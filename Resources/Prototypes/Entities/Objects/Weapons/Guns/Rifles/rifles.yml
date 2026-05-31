@@ -72,22 +72,26 @@
         map: ["enum.GunVisualLayers.Base"]
       - state: mag-0
         map: ["enum.GunVisualLayers.Mag"]
-  #SS220 increase-automatic-rifles-spread begin
   - type: GunWieldBonus
-    minAngle: -18
-    maxAngle: -24
-  #SS220 increase-automatic-rifles-spread end
+  #SS220 weapon overhaul begin
+    minAngle: -4
+    maxAngle: -18
+    angleIncrease: -0.9
+  - type: GunAimable
+    minAngle: -10
+    maxAngle: -9
+  #SS220 weapon overhaul end
   - type: Gun
-   #ss220 gunmodes start
+    minAngle: 15
+    maxAngle: 36
+   #ss220 gunmodes begin
     availableModes:
       - FullAuto
       - SemiAuto
    #ss220 gunmodes end
     fireRate: 5
-    #SS220 increase-automatic-rifles-spread begin
-    angleIncrease: 4
-    angleDecay: 14
-    #SS220 increase-automatic-rifles-spread end
+    angleIncrease: 2.50 #SS220 weapon overhaul
+    angleDecay: 6 #SS220 increase-automatic-rifles-spread end
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/rifle2.ogg
   - type: ChamberMagazineAmmoProvider
@@ -136,6 +140,22 @@
         map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
     sprite: Objects/Weapons/Guns/Rifles/carbine.rsi
+  - type: GunWieldBonus
+  #SS220 weapon overhaul start
+    minAngle: -4
+    maxAngle: -22
+    angleIncrease: -1.2
+  - type: GunAimable
+    minAngle: -8
+    maxAngle: -7
+  #SS220 weapon overhaul end
+  - type: Gun
+    minAngle: 13
+    maxAngle: 36
+  #ss220 gunmodes start
+    availableModes:
+      - FullAuto
+      - SemiAuto
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -179,22 +199,25 @@
         map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
     sprite: SS220/Objects/Weapons/Guns/Rifles/lecter.rsi #ss220 lecter resprite
-  #SS220 increase-automatic-rifles-spread begin
   - type: GunWieldBonus
-    minAngle: -19
-    maxAngle: -20
-  #SS220 increase-automatic-rifles-spread end
+  #SS220 weapon overhaul start
+    minAngle: -4
+    maxAngle: -22
+    angleIncrease: -1.2
+  - type: GunAimable
+    minAngle: -8
+    maxAngle: -7
+  #SS220 weapon overhaul end
   - type: Gun
+    minAngle: 13
+    maxAngle: 36
   #ss220 gunmodes start
     availableModes:
       - FullAuto
       - SemiAuto
-      - Burst
   #ss220 gunmodes end
-    #SS220 increase-automatic-rifles-spread begin
-    angleIncrease: 2
-    angleDecay: 12
-    #SS220 increase-automatic-rifles-spread end
+    angleIncrease: 2.30
+    angleDecay: 6 #SS220 increase-automatic-rifles-spread end
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/ltrifle.ogg
   - type: ItemSlots
@@ -238,10 +261,6 @@
     sprite: Objects/Weapons/Guns/Rifles/XL8.rsi
   - type: Clothing
     sprite: Objects/Weapons/Guns/Rifles/XL8.rsi
-  - type: CursorOffsetRequiresWield
-  - type: EyeCursorOffset
-    maxOffset: 2
-    pvsIncrease: 0.2
   - type: StaticPrice
     price: 1500 #3x lecter
   - type: Gun
@@ -256,7 +275,7 @@
   name: Estoc DMR
   parent: [BaseWeaponRifle, BaseSyndicateContraband]
   id: WeaponRifleEstoc
-  description: "A designated marksman rifle firing in 3-round bursts. The Estoc was designed as the Lecter’s long-range counterpart, equipped with an extended 20-inch barrel and telescopic sight.\nFeeds from .20 rifle magazines."
+  description: "A battle rifle chambered in 7,62x55. The Estoc was designed as the Lecter’s long-range counterpart, equipped with an extended 20-inch barrel and telescopic sight.\nFeeds from 7,62x55 full rifle magazines."
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Rifles/estoc.rsi
@@ -271,39 +290,46 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/Rifles/estoc.rsi
   - type: Gun
+    angleIncrease: 3
+    angleDecay: 3
+    fireRate: 3.3
     soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/estocshot.ogg
-    shotsPerBurst: 3
-    selectedMode: Burst
+      path: /Audio/Weapons/Guns/Gunshots/lmg.ogg
+    minAngle: 13
+    maxAngle: 42
+    selectedMode: FullAuto #SS220 weapon overhaul
     availableModes:
-    - Burst
+    - FullAuto
     - SemiAuto
-    burstFireRate: 14
+  - type: GunWieldBonus
+    #SS220 weapon overhaul start
+    minAngle: -4
+    maxAngle: -28
+    angleIncrease: -1.25
+  - type: GunAimable
+    minAngle: -8
+    maxAngle: -10
+  #SS220 weapon overhaul end
+
   - type: ItemSlots
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineRifle
+        startingItem: MagazineFullRifleFMJ
         insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
         priority: 2
         whitelist:
           tags:
-          - MagazineRifle
+          - FullRifleMagazine
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
+        startingItem: FullRifleCartridge
         priority: 1
         whitelist:
           tags:
-          - CartridgeRifle
-  - type: CursorOffsetRequiresWield
-  - type: EyeCursorOffset
-    maxOffset: 2
-    pvsIncrease: 0.2
-  - type: SpeedModifiedOnWield
-    walkModifier: 0.9
-    sprintModifier: 0.9
+          - FullRifleCartridge
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot

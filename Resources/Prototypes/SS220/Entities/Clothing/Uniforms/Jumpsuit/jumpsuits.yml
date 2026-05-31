@@ -872,10 +872,7 @@
   name: black jumpsuit
   description: A generic black jumpsuit with no rank markings.
   components:
-  - type: StaminaResistance
-    damageCoefficient: 0.1
-  - type: StaminaConvertArmor
-    damageType: Shock
-    damageCoefficient: 0.2
-    ignoredEffects:
-    - Paralyze
+  - type: Armor
+    modifiers:
+      coefficients:
+        Shock: 0.5

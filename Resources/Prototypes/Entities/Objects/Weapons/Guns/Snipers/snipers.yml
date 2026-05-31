@@ -23,112 +23,191 @@
     - Back
     - suitStorage
   - type: AmmoCounter
+  #SS220 weapon overhaul begin
+  - type: GunWieldBonus
+    minAngle: -3
+    maxAngle: -17
+    angleIncrease: -1.1
+  - type: GunAimable
+    minAngle: -13
+    maxAngle: -3
   - type: Gun
+    minAngle: 17
+    maxAngle: 30
+    angleIncrease: 4
+    angleDecay: 6
     fireRate: 0.75
-    selectedMode: SemiAuto
-    availableModes:
-    - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
   - type: BallisticAmmoProvider
-    capacity: 10
-    proto: CartridgeLightRifle
+    autoCycle: false
+    capacity: 5
+    proto: FullRifleCartridge
     whitelist:
       tags:
-      - CartridgeLightRifle
+      - FullRifleCartridge
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
         ents: []
+  #SS220 weapon overhaul end
   - type: StaticPrice
     price: 500
 
+
+#SS220 weapon overhaul begin
+- type: entity
+  name: BaseWeaponSniper
+  parent: BaseItem
+  id: BaseWeaponSniperAlt
+  description: A rooty tooty point and shooty.
+  abstract: true
+  components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/lsmg.ogg
+      params:
+        volume: 2
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+  - type: Item
+    size: Large
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Snipers/bolt_gun_wood.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
+  - type: AmmoCounter
+  - type: GunWieldBonus
+    minAngle: -3
+    maxAngle: -17
+    angleIncrease: -1.1
+  - type: GunAimable
+    minAngle: -13
+    maxAngle: -3
+  - type: Gun
+    minAngle: 17
+    maxAngle: 30
+    angleIncrease: 4
+    angleDecay: 6
+    fireRate: 0.75
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
+  - type: ChamberMagazineAmmoProvider
+    canBeLoadedManually: true
+    mustBeLoadedThroughChamber: true
+    autoCycle: false
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/m41_cock.ogg
+  - type: InternalMagazine
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: InternalMagazineMosin
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+            - FullRifleCartridge
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: StaticPrice
+    price: 500
+#SS220 weapon overhaul end
+
 - type: entity
   name: Kardashev-Mosin
-  parent: [BaseWeaponSniper, BaseGunWieldable, BaseMajorContraband]
+  parent: [BaseWeaponSniperAlt, BaseGunWieldable, BaseMajorContraband] #SS220 weapon overhaul
   id: WeaponSniperMosin
   description: A true relic, the Kardashev-Mosin has served in nearly every armed conflict since its creation 670 years ago. The bolt-action design of the rifle remains virtually identical to its original design, whether used for hunting, sniping, or endless trench warfare. Loads 10 rounds of .30 rifle.
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Snipers/bolt_gun_wood.rsi
-    layers:
-    - state: base
-    - state: base1
-      map: [ "enum.SolutionContainerLayers.Fill" ]
-      visible: false
   - type: Appearance
-  - type: SolutionContainerVisuals
-    maxFillLevels: 1
-    fillBaseName: base
-    inHandsFillBaseName: -fill-
-    inHandsMaxFillLevels: 1
-    equippedFillBaseName: -fill-
-    equippedMaxFillLevels: 1
-  - type: MeleeWeapon
-    wideAnimationRotation: -135
-    damage:
-      types:
-        Piercing: 12
-    angle: 0
-    animation: WeaponArcThrust
-    soundHit:
-      path: /Audio/Weapons/bladeslice.ogg
-  - type: MeleeRequiresWield
-  - type: AltFireMelee
-    attackType: Heavy
-  - type: SolutionContainerManager
-    solutions:
-      melee:
-        maxVol: 2
-  - type: MeleeChemicalInjector
-    solution: melee
-  - type: RefillableSolution
-    solution: melee
-  - type: InjectableSolution
-    solution: melee
-  - type: SolutionTransfer
-    maxTransferAmount: 2
-  - type: Sharp
-    butcherDelayModifier: 2 #It's a bayonet
   - type: GunRequiresWield
   - type: StaticPrice
     price: 500
 
 - type: entity
   name: Hristov
-  parent: [BaseWeaponSniper, BaseGunWieldable]
+  parent: [BaseWeaponRifle, BaseGunWieldable]
   id: WeaponSniperHristov
-  description: For when you absolutely, positively need to make someone regret their life choices from a safe distance. Uses .60 anti-materiel ammo.
+  description: A semi-auto antimateriel rifle equipped with 2x scope and a recoil compensator. Uses 15,24x140 anti-materiel ammo. #SS220 weapon overhaul
   components:
   - type: Item
     size: Huge
     shape:
     - 0,0,5,1
+  #SS220 weapon overhaul begin
   - type: Sprite
     sprite: Objects/Weapons/Guns/Snipers/heavy_sniper.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-0
+        map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
     sprite: Objects/Weapons/Guns/Snipers/heavy_sniper.rsi
   - type: GunRequiresWield
+  - type: GunWieldBonus
+    minAngle: -3
+    maxAngle: -13
+    angleIncrease: -0.4
+  - type: GunAimable
+    minAngle: -14
+    maxAngle: -3
+    angleIncrease: -5
+    aimedSprintSpeedModifier: 0.4
   - type: Gun
-    fireRate: 0.4
-    selectedMode: SemiAuto
-    availableModes:
-    - SemiAuto
+    minAngle: 17
+    maxAngle: 50 #Yes, i really don't want people to use this on close ranges
+    angleIncrease: 10
+    angleDecay: 4
+    fireRate: 1
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
-  - type: BallisticAmmoProvider
-    whitelist:
-      tags:
-      - CartridgeAntiMateriel
-    capacity: 5
-    proto: CartridgeAntiMateriel
-  - type: SpeedModifiedOnWield
-    walkModifier: 0.25
-    sprintModifier: 0.25
-  - type: CursorOffsetRequiresWield
-  - type: EyeCursorOffset
-    maxOffset: 3
-    pvsIncrease: 0.3
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineAntiMaterialFMJ
+        insertSound: /Audio/Weapons/Guns/MagIn/rifle_load.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - AntiMaterialMagazine
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeAntiMateriel
+  - type: ChamberMagazineAmmoProvider
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/batrifle_cock.ogg
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+  #SS220 weapon overhaul end
   - type: StaticPrice
     price: 3500
 

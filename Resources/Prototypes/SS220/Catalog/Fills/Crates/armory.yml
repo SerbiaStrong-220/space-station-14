@@ -1,0 +1,12 @@
+- type: entity
+  id: CrateArmorySniper
+  parent: [ CrateWeaponSecure, BaseSecurityContraband ]
+  name: antimateriel rifle crate
+  description: For the toughest foes possible. Contains two antimateriel rifles and four ammunition boxes.
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponSniperCompact
+      amount: 2
+    - id: MagazineBoxAntiMateriel
+      amount: 4

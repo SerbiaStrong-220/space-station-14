@@ -1,6 +1,12 @@
 using Content.Client.Hands.Systems;
+using Content.Client.Movement.Components;
+using Content.Client.NPC.HTN;
+using Content.Client.Weapons.Ranged.Systems;
+using Content.Shared.Camera;
 using Content.Shared.CCVar;
 using Content.Shared.CombatMode;
+using Content.Shared.SS220.CombatMode;
+using Content.Shared.Movement.Systems;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Player;
@@ -15,6 +21,7 @@ public sealed class CombatModeSystem : SharedCombatModeSystem
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IInputManager _inputManager = default!;
     [Dependency] private readonly IEyeManager _eye = default!;
+    [Dependency] private readonly GunSystem _gunSystem = default!;//SS220 weapon overhaul
 
     /// <summary>
     /// Raised whenever combat mode changes.
@@ -52,9 +59,21 @@ public sealed class CombatModeSystem : SharedCombatModeSystem
         return IsInCombatMode(entity.Value);
     }
 
+    //SS220 weapon overhaul begin
+    protected override void OnActionPerform(EntityUid uid, CombatModeComponent component, ToggleCombatActionEvent args)
+    {
+        base.OnActionPerform(uid, component, args);
+    }
+    //SS220 weapon overhaul end
+
     public override void SetInCombatMode(EntityUid entity, bool value, CombatModeComponent? component = null)
     {
         base.SetInCombatMode(entity, value, component);
+        _gunSystem.SpreadOverlayIngame = value;//SS220 aiming overlay
+        //if(!TryComp<EyeCursorOffsetComponent>(entity, out var offsetComp))
+        //_eye.UpdatePvsScale(args.User);
+        //_eyeSystem.UpdateEyeOffset
+
         UpdateHud(entity);
     }
 

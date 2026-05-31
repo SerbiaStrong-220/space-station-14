@@ -91,10 +91,10 @@
   - type: Appearance
 
 - type: entity
-  name: C-20r submachine gun
-  parent: [BaseWeaponSubMachineGun]
+  name: C-20r assault rifle #SS220 weapon overhaul begin
+  parent: [BaseWeaponRifle]
   id: WeaponSubMachineGunC20r
-  description: A classic and widespread submachine gun, infamous for its use by the Gorlex Marauders. One of the first homegrown Waffle Corp. designs, it remains in service today. Feeds from .35 SMG magazines.
+  description: A classic and widespread bullpup-configured assault rifle, infamous for its use by the Gorlex Marauders. One of the first homegrown Waffle Corp. designs, it remains in service today. Feeds from .20 rifle magazines. #SS220 weapon overhaul begin
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/SMGs/c20r.rsi
@@ -105,19 +105,46 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
     sprite: Objects/Weapons/Guns/SMGs/c20r.rsi
+  #SS220 weapon overhaul begin
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineRifle
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazineRifle
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeRifle
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeRifle
+  #SS220 weapon overhaul end
   - type: Wieldable
     unwieldOnUse: false
   - type: GunWieldBonus
-    #220 SG Angle Updates begin
-    minAngle: -2
-    maxAngle: -13
-    #220 SG Angle Updates end
+    #SS220 weapon overhaul begin
+    minAngle: -5
+    maxAngle: -18
+    angleIncrease: -0.85
+  - type: GunAimable
+    minAngle: -7
+    maxAngle: -11
+    #SS220 weapon overhaul end
   - type: Gun
-    #220 SG Angle Updates begin
-    minAngle: 17
-    maxAngle: 29
+    #SS220 weapon overhaul begin
+    angleIncrease: 1.8
+    angleDecay: 6
+    #SS220 weapon overhaul end
+    minAngle: 15
+    maxAngle: 35
     shotsPerBurst: 6
-    #220 SG Angle Updates end
     availableModes:
     - Burst
     - FullAuto
@@ -194,17 +221,20 @@
     - type: Wieldable
       unwieldOnUse: false
     - type: GunWieldBonus
-      #220 SG Angle Updates begin
-      minAngle: -2
-      maxAngle: -13
-      #220 SG Angle Updates end
+      #SS220 weapon overhaul begin
+      minAngle: -4
+      maxAngle: -14
+    - type: GunAimable
+      minAngle: -7
+      maxAngle: -8
+      #SS220 weapon overhaul end
     - type: Gun
+      angleIncrease: 0.85
       #220 SG Angle Updates begin
-      minAngle: 17
+      minAngle: 12
       maxAngle: 29
       fireRate: 6.5
       #220 SG Angle Updates end
-      burstFireRate: 18
       soundGunshot:
         path: /Audio/SS220/Weapons/Guns/Gunshots/drozd_shot.ogg #SS220 drozd update
       selectedMode: Burst
@@ -260,14 +290,24 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/SMGs/wt550.rsi
   - type: ChamberMagazineAmmoProvider
-    boltClosed: null
+  #SS220 weapon overhaul begin
+  - type: Wieldable
+    unwieldOnUse: false
+  - type: GunAimable
+    minAngle: -4
+    maxAngle: -4
+  - type: GunWieldBonus
+    minAngle: -2
+    maxAngle: -19
+    angleIncrease: 0.65
+  #SS220 weapon overhaul end
   - type: Gun
     #220 SG Angle Updates begin
     fireRate: 6.5
-    minAngle: 17
-    maxAngle: 27
+    minAngle: 12
+    maxAngle: 30
     #220 SG Angle Updates end
-    angleIncrease: 1.5
+    angleIncrease: 1.3
     angleDecay: 6
     selectedMode: FullAuto
     shotsPerBurst: 5

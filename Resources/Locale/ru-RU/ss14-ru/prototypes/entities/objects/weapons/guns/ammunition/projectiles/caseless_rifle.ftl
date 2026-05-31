@@ -1,4 +1,8 @@
-ent-BulletCaselessRifle = пуля (.25 безгильзовая)
+#SS220-weapon-overhaul-begin
+ent-BulletCaselessRifle = пуля (8x18 безгильзовая)
     .desc = { ent-BaseBullet.desc }
-ent-BulletCaselessRiflePractice = пуля (.25 безгильзовая учебная)
+ent-BulletCaselessRifleHighVelocity = пуля (8x18 безгильзовя высокоскоростная)
+    .desc = { ent-BaseBulletHighVelocity.desc }
+ent-BulletCaselessRiflePractice = пуля (8x18 безгильзовая учебная)
     .desc = { ent-BaseBulletPractice.desc }
+#SS220-weapon-overhaul-end

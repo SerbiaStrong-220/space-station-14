@@ -3,7 +3,7 @@
 #Base
 - type: entity
   abstract: true
-  parent: BaseItem
+  parent: [ BaseItem, GasTankBase ]
   id: BasePowerCellBlaster
   components:
   - type: Item
@@ -181,6 +181,58 @@
     tags:
       - WeaponRechargerWhitelist
       - LaserCarabinePowerCell
+  - type: Appearance
+  - type: Riggable
+  - type: AmmoCounter
+
+- type: entity
+  parent: BaseItem
+  id: WeaponPowerCell
+  name: weapon power cell
+  description: Highly reliable portable battery that is standard issue for every popular energy weapon in local space. Can fit into most power cell slots.
+  suffix:  Laser
+  components:
+  - type: Item
+  - type: Battery
+    pricePerJoule: 0.15
+    maxCharge: 1200
+    startingCharge: 1200
+  - type: BatteryVisuals
+    levels: 3
+  - type: GenericVisualizer
+    visuals:
+      enum.BatteryLevels.Level:
+        enum.PowerCellVisualLayers.Unshaded:
+          0: { visible: false }
+          1: { visible: true, state: o1 }
+          2: { visible: true, state: o2 }
+          3: { visible: true, state: o3 }
+  - type: PowerCell
+  - type: Sprite
+    sprite: SS220/Objects/Power/weapon_power_cells.rsi
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: base
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o3
+      shader: unshaded
+  - type: SolutionContainerManager
+    solutions:
+      battery:
+        maxVol: 5
+  - type: InjectableSolution
+    solution: battery
+  - type: DrawableSolution
+    solution: battery
+  - type: Extractable
+    juiceSolution:
+      reagents:
+        - ReagentId: Zinc
+          Quantity: 5
+  - type: Tag
+    tags:
+      - WeaponRechargerWhitelist
+      - WeaponPowerCell
   - type: Appearance
   - type: Riggable
   - type: AmmoCounter

@@ -1,0 +1,44 @@
+- type: entity
+  id: ShellShotgunSlugHP
+  name: shell (18,5x72 slug HPIB)
+  parent: [ BaseShellShotgun, BaseSecurityContraband]
+  description: A shotgun round with a HP slug in it. This bullet turns unarmored targets' insides into horrific mass of torn flesh.
+  components:
+  - type: Sprite
+    layers:
+      - state: slug-hp
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: PelletShotgunSlugHP
+  - type: SpentAmmoVisuals
+    state: "slug-hp"
+
+- type: entity
+  id: ShellShotgunSlugExplosive
+  name: shell (18,5x72 slug incendiary)
+  parent: [ BaseShellShotgun, BaseSecurityContraband]
+  description: A shotgun round with an 'incendiary' slug
+  components:
+  - type: Sprite
+    layers:
+      - state: tranquilizer
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: PelletShotgunSlugExplosive
+  - type: SpentAmmoVisuals
+    state: "tranquilizer"
+
+- type: entity
+  id: ShellShotgunSlugMagnesium
+  name: shell (18,5x72 slug magnesium)
+  parent: [ BaseShellShotgun, BaseSecurityContraband]
+  description: "This shell contains a slug with a small explosive charge covered with magnesium shrapnel that is being tossed to the target on hit. \nA very cruel weapon."
+  components:
+  - type: Sprite
+    layers:
+      - state: explosive
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: PelletShotgunSlugMagnesium
+  - type: SpentAmmoVisuals
+    state: "explosive"

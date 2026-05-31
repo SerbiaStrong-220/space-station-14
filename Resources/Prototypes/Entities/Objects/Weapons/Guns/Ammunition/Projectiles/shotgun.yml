@@ -16,6 +16,7 @@
       types:
         Piercing: 40
         Structural: 15
+      armourPiercing: 20 #SS220 armor piercing added
 
 
 - type: entity
@@ -36,9 +37,8 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 16 #ss220lowTTKUpdate
-  - type: StaminaDamageOnCollide
-    damage: 60 # 2 hits to stun #ss220lowTTKUpdate
+        Blunt: 25 #ss220lowTTKUpdate
+      armourPiercing: -10 #SS220 armor piercing added
 
 - type: entity
   parent: BaseBullet
@@ -65,7 +65,7 @@
   - type: ProjectileSpread
     proto: PelletShotgun
     count: 6
-    spread: 22 #ss220lowTTKUpdate
+    spread: 6 #ss220lowTTKUpdate
 
 - type: entity
   parent: BaseBulletIncendiary
@@ -80,10 +80,12 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 10 #ss220weaponBalance #Incendary rebalance
-        Heat: 3 #ss220weaponBalance
+        Piercing: 7 #ss220weaponBalance #Incendary rebalance
+      armourPiercing: -30 #SS220 armor piercing added
   - type: IgnitionSource
     ignited: true
+  - type: IgniteOnCollide #SS220 weapon overhaul
+    fireStacks: 0.4 #SS220 weapon overhaul
 
 - type: entity
   parent: PelletShotgunIncendiary
@@ -93,7 +95,7 @@
   - type: ProjectileSpread
     proto: PelletShotgunIncendiary
     count: 6
-    spread: 15
+    spread: 6
 
 - type: entity
   parent: BaseBulletPractice
@@ -114,7 +116,7 @@
   - type: ProjectileSpread
     proto: PelletShotgunPractice
     count: 6
-    spread: 15
+    spread: 6
 
 - type: entity
   parent: BaseBullet
@@ -146,7 +148,7 @@
   - type: ProjectileSpread
     proto: PelletShotgunImprovised
     count: 10
-    spread: 45
+    spread: 20
 
 - type: entity
   parent: BaseBulletPractice

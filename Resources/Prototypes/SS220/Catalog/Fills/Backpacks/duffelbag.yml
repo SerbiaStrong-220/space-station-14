@@ -34,6 +34,19 @@
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateFilledSniperBundle
+  suffix: Syndicate, Sniper Bundle
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WeaponSniperHristov
+        - id: MagazineAntiMaterialFMJ
+          amount: 3
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
   id: ClothingBackpackDuffelSyndicateFilledRevolverToy
   name: Python bundle
   description: "Go loud and proud with a fully loaded capgun Python, bundled with four speed loaders."

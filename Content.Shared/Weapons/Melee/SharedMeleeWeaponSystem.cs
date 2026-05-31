@@ -590,6 +590,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         // Raise event before doing damage so we can cancel damage if the event is handled
         var hitEvent = new MeleeHitEvent(new List<EntityUid> { target.Value }, user, meleeUid, damage, null);
         RaiseLocalEvent(meleeUid, hitEvent);
+        RaiseLocalEvent(target.Value, hitEvent);//SS220 melee weapon logic extension
 
         if (hitEvent.Handled)
             return;
@@ -819,12 +820,6 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
             if (damageResult.GetTotal() > FixedPoint2.Zero)
             {
-                // If the target has stamina and is taking blunt damage, they should also take stamina damage based on their blunt to stamina factor
-                if (damageResult.DamageDict.TryGetValue("Blunt", out var bluntDamage))
-                {
-                    _stamina.TakeStaminaDamage(entity, (bluntDamage * component.BluntStaminaDamageFactor).Float(), visual: false, source: user, with: meleeUid == user ? null : meleeUid);
-                }
-
                 appliedDamage += damageResult;
 
                 if (meleeUid == user)

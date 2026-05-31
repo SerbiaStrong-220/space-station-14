@@ -1,13 +1,15 @@
-ent-BaseMagazineShotgun = барабан (.50 дробь)
+#SS220-weapon-overhaul-begin
+ent-BaseMagazineShotgun = барабан (18,5x72 дробь)
     .desc = { ent-BaseItem.desc }
-ent-MagazineShotgunEmpty = барабан (.50 любые)
-    .desc = Большой барабанный магазин, используемый в некоторых автоматических дробовиках военного назначения.
+ent-MagazineShotgunEmpty = барабан (18,5x72 любые)
     .suffix = Пустой
-ent-MagazineShotgun = барабан (.50 дробь)
-    .desc = Большой барабанный магазин, используемый в некоторых автоматических дробовиках военного назначения. Предназначен для кинетических боеприпасов общего назначения.
-ent-MagazineShotgunBeanbag = барабан (.50 травматические)
-    .desc = Большой барабанный магазин, используемый в некоторых автоматических дробовиках военного назначения. Предназначен для нелетальных боеприпасов.
-ent-MagazineShotgunSlug = барабан (.50 пуля)
-    .desc = Большой барабанный магазин, используемый в некоторых автоматических дробовиках военного назначения. Предназначен для дальнобойных цельных пуль.
-ent-MagazineShotgunIncendiary = барабан (.50 зажигательные)
-    .desc = Большой барабанный магазин, используемый в некоторых автоматических дробовиках военного назначения. Предназначен для самовоспламеняющихся зажигательных боеприпасов.
+    .desc = { ent-BaseMagazineShotgun.desc }
+ent-MagazineShotgun = барабан (18,5x72 дробь)
+    .desc = { ent-BaseMagazineShotgun.desc }
+ent-MagazineShotgunBeanbag = барабан (18,5x72 травматические)
+    .desc = { ent-BaseMagazineShotgun.desc }
+ent-MagazineShotgunSlug = барабан (18,5x72 картечь)
+    .desc = { ent-BaseMagazineShotgun.desc }
+ent-MagazineShotgunIncendiary = барабан (18,5x72 магниевые)
+    .desc = { ent-BaseMagazineShotgun.desc }
+#SS220-weapon-overhaul-end

@@ -1,0 +1,29 @@
+#SS220-weapon-overhaul-begin
+ent-MagazineLRifleBase = магазин (7,62x41 промежуточные)
+    .desc = { ent-BaseItem.desc }
+    .suffix = { "" }
+ent-MagazineLRifleBox = короб патронов L6 SAW (7,62x41 промежуточные)
+    .desc = { ent-MagazineLRifleBase.desc }
+    .suffix = { "" }
+ent-MagazineLRifle = магазин (7,62x41 промежуточные)
+    .desc = { ent-MagazineLRifleBase.desc }
+    .suffix = { "" }
+ent-MagazineLRifleFlash = магазин (7,62x41 промежуточные светошумовые)
+    .desc = { ent-MagazineLRifleBase.desc }
+    .suffix = { "" }
+ent-MagazineLRifleHV = магазин (7,62x41 промежуточные высокоскоростные)
+    .desc = { ent-MagazineLRifleBase.desc }
+    .suffix = { "" }
+ent-MagazineLRiflePractice = магазин (7,62x41 промежуточные учебные)
+    .desc = { ent-MagazineLRifleBase.desc }
+    .suffix = { "" }
+ent-MagazineLRifleRubber = магазин (7,62x41 промежуточные резиновые)
+    .desc = { ent-MagazineLRifleBase.desc }
+    .suffix = { "" }
+ent-MagazineLRifleMaxim = дисковый магазин (7,62x41 промежуточные)
+    .desc = { ent-MagazineLRifleBase.desc }
+    .suffix = { "" }
+ent-MagazineLRiflePkBox =короб патронов ПК (7,62x41 промежуточные)
+    .desc = { ent-MagazineLRifleBase.desc }
+    .suffix = { "" }
+#SS220-weapon-overhaul-end

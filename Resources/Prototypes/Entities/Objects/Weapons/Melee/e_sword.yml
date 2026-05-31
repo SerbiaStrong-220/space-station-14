@@ -256,8 +256,8 @@
   - type: ItemToggleMeleeWeapon
     activatedDamage:
         types:
-            Slash: 10
-            Heat: 12
+            Slash: 5 #SS220 weapon overhaul
+            Heat: 17 #SS220 weapon overhaul
             Blunt: -1
             Structural: 10
     deactivatedSecret: true

@@ -3,6 +3,7 @@
   parent: BaseItem
   abstract: true
   components:
+  - type: GunAimable #SS220 shield rework
   - type: EmitSoundOnLand
     sound:
       path: /Audio/SS220/Effects/Drop/laser.ogg #new sound_drop effect, add MIXnikita
@@ -83,7 +84,7 @@
     size: Huge
   - type: AmmoCounter
   - type: Gun
-    fireRate: 2
+    fireRate: 2.5 #SS220 weapon oerhaul
     projectileSpeed: 25 # SS220 Bullet Speed
     selectedMode: SemiAuto
     availableModes:
@@ -243,14 +244,16 @@
     steps: 5
     zeroVisible: false
   - type: Appearance
+  - type: Gun #SS220 weapon overhaul
+    fireRate: 1.4 #SS220 weapon overhaul
   - type: Clothing
     sprite: SS220/Objects/Weapons/Guns/Battery/makeshift.rsi #SS220 resprite
   - type: BatteryAmmoProvider
     proto: RedLaser
     fireCost: 62.5
   - type: Battery
-    maxCharge: 500
-    startingCharge: 500
+    maxCharge: 250 #SS220 weapon overhaul
+    startingCharge: 250 #SS220 weapon overhaul
 #ss220 handmade gun buff begin
   - type: Construction
     graph: WeaponMakeshiftLaserGraph
@@ -295,14 +298,8 @@
   - type: Appearance
 
 - type: entity
-  name: laser carbine
-  parent: [BaseLaserRifle, BaseGunWieldable, BaseSecurityContraband]
-  id: WeaponLaserCarbine
-  description: Favoured by Nanotrasen Security for being cheap and easy to use.
-
-- type: entity
   name: practice laser carbine
-  parent: [BaseLaserRifle, BaseGunWieldable]
+  parent: WeaponLaserCarbine #SS220 weapon overhaul
   id: WeaponLaserCarbinePractice
   description: This modified laser carbine fires nearly harmless beams in the 40-watt range, for target practice.
   components:
@@ -310,7 +307,7 @@
     price: 300
   - type: BatteryAmmoProvider
     proto: RedLaserPractice
-    fireCost: 62.5
+    fireCost: 2.5
   - type: PacifismAllowedGun
 
 - type: entity
@@ -640,60 +637,6 @@
   - type: PacifismAllowedGun
 
 - type: entity
-  name: taser
-  parent: [BaseWeaponBatterySmall, BaseSecurityContraband]
-  id: WeaponTaser
-  description: A low-capacity, energy-based stun gun used by security teams to subdue targets at close range.
-  components:
-  - type: Tag
-    tags:
-    - Taser
-    - Sidearm
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Battery/taser.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-unshaded-0
-      map: ["enum.GunVisualLayers.MagUnshaded"]
-      shader: unshaded
-  - type: Item
-    heldPrefix: taser4
-  - type: Clothing
-    quickEquip: false
-  - type: Gun
-    fireRate: 0.5
-    soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/taser.ogg
-    projectileSpeed: 25
-  - type: BatteryAmmoProvider
-    proto: BulletTaser
-    fireCost: 200
-  - type: MagazineVisuals
-    magState: mag
-    steps: 5
-    zeroVisible: true
-  - type: Appearance
-  - type: PacifismAllowedGun
-
-- type: entity
-  name: elite taser
-  parent: [ BaseCentcommContraband, WeaponTaser ]
-  id: WeaponTaserSuper
-  suffix: ADMEME
-  description: A low-capacity, energy-based stun gun used by elite security teams to disable even the toughest of targets.
-  components:
-  - type: Gun
-    fireRate: 0.5
-    soundGunshot:
-      path: /Audio/Effects/tesla_collapse.ogg # The wrath of god...
-      params:
-        volume: -6
-  - type: BatteryAmmoProvider
-    proto: BulletTaserSuper
-    fireCost: 200
-
-- type: entity
   name: antique laser pistol
   parent: [BaseWeaponBatterySmall]
   id: WeaponAntiqueLaser
@@ -709,9 +652,19 @@
       shader: unshaded
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/antiquelasergun.rsi
+  #SS220 weapon overhaul begin
+  - type: GunAimable
+    minAngle: -6.5
+    maxAngle: -6
   - type: Gun
+    fireRate: 1.8
+    cameraRecoilScalar: 0 #Laser weapons have effectively no recoil
+    maxAngle: 15
+    minAngle: 9 #Very low values for the same reason
+    angleIncrease: 0.09 #Basically the force of a finger pulling the trigger
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+  #SS220 weapon overhaul end
   - type: BatteryAmmoProvider
     proto: RedMediumLaser
     fireCost: 100
@@ -760,9 +713,19 @@
       shader: unshaded
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/advancedlasergun.rsi
+  #SS220 weapon overhaul begin
+  - type: GunAimable
+    minAngle: -6.5
+    maxAngle: -6
   - type: Gun
+    fireRate: 1.8
+    cameraRecoilScalar: 0 #Laser weapons have effectively no recoil
+    maxAngle: 15
+    minAngle: 9 #Very low values for the same reason
+    angleIncrease: 0.09 #Basically the force of a finger pulling the trigger
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+  #SS220 weapon overhaul end
   - type: BatteryAmmoProvider
     proto: RedMediumLaser
     fireCost: 100
@@ -796,9 +759,19 @@
       shader: unshaded
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/laser_revolver.rsi
+  #SS220 weapon overhaul begin
+  - type: GunAimable
+    minAngle: -6.5
+    maxAngle: -6
   - type: Gun
+    fireRate: 1.8
+    cameraRecoilScalar: 0 #Laser weapons have effectively no recoil
+    maxAngle: 15
+    minAngle: 9 #Very low values for the same reason
+    angleIncrease: 0.09 #Basically the force of a finger pulling the trigger
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+  #SS220 weapon overhaul end
   - type: BatteryAmmoProvider
     proto: RedMediumLaser
     #ss220 add stun mode begin
@@ -853,12 +826,21 @@
     zeroVisible: false
   - type: Clothing
     sprite: Objects/Weapons/Guns/Revolvers/chimp.rsi
+  #SS220 weapon overhaul begin
+  - type: GunAimable
+    minAngle: -6.5
+    maxAngle: -6
   - type: Gun
+    cameraRecoilScalar: 0 #Laser weapons have effectively no recoil
+    maxAngle: 15
+    minAngle: 9 #Very low values for the same reason
+    angleIncrease: 0.09 #Basically the force of a finger pulling the trigger
     canSuicide: false # SS220-new-feature kus
     projectileSpeed: 10
     fireRate: 1.5
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
+  #SS220 weapon overhaul end
   - type: BatteryAmmoProvider
     proto: AnomalousParticleDeltaStrong
     fireCost: 100
@@ -907,11 +889,19 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
+  #SS220 weapon overhaul begin
+  - type: GunAimable
+    minAngle: -6.5
+    maxAngle: -6
   - type: Gun
-    canSuicide: false #SS220-new-feature kus
     fireRate: 1
+    cameraRecoilScalar: 0 #Laser weapons have effectively no recoil
+    maxAngle: 15
+    minAngle: 9 #Very low values for the same reason
+    angleIncrease: 0.09 #Basically the force of a finger pulling the trigger
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_clown.ogg
+  #SS220 weapon overhaul end
   - type: BatteryAmmoProvider
     proto: RedMediumLaser
     fireCost: 100
@@ -926,9 +916,9 @@
 
 - type: entity
   name: energy shotgun
-  parent: [BaseWeaponBattery, BaseGunWieldable]
+  parent: [BaseWeaponBattery, BaseGunWieldable, GasTankBase] #SS220 weapon overhaul
   id: WeaponEnergyShotgun
-  description: A one-of-a-kind prototype energy weapon that uses various shotgun configurations. It offers the possibility of both lethal and non-lethal shots, making it a versatile weapon.
+  description: Basically a plasma cannon that throws EM-contained clouds of overheated gas. Has fairly short effective distance but that doesn't matter much on close ranges. #SS220 weapon overhaul
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Battery/energy_shotgun.rsi
@@ -943,22 +933,20 @@
     steps: 5
     zeroVisible: false
   - type: Appearance
+  #SS220 weapon overhaul begin
+  - type: GasWeapon
+    internalTank: true
+    gasUsage: 0.17
+  #SS220 weapon overhaul end
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/energy_shotgun.rsi
   - type: Gun
-    fireRate: 2
+    fireRate: 1 #SS220 weapon overhaul
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: BatteryAmmoProvider
     proto: BulletLaserSpreadNarrow
-    fireCost: 80
-  - type: BatteryWeaponFireModes
-    fireModes:
-    - proto: BulletLaserSpreadNarrow
-      fireCost: 80
-    - proto: BulletDisablerSmgSpread
-      fireCost: 48
-      pacifismAllowedMode: true
+    fireCost: 160 #SS220 weapon overhaul
   - type: Item
     size: Large
     sprite: Objects/Weapons/Guns/Battery/inhands_64x.rsi

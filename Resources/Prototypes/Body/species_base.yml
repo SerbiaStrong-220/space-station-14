@@ -25,6 +25,7 @@
         color: "#FF0000"
       Burn:
         sprite: Mobs/Effects/burn_damage.rsi
+  - type: StaminaDamageConversion #SS220 stun rework
   - type: StatusIcon
     bounds: -0.5,-0.5,0.5,0.5
   - type: JobStatus
@@ -87,6 +88,14 @@
   - type: Internals
   - type: FloatingVisuals
   - type: Climbing
+  - type: Damageable #SS220 damageable overhaul
+    piercingThreshold: 15 #SS220 damageable overhaul
+  #SS220 eye offset begin
+  - type: EyeCursorOffset
+    maxOffset: 6
+    pvsIncrease: 0.6
+  #SS220 eye offset end
+  - type: EyeOffsetInCombatMode
   - type: Cuffable
   - type: Ensnareable
     sprite: Objects/Misc/ensnare.rsi

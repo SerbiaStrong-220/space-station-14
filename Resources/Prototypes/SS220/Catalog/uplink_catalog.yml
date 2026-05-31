@@ -116,6 +116,25 @@
 # JobItems
 
 - type: listing
+  id: SyndicateFilledSniperBundle
+  name: uplink-sniper-bundle-name
+  description: uplink-sniper-bundle-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Snipers/heavy_sniper.rsi, state: icon }
+  productEntity: ClothingBackpackDuffelSyndicateFilledSniperBundle
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 15
+  cost:
+    Telecrystal: 19
+  categories:
+  - UplinkWeaponry
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
+
+- type: listing
   id: UplinkMimeRelic
   name: uplink-mime-relic-name
   description: uplink-mime-relic-desc
@@ -219,19 +238,19 @@
   productEntity: ThermalVisorChameleon
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 5 #ss220-uplink-discounts
   cost:
-    Telecrystal: 2 #ss220-uplink-discounts
+    Telecrystal: 6 #ss220-uplink-discounts
   categories:
   - UplinkWearables
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 6
     MediumDynamic:
-      Telecrystal: 3
+      Telecrystal: 6
     HardDynamic:
-      Telecrystal: 3
+      Telecrystal: 5
 #ss220 dynamic-price end
 
 - type: listing
@@ -242,19 +261,19 @@
   productEntity: ThermalVisorImplanter
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 2 #ss220-uplink-discounts
+    Telecrystal: 7 #ss220-uplink-discounts
   cost:
-    Telecrystal: 5 #ss220-uplink-discounts
+    Telecrystal: 7 #ss220-uplink-discounts
   categories:
   - UplinkImplants
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 5
+      Telecrystal: 9
     MediumDynamic:
-      Telecrystal: 5
+      Telecrystal: 8
     HardDynamic:
-      Telecrystal: 6
+      Telecrystal: 8
 #ss220 dynamic-price end
 
 - type: listing
@@ -355,7 +374,7 @@
   discountDownTo:
     Telecrystal: 2 #ss220-uplink-discounts
   cost:
-    Telecrystal: 3 #ss220-uplink-discounts
+    Telecrystal: 2 #ss220-uplink-discounts
   categories:
   - UplinkWearables
   conditions:

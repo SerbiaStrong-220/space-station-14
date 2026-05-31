@@ -598,6 +598,7 @@
     graph: Girder
     node: reinforcedWall
   - type: Damageable
+    piercingThreshold: 8
     damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallicStrong
   - type: Destructible

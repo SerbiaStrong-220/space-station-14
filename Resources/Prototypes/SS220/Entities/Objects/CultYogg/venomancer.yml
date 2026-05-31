@@ -9,10 +9,19 @@
   - type: CultYoggWeapon
     item: CultYoggCocoonVenomancer
   - type: AmmoCounter
+  - type: GunAimable
+    minAngle: -13
+    maxAngle: -7
+    aimedSprintSpeedModifier: 0.5
+    aimedWalkingSpeedModifier: 0.5
   - type: Gun
     soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg
     cameraRecoilScalar: 1
     fireRate: 0.5
+    angleIncrease: 4
+    angleDecay: 4
+    minAngle: 15
+    maxAngle: 22
     soundEmpty: null
     projectileSpeed: 25
   - type: BasicEntityAmmoProvider

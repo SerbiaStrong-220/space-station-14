@@ -70,7 +70,8 @@
       projectile:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.1,-0.10,0.1,0.30"
+          bounds: "-0.1,-0.30,0.1,0.30" #SS220 weapon overhaul
+
         hard: false
         mask:
         - Impassable
@@ -89,6 +90,8 @@
     damage:
       types:
         Piercing: 14
+    penetrationDamageTypeRequirement: #SS220 weapon overhaul
+    - Piercing #SS220 weapon overhaul
     soundHit:
       path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
   - type: TimedDespawn
@@ -166,7 +169,6 @@
     damage:
       types:
         Piercing: 11 # 20% decrease
-    ignoreResistances: true
 
 - type: entity
   id: BaseBulletUranium
@@ -1365,7 +1367,7 @@
     impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
-        Heat: 19  #ss220lowTTKUpdate
+        Heat: 38  #SS220 weapon overhaul
 
 - type: entity
   name: wide laser barrage
@@ -1387,7 +1389,7 @@
   - type: ProjectileSpread
     proto: BulletLaser
     count: 4 #52 heat damage if you hit all your shots, but narrower spread
-    spread: 10
+    spread: 6 #SS220 weapon overhaul
 
 - type: entity
   name: disabling laser barrage

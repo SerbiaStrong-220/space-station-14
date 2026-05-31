@@ -283,29 +283,6 @@
   #ss220 dynamic-price end
 
 - type: listing
-  id: UplinkSniperBundle
-  name: uplink-sniper-bundle-name
-  description: uplink-sniper-bundle-desc
-  icon: { sprite: /Textures/Objects/Weapons/Guns/Snipers/heavy_sniper.rsi, state: base }
-  productEntity: BriefcaseSyndieSniperBundleFilled
-  discountCategory: usualDiscounts
-  discountDownTo:
-    Telecrystal: 6
-  cost:
-    Telecrystal: 14 #ss220TTKUpdate
-  categories:
-  - UplinkWeaponry
-  #ss220 dynamic-price bgn
-  dynamicsPrices:
-    LightDynamic:
-      Telecrystal: 16
-    MediumDynamic:
-      Telecrystal: 12
-    HardDynamic:
-      Telecrystal: 8
-  #ss220 dynamic-price end
-
-- type: listing
   id: UplinkHushpup
   name: uplink-hushpup-name
   description: uplink-hushpup-desc
@@ -486,9 +463,9 @@
   productEntity: ClothingBackpackDuffelSyndicateFilledLMG
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 30 #ss220TTKUpdate
+    Telecrystal: 25 #SS220 weapon overhaul
   cost:
-    Telecrystal: 40 #ss220TTKUpdate
+    Telecrystal: 35 #SS220 weapon overhaul
   categories:
   - UplinkWeaponry
   conditions:

@@ -1,0 +1,27 @@
+- type: entity
+  id: BulletRifleAP
+  name: bullet (6,3x47 rifle AP)
+  parent: BaseBulletAP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+    - state: bullet
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 29
+      armourPiercing: 18
+
+- type: entity
+  id: BulletRifleHP
+  name: bullet (6,3x47 rifle HPIB)
+  parent: BaseBulletHP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 35
+      armourPiercing: -10

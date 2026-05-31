@@ -13,6 +13,7 @@ using Content.Shared.Trigger.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using System.Security.Cryptography;
 
 namespace Content.Shared.Nutrition.EntitySystems;
 
@@ -131,7 +132,7 @@ public abstract class SharedCreamPieSystem : EntitySystem
 
         // TODO: Check if they even have a head that can be hit.
         SetCreamPied(creamPied.AsNullable(), true);
-        _stunSystem.TryUpdateParalyzeDuration(creamPied.Owner, creamPie.ParalyzeTime);
+        _stunSystem.TryUpdateParalyzeDuration(creamPied.Owner, creamPie.ParalyzeTime); // SS220 creampie stun removal
 
         // Throwing is not predicted, so the thrower is not equal to the client predicting the collision, so we cannot pass in a user.
         // TODO: Make the popup API sane.
