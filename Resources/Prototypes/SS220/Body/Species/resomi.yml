@@ -214,12 +214,13 @@
       types:
         Slash: 5
   - type: DamageVisuals
+    thresholds: [ 10, 30, 50, 70 ]
     damageOverlayGroups:
       Brute:
-        sprite: Mobs/Effects/brute_damage.rsi
+        sprite: SS220/Mobs/Effects/Resomi/brute_damage.rsi
         color: "#cfa7ff"
       Burn:
-        sprite: Mobs/Effects/burn_damage.rsi
+        sprite: SS220/Mobs/Effects/Resomi/burn_damage.rsi
   - type: TemperatureDamage
     heatDamageThreshold: 305.85    # 305.85 K = 32.70 °C
     coldDamageThreshold: 205.15    # 205.15 K = -68 °C
