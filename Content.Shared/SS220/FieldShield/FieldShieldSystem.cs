@@ -8,20 +8,11 @@ using Content.Shared.Examine;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Popups;
-using Content.Shared.Random.Helpers;
-using Content.Shared.SS220.AltBlocking;
-using Content.Shared.SS220.ToggleBlocking;
-using Content.Shared.SS220.Weapons.Melee.Events;
 using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Containers;
-using Robust.Shared.GameObjects;
-using Robust.Shared.Network;
-using Robust.Shared.Physics;
 using Robust.Shared.Timing;
-using System.Numerics;
 
 namespace Content.Shared.SS220.FieldShield;
 
@@ -30,7 +21,7 @@ public sealed class FieldShieldProviderSystem : EntitySystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] protected readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
 
     private const int FieldShieldPushPriority = 2;
 
