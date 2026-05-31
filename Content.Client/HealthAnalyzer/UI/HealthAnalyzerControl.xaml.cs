@@ -116,6 +116,44 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
 
         NoPatientDataText.Visible = false;
 
+        // SS220 clinic death analyzer - start
+        if (state.ClinicalDeathTimeRemaining.HasValue)
+        {
+            ClinicalDeathLabel.Visible = true;
+            ClinicalDeathTimeLabel.Visible = true;
+
+            var timeLeft = state.ClinicalDeathTimeRemaining.Value;
+
+            if (timeLeft <= TimeSpan.Zero)
+            {
+                ClinicalDeathTimeLabel.Text = Loc.GetString("health-analyzer-window-clinical-death-expired");
+                ClinicalDeathTimeLabel.FontColorOverride = Color.Red;
+            }
+            else
+            {
+                ClinicalDeathTimeLabel.Text = $"{timeLeft.Minutes:D2}:{timeLeft.Seconds:D2}";
+
+                if (timeLeft.TotalMinutes >= 2)
+                {
+                    ClinicalDeathTimeLabel.FontColorOverride = Color.Lime;
+                }
+                else if (timeLeft.TotalMinutes >= 1)
+                {
+                    ClinicalDeathTimeLabel.FontColorOverride = Color.Yellow;
+                }
+                else
+                {
+                    ClinicalDeathTimeLabel.FontColorOverride = Color.Red;
+                }
+            }
+        }
+        else
+        {
+            ClinicalDeathLabel.Visible = false;
+            ClinicalDeathTimeLabel.Visible = false;
+        }
+        // SS220 clinic death analyzer - end
+
         // Scan Mode
 
         ScanModeLabel.Text = state.ScanMode.HasValue
@@ -169,10 +207,25 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
             : Loc.GetString("health-analyzer-window-entity-unknown-value-text");
         //SS220 LimitationRevive - end
 
-        StatusLabel.Text =
-            _entityManager.TryGetComponent<MobStateComponent>(target.Value, out var mobStateComponent)
-                ? GetStatus(mobStateComponent.CurrentState)
-                : Loc.GetString("health-analyzer-window-entity-unknown-text");
+        //SS220 clinic death analyzer - start
+        if (_entityManager.TryGetComponent<MobStateComponent>(target.Value, out var mobStateComponent))
+        {
+            if (mobStateComponent.CurrentState == MobState.Dead &&
+                state.ClinicalDeathTimeRemaining.HasValue &&
+                state.ClinicalDeathTimeRemaining.Value > TimeSpan.Zero)
+            {
+                StatusLabel.Text = Loc.GetString("health-analyzer-window-entity-clinical-dead-text");
+            }
+            else
+            {
+                StatusLabel.Text = GetStatus(mobStateComponent.CurrentState);
+            }
+        }
+        else
+        {
+            StatusLabel.Text = Loc.GetString("health-analyzer-window-entity-unknown-text");
+        }
+        //SS220 clinic death analyzer - end
 
         // Total Damage
 
