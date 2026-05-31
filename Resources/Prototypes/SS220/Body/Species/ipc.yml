@@ -67,8 +67,7 @@
   - type: HumanoidProfile
     species: Ipc
   - type: Inventory
-    templateId: human
-    speciesId: ipc
+    templateId: Ipc
 
 - type: entity
   parent:
