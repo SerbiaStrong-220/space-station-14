@@ -70,6 +70,20 @@
 
 - type: entity
   parent: BaseSubdermalImplant
+  id: NanoSurgeryMachinesImplant
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SubdermalImplant
+    implantAction: ActionActivateNanoSurgeryMachinesImplant
+  - type: RemovePathologyOnTrigger
+    targetUser: true
+    curePathologyStacksSelectors:
+    - TorsoProjectileFragment: -1
+    - HeadProjectileFragment: -1
+  - type: TriggerOnActivateImplant
+
+- type: entity
+  parent: BaseSubdermalImplant
   id: AdrenalImplant
   categories: [ HideSpawnMenu ]
   components:

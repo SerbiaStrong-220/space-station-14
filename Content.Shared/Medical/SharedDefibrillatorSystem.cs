@@ -15,6 +15,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.PowerCell;
 using Content.Shared.Random.Helpers;
+using Content.Shared.SS220.DirectCompactDefibrillator;
 using Content.Shared.SS220.Experience.Skill.Components;
 using Content.Shared.SS220.LimitationRevive;
 using Content.Shared.Timing;
@@ -49,8 +50,10 @@ public abstract class SharedDefibrillatorSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!; // SS220-new-defib-update
     [Dependency] private readonly IGameTiming _gameTiming = default!; // SS220-defib-chance-prob
 
-    private static readonly LocId DefibWithOuterClothes = "loc-defib-outer-popup";
-    private static readonly string OuterSlotId = "outerClothing";
+    private static readonly LocId DefibWithOuterClothes = "loc-defib-outer-popup"; // SS220-defib-update
+    private readonly LocId _directCompactDefibrillatorNonSurgeryUse = "direct-compact-defibrillator-cant-zap"; // SS220-surgery-update
+    private static readonly string OuterSlotId = "outerClothing"; // SS220-deib-update
+
 
     private readonly HashSet<EntityUid> _interacters = new();
 
@@ -64,6 +67,16 @@ public abstract class SharedDefibrillatorSystem : EntitySystem
     {
         if (args.Handled || args.Target is not { } target)
             return;
+
+        //ss220-surgery-update-begin
+        if (TryComp<DirectCompactDefibrillatorComponent>(ent, out var directCompactDefibrillator))
+        {
+            if (directCompactDefibrillator.ShowIncorrectUsagePopup)
+                _popup.PopupClient(Loc.GetString(_directCompactDefibrillatorNonSurgeryUse), args.User);
+
+            return;
+        }
+        //ss220-surgery-update-end
 
         args.Handled = TryStartZap(ent.AsNullable(), target, args.User);
     }
@@ -214,7 +227,6 @@ public abstract class SharedDefibrillatorSystem : EntitySystem
 
         //SS220 LimitationRevive - start
         var defibChancesEvent = new GetDefibrillatorUseChances();
-
         RaiseLocalEvent(user, ref defibChancesEvent);
 
         var predictedRandom = SharedRandomExtensions.PredictedRandom(_gameTiming, GetNetEntity(target), GetNetEntity(user));
