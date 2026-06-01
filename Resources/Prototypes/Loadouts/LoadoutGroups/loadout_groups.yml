@@ -90,7 +90,7 @@
 - type: loadoutGroup
   id: Survival
   name: loadout-group-survival-basic
-  minLimit: 1
+  minLimit: 1 #SS220-Survival-Loadout
   hidden: false #SS220-Survival-Loadout
   loadouts:
   - EmergencyOxygen
@@ -717,7 +717,7 @@
 - type: loadoutGroup
   id: SurvivalClown
   name: loadout-group-survival-clown
-  minLimit: 1
+  minLimit: 1 #SS220-Survival-Loadout
   hidden: false #SS220-Survival-Loadout
   loadouts:
   - EmergencyOxygenClown
@@ -785,7 +785,7 @@
 - type: loadoutGroup
   id: SurvivalMime
   name: loadout-group-survival-mime
-  minLimit: 1
+  minLimit: 1 #SS220-Survival-Loadout
   hidden: false #SS220-Survival-Loadout
   loadouts:
   - EmergencyOxygenMime
@@ -1184,7 +1184,7 @@
 - type: loadoutGroup
   id: SurvivalExtended
   name: loadout-group-survival-extended
-  minLimit: 1
+  minLimit: 1 #SS220-Survival-Loadout
   hidden: false
   loadouts:
   - EmergencyOxygenExtended
@@ -1597,7 +1597,7 @@
 - type: loadoutGroup
   id: SurvivalSecurity
   name: loadout-group-survival-security
-  minLimit: 1
+  minLimit: 1 #SS220-Survival-Loadout
   hidden: false #SS220-Survival-Loadout
   loadouts:
   - EmergencyOxygenSecurity

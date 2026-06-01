@@ -27,7 +27,7 @@
 - type: loadoutGroup
   id: SurvivalMedical
   name: loadout-group-survival-medical
-  minLimit: 1
+  minLimit: 1 #SS220-Survival-Loadout
   hidden: false #SS220-Survival-Loadout
   loadouts:
   - EmergencyOxygenMedical
