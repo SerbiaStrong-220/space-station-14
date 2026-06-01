@@ -6,8 +6,8 @@
     species:
     - SlimePerson
     - Vox
-  #- !type:SponsorTierRequirementLoadoutEffect
-  #  requirement: Shlopa
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: Shlopa
 
 - type: loadoutEffectGroup
   id: OxygenBreatherSponsor
@@ -21,8 +21,8 @@
     - Human
     - Moth
     - Reptilian
-  #- !type:SponsorTierRequirementLoadoutEffect
-  #  requirement: Shlopa
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: Shlopa
 
 - type: loadoutEffectGroup
   id: EffectSpeciesVoxSponsor
