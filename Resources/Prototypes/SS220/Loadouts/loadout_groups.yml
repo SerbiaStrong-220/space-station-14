@@ -605,12 +605,13 @@
 - type: loadoutGroup
   id: SurvivalBrigMedic
   name: loadout-group-survival-brigmedic
-  minLimit: 2
-  hidden: true
+  minLimit: 1
+  hidden: false
   loadouts:
   - EmergencyOxygenBrigmedic
+  - EmergencyOxygenBrigmedicSponsor
   - EmergencyNitrogenBrigmedic
-  - LoadoutSpeciesVoxNitrogen
+  - EmergencyNitrogenBrigmedicSponsor
   # Бригмедик (Конец)
 
   # Врач (Начало)
@@ -953,6 +954,14 @@
   - GlovesBlack
   - GlovesRed
   - GlovesBlue
+
+ # Баллон азота воксов
+- type: loadoutGroup
+  id: SurvivalVox
+  name: loadout-group-survival-basic
+  hidden: true
+  loadouts:
+  - LoadoutSpeciesVoxNitrogen
 
 #! Эксклюзивы карт (Начало)
 
