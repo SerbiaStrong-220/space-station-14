@@ -686,10 +686,16 @@
 - type: entity
   parent: BoxSurvival
   id: BoxSurvivalSponsor
-  name: элитный аварийный запас
-  description: Коробка с элитным набором для выживания.
-  suffix: Стандартный, Шлёпа
+  name: Elite survival box
+  description: Box with an elite survival kit.
+  suffix: Default, Floppa
   components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: FoodNutribrickSponsor
+
   - type: Sprite
     sprite: SS220/Objects/Sponsor/floppa_box.rsi
     state: floppa_box
@@ -699,112 +705,182 @@
 
 - type: entity
   parent: BoxSurvivalNitrogen
-  name: элитный аварийный запас
-  description: Коробка с элитным набором для выживания.
+  name: Elite survival box
+  description: Box with an elite survival kit.
   id: BoxSurvivalNitrogenSponsor
-  suffix: Стандартный Азот N2, Шлёпа
+  suffix: Default N2, Floppa
   components:
   - type: Sprite
     sprite: SS220/Objects/Sponsor/floppa_box.rsi
     state: floppa_box
     layers: [ ]
   - type: Item
-    sprite: SS220/Objects/Sponsor/floppa_box.rs
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
 
 - type: entity
   parent: BoxSurvivalEngineering
   id: BoxSurvivalEngineeringSponsor
-  name: расширенный элитный аварийный запас
-  description: Коробка с базовым набором для выживания. Согласно этикетке, содержит более ёмкий баллон.
-  suffix: Расширенный, Шлёпа
+  name: Advanced elite survival box
+  description: Box with a basic survival kit. According to the label, contains a higher-capacity canister.
+  suffix: Extended, Floppa
   components:
   - type: Sprite
     sprite: SS220/Objects/Sponsor/floppa_box.rsi
     state: floppa_box
     layers: [ ]
   - type: Item
-    sprite: SS220/Objects/Sponsor/floppa_box.rs
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
 
 - type: entity
   parent: BoxSurvivalEngineeringNitrogen
   id: BoxSurvivalEngineeringNitrogenSponsor
-  name: расширенный элитный аварийный запас
-  description: Коробка с базовым набором для выживания. Согласно этикетке, содержит более ёмкий баллон.
-  suffix: Расширенный Азот N2, Шлёпа
+  name: Advanced elite survival box
+  description: Box with a basic survival kit. According to the label, contains a higher-capacity canister.
+  suffix: Extended N2, Floppa
   components:
   - type: Sprite
     sprite: SS220/Objects/Sponsor/floppa_box.rsi
     state: floppa_box
     layers: [ ]
   - type: Item
-    sprite: SS220/Objects/Sponsor/floppa_box.rs
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
 
 - type: entity
   parent: BoxSurvivalSecurity
   id: BoxSurvivalSecuritySponsor
-  name: элитный аварийный запас
-  description: Коробка с элитным набором для выживания.
-  suffix: СБ, Шлёпа
+  name: Elite survival box
+  description: Box with an elite survival kit.
+  suffix: Sec, Floppa
   components:
   - type: Sprite
     sprite: SS220/Objects/Sponsor/floppa_box.rsi
     state: floppa_box
     layers: [ ]
   - type: Item
-    sprite: SS220/Objects/Sponsor/floppa_box.rs
-
-- type: entity
-  parent: BoxSurvivalBrigmedic
-  id: BoxSurvivalBrigmedicSponsor
-  name: элитный аварийный запас
-  description: Коробка с элитным набором для выживания.
-  suffix: Мед-СБ, Шлёпа
-  components:
-  - type: Sprite
     sprite: SS220/Objects/Sponsor/floppa_box.rsi
-    state: floppa_box
-    layers: [ ]
-  - type: Item
-    sprite: SS220/Objects/Sponsor/floppa_box.rs
 
 - type: entity
   parent: BoxSurvivalSecurityNitrogen
   id: BoxSurvivalSecurityNitrogenSponsor
-  name: элитный аварийный запас
-  description: Коробка с элитным набором для выживания.
-  suffix: Охранный Азот N2, Шлёпа
+  name: Elite survival box
+  description: Box with an elite survival kit.
+  suffix: Sec N2, Floppa
   components:
   - type: Sprite
     sprite: SS220/Objects/Sponsor/floppa_box.rsi
     state: floppa_box
     layers: [ ]
   - type: Item
-    sprite: SS220/Objects/Sponsor/floppa_box.rs
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+
+- type: entity
+  parent: BoxSurvivalBrigmedic
+  id: BoxSurvivalBrigmedicSponsor
+  name: Elite survival box
+  description: Box with an elite survival kit.
+  suffix: Med-Sec, Floppa
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+
+- type: entity
+  parent: BoxSurvivalBrigmedicNitrogen
+  id: BoxSurvivalBrigmedicNitrogenSponsor
+  name: Elite survival box
+  description: Box with an elite survival kit.
+  suffix: Med-Sec N2, Floppa
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
 
 - type: entity
   parent: BoxSurvivalMedical
   id: BoxSurvivalMedicalSponsor
-  name: элитный аварийный запас
-  description: Коробка с элитным набором для выживания.
-  suffix: Медицинский, Шлёпа
+  name: Elite survival box
+  description: Box with an elite survival kit.
+  suffix: Medical, Floppa
   components:
   - type: Sprite
     sprite: SS220/Objects/Sponsor/floppa_box.rsi
     state: floppa_box
     layers: [ ]
   - type: Item
-    sprite: SS220/Objects/Sponsor/floppa_box.rs
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
 
 - type: entity
   parent: BoxSurvivalMedicalNitrogen
   id: BoxSurvivalMedicalNitrogenSponsor
-  name: элитный аварийный запас
-  description: Коробка с элитным набором для выживания.
-  suffix: Медицинский Азот N2, Шлёпа
+  name: Elite survival box
+  description: Box with an elite survival kit.
+  suffix: Medical N2, Floppa
   components:
   - type: Sprite
     sprite: SS220/Objects/Sponsor/floppa_box.rsi
     state: floppa_box
     layers: [ ]
   - type: Item
-    sprite: SS220/Objects/Sponsor/floppa_box.rs
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+
+- type: entity
+  parent: BoxHug
+  id: BoxHugSponsor
+  name: Elite survival box
+  description: Box with an elite survival kit.
+  suffix: Clown, Floppa
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+
+- type: entity
+  parent: BoxHugNitrogen
+  id: BoxHugNitrogenSponsor
+  name: Elite survival box
+  description: Box with an elite survival kit.
+  suffix: Clown N2, Floppa
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+
+- type: entity
+  parent: BoxMime
+  id: BoxMimeSponsor
+  name: Elite survival box
+  description: Box with an elite survival kit.
+  suffix: Mime, Floppa
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+
+- type: entity
+  parent: BoxMimeNitrogen
+  id: BoxMimeNitrogenSponsor
+  name: Elite survival box
+  description: Box with an elite survival kit.
+  suffix: Mime N2, Floppa
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi

@@ -6,14 +6,15 @@
   - CAPHeadset #SS220-Law Department
   - CaptainNeck
   - CaptainJumpsuit
-  - CaptainBackpack
   - CaptainGloves #SS220-whiteCaptainGloves
   - CaptainOuterClothing
+  - CaptainBackpack
+  - CAPSiutstorage #SS220-Cutlass-Update
+  - GroupSpeciesBreathTool
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- CaptainJobTrinkets
-  - GroupSpeciesBreathTool
-  - CAPSiutstorage #SS220-Cutlass-Update
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
 
@@ -23,15 +24,16 @@
   - GroupTankHarness
   - HoPHead
   - HoPHeadset #SS220 Headsetloadout
+  - Glasses
   - HoPNeck
   - HoPJumpsuit
-  - HoPBackpack
   - HoPOuterClothing
-  - Glasses
+  - HoPBackpack
+  - GroupSpeciesBreathTool
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- HoPJobTrinkets
-  - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
 
@@ -55,18 +57,19 @@
   id: JobPassenger
   groups:
   - GroupTankHarness
-  - PassengerJumpsuit
-  - CommonBackpack
   - PassengerNeck
   - PassengerFace
-  - PassengerGloves
+  - PassengerJumpsuit
   - PassengerOuterClothing
+  - PassengerGloves
+  - CommonBackpack
   - PassengerShoes
   - Glasses
+  - GroupSpeciesBreathTool
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- PassengerJobTrinkets
-  - GroupSpeciesBreathTool
   - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
@@ -74,27 +77,29 @@
   groups:
   - GroupTankHarness
   - BartenderHead
-  - BartenderJumpsuit
-  - CommonBackpack
-  - BartenderOuterClothing
   - Glasses
+  - BartenderJumpsuit
+  - BartenderOuterClothing
+  - CommonBackpack
+  - GroupSpeciesBreathTool
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   - BartenderJobTrinkets
-  - GroupSpeciesBreathTool
   - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobServiceWorker
   groups:
   - GroupTankHarness
+  - Glasses
   - ServiceWorkerJumpsuit #SS220-Service Worker Loadout Fix
   - CommonBackpack
-  - Glasses
+  - GroupSpeciesBreathTool
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- ServiceWorkerJobTrinkets
-  - GroupSpeciesBreathTool
   - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
@@ -102,48 +107,51 @@
   groups:
   - GroupTankHarness
   - ChefHead
+  - Glasses
   - ChefMask
   - ChefJumpsuit
-  - CommonBackpack
   - ChefOuterClothing
   - ChefBeltApron #SS220 Chef Resprite
-  - Glasses
+  - CommonBackpack
+  - GroupSpeciesBreathTool
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- ChefJobTrinkets
-  - GroupSpeciesBreathTool
   - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobLibrarian
   groups:
   - GroupTankHarness
+  - LibrarianEyes #SS220 ADD Monocle
   - LibrarianJumpsuit
   - CommonBackpack
-  - LibrarianEyes #SS220 ADD Monocle
+  - GroupSpeciesBreathTool
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- LibrarianJobTrinkets
-  - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobLawyer
   groups:
+  - GroupTankHarness
   - LawyerHead # ss220 - ntr add - transfer iaa cloths
   - LawyerHeadset #SS220-Law Department & SS220 add-iaa-command-key
-  - GroupTankHarness
+  - IAAGlasses #SS220-IAA-Loadouts
   - LawyerNeck
   - LawyerJumpsuit
   - LawyerOuterclothing #SS220-Two Floppa Iteration
-  - CommonBackpack
-  - IAAGlasses #SS220-IAA-Loadouts
-  - Survival
   - Gloves #SS220-IAA-Loadouts
+  - CommonBackpack
+  - GroupSpeciesBreathTool
+  - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- LawyerJobTrinkets
-  - GroupSpeciesBreathTool
   - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
@@ -152,17 +160,18 @@
   groups:
   - GroupTankHarness
   - ChaplainHead
+  - Glasses
   - ChaplainMask
   - ChaplainNeck
   - ChaplainJumpsuit
-  - CommonBackpack
   - ChaplainOuterClothing
   - ChaplainBible
-  - Glasses
+  - CommonBackpack
+  - GroupSpeciesBreathTool
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- ChaplainJobTrinkets
-  - GroupSpeciesBreathTool
   - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
@@ -170,36 +179,38 @@
   groups:
   - GroupTankHarness
   - JanitorHead
+  - Glasses
   - JanitorJumpsuit
+  - JanitorOuterClothing
   - JanitorGloves
   - CommonBackpack
-  - JanitorOuterClothing
-  - JanitorShoes #SS220-OrangeJanitor
   - JanitorBelt #SS220-JunkRecyclesJanitor
-  - Glasses
+  - JanitorShoes #SS220-OrangeJanitor
+  - GroupSpeciesBreathTool
+  - JanitorEquipment #SS220-JREquipmentUpdate
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   - JanitorJobTrinkets
-  - GroupSpeciesBreathTool
   - WorkerCash #SS220-Cash-personal
-  - JanitorEquipment #SS220-JREquipmentUpdate
 
 - type: roleLoadout
   id: JobBotanist
   groups:
   - GroupTankHarness
   - BotanistHead
-  - BotanistJumpsuit
-  - BotanistBackpack
-  - BotanistOuterClothing
   - Glasses
+  - BotanistNeck #SS220 druid loadout
+  - BotanistJumpsuit
+  - BotanistOuterClothing
+  - BotanistBackpack
+  - BotanistBelt #SS220 druid loadout
+  - BotanistShoes #SS220 druid loadout
+  - GroupSpeciesBreathTool
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- BotanistJobTrinkets
-  - GroupSpeciesBreathTool
-  - BotanistBelt #SS220 druid loadout
-  - BotanistNeck #SS220 druid loadout
-  - BotanistShoes #SS220 druid loadout
   - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
@@ -208,15 +219,17 @@
   groups:
   - GroupTankHarness
   - ClownHead
+  - Glasses
   - ClownMask #SS220 clown pennywise loadout
   - ClownNeck #SS220 clown pennywise loadout
   - ClownJumpsuit
+  - ClownOuterClothing
   - ClownGloves #SS220-Two Floppa Iteration
   - ClownBackpack
-  - ClownOuterClothing
   - ClownShoes
-  - Glasses
+  - GroupSpeciesBreathTool
   - SurvivalClown
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   - ClownJobTrinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
@@ -228,14 +241,16 @@
   groups:
   - GroupTankHarness
   - MimeHead
+  - Glasses
   - MimeMask
   - MimeJumpsuit
-  - MimeBackpack
   - MimeOuterClothing
+  - MimeBackpack
   - MimeBelt
   - MimeShoes #SS220-Two Floppa Iterarion
-  - Glasses
+  - GroupSpeciesBreathTool
   - SurvivalMime
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- MimeJobTrinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
@@ -247,16 +262,17 @@
   groups:
   - GroupTankHarness
   - MusicianHead #SS220 bard loadout
-  - MusicianJumpsuit
-  - CommonBackpack
-  - MusicianOuterClothing
-  - MusicianShoes #SS220 bard loadout
   - Glasses
-  - Survival
-  - Trinkets
-  #- MusicianJobTrinkets
+  - MusicianJumpsuit
+  - MusicianOuterClothing
+  - CommonBackpack
+  - MusicianShoes #SS220 bard loadout
   - Instruments
   - GroupSpeciesBreathTool
+  - Survival
+  - SurvivalVox #SS220-Survival-Loadout
+  - Trinkets
+  #- MusicianJobTrinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - WorkerCash #SS220-Cash-personal
 
@@ -267,16 +283,17 @@
   - GroupTankHarness
   - QuartermasterHead
   - QuartermasterHeadset #SS220 HeadsetLoadout
+  - Glasses
   - QuartermasterNeck
   - QuartermasterJumpsuit
-  - CargoTechnicianBackpack
   - QuartermasterOuterClothing
+  - CargoTechnicianBackpack
   - QuartermasterShoes
-  - Glasses
+  - GroupSpeciesBreathTool
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- QuartermasterJobTrinkets
-  - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
 
@@ -285,32 +302,34 @@
   groups:
   - GroupTankHarness
   - CargoTechnicianHead
+  - Glasses
   - CargoTechnicianJumpsuit
-  - CargoTechnicianBackpack
   - CargoTechnicianOuterClothing
+  - CargoTechnicianBackpack
   - CargoTechnicianShoes
   - CargoTechnicianID
-  - Glasses
+  - GroupSpeciesBreathTool
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- CargoTechnicianJobTrinkets
-  - GroupSpeciesBreathTool
   - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobSalvageSpecialist
   groups:
-  - SalvageSpecialistHead #SS220-Salvage-Loadouts-Update
   - GroupTankHarness
-  - SalvageSpecialistBackpack
+  - SalvageSpecialistHead #SS220-Salvage-Loadouts-Update
+  - Glasses
   - SalvageSpecialistJumpsuit #SS220-MoreTurtleneck
   - SalvageSpecialistOuterClothing
+  - SalvageSpecialistBackpack
   - SalvageSpecialistShoes
-  - Glasses
+  - GroupSpeciesBreathTool
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- SalvageSpecialistJobTrinkets
-  - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - WorkerCash #SS220-Cash-personal
 
@@ -322,16 +341,17 @@
   - ChiefEngineerHead
   - ChiefEngineerHeadset #SS220 HeadsetLoadout
   - EngineerGlasses #SS220-TwoOne-Floppa-Iteration
-  - ChiefEngineerJumpsuit
-  - ChiefEngineerBack #ss220-ce-fix
   - ChiefEngineerNeck
+  - ChiefEngineerJumpsuit
   - ChiefEngineerOuterClothing
+  - ChiefEngineerBack #ss220-ce-fix
   - ChiefEngineerShoes
   - ChiefEngineerPDA #SS220-dark-chief-engineer-pda
+  - GroupSpeciesBreathTool
   - SurvivalExtended
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- ChiefEngineerJobTrinkets
-  - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
 
@@ -341,10 +361,11 @@
   - GroupTankHarness
   - TechnicalAssistantJumpsuit
   - StationEngineerBackpack
+  - GroupSpeciesBreathTool
   - SurvivalExtended
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- TechnicalAssistantJobTrinkets
-  - GroupSpeciesBreathTool
   - CivilianCash #SS220-Cash-personal
 
 - type: roleLoadout
@@ -354,14 +375,15 @@
   - StationEngineerHead
   - EngineerGlasses #SS220-Two Floppa Iteration
   - StationEngineerJumpsuit
-  - StationEngineerBackpack
   - StationEngineerOuterClothing
+  - StationEngineerBackpack
   - StationEngineerShoes
   - StationEngineerID
+  - GroupSpeciesBreathTool
   - SurvivalExtended
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- StationEngineerJobTrinkets
-  - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - WorkerCash #SS220-Cash-personal
 
@@ -371,13 +393,14 @@
   - GroupTankHarness
   - EngineerGlasses #SS220-TwoOne-Floppa-Iteration
   - AtmosphericTechnicianJumpsuit
-  - AtmosphericTechnicianBackpack
   - AtmosphericTechnicianOuterClothing
+  - AtmosphericTechnicianBackpack
   - AtmosphericTechnicianShoes
+  - GroupSpeciesBreathTool
   - SurvivalExtended
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- AtmosphericTechnicianJobTrinkets
-  - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - WorkerCash #SS220-Cash-personal
 
@@ -391,16 +414,16 @@
   - ScientistGlasses #SS220-TwoOne-Floppa-Iteration
   - ResearchDirectorNeck
   - ResearchDirectorJumpsuit
-  - ScientistBackpack
   - ResearchDirectorOuterClothing
   - ScientistGloves
+  - ScientistBackpack
   - ResearchDirectorShoes
   - ResearchDirectorPDA #SS220-RD-New-Loadout
-#  - Glasses #SS220-TwoOne-Floppa-Iteration
+  - GroupSpeciesBreathTool
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- ResearchDirectorJobTrinkets
-  - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
 
@@ -408,20 +431,20 @@
   id: JobScientist
   groups:
   - GroupTankHarness
-  - ScientistGlasses #SS220-Two Floppa Iteration
   - ScientistHead
+  - ScientistGlasses #SS220-Two Floppa Iteration
   - ScientistNeck
   - ScientistJumpsuit
-  - ScientistBackpack
   - ScientistOuterClothing
   - ScientistGloves
+  - ScientistBackpack
   - ScientistShoes
   - ScientistPDA
-#  - Glasses #SS220-Two Floppa Iteration
+  - GroupSpeciesBreathTool
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- ScientistJobTrinkets
-  - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - WorkerCash #SS220-Cash-personal
 
@@ -429,13 +452,13 @@
   id: JobResearchAssistant
   groups:
   - GroupTankHarness
+  - Glasses
   - ResearchAssistantJumpsuit
   - ScientistBackpack
-  - Glasses
+  - GroupSpeciesBreathTool
   - Survival
   - Trinkets
   #- ResearchAssistantJobTrinkets
-  - GroupSpeciesBreathTool
   - CivilianCash #SS220-Cash-personal
 
 # Security
@@ -444,18 +467,19 @@
   groups:
   - HeadofSecurityHead
   - SecurityGlasses #SS220-TwoOne-Floppa-Iteration
-  - HeadofSecurityNeck
   - SecurityMask #SS220 Security Tactical Gas Mask
+  - HeadofSecurityNeck
   - HeadofSecurityJumpsuit
+  - HeadofSecurityOuterClothing
   - SecurityBackpack
   - SecurityBelt
-  - HeadofSecurityOuterClothing
   - SecurityShoes
+  - SecurityHoSSiutstorage #SS220-OfficerCutlass
+  - GroupSpeciesBreathToolSecurity
   - SurvivalSecurity
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   - HeadofSecurityJobTrinkets
-  - GroupSpeciesBreathToolSecurity
-  - SecurityHoSSiutstorage #SS220-OfficerCutlass
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
 
@@ -463,18 +487,19 @@
   id: JobWarden
   groups:
   - WardenHead
-  - SecurityNeck #SS220 holster loadout
-  - SecurityMask #SS220 Security Tactical Gas Mask
   - SecurityGlasses #SS220-TwoOne-Floppa-Iteration
+  - SecurityMask #SS220 Security Tactical Gas Mask
+  - SecurityNeck #SS220 holster loadout
   - WardenJumpsuit
+  - WardenOuterClothing
   - SecurityBackpack
   - SecurityBelt
-  - WardenOuterClothing
   - SecurityShoes
+  - GroupSpeciesBreathToolSecurity
   - SurvivalSecurity
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   - WardenJobTrinkets
-  - GroupSpeciesBreathToolSecurity
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
 
@@ -486,16 +511,17 @@
   - SecurityMask #SS220 mask loadout
   - SecurityNeck #SS220 holster loadout
   - SecurityJumpsuit
-  - SecurityBackpack
   - SecurityOuterClothing
   - SecurityGloves #SS220-tacsec loadout
+  - SecurityBackpack
+  - SecurityBelt
   - SecurityShoes
   - SecurityPDA
-  - SecurityBelt
+  - GroupSpeciesBreathToolSecurity
   - SurvivalSecurity
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   - SecurityJobTrinkets
-  - GroupSpeciesBreathToolSecurity
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - WorkerCash #SS220-Cash-personal
 
@@ -506,13 +532,14 @@
   - DetectiveGlasses #SS220 Add glasses for detective
   - DetectiveNeck #SS220 holster to neck
   - DetectiveJumpsuit
-  - DetectiveSecBackpack #ss220 backpack noir
   - DetectiveOuterClothing
+  - DetectiveSecBackpack #ss220 backpack noir
   - DetectiveShoes #SS220 dec-lux-shoes
+  - GroupSpeciesBreathToolSecurity
   - SurvivalSecurity
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   - DetectiveJobTrinkets
-  - GroupSpeciesBreathToolSecurity
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - WorkerCash #SS220-Cash-personal
 
@@ -521,10 +548,11 @@
   groups:
   - SecurityCadetJumpsuit
   - SecurityBackpack
+  - GroupSpeciesBreathToolSecurity
   - SurvivalSecurity
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- SecurityCadetJobTrinkets
-  - GroupSpeciesBreathToolSecurity
   - CivilianCash #SS220-Cash-personal
 
 # Wildcards
@@ -532,26 +560,29 @@
   id: JobReporter
   groups:
   - GroupTankHarness
-  - ReporterJumpsuit
   - ReporterHead
+  - Glasses
+  - ReporterJumpsuit
   - ReporterOuterClothing
   - CommonBackpack
-  - Glasses
+  - GroupSpeciesBreathTool
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- ReporterJobTrinkets
-  - GroupSpeciesBreathTool
   - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobPsychologist
   groups:
   - GroupTankHarness
-  - PsychologistJumpsuit
-  - MedicalNeck #SS220-WhiteScarf
-  - MedicalBackpack
   - Glasses
+  - MedicalNeck #SS220-WhiteScarf
+  - PsychologistJumpsuit
+  - MedicalBackpack
+  - GroupSpeciesBreathTool
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- PsychologistJobTrinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
