@@ -376,6 +376,10 @@
 - type: entity
   parent: [ OrganBaseEars, OrganSpriteHumanInternal, OrganResomiInternal ]
   id: OrganResomiEars
+  components:
+  - type: ChatHearingRangeMultiplier
+    multipliers:
+      Whisper: 2.0
 
 - type: entity
   parent: [ OrganBaseLungs, OrganResomiInternal, OrganResomiMetabolizer ]
