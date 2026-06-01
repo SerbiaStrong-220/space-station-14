@@ -690,12 +690,6 @@
   description: Box with an elite survival kit.
   suffix: Default, Floppa
   components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: FoodNutribrickSponsor
-
   - type: Sprite
     sprite: SS220/Objects/Sponsor/floppa_box.rsi
     state: floppa_box

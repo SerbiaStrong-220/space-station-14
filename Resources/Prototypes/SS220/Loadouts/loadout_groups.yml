@@ -958,7 +958,7 @@
  # Баллон азота воксов
 - type: loadoutGroup
   id: SurvivalVox
-  name: loadout-group-gloves
+  name: loadout-group-survival-basic
   hidden: true
   loadouts:
   - LoadoutSpeciesVoxNitrogen
