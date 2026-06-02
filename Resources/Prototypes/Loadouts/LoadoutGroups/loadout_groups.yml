@@ -1185,7 +1185,7 @@
   id: SurvivalExtended
   name: loadout-group-survival-extended
   minLimit: 1 #SS220-Survival-Loadout
-  hidden: false
+  hidden: false #SS220-Survival-Loadout
   loadouts:
   - EmergencyNitrogenExtended
   - EmergencyNitrogenExtendedSponsor #SS220-Survival-Loadout
