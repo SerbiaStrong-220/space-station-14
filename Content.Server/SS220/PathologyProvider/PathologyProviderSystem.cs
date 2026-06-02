@@ -10,10 +10,10 @@ using System.Linq;
 
 namespace Content.Server.SS220.PathologyProvider;
 
-public sealed class PathologyProviderSystem : EntitySystem
+public sealed partial class PathologyProviderSystem : EntitySystem
 {
-    [Dependency] private readonly PathologySystem _pathology = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private PathologySystem _pathology = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private readonly HashSet<ProtoId<DamageTypePrototype>> _damageTypesToIgnore = new() { "Structural" };
     // having any armor is better than nothing

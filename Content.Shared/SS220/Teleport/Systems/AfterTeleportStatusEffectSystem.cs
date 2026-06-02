@@ -4,10 +4,10 @@ using Content.Shared.SS220.Teleport.Components;
 
 namespace Content.Shared.SS220.Teleport.Systems;
 
-public sealed class AfterTeleportStatusEffectSystem : EntitySystem
+public sealed partial class AfterTeleportStatusEffectSystem : EntitySystem
 {
-    [Dependency] private readonly StatusEffect.StatusEffectsSystem _statusEffectsOld = default!;
-    [Dependency] private readonly StatusEffectNew.StatusEffectsSystem _statusEffectsNew = default!;
+    [Dependency] private StatusEffect.StatusEffectsSystem _statusEffectsOld = default!;
+    [Dependency] private StatusEffectNew.StatusEffectsSystem _statusEffectsNew = default!;
 
     public override void Initialize()
     {

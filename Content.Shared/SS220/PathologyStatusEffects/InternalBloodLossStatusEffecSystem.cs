@@ -19,9 +19,9 @@ namespace Content.Shared.SS220.PathologyStatusEffects;
 /// <inheritdoc cref="EntityEffectSystem{T,TEffect}"/>
 public sealed partial class InternalBloodLossStatusEffectSystem : EntitySystem
 {
-    [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
-    [Dependency] private readonly SharedChatSystem _chat = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
+    [Dependency] private SharedChatSystem _chat = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
 
     private const float UpdateRate = 0.8f;
     private static readonly TimeSpan BleedingTimeUpdate = TimeSpan.FromSeconds(UpdateRate);

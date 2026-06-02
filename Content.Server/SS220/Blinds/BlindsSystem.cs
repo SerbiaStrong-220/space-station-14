@@ -9,11 +9,11 @@ using Robust.Shared.Map.Enumerators;
 
 namespace Content.Server.SS220.Blinds;
 
-public sealed class BlindsSystem : EntitySystem
+public sealed partial class BlindsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
-    [Dependency] private readonly OccluderSystem _occluder = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private OccluderSystem _occluder = default!;
 
     private const int MaxConnectedBlinds = 64;
 

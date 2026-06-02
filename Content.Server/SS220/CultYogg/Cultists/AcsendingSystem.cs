@@ -10,12 +10,12 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.SS220.CultYogg.Cultists;
 
-public sealed class AcsendingSystem : EntitySystem
+public sealed partial class AcsendingSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly CultYoggSystem _cultYogg = default!;
-    [Dependency] private readonly SharedStationSystem _station = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private CultYoggSystem _cultYogg = default!;
+    [Dependency] private SharedStationSystem _station = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

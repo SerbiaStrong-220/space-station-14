@@ -9,12 +9,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.Experience.Systems;
 
-public sealed partial class ExperienceSystem : EntitySystem
+public sealed partial class ExperienceSystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogManager = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogManager = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
 
     public const int StartSkillLevel = 1;
     public const int StartSublevel = 0;

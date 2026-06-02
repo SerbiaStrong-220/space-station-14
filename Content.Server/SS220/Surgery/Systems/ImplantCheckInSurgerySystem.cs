@@ -13,14 +13,14 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.SS220.Surgery.Systems;
 
-public sealed class ImplantCheckInSurgerySystem : EntitySystem
+public sealed partial class ImplantCheckInSurgerySystem : EntitySystem
 {
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly PaperSystem _paper = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly HandsSystem _handsSystem = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private ContainerSystem _container = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private PaperSystem _paper = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private HandsSystem _handsSystem = default!;
 
     private static readonly LocId ImplantCheckNoImplantSlot = "implant-check-surgery-no-implants";
     private static readonly LocId ImplantCheckReportTitle = "implant-check-report-title";

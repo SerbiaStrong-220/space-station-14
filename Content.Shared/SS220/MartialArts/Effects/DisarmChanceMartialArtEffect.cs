@@ -11,7 +11,7 @@ namespace Content.Shared.SS220.MartialArts.Effects;
 
 public sealed partial class DisarmChanceMartialArtEffectSystem : BaseMartialArtEffectSystem<DisarmChanceMartialArtEffect, DisarmChanceMartialArtEffectComponent>
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     public override void Initialize()
     {

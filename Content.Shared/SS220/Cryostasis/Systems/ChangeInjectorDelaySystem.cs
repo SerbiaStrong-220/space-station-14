@@ -6,9 +6,9 @@ using Content.Shared.SS220.Cryostasis.Events;
 
 namespace Content.Shared.SS220.Cryostasis.Systems;
 
-public sealed class ChangeInjectorDelaySystem : EntitySystem
+public sealed partial class ChangeInjectorDelaySystem : EntitySystem
 {
-    [Dependency] private readonly SharedPowerReceiverSystem _powerReceiver = default!;
+    [Dependency] private SharedPowerReceiverSystem _powerReceiver = default!;
 
     public override void Initialize()
     {

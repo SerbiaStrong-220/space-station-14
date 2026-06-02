@@ -18,8 +18,8 @@ namespace Content.Client.SS220.Experience.Ui;
 [GenerateTypedNameReferences]
 public sealed partial class ExperienceEditorWindow : FancyWindow
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
 
     private readonly ExperienceEditorSystem _experienceEditor = default!;
     private readonly ExperienceInfoSystem _experienceInfo = default!;

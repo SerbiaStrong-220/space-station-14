@@ -5,9 +5,9 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared.SS220.Teleport.Systems;
 
-public sealed class DeleteOnTeleportedSystem : EntitySystem
+public sealed partial class DeleteOnTeleportedSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {
