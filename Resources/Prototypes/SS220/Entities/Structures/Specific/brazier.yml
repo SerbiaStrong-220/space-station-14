@@ -20,7 +20,6 @@
       visible: false
       shader: unshaded
   - type: Appearance
-  - type: ToggleableLightVisuals
   - type: Flammable 
     fireSpread: false
     canResistFire: false
