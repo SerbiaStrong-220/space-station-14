@@ -1021,7 +1021,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     /// <summary>
     ///     Returns list of players and ranges for all players withing some range. Also returns observers with a range of -1.
     /// </summary>
-    private Dictionary<ICommonSession, ICChatRecipientData> GetRecipients(EntityUid source, float voiceGetRange, InGameICChatType? chatType = null /* SS220 Hearing range multiplier */)
+    private Dictionary<ICommonSession, ICChatRecipientData> GetRecipients(EntityUid source, float voiceGetRange, InGameICChatType chatType = InGameICChatType.Speak /* SS220 Hearing range multiplier */)
     {
         // TODO proper speech occlusion
 
@@ -1049,7 +1049,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             //ss220 add filter tts for ghost end
 
             // SS220 Hearing range multiplier begin
-            var multiplierEv = new GetHearingRangeMultiplierEvent(chatType ?? InGameICChatType.Speak);
+            var multiplierEv = new GetHearingRangeMultiplierEvent(chatType);
             RaiseLocalEvent(playerEntity, ref multiplierEv);
             var modRange = voiceGetRange * multiplierEv.Multiplier;
             // SS220 Hearing range multiplier end
