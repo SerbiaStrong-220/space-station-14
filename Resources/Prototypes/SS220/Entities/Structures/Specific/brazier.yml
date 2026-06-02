@@ -1,0 +1,216 @@
+#© SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: BrazierWood
+  parent: BaseStructure
+  name: brazier wood
+  description: It's completely out of place on a space station, but it provides much-needed warmth.
+  components:
+  - type: Construction
+    graph: BrazierWoodGraph
+    node: BrazierWoodNode
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/Specific/brazier.rsi
+    drawdepth: Objects
+    layers:
+    - state: wood
+    - map: ["enum.ToggleableVisuals.Layer"]
+      state: fire-Sheet
+      visible: false
+      shader: unshaded
+  - type: Appearance
+  - type: ToggleableLightVisuals
+  - type: Flammable 
+    fireSpread: false
+    canResistFire: false
+    alwaysCombustible: true
+    canExtinguish: true
+    firestacksOnIgnite: 3.0
+    firestackFade: 0.0
+    damage:
+      types:
+        Heat: 0.0
+  - type: Reactive
+    groups:
+      Flammable: [ Touch ]
+      Extinguish: [ Touch ]
+  - type: FireVisuals
+    sprite: SS220/Structures/Specific/brazier.rsi
+    normalState: fire-Sheet
+    spriteLayer: flame
+    lightColor: "#db9b66"
+    lightRadiusPerStack: 2.0
+    maxLightRadius: 4.0
+    lightEnergyPerStack: 0.5
+    maxLightEnergy: 0.6
+  - type: UseDelay
+  - type: ExtinguishOnInteract
+    extinguishAttemptSound:
+      path: /Audio/Effects/cig_light.ogg
+      params:
+        variation: 0.05
+        volume: -6
+    probability: 1.0
+    stackDelta: -10.0
+  - type: ExtinguishableSetCollisionWake
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.25
+        mask:
+        - ItemMask 
+        - MachineMask
+        layer:
+        - MidImpassable
+  - type: Damageable
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 60
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: EmitSoundOnInteractUsing
+    sound:
+      path: /Audio/Effects/fire.ogg
+      params:
+        variation: 0.05
+        volume: -2
+    whitelist:
+      tags:
+        - Lighter
+
+- type: entity
+  id: BrazierStone
+  parent: BrazierWood
+  name: brazier stone
+  description: A pile of rocks or a work of art? It's actually made of steel.
+  components:
+  - type: Construction
+    graph: BrazierStoneGraph
+    node: BrazierStoneNode
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/Specific/brazier.rsi
+    drawdepth: Objects
+    layers:
+    - state: stone
+    - map: ["enum.ToggleableVisuals.Layer"]
+      state: fire-Sheet
+      visible: false
+      shader: unshaded
+  - type: Damageable
+    damageModifierSet: Rock
+  - type: FireVisuals
+    sprite: SS220/Structures/Specific/brazier.rsi
+    normalState: fire-Sheet
+    spriteLayer: flame
+    lightColor: "#db9b66"
+    lightRadiusPerStack: 2.0
+    maxLightRadius: 5.0
+    lightEnergyPerStack: 0.5
+    maxLightEnergy: 0.7
+
+- type: entity
+  id: BrazierSteel
+  parent: BrazierWood
+  name: brazier steel
+  description: It takes real skill to make it out of steel.
+  components:
+  - type: Construction
+    graph: BrazierSteelGraph
+    node: BrazierSteelNode
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/Specific/brazier.rsi
+    drawdepth: Objects
+    layers:
+    - state: steel
+    - map: ["enum.ToggleableVisuals.Layer"]
+      state: fire-Sheet
+      visible: false
+      shader: unshaded
+  - type: Damageable
+    damageModifierSet: Metallic
+  - type: FireVisuals
+    sprite: SS220/Structures/Specific/brazier.rsi
+    normalState: fire-Sheet
+    spriteLayer: flame
+    lightColor: "#db9b66"
+    lightRadiusPerStack: 2.0
+    maxLightRadius: 7.0
+    lightEnergyPerStack: 0.5
+    maxLightEnergy: 0.8
+
+# Маппинг
+
+- type: entity
+  id: BrazierWoodInfinite
+  parent: BrazierWood
+  name: brazier wood
+  suffix: Mapping, Infinite Burning
+  components:
+  - type: Sprite
+    layers:
+    - state: wood
+    - map: ["enum.ToggleableVisuals.Layer"]
+      state: fire-Sheet
+      visible: true
+      shader: unshaded
+  - type: PointLight
+    enabled: true
+    color: "#db9b66"
+    energy: 0.6
+    radius: 4.0
+  - type: Flammable
+    alwaysCombustible: false
+
+- type: entity
+  id: BrazierStoneInfinite
+  parent: BrazierStone
+  name: brazier stone
+  suffix: Mapping, Infinite Burning
+  components:
+  - type: Sprite
+    layers:
+    - state: stone
+    - map: ["enum.ToggleableVisuals.Layer"]
+      state: fire-Sheet
+      visible: true
+      shader: unshaded
+  - type: PointLight
+    enabled: true
+    color: "#db9b66"
+    energy: 0.7
+    radius: 5.0
+  - type: Flammable
+    alwaysCombustible: false
+
+- type: entity
+  id: BrazierSteelInfinite
+  parent: BrazierSteel
+  name: brazier steel
+  suffix: Mapping, Infinite Burning
+  components:
+  - type: Sprite
+    layers:
+    - state: steel
+    - map: ["enum.ToggleableVisuals.Layer"]
+      state: fire-Sheet
+      visible: true
+      shader: unshaded
+  - type: PointLight
+    enabled: true
+    color: "#db9b66"
+    energy: 0.8
+    radius: 7.0
+  - type: Flammable
+    alwaysCombustible: false
+

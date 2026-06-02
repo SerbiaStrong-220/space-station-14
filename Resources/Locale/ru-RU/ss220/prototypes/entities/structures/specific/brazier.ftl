@@ -1,0 +1,15 @@
+ent-BrazierWood = деревянная жаровня
+    .desc = Крайне неуместна на космической станции, однако дарует так необходимое тепло.
+ent-BrazierStone = каменная жаровня
+    .desc = Груда камней или произведение искусства? На самом деле оно сделано из стали.
+ent-BrazierSteel = стальная жаровня
+    .desc = Требуется настоящее мастерство, чтобы изготовить её из стали.
+ent-BrazierWoodInfinite = { ent-BrazierWood }
+    .desc = { ent-BrazierWood.desc }
+    .suffix = Маппинг, Бесконечно горит
+ent-BrazierStoneInfinite = { ent-BrazierStone }
+    .desc = { ent-BrazierStone.desc }
+    .suffix = { ent-BrazierWoodInfinite.suffix}
+ent-BrazierSteelInfinite = { ent-BrazierSteel }
+    .desc = { ent-BrazierSteel.desc }
+    .suffix = { ent-BrazierWoodInfinite.suffix }
