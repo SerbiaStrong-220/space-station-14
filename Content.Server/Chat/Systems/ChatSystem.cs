@@ -45,6 +45,7 @@ using Robust.Shared.Map;
 using Content.Shared.SS220.Language.Systems;
 using Content.Shared.SS220.TTS;
 using Content.Shared.FixedPoint;
+using Content.Shared.SS220.Body.Events;
 using Content.Server.SS220.QuadHearing;
 using Content.Shared.SS220.QuadHearing;
 
@@ -522,7 +523,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         name = FormattedMessage.EscapeText(name);
         // SS220-Add-Languages begin
         var languageMessage = _languageSystem.SanitizeMessage(source, message);
-        foreach (var (session, data) in GetRecipients(source, VoiceRange))
+        foreach (var (session, data) in GetRecipients(source, VoiceRange, InGameICChatType.Speak /* SS220 Hearing range multiplier */))
         {
             if (session.AttachedEntity is not { Valid: true } playerEntity)
                 continue;
@@ -625,7 +626,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         var wrappedUnknownMessage = Loc.GetString("chat-manager-entity-whisper-unknown-wrap-message",
             ("message", FormattedMessage.EscapeText(obfuscatedMessage)));
 
-        foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange))
+        foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange, InGameICChatType.Whisper /* SS220 Hearing range multiplier */))
         {
             EntityUid listener;
 
@@ -649,7 +650,13 @@ public sealed partial class ChatSystem : SharedChatSystem
             if (MessageRangeCheck(session, data, range) != MessageRangeCheckResult.Full)
                 continue; // Won't get logged to chat, and ghosts are too far away to see the pop-up, so we just won't send it to them.
 
-            if (data.Range <= WhisperClearRange || data.Observer)
+            // SS220 Hearing multiplier begin
+            var multiplierEv = new GetHearingRangeMultiplierEvent(InGameICChatType.Whisper);
+            RaiseLocalEvent(listener, ref multiplierEv);
+            var modRange = WhisperClearRange * multiplierEv.Multiplier;
+            // SS220 Hearing multiplier end
+
+            if (data.Range <= modRange /* SS220 Hearing multiplier */ || data.Observer)
                 _chatManager.ChatMessageToOne(ChatChannel.Whisper, scrambledMessage /* SS220 languages */, wrappedMessage, source, false, session.Channel);
             //If listener is too far, they only hear fragments of the message
             else if (_examineSystem.InRangeUnOccluded(source, listener, WhisperMuffledRange))
@@ -1027,7 +1034,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     /// <summary>
     ///     Returns list of players and ranges for all players withing some range. Also returns observers with a range of -1.
     /// </summary>
-    private Dictionary<ICommonSession, ICChatRecipientData> GetRecipients(EntityUid source, float voiceGetRange)
+    private Dictionary<ICommonSession, ICChatRecipientData> GetRecipients(EntityUid source, float voiceGetRange, InGameICChatType chatType = InGameICChatType.Speak /* SS220 Hearing range multiplier */)
     {
         // TODO proper speech occlusion
 
@@ -1054,8 +1061,14 @@ public sealed partial class ChatSystem : SharedChatSystem
                            && ghostComp.IsEnabled;
             //ss220 add filter tts for ghost end
 
+            // SS220 Hearing range multiplier begin
+            var multiplierEv = new GetHearingRangeMultiplierEvent(chatType);
+            RaiseLocalEvent(playerEntity, ref multiplierEv);
+            var modRange = voiceGetRange * multiplierEv.Multiplier;
+            // SS220 Hearing range multiplier end
+
             // even if they are a ghost hearer, in some situations we still need the range
-            if (sourceCoords.TryDistance(EntityManager, transformEntity.Coordinates, out var distance) && distance < voiceGetRange)
+            if (sourceCoords.TryDistance(EntityManager, transformEntity.Coordinates, out var distance) && distance < modRange /* SS220 Hearing range multiplier */)
             {
                 recipients.Add(player, new ICChatRecipientData(distance, observer));
                 continue;
