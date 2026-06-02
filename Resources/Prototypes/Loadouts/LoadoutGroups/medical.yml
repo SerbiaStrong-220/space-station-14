@@ -30,10 +30,10 @@
   minLimit: 1 #SS220-Survival-Loadout
   hidden: false #SS220-Survival-Loadout
   loadouts:
-  - EmergencyOxygenMedical
-  - EmergencyOxygenMedicalSponsor #SS220-Survival-Loadout
   - EmergencyNitrogenMedical
   - EmergencyNitrogenMedicalSponsor #SS220-Survival-Loadout
+  - EmergencyOxygenMedical
+  - EmergencyOxygenMedicalSponsor #SS220-Survival-Loadout
 #  - LoadoutSpeciesVoxNitrogen #SS220-Survival-Loadout
 
 # Chief Medical Officer

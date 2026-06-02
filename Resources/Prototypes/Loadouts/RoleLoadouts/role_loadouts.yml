@@ -6,9 +6,9 @@
   - CAPHeadset #SS220-Law Department
   - CaptainNeck
   - CaptainJumpsuit
-  - CaptainOuterClothing
-  - CaptainGloves #SS220-whiteCaptainGloves
   - CaptainBackpack
+  - CaptainGloves #SS220-whiteCaptainGloves
+  - CaptainOuterClothing
   - Survival
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -26,8 +26,8 @@
   - HoPHeadset #SS220 Headsetloadout
   - HoPNeck
   - HoPJumpsuit
-  - HoPOuterClothing
   - HoPBackpack
+  - HoPOuterClothing
   - Glasses
   - Survival
   - SurvivalVox #SS220-Survival-Loadout
