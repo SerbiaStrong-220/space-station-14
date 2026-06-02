@@ -17,7 +17,6 @@
       visible: false
   - type: Appearance
   - type: PlaceableSurface
-  - type: Climbable
   - type: Construction
     graph: TableFoldingGraph
     node: TableFoldingNode
