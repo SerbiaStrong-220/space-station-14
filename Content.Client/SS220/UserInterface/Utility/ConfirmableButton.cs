@@ -11,7 +11,7 @@ namespace Content.Client.SS220.UserInterface.Utility;
 ///     A button that requires some confirmation clicks before executing its action.
 /// </summary>
 [Virtual]
-public  partial class ConfirmableButton : Button
+public partial class ConfirmableButton : Button
 {
     [Dependency] private IGameTiming _gameTiming = default!;
 
