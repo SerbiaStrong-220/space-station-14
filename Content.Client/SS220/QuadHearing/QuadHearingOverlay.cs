@@ -124,7 +124,8 @@ public sealed class QuadHearingOverlay : Overlay
                 foreach (var data in targets)
                 {
                     var worldPos = _transform.ToWorldPosition(data.Coords);
-                    var delta = worldPos - playerPos;
+                    var dir = worldPos - playerPos;
+                    var dist = dir.Length();
 
                     var color = proto.Color;
                     if (_timing.CurTime > data.FadeTime)
@@ -143,12 +144,31 @@ public sealed class QuadHearingOverlay : Overlay
                     shd.SetParameter("CircleWaveFadeRadius", screenCircleWaveFadeRadius);
                     shd.SetParameter("DrawSectorWave", !args.WorldBounds.Contains(worldPos));
                     shd.SetParameter("SectorWaveMinDistance", screenSectorWaveMinDistance);
-                    shd.SetParameter("SectorWaveAngle", GetSectorWaveAngle(delta.Length(), proto.CircleWaveRadius));
+                    shd.SetParameter("SectorWaveAngle", GetSectorWaveAngle(dist, proto.CircleWaveRadius));
                     shd.SetParameter("NoiseAmplitude", proto.NoiseAmplitude);
                     shd.SetParameter("Color", color);
                     handle.UseShader(shd);
 
-                    handle.DrawRect(args.WorldBounds, color);
+                    handle.SetTransform(playerPos, dir.ToAngle());
+                    handle.DrawPrimitives(DrawPrimitiveTopology.TriangleStrip, GetDrawRegion(), color);
+
+                    Vector2[] GetDrawRegion()
+                    {
+                        const float boundsAngle = -0.7853981634f; // -π/4 (45 degrees clockwise)
+                        var playerPos = Vector2.Zero;
+
+                        var radius = proto.CircleWaveRadius;
+                        var box = Box2.FromTwoPoints(new Vector2(dist - radius, -radius), new Vector2(dist + radius, radius));
+                        var bounds = new Box2Rotated(box, boundsAngle, box.Center);
+
+                        Vector2 p1;
+                        if (bounds.Contains(playerPos))
+                            p1 = bounds.BottomLeft;
+                        else
+                            p1 = playerPos;
+
+                        return [p1, bounds.TopLeft, bounds.BottomRight, bounds.TopRight];
+                    }
                 }
             }
         }
