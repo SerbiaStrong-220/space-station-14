@@ -24,7 +24,7 @@ public sealed class QuadHearingOverlay : Overlay
     private readonly ShaderInstance _shader = default!;
 
     private readonly Dictionary<ProtoId<QuadHearingTargetPrototype>, TargetsEntry> _targetsEntries = [];
-    private readonly List<string> _idQueueRem = [];
+    private readonly List<ProtoId<QuadHearingTargetPrototype>> _idQueueRem = [];
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
@@ -113,6 +113,8 @@ public sealed class QuadHearingOverlay : Overlay
             var screenCircleWaveFadeRadius = WorldToScreenLength(proto.CircleWaveFadeRadius, renderScale.X, zoom.X);
             var screenSectorWaveMinDistance = WorldToScreenLength(proto.SectorWaveMinDistance, renderScale.X);
 
+            var circleWaveRadius = proto.CircleWaveRadius;
+
             foreach (var (parent, targets) in entry.TargetsData)
             {
                 if (!_entity.EntityExists(parent))
@@ -130,8 +132,16 @@ public sealed class QuadHearingOverlay : Overlay
                     var color = proto.Color;
                     if (_timing.CurTime > data.FadeTime)
                     {
-                        var fadeProg = (_timing.CurTime - data.FadeTime) / (data.DeleteTime - data.FadeTime);
-                        color.A *= 1 - Math.Clamp((float)fadeProg, 0, 1);
+                        var fadeLifetime = data.DeleteTime - data.FadeTime;
+                        if (fadeLifetime > TimeSpan.Zero)
+                        {
+                            var fadeProg = (_timing.CurTime - data.FadeTime) / fadeLifetime;
+                            color.A *= 1 - Math.Clamp((float)fadeProg, 0, 1);
+                        }
+                        else
+                        {
+                            color.A = 0f;
+                        }
                     }
 
                     var shd = data.Shader;
@@ -149,31 +159,38 @@ public sealed class QuadHearingOverlay : Overlay
                     shd.SetParameter("Color", color);
                     handle.UseShader(shd);
 
+                    const float boundsAngle = -0.7853981634f; // -π/4 (45 degrees clockwise)
+                    var localPlayerPos = Vector2.Zero;
+                    var localCircleBox = Box2.FromTwoPoints(new Vector2(dist - circleWaveRadius, -circleWaveRadius), new Vector2(dist + circleWaveRadius, circleWaveRadius));
+                    var localCircleBounds = new Box2Rotated(localCircleBox, boundsAngle, localCircleBox.Center);
+
+                    var verts = new Vector2[4];
+                    if (localCircleBounds.Contains(localPlayerPos))
+                        verts[0] = localCircleBounds.BottomLeft;
+                    else
+                        verts[0] = localPlayerPos;
+
+                    verts[1] = localCircleBounds.TopLeft;
+                    verts[2] = localCircleBounds.BottomRight;
+                    verts[3] = localCircleBounds.TopRight;
+
                     handle.SetTransform(playerPos, dir.ToAngle());
-                    handle.DrawPrimitives(DrawPrimitiveTopology.TriangleStrip, GetDrawRegion(), color);
-
-                    Vector2[] GetDrawRegion()
-                    {
-                        const float boundsAngle = -0.7853981634f; // -π/4 (45 degrees clockwise)
-                        var playerPos = Vector2.Zero;
-
-                        var radius = proto.CircleWaveRadius;
-                        var box = Box2.FromTwoPoints(new Vector2(dist - radius, -radius), new Vector2(dist + radius, radius));
-                        var bounds = new Box2Rotated(box, boundsAngle, box.Center);
-
-                        Vector2 p1;
-                        if (bounds.Contains(playerPos))
-                            p1 = bounds.BottomLeft;
-                        else
-                            p1 = playerPos;
-
-                        return [p1, bounds.TopLeft, bounds.BottomRight, bounds.TopRight];
-                    }
+                    handle.DrawPrimitives(DrawPrimitiveTopology.TriangleStrip, verts, color);
                 }
             }
         }
 
         handle.UseShader(null);
+    }
+
+    protected override void DisposeBehavior()
+    {
+        base.DisposeBehavior();
+
+        foreach (var entry in _targetsEntries.Values)
+            entry.Dispose();
+
+        _targetsEntries.Clear();
     }
 
     private static float WorldToScreenLength(float length, float renderScale, float zoom = 1)

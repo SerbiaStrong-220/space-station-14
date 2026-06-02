@@ -83,24 +83,24 @@ public abstract class SharedQuadHearingSystem : EntitySystem
         return new EntityCoordinates(map, mapCoords.Position);
     }
 
-    protected bool CanRegisterTarget(Entity<QuadHearingComponent> recepient, MapCoordinates targetMapCoords, float range)
+    protected bool CanRegisterTarget(Entity<QuadHearingComponent> recipient, MapCoordinates targetMapCoords, float range)
     {
-        var recepientMapCoords = _transform.GetMapCoordinates(recepient.Owner);
+        var recipientMapCoords = _transform.GetMapCoordinates(recipient.Owner);
 
-        if (recepientMapCoords.MapId != targetMapCoords.MapId)
+        if (recipientMapCoords.MapId != targetMapCoords.MapId)
             return false;
 
-        var delta = recepientMapCoords.Position - targetMapCoords.Position;
-        var distance = delta.Length();
-        if (distance < recepient.Comp.MinDistance || distance > range)
+        var delta = recipientMapCoords.Position - targetMapCoords.Position;
+        var distanceSquared = delta.LengthSquared();
+        if (distanceSquared < recipient.Comp.MinDistance * recipient.Comp.MinDistance || distanceSquared > range * range)
             return false;
 
         return true;
     }
 
-    protected static float GetHearingRange(QuadHearingTargetPrototype proto, Entity<QuadHearingComponent> recepient)
+    protected static float GetHearingRange(QuadHearingTargetPrototype proto, Entity<QuadHearingComponent> recipient)
     {
-        if (recepient.Comp.HearingRangeOverride is { } ovr && ovr.TryGetValue(proto.ID, out var ovrRange))
+        if (recipient.Comp.HearingRangeOverride is { } ovr && ovr.TryGetValue(proto.ID, out var ovrRange))
             return ovrRange;
 
         return proto.HearingRange;
