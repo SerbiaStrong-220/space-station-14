@@ -8,18 +8,21 @@
   - ChiefMedicalOfficerHeadset #SS220 Headsetloadout
   - ChiefMedicalOfficerGlasses #SS220-TwoOne-Floppa-Iteration / ss220 cmo new
   - MedicalMask
-  - ChiefMedicalOfficerNeck
   - ChiefMedicalOfficerJumpsuit
-  - ChiefMedicalOfficerOuterClothing
   - MedicalsGloves #SS220 gloves-for-med
   - MedicalBackpack
+  - ChiefMedicalOfficerOuterClothing
+  - ChiefMedicalOfficerNeck
   - ChiefMedicalOfficerShoes
-  - GroupSpeciesBreathToolMedical
+  - Glasses
   - SurvivalMedical
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
 #  - ChiefMedicalOfficerJobTrinkets
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - GroupSpeciesBreathToolMedical
+  #SS220-TwoOne-Floppa-Iteration begin
+  - SponsorNeck
+  #SS220-TwoOne-Floppa-Iteration end
   - SeniorStaffCash #SS220-Cash-personal
 
 - type: roleLoadout
@@ -27,37 +30,39 @@
   groups:
   - GroupTankHarness
   - MedicalDoctorHead
-  - Glasses
   - MedicalMask
-  - MedicalNeck #SS220-WhiteScarf
   - MedicalDoctorJumpsuit
-  - MedicalDoctorOuterClothing
   - MedicalsGloves #SS220 gloves-for-med
   - MedicalBackpack
+  - MedicalDoctorOuterClothing
   - MedicalShoes
   - MedicalDoctorPDA
-  - GroupSpeciesBreathToolMedical
+  - Glasses
   - SurvivalMedical
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
 #  - MedicalDoctorJobTrinkets
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - GroupSpeciesBreathToolMedical
+  - MedicalNeck #SS220-WhiteScarf
+  #SS220-Two Floppa Iteration begin
+  - SponsorNeck
+  #SS220-TwoOne-Floppa-Iteration end
   - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobMedicalIntern
   groups:
   - GroupTankHarness
-  - Glasses
   - MedicalNeck #SS220-WhiteScarf
   - MedicalInternJumpsuit
   - MedicalsGloves #SS220 gloves-for-med
   - MedicalBackpack
-  - GroupSpeciesBreathToolMedical
+  - Glasses
   - SurvivalMedical
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
 #  - MedicalInternJobTrinkets
+  - GroupSpeciesBreathToolMedical
   - CivilianCash #SS220-Cash-personal
 
 - type: roleLoadout
@@ -65,18 +70,19 @@
   groups:
   - GroupTankHarness
   - ChemicalGlasses #SS220-TwoOne-Floppa-Iteration
-  - MedicalMask
   - MedicalNeck #SS220-WhiteScarf
+  - MedicalMask
   - ChemistJumpsuit
-  - ChemistOuterClothing
   - MedicalsGloves #SS220 gloves-for-med
   - ChemistBackpack
+  - ChemistOuterClothing
   - MedicalShoes
-  - GroupSpeciesBreathToolMedical
+  - Glasses
   - SurvivalMedical
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
 #  - ChemistJobTrinkets
+  - GroupSpeciesBreathToolMedical
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - WorkerCash #SS220-Cash-personal
 
@@ -85,20 +91,20 @@
   groups:
   - GroupTankHarness
   - ParamedicHead
-  - Glasses
+  - MedicalNeck #SS220-WhiteScarf
   - MedicalMask
 # - MedicalGlasses #SS220-Two Floppa Iteration
-  - MedicalNeck #SS220-WhiteScarf
   - ParamedicJumpsuit
-  - ParamedicOuterClothing
   - MedicalsGloves #SS220 gloves-for-med
   - MedicalBackpack
-  - ParamedicBelt #ss220 ParamedInterdyne
+  - ParamedicOuterClothing
   - ParamedicShoes
-  - GroupSpeciesBreathToolMedical
+  - Glasses
   - SurvivalMedical
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
+  - ParamedicBelt #ss220 ParamedInterdyne
 #  - ParamedicJobTrinkets
+  - GroupSpeciesBreathToolMedical
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - WorkerCash #SS220-Cash-personal

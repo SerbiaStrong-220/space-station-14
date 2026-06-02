@@ -962,6 +962,9 @@
   hidden: true
   loadouts:
   - LoadoutSpeciesVoxNitrogen
+  - GroupTankHarness
+
+ # Дыхательная маска воксам
 
 #! Эксклюзивы карт (Начало)
 

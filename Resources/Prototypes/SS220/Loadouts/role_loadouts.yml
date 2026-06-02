@@ -16,6 +16,7 @@
   - NanoTrasenRepresentativeTrinket
   - Survival
   - SurvivalVox
+  - GroupSpeciesBreathTool
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
@@ -31,6 +32,7 @@
   - IAABackpacks
   - Survival
   - SurvivalVox
+  - GroupSpeciesBreathTool
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
@@ -49,6 +51,7 @@
   - IAABackpacks #ss220 iaa loadout fix
   - Survival
   - SurvivalVox
+  - GroupSpeciesBreathTool
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
@@ -68,6 +71,7 @@
   - BlueShieldShoes
   - Survival
   - SurvivalVox
+  - GroupSpeciesBreathToolSecurity
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
@@ -86,9 +90,11 @@
   - SecurityOuterClothing
   - SecurityGloves #Sec Tactical Gloves for Senior Officer
   - SecurityBackpack
+  - SecurityShoes
   - SecurityBelt
   - SurvivalSecurity
   - SurvivalVox
+  - GroupSpeciesBreathToolSecurity
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
@@ -104,8 +110,10 @@
   - SecurityJumpsuit
   - SecurityPilotOuterClothing
   - SecurityBackpack
+  - SecurityShoes
   - SurvivalSecurity
   - SurvivalVox
+  - GroupSpeciesBreathToolSecurity
   - Trinkets
   - WorkerCash #SS220-Cash-personal
 
@@ -128,6 +136,7 @@
   - SeniorShoes
   - SurvivalMedical
   - SurvivalVox
+  - GroupSpeciesBreathToolMedical
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
@@ -167,6 +176,7 @@
   - StationEngineerShoes
   - SurvivalExtended
   - SurvivalVox
+  - GroupSpeciesBreathTool
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
@@ -189,6 +199,7 @@
   - ScientistShoes
   - Survival
   - SurvivalVox
+  - GroupSpeciesBreathTool
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
@@ -208,6 +219,7 @@
   - SeniorServiceShoes
   - Survival
   - SurvivalVox
+  - GroupSpeciesBreathTool
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
@@ -226,6 +238,7 @@
   - GroupSpeciesBreathTool
   - Survival
   - SurvivalVox
+  - GroupSpeciesBreathTool
   - Trinkets
   - WorkerCash #SS220-Cash-personal
 
@@ -241,6 +254,7 @@
   - GroupSpeciesBreathTool
   - Survival
   - SurvivalVox
+  - GroupSpeciesBreathTool
   - Trinkets
   - WorkerCash #SS220-Cash-personal
 
