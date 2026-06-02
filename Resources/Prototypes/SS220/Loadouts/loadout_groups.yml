@@ -608,10 +608,10 @@
   minLimit: 1
   hidden: false
   loadouts:
-  - EmergencyOxygenBrigmedic
-  - EmergencyOxygenBrigmedicSponsor
   - EmergencyNitrogenBrigmedic
   - EmergencyNitrogenBrigmedicSponsor
+  - EmergencyOxygenBrigmedic
+  - EmergencyOxygenBrigmedicSponsor
   # Бригмедик (Конец)
 
   # Врач (Начало)
@@ -962,9 +962,6 @@
   hidden: true
   loadouts:
   - LoadoutSpeciesVoxNitrogen
-  - GroupTankHarness
-
- # Дыхательная маска воксам
 
 #! Эксклюзивы карт (Начало)
 

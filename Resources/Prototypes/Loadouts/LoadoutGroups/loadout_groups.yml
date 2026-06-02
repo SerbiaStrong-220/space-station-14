@@ -93,10 +93,10 @@
   minLimit: 1 #SS220-Survival-Loadout
   hidden: false #SS220-Survival-Loadout
   loadouts:
-  - EmergencyOxygen
-  - EmergencyOxygenMedicalSponsor #SS220-Survival-Loadout
   - EmergencyNitrogen
-  - EmergencyNitrogenMedicalSponsor #SS220-Survival-Loadout
+  - EmergencyNitrogenSponsor #SS220-Survival-Loadout
+  - EmergencyOxygen
+  - EmergencyOxygenSponsor #SS220-Survival-Loadout
  # - LoadoutSpeciesVoxNitrogen #SS220-Survival-Loadout
 
 # nitrogen or oxygen tank, depending on what your species needs
@@ -720,10 +720,10 @@
   minLimit: 1 #SS220-Survival-Loadout
   hidden: false #SS220-Survival-Loadout
   loadouts:
-  - EmergencyOxygenClown
-  - EmergencyOxygenClownSponsor #SS220-Survival-Loadout
   - EmergencyNitrogenClown
   - EmergencyNitrogenClownSponsor #SS220-Survival-Loadout
+  - EmergencyOxygenClown
+  - EmergencyOxygenClownSponsor #SS220-Survival-Loadout
  # - LoadoutSpeciesVoxNitrogen #SS220-Survival-Loadout
 
 - type: loadoutGroup
@@ -788,11 +788,11 @@
   minLimit: 1 #SS220-Survival-Loadout
   hidden: false #SS220-Survival-Loadout
   loadouts:
+  - EmergencyNitrogenMime
+  - EmergencyNitrogenMimeSponsor #SS220-Survival-Loadout
   - EmergencyOxygenMime
   - EmergencyOxygenMimeSponsor #SS220-Survival-Loadout
  # - EmergencySpeciesMothMime #SS220-Survival-Loadout
-  - EmergencyNitrogenMime
-  - EmergencyNitrogenMimeSponsor #SS220-Survival-Loadout
  # - LoadoutSpeciesVoxNitrogen #SS220-Survival-Loadout
 
 #- type: loadoutGroup
@@ -1187,10 +1187,10 @@
   minLimit: 1 #SS220-Survival-Loadout
   hidden: false
   loadouts:
-  - EmergencyOxygenExtended
-  - EmergencyOxygenExtendedSponsor #SS220-Survival-Loadout
   - EmergencyNitrogenExtended
   - EmergencyNitrogenExtendedSponsor #SS220-Survival-Loadout
+  - EmergencyOxygenExtended
+  - EmergencyOxygenExtendedSponsor #SS220-Survival-Loadout
  # - LoadoutSpeciesVoxNitrogen #SS220-Survival-Loadout
 
 # Science
@@ -1600,10 +1600,10 @@
   minLimit: 1 #SS220-Survival-Loadout
   hidden: false #SS220-Survival-Loadout
   loadouts:
-  - EmergencyOxygenSecurity
-  - EmergencyOxygenSecuritySponsor #SS220-Survival-Loadout
   - EmergencyNitrogenSecurity
   - EmergencyNitrogenSecuritySponsor #SS220-Survival-Loadout
+  - EmergencyOxygenSecurity
+  - EmergencyOxygenSecuritySponsor #SS220-Survival-Loadout
  # - LoadoutSpeciesVoxNitrogen #SS220-Survival-Loadout
 
 # Wildcards
