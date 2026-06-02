@@ -38,7 +38,6 @@
   - type: FireVisuals
     sprite: SS220/Structures/Specific/brazier.rsi
     normalState: fire-Sheet
-    spriteLayer: flame
     lightColor: "#db9b66"
     lightRadiusPerStack: 2.0
     maxLightRadius: 4.0
@@ -111,7 +110,6 @@
   - type: FireVisuals
     sprite: SS220/Structures/Specific/brazier.rsi
     normalState: fire-Sheet
-    spriteLayer: flame
     lightColor: "#db9b66"
     lightRadiusPerStack: 2.0
     maxLightRadius: 5.0
@@ -142,7 +140,6 @@
   - type: FireVisuals
     sprite: SS220/Structures/Specific/brazier.rsi
     normalState: fire-Sheet
-    spriteLayer: flame
     lightColor: "#db9b66"
     lightRadiusPerStack: 2.0
     maxLightRadius: 7.0
