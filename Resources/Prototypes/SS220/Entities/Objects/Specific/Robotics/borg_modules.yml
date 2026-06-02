@@ -108,3 +108,11 @@
   - type: Sprite
     sprite: SS220/Placeholders/tanks.rsi
     state: tanks
+
+- type: entity
+  id: BorgModuleSeedsPlaceholder
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: SS220/Placeholders/seeds.rsi
+    state: seed
