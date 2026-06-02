@@ -23,7 +23,7 @@ public sealed class QuadHearingOverlay : Overlay
     private static readonly ProtoId<ShaderPrototype> ShaderProtoId = "QuadHearing";
     private readonly ShaderInstance _shader = default!;
 
-    private readonly Dictionary<string, TargetsEntry> _targetsEntries = [];
+    private readonly Dictionary<ProtoId<QuadHearingTargetPrototype>, TargetsEntry> _targetsEntries = [];
     private readonly List<string> _idQueueRem = [];
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
