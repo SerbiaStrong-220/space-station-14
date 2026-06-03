@@ -116,8 +116,8 @@
       coefficients:
         Blunt: 0.4
         Slash: 0.4
-        Piercing: 0.3
-        Heat: 0.7
+        Piercing: 0.2
+        Heat: 0.6
         Caustic: 0.5
         Radiation: 0.85
   - type: StaminaResistance

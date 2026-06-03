@@ -776,6 +776,7 @@
   id: UplinkMagazineRifleHP
   name: "Rifle magazine(6,3x47) HPIB"
   description: uplink-hollow-point-ammo-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Rifle/rifle_mag.rsi, state: red-icon }
   productEntity: MagazineRifleHP
   cost:
     Telecrystal: 2
@@ -792,6 +793,7 @@
 - type: listing
   id: UplinkMagazineRifleAP
   name: "Rifle magazine(6,3x47) AP"
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Rifle/rifle_mag.rsi, state: green-icon }
   description: uplink-armor-piercing-ammo-desc
   productEntity: MagazineRifleAP
   cost:
