@@ -365,6 +365,11 @@
   - type: VisualOrgan
     data:
       sprite: SS220/Mobs/Customization/Resomi/eyes.rsi
+  - type: FlashSensitive
+    flashDurationMultiplier: 2.0
+    stunDurationMultiplier: 1.5
+    flashEyeDamage: 1
+    temporaryBlindnessDuration: 3s
 
 - type: entity
   parent: [ OrganBaseTongue, OrganResomiInternal ]

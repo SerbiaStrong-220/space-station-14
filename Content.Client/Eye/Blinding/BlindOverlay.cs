@@ -1,12 +1,10 @@
+using Content.Client.Flash;
 using Content.Client.Movement.Systems;
+using Content.Shared.Eye.Blinding.Components;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
-using Content.Shared.Eye.Blinding;
-using Content.Shared.Eye.Blinding.Components;
-using Content.Shared.Movement.Components;
-using Content.Shared.Movement.Systems;
 
 namespace Content.Client.Eye.Blinding
 {
@@ -27,11 +25,15 @@ namespace Content.Client.Eye.Blinding
 
         private BlindableComponent _blindableComponent = default!;
 
+        public static readonly int ContentZIndex = FlashOverlay.ContentZIndex + 1; // SS220 Fix flash & blind overlays overlapping
+
         public BlindOverlay()
         {
             IoCManager.InjectDependencies(this);
             _greyscaleShader = _prototypeManager.Index(GreyscaleShader).InstanceUnique();
             _circleMaskShader = _prototypeManager.Index(CircleShader).InstanceUnique();
+
+            ZIndex = ContentZIndex; // SS220 Fix flash & blind overlays overlapping
         }
         protected override bool BeforeDraw(in OverlayDrawArgs args)
         {

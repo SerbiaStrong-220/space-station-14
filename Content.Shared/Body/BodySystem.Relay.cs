@@ -1,8 +1,10 @@
 using Content.Shared.Body.Events;
+using Content.Shared.Flash;
 using Content.Shared.Gibbing;
 using Content.Shared.Humanoid;
 using Content.Shared.Medical;
 using Content.Shared.SS220.Body.Events;
+using Content.Shared.SS220.Flash;
 using JetBrains.Annotations;
 
 namespace Content.Shared.Body;
@@ -20,6 +22,8 @@ public sealed partial class BodySystem
         SubscribeLocalEvent<BodyComponent, OrganCopyAppearanceEvent>(RefRelayBodyEvent);
         SubscribeLocalEvent<BodyComponent, HumanoidLayerVisibilityChangedEvent>(RefRelayBodyEvent);
         SubscribeLocalEvent<BodyComponent, GetHearingRangeMultiplierEvent>(RefRelayBodyEvent); // SS220 Hearing range multiplier
+        SubscribeLocalEvent<BodyComponent, BeforeFlashedEvent>(RefRelayBodyEvent); // SS220 Flash duration multipliers
+        SubscribeLocalEvent<BodyComponent, AfterFlashedEvent>(RefRelayBodyEvent); // SS220 Flash sensitive organ
     }
 
     private void RefRelayBodyEvent<T>(EntityUid uid, BodyComponent component, ref T args) where T : struct
