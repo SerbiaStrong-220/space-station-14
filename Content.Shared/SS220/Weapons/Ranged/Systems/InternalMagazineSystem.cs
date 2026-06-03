@@ -61,6 +61,8 @@ public sealed class InternalMagazineSystem : EntitySystem
 
     private void OnComponentStartup(Entity<InternalMagazineComponent> ent, ref ComponentStartup args)
     {
+        EnsureComp<ItemSlotsComponent>(ent);
+
         _itemSlots.SetLock(ent.Owner, ent.Comp.MagSlotId, ent.Comp.MagFixed);
     }
 

@@ -11,7 +11,7 @@
         children:
         - id: WeaponShotgunBulldogToy
         - id: MagazineShotgunCaps
-          amount: 6
+          amount: 3
         - id: MagazineShotgunSlugCaps
           amount: 3 #triple the fun
 
