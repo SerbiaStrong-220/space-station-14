@@ -148,10 +148,10 @@
 # Маппинг
 
 - type: entity
-  id: BrazierWoodUnextinguishable
+  id: BrazierWoodInextinguishable
   parent: BrazierWood
   name: brazier wood
-  suffix: Mapping, Unextinguishable
+  suffix: Mapping, Inextinguishable flame
   components:
   - type: Sprite
     layers:
@@ -169,10 +169,10 @@
     alwaysCombustible: false
 
 - type: entity
-  id: BrazierStoneUnextinguishable
+  id: BrazierStoneInextinguishable
   parent: BrazierStone
   name: brazier stone
-  suffix: Mapping, Unextinguishable
+  suffix: Mapping, Inextinguishable flame
   components:
   - type: Sprite
     layers:
@@ -190,10 +190,10 @@
     alwaysCombustible: false
 
 - type: entity
-  id: BrazierSteelUnextinguishable
+  id: BrazierSteelInextinguishable
   parent: BrazierSteel
   name: brazier steel
-  suffix: Mapping, Unextinguishable
+  suffix: Mapping, Inextinguishable flame
   components:
   - type: Sprite
     layers:
