@@ -25,7 +25,7 @@
 
 - type: startingGear
   id: RedWingsOfficerGear
-  experienceDefinition: SecurityOfficerRoleExperience
+  experienceDefinition: RedWingsOfficerRoleExperience
   equipment:
     jumpsuit: ClothingUniformJumpsuitMilitaryFeldsher
     back: ClothingBackpackSecurity
@@ -52,13 +52,12 @@
     - Zipties
     back:
     - BoxSurvivalBrigmedic
-    - CrowbarRed
     - MedkitCombatFilled
     - PinpointerUplink
 
 - type: startingGear
   id: RedWingsMedicGear
-  experienceDefinition: BrigmedicRoleExperience
+  experienceDefinition: RedWingsMedicRoleExperience
   equipment:
     jumpsuit: ClothingUniformJumpsuitMilitaryFeldsher
     back: ClothingBackpackSatchelBrigmedic
@@ -88,7 +87,6 @@
     - AdvancedJetInjector
     back:
     - BoxSurvivalBrigmedic
-    - CrowbarRed
     - MedkitCombatFilled
     - PinpointerUplink
     - LaserSMGPowerCell
@@ -98,7 +96,7 @@
 
 - type: startingGear
   id: RedWingsPilotGear
-  experienceDefinition: SecurityPilotRoleExperience
+  experienceDefinition: RedWingsPilotRoleExperience
   equipment:
     jumpsuit: ClothingUniformJumpsuitMilitaryFeldsher
     back: ClothingBackpackSecurity
@@ -126,7 +124,6 @@
     - MagazinePistol
     back:
     - BoxSurvivalBrigmedic
-    - CrowbarRed
     - MedkitCombatFilled
     - HandHeldMassScanner
     - PinpointerUplink
