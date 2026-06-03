@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Shared.ActionBlocker;
@@ -75,9 +76,11 @@ public abstract partial class SharedMoverController : VirtualController
     /// <summary>
     /// Cache the mob movement calculation to re-use elsewhere.
     /// </summary>
-    public Dictionary<EntityUid, bool> UsedMobMovement = new();
+    public ConcurrentDictionary<EntityUid, bool> UsedMobMovement = new(); // SS220-make-it-concurrent-dictionary
+    protected ConcurrentDictionary<EntityUid, (SoundSpecifier, EntityUid, AudioParams)> PlaySound = new(); // SS220-make-it-concurrent-dictionary
+    private readonly object _transformLock = new(); // SS220 make transform update thread safe
 
-    private readonly HashSet<EntityUid> _aroundColliderSet = [];
+    protected HashSet<EntityUid> AroundColliderSet = []; // SS220 make collider hashset thread safe
 
     public override void Initialize()
     {
@@ -119,7 +122,9 @@ public abstract partial class SharedMoverController : VirtualController
     /// </summary>
     protected void HandleMobMovement(
         Entity<InputMoverComponent> entity,
-        float frameTime)
+        float frameTime,
+        bool calledInParallel, // SS220-add-parallel-update
+        ref HashSet<EntityUid> threadColliderSet) // SS220-add-parallel-update
     {
         var uid = entity.Owner;
         var mover = entity.Comp;
@@ -253,7 +258,7 @@ public abstract partial class SharedMoverController : VirtualController
 
             // If we're not on a grid, and not able to move in space check if we're close enough to a grid to touch.
             if (!touching && MobMoverQuery.TryComp(uid, out var mobMover))
-                touching |= IsAroundCollider(_lookup, (uid, physicsComponent, mobMover, xform));
+                touching |= IsAroundCollider(_lookup, (uid, physicsComponent, mobMover, xform), ref threadColliderSet); // SS220-make-collider-set-thread-safe
 
             // If we're touching then use the weightless values
             if (touching)
@@ -340,8 +345,8 @@ public abstract partial class SharedMoverController : VirtualController
                 // TODO apparently this results in a duplicate move event because "This should have its event run during
                 // island solver"??. So maybe SetRotation needs an argument to avoid raising an event?
                 var worldRot = _transform.GetWorldRotation(xform);
-
-                _transform.SetLocalRotation(uid, xform.LocalRotation + wishDir.ToWorldAngle() - worldRot, xform);
+                lock (_transformLock)
+                    _transform.SetLocalRotation(uid, xform.LocalRotation + wishDir.ToWorldAngle() - worldRot, xform);
             }
 
             if (!weightless && MobMoverQuery.TryGetComponent(uid, out var mobMover) &&
@@ -367,6 +372,14 @@ public abstract partial class SharedMoverController : VirtualController
 
                 audioParams = audioParams.WithVolume(sound.Params.Volume + soundModifier);
                 // SS220 - softy footsteps feature - end
+
+                // SS220-make-mover-controller-parallel-begin
+                if (calledInParallel)
+                {
+                    PlaySound[uid] = (sound, relaySource ?? uid, audioParams);
+                    return;
+                }
+                // SS220-make-mover-controller-parallel-end
 
                 // If we're a relay target then predict the sound for all relays.
                 if (relaySource != null)
@@ -481,14 +494,13 @@ public abstract partial class SharedMoverController : VirtualController
     /// <summary>
     /// Used for weightlessness to determine if we are near a wall.
     /// </summary>
-    private bool IsAroundCollider(EntityLookupSystem lookupSystem, Entity<PhysicsComponent, MobMoverComponent, TransformComponent> entity)
+    private bool IsAroundCollider(EntityLookupSystem lookupSystem, Entity<PhysicsComponent, MobMoverComponent, TransformComponent> entity, ref HashSet<EntityUid> threadColliderSet) //  SS220-make-collider-set-thread-safe
     {
         var (uid, collider, mover, transform) = entity;
         var enlargedAABB = _lookup.GetWorldAABB(entity.Owner, transform).Enlarged(mover.GrabRange);
 
-        _aroundColliderSet.Clear();
-        lookupSystem.GetEntitiesIntersecting(transform.MapID, enlargedAABB, _aroundColliderSet);
-        foreach (var otherEntity in _aroundColliderSet)
+        lookupSystem.GetEntitiesIntersecting(transform.MapID, enlargedAABB, threadColliderSet); //  SS220-make-collider-set-thread-safe
+        foreach (var otherEntity in threadColliderSet) //  SS220-make-collider-set-thread-safe
         {
             if (otherEntity == uid)
                 continue; // Don't try to push off of yourself!
