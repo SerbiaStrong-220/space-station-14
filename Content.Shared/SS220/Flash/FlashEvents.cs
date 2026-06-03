@@ -1,8 +1,8 @@
 namespace Content.Shared.SS220.Flash;
 
 /// <summary>
-/// Called when a player is successfully flashed, once for each flashed player.
-/// Raised on the target hit by the flash, the user of the flash and the flash used.
+/// Called before a player is flashed, once for each flashed player.
+/// Raised only on the target hit by the flash.
 /// The Melee parameter is used to check for rev conversion.
 /// </summary>
 [ByRefEvent]
