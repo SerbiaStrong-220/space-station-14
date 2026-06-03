@@ -753,24 +753,130 @@
     HardDynamic:
       Telecrystal: 3
 
-  # For the Python
+# Ammunition
 - type: listing
   id: UplinkSpeedLoaderMagnumAP
   name: uplink-speedloader-magnum-name
-  description: uplink-speedloader-magnu-desc
+  description: uplink-armor-piercing-ammo-desc
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/SpeedLoaders/Magnum/magnum_speed_loader.rsi, state: icon }
   productEntity: SpeedLoaderMagnumAP
   cost:
-    Telecrystal: 4
+    Telecrystal: 2
   categories:
   - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 4
+      Telecrystal: 2 #it was WAY too much for that
     MediumDynamic:
-      Telecrystal: 4
-    HardDynamic:
       Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazineRifleHP
+  name: "Rifle magazine(6,3x47) HPIB"
+  description: uplink-hollow-point-ammo-desc
+  productEntity: MagazineRifleHP
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazineRifleAP
+  name: "Rifle magazine(6,3x47) AP"
+  description: uplink-armor-piercing-ammo-desc
+  productEntity: MagazineRifleAP
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazinePistolAP
+  name: "Pistol magazine(9x20) AP"
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_mag.rsi, state: green-icon }
+  description: uplink-armor-piercing-ammo-desc
+  productEntity: MagazinePistolAP
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazinePistolHP
+  name: "Pistol magazine (9x20) HPIB"
+  description: uplink-hollow-point-ammo-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_mag.rsi, state: red-icon }
+  productEntity: MagazinePistolHP
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazinePistolSubMachineGunAP
+  name: "SMG magazine(9x20) AP"
+  description: uplink-armor-piercing-ammo-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: green-icon }
+  productEntity: MagazinePistolSubMachineGunAP
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazinePistolSubMachineGunHP
+  name: "SMG magazine(9x20) HPIB"
+  description: uplink-hollow-point-ammo-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: red-icon }
+  productEntity: MagazinePistolSubMachineGunHP
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 1
 
 - type: listing
   id: UplinkUltrabrightLantern

@@ -108,12 +108,21 @@
         path: /Audio/SS220/Effects/Drop/lsmg.ogg ##new sound_drop effect, add MIXnikita
         params:
           volume: 2
+    #SS220 weapon overhaul begin
+    - type: GunWieldBonus
+      minAngle: -7
+      maxAngle: -26
+      angleIncrease: -1.1
+    - type: GunAimable
+      minAngle: -16
+      maxAngle: -8
     - type: Gun
-      minAngle: 4
-      maxAngle: 25
-      angleIncrease: 4
+      minAngle: 24
+      maxAngle: 45
+      angleIncrease: 2.50
       angleDecay: 16
-      fireRate: 8
+      fireRate: 6
+    #SS220 weapon overhaul end
       selectedMode: FullAuto
       availableModes:
         - FullAuto
@@ -141,6 +150,6 @@
       proto: CartridgeLightRifle
       cycleable: false # No synthesizing ammo for your syndicate masters.
     - type: BallisticAmmoSelfRefiller
-      autoRefillRate: 4s
+      autoRefillRate: 0.5s #SS220 weapon overhaul #8 times faster because the DPS became way lower and the weapon was repurposed for suppressive fire(which requires LOTS of ammo)
       affectedByEmp: true
     - type: AmmoCounter
