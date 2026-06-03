@@ -89,7 +89,7 @@ public sealed class HitscanBasicRaycastSystem : EntitySystem
     //SS220 weapon overhaul begin
     private bool ShouldIgnoreRequireTarget(Entity<RequireProjectileTargetComponent?> target, EntityUid gun)
     {
-        if (!TryComp<RequireProjectileTargetComponent>(target, out var requireTargetComp))
+        if (target.Comp == null)
             return false;
 
         if (!TryComp<GunAimableComponent>(gun, out var aimableComp) || !aimableComp.IsAimed)
