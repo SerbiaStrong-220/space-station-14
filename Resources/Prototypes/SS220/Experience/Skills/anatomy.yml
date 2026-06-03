@@ -1,0 +1,71 @@
+- type: skill
+  id: AnatomyInitial
+  levelInfo:
+    maximumSublevel: 5
+    levelUpPopup: anatomy-initial-level-up-popup
+    sublevelUpPopup: anatomy-initial-sublevel-up-popup
+  levelDescription:
+    skillName: anatomy-initial-name
+    skillDescription: anatomy-initial-desc
+  components:
+  - type: SurgeryDoAfterSkill
+    durationScale: 1.5
+    failureChance: 0
+  - type: PathologyHealerRemoveDamageSkill
+    removeDamageModifier:
+      TorsoProjectileFragment: 1.2
+      HeadProjectileFragment: 1.4
+
+- type: skill
+  id: AnatomyBase
+  levelInfo:
+    maximumSublevel: 5
+    levelUpPopup: anatomy-base-level-up-popup
+    sublevelUpPopup: anatomy-base-sublevel-up-popup
+  levelDescription:
+    skillName: anatomy-base-name
+    skillDescription: anatomy-base-desc
+  components:
+  - type: SurgeryDoAfterSkill
+    durationScale: 1
+    failureChance: 0
+  - type: PathologyHealerRemoveDamageSkill
+    removeDamageModifier:
+      TorsoProjectileFragment: 1
+      HeadProjectileFragment: 1.2
+
+- type: skill
+  id: AnatomyTrained
+  levelInfo:
+    maximumSublevel: 5
+    levelUpPopup: anatomy-trained-level-up-popup
+    sublevelUpPopup: anatomy-trained-sublevel-up-popup
+  levelDescription:
+    skillName: anatomy-trained-name
+    skillDescription: anatomy-trained-desc
+  components:
+  - type: SurgeryDoAfterSkill
+    durationScale: 0.85
+    failureChance: 0
+  - type: PathologyHealerRemoveDamageSkill
+    removeDamageModifier:
+      TorsoProjectileFragment: 0.9
+      HeadProjectileFragment: 1
+
+- type: skill
+  id: AnatomyProfessional
+  levelInfo:
+    maximumSublevel: 1
+    levelUpPopup: anatomy-professional-level-up-popup
+    sublevelUpPopup: anatomy-professional-sublevel-up-popup
+  levelDescription:
+    skillName: anatomy-professional-name
+    skillDescription: anatomy-professional-desc
+  components:
+  - type: SurgeryDoAfterSkill
+    durationScale: 0.7
+    failureChance: 0
+  - type: PathologyHealerRemoveDamageSkill
+    removeDamageModifier:
+      TorsoProjectileFragment: 0.8
+      HeadProjectileFragment: 0.8
