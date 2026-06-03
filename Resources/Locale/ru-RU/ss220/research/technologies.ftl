@@ -9,3 +9,5 @@ research-technology-heavy-ballistics = Крупнокалиберное балл
 research-clothing-eyes-hud-medichem = Адаптивная оптохемодинамика 
 research-technology-hollow-point-ammunition = Экспансивные боеприпасы
 research-technology-automated-defence-systems = Автоматические системы защиты
+research-technology-explosive-ammunition = Использование гексогена в боеприпасах
+research-technology-uranium-munitions = Использование урана в боеприпасах

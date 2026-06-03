@@ -56,6 +56,8 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
+  - !type:AddMartialArtSpecial
+    martialArt: CloseQuartersCombat
 
 - type: startingGear
   id: BlueShieldGear
