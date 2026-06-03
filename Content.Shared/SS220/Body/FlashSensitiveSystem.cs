@@ -38,9 +38,9 @@ public sealed partial class FlashSensitiveSystem : EntitySystem
         if (ent.Comp.FlashEyeDamage is { } eyeDamage)
             _blindable.AdjustEyeDamage(args.Body.Owner, eyeDamage);
 
-        if (ent.Comp.TemporaryBlindnessDuration is { } tempBlindDuraion)
+        if (ent.Comp.TemporaryBlindnessDuration is { } tempBlindDuration)
             // SS220 ToDo: change obsolete method after refactoring TemporaryBlindness status effect 
             _statusEffects.TryAddStatusEffect(args.Body, TemporaryBlindnessSystem.BlindingStatusEffect,
-                tempBlindDuraion, false, TemporaryBlindnessSystem.BlindingStatusEffect);
+                tempBlindDuration, false, TemporaryBlindnessSystem.BlindingStatusEffect);
     }
 }
