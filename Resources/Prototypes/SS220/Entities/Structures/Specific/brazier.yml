@@ -29,7 +29,7 @@
     firestackFade: 0.0
     damage:
       types:
-        Heat: 0.0
+        Heat: 0.025
   - type: Reactive
     groups:
       Flammable: [ Touch ]
@@ -71,7 +71,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 60
+        damage: 100
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
@@ -114,10 +114,20 @@
     maxLightRadius: 5.0
     lightEnergyPerStack: 0.5
     maxLightEnergy: 0.7
+  - type: Flammable 
+    fireSpread: false
+    canResistFire: false
+    alwaysCombustible: true
+    canExtinguish: true
+    firestacksOnIgnite: 3.0
+    firestackFade: 0.0
+    damage:
+      types:
+        Heat: 0.0
 
 - type: entity
   id: BrazierSteel
-  parent: BrazierWood
+  parent: BrazierStone
   name: brazier steel
   description: It takes real skill to make it out of steel.
   components:
