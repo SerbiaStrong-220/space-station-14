@@ -16,6 +16,7 @@
   - ChiefMedicalOfficerShoes
   - Glasses
   - SurvivalMedical
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
 #  - ChiefMedicalOfficerJobTrinkets
   - GroupSpeciesBreathToolMedical
@@ -38,6 +39,7 @@
   - MedicalDoctorPDA
   - Glasses
   - SurvivalMedical
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
 #  - MedicalDoctorJobTrinkets
   - GroupSpeciesBreathToolMedical
@@ -57,6 +59,7 @@
   - MedicalBackpack
   - Glasses
   - SurvivalMedical
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
 #  - MedicalInternJobTrinkets
   - GroupSpeciesBreathToolMedical
@@ -76,6 +79,7 @@
   - MedicalShoes
   - Glasses
   - SurvivalMedical
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
 #  - ChemistJobTrinkets
   - GroupSpeciesBreathToolMedical
@@ -97,6 +101,7 @@
   - ParamedicShoes
   - Glasses
   - SurvivalMedical
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   - ParamedicBelt #ss220 ParamedInterdyne
 #  - ParamedicJobTrinkets
