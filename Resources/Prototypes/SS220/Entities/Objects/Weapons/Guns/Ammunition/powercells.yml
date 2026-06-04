@@ -6,6 +6,9 @@
   parent: [ BaseItem, GasTankBase ]
   id: BasePowerCellBlaster
   components:
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 150
   - type: Item
   - type: Battery
     pricePerJoule: 0.15

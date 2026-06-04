@@ -32,7 +32,7 @@
 
 - type: entity
   categories: [ HideSpawnMenu ]
-  parent: BaseBulletTrigger
+  parent: BaseBulletIncendiary #SS220 adapt dragon to low TTK
   id: ProjectileDragonsBreath
   name: dragon's breath
   description: Try not to get toasted.
@@ -49,19 +49,16 @@
   - type: IgnitionSource
     temperature: 1000
     ignited: true
-  - type: RepeatingTrigger
-    delay: 0.5 # line of fire as well as if it hits something
-  - type: ExplodeOnTrigger
-  - type: Explosive
-    explosionType: FireBomb
-    totalIntensity: 5 # low intensity, the point is to burn attackers not to break open walls, dragons can just eat them
-    intensitySlope: 1
-    maxIntensity: 3
-    canCreateVacuum: false
-    deleteAfterExplosion: false
-    repeatable: true
   - type: TimedDespawn
     lifetime: 5
+  #SS220 adapt dragon to low TTK begin
+  - type: Projectile
+    damage:
+      types:
+        Heat: 30 #Not a lot but we should remember that sec hardsuits still have 20% heat resistance and that this projectile adds 4 stacks of burning
+  - type: IgniteOnCollide
+    fireStacks: 4 #A LOT of stacks but requires direct hit
+  #SS220 adapt dragon to low TTK end
 
 - type: entity
   id: ProjectileAnomalyFireball
