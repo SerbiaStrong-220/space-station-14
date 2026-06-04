@@ -292,6 +292,8 @@
   components:
   - type: Sprite
     sprite: Structures/Specific/Anomalies/ice_anom.rsi
+    layers: #SS220 weapon overhaul
+    - state: bullet #SS220 weapon overhaul
   - type: Projectile
     damage:
       types:
