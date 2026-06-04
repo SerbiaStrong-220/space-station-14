@@ -8,5 +8,3 @@ ent-WeaponRifleM90GrenadeLauncher = М-90gl
 ent-WeaponRifleLecterRubber = { ent-WeaponRifleLecter }
     .suffix = Травматический
     .desc = { ent-WeaponRifleLecter.desc }
-ent-WeaponRifleFoam = Астро-Ас Сила Пенопласта
-    .desc = Первоклассная пенопластовая винтовка высочайшего качества. Её пластик прочен на ощупь, а механизмы надёжены.
