@@ -75,12 +75,13 @@
   id: DirectHandHeldDefibrillator
   components:
   - type: Sprite
-    sprite: Objects/Devices/forensic_scanner.rsi # TODO: ADD ME
-    state: icon
+    sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+    state: direct-defibrillator
   - type: Item
     size: Small
     storedRotation: 90
   - type: DirectCompactDefibrillator
+  - type: UseDelay
   - type: Defibrillator
     zapHeal:
       types:
@@ -96,8 +97,8 @@
   id: HandHeldImplantMedicalScanner
   components:
   - type: Sprite
-    sprite: Objects/Devices/forensic_scanner.rsi # TODO: ADD ME <- it has kinda good sprite btw
-    state: icon
+    sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+    state: implant-scanner
   - type: Item
     size: Small
     storedRotation: 90

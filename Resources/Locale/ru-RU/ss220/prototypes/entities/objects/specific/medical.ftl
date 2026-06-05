@@ -7,7 +7,7 @@ ent-BoneGel = костный гель
 ent-BodyAnalyzer = анализатор тела
     .desc = Современный диагностический прибор. Отличный помощник для любого хирурга.
 
-ent-DirectHandHeldDefibrillator = компактный прямой дефибриллятор
+ent-DirectHandHeldDefibrillator = контактный дефибриллятор
     .desc = Небольшой маломощный ручной дефибриллятор. Предназначен исключительно для прямого воздействия на открытое сердце.
 
 ent-HandHeldImplantMedicalScanner = сканер имплантов
