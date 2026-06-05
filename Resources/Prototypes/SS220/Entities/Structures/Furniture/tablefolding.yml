@@ -24,6 +24,10 @@
     node: TableFoldingNode
   - type: DeployFoldable
   - type: DamageExaminable
+  - type: Bonkable
+    bonkDamage:
+      types:
+        Blunt: 4
   - type: Physics
     bodyType: Dynamic
   - type: Climbable
