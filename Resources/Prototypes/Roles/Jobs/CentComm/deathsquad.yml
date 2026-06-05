@@ -18,6 +18,8 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
+  - !type:AddMartialArtSpecial #SS220 weapon overhaul
+    martialArt: CloseQuartersCombat #SS220 weapon overhaul
 
 - type: startingGear
   id: DeathSquadGear

@@ -300,8 +300,6 @@
   icon: {sprite: /Textures/SS220/Interface/Actions/implants_cla.rsi, state: EyeON}
   productEntity: ThermalVisorImplanter
   discountCategory: rareDiscounts
-  discountDownTo:
-    Telecrystal: 7 #ss220-uplink-discounts
   cost:
     Telecrystal: 7 #ss220-uplink-discounts
   categories:
@@ -309,11 +307,11 @@
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 9
+      Telecrystal: 7
     MediumDynamic:
-      Telecrystal: 8
+      Telecrystal: 6
     HardDynamic:
-      Telecrystal: 8
+      Telecrystal: 4
 #ss220 dynamic-price end
 
 - type: listing
@@ -411,8 +409,6 @@
   icon: {sprite: Clothing/Head/Helmets/swat_syndicate.rsi, state: icon}
   productEntity: ClothingHeadHelmetSwatSyndicate
   discountCategory: rareDiscounts
-  discountDownTo:
-    Telecrystal: 2 #ss220-uplink-discounts
   cost:
     Telecrystal: 2 #ss220-uplink-discounts
   categories:

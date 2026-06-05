@@ -56,8 +56,8 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
-  - !type:AddMartialArtSpecial
-    martialArt: CloseQuartersCombat
+  - !type:AddMartialArtSpecial #SS220 weapon overhaul
+    martialArt: CloseQuartersCombat #SS220 weapon overhaul
 
 - type: startingGear
   id: BlueShieldGear

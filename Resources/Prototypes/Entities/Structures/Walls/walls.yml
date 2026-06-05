@@ -35,6 +35,7 @@
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallic
+    piercingThreshold: 15 #SS220 weapon overhaul
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -512,6 +513,7 @@
     - type: Damageable
       damageContainer: StructuralInorganic
       damageModifierSet: StructuralMetallicStrong
+      piercingThreshold: 99999 #SS220 weapon overhaul
     - type: RadiationBlocker
       resistance: 5
 

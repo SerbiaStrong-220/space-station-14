@@ -30,6 +30,8 @@
     access: [ [ "Blueshield" ] ]
   - type: StorageFill
     contents:
-    - id: WeaponBlasterKRS
-    - id: PowerCellBlaster
+    - id: WeaponRifleCommando
+    - id: MagazineRifleHP
+      amount: 3
+    - id: MagazineRifleAP
       amount: 3
