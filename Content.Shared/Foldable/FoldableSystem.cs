@@ -10,6 +10,8 @@ using Robust.Shared.Containers;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
+using Content.Shared.Climbing.Events; // SS220-fold-noclimb
+using Content.Shared.Construction.Components; // SS220-fold-noanchor
 
 namespace Content.Shared.Foldable;
 
@@ -37,6 +39,8 @@ public sealed class FoldableSystem : EntitySystem
         SubscribeLocalEvent<FoldableComponent, EntityStorageInsertedIntoAttemptEvent>(OnEntityStorageAttemptInsert);
 
         SubscribeLocalEvent<FoldableComponent, StrapAttemptEvent>(OnStrapAttempt);
+        SubscribeLocalEvent<FoldableComponent, AttemptClimbEvent>(OnAttemptClimb); // SS220-fold-noclimb
+        SubscribeLocalEvent<FoldableComponent, AnchorAttemptEvent>(OnAnchorAttempt); // SS220-fold-noanchor
     }
 
     private void OnHandleState(EntityUid uid, FoldableComponent component, ref AfterAutoHandleStateEvent args)
@@ -166,6 +170,30 @@ public sealed class FoldableSystem : EntitySystem
         SetFolded(uid, comp, state, user);
         return true;
     }
+
+    // SS220-fold-noclimb begin
+    private void OnAttemptClimb(Entity<FoldableComponent> entity, ref AttemptClimbEvent args)
+    {
+        if (entity.Comp.IsFolded)
+        {
+            args.Cancelled = true;
+
+           _popup.PopupPredicted(Loc.GetString("foldable-noclimb-fail", ("object", entity.Owner)), entity.Owner, args.User);
+        }
+    }
+    // SS220-fold-noclimb end
+
+    // SS220-fold-noanchor begin
+    private void OnAnchorAttempt(Entity<FoldableComponent> entity, ref AnchorAttemptEvent args)
+    {
+        if (entity.Comp.IsFolded)
+        {
+            args.Cancel();
+
+            _popup.PopupPredicted(Loc.GetString("foldable-anchor-fail", ("object", entity.Owner)), entity.Owner, args.User);
+        }
+    }
+    // SS220-fold-noanchor end
 
     #region Verb
 
