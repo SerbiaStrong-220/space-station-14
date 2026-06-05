@@ -16,6 +16,7 @@
       map: ["foldedLayer"]
       visible: false
   - type: Item
+    size: Huge
   - type: Appearance
   - type: PlaceableSurface
   - type: Construction
