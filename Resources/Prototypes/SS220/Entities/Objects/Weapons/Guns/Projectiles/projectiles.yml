@@ -616,5 +616,5 @@
     impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
-        Heat: 110
-      armourPiercing: 60
+        Heat: 90
+      armourPiercing: 70

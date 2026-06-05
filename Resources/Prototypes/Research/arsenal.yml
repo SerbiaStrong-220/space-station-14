@@ -69,7 +69,6 @@
   - MagazineShotgunBeanbag
   # - BoxShellTranquilizer
   - BoxBeanbag
-  - WeaponDisabler
 
 - type: technology
   id: UraniumMunitions
@@ -112,7 +111,6 @@
   - Truncheon
   - TelescopicShield
   - HoloprojectorSecurity
-  - WeaponDisablerSMG
 
 - type: technology
   id: ExplosiveTechnology

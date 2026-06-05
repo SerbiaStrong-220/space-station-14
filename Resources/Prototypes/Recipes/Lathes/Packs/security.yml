@@ -28,7 +28,6 @@
   - SpeedLoaderMagnumPractice
   - MagazinePistolSubMachineGunPractice
   - WeaponFlareGunSecurity
-  - MagazineAntiMaterialFMJ #SS220 weapon overhaul
 
 # Shared between secfab and emagged autolathe
 - type: latheRecipePack
@@ -60,6 +59,7 @@
   - TaserCartridge
   - WeaponPowerCell
   - MagazineFullRifleFMJ
+  - MagazineAntiMaterialFMJ
   #ss220 more recipies end
 
 - type: latheRecipePack
@@ -161,7 +161,6 @@
   - MagazineBoxAntiMaterielHE
   - MagazineAntiMaterialExplosive
   - MagazineAntiMaterialHP
-  - MagazineAntiMaterialFMJ
   - MagazineAntiMaterialAP
   - MagazineFullRifleAP
   - MagazineFullRifleHP
@@ -180,5 +179,4 @@
   - WeaponXrayCannon
   - WeaponTemperatureGun
   - WeaponEnergyCrossbow #SS220 Energy Crossbow
-  - WeaponTaser #SS220 taserback
   - WeaponLaserPistol #SS220 weapon overhaul

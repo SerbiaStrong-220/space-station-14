@@ -30,6 +30,46 @@
 #ss220 dynamic-price end
 
 - type: listing
+  id: UplinkDevastator
+  name: uplink-devastator-name
+  description: uplink-devastator-desc
+  icon: { sprite: Objects/Weapons/Guns/Battery/energy_magnum.rsi, state: icon }
+  productEntity: BriefcaseWeaponDevastatorFilled
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 13
+  cost:
+    Telecrystal: 17
+  categories:
+  - UplinkWeaponry
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+
+- type: listing
+  id: UplinkWeaponAdvancedLaser
+  name: uplink-advanced-laser-name
+  description: uplink-advanced-laser-desc
+  icon: { sprite: Objects/Weapons/Guns/Battery/advancedlasergun.rsi, state: base }
+  productEntity: WeaponAdvancedLaser
+  discountCategory: veryRareDiscounts
+  categories:
+  - UplinkWeaponry
+  discountDownTo:
+    Telecrystal: 11
+  cost:
+    Telecrystal: 15
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 8
+    MediumDynamic:
+      Telecrystal: 7
+    HardDynamic:
+      Telecrystal: 6
+
+- type: listing
   id: UplinkOrigami
   name: uplink-origami-name
   description: uplink-origami-desc
@@ -754,6 +794,22 @@
       Telecrystal: 3
 
 # Ammunition
+- type: listing
+  id: UplinkPowerCellBlaster
+  name: uplink-blaster-cell-name
+  description: uplink-blaster-cell-desc
+  icon: { sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/krs_magblaster.rsi, state: base }
+  productEntity: PowerCellBlasterFull
+  cost:
+    Telecrystal: 3
+  categories:
+  - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+
 - type: listing
   id: UplinkSpeedLoaderMagnumAP
   name: uplink-speedloader-magnum-name

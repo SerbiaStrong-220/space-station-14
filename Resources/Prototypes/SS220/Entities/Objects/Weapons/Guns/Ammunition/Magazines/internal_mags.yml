@@ -28,19 +28,18 @@
     capacity: 4
 
 - type: entity
-  id: InternalMagazineHristov
-  parent: BaseMagazineFullRifle
+  id: InternalMagazineMosinToy
+  parent: InternalMagazineMosin
   name: "magazine (internal)"
   components:
-  - type: Item
-    size: Small
   - type: BallisticAmmoProvider
-    proto: CartridgeAntiMateriel
     mayTransfer: true
-    capacity: 5
+    capacity: 4
+    proto: CartridgeCap
     whitelist:
       tags:
-        - CartridgeAntiMateriel
+        - CartridgeCap
+        - BulletFoam
 
 - type: entity
   id: InternalMagazineShotgun
@@ -82,3 +81,16 @@
     whitelist:
       tags:
         - Grenade
+
+- type: entity
+  id: InternalMagazineChinaLakeToy
+  parent: InternalMagazineShotgun
+  name: "magazine (internal)"
+  components:
+  - type: BallisticAmmoProvider
+    proto: GrenadeFragToy
+    mayTransfer: true
+    capacity: 3
+    whitelist:
+      tags:
+        - ToyGrenade

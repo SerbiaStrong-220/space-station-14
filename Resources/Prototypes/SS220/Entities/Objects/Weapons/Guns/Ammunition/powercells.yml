@@ -31,6 +31,10 @@
     solution: battery
   - type: DrawableSolution
     solution: battery
+  - type: GasTank
+    outputPressure: 101.3
+    air:
+      volume: 1.5
   - type: Extractable
     juiceSolution:
       reagents:
@@ -51,6 +55,26 @@
   name: blaster power cell
   description: Standard energy cell for blaster weapons.
   suffix: Standard
+
+- type: entity
+  parent: BasePowerCellBlaster
+  id: PowerCellBlasterFull
+  name: blaster power cell
+  description: Standard energy cell for blaster weapons.
+  suffix: Full
+  components:
+  - type: GasTank
+    outputPressure: 101.3
+    air:
+      # 6 minutes of agony
+      volume: 1.5
+      moles:
+        - 0           # oxygen
+        - 0           # nitrogen
+        - 0           # CO2
+        - 1.5 # plasma
+      temperature: 120.06
+
 
 # Powerful 1400 charge battery
 - type: entity

@@ -20,6 +20,9 @@
   id: AntiMaterialMagazine
 
 - type: Tag
+  id: AntiMaterialMagazineToy
+
+- type: Tag
   id: MeatSlime
 
 - type: Tag

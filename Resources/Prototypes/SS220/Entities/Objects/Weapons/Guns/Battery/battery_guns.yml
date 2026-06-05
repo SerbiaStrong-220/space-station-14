@@ -125,10 +125,6 @@
     magState: mag
     steps: 6
     zeroVisible: true
-  - type: Wieldable
-  - type: GunWieldBonus
-    minAngle: -15
-    maxAngle: -22
   - type: Gun
     fireRate: 6
     minAngle: 17
@@ -153,19 +149,18 @@
     projectileSpeed: 35
     availableModes:
       - SemiAuto
+  - type: Wieldable
+  - type: GunWieldBonus
+    minAngle: -15
+    maxAngle: -22
   - type: BatteryAmmoProvider
     proto: BulletBlasterBolt
     fireCost: 62.5
-  - type: BatteryWeaponFireModes
-    fireModes:
-      - proto: BulletBlasterBolt
-        name: firemode-name-blaster
-        fireCost: 62.5
   - type: ItemSlots
     slots:
       cell_slot:
         name: Magazine
-        startingItem: PowerCellBlaster
+        startingItem: PowerCellBlasterFull
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         whitelist:
@@ -181,6 +176,10 @@
   - type: GasWeapon
     tankSlot: cell_slot
     gasUsage: 0.09
+  - type: Wieldable
+  - type: GunWieldBonus
+    minAngle: -15
+    maxAngle: -22
   - type: Gun
     fireRate: 3
     selectedMode: SemiAuto
@@ -199,7 +198,7 @@
     slots:
       cell_slot:
         name: Magazine
-        startingItem: PowerCellBlaster
+        startingItem: PowerCellBlasterFull
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         whitelist:
@@ -322,42 +321,59 @@
             - LaserCarabinePowerCell
 
 - type: entity
-  name: Devastator
-  parent: WeaponBlasterKRS
+  name: APW-021 "Devastator"
+  parent: BaseWeaponBlaster
   id: WeaponPlasmaPistolDevastator
   description: "An outdated energy weapon firing EM-contained ionised gas. \nWhile it is a common antimaterial weapon of many well-equipped militaries it's a rare thing here in Tigarden."
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Battery/energy_magnum.rsi
+    sprite: SS220/Objects/Weapons/Guns/Battery/plasma_pistol.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
-    - state: mag-unshaded-1
-      visible: false
+    - state: mag-3
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: mag-unshaded-3
       map: [ "enum.GunVisualLayers.MagUnshaded" ]
       shader: unshaded
   - type: MagazineVisuals
     magState: mag
-    steps: 1
+    steps: 4
     zeroVisible: true
+  - type: Item
+    size: Small
+    shape:
+    - 0,0,1,0
+    - 0,1,0,1
+    storedOffset: 0,-4
+  - type: Tag
+    tags:
+    - Sidearm
   - type: Appearance
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/energy_magnum.rsi
   - type: Gun
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+    canSuicide: true
+    minAngle: 9
+    maxAngle: 19
+    fireRate: 1.5
     projectileSpeed: 30
   - type: GasWeapon
     tankSlot: cell_slot
-    gasUsage: 0.03
+    gasUsage: 0.2
+  - type: GunAimable
+    minAngle: -5
+    maxAngle: -9
   - type: BatteryAmmoProvider
     proto: BulletPlasma
-    fireCost: 1000
+    fireCost: 250
   - type: ItemSlots
     slots:
       cell_slot:
         name: Magazine
-        startingItem: PowerCellBlaster
+        startingItem: PowerCellBlasterFull
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         whitelist:
@@ -365,10 +381,10 @@
             - PowerCellBlaster
 
 - type: entity
-  name: M32-OTW-P
+  name: M32-OTW-S
   parent: [BaseWeaponPowerCellSmall, BaseSecurityContraband]
   id: WeaponLaserPistol
-  description: Model 32 Optical Thermal Weapon - Pistol. This pistol-like pulse laser is widely used due to it being relatively cheap, easy to use and quite effective against humanoid targets.
+  description: Model 32 Optical Thermal Weapon - Short. This pistol-like pulse laser is widely used due to it being relatively cheap, easy to use and quite effective against humanoid targets.
   components:
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/Battery/laser_pistol.rsi

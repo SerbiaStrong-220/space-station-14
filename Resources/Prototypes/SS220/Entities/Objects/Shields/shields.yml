@@ -711,7 +711,7 @@
       toggledMeleeBlockProb: 0.65
     - type: AltArmor
       tresholdDict:
-          Piercing: 15
+          Piercing: 6
           Blunt: 30
           Heat: 10
           Slash: 25
@@ -723,7 +723,7 @@
           Shock: 30
           Cold: 20
       durabilityTresholdDict:
-          Piercing: 12
+          Piercing: 7
           Blunt: 15
           Heat: 7
           Slash: 15
