@@ -10,8 +10,10 @@ using Robust.Shared.Containers;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
-using Content.Shared.Climbing.Events; // SS220-fold-noclimb
-using Content.Shared.Construction.Components; // SS220-fold-noanchor
+//SS220-fold-noclimb-and-noanchor begin
+using Content.Shared.Climbing.Events;
+using Content.Shared.Construction.Components;
+//SS220-fold-noclimb-and-noanchor end
 
 namespace Content.Shared.Foldable;
 
@@ -39,8 +41,10 @@ public sealed class FoldableSystem : EntitySystem
         SubscribeLocalEvent<FoldableComponent, EntityStorageInsertedIntoAttemptEvent>(OnEntityStorageAttemptInsert);
 
         SubscribeLocalEvent<FoldableComponent, StrapAttemptEvent>(OnStrapAttempt);
-        SubscribeLocalEvent<FoldableComponent, AttemptClimbEvent>(OnAttemptClimb); // SS220-fold-noclimb
-        SubscribeLocalEvent<FoldableComponent, AnchorAttemptEvent>(OnAnchorAttempt); // SS220-fold-noanchor
+        //SS220-fold-noclimb-and-noanchor begin
+        SubscribeLocalEvent<FoldableComponent, AttemptClimbEvent>(OnAttemptClimb);
+        SubscribeLocalEvent<FoldableComponent, AnchorAttemptEvent>(OnAnchorAttempt);
+        //SS220-fold-noclimb-and-noanchor end
     }
 
     private void OnHandleState(EntityUid uid, FoldableComponent component, ref AfterAutoHandleStateEvent args)
@@ -171,7 +175,7 @@ public sealed class FoldableSystem : EntitySystem
         return true;
     }
 
-    // SS220-fold-noclimb begin
+    //SS220-fold-noclimb-and-noanchor begin
     private void OnAttemptClimb(Entity<FoldableComponent> entity, ref AttemptClimbEvent args)
     {
         if (entity.Comp.IsFolded)
@@ -181,9 +185,7 @@ public sealed class FoldableSystem : EntitySystem
            _popup.PopupPredicted(Loc.GetString("foldable-noclimb-fail", ("object", entity.Owner)), entity.Owner, args.User);
         }
     }
-    // SS220-fold-noclimb end
 
-    // SS220-fold-noanchor begin
     private void OnAnchorAttempt(Entity<FoldableComponent> entity, ref AnchorAttemptEvent args)
     {
         if (entity.Comp.IsFolded)
@@ -193,8 +195,7 @@ public sealed class FoldableSystem : EntitySystem
             _popup.PopupPredicted(Loc.GetString("foldable-anchor-fail", ("object", entity.Owner)), entity.Owner, args.User);
         }
     }
-    // SS220-fold-noanchor end
-
+    //SS220-fold-noclimb-and-noanchor end
     #region Verb
 
     private void AddFoldVerb(EntityUid uid, FoldableComponent component, GetVerbsEvent<AlternativeVerb> args)
