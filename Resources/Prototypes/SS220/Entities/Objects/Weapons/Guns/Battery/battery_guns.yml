@@ -384,7 +384,7 @@
   name: M32-OTW-S
   parent: [BaseWeaponPowerCellSmall, BaseSecurityContraband]
   id: WeaponLaserPistol
-  description: Model 32 Optical Thermal Weapon - Short. This pistol-like pulse laser is widely used due to it being relatively cheap, easy to use and quite effective against humanoid targets.
+  description: Model 32 Optical Thermal Weapon - Sidearm. This pistol-like pulse laser is widely used due to it being relatively cheap, easy to use and quite effective against humanoid targets.
   components:
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/Battery/laser_pistol.rsi
