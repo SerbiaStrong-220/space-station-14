@@ -352,7 +352,7 @@
     gasUsage: 0.03
   - type: BatteryAmmoProvider
     proto: BulletPlasma
-    fireCost: 1000
+    fireCost: 50
   - type: ItemSlots
     slots:
       cell_slot:
