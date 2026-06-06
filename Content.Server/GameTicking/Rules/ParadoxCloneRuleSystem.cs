@@ -67,22 +67,21 @@ public sealed class ParadoxCloneRuleSystem : GameRuleSystem<ParadoxCloneRuleComp
             // get possible targets
             var allAliveHumanoids = _target.GetAliveHumans();
 
-            // we already checked when starting the gamerule, but someone might have died since then.
-            if (allAliveHumanoids.Count == 0 || allAliveHumanoids.Count <= _entityManager.AllComponents<ParadoxCloneBlacklistComponent>().Length) //SS220 add paradox clone blacklist
+            //SS220 add paradox clone blacklist begin
+            var validHumanoids = new List<Entity<MindComponent>>();
+            foreach (var humanoid in allAliveHumanoids)
+            {
+                if (!HasComp<ParadoxCloneBlacklistComponent>(humanoid.Comp.OwnedEntity))
+                    validHumanoids.Add(humanoid);
+            }
+
+            if (validHumanoids.Count == 0)
             {
                 Log.Warning("Could not find any alive players to create a paradox clone from!");
                 return;
             }
 
-            // pick a random player
-            var randomHumanoidMind = _random.Pick(allAliveHumanoids);
-            //SS220 add paradox clone blacklist begin
-            if (HasComp<ParadoxCloneBlacklistComponent>(randomHumanoidMind.Comp.OwnedEntity))
-            {
-                foreach (var possibleTarget in allAliveHumanoids)
-                    if (!HasComp<ParadoxCloneBlacklistComponent>(possibleTarget.Comp.OwnedEntity))
-                        randomHumanoidMind = possibleTarget;
-            }
+            var randomHumanoidMind = _random.Pick(validHumanoids);
             //SS220 add paradox clone blacklist end
             ent.Comp.OriginalMind = randomHumanoidMind;
             ent.Comp.OriginalBody = randomHumanoidMind.Comp.OwnedEntity;
