@@ -222,8 +222,8 @@
       Burn:
         sprite: SS220/Mobs/Effects/Resomi/burn_damage.rsi
   - type: TemperatureDamage
-    heatDamageThreshold: 305.85    # 305.85 K = 32.70 °C
-    coldDamageThreshold: 205.15    # 205.15 K = -68 °C
+    heatDamageThreshold: 305.85 # 305.85 K = 32.70 °C
+    coldDamageThreshold: 205.15 # 205.15 K = -68 °C
     coldDamage:
       types:
         Cold: 0.05 #per second, scales with temperature & other constants
@@ -231,7 +231,7 @@
       types:
         Heat: 2 #per second, scales with temperature & other constants
   - type: Temperature
-    currentTemperature: 255.5
+    currentTemperature: 253.15 # 253.15 K = -20 °C
     specificHeat: 42
   - type: TemperatureSpeed
     thresholds:
@@ -242,7 +242,7 @@
       350: 0.8
       380: 0.6
   - type: ThermalRegulator
-    normalBodyTemperature: 255.5
+    normalBodyTemperature: 253.15 # 253.15 K = -20 °C
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
