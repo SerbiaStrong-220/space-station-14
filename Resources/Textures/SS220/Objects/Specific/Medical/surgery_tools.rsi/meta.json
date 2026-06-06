@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from tg station, repo https://github.com/tgstation/tgstation",
+  "copyright": "Taken from tg station, repo https://github.com/tgstation/tgstation and baystation12, repo https://github.com/Baystation12/Baystation12",
   "size": {
     "x": 32,
     "y": 32
@@ -18,6 +18,26 @@
     },
     {
       "name": "cautery"
+    },
+    {
+      "name": "implant-scanner",
+      "delays": [
+        [
+            0.12,
+            0.12,
+            0.12,
+            0.12,
+            0.12,
+            0.12,
+            0.12,
+            0.12,
+            0.12,
+            0.12
+        ]
+      ]
+    },
+    {
+      "name": "direct-defibrillator"
     }
   ]
 }

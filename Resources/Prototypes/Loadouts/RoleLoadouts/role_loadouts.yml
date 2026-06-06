@@ -10,6 +10,7 @@
   - CaptainGloves #SS220-whiteCaptainGloves
   - CaptainOuterClothing
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- CaptainJobTrinkets
   - GroupSpeciesBreathTool
@@ -29,6 +30,7 @@
   - HoPOuterClothing
   - Glasses
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- HoPJobTrinkets
   - GroupSpeciesBreathTool
@@ -64,6 +66,7 @@
   - PassengerShoes
   - Glasses
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- PassengerJobTrinkets
   - GroupSpeciesBreathTool
@@ -79,6 +82,7 @@
   - BartenderOuterClothing
   - Glasses
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   - BartenderJobTrinkets
   - GroupSpeciesBreathTool
@@ -92,6 +96,7 @@
   - CommonBackpack
   - Glasses
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- ServiceWorkerJobTrinkets
   - GroupSpeciesBreathTool
@@ -109,6 +114,7 @@
   - ChefBeltApron #SS220 Chef Resprite
   - Glasses
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- ChefJobTrinkets
   - GroupSpeciesBreathTool
@@ -123,6 +129,7 @@
   - LibrarianEyes #SS220 ADD Monocle
   - Survival
   - Trinkets
+  - SurvivalVox #SS220-Survival-Loadout
   #- LibrarianJobTrinkets
   - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
@@ -140,6 +147,7 @@
   - CommonBackpack
   - IAAGlasses #SS220-IAA-Loadouts
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Gloves #SS220-IAA-Loadouts
   - Trinkets
   #- LawyerJobTrinkets
@@ -160,6 +168,7 @@
   - ChaplainBible
   - Glasses
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- ChaplainJobTrinkets
   - GroupSpeciesBreathTool
@@ -178,6 +187,7 @@
   - JanitorBelt #SS220-JunkRecyclesJanitor
   - Glasses
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   - JanitorJobTrinkets
   - GroupSpeciesBreathTool
@@ -194,6 +204,7 @@
   - BotanistOuterClothing
   - Glasses
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- BotanistJobTrinkets
   - GroupSpeciesBreathTool
@@ -217,6 +228,7 @@
   - ClownShoes
   - Glasses
   - SurvivalClown
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   - ClownJobTrinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
@@ -236,6 +248,7 @@
   - MimeShoes #SS220-Two Floppa Iterarion
   - Glasses
   - SurvivalMime
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- MimeJobTrinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
@@ -253,6 +266,7 @@
   - MusicianShoes #SS220 bard loadout
   - Glasses
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- MusicianJobTrinkets
   - Instruments
@@ -274,6 +288,7 @@
   - QuartermasterShoes
   - Glasses
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- QuartermasterJobTrinkets
   - GroupSpeciesBreathTool
@@ -292,6 +307,7 @@
   - CargoTechnicianID
   - Glasses
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- CargoTechnicianJobTrinkets
   - GroupSpeciesBreathTool
@@ -308,6 +324,7 @@
   - SalvageSpecialistShoes
   - Glasses
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- SalvageSpecialistJobTrinkets
   - GroupSpeciesBreathTool
@@ -329,6 +346,7 @@
   - ChiefEngineerShoes
   - ChiefEngineerPDA #SS220-dark-chief-engineer-pda
   - SurvivalExtended
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- ChiefEngineerJobTrinkets
   - GroupSpeciesBreathTool
@@ -342,6 +360,7 @@
   - TechnicalAssistantJumpsuit
   - StationEngineerBackpack
   - SurvivalExtended
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- TechnicalAssistantJobTrinkets
   - GroupSpeciesBreathTool
@@ -359,6 +378,7 @@
   - StationEngineerShoes
   - StationEngineerID
   - SurvivalExtended
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- StationEngineerJobTrinkets
   - GroupSpeciesBreathTool
@@ -375,6 +395,7 @@
   - AtmosphericTechnicianOuterClothing
   - AtmosphericTechnicianShoes
   - SurvivalExtended
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- AtmosphericTechnicianJobTrinkets
   - GroupSpeciesBreathTool
@@ -398,6 +419,7 @@
   - ResearchDirectorPDA #SS220-RD-New-Loadout
 #  - Glasses #SS220-TwoOne-Floppa-Iteration
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- ResearchDirectorJobTrinkets
   - GroupSpeciesBreathTool
@@ -419,6 +441,7 @@
   - ScientistPDA
 #  - Glasses #SS220-Two Floppa Iteration
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- ScientistJobTrinkets
   - GroupSpeciesBreathTool
@@ -433,6 +456,7 @@
   - ScientistBackpack
   - Glasses
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- ResearchAssistantJobTrinkets
   - GroupSpeciesBreathTool
@@ -452,6 +476,7 @@
   - HeadofSecurityOuterClothing
   - SecurityShoes
   - SurvivalSecurity
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   - HeadofSecurityJobTrinkets
   - GroupSpeciesBreathToolSecurity
@@ -472,6 +497,7 @@
   - WardenOuterClothing
   - SecurityShoes
   - SurvivalSecurity
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   - WardenJobTrinkets
   - GroupSpeciesBreathToolSecurity
@@ -493,6 +519,7 @@
   - SecurityPDA
   - SecurityBelt
   - SurvivalSecurity
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   - SecurityJobTrinkets
   - GroupSpeciesBreathToolSecurity
@@ -510,6 +537,7 @@
   - DetectiveOuterClothing
   - DetectiveShoes #SS220 dec-lux-shoes
   - SurvivalSecurity
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   - DetectiveJobTrinkets
   - GroupSpeciesBreathToolSecurity
@@ -522,6 +550,7 @@
   - SecurityCadetJumpsuit
   - SecurityBackpack
   - SurvivalSecurity
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- SecurityCadetJobTrinkets
   - GroupSpeciesBreathToolSecurity
@@ -538,6 +567,7 @@
   - CommonBackpack
   - Glasses
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- ReporterJobTrinkets
   - GroupSpeciesBreathTool
@@ -552,6 +582,8 @@
   - MedicalBackpack
   - Glasses
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
+  - GroupSpeciesBreathToolMedical #SS220-Survival-Loadout
   - Trinkets
   #- PsychologistJobTrinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
