@@ -14,7 +14,7 @@ namespace Content.Server.Mapping;
 
 public sealed class MappingManager : IPostInjectInit
 {
-#if !FULL_RELEASE
+// #if !FULL_RELEASE # SS220-add-mapping-to-mapper-server
     [Dependency] private readonly IAdminManager _admin = default!;
     [Dependency] private readonly ILogManager _log = default!;
     [Dependency] private readonly IServerNetManager _net = default!;
@@ -24,23 +24,23 @@ public sealed class MappingManager : IPostInjectInit
 
     private ISawmill _sawmill = default!;
     private ZStdCompressionContext _zstd = default!;
-#endif
+// #endif # SS220-add-mapping-to-mapper-server
 
     public void PostInject()
     {
-//#if !FULL_RELEASE
+//#if !FULL_RELEASE # SS220-add-mapping-to-mapper-server
         _net.RegisterNetMessage<MappingSaveMapMessage>(OnMappingSaveMap);
         _net.RegisterNetMessage<MappingSaveMapErrorMessage>();
         _net.RegisterNetMessage<MappingMapDataMessage>();
 
         _sawmill = _log.GetSawmill("mapping");
         _zstd = new ZStdCompressionContext();
-//#endif
+//#endif # SS220-add-mapping-to-mapper-server
     }
 
     private void OnMappingSaveMap(MappingSaveMapMessage message)
     {
-//#if !FULL_RELEASE
+//#if !FULL_RELEASE # SS220-add-mapping-to-mapper-server
         try
         {
             if (!_players.TryGetSessionByChannel(message.MsgChannel, out var session) ||
@@ -72,6 +72,6 @@ public sealed class MappingManager : IPostInjectInit
             var msg = new MappingSaveMapErrorMessage();
             _net.ServerSendMessage(msg, message.MsgChannel);
         }
-//#endif
+//#endif # SS220-add-mapping-to-mapper-server
     }
 }
