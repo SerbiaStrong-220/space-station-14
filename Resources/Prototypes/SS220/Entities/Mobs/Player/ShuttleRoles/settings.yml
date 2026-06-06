@@ -17,6 +17,7 @@
     - type: GhostRole
       raffle:
         settings: short
+    - type: AntagImmune
 
 - type: randomHumanoidSettings
   id: RedWingsOfficer
@@ -36,8 +37,7 @@
       - NamesRedwingsLast
       nameFormat: name-format-redwings-officer
     - type: RoleExperienceAdd
-      definitionId: SecurityOfficerRoleExperience
-      addSublevelPoints: 5
+      definitionId: RedWingsOfficerRoleExperience
 
 - type: randomHumanoidSettings
   id: RedWingsMedic
@@ -58,8 +58,7 @@
       - NamesRedwingsLast
       nameFormat: name-format-redwings-medic
     - type: RoleExperienceAdd
-      definitionId: BrigmedicRoleExperience
-      addSublevelPoints: 5
+      definitionId: RedWingsMedicRoleExperience
 
 - type: randomHumanoidSettings
   id: RedWingsPilot
@@ -80,5 +79,4 @@
       - NamesRedwingsLast
       nameFormat: name-format-redwings-pilot
     - type: RoleExperienceAdd
-      definitionId: SecurityPilotRoleExperience
-      addSublevelPoints: 5
+      definitionId: RedWingsPilotRoleExperience
