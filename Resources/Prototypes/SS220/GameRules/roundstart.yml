@@ -108,6 +108,48 @@
   - type: TraitorDynamics
 
 - type: entity
+  parent: BaseGameRule
+  id: BloodBrothers
+  components:
+  - type: GameRule
+    minPlayers: 3
+    delay:
+      min: 4
+      max: 5
+  - type: BloodBrothersRule
+  - type: AntagObjectives
+    objectives:
+    - BloodBrothersEscapeShuttleObjective
+  - type: AntagRandomObjectives
+    sets:
+    - groups: TraitorObjectiveGroups
+    maxDifficulty: 5
+  - type: AntagSelection
+    selectionTime: PostPlayerSpawn
+    agentName: blood-brothers-round-end-agent-name
+    definitions:
+    - prefRoles: [ BloodBrothers ]
+      min: 2
+      max: 2
+      multiAntagSetting: NotExclusive
+      playerRatio: 1
+      allowNonHumans: true
+      components:
+      # SS220-experience-update-begin
+      - type: AntagFreeSublevelPointsAdd
+        addFreeSublevelPoints: 10
+      - type: AntagAddKnowledge
+        knowledgesToAdd:
+        - SyndicateAgentKnowledge
+      # SS220-experience-update-end
+      mindRoles:
+      - MindRoleBloodBrothers
+      briefing:
+        sound: "/Audio/SS220/Ambience/Antag/blood_brothers_intro.ogg"
+  - type: DynamicRuleCost
+    cost: 75
+
+- type: entity
   id: SpaceTrafficControlNeutralEventScheduler
   parent: BaseGameRule
   components:

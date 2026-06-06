@@ -293,6 +293,12 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         var existingAntagCount = ent.Comp.PreSelectedSessions.TryGetValue(def, out var existingAntags) ?  existingAntags.Count : 0;
         var count = GetTargetAntagCount(ent, GetTotalPlayerCount(pool), def) - existingAntagCount;
 
+        if (def.Min > 0 && def.Min == def.Max && playerPool.Count < def.Min)
+        {
+            Log.Info($"Not enough valid candidates for rule {ToPrettyString(ent)} ({playerPool.Count}/{def.Min} needed), skip selection.");
+            return;
+        }
+
         // if there is both a spawner and players getting picked, let it fall back to a spawner.
         var noSpawner = def.SpawnerPrototype == null;
         var picking = def.PickPlayer;
