@@ -23,7 +23,6 @@ public sealed class ParadoxCloneRuleSystem : GameRuleSystem<ParadoxCloneRuleComp
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly SuitSensorSystem _sensor = default!;
     [Dependency] private readonly TargetSystem _target = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!; //SS220 add paradox clone blacklist
 
     public override void Initialize()
     {
