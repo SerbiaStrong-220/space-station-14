@@ -255,6 +255,11 @@
       types:
         Bloodloss: -1
   - type: QuadHearing
+  - type: ScotopicVision
+    radius: 5
+    energy: 0.12
+    softness: 1
+    color: "#ffffff"
 
 
 - type: entity
