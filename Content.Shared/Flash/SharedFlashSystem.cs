@@ -13,6 +13,7 @@ using Content.Shared.Light;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
+using Content.Shared.SS220.Flash;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
@@ -186,12 +187,18 @@ public abstract class SharedFlashSystem : EntitySystem
         if (attempt.Cancelled)
             return;
 
+        // SS220 Flash duration multipliers begin
+        var beforeEv = new BeforeFlashedEvent(target, user, used, melee);
+        RaiseLocalEvent(target, ref beforeEv);
+        flashDuration *= beforeEv.FlashDurationMultiplier;
+        // SS220 Flash duration multipliers end
+
         // don't paralyze, slowdown or convert to rev if the target is immune to flashes
         if (!_statusEffectsSystem.TryAddStatusEffect<FlashedComponent>(target, FlashedKey, flashDuration, true))
             return;
 
         if (stunDuration != null)
-            _stun.TryUpdateParalyzeDuration(target, stunDuration.Value);
+            _stun.TryUpdateParalyzeDuration(target, stunDuration.Value * beforeEv.StunDurationMultiplier /* SS220 Flash duration multipliers */);
         else
             _movementMod.TryUpdateMovementSpeedModDuration(target, MovementModStatusSystem.FlashSlowdown, flashDuration, slowTo);
 
@@ -201,13 +208,18 @@ public abstract class SharedFlashSystem : EntitySystem
                 ("user", Identity.Entity(user.Value, EntityManager))), target, target);
         }
 
+        // SS220 Fix multi event raising on one ent begin
         var ev = new AfterFlashedEvent(target, user, used, melee);
-        RaiseLocalEvent(target, ref ev);
+        var evTargets = new HashSet<EntityUid> { target };
 
         if (user != null)
-            RaiseLocalEvent(user.Value, ref ev);
+            evTargets.Add(user.Value);
         if (used != null)
-            RaiseLocalEvent(used.Value, ref ev);
+            evTargets.Add(used.Value);
+
+        foreach (var uid in evTargets)
+            RaiseLocalEvent(uid, ref ev);
+        // SS220 Fix multi event raising on one ent end
     }
 
     /// <summary>
