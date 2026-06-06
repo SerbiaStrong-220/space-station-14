@@ -3,12 +3,14 @@ using Content.Server.Cloning;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Medical.SuitSensors;
 using Content.Server.Objectives.Components;
+using Content.Shared.Damage.Components;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Gibbing.Components;
 using Content.Shared.Medical.SuitSensor;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Systems;
 using Content.Shared.Random.Helpers;
+using Content.Shared.SS220.Antag;
 using Robust.Shared.Random;
 
 namespace Content.Server.GameTicking.Rules;
@@ -21,6 +23,7 @@ public sealed class ParadoxCloneRuleSystem : GameRuleSystem<ParadoxCloneRuleComp
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly SuitSensorSystem _sensor = default!;
     [Dependency] private readonly TargetSystem _target = default!;
+    [Dependency] private readonly IEntityManager _entityManager = default!; //SS220 add paradox clone blacklist
 
     public override void Initialize()
     {
@@ -65,7 +68,7 @@ public sealed class ParadoxCloneRuleSystem : GameRuleSystem<ParadoxCloneRuleComp
             var allAliveHumanoids = _target.GetAliveHumans();
 
             // we already checked when starting the gamerule, but someone might have died since then.
-            if (allAliveHumanoids.Count == 0)
+            if (allAliveHumanoids.Count == 0 || allAliveHumanoids.Count <= _entityManager.AllComponents<ParadoxCloneBlacklistComponent>().Length) //SS220 add paradox clone blacklist
             {
                 Log.Warning("Could not find any alive players to create a paradox clone from!");
                 return;
@@ -73,6 +76,14 @@ public sealed class ParadoxCloneRuleSystem : GameRuleSystem<ParadoxCloneRuleComp
 
             // pick a random player
             var randomHumanoidMind = _random.Pick(allAliveHumanoids);
+            //SS220 add paradox clone blacklist begin
+            if (HasComp<ParadoxCloneBlacklistComponent>(randomHumanoidMind.Comp.OwnedEntity))
+            {
+                foreach (var possibleTarget in allAliveHumanoids)
+                    if (!HasComp<ParadoxCloneBlacklistComponent>(randomHumanoidMind.Comp.OwnedEntity))
+                        randomHumanoidMind = possibleTarget;
+            }
+            //SS220 add paradox clone blacklist end
             ent.Comp.OriginalMind = randomHumanoidMind;
             ent.Comp.OriginalBody = randomHumanoidMind.Comp.OwnedEntity;
 
