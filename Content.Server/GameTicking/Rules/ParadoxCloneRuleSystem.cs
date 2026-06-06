@@ -80,7 +80,7 @@ public sealed class ParadoxCloneRuleSystem : GameRuleSystem<ParadoxCloneRuleComp
             if (HasComp<ParadoxCloneBlacklistComponent>(randomHumanoidMind.Comp.OwnedEntity))
             {
                 foreach (var possibleTarget in allAliveHumanoids)
-                    if (!HasComp<ParadoxCloneBlacklistComponent>(randomHumanoidMind.Comp.OwnedEntity))
+                    if (!HasComp<ParadoxCloneBlacklistComponent>(possibleTarget.Comp.OwnedEntity))
                         randomHumanoidMind = possibleTarget;
             }
             //SS220 add paradox clone blacklist end
