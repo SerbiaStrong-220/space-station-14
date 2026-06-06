@@ -47,15 +47,19 @@ public abstract class SharedQuadHearingSystem : EntitySystem
     /// <inheritdoc cref="RegisterTarget(ProtoId{QuadHearingTargetPrototype}, EntityCoordinates, float?, ICommonSession?)"/>
     public void RegisterTarget(ProtoId<QuadHearingTargetPrototype> protoId, MapCoordinates coords, EntityUid? predictedUser)
     {
-        var map = _map.GetMap(coords.MapId);
-        RegisterTarget(protoId, new EntityCoordinates(map, coords.Position), predictedUser);
+        if (!_map.TryGetMap(coords.MapId, out var map))
+            return;
+
+        RegisterTarget(protoId, new EntityCoordinates(map.Value, coords.Position), predictedUser);
     }
 
     /// <inheritdoc cref="RegisterTarget(ProtoId{QuadHearingTargetPrototype}, EntityCoordinates, float?, ICommonSession?)"/>
     public void RegisterTarget(ProtoId<QuadHearingTargetPrototype> protoId, MapCoordinates coords, ICommonSession? predictedSession = null)
     {
-        var map = _map.GetMap(coords.MapId);
-        RegisterTarget(protoId, new EntityCoordinates(map, coords.Position), predictedSession);
+        if (!_map.TryGetMap(coords.MapId, out var map))
+            return;
+
+        RegisterTarget(protoId, new EntityCoordinates(map.Value, coords.Position), predictedSession);
     }
 
     /// <inheritdoc cref="RegisterTarget(ProtoId{QuadHearingTargetPrototype}, EntityCoordinates, float?, ICommonSession?)"/>
