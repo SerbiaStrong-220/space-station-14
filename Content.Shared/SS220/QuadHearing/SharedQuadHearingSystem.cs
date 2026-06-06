@@ -83,8 +83,10 @@ public abstract class SharedQuadHearingSystem : EntitySystem
         if (_mapMng.TryFindGridAt(mapCoords, out var gridUid, out _) && !TerminatingOrDeleted(gridUid))
             return gridUid == coords.EntityId ? coords : _transform.ToCoordinates(gridUid, mapCoords);
 
-        var map = _map.GetMap(mapCoords.MapId);
-        return new EntityCoordinates(map, mapCoords.Position);
+        if (_map.TryGetMap(mapCoords.MapId, out var mapUid))
+            return new EntityCoordinates(mapUid.Value, mapCoords.Position);
+
+        return coords;
     }
 
     protected bool CanRegisterTarget(Entity<QuadHearingComponent> recipient, MapCoordinates targetMapCoords, float range)
