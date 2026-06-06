@@ -6,4 +6,7 @@ namespace Content.Shared.SS220.Body.Events;
 /// Raised on an entity to determine their hearing range multiplier.
 /// </summary>
 [ByRefEvent]
-public record struct GetHearingRangeMultiplierEvent(InGameICChatType ChatType, float Multiplier = 1f) { }
+public record struct GetHearingRangeMultiplierEvent(InGameICChatType ChatType)
+{
+    public float Multiplier = 1f;
+}

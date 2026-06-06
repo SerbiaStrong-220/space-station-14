@@ -1,4 +1,5 @@
 using Content.Server.Actions;
+using Content.Server.Database;
 using Content.Shared.SS220.QuadHearing;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
@@ -45,22 +46,18 @@ public sealed class QuadHearingSystem : SharedQuadHearingSystem
         var mapCoords = _transform.ToMapCoordinates(coords);
         var proto = _prototype.Index(protoId);
         QuadHearingRegisterTargetMessage? msg = null;
-        foreach (var session in _player.Sessions)
+
+        var query = EntityQueryEnumerator<QuadHearingComponent>();
+        while (query.MoveNext(out var uid, out var comp))
         {
-            if (session == predictedSession)
+            if (!_player.TryGetSessionByEntity(uid, out var session))
                 continue;
 
             if (session.Status is not SessionStatus.InGame)
                 continue;
 
-            if (session.AttachedEntity is not { } player)
-                continue;
-
-            if (!TryComp<QuadHearingComponent>(player, out var quadHearing))
-                continue;
-
-            var range = GetHearingRange(proto, (player, quadHearing));
-            if (!CanRegisterTarget((player, quadHearing), mapCoords, range))
+            var range = GetHearingRange(proto, (uid, comp));
+            if (!CanRegisterTarget((uid, comp), mapCoords, range))
                 continue;
 
             msg ??= new QuadHearingRegisterTargetMessage

@@ -32,9 +32,9 @@ public sealed partial class ResomiAccentSystem : EntitySystem
     private const string RuUpperCHReplacement = "ЧЩ";
 
     // Insert 'sh' after 'c'
-    [GeneratedRegex("c")] private static partial Regex LowerCRegex();
+    [GeneratedRegex("c(?![hH])")] private static partial Regex LowerCRegex();
     private const string LowerCReplacement = "csh";
-    [GeneratedRegex("C")] private static partial Regex UpperCRegex();
+    [GeneratedRegex("C(?![hH])")] private static partial Regex UpperCRegex();
     private const string UpperCReplacement = "CSH";
     [GeneratedRegex("ц")] private static partial Regex RuLowerCRegex();
     private const string RuLowerCReplacement = "цщ";

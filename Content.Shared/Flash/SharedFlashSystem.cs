@@ -208,18 +208,16 @@ public abstract class SharedFlashSystem : EntitySystem
                 ("user", Identity.Entity(user.Value, EntityManager))), target, target);
         }
 
-        // SS220 Fix multi event raising on one ent begin
         var ev = new AfterFlashedEvent(target, user, used, melee);
-        var evTargets = new HashSet<EntityUid> { target };
+        RaiseLocalEvent(target, ref ev);
 
-        if (user != null)
-            evTargets.Add(user.Value);
-        if (used != null)
-            evTargets.Add(used.Value);
+        if (user != null &&
+            user.Value != target) // SS220 Fix multi event raising on one ent
+            RaiseLocalEvent(user.Value, ref ev);
 
-        foreach (var uid in evTargets)
-            RaiseLocalEvent(uid, ref ev);
-        // SS220 Fix multi event raising on one ent end
+        if (used != null &&
+            used.Value != target && used.Value != user) // SS220 Fix multi event raising on one ent
+            RaiseLocalEvent(used.Value, ref ev);
     }
 
     /// <summary>
