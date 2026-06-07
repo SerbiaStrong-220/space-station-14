@@ -157,6 +157,7 @@ public sealed partial class GunSystem : SharedGunSystem
                     Del(ent);
 
                     Audio.PlayPredicted(gun.Comp.SoundGunshotModified, gun, user);
+                    _quadHearing.RegisterTarget(QuadHearingTargetProtoId, fromCoordinates); // SS220 Quad hearing
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
