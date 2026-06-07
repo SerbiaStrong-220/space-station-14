@@ -134,7 +134,7 @@
     damage:
       types:
         Heat: 40 #ss220lowTTKUpdate
-    armourPiercing: 35 #SS220 weapon overhaul
+      armourPiercing: 35 #SS220 weapon overhaul
   - type: HitscanBasicVisuals
     muzzleFlash:
       sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
