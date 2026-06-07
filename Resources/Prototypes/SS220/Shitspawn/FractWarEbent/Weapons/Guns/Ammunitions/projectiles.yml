@@ -50,6 +50,8 @@
   parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
+  - type: PathologyOnProjectileHit
+    weightedRandomProviderEntity: HeavyCaliberFragment
   - type: Projectile
     damage:
       types:

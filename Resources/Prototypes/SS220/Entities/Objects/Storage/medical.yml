@@ -28,4 +28,50 @@
         - id: ClothingHandsGlovesNitrile
         - id: SurgeryDrapes
         - id: MindslaveFixerCerebralImplant
-        - id: MindslaveFixSurgeryGuide
+        - id: BodyAnalyzer
+
+- type: entity
+  parent: BoxCardboard
+  id: SurgeryMedkit
+  name: surgery medkit
+  description: Small and compact kit for life saving tools
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/surgery_medkit.rsi
+    layers:
+    - state: icon
+  - type: Item
+    sprite: SS220/Objects/Storage/surgery_medkit.rsi
+    size: Large
+    shape:
+    - 0,0,2,1
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,3,3
+    whitelist:
+      tags:
+      - SurgeryTool
+      - Bottle
+      components:
+      - Healing
+      - SurgeryTool
+
+- type: entity
+  parent: SurgeryMedkit
+  id: FilledSurgeryMedkit
+  name: surgery medkit
+  description: Small and compact kit for life saving tools
+  suffix: Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: SurgeryDrapes
+        - id: Scalpel
+        - id: Retractor
+        - id: Hemostat
+        - id: Cautery
+        - id: BodyAnalyzer
+        - id: ChemistryBottleTricordrazine

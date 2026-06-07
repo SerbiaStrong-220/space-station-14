@@ -14,7 +14,123 @@
   - type: Tag
     tags:
     - SurgeryTool
-  - type: SurgeryDrape
+  - type: SurgeryStarter
+  - type: ActivatableUI
+    key: enum.SurgeryDrapeUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.SurgeryDrapeUiKey.Key:
+        type: SurgeryDrapeBUI
+  - type: GuideHelp
+    guides:
+    - Surgery
+
+
+- type: entity
+  parent: BaseToolSurgery
+  id: BoneGel
+  name: bone gel
+  description: A specialized bioactive gel used in surgery to rapidly fuse and repair bone tissue.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+    state: bone-gel
+  - type: StaticPrice
+    price: 20
+  - type: SurgeryTool
+    toolType: BoneGel
+  - type: Tag
+    tags:
+    - SurgeryTool
+
+- type: entity
+  parent: BaseToolSurgery
+  id: BodyAnalyzer
+  name: Body analyzer
+  description: modern analyzer. Comes handy to surgeons.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+    state: body-analyzer
+  - type: StaticPrice
+    price: 20
+  - type: Tag
+    tags:
+    - SurgeryTool
+  - type: BodyAnalyzer
+  - type: ActivatableUI
+    key: enum.BodyAnalyzerUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.BodyAnalyzerUiKey.Key:
+        type: BodyAnalyzerBUI
+  - type: GuideHelp
+    guides:
+    - Surgery
+
+- type: entity
+  name: compact direct defibrillator
+  description: small and low power hand-held defibrillator for direct heart apply only
+  parent: BaseItem
+  id: DirectHandHeldDefibrillator
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+    state: direct-defibrillator
+  - type: Item
+    size: Small
+    storedRotation: 90
+  - type: DirectCompactDefibrillator
+  - type: UseDelay
+  - type: Defibrillator
+    zapHeal:
+      types:
+        Asphyxiation: -40
+  - type: GuideHelp
+    guides:
+    - Surgery
+
+- type: entity
+  name: implant scanner
+  description: Advanced scanner which can find poorly hidden uncommon objects in person body
+  parent: BaseItem
+  id: HandHeldImplantMedicalScanner
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+    state: implant-scanner
+  - type: Item
+    size: Small
+    storedRotation: 90
+  - type: ImplantCheckInSurgery
+  - type: GuideHelp
+    guides:
+    - Surgery
+
+- type: entity
+  name: implant scanner report
+  description: Better than get playing russian roulette with implanter
+  parent: Paper
+  id: ImplantCheckReportPaper
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/bureaucracy.rsi
+    layers:
+    - state: paper_receipt_horizontal
+    - state: paper_receipt_horizontal_words
+      map: ["enum.PaperVisualLayers.Writing"]
+      visible: false
+    - state: paper_stamp-generic
+      map: ["enum.PaperVisualLayers.Stamp"]
+      visible: false
+  - type: PaperVisuals
+    backgroundImagePath: "/Textures/Interface/Paper/paper_background_perforated.svg.96dpi.png"
+    headerImagePath: "/Textures/Interface/Paper/paper_heading_forensic_scanner.svg.96dpi.png"
+    headerMargin: 0.0, 0.0, 0.0, 4.0
+    backgroundImageTile: true
+    backgroundPatchMargin: 6.0, 0.0, 6.0, 0.0
+    contentMargin: 12.0, 0.0, 6.0, 0.0
+    maxWritableArea: 368.0, 256.0
 
 - type: entity
   parent: BaseItem
@@ -28,6 +144,9 @@
   - type: MindSlaveDisfunctionFixer
   - type: SurgeryTool
     toolType: Specific
+    failureDamage:
+      types:
+        Cerebral: 5
   - type: HiddenDescription
     entries:
       MedicalKnowledge: [ hidden-desc-implant-manipulator-medical ]
@@ -38,3 +157,6 @@
     - [SyndicateAgentKnowledge, null]
     - [ScienceKnowledge, null]
     hiddenName: ent-MindslaveFixerCerebralImplant
+  - type: GuideHelp
+    guides:
+    - Surgery

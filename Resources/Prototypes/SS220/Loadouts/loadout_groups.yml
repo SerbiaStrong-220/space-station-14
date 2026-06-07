@@ -605,12 +605,13 @@
 - type: loadoutGroup
   id: SurvivalBrigMedic
   name: loadout-group-survival-brigmedic
-  minLimit: 2
-  hidden: true
+  minLimit: 1
+  hidden: false
   loadouts:
-  - EmergencyOxygenBrigmedic
   - EmergencyNitrogenBrigmedic
-  - LoadoutSpeciesVoxNitrogen
+  - EmergencyNitrogenBrigmedicSponsor
+  - EmergencyOxygenBrigmedic
+  - EmergencyOxygenBrigmedicSponsor
   # Бригмедик (Конец)
 
   # Врач (Начало)
@@ -901,6 +902,7 @@
   - JanitorGaloshes
   - JanitorOrangeShoes
   - JanitorJRShoes
+  - JanitorJRBoots
 
 - type: loadoutGroup
   id: JanitorBelt
@@ -908,6 +910,12 @@
   loadouts:
   - JanitorBaseBelt
   - JanitorJRBelt #SS220-JRBelt
+
+- type: loadoutGroup
+  id: JanitorEquipment
+  name: loadout-group-janitor-equipment
+  loadouts:
+  - JRMopItem
   # Уборщик (Конец)
 
  # Сервисный работник (Начало)
@@ -946,6 +954,14 @@
   - GlovesBlack
   - GlovesRed
   - GlovesBlue
+
+ # Баллон азота воксов
+- type: loadoutGroup
+  id: SurvivalVox
+  name: loadout-group-survival-basic
+  hidden: true
+  loadouts:
+  - LoadoutSpeciesVoxNitrogen
 
 #! Эксклюзивы карт (Начало)
 
