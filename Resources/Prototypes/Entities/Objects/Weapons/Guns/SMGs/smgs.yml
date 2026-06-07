@@ -146,6 +146,7 @@
     #SS220 weapon overhaul begin
     angleIncrease: 1.8
     angleDecay: 6
+    fireRate: 5.7
     #SS220 weapon overhaul end
     minAngle: 15
     maxAngle: 35

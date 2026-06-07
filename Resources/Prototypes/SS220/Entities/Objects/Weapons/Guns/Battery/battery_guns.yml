@@ -626,7 +626,7 @@
       path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
   - type: BatteryAmmoProvider
     proto: Pulse
-    fireCost: 200
+    fireCost: 100
   - type: Tag
     tags:
     - Sidearm
