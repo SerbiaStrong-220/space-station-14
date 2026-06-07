@@ -13,7 +13,7 @@
   - Maintenance
   #special: #SS220-removeInspectorHoliday begin
   #- !type:GiveItemOnHolidaySpecial
-  #  holiday: GarbageDay 
+  #  holiday: GarbageDay
   #  prototype: WeaponRevolverInspector #SS220-removeInspectorHoliday end
 
 - type: startingGear
