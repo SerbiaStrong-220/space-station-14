@@ -11,10 +11,10 @@
   - Service
   - Janitor
   - Maintenance
-  special:
-  - !type:GiveItemOnHolidaySpecial
-    holiday: GarbageDay
-    prototype: WeaponRevolverInspector
+  #special: #SS220-removeInspectorHoliday begin
+  #- !type:GiveItemOnHolidaySpecial
+  #  holiday: GarbageDay 
+  #  prototype: WeaponRevolverInspector #SS220-removeInspectorHoliday end
 
 - type: startingGear
   id: JanitorGear
