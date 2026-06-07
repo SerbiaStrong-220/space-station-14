@@ -95,6 +95,24 @@
       Telecrystal: 8
 #ss220 dynamic-price end
 
+- type: listing
+  id: UplinkCommandoModkit
+  name: uplink-commando-modkit
+  description: uplink-commando-modkit-desc
+  icon: { sprite: SS220/Objects/Weapons/Guns/Modkits/commando.rsi, state: icon }
+  productEntity: CommandoModkit
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkWeaponry
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 5
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 3
+
 # Implants
 
 - type: listing

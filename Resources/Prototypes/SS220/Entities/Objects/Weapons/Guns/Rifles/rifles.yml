@@ -20,6 +20,7 @@
   - type: GunAimable
     minAngle: -8
     maxAngle: -9
+    aimedSprintSpeedModifier: 0.65
   - type: Gun
     minAngle: 13
     maxAngle: 36
@@ -32,7 +33,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/ltrifle.ogg
       params:
-        volume: -4
+        volume: -6
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -60,4 +61,3 @@
     steps: 1
     zeroVisible: true
   - type: Appearance
-

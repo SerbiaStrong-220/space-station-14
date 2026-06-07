@@ -140,6 +140,7 @@
   - type: GunAimable
     minAngle: -7
     maxAngle: -11
+    aimedSprintSpeedModifier: 0.65
     #SS220 weapon overhaul end
   - type: Gun
     #SS220 weapon overhaul begin

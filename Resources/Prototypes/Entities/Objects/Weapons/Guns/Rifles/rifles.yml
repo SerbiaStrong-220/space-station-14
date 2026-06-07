@@ -247,6 +247,12 @@
     steps: 1 # SS220-fix-for-our-sprites
     zeroVisible: true
   - type: Appearance
+  #SS220 weapon overhaul start
+  - type: Construction
+    graph: Commando
+    node: start
+    deconstructionTarget: null
+  #SS220 weapon overhaul end
 
 - type: entity
   parent: WeaponRifleLecter
@@ -310,7 +316,6 @@
     minAngle: -8
     maxAngle: -10
   #SS220 weapon overhaul end
-
   - type: ItemSlots
     slots:
       gun_magazine:

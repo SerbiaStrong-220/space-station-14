@@ -5,6 +5,9 @@
   id: DeusAmbrosia
 
 - type: Tag
+  id: CommandoModkit
+
+- type: Tag
   id: FullRifleCartridge
 
 - type: Tag
