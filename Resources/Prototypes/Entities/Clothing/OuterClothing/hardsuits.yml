@@ -64,7 +64,6 @@
         Blunt: 0.9
         Slash: 0.9
         Piercing: 0.9
-        Shock: 0.8
         Caustic: 0.5
         Radiation: 0.2
         Shock: 0.5 #SS220 weapon overhaul
@@ -1396,7 +1395,6 @@
         Shock: 0.25
         Radiation: 0.2
         Caustic: 0.2
-        Shock: 0.5 #SS220 weapon overhaul
 # SS220 CBURN_stats_tweak end
   - type: ZombificationResistance
     zombificationResistanceCoefficient: 0.25
