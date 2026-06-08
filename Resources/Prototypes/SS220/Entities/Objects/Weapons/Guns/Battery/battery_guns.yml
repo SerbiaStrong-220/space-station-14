@@ -569,7 +569,7 @@
   - type: Item
     size: Huge
     shape:
-    - 0,0,4,1
+    - 0,0,5,1
     sprite: Objects/Weapons/Guns/Battery/laser_cannon.rsi
   - type: Sprite
     sprite: Objects/Weapons/Guns/Battery/laser_cannon.rsi
@@ -587,7 +587,7 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/laser_cannon.rsi
   - type: Gun
-    fireRate: 1.5
+    fireRate: 1
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: BatteryAmmoProvider

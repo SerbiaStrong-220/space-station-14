@@ -8,5 +8,6 @@
           steps:
             - tag: CommandoModkit
               doAfter: 10.0
+              name: construction-graph-commando
     - node: commando
       entity: WeaponRifleCommando
