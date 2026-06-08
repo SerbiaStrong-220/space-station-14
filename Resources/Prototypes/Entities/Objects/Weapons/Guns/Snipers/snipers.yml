@@ -40,7 +40,6 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
   - type: BallisticAmmoProvider
-    autoCycle: false
     capacity: 5
     proto: FullRifleCartridge
     whitelist:
