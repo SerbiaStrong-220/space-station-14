@@ -617,4 +617,4 @@
     damage:
       types:
         Heat: 90
-      armourPiercing: 70
+      armourPiercing: 45

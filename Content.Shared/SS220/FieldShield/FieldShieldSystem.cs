@@ -8,6 +8,7 @@ using Content.Shared.Examine;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Popups;
+using Content.Shared.Projectiles;
 using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee.Events;
@@ -201,19 +202,22 @@ public sealed class FieldShieldProviderSystem : EntitySystem
 
     private void OnShieldUserCollide(Entity<FieldShieldComponent> ent, ref ProjectileBlockAttemptEvent args)
     {
-        if (TryBlockDamage(ent, ref args.Damage))
+        if (!TryComp<ProjectileComponent>(args.ProjUid, out var projComp))
+            return;//if a projectile has no projectile component absence of logic handling it here is the least problematic part of the problem
+
+        if (TryBlockDamage(ent, projComp.Shooter, ref args.Damage))
             args.Cancelled = true;
     }
 
     private void OnBlockThrownProjectile(Entity<FieldShieldComponent> ent, ref ThrowableProjectileBlockAttemptEvent args)
     {
-        if (args.Damage != null && TryBlockDamage(ent, ref args.Damage))
+        if (args.Damage != null && TryBlockDamage(ent, null, ref args.Damage))
             args.Cancelled = true;
     }
 
     private void OnShieldUserHitscan(Entity<FieldShieldComponent> ent, ref HitscanBlockAttemptEvent args)
     {
-        if (args.Damage != null && TryBlockDamage(ent, ref args.Damage))
+        if (args.Damage != null && TryBlockDamage(ent, args.Shooter, ref args.Damage))
             args.Cancelled = true;
     }
 
@@ -226,7 +230,7 @@ public sealed class FieldShieldProviderSystem : EntitySystem
         }
     }
 
-    private bool TryBlockDamage(Entity<FieldShieldComponent> entity, ref DamageSpecifier damage)
+    private bool TryBlockDamage(Entity<FieldShieldComponent> entity, EntityUid? attacker, ref DamageSpecifier damage)
     {
         UpdateShieldTimer(entity);
 
@@ -235,7 +239,7 @@ public sealed class FieldShieldProviderSystem : EntitySystem
 
         DecreaseShieldCharges(entity);
         damage = DamageSpecifier.ApplyModifierSet(damage, entity.Comp.ShieldData.Modifiers);
-        _damageable.TryChangeDamage(entity.Owner, damage, out var damageResult);
+        _damageable.TryChangeDamage(entity.Owner, damage, out var damageResult, origin: attacker);
         return true;
     }
 
