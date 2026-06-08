@@ -256,6 +256,7 @@
       playerRatio: 10
       blacklist:
         components:
+        - ArenaParticipant #SS220 prevent arena participants from getting antag roles
         - AntagImmune
       lateJoinAdditional: true # ss220 traitor latejoin back
       mindRoles:
