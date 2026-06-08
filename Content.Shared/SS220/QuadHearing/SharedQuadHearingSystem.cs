@@ -29,6 +29,7 @@ public abstract class SharedQuadHearingSystem : EntitySystem
         ent.Comp.ShowEffect = !ent.Comp.ShowEffect;
         Dirty(ent);
 
+        args.Toggle = true;
         args.Handled = true;
     }
 
