@@ -150,11 +150,11 @@ public sealed class ProjectileSystem : SharedProjectileSystem
             if (projectile.Comp.Damage[requiredDamageType] + projectile.Comp.Damage.ArmourPiercing < targetThreshold)
                 stopPenetration = true;
 
-            var resultThreshold = Math.Clamp((targetThreshold - projectile.Comp.Damage.ArmourPiercing).Float(), 0f, Math.Abs(targetThreshold + projectile.Comp.Damage.ArmourPiercing.Float()));
+            var resultThreshold = FixedPoint2.Clamp(targetThreshold - projectile.Comp.Damage.ArmourPiercing, FixedPoint2.Zero, FixedPoint2.Abs(targetThreshold + projectile.Comp.Damage.ArmourPiercing));
 
-            projectile.Comp.Damage.ArmourPiercing = projectile.Comp.Damage.ArmourPiercing.Float() - targetThreshold;
+            projectile.Comp.Damage.ArmourPiercing = projectile.Comp.Damage.ArmourPiercing - targetThreshold;
 
-            projectile.Comp.Damage.DamageDict[requiredDamageType] = Math.Clamp((projectile.Comp.Damage.DamageDict[requiredDamageType] - resultThreshold).Float(), 0f, (projectile.Comp.Damage.DamageDict[requiredDamageType] + resultThreshold).Float());
+            projectile.Comp.Damage.DamageDict[requiredDamageType] = FixedPoint2.Clamp(projectile.Comp.Damage.DamageDict[requiredDamageType] - resultThreshold, FixedPoint2.Zero, projectile.Comp.Damage.DamageDict[requiredDamageType] + resultThreshold);
 
             if (projectile.Comp.Damage[requiredDamageType] < resultThreshold)
                 stopPenetration = true;
