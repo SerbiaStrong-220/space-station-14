@@ -17,6 +17,9 @@ uplink-advanced-laser-desc = Лазерный пистолет со встрое
 uplink-commando-modkit = Набор модификации M-53E3ST
 uplink-commando-modkit-desc = Набор сменных частей, позволяющий модифицировать "Лектер"
 
+uplink-estoc-name = Боевая винтовка "Эсток"
+uplink-estoc-desc = Набор с боевой винтовкой и тремя магазинами патронов для неё.
+
 # Ammunition
 
 uplink-blaster-cell-name = Энергоячейка для плазменного оружия

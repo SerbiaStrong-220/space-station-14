@@ -85,7 +85,7 @@
   coefficients:
     Blunt: 0.5
     Slash: 0.4 #Dragon should be strong in melee combat
-    Piercing: 0.75 #Less armor and more damage so dragon makes sense in low TTK
+    Piercing: 0.7 #Less armor and more damage so dragon makes sense in low TTK
     Heat: 0.4 #Obviuosly fireproof
     Shock: 1
     Cold: 1

@@ -34,12 +34,31 @@
   name: uplink-devastator-name
   description: uplink-devastator-desc
   icon: { sprite: Objects/Weapons/Guns/Battery/energy_magnum.rsi, state: icon }
-  productEntity: BriefcaseWeaponDevastatorFilled
+  productEntity: ClothingBackpackDuffelSyndicateFilledRifle
   discountCategory: veryRareDiscounts
   discountDownTo:
     Telecrystal: 13
   cost:
     Telecrystal: 17
+  categories:
+  - UplinkWeaponry
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+
+- type: listing
+  id: UplinkEstoc
+  name: uplink-estoc-name
+  description: uplink-estoc-desc
+  icon: { sprite: Objects/Weapons/Guns/Rifles/estoc.rsi, state: icon }
+  productEntity: ClothingBackpackDuffelSyndicateFilledRifle
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 16
+  cost:
+    Telecrystal: 20
   categories:
   - UplinkWeaponry
   conditions:
@@ -306,9 +325,9 @@
     LightDynamic:
       Telecrystal: 6
     MediumDynamic:
-      Telecrystal: 6
-    HardDynamic:
       Telecrystal: 5
+    HardDynamic:
+      Telecrystal: 4
 #ss220 dynamic-price end
 
 - type: listing
@@ -329,7 +348,7 @@
     MediumDynamic:
       Telecrystal: 6
     HardDynamic:
-      Telecrystal: 4
+      Telecrystal: 5
 #ss220 dynamic-price end
 
 - type: listing

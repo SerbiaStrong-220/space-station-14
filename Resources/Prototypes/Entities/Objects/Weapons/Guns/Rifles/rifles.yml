@@ -278,7 +278,7 @@
     - FullAuto
 
 - type: entity
-  name: Estoc DMR
+  name: MRCR-308 "Estoc" #SS220 weapon overhaul
   parent: [BaseWeaponRifle, BaseSyndicateContraband]
   id: WeaponRifleEstoc
   description: "A battle rifle chambered in 7,62x55. The Estoc was designed as the Lecter’s long-range counterpart, equipped with an extended 20-inch barrel and telescopic sight.\nFeeds from 7,62x55 full rifle magazines."
@@ -295,6 +295,7 @@
     - 0,0,4,2
   - type: Clothing
     sprite: Objects/Weapons/Guns/Rifles/estoc.rsi
+  #SS220 weapon overhaul begin
   - type: Gun
     angleIncrease: 3
     angleDecay: 3
@@ -303,14 +304,13 @@
       path: /Audio/Weapons/Guns/Gunshots/lmg.ogg
     minAngle: 13
     maxAngle: 42
-    selectedMode: FullAuto #SS220 weapon overhaul
+    selectedMode: FullAuto
     availableModes:
     - FullAuto
     - SemiAuto
   - type: GunWieldBonus
-    #SS220 weapon overhaul start
     minAngle: -4
-    maxAngle: -28
+    maxAngle: -25
     angleIncrease: -1.25
   - type: GunAimable
     minAngle: -8
