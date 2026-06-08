@@ -120,8 +120,7 @@
         Heat: 0.6
         Caustic: 0.5
         Radiation: 0.85
-  - type: StaminaResistance
-    damageCoefficient: 0.45
+        Shock: 0.45
   - type: StaticPrice
     price: 1500
   - type: IntegratedClothing

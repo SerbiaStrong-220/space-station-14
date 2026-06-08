@@ -442,6 +442,8 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
+    - state: mag-3
+      map: ["enum.GunVisualLayers.Mag"]
     - state: mag-unshaded-3
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
@@ -593,7 +595,7 @@
     fireCost: 125
 
 - type: entity
-  name: M51-PTW-HE-S
+  name: M51-PTW-S
   parent: [WeaponLaserPistol, BaseCentcommContraband]
   id: WeaponPulsePistol
   description: A state of the art energy pistol favoured as a sidearm by the NT operatives.
@@ -633,28 +635,31 @@
     - LaserWeapon
 
 - type: entity
-  name: pulse carbine
-  parent: WeaponLaserCarbine
+  name: M51-PTW
+  parent: [WeaponLaserCarbine, BaseCentcommContraband]
   id: WeaponPulseCarbine
   description: A high tech energy carbine favoured by the NT-ERT operatives.
   components:
   - type: Item
     size: Large
+    sprite: SS220/Objects/Weapons/Guns/Battery/pulse_carbine.rsi
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Battery/pulse_carbine.rsi
+    sprite: SS220/Objects/Weapons/Guns/Battery/pulse_carbine.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
+    - state: mag-4
+      map: ["enum.GunVisualLayers.Mag"]
     - state: mag-unshaded-4
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
   - type: MagazineVisuals
     magState: mag
     steps: 5
-    zeroVisible: false
+    zeroVisible: true
   - type: Appearance
   - type: Clothing
-    sprite: Objects/Weapons/Guns/Battery/pulse_carbine.rsi
+    sprite: SS220/Objects/Weapons/Guns/Battery/pulse_carbine.rsi
   - type: Gun
     selectedMode: SemiAuto
     fireRate: 3
@@ -665,43 +670,44 @@
       path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
   - type: BatteryAmmoProvider
     proto: Pulse
-    fireCost: 200
-  - type: Battery
-    maxCharge: 5000
-    startingCharge: 5000
+    fireCost: 65
 
 - type: entity
-  name: pulse rifle
+  name: M54-PTW-HE
   parent: [WeaponLaserCarbine, BaseCentcommContraband]
   id: WeaponPulseRifle
-  description: A weapon that is almost as infamous as its users.
+  description: Pinnacle of portable laser armament technology, this weapon is usually issued to elite assault units of the Solar Federation army and other well-equipped militaries.
   components:
   - type: Item
     size: Huge
     shape:
     - 0,0,4,1
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Battery/pulse_rifle.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-unshaded-4
-      map: ["enum.GunVisualLayers.MagUnshaded"]
-      shader: unshaded
+    sprite: SS220/Objects/Weapons/Guns/Battery/pulse_rifle.rsi
   - type: MagazineVisuals
     magState: mag
     steps: 5
-    zeroVisible: false
+    zeroVisible: true
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Battery/pulse_rifle.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-4
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: mag-unshaded-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
   - type: Appearance
   - type: Clothing
-    sprite: Objects/Weapons/Guns/Battery/pulse_rifle.rsi
+    sprite: SS220/Objects/Weapons/Guns/Battery/pulse_rifle.rsi
   - type: Gun
-    fireRate: 1.5
+    selectedMode: SemiAuto
+    fireRate: 4
+    availableModes:
+      - SemiAuto
+      - FullAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
   - type: BatteryAmmoProvider
-    proto: Pulse
-    fireCost: 100
-  - type: Battery
-    maxCharge: 40000
-    startingCharge: 40000
+    proto: PulseHeavy
+    fireCost: 50

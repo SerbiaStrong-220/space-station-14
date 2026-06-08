@@ -146,6 +146,20 @@
       sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
       state: impact_blue
 
+#SS220 weapon overhaul begin
+- type: entity
+  parent: Pulse
+  id: PulseHeavy
+  name: blue high-energy laser ray
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Heat: 55
+      armourPiercing: 45
+#SS220 weapon overhaul end
+
 - type: entity
   parent: BasicHitscan
   id: RedShuttleLaser

@@ -1015,3 +1015,7 @@ ClockworkShield: ClockworkShieldAlt
 MirrorShield: MirrorShieldAlt
 EnergyShield: EnergyShieldAlt
 TelescopicShield: TelescopicShieldAlt
+
+# 2026-06-08 - SS220 weapon overhaul
+WeaponDisabler: WeaponTaser
+WeaponDisablerSMG: WeaponTaser
