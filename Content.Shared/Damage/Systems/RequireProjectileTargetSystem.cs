@@ -12,6 +12,7 @@ namespace Content.Shared.Damage.Systems;
 public sealed class RequireProjectileTargetSystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly StandingStateSystem _standing = default!; //SS220 weapon overhaul
 
     public override void Initialize()
     {
@@ -23,18 +24,28 @@ public sealed class RequireProjectileTargetSystem : EntitySystem
     private void PreventCollide(Entity<RequireProjectileTargetComponent> ent, ref PreventCollideEvent args)
     {
         if (args.Cancelled)
-          return;
+            return;
 
         if (!ent.Comp.Active)
             return;
 
         var other = args.OtherEntity;
         //SS220 weapon overhaul begin
-        if (TryComp(other, out ProjectileComponent? projectile))
+        if (TryComp(other, out ProjectileComponent? projectile) && (projectile.Shooter is { Valid: true } shooterValidated))
         {
+            if (TryComp<MobStateComponent>(ent.Owner, out var statesComp) && (statesComp.CurrentState != Mobs.MobState.Alive))
+            {
+                args.Cancelled = true;
+                return;
+            }
+
+            if (TryComp<StandingStateComponent>(shooterValidated, out var standingState) && _standing.IsDown((shooterValidated, standingState)))
+                if (TryComp<StandingStateComponent>(ent, out var standingStateTarget) && _standing.IsDown((ent, standingStateTarget)))
+                    return;
+
             if (TryComp<GunAimableComponent>(projectile.Weapon, out var aimComp) && aimComp.IsAimed)
             {
-                if (TryComp<MobStateComponent>(ent.Owner, out var statesComp) && (statesComp.CurrentState == Mobs.MobState.Alive))
+                if (statesComp != null && (statesComp.CurrentState == Mobs.MobState.Alive))
                     return;
             }
 

@@ -5,6 +5,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Projectiles;
 using Content.Shared.SS220.Shuttles.UI;
 using Content.Shared.SS220.Weapons.Components;
+using Content.Shared.Standing;
 using Content.Shared.Weapons.Hitscan.Components;
 using Content.Shared.Weapons.Hitscan.Events;
 using Content.Shared.Weapons.Ranged.Components;
@@ -26,6 +27,7 @@ public sealed class HitscanBasicRaycastSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly ISharedAdminLogManager _log = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly StandingStateSystem _standing = default!; //SS220 weapon overhaul
 
     [Dependency] private readonly EntityQuery<HitscanBasicVisualsComponent> _visualsQuery = default!;
 
@@ -52,7 +54,7 @@ public sealed class HitscanBasicRaycastSystem : EntitySystem
         var result = _container.IsEntityOrParentInContainer(shooter)
             ? rayCastResults.FirstOrNull()
             : rayCastResults.FirstOrNull(hit => CanBeTargeted(hit.HitEntity, ent.Owner) && ((hit.HitEntity == target // SS220-make-hitscan-target-change
-                                                || CompOrNull<RequireProjectileTargetComponent>(hit.HitEntity)?.Active != true) || ShouldIgnoreRequireTarget(hit.HitEntity, gun))); // SS220-make-hitscan-target-change
+                                                || CompOrNull<RequireProjectileTargetComponent>(hit.HitEntity)?.Active != true) || ShouldIgnoreRequireTarget(hit.HitEntity, gun, shooter))); // SS220-make-hitscan-target-change
 
         var distanceTried = result?.Distance ?? ent.Comp.MaxDistance;
 
@@ -87,18 +89,22 @@ public sealed class HitscanBasicRaycastSystem : EntitySystem
     }
 
     //SS220 weapon overhaul begin
-    private bool ShouldIgnoreRequireTarget(Entity<RequireProjectileTargetComponent?> target, EntityUid gun)
+    private bool ShouldIgnoreRequireTarget(EntityUid target, EntityUid gun, EntityUid user)
     {
-        if (target.Comp == null)
+        if (!TryComp<RequireProjectileTargetComponent>(target, out var requireTargetComp))
             return false;
+
+        if (!TryComp<MobStateComponent>(target, out var statesComp) || (statesComp.CurrentState != Mobs.MobState.Alive))
+            return false;
+
+        if (TryComp<StandingStateComponent>(user, out var standingState) && _standing.IsDown((user, standingState)))
+            if (TryComp<StandingStateComponent>(target, out var standingStateTarget) && _standing.IsDown((target, standingStateTarget)))
+                return true;
 
         if (!TryComp<GunAimableComponent>(gun, out var aimableComp) || !aimableComp.IsAimed)
             return false;
 
-        if (TryComp<MobStateComponent>(target.Owner, out var statesComp) && (statesComp.CurrentState == Mobs.MobState.Alive))
-            return true;
-
-        return false;
+        return true;
     }
     //SS220 weapon overhaul end
 
