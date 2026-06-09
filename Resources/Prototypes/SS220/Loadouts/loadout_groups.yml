@@ -289,7 +289,7 @@
 - type: loadoutGroup
   id: LawyerBackpack
   name: loadout-group-lawyer-backpack
-  minlimit: 1
+  minLimit: 1
   loadouts:
   - CommonBackpack
   - CommonSatchel
