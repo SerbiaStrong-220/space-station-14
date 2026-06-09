@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.SS220.CultYogg.CultYoggIcons;
 using Content.Shared.SS220.CultYogg.Unenslavable;
 using Content.Shared.StatusIcon;
 using Content.Shared.StatusIcon.Components;
@@ -26,11 +27,11 @@ public sealed partial class UnenslavableSystem : EntitySystem
         if (viewer == ent)
             return;
 
-        var iconId = ent.Comp.StatusIcon;
+        if (!HasComp<ShowCultYoggIconsComponent>(viewer))
+            return;
 
-        if (_prototype.TryIndex<FactionIconPrototype>(iconId, out var iconPrototype))
+        var iconId = ent.Comp.StatusIcon;
+        if (_prototype.Resolve(iconId, out var iconPrototype))
             ev.StatusIcons.Add(iconPrototype);
-        else
-            Log.Error($"Invalid faction icon id: {iconId}");
     }
 }

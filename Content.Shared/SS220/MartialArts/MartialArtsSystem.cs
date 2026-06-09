@@ -200,12 +200,6 @@ public sealed partial class MartialArtsSystem : EntitySystem, IMartialArtEffectE
         if (!_prototype.TryIndex(user.Comp.MartialArt, out var martialArt))
             return;
 
-        if (_grab.IsGrabbed(ev.Grabbable) && user.Comp.CurrentSteps.Count > 0)
-        {
-            ev.Multiply(0); // make it instant if target already grabbed and part of combo
-            return;
-        }
-
         ev.Multiply(martialArt.GrabDelayCoefficient);
     }
 
