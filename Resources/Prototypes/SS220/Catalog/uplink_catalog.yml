@@ -34,7 +34,7 @@
   name: uplink-devastator-name
   description: uplink-devastator-desc
   icon: { sprite: Objects/Weapons/Guns/Battery/energy_magnum.rsi, state: icon }
-  productEntity: ClothingBackpackDuffelSyndicateFilledRifle
+  productEntity: BriefcaseWeaponDevastatorFilled
   discountCategory: veryRareDiscounts
   discountDownTo:
     Telecrystal: 13
@@ -863,7 +863,7 @@
 
 - type: listing
   id: UplinkMagazineRifleHP
-  name: "Rifle magazine(6,3x47) HPIB"
+  name: uplink-intermediate-hollow-point-ammo-name
   description: uplink-hollow-point-ammo-desc
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Rifle/rifle_mag.rsi, state: red-icon }
   productEntity: MagazineRifleHP
@@ -881,7 +881,7 @@
 
 - type: listing
   id: UplinkMagazineRifleAP
-  name: "Rifle magazine(6,3x47) AP"
+  name: uplink-intermediate-armor-piercing-ammo-name
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Rifle/rifle_mag.rsi, state: green-icon }
   description: uplink-armor-piercing-ammo-desc
   productEntity: MagazineRifleAP
@@ -899,7 +899,7 @@
 
 - type: listing
   id: UplinkMagazinePistolAP
-  name: "Pistol magazine(9x20) AP"
+  name: uplink-pistol-armor-piercing-ammo-name
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_mag.rsi, state: green-icon }
   description: uplink-armor-piercing-ammo-desc
   productEntity: MagazinePistolAP
@@ -917,7 +917,7 @@
 
 - type: listing
   id: UplinkMagazinePistolHP
-  name: "Pistol magazine (9x20) HPIB"
+  name: uplink-pistol-hollow-point-ammo-name
   description: uplink-hollow-point-ammo-desc
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_mag.rsi, state: red-icon }
   productEntity: MagazinePistolHP
@@ -935,7 +935,7 @@
 
 - type: listing
   id: UplinkMagazinePistolSubMachineGunAP
-  name: "SMG magazine(9x20) AP"
+  name: uplink-smg-armor-piercing-ammo-name
   description: uplink-armor-piercing-ammo-desc
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: green-icon }
   productEntity: MagazinePistolSubMachineGunAP
@@ -953,7 +953,7 @@
 
 - type: listing
   id: UplinkMagazinePistolSubMachineGunHP
-  name: "SMG magazine(9x20) HPIB"
+  name: uplink-smg-hollow-point-ammo-name
   description: uplink-hollow-point-ammo-desc
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: red-icon }
   productEntity: MagazinePistolSubMachineGunHP
@@ -971,28 +971,28 @@
 
 - type: listing
   id: UplinkMagazineAntiMaterialFMJ
-  name: "magazine (15,24x140 antimaterial) FMJ"
+  name: uplink-antimaterial-full-metal-jacket-ammo-name
   description: uplink-full-metal-jacket-ammo-desc
-  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: red-icon }
+  icon: { sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/antimaterial_mag.rsi, state: icon }
   productEntity: MagazineAntiMaterialFMJ
   cost:
-    Telecrystal: 2
+    Telecrystal: 1
   categories:
   - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     HardDynamic:
       Telecrystal: 1
 
 - type: listing
-  id: UplinkMagazineAntiMaterialFMJ
-  name: "magazine (15,24x140 antimaterial) FMJ"
-  description: uplink-full-metal-jacket-ammo-desc
-  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: red-icon }
-  productEntity: MagazineAntiMaterialFMJ
+  id: UplinkMagazineAntiMaterialHP
+  name: uplink-antimaterial-hollow-point-ammo-name
+  description: uplink-hollow-point-ammo-desc
+  icon: { sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/antimaterial_mag.rsi, state: red-icon }
+  productEntity: MagazineAntiMaterialHP
   cost:
     Telecrystal: 2
   categories:
@@ -1007,10 +1007,170 @@
 
 - type: listing
   id: UplinkMagazineAntiMaterialAP
-  name: "magazine (15,24x140 antimaterial) AP"
+  name: uplink-antimaterial-armor-piercing-ammo-name
   description: uplink-armor-piercing-ammo-desc
-  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: red-icon }
+  icon: { sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/antimaterial_mag.rsi, state: green-icon }
   productEntity: MagazineAntiMaterialAP
+  cost:
+    Telecrystal: 3
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 3
+    MediumDynamic:
+      Telecrystal: 3
+    HardDynamic:
+      Telecrystal: 2
+
+- type: listing
+  id: UplinkMagazineAntiMaterialHE
+  name: uplink-antimaterial-high-explosive-ammo-name
+  description: antimaterial-high-explosive-ammo-desc
+  icon: { sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/antimaterial_mag.rsi, state: black-icon }
+  productEntity: MagazineAntiMaterialExplosive
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazineFullRifleFMJ
+  name: uplink-full-rifle-full-metal-jacket-ammo-name
+  description: uplink-full-metal-jacket-ammo-desc
+  icon: { sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/full_rifle_mag.rsi, state: icon }
+  productEntity: MagazineFullRifleFMJ
+  cost:
+    Telecrystal: 1
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazineFullRifleHP
+  name: uplink-full-rifle-hollow-point-ammo-name
+  description: uplink-hollow-point-ammo-desc
+  icon: { sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/full_rifle_mag.rsi, state: red-icon }
+  productEntity: MagazineFullRifleHP
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazineFullRifleAP
+  name: uplink-full-rifle-armor-piercing-ammo-name
+  description: uplink-armor-piercing-ammo-desc
+  icon: { sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/full_rifle_mag.rsi, state: green-icon }
+  productEntity: MagazineFullRifleAP
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazineFullRifleAPM2
+  name: uplink-full-rifle-armor-piercing-m2-ammo-name
+  description: uplink-armor-piercing-m2-ammo-desc
+  icon: { sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/full_rifle_mag.rsi, state: purple-icon }
+  productEntity: MagazineFullRifleAPM2
+  cost:
+    Telecrystal: 3
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 3
+    MediumDynamic:
+      Telecrystal: 3
+    HardDynamic:
+      Telecrystal: 3
+
+- type: listing
+  id: UplinkMagazineShotgunHEI
+  name: uplink-incendiary-explosive-shotgun-ammo-name
+  description: uplink-incendiary-explosive-ammo-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/m12.rsi, state: base }
+  productEntity: MagazineShotgunHEI
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazineShotgunHE
+  name: uplink-high-explosive-shotgun-ammo-name
+  description: uplink-high-explosive-ammo-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/m12.rsi, state: pellets }
+  productEntity: MagazineShotgunExplosive
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazineLightRifleBox
+  name: uplink-machine-gun-box-ammo-name
+  description: uplink-machine-gun-box-ammo-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/LightRifle/light_rifle_box.rsi, state: base }
+  productEntity: MagazineLightRifleBox
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+
+- type: listing
+  id: UplinkMagazineShotgunHP
+  name: uplink-hollow-point-shotgun-ammo-name
+  description: uplink-hollow-point-ammo-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/m12.rsi, state: slug }
+  productEntity: MagazineShotgunHP
   cost:
     Telecrystal: 2
   categories:

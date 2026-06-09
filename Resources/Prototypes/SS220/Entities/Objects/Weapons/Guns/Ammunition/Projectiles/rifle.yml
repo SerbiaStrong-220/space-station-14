@@ -1,7 +1,7 @@
 - type: entity
   id: BulletRifleAP
   name: bullet (6,3x47 rifle AP)
-  parent: BaseBulletAP
+  parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
@@ -13,11 +13,10 @@
 - type: entity
   id: BulletRifleHP
   name: bullet (6,3x47 rifle HPIB)
-  parent: BaseBulletHP
+  parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
       types:
         Piercing: 35
-      armourPiercing: -10

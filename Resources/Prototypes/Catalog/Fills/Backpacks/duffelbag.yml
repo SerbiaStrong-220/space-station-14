@@ -175,11 +175,11 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: MagazinePistolSubMachineGun
+        - id: MagazineRifle #SS220 weapon overhaul
           amount: 4
         - id: MagazineShotgun
           amount: 4
-        - id: MagazineRifle
+        - id: MagazineFullRifleFMJ #SS220 weapon overhaul
           amount: 3
         - id: MagazineShotgunSlug
         - id: MagazineLightRifleBox

@@ -87,7 +87,7 @@
           Piercing: 6
           Blunt: 30
           Heat: 10
-          Slash: 25
+          Slash: 30
           Radiation: 1000
           Poison: 1000
           Caustic: 1000
@@ -96,7 +96,7 @@
           Piercing: 7
           Blunt: 15
           Heat: 7
-          Slash: 15
+          Slash: 20
           Radiation: 1000
           Poison: 1000
           Asphyxiation: 1000
@@ -129,7 +129,7 @@
           Caustic: 1000
           Piercing: 7
           Blunt: 15
-          Heat: 70
+          Heat: 80
           Slash: 7
           Shock: 30
           Cold: 50
@@ -141,7 +141,7 @@
           Caustic: 1000
           Piercing: 4
           Blunt: 10
-          Heat: 50
+          Heat: 55
           Slash: 4
           Shock: 40
           Cold: 100
@@ -169,9 +169,9 @@
           Bloodloss: 1000
           Caustic: 1000
           Piercing: 50
-          Blunt: 35
-          Heat: 40
-          Slash: 35
+          Blunt: 50
+          Heat: 50
+          Slash: 55
           Shock: 30
           Cold: 40
       durabilityTresholdDict:
@@ -181,9 +181,9 @@
           Bloodloss: 1000
           Caustic: 1000
           Piercing: 38
-          Blunt: 35
+          Blunt: 40
           Heat: 36
-          Slash: 30
+          Slash: 50
           Shock: 40
           Cold: 50
     - type: ClothingSpeedModifier
@@ -629,9 +629,9 @@
     - type: AltArmor
       tresholdDict:
         Piercing: 65
-        Blunt: 30
+        Blunt: 50
         Heat: 40
-        Slash: 30
+        Slash: 50
         Radiation: 1000
         Poison: 1000
         Asphyxiation: 1000
@@ -714,7 +714,7 @@
           Piercing: 6
           Blunt: 30
           Heat: 10
-          Slash: 25
+          Slash: 30
           Radiation: 1000
           Poison: 1000
           Asphyxiation: 1000
@@ -726,7 +726,7 @@
           Piercing: 7
           Blunt: 15
           Heat: 7
-          Slash: 15
+          Slash: 20
           Radiation: 1000
           Poison: 1000
           Asphyxiation: 1000

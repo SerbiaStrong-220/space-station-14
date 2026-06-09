@@ -20,6 +20,18 @@
             "name": "mag-2"
         },
         {
+            "name": "icon"
+        },
+        {
+            "name": "green-icon"
+        },
+        {
+            "name": "red-icon"
+        },
+        {
+            "name": "black-icon"
+        },
+        {
             "name": "inhand-left-mag",
             "directions": 4
         },

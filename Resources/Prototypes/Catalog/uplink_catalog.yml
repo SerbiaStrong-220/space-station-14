@@ -771,12 +771,12 @@
   categories:
   - UplinkAmmo
 
-# For the C20R
+# For anything a nukie can loot
 - type: listing
   id: UplinkMagazinePistolSubMachineGun
   name: uplink-pistol-magazine-c20r-name
   description: uplink-pistol-magazine-c20r-desc
-  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: red-icon }
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: icon } #SS220 weapon overhaul
   productEntity: MagazinePistolSubMachineGun
   cost:
     Telecrystal: 2

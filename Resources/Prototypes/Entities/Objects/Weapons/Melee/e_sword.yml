@@ -312,10 +312,10 @@
   - type: ArmorBlock
   - type: AltArmor
     tresholdDict:
-      Piercing: 48
-      Blunt: 30
-      Heat: 35
-      Slash: 30
+      Piercing: 65
+      Blunt: 50
+      Heat: 40
+      Slash: 50
       Radiation: 1000
       Poison: 1000
       Caustic: 1000
