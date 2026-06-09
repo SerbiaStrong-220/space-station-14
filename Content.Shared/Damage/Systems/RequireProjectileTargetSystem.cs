@@ -33,19 +33,14 @@ public sealed class RequireProjectileTargetSystem : EntitySystem
         //SS220 weapon overhaul begin
         if (TryComp(other, out ProjectileComponent? projectile) && (projectile.Shooter is { Valid: true } shooterValidated))
         {
-            if (TryComp<MobStateComponent>(ent.Owner, out var statesComp) && (statesComp.CurrentState != Mobs.MobState.Alive))
-            {
-                args.Cancelled = true;
-                return;
-            }
-
             if (TryComp<StandingStateComponent>(shooterValidated, out var standingState) && _standing.IsDown((shooterValidated, standingState)))
                 if (TryComp<StandingStateComponent>(ent, out var standingStateTarget) && _standing.IsDown((ent, standingStateTarget)))
-                    return;
+                    if (TryComp<MobStateComponent>(ent.Owner, out var statesComp) && (statesComp.CurrentState == Mobs.MobState.Alive))
+                        return;
 
             if (TryComp<GunAimableComponent>(projectile.Weapon, out var aimComp) && aimComp.IsAimed)
             {
-                if (statesComp != null && (statesComp.CurrentState == Mobs.MobState.Alive))
+                if (TryComp<MobStateComponent>(ent.Owner, out var statesComp) && (statesComp.CurrentState == Mobs.MobState.Alive))
                     return;
             }
 

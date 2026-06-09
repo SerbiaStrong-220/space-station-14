@@ -40,7 +40,7 @@
         variation: 0.125
     activatedDamage:
       types:
-        Heat: 30 #SS220 shield rework
+        Heat: 35 #SS220 shield rework
         Structural: 20
   - type: MeleeWeapon
     wideAnimationRotation: -135
@@ -147,7 +147,7 @@
   - type: ItemToggleMeleeWeapon
     activatedDamage:
         types:
-            Heat: 20 #SS220 shield rework
+            Heat: 25 #SS220 shield rework
   - type: Sprite
     sprite: Objects/Weapons/Melee/e_dagger_loud.rsi
     layers:
@@ -353,7 +353,7 @@
         variation: 0.250
     activatedDamage:
         types:
-            Heat: 24 #SS220 shield rework
+            Heat: 29 #SS220 shield rework
             Structural: 15
   - type: ItemToggleActiveSound
     activeSound:
@@ -479,7 +479,7 @@
         variation: 0.250
     activatedDamage:
         types:
-            Heat: 24
+            Heat: 29
             Structural: 15
   - type: InstastunResist
     resistedStunTypes:

@@ -17,6 +17,7 @@ public sealed class ScotopicVisionSystem : EntitySystem
     {
         SubscribeLocalEvent<ScotopicVisionComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<ScotopicVisionComponent, ComponentRemove>(OnRemove);
+        SubscribeLocalEvent<ScotopicVisionComponent, AfterAutoHandleStateEvent>(OnCompUpdated);
         SubscribeLocalEvent<ScotopicVisionComponent, LocalPlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<ScotopicVisionComponent, LocalPlayerDetachedEvent>(OnPlayerDetached);
     }
@@ -25,6 +26,15 @@ public sealed class ScotopicVisionSystem : EntitySystem
     {
         if (ent.Owner == _player.LocalEntity)
             SetNightVisionLight(ent, true);
+    }
+
+    private void OnCompUpdated(Entity<ScotopicVisionComponent> ent, ref AfterAutoHandleStateEvent args) // this is made basically for role-specific implementations of this component
+    {
+        if (ent.Owner == _player.LocalEntity)
+        {
+            RemoveNightVisionLight(ent);
+            SetNightVisionLight(ent, true);
+        }
     }
 
     private void OnRemove(Entity<ScotopicVisionComponent> ent, ref ComponentRemove args)

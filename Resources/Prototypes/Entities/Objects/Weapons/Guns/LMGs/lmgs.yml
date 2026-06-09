@@ -109,17 +109,13 @@
         params:
           volume: 2
     #SS220 weapon overhaul begin
-    - type: GunWieldBonus
-      minAngle: -7
-      maxAngle: -26
-      angleIncrease: -1.1
     - type: GunAimable
       minAngle: -16
       maxAngle: -8
     - type: Gun
-      minAngle: 24
-      maxAngle: 45
-      angleIncrease: 2.50
+      minAngle: 17
+      maxAngle: 19
+      angleIncrease: 1.4
       angleDecay: 16
       fireRate: 6
     #SS220 weapon overhaul end
@@ -150,6 +146,6 @@
       proto: CartridgeLightRifle
       cycleable: false # No synthesizing ammo for your syndicate masters.
     - type: BallisticAmmoSelfRefiller
-      autoRefillRate: 0.5s #SS220 weapon overhaul #8 times faster because the DPS became way lower and the weapon was repurposed for suppressive fire(which requires LOTS of ammo)
+      autoRefillRate: 0.7s #SS220 weapon overhaul #much faster because the DPS became way lower and the weapon was repurposed for suppressive fire(which requires LOTS of ammo)
       affectedByEmp: true
     - type: AmmoCounter

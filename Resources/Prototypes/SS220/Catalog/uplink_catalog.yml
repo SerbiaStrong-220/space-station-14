@@ -970,6 +970,60 @@
       Telecrystal: 1
 
 - type: listing
+  id: UplinkMagazineAntiMaterialFMJ
+  name: "magazine (15,24x140 antimaterial) FMJ"
+  description: uplink-full-metal-jacket-ammo-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: red-icon }
+  productEntity: MagazineAntiMaterialFMJ
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazineAntiMaterialFMJ
+  name: "magazine (15,24x140 antimaterial) FMJ"
+  description: uplink-full-metal-jacket-ammo-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: red-icon }
+  productEntity: MagazineAntiMaterialFMJ
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazineAntiMaterialAP
+  name: "magazine (15,24x140 antimaterial) AP"
+  description: uplink-armor-piercing-ammo-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: red-icon }
+  productEntity: MagazineAntiMaterialAP
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
   id: UplinkUltrabrightLantern
   name: uplink-ultrabright-lantern-name
   description: uplink-ultrabright-lantern-desc
