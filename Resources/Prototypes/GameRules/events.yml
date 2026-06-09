@@ -309,6 +309,7 @@
       - type: AutoImplant
         implants:
         - DeathAcidifierImplant
+        - NanoSurgeryMachinesImplant # SS220-add-projectile-fragments
       - type: RandomMetadata
         nameSegments:
         - NamesNinjaTitle

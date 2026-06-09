@@ -11,6 +11,8 @@
       level: 1
     Medicine:
       level: 3
+    Anatomy:
+      level: 2
     PhysicalTraining:
       level: 2
   knowledges:
@@ -32,6 +34,8 @@
       level: 3
     Medicine:
       level: 3
+    Anatomy:
+      level: 2
     PhysicalTraining:
       level: 2
   knowledges:
@@ -51,8 +55,10 @@
       level: 2
     Medicine:
       level: 1
+    Anatomy:
+      level: 1
     PhysicalTraining:
       level: 1
   knowledges:
   - InformedPersonalKnowledge
-  addSublevelPoints: 15
+  addSublevelPoints: 20

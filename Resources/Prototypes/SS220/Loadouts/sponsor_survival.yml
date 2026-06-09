@@ -106,3 +106,60 @@
   storage:
     back:
     - BoxSurvivalSecurityNitrogenSponsor
+
+# Mime
+- type: loadout
+  id: EmergencyOxygenMimeSponsor
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: OxygenBreatherSponsor
+  storage:
+    back:
+    - BoxMimeSponsor
+
+- type: loadout
+  id: EmergencyNitrogenMimeSponsor
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: NitrogenBreatherSponsor
+  storage:
+    back:
+    - BoxMimeNitrogenSponsor
+
+# Clown
+- type: loadout
+  id: EmergencyOxygenClownSponsor
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: OxygenBreatherSponsor
+  storage:
+    back:
+    - BoxHugSponsor
+
+- type: loadout
+  id: EmergencyNitrogenClownSponsor
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: NitrogenBreatherSponsor
+  storage:
+    back:
+    - BoxHugNitrogenSponsor
+
+# Brigmedic
+- type: loadout
+  id: EmergencyOxygenBrigmedicSponsor
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: OxygenBreatherSponsor
+  storage:
+    back:
+    - BoxSurvivalBrigmedicSponsor
+
+- type: loadout
+  id: EmergencyNitrogenBrigmedicSponsor
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: NitrogenBreatherSponsor
+  storage:
+    back:
+    - BoxSurvivalBrigmedicNitrogenSponsor
