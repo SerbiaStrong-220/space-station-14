@@ -64,7 +64,6 @@ uplink-shrapnel-grenade-name = Осколочная граната
 uplink-shrapnel-grenade-desc = Выпускает серию острых осколков, наносящих огромный урон по незащищённым целям.
 # Ammo
 uplink-pistol-magazine-desc = Пистолетный магазин на 10 патронов. Совместим с "Гадюкой".
-uplink-estoc-ammo-name = Винтовочный магазин (.20 винтовочный)
 uplink-estoc-ammo-desc = Винтовочный магазин на 25 патронов. Совместим с марксманской винтовкой Эсток.
 uplink-pistol-magazine-caseless-desc = Пистолетный магазин на 10 патронов. Совместим с "Коброй".
 uplink-speedloader-magnu-desc = Спидлоадер с 6 бронебойными патронами для револьвера. Совместим с "Питоном".
@@ -162,7 +161,6 @@ uplink-meds-bundle-desc = Ассортимент автоинъекторов и
 uplink-ammo-bundle-name = Набор боеприпасов
 uplink-ammo-bundle-desc = Перезаряжаю! Содержит 4 магазина для C-20r, 4 барабана для Бульдога, 3 магазина для винтовки Эсток и 2 короба патронов для L6 SAW.
 uplink-c20r-bundle-name = Набор "C-20r"
-uplink-c20r-bundle-desc = Старый добрый: Классический пистолет-пулемёт C-20r в комплекте с тремя магазинами.
 uplink-buldog-bundle-name = Набор "Бульдог"
 uplink-buldog-bundle-desc = Простой и надёжный: Содержит популярный дробовик Бульдог, 1 барабан пуль и 4 барабана дроби.
 uplink-grenade-launcher-bundle-name = Набор "China-Lake"
@@ -332,8 +330,6 @@ uplink-hushpup-name = Хашпап
 uplink-hushpup-desc = Мощный дробовик с глушителем и небольшой емкостью магазина. Использует боеприпасы для дробовика калибра .50.
 
 uplink-c20r-name = C-20r
-
-uplink-c20r-desc = Старый добрый верный друг: Классический пистолет-пулемет C-20r.
 
 uplink-bulldog-name = Бульдог
 

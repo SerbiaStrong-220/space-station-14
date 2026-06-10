@@ -833,7 +833,7 @@
 - type: listing
   id: UplinkEstocAmmo
   #SS220 weapon overhaul begin
-  name: "Rifle magazine(6,3x47) FMJ"
+  name: uplink-estoc-ammo-name
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Rifle/rifle_mag.rsi, state: icon }
   description: uplink-full-metal-jacket-ammo-desc
   #SS220 weapon overhaul end

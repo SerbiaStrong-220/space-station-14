@@ -1026,7 +1026,7 @@
 - type: listing
   id: UplinkMagazineAntiMaterialHE
   name: uplink-antimaterial-high-explosive-ammo-name
-  description: antimaterial-high-explosive-ammo-desc
+  description: uplink-antimaterial-high-explosive-ammo-desc
   icon: { sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/antimaterial_mag.rsi, state: black-icon }
   productEntity: MagazineAntiMaterialExplosive
   cost:
