@@ -135,7 +135,7 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
                     break;
                 }
 
-                var timeWhenTeleport = humanoidPreferences.TeleportAfkToCryoStorage ? _gameTiming.CurTime + _afkTeleportToCryo : _gameTiming.CurTime + _lateAftTeleportToCryo ;
+                var timeWhenTeleport = humanoidPreferences.TeleportAfkToCryoStorage ? _gameTiming.CurTime + _afkTeleportToCryo : _gameTiming.CurTime + _lateAftTeleportToCryo;
                 _entityEnteredSSDTimes[(e.Session.AttachedEntity.Value, e.Session.UserId)] = timeWhenTeleport;
                 break;
 
