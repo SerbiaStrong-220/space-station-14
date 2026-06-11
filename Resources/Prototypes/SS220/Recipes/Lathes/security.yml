@@ -37,15 +37,6 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazineMagnumUranium
-  result: MagazineMagnumUranium
-  materials:
-    Steel: 60
-    Plastic: 150
-    Uranium: 120
-
-- type: latheRecipe
-  parent: BaseAmmoRecipe
   id: MagazinePistolHighCapacityEmpty
   result: MagazinePistolHighCapacityEmpty
   materials:
