@@ -338,6 +338,36 @@
     Plastic: 80
 
 - type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: MagazineBoxFullRifleFMJ
+  result: MagazineBoxFullRifleFMJ
+  materials:
+    Steel: 200
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: MagazineBoxFullRifleAP
+  result: MagazineBoxFullRifleAP
+  materials:
+    Steel: 200
+    Uranium: 180
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: MagazineBoxFullRifleHP
+  result: MagazineBoxFullRifleHP
+  materials:
+    Steel: 200
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: MagazineBoxFullRifleIncendiary
+  result: MagazineBoxFullRifleIncendiary
+  materials:
+    Steel: 150
+    Plastic: 180
+
+- type: latheRecipe
   parent: [ BaseGoldCircuitboardRecipe, BaseMachineRecipeCategory ]
   id: ShuttleGunMLGSWCircuitboard
   result: ShuttleGunMLGSWCircuitboard

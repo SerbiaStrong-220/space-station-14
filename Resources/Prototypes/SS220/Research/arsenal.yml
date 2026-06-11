@@ -17,7 +17,7 @@
     sprite: Objects/Weapons/Guns/Ammunition/Boxes/pistol.rsi
     state: incendiarydisplay
   discipline: Arsenal
-  tier: 2
+  tier: 1
   cost: 9000
   recipeUnlocks:
   - MagazineBoxAntiMaterielHP
@@ -34,6 +34,7 @@
   - MagazineShotgunHP
   - MagazineFullRifleHP
   - MagazineAntiMaterialHP
+  - MagazineBoxFullRifleHP
 
 - type: technology
   id: ExplosiveAmmunition
@@ -42,7 +43,7 @@
     sprite: Objects/Weapons/Guns/Ammunition/Boxes/pistol.rsi
     state: incendiarydisplay
   discipline: Arsenal
-  tier: 2
+  tier: 3
   cost: 12000
   recipeUnlocks:
   - BoxShotgunHE

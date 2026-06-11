@@ -16,7 +16,7 @@
       types:
         Piercing: 40
         Structural: 15
-      armourPiercing: 20 #SS220 armor piercing added
+      armourPiercing: 25 #SS220 armor piercing added
 
 
 - type: entity

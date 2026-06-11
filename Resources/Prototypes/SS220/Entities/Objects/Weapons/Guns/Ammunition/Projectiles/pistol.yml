@@ -21,6 +21,7 @@
     damage:
       types:
         Piercing: 27
+      armourPiercing: -10
 
 - type: entity
   id: BulletPistolAP
@@ -32,4 +33,4 @@
     damage:
       types:
         Piercing: 20
-      armourPiercing: 10
+      armourPiercing: 15

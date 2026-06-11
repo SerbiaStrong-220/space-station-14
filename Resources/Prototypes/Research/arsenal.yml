@@ -41,6 +41,7 @@
   - MagazineShotgunHEI
   - BoxShotgunHEI
   - MagazineFullRifleIncendiary
+  - MagazineBoxFullRifleIncendiary
   #ss220 more recipies begin
 
 - type: technology
@@ -90,11 +91,11 @@
   - MagazineBoxLightRifleUranium
   - MagazineBoxRifleUranium
   #ss220 more recipies begin
-  - MagazineMagnumUranium
   - MagazinePistolSubMachineGunUranium
   - MagazineFullRifleAP
   - MagazineAntiMaterialAP
   - MagazineBoxAntiMaterielAP
+  - MagazineBoxFullRifleAP
   #ss220 more recipies end
 
 - type: technology

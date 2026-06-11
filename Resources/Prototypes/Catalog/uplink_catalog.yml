@@ -823,7 +823,7 @@
   id: UplinkMosinAmmo
   name: uplink-mosin-ammo-name
   description: uplink-mosin-ammo-desc
-  productEntity: MagazineBoxLightRifle
+  productEntity: MagazineBoxFullRifleFMJ #SS220 weapon overhaul
   cost:
     Telecrystal: 1
   categories:

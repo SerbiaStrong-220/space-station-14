@@ -60,6 +60,7 @@
   - WeaponPowerCell
   - MagazineFullRifleFMJ
   - MagazineAntiMaterialFMJ
+  - MagazineBoxFullRifleFMJ
   #ss220 more recipies end
 
 - type: latheRecipePack
@@ -165,6 +166,10 @@
   - MagazineFullRifleAP
   - MagazineFullRifleHP
   - MagazineFullRifleIncendiary
+  - MagazineBoxFullRifleFMJ
+  - MagazineBoxFullRifleAP
+  - MagazineBoxFullRifleHP
+  - MagazineBoxFullRifleIncendiary
   #SS220 weapon overhaul end
 
 - type: latheRecipePack

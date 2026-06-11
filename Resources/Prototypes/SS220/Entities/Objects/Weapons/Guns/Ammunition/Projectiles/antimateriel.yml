@@ -20,8 +20,9 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 140
+        Piercing: 105
         Structural: 20
+      armourPiercing: 10
 
 - type: entity
   categories: [ HideSpawnMenu ]

@@ -25,9 +25,9 @@
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: Default
-    maxIntensity: 7
+    maxIntensity: 3
     intensitySlope: 4
-    totalIntensity: 7
+    totalIntensity: 5
     maxTileBreak: 0
 
 - type: entity

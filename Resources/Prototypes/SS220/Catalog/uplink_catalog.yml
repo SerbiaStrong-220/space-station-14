@@ -77,9 +77,9 @@
   categories:
   - UplinkWeaponry
   discountDownTo:
-    Telecrystal: 11
+    Telecrystal: 9
   cost:
-    Telecrystal: 15
+    Telecrystal: 10
   dynamicsPrices:
     LightDynamic:
       Telecrystal: 8
