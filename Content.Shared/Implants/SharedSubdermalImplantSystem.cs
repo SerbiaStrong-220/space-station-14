@@ -25,11 +25,8 @@ public abstract partial class SharedSubdermalImplantSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly TagSystem _tag = default!; // SS220-some-tag...
-    [Dependency] private readonly IRobustRandom _random = default!; // SS220-add-stealth-implant
 
     private static readonly ProtoId<TagPrototype> ThermalImplantTag = "ThermalImplant";
-
-    private const float HiddenImplantInjectionChance = 0.15f;  // SS220-add-stealth-implant
 
     public override void Initialize()
     {
@@ -51,8 +48,16 @@ public abstract partial class SharedSubdermalImplantSystem : EntitySystem
             return;
 
         // SS220-add-hidden-implants-begin
-        if (_net.IsServer && _random.Prob(HiddenImplantInjectionChance))
-            EnsureComp<HiddenInstalledImplantComponent>(ent);
+        if (_net.IsServer)
+        {
+            var parent = args.Container.Owner;
+            var installEvent = new GetSubdermalInstallLevel();
+            RaiseLocalEvent(parent, ref installEvent);
+
+            var hiddenInstallComp = EnsureComp<HiddenInstalledImplantComponent>(ent);
+            hiddenInstallComp.InstallLevel = installEvent.InstallLevel;
+            hiddenInstallComp.Hidden = installEvent.Hidden;
+        }
         // SS220-add-hidden-implants-end
 
         ent.Comp.ImplantedEntity = args.Container.Owner;
