@@ -46,6 +46,7 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
 
     private TimeSpan _afkTeleportToCryo;
     private TimeSpan _ssdTimeout;
+    private TimeSpan _lateAftTeleportToCryo;
 
     private readonly Dictionary<(EntityUid, NetUserId), TimeSpan> _entityEnteredSSDTimes = new();
     private readonly List<(EntityUid, NetUserId)> _toRemove = new();
@@ -54,20 +55,15 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
     {
         base.Initialize();
 
-        _cfg.OnValueChanged(CCVars220.AfkTeleportToCryo, SetAfkTeleportToCryo, true);
-        _cfg.OnValueChanged(CCVars220.SSDTimeOut, SetSSDTimeout, true);
+        _cfg.OnValueChanged(CCVars220.AfkTeleportToCryo, x => _afkTeleportToCryo = TimeSpan.FromSeconds(x), true);
+        _cfg.OnValueChanged(CCVars220.LateAfkTeleportToCryo, x => _lateAftTeleportToCryo = TimeSpan.FromSeconds(x), true);
+        _cfg.OnValueChanged(CCVars220.SSDTimeOut, x => _ssdTimeout = TimeSpan.FromSeconds(x), true);
 
         _playerManager.PlayerStatusChanged += OnPlayerChange;
 
         SubscribeLocalEvent<CryostorageComponent, TeleportToCryoFinished>(HandleTeleportFinished);
         SubscribeLocalEvent<RoundEndMessageEvent>(OnRoundEnd);
     }
-
-    private void SetAfkTeleportToCryo(float value)
-        => _afkTeleportToCryo = TimeSpan.FromSeconds(value);
-
-    private void SetSSDTimeout(float value)
-        => _ssdTimeout = TimeSpan.FromSeconds(value);
 
     private void OnRoundEnd(RoundEndMessageEvent ev)
     {
@@ -78,9 +74,6 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
     public override void Shutdown()
     {
         base.Shutdown();
-
-        _cfg.UnsubValueChanged(CCVars220.AfkTeleportToCryo, SetAfkTeleportToCryo);
-        _cfg.UnsubValueChanged(CCVars220.SSDTimeOut, SetSSDTimeout);
 
         _playerManager.PlayerStatusChanged -= OnPlayerChange;
     }
@@ -109,7 +102,7 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
                 continue;
             }
 
-            if (!IsTeleportAfkToCryoTime(pair.Value))
+            if (pair.Value < _gameTiming.CurTime)
                 continue;
 
             if (!TeleportEntityToCryoStorage(pair.Key.Item1))
@@ -122,11 +115,6 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
         {
             _entityEnteredSSDTimes.Remove(key);
         }
-    }
-
-    private bool IsTeleportAfkToCryoTime(TimeSpan time)
-    {
-        return _gameTiming.CurTime - time > _afkTeleportToCryo;
     }
 
     private void OnPlayerChange(object? sender, SessionStatusEventArgs e)
@@ -147,11 +135,10 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
                     break;
                 }
 
-                if (!humanoidPreferences.TeleportAfkToCryoStorage)
-                    break;
-
-                _entityEnteredSSDTimes[(e.Session.AttachedEntity.Value, e.Session.UserId)] = _gameTiming.CurTime;
+                var timeWhenTeleport = humanoidPreferences.TeleportAfkToCryoStorage ? _gameTiming.CurTime + _afkTeleportToCryo : _gameTiming.CurTime + _lateAftTeleportToCryo ;
+                _entityEnteredSSDTimes[(e.Session.AttachedEntity.Value, e.Session.UserId)] = timeWhenTeleport;
                 break;
+
             case SessionStatus.Connected:
                 foreach (var keys in _entityEnteredSSDTimes.Keys.ToList())
                 {

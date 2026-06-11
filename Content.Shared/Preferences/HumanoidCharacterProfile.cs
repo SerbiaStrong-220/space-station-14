@@ -111,6 +111,7 @@ namespace Content.Shared.Preferences
 
         // SS220 Cryo begin
         [DataField]
+        // TODO not renamed cause of changing during server migration so no db migration should be
         public bool TeleportAfkToCryoStorage { get; private set; } = true;
         // SS220 Cryo end
 
@@ -157,7 +158,7 @@ namespace Content.Shared.Preferences
             HashSet<ProtoId<TraitPrototype>> traitPreferences,
             Dictionary<string, RoleLoadout> loadouts,
             SignatureData? signatureData = null, // ss220 add signature
-            bool teleportAfkToCryoStorage = true) //SS220 Cryo-Teleport
+            bool lateTeleportAfkToCryoStorage = true) //SS220 Cryo-Teleport
         {
             Name = name;
             FlavorText = flavortext;
@@ -172,7 +173,7 @@ namespace Content.Shared.Preferences
             PreferenceUnavailable = preferenceUnavailable;
             _antagPreferences = antagPreferences;
             _traitPreferences = traitPreferences;
-            TeleportAfkToCryoStorage = teleportAfkToCryoStorage; // SS220 Cryo-Teleport
+            TeleportAfkToCryoStorage = lateTeleportAfkToCryoStorage; // SS220 Cryo-Teleport
             SignatureData = signatureData; // ss220 add signature
             _loadouts = loadouts;
 
@@ -493,8 +494,8 @@ namespace Content.Shared.Preferences
             };
         }
 
-        public HumanoidCharacterProfile WithTeleportAfkToCryoStorage(bool teleportAfkToCryoStorage)
-            => new(this) { TeleportAfkToCryoStorage = teleportAfkToCryoStorage };
+        public HumanoidCharacterProfile WithTeleportAfkToCryoStorage(bool lateTeleportAfkToCryoStorage)
+            => new(this) { TeleportAfkToCryoStorage = lateTeleportAfkToCryoStorage };
 
         // ss220 add signature start
         public HumanoidCharacterProfile WithSignatureData(SignatureData signatureData)
