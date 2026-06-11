@@ -739,7 +739,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     private void SendDeadChat(EntityUid source, ICommonSession player, string message, bool hideChat)
     {
         // SS220-chat-bans-begin
-        if (_banManager.IsChatBanned(player, BannableChats.OOC))
+        if (_banManager.IsChatBanned(player, BannableChats.Dead))
             return;
         // SS220-chat-bans-end
 
