@@ -56,21 +56,8 @@ public sealed class WeightlessChangingReadySkillSystem : SkillEntitySystem
         var hardsuitEquipped = _inventory.TryGetSlotEntity(experienceEntity.Value.Owner, HardSuitInventorySlot, out var outerClothingEntity)
                                && _tag.HasAnyTag(outerClothingEntity.Value, entity.Comp.HardsuitTags);
 
-        if (args.Weightless)
-        {
-            if (hardsuitEquipped)
-                return;
-
-            var predictedRandomForVomit = GetPredictedRandomOnCurTick(GetNetEntity(entity));
-            if (predictedRandomForVomit.Prob(entity.Comp.VomitChance))
-                _vomit.Vomit(experienceEntity.Value);
-
+        if (args.Weightless || entity.Comp.MagbootsActive)
             return;
-        }
-        else if (entity.Comp.MagbootsActive)
-        {
-            return;
-        }
 
         var chance = hardsuitEquipped ? entity.Comp.HardsuitFallChance : entity.Comp.WithoutHardsuitFallChance;
         var predictedRandom = GetPredictedRandomOnCurTick(GetNetEntity(entity));
