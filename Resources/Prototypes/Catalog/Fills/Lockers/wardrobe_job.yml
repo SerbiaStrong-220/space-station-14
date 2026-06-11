@@ -30,6 +30,7 @@
       - id: ClothingUniformJumpskirtPrisoner
       - id: ClothingShoesColorOrange # SS220 black to orange prison shoes
       # - id: ClothingShoesColorBlack # SS220 orange-prisoners-shoes
+      - id: ClothingHeadsetPrisoner # SS220 PrisonerHeadset
     - id: ClothingMaskMuzzle
     - !type:GroupSelector
       prob: 0.15
