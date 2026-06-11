@@ -223,12 +223,10 @@
   name: clown wig and mask
   description: A true prankster's facial attire. A clown is incomplete without his wig and mask.
   components:
-#SS220 resprite masks START
   - type: Sprite
-    sprite: SS220/Clothing/Mask/clown.rsi
+    sprite: SS220/Clothing/Mask/clown.rsi #SS220 resprite masks
   - type: Clothing
-    sprite: SS220/Clothing/Mask/clown.rsi
-#SS220 resprite masks END
+    sprite: SS220/Clothing/Mask/clown.rsi #SS220 resprite masks
   - type: BreathMask
   - type: IdentityBlocker
   - type: Tag
@@ -294,8 +292,8 @@
   name: security clown wig and mask
   description: A debatably oxymoronic but protective mask and wig.
   components:
-#SS220 resprite masks START
   - type: Sprite
+#SS220 resprite masks START
     sprite: SS220/Clothing/Mask/clown_security.rsi
     layers:
     - state: icon
@@ -303,9 +301,9 @@
     - state: icon-opened
       map: [ "foldedLayer" ]
       visible: false
-  - type: Clothing
-    sprite: SS220/Clothing/Mask/clown_security.rsi
 #SS220 resprite masks END
+  - type: Clothing
+    sprite: SS220/Clothing/Mask/clown_security.rsi #SS220 resprite masks
   - type: Armor
     modifiers:
       coefficients:
@@ -344,12 +342,10 @@
   name: mime mask
   description: The traditional mime's mask. It has an eerie facial posture.
   components:
-#SS220 resprite masks START
   - type: Sprite
-    sprite: SS220/Clothing/Mask/mime.rsi
+    sprite: SS220/Clothing/Mask/mime.rsi #SS220 resprite masks
   - type: Clothing
-    sprite: SS220/Clothing/Mask/mime.rsi
-#SS220 resprite masks END
+    sprite: SS220/Clothing/Mask/mime.rsi #SS220 resprite masks
   - type: BreathMask
   - type: IdentityBlocker
   - type: Tag
@@ -708,8 +704,8 @@
   name: blushing clown mask
   description: A mask for a blushing clown.
   components:
-#SS220 resprite masks START
   - type: Sprite
+#SS220 resprite masks START
     sprite: SS220/Clothing/Mask/blushingclown.rsi
     layers:
     - state: icon
@@ -717,9 +713,9 @@
     - state: icon-opened
       map: [ "foldedLayer" ]
       visible: false
-  - type: Clothing
-    sprite: SS220/Clothing/Mask/blushingclown.rsi
 #SS220 resprite masks END
+  - type: Clothing
+    sprite: SS220/Clothing/Mask/blushingclown.rsi #SS220 resprite masks
 
 - type: entity
   parent: ClothingMaskMime
@@ -727,12 +723,10 @@
   name: blushing mime mask
   description: Those ruddy cheeks just want to be rubbed.
   components:
-#SS220 resprite masks START
   - type: Sprite
-    sprite: SS220/Clothing/Mask/blushingmime.rsi
+    sprite: SS220/Clothing/Mask/blushingmime.rsi #SS220 resprite masks
   - type: Clothing
-    sprite: SS220/Clothing/Mask/blushingmime.rsi
-#SS220 resprite masks END
+    sprite: SS220/Clothing/Mask/blushingmime.rsi #SS220 resprite masks
 
 - type: entity
   parent: ClothingMaskMime
@@ -740,12 +734,10 @@
   name: sad mime mask
   description: Many people think this is what a real mime mask looks like.
   components:
-#SS220 resprite masks START
   - type: Sprite
-    sprite: SS220/Clothing/Mask/sadmime.rsi
+    sprite: SS220/Clothing/Mask/sadmime.rsi #SS220 resprite masks
   - type: Clothing
-    sprite: SS220/Clothing/Mask/sadmime.rsi
-#SS220 resprite masks END
+    sprite: SS220/Clothing/Mask/sadmime.rsi #SS220 resprite masks
 
 - type: entity
   parent: ClothingMaskMime
@@ -753,12 +745,10 @@
   name: scared mime mask
   description: Looks like it would scream if it wasn't a mask.
   components:
-#SS220 resprite masks START
   - type: Sprite
-    sprite: SS220/Clothing/Mask/scaredmime.rsi
+    sprite: SS220/Clothing/Mask/scaredmime.rsi #SS220 resprite masks
   - type: Clothing
-    sprite: SS220/Clothing/Mask/scaredmime.rsi
-#SS220 resprite masks END
+    sprite: SS220/Clothing/Mask/scaredmime.rsi #SS220 resprite masks
 
 - type: entity
   parent: [ClothingMaskMime, BaseSecurityContraband]
@@ -766,12 +756,10 @@
   name: security mime mask
   description: You have the right to remain silent.
   components:
-#SS220 resprite masks START
   - type: Sprite
-    sprite: SS220/Clothing/Mask/mime_security.rsi
+    sprite: SS220/Clothing/Mask/mime_security.rsi #SS220 resprite masks
   - type: Clothing
-    sprite: SS220/Clothing/Mask/mime_security.rsi
-#SS220 resprite masks END
+    sprite: SS220/Clothing/Mask/mime_security.rsi #SS220 resprite masks
   - type: Armor
     modifiers:
       coefficients:
