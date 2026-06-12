@@ -90,19 +90,22 @@
 - type: loadoutGroup
   id: Survival
   name: loadout-group-survival-basic
-  minLimit: 3
-  hidden: true
+  minLimit: 1 #SS220-Survival-Loadout
+  hidden: false #SS220-Survival-Loadout
   loadouts:
   - EmergencyNitrogen
+  - EmergencyNitrogenSponsor #SS220-Survival-Loadout
   - EmergencyOxygen
   - LoadoutSpeciesVoxNitrogen
   - LoadoutSpeciesIpc #SS220-add-ipc
+  - EmergencyOxygenSponsor #SS220-Survival-Loadout
+ # - LoadoutSpeciesVoxNitrogen #SS220-Survival-Loadout
 
 # nitrogen or oxygen tank, depending on what your species needs
 - type: loadoutGroup
   id: GroupEVATank
   name: loadout-group-EVA-tank
-  hidden: true
+  hidden: false #SS220-Survival-Loadout
   loadouts:
   - LoadoutSpeciesEVANitrogen
   - LoadoutSpeciesEVAOxygen
@@ -118,7 +121,7 @@
 - type: loadoutGroup
   id: GroupPocketTankDouble
   name: loadout-group-pocket-tank-double
-  hidden: true
+  hidden: false #SS220-Survival-Loadout
   loadouts:
   - LoadoutSpeciesPocketDoubleNitrogen
   - LoadoutSpeciesPocketDoubleOxygen
@@ -716,13 +719,16 @@
 - type: loadoutGroup
   id: SurvivalClown
   name: loadout-group-survival-clown
-  minLimit: 2
-  hidden: true
+  minLimit: 1 #SS220-Survival-Loadout
+  hidden: false #SS220-Survival-Loadout
   loadouts:
   - EmergencyNitrogenClown
+  - EmergencyNitrogenClownSponsor #SS220-Survival-Loadout
   - EmergencyOxygenClown
   - LoadoutSpeciesVoxNitrogen
   - LoadoutSpeciesClownIpc #SS220-add-ipc
+  - EmergencyOxygenClownSponsor #SS220-Survival-Loadout
+ # - LoadoutSpeciesVoxNitrogen #SS220-Survival-Loadout
 
 - type: loadoutGroup
   id: ClownJobTrinkets
@@ -783,14 +789,18 @@
 - type: loadoutGroup
   id: SurvivalMime
   name: loadout-group-survival-mime
-  minLimit: 2
-  hidden: true
+  minLimit: 1 #SS220-Survival-Loadout
+  hidden: false #SS220-Survival-Loadout
   loadouts:
   - EmergencyNitrogenMime
+  - EmergencyNitrogenMimeSponsor #SS220-Survival-Loadout
   - EmergencyOxygenMime
   - EmergencySpeciesMothMime
   - LoadoutSpeciesVoxNitrogen
   - LoadoutSpeciesMimeIpc #SS220-add-ipc
+  - EmergencyOxygenMimeSponsor #SS220-Survival-Loadout
+ # - EmergencySpeciesMothMime #SS220-Survival-Loadout
+ # - LoadoutSpeciesVoxNitrogen #SS220-Survival-Loadout
 
 #- type: loadoutGroup
 #  id: MimeJobTrinkets
@@ -1181,13 +1191,16 @@
 - type: loadoutGroup
   id: SurvivalExtended
   name: loadout-group-survival-extended
-  minLimit: 2
-  hidden: true
+  minLimit: 1 #SS220-Survival-Loadout
+  hidden: false #SS220-Survival-Loadout
   loadouts:
   - EmergencyNitrogenExtended
+  - EmergencyNitrogenExtendedSponsor #SS220-Survival-Loadout
   - EmergencyOxygenExtended
   - LoadoutSpeciesVoxNitrogen
   - LoadoutSpeciesEngineerIpc #SS220-add-ipc
+  - EmergencyOxygenExtendedSponsor #SS220-Survival-Loadout
+ # - LoadoutSpeciesVoxNitrogen #SS220-Survival-Loadout
 
 # Science
 - type: loadoutGroup
@@ -1593,10 +1606,11 @@
 - type: loadoutGroup
   id: SurvivalSecurity
   name: loadout-group-survival-security
-  minLimit: 2
-  hidden: true
+  minLimit: 1 #SS220-Survival-Loadout
+  hidden: false #SS220-Survival-Loadout
   loadouts:
   - EmergencyNitrogenSecurity
+  - EmergencyNitrogenSecuritySponsor #SS220-Survival-Loadout
   - EmergencyOxygenSecurity
   - LoadoutSpeciesVoxNitrogen
   - LoadoutSpeciesSecurityIpc #SS220-add-ipc
@@ -1617,6 +1631,8 @@
   loadouts:
   - LatexGloves
   - NitrileGloves
+  - EmergencyOxygenSecuritySponsor #SS220-Survival-Loadout
+ # - LoadoutSpeciesVoxNitrogen #SS220-Survival-Loadout
 
 # Wildcards
 - type: loadoutGroup
