@@ -118,6 +118,7 @@
     - Snout
     changeHairSound: null
     modifyTime: 0
+    showPopup: false
   #- type: ActivatableUI
   #  key: enum.MagicMirrorUiKey.Key
   #  singleUser: true
