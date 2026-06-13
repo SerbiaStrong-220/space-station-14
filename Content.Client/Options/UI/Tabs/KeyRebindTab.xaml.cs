@@ -46,12 +46,6 @@ namespace Content.Client.Options.UI.Tabs
         }
         // SS220-better-smart-equip-end
 
-        private void HandleToggleUSQWERTYCheckbox(BaseButton.ButtonToggledEventArgs args)
-        {
-            _cfg.SetCVar(CVars.DisplayUSQWERTYHotkeys, args.Pressed);
-            _cfg.SaveToFile();
-        }
-
         private void InitToggleWalk()
         {
             if (_cfg.GetCVar(CCVars.ToggleWalk))
@@ -140,8 +134,7 @@ namespace Content.Client.Options.UI.Tabs
                 KeybindsContainer.AddChild(new Label
                 {
                     Text = Loc.GetString(headerContents),
-                    FontColorOverride = StyleNano.NanoGold,
-                    StyleClasses = { StyleNano.StyleClassLabelKeyText }
+                    StyleClasses = { StyleClass.LabelKeyText }
                 });
             }
 
@@ -161,8 +154,23 @@ namespace Content.Client.Options.UI.Tabs
                 KeybindsContainer.AddChild(newCheckBox);
             }
 
+            void AddToggleCvarCheckBox(string checkBoxName, CVarDef<bool> cvar)
+            {
+                CheckBox newCheckBox = new CheckBox() { Text = Loc.GetString(checkBoxName) };
+                newCheckBox.Pressed = _cfg.GetCVar(cvar);
+                newCheckBox.OnToggled += (e) =>
+                {
+                    _cfg.SetCVar(cvar, e.Pressed);
+                    _cfg.SaveToFile();
+                };
+
+                KeybindsContainer.AddChild(newCheckBox);
+            }
+
             AddHeader("ui-options-header-general");
-            AddCheckBox("ui-options-hotkey-keymap", _cfg.GetCVar(CVars.DisplayUSQWERTYHotkeys), HandleToggleUSQWERTYCheckbox);
+            AddToggleCvarCheckBox("ui-options-hotkey-keymap", CVars.DisplayUSQWERTYHotkeys);
+            AddToggleCvarCheckBox("ui-options-hold-to-attack-melee", CCVars.ControlHoldToAttackMelee);
+            AddToggleCvarCheckBox("ui-options-hold-to-attack-ranged", CCVars.ControlHoldToAttackRanged);
 
             AddHeader("ui-options-header-movement");
             AddButton(EngineKeyFunctions.MoveUp);
@@ -187,7 +195,6 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(EngineKeyFunctions.UseSecondary);
             AddButton(ContentKeyFunctions.UseItemInHand);
             AddButton(ContentKeyFunctions.AltUseItemInHand);
-            AddButton(ContentKeyFunctions.UseGunInHand);//FCB realistic weapons
             AddButton(ContentKeyFunctions.ActivateItemInWorld);
             AddButton(ContentKeyFunctions.AltActivateItemInWorld);
             AddButton(ContentKeyFunctions.Drop);
@@ -234,6 +241,7 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(ContentKeyFunctions.CycleChatChannelForward);
             AddButton(ContentKeyFunctions.CycleChatChannelBackward);
             AddButton(ContentKeyFunctions.OpenCharacterMenu);
+            AddButton(KeyFunctions220.OpenExperienceViewerMenu); // SS220-experience-update
             AddButton(ContentKeyFunctions.OpenCraftingMenu);
             AddButton(ContentKeyFunctions.OpenGuidebook);
             AddButton(ContentKeyFunctions.OpenInventoryMenu);
@@ -285,6 +293,8 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(EngineKeyFunctions.ShowDebugMonitors);
             AddButton(EngineKeyFunctions.HideUI);
             AddButton(ContentKeyFunctions.InspectEntity);
+            AddButton(ContentKeyFunctions.InspectServerComponent);
+            AddButton(ContentKeyFunctions.InspectClientComponent);
 
             AddHeader("ui-options-header-text-cursor");
             AddButton(EngineKeyFunctions.TextCursorLeft);
@@ -544,9 +554,9 @@ namespace Content.Client.Options.UI.Tabs
                     HorizontalAlignment = HAlignment.Left
                 };
 
-                BindButton1 = new BindButton(parent, this, StyleBase.ButtonOpenRight);
-                BindButton2 = new BindButton(parent, this, StyleBase.ButtonOpenLeft);
-                ResetButton = new Button { Text = Loc.GetString("ui-options-bind-reset"), StyleClasses = { StyleBase.ButtonCaution } };
+                BindButton1 = new BindButton(parent, this, StyleClass.ButtonOpenRight);
+                BindButton2 = new BindButton(parent, this, StyleClass.ButtonOpenLeft);
+                ResetButton = new Button { Text = Loc.GetString("ui-options-bind-reset"), StyleClasses = { StyleClass.Negative } };
 
                 var hBox = new BoxContainer
                 {

@@ -79,16 +79,18 @@
   - type: Clothing
     sprite: Clothing/Head/Helmets/swat.rsi
   - type: Armor #This is intentionally not spaceproof, when the time comes to port the values from SS13 this should be buffed from what it was.
+  #SS220 new armor begin
     modifiers:
       coefficients:
-        Blunt: 0.80
-        Slash: 0.80
-        Piercing: 0.80
-        Heat: 0.80
-        Radiation: 0.80
+        Blunt: 0.85
+        Slash: 0.85
+        Piercing: 0.85
+        Heat: 0.9
+        Radiation: 0.9
         Caustic: 0.95
   - type: ExplosionResistance
-    damageCoefficient: 0.75
+    damageCoefficient: 0.9
+  #SS220 new armor end
   - type: HideLayerClothing
     layers:
       Hair: HEAD
@@ -262,7 +264,6 @@
     maxCharge: 600
     startingCharge: 600
   - type: BatterySelfRecharger
-    autoRecharge: true
     autoRechargeRate: 2
   - type: NeedleProtection
     # SS220 Ninja Resprite End
@@ -278,6 +279,8 @@
     sprite: Clothing/Head/Helmets/templar.rsi
   - type: Clothing
     sprite: Clothing/Head/Helmets/templar.rsi
+  - type: Item
+    storedRotation: 0
   - type: IngestionBlocker
   - type: IdentityBlocker
   - type: HideLayerClothing
@@ -370,7 +373,6 @@
     tags:
     - WhitelistChameleon
     - FireHelmet
-    - CorgiWearable
   - type: HideLayerClothing
     layers:
       Hair: HEAD
@@ -590,7 +592,7 @@
   - type: PointLight
     enabled: false
     radius: 1.4
-    energy: 1.4
+    energy: 2.5
     color: red
     netsync: false
     mask: /Textures/Effects/LightMasks/double_cone.png

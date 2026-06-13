@@ -7,7 +7,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
-using Content.Shared.FCB.Mech.Systems;
+using Content.Shared.SS220.Mech.Systems;
 using Robust.Shared.Containers;
 
 namespace Content.Shared.Clothing;

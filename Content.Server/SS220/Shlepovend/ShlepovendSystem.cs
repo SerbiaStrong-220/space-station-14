@@ -76,7 +76,7 @@ public sealed class ShlepovendSystem : SharedShlepovendSystem
 
     public void OnToggleInterface(Entity<ShlepovendComponent> entity, ref AfterActivatableUIOpenEvent args)
     {
-        if (TryComp<ActorComponent>(args.Actor, out var actor) && actor.PlayerSession is { } session)
+        if (TryComp<ActorComponent>(args.User, out var actor) && actor.PlayerSession is { } session)
             SendTokenCount(session);
     }
 

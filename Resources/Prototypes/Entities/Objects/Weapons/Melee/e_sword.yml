@@ -37,8 +37,7 @@
         variation: 0.125
     activatedDamage:
       types:
-        Slash: 15
-        Heat: 15
+        Heat: 30 #SS220 shield rework
         Structural: 20
   - type: MeleeWeapon
     wideAnimationRotation: -135
@@ -68,24 +67,18 @@
         shader: unshaded
   - type: IgnitionSource
     temperature: 700
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-EnergySword-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: corvax-hidden-desc-EnergySword-security
-      jobRequired:
-        - HeadOfSecurity
-        - Detective
-        - SecurityCadet
-        - SecurityOfficer
-        - Warden
-    - label: corvax-hidden-desc-EnergySword-cargo
-      jobRequired:
-        - SalvageSpecialist
-# Corvax-HiddenDesc-End
+      NinjaKnowledge: [ corvax-hidden-desc-EnergySword-syndicate ]
+      SecurityKnowledge: [ corvax-hidden-desc-EnergySword-security ]
+      CargoKnowledge: [ corvax-hidden-desc-EnergySword-cargo ]
+    nameEntries:
+    - [NinjaKnowledge, null]
+    - [SecurityKnowledge, null]
+    - [CargoKnowledge, null]
+    hiddenName: ent-EnergySword
+# SS220-hidden-desc-end
 
 - type: entity
   name: energy sword
@@ -109,11 +102,14 @@
 
 - type: entity
   name: energy dagger
-  parent: [BaseMeleeWeaponEnergy]
+  parent: BaseItem #SS220 shield rework
   id: EnergyDaggerLoud
   description: A not as loud and dangerous dagger with a beam made of pure, concentrated plasma. This one is completely undisguised.
   components:
+  #SS220 shield rework begin
+  - type: EnergySword
   - type: ItemToggle
+<<<<<<< HEAD
     soundActivate:
       path: /Audio/Weapons/ebladeon.ogg
       params:
@@ -138,6 +134,33 @@
       path: /Audio/Weapons/ebladehum.ogg
       params:
         volume: -3
+=======
+  - type: ItemToggleHot
+  - type: ItemToggleSize
+    activatedSize: Huge
+  - type: ItemTogglePointLight
+    toggleableVisualsColorModulatesLights: true
+  - type: UseDelay
+    delay: 1.0
+  - type: PointLight
+    enabled: false
+    radius: 2
+    energy: 2
+    color: white
+    netsync: false
+  - type: Appearance
+  - type: ToggleableVisuals # Add support for multiple layers
+    spriteLayer: blade
+    inhandVisuals:
+      left:
+      - state: inhand-left-blade
+        shader: unshaded
+      right:
+      - state: inhand-right-blade
+        shader: unshaded
+  - type: IgnitionSource
+    temperature: 700
+>>>>>>> master
   - type: ComponentToggler
     components:
     - type: Sharp
@@ -145,6 +168,10 @@
       malus: 0.4
     - type: Execution
       doAfterDuration: 4.0
+  - type: ItemToggleMeleeWeapon
+    activatedDamage:
+        types:
+            Heat: 20 #SS220 shield rework
   - type: Sprite
     sprite: Objects/Weapons/Melee/e_dagger_loud.rsi
     layers:
@@ -161,23 +188,21 @@
     damage:
       types:
         Blunt: 1
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
   - type: Item
     size: Tiny
     sprite: Objects/Weapons/Melee/e_dagger_loud.rsi
-  - type: PointLight
-    enabled: false
-    radius: 1.5
-    energy: 1.5
-    color: white
-    netsync: false
+  #SS220 shield rework end
 
 - type: entity
   name: pen
-  parent: [BaseMeleeWeaponEnergy, SelectableLock]
+  parent: [EnergyDaggerLoud, SelectableLock] #SS220 shield rework
   id: EnergyDagger
   suffix: E-Dagger
   description: 'A dark ink pen.'
   components:
+<<<<<<< HEAD
   - type: ItemToggle
     soundActivate:
       path: /Audio/Weapons/ebladeon.ogg
@@ -211,6 +236,8 @@
       doAfterDuration: 4.0
     - type: Contraband
       severity: Syndicate
+=======
+>>>>>>> master
   - type: Sprite
     sprite: Objects/Weapons/Melee/e_dagger.rsi
     layers:
@@ -226,7 +253,7 @@
   - type: PointLight
     enabled: false
     radius: 1.5
-    energy: 1.5
+    energy: 2.7
     color: white
     netsync: false
   - type: MeleeWeapon
@@ -236,6 +263,8 @@
     damage:
       types:
         Blunt: 1
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
   - type: EmitSoundOnUse
     sound:
       path: /Audio/Items/pen_click.ogg
@@ -249,20 +278,16 @@
   - type: Tag
     tags:
     - Write
-# Corvax-HiddenDesc-Start
+  # SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-EnergyDagger-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: corvax-hidden-desc-EnergyDagger-research
-      jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
-# Corvax-HiddenDesc-End
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-EnergyDagger-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-EnergyDagger-research ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ScienceKnowledge, null]
+    hiddenName: ent-EnergyDagger
+  # SS220-hidden-desc-end
 
 - type: entity
   parent: [BaseItem]
@@ -307,21 +332,16 @@
         map: [ "blade" ]
   - type: Item
     sprite: Objects/Weapons/Melee/e_cutlass.rsi
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
-    #- label: corvax-hidden-desc-EnergyCutlass-pirate #У нас нету в игре PirateRole, грусть
-    - label: corvax-hidden-desc-EnergyCutlass-security
-      jobRequired:
-        - HeadOfSecurity
-        - Detective
-        - SecurityCadet
-        - SecurityOfficer
-        - Warden
-    - label: corvax-hidden-desc-EnergyCutlass-cargo
-      jobRequired:
-        - SalvageSpecialist
-# Corvax-HiddenDesc-End
+      SecurityKnowledge: [ corvax-hidden-desc-EnergyCutlass-security ]
+      CargoKnowledge: [ corvax-hidden-desc-EnergyCutlass-cargo ]
+    nameEntries:
+    - [SecurityKnowledge, null]
+    - [CargoKnowledge, null]
+    hiddenName: ent-EnergyCutlass
+# SS220-hidden-desc-end
 
 - type: entity
   name: double-bladed energy sword
@@ -329,17 +349,27 @@
   id: EnergySwordDouble
   description: Syndicate Command Interns thought that having one blade on the energy sword was not enough. This can be stored in pockets.
   components:
+<<<<<<< HEAD
   #FCB shield rework begin
+=======
+  #SS220 shield rework begin
+>>>>>>> master
   - type: AltBlocking
     rangeBlockProb: 0
     meleeBlockProb: 0
     activeRangeBlockProb: 0.85
     activeMeleeBlockProb: 0.85
   - type: ToggleBlockingChance
+<<<<<<< HEAD
     toggledRangeBlockProb: 0.4
     toggledMeleeBlockProb: 0.35
   - type: ChangeAppearanceOnActiveBlocking
     requiresToggle: true
+=======
+    toggledRangeBlockProb: 0.3
+    toggledMeleeBlockProb: 0.35
+  - type: ChangeAppearanceOnActiveBlocking
+>>>>>>> master
     spriteLayer: shield
     inhandVisuals:
       left:
@@ -348,23 +378,37 @@
       right:
       - state: inhand-right-shield
         shader: unshaded
+<<<<<<< HEAD
   - type: ArmorBlock
     tresholddict:
+=======
+  - type: Damageable
+    damageContainer: Invulnerable
+  - type: ArmorBlock
+  - type: AltArmor
+    tresholdDict:
+>>>>>>> master
       Piercing: 48
       Blunt: 30
       Heat: 35
       Slash: 30
       Radiation: 1000
       Poison: 1000
+<<<<<<< HEAD
       Airloss: 1000
       Caustic: 1000
     durabilitytresholddict:
+=======
+      Caustic: 1000
+    durabilityTresholdDict:
+>>>>>>> master
       Piercing: 10000
       Blunt: 10000
       Heat: 10000
       Slash: 10000
       Radiation: 10000
       Poison: 1000
+<<<<<<< HEAD
       Airloss: 1000
       Caustic: 1000
   - type: InstastunResistOnActiveBlocking
@@ -372,6 +416,16 @@
       - Creampie
       - Projectile
   #FCB shield rework end
+=======
+      Caustic: 1000
+  - type: InstastunResist
+    resistedStunTypes:
+      - Creampie
+      - Projectile
+    active: false
+  - type: InstastunResistOnActiveBlocking
+  #SS220 shield rework end
+>>>>>>> master
   - type: ItemToggle
     onUse: false # wielding events control it instead
     onActivate: false # prevents the weapon from being able to be turned on when it is on the ground
@@ -391,9 +445,19 @@
         variation: 0.250
     activatedDamage:
         types:
+<<<<<<< HEAD
           Slash: 12
           Heat: 12
           Structural: 15
+=======
+            Heat: 24 #SS220 shield rework
+            Structural: 15
+  - type: ItemToggleActiveSound
+    activeSound:
+      path: /Audio/Weapons/ebladehum.ogg
+      params:
+        volume: 3
+>>>>>>> master
   - type: ComponentToggler
     components:
     - type: Sharp
@@ -472,9 +536,6 @@
   - type: Item
     size: Small
     sprite: Objects/Weapons/Melee/hypereutactic_blade_inhands.rsi
-  - type: Reflect
-    reflectProb: 1.0
-    spread: 75
 
 # Borgs
 
@@ -485,13 +546,22 @@
   description: A very loud & dangerous sword with a beam made of pure, concentrated plasma. Specially designed for syndicate cyborgs.
 
 - type: entity
+<<<<<<< HEAD
   parent: EnergySword #FCB shield rework
+=======
+  parent: EnergySword #SS220 shield rework
+>>>>>>> master
   id: CyborgEnergySwordDouble # why is this invalid if ID is BorgEnergySwordDouble
   suffix: One-Handed, For Borgs
   description: Syndicate Command Interns thought that having one blade on the energy sword was not enough. Specially designed for syndicate cyborgs.
   components: # could add energy-draining like the L6C
+<<<<<<< HEAD
   #Inheriting from usual double esword somehow and somewhy throwed the exeption(No, this is not related to shield rework in any way)
   #FCB shield rework begin
+=======
+   #Inheriting from usual double esword somehow and somewhy throwed the exeption(No, this is not related to shield rework in any way)
+  #SS220 shield rework begin
+>>>>>>> master
   - type: MeleeWeapon
     wideAnimationRotation: -135
     attackRate: 1.5
@@ -508,14 +578,39 @@
         visible: false
         shader: unshaded
         map: [ "blade" ]
+<<<<<<< HEAD
+=======
+  - type: ItemToggleMeleeWeapon
+    activatedSoundOnSwing:
+      path: /Audio/Weapons/eblademiss.ogg
+      params:
+        volume: 3
+        variation: 0.250
+    activatedDamage:
+        types:
+            Heat: 24
+            Structural: 15
+  - type: InstastunResist
+    resistedStunTypes:
+      - Creampie
+      - Projectile
+    active: false
+  - type: InstastunResistOnActiveBlocking
+>>>>>>> master
   - type: AltBlocking
     rangeBlockProb: 0
     meleeBlockProb: 0
     activeRangeBlockProb: 0.60 #As we have no indication of the double esword being turned on or off chance frameworks were shrinked
     activeMeleeBlockProb: 0.65
+<<<<<<< HEAD
   - type: ItemToggleBlockingDamage
     toggledRangeBlockProb: 0.60
     toggledMeleeBlockProb: 0.45
+=======
+  - type: ToggleBlockingChance
+    toggledRangeBlockProb: 0.50
+    toggledMeleeBlockProb: 0.35
+>>>>>>> master
   - type: ChangeAppearanceOnActiveBlocking
     spriteLayer: shield
     inhandVisuals:
@@ -525,14 +620,23 @@
       right:
       - state: inhand-right-shield
         shader: unshaded
+<<<<<<< HEAD
   - type: ArmorBlock
     tresholddict:
+=======
+  - type: Damageable
+    damageContainer: Invulnerable
+  - type: ArmorBlock
+  - type: AltArmor
+    tresholdDict:
+>>>>>>> master
       Piercing: 40
       Blunt: 30
       Heat: 35
       Slash: 30
       Radiation: 1000
       Poison: 1000
+<<<<<<< HEAD
       Airloss: 1000
       Caustic: 1000
     durabilitytresholddict:
@@ -546,6 +650,14 @@
       Caustic: 1000
   #FCB shield rework end
 
+=======
+      Caustic: 1000
+      Asphyxiation: 1000
+      Bloodloss: 1000
+      Shock: 30
+      Cold: 20
+  #SS220 shield rework end
+>>>>>>> master
 
 - type: entity
   parent: [ EnergyDaggerLoud, BaseXenoborgContraband ]

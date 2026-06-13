@@ -1,12 +1,10 @@
+using System.Numerics;
 using Content.Client.Movement.Components;
 using Content.Client.Viewport;
 using Content.Shared.Camera;
-using Content.Shared.CombatMode;
-using Content.Shared.FCB.ComplexRepairable;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Shared.Map;
-using System.Numerics;
 
 namespace Content.Client.Movement.Systems;
 
@@ -28,12 +26,6 @@ public sealed partial class EyeCursorOffsetSystem : EntitySystem
 
     private void OnGetEyeOffsetEvent(EntityUid uid, EyeCursorOffsetComponent component, ref GetEyeOffsetEvent args)
     {
-        if (TryComp<EyeOffsetInCombatModeComponent>(uid, out var combatOffsetComp))
-        {
-            if (!TryComp<CombatModeComponent>(uid, out var combatModeComp) || !combatModeComp.IsInCombatMode)
-                return;
-        }
-
         var offset = OffsetAfterMouse(uid, component);
         if (offset == null)
             return;
@@ -64,10 +56,6 @@ public sealed partial class EyeCursorOffsetSystem : EntitySystem
         if (component == null)
             component = EnsureComp<EyeCursorOffsetComponent>(uid);
 
-        var MaxOffset = component.MaxOffset;
-
-        var PvsIncrease = component.PvsIncrease;
-
         // Doesn't move the offset if the mouse has left the game window!
         if (_inputManager.MouseScreenPosition.Window != WindowId.Invalid)
         {
@@ -76,10 +64,10 @@ public sealed partial class EyeCursorOffsetSystem : EntitySystem
             var mouseActualRelativePos = Vector2.Transform(mouseNormalizedPos, System.Numerics.Quaternion.CreateFromAxisAngle(-System.Numerics.Vector3.UnitZ, (float)(eyeRotation.Opposite().Theta))); // I don't know, it just works.
 
             // Caps the offset into a circle around the player.
-            mouseActualRelativePos *= MaxOffset;
-            if (mouseActualRelativePos.Length() > MaxOffset)
+            mouseActualRelativePos *= component.MaxOffset;
+            if (mouseActualRelativePos.Length() > component.MaxOffset)
             {
-                mouseActualRelativePos = mouseActualRelativePos.Normalized() * MaxOffset;
+                mouseActualRelativePos = mouseActualRelativePos.Normalized() * component.MaxOffset;
             }
 
             component.TargetPosition = mouseActualRelativePos;

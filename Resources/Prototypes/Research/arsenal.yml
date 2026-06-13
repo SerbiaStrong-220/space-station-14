@@ -102,6 +102,7 @@
   tier: 2 # SS220 shield rework
   cost: 8000
   recipeUnlocks:
+  - RiotBulletShield # SS220 shield rework
   - Truncheon
   - TelescopicShield
   - RiotBulletShield # SS220 shield rework
@@ -269,6 +270,7 @@
   recipeUnlocks:
   - GrenadeEMP
   - PowerCageHigh
+  - ShuttleGunMLGSWCircuitboard #SS220-MLGSW-gun-research
 #  - ShuttleGunDusterCircuitboard #SS220-Duster-Resprite
   technologyPrerequisites:
   - BasicShuttleArmament

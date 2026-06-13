@@ -1,5 +1,5 @@
 using Content.Shared.Examine;
-using Content.Shared.FCB.Weapons.Ranged.Systems;
+using Content.Shared.SS220.Weapons.Ranged.Systems;
 using Content.Shared.Hands.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Input;

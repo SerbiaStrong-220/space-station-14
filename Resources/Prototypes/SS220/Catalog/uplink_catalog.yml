@@ -316,15 +316,36 @@
     Telecrystal: 3 #ss220-uplink-discounts
   categories:
   - UplinkWearables
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 4
+      Telecrystal: 3
     MediumDynamic:
       Telecrystal: 3
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 3
 #ss220 dynamic-price end
+
+- type: listing
+  id: ClothingHeadHelmetSwatNukeops
+  name: uplink-helmet-swat-syndicate-name
+  description: uplink-helmet-swat-syndicate-desc
+  icon: {sprite: Clothing/Head/Helmets/swat_syndicate.rsi, state: icon}
+  productEntity: ClothingHeadHelmetSwatSyndicate
+  cost:
+    Telecrystal: 2 #ss220-uplink-discounts
+  categories:
+  - UplinkWearables
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
 
 - type: listing
   id: UplinkBorgModuleFlamingAxe
@@ -379,6 +400,43 @@
   categories:
   - UplinkWearables
 
+- type: listing
+  id: ClothingClothingAssaultSuit
+  name: uplink-assault-suit-name
+  description: uplink-assault-suit-desc
+  icon: {sprite: /Textures/Clothing/OuterClothing/Vests/webvest.rsi, state: icon}
+  productEntity: ClothingBackpackDuffelSyndicateFilledAssaultSuit
+  cost:
+    Telecrystal: 8
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 16
+    MediumDynamic:
+      Telecrystal: 14
+    HardDynamic:
+      Telecrystal: 11
+  categories:
+  - UplinkWearables
+
+- type: listing
+  id: ClothingClothingChameleonVest
+  name: uplink-chameleon-vest-name
+  description: uplink-chameleon-vest-desc
+  icon: {sprite: /Textures/Clothing/OuterClothing/Vests/vest.rsi, state: icon}
+  productEntity: ClothingOuterVestWebChameleon
+  cost:
+    Telecrystal: 8
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 8
+    MediumDynamic:
+      Telecrystal: 10
+    HardDynamic:
+      Telecrystal: 12
+  categories:
+  - UplinkWearables
+
+
 #SS220 SpicyUPD begin
 - type: listing
   id: UplinkSpicyPizza
@@ -399,15 +457,26 @@
     - Chef
 #SS220 SpicyUPD end
 
-#- type: listing
-#  id: UplinkCQC
-#  name: ent-cqc-name
-#  description: ent-cqc-desc
-#  productEntity: cqc_lethal
-#  cost:
-#    Telecrystal: 4
-#  categories:
-#  - UplinkWeaponry
+- type: listing
+  id: UplinkCQCManual
+  name: uplink-cqc-manual-name
+  description: uplink-cqc-manual-desc
+  icon: {sprite: /Textures/SS220/Objects/Misc/cqc_manual.rsi, state: icon}
+  productEntity: CQCManual
+  discountCategory: rareDiscounts
+  discountDownTo:
+    Telecrystal: 6
+  cost:
+    Telecrystal: 10
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 8
+    MediumDynamic:
+      Telecrystal: 10
+    HardDynamic:
+      Telecrystal: 12
+  categories:
+  - UplinkWeaponry
 
 - type: listing
   id: UplinkBoxFakeOps
@@ -582,3 +651,82 @@
     Telecrystal: 1
   categories:
   - UplinkDeception
+
+- type: listing
+  id: UplinkRevolverPython
+  name: uplink-revolver-python-name
+  description: uplink-revolver-python-desc
+  productEntity: WeaponRevolverPythonAP
+  discountCategory: rareDiscounts
+  discountDownTo:
+    Telecrystal: 2
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkWeaponry
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 6
+    MediumDynamic:
+      Telecrystal: 3
+    HardDynamic:
+      Telecrystal: 3
+
+- type: listing
+  id: UplinkEmpKit
+  name: uplink-emp-kit-name
+  description: uplink-emp-kit-desc
+  productEntity: ElectricalDisruptionKit
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 4
+  cost:
+    Telecrystal: 6
+  categories:
+    - UplinkExplosives
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 6
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 3
+
+  # For the Python
+- type: listing
+  id: UplinkSpeedLoaderMagnumAP
+  name: uplink-speedloader-magnum-name
+  description: uplink-speedloader-magnu-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/SpeedLoaders/Magnum/magnum_speed_loader.rsi, state: icon }
+  productEntity: SpeedLoaderMagnumAP
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 4
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 2
+
+- type: listing
+  id: UplinkUltrabrightLantern
+  name: uplink-ultrabright-lantern-name
+  description: uplink-ultrabright-lantern-desc
+  productEntity: LanternFlash
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 1
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkDeception
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1

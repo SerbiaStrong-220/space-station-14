@@ -9,6 +9,7 @@ namespace Content.Shared.Input
         public static readonly BoundKeyFunction UseItemInHand = "ActivateItemInHand";
         public static readonly BoundKeyFunction UseGunInHand = "ActivateGunInHand"; //FCB realistic weapons
         public static readonly BoundKeyFunction AltUseItemInHand = "AltActivateItemInHand";
+        public static readonly BoundKeyFunction ToggleActiveBlocking = "ToggleActiveBlocking";
         public static readonly BoundKeyFunction ActivateItemInWorld = "ActivateItemInWorld";
         public static readonly BoundKeyFunction AltActivateItemInWorld = "AltActivateItemInWorld";
         public static readonly BoundKeyFunction Drop = "Drop";
@@ -125,7 +126,8 @@ namespace Content.Shared.Input
         public static readonly BoundKeyFunction EditorCopyObject = "EditorCopyObject";
         public static readonly BoundKeyFunction EditorFlipObject = "EditorFlipObject";
         public static readonly BoundKeyFunction InspectEntity = "InspectEntity";
-
+        public static readonly BoundKeyFunction InspectServerComponent = "InspectServerComponent";
+        public static readonly BoundKeyFunction InspectClientComponent = "InspectClientComponent";
         public static readonly BoundKeyFunction MappingUnselect = "MappingUnselect";
         public static readonly BoundKeyFunction SaveMap = "SaveMap";
         public static readonly BoundKeyFunction MappingEnablePick = "MappingEnablePick";

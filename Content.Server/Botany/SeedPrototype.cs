@@ -1,10 +1,6 @@
-using Content.Server.Botany.Components;
-using Content.Server.Botany.Systems;
-using Content.Server.SS220.CultYogg.Fungus;
-using Content.Server.EntityEffects.Effects.Botany;
 using Content.Shared.Atmos;
 using Content.Shared.Database;
-using Content.Shared.EntityEffects;
+using Content.Shared.FixedPoint;
 using Content.Shared.Random;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
@@ -62,18 +58,18 @@ public partial struct SeedChemQuantity
     /// <summary>
     /// Minimum amount of chemical that is added to produce, regardless of the potency
     /// </summary>
-    [DataField("Min")] public int Min;
+    [DataField("Min")] public FixedPoint2 Min = FixedPoint2.Epsilon;
 
     /// <summary>
     /// Maximum amount of chemical that can be produced after taking plant potency into account.
     /// </summary>
-    [DataField("Max")] public int Max;
+    [DataField("Max")] public FixedPoint2 Max;
 
     /// <summary>
     /// When chemicals are added to produce, the potency of the seed is divided with this value. Final chemical amount is the result plus the `Min` value.
     /// Example: PotencyDivisor of 20 with seed potency of 55 results in 2.75, 55/20 = 2.75. If minimum is 1 then final result will be 3.75 of that chemical, 55/20+1 = 3.75.
     /// </summary>
-    [DataField("PotencyDivisor")] public int PotencyDivisor;
+    [DataField("PotencyDivisor")] public float PotencyDivisor;
 
     /// <summary>
     /// Inherent chemical is one that is NOT result of mutation or crossbreeding. These chemicals are removed if species mutation is executed.
@@ -233,6 +229,7 @@ public partial class SeedData
 
     [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))] public string KudzuPrototype = "WeakKudzu";
     [DataField("tomatokillerPrototype")] public EntProtoId TomatoKillerPrototype = "MobTomatoKiller"; // SS220 Tomato-Killer
+    [DataField] public bool AutoSpawnMob = false; //SS220-Mob-Spawn-Nerf
 
     [DataField] public bool TurnIntoKudzu;
     [DataField("turnIntoTomatoKiller")] public bool TurnIntoTomatoKiller; // SS220 Tomato-Killer
@@ -310,7 +307,8 @@ public partial class SeedData
             PlantIconState = PlantIconState,
             CanScream = CanScream,
             TurnIntoKudzu = TurnIntoKudzu,
-            TurnIntoTomatoKiller = TurnIntoTomatoKiller,
+            TurnIntoTomatoKiller = TurnIntoTomatoKiller, //SS220 Tomato-Killer
+            AutoSpawnMob = AutoSpawnMob, //SS220-Mob-Spawn-Nerf
             SplatPrototype = SplatPrototype,
             Mutations = new List<RandomPlantMutation>(),
 
@@ -374,7 +372,8 @@ public partial class SeedData
             PlantIconState = other.PlantIconState,
             CanScream = CanScream,
             TurnIntoKudzu = TurnIntoKudzu,
-            TurnIntoTomatoKiller = TurnIntoTomatoKiller,
+            TurnIntoTomatoKiller = TurnIntoTomatoKiller, //SS220 Tomato-Killer
+            AutoSpawnMob = other.AutoSpawnMob, //SS220-Mob-Spawn-Nerf
             SplatPrototype = other.SplatPrototype,
 
             // Newly cloned seed is unique. No need to unnecessarily clone if repeatedly modified.

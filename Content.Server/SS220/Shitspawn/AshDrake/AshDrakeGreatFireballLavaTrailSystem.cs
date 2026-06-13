@@ -16,7 +16,7 @@ public sealed class AshDrakeGreatFireballLavaTrailSystem : EntitySystem
         var query = EntityQueryEnumerator<AshDrakeGreatFireballLavaTrailComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
-            if (!TryComp<TransformComponent>(uid, out var xform))
+            if (!TryComp(uid, out TransformComponent? xform))
                 continue;
 
             comp.TimeSinceLastLava += frameTime;

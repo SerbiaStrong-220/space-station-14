@@ -1,8 +1,8 @@
 - type: entity
-  id: BulletMagnum
-  name: bullet (.45 magnum)
   parent: BaseBullet
+  id: BulletMagnum
   categories: [ HideSpawnMenu ]
+  name: bullet (.45 magnum)
   components:
   - type: Projectile
     damage:
@@ -11,10 +11,10 @@
       armourPiercing: 8 #FCB armour piercing added
 
 - type: entity
-  id: BulletMagnumPractice
-  name: bullet (.45 magnum practice)
   parent: BaseBulletPractice
+  id: BulletMagnumPractice
   categories: [ HideSpawnMenu ]
+  name: bullet (.45 magnum practice)
   components:
   - type: Projectile
     damage:
@@ -22,10 +22,10 @@
         Blunt: 1
 
 - type: entity
-  id: BulletMagnumIncendiary
   parent: BaseBulletIncendiary
-  name: bullet (.45 magnum incendiary)
+  id: BulletMagnumIncendiary
   categories: [ HideSpawnMenu ]
+  name: bullet (.45 magnum incendiary)
   components:
   - type: Projectile
     damage:
@@ -35,10 +35,10 @@
       armourPiercing: 6 #FCB armour piercing added
 
 - type: entity
-  id: BulletMagnumAP
-  name: bullet (.45 magnum armor-piercing)
   parent: BaseBulletAP
+  id: BulletMagnumAP
   categories: [ HideSpawnMenu ]
+  name: bullet (.45 magnum armor-piercing)
   components:
   - type: Projectile
     damage:
@@ -48,10 +48,10 @@
     ignoreResistances: true
 
 - type: entity
-  id: BulletMagnumUranium
-  name: bullet (.45 magnum uranium)
   parent: BaseBulletUranium
+  id: BulletMagnumUranium
   categories: [ HideSpawnMenu ]
+  name: bullet (.45 magnum uranium)
   components:
   - type: Projectile
     damage:

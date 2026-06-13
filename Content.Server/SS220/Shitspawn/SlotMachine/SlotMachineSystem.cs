@@ -113,7 +113,7 @@ public sealed class SlotMachineSystem : EntitySystem
         }
 
         var amountToTake = Math.Min(args.Amount, stack.Count);
-        if (!_stack.Use(item!.Value, amountToTake, stack))
+        if (!_stack.TryUse(item.Value, amountToTake))
             return;
 
         comp.StoredCredits += amountToTake;

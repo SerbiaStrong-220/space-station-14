@@ -1,23 +1,24 @@
 using Content.Server.Administration.Logs;
 using Content.Server.GameTicking;
 using Content.Server.Ghost;
-using Content.Server.Polymorph.Systems; //SS220-cryo-mobs-fix
-using Content.Server.SS220.MindExtension;
-using Content.Shared.Body.Systems; //SS220-cryo-mobs-fix
 using Content.Shared.Database;
-using Content.Shared.FCB.Mind.Systems;
+using Content.Shared.SS220.Mind;
 using Content.Shared.Ghost;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Players;
 using Content.Shared.Polymorph;
-using Content.Shared.SS220.Containers; //SS220-cryo-mobs-fix
 using Robust.Server.GameStates;
 using Robust.Server.Player;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared.SS220.Containers; //SS220-cryo-mobs-fix
+using Content.Server.Polymorph.Systems; //SS220-cryo-mobs-fix
+using Content.Shared.Body.Systems; //SS220-cryo-mobs-fix
+using Content.Server.SS220.MindExtension;
+using Content.Shared.Body;
 
 namespace Content.Server.Mind;
 
@@ -93,7 +94,7 @@ public sealed class MindSystem : SharedMindSystem
     private void OnPolymorphed(Entity<MindContainerComponent> ent, ref BeforePolymorpedEvent args)
     {
         if (args.PolymorphConfiguration.EffectProto == PolymorphSystem.EffectDesynchronizer)
-            _containerSystemExtensions.RemoveEntitiesFromAllContainers<MindContainerComponent>(ent.Owner, [SharedBodySystem.BodyRootContainerId]);
+            _containerSystemExtensions.RemoveEntitiesFromAllContainers<MindContainerComponent>(ent.Owner, [BodyComponent.ContainerID]);
     }
     //SS220-cryo-mobs-fix end
 
@@ -218,8 +219,8 @@ public sealed class MindSystem : SharedMindSystem
         {
             component = EnsureComp<MindContainerComponent>(entity.Value);
 
-            if (component.HasMind)
-                _ghosts.OnGhostAttempt(component.Mind.Value, false);
+            if (TryGetMind(entity.Value, out var entityMindId, out _))
+                _ghosts.OnGhostAttempt(entityMindId, false);
 
             if (TryComp<ActorComponent>(entity.Value, out var actor))
             {
@@ -256,12 +257,18 @@ public sealed class MindSystem : SharedMindSystem
 
         if (TryComp(oldEntity, out MindContainerComponent? oldContainer))
         {
-            oldContainer.Mind = null;
-            mind.OwnedEntity = null;
             Entity<MindComponent> mindEnt = (mindId, mind);
             Entity<MindContainerComponent> containerEnt = (oldEntity.Value, oldContainer);
-            RaiseLocalEvent(oldEntity.Value, new MindRemovedMessage(mindEnt, containerEnt));
-            RaiseLocalEvent(mindId, new MindGotRemovedEvent(mindEnt, containerEnt));
+
+            RaiseLocalEvent(oldEntity.Value, new BeforeMindRemovedMessage(mindEnt, containerEnt, entity));
+            RaiseLocalEvent(mindId, new BeforeMindGotRemovedEvent(mindEnt, containerEnt, entity));
+
+            oldContainer.Mind = null;
+            oldContainer.HasMind = false;
+            mind.OwnedEntity = null;
+
+            RaiseLocalEvent(oldEntity.Value, new MindRemovedMessage(mindEnt, containerEnt, entity));
+            RaiseLocalEvent(mindId, new MindGotRemovedEvent(mindEnt, containerEnt, entity));
             Dirty(oldEntity.Value, oldContainer);
         }
 
@@ -293,12 +300,13 @@ public sealed class MindSystem : SharedMindSystem
         if (entity != null)
         {
             component!.Mind = mindId;
+            component.HasMind = true;
             mind.OwnedEntity = entity;
             mind.OriginalOwnedEntity ??= GetNetEntity(mind.OwnedEntity);
             Entity<MindComponent> mindEnt = (mindId, mind);
             Entity<MindContainerComponent> containerEnt = (entity.Value, component);
-            RaiseLocalEvent(entity.Value, new MindAddedMessage(mindEnt, containerEnt));
-            RaiseLocalEvent(mindId, new MindGotAddedEvent(mindEnt, containerEnt));
+            RaiseLocalEvent(entity.Value, new MindAddedMessage(mindEnt, containerEnt, oldEntity));
+            RaiseLocalEvent(mindId, new MindGotAddedEvent(mindEnt, containerEnt, oldEntity));
             Dirty(entity.Value, component);
         }
     }

@@ -2,18 +2,18 @@
   id: NanoTrasenRepresentative
   name: job-name-nanotrasen-representative
   description: job-description-nanotrasen-representative
-  setPreference: false #SS220 TODO NanoTraisen Representative
   playTimeTracker: JobNanoTrasenRepresentative
   requirements:
     - !type:DepartmentTimeRequirement
       department: Command
-      time: 288000 # 40 hours #SS220 TODO NanoTraisen Representative
+      time: 180000 # 50h
     - !type:SpeciesRequirement
       species:
       - Human
   weight: 20
   startingGear: NanoTrasenRepresentativeGear
-  icon: "JobIconNanotrasen" #SS220 TODO NanoTraisen Representative
+  experienceDefinition: IAARoleExperience
+  icon: "JobIconNanotrasen"
   requireAdminNotify: true
   joinNotifyCrew: true
   supervisors: job-supervisors-centcom
@@ -56,6 +56,8 @@
   equipment:
     shoes: ClothingShoesBootsLaceup
     id: NanoTrasenRepresentativePDA
+  inhand:
+    - BriefcaseMagistrateFilled
   storage:
     back:
     - Flash

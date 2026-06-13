@@ -184,11 +184,20 @@ binds:
 - function: ActivateItemInHand
   type: State
   key: Z
+<<<<<<< HEAD
 #FCB realistic weapons begin
 - function: ActivateGunInHand
   type: State
   key: R
 #FCB realistic weapons end
+=======
+#SS220 shield rework begin
+- function: ToggleActiveBlocking
+  type: State
+  key: B
+  mod1: Shift
+#SS220 shield rework end
+>>>>>>> master
 - function: AltActivateItemInHand
   type: State
   key: Z
@@ -196,6 +205,11 @@ binds:
 - function: OpenCharacterMenu
   type: State
   key: U
+  # SS220-experience-update
+- function: OpenExperienceViewerMenu
+  type: State
+  key: O
+  # SS220-experience-update
 - function: OpenEmotesMenu
   type: State
   key: Y
@@ -291,6 +305,14 @@ binds:
 - function: InspectEntity
   type: State
   key: v
+  mod1: Alt
+- function: InspectServerComponent
+  type: State
+  key: b
+  mod1: Alt
+- function: InspectClientComponent
+  type: State
+  key: c
   mod1: Alt
 - function: MouseMiddle
   type: State

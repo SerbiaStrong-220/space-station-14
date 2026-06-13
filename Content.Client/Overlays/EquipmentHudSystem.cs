@@ -1,9 +1,9 @@
-using Content.Shared.FCB.Mech.Components;//FCB add mech overlay
+using Content.Shared.SS220.Mech.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Robust.Client.Player;
-using Robust.Shared.Containers;//FCB add mech overlay
+using Robust.Shared.Containers;//SS220 add mech overlay
 using Robust.Shared.Player;
 
 namespace Content.Client.Overlays;
@@ -17,7 +17,7 @@ public abstract class EquipmentHudSystem<T> : EntitySystem where T : IComponent
     [Dependency] private readonly IPlayerManager _player = default!;
 
     [ViewVariables]
-    protected bool IsActive;
+    public bool IsActive { get; private set; }
     protected virtual SlotFlags TargetSlots => ~SlotFlags.POCKET;
 
     public override void Initialize()
@@ -33,10 +33,10 @@ public abstract class EquipmentHudSystem<T> : EntitySystem where T : IComponent
         SubscribeLocalEvent<T, GotEquippedEvent>(OnCompEquip);
         SubscribeLocalEvent<T, GotUnequippedEvent>(OnCompUnequip);
 
-        //FCB add mech overlay begin
+        //SS220 add mech overlay begin
         SubscribeLocalEvent<T, EntGotInsertedIntoContainerMessage>(OnCompEquip);
         SubscribeLocalEvent<T, EntGotRemovedFromContainerMessage>(OnCompUnequip);
-        //FCB add mech overlay end
+        //SS220 add mech overlay end
 
         SubscribeLocalEvent<T, RefreshEquipmentHudEvent<T>>(OnRefreshComponentHud);
         SubscribeLocalEvent<T, InventoryRelayedEvent<RefreshEquipmentHudEvent<T>>>(OnRefreshEquipmentHud);
@@ -94,7 +94,7 @@ public abstract class EquipmentHudSystem<T> : EntitySystem where T : IComponent
         RefreshOverlay();
     }
 
-    //FCB add mech overlay begin
+    //SS220 add mech overlay begin
     private void OnCompEquip(Entity<T> ent, ref EntGotInsertedIntoContainerMessage args)
     {
         if (TryComp<AltMechComponent>(args.Container.Owner, out var _))
@@ -106,7 +106,7 @@ public abstract class EquipmentHudSystem<T> : EntitySystem where T : IComponent
         if (TryComp<AltMechComponent>(args.Container.Owner, out var _))
             RefreshOverlay();
     }
-    //FCB add mech overlay end
+    //SS220 add mech overlay end
 
     private void OnRoundRestart(RoundRestartCleanupEvent args)
     {
@@ -132,7 +132,7 @@ public abstract class EquipmentHudSystem<T> : EntitySystem where T : IComponent
         var ev = new RefreshEquipmentHudEvent<T>(TargetSlots);
         RaiseLocalEvent(entity, ref ev);
 
-        //FCB add mech overlays begin
+        //SS220 add mech overlays begin
         if (TryComp<AltMechComponent>(entity, out var mechComp))//Honestly i'm not perfectly fine with this solution but it is way better than making hundreds of strings of code to rewrite the entire equipment overlay system and every overlay but for mech visors only
         {
             if (mechComp.ContainerDict["head"].ContainedEntity != null && TryComp<T>(mechComp.ContainerDict["head"].ContainedEntity, out var headComp))
@@ -155,7 +155,7 @@ public abstract class EquipmentHudSystem<T> : EntitySystem where T : IComponent
                 }
             }
         }
-        //FCB add mech overlays end
+        //SS220 add mech overlays end
 
         if (ev.Active)
             Update(ev);

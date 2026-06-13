@@ -1,12 +1,11 @@
+using Content.Shared.Damage.Components;
 using Content.Shared.Projectiles;
-using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Standing;
-using Robust.Shared.Physics.Events;
+using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Containers;
-using Content.Shared.Mobs.Components;
-using Content.Shared.FCB.Weapons.Components;
+using Robust.Shared.Physics.Events;
 
-namespace Content.Shared.Damage.Components;
+namespace Content.Shared.Damage.Systems;
 
 public sealed class RequireProjectileTargetSystem : EntitySystem
 {
@@ -22,53 +21,29 @@ public sealed class RequireProjectileTargetSystem : EntitySystem
     private void PreventCollide(Entity<RequireProjectileTargetComponent> ent, ref PreventCollideEvent args)
     {
         if (args.Cancelled)
-          return;
+            return;
 
         if (!ent.Comp.Active)
             return;
 
         var other = args.OtherEntity;
-        //FCB realistic weapons begin
-        if (TryComp(other, out ProjectileComponent? projectile))
+        if (TryComp(other, out ProjectileComponent? projectile) &&
+            CompOrNull<TargetedProjectileComponent>(other)?.Target != ent)
         {
-            if (TryComp<GunAimableComponent>(projectile.Weapon, out var aimComp) && aimComp.IsAimed)
-            {
-                if (TryComp<MobStateComponent>(ent.Owner, out var statesComp) && (statesComp.CurrentState == Mobs.MobState.Alive))
-                    return;
-            }
+            // Prevents shooting out of while inside of crates
+            var shooter = projectile.Shooter;
+            if (!shooter.HasValue)
+                return;
 
-            if(CompOrNull<TargetedProjectileComponent>(other)?.Target != ent)
-            {
-                // Prevents shooting out of while inside of crates
-                var shooter = projectile.Shooter;
-                if (!shooter.HasValue)
-                    return;
+            // ProjectileGrenades delete the entity that's shooting the projectile,
+            // so it's impossible to check if the entity is in a container
+            if (TerminatingOrDeleted(shooter.Value))
+                return;
 
-                // ProjectileGrenades delete the entity that's shooting the projectile,
-                // so it's impossible to check if the entity is in a container
-                if (TerminatingOrDeleted(shooter.Value))
-                    return;
-
-                if (!_container.IsEntityOrParentInContainer(shooter.Value))
-                    args.Cancelled = true;
-            }
+            if (!_container.IsEntityOrParentInContainer(shooter.Value))
+                args.Cancelled = true;
         }
-        //FCB realistic weapons end
     }
-
-    // FCB realistic begin
-    public bool PreventHitscan(Entity<RequireProjectileTargetComponent> ent, EntityUid gunUid)
-    {
-        if (!ent.Comp.Active)
-            return false;
-
-        if (TryComp<GunAimableComponent>(gunUid, out var aimComp) && aimComp.IsAimed)
-            if (TryComp<MobStateComponent>(ent.Owner, out var statesComp) && (statesComp.CurrentState == Mobs.MobState.Alive))
-                return false;
-
-        return true;
-    }
-    // FCB realistic weapons end
 
     private void SetActive(Entity<RequireProjectileTargetComponent> ent, bool value)
     {

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #SS220-marking-obsolete-officials'-shields-begin
 ent-BaseShield = базовый щит(ОФЫ, УСТАРЕЛО)
     .desc = Щит!
@@ -16,15 +17,60 @@ ent-WebShield = паутинный щит(ОФЫ, УСТАРЕЛО)
 ent-ClockworkShield = заводной щит(ОФЫ, УСТАРЕЛО)
     .desc = Ratvar oyrffrf lbh jvgu uvf cebgrpgvba. Ратвар благословляет вас Своей защитой.
 ent-MirrorShield = зеркальный щит(ОФЫ, УСТАРЕЛО)
+=======
+#SS220 shield rework begin
+ent-BaseShield = базовый щит
+    .desc = Щит!
+.suffix = старый
+ent-RiotShield = противоударный щит
+    .desc = Большой башенный щит на случай беспорядков. Хорошо подходит для контроля толпы.
+    .suffix = старый
+ent-RiotLaserShield = противолазерный щит
+    .desc = Щит на случай беспорядков, созданный противостоять лазерам, но не более того.
+    .suffix = старый
+ent-RiotBulletShield = противопульный щит
+    .desc = Щит на случай беспорядков, созданный противостоять пулям, но не более того.
+    .suffix = старый
+ent-WoodenBuckler = деревянный баклер
+    .desc = Небольшой круглый деревянный самодельный щит.
+    .suffix = старый
+ent-CardShield = картонный щит
+    .desc = Щит из картона, не сильно защитит вас.
+    .suffix = старый
+ent-MakeshiftShield = импровизированный щит
+    .desc = Ветхий на вид щит, мало на что пригодный.
+    .suffix = старый
+ent-WebShield = паутинный щит
+    .desc = Нитяной щит. Он слаб и плохо противостоит нагреванию.
+    .suffix = старый
+ent-ClockworkShield = заводной щит
+    .desc = Ratvar oyrffrf lbh jvgu uvf cebgrpgvba. Ратвар благословляет вас Своей защитой.
+    .suffix = старый
+ent-MirrorShield = зеркальный щит
+>>>>>>> master
     .desc = Жутко светится красным... Вы слышите, как геометр шепчет...
+    .suffix = старый
 # Corvax-HiddenDesc-Start
+<<<<<<< HEAD
 ent-EnergyShield = подозрительное устройство(ОФЫ, УСТАРЕЛО)
     .suffix = энергощит
     .desc = Небольшое дискообразное устройство с удобной рукоятью и кнопкой активации.
 ent-BrokenEnergyShield = сломанное подозрительное устройство(ОФЫ, УСТАРЕЛО)
     .suffix = сломанный энергощит
+=======
+ent-EnergyShield = подозрительное устройство
+    .suffix = энергощит, офы, не использовать
+    .desc = Небольшое дискообразное устройство с удобной рукоятью и кнопкой активации.
+ent-BrokenEnergyShield = сломанное подозрительное устройство
+    .suffix = сломаный энергощит, офы, не использовать
+>>>>>>> master
     .desc = Чтобы это ни было, оно больше не функционирует.
 # Corvax-HiddenDesc-End
 ent-TelescopicShield = телескопический щит(ОФЫ, УСТАРЕЛО)
     .desc = Продвинутый щит на случай беспорядков, изготовлен из облегчённых материалов, способен складываться для удобства хранения.
+<<<<<<< HEAD
 #SS220-marking-obsolete-officials'-shields-end
+=======
+    .suffix = старый
+#SS220 shield rework end
+>>>>>>> master

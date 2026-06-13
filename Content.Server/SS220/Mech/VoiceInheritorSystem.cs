@@ -1,7 +1,7 @@
-// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+// © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 using Content.Server.SS220.Language;
-using Content.Shared.FCB.Mech.Components;
-using Content.Shared.FCB.Mech.Systems;
+using Content.Shared.SS220.Mech.Components;
+using Content.Shared.SS220.Mech.Systems;
 using Content.Shared.Inventory;
 using Content.Shared.Mech.EntitySystems;
 using Content.Shared.Radio.Components;

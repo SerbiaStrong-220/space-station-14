@@ -15,6 +15,10 @@ uplink-clothing-briefcase-with-double-bottom-desc = Чемодан с двойн
 
 uplink-pinpointer-syndie-name = Пинпоинтер Cиндиката
 uplink-pinpointer-syndie-desc = Пинпоинтер, способный отследить любой ценный предмет на станции, а так же любое существо по ДНК.
+
+uplink-cqc-manual-name = Старый мануал
+uplink-cqc-manual-desc = Небольшое черное руководство. Внутри есть нарисованные инструкции по тактическому рукопашному бою.
+
 # Disruption
 
 uplink-syndicate-pen-signaller = Ручка-передатчик
@@ -79,3 +83,12 @@ uplink-suit-electrification-desc = Костюм, позволяющий конв
 
 uplink-fake-captain-id-card-name = Фальшивая ID карта капитана
 uplink-fake-captain-id-card-desc = ID карта со сломанным модулем доступов, внешне неотличимая от ID карты капитана. Они не заметят подмены.
+
+uplink-clothing-outer-vest-web-elite-name = Огнеупорный тактический жилет
+uplink-clothing-outer-vest-web-elite-desc = Бронежилет класса IIIA с дополнительными огнеупорными элементами.
+
+uplink-assault-suit-name = Штурмовой бронекостюм
+uplink-assault-suit-desc = Костюм,состоящий из бронежилета IV класса, несъёмного встроенного шлема и комплектов защиты для предплечий, шеи и паха.
+
+uplink-chameleon-vest-name = Бронежилет-хамелеон
+uplink-chameleon-vest-desc = Бронежилет III класса, имеющий встроеную маскировку. Идентичен противопульному бронежилету.

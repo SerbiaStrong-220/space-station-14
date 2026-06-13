@@ -41,18 +41,16 @@
       Glass: 100
 
 - type: entity
-  parent: DrinkBankateBaseFull
+  parent: [DrinkBankateBaseFull, DrinkVisualsAllFilled]
   id: DrinkBankateJarFull
   name: bankate jar
   description: You're not actually going to drink this, are you?
   components:
-  # TODO-SS220-Sprites-begin
   - type: SolutionContainerVisuals
     maxFillLevels: 5
     fillBaseName: fill-
     inHandsMaxFillLevels: 0
     inHandsFillBaseName: null
-  # TODO-SS220-Sprites-end
   - type: SolutionContainerManager
     solutions:
       drink:

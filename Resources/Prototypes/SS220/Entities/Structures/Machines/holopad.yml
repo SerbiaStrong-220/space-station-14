@@ -37,3 +37,11 @@
   components:
   - type: Label
     currentLabel: holopad-station-warden
+
+- type: entity
+  parent: Holopad
+  id: HolopadCommandNanoTrasenRepresentative
+  suffix: NanoTrasen Representative
+  components:
+  - type: Label
+    currentLabel: holopad-command-ntr

@@ -6,7 +6,7 @@ using Content.Shared.Mind;
 using Content.Shared.Objectives;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Objectives.Systems;
-using Content.Shared.FCB.Mech.Components;
+using Content.Shared.SS220.Mech.Components;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Server.CharacterInfo;

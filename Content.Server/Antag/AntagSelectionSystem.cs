@@ -13,10 +13,9 @@ using Content.Server.Players.PlayTimeTracking;
 using Content.Server.Preferences.Managers;
 using Content.Server.Roles;
 using Content.Server.Roles.Jobs;
-using Content.Server.Shuttles.Components;
-using Content.Server.SS220.DefibrillatorSkill; //SS220 LimitationRevive
+using Content.Server.Shuttles.Systems;
+using Content.Server.SS220.Mech.Systems;//SS220 mech rework
 using Content.Server.SS220.MindSlave;
-using Content.Shared.FCB.Mech.Components;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Antag;
 using Content.Shared.Clothing;
@@ -28,6 +27,8 @@ using Content.Shared.Humanoid;
 using Content.Shared.Mind;
 using Content.Shared.Players;
 using Content.Shared.Roles;
+using Content.Shared.SS220.Experience;
+using Content.Shared.SS220.Mech.Components;
 using Content.Shared.Whitelist;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
@@ -39,7 +40,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using System.Linq;
-using Content.Server.FCB.Mech.Systems;//FCB mech rework
 
 namespace Content.Server.Antag;
 
@@ -60,7 +60,9 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly MindSlaveSystem _mindSlave = default!; // SS220 MindSlave
-    [Dependency] private readonly AltMechSystem _altmech = default!;//FCB mech rework
+    [Dependency] private readonly AltMechSystem _altmech = default!;//SS220 mech rework
+    [Dependency] private readonly ArrivalsSystem _arrivals = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!; //SS220-experience-update
 
     // arbitrary random number to give late joining some mild interest.
     public const float LateJoinRandomChance = 0.5f;
@@ -175,6 +177,15 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         if (!args.LateJoin)
             return;
 
+        TryMakeLateJoinAntag(args.Player);
+    }
+
+    /// <summary>
+    /// Attempt to make this player be a late-join antag.
+    /// </summary>
+    /// <param name="session">The session to attempt to make antag.</param>
+    public void TryMakeLateJoinAntag(ICommonSession session)
+    {
         // TODO: this really doesn't handle multiple latejoin definitions well
         // eventually this should probably store the players per definition with some kind of unique identifier.
         // something to figure out later.
@@ -199,12 +210,12 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
             DebugTools.AssertNotEqual(antag.SelectionTime, AntagSelectionTime.PrePlayerSpawn);
 
             // do not count players in the lobby for the antag ratio
-            var players = PlayerManager.Sessions.Count(session => session.Status is not SessionStatus.Disconnected or SessionStatus.Zombie); // SS220-make-antag-selection-based-on-all-players
+            var players = _playerManager.NetworkedSessions.Count(x => x.AttachedEntity != null);
 
             if (!TryGetNextAvailableDefinition((uid, antag), out var def, players))
                 continue;
 
-            if (TryMakeAntag((uid, antag), args.Player, def.Value))
+            if (TryMakeAntag((uid, antag), session, def.Value))
                 break;
         }
     }
@@ -284,8 +295,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
     {
         var playerPool = GetPlayerPool(ent, pool, def);
         var existingAntagCount = ent.Comp.PreSelectedSessions.TryGetValue(def, out var existingAntags) ?  existingAntags.Count : 0;
-        var allPlayerCount = PlayerManager.Sessions.Count(session => session.Status is not SessionStatus.Disconnected or SessionStatus.Zombie); // SS220-make-antag-selection-based-on-all-players
-        var count = GetTargetAntagCount(ent, allPlayerCount, def) - existingAntagCount; // SS220 GetTotalPlayerCount(pool) -> allPlayerCount
+        var count = GetTargetAntagCount(ent, GetTotalPlayerCount(pool), def) - existingAntagCount;
 
         // if there is both a spawner and players getting picked, let it fall back to a spawner.
         var noSpawner = def.SpawnerPrototype == null;
@@ -399,7 +409,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
 
             // we shouldn't be blocking the entity if they're just a ghost or smth.
             if (!HasComp<GhostComponent>(session.AttachedEntity))
-            //FCB mech rework begin
+            //SS220 mech rework begin
             {
                 if (TryComp<AltMechComponent>(session.AttachedEntity, out var mechComp))
                 {
@@ -409,7 +419,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
                 else
                     antagEnt = session.AttachedEntity;
             }
-            //FCB mech rework end
+            //SS220 mech rework end
         }
         else if (!ignoreSpawner && def.SpawnerPrototype != null) // don't add spawners if we have a player, dummy.
         {
@@ -419,7 +429,8 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
 
         if (!antagEnt.HasValue)
         {
-            var getEntEv = new AntagSelectEntityEvent(session, ent);
+            var getEntEv = new AntagSelectEntityEvent(session, ent, def.PrefRoles);
+
             RaiseLocalEvent(ent, ref getEntEv, true);
             antagEnt = getEntEv.Entity;
         }
@@ -427,7 +438,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         if (antagEnt is not { } player)
         {
             Log.Error($"Attempted to make {session} antagonist in gamerule {ToPrettyString(ent)} but there was no valid entity for player.");
-            _adminLogger.Add(LogType.AntagSelection,$"Attempted to make {session} antagonist in gamerule {ToPrettyString(ent)} but there was no valid entity for player.");
+            _adminLogger.Add(LogType.AntagSelection, $"Attempted to make {session} antagonist in gamerule {ToPrettyString(ent)} but there was no valid entity for player.");
             if (session != null && ent.Comp.RemoveUponFailedSpawn)
             {
                 ent.Comp.AssignedSessions.Remove(session);
@@ -442,7 +453,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         // Therefore any component subscribing to this has to make sure both subscriptions return the same value
         // or the ghost role raffle location preview will be wrong.
 
-        var getPosEv = new AntagSelectLocationEvent(session, ent);
+        var getPosEv = new AntagSelectLocationEvent(session, ent, player);
         RaiseLocalEvent(ent, ref getPosEv, true);
         if (getPosEv.Handled)
         {
@@ -458,7 +469,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
             if (!TryComp<GhostRoleAntagSpawnerComponent>(player, out var spawnerComp))
             {
                 Log.Error($"Antag spawner {player} does not have a GhostRoleAntagSpawnerComponent.");
-                _adminLogger.Add(LogType.AntagSelection,$"Antag spawner {player} in gamerule {ToPrettyString(ent)} failed due to not having GhostRoleAntagSpawnerComponent.");
+                _adminLogger.Add(LogType.AntagSelection, $"Antag spawner {player} in gamerule {ToPrettyString(ent)} failed due to not having GhostRoleAntagSpawnerComponent.");
                 if (session != null)
                 {
                     ent.Comp.AssignedSessions.Remove(session);
@@ -475,12 +486,22 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
 
         // The following is where we apply components, equipment, and other changes to our antagonist entity.
         EntityManager.AddComponents(player, def.Components);
-        EnsureComp<DefibrillatorSkillComponent>(player); //SS220 LimitationRevive
 
         // Equip the entity's RoleLoadout and LoadoutGroup
         List<ProtoId<StartingGearPrototype>> gear = new();
         if (def.StartingGear is not null)
             gear.Add(def.StartingGear.Value);
+
+        // SS220-experience-update-begin
+        if (def.StartingGear is not null && _prototype.Resolve(def.StartingGear, out var gearPrototype))
+        {
+            var skillRoleAddComp = EnsureComp<RoleExperienceAddComponent>(antagEnt.Value);
+            skillRoleAddComp.DefinitionId ??= gearPrototype.ExperienceDefinition;
+
+            var recalculateEv = new RecalculateEntityExperience();
+            RaiseLocalEvent(antagEnt.Value, ref recalculateEv);
+        }
+        // SS220-experience-update-end
 
         _loadout.Equip(player, gear, def.RoleLoadout);
 
@@ -508,10 +529,10 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         var afterEv = new AfterAntagEntitySelectedEvent(session, player, ent, def);
         RaiseLocalEvent(ent, ref afterEv, true);
 
-        //FCB mech rework begin
+        //SS220 mech rework begin
         if (TryComp<AltMechPilotComponent>(player, out var pilotComp) && TryComp<AltMechComponent>(pilotComp.Mech, out var playerMechComp))
             _altmech.TransferMindIntoMech((pilotComp.Mech,playerMechComp));
-        //FCB mech rework end
+        //SS220 mech rework end
     }
 
     /// <summary>
@@ -561,11 +582,11 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
             return false;
 
         // SS220 Antag ban fix begin
-        if (_ban.GetRoleBans(session.UserId) is { } roleBans)
+        if (_ban.GetAntagBans(session.UserId) is { } antagBans)
         {
             foreach (var role in def.PrefRoles)
             {
-                if (roleBans.Contains(role))
+                if (antagBans.Contains(role))
                     return false;
             }
         }
@@ -578,21 +599,21 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         switch (def.MultiAntagSetting)
         {
             case AntagAcceptability.None:
-            {
-                if (_role.MindIsAntagonist(mind))
-                    return false;
-                if (GetPreSelectedAntagSessions(def).Contains(session)) // Used for rules where the antag has been selected, but not started yet
-                    return false;
-                break;
-            }
+                {
+                    if (_role.MindIsAntagonist(mind))
+                        return false;
+                    if (GetPreSelectedAntagSessions(def).Contains(session)) // Used for rules where the antag has been selected, but not started yet
+                        return false;
+                    break;
+                }
             case AntagAcceptability.NotExclusive:
-            {
-                if (_role.MindIsExclusiveAntagonist(mind))
-                    return false;
-                if (GetPreSelectedExclusiveAntagSessions(def).Contains(session))
-                    return false;
-                break;
-            }
+                {
+                    if (_role.MindIsExclusiveAntagonist(mind))
+                        return false;
+                    if (GetPreSelectedExclusiveAntagSessions(def).Contains(session))
+                        return false;
+                    break;
+                }
         }
 
         // todo: expand this to allow for more fine antag-selection logic for game rules.
@@ -611,10 +632,10 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         if (entity == null)
             return true;
 
-        if (HasComp<PendingClockInComponent>(entity))
+        if (_arrivals.IsOnArrivals((entity.Value, null)))
             return false;
 
-        if (!def.AllowNonHumans && !HasComp<HumanoidAppearanceComponent>(entity))
+        if (!def.AllowNonHumans && !HasComp<HumanoidProfileComponent>(entity))
             return false;
 
         if (def.Whitelist != null)
@@ -666,9 +687,12 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
 /// Only raised if the selected player's current entity is invalid.
 /// </summary>
 [ByRefEvent]
-public record struct AntagSelectEntityEvent(ICommonSession? Session, Entity<AntagSelectionComponent> GameRule)
+public record struct AntagSelectEntityEvent(ICommonSession? Session, Entity<AntagSelectionComponent> GameRule, List<ProtoId<AntagPrototype>> AntagRoles)
 {
     public readonly ICommonSession? Session = Session;
+
+    /// list of antag role prototypes associated with a entity. used by the <see cref="AntagMultipleRoleSpawnerComponent"/>
+    public readonly List<ProtoId<AntagPrototype>> AntagRoles = AntagRoles;
 
     public bool Handled => Entity != null;
 
@@ -679,11 +703,14 @@ public record struct AntagSelectEntityEvent(ICommonSession? Session, Entity<Anta
 /// Event raised on a game rule entity to determine the location for the antagonist.
 /// </summary>
 [ByRefEvent]
-public record struct AntagSelectLocationEvent(ICommonSession? Session, Entity<AntagSelectionComponent> GameRule)
+public record struct AntagSelectLocationEvent(ICommonSession? Session, Entity<AntagSelectionComponent> GameRule, EntityUid Entity)
 {
     public readonly ICommonSession? Session = Session;
 
     public bool Handled => Coordinates.Any();
+
+    // the entity of the antagonist
+    public EntityUid Entity = Entity;
 
     public List<MapCoordinates> Coordinates = new();
 }

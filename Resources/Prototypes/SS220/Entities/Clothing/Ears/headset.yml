@@ -61,6 +61,34 @@
       - EncryptionKeyCommand
 
 - type: entity
+  parent:  ClothingHeadsetAltLaw
+  id: ClothingHeadsetAltNanoTrasenRepresentative
+  name: full-size headset of the NanoTrasen Representative
+  description: It is used by representatives of the NanoTrasen.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyLaw
+      - EncryptionKeySecurity
+      - EncryptionKeyCommon
+      - EncryptionKeyCommand
+
+- type: entity
+  parent: ClothingHeadsetLaw
+  id: ClothingHeadsetNanoTrasenRepresentative
+  name: headset of the NanoTrasen Representative
+  description: It is used by representatives of the NanoTrasen.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyLaw
+      - EncryptionKeySecurity
+      - EncryptionKeyCommon
+      - EncryptionKeyCommand
+
+- type: entity
   parent: ClothingHeadsetAltLaw
   id: ClothingHeadsetAltIAA
   name: full-size headset of the iaa
@@ -120,3 +148,19 @@
     sprite: SS220/Clothing/Ears/Headsets/blueshield.rsi
   - type: Clothing
     sprite: SS220/Clothing/Ears/Headsets/blueshield.rsi
+
+- type: entity
+  parent: ClothingHeadset
+  id: ClothingHeadsetRedWings
+  name: full-size headset of the RedWings Squad
+  description: An impeccable headset for the RedWings operators.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyInterdyne
+      - EncryptionKeyCommon
+  - type: Sprite
+    sprite: SS220/Clothing/Ears/Headsets/redwings.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Ears/Headsets/redwings.rsi

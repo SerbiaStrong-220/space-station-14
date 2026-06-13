@@ -21,17 +21,19 @@ accent-pirate-replacement-7 = тысяча чертей
 accent-pirate-replaced-8 = пошел нахуй
 accent-pirate-replacement-8 = чтоб тебя черти драли
 
+# SS220 pirate-accent-fix begin
 accent-pirate-replaced-9 = вы
-accent-pirate-replacement-9 = ты
+accent-pirate-replacement-9 = вы
 
 accent-pirate-replaced-10 = ваш
-accent-pirate-replacement-10 = твой
+accent-pirate-replacement-10 = ваш
 
 accent-pirate-replaced-11 = вам
-accent-pirate-replacement-11 = тебе
+accent-pirate-replacement-11 = вам
 
 accent-pirate-replaced-12 = вас
-accent-pirate-replacement-12 = тебя
+accent-pirate-replacement-12 = вас
+# SS220 pirate-accent-fix end
 
 accent-pirate-replaced-13 = привет
 accent-pirate-replacement-13 = э-хей
