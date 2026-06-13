@@ -2,6 +2,8 @@ using Content.Client.Movement.Components;
 using Content.Client.Viewport;
 using Content.Shared.Camera;
 using Content.Shared.CombatMode;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Content.Shared.SS220.ComplexRepairable;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
@@ -32,6 +34,9 @@ public sealed partial class EyeCursorOffsetSystem : EntitySystem
         if (TryComp<EyeOffsetInCombatModeComponent>(uid, out var combatOffsetComp))
         {
             if (!TryComp<CombatModeComponent>(uid, out var combatModeComp) || !combatModeComp.IsInCombatMode)
+                return;
+
+            if (TryComp<MobStateComponent>(uid, out var mobStateComp) && mobStateComp.CurrentState != MobState.Alive)
                 return;
         }
         //SS220 weapon overhaul end
