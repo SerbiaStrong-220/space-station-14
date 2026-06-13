@@ -1,12 +1,12 @@
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Examine;
-using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Containers;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -28,6 +28,7 @@ public abstract partial class SharedGunSystem
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, GetVerbsEvent<AlternativeVerb>>(OnMagazineVerb);
 
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, ActivateInWorldEvent>(OnChamberActivate);
+        SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, UseInHandEvent>(OnChamberUse);
 
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, EntInsertedIntoContainerMessage>(OnMagazineSlotChange);
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, EntRemovedFromContainerMessage>(OnMagazineSlotChange);
@@ -51,12 +52,23 @@ public abstract partial class SharedGunSystem
         if (args.Handled || !args.Complex)
             return;
 
-        if (TryComp<HandsComponent>(args.User, out var handsComponent) && _hands.TryGetActiveItem((args.User, handsComponent), out var heldEnt) && heldEnt == uid) //FCB realistic weapons
-            return; //FCB realistic weapons
-        //Yes, this was fired when used in hand
-
         args.Handled = true;
         ToggleBolt(uid, component, args.User);
+    }
+
+    /// <summary>
+    /// Called when gun was "Activated In Hand" (Z)
+    /// </summary>
+    private void OnChamberUse(EntityUid uid, ChamberMagazineAmmoProviderComponent component, UseInHandEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        args.Handled = true;
+        if (component.CanRack)
+            UseChambered(uid, component, args.User);
+        else
+            ToggleBolt(uid, component, args.User);
     }
 
     /// <summary>
