@@ -4,6 +4,11 @@
   categories: [ HideSpawnMenu ]
   name: bullet (.45 magnum)
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.6
+    weightedRandomProviderEntity: 45ACPCaliberFragment
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
@@ -27,6 +32,10 @@
   categories: [ HideSpawnMenu ]
   name: bullet (.45 magnum incendiary)
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    weightedRandomProviderEntity: 45ACPCaliberFragment
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
@@ -40,6 +49,10 @@
   categories: [ HideSpawnMenu ]
   name: bullet (.45 magnum armor-piercing)
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.15
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
@@ -53,6 +66,10 @@
   categories: [ HideSpawnMenu ]
   name: bullet (.45 magnum uranium)
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    weightedRandomProviderEntity: 45ACPCaliberFragment
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:

@@ -4,13 +4,19 @@ ent-LockerCburnCommander = шкаф командира отряда РХБЗ
     .desc = { ent-LockerSRTOperative.desc }
 
 ent-LockerInterdyneArmored = укрепленный шкаф Интердайн
-    .desc = { ent-BaseWallCloset.desc }
+    .desc = { ent-LockerMedicine.desc }
+ent-LockerInterdyneArmoredFilled = укрепленный шкаф Интердайн
+    .desc = { ent-LockerMedicine.desc }
+    .suffix = Заполненный
 ent-LockerInterdyne = шкаф Интердайн
-    .desc = { ent-BaseWallCloset.desc }
+    .desc = { ent-LockerMedicine.desc }
+ent-LockerInterdyneFilled = шкаф Интердайн
+    .desc = { ent-LockerMedicine.desc }
+    .suffix = Заполненный
 ent-LockerInterdyneArmory = шкаф отряда "Красные Крылья"
-    .desc = { ent-BaseWallCloset.desc }
+    .desc = { ent-LockerSyndicatePersonal.desc }
 ent-LockerInterdyneArmoryArmored = укрепленный шкаф отряда "Красные Крылья"
-    .desc = { ent-BaseWallCloset.desc }
+    .desc = { ent-LockerSyndicatePersonal.desc }
 
 ent-LockerNanoTrasenRepresentative = шкаф представителя НТ
     .desc = { ent-LockerBaseSecure.desc }

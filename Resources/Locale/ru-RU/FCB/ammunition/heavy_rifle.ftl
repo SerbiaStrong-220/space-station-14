@@ -1,4 +1,4 @@
-ent-BaseCartridgeHeavyRifle = патрон (.10 винтовочный)
+ent-BaseCartridgeHeavyRifle = патрон (.50 винтовочный)
     .desc = { ent-BaseCartridge.desc }
-ent-CartridgeMinigun = патрон (.10 винтовочный)
+ent-CartridgeMinigun = патрон (.50 винтовочный)
     .desc = { ent-BaseCartridgeHeavyRifle.desc }

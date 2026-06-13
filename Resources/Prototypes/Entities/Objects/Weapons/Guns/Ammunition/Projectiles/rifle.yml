@@ -4,6 +4,10 @@
   categories: [ HideSpawnMenu ]
   name: bullet (.20 rifle)
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    weightedRandomProviderEntity: LightCaliberFragment
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
@@ -27,6 +31,11 @@
   categories: [ HideSpawnMenu ]
   name: bullet (.20 rifle incendiary)
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.1
+    weightedRandomProviderEntity: LightCaliberFragment
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
@@ -40,6 +49,11 @@
   categories: [ HideSpawnMenu ]
   name: bullet (.20 rifle uranium)
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.1
+    weightedRandomProviderEntity: LightCaliberFragment
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:

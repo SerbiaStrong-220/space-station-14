@@ -84,6 +84,28 @@
       paper_label: !type:ContainerSlot
   - type: StaticPrice
     price: 50
+  #SS220-BodyBagDamageable begin
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetPlastic1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+    #SS220-BodyBagDamageable end
 
 - type: entity
   id: BodyBagFolded
