@@ -1,1 +1,0 @@
-complex-repairable-material-repair = Вы ремонтируете { $target } с помощью { $material }
