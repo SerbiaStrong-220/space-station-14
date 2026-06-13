@@ -44,8 +44,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using ItemToggleMeleeWeaponComponent = Content.Shared.Item.ItemToggle.Components.ItemToggleMeleeWeaponComponent;
-using Content.Shared.SS220.AltBlocking;
-using Content.Shared.SS220.Weapons.Melee.Events;
 
 namespace Content.Shared.Weapons.Melee;
 
