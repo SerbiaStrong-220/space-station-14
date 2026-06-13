@@ -184,20 +184,12 @@ binds:
 - function: ActivateItemInHand
   type: State
   key: Z
-<<<<<<< HEAD
-#FCB realistic weapons begin
-- function: ActivateGunInHand
-  type: State
-  key: R
-#FCB realistic weapons end
-=======
 #SS220 shield rework begin
 - function: ToggleActiveBlocking
   type: State
   key: B
   mod1: Shift
 #SS220 shield rework end
->>>>>>> master
 - function: AltActivateItemInHand
   type: State
   key: Z
