@@ -69,13 +69,8 @@
       methods: [Touch]
       effects:
       - !type:WashCreamPie
-  #FCB realistic movement update begin
-  - type: MovementSpeedModifier
-    baseAcceleration: 0.6
-    baseFriction: 1.3
-  #FCB realistic movement update end
-  - type: Item #FCB rofls
-    size: Gigantic #FCB rofls
+  - type: Item #SS220 rofls
+    size: Gigantic #SS220 rofls
   - type: StatusEffects
     allowed:
     - Electrocution
@@ -94,12 +89,6 @@
   - type: Internals
   - type: FloatingVisuals
   - type: Climbing
-  - type: Damageable
-    piercingThreshold: 15
-  - type: EyeCursorOffset
-    maxOffset: 6
-    pvsIncrease: 0.6
-  - type: EyeOffsetInCombatMode
   - type: Cuffable
   - type: Ensnareable
     sprite: Objects/Misc/ensnare.rsi
