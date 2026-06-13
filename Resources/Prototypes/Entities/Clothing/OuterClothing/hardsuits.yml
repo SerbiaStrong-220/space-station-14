@@ -260,6 +260,8 @@
   - type: PressureProtection
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
+  - type: FireProtection #SS220 weapon overhaul
+    reduction: 0.4 #SS220 weapon overhaul
   - type: ExplosionResistance
     damageCoefficient: 0.4
   - type: Armor
@@ -334,6 +336,8 @@
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
     damageCoefficient: 0.3 #SS220-WardenJuggernaut
+  - type: FireProtection #SS220 weapon overhaul
+    reduction: 0.3 #SS220 weapon overhaul
   - type: Armor
     modifiers:
       coefficients:
@@ -531,6 +535,8 @@
   - type: PressureProtection
     highPressureMultiplier: 0.45
     lowPressureMultiplier: 1000
+  - type: FireProtection #SS220 weapon overhaul
+    reduction: 0.4 #SS220 weapon overhaul
   - type: ExplosionResistance
     damageCoefficient: 0.5
   - type: Armor

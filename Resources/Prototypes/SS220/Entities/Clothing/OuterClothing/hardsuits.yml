@@ -80,6 +80,8 @@
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
     damageCoefficient: 0.4
+  - type: FireProtection #SS220 weapon overhaul
+    reduction: 0.4 #SS220 weapon overhaul
   - type: Armor
     modifiers:
       coefficients:
