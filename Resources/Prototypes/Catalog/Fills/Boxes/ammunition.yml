@@ -154,18 +154,11 @@
   id: BoxMagazineShotgun
   description: A box full of (.50 pellet) ammo drums.
   components:
-<<<<<<< HEAD
-  - type: StorageFill
-    contents:
-      - id: MagazineShotgun
-        amount: 1 #FCB realistic weapons
-=======
   - type: EntityTableContainerFill
     containers:
       storagebase:
         id: MagazineShotgun
         amount: 4
->>>>>>> master
 
 - type: entity
   name: box of (.50 beanbag) ammo drums
@@ -173,18 +166,11 @@
   id: BoxMagazineShotgunBeanbag
   description: A box full of (.50 beanbag) ammo drums.
   components:
-<<<<<<< HEAD
-  - type: StorageFill
-    contents:
-      - id: MagazineShotgunBeanbag
-        amount: 1 #FCB realistic weapons
-=======
   - type: EntityTableContainerFill
     containers:
       storagebase:
         id: MagazineShotgunBeanbag
         amount: 4
->>>>>>> master
 
 - type: entity
   name: box of (.50 slug) ammo drums
@@ -192,18 +178,11 @@
   id: BoxMagazineShotgunSlug
   description: A box full of (.50 slug) ammo drums.
   components:
-<<<<<<< HEAD
-  - type: StorageFill
-    contents:
-      - id: MagazineShotgunSlug
-        amount: 1 #FCB realistic weapons
-=======
   - type: EntityTableContainerFill
     containers:
       storagebase:
         id: MagazineShotgunSlug
         amount: 4
->>>>>>> master
 
 - type: entity
   name: box of (.50 incendiary) ammo drums
@@ -211,18 +190,11 @@
   id: BoxMagazineShotgunIncendiary
   description: A box full of (.50 incendiary) ammo drums.
   components:
-<<<<<<< HEAD
-  - type: StorageFill
-    contents:
-      - id: MagazineShotgunIncendiary
-        amount: 1 #FCB realistic weapons
-=======
   - type: EntityTableContainerFill
     containers:
       storagebase:
         id: MagazineShotgunIncendiary
         amount: 4
->>>>>>> master
 
 # Rifle
 - type: entity
