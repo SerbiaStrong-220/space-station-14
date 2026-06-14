@@ -4,7 +4,7 @@
   parent: ClothingOuterEVASuitBase
   id: ClothingOuterHardsuitNTR
   name: NTR suit
-  description: A sleek spacesuit for a NanoTrazen representative, designed for specialized bureaucratic work in space.
+  description: A sleek spacesuit for a NanoTrasen representative, designed for specialized bureaucratic work in space.
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Suits/nanotrasen-representative.rsi
