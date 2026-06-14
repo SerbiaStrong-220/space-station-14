@@ -9,6 +9,7 @@ species-name-ipc = КПБ
 Ipc-face-menu-title = Смена Интерфейса
 Ipc-component-ready = Опустошение заряда активно
 Ipc-component-disabled = Опустошение заряда отключено
+Ipc-component-no-battery = Отсутствует батарея
 ipc-face-customization-cat = Категории
 ipc-face-customization-screen = Экран (выберите один)
 ipc-cat-all = Все

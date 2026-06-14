@@ -22,6 +22,7 @@ using Content.Shared.UserInterface;
 using Content.Shared.Temperature;
 using Robust.Shared.Audio;
 using Content.Shared.MagicMirror;
+using Content.Shared.Power;
 
 namespace Content.Server.SS220.Ipc;
 
@@ -51,6 +52,7 @@ public sealed partial class IpcSystem : EntitySystem
         SubscribeLocalEvent<IpcComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<IpcComponent, OpenIpcFaceActionEvent>(OnOpenIpcFaceAction);
         SubscribeLocalEvent<IpcComponent, DamageChangedEvent>(OnDamageChanged);
+        SubscribeLocalEvent<IpcComponent, BatteryStateChangedEvent>(OnBatteryStateChanged);
         //SubscribeLocalEvent<IpcComponent, OnTemperatureChangeEvent>(OnTemperatureChange);
     }
 
@@ -58,7 +60,7 @@ public sealed partial class IpcSystem : EntitySystem
     {
         _action.AddAction(ent, ref ent.Comp.DrainBatteryActionEntity, ent.Comp.DrainBatteryAction);
         _action.AddAction(ent, ref ent.Comp.ChangeFaceActionEntity, ent.Comp.ChangeFaceAction);
-        _movementSpeedModifier.RefreshMovementSpeedModifiers(ent);
+        _movementSpeedModifier.RefreshMovementSpeedModifiers(ent.Owner);
         Dirty(ent);
     }
 
@@ -68,7 +70,7 @@ public sealed partial class IpcSystem : EntitySystem
         _action.RemoveAction(ent.Owner, ent.Comp.ChangeFaceActionEntity);
     }
 
-    private void OnPowerCellChanged(Entity<IpcComponent> ent, ref PowerCellChangedEvent args)
+    private void OnBatteryStateChanged(Entity<IpcComponent> ent, ref BatteryStateChangedEvent args)
     {
         if (MetaData(ent).EntityLifeStage >= EntityLifeStage.Terminating)
             return;
@@ -76,8 +78,31 @@ public sealed partial class IpcSystem : EntitySystem
         _movementSpeedModifier.RefreshMovementSpeedModifiers(ent.Owner);
     }
 
+    private void OnPowerCellChanged(Entity<IpcComponent> ent, ref PowerCellChangedEvent args)
+    {
+        if (MetaData(ent).EntityLifeStage >= EntityLifeStage.Terminating)
+            return;
+
+        _movementSpeedModifier.RefreshMovementSpeedModifiers(ent.Owner);
+
+        if (!_powerCell.HasBattery(ent.Owner))
+        {
+            ent.Comp.DrainActivated = false;
+            _action.SetToggled(ent.Comp.DrainBatteryActionEntity, ent.Comp.DrainActivated);
+            RemComp<BatteryDrainerComponent>(ent);
+            _popup.PopupEntity(Loc.GetString("Ipc-component-disabled"), ent, ent);
+            Dirty(ent);
+        }
+    }
+
     private void OnToggleDrainAction(Entity<IpcComponent> ent, ref ToggleDrainActionEvent args)
     {
+        if (!_powerCell.HasBattery(ent.Owner))
+        {
+            _popup.PopupEntity(Loc.GetString("Ipc-component-no-battery"), ent, ent);
+            return;
+        }
+
         if (args.Handled)
             return;
 
