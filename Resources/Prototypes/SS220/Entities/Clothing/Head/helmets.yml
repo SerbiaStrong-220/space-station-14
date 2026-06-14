@@ -56,3 +56,18 @@
         Caustic: 0.95
   - type: ExplosionResistance
     damageCoefficient: 0.9
+
+- type: entity
+  parent: ClothingHeadEVAHelmetBase
+  id: ClothingHeadHelmetNTR
+  name: NTR helmet
+  description: A sleek NanoTrasen helmet for bureaucratic work in space. Fashion in the form of bureaucracy!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Helmets/nanotrasen-representative.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Helmets/nanotrasen-representative.rsi
+  - type: Tag
+    tags:
+    - HelmetEVA
+    - WhitelistChameleon

@@ -40,6 +40,8 @@
     - id: ClothingEyesGlassesCommand
     - id: BoxEncryptionKeyLaw
     - id: BoxTapeRecorder
+    - id: ClothingHeadHelmetNTR
+    - id: ClothingOuterHardsuitNTR
 
 - type: entity
   parent: LockerNanoTrasenRepresentative
