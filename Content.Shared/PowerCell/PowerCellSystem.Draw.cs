@@ -21,6 +21,21 @@ public sealed partial class PowerCellSystem
             _battery.RefreshChargeRate(battery.Value.AsNullable());
     }
 
+    /// <summary>
+    /// Sets the draw rate for the power cell draw component.
+    /// </summary>
+    [PublicAPI]
+    public void SetDrawRate(Entity<PowerCellDrawComponent?> ent, float drawRate)
+    {
+        if (Resolve(ent, ref ent.Comp, false) && !MathHelper.CloseTo(ent.Comp.DrawRate, drawRate))
+        {
+            ent.Comp.DrawRate = drawRate;
+            Dirty(ent, ent.Comp);
+        }
+
+        if (TryGetBatteryFromSlot(ent.Owner, out var battery))
+            _battery.RefreshChargeRate(battery.Value.AsNullable());
+    }
 
     /// <summary>
     /// Returns whether the entity has a slotted battery and <see cref="PowerCellDrawComponent.UseCharge"/> charge.

@@ -53,7 +53,7 @@ public sealed partial class IpcSystem : EntitySystem
         SubscribeLocalEvent<IpcComponent, OpenIpcFaceActionEvent>(OnOpenIpcFaceAction);
         SubscribeLocalEvent<IpcComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<IpcComponent, BatteryStateChangedEvent>(OnBatteryStateChanged);
-        //SubscribeLocalEvent<IpcComponent, OnTemperatureChangeEvent>(OnTemperatureChange);
+        SubscribeLocalEvent<IpcComponent, OnTemperatureChangeEvent>(OnTemperatureChange);
     }
 
     private void OnMapInit(Entity<IpcComponent> ent, ref MapInitEvent args)
@@ -197,14 +197,13 @@ public sealed partial class IpcSystem : EntitySystem
 
         _mobState.ChangeMobState(ent, MobState.Critical);
     }
-/*
+
     private void OnTemperatureChange(Entity<IpcComponent> ent, ref OnTemperatureChangeEvent args)
     {
         if (!TryComp<PowerCellDrawComponent>(ent, out var draw))
             return;
 
         var delta = Math.Abs(args.CurrentTemperature - ent.Comp.NormalTemperature);
-
         float newDrawRate = ent.Comp.BaseDrawRate;
 
         if (delta > ent.Comp.CritDelta)
@@ -212,10 +211,6 @@ public sealed partial class IpcSystem : EntitySystem
         else if (delta > ent.Comp.OverDelta)
             newDrawRate = ent.Comp.OverDrawRate;
 
-        if (MathHelper.CloseTo(draw.DrawRate, newDrawRate))
-            return;
-
-        draw.DrawRate = newDrawRate;
-        Dirty(ent, draw);
-    }*/
+        _powerCell.SetDrawRate((ent.Owner, draw), newDrawRate);
+    }
 }
