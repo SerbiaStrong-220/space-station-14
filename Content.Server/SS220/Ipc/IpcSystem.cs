@@ -90,7 +90,7 @@ public sealed partial class IpcSystem : EntitySystem
             ent.Comp.DrainActivated = false;
             _action.SetToggled(ent.Comp.DrainBatteryActionEntity, ent.Comp.DrainActivated);
             RemComp<BatteryDrainerComponent>(ent);
-            _popup.PopupEntity(Loc.GetString("Ipc-component-disabled"), ent, ent);
+            _popup.PopupEntity(Loc.GetString("ipc-component-disabled"), ent, ent);
             Dirty(ent);
         }
     }
@@ -99,7 +99,7 @@ public sealed partial class IpcSystem : EntitySystem
     {
         if (!_powerCell.HasBattery(ent.Owner))
         {
-            _popup.PopupEntity(Loc.GetString("Ipc-component-no-battery"), ent, ent);
+            _popup.PopupEntity(Loc.GetString("ipc-component-no-battery"), ent, ent);
             return;
         }
 
@@ -118,7 +118,7 @@ public sealed partial class IpcSystem : EntitySystem
         else
             RemComp<BatteryDrainerComponent>(ent);
 
-        var message = ent.Comp.DrainActivated ? "Ipc-component-ready" : "Ipc-component-disabled";
+        var message = ent.Comp.DrainActivated ? "ipc-component-ready" : "ipc-component-disabled";
         _popup.PopupEntity(Loc.GetString(message), ent, ent);
 
         Dirty(ent);
