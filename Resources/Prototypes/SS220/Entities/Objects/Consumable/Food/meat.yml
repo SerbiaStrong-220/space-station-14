@@ -304,12 +304,12 @@
     storedOffset: -2,1
     inhandVisuals:
       left:
-      - sprite: Resources/Textures/Consumable/Food/meat.rsi
-      - state: plain-inhand-left
+      - sprite: Objects/Consumable/Food/meat.rsi
+        state: plain-inhand-left
         color: "#6EFF41"
       right:
-      - sprite: Resources/Textures/Consumable/Food/meat.rsi
-      - state: plain-inhand-right
+      - sprite: Objects/Consumable/Food/meat.rsi
+        state: plain-inhand-right
         color: "#6EFF41"
   - type: FoodSequenceElement
     entries:
