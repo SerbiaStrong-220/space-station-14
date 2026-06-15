@@ -7,7 +7,7 @@
   id: Invulnerable
 
 - type: damageContainer
-  id: IpcContainer
+  id: Ipc
   supportedGroups:
     - Brute
     - Burn

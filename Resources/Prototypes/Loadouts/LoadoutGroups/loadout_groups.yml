@@ -97,7 +97,7 @@
   - EmergencyNitrogenSponsor #SS220-Survival-Loadout
   - EmergencyOxygen
   - LoadoutSpeciesVoxNitrogen
-  - LoadoutSpeciesIpc #SS220-add-ipc
+  - LoadoutSpeciesIpc #SS220-IPC
   - EmergencyOxygenSponsor #SS220-Survival-Loadout
  # - LoadoutSpeciesVoxNitrogen #SS220-Survival-Loadout
 
@@ -726,7 +726,7 @@
   - EmergencyNitrogenClownSponsor #SS220-Survival-Loadout
   - EmergencyOxygenClown
   - LoadoutSpeciesVoxNitrogen
-  - LoadoutSpeciesClownIpc #SS220-add-ipc
+  - LoadoutSpeciesClownIpc #SS220-IPC
   - EmergencyOxygenClownSponsor #SS220-Survival-Loadout
  # - LoadoutSpeciesVoxNitrogen #SS220-Survival-Loadout
 
@@ -797,7 +797,7 @@
   - EmergencyOxygenMime
   - EmergencySpeciesMothMime
   - LoadoutSpeciesVoxNitrogen
-  - LoadoutSpeciesMimeIpc #SS220-add-ipc
+  - LoadoutSpeciesMimeIpc #SS220-IPC
   - EmergencyOxygenMimeSponsor #SS220-Survival-Loadout
  # - EmergencySpeciesMothMime #SS220-Survival-Loadout
  # - LoadoutSpeciesVoxNitrogen #SS220-Survival-Loadout
@@ -1199,7 +1199,7 @@
   - EmergencyNitrogenExtendedSponsor #SS220-Survival-Loadout
   - EmergencyOxygenExtended
   - LoadoutSpeciesVoxNitrogen
-  - LoadoutSpeciesEngineerIpc #SS220-add-ipc
+  - LoadoutSpeciesEngineerIpc #SS220-IPC
   - EmergencyOxygenExtendedSponsor #SS220-Survival-Loadout
  # - LoadoutSpeciesVoxNitrogen #SS220-Survival-Loadout
 
@@ -1614,7 +1614,7 @@
   - EmergencyNitrogenSecuritySponsor #SS220-Survival-Loadout
   - EmergencyOxygenSecurity
   - LoadoutSpeciesVoxNitrogen
-  - LoadoutSpeciesSecurityIpc #SS220-add-ipc
+  - LoadoutSpeciesSecurityIpc #SS220-IPC
 
 - type: loadoutGroup
   id: SecurityStar

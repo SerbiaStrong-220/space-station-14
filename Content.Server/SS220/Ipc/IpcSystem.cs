@@ -1,4 +1,5 @@
-﻿// Taken from: Corvax https://github.com/space-syndicate/space-station-14
+﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+// Original code taken from: Corvax https://github.com/space-syndicate/space-station-14
 
 using Content.Shared.Actions;
 using Content.Shared.Alert;

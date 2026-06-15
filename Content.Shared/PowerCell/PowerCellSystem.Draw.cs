@@ -21,6 +21,7 @@ public sealed partial class PowerCellSystem
             _battery.RefreshChargeRate(battery.Value.AsNullable());
     }
 
+    //SS220-IPC begin
     /// <summary>
     /// Sets the draw rate for the power cell draw component.
     /// </summary>
@@ -36,6 +37,7 @@ public sealed partial class PowerCellSystem
         if (TryGetBatteryFromSlot(ent.Owner, out var battery))
             _battery.RefreshChargeRate(battery.Value.AsNullable());
     }
+    //SS220-IPC end
 
     /// <summary>
     /// Returns whether the entity has a slotted battery and <see cref="PowerCellDrawComponent.UseCharge"/> charge.

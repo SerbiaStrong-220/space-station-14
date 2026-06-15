@@ -1,4 +1,6 @@
-﻿- type: markingsGroup
+﻿# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: markingsGroup
   parent: Undergarments
   id: Ipc
   onlyGroupWhitelisted: true
@@ -168,7 +170,7 @@
       types:
         Slash: 5
   - type: Damageable
-    damageContainer: IpcContainer
+    damageContainer: Ipc
     damageModifierSet: Ipc
   - type: ToggleableVisuals
     spriteLayer: light 
