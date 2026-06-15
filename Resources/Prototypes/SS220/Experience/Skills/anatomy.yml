@@ -17,9 +17,9 @@
       HeadProjectileFragment: 1.4
   - type: HiddenImplantInstallation
     installChances:
-      HiddenInstallLevel.Easy: 0.7f
-      HiddenInstallLevel.Medium: 0.3f
-    hiddenInstallChance: 0.15f
+      Easy: 0.7
+      Medium: 0.3
+    hiddenInstallChance: 0.15
 
 - type: skill
   id: AnatomyBase
@@ -40,10 +40,10 @@
       HeadProjectileFragment: 1.2
   - type: HiddenImplantInstallation
     installChances:
-      HiddenInstallLevel.Easy: 0.1f
-      HiddenInstallLevel.Medium: 0.8f
-      HiddenInstallLevel.Hard: 0.1f
-    hiddenInstallChance: 0.2f
+      Easy: 0.1
+      Medium: 0.8
+      Hard: 0.1
+    hiddenInstallChance: 0.2
 
 - type: skill
   id: AnatomyTrained
@@ -64,9 +64,9 @@
       HeadProjectileFragment: 1
   - type: HiddenImplantInstallation
     installChances:
-      HiddenInstallLevel.Medium: 0.6f
-      HiddenInstallLevel.Hard: 0.4f
-    hiddenInstallChance: 0.25f
+      Medium: 0.6
+      Hard: 0.4
+    hiddenInstallChance: 0.25
 
 - type: skill
   id: AnatomyProfessional
@@ -87,6 +87,6 @@
       HeadProjectileFragment: 0.8
   - type: HiddenImplantInstallation
     installChances:
-      HiddenInstallLevel.Medium: 0.2f
-      HiddenInstallLevel.Hard: 0.8f
-    hiddenInstallChance: 0.35f
+      Medium: 0.2
+      Hard: 0.8
+    hiddenInstallChance: 0.35
