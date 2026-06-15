@@ -245,3 +245,4 @@ ent-AirlockMaintNanoTrasenRepresentativeLocked = { ent-AirlockMaintCommandLocked
 ent-AirlockClownLocked = стеклянный шлюз клоуна
     .suffix = Клоун, Закрыт
     .desc = { ent-AirlockServiceGlassLocked.desc }
+
