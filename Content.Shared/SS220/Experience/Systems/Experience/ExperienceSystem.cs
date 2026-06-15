@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Administration.Logs;
+using Content.Shared.Cloning.Events;
 using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
 using Content.Shared.SS220.Experience.SkillChecks;
@@ -36,6 +37,7 @@ public sealed partial class ExperienceSystem : EntitySystem
 
         SubscribeLocalEvent<ExperienceComponent, SkillCheckEvent>(OnSkillCheckEvent);
         SubscribeLocalEvent<ExperienceComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<ExperienceComponent, CloningEvent>(OnCloning);
     }
 
     private void OnSkillCheckEvent(Entity<ExperienceComponent> entity, ref SkillCheckEvent args)
@@ -47,6 +49,14 @@ public sealed partial class ExperienceSystem : EntitySystem
     {
         OnMapInitSkillEntity(entity, ref args);
         InitializeExperienceComp(entity);
+    }
+
+    private void OnCloning(Entity<ExperienceComponent> entity, ref CloningEvent args)
+    {
+        if (!TryComp<ExperienceComponent>(args.CloneUid, out var experienceComp))
+            return;
+
+        InitializeExperienceComp((args.CloneUid, experienceComp));
     }
 
     private void InitExperienceSkillTree(Entity<ExperienceComponent> entity, ProtoId<SkillTreePrototype> skillTree, bool logReiniting = true)
