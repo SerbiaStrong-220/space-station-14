@@ -20,3 +20,6 @@ ent-LockerInterdyneArmoryArmored = укрепленный шкаф отряда 
 
 ent-LockerNanoTrasenRepresentative = шкаф представителя НТ
     .desc = { ent-LockerBaseSecure.desc }
+ent-LockerClownFilled = { ent-LockerClown }
+    .suffix = Заполненный
+    .desc = { ent-LockerClown.desc }
