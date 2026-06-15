@@ -1,0 +1,62 @@
+# carp
+- type: foodSequenceElement
+  id: MeatCarpBurger
+  name: food-sequence-burger-content-carp
+  sprites:
+  - sprite: SS220/Objects/Consumable/Food/meat.rsi
+    state: fish-cooked
+
+# xeno
+- type: foodSequenceElement
+  id: MeatXenoBurger
+  name: food-sequence-burger-content-xeno
+  sprites:
+  - sprite: SS220/Objects/Consumable/Food/meat.rsi
+    state: xeno-cooked
+  tags:
+  - Cooked
+  - Meat
+
+# snake
+- type: foodSequenceElement
+  id: MeatSnakeBurger
+  name: food-sequence-burger-content-snake
+  sprites:
+  - sprite: SS220/Objects/Consumable/Food/meat.rsi
+    state: snake-grilled
+  tags:
+  - Cooked
+  - Meat
+
+# spider
+- type: foodSequenceElement
+  id: MeatSpiderBurger
+  name: food-sequence-burger-content-spider
+  sprites:
+  - sprite: SS220/Objects/Consumable/Food/meat.rsi
+    state: spider-grilled
+  tags:
+  - Cooked
+  - Meat
+
+# rabbit
+- type: foodSequenceElement
+  id: MeatRabbitBurger
+  name: food-sequence-burger-content-rabbit
+  sprites:
+  - sprite: SS220/Objects/Consumable/Food/meat.rsi
+    state: rabbit_cooked
+  tags:
+  - Cooked
+  - Meat
+
+# rabbit - dried
+- type: foodSequenceElement
+  id: MeatRabbitDriedBurger
+  name: food-sequence-burger-content-rabbit
+  sprites:
+  - sprite: SS220/Objects/Consumable/Food/meat.rsi
+    state: rabbit_dried
+  tags:
+  - Cooked
+  - Meat

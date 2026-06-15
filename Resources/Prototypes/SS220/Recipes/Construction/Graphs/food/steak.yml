@@ -33,3 +33,28 @@
 
   - node: cooked bnuuy
     entity: FoodMeatRabbitBnuuySteak
+
+# filet migrawr
+- type: constructionGraph
+  id: BearSteak
+  start: filet migrawr
+  graph:
+  - node: filet migrawr
+    entity: FoodMeatBearCooked
+    edges:
+    - to: finished filet migrawr
+      conditions:
+      - !type:MinSolution
+        solution: food
+        reagent:
+          ReagentId: ManlyDorf
+        quantity: 5
+      completed:
+      - !type:PlaySound
+        sound: /Audio/Items/Lighters/lighter1.ogg
+      steps:
+      - ignite: {}
+        doAfter: 1
+
+  - node: finished filet migrawr
+    entity: FoodMealBearsteak

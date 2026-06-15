@@ -380,6 +380,54 @@ namespace Content.Server.Construction
                     return result && doAfter != null ? HandleResult.DoAfter : HandleResult.False;
                 }
 
+                //SS220-grillables-update begin
+                case Shared.SS220.Construction.Steps.IgniteConstructionGraphStep igniteStep:
+                {
+                    if (ev is not InteractUsingEvent interactUsing)
+                        break;
+
+                    user = interactUsing.User;
+
+                    var isHotEvent = new IsHotEvent();
+                    RaiseLocalEvent(interactUsing.Used, isHotEvent);
+
+                    if (!isHotEvent.IsHot)
+                        return HandleResult.False;
+
+                    if (validation)
+                        return HandleResult.Validated;
+
+                    if (doAfterState == DoAfterState.Completed)
+                        return HandleResult.True;
+
+                    if (doAfterState == DoAfterState.None && igniteStep.DoAfter > 0)
+                    {
+                        var doAfterEv = new ConstructionInteractDoAfterEvent(EntityManager, interactUsing);
+
+                        var doAfterEventArgs = new DoAfterArgs(EntityManager, interactUsing.User, igniteStep.DoAfter, doAfterEv, uid, uid, interactUsing.Used)
+                        {
+                            BreakOnDamage = true,
+                            BreakOnMove = true,
+                            NeedHand = true,
+                        };
+
+                        var started = _doAfterSystem.TryStartDoAfter(doAfterEventArgs);
+
+                        if (!started)
+                            return HandleResult.False;
+
+#if DEBUG
+                        doAfterEv.DoAfter = new(default, doAfterEventArgs, default);
+                        var result = HandleInteraction(uid, doAfterEv, step, validation: true, out _, construction);
+                        DebugTools.Assert(result == HandleResult.Validated);
+#endif
+                        return HandleResult.DoAfter;
+                    }
+
+                    return HandleResult.True;
+                }
+                //SS220-grillables-update end
+
                 case TemperatureConstructionGraphStep temperatureChangeStep:
                 {
                     if (ev is not OnTemperatureChangeEvent)

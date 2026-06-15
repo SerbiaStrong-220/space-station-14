@@ -31,10 +31,9 @@
           Quantity: 3
         - ReagentId: Fat
           Quantity: 1
-  - type: Construction
-    graph: RabbitSteak
-    node: start
-    defaultTarget: cooked rabbit
+  - type: Grillable
+    timeToCook: 10
+    cookingResult: FoodMeatRabbitSteak
   - type: RotInto
     entity: FoodMeatRabbitRotten
 
@@ -84,12 +83,11 @@
           Quantity: 2
         - ReagentId: Stimulants
           Quantity: 2
-  - type: Construction
-    graph: RabbitBnuuySteak
-    node: start
-    defaultTarget: cooked bnuuy
   - type: RotInto
     entity: FoodMeatRabbitBnuuyDried
+  - type: Grillable
+    timeToCook: 10
+    cookingResult: FoodMeatRabbitBnuuySteak
 
 - type: entity
   parent: FoodMeatBase
@@ -117,6 +115,9 @@
           Quantity: 2
         - ReagentId: Protein
           Quantity: 2
+  - type: FoodSequenceElement
+    entries:
+      Burger: MeatRabbitDriedBurger
 
 # Cooked
 
@@ -151,6 +152,9 @@
       - state: spider-inhand-left-grilled
       right:
       - state: spider-inhand-right-grilled
+  - type: FoodSequenceElement
+    entries:
+      Burger: MeatSpiderBurger
 
 - type: entity
   name: snake steak
@@ -181,6 +185,9 @@
       - state: snake-inhand-left-grilled
       right:
       - state: snake-inhand-right-grilled
+  - type: FoodSequenceElement
+    entries:
+      Burger: MeatSnakeBurger
 
 - type: entity
   parent: FoodMeatBase
@@ -204,6 +211,9 @@
           Quantity: 2
         - ReagentId: Protein
           Quantity: 2
+  - type: FoodSequenceElement
+    entries:
+      Burger: MeatRabbitBurger
 
 - type: entity
   parent: FoodMeatRabbitSteak
@@ -223,3 +233,84 @@
           Quantity: 1
         - ReagentId: Stimulants
           Quantity: 2
+  - type: FoodSequenceElement
+    entries:
+      Burger: MeatRabbitBurger
+
+# Grilled carp
+- type: entity
+  parent: FoodMeatBase
+  id: FoodMeatFishCooked
+  name: cooked carp fillet
+  description: Best served with Tartar sauce
+  components:
+  - type: FlavorProfile
+    flavors:
+    - fishy
+  - type: Tag
+    tags:
+    - Cooked
+    - Meat
+    - Steak
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/meat.rsi
+    state: fish-cooked
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Protein
+          Quantity: 5
+  - type: Item
+    storedOffset: -2,1
+    inhandVisuals:
+      left:
+      - state: fish-cooked-inhand-left
+      right:
+      - state: fish-cooked-inhand-right
+  - type: FoodSequenceElement
+    entries:
+      Burger: MeatCarpBurger
+
+# Grilled xeno
+- type: entity
+  parent: FoodMeatBase
+  id: FoodMeatXenoCooked
+  name: cooked xeno meat
+  description: Xeno steak grilled to perfection.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - meaty
+  - type: Tag
+    tags:
+    - Cooked
+    - Meat
+    - Steak
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/meat.rsi
+    state: xeno-cooked
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Protein
+          Quantity: 5
+  - type: Item
+    storedOffset: -2,1
+    inhandVisuals:
+      left:
+      - sprite: Resources/Textures/Consumable/Food/meat.rsi
+      - state: plain-inhand-left
+        color: "#6EFF41"
+      right:
+      - sprite: Resources/Textures/Consumable/Food/meat.rsi
+      - state: plain-inhand-right
+        color: "#6EFF41"
+  - type: FoodSequenceElement
+    entries:
+      Burger: MeatXenoBurger
