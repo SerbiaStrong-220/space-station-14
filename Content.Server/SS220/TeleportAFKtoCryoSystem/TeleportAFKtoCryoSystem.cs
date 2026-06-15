@@ -7,7 +7,6 @@ using Content.Server.Station.Systems;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Audio;
 using Content.Shared.Bed.Cryostorage;
-using Content.Shared.Body.Components;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.GameTicking;
@@ -46,7 +45,7 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
 
     private TimeSpan _afkTeleportToCryo;
     private TimeSpan _ssdTimeout;
-    private TimeSpan _lateAftTeleportToCryo;
+    private TimeSpan _lateAfkTeleportToCryo;
 
     private readonly Dictionary<(EntityUid, NetUserId), TimeSpan> _entityEnteredSSDTimes = new();
     private readonly List<(EntityUid, NetUserId)> _toRemove = new();
@@ -56,7 +55,7 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
         base.Initialize();
 
         _cfg.OnValueChanged(CCVars220.AfkTeleportToCryo, x => _afkTeleportToCryo = TimeSpan.FromSeconds(x), true);
-        _cfg.OnValueChanged(CCVars220.LateAfkTeleportToCryo, x => _lateAftTeleportToCryo = TimeSpan.FromSeconds(x), true);
+        _cfg.OnValueChanged(CCVars220.LateAfkTeleportToCryo, x => _lateAfkTeleportToCryo = TimeSpan.FromSeconds(x), true);
         _cfg.OnValueChanged(CCVars220.SSDTimeOut, x => _ssdTimeout = TimeSpan.FromSeconds(x), true);
 
         _playerManager.PlayerStatusChanged += OnPlayerChange;
@@ -102,7 +101,7 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
                 continue;
             }
 
-            if (pair.Value < _gameTiming.CurTime)
+            if (pair.Value > _gameTiming.CurTime)
                 continue;
 
             if (!TeleportEntityToCryoStorage(pair.Key.Item1))
@@ -135,7 +134,7 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
                     break;
                 }
 
-                var timeWhenTeleport = humanoidPreferences.TeleportAfkToCryoStorage ? _gameTiming.CurTime + _afkTeleportToCryo : _gameTiming.CurTime + _lateAftTeleportToCryo;
+                var timeWhenTeleport = humanoidPreferences.TeleportAfkToCryoStorage ? _gameTiming.CurTime + _afkTeleportToCryo : _gameTiming.CurTime + _lateAfkTeleportToCryo;
                 _entityEnteredSSDTimes[(e.Session.AttachedEntity.Value, e.Session.UserId)] = timeWhenTeleport;
                 break;
 

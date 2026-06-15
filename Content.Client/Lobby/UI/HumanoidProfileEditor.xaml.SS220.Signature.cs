@@ -5,9 +5,9 @@ namespace Content.Client.Lobby.UI;
 public sealed partial class HumanoidProfileEditor
 {
     // this is here cause I CAN
-    private void SetTeleportAfkToCryoStorage(bool newLateTeleportAfkToCryoStorage)
+    private void SetTeleportAfkToCryoStorage(bool newEarlyTeleportAfkToCryoStorage)
     {
-        Profile = Profile?.WithTeleportAfkToCryoStorage(newLateTeleportAfkToCryoStorage);
+        Profile = Profile?.WithTeleportAfkToCryoStorage(newEarlyTeleportAfkToCryoStorage);
         SetDirty();
     }
 

@@ -494,8 +494,8 @@ namespace Content.Shared.Preferences
             };
         }
 
-        public HumanoidCharacterProfile WithTeleportAfkToCryoStorage(bool lateTeleportAfkToCryoStorage)
-            => new(this) { TeleportAfkToCryoStorage = lateTeleportAfkToCryoStorage };
+        public HumanoidCharacterProfile WithTeleportAfkToCryoStorage(bool earlyTeleportAfkToCryoStorage)
+            => new(this) { TeleportAfkToCryoStorage = earlyTeleportAfkToCryoStorage };
 
         // ss220 add signature start
         public HumanoidCharacterProfile WithSignatureData(SignatureData signatureData)
