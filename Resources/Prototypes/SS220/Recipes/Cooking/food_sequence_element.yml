@@ -5,6 +5,9 @@
   sprites:
   - sprite: SS220/Objects/Consumable/Food/meat.rsi
     state: fish-cooked
+  tags:
+  - Cooked
+  - Meat
 
 # xeno
 - type: foodSequenceElement
