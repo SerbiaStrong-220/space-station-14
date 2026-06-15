@@ -102,18 +102,18 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         switch (edgeSelectorState.Infos.Count)
         {
             case 0:
-                if (entity.Comp.OngoingSurgeries.Count == 0 && HasComp<SurgeryToolComponent>(args.Used))
-                {
+                if (!HasComp<SurgeryToolComponent>(args.Used))
+                    return;
+
+                if (entity.Comp.OngoingSurgeries.Count == 0)
                     _popup.PopupPredictedCursor(Loc.GetString(SurgeryNeedToBeStarted), args.User);
-                    args.Handled = true;
-                    break;
-                }
 
                 foreach (var (surgeryId, _) in entity.Comp.OngoingSurgeries)
                 {
                     PopupSurgeryGraphFailures(entity, surgeryId, args.Used, args.User);
-                    args.Handled = true;
                 }
+
+                args.Handled = true;
                 break;
 
             case 1:
