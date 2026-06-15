@@ -50,7 +50,7 @@ ent-AirlockMimeLocked = { ent-AirlockServiceLocked }
     .suffix = Мим, Закрыт
     .desc = { ent-AirlockServiceLocked.desc }
 
-ent-AirlockGlassMimeLocked = стеклянный шлюз мима
+ent-AirlockGlassMimeLocked = { ent-AirlockServiceGlassLocked }
     .suffix = Мим, Закрыт
     .desc = { ent-AirlockServiceGlassLocked.desc }
 
@@ -241,8 +241,3 @@ ent-AirlockNanoTrasenRepresentativeLocked = { ent-AirlockCommand }
 ent-AirlockMaintNanoTrasenRepresentativeLocked = { ent-AirlockMaintCommandLocked }
     .desc = { ent-AirlockMaintCommandLocked.desc }
     .suffix = Представитель НТ, Закрыто
-
-ent-AirlockClownLocked = стеклянный шлюз клоуна
-    .suffix = Клоун, Закрыт
-    .desc = { ent-AirlockServiceGlassLocked.desc }
-
