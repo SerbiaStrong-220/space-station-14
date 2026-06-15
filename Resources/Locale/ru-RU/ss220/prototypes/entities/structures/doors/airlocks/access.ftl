@@ -243,7 +243,7 @@ ent-AirlockMaintNanoTrasenRepresentativeLocked = { ent-AirlockMaintCommandLocked
     .suffix = Представитель НТ, Закрыто
 
 
-ent-AirlockClownLocked = { ent-AirlockServiceLocked }
+ent-AirlockClownLocked = { ent-AirlockClown }
     .suffix = Клоун, Закрыт
     .desc = { ent-AirlockServiceGlassLocked.desc }
 
