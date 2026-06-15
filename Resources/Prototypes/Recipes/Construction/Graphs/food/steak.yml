@@ -89,21 +89,22 @@
     entity: FoodMeatLizardCooked
 
 # bear steak
-#SS220-grillables-update begin
-#- type: constructionGraph
-#  id: BearSteak
-#  start: start
-#  graph:
-#
-#  - node: start
-#    edges:
-#    - to: filet migrawr
-#      completed:
-#      - !type:PlaySound
-#        sound: /Audio/Effects/sizzle.ogg
-#      steps:
-#      - minTemperature: 345 #apparently trichinellosis is a concern
-#SS220-grillables-update end
+- type: constructionGraph
+  id: BearSteak
+  start: start
+  graph:
+
+  - node: start
+    edges:
+    - to: filet migrawr
+      completed:
+      - !type:PlaySound
+        sound: /Audio/Effects/sizzle.ogg
+      steps:
+      - minTemperature: 345 #apparently trichinellosis is a concern
+
+  - node: filet migrawr
+    entity: FoodMeatBearCooked
 
 # crab steak
 - type: constructionGraph

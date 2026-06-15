@@ -382,10 +382,6 @@ namespace Content.Server.Construction
                 {
                     case ToolConstructionGraphStep _:
                         throw new InvalidDataException("Invalid first step for construction recipe!");
-                    //SS220-grillables-update begin
-                    case Shared.SS220.Construction.Steps.IgniteConstructionGraphStep _:
-                        throw new InvalidDataException("Invalid first step for construction recipe!");
-                    //SS220-grillables-update end
                 }
             }
 
@@ -518,10 +514,6 @@ namespace Content.Server.Construction
                         break;
                     case ToolConstructionGraphStep _:
                         throw new InvalidDataException("Invalid first step for item recipe!");
-                    //SS220-grillables-update begin
-                    case Shared.SS220.Construction.Steps.IgniteConstructionGraphStep _:
-                        throw new InvalidDataException("Invalid first step for item recipe!");
-                    //SS220-grillables-update end
                 }
 
                 if (valid)

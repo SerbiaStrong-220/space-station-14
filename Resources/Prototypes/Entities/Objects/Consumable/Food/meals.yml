@@ -329,7 +329,7 @@
   - type: FlavorProfile
     flavors:
       - meaty
-#      - fishy #SS220-grillables-update - no more fish
+      - fishy
   - type: Sprite
     state: bearsteak
   - type: SolutionContainerManager
@@ -341,11 +341,6 @@
           Quantity: 2
         - ReagentId: Vitamin
           Quantity: 5
-#SS220-grillables-update-begin
-  - type: Construction
-    graph: BearSteak
-    node: finished filet migrawr
-  #SS220-grillables-update-end
   - type: Tag
     tags:
     - Meat

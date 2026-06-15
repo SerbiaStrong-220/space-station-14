@@ -21,13 +21,6 @@ namespace Content.Shared.Construction.Steps
                 return typeof(ToolConstructionGraphStep);
             }
 
-            //SS220-grillables-update begin
-            if (node.Has("ignite"))
-            {
-                return typeof(SS220.Construction.Steps.IgniteConstructionGraphStep);
-            }
-            //SS220-grillables-update end
-
             if (node.Has("component"))
             {
                 return typeof(ComponentConstructionGraphStep);

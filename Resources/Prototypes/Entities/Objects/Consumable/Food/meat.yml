@@ -1199,10 +1199,6 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        #SS220-grillables-update begin - to cook filet migrawr
-        maxVol: 20
-        canReact: false
-        #SS220-grillables-update end
         reagents:
         - ReagentId: Nutriment
           Quantity: 5
