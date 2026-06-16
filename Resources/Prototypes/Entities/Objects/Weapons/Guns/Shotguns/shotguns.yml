@@ -27,7 +27,6 @@
   - type: AmmoCounter
   - type: Gun
     fireRate: 2
-    angleIncrease: 7
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -78,22 +77,8 @@
     - Back
     - suitStorage
   - type: AmmoCounter
-  #FCB realistic guns begin
-  - type: GunWieldBonus
-    minAngle: -5
-    maxAngle: -20
-    angleIncrease: -2.6
-  - type: GunAimable
-    minAngle: -8
-    maxAngle: -6
-  #FCB realistic guns end
+  - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
   - type: Gun
-  #FCB realistic shotguns begin
-    angleIncrease: 7
-    angleDecay: 6
-    minAngle: 15
-    maxAngle: 35
-  #FCB realistic shotguns end
     fireRate: 2
     selectedMode: FullAuto
     availableModes:
@@ -114,20 +99,11 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
         insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
-      gun_chamber:
-        name: Chamber
-        startingItem: ShellShotgun
-        priority: 1
-        whitelist:
-          tags:
-            - ShellShotgun
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
-  - type: ChamberMagazineAmmoProvider
-    soundRack:
-      path: /Audio/Weapons/Guns/Cock/ltrifle_cock.ogg
+  - type: MagazineAmmoProvider
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -135,50 +111,6 @@
   - type: Appearance
   - type: StaticPrice
     price: 5000
-
-- type: entity
-  name: SF-FAS
-  id: SFShotgun
-  parent: WeaponShotgunBulldog
-  description: A devastating close-quarters weapon. This is what happens when old and reliable design of lecter meets 12x71.
-  components:
-  - type: Clothing
-    sprite: SS220/Objects/Weapons/Guns/Shotguns/sf_fas.rsi
-    quickEquip: false
-    slots:
-    - Back
-    - suitStorage
-  - type: AmmoCounter
-  - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
-  - type: Gun
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazineShotgun
-        priority: 2
-        whitelist:
-          tags:
-          - MagazineShotgun
-        whitelistFailPopup: gun-magazine-whitelist-fail
-        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
-      gun_chamber:
-        name: Chamber
-        startingItem: ShellShotgun
-        priority: 1
-        whitelist:
-          tags:
-            - ShellShotgun
-  - type: Sprite
-    sprite: SS220/Objects/Weapons/Guns/Shotguns/sf_fas.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-0
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: Item
-    size: Large
 
 - type: entity
   name: double-barreled shotgun
@@ -193,6 +125,8 @@
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
   - type: Gun
     fireRate: 3
+  - type: GunSpreadModifier
+    spread: 0.6
   - type: BallisticAmmoProvider
     capacity: 2
   - type: Construction
@@ -212,7 +146,7 @@
 
 - type: entity
   name: Enforcer
-  parent: [BaseWeaponShotgun, BaseGunWieldable, BaseSecurityContraband] #FCB realistic weapons
+  parent: [BaseWeaponShotgun, BaseGunWieldable, BaseSecurityContraband]
   id: WeaponShotgunEnforcer
   description: A premium semi-automatic shotgun, and the pride of all security forces. Uses .50 shotgun shells.
   components: # intend for Enforcer to have wider choke for semi-auto function
@@ -222,35 +156,26 @@
     sprite: Objects/Weapons/Guns/Shotguns/enforcer.rsi
   - type: Item
     sprite: Objects/Weapons/Guns/Shotguns/enforcer_inhands_64x.rsi
-  #FCB realistic guns begin
-  - type: GunWieldBonus
-    minAngle: -5
-    maxAngle: -20
-    angleIncrease: -5.2
-  - type: GunAimable
-    minAngle: -8
-    maxAngle: -6
-  - type: Gun
-    angleIncrease: 7
-    angleDecay: 6
-    minAngle: 15
-    maxAngle: 35
-  #FCB realistic guns end
+  - type: BallisticAmmoProvider
+  - type: Gun # Corvax-Guns
     soundGunshot:
       path: /Audio/Corvax/Weapons/Guns/Gunshots/shotgun_metal.ogg
+  - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
 
 - type: entity
   parent: WeaponShotgunEnforcer
   id: WeaponShotgunEnforcerRubber
   suffix: Non-Lethal
   components:
+  - type: BallisticAmmoProvider
+    proto: ShellShotgunBeanbag
   - type: Gun # Corvax-Guns
     soundGunshot:
       path: /Audio/Corvax/Weapons/Guns/Gunshots/shotgun_metal.ogg
 
 - type: entity
   name: Kammerer
-  parent: [BaseWeaponShotgun, BaseGunWieldable, BaseSecurityContraband] #FCB realistic weapons
+  parent: [BaseWeaponShotgun, BaseGunWieldable, BaseSecurityContraband]
   id: WeaponShotgunKammerer
   description: An old yet faithful design, and a favorite among irregular forces of many worlds. Uses .50 shotgun shells.
   components: # intend for Kammerer to have tighter choke for slower fire rate and/or manual cycling
@@ -262,24 +187,12 @@
   - type: Clothing
     sprite: SS220/Objects/Weapons/Guns/Shotguns/pump.rsi #SS220 kammerer resprite
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
-  #FCB realistic guns begin
-  - type: GunWieldBonus
-    minAngle: -5
-    maxAngle: -21
-    angleIncrease: -6.2
-  - type: GunAimable
-    minAngle: -9
-    maxAngle: -8
   - type: Gun
-    angleIncrease: 8
-    angleDecay: 8
-    minAngle: 15
-    maxAngle: 35
-  #FCB realistic guns end
     fireRate: 1
     soundGunshot: # Corvax-Guns
       path: /Audio/Corvax/Weapons/Guns/Gunshots/shotgun_alt.ogg
-
+  - type: GunSpreadModifier
+    spread: 0.6
   - type: Tag
     tags:
     - WeaponShotgunKammerer

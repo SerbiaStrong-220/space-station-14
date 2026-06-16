@@ -33,8 +33,6 @@
     - Belt
   - type: Gun
     canSuicide: true ##SS220-new-feature kus
-    minAngle: 9 #FCB realistic guns
-    maxAngle: 19 #FCB realistic guns
     fireRate: 6
     selectedMode: SemiAuto
     availableModes:
@@ -85,11 +83,6 @@
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Pistols/viper.rsi
-  #FCB realistic guns start
-  - type: GunAimable
-    minAngle: -5
-    maxAngle: -9
-  #FCB realistic guns end
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -122,11 +115,6 @@
   id: WeaponPistolEchis
   description: A cyborg-mounted weapon system based on the Viper pistol. Creates ammunition on the fly from an internal fabricator, which slowly self-charges.
   components:
-  #FCB realistic guns start
-  - type: GunAimable
-    minAngle: -5
-    maxAngle: -9
-  #FCB realistic guns end
   - type: Gun
     fireRate: 6
     selectedMode: SemiAuto
@@ -163,11 +151,6 @@
   id: WeaponPistolCobra
   description: Integrally suppressed semi-automatic pistol used by the Syndicate, firing caseless subsonic rounds. Favored by any agent who likes to keep things quiet and leave no evidence behind. Feeds from .25 pistol magazines.
   components:
-  #FCB realistic guns start
-  - type: GunAimable
-    minAngle: -5
-    maxAngle: -9
-  #FCB realistic guns end
   - type: Sprite
     sprite: Objects/Weapons/Guns/Pistols/cobra.rsi
     layers:
@@ -230,18 +213,11 @@
   - type: Item
     storedOffset: 0,-2
   - type: Gun
-    minAngle: 9 #FCB realistic guns
-    maxAngle: 18 #FCB realistic guns
     fireRate: 5
     availableModes:
     - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/mk58.ogg
-  #FCB realistic guns start
-  - type: GunAimable
-    minAngle: -5
-    maxAngle: -10
-  #FCB realistic guns end
   - type: StealTarget
     stealGroup: OfficerHandgun
 
@@ -260,15 +236,10 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
     sprite: Objects/Weapons/Guns/Pistols/N1984.rsi
-  #FCB realistic guns start
-  - type: GunAimable
-    minAngle: -4
-    maxAngle: -10
-  #FCB realistic guns end
   - type: Gun
-    minAngle: 10 #FCB realistic guns
-    maxAngle: 24 #FCB realistic guns
-    angleIncrease: 5 #FCB realistic guns
+    minAngle: 1
+    maxAngle: 20
+    angleIncrease: 8
     angleDecay: 9
     fireRate: 4
     availableModes:

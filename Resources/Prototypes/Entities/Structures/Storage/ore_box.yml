@@ -6,8 +6,6 @@
   components:
   - type: StaticPrice
     price: 500
-  - type: Item #FCB added item component to structures
-    size: Gigantic #FCB added item component to structures
   - type: Anchorable
   - type: InteractionOutline
   - type: Damageable

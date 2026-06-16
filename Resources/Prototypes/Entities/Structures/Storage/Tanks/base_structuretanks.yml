@@ -6,8 +6,6 @@
   abstract: true
   components:
   - type: Animateable
-  - type: Item #FCB added item component to structures
-    size: Gigantic #FCB added item component to structures
   - type: Sprite
     noRot: true
   - type: InteractionOutline

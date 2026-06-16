@@ -3,7 +3,6 @@
   parent: BaseItem
   abstract: true
   components:
-  - type: GunAimable #FCB realistic weapons
   - type: EmitSoundOnLand
     sound:
       path: /Audio/SS220/Effects/Drop/laser.ogg #new sound_drop effect, add MIXnikita

@@ -9,8 +9,6 @@
     sprite: Structures/Storage/barrels.rsi
     state: metalbarrel
     noRot: true
-  - type: Item #FCB added item component to structures
-    size: Gigantic #FCB added item component to structures
   - type: Fixtures
     fixtures:
       fix1:

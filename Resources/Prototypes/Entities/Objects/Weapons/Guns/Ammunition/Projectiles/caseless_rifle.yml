@@ -12,7 +12,6 @@
     damage:
       types:
         Piercing: 24 #ss220lowTTKUpdate
-      armourPiercing: 15 #FCB armour piercing added
 
 - type: entity
   parent: BaseBulletPractice

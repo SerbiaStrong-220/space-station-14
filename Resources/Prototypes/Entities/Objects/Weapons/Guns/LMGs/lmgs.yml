@@ -23,25 +23,18 @@
     - suitStorage
   - type: Wieldable
     unwieldOnUse: false
-  #FCB realistic guns begin
   - type: GunWieldBonus
-    minAngle: -7
-    maxAngle: -26
-    angleIncrease: -1.1
-  - type: GunAimable
-    minAngle: -16
-    maxAngle: -8
+    minAngle: -20
+    maxAngle: -20
   - type: Gun
     minAngle: 24
     maxAngle: 45
-    angleIncrease: 2.50
+    angleIncrease: 4
     angleDecay: 16
-    fireRate: 6
-  #FCB realistic guns end
+    fireRate: 8
     selectedMode: FullAuto
     availableModes:
       - FullAuto
-      - SemiAuto #FCB realistic guns
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/lmg.ogg
     soundEmpty:
@@ -94,6 +87,12 @@
     steps: 4
     zeroVisible: true
   - type: Appearance
+    #ss220lowTTKUpdate btw lmg too OP ^^^^
+  - type: HeldSpeedModifier
+    walkModifier: 0.7
+    sprintModifier: 0.7
+    mirrorClothingModifier: false
+    #ss220lowTTKUpdate
   - type: StaticPrice
     price: 10000
 

@@ -7,8 +7,6 @@
   components:
     - type: Animateable
     - type: InteractionOutline
-    - type: Item #FCB added item component to structures
-      size: Gigantic #FCB added item component to structures
     - type: Transform
       noRot: true
     - type: Sprite

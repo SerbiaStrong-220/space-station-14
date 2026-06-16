@@ -7,8 +7,6 @@
   - type: Transform
     anchored: true
     noRot: false
-  - type: Item #FCB added item component to structures
-    size: Gigantic #FCB added item component to structures
   - type: Physics
     bodyType: Static
   - type: Fixtures

@@ -23,33 +23,23 @@
     - Back
     - suitStorage
   - type: AmmoCounter
-    #FCB realistic guns begin
-  - type: GunWieldBonus
-    minAngle: -3
-    maxAngle: -17
-    angleIncrease: -1.1
-  - type: GunAimable
-    minAngle: -13
-    maxAngle: -3
   - type: Gun
-    minAngle: 17
-    maxAngle: 30
-    angleIncrease: 4
-    angleDecay: 8
     fireRate: 0.75
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
   - type: BallisticAmmoProvider
-    capacity: 5
-    proto: FullRifleCartridge
+    capacity: 10
+    proto: CartridgeLightRifle
     whitelist:
       tags:
-      - FullRifleCartridge
+      - CartridgeLightRifle
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
         ents: []
-  #FCB realistic guns end
   - type: StaticPrice
     price: 500
 
@@ -67,6 +57,39 @@
       map: [ "enum.SolutionContainerLayers.Fill" ]
       visible: false
   - type: Appearance
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    fillBaseName: base
+    inHandsFillBaseName: -fill-
+    inHandsMaxFillLevels: 1
+    equippedFillBaseName: -fill-
+    equippedMaxFillLevels: 1
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Piercing: 12
+    angle: 0
+    animation: WeaponArcThrust
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: MeleeRequiresWield
+  - type: AltFireMelee
+    attackType: Heavy
+  - type: SolutionContainerManager
+    solutions:
+      melee:
+        maxVol: 2
+  - type: MeleeChemicalInjector
+    solution: melee
+  - type: RefillableSolution
+    solution: melee
+  - type: InjectableSolution
+    solution: melee
+  - type: SolutionTransfer
+    maxTransferAmount: 2
+  - type: Sharp
+    butcherDelayModifier: 2 #It's a bayonet
   - type: GunRequiresWield
   - type: StaticPrice
     price: 500

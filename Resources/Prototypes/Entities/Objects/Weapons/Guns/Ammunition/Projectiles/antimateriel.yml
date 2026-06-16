@@ -13,10 +13,9 @@
     damage:
       types:
         Piercing: 75
-        Structural: 50 #Isn't that important any more i guess
-      armourPiercing: 50 #FCB armour piercing added
+        Structural: 226
     penetrationThreshold: 360
-    #penetrationDamageTypeRequirement:
-    #- Structural
+    penetrationDamageTypeRequirement:
+    - Structural
   - type: StaminaDamageOnCollide
     damage: 60

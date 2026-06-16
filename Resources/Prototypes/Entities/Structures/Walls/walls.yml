@@ -62,8 +62,6 @@
   parent: BaseStructureWall
   id: BaseWall
   components:
-  - type: Damageable
-    piercingThreshold: 5
   - type: Occluder # Breaks on diagonal walls
 
 - type: entity
@@ -514,7 +512,6 @@
     - type: Damageable
       damageContainer: StructuralInorganic
       damageModifierSet: StructuralMetallicStrong
-      piercingThreshold: 9999
     - type: RadiationBlocker
       resistance: 5
 
@@ -524,8 +521,6 @@
   name: plastitanium wall
   suffix: ""
   components:
-    - type: Damageable
-      piercingThreshold: 55
     - type: Destructible
       thresholds:
         - trigger:
@@ -603,7 +598,6 @@
     graph: Girder
     node: reinforcedWall
   - type: Damageable
-    piercingThreshold: 40
     damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallicStrong
   - type: Destructible

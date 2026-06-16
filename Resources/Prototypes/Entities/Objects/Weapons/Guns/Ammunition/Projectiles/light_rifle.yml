@@ -12,7 +12,6 @@
     damage:
       types:
         Piercing: 33 #ss220lowTTKUpdate
-      armourPiercing: 15 #FCB armour piercing added
 
 - type: entity
   parent: BaseBulletPractice
@@ -41,7 +40,6 @@
       types:
         Piercing: 16 #weaponBalance #Incendary rebalance
         Heat: 3 #weaponBalance
-      armourPiercing: 7 #FCB armour piercing added
 
 - type: entity
   parent: BaseBulletUranium
@@ -59,4 +57,3 @@
       types:
         Radiation: 9
         Piercing: 14 #ss220lowTTKUpdate
-      armourPiercing: 16 #FCB armour piercing added

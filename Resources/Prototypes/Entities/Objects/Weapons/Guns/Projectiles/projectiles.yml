@@ -70,11 +70,7 @@
       projectile:
         shape:
           !type:PhysShapeAabb
-<<<<<<< HEAD
-          bounds: "-0.1,-0.30,0.1,0.30" #FCB realistic weapons
-=======
           bounds: "-0.1,-0.10,0.1,0.30"
->>>>>>> master
         hard: false
         mask:
         - Impassable
@@ -93,8 +89,6 @@
     damage:
       types:
         Piercing: 14
-    penetrationDamageTypeRequirement:
-    - Piercing
     soundHit:
       path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
   - type: TimedDespawn

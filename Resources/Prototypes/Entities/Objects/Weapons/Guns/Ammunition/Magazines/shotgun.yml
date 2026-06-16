@@ -12,12 +12,10 @@
     whitelist:
       tags:
         - ShellShotgun
-    capacity: 16 # FCB realistic guns
+    capacity: 8
     soundRack:
       path: /Audio/Corvax/Weapons/Guns/Cock/shotgun_cock.ogg # Corvax-Guns
   - type: Item
-    shape: # FCB realistic guns
-    - 0,0,1,1 # FCB realistic guns
     size: Small
     inhandVisuals:
       left:

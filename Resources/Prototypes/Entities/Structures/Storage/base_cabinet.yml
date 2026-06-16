@@ -2,8 +2,6 @@
   abstract: true
   id: BaseItemCabinet
   components:
-  - type: Item #FCB added item component to structures
-    size: Gigantic #FCB added item component to structures
   - type: Openable
     openOnActivate: true
     closeable: true

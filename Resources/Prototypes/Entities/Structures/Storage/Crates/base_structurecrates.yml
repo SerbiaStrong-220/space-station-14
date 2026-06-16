@@ -31,8 +31,6 @@
       map: ["enum.PaperLabelVisuals.Layer"]
   - type: InteractionOutline
   - type: Physics
-  - type: Item #FCB added item component to structures
-    size: Gigantic #FCB added item component to structures
   - type: Fixtures
     fixtures:
       fix1:
