@@ -24,7 +24,6 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IOverlayManager _overlay = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
