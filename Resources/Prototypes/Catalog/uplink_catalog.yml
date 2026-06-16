@@ -290,19 +290,19 @@
   productEntity: BriefcaseWeaponHushpupFilled
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 10
+    Telecrystal: 5 #SS220 weapon overhaul
   cost:
-    Telecrystal: 15
+    Telecrystal: 5 #SS220 weapon overhaul
   categories:
   - UplinkWeaponry
   # ss220 - post upstream - uplink tweaks - bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 17
+      Telecrystal: 5 #SS220 weapon overhaul #This weapon is COMICALLY useless, especially if we remember that c-20r has similar cost
     MediumDynamic:
-      Telecrystal: 13
+      Telecrystal: 7 #SS220 weapon overhaul
     HardDynamic:
-      Telecrystal: 13
+      Telecrystal: 9 #SS220 weapon overhaul
   # ss220 - post upstream - uplink tweaks - end
 
 - type: listing
@@ -326,11 +326,11 @@
   #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 19
+      Telecrystal: 15 #SS220 weapon overhaul
     MediumDynamic:
-      Telecrystal: 15
+      Telecrystal: 13 #SS220 weapon overhaul
     HardDynamic:
-      Telecrystal: 8
+      Telecrystal: 7 #SS220 weapon overhaul
   #ss220 dynamic-price end
 
 - type: listing
@@ -373,11 +373,11 @@
   #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 22
+      Telecrystal: 18 #SS220 weapon overhaul
     MediumDynamic:
-      Telecrystal: 16
+      Telecrystal: 12 #SS220 weapon overhaul
     HardDynamic:
-      Telecrystal: 10
+      Telecrystal: 8 #SS220 weapon overhaul
   #ss220 dynamic-price end
 
 - type: listing

@@ -47,6 +47,7 @@
     whitelist:
       tags:
       - NukeOpsUplink
+      - DebugUplink
 
 - type: listing
   id: UplinkEstoc
@@ -66,6 +67,7 @@
     whitelist:
       tags:
       - NukeOpsUplink
+      - DebugUplink
 
 - type: listing
   id: UplinkWeaponAdvancedLaser
@@ -210,6 +212,7 @@
     whitelist:
       tags:
       - NukeOpsUplink
+      - DebugUplink
 
 - type: listing
   id: UplinkMimeRelic
@@ -480,6 +483,7 @@
     whitelist:
       tags:
       - NukeOpsUplink
+      - DebugUplink
 
 - type: listing
   id: UplinkBorgModuleFlamingAxe
@@ -546,9 +550,9 @@
     LightDynamic:
       Telecrystal: 16
     MediumDynamic:
-      Telecrystal: 14
+      Telecrystal: 10
     HardDynamic:
-      Telecrystal: 11
+      Telecrystal: 8
   categories:
   - UplinkWearables
 
@@ -748,6 +752,7 @@
     whitelist:
       tags:
       - NukeOpsUplink
+      - DebugUplink
 
 - type: listing
   id: UplinkDABChemicalImplant
@@ -775,6 +780,7 @@
     blacklist:
       tags:
       - NukeOpsUplink
+      - DebugUplink
 
 - type: listing
   id: UplinkFakeCaptainIDCard
@@ -842,6 +848,7 @@
     whitelist:
       tags:
       - NukeOpsUplink
+      - DebugUplink
 
 - type: listing
   id: UplinkSpeedLoaderMagnumAP
@@ -1164,6 +1171,7 @@
     whitelist:
       tags:
       - NukeOpsUplink
+      - DebugUplink
 
 - type: listing
   id: UplinkMagazineShotgunHP
