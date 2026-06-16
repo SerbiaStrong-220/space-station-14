@@ -69,6 +69,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly StationSystem _stationSystem = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
+    [Dependency] private readonly IBanManager _banManager = default!; // SS220-ban-manager
     //[Dependency] private readonly SharedAudioSystem _audio = default!; // ss220 remove unused dep
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly ReplacementAccentSystem _wordreplacement = default!;
@@ -758,6 +759,11 @@ public sealed partial class ChatSystem : SharedChatSystem
 
     private void SendDeadChat(EntityUid source, ICommonSession player, string message, bool hideChat)
     {
+        // SS220-chat-bans-begin
+        if (_banManager.IsChatBanned(player, BannableChats.Dead))
+            return;
+        // SS220-chat-bans-end
+
         var clients = GetDeadChatClients();
         var playerName = Name(source);
         message = _chatManager.DeleteProhibitedCharacters(message, player); // SS220 delete prohibited characters
