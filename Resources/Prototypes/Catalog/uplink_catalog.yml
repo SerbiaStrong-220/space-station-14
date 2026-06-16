@@ -779,7 +779,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: icon } #SS220 weapon overhaul
   productEntity: MagazinePistolSubMachineGun
   cost:
-    Telecrystal: 2
+    Telecrystal: 1 #SS220 weapon overhaul
   categories:
   - UplinkAmmo
 
@@ -791,7 +791,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/m12.rsi, state: pellets }
   productEntity: MagazineShotgun
   cost:
-    Telecrystal: 2
+    Telecrystal: 1 #SS220 weapon overhaul
   categories:
   - UplinkAmmo
 
@@ -802,7 +802,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/m12.rsi, state: slug }
   productEntity: MagazineShotgunSlug
   cost:
-    Telecrystal: 2
+    Telecrystal: 1 #SS220 weapon overhaul
   categories:
   - UplinkAmmo
 
@@ -850,7 +850,7 @@
   description: uplink-sniper-ammo-desc
   productEntity: MagazineBoxAntiMateriel
   cost:
-    Telecrystal: 3 #SS220 weapon overhaul
+    Telecrystal: 1 #SS220 weapon overhaul
   categories:
   - UplinkAmmo
 

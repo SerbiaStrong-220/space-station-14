@@ -548,11 +548,11 @@
     Telecrystal: 8
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 16
+      Telecrystal: 15
     MediumDynamic:
-      Telecrystal: 10
+      Telecrystal: 9
     HardDynamic:
-      Telecrystal: 8
+      Telecrystal: 7
   categories:
   - UplinkWearables
 
@@ -862,9 +862,9 @@
   - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2 #it was WAY too much for that
+      Telecrystal: 1 #it was WAY too much for that
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     HardDynamic:
       Telecrystal: 1
 
@@ -880,9 +880,9 @@
   - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     HardDynamic:
       Telecrystal: 1
 
@@ -898,9 +898,9 @@
   - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     HardDynamic:
       Telecrystal: 1
 
@@ -916,9 +916,9 @@
   - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     HardDynamic:
       Telecrystal: 1
 
@@ -934,9 +934,9 @@
   - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     HardDynamic:
       Telecrystal: 1
 
@@ -952,9 +952,9 @@
   - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     HardDynamic:
       Telecrystal: 1
 
@@ -970,9 +970,9 @@
   - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     HardDynamic:
       Telecrystal: 1
 
@@ -1006,9 +1006,9 @@
   - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     HardDynamic:
       Telecrystal: 1
 
@@ -1019,16 +1019,16 @@
   icon: { sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/antimaterial_mag.rsi, state: green-icon }
   productEntity: MagazineAntiMaterialAP
   cost:
-    Telecrystal: 3
+    Telecrystal: 2
   categories:
   - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 3
+      Telecrystal: 1
     MediumDynamic:
-      Telecrystal: 3
+      Telecrystal: 1
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
 
 - type: listing
   id: UplinkMagazineAntiMaterialHE
@@ -1042,9 +1042,9 @@
   - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     HardDynamic:
       Telecrystal: 1
 
@@ -1078,9 +1078,9 @@
   - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     HardDynamic:
       Telecrystal: 1
 
@@ -1096,9 +1096,9 @@
   - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     HardDynamic:
       Telecrystal: 1
 
@@ -1114,11 +1114,11 @@
   - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 3
+      Telecrystal: 1 #Not nearly as valuable without the estoc
     MediumDynamic:
-      Telecrystal: 3
+      Telecrystal: 1
     HardDynamic:
-      Telecrystal: 3
+      Telecrystal: 1
 
 - type: listing
   id: UplinkMagazineShotgunHEI
@@ -1132,9 +1132,9 @@
   - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     HardDynamic:
       Telecrystal: 1
 
@@ -1150,9 +1150,9 @@
   - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     HardDynamic:
       Telecrystal: 1
 
@@ -1185,9 +1185,9 @@
   - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     HardDynamic:
       Telecrystal: 1
 
