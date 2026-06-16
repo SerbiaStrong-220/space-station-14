@@ -198,6 +198,19 @@ public abstract partial class SharedMoverController : VirtualController
             return;
         }
 
+        // SS220-try-to-reduce-idle-computing-cost-begin
+        if (AssertValidWish(mover, MovementSpeedModifierComponent.DefaultBaseWalkSpeed, MovementSpeedModifierComponent.DefaultBaseSprintSpeed) == Vector2.Zero
+            && physicsComponent.LinearVelocity.LengthSquared() < 0.00001f)
+        {
+            UsedMobMovement[uid] = true;
+
+            if (physicsComponent.AngularVelocity != 0f)
+                PhysicsSystem.SetAngularVelocity(uid, 0, body: physicsComponent);
+
+            return;
+        }
+        // SS220-try-to-reduce-idle-computing-cost-end
+
         /*
          * This assert is here because any entity using inputs to move should be a Kinematic Controller.
          * Kinematic Controllers are not built to use the entirety of the Physics engine by intention and
