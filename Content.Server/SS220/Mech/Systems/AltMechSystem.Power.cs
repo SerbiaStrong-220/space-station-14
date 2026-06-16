@@ -24,27 +24,27 @@ public sealed partial class AltMechSystem
         while (query.MoveNext(out var uid, out var comp))
         {
             if (!TryComp<InputMoverComponent>(uid, out var moverComp))
-                return;
+                continue;
 
             if (comp.PilotSlot.ContainedEntity == null)
-                return;
+                continue;
 
             if (curTime < comp.NextPowerDrain)
                 continue;
 
             if (comp.ContainerDict["chassis"].ContainedEntity == null)
-                return;
+                continue;
 
             var batteryEnt = comp.ContainerDict["power"].ContainedEntity;
 
             if (batteryEnt == null)
-                return;
+                continue;
 
             if (!TryComp<BatteryComponent>(comp.ContainerDict["power"].ContainedEntity, out var batteryComp))
-                return;
+                continue;
 
             if (!TryComp<MechChassisComponent>(comp.ContainerDict["chassis"].ContainedEntity, out var chassisComp))
-                return;
+                continue;
 
             comp.NextPowerDrain = _timing.CurTime + new TimeSpan(0,0,1);
 
