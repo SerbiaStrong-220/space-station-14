@@ -9,7 +9,11 @@
   - type: MechPart
   - type: ComplexInteraction
   - type: MobMover
+  - type: ArmorBlock
   - type: AltMech
+    pilotWhitelist:
+      components:
+        - HumanoidProfile
   - type: PowerCellDraw
   - type: Blindable #For optics to work
   - type: StatusEffects
@@ -129,27 +133,27 @@
     sprite: FCB/Objects/Mechs/cores.rsi
     state: basicloader
     noRot: true
-  - type: ArmorBlock # Ah yes,my beloved СБЭУ
+  - type: AltArmor # Ah yes,my beloved СБЭУ
     tresholddict:
-        Radiation: 1000 # As always mechs do not care about radiation/poison/airloss/etc.
-        Poison: 1000
-        Airloss: 1000
-        Caustic: 1000
-        Piercing: 18 #Numbers higher compared to a strikeproof shield, bullets/lasers should be easily ignoring this due to AP
-        Blunt: 27
-        Heat: 13
-        Slash: 20
-        Shock: 30 # All the electronics is insulated in any industrial machine and the steel frame is not affected by it in any way
+      Radiation: 1000 # As always mechs do not care about radiation/poison/airloss/etc.
+      Poison: 1000
+      Airloss: 1000
+      Caustic: 1000
+      Piercing: 18 #Numbers higher compared to a strikeproof shield, bullets/lasers should be easily ignoring this due to AP
+      Blunt: 27
+      Heat: 13
+      Slash: 20
+      Shock: 30 # All the electronics is insulated in any industrial machine and the steel frame is not affected by it in any way
     durabilitytresholddict:
-        Radiation: 1000
-        Poison: 1000
-        Airloss: 1000
-        Caustic: 1000
-        Piercing: 10
-        Blunt: 14
-        Heat: 7
-        Slash: 15
-        Shock: 30
+      Radiation: 1000
+      Poison: 1000
+      Airloss: 1000
+      Caustic: 1000
+      Piercing: 10
+      Blunt: 14
+      Heat: 7
+      Slash: 15
+      Shock: 30
   - type: AltMech
     baseState: basicloader
     openState: basicloader
@@ -160,9 +164,6 @@
     maxIntegrity: 250
     maximalArmMass: 250
     ownMass: 250
-    pilotWhitelist:
-      components:
-        - HumanoidAppearance
 
 - type: entity
   id: MechLight
@@ -174,27 +175,27 @@
     sprite: FCB/Objects/Mechs/cores.rsi
     state: basiclight
     noRot: true
-  - type: ArmorBlock # Ah yes,my beloved СБЭУ
+  - type: AltArmor # Ah yes,my beloved СБЭУ
     tresholddict:
-        Radiation: 1000 # As always mechs do not care about radiation/poison/airloss/etc.
-        Poison: 1000
-        Airloss: 1000
-        Caustic: 1000
-        Piercing: 15 #Numbers a bit higher compared to a strikeproof shield, bullets/lasers should be easily ignoring this due to AP
-        Blunt: 20
-        Heat: 13
-        Slash: 20
-        Shock: 30 # All the electronics is insulated in any industrial machine and the steel frame is not affected by it in any way
+      Radiation: 1000 # As always mechs do not care about radiation/poison/airloss/etc.
+      Poison: 1000
+      Airloss: 1000
+      Caustic: 1000
+      Piercing: 15 #Numbers a bit higher compared to a strikeproof shield, bullets/lasers should be easily ignoring this due to AP
+      Blunt: 20
+      Heat: 13
+      Slash: 20
+      Shock: 30 # All the electronics is insulated in any industrial machine and the steel frame is not affected by it in any way
     durabilitytresholddict:
-        Radiation: 1000
-        Poison: 1000
-        Airloss: 1000
-        Caustic: 1000
-        Piercing: 10
-        Blunt: 13
-        Heat: 7
-        Slash: 12
-        Shock: 30
+      Radiation: 1000
+      Poison: 1000
+      Airloss: 1000
+      Caustic: 1000
+      Piercing: 10
+      Blunt: 13
+      Heat: 7
+      Slash: 12
+      Shock: 30
   - type: AltMech
     baseState: basiclight
     openState: basiclight
@@ -203,9 +204,6 @@
     maxIntegrity: 200
     ownMass: 150
     maximalArmMass: 145
-    pilotWhitelist:
-      components:
-        - HumanoidAppearance
   - type: Destructible
     thresholds:
     - trigger:
@@ -230,27 +228,27 @@
     sprite: FCB/Objects/Mechs/cores.rsi
     state: armoredsynthold
     noRot: true
-  - type: ArmorBlock
+  - type: AltArmor
     tresholddict:
-        Radiation: 1000
-        Poison: 1000
-        Airloss: 1000
-        Caustic: 1000
-        Piercing: 140 #This is a DS frame and logically a tank
-        Blunt: 150
-        Heat: 120
-        Slash: 70
-        Shock: 150
+      Radiation: 1000
+      Poison: 1000
+      Airloss: 1000
+      Caustic: 1000
+      Piercing: 140 #This is a DS frame and logically a tank
+      Blunt: 150
+      Heat: 120
+      Slash: 70
+      Shock: 150
     durabilitytresholddict:
-        Radiation: 1000
-        Poison: 1000
-        Airloss: 1000
-        Caustic: 1000
-        Piercing: 110
-        Blunt: 150
-        Heat: 120
-        Slash: 70
-        Shock: 150
+      Radiation: 1000
+      Poison: 1000
+      Airloss: 1000
+      Caustic: 1000
+      Piercing: 110
+      Blunt: 150
+      Heat: 120
+      Slash: 70
+      Shock: 150
   - type: FlashImmunity
   - type: EyeProtection
   - type: AltMech
@@ -262,9 +260,6 @@
     ownMass: 300
     maximalArmMass: 200
     transparent: true
-    pilotWhitelist:
-      components:
-        - HumanoidAppearance
   - type: Destructible
     thresholds:
     - trigger:

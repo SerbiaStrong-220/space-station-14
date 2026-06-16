@@ -75,35 +75,20 @@
   icon: { sprite: /Textures/Objects/Weapons/Melee/e_sword.rsi, state: icon }
   discountCategory: veryRareDiscounts
   discountDownTo:
-<<<<<<< HEAD
-    Telecrystal: 6 #ss220-uplink-discounts
-  productEntity: EnergySword
-  cost:
-    Telecrystal: 8 #ss220-uplink-discounts
-=======
     Telecrystal: 4 #ss220-uplink-discounts
   productEntity: EnergySword
   cost:
     Telecrystal: 5 #ss220-uplink-discounts
->>>>>>> master
   categories:
   - UplinkWeaponry
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-<<<<<<< HEAD
-      Telecrystal: 11
-    MediumDynamic:
-      Telecrystal: 8
-    HardDynamic:
-      Telecrystal: 6
-=======
       Telecrystal: 7
     MediumDynamic:
       Telecrystal: 5
     HardDynamic:
       Telecrystal: 4
->>>>>>> master
 #ss220 dynamic-price end
 
 - type: listing
@@ -259,15 +244,9 @@
   productEntity: EnergyShieldAlt #FCB shield rework
   discountCategory: veryRareDiscounts
   discountDownTo:
-<<<<<<< HEAD
-    Telecrystal: 6 #FCB shield rework
-  cost:
-    Telecrystal: 8 #FCB shield rework
-=======
     Telecrystal: 6 #SS220 shield rework
   cost:
     Telecrystal: 8 #SS220 shield rework
->>>>>>> master
   categories:
   - UplinkWeaponry
   #ss220 dynamic-price bgn
@@ -279,8 +258,6 @@
     HardDynamic:
       Telecrystal: 7
   #ss220 dynamic-price end
-<<<<<<< HEAD
-=======
 
 - type: listing
   id: uplinkRiggedBoxingGloves
@@ -304,7 +281,6 @@
     HardDynamic:
       Telecrystal: 7
   #ss220 dynamic-price end
->>>>>>> master
 
 - type: listing
   id: UplinkSniperBundle
