@@ -32,13 +32,11 @@ using Content.Shared.Standing;
 using Content.Shared.Storage.Components;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Whitelist;
-using Lidgren.Network;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Content.Shared.SS220.Mech.Systems;
 
