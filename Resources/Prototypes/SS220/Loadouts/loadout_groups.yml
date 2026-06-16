@@ -285,6 +285,16 @@
   loadouts:
   - LawHeadset
   - LawHeadsetAlt
+
+- type: loadoutGroup
+  id: LawyerBackpack
+  name: loadout-group-lawyer-backpack
+  minLimit: 1
+  loadouts:
+  - CommonBackpack
+  - CommonSatchel
+  - CommonDuffel
+  - IAABackpackLeather
   # Адвокат (Конец)
 
   # Офицер "Синий Щит" (Начало)

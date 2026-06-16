@@ -67,6 +67,9 @@ public sealed class ImplantCheckInSurgerySystem : EntitySystem
 
         foreach (var implant in implants)
         {
+            if (HasComp<HiddenInstalledImplantComponent>(implant))
+                continue;
+
             string implantName;
             var protoId = MetaData(implant)?.EntityPrototype?.ID;
             if (protoId is not null)
