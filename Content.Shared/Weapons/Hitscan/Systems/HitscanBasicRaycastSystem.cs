@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Damage.Components;
 using Content.Shared.Database;
@@ -16,7 +17,6 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
-using System.Numerics;
 
 namespace Content.Shared.Weapons.Hitscan.Systems;
 
