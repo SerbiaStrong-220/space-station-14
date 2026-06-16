@@ -1,6 +1,5 @@
 using System.Linq;
 using Content.Server.Administration.Managers;
-using Content.Server.Administration.Managers;
 using Content.Server.Antag.Components;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
@@ -40,7 +39,6 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
-using System.Linq;
 
 namespace Content.Server.Antag;
 

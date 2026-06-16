@@ -26,10 +26,10 @@ public sealed partial class AltMechSystem
     {
         ClearOverlay();
 
-        if (!EntityManager.TryGetComponent<AltMechComponent>(entity, out var mechComp) || mechComp.PilotSlot.ContainedEntity == null)
+        if (!TryComp<AltMechComponent>(entity, out var mechComp) || mechComp.PilotSlot.ContainedEntity == null)
             return;
 
-        if (!EntityManager.TryGetComponent<MobStateComponent>(mechComp.PilotSlot.ContainedEntity, out var mobState))
+        if (!TryComp<MobStateComponent>(mechComp.PilotSlot.ContainedEntity, out var mobState))
             return;
 
         _overlay.AddOverlay(_damageOverlay);
@@ -55,7 +55,7 @@ public sealed partial class AltMechSystem
     private void OnThresholdCheck(Entity<AltMechPilotComponent> ent, ref MobThresholdChecked args)
     {
 
-        if (!(EntityManager.TryGetComponent(args.Target, out AltMechPilotComponent? pilot)))
+        if (!TryComp(args.Target, out AltMechPilotComponent? pilot))
             return;
 
         if (pilot.Mech != _playerManager.LocalEntity)
@@ -74,7 +74,7 @@ public sealed partial class AltMechSystem
 
     private void UpdateOverlays(EntityUid entity, MobStateComponent? mobState, DamageableComponent? damageable = null, MobThresholdsComponent? thresholds = null)
     {
-        if (!EntityManager.TryGetComponent<AltMechComponent>(entity, out var mechComp) || mechComp.PilotSlot.ContainedEntity == null)
+        if (!TryComp<AltMechComponent>(entity, out var mechComp) || mechComp.PilotSlot.ContainedEntity == null)
             return;
 
         var pilot = mechComp.PilotSlot.ContainedEntity;
@@ -82,9 +82,9 @@ public sealed partial class AltMechSystem
         if (pilot is not { Valid: true } pilotValidated)
             return;
 
-        if (mobState == null && !EntityManager.TryGetComponent(pilotValidated, out mobState) ||
-            thresholds == null && !EntityManager.TryGetComponent(pilotValidated, out thresholds) ||
-            damageable == null && !EntityManager.TryGetComponent(pilotValidated, out damageable))
+        if (mobState == null && !TryComp(pilotValidated, out mobState) ||
+            thresholds == null && !TryComp(pilotValidated, out thresholds) ||
+            damageable == null && !TryComp(pilotValidated, out damageable))
             return;
 
         if (!thresholds.ShowOverlays)

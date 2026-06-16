@@ -6,7 +6,6 @@ using Content.Shared.Ghost;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Silicons.Borgs.Components;
-using Content.Shared.SS220.Mech.Components;
 using Content.Shared.SS220.MindExtension;
 using Content.Shared.SS220.MindExtension.Events;
 using Robust.Shared.Network;

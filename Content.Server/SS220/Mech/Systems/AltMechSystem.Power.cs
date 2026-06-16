@@ -13,7 +13,7 @@ namespace Content.Server.SS220.Mech.Systems;
 /// </summary>
 public sealed partial class AltMechSystem
 {
-    [Dependency] protected readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Update(float frameTime)
     {
