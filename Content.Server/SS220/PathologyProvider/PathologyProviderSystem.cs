@@ -2,6 +2,7 @@
 
 using Content.Server.SS220.Pathology;
 using Content.Shared.Armor;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Projectiles;
 using Content.Shared.SS220.Pathology;
@@ -28,6 +29,9 @@ public sealed class PathologyProviderSystem : EntitySystem
 
     private void OnProjectileHit(Entity<PathologyOnProjectileHitComponent> entity, ref ProjectileHitEvent args)
     {
+        if (HasComp<GodmodeComponent>(args.Target))
+            return;
+
         var validDamages = args.Damage.DamageDict.Where(x => !_damageTypesToIgnore.Contains(x.Key));
         if (!validDamages.Any())
             return;
