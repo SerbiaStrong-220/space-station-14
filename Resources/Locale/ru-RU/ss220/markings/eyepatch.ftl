@@ -1,0 +1,10 @@
+marking-CustomizationLefteyePatch = Глазная повязка (Левый)
+marking-CustomizationRighteyePatch = Глазная повязка (Правый)
+marking-CustomizationLefteyePatchMoth = { marking-CustomizationLefteyePatch }
+marking-CustomizationRighteyePatchMoth = { marking-CustomizationRighteyePatch }
+marking-CustomizationLefteyePatchVox = { marking-CustomizationLefteyePatch }
+marking-CustomizationRighteyePatchVox = { marking-CustomizationRighteyePatch }
+marking-CustomizationLefteyePatchArachnid = { marking-CustomizationLefteyePatch }
+marking-CustomizationRighteyePatchArachnid = { marking-CustomizationRighteyePatch }
+marking-CustomizationLefteyePatchTajaran = { marking-CustomizationLefteyePatch }
+marking-CustomizationRighteyePatchTajaran = { marking-CustomizationRighteyePatch }
