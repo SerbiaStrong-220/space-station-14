@@ -2,7 +2,6 @@
 // Original code taken from: Corvax https://github.com/space-syndicate/space-station-14
 
 using Content.Shared.Actions;
-using Content.Shared.Alert;
 using Content.Shared.SS220.Ipc;
 using Content.Shared.Ninja.Components;
 using Content.Shared.Ninja.Systems;
@@ -21,7 +20,6 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Sound.Components;
 using Content.Shared.UserInterface;
 using Content.Shared.Temperature;
-using Robust.Shared.Audio;
 using Content.Shared.MagicMirror;
 using Content.Shared.Power;
 
@@ -39,6 +37,12 @@ public sealed partial class IpcSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly MobThresholdSystem _mobThresholdSystem = default!;
+
+    private static readonly LocId IpcDrainReady = "ipc-drain-enabled";
+    private static readonly LocId IpcDrainDisabled = "ipc-drain-disabled";
+    private static readonly LocId IpcNoBattery = "ipc-no-battery";
+    private static readonly TimeSpan SoundMinInterval = TimeSpan.FromSeconds(15);
+    private static readonly TimeSpan SoundMaXInterval = TimeSpan.FromSeconds(30);
 
     public override void Initialize()
     {
@@ -71,41 +75,57 @@ public sealed partial class IpcSystem : EntitySystem
         _action.RemoveAction(ent.Owner, ent.Comp.ChangeFaceActionEntity);
     }
 
+    /// <summary>
+    /// If the battery is present but discharged, the movement speed is reduced.
+    /// </summary>
     private void OnBatteryStateChanged(Entity<IpcComponent> ent, ref BatteryStateChangedEvent args)
     {
-        if (MetaData(ent).EntityLifeStage >= EntityLifeStage.Terminating)
+        if (Terminating(ent))
             return;
 
         _movementSpeedModifier.RefreshMovementSpeedModifiers(ent.Owner);
     }
 
+    /// <summary>
+    /// The presence of a battery affects the movement speed
+    /// and the ability to use the drain ability.
+    /// When removing the battery, forcibly disable the drain ability.
+    /// </summary>
     private void OnPowerCellChanged(Entity<IpcComponent> ent, ref PowerCellChangedEvent args)
     {
-        if (MetaData(ent).EntityLifeStage >= EntityLifeStage.Terminating)
+        if (Terminating(ent))
             return;
 
         _movementSpeedModifier.RefreshMovementSpeedModifiers(ent.Owner);
 
-        if (!_powerCell.HasBattery(ent.Owner))
+        if (_powerCell.HasBattery(ent.Owner))
+            return;
+
+        ent.Comp.DrainActivated = false;
+        _action.SetToggled(ent.Comp.DrainBatteryActionEntity, ent.Comp.DrainActivated);
+
+        // show popup only if comp removed
+        if (RemComp<BatteryDrainerComponent>(ent))
         {
-            ent.Comp.DrainActivated = false;
-            _action.SetToggled(ent.Comp.DrainBatteryActionEntity, ent.Comp.DrainActivated);
-            RemComp<BatteryDrainerComponent>(ent);
-            _popup.PopupEntity(Loc.GetString("ipc-component-disabled"), ent, ent);
-            Dirty(ent);
+            _popup.PopupEntity(Loc.GetString(IpcDrainDisabled), ent, ent);
         }
+
+        Dirty(ent);
     }
 
+    /// <summary>
+    /// Enable/disable the drain ability. 
+    /// </summary>
     private void OnToggleDrainAction(Entity<IpcComponent> ent, ref ToggleDrainActionEvent args)
     {
-        if (!_powerCell.HasBattery(ent.Owner))
-        {
-            _popup.PopupEntity(Loc.GetString("ipc-component-no-battery"), ent, ent);
-            return;
-        }
-
         if (args.Handled)
             return;
+
+        if (!_powerCell.HasBattery(ent.Owner))
+        {
+            _popup.PopupEntity(Loc.GetString(IpcNoBattery), ent, ent);
+            return;
+        }
 
         ent.Comp.DrainActivated = !ent.Comp.DrainActivated;
         _action.SetToggled(ent.Comp.DrainBatteryActionEntity, ent.Comp.DrainActivated);
@@ -119,12 +139,15 @@ public sealed partial class IpcSystem : EntitySystem
         else
             RemComp<BatteryDrainerComponent>(ent);
 
-        var message = ent.Comp.DrainActivated ? "ipc-component-ready" : "ipc-component-disabled";
+        var message = ent.Comp.DrainActivated ? IpcDrainReady : IpcDrainDisabled;
         _popup.PopupEntity(Loc.GetString(message), ent, ent);
 
         Dirty(ent);
     }
 
+    /// <summary>
+    /// The movement speed of the IPS is reduced if they are out of charge.
+    /// </summary>
     private void OnRefreshMovementSpeedModifiers(Entity<IpcComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
         if (!_powerCell.TryGetBatteryFromSlot(ent.Owner, out var battery) || _battery.GetCharge(battery.Value.AsNullable()) / battery.Value.Comp.MaxCharge < 0.01f)
@@ -133,6 +156,9 @@ public sealed partial class IpcSystem : EntitySystem
         }
     }
 
+    /// <summary>
+    /// The screen image change function is based on the Magic Mirror.
+    /// </summary>
     private void OnOpenIpcFaceAction(Entity<IpcComponent> ent, ref OpenIpcFaceActionEvent args)
     {
         if (args.Handled)
@@ -141,8 +167,6 @@ public sealed partial class IpcSystem : EntitySystem
         if (!HasComp<MagicMirrorComponent>(ent))
             return;
 
-        args.Handled = true;
-
         // User open UI event.
         var ev = new BeforeActivatableUIOpenEvent(args.Performer);
 
@@ -150,9 +174,12 @@ public sealed partial class IpcSystem : EntitySystem
         RaiseLocalEvent(ent.Owner, ev);
 
         // Open magic mirror UI
-        _ui.TryOpenUi(ent.Owner, MagicMirrorUiKey.Key, args.Performer);
+        args.Handled = _ui.TryOpenUi(ent.Owner, MagicMirrorUiKey.Key, args.Performer);
     }
 
+    /// <summary>
+    /// IPS take damage from EMP.
+    /// </summary>
     private void OnEmpPulse(Entity<IpcComponent> ent, ref EmpPulseEvent args)
     {
         args.Affected = true;
@@ -163,14 +190,17 @@ public sealed partial class IpcSystem : EntitySystem
 
     }
 
+    /// <summary>
+    /// Organic beings in critical condition make sounds of labored breathing. IPS - beeps.
+    /// </summary>
     private void OnMobStateChanged(Entity<IpcComponent> ent, ref MobStateChangedEvent args)
     {
         if (args.NewMobState is MobState.Critical)
         {
             var sound = EnsureComp<SpamEmitSoundComponent>(ent);
-            sound.Sound = new SoundPathSpecifier("/Audio/Machines/buzz-two.ogg");
-            sound.MinInterval = TimeSpan.FromSeconds(15);
-            sound.MaxInterval = TimeSpan.FromSeconds(30);
+            sound.Sound = ent.Comp.CritStateSound;
+            sound.MinInterval = SoundMinInterval;
+            sound.MaxInterval = SoundMaXInterval;
         }
         else
         {
@@ -179,6 +209,9 @@ public sealed partial class IpcSystem : EntitySystem
 
     }
 
+    /// <summary>
+    /// IPS easily return from a dead state to a critical state if they are repaired.
+    /// </summary>
     private void OnDamageChanged(Entity<IpcComponent> ent, ref DamageChangedEvent args)
     {
         if (!TryComp<MobStateComponent>(ent, out var mobComp))
@@ -199,6 +232,10 @@ public sealed partial class IpcSystem : EntitySystem
         _mobState.ChangeMobState(ent, MobState.Critical);
     }
 
+    /// <summary>
+    /// IPC are sensitive to temperature changes. 
+    /// Going into space without a hardsuit? The battery drains faster.
+    /// </summary>
     private void OnTemperatureChange(Entity<IpcComponent> ent, ref OnTemperatureChangeEvent args)
     {
         if (!TryComp<PowerCellDrawComponent>(ent, out var draw))

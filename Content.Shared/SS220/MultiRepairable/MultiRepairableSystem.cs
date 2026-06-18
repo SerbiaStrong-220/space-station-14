@@ -2,7 +2,6 @@
 
 using Content.Shared.Administration.Logs;
 using Content.Shared.Damage.Systems;
-using Content.Shared.Damage.Components;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
@@ -14,10 +13,14 @@ namespace Content.Shared.Repairable;
 
 public sealed class MultiRepairableSystem : EntitySystem
 {
-    [Dependency] private readonly SharedToolSystem _toolSystem = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedToolSystem _toolSystem = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+
+    private static readonly LocId RepairableRepair = "comp-repairable-repair";
+    private static readonly LocId Target = "target";
+    private static readonly LocId Tool = "tool";
 
     public override void Initialize()
     {
@@ -75,7 +78,7 @@ public sealed class MultiRepairableSystem : EntitySystem
             _adminLogger.Add(LogType.Healed, $"{ToPrettyString(args.User):user} repaired {ToPrettyString(ent):target} by {_damageableSystem.GetTotalDamage(ent.Owner)} using {ToPrettyString(args.Args.Used.Value):tool}");
         }
 
-        var str = Loc.GetString("comp-repairable-repair", ("target", ent), ("tool", args.Args.Used.Value));
+        var str = Loc.GetString(RepairableRepair, (Target, ent), (Tool, args.Args.Used.Value));
         _popup.PopupClient(str, ent, args.User);
 
         var ev = new MultiRepairedEvent(ent, args.User, option);

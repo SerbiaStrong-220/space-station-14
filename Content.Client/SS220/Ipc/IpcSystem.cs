@@ -23,15 +23,17 @@ public sealed partial class IpcSystem : EntitySystem
     private static readonly TimeSpan AlertUpdateDelay = TimeSpan.FromSeconds(0.5f);
     private TimeSpan _nextAlertUpdate = TimeSpan.Zero;
 
-    private EntityQuery<IpcComponent> _ipcQuery;
-    private EntityQuery<PowerCellSlotComponent> _slotQuery;
+    /// <summary>
+    /// Multiply the charge fraction by 10 to get the charge percentage
+    /// </summary>
+    private const float ChargeFracMult = 10f;
+
+    [Dependency] private EntityQuery<IpcComponent> _ipcQuery = default!;
+    [Dependency] private EntityQuery<PowerCellSlotComponent> _slotQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _ipcQuery = GetEntityQuery<IpcComponent>();
-        _slotQuery = GetEntityQuery<PowerCellSlotComponent>();
 
         SubscribeLocalEvent<IpcComponent, LocalPlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<IpcComponent, LocalPlayerDetachedEvent>(OnPlayerDetached);
@@ -71,8 +73,11 @@ public sealed partial class IpcSystem : EntitySystem
             return;
         }
 
-        var chargeLevel = (short)MathF.Round(_battery.GetChargeLevel(battery.Value.AsNullable()) * 10f);
+        // Alert levels from 0 to 10.
+        var chargeLevel = (short)MathF.Round(_battery.GetChargeLevel(battery.Value.AsNullable()) * ChargeFracMult);
 
+        // we make sure 0 only shows if they have absolutely no battery.
+        // also account for floating point imprecision
         if (chargeLevel == 0 && _powerCell.HasDrawCharge((ent.Owner, null, ent.Comp2)))
         {
             chargeLevel = 1;

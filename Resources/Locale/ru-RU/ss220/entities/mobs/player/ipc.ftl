@@ -9,9 +9,9 @@ ent-ActionIpcChangeFace = Сменить интерфейс КПБ
 
 sleep-ipc = КПБ уходит в режим сна.
 
-ipc-component-ready = Опустошение заряда активно
-ipc-component-disabled = Опустошение заряда отключено
-ipc-component-no-battery = Отсутствует батарея
+ipc-drain-enabled = Опустошение заряда активно
+ipc-drain-disabled = Опустошение заряда отключено
+ipc-no-battery = Отсутствует батарея
 
 id-card-access-level-ipc = КПБ
 
