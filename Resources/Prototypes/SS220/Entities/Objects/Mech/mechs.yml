@@ -130,7 +130,7 @@
   description: Name is self-speaking - this is a powerloader frame which has limited equipment space, high mass, cannot be sealed and provides little to no protection to the user but is still better than nothing
   components:
   - type: Sprite
-    sprite: FCB/Objects/Mechs/cores.rsi
+    sprite: SS220/Objects/Mechs/cores.rsi
     state: basicloader
     noRot: true
   - type: AltArmor # Ah yes,my beloved СБЭУ
@@ -172,7 +172,7 @@
   description: Versatile, light and still pretty cheap mech frame, LEF-021 is one of the most widely used mech frames in the TSF space
   components:
   - type: Sprite
-    sprite: FCB/Objects/Mechs/cores.rsi
+    sprite: SS220/Objects/Mechs/cores.rsi
     state: basiclight
     noRot: true
   - type: AltArmor # Ah yes,my beloved СБЭУ
@@ -225,7 +225,7 @@
   description: The peak of modern mech design. Materials, drives, electronics - everything was picked without a glance on the price
   components:
   - type: Sprite
-    sprite: FCB/Objects/Mechs/cores.rsi
+    sprite: SS220/Objects/Mechs/cores.rsi
     state: armoredsynthold
     noRot: true
   - type: AltArmor

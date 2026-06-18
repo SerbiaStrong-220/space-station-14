@@ -7,13 +7,13 @@
   - type: FlashImmunity
   - type: EyeProtection
   - type: Sprite
-    sprite: FCB/Objects/Mechs/items/mecha_parts.rsi
+    sprite: SS220/Objects/Mechs/items/mecha_parts.rsi
     state: visor_basic
   - type: MechPart
     integrity: 70
     maxIntegrity: 70
     attachedSprite:
-      sprite: FCB/Objects/Mechs/heads.rsi
+      sprite: SS220/Objects/Mechs/heads.rsi
       state: welding
   - type: Destructible
     thresholds:
@@ -38,13 +38,13 @@
   - type: FlashImmunity
   - type: EyeProtection
   - type: Sprite
-    sprite: FCB/Objects/Mechs/items/mecha_parts.rsi
+    sprite: SS220/Objects/Mechs/items/mecha_parts.rsi
     state: visor_basic
   - type: MechPart
     integrity: 50 #a large sensor array is not very durable
     maxIntegrity: 50
     attachedSprite:
-      sprite: FCB/Objects/Mechs/heads.rsi
+      sprite: SS220/Objects/Mechs/heads.rsi
       state: medical
   - type: ShowHealthBars
   - type: ShowHealthIcons
@@ -71,13 +71,13 @@
   - type: FlashImmunity
   - type: EyeProtection
   - type: Sprite
-    sprite: FCB/Objects/Mechs/items/mecha_parts.rsi
+    sprite: SS220/Objects/Mechs/items/mecha_parts.rsi
     state: visor_basic
   - type: MechPart
     integrity: 90
     maxIntegrity: 90
     attachedSprite:
-      sprite: FCB/Objects/Mechs/heads.rsi
+      sprite: SS220/Objects/Mechs/heads.rsi
       state: armored
   - type: ShowMindShieldIcons
   - type: ShowJobIcons
@@ -104,13 +104,13 @@
   - type: FlashImmunity
   - type: EyeProtection
   - type: Sprite
-    sprite: FCB/Objects/Mechs/items/mecha_parts.rsi
+    sprite: SS220/Objects/Mechs/items/mecha_parts.rsi
     state: visor_basic
   - type: MechPart
     integrity: 90
     maxIntegrity: 90
     attachedSprite:
-      sprite: FCB/Objects/Mechs/heads.rsi
+      sprite: SS220/Objects/Mechs/heads.rsi
       state: armoredsyndie
   - type: ShowSyndicateIcons
   - type: Destructible
@@ -136,13 +136,13 @@
   - type: FlashImmunity
   - type: EyeProtection
   - type: Sprite
-    sprite: FCB/Objects/Mechs/items/mecha_parts.rsi
+    sprite: SS220/Objects/Mechs/items/mecha_parts.rsi
     state: visor_basic
   - type: MechPart
     integrity: 120
     maxIntegrity: 120
     attachedSprite:
-      sprite: FCB/Objects/Mechs/heads.rsi
+      sprite: SS220/Objects/Mechs/heads.rsi
       state: armoredsyndieheavy
   - type: Destructible
     thresholds:
@@ -167,13 +167,13 @@
   - type: FlashImmunity
   - type: EyeProtection
   - type: Sprite
-    sprite: FCB/Objects/Mechs/items/mecha_parts.rsi
+    sprite: SS220/Objects/Mechs/items/mecha_parts.rsi
     state: visor_basic
   - type: MechPart
     integrity: 75
     maxIntegrity: 75
     attachedSprite:
-      sprite: FCB/Objects/Mechs/heads.rsi
+      sprite: SS220/Objects/Mechs/heads.rsi
       state: armoredsyndiemedical
   - type: ShowSyndicateIcons
   - type: ShowHealthBars
@@ -201,13 +201,13 @@
   - type: FlashImmunity
   - type: EyeProtection
   - type: Sprite
-    sprite: FCB/Objects/Mechs/items/mecha_parts.rsi
+    sprite: SS220/Objects/Mechs/items/mecha_parts.rsi
     state: visor_basic
   - type: MechPart
     integrity: 110
     maxIntegrity: 110
     attachedSprite:
-      sprite: FCB/Objects/Mechs/heads.rsi
+      sprite: SS220/Objects/Mechs/heads.rsi
       state: advancedarmored
   - type: ShowSyndicateIcons
   - type: ShowHealthBars
