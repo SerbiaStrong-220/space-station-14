@@ -31,7 +31,7 @@ public sealed partial class AshDrakeGreatFireballLavaTrailSystem : EntitySystem
 
     private void SpawnLavaAt(EntityUid uid, TransformComponent xform)
     {
-        if (xform.GridUid is not { Valid: true } gridUid || !TryComp<MapGridComponent>(xform.GridUid, out var gridComponent))
+        if (xform.GridUid is not { Valid: true } gridUid || !TryComp<MapGridComponent>(gridUid, out var gridComponent))
             return;
 
         var pos = _transform.GetWorldPosition(xform);

@@ -62,14 +62,14 @@ public sealed partial class BlindsSystem : EntitySystem
         if (!TryComp(uid, out TransformComponent? transform))
             return;
 
-        if (transform.Anchored && TryComp<MapGridComponent>(transform.GridUid, out var grid)) //SS220-upstream-merge
+        if (transform.Anchored && transform.GridUid is { Valid: true } gridUid && TryComp<MapGridComponent>(gridUid, out var gridComp)) //SS220-upstream-merge
         {
-            var pos = _map.CoordinatesToTile(transform.GridUid.Value, grid, transform.Coordinates);
+            var pos = _map.CoordinatesToTile(gridUid, gridComp, transform.Coordinates);
 
-            TrySetOpenAnchoredEntities(component.IsOpen, _map.GetAnchoredEntitiesEnumerator(transform.GridUid.Value, grid, pos + new Vector2i(1, 0)), processedEntities);
-            TrySetOpenAnchoredEntities(component.IsOpen, _map.GetAnchoredEntitiesEnumerator(transform.GridUid.Value, grid, pos + new Vector2i(-1, 0)), processedEntities);
-            TrySetOpenAnchoredEntities(component.IsOpen, _map.GetAnchoredEntitiesEnumerator(transform.GridUid.Value, grid, pos + new Vector2i(0, 1)), processedEntities);
-            TrySetOpenAnchoredEntities(component.IsOpen, _map.GetAnchoredEntitiesEnumerator(transform.GridUid.Value, grid, pos + new Vector2i(0, -1)), processedEntities);
+            TrySetOpenAnchoredEntities(component.IsOpen, _map.GetAnchoredEntitiesEnumerator(gridUid, gridComp, pos + new Vector2i(1, 0)), processedEntities);
+            TrySetOpenAnchoredEntities(component.IsOpen, _map.GetAnchoredEntitiesEnumerator(gridUid, gridComp, pos + new Vector2i(-1, 0)), processedEntities);
+            TrySetOpenAnchoredEntities(component.IsOpen, _map.GetAnchoredEntitiesEnumerator(gridUid, gridComp, pos + new Vector2i(0, 1)), processedEntities);
+            TrySetOpenAnchoredEntities(component.IsOpen, _map.GetAnchoredEntitiesEnumerator(gridUid, gridComp, pos + new Vector2i(0, -1)), processedEntities);
         }
     }
 

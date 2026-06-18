@@ -512,6 +512,7 @@ public abstract partial class SharedMoverController : VirtualController
         var (uid, collider, mover, transform) = entity;
         var enlargedAABB = _lookup.GetWorldAABB(entity.Owner, transform).Enlarged(mover.GrabRange);
 
+        threadColliderSet.Clear(); //  SS220-make-collider-set-thread-safe
         lookupSystem.GetEntitiesIntersecting(transform.MapID, enlargedAABB, threadColliderSet); //  SS220-make-collider-set-thread-safe
         foreach (var otherEntity in threadColliderSet) //  SS220-make-collider-set-thread-safe
         {

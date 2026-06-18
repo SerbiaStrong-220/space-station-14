@@ -137,7 +137,7 @@ public sealed partial class AshDrakeFlySystem : EntitySystem
 
     private void SpawnLavaAround(EntityUid uid, AshDrakeFlyComponent comp, TransformComponent xform)
     {
-        if (xform.GridUid is not { Valid: true } gridUid || !TryComp<MapGridComponent>(xform.GridUid, out var mapGridComp))
+        if (xform.GridUid is not { Valid: true } gridUid || !TryComp<MapGridComponent>(gridUid, out var mapGridComp))
             return;
 
         var tilePos = _map.TileIndicesFor((gridUid, mapGridComp), _transform.GetMapCoordinates(uid));

@@ -41,7 +41,7 @@ public sealed class MoverController : SharedMoverController
     private readonly HashSet<EntityUid> _seenRelayMovers = [];
     private readonly List<Entity<InputMoverComponent>> _moversToUpdate = [];
 
-    private bool _useParallelMobMover = false; // SS220-make-mover-update-parallel;
+    private bool _useParallelMobMover = false; // SS220-make-mover-update-parallel
 
     public override void Initialize()
     {
