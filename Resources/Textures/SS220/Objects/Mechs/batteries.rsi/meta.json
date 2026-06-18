@@ -8,8 +8,20 @@
   },
   "states": [
     {
-      "name": "small",
-      "directions": 4
+        "name": "small",
+        "directions": 4
+    },
+    {
+        "name": "large",
+        "directions": 4
+    },
+    {
+        "name": "nuclear",
+        "directions": 4
+    },
+    {
+        "name": "armorednuclear",
+        "directions": 4
     }
-    ]
+  ]
 }
