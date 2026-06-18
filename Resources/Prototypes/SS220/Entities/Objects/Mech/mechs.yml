@@ -95,6 +95,14 @@
         Blunt: 0
   - type: ActiveRadio
   - type: ZombieImmune
+  - type: ItemSlots
+    slots:
+      mech-tank-slot:
+        name: GasTank
+        priority: 2
+        whitelist:
+          tags:
+            - GasTank
   - type: ContainerContainer
     containers:
       mech-pilot-slot: !type:ContainerSlot

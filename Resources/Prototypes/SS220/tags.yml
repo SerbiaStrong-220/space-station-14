@@ -393,3 +393,6 @@
 
 - type: Tag
   id: HookahCoal
+
+- type: Tag
+  id: GasTank

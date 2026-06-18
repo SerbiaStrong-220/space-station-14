@@ -58,7 +58,6 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly BlindableSystem _blindable = default!;
 
-
     /// <inheritdoc/>
     public override void Initialize()
     {
@@ -261,11 +260,8 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     }
 
 
-    private void SetupUser(EntityUid mech, EntityUid pilot, AltMechComponent? component = null)
+    private void SetupUser(Entity<AltMechComponent> mech, EntityUid pilot)
     {
-        if (!Resolve(mech, ref component))
-            return;
-
         var pilotComp = EnsureComp<AltMechPilotComponent>(pilot);
 
         pilotComp.Mech = mech;
@@ -496,10 +492,8 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         Dirty(uid, component);
 
-        if(TryGetNetEntity(uid, out var netMech) && TryGetNetEntity(toRemove, out var netPart))
+        if (TryGetNetEntity(uid, out var netMech) && TryGetNetEntity(toRemove, out var netPart))
             RaiseNetworkEvent(new MechPartStatusChanged((NetEntity)netMech, (NetEntity)netPart, false, slot));
-
-       // UpdateUserInterface(uid, component);
     }
 
     /// <summary>
@@ -509,17 +503,16 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     /// <param name="delta">The change in energy</param>
     /// <param name="component"></param>
     /// <returns>If the energy was successfully changed.</returns>
-    public virtual bool TryChangeEnergy(EntityUid uid, FixedPoint2 delta, AltMechComponent? component = null)
+    public virtual bool TryChangeEnergy(Entity<AltMechComponent> ent, FixedPoint2 delta)
     {
-        if (!Resolve(uid, ref component))
+        if (!HasComp<AltMechComponent>(ent))
             return false;
 
-        if (component.Energy + delta < 0)
+        if (ent.Comp.Energy + delta < 0)
             return false;
 
-        component.Energy = FixedPoint2.Clamp(component.Energy + delta, 0, component.MaxEnergy);
-        Dirty(uid, component);
-        //UpdateUserInterface(uid, component);
+        ent.Comp.Energy = FixedPoint2.Clamp(ent.Comp.Energy + delta, 0, ent.Comp.MaxEnergy);
+        Dirty(ent);
         return true;
     }
 
@@ -529,25 +522,21 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     /// <param name="uid">The mech itself</param>
     /// <param name="value">The value the integrity will be set at</param>
     /// <param name="component"></param>
-    public virtual void SetIntegrity(EntityUid uid, FixedPoint2 value, AltMechComponent? component = null)
+    public virtual void SetIntegrity(Entity<AltMechComponent> ent, FixedPoint2 value)
     {
-        if (!Resolve(uid, ref component))
-            return;
+        ent.Comp.Integrity = FixedPoint2.Clamp(value, 0, ent.Comp.MaxIntegrity);
 
-        component.Integrity = FixedPoint2.Clamp(value, 0, component.MaxIntegrity);
-
-        if (component.Integrity <= 0)
+        if (ent.Comp.Integrity <= 0)
         {
 
         }
-        else if (component.Broken)
+        else if (ent.Comp.Broken)
         {
-            component.Broken = false;
-            UpdateAppearance(uid, component);
+            ent.Comp.Broken = false;
+            UpdateAppearance(ent);
         }
 
-        Dirty(uid, component);
-        //UpdateUserInterface(uid, component);
+        Dirty(ent);
     }
 
     /// <summary>
@@ -568,12 +557,12 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     /// <param name="toInsert"></param>
     /// <param name="component"></param>
     /// <returns></returns>
-    public bool CanInsert(EntityUid uid, EntityUid toInsert, AltMechComponent? component = null)
+    public bool CanInsert(Entity<AltMechComponent> ent, EntityUid toInsert)
     {
-        if (!Resolve(uid, ref component))
+        if (!HasComp<AltMechComponent>(ent))
             return false;
 
-        return IsEmpty(component) && !component.Bolted;
+        return IsEmpty(ent.Comp) && !ent.Comp.Bolted;
     }
 
     /// <summary>
@@ -583,35 +572,32 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     /// <param name="toInsert"></param>
     /// <param name="component"></param>
     /// <returns>Whether or not the entity was inserted</returns>
-    public bool TryInsert(EntityUid uid, EntityUid? toInsert, AltMechComponent? component = null)
+    public bool TryInsert(Entity<AltMechComponent> ent, EntityUid? toInsert)
     {
-        if (!Resolve(uid, ref component))
-            return false;
-
-        if (toInsert == null || component.PilotSlot.ContainedEntity == toInsert)
+        if (toInsert == null || ent.Comp.PilotSlot.ContainedEntity == toInsert)
             return false;
 
         if (TryComp<InventoryComponent>(toInsert, out var inventoryComp))
         {
-            foreach (var slot in component.SlotsToDrop)
+            foreach (var slot in ent.Comp.SlotsToDrop)
             {
                 _inventory.TryUnequip((EntityUid)toInsert, slot);
             }
         }
 
-        if (!CanInsert(uid, toInsert.Value, component))
+        if (!CanInsert(ent, toInsert.Value))
             return false;
 
-        SetupUser(uid, toInsert.Value);
-        _container.Insert(toInsert.Value, component.PilotSlot);
+        SetupUser(ent, toInsert.Value);
+        _container.Insert(toInsert.Value, ent.Comp.PilotSlot);
 
         var ev = new OnMechEntryEvent();
-        RaiseLocalEvent(uid, ref ev);
+        RaiseLocalEvent(ent, ref ev);
 
-        if (TryComp<ArmorBlockComponent>(uid, out var blockComp))
+        if (TryComp<ArmorBlockComponent>(ent, out var blockComp))
             blockComp.User = toInsert;
 
-        UpdateAppearance(uid, component);
+        UpdateAppearance(ent);
         return true;
     }
 
@@ -707,7 +693,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     {
         args.Handled = true;
 
-        args.CanDrop = CanInsert(ent.Owner, args.Dragged, ent.Comp);
+        args.CanDrop = CanInsert(ent, args.Dragged);
     }
 
 }

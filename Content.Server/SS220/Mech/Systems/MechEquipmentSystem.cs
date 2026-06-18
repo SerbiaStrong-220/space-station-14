@@ -82,8 +82,8 @@ public sealed class MechEquipmentSystem : EntitySystem
         _popup.PopupEntity(Loc.GetString("mech-equipment-finish-install", ("item", ent.Owner)), args.Args.Target.Value);
         _mech.InsertEquipment(args.Args.Target.Value, ent.Owner);
 
-        if (ent.Comp.EquipmentOwner != null)
-            _mech.UpdateUserInterface((EntityUid)ent.Comp.EquipmentOwner);
+        if (ent.Comp.EquipmentOwner is { Valid: true } equipmentOwner && TryComp<AltMechComponent>(equipmentOwner, out var mechComp))
+            _mech.UpdateUserInterface((equipmentOwner, mechComp));
 
         args.Handled = true;
     }
@@ -101,8 +101,8 @@ public sealed class MechEquipmentSystem : EntitySystem
         if (!TryComp<AltMechComponent>(args.Mech, out var mechComp))
             return;
 
-        if (ent.Comp.EquipmentAbilityAction != null)
-            _actions.RemoveProvidedAction(args.Mech, ent.Owner, (EntityUid)ent.Comp.EquipmentAbilityAction);
+        if (ent.Comp.EquipmentAbilityAction is { Valid: true } equipmentAction)
+            _actions.RemoveProvidedAction(args.Mech, ent.Owner, equipmentAction);
     }
 
     private void OnStatsEquipmentInserted(Entity<MechEquipmentStatModifierComponent> ent, ref MechEquipmentInsertedEvent args)
@@ -132,19 +132,19 @@ public sealed class MechEquipmentSystem : EntitySystem
 
         mechComp.OwnMass -= ent.Comp.OwnMassDelta;
 
-        if(ent.Comp.MaximalArmMassDelta != 0)
+        if (ent.Comp.MaximalArmMassDelta != 0)
         {
             var rightArm = mechComp.ContainerDict["right-arm"].ContainedEntity;
 
-            if (rightArm != null && TryComp<MechPartComponent>(rightArm, out var partCompRight))
+            if (rightArm is { Valid: true } rightArmValid && TryComp<MechPartComponent>(rightArmValid, out var partCompRight))
                 if (partCompRight.OwnMass > mechComp.MaximalArmMass - ent.Comp.MaximalArmMassDelta)
-                    _mech.RemovePart(args.Mech, (EntityUid)rightArm);
+                    _mech.RemovePart(args.Mech, rightArmValid);
 
             var leftArm = mechComp.ContainerDict["left-arm"].ContainedEntity;
 
-            if (leftArm != null && TryComp<MechPartComponent>(leftArm, out var partCompLeft))
+            if (leftArm is { Valid: true } leftArmValid && TryComp<MechPartComponent>(leftArmValid, out var partCompLeft))
                 if (partCompLeft.OwnMass > mechComp.MaximalArmMass - ent.Comp.MaximalArmMassDelta)
-                    _mech.RemovePart(args.Mech, (EntityUid)leftArm);
+                    _mech.RemovePart(args.Mech, leftArmValid);
         }
 
         mechComp.MaximalArmMass -= ent.Comp.MaximalArmMassDelta;

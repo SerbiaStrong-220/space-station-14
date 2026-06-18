@@ -59,7 +59,7 @@ public sealed partial class AltMechSystem
 
             Dirty(uid, comp);
 
-            UpdateUserInterface(uid);
+            UpdateUserInterface((uid, comp));
         }
     }
 

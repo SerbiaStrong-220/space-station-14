@@ -1,10 +1,11 @@
 // © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
 using Content.Server.Atmos.Components;
+using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Mech;
+using Content.Shared.Mech.EntitySystems;
 using Content.Shared.SS220.AltMech;
 using Content.Shared.SS220.Mech.Components;
 using Content.Shared.SS220.Mech.Equipment.Components;
-using Content.Shared.Mech;
-using Content.Shared.Mech.EntitySystems;
 
 namespace Content.Server.SS220.Mech.Systems;
 
@@ -37,6 +38,7 @@ public sealed partial class AltMechSystem
     private void OnMaintenanceToggledMessage(Entity<AltMechComponent> ent, ref MechMaintenanceToggleMessage args)
     {
         ent.Comp.MaintenanceMode = args.Toggled;
+        _itemSlots.SetLock(ent.Owner, ent.Comp.TankSlotId, !ent.Comp.MaintenanceMode);
         Dirty(ent.Owner, ent.Comp);
     }
 

@@ -3,16 +3,11 @@ using Content.Server.SS220.Language;
 using Content.Shared.SS220.Mech.Components;
 using Content.Shared.SS220.Mech.Systems;
 using Content.Shared.Inventory;
-using Content.Shared.Mech.EntitySystems;
 using Content.Shared.Radio.Components;
 using Content.Shared.SS220.Language.Components;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Content.Server.SS220.Mech;
+namespace Content.Server.SS220.Mech.Systems;
 
 public sealed class VoiceInheritorSystem : EntitySystem
 {
@@ -44,8 +39,10 @@ public sealed class VoiceInheritorSystem : EntitySystem
             {
                 if (!TryComp<ActiveRadioComponent>(slot.ContainedEntity, out var radioComp))
                     return;
+
                 mechRadio.FrequencyChannels = radioComp.FrequencyChannels;
             }
+
             if (TryComp<ActiveRadioComponent>(pilot, out var embeddedRadio))//in case the pilot is a radio himself
             {
                 foreach (var channel in embeddedRadio.Channels)

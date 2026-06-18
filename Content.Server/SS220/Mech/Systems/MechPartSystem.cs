@@ -62,15 +62,16 @@ public sealed class MechPartSystem : EntitySystem
 
     private void OnPartDestroyed(Entity<MechPartComponent> ent, ref DestructionEventArgs args)
     {
-        if (!TryComp<AltMechComponent>(ent.Comp.PartOwner, out var mechComp))
+        if (ent.Comp.PartOwner is not { Valid: true } ownerValidated)
             return;
 
-        var equip = (mechComp.ContainerDict[ent.Comp.slot].ContainedEntity);
-
-        if (!Exists(equip) || Deleted(equip))
+        if (!TryComp<AltMechComponent>(ownerValidated, out var mechComp))
             return;
 
-        _mech.RemovePart((EntityUid)ent.Comp.PartOwner, ent.Owner);
+        if (!mechComp.ContainerDict.ContainsKey(ent.Comp.slot))
+            return;
+
+        _mech.RemovePart(ownerValidated, ent.Owner);
     }
 
     private void OnUsed(Entity<MechPartComponent> ent, ref AfterInteractEvent args)
@@ -301,8 +302,8 @@ public sealed class MechPartSystem : EntitySystem
         _popup.PopupEntity(Loc.GetString("mech-equipment-finish-install", ("item", ent.Owner)), args.Args.Target.Value);
         _mech.InsertPart(args.Args.Target.Value, ent.Owner);
 
-        if (ent.Comp.PartOwner != null)
-            _mech.UpdateUserInterface((EntityUid)ent.Comp.PartOwner);
+        if (ent.Comp.PartOwner is { Valid: true } partOwnerValidated && TryComp<AltMechComponent>(partOwnerValidated, out var mechComp))
+            _mech.UpdateUserInterface((partOwnerValidated, mechComp));
 
         args.Handled = true;
     }
