@@ -34,6 +34,16 @@
     Cloth: 100
 
 - type: latheRecipe
+  id: BoneGel
+  result: BoneGel
+  completetime: 2
+  materials:
+    Cloth: 200
+    Silver: 50
+    Gold: 50
+    Plastic: 100
+
+- type: latheRecipe
   id: SawElectric
   result: SawElectric
   completetime: 4
