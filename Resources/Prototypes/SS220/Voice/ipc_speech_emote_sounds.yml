@@ -1,0 +1,92 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: emoteSounds
+  id: MaleIpc
+  params:
+    variation: 0.125
+  sounds:
+    Gasp:
+      path: /Audio/Machines/buzz-two.ogg
+    Whistle:
+      path: /Audio/Effects/sparks3.ogg
+    DefaultDeathgasp:
+      path: /Audio/Effects/refill.ogg
+    Cough:
+      path: /Audio/Machines/beep.ogg
+    Sigh:
+      path: /Audio/Machines/robotscream_5.ogg
+    Yawn:
+      path: /Audio/Machines/airlock_electrify_off.ogg
+    Fart:
+      path: /Audio/Machines/buzz-sigh.ogg
+    Giggle:
+      path: /Audio/SS220/Effects/Ipc/laugh.ogg
+    Scream:
+      path: /Audio/SS220/Effects/Ipc/scream.ogg
+    Laugh:
+      path: /Audio/SS220/Effects/Ipc/laugh.ogg
+    Snore:
+      path: /Audio/Machines/buzz-two.ogg
+    Crying:
+      path: /Audio/SS220/Effects/Ipc/cry.ogg
+    Weh:
+      collection: Weh
+
+- type: emoteSounds
+  id: FemaleIpc
+  params:
+    variation: 0.125
+  sounds:
+    Gasp:
+      path: /Audio/Machines/buzz-two.ogg
+    Whistle:
+      path: /Audio/Effects/sparks3.ogg
+    DefaultDeathgasp:
+      path: /Audio/Effects/refill.ogg
+    Cough:
+      path: /Audio/Machines/beep.ogg
+    Sigh:
+      path: /Audio/Machines/robotscream_5.ogg
+    Yawn:
+      path: /Audio/Machines/airlock_electrify_off.ogg
+    Fart:
+      path: /Audio/Machines/buzz-sigh.ogg
+    Giggle:
+      path: /Audio/SS220/Effects/Ipc/laugh.ogg
+    Scream:
+      path: /Audio/SS220/Effects/Ipc/scream.ogg
+    Laugh:
+      path: /Audio/SS220/Effects/Ipc/laugh.ogg
+    Snore:
+      path: /Audio/Machines/buzz-two.ogg
+    Crying:
+      path: /Audio/SS220/Effects/Ipc/cry.ogg
+    Weh:
+      collection: Weh
+
+- type: emoteSounds
+  id: IpcEmotes
+  sounds:
+    BeepIpc:
+      path: /Audio/Machines/twobeep.ogg
+    ChimeIpc:
+      path: /Audio/Machines/chime.ogg
+    BuzzIpc:
+      path: /Audio/Machines/buzz-sigh.ogg
+    Buzz-TwoIpc:
+      path: /Audio/Machines/buzz-two.ogg
+    HonkIpc:
+      path: /Audio/Items/bikehorn.ogg
+    PingIpc:
+      path: /Audio/Effects/Cargo/ping.ogg
+    Clap:
+      collection: Claps
+    ClapSingle:
+      collection: ClapSingle
+    Snap:
+      collection: Snaps
+      params:
+        volume: -6
+    Salute:
+      collection: Salutes
+
