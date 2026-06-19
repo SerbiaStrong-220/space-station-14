@@ -217,6 +217,6 @@ public sealed partial class BloodstreamComponent : Component
 
     [DataField]
     [AutoNetworkedField]
-    public FixedPoint2 BloodAmountToCough = 4f;
+    public FixedPoint2 BloodAmountToCough = 6f;
     // SS220-IB-cough-end
 }

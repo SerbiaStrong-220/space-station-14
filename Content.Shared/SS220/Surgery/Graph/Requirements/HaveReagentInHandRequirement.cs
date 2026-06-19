@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
@@ -22,7 +23,7 @@ public sealed partial class HaveReagentInHandRequirement : SurgeryGraphRequireme
     [DataField]
     public string SolutionName = "drink";
 
-    protected override bool Requirement(EntityUid? uid, IEntityManager entityManager)
+    protected override bool Requirement(EntityUid? uid, EntityUid user, IEntityManager entityManager)
     {
         if (uid is null)
             return false;
@@ -48,17 +49,23 @@ public sealed partial class HaveReagentInHandRequirement : SurgeryGraphRequireme
         var handSystem = entityManager.System<SharedHandsSystem>();
         var solutionSystem = entityManager.System<SharedSolutionContainerSystem>();
 
+        Entity<SolutionComponent>? solutionEntity = null;
         foreach (var heldItem in handSystem.EnumerateHeld(uid.Value))
         {
-            Entity<SolutionComponent>? solutionEntity = null;
-            if (!solutionSystem.ResolveSolution(heldItem, SolutionName, ref solutionEntity, out _))
+            if (!entityManager.TryGetComponent<SolutionContainerManagerComponent>(heldItem, out var heldSolutionManager))
                 continue;
 
-            if (!(solutionSystem.GetTotalPrototypeQuantity(heldItem, ReagentId) >= ConsumedAmount))
-                continue;
+            foreach (var solutionName in heldSolutionManager.Containers)
+            {
+                if (!solutionSystem.ResolveSolution(heldItem, solutionName, ref solutionEntity, out var solution))
+                    continue;
 
-            solutionSystem.RemoveReagent(solutionEntity.Value, ReagentId, ConsumedAmount);
-            return;
+                if (!(solution.GetTotalPrototypeQuantity(ReagentId) >= ConsumedAmount))
+                    continue;
+
+                solutionSystem.RemoveReagent(solutionEntity.Value, ReagentId, ConsumedAmount);
+                return;
+            }
         }
 
         entityManager.System<SharedSurgerySystem>().Log.Error($"Trying to meet {nameof(HaveReagentInHandRequirement)} but cant find any solution to drain reagent from");

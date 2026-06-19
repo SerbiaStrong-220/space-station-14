@@ -62,9 +62,12 @@ public sealed partial class OperationNodeLabel : BoxContainer
             return;
         }
 
+        if (_player.LocalEntity is not { Valid: true } playerEntity)
+            return;
+
         foreach (var edge in node.Edges)
         {
-            var edgeVisible = _surgeryGraph.GetVisibilityRequirements(edge).All(x => x.MeetRequirement(_player.LocalEntity, _entityManager));
+            var edgeVisible = _surgeryGraph.GetVisibilityRequirements(edge).All(x => x.MeetRequirement(playerEntity, playerEntity, _entityManager));
             if (!edgeVisible)
                 continue;
 

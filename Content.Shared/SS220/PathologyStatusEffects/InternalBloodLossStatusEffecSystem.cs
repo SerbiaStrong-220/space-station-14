@@ -28,7 +28,7 @@ public sealed partial class InternalBloodLossStatusEffectSystem : EntitySystem
     /// <summary>
     /// it actually gives (1 + CaughtPart) multiplier to bloodloss, so be careful
     /// </summary>
-    private const float CaughtPart = 0.1f;
+    private const float CaughtPart = 0.2f;
 
     private static readonly TimeSpan BleedingTimeUpdate = TimeSpan.FromSeconds(UpdateRate);
     private static readonly FixedPoint2 DecreaseLoss = 0.6f;
@@ -116,7 +116,6 @@ public sealed partial class InternalBloodLossStatusEffectSystem : EntitySystem
     {
         entity.Comp.Multiplier = args.Args.Multiplier;
     }
-
 
     private const float CoeffA = 3.2f;
     private const float CoeffB = 0.1f;
