@@ -13,7 +13,7 @@ public sealed partial class InternalBloodLossStatusEffectComponent : Component
 
     [DataField]
     [AutoNetworkedField]
-    public FixedPoint2 BloodLossRatePerStack = 0.3f;
+    public FixedPoint2 BloodLossRatePerStack = 0.7f;
 
     [AutoNetworkedField]
     public TimeSpan NextEffectTime;
