@@ -15,28 +15,29 @@ ent-BoxSurvivalCentcom = аварийный запас
     .suffix = Центком
 
 ent-BoxSurvivalIpc = аварийный запас КПБ
-    .desc = Это коробка с аварийными припасами.
+    .desc = {ent-BoxSurvival.desc}
     .suffix = Базовый
 
-ent-BoxSurvivalEngineerIpc = аварийный запас КПБ
-    .desc = Это коробка с аварийными припасами.
-
+ent-BoxSurvivalEngineerIpc = расширенный аварийный запас КПБ
+    .desc = {ent-BoxSurvival.desc}
     .suffix = Инженерный
-ent-BoxSurvivalSecurityIpc = аварийный запас КПБ
-    .desc = Это коробка с аварийными припасами.
+
+ent-BoxSurvivalSecurityIpc = {ent-BoxSurvivalIpc}
+    .desc = {ent-BoxSurvival.desc}
     .suffix = Служба безопасности
 
-ent-BoxSurvivalClownIpc = аварийный запас КПБ
-    .desc = Это коробка с аварийными припасами.
+ent-BoxSurvivalClownIpc = {ent-BoxSurvivalIpc}
+    .desc = {ent-BoxSurvival.desc}
     .suffix = Клоун
 
-ent-BoxSurvivalMimeIpc = аварийный запас КПБ
-    .desc = Это коробка с аварийными припасами.
+ent-BoxSurvivalMimeIpc = {ent-BoxSurvivalIpc}
+    .desc = {ent-BoxSurvival.desc}
     .suffix = Мим
 
-ent-BoxSurvivalMedicalIpc = аварийный запас КПБ
-    .desc = Это коробка с аварийными припасами.
+ent-BoxSurvivalMedicalIpc = {ent-BoxSurvivalIpc}
+    .desc = {ent-BoxSurvival.desc}
     .suffix = Медицинский
+
 ent-BoxSurvivalSponsor = элитный аварийный запас
     .desc = Коробка с элитным набором для выживания.
     .suffix = Стандартный, Шлёпа
