@@ -90,22 +90,18 @@
 - type: loadoutGroup
   id: Survival
   name: loadout-group-survival-basic
-  minLimit: 1 #SS220-Survival-Loadout
-  hidden: false #SS220-Survival-Loadout
+  minLimit: 3
+  hidden: true
   loadouts:
   - EmergencyNitrogen
-  - EmergencyNitrogenSponsor #SS220-Survival-Loadout
   - EmergencyOxygen
   - LoadoutSpeciesVoxNitrogen
-  - LoadoutSpeciesIpc #SS220-IPC
-  - EmergencyOxygenSponsor #SS220-Survival-Loadout
- # - LoadoutSpeciesVoxNitrogen #SS220-Survival-Loadout
 
 # nitrogen or oxygen tank, depending on what your species needs
 - type: loadoutGroup
   id: GroupEVATank
   name: loadout-group-EVA-tank
-  hidden: false #SS220-Survival-Loadout
+  hidden: true
   loadouts:
   - LoadoutSpeciesEVANitrogen
   - LoadoutSpeciesEVAOxygen
@@ -121,7 +117,7 @@
 - type: loadoutGroup
   id: GroupPocketTankDouble
   name: loadout-group-pocket-tank-double
-  hidden: false #SS220-Survival-Loadout
+  hidden: true
   loadouts:
   - LoadoutSpeciesPocketDoubleNitrogen
   - LoadoutSpeciesPocketDoubleOxygen
@@ -524,10 +520,6 @@
   loadouts:
   - ChaplainNeck
   - ChaplainNeckCloak #ss220-dress-cloak-tweak
-  #SS220-AddCenser begin
-  - ChaplainNeckGoldenCross
-  - ChaplainNeckSilverCross
-  #SS220-AddCenser end
 
 #- type: loadoutGroup
 #  id: ChaplainJobTrinkets
@@ -719,16 +711,12 @@
 - type: loadoutGroup
   id: SurvivalClown
   name: loadout-group-survival-clown
-  minLimit: 1 #SS220-Survival-Loadout
-  hidden: false #SS220-Survival-Loadout
+  minLimit: 2
+  hidden: true
   loadouts:
   - EmergencyNitrogenClown
-  - EmergencyNitrogenClownSponsor #SS220-Survival-Loadout
   - EmergencyOxygenClown
   - LoadoutSpeciesVoxNitrogen
-  - LoadoutSpeciesClownIpc #SS220-IPC
-  - EmergencyOxygenClownSponsor #SS220-Survival-Loadout
- # - LoadoutSpeciesVoxNitrogen #SS220-Survival-Loadout
 
 - type: loadoutGroup
   id: ClownJobTrinkets
@@ -789,18 +777,13 @@
 - type: loadoutGroup
   id: SurvivalMime
   name: loadout-group-survival-mime
-  minLimit: 1 #SS220-Survival-Loadout
-  hidden: false #SS220-Survival-Loadout
+  minLimit: 2
+  hidden: true
   loadouts:
   - EmergencyNitrogenMime
-  - EmergencyNitrogenMimeSponsor #SS220-Survival-Loadout
   - EmergencyOxygenMime
   - EmergencySpeciesMothMime
   - LoadoutSpeciesVoxNitrogen
-  - LoadoutSpeciesMimeIpc #SS220-IPC
-  - EmergencyOxygenMimeSponsor #SS220-Survival-Loadout
- # - EmergencySpeciesMothMime #SS220-Survival-Loadout
- # - LoadoutSpeciesVoxNitrogen #SS220-Survival-Loadout
 
 #- type: loadoutGroup
 #  id: MimeJobTrinkets
@@ -825,7 +808,6 @@
   - MusicianWintercoat
   - BardApron #SS220 bard loadout
   - DangerCoat #SS220 danger coat
-  - DeadAnarchistCoat #SS220 dead anarchist's coat
 
 - type: loadoutGroup
   id: Instruments
@@ -1192,16 +1174,12 @@
 - type: loadoutGroup
   id: SurvivalExtended
   name: loadout-group-survival-extended
-  minLimit: 1 #SS220-Survival-Loadout
-  hidden: false #SS220-Survival-Loadout
+  minLimit: 2
+  hidden: true
   loadouts:
   - EmergencyNitrogenExtended
-  - EmergencyNitrogenExtendedSponsor #SS220-Survival-Loadout
   - EmergencyOxygenExtended
   - LoadoutSpeciesVoxNitrogen
-  - LoadoutSpeciesEngineerIpc #SS220-IPC
-  - EmergencyOxygenExtendedSponsor #SS220-Survival-Loadout
- # - LoadoutSpeciesVoxNitrogen #SS220-Survival-Loadout
 
 # Science
 - type: loadoutGroup
@@ -1607,33 +1585,12 @@
 - type: loadoutGroup
   id: SurvivalSecurity
   name: loadout-group-survival-security
-  minLimit: 1 #SS220-Survival-Loadout
-  hidden: false #SS220-Survival-Loadout
+  minLimit: 2
+  hidden: true
   loadouts:
   - EmergencyNitrogenSecurity
-  - EmergencyNitrogenSecuritySponsor #SS220-Survival-Loadout
   - EmergencyOxygenSecurity
   - LoadoutSpeciesVoxNitrogen
-  - LoadoutSpeciesSecurityIpc #SS220-IPC
-
-- type: loadoutGroup
-  id: SecurityStar
-  name: loadout-group-security-star
-  minLimit: 0
-  loadouts:
-  - SecStar
-
-# Medical
-
-- type: loadoutGroup
-  id: MedicalGloves
-  name: loadout-group-medical-gloves
-  minLimit: 0
-  loadouts:
-  - LatexGloves
-  - NitrileGloves
-  - EmergencyOxygenSecuritySponsor #SS220-Survival-Loadout
- # - LoadoutSpeciesVoxNitrogen #SS220-Survival-Loadout
 
 # Wildcards
 - type: loadoutGroup
