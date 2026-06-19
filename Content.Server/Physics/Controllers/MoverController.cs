@@ -59,7 +59,7 @@ public sealed class MoverController : SharedMoverController
         _droneQuery = GetEntityQuery<DroneConsoleComponent>();
         _shuttleQuery = GetEntityQuery<ShuttleComponent>();
 
-        _configManager.OnValueChanged(CCVars220.ParallelMoverUpdate, x => _useParallelMobMover = x, true);
+        _configManager.OnValueChanged(CCVars220.ParallelMoverUpdate, x => _useParallelMobMover = x, true); // SS220-add-parallel-mover-update
     }
 
     private void OnEntityPaused(Entity<ActiveInputMoverComponent> ent, ref EntityPausedEvent args)
