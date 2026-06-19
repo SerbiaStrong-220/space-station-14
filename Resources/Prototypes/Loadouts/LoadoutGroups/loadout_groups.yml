@@ -96,6 +96,7 @@
   - EmergencyNitrogen
   - EmergencyOxygen
   - LoadoutSpeciesVoxNitrogen
+  - LoadoutSpeciesIpc #SS220-IPC
 
 # nitrogen or oxygen tank, depending on what your species needs
 - type: loadoutGroup
@@ -717,6 +718,7 @@
   - EmergencyNitrogenClown
   - EmergencyOxygenClown
   - LoadoutSpeciesVoxNitrogen
+  - LoadoutSpeciesClownIpc #SS220-IPC
 
 - type: loadoutGroup
   id: ClownJobTrinkets
@@ -784,6 +786,7 @@
   - EmergencyOxygenMime
   - EmergencySpeciesMothMime
   - LoadoutSpeciesVoxNitrogen
+  - LoadoutSpeciesMimeIpc #SS220-IPC
 
 #- type: loadoutGroup
 #  id: MimeJobTrinkets
@@ -1180,6 +1183,7 @@
   - EmergencyNitrogenExtended
   - EmergencyOxygenExtended
   - LoadoutSpeciesVoxNitrogen
+  - LoadoutSpeciesEngineerIpc #SS220-IPC
 
 # Science
 - type: loadoutGroup
@@ -1591,6 +1595,7 @@
   - EmergencyNitrogenSecurity
   - EmergencyOxygenSecurity
   - LoadoutSpeciesVoxNitrogen
+  - LoadoutSpeciesSecurityIpc #SS220-IPC
 
 # Wildcards
 - type: loadoutGroup

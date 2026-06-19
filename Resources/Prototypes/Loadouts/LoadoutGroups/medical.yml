@@ -33,6 +33,7 @@
   - EmergencyNitrogenMedical
   - EmergencyOxygenMedical
   - LoadoutSpeciesVoxNitrogen
+  - LoadoutSpeciesMedicalIpc #SS220-IPC
 
 # Chief Medical Officer
 
