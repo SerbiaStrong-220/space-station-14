@@ -11,11 +11,13 @@ public sealed partial class HiddenInstalledImplantComponent : Component
     /// <summary>
     /// How goodly implant installed
     /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
     public HiddenInstallLevel InstallLevel;
 
     /// <summary>
     /// If implant can be found but still not visible
     /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
     public bool Hidden;
 }
 
