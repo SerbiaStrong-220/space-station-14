@@ -9,8 +9,8 @@
 - type: damageContainer
   id: Ipc
   supportedGroups:
-    - Brute
-    - Burn
+  - Brute
+  - Burn
   supportedTypes:
-    - Heat
-    - Shock
+  - Heat
+  - Shock
