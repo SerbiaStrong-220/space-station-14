@@ -50,7 +50,7 @@ public sealed class VoiceInheritorSystem : EntitySystem
             }
         }
 
-        if(TryComp<LanguageComponent>(ent.Owner, out var mechLanguage) && TryComp<LanguageComponent>(pilot, out var pilotLanguage))
+        if (TryComp<LanguageComponent>(ent.Owner, out var mechLanguage) && TryComp<LanguageComponent>(pilot, out var pilotLanguage))
         {
             _language.AddLanguages((ent.Owner, mechLanguage), pilotLanguage.AvailableLanguages.ToList());
         }

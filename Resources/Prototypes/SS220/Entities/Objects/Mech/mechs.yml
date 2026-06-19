@@ -24,10 +24,7 @@
     lowPressureMultiplier: 1000
   - type: MobCollision
     colliding: false
-    bufferAccumulator: 0
-    speedModifier: 0
-    minimumSpeedModifier: 0
-    strength: 0
+    strength: 150
     fixtureId: ""
   - type: DoAfter
   - type: UserInterface
@@ -61,7 +58,8 @@
     bodyType: KinematicController
   - type: GravityAffected
   - type: Clickable
-  - type: WiresPanel
+  #- type: WiresPanel
+  - type: Language
   - type: HealthExaminable
     examinableTypes:
       - Blunt

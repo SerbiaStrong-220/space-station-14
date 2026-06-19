@@ -46,6 +46,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using static Content.Server.Power.Pow3r.PowerState;
 
 namespace Content.Server.SS220.Mech.Systems;
 
@@ -294,7 +295,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
         _alerts.ShowAlert(ent.Owner, _mechIntegrityAlert, (short)integrity);
 
-        if (TryComp<AlertsComponent>(pilot,out var pilotAlerts))
+        if (TryComp<AlertsComponent>(pilot, out var pilotAlerts))
         {
             foreach (var alert in pilotAlerts.Alerts)
             {
@@ -321,16 +322,6 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
     public void TransferMindIntoPilot(Entity<AltMechComponent> ent)
     {
-        if (!TryComp<VisitingMindComponent>(ent.Owner, out var mechVisitComp))
-            return;
-
-        var mindId = mechVisitComp.MindId;
-
-        if (mindId == null)
-            return;
-
-        _mind.UnVisit((EntityUid)mindId);
-
         if (TryComp<AlertsComponent>(ent.Owner, out var alertsComp))
         {
             foreach (var alert in alertsComp.Alerts)
@@ -338,6 +329,16 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
                 _alerts.ClearAlert(ent.Owner, alert.Value.Type);
             }
         }
+
+        if (!TryComp<VisitingMindComponent>(ent.Owner, out var mechVisitComp))
+            return;
+
+        var mindId = mechVisitComp.MindId;
+
+        if (mindId is not { Valid: true } mindValidated)
+            return;
+
+        _mind.UnVisit(mindValidated);
 
         if (ent.Comp.PilotSlot.ContainedEntity == null)
             return;
