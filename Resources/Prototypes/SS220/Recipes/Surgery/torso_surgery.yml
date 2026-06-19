@@ -56,6 +56,7 @@
     # heal wounds
     - to: retract-torso-skin
       id: retract-torso-skin-heal-wounds
+      deceaseSkillBonus: true
       baseEdge: retract-skin
       edgeTooltip: to-torso-internal-healing
       actions:
