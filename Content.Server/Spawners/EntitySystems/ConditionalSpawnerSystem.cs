@@ -5,6 +5,7 @@ using Content.Shared.EntityTable;
 using Content.Shared.GameTicking.Components;
 using JetBrains.Annotations;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Server.Spawners.EntitySystems
@@ -15,7 +16,9 @@ namespace Content.Server.Spawners.EntitySystems
         [Dependency] private readonly IRobustRandom _robustRandom = default!;
         [Dependency] private readonly GameTicker _ticker = default!;
         [Dependency] private readonly EntityTableSystem _entityTable = default!;
-
+#if !FULL_RELEASE
+        [Dependency] private readonly IPrototypeManager _prototype = default!;
+#endif
         public override void Initialize()
         {
             base.Initialize();
@@ -33,6 +36,15 @@ namespace Content.Server.Spawners.EntitySystems
 
         private void OnRandSpawnMapInit(EntityUid uid, RandomSpawnerComponent component, MapInitEvent args)
         {
+#if !FULL_RELEASE
+            foreach (var possibleSpawnId in component.Prototypes)
+                if (!_prototype.HasIndex<EntityPrototype>(possibleSpawnId))
+                    Log.Error($"Attempted to spawn an entity with an invalid prototype: {possibleSpawnId} in random spawner component of {ToPrettyString(uid)}");
+
+            foreach (var possibleSpawnId in component.RarePrototypes)
+                if (!_prototype.HasIndex<EntityPrototype>(possibleSpawnId))
+                    Log.Error($"Attempted to spawn an entity with an invalid prototype: {possibleSpawnId} in random spawner component of {ToPrettyString(uid)}");
+#endif
             Spawn(uid, component);
             if (component.DeleteSpawnerAfterSpawn)
                 QueueDel(uid);
