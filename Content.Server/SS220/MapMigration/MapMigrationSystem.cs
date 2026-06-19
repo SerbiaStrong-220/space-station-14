@@ -29,6 +29,8 @@ public sealed class MapMigrationSystem_SS220 : EntitySystem
             if (value)
                 SubscribeLocalEvent<AirlockComponent, MapInitEvent>(OnCompInit);
         }, true);
+
+        SubscribeLocalEvent<DoorComponent, MapInitEvent>(OnDoorMapInit);
     }
 
     private void OnCompInit(Entity<AirlockComponent> entity, ref MapInitEvent args)
@@ -37,6 +39,11 @@ public sealed class MapMigrationSystem_SS220 : EntitySystem
             return;
 
         RotateDoor(entity);
+    }
+
+    private void OnDoorMapInit(Entity<DoorComponent> entity, ref MapInitEvent _)
+    {
+        RotateDoor(entity, requireBothNeighbors: true);
     }
 
     private bool CheckTileOccupied(Vector2i pos, EntityUid gridUid, MapGridComponent grid)
@@ -64,7 +71,7 @@ public sealed class MapMigrationSystem_SS220 : EntitySystem
         return false;
     }
 
-    public void RotateDoor(EntityUid airlockUid, EntityUid? gridUid = null)
+    public void RotateDoor(EntityUid airlockUid, EntityUid? gridUid = null, bool requireBothNeighbors = false)
     {
         var transform = Transform(airlockUid);
         gridUid ??= transform.GridUid;
@@ -94,6 +101,23 @@ public sealed class MapMigrationSystem_SS220 : EntitySystem
         if (transform.Anchored)
         {
             var pos = _map.CoordinatesToTile(gridUid.Value, grid, transform.Coordinates);
+
+            if (requireBothNeighbors)
+            {
+                if (CheckTileOccupied(pos + new Vector2i(1, 0), gridUid.Value, grid)
+                    && CheckTileOccupied(pos + new Vector2i(-1, 0), gridUid.Value, grid))
+                {
+                    _transform.SetLocalRotationNoLerp(airlockUid, Angle.FromDegrees(180), transform);
+                    return;
+                }
+
+                if (CheckTileOccupied(pos + new Vector2i(0, 1), gridUid.Value, grid)
+                    && CheckTileOccupied(pos + new Vector2i(0, -1), gridUid.Value, grid))
+                {
+                    _transform.SetLocalRotationNoLerp(airlockUid, Angle.FromDegrees(90), transform);
+                    return;
+                }
+            }
 
             if (!CheckTileOccupied(pos + new Vector2i(1, 0), gridUid.Value, grid))
             {
