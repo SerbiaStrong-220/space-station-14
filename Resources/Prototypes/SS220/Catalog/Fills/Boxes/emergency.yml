@@ -126,8 +126,6 @@
   parent: BoxSurvival
   id: BoxSurvivalIpc
   name: survival box ipc
-  description: It's a box with basic internals inside.
-  suffix: Standard
   components:
   - type: EntityTableContainerFill
     containers:
@@ -142,8 +140,6 @@
   parent: BoxSurvival
   id: BoxSurvivalSecurityIpc
   name: survival box security ipc
-  description: It's a box with basic internals inside.
-  suffix: Standard
   components:
   - type: EntityTableContainerFill
     containers:
@@ -158,8 +154,6 @@
   parent: BoxSurvivalIpc
   id: BoxSurvivalClownIpc
   name: survival box clown ipc
-  description: It's a box with basic internals inside.
-  suffix: Standard
   components:
   - type: EntityTableContainerFill
     containers:
@@ -175,8 +169,6 @@
   parent: BoxSurvivalIpc
   id: BoxSurvivalMimeIpc
   name: survival box mime ipc
-  description: It's a box with basic internals inside.
-  suffix: Standard
   components:
   - type: EntityTableContainerFill
     containers:
@@ -192,13 +184,9 @@
   parent: BoxSurvivalIpc
   id: BoxSurvivalMedicalIpc
   name: survival box ipc
-  description: It's a box with basic internals inside.
-  suffix: Standard
 
 - type: entity
   parent: BoxSurvivalSecurityIpc
   id: BoxSurvivalEngineerIpc
   name: survival box engineer ipc
-  description: It's a box with basic internals inside.
-  suffix: Standard
 
