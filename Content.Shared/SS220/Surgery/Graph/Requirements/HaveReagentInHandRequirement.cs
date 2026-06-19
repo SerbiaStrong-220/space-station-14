@@ -49,7 +49,6 @@ public sealed partial class HaveReagentInHandRequirement : SurgeryGraphRequireme
         var handSystem = entityManager.System<SharedHandsSystem>();
         var solutionSystem = entityManager.System<SharedSolutionContainerSystem>();
 
-        Entity<SolutionComponent>? solutionEntity = null;
         foreach (var heldItem in handSystem.EnumerateHeld(uid.Value))
         {
             if (!entityManager.TryGetComponent<SolutionContainerManagerComponent>(heldItem, out var heldSolutionManager))
@@ -57,6 +56,7 @@ public sealed partial class HaveReagentInHandRequirement : SurgeryGraphRequireme
 
             foreach (var solutionName in heldSolutionManager.Containers)
             {
+                Entity<SolutionComponent>? solutionEntity = null;
                 if (!solutionSystem.ResolveSolution(heldItem, solutionName, ref solutionEntity, out var solution))
                     continue;
 

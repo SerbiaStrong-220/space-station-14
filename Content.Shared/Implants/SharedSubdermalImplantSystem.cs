@@ -57,6 +57,7 @@ public abstract partial class SharedSubdermalImplantSystem : EntitySystem
             var hiddenInstallComp = EnsureComp<HiddenInstalledImplantComponent>(ent);
             hiddenInstallComp.InstallLevel = installEvent.InstallLevel;
             hiddenInstallComp.Hidden = installEvent.Hidden;
+            Dirty(ent, hiddenInstallComp);
         }
         // SS220-add-hidden-implants-end
 
