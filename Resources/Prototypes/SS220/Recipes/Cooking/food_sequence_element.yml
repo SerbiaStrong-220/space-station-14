@@ -63,3 +63,14 @@
   tags:
   - Cooked
   - Meat
+
+# glazunya
+- type: foodSequenceElement
+  id: MeatSunnySideUpEggBurger
+  name: food-sequence-burger-content-egg
+  sprites:
+  - sprite: SS220/Objects/Consumable/Food/meals.rsi
+    state: sunny-side-up-egg
+  tags:
+  - Cooked
+  - Meat

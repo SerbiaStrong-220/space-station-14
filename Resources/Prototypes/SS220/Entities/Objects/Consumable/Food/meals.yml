@@ -49,3 +49,6 @@
   - type: Tag
     tags:
     - Meat
+  - type: FoodSequenceElement
+    entries:
+      Burger: MeatSunnySideUpEggBurger

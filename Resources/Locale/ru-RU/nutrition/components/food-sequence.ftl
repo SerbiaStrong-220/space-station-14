@@ -123,6 +123,7 @@ food-sequence-burger-content-world-pea = миро
 food-sequence-burger-content-xeno = ксено
 food-sequence-burger-content-snake = змеино
 food-sequence-burger-content-rabbit = кролико
+food-sequence-burger-content-egg = яично
 # SS220-grillables-update-end
 
 # TACO
