@@ -44,11 +44,13 @@
       food:
         maxVol: 10
         reagents:
-        - ReagentId: Nutriment
-          Quantity: 1
+        - ReagentId: EggCooked
+          Quantity: 6
   - type: Tag
     tags:
     - Meat
   - type: FoodSequenceElement
     entries:
       Burger: MeatSunnySideUpEggBurger
+  - type: Extractable
+    grindableSolutionName: food
