@@ -65,8 +65,8 @@ public sealed partial class InternalBloodLossStatusEffectSystem : EntitySystem
                 continue;
             }
 
-            var bloodlossCorrectCount = GetCorrectStack(stackableComponent.StackCount);
-            var bloodLoss = internalBloodLoss.BloodLossRatePerStack * internalBloodLoss.Multiplier * bloodlossCorrectCount * UpdateRate;
+            var bloodLossCorrectCount = GetCorrectStack(stackableComponent.StackCount);
+            var bloodLoss = internalBloodLoss.BloodLossRatePerStack * internalBloodLoss.Multiplier * bloodLossCorrectCount * UpdateRate;
 
             // Add some 'last stand' effect for ux
             if (bloodstreamComponent.BloodSolution is { } bloodSolution)
@@ -120,6 +120,7 @@ public sealed partial class InternalBloodLossStatusEffectSystem : EntitySystem
     private const float CoeffA = 3.2f;
     private const float CoeffB = 0.1f;
     private const float CoeffC = 4f;
+
     /// <summary>
     /// Implements formula for better ux:
     /// result stack is 1 + a(x-1) / (b(x-1) + c)

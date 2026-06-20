@@ -12,7 +12,6 @@ public sealed partial class HiddenImplantInstallationComponent : Component
     [AutoNetworkedField]
     public Dictionary<HiddenInstallLevel, float> InstallChances;
 
-
     [DataField(required: true)]
     [AutoNetworkedField]
     public float HiddenInstallChance;

@@ -8,7 +8,7 @@ using Robust.Shared.Random;
 
 namespace Content.Shared.SS220.Experience.Skill.Systems;
 
-public sealed class HiddenImplantInstallationSystem : SkillEntitySystem
+public sealed partial class HiddenImplantInstallationSystem : SkillEntitySystem
 {
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private INetManager _net = default!;
