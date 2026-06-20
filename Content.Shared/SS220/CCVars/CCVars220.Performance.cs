@@ -11,7 +11,7 @@ public sealed partial class CCVars220
         CVarDef.Create("audio.less_sound_sources", false, CVar.SERVER | CVar.REPLICATED, "serve to turn off most of player generatish sounds like steps, telephones and etc. Do not affect TTS.");
 
     /// <summary>
-    /// Cvar which turns off most of player generatish sounds like steps, telephones and etc. Do not affect TTS.
+    /// Cvar which switches mob movement update from sequential to parallel.
     /// </summary>
     public static readonly CVarDef<bool> ParallelMoverUpdate =
         CVarDef.Create("performance.parallel_mover_update", false, CVar.SERVERONLY, "switches mob movement update from sequential to parallel");
