@@ -53,6 +53,11 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
     private const float MinRandomSkillIssueFlatDamageAddition = 0f;
     // SS220-experience-update-end
 
+    // SS220 clinic death analyzer - start
+    private const int SafeThresholdMinutes  = 2;
+    private const int WarningThresholdMinutes  = 1;
+    // SS220 clinic death analyzer - end
+
     public HealthAnalyzerControl()
     {
         RobustXamlLoader.Load(this);
@@ -117,12 +122,10 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
         NoPatientDataText.Visible = false;
 
         // SS220 clinic death analyzer - start
-        if (state.ClinicalDeathTimeRemaining.HasValue)
+        if (state.ClinicalDeathTimeRemaining is { } timeLeft)
         {
             ClinicalDeathLabel.Visible = true;
             ClinicalDeathTimeLabel.Visible = true;
-
-            var timeLeft = state.ClinicalDeathTimeRemaining.Value;
 
             if (timeLeft <= TimeSpan.Zero)
             {
@@ -131,20 +134,15 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
             }
             else
             {
-                ClinicalDeathTimeLabel.Text = $"{timeLeft.Minutes:D2}:{timeLeft.Seconds:D2}";
+                ClinicalDeathTimeLabel.Text = Loc.GetString("health-analyzer-window-clinical-death-decay",
+                    ("timeLeft", timeLeft.ToString(@"mm\:ss")));
 
-                if (timeLeft.TotalMinutes >= 2)
+                ClinicalDeathTimeLabel.FontColorOverride = timeLeft.TotalMinutes switch
                 {
-                    ClinicalDeathTimeLabel.FontColorOverride = Color.Lime;
-                }
-                else if (timeLeft.TotalMinutes >= 1)
-                {
-                    ClinicalDeathTimeLabel.FontColorOverride = Color.Yellow;
-                }
-                else
-                {
-                    ClinicalDeathTimeLabel.FontColorOverride = Color.Red;
-                }
+                    >= SafeThresholdMinutes => Color.Lime,
+                    >= WarningThresholdMinutes => Color.Yellow,
+                    _ => Color.Red
+                };
             }
         }
         else
