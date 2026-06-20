@@ -119,9 +119,11 @@ food-sequence-burger-content-spacemans-trumpet = космотрубо
 food-sequence-burger-content-anomaly-berry = аномо
 food-sequence-burger-content-extradimensional-orange = три-дэ
 food-sequence-burger-content-world-pea = миро
+# SS220-grillables-update-begin
 food-sequence-burger-content-xeno = ксено
 food-sequence-burger-content-snake = змеино
 food-sequence-burger-content-rabbit = кролико
+# SS220-grillables-update-end
 
 # TACO
 
