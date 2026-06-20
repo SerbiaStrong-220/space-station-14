@@ -7,3 +7,13 @@
   - MedicineBase
   - MedicineTrained
   - MedicineProfessional
+
+- type: skillTree
+  id: Anatomy
+  skillGroupId: SkillGroupMedicine
+  skillTreeName: anatomy-skill-tree-name
+  skillTree:
+  - AnatomyInitial
+  - AnatomyBase
+  - AnatomyTrained
+  - AnatomyProfessional

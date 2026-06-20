@@ -12,6 +12,8 @@
       collection: MaleLaugh
     Cough:
       collection: MaleCoughs
+    BloodCough:
+      collection: MaleCoughs
     Yawn:
       collection: MaleYawn
     Sigh:
@@ -48,6 +50,8 @@
       collection: FemaleLaugh
     Giggle:
       collection: FemaleLaugh
+    BloodCough:
+      collection: FemaleCoughs
     Cough:
       collection: FemaleCoughs
     Yawn:
@@ -110,6 +114,8 @@
       collection: MaleLaugh
     Cough:
       collection: MaleCoughs
+    BloodCough:
+      collection: MaleCoughs
     Yawn:
       collection: MaleYawn
     Sigh:
@@ -149,6 +155,8 @@
     Giggle:
       collection: FemaleLaugh
     Cough:
+      collection: FemaleCoughs
+    BloodCough:
       collection: FemaleCoughs
     Yawn:
       collection: FemaleYawn

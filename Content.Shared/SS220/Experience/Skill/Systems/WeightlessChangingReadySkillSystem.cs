@@ -21,13 +21,12 @@ public sealed class WeightlessChangingReadySkillSystem : SkillEntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly VomitSystem _vomit = default!;
 
     private const string HardSuitInventorySlot = "outerClothing";
 
     private const uint SpawnTickBorder = 20;
 
-    private readonly LocId _evadedFallPopup = "weightless-changing-ready-skill-evaded-fall-popup";
+    private static readonly LocId FallPopup = "weightless-changing-ready-skill-fall-popup";
 
     public override void Initialize()
     {
@@ -56,29 +55,15 @@ public sealed class WeightlessChangingReadySkillSystem : SkillEntitySystem
         var hardsuitEquipped = _inventory.TryGetSlotEntity(experienceEntity.Value.Owner, HardSuitInventorySlot, out var outerClothingEntity)
                                && _tag.HasAnyTag(outerClothingEntity.Value, entity.Comp.HardsuitTags);
 
-        if (args.Weightless)
-        {
-            if (hardsuitEquipped)
-                return;
-
-            var predictedRandomForVomit = GetPredictedRandomOnCurTick(GetNetEntity(entity));
-            if (predictedRandomForVomit.Prob(entity.Comp.VomitChance))
-                _vomit.Vomit(experienceEntity.Value);
-
+        if (args.Weightless || entity.Comp.MagbootsActive)
             return;
-        }
-        else if (entity.Comp.MagbootsActive)
-        {
-            return;
-        }
 
         var chance = hardsuitEquipped ? entity.Comp.HardsuitFallChance : entity.Comp.WithoutHardsuitFallChance;
         var predictedRandom = GetPredictedRandomOnCurTick(GetNetEntity(entity));
         if (!predictedRandom.Prob(chance))
-        {
-            _popup.PopupPredicted(Loc.GetString(_evadedFallPopup, ("entity", Identity.Name(experienceEntity.Value, EntityManager))), experienceEntity.Value.Owner, experienceEntity);
             return;
-        }
+
+        _popup.PopupPredicted(Loc.GetString(FallPopup, ("entity", Identity.Name(experienceEntity.Value, EntityManager))), experienceEntity.Value.Owner, experienceEntity);
 
         // if you make drop: true this will lead to engine error:
         // ex: `Grid traversal attempted to handle movement of джетпак (5289/n5289, JetpackBlueFilled) while moving name-name (5172/n5172, MobReptilian, ckey)`
