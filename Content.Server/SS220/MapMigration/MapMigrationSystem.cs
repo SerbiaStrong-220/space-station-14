@@ -127,6 +127,8 @@ public sealed class MapMigrationSystem_SS220 : EntitySystem
                     _transform.SetLocalRotationNoLerp(airlockUid, Angle.FromDegrees(90), transform);
                     return;
                 }
+
+                return;
             }
 
             if (!CheckTileOccupied(pos + new Vector2i(1, 0), gridUid.Value, grid))
