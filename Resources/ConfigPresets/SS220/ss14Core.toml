@@ -1,0 +1,51 @@
+[queue]
+enabled = true
+
+[server]
+rules_file = "RulesSS220"
+
+[game]
+hostname = "[RU][TTS] SS220 TEMPLATE 🐛"
+desc = "Русский язык, 250+ голосов, MRP"
+soft_max_players = 85
+role_timers=true
+map_pool = "SS220MapPool"
+map_rotation = true
+map_memory_depth = 1
+map = ""
+lobbyduration = 300
+contraband_examine = false
+
+[game.panic_bunker]
+disable_with_admins = true
+enable_without_admins = false
+count_deadminned_admins = true
+show_reason = true
+
+[movement]
+mob_pushing = true
+
+[vote]
+enabled = false
+map_enabled = false
+auto_map_vote = true
+
+[chat]
+motd = "Билд SS14 проекта SS220 поддерживается сообществом! Заходите на наш дискорд сервер, участвуйте в жизни проекта!\nhttps://discord.gg/ss220"
+max_announcement_length = 300
+
+[admin]
+note_fresh_days = 0
+
+[replay]
+auto_record = true
+max_compressed_size = 2097152
+max_uncompressed_size = 4194304
+
+[infolinks]
+discord = "https://discord.gg/ss220"
+wiki = "https://wiki14.ss220.club"
+github = "https://github.com/SerbiaStrong-220/space-station-14"
+
+[viewport]
+maximum_width = 26

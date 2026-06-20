@@ -72,7 +72,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
         ImmutableArray<IBanRoleDef> speciesDefs = [.. banInfo.SpeciesPrototypes.Where(x => _prototypeManager.HasIndex(x)).Select(x => new BanSpecieDef(x))];
         var (banDef, expires) = await CreateBanDef(banInfo, BanType.Species, speciesDefs, adminName);
 
-        await AddSpeciesBan(banDef);
+        var createdBan = await AddSpeciesBan(banDef);
 
         var length = expires == null ? Loc.GetString("cmd-species-ban-inf") : Loc.GetString("cmd-species-ban-until", ("expires", expires));
 
@@ -83,7 +83,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
 
         _chat.SendAdminAlert(Loc.GetString("cmd-species-ban-success", ("target", targetName), ("species", speciesId), ("reason", banInfo.Reason), ("length", length)));
 
-        if (banInfo.PostBanInfo && banDef.Id is { } banId)
+        if (banInfo.PostBanInfo && createdBan.Id is { } banId)
         {
             await _discordBanPostManager.PostUserBanInfo(banId);
         }
@@ -147,7 +147,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
         _netManager.ServerSendMessage(bans, pSession.Channel);
     }
 
-    private async Task AddSpeciesBan(BanDef banDef)
+    private async Task<BanDef> AddSpeciesBan(BanDef banDef)
     {
         banDef = await _db.AddBanAsync(banDef);
 
@@ -159,6 +159,8 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
                 cachedBans.Add(banDef);
             }
         }
+
+        return banDef;
     }
 
     #endregion
@@ -217,7 +219,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
         ImmutableArray<IBanRoleDef> chatDefs = [.. banInfo.Chats.Where(x => x is not BannableChats.Invalid).Select(x => new BanChatDef(x))];
         var (banDef, expires) = await CreateBanDef(banInfo, BanType.Chat, chatDefs, adminName);
 
-        await AddChatsBan(banDef);
+        var createdBan = await AddChatsBan(banDef);
 
         var length = expires == null ? Loc.GetString("cmd-chat-ban-inf") : Loc.GetString("cmd-chat-ban-until", ("expires", expires));
 
@@ -228,7 +230,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
 
         _chat.SendAdminAlert(Loc.GetString("cmd-chat-ban-success", ("target", targetName), ("chat", bannedChats), ("reason", banInfo.Reason), ("length", length)));
 
-        if (banInfo.PostBanInfo && banDef.Id is { } banId)
+        if (banInfo.PostBanInfo && createdBan.Id is { } banId)
         {
             await _discordBanPostManager.PostUserBanInfo(banId);
         }
@@ -278,7 +280,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
         return $"Pardoned chats ban with id {banId}";
     }
 
-    private async Task AddChatsBan(BanDef banDef)
+    private async Task<BanDef> AddChatsBan(BanDef banDef)
     {
         banDef = await _db.AddBanAsync(banDef);
 
@@ -290,6 +292,8 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
                 cachedBans.Add(banDef);
             }
         }
+
+        return banDef;
     }
 
     #endregion

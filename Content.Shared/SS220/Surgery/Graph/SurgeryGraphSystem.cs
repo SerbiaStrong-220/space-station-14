@@ -2,6 +2,7 @@
 
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.Surgery.Graph;
 
@@ -14,27 +15,31 @@ public sealed class SurgeryGraphSystem : EntitySystem
         return Get(edge, (x) => x.EndSound);
     }
 
-    public IReadOnlyList<ISurgeryGraphAction> GetActions(SurgeryGraphEdge edge)
+    public IReadOnlyList<ISurgeryGraphEdgeAction> GetActions(SurgeryGraphEdge edge)
     {
         return GetList(edge, (x) => x.Actions);
     }
-
-    public IReadOnlyList<ISurgeryGraphCondition> GetConditions(SurgeryGraphEdge edge)
+    public IReadOnlyList<LocId> GetActionsLocIds(SurgeryGraphEdge edge)
     {
-        return GetList(edge, (x) => x.Conditions);
+        return GetList(edge, (x) => x.ActionLocIds);
     }
 
-    public string? ExamineDescription(SurgeryGraphNode node)
+    public IReadOnlyList<SurgeryGraphRequirement> GetRequirements(SurgeryGraphEdge edge)
+    {
+        return GetList(edge, (x) => x.Requirements);
+    }
+
+    public IReadOnlyList<SurgeryGraphRequirement> GetVisibilityRequirements(SurgeryGraphEdge edge)
+    {
+        return GetList(edge, (x) => x.VisibilityRequirements);
+    }
+
+    public LocId? ExamineDescription(SurgeryGraphNode node)
     {
         return Get(node, (x) => x.NodeText.ExamineDescription);
     }
 
-    public string? Description(SurgeryGraphNode node)
-    {
-        return Get(node, (x) => x.NodeText.Description);
-    }
-
-    public string? Popup(SurgeryGraphNode node)
+    public LocId? Popup(SurgeryGraphNode node)
     {
         return Get(node, (x) => x.NodeText.Popup);
     }
@@ -44,7 +49,12 @@ public sealed class SurgeryGraphSystem : EntitySystem
         return Get(edge, (x) => x.Delay);
     }
 
-    public IReadOnlyList<T> GetList<T>(SurgeryGraphEdge edge, Func<SurgeryGraphEdge, IReadOnlyList<T>> listGetter) where T : class
+    public SpriteSpecifier? EdgeIcon(SurgeryGraphEdge edge)
+    {
+        return Get(edge, (x) => x.EdgeIcon);
+    }
+
+    public IReadOnlyList<T> GetList<T>(SurgeryGraphEdge edge, Func<SurgeryGraphEdge, IReadOnlyList<T>> listGetter) where T : notnull
     {
         if (edge.BaseEdge.HasValue
             && listGetter(edge).Count == 0
