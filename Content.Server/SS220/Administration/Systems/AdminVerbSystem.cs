@@ -50,7 +50,7 @@ public sealed class AdminVerbSystem : EntitySystem
 
                     _quickDialog.OpenDialog(player,
                         Loc.GetString("admin-verbs-lives-title"),
-                        Loc.GetString("admin-verbs-lives-prompt",
+                        Loc.GetString("admin-verbs-lives-input",
                             ("max", maxLimit),
                             ("current", remainingLives)),
                         (int desiredLives) =>
