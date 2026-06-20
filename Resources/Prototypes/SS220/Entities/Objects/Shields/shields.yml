@@ -189,6 +189,8 @@
           Slash: 30
           Shock: 40
           Cold: 50
+    - type: ExplosionResistance
+      damageCoefficient: 0.4
     - type: ClothingSpeedModifier
       sprintModifier: 0.9
     - type: HeldSpeedModifier
@@ -680,6 +682,8 @@
                 BrokenEnergyShield:
                   min: 1
                   max: 1
+    - type: ExplosionResistance
+      damageCoefficient: 0.4
     - type: StaticPrice
       price: 350
 
