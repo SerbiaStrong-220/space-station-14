@@ -44,15 +44,16 @@ public sealed partial class DisarmChanceMartialArtEffectSystem : BaseMartialArtE
 
         if (effect.ToHand)
         {
-            var held = _hands.EnumerateHeld(target);
+            if (_hands.GetActiveItem(target) is not { Valid: true } activeHandHeldItem)
+                return;
 
-            if (held.TryFirstOrNull(out var item))
-            {
-                _hands.PickupOrDrop(user, item.Value);
+            if (!_hands.TryDrop(target, activeHandHeldItem, checkActionBlocker: false))
+                return;
 
-                ev.Handled = true;
-                ev.PopupPrefix = "martial-art-effects-disarm-success-";
-            }
+            _hands.PickupOrDrop(user, activeHandHeldItem);
+
+            ev.Handled = true;
+            ev.PopupPrefix = "martial-art-effects-disarm-success-";
         }
     }
 }
