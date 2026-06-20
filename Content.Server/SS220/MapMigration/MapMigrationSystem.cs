@@ -1,3 +1,4 @@
+using Content.Server.Shuttles.Components;
 using Content.Shared.Doors.Components;
 using Content.Shared.SS220.CCVars;
 using Content.Shared.Tag;
@@ -17,6 +18,8 @@ public sealed class MapMigrationSystem_SS220 : EntitySystem
 
     private static readonly HashSet<ProtoId<TagPrototype>> TagsForTileOccupied = ["Wall", "Window"];
     private bool _rotateDoors;
+
+    private static readonly EntProtoId BaseSecretDoorId = "BaseSecretDoor";
 
     public override void Initialize()
     {
@@ -38,7 +41,10 @@ public sealed class MapMigrationSystem_SS220 : EntitySystem
         if (!_rotateDoors)
             return;
 
-        RotateDoor(entity);
+        // whitelist secret door
+        if (MetaData(entity).EntityPrototype is { } prototype
+            && (prototype.ID == BaseSecretDoorId || prototype.Parents.Contains(BaseSecretDoorId)))
+            RotateDoor(entity);
     }
 
     private void OnDoorMapInit(Entity<DoorComponent> entity, ref MapInitEvent _)
@@ -73,6 +79,10 @@ public sealed class MapMigrationSystem_SS220 : EntitySystem
 
     public void RotateDoor(EntityUid airlockUid, EntityUid? gridUid = null, bool requireBothNeighbors = false)
     {
+        // any dock airlock rotation breaks logic, so skip
+        if (HasComp<DockingComponent>(airlockUid))
+            return;
+
         var transform = Transform(airlockUid);
         gridUid ??= transform.GridUid;
 
