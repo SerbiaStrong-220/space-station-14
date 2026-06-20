@@ -16,11 +16,14 @@ using DroneConsoleComponent = Content.Server.Shuttles.DroneConsoleComponent;
 using Robust.Shared.Configuration;
 using Content.Shared.SS220.CCVars;
 using Robust.Shared.Audio.Systems;
+using System.Threading;
+using Robust.Server.GameObjects;
 
 namespace Content.Server.Physics.Controllers;
 
-public sealed class MoverController : SharedMoverController
+public sealed partial class MoverController : SharedMoverController // SS220-add-partial
 {
+    [Dependency] private TransformSystem _transform = default!; // SS220-add-local-rotation-setter
     [Dependency] private IConfigurationManager _configManager = default!; // SS220-add-mob-update
     [Dependency] private SharedAudioSystem _audio = default!; // SS220-add-mob-update
 
@@ -191,13 +194,39 @@ public sealed class MoverController : SharedMoverController
         // SS220-process-parallel-begin
         if (_useParallelMobMover)
         {
-            PlaySound.Clear();
-            ProcessMobMovementParallel(_moversToUpdate, frameTime, 4);
+            SoundQueue.Clear();
+            SetLocalRotationQueue.Clear();
+            var movementHandle = ProcessMobMovementParallel(_moversToUpdate, frameTime, 4);
 
-            foreach (var (key, (sound, user, audioParams)) in PlaySound)
+            while (!movementHandle.WaitOne(0))
             {
-                _audio.PlayPredicted(sound, key, user, audioParams);
+                var processedAny = false;
+                while (SoundQueue.TryDequeue(out var queuedSound))
+                {
+                    _audio.PlayPredicted(queuedSound.Sound, queuedSound.Key, queuedSound.User, queuedSound.AudioParams);
+                    processedAny = true;
+                }
+
+                while (SetLocalRotationQueue.TryDequeue(out var localRotation))
+                {
+                    _transform.SetLocalRotation(localRotation.Target, localRotation.Value, localRotation.Xform);
+                    processedAny = true;
+                }
+
+                if (!processedAny)
+                    Thread.Yield();
             }
+
+            while (SoundQueue.TryDequeue(out var queuedSound))
+            {
+                _audio.PlayPredicted(queuedSound.Sound, queuedSound.Key, queuedSound.User, queuedSound.AudioParams);
+            }
+
+            while (SetLocalRotationQueue.TryDequeue(out var localRotation))
+            {
+                _transform.SetLocalRotation(localRotation.Target, localRotation.Value, localRotation.Xform);
+            }
+
         }
         else
         {

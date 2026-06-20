@@ -25,6 +25,7 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using YamlDotNet.Core.Tokens;
 using PullableComponent = Content.Shared.Movement.Pulling.Components.PullableComponent;
 
 namespace Content.Shared.Movement.Systems;
@@ -77,10 +78,16 @@ public abstract partial class SharedMoverController : VirtualController
     /// Cache the mob movement calculation to re-use elsewhere.
     /// </summary>
     public ConcurrentDictionary<EntityUid, bool> UsedMobMovement = new(); // SS220-make-it-concurrent-dictionary
-    protected ConcurrentDictionary<EntityUid, (SoundSpecifier, EntityUid, AudioParams)> PlaySound = new(); // SS220-make-it-concurrent-dictionary
-    private readonly object _transformLock = new(); // SS220 make transform update thread safe
 
-    protected HashSet<EntityUid> AroundColliderSet = []; // SS220 make collider hashset thread safe
+    // SS220-make-mob-movement-parallel-begin
+    protected readonly record struct QueuedSound(SoundSpecifier Sound, EntityUid Key, EntityUid User, AudioParams AudioParams);
+    protected readonly ConcurrentQueue<QueuedSound> SoundQueue = new();
+
+    protected readonly record struct QueuedSetLocalRotation(EntityUid Target, Angle Value, TransformComponent Xform);
+    protected readonly ConcurrentQueue<QueuedSetLocalRotation> SetLocalRotationQueue = new();
+    // SS220-make-mob-movement-parallel-end
+
+    protected HashSet<EntityUid> AroundColliderSet = []; // SS220 make collider hashset changeable
 
     public override void Initialize()
     {
@@ -358,7 +365,12 @@ public abstract partial class SharedMoverController : VirtualController
                 // TODO apparently this results in a duplicate move event because "This should have its event run during
                 // island solver"??. So maybe SetRotation needs an argument to avoid raising an event?
                 var worldRot = _transform.GetWorldRotation(xform);
-                lock (_transformLock)
+
+                // SS220-make-handle-mob-movement-parallel-begin
+                if (calledInParallel)
+                    SetLocalRotationQueue.Enqueue(new(uid, xform.LocalRotation + wishDir.ToWorldAngle() - worldRot, xform));
+                else
+                // SS220-make-handle-mob-movement-parallel-end
                     _transform.SetLocalRotation(uid, xform.LocalRotation + wishDir.ToWorldAngle() - worldRot, xform);
             }
 
@@ -389,7 +401,7 @@ public abstract partial class SharedMoverController : VirtualController
                 // SS220-make-mover-controller-parallel-begin
                 if (calledInParallel)
                 {
-                    PlaySound[uid] = (sound, relaySource ?? uid, audioParams);
+                    SoundQueue.Enqueue(new(sound, uid, relaySource ?? uid, audioParams));
                     return;
                 }
                 // SS220-make-mover-controller-parallel-end
