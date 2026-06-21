@@ -277,7 +277,6 @@ public sealed class HealthAnalyzerSystem : EntitySystem
         }
         //SS220 LimitationRevive - end
 
-
         // ss220 add health analyzer start
         var scannedName = HasComp<MetaDataComponent>(target)
             ? Identity.Name(target.Value, EntityManager)

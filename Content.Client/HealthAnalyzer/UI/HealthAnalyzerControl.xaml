@@ -30,8 +30,7 @@
             <!-- SS220 clinic death analyzer begin -->
             <Label Name="ClinicalDeathLabel"
                    Text="{Loc 'health-analyzer-window-clinical-death-text'}"
-                   Visible="False"
-                   FontColorOverride="LightGray" />
+                   Visible="False" />
             <Label Name="ClinicalDeathTimeLabel"
                    Visible="False"
                    StyleClasses="LabelBig" />
