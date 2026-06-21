@@ -22,6 +22,7 @@ using Content.Shared.UserInterface;
 using Content.Shared.Temperature;
 using Content.Shared.MagicMirror;
 using Content.Shared.Power;
+using Content.Server.Body.Components;
 
 namespace Content.Server.SS220.Ipc;
 
@@ -241,7 +242,11 @@ public sealed partial class IpcSystem : EntitySystem
         if (!TryComp<PowerCellDrawComponent>(ent, out var draw))
             return;
 
-        var delta = Math.Abs(args.CurrentTemperature - ent.Comp.NormalTemperature);
+        if (!TryComp<ThermalRegulatorComponent>(ent, out var regulator))
+            return;
+
+        var delta = Math.Abs(args.CurrentTemperature - regulator.NormalBodyTemperature);
+
         float newDrawRate = ent.Comp.BaseDrawRate;
 
         if (delta > ent.Comp.CritDelta)
