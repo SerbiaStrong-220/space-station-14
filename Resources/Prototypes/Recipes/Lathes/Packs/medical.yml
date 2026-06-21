@@ -37,6 +37,7 @@
   - Saw
   - Hemostat
   - SurgeryDrapes # SS220-surgery-update
+  - BoneGel # SS220-surgery-update
   - SawElectric # SS220-surgery-update
 
 - type: latheRecipePack

@@ -166,6 +166,12 @@ public sealed partial class ExperienceSystem : EntitySystem
         return true;
     }
 
+    public int? GetSkillTreeLevel(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree)
+    {
+        TryGetSkillTreeLevels(entity, skillTree, out var level, out _);
+        return level;
+    }
+
     public bool TryGetSkillTreeLevel(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, [NotNullWhen(true)] out int? level)
     {
         return TryGetSkillTreeLevels(entity, skillTree, out level, out _);
