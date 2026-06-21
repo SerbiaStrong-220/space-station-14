@@ -1,4 +1,4 @@
-// © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
+// © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -18,6 +18,9 @@ public sealed partial class AltMechPilotComponent : Component
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public EntityUid Mech;
+
+    [DataField, AutoNetworkedField]
+    public int PilotEyeDamage = 0;
 
     [DataField] public EntityUid? PilotUiActionEntity;
     [DataField] public EntityUid? PilotEjectActionEntity;

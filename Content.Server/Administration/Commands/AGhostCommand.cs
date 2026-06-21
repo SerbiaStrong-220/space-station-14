@@ -105,7 +105,7 @@ public sealed class AGhostCommand : LocalizedCommands
         //SS220 admin action log
         LogAdminAction(shell, args);
 
-        //FCB mech rework begin
+        //SS220 mech rework begin
         if (mind.VisitingEntity != default)
         {
             mindSystem.UnVisit(mindId, mind);
@@ -113,7 +113,7 @@ public sealed class AGhostCommand : LocalizedCommands
 
         if (_entities.TryGetComponent<GhostComponent>(mind.VisitingEntity, out var oldGhostComponent) && oldGhostComponent.CanGhostInteract)
             return;
-        //FCB mech rework end
+        //SS220 mech rework end
 
         var canReturn = mind.CurrentEntity != null
                         && !_entities.HasComponent<GhostComponent>(mind.CurrentEntity);

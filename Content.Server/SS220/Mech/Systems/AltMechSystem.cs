@@ -46,7 +46,6 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using static Content.Server.Power.Pow3r.PowerState;
 
 namespace Content.Server.SS220.Mech.Systems;
 
@@ -178,9 +177,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
                 Act = () =>
                 {
                     if (user == ent.Owner || user == ent.Comp.PilotSlot.ContainedEntity)
-                    {
                         return;
-                    }
 
                     _toolSystem.UseTool((EntityUid)item, user, ent, 30f, SawToolQualities, new MechBoltsSawedEvent(), 30f);
                 }
@@ -267,15 +264,13 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
     public void TransferMindIntoMech(Entity<AltMechComponent> ent)
     {
-        if (ent.Comp.PilotSlot.ContainedEntity == null)
+        if (ent.Comp.PilotSlot.ContainedEntity is not { Valid: true } pilotValidated)
             return;
 
-        var pilot = (EntityUid)ent.Comp.PilotSlot.ContainedEntity;
-
-        if (TryComp<MobStateComponent>(pilot, out var stateComp) && (stateComp.CurrentState == MobState.Critical || stateComp.CurrentState == MobState.Dead || stateComp.CurrentState == MobState.Invalid))
+        if (TryComp<MobStateComponent>(pilotValidated, out var stateComp) && (stateComp.CurrentState == MobState.Critical || stateComp.CurrentState == MobState.Dead || stateComp.CurrentState == MobState.Invalid))
             return;
 
-        if (!HasComp<MindContainerComponent>(pilot) || !_mind.TryGetMind(pilot, out var mindId, out var mind))
+        if (!HasComp<MindContainerComponent>(pilotValidated) || !_mind.TryGetMind(pilotValidated, out var mindId, out var mind))
             return;
 
         _mind.Visit(mindId, ent.Owner);
@@ -293,14 +288,18 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         if (integrity > 4)
             integrity = 4;
 
+        if (TryComp<AlertsComponent>(ent.Owner, out var alertsComp))
+        {
+            foreach (var alert in alertsComp.Alerts)
+                _alerts.ClearAlert(ent.Owner, alert.Value.Type);
+        }
+
         _alerts.ShowAlert(ent.Owner, _mechIntegrityAlert, (short)integrity);
 
-        if (TryComp<AlertsComponent>(pilot, out var pilotAlerts))
+        if (TryComp<AlertsComponent>(pilotValidated, out var pilotAlerts))
         {
             foreach (var alert in pilotAlerts.Alerts)
-            {
                 _alerts.ShowAlert(ent.Owner, alert.Value);
-            }
         }
 
         if (ent.Comp.ContainerDict["head"].ContainedEntity != null || ent.Comp.Transparent)
@@ -308,9 +307,9 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
             if (!TryComp<BlindableComponent>(ent.Owner, out var blindableCompMech))
                 return;
 
-            if (TryComp<BlindableComponent>(pilot, out var blindableComp))
+            if (TryComp<AltMechPilotComponent>(pilotValidated, out var pilotComp))
             {
-                _blindable.AdjustEyeDamage((ent.Owner, blindableCompMech), (-blindableCompMech.EyeDamage + blindableComp.EyeDamage)); //Mech cannot see anything if it has no eyes
+                _blindable.AdjustEyeDamage((ent.Owner, blindableCompMech), -blindableCompMech.EyeDamage + pilotComp.PilotEyeDamage); //Mech cannot see anything if it has no eyes
                 return;
             }
 
@@ -325,9 +324,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         if (TryComp<AlertsComponent>(ent.Owner, out var alertsComp))
         {
             foreach (var alert in alertsComp.Alerts)
-            {
                 _alerts.ClearAlert(ent.Owner, alert.Value.Type);
-            }
         }
 
         if (!TryComp<VisitingMindComponent>(ent.Owner, out var mechVisitComp))
@@ -385,16 +382,12 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         var LeftArmEquipment = mechComp.ContainerDict["left-arm"].ContainedEntity;
 
         if (LeftArmEquipment != null)
-        {
             _parts.ProvideItems(mech, (EntityUid)LeftArmEquipment);
-        }
 
         var RightArmEquipment = mechComp.ContainerDict["right-arm"].ContainedEntity;
 
         if (RightArmEquipment != null)
-        {
             _parts.ProvideItems(mech, (EntityUid)RightArmEquipment);
-        }
     }
 
     public void RemoveItemsFromMech(EntityUid mech)
@@ -405,16 +398,12 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         var LeftArmEquipment = mechComp.ContainerDict["left-arm"].ContainedEntity;
 
         if (LeftArmEquipment != null)
-        {
             _parts.RemoveProvidedItems(mech, (EntityUid)LeftArmEquipment);
-        }
 
         var RightArmEquipment = mechComp.ContainerDict["right-arm"].ContainedEntity;
 
         if (RightArmEquipment != null)
-        {
             _parts.RemoveProvidedItems(mech, (EntityUid)RightArmEquipment);
-        }
     }
 
     private void OnMechDestroyed(Entity<AltMechComponent> ent, ref DestructionEventArgs args)
@@ -520,6 +509,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
             return;
 
         user ??= component.PilotSlot.ContainedEntity;
+
         if (user == null)
             return;
 
@@ -564,15 +554,10 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
                 continue;
 
             foreach (var equip in ent.Comp.EquipmentContainer.ContainedEntities)
-            {
                 RaiseLocalEvent(equip, ev);
-            }
         }
 
-        var state = new AltMechBoundUiState
-        {
-            EquipmentStates = ev.States
-        };
+        var state = new AltMechBoundUiState { EquipmentStates = ev.States };
 
         _ui.SetUiState(ent.Owner, MechUiKey.Key, state);
     }
@@ -655,9 +640,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
     private void OnInhale(Entity<AltMechPilotComponent> ent, ref InhaleLocationEvent args)
     {
         if (!TryComp<AltMechComponent>(ent.Comp.Mech, out var mechComp) || mechComp.TankSlot == null || mechComp.TankSlot.ContainedEntity == null)
-        {
             return;
-        }
 
         if (!TryComp<GasTankComponent>(mechComp.TankSlot.ContainedEntity, out var tankComp))
             return;

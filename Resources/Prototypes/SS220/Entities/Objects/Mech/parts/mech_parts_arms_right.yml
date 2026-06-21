@@ -20,6 +20,7 @@
             Blunt: 40
             Structural: 50
         altDisarm: false
+        strengthModifier: 6
         soundHit:
           path: /Audio/Effects/metal_thud1.ogg
           params:
@@ -70,6 +71,7 @@
           - Huge
           - Large
           - Normal
+        strengthModifier: 3.8
         damageOverride:
           types:
             Blunt: 20
@@ -124,6 +126,7 @@
         damageOverride:
           types:
             Slash: 5
+        strengthModifier: 0.3
         attackRate: 2.5
         altDisarm: false
         autoAttack: true
@@ -137,11 +140,13 @@
         damageOverride:
           types:
             Slash: 5
+        strengthModifier: 0.3
         attackRate: 2.5
         altDisarm: false
         autoAttack: true
     - hand:
         location: Right
+        strengthModifier: 0.8
       item: BorgHypo
   - type: Item
     inhandVisuals:
@@ -243,6 +248,7 @@
             Blunt: 50
             Structural: 60
         altDisarm: false
+        strengthModifier: 8
         attackRate: 2.5
         soundHit:
           path: /Audio/Effects/metal_thud1.ogg
@@ -292,10 +298,6 @@
   - type: Sprite
     sprite: Objects/Specific/Mech/mecha_equipment.rsi
     state: mecha_clamp
-  - type: MechArm
-    hands:
-    - hand:
-        location: Right
   - type: Item
     inhandVisuals:
       left:
@@ -308,6 +310,20 @@
     attachedSprite:
       sprite: SS220/Objects/Mechs/righthand.rsi
       state: basichydraulic
+  - type: MechArm
+    hands:
+    - hand:
+        location: Right
+        damageOverride:
+          types:
+            Blunt: 40
+            Structural: 50
+        altDisarm: false
+        strengthModifier: 5
+        soundHit:
+          path: /Audio/Effects/metal_thud1.ogg
+          params:
+            variation: 0.10
   - type: Destructible
     thresholds:
     - trigger:

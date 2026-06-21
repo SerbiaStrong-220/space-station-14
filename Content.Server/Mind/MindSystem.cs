@@ -158,10 +158,10 @@ public sealed class MindSystem : SharedMindSystem
         if (_players.TryGetSessionById(mind.UserId, out var session))
             _players.SetAttachedEntity(session, entity);
 
-        //FCB add mind visit events begin
+        //SS220 add mind visit events begin
         var ev = new EntityVisitedEvent(mindId, mind);
         RaiseLocalEvent(entity, ref ev);
-        //FCB add mind visit events end
+        //SS220 add mind visit events end
 
         Log.Info($"Session {session?.Name} visiting entity {entity}.");
     }
@@ -187,13 +187,13 @@ public sealed class MindSystem : SharedMindSystem
         var owned = mind.OwnedEntity;
         _players.SetAttachedEntity(session, owned);
 
-        //FCB add mind visit events begin
+        //SS220 add mind visit events begin
         if(mind.OwnedEntity != null)
         {
             var ev = new EntityUnvisitedEvent(mindId, mind);
             RaiseLocalEvent((EntityUid)mind.OwnedEntity, ref ev);
         }
-        //FCB add mind visit events end
+        //SS220 add mind visit events end
 
         if (owned.HasValue)
         {

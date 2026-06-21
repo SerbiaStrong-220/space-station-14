@@ -190,7 +190,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             return;
         }
 
-        //FCB mech rework begin
+        //SS220 mech rework begin
         if (TryComp<AltMechComponent>(source, out var mechComp) && mechComp.PilotSlot.ContainedEntity != null)
         {
             TrySendInGameICMessage(
@@ -207,13 +207,13 @@ public sealed partial class ChatSystem : SharedChatSystem
 
             return;
         }
-        //FCB mech rework end
+        //SS220 mech rework end
 
         if (player != null && _chatManager.HandleRateLimit(player) != RateLimitStatus.Allowed)
             return;
 
         // Sus
-        if (player?.AttachedEntity is { Valid: true } entity && source != entity && (!TryComp<AltMechPilotComponent>(source, out var pilotComp) || entity != pilotComp.Mech))//FCB mech rework
+        if (player?.AttachedEntity is { Valid: true } entity && source != entity && (!TryComp<AltMechPilotComponent>(source, out var pilotComp) || entity != pilotComp.Mech))//SS220 mech rework
         {
             return;
         }

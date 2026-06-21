@@ -10,6 +10,13 @@
   - type: ComplexInteraction
   - type: MobMover
   - type: ArmorBlock
+  - type: Flammable
+    fireSpread: true
+    canResistFire: true
+    damage:
+      types:
+        Heat: 0
+  - type: PhysicalParameters
   - type: AltMech
     pilotWhitelist:
       components:
@@ -25,7 +32,7 @@
   - type: MobCollision
     colliding: false
     strength: 150
-    fixtureId: ""
+    fixtureId: "flammable"
   - type: DoAfter
   - type: UserInterface
     interfaces:
@@ -228,11 +235,11 @@
   id: MechArmoredSynth
   parent: BaseAltMech
   name: Executor
-  description: The peak of modern mech design. Materials, drives, electronics - everything was picked without a glance on the price
+  description: The peak of modern mech design partially based on reverse-enginiered [DELETED]. Materials, drives, electronics - everything was picked without a glance on the price
   components:
   - type: Sprite
     sprite: SS220/Objects/Mechs/cores.rsi
-    state: armoredsynthold
+    state: armoredsynth
     noRot: true
   - type: AltArmor
     tresholddict:
@@ -240,8 +247,8 @@
       Poison: 1000
       Airloss: 1000
       Caustic: 1000
-      Piercing: 140 #This is a DS frame and logically a tank
-      Blunt: 150
+      Piercing: 245 #This is a DS frame and logically a tank
+      Blunt: 270
       Heat: 120
       Slash: 70
       Shock: 150

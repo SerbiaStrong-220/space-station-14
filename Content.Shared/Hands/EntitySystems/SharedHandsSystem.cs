@@ -33,7 +33,7 @@ public abstract partial class SharedHandsSystem
     public event Action<Entity<HandsComponent>, string>? OnPlayerRemoveHand;
     protected event Action<Entity<HandsComponent>?>? OnHandSetActive;
 
-    private DamageSpecifier NoHandDamage = new DamageSpecifier();// FCB add hand damage
+    private DamageSpecifier NoHandDamage = new DamageSpecifier();// SS220 add hand damage
 
     public override void Initialize()
     {
@@ -351,7 +351,7 @@ public abstract partial class SharedHandsSystem
 
         RaiseLocalEvent(ent, new DidSwitchHandEvent(ent.Comp.ActiveHandId));//SS220 Cult_update2
 
-        //FCB add hand damage begin
+        //SS220 add hand damage begin
         if (TryComp<MeleeWeaponComponent>(ent.Owner, out var meleeComp) && ent.Comp.Hands.ContainsKey(handId) && ent.Comp.HandsOverrideDamage)//or we overrdie all hands or we don't do it at all
         {
             var hand = ent.Comp.Hands[handId];
@@ -386,7 +386,7 @@ public abstract partial class SharedHandsSystem
 
             meleeComp.HitSound = null;
         }
-        //FCB add hand damage end
+        //SS220 add hand damage end
 
         Dirty(ent);
         return true;

@@ -159,8 +159,8 @@ public abstract class AlertsSystem : EntitySystem
             return;
         }
 
-        if(TryComp<AltMechPilotComponent> (entity.Owner,out var pilotComp))//FCB mech rework
-            ShowAlert(pilotComp.Mech, state);//FCB mech rework
+        if(TryComp<AltMechPilotComponent> (entity.Owner,out var pilotComp))//SS220 mech rework
+            ShowAlert(pilotComp.Mech, state);//SS220 mech rework
 
         // Check whether the alert category we want to show is already being displayed, with the same type,
         // severity, and cooldown.
@@ -244,8 +244,8 @@ public abstract class AlertsSystem : EntitySystem
             return;
         }
 
-        if (TryComp<AltMechPilotComponent>(entity.Owner, out var pilotComp))//FCB mech rework
-            ClearAlertCategory(pilotComp.Mech, category);//FCB mech rework
+        if (TryComp<AltMechPilotComponent>(entity.Owner, out var pilotComp))//SS220 mech rework
+            ClearAlertCategory(pilotComp.Mech, category);//SS220 mech rework
 
         AfterClearAlert((entity, entity.Comp));
 
@@ -270,8 +270,8 @@ public abstract class AlertsSystem : EntitySystem
                 return;
             }
 
-            if (TryComp<AltMechPilotComponent>(entity.Owner, out var pilotComp))//FCB mech rework
-                ClearAlert(pilotComp.Mech, alertType);//FCB mech rework
+            if (TryComp<AltMechPilotComponent>(entity.Owner, out var pilotComp))//SS220 mech rework
+                ClearAlert(pilotComp.Mech, alertType);//SS220 mech rework
 
             AfterClearAlert((entity, entity.Comp));
 

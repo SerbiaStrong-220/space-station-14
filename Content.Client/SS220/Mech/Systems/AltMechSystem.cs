@@ -1,4 +1,4 @@
-// © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
+// © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 using Content.Client.SS220.Mech.Ui;
 using Content.Client.UserInterface.Systems.DamageOverlays.Overlays;
 using Content.Shared.Damage.Systems;

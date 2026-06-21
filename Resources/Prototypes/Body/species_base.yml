@@ -25,6 +25,7 @@
         color: "#FF0000"
       Burn:
         sprite: Mobs/Effects/burn_damage.rsi
+  - type: PhysicalParameters #SS220 add physical parameters
   - type: StatusIcon
     bounds: -0.5,-0.5,0.5,0.5
   - type: JobStatus
@@ -70,7 +71,9 @@
       effects:
       - !type:WashCreamPie
   - type: Item #SS220 rofls
-    size: Gigantic #SS220 rofls
+    size: Ginormous #SS220 rofls
+  - type: ItemExtension #SS220 rofls
+    minimalStrengthToPickUp: 3.5 #SS220 rofls
   - type: StatusEffects
     allowed:
     - Electrocution

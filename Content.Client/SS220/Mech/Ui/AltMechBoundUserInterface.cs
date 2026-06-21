@@ -1,6 +1,4 @@
-// © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
-using Content.Client.SS220.Mech;
-using Content.Client.SS220.Mech.Ui;
+// © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 using Content.Client.UserInterface.Fragments;
 using Content.Shared.SS220.AltMech;
 using Content.Shared.SS220.Mech.Components;

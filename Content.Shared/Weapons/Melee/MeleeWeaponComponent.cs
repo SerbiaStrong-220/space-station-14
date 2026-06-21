@@ -4,6 +4,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using Content.Shared.Damage.Prototypes;
 
 namespace Content.Shared.Weapons.Melee;
 
@@ -132,6 +133,22 @@ public sealed partial class MeleeWeaponComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public float AnimationOffset = 1f;
+
+    //SS220 add physical parameters begin
+    [DataField, AutoNetworkedField]
+    public bool StrengthAffectsDamage = true;
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 StrengthDamageMultiplier = 0.35f;
+
+    [DataField, AutoNetworkedField]
+    public HashSet<ProtoId<DamageTypePrototype>> AffectedDamageTypes = new HashSet<ProtoId<DamageTypePrototype>>
+    {
+        "Piercing",
+        "Slash",
+        "Blunt"
+    };
+    //SS220 add physical parameters end
 
     // Sounds
 

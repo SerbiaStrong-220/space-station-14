@@ -93,5 +93,14 @@ namespace Content.Shared.Weapons.Melee.Events
             Type = type;
         }
     }
+
+    [ByRefEvent]
+    public record struct MeleeAttackerEvent(EntityUid used, EntityUid target, DamageSpecifier damage)
+    {
+        public EntityUid Used = used;
+        public EntityUid Target = target;
+        public DamageSpecifier Damage = damage;
+        public DamageSpecifier ModifiedDamage = new DamageSpecifier();
+    }
     //ss220 extended weapon logic end
 }

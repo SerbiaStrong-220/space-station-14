@@ -20,7 +20,8 @@
       path: "/Audio/Items/drill_hit.ogg"
     attackRate: 4
     damage:
-      groups:
-        Brute: 25
       types:
+        Blunt: 8
+        Piercing: 8
+        Slash: 8
         Structural: 70

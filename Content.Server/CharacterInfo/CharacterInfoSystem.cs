@@ -50,13 +50,13 @@ public sealed class CharacterInfoSystem : EntitySystem
             briefing = _roles.MindGetBriefing(mindId);
         }
 
-        //FCB mech rework begin
+        //SS220 mech rework begin
         if (TryComp<AltMechComponent>(entity, out var mechComp))
         {
             if (mechComp.PilotSlot.ContainedEntity != null)
                 entity = (EntityUid)mechComp.PilotSlot.ContainedEntity;
         }
-        //FCB mech rework end
+        //SS220 mech rework end
 
         RaiseNetworkEvent(new CharacterInfoEvent(GetNetEntity(entity), jobTitle, objectives, briefing), args.SenderSession);
     }

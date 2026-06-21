@@ -63,6 +63,7 @@
           types:
             Blunt: 40
             Structural: 50
+        strengthModifier: 6
         altDisarm: false
         soundHit:
           path: /Audio/Effects/metal_thud1.ogg
@@ -119,6 +120,7 @@
             Blunt: 20
             Structural: 10
         altDisarm: false
+        strengthModifier: 3.8
         attackRate: 1.5
   - type: Item
     inhandVisuals:
@@ -170,6 +172,7 @@
             Slash: 5
         attackRate: 2.5
         autoAttack: true
+        strengthModifier: 0.3
         altDisarm: false
     - hand:
         location: Left
@@ -182,6 +185,7 @@
           types:
             Slash: 5
         attackRate: 2.5
+        strengthModifier: 0.3
         autoAttack: true
     - hand:
         location: Left
@@ -242,6 +246,7 @@
             Blunt: 50
             Structural: 60
         attackRate: 2.5
+        strengthModifier: 8
         altDisarm: false
         soundHit:
           path: /Audio/Effects/metal_thud1.ogg

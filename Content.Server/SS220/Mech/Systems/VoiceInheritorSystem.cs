@@ -26,16 +26,14 @@ public sealed class VoiceInheritorSystem : EntitySystem
         if (!TryComp<AltMechComponent>(ent.Owner, out var mechComp))
             return;
 
-        if (mechComp.PilotSlot.ContainedEntity == null)
+        if (mechComp.PilotSlot.ContainedEntity is not { Valid: true } pilotValidated)
             return;
 
-        EntityUid pilot = (EntityUid)mechComp.PilotSlot.ContainedEntity;
-
-        var rider = EnsureComp<AltMechPilotComponent>(pilot);
+        var rider = EnsureComp<AltMechPilotComponent>(pilotValidated);
 
         if (TryComp<ActiveRadioComponent>(ent.Owner, out var mechRadio))
         {
-            if (TryComp<InventoryComponent>(pilot, out var pilotInventory) && _inventory.TryGetSlotContainer(pilot, "ears", out var slot, out var def))
+            if (TryComp<InventoryComponent>(pilotValidated, out var pilotInventory) && _inventory.TryGetSlotContainer(pilotValidated, "ears", out var slot, out var def))
             {
                 if (!TryComp<ActiveRadioComponent>(slot.ContainedEntity, out var radioComp))
                     return;
@@ -43,17 +41,15 @@ public sealed class VoiceInheritorSystem : EntitySystem
                 mechRadio.FrequencyChannels = radioComp.FrequencyChannels;
             }
 
-            if (TryComp<ActiveRadioComponent>(pilot, out var embeddedRadio))//in case the pilot is a radio himself
+            if (TryComp<ActiveRadioComponent>(pilotValidated, out var embeddedRadio))//in case the pilot is a radio himself
             {
                 foreach (var channel in embeddedRadio.Channels)
                     mechRadio.FrequencyChannels = embeddedRadio.FrequencyChannels;
             }
         }
 
-        if (TryComp<LanguageComponent>(ent.Owner, out var mechLanguage) && TryComp<LanguageComponent>(pilot, out var pilotLanguage))
-        {
+        if (TryComp<LanguageComponent>(ent.Owner, out var mechLanguage) && TryComp<LanguageComponent>(pilotValidated, out var pilotLanguage))
             _language.AddLanguages((ent.Owner, mechLanguage), pilotLanguage.AvailableLanguages.ToList());
-        }
     }
 
     private void OnMechExited(Entity<VoiceInheritorComponent> ent, ref OnMechExitEvent args)

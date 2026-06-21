@@ -146,7 +146,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         if (TryComp<MovementSpeedModifierComponent>(ent.Owner, out var movementComp))
             _movementSpeedModifier.ChangeBaseSpeed(ent.Owner, ent.Comp.OverallBaseMovementSpeed * 0.5f, ent.Comp.OverallBaseMovementSpeed, ent.Comp.OverallBaseAcceleration, movementComp);
 
-        if(ent.Comp.ContainerDict["head"].ContainedEntity == null && !ent.Comp.Transparent)
+        if (ent.Comp.ContainerDict["head"].ContainedEntity == null && !ent.Comp.Transparent)
         {
             TryComp<BlindableComponent>(ent.Owner, out var blindableComp);
             _blindable.AdjustEyeDamage((ent.Owner, blindableComp), 9); //Mech cannot see anything if it has no eyes
@@ -266,23 +266,29 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         pilotComp.Mech = mech;
 
+        if (TryComp<BlindableComponent>(pilot, out var blindableCompPilot))
+        {
+            pilotComp.PilotEyeDamage = blindableCompPilot.EyeDamage;
+            _blindable.AdjustEyeDamage(pilot, 9 - blindableCompPilot.EyeDamage);
+        }
+
         if (_net.IsClient)
             return;
 
         var ev = new DropHandItemsEvent();
         RaiseLocalEvent(pilot, ref ev);
 
-        if(TryComp<ActiveRadioComponent>(mech, out var mechRadio))
+        if (TryComp<ActiveRadioComponent>(mech, out var mechRadio))
         {
-            if(TryComp<InventoryComponent>(pilot, out var pilotInventory) && _inventory.TryGetSlotContainer(pilot, "ears", out var slot, out var def))
+            if (TryComp<InventoryComponent>(pilot, out var pilotInventory) && _inventory.TryGetSlotContainer(pilot, "ears", out var slot, out var def))
             {
                 if (!TryComp<ActiveRadioComponent>(slot.ContainedEntity, out var radioComp))
                     return;
                 mechRadio.Channels = radioComp.Channels;
             }
-            if(TryComp<ActiveRadioComponent>(pilot, out var embeddedRadio))//in case the pilot is a radio himself
+            if (TryComp<ActiveRadioComponent>(pilot, out var embeddedRadio))//in case the pilot is a radio himself
             {
-                foreach ( var channel in embeddedRadio.Channels)
+                foreach (var channel in embeddedRadio.Channels)
                     mechRadio.Channels.Add(channel);
             }
         }
@@ -629,6 +635,9 @@ public abstract partial class SharedAltMechSystem : EntitySystem
             _actions.RemoveProvidedAction(pilot, ent.Owner, (EntityUid)pilotComp.PilotEjectActionEntity);
 
         _container.RemoveEntity(ent.Owner, pilot);
+
+        if (TryComp<BlindableComponent>(pilot, out var blindableCompPilot))
+            _blindable.AdjustEyeDamage(pilot, pilotComp.PilotEyeDamage - blindableCompPilot.EyeDamage);
 
         if (!RemComp<AltMechPilotComponent>(pilot))
             return false;
