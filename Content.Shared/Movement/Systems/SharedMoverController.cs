@@ -1,4 +1,3 @@
-using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Shared.ActionBlocker;
@@ -25,7 +24,6 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using YamlDotNet.Core.Tokens;
 using PullableComponent = Content.Shared.Movement.Pulling.Components.PullableComponent;
 
 namespace Content.Shared.Movement.Systems;
@@ -77,17 +75,9 @@ public abstract partial class SharedMoverController : VirtualController
     /// <summary>
     /// Cache the mob movement calculation to re-use elsewhere.
     /// </summary>
-    public ConcurrentDictionary<EntityUid, bool> UsedMobMovement = new(); // SS220-make-it-concurrent-dictionary
+    public Dictionary<EntityUid, bool> UsedMobMovement = new();
 
-    // SS220-make-mob-movement-parallel-begin
-    protected readonly record struct QueuedSound(SoundSpecifier Sound, EntityUid Key, EntityUid User, AudioParams AudioParams);
-    protected readonly ConcurrentQueue<QueuedSound> SoundQueue = new();
-
-    protected readonly record struct QueuedSetLocalRotation(EntityUid Target, Angle Value, TransformComponent Xform);
-    protected readonly ConcurrentQueue<QueuedSetLocalRotation> SetLocalRotationQueue = new();
-    // SS220-make-mob-movement-parallel-end
-
-    protected HashSet<EntityUid> AroundColliderSet = []; // SS220 make collider hashset changeable
+    private readonly HashSet<EntityUid> _aroundColliderSet = [];
 
     public override void Initialize()
     {
@@ -129,9 +119,7 @@ public abstract partial class SharedMoverController : VirtualController
     /// </summary>
     protected void HandleMobMovement(
         Entity<InputMoverComponent> entity,
-        float frameTime,
-        bool calledInParallel, // SS220-add-parallel-update
-        ref HashSet<EntityUid> threadColliderSet) // SS220-add-parallel-update
+        float frameTime)
     {
         var uid = entity.Owner;
         var mover = entity.Comp;
@@ -205,19 +193,6 @@ public abstract partial class SharedMoverController : VirtualController
             return;
         }
 
-        // SS220-try-to-reduce-idle-computing-cost-begin
-        if (AssertValidWish(mover, MovementSpeedModifierComponent.DefaultBaseWalkSpeed, MovementSpeedModifierComponent.DefaultBaseSprintSpeed) == Vector2.Zero
-            && physicsComponent.LinearVelocity.LengthSquared() < 0.00001f)
-        {
-            UsedMobMovement[uid] = true;
-
-            if (physicsComponent.AngularVelocity != 0f)
-                PhysicsSystem.SetAngularVelocity(uid, 0, body: physicsComponent);
-
-            return;
-        }
-        // SS220-try-to-reduce-idle-computing-cost-end
-
         /*
          * This assert is here because any entity using inputs to move should be a Kinematic Controller.
          * Kinematic Controllers are not built to use the entirety of the Physics engine by intention and
@@ -278,7 +253,7 @@ public abstract partial class SharedMoverController : VirtualController
 
             // If we're not on a grid, and not able to move in space check if we're close enough to a grid to touch.
             if (!touching && MobMoverQuery.TryComp(uid, out var mobMover))
-                touching |= IsAroundCollider(_lookup, (uid, physicsComponent, mobMover, xform), ref threadColliderSet); // SS220-make-collider-set-thread-safe
+                touching |= IsAroundCollider(_lookup, (uid, physicsComponent, mobMover, xform));
 
             // If we're touching then use the weightless values
             if (touching)
@@ -366,12 +341,7 @@ public abstract partial class SharedMoverController : VirtualController
                 // island solver"??. So maybe SetRotation needs an argument to avoid raising an event?
                 var worldRot = _transform.GetWorldRotation(xform);
 
-                // SS220-make-handle-mob-movement-parallel-begin
-                if (calledInParallel)
-                    SetLocalRotationQueue.Enqueue(new(uid, xform.LocalRotation + wishDir.ToWorldAngle() - worldRot, xform));
-                else
-                // SS220-make-handle-mob-movement-parallel-end
-                    _transform.SetLocalRotation(uid, xform.LocalRotation + wishDir.ToWorldAngle() - worldRot, xform);
+                _transform.SetLocalRotation(uid, xform.LocalRotation + wishDir.ToWorldAngle() - worldRot, xform);
             }
 
             if (!weightless && MobMoverQuery.TryGetComponent(uid, out var mobMover) &&
@@ -397,14 +367,6 @@ public abstract partial class SharedMoverController : VirtualController
 
                 audioParams = audioParams.WithVolume(sound.Params.Volume + soundModifier);
                 // SS220 - softy footsteps feature - end
-
-                // SS220-make-mover-controller-parallel-begin
-                if (calledInParallel)
-                {
-                    SoundQueue.Enqueue(new(sound, uid, relaySource ?? uid, audioParams));
-                    return;
-                }
-                // SS220-make-mover-controller-parallel-end
 
                 // If we're a relay target then predict the sound for all relays.
                 if (relaySource != null)
@@ -519,14 +481,14 @@ public abstract partial class SharedMoverController : VirtualController
     /// <summary>
     /// Used for weightlessness to determine if we are near a wall.
     /// </summary>
-    private bool IsAroundCollider(EntityLookupSystem lookupSystem, Entity<PhysicsComponent, MobMoverComponent, TransformComponent> entity, ref HashSet<EntityUid> threadColliderSet) //  SS220-make-collider-set-thread-safe
+    private bool IsAroundCollider(EntityLookupSystem lookupSystem, Entity<PhysicsComponent, MobMoverComponent, TransformComponent> entity)
     {
         var (uid, collider, mover, transform) = entity;
         var enlargedAABB = _lookup.GetWorldAABB(entity.Owner, transform).Enlarged(mover.GrabRange);
 
-        threadColliderSet.Clear(); //  SS220-make-collider-set-thread-safe
-        lookupSystem.GetEntitiesIntersecting(transform.MapID, enlargedAABB, threadColliderSet); //  SS220-make-collider-set-thread-safe
-        foreach (var otherEntity in threadColliderSet) //  SS220-make-collider-set-thread-safe
+        _aroundColliderSet.Clear();
+        lookupSystem.GetEntitiesIntersecting(transform.MapID, enlargedAABB, _aroundColliderSet);
+        foreach (var otherEntity in _aroundColliderSet)
         {
             if (otherEntity == uid)
                 continue; // Don't try to push off of yourself!

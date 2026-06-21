@@ -6,7 +6,7 @@ using Robust.Client.UserInterface.Controls;
 namespace Content.Client.SS220.CriminalRecords.UI;
 
 [Virtual]
-public partial class RecordListGroup : BoxContainer
+public abstract partial class RecordListGroup : BoxContainer
 {
     public Control RecordContainer;
     public RecordListGroup()

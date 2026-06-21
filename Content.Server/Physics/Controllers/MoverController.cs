@@ -12,21 +12,13 @@ using Robust.Shared.Player;
 using DependencyAttribute = Robust.Shared.IoC.DependencyAttribute;
 using Robust.Shared.Map.Components;
 using Content.Shared.SS220.CruiseControl;
+using Content.Server.SS220.CruiseControl;
 using DroneConsoleComponent = Content.Server.Shuttles.DroneConsoleComponent;
-using Robust.Shared.Configuration;
-using Content.Shared.SS220.CCVars;
-using Robust.Shared.Audio.Systems;
-using System.Threading;
-using Robust.Server.GameObjects;
 
 namespace Content.Server.Physics.Controllers;
 
-public sealed partial class MoverController : SharedMoverController // SS220-add-partial
+public sealed class MoverController : SharedMoverController
 {
-    [Dependency] private TransformSystem _transform = default!; // SS220-add-local-rotation-setter
-    [Dependency] private IConfigurationManager _configManager = default!; // SS220-add-mob-update
-    [Dependency] private SharedAudioSystem _audio = default!; // SS220-add-mob-update
-
     private static readonly Gauge ActiveMoverGauge = Metrics.CreateGauge(
         "physics_active_mover_count",
         "Amount of ActiveInputMovers being processed by MoverController");
@@ -44,8 +36,6 @@ public sealed partial class MoverController : SharedMoverController // SS220-add
     private readonly HashSet<EntityUid> _seenRelayMovers = [];
     private readonly List<Entity<InputMoverComponent>> _moversToUpdate = [];
 
-    private bool _useParallelMobMover = false; // SS220-make-mover-update-parallel
-
     public override void Initialize()
     {
         base.Initialize();
@@ -61,8 +51,6 @@ public sealed partial class MoverController : SharedMoverController // SS220-add
         _activeQuery = GetEntityQuery<ActiveInputMoverComponent>();
         _droneQuery = GetEntityQuery<DroneConsoleComponent>();
         _shuttleQuery = GetEntityQuery<ShuttleComponent>();
-
-        _configManager.OnValueChanged(CCVars220.ParallelMoverUpdate, x => _useParallelMobMover = x, true); // SS220-add-parallel-mover-update
     }
 
     private void OnEntityPaused(Entity<ActiveInputMoverComponent> ent, ref EntityPausedEvent args)
@@ -191,51 +179,10 @@ public sealed partial class MoverController : SharedMoverController // SS220-add
 
         ActiveMoverGauge.Set(_moversToUpdate.Count);
 
-        // SS220-process-parallel-begin
-        if (_useParallelMobMover)
+        foreach (var ent in _moversToUpdate)
         {
-            SoundQueue.Clear();
-            SetLocalRotationQueue.Clear();
-            var movementHandle = ProcessMobMovementParallel(_moversToUpdate, frameTime, 4);
-
-            while (!movementHandle.WaitOne(0))
-            {
-                var processedAny = false;
-                while (SoundQueue.TryDequeue(out var queuedSound))
-                {
-                    _audio.PlayPredicted(queuedSound.Sound, queuedSound.Key, queuedSound.User, queuedSound.AudioParams);
-                    processedAny = true;
-                }
-
-                while (SetLocalRotationQueue.TryDequeue(out var localRotation))
-                {
-                    _transform.SetLocalRotation(localRotation.Target, localRotation.Value, localRotation.Xform);
-                    processedAny = true;
-                }
-
-                if (!processedAny)
-                    Thread.Yield();
-            }
-
-            while (SoundQueue.TryDequeue(out var queuedSound))
-            {
-                _audio.PlayPredicted(queuedSound.Sound, queuedSound.Key, queuedSound.User, queuedSound.AudioParams);
-            }
-
-            while (SetLocalRotationQueue.TryDequeue(out var localRotation))
-            {
-                _transform.SetLocalRotation(localRotation.Target, localRotation.Value, localRotation.Xform);
-            }
-
+            HandleMobMovement(ent, frameTime);
         }
-        else
-        {
-            foreach (var ent in _moversToUpdate)
-            {
-                HandleMobMovement(ent, frameTime, false, ref AroundColliderSet);
-            }
-        }
-        // SS220-process-parallel-end
 
         HandleShuttleMovement(frameTime);
         return;
@@ -468,7 +415,7 @@ public sealed partial class MoverController : SharedMoverController // SS220-add
 
         _shuttlePilots = newPilots;
 
-
+        
         // SS220 Cruise-Control begin
         var cruiseQuery = GetEntityQuery<ShuttleCruiseControlComponent>();
         var cruiseShuttleEnumerator = EntityQueryEnumerator<ShuttleComponent, ShuttleCruiseControlComponent>();
