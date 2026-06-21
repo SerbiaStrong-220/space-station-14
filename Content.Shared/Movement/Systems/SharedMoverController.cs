@@ -77,7 +77,7 @@ public abstract partial class SharedMoverController : VirtualController
     /// <summary>
     /// Cache the mob movement calculation to re-use elsewhere.
     /// </summary>
-    public ConcurrentDictionary<EntityUid, bool> UsedMobMovement = new(); // SS220-make-it-concurrent-dictionary
+    public Dictionary<EntityUid, bool> UsedMobMovement = new();
 
     // SS220-make-mob-movement-parallel-begin
     protected readonly record struct QueuedSound(SoundSpecifier Sound, EntityUid Key, EntityUid User, AudioParams AudioParams);
@@ -201,7 +201,12 @@ public abstract partial class SharedMoverController : VirtualController
             || !PhysicsQuery.TryComp(uid, out var physicsComponent)
             || PullableQuery.TryGetComponent(uid, out var pullable) && pullable.BeingPulled)
         {
-            UsedMobMovement[uid] = false;
+            // SS220-optimize-UsedMobMovement-for-concurrent-begin
+            if (calledInParallel)
+                DebugTools.Assert(UsedMobMovement.TryGetValue(uid, out var used) && used == false);
+            else
+                UsedMobMovement[uid] = false;
+            // SS220-optimize-UsedMobMovement-for-concurrent-end
             return;
         }
 
@@ -209,6 +214,8 @@ public abstract partial class SharedMoverController : VirtualController
         if (AssertValidWish(mover, MovementSpeedModifierComponent.DefaultBaseWalkSpeed, MovementSpeedModifierComponent.DefaultBaseSprintSpeed) == Vector2.Zero
             && physicsComponent.LinearVelocity.LengthSquared() < 0.00001f)
         {
+            if (calledInParallel) // SS220-optimize-UsedMobMovement-for-concurrent
+                DebugTools.Assert(UsedMobMovement.ContainsKey(uid)); // SS220-optimize-UsedMobMovement-for-concurrent
             UsedMobMovement[uid] = true;
 
             if (physicsComponent.AngularVelocity != 0f)
@@ -243,12 +250,20 @@ public abstract partial class SharedMoverController : VirtualController
         {
             if (!weightless)
             {
-                UsedMobMovement[uid] = false;
+                // SS220-optimize-UsedMobMovement-for-concurrent-begin
+                if (calledInParallel)
+                    DebugTools.Assert(UsedMobMovement.TryGetValue(uid, out var used) && used == false);
+                else
+                    UsedMobMovement[uid] = false;
+                // SS220-optimize-UsedMobMovement-for-concurrent-end
                 return;
             }
             inAirHelpless = true;
         }
-
+        // SS220-optimize-UsedMobMovement-for-concurrent-begin
+        if (calledInParallel)
+            DebugTools.Assert(UsedMobMovement.ContainsKey(uid));
+        // SS220-optimize-UsedMobMovement-for-concurrent-end
         UsedMobMovement[uid] = true;
 
         var moveSpeedComponent = ModifierQuery.CompOrNull(uid);

@@ -18,6 +18,8 @@ using Content.Shared.SS220.CCVars;
 using Robust.Shared.Audio.Systems;
 using System.Threading;
 using Robust.Server.GameObjects;
+using Robust.Shared.Utility;
+using System.Runtime.InteropServices;
 
 namespace Content.Server.Physics.Controllers;
 
@@ -196,6 +198,14 @@ public sealed partial class MoverController : SharedMoverController // SS220-add
         {
             SoundQueue.Clear();
             SetLocalRotationQueue.Clear();
+
+            DebugTools.Assert(UsedMobMovement.Count == 0);
+            UsedMobMovement.EnsureCapacity(_moversToUpdate.Count);
+            foreach (var entity in CollectionsMarshal.AsSpan(_moversToUpdate))
+            {
+                UsedMobMovement.Add(entity.Owner, false);
+            }
+
             var movementHandle = ProcessMobMovementParallel(_moversToUpdate, frameTime, 4);
 
             while (!movementHandle.WaitOne(0))
