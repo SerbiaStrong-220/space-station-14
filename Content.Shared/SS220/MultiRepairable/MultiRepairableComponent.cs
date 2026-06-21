@@ -24,15 +24,15 @@ public sealed partial class MultiRepairableComponent : Component
 [DataDefinition, Serializable, NetSerializable]
 public sealed partial class RepairOption
 {
-    [DataField] 
+    [DataField]
     public ProtoId<ToolQualityPrototype> QualityNeeded = "Welding";
 
-    [DataField] 
+    [DataField]
     public DamageSpecifier? Damage;
 
-    [DataField] 
+    [DataField]
     public float FuelCost = 5f;
 
-    [DataField] 
+    [DataField]
     public float DoAfterDelay = 1f;
 }

@@ -14,11 +14,11 @@ namespace Content.Client.SS220.Ipc;
 
 public sealed partial class IpcSystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly PowerCellSystem _powerCell = default!;
-    [Dependency] private readonly SharedBatterySystem _battery = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private PowerCellSystem _powerCell = default!;
+    [Dependency] private SharedBatterySystem _battery = default!;
 
     private static readonly TimeSpan AlertUpdateDelay = TimeSpan.FromSeconds(0.5f);
     private TimeSpan _nextAlertUpdate = TimeSpan.Zero;

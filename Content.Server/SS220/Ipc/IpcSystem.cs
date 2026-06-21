@@ -27,16 +27,16 @@ namespace Content.Server.SS220.Ipc;
 
 public sealed partial class IpcSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _action = default!;
-    [Dependency] private readonly SharedBatteryDrainerSystem _batteryDrainer = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly PowerCellSystem _powerCell = default!;
-    [Dependency] private readonly SharedBatterySystem _battery = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly MobThresholdSystem _mobThresholdSystem = default!;
+    [Dependency] private SharedActionsSystem _action = default!;
+    [Dependency] private SharedBatteryDrainerSystem _batteryDrainer = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private PowerCellSystem _powerCell = default!;
+    [Dependency] private SharedBatterySystem _battery = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeedModifier = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private MobThresholdSystem _mobThresholdSystem = default!;
 
     private static readonly LocId IpcDrainReady = "ipc-drain-enabled";
     private static readonly LocId IpcDrainDisabled = "ipc-drain-disabled";
