@@ -72,13 +72,7 @@ public sealed partial class IpcComponent : Component
     public float DamageFromEmp = 30;
 
     /// <summary>
-    /// Ideal ambient temperature for IPC.
-    /// </summary>
-    [DataField]
-    public float NormalTemperature = 293.2f;
-
-    /// <summary>
-    /// The minimum difference from the <see cref="NormalTemperature"/>
+    /// The minimum difference from the NormalBodyTemperature
     /// (more or less) at which increased battery discharge begins
     /// and the draw rate becomes equal to <see cref="OverDrawRate"/>.
     /// </summary>
@@ -86,27 +80,27 @@ public sealed partial class IpcComponent : Component
     public float OverDelta = 20f;
 
     /// <summary>
-    /// The difference from the <see cref="NormalTemperature"/>
+    /// The difference from the NormalBodyTemperature
     /// when the battery discharge is maximum and equal to <see cref="CritDrawRate"/>.
     /// </summary>
     [DataField]
     public float CritDelta = 60.0f;
 
     /// <summary>
-    /// Base draw rate battery at <see cref="NormalTemperature"/>.
+    /// Base draw rate battery at NormalBodyTemperature.
     /// </summary>
     [DataField]
     public float BaseDrawRate = 0.8f;
 
     /// <summary>
-    /// Draw rate when difference from <see cref="NormalTemperature"/>
+    /// Draw rate when difference from NormalBodyTemperature
     /// equal to <see cref="OverDelta"/>.
     /// </summary>
     [DataField]
     public float OverDrawRate = 2.5f;
 
     /// <summary>
-    /// Draw rate when difference from <see cref="NormalTemperature"/>
+    /// Draw rate when difference from NormalBodyTemperature
     /// equal to <see cref="CritDelta"/>.
     /// </summary>
     [DataField]
