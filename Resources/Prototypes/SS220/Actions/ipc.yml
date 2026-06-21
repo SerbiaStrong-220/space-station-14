@@ -33,8 +33,8 @@
   components:
   - type: Action
     useDelay: 1
-    icon: { sprite: Objects/Tools/flashlight.rsi, state: flashlight }
-    iconOn: { sprite: Objects/Tools/flashlight.rsi, state: flashlight-on }
+    icon: { sprite: SS220/Interface/Actions/ipc/light.rsi, state: off }
+    iconOn: { sprite: SS220/Interface/Actions/ipc/light.rsi, state: on }
 
 - type: entity
   parent: ActionScream
@@ -42,6 +42,6 @@
   components:
   - type: Action
     useDelay: 10
-    icon: Interface/Actions/scream.png
+    icon: { sprite: SS220/Interface/Actions/ipc/scream.rsi, state: scream }
     checkCanInteract: false
 
