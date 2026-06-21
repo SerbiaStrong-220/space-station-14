@@ -163,6 +163,7 @@
       Male: MaleIpc
       Female: FemaleIpc
       Unsexed: MaleIpc
+    screamAction: ActionIpcScream
   - type: MeleeWeapon
     soundHit:
       collection: AlienClaw
@@ -185,6 +186,7 @@
     wattage: 0.2
     blinkingBehaviourId: blinking
     radiatingBehaviourId: radiating
+    toggleAction: ActionIpcToggleLight
   - type: LightBehaviour
     behaviours:
     - !type:FadeBehaviour

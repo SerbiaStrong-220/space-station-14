@@ -26,3 +26,22 @@
       itemIconStyle: NoItem
     - type: InstantAction
       event: !type:OpenIpcFaceActionEvent
+
+- type: entity
+  parent: ActionToggleLight
+  id: ActionIpcToggleLight
+  components:
+  - type: Action
+    useDelay: 1
+    icon: { sprite: Objects/Tools/flashlight.rsi, state: flashlight }
+    iconOn: { sprite: Objects/Tools/flashlight.rsi, state: flashlight-on }
+
+- type: entity
+  parent: ActionScream
+  id: ActionIpcScream
+  components:
+  - type: Action
+    useDelay: 10
+    icon: Interface/Actions/scream.png
+    checkCanInteract: false
+

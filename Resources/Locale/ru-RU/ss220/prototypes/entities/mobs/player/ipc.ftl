@@ -29,3 +29,10 @@ ent-LeftLegIpc = левая нога КПБ
 ent-RightLegIpc = правая нога КПБ
 ent-LeftFootIpc = левая ступня КПБ
 ent-RightFootIpc = правая ступня КПБ
+
+ent-ActionIpcToggleLight = {ent-ActionToggleLighting}
+    .desc = {ent-ActionToggleLighting.desc}
+
+ent-ActionIpcScream = {ent-ActionScream}
+    .desc = {ent-ActionScream.desc}
+
