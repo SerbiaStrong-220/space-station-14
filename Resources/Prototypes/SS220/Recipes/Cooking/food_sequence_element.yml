@@ -74,3 +74,14 @@
   tags:
   - Cooked
   - Meat
+
+# spaceshroom
+- type: foodSequenceElement
+  id: SpaceshroomBurger
+  name: food-sequence-burger-content-spaceshroom
+  sprites:
+  - sprite: Objects/Misc/spaceshroom.rsi
+    state: spaceshroom_cooked
+  tags:
+  - Cooked
+  - Mushroom
