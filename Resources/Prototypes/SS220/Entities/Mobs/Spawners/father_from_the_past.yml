@@ -1,0 +1,13 @@
+﻿- type: entity
+  id: SpawnPointGhostFatherFromThePast
+  parent: MarkerBase
+  name: Father From The Past spawner
+  components:
+  - type: GhostRole
+    name: ghost-role-information-father-from-the-past-name
+    description: ghost-role-information-father-from-the-past-description
+    rules: ghost-role-information-default-rules
+  - type: GhostRoleAntagSpawner
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    state: green
