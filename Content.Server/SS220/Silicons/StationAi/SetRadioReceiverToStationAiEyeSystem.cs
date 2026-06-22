@@ -5,9 +5,9 @@ using Robust.Shared.Containers;
 
 namespace Content.Server.SS220.Silicons.StationAi;
 
-public sealed class SetRadioReceiverToStationAiEyeSystem : EntitySystem
+public sealed partial class SetRadioReceiverToStationAiEyeSystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
 
     public override void Initialize()
     {

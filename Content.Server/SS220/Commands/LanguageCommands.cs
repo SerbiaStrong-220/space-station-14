@@ -9,10 +9,10 @@ using Robust.Shared.Console;
 namespace Content.Server.SS220.Commands;
 
 [AdminCommand(AdminFlags.Admin)]
-public sealed class AddLanguageCommand : LocalizedCommands
+public sealed partial class AddLanguageCommand : LocalizedCommands
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
-    [Dependency] private readonly LanguageManager _languageManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
+    [Dependency] private LanguageManager _languageManager = default!;
 
     public override string Command => "addlanguage";
 
@@ -74,9 +74,9 @@ public sealed class AddLanguageCommand : LocalizedCommands
 }
 
 [AdminCommand(AdminFlags.Admin)]
-public sealed class RemoveLanguageCommand : LocalizedCommands
+public sealed partial class RemoveLanguageCommand : LocalizedCommands
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
 
     public override string Command => "removelanguage";
 
@@ -130,9 +130,9 @@ public sealed class RemoveLanguageCommand : LocalizedCommands
 }
 
 [AdminCommand(AdminFlags.Admin)]
-public sealed class ClearLanguagesCommand : LocalizedCommands
+public sealed partial class ClearLanguagesCommand : LocalizedCommands
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
 
     public override string Command => "clearlanguages";
 

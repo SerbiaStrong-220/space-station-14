@@ -12,8 +12,8 @@ namespace Content.Server.SS220.Pathology;
 
 public sealed partial class PathologySystem : SharedPathologySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     public bool TryMakeEntityContext(Entity<ForensicsComponent?> provider, ProtoId<WeightedRandomEntityPrototype>? providerEntityRandom, [NotNullWhen(true)] out EntityProvidedPathologyContext? context)
     {

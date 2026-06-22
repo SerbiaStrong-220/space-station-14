@@ -6,8 +6,8 @@ using Content.Shared.Inventory;
 namespace Content.Shared.SS220.InstastunResist;
 public sealed partial class InstastunResistSystem : EntitySystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     public override void Initialize()
     {

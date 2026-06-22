@@ -14,7 +14,7 @@ namespace Content.Server.SS220.SuperMatter.Crystal;
 // TODO: added: Fun!
 public sealed partial class SuperMatterSystem
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private IConfigurationManager _config = default!;
 
     private float _broadcastDelay;
 

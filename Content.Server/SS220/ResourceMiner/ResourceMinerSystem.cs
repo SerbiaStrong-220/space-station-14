@@ -11,15 +11,15 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.ResourceMiner;
 
-public sealed class ResourceMinerSystem : EntitySystem
+public sealed partial class ResourceMinerSystem : EntitySystem
 {
-    [Dependency] private readonly AmbientSoundSystem _ambientSound = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly MaterialStorageSystem _materialStorage = default!;
-    [Dependency] private readonly PointLightSystem _pointLight = default!;
-    [Dependency] private readonly TransformSystem _transformSystem = default!;
-    [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
+    [Dependency] private AmbientSoundSystem _ambientSound = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private MaterialStorageSystem _materialStorage = default!;
+    [Dependency] private PointLightSystem _pointLight = default!;
+    [Dependency] private TransformSystem _transformSystem = default!;
+    [Dependency] private UserInterfaceSystem _userInterface = default!;
 
     public override void Initialize()
     {
@@ -46,7 +46,7 @@ public sealed class ResourceMinerSystem : EntitySystem
 
             if (_gameTiming.CurTime < resourceMinerComponent.NextUpdate)
                 continue;
-                
+
             if (TerminatingOrDeleted(resourceMinerComponent.Silo))
             {
                 resourceMinerComponent.Silo = null;

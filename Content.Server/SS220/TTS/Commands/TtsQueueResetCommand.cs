@@ -8,10 +8,10 @@ using Robust.Shared.Console;
 namespace Content.Server.SS220.TTS.Commands;
 
 [AdminCommand(AdminFlags.Admin)]
-public sealed class TtsQueueResetCommand : IConsoleCommand
+public sealed partial class TtsQueueResetCommand : IConsoleCommand
 {
-    [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
-    [Dependency] private readonly IChatManager _chat = default!;
+    [Dependency] private IEntitySystemManager _entitySystemManager = default!;
+    [Dependency] private IChatManager _chat = default!;
 
     public string Command => "allttsqueuereset";
     public string Description => "Reset TTS queues on all connected clients";
