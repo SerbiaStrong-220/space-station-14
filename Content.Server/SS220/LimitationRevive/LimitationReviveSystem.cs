@@ -29,7 +29,6 @@ public sealed class LimitationReviveSystem : SharedLimitationReviveSystem
         SubscribeLocalEvent<LimitationReviveComponent, MobStateChangedEvent>(OnMobStateChanged, before: [typeof(ZombieSystem)]);
         SubscribeLocalEvent<LimitationReviveComponent, CloningEvent>(OnCloning);
         SubscribeLocalEvent<LimitationReviveComponent, AddReviveDebuffsEvent>(OnAddReviveDebuffs);
-        SubscribeLocalEvent<LimitationReviveComponent, RejuvenateEvent>(OnRejuvenate);
         SubscribeLocalEvent<LimitationReviveComponent, ApplyMetabolicMultiplierEvent>(OnApplyMetabolicMultiplier);
     }
 
@@ -87,11 +86,6 @@ public sealed class LimitationReviveSystem : SharedLimitationReviveSystem
         _serialization.CopyTo(ent.Comp, ref targetComp, notNullableOverride: true);
 
         targetComp.DeathCounter = 0;
-    }
-
-    private void OnRejuvenate(Entity<LimitationReviveComponent> ent, ref RejuvenateEvent args)
-    {
-        ent.Comp.DeathCounter = 0;
     }
 
     private void OnApplyMetabolicMultiplier(Entity<LimitationReviveComponent> ent, ref ApplyMetabolicMultiplierEvent args)

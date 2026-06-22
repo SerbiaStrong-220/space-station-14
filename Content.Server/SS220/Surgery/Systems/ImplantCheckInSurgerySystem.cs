@@ -2,41 +2,41 @@
 
 using System.Text;
 using Content.Server.Hands.Systems;
-using Content.Server.Popups;
 using Content.Shared.Forensics.Components;
 using Content.Shared.Implants.Components;
 using Content.Shared.Paper;
+using Content.Shared.SS220.Experience;
+using Content.Shared.SS220.Experience.Skill.Components;
+using Content.Shared.SS220.Experience.Systems;
 using Content.Shared.SS220.Surgery.Components;
 using Robust.Server.Audio;
 using Robust.Server.Containers;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Server.SS220.Surgery.Systems;
 
 public sealed class ImplantCheckInSurgerySystem : EntitySystem
 {
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly PaperSystem _paper = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly HandsSystem _handsSystem = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private ContainerSystem _container = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private PaperSystem _paper = default!;
+    [Dependency] private HandsSystem _handsSystem = default!;
+    [Dependency] private ExperienceSystem _experience = default!;
 
-    private static readonly LocId ImplantCheckNoImplantSlot = "implant-check-surgery-no-implants";
     private static readonly LocId ImplantCheckReportTitle = "implant-check-report-title";
     private static readonly LocId ImplantCheckHeader = "implant-check-report-header";
     private static readonly LocId ImplantCheckReportImplantEntry = "implant-check-report-implant-entry";
+
+    private static readonly ProtoId<SkillTreePrototype> AnatomySkillTree = "Anatomy";
 
     public bool MakeImplantCheckPaper(EntityUid user, Entity<ImplantCheckInSurgeryComponent?> used, EntityUid target)
     {
         if (!Resolve(used.Owner, ref used.Comp))
             return false;
 
-        if (!_container.TryGetContainer(target, ImplanterComponent.ImplantSlotId, out var implantContainer))
-        {
-            _popup.PopupClient(ImplantCheckNoImplantSlot, user);
-        }
-
+        _container.TryGetContainer(target, ImplanterComponent.ImplantSlotId, out var implantContainer);
         var implantsList = implantContainer?.ContainedEntities ?? [];
 
         return MakePaper((used.Owner, used.Comp), user, target, implantsList);
@@ -65,10 +65,17 @@ public sealed class ImplantCheckInSurgerySystem : EntitySystem
 
         text.AppendLine(Loc.GetString(ImplantCheckHeader, ("dna", targetDNA)));
 
+        var level = _experience.GetSkillTreeLevel(user, AnatomySkillTree) ?? (int)HiddenInstallLevel.Easy;
         foreach (var implant in implants)
         {
-            if (HasComp<HiddenInstalledImplantComponent>(implant))
-                continue;
+            if (TryComp<HiddenInstalledImplantComponent>(implant, out var installedImplantComponent))
+            {
+                if ((int)installedImplantComponent.InstallLevel > level)
+                    continue;
+
+                if (installedImplantComponent.Hidden)
+                    continue;
+            }
 
             string implantName;
             var protoId = MetaData(implant)?.EntityPrototype?.ID;

@@ -342,7 +342,11 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         if (used is not null)
             RaiseLocalEvent(used.Value, ref ev);
 
-        secondsDelay *= ev.Multiplier;
+        if (chosenEdge.DeceaseSkillBonus && ev.Multiplier > 1f)
+            secondsDelay *= (ev.Multiplier - 1f) / 2 + 1f;
+        else
+            secondsDelay *= ev.Multiplier;
+
         secondsDelay += ev.FlatModifier;
 
         var performerDoAfterEventArgs =
