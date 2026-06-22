@@ -14,7 +14,7 @@ public sealed partial class SurgeryPathologyRequirement : SurgeryGraphRequiremen
     [DataField]
     public int StackChange = -1;
 
-    protected override bool Requirement(EntityUid? uid, IEntityManager entityManager)
+    protected override bool Requirement(EntityUid? uid, EntityUid user, IEntityManager entityManager)
     {
         if (!entityManager.TryGetComponent<PathologyHolderComponent>(uid, out var pathologyHolder))
             return false;

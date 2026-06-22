@@ -21,6 +21,7 @@ internal sealed partial class ChatManager : IChatManager
         {
             ChatChannel.LOOC => BannableChats.LOOC,
             ChatChannel.OOC => BannableChats.OOC,
+            ChatChannel.Dead => BannableChats.Dead,
             _ => (BannableChats?)null,
         };
 

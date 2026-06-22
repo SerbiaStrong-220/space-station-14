@@ -24,6 +24,12 @@ public sealed partial class InternalBloodLossStatusEffectSystem : EntitySystem
     [Dependency] private IGameTiming _gameTiming = default!;
 
     private const float UpdateRate = 0.8f;
+
+    /// <summary>
+    /// it actually gives (1 + CaughtPart) multiplier to bloodloss, so be careful
+    /// </summary>
+    private const float CaughtPart = 0.15f;
+
     private static readonly TimeSpan BleedingTimeUpdate = TimeSpan.FromSeconds(UpdateRate);
     private static readonly FixedPoint2 DecreaseLoss = 0.6f;
 
@@ -59,7 +65,8 @@ public sealed partial class InternalBloodLossStatusEffectSystem : EntitySystem
                 continue;
             }
 
-            var bloodLoss = internalBloodLoss.BloodLossRatePerStack * internalBloodLoss.Multiplier * stackableComponent.StackCount * UpdateRate;
+            var bloodLossCorrectCount = GetCorrectStack(stackableComponent.StackCount);
+            var bloodLoss = internalBloodLoss.BloodLossRatePerStack * internalBloodLoss.Multiplier * bloodLossCorrectCount * UpdateRate;
 
             // Add some 'last stand' effect for ux
             if (bloodstreamComponent.BloodSolution is { } bloodSolution)
@@ -89,6 +96,9 @@ public sealed partial class InternalBloodLossStatusEffectSystem : EntitySystem
         if (entity.Comp.InternalBleedingBloodAccumulator < entity.Comp.BloodAmountToCough)
             return;
 
+        // this is actually gives (1 + CaughtPart) multiplier to bloodloss, so be careful
+        _bloodstream.TryBleedOut(entity!, entity.Comp.InternalBleedingBloodAccumulator * CaughtPart);
+
         entity.Comp.InternalBleedingBloodAccumulator = FixedPoint2.Zero;
         _chat.TryEmoteWithChat(entity, entity.Comp.BloodCoughEmote);
     }
@@ -105,5 +115,20 @@ public sealed partial class InternalBloodLossStatusEffectSystem : EntitySystem
     private void OnMetabolicMultiplierApply(Entity<InternalBloodLossStatusEffectComponent> entity, ref StatusEffectRelayedEvent<ApplyMetabolicMultiplierEvent> args)
     {
         entity.Comp.Multiplier = args.Args.Multiplier;
+    }
+
+    private const float CoeffA = 3.2f;
+    private const float CoeffB = 0.1f;
+    private const float CoeffC = 4f;
+
+    /// <summary>
+    /// Implements formula for better ux:
+    /// result stack is 1 + a(x-1) / (b(x-1) + c)
+    /// this allows to fine tune how much bullet stacks cause bleeds while stacking.
+    /// Use any graphic tool to see the actual y(x)
+    /// </summary>
+    private static float GetCorrectStack(float stackCount)
+    {
+        return 1f + CoeffA * (stackCount - 1) / (CoeffB * (stackCount - 1) + CoeffC);
     }
 }
