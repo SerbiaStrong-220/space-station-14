@@ -3,9 +3,9 @@ using Robust.Client.Graphics;
 
 namespace Content.Client.SS220.Forcefield.Systems;
 
-public sealed class ForcefieldOverlaySystem : EntitySystem
+public sealed partial class ForcefieldOverlaySystem : EntitySystem
 {
-    [Dependency] private readonly IOverlayManager _overlayManager = default!;
+    [Dependency] private IOverlayManager _overlayManager = default!;
 
     private ForcefieldOverlay _overlay = default!;
 

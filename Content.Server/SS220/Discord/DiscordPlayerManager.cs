@@ -23,14 +23,14 @@ using Robust.Shared.Player;
 
 namespace Content.Server.SS220.Discord;
 
-public sealed class DiscordPlayerManager : IPostInjectInit, IDisposable
+public sealed partial class DiscordPlayerManager : IPostInjectInit, IDisposable
 {
-    internal SponsorUsers? CachedSponsorUsers => _cachedSponsorUsers;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IServerNetManager _netMgr = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IAdminManager _adminManager = default!;
 
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IServerNetManager _netMgr = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IAdminManager _adminManager = default!;
+    internal SponsorUsers? CachedSponsorUsers => _cachedSponsorUsers;
 
     private ISawmill _sawmill = default!;
     private Timer? _statusRefreshTimer; // We should keep reference or else evil GC will kill our timer

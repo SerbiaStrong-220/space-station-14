@@ -6,9 +6,9 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.Surgery.Graph;
 
-public sealed class SurgeryGraphSystem : EntitySystem
+public sealed partial class SurgeryGraphSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     public SoundSpecifier? GetSoundSpecifier(SurgeryGraphEdge edge)
     {

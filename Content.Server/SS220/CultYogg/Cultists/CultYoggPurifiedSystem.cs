@@ -7,11 +7,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.CultYogg.Cultists;
 
-public sealed class CultYoggPurifiedSystem : EntitySystem
+public sealed partial class CultYoggPurifiedSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
