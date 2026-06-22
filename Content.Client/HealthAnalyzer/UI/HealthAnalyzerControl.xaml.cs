@@ -132,7 +132,7 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
             {
                 var reviveExhausted =
                     _entityManager.TryGetComponent<LimitationReviveComponent>(target.Value, out var reviveComp)
-                    && reviveComp.DeathCounter >= reviveComp.ReviveLimit;
+                    && reviveComp.DeathCounter > reviveComp.ReviveLimit;
 
                 ClinicalDeathTimeLabel.Text = Loc.GetString(reviveExhausted
                     ? "health-analyzer-window-clinical-death-expired"
