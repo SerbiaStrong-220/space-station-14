@@ -18,18 +18,17 @@ namespace Content.Server.SS220.LimitationRevive;
 /// <summary>
 /// This handles limiting the number of defibrillator resurrections
 /// </summary>
-public sealed class LimitationReviveSystem : SharedLimitationReviveSystem
+public sealed partial class LimitationReviveSystem : SharedLimitationReviveSystem
 {
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly SharedPathologySystem _pathology = default!;
-    [Dependency] private readonly ISerializationManager _serialization = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private SharedPathologySystem _pathology = default!;
+    [Dependency] private ISerializationManager _serialization = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<LimitationReviveComponent, MobStateChangedEvent>(OnMobStateChanged, before: [typeof(ZombieSystem)]);
         SubscribeLocalEvent<LimitationReviveComponent, CloningEvent>(OnCloning);
         SubscribeLocalEvent<LimitationReviveComponent, AddReviveDebuffsEvent>(OnAddReviveDebuffs);
-        SubscribeLocalEvent<LimitationReviveComponent, RejuvenateEvent>(OnRejuvenate);
         SubscribeLocalEvent<LimitationReviveComponent, ApplyMetabolicMultiplierEvent>(OnApplyMetabolicMultiplier);
     }
 
@@ -87,11 +86,6 @@ public sealed class LimitationReviveSystem : SharedLimitationReviveSystem
         _serialization.CopyTo(ent.Comp, ref targetComp, notNullableOverride: true);
 
         targetComp.DeathCounter = 0;
-    }
-
-    private void OnRejuvenate(Entity<LimitationReviveComponent> ent, ref RejuvenateEvent args)
-    {
-        ent.Comp.DeathCounter = 0;
     }
 
     private void OnApplyMetabolicMultiplier(Entity<LimitationReviveComponent> ent, ref ApplyMetabolicMultiplierEvent args)

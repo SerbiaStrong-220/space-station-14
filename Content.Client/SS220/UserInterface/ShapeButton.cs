@@ -10,9 +10,9 @@ namespace Content.Client.SS220.UserInterface;
 /// A customizable UI button that uses a shader to render a rounded shape
 /// with optional border and ripple effect.
 /// </summary>
-public sealed class ShapeButton : Button
+public sealed partial class ShapeButton : Button
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     private static readonly ProtoId<ShaderPrototype> Shader = "ShapeShader";
     private readonly ShaderInstance _shader;

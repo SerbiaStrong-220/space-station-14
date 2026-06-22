@@ -17,8 +17,8 @@ namespace Content.Shared.EntityEffects.Effects;
 /// <inheritdoc cref="EntityEffectSystem{T,TEffect}"/>
 public sealed partial class HealthChangeOnAdaptationEntityEffectSystem : EntityEffectSystem<DamageableComponent, HealthChangeOnAdaptation>
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly ChemicalAdaptationSystem _chemicalAdaptation = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private ChemicalAdaptationSystem _chemicalAdaptation = default!;
 
     protected override void Effect(Entity<DamageableComponent> entity, ref EntityEffectEvent<HealthChangeOnAdaptation> args)
     {

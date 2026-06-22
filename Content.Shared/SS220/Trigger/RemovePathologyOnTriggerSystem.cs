@@ -5,9 +5,9 @@ using Content.Shared.Trigger;
 
 namespace Content.Shared.SS220.Trigger;
 
-public sealed class RemovePathologyOnTriggerSystem : EntitySystem
+public sealed partial class RemovePathologyOnTriggerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPathologySystem _pathology = default!;
+    [Dependency] private SharedPathologySystem _pathology = default!;
 
     public override void Initialize()
     {

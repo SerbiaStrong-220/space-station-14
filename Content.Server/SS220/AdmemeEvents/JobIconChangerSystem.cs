@@ -12,10 +12,10 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.AdmemeEvents;
 
-public sealed class JobIconChangerSystem : EntitySystem
+public sealed partial class JobIconChangerSystem : EntitySystem
 {
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private NpcFactionSystem _npcFaction = default!;
 
     private readonly Dictionary<EventRoleIconFilterGroup, string> _roleGroupKeys = new()
     {

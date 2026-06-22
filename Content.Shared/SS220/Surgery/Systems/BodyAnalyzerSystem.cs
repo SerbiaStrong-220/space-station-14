@@ -8,11 +8,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.Surgery.Systems;
 
-public sealed class BodyAnalyzerSystem : EntitySystem
+public sealed partial class BodyAnalyzerSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _userInterface = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private SharedUserInterfaceSystem _userInterface = default!;
 
     public override void Initialize()
     {

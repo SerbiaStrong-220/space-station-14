@@ -7,10 +7,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.Experience;
 
-public sealed class MentorRoleSystem : EntitySystem
+public sealed partial class MentorRoleSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
 
     public override void Initialize()
     {
