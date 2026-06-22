@@ -26,19 +26,7 @@ public sealed class PhysicalParametersSystem : EntitySystem
             !weaponComp.StrengthAffectsDamage)
             return;
 
-        FixedPoint2 strengthModifier = 1f;
-
-        if (ent.Comp.StrengthAffectsArms &&
-            ent.Comp.ParameterDict.ContainsKey(Parameter.Strength))
-            strengthModifier = ent.Comp.ParameterDict[Parameter.Strength];
-
-        if (TryComp<HandsComponent>(ent.Owner, out var handsComp) &&
-            handsComp.ActiveHandId != null &&
-            _handsSystem.TryGetHand(ent.Owner, handsComp.ActiveHandId, out var activeHand) &&
-            activeHand.Value.StrengthModifier != null)
-            strengthModifier = (FixedPoint2)activeHand.Value.StrengthModifier;
-
-        FixedPoint2 itemReqModifier = 1f;
+        FixedPoint2 strengthModifier = GetParameterValue(ent, Parameter.Strength);
 
         if (TryComp<ItemExtensionComponent>(args.Used, out var extensionComp))
             strengthModifier = (strengthModifier - extensionComp.MinimalStrengthToPickUp) / extensionComp.StrengthRequirementToBeUsed - 1;
@@ -53,6 +41,23 @@ public sealed class PhysicalParametersSystem : EntitySystem
 
             args.ModifiedDamage.DamageDict.Add(type.Key, type.Value);
         }
+    }
+
+    public FixedPoint2 GetParameterValue(Entity<PhysicalParametersComponent> ent, Parameter parameter)
+    {
+        FixedPoint2 strengthModifier = 1f;
+
+        if (ent.Comp.StrengthAffectsArms &&
+            ent.Comp.ParameterDict.ContainsKey(Parameter.Strength))
+            strengthModifier = ent.Comp.ParameterDict[Parameter.Strength];
+
+        if (TryComp<HandsComponent>(ent.Owner, out var handsComp) &&
+            handsComp.ActiveHandId != null &&
+            _handsSystem.TryGetHand(ent.Owner, handsComp.ActiveHandId, out var activeHand) &&
+            activeHand.Value.StrengthModifier != null)
+            strengthModifier = (FixedPoint2)activeHand.Value.StrengthModifier;
+
+        return strengthModifier;
     }
 
     public void AddParameter(Entity<PhysicalParametersComponent> ent, Parameter parameter, FixedPoint2 value)

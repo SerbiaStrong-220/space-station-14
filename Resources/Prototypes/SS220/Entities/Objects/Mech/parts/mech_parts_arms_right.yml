@@ -17,7 +17,7 @@
           - Gigantic
         damageOverride:
           types:
-            Blunt: 40
+            Blunt: 16
             Structural: 50
         altDisarm: false
         strengthModifier: 6
@@ -188,6 +188,7 @@
     hands:
     - hand:
         location: Right
+        strengthModifier: 1
         whitelist:
           sizes:
           - Ginormous

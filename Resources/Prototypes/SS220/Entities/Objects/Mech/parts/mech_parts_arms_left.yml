@@ -11,6 +11,7 @@
     hands:
     - hand:
         location: Left
+        strengthModifier: 1
         whitelist:
           sizes:
           - Ginormous
@@ -61,7 +62,7 @@
           - Gigantic
         damageOverride:
           types:
-            Blunt: 40
+            Blunt: 16
             Structural: 50
         strengthModifier: 6
         altDisarm: false
