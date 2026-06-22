@@ -4,7 +4,6 @@ using Content.Server.Chat.Managers;
 using Content.Server.Cloning;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Objectives.Components;
-using Content.Server.Spawners.Components;
 using Content.Shared.Chat;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Humanoid;
@@ -28,6 +27,7 @@ public sealed partial class FatherFromThePastRuleSystem : GameRuleSystem<FatherF
     private const string NoAliveHumansLog = "No alive players to spawn Father From The Past from! Ending gamerule.";
     private const string NoTargetMindLog = "Could not find mind of target player for Father From The Past!";
     private const string FallbackSpecies = "Human";
+    private const string NoVendingMachineLog = "No cigarette vending machine to spawn Father From The Past at! Ending gamerule.";
 
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private IChatManager _chat = default!;
@@ -59,6 +59,13 @@ public sealed partial class FatherFromThePastRuleSystem : GameRuleSystem<FatherF
         {
             Log.Info(NoAliveHumansLog);
             ForceEndSelf(uid, gameRule);
+            return;
+        }
+
+        if (GetVendingMachines((uid, component)).Count == 0)
+        {
+            Log.Info(NoVendingMachineLog);
+            ForceEndSelf(uid, gameRule);
         }
     }
 
@@ -70,7 +77,7 @@ public sealed partial class FatherFromThePastRuleSystem : GameRuleSystem<FatherF
         if (!TryResolveTarget(ent) || ent.Comp.OriginalBody is not { } originalBody)
             return;
 
-        var coords = TryGetSpawnLocation(ent) ?? _transform.GetMapCoordinates(spawner);
+        var coords = TryGetVendingSpawn(ent) ?? _transform.GetMapCoordinates(spawner);
 
         if (!_cloning.TryCloning(originalBody, coords, ent.Comp.Settings, out var clone) || clone == null)
         {
@@ -108,7 +115,7 @@ public sealed partial class FatherFromThePastRuleSystem : GameRuleSystem<FatherF
 
     private void OnAntagSelectLocation(Entity<FatherFromThePastRuleComponent> ent, ref AntagSelectLocationEvent args)
     {
-        if (!args.Handled && TryGetSpawnLocation(ent) is { } coords)
+        if (!args.Handled && TryGetVendingSpawn(ent) is { } coords)
             args.Coordinates.Add(coords);
     }
 
@@ -156,10 +163,7 @@ public sealed partial class FatherFromThePastRuleSystem : GameRuleSystem<FatherF
         return _naming.GetName(species, Gender.Male);
     }
 
-    private MapCoordinates? TryGetSpawnLocation(Entity<FatherFromThePastRuleComponent> ent)
-        => TryGetVendingSpawn(ent) ?? TryGetArrivalsSpawn();
-
-    private MapCoordinates? TryGetVendingSpawn(Entity<FatherFromThePastRuleComponent> ent)
+    private List<EntityUid> GetVendingMachines(Entity<FatherFromThePastRuleComponent> ent)
     {
         var machines = new List<EntityUid>();
         var query = EntityQueryEnumerator<VendingMachineComponent, MetaDataComponent>();
@@ -169,6 +173,12 @@ public sealed partial class FatherFromThePastRuleSystem : GameRuleSystem<FatherF
                 machines.Add(uid);
         }
 
+        return machines;
+    }
+
+    private MapCoordinates? TryGetVendingSpawn(Entity<FatherFromThePastRuleComponent> ent)
+    {
+        var machines = GetVendingMachines(ent);
         if (machines.Count == 0)
             return null;
 
@@ -194,18 +204,5 @@ public sealed partial class FatherFromThePastRuleSystem : GameRuleSystem<FatherF
         }
 
         return null;
-    }
-
-    private MapCoordinates? TryGetArrivalsSpawn()
-    {
-        var points = new List<EntityUid>();
-        var query = EntityQueryEnumerator<SpawnPointComponent>();
-        while (query.MoveNext(out var uid, out var spawnPoint))
-        {
-            if (spawnPoint.SpawnType == SpawnPointType.LateJoin)
-                points.Add(uid);
-        }
-
-        return points.Count == 0 ? null : _transform.GetMapCoordinates(_random.Pick(points));
     }
 }
