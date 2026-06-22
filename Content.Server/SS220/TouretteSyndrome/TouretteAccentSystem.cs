@@ -8,10 +8,10 @@ using Content.Shared.Speech;
 
 namespace Content.Server.SS220.TouretteSyndrome;
 
-public sealed class TouretteAccentSystem : EntitySystem
+public sealed partial class TouretteAccentSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {

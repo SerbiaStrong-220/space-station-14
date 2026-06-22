@@ -11,10 +11,10 @@ namespace Content.Client.SS220.AdmemeEvents;
 /// <summary>
 /// Used for the client to get status icons from other event roles.
 /// </summary>
-public sealed class EventRoleIconsSystem : EntitySystem
+public sealed partial class EventRoleIconsSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     public override void Initialize()
     {

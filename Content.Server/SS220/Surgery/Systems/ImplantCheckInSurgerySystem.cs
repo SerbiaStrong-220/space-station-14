@@ -16,7 +16,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.SS220.Surgery.Systems;
 
-public sealed class ImplantCheckInSurgerySystem : EntitySystem
+public sealed partial class ImplantCheckInSurgerySystem : EntitySystem
 {
     [Dependency] private AudioSystem _audio = default!;
     [Dependency] private ContainerSystem _container = default!;

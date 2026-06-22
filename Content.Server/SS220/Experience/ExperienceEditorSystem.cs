@@ -13,11 +13,11 @@ using System.Linq;
 
 namespace Content.Server.SS220.Experience;
 
-public sealed class ExperienceEditorSystem : EntitySystem
+public sealed partial class ExperienceEditorSystem : EntitySystem
 {
-    [Dependency] private readonly ExperienceSystem _experience = default!;
-    [Dependency] private readonly IAdminLogManager _adminLog = default!;
-    [Dependency] private readonly IConGroupController _groupController = default!;
+    [Dependency] private ExperienceSystem _experience = default!;
+    [Dependency] private IAdminLogManager _adminLog = default!;
+    [Dependency] private IConGroupController _groupController = default!;
 
     private static readonly ProtoId<KnowledgePrototype> CultYoggKnowledge = "CultYoggKnowledge";
 

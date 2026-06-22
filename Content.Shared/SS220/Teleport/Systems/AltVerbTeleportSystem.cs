@@ -8,11 +8,11 @@ using Content.Shared.Whitelist;
 
 namespace Content.Shared.SS220.Teleport.Systems;
 
-public sealed class AltVerbTeleportSystem : EntitySystem
+public sealed partial class AltVerbTeleportSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
