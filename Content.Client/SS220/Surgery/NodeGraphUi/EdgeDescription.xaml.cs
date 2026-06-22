@@ -20,8 +20,8 @@ namespace Content.Client.SS220.Surgery.NodeGraphUi;
 [GenerateTypedNameReferences]
 public sealed partial class EdgeDescription : BoxContainer
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
 
     private readonly SurgeryGraphSystem _surgeryGraph = default!;
 

@@ -13,11 +13,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.SS220.Surgery;
 
-public sealed class SurgeryPatientAnalyzer : EntitySystem
+public sealed partial class SurgeryPatientAnalyzer : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly RottingSystem _rotting = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private RottingSystem _rotting = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
 
     private const int MaxBrainRotPercentage = 100;
 

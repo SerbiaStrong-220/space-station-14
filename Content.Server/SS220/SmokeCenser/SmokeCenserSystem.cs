@@ -13,21 +13,21 @@ using Content.Server.Atmos.EntitySystems;
 
 namespace Content.Server.SS220.SmokeCenser;
 
-public sealed class CenserSystem : EntitySystem
+public sealed partial class CenserSystem : EntitySystem
 {
-    [Dependency] private readonly AtmosphereSystem _atmos = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private AtmosphereSystem _atmos = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     private const string CenserSolutionName = "reagents";
-    
+
     private static readonly ProtoId<ReagentPrototype> HolyWaterReagentId = "Holywater";
 
     public override void Initialize()
     {
         base.Initialize();
-        
+
         SubscribeLocalEvent<CenserComponent, UseInHandEvent>(OnUseInHand);
     }
 
@@ -48,7 +48,7 @@ public sealed class CenserSystem : EntitySystem
                 _popupSystem.PopupEntity(Loc.GetString("censer-contaminated"), entity.Owner, args.User);
                 return;
             }
-            
+
             holyWaterQuantity = reagent.Quantity;
         }
 

@@ -10,7 +10,7 @@ namespace Content.Client.SS220.Surgery.UiParts;
 [GenerateTypedNameReferences]
 public sealed partial class PatientStatus : Control
 {
-    [Dependency] private readonly ILocalizationManager _localizationManager = default!;
+    [Dependency] private ILocalizationManager _localizationManager = default!;
 
     public PatientStatus()
     {

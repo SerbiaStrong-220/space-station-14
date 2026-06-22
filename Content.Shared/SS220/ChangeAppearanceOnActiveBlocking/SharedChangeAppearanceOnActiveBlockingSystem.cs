@@ -6,7 +6,7 @@ namespace Content.Shared.SS220.ChangeAppearanceOnActiveBlocking;
 
 public sealed partial class SharedChangeAppearanceOnActiveBlockingSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
+    [Dependency] private SharedAppearanceSystem _appearanceSystem = default!;
 
     public override void Initialize()
     {

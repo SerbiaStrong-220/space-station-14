@@ -10,12 +10,12 @@ using Robust.Shared.Random;
 
 namespace Content.Server.SS220.CultYogg.Rave;
 
-public sealed class RaveSystem : SharedRaveSystem
+public sealed partial class RaveSystem : SharedRaveSystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {

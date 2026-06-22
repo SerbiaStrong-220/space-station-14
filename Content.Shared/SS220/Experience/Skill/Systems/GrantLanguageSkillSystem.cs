@@ -6,9 +6,9 @@ using Content.Shared.SS220.Language.Systems;
 
 namespace Content.Shared.SS220.Experience.Skill.Systems;
 
-public sealed class GrantLanguageSkillSystem : SkillEntitySystem
+public sealed partial class GrantLanguageSkillSystem : SkillEntitySystem
 {
-    [Dependency] private readonly SharedLanguageSystem _language = default!;
+    [Dependency] private SharedLanguageSystem _language = default!;
 
     public override void Initialize()
     {
