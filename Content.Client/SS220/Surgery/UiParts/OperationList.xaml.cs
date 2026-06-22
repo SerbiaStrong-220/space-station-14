@@ -15,12 +15,12 @@ namespace Content.Client.SS220.Surgery.UiParts;
 [GenerateTypedNameReferences]
 public sealed partial class OperationList : Control
 {
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+
     public event Action<ProtoId<SurgeryGraphPrototype>, bool>? OnSurgeryClicked;
     public event Action<ProtoId<SurgeryGraphPrototype>>? OnSurgeryHovered;
-
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
 
     private readonly SharedSurgerySystem _sharedSurgery = default!;
 

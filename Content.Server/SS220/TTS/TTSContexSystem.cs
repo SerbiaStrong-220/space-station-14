@@ -11,7 +11,7 @@ namespace Content.Server.SS220.TTS;
 
 public sealed partial class TTSContextSystem : EntitySystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     public bool TryGetVoiceID(EntityUid uid, [NotNullWhen(true)] out ProtoId<TTSVoicePrototype>? voiceId)
     {

@@ -28,17 +28,17 @@ namespace Content.Server.SS220.CultYogg.Cultists;
 
 public sealed partial class CultYoggSystem : SharedCultYoggSystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly HungerSystem _hungerSystem = default!;
-    [Dependency] private readonly SharedStuckOnEquipSystem _stuckOnEquip = default!;
-    [Dependency] private readonly ThirstSystem _thirstSystem = default!;
-    [Dependency] private readonly VomitSystem _vomitSystem = default!;
-    [Dependency] private readonly CultYoggRuleSystem _cultRuleSystem = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private HungerSystem _hungerSystem = default!;
+    [Dependency] private SharedStuckOnEquipSystem _stuckOnEquip = default!;
+    [Dependency] private ThirstSystem _thirstSystem = default!;
+    [Dependency] private VomitSystem _vomitSystem = default!;
+    [Dependency] private CultYoggRuleSystem _cultRuleSystem = default!;
+    [Dependency] private IChatManager _chatManager = default!;
 
     public override void Initialize()
     {

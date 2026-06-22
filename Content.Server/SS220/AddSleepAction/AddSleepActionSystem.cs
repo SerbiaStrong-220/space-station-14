@@ -6,10 +6,10 @@ using Content.Shared.Buckle.Components;
 
 namespace Content.Server.SS220.AddSleepAction;
 
-public sealed class AddSleepActionSystem : EntitySystem
+public sealed partial class AddSleepActionSystem : EntitySystem
 {
-    [Dependency] private readonly ActionsSystem _actionsSystem = default!;
-    [Dependency] private readonly SleepingSystem _sleepingSystem = default!;
+    [Dependency] private ActionsSystem _actionsSystem = default!;
+    [Dependency] private SleepingSystem _sleepingSystem = default!;
 
     public override void Initialize()
     {

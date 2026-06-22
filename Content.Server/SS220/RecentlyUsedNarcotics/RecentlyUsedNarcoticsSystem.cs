@@ -3,9 +3,9 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.RecentlyUsedNarcotics;
 
-public sealed class RecentlyUsedNarcoticsSystem : EntitySystem
+public sealed partial class RecentlyUsedNarcoticsSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
 
     public override void Initialize()
     {

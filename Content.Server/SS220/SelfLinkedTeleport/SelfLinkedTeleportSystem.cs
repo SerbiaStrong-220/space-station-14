@@ -9,12 +9,12 @@ using Content.Shared.Whitelist;
 
 namespace Content.Server.SS220.SelfLinkedTeleport;
 
-public sealed class SelfLinkedTeleportSystem : SharedSelfLinkedTeleportSystem
+public sealed partial class SelfLinkedTeleportSystem : SharedSelfLinkedTeleportSystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private PullingSystem _pulling = default!;
 
     public override void Initialize()
     {

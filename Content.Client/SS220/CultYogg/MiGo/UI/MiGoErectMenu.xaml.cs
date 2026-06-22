@@ -14,7 +14,7 @@ namespace Content.Client.SS220.CultYogg.MiGo.UI;
 [GenerateTypedNameReferences]
 public sealed partial class MiGoErectMenu : FancyWindow
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     private readonly MiGoErectBoundUserInterface _owner;
 

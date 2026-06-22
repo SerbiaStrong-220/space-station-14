@@ -39,21 +39,21 @@ namespace Content.Shared.SS220.Grab;
 // - The control flow comes from PullingSystem 'cuz of input handling
 public abstract partial class SharedGrabSystem : EntitySystem
 {
-    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedJointSystem _joints = default!;
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private PullingSystem _pulling = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedVirtualItemSystem _virtualItem = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedJointSystem _joints = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
 
     protected EntityQuery<GrabbableComponent> _grabbableQuery;
     private EntityQuery<GrabberComponent> _grabberQuery;

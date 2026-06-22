@@ -31,21 +31,21 @@ using System.Linq;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
 
-public abstract class SharedMiGoSystem : EntitySystem
+public abstract partial class SharedMiGoSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedMiGoErectSystem _miGoErectSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _userInterfaceSystem = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedMiGoErectSystem _miGoErectSystem = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedUserInterfaceSystem _userInterfaceSystem = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
 
     public override void Initialize()
     {

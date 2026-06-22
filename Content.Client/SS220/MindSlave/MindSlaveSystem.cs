@@ -7,10 +7,10 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.MindSlave;
 
-public sealed class MindSlaveSystem : EntitySystem
+public sealed partial class MindSlaveSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     public override void Initialize()
     {

@@ -2,6 +2,7 @@
 using Content.Shared.Actions;
 using Content.Shared.Mobs;
 using Content.Shared.SS220.Shitspawn.AshDrake;
+using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -12,13 +13,14 @@ using System.Numerics;
 
 namespace Content.Server.SS220.Shitspawn.AshDrake;
 
-public sealed class AshDrakeFlySystem : EntitySystem
+public sealed partial class AshDrakeFlySystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private MapSystem _map = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     private readonly Dictionary<EntityUid, (Vector2 Target, MapId MapId)> _flying = new();
     private readonly List<EntityUid> _toRemove = new();
@@ -69,13 +71,13 @@ public sealed class AshDrakeFlySystem : EntitySystem
 
             if (dir.Length() <= step)
             {
-                _transform.SetWorldPosition(xform, data.Target);
+                _transform.SetWorldPosition((uid, xform), data.Target);
                 _toRemove.Add(uid);
                 Land(uid, comp, xform);
             }
             else
             {
-                _transform.SetWorldPosition(xform, cur + Vector2.Normalize(dir) * step);
+                _transform.SetWorldPosition((uid, xform), cur + Vector2.Normalize(dir) * step);
             }
         }
 
@@ -135,17 +137,24 @@ public sealed class AshDrakeFlySystem : EntitySystem
 
     private void SpawnLavaAround(EntityUid uid, AshDrakeFlyComponent comp, TransformComponent xform)
     {
-        if (xform.GridUid == null || !TryComp<MapGridComponent>(xform.GridUid, out var grid))
+        if (xform.GridUid is not { Valid: true } gridUid || !TryComp<MapGridComponent>(gridUid, out var mapGridComp))
             return;
 
-        var tilePos = grid.TileIndicesFor(_transform.GetMapCoordinates(uid));
+        var tilePos = _map.TileIndicesFor((gridUid, mapGridComp), _transform.GetMapCoordinates(uid));
 
         for (var x = -comp.LavaRadius; x <= comp.LavaRadius; x++)
-        for (var y = -comp.LavaRadius; y <= comp.LavaRadius; y++)
         {
-            if (x * x + y * y > comp.LavaRadius * comp.LavaRadius) continue;
-            if (!_random.Prob(comp.LavaChance)) continue;
-            Spawn(comp.LavaProto, grid.GridTileToLocal(new Vector2i(tilePos.X + x, tilePos.Y + y)));
+            for (var y = -comp.LavaRadius; y <= comp.LavaRadius; y++)
+            {
+                if (x * x + y * y > comp.LavaRadius * comp.LavaRadius)
+                    continue;
+
+                if (!_random.Prob(comp.LavaChance))
+                    continue;
+
+                var coordinates = _map.GridTileToLocal(gridUid, mapGridComp, new Vector2i(tilePos.X + x, tilePos.Y + y));
+                Spawn(comp.LavaProto, coordinates);
+            }
         }
     }
 }
