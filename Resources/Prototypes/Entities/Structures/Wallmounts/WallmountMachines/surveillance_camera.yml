@@ -25,13 +25,13 @@
         layer:
         - TabletopMachineLayer
   - type: CameraActiveOnCollide
-    requiresPower: false # TODO: Change this when AI can no longer see via unpowered cameras
   - type: PointLight
     enabled: false
     radius: 5
   - type: SlimPoweredLight
     enabled: false
   - type: StationAiVision
+    needsPower: true
   - type: Clickable
   - type: InteractionOutline
   - type: Construction
