@@ -1,7 +1,7 @@
 ﻿- type: startingGear
   id: GearFatherFromThePast
   equipment:
-    jumpsuit: ClothingUniformJumpsuitHawaiianRed
+    jumpsuit: ClothingUniformJumpsuitHawaiRed
     shoes: ClothingShoesColorBlack
     back: ClothingBackpackSatchel
     id: PassengerPDA

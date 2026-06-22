@@ -13,7 +13,6 @@
   - type: AntagObjectives
     objectives:
     - FatherFromThePastObjective
-  - type: AntagRandomSpawn
   - type: AntagSelection
     agentName: father-from-the-past-round-end-agent-name
     definitions:
@@ -26,3 +25,7 @@
       - RoleSurvivalVoxTank
       briefing:
         text: father-from-the-past-role-greeting
+- type: cloningSettings
+  id: FatherFromThePastCloningSettings
+  parent: ParadoxCloningSettings
+  copyEquipment: null

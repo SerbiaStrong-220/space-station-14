@@ -1,39 +1,53 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Server.Antag;
 using Content.Server.Chat.Managers;
 using Content.Server.Cloning;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Objectives.Components;
+using Content.Server.Spawners.Components;
 using Content.Shared.Chat;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Humanoid;
+using Content.Shared.Humanoid.Prototypes;
+using Content.Shared.Maps;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Systems;
+using Content.Shared.Physics;
 using Content.Shared.SS220.Antag;
 using Content.Shared.VendingMachines;
+using Robust.Shared.Enums;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Server.GameTicking.Rules;
 
-public sealed class FatherFromThePastRuleSystem : GameRuleSystem<FatherFromThePastRuleComponent>
+public sealed partial class FatherFromThePastRuleSystem : GameRuleSystem<FatherFromThePastRuleComponent>
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly CloningSystem _cloning = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly TargetSystem _target = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
+    private const string NoAliveHumansLog = "No alive players to spawn Father From The Past from! Ending gamerule.";
+    private const string NoTargetMindLog = "Could not find mind of target player for Father From The Past!";
+    private const string FallbackSpecies = "Human";
+
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private CloningSystem _cloning = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private TargetSystem _target = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private HumanoidProfileSystem _humanoidProfile = default!;
+    [Dependency] private NamingSystem _naming = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private TurfSystem _turf = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<FatherFromThePastRuleComponent, AntagSelectEntityEvent>(OnAntagSelectEntity);
+        SubscribeLocalEvent<FatherFromThePastRuleComponent, AntagSelectLocationEvent>(OnAntagSelectLocation);
         SubscribeLocalEvent<FatherFromThePastRuleComponent, AfterAntagEntitySelectedEvent>(AfterAntagEntitySelected);
     }
 
@@ -43,7 +57,7 @@ public sealed class FatherFromThePastRuleSystem : GameRuleSystem<FatherFromThePa
 
         if (_target.GetAliveHumans().Count == 0)
         {
-            Log.Info("No alive players to spawn Father From The Past from! Ending gamerule.");
+            Log.Info(NoAliveHumansLog);
             ForceEndSelf(uid, gameRule);
         }
     }
@@ -53,67 +67,97 @@ public sealed class FatherFromThePastRuleSystem : GameRuleSystem<FatherFromThePa
         if (args.Session?.AttachedEntity is not { } spawner)
             return;
 
-        if (ent.Comp.OriginalBody != null)
+        if (!TryResolveTarget(ent) || ent.Comp.OriginalBody is not { } originalBody)
+            return;
+
+        var coords = TryGetSpawnLocation(ent) ?? _transform.GetMapCoordinates(spawner);
+
+        if (!_cloning.TryCloning(originalBody, coords, ent.Comp.Settings, out var clone) || clone == null)
         {
-            if (Deleted(ent.Comp.OriginalBody.Value) || !_mind.TryGetMind(ent.Comp.OriginalBody.Value, out var originalMindId, out _))
-            {
-                Log.Warning("Could not find mind of target player for Father From The Past!");
-                return;
-            }
-            ent.Comp.OriginalMind = originalMindId;
-        }
-        else
-        {
-            var valid = new List<Entity<MindComponent>>();
-            foreach (var humanoid in _target.GetAliveHumans())
-            {
-                if (!HasComp<ParadoxCloneBlacklistComponent>(humanoid.Comp.OwnedEntity))
-                    valid.Add(humanoid);
-            }
-
-            if (valid.Count == 0)
-            {
-                Log.Warning(Loc.GetString("father-from-the-past-log-no-child"));
-                return;
-            }
-
-            var picked = _random.Pick(valid);
-            ent.Comp.OriginalMind = picked;
-            ent.Comp.OriginalBody = picked.Comp.OwnedEntity;
-        }
-
-        var coords = TryGetVendingSpawn(ent) ?? _transform.GetMapCoordinates(spawner);
-
-        if (ent.Comp.OriginalBody == null ||
-            !_cloning.TryCloning(ent.Comp.OriginalBody.Value, coords, ent.Comp.Settings, out var clone) ||
-            clone == null)
-        {
-            Log.Error(Loc.GetString("father-from-the-past-log-clone-failed", ("target", $"{ToPrettyString(ent.Comp.OriginalBody)}")));
+            Log.Error(Loc.GetString("father-from-the-past-log-clone-failed", ("target", $"{ToPrettyString(originalBody)}")));
             return;
         }
 
-        _metaData.SetEntityName(clone.Value, Name(ent.Comp.OriginalBody.Value));
-        _humanoid.SetSex(clone.Value, Sex.Male);
-
-        var targetComp = EnsureComp<TargetOverrideComponent>(clone.Value);
-        targetComp.Target = ent.Comp.OriginalMind;
+        _metaData.SetEntityName(clone.Value, BuildFatherName(clone.Value, originalBody));
+        _humanoidProfile.SetSex(clone.Value, Sex.Male, Gender.Male);
+        EnsureComp<TargetOverrideComponent>(clone.Value).Target = ent.Comp.OriginalMind;
 
         args.Entity = clone;
     }
 
     private void AfterAntagEntitySelected(Entity<FatherFromThePastRuleComponent> ent, ref AfterAntagEntitySelectedEvent args)
     {
-        if (ent.Comp.OriginalMind == null)
-            return;
+        var name = Name(args.EntityUid);
+        var renamedEv = new EntityRenamedEvent(args.EntityUid, name, name);
+        RaiseLocalEvent(args.EntityUid, ref renamedEv, true);
 
-        if (TryComp<MindComponent>(ent.Comp.OriginalMind.Value, out var childMind)
-            && childMind.UserId is { } userId
-            && _player.TryGetSessionById(userId, out var session))
+        if (ent.Comp.SpawnEffect is { } spawnEffect)
+            Spawn(spawnEffect, _transform.GetMapCoordinates(args.EntityUid));
+
+        if (ent.Comp.OriginalMind is not { } childMindId
+            || !TryComp<MindComponent>(childMindId, out var childMind)
+            || childMind.UserId is not { } userId
+            || !_player.TryGetSessionById(userId, out var session))
         {
-            var msg = Loc.GetString("father-from-the-past-child-notification");
-            _chat.ChatMessageToOne(ChatChannel.Server, msg, msg, default, false, session.Channel);
+            return;
         }
+
+        var msg = Loc.GetString("father-from-the-past-child-notification");
+        _chat.ChatMessageToOne(ChatChannel.Server, msg, msg, default, false, session.Channel);
     }
+
+    private void OnAntagSelectLocation(Entity<FatherFromThePastRuleComponent> ent, ref AntagSelectLocationEvent args)
+    {
+        if (!args.Handled && TryGetSpawnLocation(ent) is { } coords)
+            args.Coordinates.Add(coords);
+    }
+
+    private bool TryResolveTarget(Entity<FatherFromThePastRuleComponent> ent)
+    {
+        if (ent.Comp.OriginalBody is { } body)
+        {
+            if (Deleted(body) || !_mind.TryGetMind(body, out var bodyMind, out _))
+            {
+                Log.Warning(NoTargetMindLog);
+                return false;
+            }
+
+            ent.Comp.OriginalMind = bodyMind;
+            return true;
+        }
+
+        var valid = new List<Entity<MindComponent>>();
+        foreach (var humanoid in _target.GetAliveHumans())
+        {
+            if (!HasComp<ParadoxCloneBlacklistComponent>(humanoid.Comp.OwnedEntity))
+                valid.Add(humanoid);
+        }
+
+        if (valid.Count == 0)
+        {
+            Log.Warning(Loc.GetString("father-from-the-past-log-no-child"));
+            return false;
+        }
+
+        var picked = _random.Pick(valid);
+        ent.Comp.OriginalMind = picked;
+        ent.Comp.OriginalBody = picked.Comp.OwnedEntity;
+        return true;
+    }
+
+    private string BuildFatherName(EntityUid clone, EntityUid originalBody)
+    {
+        var species = TryComp<HumanoidProfileComponent>(clone, out var profile) ? profile.Species.Id : FallbackSpecies;
+
+        var parts = Name(originalBody).Split(' ', 2);
+        if (parts.Length == 2 && _prototype.TryIndex<SpeciesPrototype>(species, out var speciesProto))
+            return $"{_naming.GetFirstName(speciesProto, Gender.Male)} {parts[1]}";
+
+        return _naming.GetName(species, Gender.Male);
+    }
+
+    private MapCoordinates? TryGetSpawnLocation(Entity<FatherFromThePastRuleComponent> ent)
+        => TryGetVendingSpawn(ent) ?? TryGetArrivalsSpawn();
 
     private MapCoordinates? TryGetVendingSpawn(Entity<FatherFromThePastRuleComponent> ent)
     {
@@ -128,10 +172,40 @@ public sealed class FatherFromThePastRuleSystem : GameRuleSystem<FatherFromThePa
         if (machines.Count == 0)
             return null;
 
-        var machine = _random.Pick(machines);
-        var baseCoords = _transform.GetMapCoordinates(machine);
+        _random.Shuffle(machines);
+        var offsets = new[] { new Vector2(0, -1), new Vector2(0, 1), new Vector2(1, 0), new Vector2(-1, 0) };
 
-        Vector2[] offsets = { new(0, -1), new(0, 1), new(1, 0), new(-1, 0) };
-        return baseCoords.Offset(_random.Pick(offsets));
+        foreach (var machine in machines)
+        {
+            var baseCoords = Transform(machine).Coordinates;
+            _random.Shuffle(offsets);
+
+            foreach (var offset in offsets)
+            {
+                if (_turf.GetTileRef(baseCoords.Offset(offset)) is not { } tile
+                    || tile.Tile.IsEmpty
+                    || _turf.IsTileBlocked(tile, CollisionGroup.MobMask))
+                {
+                    continue;
+                }
+
+                return _transform.ToMapCoordinates(_turf.GetTileCenter(tile));
+            }
+        }
+
+        return null;
+    }
+
+    private MapCoordinates? TryGetArrivalsSpawn()
+    {
+        var points = new List<EntityUid>();
+        var query = EntityQueryEnumerator<SpawnPointComponent>();
+        while (query.MoveNext(out var uid, out var spawnPoint))
+        {
+            if (spawnPoint.SpawnType == SpawnPointType.LateJoin)
+                points.Add(uid);
+        }
+
+        return points.Count == 0 ? null : _transform.GetMapCoordinates(_random.Pick(points));
     }
 }

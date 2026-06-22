@@ -1,5 +1,6 @@
 ﻿ghost-role-information-father-from-the-past-name = Отец из прошлого
 ghost-role-information-father-from-the-past-description = Отец одного из членов экипажа, провалившийся во времени. Найдите своё дитя и улетите вместе.
+ghost-role-information-father-from-the-past-rules = Вы ничего не помните о последних 15 годах. Единственное, что вы знаете — один из членов экипажа ваш ребёнок, и вам нужно покинуть станцию вместе с ним.
 
 father-from-the-past-round-end-agent-name = Отец из прошлого
 

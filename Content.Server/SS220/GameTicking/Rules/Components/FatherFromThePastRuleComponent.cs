@@ -8,7 +8,7 @@ namespace Content.Server.GameTicking.Rules.Components;
 public sealed partial class FatherFromThePastRuleComponent : Component
 {
     [DataField]
-    public ProtoId<CloningSettingsPrototype> Settings = "ParadoxCloningSettings";
+    public ProtoId<CloningSettingsPrototype> Settings = "FatherFromThePastCloningSettings";
 
     [DataField]
     public EntityUid? OriginalBody;
@@ -21,4 +21,7 @@ public sealed partial class FatherFromThePastRuleComponent : Component
 
     [DataField]
     public int YearDisplacement = 15;
+
+    [DataField]
+    public EntProtoId? SpawnEffect = "EffectFlashBluespace";
 }

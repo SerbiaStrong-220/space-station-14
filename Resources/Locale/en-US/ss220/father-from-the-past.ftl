@@ -1,5 +1,6 @@
 ﻿ghost-role-information-father-from-the-past-name = Father From The Past
 ghost-role-information-father-from-the-past-description = The father of a crew member, lost in time. Find your child and escape together.
+ghost-role-information-father-from-the-past-rules = You remember nothing of the last 15 years. The only thing you know is that one of the crew members is your child, and you must leave the station together with them.
 
 father-from-the-past-round-end-agent-name = Father From The Past
 

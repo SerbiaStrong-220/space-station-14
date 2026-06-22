@@ -6,7 +6,7 @@
   - type: GhostRole
     name: ghost-role-information-father-from-the-past-name
     description: ghost-role-information-father-from-the-past-description
-    rules: ghost-role-information-default-rules
+    rules: ghost-role-information-father-from-the-past-rules
   - type: GhostRoleAntagSpawner
   - type: Sprite
     sprite: Markers/jobs.rsi
