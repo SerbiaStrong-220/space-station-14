@@ -46,6 +46,11 @@
       Steel: 185
   - type: StaticPrice
     price: 30
+  #SS220 add gas tank tag begin
+  - type: Tag
+    tags:
+      - GasTank
+  #SS220 add gas tank tag end
 
 - type: entity
   abstract: true

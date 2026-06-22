@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Bed.Cryostorage;
+using Content.Shared.SS220.Mech.Components;
 using Content.Shared.Ghost;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
@@ -37,8 +38,8 @@ public partial class MindExtensionSystem //MindTrailSystem
             IsAvailableToEnterEntity(target.Value, data, args.SenderSession.UserId) != BodyStateToEnter.Available)
             return;
 
-        _mind.TransferTo(mind.Value, target.Value);
         _mind.UnVisit(mind.Value);
+        _mind.TransferTo(mind.Value, target.Value);
 
         RaiseNetworkEvent(new ExtensionReturnResponse(), args.SenderSession);
     }
@@ -57,6 +58,9 @@ public partial class MindExtensionSystem //MindTrailSystem
             var targetEnt = GetEntity(targetNet);
             var finalMetaData = trailMetaData;
             var state = IsAvailableToEnterEntity(targetEnt, data, args.SenderSession.UserId);
+
+            if (HasComp<AltMechComponent>(targetEnt))
+                continue;
 
             if (HasComp<BorgBrainComponent>(targetEnt))
             {

@@ -173,3 +173,35 @@
   #   slots:
   #   - Back
   #   - suitStorage
+
+# Высокочастотный нож меха ТСФ
+- type: entity
+  parent: CaptainSabre
+  id: KnifeHFMech
+  name: HF mech knife
+  description: "An enormous knife, much larger than a common sword. The words are engraved along the blade: Sol Custos"
+  components:
+  - type: Sharp
+  - type: ItemExtension
+    minimalStrengthToPickUp: 3
+    strengthRequirementToBeUsed: 4
+  - type: ItemToggle
+  - type: MeleeWeapon
+    autoAttack: true
+    wideAnimationRotation: -135
+    attackRate: 3
+    damage:
+      types:
+          Slash: 65
+          Structural: 80
+  - type: ItemToggleMeleeWeapon
+    activatedDamage:
+      types:
+        Heat: 85
+        Structural: 200
+      armourPiercing: 90
+  - type: Item
+    size: Ginormous
+  - type: Appearance
+  - type: DisarmMalus
+    malus: 0

@@ -83,10 +83,9 @@
   result: LaserSMGPowerCell
   completetime: 5
   materials:
-    Steel: 300
-    Glass: 200
-    Plastic: 300
-    Gold: 50
+    Steel: 500
+    Gold: 350
+    Plasma: 500
 
 - type: latheRecipe
   id: RiotLaserShield
