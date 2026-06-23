@@ -5,7 +5,7 @@ using Content.Shared.Weapons.Ranged.Events;
 
 namespace Content.Client.SS220.Weapons.Ranged.Systems;
 
-public sealed class GasWeaponSystem : SharedGasWeaponSystem
+public sealed partial class GasWeaponSystem : SharedGasWeaponSystem
 {
 
     public override void Initialize()
