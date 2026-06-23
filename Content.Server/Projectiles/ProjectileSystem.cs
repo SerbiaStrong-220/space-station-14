@@ -8,6 +8,7 @@ using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.FixedPoint;
+using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.SS220.AltArmor.Components;
 using Content.Shared.SS220.Projectiles.Components;
