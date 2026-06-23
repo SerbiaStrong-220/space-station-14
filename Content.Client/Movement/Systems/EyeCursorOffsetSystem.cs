@@ -4,7 +4,7 @@ using Content.Shared.Camera;
 using Content.Shared.CombatMode;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
-using Content.Shared.SS220.ComplexRepairable;
+using Content.Shared.SS220.EyeOffsetInCombatMode;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Shared.Map;
