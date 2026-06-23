@@ -94,8 +94,8 @@
   - type: EyeCursorOffset
     maxOffset: 6
     pvsIncrease: 0.6
-  #SS220 eye offset end
   - type: EyeOffsetInCombatMode
+  #SS220 eye offset end
   - type: Cuffable
   - type: Ensnareable
     sprite: Objects/Misc/ensnare.rsi
