@@ -59,13 +59,6 @@ public sealed class CombatModeSystem : SharedCombatModeSystem
         return IsInCombatMode(entity.Value);
     }
 
-    //SS220 weapon overhaul begin
-    protected override void OnActionPerform(EntityUid uid, CombatModeComponent component, ToggleCombatActionEvent args)
-    {
-        base.OnActionPerform(uid, component, args);
-    }
-    //SS220 weapon overhaul end
-
     public override void SetInCombatMode(EntityUid entity, bool value, CombatModeComponent? component = null)
     {
         base.SetInCombatMode(entity, value, component);
