@@ -10,6 +10,7 @@
   - type: ComplexInteraction
   - type: MobMover
   - type: ArmorBlock
+  - type: Stripping
   - type: Flammable
     fireSpread: true
     canResistFire: true

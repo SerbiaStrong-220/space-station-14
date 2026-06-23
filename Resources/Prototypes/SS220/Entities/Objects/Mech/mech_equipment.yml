@@ -87,3 +87,77 @@
     itemIconStyle: BigItem
   - type: InstantAction
     event: !type:ToggleActionEvent
+
+- type: entity
+  id: JetpackMechModBasic
+  parent: MechEquipmentBase
+  name: mech ionic jetpack
+  description: "Set of ionic thrusters that can be attached to a mech. They need no gas or fuel to operate but consume lots of energy. This one is low-end, simple and cheap."
+  components:
+  - type: Item
+    size: Ginormous
+  - type: Actions
+  - type: ActionsContainer
+  - type: Sprite
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: mecha_clamp
+  - type: PowerConsumingJetpack
+  - type: Jetpack
+    moleUsage: 0
+    acceleration: 0.25
+    friction: 0.2
+  - type: AltMechEquipment
+    ownMass: 5
+    eqipmentSize: 10
+  - type: MechEquipmentAction
+    equipmentAbilityActionName: ActionToggleJetpack
+
+- type: entity
+  id: JetpackMechMod
+  parent: MechEquipmentBase
+  name: mech ionic jetpack
+  description: "Set of ionic thrusters that can be attached to a mech. They need no gas or fuel to operate but consume lots of energy. This one is gold standart and widely used."
+  components:
+  - type: Item
+    size: Ginormous
+  - type: Actions
+  - type: ActionsContainer
+  - type: Sprite
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: mecha_clamp
+  - type: PowerConsumingJetpack
+    powerConsumption: 5
+  - type: Jetpack
+    moleUsage: 0
+    acceleration: 0.5
+    friction: 0.25
+  - type: AltMechEquipment
+    ownMass: 10
+    eqipmentSize: 20
+  - type: MechEquipmentAction
+    equipmentAbilityActionName: ActionToggleJetpack
+
+- type: entity
+  id: JetpackMechModAdvanced
+  parent: MechEquipmentBase
+  name: mech ionic jetpack
+  description: "Set of ionic thrusters that can be attached to a mech. They need no gas or fuel to operate but consume lots of energy. This one is extended, heavy and consumes pretty much energy."
+  components:
+  - type: Item
+    size: Ginormous
+  - type: Actions
+  - type: ActionsContainer
+  - type: Sprite
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: mecha_clamp
+  - type: PowerConsumingJetpack
+    powerConsumption: 8
+  - type: Jetpack
+    moleUsage: 0
+    acceleration: 0.8
+    friction: 0.25
+  - type: AltMechEquipment
+    ownMass: 15
+    eqipmentSize: 30
+  - type: MechEquipmentAction
+    equipmentAbilityActionName: ActionToggleJetpack

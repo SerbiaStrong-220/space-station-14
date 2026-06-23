@@ -25,3 +25,62 @@
         Piercing: 8
         Slash: 8
         Structural: 70
+
+- type: entity
+  name: industrial spray
+  parent: BaseItem
+  id: MechSpray
+  description: Large and powerfull electric spray on a manipulator for use on mechs and other large-scale machines. Has two spraying modes.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/fire_extinguisher.rsi
+    layers:
+    - state: fire_extinguisher_closed
+      map: [ "enum.ToggleableVisuals.Layer" ]
+  - type: Item
+    sprite: Objects/Misc/fire_extinguisher.rsi
+    size: Normal
+  - type: SolutionContainerManager
+    solutions:
+      chamber:
+        maxVol: 1500
+  - type: Spray
+    transferAmount: 45
+    pushbackAmount: 60
+    solution: chamber
+    spraySound:
+      path: /Audio/Effects/extinguish.ogg
+    sprayedPrototype: ExtinguisherSpray
+    vaporAmount: 3
+    vaporSpread: 45
+    sprayVelocity: 6.0
+  - type: Gun
+    clumsyProof: true
+    cameraRecoilScalar: 0 #no recoil
+    fireRate: 2
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/water_spray.ogg
+  - type: SolutionAmmoProvider
+    solutionId: chamber
+    proto: BulletWaterShot
+    fireCost: 30
+  - type: SolutionTransfer
+    maxTransferAmount: 100
+    transferAmount: 100
+    minTransferAmount: 5
+    canChangeTransferAmount: true
+  - type: UserInterface
+    interfaces:
+      enum.TransferAmountUiKey.Key:
+        type: TransferAmountBoundUserInterface
+  - type: DrawableSolution
+    solution: chamber
+  - type: DrainableSolution
+    solution: chamber
+  - type: RefillableSolution
+    solution: chamber
+  - type: ExaminableSolution
+    solution: chamber

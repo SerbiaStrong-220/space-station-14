@@ -35,6 +35,6 @@ public sealed partial class AltMechEquipmentComponent : Component
     /// <summary>
     /// How much space this equipment takes
     /// </summary>
-    [DataField("size")]
+    [DataField]
     public int EqipmentSize = 20;
 }

@@ -44,6 +44,51 @@
         acts: ["Destruction"]
 
 - type: entity
+  id: SprayLeftArm
+  parent: BaseMechLeftArm
+  name: integrated industrial drill manipulator (left)
+  description: A manipulator with an industrial spray mounted on it. This one is designed to be installed in mech's left arm slot.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: mecha_drill
+  - type: MechArm
+    hands:
+    - hand:
+        location: Left
+        strengthModifier: 1
+        whitelist:
+          sizes:
+          - Ginormous
+      item: MechSpray
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-big
+      right:
+      - state: inhand-right-big
+  - type: MechPart
+    integrity: 150
+    maxIntegrity: 150
+    ownMass: 125
+    attachedSprite:
+      sprite: SS220/Objects/Mechs/lefthand.rsi
+      state: hydraulicdrill
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
   id: HydraulicLeftArm
   parent: BaseMechLeftArm
   name: hydraulic arm (left)
