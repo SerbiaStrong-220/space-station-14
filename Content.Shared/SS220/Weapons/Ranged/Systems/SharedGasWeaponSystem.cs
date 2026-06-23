@@ -10,8 +10,8 @@ namespace Content.Shared.SS220.Weapons.Ranged.Systems;
 public abstract class SharedGasWeaponSystem : EntitySystem
 {
 
-    [Dependency] protected readonly SharedContainerSystem _container = default!;
-    [Dependency] protected readonly SharedPopupSystem _popup = default!;
+    [Dependency] protected SharedContainerSystem _container = default!;
+    [Dependency] protected SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
