@@ -187,7 +187,7 @@ public sealed partial class FieldShieldProviderSystem : EntitySystem
 
             args.Verbs.Add(new AlternativeVerb
             {
-                Text = Loc.GetString("field-shield-set-mode" + id),
+                Text = Loc.GetString("field-shield-set-mode", ("mode", Loc.GetString(id))),
                 Act = () => SetMode(ent, id),
                 Priority = 2
             });

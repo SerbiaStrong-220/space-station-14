@@ -17,3 +17,9 @@ ent-ActionTogglePersonalShield = Переключить персональный
 
 field-shield-provider-on = Щит наполняются энергией
 field-shield-provider-off = Щит отключается...
+
+field-shield-set-mode = Переключить щит в режим { $mode }
+
+any = отражения любых атак
+
+high = отражения высокоэнергетических атак
