@@ -81,8 +81,8 @@ public sealed partial class ChatSystem : SharedChatSystem
     public readonly TimeSpan ChatSpamCooldown = TimeSpan.FromSeconds(2);
     public const int MinSpamMessageLength = 5;
 
-    public readonly record struct RecentChatMessage(TimeSpan LastMessageTimeSent, string Message);
-    public Dictionary<EntityUid, RecentChatMessage> RecentChatMessages { get; } = new();
+    private readonly record struct RecentChatMessage(TimeSpan LastMessageTimeSent, string Message);
+    private readonly Dictionary<EntityUid, RecentChatMessage> _recentChatMessages = new();
     // ss220 chat unique end
 
     private bool _loocEnabled = true;
@@ -105,7 +105,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     // ss220 chat unique begin
     private void OnRoundRestart(RoundRestartCleanupEvent ev)
     {
-        RecentChatMessages.Clear();
+        _recentChatMessages.Clear();
     }
     // ss220 chat unique end
 
@@ -250,13 +250,13 @@ public sealed partial class ChatSystem : SharedChatSystem
         {
             var curTime = _gameTiming.CurTime;
 
-            if (RecentChatMessages.TryGetValue(source, out var chatStruct) && chatStruct.Message == message)
+            if (_recentChatMessages.TryGetValue(source, out var recentMessage) && recentMessage.Message == message)
             {
-                if (curTime - chatStruct.LastMessageTimeSent < ChatSpamCooldown)
+                if (curTime - recentMessage.LastMessageTimeSent < ChatSpamCooldown)
                     return;
             }
 
-            RecentChatMessages[source] = new RecentChatMessage(curTime, message);
+            _recentChatMessages[source] = new RecentChatMessage(curTime, message);
         }
         //ss220 chat unique end
 
