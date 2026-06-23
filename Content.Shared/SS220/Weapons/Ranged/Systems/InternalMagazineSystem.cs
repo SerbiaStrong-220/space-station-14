@@ -9,11 +9,11 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Weapons.Ranged.Systems;
 
-public sealed class InternalMagazineSystem : EntitySystem
+public sealed partial class InternalMagazineSystem : EntitySystem
 {
-    [Dependency] private readonly SharedToolSystem _tool = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedToolSystem _tool = default!;
+    [Dependency] private ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
 
     public override void Initialize()
     {
