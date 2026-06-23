@@ -9,10 +9,11 @@ using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Client.SS220.Weapons.Ranged.Systems;
-public sealed class GunUseSystem : EntitySystem
+
+public sealed partial class GunUseSystem : EntitySystem
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {
