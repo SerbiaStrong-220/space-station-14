@@ -2,7 +2,7 @@
 using Content.Shared.Hands.EntitySystems;
 
 namespace Content.Shared.SS220.Weapons.Ranged.Systems;
-public sealed class SharedGunUseSystem : EntitySystem
+public sealed partial class SharedGunUseSystem : EntitySystem
 {
 
 }
