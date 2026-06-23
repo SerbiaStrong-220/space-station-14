@@ -34,17 +34,17 @@ namespace Content.Server.SS220.TraitorDynamics;
 /// - Dynamic-specific pricing and discounts in stores
 /// - Round-end reporting of active dynamic
 /// </remarks>
-public sealed class TraitorDynamicsSystem : EntitySystem
+public sealed partial class TraitorDynamicsSystem : EntitySystem
 {
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly IAdminLogManager _admin = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly CrewManifestSystem _crewManifest = default!;
-    [Dependency] private readonly StoreDiscountSystem _discount = default!;
-    [Dependency] private readonly StoreSystem _store = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private IAdminLogManager _admin = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private CrewManifestSystem _crewManifest = default!;
+    [Dependency] private StoreDiscountSystem _discount = default!;
+    [Dependency] private StoreSystem _store = default!;
 
     private static Counter _chosenDynamicsModes = default!;
 

@@ -11,14 +11,14 @@ using Robust.Shared.Random;
 
 namespace Content.Server.SS220.RandomTeleport;
 
-public sealed class RandomTeleportSystem : EntitySystem
+public sealed partial class RandomTeleportSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private IComponentFactory _componentFactory = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private PullingSystem _pulling = default!;
 
     public override void Initialize()
     {

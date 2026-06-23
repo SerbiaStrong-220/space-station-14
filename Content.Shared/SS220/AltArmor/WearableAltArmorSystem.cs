@@ -6,10 +6,10 @@ using Content.Shared.SS220.AltArmor.Components;
 
 namespace Content.Shared.SS220.WearableAltArmor;
 
-public sealed class WearableAltArmorSystem : EntitySystem
+public sealed partial class WearableAltArmorSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly AltArmorSystem _altArmor = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private AltArmorSystem _altArmor = default!;
 
     public override void Initialize()
     {

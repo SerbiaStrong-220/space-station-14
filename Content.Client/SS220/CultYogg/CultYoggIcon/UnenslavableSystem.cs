@@ -9,10 +9,10 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.CultYogg.CultYoggIcon;
 
-public sealed class UnenslavableSystem : EntitySystem
+public sealed partial class UnenslavableSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
 
     public override void Initialize()
     {

@@ -13,15 +13,15 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
 
-public abstract class SharedCultYoggHealSystem : EntitySystem
+public abstract partial class SharedCultYoggHealSystem : EntitySystem
 {
-    [Dependency] private readonly SharedBloodstreamSystem _bloodstreamSystem = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _time = default!;
-    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
+    [Dependency] private SharedBloodstreamSystem _bloodstreamSystem = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private MobThresholdSystem _mobThreshold = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _time = default!;
+    [Dependency] private SharedStaminaSystem _stamina = default!;
 
     public override void Initialize()
     {

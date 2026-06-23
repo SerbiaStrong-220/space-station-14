@@ -16,8 +16,8 @@ namespace Content.Client.SS220.CultYogg.FungusMachine;
 [GenerateTypedNameReferences]
 public sealed partial class FungusMachineMenu : FancyWindow
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
 
     private readonly Dictionary<EntProtoId, EntityUid> _dummies = [];
 

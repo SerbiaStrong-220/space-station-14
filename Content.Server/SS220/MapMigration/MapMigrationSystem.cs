@@ -8,12 +8,12 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.MapMigration;
 
-public sealed class MapMigrationSystem_SS220 : EntitySystem
+public sealed partial class MapMigrationSystem_SS220 : EntitySystem
 {
-    [Dependency] private readonly MapSystem _map = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private MapSystem _map = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     private static readonly HashSet<ProtoId<TagPrototype>> TagsForTileOccupied = ["Wall", "Window"];
     private bool _rotateDoors;

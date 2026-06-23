@@ -11,7 +11,7 @@ public sealed partial class MobStateRequirement : SurgeryGraphRequirement
     [DataField(required: true)]
     public HashSet<MobState> States;
 
-    protected override bool Requirement(EntityUid? uid, IEntityManager entityManager)
+    protected override bool Requirement(EntityUid? uid, EntityUid user, IEntityManager entityManager)
     {
         if (!entityManager.TryGetComponent<MobStateComponent>(uid, out var mobStateComponent))
             return false;

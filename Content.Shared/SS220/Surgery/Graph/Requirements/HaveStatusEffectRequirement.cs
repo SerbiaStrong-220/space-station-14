@@ -11,7 +11,7 @@ public sealed partial class HaveStatusEffectRequirement : SurgeryGraphRequiremen
     [DataField(required: true)]
     public EntProtoId StatusEffect;
 
-    protected override bool Requirement(EntityUid? uid, IEntityManager entityManager)
+    protected override bool Requirement(EntityUid? uid, EntityUid user, IEntityManager entityManager)
     {
         if (uid is null)
             return true;

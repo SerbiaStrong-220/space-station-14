@@ -10,7 +10,7 @@ namespace Content.Server.SS220.CultYogg.Pod;
 
 public sealed partial class CultYoggPodSystem : SharedCultYoggPodSystem
 {
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {

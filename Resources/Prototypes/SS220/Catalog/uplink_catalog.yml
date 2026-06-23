@@ -415,11 +415,11 @@
   - UplinkImplants
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 12
-    MediumDynamic:
       Telecrystal: 8
-    HardDynamic:
+    MediumDynamic:
       Telecrystal: 6
+    HardDynamic:
+      Telecrystal: 4
 
 - type: listing
   id: SyndicateFragmentExtractor
@@ -436,11 +436,11 @@
   - UplinkWearables
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 8
+      Telecrystal: 5
     MediumDynamic:
-      Telecrystal: 6
+      Telecrystal: 3
     HardDynamic:
-      Telecrystal: 4
+      Telecrystal: 2
 
 - type: listing
   id: ClothingHeadHelmetSwatSyndicate

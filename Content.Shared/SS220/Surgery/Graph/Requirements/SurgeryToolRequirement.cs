@@ -10,7 +10,7 @@ public sealed partial class SurgeryToolRequirement : SurgeryGraphRequirement
     [DataField(required: true)]
     public SurgeryToolType SurgeryTool = SurgeryToolType.Invalid;
 
-    protected override bool Requirement(EntityUid? uid, IEntityManager entityManager)
+    protected override bool Requirement(EntityUid? uid, EntityUid user, IEntityManager entityManager)
     {
         if (!entityManager.TryGetComponent<SurgeryToolComponent>(uid, out var surgeryTool))
             return false;
