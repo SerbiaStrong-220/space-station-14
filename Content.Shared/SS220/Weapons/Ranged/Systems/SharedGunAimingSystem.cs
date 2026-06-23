@@ -13,9 +13,9 @@ namespace Content.Shared.SS220.Weapons.Ranged.Systems;
 
 public abstract partial class SharedGunAimingSystem : EntitySystem
 {
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeedModifier = default!;
 
     public override void Initialize()
     {
