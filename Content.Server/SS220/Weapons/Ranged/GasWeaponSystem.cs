@@ -11,9 +11,9 @@ using Robust.Shared.Containers;
 
 namespace Content.Server.SS220.Weapons.Ranged.Systems;
 
-public sealed class GasWeaponSystem : SharedGasWeaponSystem
+public sealed partial class GasWeaponSystem : SharedGasWeaponSystem
 {
-    [Dependency] private readonly GasTankSystem _gasTank = default!;
+    [Dependency] private GasTankSystem _gasTank = default!;
 
     public override void Initialize()
     {
