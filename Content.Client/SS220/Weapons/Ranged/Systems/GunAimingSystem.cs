@@ -13,10 +13,10 @@ namespace Content.Client.SS220.Weapons;
 
 public sealed partial class GunAimingSystem : SharedGunAimingSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly InputSystem _inputSystem = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly GunSystem _gun = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private InputSystem _inputSystem = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private GunSystem _gun = default!;
 
     public override void Initialize()
     {
