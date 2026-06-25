@@ -75,7 +75,7 @@ public sealed partial class ServerDescriptionChangeSystem : EntitySystem
             if (splitDictionaryString.Length < 2)
                 continue;
 
-            if (!float.TryParse(splitDictionaryString[0], out var chance))
+            if (!float.TryParse(splitDictionaryString[0], System.Globalization.CultureInfo.InvariantCulture, out var chance))
                 continue;
 
             var description = splitDictionaryString[1];
