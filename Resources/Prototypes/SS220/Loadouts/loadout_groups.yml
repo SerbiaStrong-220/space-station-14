@@ -142,6 +142,7 @@
   loadouts:
   - MagistrateRobesJudge
   - OuterClothingJujutsuShlepa
+  - NanoTrasenRepresentativeFormalCoat
 
 - type: loadoutGroup
   id: NanoTrasenRepresentativeHeadset

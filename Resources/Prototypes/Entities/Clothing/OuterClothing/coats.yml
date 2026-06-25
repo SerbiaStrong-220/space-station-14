@@ -752,9 +752,9 @@
   description: A dress for special occasions.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Coats/hos_coat.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/hos_dress.rsi #SS220 real hos coat
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Coats/hos_coat.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/hos_dress.rsi #SS220 real hos coat
   - type: Armor
     modifiers:
       coefficients:

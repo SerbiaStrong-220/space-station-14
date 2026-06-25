@@ -244,3 +244,26 @@
       item_radio: !type:ContainerSlot { }
       storagebase: !type:Container
         ents: [ ]
+
+- type: entity
+  parent: ClothingUniformJumpskirtHosFormal
+  id: ClothingOuterCoatHosFormal
+  name: hos's formal coat
+  description: A coat for special occasions.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/hos_coat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/hos_coat.rsi
+
+# ПНТ
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatNTRFormal
+  name: NTR's formal coat
+  description: Show them true corporate style with this dress coat!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/NTR_formal.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/NTR_formal.rsi

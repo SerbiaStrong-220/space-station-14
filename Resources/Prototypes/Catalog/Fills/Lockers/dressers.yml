@@ -100,6 +100,7 @@
         - id: ClothingOuterCoatHoSGreatcoat # Corvax-Resprite
         - id: ClothingOuterCoatHoSbomber # SS220-NewBomberForHos
         - id: ClothingHeadBigCapHoS # SS220-FreedomHoSCap
+        - id: ClothingOuterCoatHosFormal #SS220 Formal coat for HoS
 
 - type: entity
   id: DresserQuarterMasterFilled
