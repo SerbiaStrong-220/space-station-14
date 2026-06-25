@@ -31,7 +31,7 @@ public sealed partial class ServerDescriptionChangeSystem : EntitySystem
 
         _cachedDefaultDesc = _configuration.GetCVar(CVars.GameDesc);
 
-        _configuration.OnValueChanged(CCVars220.GameDescList, DescDictionaryString, true);
+        _configuration.OnValueChanged(CCVars220.GameDescList, UpdateCachedDescriptions, true);
         _configuration.OnValueChanged(CCVars220.GameDescListChangeInterval, x => _changeInterval = TimeSpan.FromSeconds(x), true);
 
         _configuration.OnValueChanged(CCVars220.GameDescListEnabled, OnEnableSwitched, true);
@@ -59,7 +59,7 @@ public sealed partial class ServerDescriptionChangeSystem : EntitySystem
         _configuration.SetCVar(CVars.GameDesc, _cachedDefaultDesc);
     }
 
-    private void DescDictionaryString(string input)
+    private void UpdateCachedDescriptions(string input)
     {
         if (string.IsNullOrEmpty(input))
             _cachedDescription.Clear();
