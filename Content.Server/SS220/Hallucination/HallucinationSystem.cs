@@ -14,12 +14,12 @@ namespace Content.Server.SS220.Hallucination;
 /// <summary>
 /// System which make it easier to work with Hallucinations
 /// </summary>
-public sealed class HallucinationSystem : SharedHallucinationSystem
+public sealed partial class HallucinationSystem : SharedHallucinationSystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private IComponentFactory _componentFactory = default!;
 
     public const float DelayBetweenHallucinateAttempt = 2f;
 

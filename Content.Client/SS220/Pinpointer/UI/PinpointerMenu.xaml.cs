@@ -16,8 +16,8 @@ namespace Content.Client.SS220.Pinpointer.UI;
 [GenerateTypedNameReferences]
 public sealed partial class PinpointerMenu : FancyWindow
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     private readonly SpriteSystem _sprite;
 

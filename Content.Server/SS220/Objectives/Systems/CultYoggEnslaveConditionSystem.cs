@@ -7,10 +7,10 @@ using System.Text;
 
 namespace Content.Server.SS220.Objectives.Systems;
 
-public sealed class CultYoggEnslaveConditionSystem : EntitySystem
+public sealed partial class CultYoggEnslaveConditionSystem : EntitySystem
 {
-    [Dependency] private readonly CultYoggRuleSystem _cultRule = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private CultYoggRuleSystem _cultRule = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
 
     public override void Initialize()
     {

@@ -7,7 +7,7 @@ namespace Content.Client.SS220.Experience.UiElements;
 
 public sealed partial class FancyTextureButton : TextureButton
 {
-    [Dependency] private readonly IResourceCache _resCache = default!;
+    [Dependency] private IResourceCache _resCache = default!;
 
     public Color? BackgroundColor { get; set; } = Color.White;
 

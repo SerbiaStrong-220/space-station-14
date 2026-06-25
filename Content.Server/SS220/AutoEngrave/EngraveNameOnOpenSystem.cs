@@ -6,9 +6,9 @@ using Content.Shared.Storage;
 
 namespace Content.Server.SS220.AutoEngrave;
 
-public sealed class EngraveNameOnOpenSystem : EntitySystem
+public sealed partial class EngraveNameOnOpenSystem : EntitySystem
 {
-    [Dependency] private readonly AccessReaderSystem _accessReader = default!;
+    [Dependency] private AccessReaderSystem _accessReader = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

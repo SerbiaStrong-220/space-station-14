@@ -13,7 +13,7 @@ namespace Content.Client.SS220.Experience.UiElements;
 [GenerateTypedNameReferences]
 public sealed partial class KnowledgeLabel : BoxContainer
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     public ProtoId<KnowledgePrototype> KnowledgeProto { private set; get; }
 

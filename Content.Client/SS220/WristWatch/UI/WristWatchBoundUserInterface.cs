@@ -8,11 +8,11 @@ using Robust.Shared.Timing;
 namespace Content.Client.SS220.WristWatch.UI;
 
 [UsedImplicitly]
-public sealed class WristWatchBoundUserInterface : BoundUserInterface
+public sealed partial class WristWatchBoundUserInterface : BoundUserInterface
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly EntityManager _entityManager = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private EntityManager _entityManager = default!;
 
     private readonly ClientGameTicker _gameTicker = default!;
 
