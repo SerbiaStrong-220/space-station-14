@@ -202,7 +202,7 @@
 
 - type: entity
   name: ik 40 laser carbine
-  parent: BaseWeaponBlaster
+  parent: [ BaseWeaponBlaster, BaseGunWieldable ]
   id: WeaponLaserSMG
   description: A powerful laser carbine resembling a rifle, which relies more on battery cartridges than on an integrated power cell. It is used by NanoTrasen Corporate Security squads in combat operations.
   components:
@@ -236,6 +236,9 @@
   - type: GunWieldBonus
     minAngle: -2
     maxAngle: -13
+  - type: GunAimable
+    minAngle: -10
+    maxAngle: -3
   - type: BatteryAmmoProvider
     proto: BulletLaserSMG
     fireCost: 48
@@ -257,7 +260,7 @@
 
 - type: entity
   name: IK 60 Laser Carbine
-  parent: BaseWeaponBlaster
+  parent: [ BaseWeaponBlaster, BaseGunWieldable ]
   id: WeaponLaserCarabine
   description: A powerful laser carbine resembling a rifle, which relies more on battery cartridges than on an integrated power cell. It is used by NanoTrasen Corporate Security squads in combat operations.
   components:
