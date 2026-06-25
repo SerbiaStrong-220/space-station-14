@@ -47,6 +47,7 @@ public sealed partial class MoverController : SharedMoverController // SS220-add
     private readonly List<Entity<InputMoverComponent>> _moversToUpdate = [];
 
     private bool _useParallelMobMover = false; // SS220-make-mover-update-parallel
+    private int _parallelThreadCount; // SS220-make-mover-update-parallel
 
     public override void Initialize()
     {
@@ -65,6 +66,7 @@ public sealed partial class MoverController : SharedMoverController // SS220-add
         _shuttleQuery = GetEntityQuery<ShuttleComponent>();
 
         _configManager.OnValueChanged(CCVars220.ParallelMoverUpdate, x => _useParallelMobMover = x, true); // SS220-add-parallel-mover-update
+        _configManager.OnValueChanged(CCVars220.ParallelMoverThreads, x => _parallelThreadCount = x, true); // SS220-add-parallel-mover-update
     }
 
     private void OnEntityPaused(Entity<ActiveInputMoverComponent> ent, ref EntityPausedEvent args)
@@ -203,10 +205,10 @@ public sealed partial class MoverController : SharedMoverController // SS220-add
             UsedMobMovement.EnsureCapacity(_moversToUpdate.Count);
             foreach (var entity in CollectionsMarshal.AsSpan(_moversToUpdate))
             {
-                UsedMobMovement.Add(entity.Owner, false);
+                UsedMobMovement.TryAdd(entity.Owner, false);
             }
 
-            var movementHandle = ProcessMobMovementParallel(_moversToUpdate, frameTime, 4);
+            var movementHandle = ProcessMobMovementParallel(_moversToUpdate, frameTime, _parallelThreadCount);
 
             while (!movementHandle.WaitOne(0))
             {
