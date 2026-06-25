@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Random.Helpers;
 using Content.Shared.SS220.CCVars;
 using Robust.Shared;
 using Robust.Shared.Configuration;
@@ -40,7 +41,7 @@ public sealed partial class ServerDescriptionChangeSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        if (!_changeDescription)
+        if (!_changeDescription || _cachedDescription.Count == 0)
             return;
 
         if (_gameTiming.CurTime < _nextChangeTime)
@@ -49,7 +50,7 @@ public sealed partial class ServerDescriptionChangeSystem : EntitySystem
         _nextChangeTime = _gameTiming.CurTime + _changeInterval;
         var currentDescription = _random.Pick(_cachedDescription);
 
-        _configuration.SetCVar(CVars.GameDesc, currentDescription.Key);
+        _configuration.SetCVar(CVars.GameDesc, currentDescription);
     }
 
     private void OnEnableSwitched(bool enabled)
