@@ -62,7 +62,11 @@ public sealed partial class ServerDescriptionChangeSystem : EntitySystem
     private void UpdateCachedDescriptions(string input)
     {
         if (string.IsNullOrEmpty(input))
+        {
             _cachedDescription.Clear();
+            return;
+        }
+
 
         var splitInput = input.Split(';');
 
@@ -73,6 +77,9 @@ public sealed partial class ServerDescriptionChangeSystem : EntitySystem
         foreach (var dictionaryFullString in splitInput)
         {
             var splitDictionaryString = dictionaryFullString.Split('|', 2);
+            if (splitDictionaryString.Length < 2)
+                continue;
+
             if (!float.TryParse(splitDictionaryString[0], out var chance))
                 continue;
 
