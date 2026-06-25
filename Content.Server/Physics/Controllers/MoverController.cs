@@ -66,7 +66,7 @@ public sealed partial class MoverController : SharedMoverController // SS220-add
         _shuttleQuery = GetEntityQuery<ShuttleComponent>();
 
         _configManager.OnValueChanged(CCVars220.ParallelMoverUpdate, x => _useParallelMobMover = x, true); // SS220-add-parallel-mover-update
-        _configManager.OnValueChanged(CCVars220.ParallelMoverThreads, x => _parallelThreadCount = x, true); // SS220-add-parallel-mover-update
+        _configManager.OnValueChanged(CCVars220.ParallelMoverThreads, x => _parallelThreadCount = Math.Max(1, x), true); // SS220-add-parallel-mover-update
     }
 
     private void OnEntityPaused(Entity<ActiveInputMoverComponent> ent, ref EntityPausedEvent args)
