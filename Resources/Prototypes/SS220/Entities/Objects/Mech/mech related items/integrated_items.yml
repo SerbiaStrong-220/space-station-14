@@ -72,6 +72,7 @@
     transferAmount: 100
     minTransferAmount: 5
     canChangeTransferAmount: true
+  - type: UseDelay
   - type: UserInterface
     interfaces:
       enum.TransferAmountUiKey.Key:

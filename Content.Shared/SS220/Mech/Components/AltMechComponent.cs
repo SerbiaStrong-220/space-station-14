@@ -1,19 +1,17 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.Components;
+using Content.Shared.SS220.Mech.Systems;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.Mech.Components;
 
-/// <summary>
-/// A large, pilotable machine that has equipment that is
-/// powered via an internal battery.
-/// </summary>
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class AltMechComponent : Component
@@ -113,11 +111,16 @@ public sealed partial class AltMechComponent : Component
     [ViewVariables]
     public readonly string PilotSlotId = "mech-pilot-slot";
 
-    /// <summary>
-    /// The slot the pilot is stored in.
-    /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
     public ContainerSlot TankSlot = default!;
+
+    [DataField]
+    [AutoNetworkedField]
+    public MechPartVisualLayers AttachedColoredSpriteLayer = MechPartVisualLayers.CoreColored;
+
+    [DataField]
+    [AutoNetworkedField]
+    public Color ColoredSpriteColor = Color.White;
 
     [ViewVariables]
     public readonly string TankSlotId = "mech-tank-slot";// for tanks with breathing mix

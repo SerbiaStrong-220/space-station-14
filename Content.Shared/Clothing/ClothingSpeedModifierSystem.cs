@@ -3,6 +3,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Movement.Systems;
+using Content.Shared.SS220.PhysicalParameters;
 using Content.Shared.Standing;
 using Content.Shared.Verbs;
 using Robust.Shared.Containers;
@@ -61,6 +62,14 @@ public sealed class ClothingSpeedModifierSystem : EntitySystem
 
         if (component.Standing != null && !_standing.IsMatchingState(args.Owner, component.Standing.Value))
             return;
+
+        //SS220 add physical parameters begin
+        if (component.AffectedByParameters && TryComp<PhysicalParametersComponent>(args.Owner, out var parametersComp) && parametersComp.ParameterDict.ContainsKey(Parameter.Strength))
+        {
+            args.Args.ModifySpeed(1 - (1 - component.WalkModifier) * Math.Clamp((parametersComp.ParameterDict[Parameter.Strength].Float() - component.MinimalStrengthToWear.Float()) / (component.StrengthRequirementToBeWorn.Float() - component.MinimalStrengthToWear.Float()), 0, 1), 1 - (1 - component.SprintModifier) * Math.Clamp(1 - (parametersComp.ParameterDict[Parameter.Strength].Float() - component.MinimalStrengthToWear.Float()) / (component.StrengthRequirementToBeWorn.Float() - component.MinimalStrengthToWear.Float()), 0, 1));
+            return;
+        }
+        //SS220 add physical parameters end
 
         args.Args.ModifySpeed(component.WalkModifier, component.SprintModifier);
     }

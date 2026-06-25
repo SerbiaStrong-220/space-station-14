@@ -1,0 +1,19 @@
+- type: entity
+  parent: Clothing
+  id: ClothingBackpackExo
+  name: exosuit powerpack
+  description: This power module allows your exoskeleton to operate.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Misc/industrial_exosuit_backpack.rsi
+    state: icon
+  - type: Item
+    size: Huge
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - back
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+

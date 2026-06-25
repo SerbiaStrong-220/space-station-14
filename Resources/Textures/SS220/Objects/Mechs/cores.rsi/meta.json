@@ -12,6 +12,10 @@
         "directions": 4
     },
     {
+        "name": "basicloadercolor",
+        "directions": 4
+    },
+    {
         "name": "basiclight",
         "directions": 4
     },

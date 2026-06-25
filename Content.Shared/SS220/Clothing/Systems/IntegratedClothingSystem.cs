@@ -30,7 +30,7 @@ public sealed class IntegratedClothingSystem : EntitySystem
         SubscribeLocalEvent<IntegratedClothingComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<IntegratedClothingComponent, BeingEquippedAttemptEvent>(OnEquipAttempt);
         SubscribeLocalEvent<IntegratedClothingComponent, ClothingGotEquippedEvent>(OnGotEquipped);
-        SubscribeLocalEvent<IntegratedClothingComponent, GotUnequippedEvent>(OnToggleableUnequip);
+        SubscribeLocalEvent<IntegratedClothingComponent, GotUnequippedEvent>(OnIntegratedUnequip);
 
         SubscribeLocalEvent<IntegratedToClothingComponent, InteractHandEvent>(OnInteractHand);
         SubscribeLocalEvent<IntegratedToClothingComponent, GotUnequippedEvent>(OnAttachedUnequip);
@@ -58,7 +58,7 @@ public sealed class IntegratedClothingSystem : EntitySystem
         args.Handled = true;
     }
 
-    private void OnToggleableUnequip(Entity<IntegratedClothingComponent> ent, ref GotUnequippedEvent args)
+    private void OnIntegratedUnequip(Entity<IntegratedClothingComponent> ent, ref GotUnequippedEvent args)
     {
         if (_timing.ApplyingState)
             return;

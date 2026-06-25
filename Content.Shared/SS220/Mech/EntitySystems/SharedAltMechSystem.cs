@@ -11,6 +11,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Flash;
 using Content.Shared.Flash.Components;
 using Content.Shared.Gravity;
+using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Mech;
@@ -21,6 +22,7 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Radio.Components;
 using Content.Shared.Random.Helpers;
+using Content.Shared.SprayPainter.Components;
 using Content.Shared.SS220.AltBlocking;
 using Content.Shared.SS220.ArmorBlock;
 using Content.Shared.SS220.Mech.Components;
@@ -34,7 +36,6 @@ using Content.Shared.Weapons.Melee;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
-using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 
@@ -72,6 +73,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         SubscribeLocalEvent<AltMechComponent, MechPilotRelayedEvent<FlashAttemptEvent>>(OnPilotFlashed);
         SubscribeLocalEvent<AltMechComponent, FlashAttemptEvent>(OnMechFlashed);
         SubscribeLocalEvent<AltMechComponent, GetEyeProtectionEvent>(OnMechGetEyeProtection);
+        SubscribeLocalEvent<AltMechComponent, AfterInteractUsingEvent>(OnMechInteractedWith);
 
         SubscribeLocalEvent<AltMechPilotComponent, GetMeleeWeaponEvent>(OnGetMeleeWeapon);
         SubscribeLocalEvent<AltMechPilotComponent, AttackAttemptEvent>(OnAttackAttempt);
@@ -176,6 +178,21 @@ public abstract partial class SharedAltMechSystem : EntitySystem
             return;
 
         args.Entities.Add(pilot.Value);
+    }
+
+    protected virtual void OnMechInteractedWith(Entity<AltMechComponent> ent, ref AfterInteractUsingEvent args)
+    {
+        if (!TryComp<SprayPainterComponent>(args.Used, out var painterComp) || painterComp.SelectedDecalColor == null)
+            return;
+
+        if (painterComp.SelectedDecalColor != null)
+        {
+            ent.Comp.ColoredSpriteColor = (Color)painterComp.SelectedDecalColor;
+            return;
+        }
+
+        if (painterComp.ColorPalette.ContainsKey(painterComp.PickedColor))
+            ent.Comp.ColoredSpriteColor = painterComp.ColorPalette[painterComp.PickedColor];
     }
 
     private void OnProjectileHit(Entity<AltMechComponent> ent, ref ProjectileBlockAttemptEvent args)
@@ -802,4 +819,18 @@ public record struct RefreshOpticHudEvent<T>() where T : IComponent
     public List<T> Components = new();
 }
 
-
+public enum MechPartVisualLayers : byte
+{
+    Core = 0,
+    CoreColored = 1,
+    Head = 2,
+    HeadColored = 3,
+    Chassis = 4,
+    ChassisColored = 5,
+    RightArm = 6,
+    RightArmColored = 7,
+    LeftArm = 8,
+    LeftArmColored = 9,
+    Power = 10,
+    PowerColored = 11
+}

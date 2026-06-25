@@ -8,6 +8,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Content.Client.UserInterface.Fragments;
 using Content.Shared.Atmos.Components;
+using Content.Shared.SS220.Mech.Systems;
 
 namespace Content.Client.SS220.Mech.Ui;
 

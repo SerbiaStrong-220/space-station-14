@@ -23,3 +23,94 @@
     containers:
       ballistic-ammo: !type:Container
         ents: []
+
+- type: entity
+  id: GrapplingHookLarge
+  name: grappling hook
+  parent: GrapplingHook
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Projectile
+      deleteOnCollide: false
+      damage:
+        types:
+          Piercing: 35
+
+- type: entity
+  name: large grappling gun
+  parent: WeaponGrapplingGun
+  id: WeaponGrapplingGunMech
+  components:
+    - type: EmitSoundOnLand
+      sound:
+        path: /Audio/SS220/Effects/Drop/revolver.ogg
+        params:
+          volume: 2
+    - type: Item
+      size: Large
+    - type: AmmoCounter
+    - type: GrapplingGun
+    - type: Gun
+      soundGunshot: /Audio/Weapons/Guns/Gunshots/harpoon.ogg
+      fireRate: 0.5
+      clumsyProof: true
+    - type: BasicEntityAmmoProvider
+      proto: GrapplingHookLarge
+      capacity: 1
+    - type: Sprite
+      sprite: Objects/Weapons/Guns/Launchers/grappling_gun.rsi
+      layers:
+        - state: base
+        - state: base-unshaded
+          map: [ "unshaded" ]
+          visible: true
+    - type: UseDelay
+      delay: 1.5
+    - type: Appearance
+    - type: GenericVisualizer
+      visuals:
+        enum.TetherVisualsStatus.Key:
+          unshaded:
+            True: { state: base-unshaded }
+            False: { state: base-unshaded-off }
+    - type: PacifismAllowedGun
+
+- type: entity
+  name: large machete
+  parent: Machete
+  id: MacheteMech
+  description: A giant blade, much larger than any longsword. A fitting weapon to kill dragons..
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/machete.rsi
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 50
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: Item
+    storedSprite:
+      state: storage
+      sprite: Objects/Weapons/Melee/machete.rsi
+    shape:
+    - 0,0,0,2
+  - type: ItemExtension
+    minimalStrengthToPickUp: 1.5
+    strengthRequirementToBeUsed: 3
+  - type: DisarmMalus
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/blade.ogg
+      params:
+        volume: 2
+  - type: LandAtCursor
+  - type: ThrowingAngle
+    angle: 225
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 45

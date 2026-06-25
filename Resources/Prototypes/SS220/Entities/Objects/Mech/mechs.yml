@@ -144,8 +144,16 @@
   description: Name is self-speaking - this is a powerloader frame which has limited equipment space, high mass, cannot be sealed and provides little to no protection to the user but is still better than nothing
   components:
   - type: Sprite
-    sprite: SS220/Objects/Mechs/cores.rsi
-    state: basicloader
+    layers:
+      - sprite: SS220/Objects/Mechs/cores.rsi
+        state: basicloader
+        map: [ "enum.MechPartVisualLayers.Core" ]
+        visible: true
+      - sprite: SS220/Objects/Mechs/cores.rsi
+        state: basicloadercolor
+        map: [ "enum.MechPartVisualLayers.CoreColored" ]
+        color: "#ff6e52"
+        visible: true
     noRot: true
   - type: AltArmor # Ah yes,my beloved СБЭУ
     tresholddict:
@@ -168,6 +176,9 @@
       Heat: 7
       Slash: 15
       Shock: 30
+    attachedColoredSprite:
+      sprite: SS220/Objects/Mechs/cores.rsi
+      state: basicloadercolor
   - type: AltMech
     baseState: basicloader
     openState: basicloader

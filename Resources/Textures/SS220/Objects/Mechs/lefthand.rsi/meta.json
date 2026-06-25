@@ -12,8 +12,12 @@
       "directions": 4
     },
     {
-      "name": "hydraulicdrill",
-      "directions": 4
+        "name": "hydraulicdrill",
+        "directions": 4
+    },
+    {
+        "name": "hydraulicdrillcolor",
+        "directions": 4
     },
     {
       "name": "servo",

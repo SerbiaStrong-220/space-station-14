@@ -1,4 +1,5 @@
-﻿using Robust.Shared.GameStates;
+using Content.Shared.FixedPoint;
+using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Clothing;
@@ -15,6 +16,17 @@ public sealed partial class ClothingSpeedModifierComponent : Component
 
     [DataField]
     public float SprintModifier = 1.0f;
+
+    //SS220 add physical parameters begin
+    [DataField]
+    public bool AffectedByParameters = false;
+
+    [DataField]
+    public FixedPoint2 MinimalStrengthToWear = 0;
+
+    [DataField]
+    public FixedPoint2 StrengthRequirementToBeWorn = 2;
+    //SS220 add physical parameters end
 
     /// <summary>
     /// Defines if the speed modifier requires <see cref="ItemToggleComponent"/> activation to apply.

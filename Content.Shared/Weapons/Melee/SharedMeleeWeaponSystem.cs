@@ -616,7 +616,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         var weaponAttackEvent = new WeaponAttackEvent(user, target.Value, AttackType.LIGHT);
         RaiseLocalEvent(meleeUid, weaponAttackEvent);
 
-        var attackerEvent = new MeleeAttackerEvent(user, target.Value, damage);
+        var attackerEvent = new MeleeAttackerEvent(meleeUid, target.Value, damage);
         RaiseLocalEvent(user, ref attackerEvent);
 
         if (attackerEvent.ModifiedDamage != new DamageSpecifier())
@@ -813,7 +813,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             var weaponAttackEvent = new WeaponAttackEvent(user, entity, AttackType.HEAVY);
             RaiseLocalEvent(meleeUid, weaponAttackEvent);
 
-            var attackerEvent = new MeleeAttackerEvent(user, entity, damage);
+            var attackerEvent = new MeleeAttackerEvent(meleeUid, entity, damage);
             RaiseLocalEvent(user, ref attackerEvent);
 
             if (attackerEvent.ModifiedDamage != new DamageSpecifier())

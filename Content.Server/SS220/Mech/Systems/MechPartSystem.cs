@@ -14,6 +14,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Movement.Components;
 using Content.Shared.Power.Components;
+using Content.Shared.SprayPainter.Components;
 using Content.Shared.SS220.Mech.Components;
 using Content.Shared.SS220.Mech.Parts.Components;
 using Content.Shared.SS220.Mech.Systems;
@@ -58,6 +59,8 @@ public sealed class MechPartSystem : EntitySystem
         SubscribeLocalEvent<MechPartComponent, MechPartRelayedEvent<FlashAttemptEvent>>(OnFlashAttempt);
 
         SubscribeLocalEvent<MechPartComponent, DamageChangedEvent>(OnDamageChanged);
+
+        SubscribeLocalEvent<MechPartComponent, AfterInteractUsingEvent>(OnMechInteractedWith);
     }
 
     private void OnPartDestroyed(Entity<MechPartComponent> ent, ref DestructionEventArgs args)
@@ -332,5 +335,20 @@ public sealed class MechPartSystem : EntitySystem
         ent.Comp.Integrity = FixedPoint2.Clamp(integrity, 0, ent.Comp.MaxIntegrity);
 
         Dirty(ent);
+    }
+
+    private void OnMechInteractedWith(Entity<MechPartComponent> ent, ref AfterInteractUsingEvent args)
+    {
+        if (!TryComp<SprayPainterComponent>(args.Used, out var painterComp) || painterComp.SelectedDecalColor == null)
+            return;
+
+        if (painterComp.SelectedDecalColor != null)
+        {
+            ent.Comp.ColoredSpriteColor = (Color)painterComp.SelectedDecalColor;
+            return;
+        }
+
+        if (painterComp.ColorPalette.ContainsKey(painterComp.PickedColor))
+            ent.Comp.ColoredSpriteColor = painterComp.ColorPalette[painterComp.PickedColor];
     }
 }

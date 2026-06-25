@@ -58,4 +58,12 @@ public sealed partial class MechPartComponent : Component
     [DataField]
     [AutoNetworkedField]
     public SpriteSpecifier? AttachedSprite;
+
+    [DataField]
+    [AutoNetworkedField]
+    public SpriteSpecifier? AttachedColoredSprite;
+
+    [DataField]
+    [AutoNetworkedField]
+    public Color ColoredSpriteColor = Color.White;
 }
