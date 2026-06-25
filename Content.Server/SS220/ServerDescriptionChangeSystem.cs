@@ -67,12 +67,7 @@ public sealed partial class ServerDescriptionChangeSystem : EntitySystem
             return;
         }
 
-
         var splitInput = input.Split(';');
-
-        if (splitInput.Length == 0)
-            return;
-
         var parsedAny = false;
         foreach (var dictionaryFullString in splitInput)
         {
