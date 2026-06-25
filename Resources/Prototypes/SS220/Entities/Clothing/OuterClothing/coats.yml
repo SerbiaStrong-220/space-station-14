@@ -239,11 +239,10 @@
     sprite: SS220/Clothing/OuterClothing/Coats/bomberhos.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Coats/bomberhos.rsi
-  - type: ContainerContainer
-    containers:
-      item_radio: !type:ContainerSlot { }
-      storagebase: !type:Container
-        ents: [ ]
+  - type: Item
+    size: Normal
+    shape:
+    - 0,0,1,2
 
 - type: entity
   parent: ClothingUniformJumpskirtHosFormal

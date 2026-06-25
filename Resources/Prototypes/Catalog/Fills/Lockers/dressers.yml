@@ -93,7 +93,7 @@
         - id: ClothingUniformJumpskirtHoSAlt
         - id: ClothingUniformJumpsuitHoSAlt
         - id: ClothingUniformJumpskirtHosFormal
-        - id: ClothingUniformJumpsuitHosFormal
+#        - id: ClothingUniformJumpsuitHosFormal #SS220 Formal coat for HoS
         - id: ClothingOuterWinterHoS
 #        - id: ClothingNeckCloakHos #SS220-cloak-dress-tweak
         - id: ClothingHeadHatCapHoS # Corvax-SecFashion
