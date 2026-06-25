@@ -26,21 +26,21 @@ namespace Content.Shared.SS220.AltBlocking;
 
 public sealed partial class SharedAltBlockingSystem : EntitySystem
 {
+    [Dependency] private SharedHandsSystem _handsSystem = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private ISharedPlayerManager _playerManager = default!;
+
     private static readonly LocId ActiveBlockingOwnerLocale = "actively-blocking-attack";
     private static readonly LocId ActiveBlockingOthersLocale = "actively-blocking-others";
     private static readonly LocId StopActiveBlockingOwnerLocale = "actively-blocking-stop";
     private static readonly LocId StopActiveBlockingOthersLocale = "actively-blocking-stop-others";
     private static readonly LocId BlockShotLocale = "block-shot";
     private static readonly LocId BlockThrowingLocale = "adthrowing-block";
-
-    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
 
     public override void Initialize()
     {

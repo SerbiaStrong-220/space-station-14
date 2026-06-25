@@ -6,11 +6,12 @@ using Content.Shared.SS220.Teleport;
 
 namespace Content.Shared.SS220.SelfLinkedTeleport;
 
-public abstract class SharedSelfLinkedTeleportSystem : EntitySystem
+public abstract partial class SharedSelfLinkedTeleportSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedPointLightSystem _lights = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedPointLightSystem _lights = default!;
+
     public override void Initialize()
     {
         base.Initialize();

@@ -10,8 +10,8 @@ namespace Content.Server.SS220.RadiationDecrease;
 
 public sealed partial class RadiationDecreaseSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly RadiationSystem _radiation = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private RadiationSystem _radiation = default!;
 
     public override void Initialize()
     {

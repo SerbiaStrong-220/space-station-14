@@ -15,7 +15,7 @@ namespace Content.Client.SS220.Arena.Lobby;
 [GenerateTypedNameReferences]
 public sealed partial class ArenaLobbyWindow : DefaultWindow
 {
-    [Dependency] private readonly ILocalizationManager _loc = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
 
     private const string CategoryAll = "";
 

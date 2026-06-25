@@ -15,15 +15,15 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.CultYogg.Cultists;
 
-public abstract class SharedCultYoggSystem : EntitySystem
+public abstract partial class SharedCultYoggSystem : EntitySystem
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedCultYoggCorruptedSystem _cultYoggCorruptedSystem = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedCultYoggCorruptedSystem _cultYoggCorruptedSystem = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     public override void Initialize()
     {

@@ -47,6 +47,13 @@ public sealed partial class SurgeryGraphEdge : ISerializationHooks
     public float? Delay { get; private set; }
 
     /// <summary>
+    /// Defines if edge will have less benefits from performer skill level
+    /// Does nothing when edge completion is slowed by skill level
+    /// </summary>
+    [DataField]
+    public bool DeceaseSkillBonus { get; private set; } = false;
+
+    /// <summary>
     /// This sound will be played when graph gets to target node
     /// </summary>
     [DataField("sound")]

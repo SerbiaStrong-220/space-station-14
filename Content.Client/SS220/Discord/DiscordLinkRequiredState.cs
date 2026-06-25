@@ -10,10 +10,10 @@ using Timer = Robust.Shared.Timing.Timer;
 
 namespace Content.Client.SS220.Discord;
 
-public sealed class DiscordLinkRequiredState : State
+public sealed partial class DiscordLinkRequiredState : State
 {
-    [Dependency] private readonly IUserInterfaceManager _userInterfaceManager = default!;
-    [Dependency] private readonly IClientNetManager _netManager = default!;
+    [Dependency] private IUserInterfaceManager _userInterfaceManager = default!;
+    [Dependency] private IClientNetManager _netManager = default!;
 
     private DiscordLinkRequiredGui? _linkGui;
     private readonly CancellationTokenSource _timerCancel = new();

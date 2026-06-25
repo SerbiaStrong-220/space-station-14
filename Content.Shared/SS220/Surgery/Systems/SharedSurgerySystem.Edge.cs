@@ -33,7 +33,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
                 {
                     var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
 
-                    if (requirement.SatisfiesRequirements(requirementTarget, EntityManager))
+                    if (requirement.SatisfiesRequirements(requirementTarget, user, EntityManager))
                         continue;
 
                     meetRequirement = false;
@@ -80,7 +80,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         {
             var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
 
-            if (requirement.SatisfiesRequirements(requirementTarget, EntityManager))
+            if (requirement.SatisfiesRequirements(requirementTarget, user, EntityManager))
                 continue;
 
             var reason = requirement.RequirementFailureReason(requirementTarget, _prototype, EntityManager);
@@ -114,7 +114,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         {
             var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
 
-            if (requirement.SatisfiesRequirements(requirementTarget, EntityManager))
+            if (requirement.SatisfiesRequirements(requirementTarget, user, EntityManager))
                 continue;
 
             return false;
@@ -129,7 +129,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         {
             var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
 
-            if (requirement.MeetRequirement(requirementTarget, EntityManager))
+            if (requirement.MeetRequirement(requirementTarget, user, EntityManager))
                 continue;
 
             return false;
@@ -139,7 +139,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         {
             var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
 
-            if (requirement.MeetRequirement(requirementTarget, EntityManager))
+            if (requirement.MeetRequirement(requirementTarget, user, EntityManager))
                 continue;
 
             var reason = requirement.RequirementFailureReason(requirementTarget, _prototype, EntityManager);
@@ -157,7 +157,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         {
             var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
 
-            if (requirement.SatisfiesRequirements(requirementTarget, EntityManager))
+            if (requirement.SatisfiesRequirements(requirementTarget, user, EntityManager))
                 continue;
 
             return new PerformSurgeryEdgeInfo(edge.Target, false, null);
@@ -167,7 +167,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         {
             var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
 
-            if (requirement.SatisfiesRequirements(requirementTarget, EntityManager))
+            if (requirement.SatisfiesRequirements(requirementTarget, user, EntityManager))
                 continue;
 
             var reason = requirement.RequirementFailureReason(requirementTarget, _prototype, EntityManager);

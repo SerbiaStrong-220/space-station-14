@@ -17,7 +17,7 @@ namespace Content.Client.SS220.Guidebook.Controls;
 [UsedImplicitly, GenerateTypedNameReferences]
 public sealed partial class SkillTreePrototypeShower : BoxContainer, IDocumentTag
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private readonly ISawmill _sawmill;
 
