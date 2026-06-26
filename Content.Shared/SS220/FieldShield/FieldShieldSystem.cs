@@ -226,6 +226,9 @@ public sealed partial class FieldShieldProviderSystem : EntitySystem
 
     private bool TryBlockDamage(Entity<FieldShieldComponent> entity, EntityUid? attacker, ref DamageSpecifier damage)
     {
+        if (damage.GetTotal() < entity.Comp.ShieldData.DamageThreshold)
+            return false;
+
         UpdateShieldTimer(entity);
 
         if (entity.Comp.ShieldCharge <= 0)
