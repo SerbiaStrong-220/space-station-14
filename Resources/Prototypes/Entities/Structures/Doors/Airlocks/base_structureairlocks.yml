@@ -154,6 +154,7 @@
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: StrongMetallic
+    piercingThreshold: 18 #SS220 weapon overhaul
   - type: RCDDeconstructable
     cost: 6
     delay: 8

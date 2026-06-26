@@ -35,7 +35,7 @@
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallic
-    piercingThreshold: 15 #SS220 weapon overhaul
+    piercingThreshold: 20 #SS220 weapon overhaul
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -600,7 +600,7 @@
     graph: Girder
     node: reinforcedWall
   - type: Damageable
-    piercingThreshold: 8
+    piercingThreshold: 14 #SS220 weapon overhaul
     damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallicStrong
   - type: Destructible
@@ -859,8 +859,6 @@
   - type: Icon
     sprite: SS220/Structures/Walls/shuttle_diagonal.rsi #ss220-walls-update
     state: state0
-  - type: Reflect
-    reflectProb: 1
   - type: Pullable
   - type: Airtight
     noAirWhenFullyAirBlocked: false
@@ -884,6 +882,7 @@
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallicStrong
+    piercingThreshold: 12 #SS220 weapon overhaul
   - type: Destructible
     thresholds:
     - trigger:
@@ -922,6 +921,7 @@
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallicStrong
+    piercingThreshold: 12 #SS220 weapon overhaul
   - type: Destructible
     thresholds:
     - trigger:
@@ -971,8 +971,6 @@
           3: { state: shuttle_construct-3, visible: true}
           4: { state: shuttle_construct-4, visible: true}
           5: { state: shuttle_construct-5, visible: true}
-  - type: Reflect
-    reflectProb: 1
   - type: Fixtures
     fixtures:
       fix1:
