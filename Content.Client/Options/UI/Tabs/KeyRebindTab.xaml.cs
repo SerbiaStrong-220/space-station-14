@@ -196,6 +196,7 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(ContentKeyFunctions.UseItemInHand);
             AddButton(ContentKeyFunctions.AltUseItemInHand);
             AddButton(ContentKeyFunctions.UseGunInHand);//SS220 weapon overhaul
+            AddButton(ContentKeyFunctions.ToggleOffset);//SS220 weapon overhaul
             AddButton(ContentKeyFunctions.ToggleActiveBlocking);//SS220 shield rework
             AddButton(ContentKeyFunctions.ActivateItemInWorld);
             AddButton(ContentKeyFunctions.AltActivateItemInWorld);
