@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Numerics;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Alert;
 using Content.Shared.Buckle.Components;
@@ -11,10 +10,12 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Inventory;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Item;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.MouseRotator;
+using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
@@ -30,6 +31,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using System.Numerics;
 
 namespace Content.Shared.SS220.Grab;
 
@@ -347,6 +349,12 @@ public abstract partial class SharedGrabSystem : EntitySystem
         if (checkCanPull)
             return _pulling.CanPull(grabber, grabbable, ignoreHands: true);
 
+        var attemptEv = new GrabArremptEvent();
+        RaiseLocalEvent(grabbable.Owner, ref attemptEv);
+
+        if (attemptEv.Cancelled)
+            return false;
+
         return true;
     }
 
@@ -559,3 +567,11 @@ public abstract partial class SharedGrabSystem : EntitySystem
     }
     #endregion
 }
+
+[ByRefEvent]
+public record struct GrabArremptEvent(bool cancelled = false) : IInventoryRelayEvent
+{
+    public bool Cancelled = cancelled;
+    SlotFlags IInventoryRelayEvent.TargetSlots => ~SlotFlags.POCKET;
+}
+

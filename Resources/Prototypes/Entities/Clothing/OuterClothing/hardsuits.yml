@@ -930,6 +930,7 @@
   - type: TemperatureProtection #ss-220 armReb
     heatingCoefficient: 0.001 #ss-220 armReb
     coolingCoefficient: 0.001 #ss220 armReb
+  - type: GrabImmuneProvider #SS220 add juggernaut grab immunity
   - type: ExplosionResistance
     damageCoefficient: 0.2  #ss-220 armReb
   #- type: StaminaResistance # Should not have stamina resistance, this is purely so people know it was not forgotten.
@@ -955,13 +956,13 @@
     modes:
       any:
         damageThreshold: 7 #There are no player attacks a nuke ops will care about below this threshold
-        shieldMaxCharge: 1
+        shieldMaxCharge: 6
         shieldSprite:
           sprite: SS220/Effects/field_shield.rsi
           state: red
       high:
         damageThreshold: 40 #Nothing except 15x24 and 18,5
-        shieldMaxCharge: 1
+        shieldMaxCharge: 6
         shieldSprite:
           sprite: SS220/Effects/field_shield.rsi
           state: red
