@@ -138,8 +138,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 6 #ss220 handmade gun buff
-        Slash: 7 #ss220 handmade gun buff
+        Piercing: 12 #ss220 handmade gun buff
 
 - type: entity
   parent: PelletShotgunImprovised

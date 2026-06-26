@@ -153,9 +153,11 @@ public sealed class ProjectileSystem : SharedProjectileSystem
 
             var resultThreshold = FixedPoint2.Clamp(targetThreshold - projectile.Comp.Damage.ArmourPiercing, FixedPoint2.Zero, FixedPoint2.Abs(targetThreshold + projectile.Comp.Damage.ArmourPiercing));
 
-            //projectile.Comp.Damage.ArmourPiercing = projectile.Comp.Damage.ArmourPiercing - targetThreshold;
+            var leftToRemove = FixedPoint2.Max(FixedPoint2.Zero, targetThreshold - projectile.Comp.Damage.ArmourPiercing);
 
-            //projectile.Comp.Damage.DamageDict[requiredDamageType] = FixedPoint2.Clamp(projectile.Comp.Damage.DamageDict[requiredDamageType] - resultThreshold, FixedPoint2.Zero, projectile.Comp.Damage.DamageDict[requiredDamageType] + resultThreshold);
+            projectile.Comp.Damage.ArmourPiercing = FixedPoint2.Max(FixedPoint2.Zero, projectile.Comp.Damage.ArmourPiercing - targetThreshold);
+
+            projectile.Comp.Damage.DamageDict[requiredDamageType] = FixedPoint2.Max(projectile.Comp.Damage.DamageDict[requiredDamageType] - leftToRemove, FixedPoint2.Zero);
 
             if (projectile.Comp.Damage[requiredDamageType] < resultThreshold)
                 stopPenetration = true;
