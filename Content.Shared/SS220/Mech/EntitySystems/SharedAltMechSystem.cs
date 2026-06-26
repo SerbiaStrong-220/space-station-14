@@ -41,9 +41,6 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.Mech.Systems;
 
-/// <summary>
-/// Handles all of the interactions, UI handling, and items shennanigans for <see cref="MechComponent"/>
-/// </summary>
 public abstract partial class SharedAltMechSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;

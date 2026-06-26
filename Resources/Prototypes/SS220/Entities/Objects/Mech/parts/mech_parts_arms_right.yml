@@ -383,3 +383,60 @@
         node: start
       - !type:DoActsBehavior
         acts: ["Destruction"]
+
+- type: entity
+  id: RightChemicalMultitoolArm
+  parent: BaseMechRightArm
+  name: chemical processing module (right)
+  description: A large and bulky module that hosts an entire chemical processing complex with an external manipulator. This one fits into a standard mech's right arm slot
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: mecha_clamp
+  - type: MechArm
+    hands:
+    - hand:
+        location: Right
+        whitelist:
+          sizes:
+          - Tiny
+          - Small
+          - Normal
+        damageOverride:
+          types:
+            Slash: 5
+        strengthModifier: 0.3
+        attackRate: 2.5
+        altDisarm: false
+        autoAttack: true
+    - hand:
+    - hand:
+        location: Right
+        strengthModifier: 0.8
+      item: ChemMasterPortable
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-big
+      right:
+      - state: inhand-right-big
+  - type: MechPart
+    integrity: 65
+    maxIntegrity: 65
+    ownMass: 40
+    attachedSprite:
+      sprite: SS220/Objects/Mechs/righthand.rsi
+      state: medicalmultitool
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 65
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
