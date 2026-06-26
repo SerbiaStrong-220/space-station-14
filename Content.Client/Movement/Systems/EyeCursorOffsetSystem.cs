@@ -33,6 +33,9 @@ public sealed partial class EyeCursorOffsetSystem : EntitySystem
         //SS220 weapon overhaul begin
         if (TryComp<EyeOffsetInCombatModeComponent>(uid, out var combatOffsetComp))
         {
+            if (!combatOffsetComp.Online)
+                return;
+
             if (!TryComp<CombatModeComponent>(uid, out var combatModeComp) || !combatModeComp.IsInCombatMode)
                 return;
 

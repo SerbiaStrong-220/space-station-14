@@ -4,9 +4,10 @@ using Robust.Shared.GameStates;
 namespace Content.Shared.SS220.EyeOffsetInCombatMode;
 
 /// <summary>
-/// Does whst it's name says - modifies the offset when in combat mode
+/// Does what it's name says - modifies the offset when in combat mode
 /// </summary>
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent]
+[NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class EyeOffsetInCombatModeComponent : Component
 {
     /// <summary>
@@ -28,4 +29,7 @@ public sealed partial class EyeOffsetInCombatModeComponent : Component
     /// </summary>
     [DataField]
     public float PvsIncrease = 0.6f;
+
+    [DataField, AutoNetworkedField]
+    public bool Online = true;
 }

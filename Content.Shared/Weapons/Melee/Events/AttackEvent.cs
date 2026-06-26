@@ -40,6 +40,10 @@ namespace Content.Shared.Weapons.Melee.Events
 
         public DamageSpecifier BonusDamage = new();
 
+        //SS220 extended melee logic begin
+        public List<DamageModifierSet> ModifiersList = new();
+        //SS220 extended melee logic end
+
         public AttackedEvent(EntityUid used, EntityUid user, EntityCoordinates clickLocation)
         {
             Used = used;

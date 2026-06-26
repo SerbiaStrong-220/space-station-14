@@ -52,7 +52,7 @@ public sealed partial class FieldShieldProviderSystem : EntitySystem
 
         SubscribeLocalEvent<FieldShieldComponent, ProjectileBlockAttemptEvent>(OnShieldUserCollide);
         SubscribeLocalEvent<FieldShieldComponent, HitscanBlockAttemptEvent>(OnShieldUserHitscan);
-        SubscribeLocalEvent<FieldShieldComponent, MeleeHitEvent>(OnShieldUserMeleeHit);
+        SubscribeLocalEvent<FieldShieldComponent, AttackedEvent>(OnShieldUserMeleeHit);
         SubscribeLocalEvent<FieldShieldComponent, ThrowableProjectileBlockAttemptEvent>(OnBlockThrownProjectile);
 
         SubscribeLocalEvent<FieldShieldProviderComponent, EmpPulseEvent>(OnFieldShieldProviderEmpPulse);
@@ -215,7 +215,7 @@ public sealed partial class FieldShieldProviderSystem : EntitySystem
             args.Cancelled = true;
     }
 
-    private void OnShieldUserMeleeHit(Entity<FieldShieldComponent> ent, ref MeleeHitEvent args)
+    private void OnShieldUserMeleeHit(Entity<FieldShieldComponent> ent, ref AttackedEvent args)
     {
         if (ent.Comp.ShieldCharge > 0)
         {

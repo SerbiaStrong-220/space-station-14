@@ -590,7 +590,6 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         // Raise event before doing damage so we can cancel damage if the event is handled
         var hitEvent = new MeleeHitEvent(new List<EntityUid> { target.Value }, user, meleeUid, damage, null);
         RaiseLocalEvent(meleeUid, hitEvent);
-        RaiseLocalEvent(target.Value, hitEvent);//SS220 melee weapon logic extension
 
         if (hitEvent.Handled)
             return;
@@ -622,6 +621,9 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         if (attackedEvent.Cancelled)
             return;
         // SS220 hook attack event end
+
+        foreach (var list in attackedEvent.ModifiersList)//SS220 extended weapon logic
+            hitEvent.ModifiersList.Add(list);//SS220 extended weapon logic
 
         var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEvent.BonusDamage, hitEvent.ModifiersList);
 
@@ -813,6 +815,9 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             if (attackedEvent.Cancelled)
                 continue;
             // SS220 hook attack event end
+
+            foreach (var list in attackedEvent.ModifiersList)//SS220 extended weapon logic
+                hitEvent.ModifiersList.Add(list);//SS220 extended weapon logic
 
             var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEvent.BonusDamage, hitEvent.ModifiersList);
 
