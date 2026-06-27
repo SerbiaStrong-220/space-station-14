@@ -954,10 +954,15 @@
     state: raw_patty
   - type: InternalTemperature
     conductivity: 0.43
-  - type: Construction
-    graph: CookedPatty
-    node: start
-    defaultTarget: cooked meat patty
+    #SS220-grillables-update begin
+#  - type: Construction
+#    graph: CookedPatty
+#    node: start
+#    defaultTarget: cooked meat patty
+  - type: Grillable
+    timeToCook: 30
+    cookingResult: FoodMeatPattyCooked
+    #SS220-grillables-update end
   - type: Item
     size: Tiny
     shape:
