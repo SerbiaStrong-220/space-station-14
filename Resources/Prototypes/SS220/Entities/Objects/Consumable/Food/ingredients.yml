@@ -219,3 +219,28 @@
     flavors:
     - sweet
     - bitter
+
+# cooked mushroom
+- type: entity
+  name: cooked chanterelle cluster
+  parent: FoodProduceBase
+  id: FoodMushroomCooked
+  description: Cooked Cantharellus Cibarius, gatherer's delight.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - mushroom
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 6
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/mushroom.rsi
+    state: mushroom-cooked
+  - type: Tag
+    tags:
+    - Vegetable
+    - Mushroom
+    - Cooked

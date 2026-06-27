@@ -85,3 +85,14 @@
   tags:
   - Cooked
   - Mushroom
+
+# mushroom
+- type: foodSequenceElement
+  id: MushroomBurger
+  name: food-sequence-burger-content-mushroom
+  sprites:
+  - sprite: SS220/Objects/Consumable/Food/mushroom.rsi
+    state: mushroom-cooked
+  tags:
+  - Cooked
+  - Mushroom
