@@ -45,4 +45,4 @@
         Piercing: 20
       armourPiercing: -40
   - type: IgniteOnCollide
-    fireStacks: 1.3
+    fireStacks: 1.7

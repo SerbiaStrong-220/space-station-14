@@ -158,9 +158,6 @@ public sealed class ProjectileSystem : SharedProjectileSystem
             projectile.Comp.Damage.ArmourPiercing = FixedPoint2.Max(FixedPoint2.Zero, projectile.Comp.Damage.ArmourPiercing - targetThreshold);
 
             projectile.Comp.Damage.DamageDict[requiredDamageType] = FixedPoint2.Max(projectile.Comp.Damage.DamageDict[requiredDamageType] - leftToRemove, FixedPoint2.Zero);
-
-            if (projectile.Comp.Damage[requiredDamageType] < resultThreshold)
-                stopPenetration = true;
         }
         if (stopPenetration)
             return false;

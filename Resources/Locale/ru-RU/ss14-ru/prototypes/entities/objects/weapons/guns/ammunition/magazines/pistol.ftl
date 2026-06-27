@@ -38,4 +38,6 @@ ent-MagazinePistolSubMachineGunPractice = магазин ПП (9x20 учебны
     .desc = { ent-BaseMagazinePistolSubMachineGun.desc }
 ent-MagazinePistolSubMachineGunUranium = магазин ПП (9x20 урановые)
     .desc = { ent-BaseMagazinePistolSubMachineGun.desc }
+ent-MagazinePistolSubMachineGunIncendiary = магазин ПП (9x20 трассирующие)
+    .desc = { ent-BaseMagazinePistolSubMachineGun.desc }
 #SS220-weapon-overhaul-end

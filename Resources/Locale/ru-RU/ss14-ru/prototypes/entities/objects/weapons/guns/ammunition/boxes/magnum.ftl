@@ -13,4 +13,6 @@ ent-MagazineBoxMagnumUranium = коробка патронов (11,5х32 маг�
     .desc = { ent-BaseMagazineBoxMagnum.desc }
 ent-MagazineBoxMagnumAP = коробка патронов (11,5х32 магнум бронебойные)
     .desc = { ent-BaseMagazineBoxMagnum.desc }
+ent-MagazineBoxMagnumHP = коробка патронов (11,5х32 магнум экспансивные)
+    .desc = { ent-BaseMagazineBoxMagnum.desc }
 #SS220-weapon-overhaul-end
