@@ -92,6 +92,7 @@
 - type: foodSequenceElement
   id: MushroomBurger
   name: food-sequence-burger-content-mushroom
+  scale: 0.7, 0.7
   sprites:
   - sprite: SS220/Objects/Consumable/Food/mushroom.rsi
     state: mushroom-cooked

@@ -244,6 +244,9 @@
     - Vegetable
     - Mushroom
     - Cooked
+  - type: FoodSequenceElement
+    entries:
+      Burger: MushroomBurger
 
 #Glazunya
 - type: entity
