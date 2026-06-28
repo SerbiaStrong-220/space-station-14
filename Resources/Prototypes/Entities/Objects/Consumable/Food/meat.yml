@@ -361,10 +361,15 @@
   - type: SliceableFood
     count: 3
     slice: FoodMeatDuckCutlet
-  - type: Construction
-    graph: DuckSteak
-    node: start
-    defaultTarget: cooked duck
+    #SS220-grillables-update begin
+#  - type: Construction
+#    graph: DuckSteak
+#    node: start
+#    defaultTarget: cooked duck
+  - type: Grillable
+    timeToCook: 30
+    cookingResult: FoodMeatDuckCooked
+    #SS220-grillables-update end
   - type: Item
     storedOffset: -1,1
     inhandVisuals:
@@ -507,10 +512,15 @@
   - type: SliceableFood
     count: 3
     slice: FoodMeatDragonCutlet
-  - type: Construction
-    graph: DragonSteak
-    node: start
-    defaultTarget: dragon steak
+    #SS220-grillables-update begin
+#  - type: Construction
+#    graph: DragonSteak
+#    node: start
+#    defaultTarget: dragon steak
+  - type: Grillable
+    timeToCook: 30
+    cookingResult: FoodMeatDragonCooked
+    #SS220-grillables-update end
   - type: Item
     storedOffset: -2,1
     inhandVisuals:
@@ -822,10 +832,15 @@
         reagents:
         - ReagentId: SulfuricAcid
           Quantity: 20
-  - type: Construction
-    graph: RounySteak
-    node: start
-    defaultTarget: rouny steak
+  #SS220-grillables-update begin
+#  - type: Construction
+#    graph: RounySteak
+#    node: start
+#    defaultTarget: rouny steak
+  - type: Grillable
+    timeToCook: 30
+    cookingResult: FoodMeatRounyCooked
+    #SS220-grillables-update end
   - type: Item
     inhandVisuals:
       left:
@@ -1050,10 +1065,15 @@
   - type: InternalTemperature
     conductivity: 0.4 #SS220-grill-update-2
     thickness: 0.25 #SS220-grill-update-2
-  - type: Construction
-    graph: AnomalyMeatSteak
-    node: start
-    defaultTarget: anomaly steak
+    #SS220-grillables-update begin
+#  - type: Construction
+#    graph: AnomalyMeatSteak
+#    node: start
+#    defaultTarget: anomaly steak
+  - type: Grillable
+    timeToCook: 30
+    cookingResult: FoodMeatAnomalyCooked
+    #SS220-grillables-update end
   - type: Tag
     tags:
     - Meat
