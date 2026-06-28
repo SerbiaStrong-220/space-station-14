@@ -25,7 +25,7 @@ public sealed partial class StaminaDamageConversionSystem : EntitySystem
             return;
 
         foreach (var (key, value) in args.DamageDelta.DamageDict)
-            if (ent.Comp.ConversionDict.ContainsKey(key))
-                _stamina.TakeStaminaDamage(ent.Owner, (args.DamageDelta.DamageDict[key] * ent.Comp.ConversionDict[key]).Float());
+            if (ent.Comp.ConversionDict.TryGetValue(key, out var conversionValue))
+                _stamina.TakeStaminaDamage(ent.Owner, (value * conversionValue).Float());
     }
 }

@@ -229,15 +229,17 @@
     - FullAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+    angleIncrease: 0.05
+    minAngle: 12
   - type: MagazineVisuals
     magState: mag
     steps: 5
     zeroVisible: true
   - type: GunWieldBonus
-    minAngle: -2
+    minAngle: -4
     maxAngle: -13
   - type: GunAimable
-    minAngle: -10
+    minAngle: -6
     maxAngle: -3
   - type: BatteryAmmoProvider
     proto: BulletLaserSMG

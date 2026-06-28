@@ -15,13 +15,13 @@
     energy: 7.0
   - type: Explosive
     explosionType: Default
-    maxIntensity: 10
+    maxIntensity: 7
     intensitySlope: 5
-    totalIntensity: 10
+    totalIntensity: 7
     maxTileBreak: 0
   - type: Projectile
     damage:
       types:
-        Piercing: 50
-        Heat: 50
+        Piercing: 35
+        Heat: 35
       armourPiercing: 90

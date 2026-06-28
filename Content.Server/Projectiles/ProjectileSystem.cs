@@ -141,15 +141,18 @@ public sealed class ProjectileSystem : SharedProjectileSystem
                 stopPenetration = true;
                 break;
             }
-            float targetThreshold = 0f;
+            FixedPoint2 targetThreshold = 0f;
 
             targetThreshold = target.Comp.PiercingThreshold.Float();
 
-            if (TryComp<AltArmorComponent>(target, out var armorComp) && armorComp.TresholdDict.ContainsKey(requiredDamageType))
-                targetThreshold += armorComp.TresholdDict[requiredDamageType].Float();
+            if (TryComp<AltArmorComponent>(target, out var armorComp) && armorComp.TresholdDict.TryGetValue(requiredDamageType, out var value))
+                targetThreshold += value;
 
             if (projectile.Comp.Damage[requiredDamageType] + projectile.Comp.Damage.ArmourPiercing < targetThreshold)
+            {
                 stopPenetration = true;
+                return false;
+            }
 
             var resultThreshold = FixedPoint2.Clamp(targetThreshold - projectile.Comp.Damage.ArmourPiercing, FixedPoint2.Zero, FixedPoint2.Abs(targetThreshold + projectile.Comp.Damage.ArmourPiercing));
 
