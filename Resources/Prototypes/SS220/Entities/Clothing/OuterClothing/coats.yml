@@ -263,6 +263,6 @@
   description: Show them true corporate style with this dress coat!
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Coats/NTR_formal.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/ntr_formal.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Coats/NTR_formal.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/ntr_formal.rsi
