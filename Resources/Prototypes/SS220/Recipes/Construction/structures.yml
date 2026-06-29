@@ -1091,6 +1091,7 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  - !type:TileNotBlocked
 
 - type: construction
   id: FlowerHedgeCraft
