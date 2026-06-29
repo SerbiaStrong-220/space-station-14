@@ -48,6 +48,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.SS220.Body.Events;
 using Content.Server.SS220.QuadHearing;
 using Content.Shared.SS220.QuadHearing;
+using Content.Shared.GameTicking;
 
 namespace Content.Server.Chat.Systems;
 
@@ -70,6 +71,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly StationSystem _stationSystem = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
+    [Dependency] private readonly IBanManager _banManager = default!; // SS220-ban-manager
     //[Dependency] private readonly SharedAudioSystem _audio = default!; // ss220 remove unused dep
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly ReplacementAccentSystem _wordreplacement = default!;
@@ -79,8 +81,13 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly HumanoidProfileSystem _humanoidAppearance = default!; //ss220 add identity concealment for chat and radio messages
     [Dependency] private readonly QuadHearingSystem _quadHearing = default!; // SS220 Quad hearing
 
-    public readonly TimeSpan CoolDown = TimeSpan.FromSeconds(2); //ss220 chat unique
-    public const int MaximumLengthMsg = 5; //ss220 chat unique
+    // ss220 chat unique begin
+    public readonly TimeSpan ChatSpamCooldown = TimeSpan.FromSeconds(2);
+    public const int MinSpamMessageLength = 5;
+
+    private readonly record struct RecentChatMessage(TimeSpan LastMessageTimeSent, string Message);
+    private readonly Dictionary<EntityUid, RecentChatMessage> _recentChatMessages = new();
+    // ss220 chat unique end
 
     private bool _loocEnabled = true;
     private bool _deadLoocEnabled;
@@ -101,16 +108,14 @@ public sealed partial class ChatSystem : SharedChatSystem
         Subs.CVar(_configurationManager, CCVars.CritLoocEnabled, OnCritLoocEnabledChanged, true);
 
         SubscribeLocalEvent<GameRunLevelChangedEvent>(OnGameChange);
+        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart); // ss220 chat unique
     }
 
     // ss220 chat unique begin
-    public struct ChatUniqueStruct
+    private void OnRoundRestart(RoundRestartCleanupEvent ev)
     {
-        public TimeSpan? lastMessageTimeSent;
-        public string? message;
+        _recentChatMessages.Clear();
     }
-
-    public Dictionary<EntityUid, ChatUniqueStruct> ChatMsgUnique { get; private set;} = new();
     // ss220 chat unique end
 
     private void OnLoocEnabledChanged(bool val)
@@ -250,20 +255,17 @@ public sealed partial class ChatSystem : SharedChatSystem
             return;
 
         //ss220 chat unique begin
-        if (ChatMsgUnique.TryGetValue(source, out var chatStruct)
-            && chatStruct.message == message
-            && message.Length >= MaximumLengthMsg)
+        if (message.Length >= MinSpamMessageLength)
         {
             var curTime = _gameTiming.CurTime;
-            if (curTime - chatStruct.lastMessageTimeSent < CoolDown)
-                return;
 
-            ChatMsgUnique[source] = new ChatUniqueStruct() { message = message, lastMessageTimeSent = curTime };
-        }
-        else
-        {
-            var curTime = _gameTiming.CurTime;
-            ChatMsgUnique[source] = new ChatUniqueStruct() { message = message, lastMessageTimeSent = curTime };
+            if (_recentChatMessages.TryGetValue(source, out var recentMessage) && recentMessage.Message == message)
+            {
+                if (curTime - recentMessage.LastMessageTimeSent < ChatSpamCooldown)
+                    return;
+            }
+
+            _recentChatMessages[source] = new RecentChatMessage(curTime, message);
         }
         //ss220 chat unique end
 
@@ -757,6 +759,11 @@ public sealed partial class ChatSystem : SharedChatSystem
 
     private void SendDeadChat(EntityUid source, ICommonSession player, string message, bool hideChat)
     {
+        // SS220-chat-bans-begin
+        if (_banManager.IsChatBanned(player, BannableChats.Dead))
+            return;
+        // SS220-chat-bans-end
+
         var clients = GetDeadChatClients();
         var playerName = Name(source);
         message = _chatManager.DeleteProhibitedCharacters(message, player); // SS220 delete prohibited characters

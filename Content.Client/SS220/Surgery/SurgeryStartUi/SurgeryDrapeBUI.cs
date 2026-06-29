@@ -10,10 +10,10 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.Surgery.SurgeryStartUi;
 
-public sealed class SurgeryDrapeBUI : BoundUserInterface
+public sealed partial class SurgeryDrapeBUI : BoundUserInterface
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
 
     private readonly SharedSurgerySystem _surgery = default!;
 

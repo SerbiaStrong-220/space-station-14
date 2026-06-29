@@ -6,9 +6,9 @@ using Content.Shared.SS220.CultYogg.Cultists;
 
 namespace Content.Server.SS220.CultYogg.CultYoggChamelenBlocker;
 
-public sealed class CultYoggChamelenBlockerSystem : EntitySystem
+public sealed partial class CultYoggChamelenBlockerSystem : EntitySystem
 {
-    [Dependency] private readonly CultYoggRuleSystem _cultRuleSystem = default!;
+    [Dependency] private CultYoggRuleSystem _cultRuleSystem = default!;
 
     public override void Initialize()
     {

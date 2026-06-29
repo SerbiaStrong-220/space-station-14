@@ -15,10 +15,10 @@ namespace Content.Server.SS220.SuperMatter.Crystal;
 
 public sealed partial class SuperMatterSystem
 {
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly ChatSystem _chatSystem = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IAdminLogManager _adminLog = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private ChatSystem _chatSystem = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IAdminLogManager _adminLog = default!;
 
     private readonly ProtoId<RadioChannelPrototype> _engineerRadio = "Engineering";
     private readonly ProtoId<RadioChannelPrototype> _commonRadio = "Common";

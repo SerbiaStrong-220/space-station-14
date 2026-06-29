@@ -6,10 +6,10 @@ using Content.Shared.Polymorph;
 
 namespace Content.Shared.SS220.AstralLeap;
 
-public sealed class AstralLeapSystem : EntitySystem
+public sealed partial class AstralLeapSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
 
     public override void Initialize()
     {

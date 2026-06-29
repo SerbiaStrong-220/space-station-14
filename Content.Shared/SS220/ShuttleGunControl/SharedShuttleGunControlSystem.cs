@@ -18,14 +18,14 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.ShuttleGunControl;
 
-public abstract class SharedShuttleGunControlSystem : EntitySystem
+public abstract partial class SharedShuttleGunControlSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly SharedDeviceListSystem _deviceList = default!;
-    [Dependency] private readonly SharedDeviceNetworkSystem _deviceNetwork = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private SharedDeviceListSystem _deviceList = default!;
+    [Dependency] private SharedDeviceNetworkSystem _deviceNetwork = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
 
     public const string Trigger = "Trigger";
 

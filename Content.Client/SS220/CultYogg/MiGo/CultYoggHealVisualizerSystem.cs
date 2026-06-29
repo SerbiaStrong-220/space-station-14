@@ -7,10 +7,9 @@ namespace Content.Client.SS220.CultYogg.MiGo;
 
 /// <summary>
 /// </summary>
-public sealed class CultYoggHealVisualizerSystem : VisualizerSystem<CultYoggHealComponent>
+public sealed partial class CultYoggHealVisualizerSystem : VisualizerSystem<CultYoggHealComponent>
 {
-
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

@@ -5,7 +5,7 @@ namespace Content.Server.SS220.HealOnCollide.Bloodstream;
 
 public sealed partial class BloodstreamExtensionSystem : SharedBloodstreamExtensionSystem
 {
-    [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
+    [Dependency] private BloodstreamSystem _bloodstream = default!;
 
     public override void TryModifyBleedAmount(EntityUid uid, float amount)
     {

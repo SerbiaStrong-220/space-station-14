@@ -216,6 +216,18 @@
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Coats/muscian_danger_coat.rsi
 
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatDeadAnarchist
+  name: dead anarchist's coat
+  description: The legendary leather jacket of the dead anarchist. On the back is a skull holding a beer mug, with the inscription below «We’ll drink it all away, but we won’t disgrace punk!»
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/dead_anarchist.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/dead_anarchist.rsi
+
 # ГСБ
 - type: entity
   parent: [ClothingOuterArmorHoS, ClothingOuterStorageBase]

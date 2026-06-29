@@ -11,13 +11,13 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.SS220.TeleportationChasm;
 
-public sealed class TeleportationChasmSystem : SharedTeleportationChasmSystem
+public sealed partial class TeleportationChasmSystem : SharedTeleportationChasmSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedStationSystem _station = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedStationSystem _station = default!;
 
     public override void Initialize()
     {

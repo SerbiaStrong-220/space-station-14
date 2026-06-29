@@ -1,3 +1,4 @@
+using Content.Shared.Damage.Systems;
 using Content.Shared.Ninja.Components;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
@@ -21,6 +22,7 @@ public abstract class SharedSpaceNinjaSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<SpaceNinjaComponent, AttackedEvent>(OnNinjaAttacked);
+        SubscribeLocalEvent<SpaceNinjaComponent, DamageChangedEvent>(OnNinjaDamaged); // SS220 reveal on health damage
         SubscribeLocalEvent<SpaceNinjaComponent, MeleeAttackEvent>(OnNinjaAttack);
         SubscribeLocalEvent<SpaceNinjaComponent, ShotAttemptedEvent>(OnShotAttempted);
     }
@@ -83,6 +85,16 @@ public abstract class SharedSpaceNinjaSystem : EntitySystem
     {
         TryRevealNinja(ent, disable: true);
     }
+    // SS220 invis buff start
+    /// <summary>
+    /// Handle revealing ninja if cloaked when taking amount of health damage.
+    /// </summary>
+    private void OnNinjaDamaged(Entity<SpaceNinjaComponent> ent, ref DamageChangedEvent args)
+    {
+        if (args.DamageIncreased && args.DamageDelta is { } delta && delta.GetTotal() >= ent.Comp.RevealDamageThreshold)
+            TryRevealNinja(ent, disable: true);
+    }
+    // SS220 invis buff end
 
     /// <summary>
     /// Handle revealing ninja if cloaked when attacking.

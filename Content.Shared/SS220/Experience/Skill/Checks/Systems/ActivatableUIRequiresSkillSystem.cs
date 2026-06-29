@@ -6,10 +6,10 @@ using Content.Shared.UserInterface;
 
 namespace Content.Shared.SS220.Experience.SkillChecks.Components;
 
-public sealed class ActivatableUIRequiresSkillSystem : EntitySystem
+public sealed partial class ActivatableUIRequiresSkillSystem : EntitySystem
 {
-    [Dependency] private readonly ExperienceSystem _experience = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private ExperienceSystem _experience = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
