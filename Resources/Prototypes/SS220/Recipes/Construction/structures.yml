@@ -1091,6 +1091,7 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+
 - type: construction
   id: FlowerHedgeCraft
   graph: FlowerHedgeGraph
@@ -1162,7 +1163,6 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-    
 
 - type: construction
   id: BrazierWoodCraft
@@ -1199,4 +1199,3 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-
