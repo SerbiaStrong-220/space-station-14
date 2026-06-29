@@ -11,7 +11,7 @@ public sealed partial class HavePathologyRequirement : SurgeryGraphRequirement
     [DataField(required: true)]
     public ProtoId<PathologyPrototype> Pathology;
 
-    protected override bool Requirement(EntityUid? uid, IEntityManager entityManager)
+    protected override bool Requirement(EntityUid? uid, EntityUid user, IEntityManager entityManager)
     {
         if (uid is null)
             return true;

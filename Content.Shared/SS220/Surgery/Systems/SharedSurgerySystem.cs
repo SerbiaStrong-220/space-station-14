@@ -21,16 +21,16 @@ namespace Content.Shared.SS220.Surgery.Systems;
 
 public abstract partial class SharedSurgerySystem : EntitySystem
 {
-    [Dependency] protected readonly SurgeryGraphSystem SurgeryGraph = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogManager = default!;
-    [Dependency] private readonly SharedMeleeWeaponSystem _meleeWeapon = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _userInterface = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] protected SurgeryGraphSystem SurgeryGraph = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogManager = default!;
+    [Dependency] private SharedMeleeWeaponSystem _meleeWeapon = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedUserInterfaceSystem _userInterface = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private const float ErrorGettingDelayDelay = 8f;
     private const float DoAfterMovementThreshold = 0.15f;
@@ -102,18 +102,18 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         switch (edgeSelectorState.Infos.Count)
         {
             case 0:
-                if (entity.Comp.OngoingSurgeries.Count == 0 && HasComp<SurgeryToolComponent>(args.Used))
-                {
+                if (!HasComp<SurgeryToolComponent>(args.Used))
+                    return;
+
+                if (entity.Comp.OngoingSurgeries.Count == 0)
                     _popup.PopupPredictedCursor(Loc.GetString(SurgeryNeedToBeStarted), args.User);
-                    args.Handled = true;
-                    break;
-                }
 
                 foreach (var (surgeryId, _) in entity.Comp.OngoingSurgeries)
                 {
                     PopupSurgeryGraphFailures(entity, surgeryId, args.Used, args.User);
-                    args.Handled = true;
                 }
+
+                args.Handled = true;
                 break;
 
             case 1:
@@ -342,7 +342,11 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         if (used is not null)
             RaiseLocalEvent(used.Value, ref ev);
 
-        secondsDelay *= ev.Multiplier;
+        if (chosenEdge.DeceaseSkillBonus && ev.Multiplier > 1f)
+            secondsDelay *= (ev.Multiplier - 1f) / 2 + 1f;
+        else
+            secondsDelay *= ev.Multiplier;
+
         secondsDelay += ev.FlatModifier;
 
         var performerDoAfterEventArgs =

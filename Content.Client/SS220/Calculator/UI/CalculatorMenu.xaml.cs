@@ -26,8 +26,8 @@ namespace Content.Client.SS220.Calculator.UI;
 [GenerateTypedNameReferences]
 public sealed partial class CalculatorMenu : BaseWindow, IPinnableWindow
 {
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     [Animatable]
     public Vector2 BodyOffset

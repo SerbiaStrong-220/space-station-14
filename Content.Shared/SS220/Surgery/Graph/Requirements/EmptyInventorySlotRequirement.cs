@@ -12,7 +12,7 @@ public sealed partial class EmptyInventorySlotRequirement : SurgeryGraphRequirem
     [DataField(required: true)]
     public HashSet<string> SlotNames;
 
-    protected override bool Requirement(EntityUid? uid, IEntityManager entityManager)
+    protected override bool Requirement(EntityUid? uid, EntityUid user, IEntityManager entityManager)
     {
         if (uid is null)
             return true;

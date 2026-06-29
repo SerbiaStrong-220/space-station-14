@@ -22,18 +22,18 @@ using System.Numerics;
 
 namespace Content.Server.SS220.Arena.Lobby;
 
-public sealed class ArenaLobbySystem : EntitySystem
+public sealed partial class ArenaLobbySystem : EntitySystem
 {
-    [Dependency] private readonly EuiManager _euiManager = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly SharedMindSystem _mindSystem = default!;
-    [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IComponentFactory _factory = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private EuiManager _euiManager = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private SharedMindSystem _mindSystem = default!;
+    [Dependency] private StationSpawningSystem _stationSpawning = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IComponentFactory _factory = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private const float RefreshIntervalSeconds = 3f;
 
