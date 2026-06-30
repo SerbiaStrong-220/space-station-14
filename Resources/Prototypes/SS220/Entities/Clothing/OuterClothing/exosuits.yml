@@ -43,8 +43,9 @@
     sprite: SS220/Clothing/OuterClothing/Misc/industrial_exosuit.rsi
   - type: PhysicalParametersModifyingClothing
   - type: IntegratedClothing
-    clothingPrototype: ClothingBackpackExo
-    slot: back
+    clothingPrototypes:
+      back: ClothingBackpackExo
+    slots: [ back ]
   - type: FootstepModifier
     footstepSoundCollection:
       path: /Audio/Mecha/mechmove03.ogg

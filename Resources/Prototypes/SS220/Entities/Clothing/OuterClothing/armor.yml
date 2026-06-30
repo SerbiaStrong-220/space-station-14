@@ -125,7 +125,8 @@
   - type: StaticPrice
     price: 1500
   - type: IntegratedClothing
-    clothingPrototype: ClothingHeadHelmetAssault
+    clothingPrototypes:
+      head: ClothingHeadHelmetAssault
   - type: ClothingSpeedModifier
     walkModifier: 1
     sprintModifier: 0.75
@@ -133,7 +134,7 @@
   - type: ContainerContainer
     containers:
       item_radio: !type:ContainerSlot { }
-      integrated-clothing: !type:ContainerSlot { }
+      integrated-clothing-head: !type:ContainerSlot { }
       storagebase: !type:Container
         ents: [ ]
 
