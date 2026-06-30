@@ -215,3 +215,23 @@
     sprite: SS220/Clothing/Shoes/Boots/senior_service_laceups.rsi
   - type: Clothing
     sprite: SS220/Clothing/Shoes/Boots/senior_service_laceups.rsi
+
+# Экзоскелеты
+- type: entity
+  parent: ClothingShoesBootsMagBase
+  id: ClothingShoesBootsMagExo
+  name: exosuit integrated magboots
+  description: Integrated boots with magpads. They are much better than common ones because of access to exosuit's battery and electronics.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Boots/dq_magboots.rsi
+    state: icon
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Boots/dq_magboots.rsi
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 0.9
+  - type: FootstepModifier
+    footstepSoundCollection:
+      path: /Audio/Mecha/mechmove03.ogg
+

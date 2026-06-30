@@ -7,6 +7,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.SS220.ItemExtension;
+using Content.Shared.SS220.Weapons.Melee.Components;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 
@@ -34,8 +35,15 @@ public sealed class PhysicalParametersSystem : EntitySystem
 
         FixedPoint2 strengthModifier = GetParameterValue(ent, Parameter.Strength);
 
-        if (TryComp<ItemExtensionComponent>(args.Used, out var extensionComp))
-            strengthModifier = (strengthModifier - extensionComp.MinimalStrengthToPickUp) / (extensionComp.StrengthRequirementToBeUsed - 1);
+        if (HasComp<ItemExtensionMeleeWeaponComponent>(args.Used) && TryComp<ItemExtensionComponent>(args.Used, out var extensionComp))
+        {
+            FixedPoint2 toDivide = extensionComp.StrengthRequirementToBeUsed - extensionComp.MinimalStrengthToPickUp;
+
+            if (toDivide == 0)
+                toDivide = 1;
+
+            strengthModifier = (strengthModifier - extensionComp.MinimalStrengthToPickUp) / toDivide;
+        }
 
         foreach (var type in args.Damage.DamageDict)
         {
