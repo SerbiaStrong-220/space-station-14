@@ -239,8 +239,52 @@
     sprite: SS220/Clothing/OuterClothing/Coats/bomberhos.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Coats/bomberhos.rsi
-  - type: ContainerContainer
-    containers:
-      item_radio: !type:ContainerSlot { }
-      storagebase: !type:Container
-        ents: [ ]
+  - type: Item
+    size: Normal
+    shape:
+    - 0,0,1,2
+
+- type: entity
+  parent: ClothingUniformJumpskirtHosFormal
+  id: ClothingOuterCoatHosFormal
+  name: hos's formal coat
+  description: A coat for special occasions.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/hos_formal.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/hos_formal.rsi
+
+# ПНТ
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatNTRFormalDress
+  name: NTR's formal dress
+  description: A dress for special occasions... Damn, you really look great in that!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/ntr_dress.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/ntr_dress.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatNTRTrench
+  name: NTR's trench coat
+  description: An excellent everyday trench coat for a loyal servant of the corporation.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/ntr_trench.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/ntr_trench.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatNTRFormalCoat
+  name: NTR's formal coat
+  description: Show them true corporate style with this dress coat!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/ntr_coat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/ntr_coat.rsi

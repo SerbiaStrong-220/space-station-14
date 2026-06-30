@@ -1376,7 +1376,7 @@
   - HeadofSecurityJumpskirt
   - HeadofSecurityTurtleneck
   - HeadofSecurityTurtleneckSkirt
-  - HeadofSecurityFormalSuit
+#  - HeadofSecurityFormalSuit #SS220 Formal coat for HoS
   - JumpsuitHoSGrey #ss220 sec loadout update
   - JumpsuitHoSBlue #ss220 sec loadout update
   - JumpskirtHoSParadeMale #ss220 sec loadout update
