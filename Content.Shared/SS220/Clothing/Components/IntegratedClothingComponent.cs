@@ -14,10 +14,10 @@ public sealed partial class IntegratedClothingComponent : Component
     public const string DefaultClothingContainerId = "integrated-clothing";
 
     [DataField(required: true), AutoNetworkedField]
-    public Dictionary<string, EntProtoId> ClothingPrototypes = new Dictionary<string, EntProtoId>();
+    public EntProtoId ClothingPrototype = default!;
 
     [DataField, AutoNetworkedField]
-    public List<string> Slots = new List<string> { "head" };
+    public string Slot = "head";
 
     [DataField("requiredSlot"), AutoNetworkedField]
     public SlotFlags RequiredFlags = SlotFlags.OUTERCLOTHING;
@@ -26,8 +26,8 @@ public sealed partial class IntegratedClothingComponent : Component
     public string ContainerId = DefaultClothingContainerId;
 
     [ViewVariables]
-    public Dictionary<string, ContainerSlot> Containers = new Dictionary<string, ContainerSlot>();
+    public ContainerSlot? Container;
 
     [AutoNetworkedField]
-    public Dictionary<string, EntityUid> ClothingUids = new Dictionary<string, EntityUid>();
+    public EntityUid? ClothingUid;
 }
