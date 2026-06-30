@@ -7,3 +7,13 @@
   cost: 10000
   category: cargoproduct-category-name-armory
   group: market
+
+- type: cargoProduct
+  id: ArmoryReflective
+  icon:
+    sprite: Clothing/OuterClothing/Armor/armor_reflec.rsi
+    state: icon
+  product: CrateSecurityArmorReflective
+  cost: 1200
+  category: cargoproduct-category-name-armory
+  group: market
