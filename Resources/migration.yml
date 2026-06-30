@@ -1019,3 +1019,9 @@ TelescopicShield: TelescopicShieldAlt
 # 2026-06-08 - SS220 weapon overhaul
 WeaponDisabler: WeaponTaser
 WeaponDisablerSMG: WeaponTaser
+
+# 2026-06-29 - SS220 fix Dark Curb id
+CurbDarckSteel: CurbDarkSteel
+CurbDarckSteelCorner: CurbDarkSteelCorner
+CurbDarckSteelCornerSmall: CurbDarkSteelCornerSmall
+CurbDarckSteelRound: CurbDarkSteelRound
