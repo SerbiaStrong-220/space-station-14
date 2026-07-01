@@ -24,7 +24,7 @@ public sealed class PhysicalParametersSystem : EntitySystem
         SubscribeLocalEvent<PhysicalParametersComponent, MeleeAttackerEvent>(OnMeleeAttack);
         SubscribeLocalEvent<PhysicalParametersModifyingClothingComponent, ClothingGotEquippedEvent>(OnGotEquipped);
         SubscribeLocalEvent<PhysicalParametersModifyingClothingComponent, GotUnequippedEvent>(OnGotUnequipped);
-        SubscribeLocalEvent<PhysicalParametersModifyingClothingComponent, GrabDelayModifiersEvent>(OnGrabAttempt);
+        SubscribeLocalEvent<PhysicalParametersComponent, GrabDelayModifiersEvent>(OnGrabAttempt);
 
         base.Initialize();
     }
@@ -121,17 +121,19 @@ public sealed class PhysicalParametersSystem : EntitySystem
 
         if (ent.Comp.StrengthAffectsArms &&
             ent.Comp.ParameterDict.ContainsKey(parameter))
+        {
             strengthModifier = ent.Comp.ParameterDict[parameter];
+
+            if (TryComp<HumanoidProfileComponent>(ent.Owner, out var profileComp) && profileComp.Sex == Sex.Female)
+                if (ent.Comp.GenderModifier.TryGetValue(parameter, out var genderModifier))
+                    strengthModifier += genderModifier;
+        }
 
         if (TryComp<HandsComponent>(ent.Owner, out var handsComp) &&
             handsComp.ActiveHandId != null &&
             _handsSystem.TryGetHand(ent.Owner, handsComp.ActiveHandId, out var activeHand) &&
             activeHand.Value.StrengthModifier != null)
             strengthModifier = (FixedPoint2)activeHand.Value.StrengthModifier;
-
-        if (TryComp<HumanoidProfileComponent>(ent.Owner, out var profileComp) && profileComp.Sex == Sex.Female)
-            if (ent.Comp.GenderModifier.TryGetValue(parameter, out var genderModifier))
-                strengthModifier += genderModifier;
 
         return strengthModifier;
     }

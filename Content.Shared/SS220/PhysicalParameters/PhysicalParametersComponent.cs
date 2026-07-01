@@ -19,10 +19,11 @@ public sealed partial class PhysicalParametersComponent : Component // This comp
       { Parameter.PainTolerance, 1}
     };
 
+    [DataField]
     [AutoNetworkedField]
     public Dictionary<Parameter, FixedPoint2> GenderModifier = new Dictionary<Parameter, FixedPoint2>
     {
-      { Parameter.Strength, -0.1},
+      { Parameter.Strength, -0.1}
     };
 
     [DataField]

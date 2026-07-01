@@ -102,6 +102,8 @@
   - type: PhysicalParameters
     parameterDict:
       Strength: 0.65
+    genderModifier:
+      Strength: 0
   #SS220 add physical parameters end
   - type: Storage
     clickInsert: false
