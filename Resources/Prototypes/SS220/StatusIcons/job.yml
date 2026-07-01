@@ -29,3 +29,12 @@
     sprite: /Textures/SS220/Interface/Misc/job_icons.rsi
     state: RedWingsPilot
   jobName: ghost-role-information-redwings-pilot-name
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconSecBorg
+  icon:
+    sprite: /Textures/Interface/Misc/job_icons.rsi
+    state: Borg
+  jobName: job-name-secborg
+  isCrewJob: false

@@ -16,13 +16,29 @@
       "directions": 4
     },
     {
-      "name": "ClownMime_e_r",
+      "name": "ClownMime_e_r", 
       "directions": 4
     },
     {
       "name": "ClownMime_l",
       "directions": 4
+    },
+    {
+      "name": "SecBorg",
+      "directions": 4
+    },
+    {
+      "name": "SecBorg_e",
+      "directions": 4
+    },
+    {
+      "name": "SecBorg_e_r",
+      "directions": 4
+    },
+    {
+      "name": "SecBorg_l",
+      "directions": 4
     }
-
   ]
 }
+

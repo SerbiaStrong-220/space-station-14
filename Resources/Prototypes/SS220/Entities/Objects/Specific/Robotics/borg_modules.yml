@@ -1,4 +1,35 @@
 - type: entity
+  id: BaseBorgModuleSecurity
+  parent: BaseBorgModule
+  abstract: true
+  components:
+  - type: Item
+    sprite: Objects/Specific/Robotics/borgmodule.rsi
+    inhandVisuals:
+      left:
+      - state: base-icon-inhand-left
+        color: "#EBD8B7"
+      - state: base-module-inhand-left
+        color: "#34476c"
+      - state: base-part-inhand-left
+      - state: base-stripes-inhand-left
+        color: "#404040"
+      right:
+      - state: base-icon-inhand-right
+        color: "#EBD8B7"
+      - state: base-module-inhand-right
+        color: "#34476c"
+      - state: base-part-inhand-right
+      - state: base-stripes-inhand-right
+        color: "#404040"
+  - type: Tag
+    tags:
+    - BorgModuleSecurity
+  - type: BorgModule
+    borgFitTypes:
+    - borg-type-security
+ 
+- type: entity
   id: BorgModuleProtoKineticAccelerator
   parent: [ BaseBorgModuleCargo, BaseProviderBorgModule ]
   name: protokinetic cyborg module
@@ -102,9 +133,52 @@
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: clowning-module }
 
 - type: entity
-  id: BorgModuleTanksPlaceholder
+  id: ZiptiesPlaceholder
   parent: BaseItem
   components:
   - type: Sprite
-    sprite: SS220/Placeholders/tanks.rsi
-    state: tanks
+    sprite: Objects/Misc/zipties.rsi
+    state: cuff
+    
+- type: entity
+  id: BorgModuleSafety
+  parent: [ BaseBorgModuleSecurity, BaseProviderBorgModule ]
+  name: safety cyborg module
+  components:
+  - type: Sprite
+    layers:
+    - state: cargo
+    - state: icon-ProtoKinetic-gun
+  - type: Tag
+    tags:
+    - BorgModuleSafety
+  - type: ItemBorgModule
+    hands:
+    - item: Crowbar
+    - item: BorgWeaponDisabler
+    - item: BorgFlash
+    - hand:
+        emptyLabel: borg-slot-zipties-empty #Либо это для того чтобы потом локализировать либо для того чтобы держать
+        emptyRepresentative: Zipties #Возможно если написать cuff то это изменит на спрайт и не нужно делать другой компонент
+        whitelist:
+          tags:
+          - Zipties
+    - item: BoxZiptie
+
+- type: entity
+  id: BorgModuleLethal
+  parent: [ BaseBorgModuleSecurity, BaseProviderBorgModule ]
+  name: lethal cyborg module
+  components:
+  - type: Sprite
+    layers:
+    - state: cargo
+    - state: icon-ProtoKinetic-gun
+  - type: Tag
+    tags:
+    - BorgModuleLethal
+  - type: ItemBorgModule
+    hands:
+    - item: CombatKnife
+    - item: BorgWeaponLaserCarbine
+    - item: RadioHandheldSecurity

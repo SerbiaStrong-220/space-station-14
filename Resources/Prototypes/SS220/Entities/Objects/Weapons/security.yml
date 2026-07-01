@@ -1,0 +1,42 @@
+- type: entity
+  name: Borg flash
+  id: BorgFlash
+  description: An ultrabright flashbulb with a trigger, which causes the victim to be dazed and lose their eyesight for a moment. Useless when burnt out.
+  components:    
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/handgrenade.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/flash.rsi
+    layers:
+    - state: flash
+      map: [ "enum.FlashVisualLayers.BaseLayer" ]
+    - state: flashing
+      map: [ "enum.FlashVisualLayers.LightLayer" ]
+      visible: false
+      shader: unshaded
+  - type: Flash
+  - type: RevolutionaryConverter
+  - type: LimitedCharges
+    maxCharges: 5
+  - type: MeleeWeapon
+    wideAnimationRotation: 180
+    damage:
+      types:
+        Blunt: 0 # melee weapon to allow flashing individual targets
+    angle: 10
+  - type: Item
+    size: Small
+    sprite: Objects/Weapons/Melee/flash.rsi
+  - type: UseDelay
+    delay: 4 # has to be the same as the FlashingTime datafield in FlashComponent
+  - type: UseDelayOnMeleeHit
+  - type: Appearance
+  - type: GuideHelp
+    guides:
+    - Security
+    - Antagonists
+  - type: AutoRecharge
+    rechargeDuration: 30

@@ -1,0 +1,58 @@
+- type: entity
+  parent: [ BaseSecurityChassis, ShowSecurityIcons ]
+  id: BorgChassisSecurity
+  name: security borg
+  suffix: with brain
+  description: A man-machine hybrid that aims to replicate itself. 
+  components:  
+  - type: BorgTransponder
+    name: sec borg
+    sprite:
+      sprite: SS220/Mobs/Silicon/chassis.rsi
+      state: SecBorg
+  - type: Sprite
+    layers:
+    - sprite: SS220/Mobs/Silicon/chassis.rsi
+      state: SecBorg
+    - sprite: SS220/Mobs/Silicon/chassis.rsi
+      state: SecBorg_e
+      map: ["enum.BorgVisualLayers.Light"]
+      shader: unshaded
+      visible: false
+    - sprite: SS220/Mobs/Silicon/chassis.rsi
+      state: SecBorg_l
+      shader: unshaded
+      map: ["light"]
+      visible: false 
+  - type: BorgChassis
+    maxModules: 4
+    moduleWhitelist:
+      tags:
+      - BorgModuleSafety
+      - BorgModuleLethal
+      - BorgModuleGeneric
+    hasMindState: SecBorg_e
+    noMindState: SecBorg_e_r
+  - type: Damageable
+    damageModifierSet: SiliconSecurity
+  - type: ExplosionResistance
+    damageCoefficient: 0.7
+  - type: ContainerFill
+    containers:
+      borg_brain:
+      - PositronicBrain
+      borg_module:
+      - BorgModuleSafety
+      - BorgModuleLethal
+  - type: ShowHealthBars
+    damageContainers:
+    - Inorganic
+    - Silicon
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellHigh
+  - type: StartingMindRole
+    mindRole: "MindRoleSiliconBrain"
+    silent: true

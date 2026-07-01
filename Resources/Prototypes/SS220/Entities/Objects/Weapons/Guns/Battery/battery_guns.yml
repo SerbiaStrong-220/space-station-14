@@ -403,3 +403,50 @@
       gunModifiers:
         soundGunshot: /Audio/SS220/Weapons/Guns/Gunshots/hidg_rifle.ogg
       magState: heal-mag
+
+- type: entity
+  name: borg laser carbine
+  parent: [BaseLaserRifle, BaseGunWieldable, BaseSecurityContraband]
+  id: BorgWeaponLaserCarbine
+  description: Favoured by Nanotrasen Security for being cheap and easy to use.
+  components:
+  - type: GunWieldBonus   # "remove" wield bonus and penalty so borgs can use it
+    minAngle: 0
+    maxAngle: 0
+  - type: Gun
+    fireRate: 2
+    minAngle: 1
+    maxAngle: 2
+  - type: BatterySelfRecharger
+    autoRechargeRate: 20
+ 
+- type: entity
+  name: borg disabler
+  parent: [ WeaponDisablerPractice] # Ss220-delete-contraband
+  id: BorgWeaponDisabler
+  description: A self-defense weapon that exhausts organic targets, weakening them until they collapse.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Battery/disabler.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-unshaded-0
+        map: ["enum.GunVisualLayers.MagUnshaded"]
+        shader: unshaded
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Battery/disabler.rsi
+    quickEquip: false
+    slots:
+      - suitStorage
+      - Belt
+  - type: BatteryAmmoProvider
+    proto: BulletDisabler
+    fireCost: 62.5
+  - type: BatterySelfRecharger
+    autoRechargeRate: 30
+  - type: GuideHelp
+    guides:
+    - Security
+    - Antagonists
+  - type: PacifismAllowedGun

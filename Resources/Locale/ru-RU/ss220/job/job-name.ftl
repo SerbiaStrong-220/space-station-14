@@ -42,3 +42,5 @@ job-name-space-dragon = { roles-antag-dragon-name }
 job-name-syndicate-borg = киборг Синдиката
 
 job-name-syndicate-reinforcement = подкрепление Синдиката
+
+job-name-secborg = киборг Службы Безопасности

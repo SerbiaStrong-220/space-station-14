@@ -213,6 +213,31 @@
 - type: Tag
   id: BananiumHorn
 
+# SS220 SecCyborg
+- type: Tag
+  id: BorgWeaponDisabler
+
+- type: Tag
+  id: BorgWeaponLaserCarbine
+  
+- type: Tag
+  id: BorgModuleSecurity
+
+- type: Tag
+  id: BorgFlash
+
+- type: Tag
+  id: BorgModuleSafety
+
+- type: Tag
+  id: BorgModuleLethal
+
+- type: Tag
+  id: Zipties
+
+- type: Tag
+  id: BoxZiptie
+
 # SS220-PumpkinLantern-Craft
 - type: Tag
   id: CarvedPumpkin

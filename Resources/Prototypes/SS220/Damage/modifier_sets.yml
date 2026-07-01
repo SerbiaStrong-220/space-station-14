@@ -196,3 +196,11 @@
     Cold: 1.5
     Poison: 0.6
     Radiation: 0.5
+    
+- type: damageModifierSet
+  id: SiliconSecurity
+  coefficients:
+    Blunt: 0.6
+    Slash: 0.7
+    Piercing: 0.7
+    Heat: 0.9

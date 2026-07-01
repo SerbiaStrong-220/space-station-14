@@ -35,7 +35,7 @@
     baseWalkSpeed : 2.5
     baseSprintSpeed : 4.5
   - type: Sprite
-    sprite: Mobs/Silicon/chassis.rsi
+    sprite: SS220/Mobs/Silicon/chassis.rsi
   - type: RotationVisuals
     horizontalRotation: 90
   - type: MobState

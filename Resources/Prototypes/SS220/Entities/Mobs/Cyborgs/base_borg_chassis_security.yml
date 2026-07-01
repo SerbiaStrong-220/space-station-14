@@ -1,0 +1,111 @@
+- type: entity
+  parent: BaseBorgChassisNotIonStormable
+  id: BaseSecurityChassis
+  name: security borg
+  description: A man-machine hybrid that aims to replicate itself. They love extracting brains to insert into fresh Xenoborg chassis to grow their army.
+  save: false
+  abstract: true
+  components:
+  - type: RandomMetadata
+    nameSegments:
+    - NamesBorg
+  - type: Sprite
+    sprite: SS220/Mobs/Silicon/chassis.rsi
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      100: Critical
+      300: Dead 
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 2.25
+    baseSprintSpeed : 4.05
+  - type: EmagSiliconLaw
+    stunTime: 5
+  - type: SiliconLawProvider
+    laws: NTDefault
+  - type: IntrinsicRadioTransmitter
+    channels:
+    - Common
+    - Science
+    - Security
+    - Binary
+  - type: ActiveRadio 
+    channels:
+    - Common
+    - Science
+    - Security
+    - Binary
+  - type: Access
+    groups:
+    - AllAccess
+    tags:
+    - Borg
+  - type: AccessReader
+    access: [["Command"], ["Research"], ["Security"]]
+  - type: BorgChassis
+    maxModules: 0
+    hasMindState: robot_e
+    noMindState: robot_e_r
+  - type: TypingIndicator
+    proto: robot
+  - type: Speech
+    speechVerb: Robotic
+    speechSounds: Borg
+    allowedEmotes:
+    - Laugh
+  - type: Vocal
+    sounds:
+      Unsexed: UnisexSilicon
+    wilhelmProbability: 0
+  - type: DamagedSiliconAccent
+  - type: UnblockableSpeech
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepBorg
+  - type: NpcFactionMember
+    factions:
+    - NanoTrasen
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 75
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Machines/warning_buzzer.ogg
+          params:
+            volume: 5
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+      - !type:EmptyContainersBehaviour
+        containers:
+        - borg_brain
+        - borg_module
+        - cell_slot
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: PointLight  
+    enabled: false
+    mask: /Textures/Effects/LightMasks/cone.png
+    autoRot: true
+    radius: 8
+    netsync: false
+  - type: GuideHelp
+    guides:
+    - Cyborgs
+    - Robotics
+    - Security
+  - type: ShowJobIcons
+  - type: ShowCrewIcons
+  - type: InteractionPopup
+    interactSuccessSound:
+      path: /Audio/Ambience/Objects/periodic_beep.ogg
+  - type: BypassLock
+    bypassDelay: 15 # We don't want people to easily be able to remove xenoborg brains.
