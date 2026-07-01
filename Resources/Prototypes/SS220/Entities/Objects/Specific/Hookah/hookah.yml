@@ -84,27 +84,13 @@
       path: /Audio/Items/welder.ogg
 
 - type: entity
-  id: HookahBase
+  id: BaseHookah
+  abstract: true
   name: кальян
   description: Изощрённый прибор для культурного употребления ароматных жидкостей. Курить — здоровью вредить.
   components:
   - type: Clickable
   - type: InteractionOutline
-  - type: Sprite
-    sprite: Objects/Specific/Hookah/hookah.rsi
-    drawdepth: SmallObjects
-    noRot: true
-    layers:
-    - state: icon
-      map: ["base"]
-  - type: Appearance
-  - type: HookahVisuals
-    unlitState: icon
-    unlitNoHoseState: icon-no-hose
-    coalUnlitState: icon-coal
-    coalUnlitNoHoseState: icon-coal-no-hose
-    coalLitState: icon-lit
-    coalLitNoHoseState: icon-lit-no-hose
   - type: Pullable
   - type: Damageable
     damageContainer: StructuralInorganic
@@ -122,8 +108,6 @@
   - type: Hookah
     hosePrototype: HookahHose
     inhaleAmount: 2
-    lightSound:
-      path: /Audio/Items/Lighters/lighter1.ogg
     useSound:
       path: /Audio/SS220/Hookah/hookah_drag.ogg
     ropeSprite:
@@ -131,17 +115,6 @@
       state: rope
     exhaleGasType: WaterVapor
     exhaleMoles: 15
-    extinguishSound:
-      path: /Audio/Effects/extinguish.ogg
-    coal_slot:
-      name: hookah-coal-slot-name
-      whitelist:
-        tags:
-        - HookahCoal
-      insertSound:
-        path: /Audio/Weapons/Guns/Empty/empty.ogg
-      ejectSound:
-        path: /Audio/Weapons/Guns/Empty/empty.ogg
   - type: SmokingFuel
     tobacco_slot:
       name: hookah-tobacco-slot-name
@@ -152,7 +125,6 @@
         path: /Audio/Weapons/Guns/Empty/empty.ogg
   - type: ContainerContainer
     containers:
-      coal_slot: !type:ContainerSlot
       tobacco_slot: !type:ContainerSlot
   - type: ItemSlots
   - type: SolutionContainerManager
@@ -182,7 +154,45 @@
         friction: 1.0
 
 - type: entity
-  id: HookahHose
+  parent: BaseHookah
+  id: HookahBase
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hookah/hookah.rsi
+    drawdepth: SmallObjects
+    noRot: true
+    layers:
+    - state: icon
+      map: ["base"]
+  - type: Appearance
+  - type: HookahVisuals
+    unlitState: icon
+    unlitNoHoseState: icon-no-hose
+    coalUnlitState: icon-coal
+    coalUnlitNoHoseState: icon-coal-no-hose
+    coalLitState: icon-lit
+    coalLitNoHoseState: icon-lit-no-hose
+  - type: HookahCoalHolder
+    lightSound:
+      path: /Audio/Items/Lighters/lighter1.ogg
+    extinguishSound:
+      path: /Audio/Effects/extinguish.ogg
+    coal_slot:
+      name: hookah-coal-slot-name
+      whitelist:
+        tags:
+        - HookahCoal
+      insertSound:
+        path: /Audio/Weapons/Guns/Empty/empty.ogg
+      ejectSound:
+        path: /Audio/Weapons/Guns/Empty/empty.ogg
+  - type: ContainerContainer
+    containers:
+      coal_slot: !type:ContainerSlot
+
+- type: entity
+  id: BaseHookahHose
+  abstract: true
   name: трубка кальяна
   description: Гибкий шланг. Один конец — в кальян, другой — в лёгкие.
   components:
@@ -215,6 +225,20 @@
         - ItemMask
         restitution: 0.3
         friction: 0.2
+
+- type: entity
+  parent: BaseHookahHose
+  id: HookahHose
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hookah/hookah_hose.rsi
+    drawdepth: Items
+    noRot: false
+    layers:
+    - state: icon
+  - type: Item
+    size: Ginormous
+    sprite: Objects/Specific/Hookah/hookah_hose.rsi
 
 - type: entity
   id: HookahCoal
