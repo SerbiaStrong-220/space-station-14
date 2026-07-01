@@ -1,5 +1,5 @@
+using System.Linq;
 using Content.Shared.Examine;
-using Content.Shared.SS220.Weapons.Ranged.Systems;
 using Content.Shared.Hands.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Input;
@@ -8,10 +8,8 @@ using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Localizations;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
-using System.Linq;
 
 namespace Content.Shared.Hands.EntitySystems;
 
