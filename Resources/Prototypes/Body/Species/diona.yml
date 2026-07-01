@@ -87,6 +87,11 @@
     baseDecayRate: 0.0083
   - type: Thirst
     baseDecayRate: 0.0083
+  #SS220 add physical parameters begin
+  - type: PhysicalParameters
+    parameterDict:
+      Strength: 0.7
+  #SS220 add physical parameters end
   - type: Damageable
     damageModifierSet: Diona
   - type: DamageVisuals
@@ -130,11 +135,6 @@
         visualType: Large
         messages: [ "diona-hurt-by-herbicide-popup" ]
         probability: 0.66
-    #SS220 add physical parameters begin
-    - type: PhysicalParameters
-      parameterDict:
-        Strength: 0.7
-    #SS220 add physical parameters end
     - reagents: [ WeedKiller ]
       methods: [ Touch ]
       effects:
