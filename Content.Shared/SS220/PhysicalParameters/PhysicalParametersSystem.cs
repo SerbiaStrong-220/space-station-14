@@ -123,6 +123,11 @@ public sealed class PhysicalParametersSystem : EntitySystem
 
         RaiseLocalEvent(ent, ref ev);
 
+        var evHeld = new UserParametersChangedEvent();
+
+        foreach (var item in _handsSystem.EnumerateHeld(ent.Owner))
+            RaiseLocalEvent(item, ref evHeld);
+
         _movementSystem.RefreshMovementSpeedModifiers(ent);
     }
 
@@ -135,11 +140,21 @@ public sealed class PhysicalParametersSystem : EntitySystem
 
         RaiseLocalEvent(ent, ref ev);
 
+        var evHeld = new UserParametersChangedEvent();
+
+        foreach (var item in _handsSystem.EnumerateHeld(ent.Owner))
+            RaiseLocalEvent(item, ref evHeld);
+
         _movementSystem.RefreshMovementSpeedModifiers(ent);
     }
 
     [ByRefEvent]
     public readonly record struct ParametersChangedEvent()
+    {
+    }
+
+    [ByRefEvent]
+    public readonly record struct UserParametersChangedEvent()
     {
     }
 }

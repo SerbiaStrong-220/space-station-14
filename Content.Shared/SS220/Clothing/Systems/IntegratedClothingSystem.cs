@@ -117,6 +117,9 @@ public sealed class IntegratedClothingSystem : EntitySystem
 
     private void ToggleClothing(EntityUid user, Entity<IntegratedClothingComponent> ent)
     {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
         foreach (var slot in ent.Comp.Slots)
         {
             if (!ent.Comp.Containers.TryGetValue(slot, out var containerSlot) || !ent.Comp.ClothingUids.TryGetValue(slot, out var uid))
@@ -134,7 +137,7 @@ public sealed class IntegratedClothingSystem : EntitySystem
                 continue;
             }
 
-            _inventorySystem.TryEquip(user, user, uid, slot, triggerHandContact: true);
+            _inventorySystem.TryEquip(user, user, uid, slot, triggerHandContact: true, force: true);
         }
     }
 
@@ -147,9 +150,7 @@ public sealed class IntegratedClothingSystem : EntitySystem
     private void OnShutdown(Entity<IntegratedClothingComponent> ent, ref ComponentShutdown args)
     {
         foreach (var (key, value) in ent.Comp.ClothingUids)
-        {
             PredictedQueueDel(value);
-        }
     }
 
     private void OnMapInit(Entity<IntegratedClothingComponent> ent, ref MapInitEvent args)
