@@ -27,6 +27,13 @@
       implant: DnaCopyImplant
 
 - type: entity
+  id: NanoSurgeryMachinesImplanter
+  parent: BaseImplantOnlyImplanterSyndi
+  components:
+  - type: Implanter
+    implant: NanoSurgeryMachinesImplant
+
+- type: entity
   id: AdrenalImplanter
   parent: BaseImplantOnlyImplanterSyndi
   components:

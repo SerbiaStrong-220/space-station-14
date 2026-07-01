@@ -24,6 +24,7 @@
         - id: Flare
         - id: FoodSnackNutribrick
         - id: DrinkWaterBottleFull
+        - id: CrowbarRed
   - type: Sprite
     layers:
     - state: internals
@@ -31,11 +32,19 @@
 
 - type: entity
   name: survival box
-  parent: BoxSurvivalBrigmedic
+  parent: BoxCardboard
   id: BoxSurvivalBrigmedicNitrogen
   description: It's a box with basic internals inside.
   suffix: MedSec N2
   components:
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,2,1
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,2,3
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:AllSelector
@@ -47,6 +56,11 @@
         - id: Flare
         - id: FoodSnackNutribrick
         - id: DrinkWaterBottleFull
+        - id: CrowbarRed
+  - type: Sprite
+    layers:
+    - state: internals
+    - state: nitrogentank
   - type: Label
     currentLabel: reagent-name-nitrogen
 
@@ -65,8 +79,8 @@
         - id: SpaceMedipen
         - id: Flare
         - id: FoodSnackNutribrick
-        - id: DrinkWaterBottleFull
         - id: DrinkBeerCan
+        - id: CrowbarRed
   - type: Sprite
     layers:
     - state: internals

@@ -3,9 +3,9 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client.SS220.PenScrambler;
 
-public sealed class ClientPenScramblerSystem : EntitySystem
+public sealed partial class ClientPenScramblerSystem : EntitySystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

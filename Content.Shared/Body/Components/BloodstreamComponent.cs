@@ -1,5 +1,6 @@
 using Content.Shared.Alert;
 using Content.Shared.Body.Systems;
+using Content.Shared.Chat.Prototypes;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
@@ -17,7 +18,7 @@ namespace Content.Shared.Body.Components;
 /// </summary>
 [RegisterComponent, NetworkedComponent,]
 [AutoGenerateComponentState(fieldDeltas: true), AutoGenerateComponentPause]
-[Access(typeof(SharedBloodstreamSystem))]
+// [Access(typeof(SharedBloodstreamSystem))]  // SS220-IB-cough
 public sealed partial class BloodstreamComponent : Component
 {
     public const string DefaultBloodSolutionName = "bloodstream";
@@ -203,4 +204,19 @@ public sealed partial class BloodstreamComponent : Component
     /// </summary>
     [DataField]
     public ProtoId<AlertPrototype> BleedingAlert = "Bleed";
+
+
+    // SS220-IB-cough-begin
+    [DataField]
+    [AutoNetworkedField]
+    public ProtoId<EmotePrototype> BloodCoughEmote = "BloodCough";
+
+    [ViewVariables(VVAccess.ReadOnly)]
+    [AutoNetworkedField]
+    public FixedPoint2 InternalBleedingBloodAccumulator = 0;
+
+    [DataField]
+    [AutoNetworkedField]
+    public FixedPoint2 BloodAmountToCough = 8f;
+    // SS220-IB-cough-end
 }

@@ -4,9 +4,9 @@ using Content.Shared.DoAfter;
 
 namespace Content.Shared.SS220.Detective.Camera;
 
-public abstract class SharedDetectiveCameraAttachSystem : EntitySystem
+public abstract partial class SharedDetectiveCameraAttachSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
 
     protected bool TryAttachCamera(EntityUid target, Entity<DetectiveCameraAttachComponent> cameraEntity, EntityUid user)
     {

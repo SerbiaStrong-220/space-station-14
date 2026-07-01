@@ -8,17 +8,17 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.Hookah;
 
-public sealed class HookahAssemblySystem : EntitySystem
+public sealed partial class HookahAssemblySystem : EntitySystem
 {
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+
     private static readonly EntProtoId HookahPartialId = "HookahPartial";
     private static readonly EntProtoId HookahPartialFullId = "HookahPartialFull";
     private static readonly EntProtoId HookahBaseId = "HookahBase";
     private static readonly LocId HookahAssemblyStage1 = "hookah-assembly-stage1";
     private static readonly LocId HookahAssemblyStage2 = "hookah-assembly-stage2";
     private static readonly LocId HookahAssemblyComplete = "hookah-assembly-complete";
-
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

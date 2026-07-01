@@ -4,16 +4,9 @@ using Robust.Shared.Player;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
 
-public sealed class SharedMiGoPlantSystem : EntitySystem
+public sealed partial class SharedMiGoPlantSystem : EntitySystem
 {
-    [Dependency] private readonly SharedUserInterfaceSystem _userInterfaceSystem = default!;
-
-    /// <inheritdoc/>
-    public override void Initialize()
-    {
-        base.Initialize();
-        //SubscribeLocalEvent<MiGoComponent, BoundUIOpenedEvent>(OnBoundUIOpened);
-    }
+    [Dependency] private SharedUserInterfaceSystem _userInterfaceSystem = default!;
 
     public void OpenUI(Entity<MiGoComponent> entity, ActorComponent actor)
     {
