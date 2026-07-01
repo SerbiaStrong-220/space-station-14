@@ -9,7 +9,6 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.SS220.ItemExtension;
 using Content.Shared.SS220.Weapons.Melee.Components;
 using Content.Shared.Weapons.Melee;
-using Content.Shared.Weapons.Melee.Events;
 
 namespace Content.Shared.SS220.PhysicalParameters;
 
@@ -49,6 +48,12 @@ public sealed class PhysicalParametersSystem : EntitySystem
         {
             if (weaponComp.AffectedDamageTypes.Contains(type.Key))
             {
+                if (args.ModifiedDamage.DamageDict.ContainsKey(type.Key))
+                {
+                    args.ModifiedDamage.DamageDict[type.Key] += type.Value + (type.Value * strengthModifier - type.Value) * weaponComp.StrengthDamageMultiplier;
+                    continue;
+                }
+
                 args.ModifiedDamage.DamageDict.Add(type.Key, type.Value + (type.Value * strengthModifier - type.Value) * weaponComp.StrengthDamageMultiplier);
                 continue;
             }
@@ -102,8 +107,8 @@ public sealed class PhysicalParametersSystem : EntitySystem
         FixedPoint2 strengthModifier = 1f;
 
         if (ent.Comp.StrengthAffectsArms &&
-            ent.Comp.ParameterDict.ContainsKey(Parameter.Strength))
-            strengthModifier = ent.Comp.ParameterDict[Parameter.Strength];
+            ent.Comp.ParameterDict.ContainsKey(parameter))
+            strengthModifier = ent.Comp.ParameterDict[parameter];
 
         if (TryComp<HandsComponent>(ent.Owner, out var handsComp) &&
             handsComp.ActiveHandId != null &&
@@ -128,6 +133,8 @@ public sealed class PhysicalParametersSystem : EntitySystem
         foreach (var item in _handsSystem.EnumerateHeld(ent.Owner))
             RaiseLocalEvent(item, ref evHeld);
 
+        Dirty(ent);
+
         _movementSystem.RefreshMovementSpeedModifiers(ent);
     }
 
@@ -144,6 +151,8 @@ public sealed class PhysicalParametersSystem : EntitySystem
 
         foreach (var item in _handsSystem.EnumerateHeld(ent.Owner))
             RaiseLocalEvent(item, ref evHeld);
+
+        Dirty(ent);
 
         _movementSystem.RefreshMovementSpeedModifiers(ent);
     }

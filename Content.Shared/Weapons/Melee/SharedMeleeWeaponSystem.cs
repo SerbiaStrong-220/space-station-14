@@ -615,6 +615,12 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         //ss220 extended weapon logic start
         var weaponAttackEvent = new WeaponAttackEvent(user, target.Value, AttackType.LIGHT);
         RaiseLocalEvent(meleeUid, weaponAttackEvent);
+
+        var attackerEvent = new MeleeAttackerEvent(meleeUid, target.Value, damage);
+        RaiseLocalEvent(user, ref attackerEvent);
+
+        if (attackerEvent.ModifiedDamage != new DamageSpecifier())
+            damage = attackerEvent.ModifiedDamage;
         //ss220 extended weapon logic end
 
         // SS220 hook attack event start
@@ -806,6 +812,12 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             //ss220 extended weapon logic start
             var weaponAttackEvent = new WeaponAttackEvent(user, entity, AttackType.HEAVY);
             RaiseLocalEvent(meleeUid, weaponAttackEvent);
+
+            var attackerEvent = new MeleeAttackerEvent(meleeUid, entity, damage);
+            RaiseLocalEvent(user, ref attackerEvent);
+
+            if (attackerEvent.ModifiedDamage != new DamageSpecifier())
+                damage = attackerEvent.ModifiedDamage;
             //ss220 extended weapon logic end
 
             // SS220 hook attack event start
