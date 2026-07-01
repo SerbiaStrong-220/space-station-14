@@ -197,7 +197,7 @@
   id: PlayerBorgChassisSecurityBattery
   parent: BorgChassisSecurity
   name: security borg
-  description: A man-machine hybrid that aims to replicate itself. 
+  description: A cyborg security service created to help security personnel maintain order at the station.
   suffix: Battery, Module, Ghost role
   components:
   - type: ContainerFill

@@ -133,12 +133,12 @@
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: clowning-module }
 
 - type: entity
-  id: ZiptiesPlaceholder
+  id: BorgModuleTanksPlaceholder
   parent: BaseItem
   components:
   - type: Sprite
-    sprite: Objects/Misc/zipties.rsi
-    state: cuff
+    sprite: SS220/Placeholders/tanks.rsi
+    state: tanks
     
 - type: entity
   id: BorgModuleSafety
@@ -158,8 +158,8 @@
     - item: BorgWeaponDisabler
     - item: BorgFlash
     - hand:
-        emptyLabel: borg-slot-zipties-empty #Либо это для того чтобы потом локализировать либо для того чтобы держать
-        emptyRepresentative: Zipties #Возможно если написать cuff то это изменит на спрайт и не нужно делать другой компонент
+        emptyLabel: borg-slot-zipties-empty
+        emptyRepresentative: Zipties
         whitelist:
           tags:
           - Zipties

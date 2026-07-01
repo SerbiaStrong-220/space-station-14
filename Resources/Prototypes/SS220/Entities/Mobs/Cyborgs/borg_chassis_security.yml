@@ -3,7 +3,7 @@
   id: BorgChassisSecurity
   name: security borg
   suffix: with brain
-  description: A man-machine hybrid that aims to replicate itself. 
+  description: A cyborg security service created to help security personnel maintain order at the station.
   components:  
   - type: BorgTransponder
     name: sec borg

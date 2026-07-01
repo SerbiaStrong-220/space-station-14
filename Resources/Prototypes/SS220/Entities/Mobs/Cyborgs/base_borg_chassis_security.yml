@@ -2,7 +2,7 @@
   parent: BaseBorgChassisNotIonStormable
   id: BaseSecurityChassis
   name: security borg
-  description: A man-machine hybrid that aims to replicate itself. They love extracting brains to insert into fresh Xenoborg chassis to grow their army.
+  description: A cyborg security service created to help security personnel maintain order at the station.
   save: false
   abstract: true
   components:
@@ -108,4 +108,4 @@
     interactSuccessSound:
       path: /Audio/Ambience/Objects/periodic_beep.ogg
   - type: BypassLock
-    bypassDelay: 15 # We don't want people to easily be able to remove xenoborg brains.
+    bypassDelay: 15
