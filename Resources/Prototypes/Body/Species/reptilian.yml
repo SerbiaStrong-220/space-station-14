@@ -139,7 +139,9 @@
   #SS220 add physical parameters begin
   - type: PhysicalParameters
     parameterDict:
-      Strength: 1.15
+      Strength: 1.07
+    genderModifier:
+      Strength: 0.8
   #SS220 add physical parameters end
   # SS220-Add-Languages begin
   - type: Language

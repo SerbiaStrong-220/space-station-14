@@ -67,6 +67,8 @@
   - type: PhysicalParameters
     parameterDict:
       Strength: 0.85
+    genderModifier:
+      Strength: -0.5
   #SS220 add physical parameters end
   - type: DwarfAccent #SS220 Dwarf accent
   # - type: ReplacementAccent

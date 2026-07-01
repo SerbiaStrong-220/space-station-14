@@ -4,8 +4,10 @@ using Content.Shared.Clothing;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Humanoid;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Movement.Systems;
+using Content.Shared.SS220.Grab;
 using Content.Shared.SS220.ItemExtension;
 using Content.Shared.SS220.Weapons.Melee.Components;
 using Content.Shared.Weapons.Melee;
@@ -22,6 +24,7 @@ public sealed class PhysicalParametersSystem : EntitySystem
         SubscribeLocalEvent<PhysicalParametersComponent, MeleeAttackerEvent>(OnMeleeAttack);
         SubscribeLocalEvent<PhysicalParametersModifyingClothingComponent, ClothingGotEquippedEvent>(OnGotEquipped);
         SubscribeLocalEvent<PhysicalParametersModifyingClothingComponent, GotUnequippedEvent>(OnGotUnequipped);
+        SubscribeLocalEvent<PhysicalParametersModifyingClothingComponent, GrabDelayModifiersEvent>(OnGrabAttempt);
 
         base.Initialize();
     }
@@ -102,6 +105,16 @@ public sealed class PhysicalParametersSystem : EntitySystem
         }
     }
 
+    public void OnGrabAttempt(Entity<PhysicalParametersComponent> ent, ref GrabDelayModifiersEvent args)
+    {
+        FixedPoint2 grabbedStrength = 1;
+
+        if (TryComp<PhysicalParametersComponent>(args.Grabbable, out var grabbedComp))
+            grabbedStrength = GetParameterValue((args.Grabbable, grabbedComp), Parameter.Strength);
+
+        args.Multiply((grabbedStrength / GetParameterValue(ent, Parameter.Strength)).Float());
+    }
+
     public FixedPoint2 GetParameterValue(Entity<PhysicalParametersComponent> ent, Parameter parameter)
     {
         FixedPoint2 strengthModifier = 1f;
@@ -115,6 +128,10 @@ public sealed class PhysicalParametersSystem : EntitySystem
             _handsSystem.TryGetHand(ent.Owner, handsComp.ActiveHandId, out var activeHand) &&
             activeHand.Value.StrengthModifier != null)
             strengthModifier = (FixedPoint2)activeHand.Value.StrengthModifier;
+
+        if (TryComp<HumanoidProfileComponent>(ent.Owner, out var profileComp) && profileComp.Sex == Sex.Female)
+            if (ent.Comp.GenderModifier.TryGetValue(parameter, out var genderModifier))
+                strengthModifier += genderModifier;
 
         return strengthModifier;
     }

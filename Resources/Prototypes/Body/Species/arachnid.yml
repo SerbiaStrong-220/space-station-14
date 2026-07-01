@@ -106,7 +106,9 @@
   #SS220 add physical parameters begin
   - type: PhysicalParameters
     parameterDict:
-      Strength: 1.1
+      Strength: 1.05
+    genderModifier:
+      Strength: 0.5
   #SS220 add physical parameters end
   - type: Tag
     tags:
