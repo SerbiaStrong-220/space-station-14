@@ -98,6 +98,11 @@
         layer:
         - MobLayer
 # SS220-change-races-height end
+  #SS220 add physical parameters begin
+  - type: PhysicalParameters
+    parameterDict:
+      Strength: 0.65
+  #SS220 add physical parameters end
   - type: Storage
     clickInsert: false
     grid:

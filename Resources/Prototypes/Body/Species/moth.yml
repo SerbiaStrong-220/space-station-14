@@ -158,6 +158,11 @@
         layer:
         - MobLayer
 # SS220-change-races-height end
+  #SS220 add physical parameters begin
+  - type: PhysicalParameters
+    parameterDict:
+      Strength: 0.7
+  #SS220 add physical parameters end
   - type: Damageable
     damageModifierSet: Moth
   - type: ZombieAccentOverride

@@ -136,6 +136,11 @@
         layer:
         - MobLayer
   # SS220-change-races-height end
+  #SS220 add physical parameters begin
+  - type: PhysicalParameters
+    parameterDict:
+      Strength: 1.15
+  #SS220 add physical parameters end
   # SS220-Add-Languages begin
   - type: Language
     selectedLanguage: Galactic

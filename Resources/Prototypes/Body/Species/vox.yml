@@ -194,6 +194,11 @@
     speechVerb: Vox
     speechSounds: Vox
     allowedEmotes: ['Click', 'Chitter']
+  #SS220 add physical parameters begin
+  - type: PhysicalParameters
+    parameterDict:
+      Strength: 0.8
+  #SS220 add physical parameters end
   - type: TypingIndicator
     proto: vox
   - type: CreamPied

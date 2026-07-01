@@ -63,6 +63,11 @@
       Male: UnisexDwarf
       Female: FemaleDwarf
       Unsexed: UnisexDwarf
+  #SS220 add physical parameters begin
+  - type: PhysicalParameters
+    parameterDict:
+      Strength: 0.85
+  #SS220 add physical parameters end
   - type: DwarfAccent #SS220 Dwarf accent
   # - type: ReplacementAccent
   #   accent: scottish
