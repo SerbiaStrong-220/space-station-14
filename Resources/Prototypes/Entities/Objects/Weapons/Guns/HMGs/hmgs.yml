@@ -35,7 +35,7 @@
   name: minigun
   id: WeaponMinigun
   parent: [ BaseWeaponHeavyMachineGun]
-  description: Vzzzzzt! Rahrahrahrah! Vrrrrr! Uses .10 rifle ammo.
+  description: Typically this machine gun is mounted on mechs, LAVs and shuttles, but this one seems to be fitted to be carried in hands.. Chambered in 7,62x55. #SS220 weapon overhaul
   components:
   - type: AmmoCounter #SS220-FIX bullet show
   - type: Sprite
@@ -49,7 +49,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/minigun.ogg
   - type: BallisticAmmoProvider
-    proto: CartridgeMinigun
+    proto: FullRifleCartridge #SS220 weapon overhaul
     capacity: 1000
   - type: ContainerContainer
     containers:

@@ -1,0 +1,11 @@
+- type: entity
+  id: BulletMagnumHP
+  name: bullet (11,5x32 HPIB)
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 46
+      armourPiercing: -10

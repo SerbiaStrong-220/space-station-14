@@ -30,6 +30,67 @@
 #ss220 dynamic-price end
 
 - type: listing
+  id: UplinkDevastator
+  name: uplink-devastator-name
+  description: uplink-devastator-desc
+  icon: { sprite: Objects/Weapons/Guns/Battery/energy_magnum.rsi, state: icon }
+  productEntity: BriefcaseWeaponDevastatorFilled
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 13
+  cost:
+    Telecrystal: 17
+  categories:
+  - UplinkWeaponry
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+      - DebugUplink
+
+- type: listing
+  id: UplinkEstoc
+  name: uplink-estoc-name
+  description: uplink-estoc-desc
+  icon: { sprite: Objects/Weapons/Guns/Rifles/estoc.rsi, state: icon }
+  productEntity: ClothingBackpackDuffelSyndicateFilledRifle
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 16
+  cost:
+    Telecrystal: 20
+  categories:
+  - UplinkWeaponry
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+      - DebugUplink
+
+- type: listing
+  id: UplinkWeaponAdvancedLaser
+  name: uplink-advanced-laser-name
+  description: uplink-advanced-laser-desc
+  icon: { sprite: Objects/Weapons/Guns/Battery/advancedlasergun.rsi, state: base }
+  productEntity: WeaponAdvancedLaser
+  discountCategory: veryRareDiscounts
+  categories:
+  - UplinkWeaponry
+  discountDownTo:
+    Telecrystal: 9
+  cost:
+    Telecrystal: 10
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 8
+    MediumDynamic:
+      Telecrystal: 7
+    HardDynamic:
+      Telecrystal: 6
+
+- type: listing
   id: UplinkOrigami
   name: uplink-origami-name
   description: uplink-origami-desc
@@ -54,6 +115,24 @@
     HardDynamic:
       Telecrystal: 8
 #ss220 dynamic-price end
+
+- type: listing
+  id: UplinkCommandoModkit
+  name: uplink-commando-modkit
+  description: uplink-commando-modkit-desc
+  icon: { sprite: SS220/Objects/Weapons/Guns/Modkits/commando.rsi, state: icon }
+  productEntity: CommandoModkit
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkWeaponry
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 5
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 3
 
 # Implants
 
@@ -114,6 +193,26 @@
       Telecrystal: 4
 #ss220 dynamic-price end
 # JobItems
+
+- type: listing
+  id: SyndicateFilledSniperBundle
+  name: uplink-sniper-bundle-name
+  description: uplink-sniper-bundle-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Snipers/heavy_sniper.rsi, state: icon }
+  productEntity: ClothingBackpackDuffelSyndicateFilledSniperBundle
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 15
+  cost:
+    Telecrystal: 19
+  categories:
+  - UplinkWeaponry
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+      - DebugUplink
 
 - type: listing
   id: UplinkMimeRelic
@@ -219,19 +318,19 @@
   productEntity: ThermalVisorChameleon
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 5 #ss220-uplink-discounts
   cost:
-    Telecrystal: 2 #ss220-uplink-discounts
+    Telecrystal: 6 #ss220-uplink-discounts
   categories:
   - UplinkWearables
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 6
     MediumDynamic:
-      Telecrystal: 3
+      Telecrystal: 5
     HardDynamic:
-      Telecrystal: 3
+      Telecrystal: 4
 #ss220 dynamic-price end
 
 - type: listing
@@ -241,20 +340,18 @@
   icon: {sprite: /Textures/SS220/Interface/Actions/implants_cla.rsi, state: EyeON}
   productEntity: ThermalVisorImplanter
   discountCategory: rareDiscounts
-  discountDownTo:
-    Telecrystal: 2 #ss220-uplink-discounts
   cost:
-    Telecrystal: 5 #ss220-uplink-discounts
+    Telecrystal: 7 #ss220-uplink-discounts
   categories:
   - UplinkImplants
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 5
+      Telecrystal: 7
     MediumDynamic:
-      Telecrystal: 5
-    HardDynamic:
       Telecrystal: 6
+    HardDynamic:
+      Telecrystal: 5
 #ss220 dynamic-price end
 
 - type: listing
@@ -352,10 +449,8 @@
   icon: {sprite: Clothing/Head/Helmets/swat_syndicate.rsi, state: icon}
   productEntity: ClothingHeadHelmetSwatSyndicate
   discountCategory: rareDiscounts
-  discountDownTo:
-    Telecrystal: 2 #ss220-uplink-discounts
   cost:
-    Telecrystal: 3 #ss220-uplink-discounts
+    Telecrystal: 2 #ss220-uplink-discounts
   categories:
   - UplinkWearables
   conditions:
@@ -388,6 +483,7 @@
     whitelist:
       tags:
       - NukeOpsUplink
+      - DebugUplink
 
 - type: listing
   id: UplinkBorgModuleFlamingAxe
@@ -452,11 +548,11 @@
     Telecrystal: 8
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 16
+      Telecrystal: 15
     MediumDynamic:
-      Telecrystal: 14
+      Telecrystal: 9
     HardDynamic:
-      Telecrystal: 11
+      Telecrystal: 7
   categories:
   - UplinkWearables
 
@@ -467,14 +563,14 @@
   icon: {sprite: /Textures/Clothing/OuterClothing/Vests/vest.rsi, state: icon}
   productEntity: ClothingOuterVestWebChameleon
   cost:
-    Telecrystal: 8
+    Telecrystal: 5
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 8
+      Telecrystal: 4
     MediumDynamic:
-      Telecrystal: 10
+      Telecrystal: 5
     HardDynamic:
-      Telecrystal: 12
+      Telecrystal: 6
   categories:
   - UplinkWearables
 
@@ -656,6 +752,7 @@
     whitelist:
       tags:
       - NukeOpsUplink
+      - DebugUplink
 
 - type: listing
   id: UplinkDABChemicalImplant
@@ -683,6 +780,7 @@
     blacklist:
       tags:
       - NukeOpsUplink
+      - DebugUplink
 
 - type: listing
   id: UplinkFakeCaptainIDCard
@@ -734,24 +832,364 @@
     HardDynamic:
       Telecrystal: 3
 
-  # For the Python
+# Ammunition
+- type: listing
+  id: UplinkPowerCellBlaster
+  name: uplink-blaster-cell-name
+  description: uplink-blaster-cell-desc
+  icon: { sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/krs_magblaster.rsi, state: base }
+  productEntity: PowerCellBlasterFull
+  cost:
+    Telecrystal: 3
+  categories:
+  - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+      - DebugUplink
+
 - type: listing
   id: UplinkSpeedLoaderMagnumAP
   name: uplink-speedloader-magnum-name
-  description: uplink-speedloader-magnu-desc
+  description: uplink-armor-piercing-ammo-desc
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/SpeedLoaders/Magnum/magnum_speed_loader.rsi, state: icon }
   productEntity: SpeedLoaderMagnumAP
   cost:
-    Telecrystal: 4
+    Telecrystal: 2
   categories:
   - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 4
+      Telecrystal: 1 #it was WAY too much for that
     MediumDynamic:
-      Telecrystal: 4
+      Telecrystal: 1
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazineRifleHP
+  name: uplink-intermediate-hollow-point-ammo-name
+  description: uplink-hollow-point-ammo-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Rifle/rifle_mag.rsi, state: red-icon }
+  productEntity: MagazineRifleHP
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazineRifleAP
+  name: uplink-intermediate-armor-piercing-ammo-name
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Rifle/rifle_mag.rsi, state: green-icon }
+  description: uplink-armor-piercing-ammo-desc
+  productEntity: MagazineRifleAP
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazinePistolAP
+  name: uplink-pistol-armor-piercing-ammo-name
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_mag.rsi, state: green-icon }
+  description: uplink-armor-piercing-ammo-desc
+  productEntity: MagazinePistolAP
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazinePistolHP
+  name: uplink-pistol-hollow-point-ammo-name
+  description: uplink-hollow-point-ammo-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_mag.rsi, state: red-icon }
+  productEntity: MagazinePistolHP
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazinePistolSubMachineGunAP
+  name: uplink-smg-armor-piercing-ammo-name
+  description: uplink-armor-piercing-ammo-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: green-icon }
+  productEntity: MagazinePistolSubMachineGunAP
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazinePistolSubMachineGunHP
+  name: uplink-smg-hollow-point-ammo-name
+  description: uplink-hollow-point-ammo-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: red-icon }
+  productEntity: MagazinePistolSubMachineGunHP
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazineAntiMaterialFMJ
+  name: uplink-antimaterial-full-metal-jacket-ammo-name
+  description: uplink-full-metal-jacket-ammo-desc
+  icon: { sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/antimaterial_mag.rsi, state: icon }
+  productEntity: MagazineAntiMaterialFMJ
+  cost:
+    Telecrystal: 1
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazineAntiMaterialHP
+  name: uplink-antimaterial-hollow-point-ammo-name
+  description: uplink-hollow-point-ammo-desc
+  icon: { sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/antimaterial_mag.rsi, state: red-icon }
+  productEntity: MagazineAntiMaterialHP
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazineAntiMaterialAP
+  name: uplink-antimaterial-armor-piercing-ammo-name
+  description: uplink-armor-piercing-ammo-desc
+  icon: { sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/antimaterial_mag.rsi, state: green-icon }
+  productEntity: MagazineAntiMaterialAP
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazineAntiMaterialHE
+  name: uplink-antimaterial-high-explosive-ammo-name
+  description: uplink-antimaterial-high-explosive-ammo-desc
+  icon: { sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/antimaterial_mag.rsi, state: black-icon }
+  productEntity: MagazineAntiMaterialExplosive
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazineFullRifleFMJ
+  name: uplink-full-rifle-full-metal-jacket-ammo-name
+  description: uplink-full-metal-jacket-ammo-desc
+  icon: { sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/full_rifle_mag.rsi, state: icon }
+  productEntity: MagazineFullRifleFMJ
+  cost:
+    Telecrystal: 1
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazineFullRifleHP
+  name: uplink-full-rifle-hollow-point-ammo-name
+  description: uplink-hollow-point-ammo-desc
+  icon: { sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/full_rifle_mag.rsi, state: red-icon }
+  productEntity: MagazineFullRifleHP
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazineFullRifleAP
+  name: uplink-full-rifle-armor-piercing-ammo-name
+  description: uplink-armor-piercing-ammo-desc
+  icon: { sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/full_rifle_mag.rsi, state: green-icon }
+  productEntity: MagazineFullRifleAP
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazineFullRifleAPM2
+  name: uplink-full-rifle-armor-piercing-m2-ammo-name
+  description: uplink-armor-piercing-m2-ammo-desc
+  icon: { sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/full_rifle_mag.rsi, state: purple-icon }
+  productEntity: MagazineFullRifleAPM2
+  cost:
+    Telecrystal: 3
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1 #Not nearly as valuable without the estoc
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazineShotgunHEI
+  name: uplink-incendiary-explosive-shotgun-ammo-name
+  description: uplink-incendiary-explosive-ammo-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/m12.rsi, state: base }
+  productEntity: MagazineShotgunHEI
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazineShotgunHE
+  name: uplink-high-explosive-shotgun-ammo-name
+  description: uplink-high-explosive-ammo-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/m12.rsi, state: pellets }
+  productEntity: MagazineShotgunExplosive
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+
+- type: listing
+  id: UplinkMagazineLightRifleBox
+  name: uplink-machine-gun-box-ammo-name
+  description: uplink-machine-gun-box-ammo-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/LightRifle/light_rifle_box.rsi, state: base }
+  productEntity: MagazineLightRifleBox
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+      - DebugUplink
+
+- type: listing
+  id: UplinkMagazineShotgunHP
+  name: uplink-hollow-point-shotgun-ammo-name
+  description: uplink-hollow-point-ammo-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/m12.rsi, state: slug }
+  productEntity: MagazineShotgunHP
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
 
 - type: listing
   id: UplinkUltrabrightLantern

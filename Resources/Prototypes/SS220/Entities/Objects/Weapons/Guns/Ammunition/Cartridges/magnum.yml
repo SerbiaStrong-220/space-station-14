@@ -1,0 +1,15 @@
+- type: entity
+  id: CartridgeMagnumHP
+  name: cartridge (11,5x32 magnum HPIB)
+  parent: BaseCartridgeMagnum
+  description: Heavy magnum cartridge mostly used by revolvers. HPIB ammo is very effective against unarmored targets.
+  components:
+  - type: CartridgeAmmo
+    proto: BulletMagnumHP
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#cf0404"

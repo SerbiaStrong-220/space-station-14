@@ -23,18 +23,25 @@
     - suitStorage
   - type: Wieldable
     unwieldOnUse: false
+  #SS220 weapon overhaul begin
   - type: GunWieldBonus
-    minAngle: -20
-    maxAngle: -20
+    minAngle: -7
+    maxAngle: -26
+    angleIncrease: -1.1
+  - type: GunAimable
+    minAngle: -16
+    maxAngle: -8
   - type: Gun
     minAngle: 24
     maxAngle: 45
-    angleIncrease: 4
+    angleIncrease: 2.50
     angleDecay: 16
-    fireRate: 8
+    fireRate: 6
+  #SS220 weapon overhaul end
     selectedMode: FullAuto
     availableModes:
       - FullAuto
+      - SemiAuto #SS220 weapon overhaul
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/lmg.ogg
     soundEmpty:
@@ -87,12 +94,6 @@
     steps: 4
     zeroVisible: true
   - type: Appearance
-    #ss220lowTTKUpdate btw lmg too OP ^^^^
-  - type: HeldSpeedModifier
-    walkModifier: 0.7
-    sprintModifier: 0.7
-    mirrorClothingModifier: false
-    #ss220lowTTKUpdate
   - type: StaticPrice
     price: 10000
 
@@ -107,12 +108,17 @@
         path: /Audio/SS220/Effects/Drop/lsmg.ogg ##new sound_drop effect, add MIXnikita
         params:
           volume: 2
+    #SS220 weapon overhaul begin
+    - type: GunAimable
+      minAngle: -16
+      maxAngle: -8
     - type: Gun
-      minAngle: 4
-      maxAngle: 25
-      angleIncrease: 4
+      minAngle: 17
+      maxAngle: 19
+      angleIncrease: 1.4
       angleDecay: 16
-      fireRate: 8
+      fireRate: 6
+    #SS220 weapon overhaul end
       selectedMode: FullAuto
       availableModes:
         - FullAuto
@@ -140,6 +146,6 @@
       proto: CartridgeLightRifle
       cycleable: false # No synthesizing ammo for your syndicate masters.
     - type: BallisticAmmoSelfRefiller
-      autoRefillRate: 4s
+      autoRefillRate: 0.7s #SS220 weapon overhaul #much faster because the DPS became way lower and the weapon was repurposed for suppressive fire(which requires LOTS of ammo)
       affectedByEmp: true
     - type: AmmoCounter

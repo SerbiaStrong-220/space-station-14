@@ -81,15 +81,10 @@
     impactEffect: BulletImpactEffectGreenLaser
     damage:
       types:
-        Poison: 15
+        Poison: 20
     soundHit:
       collection: WeakHit
     forceSound: true
-  - type: StaminaDamageOnCollide
-    damage: 25 #weaponBalance
-  - type: StunOnCollide
-    stunAmount: 2 #weaponBalance #ss220 fix 4 -> 2
-    knockdownAmount: 2 #weaponBalance
 
 - type: entity
   name: energy crossbow bolt
@@ -100,12 +95,7 @@
   - type: Projectile
     damage:
       types:
-        Poison: 10
-  - type: StaminaDamageOnCollide
-    damage: 55 #weaponBalance
-  - type: StunOnCollide
-    stunAmount: 1 #weaponBalance
-    knockdownAmount: 1 #weaponBalance
+        Poison: 20
 
 
 - type: entity
@@ -477,8 +467,8 @@
     impactEffect: BulletImpactEffectBlaster
     damage:
       types:
-        Heat: 14
-        Piercing: 5
+        Heat: 55
+      armourPiercing: 45
     soundHit:
       collection: WeakHit
     forceSound: true
@@ -607,3 +597,24 @@
     damage:
       types:
         Piercing: 120
+
+- type: entity
+  name: plasma bolt
+  id: BulletPlasma
+  categories: [ HideSpawnMenu ]
+  parent: BulletLaser
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles_magnum.rsi
+    layers:
+    - state: magnum
+      shader: unshaded
+  - type: PointLight
+    enabled: true
+    color: "#ff4300"
+  - type: Projectile
+    impactEffect: BulletImpactEffectOrangeDisabler
+    damage:
+      types:
+        Heat: 90
+      armourPiercing: 45

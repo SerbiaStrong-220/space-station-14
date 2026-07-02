@@ -1,0 +1,44 @@
+- type: entity
+  parent: BaseMagazineBoxAntiMateriel
+  id: MagazineBoxAntiMaterielHP
+  name: ammunition box (15,24x140 antimaterial HPIB)
+  description: A cardboard box of 15,24x140 anti-materiel rounds.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeAntiMaterielHP
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: BaseMagazineBoxAntiMateriel
+  id: MagazineBoxAntiMaterielAP
+  name: ammunition box (15,24x140 antimaterial AP)
+  description: A cardboard box of 15,24x140 anti-materiel rounds.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeAntiMaterielAP
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: BaseMagazineBoxAntiMateriel
+  id: MagazineBoxAntiMaterielHE
+  name: ammunition box (15,24x140 antimaterial HE)
+  description: A cardboard box of 15,24x140 anti-materiel rounds.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeAntiMaterielExplosive
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]

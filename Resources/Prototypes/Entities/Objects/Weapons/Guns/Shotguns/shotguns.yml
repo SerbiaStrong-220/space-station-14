@@ -19,7 +19,7 @@
     shape:
     - 0,0,4,0
   - type: Clothing
-    sprite: SS220/Objects/Weapons/Guns/Shotguns/db_shotgun.rsi #ss220 double-barreled shotgun resprite 
+    sprite: SS220/Objects/Weapons/Guns/Shotguns/db_shotgun.rsi #ss220 double-barreled shotgun resprite
     quickEquip: false
     slots:
     - Back
@@ -27,6 +27,7 @@
   - type: AmmoCounter
   - type: Gun
     fireRate: 2
+    angleIncrease: 7
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -48,6 +49,73 @@
         ents: []
   - type: StaticPrice
     price: 500
+
+#SS220 weapon overhaul begin
+- type: entity
+  name: BaseWeaponShotgun
+  parent: BaseItem
+  id: BaseWeaponShotgunAlt
+  description: A rooty tooty point and shooty.
+  abstract: true
+  components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/revolver.ogg
+      params:
+        volume: 2
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,4,0
+  - type: Clothing
+    sprite: SS220/Objects/Weapons/Guns/Shotguns/db_shotgun.rsi #ss220 double-barreled shotgun resprite
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
+  - type: AmmoCounter
+  - type: Gun
+    fireRate: 2
+    angleIncrease: 7
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/shotgun.ogg
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/empty.ogg
+  - type: ChamberMagazineAmmoProvider
+    canBeLoadedManually: true
+    mustBeLoadedThroughChamber: false
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/m41_cock.ogg
+  - type: InternalMagazine
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: InternalMagazineShotgun
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+            - ShellShotgun
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: StaticPrice
+    price: 500
+#SS220 weapon overhaul end
 
 - type: entity
   name: Bulldog
@@ -77,8 +145,22 @@
     - Back
     - suitStorage
   - type: AmmoCounter
-  - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
+  #SS220 weapon overhaul begin
+  - type: GunWieldBonus
+    minAngle: -5
+    maxAngle: -17
+    angleIncrease: -2.6
+  - type: GunAimable
+    minAngle: -8
+    maxAngle: -7
+  #SS220 weapon overhaul end
   - type: Gun
+  #SS220 weapon overhaul begin
+    angleIncrease: 9
+    angleDecay: 6
+    minAngle: 15
+    maxAngle: 35
+  #SS220 weapon overhaul end
     fireRate: 2
     selectedMode: FullAuto
     availableModes:
@@ -99,11 +181,20 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
         insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+      gun_chamber:
+        name: Chamber
+        startingItem: ShellShotgun
+        priority: 1
+        whitelist:
+          tags:
+            - ShellShotgun
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
-  - type: MagazineAmmoProvider
+  - type: ChamberMagazineAmmoProvider
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/ltrifle_cock.ogg
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -123,10 +214,21 @@
   - type: Item
     sprite: SS220/Objects/Weapons/Guns/Shotguns/db_shotgun_inhands_64x.rsi #ss220 double-barreled shotgun resprite
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
+  #SS220 weapon overhaul begin
+  - type: GunWieldBonus
+    minAngle: -5
+    maxAngle: -21
+    angleIncrease: -6.2
+  - type: GunAimable
+    minAngle: -9
+    maxAngle: -8
   - type: Gun
+    angleIncrease: 8
+    angleDecay: 8
+    minAngle: 15
+    maxAngle: 35
     fireRate: 3
-  - type: GunSpreadModifier
-    spread: 0.6
+  #SS220 weapon overhaul end
   - type: BallisticAmmoProvider
     capacity: 2
   - type: Construction
@@ -146,7 +248,7 @@
 
 - type: entity
   name: Enforcer
-  parent: [BaseWeaponShotgun, BaseGunWieldable, BaseSecurityContraband]
+  parent: [BaseWeaponShotgunAlt, BaseGunWieldable, BaseSecurityContraband] #SS220 weapon overhaul
   id: WeaponShotgunEnforcer
   description: A premium semi-automatic shotgun, and the pride of all security forces. Uses .50 shotgun shells.
   components: # intend for Enforcer to have wider choke for semi-auto function
@@ -156,26 +258,37 @@
     sprite: Objects/Weapons/Guns/Shotguns/enforcer.rsi
   - type: Item
     sprite: Objects/Weapons/Guns/Shotguns/enforcer_inhands_64x.rsi
-  - type: BallisticAmmoProvider
-  - type: Gun # Corvax-Guns
+  #SS220 weapon overhaul begin
+  - type: GunWieldBonus
+    minAngle: -5
+    maxAngle: -17
+    angleIncrease: -5.2
+  - type: GunAimable
+    minAngle: -8
+    maxAngle: -7
+  - type: GunRequiresWield
+  - type: Appearance
+  - type: Gun
+    angleIncrease: 7
+    angleDecay: 6
+    minAngle: 15
+    maxAngle: 35
+  #SS220 weapon overhaul end
     soundGunshot:
       path: /Audio/Corvax/Weapons/Guns/Gunshots/shotgun_metal.ogg
-  - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
 
 - type: entity
   parent: WeaponShotgunEnforcer
   id: WeaponShotgunEnforcerRubber
   suffix: Non-Lethal
   components:
-  - type: BallisticAmmoProvider
-    proto: ShellShotgunBeanbag
   - type: Gun # Corvax-Guns
     soundGunshot:
       path: /Audio/Corvax/Weapons/Guns/Gunshots/shotgun_metal.ogg
 
 - type: entity
   name: Kammerer
-  parent: [BaseWeaponShotgun, BaseGunWieldable, BaseSecurityContraband]
+  parent: [BaseWeaponShotgunAlt, BaseGunWieldable, BaseSecurityContraband] #SS220 weapon overhaul
   id: WeaponShotgunKammerer
   description: An old yet faithful design, and a favorite among irregular forces of many worlds. Uses .50 shotgun shells.
   components: # intend for Kammerer to have tighter choke for slower fire rate and/or manual cycling
@@ -187,12 +300,31 @@
   - type: Clothing
     sprite: SS220/Objects/Weapons/Guns/Shotguns/pump.rsi #SS220 kammerer resprite
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
+  #SS220 weapon overhaul begin
+  - type: ChamberMagazineAmmoProvider
+    autoCycle: false
+    soundBoltOpened:
+      path: /Audio/Weapons/Guns/Cock/shotgun_open.ogg
+    soundBoltClosed:
+      path: /Audio/Weapons/Guns/Cock/shotgun_close.ogg
+  - type: Appearance
+  - type: GunWieldBonus
+    minAngle: -5
+    maxAngle: -21
+    angleIncrease: -6.2
+  - type: GunAimable
+    minAngle: -9
+    maxAngle: -8
   - type: Gun
+    angleIncrease: 8
+    angleDecay: 8
+    minAngle: 15
+    maxAngle: 35
+  #SS220 weapon overhaul end
     fireRate: 1
     soundGunshot: # Corvax-Guns
       path: /Audio/Corvax/Weapons/Guns/Gunshots/shotgun_alt.ogg
-  - type: GunSpreadModifier
-    spread: 0.6
+
   - type: Tag
     tags:
     - WeaponShotgunKammerer
@@ -212,9 +344,18 @@
     shape:
     - 0,0,2,0
     sprite: SS220/Objects/Weapons/Guns/Shotguns/sawn_inhands_64x.rsi #SS220 sawn-off shotgun resprite
+  #SS220 weapon overhaul begin
+  - type: GunAimable
+    minAngle: -4
+    maxAngle: -6
   - type: Gun
-    canSuicide: true ##SS220-new-feature kus
+    angleIncrease: 8
+    angleDecay: 2
+    minAngle: 7
+    maxAngle: 18
     fireRate: 3
+  #SS220 weapon overhaul end
+    canSuicide: true ##SS220-new-feature kus
     soundGunshot: # Corvax-Guns
       path: /Audio/Corvax/Weapons/Guns/Gunshots/shotgun_sawed.ogg
   - type: GunSpreadModifier
@@ -256,7 +397,18 @@
     sprite: Objects/Weapons/Guns/Shotguns/hm_pistol.rsi
   - type: Clothing
     sprite: Objects/Weapons/Guns/Shotguns/hm_pistol.rsi
+  #SS220 weapon overhaul begin
+  - type: GunAimable
+    minAngle: -4
+    maxAngle: -6
+  - type: GunSpreadModifier
+    spread: 1.7
   - type: Gun
+    angleIncrease: 10
+    angleDecay: 2
+    minAngle: 7
+    maxAngle: 35
+  #SS220 weapon overhaul end
     fireRate: 4
     soundGunshot: # Corvax-Guns
       path: /Audio/Corvax/Weapons/Guns/Gunshots/shotgun_pipe.ogg
@@ -309,8 +461,20 @@
   - type: Item
     sprite: Objects/Weapons/Guns/Shotguns/improvised_shotgun_inhands_64x.rsi
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
+  #SS220 weapon overhaul begin
+  - type: GunWieldBonus
+    minAngle: -5
+    maxAngle: -21
+    angleIncrease: -6.2
+  - type: GunAimable
+    minAngle: -9
+    maxAngle: -8
   - type: Gun
-    fireRate: 4 #No reason to stifle the firerate since you have to manually reload every time anyways.
+    angleIncrease: 8
+    angleDecay: 8
+    minAngle: 15
+    maxAngle: 35
+  #SS220 weapon overhaul end
   - type: BallisticAmmoProvider
     capacity: 1
     proto: null
@@ -330,7 +494,7 @@
     proto: ShellShotgunImprovised
 
 - type: entity
-  parent: [BaseWeaponShotgun, BaseGunWieldable, BaseSyndicateContraband]
+  parent: [BaseWeaponShotgunAlt, BaseGunWieldable, BaseSyndicateContraband] #SS220 weapon overhaul
   id: WeaponShotgunHushpup
   name: Hushpup
   description: An obscure modification of the Enforcer, fitted with an experimental muffler. Great for those with a strict moral code. Uses .50 shotgun shells.
@@ -343,15 +507,43 @@
     sprite: Objects/Weapons/Guns/Shotguns/hushpup.rsi
     shape:
     - 0,0,3,0 # smaller than BaseShotgun by 1 tile
-  - type: BallisticAmmoProvider
-    capacity: 4
-  - type: GunRequiresWield
+  #SS220 weapon overhaul begin
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: InternalMagazineShotgunShort
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+            - ShellShotgun
+  - type: Appearance
+  - type: GunWieldBonus
+    minAngle: -5
+    maxAngle: -20
+    angleIncrease: -4
+  - type: GunAimable
+    minAngle: -5
+    maxAngle: -6
   - type: Gun
+    muzzleFlashSupressed: true
+    angleIncrease: 7
+    angleDecay: 6
+    minAngle: 15
+    maxAngle: 35
     soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/hushpup.ogg
+      path: /Audio/Weapons/Guns/Gunshots/shotgun.ogg #SS220 weapon overhaul #What is the point of suppressor if it has it's own specific sound?
       params:
-        volume: -3
+        volume: -5 #SS220 weapon overhaul
         rolloffFactor: 1.3
     fireRate: 2
+  #SS220 weapon overhaul end
+  - type: GunRequiresWield
   - type: GunSpreadModifier
     spread: 1.2

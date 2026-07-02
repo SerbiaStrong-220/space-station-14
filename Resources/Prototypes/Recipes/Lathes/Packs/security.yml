@@ -56,6 +56,11 @@
   - SpeedLoaderLightRifle
   - MagazineMagnumEmpty
   - MagazineMagnum
+  - TaserCartridge
+  - WeaponPowerCell
+  - MagazineFullRifleFMJ
+  - MagazineAntiMaterialFMJ
+  - MagazineBoxFullRifleFMJ
   #ss220 more recipies end
 
 - type: latheRecipePack
@@ -65,6 +70,7 @@
   - Stunbaton
   - CombatKnife
   - RiotShield
+  - WeaponTaser #SS220 weapon overhaul
 
 ## Dynamic recipes
 
@@ -112,7 +118,6 @@
   recipes:
   - BoxBeanbag
   - BoxShotgunIncendiary
-  - BoxShotgunUranium
   #- BoxShellTranquilizer #SS220-no-tranq
   - MagazineBoxLightRifleIncendiary
   - MagazineBoxLightRifleUranium
@@ -135,12 +140,39 @@
   - SpeedLoaderMagnumIncendiary
   - SpeedLoaderMagnumUranium
   - MagazineMagnumIncendiary #ss220 more recipies
-  - MagazineMagnumUranium #ss220 more recipies
+  #SS220 weapon overhaul begin
+  - MagazineBoxAntiMaterielAP
+  - MagazineBoxAntiMaterielHP
+  - MagazineBoxLightRifleHP
+  - MagazineBoxMagnumHP
+  - MagazineBoxPistolHP
+  - MagazineBoxRifleHP
+  - MagazineLightRifleHP
+  - MagazinePistolHP
+  - MagazinePistolSubMachineGunHP
+  - MagazineRifleHP
+  - SpeedLoaderMagnumHP
+  - MagazineShotgunHP
+  - BoxShotgunHP
+  - MagazineShotgunHEI
+  - BoxShotgunHEI
+  - MagazineShotgunExplosive
+  - BoxShotgunHE
+  - MagazineBoxAntiMaterielHE
+  - MagazineAntiMaterialExplosive
+  - MagazineAntiMaterialHP
+  - MagazineAntiMaterialAP
+  - MagazineFullRifleAP
+  - MagazineFullRifleHP
+  - MagazineFullRifleIncendiary
+  - MagazineBoxFullRifleAP
+  - MagazineBoxFullRifleHP
+  - MagazineBoxFullRifleIncendiary
+  #SS220 weapon overhaul end
 
 - type: latheRecipePack
   id: SecurityWeapons
   recipes:
-  - WeaponSniperCompact #SS220 WeaponSniperCompact
   - LaserSMGPowerCell #SS220 WeaponLaserSMG
   - WeaponLaserSMG #SS220 WeaponLaserSMG
   - Truncheon
@@ -150,10 +182,4 @@
   - WeaponXrayCannon
   - WeaponTemperatureGun
   - WeaponEnergyCrossbow #SS220 Energy Crossbow
-  - WeaponTaser #SS220 taserback
-
-- type: latheRecipePack
-  id: SecurityDisablers
-  recipes:
-  - WeaponDisabler
-  - WeaponDisablerSMG
+  - WeaponLaserPistol #SS220 weapon overhaul

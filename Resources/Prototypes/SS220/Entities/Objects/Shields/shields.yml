@@ -85,28 +85,25 @@
     - type: AltArmor
       tresholdDict:
           Piercing: 6
-          Blunt: 20
+          Blunt: 30
           Heat: 10
-          Slash: 15
+          Slash: 30
           Radiation: 1000
           Poison: 1000
-          Asphyxiation: 1000
-          Bloodloss: 1000
           Caustic: 1000
           Shock: 30
-          Cold: 20
       durabilityTresholdDict:
           Piercing: 7
           Blunt: 15
           Heat: 7
-          Slash: 10
+          Slash: 20
           Radiation: 1000
           Poison: 1000
           Asphyxiation: 1000
           Bloodloss: 1000
           Caustic: 1000
           Shock: 40
-          Cold: 50
+          Cold: 20
 
 - type: entity
   name: laser shield
@@ -131,8 +128,8 @@
           Bloodloss: 1000
           Caustic: 1000
           Piercing: 7
-          Blunt: 10
-          Heat: 60
+          Blunt: 15
+          Heat: 80
           Slash: 7
           Shock: 30
           Cold: 50
@@ -143,8 +140,8 @@
           Bloodloss: 1000
           Caustic: 1000
           Piercing: 4
-          Blunt: 5
-          Heat: 35
+          Blunt: 10
+          Heat: 55
           Slash: 4
           Shock: 40
           Cold: 100
@@ -171,10 +168,10 @@
           Asphyxiation: 1000
           Bloodloss: 1000
           Caustic: 1000
-          Piercing: 37
-          Blunt: 35
-          Heat: 30
-          Slash: 35
+          Piercing: 50
+          Blunt: 50
+          Heat: 50
+          Slash: 55
           Shock: 30
           Cold: 40
       durabilityTresholdDict:
@@ -183,16 +180,18 @@
           Asphyxiation: 1000
           Bloodloss: 1000
           Caustic: 1000
-          Piercing: 30
-          Blunt: 30
-          Heat: 25
-          Slash: 30
+          Piercing: 38
+          Blunt: 40
+          Heat: 36
+          Slash: 50
           Shock: 40
           Cold: 50
     - type: ClothingSpeedModifier
       sprintModifier: 0.9
     - type: HeldSpeedModifier
       sprintModifier: 0.9
+    - type: ExplosionResistance
+      damageCoefficient: 0.4
 
 
 #Craftable shields
@@ -344,9 +343,9 @@
     - type: AltArmor
       tresholdDict:
           Piercing: 6
-          Blunt: 20
+          Blunt: 30
           Heat: 10
-          Slash: 15
+          Slash: 30
           Radiation: 1000
           Poison: 1000
           Asphyxiation: 1000
@@ -356,9 +355,9 @@
           Cold: 20
       durabilityTresholdDict:
           Piercing: 5
-          Blunt: 15
+          Blunt: 20
           Heat: 7
-          Slash: 10
+          Slash: 20
           Radiation: 1000
           Poison: 1000
           Asphyxiation: 1000
@@ -631,10 +630,10 @@
     - type: Appearance
     - type: AltArmor
       tresholdDict:
-        Piercing: 55
-        Blunt: 30
-        Heat: 35
-        Slash: 30
+        Piercing: 65
+        Blunt: 50
+        Heat: 40
+        Slash: 50
         Radiation: 1000
         Poison: 1000
         Asphyxiation: 1000
@@ -646,7 +645,7 @@
       durabilityTresholdDict:
         Piercing: 40
         Blunt: 40
-        Heat: 40
+        Heat: 50
         Slash: 40
         Radiation: 1000
         Poison: 1000
@@ -680,6 +679,8 @@
                 BrokenEnergyShield:
                   min: 1
                   max: 1
+    - type: ExplosionResistance
+      damageCoefficient: 0.4
     - type: StaticPrice
       price: 350
 
@@ -714,10 +715,10 @@
       toggledMeleeBlockProb: 0.65
     - type: AltArmor
       tresholdDict:
-          Piercing: 15
-          Blunt: 20
+          Piercing: 6
+          Blunt: 30
           Heat: 10
-          Slash: 15
+          Slash: 30
           Radiation: 1000
           Poison: 1000
           Asphyxiation: 1000
@@ -726,10 +727,10 @@
           Shock: 30
           Cold: 20
       durabilityTresholdDict:
-          Piercing: 12
+          Piercing: 7
           Blunt: 15
           Heat: 7
-          Slash: 10
+          Slash: 20
           Radiation: 1000
           Poison: 1000
           Asphyxiation: 1000

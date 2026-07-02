@@ -96,6 +96,7 @@
   equipment:
     id: SyndiCommanderPDA
     neck: SyndicateWhistle
+    pocket1: CQCManual #SS220 weapon overhaul
     outerClothing: ClothingOuterHardsuitSyndieCommander
   inhand:
   - NukeOpsDeclarationOfWar

@@ -14,7 +14,7 @@
     whitelist:
       tags:
         - CartridgeRifle
-    capacity: 25
+    capacity: 30 #SS220 weapon overhaul
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
@@ -35,7 +35,7 @@
   parent: BaseMagazineRifle
   id: MagazineRifle
   name: "magazine (.20 rifle)"
-  description: 25-round double stack magazine for combat rifles. Intended to hold general-purpose kinetic ammunition.
+  description: 30-round double stack magazine for combat rifles. Intended to hold general-purpose kinetic ammunition. #SS220 weapon overhaul
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeRifle
@@ -57,7 +57,7 @@
   id: MagazineRifleEmpty
   name: "magazine (.20 rifle any)"
   suffix: empty
-  description: 25-round double stack magazine for combat rifles.
+  description: 30-round double stack magazine for combat rifles. #SS220 weapon overhaul
   components:
   - type: BallisticAmmoProvider
     proto: null
@@ -78,7 +78,7 @@
   parent: MagazineRifle
   id: MagazineRifleIncendiary
   name: "magazine (.20 rifle incendiary)"
-  description: 25-round double stack magazine for combat rifles. Intended to hold self-igniting incendiary ammunition.
+  description: 30-round double stack magazine for combat rifles. Intended to hold self-igniting incendiary ammunition. #SS220 weapon overhaul
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeRifleIncendiary
@@ -89,23 +89,23 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
     - state: stripe
-      color: "#ff6e52"
+      color: "#dbdbdb" #SS220 weapon overhaul
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left-mag
       - state: inhand-left-stripe
-        color: "#ff6e52"
+        color: "#dbdbdb" #SS220 weapon overhaul
       right:
       - state: inhand-right-mag
       - state: inhand-right-stripe
-        color: "#ff6e52"
+        color: "#dbdbdb" #SS220 weapon overhaul
 
 - type: entity
   parent: BaseMagazineRifle
   id: MagazineRiflePractice
   name: "magazine (.20 rifle practice)"
-  description: 25-round double stack magazine for combat rifles. Intended to hold harmless practice ammunition.
+  description: 30-round double stack magazine for combat rifles. Intended to hold harmless practice ammunition. #SS220 weapon overhaul
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeRiflePractice
@@ -116,23 +116,23 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
     - state: stripe
-      color: "#dbdbdb"
+      color: "#ffa200"
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left-mag
       - state: inhand-left-stripe
-        color: "#dbdbdb"
+        color: "#ffa200"
       right:
       - state: inhand-right-mag
       - state: inhand-right-stripe
-        color: "#dbdbdb"
+        color: "#ffa200"
 
 - type: entity
   parent: BaseMagazineRifle
   id: MagazineRifleUranium
   name: "magazine (.20 rifle uranium)"
-  description: 25-round double stack magazine for combat rifles. Intended to hold exotic uranium-core ammunition.
+  description: 30-round double stack magazine for combat rifles. Intended to hold exotic uranium-core ammunition. #SS220 weapon overhaul
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeRifleUranium
