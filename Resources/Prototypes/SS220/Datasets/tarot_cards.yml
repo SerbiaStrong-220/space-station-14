@@ -1,0 +1,47 @@
+﻿- type: dataset
+  id: JusticeItems
+  values:
+    - ExGrenade
+    - MedkitCombatFilled
+    - SpaceCash500
+
+- type: dataset
+  id: RandomArcadeSpawner
+  values:
+  - BlockGameArcade
+  - SpaceVillainArcadeFilled
+
+- type: dataset
+  id: RandomMessageToChat
+  values:
+  - ";СБ, убивают!"
+  - ";ЯО в прибытии!"
+  - ";Украли карту капитана"
+  - ";Человек с чайной в отбытии!"
+  - ";Убивают в дормах!"
+  - ";Проникновение в каюту капитана"
+  - ";Украли гипоспрей"
+  - ";Давай сюда 5 тк"
+  - ";У меня дабла и ноуслипы"
+  - ";ЯО мед"
+  - ";Техи меда убивают, помощи"
+  - ";Помогите"
+  - ";СМ УБЕЖАЛ!!!"
+  - ";Идем гв убивать"
+  - ";В аплинке покупай"
+  - ";КУЛЬТ!!"
+
+- type: dataset
+  id: RandomAnomalyInjectorsSpawn
+  values:
+  - AnomalyTrapPyroclastic
+  - AnomalyTrapElectricity
+  - AnomalyTrapShadow
+  - AnomalyTrapIce
+  - AnomalyTrapFlora
+  - AnomalyTrapBluespace
+  - AnomalyTrapFlesh
+  - AnomalyTrapGravity
+  - AnomalyTrapTech
+  - AnomalyTrapRock
+  - AnomalyTrapSanta
