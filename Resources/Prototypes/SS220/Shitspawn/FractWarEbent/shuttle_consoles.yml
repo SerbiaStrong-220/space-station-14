@@ -9,8 +9,8 @@
   parent: ComputerShuttleSyndie
   id: FractWarShuttleConsoleSyndicate
   suffix: Shitspawn, Ebent, FractWar
-  name: syndicate shuttle control console
-  description: Syndicate shuttle control console. Destroying it gives points to the syndicate team.
+  name: Syndicate shuttle control console
+  description: Used to pilot a Syndicate shuttle.
   components:
   - type: Anchorable
     flags:
@@ -51,7 +51,7 @@
   id: FractWarShuttleConsoleNT
   suffix: Shitspawn, Ebent, FractWar
   name: Nanotrasen shuttle control console
-  description: Nanotrasen shuttle control console. Destroying it gives points to the NT team.
+  description: Used to pilot a Nanotrasen shuttle.
   components:
   - type: Anchorable
     flags:
