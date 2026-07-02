@@ -60,12 +60,10 @@
     - id: WeaponDisabler
     - id: ClothingWristWatchGold # SS220 Wrist Watch
     - id: ClothingEyesGlassesCommand
-    #SS220-NoSkeletonCaptainLocker begin
-    #- id: OrganSkeletonPersonHead # A skull to accompany your skeleton crew
-    #  conditions:
-    #  - !type:PlayerCountCondition
-    #    max: 15
-    #SS220-NoSkeletonCaptainLocker end
+    - id: OrganSkeletonAssistantPersonHead #SS220-AssistantSkeletonCaptainLocker
+      conditions:
+      - !type:PlayerCountCondition
+        max: 15
     - id: PlushieLizardJobCaptain
       prob: 0.02
 

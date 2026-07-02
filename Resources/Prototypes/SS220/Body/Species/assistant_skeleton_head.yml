@@ -1,0 +1,6 @@
+- type: entity
+  parent: OrganSkeletonPersonHead
+  id: OrganSkeletonAssistantPersonHead
+  name: skeleton assistant person head
+  description: You definitely have some skeletons in your closet, don't you, Captain?
+
