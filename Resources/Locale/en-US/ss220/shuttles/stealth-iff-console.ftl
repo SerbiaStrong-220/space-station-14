@@ -1,0 +1,9 @@
+stealth-iff-console-window-title = Stealth console
+stealth-iff-console-label = Stealth mode
+stealth-iff-console-activate = Activate Stealth
+stealth-iff-console-active = Stealth Active
+stealth-iff-console-cooldown = Cooldown
+stealth-iff-console-time = Stealth: {$seconds}s
+stealth-iff-console-cooldown-time = Cooldown: {$seconds}s
+fractwar-console-destroyed-sender = {$grid} - {$fraction}
+fractwar-console-destroyed-announcement = Destroyed.

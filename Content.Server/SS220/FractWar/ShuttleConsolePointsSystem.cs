@@ -7,10 +7,10 @@ using Robust.Shared.Maths;
 
 namespace Content.Server.SS220.FractWar;
 
-public sealed class ShuttleConsolePointsSystem : EntitySystem
+public sealed partial class ShuttleConsolePointsSystem : EntitySystem
 {
-    [Dependency] private readonly FractWarRuleSystem _fractWarRule = default!;
-    [Dependency] private readonly ChatSystem _chatSystem = default!;
+    [Dependency] private FractWarRuleSystem _fractWarRule = default!;
+    [Dependency] private ChatSystem _chatSystem = default!;
 
     private static readonly Color NtAnnouncementColor = Color.FromHex("#0c82c7");
     private static readonly Color SyndAnnouncementColor = Color.FromHex("#8f4a4b");

@@ -1,0 +1,9 @@
+stealth-iff-console-window-title = Консоль маскировки
+stealth-iff-console-label = Режим маскировки
+stealth-iff-console-activate = Активировать маскировку
+stealth-iff-console-active = Маскировка активна
+stealth-iff-console-cooldown = Перезарядка
+stealth-iff-console-time = Маскировка: {$seconds}с
+stealth-iff-console-cooldown-time = Перезарядка: {$seconds}с
+fractwar-console-destroyed-sender = {$grid} - {$fraction}
+fractwar-console-destroyed-announcement = Уничтожен.
