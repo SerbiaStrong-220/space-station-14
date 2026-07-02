@@ -87,6 +87,16 @@
     baseDecayRate: 0.0083
   - type: Thirst
     baseDecayRate: 0.0083
+  #SS220 add physical parameters begin
+  - type: PhysicalParameters
+    parameterDict:
+      Strength: 0.7
+      ReactionSpeed: 1
+      Coordination: 1
+      PainTolerance: 1
+    genderModifier:
+      Strength: 0
+  #SS220 add physical parameters end
   - type: Damageable
     damageModifierSet: Diona
   - type: DamageVisuals
