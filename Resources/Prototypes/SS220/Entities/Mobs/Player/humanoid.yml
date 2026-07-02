@@ -2,7 +2,7 @@
 
 - type: randomHumanoidSettings
   id: DeathSquadLeaderRandom
-  speciesBlacklist: [ Felinid, Diona, Arachnid, Dwarf, Moth, Vox, Reptilian, Skeleton, SlimePerson, Vulpkanin, Tajaran]
+  speciesBlacklist: [ Felinid, Diona, Arachnid, Dwarf, Moth, Vox, Reptilian, Skeleton, SlimePerson, Vulpkanin, Tajaran, Resomi]
   parent: EventHumanoidMindShielded
   randomizeName: false
   components:
@@ -222,7 +222,7 @@
 #ERT Gamma Leader
 - type: randomHumanoidSettings
   id: ERTLeaderGamma
-  speciesBlacklist: [ Felinid, Diona, Arachnid, Moth, Vox, Reptilian, Skeleton, SlimePerson, Vulpkanin, Tajaran]
+  speciesBlacklist: [ Felinid, Diona, Arachnid, Moth, Vox, Reptilian, Skeleton, SlimePerson, Vulpkanin, Tajaran, Resomi]
   parent: EventHumanoidMindShielded
   randomizeName: false
   components:
@@ -422,7 +422,7 @@
 
 - type: randomHumanoidSettings
   id: CBURNLeader
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran, Resomi] #SS220-centcom-human-ERT-update
   parent: EventHumanoidCentcomm
   components:
     - type: Loadout

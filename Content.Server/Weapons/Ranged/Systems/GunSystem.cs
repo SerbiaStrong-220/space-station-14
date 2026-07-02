@@ -19,6 +19,8 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Robust.Shared.Containers;
 using Robust.Shared.Random;
+using Content.Server.SS220.QuadHearing;
+using Content.Shared.SS220.QuadHearing;
 
 namespace Content.Server.Weapons.Ranged.Systems;
 
@@ -26,8 +28,11 @@ public sealed partial class GunSystem : SharedGunSystem
 {
     [Dependency] private readonly PricingSystem _pricing = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private readonly QuadHearingSystem _quadHearing = default!; // SS220 Quad hearing
 
     private const float DamagePitchVariation = 0.05f;
+
+    private static readonly ProtoId<QuadHearingTargetPrototype> QuadHearingTargetProtoId = "GunShoot"; // SS220 Quad hearing
 
     public override void Initialize()
     {
@@ -152,6 +157,7 @@ public sealed partial class GunSystem : SharedGunSystem
                     Del(ent);
 
                     Audio.PlayPredicted(gun.Comp.SoundGunshotModified, gun, user);
+                    _quadHearing.RegisterTarget(QuadHearingTargetProtoId, fromCoordinates); // SS220 Quad hearing
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -191,6 +197,7 @@ public sealed partial class GunSystem : SharedGunSystem
 
             MuzzleFlash(gun, ammoComp, mapDirection.ToAngle(), user);
             Audio.PlayPredicted(gun.Comp.SoundGunshotModified, gun, user);
+            _quadHearing.RegisterTarget(QuadHearingTargetProtoId, fromCoordinates); // SS220 Quad hearing
         }
     }
 

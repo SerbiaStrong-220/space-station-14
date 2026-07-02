@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Sprited by matriotic (Discord) for SS220",
+    "copyright": "Sprited by matriotic (Discord) for SS220, resomi states sprited by abubben (Discord) for SS220",
     "size": {
         "x": 32,
         "y": 32
@@ -13,6 +13,10 @@
         {
             "name": "equipped-OUTERCLOTHING",
             "directions": 4
+        },
+        {
+        "name": "equipped-OUTERCLOTHING-resomi",
+        "directions": 4
         },
         {
             "name": "equipped-OUTERCLOTHING-vox",

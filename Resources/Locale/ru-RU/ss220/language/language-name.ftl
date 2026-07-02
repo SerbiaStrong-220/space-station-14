@@ -15,6 +15,7 @@ language-tkachi-name = Ткачий
 language-eldwarf-name = Эл’Дварф
 language-arati-name = Арати
 language-canilunzt-name = Канилунц
+language-schechi-name = Щехи
 # Misc
 language-binary-name = Бинарный канал
 language-codespeak-name = Кодспик

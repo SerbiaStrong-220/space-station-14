@@ -1,0 +1,82 @@
+uniform highp vec2 TargetPos;
+uniform highp vec2 PlayerPos;
+
+uniform highp float WaveThickness;
+uniform highp float WaveInterval;
+uniform highp float WaveSpeed;
+
+uniform highp float CircleWaveRadius;
+uniform highp float CircleWaveFadeRadius;
+
+uniform bool DrawSectorWave;
+uniform highp float SectorWaveAngle;
+uniform highp float SectorWaveMinDistance;
+
+uniform highp float NoiseAmplitude;
+
+uniform highp vec4 Color;
+
+highp float rand(highp vec2 p)
+{
+    return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
+}
+
+highp vec3 applyNoise(highp vec2 p, highp vec3 rgb)
+{
+    highp float noise = (rand(p + fract(TIME)) - 0.5) * NoiseAmplitude;
+    return clamp(rgb + noise, 0.0, 1.0);
+}
+
+bool isOnWave(highp vec2 p){
+    highp float fullInterval = WaveThickness + WaveInterval;
+    highp float animProg = fract(TIME * WaveSpeed);
+    highp float pos = length(p - TargetPos) + fullInterval - fullInterval * animProg;
+
+    highp float rem = mod(pos, fullInterval);
+    return rem >= WaveInterval;
+}
+
+bool isInSector(highp vec2 p){
+    highp vec2 toPoint = p - PlayerPos;
+    highp vec2 toTarget = TargetPos - PlayerPos;
+
+    highp float distToPointSq = dot(toPoint, toPoint);
+    highp float distToTargetSq = dot(toTarget, toTarget);
+
+    if (distToPointSq > distToTargetSq)
+        return false;
+
+    if (distToPointSq < SectorWaveMinDistance * SectorWaveMinDistance)
+        return false;
+
+    if (distToPointSq < 0.001 || distToTargetSq < 0.001)
+        return true;
+
+    highp float cosHalfAngle = cos(SectorWaveAngle * 0.5);
+    highp float dotVal = dot(toPoint, toTarget);
+    if (dotVal < 0.0)
+        return false;
+
+    return (dotVal * dotVal) >= (cosHalfAngle * cosHalfAngle * distToPointSq * distToTargetSq);
+}
+
+void fragment() {
+    highp vec2 point = FRAGCOORD.xy;
+    if (!isOnWave(point))
+        discard;
+
+    highp vec4 color = Color;
+    if (DrawSectorWave && isInSector(point)){
+        COLOR = vec4(applyNoise(point, color.rgb), color.a);
+    }
+    else{
+        highp float radius = length(point - TargetPos);
+        if (radius > CircleWaveRadius)
+            discard;
+
+        if (radius > CircleWaveFadeRadius)
+            color.a = color.a * (CircleWaveRadius - radius) / (CircleWaveRadius - CircleWaveFadeRadius);
+
+        COLOR = vec4(applyNoise(point, color.rgb), color.a);
+    }
+}
