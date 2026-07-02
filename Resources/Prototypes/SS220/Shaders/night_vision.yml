@@ -1,0 +1,9 @@
+- type: shader
+  id: NightVision
+  kind: source
+  path: "/Textures/SS220/Shaders/nightvision.swsl"
+
+- type: shader
+  id: NightVisionColor
+  kind: source
+  path: "/Textures/SS220/Shaders/nightvisioncolor.swsl"
