@@ -1,0 +1,14 @@
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband ]
+  id: NukeOpsReinforcementUplink
+  name: reinforcement uplink
+  description: Use to send a declaration of hostilities to the target, delaying your shuttle departure while they prepare for your assault. Such a brazen move will attract the attention of powerful benefactors within the Syndicate, who will supply your team with a massive amount of bonus telecrystals. Must be used at start of mission, or your benefactors will lose interest.
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/Devices/reinforcement_uplink.rsi
+      layers:
+        - state: uplink
+    - type: Item
+    - type: UseDelay
+      delay: 0.5
+    - type: NuclearReinforcementRequest
