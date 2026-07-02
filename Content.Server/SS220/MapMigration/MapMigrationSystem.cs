@@ -1,3 +1,4 @@
+using Content.Server.Shuttles.Components;
 using Content.Shared.Doors.Components;
 using Content.Shared.SS220.CCVars;
 using Content.Shared.Tag;
@@ -18,6 +19,8 @@ public sealed partial class MapMigrationSystem_SS220 : EntitySystem
     private static readonly HashSet<ProtoId<TagPrototype>> TagsForTileOccupied = ["Wall", "Window"];
     private bool _rotateDoors;
 
+    private static readonly EntProtoId BaseSecretDoorId = "BaseSecretDoor";
+
     public override void Initialize()
     {
         base.Initialize();
@@ -29,6 +32,8 @@ public sealed partial class MapMigrationSystem_SS220 : EntitySystem
             if (value)
                 SubscribeLocalEvent<AirlockComponent, MapInitEvent>(OnCompInit);
         }, true);
+
+        SubscribeLocalEvent<DoorComponent, MapInitEvent>(OnDoorMapInit);
     }
 
     private void OnCompInit(Entity<AirlockComponent> entity, ref MapInitEvent args)
@@ -36,7 +41,15 @@ public sealed partial class MapMigrationSystem_SS220 : EntitySystem
         if (!_rotateDoors)
             return;
 
-        RotateDoor(entity);
+        // whitelist secret door
+        if (MetaData(entity).EntityPrototype is { } prototype
+            && (prototype.ID == BaseSecretDoorId || prototype.Parents.Contains(BaseSecretDoorId)))
+            RotateDoor(entity);
+    }
+
+    private void OnDoorMapInit(Entity<DoorComponent> entity, ref MapInitEvent _)
+    {
+        RotateDoor(entity, requireBothNeighbors: true);
     }
 
     private bool CheckTileOccupied(Vector2i pos, EntityUid gridUid, MapGridComponent grid)
@@ -64,8 +77,12 @@ public sealed partial class MapMigrationSystem_SS220 : EntitySystem
         return false;
     }
 
-    public void RotateDoor(EntityUid airlockUid, EntityUid? gridUid = null)
+    public void RotateDoor(EntityUid airlockUid, EntityUid? gridUid = null, bool requireBothNeighbors = false)
     {
+        // any dock airlock rotation breaks logic, so skip
+        if (HasComp<DockingComponent>(airlockUid))
+            return;
+
         var transform = Transform(airlockUid);
         gridUid ??= transform.GridUid;
 
@@ -94,6 +111,25 @@ public sealed partial class MapMigrationSystem_SS220 : EntitySystem
         if (transform.Anchored)
         {
             var pos = _map.CoordinatesToTile(gridUid.Value, grid, transform.Coordinates);
+
+            if (requireBothNeighbors)
+            {
+                if (CheckTileOccupied(pos + new Vector2i(1, 0), gridUid.Value, grid)
+                    && CheckTileOccupied(pos + new Vector2i(-1, 0), gridUid.Value, grid))
+                {
+                    _transform.SetLocalRotationNoLerp(airlockUid, Angle.FromDegrees(180), transform);
+                    return;
+                }
+
+                if (CheckTileOccupied(pos + new Vector2i(0, 1), gridUid.Value, grid)
+                    && CheckTileOccupied(pos + new Vector2i(0, -1), gridUid.Value, grid))
+                {
+                    _transform.SetLocalRotationNoLerp(airlockUid, Angle.FromDegrees(90), transform);
+                    return;
+                }
+
+                return;
+            }
 
             if (!CheckTileOccupied(pos + new Vector2i(1, 0), gridUid.Value, grid))
             {
