@@ -1,3 +1,11 @@
+# Implants
+uplink-virus-immunity-implanter-name = Имплант вирусного иммунитета
+uplink-virus-immunity-implanter-desc = Подкожный чип, разгоняющий имунную систему, не особо полезно на дистанции, но защитит от вирусов.
+
+# Chemicals
+uplink-red-death-name = Пробирка с вирусом «Красная смерть»
+uplink-red-death-desc = Пробирка стабильного мутагена, заражённого штаммом «Красная смерть» — заразной чумой, которая изводит носителя приступами кашля, лишает его сил и заживо гноит плоть и глаза. Одна из секретных разработок синдиката.
+
 # Weapons
 uplink-ecrossbow-name = { ent-WeaponMiniEnergyCrossbow }
 uplink-ecrossbow-desc = { ent-WeaponMiniEnergyCrossbow.desc }

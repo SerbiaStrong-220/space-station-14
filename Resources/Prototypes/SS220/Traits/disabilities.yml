@@ -30,3 +30,11 @@
   - type: AutoEmote
     emotes:
     - Cough
+
+- type: trait
+  id: SkillSuppressed
+  name: trait-skill-suppressed-name
+  description: trait-skill-suppressed-desc
+  category: Disabilities
+  components:
+  - type: SkillSuppression

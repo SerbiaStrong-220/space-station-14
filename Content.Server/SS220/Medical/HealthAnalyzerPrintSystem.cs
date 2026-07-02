@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Content.Server.Medical.Components;
+using Content.Server.SS220.Pathology;
 using Content.Shared.Atmos;
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
@@ -37,6 +39,13 @@ public sealed partial class HealthAnalyzerPrintSystem : EntitySystem
     [Dependency] private SharedAudioSystem _audio = default!; // SS220-health-analyzer-report
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private PathologySystem _pathology = default!;
+
+    // Disease lines a basic health analyzer will show on scan. Used by both the live UI and the print.
+    public List<string> GetDiseaseLines(EntityUid target)
+    {
+        return _pathology.GetAnalyzerVirusLines(target);
+    }
 
     public override void Initialize()
     {
@@ -186,6 +195,15 @@ public sealed partial class HealthAnalyzerPrintSystem : EntitySystem
 
         if (!hasReagents)
             builder.AppendLine(Loc.GetString("health-analyzer-report-none"));
+
+        builder.AppendLine();
+        builder.AppendLine(Loc.GetString("health-analyzer-report-section-diseases"));
+        var diseaseLines = GetDiseaseLines(target);
+        if (diseaseLines.Count == 0)
+            builder.AppendLine(Loc.GetString("health-analyzer-report-none"));
+        else
+            foreach (var line in diseaseLines)
+                builder.AppendLine(line);
 
         return builder.ToString();
     }

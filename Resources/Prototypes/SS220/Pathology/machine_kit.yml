@@ -1,0 +1,12 @@
+- type: entity
+  parent: CrateMedical
+  id: CrateDiseaseMachineBoards
+  name: disease machine board crate
+  description: Circuit boards for building a disease diagnoser and a vaccinator.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: DiagnoserMachineCircuitboard
+        - id: VaccinatorMachineCircuitboard

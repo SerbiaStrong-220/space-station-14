@@ -1,0 +1,29 @@
+disease-diagnoser-title = Диагност болезней
+disease-diagnoser-header = ДИАГНОСТИКА
+disease-diagnoser-scan-button = Сканировать образец
+disease-diagnoser-eject-button = Извлечь
+disease-diagnoser-no-sample = Нет образца. Вставьте пробирку с кровью.
+disease-diagnoser-ready = Образец загружен. Готов к сканированию.
+disease-diagnoser-scanning = Сканирование образца...
+disease-diagnoser-printing = Печать справки...
+disease-diagnoser-result = Анализ завершён.
+disease-diagnoser-virus-name = Опознан патоген: {$name}
+disease-diagnoser-virus-unknown = Неопознанный патоген
+disease-diagnoser-unreadable = Нечитаемых генетических фрагментов: {$count} — часть симптомов не расшифрована.
+disease-diagnoser-transmission = Способы передачи: {$vectors}
+disease-diagnoser-vector-contact = контакт
+disease-diagnoser-vector-proximity = воздух
+disease-diagnoser-symptom-stage = {$symptom} — стадия {$stage}/{$max}, ускоритель: {$reagent}
+disease-diagnoser-transfer-button = Слить мутаген
+disease-diagnoser-copy-button = Копировать вирус
+disease-diagnoser-print-button = Распечатать справку
+disease-diagnoser-buffer = Буфер: {$amount}ед. стабильного мутагена
+disease-diagnoser-no-virus = В образце нет вируса.
+disease-diagnoser-not-enough-mutagen = В буфере недостаточно стабильного мутагена.
+disease-diagnoser-no-mutagen-source = Во вставленной ёмкости нет стабильного мутагена.
+disease-diagnoser-copied = Вирус переписан в новый пузырёк.
+
+# Общие элементы консолей патологии (используются окнами диагнозера и вакцинатора)
+pathology-console-station = СТАНЦИЯ: {$name}
+pathology-console-station-unknown = СТАНЦИЯ: —
+pathology-console-os = nt-os 0.220-c35

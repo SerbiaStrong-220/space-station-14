@@ -7,3 +7,15 @@
   id: Pathology
   name: guide-name-pathology
   text: "/ServerInfo/SS220/Guidebook/Medical/pathology.xml"
+
+- type: guideEntry
+  id: Virology
+  name: guide-name-virology
+  text: "/ServerInfo/SS220/Guidebook/Medical/virology.xml"
+  children:
+  - VirologyKnownViruses
+
+- type: guideEntry
+  id: VirologyKnownViruses
+  name: guide-name-virology-known-viruses
+  text: "/ServerInfo/SS220/Guidebook/Medical/known_viruses.xml"

@@ -166,7 +166,20 @@ public sealed class MetabolizerSystem : EntitySystem
                 continue;
 
             // Skip blood reagents
-            if (ev.Reagents.Contains(reagent))
+            // SS220-Start.
+            // So in the end we match just by prototype. This way extra reagent data (DNA, virus) on the body's own
+            // blood doesn't drop it out of the exclusion and get it metabolized
+            var isExcluded = false;
+            foreach (var excluded in ev.Reagents)
+            {
+                if (excluded.Prototype == reagent.Prototype)
+                {
+                    isExcluded = true;
+                    break;
+                }
+            }
+            if (isExcluded)
+            // SS220-End
                 continue;
 
             // ss220 add narcotics test start

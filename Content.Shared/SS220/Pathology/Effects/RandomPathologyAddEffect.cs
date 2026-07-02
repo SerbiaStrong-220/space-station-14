@@ -13,10 +13,10 @@ public sealed partial class RandomPathologyAddEffect : IPathologyEffect
     [DataField(required: true)]
     public ProtoId<WeightedRandomPrototype> WeightedId = "BrainTraumaPathology";
 
-    public void ApplyEffect(EntityUid uid, PathologyInstanceData data, IEntityManager entityManager)
+    public void ApplyEffect(in PathologyEffectArgs args)
     {
-        var pathologySystem = entityManager.System<SharedPathologySystem>();
+        var pathologySystem = args.EntityManager.System<SharedPathologySystem>();
 
-        pathologySystem.TryAddRandom(uid, WeightedId, Chance);
+        pathologySystem.TryAddRandom(args.Target, WeightedId, Chance);
     }
 }

@@ -1,0 +1,1189 @@
+# Sneezing
+- type: pathology
+  id: Sneezing
+  name: pathology-sneezing-name
+  genome: Rna
+  definition:
+  - description: pathology-sneezing-description
+    detection:
+      description: pathology-sneezing-detection
+    manifestation:
+      visible: true
+      examineText: pathology-sneezing-examine
+      emote: Sneeze
+      emoteChance: 1
+      emoteInterval: 8
+    speciesManifestations:
+      Arachnid:
+        visible: true
+        examineText: pathology-sneezing-examine
+        emote: Cough
+        emoteChance: 1
+        emoteInterval: 8
+
+- type: pathology
+  id: Cough
+  name: pathology-cough-name
+  genome: Dna
+  definition:
+  - description: pathology-cough-description
+    detection:
+      description: pathology-cough-detection
+    manifestation:
+      visible: true
+      examineText: pathology-cough-examine
+      emote: Cough
+      emoteChance: 1
+      emoteInterval: 8
+    speciesManifestations:
+      Reptilian:
+        visible: true
+        examineText: pathology-sneezing-examine
+        emote: Sneeze
+        emoteChance: 1
+        emoteInterval: 8
+      Moth:
+        visible: true
+        examineText: pathology-sneezing-examine
+        emote: Sneeze
+        emoteChance: 1
+        emoteInterval: 8
+
+- type: pathology
+  id: Drowsiness
+  name: pathology-drowsiness-name
+  genome: Rna
+  definition:
+  - description: pathology-drowsiness-description
+    detection:
+      description: pathology-drowsiness-detection
+    manifestation:
+      visible: true
+      examineText: pathology-drowsiness-examine
+      emote: Yawn
+      emoteChance: 1
+      emoteInterval: 10
+
+- type: pathology
+  id: SkinBurst
+  name: pathology-skin-burst-name
+  genome: Dna
+  definition:
+  # Stage 1
+  - description: pathology-skin-burst-description
+    detection:
+      description: pathology-skin-burst-detection
+    manifestation:
+      visible: true
+      examineText: pathology-skin-burst-examine-1
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+    effects:
+    - !type:PathologyDamageEffect
+      damage:
+        types:
+          Slash: 0.1
+  # Stage 2
+  - description: pathology-skin-burst-description
+    progressMessage: pathology-skin-burst-progress-2
+    progressMessageColor: "#8B0000"
+    detection:
+      description: pathology-skin-burst-detection
+    manifestation:
+      visible: true
+      examineText: pathology-skin-burst-examine-2
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+    effects:
+    - !type:PathologyDamageEffect
+      damage:
+        types:
+          Slash: 0.2
+  # Stage 3
+  - description: pathology-skin-burst-description
+    progressMessage: pathology-skin-burst-progress-3
+    progressMessageColor: "#8B0000"
+    detection:
+      description: pathology-skin-burst-detection
+    manifestation:
+      visible: true
+      examineText: pathology-skin-burst-examine-3
+    effects:
+    - !type:PathologyDamageEffect
+      damage:
+        types:
+          Slash: 0.5
+
+- type: pathology
+  id: Necrosis
+  name: pathology-necrosis-name
+  genome: Dna
+  definition:
+  # Stage 1
+  - description: pathology-necrosis-description
+    detection:
+      description: pathology-necrosis-detection
+    manifestation:
+      visible: true
+      examineText: pathology-necrosis-examine-1
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+    effects:
+    - !type:PathologyDamageEffect
+      damage:
+        types:
+          Slash: 0.1
+  # Stage 2
+  - description: pathology-necrosis-description
+    progressMessage: pathology-necrosis-progress-2
+    progressMessageColor: "#8B0000"
+    detection:
+      description: pathology-necrosis-detection
+    manifestation:
+      visible: true
+      examineText: pathology-necrosis-examine-2
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+    effects:
+    - !type:PathologyDamageEffect
+      damage:
+        types:
+          Slash: 0.2
+  # Stage 3
+  - description: pathology-necrosis-description
+    progressMessage: pathology-necrosis-progress-3
+    progressMessageColor: "#8B0000"
+    detection:
+      description: pathology-necrosis-detection
+    manifestation:
+      visible: true
+      examineText: pathology-necrosis-examine-3
+    effects:
+    - !type:PathologyDamageEffect
+      damage:
+        types:
+          Slash: 0.5
+
+# Eye bleeding
+- type: pathology
+  id: EyeBleeding
+  name: pathology-eye-bleeding-name
+  genome: Dna
+  definition:
+  # Stage 1
+  - description: pathology-eye-bleeding-description
+    detection:
+      description: pathology-eye-bleeding-detection
+    manifestation:
+      visible: true
+      examineText: pathology-eye-bleeding-examine-1
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+    effects:
+    - !type:PathologyBleedEffect
+      amount: 1
+  # Stage 2
+  - description: pathology-eye-bleeding-description
+    progressMessage: pathology-eye-bleeding-progress-2
+    detection:
+      description: pathology-eye-bleeding-detection
+    manifestation:
+      visible: true
+      examineText: pathology-eye-bleeding-examine-2
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+    effects:
+    - !type:PathologyBleedEffect
+      amount: 2
+  # Stage 3
+  - description: pathology-eye-bleeding-description
+    progressMessage: pathology-eye-bleeding-progress-3
+    detection:
+      description: pathology-eye-bleeding-detection
+    manifestation:
+      visible: true
+      examineText: pathology-eye-bleeding-examine-3
+    effects:
+    - !type:PathologyBleedEffect
+      amount: 3
+    - !type:PathologyEyeDamageEffect
+      timeToFull: 5m
+
+- type: pathology
+  id: Muteness
+  name: pathology-muteness-name
+  genome: Rna
+  definition:
+  # Stage 1
+  - description: pathology-muteness-description
+    detection:
+      description: pathology-muteness-detection
+    manifestation:
+      visible: true
+      emoteMessage: pathology-muteness-drool
+      selfMessage: pathology-muteness-numbness
+      selfMessageColor: "#88AABB"
+      emoteChance: 0.3
+      emoteInterval: 20
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 5m
+  # Stage 2
+  - description: pathology-muteness-description
+    progressMessage: pathology-muteness-progress-2
+    detection:
+      description: pathology-muteness-detection
+    components:
+    - type: Muted
+
+- type: pathology
+  id: Stupefaction
+  name: pathology-stupefaction-name
+  genome: Rna
+  definition:
+  - description: pathology-stupefaction-description
+    detection:
+      description: pathology-stupefaction-detection
+    components:
+    - type: SkillSuppression
+
+# Hyperabsorption
+- type: pathology
+  id: Hyperabsorption
+  name: pathology-hyperabsorption-name
+  genome: Rna
+  definition:
+  # Stage 1
+  - description: pathology-hyperabsorption-description
+    detection:
+      description: pathology-hyperabsorption-detection
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+    effects:
+    - !type:PathologyNutritionEffect
+      hunger: 0.2
+    components:
+    - type: Hyperabsorption
+  # Stage 2
+  - description: pathology-hyperabsorption-description
+    progressMessage: pathology-hyperabsorption-progress-2
+    detection:
+      description: pathology-hyperabsorption-detection
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+    effects:
+    - !type:PathologyNutritionEffect
+      hunger: 0.35
+  # Stage 3
+  - description: pathology-hyperabsorption-description
+    progressMessage: pathology-hyperabsorption-progress-3
+    detection:
+      description: pathology-hyperabsorption-detection
+    effects:
+    - !type:PathologyNutritionEffect
+      hunger: 0.7
+
+# Autorespiration
+- type: pathology
+  id: Autorespiration
+  name: pathology-autorespiration-name
+  genome: Rna
+  definition:
+  - description: pathology-autorespiration-description
+    detection:
+      description: pathology-autorespiration-detection
+    effects:
+    - !type:PathologyInjectReagentEffect
+      reagent: Dexalin
+      amount: 0.6
+
+# Burning blood
+- type: pathology
+  id: BurningBlood
+  name: pathology-burning-blood-name
+  genome: Rna
+  definition:
+  # Stage 1
+  - description: pathology-burning-blood-description
+    detection:
+      description: pathology-burning-blood-detection
+    manifestation:
+      visible: true
+      examineText: pathology-burning-blood-examine-1
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+    effects:
+    - !type:PathologyTemperatureEffect
+      temperature: 318.15
+  # Stage 2
+  - description: pathology-burning-blood-description
+    progressMessage: pathology-burning-blood-progress-2
+    detection:
+      description: pathology-burning-blood-detection
+    manifestation:
+      visible: true
+      examineText: pathology-burning-blood-examine-2
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+    effects:
+    - !type:PathologyTemperatureEffect
+      temperature: 318.15
+    - !type:PathologyIgniteEffect
+      fireStacks: 2
+      chance: 0.0083
+  # Stage 3
+  - description: pathology-burning-blood-description
+    progressMessage: pathology-burning-blood-progress-3
+    detection:
+      description: pathology-burning-blood-detection
+    manifestation:
+      visible: true
+      examineText: pathology-burning-blood-examine-3
+    components:
+    - type: FireBreathing
+    effects:
+    - !type:PathologyTemperatureEffect
+      temperature: 318.15
+
+# Tricordrazine tolerance
+- type: pathology
+  id: TricordTolerance
+  name: pathology-tricord-tolerance-name
+  genome: Rna
+  definition:
+  - description: pathology-tricord-tolerance-description
+    detection:
+      description: pathology-tricord-tolerance-detection
+    components:
+    - type: ReagentMetabolismBlock
+      reagents:
+      - Tricordrazine
+
+# Dementia
+- type: pathology
+  id: Dementia
+  name: pathology-dementia-name
+  genome: Rna
+  definition:
+  # Stage 1
+  - description: pathology-dementia-description
+    detection:
+      description: pathology-dementia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-dementia-examine-1
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+    effects:
+    - !type:PathologyDamageEffect
+      damage:
+        types:
+          Cerebral: 0.01
+  # Stage 2
+  - description: pathology-dementia-description
+    progressMessage: pathology-dementia-progress-2
+    detection:
+      description: pathology-dementia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-dementia-examine-2
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 300
+      - !type:PathologyReagentProgressCondition
+    effects:
+    - !type:PathologyDamageEffect
+      damage:
+        types:
+          Cerebral: 0.05
+  # Stage 3
+  - description: pathology-dementia-description
+    progressMessage: pathology-dementia-progress-3
+    detection:
+      description: pathology-dementia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-dementia-examine-3
+    effects:
+    - !type:PathologyDamageEffect
+      damage:
+        types:
+          Cerebral: 0.1
+
+# Synthification
+- type: pathology
+  id: Synthification
+  name: pathology-synthification-name
+  genome: Rna
+  definition:
+  # Stage 1
+  - description: pathology-synthification-description
+    detection:
+      description: pathology-synthification-detection
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+    components:
+    - type: SiliconLawBound
+    # no UserInterface component here bc we setUi in SynthificationSystem
+    - type: Synthification
+  # Stage 2
+  - description: pathology-synthification-description
+    progressMessage: pathology-synthification-progress-2
+    detection:
+      description: pathology-synthification-detection
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+  # Stage 3
+  - description: pathology-synthification-description
+    progressMessage: pathology-synthification-progress-3
+    detection:
+      description: pathology-synthification-detection
+
+# Alcosia
+- type: pathology
+  id: Alcosia
+  name: pathology-alcosia-name
+  genome: Rna
+  definition:
+  - description: pathology-alcosia-description
+    detection:
+      description: pathology-alcosia-detection
+    effects:
+    - !type:PathologyInjectReagentEffect
+      reagent: Ethanol
+      amount: 0.2
+
+# Radiophasia
+- type: pathology
+  id: Radiophasia
+  name: pathology-radiophasia-name
+  genome: Dna
+  definition:
+  # Stage 1
+  - description: pathology-radiophasia-description
+    detection:
+      description: pathology-radiophasia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-radiophasia-examine-1
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+    components:
+    - type: Radiophasia
+      healPerRad:
+        types:
+          Radiation: -1
+          Blunt: -1
+          Slash: -1
+          Piercing: -1
+          Heat: -1
+          Shock: -1
+          Cold: -1
+  # Stage 2
+  - description: pathology-radiophasia-description
+    progressMessage: pathology-radiophasia-progress-2
+    detection:
+      description: pathology-radiophasia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-radiophasia-examine-2
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+  # Stage 3
+  - description: pathology-radiophasia-description
+    progressMessage: pathology-radiophasia-progress-3
+    detection:
+      description: pathology-radiophasia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-radiophasia-examine-3
+
+# Hypersomnia
+- type: pathology
+  id: Hypersomnia
+  name: pathology-hypersomnia-name
+  genome: Dna
+  definition:
+  # Stage 1
+  - description: pathology-hypersomnia-description
+    detection:
+      description: pathology-hypersomnia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-hypersomnia-examine-1
+      emote: Yawn
+      emoteChance: 1
+      emoteInterval: 10
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+    components:
+    - type: Hypersomnia
+  # Stage 2
+  - description: pathology-hypersomnia-description
+    progressMessage: pathology-hypersomnia-progress-2
+    detection:
+      description: pathology-hypersomnia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-hypersomnia-examine-2
+      emote: Yawn
+      emoteChance: 1
+      emoteInterval: 10
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+  # Stage 3
+  - description: pathology-hypersomnia-description
+    progressMessage: pathology-hypersomnia-progress-3
+    detection:
+      description: pathology-hypersomnia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-hypersomnia-examine-3
+      emote: Yawn
+      emoteChance: 1
+      emoteInterval: 10
+
+# Dog vitality
+- type: pathology
+  id: DogVitality
+  name: pathology-dog-vitality-name
+  genome: Dna
+  definition:
+  # Stage 1
+  - description: pathology-dog-vitality-description
+    detection:
+      description: pathology-dog-vitality-detection
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 20m
+      - !type:PathologyReagentProgressCondition
+    components:
+    - type: DogVitality
+  # Stage 2
+  - description: pathology-dog-vitality-description
+    progressMessage: pathology-dog-vitality-progress-2
+    detection:
+      description: pathology-dog-vitality-detection
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 20m
+      - !type:PathologyReagentProgressCondition
+  # Stage 3
+  - description: pathology-dog-vitality-description
+    progressMessage: pathology-dog-vitality-progress-3
+    detection:
+      description: pathology-dog-vitality-detection
+
+# Narcophasia
+- type: pathology
+  id: Narcophasia
+  name: pathology-narcophasia-name
+  genome: Dna
+  definition:
+  - description: pathology-narcophasia-description
+    detection:
+      description: pathology-narcophasia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-narcophasia-examine-1
+    effects:
+    - !type:PathologyInjectReagentEffect
+      reagent: SpaceDrugs
+      amount: 0.75
+
+# Stuffy
+- type: pathology
+  id: StuffyNose
+  name: pathology-stuffy-nose-name
+  genome: Dna
+  definition:
+  # Stage 1
+  - description: pathology-stuffy-nose-description
+    detection:
+      description: pathology-stuffy-nose-detection
+    manifestation:
+      visible: true
+      examineText: pathology-stuffy-nose-examine-1
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+    effects:
+    - !type:PathologyDamageEffect
+      requireSlot: mask
+      damage:
+        types:
+          Asphyxiation: 0.5
+  # Stage 2
+  - description: pathology-stuffy-nose-description
+    progressMessage: pathology-stuffy-nose-progress-2
+    detection:
+      description: pathology-stuffy-nose-detection
+    manifestation:
+      visible: true
+      examineText: pathology-stuffy-nose-examine-2
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+    effects:
+    - !type:PathologyDamageEffect
+      requireSlot: mask
+      damage:
+        types:
+          Asphyxiation: 1
+  # Stage 3
+  - description: pathology-stuffy-nose-description
+    progressMessage: pathology-stuffy-nose-progress-3
+    detection:
+      description: pathology-stuffy-nose-detection
+    manifestation:
+      visible: true
+      examineText: pathology-stuffy-nose-examine-3
+    effects:
+    - !type:PathologyDamageEffect
+      requireSlot: mask
+      damage:
+        types:
+          Asphyxiation: 1.5
+
+# Bulimia
+- type: pathology
+  id: Bulimia
+  name: pathology-bulimia-name
+  genome: Dna
+  definition:
+  - description: pathology-bulimia-description
+    detection:
+      description: pathology-bulimia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-bulimia-examine
+    components:
+    - type: Bulimia
+
+# Breathing inversion
+- type: pathology
+  id: BreathInversion
+  name: pathology-breath-inversion-name
+  genome: Dna
+  definition:
+  - description: pathology-breath-inversion-description
+    detection:
+      description: pathology-breath-inversion-detection
+    manifestation:
+      visible: true
+      examineText: pathology-breath-inversion-examine
+    components:
+    - type: BreathInversion
+
+# Noodle arms:
+- type: pathology
+  id: NoodleArms
+  name: pathology-noodle-arms-name
+  genome: Rna
+  definition:
+  # Stage 1
+  - description: pathology-noodle-arms-description
+    detection:
+      description: pathology-noodle-arms-detection
+    manifestation:
+      visible: true
+      examineText: pathology-noodle-arms-examine-1
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+    components:
+    - type: NoodleArms
+  # Stage 2
+  - description: pathology-noodle-arms-description
+    progressMessage: pathology-noodle-arms-progress-2
+    detection:
+      description: pathology-noodle-arms-detection
+    manifestation:
+      visible: true
+      examineText: pathology-noodle-arms-examine-2
+
+# Sharp hearing
+- type: pathology
+  id: SharpHearing
+  name: pathology-sharp-hearing-name
+  genome: Dna
+  definition:
+  # Stage 1
+  - description: pathology-sharp-hearing-description
+    detection:
+      description: pathology-sharp-hearing-detection
+    manifestation:
+      visible: true
+      examineText: pathology-sharp-hearing-examine-1
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+    components:
+    - type: KeenHearing
+      visionRadius: 5
+      highSensitiveVisionRadius: 2
+    - type: SharpHearing
+  # Stage 2
+  - description: pathology-sharp-hearing-description
+    progressMessage: pathology-sharp-hearing-progress-2
+    detection:
+      description: pathology-sharp-hearing-detection
+    manifestation:
+      visible: true
+      examineText: pathology-sharp-hearing-examine-2
+
+# Lethalgy
+- type: pathology
+  id: Lethalgy
+  name: pathology-lethalgy-name
+  genome: Dna
+  definition:
+  # Stage 1
+  - description: pathology-lethalgy-description
+    detection:
+      description: pathology-lethalgy-detection
+    manifestation:
+      visible: true
+      examineText: pathology-lethalgy-examine-1
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+    effects:
+    - !type:PathologyDamageEffect
+      whileRecumbent: true
+      damage:
+        types:
+          Asphyxiation: 1
+  # Stage 2
+  - description: pathology-lethalgy-description
+    progressMessage: pathology-lethalgy-progress-2
+    detection:
+      description: pathology-lethalgy-detection
+    manifestation:
+      visible: true
+      examineText: pathology-lethalgy-examine-2
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+    effects:
+    - !type:PathologyDamageEffect
+      whileRecumbent: true
+      damage:
+        types:
+          Asphyxiation: 2
+  # Stage 3
+  - description: pathology-lethalgy-description
+    progressMessage: pathology-lethalgy-progress-3
+    detection:
+      description: pathology-lethalgy-detection
+    manifestation:
+      visible: true
+      examineText: pathology-lethalgy-examine-3
+    effects:
+    - !type:PathologyDamageEffect
+      whileRecumbent: true
+      damage:
+        types:
+          Asphyxiation: 3
+
+# Chronic fatigue
+- type: pathology
+  id: ChronicFatigue
+  name: pathology-chronic-fatigue-name
+  genome: Dna
+  definition:
+  # Stage 1
+  - description: pathology-chronic-fatigue-description
+    detection:
+      description: pathology-chronic-fatigue-detection
+    manifestation:
+      visible: true
+      examineText: pathology-chronic-fatigue-examine-1
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+    effects:
+    - !type:PathologyStaminaDamageEffect
+      amount: 3
+  # Stage 2
+  - description: pathology-chronic-fatigue-description
+    progressMessage: pathology-chronic-fatigue-progress-2
+    detection:
+      description: pathology-chronic-fatigue-detection
+    manifestation:
+      visible: true
+      examineText: pathology-chronic-fatigue-examine-2
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+    effects:
+    - !type:PathologyStaminaDamageEffect
+      amount: 6
+  # Stage 3
+  - description: pathology-chronic-fatigue-description
+    progressMessage: pathology-chronic-fatigue-progress-3
+    detection:
+      description: pathology-chronic-fatigue-detection
+    manifestation:
+      visible: true
+      examineText: pathology-chronic-fatigue-examine-3
+    effects:
+    - !type:PathologyStaminaDamageEffect
+      amount: 9
+
+# Recoil weakness name is kinda stupid, need better one
+- type: pathology
+  id: RecoilWeakness
+  name: pathology-recoil-weakness-name
+  genome: Dna
+  definition:
+  - description: pathology-recoil-weakness-description
+    detection:
+      description: pathology-recoil-weakness-detection
+    manifestation:
+      visible: true
+      examineText: pathology-recoil-weakness-examine
+    components:
+    - type: RecoilWeakness
+
+# Stone skin
+- type: pathology
+  id: StoneSkin
+  name: pathology-stone-skin-name
+  genome: Rna
+  definition:
+  - description: pathology-stone-skin-description
+    detection:
+      description: pathology-stone-skin-detection
+    manifestation:
+      visible: true
+      examineText: pathology-stone-skin-examine
+    components:
+    # composed from reusable behaviours — no StoneSkin-specific system
+    - type: PathologyInjectionBlock
+      message: pathology-stone-skin-too-hard
+    - type: PathologyDamageModifier
+      modifierPerStage:
+      - coefficients:
+          Piercing: 0.85
+          Slash: 0.85
+
+# Electrophilia
+- type: pathology
+  id: Electrophilia
+  name: pathology-electrophilia-name
+  genome: Rna
+  definition:
+  # Stage 1
+  - description: pathology-electrophilia-description
+    detection:
+      description: pathology-electrophilia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-electrophilia-examine-1
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 30m
+      - !type:PathologyReagentProgressCondition
+    components:
+    - type: Electrophilia
+  # Stage 2
+  - description: pathology-electrophilia-description
+    progressMessage: pathology-electrophilia-progress-2
+    detection:
+      description: pathology-electrophilia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-electrophilia-examine-2
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 30m
+      - !type:PathologyReagentProgressCondition
+  # Stage 3
+  - description: pathology-electrophilia-description
+    progressMessage: pathology-electrophilia-progress-3
+    detection:
+      description: pathology-electrophilia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-electrophilia-examine-3
+
+# Dehydration
+- type: pathology
+  id: Dehydration
+  name: pathology-dehydration-name
+  genome: Rna
+  definition:
+  # Stage 1
+  - description: pathology-dehydration-description
+    detection:
+      description: pathology-dehydration-detection
+    manifestation:
+      visible: true
+      examineText: pathology-dehydration-examine-1
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+    effects:
+    - !type:PathologyNutritionEffect
+      thirst: 0.3
+    - !type:PathologyBleedEffect
+      amount: -0.5
+  # Stage 2
+  - description: pathology-dehydration-description
+    progressMessage: pathology-dehydration-progress-2
+    detection:
+      description: pathology-dehydration-detection
+    manifestation:
+      visible: true
+      examineText: pathology-dehydration-examine-2
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+    effects:
+    - !type:PathologyNutritionEffect
+      thirst: 0.6
+    - !type:PathologyBleedEffect
+      amount: -1
+  # Stage 3
+  - description: pathology-dehydration-description
+    progressMessage: pathology-dehydration-progress-3
+    detection:
+      description: pathology-dehydration-detection
+    manifestation:
+      visible: true
+      examineText: pathology-dehydration-examine-3
+    effects:
+    - !type:PathologyNutritionEffect
+      thirst: 1.0
+    - !type:PathologyBleedEffect
+      amount: -2
+
+# Steel stomach
+- type: pathology
+  id: SteelStomach
+  name: pathology-steel-stomach-name
+  genome: Rna
+  definition:
+  # Stage 1
+  - description: pathology-steel-stomach-description
+    detection:
+      description: pathology-steel-stomach-detection
+    manifestation:
+      visible: true
+      examineText: pathology-steel-stomach-examine-1
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+    effects:
+    - !type:PathologyNutritionEffect
+      hunger: -0.3
+      thirst: -0.3
+  # Stage 2
+  - description: pathology-steel-stomach-description
+    progressMessage: pathology-steel-stomach-progress-2
+    detection:
+      description: pathology-steel-stomach-detection
+    manifestation:
+      visible: true
+      examineText: pathology-steel-stomach-examine-2
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+    effects:
+    - !type:PathologyNutritionEffect
+      hunger: -0.6
+      thirst: -0.6
+  # Stage 3
+  - description: pathology-steel-stomach-description
+    progressMessage: pathology-steel-stomach-progress-3
+    detection:
+      description: pathology-steel-stomach-detection
+    manifestation:
+      visible: true
+      examineText: pathology-steel-stomach-examine-3
+    effects:
+    - !type:PathologyNutritionEffect
+      hunger: -1.0
+      thirst: -1.0
+    components:
+    - type: PathologyMovementModifier
+      sprint: 0.85
+
+# haha cluwne
+- type: pathology
+  id: Clumsiness
+  name: pathology-clumsiness-name
+  genome: Rna
+  definition:
+  - description: pathology-clumsiness-description
+    detection:
+      description: pathology-clumsiness-detection
+    manifestation:
+      visible: true
+      examineText: pathology-clumsiness-examine
+    components:
+    - type: Clumsy
+      clumsyDefaultCheck: 0.3
+
+# Laser eyes
+- type: pathology
+  id: LaserEyes
+  name: pathology-laser-eyes-name
+  genome: Dna
+  definition:
+  # Stage 1
+  - description: pathology-laser-eyes-description
+    detection:
+      description: pathology-laser-eyes-detection
+    manifestation:
+      visible: true
+      examineText: pathology-laser-eyes-examine-1
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+    components:
+    - type: LaserEyes
+      damagePerStage:
+      - types: { Heat: 6 }
+      - types: { Heat: 9 }
+      - types: { Heat: 12 }
+  # Stage 2
+  - description: pathology-laser-eyes-description
+    progressMessage: pathology-laser-eyes-progress-2
+    detection:
+      description: pathology-laser-eyes-detection
+    manifestation:
+      visible: true
+      examineText: pathology-laser-eyes-examine-2
+    progressConditions:
+    - !type:PathologyAnyProgressCondition
+      conditions:
+      - !type:PathologyTimeProgressCondition
+        delay: 3m
+      - !type:PathologyReagentProgressCondition
+  # Stage 3
+  - description: pathology-laser-eyes-description
+    progressMessage: pathology-laser-eyes-progress-3
+    detection:
+      description: pathology-laser-eyes-detection
+    manifestation:
+      visible: true
+      examineText: pathology-laser-eyes-examine-3

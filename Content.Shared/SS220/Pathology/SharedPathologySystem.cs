@@ -1,10 +1,12 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Bed.Components;
+using Content.Shared.Body.Events;
+using Content.Shared.GameTicking;
+using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
 using Content.Shared.StatusEffectNew;
-using Content.Shared.Traits;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -14,22 +16,83 @@ namespace Content.Shared.SS220.Pathology;
 public abstract partial class SharedPathologySystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _prototype = default!;
-    [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private StatusEffectsSystem _statusEffects = default!;
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private IComponentFactory _componentFactory = default!;
 
     public static readonly int OneStack = 1;
-
+    public static readonly int DefaultMaxStack = 7;
     public static readonly TimeSpan UpdateInterval = TimeSpan.FromSeconds(1f);
+    private static readonly TimeSpan InitialEmoteDelayMin = TimeSpan.FromSeconds(30);
+    private static readonly TimeSpan InitialEmoteDelayMax = TimeSpan.FromSeconds(60);
 
     private TimeSpan _lastUpdate;
 
+    private int _strainSeed;
+
     public override void Initialize()
     {
+        _strainSeed = _random.Next();
+
         SubscribeLocalEvent<PathologyHolderComponent, RejuvenateEvent>(OnRejuvenate);
+        SubscribeLocalEvent<PathologyHolderComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
 
         InitializeStatusEffectContainerEvents();
+        InitializeSigns();
+    }
+
+    private void OnRoundRestart(RoundRestartCleanupEvent _)
+    {
+        _strainSeed = _random.Next();
+    }
+
+    private void OnMobStateChanged(Entity<PathologyHolderComponent> ent, ref MobStateChangedEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (args.NewMobState == MobState.Dead)
+        {
+            ent.Comp.DiedAt = _gameTiming.CurTime;
+        }
+        else if (args.OldMobState == MobState.Dead && ent.Comp.DiedAt is { } diedAt)
+        {
+            ent.Comp.DiedAt = null;
+            ShiftPathologyTimers(ent, _gameTiming.CurTime - diedAt);
+        }
+    }
+
+    // Shifts every active symptom's stage and emote timers forward by the same delta, so time the
+    // virus shouldnt be progressing (spent dead, or on stasis bed) doesn't advance it.
+    private void ShiftPathologyTimers(Entity<PathologyHolderComponent> ent, TimeSpan delta)
+    {
+        foreach (var data in ent.Comp.ActivePathologies.Values)
+        {
+            data.StageStartTime += delta;
+            data.LastEmote += delta;
+        }
+
+        Dirty(ent);
+    }
+
+    private void ApplyMetabolicSlowdown(Entity<PathologyHolderComponent> ent)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!HasComp<StasisBedBuckledComponent>(ent))
+            return;
+
+        var ev = new GetMetabolicMultiplierEvent();
+        RaiseLocalEvent(ent.Owner, ref ev);
+
+        if (ev.Multiplier <= 1f)
+            return;
+
+        var banked = UpdateInterval * (1d - 1d / ev.Multiplier);
+        ShiftPathologyTimers(ent, banked);
     }
 
     public override void Update(float frameTime)
@@ -50,58 +113,78 @@ public abstract partial class SharedPathologySystem : EntitySystem
             if (holder.ActivePathologies.Count == 0)
                 continue;
 
+            if (_mobState.IsDead(uid))
+                continue;
+
+            ApplyMetabolicSlowdown((uid, holder));
+
             foreach (var (protoId, data) in holder.ActivePathologies)
             {
                 if (!_prototype.Resolve(protoId, out var pathologyProto))
                     continue;
 
-                TryProgressPathology((uid, holder), pathologyProto, data, null);
+                TryProgressPathology((uid, holder), pathologyProto, data);
 
-                foreach (var effect in pathologyProto.Definition[data.Level].Effects)
+                if (!_net.IsClient)
                 {
-                    effect.ApplyEffect(uid, data, EntityManager);
+                    var args = new PathologyEffectArgs(uid, data, EntityManager, _gameTiming.CurTime, _net.IsClient);
+                    foreach (var effect in pathologyProto.Definition[data.Level].Effects)
+                        effect.ApplyEffect(in args);
                 }
+
+                TryDoSymptomEmote((uid, holder), pathologyProto, data);
             }
         }
     }
 
     private void OnRejuvenate(Entity<PathologyHolderComponent> entity, ref RejuvenateEvent args)
     {
-        foreach (var (pathologyId, _) in entity.Comp.ActivePathologies)
+        // snapshot keys — TryRemovePathology removes from ActivePathologies, so the live dict can't be iterated
+        foreach (var pathologyId in new List<ProtoId<PathologyPrototype>>(entity.Comp.ActivePathologies.Keys))
         {
             TryRemovePathology(entity!, pathologyId, checkStacks: false);
         }
+
+        entity.Comp.ActiveViruses.Clear();
+        entity.Comp.Immunities.Clear();
+        Dirty(entity);
+        OnVirusContentsChanged(entity);
     }
 
-    private bool TryProgressPathology(Entity<PathologyHolderComponent> entity, PathologyPrototype pathologyPrototype, PathologyInstanceData instanceData, IPathologyContext? context)
+    private bool TryProgressPathology(Entity<PathologyHolderComponent> entity, PathologyPrototype pathologyPrototype, PathologyInstanceData instanceData)
     {
         if (pathologyPrototype.Definition[instanceData.Level].ProgressConditions.Length == 0)
             return false;
 
+        var args = new PathologyEffectArgs(entity, instanceData, EntityManager, _gameTiming.CurTime, _net.IsClient);
         foreach (var req in pathologyPrototype.Definition[instanceData.Level].ProgressConditions)
         {
-            if (req.CheckCondition(entity, instanceData, EntityManager))
+            if (req.CheckCondition(in args))
                 continue;
 
             return false;
         }
 
+        return AdvancePathologyStage(entity, pathologyPrototype, instanceData);
+    }
+
+    private bool AdvancePathologyStage(Entity<PathologyHolderComponent> entity, PathologyPrototype pathologyPrototype, PathologyInstanceData instanceData, bool popup = true)
+    {
         if (instanceData.Level + 1 >= pathologyPrototype.Definition.Length)
             return false;
 
         instanceData.Level++;
-        // we drop all previous
-        instanceData.StackCount = OneStack;
-        instanceData.PathologyContexts.Clear();
-
-        instanceData.PathologyContexts.Add(context);
-        AddPathologyDefinitionEffects(entity, pathologyPrototype.Definition[instanceData.Level]);
+        var current = pathologyPrototype.Definition[instanceData.Level];
+        instanceData.StageStartTime = _gameTiming.CurTime;
+        AddPathologyDefinitionEffects(entity, instanceData, current, popup);
         DebugTools.Assert(instanceData.PathologyContexts.Count == instanceData.StackCount);
 
         var ev = new PathologySeverityChanged(pathologyPrototype.ID, instanceData.Level - 1, instanceData.Level);
         RaiseLocalEvent(entity, ref ev);
 
         Dirty(entity);
+        // re-stamp blood so a drawn sample reports the new stage
+        OnVirusContentsChanged(entity.Owner);
         return true;
     }
 
@@ -111,9 +194,10 @@ public abstract partial class SharedPathologySystem : EntitySystem
         RaiseLocalEvent(entity, ref ev);
 
         var instanceData = new PathologyInstanceData(_gameTiming.CurTime, context);
+        instanceData.LastEmote = _gameTiming.CurTime + _random.Next(InitialEmoteDelayMin, InitialEmoteDelayMax);
         entity.Comp.ActivePathologies.Add(pathologyPrototype.ID, instanceData);
 
-        AddPathologyDefinitionEffects(entity, pathologyPrototype.Definition[0]);
+        AddPathologyDefinitionEffects(entity, instanceData, pathologyPrototype.Definition[0]);
 
         var severityChangedEv = new PathologySeverityChanged(pathologyPrototype.ID, -1, 0);
         RaiseLocalEvent(entity, ref severityChangedEv);
@@ -124,24 +208,25 @@ public abstract partial class SharedPathologySystem : EntitySystem
         Dirty(entity);
     }
 
-    private void AddPathologyDefinitionEffects(Entity<PathologyHolderComponent> entity, PathologyDefinition definition)
+    private void AddPathologyDefinitionEffects(Entity<PathologyHolderComponent> entity, PathologyInstanceData data, PathologyDefinition definition, bool popup = true)
     {
-        AddTrait(entity, definition.Trait);
+        AddTrackedComponents(entity, data, definition.Components);
 
-        // we don't want to popup dead ones
-        if (_mobState.IsIncapacitated(entity))
+        // we don't want to message dead ones, nor when silently restoring suppressed stages
+        if (!popup || _mobState.IsIncapacitated(entity))
             return;
 
-        if (definition.ProgressPopup is { } progressPopup)
-            _popup.PopupEntity(Loc.GetString(progressPopup), entity, entity, PopupType.MediumCaution);
+        // stage-progress feedback goes to the carrier's own chat, same channel as symptom self-messages
+        if (definition.ProgressMessage is { } progressMessage)
+            SendSelfMessage(entity, Loc.GetString(progressMessage), definition.ProgressMessageColor);
     }
 
     private void RemovePathology(Entity<PathologyHolderComponent> entity, PathologyPrototype pathologyPrototype)
     {
         var data = entity.Comp.ActivePathologies[pathologyPrototype.ID];
 
-        for (var _ = 0; _ < data.PathologyContexts.Count; _++)
-            ApplyPathologyContext(entity, data.PathologyContexts.Pop());
+        foreach (var context in data.PathologyContexts)
+            ApplyPathologyContext(entity, context);
 
         for (var i = 0; i <= data.Level; i++)
         {
@@ -155,13 +240,12 @@ public abstract partial class SharedPathologySystem : EntitySystem
             {
                 _statusEffects.TryRemoveStatusEffect(entity, effect);
             }
-
-            RemoveTrait(entity, pathologyPrototype.Definition[i].Trait);
         }
 
-        foreach (var context in data.PathologyContexts)
+        foreach (var name in data.AddedComponents)
         {
-            ApplyPathologyContext(entity, context);
+            if (_componentFactory.TryGetRegistration(name, out var registration))
+                RemComp(entity, registration.Type);
         }
 
         entity.Comp.ActivePathologies.Remove(pathologyPrototype.ID);
@@ -171,27 +255,19 @@ public abstract partial class SharedPathologySystem : EntitySystem
 
     protected virtual void ApplyPathologyContext(Entity<PathologyHolderComponent> entity, IPathologyContext? context) { }
 
-    // Kill it with TraitPrototype pls
-    private void AddTrait(EntityUid uid, ProtoId<TraitPrototype>? traitId)
+    // we need to record what this symptom adds so a full cure strips exactly these
+    private void AddTrackedComponents(Entity<PathologyHolderComponent> entity, PathologyInstanceData data, ComponentRegistry registry)
     {
-        if (!_prototype.Resolve(traitId, out var traitPrototype))
+        if (registry.Count == 0)
             return;
 
-        if (traitPrototype.Components is null)
-            return;
+        foreach (var name in registry.Keys)
+        {
+            if (_componentFactory.TryGetRegistration(name, out var registration)
+                && !HasComp(entity, registration.Type))
+                data.AddedComponents.Add(name);
+        }
 
-        EntityManager.AddComponents(uid, traitPrototype.Components, false);
-    }
-
-    // and it
-    private void RemoveTrait(EntityUid uid, ProtoId<TraitPrototype>? traitId)
-    {
-        if (!_prototype.Resolve(traitId, out var traitPrototype))
-            return;
-
-        if (traitPrototype.Components is null)
-            return;
-
-        EntityManager.RemoveComponents(uid, traitPrototype.Components);
+        EntityManager.AddComponents(entity, registry, false);
     }
 }

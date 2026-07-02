@@ -1,0 +1,20 @@
+# "Laser eyes" ability: fire a laser at a clicked tile on a cooldown. Damage scales with the symptom's
+# stage and every shot burns the caster's own eyes. Granted by the laser-eyes symptom via LaserEyesComponent.
+- type: entity
+  parent: BaseAction
+  id: ActionVirusLaserEyes
+  name: лазерные глаза
+  description: Выстрелить лазером из глаз в указанную точку. Каждый выстрел выжигает собственные глаза.
+  components:
+  - type: Action
+    useDelay: 4
+    itemIconStyle: BigAction
+    # placeholder icon — swap for a proper laser-eyes one
+    icon:
+      sprite: SS220/Interface/Actions/magic_spells.rsi
+      state: fireball
+  - type: TargetAction
+    checkCanAccess: false
+    range: 20
+  - type: WorldTargetAction
+    event: !type:LaserEyesActionEvent

@@ -1,0 +1,169 @@
+#  How to crate ur own favorite virus?
+#  A virus is spread method + a list of symptoms.
+#  Btw cure & accelerant reagents are rolled automatically
+#
+# Create virus proto in this file.
+#  - type: virus
+#    id: MyFavVirus
+#    name: virus-myfavvirus-name   # do not forget locale, en+ru
+#    transmission:                 
+#      contactChance: 0.5          
+#      proximityChance: 0.1        # per second 
+#      proximityRange: 2           
+#    symptoms:                     # all must share one genome, RNA or DNA, will break if u mix them
+#    - Sneezing
+#    - Necrosis
+# At this point virus is set, do not forget to add guidebook entry known_viruses.xml
+# But if u want more - new symptoms etc. - this is where it gets tricky:
+#  
+#
+# todo: write comprehend instruction about pathogenes
+
+# Cold
+- type: virus
+  id: Cold
+  name: virus-cold-name
+  transmission:
+    proximityChance: 0.1
+    proximityRange: 2
+  symptoms:
+  - Sneezing
+
+# Quvot
+- type: virus
+  id: Quvot
+  name: virus-quvot-name
+  transmission:
+    contactChance: 0.5
+  symptoms:
+  - SkinBurst
+
+# Hemolacria
+- type: virus
+  id: Hemolacria
+  name: virus-hemolacria-name
+  transmission:
+    contactChance: 0.5
+  symptoms:
+  - EyeBleeding
+
+# Mimosa
+- type: virus
+  id: Mimosa
+  name: virus-mimosa-name
+  transmission:
+    proximityChance: 0.1
+    proximityRange: 2
+  symptoms:
+  - Muteness
+  - Drowsiness
+  - NoodleArms
+
+# Synthesia
+- type: virus
+  id: Synthesia
+  name: virus-synthesia-name
+  transmission:
+    contactChance: 0.5
+  symptoms:
+  - Synthification
+  - SteelStomach
+  - StoneSkin
+  - Electrophilia
+
+# Shitsec
+- type: virus
+  id: Shitsec
+  name: virus-shitsec-name
+  transmission:
+    contactChance: 0.5
+  symptoms:
+  - NoodleArms
+  - Alcosia
+  - Drowsiness
+
+# Somnambula
+- type: virus
+  id: Somnambula
+  name: virus-somnambula-name
+  transmission:
+    contactChance: 0.5
+  symptoms:
+  - Lethalgy
+  - ChronicFatigue
+  - Hypersomnia
+
+# Sacrilia
+- type: virus
+  id: Sacrilia
+  name: virus-sacrilia-name
+  transmission:
+    contactChance: 0.5
+  symptoms:
+  - LaserEyes
+  - EyeBleeding
+  - Narcophasia
+  - Bulimia
+
+# Ghoulification
+- type: virus
+  id: Ghoulification
+  name: virus-ghoulification-name
+  transmission:
+    contactChance: 0.5
+  symptoms:
+  - Radiophasia
+  - BreathInversion
+  - RecoilWeakness
+  - DogVitality
+
+# Kenuraya
+- type: virus
+  id: Kenuraya
+  name: virus-kenuraya-name
+  transmission:
+    contactChance: 0.5
+  symptoms:
+  - TricordTolerance
+  - Dehydration
+  - Hyperabsorption
+  - Autorespiration
+
+# Neurolock
+- type: virus
+  id: Neurolock
+  name: virus-neurolock-name
+  transmission:
+    proximityChance: 0.1
+    proximityRange: 2
+  symptoms:
+  - Dementia
+  - Stupefaction
+  - Clumsiness
+  - Sneezing
+
+# Red Death
+- type: virus
+  id: RedDeath
+  name: virus-red-death-name
+  transmission:
+    contactChance: 0.5
+    proximityChance: 0.1
+    proximityRange: 2
+  symptoms:
+  - Cough
+  - ChronicFatigue
+  - Necrosis
+  - EyeBleeding
+
+# Dragon Blood
+- type: virus
+  id: DragonBlood
+  name: virus-dragon-blood-name
+  transmission:
+    contactChance: 0.5
+  symptoms:
+  - BurningBlood
+  - Paracusia
+  - Hyperabsorption
+  - TricordTolerance

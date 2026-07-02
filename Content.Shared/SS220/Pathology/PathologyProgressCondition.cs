@@ -8,10 +8,10 @@ public abstract partial class PathologyProgressCondition
     [DataField]
     public bool Invert = false;
 
-    protected abstract bool Condition(EntityUid uid, PathologyInstanceData instanceData, IEntityManager entityManager);
+    protected abstract bool Condition(in PathologyEffectArgs args);
 
-    public bool CheckCondition(EntityUid uid, PathologyInstanceData instanceData, IEntityManager entityManager)
+    public bool CheckCondition(in PathologyEffectArgs args)
     {
-        return Invert != Condition(uid, instanceData, entityManager);
+        return Invert != Condition(in args);
     }
 }

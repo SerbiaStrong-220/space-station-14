@@ -6,17 +6,72 @@
   placement:
     mode: SnapgridCenter
   components:
+  # SS220-Start
   - type: Sprite
-    sprite: Structures/Machines/diagnoser.rsi
+    sprite: SS220/Structures/Machines/diagnoser.rsi
+    snapCardinals: true
     layers:
+    # always-visible machine body; everything below is an independent overlay on top of it
     - state: icon
-      map: ["enum.DiseaseMachineVisualLayers.IsRunning"]
-    - state: unlit
-      shader: unshaded
-      map: ["enum.DiseaseMachineVisualLayers.IsOn"]
+    - state: turned_on
+      map: ["enum.DiseaseDiagnoserVisualLayers.Powered"]
+      visible: false
+    - state: running
+      map: ["enum.DiseaseDiagnoserVisualLayers.Running"]
+      visible: false
+    - state: vial_installed_empty
+      map: ["enum.DiseaseDiagnoserVisualLayers.Vial"]
+      visible: false
+    - state: fill-1
+      map: ["enum.DiseaseDiagnoserVisualLayers.Buffer"]
+      visible: false
   - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      # powered overlay — toggled automatically by the power system
+      enum.PowerDeviceVisuals.Powered:
+        enum.DiseaseDiagnoserVisualLayers.Powered:
+          "True": { visible: true }
+          "False": { visible: false }
+      enum.DiseaseDiagnoserVisuals.Running:
+        enum.DiseaseDiagnoserVisualLayers.Running:
+          "True": { visible: true }
+          "False": { visible: false }
+      enum.DiseaseDiagnoserVisuals.Vial:
+        enum.DiseaseDiagnoserVisualLayers.Vial:
+          "None": { visible: false }
+          "Blood": { visible: true, state: vial_installed_blood }
+          "Empty": { visible: true, state: vial_installed_empty }
+          "Mutagen": { visible: true, state: vial_installed_mutagen }
+  - type: DiseaseDiagnoserBufferVisuals
+  # SS220-End
   - type: Machine
     board: DiagnoserMachineCircuitboard
+  # SS220-Start
+  - type: DiseaseDiagnoser
+  - type: ItemSlots
+    slots:
+      diagnoserSlot:
+        whitelist:
+          components:
+          - FitsInDispenser
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+      diagnoserSlot: !type:ContainerSlot
+  - type: SolutionContainerManager
+    solutions:
+      buffer:
+        maxVol: 100
+  - type: ActivatableUI
+    key: enum.DiseaseDiagnoserUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.DiseaseDiagnoserUiKey.Key:
+        type: DiseaseDiagnoserBoundUserInterface
+  # SS220-End
 
 - type: entity
   name: disease diagnoser report

@@ -1,0 +1,40 @@
+- type: entity
+  parent: ChemistryEmptyVial
+  id: ColdVirusSample
+  suffix: Cold
+  components:
+  - type: Label
+    currentLabel: virus-cold-name
+  - type: VirusSample
+    virus: Cold
+- type: entity
+  parent: ChemistryEmptyVial
+  id: QuvotVirusSample
+  suffix: Quvot
+  components:
+  - type: Label
+    currentLabel: virus-quvot-name
+  - type: VirusSample
+    virus: Quvot
+- type: entity
+  parent: ChemistryEmptyVial
+  id: RedDeathVirusSample
+  suffix: Red Death
+  components:
+  - type: Label
+    currentLabel: virus-red-death-name
+  - type: VirusSample
+    virus: RedDeath
+    amount: 15
+- type: entity
+  parent: CrateMedical
+  id: CrateVirusSamples
+  name: virus sample crate
+  description: A pair of sealed virus strain samples, one RNA and one DNA.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: ColdVirusSample
+        - id: QuvotVirusSample

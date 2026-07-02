@@ -108,3 +108,13 @@
   parent: BaseCircuitboardRecipe
   id: CloningConsoleComputerCircuitboard
   result: CloningConsoleComputerCircuitboard
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: DiagnoserMachineCircuitboard
+  result: DiagnoserMachineCircuitboard
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: VaccinatorMachineCircuitboard
+  result: VaccinatorMachineCircuitboard

@@ -1,0 +1,40 @@
+# Unstable mutagen can splice any of these symptoms into a virus it contacts in a solution.
+# The virus's genome (from its first symptom) gates which actually take: an RNA strain only accepts
+# RNA symptoms, a DNA strain only DNA. Incompatible picks and duplicates still spend the reagents.
+- type: virusMutation
+  id: UnstableMutagen
+  mutagen: UnstableMutagen
+  pool:
+  - Sneezing
+  - Drowsiness
+  - SkinBurst
+  - Necrosis
+  - EyeBleeding
+  - Muteness
+  - Stupefaction
+  - Hyperabsorption
+  - Autorespiration
+  - BurningBlood
+  - TricordTolerance
+  - Dementia
+  - Synthification
+  - Alcosia
+  - Radiophasia
+  - Hypersomnia
+  - DogVitality
+  - Narcophasia
+  - StuffyNose
+  - Bulimia
+  - BreathInversion
+  - NoodleArms
+  - SharpHearing
+  - Lethalgy
+  - ChronicFatigue
+  - RecoilWeakness
+  - StoneSkin
+  - Electrophilia
+  - Dehydration
+  - SteelStomach
+  - Clumsiness
+  - LaserEyes
+  - Paracusia

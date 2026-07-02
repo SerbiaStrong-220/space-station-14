@@ -1,0 +1,12 @@
+# Reveal chemistry: a dose of the matching reagent exposes one random symptom of a same-genome virus in a
+# solution. Arcryox reads DNA symptoms, Aloxadone reads RNA ones. A dose that lands on an already-known
+# symptom is spent for nothing.
+- type: diseaseReveal
+  id: ArcryoxDna
+  reagent: Arcryox
+  genome: Dna
+
+- type: diseaseReveal
+  id: AloxadoneRna
+  reagent: Aloxadone
+  genome: Rna

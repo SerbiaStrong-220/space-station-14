@@ -278,7 +278,7 @@ public sealed class HealthAnalyzerSystem : EntitySystem
         }
         // ss220 add health analyzer end
 
-        return new HealthAnalyzerUiState(
+        var uiState = new HealthAnalyzerUiState( // SS220
             GetNetEntity(entity),
             bodyTemperature,
             bloodAmount,
@@ -288,5 +288,9 @@ public sealed class HealthAnalyzerSystem : EntitySystem
             counterDeath, //SS220 LimitationRevive
             healthAnalyzerComp?.CanPrint ?? false // SS220-health-analyzer-report
         );
+        // SS220-Start
+        uiState.Diseases = _healthAnalyzerPrint.GetDiseaseLines(entity);
+        return uiState;
+        // SS220-End
     }
 }

@@ -116,6 +116,7 @@
   color: "#52B4E9"
   roles:
   - Chemist
+  - Virologist # SS220
   - ChiefMedicalOfficer
   - SeniorPhysician #ss220
   - MedicalDoctor

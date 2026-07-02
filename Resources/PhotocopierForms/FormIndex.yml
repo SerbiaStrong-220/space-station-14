@@ -121,6 +121,8 @@
     - /PhotocopierForms/nanotrasen_station/medical/med_rep_psych_tourette.xml
     - /PhotocopierForms/nanotrasen_station/medical/med_sitrep.xml
     - /PhotocopierForms/nanotrasen_station/medical/med_rep_hhc.xml
+    - /PhotocopierForms/nanotrasen_station/medical/med_rep_vaccine.xml
+    - /PhotocopierForms/nanotrasen_station/medical/med_rep_virus.xml
   - Id: engineering
     Name: Инженерный отдел
     Color: "#FCA503FF"

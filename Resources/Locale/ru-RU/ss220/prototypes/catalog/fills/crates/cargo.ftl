@@ -6,3 +6,6 @@ ent-CrateCargoLottery5 = ящик лотерейных билетов
 
 ent-CrateCargoLottery10 = большой ящик лотерейных билетов
     .desc = { ent-CrateCargoLottery5.desc }
+
+ent-CrateDiseaseMachineBoards = ящик вирусологических машинных плат
+    .desc = Машинные платы для сборки диагностировщика заболеваний и вакцинатора.

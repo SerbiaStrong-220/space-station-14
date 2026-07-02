@@ -182,6 +182,11 @@
   - type: Fiber
     fiberMaterial: fibers-latex
   - type: FingerprintMask
+  # SS220-Start
+  - type: DiseaseProtection
+    vectors: Contact
+    blockChance: 1
+  # SS220-End
 
 - type: entity
   parent: ClothingHandsButcherable
@@ -196,6 +201,11 @@
   - type: Fiber
     fiberMaterial: fibers-nitrile
   - type: FingerprintMask
+  # SS220-Start
+  - type: DiseaseProtection
+    vectors: Contact
+    blockChance: 1
+  # SS220-End
 
 - type: entity
   parent: ClothingHandsButcherable
@@ -514,6 +524,11 @@
   - type: GuideHelp
     guides:
     - Forensics
+  # SS220-Start
+  - type: DiseaseProtection
+    vectors: Contact
+    blockChance: 0.8
+  # SS220-End
 
 # TODO Make lubed items not slip in hands
 - type: entity
