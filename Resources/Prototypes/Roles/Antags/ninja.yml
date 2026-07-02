@@ -19,7 +19,7 @@
     gloves: ClothingHandsGlovesSpaceNinja
     outerClothing: ClothingOuterSuitSpaceNinja
     shoes: ClothingShoesSpaceNinja
-    id: PassengerPDA # ss220 remove ninja pda
+    id: NinjaIDCard # SS20 ninja id fix
     ears: ClothingHeadsetNinja
     pocket1: DoubleEmergencyOxygenTankFilled # SS220 Ninja Resprite
     pocket2: PinpointerStation
