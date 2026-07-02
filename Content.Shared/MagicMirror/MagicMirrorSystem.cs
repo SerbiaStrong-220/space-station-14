@@ -90,14 +90,19 @@ public sealed class MagicMirrorSystem : EntitySystem
         },
             out var doAfterId);
 
-        if (target == args.Actor)
+        //SS220-IPC begin
+        if (ent.Comp.ShowPopup)
         {
-            _popup.PopupEntity(Loc.GetString("magic-mirror-change-slot-self"), target, target, PopupType.Medium);
+            if (target == args.Actor)
+            {
+                _popup.PopupEntity(Loc.GetString("magic-mirror-change-slot-self"), target, target, PopupType.Medium);
+            }
+            else
+            {
+                _popup.PopupEntity(Loc.GetString("magic-mirror-change-slot-target", ("user", Identity.Entity(args.Actor, EntityManager))), target, target, PopupType.Medium);
+            }
         }
-        else
-        {
-            _popup.PopupEntity(Loc.GetString("magic-mirror-change-slot-target", ("user", Identity.Entity(args.Actor, EntityManager))), target, target, PopupType.Medium);
-        }
+        //SS220-IPC end
 
         ent.Comp.DoAfter = doAfterId?.Index;
         _audio.PlayPredicted(ent.Comp.ChangeHairSound, ent, args.Actor);
