@@ -10,7 +10,7 @@
     - Hide
     - HideLabel
     stealthCooldown: 120
-    stealthTime: 20
+    stealthTime: 30
   - type: Anchorable
     flags:
     - Anchorable

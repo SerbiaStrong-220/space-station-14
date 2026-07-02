@@ -44,7 +44,12 @@ public sealed partial class ShuttleSystem
 
         if (!args.Show)
         {
+            if (_gameTiming.CurTime < component.CooldownUntil)
+                return;
+
             AddAllSupportedIFFFlags(xform, component);
+            component.StealthUntil = _gameTiming.CurTime + component.StealthTime;
+            component.CooldownUntil = _gameTiming.CurTime + component.StealthTime + component.StealthCooldown;
         }
         else
         {
