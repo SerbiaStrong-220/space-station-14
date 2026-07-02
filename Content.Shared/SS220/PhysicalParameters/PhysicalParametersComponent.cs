@@ -11,7 +11,17 @@ public sealed partial class PhysicalParametersComponent : Component // This comp
 {
     [DataField]
     [AutoNetworkedField]
-    public Dictionary<Parameter, FixedPoint2> ParameterDict = new Dictionary<Parameter, FixedPoint2>
+    public Dictionary<Parameter, FixedPoint2> ParameterDict = new Dictionary<Parameter, FixedPoint2> // These are base values, no temporary effect (like chemical one) should be written here
+    {
+      { Parameter.Strength, 1},
+      { Parameter.ReactionSpeed, 1},
+      { Parameter.Coordination, 1},
+      { Parameter.PainTolerance, 1}
+    };
+
+    [DataField]
+    [AutoNetworkedField]
+    public Dictionary<Parameter, FixedPoint2> ParameterDictModified = new Dictionary<Parameter, FixedPoint2>
     {
       { Parameter.Strength, 1},
       { Parameter.ReactionSpeed, 1},

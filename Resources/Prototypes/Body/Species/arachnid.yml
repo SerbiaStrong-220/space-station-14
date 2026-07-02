@@ -107,6 +107,9 @@
   - type: PhysicalParameters
     parameterDict:
       Strength: 0.9
+      ReactionSpeed: 1
+      Coordination: 1
+      PainTolerance: 1
     genderModifier:
       Strength: 0.2
   #SS220 add physical parameters end

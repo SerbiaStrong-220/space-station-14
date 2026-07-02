@@ -198,6 +198,11 @@
   - type: PhysicalParameters
     parameterDict:
       Strength: 0.8
+      ReactionSpeed: 1
+      Coordination: 1
+      PainTolerance: 1
+    genderModifier:
+      Strength: -0.1
   #SS220 add physical parameters end
   - type: TypingIndicator
     proto: vox

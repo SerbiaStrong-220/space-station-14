@@ -32,6 +32,7 @@ using Content.Shared.VoiceMask;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Wieldable;
 using Content.Shared.Zombies;
+using static Content.Shared.SS220.PhysicalParameters.PhysicalParametersSystem;
 
 namespace Content.Shared.Inventory;
 
@@ -70,6 +71,7 @@ public partial class InventorySystem
         //ss220 add electricity armor start
         SubscribeLocalEvent<InventoryComponent, BeforeStatusEffectAddedRelayEvent>(RefRelayInventoryEvent);
         //ss220 add electricity armor end
+        SubscribeLocalEvent<InventoryComponent, ParametersUpdateEvent>(RefRelayInventoryEvent);//SS220 add physical parameters
         SubscribeLocalEvent<InventoryComponent, GetFrequencyRadioEvent>(RefRelayInventoryEvent); // SS220-add-frequency-radio
         SubscribeLocalEvent<InventoryComponent, GetExplosionResistanceEvent>(RefRelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, IsWeightlessEvent>(RefRelayInventoryEvent);
