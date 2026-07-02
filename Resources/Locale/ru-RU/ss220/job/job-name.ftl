@@ -43,4 +43,4 @@ job-name-syndicate-borg = киборг Синдиката
 
 job-name-syndicate-reinforcement = подкрепление Синдиката
 
-job-name-secborg = киборг Службы Безопасности
+job-name-secborg = киборг СБ

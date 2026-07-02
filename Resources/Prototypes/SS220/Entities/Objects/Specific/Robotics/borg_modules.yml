@@ -147,8 +147,8 @@
   components:
   - type: Sprite
     layers:
-    - state: cargo
-    - state: icon-ProtoKinetic-gun
+    - state: security
+    - state: icon-security
   - type: Tag
     tags:
     - BorgModuleSafety
@@ -164,6 +164,8 @@
           tags:
           - Zipties
     - item: BoxZiptie
+  - type: BorgModuleIcon
+    icon: { sprite: SS220/Interface/Actions/actions_borg.rsi, state: fireaxe-module }
 
 - type: entity
   id: BorgModuleLethal
@@ -172,8 +174,8 @@
   components:
   - type: Sprite
     layers:
-    - state: cargo
-    - state: icon-ProtoKinetic-gun
+    - state: security
+    - state: icon-security
   - type: Tag
     tags:
     - BorgModuleLethal
@@ -182,3 +184,5 @@
     - item: CombatKnife
     - item: BorgWeaponLaserCarbine
     - item: RadioHandheldSecurity
+  - type: BorgModuleIcon
+    icon: { sprite: SS220/Interface/Actions/actions_borg.rsi, state: fireaxe-module }  

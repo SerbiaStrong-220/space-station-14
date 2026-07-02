@@ -141,7 +141,7 @@
   - Warden
   - SecurityPilot
   - Detective #SS220-Transfer Detective To Security
-
+  - SecurityBorg #SS220-Security Borg
 
 - type: department
   id: Science

@@ -12,7 +12,7 @@
       role: Security
       time: 20h
   canBeAntag: false
-  icon: JobIconBorg
+  icon: JobIconSecBorg
   supervisors: job-supervisors-rd
   jobEntity: PlayerBorgChassisSecurityBattery
   applyTraits: false

@@ -51,6 +51,7 @@
             ResearchAssistant: [ 8, 8 ]
             StationAi: [ 1, 1 ]
             Borg: [ 3, 3 ]
+            SecurityBorg: [ 1, 1 ]
             #security
             HeadOfSecurity: [ 1, 1 ]
             Warden: [ 1, 1 ]
@@ -61,7 +62,6 @@
             SecurityCadet: [ 1, 2 ]
             Magistrate: [ 1, 1 ]
             IAA: [ 2, 2 ] # Corvax-IAA
-            SecurityBorg: [ 1, 1 ] 
             # NanoTrasenRepresentative: [ 1, 1 ] #SS220 TODO NanoTraisen Representative
             Lawyer: [ 3, 3 ]
             BlueShield: [ 1, 1 ]

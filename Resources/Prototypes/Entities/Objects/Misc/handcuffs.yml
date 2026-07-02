@@ -97,11 +97,11 @@
   - type: Sprite
     sprite: Objects/Misc/zipties.rsi
     state: cuff
-#SS220 SecBorgZipties start
+#SS220-SecBorgZipties start
   - type: Tag
     tags:
     - Zipties
-#SS220 SecBorgZipties end
+#SS220-SecBorgZipties end
 
 - type: entity
   id: BaseHandcuffsBroken
