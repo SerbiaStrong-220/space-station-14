@@ -30,10 +30,11 @@ public struct HealthAnalyzerUiState
     public bool? Bleeding;
     public bool? Unrevivable;
     public int? CounterDeath; //SS220 LimitationRevive
+    public readonly TimeSpan? ClinicalDeathTimeRemaining; //SS220-clinic-death-analyzer
 
     public HealthAnalyzerUiState() {}
 
-    public HealthAnalyzerUiState(NetEntity? targetEntity, float temperature, float bloodLevel, bool? scanMode, bool? bleeding, bool? unrevivable, int? counterDeath /* SS220 LimitationRevive */, bool canPrint /*  SS220-health-analyzer-report */)
+    public HealthAnalyzerUiState(NetEntity? targetEntity, float temperature, float bloodLevel, bool? scanMode, bool? bleeding, bool? unrevivable, int? counterDeath /* SS220 LimitationRevive */, bool canPrint /*  SS220-health-analyzer-report */, TimeSpan? clinicalDeathTimeRemaining /* S220-clinic-death-analyzer */)
     {
         TargetEntity = targetEntity;
         Temperature = temperature;
@@ -43,5 +44,6 @@ public struct HealthAnalyzerUiState
         Bleeding = bleeding;
         Unrevivable = unrevivable;
         CounterDeath = counterDeath; // SS220 LimitationRevive
+        ClinicalDeathTimeRemaining = clinicalDeathTimeRemaining; // SS220 clinic death analyzer
     }
 }
