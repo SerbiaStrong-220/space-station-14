@@ -361,3 +361,30 @@
       Min: 1
       Max: 5
       PotencyDivisor: 20
+
+
+- type: seed
+  id: hop
+  name: seeds-hop-name
+  noun: seeds-noun-seeds
+  displayName: seeds-hop-display-name
+  plantRsi: SS220/Objects/Specific/Hydroponics/hop.rsi
+  packetPrototype: HopSeeds
+  productPrototypes:
+    - HopsHead
+  lifespan: 30
+  maturation: 10
+  production: 3
+  yield: 2
+  potency: 5
+  growthStages: 5
+  waterConsumption: 0.60
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 10
+    HopsExtract:
+      Min: 5
+      Max: 20
+      PotencyDivisor: 20
