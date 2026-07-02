@@ -3,7 +3,7 @@ using Content.Server.SS220.Shuttles.Components;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.SS220.Shuttles.BUIStates;
 using Content.Shared.SS220.Shuttles.Events;
-using Content.Shared.UserInterface;
+using Robust.Server.GameObjects;
 using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.Shuttles.Systems;

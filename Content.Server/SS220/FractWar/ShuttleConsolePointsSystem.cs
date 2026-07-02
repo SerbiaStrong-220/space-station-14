@@ -1,9 +1,8 @@
-using Content.Server.SS220.FractWar;
 using Content.Server.Chat.Systems;
 using Content.Shared.Destructible;
 using Content.Shared.SS220.FractWar;
-using Robust.Server.GameObjects;
-using Robust.Shared.Maths;
+using Robust.Shared.Prototypes;
+using Color = Robust.Shared.Maths.Color;
 
 namespace Content.Server.SS220.FractWar;
 
@@ -12,6 +11,8 @@ public sealed partial class ShuttleConsolePointsSystem : EntitySystem
     [Dependency] private FractWarRuleSystem _fractWarRule = default!;
     [Dependency] private ChatSystem _chatSystem = default!;
 
+    private static readonly EntProtoId NtConsolePrototype = "FractWarShuttleConsoleNT";
+    private static readonly EntProtoId SyndicateConsolePrototype = "FractWarShuttleConsoleSyndicate";
     private static readonly Color NtAnnouncementColor = Color.FromHex("#0c82c7");
     private static readonly Color SyndAnnouncementColor = Color.FromHex("#8f4a4b");
 
@@ -41,7 +42,7 @@ public sealed partial class ShuttleConsolePointsSystem : EntitySystem
     private void AnnounceConsoleDestroyed(Entity<ShuttleConsolePointsComponent> entity)
     {
         var prototype = MetaData(entity).EntityPrototype?.ID;
-        if (prototype is not ("FractWarShuttleConsoleSyndicate" or "FractWarShuttleConsoleNT"))
+        if (prototype is not (SyndicateConsolePrototype or NtConsolePrototype))
             return;
 
         var transform = Transform(entity);
@@ -51,8 +52,8 @@ public sealed partial class ShuttleConsolePointsSystem : EntitySystem
 
         var (fractionName, color) = prototype switch
         {
-            "FractWarShuttleConsoleNT" => (Loc.GetString("flag-fraction-NT"), NtAnnouncementColor),
-            "FractWarShuttleConsoleSyndicate" => (Loc.GetString("flag-fraction-Synd"), SyndAnnouncementColor),
+            NtConsolePrototype => (Loc.GetString("flag-fraction-NT"), NtAnnouncementColor),
+            SyndicateConsolePrototype => (Loc.GetString("flag-fraction-Synd"), SyndAnnouncementColor),
             _ => (string.Empty, Color.White),
         };
 

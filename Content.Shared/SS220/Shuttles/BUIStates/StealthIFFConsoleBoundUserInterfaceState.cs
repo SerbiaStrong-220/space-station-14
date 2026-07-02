@@ -1,4 +1,3 @@
-using Content.Shared.UserInterface;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Shuttles.BUIStates;

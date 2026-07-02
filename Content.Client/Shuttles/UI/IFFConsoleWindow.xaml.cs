@@ -14,13 +14,12 @@ public sealed partial class IFFConsoleWindow : FancyWindow,
     IComputerWindow<IFFConsoleBoundUserInterfaceState>
 {
     public event Action<bool>? ShowIFF;
+    private bool _show;
 
     public IFFConsoleWindow()
     {
         RobustXamlLoader.Load(this);
-        StealthButton.OnPressed += args => ShowIFFPressed(false);
-        UpdateLabels(TimeSpan.Zero, TimeSpan.Zero);
-        StealthButton.Text = Loc.GetString("iff-console-stealth-activate");
+        ShowIFFButton.OnPressed += _ => ShowIFFPressed(!_show);
     }
 
     private void ShowIFFPressed(bool pressed)
@@ -30,25 +29,12 @@ public sealed partial class IFFConsoleWindow : FancyWindow,
 
     public void UpdateState(IFFConsoleBoundUserInterfaceState state)
     {
-        UpdateLabels(state.StealthDuration, state.Cooldown);
-
-        if (state.StealthDuration > TimeSpan.Zero || state.Cooldown > TimeSpan.Zero)
-        {
-            StealthButton.Disabled = true;
-            StealthButton.Text = state.StealthDuration > TimeSpan.Zero
-                ? Loc.GetString("iff-console-stealth-active")
-                : Loc.GetString("iff-console-stealth-cooldown");
-        }
-        else
-        {
-            StealthButton.Disabled = false;
-            StealthButton.Text = Loc.GetString("iff-console-stealth-activate");
-        }
-    }
-
-    private void UpdateLabels(TimeSpan stealthDuration, TimeSpan cooldown)
-    {
-        StealthTimerLabel.Text = Loc.GetString("iff-console-stealth-time", ("seconds", $"{stealthDuration.TotalSeconds:F0}"));
-        CooldownTimerLabel.Text = Loc.GetString("iff-console-cooldown-time", ("seconds", $"{cooldown.TotalSeconds:F0}"));
+        // SS220 Add stealth start
+        _show = (state.Flags & state.AllowedFlags) == 0x0;
+        ShowIFFLabel.Text = Loc.GetString((state.AllowedFlags & IFFFlags.Hide) != 0x0
+            ? "iff-console-show-vessel-label"
+            : "iff-console-show-iff-label");
+        ShowIFFButton.Text = Loc.GetString(_show ? "iff-console-on" : "iff-console-off");
+        // SS220 Add stealth end
     }
 }

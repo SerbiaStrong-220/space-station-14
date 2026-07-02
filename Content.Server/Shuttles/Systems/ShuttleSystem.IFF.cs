@@ -42,19 +42,14 @@ public sealed partial class ShuttleSystem
             return;
         }
 
-        if (!args.Show)
-        {
-            if (_gameTiming.CurTime < component.CooldownUntil)
-                return;
-
-            AddAllSupportedIFFFlags(xform, component);
-            component.StealthUntil = _gameTiming.CurTime + component.StealthTime;
-            component.CooldownUntil = _gameTiming.CurTime + component.StealthTime + component.StealthCooldown;
-        }
-        else
+        if (args.Show)
         {
             RemoveIFFFlag(xform.GridUid.Value, IFFFlags.HideLabel);
             RemoveIFFFlag(xform.GridUid.Value, IFFFlags.Hide);
+        }
+        else
+        {
+            AddAllSupportedIFFFlags(xform, component);
         }
     }
 
@@ -133,42 +128,9 @@ public sealed partial class ShuttleSystem
         }
     }
 
-    //ss220 spacewar begin
+    // SS220 Add stealth start
     public void UpdateIFF()
     {
-        var curtime = _gameTiming.CurTime;
-        var consoles = EntityQueryEnumerator<IFFConsoleComponent, TransformComponent>();
-        while (consoles.MoveNext(out var consoleEnt,out var iffConsole, out var transform))
-        {
-            if (!TryComp<IFFComponent>(transform.GridUid, out var iff))
-                continue;
-
-            if (curtime > iffConsole.StealthUntil && iffConsole.StealthUntil != TimeSpan.Zero)
-                RemoveIFFFlag(transform.GridUid.Value, IFFFlags.Hide, iff);
-
-            if (iffConsole.StealthCooldown == TimeSpan.Zero)
-                continue;
-
-            SendIFFConsoleState(consoleEnt, iffConsole, iff);
-        }
     }
-
-    private TimeSpan GetRemainingTime(TimeSpan until, TimeSpan curtime)
-    {
-        return until > curtime ? until - curtime : TimeSpan.Zero;
-    }
-
-    private void SendIFFConsoleState(EntityUid consoleEnt, IFFConsoleComponent iffConsole, IFFComponent? iff)
-    {
-        var curtime = _gameTiming.CurTime;
-
-        _uiSystem.SetUiState(consoleEnt, IFFConsoleUiKey.Key, new IFFConsoleBoundUserInterfaceState()
-        {
-            AllowedFlags = iffConsole.AllowedFlags,
-            Flags = iff?.Flags ?? iffConsole.AllowedFlags,
-            Cooldown = GetRemainingTime(iffConsole.CooldownUntil, curtime),
-            StealthDuration = GetRemainingTime(iffConsole.StealthUntil, curtime),
-        });
-    }
-    //ss220 spacewar end
+    // SS220 Add stealth end
 }

@@ -6,7 +6,7 @@ namespace Content.Server.SS220.Shuttles.Components;
 [RegisterComponent, Access(typeof(StealthIFFConsoleSystem))]
 public sealed partial class StealthIFFConsoleComponent : Component
 {
-    [ViewVariables(VVAccess.ReadWrite), DataField("allowedFlags")]
+    [DataField]
     public IFFFlags AllowedFlags = IFFFlags.HideLabel;
 
     [DataField]
