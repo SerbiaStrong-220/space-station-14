@@ -1,6 +1,5 @@
 using Content.Server.Shuttles.Systems;
 using Content.Server.SS220.Shuttles.Components;
-using Content.Shared.Shuttles.Components;
 using Content.Shared.SS220.Shuttles.BUIStates;
 using Content.Shared.SS220.Shuttles.Events;
 using Robust.Server.GameObjects;
@@ -88,11 +87,13 @@ public sealed partial class ComputerIFFEbentConsoleSystem : EntitySystem
 
     private void UpdateInterface(EntityUid uid, ComputerIFFEbentConsoleComponent component)
     {
-        _uiSystem.SetUiState(uid, ComputerIFFEbentConsoleUiKey.Key, new ComputerIFFEbentConsoleBoundUserInterfaceState
+        var state = new ComputerIFFEbentConsoleBoundUserInterfaceState
         {
             Cooldown = GetRemainingTime(component.CooldownUntil),
             StealthDuration = GetRemainingTime(component.StealthUntil),
-        });
+        };
+
+        _uiSystem.SetUiState(uid, ComputerIFFEbentConsoleUiKey.Key, state);
     }
 
     private TimeSpan GetRemainingTime(TimeSpan until)

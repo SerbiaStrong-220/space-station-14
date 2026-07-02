@@ -2,8 +2,8 @@
   id: FractWarShuttleConsoleLocked
   start: computer
   graph:
-    - node: computer
-      entity: !type:BoardNodeEntity { container: board }
+  - node: computer
+    entity: !type:BoardNodeEntity { container: board }
 
 - type: entity
   parent: ComputerShuttleSyndie
@@ -44,7 +44,7 @@
       behaviors:
       - !type:ExplodeBehavior
       - !type:DoActsBehavior
-        acts: ["Destruction"]
+        acts: [ "Destruction" ]
 
 - type: entity
   parent: ComputerShuttle
@@ -85,4 +85,4 @@
       behaviors:
       - !type:ExplodeBehavior
       - !type:DoActsBehavior
-        acts: ["Destruction"]
+        acts: [ "Destruction" ]
