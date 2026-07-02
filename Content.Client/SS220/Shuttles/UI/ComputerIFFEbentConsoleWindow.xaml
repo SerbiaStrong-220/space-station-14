@@ -1,11 +1,11 @@
 <controls:FancyWindow xmlns="https://spacestation14.io"
                       xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
-                      Title="{Loc 'stealth-iff-console-window-title'}"
+                      Title="{Loc 'computer-iff-ebent-console-window-title'}"
                       MinSize="220 120">
     <BoxContainer Orientation="Vertical" HorizontalExpand="True">
         <GridContainer Margin="4 0 0 0" Columns="2">
-            <Label Name="StealthLabel" Text="{Loc 'stealth-iff-console-label'}" HorizontalExpand="True" StyleClasses="highlight" />
-            <Button Name="StealthButton" Text="{Loc 'stealth-iff-console-activate'}" MinWidth="140" />
+            <Label Name="StealthLabel" Text="{Loc 'computer-iff-ebent-console-label'}" HorizontalExpand="True" StyleClasses="highlight" />
+            <Button Name="StealthButton" Text="{Loc 'computer-iff-ebent-console-activate'}" MinWidth="140" />
         </GridContainer>
         <BoxContainer Orientation="Vertical" Margin="4 4 0 0">
             <Label Name="StealthTimerLabel" HorizontalExpand="True" />

@@ -42,7 +42,10 @@ public sealed partial class ShuttleConsolePointsSystem : EntitySystem
     private void AnnounceConsoleDestroyed(Entity<ShuttleConsolePointsComponent> entity)
     {
         var prototype = MetaData(entity).EntityPrototype?.ID;
-        if (prototype is not (SyndicateConsolePrototype or NtConsolePrototype))
+        if (prototype is null)
+            return;
+
+        if (prototype != SyndicateConsolePrototype && prototype != NtConsolePrototype)
             return;
 
         var transform = Transform(entity);
@@ -50,12 +53,13 @@ public sealed partial class ShuttleConsolePointsSystem : EntitySystem
             ? MetaData(gridUid).EntityName
             : MetaData(entity).EntityName;
 
-        var (fractionName, color) = prototype switch
-        {
-            NtConsolePrototype => (Loc.GetString("flag-fraction-NT"), NtAnnouncementColor),
-            SyndicateConsolePrototype => (Loc.GetString("flag-fraction-Synd"), SyndAnnouncementColor),
-            _ => (string.Empty, Color.White),
-        };
+        var fractionName = prototype == NtConsolePrototype
+            ? Loc.GetString("flag-fraction-NT")
+            : Loc.GetString("flag-fraction-Synd");
+
+        var color = prototype == NtConsolePrototype
+            ? NtAnnouncementColor
+            : SyndAnnouncementColor;
 
         _chatSystem.DispatchGlobalAnnouncement(
             Loc.GetString("fractwar-console-destroyed-announcement"),

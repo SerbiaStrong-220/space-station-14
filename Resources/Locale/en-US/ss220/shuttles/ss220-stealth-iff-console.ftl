@@ -1,9 +1,0 @@
-ss220-stealth-iff-console-window-title = Stealth console
-ss220-stealth-iff-console-label = Stealth mode
-ss220-stealth-iff-console-activate = Activate Stealth
-ss220-stealth-iff-console-active = Stealth Active
-ss220-stealth-iff-console-cooldown = Cooldown
-ss220-stealth-iff-console-time = Stealth: {$seconds}s
-ss220-stealth-iff-console-cooldown-time = Cooldown: {$seconds}s
-fractwar-console-destroyed-sender = {$grid} - {$fraction}
-fractwar-console-destroyed-announcement = Destroyed.

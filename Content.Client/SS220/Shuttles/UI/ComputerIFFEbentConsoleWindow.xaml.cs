@@ -9,19 +9,19 @@ using Robust.Shared.Localization;
 namespace Content.Client.SS220.Shuttles.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class StealthIFFConsoleWindow : FancyWindow,
-    IComputerWindow<StealthIFFConsoleBoundUserInterfaceState>
+public sealed partial class ComputerIFFEbentConsoleWindow : FancyWindow,
+    IComputerWindow<ComputerIFFEbentConsoleBoundUserInterfaceState>
 {
     public event Action? ActivateStealth;
 
-    public StealthIFFConsoleWindow()
+    public ComputerIFFEbentConsoleWindow()
     {
         RobustXamlLoader.Load(this);
         StealthButton.OnPressed += _ => ActivateStealth?.Invoke();
         UpdateLabels(TimeSpan.Zero, TimeSpan.Zero);
     }
 
-    public void UpdateState(StealthIFFConsoleBoundUserInterfaceState state)
+    public void UpdateState(ComputerIFFEbentConsoleBoundUserInterfaceState state)
     {
         UpdateLabels(state.StealthDuration, state.Cooldown);
 
@@ -29,19 +29,19 @@ public sealed partial class StealthIFFConsoleWindow : FancyWindow,
         {
             StealthButton.Disabled = true;
             StealthButton.Text = state.StealthDuration > TimeSpan.Zero
-                ? Loc.GetString("stealth-iff-console-active")
-                : Loc.GetString("stealth-iff-console-cooldown");
+                ? Loc.GetString("computer-iff-ebent-console-active")
+                : Loc.GetString("computer-iff-ebent-console-cooldown");
         }
         else
         {
             StealthButton.Disabled = false;
-            StealthButton.Text = Loc.GetString("stealth-iff-console-activate");
+            StealthButton.Text = Loc.GetString("computer-iff-ebent-console-activate");
         }
     }
 
     private void UpdateLabels(TimeSpan stealthDuration, TimeSpan cooldown)
     {
-        StealthTimerLabel.Text = Loc.GetString("stealth-iff-console-time", ("seconds", $"{stealthDuration.TotalSeconds:F0}"));
-        CooldownTimerLabel.Text = Loc.GetString("stealth-iff-console-cooldown-time", ("seconds", $"{cooldown.TotalSeconds:F0}"));
+        StealthTimerLabel.Text = Loc.GetString("computer-iff-ebent-console-time", ("seconds", $"{stealthDuration.TotalSeconds:F0}"));
+        CooldownTimerLabel.Text = Loc.GetString("computer-iff-ebent-console-cooldown-time", ("seconds", $"{cooldown.TotalSeconds:F0}"));
     }
 }

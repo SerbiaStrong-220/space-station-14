@@ -3,8 +3,8 @@ using Content.Shared.Shuttles.Components;
 
 namespace Content.Server.SS220.Shuttles.Components;
 
-[RegisterComponent, Access(typeof(StealthIFFConsoleSystem))]
-public sealed partial class StealthIFFConsoleComponent : Component
+[RegisterComponent, Access(typeof(ComputerIFFEbentConsoleSystem))]
+public sealed partial class ComputerIFFEbentConsoleComponent : Component
 {
     [DataField]
     public IFFFlags AllowedFlags = IFFFlags.HideLabel;

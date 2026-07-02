@@ -7,11 +7,11 @@ using Robust.Client.UserInterface;
 namespace Content.Client.SS220.Shuttles.BUI;
 
 [UsedImplicitly]
-public sealed class SS220StealthIFFConsoleBoundUserInterface : BoundUserInterface
+public sealed class ComputerIFFEbentConsoleBoundUserInterface : BoundUserInterface
 {
-    private SS220StealthIFFConsoleWindow? _window;
+    private ComputerIFFEbentConsoleWindow? _window;
 
-    public SS220StealthIFFConsoleBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
+    public ComputerIFFEbentConsoleBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
     }
 
@@ -19,7 +19,7 @@ public sealed class SS220StealthIFFConsoleBoundUserInterface : BoundUserInterfac
     {
         base.Open();
 
-        _window = this.CreateWindowCenteredLeft<SS220StealthIFFConsoleWindow>();
+        _window = this.CreateWindowCenteredLeft<ComputerIFFEbentConsoleWindow>();
         _window.ActivateStealth += SendActivateMessage;
     }
 
@@ -27,13 +27,13 @@ public sealed class SS220StealthIFFConsoleBoundUserInterface : BoundUserInterfac
     {
         base.UpdateState(state);
 
-        if (state is SS220StealthIFFConsoleBoundUserInterfaceState bState)
+        if (state is ComputerIFFEbentConsoleBoundUserInterfaceState bState)
             _window?.UpdateState(bState);
     }
 
     private void SendActivateMessage()
     {
-        SendMessage(new SS220ActivateStealthIFFMessage());
+        SendMessage(new ActivateComputerIFFEbentConsoleMessage());
     }
 
     protected override void Dispose(bool disposing)

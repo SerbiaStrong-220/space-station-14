@@ -1,9 +1,0 @@
-ss220-stealth-iff-console-window-title = Консоль маскировки
-ss220-stealth-iff-console-label = Режим маскировки
-ss220-stealth-iff-console-activate = Активировать маскировку
-ss220-stealth-iff-console-active = Маскировка активна
-ss220-stealth-iff-console-cooldown = Перезарядка
-ss220-stealth-iff-console-time = Маскировка: {$seconds}с
-ss220-stealth-iff-console-cooldown-time = Перезарядка: {$seconds}с
-fractwar-console-destroyed-sender = {$grid} - {$fraction}
-fractwar-console-destroyed-announcement = Уничтожен.

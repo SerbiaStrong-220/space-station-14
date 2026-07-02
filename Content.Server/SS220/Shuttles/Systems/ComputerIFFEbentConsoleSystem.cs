@@ -3,30 +3,31 @@ using Content.Server.SS220.Shuttles.Components;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.SS220.Shuttles.BUIStates;
 using Content.Shared.SS220.Shuttles.Events;
-using Content.Shared.UserInterface;
+using Robust.Server.GameObjects;
+using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.Shuttles.Systems;
 
-public sealed class SS220StealthIFFConsoleSystem : EntitySystem
+public sealed partial class ComputerIFFEbentConsoleSystem : EntitySystem
 {
-    [Dependency] private readonly ShuttleSystem _shuttle = default!;
-    [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private ShuttleSystem _shuttle = default!;
+    [Dependency] private UserInterfaceSystem _uiSystem = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<SS220StealthIFFConsoleComponent, SS220ActivateStealthIFFMessage>(OnActivateStealth);
-        SubscribeLocalEvent<SS220StealthIFFConsoleComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<SS220StealthIFFConsoleComponent, AnchorStateChangedEvent>(OnAnchorChanged);
-        SubscribeLocalEvent<SS220StealthIFFConsoleComponent, BoundUIOpenedEvent>(OnUiOpened);
+        SubscribeLocalEvent<ComputerIFFEbentConsoleComponent, ActivateComputerIFFEbentConsoleMessage>(OnActivateStealth);
+        SubscribeLocalEvent<ComputerIFFEbentConsoleComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<ComputerIFFEbentConsoleComponent, AnchorStateChangedEvent>(OnAnchorChanged);
+        SubscribeLocalEvent<ComputerIFFEbentConsoleComponent, BoundUIOpenedEvent>(OnUiOpened);
     }
 
     public override void Update(float frameTime)
     {
         var curTime = _gameTiming.CurTime;
-        var query = EntityQueryEnumerator<SS220StealthIFFConsoleComponent, TransformComponent>();
+        var query = EntityQueryEnumerator<ComputerIFFEbentConsoleComponent, TransformComponent>();
 
         while (query.MoveNext(out var uid, out var component, out var transform))
         {
@@ -52,7 +53,7 @@ public sealed class SS220StealthIFFConsoleSystem : EntitySystem
         }
     }
 
-    private void OnActivateStealth(Entity<SS220StealthIFFConsoleComponent> ent, ref SS220ActivateStealthIFFMessage args)
+    private void OnActivateStealth(Entity<ComputerIFFEbentConsoleComponent> ent, ref ActivateComputerIFFEbentConsoleMessage args)
     {
         if (_gameTiming.CurTime < ent.Comp.CooldownUntil)
             return;
@@ -67,7 +68,7 @@ public sealed class SS220StealthIFFConsoleSystem : EntitySystem
         UpdateInterface(ent, ent.Comp);
     }
 
-    private void OnMapInit(Entity<SS220StealthIFFConsoleComponent> ent, ref MapInitEvent args)
+    private void OnMapInit(Entity<ComputerIFFEbentConsoleComponent> ent, ref MapInitEvent args)
     {
         if (ent.Comp.HideOnInit && TryComp(ent, out TransformComponent? transform) && transform.GridUid is { } gridUid)
             _shuttle.AddIFFFlag(gridUid, ent.Comp.AllowedFlags);
@@ -75,19 +76,19 @@ public sealed class SS220StealthIFFConsoleSystem : EntitySystem
         UpdateInterface(ent, ent.Comp);
     }
 
-    private void OnAnchorChanged(Entity<SS220StealthIFFConsoleComponent> ent, ref AnchorStateChangedEvent args)
+    private void OnAnchorChanged(Entity<ComputerIFFEbentConsoleComponent> ent, ref AnchorStateChangedEvent args)
     {
         UpdateInterface(ent, ent.Comp);
     }
 
-    private void OnUiOpened(Entity<SS220StealthIFFConsoleComponent> ent, ref BoundUIOpenedEvent args)
+    private void OnUiOpened(Entity<ComputerIFFEbentConsoleComponent> ent, ref BoundUIOpenedEvent args)
     {
         UpdateInterface(ent, ent.Comp);
     }
 
-    private void UpdateInterface(EntityUid uid, SS220StealthIFFConsoleComponent component)
+    private void UpdateInterface(EntityUid uid, ComputerIFFEbentConsoleComponent component)
     {
-        _uiSystem.SetUiState(uid, SS220StealthIFFConsoleUiKey.Key, new SS220StealthIFFConsoleBoundUserInterfaceState
+        _uiSystem.SetUiState(uid, ComputerIFFEbentConsoleUiKey.Key, new ComputerIFFEbentConsoleBoundUserInterfaceState
         {
             Cooldown = GetRemainingTime(component.CooldownUntil),
             StealthDuration = GetRemainingTime(component.StealthUntil),

@@ -5,7 +5,7 @@
   description: Переключает систему активного демпфирования отраженных волн радаров, благодаря чему судно становится невидимым для большинства современных систем слежения.
   suffix: SpaceWar
   components:
-  - type: StealthIFFConsole
+  - type: ComputerIFFEbentConsole
     allowedFlags:
     - Hide
     - HideLabel
@@ -28,10 +28,10 @@
     - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
       state: generic_panel_open
   - type: ActivatableUI
-    key: enum.StealthIFFConsoleUiKey.Key
+    key: enum.ComputerIFFEbentConsoleUiKey.Key
   - type: UserInterface
     interfaces:
-      enum.StealthIFFConsoleUiKey.Key:
-        type: StealthIFFConsoleBoundUserInterface
+      enum.ComputerIFFEbentConsoleUiKey.Key:
+        type: ComputerIFFEbentConsoleBoundUserInterface
       enum.WiresUiKey.Key:
         type: WiresBoundUserInterface
