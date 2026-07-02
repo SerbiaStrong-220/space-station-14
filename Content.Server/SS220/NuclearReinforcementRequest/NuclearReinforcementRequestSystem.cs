@@ -1,9 +1,7 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 using Content.Server.NukeOps;
 using Content.Server.Store.Systems;
-using Content.Shared.Atmos.Components;
 using Content.Shared.Interaction.Events;
-using Content.Shared.Movement.Components;
 using Content.Shared.NukeOps;
 using Content.Shared.Objectives.Systems;
 using Content.Shared.Popups;
