@@ -15,8 +15,4 @@ public sealed partial class PhysicalParametersModifyingClothingComponent : Compo
     {
       { Parameter.Strength, 1}
     };
-
-    [DataField]
-    [AutoNetworkedField]
-    public bool AddParameters = true; //If false the parameters will be replaced 
 }

@@ -19,8 +19,6 @@ using Content.Shared.DoAfter;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.FixedPoint;
-using Content.Shared.Flash;
-using Content.Shared.Interaction;
 using Content.Shared.Mech;
 using Content.Shared.Mech.EntitySystems;
 using Content.Shared.Mind.Components;
@@ -55,25 +53,25 @@ namespace Content.Server.SS220.Mech.Systems;
 /// <inheritdoc/>
 public sealed partial class AltMechSystem : SharedAltMechSystem
 {
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly GasTankSystem _gasTank = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly BatterySystem _battery = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
-    [Dependency] private readonly MechPartSystem _parts = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly BlindableSystem _blindable = default!;
-    [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly SharedToolSystem _toolSystem = default!;
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private GasTankSystem _gasTank = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private BatterySystem _battery = default!;
+    [Dependency] private ContainerSystem _container = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private MechPartSystem _parts = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeedModifier = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private BlindableSystem _blindable = default!;
+    [Dependency] private HandsSystem _hands = default!;
+    [Dependency] private SharedToolSystem _toolSystem = default!;
+    [Dependency] private IPrototypeManager _protoManager = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private ItemSlotsSystem _itemSlots = default!;
 
     private readonly ProtoId<AlertPrototype> _mechIntegrityAlert = "MechHealth";
 
@@ -167,7 +165,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
         var user = args.User;
 
-        if (_hands.TryGetActiveItem(args.User, out var item))
+        if (_hands.TryGetActiveItem(args.User, out var item) && item is { Valid: true } itemValidated)
         {
             var text = Loc.GetString("mech-saw-bolts-verb");
 
@@ -183,7 +181,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
                     if (user == ent.Owner || user == ent.Comp.PilotSlot.ContainedEntity)
                         return;
 
-                    _toolSystem.UseTool((EntityUid)item, user, ent, 30f, SawToolQualities, new MechBoltsSawedEvent(), 30f);
+                    _toolSystem.UseTool(itemValidated, user, ent, 30f, SawToolQualities, new MechBoltsSawedEvent(), 30f);
                 }
             });
         }
@@ -383,15 +381,15 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         if (!TryComp<AltMechComponent>(mech, out var mechComp))
             return;
 
-        var LeftArmEquipment = mechComp.ContainerDict["left-arm"].ContainedEntity;
+        var leftArmEquipment = mechComp.ContainerDict["left-arm"].ContainedEntity;
 
-        if (LeftArmEquipment != null)
-            _parts.ProvideItems(mech, (EntityUid)LeftArmEquipment);
+        if (leftArmEquipment is { Valid: true } leftArmEquipmentValidated)
+            _parts.ProvideItems(mech, leftArmEquipmentValidated);
 
-        var RightArmEquipment = mechComp.ContainerDict["right-arm"].ContainedEntity;
+        var rightArmEquipment = mechComp.ContainerDict["right-arm"].ContainedEntity;
 
-        if (RightArmEquipment != null)
-            _parts.ProvideItems(mech, (EntityUid)RightArmEquipment);
+        if (rightArmEquipment is { Valid: true } rightArmEquipmentValidated)
+            _parts.ProvideItems(mech, rightArmEquipmentValidated);
     }
 
     public void RemoveItemsFromMech(EntityUid mech)
@@ -399,15 +397,15 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         if (!TryComp<AltMechComponent>(mech, out var mechComp))
             return;
 
-        var LeftArmEquipment = mechComp.ContainerDict["left-arm"].ContainedEntity;
+        var leftArmEquipment = mechComp.ContainerDict["left-arm"].ContainedEntity;
 
-        if (LeftArmEquipment != null)
-            _parts.RemoveProvidedItems(mech, (EntityUid)LeftArmEquipment);
+        if (leftArmEquipment is { Valid: true } leftArmEquipmentValidated)
+            _parts.RemoveProvidedItems(mech, leftArmEquipmentValidated);
 
-        var RightArmEquipment = mechComp.ContainerDict["right-arm"].ContainedEntity;
+        var rightArmEquipment = mechComp.ContainerDict["right-arm"].ContainedEntity;
 
-        if (RightArmEquipment != null)
-            _parts.RemoveProvidedItems(mech, (EntityUid)RightArmEquipment);
+        if (rightArmEquipment is { Valid: true } rightArmEquipmentValidated)
+            _parts.RemoveProvidedItems(mech, rightArmEquipmentValidated);
     }
 
     private void OnMechDestroyed(Entity<AltMechComponent> ent, ref DestructionEventArgs args)

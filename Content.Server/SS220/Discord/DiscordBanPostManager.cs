@@ -9,9 +9,9 @@ using Robust.Shared.Configuration;
 
 namespace Content.Server.SS220.Discord;
 
-public sealed class DiscordBanPostManager
+public sealed partial class DiscordBanPostManager
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     private ISawmill _sawmill = default!;
 

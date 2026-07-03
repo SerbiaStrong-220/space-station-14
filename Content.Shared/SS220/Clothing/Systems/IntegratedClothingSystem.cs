@@ -12,15 +12,15 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.Clothing.Systems;
 
-public sealed class IntegratedClothingSystem : EntitySystem
+public sealed partial class IntegratedClothingSystem : EntitySystem
 {
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private InventorySystem _inventorySystem = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+
     private static readonly LocId CannotPutIntegratedClothingOn = "integrated-clothing-cannot-put-on";
     private static readonly LocId MustRemoveClothingFirst = "toggleable-clothing-remove-first";
-
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly InventorySystem _inventorySystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
 
     public override void Initialize()
     {

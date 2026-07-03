@@ -22,13 +22,13 @@ namespace Content.Client.SS220.Mech;
 /// <inheritdoc/>
 public sealed partial class AltMechSystem : SharedAltMechSystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly IOverlayManager _overlay = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
 
-    [Dependency] private readonly MobThresholdSystem _mobThresholdSystem = default!;
+    [Dependency] private MobThresholdSystem _mobThresholdSystem = default!;
     private DamageOverlay _damageOverlay = default!;
 
     /// <inheritdoc/>
@@ -95,14 +95,6 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
     {
         if (!TryComp<SpriteComponent>(ent.Owner, out var spriteComp) || !TryComp(ent, out AppearanceComponent? appearance))
             return;
-
-        //foreach (MechPartVisualLayers layer in partsVisuals.Values)
-        //{
-        //    _sprite.LayerMapReserve((ent.Owner, spriteComp), layer);
-        //    _sprite.LayerSetVisible((ent.Owner, spriteComp), layer, false);
-        //    _sprite.LayerMapReserve((ent.Owner, spriteComp), layer + 1);
-        //    _sprite.LayerSetVisible((ent.Owner, spriteComp), layer + 1, false);
-        //}
 
         _sprite.LayerSetColor((ent, spriteComp), ent.Comp.AttachedColoredSpriteLayer, ent.Comp.ColoredSpriteColor);
     }

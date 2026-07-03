@@ -924,6 +924,7 @@
 - type: loadoutGroup
   id: JanitorEquipment
   name: loadout-group-janitor-equipment
+  minLimit: 0
   loadouts:
   - JRMopItem
   # Уборщик (Конец)

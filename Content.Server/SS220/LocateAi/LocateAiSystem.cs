@@ -5,10 +5,10 @@ using Content.Shared.SS220.LocateAi;
 
 namespace Content.Server.SS220.LocateAi;
 
-public sealed class LocateAiSystem : SharedLocateAiSystem
+public sealed partial class LocateAiSystem : SharedLocateAiSystem
 {
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
 
     public override void Initialize()
     {

@@ -5,8 +5,16 @@
   description: Low-tier hydraulic chassis, heavy and slow but also very powerfull and reliable
   components:
   - type: Sprite
-    sprite: Objects/Specific/Mech/mecha_equipment.rsi
-    state: mecha_clamp
+    layers:
+      - map: [ "enum.ColorableVisualLayer.CustomBase" ]
+        sprite: SS220/Objects/Mechs/altchassis.rsi
+        state: basichydraulic
+      - map: [ "enum.ColorableVisualLayer.CustomColor" ]
+        sprite: SS220/Objects/Mechs/altchassis.rsi
+        state: basichydrauliccolor
+    sprite: SS220/Objects/Mechs/altchassis.rsi
+    state: basichydraulic
+  - type: CustomColorableLayer
   - type: MechChassis
     maximalMass: 900
     baseMovementSpeed: 3.3

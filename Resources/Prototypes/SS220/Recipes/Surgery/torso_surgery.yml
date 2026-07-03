@@ -56,6 +56,7 @@
     # heal wounds
     - to: retract-torso-skin
       id: retract-torso-skin-heal-wounds
+      deceaseSkillBonus: true
       baseEdge: retract-skin
       edgeTooltip: to-torso-internal-healing
       actions:
@@ -70,6 +71,17 @@
           AnatomyTrained: 1.2
           AnatomyProfessional: 1.5
       requirements:
+      - !type:TotalDamageRequirement
+        subject: target
+        damage: 200
+        skillTree: Anatomy
+        damageMultipliers:
+          AnatomyInitial: 1.5
+          AnatomyBase: 1
+          AnatomyTrained: 0.9
+          AnatomyProfessional: 0.75
+        description: surgery-requirement-total-damage-requirement-body-heal-description
+        failureMessage: surgery-requirement-total-damage-requirement-body-heal-not-enough-damage
       - !type:SurgeryToolRequirement
         subject: used
         surgeryTool: retractor

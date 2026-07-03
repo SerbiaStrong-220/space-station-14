@@ -371,6 +371,8 @@ public abstract partial class SharedHandsSystem
                 meleeComp.HitSound = hand.HitSound;
 
                 Dirty(ent);
+                Dirty(ent.Owner, meleeComp);
+
                 return true;
             }
 
@@ -385,6 +387,8 @@ public abstract partial class SharedHandsSystem
             meleeComp.Range = 1.5f;
 
             meleeComp.HitSound = null;
+
+            Dirty(ent.Owner, meleeComp);
         }
         //SS220 add hand damage end
 

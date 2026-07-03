@@ -1,12 +1,10 @@
-using System.Globalization;
-using System.Linq;
-using System.Text;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Server.Speech.EntitySystems;
 using Content.Server.Speech.Prototypes;
+using Content.Server.SS220.Language; // SS220-Add-Languages-end
 using Content.Server.Station.Systems;
 using Content.Shared.Access.Components;
 using Content.Shared.ActionBlocker;
@@ -15,6 +13,8 @@ using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Examine;
+using Content.Shared.FixedPoint;
+using Content.Shared.GameTicking;
 using Content.Shared.Ghost;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
@@ -26,27 +26,27 @@ using Content.Shared.Players;
 using Content.Shared.Players.RateLimiting;
 using Content.Shared.Radio;
 using Content.Shared.Silicons.Borgs.Components;
+using Content.Shared.SS220.Language.Systems;
+using Content.Shared.SS220.Mech.Components;
 using Content.Shared.SS220.Telepathy;
+using Content.Shared.SS220.TTS;
 using Content.Shared.Station.Components;
 using Content.Shared.Whitelist;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
 using Robust.Shared.Configuration;
 using Robust.Shared.Console;
+using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Replays;
-using Robust.Shared.Utility;
 using Robust.Shared.Timing;
-using Content.Server.SS220.Language; // SS220-Add-Languages-end
-using Robust.Shared.Map;
-using Content.Shared.SS220.Language.Systems;
-using Content.Shared.SS220.TTS;
-using Content.Shared.FixedPoint;
-using Content.Server.SS220.Mech.Systems;
-using Content.Shared.SS220.Mech.Components;
+using Robust.Shared.Utility;
+using System.Globalization;
+using System.Linq;
+using System.Text;
 
 namespace Content.Server.Chat.Systems;
 
@@ -78,8 +78,13 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly InventorySystem _inventory = default!; //ss220 add identity concealment for chat and radio messages
     [Dependency] private readonly HumanoidProfileSystem _humanoidAppearance = default!; //ss220 add identity concealment for chat and radio messages
 
-    public readonly TimeSpan CoolDown = TimeSpan.FromSeconds(2); //ss220 chat unique
-    public const int MaximumLengthMsg = 5; //ss220 chat unique
+    // ss220 chat unique begin
+    public readonly TimeSpan ChatSpamCooldown = TimeSpan.FromSeconds(2);
+    public const int MinSpamMessageLength = 5;
+
+    private readonly record struct RecentChatMessage(TimeSpan LastMessageTimeSent, string Message);
+    private readonly Dictionary<EntityUid, RecentChatMessage> _recentChatMessages = new();
+    // ss220 chat unique end
 
     private bool _loocEnabled = true;
     private bool _deadLoocEnabled;
@@ -95,16 +100,14 @@ public sealed partial class ChatSystem : SharedChatSystem
         Subs.CVar(_configurationManager, CCVars.CritLoocEnabled, OnCritLoocEnabledChanged, true);
 
         SubscribeLocalEvent<GameRunLevelChangedEvent>(OnGameChange);
+        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart); // ss220 chat unique
     }
 
     // ss220 chat unique begin
-    public struct ChatUniqueStruct
+    private void OnRoundRestart(RoundRestartCleanupEvent ev)
     {
-        public TimeSpan? lastMessageTimeSent;
-        public string? message;
+        _recentChatMessages.Clear();
     }
-
-    public Dictionary<EntityUid, ChatUniqueStruct> ChatMsgUnique { get; private set;} = new();
     // ss220 chat unique end
 
     private void OnLoocEnabledChanged(bool val)
@@ -263,20 +266,17 @@ public sealed partial class ChatSystem : SharedChatSystem
             return;
 
         //ss220 chat unique begin
-        if (ChatMsgUnique.TryGetValue(source, out var chatStruct)
-            && chatStruct.message == message
-            && message.Length >= MaximumLengthMsg)
+        if (message.Length >= MinSpamMessageLength)
         {
             var curTime = _gameTiming.CurTime;
-            if (curTime - chatStruct.lastMessageTimeSent < CoolDown)
-                return;
 
-            ChatMsgUnique[source] = new ChatUniqueStruct() { message = message, lastMessageTimeSent = curTime };
-        }
-        else
-        {
-            var curTime = _gameTiming.CurTime;
-            ChatMsgUnique[source] = new ChatUniqueStruct() { message = message, lastMessageTimeSent = curTime };
+            if (_recentChatMessages.TryGetValue(source, out var recentMessage) && recentMessage.Message == message)
+            {
+                if (curTime - recentMessage.LastMessageTimeSent < ChatSpamCooldown)
+                    return;
+            }
+
+            _recentChatMessages[source] = new RecentChatMessage(curTime, message);
         }
         //ss220 chat unique end
 

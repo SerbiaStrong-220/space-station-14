@@ -28,18 +28,26 @@ public sealed class ItemExtensionRangedWeaponSystem : EntitySystem
     private void OnEquip(Entity<ItemExtensionRangedWeaponComponent> ent, ref GotEquippedHandEvent args)
     {
         ent.Comp.User = args.User;
+
+        Dirty(ent);
+
         _gun.RefreshModifiers(ent.Owner);
     }
 
     private void OnUnequip(Entity<ItemExtensionRangedWeaponComponent> ent, ref GotUnequippedHandEvent args)
     {
         ent.Comp.User = null;
+
+        Dirty(ent);
+
         _gun.RefreshModifiers(ent.Owner);
     }
 
     private void OnUserParametersChanged(Entity<ItemExtensionRangedWeaponComponent> ent, ref UserParametersChangedEvent args)
     {
         _gun.RefreshModifiers(ent.Owner);
+
+        Dirty(ent);
     }
 
     private void OnGunRefreshModifiers(Entity<ItemExtensionRangedWeaponComponent> ent, ref GunRefreshModifiersEvent args)
@@ -59,6 +67,8 @@ public sealed class ItemExtensionRangedWeaponSystem : EntitySystem
             toDivide = 1;
 
         FixedPoint2 strengthModifier = (_parameters.GetParameterValue((userValidated, userParametersComp), Parameter.Strength) - extensionComp.MinimalStrengthToPickUp) / toDivide;
+
+        strengthModifier = FixedPoint2.Clamp(strengthModifier, 0, 1);
 
         args.MinAngle += (ent.Comp.MinAngle.Theta * strengthModifier).Float();
         args.MaxAngle += (ent.Comp.MaxAngle.Theta * strengthModifier).Float();
