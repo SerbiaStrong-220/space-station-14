@@ -24,7 +24,8 @@
         color: "#404040"
   - type: Tag
     tags:
-    - BorgModuleSecurity
+    - BorgModuleSafety
+    - BorgModuleLethal
     
     
   - type: BorgModule
