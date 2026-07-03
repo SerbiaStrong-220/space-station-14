@@ -135,5 +135,5 @@ ent-ClothingHeadHatBeretSeniorService = берет сервисного адми
 
 ent-ClothingHeadNTRCap = фуражка представителя НаноТрейзен
     .desc = Фуражка представителя НаноТрейзен. Красивая.
-ent-ClothingHeadNTRTophat = колпак представителя НаноТрейзен
+ent-ClothingHeadNTRTophat = цилиндр представителя НаноТрейзен
     .desc = Мало кто осмелится сказать вам это в лицо, но вы в этом выглядите забавно.
