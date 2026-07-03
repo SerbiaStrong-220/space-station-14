@@ -56,9 +56,6 @@
             "name": "icon-fire-extinguisher"
         },
         {
-            "name": "icon-security"
-        },
-        {
             "name": "icon-artistry"
         },
         {
@@ -242,6 +239,12 @@
         },
         {
             "name": "icon-ProtoKinetic-gun"
+        },
+        {
+            "name": "icon-lethal"
+        },
+        {
+            "name": "icon-safety"
         }
     ]
 

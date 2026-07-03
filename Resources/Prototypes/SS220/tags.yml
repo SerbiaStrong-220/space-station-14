@@ -218,12 +218,6 @@
   id: BorgModuleSecurity
 
 - type: Tag
-  id: BorgModuleSafety
-
-- type: Tag
-  id: BorgModuleLethal
-
-- type: Tag
   id: Zipties
 
 # SS220-PumpkinLantern-Craft

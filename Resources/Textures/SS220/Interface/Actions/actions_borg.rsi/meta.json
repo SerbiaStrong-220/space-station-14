@@ -15,6 +15,12 @@
         },
         {
             "name":"ClownMime-module"
+        },
+        {
+            "name":"lethal-module"
+        },
+        {
+            "name":"safety-module"
         }
     ]
 }

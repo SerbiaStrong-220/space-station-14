@@ -1,7 +1,7 @@
 - type: job
   id: SecurityBorg
   name: job-name-secborg
-  description: job-description-borg
+  description: job-description-secborg
   experienceDefinition: StationBorgsRoleExperience
   playTimeTracker: JobSecBorg
   requirements:

@@ -23,13 +23,12 @@
       state: SecBorg_l
       shader: unshaded
       map: ["light"]
-      visible: false 
+      visible: false
   - type: BorgChassis
     maxModules: 4
     moduleWhitelist:
       tags:
-      - BorgModuleSafety
-      - BorgModuleLethal
+      - BorgModuleSecurity
       - BorgModuleGeneric
     hasMindState: SecBorg_e
     noMindState: SecBorg_e_r

@@ -25,6 +25,8 @@
   - type: Tag
     tags:
     - BorgModuleSecurity
+    
+    
   - type: BorgModule
     borgFitTypes:
     - borg-type-security
@@ -148,10 +150,10 @@
   - type: Sprite
     layers:
     - state: security
-    - state: icon-security
+    - state: icon-safety
   - type: Tag
     tags:
-    - BorgModuleSafety
+    - BorgModuleSecurity
   - type: ItemBorgModule
     hands:
     - item: Crowbar
@@ -165,7 +167,7 @@
           - Zipties
     - item: BoxZiptie
   - type: BorgModuleIcon
-    icon: { sprite: SS220/Interface/Actions/actions_borg.rsi, state: fireaxe-module }
+    icon: { sprite: SS220/Interface/Actions/actions_borg.rsi, state: safety-module }
 
 - type: entity
   id: BorgModuleLethal
@@ -175,14 +177,14 @@
   - type: Sprite
     layers:
     - state: security
-    - state: icon-security
+    - state: icon-lethal
   - type: Tag
     tags:
-    - BorgModuleLethal
+    - BorgModuleSecurity
   - type: ItemBorgModule
     hands:
     - item: CombatKnife
     - item: BorgWeaponLaserCarbine
     - item: RadioHandheldSecurity
   - type: BorgModuleIcon
-    icon: { sprite: SS220/Interface/Actions/actions_borg.rsi, state: fireaxe-module }  
+    icon: { sprite: SS220/Interface/Actions/actions_borg.rsi, state: lethal-module }  

@@ -1,0 +1,1 @@
+borg-slot-zipties-empty = Стяжки
