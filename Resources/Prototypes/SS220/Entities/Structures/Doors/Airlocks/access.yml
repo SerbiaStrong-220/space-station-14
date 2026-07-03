@@ -89,6 +89,25 @@
     containers:
       board: [ DoorElectronicsTheatre ]
 
+- type: entity
+  parent: AirlockMaint
+  id: AirlockClownMaintLocked
+  suffix: Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsClown ]
+
+# Mime
+- type: entity
+  parent: AirlockMaint
+  id: AirlockMimeMaintLocked
+  suffix: Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsMime ]
+
 # External access
 - type: entity
   parent: AirlockExternalGlass

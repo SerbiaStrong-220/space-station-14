@@ -246,3 +246,10 @@ ent-AirlockClownLocked = { ent-AirlockClown }
     .suffix = Клоун, Закрыт
     .desc = { ent-AirlockServiceGlassLocked.desc }
 
+ent-AirlockClownMaintLocked = { ent-AirlockMaint }
+    .suffix = Клоун, Закрыт
+    .desc = { ent-AirlockMaint.desc }
+
+ent-AirlockMimeMaintLocked = { ent-AirlockMaint }
+    .suffix = Мим, Закрыт
+    .desc = { ent-AirlockMaint.desc }
