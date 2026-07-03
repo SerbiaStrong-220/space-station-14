@@ -3,7 +3,7 @@
 # Eyes category
 
 - type: marking
-  id: CustomizationLefteyePatch
+  id: CustomizationLeftEyePatch
   bodyPart: Eyes
   groupWhitelist: [Human, Reptilian]
   sprites:
@@ -11,7 +11,7 @@
     state: equipped-EYES-left
 
 - type: marking
-  id: CustomizationRighteyePatch
+  id: CustomizationRightEyePatch
   bodyPart: Eyes
   groupWhitelist: [Human, Reptilian]
   sprites:
@@ -19,7 +19,7 @@
     state: equipped-EYES
 
 - type: marking
-  id: CustomizationLefteyePatchMoth
+  id: CustomizationLeftEyePatchMoth
   bodyPart: Eyes
   groupWhitelist: [Moth]
   sprites:
@@ -27,7 +27,7 @@
     state: equipped-EYES-moth-left
 
 - type: marking
-  id: CustomizationRighteyePatchMoth
+  id: CustomizationRightEyePatchMoth
   bodyPart: Eyes
   groupWhitelist: [Moth]
   sprites:
@@ -35,7 +35,7 @@
     state: equipped-EYES-moth
 
 - type: marking
-  id: CustomizationLefteyePatchVox
+  id: CustomizationLeftEyePatchVox
   bodyPart: Eyes
   groupWhitelist: [Vox]
   sprites:
@@ -43,7 +43,7 @@
     state: equipped-EYES-vox-left
 
 - type: marking
-  id: CustomizationRighteyePatchVox
+  id: CustomizationRightEyePatchVox
   bodyPart: Eyes
   groupWhitelist: [Vox]
   sprites:
@@ -51,7 +51,7 @@
     state: equipped-EYES-vox
 
 - type: marking
-  id: CustomizationLefteyePatchArachnid
+  id: CustomizationLeftEyePatchArachnid
   bodyPart: Eyes
   groupWhitelist: [Arachnid]
   sprites:
@@ -59,7 +59,7 @@
     state: equipped-EYES-arachnid-left
 
 - type: marking
-  id: CustomizationRighteyePatchArachnid
+  id: CustomizationRightEyePatchArachnid
   bodyPart: Eyes
   groupWhitelist: [Arachnid]
   sprites:
@@ -67,7 +67,7 @@
     state: equipped-EYES-arachnid
 
 - type: marking
-  id: CustomizationLefteyePatchTajaran
+  id: CustomizationLeftEyePatchTajaran
   bodyPart: Eyes
   groupWhitelist: [Tajaran]
   sprites:
@@ -75,7 +75,7 @@
     state: equipped-EYES-tajaran-left
 
 - type: marking
-  id: CustomizationRighteyePatchTajaran
+  id: CustomizationRightEyePatchTajaran
   bodyPart: Eyes
   groupWhitelist: [Tajaran]
   sprites:
