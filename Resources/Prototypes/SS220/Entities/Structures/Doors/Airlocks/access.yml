@@ -108,6 +108,16 @@
     containers:
       board: [ DoorElectronicsMime ]
 
+# Musician
+- type: entity
+  parent: AirlockMaint
+  id: AirlockMusicianMaintLocked
+  suffix: Musician, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsMusician ]
+
 # External access
 - type: entity
   parent: AirlockExternalGlass

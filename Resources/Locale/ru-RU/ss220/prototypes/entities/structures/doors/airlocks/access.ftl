@@ -254,3 +254,7 @@ ent-AirlockMimeMaintLocked = { ent-AirlockMaint }
     .suffix = { ent-AirlockGlassMimeLocked.suffix }
     .desc = { ent-AirlockMaint.desc }
 
+ent-AirlockMusicianMaintLocked = { ent-AirlockMaint }
+    .suffix = { ent-AirlockGlassMusicianLocked.suffix }
+    .desc = { ent-AirlockMaint.desc }
+
