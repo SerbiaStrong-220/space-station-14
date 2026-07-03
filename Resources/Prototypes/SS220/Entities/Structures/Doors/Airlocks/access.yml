@@ -92,7 +92,7 @@
 - type: entity
   parent: AirlockMaint
   id: AirlockClownMaintLocked
-  suffix: Locked
+  suffix: Clown, Locked
   components:
   - type: ContainerFill
     containers:
@@ -102,7 +102,7 @@
 - type: entity
   parent: AirlockMaint
   id: AirlockMimeMaintLocked
-  suffix: Locked
+  suffix: Mime, Locked
   components:
   - type: ContainerFill
     containers:
