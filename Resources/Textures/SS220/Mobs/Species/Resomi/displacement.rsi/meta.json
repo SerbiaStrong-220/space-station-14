@@ -51,14 +51,6 @@
             "directions": 4
         },
         {
-            "name": "hand_l",
-            "directions": 4
-        },
-        {
-            "name": "hand_r",
-            "directions": 4
-        },
-        {
             "name": "inhand",
             "directions": 4
         },
