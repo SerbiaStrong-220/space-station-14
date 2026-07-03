@@ -12,6 +12,11 @@
 
 # Head
 - type: loadout
+  id: NanoTrasenOfficerBeret
+  equipment:
+    head: ClothingHeadHatBeretNanoTrasenOfficer
+
+- type: loadout
   id: NanoTrasenRepresentativeCap
   equipment:
     head: ClothingHeadNTRCap

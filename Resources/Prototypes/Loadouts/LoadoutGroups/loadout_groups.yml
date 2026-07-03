@@ -188,6 +188,7 @@
   name: loadout-group-captain-outerclothing
   loadouts:
   - CaptainOuterClothing
+  - CaptainCoat #SS220 Coat for cap
   - CaptainWintercoat
 #ss220-loadout-captain-begin
   - CaptainWhiteOuterClothing

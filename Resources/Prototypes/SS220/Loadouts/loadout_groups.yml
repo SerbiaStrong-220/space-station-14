@@ -88,6 +88,7 @@
   loadouts:
   - NanoTrasenRepresentativeCap
   - NanoTrasenRepresentativeTophat
+  - NanoTrasenOfficerBeret
 
 - type: loadoutGroup
   id: NanoTrasenRepresentativeEyes
@@ -137,6 +138,14 @@
   loadouts:
   - NanoTrasenRepresentativeHeadset
   - NanoTrasenRepresentativeHeadsetAlt
+
+- type: loadoutGroup
+  id: NanoTrasenRepresentativeGloves
+  name: loadout-group-gloves
+  loadouts:
+  - GlovesWhite
+  - GlovesGray
+  - GlovesBlack
 
   # Магистрат
 - type: loadoutGroup
