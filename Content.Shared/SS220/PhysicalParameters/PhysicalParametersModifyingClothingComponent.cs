@@ -13,10 +13,7 @@ public sealed partial class PhysicalParametersModifyingClothingComponent : Compo
     [AutoNetworkedField]
     public Dictionary<Parameter, FixedPoint2> ParameterDict = new Dictionary<Parameter, FixedPoint2>
     {
-      { Parameter.Strength, 1},
-      { Parameter.ReactionSpeed, 1},
-      { Parameter.Coordination, 1},
-      { Parameter.PainTolerance, 1}
+      { Parameter.Strength, 1}
     };
 
     [DataField]

@@ -45,6 +45,11 @@
     equipDelay: 4
     unequipDelay: 4
   - type: PhysicalParametersModifyingClothing
+    parameterDict:
+      Strength: 1.7
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 0.85
   - type: IntegratedClothing
     clothingPrototypes:
       back: ClothingBackpackExo
@@ -60,13 +65,14 @@
         Heat: 0.85
         Caustic: 0.85
         Radiation: 0.85
+        Cold: 0.85
   - type: StaminaResistance
     damageCoefficient: 0.9
 
 #Экзоскелетный бронекостюм
 - type: entity
-  parent: ClothingOuterBaseMedium
-  id: ClothingOuterExosuit
+  parent: ClothingOuterExosuit
+  id: ClothingOuterExosuitArmor
   name: exoskeletal armor
   description: A specialised powered exoskeleton made to increase muscle strength.
   components:
@@ -89,9 +95,10 @@
       coefficients:
         Blunt: 0.5
         Slash: 0.5
-        Piercing: 0.55
+        Piercing: 0.5
         Heat: 0.55
         Caustic: 0.3
         Radiation: 0.4
+        Cold: 0.3
   - type: StaminaResistance
-    damageCoefficient: 0.9
+    damageCoefficient: 0.2
