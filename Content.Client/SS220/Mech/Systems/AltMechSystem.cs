@@ -96,13 +96,13 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         if (!TryComp<SpriteComponent>(ent.Owner, out var spriteComp) || !TryComp(ent, out AppearanceComponent? appearance))
             return;
 
-        foreach (MechPartVisualLayers layer in partsVisuals.Values)
-        {
-            _sprite.LayerMapReserve((ent.Owner, spriteComp), layer);
-            _sprite.LayerSetVisible((ent.Owner, spriteComp), layer, false);
-            _sprite.LayerMapReserve((ent.Owner, spriteComp), layer + 1);
-            _sprite.LayerSetVisible((ent.Owner, spriteComp), layer + 1, false);
-        }
+        //foreach (MechPartVisualLayers layer in partsVisuals.Values)
+        //{
+        //    _sprite.LayerMapReserve((ent.Owner, spriteComp), layer);
+        //    _sprite.LayerSetVisible((ent.Owner, spriteComp), layer, false);
+        //    _sprite.LayerMapReserve((ent.Owner, spriteComp), layer + 1);
+        //    _sprite.LayerSetVisible((ent.Owner, spriteComp), layer + 1, false);
+        //}
 
         _sprite.LayerSetColor((ent, spriteComp), ent.Comp.AttachedColoredSpriteLayer, ent.Comp.ColoredSpriteColor);
     }

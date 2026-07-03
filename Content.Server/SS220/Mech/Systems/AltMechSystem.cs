@@ -8,7 +8,9 @@ using Content.Server.Power.EntitySystems;
 using Content.Server.Temperature.Components;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Alert;
+using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
+using Content.Shared.Clothing.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
@@ -17,6 +19,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.FixedPoint;
+using Content.Shared.Flash;
 using Content.Shared.Interaction;
 using Content.Shared.Mech;
 using Content.Shared.Mech.EntitySystems;
@@ -94,6 +97,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         SubscribeLocalEvent<MechPartComponent, ChargeChangedEvent>(OnChargeChanged);
 
         SubscribeLocalEvent<AltMechComponent, DamageChangedEvent>(OnDamageChanged);
+        SubscribeLocalEvent<AltMechComponent, MechPilotRelayedEvent<GetFireProtectionEvent>>(OnPilotBurning);
         SubscribeLocalEvent<AltMechComponent, DestructionEventArgs>(OnMechDestroyed);
 
         SubscribeLocalEvent<AltMechPilotComponent, MobStateChangedEvent>(OnPilotStateChanged);
@@ -426,6 +430,17 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         _alerts.ShowAlert(ent.Owner, _mechIntegrityAlert, (short)severity);
 
         SetIntegrity(ent, integrity);
+    }
+
+    private void OnPilotBurning(Entity<AltMechComponent> ent, ref MechPilotRelayedEvent<GetFireProtectionEvent> args)
+    {
+        if (!TryComp<FireProtectionComponent>(ent.Owner, out var fireProtectionComp))
+            return;
+
+        if (!ent.Comp.Airtight || !ent.Comp.Sealable)
+            return;
+
+        args.Args.Reduce(fireProtectionComp.Reduction);
     }
 
     private void OnPilotStateChanged(Entity<AltMechPilotComponent> ent, ref MobStateChangedEvent args)

@@ -1,4 +1,5 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
+using Content.Shared.Atmos;
 using Content.Shared.Flash;
 using Content.Shared.Mech.EntitySystems;
 using Content.Shared.SS220.Mech.Components;
@@ -10,6 +11,7 @@ public abstract partial class SharedAltMechSystem
     private void InitializeRelay()
     {
         SubscribeLocalEvent<AltMechPilotComponent, FlashAttemptEvent>(RelayRefToMech);
+        SubscribeLocalEvent<AltMechPilotComponent, GetFireProtectionEvent>(RelayToMech);
     }
 
     protected void RelayToPilot<T>(Entity<AltMechComponent> ent, T args) where T : class
@@ -22,7 +24,7 @@ public abstract partial class SharedAltMechSystem
         RaiseLocalEvent(pilot, ref ev);
     }
 
-    protected void RelayRefToPilot<T>(Entity<AltMechComponent> ent, ref T args) where T :struct
+    protected void RelayRefToPilot<T>(Entity<AltMechComponent> ent, ref T args) where T : struct
     {
         if (ent.Comp.PilotSlot.ContainedEntity is not { } pilot)
             return;
@@ -34,7 +36,7 @@ public abstract partial class SharedAltMechSystem
         args = ev.Args;
     }
 
-    protected void RelayToMech<T>(Entity<AltMechPilotComponent> ent, T args) where T : class
+    protected void RelayToMech<T>(Entity<AltMechPilotComponent> ent, ref T args) where T : class
     {
         var ev = new MechPilotRelayedEvent<T>(args);
 

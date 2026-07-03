@@ -17,8 +17,11 @@
     maxIntegrity: 250
     ownMass: 300
     attachedSprite:
-      sprite: SS220/Objects/Mechs/chassis.rsi
+      sprite: SS220/Objects/Mechs/altchassis.rsi
       state: basichydraulic
+    attachedColoredSprite:
+      sprite: SS220/Objects/Mechs/altchassis.rsi
+      state: basichydrauliccolor
   - type: Destructible
     thresholds:
     - trigger:

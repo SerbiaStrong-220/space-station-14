@@ -11,6 +11,38 @@
   - type: MobMover
   - type: ArmorBlock
   - type: Stripping
+  - type: Sprite
+    layers:
+      - map: [ "enum.MechPartVisualLayers.Chassis" ]
+        visible: false
+      - map: [ "enum.MechPartVisualLayers.ChassisColored" ]
+        visible: false
+      - sprite: SS220/Objects/Mechs/altcores.rsi
+        state: basicloader
+        map: [ "enum.MechPartVisualLayers.Core" ]
+        visible: true
+      - sprite: SS220/Objects/Mechs/altcores.rsi
+        state: basicloadercolor
+        map: [ "enum.MechPartVisualLayers.CoreColored" ]
+        color: "#ff6e52"
+        visible: true
+      - map: [ "enum.MechPartVisualLayers.Head" ]
+        visible: false
+      - map: [ "enum.MechPartVisualLayers.HeadColored" ]
+        visible: false
+      - map: [ "enum.MechPartVisualLayers.Power" ]
+        visible: false
+      - map: [ "enum.MechPartVisualLayers.PowerColored" ]
+        visible: false
+      - map: [ "enum.MechPartVisualLayers.RightArm" ]
+        visible: false
+      - map: [ "enum.MechPartVisualLayers.RightArmColored" ]
+        visible: false
+      - map: [ "enum.MechPartVisualLayers.LeftArm" ]
+        visible: false
+      - map: [ "enum.MechPartVisualLayers.LeftArmColored" ]
+        visible: false
+    noRot: true
   - type: Flammable
     fireSpread: true
     canResistFire: true
@@ -30,6 +62,8 @@
   - type: PressureProtection #After some research i decided to get rid of MechAir as there will be basically no difference in game but larger amounts of work and space for bugs
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
+  - type: FireProtection
+    reduction: 1
   - type: MobCollision
     colliding: false
     strength: 150
@@ -143,18 +177,6 @@
   name: Powerloader
   description: Name is self-speaking - this is a powerloader frame which has limited equipment space, high mass, cannot be sealed and provides little to no protection to the user but is still better than nothing
   components:
-  - type: Sprite
-    layers:
-      - sprite: SS220/Objects/Mechs/cores.rsi
-        state: basicloader
-        map: [ "enum.MechPartVisualLayers.Core" ]
-        visible: true
-      - sprite: SS220/Objects/Mechs/cores.rsi
-        state: basicloadercolor
-        map: [ "enum.MechPartVisualLayers.CoreColored" ]
-        color: "#ff6e52"
-        visible: true
-    noRot: true
   - type: AltArmor # Ah yes,my beloved СБЭУ
     tresholddict:
       Radiation: 1000 # As always mechs do not care about radiation/poison/airloss/etc.
@@ -177,8 +199,10 @@
       Slash: 15
       Shock: 30
     attachedColoredSprite:
-      sprite: SS220/Objects/Mechs/cores.rsi
+      sprite: SS220/Objects/Mechs/altcores.rsi
       state: basicloadercolor
+  - type: FireProtection
+    reduction: 0.5
   - type: AltMech
     baseState: basicloader
     openState: basicloader
