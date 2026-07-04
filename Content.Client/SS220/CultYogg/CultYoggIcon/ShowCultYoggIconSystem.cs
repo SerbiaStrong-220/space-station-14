@@ -6,9 +6,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.CultYogg.CultYoggIcon;
 
-public sealed class ShowCultYoggIconsSystem : EntitySystem
+public sealed partial class ShowCultYoggIconsSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     public override void Initialize()
     {

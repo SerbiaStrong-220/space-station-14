@@ -1015,3 +1015,9 @@ ClockworkShield: ClockworkShieldAlt
 MirrorShield: MirrorShieldAlt
 EnergyShield: EnergyShieldAlt
 TelescopicShield: TelescopicShieldAlt
+
+# 2026-06-29 - SS220 fix Dark Curb id
+CurbDarckSteel: CurbDarkSteel
+CurbDarckSteelCorner: CurbDarkSteelCorner
+CurbDarckSteelCornerSmall: CurbDarkSteelCornerSmall
+CurbDarckSteelRound: CurbDarkSteelRound

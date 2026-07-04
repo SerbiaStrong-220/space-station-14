@@ -486,6 +486,8 @@
   result: FoodBakedBunMeat
   time: 5
   group: Breads
+  reagents:
+    TableSalt: 1
   solids:
     FoodDoughSlice: 1
     FoodMeatCutlet: 1

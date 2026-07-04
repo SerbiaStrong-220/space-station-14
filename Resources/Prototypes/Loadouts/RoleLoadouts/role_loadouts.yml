@@ -144,7 +144,7 @@
   - LawyerNeck
   - LawyerJumpsuit
   - LawyerOuterclothing #SS220-Two Floppa Iteration
-  - CommonBackpack
+  - LawyerBackpack #SS220- Leather backback loadout
   - IAAGlasses #SS220-IAA-Loadouts
   - Survival
   - SurvivalVox #SS220-Survival-Loadout
@@ -152,6 +152,7 @@
   - Trinkets
   #- LawyerJobTrinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
