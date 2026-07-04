@@ -29,6 +29,10 @@
       path: /Audio/Machines/buzz-two.ogg
     Crying:
       path: /Audio/SS220/Effects/Ipc/cry.ogg
+    BuzzIpc:
+      path: /Audio/Machines/buzz-sigh.ogg
+    Sneeze:
+      path: /Audio/Weapons/Guns/Hits/energy_metal2.ogg
     Weh:
       collection: Weh
 
@@ -61,6 +65,10 @@
       path: /Audio/Machines/buzz-two.ogg
     Crying:
       path: /Audio/SS220/Effects/Ipc/cry.ogg
+    BuzzIpc:
+      path: /Audio/Machines/buzz-sigh.ogg
+    Sneeze:
+      path: /Audio/Weapons/Guns/Hits/energy_metal2.ogg
     Weh:
       collection: Weh
 
