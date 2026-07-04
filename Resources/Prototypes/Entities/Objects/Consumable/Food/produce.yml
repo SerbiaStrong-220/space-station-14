@@ -423,7 +423,7 @@
       Taco: Mimana
 
 - type: entity
-  parent: BaseItem
+  parent: BananaPeelBase #SS220-grillable-banana-peel-fix
   id: TrashBananaPeel
   name: banana peel
   components:
@@ -433,61 +433,65 @@
   - type: Item
     sprite: Objects/Specific/Hydroponics/banana.rsi
     heldPrefix: peel
-  - type: Slippery
-  - type: StepTrigger
-    intersectRatio: 0.2
-  - type: CollisionWake
-    enabled: false
-  - type: Physics
-    bodyType: Dynamic
-  - type: Fixtures
-    fixtures:
-      slips:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.2,-0.2,0.2,0.2"
-        hard: false
-        layer:
-        - SlipLayer
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.2,-0.2,0.2,0.2"
-        density: 30
-        mask:
-        - ItemMask
-  - type: Tag
-    tags:
-    - Recyclable
-    - Trash
-    - BananaPeel
-    - Ruminant
-
-    - WhitelistChameleon
-    - HamsterWearable
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 4
-        reagents:
-        - ReagentId: PulpedBananaPeel
-          Quantity: 4
-  - type: Extractable
-    grindableSolutionName: food
-  - type: SpaceGarbage
+    #SS220-grillable-banana-peel-fix begin
+#  - type: Slippery
+#  - type: StepTrigger
+#    intersectRatio: 0.2
+#  - type: CollisionWake
+#    enabled: false
+#  - type: Physics
+#    bodyType: Dynamic
+#  - type: Fixtures
+#    fixtures:
+#      slips:
+#        shape:
+#          !type:PhysShapeAabb
+#          bounds: "-0.2,-0.2,0.2,0.2"
+#        hard: false
+#        layer:
+#        - SlipLayer
+#      fix1:
+#        shape:
+#          !type:PhysShapeAabb
+#          bounds: "-0.2,-0.2,0.2,0.2"
+#        density: 30
+#        mask:
+#        - ItemMask
+#  - type: Tag
+#    tags:
+#    - Recyclable
+#    - Trash
+#    - BananaPeel
+#    - Ruminant
+#
+#    - WhitelistChameleon
+#    - HamsterWearable
+#  - type: SolutionContainerManager
+#    solutions:
+#      food:
+#        maxVol: 4
+#        reagents:
+#        - ReagentId: PulpedBananaPeel
+#          Quantity: 4
+#  - type: Extractable
+#    grindableSolutionName: food
+#  - type: SpaceGarbage
+    #SS220-grillable-banana-peel-fix end
     # ss220 clown uplink bgn
   - type: Currency
     price:
       TrashBananaPeel: 1
   # ss220 clown uplink end
-  - type: Edible
-    requiresSpecialDigestion: true
-  - type: Clothing
-    sprite: Objects/Specific/Hydroponics/banana.rsi
-    equippedPrefix: peel
-    slots:
-    - HEAD
-    quickEquip: false
+  #SS220-grillable-banana-peel-fix begin
+#  - type: Edible
+#    requiresSpecialDigestion: true
+#  - type: Clothing
+#    sprite: Objects/Specific/Hydroponics/banana.rsi
+#    equippedPrefix: peel
+#    slots:
+#    - HEAD
+#    quickEquip: false
+  #SS220-grillable-banana-peel-fix end
   # SS220-grilling-update-2 begin
   - type: Grillable
     timeToCook: 30
@@ -501,7 +505,7 @@
   # SS220-grilling-update-2 end
 
 - type: entity
-  parent: TrashBananaPeel
+  parent: BananaPeelBase #SS220-grillable-banana-peel-fix
   id: TrashBakedBananaPeel
   name: baked banana peel
   components:
@@ -531,7 +535,7 @@
   # ss220 clown uplink end
 
 - type: entity
-  parent: TrashBananaPeel
+  parent: BananaPeelBase #SS220-grillable-banana-peel-fix
   id: TrashMimanaPeel
   name: mimana peel
   components:
@@ -556,7 +560,7 @@
   # ss220 clown uplink end
 
 - type: entity
-  parent: TrashBananaPeel
+  parent: BananaPeelBase #SS220-grillable-banana-peel-fix
   id: TrashBananiumPeel
   name: bananium peel
   components:
@@ -566,7 +570,7 @@
   - type: Item
     sprite: Objects/Materials/materials.rsi
     heldPrefix: peel
-  - type: Slippery
+#  - type: Slippery #SS220-grillable-banana-peel-fix
   - type: Clothing
     sprite: Objects/Materials/materials.rsi
     equippedPrefix: peel

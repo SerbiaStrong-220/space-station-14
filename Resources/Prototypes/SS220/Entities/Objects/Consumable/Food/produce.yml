@@ -236,3 +236,59 @@
     containers:
       payloadSlot: !type:ContainerSlot
   - type: Edible
+
+# banana peel
+- type: entity
+  parent: BaseItem
+  id: BananaPeelBase
+  abstract: true
+  components:
+  - type: Slippery
+  - type: StepTrigger
+    intersectRatio: 0.2
+  - type: CollisionWake
+    enabled: false
+  - type: Physics
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      slips:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.2,-0.2,0.2,0.2"
+        hard: false
+        layer:
+        - SlipLayer
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.2,-0.2,0.2,0.2"
+        density: 30
+        mask:
+        - ItemMask
+  - type: Tag
+    tags:
+    - Recyclable
+    - Trash
+    - BananaPeel
+    - Ruminant
+    - WhitelistChameleon
+    - HamsterWearable
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 4
+        reagents:
+        - ReagentId: PulpedBananaPeel
+          Quantity: 4
+  - type: Extractable
+    grindableSolutionName: food
+  - type: SpaceGarbage
+  - type: Edible
+    requiresSpecialDigestion: true
+  - type: Clothing
+    sprite: Objects/Specific/Hydroponics/banana.rsi
+    equippedPrefix: peel
+    slots:
+    - HEAD
+    quickEquip: false
