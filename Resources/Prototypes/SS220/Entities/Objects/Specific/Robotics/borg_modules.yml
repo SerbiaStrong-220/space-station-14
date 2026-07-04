@@ -26,6 +26,7 @@
     tags:
     - BorgModuleSafety
     - BorgModuleLethal
+    - BorgModuleSecurity
     
     
   - type: BorgModule
@@ -152,9 +153,6 @@
     layers:
     - state: security
     - state: icon-safety
-  - type: Tag
-    tags:
-    - BorgModuleSecurity
   - type: ItemBorgModule
     hands:
     - item: Crowbar
@@ -179,9 +177,6 @@
     layers:
     - state: security
     - state: icon-lethal
-  - type: Tag
-    tags:
-    - BorgModuleSecurity
   - type: ItemBorgModule
     hands:
     - item: CombatKnife
