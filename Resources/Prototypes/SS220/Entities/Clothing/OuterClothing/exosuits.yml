@@ -84,6 +84,8 @@
     equipDelay: 4
     unequipDelay: 4
   - type: PhysicalParametersModifyingClothing
+    parameterDict:
+      Strength: 1.1
   - type: IntegratedClothing
     clothingPrototypes:
       back: ClothingBackpackExo

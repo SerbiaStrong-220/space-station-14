@@ -40,6 +40,7 @@ public sealed partial class PhysicalParametersComponent : Component // This comp
     [AutoNetworkedField]
     public bool StrengthAffectsArms = true;
 }
+
 public enum Parameter : byte
 {
     Strength = 0,
