@@ -12,6 +12,7 @@ using Content.Shared.SS220.Grab;
 using Content.Shared.SS220.ItemExtension;
 using Content.Shared.SS220.Weapons.Melee.Components;
 using Content.Shared.Weapons.Melee;
+using System.Reflection.Metadata;
 
 namespace Content.Shared.SS220.PhysicalParameters;
 
@@ -25,11 +26,22 @@ public sealed class PhysicalParametersSystem : EntitySystem
         SubscribeLocalEvent<PhysicalParametersComponent, MeleeAttackerEvent>(OnMeleeAttack);
         SubscribeLocalEvent<PhysicalParametersComponent, GrabDelayModifiersEvent>(OnGrabAttempt);
 
-        SubscribeLocalEvent<PhysicalParametersModifyingClothingComponent, InventoryRelayedEvent<ParametersUpdateEvent>>(OnUpdateEvent);
+        SubscribeLocalEvent<PhysicalParametersComponent, ComponentInit>(OnCompInit);
+
+        SubscribeLocalEvent<PhysicalParametersModifyingClothingComponent, InventoryRelayedEvent<ParametersUpdateEvent>>(OnUpdateRelayedEvent);
         SubscribeLocalEvent<PhysicalParametersModifyingClothingComponent, ClothingGotEquippedEvent>(OnGotEquipped);
         SubscribeLocalEvent<PhysicalParametersModifyingClothingComponent, GotUnequippedEvent>(OnGotUnequipped);
 
         base.Initialize();
+    }
+
+    public void OnCompInit(Entity<PhysicalParametersComponent> ent, ref ComponentInit args)
+    {
+        UpdateParameterValues(ent);
+
+        var ev = new ParametersUpdateEvent();
+
+        RaiseLocalEvent(ent, ref ev);
     }
 
     public void OnMeleeAttack(Entity<PhysicalParametersComponent> ent, ref MeleeAttackerEvent args)
@@ -68,7 +80,7 @@ public sealed class PhysicalParametersSystem : EntitySystem
         }
     }
 
-    public void OnUpdateEvent(Entity<PhysicalParametersModifyingClothingComponent> ent, ref InventoryRelayedEvent<ParametersUpdateEvent> args)
+    public void OnUpdateRelayedEvent(Entity<PhysicalParametersModifyingClothingComponent> ent, ref InventoryRelayedEvent<ParametersUpdateEvent> args)
     {
         foreach (var (parameter, value) in ent.Comp.ParameterDict)
         {
