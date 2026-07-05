@@ -7,6 +7,8 @@ using Content.Server.Mind;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Temperature.Components;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Content.Shared.Alert;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
@@ -72,6 +74,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private DamageableSystem _damageableSystem = default!;
     [Dependency] private ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     private readonly ProtoId<AlertPrototype> _mechIntegrityAlert = "MechHealth";
 

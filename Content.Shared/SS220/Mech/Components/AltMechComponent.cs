@@ -247,8 +247,6 @@ public sealed partial class AltMechComponent : Component
 
     #region Action Prototypes
     [DataField]
-    public EntProtoId MechCycleAction = "ActionMechCycleEquipment";
-    [DataField]
     public EntProtoId MechUiAction = "ActionMechOpenUI";
     [DataField]
     public EntProtoId MechEjectAction = "ActionMechEject";

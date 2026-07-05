@@ -1,6 +1,7 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 using Content.Shared.Access.Components;
 using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
@@ -38,6 +39,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
+using System.Linq;
 
 namespace Content.Shared.SS220.Mech.Systems;
 
@@ -307,8 +309,32 @@ public abstract partial class SharedAltMechSystem : EntitySystem
             }
         }
 
-        _actions.AddAction(pilot, ref pilotComp.PilotUiActionEntity, pilotComp.PilotUiAction, mech);
-        _actions.AddAction(pilot, ref pilotComp.PilotEjectActionEntity, pilotComp.PilotEjectAction, mech);
+        //_actions.AddAction(pilot, ref pilotComp.PilotUiActionEntity, pilotComp.PilotUiAction, mech);
+        //_actions.AddAction(pilot, ref pilotComp.PilotEjectActionEntity, pilotComp.PilotEjectAction, mech);
+
+        if (!TryComp<ActionsComponent>(mech.Owner, out var mechActions))
+            return;
+
+        foreach (var action in mechActions.Actions.ToArray())
+        {
+            var actionMeta = MetaData(action);
+            if (actionMeta.EntityPrototype != null &&
+                actionMeta.EntityPrototype.ID != "ActionCombatModeToggle" &&
+                actionMeta.EntityPrototype.ID != "ActionMechOpenUI" &&
+                actionMeta.EntityPrototype.ID != "ActionMechEject"
+                )
+                _actions.RemoveAction(action);
+        }
+
+        if (!TryComp<ActionsComponent>(pilot, out var pilotActions))
+            return;
+
+        foreach (var action in pilotActions.Actions.ToArray())
+        {
+            var actionMeta = MetaData(action);
+            if (actionMeta.EntityPrototype != null && actionMeta.EntityPrototype.ID != "ActionCombatModeToggle")
+                _actions.AddAction(mech.Owner, actionMeta.EntityPrototype.ID, pilot);
+        }
     }
 
     /// <summary>

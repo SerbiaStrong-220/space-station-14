@@ -17,7 +17,7 @@ public sealed class NeuralInterfaceSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<NeuralInterfaceSystem, MeleeAttackerEvent>(OnMeleeAttack);
+        //SubscribeLocalEvent<NeuralInterfaceSystem, MeleeAttackerEvent>(OnMeleeAttack);
 
         base.Initialize();
     }
