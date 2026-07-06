@@ -1,0 +1,163 @@
+# Cold
+- type: virusStrain
+  id: Cold
+  name: virus-cold-name
+  transmission:
+    proximityChance: 0.1
+    proximityRange: 2
+  symptoms:
+  - Sneezing
+
+# Quvot
+- type: virusStrain
+  id: Quvot
+  name: virus-quvot-name
+  transmission:
+    contactChance: 0.5
+  symptoms:
+  - SkinBurst
+
+# Hemolacria
+- type: virusStrain
+  id: Hemolacria
+  name: virus-hemolacria-name
+  transmission:
+    contactChance: 0.5
+  symptoms:
+  - EyeBleeding
+
+# Mimosa
+- type: virusStrain
+  id: Mimosa
+  name: virus-mimosa-name
+  transmission:
+    proximityChance: 0.1
+    proximityRange: 2
+  symptoms:
+  - Muteness
+  - Drowsiness
+
+# Synthesia
+- type: virusStrain
+  id: Synthesia
+  name: virus-synthesia-name
+  transmission:
+    contactChance: 0.5
+  symptoms:
+  - Synthification
+  - SteelStomach
+  - StoneSkin
+  - Electrophilia
+
+# Shitsec
+- type: virusStrain
+  id: Shitsec
+  name: virus-shitsec-name
+  transmission:
+    contactChance: 0.5
+  symptoms:
+  - RecoilWeakness
+  - Alcosia
+  - Drowsiness
+
+# Somnambula
+- type: virusStrain
+  id: Somnambula
+  name: virus-somnambula-name
+  transmission:
+    contactChance: 0.5
+  symptoms:
+  - Lethalgy
+  - ChronicFatigue
+  - Hypersomnia
+
+# Sacrilia
+- type: virusStrain
+  id: Sacrilia
+  name: virus-sacrilia-name
+  transmission:
+    contactChance: 0.5
+  symptoms:
+  - LaserEyes
+  - EyeBleeding
+  - Narcophasia
+  - Bulimia
+
+# Ghoulification
+- type: virusStrain
+  id: Ghoulification
+  name: virus-ghoulification-name
+  transmission:
+    contactChance: 0.5
+  symptoms:
+  - Radiophasia
+  - BreathInversion
+  - NoodleArms
+  - DogVitality
+
+# Kenuraya
+- type: virusStrain
+  id: Kenuraya
+  name: virus-kenuraya-name
+  transmission:
+    contactChance: 0.5
+  symptoms:
+  - TricordTolerance
+  - Dehydration
+  - Hyperabsorption
+  - Autorespiration
+
+# Neurolock
+- type: virusStrain
+  id: Neurolock
+  name: virus-neurolock-name
+  transmission:
+    proximityChance: 0.1
+    proximityRange: 2
+  symptoms:
+  - Dementia
+  - Stupefaction
+  - Clumsiness
+  - Sneezing
+  - Schizophrenia
+  - Paracusia
+
+# Red Death
+- type: virusStrain
+  id: RedDeath
+  name: virus-red-death-name
+  transmission:
+    contactChance: 0.5
+    proximityChance: 0.1
+    proximityRange: 2
+  symptoms:
+  - Cough
+  - ChronicFatigue
+  - Necrosis
+  - EyeBleeding
+
+# Dragon Blood
+- type: virusStrain
+  id: DragonBlood
+  name: virus-dragon-blood-name
+  transmission:
+    contactChance: 0.5
+  symptoms:
+  - BurningBlood
+  - Paracusia
+  - Hyperabsorption
+  - TricordTolerance
+
+# Oppressor
+- type: virusStrain
+  id: Oppressor
+  name: virus-oppressor-name
+  transmission:
+    contactChance: 0.5
+  symptoms:
+  - SharpHearing
+  - Strongman
+  - ToxinFiltration
+  - ToxicConversion
+  - ChronicFatigue
+  - Bulimia

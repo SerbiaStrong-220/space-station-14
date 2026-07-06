@@ -217,7 +217,7 @@
     sprite: SS220/Clothing/Head/Helmets/spaceninja.rsi # SS220 Ninja Resprite
     equippedPrefix: off # SS220 Ninja Resprite
   # SS220-Start
-  - type: DiseaseProtection
+  - type: VirusProtection
     vectors: Contact, Proximity
     blockChance: 1
   # SS220-End

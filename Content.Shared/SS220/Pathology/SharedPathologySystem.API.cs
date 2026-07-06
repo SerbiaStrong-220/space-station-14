@@ -158,25 +158,6 @@ public abstract partial class SharedPathologySystem
         return pathologyPrototype.Definition[instanceData.Level].MaxStackCount > OneStack;
     }
 
-    public bool TryGetSymptomData(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId, [NotNullWhen(true)] out PathologyInstanceData? data)
-    {
-        data = null;
-        if (!Resolve(entity.Owner, ref entity.Comp, false))
-            return false;
-
-        return entity.Comp.ActivePathologies.TryGetValue(pathologyId, out data);
-    }
-
-    public bool TryGetStageValue<T>(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId, IReadOnlyList<T> perStage, [NotNullWhen(true)] out T? value)
-    {
-        value = default;
-        if (perStage.Count == 0 || !TryGetSymptomData(entity, pathologyId, out var data))
-            return false;
-
-        value = perStage[Math.Min(data.Level, perStage.Count - 1)]!;
-        return true;
-    }
-
     public bool TryGetPathologyStack(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId, [NotNullWhen(true)] out int? stackCount)
     {
         stackCount = null;

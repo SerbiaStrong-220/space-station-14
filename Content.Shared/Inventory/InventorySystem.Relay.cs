@@ -23,7 +23,7 @@ using Content.Shared.Overlays;
 using Content.Shared.Projectiles;
 using Content.Shared.Radio;
 using Content.Shared.Slippery;
-using Content.Shared.SS220.Pathology;
+using Content.Shared.SS220.Virology;
 using Content.Shared.SS220.StaminaConvertArmor;
 using Content.Shared.Standing;
 using Content.Shared.Strip.Components;
@@ -85,7 +85,7 @@ public partial class InventorySystem
         SubscribeLocalEvent<InventoryComponent, WieldAttemptEvent>(RefRelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, UnwieldAttemptEvent>(RefRelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, IngestionAttemptEvent>(RefRelayInventoryEvent);
-        SubscribeLocalEvent<InventoryComponent, VirusAddedAttempt>(RefRelayInventoryEvent); // SS220
+        SubscribeLocalEvent<InventoryComponent, VirusAddAttempt>(RefRelayInventoryEvent); // SS220
 
         // Eye/vision events
         SubscribeLocalEvent<InventoryComponent, CanSeeAttemptEvent>(RelayInventoryEvent);

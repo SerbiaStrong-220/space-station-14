@@ -2,7 +2,6 @@
 
 using Content.Shared.Bed.Components;
 using Content.Shared.Body.Events;
-using Content.Shared.GameTicking;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Rejuvenate;
@@ -24,28 +23,15 @@ public abstract partial class SharedPathologySystem : EntitySystem
     public static readonly int OneStack = 1;
     public static readonly int DefaultMaxStack = 7;
     public static readonly TimeSpan UpdateInterval = TimeSpan.FromSeconds(1f);
-    private static readonly TimeSpan InitialEmoteDelayMin = TimeSpan.FromSeconds(30);
-    private static readonly TimeSpan InitialEmoteDelayMax = TimeSpan.FromSeconds(60);
 
     private TimeSpan _lastUpdate;
 
-    private int _strainSeed;
-
     public override void Initialize()
     {
-        _strainSeed = _random.Next();
-
         SubscribeLocalEvent<PathologyHolderComponent, RejuvenateEvent>(OnRejuvenate);
         SubscribeLocalEvent<PathologyHolderComponent, MobStateChangedEvent>(OnMobStateChanged);
-        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
 
         InitializeStatusEffectContainerEvents();
-        InitializeSigns();
-    }
-
-    private void OnRoundRestart(RoundRestartCleanupEvent _)
-    {
-        _strainSeed = _random.Next();
     }
 
     private void OnMobStateChanged(Entity<PathologyHolderComponent> ent, ref MobStateChangedEvent args)
@@ -64,15 +50,12 @@ public abstract partial class SharedPathologySystem : EntitySystem
         }
     }
 
-    // Shifts every active symptom's stage and emote timers forward by the same delta, so time the
-    // virus shouldnt be progressing (spent dead, or on stasis bed) doesn't advance it.
+    // Shifts every active pathology's stage timer forward by the same delta, so time the pathology
+    // shouldn't be progressing (spent dead, or on stasis bed) doesn't advance it.
     private void ShiftPathologyTimers(Entity<PathologyHolderComponent> ent, TimeSpan delta)
     {
         foreach (var data in ent.Comp.ActivePathologies.Values)
-        {
             data.StageStartTime += delta;
-            data.LastEmote += delta;
-        }
 
         Dirty(ent);
     }
@@ -131,8 +114,6 @@ public abstract partial class SharedPathologySystem : EntitySystem
                     foreach (var effect in pathologyProto.Definition[data.Level].Effects)
                         effect.ApplyEffect(in args);
                 }
-
-                TryDoSymptomEmote((uid, holder), pathologyProto, data);
             }
         }
     }
@@ -145,10 +126,7 @@ public abstract partial class SharedPathologySystem : EntitySystem
             TryRemovePathology(entity!, pathologyId, checkStacks: false);
         }
 
-        entity.Comp.ActiveViruses.Clear();
-        entity.Comp.Immunities.Clear();
         Dirty(entity);
-        OnVirusContentsChanged(entity);
     }
 
     private bool TryProgressPathology(Entity<PathologyHolderComponent> entity, PathologyPrototype pathologyPrototype, PathologyInstanceData instanceData)
@@ -183,8 +161,6 @@ public abstract partial class SharedPathologySystem : EntitySystem
         RaiseLocalEvent(entity, ref ev);
 
         Dirty(entity);
-        // re-stamp blood so a drawn sample reports the new stage
-        OnVirusContentsChanged(entity.Owner);
         return true;
     }
 
@@ -194,7 +170,6 @@ public abstract partial class SharedPathologySystem : EntitySystem
         RaiseLocalEvent(entity, ref ev);
 
         var instanceData = new PathologyInstanceData(_gameTiming.CurTime, context);
-        instanceData.LastEmote = _gameTiming.CurTime + _random.Next(InitialEmoteDelayMin, InitialEmoteDelayMax);
         entity.Comp.ActivePathologies.Add(pathologyPrototype.ID, instanceData);
 
         AddPathologyDefinitionEffects(entity, instanceData, pathologyPrototype.Definition[0]);
@@ -254,6 +229,8 @@ public abstract partial class SharedPathologySystem : EntitySystem
     }
 
     protected virtual void ApplyPathologyContext(Entity<PathologyHolderComponent> entity, IPathologyContext? context) { }
+
+    protected virtual void SendSelfMessage(EntityUid entity, string message, Color? color) { }
 
     // we need to record what this symptom adds so a full cure strips exactly these
     private void AddTrackedComponents(Entity<PathologyHolderComponent> entity, PathologyInstanceData data, ComponentRegistry registry)

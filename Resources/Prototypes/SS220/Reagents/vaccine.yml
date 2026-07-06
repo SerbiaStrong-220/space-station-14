@@ -1,8 +1,0 @@
-- type: reagent
-  id: Vaccine
-  name: reagent-name-vaccine
-  group: Medicine
-  desc: reagent-desc-vaccine
-  physicalDesc: reagent-physical-desc-translucent
-  flavor: bitter
-  color: "#dfe9f2"

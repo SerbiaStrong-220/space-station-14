@@ -46,8 +46,6 @@
   name: pathology-slowness-name
   definition:
   - description: pathology-slowness-description
-    detection:
-      description: pathology-slowness-detection
     components:
     - type: ChangeSpeedDoAfters
       coefficient: 1.3
@@ -83,7 +81,6 @@
 - type: pathology
   id: Paracusia
   name: pathology-paracusia-name
-  genome: Rna
   definition:
   - description: pathology-paracusia-description
     components:

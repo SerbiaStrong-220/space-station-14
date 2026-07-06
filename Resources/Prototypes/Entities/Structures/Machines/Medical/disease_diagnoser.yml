@@ -14,41 +14,41 @@
     # always-visible machine body; everything below is an independent overlay on top of it
     - state: icon
     - state: turned_on
-      map: ["enum.DiseaseDiagnoserVisualLayers.Powered"]
+      map: ["enum.VirusDiagnoserVisualLayers.Powered"]
       visible: false
     - state: running
-      map: ["enum.DiseaseDiagnoserVisualLayers.Running"]
+      map: ["enum.VirusDiagnoserVisualLayers.Running"]
       visible: false
     - state: vial_installed_empty
-      map: ["enum.DiseaseDiagnoserVisualLayers.Vial"]
+      map: ["enum.VirusDiagnoserVisualLayers.Vial"]
       visible: false
     - state: fill-1
-      map: ["enum.DiseaseDiagnoserVisualLayers.Buffer"]
+      map: ["enum.VirusDiagnoserVisualLayers.Buffer"]
       visible: false
   - type: Appearance
   - type: GenericVisualizer
     visuals:
       # powered overlay — toggled automatically by the power system
       enum.PowerDeviceVisuals.Powered:
-        enum.DiseaseDiagnoserVisualLayers.Powered:
+        enum.VirusDiagnoserVisualLayers.Powered:
           "True": { visible: true }
           "False": { visible: false }
-      enum.DiseaseDiagnoserVisuals.Running:
-        enum.DiseaseDiagnoserVisualLayers.Running:
+      enum.VirusDiagnoserVisuals.Running:
+        enum.VirusDiagnoserVisualLayers.Running:
           "True": { visible: true }
           "False": { visible: false }
-      enum.DiseaseDiagnoserVisuals.Vial:
-        enum.DiseaseDiagnoserVisualLayers.Vial:
+      enum.VirusDiagnoserVisuals.Vial:
+        enum.VirusDiagnoserVisualLayers.Vial:
           "None": { visible: false }
           "Blood": { visible: true, state: vial_installed_blood }
           "Empty": { visible: true, state: vial_installed_empty }
           "Mutagen": { visible: true, state: vial_installed_mutagen }
-  - type: DiseaseDiagnoserBufferVisuals
+  - type: VirusDiagnoserBufferVisuals
   # SS220-End
   - type: Machine
     board: DiagnoserMachineCircuitboard
   # SS220-Start
-  - type: DiseaseDiagnoser
+  - type: VirusDiagnoser
   - type: ItemSlots
     slots:
       diagnoserSlot:
@@ -65,12 +65,12 @@
       buffer:
         maxVol: 100
   - type: ActivatableUI
-    key: enum.DiseaseDiagnoserUiKey.Key
+    key: enum.VirusDiagnoserUiKey.Key
   - type: ActivatableUIRequiresPower
   - type: UserInterface
     interfaces:
-      enum.DiseaseDiagnoserUiKey.Key:
-        type: DiseaseDiagnoserBoundUserInterface
+      enum.VirusDiagnoserUiKey.Key:
+        type: VirusDiagnoserBoundUserInterface
   # SS220-End
 
 - type: entity

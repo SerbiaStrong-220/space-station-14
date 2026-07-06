@@ -280,7 +280,7 @@
   - type: Clothing
     sprite: Clothing/OuterClothing/Misc/plaguedoctorsuit.rsi
   # SS220-Start
-  - type: DiseaseProtection
+  - type: VirusProtection
     vectors: Contact
     blockChance: 0.9
   # SS220-End

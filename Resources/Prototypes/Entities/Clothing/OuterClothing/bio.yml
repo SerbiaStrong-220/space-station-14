@@ -23,8 +23,8 @@
     walkModifier: 0.95
     sprintModifier: 0.95
   # SS220-Start
-  - type: DiseaseProtection
-    vectors: Contact
+  - type: VirusProtection
+    vectors: Contact, Splash
   # SS220-End
 
 - type: entity
@@ -108,6 +108,6 @@
   - type: ZombificationResistance
     zombificationResistanceCoefficient: 0.25
   # SS220-Start
-  - type: DiseaseProtection
-    vectors: Contact
+  - type: VirusProtection
+    vectors: Contact, Splash
   # SS220-End

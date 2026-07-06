@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.MedicalScanner;

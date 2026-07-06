@@ -1,0 +1,6 @@
+- type: virusSymptomRemoval
+  id: SynaptizineRemoval
+  reagent: Synaptizine
+  amount: 10
+  removeSound:
+    path: /Audio/Effects/Chemistry/bubbles.ogg

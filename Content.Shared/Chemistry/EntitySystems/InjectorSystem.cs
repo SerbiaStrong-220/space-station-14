@@ -16,7 +16,7 @@ using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.AutoInjector;
 using Content.Shared.SS220.Cryostasis.Events;
-using Content.Shared.SS220.Pathology;
+using Content.Shared.SS220.Virology.Behaviors;
 using Content.Shared.Stacks;
 using Content.Shared.Standing;
 using Content.Shared.Timing;
@@ -225,9 +225,9 @@ public sealed partial class InjectorSystem : EntitySystem
         //ss220 needleprotection end
 
         // SS220-Start
-        if (TryComp<PathologyInjectionBlockComponent>(target, out var injectionBlock))
+        if (TryComp<VirusInjectionBlockComponent>(target, out var injectionBlock))
         {
-            _popup.PopupEntity(Loc.GetString(injectionBlock.Message), injector, user);
+            _popup.PopupClient(Loc.GetString(injectionBlock.Message), injector, user);
             return false;
         }
         // SS220-End

@@ -249,6 +249,7 @@
     alternateState: Standing
   - type: SurgeryPatient #SS220 Surgery
   - type: PathologyHolder #SS220 Pathology
+  - type: VirusSusceptible # SS220
   - type: Experience # SS220 Experience update
   - type: StunVisuals
   - type: LimitationRevive #SS220 LimitationRevive

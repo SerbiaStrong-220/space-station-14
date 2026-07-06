@@ -183,7 +183,7 @@
     fiberMaterial: fibers-latex
   - type: FingerprintMask
   # SS220-Start
-  - type: DiseaseProtection
+  - type: VirusProtection
     vectors: Contact
     blockChance: 1
   # SS220-End
@@ -202,7 +202,7 @@
     fiberMaterial: fibers-nitrile
   - type: FingerprintMask
   # SS220-Start
-  - type: DiseaseProtection
+  - type: VirusProtection
     vectors: Contact
     blockChance: 1
   # SS220-End
@@ -525,7 +525,7 @@
     guides:
     - Forensics
   # SS220-Start
-  - type: DiseaseProtection
+  - type: VirusProtection
     vectors: Contact
     blockChance: 0.8
   # SS220-End

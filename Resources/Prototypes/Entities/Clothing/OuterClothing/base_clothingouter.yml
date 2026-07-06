@@ -157,8 +157,8 @@
     sprintModifier: 0.6
     requireActivated: false #ss220 shield fix
   # SS220-Start
-  - type: DiseaseProtection
-    vectors: Contact, Proximity
+  - type: VirusProtection
+    vectors: Contact, Proximity, Splash
     blockChance: 0.9
   # SS220-End
   - type: HeldSpeedModifier
@@ -222,8 +222,8 @@
     walkModifier: 0.8
     sprintModifier: 0.8
   # SS220-Start
-  - type: DiseaseProtection
-    vectors: Contact, Proximity
+  - type: VirusProtection
+    vectors: Contact, Proximity, Splash
     blockChance: 0.9
   # SS220-End
   - type: HeldSpeedModifier

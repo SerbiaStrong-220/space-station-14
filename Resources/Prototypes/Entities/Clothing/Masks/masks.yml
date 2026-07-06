@@ -17,7 +17,7 @@
       - Creampie
   #SS220 shield rework end
   # SS220-Start
-  - type: DiseaseProtection
+  - type: VirusProtection
     vectors: Proximity
     blockChance: 0.9
   # SS220-End
@@ -173,7 +173,7 @@
       Steel: 50
       Plastic: 50
   # SS220-Start
-  - type: DiseaseProtection
+  - type: VirusProtection
     vectors: Proximity
     blockChance: 0.6
   # SS220-End
@@ -226,7 +226,7 @@
   - type: StaticPrice
     price: 30 # increases in price after decomposed into raw materials
   # SS220-Start
-  - type: DiseaseProtection
+  - type: VirusProtection
     vectors: Proximity
     blockChance: 0.6
   # SS220-End
@@ -393,7 +393,7 @@
   - type: StaticPrice
     price: 5
   # SS220-Start
-  - type: DiseaseProtection
+  - type: VirusProtection
     vectors: Proximity
   # SS220-End
 
@@ -439,7 +439,7 @@
     - Snout
     hideOnToggle: true
   # SS220-Start
-  - type: DiseaseProtection
+  - type: VirusProtection
     vectors: Proximity
     blockChance: 0.9
   # SS220-End

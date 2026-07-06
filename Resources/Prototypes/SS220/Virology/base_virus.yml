@@ -1,0 +1,9 @@
+# The generic virus entity. Every strain — pristine or mutant — spawns from this and is populated from its
+# descriptor/prototype, then lives inside the host's virus container. It carries no visuals; all behaviour is
+# expressed by the per-stage symptom components applied onto it (whose systems act on the carrier).
+- type: entity
+  id: BaseVirus
+  name: virus
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Virus

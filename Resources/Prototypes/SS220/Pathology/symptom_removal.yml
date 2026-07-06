@@ -1,7 +1,0 @@
-# Symptom-removal chemistry: a dose of synaptizine strips one random symptom out of a virus in a solution —
-# the inverse of mutagen. It never removes the last symptom (a one-symptom virus is left intact); destroying
-# a strain entirely is a cure's job.
-- type: diseaseSymptomRemoval
-  id: SynaptizineRemoval
-  reagent: Synaptizine
-  amount: 10

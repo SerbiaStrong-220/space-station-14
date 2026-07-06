@@ -1513,6 +1513,7 @@
   description: New church of neo-darwinists actually believe that EVERY animal evolved from a monkey. Tastes like pork, and killing them is both fun and relaxing.
   components:
   - type: PathologyHolder # SS220 Pathology
+  - type: VirusSusceptible # SS220
   - type: NameIdentifier
     group: Monkey
 #SS220 Animalistic languages begin
@@ -1765,6 +1766,7 @@
   description: Cousins to the sentient race of lizard people, kobolds blend in with their natural habitat and are as nasty as monkeys; ready to pull out your hair and stab you to death.
   components:
   - type: PathologyHolder # SS220 Pathology
+  - type: VirusSusceptible # SS220
   - type: Clumsy
     gunShootFailDamage:
       types:

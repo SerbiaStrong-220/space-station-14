@@ -9,8 +9,8 @@
   description: A special suit that protects against hazardous, low pressure environments. Has thermal shielding.
   components:
   # SS220-Start
-  - type: DiseaseProtection
-    vectors: Contact, Proximity
+  - type: VirusProtection
+    vectors: Contact, Proximity, Splash
     blockChance: 1
   # SS220-End
   - type: Sprite
@@ -314,8 +314,8 @@
   description: Special hardsuit of the guardian angel of the brig. It is the medical version of the security hardsuit.
   components:
   # SS220-Start
-  - type: DiseaseProtection
-    vectors: Contact, Proximity
+  - type: VirusProtection
+    vectors: Contact, Proximity, Splash
     blockChance: 1
   # SS220-End
   - type: Sprite
@@ -394,8 +394,8 @@
   description: A formal armored spacesuit, made for the station's captain.
   components:
   # SS220-Start
-  - type: DiseaseProtection
-    vectors: Contact, Proximity
+  - type: VirusProtection
+    vectors: Contact, Proximity, Splash
     blockChance: 1
   # SS220-End
   - type: Sprite
@@ -439,8 +439,8 @@
   description: A special hardsuit that protects against hazardous, low pressure environments, made for the chief engineer of the station.
   components:
   # SS220-Start
-  - type: DiseaseProtection
-    vectors: Contact, Proximity
+  - type: VirusProtection
+    vectors: Contact, Proximity, Splash
     blockChance: 1
   # SS220-End
   - type: Sprite
@@ -495,8 +495,8 @@
   description: A special suit that protects against hazardous, low pressure environments. Built with lightweight materials for easier movement.
   components:
   # SS220-Start
-  - type: DiseaseProtection
-    vectors: Contact, Proximity
+  - type: VirusProtection
+    vectors: Contact, Proximity, Splash
     blockChance: 1
   # SS220-End
   - type: Sprite
@@ -535,8 +535,8 @@
   description: A special suit that protects against hazardous, low pressure environments. Has an additional layer of armor.
   components:
   # SS220-Start
-  - type: DiseaseProtection
-    vectors: Contact, Proximity
+  - type: VirusProtection
+    vectors: Contact, Proximity, Splash
     blockChance: 1
   # SS220-End
   - type: Sprite
@@ -592,8 +592,8 @@
   description: A special suit that protects against hazardous, low pressure environments. Has an additional layer of armor.
   components:
   # SS220-Start
-  - type: DiseaseProtection
-    vectors: Contact, Proximity
+  - type: VirusProtection
+    vectors: Contact, Proximity, Splash
     blockChance: 1
   # SS220-End
   - type: Sprite
@@ -680,8 +680,8 @@
   description: A heavily armored hardsuit designed for work in special operations. Property of Gorlex Marauders.
   components:
   # SS220-Start
-  - type: DiseaseProtection
-    vectors: Contact, Proximity
+  - type: VirusProtection
+    vectors: Contact, Proximity, Splash
     blockChance: 1
   # SS220-End
   - type: Sprite
@@ -814,8 +814,8 @@
   description: An elite version of the blood-red hardsuit, with improved radiation resistance and fireproofing. Property of Gorlex Marauders.
   components:
   # SS220-Start
-  - type: DiseaseProtection
-    vectors: Contact, Proximity
+  - type: VirusProtection
+    vectors: Contact, Proximity, Splash
     blockChance: 1
   # SS220-End
   - type: Sprite
@@ -895,8 +895,8 @@
   description: A bulked up version of the blood-red hardsuit, purpose-built for the commander of a syndicate operative squad. Has significantly improved armor for those deadly front-lines firefights.
   components:
   # SS220-Start
-  - type: DiseaseProtection
-    vectors: Contact, Proximity
+  - type: VirusProtection
+    vectors: Contact, Proximity, Splash
     blockChance: 1
   # SS220-End
   - type: Sprite
@@ -1038,8 +1038,8 @@
   description: A bizarre gem-encrusted suit that radiates magical energies.
   components:
   # SS220-Start
-  - type: DiseaseProtection
-    vectors: Contact, Proximity
+  - type: VirusProtection
+    vectors: Contact, Proximity, Splash
     blockChance: 1
   # SS220-End
   - type: Sprite
@@ -1336,8 +1336,8 @@
   description: An advanced hardsuit favored by commandos for use in special operations.
   components:
   # SS220-Start
-  - type: DiseaseProtection
-    vectors: Contact, Proximity
+  - type: VirusProtection
+    vectors: Contact, Proximity, Splash
     blockChance: 1
   # SS220-End
   - type: Sprite
@@ -1399,8 +1399,8 @@
   description: A lightweight yet strong exosuit used for special cleanup operations.
   components:
   # SS220-Start
-  - type: DiseaseProtection
-    vectors: Contact, Proximity
+  - type: VirusProtection
+    vectors: Contact, Proximity, Splash
     blockChance: 1
   # SS220-End
   - type: Sprite

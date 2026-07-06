@@ -168,8 +168,8 @@
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Suits/spaceninja.rsi # SS220 Ninja Resprite
   # SS220-Start
-  - type: DiseaseProtection
-    vectors: Contact, Proximity
+  - type: VirusProtection
+    vectors: Contact, Proximity, Splash
     blockChance: 1
   # SS220-End
   # hardsuit stuff
