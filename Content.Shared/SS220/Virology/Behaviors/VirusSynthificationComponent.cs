@@ -37,7 +37,7 @@ public sealed partial class VirusSynthificationComponent : Component
         "ErtLawset",
         "XenoborgLawset",
         "Ninja",
-        "Antimov",
+        "AntimovLawset",
     };
 
     /// <summary>Lawset rolled deterministically, so a re-grant same lawset.</summary>
