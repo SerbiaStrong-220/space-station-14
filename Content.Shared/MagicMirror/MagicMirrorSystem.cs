@@ -54,7 +54,7 @@ public sealed class MagicMirrorSystem : EntitySystem
             return;
 
         // Check if the target getting their hair altered has any clothes that hides their hair
-        if (CheckHeadSlotOrClothes(target))
+        if (CheckHeadSlotOrClothes(target, ent.Comp)) //SS220-IPC
         {
             _popup.PopupEntity(
                 ent.Comp.Target == args.Actor
@@ -225,8 +225,13 @@ public sealed class MagicMirrorSystem : EntitySystem
     /// Helper function that checks if the wearer has anything on their head
     /// Or if they have any clothes that hides their hair
     /// </summary>
-    private bool CheckHeadSlotOrClothes(EntityUid target)
+    //SS220-new-feature begin
+    private bool CheckHeadSlotOrClothes(EntityUid target, MagicMirrorComponent component)
     {
+        if (!component.CheckHeadSlot)
+            return false;
+    //SS220-new-feature end
+
         if (!TryComp<InventoryComponent>(target, out var inventoryComp))
             return false;
 

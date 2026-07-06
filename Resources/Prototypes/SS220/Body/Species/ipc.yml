@@ -121,6 +121,7 @@
     changeHairSound: null
     modifyTime: 0
     showPopup: false
+    checkHeadSlot: false
   #- type: ActivatableUI
   #  key: enum.MagicMirrorUiKey.Key
   #  singleUser: true
