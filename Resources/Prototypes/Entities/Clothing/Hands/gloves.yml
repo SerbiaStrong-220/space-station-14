@@ -527,7 +527,7 @@
   # SS220-Start
   - type: VirusProtection
     vectors: Contact
-    blockChance: 0.8
+    blockChance: 1
   # SS220-End
 
 # TODO Make lubed items not slip in hands
@@ -545,6 +545,11 @@
     fiberMaterial: fibers-rubber
     fiberColor: fibers-yellow
   - type: FingerprintMask
+  # SS220-Start
+  - type: VirusProtection
+    vectors: Contact
+    blockChance: 1
+  # SS220-End
 
 #Knuckledusters
 - type: entity

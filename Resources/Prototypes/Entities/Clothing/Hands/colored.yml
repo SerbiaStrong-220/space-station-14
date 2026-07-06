@@ -340,6 +340,11 @@
   - type: Fiber
     fiberMaterial: fibers-insulative
     fiberColor: fibers-yellow
+  # SS220-Start
+  - type: VirusProtection
+    vectors: Contact
+    blockChance: 0.9
+  # SS220-End
 
 # Budget Insulated Gloves
 - type: entity
