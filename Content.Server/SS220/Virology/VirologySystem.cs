@@ -10,6 +10,7 @@ using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Rejuvenate;
 using Content.Shared.SS220.Virology;
 using Content.Shared.SS220.Virology.Effects;
+using Content.Shared.Zombies;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -65,7 +66,15 @@ public sealed partial class VirologySystem : EntitySystem
         SubscribeLocalEvent<VirusComponent, ComponentShutdown>(OnVirusShutdown);
         SubscribeLocalEvent<VirusComponent, VirusDoseAbsorbedEvent>(OnDoseAbsorbed);
         SubscribeLocalEvent<VirusSusceptibleComponent, RejuvenateEvent>(OnRejuvenate);
+        SubscribeLocalEvent<VirusHolderComponent, EntityZombifiedEvent>(OnZombified);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
+    }
+
+    // becoming zombie kills the host's viruses
+    private void OnZombified(Entity<VirusHolderComponent> ent, ref EntityZombifiedEvent args)
+    {
+        foreach (var virus in GetStrains(ent))
+            RemoveVirus(virus);
     }
 
     private void OnRejuvenate(Entity<VirusSusceptibleComponent> ent, ref RejuvenateEvent args)
