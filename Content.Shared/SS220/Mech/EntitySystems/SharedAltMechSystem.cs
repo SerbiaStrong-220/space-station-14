@@ -57,11 +57,13 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private BlindableSystem _blindable = default!;
+    [Dependency] private MetaDataSystem _meta = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
     {
         SubscribeLocalEvent<AltMechComponent, MechEjectPilotEvent>(OnEjectPilotEvent);
+        SubscribeLocalEvent<AltMechComponent, MechRelayActionEvent>(OnMechRelayEvent);
 
         SubscribeLocalEvent<AltMechComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<AltMechComponent, EntityStorageIntoContainerAttemptEvent>(OnEntityStorageDump);
@@ -87,7 +89,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         InitializeRelay();
     }
 
-    private void OnEjectPilotEvent(EntityUid uid, AltMechComponent component, MechEjectPilotEvent args)
+    private void OnEjectPilotEvent(Entity<AltMechComponent> ent, ref MechEjectPilotEvent args)
     {
         if (args.Handled)
             return;
@@ -95,7 +97,26 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         args.Handled = true;
 
         var ev = new OnMechExitEvent();
-        RaiseLocalEvent(uid, ref ev);
+        RaiseLocalEvent(ent, ref ev);
+    }
+
+    private void OnMechRelayEvent(Entity<AltMechComponent> ent, ref MechRelayActionEvent args)
+    {
+        if (ent.Comp.PilotSlot.ContainedEntity is not { Valid: true } pilot)
+            return;
+
+        if (_net.IsServer)
+        {
+            var request = new RequestPerformActionEvent(GetNetEntity(args.ActionToPerform));
+
+            _actions.TryPerformAction(request, pilot);
+        }
+
+        if (TryComp<ActionComponent>(args.Action, out var actionComp) && TryComp<ActionComponent>(args.ActionToPerform, out var addedActionComp))
+        {
+            actionComp.Cooldown = addedActionComp.Cooldown;
+            Dirty(args.Action, actionComp);
+        }
     }
 
     private void OnPilotFlashed(Entity<AltMechComponent> ent, ref MechPilotRelayedEvent<FlashAttemptEvent> args)
@@ -332,8 +353,31 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         foreach (var action in pilotActions.Actions.ToArray())
         {
             var actionMeta = MetaData(action);
-            if (actionMeta.EntityPrototype != null && actionMeta.EntityPrototype.ID != "ActionCombatModeToggle")
-                _actions.AddAction(mech.Owner, actionMeta.EntityPrototype.ID, pilot);
+
+            if (!TryComp<ActionComponent>(action, out var actionComp) || actionMeta.EntityPrototype != null && actionMeta.EntityPrototype.ID == "ActionCombatModeToggle")
+                continue;
+
+            var addedAction = _actions.AddAction(mech.Owner, "ActionMechRelay", mech.Owner);
+
+            if (addedAction is not { Valid: true } addedActionValidated || !TryComp<ActionComponent>(addedActionValidated, out var addedActionComp))
+                continue;
+
+            addedActionComp.Icon = actionComp.Icon;
+            addedActionComp.IconOn = actionComp.IconOn;
+            addedActionComp.EntityIcon = actionComp.EntityIcon;
+            addedActionComp.Cooldown = actionComp.Cooldown;
+
+            _meta.SetEntityName(addedActionValidated, actionMeta.EntityName);
+            _meta.SetEntityDescription(addedActionValidated, actionMeta.EntityDescription);
+
+            var eventToSet = new MechRelayActionEvent();
+
+            eventToSet.ActionToPerform = action;
+            eventToSet.ActionUser = pilot;
+
+            eventToSet.Action = (addedActionValidated, addedActionComp);
+
+            _actions.SetEvent(addedActionValidated, eventToSet);
         }
     }
 
@@ -840,6 +884,12 @@ public record struct RefreshOpticHudEvent<T>() where T : IComponent
 {
     public bool Active = false;
     public List<T> Components = new();
+}
+
+public sealed partial class MechRelayActionEvent : InstantActionEvent
+{
+    public EntityUid ActionToPerform;
+    public EntityUid ActionUser;
 }
 
 public enum MechPartVisualLayers : byte

@@ -48,6 +48,7 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Toolshed.Commands.Math;
 using Robust.Shared.Utility;
 
 namespace Content.Server.SS220.Mech.Systems;
@@ -74,7 +75,6 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private DamageableSystem _damageableSystem = default!;
     [Dependency] private ItemSlotsSystem _itemSlots = default!;
-    [Dependency] private SharedActionsSystem _actions = default!;
 
     private readonly ProtoId<AlertPrototype> _mechIntegrityAlert = "MechHealth";
 
@@ -280,18 +280,9 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
         _mind.Visit(mindId, ent.Owner);
 
-        if (!TryComp<DamageableComponent>(ent.Comp.PilotSlot.ContainedEntity, out var damageComp))
-            return;
-
-        var health = (4 - ((100 - _damageableSystem.GetTotalDamage(ent.Owner)) / 25));
-        if (health > 4)
-            health = 4;
-
         _actionBlocker.UpdateCanMove(ent.Owner);
 
-        var integrity = (4 - (ent.Comp.Integrity / (ent.Comp.MaxIntegrity / 4)));
-        if (integrity > 4)
-            integrity = 4;
+        var integrity = FixedPoint2.Clamp(4 - ent.Comp.Integrity / (ent.Comp.MaxIntegrity / 4), min: FixedPoint2.Zero, max: 4);
 
         if (TryComp<AlertsComponent>(ent.Owner, out var alertsComp))
         {
@@ -300,6 +291,9 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         }
 
         _alerts.ShowAlert(ent.Owner, _mechIntegrityAlert, (short)integrity);
+
+        if (!TryComp<DamageableComponent>(ent.Comp.PilotSlot.ContainedEntity, out var damageComp))
+            return;
 
         if (TryComp<AlertsComponent>(pilotValidated, out var pilotAlerts))
         {

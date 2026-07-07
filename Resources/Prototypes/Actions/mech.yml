@@ -46,3 +46,11 @@
       state: mech_eject
   - type: InstantAction
     event: !type:MechEjectPilotEvent
+
+- type: entity
+  parent: BaseMechAction
+  id: ActionMechRelay
+  components:
+  - type: Action
+  - type: InstantAction
+    event: !type:MechRelayActionEvent
