@@ -7,58 +7,57 @@ using Robust.Client.Player;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 
-namespace Content.Client.SS220.Administration.UI.Tabs.AdminTab
+namespace Content.Client.SS220.Administration.UI.Tabs.AdminTab;
+
+[GenerateTypedNameReferences]
+[UsedImplicitly]
+public sealed partial class CustomObjectivesWindow : DefaultWindow
 {
-    [GenerateTypedNameReferences]
-    [UsedImplicitly]
-    public sealed partial class CustomObjectivesWindow : DefaultWindow
+    private CustomObjectivesPlayerInfo? _selectedPlayer;
+
+    protected override void EnteredTree()
     {
-        private CustomObjectivesPlayerInfo? _selectedPlayer;
+        base.EnteredTree();
+        CustomObjectivesList.OnSelectionChanged += OnSelectionChanged;
+        ListOfObjectivesButton.OnPressed += ListOfObjectivesButtonOnPressed;
+        AddObjectiveButton.OnWindowCreated += AddObjectiveButtonOnWindowCreated;
+        IoCManager.Resolve<IClientConsoleHost>().ExecuteCommand("requestcustomobjectives");
+    }
 
-        protected override void EnteredTree()
-        {
-            base.EnteredTree();
-            CustomObjectivesList.OnSelectionChanged += OnSelectionChanged;
-            ListOfObjectivesButton.OnPressed += ListOfObjectivesButtonOnPressed;
-            AddObjectiveButton.OnWindowCreated += AddObjectiveButtonOnWindowCreated;
-            IoCManager.Resolve<IClientConsoleHost>().ExecuteCommand("requestcustomobjectives");
-        }
+    private void OnSelectionChanged(CustomObjectivesPlayerInfo? obj)
+    {
+        _selectedPlayer = obj;
+        var disableButtons = _selectedPlayer == null;
+        ListOfObjectivesButton.Disabled = disableButtons;
+        AddObjectiveButton.Disabled = disableButtons;
+    }
 
-        private void OnSelectionChanged(CustomObjectivesPlayerInfo? obj)
-        {
-            _selectedPlayer = obj;
-            var disableButtons = _selectedPlayer == null;
-            ListOfObjectivesButton.Disabled = disableButtons;
-            AddObjectiveButton.Disabled = disableButtons;
-        }
+    private void ListOfObjectivesButtonOnPressed(BaseButton.ButtonEventArgs obj)
+    {
+        if (_selectedPlayer == null)
+            return;
 
-        private void ListOfObjectivesButtonOnPressed(BaseButton.ButtonEventArgs obj)
-        {
-            if (_selectedPlayer == null)
-                return;
+        IoCManager.Resolve<IClientConsoleHost>().ExecuteCommand(
+            $"openobjectives {_selectedPlayer.SessionId}");
+    }
 
-            IoCManager.Resolve<IClientConsoleHost>().ExecuteCommand(
-                $"openobjectives {_selectedPlayer.SessionId}");
-        }
+    private void AddObjectiveButtonOnWindowCreated(DefaultWindow window)
+    {
+        if (_selectedPlayer is null)
+            return;
 
-        private void AddObjectiveButtonOnWindowCreated(DefaultWindow window)
-        {
-            if (_selectedPlayer is null)
-                return;
+        var addObjectiveWindow = (AddObjectiveWindow) window;
+        if (!IoCManager.Resolve<IPlayerManager>().TryGetSessionById(_selectedPlayer.SessionId, out var playerSession))
+            return;
 
-            var addObjectiveWindow = (AddObjectiveWindow) window;
-            if (!IoCManager.Resolve<IPlayerManager>().TryGetSessionById(_selectedPlayer.SessionId, out var playerSession))
-                return;
+        addObjectiveWindow.SetAntagonist(playerSession);
+    }
 
-            addObjectiveWindow.SetAntagonist(playerSession);
-        }
-
-        protected override void ExitedTree()
-        {
-            base.ExitedTree();
-            CustomObjectivesList.OnSelectionChanged -= OnSelectionChanged;
-            ListOfObjectivesButton.OnPressed -= ListOfObjectivesButtonOnPressed;
-            AddObjectiveButton.OnWindowCreated -= AddObjectiveButtonOnWindowCreated;
-        }
+    protected override void ExitedTree()
+    {
+        base.ExitedTree();
+        CustomObjectivesList.OnSelectionChanged -= OnSelectionChanged;
+        ListOfObjectivesButton.OnPressed -= ListOfObjectivesButtonOnPressed;
+        AddObjectiveButton.OnWindowCreated -= AddObjectiveButtonOnWindowCreated;
     }
 }

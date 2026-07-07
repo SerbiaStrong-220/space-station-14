@@ -11,96 +11,95 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Input;
 using Robust.Shared.Network;
 
-namespace Content.Client.SS220.Administration.UI.CustomControls
+namespace Content.Client.SS220.Administration.UI.CustomControls;
+
+[GenerateTypedNameReferences]
+public sealed partial class CustomObjectivesListControl : BoxContainer
 {
-    [GenerateTypedNameReferences]
-    public sealed partial class CustomObjectivesListControl : BoxContainer
+    private readonly CustomObjectivesSystem _customObjectivesSystem;
+
+    private List<CustomObjectivesPlayerInfo> _customObjectivesList = new();
+
+    public event Action<CustomObjectivesPlayerInfo?>? OnSelectionChanged;
+
+    public Func<CustomObjectivesPlayerInfo, string, string>? OverrideText;
+    public Comparison<CustomObjectivesPlayerInfo>? Comparison;
+
+    private readonly IEntityManager _entManager;
+
+    public CustomObjectivesListControl()
     {
-        private readonly CustomObjectivesSystem _customObjectivesSystem;
+        _entManager = IoCManager.Resolve<IEntityManager>();
+        _customObjectivesSystem = _entManager.System<CustomObjectivesSystem>();
+        RobustXamlLoader.Load(this);
+        CustomObjectivesListContainer.ItemPressed += CustomObjectivesListItemPressed;
+        CustomObjectivesListContainer.GenerateItem += GenerateButton;
+        UpdatePlayerList(_customObjectivesSystem.Players);
+        _customObjectivesSystem.CustomObjectivesListChanged += UpdatePlayerList;
 
-        private List<CustomObjectivesPlayerInfo> _customObjectivesList = new();
+        BackgroundPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = new Color(32, 32, 40) };
+    }
 
-        public event Action<CustomObjectivesPlayerInfo?>? OnSelectionChanged;
+    protected override void ExitedTree()
+    {
+        base.ExitedTree();
+        _customObjectivesSystem.CustomObjectivesListChanged -= UpdatePlayerList;
+    }
 
-        public Func<CustomObjectivesPlayerInfo, string, string>? OverrideText;
-        public Comparison<CustomObjectivesPlayerInfo>? Comparison;
+    public void UpdatePlayerList(IReadOnlyList<CustomObjectivesPlayerInfo> players)
+    {
+        _customObjectivesList = players.ToList();
+        CustomObjectivesListContainer.PopulateList(_customObjectivesList.Select(info => new CustomObjectivesListData(info)).ToList());
+    }
 
-        private readonly IEntityManager _entManager;
+    private void CustomObjectivesListItemPressed(BaseButton.ButtonEventArgs? args, ListData? data)
+    {
+        if (args is null)
+            return;
 
-        public CustomObjectivesListControl()
+        if (data is not CustomObjectivesListData { Info: var selectedPlayer })
+            return;
+        if (args.Event.Function == EngineKeyFunctions.UIClick)
         {
-            _entManager = IoCManager.Resolve<IEntityManager>();
-            _customObjectivesSystem = _entManager.System<CustomObjectivesSystem>();
-            RobustXamlLoader.Load(this);
-            CustomObjectivesListContainer.ItemPressed += CustomObjectivesListItemPressed;
-            CustomObjectivesListContainer.GenerateItem += GenerateButton;
-            UpdatePlayerList(_customObjectivesSystem.Players);
-            _customObjectivesSystem.CustomObjectivesListChanged += UpdatePlayerList;
+            OnSelectionChanged?.Invoke(selectedPlayer);
 
-            BackgroundPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = new Color(32, 32, 40) };
+            if (OverrideText != null && args.Button.Children.FirstOrDefault()?.Children?.FirstOrDefault() is Label label)
+                label.Text = GetText(selectedPlayer);
         }
-
-        protected override void ExitedTree()
+        else if (args.Event.Function == EngineKeyFunctions.UseSecondary && selectedPlayer.NetEntity != null)
         {
-            base.ExitedTree();
-            _customObjectivesSystem.CustomObjectivesListChanged -= UpdatePlayerList;
-        }
-
-        public void UpdatePlayerList(IReadOnlyList<CustomObjectivesPlayerInfo> players)
-        {
-            _customObjectivesList = players.ToList();
-            CustomObjectivesListContainer.PopulateList(_customObjectivesList.Select(info => new CustomObjectivesListData(info)).ToList());
-        }
-
-        private void CustomObjectivesListItemPressed(BaseButton.ButtonEventArgs? args, ListData? data)
-        {
-            if (args is null)
-                return;
-
-            if (data is not CustomObjectivesListData { Info: var selectedPlayer })
-                return;
-            if (args.Event.Function == EngineKeyFunctions.UIClick)
-            {
-                OnSelectionChanged?.Invoke(selectedPlayer);
-
-                if (OverrideText != null && args.Button.Children.FirstOrDefault()?.Children?.FirstOrDefault() is Label label)
-                    label.Text = GetText(selectedPlayer);
-            }
-            else if (args.Event.Function == EngineKeyFunctions.UseSecondary && selectedPlayer.NetEntity != null)
-            {
-                IoCManager.Resolve<IUserInterfaceManager>().GetUIController<VerbMenuUIController>().OpenVerbMenu(_entManager.GetEntity(selectedPlayer.NetEntity.Value));
-            }
-        }
-
-        private string GetText(CustomObjectivesPlayerInfo info)
-        {
-            var text = $"{info.CharacterName} ({info.Username}) [{info.ObjectiveCount} objectives]";
-            if (OverrideText != null)
-                text = OverrideText.Invoke(info, text);
-            return text;
-        }
-
-        private void GenerateButton(ListData data, ListContainerButton button)
-        {
-            if (data is not CustomObjectivesListData { Info: var info })
-                return;
-
-            button.AddChild(new BoxContainer
-            {
-                Orientation = LayoutOrientation.Vertical,
-                Children =
-                {
-                    new Label
-                    {
-                        ClipText = true,
-                        Text = GetText(info)
-                    }
-                }
-            });
-            button.EnableAllKeybinds = true;
-            button.AddStyleClass(ListContainer.StyleClassListContainerButton);
+            IoCManager.Resolve<IUserInterfaceManager>().GetUIController<VerbMenuUIController>().OpenVerbMenu(_entManager.GetEntity(selectedPlayer.NetEntity.Value));
         }
     }
 
-    public record CustomObjectivesListData(CustomObjectivesPlayerInfo Info) : ListData;
+    private string GetText(CustomObjectivesPlayerInfo info)
+    {
+        var text = $"{info.CharacterName} ({info.Username}) [{info.ObjectiveCount} objectives]";
+        if (OverrideText != null)
+            text = OverrideText.Invoke(info, text);
+        return text;
+    }
+
+    private void GenerateButton(ListData data, ListContainerButton button)
+    {
+        if (data is not CustomObjectivesListData { Info: var info })
+            return;
+
+        button.AddChild(new BoxContainer
+        {
+            Orientation = LayoutOrientation.Vertical,
+            Children =
+            {
+                new Label
+                {
+                    ClipText = true,
+                    Text = GetText(info)
+                }
+            }
+        });
+        button.EnableAllKeybinds = true;
+        button.AddStyleClass(ListContainer.StyleClassListContainerButton);
+    }
 }
+
+public record CustomObjectivesListData(CustomObjectivesPlayerInfo Info) : ListData;

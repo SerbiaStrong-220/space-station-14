@@ -34,7 +34,6 @@ public sealed class CustomObjectivesAdminSystem : EntitySystem
 
         _objectiveQuery = GetEntityQuery<ObjectiveComponent>();
 
-        SubscribeLocalEvent<ObjectiveComponent, ComponentInit>(OnObjectiveInit);
         SubscribeLocalEvent<ObjectiveComponent, ComponentRemove>(OnObjectiveRemove);
         SubscribeLocalEvent<MindComponent, MindObjectivesChangedEvent>(OnMindObjectivesChanged);
 
@@ -48,8 +47,10 @@ public sealed class CustomObjectivesAdminSystem : EntitySystem
         var mindQuery = AllEntityQuery<MindComponent>();
         while (mindQuery.MoveNext(out var mindId, out var mindComp))
         {
-            UpdateCustomObjectivesPlayer(mindId, mindComp);
+            UpdateCustomObjectivesPlayer(mindId, mindComp, false);
         }
+
+        SendCustomObjectivesList();
     }
 
     public override void Shutdown()
@@ -57,22 +58,6 @@ public sealed class CustomObjectivesAdminSystem : EntitySystem
         base.Shutdown();
 
         _playerManager.PlayerStatusChanged -= OnPlayerStatusChanged;
-    }
-
-    private void OnObjectiveInit(EntityUid uid, ObjectiveComponent comp, ComponentInit args)
-    {
-        if (!comp.Completed.HasValue)
-            return;
-
-        var mindQuery = AllEntityQuery<MindComponent>();
-        while (mindQuery.MoveNext(out var mindId, out var mindComp))
-        {
-            if (mindComp.Objectives.Contains(uid))
-            {
-                UpdateCustomObjectivesPlayer(mindId, mindComp);
-                break;
-            }
-        }
     }
 
     private void OnObjectiveRemove(EntityUid uid, ObjectiveComponent comp, ComponentRemove args)
@@ -105,7 +90,7 @@ public sealed class CustomObjectivesAdminSystem : EntitySystem
         UpdateCustomObjectivesPlayer(uid, component);
     }
 
-    private void UpdateCustomObjectivesPlayer(EntityUid mindId, MindComponent mindComp)
+    private void UpdateCustomObjectivesPlayer(EntityUid mindId, MindComponent mindComp, bool sendUpdate = true)
     {
         if (mindComp.UserId == null)
             return;
@@ -114,7 +99,8 @@ public sealed class CustomObjectivesAdminSystem : EntitySystem
         {
             RemoveOwnedCustomObjectives(mindId);
             _customObjectivesPlayers.Remove(mindComp.UserId.Value);
-            SendCustomObjectivesList();
+            if (sendUpdate)
+                SendCustomObjectivesList();
             return;
         }
 
@@ -131,13 +117,14 @@ public sealed class CustomObjectivesAdminSystem : EntitySystem
         if (customObjectiveCount == 0)
         {
             _customObjectivesPlayers.Remove(mindComp.UserId.Value);
-            SendCustomObjectivesList();
+            if (sendUpdate)
+                SendCustomObjectivesList();
             return;
         }
 
         if (!_playerManager.TryGetSessionById(mindComp.UserId.Value, out var session))
         {
-            if (_customObjectivesPlayers.Remove(mindComp.UserId.Value))
+            if (_customObjectivesPlayers.Remove(mindComp.UserId.Value) && sendUpdate)
                 SendCustomObjectivesList();
 
             return;
@@ -171,7 +158,8 @@ public sealed class CustomObjectivesAdminSystem : EntitySystem
         );
 
         _customObjectivesPlayers[mindComp.UserId.Value] = playerInfo;
-        SendCustomObjectivesList();
+        if (sendUpdate)
+            SendCustomObjectivesList();
     }
 
     public void SendCustomObjectivesList(ICommonSession? admin = null)

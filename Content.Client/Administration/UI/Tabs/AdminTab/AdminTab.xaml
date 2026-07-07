@@ -20,8 +20,8 @@
             <!-- SS220 AdminTab buttons begin -->
             <cc:UICommandButton Command="antagonists" Text="{Loc admin-player-actions-window-antagonists}" WindowType="{x:Type SS220at:AntagonistsWindow}" />
             <cc:UICommandButton Command="customobjectives" Text="{Loc admin-player-actions-window-custom-objectives}" WindowType="{x:Type SS220at:CustomObjectivesWindow}" />
-            <!-- SS220 AdminTab buttons end -->
             <cc:CommandButton Command="allttsqueuereset" Text="{Loc admin-player-actions-tts-queue-reset}" WithDialog="True" />
+            <!-- SS220 AdminTab buttons end -->
         </GridContainer>
     </BoxContainer>
 </Control>
