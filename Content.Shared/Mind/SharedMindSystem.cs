@@ -235,11 +235,13 @@ public abstract partial class SharedMindSystem : EntitySystem
         return _mobState.IsDead(mind.OwnedEntity.Value, targetMobState);
     }
 
+    // ss220 add custom antag goals start
     public bool IsCharacterDeadPhysically(EntityUid user)
     {
         return !TryComp<MobStateComponent>(user, out var targetMobState) ||
                _mobState.IsDead(user, targetMobState);
     }
+    // ss220 add custom antag goals end
 
     /// <summary>
     ///     True if the OwnedEntity of this mind is physically unrevivable.
@@ -259,10 +261,12 @@ public abstract partial class SharedMindSystem : EntitySystem
         return false;
     }
 
+    // ss220 add custom antag goals start
     public bool IsCharacterUnrevivablePhysically(EntityUid target)
     {
         return !HasComp<MobStateComponent>(target);
     }
+    // ss220 add custom antag goals end
 
     public virtual void Visit(EntityUid mindId, EntityUid entity, MindComponent? mind = null)
     {
@@ -350,6 +354,7 @@ public abstract partial class SharedMindSystem : EntitySystem
 
     public virtual void ControlMob(NetUserId user, EntityUid target) {}
 
+    // ss220 add custom antag goals start
     /// <summary>
     /// Tries to create and add an objective from its prototype id.
     /// </summary>
@@ -368,6 +373,7 @@ public abstract partial class SharedMindSystem : EntitySystem
         AddObjective(mindId, mind, objective.Value);
         return true;
     }
+    // ss220 add custom antag goals end
 
     public bool TryAddObjectiveWithMetadata(EntityUid mindId, MindComponent mind, string name, string desc, SpriteSpecifier icon, string locIssuer)
     {
@@ -631,6 +637,7 @@ public abstract partial class SharedMindSystem : EntitySystem
         return IsCharacterUnrevivablePhysically(mind);
     }
 
+    // ss220 add custom antag goals start
     public bool IsCharacterUnrevivableIc(EntityUid target)
     {
         var ev = new GetCharacterUnrevivableIcEvent(null);
@@ -638,6 +645,7 @@ public abstract partial class SharedMindSystem : EntitySystem
 
         return ev.Unrevivable ?? IsCharacterUnrevivablePhysically(target);
     }
+    // ss220 add custom antag goals end
 
     /// <summary>
     /// A string to represent the mind for logging.
