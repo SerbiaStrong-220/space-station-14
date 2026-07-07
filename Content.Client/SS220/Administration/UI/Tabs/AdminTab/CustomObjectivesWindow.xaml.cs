@@ -47,7 +47,9 @@ namespace Content.Client.SS220.Administration.UI.Tabs.AdminTab
                 return;
 
             var addObjectiveWindow = (AddObjectiveWindow) window;
-            var playerSession = IoCManager.Resolve<IPlayerManager>().GetSessionById(_selectedPlayer.SessionId);
+            if (!IoCManager.Resolve<IPlayerManager>().TryGetSessionById(_selectedPlayer.SessionId, out var playerSession))
+                return;
+
             addObjectiveWindow.SetAntagonist(playerSession);
         }
 

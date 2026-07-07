@@ -22,7 +22,8 @@ public sealed class CustomObjectivesAdminSystem : EntitySystem
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly JobSystem _jobs = default!;
     [Dependency] private readonly RoleSystem _roles = default!;
-    [Dependency] private readonly EntityQuery<ObjectiveComponent> _objectiveQuery = default!;
+
+    private EntityQuery<ObjectiveComponent> _objectiveQuery;
 
     private readonly Dictionary<NetUserId, CustomObjectivesPlayerInfo> _customObjectivesPlayers = new();
     private readonly Dictionary<EntityUid, EntityUid> _customObjectiveOwners = new();
@@ -30,6 +31,8 @@ public sealed class CustomObjectivesAdminSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+
+        _objectiveQuery = GetEntityQuery<ObjectiveComponent>();
 
         SubscribeLocalEvent<ObjectiveComponent, ComponentInit>(OnObjectiveInit);
         SubscribeLocalEvent<ObjectiveComponent, ComponentRemove>(OnObjectiveRemove);
@@ -87,7 +90,12 @@ public sealed class CustomObjectivesAdminSystem : EntitySystem
     private void OnPlayerStatusChanged(object? sender, SessionStatusEventArgs e)
     {
         if (!_mind.TryGetMind(e.Session, out var mindId, out var mindComp))
+        {
+            if (_customObjectivesPlayers.Remove(e.Session.UserId))
+                SendCustomObjectivesList();
+
             return;
+        }
 
         UpdateCustomObjectivesPlayer(mindId, mindComp);
     }
@@ -128,7 +136,12 @@ public sealed class CustomObjectivesAdminSystem : EntitySystem
         }
 
         if (!_playerManager.TryGetSessionById(mindComp.UserId.Value, out var session))
+        {
+            if (_customObjectivesPlayers.Remove(mindComp.UserId.Value))
+                SendCustomObjectivesList();
+
             return;
+        }
 
         var entityName = string.Empty;
         var identityName = string.Empty;
