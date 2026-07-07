@@ -235,13 +235,11 @@ public abstract partial class SharedMindSystem : EntitySystem
         return _mobState.IsDead(mind.OwnedEntity.Value, targetMobState);
     }
 
-    // ss220 add custom antag goals start
     public bool IsCharacterDeadPhysically(EntityUid user)
     {
         return !TryComp<MobStateComponent>(user, out var targetMobState) ||
                _mobState.IsDead(user, targetMobState);
     }
-    // ss220 add custom antag goals end
 
     /// <summary>
     ///     True if the OwnedEntity of this mind is physically unrevivable.
@@ -261,12 +259,10 @@ public abstract partial class SharedMindSystem : EntitySystem
         return false;
     }
 
-    // ss220 add custom antag goals start
     public bool IsCharacterUnrevivablePhysically(EntityUid target)
     {
         return !HasComp<MobStateComponent>(target);
     }
-    // ss220 add custom antag goals end
 
     public virtual void Visit(EntityUid mindId, EntityUid entity, MindComponent? mind = null)
     {
@@ -354,7 +350,6 @@ public abstract partial class SharedMindSystem : EntitySystem
 
     public virtual void ControlMob(NetUserId user, EntityUid target) {}
 
-    // ss220 add custom antag goals start
     /// <summary>
     /// Tries to create and add an objective from its prototype id.
     /// </summary>
@@ -383,7 +378,6 @@ public abstract partial class SharedMindSystem : EntitySystem
         AddObjective(mindId, mind, objective.Value);
         return true;
     }
-    // ss220 add custom antag goals end
 
     /// <summary>
     /// Adds an objective that already exists, and is assumed to have had its requirements checked.
@@ -393,6 +387,11 @@ public abstract partial class SharedMindSystem : EntitySystem
         var title = Name(objective);
         _adminLogger.Add(LogType.Mind, LogImpact.Low, $"Objective {objective} ({title}) added to mind of {MindOwnerLoggingString(mind)}");
         mind.Objectives.Add(objective);
+        // SS220 custom objectives begin
+        Dirty(mindId, mind);
+        var addedEv = new MindObjectivesChangedEvent();
+        RaiseLocalEvent(mindId, ref addedEv, true);
+        // SS220 custom objectives end
     }
 
     /// <summary>
@@ -409,6 +408,11 @@ public abstract partial class SharedMindSystem : EntitySystem
         var title = Name(objective);
         _adminLogger.Add(LogType.Mind, LogImpact.Low, $"Objective {objective} ({title}) removed from the mind of {MindOwnerLoggingString(mind)}");
         mind.Objectives.Remove(objective);
+        // SS220 custom objectives begin
+        Dirty(mindId, mind);
+        var removedEv = new MindObjectivesChangedEvent();
+        RaiseLocalEvent(mindId, ref removedEv, true);
+        // SS220 custom objectives end
 
         // garbage collection - only delete the objective entity if no mind uses it anymore
         // This comes up for stuff like paradox clones where the objectives share the same entity
@@ -627,7 +631,6 @@ public abstract partial class SharedMindSystem : EntitySystem
         return IsCharacterUnrevivablePhysically(mind);
     }
 
-    // ss220 add custom antag goals start
     public bool IsCharacterUnrevivableIc(EntityUid target)
     {
         var ev = new GetCharacterUnrevivableIcEvent(null);
@@ -635,7 +638,6 @@ public abstract partial class SharedMindSystem : EntitySystem
 
         return ev.Unrevivable ?? IsCharacterUnrevivablePhysically(target);
     }
-    // ss220 add custom antag goals end
 
     /// <summary>
     /// A string to represent the mind for logging.
@@ -722,6 +724,11 @@ public record struct GetCharactedDeadIcEvent(bool? Dead);
 /// <param name="Unrevivable"></param>
 [ByRefEvent]
 public record struct GetCharacterUnrevivableIcEvent(bool? Unrevivable);
+
+// SS220 custom objectives begin
+[ByRefEvent]
+public record struct MindObjectivesChangedEvent;
+// SS220 custom objectives end
 
 public sealed record MindStringRepresentation(EntityStringRepresentation? OwnedEntity, bool PlayerPresent, NetUserId? Player) : IAdminLogsPlayerValue
 {

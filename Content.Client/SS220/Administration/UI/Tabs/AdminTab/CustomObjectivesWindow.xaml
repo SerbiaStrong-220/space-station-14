@@ -1,0 +1,15 @@
+<DefaultWindow
+    xmlns="https://spacestation14.io"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+    xmlns:SS220cc="clr-namespace:Content.Client.SS220.Administration.UI.CustomControls"
+    xmlns:SS220at="clr-namespace:Content.Client.SS220.Administration.UI.Tabs.AdminTab"
+    Title="{Loc admin-custom-objectives-window-title}" MinSize="425 272">
+    <BoxContainer Orientation="Vertical">
+        <SS220cc:CustomObjectivesListControl Name="CustomObjectivesList" VerticalExpand="True" />
+        <BoxContainer Orientation="Horizontal">
+            <Button Name="ListOfObjectivesButton" Text="{Loc admin-custom-objectives-list-of-objectives}" Disabled="True"/>
+            <cc:UICommandButton Name="AddObjectiveButton" Text="{Loc admin-custom-objectives-add-objective}" Disabled="True" WindowType="{x:Type SS220at:AddObjectiveWindow}"/>
+        </BoxContainer>
+    </BoxContainer>
+</DefaultWindow>
