@@ -11,7 +11,10 @@ namespace Content.Server.SS220.Objectives.Systems;
 public sealed partial class BloodBrothersEscapeShuttleConditionSystem : EntitySystem
 {
     [Dependency] private EmergencyShuttleSystem _emergency = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedRoleSystem _role = default!;
+
+    private const float Quarter = 0.25f;
 
     public override void Initialize()
     {
@@ -21,31 +24,29 @@ public sealed partial class BloodBrothersEscapeShuttleConditionSystem : EntitySy
     private void OnGetProgress(Entity<BloodBrothersEscapeShuttleConditionComponent> ent, ref ObjectiveGetProgressEvent args)
     {
         args.Progress = 0f;
+
         if (!_role.MindHasRole<BloodBrothersRoleComponent>(args.MindId, out var role))
             return;
 
-        var currentEntity = args.Mind.OwnedEntity;
-        if (currentEntity == null)
+        if (args.Mind.OwnedEntity is { } currentEntity)
+        {
+            if (_mobState.IsAlive(currentEntity))
+                args.Progress += Quarter;
+
+            if (_emergency.IsTargetEscaping(currentEntity))
+                args.Progress += Quarter;
+        }
+
+        if (role.Value.Comp2.Brother is not { } brother)
             return;
 
-        var mobState = EntityManager.System<MobStateSystem>();
-        if (mobState.IsAlive(currentEntity.Value))
-            args.Progress += 0.25f;
-
-        if (_emergency.IsTargetEscaping(currentEntity.Value))
-            args.Progress += 0.25f;
-
-        var brother = role.Value.Comp2.Brother;
-        if (brother == null)
-            return;
-
-        if (!TryComp<MindComponent>(brother.Value, out var brotherMind) || brotherMind.OwnedEntity == null)
+        if (!TryComp<MindComponent>(brother, out var brotherMind) || brotherMind.OwnedEntity == null)
             return;
 
         if (_emergency.IsTargetEscaping(brotherMind.OwnedEntity.Value))
-            args.Progress += 0.25f;
+            args.Progress += Quarter;
 
-        if (mobState.IsAlive(brotherMind.OwnedEntity.Value))
-            args.Progress += 0.25f;
+        if (_mobState.IsAlive(brotherMind.OwnedEntity.Value))
+            args.Progress += Quarter;
     }
 }
