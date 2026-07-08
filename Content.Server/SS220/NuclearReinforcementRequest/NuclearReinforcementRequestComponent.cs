@@ -7,12 +7,9 @@ using Content.Shared.Roles;
 namespace Content.Server.SS220.NuclearReinforcementRequest;
 
 [RegisterComponent]
-[NetworkedComponent]
-[AutoGenerateComponentState]
 public sealed partial class NuclearReinforcementRequestComponent : Component
 {
     [DataField]
-    [AutoNetworkedField]
     public int UsesRemain = 1;
 
     [DataField]
