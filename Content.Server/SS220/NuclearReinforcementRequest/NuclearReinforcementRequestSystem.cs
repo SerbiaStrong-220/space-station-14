@@ -30,6 +30,8 @@ public sealed partial class NuclearReinforcementRequestSystem : EntitySystem
 
     private static readonly LocId NoReinforcementsGranted = "reinforcement-uplink-no-reinforcements-granted";
 
+    private const int AmountToIgnore = 2;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -82,7 +84,7 @@ public sealed partial class NuclearReinforcementRequestSystem : EntitySystem
             if (!def.PrefRoles.Contains(ent.Comp.AntagProtoToSearchFor))
                 continue;
 
-            toSpawn = (allAliveHumanoids.Count - Math.Clamp(allOps.Length - 2, 0, allOps.Length)) / def.PlayerRatio;
+            toSpawn = (allAliveHumanoids.Count - Math.Clamp(allOps.Length - AmountToIgnore, 0, allOps.Length)) / def.PlayerRatio;
             break;
         }
 

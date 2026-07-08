@@ -4,7 +4,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Content.Shared.Roles;
 
-namespace Content.Shared.SS220.NuclearReinforcementRequest;
+namespace Content.Server.SS220.NuclearReinforcementRequest;
 
 [RegisterComponent]
 [NetworkedComponent]
