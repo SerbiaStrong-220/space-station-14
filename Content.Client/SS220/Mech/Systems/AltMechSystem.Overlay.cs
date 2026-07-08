@@ -35,7 +35,7 @@ public sealed partial class AltMechSystem
         _overlay.AddOverlay(_damageOverlay);
 
         if (mobState.CurrentState != MobState.Dead)
-            UpdateOverlays(entity, mobState);
+            UpdateDamageOverlays(entity, mobState);
     }
 
     private void OnPlayerDetached(Entity<AltMechComponent> ent, ref LocalPlayerDetachedEvent args)
@@ -49,7 +49,7 @@ public sealed partial class AltMechSystem
         if (args.Target != _playerManager.LocalEntity)
             return;
 
-        UpdateOverlays(args.Target, args.Component);
+        UpdateDamageOverlays(args.Target, args.Component);
     }
 
     private void OnThresholdCheck(Entity<AltMechPilotComponent> ent, ref MobThresholdChecked args)
@@ -61,7 +61,7 @@ public sealed partial class AltMechSystem
         if (pilot.Mech != _playerManager.LocalEntity)
             return;
 
-        UpdateOverlays(pilot.Mech, args.MobState, (DamageableComponent?)args.Damageable, args.Threshold);
+        UpdateDamageOverlays(pilot.Mech, args.MobState, (DamageableComponent?)args.Damageable, args.Threshold);
     }
 
     private void ClearOverlay()
@@ -72,7 +72,7 @@ public sealed partial class AltMechSystem
         _damageOverlay.OxygenLevel = 0f;
     }
 
-    private void UpdateOverlays(EntityUid entity, MobStateComponent? mobState, DamageableComponent? damageable = null, MobThresholdsComponent? thresholds = null)
+    private void UpdateDamageOverlays(EntityUid entity, MobStateComponent? mobState, DamageableComponent? damageable = null, MobThresholdsComponent? thresholds = null)
     {
         if (!TryComp<AltMechComponent>(entity, out var mechComp) || mechComp.PilotSlot.ContainedEntity == null)
             return;

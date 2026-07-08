@@ -126,6 +126,11 @@ public sealed partial class StatusEffectsSystem : EntitySystem
         var ev = new StatusEffectRemovedEvent(ent);
         RaiseLocalEvent(args.Entity, ref ev);
 
+        //SS220 status effect logic extension begin
+        var targetEv = new StatusEffectRemovedFromEvent(args.Entity);
+        RaiseLocalEvent(ent, ref targetEv);
+        //SS220 status effect logic extension end
+
         // Clear AppliedTo after events are handled so event handlers can use it.
         if (statusComp.AppliedTo == null)
             return;
@@ -157,6 +162,11 @@ public sealed partial class StatusEffectsSystem : EntitySystem
 
         var ev = new StatusEffectAppliedEvent(statusEffectEnt.Comp.AppliedTo.Value);
         RaiseLocalEvent(statusEffectEnt, ref ev);
+
+        //SS220 status effect logic extension begin
+        var targetEv = new StatusEffectAppliedToEvent(statusEffectEnt);
+        RaiseLocalEvent(statusEffectEnt.Comp.AppliedTo.Value, ref targetEv);
+        //SS220 status effect logic extension end
 
         statusEffectEnt.Comp.Applied = true;
 
@@ -339,6 +349,20 @@ public readonly record struct StatusEffectAppliedEvent(EntityUid Target);
 /// </summary>
 [ByRefEvent]
 public readonly record struct StatusEffectRemovedEvent(EntityUid Target);
+
+//SS220 status effect extension begin
+/// <summary>
+/// Calls on effect entity, when a status effect is applied.
+/// </summary>
+[ByRefEvent]
+public readonly record struct StatusEffectAppliedToEvent(EntityUid Effect);
+
+/// <summary>
+/// Calls on effect entity, when a status effect is removed.
+/// </summary>
+[ByRefEvent]
+public readonly record struct StatusEffectRemovedFromEvent(EntityUid Effect);
+//SS220 status effect extension end
 
 /// <summary>
 /// Raised on an entity before a status effect is added to determine if adding it should be cancelled.

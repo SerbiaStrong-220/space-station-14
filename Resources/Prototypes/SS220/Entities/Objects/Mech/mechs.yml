@@ -8,6 +8,7 @@
   - type: NoSlip
   - type: MechPart
   - type: ComplexInteraction
+  - type: StatusEffectContainer
   - type: MobMover
   - type: ArmorBlock
   - type: Stripping

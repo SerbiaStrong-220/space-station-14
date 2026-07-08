@@ -32,6 +32,8 @@ using Content.Shared.SS220.Mech.Parts.Components;
 using Content.Shared.SS220.Weapons.Melee.Events;
 using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Shared.Standing;
+using Content.Shared.StatusEffectNew;
+using Content.Shared.StatusEffectNew.Components;
 using Content.Shared.Storage.Components;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Whitelist;
@@ -59,6 +61,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private BlindableSystem _blindable = default!;
     [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
 
     public EntProtoId PilotEjectAction = "ActionMechEject";
     public EntProtoId MechUIOpenAction = "ActionMechOpenUI";
@@ -86,6 +89,9 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         SubscribeLocalEvent<AltMechPilotComponent, AttackAttemptEvent>(OnAttackAttempt);
 
         SubscribeLocalEvent<AltMechComponent, IsWeightlessEvent>(OnWeightlessCheck);
+
+        SubscribeLocalEvent<AltMechPilotComponent, StatusEffectAppliedToEvent>(OnStatusEffectApplied);
+        SubscribeLocalEvent<AltMechPilotComponent, StatusEffectRemovedFromEvent>(OnStatusEffectRemoved);
 
         SubscribeLocalEvent<AltMechComponent, ProjectileBlockAttemptEvent>(OnProjectileHit, after: [typeof(SharedAltBlockingSystem)]);
         SubscribeLocalEvent<AltMechComponent, HitscanBlockAttemptEvent>(OnHitscan, after: [typeof(SharedAltBlockingSystem)]);
@@ -350,6 +356,8 @@ public abstract partial class SharedAltMechSystem : EntitySystem
                 _actions.RemoveAction(action);
         }
 
+        EffectsSetup(mech.Owner, pilot);
+
         if (!TryComp<ActionsComponent>(pilot, out var pilotActions))
             return;
 
@@ -385,6 +393,28 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         _actions.AddAction(pilot, ref pilotComp.PilotUiActionEntity, pilotComp.PilotUiAction, mech);
         _actions.AddAction(pilot, ref pilotComp.PilotEjectActionEntity, pilotComp.PilotEjectAction, mech);
+    }
+
+    public void EffectsSetup(EntityUid mech, EntityUid pilot)
+    {
+        if (!TryComp<StatusEffectContainerComponent>(pilot, out var pilotEffects))
+            return;
+
+        if (pilotEffects.ActiveStatusEffects is not { } containerPilot)
+            return;
+
+        foreach (var effect in containerPilot.ContainedEntities)
+        {
+            if (!TryComp<StatusEffectComponent>(effect, out var effectComp))
+                continue;
+
+            var effectMeta = MetaData(effect);
+
+            if (effectMeta.EntityPrototype == null)
+                continue;
+
+            _statusEffects.TrySetStatusEffectDuration(mech, effectMeta.EntityPrototype, effectComp.Duration);
+        }
     }
 
     /// <summary>
@@ -565,8 +595,6 @@ public abstract partial class SharedAltMechSystem : EntitySystem
                 return;
         }
 
-        //if (forced && partComponent != null)
-        //    partComponent.PartOwner = null;
         string? slot = null;
 
         if(partComponent != null)
@@ -786,6 +814,23 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     {
         RelayRefToParts(ent, ref args);
         RelayRefToEquipment(ent, ref args);
+    }
+
+    public void OnStatusEffectApplied(Entity<AltMechPilotComponent> ent, ref StatusEffectAppliedToEvent args)
+    {
+        if (!TryComp<StatusEffectComponent>(args.Effect, out var effectComp))
+            return;
+
+        var effectMeta = MetaData(args.Effect);
+
+        if (effectMeta.EntityPrototype == null)
+            return;
+
+        _statusEffects.TrySetStatusEffectDuration(ent.Comp.Mech, effectMeta.EntityPrototype, effectComp.Duration);
+    }
+
+    public void OnStatusEffectRemoved(Entity<AltMechPilotComponent> ent, ref StatusEffectRemovedFromEvent args)
+    {
     }
 
     private void OnCanDragDrop(Entity<AltMechComponent> ent, ref CanDropTargetEvent args)
