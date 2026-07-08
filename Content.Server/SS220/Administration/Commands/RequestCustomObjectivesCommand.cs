@@ -6,8 +6,10 @@ using Robust.Shared.Console;
 namespace Content.Server.SS220.Administration.Commands;
 
 [AdminCommand(AdminFlags.Admin)]
-public sealed class RequestCustomObjectivesCommand : IConsoleCommand
+public sealed partial class RequestCustomObjectivesCommand : IConsoleCommand
 {
+    [Dependency] private IEntityManager _entityManager = default!;
+
     public string Command => "requestcustomobjectives";
     public string Description => "Sends the current custom objectives player list to the requesting admin.";
     public string Help => "Usage: requestcustomobjectives";
@@ -20,7 +22,7 @@ public sealed class RequestCustomObjectivesCommand : IConsoleCommand
             return;
         }
 
-        var system = IoCManager.Resolve<IEntityManager>().System<CustomObjectivesAdminSystem>();
+        var system = _entityManager.System<CustomObjectivesAdminSystem>();
         system.SendCustomObjectivesList(shell.Player);
     }
 }

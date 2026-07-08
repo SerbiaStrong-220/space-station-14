@@ -15,24 +15,22 @@ namespace Content.Client.SS220.Administration.UI.CustomControls;
 [GenerateTypedNameReferences]
 public sealed partial class GameRulesListControl : BoxContainer
 {
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IUserInterfaceManager _userInterfaceManager = default!;
+
     private readonly AdminSystem _adminSystem;
-    private readonly IEntityManager _entityManager;
 
     private List<GameRuleInfo> _gameRulesList = new();
 
     public event Action<GameRuleInfo?>? OnSelectionChanged;
 
     public Func<GameRuleInfo, string, string>? OverrideText;
-    public Comparison<GameRuleInfo>? Comparison;
-
     public GameRulesListControl()
     {
-        _entityManager = IoCManager.Resolve<IEntityManager>();
+        IoCManager.InjectDependencies(this);
         _adminSystem = _entityManager.System<AdminSystem>();
 
-        IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
-        // Fill the Option data
         GameRulesListContainer.ItemPressed += GameRulesListItemPressed;
         GameRulesListContainer.GenerateItem += GenerateButton;
 
@@ -52,7 +50,6 @@ public sealed partial class GameRulesListControl : BoxContainer
         {
             OnSelectionChanged?.Invoke(selectedGameRule);
 
-            // update label text. Only required if there is some override (e.g. unread bwoink count).
             if (OverrideText != null && args.Button.Children.FirstOrDefault()?.Children?.FirstOrDefault() is Label label)
                 label.Text = GetText(selectedGameRule);
         }
@@ -60,7 +57,7 @@ public sealed partial class GameRulesListControl : BoxContainer
         {
             var entity = _entityManager.GetEntity(selectedGameRule.Entity.Value);
             if (_entityManager.EntityExists(entity))
-                IoCManager.Resolve<IUserInterfaceManager>().GetUIController<VerbMenuUIController>().OpenVerbMenu(entity);
+                _userInterfaceManager.GetUIController<VerbMenuUIController>().OpenVerbMenu(entity);
         }
     }
 

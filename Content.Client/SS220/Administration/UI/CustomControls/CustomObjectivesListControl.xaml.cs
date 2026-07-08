@@ -9,13 +9,15 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Input;
-using Robust.Shared.Network;
 
 namespace Content.Client.SS220.Administration.UI.CustomControls;
 
 [GenerateTypedNameReferences]
 public sealed partial class CustomObjectivesListControl : BoxContainer
 {
+    [Dependency] private IEntityManager _entManager = default!;
+    [Dependency] private IUserInterfaceManager _userInterfaceManager = default!;
+
     private readonly CustomObjectivesSystem _customObjectivesSystem;
 
     private List<CustomObjectivesPlayerInfo> _customObjectivesList = new();
@@ -24,11 +26,9 @@ public sealed partial class CustomObjectivesListControl : BoxContainer
 
     public Func<CustomObjectivesPlayerInfo, string, string>? OverrideText;
 
-    private readonly IEntityManager _entManager;
-
     public CustomObjectivesListControl()
     {
-        _entManager = IoCManager.Resolve<IEntityManager>();
+        IoCManager.InjectDependencies(this);
         _customObjectivesSystem = _entManager.System<CustomObjectivesSystem>();
         RobustXamlLoader.Load(this);
         CustomObjectivesListContainer.ItemPressed += CustomObjectivesListItemPressed;
@@ -68,7 +68,7 @@ public sealed partial class CustomObjectivesListControl : BoxContainer
         }
         else if (args.Event.Function == EngineKeyFunctions.UseSecondary && selectedPlayer.NetEntity != null)
         {
-            IoCManager.Resolve<IUserInterfaceManager>().GetUIController<VerbMenuUIController>().OpenVerbMenu(_entManager.GetEntity(selectedPlayer.NetEntity.Value));
+            _userInterfaceManager.GetUIController<VerbMenuUIController>().OpenVerbMenu(_entManager.GetEntity(selectedPlayer.NetEntity.Value));
         }
     }
 

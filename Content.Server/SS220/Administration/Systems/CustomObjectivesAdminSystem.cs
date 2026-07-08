@@ -8,18 +8,17 @@ using Content.Shared.Objectives.Components;
 using Content.Shared.SS220.Administration.Events;
 using Robust.Server.Player;
 using Robust.Shared.Enums;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
 
 namespace Content.Server.SS220.Administration.Systems;
 
-public sealed class CustomObjectivesAdminSystem : EntitySystem
+public sealed partial class CustomObjectivesAdminSystem : EntitySystem
 {
-    [Dependency] private readonly IAdminManager _adminManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly JobSystem _jobs = default!;
-    [Dependency] private readonly RoleSystem _roles = default!;
+    [Dependency] private IAdminManager _adminManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private JobSystem _jobs = default!;
+    [Dependency] private RoleSystem _roles = default!;
 
     private EntityQuery<ObjectiveComponent> _objectiveQuery;
 

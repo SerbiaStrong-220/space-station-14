@@ -5,6 +5,7 @@ using Robust.Client.Console;
 using Robust.Client.Player;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
+using Robust.Client.UserInterface.XAML;
 
 namespace Content.Client.SS220.Administration.UI.Tabs.AdminTab;
 
@@ -12,7 +13,16 @@ namespace Content.Client.SS220.Administration.UI.Tabs.AdminTab;
 [UsedImplicitly]
 public sealed partial class CustomObjectivesWindow : DefaultWindow
 {
+    [Dependency] private IClientConsoleHost _consoleHost = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+
     private CustomObjectivesPlayerInfo? _selectedPlayer;
+
+    public CustomObjectivesWindow()
+    {
+        RobustXamlLoader.Load(this);
+        IoCManager.InjectDependencies(this);
+    }
 
     protected override void EnteredTree()
     {
@@ -20,7 +30,7 @@ public sealed partial class CustomObjectivesWindow : DefaultWindow
         CustomObjectivesList.OnSelectionChanged += OnSelectionChanged;
         ListOfObjectivesButton.OnPressed += ListOfObjectivesButtonOnPressed;
         AddObjectiveButton.OnWindowCreated += AddObjectiveButtonOnWindowCreated;
-        IoCManager.Resolve<IClientConsoleHost>().ExecuteCommand("requestcustomobjectives");
+        _consoleHost.ExecuteCommand("requestcustomobjectives");
     }
 
     private void OnSelectionChanged(CustomObjectivesPlayerInfo? obj)
@@ -36,7 +46,7 @@ public sealed partial class CustomObjectivesWindow : DefaultWindow
         if (_selectedPlayer == null)
             return;
 
-        IoCManager.Resolve<IClientConsoleHost>().ExecuteCommand(
+        _consoleHost.ExecuteCommand(
             $"openobjectives {_selectedPlayer.SessionId}");
     }
 
@@ -46,7 +56,7 @@ public sealed partial class CustomObjectivesWindow : DefaultWindow
             return;
 
         var addObjectiveWindow = (AddObjectiveWindow) window;
-        if (!IoCManager.Resolve<IPlayerManager>().TryGetSessionById(_selectedPlayer.SessionId, out var playerSession))
+        if (!_playerManager.TryGetSessionById(_selectedPlayer.SessionId, out var playerSession))
             return;
 
         addObjectiveWindow.SetAntagonist(playerSession);

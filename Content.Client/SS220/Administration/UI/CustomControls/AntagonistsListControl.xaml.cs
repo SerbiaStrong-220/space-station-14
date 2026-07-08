@@ -12,96 +12,92 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Input;
 
-namespace Content.Client.SS220.Administration.UI.CustomControls
+namespace Content.Client.SS220.Administration.UI.CustomControls;
+
+[GenerateTypedNameReferences]
+public sealed partial class AntagonistsListControl : BoxContainer
 {
-    [GenerateTypedNameReferences]
-    public sealed partial class AntagonistsListControl : BoxContainer
+    [Dependency] private IEntityManager _entManager = default!;
+    [Dependency] private IUserInterfaceManager _userInterfaceManager = default!;
+
+    private readonly AdminSystem _adminSystem;
+
+    private List<PlayerInfo> _antagonistsList = new();
+
+    public event Action<PlayerInfo?>? OnSelectionChanged;
+
+    public Func<PlayerInfo, string, string>? OverrideText;
+    public AntagonistsListControl()
     {
-        private readonly AdminSystem _adminSystem;
+        IoCManager.InjectDependencies(this);
+        _adminSystem = _entManager.System<AdminSystem>();
+        RobustXamlLoader.Load(this);
+        AntagonistsListContainer.ItemPressed += AntagonistsListItemPressed;
+        AntagonistsListContainer.GenerateItem += GenerateButton;
 
-        private List<PlayerInfo> _antagonistsList = new();
+        PopulateList(_adminSystem.PlayerList);
+        _adminSystem.PlayerListChanged += PopulateList;
+        BackgroundPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = new Color(32, 32, 40) };
+    }
 
-        public event Action<PlayerInfo?>? OnSelectionChanged;
+    private void AntagonistsListItemPressed(BaseButton.ButtonEventArgs? args, ListData? data)
+    {
+        if (args is null)
+            return;
 
-        public Func<PlayerInfo, string, string>? OverrideText;
-        public Comparison<PlayerInfo>? Comparison;
-
-        private IEntityManager _entManager;
-
-        public AntagonistsListControl()
+        if (data is not AntagonistsListData { Info: var selectedAntagonist })
+            return;
+        if (args.Event.Function == EngineKeyFunctions.UIClick)
         {
-            _entManager = IoCManager.Resolve<IEntityManager>();
-            _adminSystem = _entManager.System<AdminSystem>();
-            RobustXamlLoader.Load(this);
-            // Fill the Option data
-            AntagonistsListContainer.ItemPressed += AntagonistsListItemPressed;
-            AntagonistsListContainer.GenerateItem += GenerateButton;
+            OnSelectionChanged?.Invoke(selectedAntagonist);
 
-            PopulateList(_adminSystem.PlayerList);
-            _adminSystem.PlayerListChanged += PopulateList;
-            BackgroundPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = new Color(32, 32, 40) };
+            if (OverrideText != null && args.Button.Children.FirstOrDefault()?.Children?.FirstOrDefault() is Label label)
+                label.Text = GetText(selectedAntagonist);
         }
-
-        private void AntagonistsListItemPressed(BaseButton.ButtonEventArgs? args, ListData? data)
+        else if (args.Event.Function == EngineKeyFunctions.UseSecondary && selectedAntagonist.NetEntity != null)
         {
-            if (args is null)
-                return;
-
-            if (data is not AntagonistsListData { Info: var selectedAntagonist })
-                return;
-            if (args.Event.Function == EngineKeyFunctions.UIClick)
-            {
-                OnSelectionChanged?.Invoke(selectedAntagonist);
-
-                // update label text. Only required if there is some override (e.g. unread bwoink count).
-                if (OverrideText != null && args.Button.Children.FirstOrDefault()?.Children?.FirstOrDefault() is Label label)
-                    label.Text = GetText(selectedAntagonist);
-            }
-            else if (args.Event.Function == EngineKeyFunctions.UseSecondary && selectedAntagonist.NetEntity != null)
-            {
-                IoCManager.Resolve<IUserInterfaceManager>().GetUIController<VerbMenuUIController>().OpenVerbMenu(_entManager.GetEntity(selectedAntagonist.NetEntity.Value));
-            }
-        }
-
-        private void PopulateList(IReadOnlyList<PlayerInfo>? players = null)
-        {
-            players ??= _adminSystem.PlayerList;
-
-            _antagonistsList = players.Where(x => x.Antag).ToList();
-
-            if (_antagonistsList is not null)
-                AntagonistsListContainer.PopulateList(_antagonistsList.Select(info => new AntagonistsListData(info)).ToList());
-        }
-
-        private string GetText(PlayerInfo info)
-        {
-            var text = $"{info.CharacterName} ({info.Username})";
-            if (OverrideText != null)
-                text = OverrideText.Invoke(info, text);
-            return text;
-        }
-
-        private void GenerateButton(ListData data, ListContainerButton button)
-        {
-            if (data is not AntagonistsListData { Info: var info })
-                return;
-
-            button.AddChild(new BoxContainer
-            {
-                Orientation = LayoutOrientation.Vertical,
-                Children =
-                {
-                    new Label
-                    {
-                        ClipText = true,
-                        Text = GetText(info)
-                    }
-                }
-            });
-            button.EnableAllKeybinds = true;
-            button.AddStyleClass(ListContainer.StyleClassListContainerButton);
+            _userInterfaceManager.GetUIController<VerbMenuUIController>().OpenVerbMenu(_entManager.GetEntity(selectedAntagonist.NetEntity.Value));
         }
     }
 
-    public record AntagonistsListData(PlayerInfo Info) : ListData;
+    private void PopulateList(IReadOnlyList<PlayerInfo>? players = null)
+    {
+        players ??= _adminSystem.PlayerList;
+
+        _antagonistsList = players.Where(x => x.Antag).ToList();
+
+        if (_antagonistsList is not null)
+            AntagonistsListContainer.PopulateList(_antagonistsList.Select(info => new AntagonistsListData(info)).ToList());
+    }
+
+    private string GetText(PlayerInfo info)
+    {
+        var text = $"{info.CharacterName} ({info.Username})";
+        if (OverrideText != null)
+            text = OverrideText.Invoke(info, text);
+        return text;
+    }
+
+    private void GenerateButton(ListData data, ListContainerButton button)
+    {
+        if (data is not AntagonistsListData { Info: var info })
+            return;
+
+        button.AddChild(new BoxContainer
+        {
+            Orientation = LayoutOrientation.Vertical,
+            Children =
+            {
+                new Label
+                {
+                    ClipText = true,
+                    Text = GetText(info)
+                }
+            }
+        });
+        button.EnableAllKeybinds = true;
+        button.AddStyleClass(ListContainer.StyleClassListContainerButton);
+    }
 }
+
+public record AntagonistsListData(PlayerInfo Info) : ListData;
