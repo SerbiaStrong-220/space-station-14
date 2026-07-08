@@ -164,7 +164,11 @@ public sealed partial class BloodBrothersRuleSystem : GameRuleSystem<BloodBrothe
         if (!Resolve(mindUser.Owner, ref mindUser.Comp) || !Resolve(mindTarget.Owner, ref mindTarget.Comp))
             return;
 
-        mindUser.Comp.Objectives.Clear();
+        foreach (var objective in mindUser.Comp.Objectives)
+        {
+            _mind.TryRemoveObjective(mindUser.Owner, mindUser.Comp, objective);
+        }
+
         _mind.CopyObjectives(mindTarget.Owner, mindUser.Owner);
 
         var userObjectives = mindUser.Comp.Objectives;
