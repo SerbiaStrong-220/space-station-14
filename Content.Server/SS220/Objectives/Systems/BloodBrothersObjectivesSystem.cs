@@ -6,9 +6,9 @@ using Content.Shared.SS220.Roles;
 
 namespace Content.Server.SS220.Objectives.Systems;
 
-public sealed class BloodBrothersObjectivesSystem : EntitySystem
+public sealed partial class BloodBrothersObjectivesSystem : EntitySystem
 {
-    [Dependency] private readonly SharedRoleSystem _role = default!;
+    [Dependency] private SharedRoleSystem _role = default!;
 
     public override void Initialize()
     {

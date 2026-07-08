@@ -8,10 +8,10 @@ using Content.Shared.SS220.Roles;
 
 namespace Content.Server.SS220.Objectives.Systems;
 
-public sealed class BloodBrothersEscapeShuttleConditionSystem : EntitySystem
+public sealed partial class BloodBrothersEscapeShuttleConditionSystem : EntitySystem
 {
-    [Dependency] private readonly EmergencyShuttleSystem _emergency = default!;
-    [Dependency] private readonly SharedRoleSystem _role = default!;
+    [Dependency] private EmergencyShuttleSystem _emergency = default!;
+    [Dependency] private SharedRoleSystem _role = default!;
 
     public override void Initialize()
     {
