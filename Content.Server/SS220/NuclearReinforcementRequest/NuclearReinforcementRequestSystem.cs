@@ -1,4 +1,6 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
+using Content.Server.Antag;
+using Content.Server.Antag.Components;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.NukeOps;
 using Content.Server.Store.Systems;
@@ -18,6 +20,7 @@ public sealed partial class NuclearReinforcementRequestSystem : EntitySystem
     [Dependency] private TargetSystem _target = default!;
     [Dependency] private SharedPopupSystem _popupSystem = default!;
     [Dependency] private StoreSystem _store = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
 
     private static readonly ProtoId<CurrencyPrototype> TelecrystalCurrencyPrototype = "Telecrystal";
 
@@ -45,8 +48,6 @@ public sealed partial class NuclearReinforcementRequestSystem : EntitySystem
         var allAliveHumanoids = _target.GetAliveHumans();
         var allOps = _entityManager.AllComponents<NukeOperativeComponent>();
 
-        int toSpawn = (allAliveHumanoids.Count - allOps.Length) / 10;
-
         bool warDeclared = false;
 
         var declaratorQuery = EntityQueryEnumerator<WarDeclaratorComponent>();
@@ -57,11 +58,32 @@ public sealed partial class NuclearReinforcementRequestSystem : EntitySystem
 
         bool leftOutpost = false;
 
+        EntityUid? rule = null;
+
         while (ruleQuery.MoveNext(out var uid, out var ruleComp))
         {
             warTcAmountPerNukie = ruleComp.WarTcAmountPerNukie;
 
             leftOutpost = ruleComp.LeftOutpost;
+
+            rule = uid;
+        }
+
+        if (rule == null)
+            return;
+
+        if (!TryComp<AntagSelectionComponent>(rule, out var selectionComp))
+            return;
+
+        var toSpawn = 0;
+
+        foreach (var def in selectionComp.Definitions)
+        {
+            if (!def.PrefRoles.Contains(ent.Comp.AntagProtoToSearchFor))
+                continue;
+
+            toSpawn = (allAliveHumanoids.Count - Math.Clamp(allOps.Length - 2, 0, allOps.Length)) / def.PlayerRatio;
+            break;
         }
 
         if (toSpawn <= 0 || leftOutpost)

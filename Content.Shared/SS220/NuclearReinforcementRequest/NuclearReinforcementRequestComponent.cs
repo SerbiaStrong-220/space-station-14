@@ -2,6 +2,7 @@
 
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Content.Shared.Roles;
 
 namespace Content.Shared.SS220.NuclearReinforcementRequest;
 
@@ -19,4 +20,7 @@ public sealed partial class NuclearReinforcementRequestComponent : Component
 
     [DataField]
     public EntProtoId ReinforcementProto = "ReinforcementRadioSyndicateNukeops";
+
+    [DataField]
+    public ProtoId<AntagPrototype> AntagProtoToSearchFor = "Nukeops";
 }
