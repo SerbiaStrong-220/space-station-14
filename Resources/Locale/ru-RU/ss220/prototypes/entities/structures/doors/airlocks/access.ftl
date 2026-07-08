@@ -241,3 +241,20 @@ ent-AirlockNanoTrasenRepresentativeLocked = { ent-AirlockCommand }
 ent-AirlockMaintNanoTrasenRepresentativeLocked = { ent-AirlockMaintCommandLocked }
     .desc = { ent-AirlockMaintCommandLocked.desc }
     .suffix = Представитель НТ, Закрыто
+
+ent-AirlockClownLocked = { ent-AirlockClown }
+    .suffix = Клоун, Закрыт
+    .desc = { ent-AirlockServiceGlassLocked.desc }
+
+ent-AirlockClownMaintLocked = { ent-AirlockMaint }
+    .suffix = { ent-AirlockClownLocked.suffix }
+    .desc = { ent-AirlockMaint.desc }
+
+ent-AirlockMimeMaintLocked = { ent-AirlockMaint }
+    .suffix = { ent-AirlockGlassMimeLocked.suffix }
+    .desc = { ent-AirlockMaint.desc }
+
+ent-AirlockMusicianMaintLocked = { ent-AirlockMaint }
+    .suffix = { ent-AirlockGlassMusicianLocked.suffix }
+    .desc = { ent-AirlockMaint.desc }
+

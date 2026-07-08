@@ -21,6 +21,8 @@
         components:
         - BibleUser
         - CultYoggSacrificial
+        - ArenaParticipant
+        - AntagImmune
       lateJoinAdditional: false
       mindRoles:
         - MindRoleCultYogg

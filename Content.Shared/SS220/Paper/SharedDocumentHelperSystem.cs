@@ -15,10 +15,10 @@ namespace Content.Shared.SS220.Paper;
 
 public abstract partial class SharedDocumentHelperSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly SharedGameTicker _gameTicker = default!;
-    [Dependency] private readonly InventorySystem _inventorySystem = default!;
+    [Dependency] private IConfigurationManager _configurationManager = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private SharedGameTicker _gameTicker = default!;
+    [Dependency] private InventorySystem _inventorySystem = default!;
 
     private int _gameYearDelta;
     private readonly Dictionary<string, DocumentHelperOptions> _allowedTags = new()

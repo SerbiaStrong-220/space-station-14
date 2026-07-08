@@ -18,7 +18,7 @@ namespace Content.Client.SS220.SuperMatter.Ui;
 [GenerateTypedNameReferences]
 public sealed partial class SuperMatterObserverMenu : FancyWindow
 {
-    [Dependency] private readonly ILocalizationManager _localization = default!;
+    [Dependency] private ILocalizationManager _localization = default!;
 
     public event Action<BaseButton.ButtonEventArgs?, SuperMatterObserverComponent>? OnServerButtonPressed;
     public event Action<BaseButton.ButtonEventArgs?, int>? OnCrystalButtonPressed;

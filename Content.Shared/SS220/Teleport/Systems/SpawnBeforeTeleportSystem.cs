@@ -4,9 +4,9 @@ using Content.Shared.SS220.Teleport.Components;
 
 namespace Content.Shared.SS220.Teleport.Systems;
 
-public sealed class SpawnBeforeTeleportSystem : EntitySystem
+public sealed partial class SpawnBeforeTeleportSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {

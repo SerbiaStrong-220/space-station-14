@@ -35,23 +35,23 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.MindSlave;
 
-public sealed class MindSlaveSystem : EntitySystem
+public sealed partial class MindSlaveSystem : EntitySystem
 {
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly MindSlaveStopWordSystem _mindSlaveStopWord = default!;
-    [Dependency] private readonly MindSlaveDisfunctionSystem _mindSlaveDisfunction = default!;
-    [Dependency] private readonly RoleSystem _role = default!;
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
-    [Dependency] private readonly AntagSelectionSystem _antagSelection = default!;
-    [Dependency] private readonly SharedObjectivesSystem _objectives = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly TargetObjectiveSystem _targetObjective = default!;
-    [Dependency] private readonly TelepathySystem _telepathy = default!;
-    [Dependency] private readonly AlertsSystem _alert = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly EuiManager _eui = default!;
-    [Dependency] private readonly SharedSubdermalImplantSystem _implant = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private MindSlaveStopWordSystem _mindSlaveStopWord = default!;
+    [Dependency] private MindSlaveDisfunctionSystem _mindSlaveDisfunction = default!;
+    [Dependency] private RoleSystem _role = default!;
+    [Dependency] private NpcFactionSystem _npcFaction = default!;
+    [Dependency] private AntagSelectionSystem _antagSelection = default!;
+    [Dependency] private SharedObjectivesSystem _objectives = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private TargetObjectiveSystem _targetObjective = default!;
+    [Dependency] private TelepathySystem _telepathy = default!;
+    [Dependency] private AlertsSystem _alert = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private EuiManager _eui = default!;
+    [Dependency] private SharedSubdermalImplantSystem _implant = default!;
 
     private static readonly EntProtoId MindSlaveAntagId = "MindRoleMindSlave";
     private static readonly EntProtoId MindSlaveObjectiveId = "MindSlaveObeyObjective";

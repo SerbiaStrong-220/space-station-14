@@ -9,7 +9,7 @@ namespace Content.Server.SS220.EntityEffects.Effects;
 
 public sealed partial class ChemElixirOfLiberationEffectSystem : EntityEffectSystem<CultYoggComponent, ChemElixirOfLiberationEffect>
 {
-    [Dependency] private readonly CultYoggSystem _cultYogg = default!;
+    [Dependency] private CultYoggSystem _cultYogg = default!;
 
     protected override void Effect(Entity<CultYoggComponent> entity, ref EntityEffectEvent<ChemElixirOfLiberationEffect> args)
     {

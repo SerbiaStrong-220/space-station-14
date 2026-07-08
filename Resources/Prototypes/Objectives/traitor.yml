@@ -112,6 +112,7 @@
       blacklist:
         components:
         - KillPersonCondition
+        - ArenaParticipant #SS220 prevent arena participants from being antags/targets
         - BloodBrothersRole # ss220-blood-brothers
     - !type:HasRoleMindFilter
       inverted: true
@@ -144,6 +145,7 @@
       blacklist:
         components:
         - KillPersonCondition
+        - ArenaParticipant #SS220 prevent arena participants from being antags/targets
     - !type:HasRoleMindFilter
       inverted: true
       whitelist:

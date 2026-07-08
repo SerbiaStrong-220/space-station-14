@@ -10,11 +10,11 @@ using Content.Shared.SSDIndicator;
 
 namespace Content.Server.SS220.Objectives.Systems;
 
-public sealed class IntimidatePersonConditionSystem : EntitySystem
+public sealed partial class IntimidatePersonConditionSystem : EntitySystem
 {
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly TargetSystem _target = default!;
-    [Dependency] private readonly TargetObjectiveSystem _targetObjective = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private TargetSystem _target = default!;
+    [Dependency] private TargetObjectiveSystem _targetObjective = default!;
 
     public override void Initialize()
     {

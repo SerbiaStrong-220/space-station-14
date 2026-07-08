@@ -6,9 +6,9 @@ using Robust.Shared.Console;
 namespace Content.Server.SS220.Administration.Commands;
 
 [AdminCommand(AdminFlags.Ban)]
-public sealed class ChatUnbanCommand : LocalizedCommands
+public sealed partial class ChatUnbanCommand : LocalizedCommands
 {
-    [Dependency] private readonly IBanManager _ban = default!;
+    [Dependency] private IBanManager _ban = default!;
 
     public override string Command => "chatunban";
     public override string Description => Loc.GetString("cmd-chat-unban-desc");

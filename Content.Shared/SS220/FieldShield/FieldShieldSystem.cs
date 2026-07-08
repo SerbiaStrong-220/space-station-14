@@ -2,22 +2,27 @@
 
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
+using Content.Shared.DoAfter;
 using Content.Shared.Emp;
 using Content.Shared.Examine;
 using Content.Shared.Inventory.Events;
+using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.FieldShield;
 
-public sealed class FieldShieldProviderSystem : EntitySystem
+public sealed partial class FieldShieldProviderSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     private const int FieldShieldPushPriority = 2;
+
+    private static readonly LocId FieldShieldOn = "field-shield-provider-on";
+    private static readonly LocId FieldShieldOff = "field-shield-provider-off";
 
     public override void Initialize()
     {
@@ -31,6 +36,9 @@ public sealed class FieldShieldProviderSystem : EntitySystem
 
         SubscribeLocalEvent<FieldShieldProviderComponent, BeingEquippedAttemptEvent>(OnBeingEquippedAttempt);
         SubscribeLocalEvent<FieldShieldProviderComponent, BeingUnequippedAttemptEvent>(OnUneqippingAttempt);
+
+        SubscribeLocalEvent<FieldShieldProviderComponent, ItemToggleActivateAttemptEvent>(OnActivateAttempt);
+        SubscribeLocalEvent<FieldShieldProviderComponent, ItemToggledEvent>(OnToggled);
 
         SubscribeLocalEvent<FieldShieldProviderComponent, GotEquippedEvent>(OnProviderEquipped);
         SubscribeLocalEvent<FieldShieldProviderComponent, GotUnequippedEvent>(OnProviderUnequipped);
@@ -109,23 +117,50 @@ public sealed class FieldShieldProviderSystem : EntitySystem
         args.Reason = "field-shield-provider-cant-unequip-when-emped";
     }
 
-    private void OnProviderEquipped(Entity<FieldShieldProviderComponent> entity, ref GotEquippedEvent args)
+    private void OnActivateAttempt(Entity<FieldShieldProviderComponent> ent, ref ItemToggleActivateAttemptEvent args)
+    {
+        args.Cancelled = !ent.Comp.Equipped;
+    }
+
+
+    private void OnToggled(Entity<FieldShieldProviderComponent> ent, ref ItemToggledEvent args)
     {
         if (!_gameTiming.IsFirstTimePredicted)
             return;
 
-        var shieldComp = EnsureComp<FieldShieldComponent>(args.EquipTarget);
-        shieldComp.ShieldData = entity.Comp.ShieldData;
-        shieldComp.RechargeShieldData = entity.Comp.RechargeShieldData;
-        shieldComp.LightData = entity.Comp.LightData;
+        if (args.User == null)
+            return;
 
-        shieldComp.RechargeEndTime = _gameTiming.CurTime + entity.Comp.RechargeShieldData.RechargeTime;
-        Dirty(args.EquipTarget, shieldComp);
+        var user = args.User.Value;
+
+        var message = Loc.GetString(args.Activated ? FieldShieldOn : FieldShieldOff);
+        _popup.PopupClient(message, user, user);
+
+        if (args.Activated)
+        {
+            var shieldComp = EnsureComp<FieldShieldComponent>(user);
+            shieldComp.ShieldData = ent.Comp.ShieldData;
+            shieldComp.RechargeShieldData = ent.Comp.RechargeShieldData;
+            shieldComp.LightData = ent.Comp.LightData;
+
+            shieldComp.RechargeEndTime = _gameTiming.CurTime + ent.Comp.RechargeShieldData.RechargeTime;
+            Dirty(user, shieldComp);
+        }
+        else
+        {
+            RemCompDeferred<FieldShieldComponent>(user);
+        }
+    }
+
+    private void OnProviderEquipped(Entity<FieldShieldProviderComponent> ent, ref GotEquippedEvent args)
+    {
+        ent.Comp.Equipped = true;
     }
 
     private void OnProviderUnequipped(Entity<FieldShieldProviderComponent> entity, ref GotUnequippedEvent args)
     {
         RemCompDeferred<FieldShieldComponent>(args.EquipTarget);
+        entity.Comp.Equipped = false;
     }
 
     private void OnFieldShieldBeforeDamage(Entity<FieldShieldComponent> entity, ref BeforeDamageChangedEvent args)
@@ -133,7 +168,7 @@ public sealed class FieldShieldProviderSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (args.Damage.GetTotal() > entity.Comp.ShieldData.MaxDamageConsumable
+        if (args.Damage.GetTotal() + args.Damage.ArmourPiercing > entity.Comp.ShieldData.MaxDamageConsumable
             || args.Damage.GetTotal() < entity.Comp.ShieldData.DamageThreshold)
             return;
 
