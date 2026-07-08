@@ -1,9 +1,7 @@
 using System.Linq;
 using Content.Server.Roles;
 using Content.Server.Administration.Managers;
-using Content.Server.Mind;
 using Content.Server.Roles.Jobs;
-using Content.Shared.Administration;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
@@ -47,7 +45,7 @@ public sealed class CustomObjectivesAdminSystem : EntitySystem
         var mindQuery = AllEntityQuery<MindComponent>();
         while (mindQuery.MoveNext(out var mindId, out var mindComp))
         {
-            UpdateCustomObjectivesPlayer(mindId, mindComp, false);
+            UpdateCustomObjectivesPlayer((mindId, mindComp), false);
         }
 
         SendCustomObjectivesList();
@@ -60,16 +58,16 @@ public sealed class CustomObjectivesAdminSystem : EntitySystem
         _playerManager.PlayerStatusChanged -= OnPlayerStatusChanged;
     }
 
-    private void OnObjectiveRemove(EntityUid uid, ObjectiveComponent comp, ComponentRemove args)
+    private void OnObjectiveRemove(Entity<ObjectiveComponent> objective, ref ComponentRemove _args)
     {
-        if (!comp.Completed.HasValue)
+        if (!objective.Comp.Completed.HasValue)
             return;
 
-        if (!_customObjectiveOwners.Remove(uid, out var mindId))
+        if (!_customObjectiveOwners.Remove(objective, out var mindId))
             return;
 
         if (TryComp(mindId, out MindComponent? mindComp))
-            UpdateCustomObjectivesPlayer(mindId, mindComp);
+            UpdateCustomObjectivesPlayer((mindId, mindComp));
     }
 
     private void OnPlayerStatusChanged(object? sender, SessionStatusEventArgs e)
@@ -82,49 +80,49 @@ public sealed class CustomObjectivesAdminSystem : EntitySystem
             return;
         }
 
-        UpdateCustomObjectivesPlayer(mindId, mindComp);
+        UpdateCustomObjectivesPlayer((mindId, mindComp));
     }
 
-    private void OnMindObjectivesChanged(EntityUid uid, MindComponent component, ref MindObjectivesChangedEvent args)
+    private void OnMindObjectivesChanged(Entity<MindComponent> mind, ref MindObjectivesChangedEvent _args)
     {
-        UpdateCustomObjectivesPlayer(uid, component);
+        UpdateCustomObjectivesPlayer(mind);
     }
 
-    private void UpdateCustomObjectivesPlayer(EntityUid mindId, MindComponent mindComp, bool sendUpdate = true)
+    private void UpdateCustomObjectivesPlayer(Entity<MindComponent> mind, bool sendUpdate = true)
     {
-        if (mindComp.UserId == null)
+        if (mind.Comp.UserId == null)
             return;
 
-        if (_roles.MindIsAntagonist(mindId))
+        if (_roles.MindIsAntagonist(mind))
         {
-            RemoveOwnedCustomObjectives(mindId);
-            _customObjectivesPlayers.Remove(mindComp.UserId.Value);
+            RemoveOwnedCustomObjectives(mind);
+            _customObjectivesPlayers.Remove(mind.Comp.UserId.Value);
             if (sendUpdate)
                 SendCustomObjectivesList();
             return;
         }
 
         var customObjectives = new List<EntityUid>();
-        foreach (var objective in mindComp.Objectives)
+        foreach (var objective in mind.Comp.Objectives)
         {
             if (_objectiveQuery.TryGetComponent(objective, out var objComp) && objComp.Completed.HasValue)
                 customObjectives.Add(objective);
         }
 
-        SyncOwnedCustomObjectives(mindId, customObjectives);
+        SyncOwnedCustomObjectives(mind, customObjectives);
         var customObjectiveCount = customObjectives.Count;
 
         if (customObjectiveCount == 0)
         {
-            _customObjectivesPlayers.Remove(mindComp.UserId.Value);
+            _customObjectivesPlayers.Remove(mind.Comp.UserId.Value);
             if (sendUpdate)
                 SendCustomObjectivesList();
             return;
         }
 
-        if (!_playerManager.TryGetSessionById(mindComp.UserId.Value, out var session))
+        if (!_playerManager.TryGetSessionById(mind.Comp.UserId.Value, out var session))
         {
-            if (_customObjectivesPlayers.Remove(mindComp.UserId.Value) && sendUpdate)
+            if (_customObjectivesPlayers.Remove(mind.Comp.UserId.Value) && sendUpdate)
                 SendCustomObjectivesList();
 
             return;
@@ -140,7 +138,7 @@ public sealed class CustomObjectivesAdminSystem : EntitySystem
             identityName = Identity.Name(session.AttachedEntity.Value, EntityManager);
         }
 
-        if (_jobs.MindTryGetJobName(mindId, out var jobName))
+        if (_jobs.MindTryGetJobName(mind, out var jobName))
         {
             startingJob = jobName;
         }
@@ -157,7 +155,7 @@ public sealed class CustomObjectivesAdminSystem : EntitySystem
             customObjectiveCount
         );
 
-        _customObjectivesPlayers[mindComp.UserId.Value] = playerInfo;
+        _customObjectivesPlayers[mind.Comp.UserId.Value] = playerInfo;
         if (sendUpdate)
             SendCustomObjectivesList();
     }
@@ -181,10 +179,10 @@ public sealed class CustomObjectivesAdminSystem : EntitySystem
         }
     }
 
-    private void SyncOwnedCustomObjectives(EntityUid mindId, List<EntityUid> currentObjectives)
+    private void SyncOwnedCustomObjectives(Entity<MindComponent> mind, List<EntityUid> currentObjectives)
     {
         var staleObjectives = _customObjectiveOwners
-            .Where(pair => pair.Value == mindId && !currentObjectives.Contains(pair.Key))
+            .Where(pair => pair.Value == mind.Owner && !currentObjectives.Contains(pair.Key))
             .Select(pair => pair.Key)
             .ToArray();
 
@@ -195,14 +193,14 @@ public sealed class CustomObjectivesAdminSystem : EntitySystem
 
         foreach (var objective in currentObjectives)
         {
-            _customObjectiveOwners[objective] = mindId;
+            _customObjectiveOwners[objective] = mind.Owner;
         }
     }
 
-    private void RemoveOwnedCustomObjectives(EntityUid mindId)
+    private void RemoveOwnedCustomObjectives(Entity<MindComponent> mind)
     {
         var objectives = _customObjectiveOwners
-            .Where(pair => pair.Value == mindId)
+            .Where(pair => pair.Value == mind.Owner)
             .Select(pair => pair.Key)
             .ToArray();
 

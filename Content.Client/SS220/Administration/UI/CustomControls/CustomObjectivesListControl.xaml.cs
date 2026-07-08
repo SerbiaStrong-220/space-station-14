@@ -23,7 +23,6 @@ public sealed partial class CustomObjectivesListControl : BoxContainer
     public event Action<CustomObjectivesPlayerInfo?>? OnSelectionChanged;
 
     public Func<CustomObjectivesPlayerInfo, string, string>? OverrideText;
-    public Comparison<CustomObjectivesPlayerInfo>? Comparison;
 
     private readonly IEntityManager _entManager;
 
@@ -50,6 +49,7 @@ public sealed partial class CustomObjectivesListControl : BoxContainer
     {
         _customObjectivesList = players.ToList();
         CustomObjectivesListContainer.PopulateList(_customObjectivesList.Select(info => new CustomObjectivesListData(info)).ToList());
+        OnSelectionChanged?.Invoke(null);
     }
 
     private void CustomObjectivesListItemPressed(BaseButton.ButtonEventArgs? args, ListData? data)
@@ -74,9 +74,15 @@ public sealed partial class CustomObjectivesListControl : BoxContainer
 
     private string GetText(CustomObjectivesPlayerInfo info)
     {
-        var text = $"{info.CharacterName} ({info.Username}) [{info.ObjectiveCount} objectives]";
+        var text = Loc.GetString(
+            "admin-custom-objectives-entry",
+            ("character", info.CharacterName),
+            ("username", info.Username),
+            ("count", info.ObjectiveCount));
+
         if (OverrideText != null)
             text = OverrideText.Invoke(info, text);
+
         return text;
     }
 
