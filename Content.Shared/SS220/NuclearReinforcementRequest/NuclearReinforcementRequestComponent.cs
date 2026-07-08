@@ -19,7 +19,4 @@ public sealed partial class NuclearReinforcementRequestComponent : Component
 
     [DataField]
     public EntProtoId ReinforcementProto = "ReinforcementRadioSyndicateNukeops";
-
-    [DataField]
-    public int TelecrystalsToAdd = 40;
 }

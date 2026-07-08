@@ -1,4 +1,5 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
+using Content.Server.GameTicking.Rules.Components;
 using Content.Server.NukeOps;
 using Content.Server.Store.Systems;
 using Content.Shared.Interaction.Events;
@@ -46,17 +47,30 @@ public sealed partial class NuclearReinforcementRequestSystem : EntitySystem
 
         int toSpawn = (allAliveHumanoids.Count - allOps.Length) / 10;
 
-        if (toSpawn <= 0)
+        bool warDeclared = false;
+
+        var declaratorQuery = EntityQueryEnumerator<WarDeclaratorComponent>();
+
+        var ruleQuery = EntityQueryEnumerator<NukeopsRuleComponent>();
+
+        int warTcAmountPerNukie = 40;
+
+        bool leftOutpost = false;
+
+        while (ruleQuery.MoveNext(out var uid, out var ruleComp))
+        {
+            warTcAmountPerNukie = ruleComp.WarTcAmountPerNukie;
+
+            leftOutpost = ruleComp.LeftOutpost;
+        }
+
+        if (toSpawn <= 0 || leftOutpost)
         {
             _popupSystem.PopupEntity(Loc.GetString(NoReinforcementsGranted), ent);
             return;
         }
 
         _popupSystem.PopupEntity(Loc.GetString(ReinforcementsGranted), ent);
-
-        bool warDeclared = false;
-
-        var declaratorQuery = EntityQueryEnumerator<WarDeclaratorComponent>();
 
         while (declaratorQuery.MoveNext(out var uid, out var declaratorComp))
         {
@@ -72,7 +86,7 @@ public sealed partial class NuclearReinforcementRequestSystem : EntitySystem
             var uplinkUid = Spawn(ent.Comp.UplinkProto, Transform(args.User).Coordinates);
 
             if (warDeclared)
-                _store.TryAddCurrency(new() { { TelecrystalCurrencyPrototype, ent.Comp.TelecrystalsToAdd } }, uplinkUid);
+                _store.TryAddCurrency(new() { { TelecrystalCurrencyPrototype, warTcAmountPerNukie } }, uplinkUid);
 
             Spawn(ent.Comp.ReinforcementProto, Transform(args.User).Coordinates);
         }
