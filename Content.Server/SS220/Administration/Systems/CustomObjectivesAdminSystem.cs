@@ -21,16 +21,12 @@ public sealed partial class CustomObjectivesAdminSystem : EntitySystem
     [Dependency] private JobSystem _jobs = default!;
     [Dependency] private RoleSystem _roles = default!;
 
-    private EntityQuery<ObjectiveComponent> _objectiveQuery;
-
     private readonly Dictionary<NetUserId, CustomObjectivesPlayerInfo> _customObjectivesPlayers = new();
     private readonly Dictionary<EntityUid, EntityUid> _customObjectiveOwners = new();
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _objectiveQuery = GetEntityQuery<ObjectiveComponent>();
 
         SubscribeLocalEvent<ObjectiveComponent, ComponentRemove>(OnObjectiveRemove);
         SubscribeLocalEvent<MindComponent, MindObjectivesChangedEvent>(OnMindObjectivesChanged);
@@ -105,7 +101,7 @@ public sealed partial class CustomObjectivesAdminSystem : EntitySystem
         var customObjectives = new List<EntityUid>();
         foreach (var objective in mind.Comp.Objectives)
         {
-            if (_objectiveQuery.TryGetComponent(objective, out var objComp) && objComp.Completed.HasValue)
+            if (TryComp(objective, out ObjectiveComponent? objComp) && objComp.Completed.HasValue)
                 customObjectives.Add(objective);
         }
 

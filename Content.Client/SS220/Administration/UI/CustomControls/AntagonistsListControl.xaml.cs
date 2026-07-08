@@ -34,10 +34,20 @@ public sealed partial class AntagonistsListControl : BoxContainer
         RobustXamlLoader.Load(this);
         AntagonistsListContainer.ItemPressed += AntagonistsListItemPressed;
         AntagonistsListContainer.GenerateItem += GenerateButton;
-
-        PopulateList(_adminSystem.PlayerList);
-        _adminSystem.PlayerListChanged += PopulateList;
         BackgroundPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = new Color(32, 32, 40) };
+    }
+
+    protected override void EnteredTree()
+    {
+        base.EnteredTree();
+        _adminSystem.PlayerListChanged += PopulateList;
+        PopulateList(_adminSystem.PlayerList);
+    }
+
+    protected override void ExitedTree()
+    {
+        base.ExitedTree();
+        _adminSystem.PlayerListChanged -= PopulateList;
     }
 
     private void AntagonistsListItemPressed(BaseButton.ButtonEventArgs? args, ListData? data)

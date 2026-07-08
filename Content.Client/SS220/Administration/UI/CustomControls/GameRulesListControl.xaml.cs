@@ -33,10 +33,20 @@ public sealed partial class GameRulesListControl : BoxContainer
         RobustXamlLoader.Load(this);
         GameRulesListContainer.ItemPressed += GameRulesListItemPressed;
         GameRulesListContainer.GenerateItem += GenerateButton;
-
-        PopulateList(_adminSystem.GameRulesList);
-        _adminSystem.GameRulesListChanged += PopulateList;
         BackgroundPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = new Color(32, 32, 40) };
+    }
+
+    protected override void EnteredTree()
+    {
+        base.EnteredTree();
+        _adminSystem.GameRulesListChanged += PopulateList;
+        PopulateList(_adminSystem.GameRulesList);
+    }
+
+    protected override void ExitedTree()
+    {
+        base.ExitedTree();
+        _adminSystem.GameRulesListChanged -= PopulateList;
     }
 
     private void GameRulesListItemPressed(BaseButton.ButtonEventArgs? args, ListData? data)

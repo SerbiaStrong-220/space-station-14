@@ -21,6 +21,7 @@ public sealed partial class CustomObjectivesListControl : BoxContainer
     private readonly CustomObjectivesSystem _customObjectivesSystem;
 
     private List<CustomObjectivesPlayerInfo> _customObjectivesList = new();
+    private CustomObjectivesPlayerInfo? _selectedPlayer;
 
     public event Action<CustomObjectivesPlayerInfo?>? OnSelectionChanged;
 
@@ -33,10 +34,15 @@ public sealed partial class CustomObjectivesListControl : BoxContainer
         RobustXamlLoader.Load(this);
         CustomObjectivesListContainer.ItemPressed += CustomObjectivesListItemPressed;
         CustomObjectivesListContainer.GenerateItem += GenerateButton;
-        UpdatePlayerList(_customObjectivesSystem.Players);
-        _customObjectivesSystem.CustomObjectivesListChanged += UpdatePlayerList;
 
         BackgroundPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = new Color(32, 32, 40) };
+    }
+
+    protected override void EnteredTree()
+    {
+        base.EnteredTree();
+        _customObjectivesSystem.CustomObjectivesListChanged += UpdatePlayerList;
+        UpdatePlayerList(_customObjectivesSystem.Players);
     }
 
     protected override void ExitedTree()
@@ -49,6 +55,21 @@ public sealed partial class CustomObjectivesListControl : BoxContainer
     {
         _customObjectivesList = players.ToList();
         CustomObjectivesListContainer.PopulateList(_customObjectivesList.Select(info => new CustomObjectivesListData(info)).ToList());
+
+        if (_selectedPlayer == null)
+            return;
+
+        foreach (var player in _customObjectivesList)
+        {
+            if (player.SessionId != _selectedPlayer.SessionId)
+                continue;
+
+            _selectedPlayer = player;
+            OnSelectionChanged?.Invoke(player);
+            return;
+        }
+
+        _selectedPlayer = null;
         OnSelectionChanged?.Invoke(null);
     }
 
@@ -61,6 +82,7 @@ public sealed partial class CustomObjectivesListControl : BoxContainer
             return;
         if (args.Event.Function == EngineKeyFunctions.UIClick)
         {
+            _selectedPlayer = selectedPlayer;
             OnSelectionChanged?.Invoke(selectedPlayer);
 
             if (OverrideText != null && args.Button.Children.FirstOrDefault()?.Children?.FirstOrDefault() is Label label)
