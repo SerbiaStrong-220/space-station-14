@@ -37,6 +37,7 @@ using Content.Shared.Weapons.Melee;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using System.Linq;
@@ -58,6 +59,11 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private BlindableSystem _blindable = default!;
     [Dependency] private MetaDataSystem _meta = default!;
+
+    public EntProtoId PilotEjectAction = "ActionMechEject";
+    public EntProtoId MechUIOpenAction = "ActionMechOpenUI";
+    public EntProtoId CombatModeToggleAction = "ActionCombatModeToggle";
+    public EntProtoId MechRelayAction = "ActionMechRelay";
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -330,9 +336,6 @@ public abstract partial class SharedAltMechSystem : EntitySystem
             }
         }
 
-        //_actions.AddAction(pilot, ref pilotComp.PilotUiActionEntity, pilotComp.PilotUiAction, mech);
-        //_actions.AddAction(pilot, ref pilotComp.PilotEjectActionEntity, pilotComp.PilotEjectAction, mech);
-
         if (!TryComp<ActionsComponent>(mech.Owner, out var mechActions))
             return;
 
@@ -340,9 +343,9 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         {
             var actionMeta = MetaData(action);
             if (actionMeta.EntityPrototype != null &&
-                actionMeta.EntityPrototype.ID != "ActionCombatModeToggle" &&
-                actionMeta.EntityPrototype.ID != "ActionMechOpenUI" &&
-                actionMeta.EntityPrototype.ID != "ActionMechEject"
+                actionMeta.EntityPrototype.ID != CombatModeToggleAction &&
+                actionMeta.EntityPrototype.ID != MechUIOpenAction &&
+                actionMeta.EntityPrototype.ID != PilotEjectAction
                 )
                 _actions.RemoveAction(action);
         }
@@ -354,10 +357,10 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         {
             var actionMeta = MetaData(action);
 
-            if (!TryComp<ActionComponent>(action, out var actionComp) || actionMeta.EntityPrototype != null && actionMeta.EntityPrototype.ID == "ActionCombatModeToggle")
+            if (!TryComp<ActionComponent>(action, out var actionComp) || actionMeta.EntityPrototype != null && actionMeta.EntityPrototype.ID == CombatModeToggleAction)
                 continue;
 
-            var addedAction = _actions.AddAction(mech.Owner, "ActionMechRelay", mech.Owner);
+            var addedAction = _actions.AddAction(mech.Owner, MechRelayAction, mech.Owner);
 
             if (addedAction is not { Valid: true } addedActionValidated || !TryComp<ActionComponent>(addedActionValidated, out var addedActionComp))
                 continue;
@@ -379,6 +382,9 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
             _actions.SetEvent(addedActionValidated, eventToSet);
         }
+
+        _actions.AddAction(pilot, ref pilotComp.PilotUiActionEntity, pilotComp.PilotUiAction, mech);
+        _actions.AddAction(pilot, ref pilotComp.PilotEjectActionEntity, pilotComp.PilotEjectAction, mech);
     }
 
     /// <summary>
