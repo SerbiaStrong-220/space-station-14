@@ -24,7 +24,8 @@ public sealed partial class AntagonistsListControl : BoxContainer
     public event Action<PlayerInfo?>? OnSelectionChanged;
 
     public Func<PlayerInfo, string, string>? OverrideText;
-
+    public Func<PlayerInfo, string, string>? OverrideText;
+    
     public AntagonistsListControl()
     {
         IoCManager.InjectDependencies(this);
