@@ -56,7 +56,8 @@ public sealed partial class AntagonistsListControl : BoxContainer
 
         if (data is not AntagonistsListData { Info: var selectedAntagonist })
             return;
-
+            return;
+            
         if (args.Event.Function == EngineKeyFunctions.UIClick)
         {
             OnSelectionChanged?.Invoke(selectedAntagonist);
