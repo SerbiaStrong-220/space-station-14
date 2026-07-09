@@ -46,7 +46,7 @@ public sealed partial class MapMigrationSystem_SS220 : EntitySystem
 
     private void OnDoorMapInit(Entity<DoorComponent> entity, ref MapInitEvent _)
     {
-        // this event handler shouldn't effect airlocks
+        // this event handler shouldn't affect airlocks
         if (HasComp<AirlockComponent>(entity))
             return;
 
