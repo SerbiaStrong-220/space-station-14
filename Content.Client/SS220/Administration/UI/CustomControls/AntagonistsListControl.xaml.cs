@@ -34,7 +34,7 @@ public sealed partial class AntagonistsListControl : BoxContainer
         RobustXamlLoader.Load(this);
         AntagonistsListContainer.ItemPressed += AntagonistsListItemPressed;
         AntagonistsListContainer.GenerateItem += GenerateButton;
-        BackgroundPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = new Color(32, 32, 40) };
+        BackgroundPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = PrivateStaticReadOnlyColorWithMeanfullName };
     }
 
     protected override void EnteredTree()
