@@ -23,9 +23,7 @@ public sealed partial class AntagonistsListControl : BoxContainer
 
     public event Action<PlayerInfo?>? OnSelectionChanged;
 
-    public Func<PlayerInfo, string, string>? OverrideText;
-    public Func<PlayerInfo, string, string>? OverrideText;
-    
+    public Func<PlayerInfo, string, string>? TextOverride;
     public AntagonistsListControl()
     {
         IoCManager.InjectDependencies(this);
@@ -56,13 +54,12 @@ public sealed partial class AntagonistsListControl : BoxContainer
 
         if (data is not AntagonistsListData { Info: var selectedAntagonist })
             return;
-            return;
-            
+
         if (args.Event.Function == EngineKeyFunctions.UIClick)
         {
             OnSelectionChanged?.Invoke(selectedAntagonist);
 
-            if (OverrideText != null)
+            if (TextOverride != null)
                 AdminListControlHelper.UpdateButtonLabel(args.Button, GetText(selectedAntagonist));
         }
         else if (args.Event.Function == EngineKeyFunctions.UseSecondary && selectedAntagonist.NetEntity != null)
@@ -91,8 +88,8 @@ public sealed partial class AntagonistsListControl : BoxContainer
     private string GetText(PlayerInfo info)
     {
         var text = $"{info.CharacterName} ({info.Username})";
-        if (OverrideText != null)
-            text = OverrideText.Invoke(info, text);
+        if (TextOverride != null)
+            text = TextOverride.Invoke(info, text);
         return text;
     }
 
