@@ -2,11 +2,9 @@
 
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
-using Content.Shared.SS220.Virology.Behaviors;
 
-namespace Content.Server.SS220.Virology.Behaviors;
+namespace Content.Shared.SS220.Virology.Behaviors;
 
-/// <summary>Applies damage modifier to incoming damage.</summary>
 public sealed class VirusDamageModifierSystem : EntitySystem
 {
     public override void Initialize()

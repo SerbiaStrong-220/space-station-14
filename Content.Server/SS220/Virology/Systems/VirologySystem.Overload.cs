@@ -1,31 +1,19 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Server.Chat.Managers;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.SS220.Virology;
-using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.Virology;
 
-public sealed partial class VirusOverloadRuleSystem : EntitySystem
+public sealed partial class VirologySystem
 {
-    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private MovementSpeedModifierSystem _movement = default!;
     [Dependency] private BlindableSystem _blinding = default!;
-    [Dependency] private IChatManager _chatManager = default!;
 
-    private static readonly TimeSpan Interval = TimeSpan.FromSeconds(1);
-    private TimeSpan _nextUpdate;
-
-    public override void Update(float frameTime)
+    private void TickOverload()
     {
-        if (_timing.CurTime < _nextUpdate)
-            return;
-
-        _nextUpdate = _timing.CurTime + Interval;
-
         var query = EntityQueryEnumerator<VirusHolderComponent>();
         while (query.MoveNext(out var uid, out var holder))
             Evaluate(uid, CountStrains(holder));

@@ -1,20 +1,16 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Server.SS220.Chemistry;
 using Content.Shared.Chemistry.Components;
-using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.SS220.Virology;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.Virology;
 
-public sealed partial class VirusChemistrySystem : EntitySystem
+public sealed partial class VirologySystem
 {
-    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private VirusMutationSystem _mutation = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
 
     private readonly Dictionary<string, VirusMutationPrototype> _mutations = [];
     private readonly Dictionary<string, VirusRevealPrototype> _reveals = [];
@@ -23,38 +19,28 @@ public sealed partial class VirusChemistrySystem : EntitySystem
 
     private bool _reacting;
 
-    public override void Initialize()
+    private void InitializeChemistry()
     {
-        base.Initialize();
-
         BuildTables();
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
-        SubscribeLocalEvent<SolutionComponent, SolutionChangedEvent>(OnSolutionChanged);
-    }
-
-    private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
-    {
-        if (args.WasModified<VirusMutationPrototype>() || args.WasModified<VirusRevealPrototype>()
-            || args.WasModified<VirusSymptomRemovalPrototype>())
-            BuildTables();
+        SubscribeLocalEvent<RefillableSolutionChangedEvent>(OnSolutionChanged);
     }
 
     private void BuildTables()
     {
         _mutations.Clear();
-        foreach (var proto in _prototype.EnumeratePrototypes<VirusMutationPrototype>())
+        foreach (var proto in _proto.EnumeratePrototypes<VirusMutationPrototype>())
             _mutations[proto.Mutagen] = proto;
 
         _reveals.Clear();
-        foreach (var proto in _prototype.EnumeratePrototypes<VirusRevealPrototype>())
+        foreach (var proto in _proto.EnumeratePrototypes<VirusRevealPrototype>())
             _reveals[proto.Reagent] = proto;
 
         _removals.Clear();
-        foreach (var proto in _prototype.EnumeratePrototypes<VirusSymptomRemovalPrototype>())
+        foreach (var proto in _proto.EnumeratePrototypes<VirusSymptomRemovalPrototype>())
             _removals[proto.Reagent] = proto;
     }
 
-    private void OnSolutionChanged(Entity<SolutionComponent> ent, ref SolutionChangedEvent args)
+    private void OnSolutionChanged(ref RefillableSolutionChangedEvent args)
     {
         if (_reacting)
             return;
@@ -65,7 +51,7 @@ public sealed partial class VirusChemistrySystem : EntitySystem
         _reacting = true;
         try
         {
-            React(ent);
+            React(args.Solution);
         }
         finally
         {
@@ -131,7 +117,7 @@ public sealed partial class VirusChemistrySystem : EntitySystem
     private void Mutate(Entity<SolutionComponent> soln, Solution solution, VirusDescriptor virus, ReagentId mutagen, VirusMutationPrototype mutation)
     {
         var mutated = false;
-        while (solution.GetTotalPrototypeQuantity(mutagen.Prototype) >= mutation.Cost && _mutation.TryMutate(virus, mutation))
+        while (solution.GetTotalPrototypeQuantity(mutagen.Prototype) >= mutation.Cost && TryMutate(virus, mutation))
         {
             _solutionContainer.RemoveReagent(soln, mutagen, mutation.Cost);
             mutated = true;
@@ -144,7 +130,7 @@ public sealed partial class VirusChemistrySystem : EntitySystem
     private void Reveal(Entity<SolutionComponent> soln, Solution solution, VirusDescriptor virus, ReagentId reagent, VirusRevealPrototype reveal)
     {
         var revealed = false;
-        while (solution.GetTotalPrototypeQuantity(reagent.Prototype) >= reveal.Amount && _mutation.TryReveal(virus, reveal.Genome))
+        while (solution.GetTotalPrototypeQuantity(reagent.Prototype) >= reveal.Amount && TryReveal(virus, reveal.Genome))
         {
             _solutionContainer.RemoveReagent(soln, reagent, reveal.Amount);
             revealed = true;
@@ -157,7 +143,7 @@ public sealed partial class VirusChemistrySystem : EntitySystem
     private void Remove(Entity<SolutionComponent> soln, Solution solution, VirusDescriptor virus, ReagentId reagent, VirusSymptomRemovalPrototype removal)
     {
         var removed = false;
-        while (solution.GetTotalPrototypeQuantity(reagent.Prototype) >= removal.Amount && _mutation.TryRemoveSymptom(virus))
+        while (solution.GetTotalPrototypeQuantity(reagent.Prototype) >= removal.Amount && TryRemoveSymptom(virus))
         {
             _solutionContainer.RemoveReagent(soln, reagent, removal.Amount);
             removed = true;

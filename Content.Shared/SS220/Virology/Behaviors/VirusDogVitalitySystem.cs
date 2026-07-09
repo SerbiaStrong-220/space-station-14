@@ -3,9 +3,8 @@
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.SS220.Virology.Behaviors;
 
-namespace Content.Server.SS220.Virology.Behaviors;
+namespace Content.Shared.SS220.Virology.Behaviors;
 
 public sealed partial class VirusDogVitalitySystem : EntitySystem
 {
@@ -36,8 +35,8 @@ public sealed partial class VirusDogVitalitySystem : EntitySystem
         if (ent.Comp.Reverting)
             return;
 
-        args.ApplyModifier(MobState.Critical, new MobThresholdsModifier { Multiplier = 0, Flat = ent.Comp.Threshold });
-        args.ApplyModifier(MobState.Dead, new MobThresholdsModifier { Multiplier = 0, Flat = ent.Comp.Threshold + ent.Comp.DeathThresholdOffset });
+        args.ApplyModifier(MobState.Critical, new MobThresholdsModifier { Flat = ent.Comp.Threshold, Compatible = true });
+        args.ApplyModifier(MobState.Dead, new MobThresholdsModifier { Flat = ent.Comp.Threshold + ent.Comp.DeathThresholdOffset, Compatible = true });
     }
 
     private void Refresh(Entity<VirusDogVitalityComponent> ent)

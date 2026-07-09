@@ -115,13 +115,13 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
         // ss220 add reagents to health analyzer end
 
         // SS220-Start virus diagnostics
-        DiseasesContainer.DisposeAllChildren();
-        if (state.Diseases != null)
+        VirusesContainer.DisposeAllChildren();
+        if (state.Viruses != null)
         {
-            foreach (string line in state.Diseases)
-                DiseasesContainer.AddChild(new Label { Text = line });
+            foreach (string line in state.Viruses)
+                VirusesContainer.AddChild(new Label { Text = line });
         }
-        DiseasesSection.Visible = DiseasesContainer.ChildCount > 0;
+        VirusesSection.Visible = VirusesContainer.ChildCount > 0;
         // SS220-End
 
         NoPatientDataText.Visible = false;

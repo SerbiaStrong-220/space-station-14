@@ -1,68 +1,43 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Server.Administration.Logs;
 using Content.Shared.Body;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry.Components;
-using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.SS220.Virology;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.Virology;
 
-public sealed partial class VirusInfectionSystem : EntitySystem
+public sealed partial class VirologySystem
 {
-    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private VirologySystem _virology = default!;
     [Dependency] private MobStateSystem _mobState = default!;
-    [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
-    [Dependency] private IAdminLogManager _adminLog = default!;
 
-    private static readonly TimeSpan Interval = TimeSpan.FromSeconds(1);
     private static readonly TimeSpan SuppressDuration = TimeSpan.FromMinutes(15);
-    private static readonly FixedPoint2 MinAmount = 5;
-    private static readonly FixedPoint2 VaccineAmount = 5;
+    private static readonly FixedPoint2 MinCureReagentAmount = 5;
+    private static readonly FixedPoint2 MinVaccineAmount = 5;
     private readonly List<VirusBroadReagentPrototype> _broadReagents = [];
     private readonly Dictionary<ReagentId, FixedPoint2> _vaccineTotals = [];
     private readonly List<Solution> _bodySolutions = [];
 
-    private TimeSpan _nextUpdate;
-
-    public override void Initialize()
+    private void InitializeInfection()
     {
-        base.Initialize();
-
         BuildBroadReagents();
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
-    }
-
-    private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
-    {
-        if (args.WasModified<VirusBroadReagentPrototype>())
-            BuildBroadReagents();
     }
 
     private void BuildBroadReagents()
     {
         _broadReagents.Clear();
-        foreach (var proto in _prototype.EnumeratePrototypes<VirusBroadReagentPrototype>())
+        foreach (var proto in _proto.EnumeratePrototypes<VirusBroadReagentPrototype>())
             _broadReagents.Add(proto);
     }
 
-    public override void Update(float frameTime)
+    private void TickInfection()
     {
-        if (_timing.CurTime < _nextUpdate)
-            return;
-
-        _nextUpdate = _timing.CurTime + Interval;
-
         var query = EntityQueryEnumerator<VirusSusceptibleComponent, BloodstreamComponent>();
         while (query.MoveNext(out var uid, out _, out var blood))
         {
@@ -93,7 +68,7 @@ public sealed partial class VirusInfectionSystem : EntitySystem
             return;
 
         foreach (var quantity in new List<ReagentQuantity>(blood.Contents))
-            _virology.InfectFromReagent(uid, quantity.Reagent, bloodborne: true);
+            InfectFromReagent(uid, quantity.Reagent, bloodborne: true);
     }
 
     private void ApplyBroadReagent(Entity<VirusHolderComponent> ent, VirusBroadReagentPrototype broad)
@@ -101,18 +76,18 @@ public sealed partial class VirusInfectionSystem : EntitySystem
         if (ReagentInBody(broad.Reagent) < broad.Amount)
             return;
 
-        foreach (var virus in _virology.GetStrains(ent))
+        foreach (var virus in GetStrains(ent))
         {
             if (broad.Action == VirusBroadAction.Cure)
-                _virology.RemoveVirus(virus);
+                RemoveVirus(virus);
             else if (virus.Comp.SuppressedUntil == null)
-                _virology.SuppressVirus(virus, SuppressDuration);
+                SuppressVirus(virus, SuppressDuration);
         }
     }
 
     private void SuppressCured(Entity<VirusHolderComponent> ent)
     {
-        foreach (var virus in _virology.GetStrains(ent))
+        foreach (var virus in GetStrains(ent))
         {
             var comp = virus.Comp;
             if (comp.SuppressedUntil != null)
@@ -124,7 +99,7 @@ public sealed partial class VirusInfectionSystem : EntitySystem
             var present = 0;
             foreach (var reagent in cure.Reagents)
             {
-                if (ReagentInBody(reagent) >= MinAmount)
+                if (ReagentInBody(reagent) >= MinCureReagentAmount)
                     present++;
             }
 
@@ -134,7 +109,7 @@ public sealed partial class VirusInfectionSystem : EntitySystem
                 : present > 0;
 
             if (cured)
-                _virology.SuppressVirus(virus, SuppressDuration);
+                SuppressVirus(virus, SuppressDuration);
         }
     }
 
@@ -174,21 +149,21 @@ public sealed partial class VirusInfectionSystem : EntitySystem
 
         foreach (var (reagent, total) in _vaccineTotals)
         {
-            if (total < VaccineAmount || VirusVaccineData.From(reagent) is not { Strains.Count: > 0 } vaccine)
+            if (total < MinVaccineAmount || VirusVaccineData.From(reagent) is not { Strains.Count: > 0 } vaccine)
                 continue;
 
             foreach (var strain in vaccine.Strains)
             {
-                if (_virology.AddImmunity(ent.Owner, strain))
+                if (AddImmunity(ent.Owner, strain))
                 {
                     _adminLog.Add(LogType.Virology, LogImpact.Medium,
                         $"{ToPrettyString(ent.Owner):target} was vaccinated against strain {strain}");
                 }
 
-                foreach (var virus in _virology.GetStrains(ent))
+                foreach (var virus in GetStrains(ent))
                 {
-                    if (_virology.GetIdentity(virus.Comp) == strain)
-                        _virology.RemoveVirus(virus);
+                    if (GetIdentity(virus.Comp) == strain)
+                        RemoveVirus(virus);
                 }
             }
         }

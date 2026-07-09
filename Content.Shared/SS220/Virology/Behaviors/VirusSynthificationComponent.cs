@@ -44,14 +44,14 @@ public sealed partial class VirusSynthificationComponent : Component
     [ViewVariables]
     public ProtoId<SiliconLawsetPrototype>? RolledLawset;
 
-    // Original-language snapshot, so we can, restore on cure.
-
     [ViewVariables]
-    public bool Snapshotted;
+    public bool AddedBinary;
 
+    /// <summary>Languages we removed, re-added on cure.</summary>
     [ViewVariables]
-    public HashSet<LanguageDefinition> OriginalLanguages = [];
+    public HashSet<LanguageDefinition> RemovedLanguages = [];
 
+    /// <summary>Language selected before we took over, re-selected on cure if still available.</summary>
     [ViewVariables]
     public ProtoId<LanguagePrototype>? OriginalSelected;
 }

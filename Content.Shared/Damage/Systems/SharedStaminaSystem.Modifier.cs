@@ -40,4 +40,18 @@ public partial class SharedStaminaSystem
 
         entity.Comp.CritThreshold = ev.ThresholdValue * ev.Modifier;
     }
+
+    // SS220-Start
+    public void RefreshStaminaDecay(Entity<StaminaComponent?> entity)
+    {
+        if (!Resolve(entity, ref entity.Comp, false))
+            return;
+
+        var ev = new RefreshStaminaDecayEvent();
+        RaiseLocalEvent(entity, ref ev);
+
+        entity.Comp.DecayModifier = ev.Modifier;
+        Dirty(entity, entity.Comp);
+    }
+    // SS220-End
 }

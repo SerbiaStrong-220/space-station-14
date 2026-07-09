@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Hands;
 using Content.Shared.SS220.Virology.Behaviors;
 using Content.Shared.Standing;
 using Robust.Shared.Random;
@@ -15,6 +16,26 @@ public sealed partial class VirusNoodleArmsSystem : EntitySystem
     private static readonly TimeSpan UpdateInterval = TimeSpan.FromSeconds(1);
     private TimeSpan _nextUpdate;
 
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<VirusNoodleArmsComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<VirusNoodleArmsComponent, DidEquipHandEvent>(OnDidEquip);
+    }
+
+    private void OnStartup(Entity<VirusNoodleArmsComponent> ent, ref ComponentStartup args)
+    {
+        if (ent.Comp.AlwaysDrop)
+            DropAll(ent.Owner);
+    }
+
+    private void OnDidEquip(Entity<VirusNoodleArmsComponent> ent, ref DidEquipHandEvent args)
+    {
+        if (ent.Comp.AlwaysDrop)
+            DropAll(ent.Owner);
+    }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -28,10 +49,7 @@ public sealed partial class VirusNoodleArmsSystem : EntitySystem
         while (query.MoveNext(out var uid, out var comp))
         {
             if (comp.AlwaysDrop)
-            {
-                DropAll(uid);
                 continue;
-            }
 
             comp.NextSpasm ??= _timing.CurTime + _random.Next(comp.MinInterval, comp.MaxInterval);
             if (_timing.CurTime >= comp.NextSpasm)

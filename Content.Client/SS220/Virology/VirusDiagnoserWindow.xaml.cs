@@ -16,8 +16,7 @@ public sealed partial class VirusDiagnoserWindow : DefaultWindow
 
     private TimeSpan? _operationEnd;
     private TimeSpan _operationDuration;
-    private bool _hasResult;
-    private bool _scanning;
+    private VirologyMachineStatus _status;
 
     public VirusDiagnoserWindow()
     {
@@ -33,48 +32,47 @@ public sealed partial class VirusDiagnoserWindow : DefaultWindow
 
     private float ComputeProgress()
     {
-        if (_scanning && _operationEnd is { } end && _operationDuration > TimeSpan.Zero)
+        if (_status == VirologyMachineStatus.Scanning && _operationEnd is { } end && _operationDuration > TimeSpan.Zero)
         {
             var remaining = (end - _timing.CurTime) / _operationDuration;
             return Math.Clamp(1f - (float)remaining, 0f, 1f);
         }
 
-        return _hasResult ? 1f : 0f;
+        return _status is VirologyMachineStatus.Printing or VirologyMachineStatus.Result ? 1f : 0f;
     }
 
     public void UpdateState(VirusDiagnoserBoundUserInterfaceState state)
     {
-        var busy = state.Scanning || state.Printing;
-        ScanButton.Disabled = !state.HasSample || busy;
-
         _operationEnd = state.OperationEnd;
         _operationDuration = state.OperationDuration;
-        _hasResult = state.HasResult;
-        _scanning = state.Scanning;
+        _status = state.Status;
         ScanProgress.Progress = ComputeProgress();
 
         StationLabel.Text = state.StationName is { } station
             ? Loc.GetString("pathology-console-station", ("name", station))
             : Loc.GetString("pathology-console-station-unknown");
 
-        StatusLabel.Text = !state.HasSample
-            ? Loc.GetString("disease-diagnoser-no-sample")
-            : state.Scanning
-                ? Loc.GetString("disease-diagnoser-scanning")
-                : state.Printing
-                    ? Loc.GetString("disease-diagnoser-printing")
-                    : state.HasResult
-                        ? Loc.GetString("disease-diagnoser-result")
-                        : Loc.GetString("disease-diagnoser-ready");
+        StatusLabel.Text = state.Status switch
+        {
+            VirologyMachineStatus.NoSample => Loc.GetString("disease-diagnoser-no-sample"),
+            VirologyMachineStatus.Scanning => Loc.GetString("disease-diagnoser-scanning"),
+            VirologyMachineStatus.Printing => Loc.GetString("disease-diagnoser-printing"),
+            VirologyMachineStatus.Result => Loc.GetString("disease-diagnoser-result"),
+            _ => Loc.GetString("disease-diagnoser-ready"),
+        };
 
         ResultsContainer.DisposeAllChildren();
         foreach (var virus in state.Viruses)
             ResultsContainer.AddChild(BuildVirusBlock(virus));
 
         BufferLabel.Text = Loc.GetString("disease-diagnoser-buffer", ("amount", state.BufferMutagen));
-        TransferButton.Disabled = !state.HasSample || busy;
-        CopyButton.Disabled = !state.HasSample || busy;
-        PrintButton.Disabled = !state.HasResult || busy;
+
+        var idleWithSample = state.Status is VirologyMachineStatus.Ready or VirologyMachineStatus.Result;
+        var hasResult = state.Status == VirologyMachineStatus.Result;
+        ScanButton.Disabled = !idleWithSample;
+        TransferButton.Disabled = !idleWithSample;
+        CopyButton.Disabled = !idleWithSample;
+        PrintButton.Disabled = !hasResult;
     }
 
     private static BoxContainer BuildVirusBlock(VirusDiagnoserResult virus)

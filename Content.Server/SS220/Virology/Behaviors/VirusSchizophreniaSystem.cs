@@ -24,7 +24,7 @@ public sealed partial class VirusSchizophreniaSystem : EntitySystem
 
     private void OnStartup(Entity<VirusSchizophreniaComponent> ent, ref ComponentStartup args)
     {
-        ent.Comp.NextMessage = _timing.CurTime + _random.Next(ent.Comp.MinInterval, ent.Comp.MaxInterval);
+        ent.Comp.NextMessageTime = _timing.CurTime + _random.Next(ent.Comp.MinInterval, ent.Comp.MaxInterval);
     }
 
     public override void Update(float frameTime)
@@ -35,10 +35,10 @@ public sealed partial class VirusSchizophreniaSystem : EntitySystem
         var query = EntityQueryEnumerator<VirusSchizophreniaComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
-            if (now < comp.NextMessage)
+            if (now < comp.NextMessageTime)
                 continue;
 
-            comp.NextMessage = now + _random.Next(comp.MinInterval, comp.MaxInterval);
+            comp.NextMessageTime = now + _random.Next(comp.MinInterval, comp.MaxInterval);
 
             if (!_proto.Resolve(comp.Pool, out var pool) || pool.Messages.Count == 0)
                 continue;

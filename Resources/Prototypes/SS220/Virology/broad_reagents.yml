@@ -1,5 +1,5 @@
 # Station-wide antivirals with no recipe. While metabolising in a living carrier they act on EVERY strain it
-# holds: ganoderma clears them all, birfungin drives them dormant. Handled by VirusInfectionSystem.
+# holds: ganoderma clears them all, birfungin drives them dormant. Handled by VirologySystem (Infection).
 - type: virusBroadReagent
   id: GanodermaCure
   reagent: GanodermaExtract

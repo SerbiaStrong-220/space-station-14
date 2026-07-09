@@ -20,7 +20,7 @@ public sealed partial class VirusSchizophreniaComponent : Component
     public TimeSpan MaxInterval = TimeSpan.FromSeconds(55);
 
     [ViewVariables]
-    public TimeSpan NextMessage;
+    public TimeSpan NextMessageTime;
 
     /// <summary>No same line picked twice in a row.</summary>
     [ViewVariables]

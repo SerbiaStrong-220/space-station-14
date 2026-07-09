@@ -40,8 +40,7 @@ public sealed partial class HealthAnalyzerPrintSystem : EntitySystem
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private VirologySystem _virology = default!;
 
-    // Disease lines a basic health analyzer will show on scan. Used by both the live UI and the print.
-    public List<string> GetDiseaseLines(EntityUid target)
+    public List<string> GetVirusLines(EntityUid target)
     {
         return _virology.GetAnalyzerVirusLines(target);
     }
@@ -196,12 +195,12 @@ public sealed partial class HealthAnalyzerPrintSystem : EntitySystem
             builder.AppendLine(Loc.GetString("health-analyzer-report-none"));
 
         builder.AppendLine();
-        builder.AppendLine(Loc.GetString("health-analyzer-report-section-diseases"));
-        var diseaseLines = GetDiseaseLines(target);
-        if (diseaseLines.Count == 0)
+        builder.AppendLine(Loc.GetString("health-analyzer-report-section-viruses"));
+        var virusLines = GetVirusLines(target);
+        if (virusLines.Count == 0)
             builder.AppendLine(Loc.GetString("health-analyzer-report-none"));
         else
-            foreach (var line in diseaseLines)
+            foreach (var line in virusLines)
                 builder.AppendLine(line);
 
         return builder.ToString();

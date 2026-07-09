@@ -45,25 +45,18 @@ public sealed class VaccinatorVirusResult
 
 [Serializable, NetSerializable]
 public sealed class VaccinatorBoundUserInterfaceState(
-    bool hasSample,
-    bool scanning,
-    bool printing,
+    VirologyMachineStatus status,
     TimeSpan? operationEnd,
     TimeSpan operationDuration,
-    bool hasResult,
     List<VaccinatorVirusResult> viruses,
     float bufferTricordrazine,
     string? stationName) : BoundUserInterfaceState
 {
-    public readonly bool HasSample = hasSample;
-    public readonly bool Scanning = scanning;
-    public readonly bool Printing = printing;
+    public readonly VirologyMachineStatus Status = status;
 
     /// <summary>When running scan/print finishes. Client animates bar off this.</summary>
     public readonly TimeSpan? OperationEnd = operationEnd;
     public readonly TimeSpan OperationDuration = operationDuration;
-
-    public readonly bool HasResult = hasResult;
 
     /// <summary>One block per virus found in sample.</summary>
     public readonly List<VaccinatorVirusResult> Viruses = viruses;

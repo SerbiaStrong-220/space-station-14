@@ -822,6 +822,9 @@
   stages:
   # Stage 1
   - components:
+    - type: KeenHearing
+      visionRadius: 5
+      highSensitiveVisionRadius: 2
     - type: VirusSharpHearing
       forceKeen: true
     detection:
@@ -838,6 +841,9 @@
   # Stage 2
   - progressMessage: pathology-sharp-hearing-progress-2
     components:
+    - type: KeenHearing
+      visionRadius: 5
+      highSensitiveVisionRadius: 2
     - type: VirusSharpHearing
       forceKeen: true
     detection:

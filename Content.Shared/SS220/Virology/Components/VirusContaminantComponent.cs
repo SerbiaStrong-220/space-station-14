@@ -7,13 +7,16 @@ public sealed partial class VirusContaminantComponent : Component
 {
     /// <summary>Strains carried on this item.</summary>
     [ViewVariables]
-    public List<VirusDescriptor> Viruses = [];
+    public List<VirusContaminant> Viruses = [];
 
-    /// <summary>How long a strain survives on the item.</summary>
+    /// <summary>How long a strain survives on the item after it lands or refreshed.</summary>
     [DataField]
     public TimeSpan Duration = TimeSpan.FromSeconds(60);
+}
 
-    /// <summary>When the contamination clears.</summary>
-    [ViewVariables]
+/// <summary>One strain sitting on a contaminated item, with its own clear-out deadline.</summary>
+public sealed class VirusContaminant
+{
+    public VirusDescriptor Descriptor = default!;
     public TimeSpan ExpiresAt;
 }

@@ -30,7 +30,7 @@ public struct HealthAnalyzerUiState
     public bool? Bleeding;
     public bool? Unrevivable;
     public int? CounterDeath; //SS220 LimitationRevive
-    public List<string>? Diseases; // SS220 virus diagnostics
+    public List<string>? Viruses; // SS220 virus diagnostics
 
     public HealthAnalyzerUiState() {}
 

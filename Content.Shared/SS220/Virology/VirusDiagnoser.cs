@@ -40,22 +40,16 @@ public sealed class VirusDiagnoserResult
 
 [Serializable, NetSerializable]
 public sealed class VirusDiagnoserBoundUserInterfaceState(
-    bool hasSample,
-    bool scanning,
-    bool printing,
+    VirologyMachineStatus status,
     TimeSpan? operationEnd,
     TimeSpan operationDuration,
-    bool hasResult,
     List<VirusDiagnoserResult> viruses,
     float bufferMutagen,
     string? stationName) : BoundUserInterfaceState
 {
-    public readonly bool HasSample = hasSample;
-    public readonly bool Scanning = scanning;
-    public readonly bool Printing = printing;
+    public readonly VirologyMachineStatus Status = status;
     public readonly TimeSpan? OperationEnd = operationEnd;
     public readonly TimeSpan OperationDuration = operationDuration;
-    public readonly bool HasResult = hasResult;
     public readonly List<VirusDiagnoserResult> Viruses = viruses;
     public readonly float BufferMutagen = bufferMutagen;
     public readonly string? StationName = stationName;

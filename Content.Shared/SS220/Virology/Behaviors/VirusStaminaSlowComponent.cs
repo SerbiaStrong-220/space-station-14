@@ -9,10 +9,6 @@ public sealed partial class VirusStaminaSlowComponent : Component
     [DataField]
     public float SlowFraction = 0.2f;
 
-    /// <summary>Stamina decay before we slowed it, will be restored.</summary>
     [ViewVariables]
-    public float OriginalDecay;
-
-    [ViewVariables]
-    public bool Applied;
+    public bool Reverting;
 }

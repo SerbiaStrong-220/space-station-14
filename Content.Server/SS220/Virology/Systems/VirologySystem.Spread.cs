@@ -6,36 +6,25 @@ using Content.Shared.Chemistry;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.SS220.Virology;
 using Robust.Shared.Random;
-using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.Virology;
 
-public sealed partial class VirusSpreadSystem : EntitySystem
+public sealed partial class VirologySystem
 {
-    [Dependency] private VirologySystem _virology = default!;
-    [Dependency] private VirusContaminationSystem _contamination = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private AtmosphereSystem _atmos = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedInteractionSystem _interaction = default!;
-    [Dependency] private MobStateSystem _mobState = default!;
-    [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private IGameTiming _timing = default!;
 
-    private static readonly TimeSpan ProximityInterval = TimeSpan.FromSeconds(1);
-    private TimeSpan _nextScan;
     private const float MinAirbornePressure = Atmospherics.HazardLowPressure;
 
     private readonly List<(EntityUid Uid, VirusHolderComponent Holder)> _holderBuf = new();
 
-    public override void Initialize()
+    private void InitializeSpread()
     {
-        base.Initialize();
-
         SubscribeLocalEvent<VirusSusceptibleComponent, ContactInteractionEvent>(OnContact);
         SubscribeLocalEvent<VirusSusceptibleComponent, ReactionEntityEvent>(OnReaction);
         SubscribeLocalEvent<VirusProtectionComponent, InventoryRelayedEvent<VirusAddAttempt>>(OnProtection);
@@ -50,18 +39,11 @@ public sealed partial class VirusSpreadSystem : EntitySystem
         if (IsVectorBlocked(ent.Owner, VirusTransmissionVector.Splash))
             return;
 
-        _virology.InfectFromReagent(ent.Owner, args.ReagentQuantity.Reagent);
+        InfectFromReagent(ent.Owner, args.ReagentQuantity.Reagent);
     }
 
-    public override void Update(float frameTime)
+    private void TickSpread()
     {
-        base.Update(frameTime);
-
-        if (_timing.CurTime < _nextScan)
-            return;
-
-        _nextScan = _timing.CurTime + ProximityInterval;
-
         _holderBuf.Clear();
         var query = EntityQueryEnumerator<VirusHolderComponent>();
         while (query.MoveNext(out var uid, out var holder))
@@ -89,12 +71,12 @@ public sealed partial class VirusSpreadSystem : EntitySystem
 
         var coords = _transform.GetMapCoordinates(source);
 
-        foreach (var strain in _virology.EnumerateStrains(holder))
+        foreach (var strain in EnumerateStrains(holder))
         {
             if (!TryGetActiveTransmission(strain.Comp, out var transmission) || transmission.ProximityChance <= 0f)
                 continue;
 
-            var descriptor = _virology.ToDescriptor(strain);
+            var descriptor = ToDescriptor(strain);
 
             foreach (var (target, _) in _lookup.GetEntitiesInRange<VirusSusceptibleComponent>(coords, transmission.ProximityRange))
             {
@@ -110,7 +92,7 @@ public sealed partial class VirusSpreadSystem : EntitySystem
                 if (IsVectorBlocked(target, VirusTransmissionVector.Proximity))
                     continue;
 
-                _virology.AddVirus(target, descriptor.Clone());
+                AddVirus(target, descriptor.Clone());
             }
 
             // airborne strains settle on nearby food/drink
@@ -118,7 +100,7 @@ public sealed partial class VirusSpreadSystem : EntitySystem
             {
                 if (_random.Prob(transmission.ProximityChance)
                     && _interaction.InRangeUnobstructed(source, food, transmission.ProximityRange))
-                    _contamination.Contaminate(food, descriptor);
+                    Contaminate(food, descriptor);
             }
         }
     }
@@ -138,10 +120,10 @@ public sealed partial class VirusSpreadSystem : EntitySystem
         if (TryComp<VirusHolderComponent>(ent, out var selfHolder)
             && !IsVectorBlocked(ent.Owner, VirusTransmissionVector.Contact))
         {
-            foreach (var strain in _virology.EnumerateStrains(selfHolder))
+            foreach (var strain in EnumerateStrains(selfHolder))
             {
                 if (TryGetActiveTransmission(strain.Comp, out var transmission) && transmission.ContactChance > 0f)
-                    _contamination.Contaminate(args.Other, _virology.ToDescriptor(strain));
+                    Contaminate(args.Other, ToDescriptor(strain));
             }
         }
 
@@ -149,10 +131,11 @@ public sealed partial class VirusSpreadSystem : EntitySystem
         if (TryComp<VirusContaminantComponent>(args.Other, out var contaminant)
             && !IsVectorBlocked(ent.Owner, VirusTransmissionVector.Contact))
         {
-            foreach (var descriptor in contaminant.Viruses)
+            foreach (var strain in contaminant.Viruses)
             {
+                var descriptor = strain.Descriptor;
                 if (descriptor.Transmission is { ContactChance: > 0f } transmission && _random.Prob(transmission.ContactChance))
-                    _virology.AddVirus(ent.Owner, descriptor.Clone());
+                    AddVirus(ent.Owner, descriptor.Clone());
             }
         }
     }
@@ -163,20 +146,20 @@ public sealed partial class VirusSpreadSystem : EntitySystem
             || IsVectorBlocked(target, VirusTransmissionVector.Contact))
             return;
 
-        foreach (var strain in _virology.EnumerateStrains(source.Comp))
+        foreach (var strain in EnumerateStrains(source.Comp))
         {
             if (!TryGetActiveTransmission(strain.Comp, out var transmission) || transmission.ContactChance <= 0f)
                 continue;
 
             if (_random.Prob(transmission.ContactChance))
-                _virology.AddVirus(target, _virology.ToDescriptor(strain));
+                AddVirus(target, ToDescriptor(strain));
         }
     }
 
     private bool TryGetActiveTransmission(VirusComponent comp, out VirusTransmission transmission)
     {
         transmission = default!;
-        if (comp.SuppressedUntil != null || _virology.IsBloodOnly(comp) || comp.Transmission is not { } profile)
+        if (comp.SuppressedUntil != null || IsBloodOnly(comp) || comp.Transmission is not { } profile)
             return false;
 
         transmission = profile;

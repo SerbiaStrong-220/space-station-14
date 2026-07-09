@@ -5,7 +5,7 @@ namespace Content.Shared.SS220.Virology.Behaviors;
 [RegisterComponent]
 public sealed partial class VirusNoodleArmsComponent : Component
 {
-    /// <summary>If true, drops held items every update(1s).</summary>
+    /// <summary>If true, anything held or picked up drops immediately.</summary>
     [DataField]
     public bool AlwaysDrop;
 

@@ -4,6 +4,7 @@ using Content.Shared.Body;
 using Content.Shared.Body.Components;
 using Content.Shared.Metabolism;
 using Content.Shared.SS220.Virology.Behaviors;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.Virology.Behaviors;
 
@@ -50,12 +51,26 @@ public sealed partial class BreathInversionSystem : EntitySystem
             || metab.MetabolizerTypes is not { } types)
             return;
 
-        if (!inv.Original.TryAdd(lung.Owner, [.. types]))
+        var inverted = new HashSet<ProtoId<MetabolizerTypePrototype>>(types.Count);
+        var changed = false;
+        foreach (var type in types)
+        {
+            if (inv.InvertTo.TryGetValue(type, out var target))
+            {
+                inverted.Add(target);
+                changed = true;
+            }
+            else
+            {
+                inverted.Add(type);
+            }
+        }
+
+        if (!changed || !inv.Original.TryAdd(lung.Owner, [.. types]))
             return;
 
-        var invertToOxygen = types.Overlaps(inv.NitrogenBreathers);
         types.Clear();
-        types.Add(invertToOxygen ? inv.OxygenBreatherType : inv.NitrogenBreatherType);
+        types.UnionWith(inverted);
         Dirty(lung.Owner, metab);
     }
 

@@ -2,26 +2,18 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Server.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.SS220.Virology;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.Virology;
 
-public sealed partial class VirusMutationSystem : EntitySystem
+public sealed partial class VirologySystem
 {
-    [Dependency] private VirologySystem _virology = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
-    [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IAdminLogManager _adminLog = default!;
-
     public bool TryMutate(Entity<VirusComponent> virus, VirusMutationPrototype mutation)
     {
-        if (virus.Comp.IsSupervirus || virus.Comp.Symptoms.Count >= VirologySystem.MaxSymptoms)
+        if (virus.Comp.IsSupervirus || virus.Comp.Symptoms.Count >= MaxSymptoms)
             return false;
 
         if (!TryPickSymptom(mutation.Pool, virus.Comp.Genome, virus.Comp.Symptoms.Keys, out var picked))
@@ -31,27 +23,27 @@ public sealed partial class VirusMutationSystem : EntitySystem
         {
             StageStartTime = _timing.CurTime,
             LastEmote = _timing.CurTime,
-            Accelerant = _virology.RollAccelerant(VirologySystem.CollectAccelerants(virus.Comp)),
+            Accelerant = RollAccelerant(CollectAccelerants(virus.Comp)),
         };
-        _virology.ApplyStage(virus, picked.Value, -1, 0);
+        ApplyStage(virus, picked.Value, -1, 0);
         virus.Comp.Source = null;
         virus.Comp.Name = GenerateName();
         virus.Comp.CachedIdentity = null; // symptom set changed — force identity recompute
         Dirty(virus);
-        _virology.RaiseContentsChanged(virus.Comp.Carrier);
+        RaiseContentsChanged(virus.Comp.Carrier);
         return true;
     }
 
     public bool TryMutate(VirusDescriptor descriptor, VirusMutationPrototype mutation)
     {
-        if (descriptor.IsSupervirus || descriptor.Symptoms.Count >= VirologySystem.MaxSymptoms)
+        if (descriptor.IsSupervirus || descriptor.Symptoms.Count >= MaxSymptoms)
             return false;
 
         if (!TryPickSymptom(mutation.Pool, descriptor.Genome, descriptor.Symptoms.Select(s => s.Symptom), out var picked))
             return false;
 
-        var used = VirologySystem.CollectAccelerants(descriptor);
-        descriptor.Symptoms.Add(new VirusSymptomSnapshot { Symptom = picked.Value, Accelerant = _virology.RollAccelerant(used) });
+        var used = CollectAccelerants(descriptor);
+        descriptor.Symptoms.Add(new VirusSymptomSnapshot { Symptom = picked.Value, Accelerant = RollAccelerant(used) });
         descriptor.Source = null;
         descriptor.Name = GenerateName();
         return true;
@@ -68,7 +60,7 @@ public sealed partial class VirusMutationSystem : EntitySystem
 
         virus.Comp.Symptoms[_random.Pick(hidden)].Revealed = true;
         Dirty(virus);
-        _virology.RaiseContentsChanged(virus.Comp.Carrier);
+        RaiseContentsChanged(virus.Comp.Carrier);
         return true;
     }
 
@@ -91,11 +83,11 @@ public sealed partial class VirusMutationSystem : EntitySystem
             return false;
 
         var pick = _random.Pick(virus.Comp.Symptoms.Keys.ToList());
-        _virology.ApplyStage(virus, pick, virus.Comp.Symptoms[pick].Stage, -1);
+        ApplyStage(virus, pick, virus.Comp.Symptoms[pick].Stage, -1);
         virus.Comp.Symptoms.Remove(pick);
         virus.Comp.CachedIdentity = null; // symptom set changed — force identity recompute
         Dirty(virus);
-        _virology.RaiseContentsChanged(virus.Comp.Carrier);
+        RaiseContentsChanged(virus.Comp.Carrier);
         return true;
     }
 
@@ -115,10 +107,10 @@ public sealed partial class VirusMutationSystem : EntitySystem
             return false;
 
         var added = false;
-        var used = VirologySystem.CollectAccelerants(target.Comp);
+        var used = CollectAccelerants(target.Comp);
         foreach (var snapshot in incoming.Symptoms)
         {
-            if (target.Comp.Symptoms.Count >= VirologySystem.MaxSupervirusSymptoms)
+            if (target.Comp.Symptoms.Count >= MaxSupervirusSymptoms)
                 break;
 
             if (target.Comp.Symptoms.ContainsKey(snapshot.Symptom))
@@ -127,7 +119,7 @@ public sealed partial class VirusMutationSystem : EntitySystem
             // keep accelerant unless its a double
             var accelerant = snapshot.Accelerant is { } incoming2 && !used.Contains(incoming2)
                 ? snapshot.Accelerant
-                : _virology.RollAccelerant(used);
+                : RollAccelerant(used);
             if (accelerant is { } addedAccelerant)
                 used.Add(addedAccelerant);
 
@@ -138,7 +130,7 @@ public sealed partial class VirusMutationSystem : EntitySystem
                 LastEmote = _timing.CurTime,
                 Accelerant = accelerant,
             };
-            _virology.ApplyStage(target, snapshot.Symptom, -1, snapshot.Stage);
+            ApplyStage(target, snapshot.Symptom, -1, snapshot.Stage);
             added = true;
         }
 
@@ -148,14 +140,14 @@ public sealed partial class VirusMutationSystem : EntitySystem
         target.Comp.IsSupervirus = true;
         target.Comp.Source = null;
         target.Comp.Name = GenerateName();
-        target.Comp.Cure = _virology.RollCure(VirologySystem.SupervirusCureCount);
+        target.Comp.Cure = RollCure(SupervirusCureCount);
         target.Comp.Transmission = MergeTransmission(target.Comp.Transmission, incoming.Transmission);
         target.Comp.CachedIdentity = null;
         Dirty(target);
-        _virology.RaiseContentsChanged(target.Comp.Carrier);
+        RaiseContentsChanged(target.Comp.Carrier);
 
         _adminLog.Add(LogType.Virology, LogImpact.Medium,
-            $"{ToPrettyString(target.Comp.Carrier):target} strains merged into supervirus {VirologySystem.DescribeVirus(target.Comp)}");
+            $"{ToPrettyString(target.Comp.Carrier):target} strains merged into supervirus {DescribeVirus(target.Comp)}");
         return true;
     }
 
@@ -204,5 +196,4 @@ public sealed partial class VirusMutationSystem : EntitySystem
             ProximityRange = MathF.Max(a.ProximityRange, b.ProximityRange),
         };
     }
-
 }

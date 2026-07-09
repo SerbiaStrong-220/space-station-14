@@ -288,9 +288,9 @@ public sealed class HealthAnalyzerSystem : EntitySystem
             counterDeath, //SS220 LimitationRevive
             healthAnalyzerComp?.CanPrint ?? false // SS220-health-analyzer-report
         );
-        // SS220-Start
-        uiState.Diseases = _healthAnalyzerPrint.GetDiseaseLines(entity);
+        // SS220 Virology start
+        uiState.Viruses = _healthAnalyzerPrint.GetVirusLines(entity);
         return uiState;
-        // SS220-End
+        // SS220 Virology end
     }
 }

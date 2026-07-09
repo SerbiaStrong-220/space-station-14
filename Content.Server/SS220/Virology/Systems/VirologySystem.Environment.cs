@@ -9,16 +9,13 @@ using Robust.Shared.Random;
 
 namespace Content.Server.SS220.Virology;
 
-public sealed partial class VirusEnvironmentEffectSystem : EntitySystem
+public sealed partial class VirologySystem
 {
     [Dependency] private TemperatureSystem _temperature = default!;
     [Dependency] private FlammableSystem _flammable = default!;
-    [Dependency] private IRobustRandom _random = default!;
 
-    public override void Initialize()
+    private void InitializeEnvironment()
     {
-        base.Initialize();
-
         SubscribeLocalEvent<TemperatureComponent, VirusTemperatureEffectEvent>(OnTemperature);
         SubscribeLocalEvent<FlammableComponent, VirusIgniteEffectEvent>(OnIgnite);
     }

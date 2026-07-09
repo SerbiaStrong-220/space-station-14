@@ -13,20 +13,21 @@ public sealed partial class AdvanceSymptomsCommand : IConsoleCommand
     [Dependency] private EntityManager _entityManager = default!;
 
     public string Command => "advancesymptoms";
-    public string Description => "Force-advances every active pathology and virus symptom in the target by one stage (run again to push further).";
-    public string Help => "advancesymptoms <targetNetEntity>";
+    public string Description => Loc.GetString("advancesymptoms-command-description");
+    public string Help => Loc.GetString("advancesymptoms-command-help");
 
     public void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         if (args.Length != 1)
         {
-            shell.WriteLine("Expected 1 argument");
+            shell.WriteLine(Loc.GetString("shell-wrong-arguments-number-need-specific",
+                ("properAmount", 1), ("currentAmount", args.Length)));
             return;
         }
 
         if (!NetEntity.TryParse(args[0], out var netEntity) || !_entityManager.TryGetEntity(netEntity, out var target))
         {
-            shell.WriteLine($"Can't resolve entity {args[0]}");
+            shell.WriteLine(Loc.GetString("advancesymptoms-command-cant-resolve", ("entity", args[0])));
             return;
         }
 
@@ -37,6 +38,6 @@ public sealed partial class AdvanceSymptomsCommand : IConsoleCommand
 
         advanced += _entityManager.System<VirologySystem>().ForceAdvanceAllSymptoms(target.Value);
 
-        shell.WriteLine($"Advanced {advanced} symptom(s) on {netEntity}");
+        shell.WriteLine(Loc.GetString("advancesymptoms-command-advanced", ("count", advanced), ("target", netEntity)));
     }
 }

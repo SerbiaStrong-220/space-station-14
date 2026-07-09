@@ -8,17 +8,18 @@ namespace Content.Shared.SS220.Virology.Behaviors;
 [RegisterComponent]
 public sealed partial class BreathInversionComponent : Component
 {
-    /// <summary>Lung type a former oxygen-breather is switched to nitrogen.</summary>
+    /// <summary>What each race's breathing inverts to, by the lung's metabolizer type.</summary>
     [DataField]
-    public ProtoId<MetabolizerTypePrototype> NitrogenBreatherType = "Vox";
-
-    /// <summary>Lung type a former nitrogen-breather is switched to oxygen.</summary>
-    [DataField]
-    public ProtoId<MetabolizerTypePrototype> OxygenBreatherType = "Human";
-
-    /// <summary>Host with any of these inverts to an oxygen-breather instead.</summary>
-    [DataField]
-    public HashSet<ProtoId<MetabolizerTypePrototype>> NitrogenBreathers = ["Vox", "Slime"];
+    public Dictionary<ProtoId<MetabolizerTypePrototype>, ProtoId<MetabolizerTypePrototype>> InvertTo = new()
+    {
+        ["Human"] = "Vox",     // human, dwarf
+        ["Animal"] = "Vox",    // Unathi, tajaran
+        ["Arachnid"] = "Vox",
+        ["Moth"] = "Vox",
+        ["Plant"] = "Vox",
+        ["Vox"] = "Human",
+        ["Slime"] = "Human",
+    };
 
     /// <summary>Each affected lung's original metabolizer types, to restore on cure.</summary>
     [ViewVariables]

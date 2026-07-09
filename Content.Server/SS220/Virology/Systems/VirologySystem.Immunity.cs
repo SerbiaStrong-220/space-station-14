@@ -9,15 +9,12 @@ using Robust.Shared.Random;
 
 namespace Content.Server.SS220.Virology;
 
-public sealed partial class VirusImmunityRoundStartSystem : EntitySystem
+public sealed partial class VirologySystem
 {
-    [Dependency] private IRobustRandom _random = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
 
-    public override void Initialize()
+    private void InitializeImmunity()
     {
-        base.Initialize();
-
         SubscribeLocalEvent<RulePlayerJobsAssignedEvent>(OnJobsAssigned);
     }
 

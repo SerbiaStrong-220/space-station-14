@@ -16,35 +16,36 @@ public sealed partial class AddVirusCommand : IConsoleCommand
     [Dependency] private IPrototypeManager _prototype = default!;
 
     public string Command => "addvirus";
-    public string Description => "Adds a virus (composed of symptoms) to the target entity.";
-    public string Help => "addvirus <targetNetEntity> <virusProtoId>";
+    public string Description => Loc.GetString("addvirus-command-description");
+    public string Help => Loc.GetString("addvirus-command-help");
 
     public void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         if (args.Length != 2)
         {
-            shell.WriteLine("Expected 2 arguments");
+            shell.WriteLine(Loc.GetString("shell-wrong-arguments-number-need-specific",
+                ("properAmount", 2), ("currentAmount", args.Length)));
             return;
         }
 
         if (!NetEntity.TryParse(args[0], out var netEntity) || !_entityManager.TryGetEntity(netEntity, out var target))
         {
-            shell.WriteLine($"Can't resolve entity {args[0]}");
+            shell.WriteLine(Loc.GetString("addvirus-command-cant-resolve", ("entity", args[0])));
             return;
         }
 
         if (!_prototype.HasIndex<VirusPrototype>(args[1]))
         {
-            shell.WriteLine($"{nameof(VirusPrototype)} with id {args[1]} doesn't exist");
+            shell.WriteLine(Loc.GetString("addvirus-command-no-prototype", ("id", args[1])));
             return;
         }
 
         var virology = _entityManager.System<VirologySystem>();
 
         if (virology.AddVirus(target.Value, args[1]))
-            shell.WriteLine($"Added virus {args[1]} to {netEntity}");
+            shell.WriteLine(Loc.GetString("addvirus-command-added", ("virus", args[1]), ("target", netEntity)));
         else
-            shell.WriteLine("Failed to add virus (not susceptible, immune, or already infected)");
+            shell.WriteLine(Loc.GetString("addvirus-command-failed"));
     }
 
     public CompletionResult GetCompletion(IConsoleShell shell, string[] args)

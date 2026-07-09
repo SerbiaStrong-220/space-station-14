@@ -24,6 +24,12 @@ public sealed partial class KeenHearingSystem : SharedAddIgnoreLightVisionOverla
         base.Initialize();
 
         SubscribeLocalEvent<KeenHearingComponent, UseKeenHearingEvent>(OnKeenHearingAction);
+        SubscribeLocalEvent<KeenHearingComponent, ComponentStartup>(OnKeenStartup);
+    }
+
+    private void OnKeenStartup(Entity<KeenHearingComponent> ent, ref ComponentStartup args)
+    {
+        RefreshKeenHearing((ent.Owner, ent.Comp));
     }
 
     public override void Update(float frameTime)
@@ -40,9 +46,26 @@ public sealed partial class KeenHearingSystem : SharedAddIgnoreLightVisionOverla
             if (_gameTiming.CurTime <= comp.ToggleTime)
                 continue;
 
-            Toggle((uid, comp));
+            comp.ManualOn = !comp.ManualOn;
             comp.ToggleTime = null;
+            RefreshKeenHearing((uid, comp));
         }
+    }
+
+    public void RefreshKeenHearing(Entity<KeenHearingComponent> ent)
+    {
+        var ev = new GetKeenHearingModifiersEvent();
+        RaiseLocalEvent(ent, ref ev);
+
+        var target = ent.Comp.ManualOn || ev.ForceOn
+            ? IgnoreLightVisionOverlayState.Half
+            : IgnoreLightVisionOverlayState.Off;
+
+        if (ent.Comp.State == target)
+            return;
+
+        ent.Comp.State = target;
+        Dirty(ent);
     }
 
     protected override void OnMapInit(Entity<KeenHearingComponent> ent, ref MapInitEvent args)
@@ -76,7 +99,8 @@ public sealed partial class KeenHearingSystem : SharedAddIgnoreLightVisionOverla
 
     private void OnKeenHearingAction(Entity<KeenHearingComponent> ent, ref UseKeenHearingEvent args)
     {
-        Toggle((ent.Owner, ent.Comp));
+        ent.Comp.ManualOn = !ent.Comp.ManualOn;
+        RefreshKeenHearing((ent.Owner, ent.Comp));
 
         if (args.Duration != null)
             ent.Comp.ToggleTime = _gameTiming.CurTime + TimeSpan.FromSeconds(args.Duration.Value);

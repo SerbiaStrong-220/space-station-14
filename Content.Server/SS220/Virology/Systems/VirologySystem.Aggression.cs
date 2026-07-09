@@ -5,25 +5,21 @@ using Content.Shared.SS220.Virology.Effects;
 
 namespace Content.Server.SS220.Virology;
 
-public sealed partial class VirusAggressionSystem : EntitySystem
+public sealed partial class VirologySystem
 {
-    [Dependency] private VirologySystem _virology = default!;
-
-    public override void Initialize()
+    private void InitializeAggression()
     {
-        base.Initialize();
-
         SubscribeLocalEvent<VirusHolderComponent, VirusAggressionEffectEvent>(OnAggression);
     }
 
     private void OnAggression(Entity<VirusHolderComponent> ent, ref VirusAggressionEffectEvent args)
     {
-        foreach (var strain in _virology.GetStrains(ent))
+        foreach (var strain in GetStrains(ent))
         {
             if (strain.Owner == args.Aggressor)
                 continue;
 
-            _virology.RemoveVirus(strain);
+            RemoveVirus(strain);
         }
     }
 }

@@ -47,12 +47,16 @@ public sealed partial class VirusSynthificationSystem : EntitySystem
         if ((ent.Comp.AddBinary || ent.Comp.OnlyBinary) && TryComp<LanguageComponent>(ent, out var language))
         {
             Entity<LanguageComponent> lang = (ent.Owner, language);
-            Snapshot(ent, lang);
 
             if (ent.Comp.OnlyBinary)
+            {
+                // remember what we take away so we can give exactly it back on cure
+                ent.Comp.RemovedLanguages = [.. lang.Comp.AvailableLanguages];
+                ent.Comp.OriginalSelected = lang.Comp.SelectedLanguage;
                 _language.ClearLanguages(lang);
+            }
 
-            _language.AddLanguage(lang, ent.Comp.Binary, canSpeak: true);
+            ent.Comp.AddedBinary = _language.AddLanguage(lang, ent.Comp.Binary, canSpeak: true) != null;
         }
     }
 
@@ -61,17 +65,18 @@ public sealed partial class VirusSynthificationSystem : EntitySystem
         _actions.RemoveAction(ent.Owner, ent.Comp.LawsActionEntity);
         _ui.CloseUi(ent.Owner, SiliconLawsUiKey.Key);
 
-        if (Terminating(ent.Owner) || !ent.Comp.Snapshotted || !TryComp<LanguageComponent>(ent, out var language))
+        if (Terminating(ent.Owner) || !TryComp<LanguageComponent>(ent, out var language))
             return;
 
         Entity<LanguageComponent> lang = (ent.Owner, language);
-        _language.ClearLanguages(lang);
 
-        if (ent.Comp.OriginalSelected is { } selected
-            && ent.Comp.OriginalLanguages.FirstOrDefault(l => l.Id == selected) is { } selectedDef)
-            _language.AddLanguage(lang, selectedDef);
+        if (ent.Comp.AddedBinary)
+            _language.RemoveLanguage(lang, ent.Comp.Binary);
 
-        _language.AddLanguages(lang, ent.Comp.OriginalLanguages);
+        _language.AddLanguages(lang, ent.Comp.RemovedLanguages);
+
+        if (ent.Comp.OriginalSelected is { } selected)
+            _language.TrySelectLanguage(lang, selected);
     }
 
     private void OnGetLaws(Entity<VirusSynthificationComponent> ent, ref GetSiliconLawsEvent args)
@@ -81,15 +86,5 @@ public sealed partial class VirusSynthificationSystem : EntitySystem
 
         args.Laws = _siliconLaw.GetLawset(lawset);
         args.Handled = true;
-    }
-
-    private static void Snapshot(Entity<VirusSynthificationComponent> ent, Entity<LanguageComponent> lang)
-    {
-        if (ent.Comp.Snapshotted)
-            return;
-
-        ent.Comp.OriginalLanguages = [.. lang.Comp.AvailableLanguages];
-        ent.Comp.OriginalSelected = lang.Comp.SelectedLanguage;
-        ent.Comp.Snapshotted = true;
     }
 }

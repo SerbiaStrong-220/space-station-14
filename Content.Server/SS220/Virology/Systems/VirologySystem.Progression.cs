@@ -1,50 +1,27 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Server.Administration.Logs;
-using Content.Server.Chat.Managers;
 using Content.Shared.Bed.Components;
 using Content.Shared.Body.Events;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Examine;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.SS220.Virology;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.Virology;
 
-public sealed partial class VirusProgressionSystem : EntitySystem
+public sealed partial class VirologySystem
 {
-    [Dependency] private VirologySystem _virology = default!;
-    [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
-    [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedChatSystem _chat = default!;
-    [Dependency] private IChatManager _chatManager = default!;
-    [Dependency] private IAdminLogManager _adminLog = default!;
 
-    private static readonly TimeSpan UpdateInterval = TimeSpan.FromSeconds(1);
-    private TimeSpan _nextUpdate;
-
-    public override void Initialize()
+    private void InitializeProgression()
     {
-        base.Initialize();
-
         SubscribeLocalEvent<VirusHolderComponent, ExaminedEvent>(OnExamined);
     }
 
-    public override void Update(float frameTime)
+    private void TickProgression()
     {
-        base.Update(frameTime);
-
-        if (_timing.CurTime < _nextUpdate)
-            return;
-
-        _nextUpdate = _timing.CurTime + UpdateInterval;
-
         var curTime = _timing.CurTime;
         var query = EntityQueryEnumerator<VirusComponent>();
         while (query.MoveNext(out var uid, out var comp))
@@ -61,7 +38,7 @@ public sealed partial class VirusProgressionSystem : EntitySystem
                 }
                 else if (curTime >= until)
                 {
-                    _virology.ReactivateVirus(virus);
+                    ReactivateVirus(virus);
                 }
 
                 continue;
@@ -128,9 +105,9 @@ public sealed partial class VirusProgressionSystem : EntitySystem
         state.StageStartTime = curTime;
         state.LastEmote = curTime;
         state.EmoteDelay = TimeSpan.Zero;
-        _virology.ApplyStage(virus, symptomId, oldStage, state.Stage);
+        ApplyStage(virus, symptomId, oldStage, state.Stage);
         Dirty(virus);
-        _virology.RaiseContentsChanged(virus.Comp.Carrier);
+        RaiseContentsChanged(virus.Comp.Carrier);
 
         _adminLog.Add(LogType.Virology, LogImpact.Low,
             $"{ToPrettyString(virus.Comp.Carrier):target}: virus symptom {symptomId} advanced to stage {state.Stage + 1}");
@@ -142,7 +119,7 @@ public sealed partial class VirusProgressionSystem : EntitySystem
 
     private void ApplyEffects(Entity<VirusComponent> virus, VirusSymptomPrototype symptom, VirusSymptomState state, TimeSpan curTime)
     {
-        var effects = _virology.BuildStageEffects(symptom, state.Stage, virus.Comp.Carrier);
+        var effects = BuildStageEffects(symptom, state.Stage, virus.Comp.Carrier);
         if (effects.Length == 0)
             return;
 
@@ -187,7 +164,7 @@ public sealed partial class VirusProgressionSystem : EntitySystem
 
     private void OnExamined(Entity<VirusHolderComponent> ent, ref ExaminedEvent args)
     {
-        foreach (var strain in _virology.EnumerateStrains(ent.Comp))
+        foreach (var strain in EnumerateStrains(ent.Comp))
         {
             var virus = strain.Comp;
             foreach (var (symptomId, state) in virus.Symptoms)
@@ -209,7 +186,7 @@ public sealed partial class VirusProgressionSystem : EntitySystem
         if (stage < 0 || stage >= symptom.Stages.Length)
             return null;
 
-        if (_virology.GetSpecies(carrier) is { } species
+        if (GetSpecies(carrier) is { } species
             && symptom.SpeciesOverrides.TryGetValue(species, out var over))
         {
             if (over.Immune || stage < over.MinStage)

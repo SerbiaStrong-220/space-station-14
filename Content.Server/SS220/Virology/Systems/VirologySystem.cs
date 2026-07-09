@@ -21,11 +21,9 @@ public sealed partial class VirologySystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private VirusMutationSystem _mutation = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private IComponentFactory _factory = default!;
     [Dependency] private IChatManager _chatManager = default!;
-    [Dependency] private VirusOverloadRuleSystem _overload = default!;
     [Dependency] private IAdminLogManager _adminLog = default!;
 
     /// <summary>Generic entity every virus strain spawns from, its symptoms/state come from descriptor.</summary>
@@ -68,6 +66,44 @@ public sealed partial class VirologySystem : EntitySystem
         SubscribeLocalEvent<VirusSusceptibleComponent, RejuvenateEvent>(OnRejuvenate);
         SubscribeLocalEvent<VirusHolderComponent, EntityZombifiedEvent>(OnZombified);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
+        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
+
+        InitializeAggression();
+        InitializeBlood();
+        InitializeChemistry();
+        InitializeEnvironment();
+        InitializeImmunity();
+        InitializeInfection();
+        InitializeProgression();
+        InitializeSpread();
+        InitializeContamination();
+    }
+
+    private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
+    {
+        if (args.WasModified<VirusMutationPrototype>() || args.WasModified<VirusRevealPrototype>()
+            || args.WasModified<VirusSymptomRemovalPrototype>())
+            BuildTables();
+
+        if (args.WasModified<VirusBroadReagentPrototype>())
+            BuildBroadReagents();
+    }
+
+    private static readonly TimeSpan UpdateInterval = TimeSpan.FromSeconds(1);
+    private TimeSpan _nextUpdate;
+
+    public override void Update(float frameTime)
+    {
+        if (_timing.CurTime < _nextUpdate)
+            return;
+
+        _nextUpdate = _timing.CurTime + UpdateInterval;
+
+        TickInfection();
+        TickOverload();
+        TickProgression();
+        TickSpread();
+        TickContamination();
     }
 
     // becoming zombie kills the host's viruses
@@ -105,21 +141,28 @@ public sealed partial class VirologySystem : EntitySystem
         if (!_proto.Resolve<VirusCurePoolPrototype>(AccelerantPool, out var pool))
             return null;
 
-        _cureBuf.Clear();
-        _cureBuf.AddRange(pool.Natural);
-        _cureBuf.AddRange(pool.Synthesized);
-        if (_cureBuf.Count == 0)
-            return null;
-
-        var cure = new VirusCure();
-        for (var i = 0; i < count && _cureBuf.Count > 0; i++)
+        try
         {
-            var index = _random.Next(_cureBuf.Count);
-            cure.Reagents.Add(_cureBuf[index]);
-            _cureBuf.RemoveAt(index);
-        }
+            _cureBuf.Clear();
+            _cureBuf.AddRange(pool.Natural);
+            _cureBuf.AddRange(pool.Synthesized);
+            if (_cureBuf.Count == 0)
+                return null;
 
-        return cure;
+            var cure = new VirusCure();
+            for (var i = 0; i < count && _cureBuf.Count > 0; i++)
+            {
+                var index = _random.Next(_cureBuf.Count);
+                cure.Reagents.Add(_cureBuf[index]);
+                _cureBuf.RemoveAt(index);
+            }
+
+            return cure;
+        }
+        finally
+        {
+            _cureBuf.Clear();
+        }
     }
 
     // absorbing an accelerant dose re-randomises which reagent drives that symptom so no insta 1->max stages
@@ -161,7 +204,7 @@ public sealed partial class VirologySystem : EntitySystem
         if (Terminating(ent.Owner))
             return;
 
-        _overload.Deactivate(ent.Owner);
+        Deactivate(ent.Owner);
     }
 
     #region Infection gate
@@ -204,7 +247,7 @@ public sealed partial class VirologySystem : EntitySystem
             if (targetVirus.SuppressedUntil != null)
                 ReactivateVirus(target);
 
-            return _mutation.MergeDescriptor(target, descriptor);
+            return MergeDescriptor(target, descriptor);
         }
 
         return SpawnVirus(host, descriptor) != null;
@@ -649,7 +692,7 @@ public sealed partial class VirologySystem : EntitySystem
         foreach (var symptom in virus.Symptoms.Keys)
             _identityBuf.Add(symptom.Id);
 
-        return virus.CachedIdentity = BuildIdentity();
+        return virus.CachedIdentity = BuildIdentity(_identityBuf);
     }
 
     public string GetIdentity(VirusDescriptor descriptor)
@@ -658,7 +701,7 @@ public sealed partial class VirologySystem : EntitySystem
         foreach (var snapshot in descriptor.Symptoms)
             _identityBuf.Add(snapshot.Symptom.Id);
 
-        return BuildIdentity();
+        return BuildIdentity(_identityBuf);
     }
 
     /// <summary>Identity of supervirus that mwrge strain with incoming descriptor would produce.</summary>
@@ -678,13 +721,13 @@ public sealed partial class VirologySystem : EntitySystem
                 _identityBuf.Add(id);
         }
 
-        return BuildIdentity();
+        return BuildIdentity(_identityBuf);
     }
 
-    private string BuildIdentity()
+    private static string BuildIdentity(List<string> symptomIds)
     {
-        _identityBuf.Sort(StringComparer.Ordinal);
-        return string.Join(',', _identityBuf);
+        symptomIds.Sort(StringComparer.Ordinal);
+        return string.Join(',', symptomIds);
     }
 
     /// <summary>Strain genome is set by first symptom.</summary>
@@ -813,7 +856,7 @@ public sealed partial class VirologySystem : EntitySystem
             return lines;
 
         if (entity.Comp.Viruses.Count > 0)
-            lines.Add(Loc.GetString("health-analyzer-report-disease-detected"));
+            lines.Add(Loc.GetString("health-analyzer-report-virus-detected"));
 
         return lines;
     }

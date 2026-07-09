@@ -2,8 +2,9 @@
 
 using System.Text;
 using Content.Server.Power.EntitySystems;
-using Content.Server.Station.Systems;
 using Content.Server.SS220.Photocopier.Forms;
+using Content.Server.Station.Systems;
+using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Containers.ItemSlots;
@@ -15,62 +16,64 @@ using Content.Shared.SS220.Virology;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.Virology;
 
-public sealed partial class VirusDiagnoserSystem : EntitySystem
+public sealed partial class VaccinatorSystem : EntitySystem
 {
     [Dependency] private ItemSlotsSystem _itemSlots = default!;
     [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private VirologySystem _virology = default!;
     [Dependency] private UserInterfaceSystem _ui = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
-    [Dependency] private VirologySystem _virology = default!;
     [Dependency] private FormManager _formManager = default!;
     [Dependency] private PaperSystem _paper = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private MetaDataSystem _metaData = default!;
     [Dependency] private StationSystem _station = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<VirusDiagnoserComponent, ComponentStartup>(OnUiDirty);
-        SubscribeLocalEvent<VirusDiagnoserComponent, BoundUIOpenedEvent>(OnUiDirty);
-        SubscribeLocalEvent<VirusDiagnoserComponent, EntInsertedIntoContainerMessage>(OnEntInserted);
-        SubscribeLocalEvent<VirusDiagnoserComponent, EntRemovedFromContainerMessage>(OnEntRemoved);
-        SubscribeLocalEvent<VirusDiagnoserComponent, VirusDiagnoserScanMessage>(OnScan);
-        SubscribeLocalEvent<VirusDiagnoserComponent, VirusDiagnoserTransferMutagenMessage>(OnTransferMutagen);
-        SubscribeLocalEvent<VirusDiagnoserComponent, VirusDiagnoserCopyMessage>(OnCopy);
-        SubscribeLocalEvent<VirusDiagnoserComponent, VirusDiagnoserPrintMessage>(OnPrint);
-        SubscribeLocalEvent<VirusDiagnoserComponent, SolutionContainerChangedEvent>(OnSolutionChanged);
+        SubscribeLocalEvent<VaccinatorComponent, ComponentStartup>(OnUiDirty);
+        SubscribeLocalEvent<VaccinatorComponent, BoundUIOpenedEvent>(OnUiDirty);
+        SubscribeLocalEvent<VaccinatorComponent, EntInsertedIntoContainerMessage>(OnEntInserted);
+        SubscribeLocalEvent<VaccinatorComponent, EntRemovedFromContainerMessage>(OnEntRemoved);
+        SubscribeLocalEvent<VaccinatorComponent, VaccinatorScanMessage>(OnScan);
+        SubscribeLocalEvent<VaccinatorComponent, VaccinatorTransferMessage>(OnTransfer);
+        SubscribeLocalEvent<VaccinatorComponent, VaccinatorCreateVaccineMessage>(OnCreateVaccine);
+        SubscribeLocalEvent<VaccinatorComponent, VaccinatorPrintMessage>(OnPrint);
+        SubscribeLocalEvent<VaccinatorComponent, SolutionContainerChangedEvent>(OnSolutionChanged);
     }
 
-    private void OnUiDirty<T>(Entity<VirusDiagnoserComponent> ent, ref T args)
+    private void OnUiDirty<T>(Entity<VaccinatorComponent> ent, ref T args)
     {
         UpdateUi(ent);
     }
 
-    private void OnSolutionChanged(Entity<VirusDiagnoserComponent> ent, ref SolutionContainerChangedEvent args)
+    private void OnSolutionChanged(Entity<VaccinatorComponent> ent, ref SolutionContainerChangedEvent args)
     {
         if (args.SolutionId == ent.Comp.BufferSolutionId)
             UpdateUi(ent);
     }
 
-    private void OnEntInserted(Entity<VirusDiagnoserComponent> ent, ref EntInsertedIntoContainerMessage args)
+    private void OnEntInserted(Entity<VaccinatorComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
         OnSlotChanged(ent, args.Container.ID);
     }
 
-    private void OnEntRemoved(Entity<VirusDiagnoserComponent> ent, ref EntRemovedFromContainerMessage args)
+    private void OnEntRemoved(Entity<VaccinatorComponent> ent, ref EntRemovedFromContainerMessage args)
     {
         OnSlotChanged(ent, args.Container.ID);
     }
 
-    private void OnSlotChanged(Entity<VirusDiagnoserComponent> ent, string containerId)
+    private void OnSlotChanged(Entity<VaccinatorComponent> ent, string containerId)
     {
         if (containerId != ent.Comp.SlotId)
             return;
@@ -83,15 +86,12 @@ public sealed partial class VirusDiagnoserSystem : EntitySystem
         UpdateUi(ent);
     }
 
-    private void OnScan(Entity<VirusDiagnoserComponent> ent, ref VirusDiagnoserScanMessage args)
+    private void OnScan(Entity<VaccinatorComponent> ent, ref VaccinatorScanMessage args)
     {
         if (!this.IsPowered(ent, EntityManager))
             return;
 
-        if (ent.Comp.ScanEndTime != null || ent.Comp.PrintEndTime != null)
-            return;
-
-        if (_itemSlots.GetItemOrNull(ent, ent.Comp.SlotId) == null)
+        if (ent.Comp.ScanEndTime != null || ent.Comp.PrintEndTime != null || _itemSlots.GetItemOrNull(ent, ent.Comp.SlotId) == null)
             return;
 
         ClearResult(ent);
@@ -99,7 +99,7 @@ public sealed partial class VirusDiagnoserSystem : EntitySystem
         UpdateUi(ent);
     }
 
-    private void OnTransferMutagen(Entity<VirusDiagnoserComponent> ent, ref VirusDiagnoserTransferMutagenMessage args)
+    private void OnTransfer(Entity<VaccinatorComponent> ent, ref VaccinatorTransferMessage args)
     {
         if (!this.IsPowered(ent, EntityManager))
             return;
@@ -110,20 +110,20 @@ public sealed partial class VirusDiagnoserSystem : EntitySystem
             || !_solutionContainer.TryGetSolution(ent.Owner, ent.Comp.BufferSolutionId, out var bufferSoln, out var buffer))
             return;
 
-        var available = source.GetTotalPrototypeQuantity(ent.Comp.MutagenReagent);
+        var available = source.GetTotalPrototypeQuantity(ent.Comp.TricordrazineReagent);
         var amount = FixedPoint2.Min(available, buffer.MaxVolume - buffer.Volume);
         if (amount <= FixedPoint2.Zero)
         {
-            _popup.PopupEntity(Loc.GetString("disease-diagnoser-no-mutagen-source"), ent, args.Actor);
+            _popup.PopupEntity(Loc.GetString("vaccinator-no-tricordrazine-source"), ent, args.Actor);
             return;
         }
 
-        source.RemoveReagent(new ReagentId(ent.Comp.MutagenReagent, null), amount, ignoreReagentData: true);
+        source.RemoveReagent(new ReagentId(ent.Comp.TricordrazineReagent, null), amount, ignoreReagentData: true);
         _solutionContainer.UpdateChemicals(sourceSoln.Value);
-        _solutionContainer.TryAddReagent(bufferSoln.Value, ent.Comp.MutagenReagent, amount, out _);
+        _solutionContainer.TryAddReagent(bufferSoln.Value, ent.Comp.TricordrazineReagent, amount, out _);
     }
 
-    private void OnCopy(Entity<VirusDiagnoserComponent> ent, ref VirusDiagnoserCopyMessage args)
+    private void OnCreateVaccine(Entity<VaccinatorComponent> ent, ref VaccinatorCreateVaccineMessage args)
     {
         if (!this.IsPowered(ent, EntityManager))
             return;
@@ -131,41 +131,43 @@ public sealed partial class VirusDiagnoserSystem : EntitySystem
         var item = _itemSlots.GetItemOrNull(ent, ent.Comp.SlotId);
         if (item == null || !_solutionContainer.TryGetFitsInDispenser(item.Value, out _, out var source))
             return;
-
-        var descriptors = new List<VirusDescriptor>();
+        var strains = new HashSet<string>();
         foreach (var virus in VirusData.EnumerateViruses(source))
-            descriptors.Add(virus.Clone());
-
-        if (descriptors.Count == 0)
         {
-            _popup.PopupEntity(Loc.GetString("disease-diagnoser-no-virus"), ent, args.Actor);
+            if (virus.SuppressedRemaining != null)
+                strains.Add(_virology.GetIdentity(virus));
+        }
+
+        if (strains.Count == 0)
+        {
+            _popup.PopupEntity(Loc.GetString("vaccinator-no-cured-blood"), ent, args.Actor);
             return;
         }
 
         if (!_solutionContainer.TryGetSolution(ent.Owner, ent.Comp.BufferSolutionId, out var bufferSoln, out var buffer)
-            || buffer.GetTotalPrototypeQuantity(ent.Comp.MutagenReagent) < ent.Comp.CopyAmount)
+            || buffer.GetTotalPrototypeQuantity(ent.Comp.TricordrazineReagent) < ent.Comp.VaccineAmount)
         {
-            _popup.PopupEntity(Loc.GetString("disease-diagnoser-not-enough-mutagen"), ent, args.Actor);
+            _popup.PopupEntity(Loc.GetString("vaccinator-no-tricordrazine"), ent, args.Actor);
             return;
         }
 
-        var bottle = Spawn(ent.Comp.CopyBottle, Transform(ent).Coordinates);
+        var bottle = Spawn(ent.Comp.VaccineBottle, Transform(ent).Coordinates);
         if (!_solutionContainer.TryGetSolution(bottle, ent.Comp.BottleSolutionId, out var bottleSoln, out _))
         {
-            Log.Error($"CopyBottle {ent.Comp.CopyBottle} has no '{ent.Comp.BottleSolutionId}' solution");
+            Log.Error($"VaccineBottle {ent.Comp.VaccineBottle} has no '{ent.Comp.BottleSolutionId}' solution");
             Del(bottle);
             return;
         }
 
-        _solutionContainer.RemoveReagent(bufferSoln.Value, ent.Comp.MutagenReagent, ent.Comp.CopyAmount);
+        _solutionContainer.RemoveReagent(bufferSoln.Value, ent.Comp.TricordrazineReagent, ent.Comp.VaccineAmount);
 
-        var virusData = new VirusData { Viruses = descriptors };
-        _solutionContainer.TryAddReagent(bottleSoln.Value, ent.Comp.MutagenReagent, ent.Comp.CopyAmount, out _, data: [virusData]);
+        var vaccineData = new VirusVaccineData { Strains = [.. strains] };
+        _solutionContainer.TryAddReagent(bottleSoln.Value, ent.Comp.VaccineReagent, ent.Comp.VaccineAmount, out _, data: [vaccineData]);
 
-        _popup.PopupEntity(Loc.GetString("disease-diagnoser-copied"), ent, args.Actor);
+        _popup.PopupEntity(Loc.GetString("vaccinator-vaccine-created"), ent, args.Actor);
     }
 
-    private void OnPrint(Entity<VirusDiagnoserComponent> ent, ref VirusDiagnoserPrintMessage args)
+    private void OnPrint(Entity<VaccinatorComponent> ent, ref VaccinatorPrintMessage args)
     {
         if (!this.IsPowered(ent, EntityManager))
             return;
@@ -180,7 +182,7 @@ public sealed partial class VirusDiagnoserSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        var query = EntityQueryEnumerator<VirusDiagnoserComponent>();
+        var query = EntityQueryEnumerator<VaccinatorComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
             var ent = (uid, comp);
@@ -202,7 +204,7 @@ public sealed partial class VirusDiagnoserSystem : EntitySystem
         }
     }
 
-    private void BuildResult(Entity<VirusDiagnoserComponent> ent)
+    private void BuildResult(Entity<VaccinatorComponent> ent)
     {
         ClearResult(ent);
         ent.Comp.HasResult = true;
@@ -211,9 +213,13 @@ public sealed partial class VirusDiagnoserSystem : EntitySystem
         if (item == null || !_solutionContainer.TryGetFitsInDispenser(item.Value, out _, out var solution))
             return;
 
+        // each virus have its own block
         foreach (var virus in VirusData.EnumerateViruses(solution))
         {
-            var block = new VirusDiagnoserResult();
+            var block = new VaccinatorVirusResult();
+
+            if (virus.SuppressedRemaining != null)
+                block.Suppressed = true;
 
             var allReadable = true;
             foreach (var snapshot in virus.Symptoms)
@@ -224,7 +230,7 @@ public sealed partial class VirusDiagnoserSystem : EntitySystem
                     && description != null;
 
                 if (readable)
-                    block.Symptoms.Add(_virology.FormatSymptom(snapshot.Symptom, description!, snapshot.Stage, snapshot.Accelerant));
+                    block.Symptoms.Add(_virology.FormatSymptom(snapshot.Symptom, description!, snapshot.Stage));
                 else
                 {
                     allReadable = false;
@@ -232,39 +238,37 @@ public sealed partial class VirusDiagnoserSystem : EntitySystem
                 }
             }
 
-            if (allReadable)
+            if (allReadable && virus.Name is { } name)
+                block.Name = name;
+
+            // cure reagents only show if every symptom is revealed
+            if (virus.Cure is { } cure)
             {
-                block.Transmission = GetVectors(virus.Transmission);
-                if (virus.Name is { } name)
-                    block.Name = name;
+                if (allReadable)
+                {
+                    foreach (var reagent in cure.Reagents)
+                    {
+                        if (_prototype.TryIndex<ReagentPrototype>(reagent, out var reagentProto))
+                            block.CureReagents.Add(reagentProto.LocalizedName);
+                    }
+                }
+                else
+                {
+                    block.CureHidden = true;
+                }
             }
 
             ent.Comp.ResultViruses.Add(block);
         }
     }
 
-    private static VirusTransmissionVector GetVectors(VirusTransmission? transmission)
-    {
-        var vectors = VirusTransmissionVector.None;
-        if (transmission == null)
-            return vectors;
-
-        if (transmission.ContactChance > 0f)
-            vectors |= VirusTransmissionVector.Contact;
-
-        if (transmission.ProximityChance > 0f)
-            vectors |= VirusTransmissionVector.Proximity;
-
-        return vectors;
-    }
-
-    private void FinishPrint(Entity<VirusDiagnoserComponent> ent)
+    private void FinishPrint(Entity<VaccinatorComponent> ent)
     {
         var form = _formManager.TryGetFormFromDescriptor(
             new FormDescriptor(ent.Comp.FormCollection, ent.Comp.FormGroup, ent.Comp.FormId));
         if (form == null)
         {
-            Log.Error($"Diagnoser form {ent.Comp.FormCollection}/{ent.Comp.FormGroup}/{ent.Comp.FormId} not found");
+            Log.Error($"Vaccinator form {ent.Comp.FormCollection}/{ent.Comp.FormGroup}/{ent.Comp.FormId} not found");
             return;
         }
 
@@ -284,13 +288,12 @@ public sealed partial class VirusDiagnoserSystem : EntitySystem
 
             report.AppendLine(Loc.GetString("pathology-report-unreadable", ("count", virus.UnreadableCount)));
 
-            var vectors = new List<string>();
-            if ((virus.Transmission & VirusTransmissionVector.Contact) != 0)
-                vectors.Add(Loc.GetString("disease-diagnoser-vector-contact"));
-            if ((virus.Transmission & VirusTransmissionVector.Proximity) != 0)
-                vectors.Add(Loc.GetString("disease-diagnoser-vector-proximity"));
-            var transmission = vectors.Count > 0 ? string.Join(", ", vectors) : "—";
-            report.AppendLine(Loc.GetString("pathology-report-transmission", ("vectors", transmission)));
+            var cure = virus.CureHidden
+                ? Loc.GetString("pathology-report-cure-hidden")
+                : virus.CureReagents.Count > 0
+                    ? string.Join(", ", virus.CureReagents)
+                    : "—";
+            report.AppendLine(Loc.GetString("pathology-report-cure", ("cure", cure)));
             report.AppendLine();
         }
 
@@ -302,7 +305,7 @@ public sealed partial class VirusDiagnoserSystem : EntitySystem
         _metaData.SetEntityName(paper, form.EntityName);
     }
 
-    private void UpdateUi(Entity<VirusDiagnoserComponent> ent)
+    private void UpdateUi(Entity<VaccinatorComponent> ent)
     {
         var hasSample = _itemSlots.GetItemOrNull(ent, ent.Comp.SlotId) != null;
         var scanning = ent.Comp.ScanEndTime != null;
@@ -314,61 +317,63 @@ public sealed partial class VirusDiagnoserSystem : EntitySystem
                 ? ent.Comp.PrintDuration
                 : TimeSpan.Zero;
 
-        var bufferMutagen = 0f;
-        if (_solutionContainer.TryGetSolution(ent.Owner, ent.Comp.BufferSolutionId, out _, out var buffer))
-            bufferMutagen = (float)buffer.GetTotalPrototypeQuantity(ent.Comp.MutagenReagent);
+        var status = !hasSample ? VirologyMachineStatus.NoSample
+            : scanning ? VirologyMachineStatus.Scanning
+            : printing ? VirologyMachineStatus.Printing
+            : ent.Comp.HasResult ? VirologyMachineStatus.Result
+            : VirologyMachineStatus.Ready;
+
+        var bufferTricordrazine = 0f;
+        _solutionContainer.TryGetSolution(ent.Owner, ent.Comp.BufferSolutionId, out _, out var buffer);
+        if (buffer != null)
+            bufferTricordrazine = (float)buffer.GetTotalPrototypeQuantity(ent.Comp.TricordrazineReagent);
 
         string? stationName = null;
         if (_station.GetOwningStation(ent.Owner) is { } station)
             stationName = Name(station);
 
-        var state = new VirusDiagnoserBoundUserInterfaceState(
-            hasSample,
-            scanning,
-            printing,
+        var state = new VaccinatorBoundUserInterfaceState(
+            status,
             operationEnd,
             operationDuration,
-            ent.Comp.HasResult,
             [.. ent.Comp.ResultViruses],
-            bufferMutagen,
+            bufferTricordrazine,
             stationName);
 
-        _ui.SetUiState(ent.Owner, VirusDiagnoserUiKey.Key, state);
+        _ui.SetUiState(ent.Owner, VaccinatorUiKey.Key, state);
 
-        UpdateVisuals(ent);
+        UpdateVisuals(ent, buffer);
     }
 
-    private void UpdateVisuals(Entity<VirusDiagnoserComponent> ent)
+    private void UpdateVisuals(Entity<VaccinatorComponent> ent, Solution? buffer)
     {
         var fill = 0f;
-        if (_solutionContainer.TryGetSolution(ent.Owner, ent.Comp.BufferSolutionId, out _, out var buffer)
-            && buffer.MaxVolume > FixedPoint2.Zero)
+        if (buffer != null && buffer.MaxVolume > FixedPoint2.Zero)
         {
-            var amount = buffer.GetTotalPrototypeQuantity(ent.Comp.MutagenReagent);
+            var amount = buffer.GetTotalPrototypeQuantity(ent.Comp.TricordrazineReagent);
             fill = Math.Clamp((float)(amount / buffer.MaxVolume), 0f, 1f);
         }
 
-        _appearance.SetData(ent, VirusDiagnoserVisuals.Running, ent.Comp.PrintEndTime != null);
-        _appearance.SetData(ent, VirusDiagnoserVisuals.Vial, GetVialVisual(ent));
-        _appearance.SetData(ent, VirusDiagnoserVisuals.Buffer, fill);
+        _appearance.SetData(ent, VaccinatorVisuals.Running, ent.Comp.PrintEndTime != null);
+        _appearance.SetData(ent, VaccinatorVisuals.Vial, GetVialVisual(ent));
+        _appearance.SetData(ent, VaccinatorVisuals.BufferFill, fill);
     }
 
-    private VirusDiagnoserVial GetVialVisual(Entity<VirusDiagnoserComponent> ent)
+    private VaccinatorVial GetVialVisual(Entity<VaccinatorComponent> ent)
     {
         if (_itemSlots.GetItemOrNull(ent, ent.Comp.SlotId) is not { } item)
-            return VirusDiagnoserVial.None;
+            return VaccinatorVial.None;
 
         if (!_solutionContainer.TryGetFitsInDispenser(item, out _, out var solution) || solution.Volume <= FixedPoint2.Zero)
-            return VirusDiagnoserVial.Empty;
+            return VaccinatorVial.Empty;
 
-        if (solution.GetTotalPrototypeQuantity(ent.Comp.MutagenReagent) > FixedPoint2.Zero
-            || solution.GetTotalPrototypeQuantity(ent.Comp.UnstableMutagenReagent) > FixedPoint2.Zero)
-            return VirusDiagnoserVial.Mutagen;
+        if (solution.GetTotalPrototypeQuantity(ent.Comp.TricordrazineReagent) > FixedPoint2.Zero)
+            return VaccinatorVial.Tricordrazine;
 
-        return VirusDiagnoserVial.Blood;
+        return VaccinatorVial.Blood;
     }
 
-    private static void ClearResult(Entity<VirusDiagnoserComponent> ent)
+    private static void ClearResult(Entity<VaccinatorComponent> ent)
     {
         ent.Comp.HasResult = false;
         ent.Comp.ResultViruses = [];

@@ -316,10 +316,10 @@ vaccinator-no-tricordrazine = Not enough tricordrazine in the buffer.
 vaccinator-no-cured-blood = Needs blood from a host cured within the last 15 minutes.
 vaccinator-vaccine-created = A vaccine is cultured into a fresh vial.
 
-# ==================== Health analyzer - diseases section ====================
-health-analyzer-window-diseases-title = Diseases
-health-analyzer-report-section-diseases = DISEASES
-health-analyzer-report-disease-detected = A pathogen is detected in the blood.
+# ==================== Health analyzer - viruses section ====================
+health-analyzer-window-viruses-title = Viruses
+health-analyzer-report-section-viruses = VIRUSES
+health-analyzer-report-virus-detected = A pathogen is detected in the blood.
 pathology-symptom-stage = {$symptom} — stage {$stage}/{$max}
 
 pathology-sneezing-detection = Sneezing fits
@@ -349,3 +349,16 @@ reagent-desc-vaccine = A tailored vaccine. Enough of it in the bloodstream grant
 
 # ==================== RnD & cargo ====================
 research-technology-disease-machines = Virology Equipment
+
+# ==================== Admin commands ====================
+addvirus-command-description = Adds a virus (composed of symptoms) to the target entity.
+addvirus-command-help = addvirus <targetNetEntity> <virusProtoId>
+addvirus-command-cant-resolve = Can't resolve entity {$entity}.
+addvirus-command-no-prototype = No virus prototype with id {$id}.
+addvirus-command-added = Added virus {$virus} to {$target}.
+addvirus-command-failed = Failed to add virus (not susceptible, immune, or already infected).
+
+advancesymptoms-command-description = Force-advances every active pathology and virus symptom in the target by one stage (run again to push further).
+advancesymptoms-command-help = advancesymptoms <targetNetEntity>
+advancesymptoms-command-cant-resolve = Can't resolve entity {$entity}.
+advancesymptoms-command-advanced = Advanced {$count} symptom(s) on {$target}.

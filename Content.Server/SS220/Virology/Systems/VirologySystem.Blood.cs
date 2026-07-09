@@ -9,18 +9,15 @@ using Content.Shared.SS220.Virology;
 
 namespace Content.Server.SS220.Virology;
 
-public sealed partial class VirusBloodSystem : EntitySystem
+public sealed partial class VirologySystem
 {
     [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private VirologySystem _virology = default!;
 
     // reused so re-stamping doesn't allocate a set each change
     private readonly HashSet<string> _bloodPrototypes = [];
 
-    public override void Initialize()
+    private void InitializeBlood()
     {
-        base.Initialize();
-
         SubscribeLocalEvent<VirusHolderComponent, VirusContentsChangedEvent>(OnContentsChanged);
     }
 
@@ -47,8 +44,8 @@ public sealed partial class VirusBloodSystem : EntitySystem
             return null;
 
         var descriptors = new List<VirusDescriptor>();
-        foreach (var strain in _virology.EnumerateStrains(ent.Comp))
-            descriptors.Add(_virology.ToDescriptor(strain));
+        foreach (var strain in EnumerateStrains(ent.Comp))
+            descriptors.Add(ToDescriptor(strain));
 
         return descriptors.Count > 0 ? new VirusData { Viruses = descriptors } : null;
     }
