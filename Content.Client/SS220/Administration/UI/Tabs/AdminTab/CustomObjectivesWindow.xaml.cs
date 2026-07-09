@@ -43,20 +43,20 @@ public sealed partial class CustomObjectivesWindow : DefaultWindow
 
     private void ListOfObjectivesButtonOnPressed(BaseButton.ButtonEventArgs _)
     {
-        if (_selectedPlayer == null)
+        if (_selectedPlayer is not { } selectedPlayer)
             return;
 
         _consoleHost.ExecuteCommand(
-            $"openobjectives {_selectedPlayer.SessionId}");
+            $"openobjectives {selectedPlayer.SessionId}");
     }
 
     private void AddObjectiveButtonOnWindowCreated(DefaultWindow window)
     {
-        if (_selectedPlayer is null)
+        if (_selectedPlayer is not { } selectedPlayer)
             return;
 
         var addObjectiveWindow = (AddObjectiveWindow) window;
-        if (!_playerManager.TryGetSessionById(_selectedPlayer.SessionId, out var playerSession))
+        if (!_playerManager.TryGetSessionById(selectedPlayer.SessionId, out var playerSession))
             return;
 
         addObjectiveWindow.SetAntagonist(playerSession);

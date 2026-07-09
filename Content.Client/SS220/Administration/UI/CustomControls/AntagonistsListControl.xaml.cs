@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Linq;
 using Content.Client.Administration.Systems;
 using Content.Client.UserInterface.Controls;
 using Content.Client.Verbs.UI;
@@ -22,11 +21,10 @@ public sealed partial class AntagonistsListControl : BoxContainer
 
     private readonly AdminSystem _adminSystem;
 
-    private List<PlayerInfo> _antagonistsList = new();
-
     public event Action<PlayerInfo?>? OnSelectionChanged;
 
     public Func<PlayerInfo, string, string>? OverrideText;
+
     public AntagonistsListControl()
     {
         IoCManager.InjectDependencies(this);
@@ -34,7 +32,7 @@ public sealed partial class AntagonistsListControl : BoxContainer
         RobustXamlLoader.Load(this);
         AntagonistsListContainer.ItemPressed += AntagonistsListItemPressed;
         AntagonistsListContainer.GenerateItem += GenerateButton;
-        BackgroundPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = PrivateStaticReadOnlyColorWithMeanfullName };
+        BackgroundPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = AdminListControlHelper.ListBackgroundColor };
     }
 
     protected override void EnteredTree()
@@ -57,12 +55,13 @@ public sealed partial class AntagonistsListControl : BoxContainer
 
         if (data is not AntagonistsListData { Info: var selectedAntagonist })
             return;
+
         if (args.Event.Function == EngineKeyFunctions.UIClick)
         {
             OnSelectionChanged?.Invoke(selectedAntagonist);
 
-            if (OverrideText != null && args.Button.Children.FirstOrDefault()?.Children?.FirstOrDefault() is Label label)
-                label.Text = GetText(selectedAntagonist);
+            if (OverrideText != null)
+                AdminListControlHelper.UpdateButtonLabel(args.Button, GetText(selectedAntagonist));
         }
         else if (args.Event.Function == EngineKeyFunctions.UseSecondary && selectedAntagonist.NetEntity != null)
         {
@@ -74,10 +73,17 @@ public sealed partial class AntagonistsListControl : BoxContainer
     {
         players ??= _adminSystem.PlayerList;
 
-        _antagonistsList = players.Where(x => x.Antag).ToList();
+        var listData = new List<ListData>();
 
-        if (_antagonistsList is not null)
-            AntagonistsListContainer.PopulateList(_antagonistsList.Select(info => new AntagonistsListData(info)).ToList());
+        foreach (var player in players)
+        {
+            if (!player.Antag)
+                continue;
+
+            listData.Add(new AntagonistsListData(player));
+        }
+
+        AntagonistsListContainer.PopulateList(listData);
     }
 
     private string GetText(PlayerInfo info)

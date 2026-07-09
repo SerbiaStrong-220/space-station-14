@@ -395,8 +395,8 @@ public abstract partial class SharedMindSystem : EntitySystem
         mind.Objectives.Add(objective);
         // SS220 custom objectives begin
         Dirty(mindId, mind);
-        var addedEv = new MindObjectivesChangedEvent();
-        RaiseLocalEvent(mindId, ref addedEv, true);
+        var objectivesChangedEv = new MindObjectivesChangedEvent(objective, true);
+        RaiseLocalEvent(mindId, ref objectivesChangedEv);
         // SS220 custom objectives end
     }
 
@@ -416,8 +416,8 @@ public abstract partial class SharedMindSystem : EntitySystem
         mind.Objectives.Remove(objective);
         // SS220 custom objectives begin
         Dirty(mindId, mind);
-        var removedEv = new MindObjectivesChangedEvent();
-        RaiseLocalEvent(mindId, ref removedEv, true);
+        var objectivesChangedEv = new MindObjectivesChangedEvent(objective, false);
+        RaiseLocalEvent(mindId, ref objectivesChangedEv);
         // SS220 custom objectives end
 
         // garbage collection - only delete the objective entity if no mind uses it anymore
@@ -735,7 +735,7 @@ public record struct GetCharacterUnrevivableIcEvent(bool? Unrevivable);
 
 // SS220 custom objectives begin
 [ByRefEvent]
-public record struct MindObjectivesChangedEvent;
+public readonly record struct MindObjectivesChangedEvent(EntityUid Objective, bool Added);
 // SS220 custom objectives end
 
 public sealed record MindStringRepresentation(EntityStringRepresentation? OwnedEntity, bool PlayerPresent, NetUserId? Player) : IAdminLogsPlayerValue

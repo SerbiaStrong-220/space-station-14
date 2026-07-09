@@ -1,4 +1,3 @@
-using System.Linq;
 using Content.Client.Administration.Systems;
 using Content.Client.UserInterface.Controls;
 using Content.Client.Verbs.UI;
@@ -20,11 +19,10 @@ public sealed partial class GameRulesListControl : BoxContainer
 
     private readonly AdminSystem _adminSystem;
 
-    private List<GameRuleInfo> _gameRulesList = new();
-
     public event Action<GameRuleInfo?>? OnSelectionChanged;
 
     public Func<GameRuleInfo, string, string>? OverrideText;
+
     public GameRulesListControl()
     {
         IoCManager.InjectDependencies(this);
@@ -33,7 +31,7 @@ public sealed partial class GameRulesListControl : BoxContainer
         RobustXamlLoader.Load(this);
         GameRulesListContainer.ItemPressed += GameRulesListItemPressed;
         GameRulesListContainer.GenerateItem += GenerateButton;
-        BackgroundPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = new Color(32, 32, 40) };
+        BackgroundPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = AdminListControlHelper.ListBackgroundColor };
     }
 
     protected override void EnteredTree()
@@ -56,12 +54,13 @@ public sealed partial class GameRulesListControl : BoxContainer
 
         if (data is not GameRuleListData { Info: var selectedGameRule })
             return;
+
         if (args.Event.Function == EngineKeyFunctions.UIClick)
         {
             OnSelectionChanged?.Invoke(selectedGameRule);
 
-            if (OverrideText != null && args.Button.Children.FirstOrDefault()?.Children?.FirstOrDefault() is Label label)
-                label.Text = GetText(selectedGameRule);
+            if (OverrideText != null)
+                AdminListControlHelper.UpdateButtonLabel(args.Button, GetText(selectedGameRule));
         }
         else if (args.Event.Function == EngineKeyFunctions.UseSecondary && selectedGameRule.Entity != null)
         {
@@ -75,15 +74,19 @@ public sealed partial class GameRulesListControl : BoxContainer
     {
         gameRules ??= _adminSystem.GameRulesList;
 
-        _gameRulesList = gameRules.ToList();
+        var listData = new List<ListData>(gameRules.Count);
 
-        if (_gameRulesList is not null)
-            GameRulesListContainer.PopulateList(_gameRulesList.Select(info => new GameRuleListData(info)).ToList());
+        foreach (var gameRule in gameRules)
+        {
+            listData.Add(new GameRuleListData(gameRule));
+        }
+
+        GameRulesListContainer.PopulateList(listData);
     }
 
     private string GetText(GameRuleInfo info)
     {
-        var text = $"n{info.Entity} - {info.Name}";
+        var text = $"{info.Entity} - {info.Name}";
         if (OverrideText != null)
             text = OverrideText.Invoke(info, text);
         return text;

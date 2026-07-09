@@ -1,4 +1,3 @@
-using System.Linq;
 using Content.Server.Roles;
 using Content.Server.Administration.Managers;
 using Content.Server.Roles.Jobs;
@@ -44,7 +43,6 @@ public sealed partial class CustomObjectivesAdminSystem : EntitySystem
             UpdateCustomObjectivesPlayer((mindId, mindComp), false);
         }
 
-        SendCustomObjectivesList();
     }
 
     public override void Shutdown()
@@ -56,7 +54,7 @@ public sealed partial class CustomObjectivesAdminSystem : EntitySystem
 
     private void OnObjectiveRemove(Entity<ObjectiveComponent> objective, ref ComponentRemove _args)
     {
-        if (!objective.Comp.Completed.HasValue)
+        if (!IsCustomObjective(objective.Comp))
             return;
 
         if (!_customObjectiveOwners.Remove(objective, out var mindId))
@@ -79,8 +77,18 @@ public sealed partial class CustomObjectivesAdminSystem : EntitySystem
         UpdateCustomObjectivesPlayer((mindId, mindComp));
     }
 
-    private void OnMindObjectivesChanged(Entity<MindComponent> mind, ref MindObjectivesChangedEvent _args)
+    private void OnMindObjectivesChanged(Entity<MindComponent> mind, ref MindObjectivesChangedEvent args)
     {
+        if (args.Added)
+        {
+            if (!TryComp(args.Objective, out ObjectiveComponent? objectiveComp) || !IsCustomObjective(objectiveComp))
+                return;
+        }
+        else if (!_customObjectiveOwners.ContainsKey(args.Objective))
+        {
+            return;
+        }
+
         UpdateCustomObjectivesPlayer(mind);
     }
 
@@ -92,17 +100,19 @@ public sealed partial class CustomObjectivesAdminSystem : EntitySystem
         if (_roles.MindIsAntagonist(mind))
         {
             RemoveOwnedCustomObjectives(mind);
-            _customObjectivesPlayers.Remove(mind.Comp.UserId.Value);
-            if (sendUpdate)
+            var removed = _customObjectivesPlayers.Remove(mind.Comp.UserId.Value);
+            if (removed && sendUpdate)
                 SendCustomObjectivesList();
             return;
         }
 
-        var customObjectives = new List<EntityUid>();
+        var customObjectives = new HashSet<EntityUid>();
         foreach (var objective in mind.Comp.Objectives)
         {
-            if (TryComp(objective, out ObjectiveComponent? objComp) && objComp.Completed.HasValue)
-                customObjectives.Add(objective);
+            if (!TryComp(objective, out ObjectiveComponent? objectiveComp) || !IsCustomObjective(objectiveComp))
+                continue;
+
+            customObjectives.Add(objective);
         }
 
         SyncOwnedCustomObjectives(mind, customObjectives);
@@ -110,8 +120,8 @@ public sealed partial class CustomObjectivesAdminSystem : EntitySystem
 
         if (customObjectiveCount == 0)
         {
-            _customObjectivesPlayers.Remove(mind.Comp.UserId.Value);
-            if (sendUpdate)
+            var removed = _customObjectivesPlayers.Remove(mind.Comp.UserId.Value);
+            if (removed && sendUpdate)
                 SendCustomObjectivesList();
             return;
         }
@@ -151,17 +161,25 @@ public sealed partial class CustomObjectivesAdminSystem : EntitySystem
             customObjectiveCount
         );
 
+        var changed =
+            !_customObjectivesPlayers.TryGetValue(mind.Comp.UserId.Value, out var previousInfo) ||
+            previousInfo != playerInfo;
+
         _customObjectivesPlayers[mind.Comp.UserId.Value] = playerInfo;
-        if (sendUpdate)
+
+        if (sendUpdate && changed)
             SendCustomObjectivesList();
     }
 
     public void SendCustomObjectivesList(ICommonSession? admin = null)
     {
-        var ev = new CustomObjectivesPlayersEvent
+        var players = new List<CustomObjectivesPlayerInfo>(_customObjectivesPlayers.Count);
+        foreach (var playerInfo in _customObjectivesPlayers.Values)
         {
-            Players = _customObjectivesPlayers.Values.ToList()
-        };
+            players.Add(playerInfo);
+        }
+
+        var ev = new CustomObjectivesPlayersEvent(players);
 
         if (admin != null)
         {
@@ -175,12 +193,17 @@ public sealed partial class CustomObjectivesAdminSystem : EntitySystem
         }
     }
 
-    private void SyncOwnedCustomObjectives(Entity<MindComponent> mind, List<EntityUid> currentObjectives)
+    private void SyncOwnedCustomObjectives(Entity<MindComponent> mind, HashSet<EntityUid> currentObjectives)
     {
-        var staleObjectives = _customObjectiveOwners
-            .Where(pair => pair.Value == mind.Owner && !currentObjectives.Contains(pair.Key))
-            .Select(pair => pair.Key)
-            .ToArray();
+        var staleObjectives = new List<EntityUid>();
+
+        foreach (var (objective, owner) in _customObjectiveOwners)
+        {
+            if (owner != mind.Owner || currentObjectives.Contains(objective))
+                continue;
+
+            staleObjectives.Add(objective);
+        }
 
         foreach (var staleObjective in staleObjectives)
         {
@@ -195,14 +218,24 @@ public sealed partial class CustomObjectivesAdminSystem : EntitySystem
 
     private void RemoveOwnedCustomObjectives(Entity<MindComponent> mind)
     {
-        var objectives = _customObjectiveOwners
-            .Where(pair => pair.Value == mind.Owner)
-            .Select(pair => pair.Key)
-            .ToArray();
+        var objectives = new List<EntityUid>();
+
+        foreach (var (objective, owner) in _customObjectiveOwners)
+        {
+            if (owner != mind.Owner)
+                continue;
+
+            objectives.Add(objective);
+        }
 
         foreach (var objective in objectives)
         {
             _customObjectiveOwners.Remove(objective);
         }
+    }
+
+    private static bool IsCustomObjective(ObjectiveComponent objective)
+    {
+        return objective.Completed is not null;
     }
 }

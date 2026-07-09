@@ -6,11 +6,16 @@ namespace Content.Shared.SS220.Administration.Events;
 [Serializable, NetSerializable]
 public sealed class CustomObjectivesPlayersEvent : EntityEventArgs
 {
-    public List<CustomObjectivesPlayerInfo> Players = new();
+    public List<CustomObjectivesPlayerInfo> Players;
+
+    public CustomObjectivesPlayersEvent(List<CustomObjectivesPlayerInfo> players)
+    {
+        Players = players;
+    }
 }
 
 [Serializable, NetSerializable]
-public sealed record CustomObjectivesPlayerInfo(
+public readonly record struct CustomObjectivesPlayerInfo(
     string Username,
     string CharacterName,
     string IdentityName,

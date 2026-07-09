@@ -1,4 +1,3 @@
-using System.Linq;
 using Content.Client.SS220.Administration.Systems;
 using Content.Client.UserInterface.Controls;
 using Content.Client.Verbs.UI;
@@ -9,6 +8,7 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Input;
+using Robust.Shared.Network;
 
 namespace Content.Client.SS220.Administration.UI.CustomControls;
 
@@ -20,8 +20,8 @@ public sealed partial class CustomObjectivesListControl : BoxContainer
 
     private readonly CustomObjectivesSystem _customObjectivesSystem;
 
-    private List<CustomObjectivesPlayerInfo> _customObjectivesList = new();
-    private CustomObjectivesPlayerInfo? _selectedPlayer;
+    private readonly Dictionary<NetUserId, CustomObjectivesPlayerInfo> _playersBySession = new();
+    private NetUserId? _selectedPlayerSessionId;
 
     public event Action<CustomObjectivesPlayerInfo?>? OnSelectionChanged;
 
@@ -35,7 +35,7 @@ public sealed partial class CustomObjectivesListControl : BoxContainer
         CustomObjectivesListContainer.ItemPressed += CustomObjectivesListItemPressed;
         CustomObjectivesListContainer.GenerateItem += GenerateButton;
 
-        BackgroundPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = new Color(32, 32, 40) };
+        BackgroundPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = AdminListControlHelper.ListBackgroundColor };
     }
 
     protected override void EnteredTree()
@@ -53,23 +53,27 @@ public sealed partial class CustomObjectivesListControl : BoxContainer
 
     public void UpdatePlayerList(IReadOnlyList<CustomObjectivesPlayerInfo> players)
     {
-        _customObjectivesList = players.ToList();
-        CustomObjectivesListContainer.PopulateList(_customObjectivesList.Select(info => new CustomObjectivesListData(info)).ToList());
+        _playersBySession.Clear();
+        var listData = new List<ListData>(players.Count);
 
-        if (_selectedPlayer == null)
+        foreach (var player in players)
+        {
+            _playersBySession[player.SessionId] = player;
+            listData.Add(new CustomObjectivesListData(player));
+        }
+
+        CustomObjectivesListContainer.PopulateList(listData);
+
+        if (_selectedPlayerSessionId is not { } selectedPlayerSessionId)
             return;
 
-        foreach (var player in _customObjectivesList)
+        if (_playersBySession.TryGetValue(selectedPlayerSessionId, out var selectedPlayer))
         {
-            if (player.SessionId != _selectedPlayer.SessionId)
-                continue;
-
-            _selectedPlayer = player;
-            OnSelectionChanged?.Invoke(player);
+            OnSelectionChanged?.Invoke(selectedPlayer);
             return;
         }
 
-        _selectedPlayer = null;
+        _selectedPlayerSessionId = null;
         OnSelectionChanged?.Invoke(null);
     }
 
@@ -80,13 +84,14 @@ public sealed partial class CustomObjectivesListControl : BoxContainer
 
         if (data is not CustomObjectivesListData { Info: var selectedPlayer })
             return;
+
         if (args.Event.Function == EngineKeyFunctions.UIClick)
         {
-            _selectedPlayer = selectedPlayer;
+            _selectedPlayerSessionId = selectedPlayer.SessionId;
             OnSelectionChanged?.Invoke(selectedPlayer);
 
-            if (OverrideText != null && args.Button.Children.FirstOrDefault()?.Children?.FirstOrDefault() is Label label)
-                label.Text = GetText(selectedPlayer);
+            if (OverrideText != null)
+                AdminListControlHelper.UpdateButtonLabel(args.Button, GetText(selectedPlayer));
         }
         else if (args.Event.Function == EngineKeyFunctions.UseSecondary && selectedPlayer.NetEntity != null)
         {

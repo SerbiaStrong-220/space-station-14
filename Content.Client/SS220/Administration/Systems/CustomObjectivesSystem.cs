@@ -1,9 +1,12 @@
+using Content.Client.Administration.Managers;
 using Content.Shared.SS220.Administration.Events;
 
 namespace Content.Client.SS220.Administration.Systems;
 
 public sealed partial class CustomObjectivesSystem : EntitySystem
 {
+    [Dependency] private IClientAdminManager _adminManager = default!;
+
     public event Action<IReadOnlyList<CustomObjectivesPlayerInfo>>? CustomObjectivesListChanged;
 
     private List<CustomObjectivesPlayerInfo> _players = new();
@@ -18,6 +21,9 @@ public sealed partial class CustomObjectivesSystem : EntitySystem
 
     private void OnCustomObjectivesPlayersEvent(CustomObjectivesPlayersEvent ev)
     {
+        if (!_adminManager.CanCommand("requestcustomobjectives"))
+            return;
+
         _players = ev.Players;
         CustomObjectivesListChanged?.Invoke(_players);
     }
