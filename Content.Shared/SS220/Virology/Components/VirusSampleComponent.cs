@@ -12,7 +12,7 @@ public sealed partial class VirusSampleComponent : Component
 {
     /// <summary>Exact strain to load into container.</summary>
     [DataField(required: true)]
-    public ProtoId<VirusPrototype> Virus;
+    public EntProtoId Virus;
 
     /// <summary>Reagent virus being carried on.</summary>
     [DataField]

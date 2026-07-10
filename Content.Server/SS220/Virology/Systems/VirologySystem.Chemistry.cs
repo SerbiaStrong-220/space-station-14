@@ -1,7 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Server.SS220.Chemistry;
 using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.SS220.Virology;
 using Robust.Shared.Audio.Systems;
@@ -22,7 +22,7 @@ public sealed partial class VirologySystem
     private void InitializeChemistry()
     {
         BuildTables();
-        SubscribeLocalEvent<RefillableSolutionChangedEvent>(OnSolutionChanged);
+        SubscribeLocalEvent<VirusReactiveComponent, SolutionContainerChangedEvent>(OnSolutionChanged);
     }
 
     private void BuildTables()
@@ -40,7 +40,7 @@ public sealed partial class VirologySystem
             _removals[proto.Reagent] = proto;
     }
 
-    private void OnSolutionChanged(ref RefillableSolutionChangedEvent args)
+    private void OnSolutionChanged(Entity<VirusReactiveComponent> ent, ref SolutionContainerChangedEvent args)
     {
         if (_reacting)
             return;
@@ -48,10 +48,13 @@ public sealed partial class VirologySystem
         if (_mutations.Count == 0 && _reveals.Count == 0 && _removals.Count == 0)
             return;
 
+        if (!_solutionContainer.TryGetSolution(ent.Owner, args.SolutionId, out var soln, out _))
+            return;
+
         _reacting = true;
         try
         {
-            React(args.Solution);
+            React(soln.Value);
         }
         finally
         {

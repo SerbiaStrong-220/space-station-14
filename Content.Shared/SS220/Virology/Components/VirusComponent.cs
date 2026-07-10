@@ -10,39 +10,48 @@ namespace Content.Shared.SS220.Virology;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class VirusComponent : Component
 {
-    /// <summary>The infected host this strain sits in.</summary>
-    [DataField, AutoNetworkedField]
-    public EntityUid Carrier;
+    /// <summary>Default name of strain. A mutated strain carries a generated name instead.</summary>
+    [DataField]
+    public LocId? NameLoc;
 
-    /// <summary>Prototype this strain was built from, null once mutated. For identity + re-infection.</summary>
-    [DataField, AutoNetworkedField]
-    public ProtoId<VirusPrototype>? Source;
+    /// <summary>Symptoms this strain is made of.</summary>
+    [DataField]
+    public List<ProtoId<VirusSymptomPrototype>> Symptoms = [];
 
-    /// <summary>Display name, null = prototype/generated name.</summary>
-    [DataField, AutoNetworkedField]
-    public string? Name;
-
-    [DataField, AutoNetworkedField]
-    public VirusGenome Genome;
-
+    /// <summary>How this strain spreads. Null = can't.</summary>
     [DataField, AutoNetworkedField]
     public VirusTransmission? Transmission;
 
+    /// <summary>The infected host this strain sits in.</summary>
+    [ViewVariables, AutoNetworkedField]
+    public EntityUid Carrier;
+
+    /// <summary>Strain prototype this was built from, null once mutated. For identity + name.</summary>
+    [ViewVariables, AutoNetworkedField]
+    public EntProtoId? Source;
+
+    /// <summary>Display name, null = prototype/generated name.</summary>
+    [ViewVariables, AutoNetworkedField]
+    public string? Name;
+
+    [ViewVariables, AutoNetworkedField]
+    public VirusGenome Genome;
+
     /// <summary>Cure reagents for this strain.</summary>
-    [DataField, AutoNetworkedField]
+    [ViewVariables, AutoNetworkedField]
     public VirusCure? Cure;
 
     /// <summary>Formed by merging two compatible strains: can't mutate further.</summary>
-    [DataField, AutoNetworkedField]
+    [ViewVariables, AutoNetworkedField]
     public bool IsSupervirus;
 
     /// <summary>While set, virus is suppressed (symptoms off, not contagious). Null = active.</summary>
-    [DataField, AutoNetworkedField]
+    [ViewVariables, AutoNetworkedField]
     public TimeSpan? SuppressedUntil;
 
     /// <summary>Per-symptom progression state, keyed by symptom prototype.</summary>
-    [DataField, AutoNetworkedField]
-    public Dictionary<ProtoId<VirusSymptomPrototype>, VirusSymptomState> Symptoms = [];
+    [ViewVariables, AutoNetworkedField]
+    public Dictionary<ProtoId<VirusSymptomPrototype>, VirusSymptomState> SymptomStates = [];
 
     public Dictionary<ProtoId<VirusSymptomPrototype>, HashSet<string>> GrantedComponents = [];
 

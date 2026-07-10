@@ -2,6 +2,7 @@ using Content.Server.Medical.Components;
 using Content.Shared.Body.Components;
 using Content.Server.SS220.LimitationRevive; //SS220 LimitationRevive
 using Content.Server.SS220.Medical;
+using Content.Server.SS220.Virology; // SS220 Virology
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage.Components;
 using Content.Shared.DoAfter;
@@ -38,6 +39,7 @@ public sealed class HealthAnalyzerSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly BloodstreamSystem _bloodstreamSystem = default!;
     [Dependency] private readonly HealthAnalyzerPrintSystem _healthAnalyzerPrint = default!; // ss220 add health analyzer
+    [Dependency] private VirologySystem _virology = default!; // SS220 Virology
 
     public override void Initialize()
     {
@@ -289,7 +291,7 @@ public sealed class HealthAnalyzerSystem : EntitySystem
             healthAnalyzerComp?.CanPrint ?? false // SS220-health-analyzer-report
         );
         // SS220 Virology start
-        uiState.Viruses = _healthAnalyzerPrint.GetVirusLines(entity);
+        uiState.Viruses = _virology.GetAnalyzerVirusLines(entity);
         return uiState;
         // SS220 Virology end
     }

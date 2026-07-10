@@ -2,7 +2,6 @@
 
 using Content.Server.Administration;
 using Content.Shared.Administration;
-using Content.Shared.SS220.Pathology;
 using Robust.Shared.Console;
 
 namespace Content.Server.SS220.Virology.Commands;
@@ -31,12 +30,7 @@ public sealed partial class AdvanceSymptomsCommand : IConsoleCommand
             return;
         }
 
-        var advanced = 0;
-
-        if (_entityManager.HasComponent<PathologyHolderComponent>(target.Value))
-            advanced += _entityManager.System<SharedPathologySystem>().ForceAdvanceAllPathologies(target.Value);
-
-        advanced += _entityManager.System<VirologySystem>().ForceAdvanceAllSymptoms(target.Value);
+        var advanced = _entityManager.System<VirologySystem>().ForceAdvanceAllSymptoms(target.Value);
 
         shell.WriteLine(Loc.GetString("advancesymptoms-command-advanced", ("count", advanced), ("target", netEntity)));
     }

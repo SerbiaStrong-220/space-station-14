@@ -286,10 +286,10 @@ disease-diagnoser-not-enough-mutagen = В буфере недостаточно 
 disease-diagnoser-no-mutagen-source = Во вставленной ёмкости нет стабильного мутагена.
 disease-diagnoser-copied = Вирус переписан в новый пузырёк.
 
-# Общие элементы консолей патологии (используются окнами диагнозера и вакцинатора)
-pathology-console-station = СТАНЦИЯ: {$name}
-pathology-console-station-unknown = СТАНЦИЯ: —
-pathology-console-os = nt-os 0.220-c35
+# Общие элементы консолей вирусологии (используются окнами диагнозера и вакцинатора)
+virology-console-station = СТАНЦИЯ: {$name}
+virology-console-station-unknown = СТАНЦИЯ: —
+virology-console-os = nt-os 0.220-c35
 
 # ==================== Vaccinator ====================
 vaccinator-header = ВАКЦИНАЦИЯ

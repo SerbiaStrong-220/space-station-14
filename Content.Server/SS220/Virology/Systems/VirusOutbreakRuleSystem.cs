@@ -13,14 +13,18 @@ namespace Content.Server.SS220.Virology;
 public sealed partial class VirusOutbreakRuleSystem : StationEventSystem<VirusOutbreakRuleComponent>
 {
     [Dependency] private VirologySystem _virology = default!;
+    [Dependency] private IComponentFactory _factory = default!;
 
     protected override void Started(EntityUid uid, VirusOutbreakRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {
         base.Started(uid, component, gameRule, args);
 
-        var viruses = new List<ProtoId<VirusPrototype>>();
-        foreach (var virus in PrototypeManager.EnumeratePrototypes<VirusPrototype>())
-            viruses.Add(virus.ID);
+        var viruses = new List<EntProtoId>();
+        foreach (var proto in PrototypeManager.EnumeratePrototypes<EntityPrototype>())
+        {
+            if (proto.TryGetComponent<VirusComponent>(out var virus, _factory) && virus.Symptoms.Count > 0)
+                viruses.Add(proto.ID);
+        }
 
         if (viruses.Count == 0)
             return;

@@ -268,7 +268,7 @@
   # Stage 2
   - progressMessage: pathology-muteness-progress-2
     components:
-    - type: VirusMuted
+    - type: Muted
     detection:
       description: pathology-muteness-detection
   speciesOverrides:
@@ -536,6 +536,10 @@
           Heat: -1
           Shock: -1
           Cold: -1
+    - type: VirusGlow
+      lightColor: LimeGreen
+      lightRadius: 1.5
+      lightEnergy: 1
     detection:
       description: pathology-radiophasia-detection
     manifestation:
@@ -560,6 +564,10 @@
           Heat: -1
           Shock: -1
           Cold: -1
+    - type: VirusGlow
+      lightColor: LimeGreen
+      lightRadius: 1.5
+      lightEnergy: 1
     detection:
       description: pathology-radiophasia-detection
     manifestation:
@@ -584,6 +592,10 @@
           Heat: -1
           Shock: -1
           Cold: -1
+    - type: VirusGlow
+      lightColor: LimeGreen
+      lightRadius: 1.5
+      lightEnergy: 1
     detection:
       description: pathology-radiophasia-detection
     manifestation:
@@ -1407,6 +1419,10 @@
       damage:
         types:
           Heat: 12
+    - type: VirusGlow
+      lightColor: Red
+      lightRadius: 1.2
+      lightEnergy: 0.5
     detection:
       description: pathology-laser-eyes-detection
     manifestation:
@@ -1425,6 +1441,10 @@
       damage:
         types:
           Heat: 24
+    - type: VirusGlow
+      lightColor: Red
+      lightRadius: 1.2
+      lightEnergy: 0.5
     detection:
       description: pathology-laser-eyes-detection
     manifestation:
@@ -1443,6 +1463,10 @@
       damage:
         types:
           Heat: 36
+    - type: VirusGlow
+      lightColor: Red
+      lightRadius: 1.2
+      lightEnergy: 0.5
     detection:
       description: pathology-laser-eyes-detection
     manifestation:

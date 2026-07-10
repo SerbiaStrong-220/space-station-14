@@ -21,7 +21,7 @@ public sealed partial class VirologySystem
 
     private const float MinAirbornePressure = Atmospherics.HazardLowPressure;
 
-    private readonly List<(EntityUid Uid, VirusHolderComponent Holder)> _holderBuf = new();
+    private readonly List<(EntityUid Uid, VirusHolderComponent Holder)> _holderBuf = [];
 
     private void InitializeSpread()
     {
@@ -134,7 +134,7 @@ public sealed partial class VirologySystem
             foreach (var strain in contaminant.Viruses)
             {
                 var descriptor = strain.Descriptor;
-                if (descriptor.Transmission is { ContactChance: > 0f } transmission && _random.Prob(transmission.ContactChance))
+                if (ResolveTransmission(descriptor) is { ContactChance: > 0f } transmission && _random.Prob(transmission.ContactChance))
                     AddVirus(ent.Owner, descriptor.Clone());
             }
         }

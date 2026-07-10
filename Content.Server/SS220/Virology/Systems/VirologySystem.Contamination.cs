@@ -7,7 +7,7 @@ namespace Content.Server.SS220.Virology;
 
 public sealed partial class VirologySystem
 {
-    private readonly List<EntityUid> _expiredBuf = new();
+    private readonly List<EntityUid> _expiredBuf = [];
 
     private void InitializeContamination()
     {

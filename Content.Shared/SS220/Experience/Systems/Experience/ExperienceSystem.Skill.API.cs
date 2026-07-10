@@ -62,6 +62,9 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (HasComp<BypassSkillCheckComponent>(entity))
             return true;
 
+        if (HasComp<SkillSuppressionComponent>(entity))
+            return false;
+
         if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
             return false;
 
@@ -85,6 +88,12 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (HasComp<BypassSkillCheckComponent>(entity))
         {
             resultSkills = [.. treeProto.SkillTree];
+            return true;
+        }
+
+        if (HasComp<SkillSuppressionComponent>(entity))
+        {
+            resultSkills = [];
             return true;
         }
 
@@ -156,6 +165,9 @@ public sealed partial class ExperienceSystem : EntitySystem
             return true;
         }
 
+        if (HasComp<SkillSuppressionComponent>(entity))
+            return false;
+
         if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
             return false;
 
@@ -191,6 +203,9 @@ public sealed partial class ExperienceSystem : EntitySystem
         sublevel = null;
 
         if (!Resolve(entity.Owner, ref entity.Comp))
+            return false;
+
+        if (HasComp<SkillSuppressionComponent>(entity) && !HasComp<BypassSkillCheckComponent>(entity))
             return false;
 
         // skill issue?

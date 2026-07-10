@@ -10,7 +10,6 @@ namespace Content.Server.SS220.Virology.Behaviors;
 
 public sealed partial class VirusRadiophasiaSystem : EntitySystem
 {
-    [Dependency] private SharedPointLightSystem _light = default!;
     [Dependency] private SharedRadiationSystem _radiation = default!;
     [Dependency] private DamageableSystem _damageable = default!;
 
@@ -25,8 +24,6 @@ public sealed partial class VirusRadiophasiaSystem : EntitySystem
 
     private void OnStartup(Entity<VirusRadiophasiaComponent> ent, ref ComponentStartup args)
     {
-        VirusGlow.Apply(EntityManager, _light, ent.Owner, ent.Comp.LightColor, ent.Comp.LightRadius, ent.Comp.LightEnergy, ref ent.Comp.Glow);
-
         if (TryComp<RadiationSourceComponent>(ent.Owner, out var existing))
             ent.Comp.PreviousIntensity = existing.Intensity;
         else
@@ -45,8 +42,6 @@ public sealed partial class VirusRadiophasiaSystem : EntitySystem
             RemComp<RadiationSourceComponent>(ent.Owner);
         else if (ent.Comp.PreviousIntensity is { } previous)
             _radiation.SetIntensity(ent.Owner, previous);
-
-        VirusGlow.Restore(EntityManager, _light, ent.Owner, ent.Comp.Glow);
     }
 
     private void OnIrradiated(Entity<VirusRadiophasiaComponent> ent, ref OnIrradiatedEvent args)

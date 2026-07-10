@@ -6,7 +6,7 @@
   - type: Label
     currentLabel: virus-cold-name
   - type: VirusSample
-    virus: Cold
+    virus: VirusCold
 - type: entity
   parent: ChemistryEmptyVial
   id: QuvotVirusSample
@@ -15,7 +15,7 @@
   - type: Label
     currentLabel: virus-quvot-name
   - type: VirusSample
-    virus: Quvot
+    virus: VirusQuvot
 - type: entity
   parent: ChemistryEmptyVial
   id: RedDeathVirusSample
@@ -24,7 +24,7 @@
   - type: Label
     currentLabel: virus-red-death-name
   - type: VirusSample
-    virus: RedDeath
+    virus: VirusRedDeath
     amount: 15
 - type: entity
   parent: CrateMedical

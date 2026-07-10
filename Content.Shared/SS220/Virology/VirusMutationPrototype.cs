@@ -7,7 +7,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Virology;
 
-[Prototype("virusMutagen")]
+[Prototype]
 public sealed partial class VirusMutationPrototype : IPrototype
 {
     [IdDataField]

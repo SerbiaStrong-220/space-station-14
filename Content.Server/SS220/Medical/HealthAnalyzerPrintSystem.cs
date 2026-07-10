@@ -40,11 +40,6 @@ public sealed partial class HealthAnalyzerPrintSystem : EntitySystem
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private VirologySystem _virology = default!;
 
-    public List<string> GetVirusLines(EntityUid target)
-    {
-        return _virology.GetAnalyzerVirusLines(target);
-    }
-
     public override void Initialize()
     {
         SubscribeLocalEvent<HealthAnalyzerComponent, HealthAnalyzerPrintMessage>(OnPrint);
@@ -196,12 +191,11 @@ public sealed partial class HealthAnalyzerPrintSystem : EntitySystem
 
         builder.AppendLine();
         builder.AppendLine(Loc.GetString("health-analyzer-report-section-viruses"));
-        var virusLines = GetVirusLines(target);
+        var virusLines = _virology.GetAnalyzerVirusLines(target);
         if (virusLines.Count == 0)
             builder.AppendLine(Loc.GetString("health-analyzer-report-none"));
         else
-            foreach (var line in virusLines)
-                builder.AppendLine(line);
+            builder.AppendJoin('\n', virusLines);
 
         return builder.ToString();
     }

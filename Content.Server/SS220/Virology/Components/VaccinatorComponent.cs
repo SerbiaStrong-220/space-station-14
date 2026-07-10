@@ -60,6 +60,5 @@ public sealed partial class VaccinatorComponent : Component
 
     public bool HasResult;
 
-    /// <summary>One block per virus.</summary>
-    public List<VaccinatorVirusResult> ResultViruses = [];
+    public List<VaccinatorVirusResult> ScanResults = [];
 }

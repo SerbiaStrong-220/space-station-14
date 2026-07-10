@@ -63,6 +63,8 @@ public sealed partial class VirusElectrophiliaSystem : EntitySystem
 
         _nextUpdate = _timing.CurTime + UpdateInterval;
 
+        var seconds = (float)UpdateInterval.TotalSeconds;
+
         var query = EntityQueryEnumerator<VirusElectrophiliaComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
@@ -72,7 +74,7 @@ public sealed partial class VirusElectrophiliaSystem : EntitySystem
             if (_timing.CurTime - comp.LastShock < comp.WithdrawalDelay)
                 continue;
 
-            _stamina.TakeStaminaDamage(uid, comp.WithdrawalStaminaDamage);
+            _stamina.TakeStaminaDamage(uid, comp.WithdrawalStaminaDamage * seconds);
         }
     }
 }

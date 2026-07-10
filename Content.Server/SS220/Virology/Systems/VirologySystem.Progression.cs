@@ -60,7 +60,7 @@ public sealed partial class VirologySystem
 
             if (banked > TimeSpan.Zero)
             {
-                foreach (var state in comp.Symptoms.Values)
+                foreach (var state in comp.SymptomStates.Values)
                 {
                     state.StageStartTime += banked;
                     state.LastEmote += banked;
@@ -72,7 +72,7 @@ public sealed partial class VirologySystem
             if (dead)
                 continue;
 
-            foreach (var (symptomId, state) in comp.Symptoms)
+            foreach (var (symptomId, state) in comp.SymptomStates)
             {
                 if (!_proto.Resolve(symptomId, out var symptom))
                     continue;
@@ -167,7 +167,7 @@ public sealed partial class VirologySystem
         foreach (var strain in EnumerateStrains(ent.Comp))
         {
             var virus = strain.Comp;
-            foreach (var (symptomId, state) in virus.Symptoms)
+            foreach (var (symptomId, state) in virus.SymptomStates)
             {
                 if (!_proto.Resolve(symptomId, out var symptom))
                     continue;

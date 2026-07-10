@@ -18,7 +18,6 @@ public sealed partial class VirusLaserEyesSystem : EntitySystem
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedGunSystem _gun = default!;
-    [Dependency] private SharedPointLightSystem _light = default!;
     [Dependency] private BlindableSystem _blindable = default!;
 
     public override void Initialize()
@@ -34,18 +33,11 @@ public sealed partial class VirusLaserEyesSystem : EntitySystem
     {
         _actions.AddAction(ent.Owner, ref ent.Comp.ActionEntity, ent.Comp.ActionId);
         _actions.SetUseDelay(ent.Comp.ActionEntity, ent.Comp.Cooldown);
-
-        VirusGlow.Apply(EntityManager, _light, ent.Owner, ent.Comp.LightColor, ent.Comp.LightRadius, ent.Comp.LightEnergy, ref ent.Comp.Glow);
     }
 
     private void OnShutdown(Entity<VirusLaserEyesComponent> ent, ref ComponentShutdown args)
     {
         _actions.RemoveAction(ent.Owner, ent.Comp.ActionEntity);
-
-        if (Terminating(ent.Owner))
-            return;
-
-        VirusGlow.Restore(EntityManager, _light, ent.Owner, ent.Comp.Glow);
     }
 
     private void OnLaser(Entity<VirusLaserEyesComponent> ent, ref VirusLaserEyesActionEvent args)

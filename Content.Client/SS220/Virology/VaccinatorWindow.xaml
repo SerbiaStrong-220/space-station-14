@@ -7,12 +7,12 @@
         <PanelContainer.PanelOverride>
             <graphics:StyleBoxFlat BackgroundColor="#1E1E22" />
         </PanelContainer.PanelOverride>
-        <BoxContainer Orientation="Vertical" Margin="6">
+        <BoxContainer Orientation="Vertical" Margin="8">
             <PanelContainer>
                 <PanelContainer.PanelOverride>
                     <graphics:StyleBoxFlat BackgroundColor="#141418" />
                 </PanelContainer.PanelOverride>
-                <BoxContainer Orientation="Horizontal" Margin="8 5" VerticalAlignment="Center">
+                <BoxContainer Orientation="Horizontal" Margin="8 4" VerticalAlignment="Center">
                     <TextureRect TexturePath="/Textures/Interface/Nano/ntlogo.svg.png"
                                  Stretch="KeepAspectCentered" SetSize="22 22" Margin="0 0 8 0" />
                     <Label Text="{Loc 'vaccinator-header'}" StyleClasses="LabelHeading" FontColorOverride="#A88B5E" />
@@ -21,18 +21,18 @@
                 </BoxContainer>
             </PanelContainer>
 
-            <Label Name="StatusLabel" Text="{Loc 'vaccinator-no-sample'}" Margin="2 8 0 4" />
+            <Label Name="StatusLabel" Text="{Loc 'vaccinator-no-sample'}" Margin="0 8 0 4" />
 
-            <virology:DnaProgressBar Name="ScanProgress" MinHeight="40" Margin="0 0 0 6" />
+            <virology:DnaProgressBar Name="ScanProgress" MinHeight="40" Margin="0 0 0 8" />
 
-            <BoxContainer Orientation="Horizontal" Margin="0 0 0 2">
+            <BoxContainer Orientation="Horizontal">
                 <Button Name="ScanButton" Access="Public" Text="{Loc 'vaccinator-scan-button'}" Disabled="True" HorizontalExpand="True" />
                 <Button Name="EjectButton" Access="Public" Text="{Loc 'vaccinator-eject-button'}" Margin="4 0 0 0" />
             </BoxContainer>
 
-            <PanelContainer StyleClasses="LowDivider" Margin="0 6" />
+            <PanelContainer StyleClasses="LowDivider" Margin="0 8" />
             <BoxContainer Name="ResultsContainer" Orientation="Vertical" />
-            <PanelContainer StyleClasses="LowDivider" Margin="0 6" />
+            <PanelContainer StyleClasses="LowDivider" Margin="0 8" />
 
             <Label Name="BufferLabel" />
             <BoxContainer Orientation="Horizontal" Margin="0 4 0 0">
@@ -41,7 +41,7 @@
             </BoxContainer>
             <Button Name="PrintButton" Access="Public" Text="{Loc 'vaccinator-print-button'}" Disabled="True" Margin="0 4 0 0" HorizontalExpand="True" />
 
-            <Label Text="{Loc 'pathology-console-os'}" StyleClasses="LabelSubText" FontColorOverride="#45454D" HorizontalAlignment="Left" Margin="2 8 0 0" />
+            <Label Text="{Loc 'virology-console-os'}" StyleClasses="LabelSubText" FontColorOverride="#45454D" HorizontalAlignment="Left" Margin="0 8 0 0" />
         </BoxContainer>
     </PanelContainer>
 </DefaultWindow>

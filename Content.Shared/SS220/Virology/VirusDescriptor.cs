@@ -11,7 +11,7 @@ namespace Content.Shared.SS220.Virology;
 public sealed partial class VirusDescriptor
 {
     /// <summary>Prototype this strain came from (identity/name), null for a mutant.</summary>
-    public ProtoId<VirusPrototype>? Source;
+    public EntProtoId? Source;
 
     public string? Name;
 

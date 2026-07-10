@@ -238,11 +238,11 @@ public sealed partial class VaccinatorSystem : EntitySystem
                 }
             }
 
-            if (allReadable && virus.Name is { } name)
+            if (allReadable && _virology.ResolveName(virus) is { } name)
                 block.Name = name;
 
             // cure reagents only show if every symptom is revealed
-            if (virus.Cure is { } cure)
+            if (_virology.ResolveCure(virus) is { } cure)
             {
                 if (allReadable)
                 {
@@ -258,7 +258,7 @@ public sealed partial class VaccinatorSystem : EntitySystem
                 }
             }
 
-            ent.Comp.ResultViruses.Add(block);
+            ent.Comp.ScanResults.Add(block);
         }
     }
 
@@ -273,7 +273,7 @@ public sealed partial class VaccinatorSystem : EntitySystem
         }
 
         var report = new StringBuilder();
-        foreach (var virus in ent.Comp.ResultViruses)
+        foreach (var virus in ent.Comp.ScanResults)
         {
             report.AppendLine(Loc.GetString("pathology-report-pathogen",
                 ("name", virus.Name ?? Loc.GetString("pathology-report-pathogen-unknown"))));
@@ -336,7 +336,7 @@ public sealed partial class VaccinatorSystem : EntitySystem
             status,
             operationEnd,
             operationDuration,
-            [.. ent.Comp.ResultViruses],
+            [.. ent.Comp.ScanResults],
             bufferTricordrazine,
             stationName);
 
@@ -376,6 +376,6 @@ public sealed partial class VaccinatorSystem : EntitySystem
     private static void ClearResult(Entity<VaccinatorComponent> ent)
     {
         ent.Comp.HasResult = false;
-        ent.Comp.ResultViruses = [];
+        ent.Comp.ScanResults = [];
     }
 }

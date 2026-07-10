@@ -47,24 +47,11 @@ public sealed partial class VirusLaserEyesComponent : Component
     [DataField, AutoNetworkedField]
     public EntityUid? ActionEntity;
 
-    [DataField]
-    public Color LightColor = Color.Red;
-
-    [DataField]
-    public float LightRadius = 1.2f;
-
-    [DataField]
-    public float LightEnergy = 0.5f;
-
     [ViewVariables]
     public int ShotsFired;
 
     [ViewVariables]
     public int AppliedEyeDamage;
-
-    /// <summary>Data of pointlight, so cure restores the carrier's own light.</summary>
-    [ViewVariables]
-    public VirusGlowState Glow;
 }
 
 public sealed partial class VirusLaserEyesActionEvent : WorldTargetActionEvent;

@@ -14,6 +14,7 @@ public sealed partial class AddVirusCommand : IConsoleCommand
 {
     [Dependency] private EntityManager _entityManager = default!;
     [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IComponentFactory _factory = default!;
 
     public string Command => "addvirus";
     public string Description => Loc.GetString("addvirus-command-description");
@@ -34,7 +35,9 @@ public sealed partial class AddVirusCommand : IConsoleCommand
             return;
         }
 
-        if (!_prototype.HasIndex<VirusPrototype>(args[1]))
+        if (!_prototype.TryIndex<EntityPrototype>(args[1], out var proto)
+            || !proto.TryGetComponent<VirusComponent>(out var virus, _factory)
+            || virus.Symptoms.Count == 0)
         {
             shell.WriteLine(Loc.GetString("addvirus-command-no-prototype", ("id", args[1])));
             return;
@@ -53,7 +56,8 @@ public sealed partial class AddVirusCommand : IConsoleCommand
         if (args.Length != 2)
             return CompletionResult.Empty;
 
-        var options = _prototype.EnumeratePrototypes<VirusPrototype>()
+        var options = _prototype.EnumeratePrototypes<EntityPrototype>()
+            .Where(p => p.TryGetComponent<VirusComponent>(out var virus, _factory) && virus.Symptoms.Count > 0)
             .OrderBy(p => p.ID)
             .Select(p => p.ID);
 

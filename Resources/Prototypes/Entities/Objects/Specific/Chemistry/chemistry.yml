@@ -31,6 +31,7 @@
     solution: beaker
   - type: RefillableSolution
     solution: beaker
+  - type: VirusReactive # SS220 Virology
   - type: DrainableSolution
     solution: beaker
   - type: ExaminableSolution
@@ -131,6 +132,7 @@
     solution: beaker
   - type: RefillableSolution
     solution: beaker
+  - type: VirusReactive # SS220 Virology
   - type: DrainableSolution
     solution: beaker
   - type: ExaminableSolution

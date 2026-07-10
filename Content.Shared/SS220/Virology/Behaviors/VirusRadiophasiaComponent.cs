@@ -8,15 +8,6 @@ namespace Content.Shared.SS220.Virology.Behaviors;
 public sealed partial class VirusRadiophasiaComponent : Component
 {
     [DataField]
-    public Color LightColor = Color.LimeGreen;
-
-    [DataField]
-    public float LightRadius = 1.5f;
-
-    [DataField]
-    public float LightEnergy = 1f;
-
-    [DataField]
     public float RadiationIntensity = 0.5f;
 
     /// <summary>Damage healed per rad the carrier receives.</summary>
@@ -30,8 +21,4 @@ public sealed partial class VirusRadiophasiaComponent : Component
     /// <summary>Carrier's own radiation to restore to.</summary>
     [ViewVariables]
     public float? PreviousIntensity;
-
-    /// <summary>Data of pointlight, so cure restores the carrier's own light.</summary>
-    [ViewVariables]
-    public VirusGlowState Glow;
 }

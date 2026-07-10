@@ -234,12 +234,12 @@ public sealed partial class VirusDiagnoserSystem : EntitySystem
 
             if (allReadable)
             {
-                block.Transmission = GetVectors(virus.Transmission);
-                if (virus.Name is { } name)
+                block.Transmission = GetVectors(_virology.ResolveTransmission(virus));
+                if (_virology.ResolveName(virus) is { } name)
                     block.Name = name;
             }
 
-            ent.Comp.ResultViruses.Add(block);
+            ent.Comp.ScanResults.Add(block);
         }
     }
 
@@ -269,7 +269,7 @@ public sealed partial class VirusDiagnoserSystem : EntitySystem
         }
 
         var report = new StringBuilder();
-        foreach (var virus in ent.Comp.ResultViruses)
+        foreach (var virus in ent.Comp.ScanResults)
         {
             report.AppendLine(Loc.GetString("pathology-report-pathogen",
                 ("name", virus.Name ?? Loc.GetString("pathology-report-pathogen-unknown"))));
@@ -332,7 +332,7 @@ public sealed partial class VirusDiagnoserSystem : EntitySystem
             status,
             operationEnd,
             operationDuration,
-            [.. ent.Comp.ResultViruses],
+            [.. ent.Comp.ScanResults],
             bufferMutagen,
             stationName);
 
@@ -374,6 +374,6 @@ public sealed partial class VirusDiagnoserSystem : EntitySystem
     private static void ClearResult(Entity<VirusDiagnoserComponent> ent)
     {
         ent.Comp.HasResult = false;
-        ent.Comp.ResultViruses = [];
+        ent.Comp.ScanResults = [];
     }
 }

@@ -64,6 +64,5 @@ public sealed partial class VirusDiagnoserComponent : Component
 
     public bool HasResult;
 
-    /// <summary>One block per virus.</summary>
-    public List<VirusDiagnoserResult> ResultViruses = [];
+    public List<VirusDiagnoserResult> ScanResults = [];
 }

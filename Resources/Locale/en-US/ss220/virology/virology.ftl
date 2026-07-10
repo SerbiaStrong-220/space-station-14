@@ -287,10 +287,10 @@ disease-diagnoser-not-enough-mutagen = Not enough stable mutagen in the buffer.
 disease-diagnoser-no-mutagen-source = No stable mutagen in the inserted container.
 disease-diagnoser-copied = The virus is transcribed into a fresh bottle.
 
-# Shared pathology console chrome (used by the diagnoser and vaccinator windows)
-pathology-console-station = STATION: {$name}
-pathology-console-station-unknown = STATION: —
-pathology-console-os = nt-os 0.220-c35
+# Shared virology console chrome (used by the diagnoser and vaccinator windows)
+virology-console-station = STATION: {$name}
+virology-console-station-unknown = STATION: —
+virology-console-os = nt-os 0.220-c35
 
 # ==================== Vaccinator ====================
 vaccinator-header = VACCINATION

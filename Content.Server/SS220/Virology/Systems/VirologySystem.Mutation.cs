@@ -13,13 +13,13 @@ public sealed partial class VirologySystem
 {
     public bool TryMutate(Entity<VirusComponent> virus, VirusMutationPrototype mutation)
     {
-        if (virus.Comp.IsSupervirus || virus.Comp.Symptoms.Count >= MaxSymptoms)
+        if (virus.Comp.IsSupervirus || virus.Comp.SymptomStates.Count >= MaxSymptoms)
             return false;
 
-        if (!TryPickSymptom(mutation.Pool, virus.Comp.Genome, virus.Comp.Symptoms.Keys, out var picked))
+        if (!TryPickSymptom(mutation.Pool, virus.Comp.Genome, virus.Comp.SymptomStates.Keys, out var picked))
             return false;
 
-        virus.Comp.Symptoms[picked.Value] = new VirusSymptomState
+        virus.Comp.SymptomStates[picked.Value] = new VirusSymptomState
         {
             StageStartTime = _timing.CurTime,
             LastEmote = _timing.CurTime,
@@ -44,6 +44,8 @@ public sealed partial class VirologySystem
 
         var used = CollectAccelerants(descriptor);
         descriptor.Symptoms.Add(new VirusSymptomSnapshot { Symptom = picked.Value, Accelerant = RollAccelerant(used) });
+        descriptor.Cure = ResolveCure(descriptor);
+        descriptor.Transmission = ResolveTransmission(descriptor);
         descriptor.Source = null;
         descriptor.Name = GenerateName();
         return true;
@@ -54,11 +56,11 @@ public sealed partial class VirologySystem
         if (virus.Comp.Genome != genome)
             return false;
 
-        var hidden = virus.Comp.Symptoms.Where(kv => !kv.Value.Revealed).Select(kv => kv.Key).ToList();
+        var hidden = virus.Comp.SymptomStates.Where(kv => !kv.Value.Revealed).Select(kv => kv.Key).ToList();
         if (hidden.Count == 0)
             return false;
 
-        virus.Comp.Symptoms[_random.Pick(hidden)].Revealed = true;
+        virus.Comp.SymptomStates[_random.Pick(hidden)].Revealed = true;
         Dirty(virus);
         RaiseContentsChanged(virus.Comp.Carrier);
         return true;
@@ -79,12 +81,12 @@ public sealed partial class VirologySystem
 
     public bool TryRemoveSymptom(Entity<VirusComponent> virus)
     {
-        if (virus.Comp.IsSupervirus || virus.Comp.Symptoms.Count <= 1)
+        if (virus.Comp.IsSupervirus || virus.Comp.SymptomStates.Count <= 1)
             return false;
 
-        var pick = _random.Pick(virus.Comp.Symptoms.Keys.ToList());
-        ApplyStage(virus, pick, virus.Comp.Symptoms[pick].Stage, -1);
-        virus.Comp.Symptoms.Remove(pick);
+        var pick = _random.Pick(virus.Comp.SymptomStates.Keys.ToList());
+        ApplyStage(virus, pick, virus.Comp.SymptomStates[pick].Stage, -1);
+        virus.Comp.SymptomStates.Remove(pick);
         virus.Comp.CachedIdentity = null; // symptom set changed — force identity recompute
         Dirty(virus);
         RaiseContentsChanged(virus.Comp.Carrier);
@@ -110,10 +112,10 @@ public sealed partial class VirologySystem
         var used = CollectAccelerants(target.Comp);
         foreach (var snapshot in incoming.Symptoms)
         {
-            if (target.Comp.Symptoms.Count >= MaxSupervirusSymptoms)
+            if (target.Comp.SymptomStates.Count >= MaxSupervirusSymptoms)
                 break;
 
-            if (target.Comp.Symptoms.ContainsKey(snapshot.Symptom))
+            if (target.Comp.SymptomStates.ContainsKey(snapshot.Symptom))
                 continue;
 
             // keep accelerant unless its a double
@@ -123,7 +125,7 @@ public sealed partial class VirologySystem
             if (accelerant is { } addedAccelerant)
                 used.Add(addedAccelerant);
 
-            target.Comp.Symptoms[snapshot.Symptom] = new VirusSymptomState
+            target.Comp.SymptomStates[snapshot.Symptom] = new VirusSymptomState
             {
                 Stage = snapshot.Stage,
                 StageStartTime = _timing.CurTime,
