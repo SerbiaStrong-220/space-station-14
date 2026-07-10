@@ -50,7 +50,7 @@ public sealed partial class BloodBrothersRuleSystem : GameRuleSystem<BloodBrothe
         if (assignedSessions.Count < 2)
             return;
 
-        TryLinkBloodBrothers(assignedSessions, mind.Value, role.Value, mindComp, args.Def.Briefing);
+        TryLinkBloodBrothers(assignedSessions, (mind.Value, mindComp), role.Value, args.Def.Briefing);
     }
 
     private bool TryGetAntagData(
@@ -87,9 +87,8 @@ public sealed partial class BloodBrothersRuleSystem : GameRuleSystem<BloodBrothe
 
     private void TryLinkBloodBrothers(
         HashSet<ICommonSession> assignedSessions,
-        EntityUid currentMind,
+        Entity<MindComponent> currentMind,
         Entity<BloodBrothersRoleComponent> currentRole,
-        MindComponent currentMindComp,
         BriefingData? briefing)
     {
         var firstBrotherSession = assignedSessions.FirstOrDefault();
@@ -107,14 +106,14 @@ public sealed partial class BloodBrothersRuleSystem : GameRuleSystem<BloodBrothe
         firstBrotherRole.Value.Comp2.Brother = currentMind;
         currentRole.Comp.Brother = firstBrotherMind.Value;
 
-        CopyObjectives(firstBrotherMind.Value, currentMind);
+        CopyObjectives(firstBrotherMind.Value, currentMind.Owner);
 
         Dirty(firstBrotherRole.Value);
         Dirty(currentRole);
 
         if (briefing != null)
         {
-            if (firstBrotherMindComp.OwnedEntity != null && currentMindComp.CharacterName != null)
+            if (firstBrotherMindComp.OwnedEntity != null && currentMind.Comp.CharacterName != null)
             {
                 _antag.SendBriefing(firstBrotherMindComp.OwnedEntity.Value,
                     MakeBriefing(firstBrotherMind.Value),
@@ -122,9 +121,9 @@ public sealed partial class BloodBrothersRuleSystem : GameRuleSystem<BloodBrothe
                     briefing.Value.Sound);
             }
 
-            if (currentMindComp.OwnedEntity != null && firstBrotherMindComp.CharacterName != null)
+            if (currentMind.Comp.OwnedEntity != null && firstBrotherMindComp.CharacterName != null)
             {
-                _antag.SendBriefing(currentMindComp.OwnedEntity.Value,
+                _antag.SendBriefing(currentMind.Comp.OwnedEntity.Value,
                     MakeBriefing(currentMind),
                     null,
                     briefing.Value.Sound);
