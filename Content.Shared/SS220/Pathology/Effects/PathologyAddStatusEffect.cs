@@ -11,16 +11,16 @@ public sealed partial class PathologyAddStatusEffect : IPathologyEffect
     [DataField(required: true)]
     public EntProtoId StatusEffect;
 
-    public void ApplyEffect(in PathologyEffectArgs args)
+    public void ApplyEffect(EntityUid uid, PathologyInstanceData data, IEntityManager entityManager)
     {
-        var statusEffects = args.EntityManager.System<StatusEffectsSystem>();
+        var statusEffects = entityManager.System<StatusEffectsSystem>();
 
-        if (!statusEffects.TryUpdateStatusEffectDuration(args.Target, StatusEffect, out var effect, null, null))
+        if (!statusEffects.TryUpdateStatusEffectDuration(uid, StatusEffect, out var effect, null, null))
             return;
 
-        if (!args.EntityManager.TryGetComponent<PathologyStatusEffectStackableComponent>(effect, out var stackableComponent))
+        if (!entityManager.TryGetComponent<PathologyStatusEffectStackableComponent>(effect, out var stackableComponent))
             return;
 
-        stackableComponent.StackCount = args.Data.StackCount;
+        stackableComponent.StackCount = data.StackCount;
     }
 }

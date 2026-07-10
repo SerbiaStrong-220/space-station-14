@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Inventory;
+using Content.Shared.Traits;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Pathology;
@@ -28,23 +29,17 @@ public sealed partial class PathologyDefinition
     [DataField(required: true)]
     public LocId Description;
 
-    /// <summary>Chat feedback sent to the carrier's chat when this stage begins.</summary>
     [DataField]
-    public LocId? ProgressMessage;
-
-    /// <summary>Colour of the <see cref="ProgressMessage"/> chat line. Null uses the default colour.</summary>
-    [DataField]
-    public Color? ProgressMessageColor;
+    public LocId? ProgressPopup;
 
     [DataField]
-    public int MaxStackCount = SharedPathologySystem.DefaultMaxStack;
+    public int MaxStackCount = SharedPathologySystem.OneStack;
 
     [DataField]
     public HashSet<EntProtoId> StatusEffects = new();
 
-    /// <summary>Components added to host while this stage is active and stripped when virus/stage removed.</summary>
     [DataField]
-    public ComponentRegistry Components = new();
+    public ProtoId<TraitPrototype>? Trait;
 
     [DataField]
     public PathologyProgressCondition[] ProgressConditions = Array.Empty<PathologyProgressCondition>();

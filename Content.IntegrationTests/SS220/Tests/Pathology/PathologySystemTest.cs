@@ -125,6 +125,12 @@ public sealed class PathologySystemTest
 
     [TestPrototypes]
     private const string ProgressionPrototype = @"
+- type: trait
+  id: TestPathologyProgression
+  name: cmd-testlog-desc
+  components:
+  - type: TestPathologyProgressionTrait
+
 - type: pathology
   id: TestPathologyProgression
   name: cmd-testlog-desc
@@ -134,8 +140,7 @@ public sealed class PathologySystemTest
     - !type:PathologyTimeProgressCondition
       delay: 2s
   - description: cmd-testlog-desc
-    components:
-    - type: TestPathologyProgressionTrait
+    trait: TestPathologyProgression
 ";
 
     [Test]
