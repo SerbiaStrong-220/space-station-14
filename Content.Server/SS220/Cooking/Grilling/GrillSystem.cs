@@ -25,12 +25,15 @@ public sealed class GrillSystem : SharedGrillSystem
         {
             var activelyCooking = power.Powered && grill.GrillSettings != Shared.Temperature.EntityHeaterSetting.Off;
 
+            if (!activelyCooking)
+                return;
+
             foreach (var ent in placer.PlacedEntities)
             {
-                UpdateBeingCooked(ent, activelyCooking);
+                var canCook = HasComp<GrillableComponent>(ent) || _overcooking.CanBeOvercooked(ent);
 
-                if (!activelyCooking)
-                    continue;
+                if(canCook)
+                    UpdateBeingCooked(ent, activelyCooking);
 
                 if (_overcooking.UpdateOvercooking(ent, frameTime))
                     continue;

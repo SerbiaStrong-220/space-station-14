@@ -13,11 +13,11 @@ namespace Content.Shared.SS220.Cooking.Overcooking;
 [NetworkedComponent, AutoGenerateComponentState(true)]
 public sealed partial class OvercookingComponent : Component
 {
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public float TimeToOvercook = 15f;
 
     // Minimum time, at which the entity is considered "Overcooked", so it won't be 0.1s after cooking is done
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public float MinOvercookingTime = 5f;
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]

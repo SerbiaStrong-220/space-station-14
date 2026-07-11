@@ -27,7 +27,7 @@ public sealed class OvercookingVisualsSystem : EntitySystem
             return;
 
         var burnProgress = GetBurnProgress(ent.Comp);
-        _sprite.SetColor((ent.Owner, sprite), LerpColor(Color.White, BurntColor, burnProgress));
+        _sprite.SetColor((ent.Owner, sprite), Color.InterpolateBetween(Color.White, BurntColor, burnProgress));
     }
 
     private static float GetBurnProgress(OvercookingComponent component)
@@ -37,14 +37,5 @@ public sealed class OvercookingVisualsSystem : EntitySystem
             return 1f;
 
         return Math.Clamp((component.CurrentOvercookTime - component.MinOvercookingTime) / burnTime, 0f, 1f);
-    }
-
-    private static Color LerpColor(Color from, Color to, float ratio)
-    {
-        return new Color(
-            from.R + (to.R - from.R) * ratio,
-            from.G + (to.G - from.G) * ratio,
-            from.B + (to.B - from.B) * ratio,
-            from.A + (to.A - from.A) * ratio);
     }
 }
