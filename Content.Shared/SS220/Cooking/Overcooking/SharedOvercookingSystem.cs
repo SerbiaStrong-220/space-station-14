@@ -39,6 +39,7 @@ public sealed partial class SharedOvercookingSystem : EntitySystem
         if (overcooking.CurrentOvercookTime >= overcooking.TimeToOvercook)
         {
             var newEnt = Spawn(overcooking.OvercookedEntity, _transformSystem.GetMapCoordinates(uid));
+            _transformSystem.SetLocalRotation(newEnt, Angle.Zero);
 
             _audio.PlayPvs(overcooking.OvercookedSound, newEnt);
 
