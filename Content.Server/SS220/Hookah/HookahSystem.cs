@@ -95,6 +95,9 @@ public sealed partial class HookahSystem : EntitySystem
 
     private void OnFuelInit(Entity<SmokingFuelComponent> ent, ref ComponentInit args)
     {
+        if (!HasComp<ItemSlotsComponent>(ent))
+            return;
+
         if (_itemSlots.TryGetSlot(ent, SmokingFuelComponent.TobaccoSlotId, out var slot))
             ent.Comp.TobaccoSlot = slot;
     }
@@ -105,6 +108,12 @@ public sealed partial class HookahSystem : EntitySystem
 
     private void OnInit(Entity<HookahComponent> ent, ref ComponentInit args)
     {
+        if (!HasComp<ItemSlotsComponent>(ent))
+        {
+            UpdateAppearance(ent);
+            return;
+        }
+
         if (TryComp<HookahCoalHolderComponent>(ent, out var coalHolder))
         {
             if (_itemSlots.TryGetSlot(ent, HookahCoalHolderComponent.CoalSlotId, out var slot))
