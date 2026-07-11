@@ -3,7 +3,9 @@
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Examine;
 using Content.Shared.SS220.Cooking;
+using Content.Shared.Tag;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Cooking.Grilling;
 
@@ -12,8 +14,11 @@ namespace Content.Shared.SS220.Cooking.Grilling;
 /// </summary>
 public sealed partial class GrillableSystem : EntitySystem
 {
+    private static readonly ProtoId<TagPrototype> CookedTag = "Cooked";
+
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -58,6 +63,7 @@ public sealed partial class GrillableSystem : EntitySystem
         if (ent.Comp.CurrentCookTime >= ent.Comp.TimeToCook)
         {
             var newEnt = Spawn(ent.Comp.CookingResult, _transformSystem.GetMapCoordinates(ent));
+            _tag.AddTag(newEnt, CookedTag);
 
             _audio.PlayPvs(ent.Comp.CookingDoneSound, newEnt);
 
