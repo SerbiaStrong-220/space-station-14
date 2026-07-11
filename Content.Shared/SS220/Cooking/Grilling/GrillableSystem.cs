@@ -2,6 +2,7 @@
 
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Examine;
+using Content.Shared.SS220.Cooking;
 using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared.SS220.Cooking.Grilling;
@@ -29,7 +30,7 @@ public sealed partial class GrillableSystem : EntitySystem
         if (args.Handled)
             return;
 
-        args.Handled = ent.Comp.IsCooking;
+        args.Handled = HasComp<BeingCookedComponent>(ent);
     }
 
     private void OnGrillableExamined(Entity<GrillableComponent> ent, ref ExaminedEvent args)

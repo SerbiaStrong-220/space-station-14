@@ -27,6 +27,7 @@
       components:
       - Temperature
       - Grillable #SS220-grill-update-2
+      - Edible
   - type: PlaceableSurface
   - type: Machine
     board: ElectricGrillMachineCircuitboard
