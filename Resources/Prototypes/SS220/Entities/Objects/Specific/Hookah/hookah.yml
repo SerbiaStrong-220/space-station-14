@@ -125,7 +125,7 @@
         path: /Audio/Weapons/Guns/Empty/empty.ogg
   - type: ContainerContainer
     containers:
-      tobacco_slot: !type:ContainerSlot
+      tobacco_slot: !type:ContainerSlot {}
   - type: ItemSlots
   - type: SolutionContainerManager
     solutions:
@@ -188,7 +188,7 @@
         path: /Audio/Weapons/Guns/Empty/empty.ogg
   - type: ContainerContainer
     containers:
-      coal_slot: !type:ContainerSlot
+      coal_slot: !type:ContainerSlot {}
 
 - type: entity
   id: BaseHookahHose
