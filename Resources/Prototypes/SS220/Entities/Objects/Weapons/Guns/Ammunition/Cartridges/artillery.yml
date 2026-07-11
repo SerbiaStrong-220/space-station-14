@@ -1,10 +1,9 @@
 - type: entity
   id: BaseCartridgeArtilleryShell
-  name: base grenade
   parent: BaseItem
   abstract: true
   components:
-  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita
+  - type: EmitSoundOnLand
     sound:
       path: /Audio/SS220/Effects/Drop/artillery_shell.ogg
       params:
