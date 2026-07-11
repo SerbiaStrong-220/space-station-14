@@ -95,19 +95,20 @@ public sealed partial class HookahSystem : EntitySystem
 
     private void OnFuelInit(Entity<SmokingFuelComponent> ent, ref ComponentInit args)
     {
-        _itemSlots.AddItemSlot(ent, SmokingFuelComponent.TobaccoSlotId, ent.Comp.TobaccoSlot);
+        if (_itemSlots.TryGetSlot(ent, SmokingFuelComponent.TobaccoSlotId, out var slot))
+            ent.Comp.TobaccoSlot = slot;
     }
 
     private void OnFuelShutdown(Entity<SmokingFuelComponent> ent, ref ComponentShutdown args)
     {
-        _itemSlots.RemoveItemSlot(ent, ent.Comp.TobaccoSlot);
     }
 
     private void OnInit(Entity<HookahComponent> ent, ref ComponentInit args)
     {
         if (TryComp<HookahCoalHolderComponent>(ent, out var coalHolder))
         {
-            _itemSlots.AddItemSlot(ent, HookahCoalHolderComponent.CoalSlotId, coalHolder.CoalSlot);
+            if (_itemSlots.TryGetSlot(ent, HookahCoalHolderComponent.CoalSlotId, out var slot))
+                coalHolder.CoalSlot = slot;
 
             if (ent.Comp.IsLit)
                 EnsureComp<ActiveHookahComponent>(ent);
@@ -118,9 +119,6 @@ public sealed partial class HookahSystem : EntitySystem
 
     private void OnShutdown(Entity<HookahComponent> ent, ref ComponentShutdown args)
     {
-        if (TryComp<HookahCoalHolderComponent>(ent, out var coalHolder))
-            _itemSlots.RemoveItemSlot(ent, coalHolder.CoalSlot);
-
         if (TryComp(ent.Owner, out HookahElectricComponent? electric))
         {
             QueueElectricHose(electric.LeftHose);

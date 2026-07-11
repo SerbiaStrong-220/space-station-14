@@ -8,7 +8,6 @@ public sealed partial class HookahCoalHolderComponent : Component
 {
     public const string CoalSlotId = "coal_slot";
 
-    [DataField("coal_slot")]
     public ItemSlot CoalSlot = new();
 
     [DataField]

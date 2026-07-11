@@ -116,17 +116,18 @@
     exhaleGasType: WaterVapor
     exhaleMoles: 15
   - type: SmokingFuel
-    tobacco_slot:
-      name: hookah-tobacco-slot-name
-      whitelist:
-        components:
-        - Stack
-      insertSound:
-        path: /Audio/Weapons/Guns/Empty/empty.ogg
   - type: ContainerContainer
     containers:
       tobacco_slot: !type:ContainerSlot {}
   - type: ItemSlots
+    slots:
+      tobacco_slot:
+        name: hookah-tobacco-slot-name
+        whitelist:
+          components:
+          - Stack
+        insertSound:
+          path: /Audio/Weapons/Guns/Empty/empty.ogg
   - type: SolutionContainerManager
     solutions:
       hookah:
@@ -177,18 +178,20 @@
       path: /Audio/Items/Lighters/lighter1.ogg
     extinguishSound:
       path: /Audio/Effects/extinguish.ogg
-    coal_slot:
-      name: hookah-coal-slot-name
-      whitelist:
-        tags:
-        - HookahCoal
-      insertSound:
-        path: /Audio/Weapons/Guns/Empty/empty.ogg
-      ejectSound:
-        path: /Audio/Weapons/Guns/Empty/empty.ogg
   - type: ContainerContainer
     containers:
       coal_slot: !type:ContainerSlot {}
+  - type: ItemSlots
+    slots:
+      coal_slot:
+        name: hookah-coal-slot-name
+        whitelist:
+          tags:
+          - HookahCoal
+        insertSound:
+          path: /Audio/Weapons/Guns/Empty/empty.ogg
+        ejectSound:
+          path: /Audio/Weapons/Guns/Empty/empty.ogg
 
 - type: entity
   id: BaseHookahHose
