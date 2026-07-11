@@ -18,7 +18,7 @@
     attackRate: 1.5
     damage:
       types:
-        Slash: 12
+        Slash: 15 #SS220 weapon overhaul
   - type: Item
     size: Normal
   - type: Clothing
@@ -47,7 +47,7 @@
     attackRate: 0.75
     damage:
       types:
-        Slash: 16
+        Slash: 19 #SS220 weapon overhaul
   - type: Item
     size: Normal
   - type: Clothing

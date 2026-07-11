@@ -8,6 +8,10 @@ using Content.Shared.Examine;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Popups;
+using Content.Shared.Projectiles;
+using Content.Shared.SS220.Weapons.Ranged.Events;
+using Content.Shared.Verbs;
+using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 
@@ -18,6 +22,7 @@ public sealed partial class FieldShieldProviderSystem : EntitySystem
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
 
     private const int FieldShieldPushPriority = 2;
 
@@ -43,8 +48,12 @@ public sealed partial class FieldShieldProviderSystem : EntitySystem
         SubscribeLocalEvent<FieldShieldProviderComponent, GotEquippedEvent>(OnProviderEquipped);
         SubscribeLocalEvent<FieldShieldProviderComponent, GotUnequippedEvent>(OnProviderUnequipped);
 
-        SubscribeLocalEvent<FieldShieldComponent, BeforeDamageChangedEvent>(OnFieldShieldBeforeDamage);
-        SubscribeLocalEvent<FieldShieldComponent, DamageModifyEvent>(OnShieldDamageModify);
+        SubscribeLocalEvent<FieldShieldProviderComponent, GetVerbsEvent<AlternativeVerb>>(OnGetAltVerbs);
+
+        SubscribeLocalEvent<FieldShieldComponent, ProjectileBlockAttemptEvent>(OnShieldUserCollide);
+        SubscribeLocalEvent<FieldShieldComponent, HitscanBlockAttemptEvent>(OnShieldUserHitscan);
+        SubscribeLocalEvent<FieldShieldComponent, AttackedEvent>(OnShieldUserMeleeHit);
+        SubscribeLocalEvent<FieldShieldComponent, ThrowableProjectileBlockAttemptEvent>(OnBlockThrownProjectile);
 
         SubscribeLocalEvent<FieldShieldProviderComponent, EmpPulseEvent>(OnFieldShieldProviderEmpPulse);
         SubscribeLocalEvent<FieldShieldComponent, EmpPulseEvent>(OnFieldShieldEmpPulse);
@@ -128,10 +137,10 @@ public sealed partial class FieldShieldProviderSystem : EntitySystem
         if (!_gameTiming.IsFirstTimePredicted)
             return;
 
-        if (args.User == null)
-            return;
+        ent.Comp.Wearer = args.User;
 
-        var user = args.User.Value;
+        if (args.User is not { Valid: true } user)
+            return;
 
         var message = Loc.GetString(args.Activated ? FieldShieldOn : FieldShieldOff);
         _popup.PopupClient(message, user, user);
@@ -139,6 +148,7 @@ public sealed partial class FieldShieldProviderSystem : EntitySystem
         if (args.Activated)
         {
             var shieldComp = EnsureComp<FieldShieldComponent>(user);
+
             shieldComp.ShieldData = ent.Comp.ShieldData;
             shieldComp.RechargeShieldData = ent.Comp.RechargeShieldData;
             shieldComp.LightData = ent.Comp.LightData;
@@ -159,40 +169,75 @@ public sealed partial class FieldShieldProviderSystem : EntitySystem
 
     private void OnProviderUnequipped(Entity<FieldShieldProviderComponent> entity, ref GotUnequippedEvent args)
     {
+        entity.Comp.Wearer = null;
+
         RemCompDeferred<FieldShieldComponent>(args.EquipTarget);
         entity.Comp.Equipped = false;
     }
 
-    private void OnFieldShieldBeforeDamage(Entity<FieldShieldComponent> entity, ref BeforeDamageChangedEvent args)
+    private void OnGetAltVerbs(Entity<FieldShieldProviderComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
-        if (args.Cancelled)
+        if (ent.Comp.Wearer != args.User)
             return;
 
-        if (args.Damage.GetTotal() + args.Damage.ArmourPiercing > entity.Comp.ShieldData.MaxDamageConsumable
-            || args.Damage.GetTotal() < entity.Comp.ShieldData.DamageThreshold)
-            return;
+        foreach (var (id, mode) in ent.Comp.Modes)
+        {
+            if (id == ent.Comp.Mode)
+                continue;
 
-        UpdateShieldTimer(entity);
-
-        if (entity.Comp.ShieldCharge <= 0)
-            return;
-
-        DecreaseShieldCharges(entity);
-        args.Cancelled = true;
+            args.Verbs.Add(new AlternativeVerb
+            {
+                Text = Loc.GetString("field-shield-set-mode", ("mode", Loc.GetString(id))),
+                Act = () => SetMode(ent, id),
+                Priority = 2
+            });
+        }
     }
 
-    private void OnShieldDamageModify(Entity<FieldShieldComponent> entity, ref DamageModifyEvent args)
+    private void OnShieldUserCollide(Entity<FieldShieldComponent> ent, ref ProjectileBlockAttemptEvent args)
     {
-        if (args.OriginalDamage.GetTotal() < entity.Comp.ShieldData.DamageThreshold)
-            return;
+        if (!TryComp<ProjectileComponent>(args.ProjUid, out var projComp))
+            return;//if a projectile has no projectile component absence of logic handling it here is the least problematic part of the problem
+
+        if (TryBlockDamage(ent, projComp.Shooter, ref args.Damage))
+            args.Cancelled = true;
+    }
+
+    private void OnBlockThrownProjectile(Entity<FieldShieldComponent> ent, ref ThrowableProjectileBlockAttemptEvent args)
+    {
+        if (args.Damage != null && TryBlockDamage(ent, null, ref args.Damage))
+            args.Cancelled = true;
+    }
+
+    private void OnShieldUserHitscan(Entity<FieldShieldComponent> ent, ref HitscanBlockAttemptEvent args)
+    {
+        if (args.Damage != null && TryBlockDamage(ent, args.Shooter, ref args.Damage))
+            args.Cancelled = true;
+    }
+
+    private void OnShieldUserMeleeHit(Entity<FieldShieldComponent> ent, ref AttackedEvent args)
+    {
+        if (ent.Comp.ShieldCharge > 0)
+        {
+            args.ModifiersList.Add(ent.Comp.ShieldData.Modifiers);
+            DecreaseShieldCharges(ent);
+        }
+    }
+
+    private bool TryBlockDamage(Entity<FieldShieldComponent> entity, EntityUid? attacker, ref DamageSpecifier damage)
+    {
+        if (damage.GetTotal() < entity.Comp.ShieldData.DamageThreshold)
+            return false;
 
         UpdateShieldTimer(entity);
 
         if (entity.Comp.ShieldCharge <= 0)
-            return;
+            return false;
 
         DecreaseShieldCharges(entity);
-        args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, entity.Comp.ShieldData.Modifiers);
+        damage = DamageSpecifier.ApplyModifierSet(damage, entity.Comp.ShieldData.Modifiers);
+        _damageable.TryChangeDamage(entity.Owner, damage, out var damageResult, origin: attacker);
+        return true;
     }
 
     private void DecreaseShieldCharges(Entity<FieldShieldComponent> entity)
@@ -234,5 +279,30 @@ public sealed partial class FieldShieldProviderSystem : EntitySystem
         entity.Comp.RechargeEndTime = _gameTiming.CurTime + entity.Comp.RechargeShieldData.RechargeTime * entity.Comp.RechargeShieldData.EmpRechargeMultiplier;
         entity.Comp.ShieldCharge = 0;
         Dirty(entity);
+    }
+
+    public void SetMode(Entity<FieldShieldProviderComponent> ent, string mode)
+    {
+        if (!_gameTiming.IsFirstTimePredicted)
+            return;
+
+        if (ent.Comp.Wearer is not { Valid: true } wearer)
+            return;
+
+        if (!ent.Comp.Modes.ContainsKey(mode))
+            return;
+
+        if (!TryComp<FieldShieldComponent>(wearer, out var shieldComp))
+            return;
+
+        shieldComp.ShieldData = ent.Comp.Modes[mode];
+
+        ent.Comp.ShieldData = ent.Comp.Modes[mode];
+
+        ent.Comp.Mode = mode;
+
+        Dirty(wearer, shieldComp);
+
+        Dirty(ent);
     }
 }

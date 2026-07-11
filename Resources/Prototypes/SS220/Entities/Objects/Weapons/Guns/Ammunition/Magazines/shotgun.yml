@@ -1,0 +1,70 @@
+- type: entity
+  parent: BaseMagazineShotgun
+  id: MagazineShotgunHEI
+  name: ammo drum (18,5x72 HEI)
+  description: A large drum magazine used by some military-grade automatic shotguns.
+  components:
+  - type: BallisticAmmoProvider
+    proto: ShellShotgunSlugMagnesium
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#212121"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#212121"
+
+- type: entity
+  parent: BaseMagazineShotgun
+  id: MagazineShotgunExplosive
+  name: ammo drum (18,5x72 explosive)
+  description: A large drum magazine used by some military-grade automatic shotguns. Intended to hold less-than-lethal beanbag ammunition.
+  components:
+  - type: BallisticAmmoProvider
+    proto: ShellShotgunSlugExplosive
+  - type: Sprite
+    layers:
+    - state: pellets
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      right:
+      - state: inhand-right-mag
+
+- type: entity
+  parent: BaseMagazineShotgun
+  id: MagazineShotgunHP
+  name: ammo drum (18,5x72 HPIB)
+  description: A large drum magazine used by some military-grade automatic shotguns.
+  components:
+  - type: BallisticAmmoProvider
+    proto: ShellShotgunSlugHP
+  - type: Sprite
+    layers:
+    - state: slug
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#cf0404"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#cf0404"

@@ -135,8 +135,7 @@
       path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
     damage:
       types:
-        Piercing: 15
-        Slash: 15
+        Slash: 50 #SS220 adapt dragon to low TTK
   - type: Devourer
     foodPreferenceWhitelist:
       components:

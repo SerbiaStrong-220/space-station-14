@@ -622,6 +622,9 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             return;
         // SS220 hook attack event end
 
+        foreach (var list in attackedEvent.ModifiersList)//SS220 extended weapon logic
+            hitEvent.ModifiersList.Add(list);//SS220 extended weapon logic
+
         var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEvent.BonusDamage, hitEvent.ModifiersList);
 
         if (Damageable.TryChangeDamage(target.Value, modifiedDamage, out var damageResult, origin:user, ignoreResistances:resistanceBypass))
@@ -813,18 +816,15 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
                 continue;
             // SS220 hook attack event end
 
+            foreach (var list in attackedEvent.ModifiersList)//SS220 extended weapon logic
+                hitEvent.ModifiersList.Add(list);//SS220 extended weapon logic
+
             var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEvent.BonusDamage, hitEvent.ModifiersList);
 
             var damageResult = Damageable.ChangeDamage(entity, modifiedDamage, origin: user, ignoreResistances: resistanceBypass);
 
             if (damageResult.GetTotal() > FixedPoint2.Zero)
             {
-                // If the target has stamina and is taking blunt damage, they should also take stamina damage based on their blunt to stamina factor
-                if (damageResult.DamageDict.TryGetValue("Blunt", out var bluntDamage))
-                {
-                    _stamina.TakeStaminaDamage(entity, (bluntDamage * component.BluntStaminaDamageFactor).Float(), visual: false, source: user, with: meleeUid == user ? null : meleeUid);
-                }
-
                 appliedDamage += damageResult;
 
                 if (meleeUid == user)

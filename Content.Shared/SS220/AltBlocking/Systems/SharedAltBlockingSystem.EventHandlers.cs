@@ -17,7 +17,7 @@ public sealed partial class SharedAltBlockingSystem
     private void OnBlockUserCollide(Entity<AltBlockingUserComponent> ent, ref ProjectileBlockAttemptEvent args)
     {
         var projectileAngle = _transform.GetWorldRotation(args.ProjUid);
-        args.Cancelled = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent, projectileAngle + new Angle(Math.PI).Reduced());
+        args.Cancelled = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent, projectileAngle + new Angle(Math.PI).Reduced(), args.ProjUid);
     }
 
     private void OnBlockThrownProjectile(Entity<AltBlockingUserComponent> ent, ref ThrowableProjectileBlockAttemptEvent args)
@@ -25,13 +25,13 @@ public sealed partial class SharedAltBlockingSystem
         var itemPos = _transform.GetWorldPosition(args.DamageDealer);
         var targetPos = _transform.GetWorldPosition(ent);
         var angle = new Angle(new Vector2(targetPos.X - itemPos.X, targetPos.Y - itemPos.Y)) - new Angle(Math.PI / 2);
-        args.Cancelled = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent, angle);
+        args.Cancelled = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent, angle, args.DamageDealer);
     }
 
     private void OnBlockUserHitscan(Entity<AltBlockingUserComponent> ent, ref HitscanBlockAttemptEvent args)
     {
         var vector = _transform.GetWorldPosition(ent) - _transform.GetWorldPosition(args.Shooter);
-        args.Cancelled = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent, vector.ToAngle() - new Angle(Math.PI / 2));
+        args.Cancelled = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent, vector.ToAngle() - new Angle(Math.PI / 2), args.Hitscan);
     }
 
     private void OnBlockUserMeleeHit(Entity<AltBlockingUserComponent> ent, ref MeleeHitBlockAttemptEvent args)
@@ -112,7 +112,7 @@ public sealed partial class SharedAltBlockingSystem
             StopBlockingHelper(ent, ent.Comp.User.Value);
     }
 
-    private bool TryBlock(List<EntityUid> items, DamageSpecifier? damage, Entity<AltBlockingUserComponent> owner, Angle HitRotation)
+    private bool TryBlock(List<EntityUid> items, DamageSpecifier? damage, Entity<AltBlockingUserComponent> owner, Angle HitRotation, EntityUid incomingUid)
     {
         foreach (var item in items)
         {
@@ -134,7 +134,10 @@ public sealed partial class SharedAltBlockingSystem
             if (!TryGetNetEntity(item, out var netItem))
                 continue;
 
-            if (SharedRandomExtensions.PredictedProb(_gameTiming, owner.Comp.Blocking ? blockComp.ActiveRangeBlockProb : blockComp.RangeBlockProb, (NetEntity)netItem))
+            if (!TryGetNetEntity(incomingUid, out var netIncoming))
+                continue;
+
+            if (SharedRandomExtensions.PredictedProb(_gameTiming, owner.Comp.Blocking ? blockComp.ActiveRangeBlockProb : blockComp.RangeBlockProb, (NetEntity)netItem, (NetEntity)netIncoming))
             {
                 if (_playerManager.LocalEntity == owner && _gameTiming.IsFirstTimePredicted)
                     _audio.PlayLocal(blockComp.BlockSound, item, owner);

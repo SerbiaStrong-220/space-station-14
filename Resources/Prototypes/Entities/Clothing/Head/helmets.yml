@@ -88,6 +88,7 @@
         Heat: 0.9
         Radiation: 0.9
         Caustic: 0.95
+      #SS220 armor tweaks end
   - type: ExplosionResistance
     damageCoefficient: 0.9
   #SS220 new armor end

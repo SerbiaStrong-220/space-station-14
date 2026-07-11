@@ -1,0 +1,94 @@
+- type: entity
+  id: BaseFullRifleCartridge
+  name: cartridge (7,62x55)
+  parent: [ BaseCartridge, BaseSecurityContraband ]
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+    - FullRifleCartridge
+  - type: CartridgeAmmo
+    proto: BulletFullRifle
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+  - type: StaticPrice
+    price: 5
+
+- type: entity
+  id: FullRifleCartridge
+  name: cartridge (7,62x55 FMJ)
+  parent: BaseFullRifleCartridge
+  description: Full-sized rifle cartridge mostly used in battle rifles and LMGs. Bullet of this one consists of a steel core covered in soft jacket
+
+- type: entity
+  id: FullRifleCartridgeAP
+  name: cartridge (7,62x55 AP)
+  parent: BaseFullRifleCartridge
+  description: Full-sized rifle cartridge mostly used in battle rifles and LMGs. Bullet of this one consists of a tungsten carbide core and a soft jacket.
+  components:
+  - type: CartridgeAmmo
+    proto: BulletFullRifleAP
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+    - state: tip
+      map: ["enum.AmmoVisualLayers.Tip"]
+      color: "#65fe08"
+
+- type: entity
+  id: FullRifleCartridgeHP
+  name: cartridge (7,62x55 HPIB)
+  parent: BaseFullRifleCartridge
+  description: Full-sized rifle cartridge mostly used in battle rifles and LMGs. This one has a hollow-point bullet
+  components:
+  - type: CartridgeAmmo
+    proto: BulletFullRifleHP
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+    - state: tip
+      map: ["enum.AmmoVisualLayers.Tip"]
+      color: "#cf0404"
+
+- type: entity
+  id: FullRifleCartridgeIncendiary
+  name: cartridge (7,62x55 Tracer)
+  parent: BaseFullRifleCartridge
+  description: Full-sized rifle cartridge mostly used in battle rifles and LMGs. Bullet of this one has a cavity with an incendiary mixture.
+  components:
+  - type: CartridgeAmmo
+    proto: BulletFullRifleIncendiary
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+    - state: tip
+      map: ["enum.AmmoVisualLayers.Tip"]
+      color: "#dbdbdb"
+
+- type: entity
+  id: FullRifleCartridgeAPM2
+  name: cartridge (7,62x55 AP Mark 2)
+  parent: BaseFullRifleCartridge
+  description: Advanced full-sized rifle cartridge which holds a depelted uranium billet in a soft core. Basically no body armor can withstand this.
+  components:
+  - type: CartridgeAmmo
+    proto: BulletFullRifleAPM2
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+    - state: tip
+      map: ["enum.AmmoVisualLayers.Tip"]
+      color: "#ad42ff"

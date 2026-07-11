@@ -55,3 +55,37 @@
   components:
   - type: BallisticAmmoProvider
     proto: GrenadeEMPArta
+
+- type: entity
+  id: MagazineMagnumSubMachineGunSP-91-RC
+  name: "SP-91-RC magazine (20x100 HEDP)"
+  parent: BaseItem
+  components:
+  - type: Tag
+    tags:
+      - RocketAutoMagazine
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+        - RocketAuto
+    proto: ShellRocketAuto
+    capacity: 30
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/Magnum/sp-91.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-2
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: Appearance
+

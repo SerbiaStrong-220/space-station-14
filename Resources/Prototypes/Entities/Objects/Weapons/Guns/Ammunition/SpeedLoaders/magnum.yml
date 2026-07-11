@@ -142,12 +142,12 @@
       - state: inhand-left-mag
       - state: inhand-left-ammo
       - state: inhand-left-stripe
-        color: "#540000"
+        color: "#65fe08" #SS220 weapon overhaul
       right:
       - state: inhand-right-mag
       - state: inhand-right-ammo
       - state: inhand-right-stripe
-        color: "#540000"
+        color: "#65fe08" #SS220 weapon overhaul
 
 - type: entity
   parent: BaseSpeedLoaderMagnum

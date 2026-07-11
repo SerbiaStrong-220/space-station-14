@@ -1,8 +1,9 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Explosion;
+using Content.Shared.Inventory;
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Random;
-using Robust.Shared.Network;
 namespace Content.Shared.SS220.Grab;
 
 public partial class SharedGrabSystem
@@ -11,6 +12,7 @@ public partial class SharedGrabSystem
     {
         SubscribeLocalEvent<GrabResistanceComponent, GrabBreakoutAttemptAlertEvent>(OnBreakoutAttemptAlert);
         SubscribeLocalEvent<GrabResistanceComponent, GrabStageChangeEvent>(OnGrabStageChange);
+        SubscribeLocalEvent<GrabImmuneProviderComponent, InventoryRelayedEvent<GrabArremptEvent>>(RelayedResistance);
     }
 
     private void OnGrabStageChange(Entity<GrabResistanceComponent> ent, ref GrabStageChangeEvent args)
@@ -23,6 +25,11 @@ public partial class SharedGrabSystem
             ent.Comp.LastBreakoutAttemptAt = _timing.CurTime;
             ent.Comp.NextBreakoutAttemptAt = _timing.CurTime + ent.Comp.FirstBreakoutAttemptDelay;
         }
+    }
+
+    private void RelayedResistance(Entity<GrabImmuneProviderComponent> ent, ref InventoryRelayedEvent<GrabArremptEvent> args)
+    {
+        args.Args.Cancelled = true;
     }
 
     private void OnBreakoutAttemptAlert(Entity<GrabResistanceComponent> ent, ref GrabBreakoutAttemptAlertEvent args)

@@ -11,16 +11,45 @@
   - PortableRecharger
 
 - type: technology
-  id: HeavyBallistics
-  name: research-technology-heavy-ballistics
+  id: HollowPointAmmunition
+  name: research-technology-hollow-point-ammunition
   icon:
-    sprite: SS220/Objects/Weapons/Guns/Snipers/heavy_sniper.rsi
-    state: base
+    sprite: Objects/Weapons/Guns/Ammunition/Boxes/pistol.rsi
+    state: incendiarydisplay
   discipline: Arsenal
-  tier: 2
+  tier: 1
   cost: 9000
   recipeUnlocks:
-  - WeaponSniperCompact
+  - MagazineBoxAntiMaterielHP
+  - MagazineBoxLightRifleHP
+  - MagazineBoxMagnumHP
+  - MagazineBoxPistolHP
+  - MagazineBoxRifleHP
+  - MagazineLightRifleHP
+  - MagazinePistolHP
+  - MagazinePistolSubMachineGunHP
+  - MagazineRifleHP
+  - SpeedLoaderMagnumHP
+  - BoxShotgunHP
+  - MagazineShotgunHP
+  - MagazineFullRifleHP
+  - MagazineAntiMaterialHP
+  - MagazineBoxFullRifleHP
+
+- type: technology
+  id: ExplosiveAmmunition
+  name: research-technology-explosive-ammunition
+  icon:
+    sprite: Objects/Weapons/Guns/Ammunition/Boxes/pistol.rsi
+    state: incendiarydisplay
+  discipline: Arsenal
+  tier: 3
+  cost: 12000
+  recipeUnlocks:
+  - BoxShotgunHE
+  - MagazineBoxAntiMaterielHE
+  - MagazineAntiMaterialExplosive
+  - MagazineShotgunExplosive
 
 - type: technology
   id: AutomatedDefenceSystems
@@ -42,8 +71,8 @@
     sprite: SS220/Objects/Weapons/Guns/Battery/laser_carabine.rsi
     state: icon
   discipline: Arsenal
-  tier: 3
-  cost: 15000
+  tier: 2
+  cost: 6500
   recipeUnlocks:
   - WeaponLaserSMG
   - LaserSMGPowerCell

@@ -28,11 +28,10 @@
   components:
   - type: AccessReader
     access: [ [ "Blueshield" ] ]
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:AllSelector
-        children:
-        - id: WeaponEnergyGunRevolver
-        - id: WeaponBlasterKRS
-        - id: PowerCellBlaster
-          amount: 3
+  - type: StorageFill
+    contents:
+    - id: WeaponRifleCommando
+    - id: MagazineRifleHP
+      amount: 3
+    - id: MagazineRifleAP
+      amount: 3

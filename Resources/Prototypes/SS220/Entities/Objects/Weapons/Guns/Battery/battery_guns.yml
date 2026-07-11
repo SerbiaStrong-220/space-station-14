@@ -125,10 +125,6 @@
     magState: mag
     steps: 6
     zeroVisible: true
-  - type: Wieldable
-  - type: GunWieldBonus
-    minAngle: -15
-    maxAngle: -22
   - type: Gun
     fireRate: 6
     minAngle: 17
@@ -142,31 +138,29 @@
   parent: BaseWeaponBlaster
   id: WeaponBlasterKRS
   name: blaster KRS
-  description: An old reliable blaster rifle. There is only a semi-automatic type of shooting.
+  description: An old reliable plasma rifle. It is devastating against all types of targets but requires both energy and phorone to shoot.
   components:
+  - type: GasWeapon
+    tankSlot: cell_slot
+    gasUsage: 0.09
   - type: Gun
-    selectedMode: Burst
+    fireRate: 1.9
+    selectedMode: SemiAuto
+    projectileSpeed: 35
     availableModes:
-      - Burst
+      - SemiAuto
+  - type: Wieldable
+  - type: GunWieldBonus
+    minAngle: -15
+    maxAngle: -22
   - type: BatteryAmmoProvider
     proto: BulletBlasterBolt
     fireCost: 62.5
-  - type: BatteryWeaponFireModes
-    fireModes:
-      - proto: BulletBlasterBolt
-        name: firemode-name-blaster
-        fireCost: 62.5
-      - proto: BulletBlasterBoltPiercingWindow
-        name: firemode-name-blaster-piercing-window
-        fireCost: 62.5
-      - proto: BulletDisablerSmg
-        name: firemode-name-disabler
-        fireCost: 40
   - type: ItemSlots
     slots:
       cell_slot:
         name: Magazine
-        startingItem: PowerCellBlaster
+        startingItem: PowerCellBlasterFull
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         whitelist:
@@ -179,28 +173,27 @@
   name: blaster KRV
   description: An advanced blaster rifle. Used by special operatives.
   components:
+  - type: GasWeapon
+    tankSlot: cell_slot
+    gasUsage: 0.09
+  - type: Wieldable
+  - type: GunWieldBonus
+    minAngle: -15
+    maxAngle: -22
   - type: Gun
-    selectedMode: FullAuto
+    fireRate: 3
+    selectedMode: SemiAuto
+    projectileSpeed: 35
     availableModes:
       - SemiAuto
-      - Burst
-      - FullAuto
   - type: BatteryAmmoProvider
     proto: BulletBlasterPulse
     fireCost: 87.5
-  - type: BatteryWeaponFireModes
-    fireModes:
-      - proto: BulletBlasterPulse
-        name: firemode-name-blaster
-        fireCost: 87.5
-      - proto: BulletDisablerSmg
-        name: firemode-name-disabler
-        fireCost: 40
   - type: ItemSlots
     slots:
       cell_slot:
         name: Magazine
-        startingItem: PowerCellBlasterHighCapacity
+        startingItem: PowerCellBlasterFull
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         whitelist:
@@ -209,7 +202,7 @@
 
 - type: entity
   name: ik 40 laser carbine
-  parent: BaseWeaponBlaster
+  parent: [ BaseWeaponBlaster, BaseGunWieldable ]
   id: WeaponLaserSMG
   description: A powerful laser carbine resembling a rifle, which relies more on battery cartridges than on an integrated power cell. It is used by NanoTrasen Corporate Security squads in combat operations.
   components:
@@ -236,13 +229,18 @@
     - FullAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+    angleIncrease: 0.05
+    minAngle: 12
   - type: MagazineVisuals
     magState: mag
     steps: 5
     zeroVisible: true
   - type: GunWieldBonus
-    minAngle: -2
+    minAngle: -4
     maxAngle: -13
+  - type: GunAimable
+    minAngle: -6
+    maxAngle: -3
   - type: BatteryAmmoProvider
     proto: BulletLaserSMG
     fireCost: 48
@@ -264,7 +262,7 @@
 
 - type: entity
   name: IK 60 Laser Carbine
-  parent: BaseWeaponBlaster
+  parent: [ BaseWeaponBlaster, BaseGunWieldable ]
   id: WeaponLaserCarabine
   description: A powerful laser carbine resembling a rifle, which relies more on battery cartridges than on an integrated power cell. It is used by NanoTrasen Corporate Security squads in combat operations.
   components:
@@ -321,6 +319,169 @@
         whitelist:
           tags:
             - LaserCarabinePowerCell
+
+- type: entity
+  name: APW-021 "Devastator"
+  parent: BaseWeaponBlaster
+  id: WeaponPlasmaPistolDevastator
+  description: "An outdated energy weapon firing EM-contained ionised gas. \nWhile it is a common antimaterial weapon of many well-equipped militaries it's a rare thing here in Tigarden."
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Battery/plasma_pistol.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-3
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: mag-unshaded-3
+      map: [ "enum.GunVisualLayers.MagUnshaded" ]
+      shader: unshaded
+  - type: MagazineVisuals
+    magState: mag
+    steps: 4
+    zeroVisible: true
+  - type: Item
+    size: Small
+    shape:
+    - 0,0,1,0
+    - 0,1,0,1
+    storedOffset: 0,-4
+  - type: Tag
+    tags:
+    - Sidearm
+  - type: Appearance
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Battery/energy_magnum.rsi
+  - type: Gun
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+    canSuicide: true
+    minAngle: 9
+    maxAngle: 19
+    fireRate: 1.5
+    projectileSpeed: 30
+  - type: GasWeapon
+    tankSlot: cell_slot
+    gasUsage: 0.2
+  - type: GunAimable
+    minAngle: -5
+    maxAngle: -9
+  - type: BatteryAmmoProvider
+    proto: BulletPlasma
+    fireCost: 250
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: Magazine
+        startingItem: PowerCellBlasterFull
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        whitelist:
+          tags:
+            - PowerCellBlaster
+
+- type: entity
+  name: M32-OTW-S
+  parent: [BaseWeaponPowerCellSmall, BaseSecurityContraband]
+  id: WeaponLaserPistol
+  description: Model 32 Optical Thermal Weapon - Sidearm. This pistol-like pulse laser is widely used due to it being relatively cheap, easy to use and quite effective against humanoid targets.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Battery/laser_pistol.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-3
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: mag-unshaded-3
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: GunAimable
+    minAngle: -6.5
+    maxAngle: -6
+  - type: Gun
+    fireRate: 1.8
+    cameraRecoilScalar: 0 #Laser weapons have effectively no recoil
+    maxAngle: 15
+    minAngle: 9 #Very low values for the same reason
+    angleIncrease: 0.09 #Basically the force of a finger pulling the trigger
+  - type: Item
+    shape:
+    - 0,0,1,0
+    - 0,1,0,1
+    storedOffset: 0,-7
+    sprite: SS220/Objects/Weapons/Guns/Battery/laser_pistol.rsi
+  - type: MagazineVisuals
+    magState: mag
+    steps: 4
+    zeroVisible: true
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: Magazine
+        startingItem: WeaponPowerCell
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        whitelist:
+          tags:
+            - WeaponPowerCell
+  - type: BatteryAmmoProvider
+    proto: RedLaser
+    fireCost: 70
+
+- type: entity
+  name: M32-OTW
+  parent: [BaseWeaponPowerCell, BaseGunWieldable, BaseSecurityContraband]
+  id: WeaponLaserCarbine
+  description: Optical Thermal Weapon Model 32. This carabine-sized pulse laser is widely used due to it being relatively cheap, easy to use and quite effective against humanoid targets.
+  components:
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Battery/laser_gun.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
+    - Belt
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Battery/laser_gun.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-3
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: mag-unshaded-3
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: Item
+    sprite: Objects/Weapons/Guns/Battery/laser_gun.rsi
+  - type: GunAimable
+    minAngle: -7
+    maxAngle: -5
+  - type: Gun
+    cameraRecoilScalar: 0 #Laser weapons have effectively no recoil
+    maxAngle: 20
+    minAngle: 15 #Very low values for the same reason
+    angleIncrease: 0.09
+  - type: GunWieldBonus
+    minAngle: -5
+    maxAngle: -13
+  - type: MagazineVisuals
+    magState: mag
+    steps: 4
+    zeroVisible: true
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: Magazine
+        startingItem: WeaponPowerCell
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        whitelist:
+          tags:
+            - WeaponPowerCell
+  - type: BatteryAmmoProvider
+    proto: RedLaser
+    fireCost: 50
 
 # Новые прототипы пишите выше
 # Death Squad
@@ -403,3 +564,155 @@
       gunModifiers:
         soundGunshot: /Audio/SS220/Weapons/Guns/Gunshots/hidg_rifle.ogg
       magState: heal-mag
+
+- type: entity
+  name: M33-OTW-HE
+  parent: WeaponLaserCarbine
+  id: WeaponLaserCannon
+  description: A heavy duty, high powered laser weapon. Emits laser pulses with energy output similar to full-sized rifle cartridges.
+  components:
+  - type: Item
+    size: Huge
+    shape:
+    - 0,0,5,1
+    sprite: Objects/Weapons/Guns/Battery/laser_cannon.rsi
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Battery/laser_cannon.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: MagazineVisuals
+    magState: mag
+    steps: 5
+    zeroVisible: false
+  - type: Appearance
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Battery/laser_cannon.rsi
+  - type: Gun
+    fireRate: 1
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+  - type: BatteryAmmoProvider
+    proto: RedHeavyLaser
+    fireCost: 125
+
+- type: entity
+  name: M51-PTW-S
+  parent: [WeaponLaserPistol, BaseCentcommContraband]
+  id: WeaponPulsePistol
+  description: A state of the art energy pistol favoured as a sidearm by the NT operatives.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Battery/pulse_pistol.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+    - state: mag-4
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    storedOffset: -2,-5
+    sprite: SS220/Objects/Weapons/Guns/Battery/pulse_pistol.rsi
+  - type: MagazineVisuals
+    magState: mag
+    steps: 5
+    zeroVisible: true
+  - type: Appearance
+  - type: Clothing
+    sprite: SS220/Objects/Weapons/Guns/Battery/pulse_pistol.rsi
+  - type: Gun
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
+  - type: BatteryAmmoProvider
+    proto: Pulse
+    fireCost: 100
+  - type: Tag
+    tags:
+    - Sidearm
+    - LaserWeapon
+
+- type: entity
+  name: M51-PTW
+  parent: [WeaponLaserCarbine, BaseCentcommContraband]
+  id: WeaponPulseCarbine
+  description: A high tech energy carbine favoured by the NT-ERT operatives.
+  components:
+  - type: Item
+    size: Large
+    sprite: SS220/Objects/Weapons/Guns/Battery/pulse_carbine.rsi
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Battery/pulse_carbine.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-4
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: mag-unshaded-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: MagazineVisuals
+    magState: mag
+    steps: 5
+    zeroVisible: true
+  - type: Appearance
+  - type: Clothing
+    sprite: SS220/Objects/Weapons/Guns/Battery/pulse_carbine.rsi
+  - type: Gun
+    selectedMode: SemiAuto
+    fireRate: 3
+    availableModes:
+      - SemiAuto
+      - FullAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
+  - type: BatteryAmmoProvider
+    proto: Pulse
+    fireCost: 65
+
+- type: entity
+  name: M54-PTW-HE
+  parent: [WeaponLaserCarbine, BaseCentcommContraband]
+  id: WeaponPulseRifle
+  description: Pinnacle of portable laser armament technology, this weapon is usually issued to elite assault units of the Solar Federation army and other well-equipped militaries.
+  components:
+  - type: Item
+    size: Huge
+    shape:
+    - 0,0,4,1
+    sprite: SS220/Objects/Weapons/Guns/Battery/pulse_rifle.rsi
+  - type: MagazineVisuals
+    magState: mag
+    steps: 5
+    zeroVisible: true
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Battery/pulse_rifle.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-4
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: mag-unshaded-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: Appearance
+  - type: Clothing
+    sprite: SS220/Objects/Weapons/Guns/Battery/pulse_rifle.rsi
+  - type: Gun
+    selectedMode: SemiAuto
+    fireRate: 4
+    availableModes:
+      - SemiAuto
+      - FullAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
+  - type: BatteryAmmoProvider
+    proto: PulseHeavy
+    fireCost: 50
