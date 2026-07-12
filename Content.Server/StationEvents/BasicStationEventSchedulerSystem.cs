@@ -24,20 +24,22 @@ namespace Content.Server.StationEvents
     {
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly EventManagerSystem _event = default!;
+        [Dependency] private readonly StationEventDirectorSystem _director = default!; // SS220-event-director
 
         protected override void Started(EntityUid uid, BasicStationEventSchedulerComponent component, GameRuleComponent gameRule,
             GameRuleStartedEvent args)
         {
             // A little starting variance so schedulers dont all proc at once.
-            component.TimeUntilNextEvent = RobustRandom.NextFloat(component.MinimumTimeUntilFirstEvent, component.MinimumTimeUntilFirstEvent + component.MaximumSpanUntilFirstEvent);
+            component.NextEventTime = Timing.CurTime + TimeSpan.FromSeconds(
+                RobustRandom.NextFloat(component.MinimumTimeUntilFirstEvent,
+                    component.MinimumTimeUntilFirstEvent + component.MaximumSpanUntilFirstEvent)); // SS220-event-director
         }
 
         protected override void Ended(EntityUid uid, BasicStationEventSchedulerComponent component, GameRuleComponent gameRule,
             GameRuleEndedEvent args)
         {
-            component.TimeUntilNextEvent = component.MinimumTimeUntilFirstEvent;
+            component.NextEventTime = Timing.CurTime + TimeSpan.FromSeconds(component.MinimumTimeUntilFirstEvent); // SS220-event-director
         }
-
 
         public override void Update(float frameTime)
         {
@@ -52,24 +54,13 @@ namespace Content.Server.StationEvents
                 if (!GameTicker.IsGameRuleActive(uid, gameRule))
                     continue;
 
-                if (eventScheduler.TimeUntilNextEvent > 0)
-                {
-                    eventScheduler.TimeUntilNextEvent -= frameTime;
+                if (Timing.CurTime < eventScheduler.NextEventTime)
                     continue;
-                }
 
-                _event.RunRandomEvent(eventScheduler.ScheduledGameRules);
-                ResetTimer(eventScheduler);
+                eventScheduler.NextEventTime = Timing.CurTime + _director.RequestEvent(eventScheduler.ScheduledGameRules); // SS220-event-director
             }
         }
 
-        /// <summary>
-        /// Reset the event timer once the event is done.
-        /// </summary>
-        private void ResetTimer(BasicStationEventSchedulerComponent component)
-        {
-            component.TimeUntilNextEvent = component.MinMaxEventTiming.Next(_random);
-        }
     }
 
     [ToolshedCommand, AdminCommand(AdminFlags.Debug)]

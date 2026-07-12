@@ -1,6 +1,6 @@
 using Content.Shared.Destructible.Thresholds;
 using Content.Shared.EntityTable.EntitySelectors;
-
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Server.StationEvents.Components;
 
@@ -28,11 +28,14 @@ public sealed partial class BasicStationEventSchedulerComponent : Component
     // public MinMax MinMaxEventTiming = new(3 * 60, 10 * 60); // [wizden-code]
     public MinMax MinMaxEventTiming = new(60 * 6, 60 * 12); //SS220-cut-round-duration
 
+    // SS220-event-director-begin
     /// <summary>
-    /// How long until the next check for an event runs, is initially set based on MinimumTimeUntilFirstEvent & MinMaxEventTiming.
+    /// Absolute time for the next event request. An absolute timestamp avoids float drift from
+    /// subtracting frame time every update.
     /// </summary>
-    [DataField]
-    public float TimeUntilNextEvent;
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan NextEventTime;
+    // SS220-event-director-end
 
     /// <summary>
     /// The gamerules that the scheduler can choose from

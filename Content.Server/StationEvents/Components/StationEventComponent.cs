@@ -3,6 +3,19 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Server.StationEvents.Components;
 
+// SS220-event-director-begin
+/// <summary>
+/// The amount of pressure a random station event puts on the round.
+/// Used by the station event director to alternate between quiet and dangerous beats.
+/// </summary>
+public enum StationEventSeverity : byte
+{
+    Calm,
+    Incident,
+    Crisis,
+}
+// SS220-event-director-end
+
 /// <summary>
 ///     Defines basic data for a station event
 /// </summary>
@@ -22,6 +35,15 @@ public sealed partial class StationEventComponent : Component
 
     [DataField]
     public float Weight = WeightNormal;
+
+    // SS220-event-director-begin
+    /// <summary>
+    /// Director category for a random event. Events default to calm so unclassified content
+    /// cannot unexpectedly bypass the director's crisis cooldown.
+    /// </summary>
+    [DataField]
+    public StationEventSeverity DirectorSeverity = StationEventSeverity.Calm;
+    // SS220-event-director-end
 
     [DataField]
     public string? StartAnnouncement;

@@ -1,5 +1,7 @@
 using System.Linq;
 using Content.Server.GameTicking;
+using Content.Server.GameTicking.Presets;
+using Content.Server.GameTicking.Rules.Components;
 using Content.Server.RoundEnd;
 using Content.Server.StationEvents.Components;
 using Content.Shared.CCVar;
@@ -48,12 +50,14 @@ public sealed class EventManagerSystem : EntitySystem
     public void RunRandomEvent(EntityTableSelector limitedEventsTable)
     {
         // SS220 Проверка на отключенные случаные события в текущем пресете
-        if (GameTicker.CurrentPreset != null && GameTicker.CurrentPreset.DisableRandomEvents)
+        // SS220-event-director-begin
+        if (RandomEventsDisabled())
         {
             var errStr = Loc.GetString("station-event-system-run-random-event-disablerandevents");
             Log.Error(errStr);
             return;
         }
+        // SS220-event-director-end
         // SS220 Проверка на отключенные случаные события в текущем пресете
 
         if (!TryBuildLimitedEvents(limitedEventsTable, out var limitedEvents))
@@ -79,6 +83,61 @@ public sealed class EventManagerSystem : EntitySystem
 
         GameTicker.AddGameRule(randomLimitedEvent);
     }
+
+    // SS220-event-director-begin
+    /// <summary>
+    /// Director-controlled random event selection. Unlike <see cref="RunRandomEvent"/>, this
+    /// filters candidates by severity before performing the normal weighted selection.
+    /// </summary>
+    public bool TryRunRandomEvent(EntityTableSelector limitedEventsTable, StationEventSeverity maximumSeverity,
+        out StationEventSeverity severity)
+    {
+        severity = StationEventSeverity.Calm;
+
+        if (RandomEventsDisabled())
+            return false;
+
+        if (!TryBuildLimitedEvents(limitedEventsTable, out var limitedEvents))
+            return false;
+
+        var eligible = limitedEvents
+            .Where(pair => pair.Value.DirectorSeverity <= maximumSeverity)
+            .ToDictionary(pair => pair.Key, pair => pair.Value);
+
+        // A phase is a preference, not a reason to starve a round of harmless content.
+        if (eligible.Count == 0)
+            return false;
+
+        if (FindEvent(eligible) is not { } eventId)
+            return false;
+
+        if (!_prototype.Resolve(eventId, out EntityPrototype? prototype) ||
+            !eligible.TryGetValue(prototype, out var stationEvent))
+            return false;
+
+        severity = stationEvent.DirectorSeverity;
+        GameTicker.AddGameRule(eventId);
+        return true;
+    }
+
+    private bool RandomEventsDisabled()
+    {
+        if (GameTicker.CurrentPreset?.DisableRandomEvents == true)
+            return true;
+
+        foreach (var (_, secret) in GameTicker.GetAddedGameRules<SecretRuleComponent>())
+        {
+            if (secret.SelectedPreset is { } id &&
+                _prototype.TryIndex<GamePresetPrototype>(id, out var hiddenPreset) &&
+                hiddenPreset.DisableRandomEvents)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    // SS220-event-director-end
 
     /// <summary>
     /// Builds a list of all possible events and their probabilities.

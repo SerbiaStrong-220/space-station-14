@@ -43,6 +43,7 @@ public sealed class SecretRuleSystem : GameRuleSystem<SecretRuleComponent>
         }
 
         GameTicker.CurrentPresetTitleOverride = preset.ModeTitle; // SS220 Round End Titles
+        component.SelectedPreset = new ProtoId<GamePresetPrototype>(preset.ID); // SS220-event-director
 
         Log.Info($"Selected {preset.ID} as the secret preset.");
         _adminLogger.Add(LogType.EventStarted, $"Selected {preset.ID} as the secret preset.");

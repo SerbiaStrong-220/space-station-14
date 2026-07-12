@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Content.IntegrationTests.Fixtures;
 using Content.Server.GameTicking;
+using Content.Server.GameTicking.Rules.Components;
 using Robust.Shared.GameObjects;
 
 namespace Content.IntegrationTests.Tests.GameRules;
@@ -37,6 +38,10 @@ public sealed class SecretStartsTest : GameTest
         await server.WaitAssertion(() =>
         {
             Assert.That(gameTicker.GetAddedGameRules().Count(), Is.GreaterThan(1), $"No additional rules started by secret rule.");
+
+            var secret = gameTicker.GetAddedGameRules<SecretRuleComponent>().Single(); // SS220-event-director
+            Assert.That(secret.Comp.SelectedPreset, Is.Not.Null.And.Not.Empty,
+                "Secret did not retain the preset it selected."); // SS220-event-director
 
             // End all rules
             gameTicker.ClearGameRules();

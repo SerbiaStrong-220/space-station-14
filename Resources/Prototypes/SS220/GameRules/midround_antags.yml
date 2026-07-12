@@ -5,6 +5,7 @@
   categories: [ GameRules ]
   components:
   - type: StationEvent
+    directorSeverity: Crisis # SS220-event-director
     weight: 7.5
     duration: 1
     earliestStart: 45
@@ -43,6 +44,7 @@
   categories: [ GameRules ]
   components:
   - type: StationEvent
+    directorSeverity: Crisis # SS220-event-director
     weight: 5.5
     duration: 1
     earliestStart: 30
