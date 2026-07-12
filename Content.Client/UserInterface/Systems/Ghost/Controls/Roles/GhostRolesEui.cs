@@ -83,7 +83,7 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls.Roles
                     _ =>
                     {
                         SendMessage(new RequestGhostRoleMessage(ghostRoleState.Identifier));
-                        _windowRules?.Close();
+                        Closed();
                     });
 
                 _windowRules.OpenCentered();
