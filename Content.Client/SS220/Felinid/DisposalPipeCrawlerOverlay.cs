@@ -1,5 +1,4 @@
 using System.Numerics;
-using Content.Shared.Disposal.Tube;
 using Content.Shared.SS220.Felinid.Components;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -20,7 +19,7 @@ public sealed partial class DisposalPipeCrawlerOverlay : Overlay
     private EntityLookupSystem _lookup;
     private SpriteSystem _sprite;
     private TransformSystem _transform;
-    private readonly HashSet<Entity<DisposalTubeComponent>> _nearbyTubes = new();
+    private readonly HashSet<Entity<DisposalPipeCrawlerTubeComponent>> _nearbyTubes = new();
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
 

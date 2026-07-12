@@ -5,6 +5,7 @@ using Content.Server.Disposal.Tube;
 using Content.Server.Disposal.Unit;
 using Content.Server.Popups;
 using Content.Shared.Atmos;
+using Content.Shared.Body.Systems;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Disposal.Components;
@@ -25,6 +26,7 @@ using Content.Shared.Projectiles;
 using Content.Shared.SS220.Felinid;
 using Content.Shared.SS220.Felinid.Components;
 using Content.Shared.SS220.Maths;
+using Content.Shared.Spillable;
 using Content.Shared.Stunnable;
 using Content.Shared.Slippery;
 using Content.Shared.Tag;
@@ -71,6 +73,9 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
         SubscribeLocalEvent<DisposalPipeCrawlerComponent, AtmosExposedGetAirEvent>(OnPipecrawlGetAir);
         SubscribeLocalEvent<DisposalPipeCrawlerComponent, MoveInputEvent>(OnPipecrawlMoveInput);
         SubscribeLocalEvent<DisposalPipeCrawlerComponent, MobStateChangedEvent>(OnPipecrawlMobStateChanged);
+        SubscribeLocalEvent<DisposalPipeCrawlerComponent, BloodstreamSpillAttemptEvent>(OnCrawlerBloodstreamSpillAttempt);
+        SubscribeLocalEvent<DisposalPipeCrawlerContentsComponent, BloodstreamSpillAttemptEvent>(OnPipeContentsBloodstreamSpillAttempt);
+        SubscribeLocalEvent<DisposalPipeCrawlerComponent, SpillAttemptEvent>(OnCrawlerSpillAttempt);
         SubscribeLocalEvent<EntGotInsertedIntoContainerMessage>(OnEntityInsertedIntoContainer);
         SubscribeLocalEvent<DisposalPipeCrawlerContentsComponent, EntGotRemovedFromContainerMessage>(OnPipeContentsRemoved);
     }
@@ -250,6 +255,27 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
 
         SetPipecrawlCooldown(ent, ent.Comp.ExitCooldown);
         LaunchPipecrawlerThroughDisposals(ent);
+    }
+
+    private void OnCrawlerBloodstreamSpillAttempt(
+        Entity<DisposalPipeCrawlerComponent> ent,
+        ref BloodstreamSpillAttemptEvent args)
+    {
+        if (ent.Comp.InsidePipe)
+            args.Cancelled = true;
+    }
+
+    private void OnPipeContentsBloodstreamSpillAttempt(
+        Entity<DisposalPipeCrawlerContentsComponent> ent,
+        ref BloodstreamSpillAttemptEvent args)
+    {
+        args.Cancelled = true;
+    }
+
+    private void OnCrawlerSpillAttempt(Entity<DisposalPipeCrawlerComponent> ent, ref SpillAttemptEvent args)
+    {
+        if (ent.Comp.InsidePipe)
+            args.Cancelled = true;
     }
 
     private void LaunchPipecrawlerThroughDisposals(

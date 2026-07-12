@@ -54,10 +54,10 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
         SubscribeLocalEvent<DisposalPipeCrawlerComponent, AccessibleOverrideEvent>(OnPipecrawlAccessibleOverride);
         SubscribeLocalEvent<DisposalPipeCrawlerComponent, InRangeOverrideEvent>(OnPipecrawlInRangeOverride);
         SubscribeLocalEvent<DisposalPipeCrawlerComponent, UseAttemptEvent>(OnPipecrawlUseAttempt);
-        SubscribeLocalEvent<DisposalPipeCrawlerComponent, AttackAttemptEvent>(OnPipecrawlAttempt);
+        SubscribeLocalEvent<DisposalPipeCrawlerComponent, AttackAttemptEvent>(OnPipecrawlAttackAttempt);
         SubscribeLocalEvent<DisposalPipeCrawlerComponent, PickupAttemptEvent>(OnPipecrawlPickupAttempt);
-        SubscribeLocalEvent<DisposalPipeCrawlerComponent, DropAttemptEvent>(OnPipecrawlAttempt);
-        SubscribeLocalEvent<DisposalPipeCrawlerComponent, EmoteAttemptEvent>(OnPipecrawlAttempt);
+        SubscribeLocalEvent<DisposalPipeCrawlerComponent, DropAttemptEvent>(OnPipecrawlDropAttempt);
+        SubscribeLocalEvent<DisposalPipeCrawlerComponent, EmoteAttemptEvent>(OnPipecrawlEmoteAttempt);
         SubscribeLocalEvent<DisposalPipeCrawlerComponent, IsUnequippingAttemptEvent>(OnPipecrawlUnequipAttempt);
         SubscribeLocalEvent<DisposalPipeCrawlerComponent, IsUnequippingTargetAttemptEvent>(OnPipecrawlUnequipTargetAttempt);
         SubscribeLocalEvent<DisposalPipeCrawlerComponent, DidUnequipEvent>(OnPipecrawlUnequipped);
@@ -196,7 +196,10 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
 
     private void OnPipecrawlInteractAttempt(Entity<DisposalPipeCrawlerComponent> ent, ref InteractionAttemptEvent args)
     {
-        if (!ent.Comp.InsidePipe || args.Target == null || IsOwnedByCrawler(args.Target.Value, ent.Owner))
+        if (!ent.Comp.InsidePipe ||
+            args.Target == null ||
+            IsOwnedByCrawler(args.Target.Value, ent.Owner) ||
+            args.Target == ent.Comp.CurrentTube)
             return;
 
         args.Cancelled = true;
@@ -212,7 +215,9 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
         Entity<DisposalPipeCrawlerComponent> ent,
         ref AccessibleOverrideEvent args)
     {
-        if (!ent.Comp.InsidePipe || args.User != ent.Owner || !IsOwnedByCrawler(args.Target, ent.Owner))
+        if (!ent.Comp.InsidePipe ||
+            args.User != ent.Owner ||
+            !IsOwnedByCrawler(args.Target, ent.Owner) && args.Target != ent.Comp.CurrentTube)
             return;
 
         args.Handled = true;
@@ -223,7 +228,9 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
         Entity<DisposalPipeCrawlerComponent> ent,
         ref InRangeOverrideEvent args)
     {
-        if (!ent.Comp.InsidePipe || args.User != ent.Owner || !IsOwnedByCrawler(args.Target, ent.Owner))
+        if (!ent.Comp.InsidePipe ||
+            args.User != ent.Owner ||
+            !IsOwnedByCrawler(args.Target, ent.Owner) && args.Target != ent.Comp.CurrentTube)
             return;
 
         args.Handled = true;
@@ -243,7 +250,19 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
         args.Cancel();
     }
 
-    private void OnPipecrawlAttempt<T>(Entity<DisposalPipeCrawlerComponent> ent, ref T args) where T : CancellableEntityEventArgs
+    private void OnPipecrawlAttackAttempt(Entity<DisposalPipeCrawlerComponent> ent, ref AttackAttemptEvent args)
+    {
+        if (ent.Comp.InsidePipe && args.Target != ent.Comp.CurrentTube)
+            args.Cancel();
+    }
+
+    private void OnPipecrawlDropAttempt(Entity<DisposalPipeCrawlerComponent> ent, ref DropAttemptEvent args)
+    {
+        if (ent.Comp.InsidePipe || HasComp<DisposalPipeCrawlerContentsComponent>(ent.Owner))
+            args.Cancel();
+    }
+
+    private void OnPipecrawlEmoteAttempt(Entity<DisposalPipeCrawlerComponent> ent, ref EmoteAttemptEvent args)
     {
         if (ent.Comp.InsidePipe)
             args.Cancel();

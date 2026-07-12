@@ -61,6 +61,11 @@ public abstract partial class SharedPuddleSystem
         if (solution.Volume == FixedPoint2.Zero)
             return;
 
+        var spillAttempt = new SpillAttemptEvent(args.User);
+        RaiseLocalEvent(args.User, ref spillAttempt);
+        if (spillAttempt.Cancelled)
+            return;
+
         Verb verb = new()
         {
             Text = Loc.GetString("spill-target-verb-get-data-text")

@@ -468,7 +468,10 @@ public abstract class SharedBloodstreamSystem : EntitySystem
 
         if (tempSolution.Volume > ent.Comp.BleedPuddleThreshold)
         {
-            _puddle.TrySpillAt(ent.Owner, tempSolution, out _, sound: false);
+            var spillAttempt = new BloodstreamSpillAttemptEvent();
+            RaiseLocalEvent(ent.Owner, ref spillAttempt);
+            if (!spillAttempt.Cancelled)
+                _puddle.TrySpillAt(ent.Owner, tempSolution, out _, sound: false);
 
             tempSolution.RemoveAllSolution();
         }
@@ -527,7 +530,10 @@ public abstract class SharedBloodstreamSystem : EntitySystem
             SolutionContainer.RemoveAllSolution(ent.Comp.TemporarySolution.Value);
         }
 
-        _puddle.TrySpillAt(ent, tempSol, out _);
+        var spillAttempt = new BloodstreamSpillAttemptEvent();
+        RaiseLocalEvent(ent.Owner, ref spillAttempt);
+        if (!spillAttempt.Cancelled)
+            _puddle.TrySpillAt(ent, tempSol, out _);
     }
 
     /// <summary>
@@ -601,3 +607,6 @@ public abstract class SharedBloodstreamSystem : EntitySystem
         return bloodData;
     }
 }
+
+[ByRefEvent]
+public record struct BloodstreamSpillAttemptEvent(bool Cancelled = false);
