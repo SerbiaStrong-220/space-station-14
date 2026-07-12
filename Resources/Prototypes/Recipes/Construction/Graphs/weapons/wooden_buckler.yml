@@ -17,4 +17,4 @@
               doAfter: 2
 
     - node: woodenBuckler
-      entity: WoodenBuckler
+      entity: WoodenBucklerAlt #SS220 shield rework

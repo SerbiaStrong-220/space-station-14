@@ -22,11 +22,11 @@
             Passenger: [ -1, -1 ]
             #Command
             Captain: [ 1, 1 ]
-            IAA: [ 1, 1 ]
+            # IAA: [ 1, 1 ] #SS220 Replaced NTR
             BlueShield: [ 1, 1 ]
             HeadOfPersonnel: [ 1, 1 ]
-            Magistrate: [ 1, 1 ]
-            # NanoTrasenRepresentative: [ 1, 1 ] #SS220 TODO NanoTraisen Representative
+            # Magistrate: [ 1, 1 ] #SS220 Replaced NTR
+            NanoTrasenRepresentative: [ 1, 1 ] #SS220-Map-Jobs NanoTrasen Representative
             #Security
             HeadOfSecurity: [ 1, 1 ]
             Warden: [ 1, 1 ]

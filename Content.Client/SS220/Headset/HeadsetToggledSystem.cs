@@ -5,9 +5,9 @@ using Content.Shared.SS220.Radio.Components;
 
 namespace Content.Client.SS220.Headset;
 
-public sealed class HeadsetToggledSystem : SharedHeadsetToggledSystem
+public sealed partial class HeadsetToggledSystem : SharedHeadsetToggledSystem
 {
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {

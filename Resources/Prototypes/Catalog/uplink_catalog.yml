@@ -75,20 +75,20 @@
   icon: { sprite: /Textures/Objects/Weapons/Melee/e_sword.rsi, state: icon }
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 8 #ss220-uplink-discounts
+    Telecrystal: 4 #ss220-uplink-discounts
   productEntity: EnergySword
   cost:
-    Telecrystal: 10 #ss220-uplink-discounts
+    Telecrystal: 5 #ss220-uplink-discounts
   categories:
   - UplinkWeaponry
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 14
-    MediumDynamic:
-      Telecrystal: 9
-    HardDynamic:
       Telecrystal: 7
+    MediumDynamic:
+      Telecrystal: 5
+    HardDynamic:
+      Telecrystal: 4
 #ss220 dynamic-price end
 
 - type: listing
@@ -98,10 +98,8 @@
   icon: { sprite: /Textures/Objects/Weapons/Melee/e_dagger.rsi, state: icon }
   productEntity: EnergyDaggerBox
   discountCategory: rareDiscounts
-  discountDownTo:
-    Telecrystal: 1
   cost:
-    Telecrystal: 2
+    Telecrystal: 1 #SS220 shield rework
   categories:
   - UplinkWeaponry
 #ss220 dynamic-price bgn
@@ -109,9 +107,9 @@
     LightDynamic:
       Telecrystal: 1
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
 #ss220 dynamic-price end
 
 # ss220 - post upstream - uplink tweaks - bgn
@@ -213,6 +211,7 @@
     HardDynamic:
       Telecrystal: 14
 #ss220 dynamic-price end
+# SS220-double-e-sword-end
 
 - type: listing
   id: UplinkGlovesKnuckleDusters
@@ -245,18 +244,20 @@
   productEntity: EnergyShieldSyndi # SS220 Syndi energy shield
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 4
+    Telecrystal: 6 #SS220 shield rework
   cost:
-    Telecrystal: 8
+    Telecrystal: 8 #SS220 shield rework
   categories:
   - UplinkWeaponry
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-      - LoneOpsUplink #SS220-uplink-fix
-      - DebugUplink #SS220-debug-uplink-fix
+  #ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 10
+    MediumDynamic:
+      Telecrystal: 8
+    HardDynamic:
+      Telecrystal: 7
+  #ss220 dynamic-price end
 
 - type: listing
   id: uplinkRiggedBoxingGloves
@@ -440,7 +441,7 @@
       tags:
       - NukeOpsUplink
 
-# ss220 - post upstream - uplink tweaks - bgn 
+# ss220 - post upstream - uplink tweaks - bgn
 # - type: listing
 #   id: UplinkGrenadeLauncher
 #   name: uplink-grenade-launcher-name
@@ -456,7 +457,7 @@
 #     blacklist:
 #       tags:
 #       - NukeOpsUplink
-# ss220 - post upstream - uplink tweaks - end 
+# ss220 - post upstream - uplink tweaks - end
 
 - type: listing
   id: UplinkGrenadeLauncherBundle
@@ -2375,18 +2376,18 @@
   id: UplinkClothingOuterVestWeb
   name: uplink-clothing-outer-vest-web-name
   description: uplink-clothing-outer-vest-web-desc
-  productEntity: ClothingOuterVestWeb
+  productEntity: ClothingOuterVestWebMerc #SS220 syndie armor tweaks
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 3
+    Telecrystal: 3 #SS220 syndie armor tweaks
   cost:
-    Telecrystal: 5
+    Telecrystal: 3 #SS220 syndie armor tweaks
   categories:
   - UplinkWearables
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 6
+      Telecrystal: 4
     MediumDynamic:
       Telecrystal: 4
     HardDynamic:
@@ -2402,15 +2403,15 @@
   discountDownTo:
     Telecrystal: 6 # ss220 - post upstream - uplink tweaks
   cost:
-    Telecrystal: 8 # ss220 - post upstream - uplink tweaks
+    Telecrystal: 6 # ss220 - post upstream - uplink tweaks
   categories:
   - UplinkWearables
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 10
+      Telecrystal: 9
     MediumDynamic:
-      Telecrystal: 8
+      Telecrystal: 7
     HardDynamic:
       Telecrystal: 6
 #ss220 dynamic-price end
@@ -3202,7 +3203,7 @@
   - !type:BuyerJobCondition
     whitelist:
     - Lawyer
-  # ss220 - post upstream - uplink tweaks - bgn 
+  # ss220 - post upstream - uplink tweaks - bgn
   dynamicsPrices:
     LightDynamic:
       Telecrystal: 15

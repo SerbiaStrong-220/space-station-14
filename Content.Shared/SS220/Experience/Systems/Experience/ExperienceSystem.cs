@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Administration.Logs;
+using Content.Shared.Cloning.Events;
 using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
 using Content.Shared.SS220.Experience.SkillChecks;
@@ -9,12 +10,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.Experience.Systems;
 
-public sealed partial class ExperienceSystem : EntitySystem
+public sealed partial class ExperienceSystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogManager = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogManager = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
 
     public const int StartSkillLevel = 1;
     public const int StartSublevel = 0;
@@ -36,6 +37,7 @@ public sealed partial class ExperienceSystem : EntitySystem
 
         SubscribeLocalEvent<ExperienceComponent, SkillCheckEvent>(OnSkillCheckEvent);
         SubscribeLocalEvent<ExperienceComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<ExperienceComponent, CloningEvent>(OnCloning);
     }
 
     private void OnSkillCheckEvent(Entity<ExperienceComponent> entity, ref SkillCheckEvent args)
@@ -47,6 +49,14 @@ public sealed partial class ExperienceSystem : EntitySystem
     {
         OnMapInitSkillEntity(entity, ref args);
         InitializeExperienceComp(entity);
+    }
+
+    private void OnCloning(Entity<ExperienceComponent> entity, ref CloningEvent args)
+    {
+        if (!TryComp<ExperienceComponent>(args.CloneUid, out var experienceComp))
+            return;
+
+        InitializeExperienceComp((args.CloneUid, experienceComp));
     }
 
     private void InitExperienceSkillTree(Entity<ExperienceComponent> entity, ProtoId<SkillTreePrototype> skillTree, bool logReiniting = true)

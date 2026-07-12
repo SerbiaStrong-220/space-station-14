@@ -10,10 +10,10 @@ using System.Diagnostics.CodeAnalysis;
 namespace Content.Client.SS220.Guidebook.Richtext;
 
 [UsedImplicitly]
-public sealed class BrowserLinkTag : IMarkupTag
+public sealed partial class BrowserLinkTag : IMarkupTag
 {
-    [Dependency] private readonly IUriOpener _uriOpener = default!;
-    [Dependency] private readonly ILogManager _logMan = default!;
+    [Dependency] private IUriOpener _uriOpener = default!;
+    [Dependency] private ILogManager _logMan = default!;
 
     public string Name => "browserlink";
 

@@ -690,6 +690,7 @@
     - item: WelderExperimental
     - item: Multitool
     - item: RemoteSignallerAdvanced
+    - item: SprayPainterBorg #SS220-Self-ChargingSprayBorg
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: adv-tools-module }
 
@@ -1223,6 +1224,14 @@
     - item: HydroponicsToolSpade
     - item: HydroponicsToolClippers
     - item: Bucket
+#SS220-borg-slot-seed-placeholder begin
+    - hand:
+        emptyRepresentative: BorgModuleSeedsPlaceholder
+        emptyLabel: borg-slot-seed-placeholder-empty
+        whitelist:
+          components:
+          - Seed
+#SS220-borg-slot-seed-placeholder end
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: gardening-module }
 

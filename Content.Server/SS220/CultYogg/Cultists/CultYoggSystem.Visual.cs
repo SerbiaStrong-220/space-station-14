@@ -13,8 +13,8 @@ namespace Content.Server.SS220.CultYogg.Cultists;
 
 public sealed partial class CultYoggSystem : SharedCultYoggSystem
 {
-    [Dependency] private readonly VisualBodySystem _visualBody = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private VisualBodySystem _visualBody = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private static readonly ProtoId<MarkingPrototype> CultDefaultMarking = "CultStage-Halo";
     private const string CultMarkingCommonPart = "CultStage";

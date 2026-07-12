@@ -19,7 +19,7 @@ namespace Content.Client.SS220.Experience.UiElements;
 [GenerateTypedNameReferences]
 public sealed partial class ExperienceTreeContainer : BoxContainer
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     public Action? OnAddSublevelPoint;
 

@@ -23,16 +23,16 @@ namespace Content.Shared.SS220.MartialArts;
 
 public sealed partial class MartialArtsSystem : EntitySystem, IMartialArtEffectEventRaiser
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly SharedGrabSystem _grab = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedColorFlashEffectSystem _color = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private PullingSystem _pulling = default!;
+    [Dependency] private SharedGrabSystem _grab = default!;
 
     private static readonly ProtoId<AlertPrototype> CooldownAlert = "MartialArtCooldown";
     private static readonly LocId UnknownArt = "martial-arts-unknown";
@@ -199,12 +199,6 @@ public sealed partial class MartialArtsSystem : EntitySystem, IMartialArtEffectE
     {
         if (!_prototype.TryIndex(user.Comp.MartialArt, out var martialArt))
             return;
-
-        if (_grab.IsGrabbed(ev.Grabbable) && user.Comp.CurrentSteps.Count > 0)
-        {
-            ev.Multiply(0); // make it instant if target already grabbed and part of combo
-            return;
-        }
 
         ev.Multiply(martialArt.GrabDelayCoefficient);
     }

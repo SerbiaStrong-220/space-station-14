@@ -199,7 +199,7 @@
     jumpsuit: ClothingUniformJumpsuitDeathSquad
     id: DeathsquadCommanderPDA
     pocket1: EnergySword
-    pocket2: EnergyShield
+    pocket2: EnergyShieldAlt
 
 - type: startingGear
   id: DeathSquadHealerGear
@@ -207,7 +207,7 @@
     jumpsuit: ClothingUniformJumpsuitDeathSquad
     id: DeathsquadHealerPDA
     pocket1: EnergySword
-    pocket2: EnergyShield
+    pocket2: EnergyShieldAlt
 
 - type: startingGear
   id: DeathSquadOperativeGear
@@ -215,7 +215,7 @@
     jumpsuit: ClothingUniformJumpsuitDeathSquad
     id: DeathsquadPDA
     pocket1: EnergySword
-    pocket2: EnergyShield
+    pocket2: EnergyShieldAlt
 
 ##Ert Gamma
 
@@ -274,7 +274,7 @@
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitERTLeaderGamma
     neck: ClothingBeltHolster
-    suitstorage: WeaponLaserCarabine
+    suitstorage: WeaponLaserCarbineIK60
     id: ERTLeaderPDA
     ears: ClothingHeadsetAltCentComm
     belt: ClothingBeltSecurity
@@ -337,7 +337,7 @@
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitERTSecurityGamma
     neck: ClothingBeltHolster
-    suitstorage: WeaponLaserCarabine
+    suitstorage: WeaponLaserCarbineIK60
     id: ERTSecurityPDA
     ears: ClothingHeadsetAltCentComm
     belt: ClothingBeltSecurity
@@ -401,7 +401,7 @@
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitERTMedicalGamma
     neck: ClothingBeltHolster
-    suitstorage: WeaponLaserCarabine
+    suitstorage: WeaponLaserCarbineIK60
     id: ERTMedicPDA
     ears: ClothingHeadsetAltCentComm
     belt: ClothingBeltERTGammaMedicalFilled
