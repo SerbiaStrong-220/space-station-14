@@ -143,10 +143,10 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: Mobs/Species/Human/parts.rsi
+    sprite: SS220/Mobs/Species/Felinid/parts.rsi
   - type: VisualOrgan
     data:
-      sprite: Mobs/Species/Human/parts.rsi
+      sprite: SS220/Mobs/Species/Felinid/parts.rsi
   - type: VisualOrganMarkings
     markingData:
       group: Felinid
