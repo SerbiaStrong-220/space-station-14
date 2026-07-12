@@ -1,0 +1,91 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: marking
+  id: FelinidEars[6]
+  bodyPart: HeadTop
+  groupWhitelist: [Felinid]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_parts.rsi
+    state: ears_1
+
+- type: marking
+  id: FelinidEars[7]
+  bodyPart: HeadTop
+  groupWhitelist: [Felinid]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_parts.rsi
+    state: ears_2
+
+- type: marking
+  id: FelinidEars[8]
+  bodyPart: HeadTop
+  groupWhitelist: [Felinid]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_parts.rsi
+    state: ears_3_outer
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_parts.rsi
+    state: ears_3_inner
+
+- type: marking
+  id: FelinidEars[9]
+  bodyPart: HeadTop
+  groupWhitelist: [Felinid]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_parts.rsi
+    state: ears_4_outer
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_parts.rsi
+    state: ears_4_inner
+
+- type: marking
+  id: FelinidEars[10]
+  bodyPart: HeadTop
+  groupWhitelist: [Felinid]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_parts.rsi
+    state: ears_5
+
+- type: marking
+  id: FelinidEars[11]
+  bodyPart: HeadTop
+  groupWhitelist: [Felinid]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_parts.rsi
+    state: ears_6
+
+- type: marking
+  id: FelinidTails[7]
+  bodyPart: Tail
+  groupWhitelist: [Felinid]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_tails.rsi
+    state: felinid_tail_1
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_tails.rsi
+    state: felinid_tail_1_tassel
+
+- type: marking
+  id: FelinidTails[8]
+  bodyPart: Tail
+  groupWhitelist: [Felinid]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_tails.rsi
+    state: felinid_tail_2
+
+- type: marking
+  id: FelinidTails[9]
+  bodyPart: Tail
+  groupWhitelist: [Felinid]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_tails.rsi
+    state: felinid_tail_3
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_tails.rsi
+    state: felinid_tail_3_tassel
+
+- type: marking
+  id: FelinidTails[10]
+  bodyPart: Tail
+  groupWhitelist: [Felinid]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_tails.rsi
+    state: felinid_tail_4
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_tails.rsi
+    state: felinid_tail_4_tassel

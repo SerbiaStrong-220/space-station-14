@@ -14,11 +14,11 @@
     enum.HumanoidVisualLayers.Tail:
       limit: 1
       required: true
-      default: [ FelinidTails ]
+      default: [ FelinidTails[7] ]
     enum.HumanoidVisualLayers.HeadTop:
       limit: 1
       required: true
-      default: [ FelinidEars ]
+      default: [ FelinidEars[6] ]
     enum.HumanoidVisualLayers.Chest:
       limit: 1
       required: false
