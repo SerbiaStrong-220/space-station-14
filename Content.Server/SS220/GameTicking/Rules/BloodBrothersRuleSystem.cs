@@ -22,14 +22,14 @@ namespace Content.Server.SS220.GameTicking.Rules;
 
 public sealed partial class BloodBrothersRuleSystem : GameRuleSystem<BloodBrothersRuleComponent>
 {
+    [Dependency] private NpcFactionSystem _npcFaction = default!;
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private SharedRoleSystem _role = default!;
-    [Dependency] private NpcFactionSystem _npcFaction = default!;
-    [Dependency] private MindSystem _mind = default!;
     [Dependency] private SharedJobSystem _job = default!;
+    [Dependency] private MindSystem _mind = default!;
 
-    private static readonly ProtoId<NpcFactionPrototype> SyndicateFaction = "Syndicate";
     private static readonly ProtoId<NpcFactionPrototype> NanoTrasenFaction = "NanoTrasen";
+    private static readonly ProtoId<NpcFactionPrototype> SyndicateFaction = "Syndicate";
 
     public override void Initialize()
     {
@@ -41,27 +41,32 @@ public sealed partial class BloodBrothersRuleSystem : GameRuleSystem<BloodBrothe
 
     private void AfterAntagSelected(Entity<BloodBrothersRuleComponent> ent, ref AfterAntagEntitySelectedEvent args)
     {
-        if (!TryGetAntagData(args, out var mind, out var role, out var mindComp))
+        if (!TryGetAntagData(args, out var mind, out var role))
             return;
 
         var assignedSessions = args.GameRule.Comp.AssignedSessions;
 
         InitializeAntagFaction(args.EntityUid);
-        if (assignedSessions.Count < 2)
+        if (assignedSessions.Count < args.Def.Min)
             return;
 
-        TryLinkBloodBrothers(assignedSessions, (mind.Value, mindComp), role.Value, args.Def.Briefing);
+        TryLinkBloodBrothers(assignedSessions, mind.Value, role.Value, args.Def.Briefing);
+    }
+
+    private void OnGetBriefing(Entity<BloodBrothersRoleComponent> role, ref GetBriefingEvent args)
+    {
+        var briefing = MakeBriefing(args.Mind);
+        if (!string.IsNullOrEmpty(briefing))
+            args.Append("\n" + briefing);
     }
 
     private bool TryGetAntagData(
         AfterAntagEntitySelectedEvent args,
-        [NotNullWhen(true)] out EntityUid? mind,
-        [NotNullWhen(true)] out Entity<BloodBrothersRoleComponent>? role,
-        [NotNullWhen(true)] out MindComponent? mindComp)
+        [NotNullWhen(true)] out Entity<MindComponent>? mind,
+        [NotNullWhen(true)] out Entity<BloodBrothersRoleComponent>? role)
     {
         mind = null;
         role = null;
-        mindComp = null;
 
         var sessionMind = args.Session?.GetMind();
         if (sessionMind is null)
@@ -70,12 +75,11 @@ public sealed partial class BloodBrothersRuleSystem : GameRuleSystem<BloodBrothe
         if (!_role.MindHasRole<BloodBrothersRoleComponent>(sessionMind.Value, out var foundRole))
             return false;
 
-        if (!TryComp<MindComponent>(sessionMind.Value, out var comp))
+        if (!TryComp<MindComponent>(sessionMind.Value, out var sessionMindComp))
             return false;
 
-        mind = sessionMind.Value;
+        mind = (sessionMind.Value, sessionMindComp);
         role = (foundRole.Value.Owner, foundRole.Value.Comp2);
-        mindComp = comp;
         return true;
     }
 
@@ -129,13 +133,6 @@ public sealed partial class BloodBrothersRuleSystem : GameRuleSystem<BloodBrothe
                     briefing.Value.Sound);
             }
         }
-    }
-
-    private void OnGetBriefing(Entity<BloodBrothersRoleComponent> role, ref GetBriefingEvent args)
-    {
-        var briefing = MakeBriefing(args.Mind);
-        if (!string.IsNullOrEmpty(briefing))
-            args.Append("\n" + briefing);
     }
 
     private string MakeBriefing(EntityUid userMind)
