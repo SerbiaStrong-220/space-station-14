@@ -836,7 +836,7 @@ public sealed class GhostRoleSystem : EntitySystem
     // ss220 add verb for ghost role start
     private void OnGetVerb(Entity<GhostRoleComponent> ent, ref GetVerbsEvent<Verb> args)
     {
-        if (!_ghostRoles.ContainsValue(ent))
+        if (!_ghostRoles.TryGetValue(ent.Comp.Identifier, out var ghostRole) || ghostRole.Owner != ent.Owner)
             return;
 
         if (!HasComp<GhostComponent>(args.User))
