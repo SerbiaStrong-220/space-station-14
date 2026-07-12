@@ -1,0 +1,30 @@
+- type: entity
+  parent: BaseAction
+  id: ActionFelinidDash
+  name: felinid-dash-action-name
+  description: felinid-dash-action-description
+  components:
+  - type: Action
+    useDelay: 480
+    itemIconStyle: NoItem
+    icon:
+      sprite: Interface/Actions/jump.rsi
+      state: icon
+  - type: InstantAction
+    event: !type:FelinidDashActionEvent
+
+- type: entity
+  parent: BaseAction
+  id: ActionFelinidPipecrawl
+  name: felinid-pipecrawl-action-name
+  description: felinid-pipecrawl-action-description
+  components:
+  - type: FelinidPipecrawlAction
+  - type: Action
+    checkCanInteract: false
+    itemIconStyle: NoItem
+    icon:
+      sprite: Structures/Piping/disposal.rsi
+      state: pipe-c
+  - type: InstantAction
+    event: !type:FelinidPipecrawlActionEvent

@@ -66,9 +66,9 @@
       Appendix: OrganFelinidAppendix
       Ears: OrganFelinidEars
       Lungs: OrganFelinidLungs
-      Heart: OrganAnimalHeart
+      Heart: OrganFelinidHeart
       Stomach: OrganFelinidStomach
-      Liver: OrganAnimalLiver
+      Liver: OrganFelinidLiver
       Kidneys: OrganFelinidKidneys
   - type: HumanoidProfile
     species: Felinid
@@ -94,6 +94,25 @@
       Male: MaleFelinid
       Female: FemaleFelinid
       Unsexed: MaleFelinid
+  - type: Damageable
+    damageModifierSet: Felinid
+  - type: ExplosionResistance
+    damageCoefficient: 1.1
+    worn: false
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      80: Critical
+      160: Dead
+  - type: Hunger
+    baseDecayRate: 0.0217
+  - type: Thirst
+    baseDecayRate: 0.13
+  - type: FelinidDash
+  - type: FelinidDodge
+  - type: FelinidClimbSpeed
+  - type: FelinidPipecrawl
+  - type: FelinidHeavyGunRecoil
   - type: CombatMode # remove disarm ability
 
 - type: entity
@@ -107,12 +126,8 @@
   abstract: true
   components:
   - type: Metabolizer
-    maxReagents: 3
+    updateInterval: 0.8333
     metabolizerTypes: [ Animal ]
-    groups:
-    - id: Food
-    - id: Drink
-    - id: Omnivorous
 
 - type: entity
   parent: OrganFelinid

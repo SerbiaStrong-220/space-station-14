@@ -19,7 +19,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Disposal.Tube
 {
-    public sealed class DisposalTubeSystem : SharedDisposalTubeSystem
+    public sealed partial class DisposalTubeSystem : SharedDisposalTubeSystem // SS220-felinid-pipecrawl
     {
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
@@ -43,6 +43,7 @@ namespace Content.Server.Disposal.Tube
             SubscribeLocalEvent<DisposalTubeComponent, BreakageEventArgs>(OnBreak);
             SubscribeLocalEvent<DisposalTubeComponent, ComponentStartup>(OnStartup);
             SubscribeLocalEvent<DisposalTubeComponent, ConstructionBeforeDeleteEvent>(OnDeconstruct);
+            InitializeFelinidPipecrawl(); // SS220-felinid-pipecrawl
 
             SubscribeLocalEvent<DisposalBendComponent, GetDisposalsConnectableDirectionsEvent>(OnGetBendConnectableDirections);
             SubscribeLocalEvent<DisposalBendComponent, GetDisposalsNextDirectionEvent>(OnGetBendNextDirection);

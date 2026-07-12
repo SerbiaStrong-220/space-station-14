@@ -1,0 +1,13 @@
+- type: entity
+  parent: MobStatusEffectBase
+  id: StatusEffectFelinidDash
+  name: felinid dash
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: StatusEffect
+    whitelist:
+      components:
+      - MovementSpeedModifier
+  - type: MovementModStatusEffect
+    walkSpeedModifier: 1.3
+    sprintSpeedModifier: 1.3

@@ -436,14 +436,24 @@ public abstract partial class SharedGunSystem : EntitySystem
         var shotEv = new GunShotEvent(user, ev.Ammo);
         RaiseLocalEvent(gun, ref shotEv);
 
+        // SS220-felinid-recoil-begin
+        var suppressDefaultImpulse = false;
+        if (userImpulse)
+        {
+            var shooterShot = new ShooterGunShotEvent(ev.Ammo);
+            RaiseLocalEvent(user, ref shooterShot);
+            suppressDefaultImpulse = shooterShot.SuppressDefaultImpulse;
+        }
+
         if (!userImpulse || !TryComp<PhysicsComponent>(user, out var userPhysics))
             return true;
 
         var shooterEv = new ShooterImpulseEvent();
         RaiseLocalEvent(user, ref shooterEv);
 
-        if (shooterEv.Push)
+        if (shooterEv.Push && !suppressDefaultImpulse)
             CauseImpulse(fromCoordinates, toCoordinates.Value, (user, userPhysics));
+        // SS220-felinid-recoil-end
         return true;
     }
 
@@ -721,6 +731,16 @@ public record struct AttemptShootEvent(EntityUid User, string? Message, bool Can
 /// <param name="User">The user that fired this gun.</param>
 [ByRefEvent]
 public record struct GunShotEvent(EntityUid User, List<(EntityUid? Uid, IShootable Shootable)> Ammo);
+
+// SS220-felinid-recoil-begin
+/// <summary>
+/// Raised on the shooter after a predicted gunshot has consumed valid ammunition.
+/// </summary>
+[ByRefEvent]
+public record struct ShooterGunShotEvent(
+    List<(EntityUid? Uid, IShootable Shootable)> Ammo,
+    bool SuppressDefaultImpulse = false);
+// SS220-felinid-recoil-end
 
 /// <summary>
 /// Raised on an entity after firing a gun to see if any components or systems would allow this entity to be pushed

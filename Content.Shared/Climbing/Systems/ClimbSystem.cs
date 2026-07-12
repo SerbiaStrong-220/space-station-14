@@ -221,7 +221,13 @@ public sealed partial class ClimbSystem : VirtualController
         if (ev.Cancelled)
             return false;
 
-        var args = new DoAfterArgs(EntityManager, user, comp.ClimbDelay, new ClimbDoAfterEvent(),
+        // SS220-felinid-climb-begin
+        var delayEv = new ModifyClimbDelayEvent(user, entityToMove, climbable, comp.ClimbDelay);
+        RaiseLocalEvent(entityToMove, ref delayEv);
+        if (user != entityToMove)
+            RaiseLocalEvent(user, ref delayEv);
+
+        var args = new DoAfterArgs(EntityManager, user, delayEv.Delay, new ClimbDoAfterEvent(),
             entityToMove,
             target: climbable,
             used: entityToMove)
@@ -230,6 +236,7 @@ public sealed partial class ClimbSystem : VirtualController
             BreakOnDamage = true,
             DuplicateCondition = DuplicateConditions.SameTool | DuplicateConditions.SameTarget
         };
+        // SS220-felinid-climb-end
 
         _audio.PlayPredicted(comp.StartClimbSound, climbable, user);
         var success = _doAfterSystem.TryStartDoAfter(args, out id);
