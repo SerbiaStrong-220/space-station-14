@@ -378,5 +378,4 @@ public sealed class FelinidPipecrawlSystem : EntitySystem
                 RemCompDeferred<FelinidPipecrawlUnequippedItemComponent>(uid);
         }
     }
-
 }

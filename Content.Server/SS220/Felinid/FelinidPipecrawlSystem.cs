@@ -560,5 +560,4 @@ public sealed class FelinidPipecrawlSystem : EntitySystem
 
         _throwing.TryThrow(uid, _transform.GetWorldRotation(uid).ToWorldVec() * 3f, 10f);
     }
-
 }

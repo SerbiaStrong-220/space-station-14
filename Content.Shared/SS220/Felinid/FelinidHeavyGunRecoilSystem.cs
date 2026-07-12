@@ -339,7 +339,8 @@ public sealed class FelinidHeavyGunRecoilSystem : EntitySystem
             return Caliber60Profile;
 
         return null;
-    }}
+    }
+}
 
 [ByRefEvent]
 public readonly record struct FelinidRecoilStartedEvent(FelinidHeavyGunRecoilSystem.RecoilProfile Profile);

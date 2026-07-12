@@ -128,5 +128,4 @@ public sealed class FelinidDodgeSystem : EntitySystem
 
         return Math.Clamp(chance, 0f, ent.Comp.MaxDodgeChance);
     }
-
 }

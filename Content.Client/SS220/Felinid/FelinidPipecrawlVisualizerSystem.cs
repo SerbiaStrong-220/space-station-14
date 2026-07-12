@@ -46,9 +46,9 @@ public sealed class FelinidPipecrawlVisualizerSystem : EntitySystem
             return;
         }
 
-        if (!TryComp<FelinidPipecrawlVisualStateComponent>(ent.Owner, out _))
+        if (!TryComp<FelinidPipecrawlVisualStateComponent>(ent.Owner, out var state))
         {
-            var state = EnsureComp<FelinidPipecrawlVisualStateComponent>(ent.Owner);
+            state = AddComp<FelinidPipecrawlVisualStateComponent>(ent.Owner);
             state.OriginalVisibility = sprite.Visible;
         }
 

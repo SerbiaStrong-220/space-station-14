@@ -56,5 +56,4 @@ public partial class FelinidDashSystem : EntitySystem
 
         _actions.RemoveAction(ent.Owner, ent.Comp.ActionEntity);
     }
-
 }

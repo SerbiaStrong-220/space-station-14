@@ -106,5 +106,4 @@ public sealed class FelinidDashSystem : EntitySystem
                 _thirst.ModifyThirst(ent.Owner, thirst, -thirstPool * ent.Comp.ThirstCostRatio);
         }
     }
-
 }
