@@ -5,11 +5,11 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared.SS220.Felinid.Components;
 
 [RegisterComponent, NetworkedComponent]
-[Access(typeof(FelinidDashSystem))]
-public sealed partial class FelinidDashComponent : Component
+[Access(typeof(DashSpeedModifierSystem))]
+public sealed partial class DashSpeedModifierComponent : Component
 {
     [DataField]
-    public EntProtoId<InstantActionComponent> Action = "ActionFelinidDash";
+    public EntProtoId<InstantActionComponent> Action = "ActionDashSpeedModifier";
 
     [DataField]
     public EntityUid? ActionEntity;

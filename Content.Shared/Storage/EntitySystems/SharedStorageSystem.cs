@@ -1267,13 +1267,13 @@ public abstract class SharedStorageSystem : EntitySystem
         }
 
         // SS220-felinid-pipecrawl-begin
-        var dropAttempt = new StorageInsertHeldItemAttemptEvent(ent.Owner, toInsert.Value);
-        RaiseLocalEvent(player.Owner, ref dropAttempt);
+        var insertAttemptEv = new StorageInsertHeldItemAttemptEvent(ent.Owner, toInsert.Value);
+        RaiseLocalEvent(player.Owner, ref insertAttemptEv);
 
         var canDrop = _sharedHandsSystem.CanDrop(
             player,
             toInsert.Value,
-            checkActionBlocker: !dropAttempt.BypassDropActionBlocker);
+            checkActionBlocker: !insertAttemptEv.BypassDropActionBlocker);
         // SS220-felinid-pipecrawl-end
         if (!canDrop)
         {

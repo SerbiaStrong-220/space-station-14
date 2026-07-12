@@ -1,6 +1,3 @@
-felinid-dash-action-name = Dash
-felinid-dash-action-description = Briefly accelerate at the cost of hunger and thirst.
-
 felinid-pipecrawl-action-name = Crawl Through Pipes
 felinid-pipecrawl-action-description = Slip into disposal pipes while you are already inside a disposal unit.
 felinid-pipecrawl-blocked-outer-clothing = Your outer clothing prevents you from squeezing into the pipes.

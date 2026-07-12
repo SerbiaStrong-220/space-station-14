@@ -7,11 +7,14 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Felinid.Components;
 
+/// <summary>
+/// Allows an entity to travel through the disposal network and stores its pipe-specific state.
+/// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(raiseAfterAutoHandleState: true)]
-public sealed partial class FelinidPipecrawlComponent : Component, IGasMixtureHolder
+public sealed partial class DisposalPipeCrawlerComponent : Component, IGasMixtureHolder
 {
     [DataField]
-    public EntProtoId<InstantActionComponent> Action = "ActionFelinidPipecrawl";
+    public EntProtoId<InstantActionComponent> Action = "ActionDisposalPipeCrawler";
 
     [DataField]
     public EntityUid? ActionEntity;
@@ -38,7 +41,7 @@ public sealed partial class FelinidPipecrawlComponent : Component, IGasMixtureHo
     public string OuterClothingSlot = "outerClothing";
 
     [DataField, AutoNetworkedField]
-    public bool Active;
+    public bool InsidePipe;
 
     [DataField, AutoNetworkedField]
     public TimeSpan CooldownStartedAt;
@@ -46,9 +49,13 @@ public sealed partial class FelinidPipecrawlComponent : Component, IGasMixtureHo
     [DataField, AutoNetworkedField]
     public TimeSpan NextEntryAllowed;
 
+    /// <summary>
+    /// Air carried from the disposal unit while the crawler is isolated from the atmosphere.
+    /// </summary>
     [DataField]
     public GasMixture Air { get; set; } = new(70f);
 
+    // Transit data is authoritative on the server; clients only need <see cref="InsidePipe"/> for visuals.
     public EntityUid? CurrentTube;
     public EntityUid? NextTube;
     public Direction PreviousDirection = Direction.Invalid;

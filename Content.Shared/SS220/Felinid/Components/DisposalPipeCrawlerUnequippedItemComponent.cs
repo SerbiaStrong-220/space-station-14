@@ -4,7 +4,7 @@ namespace Content.Shared.SS220.Felinid.Components;
 /// Allows an item just unequipped by a pipecrawler to complete its predicted transfer into a hand.
 /// </summary>
 [RegisterComponent]
-public sealed partial class FelinidPipecrawlUnequippedItemComponent : Component
+public sealed partial class DisposalPipeCrawlerUnequippedItemComponent : Component
 {
     public EntityUid Pipecrawler;
 }

@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared.Disposal.Tube;
 using Content.Shared.SS220.Felinid.Components;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -8,46 +9,37 @@ using Robust.Shared.Map;
 
 namespace Content.Client.SS220.Felinid;
 
-public sealed class FelinidPipecrawlOverlay : Overlay
+public sealed partial class DisposalPipeCrawlerOverlay : Overlay
 {
     private const string PipeLayer = "pipe";
+    private const int OverlayZIndex = 100;
 
-    [Dependency] private readonly IEntityManager _entity = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IEntityManager _entity = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
-    private readonly EntityLookupSystem _lookup;
-    private readonly SpriteSystem _sprite;
-    private readonly TransformSystem _transform;
-    private readonly HashSet<Entity<FelinidPipecrawlTubeComponent>> _nearbyTubes = new();
+    private EntityLookupSystem _lookup;
+    private SpriteSystem _sprite;
+    private TransformSystem _transform;
+    private readonly HashSet<Entity<DisposalTubeComponent>> _nearbyTubes = new();
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
-    public FelinidPipecrawlOverlay()
+    public DisposalPipeCrawlerOverlay()
     {
         IoCManager.InjectDependencies(this);
         _lookup = _entity.System<EntityLookupSystem>();
         _sprite = _entity.System<SpriteSystem>();
         _transform = _entity.System<TransformSystem>();
-        ZIndex = 100;
-    }
-
-    protected override bool BeforeDraw(in OverlayDrawArgs args)
-    {
-        if (_player.LocalEntity is not { } player ||
-            !_entity.TryGetComponent<FelinidPipecrawlComponent>(player, out var pipecrawl) ||
-            !pipecrawl.Active ||
-            !_entity.TryGetComponent<EyeComponent>(player, out var eye))
-        {
-            return false;
-        }
-
-        return args.Viewport.Eye == eye.Eye;
+        ZIndex = OverlayZIndex;
     }
 
     protected override void Draw(in OverlayDrawArgs args)
     {
         if (_player.LocalEntity is not { } player ||
-            !_entity.TryGetComponent<FelinidPipecrawlComponent>(player, out var pipecrawl) ||
+            !_entity.TryGetComponent<DisposalPipeCrawlerComponent>(player, out var pipecrawl) ||
+            !pipecrawl.InsidePipe ||
+            !_entity.TryGetComponent<EyeComponent>(player, out var eye) ||
+            args.Viewport.Eye != eye.Eye ||
             !_entity.TryGetComponent<TransformComponent>(player, out var playerXform))
         {
             return;
@@ -84,7 +76,7 @@ public sealed class FelinidPipecrawlOverlay : Overlay
                 revealPipeLayer: true);
         }
 
-        var contents = _lookup.GetEntitiesInRange<FelinidPipecrawlContentsComponent>(
+        var contents = _lookup.GetEntitiesInRange<DisposalPipeCrawlerContentsComponent>(
             playerXform.Coordinates,
             pipecrawl.VisionRange);
         foreach (var (uid, _) in contents)
@@ -98,10 +90,10 @@ public sealed class FelinidPipecrawlOverlay : Overlay
             RenderIfNearby((uid, sprite, xform), mapId, playerPosition, revealRangeSquared, eyeRotation, handle);
         }
 
-        var crawlers = _entity.EntityQueryEnumerator<FelinidPipecrawlComponent, SpriteComponent, TransformComponent>();
+        var crawlers = _entity.EntityQueryEnumerator<DisposalPipeCrawlerComponent, SpriteComponent, TransformComponent>();
         while (crawlers.MoveNext(out var uid, out var otherPipecrawl, out var sprite, out var xform))
         {
-            if (uid == player || !otherPipecrawl.Active)
+            if (uid == player || !otherPipecrawl.InsidePipe)
                 continue;
 
             RenderIfNearby((uid, sprite, xform), mapId, playerPosition, revealRangeSquared, eyeRotation, handle);

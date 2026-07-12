@@ -1,6 +1,3 @@
-felinid-dash-action-name = Рывок
-felinid-dash-action-description = Кратковременно ускоряет вас ценой голода и жажды.
-
 felinid-pipecrawl-action-name = Пролезть в трубы
 felinid-pipecrawl-action-description = Позволяет проскользнуть в утилизационные трубы, если вы уже сидите внутри утилизационного бака.
 felinid-pipecrawl-blocked-outer-clothing = Верхняя одежда мешает пролезть в трубы.

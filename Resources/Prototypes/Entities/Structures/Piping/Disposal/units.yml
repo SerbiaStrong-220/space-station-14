@@ -95,7 +95,6 @@
       components:
       - StationAiHeld
     # ss220 fix ai inside disposal unit end
-  - type: FelinidPipecrawlEntry # SS220-felinid-pipecrawl
   - type: ThrowInsertContainer
     containerId: disposals
     probability: 0.67
@@ -139,7 +138,6 @@
       components:
       - StationAiHeld
     # ss220 fix ai inside disposal unit end
-  - type: FelinidPipecrawlEntry # SS220-felinid-pipecrawl
   - type: UserInterface
     interfaces:
       enum.DisposalUnitUiKey.Key:

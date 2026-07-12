@@ -437,22 +437,22 @@ public abstract partial class SharedGunSystem : EntitySystem
         RaiseLocalEvent(gun, ref shotEv);
 
         // SS220-felinid-recoil-begin
-        var suppressDefaultImpulse = false;
+        var impulseMultiplier = 1f;
         if (userImpulse)
         {
             var shooterShot = new ShooterGunShotEvent(ev.Ammo);
             RaiseLocalEvent(user, ref shooterShot);
-            suppressDefaultImpulse = shooterShot.SuppressDefaultImpulse;
+            impulseMultiplier = shooterShot.ImpulseMultiplier;
         }
 
         if (!userImpulse || !TryComp<PhysicsComponent>(user, out var userPhysics))
             return true;
 
-        var shooterEv = new ShooterImpulseEvent();
+        var shooterEv = new ShooterImpulseEvent { Multiplier = impulseMultiplier };
         RaiseLocalEvent(user, ref shooterEv);
 
-        if (shooterEv.Push && !suppressDefaultImpulse)
-            CauseImpulse(fromCoordinates, toCoordinates.Value, (user, userPhysics));
+        if (shooterEv.Push)
+            CauseImpulse(fromCoordinates, toCoordinates.Value, (user, userPhysics), shooterEv.Multiplier);
         // SS220-felinid-recoil-end
         return true;
     }
@@ -586,14 +586,18 @@ public abstract partial class SharedGunSystem : EntitySystem
         CreateEffect(gun, ev, user);
     }
 
-    public void CauseImpulse(EntityCoordinates fromCoordinates, EntityCoordinates toCoordinates, Entity<PhysicsComponent> user)
+    public void CauseImpulse(
+        EntityCoordinates fromCoordinates,
+        EntityCoordinates toCoordinates,
+        Entity<PhysicsComponent> user,
+        float multiplier = 1f)
     {
         var fromMap = TransformSystem.ToMapCoordinates(fromCoordinates).Position;
         var toMap = TransformSystem.ToMapCoordinates(toCoordinates).Position;
         var shotDirection = (toMap - fromMap).Normalized();
 
         const float impulseStrength = 25.0f;
-        var impulseVector = shotDirection * impulseStrength;
+        var impulseVector = shotDirection * impulseStrength * Math.Max(0f, multiplier);
         Physics.ApplyLinearImpulse(user, -impulseVector, body: user.Comp);
     }
 
@@ -739,7 +743,7 @@ public record struct GunShotEvent(EntityUid User, List<(EntityUid? Uid, IShootab
 [ByRefEvent]
 public record struct ShooterGunShotEvent(
     List<(EntityUid? Uid, IShootable Shootable)> Ammo,
-    bool SuppressDefaultImpulse = false);
+    float ImpulseMultiplier = 1f);
 // SS220-felinid-recoil-end
 
 /// <summary>
@@ -750,6 +754,7 @@ public record struct ShooterGunShotEvent(
 public record struct ShooterImpulseEvent()
 {
     public bool Push;
+    public float Multiplier = 1f;
 };
 
 public enum EffectLayers : byte

@@ -4,23 +4,23 @@ using Content.Shared.SS220.Felinid;
 using Content.Shared.SS220.Felinid.Components;
 using Content.Shared.Tools.Components;
 using Content.Shared.Tools.Systems;
-using ServerFelinidPipecrawlSystem = Content.Server.SS220.Felinid.FelinidPipecrawlSystem;
+using ServerDisposalPipeCrawlerSystem = Content.Server.SS220.Felinid.DisposalPipeCrawlerSystem;
 
 namespace Content.Server.Disposal.Tube;
 
 // SS220-felinid-pipecrawl
 public sealed partial class DisposalTubeSystem
 {
-    [Dependency] private readonly ServerFelinidPipecrawlSystem _felinidPipecrawlSystem = default!;
-    [Dependency] private readonly SharedToolSystem _toolSystem = default!;
+    [Dependency] private ServerDisposalPipeCrawlerSystem _felinidPipecrawlSystem = default!;
+    [Dependency] private SharedToolSystem _toolSystem = default!;
 
-    private void InitializeFelinidPipecrawl()
+    private void InitializeDisposalPipeCrawler()
     {
-        SubscribeLocalEvent<DisposalTubeComponent, InteractUsingEvent>(OnFelinidPipecrawlInteractUsing);
-        SubscribeLocalEvent<DisposalTubeComponent, FelinidPipeExtractionDoAfterEvent>(OnFelinidPipeExtractionFinished);
+        SubscribeLocalEvent<DisposalTubeComponent, InteractUsingEvent>(OnDisposalPipeCrawlerInteractUsing);
+        SubscribeLocalEvent<DisposalTubeComponent, DisposalPipeExtractionDoAfterEvent>(OnPipeExtractionFinished);
     }
 
-    private void OnFelinidPipecrawlInteractUsing(Entity<DisposalTubeComponent> ent, ref InteractUsingEvent args)
+    private void OnDisposalPipeCrawlerInteractUsing(Entity<DisposalTubeComponent> ent, ref InteractUsingEvent args)
     {
         if (args.Handled ||
             !TryComp<ToolComponent>(args.Used, out var tool) ||
@@ -36,32 +36,33 @@ public sealed partial class DisposalTubeSystem
             ent.Owner,
             pipecrawl.ExtractionDelay,
             tool.Qualities,
-            new FelinidPipeExtractionDoAfterEvent(),
+            new DisposalPipeExtractionDoAfterEvent(),
             toolComponent: tool);
     }
 
-    private void OnFelinidPipeExtractionFinished(
+    private void OnPipeExtractionFinished(
         Entity<DisposalTubeComponent> ent,
-        ref FelinidPipeExtractionDoAfterEvent args)
+        ref DisposalPipeExtractionDoAfterEvent args)
     {
         if (args.Cancelled ||
-            !TryFindActivePipecrawler(ent.Owner, out var felinidUid, out _))
+            !TryFindActivePipecrawler(ent.Owner, out var felinidUid, out _) ||
+            felinidUid is not { } crawler)
         {
             return;
         }
 
-        _felinidPipecrawlSystem.TryForceExitPipecrawl(felinidUid, false);
+        _felinidPipecrawlSystem.TryForceExitPipecrawl(crawler, false);
     }
 
     private bool TryFindActivePipecrawler(
         EntityUid tubeUid,
-        out EntityUid felinidUid,
-        out FelinidPipecrawlComponent pipecrawl)
+        out EntityUid? felinidUid,
+        out DisposalPipeCrawlerComponent pipecrawl)
     {
-        var query = EntityQueryEnumerator<FelinidPipecrawlComponent>();
+        var query = EntityQueryEnumerator<DisposalPipeCrawlerComponent>();
         while (query.MoveNext(out var uid, out var candidate))
         {
-            if (!candidate.Active ||
+            if (!candidate.InsidePipe ||
                 candidate.CurrentTube != tubeUid && candidate.NextTube != tubeUid)
             {
                 continue;
@@ -72,7 +73,7 @@ public sealed partial class DisposalTubeSystem
             return true;
         }
 
-        felinidUid = default;
+        felinidUid = null;
         pipecrawl = default!;
         return false;
     }

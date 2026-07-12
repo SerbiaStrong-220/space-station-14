@@ -222,7 +222,7 @@ public sealed partial class ClimbSystem : VirtualController
             return false;
 
         // SS220-felinid-climb-begin
-        var delayEv = new ModifyClimbDelayEvent(user, entityToMove, climbable, comp.ClimbDelay);
+        var delayEv = new GetClimbDelayModifierEvent(user, entityToMove, climbable, comp.ClimbDelay);
         RaiseLocalEvent(entityToMove, ref delayEv);
         if (user != entityToMove)
             RaiseLocalEvent(user, ref delayEv);

@@ -32,60 +32,60 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.Felinid;
 
-public sealed class FelinidPipecrawlSystem : EntitySystem
+public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<FelinidPipecrawlComponent, MapInitEvent>(OnPipecrawlMapInit);
-        SubscribeLocalEvent<FelinidPipecrawlActionComponent, ActionPerformedEvent>(OnPipecrawlActionPerformed);
-        SubscribeLocalEvent<FelinidPipecrawlComponent, AfterAutoHandleStateEvent>(OnPipecrawlHandleState);
-        SubscribeLocalEvent<FelinidPipecrawlComponent, ComponentShutdown>(OnPipecrawlShutdown);
-        SubscribeLocalEvent<FelinidPipecrawlComponent, EntGotInsertedIntoContainerMessage>(OnPipecrawlContainerModified);
-        SubscribeLocalEvent<FelinidPipecrawlComponent, EntGotRemovedFromContainerMessage>(OnPipecrawlContainerModified);
-        SubscribeLocalEvent<FelinidPipecrawlComponent, UpdateCanMoveEvent>(OnPipecrawlCanMove);
-        SubscribeLocalEvent<FelinidPipecrawlComponent, InteractionAttemptEvent>(OnPipecrawlInteractAttempt);
-        SubscribeLocalEvent<FelinidPipecrawlComponent, AccessibleOverrideEvent>(OnPipecrawlAccessibleOverride);
-        SubscribeLocalEvent<FelinidPipecrawlComponent, InRangeOverrideEvent>(OnPipecrawlInRangeOverride);
-        SubscribeLocalEvent<FelinidPipecrawlComponent, UseAttemptEvent>(OnPipecrawlUseAttempt);
-        SubscribeLocalEvent<FelinidPipecrawlComponent, AttackAttemptEvent>(OnPipecrawlAttempt);
-        SubscribeLocalEvent<FelinidPipecrawlComponent, PickupAttemptEvent>(OnPipecrawlPickupAttempt);
-        SubscribeLocalEvent<FelinidPipecrawlComponent, DropAttemptEvent>(OnPipecrawlAttempt);
-        SubscribeLocalEvent<FelinidPipecrawlComponent, EmoteAttemptEvent>(OnPipecrawlAttempt);
-        SubscribeLocalEvent<FelinidPipecrawlComponent, IsUnequippingAttemptEvent>(OnPipecrawlUnequipAttempt);
-        SubscribeLocalEvent<FelinidPipecrawlComponent, IsUnequippingTargetAttemptEvent>(OnPipecrawlUnequipTargetAttempt);
-        SubscribeLocalEvent<FelinidPipecrawlComponent, DidUnequipEvent>(OnPipecrawlUnequipped);
-        SubscribeLocalEvent<FelinidPipecrawlComponent, StorageInsertHeldItemAttemptEvent>(OnPipecrawlStorageInsertAttempt);
-        SubscribeLocalEvent<FelinidPipecrawlUnequippedItemComponent, EntGotInsertedIntoContainerMessage>(OnUnequippedItemInserted);
-        SubscribeLocalEvent<FelinidPipecrawlComponent, CanSeeAttemptEvent>(OnPipecrawlCanSeeAttempt);
-        SubscribeLocalEvent<FelinidPipecrawlComponent, GetVisMaskEvent>(OnPipecrawlGetVisMask);
+        SubscribeLocalEvent<DisposalPipeCrawlerComponent, MapInitEvent>(OnPipecrawlMapInit);
+        SubscribeLocalEvent<DisposalPipeCrawlerActionComponent, ActionPerformedEvent>(OnPipecrawlActionPerformed);
+        SubscribeLocalEvent<DisposalPipeCrawlerComponent, AfterAutoHandleStateEvent>(OnPipecrawlHandleState);
+        SubscribeLocalEvent<DisposalPipeCrawlerComponent, ComponentShutdown>(OnPipecrawlShutdown);
+        SubscribeLocalEvent<DisposalPipeCrawlerComponent, EntGotInsertedIntoContainerMessage>(OnPipecrawlContainerModified);
+        SubscribeLocalEvent<DisposalPipeCrawlerComponent, EntGotRemovedFromContainerMessage>(OnPipecrawlContainerModified);
+        SubscribeLocalEvent<DisposalPipeCrawlerComponent, UpdateCanMoveEvent>(OnPipecrawlCanMove);
+        SubscribeLocalEvent<DisposalPipeCrawlerComponent, InteractionAttemptEvent>(OnPipecrawlInteractAttempt);
+        SubscribeLocalEvent<DisposalPipeCrawlerComponent, AccessibleOverrideEvent>(OnPipecrawlAccessibleOverride);
+        SubscribeLocalEvent<DisposalPipeCrawlerComponent, InRangeOverrideEvent>(OnPipecrawlInRangeOverride);
+        SubscribeLocalEvent<DisposalPipeCrawlerComponent, UseAttemptEvent>(OnPipecrawlUseAttempt);
+        SubscribeLocalEvent<DisposalPipeCrawlerComponent, AttackAttemptEvent>(OnPipecrawlAttempt);
+        SubscribeLocalEvent<DisposalPipeCrawlerComponent, PickupAttemptEvent>(OnPipecrawlPickupAttempt);
+        SubscribeLocalEvent<DisposalPipeCrawlerComponent, DropAttemptEvent>(OnPipecrawlAttempt);
+        SubscribeLocalEvent<DisposalPipeCrawlerComponent, EmoteAttemptEvent>(OnPipecrawlAttempt);
+        SubscribeLocalEvent<DisposalPipeCrawlerComponent, IsUnequippingAttemptEvent>(OnPipecrawlUnequipAttempt);
+        SubscribeLocalEvent<DisposalPipeCrawlerComponent, IsUnequippingTargetAttemptEvent>(OnPipecrawlUnequipTargetAttempt);
+        SubscribeLocalEvent<DisposalPipeCrawlerComponent, DidUnequipEvent>(OnPipecrawlUnequipped);
+        SubscribeLocalEvent<DisposalPipeCrawlerComponent, StorageInsertHeldItemAttemptEvent>(OnPipecrawlStorageInsertAttempt);
+        SubscribeLocalEvent<DisposalPipeCrawlerUnequippedItemComponent, EntGotInsertedIntoContainerMessage>(OnUnequippedItemInserted);
+        SubscribeLocalEvent<DisposalPipeCrawlerComponent, CanSeeAttemptEvent>(OnPipecrawlCanSeeAttempt);
+        SubscribeLocalEvent<DisposalPipeCrawlerComponent, GetVisMaskEvent>(OnPipecrawlGetVisMask);
     }
 
-    private void OnPipecrawlMapInit(Entity<FelinidPipecrawlComponent> ent, ref MapInitEvent args)
+    private void OnPipecrawlMapInit(Entity<DisposalPipeCrawlerComponent> ent, ref MapInitEvent args)
     {
         RefreshPipecrawlState(ent);
     }
 
     private void OnPipecrawlActionPerformed(
-        Entity<FelinidPipecrawlActionComponent> ent,
+        Entity<DisposalPipeCrawlerActionComponent> ent,
         ref ActionPerformedEvent args)
     {
-        if (TryComp<FelinidPipecrawlComponent>(args.Performer, out var pipecrawl))
+        if (TryComp<DisposalPipeCrawlerComponent>(args.Performer, out var pipecrawl))
             SyncPipecrawlAction((args.Performer, pipecrawl));
     }
 
-    private void OnPipecrawlHandleState(Entity<FelinidPipecrawlComponent> ent, ref AfterAutoHandleStateEvent args)
+    private void OnPipecrawlHandleState(Entity<DisposalPipeCrawlerComponent> ent, ref AfterAutoHandleStateEvent args)
     {
         RefreshPipecrawlState(ent);
     }
 
-    private void OnPipecrawlShutdown(Entity<FelinidPipecrawlComponent> ent, ref ComponentShutdown args)
+    private void OnPipecrawlShutdown(Entity<DisposalPipeCrawlerComponent> ent, ref ComponentShutdown args)
     {
         if (Terminating(ent.Owner))
             return;
@@ -102,19 +102,19 @@ public sealed class FelinidPipecrawlSystem : EntitySystem
         _blocker.UpdateCanMove(ent.Owner);
     }
 
-    private void OnPipecrawlContainerModified(Entity<FelinidPipecrawlComponent> ent, ref EntGotInsertedIntoContainerMessage args)
+    private void OnPipecrawlContainerModified(Entity<DisposalPipeCrawlerComponent> ent, ref EntGotInsertedIntoContainerMessage args)
     {
         RefreshPipecrawlState(ent);
     }
 
-    private void OnPipecrawlContainerModified(Entity<FelinidPipecrawlComponent> ent, ref EntGotRemovedFromContainerMessage args)
+    private void OnPipecrawlContainerModified(Entity<DisposalPipeCrawlerComponent> ent, ref EntGotRemovedFromContainerMessage args)
     {
         RefreshPipecrawlState(ent);
     }
 
-    private void SyncPipecrawlAction(Entity<FelinidPipecrawlComponent> ent)
+    private void SyncPipecrawlAction(Entity<DisposalPipeCrawlerComponent> ent)
     {
-        if (ent.Comp.Active || IsInDisposableUnit(ent.Owner))
+        if (ent.Comp.InsidePipe || IsInDisposableUnit(ent.Owner))
         {
             if (ent.Comp.ActionEntity is { } existingAction &&
                 TryComp<ActionComponent>(existingAction, out var existingActionComp) &&
@@ -148,13 +148,13 @@ public sealed class FelinidPipecrawlSystem : EntitySystem
     }
 
     private void SyncPipecrawlCooldown(
-        Entity<FelinidPipecrawlComponent> ent,
+        Entity<DisposalPipeCrawlerComponent> ent,
         Entity<ActionComponent?> action)
     {
         if (action.Comp == null)
             return;
 
-        if (ent.Comp.Active)
+        if (ent.Comp.InsidePipe)
         {
             if (action.Comp.Cooldown != null)
                 _actions.RemoveCooldown(action);
@@ -172,47 +172,47 @@ public sealed class FelinidPipecrawlSystem : EntitySystem
             _actions.RemoveCooldown(action);
     }
 
-    public void RefreshPipecrawlState(Entity<FelinidPipecrawlComponent> ent)
+    public void RefreshPipecrawlState(Entity<DisposalPipeCrawlerComponent> ent)
     {
-        if (!ent.Comp.Active)
+        if (!ent.Comp.InsidePipe)
             ClearUnequippedItemMarkers(ent.Owner);
 
         SyncPipecrawlAction(ent);
         _blocker.UpdateCanMove(ent.Owner);
-        RaisePipecrawlVisualsChanged(ent.Owner, ent.Comp.Active);
+        RaisePipecrawlVisualsChanged(ent.Owner, ent.Comp.InsidePipe);
     }
 
     private void RaisePipecrawlVisualsChanged(EntityUid uid, bool active)
     {
-        var visuals = new FelinidPipecrawlVisualsChangedEvent(active);
+        var visuals = new DisposalPipeCrawlerVisualsChangedEvent(active);
         RaiseLocalEvent(uid, ref visuals);
     }
 
-    private void OnPipecrawlCanMove(Entity<FelinidPipecrawlComponent> ent, ref UpdateCanMoveEvent args)
+    private void OnPipecrawlCanMove(Entity<DisposalPipeCrawlerComponent> ent, ref UpdateCanMoveEvent args)
     {
-        if (ent.Comp.Active)
+        if (ent.Comp.InsidePipe)
             args.Cancel();
     }
 
-    private void OnPipecrawlInteractAttempt(Entity<FelinidPipecrawlComponent> ent, ref InteractionAttemptEvent args)
+    private void OnPipecrawlInteractAttempt(Entity<DisposalPipeCrawlerComponent> ent, ref InteractionAttemptEvent args)
     {
-        if (!ent.Comp.Active || args.Target == null || IsOwnedBy(args.Target.Value, ent.Owner))
+        if (!ent.Comp.InsidePipe || args.Target == null || IsOwnedByCrawler(args.Target.Value, ent.Owner))
             return;
 
         args.Cancelled = true;
     }
 
-    private void OnPipecrawlUseAttempt(Entity<FelinidPipecrawlComponent> ent, ref UseAttemptEvent args)
+    private void OnPipecrawlUseAttempt(Entity<DisposalPipeCrawlerComponent> ent, ref UseAttemptEvent args)
     {
-        if (ent.Comp.Active && !IsOwnedBy(args.Used, ent.Owner))
+        if (ent.Comp.InsidePipe && !IsOwnedByCrawler(args.Used, ent.Owner))
             args.Cancel();
     }
 
     private void OnPipecrawlAccessibleOverride(
-        Entity<FelinidPipecrawlComponent> ent,
+        Entity<DisposalPipeCrawlerComponent> ent,
         ref AccessibleOverrideEvent args)
     {
-        if (!ent.Comp.Active || args.User != ent.Owner || !IsOwnedBy(args.Target, ent.Owner))
+        if (!ent.Comp.InsidePipe || args.User != ent.Owner || !IsOwnedByCrawler(args.Target, ent.Owner))
             return;
 
         args.Handled = true;
@@ -220,21 +220,21 @@ public sealed class FelinidPipecrawlSystem : EntitySystem
     }
 
     private void OnPipecrawlInRangeOverride(
-        Entity<FelinidPipecrawlComponent> ent,
+        Entity<DisposalPipeCrawlerComponent> ent,
         ref InRangeOverrideEvent args)
     {
-        if (!ent.Comp.Active || args.User != ent.Owner || !IsOwnedBy(args.Target, ent.Owner))
+        if (!ent.Comp.InsidePipe || args.User != ent.Owner || !IsOwnedByCrawler(args.Target, ent.Owner))
             return;
 
         args.Handled = true;
         args.InRange = true;
     }
 
-    private void OnPipecrawlPickupAttempt(Entity<FelinidPipecrawlComponent> ent, ref PickupAttemptEvent args)
+    private void OnPipecrawlPickupAttempt(Entity<DisposalPipeCrawlerComponent> ent, ref PickupAttemptEvent args)
     {
-        if (!ent.Comp.Active ||
-            IsOwnedBy(args.Item, ent.Owner) ||
-            TryComp<FelinidPipecrawlUnequippedItemComponent>(args.Item, out var marker) &&
+        if (!ent.Comp.InsidePipe ||
+            IsOwnedByCrawler(args.Item, ent.Owner) ||
+            TryComp<DisposalPipeCrawlerUnequippedItemComponent>(args.Item, out var marker) &&
             marker.Pipecrawler == ent.Owner)
         {
             return;
@@ -243,21 +243,21 @@ public sealed class FelinidPipecrawlSystem : EntitySystem
         args.Cancel();
     }
 
-    private void OnPipecrawlAttempt<T>(Entity<FelinidPipecrawlComponent> ent, ref T args) where T : CancellableEntityEventArgs
+    private void OnPipecrawlAttempt<T>(Entity<DisposalPipeCrawlerComponent> ent, ref T args) where T : CancellableEntityEventArgs
     {
-        if (ent.Comp.Active)
+        if (ent.Comp.InsidePipe)
             args.Cancel();
     }
 
-    private void OnPipecrawlCanSeeAttempt(Entity<FelinidPipecrawlComponent> ent, ref CanSeeAttemptEvent args)
+    private void OnPipecrawlCanSeeAttempt(Entity<DisposalPipeCrawlerComponent> ent, ref CanSeeAttemptEvent args)
     {
-        if (ent.Comp.Active)
+        if (ent.Comp.InsidePipe)
             args.Cancel();
     }
 
-    private void OnPipecrawlGetVisMask(Entity<FelinidPipecrawlComponent> ent, ref GetVisMaskEvent args)
+    private void OnPipecrawlGetVisMask(Entity<DisposalPipeCrawlerComponent> ent, ref GetVisMaskEvent args)
     {
-        if (ent.Comp.Active)
+        if (ent.Comp.InsidePipe)
             args.VisibilityMask |= (int) VisibilityFlags.Subfloor;
     }
 
@@ -265,14 +265,14 @@ public sealed class FelinidPipecrawlSystem : EntitySystem
     {
         return _container.TryGetContainingContainer((uid, null, null), out var container) &&
                container.ID == DisposalUnitComponent.ContainerId &&
-               HasComp<FelinidPipecrawlEntryComponent>(container.Owner);
+               HasComp<DisposalUnitComponent>(container.Owner);
     }
 
     private void OnPipecrawlUnequipAttempt(
-        Entity<FelinidPipecrawlComponent> ent,
+        Entity<DisposalPipeCrawlerComponent> ent,
         ref IsUnequippingAttemptEvent args)
     {
-        if (!ent.Comp.Active)
+        if (!ent.Comp.InsidePipe)
             return;
 
         if (args.User != ent.Owner || args.UnEquipTarget != ent.Owner)
@@ -307,19 +307,19 @@ public sealed class FelinidPipecrawlSystem : EntitySystem
     }
 
     private void OnPipecrawlUnequipTargetAttempt(
-        Entity<FelinidPipecrawlComponent> ent,
+        Entity<DisposalPipeCrawlerComponent> ent,
         ref IsUnequippingTargetAttemptEvent args)
     {
-        if (!ent.Comp.Active || args.User == ent.Owner && args.UnEquipTarget == ent.Owner)
+        if (!ent.Comp.InsidePipe || args.User == ent.Owner && args.UnEquipTarget == ent.Owner)
             return;
 
         args.Reason = "felinid-pipecrawl-unequip-external";
         args.Cancel();
     }
 
-    private void OnPipecrawlUnequipped(Entity<FelinidPipecrawlComponent> ent, ref DidUnequipEvent args)
+    private void OnPipecrawlUnequipped(Entity<DisposalPipeCrawlerComponent> ent, ref DidUnequipEvent args)
     {
-        if (!ent.Comp.Active ||
+        if (!ent.Comp.InsidePipe ||
             args.EquipTarget != ent.Owner ||
             TerminatingOrDeleted(ent.Owner) ||
             TerminatingOrDeleted(args.Equipment))
@@ -327,24 +327,24 @@ public sealed class FelinidPipecrawlSystem : EntitySystem
             return;
         }
 
-        var marker = EnsureComp<FelinidPipecrawlUnequippedItemComponent>(args.Equipment);
+        var marker = EnsureComp<DisposalPipeCrawlerUnequippedItemComponent>(args.Equipment);
         marker.Pipecrawler = ent.Owner;
     }
 
     private void OnUnequippedItemInserted(
-        Entity<FelinidPipecrawlUnequippedItemComponent> ent,
+        Entity<DisposalPipeCrawlerUnequippedItemComponent> ent,
         ref EntGotInsertedIntoContainerMessage args)
     {
-        RemCompDeferred<FelinidPipecrawlUnequippedItemComponent>(ent.Owner);
+        RemCompDeferred<DisposalPipeCrawlerUnequippedItemComponent>(ent.Owner);
     }
 
     private void OnPipecrawlStorageInsertAttempt(
-        Entity<FelinidPipecrawlComponent> ent,
+        Entity<DisposalPipeCrawlerComponent> ent,
         ref StorageInsertHeldItemAttemptEvent args)
     {
-        if (!ent.Comp.Active ||
-            !IsOwnedBy(args.Storage, ent.Owner) ||
-            !IsOwnedBy(args.Item, ent.Owner))
+        if (!ent.Comp.InsidePipe ||
+            !IsOwnedByCrawler(args.Storage, ent.Owner) ||
+            !IsOwnedByCrawler(args.Item, ent.Owner))
         {
             return;
         }
@@ -352,9 +352,9 @@ public sealed class FelinidPipecrawlSystem : EntitySystem
         args.BypassDropActionBlocker = true;
     }
 
-    private bool IsOwnedBy(EntityUid entity, EntityUid owner)
+    private bool IsOwnedByCrawler(EntityUid entity, EntityUid crawler)
     {
-        if (entity == owner)
+        if (entity == crawler)
             return true;
 
         if (!Exists(entity))
@@ -362,7 +362,7 @@ public sealed class FelinidPipecrawlSystem : EntitySystem
 
         foreach (var container in _container.GetContainingContainers((entity, null)))
         {
-            if (container.Owner == owner)
+            if (container.Owner == crawler)
                 return true;
         }
 
@@ -371,11 +371,11 @@ public sealed class FelinidPipecrawlSystem : EntitySystem
 
     private void ClearUnequippedItemMarkers(EntityUid owner)
     {
-        var query = EntityQueryEnumerator<FelinidPipecrawlUnequippedItemComponent>();
+        var query = EntityQueryEnumerator<DisposalPipeCrawlerUnequippedItemComponent>();
         while (query.MoveNext(out var uid, out var marker))
         {
             if (marker.Pipecrawler == owner)
-                RemCompDeferred<FelinidPipecrawlUnequippedItemComponent>(uid);
+                RemCompDeferred<DisposalPipeCrawlerUnequippedItemComponent>(uid);
         }
     }
 }

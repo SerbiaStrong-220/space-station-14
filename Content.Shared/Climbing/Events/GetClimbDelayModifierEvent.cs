@@ -2,7 +2,7 @@ namespace Content.Shared.Climbing.Events;
 
 // SS220-felinid-climb
 [ByRefEvent]
-public record struct ModifyClimbDelayEvent(EntityUid User, EntityUid EntityToMove, EntityUid Climbable, float Delay)
+public record struct GetClimbDelayModifierEvent(EntityUid User, EntityUid EntityToMove, EntityUid Climbable, float Delay)
 {
     public void ModifyDelay(float multiplier)
     {

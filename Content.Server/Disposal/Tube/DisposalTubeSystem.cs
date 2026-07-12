@@ -43,7 +43,7 @@ namespace Content.Server.Disposal.Tube
             SubscribeLocalEvent<DisposalTubeComponent, BreakageEventArgs>(OnBreak);
             SubscribeLocalEvent<DisposalTubeComponent, ComponentStartup>(OnStartup);
             SubscribeLocalEvent<DisposalTubeComponent, ConstructionBeforeDeleteEvent>(OnDeconstruct);
-            InitializeFelinidPipecrawl(); // SS220-felinid-pipecrawl
+            InitializeDisposalPipeCrawler(); // SS220-felinid-pipecrawl
 
             SubscribeLocalEvent<DisposalBendComponent, GetDisposalsConnectableDirectionsEvent>(OnGetBendConnectableDirections);
             SubscribeLocalEvent<DisposalBendComponent, GetDisposalsNextDirectionEvent>(OnGetBendNextDirection);

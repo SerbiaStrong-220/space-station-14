@@ -108,11 +108,11 @@
     baseDecayRate: 0.0217
   - type: Thirst
     baseDecayRate: 0.13
-  - type: FelinidDash
-  - type: FelinidDodge
-  - type: FelinidClimbSpeed
-  - type: FelinidPipecrawl
-  - type: FelinidHeavyGunRecoil
+  - type: DashSpeedModifier
+  - type: DodgeChance
+  - type: ClimbSpeedModifier
+  - type: DisposalPipeCrawler
+  - type: GunRecoilModifier
   - type: CombatMode # remove disarm ability
 
 - type: entity

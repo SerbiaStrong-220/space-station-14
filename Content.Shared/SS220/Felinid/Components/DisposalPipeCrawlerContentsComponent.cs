@@ -6,4 +6,4 @@ namespace Content.Shared.SS220.Felinid.Components;
 /// Marks ordinary disposal contents so a crawling felinid can see them inside the pipe network.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class FelinidPipecrawlContentsComponent : Component;
+public sealed partial class DisposalPipeCrawlerContentsComponent : Component;

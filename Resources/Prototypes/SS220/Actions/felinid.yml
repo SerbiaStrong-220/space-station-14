@@ -1,6 +1,6 @@
 - type: entity
   parent: BaseAction
-  id: ActionFelinidDash
+  id: ActionDashSpeedModifier
   name: felinid-dash-action-name
   description: felinid-dash-action-description
   components:
@@ -11,15 +11,15 @@
       sprite: Interface/Actions/jump.rsi
       state: icon
   - type: InstantAction
-    event: !type:FelinidDashActionEvent
+    event: !type:DashSpeedModifierActionEvent
 
 - type: entity
   parent: BaseAction
-  id: ActionFelinidPipecrawl
+  id: ActionDisposalPipeCrawler
   name: felinid-pipecrawl-action-name
   description: felinid-pipecrawl-action-description
   components:
-  - type: FelinidPipecrawlAction
+  - type: DisposalPipeCrawlerAction
   - type: Action
     checkCanInteract: false
     itemIconStyle: NoItem
@@ -27,4 +27,4 @@
       sprite: Structures/Piping/disposal.rsi
       state: pipe-c
   - type: InstantAction
-    event: !type:FelinidPipecrawlActionEvent
+    event: !type:DisposalPipeCrawlerActionEvent
