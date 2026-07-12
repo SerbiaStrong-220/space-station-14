@@ -144,6 +144,11 @@ public sealed class MagicMirrorSystem : EntitySystem
 
     private void OnMagicMirrorInteract(Entity<MagicMirrorComponent> mirror, ref AfterInteractEvent args)
     {
+        //SS220-IPC begin
+        if (!mirror.Comp.Interactable)
+            return;
+        //SS220-IPC end
+
         if (!args.CanReach || args.Target == null)
             return;
 
@@ -156,6 +161,11 @@ public sealed class MagicMirrorSystem : EntitySystem
 
     private void OnMirrorRangeCheck(EntityUid uid, MagicMirrorComponent component, ref BoundUserInterfaceCheckRangeEvent args)
     {
+        //SS220-IPC begin
+        if (!component.Interactable)
+            return;
+        //SS220-IPC end
+
         if (args.Result == BoundUserInterfaceRangeResult.Fail)
             return;
 
@@ -172,6 +182,13 @@ public sealed class MagicMirrorSystem : EntitySystem
 
     private void OnAttemptOpenUI(EntityUid uid, MagicMirrorComponent component, ref ActivatableUIOpenAttemptEvent args)
     {
+        //SS220-IPC begin
+        if (!component.Interactable)
+        {
+            args.Cancel();
+            return;
+        }
+        //SS220-IPC end
         var user = component.Target ?? args.User;
 
         if (!HasComp<VisualBodyComponent>(user))
