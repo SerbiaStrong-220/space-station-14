@@ -1,3 +1,5 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.Antag;
@@ -35,11 +37,11 @@ public sealed partial class BloodBrothersRuleSystem : GameRuleSystem<BloodBrothe
     {
         base.Initialize();
 
-        SubscribeLocalEvent<BloodBrothersRuleComponent, AfterAntagEntitySelectedEvent>(AfterAntagSelected, after: [typeof(AntagRandomObjectivesSystem)]);
+        SubscribeLocalEvent<BloodBrothersRuleComponent, AfterAntagEntitySelectedEvent>(OnAfterAntagSelected, after: [typeof(AntagRandomObjectivesSystem)]);
         SubscribeLocalEvent<BloodBrothersRoleComponent, GetBriefingEvent>(OnGetBriefing);
     }
 
-    private void AfterAntagSelected(Entity<BloodBrothersRuleComponent> ent, ref AfterAntagEntitySelectedEvent args)
+    private void OnAfterAntagSelected(Entity<BloodBrothersRuleComponent> ent, ref AfterAntagEntitySelectedEvent args)
     {
         if (!TryGetAntagData(args, out var mind, out var role))
             return;

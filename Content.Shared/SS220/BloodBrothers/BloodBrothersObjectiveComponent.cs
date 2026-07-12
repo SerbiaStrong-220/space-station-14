@@ -1,3 +1,5 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.Mind;
 using Robust.Shared.GameStates;
 
@@ -7,7 +9,7 @@ namespace Content.Shared.SS220.BloodBrothers;
 public sealed partial class BloodBrothersObjectiveComponent : Component
 {
     [DataField]
-    public string Issuer = "objective-issuer-blood-brothers";
+    public LocId Issuer = "objective-issuer-blood-brothers";
 
     [DataField]
     public EntityUid? BrotherObjective;

@@ -1,3 +1,5 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Roles;
@@ -12,11 +14,11 @@ public sealed partial class BloodBrothersObjectivesSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<BloodBrothersObjectiveComponent, ComponentInit>(OnAfterAssign);
+        SubscribeLocalEvent<BloodBrothersObjectiveComponent, ComponentInit>(OnCompInit);
         SubscribeLocalEvent<BloodBrothersObjectiveComponent, ObjectiveProgressModifyEvent>(OnProgressModify);
     }
 
-    private void OnAfterAssign(Entity<BloodBrothersObjectiveComponent> ent, ref ComponentInit args)
+    private void OnCompInit(Entity<BloodBrothersObjectiveComponent> ent, ref ComponentInit args)
     {
         if (!TryComp<ObjectiveComponent>(ent, out var objective))
             return;
