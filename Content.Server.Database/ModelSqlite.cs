@@ -17,6 +17,9 @@ namespace Content.Server.Database
     {
         public SqliteServerDbContext(DbContextOptions<SqliteServerDbContext> options) : base(options)
         {
+#if USE_SYSTEM_SQLITE
+            SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_sqlite3());
+#endif
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
@@ -55,24 +58,11 @@ namespace Content.Server.Database
             );
 
             modelBuilder
-                .Entity<ServerBan>()
+                .Entity<BanAddress>()
                 .Property(e => e.Address)
                 .HasColumnType("TEXT")
                 .HasConversion(ipMaskConverter);
 
-            modelBuilder
-                .Entity<ServerRoleBan>()
-                .Property(e => e.Address)
-                .HasColumnType("TEXT")
-                .HasConversion(ipMaskConverter);
-
-            // SS220 Species bans begin
-            modelBuilder
-                .Entity<ServerSpeciesBan>()
-                .Property(e => e.Address)
-                .HasColumnType("TEXT")
-                .HasConversion(ipMaskConverter);
-            // SS220 Species bans end
 
             var jsonStringConverter = new ValueConverter<JsonDocument, string>(
                 v => JsonDocumentToString(v),
@@ -88,6 +78,10 @@ namespace Content.Server.Database
 
             modelBuilder.Entity<Profile>()
                 .Property(log => log.Markings)
+                .HasConversion(jsonByteArrayConverter);
+
+            modelBuilder.Entity<Profile>()
+                .Property(log => log.OrganMarkings)
                 .HasConversion(jsonByteArrayConverter);
 
             // EF core can make this automatically unique on sqlite but not psql.

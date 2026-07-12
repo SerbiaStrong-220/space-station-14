@@ -14,9 +14,7 @@
       name: ghost-role-information-guardian-name
       description: ghost-role-information-guardian-description
       rules: ghost-role-information-familiar-rules
-      requirements: #SS220 ghostrole-times (20h overall) start
-      - !type:OverallPlaytimeRequirement
-        time: 72000 #SS220 ghostrole-times (20h overall) end
+      job: SyndicateReinforcement # SS220-add-playtime-restrictions
       mindRoles:
       - MindRoleGhostRoleFamiliar
       raffle:
@@ -114,6 +112,8 @@
     - type: Tag
       tags:
         - CannotSuicide
+        - StunImmune
+        - SlowImmune
 
 # From the uplink injector
 - type: entity
@@ -129,9 +129,7 @@
       name: ghost-role-information-holoparasite-name
       description: ghost-role-information-holoparasite-description
       rules: ghost-role-information-familiar-rules
-      requirements: #SS220 ghostrole-times (20h overall) start
-      - !type:OverallPlaytimeRequirement
-        time: 72000 #SS220 ghostrole-times (20h overall) end
+      job: SyndicateReinforcement # SS220-add-playtime-restrictions
       raffle:
         settings: default
     - type: GhostTakeoverAvailable
@@ -171,9 +169,7 @@
       name: ghost-role-information-ifrit-name
       description: ghost-role-information-ifrit-description
       rules: ghost-role-information-familiar-rules
-      requirements: #SS220 ghostrole-times (20h overall) start
-      - !type:OverallPlaytimeRequirement
-        time: 72000 #SS220 ghostrole-times (20h overall) end
+      job: SyndicateReinforcement # SS220-add-playtime-restrictions
       raffle:
         settings: default
     - type: GhostTakeoverAvailable
@@ -209,9 +205,7 @@
       name: ghost-role-information-holoclown-name
       description: ghost-role-information-holoclown-description
       rules: ghost-role-information-familiar-rules
-      requirements: #SS220 ghostrole-times (20h overall) start
-      - !type:OverallPlaytimeRequirement
-        time: 72000 #SS220 ghostrole-times (20h overall) end
+      job: SyndicateReinforcement # SS220-add-playtime-restrictions
       raffle:
         settings: default
     - type: GhostTakeoverAvailable
@@ -255,8 +249,6 @@
           map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
           color: "#8adaff"
           shader: unshaded
-    - type: Body
-      prototype: Primate
     - type: Tag
       tags:
         - CannotSuicide
@@ -264,17 +256,11 @@
     - type: Inventory
       templateId: holoclown
     - type: Hands
+      activeHandId: Hand
+      hands:
+        Hand:
+          location: Left
     - type: ComplexInteraction
-    - type: Clumsy
-      gunShootFailDamage:
-        types:
-          Blunt: 5
-          Piercing: 4
-        groups:
-          Burn: 3
-      catchingFailDamage:
-        types:
-          Blunt: 1
     - type: MeleeWeapon
       angle: 30
       animation: WeaponArcFist
@@ -289,9 +275,6 @@
     - type: RandomMetadata
       nameSegments:
       - NamesClown
-    - type: NpcFactionMember
-      factions:
-        - Syndicate
     - type: HTN
       rootTask:
         task: SimpleHumanoidHostileCompound

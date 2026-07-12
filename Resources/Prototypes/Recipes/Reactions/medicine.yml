@@ -495,6 +495,39 @@
     Bruizine: 2
 
 - type: reaction
+  id: BicarLacerinol # mixing any two brute medications will make Razorium
+  impact: Medium
+  reactants:
+    Lacerinol:
+      amount: 1
+    Bicaridine:
+      amount: 1
+  products:
+    Razorium: 1
+
+- type: reaction
+  id: BicarPuncturase # mixing any two brute medications will make Razorium
+  impact: Medium
+  reactants:
+    Puncturase:
+      amount: 1
+    Bicaridine:
+      amount: 1
+  products:
+    Razorium: 1
+
+- type: reaction
+  id: BicarBruizine # mixing any two brute medications will make Razorium
+  impact: Medium
+  reactants:
+    Bruizine:
+      amount: 1
+    Bicaridine:
+      amount: 1
+  products:
+    Razorium: 1
+
+- type: reaction
   id: BruizineLacerinol # mixing any two brute medications will make Razorium
   impact: Medium
   reactants:
@@ -572,8 +605,8 @@
       amount: 1
 # SS220 Dangerous chemistry update begin
   effects:
-    - !type:EmpReactionEffect
-      rangePerUnit: 0.2
+    - !type:Emp
+      rangeModifier: 0.2
       maxRange: 2
       energyConsumption: 50
       duration: 10
@@ -595,18 +628,21 @@
     Opporozidone: 3
 
 - type: reaction
-  id: Necrosol
-  impact: Medium
+  id: Arcryox
   minTemp: 370
   reactants:
-    Blood:
-      amount: 3
-    Omnizine:
+    Lithium:
       amount: 1
+    Tricordrazine:
+      amount: 1
+    #SS220 New_accesses_and_some_tweaks begin
+    Omnizine:
+      amount: 3
+    #SS220 New_accesses_and_some_tweaks end
     Cryoxadone:
-      amount: 2
+      amount: 1
   products:
-    Necrosol: 2
+    Arcryox: 3
 
 - type: reaction
   id: Aloxadone
@@ -671,7 +707,7 @@
   products:
     PotassiumIodide: 2
 
-# SS220 Haloperidol (remove official one)
+# SS220 Haloperidol (remove official one) begin
 # - type: reaction
 #   id: Haloperidol
 #   reactants:
@@ -687,3 +723,28 @@
 #       amount: 1
 #   products:
 #     Haloperidol: 5
+# SS220 Haloperidol (remove official one) end
+
+- type: reaction
+  id: Heparin
+  reactants:
+    SulfuricAcid:
+      amount: 1
+    Nitrogen:
+      amount: 1
+    Sodium:
+      amount: 1
+  products:
+    Heparin: 2
+
+- type: reaction
+  id: Hemorrhinol
+  reactants:
+    Heparin:
+      amount: 2
+    Razorium:
+      amount: 2
+    Plasma:
+      amount: 1
+  products:
+    Hemorrhinol: 2

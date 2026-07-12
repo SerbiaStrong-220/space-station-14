@@ -14,8 +14,8 @@
 - type: entity
   parent: ClothingEyesGlassesCheapSunglasses
   id: ClothingEyesQuartermasterGlasses
-  name: очки квартирмейстера
-  description: Эксклюзивные очки квартирмейстера, совмещающие в себе защиту ваших, зрящих в корень, глаз от ярких лучей в совокупности со встроенным интерфейсом оценивания груза. Выдержанный стиль отдела снабжения для своего лучшего сотрудника.
+  name: quartermaster's glasses
+  description: Exclusive glasses that combine cargo-evaluation interface with protection for your keen eyes against bright rays. The Supply Department's signature style for its finest employee.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Eyes/Glasses/qm.rsi
@@ -61,8 +61,8 @@
     coverage: EYES
 
 - type: entity
-  parent: ClothingEyesGlassesBlueShield
-  id: ClothingEyesBlueShieldGlasses
+  parent: ClothingEyesBase
+  id: ClothingEyesGlassesBlueShield
   name: blueshield glasses
   description: Upgraded sunglasses for blue shields.
   components:
@@ -74,12 +74,21 @@
     tags:
     - HamsterWearable
     - WhitelistChameleon
+  - type: FlashImmunity
+  - type: EyeProtection
+    protectionTime: 5
   - type: IdentityBlocker
     coverage: EYES
   - type: ShowJobIcons
+  - type: ShowHealthBars
+    damageContainers:
+    - Biological
+  - type: ShowHealthIcons
+    damageContainers:
+    - Biological
 
 - type: entity
-  parent: ClothingEyesBlueShieldGlasses
+  parent: ClothingEyesGlassesBlueShield
   id: ClothingEyesBlueShieldTacticGlasses
   name: blueshield tactic glasses
   description: Tactical glasses for combat situations.
@@ -88,6 +97,17 @@
     sprite: SS220/Clothing/Eyes/Glasses/blueshield_tactic.rsi
   - type: Clothing
     sprite: SS220/Clothing/Eyes/Glasses/blueshield_tactic.rsi
+
+- type: entity
+  parent: ClothingEyesGlassesBlueShield
+  id: ClothingEyesGlassesBallisticBlueShield
+  name: ballistic glasses
+  description: These glasses won't protect your eyes from splinters, but they will complement your tactical look. They have the functions of standard blue shield glasses.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/Glasses/blueshield_ballistic.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Eyes/Glasses/blueshield_ballistic.rsi
 
 - type: entity
   parent: [ClothingEyesBase, ShowMedicalIcons]
@@ -119,17 +139,12 @@
       default: ClothingEyesGlassesThermal
     - type: HiddenDescription
       entries:
-      - label: hidden-desc-ThermalGoogles-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
-      - label: hidden-desc-ThermalGoogles-research
-        jobRequired:
-          - ResearchAssistant
-          - ResearchDirector
-          - Scientist
-          - Borg
-
+        SyndicateAgentKnowledge: [ hidden-desc-ThermalGoogles-syndicate ]
+        ScienceKnowledge: [ hidden-desc-ThermalGoogles-research ]
+      nameEntries:
+      - [SyndicateAgentKnowledge, null]
+      - [ScienceKnowledge, null]
+      hiddenName: ent-BaseBigBox
 
 # Proto for future if we want to add this to RND
 - type: entity
@@ -146,7 +161,6 @@
       sprite: Clothing/Eyes/Glasses/thermal.rsi
     - type: Clothing
       sprite: Clothing/Eyes/Glasses/thermal.rsi
-
 
 - type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons]
@@ -175,3 +189,22 @@
     - Security
   - type: IdentityBlocker
     coverage: EYES
+
+- type: entity
+  parent: ClothingEyesBase
+  id: ClothingEyesVisorNinjaFake
+  name: ninja visor
+  description: A plastic replica of the night vision goggles worn by a ninja from a popular anime.
+  suffix: Fake
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/Glasses/ninjavisor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Eyes/Glasses/ninjavisor.rsi
+  - type: HiddenDescription
+    entries:
+      SyndicateAgentKnowledge: [ hidden-desc-toy-armour-syndicate ]
+      ServiceActorKnowledge: [ hidden-desc-toy-armour-clown ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ServiceActorKnowledge, null]

@@ -46,4 +46,9 @@ public sealed partial class SSDIndicatorComponent : Component
     /// </summary>
     [DataField]
     public TimeSpan UpdateInterval = TimeSpan.FromSeconds(1);
+
+    //SS220 Completely prevent mapped mobs from falling asleep start
+    [DataField, AutoNetworkedField]
+    public bool DisableAutoSleep = false;
+    //SS220 Completely prevent mapped mobs from falling asleep end
 }

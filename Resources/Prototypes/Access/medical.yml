@@ -11,7 +11,7 @@
   id: Chemistry
   name: id-card-access-level-chemistry
   canBeSwitchableInReader: false #SS220 DoorElectronicsConfiguratorFix
-  
+
 - type: accessLevel
   id: Paramedic
   name: id-card-access-level-paramedic
@@ -23,3 +23,4 @@
   - Medical
   - Chemistry
   - Paramedic
+  - Psychologist #SS220 New_accesses_and_some_tweaks

@@ -23,6 +23,9 @@ id-card-access-level-chief-medical-officer = Chief Medical Officer
 id-card-access-level-medical = Medical
 id-card-access-level-chemistry = Chemistry
 id-card-access-level-paramedic = Paramedic
+# SS220 New_accesses_and_some_tweaks start
+id-card-access-level-psychologist = Psychologist
+# SS220 New_accesses_and_some_tweaks end
 
 id-card-access-level-quartermaster = Quartermaster
 id-card-access-level-cargo = Cargo

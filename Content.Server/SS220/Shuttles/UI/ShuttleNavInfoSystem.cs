@@ -4,6 +4,7 @@ using Content.Shared.SS220.Forcefield.Components;
 using Content.Shared.SS220.Shuttles.UI;
 using Robust.Server.GameStates;
 using Robust.Server.Player;
+using Robust.Shared.Enums;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
@@ -13,10 +14,10 @@ using static Content.Server.Shuttles.Systems.ShuttleConsoleSystem;
 
 namespace Content.Server.SS220.Shuttles.UI;
 
-public sealed class ShuttleNavInfoSystem : SharedShuttleNavInfoSystem
+public sealed partial class ShuttleNavInfoSystem : SharedShuttleNavInfoSystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private PvsOverrideSystem _pvsOverride = default!;
 
     private readonly HashSet<ICommonSession> _receivers = [];
     private readonly Dictionary<ICommonSession, HashSet<EntityUid>> _pvsOverrides = [];
@@ -24,6 +25,12 @@ public sealed class ShuttleNavInfoSystem : SharedShuttleNavInfoSystem
     public override void Initialize()
     {
         base.Initialize();
+
+        _player.PlayerStatusChanged += (_, x) =>
+        {
+            if (x.NewStatus == SessionStatus.Disconnected)
+                _receivers.Remove(x.Session);
+        };
 
         SubscribeLocalEvent<RadarBoundUIOpenedEvent>(args => OnUIOpened(args.OpenedEvent));
         SubscribeLocalEvent<ShuttleConsoleBoundUIOpenedEvent>(args => OnUIOpened(args.OpenedEvent));

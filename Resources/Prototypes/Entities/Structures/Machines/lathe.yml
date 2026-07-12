@@ -50,6 +50,11 @@
     price: 800
   - type: ResearchClient
   - type: TechnologyDatabase
+  - type: ApcPowerReceiver
+    powerLoad: 150
+  - type: PowerState
+    idlePowerDraw: 150
+    workingPowerDraw: 1000
 
 # a lathe that can be sped up with space lube / slowed down with glue
 - type: entity
@@ -108,7 +113,7 @@
   - type: Machine
     board: AutolatheMachineCircuitboard
   - type: MaterialStorage
-    whitelist:
+    whitelist: &StandardMaterialWhitelist
       tags:
         - Sheet
         - RawMaterial
@@ -134,6 +139,8 @@
     - PartsStatic
     - AtmosStatic
     - CablesStatic
+    - PaperworkStatic
+    - TowelsStatic
     - CargoStatic
     - MaterialsStatic
     - BasicChemistryStatic
@@ -145,8 +152,8 @@
   - type: EmagLatheRecipes
     emagStaticPacks:
     - SecurityAmmoStatic
-    - SecurityAmmoRubberStatic #SS220-fix Magazine Pistol Rubber Lathe (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1799)
     - SS220EmagSecurityAmmoStatic #ss220 more recipies
+    - SyndicateAmmoStatic
   - type: BlueprintReceiver
     whitelist:
       tags:
@@ -193,11 +200,7 @@
   - type: Machine
     board: ProtolatheMachineCircuitboard
   - type: MaterialStorage
-    whitelist:
-      tags:
-        - Sheet
-        - RawMaterial
-        - Ingot
+    whitelist: *StandardMaterialWhitelist
   # SS220 Add access check for material eject begin
   - type: AccessReader
     access: [["Cargo"] , ["Engineering"], ["Medical"], ["Research"], ["Security"], ["Service"]]
@@ -231,7 +234,6 @@
     - Janitor
     - Instruments
     - Equipment
-    - FauxTiles
   - type: EmagLatheRecipes
     emagDynamicPacks:
     - SecurityAmmo
@@ -279,7 +281,6 @@
     - CargoBoardsStatic
     - MedicalBoardsStatic
     - EngineeringBoardsStatic
-    - CircuitFloorsStatic
     dynamicPacks:
     - EngineeringBoards
     - CargoBoards
@@ -293,11 +294,7 @@
     emagDynamicPacks:
     - SecurityBoards
   - type: MaterialStorage
-    whitelist:
-      tags:
-        - Sheet
-        - RawMaterial
-        - Ingot
+    whitelist: *StandardMaterialWhitelist
   # SS220 Add access check for material eject begin
   - type: AccessReader
     access: [["Cargo"] , ["Engineering"], ["Medical"], ["Research"], ["Security"], ["Service"]]
@@ -352,11 +349,7 @@
     - MechParts
     - MechEquipment
   - type: MaterialStorage
-    whitelist:
-      tags:
-      - Sheet
-      - RawMaterial
-      - Ingot
+    whitelist: *StandardMaterialWhitelist
   # SS220 Add access check for material eject begin
   - type: AccessReader
     access: [["Cargo"] , ["Engineering"], ["Medical"], ["Research"], ["Security"], ["Service"]]
@@ -435,11 +428,12 @@
   - type: Lathe
     idleState: icon
     runningState: icon
+    unlitIdleState: unlit
+    unlitRunningState: unlit-building
     staticPacks:
     - SecurityEquipmentStatic
     - SecurityPracticeStatic
     - SecurityAmmoStatic
-    - SecurityAmmoRubberStatic #SS220-fix Magazine Pistol Rubber Lathe (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1799)
     - SecurityWeaponsStatic
     dynamicPacks:
     - SalvageSecurityBoards
@@ -450,12 +444,12 @@
     - SecurityAmmo
     - SecurityWeapons
     - SecurityDisablers
+    - SecurityBoardsTurrets #SS220 add turrets craft
+  - type: EmagLatheRecipes
+    emagStaticPacks:
+    - SyndicateAmmoStatic
   - type: MaterialStorage
-    whitelist:
-      tags:
-        - Sheet
-        - RawMaterial
-        - Ingot
+    whitelist: *StandardMaterialWhitelist
   # SS220 Add access check for material eject begin
   - type: AccessReader
     access: [["Cargo"] , ["Engineering"], ["Medical"], ["Research"], ["Security"], ["Service"]]
@@ -494,15 +488,15 @@
     - type: Lathe
       idleState: icon
       runningState: icon
+      unlitIdleState: unlit
+      unlitRunningState: unlit-building
       staticPacks:
       - SecurityAmmoStatic
-      - SecurityAmmoRubberStatic #SS220-fix Magazine Pistol Rubber Lathe (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1799)
+    - type: EmagLatheRecipes
+      emagStaticPacks:
+      - SyndicateAmmoStatic
     - type: MaterialStorage
-      whitelist:
-        tags:
-          - Sheet
-          - RawMaterial
-          - Ingot
+      whitelist: *StandardMaterialWhitelist
     # SS220 Add access check for material eject begin
     - type: AccessReader
       access: [["Cargo"] , ["Engineering"], ["Medical"], ["Research"], ["Security"], ["Service"]]
@@ -537,6 +531,8 @@
   - type: Lathe
     idleState: icon
     runningState: icon
+    unlitIdleState: unlit
+    unlitRunningState: unlit-building
     staticPacks:
     - TopicalsStatic
     - ChemistryStatic
@@ -587,6 +583,7 @@
     idleState: icon
     runningState: building
     staticPacks:
+    - TowelsStatic
     - ClothingCivilian
     - ClothingCargo
     - ClothingCommand
@@ -605,11 +602,7 @@
     - ClothingCentComm
     - ClothingSyndie
   - type: MaterialStorage
-    whitelist:
-      tags:
-        - Sheet
-        - RawMaterial
-        - Ingot
+    whitelist: *StandardMaterialWhitelist
   - type: OreSiloClient
   # SS220 Add silo linking in mapping begin
   - type: DeviceNetwork
@@ -660,6 +653,10 @@
     staticPacks:
     - BioGenIngredientsStatic
     - BioGenMaterialsStatic
+  - type: EmagLatheRecipes
+    emagStaticPacks:
+    - BioGenEmagStatic
+    - HostileCubesStatic
 
 - type: entity
   parent: BaseLathe
@@ -751,8 +748,6 @@
   name: cutter machine
   description: This is a cutter. It cuts. Add variety to your station floor with eye-pleasing patterns! Don't stick your fingers in.
   components:
-  - type: Transform
-    noRot: false
   - type: Sprite
     sprite: Structures/Machines/cuttermachine.rsi
     snapCardinals: true
@@ -771,17 +766,24 @@
     idleState: icon
     runningState: building
     staticPacks:
-    - FloorTilesStatic
     - SS220FloorTilesStatic #SS220-Sheetifier-rework
+    - FloorDarkTilesStatic
+    - FloorSteelTilesStatic
+    - FloorWhiteTilesStatic
+    - FloorMaintsTilesStatic
+    - FloorIndustrialTilesStatic
+    - FloorWoodTilesStatic
+    - FloorConcreteTilesStatic
+    # - CircuitFloorsStatic SS220-remove-red-green-blue-circuits
+    - FloorMarbleTilesStatic
+    - FloorShuttleTilesStatic
+    - PlasticTilesStatic
+    - CarpetTilesStatic
+    - PreciousTilesStatic
+    dynamicPacks:
+    - FauxTiles
   - type: MaterialStorage
-    whitelist:
-      tags:
-        - Sheet
-        - Metal
-        - Wooden
-        - RawMaterial
-        - Plastic
-        - Ingot
+    whitelist: *StandardMaterialWhitelist
   # SS220 Add access check for material eject begin
   - type: AccessReader
     access: [["Cargo"] , ["Engineering"], ["Medical"], ["Research"], ["Security"], ["Service"]]

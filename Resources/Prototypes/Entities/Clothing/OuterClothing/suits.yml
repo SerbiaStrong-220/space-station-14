@@ -27,6 +27,9 @@
     - WhitelistChameleon
   - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
+  - type: HideLayerClothing
+    slots:
+      - Tail
 
 - type: entity
   parent: ClothingOuterSuitBomb
@@ -70,6 +73,9 @@
   - type: GroupExamine
   - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
+  - type: HideLayerClothing
+    slots:
+    - Tail
 
 - type: entity
   parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing]
@@ -78,9 +84,9 @@
   description: An expensive firesuit that protects against even the most deadly of station fires. Designed to protect even if the wearer is set aflame.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Suits/atmos_firesuit.rsi
+    sprite: SS220/Clothing/OuterClothing/Suits/atmos_firesuit.rsi #SS220 atmos firesuit resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Suits/atmos_firesuit.rsi
+    sprite: SS220/Clothing/OuterClothing/Suits/atmos_firesuit.rsi #SS220 atmos firesuit resprite
   - type: PressureProtection
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
@@ -104,8 +110,11 @@
     slots: WITHOUT_POCKET
   - type: Tag
     tags:
-    - CorgiWearable
     - WhitelistChameleon
+    - PressureProtectionSuit # SS220-add-atmos-suit-weightless-protection
+  - type: HideLayerClothing
+    slots:
+    - Tail
 
 - type: entity
   parent: [ClothingOuterBaseLarge, GeigerCounterClothing, AllowSuitStorageClothing]
@@ -144,6 +153,9 @@
   #ss220 handheld radio on outer clothing end
   - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
+  - type: HideLayerClothing
+    slots:
+    - Tail
 
 - type: entity
   parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing, BaseToggleClothing]
@@ -152,9 +164,9 @@
   description: This black technologically advanced, cybernetically-enhanced suit provides many abilities like invisibility or teleportation.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Suits/spaceninja.rsi
+    sprite: SS220/Clothing/OuterClothing/Suits/spaceninja.rsi # SS220 Ninja Resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Suits/spaceninja.rsi
+    sprite: SS220/Clothing/OuterClothing/Suits/spaceninja.rsi # SS220 Ninja Resprite
   # hardsuit stuff
   - type: PressureProtection
     highPressureMultiplier: 0.6
@@ -177,9 +189,15 @@
     parent: true
     components:
     - type: Stealth
-      minVisibility: -1 # SS220 Revert Ninja Stealth by #1075. Fix #1575 begin
-      maxVisibility: -1
-      lastVisibility: 0 # SS220 Revert Ninja Stealth by #1075. Fix #1575 end
+  # SS220 invis buff begin
+      minVisibility: 0.05
+      maxVisibility: 1
+      lastVisibility: 1
+      shimmerScale: 0.25
+    - type: StealthOnMove
+      passiveVisibilityRate: -0.475
+      movementVisibilityRate: 0
+  # SS220 invis buff end
   - type: PowerCellDraw
     drawRate: 1.8 # 200 seconds on the default cell
   - type: ToggleCellDraw
@@ -191,6 +209,13 @@
     noPowerPopup: ninja-no-power
   # core ninja suit stuff
   - type: NinjaSuit
+  - type: EmpResistance
+    strengthMultiplier: 0
+  # SS220-add-tag-for-proper-skill-check-begin
+  - type: Tag
+    tags:
+    - PressureProtectionSuit
+  # SS220-add-tag-for-proper-skill-check-end
   - type: UseDelay
     delay: 5 # disable time
   - type: PowerCellSlot
@@ -209,6 +234,9 @@
         whitelist:
           tags:
             - PowerCell
+  - type: HideLayerClothing
+    slots:
+    - Tail
 
 - type: entity
   parent: ClothingOuterBase
@@ -308,8 +336,9 @@
     slots: WITHOUT_POCKET
   - type: Tag
     tags:
-    - CorgiWearable
     - WhitelistChameleon
+  - type: AddAccentClothing
+    accent: BarkAccent
 
 - type: entity
   parent: ClothingOuterBase
@@ -339,6 +368,9 @@
           tags:
           - Radio
   #ss220 handheld radio on outer clothing end
+  - type: HideLayerClothing
+    slots:
+    - Tail
 
 - type: entity
   parent: ClothingOuterSuitCarp

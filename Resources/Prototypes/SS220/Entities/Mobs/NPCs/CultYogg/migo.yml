@@ -7,22 +7,49 @@
     - FlyingMobBase
     - MobCombat
     - BaseSimpleMob
-    #- MobFlammable #Removed cause wierd interactions in astral
+    - MobFlammable
+    - MobPolymorphable
   description: The child of the Dark God.
-  id: MiGo
+  id: MobMiGo
   suffix: CultYogg
   components:
   #cultists comps
   - type: MiGo
-    # showInHands: false
-    # disableExplosionRecursion: true
-    # canBeStripped: false
     eraseWhitelist:
       components:
       - CultYoggBuilding
       - CultYoggBuildingFrame
   - type: Body
-    prototype: MiGoBody
+  - type: Hands
+    hands:
+      body_part_slot_far right hand:
+        location: Right
+        whitelist:
+          tags:
+          - MiGoHandsWhitelist
+      body_part_slot_right hand:
+        location: Right
+        whitelist:
+          tags:
+          - MiGoHandsWhitelist
+      body_part_slot_left hand:
+        location: Left
+        whitelist:
+          tags:
+          - MiGoHandsWhitelist
+      body_part_slot_far left hand:
+        location: Left
+        whitelist:
+          tags:
+          - MiGoHandsWhitelist
+    sortedHands:
+    - body_part_slot_far right hand
+    - body_part_slot_right hand
+    - body_part_slot_left hand
+    - body_part_slot_far left hand
+    showInHands: false
+    disableExplosionRecursion: true
+    canBeStripped: false
   - type: ComplexInteraction #For UI opening only
   - type: ShowHealthBars
   - type: Telepathy
@@ -34,13 +61,14 @@
     interfaces:
       enum.MiGoUiKey.Erect:
         type: MiGoErectBoundUserInterface
+  - type: AstralLeap
+    astralAction: ActionMiGoAstral
+    astralEnt: MiGoInAstral
+    astralLeapDoAfterTime: 3
   - type: ShowCultYoggIcons
   - type: NpcFactionMember
     factions:
     - CultYogg
-  - type: AntagObjectives
-    objectives:
-    - CultYoggSacraficeObjective
   #situational for logic
   - type: Puller
     needsHands: false
@@ -57,6 +85,7 @@
   - type: ThermalVision
     state: Half
     visionRadius: 14
+    changeIconOverlaySpace: true
   #visual
   - type: PointLight
     netsync: false
@@ -67,19 +96,22 @@
     drawdepth: Mobs
     sprite: SS220/Mobs/CultYogg/MiGo.rsi
     layers:
-      - map: [ "enum.MiGoVisual.Base", "enum.DamageStateVisualLayers.Base"]
+      - map: ["enum.DamageStateVisualLayers.Base"]
         state: alive
   - type: DamageStateVisuals
     states:
       Alive:
         Base: alive
       Critical:
-        Base: dead
+        Base: critical
       Dead:
         Base: dead
   - type: Visibility
     layer: 1
   #other
+  - type: Experience
+  - type: RoleExperienceAdd
+    definitionId: MiGoRoleExperience
   - type: MovementSpeedModifier
     baseWalkSpeed : 6
     baseSprintSpeed : 6
@@ -99,8 +131,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      200: Critical
-      250: Dead
+      140: Critical
+      150: Dead
   - type: Destructible
     thresholds:
     - trigger:
@@ -110,7 +142,7 @@
       behaviors:
       - !type:GibBehavior { }
   - type: Stamina
-    critThreshold: 200
+    baseCritThreshold: 200
   - type: HTN
     rootTask:
       task: IdleCompound
@@ -122,10 +154,11 @@
       types:
         Blunt: 4
         Slash: 7
-        Structural: 12 #anti-useless in base
-  - type: Temperature
+        Structural: 40 #anti-useless in base
+  - type: TemperatureDamage
     heatDamageThreshold: 360
     coldDamageThreshold: -150
+  - type: Temperature
     currentTemperature: 310.15
   - type: Tag
     tags:

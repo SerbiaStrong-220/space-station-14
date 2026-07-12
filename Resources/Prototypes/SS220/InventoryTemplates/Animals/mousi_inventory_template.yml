@@ -1,0 +1,27 @@
+# EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: inventoryTemplate
+  id: mousi
+  slots:
+  - name: ears
+    slotTexture: ears
+    slotFlags: EARS
+    slotGroup: MainHotbar
+    stripTime: 3
+    uiWindowPos: 1,2
+    strippingWindowPos: 1,2
+    displayName: Ears
+  - name: mask
+    slotTexture: mask
+    slotFlags: MASK
+    uiWindowPos: 1,1
+    strippingWindowPos: 1,1
+    displayName: Mask
+  - name: id
+    slotTexture: id
+    slotFlags: IDCARD
+    slotGroup: SecondHotbar
+    stripTime: 6
+    uiWindowPos: 2,1
+    strippingWindowPos: 2,4
+    displayName: ID

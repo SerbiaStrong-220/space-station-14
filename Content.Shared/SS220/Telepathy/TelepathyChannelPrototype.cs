@@ -1,15 +1,15 @@
 ﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.SS220.GhostHearing;
+using Content.Shared.SS220.TTS;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Telepathy;
 
-[Prototype("telepathyChannel")]
+[Prototype]
 public sealed partial class TelepathyChannelPrototype : IHearableChannelPrototype
 {
     [IdDataField, ViewVariables]
-    public string ID { get; } = default!;
+    public string ID { get; private set; } = default!;
 
     [DataField]
     public ChannelParameters ChannelParameters = new();

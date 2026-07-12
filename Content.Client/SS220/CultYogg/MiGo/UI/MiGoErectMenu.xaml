@@ -4,7 +4,7 @@
                      xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
                      Title="{Loc 'cult-yogg-migo-erect-menu-title'}"
                      MinSize="200 300"
-                     SetSize="450 515">
+                     SetSize="470 510">
     <BoxContainer Orientation="Vertical" Margin="10 10 10 10">
         <BoxContainer Orientation="Horizontal">
             <Control HorizontalExpand="True" />

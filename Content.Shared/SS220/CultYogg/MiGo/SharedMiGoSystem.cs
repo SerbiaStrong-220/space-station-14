@@ -1,98 +1,83 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Actions;
-using Content.Shared.Alert;
+using Content.Shared.Administration.Logs;
 using Content.Shared.Buckle.Components;
+using Content.Shared.Database;
 using Content.Shared.DoAfter;
-using Content.Shared.FixedPoint;
-using Content.Shared.Interaction.Events;
+using Content.Shared.Humanoid;
+using Content.Shared.Mind;
+using Content.Shared.Mindshield.Components;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Physics;
 using Content.Shared.Popups;
-using Content.Shared.StatusEffect;
+using Content.Shared.Revolutionary.Components;
+using Content.Shared.Roles.Components;
+using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.SS220.CultYogg.Altar;
-using Content.Shared.SS220.CultYogg.Sacraficials;
+using Content.Shared.SS220.CultYogg.Buildings;
+using Content.Shared.SS220.CultYogg.Cultists;
+using Content.Shared.SS220.CultYogg.Rave;
+using Content.Shared.SS220.CultYogg.Sacrificials;
+using Content.Shared.Verbs;
+using Content.Shared.Zombies;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Physics;
-using Robust.Shared.Physics.Systems;
-using Robust.Shared.Timing;
-using System.Linq;
-using Content.Shared.SS220.CultYogg.Buildings;
 using Robust.Shared.Prototypes;
-using Content.Shared.Mindshield.Components;
-using Content.Shared.Zombies;
-using Content.Shared.Revolutionary.Components;
-using Content.Shared.Humanoid;
-using Content.Shared.Mind;
-using Content.Shared.Verbs;
-using Content.Shared.Mobs.Components;
-using Robust.Shared.Audio;
-using Content.Shared.Movement.Pulling.Events;
-using Content.Shared.Roles.Components;
+using Robust.Shared.Timing;
+using Robust.Shared.Utility;
+using System.Linq;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
 
-public abstract class SharedMiGoSystem : EntitySystem
+public abstract partial class SharedMiGoSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffectsSystem = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedMiGoErectSystem _miGoErectSystem = default!;
-    [Dependency] private readonly SharedCultYoggHealSystem _heal = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _userInterfaceSystem = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-
-    /// <summary>
-    /// Allows you to resolve dead-end situations where there are no cultists left, allowing you to recruit without feeding the mushroom
-    /// </summary>
-    protected static bool IsEslavementSimplified = false;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedMiGoErectSystem _miGoErectSystem = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedUserInterfaceSystem _userInterfaceSystem = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<MiGoComponent, ComponentStartup>(OnCompInit);
+        SubscribeLocalEvent<MiGoComponent, ComponentStartup>(OnComponentStartup);
 
         // actions
-        SubscribeLocalEvent<MiGoComponent, MiGoHealEvent>(MiGoHeal);
-        SubscribeLocalEvent<MiGoComponent, MiGoErectEvent>(MiGoErect);
-        SubscribeLocalEvent<MiGoComponent, MiGoSacrificeEvent>(MiGoSacrifice);
-        SubscribeLocalEvent<MiGoComponent, MiGoAstralEvent>(MiGoAstral);
+        SubscribeLocalEvent<MiGoComponent, MiGoHealActionEvent>(MiGoHealAction);
+        SubscribeLocalEvent<MiGoComponent, MiGoErectActionEvent>(MiGoErectAction);
+        SubscribeLocalEvent<MiGoComponent, MiGoSacrificeActionEvent>(MiGoSacrificeAction);
         SubscribeLocalEvent<MiGoComponent, MiGoEnslavementActionEvent>(OnMiGoEnslaveAction);
-
-        //astral DoAfterEvents
-        SubscribeLocalEvent<MiGoComponent, AfterMaterialize>(OnAfterMaterialize);
-        SubscribeLocalEvent<MiGoComponent, AfterDeMaterialize>(OnAfterDeMaterialize);
-
-        SubscribeLocalEvent<MiGoComponent, AttackAttemptEvent>(CheckAct);
-        SubscribeLocalEvent<MiGoComponent, PullAttemptEvent>(OnPullAttempt);
 
         SubscribeLocalEvent<MiGoComponent, BoundUIOpenedEvent>(OnBoundUIOpened);
 
         SubscribeLocalEvent<GetVerbsEvent<Verb>>(OnGetVerb);
+
+        SubscribeLocalEvent<MiGoComponent, ChangeCultYoggStageEvent>(OnUpdateStage);
     }
 
-    protected virtual void OnCompInit(Entity<MiGoComponent> uid, ref ComponentStartup args)
+    protected virtual void OnComponentStartup(Entity<MiGoComponent> uid, ref ComponentStartup args)
     {
         _actions.AddAction(uid, ref uid.Comp.MiGoHealActionEntity, uid.Comp.MiGoHealAction);
         _actions.AddAction(uid, ref uid.Comp.MiGoEnslavementActionEntity, uid.Comp.MiGoEnslavementAction);
-        _actions.AddAction(uid, ref uid.Comp.MiGoAstralActionEntity, uid.Comp.MiGoAstralAction);
         _actions.AddAction(uid, ref uid.Comp.MiGoErectActionEntity, uid.Comp.MiGoErectAction);
         _actions.AddAction(uid, ref uid.Comp.MiGoSacrificeActionEntity, uid.Comp.MiGoSacrificeAction);
         _actions.AddAction(uid, ref uid.Comp.MiGoToggleLightActionEntity, uid.Comp.MiGoToggleLightAction);
+
+        SyncStage(uid);
     }
+
+    protected virtual void SyncStage(Entity<MiGoComponent> uid) { }
 
     private void OnBoundUIOpened(Entity<MiGoComponent> entity, ref BoundUIOpenedEvent args)
     {
@@ -101,15 +86,20 @@ public abstract class SharedMiGoSystem : EntitySystem
             case "Erect":
                 _userInterfaceSystem.SetUiState(args.Entity, args.UiKey, new MiGoErectBuiState()
                 {
-                    Buildings = _proto.GetInstances<CultYoggBuildingPrototype>().Values.ToList(),
+                    Buildings = _proto.GetInstances<CultYoggBuildingPrototype>()
+                        .Values.Select(proto => (ProtoId<CultYoggBuildingPrototype>) proto)
+                        .ToList(),
                 });
-                return;
+                break;
+
             case "Plant":
                 _userInterfaceSystem.SetUiState(args.Entity, args.UiKey, new MiGoPlantBuiState()
                 {
-                    Seeds = _proto.GetInstances<CultYoggSeedsPrototype>().Values.ToList(),
+                    Seeds = _proto.GetInstances<CultYoggSeedsPrototype>()
+                        .Values.Select(proto => (ProtoId<CultYoggSeedsPrototype>) proto)
+                        .ToList(),
                 });
-                return;
+                break;
         }
     }
 
@@ -158,36 +148,28 @@ public abstract class SharedMiGoSystem : EntitySystem
     }
 
     #region Heal
-    private void MiGoHeal(Entity<MiGoComponent> uid, ref MiGoHealEvent args)
+    private void MiGoHealAction(Entity<MiGoComponent> uid, ref MiGoHealActionEvent args)
     {
         if (args.Handled)
             return;
 
-        if (!uid.Comp.IsPhysicalForm)
-            return;
-
-        if (!HasComp<MobStateComponent>(args.Target))
+        if (!HasComp<MobStateComponent>(args.Target) || HasComp<BorgChassisComponent>(args.Target))
         {
             _popup.PopupClient(Loc.GetString("cult-yogg-cant-heal-this", ("target", args.Target)), args.Target, uid);
             return;
         }
 
-        //check if effect is already applyed
-        if (_statusEffectsSystem.HasStatusEffect(args.Target, uid.Comp.RequiedEffect))
-        {
-            _popup.PopupClient(Loc.GetString("cult-yogg-heal-already-have-effect"), args.Target, uid);
-            return;
-        }
-
-        _heal.ApplyMiGoHeal(args.Target, uid.Comp.HealingEffectTime);
 
         var healComponent = EnsureComp<CultYoggHealComponent>(args.Target);
+
+        healComponent.HealingEffectTime = _timing.CurTime + uid.Comp.HealingEffectTime;
         healComponent.Heal = args.Heal;
         healComponent.BloodlossModifier = args.BloodlossModifier;
         healComponent.ModifyBloodLevel = args.ModifyBloodLevel;
-        healComponent.TimeBetweenIncidents = args.TimeBetweenIncidents;
+        healComponent.TimeBetweenHealingTicks = args.TimeBetweenIncidents;
         healComponent.Sprite = args.EffectSprite;
         healComponent.ModifyStamina = args.ModifyStamina;
+
         Dirty(args.Target, healComponent);
 
         args.Handled = true;
@@ -195,13 +177,10 @@ public abstract class SharedMiGoSystem : EntitySystem
     #endregion
 
     #region Erect
-    private void MiGoErect(Entity<MiGoComponent> entity, ref MiGoErectEvent args)
+    private void MiGoErectAction(Entity<MiGoComponent> entity, ref MiGoErectActionEvent args)
     {
         //will wait when sw will update ui parts to copy paste, cause rn it has an errors
         if (args.Handled || !TryComp<ActorComponent>(entity, out var actor))
-            return;
-
-        if (!entity.Comp.IsPhysicalForm)
             return;
 
         _miGoErectSystem.OpenUI(entity, actor);
@@ -209,15 +188,15 @@ public abstract class SharedMiGoSystem : EntitySystem
     #endregion
 
     #region MiGoSacrifice
-    private void MiGoSacrifice(Entity<MiGoComponent> uid, ref MiGoSacrificeEvent args)
+    private void MiGoSacrificeAction(Entity<MiGoComponent> uid, ref MiGoSacrificeActionEvent args)
     {
-        if (!uid.Comp.IsPhysicalForm)
+        if (uid.Comp.CurrentStage < CultYoggStage.Alarm)
         {
-            _popup.PopupClient(Loc.GetString("cult-yogg-cant-sacrafice-in-astral"), uid);
+            _popup.PopupClient(Loc.GetString("cult-yogg-sacrifice-only-stage-alarm"), uid);
             return;
         }
 
-        var altarsClose = _entityLookup.GetEntitiesInRange<CultYoggAltarComponent>(Transform(uid).Coordinates, uid.Comp.SaraficeStartRange);
+        var altarsClose = _entityLookup.GetEntitiesInRange<CultYoggAltarComponent>(Transform(uid).Coordinates, uid.Comp.SacrificeStartRange);
 
         if (altarsClose.Count == 0)
         {
@@ -245,15 +224,20 @@ public abstract class SharedMiGoSystem : EntitySystem
         if (!TryComp<StrapComponent>(ent, out var strapComp))
             return false;
 
-        var targetUid = strapComp.BuckledEntities.FirstOrDefault();
+        var targetUid = strapComp.BuckledEntities.FirstOrNull();
 
-        var sacrificeDoAfter = new DoAfterArgs(EntityManager, user, ent.Comp.RutualTime, new MiGoSacrificeDoAfterEvent(), ent, target: targetUid)
+        if (targetUid == null)
+            return false;
+
+        var sacrificeDoAfter = new DoAfterArgs(EntityManager, user, ent.Comp.RitualTime, new MiGoSacrificeDoAfterEvent(), ent, ent)
         {
-            BreakOnDamage = true,
-            BreakOnMove = true,
+            BreakOnDamage = false,
+            BreakOnMove = false,
             BlockDuplicate = true,
             CancelDuplicate = true,
-            DuplicateCondition = DuplicateConditions.SameEvent
+            DuplicateCondition = DuplicateConditions.SameEvent,
+            DistanceThreshold = 2f,
+            MovementThreshold = 2f
         };
 
         var started = _doAfter.TryStartDoAfter(sacrificeDoAfter);
@@ -262,6 +246,8 @@ public abstract class SharedMiGoSystem : EntitySystem
         {
             _popup.PopupPredicted(Loc.GetString("cult-yogg-sacrifice-started", ("user", user), ("target", targetUid)),
                 ent, null, PopupType.MediumCaution);
+
+            ent.Comp.AnnounceTime = _timing.CurTime + ent.Comp.AnnounceDelay;
         }
 
         return started;
@@ -269,168 +255,24 @@ public abstract class SharedMiGoSystem : EntitySystem
 
     #endregion
 
-    #region Astral
-    public override void Update(float delta)
-    {
-        base.Update(delta);
-        var query = EntityQueryEnumerator<MiGoComponent>();
-
-        while (query.MoveNext(out var uid, out var comp))
-        {
-            if (IsPaused(uid))//not sure what it is
-                continue;
-
-            if (comp.MaterializationTime == null)
-                continue;
-
-            var secondsLeft = (FixedPoint2)Math.Round((comp.MaterializationTime.Value - _timing.CurTime).TotalSeconds);//calculate time left in seconds
-
-            if (comp.AlertTime == 0 || comp.AlertTime > secondsLeft)//update alert if buffer has a different value
-            {
-                comp.AlertTime = secondsLeft;
-                _alerts.ShowAlert(uid, comp.AstralAlert);
-            }
-
-            if (_timing.CurTime <= comp.MaterializationTime.Value)
-                continue;
-
-            if (!comp.AudioPlayed)
-            {
-                _audio.PlayPredicted(comp.SoundMaterialize, uid, uid, AudioParams.Default.WithMaxDistance(0.5f));
-                comp.AudioPlayed = true;
-            }
-
-            ChangeForm(uid, comp, true);
-
-            _actions.StartUseDelay(comp.MiGoAstralActionEntity);
-            DirtyEntity(uid);
-        }
-    }
-    private void MiGoAstral(Entity<MiGoComponent> uid, ref MiGoAstralEvent args)
-    {
-        if (!uid.Comp.IsPhysicalForm)
-        {
-            var doafterArgs = new DoAfterArgs(EntityManager, uid, uid.Comp.ExitingAstralDoAfter, new AfterMaterialize(), uid)
-            {
-                Broadcast = false,
-                BreakOnDamage = false,
-                NeedHand = false,
-                BlockDuplicate = true,
-                CancelDuplicate = false
-            };
-
-            _doAfter.TryStartDoAfter(doafterArgs);
-        }
-        else
-        {
-            var doafterArgs = new DoAfterArgs(EntityManager, uid, uid.Comp.EnteringAstralDoAfter, new AfterDeMaterialize(), uid)
-            {
-                Broadcast = false,
-                BreakOnDamage = false,
-                NeedHand = false,
-                BlockDuplicate = true,
-                CancelDuplicate = false
-            };
-
-            var started = _doAfter.TryStartDoAfter(doafterArgs);
-            if (started)
-            {
-                _audio.PlayPredicted(uid.Comp.SoundDeMaterialize, uid, uid, AudioParams.Default.WithMaxDistance(0.5f));
-            }
-        }
-    }
-
-    private void OnAfterMaterialize(Entity<MiGoComponent> uid, ref AfterMaterialize args)
-    {
-        if (args.Cancelled)
-            return;
-
-        if (args.Handled)
-            return;
-
-        args.Handled = true;
-
-        _audio.PlayPredicted(uid.Comp.SoundMaterialize, uid, uid, AudioParams.Default.WithMaxDistance(0.5f));
-
-        ChangeForm(uid, uid.Comp, true);
-        _actions.StartUseDelay(uid.Comp.MiGoAstralActionEntity);
-        Dirty(uid);
-    }
-
-    private void OnAfterDeMaterialize(Entity<MiGoComponent> uid, ref AfterDeMaterialize args)
-    {
-        if (args.Cancelled)
-            return;
-
-        if (args.Handled)
-            return;
-
-        args.Handled = true;
-
-        ChangeForm(uid, uid.Comp, false);
-        uid.Comp.MaterializationTime = _timing.CurTime + uid.Comp.AstralDuration;
-
-        var cooldownStart = _timing.CurTime;
-        var cooldownEnd = cooldownStart + uid.Comp.CooldownAfterDematerialize;
-
-        _actions.SetCooldown(uid.Comp.MiGoAstralActionEntity, cooldownStart, cooldownEnd);
-
-        Dirty(uid);
-    }
-
-    public virtual void ChangeForm(EntityUid uid, MiGoComponent comp, bool isMaterial)
-    {
-        if (TryComp<FixturesComponent>(uid, out var fixtures) && fixtures.FixtureCount >= 1)
-        {
-            var fixture = fixtures.Fixtures.First();
-
-            var mask = (int)(isMaterial ? CollisionGroup.FlyingMobMask : CollisionGroup.GhostImpassable);
-            var layer = (int)(isMaterial ? CollisionGroup.FlyingMobLayer : CollisionGroup.None);
-
-            _physics.SetCollisionMask(uid, fixture.Key, fixture.Value, mask, fixtures);
-            _physics.SetCollisionLayer(uid, fixture.Key, fixture.Value, layer, fixtures);
-        }
-
-        //full vision during astral
-        if (TryComp<EyeComponent>(uid, out var eye))
-        {
-            _eye.SetDrawFov(uid, isMaterial, eye);
-            _eye.SetDrawLight((uid, eye), isMaterial);
-        }
-    }
-
-    private void CheckAct(Entity<MiGoComponent> uid, ref AttackAttemptEvent args)
-    {
-        if (!uid.Comp.IsPhysicalForm)
-            args.Cancel();
-    }
-
-    private void OnPullAttempt(Entity<MiGoComponent> uid, ref PullAttemptEvent args)
-    {
-        if (!uid.Comp.IsPhysicalForm)
-            args.Cancelled = true;
-    }
-    #endregion
-
     #region Enslave
-    private void OnMiGoEnslaveAction(Entity<MiGoComponent> entity, ref MiGoEnslavementActionEvent args)
+    private void OnMiGoEnslaveAction(Entity<MiGoComponent> ent, ref MiGoEnslavementActionEvent args)
     {
         if (args.Handled)
-            return;
-
-        var (uid, comp) = entity;
-        if (!comp.IsPhysicalForm)
             return;
 
         var target = args.Target;
-        if (!CanEnslaveTarget(entity, target, out var reason))
+        if (!CanEnslaveTarget(ent, target, out var reason))
         {
-            _popup.PopupClient(reason, target, uid);
+            _popup.PopupClient(reason, target, ent);
+            _adminLogger.Add(LogType.Action, $"MiGo {ToPrettyString(ent):user} failed to enslave {ToPrettyString(target):target} because \"{reason}\"");
             return;
         }
 
-        StartEnslaveDoAfter(entity, target);
+        StartEnslaveDoAfter(ent, target);
         args.Handled = true;
+
+        _adminLogger.Add(LogType.Action, $"MiGo {ToPrettyString(ent):user} successfully enslaved {ToPrettyString(target):target}");
     }
 
     protected void StartEnslaveDoAfter(Entity<MiGoComponent> entity, EntityUid target)
@@ -456,7 +298,7 @@ public abstract class SharedMiGoSystem : EntitySystem
     {
         reason = null;
 
-        if (!HasComp<HumanoidAppearanceComponent>(target))
+        if (!HasComp<HumanoidProfileComponent>(target))
         {
             reason = Loc.GetString("cult-yogg-enslave-must-be-human");
             return false;
@@ -468,13 +310,19 @@ public abstract class SharedMiGoSystem : EntitySystem
             return false;
         }
 
-        if (HasComp<RevolutionaryComponent>(target) || HasComp<MindShieldComponent>(target) || HasComp<ZombieComponent>(target))
+        if (HasComp<MindShieldComponent>(target))
+        {
+            reason = Loc.GetString("cult-yogg-enslave-mindshield");
+            return false;
+        }
+
+        if (HasComp<RevolutionaryComponent>(target) || HasComp<ZombieComponent>(target))
         {
             reason = Loc.GetString("cult-yogg-enslave-another-fraction");
             return false;
         }
 
-        if (!_statusEffectsSystem.HasStatusEffect(target, ent.Comp.RequiedEffect) && !IsEslavementSimplified)
+        if (!HasComp<RaveComponent>(target) && AnyCultistsAlive())//If the mushroom was eaten or no cultists alive
         {
             reason = Loc.GetString("cult-yogg-enslave-should-eat-shroom");
             return false;
@@ -482,7 +330,7 @@ public abstract class SharedMiGoSystem : EntitySystem
 
         if (HasComp<CultYoggSacrificialComponent>(target))
         {
-            reason = Loc.GetString("cult-yogg-enslave-is-sacraficial");
+            reason = Loc.GetString("cult-yogg-enslave-is-sacrificial");
             return false;
         }
 
@@ -505,9 +353,30 @@ public abstract class SharedMiGoSystem : EntitySystem
         return true;
     }
 
-    public void SetSimplifiedEslavement(bool newVaule)
+    protected bool AnyCultistsAlive()
     {
-        IsEslavementSimplified = newVaule;
+        var queryCultists = EntityQueryEnumerator<CultYoggComponent>();
+        while (queryCultists.MoveNext(out var ent, out _))
+        {
+            if (!_mobState.IsAlive(ent))
+                continue;
+
+            if (!_mind.TryGetMind(ent, out _, out _))
+                continue;
+
+            return true;
+        }
+
+        return false;
     }
     #endregion
+
+    private void OnUpdateStage(Entity<MiGoComponent> ent, ref ChangeCultYoggStageEvent args)
+    {
+        if (ent.Comp.CurrentStage == args.Stage)
+            return;
+
+        ent.Comp.CurrentStage = args.Stage;
+        Dirty(ent);
+    }
 }

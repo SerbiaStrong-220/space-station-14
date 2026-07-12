@@ -6,12 +6,14 @@
     requirement:
       !type:RoleTimeRequirement
       role: JobHeadOfPersonnel
-      time: 72000 #20 hrs
+      time: 20h
+  # SS220-sponsor-tier-begin
   sponsorTierLoadoutEffects:
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier
   - !type:GroupLoadoutEffect
     proto: AdministratorSponsorTier
+    # SS220-sponsor-tier-end
 
 # Professional HoP Time
 - type: loadoutEffectGroup
@@ -21,12 +23,14 @@
     requirement:
       !type:RoleTimeRequirement
       role: JobHeadOfPersonnel
-      time: 54000 #15 hrs, special reward for HoP mains
+      time: 15h # special reward for HoP mains
+  # SS220-sponsor-tier-begin
   sponsorTierLoadoutEffects:
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier
   - !type:GroupLoadoutEffect
     proto: AdministratorSponsorTier
+  # SS220-sponsor-tier-end
 
 # Jumpsuit
 - type: loadout

@@ -12,22 +12,23 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.PdaIdPainter;
 
-public abstract class SharedPdaIdPainterSystem : EntitySystem
+public abstract partial class SharedPdaIdPainterSystem : EntitySystem
 {
-    [Dependency] private readonly IComponentFactory _factory = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly ClothingSystem _clothing = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly SharedItemSystem _item = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly AccessReaderSystem _access = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private IComponentFactory _factory = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private ClothingSystem _clothing = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private SharedItemSystem _item = default!;
+    [Dependency] private ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private AccessReaderSystem _access = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public readonly HashSet<EntityPrototype> PdaAndIdProtos = new();
+    private static readonly ProtoId<TagPrototype> WhitelistPdaIdPainterPrototype = "WhitelistPdaIdPainter";
 
     public override void Initialize()
     {
@@ -165,7 +166,7 @@ public abstract class SharedPdaIdPainterSystem : EntitySystem
         if (proto.Abstract || proto.HideSpawnMenu)
             return false;
 
-        return proto.TryGetComponent(out TagComponent? tag, _factory) && _tag.HasTag(tag, "WhitelistPdaIdPainter");
+        return proto.TryGetComponent(out TagComponent? tag, _factory) && _tag.HasTag(tag, WhitelistPdaIdPainterPrototype);
     }
 
     protected void UpdateVisuals(EntProtoId? ent, EntityUid? target)
@@ -193,7 +194,7 @@ public abstract class SharedPdaIdPainterSystem : EntitySystem
         }
 
         if (TryComp(target, out AppearanceComponent? appearance) &&
-            proto.TryGetComponent("Appearance", out AppearanceComponent? appearanceOther))
+            proto.TryGetComponent(out AppearanceComponent? appearanceOther, _factory))
         {
             _appearance.AppendData(appearanceOther, target.Value);
             Dirty(target.Value, appearance);

@@ -8,6 +8,7 @@ namespace Content.Shared.Input
         public static readonly BoundKeyFunction ToggleKnockdown = "ToggleKnockdown";
         public static readonly BoundKeyFunction UseItemInHand = "ActivateItemInHand";
         public static readonly BoundKeyFunction AltUseItemInHand = "AltActivateItemInHand";
+        public static readonly BoundKeyFunction ToggleActiveBlocking = "ToggleActiveBlocking";
         public static readonly BoundKeyFunction ActivateItemInWorld = "ActivateItemInWorld";
         public static readonly BoundKeyFunction AltActivateItemInWorld = "AltActivateItemInWorld";
         public static readonly BoundKeyFunction Drop = "Drop";
@@ -33,6 +34,9 @@ namespace Content.Shared.Input
         public static readonly BoundKeyFunction SmartEquipBackpack = "SmartEquipBackpack";
         public static readonly BoundKeyFunction SmartEquipBelt = "SmartEquipBelt";
         public static readonly BoundKeyFunction SmartEquipNeck = "SmartEquipNeck"; //#SS220-SmartEquipNeck
+        public static readonly BoundKeyFunction SmartEquipPocket1 = "SmartEquipPocket1";
+        public static readonly BoundKeyFunction SmartEquipPocket2 = "SmartEquipPocket2";
+        public static readonly BoundKeyFunction SmartEquipSuitStorage = "SmartEquipSuitStorage";
         public static readonly BoundKeyFunction OpenBackpack = "OpenBackpack";
         public static readonly BoundKeyFunction OpenBelt = "OpenBelt";
         public static readonly BoundKeyFunction OpenAHelp = "OpenAHelp";
@@ -121,7 +125,8 @@ namespace Content.Shared.Input
         public static readonly BoundKeyFunction EditorCopyObject = "EditorCopyObject";
         public static readonly BoundKeyFunction EditorFlipObject = "EditorFlipObject";
         public static readonly BoundKeyFunction InspectEntity = "InspectEntity";
-
+        public static readonly BoundKeyFunction InspectServerComponent = "InspectServerComponent";
+        public static readonly BoundKeyFunction InspectClientComponent = "InspectClientComponent";
         public static readonly BoundKeyFunction MappingUnselect = "MappingUnselect";
         public static readonly BoundKeyFunction SaveMap = "SaveMap";
         public static readonly BoundKeyFunction MappingEnablePick = "MappingEnablePick";

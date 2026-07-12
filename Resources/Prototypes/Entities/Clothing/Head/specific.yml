@@ -6,7 +6,8 @@
   suffix: Chameleon
   components:
     - type: Tag
-      tags: [] # ignore "WhitelistChameleon" tag
+      tags: # ignore "WhitelistChameleon" tag
+      - ClothMade
     - type: Sprite
       sprite: Clothing/Head/Hats/beret.rsi
     - type: Clothing
@@ -14,20 +15,16 @@
     - type: ChameleonClothing
       slot: [HEAD]
       default: ClothingHeadHatBeret
-# Corvax-HiddenDesc-Start
+    # SS220-hidden-desc-begin
     - type: HiddenDescription
       entries:
-      - label: corvax-hidden-desc-Chameleon-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
-      - label: corvax-hidden-desc-Chameleon-research
-        jobRequired:
-          - ResearchAssistant
-          - ResearchDirector
-          - Scientist
-          - Borg
-# Corvax-HiddenDesc-End
+        SyndicateAgentKnowledge: [ corvax-hidden-desc-Chameleon-syndicate ]
+        ScienceKnowledge: [ corvax-hidden-desc-Chameleon-research ]
+      nameEntries:
+      - [SyndicateAgentKnowledge, null]
+      - [ScienceKnowledge, null]
+      hiddenName: null
+    # SS220-hidden-desc-end
 
 - type: entity
   parent: ClothingHeadHatFedoraBrown
@@ -38,7 +35,7 @@
   - type: Tag
     tags: [] # ignore "WhitelistChameleon" tag
   - type: TriggerOnVoice
-    keyPhrase: "go go gadget"
+    defaultKeyPhrase: key-phrase-gadget
     listenRange: 0
   - type: ActiveListener
     range: 0

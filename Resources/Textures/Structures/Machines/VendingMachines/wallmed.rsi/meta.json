@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
-  "copyright": "by MIXnikita for SS220",
+  "copyright": "Partially by MIXnikita for SS220. off civilian from somewhere: Taken from /tg/station at commit 6665eec76c98a4f3f89bebcd10b34b47dcc0b8ae, off.png taken from /tg/station commit ede31369cfa5ea1bed9262b5ef4bbef85f60fe26 and edited by @Flareguy & IProduceWidgets (github)",
   "size": {
     "x": 32,
     "y": 32
@@ -78,6 +78,9 @@
     {
       "name": "off",
       "directions": 4
+    },
+    {
+      "name": "off-civilian"
     }
   ]
 }

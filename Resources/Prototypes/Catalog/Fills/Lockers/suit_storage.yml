@@ -332,6 +332,6 @@
     children:
     - id: OxygenTankFilled
     - id: ClothingMaskBreath
+    - id: ClothingOuterHardsuitWizard #SS220 New_accesses_and_some_tweaks
     # TODO: Gone until reworked to have no space protection
-    #- id: ClothingOuterHardsuitWizard
     #- id: JetpackVoidFilled

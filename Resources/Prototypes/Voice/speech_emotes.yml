@@ -248,8 +248,9 @@
    - squeaks
    - squeaked
    #220-Localization-Start
-   - скрип
-   - скрипит
+   - писк
+   - пищит
+   - пискнул
    #220-Localization-End
 
 - type: emote
@@ -271,6 +272,141 @@
   chatTriggers:
    - click
    - clicks
+
+# Vulpkanin
+- type: emote
+  id: Bark
+  name: chat-emote-name-bark
+  category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    tags:
+    - SiliconEmotes
+  chatMessages: ["chat-emote-msg-bark"]
+  chatTriggers:
+  - bark
+  - barks
+  - barked
+  - barking
+  # SS220-port-vulpkanins-begin
+  - лает
+  - лает.
+  - лает?
+  - лает!
+  - гавкнул
+  - гавкнул.
+  - гавкнул?
+  - гавкнул!
+  - гавкает
+  - гавкает.
+  - гавкает!
+  - гавкает?
+  # SS220-port-vulpkanins-end
+
+- type: emote
+  id: Snarl
+  name: chat-emote-name-snarl
+  category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    tags:
+    - SiliconEmotes
+  chatMessages: ["chat-emote-msg-snarl"]
+  chatTriggers:
+  - snarl
+  - snarls
+  - snarled
+  - snarling
+
+- type: emote
+  id: Whine
+  name: chat-emote-name-whine
+  category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    tags:
+    - SiliconEmotes
+  chatMessages: ["chat-emote-msg-whine"]
+  chatTriggers:
+  - whine
+  - whines
+  - whined
+  - whining
+
+- type: emote
+  id: Howl
+  name: chat-emote-name-howl
+  category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    tags:
+    - SiliconEmotes
+  chatMessages: ["chat-emote-msg-howl"]
+  chatTriggers:
+  - howl
+  - howls
+  - howling
+  - howled
+  # SS220-port-vulpkanins-begin
+  - выть
+  - выть.
+  - выть!
+  - выть?
+  - воет
+  - воет.
+  - воет!
+  - воет?
+  - завыл
+  - завыл.
+  - завыл!
+  - завыл?
+  - завывает
+  - завывает.
+  - завывает!
+  - завывает?
+  # SS220-port-vulpkanins-end
+
+- type: emote
+  id: Growl
+  name: chat-emote-name-growl
+  category: Vocal
+  available: false
+  icon: SS220/Interface/Emotes/growls.png #SS220 icons for emote
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    tags:
+    - SiliconEmotes
+  chatMessages: ["chat-emote-msg-growl"]
+  chatTriggers:
+  - growl
+  - growls
+  - growled
+  - growling
+# SS220-port-vulpkanins-begin
+  - рычать
+  - рычать.
+  - рычать?
+  - рычать!
+  - рычит
+  - рычит.
+  - рычит!
+  - рычит?
+  - ррр
+# SS220-port-vulpkanins-end
 
 # hand emotes
 - type: emote
@@ -514,6 +650,7 @@
   name: chat-emote-name-hiss
   category: Vocal
   available: false
+  icon: SS220/Interface/Emotes/hisses.png #SS220 icons for emote
   whitelist:
     components:
     - Vocal
@@ -605,6 +742,42 @@
     - чирикает
     # Corvax-Localization-End
 
+- type: emote
+  id: Flap
+  name: chat-emote-name-flap
+  category: Hands # Not really "hands", but how far it to vocal? (moth mimes want to flap too!)
+  available: false
+  icon: Interface/Emotes/flap.png
+  whitelist:
+    components:
+    - Hands
+  blacklist:
+    tags:
+    - SiliconEmotes
+  chatMessages: ["chat-emote-msg-flap"]
+  chatTriggers:
+   - flap
+   - flaps
+   - flapped
+   - flapping
+   - flutter
+   - flutters
+   - fluttering
+   - fluttered
+   - flap wings
+   - flaps wings
+   - flutter wings
+   - flutters wings
+   - flaps his wings
+   - flaps her wings
+   - flaps their wings
+   - flaps its wings
+   - flutters his wings
+   - flutters her wings
+   - flutters their wings
+   - flutters its wings
+
+# Machine Emotes
 - type: emote
   id: Beep
   name: chat-emote-name-beep

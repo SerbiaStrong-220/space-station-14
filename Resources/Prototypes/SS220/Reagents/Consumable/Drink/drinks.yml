@@ -20,7 +20,7 @@
   color: "#f04737"
   metamorphicSprite:
     sprite: SS220/Objects/Consumable/Drinks/glass_berry.rsi
-    state: icon   
+    state: icon
 
 #Bankate
 - type: reagent
@@ -43,7 +43,6 @@
       methods: [ Touch ]
       effects:
       - !type:HealthChange
-        scaleByQuantity: true
         ignoreResistances: false
         damage:
           types:
@@ -69,14 +68,14 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 2
       - !type:AdjustReagent
         reagent: Ethanol
         amount: 0.07
-    Poison:
+    Bloodstream:
       effects:
       - !type:AdjustTemperature
         amount: 250 # thermal energy, not temp
@@ -100,7 +99,7 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 1
@@ -116,14 +115,14 @@
   color: "#790c0c"
   recognizable: true
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 0.5
       - !type:AdjustReagent
         reagent: Nutriment
         amount: 2.0
-    Poison:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -131,16 +130,16 @@
             Heat: -1
       - !type:AdjustTemperature
         conditions:
-        - !type:Temperature
+        - !type:TemperatureCondition
           max: 359.0
         amount: 100000
       - !type:AdjustTemperature
         conditions:
-        - !type:Temperature 
+        - !type:TemperatureCondition
           min: 293.15
         amount: -10000
       - !type:PopupMessage
-        visualType: MediumCaution   
+        visualType: MediumCaution
         type: Local
         messages: [ "capsaicin-effect-heavy-burn" ]
         probability: 0.4
@@ -156,9 +155,9 @@
   color: "#9aae07"
   recognizable: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
-      - !type:ChemVomit
+      - !type:Vomit
         probability: 0.35
       - !type:HealthChange
         damage:

@@ -5,7 +5,6 @@
   parent: BaseItem
   id: CultYoggLantern
   suffix: CultYogg
-  description: description
   components:
   - type: Sprite
     sprite: SS220/Objects/CultYogg/lantern_cult.rsi
@@ -47,3 +46,81 @@
     whitelist:
       tags:
       - CultYoggStealthProvidable
+
+- type: entity
+  name: cult bulb
+  parent: BaseItem
+  id: CultYoggLightBulb
+  suffix: CultYogg
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Objects/CultYogg/light_bulb.rsi
+    layers:
+    - state: bulb_off
+      map: [ "enum.ToggleableVisuals.Layer" ]
+  - type: Item
+    heldPrefix: off
+  - type: CultYoggLamp
+    addPrefix: true
+  - type: PointLight
+    enabled: false
+    radius: 4
+    energy: 3
+    netsync: false
+  - type: ToggleableVisuals
+    spriteLayer: enum.ToggleableVisuals.Layer
+    inhandVisuals:
+      left:
+      - state: on-inhand-left
+        shader: unshaded
+      right:
+      - state: on-inhand-right
+        shader: unshaded
+  - type: ItemTogglePointLight
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
+          True: {state: bulb_on}
+          False: {state: bulb_off}
+
+- type: entity
+  name: cult tube
+  parent: BaseItem
+  id: CultYoggLightTube
+  suffix: CultYogg
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Objects/CultYogg/light_tube.rsi
+    layers:
+    - state: tube_off
+      map: [ "enum.ToggleableVisuals.Layer" ]
+  - type: Item
+    heldPrefix: off
+  - type: CultYoggLamp
+    addPrefix: true
+  - type: PointLight
+    enabled: false
+    radius: 4
+    energy: 3
+    netsync: false
+  - type: ToggleableVisuals
+    spriteLayer: enum.ToggleableVisuals.Layer
+    inhandVisuals:
+      left:
+      - state: on-inhand-left
+        shader: unshaded
+      right:
+      - state: on-inhand-right
+        shader: unshaded
+  - type: ItemTogglePointLight
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
+          True: {state: tube_on}
+          False: {state: tube_off}

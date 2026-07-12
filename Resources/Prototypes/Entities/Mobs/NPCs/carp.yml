@@ -39,12 +39,12 @@
     - type: MobThresholds
       thresholds:
         0: Alive
-        40: Dead
+        60: Dead #SS220 Carp HP buff
     - type: MovementSpeedModifier
       baseWalkSpeed: 2.5
       baseSprintSpeed: 3.5
     - type: Stamina
-      critThreshold: 100
+      baseCritThreshold: 100
     - type: DamageStateVisuals
       states:
         Alive:
@@ -78,8 +78,11 @@
         - Carp
         - DoorBumpOpener
         - CannotSuicide
-    - type: ReplacementAccent
-      accent: genericAggressive
+  # - type: ReplacementAccent #SS220 Dragon & Carp Language Begin
+  #   accent: genericAggressive
+    - type: Language
+      availableLanguages:
+      - id: Carpish #SS220 Dragon & Carp Language End
     - type: Speech
       speechVerb: LargeMob
     - type: InteractionPopup
@@ -116,6 +119,11 @@
       sprite: Mobs/Aliens/Carps/magic.rsi
     - type: TypingIndicator
       proto: guardian
+    - type: Language #SS220 Dragon & Carp Language Begin
+      availableLanguages:
+      - id: Carpish
+      - id: Galactic
+        canSpeak: false #SS220 Dragon & Carp Language End
 
 - type: entity
   name: holocarp
@@ -139,6 +147,11 @@
             - Opaque
     - type: TypingIndicator
       proto: robot
+    - type: Language #SS220 Dragon & Carp Language Begin
+      availableLanguages:
+      - id: Carpish
+      - id: Galactic
+        canSpeak: false #SS220 Dragon & Carp Language End
 
 - type: entity
   parent: MobCarp
@@ -148,7 +161,7 @@
   components:
   - type: PointLight
     radius: 1.5
-    energy: 0.5
+    energy: 2
   - type: RgbLightController
     layers: [ 0 ]
 
@@ -158,10 +171,10 @@
   suffix: "Salvage Ruleset"
   components:
     - type: SalvageMobRestrictions
-    - type: MobThresholds
-      thresholds:
-        0: Alive
-        30: Dead
+    # - type: MobThresholds  # SS220 Revert Wizden balance #38131 BEGIN
+    #   thresholds:
+    #     0: Alive
+    #     30: Dead  # SS220 Revert Wizden balance #38131 END
 
 - type: entity
   name: space carp
@@ -182,11 +195,18 @@
     - type: HTN
       rootTask:
         task: DragonCarpCompound
+    - type: Flammable
+      damage:
+       types: {}
+    - type: Temperature
+    - type: TemperatureDamage
+      heatDamageThreshold: 1200
     # SS220 Telepathy begin
     - type: Telepathy
       canSend: true
       telepathyChannelPrototype: TelepathyChannelSpaceDragon
     # SS220 Telepathy end
+    - type: Insulated # SS220 Insulated Dragon and Carp
 
 - type: entity
   id: MobCarpDungeon
@@ -196,7 +216,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      50: Dead
+      60: Dead #SS220 Carp HP buff
   - type: SlowOnDamage
     speedModifierThresholds:
       25: 0.7
@@ -207,7 +227,7 @@
 
 - type: entity
   name: sharkminnow
-  parent: BaseMobCarp
+  parent: [ BaseMobBloodsucker, BaseMobCarp ]
   id: MobShark
   description: A dangerous shark from the blackness of endless space, who loves to drink blood.
   components:
@@ -233,9 +253,9 @@
     - type: MobThresholds
       thresholds:
         0: Alive
-        82: Dead # Might seem random, but this brings up the hits to kill with a crusher mark to 3
+        150: Dead # SS220 Revert Wizden balance #38131
     - type: Stamina
-      critThreshold: 150
+      baseCritThreshold: 150
     - type: DamageStateVisuals
       states:
         Alive:
@@ -244,9 +264,6 @@
         Dead:
           Base: dead
           BaseUnshaded: dead_mouth
-    - type: Body
-      prototype: Bloodsucker
-      requiredLegs: 1
     - type: Butcherable
       spawned:
         - id: FoodMeatFish

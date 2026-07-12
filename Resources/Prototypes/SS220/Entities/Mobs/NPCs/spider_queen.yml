@@ -47,8 +47,10 @@
       amount: 1
       prob: 0.5
   - type: Bloodstream
-    bloodMaxVolume: 250
-    bloodReagent: Cryoxadone
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Cryoxadone
+        Quantity: 250
   - type: Fixtures
     fixtures:
       fix1:
@@ -90,7 +92,7 @@
   - type: Barotrauma
     damage:
       types:
-        Blunt: 0.3
+        Blunt: 0.2
         Heat: 0.1
   - type: Respirator
     damage:
@@ -99,17 +101,18 @@
     damageRecovery:
       types:
         Asphyxiation: -1.0
-  - type: Temperature
+  - type: TemperatureDamage
     heatDamageThreshold: 325
     coldDamageThreshold: 260
-    currentTemperature: 310.15
-    specificHeat: 42
     coldDamage:
       types:
         Cold: 0.1 #per second, scales with temperature & other constants
     heatDamage:
       types:
         Heat: 0.1 #per second, scales with temperature & other constants
+  - type: Temperature
+    currentTemperature: 310.15
+    specificHeat: 42
   - type: Speech #krik
     speechVerb: Arachnid
     speechSounds: Arachnid
@@ -126,6 +129,8 @@
   - type: Telepathy
     canSend: true
     telepathyChannelPrototype: TelepathyChannelHive
+  - type: FlashImmunity
+  - type: Lifesteal
 
 - type: entity
   parent: BaseMobSpiderQueen
@@ -137,7 +142,7 @@
     - id: SpiderTongue
       canSpeak: true
   - type: Stamina
-    critThreshold: 150
+    baseCritThreshold: 150
   - type: HTN
     rootTask:
       task: SpiderServantCompound
@@ -175,6 +180,7 @@
     - ActionSpawnSingleSpiderWebDurableBloodPoints
     - ActionSpawnWebTileBloodPoints
     - ActionSpawnSpiderWallWebDurableBloodPoints
+    - ActionSpawnSpiderWebPassageBloodPoints
     - ActionSpiderCoconning
   - type: Hunger
     thresholds: # only animals and rats are derived from this prototype so let's override it here and in rats' proto
@@ -208,6 +214,8 @@
         Piercing: 25 #Damage
         Poison: 5
         Structural: 25
+  - type: Lifesteal
+    lifesteal: 10
   - type: Gun
     fireRate: 1
     useKey: false
@@ -234,7 +242,7 @@
   - type: Puller
     needsHands: false
   - type: Stamina
-    critThreshold: 200
+    baseCritThreshold: 200
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -242,7 +250,6 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 350
     damage:
       types:
         Piercing: -0.30
@@ -250,9 +257,8 @@
         Slash: -0.15
         Heat: -0.30
         Cold: -0.15
-      groups:
-        Toxin: -4
-        Airloss: -2
+        Poison: -2
+        Radiation: -2
 
 #Spiders-servants
 - type: entity
@@ -283,7 +289,6 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 75
     damage:
       types:
         Piercing: -0.33
@@ -291,9 +296,8 @@
         Slash: -0.33
         Heat: -0.33
         Cold: -0.15
-      groups:
-        Toxin: -4
-        Airloss: -2
+        Poison: -2.0
+        Radiation: -2.0
   - type: MeleeWeapon #Damage
     hidden: true
     soundHit:
@@ -316,6 +320,8 @@
     - ActionSpawnSpiderWallWebDurable
     - ActionSpawnSpiderCrystal
     - ActionSpawnSingleSpiderWebShortDelay
+    - ActionSpawnSingleSpiderWebDurable
+    - ActionSpawnSpiderWebPassage
   - type: Spider
     webPrototype: SpiderWebDespawned
   - type: MovementSpeedModifier
@@ -350,7 +356,6 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 130
     damage:
       types:
         Piercing: -0.5
@@ -358,9 +363,13 @@
         Slash: -0.25
         Heat: -0.5
         Cold: -0.25
-      groups:
-        Toxin: -4
-        Airloss: -2.5
+        Poison: -2.0
+        Radiation: -2.0
+  - type: Barotrauma
+    damage:
+      types:
+        Blunt: 0.18
+        Heat: 0.12
   - type: MeleeWeapon
     hidden: true
     soundHit:
@@ -372,6 +381,8 @@
         Piercing: 20
         Poison: 5
         Structural: 10
+  - type: Lifesteal
+    lifesteal: 7
   - type: StaminaResistance
     damageCoefficient: 0.7
     worn: false
@@ -386,6 +397,19 @@
   - type: ActionGrant
     actions:
     - ActionSpawnSingleSpiderWebLongDelay
+  - type: RechargeBasicEntityAmmo
+    rechargeCooldown: 1
+  - type: BasicEntityAmmoProvider
+    proto: StickyWeb
+    capacity: 1
+    count: 1
+  - type: Gun
+    fireRate: 4
+    useKey: false
+    selectedMode: FullAuto
+    availableModes:
+      - FullAuto
+    soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg
 
 - type: entity
   parent:
@@ -415,7 +439,6 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 110
     damage:
       types:
         Piercing: -0.5
@@ -423,9 +446,13 @@
         Slash: -0.25
         Heat: -0.5
         Cold: -0.25
-      groups:
-        Toxin: -4
-        Airloss: -2.5
+        Poison: -2
+        Radiation: -2
+  - type: Barotrauma
+    damage:
+      types:
+        Blunt: 0.18
+        Heat: 0.12
   - type: MeleeWeapon
     hidden: true
     soundHit:
@@ -481,6 +508,9 @@
   name: spider shooter
   description: spider dance
   components:
+  - type: HTN
+    rootTask:
+      task: SpiderServantShooterCompound
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Animals/spider.rsi
@@ -501,7 +531,6 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 90
     damage:
       types:
         Piercing: -0.30
@@ -509,9 +538,13 @@
         Slash: -0.15
         Heat: -0.30
         Cold: -0.15
-      groups:
-        Toxin: -4
-        Airloss: -2
+        Poison: -2
+        Radiation: -2
+  - type: Barotrauma
+    damage:
+      types:
+        Blunt: 0.18
+        Heat: 0.12
   - type: MeleeWeapon
     hidden: true
     soundHit:
@@ -584,13 +617,19 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 40
     damage:
-      groups:
-        Brute: -0.5
-        Toxin: -0.5
-        Airloss: -0.5
-        Burn: -0.5
+      types:
+        Blunt: -0.17
+        Slash: -0.17
+        Piercing: -0.16
+        Heat: -0.13
+        Shock: -0.13
+        Cold: -0.12
+        Caustic: -0.12
+        Poison: -0.25
+        Radiation: -0.25
+        Asphyxiation: -0.25
+        Bloodloss: -0.25
   - type: MeleeWeapon
     hidden: true
     soundHit:
@@ -628,9 +667,7 @@
     allowMovement: true
     name: spider-royQueen-name
     description: spider-royQueen-desc
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 216000 # 60h
+    job: SpiderQueen
     raffle:
       settings: default
   - type: GhostTakeoverAvailable #Ghost role
@@ -646,9 +683,7 @@
     allowMovement: true
     name: spider-royDrone-name
     description: spider-royDrone-desc
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 18000 # 5h
+    job: SpiderQueenServant
     raffle:
       settings: short
   - type: GhostTakeoverAvailable #Ghost role
@@ -664,9 +699,7 @@
     allowMovement: true
     name: spider-royHunter-name
     description: spider-royHunter-desc
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 18000 # 5h
+    job: SpiderQueenServant
     raffle:
       settings: short
   - type: GhostTakeoverAvailable #Ghost role
@@ -682,9 +715,7 @@
     allowMovement: true
     name: spider-royGhost-name
     description: spider-royGhost-desc
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 18000 # 5h
+    job: SpiderQueenServant
     raffle:
       settings: short
   - type: GhostTakeoverAvailable #Ghost role
@@ -700,9 +731,7 @@
     allowMovement: true
     name: spider-royShooter-name
     description: spider-royShooter-desc
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 3600 # 5h
+    job: SpiderQueenServant
     raffle:
       settings: short
   - type: GhostTakeoverAvailable #Ghost role
@@ -718,9 +747,7 @@
     allowMovement: true
     name: spider-royLittle-name
     description: spider-royLittle-desc
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 3600 # 1h
+    job: SpiderQueenServant
     raffle:
       settings: short
   - type: GhostTakeoverAvailable #Ghost role

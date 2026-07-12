@@ -87,6 +87,14 @@ public sealed partial record PolymorphConfiguration
     [DataField(serverOnly: true)]
     public bool TransferHumanoidAppearance;
 
+    // SS220 Geras reagents fix begin
+    /// <summary>
+    /// Whether or not the entity transfers its inventory and equipment between forms.
+    /// </summary>
+    [DataField(serverOnly: true)]
+    public bool TransferReagents;
+    // SS220 Geras reagents fix end
+
     /// <summary>
     /// Whether or not the entity transfers its inventory and equipment between forms.
     /// </summary>
@@ -104,6 +112,12 @@ public sealed partial record PolymorphConfiguration
     /// </summary>
     [DataField(serverOnly: true)]
     public bool RevertOnDeath = true;
+
+    /// <summary>
+    /// Whether or not the polymorph reverts when the entity is deleted.
+    /// </summary>
+    [DataField(serverOnly: true)]
+    public bool RevertOnDelete = true;
 
     /// <summary>
     /// Whether or not the polymorph reverts when the entity is eaten or fully sliced.

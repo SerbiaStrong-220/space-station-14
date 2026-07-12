@@ -32,6 +32,8 @@
           Heat: 1
     - type: Damageable
       damageContainer: Shield
+    - type: ExaminableDamage
+      messages: ShieldMessages
     - type: Destructible
       thresholds:
         - trigger:
@@ -60,11 +62,29 @@
     - type: StaticPrice
       price: 100
 
+- type: entity
+  name: base repairable shield
+  parent: BaseShield
+  id: BaseRepairableShield
+  description: A repairable shield!
+  abstract: true
+  components:
+  - type: Repairable # Negative values represent healing
+    damage:
+      types:
+        Blunt: -20
+        Slash: -20
+        Piercing: -20
+        Heat: -20
+    fuelCost: 10 # 1/2 of a Welder for a full repair
+    doAfterDelay: 5
+    allowSelfRepair: false
+
 #Security Shields
 
 - type: entity
   name: riot shield
-  parent: [ BaseShield, BaseSecurityContraband ]
+  parent: [ BaseRepairableShield, BaseSecurityContraband ]
   id: RiotShield
   description: A large tower shield. Good for controlling crowds.
   components:
@@ -85,7 +105,7 @@
 
 - type: entity
   name: laser shield
-  parent: [ BaseShield, BaseSecurityContraband ]
+  parent: [ BaseRepairableShield, BaseSecurityContraband ]
   id: RiotLaserShield
   description: A shield built for withstanding lasers, but not much else.
   components:
@@ -105,7 +125,7 @@
 
 - type: entity
   name: ballistic shield
-  parent: [ BaseShield, BaseSecurityContraband ]
+  parent: [ BaseRepairableShield, BaseSecurityContraband ]
   id: RiotBulletShield
   description: A shield built for protecting against ballistics, but not much else.
   components:
@@ -184,15 +204,12 @@
   name: cardboard shield
   parent: BaseShield
   id: CardShield
-  description: A shield that wont shield you from much.
+  description: A shield made of cardboard. Won't protect you from much.
   components:
     - type: Sprite
       state: cardshield-icon
     - type: Item
       heldPrefix: cardshield
-    - type: StaminaResistance
-      damageCoefficient: 0.95
-      worn: true
     - type: Blocking
       passiveBlockModifier:
         coefficients:
@@ -237,7 +254,7 @@
 
 - type: entity
   name: makeshift shield
-  parent: BaseShield
+  parent: BaseRepairableShield
   id: MakeshiftShield
   description: A rundown looking shield, not good for much.
   components:
@@ -346,7 +363,7 @@
 
 - type: entity
   name: clockwork shield
-  parent: BaseShield
+  parent: BaseRepairableShield
   id: ClockworkShield
   description: Ratvar oyrffrf lbh jvgu uvf cebgrpgvba.
   components:
@@ -512,6 +529,8 @@
     - type: Appearance
     - type: Damageable
       damageContainer: Shield
+    - type: ExaminableDamage
+      messages: EnergyShieldMessages
     - type: Destructible
       thresholds:
         - trigger:
@@ -536,24 +555,18 @@
                   max: 1
     - type: StaticPrice
       price: 350
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
     - type: HiddenDescription
       entries:
-      - label: corvax-hidden-desc-EnergyShield-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
-      - label: corvax-hidden-desc-EnergyShield-security
-        jobRequired:
-          - HeadOfSecurity
-          - Detective
-          - SecurityCadet
-          - SecurityOfficer
-          - Warden
-      - label: corvax-hidden-desc-EnergyShield-cargo
-        jobRequired:
-          - SalvageSpecialist
-# Corvax-HiddenDesc-End
+        SyndicateAgentKnowledge: [ corvax-hidden-desc-EnergyShield-syndicate ]
+        SecurityKnowledge: [ corvax-hidden-desc-EnergyShield-security ]
+        CargoKnowledge: [ corvax-hidden-desc-EnergyShield-cargo ]
+      nameEntries:
+      - [SyndicateAgentKnowledge, null]
+      - [SecurityKnowledge, null]
+      - [CargoKnowledge, null]
+      hiddenName: ent-EnergyShield
+# SS220-hidden-desc-end
 
 - type: entity
   name: broken energy shield
@@ -568,28 +581,22 @@
       sprite: Objects/Weapons/Melee/e_shield.rsi
       size: Small
       heldPrefix: eshield
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
     - type: HiddenDescription
       entries:
-      - label: corvax-hidden-desc-EnergyShield-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
-      - label: corvax-hidden-desc-EnergyShield-security
-        jobRequired:
-          - HeadOfSecurity
-          - Detective
-          - SecurityCadet
-          - SecurityOfficer
-          - Warden
-      - label: corvax-hidden-desc-EnergyShield-cargo
-        jobRequired:
-          - SalvageSpecialist
-# Corvax-HiddenDesc-End
+        SyndicateAgentKnowledge: [ corvax-hidden-desc-EnergyShield-syndicate ]
+        SecurityKnowledge: [ corvax-hidden-desc-EnergyShield-security ]
+        CargoKnowledge: [ corvax-hidden-desc-EnergyShield-cargo ]
+      nameEntries:
+      - [SyndicateAgentKnowledge, null]
+      - [SecurityKnowledge, null]
+      - [CargoKnowledge, null]
+      hiddenName: ent-BrokenEnergyShield
+# SS220-hidden-desc-end
 
 - type: entity
   name: telescopic shield
-  parent: BaseShield
+  parent: BaseRepairableShield
   id: TelescopicShield
   description: An advanced riot shield made of lightweight materials that collapses for easy storage.
   components:

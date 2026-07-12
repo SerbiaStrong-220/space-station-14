@@ -3,3 +3,28 @@
   storage:
     back:
     - HandheldStationMap
+
+- type: loadout
+  id: NewYearsCap
+  storage:
+    back:
+    - ClothingHeadHatNewYearsCap
+
+- type: loadout
+  id: Eyepatch
+  storage:
+    back:
+    - ClothingEyesEyepatch
+
+- type: loadout
+  id: ClothingNeckUSSPPin
+  storage:
+    back:
+    - ClothingNeckUSSPPin
+  groupBy: "pin"
+
+- type: loadout
+  id: ExpensiveCane
+  storage:
+    back:
+    - ExpensiveCane

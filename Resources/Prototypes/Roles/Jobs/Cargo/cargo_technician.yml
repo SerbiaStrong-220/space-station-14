@@ -7,6 +7,7 @@
     - !type:OverallPlaytimeRequirement
       time: 3600 # SS220-RoleTime 2
   startingGear: CargoTechGear
+  experienceDefinition: CargoTechnicianRoleExperience # SS220-experience
   icon: "JobIconCargoTechnician"
   supervisors: job-supervisors-qm
   access:
@@ -22,7 +23,6 @@
 - type: startingGear
   id: CargoTechGear
   equipment:
-    id: CargoPDA
     ears: ClothingHeadsetCargo
     pocket1: AppraisalTool
   #storage:

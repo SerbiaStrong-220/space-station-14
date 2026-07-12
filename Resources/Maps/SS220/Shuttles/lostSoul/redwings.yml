@@ -1,0 +1,8164 @@
+meta:
+  format: 7
+  category: Grid
+  engineVersion: 275.2.1
+  forkId: ""
+  forkVersion: ""
+  time: 05/24/2026 09:41:32
+  entityCount: 572
+maps: []
+grids:
+- 1
+orphans:
+- 1
+nullspace: []
+tilemap:
+  1: Space
+  9: FloorConcrete
+  10: FloorConcreteMono
+  15: FloorDarkDiagonal
+  12: FloorDarkMono
+  8: FloorFreezerMono
+  5: FloorGrayConcreteMono
+  6: FloorGrayConcreteSmooth
+  7: FloorMetalDiamond
+  11: FloorRedGlass
+  14: FloorSanitary
+  2: FloorSanitaryDark
+  13: FloorSanitaryDarkMono
+  3: FloorShuttleGlass
+  4: FloorSteelMaintDrainMiddle
+  16: FloorSteelMaintDrainVertical
+  17: Lattice
+  0: Plating
+entities:
+- proto: ""
+  entities:
+  - uid: 1
+    components:
+    - type: MetaData
+      name: RW#347 "Lifeline"
+    - type: Transform
+      pos: 12.286514,4.466298
+      parent: invalid
+    - type: MapGrid
+      chunks:
+        -1,0:
+          ind: -1,0
+          tiles: EQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAARAAAAAAAAAAAAAAAAAAwAAAAAAAAGAAAAAAAABgAAAAABAAYAAAAAAgAMAAAAAAAAAAAAAAAAABEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAAAAAAAAAAMAAAAAAAABgAAAAAAAAYAAAAAAwAGAAAAAAMADAAAAAAAAAAAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAARAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAARAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAABEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAA==
+          version: 7
+        -1,-1:
+          ind: -1,-1
+          tiles: AQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAEQAAAAAAAAcAAAAAAAAHAAAAAAAAAAAAAAAAAAcAAAAAAAAHAAAAAAAAEQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAEQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAAAAAAAAAANAAAAAAAADQAAAAAAAA0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAAAAAAAAAAADgAAAAAAAA4AAAAAAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAAAAAAAAAA4AAAAAAAAOAAAAAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAEQAAAAAAAAAAAAAAAAAOAAAAAAAADgAAAAAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAcAAAAAAAAAAAAAAAAADgAAAAAAAA4AAAAAAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAAHAAAAAAAAAAAAAAAAAA0AAAAAAAANAAAAAAAADQAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABwAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAQAAAAAAAANAAAAAAAADwAAAAAAAA8AAAAAAAAPAAAAAAAADwAAAAAAAA8AAAAAAAAPAAAAAAAADwAAAAAAAA0AAAAAAAAEAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAAAAAAAAAAADQAAAAAAAA8AAAAAAAAPAAAAAAAADQAAAAAAAA0AAAAAAAANAAAAAAAADwAAAAAAAA8AAAAAAAANAAAAAAAAAAAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAABAAAAAAAAA0AAAAAAAAPAAAAAAAADwAAAAAAAA8AAAAAAAAPAAAAAAAADwAAAAAAAA8AAAAAAAAPAAAAAAAADQAAAAAAAAQAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAAAAAAAAAAAAYAAAAAAQAGAAAAAAIABgAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAAHAAAAAAAABwAAAAAAAA0AAAAAAAAGAAAAAAMABgAAAAADAAQAAAAAAAAGAAAAAAEABgAAAAAAAAYAAAAAAAAAAAAAAAAABwAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAABwAAAAAAAAAAAAAAAAANAAAAAAAABgAAAAADAAYAAAAAAgAAAAAAAAAABgAAAAAAAA0AAAAAAAANAAAAAAAAAAAAAAAAAAcAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAA==
+          version: 7
+    - type: Broadphase
+    - type: Physics
+      bodyStatus: InAir
+      angularDamping: 0.05
+      linearDamping: 0.05
+      fixedRotation: False
+      bodyType: Dynamic
+    - type: Fixtures
+      fixtures: {}
+    - type: OccluderTree
+    - type: SpreaderGrid
+    - type: Shuttle
+      dampingModifier: 0.25
+    - type: ImplicitRoof
+    - type: GridPathfinding
+    - type: Gravity
+      gravityShakeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/alert.ogg
+    - type: DecalGrid
+      chunkCollection:
+        version: 2
+        nodes:
+        - node:
+            color: '#FFFFFFFF'
+            id: BorderfloorDarkCornerNE
+          decals:
+            328: -8,-4
+        - node:
+            color: '#FFFFFFFF'
+            id: BorderfloorDarkCornerNW
+          decals:
+            327: -14,-4
+        - node:
+            color: '#FFFFFFFF'
+            id: BorderfloorDarkCornerSE
+          decals:
+            330: -8,-6
+        - node:
+            color: '#FFFFFFFF'
+            id: BorderfloorDarkCornerSW
+          decals:
+            325: -14,-6
+        - node:
+            color: '#FFFFFFFF'
+            id: BorderfloorDarkE
+          decals:
+            329: -8,-5
+        - node:
+            color: '#FFFFFFFF'
+            id: BorderfloorDarkN
+          decals:
+            173: -13,-4
+            174: -12,-4
+            175: -11,-4
+            176: -10,-4
+            235: -9,-4
+        - node:
+            color: '#FFFFFFFF'
+            id: BorderfloorDarkS
+          decals:
+            179: -13,-6
+            180: -12,-6
+            181: -11,-6
+            182: -10,-6
+            183: -9,-6
+        - node:
+            color: '#FFFFFFFF'
+            id: BorderfloorDarkW
+          decals:
+            326: -14,-5
+        - node:
+            color: '#FFFFFFFF'
+            id: BorderfloorLightCornerNE
+          decals:
+            295: -12,-9
+        - node:
+            color: '#FFFFFFFF'
+            id: BorderfloorLightCornerNW
+          decals:
+            294: -14,-9
+        - node:
+            color: '#FFFFFFFF'
+            id: BorderfloorLightCornerSE
+          decals:
+            300: -12,-12
+        - node:
+            color: '#FFFFFFFF'
+            id: BorderfloorLightCornerSW
+          decals:
+            301: -14,-12
+        - node:
+            color: '#FFFFFFFF'
+            id: BorderfloorLightE
+          decals:
+            296: -12,-10
+            297: -12,-11
+        - node:
+            color: '#FFFFFFFF'
+            id: BorderfloorLightN
+          decals:
+            293: -13,-9
+        - node:
+            color: '#FFFFFFFF'
+            id: BorderfloorLightS
+          decals:
+            302: -13,-12
+        - node:
+            color: '#FFFFFFFF'
+            id: BorderfloorLightW
+          decals:
+            298: -14,-10
+            299: -14,-11
+        - node:
+            color: '#2D725BFF'
+            id: BorderfloorOverlayCornerNE
+          decals:
+            332: -8,-4
+        - node:
+            color: '#9C2020FF'
+            id: BorderfloorOverlayCornerNE
+          decals:
+            312: -12,-9
+        - node:
+            color: '#2D725BFF'
+            id: BorderfloorOverlayCornerNW
+          decals:
+            331: -14,-4
+        - node:
+            color: '#9C2020FF'
+            id: BorderfloorOverlayCornerNW
+          decals:
+            311: -14,-9
+        - node:
+            color: '#2D725BFF'
+            id: BorderfloorOverlayCornerSE
+          decals:
+            334: -8,-6
+        - node:
+            color: '#9C2020FF'
+            id: BorderfloorOverlayCornerSE
+          decals:
+            303: -12,-12
+        - node:
+            color: '#2D725BFF'
+            id: BorderfloorOverlayCornerSW
+          decals:
+            336: -14,-6
+        - node:
+            color: '#9C2020FF'
+            id: BorderfloorOverlayCornerSW
+          decals:
+            304: -14,-12
+        - node:
+            color: '#2D725BFF'
+            id: BorderfloorOverlayE
+          decals:
+            333: -8,-5
+        - node:
+            color: '#9C2020FF'
+            id: BorderfloorOverlayE
+          decals:
+            309: -12,-11
+            310: -12,-10
+        - node:
+            color: '#287259FF'
+            id: BorderfloorOverlayN
+          decals:
+            195: -13,-4
+            196: -12,-4
+            197: -11,-4
+            198: -10,-4
+            241: -9,-4
+        - node:
+            color: '#9C2020FF'
+            id: BorderfloorOverlayN
+          decals:
+            305: -13,-9
+        - node:
+            color: '#287259FF'
+            id: BorderfloorOverlayS
+          decals:
+            188: -13,-6
+            189: -12,-6
+            190: -11,-6
+            191: -10,-6
+            192: -9,-6
+        - node:
+            color: '#9C2020FF'
+            id: BorderfloorOverlayS
+          decals:
+            306: -13,-12
+        - node:
+            color: '#2D725BFF'
+            id: BorderfloorOverlayW
+          decals:
+            335: -14,-5
+        - node:
+            color: '#9C2020FF'
+            id: BorderfloorOverlayW
+          decals:
+            307: -14,-11
+            308: -14,-10
+        - node:
+            angle: 1.5707963267948966 rad
+            color: '#2D725BFF'
+            id: BotGreyscale
+          decals:
+            359: -15,-5
+            360: -7,-5
+        - node:
+            color: '#9C2020FF'
+            id: BotGreyscale
+          decals:
+            323: -13,-8
+            324: -14,-8
+        - node:
+            color: '#FFFFFFFF'
+            id: GrayConcreteTrimCornerNe
+          decals:
+            223: -12,-1
+            224: -10,2
+            313: -12,-9
+            337: -8,-4
+            362: -8,-2
+        - node:
+            color: '#FFFFFFFF'
+            id: GrayConcreteTrimCornerNw
+          decals:
+            222: -13,-1
+            225: -12,2
+            314: -14,-9
+            342: -14,-4
+        - node:
+            color: '#FFFFFFFF'
+            id: GrayConcreteTrimCornerSe
+          decals:
+            221: -12,-2
+            227: -10,1
+            322: -12,-12
+            339: -8,-6
+            370: -8,-3
+            397: -8,-13
+        - node:
+            color: '#FFFFFFFF'
+            id: GrayConcreteTrimCornerSw
+          decals:
+            220: -13,-2
+            226: -12,1
+            320: -14,-12
+            340: -14,-6
+            366: -10,-3
+            380: -10,-12
+        - node:
+            color: '#FFFFFFFF'
+            id: GrayConcreteTrimEndN
+          decals:
+            361: -10,-1
+            376: -8,-8
+            377: -9,-8
+        - node:
+            color: '#FFFFFFFF'
+            id: GrayConcreteTrimEndS
+          decals:
+            388: -8,-12
+        - node:
+            color: '#FFFFFFFF'
+            id: GrayConcreteTrimEndW
+          decals:
+            394: -10,-13
+        - node:
+            color: '#FFFFFFFF'
+            id: GrayConcreteTrimInnerNe
+          decals:
+            369: -10,-2
+            381: -10,-12
+            383: -10,-11
+            384: -10,-10
+        - node:
+            color: '#FFFFFFFF'
+            id: GrayConcreteTrimInnerNw
+          decals:
+            392: -8,-10
+            398: -8,-13
+        - node:
+            color: '#FFFFFFFF'
+            id: GrayConcreteTrimInnerSe
+          decals:
+            382: -10,-11
+            385: -10,-10
+        - node:
+            color: '#FFFFFFFF'
+            id: GrayConcreteTrimInnerSw
+          decals:
+            393: -8,-10
+        - node:
+            color: '#FFFFFFFF'
+            id: GrayConcreteTrimLineE
+          decals:
+            316: -12,-10
+            317: -12,-11
+            338: -8,-5
+            389: -8,-11
+            391: -8,-10
+        - node:
+            color: '#FFFFFFFF'
+            id: GrayConcreteTrimLineN
+          decals:
+            202: -13,-4
+            203: -12,-4
+            204: -11,-4
+            205: -10,-4
+            229: -11,2
+            254: -9,-4
+            315: -13,-9
+            368: -9,-2
+            395: -9,-13
+        - node:
+            color: '#FFFFFFFF'
+            id: GrayConcreteTrimLineS
+          decals:
+            211: -13,-6
+            212: -12,-6
+            213: -11,-6
+            214: -10,-6
+            215: -9,-6
+            228: -11,1
+            321: -13,-12
+            371: -9,-3
+            396: -9,-13
+        - node:
+            color: '#FFFFFFFF'
+            id: GrayConcreteTrimLineW
+          decals:
+            318: -14,-10
+            319: -14,-11
+            341: -14,-5
+            367: -10,-2
+            378: -10,-10
+            379: -10,-11
+            390: -8,-11
+        - node:
+            angle: -1.5707963267948966 rad
+            color: '#227257FF'
+            id: LoadingAreaGreyscale
+          decals:
+            401: -7,-6
+            402: -7,-4
+        - node:
+            angle: 1.5707963267948966 rad
+            color: '#227257FF'
+            id: LoadingAreaGreyscale
+          decals:
+            399: -15,-6
+            400: -15,-4
+        - node:
+            color: '#2D725BFF'
+            id: SidingInnerNeOverlayGreyscale
+          decals:
+            351: -13,-6
+        - node:
+            color: '#2D725BFF'
+            id: SidingInnerNwOverlayGreyscale
+          decals:
+            354: -9,-6
+        - node:
+            color: '#2D725BFF'
+            id: SidingInnerSeOverlayGreyscale
+          decals:
+            352: -13,-4
+        - node:
+            color: '#2D725BFF'
+            id: SidingInnerSwOverlayGreyscale
+          decals:
+            353: -9,-4
+        - node:
+            color: '#2D725BFF'
+            id: SidingLineEOverlayGreyscale
+          decals:
+            343: -13,-5
+        - node:
+            color: '#2D725BFF'
+            id: SidingLineNOverlayGreyscale
+          decals:
+            348: -12,-6
+            349: -11,-6
+            350: -10,-6
+        - node:
+            color: '#2D725BFF'
+            id: SidingLineSOverlayGreyscale
+          decals:
+            345: -12,-4
+            346: -11,-4
+            347: -10,-4
+        - node:
+            color: '#2D725BFF'
+            id: SidingLineWOverlayGreyscale
+          decals:
+            344: -9,-5
+    - type: GridAtmosphere
+      version: 2
+      data:
+        tiles:
+          -4,0:
+            0: 51361
+          -4,-1:
+            0: 56719
+          -3,0:
+            0: 65524
+          -4,1:
+            0: 8
+          -3,-1:
+            0: 57311
+          -3,1:
+            0: 8
+          -2,0:
+            0: 4132
+          -2,-1:
+            0: 21783
+          -4,-3:
+            0: 56780
+          -4,-2:
+            0: 61193
+            1: 4
+          -4,-4:
+            0: 49856
+          -3,-4:
+            0: 49360
+          -3,-3:
+            0: 56797
+          -3,-2:
+            0: 65373
+          -2,-4:
+            0: 4624
+          -2,-3:
+            0: 21777
+          -2,-2:
+            0: 14085
+        uniqueMixes:
+        - volume: 2500
+          temperature: 293.15
+          moles:
+            Oxygen: 21.824879
+            Nitrogen: 82.10312
+        - volume: 2500
+          temperature: 293.15
+          moles:
+            Oxygen: 21.683683
+            Nitrogen: 81.57195
+        chunkSize: 4
+    - type: GasTileOverlay
+    - type: RadiationGridResistance
+    - type: NavMap
+    - type: IFF
+      color: '#5FB485FF'
+    - type: TileHistory
+      chunkHistory: {}
+    - type: ExplosionAirtightGrid
+  - uid: 4
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 3
+    - type: Solution
+      solution:
+        maxVol: 1
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Fiber
+          Quantity: 1
+    - type: ContainedSolution
+      containerName: food
+      container: 3
+  - uid: 6
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 5
+    - type: Solution
+      solution:
+        maxVol: 1
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Fiber
+          Quantity: 1
+    - type: ContainedSolution
+      containerName: food
+      container: 5
+  - uid: 8
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 7
+    - type: Solution
+      solution:
+        maxVol: 1
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Fiber
+          Quantity: 1
+    - type: ContainedSolution
+      containerName: food
+      container: 7
+  - uid: 10
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 9
+    - type: Solution
+      solution:
+        maxVol: 1
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Fiber
+          Quantity: 1
+    - type: ContainedSolution
+      containerName: food
+      container: 9
+  - uid: 13
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - Welder
+    - type: Transform
+      parent: 12
+    - type: Solution
+      solution:
+        maxVol: 100
+        name: Welder
+        reagents:
+        - data: []
+          ReagentId: WeldingFuel
+          Quantity: 100
+    - type: ContainedSolution
+      containerName: Welder
+      container: 12
+  - uid: 15
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - hvcable
+    - type: Transform
+      parent: 14
+    - type: Solution
+      solution:
+        maxVol: 6
+        name: hvcable
+        reagents:
+        - data: []
+          ReagentId: Iron
+          Quantity: 3
+        - data: []
+          ReagentId: Copper
+          Quantity: 2
+        - data: []
+          ReagentId: Carbon
+          Quantity: 1
+    - type: ContainedSolution
+      containerName: hvcable
+      container: 14
+  - uid: 17
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - mvcable
+    - type: Transform
+      parent: 16
+    - type: Solution
+      solution:
+        maxVol: 5
+        name: mvcable
+        reagents:
+        - data: []
+          ReagentId: Iron
+          Quantity: 3
+        - data: []
+          ReagentId: Copper
+          Quantity: 2
+    - type: ContainedSolution
+      containerName: mvcable
+      container: 16
+  - uid: 19
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - lvcable
+    - type: Transform
+      parent: 18
+    - type: Solution
+      solution:
+        maxVol: 5
+        name: lvcable
+        reagents:
+        - data: []
+          ReagentId: Iron
+          Quantity: 3
+        - data: []
+          ReagentId: Copper
+          Quantity: 2
+    - type: ContainedSolution
+      containerName: lvcable
+      container: 18
+  - uid: 30
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - injector
+    - type: Transform
+      parent: 29
+    - type: Solution
+      solution:
+        maxVol: 15
+        name: injector
+        reagents:
+        - data: []
+          ReagentId: Ephedrine
+          Quantity: 15
+    - type: ContainedSolution
+      containerName: injector
+      container: 29
+  - uid: 32
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - injector
+    - type: Transform
+      parent: 31
+    - type: Solution
+      solution:
+        maxVol: 15
+        name: injector
+        reagents:
+        - data: []
+          ReagentId: Saline
+          Quantity: 15
+    - type: ContainedSolution
+      containerName: injector
+      container: 31
+  - uid: 34
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - pen
+    - type: Transform
+      parent: 33
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: pen
+        reagents:
+        - data: []
+          ReagentId: Bicaridine
+          Quantity: 15
+        - data: []
+          ReagentId: TranexamicAcid
+          Quantity: 5
+    - type: ContainedSolution
+      containerName: pen
+      container: 33
+  - uid: 36
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - pen
+    - type: Transform
+      parent: 35
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: pen
+        reagents:
+        - data: []
+          ReagentId: Dermaline
+          Quantity: 10
+        - data: []
+          ReagentId: Leporazine
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: pen
+      container: 35
+  - uid: 42
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 41
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Kelotane
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 41
+  - uid: 44
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 43
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Kelotane
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 43
+  - uid: 46
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 45
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Kelotane
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 45
+  - uid: 48
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 47
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Kelotane
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 47
+  - uid: 50
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 49
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Kelotane
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 49
+  - uid: 53
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 52
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Dermaline
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 52
+  - uid: 55
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 54
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Dermaline
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 54
+  - uid: 57
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 56
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Dermaline
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 56
+  - uid: 59
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 58
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Dermaline
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 58
+  - uid: 61
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 60
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Dermaline
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 60
+  - uid: 66
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - injector
+    - type: Transform
+      parent: 65
+    - type: Solution
+      solution:
+        maxVol: 15
+        name: injector
+        reagents:
+        - data: []
+          ReagentId: Ipecac
+          Quantity: 15
+    - type: ContainedSolution
+      containerName: injector
+      container: 65
+  - uid: 68
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - injector
+    - type: Transform
+      parent: 67
+    - type: Solution
+      solution:
+        maxVol: 15
+        name: injector
+        reagents:
+        - data: []
+          ReagentId: Ethylredoxrazine
+          Quantity: 15
+    - type: ContainedSolution
+      containerName: injector
+      container: 67
+  - uid: 70
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - pen
+    - type: Transform
+      parent: 69
+    - type: Solution
+      solution:
+        maxVol: 15
+        name: pen
+        reagents:
+        - data: []
+          ReagentId: Ultravasculine
+          Quantity: 10
+        - data: []
+          ReagentId: Epinephrine
+          Quantity: 5
+    - type: ContainedSolution
+      containerName: pen
+      container: 69
+  - uid: 73
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 72
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Dylovene
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 72
+  - uid: 75
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 74
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Dylovene
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 74
+  - uid: 77
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 76
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Dylovene
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 76
+  - uid: 79
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 78
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Dylovene
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 78
+  - uid: 81
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 80
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Dylovene
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 80
+  - uid: 84
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 83
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Charcoal
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 83
+  - uid: 86
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 85
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Charcoal
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 85
+  - uid: 88
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 87
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Charcoal
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 87
+  - uid: 92
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 91
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Iron
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 91
+  - uid: 94
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 93
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Iron
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 93
+  - uid: 96
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 95
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Iron
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 95
+  - uid: 98
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 97
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Iron
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 97
+  - uid: 100
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 99
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Iron
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 99
+  - uid: 103
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 102
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Copper
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 102
+  - uid: 105
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 104
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Copper
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 104
+  - uid: 107
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 106
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Copper
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 106
+  - uid: 109
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 108
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Copper
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 108
+  - uid: 111
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 110
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Copper
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 110
+  - uid: 116
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - pen
+    - type: Transform
+      parent: 115
+    - type: Solution
+      solution:
+        maxVol: 15
+        name: pen
+        reagents:
+        - data: []
+          ReagentId: Epinephrine
+          Quantity: 12
+        - data: []
+          ReagentId: TranexamicAcid
+          Quantity: 3
+    - type: ContainedSolution
+      containerName: pen
+      container: 115
+  - uid: 118
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - injector
+    - type: Transform
+      parent: 117
+    - type: Solution
+      solution:
+        maxVol: 15
+        name: injector
+        reagents:
+        - data: []
+          ReagentId: Inaprovaline
+          Quantity: 15
+    - type: ContainedSolution
+      containerName: injector
+      container: 117
+  - uid: 121
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 120
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Dexalin
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 120
+  - uid: 123
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 122
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Dexalin
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 122
+  - uid: 125
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 124
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Dexalin
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 124
+  - uid: 127
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 126
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Dexalin
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 126
+  - uid: 129
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 128
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Dexalin
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 128
+  - uid: 131
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 130
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Dexalin
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 130
+  - uid: 133
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 132
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Dexalin
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 132
+  - uid: 138
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - injector
+    - type: Transform
+      parent: 137
+    - type: Solution
+      solution:
+        maxVol: 15
+        name: injector
+        reagents:
+        - data: []
+          ReagentId: Phalanximine
+          Quantity: 15
+    - type: ContainedSolution
+      containerName: injector
+      container: 137
+  - uid: 140
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - pen
+    - type: Transform
+      parent: 139
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: pen
+        reagents:
+        - data: []
+          ReagentId: Arithrazine
+          Quantity: 15
+        - data: []
+          ReagentId: Bicaridine
+          Quantity: 5
+    - type: ContainedSolution
+      containerName: pen
+      container: 139
+  - uid: 143
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 142
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: PotassiumIodide
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 142
+  - uid: 145
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 144
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: PotassiumIodide
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 144
+  - uid: 147
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 146
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: PotassiumIodide
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 146
+  - uid: 149
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 148
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: PotassiumIodide
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 148
+  - uid: 151
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 150
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: PotassiumIodide
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 150
+  - uid: 154
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 153
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Hyronalin
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 153
+  - uid: 156
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 155
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Hyronalin
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 155
+  - uid: 158
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 157
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Hyronalin
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 157
+  - uid: 160
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 159
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Hyronalin
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 159
+  - uid: 162
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 161
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Hyronalin
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 161
+  - uid: 170
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - beaker
+    - type: Transform
+      parent: 169
+    - type: Solution
+      solution:
+        maxVol: 100
+        name: beaker
+        reagents: []
+    - type: ContainedSolution
+      containerName: beaker
+      container: 169
+  - uid: 172
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - beaker
+    - type: Transform
+      parent: 171
+    - type: Solution
+      solution:
+        maxVol: 100
+        name: beaker
+        reagents: []
+    - type: ContainedSolution
+      containerName: beaker
+      container: 171
+  - uid: 174
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - beaker
+    - type: Transform
+      parent: 173
+    - type: Solution
+      solution:
+        maxVol: 50
+        name: beaker
+        reagents: []
+    - type: ContainedSolution
+      containerName: beaker
+      container: 173
+  - uid: 176
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - beaker
+    - type: Transform
+      parent: 175
+    - type: Solution
+      solution:
+        maxVol: 50
+        name: beaker
+        reagents: []
+    - type: ContainedSolution
+      containerName: beaker
+      container: 175
+  - uid: 179
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 178
+    - type: Solution
+      solution:
+        maxVol: 1
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Fiber
+          Quantity: 1
+    - type: ContainedSolution
+      containerName: food
+      container: 178
+- proto: AirAlarm
+  entities:
+  - uid: 180
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -14.5,-8.5
+      parent: 1
+    - type: AccessReader
+      accessListsOriginal:
+      - - Atmospherics
+      access:
+      - - Interdyne
+    - type: DeviceList
+      devices:
+      - 404
+      - 399
+    - type: Fixtures
+      fixtures: {}
+  - uid: 181
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -7.5,-6.5
+      parent: 1
+    - type: AccessReader
+      accessListsOriginal:
+      - - Atmospherics
+      access:
+      - - Interdyne
+    - type: DeviceList
+      devices:
+      - 405
+      - 400
+    - type: Fixtures
+      fixtures: {}
+  - uid: 182
+    components:
+    - type: Transform
+      pos: -11.5,0.5
+      parent: 1
+    - type: AccessReader
+      accessListsOriginal:
+      - - Atmospherics
+      access:
+      - - Interdyne
+    - type: DeviceList
+      devices:
+      - 402
+      - 398
+    - type: Fixtures
+      fixtures: {}
+  - uid: 183
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -7.5,2.5
+      parent: 1
+    - type: AccessReader
+      accessListsOriginal:
+      - - Atmospherics
+      access:
+      - - Interdyne
+    - type: DeviceList
+      devices:
+      - 403
+      - 397
+    - type: Fixtures
+      fixtures: {}
+  - uid: 184
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -10.5,-9.5
+      parent: 1
+    - type: AccessReader
+      accessListsOriginal:
+      - - Atmospherics
+      access:
+      - - Interdyne
+    - type: DeviceList
+      devices:
+      - 401
+      - 406
+    - type: Fixtures
+      fixtures: {}
+- proto: AirlockExternalShuttleInterdyneLocked
+  entities:
+  - uid: 185
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -15.5,-5.5
+      parent: 1
+  - uid: 186
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -15.5,-3.5
+      parent: 1
+  - uid: 187
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -5.5,-5.5
+      parent: 1
+  - uid: 188
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -5.5,-3.5
+      parent: 1
+- proto: AirlockGlassInterdyneLocked
+  entities:
+  - uid: 189
+    components:
+    - type: Transform
+      pos: -11.5,-6.5
+      parent: 1
+  - uid: 190
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -10.5,-1.5
+      parent: 1
+- proto: AirlockInterdyneLocked
+  entities:
+  - uid: 191
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -9.5,-6.5
+      parent: 1
+  - uid: 192
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -9.5,0.5
+      parent: 1
+- proto: AntiPoisonMedipen
+  entities:
+  - uid: 69
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 64
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - pen
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@pen: !type:ContainerSlot
+          ent: 70
+- proto: APCBasic
+  entities:
+  - uid: 193
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -14.5,-10.5
+      parent: 1
+    - type: AccessReader
+      accessListsOriginal:
+      - - Engineering
+      access:
+      - - Interdyne
+    - type: Fixtures
+      fixtures: {}
+  - uid: 194
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -6.5,-1.5
+      parent: 1
+    - type: AccessReader
+      accessListsOriginal:
+      - - Engineering
+      access:
+      - - Interdyne
+    - type: Fixtures
+      fixtures: {}
+  - uid: 195
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -11.5,0.5
+      parent: 1
+    - type: AccessReader
+      accessListsOriginal:
+      - - Engineering
+      access:
+      - - Interdyne
+    - type: Fixtures
+      fixtures: {}
+  - uid: 196
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -6.5,-8.5
+      parent: 1
+    - type: AccessReader
+      accessListsOriginal:
+      - - Engineering
+      access:
+      - - Interdyne
+    - type: Fixtures
+      fixtures: {}
+- proto: AtmosDeviceFanTiny
+  entities:
+  - uid: 197
+    components:
+    - type: Transform
+      pos: -5.5,-5.5
+      parent: 1
+  - uid: 198
+    components:
+    - type: Transform
+      pos: -5.5,-3.5
+      parent: 1
+  - uid: 199
+    components:
+    - type: Transform
+      pos: -15.5,-3.5
+      parent: 1
+  - uid: 200
+    components:
+    - type: Transform
+      pos: -15.5,-5.5
+      parent: 1
+- proto: Beaker
+  entities:
+  - uid: 173
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 168
+    - type: MeleeWeapon
+      nextAttack: -2168.0316672
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - beaker
+    - type: EmitSoundOnCollide
+      nextSound: -2168.0316672
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@beaker: !type:ContainerSlot
+          ent: 174
+    - type: Forensics
+      residues: []
+      dnas: []
+      microFibers:
+      - серые плазматиеские волокна
+      fibers: []
+      fingerprints: []
+  - uid: 175
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 168
+    - type: MeleeWeapon
+      nextAttack: -2168.0316672
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - beaker
+    - type: EmitSoundOnCollide
+      nextSound: -2168.0316672
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@beaker: !type:ContainerSlot
+          ent: 176
+    - type: Forensics
+      residues: []
+      dnas: []
+      microFibers:
+      - серые плазматиеские волокна
+      fibers: []
+      fingerprints: []
+- proto: BedsheetMedical
+  entities:
+  - uid: 201
+    components:
+    - type: Transform
+      pos: -11.5,-4.5
+      parent: 1
+  - uid: 202
+    components:
+    - type: Transform
+      pos: -9.5,-4.5
+      parent: 1
+- proto: BlindsLeft
+  entities:
+  - uid: 203
+    components:
+    - type: Transform
+      pos: -13.5,-6.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+- proto: BlindsRight
+  entities:
+  - uid: 204
+    components:
+    - type: Transform
+      pos: -12.5,-6.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+- proto: Bloodpack
+  entities:
+  - uid: 164
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 163
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+  - uid: 165
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 163
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+- proto: BoxFolderMedical
+  entities:
+  - uid: 205
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -11.98982,-2.4515345
+      parent: 1
+- proto: BruteAutoInjector
+  entities:
+  - uid: 33
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 28
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - pen
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@pen: !type:ContainerSlot
+          ent: 34
+- proto: Brutepack
+  entities:
+  - uid: 112
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 89
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+- proto: BurnAutoInjector
+  entities:
+  - uid: 35
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 28
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - pen
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@pen: !type:ContainerSlot
+          ent: 36
+- proto: CableApcExtension
+  entities:
+  - uid: 206
+    components:
+    - type: Transform
+      pos: -13.5,-10.5
+      parent: 1
+  - uid: 207
+    components:
+    - type: Transform
+      pos: -14.5,-10.5
+      parent: 1
+  - uid: 208
+    components:
+    - type: Transform
+      pos: -12.5,-10.5
+      parent: 1
+  - uid: 209
+    components:
+    - type: Transform
+      pos: -12.5,-9.5
+      parent: 1
+  - uid: 210
+    components:
+    - type: Transform
+      pos: -12.5,-8.5
+      parent: 1
+  - uid: 211
+    components:
+    - type: Transform
+      pos: -12.5,-11.5
+      parent: 1
+  - uid: 212
+    components:
+    - type: Transform
+      pos: -7.5,-1.5
+      parent: 1
+  - uid: 213
+    components:
+    - type: Transform
+      pos: -8.5,-1.5
+      parent: 1
+  - uid: 214
+    components:
+    - type: Transform
+      pos: -9.5,-1.5
+      parent: 1
+  - uid: 215
+    components:
+    - type: Transform
+      pos: -11.5,-1.5
+      parent: 1
+  - uid: 216
+    components:
+    - type: Transform
+      pos: -12.5,-1.5
+      parent: 1
+  - uid: 217
+    components:
+    - type: Transform
+      pos: -10.5,-1.5
+      parent: 1
+  - uid: 218
+    components:
+    - type: Transform
+      pos: -9.5,-2.5
+      parent: 1
+  - uid: 219
+    components:
+    - type: Transform
+      pos: -9.5,-3.5
+      parent: 1
+  - uid: 220
+    components:
+    - type: Transform
+      pos: -9.5,-4.5
+      parent: 1
+  - uid: 221
+    components:
+    - type: Transform
+      pos: -10.5,-4.5
+      parent: 1
+  - uid: 222
+    components:
+    - type: Transform
+      pos: -11.5,-4.5
+      parent: 1
+  - uid: 223
+    components:
+    - type: Transform
+      pos: -12.5,-4.5
+      parent: 1
+  - uid: 224
+    components:
+    - type: Transform
+      pos: -13.5,-4.5
+      parent: 1
+  - uid: 225
+    components:
+    - type: Transform
+      pos: -8.5,-4.5
+      parent: 1
+  - uid: 226
+    components:
+    - type: Transform
+      pos: -7.5,-4.5
+      parent: 1
+  - uid: 227
+    components:
+    - type: Transform
+      pos: -6.5,-1.5
+      parent: 1
+  - uid: 228
+    components:
+    - type: Transform
+      pos: -11.5,0.5
+      parent: 1
+  - uid: 229
+    components:
+    - type: Transform
+      pos: -11.5,1.5
+      parent: 1
+  - uid: 230
+    components:
+    - type: Transform
+      pos: -10.5,1.5
+      parent: 1
+  - uid: 231
+    components:
+    - type: Transform
+      pos: -10.5,2.5
+      parent: 1
+  - uid: 232
+    components:
+    - type: Transform
+      pos: -9.5,2.5
+      parent: 1
+  - uid: 233
+    components:
+    - type: Transform
+      pos: -8.5,2.5
+      parent: 1
+  - uid: 234
+    components:
+    - type: Transform
+      pos: -7.5,-8.5
+      parent: 1
+  - uid: 235
+    components:
+    - type: Transform
+      pos: -8.5,-8.5
+      parent: 1
+  - uid: 236
+    components:
+    - type: Transform
+      pos: -8.5,-9.5
+      parent: 1
+  - uid: 237
+    components:
+    - type: Transform
+      pos: -8.5,-10.5
+      parent: 1
+  - uid: 238
+    components:
+    - type: Transform
+      pos: -8.5,-11.5
+      parent: 1
+  - uid: 239
+    components:
+    - type: Transform
+      pos: -6.5,-8.5
+      parent: 1
+  - uid: 240
+    components:
+    - type: Transform
+      pos: -13.5,-8.5
+      parent: 1
+  - uid: 241
+    components:
+    - type: Transform
+      pos: -13.5,-1.5
+      parent: 1
+  - uid: 242
+    components:
+    - type: Transform
+      pos: -12.5,-12.5
+      parent: 1
+  - uid: 243
+    components:
+    - type: Transform
+      pos: -8.5,-12.5
+      parent: 1
+  - uid: 244
+    components:
+    - type: Transform
+      pos: -14.5,-4.5
+      parent: 1
+  - uid: 245
+    components:
+    - type: Transform
+      pos: -6.5,-4.5
+      parent: 1
+- proto: CableApcStack10
+  entities:
+  - uid: 18
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 11
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - lvcable
+    - type: EmitSoundOnCollide
+      nextSound: -838.9437311
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@lvcable: !type:ContainerSlot
+          ent: 19
+    - type: Forensics
+      residues: []
+      dnas: []
+      microFibers: []
+      fibers: []
+      fingerprints: []
+- proto: CableHV
+  entities:
+  - uid: 246
+    components:
+    - type: Transform
+      pos: -9.5,-12.5
+      parent: 1
+  - uid: 247
+    components:
+    - type: Transform
+      pos: -8.5,-12.5
+      parent: 1
+  - uid: 248
+    components:
+    - type: Transform
+      pos: -7.5,-12.5
+      parent: 1
+  - uid: 249
+    components:
+    - type: Transform
+      pos: -7.5,-11.5
+      parent: 1
+  - uid: 250
+    components:
+    - type: Transform
+      pos: -7.5,-10.5
+      parent: 1
+- proto: CableHVStack10
+  entities:
+  - uid: 14
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 11
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - hvcable
+    - type: EmitSoundOnCollide
+      nextSound: -838.9437311
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@hvcable: !type:ContainerSlot
+          ent: 15
+    - type: Forensics
+      residues: []
+      dnas: []
+      microFibers: []
+      fibers: []
+      fingerprints: []
+- proto: CableMV
+  entities:
+  - uid: 251
+    components:
+    - type: Transform
+      pos: -7.5,-10.5
+      parent: 1
+  - uid: 252
+    components:
+    - type: Transform
+      pos: -7.5,-9.5
+      parent: 1
+  - uid: 253
+    components:
+    - type: Transform
+      pos: -7.5,-8.5
+      parent: 1
+  - uid: 254
+    components:
+    - type: Transform
+      pos: -8.5,-8.5
+      parent: 1
+  - uid: 255
+    components:
+    - type: Transform
+      pos: -9.5,-8.5
+      parent: 1
+  - uid: 256
+    components:
+    - type: Transform
+      pos: -6.5,-8.5
+      parent: 1
+  - uid: 257
+    components:
+    - type: Transform
+      pos: -9.5,-7.5
+      parent: 1
+  - uid: 258
+    components:
+    - type: Transform
+      pos: -9.5,-6.5
+      parent: 1
+  - uid: 259
+    components:
+    - type: Transform
+      pos: -9.5,-5.5
+      parent: 1
+  - uid: 260
+    components:
+    - type: Transform
+      pos: -10.5,-5.5
+      parent: 1
+  - uid: 261
+    components:
+    - type: Transform
+      pos: -11.5,-5.5
+      parent: 1
+  - uid: 262
+    components:
+    - type: Transform
+      pos: -11.5,-6.5
+      parent: 1
+  - uid: 263
+    components:
+    - type: Transform
+      pos: -11.5,-7.5
+      parent: 1
+  - uid: 264
+    components:
+    - type: Transform
+      pos: -11.5,-8.5
+      parent: 1
+  - uid: 265
+    components:
+    - type: Transform
+      pos: -12.5,-8.5
+      parent: 1
+  - uid: 266
+    components:
+    - type: Transform
+      pos: -13.5,-8.5
+      parent: 1
+  - uid: 267
+    components:
+    - type: Transform
+      pos: -13.5,-9.5
+      parent: 1
+  - uid: 268
+    components:
+    - type: Transform
+      pos: -13.5,-10.5
+      parent: 1
+  - uid: 269
+    components:
+    - type: Transform
+      pos: -14.5,-10.5
+      parent: 1
+  - uid: 270
+    components:
+    - type: Transform
+      pos: -9.5,-4.5
+      parent: 1
+  - uid: 271
+    components:
+    - type: Transform
+      pos: -9.5,-3.5
+      parent: 1
+  - uid: 272
+    components:
+    - type: Transform
+      pos: -9.5,-0.5
+      parent: 1
+  - uid: 273
+    components:
+    - type: Transform
+      pos: -9.5,-1.5
+      parent: 1
+  - uid: 274
+    components:
+    - type: Transform
+      pos: -9.5,0.5
+      parent: 1
+  - uid: 275
+    components:
+    - type: Transform
+      pos: -9.5,1.5
+      parent: 1
+  - uid: 276
+    components:
+    - type: Transform
+      pos: -9.5,-2.5
+      parent: 1
+  - uid: 277
+    components:
+    - type: Transform
+      pos: -10.5,1.5
+      parent: 1
+  - uid: 278
+    components:
+    - type: Transform
+      pos: -11.5,1.5
+      parent: 1
+  - uid: 279
+    components:
+    - type: Transform
+      pos: -11.5,0.5
+      parent: 1
+  - uid: 280
+    components:
+    - type: Transform
+      pos: -8.5,-1.5
+      parent: 1
+  - uid: 281
+    components:
+    - type: Transform
+      pos: -7.5,-1.5
+      parent: 1
+  - uid: 282
+    components:
+    - type: Transform
+      pos: -6.5,-1.5
+      parent: 1
+- proto: CableMVStack10
+  entities:
+  - uid: 16
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 11
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - mvcable
+    - type: EmitSoundOnCollide
+      nextSound: -838.9437311
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@mvcable: !type:ContainerSlot
+          ent: 17
+    - type: Forensics
+      residues: []
+      dnas: []
+      microFibers: []
+      fibers: []
+      fingerprints: []
+- proto: CableTerminal
+  entities:
+  - uid: 283
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -7.5,-12.5
+      parent: 1
+- proto: CatwalkBrown
+  entities:
+  - uid: 284
+    components:
+    - type: Transform
+      pos: -8.5,-9.5
+      parent: 1
+  - uid: 285
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -9.5,-8.5
+      parent: 1
+  - uid: 286
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -8.5,-8.5
+      parent: 1
+  - uid: 287
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -7.5,-8.5
+      parent: 1
+  - uid: 288
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -8.5,-10.5
+      parent: 1
+  - uid: 289
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -8.5,-11.5
+      parent: 1
+- proto: ChairOfficeLight
+  entities:
+  - uid: 290
+    components:
+    - type: Transform
+      pos: -12.268276,-1.3625603
+      parent: 1
+- proto: ChairPilotSeat
+  entities:
+  - uid: 291
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -10.5,2.5
+      parent: 1
+  - uid: 292
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -8.5,2.5
+      parent: 1
+- proto: ChemistryHotplate
+  entities:
+  - uid: 293
+    components:
+    - type: Transform
+      pos: -13.5,-1.5
+      parent: 1
+    - type: ItemPlacer
+      placedEntities:
+      - 421
+    - type: PlaceableSurface
+      isPlaceable: False
+- proto: ChemMaster
+  entities:
+  - uid: 294
+    components:
+    - type: Transform
+      pos: -12.5,-0.5
+      parent: 1
+- proto: ClockOnWall
+  entities:
+  - uid: 295
+    components:
+    - type: Transform
+      pos: -10.5,-2.5
+      parent: 1
+- proto: ClothingBackpackDuffelSurgeryFilled
+  entities:
+  - uid: 296
+    components:
+    - type: Transform
+      pos: -12.6131935,-12.35295
+      parent: 1
+- proto: ClothingEyesGlassesMeson
+  entities:
+  - uid: 20
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 11
+    - type: EmitSoundOnCollide
+      nextSound: -838.9437311
+    - type: Physics
+      canCollide: False
+    - type: Forensics
+      residues: []
+      dnas: []
+      microFibers: []
+      fibers: []
+      fingerprints: []
+- proto: ClothingMaskBreathMedical
+  entities:
+  - uid: 134
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 114
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+  - uid: 297
+    components:
+    - type: Transform
+      pos: -13.0975685,-12.306075
+      parent: 1
+- proto: computerBodyScanner
+  entities:
+  - uid: 298
+    components:
+    - type: Transform
+      pos: -12.5,-10.5
+      parent: 1
+- proto: ComputerRadar
+  entities:
+  - uid: 299
+    components:
+    - type: Transform
+      pos: -9.5,3.5
+      parent: 1
+- proto: ComputerShuttle
+  entities:
+  - uid: 300
+    components:
+    - type: Transform
+      pos: -10.5,3.5
+      parent: 1
+- proto: CrateFrezzerInterdyneSecure
+  entities:
+  - uid: 301
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      pos: -12.5,-7.5
+      parent: 1
+    - type: EntityStorage
+      air:
+        volume: 200
+        immutable: False
+        temperature: 293.147
+        moles:
+          Oxygen: 1.7443379
+          Nitrogen: 6.5620327
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 312
+          - 310
+          - 308
+          - 306
+          - 304
+          - 302
+        paper_label: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+    - type: Forensics
+      residues: []
+      dnas: []
+      microFibers: []
+      fibers: []
+      fingerprints: []
+- proto: Crowbar
+  entities:
+  - uid: 21
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 11
+    - type: MeleeWeapon
+      nextAttack: -838.9437311
+    - type: EmitSoundOnCollide
+      nextSound: -838.9437311
+    - type: Physics
+      canCollide: False
+- proto: CryoPod
+  entities:
+  - uid: 314
+    components:
+    - type: Transform
+      pos: -7.5,-0.5
+      parent: 1
+- proto: DeathRattleImplanterInterdyne
+  entities:
+  - uid: 302
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 301
+    - type: Implanter
+      implantData:
+      - имплант "Предсмертный хрип"
+      - Микрочип, который вживляют под кожу.
+    - type: ContainerContainer
+      containers:
+        implanter_slot: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: 303
+    - type: EmitSoundOnCollide
+      nextSound: -1670.1986747
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+  - uid: 304
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 301
+    - type: Implanter
+      implantData:
+      - имплант "Предсмертный хрип"
+      - Микрочип, который вживляют под кожу.
+    - type: ContainerContainer
+      containers:
+        implanter_slot: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: 305
+    - type: EmitSoundOnCollide
+      nextSound: -1670.1986747
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+  - uid: 306
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 301
+    - type: Implanter
+      implantData:
+      - имплант "Предсмертный хрип"
+      - Микрочип, который вживляют под кожу.
+    - type: ContainerContainer
+      containers:
+        implanter_slot: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: 307
+    - type: EmitSoundOnCollide
+      nextSound: -1670.1986747
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+  - uid: 308
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 301
+    - type: Implanter
+      implantData:
+      - имплант "Предсмертный хрип"
+      - Микрочип, который вживляют под кожу.
+    - type: ContainerContainer
+      containers:
+        implanter_slot: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: 309
+    - type: EmitSoundOnCollide
+      nextSound: -1670.1986747
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+  - uid: 310
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 301
+    - type: Implanter
+      implantData:
+      - имплант "Предсмертный хрип"
+      - Микрочип, который вживляют под кожу.
+    - type: ContainerContainer
+      containers:
+        implanter_slot: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: 311
+    - type: EmitSoundOnCollide
+      nextSound: -1670.1986747
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+  - uid: 312
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 301
+    - type: Implanter
+      implantData:
+      - имплант "Предсмертный хрип"
+      - Микрочип, который вживляют под кожу.
+    - type: ContainerContainer
+      containers:
+        implanter_slot: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: 313
+    - type: EmitSoundOnCollide
+      nextSound: -1670.1986747
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+- proto: DeathRattleImplantInterdyne
+  entities:
+  - uid: 303
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 302
+  - uid: 305
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 304
+  - uid: 307
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 306
+  - uid: 309
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 308
+  - uid: 311
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 310
+  - uid: 313
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 312
+- proto: DefibrillatorCabinetFilled
+  entities:
+  - uid: 315
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -10.5,-9.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+  - uid: 316
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -10.5,-6.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+- proto: EmergencyMedipen
+  entities:
+  - uid: 115
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 114
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - pen
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@pen: !type:ContainerSlot
+          ent: 116
+- proto: EmergencyOxygenTankFilled
+  entities:
+  - uid: 135
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 114
+    - type: MeleeWeapon
+      nextAttack: -1807.4113522
+    - type: UseDelay
+      delays:
+        gasTank:
+          endTime: 0
+          startTime: 0
+          length: 1
+        default:
+          endTime: 0
+          startTime: 0
+          length: 1
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+- proto: filingCabinetDrawer
+  entities:
+  - uid: 2
+    components:
+    - type: Transform
+      pos: -12.5,2.5
+      parent: 1
+    - type: Storage
+      storedItems:
+        3:
+          position: 0,0
+          _rotation: South
+        5:
+          position: 9,1
+          _rotation: South
+        7:
+          position: 9,0
+          _rotation: South
+        9:
+          position: 9,2
+          _rotation: South
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 3
+          - 5
+          - 7
+          - 9
+- proto: Firelock
+  entities:
+  - uid: 317
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -11.5,-6.5
+      parent: 1
+  - uid: 318
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -9.5,-6.5
+      parent: 1
+  - uid: 319
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -10.5,-1.5
+      parent: 1
+  - uid: 320
+    components:
+    - type: Transform
+      pos: -9.5,0.5
+      parent: 1
+- proto: FirelockEdge
+  entities:
+  - uid: 321
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -14.5,-5.5
+      parent: 1
+  - uid: 322
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -14.5,-3.5
+      parent: 1
+  - uid: 323
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -6.5,-3.5
+      parent: 1
+  - uid: 324
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -6.5,-5.5
+      parent: 1
+- proto: FloorDrainSmall
+  entities:
+  - uid: 325
+    components:
+    - type: Transform
+      pos: -11.5,-0.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+  - uid: 326
+    components:
+    - type: Transform
+      pos: -12.5,-8.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+- proto: GasFilter
+  entities:
+  - uid: 327
+    components:
+    - type: Transform
+      pos: -7.5,-1.5
+      parent: 1
+    - type: AtmosPipeLayers
+      pipeLayer: Secondary
+  - uid: 328
+    components:
+    - type: Transform
+      pos: -7.5,-2.5
+      parent: 1
+    - type: AtmosPipeLayers
+      pipeLayer: Secondary
+- proto: GasMixerFlipped
+  entities:
+  - uid: 329
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -8.5,-8.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+- proto: GasPipeBend
+  entities:
+  - uid: 330
+    components:
+    - type: Transform
+      pos: -9.5,1.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+  - uid: 331
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -12.5,-5.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+  - uid: 332
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -11.5,-5.5
+      parent: 1
+    - type: AtmosPipeLayers
+      pipeLayer: Tertiary
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+  - uid: 333
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -11.5,-8.5
+      parent: 1
+    - type: AtmosPipeLayers
+      pipeLayer: Tertiary
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+  - uid: 334
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -13.5,-8.5
+      parent: 1
+    - type: AtmosPipeLayers
+      pipeLayer: Tertiary
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+  - uid: 335
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -8.5,-4.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+  - uid: 336
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -8.5,-2.5
+      parent: 1
+  - uid: 337
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -7.5,-8.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+  - uid: 338
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -9.5,-10.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+  - uid: 339
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -8.5,-9.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+  - uid: 340
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -7.5,-2.5
+      parent: 1
+- proto: GasPipeBendAlt1
+  entities:
+  - uid: 341
+    components:
+    - type: Transform
+      pos: -7.5,-0.5
+      parent: 1
+  - uid: 342
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -8.5,-0.5
+      parent: 1
+  - uid: 343
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -9.5,-1.5
+      parent: 1
+  - uid: 344
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -9.5,-2.5
+      parent: 1
+- proto: GasPipeBendAlt2
+  entities:
+  - uid: 345
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -7.5,-5.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+  - uid: 346
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -9.5,-11.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+- proto: GasPipeFourway
+  entities:
+  - uid: 347
+    components:
+    - type: Transform
+      pos: -9.5,-5.5
+      parent: 1
+    - type: AtmosPipeLayers
+      pipeLayer: Tertiary
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+- proto: GasPipeManifold
+  entities:
+  - uid: 348
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -7.5,-4.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+  - uid: 349
+    components:
+    - type: Transform
+      pos: -8.5,-3.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+  - uid: 350
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -8.5,-1.5
+      parent: 1
+- proto: GasPipeStraight
+  entities:
+  - uid: 351
+    components:
+    - type: Transform
+      pos: -9.5,-0.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+  - uid: 352
+    components:
+    - type: Transform
+      pos: -9.5,-6.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+  - uid: 353
+    components:
+    - type: Transform
+      pos: -9.5,0.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+  - uid: 354
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -10.5,-1.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+  - uid: 355
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -11.5,-1.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+  - uid: 356
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -9.5,-2.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+  - uid: 357
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -10.5,-5.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+  - uid: 358
+    components:
+    - type: Transform
+      pos: -11.5,-6.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+  - uid: 359
+    components:
+    - type: Transform
+      pos: -11.5,-7.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+  - uid: 360
+    components:
+    - type: Transform
+      pos: -11.5,-8.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+  - uid: 361
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -10.5,1.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+  - uid: 362
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -9.5,-4.5
+      parent: 1
+    - type: AtmosPipeLayers
+      pipeLayer: Tertiary
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+  - uid: 363
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -9.5,-3.5
+      parent: 1
+    - type: AtmosPipeLayers
+      pipeLayer: Tertiary
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+  - uid: 364
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -9.5,-2.5
+      parent: 1
+    - type: AtmosPipeLayers
+      pipeLayer: Tertiary
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+  - uid: 365
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -9.5,-6.5
+      parent: 1
+    - type: AtmosPipeLayers
+      pipeLayer: Tertiary
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+  - uid: 366
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -9.5,-7.5
+      parent: 1
+    - type: AtmosPipeLayers
+      pipeLayer: Tertiary
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+  - uid: 367
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -10.5,-5.5
+      parent: 1
+    - type: AtmosPipeLayers
+      pipeLayer: Tertiary
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+  - uid: 368
+    components:
+    - type: Transform
+      pos: -11.5,-6.5
+      parent: 1
+    - type: AtmosPipeLayers
+      pipeLayer: Tertiary
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+  - uid: 369
+    components:
+    - type: Transform
+      pos: -11.5,-7.5
+      parent: 1
+    - type: AtmosPipeLayers
+      pipeLayer: Tertiary
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+  - uid: 370
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -12.5,-8.5
+      parent: 1
+    - type: AtmosPipeLayers
+      pipeLayer: Tertiary
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+  - uid: 371
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -10.5,-1.5
+      parent: 1
+    - type: AtmosPipeLayers
+      pipeLayer: Tertiary
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+  - uid: 372
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -9.5,-0.5
+      parent: 1
+    - type: AtmosPipeLayers
+      pipeLayer: Tertiary
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+  - uid: 373
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -9.5,0.5
+      parent: 1
+    - type: AtmosPipeLayers
+      pipeLayer: Tertiary
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+  - uid: 374
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -9.5,-8.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+  - uid: 375
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -7.5,-1.5
+      parent: 1
+- proto: GasPipeStraightAlt1
+  entities:
+  - uid: 376
+    components:
+    - type: Transform
+      pos: -9.5,-3.5
+      parent: 1
+    - type: AtmosPipeLayers
+      pipeLayer: Primary
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+  - uid: 377
+    components:
+    - type: Transform
+      pos: -7.5,-3.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+  - uid: 378
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -8.5,-1.5
+      parent: 1
+- proto: GasPipeStraightAlt2
+  entities:
+  - uid: 379
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -9.5,-8.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+  - uid: 380
+    components:
+    - type: Transform
+      pos: -9.5,-10.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+- proto: GasPipeTJunction
+  entities:
+  - uid: 381
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -9.5,-1.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+  - uid: 382
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -9.5,-5.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+  - uid: 383
+    components:
+    - type: Transform
+      pos: -11.5,-5.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+  - uid: 384
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -9.5,-1.5
+      parent: 1
+    - type: AtmosPipeLayers
+      pipeLayer: Tertiary
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+  - uid: 385
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -9.5,-9.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+  - uid: 386
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -9.5,-4.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+- proto: GasPipeTJunctionAlt1
+  entities:
+  - uid: 387
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -8.5,-2.5
+      parent: 1
+- proto: GasPipeTJunctionAlt2
+  entities:
+  - uid: 388
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -8.5,-5.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+  - uid: 389
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -9.5,-9.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+- proto: GasPort
+  entities:
+  - uid: 390
+    components:
+    - type: Transform
+      pos: -8.5,-7.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+  - uid: 391
+    components:
+    - type: Transform
+      pos: -7.5,-7.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+  - uid: 392
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -7.5,-9.5
+      parent: 1
+    - type: AtmosPipeLayers
+      pipeLayer: Tertiary
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+- proto: GasPressurePump
+  entities:
+  - uid: 393
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -9.5,-7.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+- proto: GasPressurePumpAlt2
+  entities:
+  - uid: 394
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -8.5,-9.5
+      parent: 1
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+  - uid: 395
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -8.5,-2.5
+      parent: 1
+- proto: GasThermoMachineFreezer
+  entities:
+  - uid: 396
+    components:
+    - type: Transform
+      pos: -8.5,-0.5
+      parent: 1
+- proto: GasVentPump
+  entities:
+  - uid: 397
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -11.5,1.5
+      parent: 1
+    - type: DeviceNetwork
+      deviceLists:
+      - 183
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+  - uid: 398
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -12.5,-1.5
+      parent: 1
+    - type: DeviceNetwork
+      deviceLists:
+      - 182
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+  - uid: 399
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -11.5,-9.5
+      parent: 1
+    - type: DeviceNetwork
+      deviceLists:
+      - 180
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+  - uid: 400
+    components:
+    - type: Transform
+      pos: -12.5,-4.5
+      parent: 1
+    - type: DeviceNetwork
+      deviceLists:
+      - 181
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+  - uid: 401
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -8.5,-10.5
+      parent: 1
+    - type: DeviceNetwork
+      deviceLists:
+      - 184
+    - type: AtmosPipeColor
+      color: '#415EDAFF'
+- proto: GasVentScrubber
+  entities:
+  - uid: 402
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -11.5,-1.5
+      parent: 1
+    - type: DeviceNetwork
+      deviceLists:
+      - 182
+    - type: AtmosPipeLayers
+      pipeLayer: Tertiary
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+  - uid: 403
+    components:
+    - type: Transform
+      pos: -9.5,1.5
+      parent: 1
+    - type: DeviceNetwork
+      deviceLists:
+      - 183
+    - type: AtmosPipeLayers
+      pipeLayer: Tertiary
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+  - uid: 404
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -13.5,-9.5
+      parent: 1
+    - type: DeviceNetwork
+      deviceLists:
+      - 180
+    - type: AtmosPipeLayers
+      pipeLayer: Tertiary
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+  - uid: 405
+    components:
+    - type: Transform
+      pos: -8.5,-4.5
+      parent: 1
+    - type: DeviceNetwork
+      deviceLists:
+      - 181
+    - type: AtmosPipeLayers
+      pipeLayer: Tertiary
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+  - uid: 406
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -8.5,-11.5
+      parent: 1
+    - type: DeviceNetwork
+      deviceLists:
+      - 184
+    - type: AtmosPipeLayers
+      pipeLayer: Tertiary
+    - type: AtmosPipeColor
+      color: '#DC4840FF'
+- proto: Gauze
+  entities:
+  - uid: 113
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 89
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+- proto: GeneratorBasic15kW
+  entities:
+  - uid: 407
+    components:
+    - type: Transform
+      pos: -9.5,-12.5
+      parent: 1
+  - uid: 408
+    components:
+    - type: Transform
+      pos: -7.5,-12.5
+      parent: 1
+  - uid: 409
+    components:
+    - type: Transform
+      pos: -8.5,-12.5
+      parent: 1
+- proto: GravityGeneratorMini
+  entities:
+  - uid: 410
+    components:
+    - type: Transform
+      pos: -9.5,-11.5
+      parent: 1
+- proto: Grille
+  entities:
+  - uid: 411
+    components:
+    - type: Transform
+      pos: -13.5,-6.5
+      parent: 1
+  - uid: 412
+    components:
+    - type: Transform
+      pos: -12.5,-6.5
+      parent: 1
+  - uid: 413
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -11.5,4.5
+      parent: 1
+  - uid: 414
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -10.5,4.5
+      parent: 1
+  - uid: 415
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -9.5,4.5
+      parent: 1
+- proto: GrilleDiagonal
+  entities:
+  - uid: 416
+    components:
+    - type: Transform
+      pos: -12.5,4.5
+      parent: 1
+  - uid: 417
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -8.5,4.5
+      parent: 1
+  - uid: 418
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -12.5,3.5
+      parent: 1
+  - uid: 419
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -8.5,3.5
+      parent: 1
+- proto: Gyroscope
+  entities:
+  - uid: 420
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -9.5,-10.5
+      parent: 1
+- proto: HandLabeler
+  entities:
+  - uid: 177
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 168
+    - type: UseDelay
+      delays:
+        default:
+          endTime: 0
+          startTime: 0
+          length: 2
+    - type: EmitSoundOnCollide
+      nextSound: -2168.0316672
+    - type: Physics
+      canCollide: False
+    - type: Forensics
+      residues: []
+      dnas: []
+      microFibers:
+      - серые плазматиеские волокна
+      fibers: []
+      fingerprints: []
+- proto: LargeBeaker
+  entities:
+  - uid: 169
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 168
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - beaker
+    - type: MeleeWeapon
+      nextAttack: -2168.0316672
+    - type: EmitSoundOnCollide
+      nextSound: -2168.0316672
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@beaker: !type:ContainerSlot
+          ent: 170
+    - type: Forensics
+      residues: []
+      dnas: []
+      microFibers:
+      - серые плазматиеские волокна
+      fibers: []
+      fingerprints: []
+  - uid: 171
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 168
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - beaker
+    - type: MeleeWeapon
+      nextAttack: -2168.0316672
+    - type: EmitSoundOnCollide
+      nextSound: -2168.0316672
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@beaker: !type:ContainerSlot
+          ent: 172
+    - type: Forensics
+      residues: []
+      dnas: []
+      microFibers:
+      - серые плазматиеские волокна
+      fibers: []
+      fingerprints: []
+  - uid: 421
+    components:
+    - type: Transform
+      pos: -13.515434,-1.118201
+      parent: 1
+    - type: CollisionWake
+      enabled: False
+- proto: LockerInterdyneArmored
+  entities:
+  - uid: 27
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      pos: -13.261782,-7.5
+      parent: 1
+    - type: AccessReader
+      accessListsOriginal:
+      - - Interdyne
+    - type: Physics
+      angularDamping: 8
+      linearDamping: 8
+    - type: EntityStorage
+      air:
+        volume: 200
+        immutable: False
+        temperature: 293.147
+        moles:
+          Oxygen: 1.7447217
+          Nitrogen: 6.563477
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 28
+          - 39
+          - 64
+          - 89
+          - 114
+          - 163
+          - 136
+        paper_label: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+    - type: Pullable
+      prevFixedRotation: True
+    - type: Forensics
+      residues: []
+      dnas: []
+      microFibers: []
+      fibers: []
+      fingerprints: []
+- proto: LockerMedicine
+  entities:
+  - uid: 26
+    components:
+    - type: Transform
+      pos: -13.75395,-7.4939227
+      parent: 1
+- proto: LockerWallMedicalFilled
+  entities:
+  - uid: 422
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -14.5,-9.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+- proto: MedicalBed
+  entities:
+  - uid: 423
+    components:
+    - type: Transform
+      pos: -11.5,-4.5
+      parent: 1
+  - uid: 424
+    components:
+    - type: Transform
+      pos: -9.5,-4.5
+      parent: 1
+- proto: MedicatedSuture
+  entities:
+  - uid: 37
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 28
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+  - uid: 166
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 163
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+- proto: MedkitAdvancedFilled
+  entities:
+  - uid: 163
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 27
+    - type: Storage
+      storedItems:
+        166:
+          position: 0,0
+          _rotation: South
+        167:
+          position: 1,0
+          _rotation: South
+        164:
+          position: 2,0
+          _rotation: South
+        165:
+          position: 3,0
+          _rotation: South
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 166
+          - 167
+          - 164
+          - 165
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: UseDelay
+      delays:
+        default:
+          length: 1
+        quickInsert:
+          length: 0.5
+        storage: {}
+    - type: InsideEntityStorage
+- proto: MedkitBruteFilled
+  entities:
+  - uid: 89
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 27
+    - type: Storage
+      storedItems:
+        112:
+          position: 0,0
+          _rotation: South
+        113:
+          position: 1,0
+          _rotation: South
+        90:
+          position: 2,0
+          _rotation: South
+        101:
+          position: 3,0
+          _rotation: South
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 112
+          - 113
+          - 90
+          - 101
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: UseDelay
+      delays:
+        default:
+          length: 1
+        quickInsert:
+          length: 0.5
+        storage: {}
+    - type: InsideEntityStorage
+- proto: MedkitBurnFilled
+  entities:
+  - uid: 39
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 27
+    - type: Storage
+      storedItems:
+        62:
+          position: 0,0
+          _rotation: South
+        63:
+          position: 1,0
+          _rotation: South
+        40:
+          position: 2,0
+          _rotation: South
+        51:
+          position: 3,0
+          _rotation: South
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 62
+          - 63
+          - 40
+          - 51
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: UseDelay
+      delays:
+        default:
+          length: 1
+        quickInsert:
+          length: 0.5
+        storage: {}
+    - type: InsideEntityStorage
+- proto: MedkitCombatFilled
+  entities:
+  - uid: 28
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 27
+    - type: Storage
+      storedItems:
+        37:
+          position: 0,0
+          _rotation: South
+        38:
+          position: 1,0
+          _rotation: South
+        29:
+          position: 2,0
+          _rotation: South
+        31:
+          position: 3,0
+          _rotation: South
+        33:
+          position: 2,1
+          _rotation: South
+        35:
+          position: 3,1
+          _rotation: South
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 37
+          - 38
+          - 29
+          - 31
+          - 33
+          - 35
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: UseDelay
+      delays:
+        default:
+          length: 1
+        quickInsert:
+          length: 0.5
+        storage: {}
+    - type: Forensics
+      residues: []
+      dnas: []
+      microFibers: []
+      fibers: []
+      fingerprints: []
+    - type: InsideEntityStorage
+- proto: MedkitOxygenFilled
+  entities:
+  - uid: 114
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 27
+    - type: Storage
+      storedItems:
+        135:
+          position: 0,0
+          _rotation: South
+        134:
+          position: 1,0
+          _rotation: South
+        115:
+          position: 2,0
+          _rotation: South
+        117:
+          position: 3,0
+          _rotation: South
+        119:
+          position: 1,1
+          _rotation: South
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 135
+          - 134
+          - 115
+          - 117
+          - 119
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: UseDelay
+      delays:
+        default:
+          length: 1
+        quickInsert:
+          length: 0.5
+        storage: {}
+    - type: InsideEntityStorage
+- proto: MedkitRadiationFilled
+  entities:
+  - uid: 136
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 27
+    - type: Storage
+      storedItems:
+        137:
+          position: 0,0
+          _rotation: South
+        139:
+          position: 1,0
+          _rotation: South
+        141:
+          position: 2,0
+          _rotation: South
+        152:
+          position: 3,0
+          _rotation: South
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 137
+          - 139
+          - 141
+          - 152
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: UseDelay
+      delays:
+        default:
+          length: 1
+        quickInsert:
+          length: 0.5
+        storage: {}
+    - type: InsideEntityStorage
+- proto: MedkitToxinFilled
+  entities:
+  - uid: 64
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 27
+    - type: Storage
+      storedItems:
+        65:
+          position: 0,0
+          _rotation: South
+        67:
+          position: 1,0
+          _rotation: South
+        69:
+          position: 2,0
+          _rotation: South
+        71:
+          position: 3,0
+          _rotation: South
+        82:
+          position: 0,1
+          _rotation: South
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 65
+          - 67
+          - 69
+          - 71
+          - 82
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: UseDelay
+      delays:
+        default:
+          length: 1
+        quickInsert:
+          length: 0.5
+        storage: {}
+    - type: InsideEntityStorage
+- proto: Multitool
+  entities:
+  - uid: 22
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 11
+    - type: NetworkConfigurator
+      lastUseAttempt: -859.2171123
+    - type: EmitSoundOnCollide
+      nextSound: -838.9437311
+    - type: Physics
+      canCollide: False
+- proto: NitrogenCanister
+  entities:
+  - uid: 425
+    components:
+    - type: Transform
+      anchored: True
+      pos: -7.5,-7.5
+      parent: 1
+    - type: Physics
+      bodyType: Static
+- proto: NitrousOxideTankFilled
+  entities:
+  - uid: 426
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -13.4569435,-12.3842
+      parent: 1
+  - uid: 427
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -13.6288185,-12.587325
+      parent: 1
+- proto: Ointment
+  entities:
+  - uid: 62
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 39
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+  - uid: 63
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 39
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+- proto: OperatingTable
+  entities:
+  - uid: 428
+    components:
+    - type: Transform
+      pos: -12.5,-9.5
+      parent: 1
+- proto: OxygenCanister
+  entities:
+  - uid: 429
+    components:
+    - type: Transform
+      anchored: True
+      pos: -8.5,-7.5
+      parent: 1
+    - type: Physics
+      bodyType: Static
+- proto: PaperBin5
+  entities:
+  - uid: 430
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -11.5,-2.5
+      parent: 1
+- proto: PaperInterdyneForm
+  entities:
+  - uid: 3
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: тарифный план "Red Wings"
+    - type: Transform
+      parent: 2
+    - type: Flammable
+      nextUpdate: -128.8971972
+    - type: Paper
+      stampState: paper_stamp-syndicate
+      stampedBy:
+      - stampedColor: '#902922FF'
+        stampedName: stamp-component-stamped-name-redwings
+      - stampedColor: '#3B704FFF'
+        stampedName: Interdyne Pharmaceutics
+      content: >-
+        [head=1]  ────────────/[/head]
+
+        [head=1]/[/head][color=#224030]████[color=#36664c]████[color=#44805f]████[color=#591a2a]████[color=#3f1329]██████[color=#280b1a]███[head=2]▌[/head]
+
+        [head=1]  [/head][color=white]░░[color=#224030]████[color=#36664c]████[color=#44805f]████[color=#591a2a]████[color=#a52f29]██[color=#88242d]██[color=#3f1329]██[color=#280b1a]█[head=2]▌[/head]
+
+        [head=1]|[/head][color=white]░░[color=#224030]████[color=#36664c]████[color=#44805f]████[color=#591a2a]██[color=#a52f29]████[color=#88242d]██[color=#3f1329]██[color=#280b1a]█[head=2]▌[/head] [color=#a52f29] [head=1]R[/head][head=2]ED[/head][color=#0]
+
+        [head=1]  [/head][color=white]░░[color=#224030]████[color=#36664c]████[color=#44805f]████[color=#591a2a]████[color=#a52f29]██[color=#88242d]██[color=#3f1329]██[color=#280b1a]█[head=2]▌[color=#591a2a][/head][bold][head=1]WINGS[/head][/bold][color=#0]
+
+        [head=1]\\[/head][color=#224030]████[color=#36664c]████[color=#44805f]████[color=#591a2a]████[color=#3f1329]██████[color=#280b1a]███[head=2]▌[/head]
+
+        [color=#0][head=1] ______________________\\[/head]
+
+
+        [color=#0][color=#902922]  [head=2]══════════════════[/color][head=1]|[/head][color=#902922]════════[/head][/color]
+
+
+        [head=3][bolditalic][color=#902922]RED WINGS[/color][/bolditalic][/head][italic][color=#4e1723] - это элитный отряд[/color]      [head=1]|[/head]
+
+        [color=#4e1723]быстрого медицинского реагирования[/color][head=1]|[/head][head=3][bolditalic] [color=#2f593f]"Приедем[/color][/bolditalic][/head]
+
+        [color=#4e1723]и спасения, который готов работать[/color][head=1]|[/head][head=3][color=#2f593f][bolditalic]  за[/bolditalic][/color] [head=2][bolditalic][color=#1e3828]СЕМЬ[/color][/bolditalic][/head][/head]
+
+        [color=#4e1723]на [head=2][italic]ВАС[/italic][/head] за небольшую сумму.[/color]             [head=2]   [/head][head=1]|[/head][head=3][bolditalic][color=#2f593f]    минут,[/color][/bolditalic][/head]
+            [color=#4e1723]Наша задача - найти, спасти и   [/color][head=3] [/head][head=2][/head][head=1]   |[/head][head=3][bolditalic][color=#2f593f]   или мы[/color][/bolditalic][/head]
+        [color=#4e1723]эвакуировать вас из любой ситуации.[/color][head=3] [/head][head=2][/head][head=1]|[/head][head=3][bolditalic][color=#2f593f]   вернем  [/color][/bolditalic][/head]
+
+        [color=#4e1723]Мы действуем быстро, точно и без[/color]    [head=3] [/head][head=2][/head][head=1]|[/head][head=3][bolditalic][color=#2f593f]      вам  [/color][/bolditalic][/head]
+
+        [color=#4e1723]лишних вопросов.[/color]                                    [head=3]   [/head][head=1]|[/head][head=3][bolditalic][color=#2f593f]  деньги!"  [/color][/bolditalic][/head]
+             [color=#772026]Пока другие оценивают риски,[/color]         [head=3] [/head][head=2][/head][head=1]|[/head]
+             [head=3][bolditalic][color=#902922]RED WINGS[/color][/bolditalic][/head][head=3][bolditalic] уже в пути.[/bolditalic][/head]              [head=3][/head][head=1]|[/head][/italic]
+
+        [color=#0][color=#902922]  [head=2]══════════════════[/color][head=1]|[/head][color=#902922]════════[/head][/color]
+
+                                                                                  [head=1]|[/head][color=#d4d7df]██[color=#b0b2cd]██[color=#d4d7df]██[color=black]
+        [head=2]   [color=#393c59]СЕРЕБРЯНЫЙ ТАРИФ[/color]    [/head] [head=3] [/head][head=1]|[/head][color=#b0b2cd]██[color=#898ba2]██[color=#b0b2cd]██[color=black]
+
+        [italic][color=#393c59]Необходимый минимум.[/italic]                             [head=1]|[/head][color=#d4d7df]██[color=#b0b2cd]██[color=#d4d7df]██[color=black]
+
+
+        ⬢ [bold][color=#224030]Время прибытия[/bold] - [italic][color=#36664c]До 7 минут[/italic][/color][/color]
+
+
+        ⬢ [bold][color=#224030]Включено:[/bold][color=#36664c]
+            [color=black]⭘[/color] [italic]Стабилизация состояния клиента[/italic]
+            [color=black]⭘[/color] [italic]Транспортировка в ближайшую больницу[/italic]
+            [color=black]⭘[/color] [italic]Оказание мед. услуг на месте[/italic]
+            [color=black]⭘[/color] [italic]Имплант отслеживания[/italic]
+            [color=black]⭘[/color] [italic]Сбор ДНК для отслеживания клиента[/italic][/color][/color]
+
+        ⬢ [bold][color=#224030]Расходы на патроны, топливо, сложные операции[/bold]: [italic][color=#36664c]Оплачиваются отдельно.[/italic][/color][/color]
+
+
+        ⚊ [head=2][color=#224030][bold]ЦЕНА:[/bold][/head][color=#36664c] [italic]5000 кредитов.[/italic][/color][/color]
+
+
+        [color=#0][color=#902922]  [head=2]══════════════════[/color][head=1]|[/head][color=#902922]════════[/head][/color]
+
+                                                                                  [head=1]|[/head][color=#dca01b]██[color=#aa6300]██[color=#dca01b]██[color=black]
+        [head=2]   [color=#703200]ЗОЛОТОЙ ТАРИФ[/color]            [/head][head=3][/head][head=1]|[/head][color=#aa6300]██[color=#703200]██[color=#aa6300]██[color=#703200]
+
+        [italic]Повышенный комфорт.[/italic]                           [head=3] [/head][head=1][color=black]|[/head][color=#dca01b]██[color=#aa6300]██[color=#dca01b]██[color=black]
+
+
+        ⬢ [bold][color=#224030]Время прибытия[/bold] - [italic][color=#36664c]До 7 минут[/italic][/color][/color]
+
+
+        ⬢ [bold][color=#224030]Включено:[/bold][color=#36664c]
+            [color=black]⭘[/color] [italic]Все, что предоставляет [color=#393c59]Серебряный тариф[/color].[/italic]
+            [color=black]⭘[/color] [italic]Более высокая приоритетность вызова[/italic]
+
+        [color=black]⬢ [bold][color=#224030]Расходы на патроны, топливо, сложные операции[/bold]: [italic][color=#36664c]Частичное покрытие.[/italic][/color][/color]
+
+
+        ⚊ [head=2][color=#224030][bold]ЦЕНА:[/bold][/color][/head][color=#36664c] [italic]10000 кредитов.[/italic][/color]
+
+
+        [color=#0][color=#902922]  [head=2]══════════════════[/color][head=1]|[/head][color=#902922]════════[/head][/color]
+
+                                                                                  [head=1]|[/head][color=#8d95a1]██[color=#565c71]██[color=#8d95a1]██[color=black]
+        [head=3] [/head][head=2]  [color=#393c59]ПЛАТИНОВЫЙ ТАРИФ[/color]   [/head][head=3][/head][head=1]|[/head][color=#565c71]██[color=#393c59]██[color=#565c71]██[color=#393c59]
+
+        [italic]  Для элитых клиентов.[/italic]                           [head=3] [/head][head=1][color=black]|[/head][color=#8d95a1]██[color=#565c71]██[color=#8d95a1]██[color=black]
+
+
+        ⬢ [bold][color=#224030]Время прибытия[/bold] - [italic][color=#36664c]Около 3 минут[/italic][/color][/color]
+
+
+        ⬢ [bold][color=#224030]Включено:[/bold][color=#36664c]
+            [color=black]⭘[/color] [italic]Все, что предоставляет [color=#703200]Золотой тариф[/color].[/italic]
+            [color=black]⭘[/color] [italic]Круглосуточный мониторинг здоровья[/italic]
+            [color=black]⭘[/color] [italic]Бесплатные хирургические процедуры[/italic]
+            [color=black]⭘[/color] [italic]Оказание мед. помощи лучшими специалистами[/italic]
+
+        [color=black]⬢ [bold][color=#224030]Расходы на патроны, топливо, сложные операции[/bold]: [italic][color=#36664c]Бесплатная доставка, частичное покрытие остальных пунктов.[/italic][/color][/color]
+
+
+        ⚊ [head=2][color=#224030][bold]ЦЕНА:[/bold][/color][/head][color=#36664c] [italic]15000 кредитов.[/italic][/color]
+
+
+
+        [color=#0][color=#902922]  [head=2]════════════════════════════[/head][/color]
+
+        [italic][color=#4e1723]    Подразделение [head=3][bolditalic][color=#902922]RED WINGS[/color][/bolditalic][/head] не является военной организацией. Отряд не заинтересован в ведении боевых действий против крупных корпораций. В случае возникновения конфликта между клиентом и представителями корпорации и/или правоохранительными органами данной корпорации, отряд имеет право не вступать в данный конфликт. В случае ведения активных боевых действий клиентом против данных корпораций, отряд имеет право аннулировать контракт без компенсаций.
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1544.3803711
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PolygonShape
+            radius: 0.01
+            vertices:
+            - -0.25,-0.25
+            - 0.25,-0.25
+            - 0.25,0.25
+            - -0.25,0.25
+          mask:
+          - Impassable
+          - HighImpassable
+          layer: []
+          density: 20
+          hard: True
+          restitution: 0.3
+          friction: 0.2
+        flammable:
+          shape: !type:PhysShapeCircle
+            radius: 0.35
+            position: 0,0
+          mask:
+          - TableLayer
+          - HighImpassable
+          - LowImpassable
+          - BulletImpassable
+          - InteractImpassable
+          - Opaque
+          layer: []
+          density: 1
+          hard: False
+          restitution: 0
+          friction: 0.4
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 4
+    - type: Forensics
+      residues: []
+      dnas: []
+      microFibers: []
+      fibers: []
+      fingerprints: []
+  - uid: 5
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: ИНТ-МЕД-СТР-РВ
+    - type: Transform
+      parent: 2
+    - type: Flammable
+      nextUpdate: -128.8971972
+    - type: Paper
+      content: >-
+        [bold]Форма ИНТ-МЕД-СТР-РВ[/bold]
+
+        [head=2]Договор о заключении медицинской страховки[/head]
+
+        [head=3]Отряд экстренного реагирования «Redwings»[/head]
+
+
+        [italic]Дата оформления: [/italic]
+
+
+        Настоящим документом подтверждается заключение договора медицинского страхования между нижеподписавшимся лицом и лицензированным медицинско-эвакуационным отрядом экстренного реагирования «Redwings», действующим в рамках корпоративных протоколов NanoTrasen.
+
+
+        [b]Данные застрахованного лица:[/b]
+
+        Ф.И.О.: 
+
+        ДНК: 
+
+
+        [b]Уровень медицинской страховки:[/b]
+
+
+        Серебряный — базовая экстренная медицинская помощь, стабилизация состояния, эвакуация в ближайший медицинский отсек.
+
+        Золотой — расширенная медицинская помощь, приоритетная эвакуация, хирургическое вмешательство при угрозе жизни.
+
+        Платиновый — максимальный приоритет реагирования, полный спектр медицинских услуг, восстановительные процедуры и защита пациента в зоне конфликта.
+
+
+        [b]Дополнительные условия:[/b]
+
+        Реагирование отряда «Redwings» осуществляется при наличии технической возможности и подтверждённого сигнала бедствия.
+
+        Уровень вмешательства и приоритет эвакуации напрямую зависят от выбранного страхового пакета.
+
+        Отряд «Redwings» не несёт ответственности за невозможность оказания помощи в условиях тотального уничтожения объекта, потери связи или действия форс-мажорных обстоятельств.
+
+        Попытка умышленного злоупотребления условиями страховки влечёт за собой её немедленное аннулирование.
+
+
+        Подтверждаю, что ознакомлен(а) с условиями страхования и принимаю их в полном объёме.
+
+
+        Подпись застрахованного лица:
+
+
+        [italic]Место для печати[/italic]
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1556.5320884
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PolygonShape
+            radius: 0.01
+            vertices:
+            - -0.25,-0.25
+            - 0.25,-0.25
+            - 0.25,0.25
+            - -0.25,0.25
+          mask:
+          - Impassable
+          - HighImpassable
+          layer: []
+          density: 20
+          hard: True
+          restitution: 0.3
+          friction: 0.2
+        flammable:
+          shape: !type:PhysShapeCircle
+            radius: 0.35
+            position: 0,0
+          mask:
+          - TableLayer
+          - HighImpassable
+          - LowImpassable
+          - BulletImpassable
+          - InteractImpassable
+          - Opaque
+          layer: []
+          density: 1
+          hard: False
+          restitution: 0
+          friction: 0.4
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 6
+    - type: Forensics
+      residues: []
+      dnas: []
+      microFibers: []
+      fibers: []
+      fingerprints: []
+  - uid: 7
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: ИНТ-МЕД-СТР-РВ
+    - type: Transform
+      parent: 2
+    - type: Flammable
+      nextUpdate: -128.8971972
+    - type: Paper
+      content: >-
+        [bold]Форма ИНТ-МЕД-СТР-РВ[/bold]
+
+        [head=2]Договор о заключении медицинской страховки[/head]
+
+        [head=3]Отряд экстренного реагирования «Redwings»[/head]
+
+
+        [italic]Дата оформления: [/italic]
+
+
+        Настоящим документом подтверждается заключение договора медицинского страхования между нижеподписавшимся лицом и лицензированным медицинско-эвакуационным отрядом экстренного реагирования «Redwings», действующим в рамках корпоративных протоколов NanoTrasen.
+
+
+        [b]Данные застрахованного лица:[/b]
+
+        Ф.И.О.: 
+
+        ДНК: 
+
+
+        [b]Уровень медицинской страховки:[/b]
+
+
+        Серебряный — базовая экстренная медицинская помощь, стабилизация состояния, эвакуация в ближайший медицинский отсек.
+
+        Золотой — расширенная медицинская помощь, приоритетная эвакуация, хирургическое вмешательство при угрозе жизни.
+
+        Платиновый — максимальный приоритет реагирования, полный спектр медицинских услуг, восстановительные процедуры и защита пациента в зоне конфликта.
+
+
+        [b]Дополнительные условия:[/b]
+
+        Реагирование отряда «Redwings» осуществляется при наличии технической возможности и подтверждённого сигнала бедствия.
+
+        Уровень вмешательства и приоритет эвакуации напрямую зависят от выбранного страхового пакета.
+
+        Отряд «Redwings» не несёт ответственности за невозможность оказания помощи в условиях тотального уничтожения объекта, потери связи или действия форс-мажорных обстоятельств.
+
+        Попытка умышленного злоупотребления условиями страховки влечёт за собой её немедленное аннулирование.
+
+
+        Подтверждаю, что ознакомлен(а) с условиями страхования и принимаю их в полном объёме.
+
+
+        Подпись застрахованного лица:
+
+
+        [italic]Место для печати[/italic]
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1556.5320884
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PolygonShape
+            radius: 0.01
+            vertices:
+            - -0.25,-0.25
+            - 0.25,-0.25
+            - 0.25,0.25
+            - -0.25,0.25
+          mask:
+          - Impassable
+          - HighImpassable
+          layer: []
+          density: 20
+          hard: True
+          restitution: 0.3
+          friction: 0.2
+        flammable:
+          shape: !type:PhysShapeCircle
+            radius: 0.35
+            position: 0,0
+          mask:
+          - TableLayer
+          - HighImpassable
+          - LowImpassable
+          - BulletImpassable
+          - InteractImpassable
+          - Opaque
+          layer: []
+          density: 1
+          hard: False
+          restitution: 0
+          friction: 0.4
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 8
+    - type: Forensics
+      residues: []
+      dnas: []
+      microFibers:
+      - серые плазматиеские волокна
+      fibers: []
+      fingerprints: []
+  - uid: 9
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: ИНТ-МЕД-СТР-РВ
+    - type: Transform
+      parent: 2
+    - type: Flammable
+      nextUpdate: -128.8971972
+    - type: Paper
+      content: >-
+        [bold]Форма ИНТ-МЕД-СТР-РВ[/bold]
+
+        [head=2]Договор о заключении медицинской страховки[/head]
+
+        [head=3]Отряд экстренного реагирования «Redwings»[/head]
+
+
+        [italic]Дата оформления: [/italic]
+
+
+        Настоящим документом подтверждается заключение договора медицинского страхования между нижеподписавшимся лицом и лицензированным медицинско-эвакуационным отрядом экстренного реагирования «Redwings», действующим в рамках корпоративных протоколов NanoTrasen.
+
+
+        [b]Данные застрахованного лица:[/b]
+
+        Ф.И.О.: 
+
+        ДНК: 
+
+
+        [b]Уровень медицинской страховки:[/b]
+
+
+        Серебряный — базовая экстренная медицинская помощь, стабилизация состояния, эвакуация в ближайший медицинский отсек.
+
+        Золотой — расширенная медицинская помощь, приоритетная эвакуация, хирургическое вмешательство при угрозе жизни.
+
+        Платиновый — максимальный приоритет реагирования, полный спектр медицинских услуг, восстановительные процедуры и защита пациента в зоне конфликта.
+
+
+        [b]Дополнительные условия:[/b]
+
+        Реагирование отряда «Redwings» осуществляется при наличии технической возможности и подтверждённого сигнала бедствия.
+
+        Уровень вмешательства и приоритет эвакуации напрямую зависят от выбранного страхового пакета.
+
+        Отряд «Redwings» не несёт ответственности за невозможность оказания помощи в условиях тотального уничтожения объекта, потери связи или действия форс-мажорных обстоятельств.
+
+        Попытка умышленного злоупотребления условиями страховки влечёт за собой её немедленное аннулирование.
+
+
+        Подтверждаю, что ознакомлен(а) с условиями страхования и принимаю их в полном объёме.
+
+
+        Подпись застрахованного лица:
+
+
+        [italic]Место для печати[/italic]
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1556.5320884
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PolygonShape
+            radius: 0.01
+            vertices:
+            - -0.25,-0.25
+            - 0.25,-0.25
+            - 0.25,0.25
+            - -0.25,0.25
+          mask:
+          - Impassable
+          - HighImpassable
+          layer: []
+          density: 20
+          hard: True
+          restitution: 0.3
+          friction: 0.2
+        flammable:
+          shape: !type:PhysShapeCircle
+            radius: 0.35
+            position: 0,0
+          mask:
+          - TableLayer
+          - HighImpassable
+          - LowImpassable
+          - BulletImpassable
+          - InteractImpassable
+          - Opaque
+          layer: []
+          density: 1
+          hard: False
+          restitution: 0
+          friction: 0.4
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 10
+    - type: Forensics
+      residues: []
+      dnas: []
+      microFibers:
+      - серые плазматиеские волокна
+      fibers: []
+      fingerprints: []
+  - uid: 178
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      pos: -11.28006,3.4414134
+      parent: 1
+    - type: Flammable
+      nextUpdate: -128.8971972
+    - type: Paper
+      stampState: paper_stamp-syndicate
+      stampedBy:
+      - stampedColor: '#902922FF'
+        stampedName: stamp-component-stamped-name-redwings
+      - stampedColor: '#3B704FFF'
+        stampedName: Interdyne Pharmaceutics
+      content: >-
+        [bold]Форма ИНТ-МЕД-РВ-УВЕД[/bold]
+
+        [head=2]Служебное уведомление оперативному составу[/head]
+
+        [head=3]Interdyne Pharmaceutics — Отряд «Redwings»[/head]
+
+
+        [italic]Гриф: Для служебного пользования[/italic]
+
+
+        Коллеги, напоминаю основные правила работы отряда во время дежурства. Просьба внимательно ознакомиться и соблюдать - это напрямую влияет на работу всей команды и компании в целом.
+
+        По прибытию в сектор позаботьтесь об имплантировании клиентов, указанных в реестре страховых контрактов. Без установленного импланта вы не будете получать сигнал о критическом состоянии клиента, что напрямую влияет на скорость реагирования и выполнение контракта.
+
+        Все клиенты, указанные в реестре страховых контрактов,  обязательно должны их иметь. Если имплант отсутствует - в случае потери клиента это ваша зона ответственности.
+
+
+        Работа ведётся строго с клиентами Interdyne. Спасение, реанимация и экстренная медицинская помощь лицам без действующей страховки запрещена. При этом вы можете оказывать иные услуги - продажа медикаментов, консультации, осмотры - если это не мешает выполнению контрактов.
+
+        Помните, что наши клиенты - это наши клиенты. Любое вмешательство в процесс лечения или эвакуации со стороны третьих лиц рассматривается как препятствие нашей работе. Действуйте по ситуации: Сначала используйте несиловые методы, но при наличии угрозы вам или клиенту допускается эскалация вплоть до летальных мер.
+
+
+        При работе в зонах других корпораций избегайте лишних конфликтов. Нам не нужны дополнительные разбирательства и расходы на юристов - работайте аккуратно.
+
+        Также напоминаем во время дежурства шаттл и всё имущество на нём закреплено за вами. Без веской причины его не покидаем. В случае утраты имущества ответственность ложится на отряд.
+
+
+        [italic]Место для печати[/italic]
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -511.5456282
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PolygonShape
+            radius: 0.01
+            vertices:
+            - -0.25,-0.25
+            - 0.25,-0.25
+            - 0.25,0.25
+            - -0.25,0.25
+          mask:
+          - Impassable
+          - HighImpassable
+          layer: []
+          density: 20
+          hard: True
+          restitution: 0.3
+          friction: 0.2
+        flammable:
+          shape: !type:PhysShapeCircle
+            radius: 0.35
+            position: 0,0
+          mask:
+          - TableLayer
+          - HighImpassable
+          - LowImpassable
+          - BulletImpassable
+          - InteractImpassable
+          - Opaque
+          layer: []
+          density: 1
+          hard: False
+          restitution: 0
+          friction: 0.4
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 179
+    - type: Forensics
+      residues: []
+      dnas: []
+      microFibers:
+      - серые плазматиеские волокна
+      fibers: []
+      fingerprints: []
+- proto: PenSignaller
+  entities:
+  - uid: 431
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -12.3752365,-2.4411178
+      parent: 1
+- proto: PhotocopierBase
+  entities:
+  - uid: 432
+    components:
+    - type: Transform
+      pos: -12.5,1.5
+      parent: 1
+- proto: PillCanisterCharcoal
+  entities:
+  - uid: 82
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: баночка для таблеток (charcoal 10u)
+    - type: Transform
+      parent: 64
+    - type: Storage
+      storedItems:
+        83:
+          position: 0,0
+          _rotation: South
+        85:
+          position: 1,0
+          _rotation: South
+        87:
+          position: 2,0
+          _rotation: South
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 83
+          - 85
+          - 87
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: NameModifier
+      baseName: баночка для таблеток
+    - type: UseDelay
+      delays:
+        default:
+          length: 1
+        quickInsert:
+          length: 0.5
+        storage: {}
+- proto: PillCanisterCopper
+  entities:
+  - uid: 101
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: баночка для таблеток (copper 10u)
+    - type: Transform
+      parent: 89
+    - type: Storage
+      storedItems:
+        102:
+          position: 0,0
+          _rotation: South
+        104:
+          position: 1,0
+          _rotation: South
+        106:
+          position: 2,0
+          _rotation: South
+        108:
+          position: 3,0
+          _rotation: South
+        110:
+          position: 4,0
+          _rotation: South
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 102
+          - 104
+          - 106
+          - 108
+          - 110
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: NameModifier
+      baseName: баночка для таблеток
+    - type: UseDelay
+      delays:
+        default:
+          length: 1
+        quickInsert:
+          length: 0.5
+        storage: {}
+- proto: PillCanisterDermaline
+  entities:
+  - uid: 51
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: баночка для таблеток (dermaline 10u)
+    - type: Transform
+      parent: 39
+    - type: Storage
+      storedItems:
+        52:
+          position: 0,0
+          _rotation: South
+        54:
+          position: 1,0
+          _rotation: South
+        56:
+          position: 2,0
+          _rotation: South
+        58:
+          position: 3,0
+          _rotation: South
+        60:
+          position: 4,0
+          _rotation: South
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 52
+          - 54
+          - 56
+          - 58
+          - 60
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: NameModifier
+      baseName: баночка для таблеток
+    - type: UseDelay
+      delays:
+        default:
+          length: 1
+        quickInsert:
+          length: 0.5
+        storage: {}
+- proto: PillCanisterDexalin
+  entities:
+  - uid: 119
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: баночка для таблеток (dexalin 10u)
+    - type: Transform
+      parent: 114
+    - type: Storage
+      storedItems:
+        120:
+          position: 0,0
+          _rotation: South
+        122:
+          position: 1,0
+          _rotation: South
+        124:
+          position: 2,0
+          _rotation: South
+        126:
+          position: 3,0
+          _rotation: South
+        128:
+          position: 4,0
+          _rotation: South
+        130:
+          position: 0,1
+          _rotation: South
+        132:
+          position: 1,1
+          _rotation: South
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 120
+          - 122
+          - 124
+          - 126
+          - 128
+          - 130
+          - 132
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: NameModifier
+      baseName: баночка для таблеток
+    - type: UseDelay
+      delays:
+        default:
+          length: 1
+        quickInsert:
+          length: 0.5
+        storage: {}
+- proto: PillCanisterDylovene
+  entities:
+  - uid: 71
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: баночка для таблеток (dylovene 10u)
+    - type: Transform
+      parent: 64
+    - type: Storage
+      storedItems:
+        72:
+          position: 0,0
+          _rotation: South
+        74:
+          position: 1,0
+          _rotation: South
+        76:
+          position: 2,0
+          _rotation: South
+        78:
+          position: 3,0
+          _rotation: South
+        80:
+          position: 4,0
+          _rotation: South
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 72
+          - 74
+          - 76
+          - 78
+          - 80
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: NameModifier
+      baseName: баночка для таблеток
+    - type: UseDelay
+      delays:
+        default:
+          length: 1
+        quickInsert:
+          length: 0.5
+        storage: {}
+- proto: PillCanisterHyronalin
+  entities:
+  - uid: 152
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: баночка для таблеток (hyronalin 10u)
+    - type: Transform
+      parent: 136
+    - type: Storage
+      storedItems:
+        153:
+          position: 0,0
+          _rotation: South
+        155:
+          position: 1,0
+          _rotation: South
+        157:
+          position: 2,0
+          _rotation: South
+        159:
+          position: 3,0
+          _rotation: South
+        161:
+          position: 4,0
+          _rotation: South
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 153
+          - 155
+          - 157
+          - 159
+          - 161
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: NameModifier
+      baseName: баночка для таблеток
+    - type: UseDelay
+      delays:
+        default:
+          length: 1
+        quickInsert:
+          length: 0.5
+        storage: {}
+- proto: PillCanisterIron
+  entities:
+  - uid: 90
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: баночка для таблеток (iron 10u)
+    - type: Transform
+      parent: 89
+    - type: Storage
+      storedItems:
+        91:
+          position: 0,0
+          _rotation: South
+        93:
+          position: 1,0
+          _rotation: South
+        95:
+          position: 2,0
+          _rotation: South
+        97:
+          position: 3,0
+          _rotation: South
+        99:
+          position: 4,0
+          _rotation: South
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 91
+          - 93
+          - 95
+          - 97
+          - 99
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: NameModifier
+      baseName: баночка для таблеток
+    - type: UseDelay
+      delays:
+        default:
+          length: 1
+        quickInsert:
+          length: 0.5
+        storage: {}
+- proto: PillCanisterKelotane
+  entities:
+  - uid: 40
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: баночка для таблеток (kelotane 10u)
+    - type: Transform
+      parent: 39
+    - type: Storage
+      storedItems:
+        41:
+          position: 0,0
+          _rotation: South
+        43:
+          position: 1,0
+          _rotation: South
+        45:
+          position: 2,0
+          _rotation: South
+        47:
+          position: 3,0
+          _rotation: South
+        49:
+          position: 4,0
+          _rotation: South
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 41
+          - 43
+          - 45
+          - 47
+          - 49
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: NameModifier
+      baseName: баночка для таблеток
+    - type: UseDelay
+      delays:
+        default:
+          length: 1
+        quickInsert:
+          length: 0.5
+        storage: {}
+- proto: PillCanisterPotassiumIodide
+  entities:
+  - uid: 141
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: баночка для таблеток (potassium iodide 10u)
+    - type: Transform
+      parent: 136
+    - type: Storage
+      storedItems:
+        142:
+          position: 0,0
+          _rotation: South
+        144:
+          position: 1,0
+          _rotation: South
+        146:
+          position: 2,0
+          _rotation: South
+        148:
+          position: 3,0
+          _rotation: South
+        150:
+          position: 4,0
+          _rotation: South
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 142
+          - 144
+          - 146
+          - 148
+          - 150
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: NameModifier
+      baseName: баночка для таблеток
+    - type: UseDelay
+      delays:
+        default:
+          length: 1
+        quickInsert:
+          length: 0.5
+        storage: {}
+- proto: PillCharcoal
+  entities:
+  - uid: 83
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 82
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 84
+  - uid: 85
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 82
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 86
+  - uid: 87
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 82
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 88
+- proto: PillCopper
+  entities:
+  - uid: 102
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 101
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 103
+  - uid: 104
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 101
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 105
+  - uid: 106
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 101
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 107
+  - uid: 108
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 101
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 109
+  - uid: 110
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 101
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 111
+- proto: PillDermaline
+  entities:
+  - uid: 52
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 51
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 53
+  - uid: 54
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 51
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 55
+  - uid: 56
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 51
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 57
+  - uid: 58
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 51
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 59
+  - uid: 60
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 51
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 61
+- proto: PillDexalin
+  entities:
+  - uid: 120
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 119
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 121
+  - uid: 122
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 119
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 123
+  - uid: 124
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 119
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 125
+  - uid: 126
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 119
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 127
+  - uid: 128
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 119
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 129
+  - uid: 130
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 119
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 131
+  - uid: 132
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 119
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 133
+- proto: PillDylovene
+  entities:
+  - uid: 72
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 71
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 73
+  - uid: 74
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 71
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 75
+  - uid: 76
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 71
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 77
+  - uid: 78
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 71
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 79
+  - uid: 80
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 71
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 81
+- proto: PillHyronalin
+  entities:
+  - uid: 153
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 152
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 154
+  - uid: 155
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 152
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 156
+  - uid: 157
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 152
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 158
+  - uid: 159
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 152
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 160
+  - uid: 161
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 152
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 162
+- proto: PillIron
+  entities:
+  - uid: 91
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 90
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 92
+  - uid: 93
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 90
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 94
+  - uid: 95
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 90
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 96
+  - uid: 97
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 90
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 98
+  - uid: 99
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 90
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 100
+- proto: PillKelotane
+  entities:
+  - uid: 41
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 40
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 42
+  - uid: 43
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 40
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 44
+  - uid: 45
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 40
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 46
+  - uid: 47
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 40
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 48
+  - uid: 49
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 40
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 50
+- proto: PillPotassiumIodide
+  entities:
+  - uid: 142
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 141
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 143
+  - uid: 144
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 141
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 145
+  - uid: 146
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 141
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 147
+  - uid: 148
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 141
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 149
+  - uid: 150
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 141
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 151
+- proto: PosterContrabandInterdyne
+  entities:
+  - uid: 433
+    components:
+    - type: Transform
+      pos: -8.5,0.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+- proto: PosterLegitPeriodicTable
+  entities:
+  - uid: 434
+    components:
+    - type: Transform
+      pos: -13.5,0.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+- proto: PottedPlant12
+  entities:
+  - uid: 435
+    components:
+    - type: Transform
+      pos: -8.72723,3.195867
+      parent: 1
+- proto: PottedPlant8
+  entities:
+  - uid: 436
+    components:
+    - type: Transform
+      pos: -12.242855,3.211492
+      parent: 1
+- proto: Poweredlight
+  entities:
+  - uid: 437
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -6.5,-4.5
+      parent: 1
+  - uid: 438
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -14.5,-4.5
+      parent: 1
+  - uid: 439
+    components:
+    - type: Transform
+      pos: -8.5,-0.5
+      parent: 1
+  - uid: 440
+    components:
+    - type: Transform
+      pos: -8.5,-7.5
+      parent: 1
+  - uid: 441
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -12.5,-12.5
+      parent: 1
+  - uid: 442
+    components:
+    - type: Transform
+      pos: -10.5,3.5
+      parent: 1
+  - uid: 443
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -11.5,-0.5
+      parent: 1
+- proto: Rack
+  entities:
+  - uid: 444
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -9.5,-9.5
+      parent: 1
+- proto: RadAutoInjector
+  entities:
+  - uid: 139
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 136
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - pen
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@pen: !type:ContainerSlot
+          ent: 140
+- proto: RedWingsClientPaper
+  entities:
+  - uid: 445
+    components:
+    - type: Transform
+      pos: -8.572505,1.5745182
+      parent: 1
+- proto: RedWingsMedicSpawner
+  entities:
+  - uid: 446
+    components:
+    - type: Transform
+      pos: -12.5,-1.5
+      parent: 1
+- proto: RedWingsOfficerSpawner
+  entities:
+  - uid: 447
+    components:
+    - type: Transform
+      pos: -8.5,2.5
+      parent: 1
+- proto: RedWingsPilotSpawner
+  entities:
+  - uid: 448
+    components:
+    - type: Transform
+      pos: -10.5,2.5
+      parent: 1
+- proto: RegenerativeMesh
+  entities:
+  - uid: 38
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 28
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+  - uid: 167
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 163
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+- proto: ReinforcedUraniumWindow
+  entities:
+  - uid: 449
+    components:
+    - type: Transform
+      pos: -9.5,4.5
+      parent: 1
+  - uid: 450
+    components:
+    - type: Transform
+      pos: -11.5,4.5
+      parent: 1
+  - uid: 451
+    components:
+    - type: Transform
+      pos: -10.5,4.5
+      parent: 1
+  - uid: 452
+    components:
+    - type: Transform
+      pos: -13.5,-6.5
+      parent: 1
+  - uid: 453
+    components:
+    - type: Transform
+      pos: -12.5,-6.5
+      parent: 1
+- proto: ReinforcedUraniumWindowDiagonal
+  entities:
+  - uid: 454
+    components:
+    - type: Transform
+      pos: -12.5,4.5
+      parent: 1
+  - uid: 455
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -8.5,4.5
+      parent: 1
+  - uid: 456
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -8.5,3.5
+      parent: 1
+  - uid: 457
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -12.5,3.5
+      parent: 1
+- proto: RubberStampRedwings
+  entities:
+  - uid: 458
+    components:
+    - type: Transform
+      pos: -8.332447,1.7648911
+      parent: 1
+- proto: Screwdriver
+  entities:
+  - uid: 23
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 11
+    - type: MeleeWeapon
+      nextAttack: -838.9437311
+    - type: RandomSprite
+      selected:
+        enum.DamageStateVisualLayers.Base:
+        - screwdriver
+        - '#D5188DFF'
+    - type: EmitSoundOnCollide
+      nextSound: -838.9437311
+    - type: Physics
+      canCollide: False
+- proto: ShelfChemistry
+  entities:
+  - uid: 168
+    components:
+    - type: Transform
+      pos: -12.5,0.5
+      parent: 1
+    - type: Storage
+      storedItems:
+        169:
+          position: 0,0
+          _rotation: South
+        171:
+          position: 2,0
+          _rotation: South
+        173:
+          position: 4,0
+          _rotation: South
+        175:
+          position: 5,0
+          _rotation: South
+        177:
+          position: 4,4
+          _rotation: East
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 169
+          - 171
+          - 173
+          - 175
+          - 177
+    - type: Fixtures
+      fixtures: {}
+- proto: SignChem
+  entities:
+  - uid: 459
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -14.5,-2.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+- proto: SignEngineering
+  entities:
+  - uid: 460
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -6.5,-6.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+- proto: SignSurgery
+  entities:
+  - uid: 461
+    components:
+    - type: Transform
+      pos: -14.5,-6.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+- proto: SinkStemlessWater
+  entities:
+  - uid: 462
+    components:
+    - type: Transform
+      pos: -11.5,-0.5
+      parent: 1
+- proto: SmartFridge
+  entities:
+  - uid: 463
+    components:
+    - type: Transform
+      pos: -11.5,-12.5
+      parent: 1
+    - type: AccessReader
+      accessListsOriginal: []
+      access:
+      - - Interdyne
+  - uid: 464
+    components:
+    - type: Transform
+      pos: -13.5,-2.5
+      parent: 1
+    - type: AccessReader
+      accessListsOriginal: []
+      access:
+      - - Interdyne
+- proto: SMESBasic
+  entities:
+  - uid: 465
+    components:
+    - type: Transform
+      pos: -7.5,-11.5
+      parent: 1
+- proto: StasisBed
+  entities:
+  - uid: 466
+    components:
+    - type: Transform
+      pos: -10.5,-4.5
+      parent: 1
+- proto: StorageCanister
+  entities:
+  - uid: 467
+    components:
+    - type: Transform
+      anchored: True
+      pos: -7.5,-9.5
+      parent: 1
+    - type: Physics
+      bodyType: Static
+- proto: SubstationBasic
+  entities:
+  - uid: 468
+    components:
+    - type: Transform
+      pos: -7.5,-10.5
+      parent: 1
+- proto: SyringeEphedrine
+  entities:
+  - uid: 29
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: шприц (эфедрин)
+    - type: Transform
+      parent: 28
+    - type: Label
+      currentLabel: эфедрин
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - injector
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: NameModifier
+      baseName: шприц
+    - type: ContainerContainer
+      containers:
+        solution@injector: !type:ContainerSlot
+          ent: 30
+- proto: SyringeEthylredoxrazine
+  entities:
+  - uid: 67
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: шприц (этилредоксразин)
+    - type: Transform
+      parent: 64
+    - type: Label
+      currentLabel: этилредоксразин
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - injector
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: NameModifier
+      baseName: шприц
+    - type: ContainerContainer
+      containers:
+        solution@injector: !type:ContainerSlot
+          ent: 68
+- proto: SyringeInaprovaline
+  entities:
+  - uid: 117
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: шприц (инапровалин)
+    - type: Transform
+      parent: 114
+    - type: Label
+      currentLabel: инапровалин
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - injector
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: NameModifier
+      baseName: шприц
+    - type: ContainerContainer
+      containers:
+        solution@injector: !type:ContainerSlot
+          ent: 118
+- proto: SyringeIpecac
+  entities:
+  - uid: 65
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: шприц (ипекак)
+    - type: Transform
+      parent: 64
+    - type: Label
+      currentLabel: ипекак
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - injector
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: NameModifier
+      baseName: шприц
+    - type: ContainerContainer
+      containers:
+        solution@injector: !type:ContainerSlot
+          ent: 66
+- proto: SyringePhalanximine
+  entities:
+  - uid: 137
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: шприц (фалангимин)
+    - type: Transform
+      parent: 136
+    - type: Label
+      currentLabel: фалангимин
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - injector
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: NameModifier
+      baseName: шприц
+    - type: ContainerContainer
+      containers:
+        solution@injector: !type:ContainerSlot
+          ent: 138
+- proto: SyringeSaline
+  entities:
+  - uid: 31
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: шприц (физраствор)
+    - type: Transform
+      parent: 28
+    - type: Label
+      currentLabel: физраствор
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - injector
+    - type: EmitSoundOnCollide
+      nextSound: -1807.4113522
+    - type: Physics
+      canCollide: False
+    - type: NameModifier
+      baseName: шприц
+    - type: ContainerContainer
+      containers:
+        solution@injector: !type:ContainerSlot
+          ent: 32
+- proto: TableFancyGreen
+  entities:
+  - uid: 469
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -8.5,1.5
+      parent: 1
+- proto: TableReinforced
+  entities:
+  - uid: 470
+    components:
+    - type: Transform
+      pos: -13.5,-1.5
+      parent: 1
+  - uid: 471
+    components:
+    - type: Transform
+      pos: -12.5,-2.5
+      parent: 1
+  - uid: 472
+    components:
+    - type: Transform
+      pos: -11.5,3.5
+      parent: 1
+  - uid: 473
+    components:
+    - type: Transform
+      pos: -11.5,-2.5
+      parent: 1
+- proto: TableReinforcedGlass
+  entities:
+  - uid: 474
+    components:
+    - type: Transform
+      pos: -13.5,-12.5
+      parent: 1
+  - uid: 475
+    components:
+    - type: Transform
+      pos: -12.5,-12.5
+      parent: 1
+- proto: Thruster
+  entities:
+  - uid: 476
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -15.5,-1.5
+      parent: 1
+  - uid: 477
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -15.5,-8.5
+      parent: 1
+  - uid: 478
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -5.5,-1.5
+      parent: 1
+  - uid: 479
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -5.5,-8.5
+      parent: 1
+  - uid: 480
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -5.5,-7.5
+      parent: 1
+  - uid: 481
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -15.5,-0.5
+      parent: 1
+  - uid: 482
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -5.5,-0.5
+      parent: 1
+  - uid: 483
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -15.5,-7.5
+      parent: 1
+  - uid: 484
+    components:
+    - type: Transform
+      pos: -6.5,1.5
+      parent: 1
+    - type: Thruster
+      thrust: 150
+  - uid: 485
+    components:
+    - type: Transform
+      pos: -14.5,1.5
+      parent: 1
+    - type: Thruster
+      thrust: 150
+- proto: ThrusterBigCenter
+  entities:
+  - uid: 486
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -9.5,-14.5
+      parent: 1
+  - uid: 487
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -12.5,-14.5
+      parent: 1
+  - uid: 488
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -11.5,-14.5
+      parent: 1
+  - uid: 489
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -8.5,-14.5
+      parent: 1
+- proto: ThrusterShunting
+  entities:
+  - uid: 490
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -14.5,-10.5
+      parent: 1
+  - uid: 491
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -6.5,-11.5
+      parent: 1
+  - uid: 492
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -6.5,-10.5
+      parent: 1
+  - uid: 493
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -14.5,-11.5
+      parent: 1
+- proto: ToolboxMechanical
+  entities:
+  - uid: 11
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      pos: -9.513739,-9.394209
+      parent: 1
+    - type: Storage
+      storedItems:
+        21:
+          position: 0,0
+          _rotation: South
+        25:
+          position: 1,0
+          _rotation: South
+        23:
+          position: 2,0
+          _rotation: South
+        24:
+          position: 3,0
+          _rotation: South
+        12:
+          position: 4,0
+          _rotation: South
+        22:
+          position: 5,0
+          _rotation: South
+        20:
+          position: 6,0
+          _rotation: South
+        14:
+          position: 0,2
+          _rotation: South
+        16:
+          position: 1,2
+          _rotation: South
+        18:
+          position: 2,2
+          _rotation: South
+    - type: MeleeWeapon
+      nextAttack: -2.9668518
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 21
+          - 25
+          - 23
+          - 24
+          - 12
+          - 22
+          - 20
+          - 14
+          - 16
+          - 18
+    - type: EmitSoundOnCollide
+      nextSound: -561.6329608
+    - type: UseDelay
+      delays:
+        default:
+          length: 1
+        quickInsert:
+          length: 0.5
+        storage: {}
+    - type: Forensics
+      residues: []
+      dnas: []
+      microFibers: []
+      fibers: []
+      fingerprints: []
+- proto: UraniumReinforcedWindowDirectional
+  entities:
+  - uid: 494
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -12.5,-2.5
+      parent: 1
+  - uid: 495
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -9.5,-12.5
+      parent: 1
+  - uid: 496
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -8.5,-12.5
+      parent: 1
+  - uid: 497
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -7.5,-12.5
+      parent: 1
+- proto: UraniumReinforcedWindowDirectionalAng
+  entities:
+  - uid: 498
+    components:
+    - type: Transform
+      pos: -11.5,-2.5
+      parent: 1
+- proto: VendingMachineChemicalsSyndicate
+  entities:
+  - uid: 499
+    components:
+    - type: Transform
+      pos: -13.5,-0.5
+      parent: 1
+    - type: AccessReader
+      accessListsOriginal:
+      - - SyndicateAgent
+      access:
+      - - Interdyne
+- proto: VendingMachineMedical
+  entities:
+  - uid: 500
+    components:
+    - type: Transform
+      pos: -6.5,-4.5
+      parent: 1
+    - type: AccessReader
+      accessListsOriginal:
+      - - Medical
+      access:
+      - - Interdyne
+  - uid: 501
+    components:
+    - type: Transform
+      pos: -14.5,-4.5
+      parent: 1
+    - type: AccessReader
+      accessListsOriginal:
+      - - Medical
+      access:
+      - - Interdyne
+- proto: WallPlastitanium
+  entities:
+  - uid: 502
+    components:
+    - type: Transform
+      pos: -15.5,-4.5
+      parent: 1
+  - uid: 503
+    components:
+    - type: Transform
+      pos: -6.5,-6.5
+      parent: 1
+  - uid: 504
+    components:
+    - type: Transform
+      pos: -15.5,-6.5
+      parent: 1
+  - uid: 505
+    components:
+    - type: Transform
+      pos: -5.5,-4.5
+      parent: 1
+  - uid: 506
+    components:
+    - type: Transform
+      pos: -5.5,-6.5
+      parent: 1
+  - uid: 507
+    components:
+    - type: Transform
+      pos: -14.5,-6.5
+      parent: 1
+  - uid: 508
+    components:
+    - type: Transform
+      pos: -10.5,-9.5
+      parent: 1
+  - uid: 509
+    components:
+    - type: Transform
+      pos: -10.5,-6.5
+      parent: 1
+  - uid: 510
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -12.5,-13.5
+      parent: 1
+  - uid: 511
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -9.5,-13.5
+      parent: 1
+  - uid: 512
+    components:
+    - type: Transform
+      pos: -10.5,-7.5
+      parent: 1
+  - uid: 513
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -10.5,-0.5
+      parent: 1
+  - uid: 514
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -10.5,-2.5
+      parent: 1
+  - uid: 515
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -13.5,0.5
+      parent: 1
+  - uid: 516
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -12.5,0.5
+      parent: 1
+  - uid: 517
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -6.5,0.5
+      parent: 1
+  - uid: 518
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -14.5,0.5
+      parent: 1
+  - uid: 519
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -11.5,-13.5
+      parent: 1
+  - uid: 520
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -13.5,-13.5
+      parent: 1
+  - uid: 521
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -10.5,-13.5
+      parent: 1
+  - uid: 522
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -14.5,-11.5
+      parent: 1
+  - uid: 523
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -14.5,-10.5
+      parent: 1
+  - uid: 524
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -14.5,-9.5
+      parent: 1
+  - uid: 525
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -14.5,-8.5
+      parent: 1
+  - uid: 526
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -14.5,-7.5
+      parent: 1
+  - uid: 527
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -7.5,-13.5
+      parent: 1
+  - uid: 528
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -6.5,-11.5
+      parent: 1
+  - uid: 529
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -6.5,-10.5
+      parent: 1
+  - uid: 530
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -6.5,-8.5
+      parent: 1
+  - uid: 531
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -6.5,-7.5
+      parent: 1
+  - uid: 532
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -6.5,-9.5
+      parent: 1
+  - uid: 533
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -8.5,0.5
+      parent: 1
+  - uid: 534
+    components:
+    - type: Transform
+      pos: -10.5,-8.5
+      parent: 1
+  - uid: 535
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -8.5,-13.5
+      parent: 1
+  - uid: 536
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -7.5,0.5
+      parent: 1
+  - uid: 537
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -15.5,-2.5
+      parent: 1
+  - uid: 538
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -14.5,-2.5
+      parent: 1
+  - uid: 539
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -5.5,-2.5
+      parent: 1
+  - uid: 540
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -6.5,-2.5
+      parent: 1
+  - uid: 541
+    components:
+    - type: Transform
+      pos: -10.5,-11.5
+      parent: 1
+  - uid: 542
+    components:
+    - type: Transform
+      pos: -7.5,2.5
+      parent: 1
+  - uid: 543
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -13.5,1.5
+      parent: 1
+  - uid: 544
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -14.5,-0.5
+      parent: 1
+  - uid: 545
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -14.5,-1.5
+      parent: 1
+  - uid: 546
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -6.5,-1.5
+      parent: 1
+  - uid: 547
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -6.5,-0.5
+      parent: 1
+  - uid: 548
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -10.5,0.5
+      parent: 1
+  - uid: 549
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -7.5,1.5
+      parent: 1
+  - uid: 550
+    components:
+    - type: Transform
+      pos: -10.5,-10.5
+      parent: 1
+  - uid: 551
+    components:
+    - type: Transform
+      pos: -14.5,-12.5
+      parent: 1
+  - uid: 552
+    components:
+    - type: Transform
+      pos: -10.5,-12.5
+      parent: 1
+  - uid: 553
+    components:
+    - type: Transform
+      pos: -6.5,-12.5
+      parent: 1
+  - uid: 554
+    components:
+    - type: Transform
+      pos: -10.5,-14.5
+      parent: 1
+  - uid: 555
+    components:
+    - type: Transform
+      pos: -13.5,2.5
+      parent: 1
+  - uid: 556
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -11.5,0.5
+      parent: 1
+  - uid: 557
+    components:
+    - type: Transform
+      pos: -8.5,-6.5
+      parent: 1
+  - uid: 558
+    components:
+    - type: Transform
+      pos: -7.5,-6.5
+      parent: 1
+- proto: WallPlastitaniumDiagonal
+  entities:
+  - uid: 559
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -7.5,3.5
+      parent: 1
+  - uid: 560
+    components:
+    - type: Transform
+      pos: -13.5,3.5
+      parent: 1
+  - uid: 561
+    components:
+    - type: Transform
+      pos: -15.5,0.5
+      parent: 1
+  - uid: 562
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -13.5,-14.5
+      parent: 1
+  - uid: 563
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -7.5,-14.5
+      parent: 1
+  - uid: 564
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -15.5,-9.5
+      parent: 1
+  - uid: 565
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -5.5,-9.5
+      parent: 1
+  - uid: 566
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -6.5,-13.5
+      parent: 1
+  - uid: 567
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -14.5,-13.5
+      parent: 1
+  - uid: 568
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -5.5,0.5
+      parent: 1
+- proto: WallWeaponCapacitorRecharger
+  entities:
+  - uid: 569
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -10.5,0.5
+      parent: 1
+- proto: WeaponCapacitorRecharger
+  entities:
+  - uid: 570
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -11.5,3.5
+      parent: 1
+- proto: Welder
+  entities:
+  - uid: 12
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 11
+    - type: UseDelay
+      delays:
+        default:
+          endTime: 20.2733812
+          startTime: 0
+          length: 1
+    - type: MeleeWeapon
+      nextAttack: -838.9437311
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - Welder
+    - type: Welder
+      nextUpdate: 0.4227069
+    - type: EmitSoundOnCollide
+      nextSound: -838.9437311
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@Welder: !type:ContainerSlot
+          ent: 13
+- proto: WindoorSecureUranium
+  entities:
+  - uid: 571
+    components:
+    - type: Transform
+      pos: -12.5,-2.5
+      parent: 1
+    - type: AccessReader
+      accessListsOriginal: []
+      access:
+      - - Interdyne
+  - uid: 572
+    components:
+    - type: Transform
+      pos: -13.5,-2.5
+      parent: 1
+    - type: AccessReader
+      accessListsOriginal: []
+      access:
+      - - Interdyne
+- proto: Wirecutter
+  entities:
+  - uid: 24
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 11
+    - type: MeleeWeapon
+      nextAttack: -838.9437311
+    - type: RandomSprite
+      selected:
+        enum.DamageStateVisualLayers.Base:
+        - cutters
+        - '#0E7F1BFF'
+    - type: EmitSoundOnCollide
+      nextSound: -838.9437311
+    - type: Physics
+      canCollide: False
+- proto: Wrench
+  entities:
+  - uid: 25
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 11
+    - type: MeleeWeapon
+      nextAttack: -838.9437311
+    - type: EmitSoundOnCollide
+      nextSound: -838.9437311
+    - type: Physics
+      canCollide: False
+...

@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Atmos;
+using Content.Shared.Explosion;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -13,7 +14,7 @@ public sealed partial class SuperMatterComponent : Component
     // SM constants
     public const float MaximumIntegrity = 100f;
     public const float MinimumIntegrity = 0.01f;
-    public const float MinimumMatter = 280f;
+    public const float MinimumMatter = 465f;
     public const float MinimumInternalEnergy = 2120f;
 
     // State flags
@@ -148,6 +149,14 @@ public sealed partial class SuperMatterComponent : Component
     public EntProtoId SingularitySpawnPrototype = "Singularity";
     [DataField]
     public EntProtoId TeslaSpawnPrototype = "TeslaEnergyBall";
+
+    [DataField]
+    public ProtoId<ExplosionPrototype> ResonanceRegionExplosion = "Default";
+    [DataField]
+    public ProtoId<ExplosionPrototype> SingularityRegionExplosion = "Radioactive";
+    [DataField]
+    public ProtoId<ExplosionPrototype> TeslaRegionExplosion = "Cryo";
+
     [DataField]
     public string DelaminateAlertLevel = "yellow";
     [DataField]

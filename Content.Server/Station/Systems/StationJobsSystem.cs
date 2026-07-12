@@ -41,6 +41,17 @@ public sealed partial class StationJobsSystem : EntitySystem
 
     private void OnInit(Entity<StationJobsComponent> ent, ref ComponentInit args)
     {
+        // ss220 add more jobs for dev map start
+        if (ent.Comp.SpawnAllJobs)
+        {
+            var queryJobs = _prototypeManager.EnumeratePrototypes<JobPrototype>();
+            foreach (var job in queryJobs)
+            {
+                ent.Comp.SetupAvailableJobs.Add(job, [-1, -1]);
+            }
+        }
+        // ss220 add more jobs for dev map end
+
         ent.Comp.MidRoundTotalJobs = ent.Comp.SetupAvailableJobs.Values
             .Select(x => Math.Max(x[1], 0))
             .Sum();

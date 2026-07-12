@@ -6,19 +6,12 @@
     - id: ClothingEyesQuartermasterGlasses
     - id: BoxEncryptionKeyCargo
     - id: BoxFolderQmClipboard
-    - id: CargoBountyComputerCircuitboard
-    - id: CargoRequestComputerCircuitboard
-    - id: CargoSaleComputerCircuitboard
-    - id: CargoShuttleConsoleCircuitboard
-    - id: SalvageMagnetMachineCircuitboard
-    - id: SalvageJobBoardComputerCircuitboard
+    - id: BoxQMCircuitboards
+    - id: BoxQMStamps
     - id: CigPackGreen
       prob: 0.50
     - id: ClothingHeadsetAltCargo
     - id: DoorRemoteCargo
-    - id: RubberStampApproved
-    - id: RubberStampDenied
-    - id: RubberStampQm
     # - id: SalvageShuttleConsoleCircuitboard SS220-upstream-merge
     - id: Telescopichka # SS220 Telescopic Baton
     - id: ClothingWristWatchGold # SS220 Wrist Watch
@@ -27,7 +20,12 @@
     - id: ClothingOuterMechLoaderFull # SS220 AddMechToClothing
     - id: DeviceCalculator # SS220 Calculator
     # - id: ClothingHandsKnuckleDustersQM # SS220-QM-own-knuckle-duster
-    - id: MailTeleporterMachineCircuitboard
+    - id: PlushieLizardJobQuartermaster
+      prob: 0.02
+    #SS220 Quartermaster_hardsuit_add begin
+    - id: ClothingOuterHardsuitQuartermaster
+    - id: OxygenTankFilled
+    #SS220 Quartermaster_hardsuit_add end
 
 - type: entity
   id: LockerQuarterMasterFilled
@@ -50,7 +48,7 @@
     - id: ClothingBeltSheathFilled
     - id: ClothingHeadsetAltCaptain #SS220-Law Department
     - id: ClothingOuterArmorCaptainCarapace
-    - id: CommsComputerCircuitboard
+    - id: BoxCaptainCircuitboards
     - id: DoorRemoteCustom
     - id: MedalCase
     - id: NukeDisk
@@ -62,10 +60,12 @@
     - id: WeaponDisabler
     - id: ClothingWristWatchGold # SS220 Wrist Watch
     - id: ClothingEyesGlassesCommand
-    - id: HeadSkeleton # A skull to accompany your skeleton crew
+    - id: OrganSkeletonAssistantPersonHead #SS220-AssistantSkeletonCaptainLocker
       conditions:
       - !type:PlayerCountCondition
         max: 15
+    - id: PlushieLizardJobCaptain
+      prob: 0.02
 
 # No laser table + Laser table
 - type: entityTable
@@ -131,6 +131,8 @@
     - id: BoxEncryptionKeyPassenger
     - id: BoxEncryptionKeyService
     - id: BoxHeadset
+    - id: BoxHoPCircuitboards
+    - id: BoxHoPStamps
     - id: BoxID
     - id: BoxPDA
     - id: CigarGoldCase
@@ -143,17 +145,13 @@
     - id: ClothingNeckGoldmedal
     - id: DoorRemoteService
     - id: HoPIDCard
-    - id: IDComputerCircuitboard
-    - id: FundingAllocationComputerCircuitboard
-    - id: CargoRequestServiceComputerCircuitboard
-    - id: RubberStampApproved
-    - id: RubberStampDenied
-    - id: RubberStampHop
     - id: WeaponDisabler
     - id: Telescopichka # SS220 Telescopic Baton
     - id: ClothingOuterCoatHOP # Corvax-Resprite
     - id: ClothingWristWatchGold # SS220 Wrist Watch
     - id: ClothingEyesHudCommand
+    - id: PlushieLizardJobHeadofpersonnel
+      prob: 0.02
 
 - type: entity
   id: LockerHeadOfPersonnelFilled
@@ -179,7 +177,7 @@
     - id: ClothingHandsGlovesColorYellow
     - id: ClothingHeadsetAltEngineering
     - id: DoorRemoteEngineering
-    - id: CargoRequestEngineeringComputerCircuitboard
+    - id: BoxCECircuitboards
     - id: RCDAmmo
     # SS220 RCD-to-CE begin
     - id: RCDCE
@@ -191,6 +189,8 @@
     - id: CigPackENG #SS220 Cigarettes
     - id: DeviceCalculator # SS220 Calculator
     - id: MetalFoamGrenade
+    - id: PlushieLizardJobChiefengineer
+      prob: 0.02
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable
@@ -234,26 +234,24 @@
   id: LockerFillChiefMedicalOfficerNoHardsuit
   table: !type:AllSelector
     children:
-    - id: BoxEncryptionKeyMedical
-    - id: ClothingBackpackDuffelSurgeryFilled
-    - id: ClothingCloakCmo
     - id: ClothingEyesHudMedical
-    - id: ClothingHandsGlovesNitrile
-    - id: ClothingHeadHatBeretCmo
-    - id: ClothingHeadsetAltMedical
-    - id: ClothingMaskSterile
-    - id: DoorRemoteMedical
+    - id: ClothingBeltMedicalFilled
     - id: HandheldCrewMonitor
     - id: Hypospray
-    - id: MedicalTechFabCircuitboard
-    - id: CargoRequestMedicalComputerCircuitboard
-    - id: MedkitFilled
+    - id: MedTekCartridge
+    # Standard command gear
     - id: RubberStampCMO
+    - id: ClothingHeadsetAltMedical
+    - id: DoorRemoteMedical
+    - id: BoxEncryptionKeyMedical
+    - id: BoxCMOCircuitboards
     - id: Telescopichka # SS220 Telescopic Baton
     - id: ClothingWristWatchGold # SS220 Wrist Watch
     - id: CigPackMED #SS220 Cigarettes
-    - id: MedTekCartridge
     - id: BoxBottleChief #SS220 Limitation Revive
+    - id: DefibrillatorCompact # SS220 Compact Defib
+    - id: PlushieLizardJobChiefmedicalofficer
+      prob: 0.02
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable
@@ -297,20 +295,19 @@
     children:
     - id: Intellicard
     - id: BoxEncryptionKeyScience
-    - id: CircuitImprinterMachineCircuitboard
+    - id: BoxRDCircuitboards
     - id: ClothingBeltUtilityFilled
     - id: ClothingHeadsetAltScience
     - id: DoorRemoteResearch
     - id: HandTeleporter
-    - id: ProtolatheMachineCircuitboard
-    - id: ResearchComputerCircuitboard
-    - id: CargoRequestScienceComputerCircuitboard
     - id: RubberStampRd
     - id: ClothingWristWatchGold # SS220 Wrist Watch
     - id: Telescopichka # SS220 Telescopic Baton
     - id: CigPackRnD #SS220 Cigarettes
     - id: ClothingOuterReactiveArmor #SS220 New RD highrisk
     - id: DeviceCalculator # SS220 Calculator
+    - id: PlushieLizardJobResearchdirector
+      prob: 0.02
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable
@@ -355,28 +352,31 @@
     #- id: WeaponEnergyShotgun #SS220 Energy shotgun removal
     - id: BookSecretDocuments # SS220 mindslave-stop-word
     - id: BookSpaceLaws # SS220 Space Law Replace
+    # - id: WeaponEnergyMagnum
     - id: BoxEncryptionKeySecurity
     - id: CigarGoldCase
       prob: 0.50
     - id: ClothingBeltSecurityFilled
     - id: ClothingEyesGlassesSecurity
     - id: ClothingHeadsetAltSecurity
-    - id: ClothingMaskNeckGaiter
     - id: ClothingOuterCoatHoSTrench
     - id: ClothingShoesBootsJack
+    - id: FlashlightSeclite
     - id: DoorRemoteSecurity
     - id: HoloprojectorSecurity
     - id: RubberStampHos
-    - id: SecurityTechFabCircuitboard
-    - id: CargoRequestSecurityComputerCircuitboard
+    - id: BoxHoSCircuitboards
     - id: WeaponDisabler
     - id: BookBusido # Corvax-Books
     - id: ClothingWristWatchGold # SS220 Wrist Watch
     - id: WeaponMultiPhaseEnergyGun #SS220 MultiPhaze Energy Gun
     - id: BodySecurityCamera #SS220-Bodycam
     - id: CigPackSEC #SS220 Cigarettes
+    # - id: WeaponTaser # SS220 No tasers
     - id: WantedListCartridge
     - id: DrinkHosFlask
+    - id: PlushieLizardJobHeadofsecurity
+      prob: 0.02
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable
@@ -414,17 +414,24 @@
         - !type:NestedSelector
           tableId: FillHeadOfSecurityHardsuit
 
-- type: entity
-  id: LockerFreezerVaultFilled
-  suffix: Vault, Locked
-  parent: LockerFreezerBase
-  components:
-  - type: AccessReader
-    access: [ [ "Command" ] ]
-  - type: StorageFill
-    contents:
+- type: entityTable
+  id: LockerFillVault
+  table: !type:AllSelector
+    children:
     - id: WeaponRevolverDeckard
     - id: JetpackBlue
     - id: SpaceCash1000
     - id: BeachBall
     - id: BikeHorn
+
+- type: entity
+  id: LockerFreezerVaultFilled
+  suffix: Vault, Filled
+  parent: LockerFreezerBase
+  components:
+  - type: AccessReader
+    access: [ [ "Command" ] ]
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: LockerFillVault

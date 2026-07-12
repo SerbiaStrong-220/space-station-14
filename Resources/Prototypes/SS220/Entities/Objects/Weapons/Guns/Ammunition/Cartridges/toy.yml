@@ -8,16 +8,14 @@
   - type: Tag
     tags:
     - ShellShotgunToy
+    - Cartridge
   - type: HiddenDescription
     entries:
-    - label: hidden-desc-toy-weapons-ammo-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: hidden-desc-toy-weapons-ammo-clown
-      jobRequired:
-        - Clown
-        - Mime
+      SyndicateAgentKnowledge: [ hidden-desc-toy-weapons-ammo-syndicate ]
+      ServiceActorKnowledge: [ hidden-desc-toy-weapons-ammo-clown ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ServiceActorKnowledge, null]
 
 - type: entity
   id: ShellShotgunSlugCaps
@@ -94,16 +92,15 @@
   - type: Tag
     tags:
     - CartridgeAntiMaterielToy
+    - Cartridge
   - type: HiddenDescription
     entries:
-    - label: hidden-desc-toy-weapons-ammo-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: hidden-desc-toy-weapons-ammo-clown
-      jobRequired:
-        - Clown
-        - Mime
+      SyndicateAgentKnowledge: [ hidden-desc-toy-weapons-ammo-syndicate ]
+      ServiceActorKnowledge: [ hidden-desc-toy-weapons-ammo-clown ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ServiceActorKnowledge, null]
+    hiddenName: ent-CartridgeAntiMateriel
 
 #stunning
 - type: entity

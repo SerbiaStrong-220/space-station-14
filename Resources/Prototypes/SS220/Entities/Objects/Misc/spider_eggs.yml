@@ -12,6 +12,7 @@
     sprite: Objects/Misc/eggspider.rsi
     state: icon
   - type: Transform
+    noRot: true
   - type: Clickable
   - type: InteractionOutline
   - type: PointLight
@@ -48,8 +49,6 @@
       - !type:PlaySoundBehavior
         sound:
           collection: desecration
-      - !type:SpillBehavior
-        solution: food
       - !type:SpawnEntitiesBehavior
         spawn:
           EggshellsSpider:
@@ -64,7 +63,7 @@
 
 #Spiders
 - type: entity
-  parent: [ BaseSpiderEgg, MobSpiderDroneGhostRole ]
+  parent: [ BaseSpiderEgg ]
   id: SpiderEggDrone
   categories: [ HideSpawnMenu ]
   name: spider hive egg
@@ -75,9 +74,19 @@
     spawnProtos:
       - id: MobSpiderDrone
         amount: 1
+  - type: GhostRole #Ghost role
+    makeSentient: true
+    allowSpeech: false
+    allowMovement: false
+    name: spider-royDrone-name
+    description: spider-royDrone-desc
+    job: SpiderQueenServant
+    raffle:
+      settings: short
+  - type: GhostTakeoverAvailable #Ghost role
 
 - type: entity
-  parent: [ BaseSpiderEgg, MobSpiderHunterGhostRole ]
+  parent: [ BaseSpiderEgg ]
   id: SpiderEggHunter
   categories: [ HideSpawnMenu ]
   name: the-egg-of-the-spider-guard
@@ -88,9 +97,19 @@
     spawnProtos:
       - id: MobSpiderHunter
         amount: 1
+  - type: GhostRole #Ghost role
+    makeSentient: true
+    allowSpeech: false
+    allowMovement: false
+    name: spider-royHunter-name
+    description: spider-royHunter-desc
+    job: SpiderQueenServant
+    raffle:
+      settings: short
+  - type: GhostTakeoverAvailable #Ghost role
 
 - type: entity
-  parent: [ BaseSpiderEgg, MobSpiderGhostGhostRole ]
+  parent: [ BaseSpiderEgg ]
   id: SpiderEggGhost
   categories: [ HideSpawnMenu ]
   name: spider hive egg
@@ -101,9 +120,19 @@
     spawnProtos:
       - id: MobSpiderGhost
         amount: 1
+  - type: GhostRole #Ghost role
+    makeSentient: true
+    allowSpeech: false
+    allowMovement: false
+    name: spider-royGhost-name
+    description: spider-royGhost-desc
+    job: SpiderQueenServant
+    raffle:
+      settings: short
+  - type: GhostTakeoverAvailable #Ghost role
 
 - type: entity
-  parent: [ BaseSpiderEgg, MobSpiderShooterGhostRole ]
+  parent: [ BaseSpiderEgg ]
   id: SpiderEggShooter
   categories: [ HideSpawnMenu ]
   name: spider hive egg
@@ -114,3 +143,13 @@
     spawnProtos:
       - id: MobSpiderShooter
         amount: 1
+  - type: GhostRole #Ghost role
+    makeSentient: true
+    allowSpeech: false
+    allowMovement: false
+    name: spider-royShooter-name
+    description: spider-royShooter-desc
+    job: SpiderQueenServant
+    raffle:
+      settings: short
+  - type: GhostTakeoverAvailable #Ghost role

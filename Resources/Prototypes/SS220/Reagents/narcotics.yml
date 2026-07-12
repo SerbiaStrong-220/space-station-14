@@ -3,16 +3,174 @@
   name: reagent-name-neonicotinoid
   group: Narcotics
   desc: reagent-desc-neonicotinoid
-  flavor: bitter
+  flavor: medicine
   color: "#C0C0C0"
   physicalDesc: reagent-physical-desc-strong-smelling
   plantMetabolism:
   - !type:PlantAdjustHealth
     amount: -5
   metabolisms:
-    Narcotic:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
           types:
             Cellular: 0.02 # Smoking causes less cancer.
+
+- type: reagent
+  id: Opium
+  name: reagent-name-opium
+  group: Narcotics
+  desc: reagent-desc-opium
+  color: "#662302"
+  physicalDesc: reagent-physical-desc-bitter
+  flavor: medicine
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:Hallucination
+        setting:
+          randomEntities: HallucinationReagentOpium
+          betweenHallucinations: 4
+          hallucinationMinTime: 2
+          hallucinationMaxTime: 10
+          totalDuration: 2
+          checkPockets: false
+      - !type:HealthChange
+          damage:
+            types:
+              Cerebral: 0.25
+      - !type:SatiateHunger
+        factor: -0.2
+
+- type: reagent
+  id: Aglomorphine
+  name: reagent-name-aglomorphine
+  group: Narcotics
+  desc: reagent-desc-aglomorphine
+  color: "#FFFFFF"
+  physicalDesc: reagent-physical-desc-bitter
+  flavor: medicine
+  metabolisms:
+    Bloodstream:
+      metabolismRate: 0.1
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentCondition
+          reagent: Aglomorphine
+          min: 10
+        damage:
+          types:
+            Cerebral: 5.0
+            Poison: 5.0
+      - !type:MovementSpeedModifier
+        walkSpeedModifier: 1.17
+        sprintSpeedModifier: 1.17
+      - !type:GenericStatusEffect
+        key: Stutter
+        component: StutteringAccent
+        time: 3
+      - !type:Jitter
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: 1.0
+      - !type:Hallucination
+        setting:
+          randomEntities: HallucinationReagentAglomorphine
+          betweenHallucinations: 4
+          hallucinationMinTime: 2
+          hallucinationMaxTime: 10
+          totalDuration: 3
+          checkPockets: false
+      - !type:MobThresholdsModifier
+        statusEffectId: MobThresholdsModifierAglomorphine
+        duration: 5
+        refresh: false
+      - !type:HealthChange
+          damage:
+            types:
+              Blunt: -0.6
+              Slash: -0.6
+              Piercing: -0.6
+              Heat: -0.6
+
+- type: reagent
+  id: Frontier
+  name: reagent-name-frontier
+  group: Narcotics
+  desc: reagent-desc-frontier
+  color: "#787878"
+  physicalDesc: reagent-physical-desc-tingling
+  flavor: medicine
+  metabolisms:
+    Bloodstream:
+      metabolismRate: 0.5
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentCondition
+          reagent: Frontier
+          min: 20.5
+        damage:
+          types:
+            Cerebral: 5.0
+            Poison: 5.0
+      - !type:StaminaChange
+        conditions:
+        - !type:ReagentCondition
+          reagent: Frontier
+          min: 20.5
+        value: 100
+      - !type:MovementSpeedModifier
+        walkSpeedModifier: 1.17
+        sprintSpeedModifier: 1.17
+        dependsOnAdaptation: true
+        metabolizedModifier: -0.00056 #Approximate value, the speed will be 1 on 300 stacks and then go below
+        reagent: Frontier
+      - !type:ChemicalAdaptationEffect
+        reagent: Frontier
+        duration: 300
+      - !type:GenericStatusEffect
+        key: Stutter
+        component: StutteringAccent
+        time: 8
+      - !type:Jitter
+        time: 8
+      - !type:HealthChangeOnAdaptation
+        reagent: Frontier
+        damage:
+          types:
+            Poison: 1.0
+        decay: -0.003
+      - !type:GenericStatusEffect
+        key: Muted
+        component: Muted
+        type: Add
+        time: 5
+      - !type:MobThresholdsModifier
+        statusEffectId: MobThresholdsModifierFrontier
+        dependsOnAdaptation: true
+        duration: 5
+        refresh: false
+      - !type:StaminaChange
+        probability: 0.1
+        value: 10
+      - !type:Hallucination
+        setting:
+          randomEntities: HallucinationReagentFrontier
+          betweenHallucinations: 4
+          hallucinationMinTime: 2
+          hallucinationMaxTime: 10
+          totalDuration: 8
+          checkPockets: false
+      - !type:HealthChangeOnAdaptation
+          reagent: Frontier
+          damage:
+            types:
+              Blunt: -0.7
+              Slash: -0.7
+              Piercing: -0.7
+              Heat: -0.7
+          decay: 0.0023

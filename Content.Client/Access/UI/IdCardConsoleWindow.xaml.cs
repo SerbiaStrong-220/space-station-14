@@ -1,4 +1,6 @@
 using System.Linq;
+using Content.Client.SS220.UserInterface.Controls;
+using Content.Client.SS220.UserInterface.System.PinUI;
 using Content.Shared.Access;
 using Content.Shared.Access.Systems;
 using Content.Shared.CCVar;
@@ -14,7 +16,7 @@ using static Content.Shared.Access.Components.IdCardConsoleComponent;
 namespace Content.Client.Access.UI
 {
     [GenerateTypedNameReferences]
-    public sealed partial class IdCardConsoleWindow : DefaultWindow
+    public sealed partial class IdCardConsoleWindow : DefaultWindow, IPinnableWindow // ss220 add pin for ui
     {
         [Dependency] private readonly IConfigurationManager _cfgManager = default!;
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
@@ -22,10 +24,6 @@ namespace Content.Client.Access.UI
         private readonly ISawmill _logMill = default!;
 
         private readonly IdCardConsoleBoundUserInterface _owner;
-
-        // CCVar.
-        private int _maxNameLength;
-        private int _maxIdJobLength;
 
         private AccessLevelControl _accessButtons = new();
         private List<ProtoId<AccessLevelPrototype>> _extendedAccess = new(); // SS220-ID console extended access button
@@ -48,14 +46,8 @@ namespace Content.Client.Access.UI
             _owner = owner;
             _extendedAccess = extendedAccess; // SS220-ID console extended access button
 
-            _maxNameLength = _cfgManager.GetCVar(CCVars.MaxNameLength);
-            _maxIdJobLength = _cfgManager.GetCVar(CCVars.MaxIdJobLength);
-
-            _maxNameLength = _cfgManager.GetCVar(CCVars.MaxNameLength);
-            _maxIdJobLength = _cfgManager.GetCVar(CCVars.MaxIdJobLength);
-
             FullNameLineEdit.OnTextEntered += _ => SubmitData();
-            FullNameLineEdit.IsValid = s => s.Length <= _maxNameLength;
+            FullNameLineEdit.IsValid = s => s.Length <= _cfgManager.GetCVar(CCVars.MaxNameLength);
             FullNameLineEdit.OnTextChanged += _ =>
             {
                 FullNameSaveButton.Disabled = FullNameSaveButton.Text == _lastFullName;
@@ -63,7 +55,7 @@ namespace Content.Client.Access.UI
             FullNameSaveButton.OnPressed += _ => SubmitData();
 
             JobTitleLineEdit.OnTextEntered += _ => SubmitData();
-            JobTitleLineEdit.IsValid = s => s.Length <= _maxIdJobLength;
+            JobTitleLineEdit.IsValid = s => s.Length <= _cfgManager.GetCVar(CCVars.MaxIdJobLength);
             JobTitleLineEdit.OnTextChanged += _ =>
             {
                 JobTitleSaveButton.Disabled = JobTitleLineEdit.Text == _lastJobTitle;
@@ -84,6 +76,20 @@ namespace Content.Client.Access.UI
                 JobPresetOptionButton.AddItem(Loc.GetString(job.Name), _jobPrototypeIds.Count - 1);
             }
 
+            // SS220-ID console extended access button-bgn
+            // SelectAllButton.OnPressed += _ =>
+            // {
+            //     SetAllAccess(true);
+            //     SubmitData();
+            // };
+            // SS220-ID console extended access button-end
+
+            DeselectAllButton.OnPressed += _ =>
+            {
+                SetAllAccess(false);
+                SubmitData();
+            };
+
             JobPresetOptionButton.OnItemSelected += SelectJobPreset;
             _accessButtons.Populate(accessLevels, prototypeManager);
             AccessLevelControlContainer.AddChild(_accessButtons);
@@ -94,17 +100,27 @@ namespace Content.Client.Access.UI
             {
                 button.OnPressed += _ => SubmitData();
             }
+
+            // SS220 add pin button begin
+            PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
+            // SS220 add pin button end
         }
 
-        private void ClearAllAccess()
+        /// <param name="enabled">If true, every individual access button will be pressed. If false, each will be depressed.</param>
+        private void SetAllAccess(bool enabled)
         {
             foreach (var button in _accessButtons.ButtonsList.Values)
             {
-                if (button.Pressed)
-                {
-                    button.Pressed = false;
-                }
+                if (!button.Disabled && button.Pressed != enabled)
+                    button.Pressed = enabled;
             }
+
+            // SS220-ID console extended access button-bgn
+            var postfix = Loc.GetString("id-card-console-window-extended-access-job-title-postfix");
+
+            if (JobTitleLineEdit.Text.EndsWith(postfix) && !enabled)
+                JobTitleLineEdit.Text = JobTitleLineEdit.Text[..^postfix.Length];
+            // SS220-ID console extended access button-end
         }
 
         private void SelectJobPreset(OptionButton.ItemSelectedEventArgs args)
@@ -117,7 +133,7 @@ namespace Content.Client.Access.UI
             JobTitleLineEdit.Text = Loc.GetString(job.Name);
             args.Button.SelectId(args.Id);
 
-            ClearAllAccess();
+            SetAllAccess(false);
 
             // this is a sussy way to do this
             foreach (var access in job.Access)
@@ -130,7 +146,7 @@ namespace Content.Client.Access.UI
 
             foreach (var group in job.AccessGroups)
             {
-                if (!_prototypeManager.TryIndex(group, out AccessGroupPrototype? groupPrototype))
+                if (!_prototypeManager.Resolve(group, out AccessGroupPrototype? groupPrototype))
                 {
                     continue;
                 }
@@ -271,7 +287,7 @@ namespace Content.Client.Access.UI
                 fullNameSafe, //ss220 format name fix
                 jobTitleSafe, //ss220 format name fix
                 _accessButtons.ButtonsList.Where(x => x.Value.Pressed).Select(x => x.Key).ToList(),
-                jobProtoDirty ? _jobPrototypeIds[JobPresetOptionButton.SelectedId] : string.Empty);
+                jobProtoDirty ? _jobPrototypeIds[JobPresetOptionButton.SelectedId] : null);
         }
     }
 }

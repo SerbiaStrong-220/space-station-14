@@ -491,7 +491,7 @@
   parent: BaseScrapLarge
   id: ScrapGeneratorUraniumLeaking
   name: leaking S.U.P.E.R.P.A.C.M.A.N. generator
-  description: A S.U.P.E.R.P.A.C.M.A.N. generator that appears to have had some kind of catastrophic failure. Its leaking uranium.
+  description: A S.U.P.E.R.P.A.C.M.A.N. generator that appears to have had some kind of catastrophic failure. It's leaking uranium.
   components:
   - type: Sprite
     sprite: Objects/Materials/Scrap/generator.rsi
@@ -513,6 +513,7 @@
       Steel: 4000 # 40 sheets
       Uranium: 2500 # 25 sheets
       Plastic: 500 # 5 sheets
+  - type: RadiationDecrease # SS220 radioactiveness fix
   - type: RadiationSource
     intensity: 1.0
 
@@ -537,6 +538,7 @@
       Steel: 4000 # 40 sheets
       Uranium: 1000 # 10 sheets
       Plastic: 500 # 5 sheets
+  - type: RadiationDecrease # SS220 radioactiveness fix
   - type: RadiationSource
     intensity: 0.5
 

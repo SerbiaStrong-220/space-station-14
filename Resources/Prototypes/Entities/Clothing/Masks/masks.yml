@@ -11,6 +11,11 @@
   - type: BreathMask
   - type: IngestionBlocker
   - type: IdentityBlocker
+  #SS220 shield rework begin
+  - type: WearableInstastunResist
+    resistedStunTypes:
+      - Creampie
+  #SS220 shield rework end
   - type: Tag
     tags:
     - HamsterWearable
@@ -126,9 +131,9 @@
   description: A military-grade gas mask that can be connected to an air supply.
   components:
   - type: Sprite
-    sprite: Clothing/Mask/gasexplorer.rsi
+    sprite: SS220/Clothing/Mask/gasexplorer.rsi # SS220-resprite
   - type: Clothing
-    sprite: Clothing/Mask/gasexplorer.rsi
+    sprite: SS220/Clothing/Mask/gasexplorer.rsi # SS220-resprite
   - type: Armor
     modifiers:
       coefficients:
@@ -219,9 +224,9 @@
   description: A true prankster's facial attire. A clown is incomplete without his wig and mask.
   components:
   - type: Sprite
-    sprite: Clothing/Mask/clown.rsi
+    sprite: SS220/Clothing/Mask/clown.rsi #SS220 resprite masks
   - type: Clothing
-    sprite: Clothing/Mask/clown.rsi
+    sprite: SS220/Clothing/Mask/clown.rsi #SS220 resprite masks
   - type: BreathMask
   - type: IdentityBlocker
   - type: Tag
@@ -233,9 +238,24 @@
     - Snout
 
 - type: entity
-  parent: ClothingMaskClownBase
+  parent: [ClothingMaskClownBase, BaseFoldable]
   id: ClothingMaskClown
+  description: A clown mask featuring a foldable wig; a true prankster's attire.
   components:
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+  - type: FoldableClothing
+    foldedEquippedPrefix: opened
+    foldedHeldPrefix: opened
+  - type: Sprite
+    sprite: SS220/Clothing/Mask/clown.rsi #SS220 resprite masks
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: icon-opened
+      map: [ "foldedLayer" ]
+      visible: false
   - type: Tag
     tags:
     - ClownMask
@@ -246,7 +266,7 @@
     - Snout
 
 - type: entity
-  parent: ClothingMaskClown
+  parent: ClothingMaskClownBase
   id: ClothingMaskClownBanana
   name: banana clown wig and mask
   components:
@@ -257,17 +277,33 @@
   - type: Construction
     graph: BananaClownMask
     node: mask
+  - type: Tag
+    tags:
+    - ClownMask
+    - HamsterWearable
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Snout
 
 - type: entity
-  parent: [ClothingMaskClown, BaseSecurityContraband]
+  parent: [ClothingMaskClown, BaseSecurityContraband] #SS220 resprite masks
   id: ClothingMaskClownSecurity
   name: security clown wig and mask
   description: A debatably oxymoronic but protective mask and wig.
   components:
   - type: Sprite
-    sprite: Clothing/Mask/clown_security.rsi
+#SS220 resprite masks START
+    sprite: SS220/Clothing/Mask/clown_security.rsi
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: icon-opened
+      map: [ "foldedLayer" ]
+      visible: false
+#SS220 resprite masks END
   - type: Clothing
-    sprite: Clothing/Mask/clown_security.rsi
+    sprite: SS220/Clothing/Mask/clown_security.rsi #SS220 resprite masks
   - type: Armor
     modifiers:
       coefficients:
@@ -275,6 +311,14 @@
         Slash: 0.95
         Piercing: 0.95
         Heat: 0.95
+  - type: Tag
+    tags:
+    - ClownMask
+    - HamsterWearable
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Snout
 
 - type: entity
   parent: ClothingMaskBase
@@ -299,9 +343,9 @@
   description: The traditional mime's mask. It has an eerie facial posture.
   components:
   - type: Sprite
-    sprite: Clothing/Mask/mime.rsi
+    sprite: SS220/Clothing/Mask/mime.rsi #SS220 resprite masks
   - type: Clothing
-    sprite: Clothing/Mask/mime.rsi
+    sprite: SS220/Clothing/Mask/mime.rsi #SS220 resprite masks
   - type: BreathMask
   - type: IdentityBlocker
   - type: Tag
@@ -464,6 +508,12 @@
     - Hair
     - Snout
     hideOnToggle: true
+  - type: UserInterface #SS220 - Smart gas mask - start
+    interfaces:
+      enum.SmartGasMaskUiKey.Key:
+        type: SmartGasMaskBoundUserInterface
+  - type: SmartGasMask
+    selectablePrototypes: ["AlertSmartGasMaskHalt", "AlertSmartGasMaskERTSupport"] #SS220 - Smart gas mask - end
   - type: FlashImmunity
   - type: EyeProtection
   - type: Armor
@@ -649,15 +699,23 @@
 #SS220-add-time-suffix-loadout-end
 
 - type: entity
-  parent: ClothingMaskClownBase
+  parent: ClothingMaskClown #SS220 resprite masks
   id: ClothingMaskBlushingClown
   name: blushing clown mask
   description: A mask for a blushing clown.
   components:
   - type: Sprite
-    sprite: Clothing/Mask/blushingclown.rsi
+#SS220 resprite masks START
+    sprite: SS220/Clothing/Mask/blushingclown.rsi
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: icon-opened
+      map: [ "foldedLayer" ]
+      visible: false
+#SS220 resprite masks END
   - type: Clothing
-    sprite: Clothing/Mask/blushingclown.rsi
+    sprite: SS220/Clothing/Mask/blushingclown.rsi #SS220 resprite masks
 
 - type: entity
   parent: ClothingMaskMime
@@ -666,9 +724,9 @@
   description: Those ruddy cheeks just want to be rubbed.
   components:
   - type: Sprite
-    sprite: Clothing/Mask/blushingmime.rsi
+    sprite: SS220/Clothing/Mask/blushingmime.rsi #SS220 resprite masks
   - type: Clothing
-    sprite: Clothing/Mask/blushingmime.rsi
+    sprite: SS220/Clothing/Mask/blushingmime.rsi #SS220 resprite masks
 
 - type: entity
   parent: ClothingMaskMime
@@ -677,9 +735,9 @@
   description: Many people think this is what a real mime mask looks like.
   components:
   - type: Sprite
-    sprite: Clothing/Mask/sadmime.rsi
+    sprite: SS220/Clothing/Mask/sadmime.rsi #SS220 resprite masks
   - type: Clothing
-    sprite: Clothing/Mask/sadmime.rsi
+    sprite: SS220/Clothing/Mask/sadmime.rsi #SS220 resprite masks
 
 - type: entity
   parent: ClothingMaskMime
@@ -688,9 +746,9 @@
   description: Looks like it would scream if it wasn't a mask.
   components:
   - type: Sprite
-    sprite: Clothing/Mask/scaredmime.rsi
+    sprite: SS220/Clothing/Mask/scaredmime.rsi #SS220 resprite masks
   - type: Clothing
-    sprite: Clothing/Mask/scaredmime.rsi
+    sprite: SS220/Clothing/Mask/scaredmime.rsi #SS220 resprite masks
 
 - type: entity
   parent: [ClothingMaskMime, BaseSecurityContraband]
@@ -699,9 +757,9 @@
   description: You have the right to remain silent.
   components:
   - type: Sprite
-    sprite: Clothing/Mask/mime_security.rsi
+    sprite: SS220/Clothing/Mask/mime_security.rsi #SS220 resprite masks
   - type: Clothing
-    sprite: Clothing/Mask/mime_security.rsi
+    sprite: SS220/Clothing/Mask/mime_security.rsi #SS220 resprite masks
   - type: Armor
     modifiers:
       coefficients:
@@ -722,9 +780,6 @@
     sprite: Clothing/Mask/italian_moustache.rsi
   - type: Item
     storedRotation: -90
-  - type: AddAccentClothing
-    accent: ReplacementAccent
-    replacement: italian
 
 - type: entity
   parent: ClothingMaskBase

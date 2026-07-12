@@ -2,26 +2,44 @@ name: "Mapping issues"
 
 on:
   issues:
-    type: [opened]
+    types: [opened]
 
 jobs:
-  add-labels-and-assigness:
+  add-labels-and-link:
     runs-on: ubuntu-latest
     steps:
-      - name: Check option and add label
+      - name: Generate token
+        id: generate_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.REVIEWER_APP }}
+          private-key: ${{ secrets.REVIEWER_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+
+      - name: Check & link
         uses: actions/github-script@v6
         with:
+          github-token: ${{ steps.generate_token.outputs.token }}
           script: |
-            const issueBody = context.payload.issue.body;
+            const issueLabels = context.payload.issue.labels.map(l => l.name);
+            const issueBody = context.payload.issue.body || '';
+
+            if (!issueLabels.includes('Mapping Issues')) {
+              console.log('Not mapping issue. Skip action.');
+              return;
+            }
+
             const options = {
-              'Frankenstein': {label: 'MI: Frankenstein', assignee: 'UrPrice' },
-              'Axioma': {label: 'MI: Axioma', assignee: 'NightmareStalker'},
-              'Donuts': {label: 'MI: Donuts', assignee: 'spo9k'},
-              'Eclipse': {label: 'MI: Eclipse', assignee: 'AliceValestray'},
-              'Astro': {label: 'MI: Astro', assignee: 'VictorBoum'},
-              'Nightshift': {label: 'MI: Nightshift', assignee: 'Heidem1'},
-              'Другое': {label: 'MI: Other', assignee: 'VictorBoum'}
+              'Frankenstein': { parentIssue: 796 },
+              'Axioma': { parentIssue: 790 },
+              'Donuts': { parentIssue: 793 },
+              'Eclipse': { parentIssue: 791 },
+              'Astro': { parentIssue: 792 },
+              'Nightshift': { parentIssue: 794 },
+              'Tox': { parentIssue: 795 },
+              'Другое': { parentIssue: 788 }
             };
+
             let selectedOption = null;
             for (const option in options){
               if (issueBody.includes(option)) {
@@ -29,17 +47,31 @@ jobs:
                 break;
               }
             }
-            if (selectedOption) {
-              await github.rest.issues.addLabels({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.issue.number,
-                labels: [selectedOption.label]
-              }); // added label
-              await github.rest.issues.addAssignees({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.issue.number,
-                assignees: [selectedOption.assignee]
-              }); // added assignee
+
+            if (selectedOption && selectedOption.parentIssue) {
+              const targetOwner = 'SerbiaStrong-220';
+              const targetRepo = 'DevTeam220';
+
+              const subIssueId = context.payload.issue.id;
+
+              try {
+                await github.request('POST /repos/{owner}/{repo}/issues/{issue_number}/sub_issues', {
+                  owner: targetOwner,
+                  repo: targetRepo,
+                  issue_number: selectedOption.parentIssue,
+                  sub_issue_id: subIssueId,
+                  headers: {
+                    'X-GitHub-Api-Version': '2026-03-10',
+                    'accept': 'application/vnd.github+json'
+                  }
+                });
+                console.log(`Linked #${context.issue.number} to ${targetOwner}/${targetRepo}#${selectedOption.parentIssue}`);
+              } catch (error) {
+                console.error(`Failed to link #${selectedOption.parentIssue}`, error);
+                if (error.response) {
+                  console.error('API:', error.response.data);
+                }
+              }
+            } else {
+              console.log('No options');
             }

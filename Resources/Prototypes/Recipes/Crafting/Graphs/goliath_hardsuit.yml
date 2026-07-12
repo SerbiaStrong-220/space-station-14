@@ -8,7 +8,7 @@
       steps:
       - tag: HardsuitSpatio
         icon:
-          sprite: Clothing/OuterClothing/Hardsuits/spatio.rsi
+          sprite: SS220/Clothing/Head/Hardsuits/spatio.rsi #SS220-Salvage Hardsuit Resprite
           state: icon
         name: construction-graph-tag-spationaut-hardsuit
         doAfter: 10

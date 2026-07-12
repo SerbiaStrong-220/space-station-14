@@ -6,6 +6,10 @@
   description: Apply crowbar.
   components:
     - type: FoVOverlay # SS220 perspective-wall-fov
+    - type: Anchorable
+      flags:
+      - Anchorable
+    - type: Rotatable
     - type: AtmosAlarmable
       syncWith:
         - FireAlarm
@@ -129,6 +133,7 @@
     - type: DoorBolt # SS220 revert "remove fire remote controller"
     - type: AccessReader
       access: [ [ "Engineering" ] ]
+      examinationText: access-reader-examination-functionality-restricted
     - type: PryUnpowered
       pryModifier: 0.5
     - type: PointLight

@@ -7,6 +7,7 @@ using Content.Client.Corvax.Sponsors;
 using Content.Client.Options;
 using Content.Client.DebugMon;
 using Content.Client.Eui;
+using Content.Client.FeedbackPopup;
 using Content.Client.Fullscreen;
 using Content.Client.GameTicking.Managers;
 using Content.Client.GhostKick;
@@ -23,11 +24,13 @@ using Content.Client.Radiation.Overlays;
 using Content.Client.Replay;
 using Content.Client.Screenshot;
 using Content.Client.Singularity;
+using Content.Client.SS220.ChatBans;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface;
 using Content.Client.Viewport;
 using Content.Client.Voting;
 using Content.Shared.Ame.Components;
+using Content.Shared.FeedbackSystem;
 using Content.Shared.Gravity;
 using Content.Shared.Localizations;
 using Robust.Client;
@@ -89,26 +92,30 @@ namespace Content.Client.Entry
         [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
         [Dependency] private readonly ClientsidePlaytimeTrackingManager _clientsidePlaytimeManager = default!;
         [Dependency] private readonly SpeciesRequirementsManager _speciesRequirements = default!; // SS220 Species bans
+        [Dependency] private readonly ChatRequirementsManager _chatRequirements = default!; // SS220 Chat bans
+        [Dependency] private readonly ClientFeedbackManager _feedbackManager = null!;
 
-        public override void Init()
+        public override void PreInit()
         {
-            ClientContentIoC.Register();
+            ClientContentIoC.Register(Dependencies);
 
             foreach (var callback in TestingCallbacks)
             {
                 var cast = (ClientModuleTestingCallbacks) callback;
                 cast.ClientBeforeIoC?.Invoke();
             }
+        }
 
-            IoCManager.BuildGraph();
-            IoCManager.InjectDependencies(this);
+        public override void Init()
+        {
+            Dependencies.BuildGraph();
+            Dependencies.InjectDependencies(this);
 
             _contentLoc.Initialize();
             _componentFactory.DoAutoRegistrations();
             _componentFactory.IgnoreMissingComponents();
 
             // Do not add to these, they are legacy.
-            _componentFactory.RegisterClass<SharedGravityGeneratorComponent>();
             _componentFactory.RegisterClass<SharedAmeControllerComponent>();
             // Do not add to the above, they are legacy
 
@@ -123,12 +130,10 @@ namespace Content.Client.Entry
             _prototypeManager.RegisterIgnore("htnPrimitive");
             _prototypeManager.RegisterIgnore("gameMap");
             _prototypeManager.RegisterIgnore("gameMapPool");
-            _prototypeManager.RegisterIgnore("lobbyBackground");
             _prototypeManager.RegisterIgnore("gamePreset");
             _prototypeManager.RegisterIgnore("noiseChannel");
             _prototypeManager.RegisterIgnore("playerConnectionWhitelist");
             _prototypeManager.RegisterIgnore("spaceBiome");
-            _prototypeManager.RegisterIgnore("worldgenConfig");
             _prototypeManager.RegisterIgnore("gameRule");
             _prototypeManager.RegisterIgnore("worldSpell");
             _prototypeManager.RegisterIgnore("entitySpell");
@@ -152,6 +157,7 @@ namespace Content.Client.Entry
             _extendedDisconnectInformation.Initialize();
             _jobRequirements.Initialize();
             _speciesRequirements.Initialize(); // SS220 Species bans
+            _chatRequirements.Initialize(); // SS220 Chat bans
             _playbackMan.Initialize();
             _clientsidePlaytimeManager.Initialize();
 
@@ -161,12 +167,6 @@ namespace Content.Client.Entry
             _configManager.SetCVar("interface.resolutionAutoScaleLowerCutoffX", 520);
             _configManager.SetCVar("interface.resolutionAutoScaleLowerCutoffY", 240);
             _configManager.SetCVar("interface.resolutionAutoScaleMinimum", 0.5f);
-        }
-
-        public override void Shutdown()
-        {
-            base.Shutdown();
-            _titleWindowManager.Shutdown();
         }
 
         public override void PostInit()
@@ -195,6 +195,7 @@ namespace Content.Client.Entry
             _discordPlayerInfoManager.Initialize(); // SS220 tier info
             _titleWindowManager.Initialize();
             _ttsManager.Initialize(); // SS220 TTS
+            _feedbackManager.Initialize();
 
             _baseClient.RunLevelChanged += (_, args) =>
             {

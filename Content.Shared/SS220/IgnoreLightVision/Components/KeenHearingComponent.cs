@@ -3,7 +3,7 @@
 using Content.Shared.Actions;
 using Robust.Shared.GameStates;
 
-namespace Content.Shared.SS220.IgnoreLightVision;
+namespace Content.Shared.SS220.IgnoreLightVision.Components;
 
 [RegisterComponent, NetworkedComponent]
 public sealed partial class KeenHearingComponent : AddIgnoreLightVisionOverlayComponent

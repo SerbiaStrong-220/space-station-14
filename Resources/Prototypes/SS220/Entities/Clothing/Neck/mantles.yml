@@ -1,19 +1,7 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-  parent: ClothingNeckBase
-  id: ClothingNeckCloakCEDark
-  name: chief engineer's dark cloak
-  description: The dark cloak of the chief engineer for years of service as the head of the engineering department.
-  suffix: For playtime
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Neck/Cloaks/ce_dark.rsi
-  - type: StealTarget
-    stealGroup: HeadCloak
-
-- type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckMantleCE
   id: ClothingNeckMantleCEDark
   name: chief engineer's dark mantle
   description: The dark mantle of the chief engineer for years of service as head of the engineering department.
@@ -25,7 +13,7 @@
     sprite: SS220/Clothing/Neck/Cloaks/ce_mantle_dark.rsi
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckMantleCap
   id: ClothingNeckWhiteMantleCap
   name: captain's white mantle
   description: A formal white mantle to drape around the shoulders. Others stand on the shoulders of giants. You're the giant they stand on.
@@ -34,23 +22,4 @@
     sprite: SS220/Clothing/Neck/Cloaks/captain_white_mantle.rsi
   - type: Clothing
     sprite: SS220/Clothing/Neck/Cloaks/captain_white_mantle.rsi
-
-- type: entity
-  parent: ClothingNeckBase
-  id: ClothingNeckCMOParadeCloak
-  name: chief medical officer's parade cloak
-  description: The owner has seen everything and more. From the dwarf under the bahus to the smoking chemist in the lab.
-  suffix: For playtime
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Neck/Cloaks/cmo_parade_cloak.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Neck/Cloaks/cmo_parade_cloak.rsi
-  - type: Foldable
-    canFoldInsideContainer: true
-    unfoldVerbText: fold-flip-verb
-    foldVerbText: fold-flip-verb
-  - type: FoldableClothing
-    foldedEquippedPrefix: flipped
-    foldedHeldPrefix: flipped
 

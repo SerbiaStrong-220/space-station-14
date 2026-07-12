@@ -1,26 +1,32 @@
 - type: entity
-  id: MagazinePistolHighCapacityRubber
-  name: machine pistol magazine (.35 auto rubber)
-  parent: BaseMagazinePistolHighCapacity
+  id: MagazinePistolSubMachineGunAcp
+  name: SMG magazine (.45 ACP)
+  parent: [ BaseItem, BaseSecurityContraband ]
   components:
+  - type: Tag
+    tags:
+      - MagazinePistolSubMachineGunAcp
   - type: BallisticAmmoProvider
-    proto: CartridgePistol
+    mayTransfer: true
+    capacity: 25
+    whitelist:
+      tags:
+      - CartridgeAmmoAcp
+    proto: CartridgeAmmoAcp
   - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/sbr.rsi
     layers:
     - state: base
-      sprite: Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_high_capacity_mag.rsi
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
+    - state: mag-2
       map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#1E90FF"
+  - type: MagazineVisuals
+    magState: mag
+    steps: 3
+    zeroVisible: false
+  - type: Appearance
   - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#1E90FF"
-      right:
-      - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#1E90FF"
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container

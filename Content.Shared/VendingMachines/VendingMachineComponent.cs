@@ -76,6 +76,7 @@ namespace Content.Shared.VendingMachines
 
         public string? NextItemToEject;
 
+        [DataField]
         public bool Broken;
 
         /// <summary>
@@ -154,6 +155,12 @@ namespace Content.Shared.VendingMachines
         /// </summary>
         [ViewVariables] public Container Container = default!;
         // SS220 Injectable vends end
+
+        /// <summary>
+        /// Audio entity used during restock in case the doafter gets canceled.
+        /// </summary>
+        [DataField]
+        public EntityUid? RestockStream;
 
         #region Client Visuals
         /// <summary>
@@ -316,5 +323,7 @@ namespace Content.Shared.VendingMachines
         public TimeSpan? DenyEnd;
 
         public TimeSpan? DispenseOnHitEnd;
+
+        public bool Broken;
     }
 }

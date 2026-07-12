@@ -61,17 +61,6 @@ public sealed class ResaveCommand : LocalizedCommands
             // Process deferred component removals.
             _entManager.CullRemovedComponents();
 
-            // SS220 Resave Variantize grids add bgn
-            var gridQueryVar = result.Grids;
-            foreach (var grid in gridQueryVar)
-            {
-                if (_entManager.TryGetComponent(grid, out MapGridComponent? gridComp))
-                {
-                    shell.ConsoleHost.ExecuteCommand($"variantize {grid}");
-                }
-            }
-            // SS220 Resave Variantize grids add end
-
             if (_entManager.HasComponent<LoadedMapComponent>(map))
             {
                 loader.TrySaveMap(map.Comp.MapId, fn);

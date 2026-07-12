@@ -1,0 +1,28 @@
+<controls:DisposalFilterWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client.SS220.Pipes.DisposalFilter"
+    xmlns:userInterface="clr-namespace:Content.Client.SS220.UserInterface"
+    MinSize="402 300">
+
+    <ScrollContainer>
+        <BoxContainer Orientation="Vertical">
+            <BoxContainer Name="FilterByDirectionContainer"
+                          Orientation="Vertical"
+                          HorizontalExpand="True"
+                          VerticalAlignment="Top"/>
+
+            <BoxContainer VerticalExpand="True" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <RichTextLabel Text="{Loc 'filter-default-condition'}"/>
+                <OptionButton Name="NoCriterialDirectionOption" SetSize="107 32" Margin="10 0 0 0" StyleClasses="OpenBoth"/>
+            </BoxContainer>
+
+            <userInterface:ShapeButton Name="ConfirmButton"
+                                       Text="{Loc 'filter-confirm-text'}"
+                                       SetSize="120 32"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Top"
+                                       StyleClasses="OpenBoth"/>
+        </BoxContainer>
+    </ScrollContainer>
+
+</controls:DisposalFilterWindow>

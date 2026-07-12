@@ -32,9 +32,13 @@
     canThrowTrigger: false
     canMoveBreakout: true
     maxEnsnares: 10
+  - type: TriggerOnCollide
+    fixtureID: slips
+  - type: WhitelistTriggerCondition
   - type: Trap
     setTrapDelay: 5
     defuseTrapDelay: 5
+    state: Unarmed
   - type: Tag
     tags:
     - Unstackable
@@ -69,3 +73,20 @@
     setTrapSound: /Audio/SS220/Items/Trap/sound_trap_set.ogg
     defuseTrapSound: /Audio/SS220/Items/Trap/sound_trap_defuse.ogg
     hitTrapSound: /Audio/SS220/Items/Trap/sound_trap_hit.ogg
+
+- type: entity
+  name: bear trap
+  suffix: armed
+  parent: BearTrap
+  id: BearTrapArmed
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Devices/traps/bearTrap.rsi
+    layers:
+    - state: trap-armed
+      map: ["base"]
+  - type: Appearance
+  - type: Trap
+    state: Armed

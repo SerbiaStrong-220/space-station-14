@@ -1,0 +1,11 @@
+<BoxContainer Orientation="Vertical"
+    xmlns="https://spacestation14.io"
+    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls">
+    <cc:HSeparator/>
+    <Label Name="Label" Text="{Loc headset-ui-radio-settings-title}"/>
+    <SpinBox LineEditDisabled="False" Name="FrequencySetterSpinBox" MinSize="100 0"/>
+    <BoxContainer Orientation="Horizontal" Name="SubmitContainer" HorizontalAlignment="Center">
+        <Label Name="SubmitDescription" Margin="4 0 0 1" HorizontalExpand="True" HorizontalAlignment="Left"/>
+        <Button Name="SubmitButton" Text="{Loc 'headset-ui-submit'}" HorizontalExpand="True" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+    </BoxContainer>
+</BoxContainer>

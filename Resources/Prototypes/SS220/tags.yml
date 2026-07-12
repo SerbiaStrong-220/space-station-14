@@ -20,7 +20,13 @@
   id: MagazineGrenadeArta
 
 - type: Tag
-  id: KRSPowerCell
+  id: PowerCellBlaster
+
+- type: Tag
+  id: LaserCarabinePowerCell
+
+- type: Tag
+  id: LaserSMGPowerCell
 
 - type: Tag
   id: WeaponRechargerWhitelist
@@ -133,10 +139,6 @@
 - type: Tag
   id: SpiderLittle
 
- #Add Tourniquet to medic's belt
-- type: Tag
-  id: Tourniquet
-
 # SS220 Add lying action
 - type: Tag
   id: Bed
@@ -217,6 +219,14 @@
 
 - type: Tag
   id: WhitelistPdaIdPainter
+
+# SS220 Saber
+- type: Tag
+  id: MagazinePistolSubMachineGunAcp
+
+- type: Tag
+  id: CartridgeAmmoAcp
+# SS220 Saber end
 
 - type: Tag
   id: CultYoggStealthProvidable
@@ -315,11 +325,6 @@
   id: HolofanProjectorSecurity
 # SS220 Fix #2009 end
 
-# ss220 migo damage in astral fix start
-- type: Tag
-  id: MiGoInAstral
-# ss220 migo damage in astral fix end
-
 # ss220 Cult_update2 start
 - type: Tag
   id: CultYoggInnerHandToggleable
@@ -343,3 +348,48 @@
 - type: Tag
   id: Legalposter
 # ss220 Posters update end
+
+- type: Tag
+  id: MiGoHandsWhitelist
+
+- type: Tag
+  id: DefibrillatorCompact
+
+- type: Tag
+  id: CultYoggTeleportEnter
+
+- type: Tag
+  id: CultYoggTeleportExit
+
+- type: Tag
+  id: VoidTeleporationTarget
+
+- type: Tag
+  id: EnvelopeWhitelist
+
+- type: Tag
+  id: RabbitBnuuyWearable
+
+- type: Tag
+  id: AirDefenseTarget
+
+- type: Tag
+  id: CrystalPurple
+
+- type: Tag
+  id: LoneOpsUplink
+
+- type: Tag
+  id: JudgeGavel
+
+- type: Tag
+  id: Ian
+
+- type: Tag
+  id: CatWalk
+
+- type: Tag
+  id: PressureProtectionSuit
+
+- type: Tag
+  id: HookahCoal

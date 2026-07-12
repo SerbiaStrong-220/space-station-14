@@ -3,8 +3,8 @@
 - type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterArmorBobmer
-  name: бронированный бомбер
-  description: Настоящие лётчики носят и бронежилеты, и модные куртки.
+  name: armored bomber jacket
+  description: Real pilots wear both body armor and fashionable jackets.
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Armor/secbomber.rsi

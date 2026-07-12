@@ -127,7 +127,7 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
             SetSeed(uid, component, _random.Next());
         }
 
-        if (_proto.TryIndex(component.Template, out var biome))
+        if (_proto.Resolve(component.Template, out var biome))
             SetTemplate(uid, component, biome);
 
         var xform = Transform(uid);
@@ -687,7 +687,9 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
 
             if (groupSize > 0)
             {
+#if DEBUG // SS220-remove-log-in-prod
                 Log.Warning($"Found remaining group size for ore veins!");
+#endif // SS220-remove-log-in-prod
             }
         }
 

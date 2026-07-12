@@ -1,3 +1,5 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 - type: construction
   id: BonFireCraft
   graph: BonFire
@@ -9,3 +11,13 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+
+- type: construction
+  id: SingingFishCraft
+  graph: SingingFish
+  startNode: start
+  targetNode: SingingFishNode
+  category: construction-category-structures
+  placementMode: SnapgridCenter
+  objectType: Structure
+  canBuildInImpassable: true

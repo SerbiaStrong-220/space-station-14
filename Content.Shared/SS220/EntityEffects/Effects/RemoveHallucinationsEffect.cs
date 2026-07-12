@@ -8,9 +8,9 @@ namespace Content.Shared.SS220.EntityEffects.Effects;
 /// <summary>
 /// Used to heal hallucinations
 /// </summary>
-public sealed partial class ChemRemoveHallucinationsEffect : EventEntityEffect<ChemRemoveHallucinationsEffect>
+public sealed partial class ChemRemoveHallucinationsEffect : EntityEffectBase<ChemRemoveHallucinationsEffect>
 {
-    protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
+    public override string EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
         return Loc.GetString("reagent-effect-guidebook-ss220-remove-hallucinations");
     }

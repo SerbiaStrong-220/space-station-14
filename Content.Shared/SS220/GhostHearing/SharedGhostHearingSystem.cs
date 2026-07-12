@@ -9,10 +9,3 @@ public abstract class SharedGhostHearingSystem : EntitySystem
         base.Initialize();
     }
 }
-
-public interface IHearableChannelPrototype : IPrototype
-{
-    string ID { get; }
-    string LocalizedName { get; }
-    Color Color { get; }
-}

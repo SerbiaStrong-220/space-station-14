@@ -26,3 +26,5 @@ language-monkey-name = Обезьяний
 language-reptilian-name = Рептильный
 language-spider-name = Паучий
 language-piggish-name = Свинячий
+language-dragon-name = Драконий
+language-carpish-name = Карпиш

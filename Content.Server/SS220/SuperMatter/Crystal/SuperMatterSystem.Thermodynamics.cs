@@ -18,14 +18,14 @@ public sealed partial class SuperMatterSystem
 
     */
 
-    [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
-    [Dependency] private readonly IRobustRandom _robustRandom = default!;
+    [Dependency] private AtmosphereSystem _atmosphere = default!;
+    [Dependency] private IRobustRandom _robustRandom = default!;
 
     private float GetDecayMatterMultiplier(float temperature, float pressure) => SuperMatterInternalProcess.GetDecayMatterMultiplier(temperature, pressure);
     private float GetMolesReactionEfficiency(float temperature, float pressure) => SuperMatterInternalProcess.GetMolesReactionEfficiency(temperature, pressure);
     private float GetDeltaChemistryPotential(float temperature, float pressure) => SuperMatterInternalProcess.GetDeltaChemistryPotential(temperature, pressure);
     private float GetChemistryPotential(float temperature, float pressure) => CHEMISTRY_POTENTIAL_BASE + GetDeltaChemistryPotential(temperature, pressure);
-    private float GetHeatCapacity(float temperature, float matter) => SuperMatterInternalProcess.GetHeatCapacity(temperature, matter);
+    private float GetHeatCapacity(float temperature, float matter) => SuperMatterInternalProcess.GetHeatCapacity(temperature, matter / MatterNondimensionalization);
     private float GetReleaseEnergyConversionEfficiency(float temperature, float pressure) => SuperMatterInternalProcess.GetReleaseEnergyConversionEfficiency(temperature, pressure);
     private float GetZapToRadiationRatio(float temperature, float pressure, SuperMatterPhaseState smState) => SuperMatterInternalProcess.GetZapToRadiationRatio(temperature, pressure, smState);
     private float GetOxygenToPlasmaRatio(float temperature, float pressure, SuperMatterPhaseState smState) => SuperMatterInternalProcess.GetOxygenToPlasmaRatio(temperature, pressure, smState);
@@ -36,9 +36,9 @@ public sealed partial class SuperMatterSystem
     public const float CHEMISTRY_POTENTIAL_BASE = 12f; // parrots now, but need to concrete in future
     public const float MATTER_DECAY_BASE_RATE = 85f; // parrots now, but need to concrete in future
     /// <summary> Defines how fast SM gets in thermal equilibrium with gas in it. Do not make it greater than 1! </summary>
-    public const float SM_HEAT_TRANSFER_RATIO = 0.07f;
+    public const float SM_HEAT_TRANSFER_RATIO = 0.17f;
 
-    private const float RestructureProbability = 0.0002f; // remember that we have about 30 times trying it in a second. 2e-4 is like one chance in 3 minutes.
+    private const float RestructureProbability = 0.001f;
     private const float RestructureAdditionalMatterDimensionLess = 42f;
 
     private void EvaluateDeltaInternalEnergy(Entity<SuperMatterComponent> crystal, GasMixture gasMixture, float frameTime)
@@ -66,8 +66,9 @@ public sealed partial class SuperMatterSystem
         if (smComp.InternalEnergy == SuperMatterComponent.MinimumInternalEnergy
             && _robustRandom.Prob(RestructureProbability))
         {
-            smComp.Matter += _robustRandom.GetRandom().NextFloat(0.7f, 1.3f) * RestructureAdditionalMatterDimensionLess * MatterNondimensionalization;
-            smComp.InternalEnergy = GetSafeInternalEnergyToMatterValue(crystal.Comp.Matter) * _robustRandom.GetRandom().NextFloat(0.7f, 1.3f);
+            smComp.Matter += _robustRandom.NextFloat(0.7f, 1.3f) * RestructureAdditionalMatterDimensionLess * MatterNondimensionalization;
+            // explicitly take energy for first mode
+            smComp.InternalEnergy = GetSafeInternalEnergyToMatterValue(crystal.Comp.Matter)[0].Energy * _robustRandom.NextFloat(0.7f, 1.3f);
             _popupSystem.PopupEntity(Loc.GetString("supermatter-crystal-restructure"), crystalUid);
 
             smComp.Integrity = MathF.Max(smComp.Integrity * 0.8f, 0.1f);

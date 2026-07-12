@@ -6,13 +6,14 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 108000 # SS220-RoleTime
+      time: 30h # SS220-RoleTime
     - !type:SpeciesRequirement #SS220-jobbans begin
       inverted: true
       species:
       - Felinid #SS220-jobbans end
   weight: 5
   startingGear: WardenGear
+  experienceDefinition: WardenRoleExperience # SS220-experience
   icon: "JobIconWarden"
   supervisors: job-supervisors-hos
   canBeAntag: false
@@ -21,10 +22,11 @@
   - Brig
   - Armory
   - Maintenance
-  - Service
   - External
   - Detective
   - Cryogenics
+  - GenpopEnter
+  - GenpopLeave
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
@@ -36,12 +38,12 @@
     id: WardenPDA
     ears: ClothingHeadsetSecurity
 #    belt: ClothingBeltSecurityFilled #SS220-FreedomHoSCap
-    pocket1: WeaponPistolMk58Nonlethal #SS220-DeleteSecurityLetal
+    pocket1: WeaponPistolMk58
   storage:
     back:
     - Flash
-    - MagazinePistolRubber #SS220-DeleteSecurityLetal-Begin
-    - MagazinePistolRubber
+    - MagazinePistol
+    - MagazinePistol
     - FlashlightSeclite
     - DrinkRelaxingPeachCan #SS220-DeleteSecurityLetal-End
 

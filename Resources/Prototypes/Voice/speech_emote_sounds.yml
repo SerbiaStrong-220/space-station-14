@@ -43,6 +43,8 @@
       params:
         volume: 2
     #SS220 emote sounds begin
+    BloodCough:
+      collection: MaleCoughs
     DefaultDeathgasp:
       collection: Deathgasp
     Gasp:
@@ -103,6 +105,8 @@
       params:
         volume: 2
     #SS220 emote sounds
+    BloodCough:
+      collection: FemaleCoughs
     DefaultDeathgasp:
       collection: Deathgasp
     Gasp:
@@ -139,6 +143,11 @@
       params:
         volume: 2
     #SS220 emote sounds
+    # TODO-SS220: maybe own lizard cough sound
+    Cough:
+      collection: MaleCoughs
+    BloodCough:
+      collection: MaleCoughs
     DefaultDeathgasp:
       collection: Deathgasp
     Gasp:
@@ -182,7 +191,12 @@
       collection: Fart
       params:
         volume: 2
-    #SS220 emote sounds
+    #SS220 emote sounds begin
+    # TODO-SS220: maybe own lizard cough sound
+    Cough:
+      collection: FemaleCoughs
+    BloodCough:
+      collection: FemaleCoughs
     # DefaultDeathgasp:
     #   collection: Deathgasp
     # Gasp:
@@ -245,6 +259,8 @@
       params:
         volume: 2
     #SS220 emote sounds
+    BloodCough:
+      collection: MaleCoughs
     DefaultDeathgasp:
       collection: Deathgasp
     Gasp:
@@ -302,7 +318,9 @@
       collection: Fart
       params:
         volume: 2
-    #SS220 emote sounds
+    #SS220 emote sounds begin
+    BloodCough:
+      collection: FemaleCoughs
     DefaultDeathgasp:
       collection: Deathgasp
     Gasp:
@@ -326,11 +344,13 @@
 - type: emoteSounds
   id: UnisexVox
   sounds:
-    #SS220 emote sounds
-    DefaultDeathgasp:
-      collection: Deathgasp
-    Gasp:
-      collection: Gasp
+    #SS220 emote sounds begin
+    BloodCough:
+      path: /Audio/Voice/Vox/vox_cough.ogg
+    # DefaultDeathgasp:
+    #   collection: Deathgasp
+    # Gasp:
+    #   collection: Gasp
     CritGasp:
       collection: MaleCritGasp
     #SS220 emote sounds end
@@ -338,15 +358,31 @@
       path: /Audio/Voice/Vox/shriek1.ogg
     Laugh:
       path: /Audio/Voice/Vox/vox_laugh.ogg
+    Sneeze:
+      path: /Audio/Voice/Vox/vox_sneeze.ogg
+    Cough:
+      path: /Audio/Voice/Vox/vox_cough.ogg
+    Sigh:
+      path: /Audio/Voice/Vox/vox_sigh.ogg
+    Click:
+      path: /Audio/Voice/Vox/vox_click.ogg
+    Chitter:
+      path: /Audio/Voice/Vox/vox_chitter.ogg
     Honk:
       collection: BikeHorn
+    Crying:
+      path: /Audio/Voice/Vox/vox_cry.ogg
     Weh:
       collection: Weh
     Hew:
       collection: Hew
+    Gasp:
+      path: /Audio/Effects/Gasp/vox_gasp.ogg
+    DefaultDeathgasp:
+      path: /Audio/Effects/Gasp/vox_DeathGasp.ogg
   params:
     variation: 0.125
-    # We need vox sounds for the other emotes
+    # TODO: We need vox sounds for the other emotes
 
 - type: emoteSounds
   id: UnisexDiona
@@ -355,6 +391,8 @@
       path: /Audio/Voice/Diona/diona_scream.ogg
     Laugh:
       collection: DionaLaugh
+    Sneeze:
+      collection: DionaSneeze
     Chirp:
       path: /Audio/Animals/nymph_chirp.ogg
     Honk:
@@ -383,7 +421,12 @@
       path: /Audio/Voice/Arachnid/arachnid_chitter.ogg
     Click:
       path: /Audio/Voice/Arachnid/arachnid_click.ogg
-    #SS220 emote sounds
+    #SS220 emote sounds begin
+    # TODO-SS220: maybe own spider cough sound
+    Cough:
+      collection: MaleCoughs
+    BloodCough:
+      collection: MaleCoughs
     DefaultDeathgasp:
       collection: Deathgasp
     Gasp:
@@ -440,6 +483,8 @@
       params:
         volume: 2
     #SS220 emote sounds begin
+    BloodCough:
+      collection: MaleCoughs
     DefaultDeathgasp:
       collection: Deathgasp
     Gasp:
@@ -492,6 +537,9 @@
       collection: Whistles
     CritGasp:
       collection: FemaleCritGasp
+    #SS220 emote sounds begin
+    BloodCough:
+      collection: FemaleCoughs
     #SS220 emote sounds end
     Weh:
       collection: Weh
@@ -521,6 +569,11 @@
     Squeak:
       path: /Audio/Voice/Moth/moth_squeak.ogg
     #SS220 emote sounds
+    # TODO-SS220: maybe own moth cough sound
+    Cough:
+      collection: FemaleCoughs
+    BloodCough:
+      collection: FemaleCoughs
     DefaultDeathgasp:
       collection: Deathgasp
     Gasp:
@@ -603,6 +656,115 @@
     Ping:
       collection: XenoborgPing
 
+# Vulp Sounds
+- type: emoteSounds
+  id: MaleVulpkanin
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      collection: MaleLaugh
+    Sneeze:
+      collection: VulpkaninSneeze
+    Cough:
+      collection: MaleCoughs
+    # SS220-emotes-begin
+    BloodCough:
+      collection: MaleCoughs
+    # SS220-emotes-end
+    Whistle:
+      collection: Whistles
+    Sigh:
+      collection: MaleSigh
+    Yawn:
+      collection: VulpkaninYawns
+    Scream:
+      collection: VulpkaninScreams
+    # Growl:
+    #   collection: VulpkaninGrowls
+    Growl:
+      collection: GrowlVulpin
+    Snarl:
+      collection: VulpkaninSnarls
+    # Bark:
+    #   collection: VulpkaninBarks
+    Bark:
+      collection: BarkVulpin
+    Whine:
+      collection: VulpkaninWhines
+    Crying:
+      collection: VulpkaninWhines
+    Howl:
+      collection: VulpkaninHowls
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Honk:
+      collection: BikeHorn
+    Gasp:
+      collection: MaleGasp
+    DefaultDeathgasp:
+      collection: MaleDeathGasp
+
+- type: emoteSounds
+  id: FemaleVulpkanin
+  params:
+    variation: 0.125
+  sounds:
+  # SS220-port-vulpkanins-begin
+    BloodCough:
+      collection: FemaleCoughs
+  # SS220-port-vulpkanins-end
+    Laugh:
+      collection: FemaleLaugh
+    Sneeze:
+      collection: VulpkaninSneeze
+    Cough:
+      collection: FemaleCoughs
+    Whistle:
+      collection: Whistles
+    Sigh:
+      collection: FemaleSigh
+    Yawn:
+      collection: VulpkaninYawns
+    Scream:
+      collection: VulpkaninScreams
+    # SS220-port-vulpkanins-begin
+    # Growl:
+    #   collection: VulpkaninGrowls
+    Growl:
+      collection: GrowlVulpin
+    # SS220-port-vulpkanins-end
+    Snarl:
+      collection: VulpkaninSnarls
+    # SS220-port-vulpkanins-begin
+    # Bark:
+    #   collection: VulpkaninBarks
+    Bark:
+      collection: BarkVulpin
+    # SS220-port-vulpkanins-end
+    Whine:
+      collection: VulpkaninWhines
+    Crying:
+      collection: VulpkaninWhines
+    # SS220-port-vulpkanins-begin
+    # Howl:
+    #   collection: VulpkaninHowls
+    Howl:
+      collection: HowlVulpin
+    # SS220-port-vulpkanins-end
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Honk:
+      collection: BikeHorn
+    Gasp:
+      collection: FemaleGasp
+    DefaultDeathgasp:
+      collection: FemaleDeathGasp
+
 # body emotes
 - type: emoteSounds
   id: GeneralBodyEmotes
@@ -642,6 +804,22 @@
       path: /Audio/Voice/Reptilian/reptilian_tailthump.ogg
       params:
         variation: 0.125
+    Clap:
+      collection: Claps
+    ClapSingle:
+      collection: ClapSingle
+    Snap:
+      collection: Snaps
+      params:
+        volume: -6
+    Salute:
+      collection: Salutes
+
+- type: emoteSounds
+  id: MothBodyEmotes
+  sounds:
+    Flap:
+      path: /Audio/Voice/Moth/moth_flap.ogg
     Clap:
       collection: Claps
     ClapSingle:
@@ -746,6 +924,10 @@
       collection: WawaLaugh
     Sneeze:
       collection: WawaSneeze
+    # SS220-add-emotes-begin
+    BloodCough:
+      collection: MaleCoughs
+    # SS220-add-emotes-end
     Cough:
       collection: MaleCoughs
     Whistle:
