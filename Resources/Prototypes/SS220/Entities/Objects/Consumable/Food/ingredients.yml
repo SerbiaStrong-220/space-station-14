@@ -219,3 +219,64 @@
     flavors:
     - sweet
     - bitter
+
+# cooked mushroom
+- type: entity
+  name: cooked chanterelle cluster
+  parent: FoodProduceBase
+  id: FoodMushroomCooked
+  description: Cooked Cantharellus Cibarius, gatherer's delight.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - mushroom
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 6
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/mushroom.rsi
+    state: mushroom-cooked
+  - type: Tag
+    tags:
+    - Vegetable
+    - Mushroom
+    - Cooked
+  - type: FoodSequenceElement
+    entries:
+      Burger: MushroomBurger
+
+#Glazunya
+- type: entity
+  parent: FoodMealBase
+  id: FoodSunnySideUpEgg
+  name: sunny-side up egg
+  description: A fried egg with an intact yolk.
+  components:
+  - type: Item
+    size: Tiny
+    shape:
+    - 0,0,0,0
+  - type: FlavorProfile
+    flavors:
+    - egg
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/meals.rsi
+    state: sunny-side-up-egg
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: EggCooked
+          Quantity: 6
+  - type: Tag
+    tags:
+    - Meat
+  - type: FoodSequenceElement
+    entries:
+      Burger: MeatSunnySideUpEggBurger
+  - type: Extractable
+    grindableSolutionName: food
