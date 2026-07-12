@@ -436,24 +436,14 @@ public abstract partial class SharedGunSystem : EntitySystem
         var shotEv = new GunShotEvent(user, ev.Ammo);
         RaiseLocalEvent(gun, ref shotEv);
 
-        // SS220-felinid-recoil-begin
-        var impulseMultiplier = 1f;
-        if (userImpulse)
-        {
-            var shooterShot = new ShooterGunShotEvent(ev.Ammo);
-            RaiseLocalEvent(user, ref shooterShot);
-            impulseMultiplier = shooterShot.ImpulseMultiplier;
-        }
-
         if (!userImpulse || !TryComp<PhysicsComponent>(user, out var userPhysics))
             return true;
 
-        var shooterEv = new ShooterImpulseEvent { Multiplier = impulseMultiplier };
+        var shooterEv = new ShooterImpulseEvent();
         RaiseLocalEvent(user, ref shooterEv);
 
         if (shooterEv.Push)
-            CauseImpulse(fromCoordinates, toCoordinates.Value, (user, userPhysics), shooterEv.Multiplier);
-        // SS220-felinid-recoil-end
+            CauseImpulse(fromCoordinates, toCoordinates.Value, (user, userPhysics));
         return true;
     }
 
@@ -586,18 +576,14 @@ public abstract partial class SharedGunSystem : EntitySystem
         CreateEffect(gun, ev, user);
     }
 
-    public void CauseImpulse(
-        EntityCoordinates fromCoordinates,
-        EntityCoordinates toCoordinates,
-        Entity<PhysicsComponent> user,
-        float multiplier = 1f)
+    public void CauseImpulse(EntityCoordinates fromCoordinates, EntityCoordinates toCoordinates, Entity<PhysicsComponent> user)
     {
         var fromMap = TransformSystem.ToMapCoordinates(fromCoordinates).Position;
         var toMap = TransformSystem.ToMapCoordinates(toCoordinates).Position;
         var shotDirection = (toMap - fromMap).Normalized();
 
         const float impulseStrength = 25.0f;
-        var impulseVector = shotDirection * impulseStrength * Math.Max(0f, multiplier);
+        var impulseVector = shotDirection * impulseStrength;
         Physics.ApplyLinearImpulse(user, -impulseVector, body: user.Comp);
     }
 
@@ -736,16 +722,6 @@ public record struct AttemptShootEvent(EntityUid User, string? Message, bool Can
 [ByRefEvent]
 public record struct GunShotEvent(EntityUid User, List<(EntityUid? Uid, IShootable Shootable)> Ammo);
 
-// SS220-felinid-recoil-begin
-/// <summary>
-/// Raised on the shooter after a predicted gunshot has consumed valid ammunition.
-/// </summary>
-[ByRefEvent]
-public record struct ShooterGunShotEvent(
-    List<(EntityUid? Uid, IShootable Shootable)> Ammo,
-    float ImpulseMultiplier = 1f);
-// SS220-felinid-recoil-end
-
 /// <summary>
 /// Raised on an entity after firing a gun to see if any components or systems would allow this entity to be pushed
 /// by the gun they're firing. If true, GunSystem will create an impulse on our entity.
@@ -754,7 +730,6 @@ public record struct ShooterGunShotEvent(
 public record struct ShooterImpulseEvent()
 {
     public bool Push;
-    public float Multiplier = 1f;
 };
 
 public enum EffectLayers : byte
