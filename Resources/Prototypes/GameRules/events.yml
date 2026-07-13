@@ -222,6 +222,7 @@
   components:
   - type: StationEvent
     directorSeverity: Crisis # SS220-event-director
+    directorCost: 90 # SS220-event-director
     weight: 9.5 # ss220 upraise midround events
     earliestStart: 40
     reoccurrenceDelay: 20
@@ -254,6 +255,7 @@
   components:
   - type: StationEvent
     directorSeverity: Crisis # SS220-event-director
+    directorCost: 90 # SS220-event-director
     weight: 9 # ss220 upraise midround events
     duration: null
     earliestStart: 30
@@ -328,6 +330,7 @@
   components:
   - type: StationEvent
     directorSeverity: Crisis # SS220-event-director
+    directorCost: 75 # SS220-event-director
     weight: 8 # ss220 upraise midround events
     duration: null
     earliestStart: 20
@@ -367,6 +370,7 @@
   components:
   - type: StationEvent
     directorSeverity: Incident # SS220-event-director
+    directorCost: 45 # SS220-event-director
     weight: 10.5 # ss220 upraise midround events
     duration: 1
     earliestStart: 45
@@ -380,6 +384,7 @@
   components:
   - type: StationEvent
     directorSeverity: Crisis # SS220-event-director
+    directorCost: 100 # SS220-event-director
     weight: 0.2 # ss220 upraise midround events
     duration: 1
     earliestStart: 30
@@ -638,6 +643,7 @@
   components:
   - type: StationEvent
     directorSeverity: Crisis # SS220-event-director
+    directorCost: 110 # SS220-event-director
     earliestStart: 50
     minimumPlayers: 30
     weight: 5 # ss220 upraise midround events
@@ -725,6 +731,7 @@
   components:
   - type: StationEvent
     directorSeverity: Crisis # SS220-event-director
+    directorCost: 90 # SS220-event-director
     earliestStart: 30
     weight: 9 # ss220 upraise midround events
     minimumPlayers: 15

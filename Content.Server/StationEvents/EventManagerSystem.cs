@@ -86,13 +86,12 @@ public sealed class EventManagerSystem : EntitySystem
 
     // SS220-event-director-begin
     /// <summary>
-    /// Director-controlled random event selection. Unlike <see cref="RunRandomEvent"/>, this
-    /// filters candidates by severity before performing the normal weighted selection.
+    /// Director-controlled random event selection. The director provides its available budget;
+    /// only events it can pay for take part in the normal weighted selection.
     /// </summary>
-    public bool TryRunRandomEvent(EntityTableSelector limitedEventsTable, StationEventSeverity maximumSeverity,
-        out StationEventSeverity severity)
+    public bool TryRunRandomEvent(EntityTableSelector limitedEventsTable, float budget, out float cost)
     {
-        severity = StationEventSeverity.Calm;
+        cost = 0f;
 
         if (RandomEventsDisabled())
             return false;
@@ -100,31 +99,24 @@ public sealed class EventManagerSystem : EntitySystem
         if (!TryBuildLimitedEvents(limitedEventsTable, out var limitedEvents))
             return false;
 
-        var eligible = limitedEvents
-            .Where(pair => pair.Value.DirectorSeverity <= maximumSeverity)
-            .ToDictionary(pair => pair.Key, pair => pair.Value);
+        var eligible = new Dictionary<EntityPrototype, StationEventComponent>();
+        foreach (var (candidatePrototype, candidateEvent) in limitedEvents)
+        {
+            if (candidateEvent.DirectorCost <= budget)
+                eligible.Add(candidatePrototype, candidateEvent);
+        }
 
-        // A phase is a preference, not a reason to starve a round of harmless content.
         if (eligible.Count == 0)
             return false;
 
         if (FindEvent(eligible) is not { } eventId)
             return false;
 
-        StationEventComponent? stationEvent = null;
-        foreach (var (prototype, candidate) in eligible)
-        {
-            if (prototype.ID != eventId)
-                continue;
-
-            stationEvent = candidate;
-            break;
-        }
-
-        if (stationEvent == null)
+        if (!_prototype.Resolve(new EntProtoId(eventId), out var prototype) ||
+            !eligible.TryGetValue(prototype, out var stationEvent))
             return false;
 
-        severity = stationEvent.DirectorSeverity;
+        cost = stationEvent.DirectorCost;
         GameTicker.AddGameRule(eventId);
         return true;
     }

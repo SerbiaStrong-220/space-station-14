@@ -7,10 +7,7 @@
   description: survival-description
   rules:
     - SurvivalRule #SS220 survival rule
-    - MeteorSwarmScheduler
-    - RampingStationEventScheduler
-    # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
-    - SpaceTrafficControlNeutralEventScheduler # SS220-LostSouls
+    - StationEventDirector # SS220-event-director
     - BasicRoundstartVariation
     - EmergencyShuttleAutoVote # SS220-evac-vote
 
@@ -24,10 +21,7 @@
   showInVote: false # secret
   description: kessler-syndrome-description
   rules:
-    - KesslerSyndromeScheduler
-    - RampingStationEventScheduler
-    # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
-    - SpaceTrafficControlNeutralEventScheduler # SS220-LostSouls
+    - StationEventDirector # SS220-event-director
     - BasicRoundstartVariation
     - EmergencyShuttleAutoVote # SS220-evac-vote
 
@@ -45,10 +39,7 @@
     - Zombie
     - Wizard
     - Xenoborgs
-    - KesslerSyndromeScheduler
-    - RampingStationEventScheduler
-    # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
-    - SpaceTrafficControlNeutralEventScheduler # SS220-LostSouls
+    - StationEventDirector # SS220-event-director
     - BasicRoundstartVariation
     - EmergencyShuttleAutoVote # SS220-evac-vote
 
@@ -69,13 +60,7 @@
     - Zombie
     - Wizard
     - Xenoborgs
-    - BasicStationEventScheduler
-    - KesslerSyndromeScheduler
-    - MeteorSwarmMildScheduler
-    - MeteorSwarmScheduler
-    - RampingStationEventScheduler
-    # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
-    - SpaceTrafficControlNeutralEventScheduler # SS220-LostSouls
+    - StationEventDirector # SS220-event-director
     - BasicRoundstartVariation
     - EmergencyShuttleAutoVote # SS220-evac-vote
 
@@ -89,10 +74,6 @@
   showInVote: false #2boring2vote
   description: extended-description
   rules:
-  - BasicStationEventScheduler
-  - MeteorSwarmScheduler
-  # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
-  - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
   - BasicRoundstartVariation
   - EmergencyShuttleAutoVote # SS220-evac-vote
 
@@ -120,10 +101,7 @@
   rules:
   - DynamicRule
   - DummyNonAntag
-  - DynamicStationEventScheduler
-  - MeteorSwarmScheduler
-  # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
-  - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
+  - DynamicStationEventDirector # SS220-event-director
   - BasicRoundstartVariation
   - EmergencyShuttleAutoVote # SS220-evac-vote
 
@@ -163,10 +141,7 @@
   - DummyNonAntagChance
   - Traitor
   - SubGamemodesRuleNoWizard
-  - BasicStationEventScheduler
-  - MeteorSwarmScheduler
-  # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
-  - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
+  - StationEventDirector # SS220-event-director
   - BasicRoundstartVariation
   - EmergencyShuttleAutoVote # SS220-evac-vote
 
@@ -194,10 +169,7 @@
     - Nukeops
     - DummyNonAntagChance
     # - SubGamemodesRuleNoWizard #SS220 no-thief-on-nukie-round-fix
-    - BasicStationEventScheduler
-    - MeteorSwarmScheduler
-    # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
-    - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
+    - StationEventDirector # SS220-event-director
     - BasicRoundstartVariation
 
 # SS220 no rev begin
@@ -231,10 +203,7 @@
   - Wizard
   - DummyNonAntagChance
   - SubGamemodesRuleNoWizard #No Dual Wizards at the start, midround is fine
-  - BasicStationEventScheduler
-  - MeteorSwarmScheduler
-  # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
-  - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
+  - StationEventDirector # SS220-event-director
   - BasicRoundstartVariation
   - EmergencyShuttleAutoVote # SS220-evac-vote
 
@@ -249,10 +218,7 @@
   - Xenoborgs
   - DummyNonAntagChance
   - SubGamemodesRuleNoWizardNoXenoborg # no two motherships
-  - BasicStationEventScheduler
-  - MeteorSwarmScheduler
-  # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
-  - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
+  - StationEventDirector # SS220-event-director
   - BasicRoundstartVariation
   - EmergencyShuttleAutoVote # SS220-evac-vote
 
@@ -269,10 +235,7 @@
   showInVote: false
   rules:
   - Zombie
-  - BasicStationEventScheduler
-  - MeteorSwarmScheduler
-  # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
-  - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
+  - StationEventDirector # SS220-event-director
   - BasicRoundstartVariation
   - EmergencyShuttleAutoVote # SS220-evac-vote
 
@@ -287,8 +250,5 @@
   showInVote: false
   rules:
   - Zombie
-  - BasicStationEventScheduler
-  - KesslerSyndromeScheduler
-  # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
-  - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
+  - StationEventDirector # SS220-event-director
   - BasicRoundstartVariation

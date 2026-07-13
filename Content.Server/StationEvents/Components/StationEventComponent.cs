@@ -43,6 +43,12 @@ public sealed partial class StationEventComponent : Component
     /// </summary>
     [DataField]
     public StationEventSeverity DirectorSeverity = StationEventSeverity.Calm;
+
+    /// <summary>
+    /// Points the station event director must spend before this event can start.
+    /// </summary>
+    [DataField]
+    public float DirectorCost = 10f;
     // SS220-event-director-end
 
     [DataField]

@@ -1,10 +1,43 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 # SS220-event-director-begin
+- type: entityTable
+  id: SS220StationEventDirectorTable
+  table: !type:AllSelector
+  children:
+  - !type:NestedSelector
+    tableId: BasicGameRulesTable
+  - !type:NestedSelector
+    tableId: BasicMeteorSwarmEventsTable
+  - !type:NestedSelector
+    tableId: UnknownShuttlesNeutralTable
+
+- type: entityTable
+  id: SS220DynamicStationEventDirectorTable
+  table: !type:AllSelector
+  children:
+  - !type:NestedSelector
+    tableId: DynamicGameRulesTable
+  - !type:NestedSelector
+    tableId: BasicMeteorSwarmEventsTable
+  - !type:NestedSelector
+    tableId: UnknownShuttlesNeutralTable
+
 - type: entity
   id: StationEventDirector
+  parent: BaseGameRule
   components:
   - type: StationEventDirector
+    scheduledGameRules: !type:NestedSelector
+      tableId: SS220StationEventDirectorTable
+
+- type: entity
+  id: DynamicStationEventDirector
+  parent: StationEventDirector
+  components:
+  - type: StationEventDirector
+    scheduledGameRules: !type:NestedSelector
+      tableId: SS220DynamicStationEventDirectorTable
 # SS220-event-director-end
 
 - type: entity

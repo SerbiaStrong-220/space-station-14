@@ -9,7 +9,7 @@
   minPlayers: 30
   rules:
     - DarkReaperSpawnMajor
-    - BasicStationEventScheduler
+    - StationEventDirector # SS220-event-director
 
 # 40-59 players Cult Yogg
 - type: gamePreset
@@ -27,7 +27,7 @@
   - SubModLowTraitorDynamic
   - SubGamemodesRule
   #- NoNewCrewAntagsStationEventScheduler
-  - SpaceTrafficControlFriendlyEventScheduler
+  - StationEventDirector # SS220-event-director
   - EmergencyShuttleAutoVote
 
 
@@ -44,11 +44,10 @@
   - CultYoggRuleHighPop
   - BasicRoundstartVariation
   - SubGamemodesRule
-  - MeteorSwarmScheduler
+  - StationEventDirector # SS220-event-director
   - SubModLowTraitorDynamic
   - SubGamemodesRule
   #- NoNewCrewAntagsStationEventScheduler
-  - SpaceTrafficControlFriendlyEventScheduler
   - EmergencyShuttleAutoVote
 
 - type: gamePreset
@@ -58,12 +57,10 @@
   minPlayers: 5
   rules:
   - TraitorDynamic
-  - BasicStationEventScheduler
   - EmergencyShuttleAutoVote
   - DummyNonAntagChance
   - SubGamemodesRule
-  - MeteorSwarmScheduler
-  - SpaceTrafficControlFriendlyEventScheduler
+  - StationEventDirector # SS220-event-director
   - BasicRoundstartVariation
 
 # event schedulers

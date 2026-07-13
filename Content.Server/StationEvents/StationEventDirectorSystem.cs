@@ -1,160 +1,135 @@
+using Content.Server.AlertLevel;
 using Content.Server.GameTicking;
+using Content.Server.GameTicking.Rules;
 using Content.Server.StationEvents.Components;
-using Content.Shared.EntityTable.EntitySelectors;
-using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
-using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Timing;
 
 namespace Content.Server.StationEvents;
 
-/// <summary>
-/// A small utility-AI that gives random station events a shared rhythm.  It deliberately
-/// coordinates all schedulers in a round, rather than letting each scheduler build its own
-/// escalating event queue.
-/// </summary>
 // SS220-event-director-begin
-public sealed class StationEventDirectorSystem : EntitySystem
+/// <summary>
+/// Owns the station's random-event economy. Unlike legacy schedulers, this system is the only
+/// normal producer of mid-round events: it earns one shared budget and buys one affordable event.
+/// </summary>
+public sealed class StationEventDirectorSystem : GameRuleSystem<StationEventDirectorComponent>
 {
-    private static readonly TimeSpan AnyEventCooldown = TimeSpan.FromMinutes(2);
-    private static readonly TimeSpan IncidentCooldown = TimeSpan.FromMinutes(6);
-    private static readonly TimeSpan CrisisCooldown = TimeSpan.FromMinutes(25);
-    private static readonly TimeSpan PhaseDuration = TimeSpan.FromMinutes(5);
-    private static readonly TimeSpan DeferredRetry = TimeSpan.FromMinutes(1);
-    private static readonly EntProtoId DirectorPrototype = "StationEventDirector";
+    private static readonly TimeSpan FailedAttemptDelay = TimeSpan.FromMinutes(1);
 
     [Dependency] private readonly EventManagerSystem _events = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<RoundStartedEvent>(OnRoundStarted);
+        SubscribeLocalEvent<AlertLevelChangedEvent>(OnAlertLevelChanged);
+        SubscribeLocalEvent<StationEventDirectorComponent, StationEventDirectorBudgetEvent>(OnBudgetChanged);
     }
 
-    private void OnRoundStarted(RoundStartedEvent ev)
+    protected override void Started(EntityUid uid, StationEventDirectorComponent component, GameRuleComponent gameRule,
+        GameRuleStartedEvent args)
     {
-        var query = EntityQueryEnumerator<StationEventDirectorComponent>();
-        while (query.MoveNext(out var uid, out _))
+        base.Started(uid, component, gameRule, args);
+
+        component.Budget = component.StartingBudget;
+        component.LastBudgetUpdate = Timing.CurTime;
+        component.NextEventTime = Timing.CurTime + GetEventDelay(component);
+    }
+
+    protected override void ActiveTick(EntityUid uid, StationEventDirectorComponent component, GameRuleComponent gameRule,
+        float frameTime)
+    {
+        base.ActiveTick(uid, component, gameRule, frameTime);
+
+        if (!_events.EventsEnabled || Timing.CurTime < component.NextEventTime)
+            return;
+
+        UpdateBudget((uid, component));
+
+        if (HasActiveStationEvent())
         {
-            QueueDel(uid);
+            component.NextEventTime = Timing.CurTime + FailedAttemptDelay;
+            return;
         }
+
+        if (!_events.TryRunRandomEvent(component.ScheduledGameRules, component.Budget, out var cost))
+        {
+            component.NextEventTime = Timing.CurTime + FailedAttemptDelay;
+            return;
+        }
+
+        component.Budget -= cost;
+        component.NextEventTime = Timing.CurTime + GetEventDelay(component);
     }
 
     /// <summary>
-    /// Attempts one random event from a scheduler table and returns when it should try again.
+    /// Adjusts the event budget. Gameplay systems may raise <see cref="StationEventDirectorBudgetEvent"/>
+    /// on the active director to report a player-caused change in station pressure.
     /// </summary>
-    public TimeSpan RequestEvent(EntityTableSelector table)
+    public void AdjustBudget(Entity<StationEventDirectorComponent> director, float amount)
     {
-        var now = _timing.CurTime;
-        var director = GetDirector();
-        var state = director.Comp;
-        UpdatePhase(state, now);
-
-        if (state.LastEvent is { } lastEvent && now - lastEvent < AnyEventCooldown)
-            return AnyEventCooldown - (now - lastEvent);
-
-        var maximum = GetMaximumSeverity(state, now);
-        if (!_events.TryRunRandomEvent(table, maximum, out var severity))
-            return DeferredRetry;
-
-        state.LastEvent = now;
-        if (severity >= StationEventSeverity.Incident)
-            state.LastIncident = now;
-        if (severity == StationEventSeverity.Crisis)
-            state.LastCrisis = now;
-
-        return GetNextAttemptDelay(state);
+        UpdateBudget(director);
+        director.Comp.Budget = Math.Clamp(director.Comp.Budget + amount, 0f, director.Comp.MaximumBudget);
     }
 
-    private Entity<StationEventDirectorComponent> GetDirector()
+    private void OnBudgetChanged(Entity<StationEventDirectorComponent> director, ref StationEventDirectorBudgetEvent args)
     {
-        var query = EntityQueryEnumerator<StationEventDirectorComponent>();
-        if (query.MoveNext(out var uid, out var component))
-            return (uid, component);
-
-        var director = Spawn(DirectorPrototype, MapCoordinates.Nullspace);
-        return (director, Comp<StationEventDirectorComponent>(director));
+        AdjustBudget(director, args.Amount);
     }
 
-    private void UpdatePhase(StationEventDirectorComponent state, TimeSpan now)
+    private void OnAlertLevelChanged(AlertLevelChangedEvent args)
     {
-        if (now < state.NextPhaseUpdate)
-            return;
-
-        state.NextPhaseUpdate = now + PhaseDuration;
-
-        if (HasActiveThreat(StationEventSeverity.Crisis) || IsOnCooldown(state.LastCrisis, CrisisCooldown, now))
+        var query = EntityQueryEnumerator<StationEventDirectorComponent, GameRuleComponent>();
+        while (query.MoveNext(out var uid, out var director, out var gameRule))
         {
-            state.Phase = StationEventSeverity.Calm;
-            return;
+            if (!GameTicker.IsGameRuleActive(uid, gameRule))
+                continue;
+
+            switch (args.AlertLevel)
+            {
+                case "green":
+                    AdjustBudget((uid, director), director.RecoveryBudget);
+                    break;
+                case "blue":
+                    DelayForAlert((uid, director), director.RecoveryBudget);
+                    break;
+                case "red":
+                case "gamma":
+                    DelayForAlert((uid, director), director.RecoveryBudget * 2f);
+                    break;
+            }
         }
+    }
 
-        if (HasActiveThreat(StationEventSeverity.Incident) || IsOnCooldown(state.LastIncident, IncidentCooldown, now))
-        {
-            state.Phase = StationEventSeverity.Calm;
+    private void DelayForAlert(Entity<StationEventDirectorComponent> director, float budgetPenalty)
+    {
+        AdjustBudget(director, -budgetPenalty);
+        var delayedTime = Timing.CurTime + director.Comp.AlertBackoff;
+        if (director.Comp.NextEventTime < delayedTime)
+            director.Comp.NextEventTime = delayedTime;
+    }
+
+    private void UpdateBudget(Entity<StationEventDirectorComponent> director)
+    {
+        var elapsedMinutes = (float) (Timing.CurTime - director.Comp.LastBudgetUpdate).TotalMinutes;
+        if (elapsedMinutes <= 0f)
             return;
-        }
 
-        var minutes = _gameTicker.RoundDuration().TotalMinutes;
-        state.Phase = minutes switch
-        {
-            < 25 => PickPhase(70, 30, 0),
-            < 60 => PickPhase(45, 45, 10),
-            _ => PickPhase(30, 50, 20),
-        };
+        director.Comp.Budget = Math.Min(
+            director.Comp.MaximumBudget,
+            director.Comp.Budget + elapsedMinutes * director.Comp.BudgetPerMinute);
+        director.Comp.LastBudgetUpdate = Timing.CurTime;
     }
 
-    private StationEventSeverity GetMaximumSeverity(StationEventDirectorComponent state, TimeSpan now)
-    {
-        if (state.Phase == StationEventSeverity.Crisis && !IsOnCooldown(state.LastCrisis, CrisisCooldown, now))
-            return StationEventSeverity.Crisis;
-
-        if (state.Phase >= StationEventSeverity.Incident && !IsOnCooldown(state.LastIncident, IncidentCooldown, now))
-            return StationEventSeverity.Incident;
-
-        return StationEventSeverity.Calm;
-    }
-
-    private StationEventSeverity PickPhase(int calm, int incident, int crisis)
-    {
-        var roll = _random.Next(0, calm + incident + crisis);
-        if (roll < calm)
-            return StationEventSeverity.Calm;
-        if (roll < calm + incident)
-            return StationEventSeverity.Incident;
-        return StationEventSeverity.Crisis;
-    }
-
-    private bool HasActiveThreat(StationEventSeverity severity)
+    private bool HasActiveStationEvent()
     {
         var query = EntityQueryEnumerator<StationEventComponent, ActiveGameRuleComponent>();
-        while (query.MoveNext(out _, out var stationEvent, out _))
-        {
-            if (stationEvent.DirectorSeverity >= severity)
-                return true;
-        }
-
-        return false;
+        return query.MoveNext(out _, out _, out _);
     }
 
-    private static bool IsOnCooldown(TimeSpan? last, TimeSpan cooldown, TimeSpan now)
+    private TimeSpan GetEventDelay(StationEventDirectorComponent component)
     {
-        return last is { } time && now - time < cooldown;
-    }
-
-    private TimeSpan GetNextAttemptDelay(StationEventDirectorComponent state)
-    {
-        return state.Phase switch
-        {
-            StationEventSeverity.Calm => TimeSpan.FromMinutes(_random.Next(5, 9)),
-            StationEventSeverity.Incident => TimeSpan.FromMinutes(_random.Next(4, 7)),
-            _ => TimeSpan.FromMinutes(_random.Next(3, 6)),
-        };
+        return _random.Next(component.MinimumEventDelay, component.MaximumEventDelay);
     }
 }
 // SS220-event-director-end
