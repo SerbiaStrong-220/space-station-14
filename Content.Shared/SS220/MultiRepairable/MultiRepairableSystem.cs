@@ -42,13 +42,8 @@ public sealed class MultiRepairableSystem : EntitySystem
             if (!_toolSystem.HasQuality(args.Used, option.QualityNeeded))
                 continue;
 
-            var delay = option.DoAfterDelay;
-            if (args.User == ent.Owner)
-            {
-                if (!ent.Comp.AllowSelfRepair)
-                    return;
-                delay *= ent.Comp.SelfRepairPenalty;
-            }
+            if (!TryGetRepairDelay(ent, args.User, option, out var delay))
+                return;
 
             args.Handled = _toolSystem.UseTool(
                 args.Used,
@@ -56,7 +51,7 @@ public sealed class MultiRepairableSystem : EntitySystem
                 ent,
                 delay,
                 option.QualityNeeded,
-                new MultiRepairDoAfterEvent(option, delay),
+                new MultiRepairDoAfterEvent(option),
                 option.FuelCost
             );
 
@@ -92,16 +87,34 @@ public sealed class MultiRepairableSystem : EntitySystem
 
         if (totalDamage > 0 && toolExists)
         {
+            if (!TryGetRepairDelay(ent, args.User, option, out var delay))
+                return;
+
             _toolSystem.UseTool(
                 toolEntity,
                 args.User,
                 ent,
-                args.UsedDelay,
+                delay,
                 option.QualityNeeded,
-                new MultiRepairDoAfterEvent(option, args.UsedDelay),
+                new MultiRepairDoAfterEvent(option),
                 option.FuelCost
             );
         }
+    }
+
+    private bool TryGetRepairDelay(Entity<MultiRepairableComponent> ent, EntityUid user, RepairOption option, out float delay)
+    {
+        delay = option.DoAfterDelay;
+
+        if (user == ent.Owner)
+        {
+            if (!ent.Comp.AllowSelfRepair)
+                return false;
+
+            delay *= ent.Comp.SelfRepairPenalty;
+        }
+
+        return true;
     }
 }
 
@@ -112,14 +125,11 @@ public readonly record struct MultiRepairedEvent(EntityUid Target, EntityUid Use
 public sealed partial class MultiRepairDoAfterEvent : DoAfterEvent
 {
     public readonly RepairOption RepairOption;
-    public readonly float UsedDelay;
-    
-    public MultiRepairDoAfterEvent(RepairOption option, float usedDelay)
+
+    public MultiRepairDoAfterEvent(RepairOption option)
     {
         RepairOption = option;
-        UsedDelay = usedDelay;
     }
-    
-    public MultiRepairDoAfterEvent(RepairOption option) => RepairOption = option;
+
     public override DoAfterEvent Clone() => this;
 }
