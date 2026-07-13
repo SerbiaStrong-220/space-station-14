@@ -6,7 +6,7 @@ namespace Content.Shared.SS220.Hookah.Components;
 [RegisterComponent]
 public sealed partial class SmokingFuelComponent : Component
 {
-    public const string TobaccoSlotId = "tobaccoSlot";
+    public const string TobaccoSlotId = "tobacco_slot";
 
     public ItemSlot TobaccoSlot = new();
 

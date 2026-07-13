@@ -5,7 +5,8 @@ namespace Content.Shared.SS220.Hookah.Components;
 
 [RegisterComponent]
 public sealed partial class HookahCoalHolderComponent : Component
-    public const string CoalSlotId = "coalSlot";
+{
+    public const string CoalSlotId = "coal_slot";
 
     public ItemSlot CoalSlot = new();
 
