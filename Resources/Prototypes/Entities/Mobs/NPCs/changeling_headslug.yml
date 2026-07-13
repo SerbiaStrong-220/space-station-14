@@ -9,6 +9,19 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 3
     baseSprintSpeed: 5
+  # Use the same collision profile as a mouse: the headslug can slip beneath airlocks,
+  # but still collides with walls and other low obstacles.
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 100
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
   - type: Sprite
     drawdepth: SmallMobs
     sprite: _Goobstation/Changeling/headcrab.rsi
