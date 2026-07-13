@@ -73,7 +73,7 @@
     sprite: _Goobstation/Changeling/shields.rsi
     state: ling-icon
   - type: Item
-    size: Bulky
+    size: Large
     sprite: _Goobstation/Changeling/shields.rsi
     heldPrefix: ling
   - type: AltBlocking

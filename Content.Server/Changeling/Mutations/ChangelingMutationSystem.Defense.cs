@@ -262,7 +262,20 @@ public sealed partial class ChangelingMutationSystem
 
         state.ChitinousArmorVisual = armor;
         state.ChitinousHelmetVisual = helmet;
+        state.ChitinousArmorAnimationEndsAt = _timing.CurTime + ChitinousArmorFormationDuration;
         return true;
+    }
+
+    private void UpdateChitinousArmorAnimation(Entity<ChangelingMutationStateComponent> ent, TimeSpan now)
+    {
+        if (ent.Comp.ChitinousArmorAnimationEndsAt is not { } animationEndsAt || animationEndsAt > now)
+            return;
+
+        ent.Comp.ChitinousArmorAnimationEndsAt = null;
+        if (ent.Comp.ChitinousArmorVisual is { } armor)
+            _clothing.SetEquippedPrefix(armor, null);
+        if (ent.Comp.ChitinousHelmetVisual is { } helmet)
+            _clothing.SetEquippedPrefix(helmet, null);
     }
 
     private void RemoveChitinousVisuals(EntityUid uid, ChangelingMutationStateComponent state)
@@ -272,6 +285,7 @@ public sealed partial class ChangelingMutationSystem
 
         state.ChitinousArmorVisual = null;
         state.ChitinousHelmetVisual = null;
+        state.ChitinousArmorAnimationEndsAt = null;
         RestoreStoredItem(uid, "outerClothing", StoredArmorOuterClothing);
         RestoreStoredItem(uid, "head", StoredArmorHead);
     }

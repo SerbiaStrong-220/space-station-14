@@ -31,6 +31,11 @@ public sealed partial class ChangelingMutationStateComponent : Component
     [DataField]
     public EntityUid? ChitinousHelmetVisual;
 
+    /// <summary>
+    /// Server-only deadline for switching the one-shot chitinous armor formation animation to its static sprite.
+    /// </summary>
+    public TimeSpan? ChitinousArmorAnimationEndsAt;
+
     [DataField, AutoNetworkedField]
     public bool ChitinousArmorActive;
 

@@ -10,6 +10,7 @@ using Content.Shared.Changeling;
 using Content.Shared.Changeling.Components;
 using Content.Shared.Changeling.Mutations;
 using Content.Shared.Changeling.Systems;
+using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
@@ -43,6 +44,7 @@ public sealed partial class ChangelingMutationSystem : EntitySystem
     private static readonly FixedPoint2 ArmBladeDrain = FixedPoint2.New(0.75f);
     private static readonly FixedPoint2 StrainedMusclesDamageLimit = FixedPoint2.New(90);
     private static readonly TimeSpan ArmBladeDrainInterval = TimeSpan.FromSeconds(2);
+    private static readonly TimeSpan ChitinousArmorFormationDuration = TimeSpan.FromSeconds(1.98);
     private static readonly TimeSpan StrainedMusclesInterval = TimeSpan.FromSeconds(1);
 
     private static readonly EntProtoId StoreAction = "ActionChangelingStore";
@@ -82,6 +84,7 @@ public sealed partial class ChangelingMutationSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedContainerSystem _containers = default!;
+    [Dependency] private readonly ClothingSystem _clothing = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedStaminaSystem _stamina = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movement = default!;
@@ -127,6 +130,7 @@ public sealed partial class ChangelingMutationSystem : EntitySystem
         while (stateQuery.MoveNext(out var uid, out var state, out var resources))
         {
             UpdateArmBlade((uid, state, resources), now);
+            UpdateChitinousArmorAnimation((uid, state), now);
             UpdateEpinephrine((uid, state), now);
             UpdateStrainedMuscles((uid, state), now);
         }

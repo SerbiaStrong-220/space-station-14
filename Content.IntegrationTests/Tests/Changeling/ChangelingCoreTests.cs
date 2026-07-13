@@ -12,6 +12,7 @@ using Content.Shared.Body;
 using Content.Shared.Changeling;
 using Content.Shared.Changeling.Components;
 using Content.Shared.Changeling.Mutations;
+using Content.Shared.Clothing.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Execution;
@@ -846,6 +847,9 @@ public sealed class ChangelingCoreTests : GameTest
         EntityUid ling = default;
         EntityUid outer = default;
         EntityUid helmet = default;
+        EntityUid chitinousArmor = default;
+        EntityUid chitinousHelmet = default;
+        EntityUid chitinousArmorAction = default;
 
         await server.WaitAssertion(() =>
         {
@@ -864,6 +868,7 @@ public sealed class ChangelingCoreTests : GameTest
             var actions = entMan.System<SharedActionsSystem>();
             var actionUid = actions.AddAction(ling, ChitinousArmorAction.Id)!.Value;
             var action = entMan.GetComponent<ActionComponent>(actionUid);
+            chitinousArmorAction = actionUid;
 
             var activate = new ChangelingChitinousArmorActionEvent
             {
@@ -874,10 +879,31 @@ public sealed class ChangelingCoreTests : GameTest
             entMan.EventBus.RaiseLocalEvent(ling, activate);
             Assert.That(activate.Handled, Is.True);
 
+            var mutationState = entMan.GetComponent<ChangelingMutationStateComponent>(ling);
+            chitinousArmor = mutationState.ChitinousArmorVisual!.Value;
+            chitinousHelmet = mutationState.ChitinousHelmetVisual!.Value;
+            Assert.Multiple(() =>
+            {
+                Assert.That(entMan.GetComponent<ClothingComponent>(chitinousArmor).EquippedPrefix, Is.EqualTo("transform"));
+                Assert.That(entMan.GetComponent<ClothingComponent>(chitinousHelmet).EquippedPrefix, Is.EqualTo("transform"));
+            });
+        });
+        await pair.RunSeconds(2.1f);
+
+        await server.WaitAssertion(() =>
+        {
+            var inventory = entMan.System<InventorySystem>();
+            Assert.Multiple(() =>
+            {
+                Assert.That(entMan.GetComponent<ClothingComponent>(chitinousArmor).EquippedPrefix, Is.Null);
+                Assert.That(entMan.GetComponent<ClothingComponent>(chitinousHelmet).EquippedPrefix, Is.Null);
+            });
+
+            var action = entMan.GetComponent<ActionComponent>(chitinousArmorAction);
             var deactivate = new ChangelingChitinousArmorActionEvent
             {
                 Performer = ling,
-                Action = (actionUid, action),
+                Action = (chitinousArmorAction, action),
                 ChemicalCost = 0,
             };
             entMan.EventBus.RaiseLocalEvent(ling, deactivate);
