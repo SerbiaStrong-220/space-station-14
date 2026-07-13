@@ -7,12 +7,13 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Humanoid;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
+using Content.Shared.Item;
 using Content.Shared.Movement.Systems;
 using Content.Shared.SS220.Grab;
 using Content.Shared.SS220.ItemExtension;
 using Content.Shared.SS220.Weapons.Melee.Components;
 using Content.Shared.Weapons.Melee;
-using System.Reflection.Metadata;
+using Content.Shared.Wieldable.Components;
 
 namespace Content.Shared.SS220.PhysicalParameters;
 
@@ -51,6 +52,12 @@ public sealed class PhysicalParametersSystem : EntitySystem
             return;
 
         FixedPoint2 strengthModifier = GetParameterValue(ent, Parameter.Strength);
+
+        if (TryComp<WieldableComponent>(args.Used, out var wieldableComp) && wieldableComp.Wielded)
+            strengthModifier += strengthModifier * wieldableComp.FreeHandsRequired;
+
+        if (TryComp<MultiHandedItemComponent>(args.Used, out var multiHandedComp))
+            strengthModifier += strengthModifier * multiHandedComp.HandsNeeded;
 
         if (HasComp<ItemExtensionMeleeWeaponComponent>(args.Used) && TryComp<ItemExtensionComponent>(args.Used, out var extensionComp))
         {
