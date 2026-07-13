@@ -51,6 +51,14 @@
     enum.HumanoidVisualLayers.RFoot:
       limit: 1
       required: false
+    enum.HumanoidVisualLayers.UndergarmentTop:
+      limit: 1
+      required: false
+      nudityDefault: [ UndergarmentTopTanktopResomi ]
+    enum.HumanoidVisualLayers.UndergarmentBottom:
+      limit: 1
+      required: false
+      nudityDefault: [ UndergarmentBottomBoxersResomi ]
 
 - type: entity
   name: resomi appearance
