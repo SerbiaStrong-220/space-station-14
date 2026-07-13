@@ -1,5 +1,5 @@
-felinid-pipecrawl-action-name = Пролезть в трубы
-felinid-pipecrawl-action-description = Позволяет проскользнуть в утилизационные трубы, если вы уже сидите внутри утилизационного бака.
+ent-ActionDisposalPipeCrawler = Пролезть в трубы
+    .desc = Позволяет проскользнуть в утилизационные трубы, если вы уже сидите внутри утилизационного бака.
 felinid-pipecrawl-blocked-outer-clothing = Верхняя одежда мешает пролезть в трубы.
 felinid-pipecrawl-exit-no-disposal-unit = Здесь нет подходящего утилизационного бака для выхода.
 felinid-pipecrawl-exit-blocked = Выход в утилизационный бак заблокирован.

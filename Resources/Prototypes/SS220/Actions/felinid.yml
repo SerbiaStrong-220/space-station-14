@@ -1,8 +1,8 @@
 - type: entity
   parent: BaseAction
   id: ActionDashSpeedModifier
-  name: felinid-dash-action-name
-  description: felinid-dash-action-description
+  name: Dash
+  description: Briefly accelerate at the cost of hunger and thirst.
   components:
   - type: Action
     useDelay: 480
@@ -16,8 +16,8 @@
 - type: entity
   parent: BaseAction
   id: ActionDisposalPipeCrawler
-  name: felinid-pipecrawl-action-name
-  description: felinid-pipecrawl-action-description
+  name: Crawl Through Pipes
+  description: Slip into disposal pipes while you are already inside a disposal unit.
   components:
   - type: DisposalPipeCrawlerAction
   - type: Action

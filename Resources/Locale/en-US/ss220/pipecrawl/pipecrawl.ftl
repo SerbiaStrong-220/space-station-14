@@ -1,5 +1,5 @@
-felinid-pipecrawl-action-name = Crawl Through Pipes
-felinid-pipecrawl-action-description = Slip into disposal pipes while you are already inside a disposal unit.
+ent-ActionDisposalPipeCrawler = Crawl Through Pipes
+    .desc = Slip into disposal pipes while you are already inside a disposal unit.
 felinid-pipecrawl-blocked-outer-clothing = Your outer clothing prevents you from squeezing into the pipes.
 felinid-pipecrawl-exit-no-disposal-unit = There is no suitable disposal unit here to exit into.
 felinid-pipecrawl-exit-blocked = The exit into the disposal unit is blocked.
