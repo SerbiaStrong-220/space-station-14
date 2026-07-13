@@ -16,6 +16,11 @@ store-category-pointless = Безделушки
 store-discounted-items = Скидки
 # Revenant
 store-category-abilities = Способности
+# SS220 Changeling
+store-category-changeling-offensive = Боевые мутации
+store-category-changeling-defensive = Защитные мутации
+store-category-changeling-utility = Полезные мутации
+store-category-changeling-stings = Мутации жал
 
 store-category-objective = Цель
 

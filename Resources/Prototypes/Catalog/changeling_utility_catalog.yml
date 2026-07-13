@@ -1,0 +1,208 @@
+# SS220 Changeling
+- type: listing
+  id: ChangelingApexPredator
+  name: changeling-apex-predator-name
+  description: changeling-apex-predator-desc
+  productAction: ActionChangelingApexPredator
+  applyToMob: true
+  cost: { ChangelingEvolution: 1 }
+  categories: [ ChangelingUtility ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]
+
+- type: listing
+  id: ChangelingAugmentedEyesight
+  name: changeling-augmented-eyesight-name
+  description: changeling-augmented-eyesight-desc
+  productAction: ActionChangelingAugmentedEyesight
+  applyToMob: true
+  cost: { ChangelingEvolution: 4 }
+  categories: [ ChangelingDefensive ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]
+
+- type: listing
+  id: ChangelingChameleonSkin
+  name: changeling-chameleon-skin-name
+  description: changeling-chameleon-skin-desc
+  productAction: ActionChangelingChameleonSkin
+  applyToMob: true
+  cost: { ChangelingEvolution: 4 }
+  categories: [ ChangelingUtility ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]
+
+- type: listing
+  id: ChangelingContortBody
+  name: changeling-contort-body-name
+  description: changeling-contort-body-desc
+  productAction: ActionChangelingContortBody
+  applyToMob: true
+  cost: { ChangelingEvolution: 4 }
+  categories: [ ChangelingUtility ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]
+
+- type: listing
+  id: ChangelingDigitalCamouflage
+  name: changeling-digital-camouflage-name
+  description: changeling-digital-camouflage-desc
+  productAction: ActionChangelingDigitalCamouflage
+  applyToMob: true
+  cost: { ChangelingEvolution: 2 }
+  categories: [ ChangelingUtility ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]
+
+- type: listing
+  id: ChangelingHivemind
+  name: changeling-hivemind-name
+  description: changeling-hivemind-desc
+  productAction: ActionChangelingHivemind
+  applyToMob: true
+  cost: { ChangelingEvolution: 0 }
+  categories: [ ChangelingUtility ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]
+
+# SS220 changeling mutations begin
+- type: listing
+  id: ChangelingDarknessAdaptation
+  name: changeling-darkness-adaptation-name
+  description: changeling-darkness-adaptation-desc
+  productAction: ActionChangelingDarknessAdaptation
+  applyToMob: true
+  cost: { ChangelingEvolution: 2 }
+  categories: [ ChangelingUtility ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]
+
+- type: listing
+  id: ChangelingVoidAdaptation
+  name: changeling-void-adaptation-name
+  description: changeling-void-adaptation-desc
+  productAction: ActionChangelingVoidAdaptation
+  applyToMob: true
+  cost: { ChangelingEvolution: 4 }
+  categories: [ ChangelingDefensive ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]
+# SS220 changeling mutations end
+
+- type: listing
+  id: ChangelingLesserForm
+  name: changeling-lesser-form-name
+  description: changeling-lesser-form-desc
+  productAction: ActionChangelingLesserForm
+  applyToMob: true
+  cost: { ChangelingEvolution: 2 }
+  categories: [ ChangelingUtility ]
+  conditions:
+  - !type:BuyBeforeCondition
+    whitelist: [ ChangelingHumanForm ]
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+- type: listing
+  id: ChangelingHumanForm
+  name: changeling-human-form-name
+  description: changeling-human-form-desc
+  productAction: ActionChangelingHumanForm
+  applyToMob: true
+  cost: { ChangelingEvolution: 1 }
+  categories: [ ChangelingUtility ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]
+
+- type: listing
+  id: ChangelingMimicVoice
+  name: changeling-mimic-voice-name
+  description: changeling-mimic-voice-desc
+  productAction: ActionChangelingMimicVoice
+  applyToMob: true
+  cost: { ChangelingEvolution: 2 }
+  categories: [ ChangelingUtility ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]
+
+- type: listing
+  id: ChangelingOrganicSpaceSuit
+  name: changeling-organic-space-suit-name
+  description: changeling-organic-space-suit-desc
+  productAction: ActionChangelingOrganicSpaceSuit
+  applyToMob: true
+  cost: { ChangelingEvolution: 4 }
+  categories: [ ChangelingDefensive ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]
+
+- type: listing
+  id: ChangelingDissonantShriek
+  name: changeling-dissonant-shriek-name
+  description: changeling-dissonant-shriek-desc
+  productAction: ActionChangelingDissonantShriek
+  applyToMob: true
+  cost: { ChangelingEvolution: 2 }
+  categories: [ ChangelingOffensive ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]
+
+- type: listing
+  id: ChangelingSpreadInfestation
+  name: changeling-spread-infestation-name
+  description: changeling-spread-infestation-desc
+  productAction: ActionChangelingSpreadInfestation
+  applyToMob: true
+  cost: { ChangelingEvolution: 4 }
+  categories: [ ChangelingOffensive ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]
+
+- type: listing
+  id: ChangelingMuteSting
+  name: changeling-mute-sting-name
+  description: changeling-mute-sting-desc
+  productAction: ActionChangelingMuteSting
+  applyToMob: true
+  cost: { ChangelingEvolution: 4 }
+  categories: [ ChangelingStings ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]
+
+- type: listing
+  id: ChangelingBlindSting
+  name: changeling-blind-sting-name
+  description: changeling-blind-sting-desc
+  productAction: ActionChangelingBlindSting
+  applyToMob: true
+  cost: { ChangelingEvolution: 2 }
+  categories: [ ChangelingStings ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]
+
+- type: listing
+  id: ChangelingCryogenicSting
+  name: changeling-cryogenic-sting-name
+  description: changeling-cryogenic-sting-desc
+  productAction: ActionChangelingCryogenicSting
+  applyToMob: true
+  cost: { ChangelingEvolution: 4 }
+  categories: [ ChangelingStings ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]
+
+- type: listing
+  id: ChangelingLethargicSting
+  name: changeling-lethargic-sting-name
+  description: changeling-lethargic-sting-desc
+  productAction: ActionChangelingLethargicSting
+  applyToMob: true
+  cost: { ChangelingEvolution: 4 }
+  categories: [ ChangelingStings ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]
+
+- type: listing
+  id: ChangelingFakeArmbladeSting
+  name: changeling-fake-armblade-sting-name
+  description: changeling-fake-armblade-sting-desc
+  productAction: ActionChangelingFakeArmbladeSting
+  applyToMob: true
+  cost: { ChangelingEvolution: 3 }
+  categories: [ ChangelingStings ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]
+
+# SS220 changeling transformation sting begin
+- type: listing
+  id: ChangelingTransformationSting
+  name: changeling-transformation-sting-name
+  description: changeling-transformation-sting-desc
+  productAction: ActionChangelingTransformationSting
+  applyToMob: true
+  cost: { ChangelingEvolution: 4 }
+  categories: [ ChangelingStings ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]
+# SS220 changeling transformation sting end

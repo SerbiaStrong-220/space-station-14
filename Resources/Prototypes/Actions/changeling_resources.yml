@@ -1,0 +1,26 @@
+# SS220 Changeling
+- type: entity
+  parent: BaseMentalAction
+  id: ActionChangelingRegenerativeStasis
+  name: "[color=red]Regenerative Stasis[/color]"
+  description: Enter a deathlike stasis. After 50 seconds you may regenerate completely.
+  components:
+  - type: Action
+    icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: stasis_enter }
+    priority: 2
+    temporary: true
+  - type: InstantAction
+    event: !type:ChangelingRegenerativeStasisActionEvent
+
+- type: entity
+  parent: BaseMentalAction
+  id: ActionChangelingRegenerate
+  name: "[color=red]Regenerate[/color]"
+  description: Leave regenerative stasis, heal completely, and break free of restraints.
+  components:
+  - type: Action
+    icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: stasis_exit }
+    priority: 2
+    temporary: true
+  - type: InstantAction
+    event: !type:ChangelingRegenerateActionEvent

@@ -1,11 +1,15 @@
+// SS220 Changeling
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Armor;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Changeling.Components;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
+using Content.Shared.FixedPoint;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
@@ -13,15 +17,21 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
+using Content.Shared.SS220.Grab;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Shared.Changeling.Systems;
 
-public sealed class ChangelingDevourSystem : EntitySystem
+public sealed partial class ChangelingDevourSystem : EntitySystem // SS220 Changeling - partial
 {
+    private static readonly ProtoId<DamageTypePrototype> HeatDamage = "Heat";
+    private static readonly ProtoId<DamageTypePrototype> AsphyxiationDamage = "Asphyxiation";
+
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
@@ -39,20 +49,34 @@ public sealed class ChangelingDevourSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ChangelingDevourComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<ChangelingDevourComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<ChangelingDevourComponent, ChangelingDevourActionEvent>(OnDevourAction);
         SubscribeLocalEvent<ChangelingDevourComponent, ChangelingDevourWindupDoAfterEvent>(OnDevourWindup);
         SubscribeLocalEvent<ChangelingDevourComponent, ChangelingDevourConsumeDoAfterEvent>(OnDevourConsume);
         SubscribeLocalEvent<ChangelingDevourComponent, ComponentShutdown>(OnShutdown);
     }
 
-    private void OnMapInit(Entity<ChangelingDevourComponent> ent, ref MapInitEvent args)
+    private void OnStartup(Entity<ChangelingDevourComponent> ent, ref ComponentStartup args)
     {
+        if (ent.Comp.DevourWindupTime < TimeSpan.Zero)
+            ent.Comp.DevourWindupTime = TimeSpan.Zero;
+        if (ent.Comp.DevourConsumeTime < TimeSpan.Zero)
+            ent.Comp.DevourConsumeTime = TimeSpan.Zero;
+        if (!float.IsFinite(ent.Comp.DevourPreventionPercentageThreshold))
+            ent.Comp.DevourPreventionPercentageThreshold = 0.1f;
+        ent.Comp.DevourPreventionPercentageThreshold = Math.Clamp(
+            ent.Comp.DevourPreventionPercentageThreshold,
+            0f,
+            1f);
+
         _actionsSystem.AddAction(ent, ref ent.Comp.ChangelingDevourActionEntity, ent.Comp.ChangelingDevourAction);
     }
 
     private void OnShutdown(Entity<ChangelingDevourComponent> ent, ref ComponentShutdown args)
     {
+        if (_net.IsServer)
+            ent.Comp.CurrentDevourSound = _audio.Stop(ent.Comp.CurrentDevourSound);
+
         if (ent.Comp.ChangelingDevourActionEntity != null)
         {
             _actionsSystem.RemoveAction(ent.Owner, ent.Comp.ChangelingDevourActionEntity);
@@ -64,6 +88,7 @@ public sealed class ChangelingDevourSystem : EntitySystem
     private void OnDevourAction(Entity<ChangelingDevourComponent> ent, ref ChangelingDevourActionEvent args)
     {
         if (args.Handled
+            || args.Performer != ent.Owner
             || _whitelistSystem.IsWhitelistFailOrNull(ent.Comp.Whitelist, args.Target)
             || !HasComp<ChangelingIdentityComponent>(ent))
             return;
@@ -74,6 +99,23 @@ public sealed class ChangelingDevourSystem : EntitySystem
         if (!CanDevour(ent.AsNullable(), target))
             return;
 
+        if (!_doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager,
+                ent,
+                ent.Comp.DevourWindupTime,
+                new ChangelingDevourWindupDoAfterEvent(),
+                ent,
+                target: target,
+                used: ent)
+        {
+            BreakOnMove = true,
+            BlockDuplicate = true,
+            CancelDuplicate = false,
+            DuplicateCondition = DuplicateConditions.SameEvent,
+        }))
+        {
+            return;
+        }
+
         if (_net.IsServer)
         {
             ent.Comp.CurrentDevourSound = _audio.Stop(ent.Comp.CurrentDevourSound);
@@ -81,13 +123,6 @@ public sealed class ChangelingDevourSystem : EntitySystem
         }
 
         _adminLogger.Add(LogType.Action, LogImpact.Medium, $"{ent:player} started changeling devour windup against {target:player}");
-
-        _doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager, ent, ent.Comp.DevourWindupTime, new ChangelingDevourWindupDoAfterEvent(), ent, target: target, used: ent)
-        {
-            BreakOnMove = true,
-            CancelDuplicate = true,
-            DuplicateCondition = DuplicateConditions.None,
-        });
 
         var selfMessage = Loc.GetString("changeling-devour-begin-windup-self", ("user", Identity.Entity(ent.Owner, EntityManager)));
         var othersMessage = Loc.GetString("changeling-devour-begin-windup-others", ("user", Identity.Entity(ent.Owner, EntityManager)));
@@ -109,8 +144,25 @@ public sealed class ChangelingDevourSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (args.Target is not { } target)
+        if (args.Target is not { } target || !CanDevour(ent.AsNullable(), target, showPopup: false))
             return;
+
+        if (!_doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager,
+                ent,
+                ent.Comp.DevourConsumeTime,
+                new ChangelingDevourConsumeDoAfterEvent(),
+                ent,
+                target: target,
+                used: ent)
+        {
+            BreakOnMove = true,
+            BlockDuplicate = true,
+            CancelDuplicate = false,
+            DuplicateCondition = DuplicateConditions.SameEvent,
+        }))
+        {
+            return;
+        }
 
         _damageable.ChangeDamage(target, ent.Comp.WindupDamage, true, true, ent.Owner);
 
@@ -127,19 +179,6 @@ public sealed class ChangelingDevourSystem : EntitySystem
             ent.Comp.CurrentDevourSound = _audio.PlayPvs(ent.Comp.ConsumeNoise, ent)?.Entity;
 
         _adminLogger.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(ent.Owner):player} began to devour {ToPrettyString(target):player}'s identity");
-
-        _doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager,
-            ent,
-            ent.Comp.DevourConsumeTime,
-            new ChangelingDevourConsumeDoAfterEvent(),
-            ent,
-            target: target,
-            used: ent)
-        {
-            BreakOnMove = true,
-            CancelDuplicate = true,
-            DuplicateCondition = DuplicateConditions.None,
-        });
     }
 
     // Second doafter finished.
@@ -152,22 +191,55 @@ public sealed class ChangelingDevourSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (args.Target is not { } target)
+        if (args.Target is not { } target || !CanDevour(ent.AsNullable(), target, showPopup: false))
             return;
 
-        // Damage first before the CanDevour check to make sure they don't gib in-between and to kill them again in case they somehow revived.
+        // Identity snapshots, damage, rewards, and the duplicate-devour marker are one authoritative server commit.
+        // The client cannot create paused-map identity clones and must not predict a storage failure or partial success.
+        if (_net.IsClient)
+            return;
+
+        if (!TryComp<ChangelingIdentityComponent>(ent.Owner, out var identityStorage))
+            return;
+
+        var genome = _changelingIdentitySystem.GetGenomeId(target);
+        if (genome == null)
+            return;
+
+        var compromisedGenome = HasExcessiveBurnOrAsphyxiation(target);
+        if (!_changelingIdentitySystem.HasStoredGenome((ent.Owner, identityStorage), genome))
+        {
+            if (!_changelingIdentitySystem.TryStoreIdentity(
+                    (ent.Owner, identityStorage),
+                    target,
+                    countForObjective: !compromisedGenome,
+                    out _))
+            {
+                _popupSystem.PopupEntity(
+                    Loc.GetString("changeling-devour-attempt-failed-storage"),
+                    ent.Owner,
+                    ent.Owner,
+                    PopupType.Medium);
+                return;
+            }
+        }
+        else if (!compromisedGenome)
+        {
+            _changelingIdentitySystem.RecordAbsorbedGenome((ent.Owner, identityStorage), genome, target);
+        }
+
+        // Identity storage is the only fallible part of committing a devour. Complete it before irreversible
+        // victim damage, clothing destruction, success feedback, rewards, and the duplicate-devour marker.
         _damageable.ChangeDamage(target, ent.Comp.DevourDamage, true, true, ent.Owner);
-
-        if (!CanDevour(ent.AsNullable(), target)) // Check again if the conditions are still met.
-            return;
 
         var selfMessage = Loc.GetString("changeling-devour-consume-complete-self", ("user", Identity.Entity(ent.Owner, EntityManager)));
         var othersMessage = Loc.GetString("changeling-devour-consume-complete-others", ("user", Identity.Entity(ent.Owner, EntityManager)));
-        _popupSystem.PopupPredicted(
-            selfMessage,
+        _popupSystem.PopupEntity(selfMessage, ent.Owner, ent.Owner, PopupType.LargeCaution);
+        _popupSystem.PopupEntity(
             othersMessage,
             ent.Owner,
-            ent.Owner,
+            Filter.PvsExcept(ent.Owner),
+            true,
             PopupType.LargeCaution);
 
         _adminLogger.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(ent.Owner):player} successfully devoured {ToPrettyString(target):player}'s identity");
@@ -176,16 +248,19 @@ public sealed class ChangelingDevourSystem : EntitySystem
             && TryComp<ButcherableComponent>(item, out var butcherable))
             RipClothing(target, (item.Value, butcherable));
 
-        if (!TryComp<ChangelingIdentityComponent>(ent.Owner, out var identityStorage))
-            return;
+        var chemicalGain = FixedPoint2.New(10);
+        if (TryComp<ChangelingResourceComponent>(target, out var victimResources))
+            chemicalGain = victimResources.Chemicals;
 
-        _changelingIdentitySystem.CloneToPausedMap((ent, identityStorage), target);
+        var addChemicals = new ChangelingAddChemicalsEvent(chemicalGain);
+        RaiseLocalEvent(ent.Owner, ref addChemicals);
+
+        var resetEvolution = new ChangelingResetEvolutionEvent();
+        RaiseLocalEvent(ent.Owner, ref resetEvolution);
 
         // We add a reference to ourselves to prevent repeated identity gain.
         var targetDevoured = EnsureComp<ChangelingDevouredComponent>(target);
         targetDevoured.DevouredBy.Add(ent.Owner);
-        Dirty(target, targetDevoured);
-        Dirty(ent);
     }
 
     /// <summary>
@@ -196,7 +271,8 @@ public sealed class ChangelingDevourSystem : EntitySystem
         if (!Resolve(changeling, ref changeling.Comp, false))
             return false;
 
-        return changeling.Comp.ConsumedIdentities.ContainsValue(devoured);
+        return TryComp<ChangelingDevouredComponent>(devoured, out var consumed)
+            && consumed.DevouredBy.Contains(changeling.Owner);
     }
 
     /// <summary>
@@ -207,8 +283,10 @@ public sealed class ChangelingDevourSystem : EntitySystem
         if (!Resolve(changeling, ref changeling.Comp))
             return false;
 
-        if (changeling.Owner == victim)
-            return false; // Can't devour yourself.
+        if (changeling.Owner == victim ||
+            TerminatingOrDeleted(changeling.Owner) ||
+            TerminatingOrDeleted(victim))
+            return false;
 
         if (!HasComp<HumanoidProfileComponent>(victim))
         {
@@ -224,10 +302,13 @@ public sealed class ChangelingDevourSystem : EntitySystem
             return false;
         }
 
-        if (!_mobState.IsDead(victim))
+        if (!_mobState.IsDead(victim)
+            && (!TryComp<GrabbableComponent>(victim, out var grabbable)
+                || grabbable.GrabbedBy != changeling.Owner
+                || grabbable.GrabStage < GrabStage.NeckGrab))
         {
             if (showPopup)
-                _popupSystem.PopupClient(Loc.GetString("changeling-devour-attempt-failed-not-dead"), changeling.Owner, changeling.Owner, PopupType.Medium);
+                _popupSystem.PopupClient(Loc.GetString("changeling-devour-attempt-failed-neck-grab"), changeling.Owner, changeling.Owner, PopupType.Medium);
             return false;
         }
 
@@ -245,7 +326,28 @@ public sealed class ChangelingDevourSystem : EntitySystem
             return false;
         }
 
+        if (TryComp<ChangelingIdentityComponent>(changeling.Owner, out var identities)
+            && _changelingIdentitySystem.GetGenomeId(victim) is { } genome
+            && !_changelingIdentitySystem.HasStoredGenome((changeling.Owner, identities), genome)
+            && identities.ConsumedIdentities.Count >= identities.MaxStoredIdentities)
+        {
+            if (showPopup)
+                _popupSystem.PopupClient(Loc.GetString("changeling-devour-attempt-failed-storage-full"), changeling.Owner, changeling.Owner, PopupType.Medium);
+            return false;
+        }
+
         return true;
+    }
+
+    private bool HasExcessiveBurnOrAsphyxiation(EntityUid target)
+    {
+        if (!TryComp<DamageableComponent>(target, out var damageable))
+            return false;
+
+        var damage = _damageable.GetPositiveDamage((target, damageable));
+        damage.DamageDict.TryGetValue(HeatDamage, out var heat);
+        damage.DamageDict.TryGetValue(AsphyxiationDamage, out var asphyxiation);
+        return heat + asphyxiation >= FixedPoint2.New(50);
     }
 
     /// <summary>

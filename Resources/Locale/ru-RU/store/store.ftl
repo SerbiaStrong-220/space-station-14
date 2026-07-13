@@ -12,6 +12,7 @@ store-ui-button-out-of-stock = { "" } (Нет в наличии)
 store-not-account-owner = Этот { $store } не привязан к вам!
 store-preset-name-uplink = Аплинк
 store-preset-name-spellbook = Книга заклинаний
-store-preset-name-changeling = Магазин ДНК
+# SS220 Changeling
+store-preset-name-changeling = Эволюции генокрада
 
 store-preset-name-nukie-delivery = Блюспейс-доставка Ядерных Оперативников

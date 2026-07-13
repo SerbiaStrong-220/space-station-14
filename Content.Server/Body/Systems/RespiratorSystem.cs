@@ -88,6 +88,19 @@ public sealed class RespiratorSystem : EntitySystem
             if (_mobState.IsDead(uid))
                 continue;
 
+            // SS220 changeling void adaptation begin
+            var attempt = new BeforeRespirationCycleEvent();
+            RaiseLocalEvent(uid, ref attempt);
+            if (attempt.Cancelled)
+            {
+                if (respirator.SuffocationCycles > 0)
+                    StopSuffocation((uid, respirator), healDamage: false);
+
+                respirator.SuffocationCycles = 0;
+                continue;
+            }
+            // SS220 changeling void adaptation end
+
             UpdateSaturation(uid, -(float)respirator.UpdateInterval.TotalSeconds, respirator);
 
             if (!_mobState.IsIncapacitated(uid)) // cannot breathe in crit.
@@ -333,16 +346,19 @@ public sealed class RespiratorSystem : EntitySystem
         RaiseLocalEvent(ent, ref ev);
     }
 
-    private void StopSuffocation(Entity<RespiratorComponent> ent)
+    // SS220 changeling void adaptation begin
+    private void StopSuffocation(Entity<RespiratorComponent> ent, bool healDamage = true)
     {
         if (ent.Comp.SuffocationCycles >= 2)
             _adminLogger.Add(LogType.Asphyxiation, $"{ToPrettyString(ent):entity} stopped suffocating");
 
-        _damageableSys.ChangeDamage(ent.Owner, ent.Comp.DamageRecovery);
+        if (healDamage)
+            _damageableSys.ChangeDamage(ent.Owner, ent.Comp.DamageRecovery);
 
         var ev = new StopSuffocatingEvent();
         RaiseLocalEvent(ent, ref ev);
     }
+    // SS220 changeling void adaptation end
 
     private void OnSuffocation(Entity<LungComponent> ent, ref BodyRelayedEvent<SuffocationEvent> args)
     {
@@ -442,6 +458,15 @@ public record struct SuffocationEvent;
 /// </summary>
 [ByRefEvent]
 public record struct StopSuffocatingEvent;
+
+// SS220 changeling void adaptation begin
+/// <summary>
+/// Raised before a living respirator entity processes one breathing cycle.
+/// Cancelling it prevents inhalation, saturation loss, and suffocation damage without healing existing damage.
+/// </summary>
+[ByRefEvent]
+public record struct BeforeRespirationCycleEvent(bool Cancelled = false);
+// SS220 changeling void adaptation end
 
 /// <summary>
 /// An event raised to inhalation handlers that asks them nicely to simulate what it would be like to metabolize

@@ -12,3 +12,5 @@ store-currency-display-stolen-essence = Stolen Essence
 store-currency-display-silicon-memory = Memory
 store-currency-display-wizcoin = Wiz€oin™
 store-currency-display-dna = DNA
+# SS220 Changeling
+store-currency-display-evolution = Evolution points

@@ -1,3 +1,4 @@
+// SS220 Changeling
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Body;
@@ -5,12 +6,14 @@ using Content.Shared.Changeling.Components;
 using Content.Shared.Cloning;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
+using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Changeling.Systems;
@@ -37,7 +40,7 @@ public sealed partial class ChangelingTransformSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ChangelingTransformComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<ChangelingTransformComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<ChangelingTransformComponent, ChangelingTransformActionEvent>(OnTransformAction);
         SubscribeLocalEvent<ChangelingTransformComponent, ChangelingTransformIdentitySelectMessage>(OnTransformSelected);
         SubscribeLocalEvent<ChangelingTransformComponent, ChangelingTransformIdentityDropMessage>(OnTransformDrop);
@@ -48,8 +51,11 @@ public sealed partial class ChangelingTransformSystem : EntitySystem
         SubscribeLocalEvent<StorageComponent, BeforeChangelingTransformEvent>(StorageBeforeTransform);
     }
 
-    private void OnMapInit(Entity<ChangelingTransformComponent> ent, ref MapInitEvent init)
+    private void OnStartup(Entity<ChangelingTransformComponent> ent, ref ComponentStartup init)
     {
+        if (ent.Comp.TransformWindup < TimeSpan.Zero)
+            ent.Comp.TransformWindup = TimeSpan.Zero;
+        ent.Comp.ChemicalCost = FixedPoint2.Max(FixedPoint2.Zero, ent.Comp.ChemicalCost);
         _actions.AddAction(ent, ref ent.Comp.ChangelingTransformActionEntity, ent.Comp.ChangelingTransformAction);
 
         var userInterfaceComp = EnsureComp<UserInterfaceComponent>(ent);
@@ -58,6 +64,11 @@ public sealed partial class ChangelingTransformSystem : EntitySystem
 
     private void OnShutdown(Entity<ChangelingTransformComponent> ent, ref ComponentShutdown args)
     {
+        if (_net.IsServer)
+            ent.Comp.CurrentTransformSound = _audio.Stop(ent.Comp.CurrentTransformSound);
+
+        _ui.CloseUi(ent.Owner, ChangelingTransformUiKey.Key);
+
         if (ent.Comp.ChangelingTransformActionEntity != null)
         {
             _actions.RemoveAction(ent.Owner, ent.Comp.ChangelingTransformActionEntity);
@@ -67,23 +78,36 @@ public sealed partial class ChangelingTransformSystem : EntitySystem
     private void OnTransformAction(Entity<ChangelingTransformComponent> ent,
         ref ChangelingTransformActionEvent args)
     {
+        if (args.Handled || args.Performer != ent.Owner)
+            return;
+
         if (!TryComp<UserInterfaceComponent>(ent, out var userInterfaceComp))
             return;
 
-        if (!TryComp<ChangelingIdentityComponent>(ent, out var userIdentity))
+        if (!TryComp<ChangelingIdentityComponent>(ent, out var identity))
             return;
 
-        if (!_ui.IsUiOpen((ent, userInterfaceComp), ChangelingTransformUiKey.Key, args.Performer))
+        args.Handled = true;
+
+        var onlyCurrentIdentityRemains = identity.StoredIdentities.Count == 1 &&
+                                         identity.CurrentIdentity is { } current &&
+                                         identity.StoredIdentities.Contains(current);
+        if (identity.StoredIdentities.Count == 0 || onlyCurrentIdentityRemains)
         {
+            _popup.PopupClient(Loc.GetString("changeling-transform-no-identities"), ent.Owner, ent.Owner);
+            return;
+        }
+
+        if (!_ui.IsUiOpen((ent, userInterfaceComp), ChangelingTransformUiKey.Key, args.Performer))
             _ui.OpenUi((ent, userInterfaceComp), ChangelingTransformUiKey.Key, args.Performer);
-        } //TODO: Can add a Else here with TransformInto and CloseUI to make a quick switch,
-          // issue right now is that Radials cover the Action buttons so clicking the action closes the UI (due to clicking off a radial causing it to close, even with UI)
-          // but pressing the number does.
     }
 
     private void OnTransformSelected(Entity<ChangelingTransformComponent> ent,
         ref ChangelingTransformIdentitySelectMessage args)
     {
+        if (!_net.IsServer || args.Actor != ent.Owner)
+            return;
+
         if (!TryGetEntity(args.TargetIdentity, out var targetIdentity))
             return;
 
@@ -96,12 +120,15 @@ public sealed partial class ChangelingTransformSystem : EntitySystem
         if (!identity.ConsumedIdentities.ContainsKey(targetIdentity.Value))
             return; // this identity does not belong to this player
 
-        TransformInto(ent.AsNullable(), targetIdentity.Value);
+        TryTransformInto(ent.AsNullable(), targetIdentity.Value);
     }
 
     private void OnTransformDrop(Entity<ChangelingTransformComponent> ent,
         ref ChangelingTransformIdentityDropMessage args)
     {
+        if (!_net.IsServer || args.Actor != ent.Owner)
+            return;
+
         if (!TryGetEntity(args.TargetIdentity, out var targetIdentity))
             return;
 
@@ -115,40 +142,33 @@ public sealed partial class ChangelingTransformSystem : EntitySystem
             return; // this identity does not belong to this player
 
         _popup.PopupClient(Loc.GetString("changeling-transform-bui-drop-identity-entity-popup", ("entity", targetIdentity.Value)), ent.Owner, PopupType.Large);
-        _changelingIdentity.DropStoredIdentity(ent.Owner, targetIdentity.Value);
+        _changelingIdentity.TryDropStoredIdentity(ent.Owner, targetIdentity.Value);
     }
 
     /// <summary>
     /// Transform the changeling into another identity.
-    /// This can be any cloneable humanoid and doesn't have to be stored in the ChangelingIdentityComponent,
-    /// so make sure to validate the target before.
+    /// The target must be one of this changeling's stored identity snapshots.
     /// </summary>
-    public void TransformInto(Entity<ChangelingTransformComponent?> ent, EntityUid targetIdentity)
+    public bool TryTransformInto(Entity<ChangelingTransformComponent?> ent, EntityUid targetIdentity)
     {
-        if (!Resolve(ent, ref ent.Comp))
-            return;
-
-        var selfMessage = Loc.GetString("changeling-transform-attempt-self", ("user", Identity.Entity(ent.Owner, EntityManager)));
-        var othersMessage = Loc.GetString("changeling-transform-attempt-others", ("user", Identity.Entity(ent.Owner, EntityManager)));
-        _popup.PopupPredicted(
-            selfMessage,
-            othersMessage,
-            ent,
-            ent,
-            PopupType.MediumCaution);
+        if (!Resolve(ent, ref ent.Comp, false) ||
+            TerminatingOrDeleted(targetIdentity) ||
+            !TryComp<ChangelingIdentityComponent>(ent, out var identity) ||
+            identity.CurrentIdentity == targetIdentity ||
+            !identity.ConsumedIdentities.ContainsKey(targetIdentity))
+        {
+            return false;
+        }
 
         if (_net.IsServer)
-        {
-            ent.Comp.CurrentTransformSound = _audio.Stop(ent.Comp.CurrentTransformSound); // cancel any previous sounds first
-            ent.Comp.CurrentTransformSound = _audio.PlayPvs(ent.Comp.TransformAttemptNoise, ent)?.Entity;
-        }
+            ent.Comp.CurrentTransformSound = _audio.Stop(ent.Comp.CurrentTransformSound);
 
         if (TryComp<ChangelingStoredIdentityComponent>(targetIdentity, out var storedIdentity) && storedIdentity.OriginalSession != null)
             _adminLogger.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(ent.Owner):player} begun an attempt to transform into \"{Name(targetIdentity)}\" ({storedIdentity.OriginalSession:player}) ");
         else
             _adminLogger.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(ent.Owner):player} begun an attempt to transform into \"{Name(targetIdentity)}\"");
 
-        _doAfter.TryStartDoAfter(new DoAfterArgs(
+        return _doAfter.TryStartDoAfter(new DoAfterArgs(
             EntityManager,
             ent,
             ent.Comp.TransformWindup,
@@ -158,7 +178,9 @@ public sealed partial class ChangelingTransformSystem : EntitySystem
         {
             BreakOnMove = true,
             BreakOnWeightlessMove = true,
-            DuplicateCondition = DuplicateConditions.None,
+            BlockDuplicate = true,
+            CancelDuplicate = false,
+            DuplicateCondition = DuplicateConditions.SameEvent,
             RequireCanInteract = false,
             DistanceThreshold = null,
         });
@@ -170,7 +192,7 @@ public sealed partial class ChangelingTransformSystem : EntitySystem
         args.Handled = true;
         ent.Comp.CurrentTransformSound = _audio.Stop(ent.Comp.CurrentTransformSound);
 
-        if (args.Cancelled)
+        if (!_net.IsServer || args.Cancelled)
             return;
 
         if (!_prototype.Resolve(ent.Comp.TransformCloningSettings, out var settings))
@@ -179,11 +201,33 @@ public sealed partial class ChangelingTransformSystem : EntitySystem
         if (args.Target is not { } targetIdentity)
             return;
 
+        if (!Exists(targetIdentity) ||
+            !TryComp<ChangelingIdentityComponent>(ent, out var identity) ||
+            !identity.ConsumedIdentities.ContainsKey(targetIdentity))
+            return;
+
+        var chemicalCost = FixedPoint2.Max(FixedPoint2.Zero, ent.Comp.ChemicalCost);
+        var spend = new ChangelingChemicalSpendAttemptEvent(chemicalCost);
+        RaiseLocalEvent(ent.Owner, ref spend);
+        if (spend.Cancelled)
+        {
+            _popup.PopupEntity(Loc.GetString("changeling-not-enough-chemicals"), ent.Owner, ent.Owner);
+            return;
+        }
+
         var beforeTransformEvent = new BeforeChangelingTransformEvent(targetIdentity);
         RaiseLocalEvent(args.User, beforeTransformEvent);
 
+        var visibleUser = Identity.Entity(ent.Owner, EntityManager);
+        var selfMessage = Loc.GetString("changeling-transform-attempt-self", ("user", visibleUser));
+        var othersMessage = Loc.GetString("changeling-transform-attempt-others", ("user", visibleUser));
+
         _visualBody.CopyAppearanceFrom(targetIdentity, args.User);
         _cloning.CloneComponents(targetIdentity, args.User, settings);
+
+        ent.Comp.CurrentTransformSound = _audio.PlayPvs(ent.Comp.TransformAttemptNoise, ent)?.Entity;
+        _popup.PopupEntity(selfMessage, ent.Owner, ent.Owner, PopupType.MediumCaution);
+        _popup.PopupEntity(othersMessage, ent.Owner, Filter.PvsExcept(ent.Owner), true, PopupType.MediumCaution);
 
         if (TryComp<ChangelingStoredIdentityComponent>(targetIdentity, out var storedIdentity) && storedIdentity.OriginalSession != null)
             _adminLogger.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(ent.Owner):player} successfully transformed into \"{Name(targetIdentity)}\" ({storedIdentity.OriginalSession:player})");
@@ -195,11 +239,10 @@ public sealed partial class ChangelingTransformSystem : EntitySystem
 
         Dirty(ent);
 
-        if (TryComp<ChangelingIdentityComponent>(ent, out var identity)) // in case we ever get changelings that don't store identities
-        {
-            identity.CurrentIdentity = targetIdentity;
-            Dirty(ent.Owner, identity);
-        }
+        identity.CurrentGenome = identity.StoredGenomes.GetValueOrDefault(targetIdentity);
+        identity.CurrentIdentity = null;
+        Dirty(ent.Owner, identity);
+        _changelingIdentity.TryDropStoredIdentity(ent.Owner, targetIdentity);
 
         var afterTransformEvent = new AfterChangelingTransformEvent(targetIdentity);
         RaiseLocalEvent(args.User, afterTransformEvent);

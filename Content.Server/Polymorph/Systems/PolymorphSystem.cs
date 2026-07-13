@@ -348,6 +348,7 @@ public sealed partial class PolymorphSystem : EntitySystem
         _transform.SetCoordinates(parent, parentXform, uidXform.Coordinates, uidXform.LocalRotation);
 
         component.Reverted = true;
+        component.Parent = null; // SS220 polymorph revert-on-delete fix
 
         if (component.Configuration.TransferDamage &&
             TryComp<DamageableComponent>(parent, out var damageParent) &&

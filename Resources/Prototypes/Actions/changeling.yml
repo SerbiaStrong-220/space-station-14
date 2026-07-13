@@ -3,13 +3,13 @@
   id: ActionRetractableItemArmBlade
   name: Arm Blade
   description: Shed your flesh and reform it into a fleshy blade.
-  components:
+  components: # SS220 Changeling
   - type: Action
     useDelay: 2
     raiseOnAction: true
     itemIconStyle: BigAction
     icon:
-      sprite: Interface/Actions/changeling.rsi
+      sprite: _Goobstation/Changeling/changeling_abilities.rsi # SS220 Changeling
       state: armblade
   - type: InstantAction
     event: !type:OnRetractableItemActionEvent
@@ -26,9 +26,10 @@
   description: Consume the essence of your victims and subsume their identity and mind into your own.
   components:
   - type: Action
-    icon: { sprite : Interface/Actions/changeling.rsi, state: "devour" }
-    iconOn: { sprite : Interface/Actions/changeling.rsi, state: "devour_on" }
+    icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: absorb_biomatter } # SS220 Changeling
+    iconOn: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: absorb_biomatter } # SS220 Changeling
     priority: 1
+    temporary: true # SS220 Changeling - component-owned action
   - type: TargetAction
   - type: EntityTargetAction
     event: !type:ChangelingDevourActionEvent
@@ -39,12 +40,16 @@
   description: Transform and assume the identities of those you have devoured.
   components:
   - type: Action
-    icon: { sprite : Interface/Actions/changeling.rsi, state: "transform" }
+    icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: transform } # SS220 Changeling
+    temporary: true # SS220 Changeling - component-owned action
   - type: InstantAction
     event: !type:ChangelingTransformActionEvent
 
 - type: entity
   parent: ActionIntrinsicStore
   id: ActionChangelingStore
-  name: DNA Store
-  description: Opens the ability store.
+  name: Evolution Menu # SS220 Changeling
+  description: Opens the changeling evolution menu. # SS220 Changeling
+  components:
+  - type: Action
+    icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: evolution_menu } # SS220 Changeling

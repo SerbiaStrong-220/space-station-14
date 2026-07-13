@@ -2,5 +2,5 @@
   id: Changeling
   name: roles-antag-changeling-name
   antagonist: true
-  setPreference: false # TODO: set this to true once Changeling exits WIP status
+  setPreference: true # SS220 Changeling
   objective: roles-antag-changeling-objective
