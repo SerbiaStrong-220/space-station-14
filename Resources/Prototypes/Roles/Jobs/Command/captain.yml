@@ -42,6 +42,10 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
+  #SS220 Add neural interface begin
+  - !type:AddImplantSpecial
+    implants: [ NeuralInterfaceImplant ]
+  #SS220 Add neural interface end
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff

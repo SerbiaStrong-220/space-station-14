@@ -9,6 +9,18 @@
     autoRechargeRate: 250 # 10 seconds to recharge
     autoRechargePause: false
     autoRechargePauseTime: 30
+  - type: Sprite
+    sprite: SS220/Objects/Mechs/batteryicons.rsi
+    state: nuclearicon
+    noRot: True
+  - type: MechPart
+    slot: power
+    ownMass: 75
+    integrity: 75
+    maxIntegrity: 75
+    attachedSprite:
+      sprite: SS220/Objects/Mechs/batteries.rsi
+      state: nuclear
 
 - type: entity
   id: MechBatterySmall
@@ -16,8 +28,8 @@
   name: small-capacity mech battery
   components:
   - type: Sprite
-    sprite: Objects/Specific/Mech/mecha_equipment.rsi
-    state: mecha_clamp
+    sprite: SS220/Objects/Mechs/batteryicons.rsi
+    state: smallicon
   - type: MechPart
     slot: power
     ownMass: 75
@@ -64,8 +76,9 @@
   name: midline mech battery
   components:
   - type: Sprite
-    sprite: Objects/Specific/Mech/mecha_equipment.rsi
-    state: mecha_clamp
+    sprite: SS220/Objects/Mechs/batteryicons.rsi
+    state: largeicon
+    noRot: True
   - type: MechPart
     slot: power
     ownMass: 125
@@ -73,7 +86,7 @@
     maxIntegrity: 100
     attachedSprite:
       sprite: SS220/Objects/Mechs/batteries.rsi
-      state: small
+      state: largeicon
   - type: Battery
     maxCharge: 15000
     startingCharge: 15000

@@ -52,6 +52,10 @@
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
+  #SS220 Add neural interface begin
+  - !type:AddImplantSpecial
+    implants: [ NeuralInterfaceImplant ]
+  #SS220 Add neural interface end
 
 - type: startingGear
   id: HoSGear

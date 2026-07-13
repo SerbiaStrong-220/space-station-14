@@ -327,20 +327,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         var ev = new DropHandItemsEvent();
         RaiseLocalEvent(pilot, ref ev);
 
-        if (TryComp<ActiveRadioComponent>(mech, out var mechRadio))
-        {
-            if (TryComp<InventoryComponent>(pilot, out var pilotInventory) && _inventory.TryGetSlotContainer(pilot, "ears", out var slot, out var def))
-            {
-                if (!TryComp<ActiveRadioComponent>(slot.ContainedEntity, out var radioComp))
-                    return;
-                mechRadio.Channels = radioComp.Channels;
-            }
-            if (TryComp<ActiveRadioComponent>(pilot, out var embeddedRadio))//in case the pilot is a radio himself
-            {
-                foreach (var channel in embeddedRadio.Channels)
-                    mechRadio.Channels.Add(channel);
-            }
-        }
+        RadioVoiceSetup(mech, pilot);
 
         if (!TryComp<ActionsComponent>(mech.Owner, out var mechActions))
             return;
@@ -349,10 +336,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         {
             var actionMeta = MetaData(action);
             if (actionMeta.EntityPrototype != null &&
-                actionMeta.EntityPrototype.ID != CombatModeToggleAction &&
-                actionMeta.EntityPrototype.ID != MechUIOpenAction &&
-                actionMeta.EntityPrototype.ID != PilotEjectAction
-                )
+                actionMeta.EntityPrototype.ID == MechRelayAction)
                 _actions.RemoveAction(action);
         }
 
@@ -414,6 +398,24 @@ public abstract partial class SharedAltMechSystem : EntitySystem
                 continue;
 
             _statusEffects.TrySetStatusEffectDuration(mech, effectMeta.EntityPrototype, effectComp.Duration);
+        }
+    }
+
+    public void RadioVoiceSetup(EntityUid mech, EntityUid pilot)
+    {
+        if (TryComp<ActiveRadioComponent>(mech, out var mechRadio))
+        {
+            if (TryComp<InventoryComponent>(pilot, out var pilotInventory) && _inventory.TryGetSlotContainer(pilot, "ears", out var slot, out var def))
+            {
+                if (!TryComp<ActiveRadioComponent>(slot.ContainedEntity, out var radioComp))
+                    return;
+                mechRadio.Channels = radioComp.Channels;
+            }
+            if (TryComp<ActiveRadioComponent>(pilot, out var embeddedRadio))//in case the pilot is a radio himself
+            {
+                foreach (var channel in embeddedRadio.Channels)
+                    mechRadio.Channels.Add(channel);
+            }
         }
     }
 

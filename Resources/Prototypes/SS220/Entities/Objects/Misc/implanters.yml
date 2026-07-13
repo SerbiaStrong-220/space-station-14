@@ -112,3 +112,21 @@
   components:
   - type: Implanter
     implant: DeathRattleImplantInterdyne
+
+- type: entity
+  id: NeuralInterfaceImplanter
+  name: neural interface implanter
+  description: neural interface
+  parent: BaseImplantOnlyImplanter
+  components:
+  - type: Implanter
+    implant: NeuralInterfaceImplant
+
+- type: entity
+  id: MilitaryNeuralInterfaceImplanter
+  name: military neural interface implanter
+  description: neural interface
+  parent: BaseImplantOnlyImplanter
+  components:
+  - type: Implanter
+    implant: MilitaryNeuralInterfaceImplant

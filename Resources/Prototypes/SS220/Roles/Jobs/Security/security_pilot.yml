@@ -25,6 +25,8 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
+  - !type:AddImplantSpecial
+    implants: [ NeuralInterfaceImplant ]
 
 - type: startingGear
   id: SecurityPilotGear

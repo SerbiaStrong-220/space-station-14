@@ -18,11 +18,11 @@
         visible: false
       - map: [ "enum.MechPartVisualLayers.ChassisColored" ]
         visible: false
-      - sprite: SS220/Objects/Mechs/altcores.rsi
+      - sprite: SS220/Objects/Mechs/cores.rsi
         state: basicloader
         map: [ "enum.MechPartVisualLayers.Core" ]
         visible: true
-      - sprite: SS220/Objects/Mechs/altcores.rsi
+      - sprite: SS220/Objects/Mechs/cores.rsi
         state: basicloadercolor
         map: [ "enum.MechPartVisualLayers.CoreColored" ]
         color: "#ff6e52"

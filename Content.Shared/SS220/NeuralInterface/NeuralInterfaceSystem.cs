@@ -1,24 +1,45 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 
-using Content.Shared.Clothing;
-using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Inventory.Events;
-using Content.Shared.Movement.Systems;
-using Content.Shared.SS220.Weapons.Melee.Events;
-using Content.Shared.Inventory;
-using Content.Shared.SS220.Grab;
+using Content.Shared.Alert;
+using Content.Shared.Mindshield.Components;
+using Content.Shared.SS220.MindShield;
 
 namespace Content.Shared.SS220.PhysicalParameters;
 
 public sealed class NeuralInterfaceSystem : EntitySystem
 {
-    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSystem = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
 
     public override void Initialize()
     {
-        //SubscribeLocalEvent<NeuralInterfaceSystem, MeleeAttackerEvent>(OnMeleeAttack);
+        SubscribeLocalEvent<NeuralInterfaceComponent, ComponentStartup>(OnCompStartup);
+        SubscribeLocalEvent<NeuralInterfaceComponent, MindshieldProtectionGrantedEvent>(OnProtectionGranted);
+        SubscribeLocalEvent<NeuralInterfaceComponent, MindshieldProtectionRemovedEvent>(OnProtectionRemoved);
 
         base.Initialize();
+    }
+
+    private void OnCompStartup(Entity<NeuralInterfaceComponent> ent, ref ComponentStartup args)
+    {
+        if (ent.Comp.InterfaceType == 0 && HasComp<MindShieldComponent>(ent.Owner))
+            ++ent.Comp.InterfaceType;
+
+        _alerts.ShowAlert(ent.Owner, ent.Comp.InterfaceAlertProto, (short)ent.Comp.InterfaceType);
+    }
+
+    private void OnProtectionGranted(Entity<NeuralInterfaceComponent> ent, ref MindshieldProtectionGrantedEvent args)
+    {
+        if (ent.Comp.InterfaceType == 0 && HasComp<MindShieldComponent>(ent.Owner))
+            ++ent.Comp.InterfaceType;
+
+        _alerts.ShowAlert(ent.Owner, ent.Comp.InterfaceAlertProto, (short)ent.Comp.InterfaceType);
+    }
+
+    private void OnProtectionRemoved(Entity<NeuralInterfaceComponent> ent, ref MindshieldProtectionRemovedEvent args)
+    {
+        if (ent.Comp.InterfaceType == 1)
+            --ent.Comp.InterfaceType;
+
+        _alerts.ShowAlert(ent.Owner, ent.Comp.InterfaceAlertProto, (short)ent.Comp.InterfaceType);
     }
 }
