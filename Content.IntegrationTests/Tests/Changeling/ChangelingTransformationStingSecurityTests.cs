@@ -15,7 +15,9 @@ using Content.Shared.Cloning;
 using Content.Shared.Doors.Components;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
+using Content.Shared.Physics;
 using Content.Shared.Stealth.Components;
+using Content.Shared.Standing;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
@@ -31,6 +33,7 @@ public sealed class ChangelingTransformationStingSecurityTests : GameTest
         "ChangelingCloningSettings";
     private static readonly EntProtoId CryogenicStingAction = "ActionChangelingCryogenicSting";
     private static readonly EntProtoId TransformationStingAction = "ActionChangelingTransformationSting";
+    private static readonly EntProtoId ContortBodyAction = "ActionChangelingContortBody";
 
     [Test]
     [PairConfig(nameof(PsDisconnected))]
@@ -83,57 +86,45 @@ public sealed class ChangelingTransformationStingSecurityTests : GameTest
 
     [Test]
     [PairConfig(nameof(PsDisconnected))]
-    public async Task ContortionCannotBypassWeldedDoors()
+    public async Task ContortionUsesMouseCollisionUntilStanding()
     {
         var pair = Pair;
         var server = pair.Server;
         var entMan = server.EntMan;
         var testMap = await pair.CreateTestMap();
         EntityUid ling = default;
-        EntityUid airlock = default;
 
         await server.WaitAssertion(() =>
         {
             ling = entMan.SpawnEntity("MobLing", testMap.GridCoords);
-            airlock = entMan.SpawnEntity(
-                "Airlock",
-                testMap.GridCoords.Offset(new Vector2(2f, 0f)));
-            entMan.EnsureComponent<ChangelingContortedComponent>(ling);
+            var action = entMan.System<SharedActionsSystem>().AddAction(ling, ContortBodyAction.Id)!.Value;
+            var contort = new ChangelingContortBodyActionEvent
+            {
+                Performer = ling,
+                Action = (action, entMan.GetComponent<ActionComponent>(action)),
+            };
+            entMan.EventBus.RaiseLocalEvent(ling, contort);
+            Assert.That(contort.Handled, Is.True);
         });
         await pair.RunTicksSync(1);
 
         await server.WaitAssertion(() =>
         {
-            var lingBody = entMan.GetComponent<PhysicsComponent>(ling);
-            var airlockBody = entMan.GetComponent<PhysicsComponent>(airlock);
             var lingFixture = entMan.GetComponent<FixturesComponent>(ling).Fixtures.Values.First();
-            var airlockFixture = entMan.GetComponent<FixturesComponent>(airlock).Fixtures.Values.First();
+            Assert.Multiple(() =>
+            {
+                Assert.That(entMan.HasComponent<ChangelingContortedComponent>(ling), Is.True);
+                Assert.That(entMan.System<StandingStateSystem>().IsDown(ling), Is.True);
+                Assert.That(lingFixture.CollisionMask, Is.EqualTo((int) CollisionGroup.SmallMobMask));
+            });
 
-            var unboltedCollision = new PreventCollideEvent(
-                ling,
-                airlock,
-                lingBody,
-                airlockBody,
-                lingFixture,
-                airlockFixture);
-            entMan.EventBus.RaiseLocalEvent(ling, ref unboltedCollision);
-            Assert.That(unboltedCollision.Cancelled, Is.True,
-                "Contortion should only pass through an ordinary unbolted door.");
-
-            var door = entMan.GetComponent<DoorComponent>(airlock);
-            Assert.That(entMan.GetComponent<DoorBoltComponent>(airlock).BoltsDown, Is.False);
-            Assert.That(entMan.System<DoorSystem>().SetState(airlock, DoorState.Welded, door), Is.True);
-
-            var weldedCollision = new PreventCollideEvent(
-                ling,
-                airlock,
-                lingBody,
-                airlockBody,
-                lingFixture,
-                airlockFixture);
-            entMan.EventBus.RaiseLocalEvent(ling, ref weldedCollision);
-            Assert.That(weldedCollision.Cancelled, Is.False,
-                "A welded door must remain a physical barrier to a contorted changeling.");
+            Assert.That(entMan.System<StandingStateSystem>().Stand(ling), Is.True);
+            Assert.Multiple(() =>
+            {
+                Assert.That(entMan.HasComponent<ChangelingContortedComponent>(ling), Is.False);
+                Assert.That(entMan.System<StandingStateSystem>().IsDown(ling), Is.False);
+                Assert.That(lingFixture.CollisionMask, Is.EqualTo((int) CollisionGroup.MobMask));
+            });
         });
     }
 

@@ -5,6 +5,7 @@ using Content.IntegrationTests.Fixtures;
 using Content.IntegrationTests.Fixtures.Attributes;
 using Content.Server.Changeling.Components;
 using Content.Server.Changeling.Systems;
+using Content.Server.Polymorph.Components;
 using Content.Shared.Alert;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
@@ -38,6 +39,7 @@ public sealed class ChangelingCoreTests : GameTest
     private static readonly ProtoId<CurrencyPrototype> EvolutionCurrency = "ChangelingEvolution";
     private static readonly EntProtoId SwapFormsAction = "ActionChangelingSwapForms";
     private static readonly EntProtoId LastResortAction = "ActionChangelingLastResort";
+    private static readonly EntProtoId HumanFormAction = "ActionChangelingHumanForm";
     private static readonly EntProtoId ArmBladeAction = "ActionChangelingArmBlade";
     private static readonly EntProtoId OrganicShieldAction = "ActionChangelingOrganicShield";
     private static readonly EntProtoId ChitinousArmorAction = "ActionChangelingChitinousArmor";
@@ -604,6 +606,8 @@ public sealed class ChangelingCoreTests : GameTest
         EntityUid corpse = default;
         EntityUid mindId = default;
         EntityUid storedState = default;
+        EntityUid hatchling = default;
+        EntityUid restoredHuman = default;
 
         await server.WaitAssertion(() =>
         {
@@ -710,21 +714,29 @@ public sealed class ChangelingCoreTests : GameTest
         {
             var mind = entMan.GetComponent<MindComponent>(mindId);
             Assert.That(mind.OwnedEntity, Is.Not.Null);
-            var hatchling = mind.OwnedEntity!.Value;
+            hatchling = mind.OwnedEntity!.Value;
             Assert.That(entMan.GetComponent<MetaDataComponent>(hatchling).EntityPrototype?.ID,
                 Is.EqualTo("MobMonkey"));
 
+            var polymorphed = entMan.GetComponent<PolymorphedEntityComponent>(hatchling);
+            Assert.That(polymorphed.Parent, Is.Not.Null);
+            restoredHuman = polymorphed.Parent!.Value;
+
             Assert.Multiple(() =>
             {
-                Assert.That(entMan.HasComponent<ChangelingIdentityComponent>(hatchling), Is.True);
-                Assert.That(entMan.HasComponent<ChangelingResourceComponent>(hatchling), Is.True);
-                Assert.That(entMan.HasComponent<ChangelingDevourComponent>(hatchling), Is.True);
-                Assert.That(entMan.HasComponent<ChangelingTransformComponent>(hatchling), Is.True);
-                Assert.That(entMan.HasComponent<ChangelingExtractDnaComponent>(hatchling), Is.True);
-                Assert.That(entMan.HasComponent<StoreComponent>(hatchling), Is.True);
+                Assert.That(entMan.HasComponent<ChangelingLesserFormComponent>(hatchling), Is.True);
+                Assert.That(entMan.HasComponent<ChangelingIdentityComponent>(hatchling), Is.False);
+                Assert.That(entMan.HasComponent<ChangelingResourceComponent>(hatchling), Is.False);
+                Assert.That(entMan.HasComponent<ChangelingDevourComponent>(hatchling), Is.False);
+                Assert.That(entMan.HasComponent<ChangelingTransformComponent>(hatchling), Is.False);
+                Assert.That(entMan.HasComponent<ChangelingExtractDnaComponent>(hatchling), Is.False);
+                Assert.That(entMan.HasComponent<StoreComponent>(hatchling), Is.False);
+                Assert.That(entMan.HasComponent<ChangelingIdentityComponent>(restoredHuman), Is.True);
+                Assert.That(entMan.HasComponent<ChangelingResourceComponent>(restoredHuman), Is.True);
+                Assert.That(entMan.HasComponent<StoreComponent>(restoredHuman), Is.True);
             });
 
-            var identity = entMan.GetComponent<ChangelingIdentityComponent>(hatchling);
+            var identity = entMan.GetComponent<ChangelingIdentityComponent>(restoredHuman);
             Assert.Multiple(() =>
             {
                 Assert.That(identity.AbsorbedGenomes, Does.Contain("last-resort-persistent-genome"));
@@ -739,14 +751,35 @@ public sealed class ChangelingCoreTests : GameTest
                 .ToHashSet();
             Assert.Multiple(() =>
             {
-                Assert.That(actionIds, Does.Contain("ActionChangelingStore"));
-                Assert.That(actionIds, Does.Contain("ActionChangelingDevour"));
-                Assert.That(actionIds, Does.Contain("ActionChangelingTransform"));
-                Assert.That(actionIds, Does.Contain("ActionChangelingExtractDna"));
-                Assert.That(actionIds, Does.Contain(LastResortAction.Id));
+                Assert.That(actionIds, Does.Contain(HumanFormAction.Id));
+                Assert.That(actionIds, Does.Not.Contain("ActionChangelingStore"));
+                Assert.That(actionIds, Does.Not.Contain("ActionChangelingDevour"));
+                Assert.That(actionIds, Does.Not.Contain("ActionChangelingTransform"));
+                Assert.That(actionIds, Does.Not.Contain("ActionChangelingExtractDna"));
+                Assert.That(actionIds, Does.Not.Contain(LastResortAction.Id));
                 Assert.That(entMan.Deleted(storedState), Is.True,
                     "The temporary Last Resort storage entity must be deleted after hatching.");
             });
+
+            var humanFormAction = entMan.System<SharedActionsSystem>().GetActions(hatchling)
+                .Single(uid => entMan.GetComponent<MetaDataComponent>(uid).EntityPrototype?.ID == HumanFormAction.Id);
+            var humanForm = new ChangelingHumanFormActionEvent
+            {
+                Performer = hatchling,
+                Action = (humanFormAction, entMan.GetComponent<ActionComponent>(humanFormAction)),
+            };
+            entMan.EventBus.RaiseLocalEvent(hatchling, humanForm);
+            Assert.That(humanForm.Handled, Is.True);
+        });
+        await pair.RunTicksSync(1);
+
+        await server.WaitAssertion(() =>
+        {
+            var mind = entMan.GetComponent<MindComponent>(mindId);
+            Assert.That(mind.OwnedEntity, Is.EqualTo(restoredHuman));
+            Assert.That(entMan.GetComponent<MetaDataComponent>(restoredHuman).EntityPrototype?.ID, Is.EqualTo("MobHuman"));
+            Assert.That(entMan.HasComponent<ChangelingResourceComponent>(restoredHuman), Is.True);
+            Assert.That(entMan.HasComponent<StoreComponent>(restoredHuman), Is.True);
         });
     }
 

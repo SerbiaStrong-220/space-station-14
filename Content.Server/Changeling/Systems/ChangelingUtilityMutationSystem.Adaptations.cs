@@ -2,14 +2,15 @@
 using Content.Server.Changeling.Components;
 using Content.Shared.Changeling.Components;
 using Content.Shared.Changeling.Mutations;
-using Content.Shared.Doors.Components;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.FixedPoint;
+using Content.Shared.Physics;
 using Content.Shared.SS220.IgnoreLightVision.Components;
 using Content.Shared.Stealth.Components;
+using Content.Shared.Standing;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Physics.Events;
+using Robust.Shared.Physics;
 
 namespace Content.Server.Changeling.Systems;
 
@@ -23,7 +24,8 @@ public sealed partial class ChangelingUtilityMutationSystem
         SubscribeLocalEvent<ChangelingResourceComponent, ChangelingDigitalCamouflageActionEvent>(OnDigitalCamouflage);
         SubscribeLocalEvent<ChangelingResourceComponent, ChangelingDarknessAdaptationActionEvent>(OnDarknessAdaptation);
         SubscribeLocalEvent<ChangelingResourceComponent, ChangelingVoidAdaptationActionEvent>(OnVoidAdaptation);
-        SubscribeLocalEvent<ChangelingContortedComponent, PreventCollideEvent>(OnContortedPreventCollide);
+        SubscribeLocalEvent<ChangelingContortedComponent, StandAttemptEvent>(OnContortedStandAttempt);
+        SubscribeLocalEvent<ChangelingContortedComponent, ComponentShutdown>(OnContortedShutdown);
     }
 
     private void UpdateAdaptations(TimeSpan now)
@@ -326,13 +328,18 @@ public sealed partial class ChangelingUtilityMutationSystem
         if (!state.Contorted && !Spend(ent.Owner, 25))
             return;
 
-        state.Contorted = !state.Contorted;
+        if (!state.Contorted && !_standing.Down(ent.Owner, dropHeldItems: false))
+            return;
+
         args.Handled = true;
         args.Toggle = true;
-        if (state.Contorted)
-            EnsureComp<ChangelingContortedComponent>(ent);
+        if (!state.Contorted)
+        {
+            state.Contorted = true;
+            EnableContortion(ent.Owner, EnsureComp<ChangelingContortedComponent>(ent));
+        }
         else
-            RemComp<ChangelingContortedComponent>(ent);
+            DisableContortion(ent.Owner, state, updateAction: false, showPopup: false);
 
         _popup.PopupEntity(
             Loc.GetString(state.Contorted
@@ -364,15 +371,72 @@ public sealed partial class ChangelingUtilityMutationSystem
             ent.Owner);
     }
 
-    private void OnContortedPreventCollide(Entity<ChangelingContortedComponent> ent, ref PreventCollideEvent args)
+    private void OnContortedStandAttempt(Entity<ChangelingContortedComponent> ent, ref StandAttemptEvent args)
     {
-        if (!TryComp<DoorComponent>(args.OtherEntity, out var door) || door.State == DoorState.Welded)
+        if (TryComp<ChangelingUtilityStateComponent>(ent, out var state))
+            DisableContortion(ent.Owner, state, updateAction: true, showPopup: true);
+    }
+
+    private void OnContortedShutdown(Entity<ChangelingContortedComponent> ent, ref ComponentShutdown args)
+    {
+        RestoreContortionCollision(ent.Owner, ent.Comp);
+    }
+
+    private void EnableContortion(EntityUid uid, ChangelingContortedComponent contorted)
+    {
+        if (!TryComp<FixturesComponent>(uid, out var fixtures))
             return;
 
-        if (TryComp<DoorBoltComponent>(args.OtherEntity, out var bolts) && bolts.BoltsDown)
+        foreach (var (id, fixture) in fixtures.Fixtures)
+        {
+            if (!fixture.Hard)
+                continue;
+
+            contorted.OriginalFixtureMasks.TryAdd(id, fixture.CollisionMask);
+            _physics.SetCollisionMask(uid, id, fixture, (int) CollisionGroup.SmallMobMask, fixtures);
+        }
+    }
+
+    private void DisableContortion(EntityUid uid, ChangelingUtilityStateComponent state, bool updateAction, bool showPopup)
+    {
+        state.Contorted = false;
+        if (TryComp<ChangelingContortedComponent>(uid, out var contorted))
+        {
+            RestoreContortionCollision(uid, contorted);
+            contorted.OriginalFixtureMasks.Clear();
+            RemComp<ChangelingContortedComponent>(uid);
+        }
+
+        if (updateAction)
+        {
+            foreach (var action in _actions.GetActions(uid))
+            {
+                if (MetaData(action).EntityPrototype?.ID != ContortBodyAction.Id)
+                    continue;
+
+                _actions.SetToggled(action.AsNullable(), false);
+                break;
+            }
+        }
+
+        if (showPopup)
+            _popup.PopupEntity(Loc.GetString("changeling-contort-body-disabled"), uid, uid);
+    }
+
+    private void RestoreContortionCollision(EntityUid uid, ChangelingContortedComponent contorted)
+    {
+        if (!TryComp<FixturesComponent>(uid, out var fixtures))
             return;
 
-        // A contorted changeling can slide beneath an unbolted door without opening it.
-        args.Cancelled = true;
+        foreach (var (id, originalMask) in contorted.OriginalFixtureMasks)
+        {
+            if (!fixtures.Fixtures.TryGetValue(id, out var fixture))
+                continue;
+
+            var mask = _standing.IsDown(uid)
+                ? originalMask & ~StandingStateSystem.StandingCollisionLayer
+                : originalMask;
+            _physics.SetCollisionMask(uid, id, fixture, mask, fixtures);
+        }
     }
 }

@@ -55,9 +55,6 @@ public sealed partial class ChangelingLayEggActionEvent : EntityTargetActionEven
 {
     [DataField]
     public TimeSpan HatchDelay = TimeSpan.FromMinutes(4);
-
-    [DataField]
-    public EntProtoId HatchPrototype = "MobMonkey";
 }
 
 public sealed partial class ChangelingBiodegradeActionEvent : InstantActionEvent

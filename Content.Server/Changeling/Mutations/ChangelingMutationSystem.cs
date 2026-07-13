@@ -1,6 +1,7 @@
 // SS220 Changeling
 using System.Linq;
 using Content.Server.Changeling.Components;
+using Content.Server.Polymorph.Systems;
 using Content.Server.Changeling.Systems;
 using Content.Server.Polymorph.Components;
 using Content.Server.Store.Systems;
@@ -22,6 +23,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
+using Content.Shared.Polymorph;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Robust.Shared.Physics.Components;
@@ -48,6 +50,9 @@ public sealed partial class ChangelingMutationSystem : EntitySystem
     private static readonly TimeSpan StrainedMusclesInterval = TimeSpan.FromSeconds(1);
 
     private static readonly EntProtoId StoreAction = "ActionChangelingStore";
+    private static readonly EntProtoId HatchlingHumanPrototype = "MobHuman";
+    private static readonly EntProtoId HumanFormAction = "ActionChangelingHumanForm";
+    private static readonly ProtoId<PolymorphPrototype> ChangelingLesserForm = "ChangelingLesserForm";
     private static readonly EntProtoId ArmBladePrototype = "ChangelingArmBlade";
     private static readonly EntProtoId BoneShardPrototype = "ChangelingBoneShard";
     private static readonly EntProtoId ChitinousArmorVisualPrototype = "ChangelingChitinousArmorVisual";
@@ -81,6 +86,7 @@ public sealed partial class ChangelingMutationSystem : EntitySystem
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
     [Dependency] private readonly ActionGrantSystem _actionGrant = default!;
     [Dependency] private readonly StoreSystem _store = default!;
+    [Dependency] private readonly PolymorphSystem _polymorph = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedContainerSystem _containers = default!;

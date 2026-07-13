@@ -69,7 +69,13 @@ public sealed partial class ChangelingUtilityStateComponent : Component
 }
 
 [RegisterComponent]
-public sealed partial class ChangelingContortedComponent : Component;
+public sealed partial class ChangelingContortedComponent : Component
+{
+    /// <summary>
+    /// Original collision masks for body fixtures, restored when contortion ends.
+    /// </summary>
+    public Dictionary<string, int> OriginalFixtureMasks = new();
+}
 
 [RegisterComponent]
 public sealed partial class ChangelingOrganicSpaceSuitComponent : Component;

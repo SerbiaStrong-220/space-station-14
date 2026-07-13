@@ -27,12 +27,16 @@ using Content.Shared.Polymorph;
 using Content.Shared.Popups;
 using Content.Shared.SS220.Telepathy;
 using Content.Shared.Stealth;
+using Content.Shared.Standing;
 using Content.Shared.UserInterface;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -57,6 +61,7 @@ public sealed partial class ChangelingUtilityMutationSystem : EntitySystem
     private static readonly SoundPathSpecifier MutationRetractSound = new("/Audio/_Goobstation/Changeling/Effects/armour_strip.ogg");
     private static readonly SoundPathSpecifier MutationShriekSound = new("/Audio/Voice/Vox/shriek1.ogg");
     private static readonly EntProtoId HumanFormAction = "ActionChangelingHumanForm";
+    private static readonly EntProtoId ContortBodyAction = "ActionChangelingContortBody";
     private static readonly EntProtoId VoidAdaptationAction = "ActionChangelingVoidAdaptation";
     private static readonly ProtoId<PolymorphPrototype> ChangelingLesserForm = "ChangelingLesserForm";
     private static readonly EntProtoId OrganicSpaceSuitVisual = "ChangelingOrganicSpaceSuitVisual";
@@ -92,6 +97,8 @@ public sealed partial class ChangelingUtilityMutationSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _containers = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;

@@ -68,7 +68,6 @@ public sealed partial class ChangelingMutationSystem
         var egg = EnsureComp<ChangelingIncubatingEggComponent>(args.Target);
         egg.Headslug = ent.Owner;
         egg.HatchAt = _timing.CurTime + args.HatchDelay;
-        egg.HatchPrototype = args.HatchPrototype;
         ent.Comp.HasLaidEgg = true;
 
         // The mind remains on the dead headslug until hatching, preserving the
@@ -96,17 +95,42 @@ public sealed partial class ChangelingMutationSystem
                 continue;
             }
 
-            var hatchling = Spawn(egg.HatchPrototype, Transform(corpse).Coordinates);
-            if (!TransferChangelingBody((storedState, resources), hatchling))
+            // A hatchling is a Lesser Form, not a fully empowered monkey. The hidden human parent
+            // owns the changeling state and mutations; the monkey only receives the guaranteed way back.
+            var humanForm = Spawn(HatchlingHumanPrototype, Transform(corpse).Coordinates);
+            if (!TransferChangelingBody((storedState, resources), humanForm))
             {
-                QueueDel(hatchling);
+                QueueDel(humanForm);
                 RemCompDeferred<ChangelingIncubatingEggComponent>(corpse);
                 continue;
             }
-            _mind.TransferTo(mind, hatchling);
+
+            var humanFormAction = _actions.AddAction(humanForm, HumanFormAction);
+            var hatchling = _polymorph.PolymorphEntity(humanForm, ChangelingLesserForm);
+            if (humanFormAction == null || hatchling == null)
+            {
+                Log.Error($"Failed to create Lesser Form for hatched headslug at {ToPrettyString(corpse)}.");
+                QueueDel(humanForm);
+                RemCompDeferred<ChangelingIncubatingEggComponent>(corpse);
+                continue;
+            }
+
+            EnsureComp<ChangelingLesserFormComponent>(hatchling.Value);
+            _actionContainer.TransferActionWithNewAttached(humanFormAction.Value, hatchling.Value, hatchling.Value);
+            if (_actions.GetAction(humanFormAction.Value) is not { } humanAction ||
+                humanAction.Comp.AttachedEntity != hatchling.Value)
+            {
+                Log.Error($"Failed to attach Human Form to hatched headslug at {ToPrettyString(corpse)}.");
+                QueueDel(hatchling.Value);
+                QueueDel(humanForm);
+                RemCompDeferred<ChangelingIncubatingEggComponent>(corpse);
+                continue;
+            }
+
+            _mind.TransferTo(mind, hatchling.Value);
 
             headslug.StoredState = null;
-            _gibbing.Gib(corpse, user: hatchling);
+            _gibbing.Gib(corpse, user: hatchling.Value);
             QueueDel(storedState);
             QueueDel(egg.Headslug);
         }

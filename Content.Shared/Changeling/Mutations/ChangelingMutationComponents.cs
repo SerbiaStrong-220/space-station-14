@@ -141,6 +141,4 @@ public sealed partial class ChangelingIncubatingEggComponent : Component
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan HatchAt;
 
-    [DataField]
-    public EntProtoId HatchPrototype = "MobMonkey";
 }

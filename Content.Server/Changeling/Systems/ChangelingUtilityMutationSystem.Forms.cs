@@ -166,14 +166,28 @@ public sealed partial class ChangelingUtilityMutationSystem
             return;
         }
 
+        if ((FindHumanFormAction(ent.Owner) ?? FindHumanFormAction(parent)) is not { } humanFormAction ||
+            _actions.GetAction(humanFormAction) is not { } action ||
+            action.Comp.AttachedEntity != ent.Owner)
+        {
+            _resources.AddChemicals(parent, FixedPoint2.New(5));
+            Log.Error($"Failed to find Human Form action for {ToPrettyString(ent.Owner)}.");
+            return;
+        }
+
+        _actionContainer.TransferActionWithNewAttached(humanFormAction, parent, parent);
+        if (_actions.GetAction(humanFormAction) is not { } transferred || transferred.Comp.AttachedEntity != parent)
+        {
+            _resources.AddChemicals(parent, FixedPoint2.New(5));
+            Log.Error($"Failed to preserve Human Form action while reverting {ToPrettyString(ent.Owner)}.");
+            return;
+        }
+
         if (_polymorph.Revert(ent.AsNullable()) is not { } restoredParent)
         {
             _resources.AddChemicals(parent, FixedPoint2.New(5));
             return;
         }
-
-        if (!TryReturnHumanFormAction(restoredParent, ent.Owner))
-            Log.Error($"Failed to return Human Form action to {ToPrettyString(restoredParent)} after polymorph reversion.");
 
         args.Handled = true;
         _popup.PopupEntity(Loc.GetString("changeling-human-form-restored"), restoredParent, restoredParent);
@@ -184,7 +198,7 @@ public sealed partial class ChangelingUtilityMutationSystem
         if (!args.IsRevert || args.OldEntity != ent.Owner)
             return;
 
-        if (FindPurchasedAction(args.NewEntity, HumanFormAction) is not { } action ||
+        if (FindHumanFormAction(args.NewEntity) is not { } action ||
             _actions.GetAction(action) is not { } actionData ||
             actionData.Comp.AttachedEntity != ent.Owner)
         {
@@ -197,7 +211,7 @@ public sealed partial class ChangelingUtilityMutationSystem
 
     private bool TryReturnHumanFormAction(EntityUid parent, EntityUid expectedCurrentOwner)
     {
-        if (FindPurchasedAction(parent, HumanFormAction) is not { } action ||
+        if (FindHumanFormAction(parent) is not { } action ||
             _actions.GetAction(action) is not { } actionData)
         {
             return false;
@@ -239,6 +253,20 @@ public sealed partial class ChangelingUtilityMutationSystem
             }
 
             return action;
+        }
+
+        return null;
+    }
+
+    private EntityUid? FindHumanFormAction(EntityUid uid)
+    {
+        if (FindPurchasedAction(uid, HumanFormAction) is { } purchasedAction)
+            return purchasedAction;
+
+        foreach (var action in _actions.GetActions(uid))
+        {
+            if (Exists(action) && MetaData(action).EntityPrototype?.ID == HumanFormAction.Id)
+                return action;
         }
 
         return null;
