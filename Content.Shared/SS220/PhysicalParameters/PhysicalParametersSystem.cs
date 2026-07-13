@@ -14,8 +14,6 @@ using Content.Shared.SS220.ItemExtension;
 using Content.Shared.SS220.Weapons.Melee.Components;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Wieldable.Components;
-using System.Data.Common;
-using System.Reflection.Metadata;
 
 namespace Content.Shared.SS220.PhysicalParameters;
 
@@ -23,13 +21,18 @@ public sealed class PhysicalParametersSystem : EntitySystem
 {
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSystem = default!;
+    private readonly FixedPoint2 UngrabbableStrengthDifference = 1.7;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<PhysicalParametersComponent, MeleeAttackerEvent>(OnMeleeAttack);
+
         SubscribeLocalEvent<PhysicalParametersComponent, GrabDelayModifiersEvent>(OnGrabAttempt);
+        SubscribeLocalEvent<PhysicalParametersComponent, GrabBreakChanceModifyEvent>(OnGrabBreakAttempt);
+        SubscribeLocalEvent<PhysicalParametersComponent, GrabCancelEvent>(OnGrabCancel);
 
         SubscribeLocalEvent<PhysicalParametersComponent, ComponentInit>(OnCompInit);
+        SubscribeLocalEvent<PhysicalParametersComponent, SexChangedEvent>(OnSexChanged);
 
         SubscribeLocalEvent<PhysicalParametersModifyingClothingComponent, InventoryRelayedEvent<ParametersUpdateEvent>>(OnUpdateRelayedEvent);
         SubscribeLocalEvent<PhysicalParametersModifyingClothingComponent, ClothingGotEquippedEvent>(OnGotEquipped);
@@ -41,6 +44,35 @@ public sealed class PhysicalParametersSystem : EntitySystem
     public void OnCompInit(Entity<PhysicalParametersComponent> ent, ref ComponentInit args)
     {
         UpdateParameterValues(ent);
+    }
+
+    public void OnSexChanged(Entity<PhysicalParametersComponent> ent, ref SexChangedEvent args)
+    {
+        UpdateParameterValues(ent);
+    }
+
+    public void OnGrabCancel(Entity<PhysicalParametersComponent> ent, ref GrabCancelEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        FixedPoint2 grabbedStrength = GetParameterValue(ent, Parameter.Strength);
+        FixedPoint2 grabberStrength = 1;
+
+        if (args.Grabber is not { Valid: true } grabberValidated)
+        {
+            args.Cancelled = true;
+            return;
+        }
+
+        if (TryComp<PhysicalParametersComponent>(grabberValidated, out var grabberComp))
+            grabberStrength = GetParameterValue((grabberValidated, grabberComp), Parameter.Strength);
+
+        if (grabbedStrength >= grabberStrength * UngrabbableStrengthDifference)
+        {
+            args.Cancelled = true;
+            return;
+        }
     }
 
     public void OnMeleeAttack(Entity<PhysicalParametersComponent> ent, ref MeleeAttackerEvent args)
@@ -124,6 +156,30 @@ public sealed class PhysicalParametersSystem : EntitySystem
 
         args.Multiply((grabbedStrength / GetParameterValue(ent, Parameter.Strength)).Float());
     }
+
+    public void OnGrabBreakAttempt(Entity<PhysicalParametersComponent> ent, ref GrabBreakChanceModifyEvent args)
+    {
+        if (args.Grabber is not { Valid: true } grabberValidated)
+        {
+            args.Chance += 1;
+            return;
+        }
+
+        FixedPoint2 grabbedStrength = GetParameterValue(ent, Parameter.Strength);
+        FixedPoint2 grabberStrength = 1;
+
+        if (TryComp<PhysicalParametersComponent>(grabberValidated, out var grabberComp))
+            grabberStrength = GetParameterValue((grabberValidated, grabberComp), Parameter.Strength);
+
+        if (grabbedStrength >= grabberStrength * UngrabbableStrengthDifference)
+        {
+            args.Chance += 1;
+            return;
+        }
+
+        args.Chance *= (grabbedStrength / grabberStrength).Float();
+    }
+
 
     public FixedPoint2 GetParameterValue(Entity<PhysicalParametersComponent> ent, Parameter parameter)
     {

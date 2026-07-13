@@ -8,7 +8,7 @@
     enum.HumanoidVisualLayers.Hair: #antennas
       limit: 1
       required: false
-    enum.HumanoidVisualLayers.Head: 
+    enum.HumanoidVisualLayers.Head:
       limit: 1
       required: false
     enum.HumanoidVisualLayers.HeadTop: #wires
@@ -80,6 +80,16 @@
   id: MobIpc
   name: Urist McIPC
   components:
+  #SS220 add physical parameters begin
+  - type: PhysicalParameters
+    parameterDict:
+      Strength: 1.5
+      ReactionSpeed: 1
+      Coordination: 1
+      PainTolerance: 1
+    genderModifier:
+      Strength: 0
+  #SS220 add physical parameters end
   - type: RemoveComponentsOnTrigger
     keysIn:
       - RemoveInternalsOnly
@@ -175,7 +185,7 @@
     damageContainer: Ipc
     damageModifierSet: Ipc
   - type: ToggleableVisuals
-    spriteLayer: light 
+    spriteLayer: light
   - type: PointLight
     enabled: false
     mask: /Textures/Effects/LightMasks/cone.png
