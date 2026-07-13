@@ -111,8 +111,17 @@ public sealed class EventManagerSystem : EntitySystem
         if (FindEvent(eligible) is not { } eventId)
             return false;
 
-        if (!_prototype.Resolve(eventId, out EntityPrototype? prototype) ||
-            !eligible.TryGetValue(prototype, out var stationEvent))
+        StationEventComponent? stationEvent = null;
+        foreach (var (prototype, candidate) in eligible)
+        {
+            if (prototype.ID != eventId)
+                continue;
+
+            stationEvent = candidate;
+            break;
+        }
+
+        if (stationEvent == null)
             return false;
 
         severity = stationEvent.DirectorSeverity;

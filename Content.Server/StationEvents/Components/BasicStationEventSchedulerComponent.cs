@@ -4,7 +4,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Server.StationEvents.Components;
 
-[RegisterComponent, Access(typeof(BasicStationEventSchedulerSystem))]
+[RegisterComponent, Access(typeof(BasicStationEventSchedulerSystem)), AutoGenerateComponentPause] // SS220-event-director
 public sealed partial class BasicStationEventSchedulerComponent : Component
 {
     /// <summary>

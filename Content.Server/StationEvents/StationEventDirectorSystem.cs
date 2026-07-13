@@ -36,12 +36,12 @@ public sealed class StationEventDirectorSystem : EntitySystem
         SubscribeLocalEvent<RoundStartedEvent>(OnRoundStarted);
     }
 
-    private void OnRoundStarted(RoundStartedEvent _)
+    private void OnRoundStarted(RoundStartedEvent ev)
     {
         var query = EntityQueryEnumerator<StationEventDirectorComponent>();
         while (query.MoveNext(out var uid, out _))
         {
-            Del(uid);
+            QueueDel(uid);
         }
     }
 
@@ -94,7 +94,7 @@ public sealed class StationEventDirectorSystem : EntitySystem
             return;
         }
 
-        if (HasActiveThreat(StationEventSeverity.Incident))
+        if (HasActiveThreat(StationEventSeverity.Incident) || IsOnCooldown(state.LastIncident, IncidentCooldown, now))
         {
             state.Phase = StationEventSeverity.Calm;
             return;

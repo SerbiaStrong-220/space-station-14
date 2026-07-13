@@ -3,7 +3,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Server.StationEvents.Components;
 
-[RegisterComponent, Access(typeof(RampingStationEventSchedulerSystem))]
+[RegisterComponent, Access(typeof(RampingStationEventSchedulerSystem)), AutoGenerateComponentPause] // SS220-event-director
 public sealed partial class RampingStationEventSchedulerComponent : Component
 {
     // SS220-event-director-begin

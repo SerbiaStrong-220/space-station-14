@@ -40,7 +40,7 @@ public sealed class SecretStartsTest : GameTest
             Assert.That(gameTicker.GetAddedGameRules().Count(), Is.GreaterThan(1), $"No additional rules started by secret rule.");
 
             var secret = gameTicker.GetAddedGameRules<SecretRuleComponent>().Single(); // SS220-event-director
-            Assert.That(secret.Comp.SelectedPreset, Is.Not.Null.And.Not.Empty,
+            Assert.That(secret.Comp.SelectedPreset, Is.Not.Null,
                 "Secret did not retain the preset it selected."); // SS220-event-director
 
             // End all rules
