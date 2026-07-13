@@ -101,7 +101,6 @@
       state: conpipe-s
   - type: DisposalTube
   - type: DisposalPipeCrawlerTube
-    containerId: DisposalTransit
   - type: DisposalTransit
   - type: ContainerContainer
     containers:
