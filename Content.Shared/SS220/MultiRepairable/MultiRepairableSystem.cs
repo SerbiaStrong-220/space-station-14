@@ -56,7 +56,7 @@ public sealed class MultiRepairableSystem : EntitySystem
                 ent,
                 delay,
                 option.QualityNeeded,
-                new MultiRepairDoAfterEvent(option),
+                new MultiRepairDoAfterEvent(option, delay),
                 option.FuelCost
             );
 
@@ -85,6 +85,23 @@ public sealed class MultiRepairableSystem : EntitySystem
         RaiseLocalEvent(ent, ref ev);
 
         args.Handled = true;
+
+        var totalDamage = _damageableSystem.GetTotalDamage(ent.Owner);
+        var toolEntity = args.Args.Used.Value;
+        var toolExists = Exists(toolEntity);
+
+        if (totalDamage > 0 && toolExists)
+        {
+            _toolSystem.UseTool(
+                toolEntity,
+                args.User,
+                ent,
+                args.UsedDelay,
+                option.QualityNeeded,
+                new MultiRepairDoAfterEvent(option, args.UsedDelay),
+                option.FuelCost
+            );
+        }
     }
 }
 
@@ -95,6 +112,12 @@ public readonly record struct MultiRepairedEvent(EntityUid Target, EntityUid Use
 public sealed partial class MultiRepairDoAfterEvent : DoAfterEvent
 {
     public readonly RepairOption RepairOption;
+    public readonly float UsedDelay;
+    public MultiRepairDoAfterEvent(RepairOption option, float usedDelay)
+    {
+        RepairOption = option;
+        UsedDelay = usedDelay;
+    }
     public MultiRepairDoAfterEvent(RepairOption option) => RepairOption = option;
     public override DoAfterEvent Clone() => this;
 }
