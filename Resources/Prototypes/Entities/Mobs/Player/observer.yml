@@ -99,6 +99,7 @@
   - type: ShowHealthBars
     damageContainers:
       - Biological
+      - Ipc #SS220-MicroFixesIPC
   - type: ShowHealthIcons
     damageContainers:
       - Biological
