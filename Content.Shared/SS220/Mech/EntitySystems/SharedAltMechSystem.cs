@@ -352,7 +352,12 @@ public abstract partial class SharedAltMechSystem : EntitySystem
             if (!TryComp<ActionComponent>(action, out var actionComp) || actionMeta.EntityPrototype != null && actionMeta.EntityPrototype.ID == CombatModeToggleAction)
                 continue;
 
-            var addedAction = _actions.AddAction(mech.Owner, MechRelayAction, mech.Owner);
+            var container = actionComp.Container != null ? actionComp.Container : mech.Owner;
+
+            if (container is not { Valid: true } containerValidated)
+                continue;
+
+            var addedAction = _actions.AddAction(mech.Owner, MechRelayAction, containerValidated);
 
             if (addedAction is not { Valid: true } addedActionValidated || !TryComp<ActionComponent>(addedActionValidated, out var addedActionComp))
                 continue;
@@ -360,7 +365,11 @@ public abstract partial class SharedAltMechSystem : EntitySystem
             addedActionComp.Icon = actionComp.Icon;
             addedActionComp.IconOn = actionComp.IconOn;
             addedActionComp.EntityIcon = actionComp.EntityIcon;
+            addedActionComp.EntIcon = actionComp.EntIcon;
             addedActionComp.Cooldown = actionComp.Cooldown;
+            addedActionComp.ItemIconStyle = actionComp.ItemIconStyle;
+
+            addedActionComp.RaiseOnUser = true;
 
             _meta.SetEntityName(addedActionValidated, actionMeta.EntityName);
             _meta.SetEntityDescription(addedActionValidated, actionMeta.EntityDescription);
