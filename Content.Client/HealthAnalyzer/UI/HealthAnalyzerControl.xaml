@@ -31,7 +31,7 @@
             <Label Name="ClinicalDeathLabel"
                    Text="{Loc 'health-analyzer-window-clinical-death-text'}"
                    Visible="False" />
-            <Label Name="ClinicalDeathTimeLabel"
+            <RichTextLabel Name="ClinicalDeathTimeLabel"
                    Visible="False"
                    StyleClasses="LabelBig" />
             <!-- SS220 clinic death analyzer end -->

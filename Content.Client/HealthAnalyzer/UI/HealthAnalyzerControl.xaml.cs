@@ -55,8 +55,7 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
     // SS220-experience-update-end
 
     // SS220 clinic death analyzer - start
-    private const int SafeThresholdMinutes  = 2;
-    private const int WarningThresholdMinutes  = 1;
+    private const int WarningThresholdMinutes = 1;
     // SS220 clinic death analyzer - end
 
     public HealthAnalyzerControl()
@@ -137,19 +136,14 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
                 ClinicalDeathTimeLabel.Text = Loc.GetString(reviveExhausted
                     ? "health-analyzer-window-clinical-death-expired"
                     : "health-analyzer-window-clinical-death-revivable");
-                ClinicalDeathTimeLabel.FontColorOverride = reviveExhausted ? Color.Red : Color.Lime;
             }
             else
             {
-                ClinicalDeathTimeLabel.Text = Loc.GetString("health-analyzer-window-clinical-death-decay",
+                var decayText = Loc.GetString("health-analyzer-window-clinical-death-decay",
                     ("timeLeft", timeLeft.ToString(@"mm\:ss")));
 
-                ClinicalDeathTimeLabel.FontColorOverride = timeLeft.TotalMinutes switch
-                {
-                    >= SafeThresholdMinutes => Color.Lime,
-                    >= WarningThresholdMinutes => Color.Yellow,
-                    _ => Color.Red
-                };
+                var decayColor = timeLeft.TotalMinutes >= WarningThresholdMinutes ? "yellow" : "red";
+                ClinicalDeathTimeLabel.Text = $"[color={decayColor}]{decayText}[/color]";
             }
         }
         else
