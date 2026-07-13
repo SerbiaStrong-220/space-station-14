@@ -14,6 +14,8 @@ using Content.Shared.SS220.ItemExtension;
 using Content.Shared.SS220.Weapons.Melee.Components;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Wieldable.Components;
+using System.Data.Common;
+using System.Reflection.Metadata;
 
 namespace Content.Shared.SS220.PhysicalParameters;
 
@@ -39,10 +41,6 @@ public sealed class PhysicalParametersSystem : EntitySystem
     public void OnCompInit(Entity<PhysicalParametersComponent> ent, ref ComponentInit args)
     {
         UpdateParameterValues(ent);
-
-        var ev = new ParametersUpdateEvent();
-
-        RaiseLocalEvent(ent, ref ev);
     }
 
     public void OnMeleeAttack(Entity<PhysicalParametersComponent> ent, ref MeleeAttackerEvent args)
@@ -152,13 +150,23 @@ public sealed class PhysicalParametersSystem : EntitySystem
 
         RaiseLocalEvent(ent, ref ev);
 
+        if (TryComp<HumanoidProfileComponent>(ent.Owner, out var profileComp) && profileComp.Sex == Sex.Female)
+        {
+            foreach (var (parameter, value) in ent.Comp.GenderModifier)
+            {
+                if (ent.Comp.ParameterDictModified.ContainsKey(parameter))
+                {
+                    ent.Comp.ParameterDictModified[parameter] += value;
+                    continue;
+                }
+
+                ent.Comp.ParameterDictModified.Add(parameter, value);
+            }
+        }
+
         foreach (var (parameter, value) in ev.ModifiedValues)
         {
             var valueToAdd = value;
-
-            if (TryComp<HumanoidProfileComponent>(ent.Owner, out var profileComp) && profileComp.Sex == Sex.Female)
-                if (ent.Comp.GenderModifier.TryGetValue(parameter, out var genderModifier))
-                    valueToAdd += genderModifier;
 
             if (ent.Comp.ParameterDictModified.ContainsKey(parameter))
             {
