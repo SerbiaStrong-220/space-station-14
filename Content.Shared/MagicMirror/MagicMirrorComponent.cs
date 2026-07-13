@@ -43,4 +43,12 @@ public sealed partial class MagicMirrorComponent : Component
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public SoundSpecifier? ChangeHairSound = new SoundPathSpecifier("/Audio/Items/scissors.ogg");
+
+    //SS220-IPC begin
+    [DataField]
+    public bool ShowPopup = true;
+
+    [DataField]
+    public bool CheckHeadSlot = true;
+    //SS220-IPC end
 }
