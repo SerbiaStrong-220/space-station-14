@@ -175,7 +175,7 @@ public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
             address = $"UID: {targetUid.Value}";
         }
 
-        if (configurator.Devices.ContainsValue(targetUid.Value))
+        if (configurator.Devices.ContainsKey(address)) // ss220 fix optimization
         {
             _popupSystem.PopupCursor(Loc.GetString("network-configurator-device-already-saved", ("device", targetUid)), userUid);
             return;
