@@ -54,7 +54,7 @@ public sealed class EventManagerSystem : EntitySystem
         if (RandomEventsDisabled())
         {
             var errStr = Loc.GetString("station-event-system-run-random-event-disablerandevents");
-            Log.Error(errStr);
+            Log.Debug(errStr); // SS220-event-director
             return;
         }
         // SS220-event-director-end
