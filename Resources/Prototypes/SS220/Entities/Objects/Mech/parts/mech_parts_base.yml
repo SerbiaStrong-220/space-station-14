@@ -31,6 +31,7 @@
   parent: MechPartBase
   abstract: true
   components:
+  - type: MultiHandedItem
   - type: MechPart
     slot: chassis
     ownMass: 200
@@ -59,6 +60,7 @@
   parent: MechPartBase
   abstract: true
   components:
+  - type: MultiHandedItem
   - type: MechPart
     slot: right-arm
     ownMass: 60
@@ -112,6 +114,7 @@
   parent: MechPartBase
   abstract: true
   components:
+  - type: MultiHandedItem
   - type: MechPart
     slot: left-arm
     ownMass: 60
@@ -137,6 +140,7 @@
   parent: MechPartBase
   abstract: true
   components:
+  - type: MultiHandedItem
   - type: MechPart
     slot: power
     ownMass: 80
