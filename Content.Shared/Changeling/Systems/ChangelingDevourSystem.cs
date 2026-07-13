@@ -77,7 +77,7 @@ public sealed partial class ChangelingDevourSystem : EntitySystem // SS220 Chang
         if (_net.IsServer)
             ent.Comp.CurrentDevourSound = _audio.Stop(ent.Comp.CurrentDevourSound);
 
-        if (ent.Comp.ChangelingDevourActionEntity != null)
+        if (_net.IsServer && ent.Comp.ChangelingDevourActionEntity != null)
         {
             _actionsSystem.RemoveAction(ent.Owner, ent.Comp.ChangelingDevourActionEntity);
         }

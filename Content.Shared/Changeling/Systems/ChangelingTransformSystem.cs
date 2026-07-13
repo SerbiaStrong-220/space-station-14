@@ -69,7 +69,7 @@ public sealed partial class ChangelingTransformSystem : EntitySystem
 
         _ui.CloseUi(ent.Owner, ChangelingTransformUiKey.Key);
 
-        if (ent.Comp.ChangelingTransformActionEntity != null)
+        if (_net.IsServer && ent.Comp.ChangelingTransformActionEntity != null)
         {
             _actions.RemoveAction(ent.Owner, ent.Comp.ChangelingTransformActionEntity);
         }
