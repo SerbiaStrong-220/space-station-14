@@ -1,7 +1,7 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: marking
-  id: FelinidEars[6]
+  id: FelinidEars1
   bodyPart: HeadTop
   groupWhitelist: [Felinid]
   sprites:
@@ -9,7 +9,7 @@
     state: ears_1
 
 - type: marking
-  id: FelinidEars[7]
+  id: FelinidEars2
   bodyPart: HeadTop
   groupWhitelist: [Felinid]
   sprites:
@@ -17,7 +17,7 @@
     state: ears_2
 
 - type: marking
-  id: FelinidEars[8]
+  id: FelinidEars3
   bodyPart: HeadTop
   groupWhitelist: [Felinid]
   sprites:
@@ -27,7 +27,7 @@
     state: ears_3_inner
 
 - type: marking
-  id: FelinidEars[9]
+  id: FelinidEars4
   bodyPart: HeadTop
   groupWhitelist: [Felinid]
   sprites:
@@ -37,7 +37,7 @@
     state: ears_4_inner
 
 - type: marking
-  id: FelinidEars[10]
+  id: FelinidEars5
   bodyPart: HeadTop
   groupWhitelist: [Felinid]
   sprites:
@@ -45,7 +45,7 @@
     state: ears_5
 
 - type: marking
-  id: FelinidEars[11]
+  id: FelinidEars6
   bodyPart: HeadTop
   groupWhitelist: [Felinid]
   sprites:
@@ -53,7 +53,7 @@
     state: ears_6
 
 - type: marking
-  id: FelinidTails[7]
+  id: FelinidTail1
   bodyPart: Tail
   groupWhitelist: [Felinid]
   sprites:
@@ -63,7 +63,7 @@
     state: felinid_tail_1_tassel
 
 - type: marking
-  id: FelinidTails[8]
+  id: FelinidTail2
   bodyPart: Tail
   groupWhitelist: [Felinid]
   sprites:
@@ -71,7 +71,7 @@
     state: felinid_tail_2
 
 - type: marking
-  id: FelinidTails[9]
+  id: FelinidTail3
   bodyPart: Tail
   groupWhitelist: [Felinid]
   sprites:
@@ -81,7 +81,7 @@
     state: felinid_tail_3_tassel
 
 - type: marking
-  id: FelinidTails[10]
+  id: FelinidTail4
   bodyPart: Tail
   groupWhitelist: [Felinid]
   sprites:

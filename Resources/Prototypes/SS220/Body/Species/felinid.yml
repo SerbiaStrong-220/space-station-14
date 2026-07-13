@@ -14,11 +14,11 @@
     enum.HumanoidVisualLayers.Tail:
       limit: 1
       required: true
-      default: [ FelinidTails[7] ]
+      default: [ FelinidTail1 ]
     enum.HumanoidVisualLayers.HeadTop:
       limit: 1
       required: true
-      default: [ FelinidEars[6] ]
+      default: [ FelinidEars1 ]
     enum.HumanoidVisualLayers.Chest:
       limit: 1
       required: false
@@ -45,6 +45,7 @@
   name: felinid appearance
   parent: BaseSpeciesAppearance
   id: AppearanceFelinid
+  categories: [ HideSpawnMenu ]
   components:
   - type: Inventory
     speciesId: Felinid
