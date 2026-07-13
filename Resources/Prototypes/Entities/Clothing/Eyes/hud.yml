@@ -43,6 +43,7 @@
     damageContainers:
     - Inorganic
     - Silicon
+    - Ipc #SS220-IPC
   - type: ShowAccessReaderSettings
 
 - type: entity
