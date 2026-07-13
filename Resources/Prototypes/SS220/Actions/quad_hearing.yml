@@ -7,7 +7,10 @@
     useDelay: 5
     priority: -2
     icon:
-      sprite: SS220/Interface/Actions/keen_hearing.rsi
-      state: icon
+      sprite: SS220/Interface/Actions/quad_hearing.rsi
+      state: icon-resomi-off
+    iconOn:
+      sprite: SS220/Interface/Actions/quad_hearing.rsi
+      state: icon-resomi-on
   - type: InstantAction
     event: !type:ToggleQuadHearingEvent

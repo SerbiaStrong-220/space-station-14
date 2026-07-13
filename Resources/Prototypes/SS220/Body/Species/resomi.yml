@@ -51,6 +51,14 @@
     enum.HumanoidVisualLayers.RFoot:
       limit: 1
       required: false
+    enum.HumanoidVisualLayers.UndergarmentTop:
+      limit: 1
+      required: false
+      nudityDefault: [ UndergarmentTopTanktopResomi ]
+    enum.HumanoidVisualLayers.UndergarmentBottom:
+      limit: 1
+      required: false
+      nudityDefault: [ UndergarmentBottomBoxersResomi ]
 
 - type: entity
   name: resomi appearance
@@ -110,17 +118,32 @@
           32:
             sprite: SS220/Mobs/Species/Resomi/displacement.rsi
             state: suitstorage
+      mask:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/Resomi/displacement.rsi
+            state: mask
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/Resomi/displacement.rsi
+            state: outerclothing
   - type: Hands
+    handDisplacement:
+      sizeMaps:
+        32:
+          sprite: SS220/Mobs/Species/Resomi/displacement.rsi
+          state: inhand
     leftHandDisplacement:
       sizeMaps:
         32:
           sprite: SS220/Mobs/Species/Resomi/displacement.rsi
-          state: hand_l
+          state: inhand
     rightHandDisplacement:
       sizeMaps:
         32:
           sprite: SS220/Mobs/Species/Resomi/displacement.rsi
-          state: hand_r
+          state: inhand
   - type: InitialBody
     organs:
       Torso: OrganResomiTorso

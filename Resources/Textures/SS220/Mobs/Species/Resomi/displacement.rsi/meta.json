@@ -1,7 +1,7 @@
 ﻿{
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "jumpsuit state made by PJB3005. back, hand, head, and eyes states made by Flareguy, ears, hand_l, hand_r, hair and shoes made by TheShuEd, neck and belt made by Dinazewwr (Discord) for SS220, eyes and hand resprited by Dinazewwr (Discord) for SS220",
+    "copyright": "Made by Estkemran (Github) for SS220",
     "size": {
         "x": 32,
         "y": 32
@@ -20,6 +20,10 @@
         },
         {
             "name": "head",
+            "directions": 4
+        },
+        {
+            "name": "mask",
             "directions": 4
         },
         {
@@ -47,11 +51,11 @@
             "directions": 4
         },
         {
-            "name": "hand_l",
+            "name": "inhand",
             "directions": 4
         },
         {
-            "name": "hand_r",
+            "name": "outerclothing",
             "directions": 4
         },
         {
