@@ -1,0 +1,497 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenStatic
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_static
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenBlue
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_blue
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenBreakout
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_breakout
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenEight
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_eight
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenGoggles
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_goggles
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenExclaim
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_exclaim
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenHeart
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_heart
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenMonoeye
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_monoeye
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenNature
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_nature
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenOrange
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_orange
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenPink
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_pink
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenQuestion
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_question
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenShower
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_shower
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenYellow
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_yellow
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenScroll
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_scroll
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenConsole
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_console
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenRgb
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_rgb
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenGlider
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_glider
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenRainbowhoriz
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_rainbowhoriz
+      
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenBsod
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_bsod
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenRedtext
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_redtext
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenSinewave
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_sinewave
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenSquarewave
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_squarewave
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenEcgwave
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_ecgwave
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenEyes
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_eyes
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenEyestall
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_eyestall
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenEyesangry
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_eyesangry
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenLoading
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_loading
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenWindowsxp
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_windowsxp
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenTetris
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_tetris
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenTv
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_tv
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenTextdrop
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_textdrop
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenStars
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_stars
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenRainbowdiag
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_rainbowdiag
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenBlank
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_blank
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenSmile
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_smile
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenFrown
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_frown
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenRing
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_ring
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenL
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_l
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenAga
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_aga
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenAgaAga
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_aga_aga
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenAwesome
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_awesome
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenBestfriend
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_best_friend
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenBigsmile
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_bigsmile
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenBoredom
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_boredom
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenClown
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_clown
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenCreeper
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_creeper
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenDealmaker
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_dealmaker
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenMime
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_mime
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenMonkey
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_monkey
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenMrgutsy
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_mr_gutsy
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenNerd
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_nerd
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenNya
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_nya
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenOko
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_oko
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenRock
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_rock
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenSkull
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_skull
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenTenna
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_tenna
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenEnder
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_ender
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenHmm
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_hmm
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenPig
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_pig
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenSheep
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_sheep
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: ScreenStupid
+  bodyPart: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_stupid

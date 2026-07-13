@@ -531,3 +531,17 @@
   solids:
     FoodBowlBig: 1
 
+# Fried eggs
+- type: microwaveMealRecipe
+  id: RecipeFriedEggs
+  name: food fried eggs
+  result: FoodMealFriedegg
+  time: 5
+  group: Breakfast
+  reagents:
+    TableSalt: 1
+    Blackpepper: 1
+  solids:
+    FoodSunnySideUpEgg: 2
+    FoodPlateSmall: 1
+

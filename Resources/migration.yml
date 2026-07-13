@@ -1021,3 +1021,12 @@ CurbDarckSteel: CurbDarkSteel
 CurbDarckSteelCorner: CurbDarkSteelCorner
 CurbDarckSteelCornerSmall: CurbDarkSteelCornerSmall
 CurbDarckSteelRound: CurbDarkSteelRound
+
+# 2026-07-11 - SS220 artillery shell fixes
+MagazineGrenadeSuperArta: MagazineArtilleryShell
+MagazineGrenadeEMPArta: MagazineArtilleryShellEMP
+GrenadeSuperArta: CartridgeArtilleryShell
+GrenadeEMPArta: CartridgeArtilleryShellEMP
+
+# 2026-07-11 - SS220 laser carbine fix
+WeaponLaserCarabine:  WeaponLaserCarbineIK60

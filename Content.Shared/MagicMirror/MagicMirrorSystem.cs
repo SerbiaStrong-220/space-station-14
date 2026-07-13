@@ -54,7 +54,7 @@ public sealed class MagicMirrorSystem : EntitySystem
             return;
 
         // Check if the target getting their hair altered has any clothes that hides their hair
-        if (CheckHeadSlotOrClothes(target))
+        if (CheckHeadSlotOrClothes(target, ent.Comp)) //SS220-IPC
         {
             _popup.PopupEntity(
                 ent.Comp.Target == args.Actor
@@ -90,14 +90,19 @@ public sealed class MagicMirrorSystem : EntitySystem
         },
             out var doAfterId);
 
-        if (target == args.Actor)
+        //SS220-IPC begin
+        if (ent.Comp.ShowPopup)
         {
-            _popup.PopupEntity(Loc.GetString("magic-mirror-change-slot-self"), target, target, PopupType.Medium);
+            if (target == args.Actor)
+            {
+                _popup.PopupEntity(Loc.GetString("magic-mirror-change-slot-self"), target, target, PopupType.Medium);
+            }
+            else
+            {
+                _popup.PopupEntity(Loc.GetString("magic-mirror-change-slot-target", ("user", Identity.Entity(args.Actor, EntityManager))), target, target, PopupType.Medium);
+            }
         }
-        else
-        {
-            _popup.PopupEntity(Loc.GetString("magic-mirror-change-slot-target", ("user", Identity.Entity(args.Actor, EntityManager))), target, target, PopupType.Medium);
-        }
+        //SS220-IPC end
 
         ent.Comp.DoAfter = doAfterId?.Index;
         _audio.PlayPredicted(ent.Comp.ChangeHairSound, ent, args.Actor);
@@ -220,8 +225,13 @@ public sealed class MagicMirrorSystem : EntitySystem
     /// Helper function that checks if the wearer has anything on their head
     /// Or if they have any clothes that hides their hair
     /// </summary>
-    private bool CheckHeadSlotOrClothes(EntityUid target)
+    //SS220-new-feature begin
+    private bool CheckHeadSlotOrClothes(EntityUid target, MagicMirrorComponent component)
     {
+        if (!component.CheckHeadSlot)
+            return false;
+    //SS220-new-feature end
+
         if (!TryComp<InventoryComponent>(target, out var inventoryComp))
             return false;
 
