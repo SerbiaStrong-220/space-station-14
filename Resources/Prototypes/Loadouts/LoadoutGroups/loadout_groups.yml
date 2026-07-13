@@ -97,6 +97,7 @@
   - EmergencyNitrogenSponsor #SS220-Survival-Loadout
   - EmergencyOxygen
   - EmergencyOxygenSponsor #SS220-Survival-Loadout
+  - LoadoutSpeciesIpc #SS220-IPC
  # - LoadoutSpeciesVoxNitrogen #SS220-Survival-Loadout
 
 # nitrogen or oxygen tank, depending on what your species needs
@@ -725,6 +726,7 @@
   - EmergencyNitrogenClownSponsor #SS220-Survival-Loadout
   - EmergencyOxygenClown
   - EmergencyOxygenClownSponsor #SS220-Survival-Loadout
+  - LoadoutSpeciesClownIpc #SS220-IPC
  # - LoadoutSpeciesVoxNitrogen #SS220-Survival-Loadout
 
 - type: loadoutGroup
@@ -793,6 +795,7 @@
   - EmergencyNitrogenMimeSponsor #SS220-Survival-Loadout
   - EmergencyOxygenMime
   - EmergencyOxygenMimeSponsor #SS220-Survival-Loadout
+  - LoadoutSpeciesMimeIpc #SS220-IPC
  # - EmergencySpeciesMothMime #SS220-Survival-Loadout
  # - LoadoutSpeciesVoxNitrogen #SS220-Survival-Loadout
 
@@ -1193,6 +1196,7 @@
   - EmergencyNitrogenExtendedSponsor #SS220-Survival-Loadout
   - EmergencyOxygenExtended
   - EmergencyOxygenExtendedSponsor #SS220-Survival-Loadout
+  - LoadoutSpeciesEngineerIpc #SS220-IPC
  # - LoadoutSpeciesVoxNitrogen #SS220-Survival-Loadout
 
 # Science
@@ -1606,6 +1610,7 @@
   - EmergencyNitrogenSecuritySponsor #SS220-Survival-Loadout
   - EmergencyOxygenSecurity
   - EmergencyOxygenSecuritySponsor #SS220-Survival-Loadout
+  - LoadoutSpeciesSecurityIpc #SS220-IPC
  # - LoadoutSpeciesVoxNitrogen #SS220-Survival-Loadout
 
 # Wildcards
