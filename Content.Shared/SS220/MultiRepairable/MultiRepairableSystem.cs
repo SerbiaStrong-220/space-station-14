@@ -113,11 +113,13 @@ public sealed partial class MultiRepairDoAfterEvent : DoAfterEvent
 {
     public readonly RepairOption RepairOption;
     public readonly float UsedDelay;
+    
     public MultiRepairDoAfterEvent(RepairOption option, float usedDelay)
     {
         RepairOption = option;
         UsedDelay = usedDelay;
     }
+    
     public MultiRepairDoAfterEvent(RepairOption option) => RepairOption = option;
     public override DoAfterEvent Clone() => this;
 }
