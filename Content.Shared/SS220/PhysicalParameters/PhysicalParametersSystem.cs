@@ -21,6 +21,7 @@ public sealed class PhysicalParametersSystem : EntitySystem
 {
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSystem = default!;
+
     private readonly FixedPoint2 UngrabbableStrengthDifference = 1.7;
 
     public override void Initialize()
@@ -181,7 +182,7 @@ public sealed class PhysicalParametersSystem : EntitySystem
     }
 
 
-    public FixedPoint2 GetParameterValue(Entity<PhysicalParametersComponent> ent, Parameter parameter)
+    public FixedPoint2 GetParameterValue(Entity<PhysicalParametersComponent> ent, Parameter parameter, bool armStrengthCounted = true)
     {
         FixedPoint2 strengthModifier = 1f;
 
@@ -189,7 +190,8 @@ public sealed class PhysicalParametersSystem : EntitySystem
             ent.Comp.ParameterDictModified.ContainsKey(parameter))
             strengthModifier = ent.Comp.ParameterDictModified[parameter];
 
-        if (TryComp<HandsComponent>(ent.Owner, out var handsComp) &&
+        if (armStrengthCounted &&
+            TryComp<HandsComponent>(ent.Owner, out var handsComp) &&
             handsComp.ActiveHandId != null &&
             _handsSystem.TryGetHand(ent.Owner, handsComp.ActiveHandId, out var activeHand) &&
             activeHand.Value.StrengthModifier != null)

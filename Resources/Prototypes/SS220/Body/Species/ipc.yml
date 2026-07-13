@@ -80,7 +80,6 @@
   id: MobIpc
   name: Urist McIPC
   components:
-  #SS220 add physical parameters begin
   - type: PhysicalParameters
     parameterDict:
       Strength: 1.5
@@ -89,7 +88,6 @@
       PainTolerance: 1
     genderModifier:
       Strength: 0
-  #SS220 add physical parameters end
   - type: RemoveComponentsOnTrigger
     keysIn:
       - RemoveInternalsOnly
