@@ -295,10 +295,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-    #SS220 xeno-buff-update begin
-      250: Critical
+      250: Critical  # SS220 xeno-buff-update 
       300: Dead
-    #SS220 xeno-buff-update end
   - type: SlowOnDamage
     speedModifierThresholds:
       100: 0.7 #SS220 xeno-buff-update
