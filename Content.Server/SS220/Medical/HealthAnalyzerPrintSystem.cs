@@ -88,7 +88,8 @@ public sealed partial class HealthAnalyzerPrintSystem : EntitySystem
         float bodyTemperature,
         float bloodAmount,
         bool? bleeding,
-        bool? unrevivable)
+        bool? unrevivable,
+        int? counterDeath)
     {
         string status;
         var builder = new StringBuilder();
