@@ -93,7 +93,7 @@
     Cellular: 1
     Radiation: 0.5
 
-    #xeno-buff-update-begin
+# xeno-buff-update-begin
 
 - type: damageModifierSet
   id: XenoBurrower
