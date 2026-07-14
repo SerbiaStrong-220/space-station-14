@@ -10,13 +10,19 @@ using Robust.Shared.Utility;
 namespace Content.Client.Changeling.UI;
 
 [UsedImplicitly]
-public sealed partial class ChangelingTransformBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed partial class ChangelingTransformBoundUserInterface : BoundUserInterface
 {
     private SimpleRadialMenu? _menu;
+    private readonly bool _isTransformationSting;
     private static readonly Color SelectedOptionBackground = Palettes.Green.Element.WithAlpha(128);
     private static readonly Color DisabledOptionBackground = Palettes.Slate.Element.WithAlpha(128);
     private static readonly Color SelectedOptionHoverBackground = Palettes.Green.HoveredElement.WithAlpha(128);
     private static readonly Color DisabledOptionHoverBackground = Palettes.Slate.HoveredElement.WithAlpha(128);
+
+    public ChangelingTransformBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
+    {
+        _isTransformationSting = uiKey.Equals(ChangelingTransformUiKey.TransformationSting);
+    }
 
     protected override void Open()
     {
@@ -61,7 +67,7 @@ public sealed partial class ChangelingTransformBoundUserInterface(EntityUid owne
             buttons.Add(option);
 
             // SS220 changeling transformation sting begin
-            if (uiKey.Equals(ChangelingTransformUiKey.TransformationSting))
+            if (_isTransformationSting)
                 continue;
             // SS220 changeling transformation sting end
 
@@ -79,7 +85,7 @@ public sealed partial class ChangelingTransformBoundUserInterface(EntityUid owne
         }
 
         // SS220 changeling transformation sting begin
-        if (uiKey.Equals(ChangelingTransformUiKey.TransformationSting))
+        if (_isTransformationSting)
             return buttons;
         // SS220 changeling transformation sting end
 
@@ -97,7 +103,7 @@ public sealed partial class ChangelingTransformBoundUserInterface(EntityUid owne
     private void SendIdentitySelect(NetEntity identityId)
     {
         // SS220 changeling transformation sting begin
-        if (uiKey.Equals(ChangelingTransformUiKey.TransformationSting))
+        if (_isTransformationSting)
         {
             SendMessage(new ChangelingTransformationStingIdentitySelectMessage(identityId));
             return;
