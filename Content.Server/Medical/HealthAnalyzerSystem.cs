@@ -21,8 +21,6 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 using Content.Server.Body.Systems;
-using Content.Shared.Mobs;
-using Content.Shared.SS220.LimitationRevive;
 
 namespace Content.Server.Medical;
 
@@ -241,8 +239,6 @@ public sealed class HealthAnalyzerSystem : EntitySystem
         var bloodAmount = float.NaN;
         var bleeding = false;
         var unrevivable = false;
-        int? counterDeath = null; //SS220 LimitationRevive
-        TimeSpan? clinicalDeathTimeRemaining = null; //SS220 - clinic death analyzer
 
         if (TryComp<BloodstreamComponent>(entity, out var bloodstream) &&
             _solutionContainerSystem.ResolveSolution(entity, bloodstream.BloodSolutionName,
@@ -254,28 +250,6 @@ public sealed class HealthAnalyzerSystem : EntitySystem
 
         if (TryComp<UnrevivableComponent>(entity, out var unrevivableComp) && unrevivableComp.Analyzable)
             unrevivable = true;
-
-        //SS220 LimitationRevive - start
-        if (TryComp<LimitationReviveComponent>(target, out var reviveComp))
-        {
-            counterDeath = reviveComp.DeathCounter;
-
-            // SS220 - clinic death analyzer - start
-            if (TryComp<MobStateComponent>(target, out var mobState) && mobState.CurrentState == MobState.Dead)
-            {
-                if (reviveComp.DamageCountingTime.HasValue)
-                {
-                    var timeLeft = reviveComp.BeforeDamageDelay - reviveComp.DamageCountingTime.Value;
-                    clinicalDeathTimeRemaining = timeLeft > TimeSpan.Zero ? timeLeft : TimeSpan.Zero;
-                }
-                else
-                {
-                    clinicalDeathTimeRemaining = TimeSpan.Zero;
-                }
-            }
-            // SS220 - clinic death analyzer - end
-        }
-        //SS220 LimitationRevive - end
 
         // ss220 add health analyzer start
         var scannedName = HasComp<MetaDataComponent>(target)
@@ -292,9 +266,7 @@ public sealed class HealthAnalyzerSystem : EntitySystem
                 bodyTemperature,
                 bloodAmount,
                 bleeding,
-                unrevivable,
-                counterDeath,
-                clinicalDeathTimeRemaining); // SS220 - clinic death analyzer
+                unrevivable);
         }
         // ss220 add health analyzer end
 
@@ -305,9 +277,7 @@ public sealed class HealthAnalyzerSystem : EntitySystem
             null,
             bleeding,
             unrevivable,
-            counterDeath, //SS220 LimitationRevive
-            healthAnalyzerComp?.CanPrint ?? false, // SS220-health-analyzer-report
-            clinicalDeathTimeRemaining // SS220 - clinic death analyzer
+            healthAnalyzerComp?.CanPrint ?? false // SS220-health-analyzer-report
         );
     }
 }

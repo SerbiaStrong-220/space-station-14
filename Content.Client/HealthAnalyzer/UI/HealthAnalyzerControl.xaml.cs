@@ -41,6 +41,7 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
     private readonly IResourceCache _cache;
     private readonly DamageableSystem _damageable;
     private readonly SharedSolutionContainerSystem _solSystem; // ss220 add reagents to health analyzer
+    private readonly SharedLimitationReviveSystem _limitationRevive; // SS220 clinic death analyzer
 
     // SS220-experience-update-begin
     /// <summary> This value was chosen for better user experience </summary>
@@ -69,6 +70,7 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
         _cache = dependencies.Resolve<IResourceCache>();
         _damageable = _entityManager.System<DamageableSystem>();
         _solSystem = _entityManager.System<SharedSolutionContainerSystem>(); // ss220 add reagents to health analyzer
+        _limitationRevive = _entityManager.System<SharedLimitationReviveSystem>(); // SS220 clinic death analyzer
 
         _randomShuffle.MakeNewRandomChange(SkillIssueReshuffleChance); // SS220-experience-update
     }
@@ -122,16 +124,17 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
         NoPatientDataText.Visible = false;
 
         // SS220 clinic death analyzer - start
-        if (state.ClinicalDeathTimeRemaining is { } timeLeft)
+        _entityManager.TryGetComponent<LimitationReviveComponent>(target.Value, out var reviveComp);
+        var clinicalDeathTimeRemaining = _limitationRevive.GetClinicalDeathTimeRemaining(target.Value);
+
+        if (clinicalDeathTimeRemaining is { } timeLeft)
         {
             ClinicalDeathLabel.Visible = true;
             ClinicalDeathTimeLabel.Visible = true;
 
             if (timeLeft <= TimeSpan.Zero)
             {
-                var reviveExhausted =
-                    _entityManager.TryGetComponent<LimitationReviveComponent>(target.Value, out var reviveComp)
-                    && reviveComp.DeathCounter >= reviveComp.ReviveLimit;
+                var reviveExhausted = reviveComp != null && reviveComp.DeathCounter >= reviveComp.ReviveLimit;
 
                 ClinicalDeathTimeLabel.Text = Loc.GetString(reviveExhausted
                     ? "health-analyzer-window-clinical-death-expired"
@@ -201,24 +204,17 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
             : Loc.GetString("health-analyzer-window-entity-unknown-value-text");
 
         //SS220 LimitationRevive - start
-        DeathLabel.Text = state.CounterDeath != null
-            ? $"{state.CounterDeath}"
+        DeathLabel.Text = reviveComp != null
+            ? $"{reviveComp.DeathCounter}"
             : Loc.GetString("health-analyzer-window-entity-unknown-value-text");
         //SS220 LimitationRevive - end
 
         //SS220 clinic death analyzer - start
         if (_entityManager.TryGetComponent<MobStateComponent>(target.Value, out var mobStateComponent))
         {
-            if (mobStateComponent.CurrentState == MobState.Dead &&
-                state.ClinicalDeathTimeRemaining.HasValue &&
-                state.ClinicalDeathTimeRemaining.Value > TimeSpan.Zero)
-            {
-                StatusLabel.Text = Loc.GetString("health-analyzer-window-entity-clinical-dead-text");
-            }
-            else
-            {
-                StatusLabel.Text = GetStatus(mobStateComponent.CurrentState);
-            }
+            StatusLabel.Text = mobStateComponent.CurrentState == MobState.Dead && clinicalDeathTimeRemaining > TimeSpan.Zero
+                ? Loc.GetString("health-analyzer-window-entity-clinical-dead-text")
+                : GetStatus(mobStateComponent.CurrentState);
         }
         else
         {
