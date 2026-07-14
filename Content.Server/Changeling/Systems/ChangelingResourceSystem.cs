@@ -93,8 +93,11 @@ public sealed class ChangelingResourceSystem : EntitySystem
     private void OnComponentRemove(Entity<ChangelingResourceComponent> ent, ref ComponentRemove args)
     {
         _alerts.ClearAlert(ent.Owner, ent.Comp.ChemicalsAlert);
-        _actions.RemoveAction(ent.Owner, ent.Comp.RegenerativeStasisActionEntity);
-        _actions.RemoveAction(ent.Owner, ent.Comp.RegenerateActionEntity);
+        if (!TerminatingOrDeleted(ent.Owner))
+        {
+            _actions.RemoveAction(ent.Owner, ent.Comp.RegenerativeStasisActionEntity);
+            _actions.RemoveAction(ent.Owner, ent.Comp.RegenerateActionEntity);
+        }
 
         var removed = new ChangelingResourceRemovedEvent(TerminatingOrDeleted(ent.Owner));
         RaiseLocalEvent(ent.Owner, ref removed);
