@@ -72,9 +72,7 @@
   - type: MobState
     allowedStates:
     - Alive
-    #SS220 xeno-buff-update begin
-    - Critical 
-    #SS220 xeno-buff-update end
+    - Critical # SS220 xeno-buff-update
     - Dead
   - type: MobThresholds
     thresholds:
