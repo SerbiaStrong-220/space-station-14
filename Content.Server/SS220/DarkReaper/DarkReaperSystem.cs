@@ -27,26 +27,26 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.DarkReaper;
 
-public sealed class DarkReaperSystem : SharedDarkReaperSystem
+public sealed partial class DarkReaperSystem : SharedDarkReaperSystem
 {
-    [Dependency] private readonly GhostSystem _ghost = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly PoweredLightSystem _poweredLight = default!;
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly AlertLevelSystem _alertLevel = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly BuckleSystem _buckle = default!;
-    [Dependency] private readonly ProjectileSystem _projectile = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private GhostSystem _ghost = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private PoweredLightSystem _poweredLight = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private AlertLevelSystem _alertLevel = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private BuckleSystem _buckle = default!;
+    [Dependency] private ProjectileSystem _projectile = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     private readonly ProtoId<AlertPrototype> _deadscoreStage1Alert = "DeadscoreStage1";
 

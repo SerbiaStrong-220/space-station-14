@@ -6,11 +6,11 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.BloomLight;
 
-public sealed class BloomLightSystem : EntitySystem
+public sealed partial class BloomLightSystem : EntitySystem
 {
-    [Dependency] private readonly IOverlayManager _overlayManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IOverlayManager _overlayManager = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     private BloomLightOverlay _overlay = default!;
 

@@ -14,13 +14,13 @@ using Robust.Shared.Random;
 
 namespace Content.Shared.SS220.Experience.Skill.Systems;
 
-public sealed class WeightlessChangingReadySkillSystem : SkillEntitySystem
+public sealed partial class WeightlessChangingReadySkillSystem : SkillEntitySystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedJetpackSystem _jetpack = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedJetpackSystem _jetpack = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     private const string HardSuitInventorySlot = "outerClothing";
 
