@@ -12,14 +12,14 @@ using System.Numerics;
 
 namespace Content.Client.SS220.QuadHearing;
 
-public sealed class QuadHearingSystem : SharedQuadHearingSystem
+public sealed partial class QuadHearingSystem : SharedQuadHearingSystem
 {
-    [Dependency] private readonly IOverlayManager _overlayManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private IOverlayManager _overlayManager = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private TransformSystem _transform = default!;
 
     private QuadHearingOverlay? _overlay;
 

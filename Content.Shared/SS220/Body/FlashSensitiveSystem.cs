@@ -8,8 +8,8 @@ namespace Content.Shared.SS220.Body;
 
 public sealed partial class FlashSensitiveSystem : EntitySystem
 {
-    [Dependency] private readonly BlindableSystem _blindable = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private BlindableSystem _blindable = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
 
     public override void Initialize()
     {

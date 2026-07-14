@@ -1,5 +1,4 @@
 using Content.Server.Actions;
-using Content.Server.Database;
 using Content.Shared.SS220.QuadHearing;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
@@ -10,12 +9,12 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.QuadHearing;
 
-public sealed class QuadHearingSystem : SharedQuadHearingSystem
+public sealed partial class QuadHearingSystem : SharedQuadHearingSystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly ActionsSystem _actions = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private ActionsSystem _actions = default!;
 
     private static readonly EntProtoId ActionId = "ActionToggleQuadHearing";
 

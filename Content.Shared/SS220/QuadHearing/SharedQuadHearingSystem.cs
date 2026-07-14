@@ -7,12 +7,12 @@ using System.Numerics;
 
 namespace Content.Shared.SS220.QuadHearing;
 
-public abstract class SharedQuadHearingSystem : EntitySystem
+public abstract partial class SharedQuadHearingSystem : EntitySystem
 {
-    [Dependency] private readonly IMapManager _mapMng = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private IMapManager _mapMng = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedMapSystem _map = default!;
 
     public override void Initialize()
     {

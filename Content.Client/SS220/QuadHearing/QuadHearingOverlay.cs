@@ -11,12 +11,12 @@ using System.Numerics;
 
 namespace Content.Client.SS220.QuadHearing;
 
-public sealed class QuadHearingOverlay : Overlay
+public sealed partial class QuadHearingOverlay : Overlay
 {
-    [Dependency] private readonly IEntityManager _entity = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IEntityManager _entity = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private readonly TransformSystem _transform;
 

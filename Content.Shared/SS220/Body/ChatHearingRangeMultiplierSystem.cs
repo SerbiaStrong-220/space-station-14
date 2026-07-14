@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 namespace Content.Shared.SS220.Body;
 
 [UsedImplicitly]
-public sealed class ChatHearingRangeMultiplierSystem : EntitySystem
+public sealed partial class ChatHearingRangeMultiplierSystem : EntitySystem
 {
     public override void Initialize()
     {

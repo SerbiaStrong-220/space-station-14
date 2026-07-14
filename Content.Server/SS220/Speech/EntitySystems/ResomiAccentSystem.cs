@@ -9,7 +9,7 @@ namespace Content.Server.SS220.Speech.EntitySystems;
 
 public sealed partial class ResomiAccentSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     // Double all z/Z
     [GeneratedRegex("z+")] private static partial Regex LowerZRegex();
