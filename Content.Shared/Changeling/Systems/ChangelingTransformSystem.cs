@@ -74,6 +74,7 @@ public sealed partial class ChangelingTransformSystem : EntitySystem
             ent.Comp.ChangelingTransformActionEntity != null)
         {
             _actions.RemoveAction(ent.Owner, ent.Comp.ChangelingTransformActionEntity);
+            QueueDel(ent.Comp.ChangelingTransformActionEntity.Value);
         }
     }
 

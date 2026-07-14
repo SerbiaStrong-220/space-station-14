@@ -38,7 +38,10 @@ public sealed class ChangelingExtractDnaSystem : EntitySystem
     private void OnShutdown(Entity<ChangelingExtractDnaComponent> ent, ref ComponentShutdown args)
     {
         if (!TerminatingOrDeleted(ent.Owner) && ent.Comp.ActionEntity is { } action)
+        {
             _actions.RemoveAction(ent.Owner, action);
+            QueueDel(action);
+        }
     }
 
     private void OnExtract(Entity<ChangelingExtractDnaComponent> ent, ref ChangelingExtractDnaActionEvent args)

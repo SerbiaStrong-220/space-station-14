@@ -8,7 +8,7 @@
   - type: Action
     icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: sting_extractdna }
     useDelay: 1
-    temporary: true
+    temporary: false
   - type: TargetAction
   - type: EntityTargetAction
     event: !type:ChangelingExtractDnaActionEvent

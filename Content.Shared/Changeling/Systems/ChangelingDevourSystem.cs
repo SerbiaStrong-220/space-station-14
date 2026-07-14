@@ -82,6 +82,7 @@ public sealed partial class ChangelingDevourSystem : EntitySystem // SS220 Chang
             ent.Comp.ChangelingDevourActionEntity != null)
         {
             _actionsSystem.RemoveAction(ent.Owner, ent.Comp.ChangelingDevourActionEntity);
+            QueueDel(ent.Comp.ChangelingDevourActionEntity.Value);
         }
     }
 

@@ -8,7 +8,7 @@
   - type: Action
     icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: stasis_enter }
     priority: 2
-    temporary: true
+    temporary: false
   - type: InstantAction
     event: !type:ChangelingRegenerativeStasisActionEvent
 
@@ -21,6 +21,6 @@
   - type: Action
     icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: stasis_exit }
     priority: 2
-    temporary: true
+    temporary: false
   - type: InstantAction
     event: !type:ChangelingRegenerateActionEvent

@@ -29,7 +29,7 @@
     icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: absorb_biomatter } # SS220 Changeling
     iconOn: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: absorb_biomatter } # SS220 Changeling
     priority: 1
-    temporary: true # SS220 Changeling - component-owned action
+    temporary: false # SS220 Changeling - explicitly deleted by its owning system
   - type: TargetAction
   - type: EntityTargetAction
     event: !type:ChangelingDevourActionEvent
@@ -41,7 +41,7 @@
   components:
   - type: Action
     icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: transform } # SS220 Changeling
-    temporary: true # SS220 Changeling - component-owned action
+    temporary: false # SS220 Changeling - explicitly deleted by its owning system
   - type: InstantAction
     event: !type:ChangelingTransformActionEvent
 

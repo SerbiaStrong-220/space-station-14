@@ -97,6 +97,8 @@ public sealed class ChangelingResourceSystem : EntitySystem
         {
             _actions.RemoveAction(ent.Owner, ent.Comp.RegenerativeStasisActionEntity);
             _actions.RemoveAction(ent.Owner, ent.Comp.RegenerateActionEntity);
+            QueueDel(ent.Comp.RegenerativeStasisActionEntity);
+            QueueDel(ent.Comp.RegenerateActionEntity);
         }
 
         var removed = new ChangelingResourceRemovedEvent(TerminatingOrDeleted(ent.Owner));
