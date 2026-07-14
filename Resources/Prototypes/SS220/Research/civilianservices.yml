@@ -23,3 +23,27 @@
   - MedicalScannerMachineCircuitboard
   - CloningPodMachineCircuitboard
   - CloningConsoleComputerCircuitboard
+
+- type: technology
+  id: DefibrillatorCompactTech
+  name: research-technology-compact-defibrillator
+  icon:
+    sprite: Objects/Specific/Medical/defibsmall.rsi
+    state: icon
+  discipline: CivilianServices
+  tier: 3
+  cost: 12000
+  recipeUnlocks:
+  - DefibrillatorCompact
+
+- type: technology
+  id: ClothingEyesHudMediChem
+  name: research-clothing-eyes-hud-medichem
+  icon:
+    sprite: SS220/Clothing/Eyes/Hud/medichem.rsi
+    state: icon
+  discipline: CivilianServices
+  tier: 1
+  cost: 5000
+  recipeUnlocks:
+  - ClothingEyesHudMediChem

@@ -31,7 +31,6 @@ using Content.Shared.Station.Components;
 using Content.Shared.Whitelist;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
-using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Console;
 using Robust.Shared.Network;
@@ -46,6 +45,7 @@ using Robust.Shared.Map;
 using Content.Shared.SS220.Language.Systems;
 using Content.Shared.SS220.TTS;
 using Content.Shared.FixedPoint;
+using Content.Shared.GameTicking;
 
 namespace Content.Server.Chat.Systems;
 
@@ -68,17 +68,22 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly StationSystem _stationSystem = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly IBanManager _banManager = default!; // SS220-ban-manager
+    //[Dependency] private readonly SharedAudioSystem _audio = default!; // ss220 remove unused dep
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly ReplacementAccentSystem _wordreplacement = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly ExamineSystemShared _examineSystem = default!;
     [Dependency] private readonly LanguageSystem _languageSystem = default!; // SS220-Add-Languages
     [Dependency] private readonly InventorySystem _inventory = default!; //ss220 add identity concealment for chat and radio messages
-    [Dependency] private readonly SharedHumanoidAppearanceSystem _humanoidAppearance = default!; //ss220 add identity concealment for chat and radio messages
+    [Dependency] private readonly HumanoidProfileSystem _humanoidAppearance = default!; //ss220 add identity concealment for chat and radio messages
 
-    public readonly TimeSpan CoolDown = TimeSpan.FromSeconds(2); //ss220 chat unique
-    public const int MaximumLengthMsg = 5; //ss220 chat unique
+    // ss220 chat unique begin
+    public readonly TimeSpan ChatSpamCooldown = TimeSpan.FromSeconds(2);
+    public const int MinSpamMessageLength = 5;
+
+    private readonly record struct RecentChatMessage(TimeSpan LastMessageTimeSent, string Message);
+    private readonly Dictionary<EntityUid, RecentChatMessage> _recentChatMessages = new();
+    // ss220 chat unique end
 
     private bool _loocEnabled = true;
     private bool _deadLoocEnabled;
@@ -94,16 +99,14 @@ public sealed partial class ChatSystem : SharedChatSystem
         Subs.CVar(_configurationManager, CCVars.CritLoocEnabled, OnCritLoocEnabledChanged, true);
 
         SubscribeLocalEvent<GameRunLevelChangedEvent>(OnGameChange);
+        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart); // ss220 chat unique
     }
 
     // ss220 chat unique begin
-    public struct ChatUniqueStruct
+    private void OnRoundRestart(RoundRestartCleanupEvent ev)
     {
-        public TimeSpan? lastMessageTimeSent;
-        public string? message;
+        _recentChatMessages.Clear();
     }
-
-    public Dictionary<EntityUid, ChatUniqueStruct> ChatMsgUnique { get; private set;} = new();
     // ss220 chat unique end
 
     private void OnLoocEnabledChanged(bool val)
@@ -150,42 +153,25 @@ public sealed partial class ChatSystem : SharedChatSystem
         }
     }
 
-    /// <summary>
-    ///     Sends an in-character chat message to relevant clients.
-    /// </summary>
-    /// <param name="source">The entity that is speaking</param>
-    /// <param name="message">The message being spoken or emoted</param>
-    /// <param name="desiredType">The chat type</param>
-    /// <param name="hideChat">Whether or not this message should appear in the chat window</param>
-    /// <param name="hideLog">Whether or not this message should appear in the adminlog window</param>
-    /// <param name="shell"></param>
-    /// <param name="player">The player doing the speaking</param>
-    /// <param name="nameOverride">The name to use for the speaking entity. Usually this should just be modified via <see cref="TransformSpeakerNameEvent"/>. If this is set, the event will not get raised.</param>
-    public void TrySendInGameICMessage(
+    /// <inheritdoc />
+    public override void TrySendInGameICMessage(
         EntityUid source,
         string message,
         InGameICChatType desiredType,
-        bool hideChat, bool hideLog = false,
+        bool hideChat,
+        bool hideLog = false,
         IConsoleShell? shell = null,
-        ICommonSession? player = null, string? nameOverride = null,
+        ICommonSession? player = null,
+        string? nameOverride = null,
         bool checkRadioPrefix = true,
-        bool ignoreActionBlocker = false)
+        bool ignoreActionBlocker = false,
+        bool bypassEnglishFilter = false) // SS220 FIX wizard spell speak
     {
-        TrySendInGameICMessage(source, message, desiredType, hideChat ? ChatTransmitRange.HideChat : ChatTransmitRange.Normal, hideLog, shell, player, nameOverride, checkRadioPrefix, ignoreActionBlocker);
+        TrySendInGameICMessage(source, message, desiredType, hideChat ? ChatTransmitRange.HideChat : ChatTransmitRange.Normal, hideLog, shell, player, nameOverride, checkRadioPrefix, ignoreActionBlocker, bypassEnglishFilter); // SS220 FIX wizard spell speak
     }
 
-    /// <summary>
-    ///     Sends an in-character chat message to relevant clients.
-    /// </summary>
-    /// <param name="source">The entity that is speaking</param>
-    /// <param name="message">The message being spoken or emoted</param>
-    /// <param name="desiredType">The chat type</param>
-    /// <param name="range">Conceptual range of transmission, if it shows in the chat window, if it shows to far-away ghosts or ghosts at all...</param>
-    /// <param name="shell"></param>
-    /// <param name="player">The player doing the speaking</param>
-    /// <param name="nameOverride">The name to use for the speaking entity. Usually this should just be modified via <see cref="TransformSpeakerNameEvent"/>. If this is set, the event will not get raised.</param>
-    /// <param name="ignoreActionBlocker">If set to true, action blocker will not be considered for whether an entity can send this message.</param>
-    public void TrySendInGameICMessage(
+    /// <inheritdoc />
+    public override void TrySendInGameICMessage(
         EntityUid source,
         string message,
         InGameICChatType desiredType,
@@ -195,7 +181,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         ICommonSession? player = null,
         string? nameOverride = null,
         bool checkRadioPrefix = true,
-        bool ignoreActionBlocker = false
+        bool ignoreActionBlocker = false,
+        bool bypassEnglishFilter = false // SS220 FIX wizard spell speak
         )
     {
         if (HasComp<GhostComponent>(source))
@@ -246,7 +233,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             || (CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Name == "en");
 
         message = _chatManager.DeleteProhibitedCharacters(message, source); // SS220 delete prohibited characters
-        message = SanitizeInGameICMessage(source, message, /* SS220 languages */ desiredType, out var emoteStr, shouldCapitalize, shouldPunctuate, shouldCapitalizeTheWordI);
+        message = SanitizeInGameICMessage(source, message, /* SS220 languages */ desiredType, out var emoteStr, shouldCapitalize, shouldPunctuate, shouldCapitalizeTheWordI, bypassEnglishFilter); // SS220 FIX wizard spell speak
 
         // Was there an emote in the message? If so, send it.
         if (player != null && emoteStr != message && emoteStr != null)
@@ -259,27 +246,24 @@ public sealed partial class ChatSystem : SharedChatSystem
             return;
 
         //ss220 chat unique begin
-        if (ChatMsgUnique.TryGetValue(source, out var chatStruct)
-            && chatStruct.message == message
-            && message.Length >= MaximumLengthMsg)
+        if (message.Length >= MinSpamMessageLength)
         {
             var curTime = _gameTiming.CurTime;
-            if (curTime - chatStruct.lastMessageTimeSent < CoolDown)
-                return;
 
-            ChatMsgUnique[source] = new ChatUniqueStruct() { message = message, lastMessageTimeSent = curTime };
-        }
-        else
-        {
-            var curTime = _gameTiming.CurTime;
-            ChatMsgUnique[source] = new ChatUniqueStruct() { message = message, lastMessageTimeSent = curTime };
+            if (_recentChatMessages.TryGetValue(source, out var recentMessage) && recentMessage.Message == message)
+            {
+                if (curTime - recentMessage.LastMessageTimeSent < ChatSpamCooldown)
+                    return;
+            }
+
+            _recentChatMessages[source] = new RecentChatMessage(curTime, message);
         }
         //ss220 chat unique end
 
         // This message may have a radio prefix, and should then be whispered to the resolved radio channel
         if (checkRadioPrefix)
         {
-            if (TryProccessRadioMessage(source, message, out var modMessage, out var channel, out var frequency /*SS220-add-frequency-radio */))
+            if (TryProcessRadioMessage(source, message, out var modMessage, out var channel, out var frequency /*SS220-add-frequency-radio */))
             {
                 SendEntityWhisper(source, modMessage, range, channel, nameOverride, hideLog, ignoreActionBlocker, frequency: frequency /*SS220-add-frequency-radio */);
                 return;
@@ -311,7 +295,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         }
     }
 
-    public void TrySendInGameOOCMessage(
+    /// <inheritdoc />
+    public override void TrySendInGameOOCMessage(
         EntityUid source,
         string message,
         InGameOOCChatType type,
@@ -348,6 +333,12 @@ public sealed partial class ChatSystem : SharedChatSystem
         if (!_critLoocEnabled && _mobStateSystem.IsCritical(source))
             return;
 
+        // Systems can differentiate Looc and DeadChat by type, and cancel the speak attempt if necessary.
+        var ev = new InGameOocMessageAttemptEvent(player, sendType);
+        RaiseLocalEvent(source, ref ev, true);
+        if (ev.Cancelled)
+            return;
+
         switch (sendType)
         {
             case InGameOOCChatType.Dead:
@@ -361,14 +352,8 @@ public sealed partial class ChatSystem : SharedChatSystem
 
     #region Announcements
 
-    /// <summary>
-    /// Dispatches an announcement to all.
-    /// </summary>
-    /// <param name="message">The contents of the message</param>
-    /// <param name="sender">The sender (Communications Console in Communications Console Announcement)</param>
-    /// <param name="playSound">Play the announcement sound</param>
-    /// <param name="colorOverride">Optional color for the announcement message</param>
-    public void DispatchGlobalAnnouncement(
+    /// <inheritdoc />
+    public override void DispatchGlobalAnnouncement(
         string message,
         string? sender = null,
         bool playSound = true,
@@ -405,17 +390,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Global station announcement from {sender}: {message}");
     }
 
-    /// <summary>
-    /// Dispatches an announcement to players selected by filter.
-    /// </summary>
-    /// <param name="filter">Filter to select players who will recieve the announcement</param>
-    /// <param name="message">The contents of the message</param>
-    /// <param name="source">The entity making the announcement (used to determine the station)</param>
-    /// <param name="sender">The sender (Communications Console in Communications Console Announcement)</param>
-    /// <param name="playDefaultSound">Play the announcement sound</param>
-    /// <param name="announcementSound">Sound to play</param>
-    /// <param name="colorOverride">Optional color for the announcement message</param>
-    public void DispatchFilteredAnnouncement(
+    /// <inheritdoc />
+    public override void DispatchFilteredAnnouncement(
         Filter filter,
         string message,
         EntityUid? source = null,
@@ -450,16 +426,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Station Announcement from {sender}: {message}");
     }
 
-    /// <summary>
-    /// Dispatches an announcement on a specific station
-    /// </summary>
-    /// <param name="source">The entity making the announcement (used to determine the station)</param>
-    /// <param name="message">The contents of the message</param>
-    /// <param name="sender">The sender (Communications Console in Communications Console Announcement)</param>
-    /// <param name="playDefaultSound">Play the announcement sound</param>
-    /// <param name="announcementSound">Specific announcement sound</param>
-    /// <param name="colorOverride">Optional color for the announcement message</param>
-    public void DispatchStationAnnouncement(
+    /// <inheritdoc />
+    public override void DispatchStationAnnouncement(
         EntityUid source,
         string message,
         string? sender = null,
@@ -771,6 +739,11 @@ public sealed partial class ChatSystem : SharedChatSystem
 
     private void SendDeadChat(EntityUid source, ICommonSession player, string message, bool hideChat)
     {
+        // SS220-chat-bans-begin
+        if (_banManager.IsChatBanned(player, BannableChats.Dead))
+            return;
+        // SS220-chat-bans-end
+
         var clients = GetDeadChatClients();
         var playerName = Name(source);
         message = _chatManager.DeleteProhibitedCharacters(message, player); // SS220 delete prohibited characters
@@ -903,7 +876,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         out string? emoteStr,
         bool capitalize = true,
         bool punctuate = false,
-        bool capitalizeTheWordI = true)
+        bool capitalizeTheWordI = true,
+        bool bypassEnglishFilter = false) // SS220 FIX wizard spell speak
     {
         var newMessage = message.Trim();
         // SS220 languages begin
@@ -961,7 +935,7 @@ public sealed partial class ChatSystem : SharedChatSystem
                 GetRadioKeycodePrefix(source, newMessage, out newMessage, out prefix);
 
             _sanitizer.TrySanitizeEmoteShorthands(newMessage, source, out newMessage, out newEmoteStr);
-            if (!_sanitizer.CheckNoEnglish(source, newMessage))
+            if (!bypassEnglishFilter && !_sanitizer.CheckNoEnglish(source, newMessage)) // SS220 FIX wizard spell speak
                 foundEnglish = true;
 
             if (capitalize)
@@ -992,14 +966,10 @@ public sealed partial class ChatSystem : SharedChatSystem
         languageMessage.ChangeInNodeMessage(msg =>
         {
             var ev = new TransformSpeechEvent(sender, msg);
-            RaiseLocalEvent(ev);
+            RaiseLocalEvent(sender, ev, true);
             return ev.Message;
         });
         var newMessage = languageMessage.GetMessageWithLanguageKeys();
-        //var ev = new TransformSpeechEvent(sender, message);
-        //RaiseLocalEvent(ev);
-
-        //return ev.Message;
 
         return newMessage;
         // SS220 languages end
@@ -1147,7 +1117,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         if (idName != null)
             return idName;
 
-        if (!TryComp<HumanoidAppearanceComponent>(entity, out var humanoid))
+        if (!TryComp<HumanoidProfileComponent>(entity, out var humanoid))
             return Loc.GetString("comp-pda-ui-unknown");
 
         var species = _humanoidAppearance.GetSpeciesRepresentation(humanoid.Species);
@@ -1203,88 +1173,6 @@ public sealed partial class ChatSystem : SharedChatSystem
 /// </summary>
 public record ExpandICChatRecipientsEvent(EntityUid Source, float VoiceRange, Dictionary<ICommonSession, ChatSystem.ICChatRecipientData> Recipients)
 {
-}
-
-/// <summary>
-///     Raised broadcast in order to transform speech.transmit
-/// </summary>
-public sealed class TransformSpeechEvent : EntityEventArgs
-{
-    public EntityUid Sender;
-    public string Message;
-
-    public TransformSpeechEvent(EntityUid sender, string message)
-    {
-        Sender = sender;
-        Message = message;
-    }
-}
-
-public sealed class CheckIgnoreSpeechBlockerEvent : EntityEventArgs
-{
-    public EntityUid Sender;
-    public bool IgnoreBlocker;
-
-    public CheckIgnoreSpeechBlockerEvent(EntityUid sender, bool ignoreBlocker)
-    {
-        Sender = sender;
-        IgnoreBlocker = ignoreBlocker;
-    }
-}
-
-/// <summary>
-///     Raised on an entity when it speaks, either through 'say' or 'whisper'.
-/// </summary>
-public sealed class EntitySpokeEvent : EntityEventArgs
-{
-    public readonly EntityUid Source;
-    public readonly string Message;
-    public readonly string OriginalMessage;
-    public readonly LanguageMessage? LanguageMessage; // SS220 languages
-    public readonly string? ObfuscatedMessage; // not null if this was a whisper
-    public readonly bool IsRadio; // radio message is always a whisper
-
-    public FixedPoint2? Frequency;// SS220-frequency-radio
-
-    /// <summary>
-    ///     If the entity was trying to speak into a radio, this was the channel they were trying to access. If a radio
-    ///     message gets sent on this channel, this should be set to null to prevent duplicate messages.
-    /// </summary>
-    public RadioChannelPrototype? Channel;
-
-    public EntitySpokeEvent(EntityUid source, string message, string originalMessage, RadioChannelPrototype? channel, string? obfuscatedMessage, LanguageMessage? languageMessage = null /* SS220 languages */, FixedPoint2? frequency = null /* SS220-frequency-radio */)
-    {
-        Source = source;
-        Message = message;
-        OriginalMessage = originalMessage; // Corvax-TTS: Spec symbol sanitize
-        LanguageMessage = languageMessage; // SS220 languages
-        Channel = channel;
-        ObfuscatedMessage = obfuscatedMessage;
-        IsRadio = channel != null;
-        Frequency = frequency;
-    }
-}
-
-/// <summary>
-///     InGame IC chat is for chat that is specifically ingame (not lobby) but is also in character, i.e. speaking.
-/// </summary>
-// ReSharper disable once InconsistentNaming
-public enum InGameICChatType : byte
-{
-    Speak,
-    Emote,
-    Whisper,
-    //ss220-telepathy
-    Telepathy
-}
-
-/// <summary>
-///     InGame OOC chat is for chat that is specifically ingame (not lobby) but is OOC, like deadchat or LOOC.
-/// </summary>
-public enum InGameOOCChatType : byte
-{
-    Looc,
-    Dead
 }
 
 

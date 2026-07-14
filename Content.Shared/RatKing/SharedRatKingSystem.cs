@@ -5,6 +5,7 @@ using Content.Shared.Item;
 using Content.Shared.Mobs;
 using Content.Shared.Popups;
 using Content.Shared.RatKing.Components;
+using Content.Shared.RatKing.Systems;
 using Content.Shared.SS220.RatKing;
 using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
@@ -21,7 +22,9 @@ public abstract class SharedRatKingSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!; //SS220 RatKing tweaks and changes
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!; // SS220 Ratking tweaks
-    [Dependency] private readonly TagSystem _tagSystem = default!; // make ratking rats Trash after death
+    [Dependency] private readonly TagSystem _tagSystem = default!; // SS220 make ratking rats Trash after death
+
+    private static readonly ProtoId<TagPrototype> TrashTag = "Trash"; // SS220 RatKing Tweaks and Changes
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -30,6 +33,7 @@ public abstract class SharedRatKingSystem : EntitySystem
         SubscribeLocalEvent<RatKingComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<RatKingComponent, RatKingOrderActionEvent>(OnOrderAction);
         SubscribeLocalEvent<RatKingServantComponent, ComponentShutdown>(OnServantShutdown);
+        SubscribeLocalEvent<RatKingServantComponent, MobStateChangedEvent>(OnServantDie); //SS220 RatKing Tweaks and Changes
         SubscribeLocalEvent<RatKingComponent, RatKingRummageActionEvent>(OnRummageAction); //SS220 RatKing Tweaks and Changes
     }
 
@@ -90,17 +94,17 @@ public abstract class SharedRatKingSystem : EntitySystem
             ratKingComponent.Servants.Remove(uid);
     }
 
-    //ss220 rat servant fix begin
-    private void OnServantDie(EntityUid uid, RatKingServantComponent component, MobStateChangedEvent args)
+    //SS220 rat servant fix begin
+    private void OnServantDie(Entity<RatKingServantComponent> servant, ref MobStateChangedEvent args)
     {
         if (args.NewMobState != MobState.Dead)
             return;
 
-        EnsureComp<ItemComponent>(uid);
+        EnsureComp<ItemComponent>(servant.Owner);
 
-        _tagSystem.AddTag(uid, "Trash");
+        _tagSystem.AddTag(servant.Owner, TrashTag);
     }
-    //ss220 rat servant fix end
+    //SS220 rat servant fix end
 
     private void UpdateActions(EntityUid uid, RatKingComponent? component = null)
     {
@@ -132,7 +136,7 @@ public abstract class SharedRatKingSystem : EntitySystem
         }
 
         var doAfter = new DoAfterArgs(EntityManager, entity, rumComp.RummageDuration,
-            new RatKingRummageDoAfterEvent(), args.Target, args.Target)
+            new RummageDoAfterEvent(), args.Target, args.Target)
         {
             BlockDuplicate = true,
             BreakOnDamage = true,

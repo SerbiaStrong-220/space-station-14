@@ -7,8 +7,10 @@
   components:
   - type: GameRule
     delay:
-      min: 120
-      max: 180
+      min: 60
+      max: 120
+  - type: LoadMapRule
+    mapPath: /Maps/SS220/cultyogg-teleport-hub.yml
   - type: CultYoggRule
   - type: AntagSelection
     definitions:
@@ -19,12 +21,18 @@
         components:
         - BibleUser
         - CultYoggSacrificial
+        - ArenaParticipant
+        - AntagImmune
+        - Ipc
       lateJoinAdditional: false
       mindRoles:
         - MindRoleCultYogg
-  - type: AntagObjectives
-    objectives:
-    - CultYoggSacraficeObjective
+      components:
+      - type: AntagFreeSublevelPointsAdd
+        addFreeSublevelPoints: 5
+      - type: AntagAddKnowledge
+        knowledgesToAdd:
+        - CultYoggKnowledge
 
 - type: entity
   id: CultYoggRuleMidPop
@@ -34,15 +42,17 @@
     minPlayers: 35 # WARNING: this should be always synced with other cult game rules and presets!
   - type: CultYoggRule
     stages:
-      Initial: {}
+      Initial:
+        stageObjectives:
+        - CultYoggEnslaveObjective
       Reveal:
-        sacrificesRequired: 1
-        cultistsFractionRequired: 0.2
+        cultistsToCrewFraction: 0.25
       Alarm:
-        sacrificesRequired: 2
-        cultistsFractionRequired: 0.3
+        cultistsToCrewFraction: 0.3
+        stageObjectives:
+        - CultYoggSacrificeObjective
       God:
-        sacrificesRequired: 3
+        sacrificesRequired: 1
 
 - type: entity
   id: CultYoggRuleHighPop
@@ -52,15 +62,17 @@
     minPlayers: 60 # WARNING: this should be always synced with other cult game rules and presets!
   - type: CultYoggRule
     stages:
-      Initial: {}
+      Initial:
+        stageObjectives:
+        - CultYoggEnslaveObjective
       Reveal:
-        sacrificesRequired: 1
-        cultistsFractionRequired: 0.1
+        cultistsToCrewFraction: 0.15
       Alarm:
-        sacrificesRequired: 2
-        cultistsFractionRequired: 0.2
+        cultistsToCrewFraction: 0.25
+        stageObjectives:
+        - CultYoggSacrificeObjective
       God:
-        sacrificesRequired: 3
+        sacrificesRequired: 1
 
 - type: entity
   parent: BaseGameRule
@@ -97,3 +109,40 @@
   parent: Traitor
   components:
   - type: TraitorDynamics
+
+- type: entity
+  id: SpaceTrafficControlNeutralEventScheduler
+  parent: BaseGameRule
+  components:
+  - type: BasicStationEventScheduler
+    minimumTimeUntilFirstEvent: 1200 # 20 mins
+    minMaxEventTiming:
+      min: 600 # 10 mins
+      max: 1800 # 30 mins
+    scheduledGameRules: !type:NestedSelector
+      tableId: UnknownShuttlesNeutralTable
+
+- type: entity
+  id: SubModLowTraitorDynamic
+  parent: TraitorDynamic
+  components:
+  - type: AntagSelection
+    selectionTime: IntraPlayerSpawn
+    definitions:
+    - prefRoles: [ Traitor ]
+      max: 4
+      playerRatio: 15
+      blacklist:
+        components:
+        - AntagImmune
+      lateJoinAdditional: true # ss220 traitor latejoin back
+      mindRoles:
+      - MindRoleTraitor
+      # SS220-experience-update-begin
+      components:
+      - type: AntagFreeSublevelPointsAdd
+        addFreeSublevelPoints: 10
+      - type: AntagAddKnowledge
+        knowledgesToAdd:
+        - SyndicateAgentKnowledge
+      # SS220-experience-update-end

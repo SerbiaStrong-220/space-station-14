@@ -13,6 +13,8 @@
       soundGunshot: /Audio/SS220/Weapons/Guns/CultYogg/spikegun_shot.ogg
       soundEmpty: null
       fireRate: 5
+      minAngle: 2
+      maxAngle: 15
       angleIncrease: 4
       angleDecay: 14
       selectedMode: FullAuto
@@ -20,9 +22,9 @@
       - FullAuto
     - type: BasicEntityAmmoProvider
       proto: Spike
-      capacity: 15
+      capacity: 20
     - type: Sprite
-      sprite: SS220/Objects/Weapons/Guns/CultYogg/cult_yogg_spikegun.rsi
+      sprite: SS220/Objects/Weapons/Guns/CultYogg/spikegun.rsi
       layers:
         - state: icon_noammo
           map: ["sprite"]
@@ -30,7 +32,7 @@
       size: Ginormous
     - type: Appearance
     - type: RechargeBasicEntityAmmo
-      rechargeCooldown: 2.5
+      rechargeCooldown: 1.5
       rechargeSound: /Audio/Weapons/Guns/MagIn/shotgun_insert.ogg
     - type: GenericVisualizer
       visuals:
@@ -66,7 +68,7 @@
       - NonEnergy
   - type: Sprite
     noRot: false
-    sprite: SS220/Objects/Weapons/Guns/CultYogg/cult_yogg_spikegun.rsi
+    sprite: SS220/Objects/Weapons/Guns/CultYogg/spikegun.rsi
     layers:
     - state: spike_projectile
       shader: unshaded
@@ -74,12 +76,14 @@
     bodyType: Dynamic
     linearDamping: 0.3
     angularDamping: 0
+  - type: PathologyOnProjectileHit # SS220-add-projectile-wounds
   - type: Projectile
     impactEffect: BulletImpactEffect
     damage:
       types:
-        Piercing: 15
-        Blunt: 7
+        Piercing: 17
+        Blunt: 5
+        Poison: 2
   - type: TimedDespawn
     lifetime: 0.6
   - type: GatheringProjectile

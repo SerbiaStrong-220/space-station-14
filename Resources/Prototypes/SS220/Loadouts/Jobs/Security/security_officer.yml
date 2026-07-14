@@ -130,7 +130,7 @@
   - !type:GroupLoadoutEffect
     proto: TacSec
   equipment:
-    mask: SecurityTacticalGasMask
+    mask: ClothingMaskGasSecurityTactical
 
 - type: loadout
   id: MaskSecBalaclava

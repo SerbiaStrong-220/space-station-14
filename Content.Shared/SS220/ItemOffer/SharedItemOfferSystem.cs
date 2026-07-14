@@ -2,21 +2,21 @@
 
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Interaction.Components;
-using Content.Shared.SS220.StuckOnEquip;
 using Content.Shared.Verbs;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.ItemOffer;
 
-public abstract class SharedItemOfferSystem : EntitySystem
+public abstract partial class SharedItemOfferSystem : EntitySystem
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     private static readonly SpriteSpecifier OfferIcon = new SpriteSpecifier.Texture(new("/Textures/SS220/Interface/VerbIcons/present.png"));
 
     public override void Initialize()
     {
+        InitializeRestrictions();
+
         SubscribeLocalEvent<HandsComponent, GetVerbsEvent<EquipmentVerb>>(AddOfferVerb);
     }
 
@@ -30,10 +30,19 @@ public abstract class SharedItemOfferSystem : EntitySystem
         if (item == null)
             return;
 
-        if (HasComp<UnremoveableComponent>(item))
+        if (args.User == args.Target)
             return;
 
-        if (TryComp<StuckOnEquipComponent>(item, out var equip) && equip.IsStuck)
+        var evItem = new CanOfferItemEvent(args.User, args.Target);
+        RaiseLocalEvent(item.Value, ref evItem, true);
+
+        if (evItem.Cancelled)
+            return;
+
+        var evUser = new CanOfferItemEvent(args.User, args.Target);
+        RaiseLocalEvent(args.User, ref evUser, true);
+
+        if (evUser.Cancelled)
             return;
 
         var user = args.User;
@@ -52,3 +61,12 @@ public abstract class SharedItemOfferSystem : EntitySystem
 
     protected abstract void DoItemOffer(EntityUid user, EntityUid target);
 }
+
+/// <summary>
+/// This event handle that this item can't be offered by users.
+/// </summary>
+/// <param name="User">User, that trade offer item</param>
+/// <param name="TargetUser">User, that can take item</param>
+/// <param name="Cancelled">If true, that means that item can't be offered</param>
+[ByRefEvent]
+public record struct CanOfferItemEvent(EntityUid User, EntityUid TargetUser, bool Cancelled = false);

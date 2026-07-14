@@ -37,13 +37,20 @@
       - Wall
   components:
     - type: Sprite
-      sprite: SS220/Objects/CultYogg/strangefruit.rsi
+      sprite: SS220/Objects/CultYogg/strange_kudzu.rsi
       state: kudzu_11
       drawdepth: HighFloorObjects
     - type: Clickable
     - type: Kudzu
       growthTickChance: 0.2
-      spreadChance: 0.2
+      spreadChance: 0.1
+      damageRecovery:
+        types:
+          Slash: -0.5
+          Heat: -1.0
+          Cold: -1.0
+          Blunt: -0.5
+    - type: KudzuVisuals
     - type: Fixtures
       fixtures:
         fix1:
@@ -63,12 +70,11 @@
         - CultYogg
         - MiGo
     - type: Damageable
-      damageModifierSet: Wood
     - type: Destructible
       thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 40
+          damage: 24
         behaviors:
         - !type:DoActsBehavior
           acts: [ "Destruction" ]
@@ -90,6 +96,19 @@
           damage:
             types:
               Heat: 0.5
+    - type: TemperatureDamage
+      heatDamage:
+        types:
+          Heat: 10
+      coldDamage:
+        types:
+          Cold: 5
+    - type: Temperature
+    - type: AtmosExposed
+    - type: Barotrauma
+      damage:
+        types:
+          Blunt: 0.5
 
 - type: entity
   parent: SeedBase
@@ -112,9 +131,10 @@
   packetPrototype: CultStrangeFruitSeed
   productPrototypes:
     - ProductStrangeFruitCultYogg
+  harvestRepeat: Repeat
   lifespan: 25
   maturation: 12
-  production: 3
+  production: 10
   yield: 1
   potency: 10
   growthStages: 7

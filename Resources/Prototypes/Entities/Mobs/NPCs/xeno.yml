@@ -85,10 +85,12 @@
     speedModifierThresholds:
       75: 0.5 # SS220 xeno-buff-update
   - type: Stamina
-    critThreshold: 200
+    baseCritThreshold: 200
   - type: Bloodstream
-    bloodReagent: FluorosulfuricAcid
-    bloodMaxVolume: 650
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: FluorosulfuricAcid
+        Quantity: 650
   - type: MeleeWeapon
     altDisarm: false
     angle: 0
@@ -128,9 +130,10 @@
   - type: TypingIndicator
     proto: alien
   - type: Temperature
+    currentTemperature: 310.15
+  - type: TemperatureDamage
     heatDamageThreshold: 360
     coldDamageThreshold: -150
-    currentTemperature: 310.15
   - type: Tag
     tags:
       - CannotSuicide
@@ -166,7 +169,7 @@
       250: Dead
     #SS220 xeno-buff-update end
   - type: Stamina
-    critThreshold: 300
+    baseCritThreshold: 300
   - type: SlowOnDamage
     speedModifierThresholds:
     #SS220 xeno-buff-update begin
@@ -716,10 +719,12 @@
   - type: ComplexInteraction
   - type: MobState
   - type: Stamina
-    critThreshold: 200
+    baseCritThreshold: 200
   - type: Bloodstream
-    bloodReagent: FluorosulfuricAcid
-    bloodMaxVolume: 300
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: FluorosulfuricAcid
+        Quantity: 300
   - type: MeleeWeapon
     altDisarm: false
     angle: 0
@@ -727,8 +732,8 @@
      collection: AlienClaw
     animation: WeaponArcBite
     damage:
-     types:
-       Brute: 5
+      types:
+        Slash: 5
   - type: DamageStateVisuals
     states:
       Alive:
@@ -746,9 +751,10 @@
   - type: TypingIndicator
     proto: alien
   - type: Temperature
+    currentTemperature: 310.15
+  - type: TemperatureDamage
     heatDamageThreshold: 360
     coldDamageThreshold: -150
-    currentTemperature: 310.15
   - type: NoSlip
   - type: Perishable #Ummmm the acid kills a lot of the bacteria or something
     molsPerSecondPerUnitMass: 0.0005

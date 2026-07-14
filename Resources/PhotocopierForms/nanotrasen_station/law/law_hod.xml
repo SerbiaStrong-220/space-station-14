@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Form>
+  <FormId>law_hod</FormId>
+  <PrototypeId>PaperNtFormLaw</PrototypeId>
+  <EntityName>форма НТ-КОМ-ХОД</EntityName>
+  <PhotocopierTitle>Ходатайство</PhotocopierTitle>
+  <Content><![CDATA[[bold]Форма НТ-КОМ-ХОД[/bold]
+[head=2]Ходатайство[/head]
+
+[italic]Дата: ДЕНЬ/МЕСЯЦ/ГОД[/italic]
+
+Уважаемый (ПОЛНОЕ ИМЯ)! 
+
+Я, (ПОЛНОЕ ИМЯ), как (ДОЛЖНОСТЬ) прошу:
+
+В случае отказа в удовлетворении данного ходатайства прошу Вас вынести мотивированное определение по форме НТ-СБ-ОТК, закреплённое печатью.
+
+[italic]Место для печатей[/italic]]]></Content>
+</Form>

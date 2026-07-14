@@ -14,11 +14,11 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.CriminalRecords;
 
-public abstract class SharedCriminalRecordSystem : EntitySystem
+public abstract partial class SharedCriminalRecordSystem : EntitySystem
 {
-    [Dependency] private readonly AccessReaderSystem _accessReader = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private AccessReaderSystem _accessReader = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     public override void Initialize()
     {
@@ -101,6 +101,10 @@ public abstract class SharedCriminalRecordSystem : EntitySystem
             }
 
             msg.AddText(record.Message);
+
+            if (record.RecordSetAt.HasValue)
+                msg.AddMarkupOrThrow("\n" + Loc.GetString("criminal-show-record-time", ("time", record.RecordSetAt.Value)));
+
             args.PushMessage(msg);
         }
     }

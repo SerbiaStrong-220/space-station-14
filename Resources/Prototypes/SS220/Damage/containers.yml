@@ -2,3 +2,15 @@
   id: Forcefield
   supportedTypes:
   - Forcefield
+
+- type: damageContainer
+  id: Invulnerable
+
+- type: damageContainer
+  id: Ipc
+  supportedGroups:
+  - Brute
+  - Burn
+  supportedTypes:
+  - Heat
+  - Shock

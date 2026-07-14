@@ -1,0 +1,32 @@
+- type: entity
+  parent: ClothingNeckOtherShoulderBase
+  id: ClothingNeckCloakCapeWhite
+  name: white cloak-cape
+  description: A comfortable cape, draped down your back and held around your neck with a brooch.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Cloaks/cloak-cape_white.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Cloaks/cloak-cape_white.rsi
+
+- type: entity
+  parent: ClothingNeckCloakCapeWhite
+  id: ClothingNeckCloakCape
+  name: cloak-cape
+  description: A comfortable cape, draped down your back and held around your neck with a brooch.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Cloaks/cloak-cape_black.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Cloaks/cloak-cape_black.rsi
+
+- type: entity
+  parent: ClothingNeckCloakCapeWhite
+  id: ClothingNeckCloakCapeBlue
+  name: blue cloak-cape
+  description: A comfortable cape, draped down your back and held around your neck with a brooch.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Cloaks/cloak-cape_blueshield.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Cloaks/cloak-cape_blueshield.rsi

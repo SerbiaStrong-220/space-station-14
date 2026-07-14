@@ -1,0 +1,22 @@
+# EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: polymorph
+  id: MiGoInAstral
+  configuration:
+    entity: MobAstralMiGo
+    transferName: true
+    inventory: None
+    revertOnDeath: true
+    revertOnCrit: true
+    allowRepeatedMorphs: false
+    polymorphSound:
+      path: /Audio/SS220/CultYogg/migo_astral_in.ogg
+      params:
+        volume: 0.8
+        maxDistance: 1.5
+    exitPolymorphSound:
+      path: /Audio/SS220/CultYogg/migo_astral_out.ogg
+      params:
+        volume: 0.8
+        maxDistance: 1.5
+    duration: 35

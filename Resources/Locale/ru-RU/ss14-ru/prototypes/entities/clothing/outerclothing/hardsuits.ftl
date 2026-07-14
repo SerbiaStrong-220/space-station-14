@@ -84,3 +84,7 @@ ent-ClothingOuterHardsuitMime = скафандр мима
     .desc = Самодельный мимский скафандр.
 ent-ClothingOuterHardsuitSanta = скафандр Санты
     .desc = Весёлый, праздничный скафандр, который защищает весёлого дарителя подарков во время полётов на космосанях. Предоставляет некоторую защиту от ударов астероидов.
+# SS220-fix-goliath-hs-locale begin
+ent-ClothingOuterHardsuitGoliath = скафандр голиафа
+    .desc = Легкий скафандр утилизатора, усиленный пластинами голиафа.
+# SS220-fix-goliath-hs-locale end

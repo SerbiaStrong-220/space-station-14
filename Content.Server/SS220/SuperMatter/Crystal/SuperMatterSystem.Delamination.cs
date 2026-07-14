@@ -13,10 +13,10 @@ namespace Content.Server.SS220.SuperMatter.Crystal;
 
 public sealed partial class SuperMatterSystem
 {
-    [Dependency] private readonly ExplosionSystem _explosion = default!;
-    [Dependency] private readonly AlertLevelSystem _alertLevel = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly TeslaEnergyBallSystem _teslaEnergyBall = default!;
+    [Dependency] private ExplosionSystem _explosion = default!;
+    [Dependency] private AlertLevelSystem _alertLevel = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private TeslaEnergyBallSystem _teslaEnergyBall = default!;
 
     private const float SECONDS_BEFORE_EXPLOSION = 13f;
     private const float IntegrityRegenerationStep = 5f;
@@ -109,7 +109,6 @@ public sealed partial class SuperMatterSystem
             {
                 case SuperMatterPhaseState.ResonanceRegion:
                     explosiveComponent.ExplosionType = crystal.Comp.ResonanceRegionExplosion;
-
                     break;
 
                 case SuperMatterPhaseState.SingularityRegion:
@@ -121,7 +120,6 @@ public sealed partial class SuperMatterSystem
                     break;
 
                 default:
-                    _explosion.TriggerExplosive(crystal.Owner);
                     break;
             }
             _explosion.TriggerExplosive(crystal.Owner);
@@ -131,7 +129,7 @@ public sealed partial class SuperMatterSystem
             && TryComp<TeslaEnergyBallComponent>(spawnedUid.Value, out var teslaComp))
             _teslaEnergyBall.AdjustEnergy(spawnedUid.Value, teslaComp, 1000f);
 
-        TryChangeStationAlertLevel(crystal, crystal.Comp.CrystalDestroyAlertLevel, out _);
+       // TryChangeStationAlertLevel(crystal, crystal.Comp.CrystalDestroyAlertLevel, out _);
         StationAnnounceIntegrity(crystal, AnnounceIntegrityTypeEnum.Explosion, smState);
     }
 }

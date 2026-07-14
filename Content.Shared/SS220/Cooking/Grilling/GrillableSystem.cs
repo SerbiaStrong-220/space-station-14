@@ -9,10 +9,10 @@ namespace Content.Shared.SS220.Cooking.Grilling;
 /// <summary>
 /// This handles the grilling process of grillable entity
 /// </summary>
-public sealed class GrillableSystem : EntitySystem
+public sealed partial class GrillableSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -26,6 +26,9 @@ public sealed class GrillableSystem : EntitySystem
     // Stop rotting, if food is cooking
     private void OnGrillableRotting(Entity<GrillableComponent> ent, ref IsRottingEvent args)
     {
+        if (args.Handled)
+            return;
+
         args.Handled = ent.Comp.IsCooking;
     }
 
@@ -53,8 +56,8 @@ public sealed class GrillableSystem : EntitySystem
         // Cooking is done
         if (ent.Comp.CurrentCookTime >= ent.Comp.TimeToCook)
         {
-            var newEnt = EntityManager.Spawn(ent.Comp.CookingResult,
-                _transformSystem.GetMapCoordinates(ent));
+            var newEnt = Spawn(ent.Comp.CookingResult, _transformSystem.GetMapCoordinates(ent));
+            _transformSystem.SetLocalRotation(newEnt, Angle.Zero);
 
             _audio.PlayPvs(ent.Comp.CookingDoneSound, newEnt);
 

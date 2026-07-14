@@ -1,0 +1,20 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: VoidTeleportTarget
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Appearance
+  - type: Transform
+    anchored: true
+  #- type: Sprite
+  #  sprite: SS220/Objects/CultYogg/strangefruit.rsi
+  #  state: kudzu_11
+  #  drawdepth: HighFloorObjects
+  - type: RandomTeleportTarget
+  - type: Tag
+    tags:
+    - VoidTeleporationTarget

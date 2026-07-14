@@ -23,9 +23,9 @@ namespace Content.Client.SS220.RoundEnd.UI;
 [GenerateTypedNameReferences]
 public sealed partial class RoundEndTitlesWindow : BaseWindow
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
 
     private readonly ShlepovendSystem _shlepovendSystem = default!;
     private readonly RoundEndTitlesStyle _style;

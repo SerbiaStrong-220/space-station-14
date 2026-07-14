@@ -17,6 +17,7 @@ public sealed class CustomFoVOverlay : Overlay
     private readonly IPrototypeManager _prototype;
     private readonly SpriteSystem _sprite;
     private readonly SharedTransformSystem _transform;
+    private readonly MapSystem _map;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceEntities;
 
@@ -24,15 +25,20 @@ public sealed class CustomFoVOverlay : Overlay
     private readonly ShaderInstance _shader;
     private readonly Dictionary<EntityUid, Dictionary<Vector2i, Entity<TransformComponent>>> _entMapDict = new();
 
+    private static readonly ProtoId<ShaderPrototype> ShaderProtoId = "unshaded";
+
     internal CustomFoVOverlay(EntityManager entMan, IPrototypeManager prototype)
     {
         _entMan = entMan;
         _prototype = prototype;
 
         _fovCorner = new SpriteSpecifier.Texture(new("SS220/Misc/fov_corner.png"));
-        _sprite = _entMan.EntitySysManager.GetEntitySystem<SpriteSystem>();
-        _transform = _entMan.EntitySysManager.GetEntitySystem<SharedTransformSystem>();
-        _shader = _prototype.Index<ShaderPrototype>("unshaded").InstanceUnique();
+
+        _map = entMan.System<MapSystem>();
+        _sprite = _entMan.System<SpriteSystem>();
+        _transform = _entMan.System<SharedTransformSystem>();
+
+        _shader = _prototype.Index(ShaderProtoId).InstanceUnique();
 
         ZIndex = (int) Shared.DrawDepth.DrawDepth.WallFovOverlay;
     }
@@ -56,11 +62,11 @@ public sealed class CustomFoVOverlay : Overlay
             if (!occluderQuery.TryGetComponent(entity, out var occluder) || !occluder.Enabled)
                 continue;
 
-            if (!xformQuery.TryGetComponent(entity, out var xform) || !xform.Anchored || !xform.GridUid.HasValue)
+            if (!xformQuery.TryGetComponent(entity, out var xform) || !xform.Anchored || xform.GridUid is not { Valid: true } gridUid)
                 continue;
 
-            var gridComp = _entMan.GetComponent<MapGridComponent>(xform.GridUid.Value);
-            var tile = gridComp.CoordinatesToTile(xform.Coordinates);
+            var gridComp = _entMan.GetComponent<MapGridComponent>(gridUid);
+            var tile = _map.CoordinatesToTile(gridUid, gridComp, xform.Coordinates);
 
             // Create lookup maps for grids so neighbors can be found quickly
             if (!_entMapDict.TryGetValue(xform.GridUid.Value, out var gridDict))

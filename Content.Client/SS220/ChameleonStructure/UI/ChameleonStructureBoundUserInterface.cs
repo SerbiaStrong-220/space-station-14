@@ -8,10 +8,9 @@ using Content.Shared.SS220.ChameleonStructure;
 namespace Content.Client.SS220.ChameleonStructure.UI;
 
 [UsedImplicitly]
-public sealed class ChameleonStructureBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed partial class ChameleonStructureBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-  
+    [Dependency] private IPrototypeManager _proto = default!;
 
     [ViewVariables]
     private ChameleonStructureMenu? _menu;
@@ -53,7 +52,7 @@ public sealed class ChameleonStructureBoundUserInterface(EntityUid owner, Enum u
         _menu?.UpdateState(newTargets, st.SelectedId);
     }
 
-    private void OnIdSelected(string selectedId)
+    private void OnIdSelected(EntProtoId selectedId)
     {
         SendMessage(new ChameleonStructurePrototypeSelectedMessage(selectedId));
     }

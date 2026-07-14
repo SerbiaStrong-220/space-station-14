@@ -9,13 +9,12 @@ using Robust.Shared.Network;
 
 namespace Content.Shared.SS220.UseableBook;
 
-public sealed class UseableBookSystem : EntitySystem
+public sealed partial class UseableBookSystem : EntitySystem
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly ISerializationManager _serialization = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private ISerializationManager _serialization = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {
@@ -28,8 +27,6 @@ public sealed class UseableBookSystem : EntitySystem
     public bool CanUseBook(EntityUid entity, UseableBookComponent comp, EntityUid user, [NotNullWhen(false)] out string? reason)
     {
         reason = null;
-        var bCan = false;
-
         if (comp is { CanUseOneTime: true, Used: true })
         {
             reason = Loc.GetString("useable-book-used-onetime"); // данную книгу можно было изучить только один раз
@@ -41,7 +38,7 @@ public sealed class UseableBookSystem : EntitySystem
             var customCanRead = comp.CustomCanRead;
             customCanRead.Interactor = user;
             customCanRead.BookComp = comp;
-            RaiseLocalEvent(entity, (object)customCanRead, broadcast:true);
+            RaiseLocalEvent(entity, (object)customCanRead, broadcast: true);
 
             if (customCanRead.Handled)
             {
@@ -89,8 +86,7 @@ public sealed class UseableBookSystem : EntitySystem
         foreach (var kvp in ent.Comp.ComponentsOnRead)
         {
             var copiedComp = (Component) _serialization.CreateCopy(kvp.Value.Component, notNullableOverride: true);
-            copiedComp.Owner = args.User;
-            _entManager.AddComponent(args.User, copiedComp, true);
+            AddComp(args.User, copiedComp, true);
         }
 
         Dirty(ent);

@@ -16,9 +16,13 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: holypen_empty
-  - type: Hypospray
+  - type: Injector
     solutionName: pen
-    transferAmount: 95
+    currentTransferAmount: null
+    activeModeProtoId: HyposprayDynamicMode
+    allowedModes:
+    - HyposprayDynamicMode
+    - HyposprayInjectMode
   - type: Sprite
     sprite: SS220/Objects/Specific/Medical/medipen.rsi
     netsync: false
@@ -31,7 +35,7 @@
 - type: entity
   parent: ChemicalMedipen
   id: StimpackERT
-  name: Morphine medicine
+  name: morphine medicine
   description: Injector of morphine that give you about 40 seconds of the chemical's effects.
   suffix: Shitspawn, ERT
   components:
@@ -59,7 +63,7 @@
       pen:
         maxVol: 24
         reagents:
-        - ReagentId: Morphine
+        - ReagentId: Aglomorphine
           Quantity: 4
         - ReagentId: Dylovene
           Quantity: 20
@@ -67,16 +71,17 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: stimpen_empty
-  - type: Hypospray
+  - type: Injector
     solutionName: pen
-    transferAmount: 24
-    onlyAffectsMobs: false
-    injectOnly: true
+    currentTransferAmount: null
+    activeModeProtoId: HyposprayInjectMode
+    allowedModes:
+    - HyposprayInjectMode
 
 - type: entity
   parent: ChemicalMedipen
   id: StimpackDQ
-  name: Frontier medicine
+  name: frontier medicine
   description: Injector of frontier that give you about 40 seconds of the chemical's effects.
   suffix: Shitspawn, Death Squad
   components:
@@ -110,11 +115,9 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: stimpen_empty
-  - type: Hypospray
+  - type: Injector
     solutionName: pen
-    transferAmount: 20
-    onlyAffectsMobs: false
-    injectOnly: true
-
-
-
+    currentTransferAmount: null
+    activeModeProtoId: HyposprayInjectMode
+    allowedModes:
+    - HyposprayInjectMode

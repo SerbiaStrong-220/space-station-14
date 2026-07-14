@@ -48,7 +48,9 @@
       amount: 2
     - id: NetworkConfigurator
     - id: Binoculars
-    - id: WeaponEnergyShotgun
+    - id: WeaponEnergyShotgun #SS220-fix
+    - id: PlushieLizardJobWarden
+      prob: 0.02
 
 - type: entityTable
   id: FillLockerWardenHarduit
@@ -94,9 +96,13 @@
       prob: 0.1
     - id: HoloprojectorSecurity
       # prob: 0.6 #ss220-guarantee projector
-    # - id: BookSpaceLaw #SS220 space-law
-    #   prob: 0.5 #SS220 space-law
-    - id: BookSpaceLaws #SS220 space-law
+    - id: BookSpaceLaw
+      prob: 1.0 #SS220 space-law
+    - id: PlushieLizardJobSecuritycadet
+      prob: 0.02
+    - id: PlushieLizardJobSecurityofficer
+      prob: 0.02
+    - id: ClothingBeltCorporateJudo # SS220-CorporateJudo
 
 - type: entity
   id: LockerBrigmedicFilled
@@ -119,6 +125,11 @@
     # - id: WeaponTaser
     #  amount: 2
     # SS220 No tasers end
+    # SS220 Return trackers for brigmed Begin
+    - id: TrackingImplanter
+      amount: 2
+    - id: HandHeldImplantMedicalScanner # SS220-surgery-scanner
+    # SS220 Return trackers for brigmed End
     - id: ClothingOuterHardsuitBrigmedic
     - id: OxygenTankFilled   #SS220 add-tanks-brigmed
     - id: NitrogenTankFilled #SS220 add-tanks-brigmed
@@ -170,6 +181,7 @@
     - id: Telescopichka # SS220 Ya-lybly-translit
     - id: ClothingEyesHudSecurity # Dec is sec
     - id: BodySecurityCamera #SS220-Bodycam
+    - id: HandHeldImplantMedicalScanner # SS220-surgery-scanner
     # SS220-our-stuff-end
     - id: ClothingEyesGlassesNoir
     - id: ClothingHeadHatDetGadget
@@ -187,6 +199,8 @@
     - id: HoloprojectorSecurity
     - id: BoxEvidenceMarkers
     - id: HandLabeler
+    - id: PlushieLizardJobDetective
+      prob: 0.02
 
 - type: entity
   id: ClosetBombFilled

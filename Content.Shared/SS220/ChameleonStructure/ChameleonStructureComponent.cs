@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Tag;
 using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -26,7 +27,7 @@ public sealed partial class ChameleonStructureComponent : Component
     ///     Filter possible chameleon options by a tag.
     /// </summary>
     [DataField]
-    public string? RequireTag;
+    public ProtoId<TagPrototype>? RequireTag;
 
     /// <summary>
     ///     RequireTag alternative.
@@ -51,17 +52,17 @@ public sealed partial class ChameleonStructureComponent : Component
 }
 
 [Serializable, NetSerializable]
-public sealed class ChameleonStructureBoundUserInterfaceState(string? selectedId, List<EntProtoId> listData, string? requiredTag) : BoundUserInterfaceState
+public sealed class ChameleonStructureBoundUserInterfaceState(EntProtoId? selectedId, List<EntProtoId> listData, ProtoId<TagPrototype>? requiredTag) : BoundUserInterfaceState
 {
-    public readonly string? SelectedId = selectedId;
-    public readonly string? RequiredTag = requiredTag;
+    public readonly EntProtoId? SelectedId = selectedId;
+    public readonly ProtoId<TagPrototype>? RequiredTag = requiredTag;
     public readonly List<EntProtoId> ListData = listData;
 }
 
 [Serializable, NetSerializable]
-public sealed class ChameleonStructurePrototypeSelectedMessage(string selectedId) : BoundUserInterfaceMessage
+public sealed class ChameleonStructurePrototypeSelectedMessage(EntProtoId selectedId) : BoundUserInterfaceMessage
 {
-    public readonly string SelectedId = selectedId;
+    public readonly EntProtoId SelectedId = selectedId;
 }
 
 [Serializable, NetSerializable]

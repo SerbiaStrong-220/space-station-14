@@ -2,19 +2,40 @@
 
 #! Юридический (Начало)
 
+  # Представитель НаноТрейзен
+- type: roleLoadout
+  id: JobNanoTrasenRepresentative
+  groups:
+  - NanoTrasenRepresentativeHead
+  - NanoTrasenRepresentativeHeadset
+  - NanoTrasenRepresentativeEyes
+  - NanoTrasenRepresentativeNeck
+  - NanoTrasenRepresentativeJumpsuit
+  - NanoTrasenRepresentativeOuterClothing
+  - NanoTrasenRepresentativeBackpacks
+  - NanoTrasenRepresentativeTrinket
+  - Survival
+  - SurvivalVox
+  - GroupSpeciesBreathTool
+  - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+
   # Магистрат
 - type: roleLoadout
   id: JobMagistrate
   groups:
   - MagistrateHead
-  - MagistrateEyes
   - MagistrateHeadset
+  - MagistrateEyes
   - MagistrateJumpsuit
   - MagistrateOuterClothing
   - IAABackpacks
-  - Trinkets
   - Survival
+  - SurvivalVox
+  - GroupSpeciesBreathTool
+  - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 
   # Агент внутренних дел
 - type: roleLoadout
@@ -26,11 +47,14 @@
   - IAANeck
   - IAAJumpsuit
   - IAAOuterclothing
+  - Gloves
   - IAABackpacks #ss220 iaa loadout fix
   - Survival
+  - SurvivalVox
+  - GroupSpeciesBreathTool
   - Trinkets
-  - Gloves
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 
   # Офицер "Синий Щит"
 - type: roleLoadout
@@ -38,14 +62,19 @@
   groups:
   - BlueShieldHead
   - BlueShieldGlasses
+  - BlueShieldMask
   - BlueShieldNeck
   - BlueShieldJumpsuit
   - BlueShieldOuterclothing
-  - BlueShieldBelt
   - BlueShieldBackpack
+  - BlueShieldBelt
+  - BlueShieldShoes
   - Survival
+  - SurvivalVox
+  - GroupSpeciesBreathToolSecurity
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 
 #! Служба безопасности (Начало)
 
@@ -55,17 +84,20 @@
   groups:
   - SecurityHead
   - SecurityGlasses #SS220-TwoOne-Floppa-Iteration
-  - SecurityNeck  #holster loadout
   - SecurityMask #SS220 Security Tactical Gas Mask
-  - SecurityGloves #Sec Tactical Gloves for Senior Officer
+  - SecurityNeck  #holster loadout
   - SeniorSecJumpsuit
-  - SecurityBackpack
   - SecurityOuterClothing
-  - SurvivalSecurity
+  - SecurityGloves #Sec Tactical Gloves for Senior Officer
+  - SecurityBackpack
   - SecurityShoes
   - SecurityBelt
+  - SurvivalSecurity
+  - SurvivalVox
+  - GroupSpeciesBreathToolSecurity
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 
   # Пилот
 - type: roleLoadout
@@ -73,15 +105,18 @@
   groups:
   - SecurityPilotHead
   - SecurityGlasses #SS220-TwoOne-Floppa-Iteration
-  - SecurityNeck #holster loadout
   - SecurityMask #SS220 Security Tactical Gas Mask
+  - SecurityNeck #holster loadout
   - SecurityJumpsuit
-  - SecurityBackpack
   - SecurityPilotOuterClothing
-  - SurvivalSecurity
+  - SecurityBackpack
   - SecurityShoes
+  - SurvivalSecurity
+  - SurvivalVox
+  - GroupSpeciesBreathToolSecurity
   - Trinkets
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - WorkerCash #SS220-Cash-personal
+
 #! Служба безопасности (Конец)
 
 #! Медицинский отдел (Начало)
@@ -91,19 +126,40 @@
   id: JobSeniorPhysician
   groups:
   - HatSeniorMedical
-  - MedicalNeck
-# - MedicalGlasses #SS220-TwoOne-Floppa-Iteration
-  - SeniorMedicalJumpsuit
-  - MedicalGloves
-  - MedicalsBackpack
-  - MedicalsMask
-  - SeniorMedicalOuterClothing
-  - SurvivalMedical
-  - SeniorShoes
   - MedicalEyewear
-#  - Glasses #SS220-TwoOne-Floppa-Iteration
+  - MedicalNeck
+  - MedicalsMask
+  - SeniorMedicalJumpsuit
+  - SeniorMedicalOuterClothing
+  - MedicalsGloves
+  - MedicalsBackpack
+  - SeniorShoes
+  - SurvivalMedical
+  - SurvivalVox
+  - GroupSpeciesBreathToolMedical
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
+
+  # Бригемдик
+- type: roleLoadout
+  id: JobBrigmedic
+  groups:
+  - BrigmedicHead
+  - BrigmedicGlasses #SS220-TwoOne-Floppa-Iteration
+  - BrigmedicMask
+  - MedicalNeck #SS220-WhiteScarf
+  - BrigmedicJumpsuit
+  - BrigmedicOuterClothing
+  - MedicalsGloves
+  - BrigmedicBackpack
+  - BrigmedicShoes
+  - SurvivalBrigMedic #SS220-Brigmedic SurvivalBox Fix
+  - SurvivalVox
+  - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - WorkerCash #SS220-Cash-personal
+
 #! Медицинский отдел (Конец)
 
 #! Инженерный отдел (Начало)
@@ -115,12 +171,16 @@
   - HatSeniorEngineer
   - EngineerGlasses #SS220-TwoOne-Floppa-Iteration
   - SeniorsEngineerJumpsuit
-  - StationEngineerBackpack
   - SeniorsEngineerOuterClothing
-  - SurvivalExtended
+  - StationEngineerBackpack
   - StationEngineerShoes
+  - SurvivalExtended
+  - SurvivalVox
+  - GroupSpeciesBreathTool
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
+
 #! Инженерный отдел (Конец)
 
 #! Исследовательский отдел (Начало)
@@ -133,14 +193,17 @@
   - ScientistGlasses #SS220-Two Floppa Iteration
   - ScientistNeck
   - SeniorSciensistJumpsuit
-  - ScientistBackpack
   - SeniorSciensistOuterClothing
   - ScientistGloves
+  - ScientistBackpack
   - ScientistShoes
   - Survival
-#  - Glasses #SS220-TwoOne-Floppa-Iteration
+  - SurvivalVox
+  - GroupSpeciesBreathTool
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
+
 #! Исследовательский отдел (Конец)
 
 #! Сервис (Начало)
@@ -150,10 +213,49 @@
   id: JobSeniorService
   groups:
   - HatSeniorService
+  - Glasses
   - SeniorServiceJumpsuit
   - CommonBackpack
+  - SeniorServiceShoes
   - Survival
-  - Glasses
+  - SurvivalVox
+  - GroupSpeciesBreathTool
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
+
 #! Сервис (Конец)
+
+#! Эксклюзивы карт (Начало)
+
+  #Зоотех
+- type: roleLoadout
+  id: JobZookeeper
+  groups:
+  - GroupTankHarness
+  - Glasses
+  - CommonBackpack
+  - GroupSpeciesBreathTool
+  - Survival
+  - SurvivalVox
+  - GroupSpeciesBreathTool
+  - Trinkets
+  - WorkerCash #SS220-Cash-personal
+
+  #Боксер
+- type: roleLoadout
+  id: JobBoxer
+  groups:
+  - GroupTankHarness
+  - Glasses
+  - BoxerJumpsuit
+  - BoxerGloves
+  - CommonBackpack
+  - GroupSpeciesBreathTool
+  - Survival
+  - SurvivalVox
+  - GroupSpeciesBreathTool
+  - Trinkets
+  - WorkerCash #SS220-Cash-personal
+
+#! Эксклюзивы карт (Конец)

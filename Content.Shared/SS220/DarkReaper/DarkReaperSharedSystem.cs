@@ -2,7 +2,6 @@
 
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
-using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Explosion.Components;
@@ -19,6 +18,7 @@ using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
+using Content.Shared.Shuttles.Components;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
@@ -31,44 +31,47 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using System.Linq;
 using System.Numerics;
+using Content.Shared.Damage;
+using Content.Shared.SS220.Lifesteal;
+using Content.Shared.Damage.Systems;
 
 namespace Content.Shared.SS220.DarkReaper;
 
-public abstract class SharedDarkReaperSystem : EntitySystem
+public abstract partial class SharedDarkReaperSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _speedModifier = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
-    [Dependency] private readonly PullingSystem _puller = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffectsSystem = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private MovementSpeedModifierSystem _speedModifier = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedPointLightSystem _pointLight = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private NpcFactionSystem _npcFaction = default!;
+    [Dependency] private PullingSystem _puller = default!;
+    [Dependency] private StatusEffectsSystem _statusEffectsSystem = default!;
+    [Dependency] private LifestealSystem _lifesteal = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<DarkReaperComponent, ComponentStartup>(OnCompInit);
+        SubscribeLocalEvent<DarkReaperComponent, ComponentStartup>(OnCompStartup);
         SubscribeLocalEvent<DarkReaperComponent, ComponentShutdown>(OnCompShutdown);
 
         // actions
@@ -128,7 +131,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
             return;
         }
 
-        if (!TryComp<HumanoidAppearanceComponent>(args.Target, out _))
+        if (!TryComp<HumanoidProfileComponent>(args.Target, out _))
         {
             if (_net.IsClient && _timing.IsFirstTimePredicted)
                 _popup.PopupEntity("Цель должна быть гуманоидом!", ent, PopupType.MediumCaution);
@@ -377,8 +380,10 @@ public abstract class SharedDarkReaperSystem : EntitySystem
     }
 
     // Crap
-    protected virtual void OnCompInit(Entity<DarkReaperComponent> ent, ref ComponentStartup args)
+    protected virtual void OnCompStartup(Entity<DarkReaperComponent> ent, ref ComponentStartup args)
     {
+        ent.Comp.SpawnedTime = _timing.CurTime;
+
         UpdateStageAppearance(ent, ent.Comp);
         ChangeForm(ent, ent.Comp.PhysicalForm);
 
@@ -415,6 +420,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
 
         if (isMaterial)
         {
+            RemCompDeferred<FTLSmashImmuneComponent>(uid);
             EnsureComp<PullerComponent>(uid).NeedsHands = false;
             _tag.AddTag(uid, _doorBumpOpenerTag);
 
@@ -448,6 +454,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
 
             RemComp<PullerComponent>(uid);
             RemComp<ActivePullerComponent>(uid);
+            EnsureComp<FTLSmashImmuneComponent>(uid);
         }
 
         _actions.SetEnabled(comp.StunActionEntity, isMaterial);
@@ -463,6 +470,11 @@ public abstract class SharedDarkReaperSystem : EntitySystem
     {
         comp.CurrentStage = stage;
         UpdateStageAppearance(uid, comp);
+
+        if (!comp.LifestealPerStage.TryGetValue(stage, out var lifestealPerStage))
+            return;
+
+        _lifesteal.ChangeLifesteal(uid, lifestealPerStage);
     }
 
     public void UpdateStage(EntityUid uid, DarkReaperComponent comp)

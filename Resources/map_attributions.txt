@@ -64,6 +64,9 @@
 - file: ["amber.yml"]
   authors: Southbridge, Flipsie27
 
+  - files: ["snowball.yml"]
+  authors: Spacemann
+
 # ss220-maps
 
 - files: ["frankenstein.yml"]
@@ -92,3 +95,9 @@
 
 - files: ["nightshift.yml"]
   authors: VictorBoum, AliceValestray, rtmfool, murraingif, NightmareStalker, Thorofare, PorteRianes, Vnoeg
+
+- files: ["cultyogg-teleport-hub.yml"]
+  authors: SkaldetSkaeg, MixNikita
+
+- files: ["tox.yml"]
+  authors: VictorBoum

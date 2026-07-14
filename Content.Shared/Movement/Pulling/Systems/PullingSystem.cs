@@ -1,10 +1,13 @@
+using System.Numerics;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Alert;
 using Content.Shared.Buckle.Components;
+using Content.Shared.CombatMode;
 using Content.Shared.Cuffs;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Database;
+using Content.Shared.Effects;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -22,8 +25,11 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Pulling.Events;
 using Content.Shared.SS220.Cart.Components;
+using Content.Shared.SS220.Grab;
 using Content.Shared.Standing;
 using Content.Shared.Verbs;
+using Content.Shared.Weapons.Melee;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Physics;
@@ -42,11 +48,17 @@ namespace Content.Shared.Movement.Pulling.Systems;
 public sealed class PullingSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!; // SS220-MIT-pull-visualization
+    [Dependency] private readonly RotateToFaceSystem _rotateTo = default!; // SS220-MIT-pull-visualization
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly ActionBlockerSystem _blocker = default!;
     [Dependency] private readonly AlertsSystem _alertsSystem = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!; // SS220-MIT-pull-visualization
+    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!; // SS220-MIT-pull-visualization
     [Dependency] private readonly MovementSpeedModifierSystem _modifierSystem = default!;
     [Dependency] private readonly SharedJointSystem _joints = default!;
+    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!; // SS220-MIT-pull-visualization
+    [Dependency] private readonly SharedCombatModeSystem _combatMode = default!; // SS220-MIT-pull-visualization
     [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
@@ -54,6 +66,9 @@ public sealed class PullingSystem : EntitySystem
     [Dependency] private readonly HeldSpeedModifierSystem _clothingMoveSpeed = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedVirtualItemSystem _virtual = default!;
+    [Dependency] private readonly SharedGrabSystem _grab = default!; // SS220-Grabs
+
+    static readonly Color СolorCaptureEffect = Color.Yellow; // SS220-MIT-pull-visualization
 
     public override void Initialize()
     {
@@ -69,8 +84,9 @@ public sealed class PullingSystem : EntitySystem
         SubscribeLocalEvent<PullableComponent, EntGotInsertedIntoContainerMessage>(OnPullableContainerInsert);
         SubscribeLocalEvent<PullableComponent, ModifyUncuffDurationEvent>(OnModifyUncuffDuration);
         SubscribeLocalEvent<PullableComponent, StopBeingPulledAlertEvent>(OnStopBeingPulledAlert);
+        SubscribeLocalEvent<PullableComponent, GetInteractingEntitiesEvent>(OnGetInteractingEntities);
 
-        SubscribeLocalEvent<PullerComponent, UpdateMobStateEvent>(OnStateChanged, after: [typeof(MobThresholdSystem)]);
+        SubscribeLocalEvent<PullerComponent, MobStateChangedEvent>(OnStateChanged, after: [typeof(MobThresholdSystem)]);
         SubscribeLocalEvent<PullerComponent, AfterAutoHandleStateEvent>(OnAfterState);
         SubscribeLocalEvent<PullerComponent, EntGotInsertedIntoContainerMessage>(OnPullerContainerInsert);
         SubscribeLocalEvent<PullerComponent, EntityUnpausedEvent>(OnPullerUnpaused);
@@ -154,12 +170,12 @@ public sealed class PullingSystem : EntitySystem
         }
     }
 
-    private void OnStateChanged(EntityUid uid, PullerComponent component, ref UpdateMobStateEvent args)
+    private void OnStateChanged(EntityUid uid, PullerComponent component, ref MobStateChangedEvent args)
     {
         if (component.Pulling == null)
             return;
 
-        if (TryComp<PullableComponent>(component.Pulling, out var comp) && (args.State == MobState.Critical || args.State == MobState.Dead))
+        if (TryComp<PullableComponent>(component.Pulling, out var comp) && (args.NewMobState == MobState.Critical || args.NewMobState == MobState.Dead))
         {
             TryStopPull(component.Pulling.Value, comp);
         }
@@ -175,6 +191,12 @@ public sealed class PullingSystem : EntitySystem
     private void OnGotBuckled(Entity<PullableComponent> ent, ref BuckledEvent args)
     {
         StopPulling(ent, ent);
+    }
+
+    private void OnGetInteractingEntities(Entity<PullableComponent> ent, ref GetInteractingEntitiesEvent args)
+    {
+        if (ent.Comp.Puller != null)
+            args.InteractingEntities.Add(ent.Comp.Puller.Value);
     }
 
     private void OnAfterState(Entity<PullerComponent> ent, ref AfterAutoHandleStateEvent args)
@@ -440,14 +462,14 @@ public sealed class PullingSystem : EntitySystem
         TryStopPull(pullerComp.Pulling.Value, pullableComp, user: player);
     }
 
-    public bool CanPull(EntityUid puller, EntityUid pullableUid, PullerComponent? pullerComp = null)
+    public bool CanPull(EntityUid puller, EntityUid pullableUid, PullerComponent? pullerComp = null, bool ignoreHands = false) // SS220-Grabs | Add ignoreHands arg
     {
         if (!Resolve(puller, ref pullerComp, false))
         {
             return false;
         }
 
-        if (pullerComp.NeedsHands
+        if (!ignoreHands && pullerComp.NeedsHands // SS220-Grabs | new ignoreHands arg
             && !_handsSystem.TryGetEmptyHand(puller, out _)
             && pullerComp.Pulling == null)
         {
@@ -519,7 +541,7 @@ public sealed class PullingSystem : EntitySystem
         if (pullerComp.Pulling == pullableUid)
             return true;
 
-        if (!CanPull(pullerUid, pullableUid))
+        if (!CanPull(pullerUid, pullableUid, ignoreHands: _combatMode.IsInCombatMode(pullerUid))) // SS220-Grabs
             return false;
 
         if (!TryComp(pullerUid, out PhysicsComponent? pullerPhysics) || !TryComp(pullableUid, out PhysicsComponent? pullablePhysics))
@@ -556,6 +578,14 @@ public sealed class PullingSystem : EntitySystem
 
         _interaction.DoContactInteraction(pullableUid, pullerUid);
 
+        // SS220-Grabs-Start
+        if (_combatMode.IsInCombatMode(pullerUid) && _grab.CanGrab(pullerUid, pullableUid, checkCanPull: false))
+        {
+            // Grab logic confirmed
+            return _grab.TryDoGrab(pullerUid, pullableUid);
+        }
+        // SS220-Grabs-End
+
         // Use net entity so it's consistent across client and server.
         pullableComp.PullJointId = $"pull-joint-{GetNetEntity(pullableUid)}";
 
@@ -585,6 +615,21 @@ public sealed class PullingSystem : EntitySystem
 
             _physics.SetFixedRotation(pullableUid, pullableComp.FixedRotationOnPull, body: pullablePhysics);
         }
+        // SS220-MIT-pull-visualization-begin
+        var xform = Transform(pullerUid);
+
+        var pullerPos = _transform.GetWorldPosition(xform);
+        var pulledPos = _transform.GetWorldPosition(pullableUid);
+
+        var localPos = Vector2.Transform(pulledPos, _transform.GetInvWorldMatrix(xform));
+        localPos = xform.LocalRotation.RotateVec(localPos);
+
+        _melee.DoLunge(pullerUid, pullerUid, Angle.Zero, localPos, null);
+        _audio.PlayPredicted(pullerComp.PullSound, pullableUid, pullerUid);
+
+        var filter = Filter.Pvs(pullableUid, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == pullerUid);
+        _colorFlash.RaiseEffect(СolorCaptureEffect, new List<EntityUid> { pullableUid }, filter);
+        // SS220-MIT-pull-visualization-end
 
         // Messaging
         var message = new PullStartedMessage(pullerUid, pullableUid);
@@ -622,5 +667,48 @@ public sealed class PullingSystem : EntitySystem
 
         StopPulling(pullableUid, pullable);
         return true;
+    }
+
+    // SS220-MIT-pull-visualization-begin
+    public override void FrameUpdate(float frameTime)
+    {
+        var query = EntityQueryEnumerator<PullerComponent>();
+        while (query.MoveNext(out var uid, out var pullerComponent))
+        {
+            if (!uid.IsValid() || Deleted(uid))
+                continue;
+
+            if (_combatMode.IsInCombatMode(uid))
+                continue;
+
+            if (GetPulling(uid, pullerComponent) is not { } pulled)
+                continue;
+
+            if (!pulled.IsValid()|| Deleted(uid))
+                continue;
+
+            var pulledPos = _transform.GetMapCoordinates(pulled).Position;
+            var pullerPos = _transform.GetMapCoordinates(uid).Position;
+            var angle = (pulledPos - pullerPos).ToWorldAngle();
+            _rotateTo.TryFaceAngle(uid, angle);
+        }
+    }
+    // SS220-MIT-pull-visualization-end
+
+    /// <summary>
+    /// Copies compatible datafields of <see cref="PullerComponent"/> onto the target entity.
+    /// </summary>
+    /// <param name="source">The entity who's component will be taken.</param>
+    /// <param name="target">The entity to apply it to.</param>
+    public void CopyPullerComponent(Entity<PullerComponent?> source, EntityUid target)
+    {
+        if (!Resolve(source, ref source.Comp))
+            return;
+
+        var targetComp = EnsureComp<PullerComponent>(target);
+        targetComp.ThrowCooldown = source.Comp.ThrowCooldown;
+        targetComp.NeedsHands = source.Comp.NeedsHands;
+        targetComp.PullingAlert = source.Comp.PullingAlert;
+        Dirty(target, targetComp);
     }
 }

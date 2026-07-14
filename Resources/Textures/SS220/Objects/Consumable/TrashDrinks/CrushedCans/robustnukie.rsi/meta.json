@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Sprite made by discord:kuro_0001 (388673708753027083), icon by Dinazewwr (discord) for SS220",
+    "states": [
+        {
+            "name": "icon"
+        },
+        {
+            "name": "inhand-right",
+            "directions": 4
+        },
+        {
+            "name": "inhand-left",
+            "directions": 4
+        }
+    ]
+}

@@ -206,7 +206,7 @@ public sealed partial class AntagSelectionSystem
         var minds = GetAntagMinds(ent);
         foreach (var mind in minds)
         {
-            if (_mind.IsCharacterDeadIc(mind))
+            if (_mind.IsCharacterDeadIc(mind.Comp)) // ss220 add custom antag goals
                 continue;
 
             if (mind.Comp.OriginalOwnedEntity != null)
@@ -226,7 +226,7 @@ public sealed partial class AntagSelectionSystem
         var minds = GetAntagMinds(ent);
         foreach (var mind in minds)
         {
-            if (_mind.IsCharacterDeadIc(mind))
+            if (_mind.IsCharacterDeadIc(mind.Comp)) // ss220 add custom antag goals
                 continue;
 
             numbah++;

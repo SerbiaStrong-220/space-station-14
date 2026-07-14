@@ -9,7 +9,23 @@
   flavor: menacing
   color: "#afdd9a" #change color to a shroom color
   metabolisms:
-    Poison:
+    Digestion:
+      effects:
+      - !type:ChemMiGomyceliumEffect
+      - !type:GenericStatusEffect
+        key: Rave
+        component: Rave
+        type: Add
+        time: 150
+        conditions:
+        - !type:ReagentCondition
+            reagent: TheBloodOfYogg
+            min: 2
+        - !type:ComponentCondition
+            inverted: true
+            components:
+            - CultYogg
+    Bloodstream:
       effects:
       - !type:ChemMiGomyceliumEffect
       - !type:GenericStatusEffect
@@ -35,7 +51,7 @@
   flavor: menacing
   color: "#afdd9a" #change color to a shroom color
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:ChemElixirOfLiberationEffect
       - !type:GenericStatusEffect
@@ -74,7 +90,7 @@
         emote: Scream
         probability: 0.3
   metabolisms:
-    Poison:
+    Bloodstream:
       metabolismRate : 3.00
       effects:
       - !type:HealthChange
@@ -82,6 +98,11 @@
           types:
             Caustic: 10.0
             Heat: 10.0
+      - !type:MovementSpeedModifier
+        walkSpeedModifier: 0.6
+        sprintSpeedModifier: 0.6
+        type: Add
+        time: 10
       - !type:PopupMessage
         type: Local
         visualType: Large
@@ -97,11 +118,11 @@
   group: Narcotics
   desc: reagent-desc-essence-of-the-abyss
   physicalDesc: reagent-physical-desc-gloopy
-  color: "#0D0A10"
+  color: "#6e10da"
   boilingPoint: 444.0
   meltingPoint: 128.0
   metabolisms:
-    Narcotic:
+    Digestion:
       effects:
       - !type:ModifyStatusEffect
         conditions:
@@ -112,6 +133,7 @@
           inverted: true
           components:
           - BibleUser
+          - CultYogg
         effectProto: StatusEffectForcedSleeping
         time: 3
         type: Add
@@ -128,3 +150,35 @@
           inverted: true
           components:
           - BibleUser
+          - CultYogg
+    Bloodstream:
+      effects:
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:ReagentCondition
+          reagent: EssenceOfTheAbyss
+          min: 8
+        - !type:ComponentCondition
+          inverted: true
+          components:
+          - BibleUser
+          - CultYogg
+          - MindShield
+        effectProto: StatusEffectForcedSleeping
+        time: 3
+        type: Add
+      - !type:GenericStatusEffect
+        key: Muted
+        component: Muted
+        type: Add
+        time: 15
+        conditions:
+        - !type:ReagentCondition
+          reagent: EssenceOfTheAbyss
+          min: 10
+        - !type:ComponentCondition
+          inverted: true
+          components:
+          - BibleUser
+          - CultYogg
+          - MindShield
