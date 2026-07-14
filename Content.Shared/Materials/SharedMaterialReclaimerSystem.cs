@@ -73,7 +73,6 @@ public abstract class SharedMaterialReclaimerSystem : EntitySystem
             ("seconds", remaining.Seconds)));
 
         //SS220-ReclaimerEmaggedTime end
-
     }
 
     private void OnEmagged(EntityUid uid, MaterialReclaimerComponent component, ref GotEmaggedEvent args)
