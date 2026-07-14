@@ -286,10 +286,10 @@ public abstract class SharedMaterialReclaimerSystem : EntitySystem
             if (TryComp<EmaggedComponent>(uid, out var emagged))
             {
                 emagged.EmagType &= ~EmagType.Interaction;
-                Dirty(uid, emagged);
-
                 if (emagged.EmagType == EmagType.None)
                     RemComp<EmaggedComponent>(uid);
+                else
+                    Dirty(uid, emagged);
             }
 
             RemComp<MaterialReclaimerEmagTimerComponent>(uid);
