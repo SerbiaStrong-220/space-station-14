@@ -204,8 +204,8 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
             : Loc.GetString("health-analyzer-window-entity-unknown-value-text");
 
         //SS220 LimitationRevive - start
-        DeathLabel.Text = reviveComp != null
-            ? $"{reviveComp.DeathCounter}"
+        DeathLabel.Text = state.CounterDeath != null
+            ? $"{state.CounterDeath}"
             : Loc.GetString("health-analyzer-window-entity-unknown-value-text");
         //SS220 LimitationRevive - end
 
