@@ -41,7 +41,6 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
     private readonly IResourceCache _cache;
     private readonly DamageableSystem _damageable;
     private readonly SharedSolutionContainerSystem _solSystem; // ss220 add reagents to health analyzer
-    private readonly SharedLimitationReviveSystem _limitationRevive; // SS220 clinic death analyzer
 
     // SS220-experience-update-begin
     /// <summary> This value was chosen for better user experience </summary>
@@ -70,7 +69,6 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
         _cache = dependencies.Resolve<IResourceCache>();
         _damageable = _entityManager.System<DamageableSystem>();
         _solSystem = _entityManager.System<SharedSolutionContainerSystem>(); // ss220 add reagents to health analyzer
-        _limitationRevive = _entityManager.System<SharedLimitationReviveSystem>(); // SS220 clinic death analyzer
 
         _randomShuffle.MakeNewRandomChange(SkillIssueReshuffleChance); // SS220-experience-update
     }
@@ -125,7 +123,9 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
 
         // SS220 clinic death analyzer - start
         _entityManager.TryGetComponent<LimitationReviveComponent>(target.Value, out var reviveComp);
-        var clinicalDeathTimeRemaining = _limitationRevive.GetClinicalDeathTimeRemaining(target.Value);
+        _entityManager.TryGetComponent<MobStateComponent>(target.Value, out var mobStateComponent);
+
+        var clinicalDeathTimeRemaining = SharedLimitationReviveSystem.GetClinicalDeathTimeRemaining(reviveComp, mobStateComponent);
 
         if (clinicalDeathTimeRemaining is { } timeLeft)
         {
@@ -210,7 +210,7 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
         //SS220 LimitationRevive - end
 
         //SS220 clinic death analyzer - start
-        if (_entityManager.TryGetComponent<MobStateComponent>(target.Value, out var mobStateComponent))
+        if (mobStateComponent != null)
         {
             StatusLabel.Text = mobStateComponent.CurrentState == MobState.Dead && clinicalDeathTimeRemaining > TimeSpan.Zero
                 ? Loc.GetString("health-analyzer-window-entity-clinical-dead-text")

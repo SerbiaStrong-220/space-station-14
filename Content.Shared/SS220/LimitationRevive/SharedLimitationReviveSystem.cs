@@ -12,18 +12,27 @@ public abstract class SharedLimitationReviveSystem : EntitySystem
 {
     public virtual void IncreaseTimer(EntityUid ent, TimeSpan addTime) { }
 
-    public TimeSpan? GetClinicalDeathTimeRemaining(Entity<LimitationReviveComponent?, MobStateComponent?> ent)
+    /// <summary>
+    /// How long the target may stay dead before its brain takes damage.
+    /// Both components are networked, so this can be called on the client as well.
+    /// </summary>
+    /// <returns>
+    /// Null if the target is alive or cannot be revived at all,
+    /// <see cref="TimeSpan.Zero"/> if the brain damage has already been dealt.
+    /// </returns>
+    public static TimeSpan? GetClinicalDeathTimeRemaining(LimitationReviveComponent? revive, MobStateComponent? mobState)
     {
-        if (!Resolve(ent, ref ent.Comp1, ref ent.Comp2, false))
+        if (revive == null || mobState == null)
             return null;
 
-        if (ent.Comp2.CurrentState != MobState.Dead)
+        if (mobState.CurrentState != MobState.Dead)
             return null;
 
-        if (ent.Comp1.DamageCountingTime is not { } countedTime)
+        // The countdown is nulled out once the brain damage lands, so a dead target without it is already damaged.
+        if (revive.DamageCountingTime is not { } countedTime)
             return TimeSpan.Zero;
 
-        var timeLeft = ent.Comp1.BeforeDamageDelay - countedTime;
+        var timeLeft = revive.BeforeDamageDelay - countedTime;
         return timeLeft > TimeSpan.Zero ? timeLeft : TimeSpan.Zero;
     }
 }

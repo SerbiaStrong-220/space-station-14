@@ -38,7 +38,6 @@ public sealed partial class HealthAnalyzerPrintSystem : EntitySystem
     [Dependency] private SharedAudioSystem _audio = default!; // SS220-health-analyzer-report
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private DamageableSystem _damageable = default!;
-    [Dependency] private SharedLimitationReviveSystem _limitationRevive = default!;
 
     public override void Initialize()
     {
@@ -94,7 +93,8 @@ public sealed partial class HealthAnalyzerPrintSystem : EntitySystem
         string status;
         var builder = new StringBuilder();
         TryComp<LimitationReviveComponent>(target, out var revive);
-        var clinicalDeathTimeRemaining = _limitationRevive.GetClinicalDeathTimeRemaining(target);
+        TryComp<MobStateComponent>(target, out var mobState);
+        var clinicalDeathTimeRemaining = SharedLimitationReviveSystem.GetClinicalDeathTimeRemaining(revive, mobState);
 
         builder.AppendLine(Loc.GetString("health-analyzer-report-section-patient"));
         builder.AppendLine(Loc.GetString("health-analyzer-report-name", ("name", scannedName)));
@@ -107,7 +107,7 @@ public sealed partial class HealthAnalyzerPrintSystem : EntitySystem
             : Loc.GetString("health-analyzer-window-entity-unknown-species-text");
         builder.AppendLine(Loc.GetString("health-analyzer-report-species", ("species", species)));
 
-        if (TryComp<MobStateComponent>(target, out var mobState))
+        if (mobState != null)
         {
             status = mobState.CurrentState == MobState.Dead && clinicalDeathTimeRemaining > TimeSpan.Zero
                 ? Loc.GetString("health-analyzer-window-entity-clinical-dead-text")
