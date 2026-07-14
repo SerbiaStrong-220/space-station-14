@@ -11,7 +11,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.Repairable;
 
-public sealed class MultiRepairableSystem : EntitySystem
+public sealed partial class MultiRepairableSystem : EntitySystem
 {
     [Dependency] private SharedToolSystem _toolSystem = default!;
     [Dependency] private DamageableSystem _damageableSystem = default!;
