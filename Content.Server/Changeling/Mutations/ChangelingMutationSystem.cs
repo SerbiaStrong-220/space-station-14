@@ -421,6 +421,7 @@ public sealed partial class ChangelingMutationSystem : EntitySystem
         targetStore.UseDynamicPrices = oldStore.UseDynamicPrices;
         targetStore.BuySuccessSound = oldStore.BuySuccessSound;
         _store.RetargetBoughtEntities(targetStore, target);
+        _store.RefreshAllListings(targetStore);
 
         oldStore.BoughtEntities.Clear();
         RemComp<StoreComponent>(source);

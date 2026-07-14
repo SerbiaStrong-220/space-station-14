@@ -4,6 +4,7 @@ using Content.Shared.Changeling;
 using Content.Shared.Changeling.Components;
 using Content.Shared.Changeling.Mutations;
 using Content.Shared.Changeling.Systems;
+using Content.Shared.Clumsy;
 using Content.Shared.Alert;
 using Content.Shared.FixedPoint;
 using Content.Server.Store.Systems;
@@ -58,6 +59,9 @@ public sealed class ChangelingResourceSystem : EntitySystem
 
     private void OnComponentInit(Entity<ChangelingResourceComponent> ent, ref ComponentInit args)
     {
+        // A changeling's control over its own anatomy supersedes the clown job's clumsiness.
+        RemComp<ClumsyComponent>(ent);
+
         ent.Comp.MaxChemicals = FixedPoint2.Max(FixedPoint2.Zero, ent.Comp.MaxChemicals);
         ent.Comp.Chemicals = FixedPoint2.Clamp(ent.Comp.Chemicals, FixedPoint2.Zero, ent.Comp.MaxChemicals);
         ent.Comp.ChemicalRegenerationAmount = FixedPoint2.Max(
