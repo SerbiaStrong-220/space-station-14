@@ -7,6 +7,15 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.Materials;
 
+//SS220-ReclaimerEmaggedTime begin
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentPause]
+public sealed partial class MaterialReclaimerEmagTimerComponent : Component
+{
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan EndTime;
+}
+//SS220-ReclaimerEmaggedTime end
+
 /// <summary>
 /// This is a machine that handles converting entities
 /// into the raw materials and chemicals that make them up.
@@ -137,6 +146,11 @@ public sealed partial class MaterialReclaimerComponent : Component
     /// </remarks>
     [DataField, AutoNetworkedField]
     public int ItemsProcessed;
+
+    //SS220-ReclaimerEmaggedTime begin
+    [DataField]
+    public TimeSpan EmagDuration = TimeSpan.FromMinutes(5);
+    //SS220-ReclaimerEmaggedTime end
 }
 
 [NetSerializable, Serializable]
