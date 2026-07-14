@@ -56,8 +56,8 @@ public sealed partial class ChangelingApexTrackerWindow : FancyWindow
                 _prototype.TryIndex(iconId, out jobIcon);
 
             var jobName = jobIcon?.LocalizedJobName ?? string.Empty;
-            if (!target.Name.Contains(_searchText, StringComparison.CurrentCultureIgnoreCase) &&
-                !jobName.Contains(_searchText, StringComparison.CurrentCultureIgnoreCase))
+            if (!target.Name.Contains(_searchText, StringComparison.OrdinalIgnoreCase) &&
+                !jobName.Contains(_searchText, StringComparison.OrdinalIgnoreCase))
             {
                 continue;
             }
