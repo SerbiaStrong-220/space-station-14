@@ -255,6 +255,7 @@
         Heat: 2 #per second, scales with temperature & other constants
   - type: Temperature
     currentTemperature: 253.15 # 253.15 K = -20 °C
+    defaultTemperature: 253.15 # 253.15 K = -20 °C
     specificHeat: 42
   - type: TemperatureSpeed
     thresholds:
