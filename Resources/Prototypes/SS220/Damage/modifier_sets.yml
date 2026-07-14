@@ -221,7 +221,7 @@
     Piercing: 8
     Heat: 5
 
-    #xeno-buff-update-end
+# xeno-buff-update-end
 
 - type: damageModifierSet
   id: SharkDragon
