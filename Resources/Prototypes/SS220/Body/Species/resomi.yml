@@ -64,6 +64,7 @@
   name: resomi appearance
   parent: BaseSpeciesAppearance
   id: AppearanceResomi
+  categories: [ HideSpawnMenu ]
   components:
   - type: Inventory
     speciesId: resomi
