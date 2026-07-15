@@ -1,0 +1,6 @@
+pirate-objective-issuer = Pirate Crew
+pirate-objective-loot-title = Earn 1,000,000 credits
+pirate-objective-loot-description = Sell loot through the pirate console. Revenue: {$current} / {$target} credits.
+pirate-objective-captives-title = Capture crew members
+pirate-objective-captives-description = Bring these crew members to the pirate base or shuttle: {$targets}. Progress: {$current} / {$target}.
+pirate-objective-captives-awaiting-description = Waiting for an eligible crew member to capture.

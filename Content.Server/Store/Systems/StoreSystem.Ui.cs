@@ -89,6 +89,11 @@ public sealed partial class StoreSystem
         if (!ListingHasCategory(listing, component.Categories))
             return;
 
+        // SS220 pirate market begin
+        if (listing.PurchaseLimit is { } purchaseLimit && listing.PurchaseAmount >= purchaseLimit)
+            return;
+        // SS220 pirate market end
+
         //condition checking because why not
         if (listing.Conditions != null)
         {

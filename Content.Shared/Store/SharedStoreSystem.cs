@@ -75,6 +75,9 @@ public abstract partial class SharedStoreSystem : EntitySystem
 
     private void OnAfterInteract(EntityUid uid, CurrencyComponent component, AfterInteractEvent args)
     {
+        if (_netManager.IsClient) // SS220 pirate market
+            return;
+
         if (args.Handled || !args.CanReach || args.Target is not { } target)
             return;
 

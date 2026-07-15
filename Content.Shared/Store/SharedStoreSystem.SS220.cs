@@ -1,5 +1,6 @@
 ﻿using Content.Shared.SS220.Store;
 using Content.Shared.Store.Components;
+using Robust.Shared.Network;
 
 namespace Content.Shared.Store;
 
@@ -9,8 +10,13 @@ namespace Content.Shared.Store;
 /// </summary>
 public abstract partial class SharedStoreSystem : EntitySystem
 {
+    [Dependency] private INetManager _netManager = default!;
+
     private void OnInsertCurrencyDoAfter(Entity<StoreComponent> store, ref InsertCurrencyDoAfterEvent args)
     {
+        if (_netManager.IsClient)
+            return;
+
         if (args.Handled || args.Cancelled || args.Used is not { } used)
             return;
 

@@ -1,0 +1,875 @@
+- type: entity
+  id: PirateLootPad
+  parent: CargoPallet
+  name: pirate loot pad
+  description: Sell stolen goods here for physical currency.
+  components:
+  - type: PirateLootPad
+
+- type: entity
+  id: PirateLootConsole
+  parent: BaseComputerAiAccess
+  name: pirate loot console
+  description: Appraises and sells stolen goods for physical currency.
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: transfer
+    - map: ["computerLayerKeys"]
+      state: generic_keys
+    - map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      state: generic_panel_open
+  - type: Anchorable
+    flags:
+    - Anchorable
+  - type: PirateLootConsole
+  - type: ActivatableUI
+    key: enum.PirateLootConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.PirateLootConsoleUiKey.Key:
+        type: PirateLootConsoleBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+
+- type: entity
+  id: PirateMarketConsole
+  parent: BaseComputer
+  name: pirate market console
+  description: A cash-only black market terminal.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/computers.rsi
+    state: cargo
+  - type: PirateMarketConsole
+  - type: ActivatableUI
+    key: enum.StoreUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: Store
+    name: pirate-market-store-name
+    categories:
+    - PirateMarketWeapons
+    - PirateMarketAmmo
+    - PirateMarketExplosives
+    - PirateMarketMedical
+    - PirateMarketImplants
+    - PirateMarketAllies
+    - PirateMarketEquipment
+    - PirateMarketMisc
+    currencyWhitelist:
+    - PirateCredit
+    balance:
+      PirateCredit: 0
+    expectedFaction:
+    - Syndicate
+
+- type: entity
+  id: PirateFulton
+  parent: Fulton
+  name: pirate fulton
+  description: A rapid extraction balloon.
+  components:
+  - type: Fulton
+    applyDuration: 1
+    duration: 20
+  - type: Sprite
+    sprite: SS220/Objects/Tools/pirate_fulton.rsi
+    state: extraction_pack
+
+- type: entity
+  id: PirateRecruitmentContract
+  parent: BaseItem
+  name: pirate recruitment contract
+  description: An offer to join a pirate crew.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/bureaucracy.rsi
+    layers:
+    - state: paper
+    - state: paper_words
+      map: ["enum.PaperVisualLayers.Writing"]
+      visible: true
+    - state: paper_stamp-generic
+      map: ["enum.PaperVisualLayers.Stamp"]
+      visible: false
+  - type: Item
+    size: Tiny
+  - type: Tag
+    tags:
+    - Document
+    - Paper
+  - type: Appearance
+  - type: Paper
+    content: pirate-recruitment-contract-content
+    editingDisabled: true
+  - type: PaperLabelType
+  - type: ActivatableUI
+    key: enum.PaperUiKey.Key
+    requiresComplex: false
+  - type: UserInterface
+    interfaces:
+      enum.PaperUiKey.Key:
+        type: PaperBoundUserInterface
+  - type: PaperVisuals
+  - type: PirateRecruitmentContract
+
+- type: entity
+  id: SpawnPointPirateCaptain
+  parent: MarkerBase
+  name: pirate captain spawn point
+  components:
+  - type: SpawnPoint
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+    - sprite: Mobs/Species/Skeleton/parts.rsi
+      state: skull_icon
+
+- type: entity
+  id: SpawnPointPirateCrew
+  parent: MarkerBase
+  name: pirate crew spawn point
+  components:
+  - type: SpawnPoint
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+    - sprite: Mobs/Species/Skeleton/parts.rsi
+      state: skull_icon
+
+- type: entity
+  categories: [ HideSpawnMenu, Spawner ]
+  id: SpawnPointPirateCaptainExpansion
+  parent: BaseAntagSpawner
+  name: pirate-ghost-role-captain-name
+  components:
+  - type: GhostRole
+    name: pirate-ghost-role-captain-name
+    description: pirate-ghost-role-captain-description
+    rules: pirate-expansion-briefing
+    mindRoles:
+    - MindRolePirateCaptainExpansion
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+    - sprite: Mobs/Species/Skeleton/parts.rsi
+      state: skull_icon
+
+- type: entity
+  categories: [ HideSpawnMenu, Spawner ]
+  id: SpawnPointPirateCrewExpansion
+  parent: BaseAntagSpawner
+  name: pirate-ghost-role-crew-name
+  components:
+  - type: GhostRole
+    name: pirate-ghost-role-crew-name
+    description: pirate-ghost-role-crew-description
+    rules: pirate-expansion-briefing
+    mindRoles:
+    - MindRolePirateExpansion
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+    - sprite: Mobs/Species/Skeleton/parts.rsi
+      state: skull_icon
+
+- type: startingGear
+  id: PirateExpansionCrewGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitPirate
+    shoes: ClothingShoesBootsLaceup
+    head: ClothingHeadBandBlack
+    id: PiratePDA
+    back: ClothingBackpackSatchelLeather
+    belt: ClothingBeltUtility
+    ears: ClothingHeadsetFreelance
+    pocket1: AppraisalTool
+    pocket2: HandheldGPSBasic
+  inhand:
+  - Cutlass
+
+- type: startingGear
+  id: PirateExpansionCaptainGear
+  parent: PirateExpansionCrewGear
+  equipment:
+    head: ClothingHeadHatPirate
+    ears: ClothingHeadsetAltFreelancer
+    neck: ClothingNeckCloakPirateCap
+  storage:
+    back:
+    - SpaceCash20000
+    - PirateRecruitmentContract
+
+- type: currency
+  id: PirateCredit
+  displayName: pirate-market-currency
+  canWithdraw: false
+
+- type: storeCategory
+  id: PirateMarketWeapons
+  name: pirate-market-category-weapons
+  priority: 0
+
+- type: storeCategory
+  id: PirateMarketAmmo
+  name: pirate-market-category-ammo
+  priority: 1
+
+- type: storeCategory
+  id: PirateMarketExplosives
+  name: pirate-market-category-explosives
+  priority: 2
+
+- type: storeCategory
+  id: PirateMarketMedical
+  name: pirate-market-category-medical
+  priority: 3
+
+- type: storeCategory
+  id: PirateMarketImplants
+  name: pirate-market-category-implants
+  priority: 4
+
+- type: storeCategory
+  id: PirateMarketAllies
+  name: pirate-market-category-allies
+  priority: 5
+
+- type: listing
+  id: PirateMarketCutlass
+  productEntity: Cutlass
+  cost:
+    PirateCredit: 1650
+  categories:
+  - PirateMarketWeapons
+
+- type: listing
+  id: PirateMarketKnuckleDusters
+  productEntity: ClothingHandsKnuckleDusters
+  cost:
+    PirateCredit: 2200
+  categories:
+  - PirateMarketWeapons
+
+- type: listing
+  id: PirateMarketMosin
+  productEntity: WeaponSniperMosin
+  cost:
+    PirateCredit: 2200
+  categories:
+  - PirateMarketWeapons
+
+- type: listing
+  id: PirateMarketRevolver
+  productEntity: WeaponRevolverPirate
+  cost:
+    PirateCredit: 2750
+  categories:
+  - PirateMarketWeapons
+
+- type: listing
+  id: PirateMarketFlintlock
+  productEntity: WeaponPistolFlintlock
+  cost:
+    PirateCredit: 3300
+  categories:
+  - PirateMarketWeapons
+
+- type: listing
+  id: PirateMarketSawnShotgun
+  productEntity: WeaponShotgunSawn
+  cost:
+    PirateCredit: 3850
+  categories:
+  - PirateMarketWeapons
+
+- type: listing
+  id: PirateMarketBlunderbuss
+  productEntity: WeaponShotgunBlunderbuss
+  cost:
+    PirateCredit: 3000
+  categories:
+  - PirateMarketWeapons
+
+- type: listing
+  id: PirateMarketCannon
+  productEntity: WeaponLauncherPirateCannon
+  cost:
+    PirateCredit: 4950
+  categories:
+  - PirateMarketWeapons
+
+- type: listing
+  id: PirateMarketPython
+  productEntity: WeaponRevolverPython
+  cost:
+    PirateCredit: 5500
+  categories:
+  - PirateMarketWeapons
+
+- type: listing
+  id: PirateMarketLaserGun
+  productEntity: WeaponLaserGun
+  cost:
+    PirateCredit: 8800
+  categories:
+  - PirateMarketWeapons
+
+- type: listing
+  id: PirateMarketTurretToolbox
+  productEntity: ToolboxElectricalTurretFilled
+  cost:
+    PirateCredit: 9350
+  categories:
+  - PirateMarketWeapons
+
+- type: listing
+  id: PirateMarketEnergyCutlass
+  productEntity: EnergyCutlass
+  cost:
+    PirateCredit: 12100
+  categories:
+  - PirateMarketWeapons
+  purchaseLimit: 3
+
+- type: listing
+  id: PirateMarketZipties
+  productEntity: Zipties
+  cost:
+    PirateCredit: 450
+  categories:
+  - PirateMarketAmmo
+
+- type: listing
+  id: PirateMarketRifleLoader
+  productEntity: SpeedLoaderLightRifle
+  cost:
+    PirateCredit: 550
+  categories:
+  - PirateMarketAmmo
+
+- type: listing
+  id: PirateMarketMagnumLoader
+  productEntity: SpeedLoaderMagnum
+  cost:
+    PirateCredit: 650
+  categories:
+  - PirateMarketAmmo
+
+- type: listing
+  id: PirateMarketShotgunMagazine
+  productEntity: MagazineShotgun
+  cost:
+    PirateCredit: 900
+  categories:
+  - PirateMarketAmmo
+
+- type: listing
+  id: PirateMarketCannonBall
+  productEntity: CannonBall
+  cost:
+    PirateCredit: 1000
+  categories:
+  - PirateMarketAmmo
+
+- type: listing
+  id: PirateMarketGrapeshotCannonBall
+  productEntity: CannonBallGrapeshot
+  cost:
+    PirateCredit: 1800
+  categories:
+  - PirateMarketAmmo
+
+- type: listing
+  id: PirateMarketGlassshotCannonBall
+  productEntity: CannonBallGlassshot
+  cost:
+    PirateCredit: 2200
+  categories:
+  - PirateMarketAmmo
+
+- type: listing
+  id: PirateMarketEmpCannonBall
+  productEntity: CannonBallEMP
+  cost:
+    PirateCredit: 5000
+  categories:
+  - PirateMarketAmmo
+
+- type: listing
+  id: PirateMarketMagnumBox
+  productEntity: MagazineBoxMagnum
+  cost:
+    PirateCredit: 1300
+  categories:
+  - PirateMarketAmmo
+
+- type: listing
+  id: PirateMarketLethalshotBox
+  productEntity: BoxLethalshot
+  cost:
+    PirateCredit: 1750
+  categories:
+  - PirateMarketAmmo
+
+- type: listing
+  id: PirateMarketAntimaterielBox
+  productEntity: MagazineBoxAntiMateriel
+  cost:
+    PirateCredit: 2200
+  categories:
+  - PirateMarketAmmo
+
+- type: listing
+  id: PirateMarketFireBomb
+  productEntity: FireBomb
+  cost:
+    PirateCredit: 1000
+  categories:
+  - PirateMarketExplosives
+
+- type: listing
+  id: PirateMarketPipeBomb
+  productEntity: PipeBomb
+  cost:
+    PirateCredit: 1350
+  categories:
+  - PirateMarketExplosives
+
+- type: listing
+  id: PirateMarketSmokeGrenade
+  productEntity: SmokeGrenade
+  cost:
+    PirateCredit: 1650
+  categories:
+  - PirateMarketExplosives
+
+- type: listing
+  id: PirateMarketEmpGrenade
+  productEntity: EmpGrenade
+  cost:
+    PirateCredit: 1800
+  categories:
+  - PirateMarketExplosives
+
+- type: listing
+  id: PirateMarketFlashbang
+  productEntity: GrenadeFlashBang
+  cost:
+    PirateCredit: 1200
+  categories:
+  - PirateMarketExplosives
+
+- type: listing
+  id: PirateMarketSeismicCharge
+  productEntity: SeismicCharge
+  cost:
+    PirateCredit: 2000
+  categories:
+  - PirateMarketExplosives
+  purchaseLimit: 8
+
+- type: listing
+  id: PirateMarketC4
+  productEntity: C4
+  cost:
+    PirateCredit: 2500
+  categories:
+  - PirateMarketExplosives
+  purchaseLimit: 5
+
+- type: listing
+  id: PirateMarketMedkit
+  productEntity: MedkitFilled
+  cost:
+    PirateCredit: 1650
+  categories:
+  - PirateMarketMedical
+
+- type: listing
+  id: PirateMarketAdvancedMedkit
+  productEntity: MedkitAdvancedFilled
+  cost:
+    PirateCredit: 4400
+  categories:
+  - PirateMarketMedical
+
+- type: listing
+  id: PirateMarketCombatMedkit
+  productEntity: MedkitCombatFilled
+  cost:
+    PirateCredit: 8800
+  categories:
+  - PirateMarketMedical
+  purchaseLimit: 3
+
+- type: listing
+  id: PirateMarketStimpackMini
+  productEntity: StimpackMini
+  cost:
+    PirateCredit: 2500
+  categories:
+  - PirateMarketMedical
+
+- type: listing
+  id: PirateMarketStimpack
+  productEntity: Stimpack
+  cost:
+    PirateCredit: 7000
+  categories:
+  - PirateMarketMedical
+  purchaseLimit: 3
+
+- type: listing
+  id: PirateMarketFreedomImplanter
+  name: pirate-market-freedom-implanter-name
+  description: pirate-market-freedom-implanter-desc
+  productEntity: FreedomImplanter
+  cost:
+    PirateCredit: 6600
+  categories:
+  - PirateMarketImplants
+  purchaseLimit: 2
+
+- type: listing
+  id: PirateMarketMicroBombImplanter
+  name: pirate-market-micro-bomb-implanter-name
+  description: pirate-market-micro-bomb-implanter-desc
+  productEntity: MicroBombImplanter
+  cost:
+    PirateCredit: 8800
+  categories:
+  - PirateMarketImplants
+  purchaseLimit: 2
+
+- type: listing
+  id: PirateMarketSpaceCarp
+  productEntity: DehydratedSpaceCarp
+  cost:
+    PirateCredit: 1650
+  categories:
+  - PirateMarketAllies
+
+- type: listing
+  id: PirateMarketMonkeyReinforcement
+  name: pirate-market-monkey-reinforcement-name
+  description: pirate-market-monkey-reinforcement-desc
+  productEntity: ReinforcementRadioSyndicateAncestor
+  cost:
+    PirateCredit: 4500
+  categories:
+  - PirateMarketAllies
+  purchaseLimit: 1
+
+- type: listing
+  id: PirateMarketMercenaryReinforcement
+  name: pirate-market-mercenary-reinforcement-name
+  description: pirate-market-mercenary-reinforcement-desc
+  productEntity: ReinforcementRadioSyndicate
+  cost:
+    PirateCredit: 10000
+  categories:
+  - PirateMarketAllies
+  purchaseLimit: 1
+
+- type: storeCategory
+  id: PirateMarketEquipment
+  name: pirate-market-category-equipment
+  priority: 6
+
+- type: storeCategory
+  id: PirateMarketMisc
+  name: pirate-market-category-misc
+  priority: 7
+
+- type: listing
+  id: PirateMarketPickaxe
+  productEntity: Pickaxe
+  cost:
+    PirateCredit: 200
+  categories:
+  - PirateMarketEquipment
+
+- type: listing
+  id: PirateMarketPodWarsHelmet
+  productEntity: ClothingHeadHelmetPodWars
+  cost:
+    PirateCredit: 1300
+  categories:
+  - PirateMarketEquipment
+
+- type: listing
+  id: PirateMarketGrapplingGun
+  productEntity: WeaponGrapplingGun
+  cost:
+    PirateCredit: 1650
+  categories:
+  - PirateMarketEquipment
+
+- type: listing
+  id: PirateMarketMagboots
+  productEntity: ClothingShoesBootsMag
+  cost:
+    PirateCredit: 2200
+  categories:
+  - PirateMarketEquipment
+
+- type: listing
+  id: PirateMarketArmorVest
+  productEntity: ClothingOuterArmorBasic
+  cost:
+    PirateCredit: 2750
+  categories:
+  - PirateMarketEquipment
+
+- type: listing
+  id: PirateMarketChameleonSet
+  name: pirate-market-chameleon-set-name
+  description: pirate-market-chameleon-set-desc
+  productEntity: ClothingBackpackChameleonFillAgent
+  cost:
+    PirateCredit: 10000
+  categories:
+  - PirateMarketEquipment
+  purchaseLimit: 1
+
+- type: listing
+  id: PirateMarketAgentId
+  productEntity: AgentIDCard
+  cost:
+    PirateCredit: 6500
+  categories:
+  - PirateMarketEquipment
+  purchaseLimit: 2
+
+- type: listing
+  id: PirateMarketEmag
+  productEntity: Emag
+  cost:
+    PirateCredit: 4500
+  categories:
+  - PirateMarketEquipment
+  purchaseLimit: 2
+
+- type: listing
+  id: PirateMarketMiniJetpack
+  productEntity: JetpackMiniFilled
+  cost:
+    PirateCredit: 3300
+  categories:
+  - PirateMarketEquipment
+
+- type: listing
+  id: PirateMarketWebbing
+  productEntity: ClothingBeltMilitaryWebbing
+  cost:
+    PirateCredit: 3300
+  categories:
+  - PirateMarketEquipment
+
+- type: listing
+  id: PirateMarketPodWarsArmor
+  productEntity: ClothingOuterArmorPodWars
+  cost:
+    PirateCredit: 3850
+  categories:
+  - PirateMarketEquipment
+
+- type: listing
+  id: PirateMarketPirateEVA
+  productEntity: ClothingOuterHardsuitPirateEVA
+  cost:
+    PirateCredit: 4400
+  categories:
+  - PirateMarketEquipment
+
+- type: listing
+  id: PirateMarketSyndicateMagboots
+  productEntity: ClothingShoesBootsMagSyndie
+  cost:
+    PirateCredit: 6600
+  categories:
+  - PirateMarketEquipment
+  purchaseLimit: 2
+
+- type: listing
+  id: PirateMarketSyndicateEVABundle
+  productEntity: ClothingBackpackDuffelSyndicateEVABundle
+  cost:
+    PirateCredit: 7150
+  categories:
+  - PirateMarketEquipment
+
+- type: listing
+  id: PirateMarketPirateCaptainHardsuit
+  productEntity: ClothingOuterHardsuitPirateCap
+  cost:
+    PirateCredit: 9900
+  categories:
+  - PirateMarketEquipment
+
+- type: listing
+  id: PirateMarketTacticalVest
+  productEntity: ClothingOuterVestWeb
+  cost:
+    PirateCredit: 11000
+  categories:
+  - PirateMarketEquipment
+  purchaseLimit: 1
+
+- type: listing
+  id: PirateMarketHat
+  productEntity: ClothingHeadHatPirate
+  cost:
+    PirateCredit: 200
+  categories:
+  - PirateMarketMisc
+
+- type: listing
+  id: PirateMarketHandyFlag
+  productEntity: PirateHandyFlag
+  cost:
+    PirateCredit: 250
+  categories:
+  - PirateMarketMisc
+
+- type: listing
+  id: PirateMarketCaptainCloak
+  productEntity: ClothingNeckCloakPirateCap
+  cost:
+    PirateCredit: 350
+  categories:
+  - PirateMarketMisc
+
+- type: listing
+  id: PirateMarketMysteryLighter
+  productEntity: MysteryLighterBox
+  cost:
+    PirateCredit: 550
+  categories:
+  - PirateMarketMisc
+  purchaseLimit: 1
+
+- type: listing
+  id: PirateMarketBodyBag
+  productEntity: BodyBagFolded
+  cost:
+    PirateCredit: 800
+  categories:
+  - PirateMarketMisc
+
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRolePirateExpansion
+  name: pirate crew member
+  components:
+  - type: MindRole
+    roleType: TeamAntagonist
+    subtype: pirate-role-name
+  - type: PirateCrewRole
+  - type: RoleBriefing
+    briefing: pirate-expansion-briefing
+
+- type: entity
+  parent: MindRolePirateExpansion
+  id: MindRolePirateCaptainExpansion
+  name: pirate captain
+  components:
+  - type: MindRole
+    roleType: TeamAntagonist
+    subtype: pirate-captain-role-name
+
+- type: entity
+  parent: BaseObjective
+  id: PirateLootValueObjective
+  name: pirate-objective-loot-title
+  description: pirate-objective-loot-description
+  components:
+  - type: Objective
+    difficulty: 1
+    issuer: pirate-objective-issuer
+    icon:
+      sprite: Objects/Economy/cash.rsi
+      state: cash_1000000
+  - type: PirateLootValueCondition
+    target: 1000000
+
+- type: entity
+  parent: BaseObjective
+  id: PirateCrewCaptureObjective
+  name: pirate-objective-captives-title
+  description: pirate-objective-captives-description
+  components:
+  - type: Objective
+    difficulty: 1
+    issuer: pirate-objective-issuer
+    icon:
+      sprite: Objects/Misc/handcuffs.rsi
+      state: handcuff
+  - type: PirateCrewCaptureCondition
+    target: 3
+
+- type: entity
+  id: PirateExpansionRule
+  parent: BaseGameRule
+  components:
+  - type: PirateGameRule
+  - type: AntagObjectives
+    objectives:
+    - PirateLootValueObjective
+    - PirateCrewCaptureObjective
+  - type: RuleGrids
+  - type: LoadMapRule
+    mapPath: /Maps/SS220/Pirates/pirate_expansion.yml
+  - type: AntagLoadProfileRule
+  - type: AntagSelection
+    selectionTime: PrePlayerSpawn
+    definitions:
+    - spawnerPrototype: SpawnPointPirateCaptainExpansion
+      pickPlayer: false
+      min: 1
+      max: 1
+      playerRatio: 100
+      startingGear: PirateExpansionCaptainGear
+      roleLoadout:
+      - RoleSurvivalEVA
+      components:
+      - type: NpcFactionMember
+        factions: [ Syndicate ]
+      mindRoles: [ MindRolePirateCaptainExpansion ]
+    - spawnerPrototype: SpawnPointPirateCrewExpansion
+      pickPlayer: false
+      min: 4
+      max: 4
+      playerRatio: 100
+      startingGear: PirateExpansionCrewGear
+      roleLoadout:
+      - RoleSurvivalEVA
+      components:
+      - type: NpcFactionMember
+        factions: [ Syndicate ]
+      mindRoles: [ MindRolePirateExpansion ]
+
+- type: gamePreset
+  id: PirateExpansion
+  alias:
+  - pirates
+  name: pirate-expansion-title
+  description: pirate-expansion-description
+  showInVote: false
+  rules:
+  - PirateExpansionRule
