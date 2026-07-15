@@ -282,7 +282,7 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
 
     private bool IsInDisposableUnit(EntityUid uid)
     {
-        return _container.TryGetContainingContainer((uid, null, null), out var container) &&
+        return _container.TryGetContainingContainer(uid, out var container) &&
                container.ID == DisposalUnitComponent.ContainerId &&
                HasComp<DisposalUnitComponent>(container.Owner);
     }

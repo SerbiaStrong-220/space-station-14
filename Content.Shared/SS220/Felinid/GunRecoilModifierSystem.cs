@@ -242,7 +242,7 @@ public sealed partial class GunRecoilModifierSystem : EntitySystem
         _blocker.UpdateCanMove(ent.Owner);
     }
 
-    public RecoilProfile? GetRecoilProfile(List<(EntityUid? Uid, IShootable Shootable)> ammo)
+    private RecoilProfile? GetRecoilProfile(List<(EntityUid? Uid, IShootable Shootable)> ammo)
     {
         foreach (var (uid, shootable) in ammo)
         {

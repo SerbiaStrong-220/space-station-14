@@ -45,13 +45,13 @@ public sealed partial class DisposalTubeSystem
         ref DisposalPipeExtractionDoAfterEvent args)
     {
         if (args.Cancelled ||
-            !TryFindActivePipecrawler(ent.Owner, out var felinidUid, out _) ||
+            !TryFindActivePipecrawler(ent.Owner, out var felinidUid, out var pipecrawl) ||
             felinidUid is not { } crawler)
         {
             return;
         }
 
-        _felinidPipecrawlSystem.TryForceExitPipecrawl(crawler, false);
+        _felinidPipecrawlSystem.TryForceExitPipecrawl((crawler, pipecrawl), false);
     }
 
     private bool TryFindActivePipecrawler(

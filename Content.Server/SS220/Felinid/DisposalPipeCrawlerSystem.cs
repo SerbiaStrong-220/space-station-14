@@ -553,7 +553,7 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
         if (!TryComp<PhysicsComponent>(uid, out var physics))
             return;
 
-        var isContained = _container.TryGetContainingContainer((uid, null, null), out _);
+        var isContained = _container.TryGetContainingContainer(uid, out _);
         _physics.SetLinearVelocity(uid, Vector2.Zero, body: physics);
         _physics.SetCanCollide(uid, !active && !isContained, body: physics);
     }

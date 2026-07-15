@@ -8,6 +8,7 @@ using Content.Shared.Nutrition.Components;
 using Content.Shared.Projectiles;
 using Content.Shared.SS220.Felinid.Components;
 using Content.Shared.Weapons.Hitscan.Events;
+using Robust.Shared.Maths;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Random;
 
@@ -68,7 +69,7 @@ public sealed partial class DodgeChanceSystem : EntitySystem
             _mobThresholds.TryGetDeadPercentage(ent.Owner, _damageable.GetTotalDamage((ent.Owner, damageable)), out FixedPoint2? healthPercent))
         {
             var damageFraction = healthPercent.Value.Float();
-            chance *= float.Lerp(1f, ent.Comp.CriticalHealthMultiplier, damageFraction);
+            chance *= MathHelper.Lerp(1f, ent.Comp.CriticalHealthMultiplier, damageFraction);
         }
 
         if (TryComp<HungerComponent>(ent.Owner, out var hunger))

@@ -20,6 +20,8 @@ public sealed partial class DisposalPipeCrawlerOverlay : Overlay
     private SpriteSystem _sprite;
     private TransformSystem _transform;
     private readonly HashSet<Entity<DisposalPipeCrawlerTubeComponent>> _nearbyTubes = new();
+    private readonly HashSet<Entity<DisposalPipeCrawlerContentsComponent>> _nearbyContents = new();
+    private readonly HashSet<Entity<DisposalPipeCrawlerComponent>> _nearbyCrawlers = new();
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
@@ -75,10 +77,12 @@ public sealed partial class DisposalPipeCrawlerOverlay : Overlay
                 revealPipeLayer: true);
         }
 
-        var contents = _lookup.GetEntitiesInRange<DisposalPipeCrawlerContentsComponent>(
+        _nearbyContents.Clear();
+        _lookup.GetEntitiesInRange(
             playerXform.Coordinates,
-            pipecrawl.VisionRange);
-        foreach (var (uid, _) in contents)
+            pipecrawl.VisionRange,
+            _nearbyContents);
+        foreach (var (uid, _) in _nearbyContents)
         {
             if (!_entity.TryGetComponent<SpriteComponent>(uid, out var sprite) ||
                 !_entity.TryGetComponent<TransformComponent>(uid, out var xform))
@@ -89,11 +93,21 @@ public sealed partial class DisposalPipeCrawlerOverlay : Overlay
             RenderIfNearby((uid, sprite, xform), mapId, playerPosition, revealRangeSquared, eyeRotation, handle);
         }
 
-        var crawlers = _entity.EntityQueryEnumerator<DisposalPipeCrawlerComponent, SpriteComponent, TransformComponent>();
-        while (crawlers.MoveNext(out var uid, out var otherPipecrawl, out var sprite, out var xform))
+        _nearbyCrawlers.Clear();
+        _lookup.GetEntitiesInRange(
+            playerXform.Coordinates,
+            pipecrawl.VisionRange,
+            _nearbyCrawlers);
+        foreach (var (uid, otherPipecrawl) in _nearbyCrawlers)
         {
             if (uid == player || !otherPipecrawl.InsidePipe)
                 continue;
+
+            if (!_entity.TryGetComponent<SpriteComponent>(uid, out var sprite) ||
+                !_entity.TryGetComponent<TransformComponent>(uid, out var xform))
+            {
+                continue;
+            }
 
             RenderIfNearby((uid, sprite, xform), mapId, playerPosition, revealRangeSquared, eyeRotation, handle);
         }
