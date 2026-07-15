@@ -22,4 +22,3 @@ public sealed class PirateLootSellMessage : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
 public sealed class PirateLootAppraiseMessage : BoundUserInterfaceMessage;
-

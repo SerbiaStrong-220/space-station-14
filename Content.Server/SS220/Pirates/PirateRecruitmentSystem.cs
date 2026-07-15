@@ -1,3 +1,4 @@
+using Content.Server.Antag;
 using Content.Server.EUI;
 using Content.Server.Mind;
 using Content.Server.Roles;
@@ -23,6 +24,9 @@ namespace Content.Server.SS220.Pirates;
 
 public sealed partial class PirateRecruitmentSystem : EntitySystem
 {
+    private static readonly EntProtoId PirateMindRole = "MindRolePirateExpansion";
+    private static readonly EntProtoId LootObjective = "PirateLootValueObjective";
+    private static readonly EntProtoId CaptureObjective = "PirateCrewCaptureObjective";
     private static readonly ProtoId<NpcFactionPrototype> PirateFaction = "Syndicate";
     private static readonly ProtoId<JobPrototype> BrigmedicJob = "Brigmedic";
     private static readonly HashSet<ProtoId<DepartmentPrototype>> ForbiddenDepartments =
@@ -33,6 +37,7 @@ public sealed partial class PirateRecruitmentSystem : EntitySystem
     ];
 
     [Dependency] private EuiManager _eui = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private MindSystem _mind = default!;
     [Dependency] private RoleSystem _roles = default!;
     [Dependency] private SharedJobSystem _jobs = default!;
@@ -105,9 +110,10 @@ public sealed partial class PirateRecruitmentSystem : EntitySystem
             return;
         }
 
-        _roles.MindAddRole(mind, "MindRolePirateExpansion", mindComponent);
-        _mind.TryAddObjective(mind, mindComponent, "PirateLootValueObjective");
-        _mind.TryAddObjective(mind, mindComponent, "PirateCrewCaptureObjective");
+        _roles.MindAddRole(mind, PirateMindRole, mindComponent);
+        _mind.TryAddObjective(mind, mindComponent, LootObjective);
+        _mind.TryAddObjective(mind, mindComponent, CaptureObjective);
+        _antag.SendBriefing(target, Loc.GetString("pirate-expansion-role-greeting"), null, null);
         var faction = EnsureComp<NpcFactionMemberComponent>(target);
         _factions.ClearFactions((target, faction), false);
         _factions.AddFaction((target, faction), PirateFaction);

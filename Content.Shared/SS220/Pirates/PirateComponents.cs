@@ -27,4 +27,3 @@ public sealed partial class PirateRecruitmentContractComponent : Component
     [ViewVariables]
     public EntityUid? OfferedTarget;
 }
-

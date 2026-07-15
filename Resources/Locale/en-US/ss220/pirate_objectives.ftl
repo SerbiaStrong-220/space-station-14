@@ -1,4 +1,8 @@
 pirate-objective-issuer = Pirate Crew
+ent-PirateLootValueObjective = { ent-BaseObjective }
+    .desc = { ent-BaseObjective.desc }
+ent-PirateCrewCaptureObjective = { ent-BaseObjective }
+    .desc = { ent-BaseObjective.desc }
 pirate-objective-loot-title = Earn 1,000,000 credits
 pirate-objective-loot-description = Sell loot through the pirate console. Revenue: {$current} / {$target} credits.
 pirate-objective-captives-title = Capture crew members

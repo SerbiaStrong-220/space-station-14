@@ -91,7 +91,8 @@ public sealed partial class PirateObjectiveSystem : EntitySystem
 
         for (var i = rule.CaptureTargets.Count - 1; i >= 0; i--)
         {
-            if (_roles.MindHasRole<PirateCrewRoleComponent>(rule.CaptureTargets[i]))
+            var target = rule.CaptureTargets[i];
+            if (Deleted(target) || _roles.MindHasRole<PirateCrewRoleComponent>(target))
                 rule.CaptureTargets.RemoveAt(i);
         }
 

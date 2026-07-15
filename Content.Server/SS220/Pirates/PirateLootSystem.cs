@@ -1,11 +1,11 @@
 using Content.Server.Cargo.Systems;
 using Content.Server.Popups;
 using Content.Server.Stack;
+using Content.Shared.Cargo.Components;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.SS220.Pirates;
-using Content.Shared.Store.Components;
 using Content.Shared.UserInterface;
 using Robust.Server.GameObjects;
 using Robust.Shared.Physics;
@@ -124,7 +124,7 @@ public sealed partial class PirateLootSystem : EntitySystem
 
     private bool ContainsRestrictedEntity(EntityUid entity, TransformComponent xform)
     {
-        if (HasComp<MobStateComponent>(entity) || HasComp<CurrencyComponent>(entity))
+        if (HasComp<MobStateComponent>(entity) || HasComp<CashComponent>(entity))
             return true;
 
         var children = xform.ChildEnumerator;

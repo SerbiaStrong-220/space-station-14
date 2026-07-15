@@ -24,7 +24,7 @@ public sealed partial class PirateGameRuleSystem : GameRuleSystem<PirateGameRule
     private static readonly EntProtoId CrewSpawnPoint = "SpawnPointPirateCrew";
 
     [Dependency] private IPlayerManager _players = default!;
-    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private AntagSelectionSystem _antagSelection = default!;
     [Dependency] private SharedRoleSystem _roles = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
 
@@ -32,6 +32,7 @@ public sealed partial class PirateGameRuleSystem : GameRuleSystem<PirateGameRule
     {
         base.Initialize();
         SubscribeLocalEvent<PirateGameRuleComponent, RuleLoadedGridsEvent>(OnRuleLoadedGrids);
+        SubscribeLocalEvent<PirateGameRuleComponent, AfterAntagEntitySelectedEvent>(OnAfterAntagSelected);
         SubscribeLocalEvent<PirateGameRuleComponent, AntagSelectLocationEvent>(OnSelectLocation,
             after: [typeof(RuleGridsSystem)]);
         SubscribeLocalEvent<PirateBaseComponent, GridSplitEvent>(OnPirateGridSplit);
@@ -47,6 +48,11 @@ public sealed partial class PirateGameRuleSystem : GameRuleSystem<PirateGameRule
     {
         foreach (var newGrid in args.NewGrids)
             EnsureComp<PirateBaseComponent>(newGrid);
+    }
+
+    private void OnAfterAntagSelected(Entity<PirateGameRuleComponent> _, ref AfterAntagEntitySelectedEvent args)
+    {
+        _antagSelection.SendBriefing(args.EntityUid, Loc.GetString("pirate-expansion-role-greeting"), null, null);
     }
 
     private void OnSelectLocation(Entity<PirateGameRuleComponent> rule, ref AntagSelectLocationEvent args)
@@ -86,7 +92,7 @@ public sealed partial class PirateGameRuleSystem : GameRuleSystem<PirateGameRule
         if (args.Session is not { } session || !TryComp<AntagSelectionComponent>(rule, out var selection))
             return false;
 
-        return _antag.IsSelectedForMindRole(selection, session, CaptainMindRole);
+        return _antagSelection.IsSelectedForMindRole(selection, session, CaptainMindRole);
     }
 
     protected override void AppendRoundEndText(EntityUid uid, PirateGameRuleComponent component,

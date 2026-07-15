@@ -1,9 +1,15 @@
+using Content.Server.Mind;
 using Content.Server.Popups;
+using Content.Server.Roles;
+using Content.Server.Stack;
 using Content.Server.Store.Systems;
+using Content.Shared.Cargo.Components;
+using Content.Shared.FixedPoint;
 using Content.Shared.GameTicking.Components;
-using Content.Shared.NPC.Prototypes;
-using Content.Shared.NPC.Systems;
+using Content.Shared.Interaction;
+using Content.Shared.Roles;
 using Content.Shared.SS220.Pirates;
+using Content.Shared.Stacks;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Content.Shared.UserInterface;
@@ -13,10 +19,12 @@ namespace Content.Server.SS220.Pirates;
 
 public sealed partial class PirateMarketSystem : EntitySystem
 {
-    private static readonly ProtoId<NpcFactionPrototype> PirateFaction = "Syndicate";
+    private static readonly ProtoId<CurrencyPrototype> PirateCurrency = "PirateCredit";
 
     [Dependency] private StoreSystem _store = default!;
-    [Dependency] private NpcFactionSystem _factions = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private RoleSystem _roles = default!;
+    [Dependency] private StackSystem _stack = default!;
     [Dependency] private PopupSystem _popup = default!;
 
     public override void Initialize()
@@ -26,6 +34,7 @@ public sealed partial class PirateMarketSystem : EntitySystem
         SubscribeLocalEvent<PirateMarketConsoleComponent, ActivatableUIOpenAttemptEvent>(OnOpenAttempt);
         SubscribeLocalEvent<PirateMarketConsoleComponent, CurrencyInsertAttemptEvent>(OnCurrencyInsertAttempt);
         SubscribeLocalEvent<PirateMarketConsoleComponent, BoundUserInterfaceMessageAttempt>(OnUiMessageAttempt);
+        SubscribeLocalEvent<CashComponent, AfterInteractEvent>(OnCashAfterInteract);
     }
 
     private void OnOpenAttempt(Entity<PirateMarketConsoleComponent> market, ref ActivatableUIOpenAttemptEvent args)
@@ -46,6 +55,41 @@ public sealed partial class PirateMarketSystem : EntitySystem
 
         args.Cancel();
         _popup.PopupEntity(Loc.GetString("pirate-market-access-denied"), market, args.User);
+    }
+
+    private void OnCashAfterInteract(Entity<CashComponent> cash, ref AfterInteractEvent args)
+    {
+        if (args.Handled ||
+            !args.CanReach ||
+            args.Target is not { } target ||
+            !HasComp<PirateMarketConsoleComponent>(target) ||
+            !TryComp<StoreComponent>(target, out var store) ||
+            !TryComp<StackComponent>(cash, out var stack))
+        {
+            return;
+        }
+
+        var insertAttempt = new CurrencyInsertAttemptEvent(args.User, target, cash.Owner, store);
+        RaiseLocalEvent(target, insertAttempt);
+        if (insertAttempt.Cancelled)
+        {
+            args.Handled = true;
+            return;
+        }
+
+        var currency = new Dictionary<string, FixedPoint2>
+        {
+            [PirateCurrency] = stack.Count,
+        };
+
+        if (!_store.TryAddCurrency(currency, target, store))
+            return;
+
+        _stack.SetCount((cash.Owner, stack), 0);
+        args.Handled = true;
+        _popup.PopupEntity(Loc.GetString("store-currency-inserted", ("used", cash.Owner), ("target", target)),
+            target,
+            args.User);
     }
 
     private void OnUiMessageAttempt(Entity<PirateMarketConsoleComponent> market,
@@ -112,7 +156,8 @@ public sealed partial class PirateMarketSystem : EntitySystem
 
     private bool CanUseMarket(EntityUid user)
     {
-        return _factions.IsMember(user, PirateFaction);
+        return _mind.TryGetMind(user, out var mind, out _) &&
+               _roles.MindHasRole<PirateCrewRoleComponent>(mind);
     }
 
     private bool TryGetRule(out Entity<PirateGameRuleComponent> rule)

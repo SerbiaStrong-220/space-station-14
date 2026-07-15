@@ -10,6 +10,8 @@ ent-PirateRecruitmentContract = pirate recruitment contract
     .desc = It smells of rum, gunpowder, and questionable decisions.
 ent-SpawnPointPirateCaptain = pirate captain spawn point
 ent-SpawnPointPirateCrew = pirate sailor spawn point
+ent-SpawnPointPirateCaptainExpansion = { ent-SpawnPointPirateCaptain }
+ent-SpawnPointPirateCrewExpansion = { ent-SpawnPointPirateCrew }
 ent-CannonBallEMP = EMP cannonball
     .desc = A cannonball that releases a powerful electromagnetic pulse on impact.
 
@@ -19,6 +21,7 @@ pirate-ghost-role-captain-name = Pirate Captain
 pirate-ghost-role-captain-description = Lead the pirate crew, divide the loot, and guide your sailors to fortune.
 pirate-ghost-role-crew-name = Pirate Sailor
 pirate-ghost-role-crew-description = Serve under the captain, raid the station, and protect your share of the loot.
+guide-entry-pirates = Pirates
 pirate-recruitment-contract-content = { "[head=2]PIRATE ARTICLES[/head]" }
 
     The undersigned willingly renounces NanoTrasen law and joins the pirate crew.
@@ -34,28 +37,18 @@ pirate-recruitment-contract-content = { "[head=2]PIRATE ARTICLES[/head]" }
     • provide a share of the loot, a bunk, and a vote during any mutiny.
 
     { "[italic]Make your mark, and from this day your home lies beneath the Jolly Roger.[/italic]" }
-pirate-loot-sale-complete = Loot sold for {$amount} spesos.
+pirate-loot-sale-complete = Loot sold for {$amount} credits.
 pirate-loot-no-active-crew = The console is not linked to an active pirate crew.
-pirate-expansion-briefing = { "[head=2]Pirate Crew Objective[/head]" }
-    Your primary goal is profit. Steal valuable property and selected station crew members to demand a ransom for their return. Your methods may vary, but they must remain believable and create engaging play for both sides.
-
-    { "[head=2]Rules for Playing as a Pirate[/head]" }
-    1. Do not commit pointless murders. Killing is permitted when necessary for self-defense, but the force used must remain proportionate to the threat.
-    2. Cooperate with other players to create engaging situations: negotiate ransoms, make deals, and infiltrate the station under cover.
-    3. Major sabotage and repeated minor sabotage are prohibited. For example, do not dismantle APCs across the station or disconnect substations more than six times.
-    4. You may deceive or frame station crew and shift blame onto them when it makes sense in the situation.
-    5. Do not begin the round by immediately raiding the armory. Act covertly until your crew is discovered. If only your ship has been spotted, you may pose as traders after hiding all pirate equipment.
-    6. Inspect your issued equipment before departing and distribute it sensibly among the crew. Do not demand additional equipment or ammunition from administrators.
-    7. New pirates may only be recruited with administrator approval. Before contacting the administrators, hold a proper roleplay conversation and give the candidate convincing motivation to join your side.
-    8. Do not abuse stealth. After 30-35 minutes, administrators may disable the stealth console if it prevents the round from developing.
-    9. Do not play solely to win. This mode is intended for negotiation, adventure, and combat within reasonable limits. Losing can also make a good story, especially if you go out in style.
+pirate-expansion-ghost-role-rules = You are a team antagonist. Raid the station, take hostages, and negotiate ransoms. Do not commit pointless murders or major sabotage. Read the Pirates guide before playing.
+pirate-expansion-role-briefing = You are a member of the pirate crew. Sell stolen valuables and capture the designated crew members. Follow the pirate rules found in the guidebook.
+pirate-expansion-role-greeting = You are a member of the pirate crew. Steal valuable property, capture designated crew members, negotiate, and demand ransoms. Avoid pointless murders and major sabotage. The complete rules are in the Pirates guide.
 pirate-loot-window-title = Pirate Loot Console
 pirate-loot-window-appraise = Appraise Value
-pirate-loot-window-appraisal = On pallets: {$count} items; appraisal: {$value} spesos
-pirate-loot-window-total = Sold this shift: {$count} items; revenue: {$value} spesos
+pirate-loot-window-appraisal = On pallets: {$count} items; appraisal: {$value} credits
+pirate-loot-window-total = Sold this shift: {$count} items; revenue: {$value} credits
 pirate-loot-window-sell = Sell Loot
 pirate-market-store-name = Pirate Market
-pirate-market-currency = spesos
+pirate-market-currency = credits
 pirate-market-access-denied = The market rejects anyone outside the pirate crew.
 pirate-market-freedom-implanter-name = Freedom Implanter
 pirate-market-freedom-implanter-desc = Lets the user break out of hand restraints three times.
@@ -82,7 +75,7 @@ pirate-recruitment-window-decline = Decline
 pirate-expansion-title = Pirates
 pirate-expansion-description = A pirate crew raids the station for loot.
 pirate-round-end-title = The game mode was Pirates.
-pirate-round-end-summary = Pirate loot: {$items} items worth {$loot} spesos.
+pirate-round-end-summary = Pirate loot: {$items} items worth {$loot} credits.
 pirate-round-end-list-start = The pirates were:
 pirate-round-end-list-entry = - [color=White]{$name}[/color] ([color=gray]{$user}[/color])
 pirate-round-end-unknown = Unknown

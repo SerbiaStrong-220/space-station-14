@@ -153,12 +153,11 @@
   categories: [ HideSpawnMenu, Spawner ]
   id: SpawnPointPirateCaptainExpansion
   parent: BaseAntagSpawner
-  name: pirate-ghost-role-captain-name
   components:
   - type: GhostRole
     name: pirate-ghost-role-captain-name
     description: pirate-ghost-role-captain-description
-    rules: pirate-expansion-briefing
+    rules: pirate-expansion-ghost-role-rules
     mindRoles:
     - MindRolePirateCaptainExpansion
   - type: Sprite
@@ -172,12 +171,11 @@
   categories: [ HideSpawnMenu, Spawner ]
   id: SpawnPointPirateCrewExpansion
   parent: BaseAntagSpawner
-  name: pirate-ghost-role-crew-name
   components:
   - type: GhostRole
     name: pirate-ghost-role-crew-name
     description: pirate-ghost-role-crew-description
-    rules: pirate-expansion-briefing
+    rules: pirate-expansion-ghost-role-rules
     mindRoles:
     - MindRolePirateExpansion
   - type: Sprite
@@ -782,7 +780,7 @@
     subtype: pirate-role-name
   - type: PirateCrewRole
   - type: RoleBriefing
-    briefing: pirate-expansion-briefing
+    briefing: pirate-expansion-role-briefing
 
 - type: entity
   parent: MindRolePirateExpansion
@@ -796,8 +794,6 @@
 - type: entity
   parent: BaseObjective
   id: PirateLootValueObjective
-  name: pirate-objective-loot-title
-  description: pirate-objective-loot-description
   components:
   - type: Objective
     difficulty: 1
@@ -806,13 +802,11 @@
       sprite: Objects/Economy/cash.rsi
       state: cash_1000000
   - type: PirateLootValueCondition
-    target: 1000000
+    target: 500000
 
 - type: entity
   parent: BaseObjective
   id: PirateCrewCaptureObjective
-  name: pirate-objective-captives-title
-  description: pirate-objective-captives-description
   components:
   - type: Objective
     difficulty: 1
