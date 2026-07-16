@@ -12,7 +12,7 @@
 - type: randomHumanoidSettings
   id: RedWings
   parent: EventHumanoid
-  speciesBlacklist: [ Felinid, Diona, Arachnid, Moth, Vox, Reptilian, Skeleton, SlimePerson, Vulpkanin, Tajaran, Dwarf, Ipc ]
+    speciesBlacklist: [ Felinid, Diona, Arachnid, Moth, Vox, Reptilian, Skeleton, SlimePerson, Vulpkanin, Tajaran, Dwarf]
   components:
     - type: GhostRole
       raffle:
