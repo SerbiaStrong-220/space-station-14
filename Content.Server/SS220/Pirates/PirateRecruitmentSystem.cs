@@ -93,7 +93,7 @@ public sealed partial class PirateRecruitmentSystem : EntitySystem
 
     public void RespondToOffer(EntityUid contractUid, EntityUid target, bool accepted)
     {
-        if (!TryComp(contractUid, out PirateRecruitmentContractComponent? contract) ||
+        if (!TryComp<PirateRecruitmentContractComponent>(contractUid, out var contract) ||
             contract.OfferedTarget != target)
             return;
 
@@ -125,7 +125,7 @@ public sealed partial class PirateRecruitmentSystem : EntitySystem
 
     public void ClearOffer(EntityUid contractUid, EntityUid target)
     {
-        if (!TryComp(contractUid, out PirateRecruitmentContractComponent? contract) ||
+        if (!TryComp<PirateRecruitmentContractComponent>(contractUid, out var contract) ||
             contract.OfferedTarget != target)
         {
             return;

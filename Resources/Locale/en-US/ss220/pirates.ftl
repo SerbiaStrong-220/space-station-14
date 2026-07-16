@@ -10,8 +10,6 @@ ent-PirateRecruitmentContract = pirate recruitment contract
     .desc = It smells of rum, gunpowder, and questionable decisions.
 ent-SpawnPointPirateCaptain = pirate captain spawn point
 ent-SpawnPointPirateCrew = pirate sailor spawn point
-ent-SpawnPointPirateCaptainExpansion = { ent-SpawnPointPirateCaptain }
-ent-SpawnPointPirateCrewExpansion = { ent-SpawnPointPirateCrew }
 ent-CannonBallEMP = EMP cannonball
     .desc = A cannonball that releases a powerful electromagnetic pulse on impact.
 
@@ -79,3 +77,28 @@ pirate-round-end-summary = Pirate loot: {$items} items worth {$loot} credits.
 pirate-round-end-list-start = The pirates were:
 pirate-round-end-list-entry = - [color=White]{$name}[/color] ([color=gray]{$user}[/color])
 pirate-round-end-unknown = Unknown
+
+pirate-crew-name-1 = Boatswain Copper Hook
+pirate-crew-name-2 = Gunner Thunder Fuse
+pirate-crew-name-3 = Sailor Torn Chart
+pirate-crew-name-4 = Navigator Northern Storm
+pirate-crew-name-5 = Corsair Grey Fin
+pirate-crew-name-6 = Deckhand Lucky Coin
+pirate-crew-name-7 = Cook Salty Whisker
+pirate-crew-name-8 = Boarder Blunt Blade
+pirate-crew-name-9 = Gunner Smoky Jack
+pirate-crew-name-10 = Quartermaster Old Rum
+pirate-crew-name-11 = Sailor Crooked Mast
+pirate-crew-name-12 = Corsair Red Tide
+pirate-crew-name-13 = Boatswain Iron Throat
+pirate-crew-name-14 = Navigator Starless Night
+pirate-crew-name-15 = Gunner Black Spark
+
+pirate-captain-name-1 = Captain Crimson Storm
+pirate-captain-name-2 = Captain Golden Compass
+pirate-captain-name-3 = Captain Silent Tide
+pirate-captain-name-4 = Captain Iron Albatross
+pirate-captain-name-5 = Captain Black Wave
+pirate-captain-name-6 = Captain Last Shot
+pirate-captain-name-7 = Captain Sea Tempest
+pirate-captain-name-8 = Captain Blind Horizon

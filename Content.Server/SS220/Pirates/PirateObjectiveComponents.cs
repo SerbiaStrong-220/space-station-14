@@ -4,7 +4,7 @@ namespace Content.Server.SS220.Pirates;
 public sealed partial class PirateLootValueConditionComponent : Component
 {
     [DataField]
-    public int Target = 1_000_000;
+    public int Target = 500_000;
 }
 
 [RegisterComponent, Access(typeof(PirateObjectiveSystem))]

@@ -34,6 +34,7 @@ public sealed partial class PirateMarketSystem : EntitySystem
         SubscribeLocalEvent<PirateMarketConsoleComponent, ActivatableUIOpenAttemptEvent>(OnOpenAttempt);
         SubscribeLocalEvent<PirateMarketConsoleComponent, CurrencyInsertAttemptEvent>(OnCurrencyInsertAttempt);
         SubscribeLocalEvent<PirateMarketConsoleComponent, BoundUserInterfaceMessageAttempt>(OnUiMessageAttempt);
+        SubscribeLocalEvent<PirateMarketConsoleComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<CashComponent, AfterInteractEvent>(OnCashAfterInteract);
     }
 
@@ -62,20 +63,35 @@ public sealed partial class PirateMarketSystem : EntitySystem
         if (args.Handled ||
             !args.CanReach ||
             args.Target is not { } target ||
-            !HasComp<PirateMarketConsoleComponent>(target) ||
-            !TryComp<StoreComponent>(target, out var store) ||
-            !TryComp<StackComponent>(cash, out var stack))
+            !HasComp<PirateMarketConsoleComponent>(target))
         {
             return;
         }
 
-        var insertAttempt = new CurrencyInsertAttemptEvent(args.User, target, cash.Owner, store);
+        args.Handled = TryInsertCash(args.User, target, cash.Owner);
+    }
+
+    private void OnInteractUsing(Entity<PirateMarketConsoleComponent> market, ref InteractUsingEvent args)
+    {
+        if (args.Handled || !HasComp<CashComponent>(args.Used))
+            return;
+
+        args.Handled = TryInsertCash(args.User, market, args.Used);
+    }
+
+    private bool TryInsertCash(EntityUid user, EntityUid target, EntityUid cash)
+    {
+        if (!TryComp<StoreComponent>(target, out var store) ||
+            !TryComp<StackComponent>(cash, out var stack) ||
+            stack.Count <= 0)
+        {
+            return false;
+        }
+
+        var insertAttempt = new CurrencyInsertAttemptEvent(user, target, cash, store);
         RaiseLocalEvent(target, insertAttempt);
         if (insertAttempt.Cancelled)
-        {
-            args.Handled = true;
-            return;
-        }
+            return true;
 
         var currency = new Dictionary<string, FixedPoint2>
         {
@@ -83,13 +99,13 @@ public sealed partial class PirateMarketSystem : EntitySystem
         };
 
         if (!_store.TryAddCurrency(currency, target, store))
-            return;
+            return false;
 
-        _stack.SetCount((cash.Owner, stack), 0);
-        args.Handled = true;
-        _popup.PopupEntity(Loc.GetString("store-currency-inserted", ("used", cash.Owner), ("target", target)),
+        _stack.SetCount((cash, stack), 0);
+        _popup.PopupEntity(Loc.GetString("store-currency-inserted", ("used", cash), ("target", target)),
             target,
-            args.User);
+            user);
+        return true;
     }
 
     private void OnUiMessageAttempt(Entity<PirateMarketConsoleComponent> market,

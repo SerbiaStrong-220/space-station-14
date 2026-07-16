@@ -124,36 +124,12 @@
   - type: PirateRecruitmentContract
 
 - type: entity
+  categories: [ HideSpawnMenu, Spawner ]
   id: SpawnPointPirateCaptain
-  parent: MarkerBase
+  parent: BaseAntagSpawner
   name: pirate captain spawn point
   components:
   - type: SpawnPoint
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-    - state: green
-    - sprite: Mobs/Species/Skeleton/parts.rsi
-      state: skull_icon
-
-- type: entity
-  id: SpawnPointPirateCrew
-  parent: MarkerBase
-  name: pirate crew spawn point
-  components:
-  - type: SpawnPoint
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-    - state: green
-    - sprite: Mobs/Species/Skeleton/parts.rsi
-      state: skull_icon
-
-- type: entity
-  categories: [ HideSpawnMenu, Spawner ]
-  id: SpawnPointPirateCaptainExpansion
-  parent: BaseAntagSpawner
-  components:
   - type: GhostRole
     name: pirate-ghost-role-captain-name
     description: pirate-ghost-role-captain-description
@@ -169,9 +145,11 @@
 
 - type: entity
   categories: [ HideSpawnMenu, Spawner ]
-  id: SpawnPointPirateCrewExpansion
+  id: SpawnPointPirateCrew
   parent: BaseAntagSpawner
+  name: pirate crew spawn point
   components:
+  - type: SpawnPoint
   - type: GhostRole
     name: pirate-ghost-role-crew-name
     description: pirate-ghost-role-crew-description
@@ -833,7 +811,7 @@
   - type: AntagSelection
     selectionTime: PrePlayerSpawn
     definitions:
-    - spawnerPrototype: SpawnPointPirateCaptainExpansion
+    - spawnerPrototype: SpawnPointPirateCaptain
       pickPlayer: false
       min: 1
       max: 1
@@ -845,7 +823,7 @@
       - type: NpcFactionMember
         factions: [ Syndicate ]
       mindRoles: [ MindRolePirateCaptainExpansion ]
-    - spawnerPrototype: SpawnPointPirateCrewExpansion
+    - spawnerPrototype: SpawnPointPirateCrew
       pickPlayer: false
       min: 4
       max: 4

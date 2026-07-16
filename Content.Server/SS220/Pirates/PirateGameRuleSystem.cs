@@ -3,9 +3,11 @@ using Content.Server.Antag.Components;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
 using Content.Server.GameTicking.Rules.Components;
+using Content.Server.RandomMetadata;
 using Content.Server.Roles;
 using Content.Server.RoundEnd;
 using Content.Server.Spawners.Components;
+using Content.Shared.Dataset;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Mind;
 using Content.Shared.Roles;
@@ -19,12 +21,16 @@ namespace Content.Server.SS220.Pirates;
 public sealed partial class PirateGameRuleSystem : GameRuleSystem<PirateGameRuleComponent>
 {
     private static readonly EntProtoId CaptainMindRole = "MindRolePirateCaptainExpansion";
-    private static readonly EntProtoId CaptainSpawner = "SpawnPointPirateCaptainExpansion";
+    private static readonly EntProtoId CaptainSpawner = "SpawnPointPirateCaptain";
     private static readonly EntProtoId CaptainSpawnPoint = "SpawnPointPirateCaptain";
     private static readonly EntProtoId CrewSpawnPoint = "SpawnPointPirateCrew";
+    private static readonly List<ProtoId<LocalizedDatasetPrototype>> CaptainNameSegments = ["PirateCaptainNames"];
+    private static readonly List<ProtoId<LocalizedDatasetPrototype>> CrewNameSegments = ["PirateCrewNames"];
 
     [Dependency] private IPlayerManager _players = default!;
     [Dependency] private AntagSelectionSystem _antagSelection = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private RandomMetadataSystem _randomMetadata = default!;
     [Dependency] private SharedRoleSystem _roles = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
 
@@ -60,7 +66,11 @@ public sealed partial class PirateGameRuleSystem : GameRuleSystem<PirateGameRule
         if (!TryComp<RuleGridsComponent>(rule, out var ruleGrids) || ruleGrids.Map is not { } map)
             return;
 
-        var spawnPoint = IsCaptain(rule, args) ? CaptainSpawnPoint : CrewSpawnPoint;
+        var isCaptain = IsCaptain(rule, args);
+        if (args.Session is not null)
+            SetPirateName(args.Entity, isCaptain);
+
+        var spawnPoint = isCaptain ? CaptainSpawnPoint : CrewSpawnPoint;
         var coordinates = new List<MapCoordinates>();
         var query = EntityQueryEnumerator<SpawnPointComponent, MetaDataComponent, TransformComponent>();
 
@@ -82,6 +92,13 @@ public sealed partial class PirateGameRuleSystem : GameRuleSystem<PirateGameRule
 
         args.Coordinates.Clear();
         args.Coordinates.AddRange(coordinates);
+    }
+
+    private void SetPirateName(EntityUid pirate, bool isCaptain)
+    {
+        var segments = isCaptain ? CaptainNameSegments : CrewNameSegments;
+        var name = _randomMetadata.GetRandomFromSegments(segments, "random-metadata-name-format-default");
+        _metaData.SetEntityName(pirate, name);
     }
 
     private bool IsCaptain(Entity<PirateGameRuleComponent> rule, AntagSelectLocationEvent args)
