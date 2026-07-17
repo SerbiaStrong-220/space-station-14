@@ -21,7 +21,7 @@ namespace Content.Server.SS220.Pirates;
 public sealed partial class PirateGameRuleSystem : GameRuleSystem<PirateGameRuleComponent>
 {
     private static readonly EntProtoId CaptainMindRole = "MindRolePirateCaptainExpansion";
-    private static readonly EntProtoId CaptainSpawner = "SpawnPointPirateCaptain";
+    private static readonly EntProtoId CaptainSpawner = "SpawnPointPirateCaptainExpansion";
     private static readonly EntProtoId CaptainSpawnPoint = "SpawnPointPirateCaptain";
     private static readonly EntProtoId CrewSpawnPoint = "SpawnPointPirateCrew";
     private static readonly List<ProtoId<LocalizedDatasetPrototype>> CaptainNameSegments = ["PirateCaptainNames"];

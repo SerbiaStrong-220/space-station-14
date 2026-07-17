@@ -1735,6 +1735,15 @@
     jobIcon: JobIconPirate
 
 - type: entity
+  parent: PirateIDCard
+  id: PirateSyndicateIDCard
+  name: pirate syndicate ID card
+  components:
+  - type: Access
+    tags:
+    - SyndicateAgent
+
+- type: entity
   parent: IDCardStandard
   id: XenoborgIDCard
   name: xenoborg ID card

@@ -8,6 +8,7 @@ ent-PirateFulton = pirate fulton
     .desc = A rapid extraction balloon.
 ent-PirateRecruitmentContract = pirate recruitment contract
     .desc = It smells of rum, gunpowder, and questionable decisions.
+ent-PirateSyndicateIDCard = Pirate ID card
 ent-SpawnPointPirateCaptain = pirate captain spawn point
 ent-SpawnPointPirateCrew = pirate sailor spawn point
 ent-CannonBallEMP = EMP cannonball

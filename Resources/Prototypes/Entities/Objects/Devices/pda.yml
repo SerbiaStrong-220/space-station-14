@@ -2624,7 +2624,7 @@
   description: Yargh!
   components:
   - type: Pda
-    id: PirateIDCard
+    id: PirateSyndicateIDCard
   #SS220 PDA-Resprite-Start
   - type: PdaBorderColor
     borderColor: "#4b474f"

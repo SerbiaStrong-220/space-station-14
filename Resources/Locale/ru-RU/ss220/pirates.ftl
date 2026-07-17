@@ -8,6 +8,7 @@ ent-PirateFulton = пиратский фултон
     .desc = Ускоренный эвакуационный шар.
 ent-PirateRecruitmentContract = пиратский контракт о вербовке
     .desc = Пахнет ромом, порохом и сомнительными решениями.
+ent-PirateSyndicateIDCard = Пиратская карта
 ent-SpawnPointPirateCaptain = точка появления капитана пиратов
 ent-SpawnPointPirateCrew = точка появления пиратского матроса
 ent-CannonBallEMP = ЭМИ-ядро

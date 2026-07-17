@@ -124,12 +124,36 @@
   - type: PirateRecruitmentContract
 
 - type: entity
-  categories: [ HideSpawnMenu, Spawner ]
   id: SpawnPointPirateCaptain
-  parent: BaseAntagSpawner
+  parent: MarkerBase
   name: pirate captain spawn point
   components:
   - type: SpawnPoint
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+    - sprite: Mobs/Species/Skeleton/parts.rsi
+      state: skull_icon
+
+- type: entity
+  id: SpawnPointPirateCrew
+  parent: MarkerBase
+  name: pirate crew spawn point
+  components:
+  - type: SpawnPoint
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+    - sprite: Mobs/Species/Skeleton/parts.rsi
+      state: skull_icon
+
+- type: entity
+  categories: [ HideSpawnMenu, Spawner ]
+  id: SpawnPointPirateCaptainExpansion
+  parent: BaseAntagSpawner
+  components:
   - type: GhostRole
     name: pirate-ghost-role-captain-name
     description: pirate-ghost-role-captain-description
@@ -145,11 +169,9 @@
 
 - type: entity
   categories: [ HideSpawnMenu, Spawner ]
-  id: SpawnPointPirateCrew
+  id: SpawnPointPirateCrewExpansion
   parent: BaseAntagSpawner
-  name: pirate crew spawn point
   components:
-  - type: SpawnPoint
   - type: GhostRole
     name: pirate-ghost-role-crew-name
     description: pirate-ghost-role-crew-description
@@ -165,6 +187,7 @@
 
 - type: startingGear
   id: PirateExpansionCrewGear
+  experienceDefinition: PirateRoleExperience
   equipment:
     jumpsuit: ClothingUniformJumpsuitPirate
     shoes: ClothingShoesBootsLaceup
@@ -177,6 +200,10 @@
     pocket2: HandheldGPSBasic
   inhand:
   - Cutlass
+
+- type: experienceDefinition
+  id: PirateRoleExperience
+  addSublevelPoints: 10
 
 - type: startingGear
   id: PirateExpansionCaptainGear
@@ -811,7 +838,7 @@
   - type: AntagSelection
     selectionTime: PrePlayerSpawn
     definitions:
-    - spawnerPrototype: SpawnPointPirateCaptain
+    - spawnerPrototype: SpawnPointPirateCaptainExpansion
       pickPlayer: false
       min: 1
       max: 1
@@ -823,7 +850,7 @@
       - type: NpcFactionMember
         factions: [ Syndicate ]
       mindRoles: [ MindRolePirateCaptainExpansion ]
-    - spawnerPrototype: SpawnPointPirateCrew
+    - spawnerPrototype: SpawnPointPirateCrewExpansion
       pickPlayer: false
       min: 4
       max: 4
