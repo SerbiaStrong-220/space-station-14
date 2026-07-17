@@ -41,8 +41,8 @@ public sealed class MagicMirrorBoundUserInterface : BoundUserInterface
         //SS220-IPC begin
         _markingsModel.OrganProfileData = data.OrganProfileData;
         _markingsModel.Markings = data.AppliedMarkings;
-        _markingsModel.OrganData = data.OrganMarkingData;
         //SS220-IPC end
+        _markingsModel.OrganData = data.OrganMarkingData;
     }
 }
 
