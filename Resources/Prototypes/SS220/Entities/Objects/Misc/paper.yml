@@ -410,8 +410,8 @@
 - type: entity
   parent: BaseItem
   id: BoxFolderRedWingsClient
-  name: папка с клиентами "Красного Крыла"
-  description: Папка, заполненная совершенно секретными документами.
+  name: RedWing's clients folder
+  description: A folder filled with top secret documents.
   components:
   - type: Sprite
     sprite: Objects/Misc/folders.rsi
