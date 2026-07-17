@@ -230,7 +230,7 @@
 
 # ГСБ
 - type: entity
-  parent: [ClothingOuterArmorHoS, ClothingOuterStorageBase]
+  parent: ClothingOuterArmorHoS
   id: ClothingOuterCoatHoSbomber
   name: bomber of the head of the security
   description: An extremely warm and equally armored bomber, for an equally important officer in command.
