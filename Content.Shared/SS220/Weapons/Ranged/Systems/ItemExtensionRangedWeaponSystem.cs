@@ -13,6 +13,7 @@ public sealed class ItemExtensionRangedWeaponSystem : EntitySystem
 {
     [Dependency] private SharedGunSystem _gun = default!;
     [Dependency] private PhysicalParametersSystem _parameters = default!;
+    [Dependency] private ItemExtensionSystem _itemExt = default!;
 
     public override void Initialize()
     {
@@ -60,7 +61,12 @@ public sealed class ItemExtensionRangedWeaponSystem : EntitySystem
         if (toDivide == 0)
             return; //If minimal and optimal strength are the same why did you use this component in the first place?
 
-        FixedPoint2 strengthModifier = (_parameters.GetParameterValue((userValidated, userParametersComp), Parameter.Strength) - extensionComp.MinimalStrengthToPickUp) / toDivide;
+        var handsUsed = _itemExt.TryGetNeededAmountOfHands(userValidated, ent.Owner);
+
+        if (handsUsed == -1)
+            handsUsed = 1;
+
+        FixedPoint2 strengthModifier = (_parameters.GetParameterValue((userValidated, userParametersComp), Parameter.Strength) * handsUsed - extensionComp.MinimalStrengthToPickUp) / toDivide;
 
         strengthModifier = FixedPoint2.Clamp(strengthModifier, 0, 1);
 

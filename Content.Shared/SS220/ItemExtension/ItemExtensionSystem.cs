@@ -118,7 +118,14 @@ public sealed class ItemExtensionSystem : EntitySystem
                 return -1;
 
             if (parametersComp.StrengthAffectsArms)
-                return (itemComp.MinimalStrengthToPickUp / userStrength).Int();
+            {
+                int neededHands = (itemComp.MinimalStrengthToPickUp / userStrength).Int();
+
+                if ((itemComp.MinimalStrengthToPickUp / userStrength) != ((itemComp.MinimalStrengthToPickUp / userStrength).Int()))
+                    neededHands += 1;
+
+                return neededHands;
+            }
         }
 
         return 1;

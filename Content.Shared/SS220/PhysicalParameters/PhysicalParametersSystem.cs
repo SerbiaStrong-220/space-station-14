@@ -21,6 +21,7 @@ public sealed class PhysicalParametersSystem : EntitySystem
 {
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSystem = default!;
+    [Dependency] private ItemExtensionSystem _itemExt = default!;
 
     private readonly FixedPoint2 UngrabbableStrengthDifference = 1.7;
 
@@ -89,6 +90,11 @@ public sealed class PhysicalParametersSystem : EntitySystem
 
         if (TryComp<MultiHandedItemComponent>(args.Used, out var multiHandedComp))
             strengthModifier += strengthModifier * multiHandedComp.HandsNeeded;
+
+        var handsUsed = _itemExt.TryGetNeededAmountOfHands(ent.Owner, args.Used);
+
+        if (handsUsed != -1)
+            strengthModifier += strengthModifier * handsUsed;
 
         if (HasComp<ItemExtensionMeleeWeaponComponent>(args.Used) && TryComp<ItemExtensionComponent>(args.Used, out var extensionComp))
         {
