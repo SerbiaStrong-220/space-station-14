@@ -264,7 +264,7 @@ public sealed class PhysicalParametersSystem : EntitySystem
 
         RaiseLocalEvent(ent, ref ev);
 
-        var evHeld = new UserParametersChangedEvent();
+        var evHeld = new UserParametersChangedEvent(ent.Owner);
 
         foreach (var item in _handsSystem.EnumerateHeld(ent.Owner))
             RaiseLocalEvent(item, ref evHeld);
@@ -273,21 +273,19 @@ public sealed class PhysicalParametersSystem : EntitySystem
 
         _movementSystem.RefreshMovementSpeedModifiers(ent);
     }
-
-    [ByRefEvent]
-    public readonly record struct ParametersChangedEvent()
-    {
-    }
-
-    [ByRefEvent]
-    public record struct ParametersUpdateEvent() : IInventoryRelayEvent
-    {
-        public Dictionary<Parameter, FixedPoint2> ModifiedValues = new Dictionary<Parameter, FixedPoint2>();
-        SlotFlags IInventoryRelayEvent.TargetSlots => ~SlotFlags.POCKET;
-    }
-
-    [ByRefEvent]
-    public readonly record struct UserParametersChangedEvent()
-    {
-    }
 }
+
+[ByRefEvent]
+public readonly record struct ParametersChangedEvent()
+{
+}
+
+[ByRefEvent]
+public record struct ParametersUpdateEvent() : IInventoryRelayEvent
+{
+    public Dictionary<Parameter, FixedPoint2> ModifiedValues = new Dictionary<Parameter, FixedPoint2>();
+    SlotFlags IInventoryRelayEvent.TargetSlots => ~SlotFlags.POCKET;
+}
+
+[ByRefEvent]
+public readonly record struct UserParametersChangedEvent(EntityUid User);

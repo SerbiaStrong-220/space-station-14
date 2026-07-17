@@ -29,7 +29,7 @@
   - type: ItemExtension
     minimalStrengthToPickUp: 0.3
     strengthRequirementToBeUsed: 0.7
-  #SS220 melee weapon extension begin
+  #SS220 melee weapon extension end
   - type: Sprite
   - type: Item
     size: Small

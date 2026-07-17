@@ -6,6 +6,7 @@ using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Item;
 using Content.Shared.Popups;
 using Content.Shared.SS220.ItemExtension;
+using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.PhysicalParameters;
 
@@ -17,10 +18,13 @@ public sealed class ItemExtensionSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<ItemExtensionComponent, GettingPickedUpAttemptEvent>(OnPickupAttempt);
+        SubscribeLocalEvent<ItemExtensionComponent, UserParametersChangedEvent>(OnUserParametersChanged);
+        SubscribeLocalEvent<ItemExtensionComponent, VirtualItemDeletedEvent>(OnVirtualItemDeleted);
         SubscribeLocalEvent<ItemExtensionComponent, GotEquippedHandEvent>(OnEquipped);
         SubscribeLocalEvent<ItemExtensionComponent, GotUnequippedHandEvent>(OnUnequipped);
 
@@ -59,6 +63,67 @@ public sealed class ItemExtensionSystem : EntitySystem
         }
     }
 
+    public void OnUserParametersChanged(Entity<ItemExtensionComponent> ent, ref UserParametersChangedEvent args)
+    {
+        FixedPoint2 userStrength = 1;
+
+        if (TryComp<PhysicalParametersComponent>(args.User, out var parametersComp))
+            userStrength = _parametersSystem.GetParameterValue((args.User, parametersComp), Parameter.Strength);
+
+        if (userStrength < ent.Comp.MinimalStrengthToPickUp)
+        {
+            if (parametersComp == null)
+            {
+                _hands.TryDrop(args.User, ent.Owner, checkActionBlocker: false);
+                _virtualItem.DeleteInHandsMatching(args.User, ent.Owner);
+                _popup.PopupClient(Loc.GetString(CannotPickupMessage), args.User);
+                return;
+            }
+
+            if (parametersComp.StrengthAffectsArms)
+            {
+                if (_hands.CountFreeHands(args.User) * userStrength < ent.Comp.MinimalStrengthToPickUp || userStrength == 0)
+                {
+                    _hands.TryDrop(args.User, ent.Owner, checkActionBlocker: false);
+                    _popup.PopupClient(Loc.GetString(CannotPickupMessage), args.User);
+                    return;
+                }
+
+                _virtualItem.DeleteInHandsMatching(args.User, ent.Owner);
+
+                for (var i = 0; i < ent.Comp.MinimalStrengthToPickUp / userStrength - 1; i++)
+                    _virtualItem.TrySpawnVirtualItemInHand(ent.Owner, args.User);
+
+                return;
+            }
+            _hands.TryDrop(args.User, ent.Owner, checkActionBlocker: false);
+            _popup.PopupClient(Loc.GetString(CannotPickupMessage), args.User);
+        }
+        _virtualItem.DeleteInHandsMatching(args.User, ent.Owner);
+    }
+
+    public int TryGetNeededAmountOfHands(EntityUid user, EntityUid used)
+    {
+        if (!TryComp<ItemExtensionComponent>(used, out var itemComp))
+            return 1;
+
+        FixedPoint2 userStrength = 1;
+
+        if (TryComp<PhysicalParametersComponent>(user, out var parametersComp))
+            userStrength = _parametersSystem.GetParameterValue((user, parametersComp), Parameter.Strength);
+
+        if (userStrength < itemComp.MinimalStrengthToPickUp)
+        {
+            if (parametersComp == null)
+                return -1;
+
+            if (parametersComp.StrengthAffectsArms)
+                return (itemComp.MinimalStrengthToPickUp / userStrength).Int();
+        }
+
+        return 1;
+    }
+
     private void OnEquipped(Entity<ItemExtensionComponent> ent, ref GotEquippedHandEvent args)
     {
         FixedPoint2 userStrength = 1;
@@ -73,5 +138,13 @@ public sealed class ItemExtensionSystem : EntitySystem
     private void OnUnequipped(Entity<ItemExtensionComponent> ent, ref GotUnequippedHandEvent args)
     {
         _virtualItem.DeleteInHandsMatching(args.User, ent.Owner);
+    }
+
+    private void OnVirtualItemDeleted(Entity<ItemExtensionComponent> ent, ref VirtualItemDeletedEvent args)
+    {
+        if (args.BlockingEntity != ent.Owner || _timing.ApplyingState)
+            return;
+
+        _hands.TryDrop(args.User, ent.Owner);
     }
 }

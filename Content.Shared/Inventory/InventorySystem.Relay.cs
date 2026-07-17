@@ -23,6 +23,7 @@ using Content.Shared.Overlays;
 using Content.Shared.Projectiles;
 using Content.Shared.Radio;
 using Content.Shared.Slippery;
+using Content.Shared.SS220.PhysicalParameters;
 using Content.Shared.SS220.StaminaConvertArmor;
 using Content.Shared.Standing;
 using Content.Shared.Strip.Components;

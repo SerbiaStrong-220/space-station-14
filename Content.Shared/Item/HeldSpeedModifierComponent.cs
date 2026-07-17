@@ -31,4 +31,9 @@ public sealed partial class HeldSpeedModifierComponent : Component
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public bool MirrorClothingModifier = true;
+
+    //SS220 add physical parameters begin
+    [DataField]
+    public bool AffectedByParameters = false;
+    //SS220 add physical parameters end
 }

@@ -26,7 +26,7 @@
       types:
         # axes are kinda like sharp hammers, you know?
         Blunt: 5
-        Slash: 15 #SS220 melee weapon extension begin
+        Slash: 10 #SS220 melee weapon extension begin
         Structural: 35 #ss220
     soundHit:
       collection: MetalThud
@@ -34,9 +34,9 @@
   #SS220 melee weapon extension begin
   - type: ItemExtensionMeleeWeapon
   - type: ItemExtension
-    minimalStrengthToPickUp: 0.8
-    strengthRequirementToBeUsed: 1
-  #SS220 melee weapon extension begin
+    minimalStrengthToPickUp: 0.7
+    strengthRequirementToBeUsed: 1.1
+  #SS220 melee weapon extension end
   - type: Item
     size: Ginormous
   - type: Clothing

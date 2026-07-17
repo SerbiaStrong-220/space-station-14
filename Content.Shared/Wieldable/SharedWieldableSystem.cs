@@ -1,4 +1,3 @@
-using System.Linq;
 using Content.Shared.Examine;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
@@ -9,11 +8,12 @@ using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Item;
+using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
-using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
+using Content.Shared.SS220.PhysicalParameters;
 using Content.Shared.SS220.StuckOnEquip;
 using Content.Shared.Timing;
 using Content.Shared.Verbs;
@@ -27,6 +27,7 @@ using Content.Shared.Wieldable.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Collections;
 using Robust.Shared.Timing;
+using System.Linq;
 
 namespace Content.Shared.Wieldable;
 
@@ -43,6 +44,7 @@ public abstract class SharedWieldableSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
     [Dependency] private readonly UseDelaySystem _delay = default!;
+    [Dependency] private ItemExtensionSystem _itemExt = default!;//SS220 add physical parameters
 
     public override void Initialize()
     {
@@ -263,7 +265,7 @@ public abstract class SharedWieldableSystem : EntitySystem
             return false;
         }
 
-        if (_hands.CountFreeableHands((user, hands), except: uid) < component.FreeHandsRequired)
+        if (_hands.CountFreeableHands((user, hands), except: uid) - _itemExt.TryGetNeededAmountOfHands(user, uid) < component.FreeHandsRequired) //SS220 add physical parameters
         {
             if (!quiet)
             {

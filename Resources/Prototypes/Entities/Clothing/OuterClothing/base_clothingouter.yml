@@ -198,6 +198,23 @@
     slots:
     - Tail
 
+#SS220 add abstract speed modifying hardsuit begin
+- type: entity
+  abstract: true
+  parent: [ClothingOuterHardsuitBase]
+  id: ClothingOuterHardsuitSpeedModifyingBase
+  name: base hardsuit
+  components:
+  - type: ItemExtension
+    minimalStrengthToPickUp: 0.4
+    strengthRequirementToBeUsed: 1.3
+  - type: ClothingSpeedModifier
+    walkModifier: 0.85
+    sprintModifier: 0.65
+    affectedByParameters: true
+  - type: HeldSpeedModifier
+#SS220 add abstract speed modifying hardsuit end
+
 - type: entity
   abstract: true
   parent: [ClothingOuterBase, AllowSuitStorageClothing]

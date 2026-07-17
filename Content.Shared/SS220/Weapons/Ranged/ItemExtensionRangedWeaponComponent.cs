@@ -10,11 +10,17 @@ public sealed partial class ItemExtensionRangedWeaponComponent : Component //The
     [DataField]
     public Angle AngleIncrease = Angle.FromDegrees(0);
 
-    [ViewVariables(VVAccess.ReadWrite), DataField("minAngle")]
+    [DataField]
     public Angle MinAngle = Angle.FromDegrees(0);
 
-    [ViewVariables(VVAccess.ReadWrite), DataField("maxAngle")]
+    [DataField]
     public Angle MaxAngle = Angle.FromDegrees(0);
+
+    [DataField]
+    public Angle MinAngleThreshold = Angle.FromDegrees(0);
+
+    [DataField]
+    public Angle MaxAngleThreshold = Angle.FromDegrees(40);
 
     [DataField]
     public Angle AngleDecay = Angle.FromDegrees(0);
