@@ -9,11 +9,11 @@
   - NanoTrasenRepresentativeHead
   - NanoTrasenRepresentativeHeadset
   - NanoTrasenRepresentativeEyes
-  - NanoTrasenRepresentativeNeck
   - NanoTrasenRepresentativeJumpsuit
   - NanoTrasenRepresentativeOuterClothing
   - NanoTrasenRepresentativeBackpacks
   - NanoTrasenRepresentativeTrinket
+  - NanoTrasenRepresentativeGloves
   - Survival
   - SurvivalVox
   - GroupSpeciesBreathTool
