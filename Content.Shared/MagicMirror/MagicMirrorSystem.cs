@@ -161,6 +161,11 @@ public sealed class MagicMirrorSystem : EntitySystem
 
     private void OnMirrorRangeCheck(EntityUid uid, MagicMirrorComponent component, ref BoundUserInterfaceCheckRangeEvent args)
     {
+        //SS220-IPC begin
+        if (args.UiKey is not MagicMirrorUiKey.Key)
+            return;
+        //SS220-IPC end
+
         if (args.Result == BoundUserInterfaceRangeResult.Fail)
             return;
 
