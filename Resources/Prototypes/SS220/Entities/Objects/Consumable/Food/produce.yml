@@ -239,56 +239,15 @@
 
 # banana peel
 - type: entity
-  parent: BaseItem
-  id: BananaPeelBase
-  abstract: true
+  parent: BananaPeelBase
+  id: TrashBananaPeel
   components:
-  - type: Slippery
-  - type: StepTrigger
-    intersectRatio: 0.2
-  - type: CollisionWake
-    enabled: false
-  - type: Physics
-    bodyType: Dynamic
-  - type: Fixtures
-    fixtures:
-      slips:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.2,-0.2,0.2,0.2"
-        hard: false
-        layer:
-        - SlipLayer
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.2,-0.2,0.2,0.2"
-        density: 30
-        mask:
-        - ItemMask
-  - type: Tag
-    tags:
-    - Recyclable
-    - Trash
-    - BananaPeel
-    - Ruminant
-    - WhitelistChameleon
-    - HamsterWearable
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 4
-        reagents:
-        - ReagentId: PulpedBananaPeel
-          Quantity: 4
-  - type: Extractable
-    grindableSolutionName: food
-  - type: SpaceGarbage
-  - type: Edible
-    requiresSpecialDigestion: true
-  - type: Clothing
-    sprite: Objects/Specific/Hydroponics/banana.rsi
-    equippedPrefix: peel
-    slots:
-    - HEAD
-    quickEquip: false
+  - type: Grillable
+    timeToCook: 30
+    cookingResult: TrashBakedBananaPeel
+  - type: Temperature
+    currentTemperature: 290
+  - type: InternalTemperature
+    conductivity: 100 # to compensate for density
+    thickness: 0.001
+    area: 0.0225 # ~15x15cm
