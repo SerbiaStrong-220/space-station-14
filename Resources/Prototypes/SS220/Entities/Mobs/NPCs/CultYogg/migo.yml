@@ -19,6 +19,9 @@
       components:
       - CultYoggBuilding
       - CultYoggBuildingFrame
+    constructionGridsBlacklist:
+      tags:
+      - MiGoBuildingBlocker
   - type: Body
   - type: Hands
     hands:
@@ -65,6 +68,9 @@
     astralAction: ActionMiGoAstral
     astralEnt: MiGoInAstral
     astralLeapDoAfterTime: 3
+    gridsBlacklist:
+      tags:
+      - AstralBlocker
   - type: ShowCultYoggIcons
   - type: NpcFactionMember
     factions:

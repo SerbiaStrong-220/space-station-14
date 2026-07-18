@@ -863,3 +863,26 @@
     sprite: SS220/Clothing/Head/Hats/PayDay/hoxton.rsi
   - type: IngestionBlocker
   - type: IdentityBlocker
+
+# ПНТ
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadNTRCap
+  name: NTR's cap
+  description: A NanoTrasen representative's peaked cap. A handsome one.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/ntr_cap.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/ntr_cap.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadNTRTophat
+  name: NTR's tophat
+  description: Few people would dare tell you to your face, but you look funny in it.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/ntr_tophat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/ntr_tophat.rsi
