@@ -3,6 +3,7 @@ using Content.Server.Antag.Components;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
 using Content.Server.GameTicking.Rules.Components;
+using Content.Server.Ghost.Roles.Components;
 using Content.Server.RandomMetadata;
 using Content.Server.Roles;
 using Content.Server.RoundEnd;
@@ -41,7 +42,15 @@ public sealed partial class PirateGameRuleSystem : GameRuleSystem<PirateGameRule
         SubscribeLocalEvent<PirateGameRuleComponent, AfterAntagEntitySelectedEvent>(OnAfterAntagSelected);
         SubscribeLocalEvent<PirateGameRuleComponent, AntagSelectLocationEvent>(OnSelectLocation,
             after: [typeof(RuleGridsSystem)]);
+        SubscribeLocalEvent<PirateAntagSpawnerComponent, TakeGhostRoleEvent>(OnPirateSpawnerTaken,
+            after: [typeof(AntagSelectionSystem)]);
         SubscribeLocalEvent<PirateBaseComponent, GridSplitEvent>(OnPirateGridSplit);
+    }
+
+    private void OnPirateSpawnerTaken(Entity<PirateAntagSpawnerComponent> ent, ref TakeGhostRoleEvent args)
+    {
+        if (args.TookRole)
+            QueueDel(ent);
     }
 
     private void OnRuleLoadedGrids(Entity<PirateGameRuleComponent> _, ref RuleLoadedGridsEvent args)

@@ -154,36 +154,26 @@
   id: SpawnPointPirateCaptainExpansion
   parent: BaseAntagSpawner
   components:
+  - type: PirateAntagSpawner
   - type: GhostRole
     name: pirate-ghost-role-captain-name
     description: pirate-ghost-role-captain-description
     rules: pirate-expansion-ghost-role-rules
     mindRoles:
     - MindRolePirateCaptainExpansion
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-    - state: green
-    - sprite: Mobs/Species/Skeleton/parts.rsi
-      state: skull_icon
 
 - type: entity
   categories: [ HideSpawnMenu, Spawner ]
   id: SpawnPointPirateCrewExpansion
   parent: BaseAntagSpawner
   components:
+  - type: PirateAntagSpawner
   - type: GhostRole
     name: pirate-ghost-role-crew-name
     description: pirate-ghost-role-crew-description
     rules: pirate-expansion-ghost-role-rules
     mindRoles:
     - MindRolePirateExpansion
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-    - state: green
-    - sprite: Mobs/Species/Skeleton/parts.rsi
-      state: skull_icon
 
 - type: startingGear
   id: PirateExpansionCrewGear
