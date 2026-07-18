@@ -4,6 +4,60 @@ namespace Content.Shared.SS220.CCVars;
 
 public sealed partial class CCVars220
 {
+    public static readonly CVarDef<bool> NTTSEnabled =
+        CVarDef.Create("tts.ntts_enabled", false, CVar.SERVERONLY);
+
+    /// <summary>
+    /// URL of the NTTS server API.
+    /// </summary>
+    public static readonly CVarDef<string> NTTSApiUrl =
+        CVarDef.Create("tts.ntts_api_url", "", CVar.SERVERONLY);
+
+    public static readonly CVarDef<bool> TTSSileroEnabled =
+         CVarDef.Create("tts.silero_enabled", false, CVar.SERVERONLY);
+
+    public static readonly CVarDef<string> TTSSileroApiUrl =
+        CVarDef.Create("tts.silero_api_url", "", CVar.SERVERONLY);
+
+    public static readonly CVarDef<string> TTSSileroApiToken =
+        CVarDef.Create("tts.silero_api_token", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
+
+    /// <summary>
+    /// Default volume setting of TTS sound
+    /// </summary>
+    public static readonly CVarDef<float> TTSVolume =
+        CVarDef.Create("tts.volume", 0.50f, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Default volume setting of TTS Radio sound
+    /// </summary>
+    public static readonly CVarDef<float> TTSRadioVolume =
+        CVarDef.Create("tts.radio_volume", 0.50f, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Count of in-memory cached tts voice lines.
+    /// </summary>
+    public static readonly CVarDef<int> TTSMaxCache =
+        CVarDef.Create("tts.max_cache", 250, CVar.SERVERONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// TTS request timeout in seconds.
+    /// </summary>
+    public static readonly CVarDef<float> TTSRequestTimeout =
+        CVarDef.Create("tts.timeout", 5f, CVar.SERVERONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// VoiceId for Announcement TTS
+    /// </summary>
+    public static readonly CVarDef<string> TTSAnnounceVoiceId =
+        CVarDef.Create("tts.announce_voice", "glados", CVar.SERVERONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Default volume setting of TTS Announce sound
+    /// </summary>
+    public static readonly CVarDef<float> TTSAnnounceVolume =
+        CVarDef.Create("tts.announce_volume", 0.50f, CVar.CLIENTONLY | CVar.ARCHIVE);
+
     /// <summary>
     /// Master switch for receiving tts
     /// </summary>

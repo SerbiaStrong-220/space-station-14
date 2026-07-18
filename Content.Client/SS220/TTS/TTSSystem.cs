@@ -11,6 +11,7 @@ using Robust.Shared.Audio.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.TTS;
 
@@ -53,8 +54,8 @@ public sealed partial class TTSSystem
 
         Subs.CVar(_cfg, CCVars220.MaxQueuedPerEntity, (x) => _maxQueuedPerEntity = x, true);
         Subs.CVar(_cfg, CCVars220.MaxEntitiesQueued, (x) => _maxEntitiesQueued = x, true);
-        _cfg.OnValueChanged(CCCVars.TTSVolume, OnTtsVolumeChanged, true);
-        _cfg.OnValueChanged(CCCVars.TTSRadioVolume, OnTtsRadioVolumeChanged, true);
+        _cfg.OnValueChanged(CCVars220.TTSVolume, OnTtsVolumeChanged, true);
+        _cfg.OnValueChanged(CCVars220.TTSRadioVolume, OnTtsRadioVolumeChanged, true);
 
         SubscribeNetworkEvent<TtsQueueResetMessage>(OnQueueResetRequest);
 
@@ -67,8 +68,8 @@ public sealed partial class TTSSystem
     public override void Shutdown()
     {
         base.Shutdown();
-        _cfg.UnsubValueChanged(CCCVars.TTSVolume, OnTtsVolumeChanged);
-        _cfg.UnsubValueChanged(CCCVars.TTSRadioVolume, OnTtsRadioVolumeChanged);
+        _cfg.UnsubValueChanged(CCVars220.TTSVolume, OnTtsVolumeChanged);
+        _cfg.UnsubValueChanged(CCVars220.TTSRadioVolume, OnTtsRadioVolumeChanged);
 
         _ttsManager.PlayTtsReceived -= OnPlayTts;
 
@@ -76,7 +77,7 @@ public sealed partial class TTSSystem
         ResetQueuesAndEndStreams();
     }
 
-    public void RequestGlobalTTS(string text, string voiceId)
+    public void RequestGlobalTTS(string text, ProtoId<TTSVoicePrototype> voiceId)
     {
         RaiseNetworkEvent(new RequestGlobalTTSEvent(text, voiceId));
     }

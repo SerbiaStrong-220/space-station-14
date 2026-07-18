@@ -1,17 +1,11 @@
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.TTS;
 
-// ReSharper disable once InconsistentNaming
 [Serializable, NetSerializable]
-public sealed class RequestGlobalTTSEvent : EntityEventArgs
+public sealed class RequestGlobalTTSEvent(string text, ProtoId<TTSVoicePrototype> voiceId) : EntityEventArgs
 {
-    public string Text { get; }
-    public string VoiceId { get; }
-
-    public RequestGlobalTTSEvent(string text, string voiceId)
-    {
-        Text = text;
-        VoiceId = voiceId;
-    }
+    public readonly string Text = text;
+    public readonly ProtoId<TTSVoicePrototype> VoiceId = voiceId;
 }

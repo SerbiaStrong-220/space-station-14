@@ -74,17 +74,17 @@ public sealed partial class AudioTab : Control
 
         // SS220-TTS-begin
         Control.AddOptionPercentSlider(
-            CCCVars.TTSVolume,
+            CCVars220.TTSVolume,
             SliderVolumeTts,
             scale: ContentAudioSystem.TTSMultiplier);
 
         Control.AddOptionPercentSlider(
-            CCCVars.TTSRadioVolume,
+            CCVars220.TTSRadioVolume,
             SliderVolumeTtsRadio,
             scale: ContentAudioSystem.TTSRadioMultiplier);
 
         Control.AddOptionPercentSlider(
-            CCCVars.TTSAnnounceVolume,
+            CCVars220.TTSAnnounceVolume,
             SliderVolumeTtsAnnounce,
             scale: ContentAudioSystem.TTSAnnounceMultiplier);
 

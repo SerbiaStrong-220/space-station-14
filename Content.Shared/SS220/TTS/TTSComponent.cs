@@ -17,6 +17,13 @@ public sealed partial class TTSComponent : Component
     [DataField("voice"), AutoNetworkedField]
     public ProtoId<TTSVoicePrototype>? VoicePrototypeId { get; set; }
 
+    [DataField]
+    public Dictionary<TTSProvider, ProtoId<TTSVoicePrototype>> PreferredVoice = new()
+    {
+        [TTSProvider.NTTS] = "",
+        [TTSProvider.Silero] = ""
+    };
+
     /// <summary>
     /// Prototype that contains a list of voices for randomize
     /// </summary>

@@ -47,13 +47,13 @@ public static class TtsContextMaker
 
     public static TtsSpeakerContext New(IEntityManager entityManager, EntityUid speaker)
     {
-        entityManager.System<TTSContextSystem>().TryGetVoiceID(speaker, out var voiceId);
+        entityManager.System<TTSSystem>().TryGetVoiceId(speaker, out var voiceId);
 
         return new()
         {
             Speaker = speaker,
             NetSpeaker = entityManager.GetNetEntity(speaker),
-            InternalVoiceId = voiceId
+            VoiceId = voiceId
         };
     }
 
@@ -71,20 +71,9 @@ public readonly record struct TtsContext
 
 public readonly record struct TtsSpeakerContext
 {
-    private static readonly ProtoId<TTSVoicePrototype> FallbackVoiceId = "father_grigori";
+    public required EntityUid Speaker { get; init; }
+    public required NetEntity NetSpeaker { get; init; }
+    public required ProtoId<TTSVoicePrototype>? VoiceId { get; init; }
 
-    public EntityUid Speaker { get; init; }
-    public NetEntity NetSpeaker { get; init; }
-    public ProtoId<TTSVoicePrototype> VoiceId
-    {
-        get
-        {
-            DebugTools.Assert(InternalVoiceId.HasValue);
-            return InternalVoiceId ?? FallbackVoiceId;
-        }
-    }
-
-    public ProtoId<TTSVoicePrototype>? InternalVoiceId { init; private get; }
-
-    public readonly bool Valid => InternalVoiceId is not null;
+    public readonly bool Valid => VoiceId is not null;
 }

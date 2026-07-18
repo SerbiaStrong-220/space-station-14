@@ -1,31 +1,32 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Buffers;
-using System.Collections.Concurrent;
-using System.Collections.Specialized;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Web;
-using Content.Shared.Corvax.CCCVars;
+using Content.Shared.SS220.CCVars;
 using Content.Shared.SS220.TTS;
 using Microsoft.IO;
 using Prometheus;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Serilog;
+using System.Buffers;
+using System.Collections.Concurrent;
+using System.Collections.Specialized;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web;
 
 namespace Content.Server.SS220.TTS;
 
 // ReSharper disable once InconsistentNaming
-public sealed partial class TTSManager
+public sealed partial class TTSManager : SharedTTSManager
 {
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IServerNetManager _netManager = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     private static readonly Histogram RequestTimings = Metrics.CreateHistogram(
         "tts_req_timings",
@@ -64,25 +65,25 @@ public sealed partial class TTSManager
     private static readonly ConcurrentDictionary<string, TtsResponse> ResponsesInProgress = new();
     private float _timeout = 1;
 
-    private string _apiUrl = string.Empty;
-    private string _apiToken = string.Empty;
-
-    public void Initialize()
+    public override void Initialize()
     {
+        base.Initialize();
+
         InitializeFFMpeg();
 
         _sawmill = Logger.GetSawmill("tts");
-        _cfg.OnValueChanged(CCCVars.TTSMaxCache, val =>
+        _cfg.OnValueChanged(CCVars220.TTSMaxCache, val =>
         {
             _cache.Limit = val;
             ResetCache();
         }, true);
-        _cfg.OnValueChanged(CCCVars.TTSRequestTimeout, val => _timeout = val, true);
-        _cfg.OnValueChanged(CCCVars.TTSApiUrl, v => _apiUrl = v, true);
-        _cfg.OnValueChanged(CCCVars.TTSApiToken, v =>
+        _cfg.OnValueChanged(CCVars220.TTSRequestTimeout, val => _timeout = val, true);
+        _cfg.OnValueChanged(CCVars220.NTTSApiUrl, v => _nttsApiUrl = v, true);
+        _cfg.OnValueChanged(CCVars220.TTSSileroApiUrl, v => _sileroApiUrl = v, true);
+        _cfg.OnValueChanged(CCVars220.TTSSileroApiToken, v =>
         {
             _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", v);
-            _apiToken = v;
+            _sileroApiToken = v;
         },
         true);
 
@@ -90,93 +91,46 @@ public sealed partial class TTSManager
         _netManager.RegisterNetMessage<MsgPlayAnnounceTts>();
     }
 
-    /// <summary>
-    /// Generates audio with passed text by API
-    /// </summary>
-    /// <param name="speaker">Identifier of speaker</param>
-    /// <param name="text">SSML formatted text</param>
-    /// <returns>File audio bytes or empty if failed</returns>
-    public async Task<ReferenceCounter<TtsAudioData>.Handle?> ConvertTextToSpeech(string speaker, string text, TtsKind kind)
+    public async Task<ReferenceCounter<TtsAudioData>.Handle?> ConvertTextToSpeech(ProtoId<TTSVoicePrototype>? protoId, string text, TtsKind kind)
     {
-        WantedCount.Inc();
+        if (protoId == null && !TryGetDefaultPreferredVoice(out protoId))
+            return default;
 
-        return await StartTtsRequest(new(speaker, text, kind),
-            async (request, response) =>
+        if (!_proto.TryIndex(protoId, out var proto))
+            return default;
+
+        return await ConvertTextToSpeech(proto.Provider, proto.Speaker, text, kind);
+    }
+
+    public async Task<ReferenceCounter<TtsAudioData>.Handle?> ConvertTextToSpeech(TTSProvider provider, string speaker, string text, TtsKind kind)
+    {
+        try
         {
-            _sawmill.Verbose($"Generate new sound for '{text}' speech by '{speaker}' speaker with kind '{kind}'");
+            var textSanitized = Sanitize(text);
+            if (textSanitized == "") return default;
+            if (char.IsLetter(textSanitized[^1]))
+                textSanitized += ".";
 
-            var reqTime = DateTime.UtcNow;
-            try
+            var ssmlTraits = SoundTraits.RateFast;
+            if (kind == TtsKind.Whisper)
+                ssmlTraits |= SoundTraits.PitchVerylow;
+
+            var textSsml = ToSsmlText(textSanitized, ssmlTraits);
+
+            return provider switch
             {
-                var cts = new CancellationTokenSource(TimeSpan.FromSeconds(_timeout));
+                TTSProvider.NTTS => await SendNttsRequest(speaker, textSsml, kind),
+                TTSProvider.Silero => await SendSileroRequest(speaker, textSsml, kind),
+                _ => null
+            };
+        }
+        catch (Exception e)
+        {
+            // Catch TTS exceptions to prevent a server crash.
+            Log.Error($"TTS System error: {e.Message}");
+        }
 
-                var requestUrl = $"{_apiUrl}" + ToQueryString(new NameValueCollection() {
-                    { "speaker", speaker },
-                    { "text", text },
-                    { "ext", AudioFileExtension }});
-
-                if (!_useFFMpegProcessing && kind == TtsKind.Radio)
-                {
-                    requestUrl += "&effect=radio";
-                }
-
-                if (kind == TtsKind.Announce)
-                {
-                    requestUrl += "&effect=announce";
-                }
-
-                if (!_useFFMpegProcessing && kind == TtsKind.Telepathy)
-                {
-                    requestUrl += "&effect=announce";
-                }
-
-                var httpRequest = new HttpRequestMessage(HttpMethod.Get, requestUrl);
-                var httpResponse = await _httpClient.SendAsync(httpRequest, cts.Token);
-                if (!httpResponse.IsSuccessStatusCode)
-                {
-                    if (httpResponse.StatusCode == HttpStatusCode.TooManyRequests)
-                    {
-                        _sawmill.Warning("TTS request was rate limited");
-                        return false;
-                    }
-
-                    _sawmill.Error($"TTS request returned bad status code: {httpResponse.StatusCode}");
-                    return false;
-                }
-
-                using var memoryStream = _memoryStreamPool.GetStream("TtsStream", 1024 * 64);
-
-                memoryStream.Position = 0;
-                memoryStream.SetLength(0);
-
-                await httpResponse.Content.CopyToAsync(memoryStream, cts.Token);
-
-                memoryStream.Position = 0;
-                using var effectStream = await AddFFMpegEffect(memoryStream, request.Kind);
-                var streamToRead = effectStream ?? memoryStream;
-
-                streamToRead.Position = 0;
-                _responseManager.AllocBuffer(response, (int)streamToRead.Length);
-                streamToRead.ReadExactly(response.Value.Buffer, 0, response.Value.Length);
-
-                _sawmill.Verbose($"Generated new sound for '{text}' speech by '{speaker}' speaker with kind '{kind}' ({response.Value.Length} bytes)");
-                RequestTimings.WithLabels("Success").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
-                return true;
-            }
-            catch (TaskCanceledException)
-            {
-                RequestTimings.WithLabels("Timeout").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
-                _sawmill.Error($"Timeout of request generation new audio for '{text}' speech by '{speaker}' speaker");
-                return false;
-            }
-            catch (Exception e)
-            {
-                RequestTimings.WithLabels("Error").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
-                _sawmill.Error(
-                    $"Failed of request generation new sound for '{text}' speech by '{speaker}' speaker\n{e}");
-                return false;
-            }
-        });
+        return default;
     }
 
     public void ResetCache()
@@ -193,14 +147,6 @@ public sealed partial class TTSManager
             ).ToArray();
 
         return "?" + string.Join("&", array);
-    }
-
-    private static string GenerateCacheKey(string speaker, string text, TtsKind kind)
-    {
-        var key = $"{speaker}/{text}/{(int)kind}";
-        var keyData = Encoding.UTF8.GetBytes(key);
-        var bytes = System.Security.Cryptography.SHA256.HashData(keyData);
-        return Convert.ToHexString(bytes);
     }
 
     private async Task<ReferenceCounter<TtsAudioData>.Handle?> StartTtsRequest(TtsRequest request, Func<TtsRequest, TtsResponse, Task<bool>> core)
@@ -227,7 +173,6 @@ public sealed partial class TTSManager
             if (isSuccess)
             {
                 _cache.Cache(request.Key, response);
-
                 return response.GetHandle();
             }
             else
@@ -243,17 +188,26 @@ public sealed partial class TTSManager
 
     private readonly struct TtsRequest
     {
-        public string Speaker { get; }
-        public string Text { get; }
-        public TtsKind Kind { get; }
-        public string Key { get; }
+        public readonly TTSProvider Provider;
+        public readonly string Speaker;
+        public readonly string Text;
+        public readonly TtsKind Kind;
+        public readonly string Key;
 
-        public TtsRequest(string speaker, string text, TtsKind kind) : this()
+        public TtsRequest(TTSProvider provider, string speaker, string text, TtsKind kind) : this()
         {
             Speaker = speaker;
             Text = text;
             Kind = kind;
-            Key = GenerateCacheKey(speaker, text, kind);
+            Key = GenerateCacheKey(provider, speaker, text, kind);
+        }
+
+        private static string GenerateCacheKey(TTSProvider provider, string speaker, string text, TtsKind kind)
+        {
+            var key = $"{provider}/{speaker}/{text}/{(int)kind}";
+            var keyData = Encoding.UTF8.GetBytes(key);
+            var bytes = System.Security.Cryptography.SHA256.HashData(keyData);
+            return Convert.ToHexString(bytes);
         }
     }
 
@@ -307,17 +261,12 @@ public sealed partial class TTSManager
     }
 }
 
-public sealed class TtsResponseManager
+public sealed class TtsResponseManager(ArrayPool<byte> arrayPool)
 {
     private readonly Stack<TtsResponse> _responsePool = new();
-    private readonly ArrayPool<byte> _arrayPool;
+    private readonly ArrayPool<byte> _arrayPool = arrayPool;
 
     public TtsResponseManager() : this(ArrayPool<byte>.Shared) { }
-
-    public TtsResponseManager(ArrayPool<byte> arrayPool)
-    {
-        _arrayPool = arrayPool;
-    }
 
     public TtsResponse Rent()
     {
@@ -349,16 +298,11 @@ public sealed class TtsResponseManager
     }
 }
 
-public sealed class TtsResponse : ReferenceCounter<TtsAudioData>
+public sealed class TtsResponse(TtsResponseManager manager) : ReferenceCounter<TtsAudioData>(new())
 {
     public Task<bool>? Task { get; set; }
 
-    private readonly TtsResponseManager _manager;
-
-    public TtsResponse(TtsResponseManager manager) : base(new())
-    {
-        _manager = manager;
-    }
+    private readonly TtsResponseManager _manager = manager;
 
     protected override void OnHandleDisposed()
     {
@@ -429,7 +373,6 @@ public class ReferenceCounter<T>
         }
     }
 }
-
 public static class ReferenceCounterExtensions
 {
     public static bool TryGetValue<T>(this ReferenceCounter<T>.Handle? handle, [NotNullWhen(true)] out T? value)

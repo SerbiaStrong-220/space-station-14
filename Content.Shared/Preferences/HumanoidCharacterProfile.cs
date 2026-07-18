@@ -82,6 +82,15 @@ namespace Content.Shared.Preferences
         public string Voice { get; private set; } = DefaultVoice;
         // Corvax-TTS end
 
+        // SS220 TTS begin
+        [DataField]
+        public TTSVoicePreferences VoicePreferences = new()
+        {
+            [TTSProvider.Silero] = "",
+            [TTSProvider.NTTS] = "father_grigori"
+        };
+        // SS220 TTS end
+
         /// <summary>
         /// Associated <see cref="SpeciesPrototype"/> for this profile.
         /// </summary>
@@ -340,6 +349,13 @@ namespace Content.Shared.Preferences
             return new(this) { Voice = voice };
         }
         // Corvax-TTS-End
+
+        // SS220 TTS begin
+        public HumanoidCharacterProfile WithVoicePreferences(TTSVoicePreferences preferences)
+        {
+            return new(this) { VoicePreferences = preferences };
+        }
+        // SS220 TTS end
 
         public HumanoidCharacterProfile WithCharacterAppearance(HumanoidCharacterAppearance appearance)
         {

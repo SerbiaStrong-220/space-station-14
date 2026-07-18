@@ -21,7 +21,7 @@ using Robust.Shared.Enums;
 namespace Content.Server.SS220.TTS;
 
 // ReSharper disable once InconsistentNaming
-public sealed partial class TTSSystem : EntitySystem
+public sealed partial class TTSSystem : SharedTTSSystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IPlayerManager _playerManager = default!;
@@ -50,8 +50,8 @@ public sealed partial class TTSSystem : EntitySystem
         base.Initialize();
         _cfg.OnValueChanged(CCVars220.MaxCharInTTSAnnounceMessage, x => _maxAnnounceMessageChars = x, true);
         _cfg.OnValueChanged(CCVars220.MaxCharInTTSMessage, x => _maxMessageChars = x, true);
-        _cfg.OnValueChanged(CCCVars.TTSEnabled, v => _isEnabled = v, true);
-        _cfg.OnValueChanged(CCCVars.TTSAnnounceVoiceId, v => _fallbackAnnounceVoiceId = v, true);
+        // _cfg.OnValueChanged(CCVars220.TTSEnabled, v => _isEnabled = v, true);
+        _cfg.OnValueChanged(CCVars220.TTSAnnounceVoiceId, v => _fallbackAnnounceVoiceId = v, true);
 
         SubscribeLocalEvent<TransformSpeechEvent>(OnTransformSpeech);
         SubscribeLocalEvent<TTSComponent, EntitySpokeEvent>(OnEntitySpoke);
@@ -169,7 +169,7 @@ public sealed partial class TTSSystem : EntitySystem
             && args.Message.Length <= _maxAnnounceMessageChars
             && !string.IsNullOrWhiteSpace(voice))
         {
-            ttsResponse = await GenerateTts(args.Message, voice, TtsKind.Announce);
+            ttsResponse = await _ttsManager.ConvertTextToSpeech(voice, args.Message, TtsKind.Announce);
         }
 
         var message = new MsgPlayAnnounceTts
@@ -203,7 +203,7 @@ public sealed partial class TTSSystem : EntitySystem
             !GetVoicePrototype(ev.VoiceId, out var protoVoice))
             return;
 
-        using var ttsResponse = await GenerateTts(ev.Text, protoVoice.Speaker, TtsKind.Default);
+        using var ttsResponse = await _ttsManager.ConvertTextToSpeech(ev.Text, protoVoice.Speaker, TtsKind.Default);
         if (!ttsResponse.TryGetValue(out var audioData))
             return;
 
@@ -290,7 +290,7 @@ public sealed partial class TTSSystem : EntitySystem
 
     private async void HandleSayToMany(IEnumerable<ICommonSession> receivers, string message, TtsSpeakerContext speakerContext)
     {
-        using var ttsResponse = await GenerateTts(message, speakerContext.VoiceId, TtsKind.Default);
+        using var ttsResponse = await _ttsManager.ConvertTextToSpeech(speakerContext.VoiceId, message, TtsKind.Default);
         if (!ttsResponse.TryGetValue(out var audioData)) return;
         var ttsMessage = new MsgPlayTts
         {
@@ -318,7 +318,7 @@ public sealed partial class TTSSystem : EntitySystem
 
         if (msgPlayTts == null)
         {
-            using var ttsResponse = await GenerateTts(message, speakerContext.VoiceId, TtsKind.Default);
+            using var ttsResponse = await _ttsManager.ConvertTextToSpeech(speakerContext.VoiceId, message, TtsKind.Default);
             if (!ttsResponse.TryGetValue(out var audioData)) return;
             msgPlayTts = new MsgPlayTts
             {
@@ -347,7 +347,7 @@ public sealed partial class TTSSystem : EntitySystem
     private async void HandleWhisperToMany(IEnumerable<ICommonSession> receivers, string message, string obfMessage, TtsContext context)
     {
         MsgPlayTts? ttsMessage = null;
-        using var ttsResponse = await GenerateTts(message, context.SpeakerContext.VoiceId, TtsKind.Whisper);
+        using var ttsResponse = await _ttsManager.ConvertTextToSpeech(context.SpeakerContext.VoiceId, message, TtsKind.Whisper);
         if (ttsResponse.TryGetValue(out var audioData))
         {
             ttsMessage = new MsgPlayTts
@@ -359,7 +359,7 @@ public sealed partial class TTSSystem : EntitySystem
         }
 
         MsgPlayTts? obfttsMessage = null;
-        using var obfTtsResponse = await GenerateTts(obfMessage, context.SpeakerContext.VoiceId, TtsKind.Whisper);
+        using var obfTtsResponse = await _ttsManager.ConvertTextToSpeech(context.SpeakerContext.VoiceId, obfMessage, TtsKind.Whisper);
         if (obfTtsResponse.TryGetValue(out var obfAudioData))
         {
             obfttsMessage = new MsgPlayTts
@@ -411,7 +411,7 @@ public sealed partial class TTSSystem : EntitySystem
         {
             if (obfTtsMessage == null)
             {
-                using var obfTtsResponse = await GenerateTts(obfMessage, context.SpeakerContext.VoiceId, TtsKind.Whisper);
+                using var obfTtsResponse = await _ttsManager.ConvertTextToSpeech(context.SpeakerContext.VoiceId, obfMessage, TtsKind.Whisper);
                 if (!obfTtsResponse.TryGetValue(out var obfAudioData)) return;
                 obfTtsMessage = new MsgPlayTts
                 {
@@ -428,7 +428,7 @@ public sealed partial class TTSSystem : EntitySystem
         {
             if (ttsMessage == null)
             {
-                using var ttsResponse = await GenerateTts(message, context.SpeakerContext.VoiceId, TtsKind.Whisper);
+                using var ttsResponse = await _ttsManager.ConvertTextToSpeech(context.SpeakerContext.VoiceId, message, TtsKind.Whisper);
                 if (!ttsResponse.TryGetValue(out var audioData)) return;
                 ttsMessage = new MsgPlayTts
                 {
@@ -445,7 +445,7 @@ public sealed partial class TTSSystem : EntitySystem
 
     private async void HandleRadio(RadioEventReceiver[] receivers, string message, TtsContext context)
     {
-        using var soundData = await GenerateTts(message, context.SpeakerContext.VoiceId, TtsKind.Radio);
+        using var soundData = await _ttsManager.ConvertTextToSpeech(context.SpeakerContext.VoiceId, message, TtsKind.Radio);
         if (soundData is null)
             return;
 
@@ -473,7 +473,7 @@ public sealed partial class TTSSystem : EntitySystem
         if (!speakerContext.Valid)
             return;
 
-        using var soundData = await GenerateTts(args.Message, speakerContext.VoiceId, TtsKind.Telepathy);
+        using var soundData = await _ttsManager.ConvertTextToSpeech(speakerContext.VoiceId, args.Message, TtsKind.Telepathy);
         if (soundData is null)
             return;
 
@@ -503,30 +503,12 @@ public sealed partial class TTSSystem : EntitySystem
         }
     }
 
-    private async Task<ReferenceCounter<TtsAudioData>.Handle?> GenerateTts(string text, string speaker, TtsKind kind)
+    private void OnTransformSpeech(TransformSpeechEvent args)
     {
-        try
-        {
-            var textSanitized = Sanitize(text);
-            if (textSanitized == "") return default;
-            if (char.IsLetter(textSanitized[^1]))
-                textSanitized += ".";
+        if (!_isEnabled)
+            return;
 
-            var ssmlTraits = SoundTraits.RateFast;
-            if (kind == TtsKind.Whisper)
-                ssmlTraits |= SoundTraits.PitchVerylow;
-
-            var textSsml = ToSsmlText(textSanitized, ssmlTraits);
-
-            return await _ttsManager.ConvertTextToSpeech(speaker, textSanitized, kind);
-        }
-        catch (Exception e)
-        {
-            // Catch TTS exceptions to prevent a server crash.
-            Log.Error($"TTS System error: {e.Message}");
-        }
-
-        return default;
+        args.Message = args.Message.Replace("+", "");
     }
 }
 

@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Corvax.CCCVars;
+using Content.Shared.SS220.CCVars;
 using Content.Shared.SS220.TTS;
 using Robust.Shared.Audio;
 
@@ -14,13 +15,13 @@ public sealed partial class TTSSystem : EntitySystem
 
     private void InitializeAnnounces()
     {
-        _cfg.OnValueChanged(CCCVars.TTSAnnounceVolume, OnTtsAnnounceVolumeChanged, true);
+        _cfg.OnValueChanged(CCVars220.TTSAnnounceVolume, OnTtsAnnounceVolumeChanged, true);
         _ttsManager.PlayAnnounceTtsReceived += OnAnnounceTtsPlay;
     }
 
     private void ShutdownAnnounces()
     {
-        _cfg.UnsubValueChanged(CCCVars.TTSAnnounceVolume, OnTtsAnnounceVolumeChanged);
+        _cfg.UnsubValueChanged(CCVars220.TTSAnnounceVolume, OnTtsAnnounceVolumeChanged);
         _ttsManager.PlayAnnounceTtsReceived -= OnAnnounceTtsPlay;
     }
 

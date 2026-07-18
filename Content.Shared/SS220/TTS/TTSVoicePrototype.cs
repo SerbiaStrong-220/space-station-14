@@ -7,31 +7,34 @@ namespace Content.Shared.SS220.TTS;
 /// Prototype represent available TTS voices
 /// </summary>
 [Prototype("ttsVoice")]
-// ReSharper disable once InconsistentNaming
 public sealed partial class TTSVoicePrototype : IPrototype
 {
     [IdDataField]
     public string ID { get; private set; } = default!;
 
-    [DataField("name")]
+    [DataField]
     public string Name = string.Empty;
 
-    [DataField("sex", required: true)]
-    public Sex Sex = default!;
+    [DataField]
+    public string Description = string.Empty;
 
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("speaker", required: true)]
+    [DataField(required: true)]
+    public TTSProvider Provider;
+
+    [DataField(required: true)]
     public string Speaker = string.Empty;
 
-    [DataField("description")]
-    public string Description = string.Empty;
+    [DataField(required: true)]
+    public Sex Sex;
 
     /// <summary>
     /// Whether the species is available "at round start" (In the character editor)
     /// </summary>
-    [DataField("roundStart")]
+    [DataField]
     public bool RoundStart = true;
 
-    [DataField("sponsorOnly")]
+    [DataField]
     public bool SponsorOnly = false;
 }
+
+public sealed class TTSVoiceDef : Dictionary<TTSProvider, ProtoId<TTSVoicePrototype>> { }
