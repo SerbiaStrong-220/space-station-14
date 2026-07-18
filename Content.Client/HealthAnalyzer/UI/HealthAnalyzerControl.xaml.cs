@@ -145,8 +145,12 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
                 var decayText = Loc.GetString("health-analyzer-window-clinical-death-decay",
                     ("timeLeft", timeLeft.ToString(@"mm\:ss")));
 
-                var decayColor = timeLeft.TotalMinutes >= WarningThresholdMinutes ? "yellow" : "red";
-                ClinicalDeathTimeLabel.Text = $"[color={decayColor}]{decayText}[/color]";
+                var decayColor = timeLeft.TotalMinutes >= WarningThresholdMinutes ? Color.Yellow : Color.Red;
+
+                var decayMsg = new FormattedMessage();
+                decayMsg.PushColor(decayColor);
+                decayMsg.AddMarkupPermissive(decayText);
+                ClinicalDeathTimeLabel.SetMessage(decayMsg);
             }
         }
         else
