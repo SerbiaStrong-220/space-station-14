@@ -1,8 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.SS220.Trackers.Components;
-using Content.Shared.Humanoid.Prototypes;
-using Robust.Shared.Prototypes;
+using Content.Shared.Mind.Filters;
 
 namespace Content.Server.SS220.Objectives.Components;
 
@@ -11,12 +10,6 @@ public sealed partial class IntimidatePersonConditionComponent : Component
 {
     [DataField(required: true)]
     public DamageTrackerSpecifier DamageTrackerSpecifier = new();
-
-    /// <summary>
-    /// Species blacklist for races.
-    /// </summary>
-    [DataField]
-    public List<ProtoId<SpeciesPrototype>> SpeciesBlacklist = new();
 
     [ViewVariables(VVAccess.ReadWrite)]
     public EntityUid TargetMob;
@@ -44,6 +37,15 @@ public sealed partial class IntimidatePersonConditionComponent : Component
     /// </summary>
     [DataField(required: true)]
     public string? SSDDescription;
+
+    [DataField]
+    public MindPool Pool = new AliveHumansPool();
+
+    /// <summary>
+    /// Filters to apply to <see cref="Pool"/>.
+    /// </summary>
+    [DataField]
+    public List<MindFilter> Filter = new();
 }
 
 public enum IntimidatePersonDescriptionType

@@ -1,19 +1,12 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Linq;
-using Content.Server.Mind;
 using Content.Server.Objectives.Components;
 using Content.Server.Objectives.Systems;
 using Content.Server.SS220.Objectives.Components;
 using Content.Server.SS220.Trackers.Components;
-using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Objectives.Systems;
 using Content.Shared.SSDIndicator;
-using Robust.Shared.Random;
-using Content.Shared.Humanoid.Prototypes;
-using Robust.Shared.Prototypes;
-using Content.Shared.Humanoid;
 
 namespace Content.Server.SS220.Objectives.Systems;
 
@@ -21,7 +14,6 @@ public sealed partial class IntimidatePersonConditionSystem : EntitySystem
 {
     [Dependency] private MetaDataSystem _metaData = default!;
     [Dependency] private TargetSystem _target = default!;
-    [Dependency] private IRobustRandom _random = default!;
     [Dependency] private TargetObjectiveSystem _targetObjective = default!;
 
     public override void Initialize()
@@ -65,40 +57,28 @@ public sealed partial class IntimidatePersonConditionSystem : EntitySystem
 
     private void OnPersonAssigned(Entity<IntimidatePersonConditionComponent> entity, ref ObjectiveAssignedEvent args)
     {
+        args.Cancelled = true;
         var (uid, _) = entity;
 
-        if (!TryComp<TargetObjectiveComponent>(uid, out var targetObjectiveComponent))
-        {
-            args.Cancelled = true;
+        if (args.Mind.CurrentEntity == null)
             return;
-        }
+
+        if (!TryComp<TargetObjectiveComponent>(uid, out var targetObjectiveComponent))
+            return;
 
         if (targetObjectiveComponent.Target != null)
             return;
 
-        var targetableMinds = _target.GetAliveHumans(args.MindId)
-                    .Where(x => TryComp<MindComponent>(x, out var mindComponent)
-                                && !HasComp<DamageReceivedTrackerComponent>(GetEntity(mindComponent.OriginalOwnedEntity))
-                                && !IsBlacklistedSpecies(GetEntity(mindComponent.OriginalOwnedEntity), entity.Comp.SpeciesBlacklist))
-                    .ToList();
-
-        if (targetableMinds.Count == 0)
-        {
-            args.Cancelled = true;
+        if (_target.PickFromPool(entity.Comp.Pool, entity.Comp.Filter, args.MindId) is not { } picked)
             return;
-        }
 
-        var targetMindUid = _random.Pick(targetableMinds);
-        var target = GetMindsOriginalEntity(targetMindUid);
+        var target = picked.Comp.OwnedEntity;
 
-        if (args.Mind.CurrentEntity == null
-            || target == null)
-        {
-            args.Cancelled = true;
+        if (target == null)
             return;
-        }
 
-        _targetObjective.SetTarget(uid, targetMindUid, targetObjectiveComponent);
+        args.Cancelled = false;
+        _targetObjective.SetTarget(uid, picked.Owner, targetObjectiveComponent);
         var damageReceivedTracker = AddComp<DamageReceivedTrackerComponent>(target.Value);
         entity.Comp.TargetMob = target.Value;
         damageReceivedTracker.WhomDamageTrack = args.Mind.CurrentEntity.Value;
@@ -117,25 +97,6 @@ public sealed partial class IntimidatePersonConditionSystem : EntitySystem
             return 0f;
 
         return tracker.GetProgress();
-    }
-
-    private EntityUid? GetMindsOriginalEntity(EntityUid mindUid)
-    {
-        return GetEntity(Comp<MindComponent>(mindUid).OriginalOwnedEntity);
-    }
-
-    /// <summary>
-    /// Species blacklist for races.
-    /// </summary>
-    private bool IsBlacklistedSpecies(EntityUid? target, List<ProtoId<SpeciesPrototype>> blacklist)
-    {
-        if (target == null || blacklist.Count == 0)
-            return false;
-
-        if (!TryComp<HumanoidProfileComponent>(target.Value, out var appearance))
-            return false;
-
-        return blacklist.Contains(appearance.Species);
     }
 
     /// <summary>
