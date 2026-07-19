@@ -44,7 +44,7 @@ public sealed class GrillSystem : SharedGrillSystem
                             break;
                     }
 
-                    grillable.CurrentCookTime += ((cookingSpeed + grill.CookingSpeed) * grill.CookingModifier) * frameTime;
+                    grillable.CurrentCookTime += (cookingSpeed + grill.CookingSpeed) * grill.CookingModifier * frameTime;
                     Dirty(ent, grillable);
 
                     var ev = new CookTimeChanged(ent);

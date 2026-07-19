@@ -219,7 +219,7 @@
 - type: entity
   id: KitchenElectricGrillBroken
   parent: BaseBrokenEntity
-  name: разрушенный электрогриль
+  name: broken electric grill
   components:
   - type: Sprite
     drawdepth: SmallObjects
@@ -239,9 +239,9 @@
   - type: PlaceableSurface
 
 - type: entity
-  id: KitchenGrillAdvancedBroken
+  id: KitchenElectricGrillAdvancedBroken
   parent: BaseBrokenEntity
-  name: разрушенный продвинутый электрогриль
+  name: broken advanced electric grill
   components:
   - type: Sprite
     drawdepth: SmallObjects
