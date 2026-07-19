@@ -76,7 +76,7 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
         SubscribeLocalEvent<DisposalPipeCrawlerComponent, BloodstreamSpillAttemptEvent>(OnCrawlerBloodstreamSpillAttempt);
         SubscribeLocalEvent<DisposalPipeCrawlerContentsComponent, BloodstreamSpillAttemptEvent>(OnPipeContentsBloodstreamSpillAttempt);
         SubscribeLocalEvent<DisposalPipeCrawlerComponent, SpillAttemptEvent>(OnCrawlerSpillAttempt);
-        SubscribeLocalEvent<DisposalHolderComponent, EntInsertedIntoContainerMessage>(OnEntityInsertedIntoHolder);
+        SubscribeLocalEvent<EntGotInsertedIntoContainerMessage>(OnEntityInsertedIntoContainer);
         SubscribeLocalEvent<DisposalPipeCrawlerContentsComponent, EntGotRemovedFromContainerMessage>(OnPipeContentsRemoved);
     }
 
@@ -320,11 +320,10 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
         }
     }
 
-    private void OnEntityInsertedIntoHolder(
-        Entity<DisposalHolderComponent> ent,
-        ref EntInsertedIntoContainerMessage args)
+    private void OnEntityInsertedIntoContainer(EntGotInsertedIntoContainerMessage args)
     {
-        EnsureComp<DisposalPipeCrawlerContentsComponent>(args.Entity);
+        if (HasComp<DisposalHolderComponent>(args.Container.Owner))
+            EnsureComp<DisposalPipeCrawlerContentsComponent>(args.Entity);
     }
 
     private void OnPipeContentsRemoved(
