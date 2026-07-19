@@ -11,6 +11,9 @@ using Content.Shared.Objectives.Components;
 using Content.Shared.Objectives.Systems;
 using Content.Shared.SSDIndicator;
 using Robust.Shared.Random;
+using Content.Shared.Humanoid.Prototypes;
+using Robust.Shared.Prototypes;
+using Content.Shared.Humanoid;
 
 namespace Content.Server.SS220.Objectives.Systems;
 
@@ -75,7 +78,8 @@ public sealed partial class IntimidatePersonConditionSystem : EntitySystem
 
         var targetableMinds = _target.GetAliveHumans(args.MindId)
                     .Where(x => TryComp<MindComponent>(x, out var mindComponent)
-                                && !HasComp<DamageReceivedTrackerComponent>(GetEntity(mindComponent.OriginalOwnedEntity)))
+                                && !HasComp<DamageReceivedTrackerComponent>(GetEntity(mindComponent.OriginalOwnedEntity))
+                                && !IsBlacklistedSpecies(GetEntity(mindComponent.OriginalOwnedEntity), entity.Comp.SpeciesBlacklist))
                     .ToList();
 
         if (targetableMinds.Count == 0)
@@ -118,6 +122,20 @@ public sealed partial class IntimidatePersonConditionSystem : EntitySystem
     private EntityUid? GetMindsOriginalEntity(EntityUid mindUid)
     {
         return GetEntity(Comp<MindComponent>(mindUid).OriginalOwnedEntity);
+    }
+
+    /// <summary>
+    /// Species blacklist for races.
+    /// </summary>
+    private bool IsBlacklistedSpecies(EntityUid? target, List<ProtoId<SpeciesPrototype>> blacklist)
+    {
+        if (target == null || blacklist.Count == 0)
+            return false;
+
+        if (!TryComp<HumanoidProfileComponent>(target.Value, out var appearance))
+            return false;
+
+        return blacklist.Contains(appearance.Species);
     }
 
     /// <summary>

@@ -74,6 +74,8 @@
     startDescription: objective-condition-intimidate-target-toxin-desc
     successDescription: objective-condition-intimidate-target-toxin-desc-success
     sSDDescription: objective-condition-intimidate-target-toxin-desc-ssd
+    speciesBlacklist:
+    - Ipc
     damageTrackerSpecifier:
       damageGroup: Toxin
       allowedState: [Alive]
