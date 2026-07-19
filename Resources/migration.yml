@@ -1030,3 +1030,11 @@ GrenadeEMPArta: CartridgeArtilleryShellEMP
 
 # 2026-07-11 - SS220 laser carbine fix
 WeaponLaserCarabine:  WeaponLaserCarbineIK60
+
+# 2026-07-17 - SS220 Cult hotfix 25 #dek this after some time
+CultYoggCocoonBeach: CocoonBeach
+CultYoggCocoonClaw: CocoonClaw
+CultYoggCocoonSpikegun: CocoonSpikegun
+CultYoggCocoonVenomancer: CocoonVenomancer
+CultYoggCocoonSpitballer: CocoonSpitballer
+CultYoggCocoonSedativeSting: CocoonSedativeSting
