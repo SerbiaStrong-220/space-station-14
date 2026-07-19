@@ -48,10 +48,12 @@ public sealed partial class PuddleSystem
         if (!_solutionContainerSystem.TryGetDrainableSolution(entity.Owner, out var soln, out var solution) || solution.Volume == 0)
             return;
 
+        // SS220-felinid-pipecrawl-begin
         var spillAttempt = new SpillAttemptEvent(args.User);
         RaiseLocalEvent(args.User, ref spillAttempt);
         if (spillAttempt.Cancelled)
             return;
+        // SS220-felinid-pipecrawl-end
 
         var puddleSolution = _solutionContainerSystem.SplitSolution(soln.Value, solution.Volume);
         TrySpillAt(Transform(entity).Coordinates, puddleSolution, out _);

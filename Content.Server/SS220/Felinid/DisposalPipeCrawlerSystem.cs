@@ -47,23 +47,23 @@ namespace Content.Server.SS220.Felinid;
 public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
 {
     private static readonly EntProtoId DisposalHolderPrototype = "DisposalHolder";
-    [Dependency] private AtmosphereSystem _atmosphere = default!;
-    [Dependency] private SharedDisposalPipeCrawlerSystem _sharedPipecrawl = default!;
-    [Dependency] private SharedContentEyeSystem _contentEye = default!;
-    [Dependency] private SharedEyeSystem _eye = default!;
-    [Dependency] private DisposableSystem _disposableSystem = default!;
-    [Dependency] private DisposalUnitSystem _disposalUnitSystem = default!;
-    [Dependency] private BlindableSystem _blindable = default!;
-    [Dependency] private SharedMoverController _mover = default!;
-    [Dependency] private SharedContainerSystem _container = default!;
-    [Dependency] private InventorySystem _inventory = default!;
-    [Dependency] private SharedPhysicsSystem _physics = default!;
-    [Dependency] private SharedMapSystem _map = default!;
-    [Dependency] private DisposalTubeSystem _disposalTubeSystem = default!;
-    [Dependency] private SharedTransformSystem _transform = default!;
-    [Dependency] private PopupSystem _popup = default!;
-    [Dependency] private ThrowingSystem _throwing = default!;
-    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
+    [Dependency] private readonly SharedDisposalPipeCrawlerSystem _sharedPipecrawl = default!;
+    [Dependency] private readonly SharedContentEyeSystem _contentEye = default!;
+    [Dependency] private readonly SharedEyeSystem _eye = default!;
+    [Dependency] private readonly DisposableSystem _disposableSystem = default!;
+    [Dependency] private readonly DisposalUnitSystem _disposalUnitSystem = default!;
+    [Dependency] private readonly BlindableSystem _blindable = default!;
+    [Dependency] private readonly SharedMoverController _mover = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private readonly DisposalTubeSystem _disposalTubeSystem = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly ThrowingSystem _throwing = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -76,7 +76,7 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
         SubscribeLocalEvent<DisposalPipeCrawlerComponent, BloodstreamSpillAttemptEvent>(OnCrawlerBloodstreamSpillAttempt);
         SubscribeLocalEvent<DisposalPipeCrawlerContentsComponent, BloodstreamSpillAttemptEvent>(OnPipeContentsBloodstreamSpillAttempt);
         SubscribeLocalEvent<DisposalPipeCrawlerComponent, SpillAttemptEvent>(OnCrawlerSpillAttempt);
-        SubscribeLocalEvent<EntGotInsertedIntoContainerMessage>(OnEntityInsertedIntoContainer);
+        SubscribeLocalEvent<DisposalHolderComponent, EntInsertedIntoContainerMessage>(OnEntityInsertedIntoHolder);
         SubscribeLocalEvent<DisposalPipeCrawlerContentsComponent, EntGotRemovedFromContainerMessage>(OnPipeContentsRemoved);
     }
 
@@ -320,10 +320,11 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
         }
     }
 
-    private void OnEntityInsertedIntoContainer(EntGotInsertedIntoContainerMessage args)
+    private void OnEntityInsertedIntoHolder(
+        Entity<DisposalHolderComponent> ent,
+        ref EntInsertedIntoContainerMessage args)
     {
-        if (HasComp<DisposalHolderComponent>(args.Container.Owner))
-            EnsureComp<DisposalPipeCrawlerContentsComponent>(args.Entity);
+        EnsureComp<DisposalPipeCrawlerContentsComponent>(args.Entity);
     }
 
     private void OnPipeContentsRemoved(

@@ -61,10 +61,12 @@ public abstract partial class SharedPuddleSystem
         if (solution.Volume == FixedPoint2.Zero)
             return;
 
+        // SS220-felinid-pipecrawl-begin
         var spillAttempt = new SpillAttemptEvent(args.User);
         RaiseLocalEvent(args.User, ref spillAttempt);
         if (spillAttempt.Cancelled)
             return;
+        // SS220-felinid-pipecrawl-end
 
         Verb verb = new()
         {

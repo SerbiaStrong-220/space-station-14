@@ -12,10 +12,10 @@ namespace Content.Server.SS220.Felinid;
 public sealed partial class GunRecoilModifierSystem : EntitySystem
 {
     private static readonly ProtoId<TagPrototype> HardsuitTag = "Hardsuit";
-    [Dependency] private InventorySystem _inventory = default!;
-    [Dependency] private SharedStunSystem _stun = default!;
-    [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private TagSystem _tags = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly TagSystem _tags = default!;
 
     public override void Initialize()
     {
@@ -42,7 +42,7 @@ public sealed partial class GunRecoilModifierSystem : EntitySystem
         }
 
         if (_inventory.TryGetSlotEntity(uid, "shoes", out var shoes) &&
-            HasComp<NoSlipComponent>(shoes))
+            HasComp<NoSlipComponent>(shoes.Value))
         {
             modifier *= 0.6f;
         }

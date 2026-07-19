@@ -34,12 +34,12 @@ namespace Content.Shared.SS220.Felinid;
 
 public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
 {
-    [Dependency] private SharedActionsSystem _actions = default!;
-    [Dependency] private ActionBlockerSystem _blocker = default!;
-    [Dependency] private SharedContainerSystem _container = default!;
-    [Dependency] private SharedHandsSystem _hands = default!;
-    [Dependency] private InventorySystem _inventory = default!;
-    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -379,7 +379,7 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
         if (!Exists(entity))
             return false;
 
-        foreach (var container in _container.GetContainingContainers((entity, null)))
+        foreach (var container in _container.GetContainingContainers(entity))
         {
             if (container.Owner == crawler)
                 return true;
