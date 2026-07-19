@@ -238,7 +238,6 @@
         - TabletopMachineLayer
   - type: PlaceableSurface
 
-#SS220-grill-update-3 begin
 - type: entity
   id: KitchenGrillAdvancedBroken
   parent: BaseBrokenEntity
@@ -263,7 +262,6 @@
   - type: Construction
     graph: BrokenEntity
     node: weld
-#SS220-grill-update-3 end
 
 - type: entity
   id: PhotocopierBroken
