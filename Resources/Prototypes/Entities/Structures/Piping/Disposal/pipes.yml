@@ -16,6 +16,8 @@
   - type: Visibility
     layer: 1
   - type: SubFloorHide
+  # Marks every disposal pipe variant for the pipecrawl visibility overlay.
+  - type: DisposalPipeCrawlerTube
   - type: Clickable
   - type: InteractionOutline
   - type: Physics
@@ -100,7 +102,7 @@
     - map: [ "pipe" ]
       state: conpipe-s
   - type: DisposalTube
-  - type: DisposalPipeCrawlerTube
+    containerId: DisposalTransit
   - type: DisposalTransit
   - type: ContainerContainer
     containers:

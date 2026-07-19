@@ -18,6 +18,8 @@ public sealed partial class GunRecoilModifierSystem : EntitySystem
     private static readonly ProtoId<TagPrototype> Caliber45AcpTag = "CartridgeAmmoAcp";
     private static readonly ProtoId<TagPrototype> Caliber45MagnumTag = "CartridgeMagnum";
     private static readonly ProtoId<TagPrototype> Caliber20RifleTag = "CartridgeRifle";
+    private static readonly ProtoId<TagPrototype> Caliber30RifleTag = "CartridgeLightRifle";
+    private static readonly ProtoId<TagPrototype> Caliber10RifleTag = "CartridgeHeavyRifle";
     private static readonly ProtoId<TagPrototype> Caliber50ShotgunTag = "ShellShotgun";
     private static readonly ProtoId<TagPrototype> Caliber50ShotgunToyTag = "ShellShotgunToy";
     private static readonly ProtoId<TagPrototype> Caliber60AntiMaterielTag = "CartridgeAntiMateriel";
@@ -39,6 +41,20 @@ public sealed partial class GunRecoilModifierSystem : EntitySystem
         "BulletRiflePractice",
         "BulletRifleIncendiary",
         "BulletRifleUranium",
+    ];
+
+    private static readonly HashSet<EntProtoId> Caliber30RifleProjectiles =
+    [
+        "BulletLightRifle",
+        "BulletLightRiflePractice",
+        "BulletLightRifleIncendiary",
+        "BulletLightRifleUranium",
+    ];
+
+    private static readonly HashSet<EntProtoId> Caliber10RifleProjectiles =
+    [
+        "BulletHeavyRifle",
+        "BulletMinigun",
     ];
 
     private static readonly HashSet<EntProtoId> Caliber50Projectiles =
@@ -92,6 +108,18 @@ public sealed partial class GunRecoilModifierSystem : EntitySystem
         TimeSpan.FromSeconds(0.30),
         0.06f,
         TimeSpan.FromSeconds(0.9));
+
+    private static readonly RecoilProfile Caliber30RifleProfile = new(
+        0.9f,
+        TimeSpan.FromSeconds(0.34),
+        0.08f,
+        TimeSpan.FromSeconds(1.0));
+
+    private static readonly RecoilProfile Caliber10RifleProfile = new(
+        1.8f,
+        TimeSpan.FromSeconds(0.46),
+        0.15f,
+        TimeSpan.FromSeconds(1.5));
 
     private static readonly RecoilProfile Caliber50Profile = new(
         1.25f,
@@ -271,6 +299,12 @@ public sealed partial class GunRecoilModifierSystem : EntitySystem
 
                 if (_tags.HasTag(ammoUid, Caliber20RifleTag))
                     return Caliber20RifleProfile;
+
+                if (_tags.HasTag(ammoUid, Caliber30RifleTag))
+                    return Caliber30RifleProfile;
+
+                if (_tags.HasTag(ammoUid, Caliber10RifleTag))
+                    return Caliber10RifleProfile;
             }
 
             if (GetProjectileRecoilProfile(cartridge.Prototype) is { } profile)
@@ -287,6 +321,12 @@ public sealed partial class GunRecoilModifierSystem : EntitySystem
 
         if (Caliber20RifleProjectiles.Contains(projectileId))
             return Caliber20RifleProfile;
+
+        if (Caliber30RifleProjectiles.Contains(projectileId))
+            return Caliber30RifleProfile;
+
+        if (Caliber10RifleProjectiles.Contains(projectileId))
+            return Caliber10RifleProfile;
 
         if (Caliber50Projectiles.Contains(projectileId))
             return Caliber50Profile;
