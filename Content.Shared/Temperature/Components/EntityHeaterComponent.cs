@@ -18,14 +18,6 @@ public sealed partial class EntityHeaterComponent : Component
     [DataField]
     public float Power = 2400f;
 
-    //SS220-grill-update-3 begin
-    /// <summary>
-    /// Extra heat added to entities on the heater
-    /// </summary>
-    [DataField]
-    public float ExtraHeat;
-    //SS220-grill-update-3 end
-
     /// <summary>
     /// Current setting of the heater. If it is off or unpowered it won't heat anything.
     /// </summary>

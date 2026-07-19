@@ -940,25 +940,6 @@
       Glass: 2
       Cable: 5
 
-#SS220-grill-update-3 begin
-- type: entity
-  parent: BaseMachineCircuitboard
-  id: ElectricGrillAdvancedCircuitboard
-  components:
-  - type: Sprite
-    state: service
-  - type: MachineBoard
-    prototype: KitchenGrillAdvanced
-    stackRequirements:
-      Manipulator: 4
-      Glass: 2
-      Cable: 5
-    tagRequirements:
-      Igniter:
-        amount: 1
-        defaultPrototype: Igniter
-#SS220-grill-update-3 end
-
 - type: entity
   id: StasisBedMachineCircuitboard
   parent: BaseMachineCircuitboard

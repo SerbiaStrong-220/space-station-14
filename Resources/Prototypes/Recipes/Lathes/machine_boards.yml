@@ -255,7 +255,6 @@
   parent: [BaseCircuitboardRecipe]
   id: SmartFridgeCircuitboard
   result: SmartFridgeCircuitboard
-  
 # Bar
 - type: latheRecipe
   parent: [ BaseCircuitboardRecipe, BaseServiceMachineRecipeCategory ]
@@ -288,13 +287,6 @@
   parent: [ BaseCircuitboardRecipe, BaseServiceMachineRecipeCategory ]
   id: ElectricGrillMachineCircuitboard
   result: ElectricGrillMachineCircuitboard
-
-#SS220-grill-update-3 begin
-- type: latheRecipe
-  parent: [ BaseGoldCircuitboardRecipe, BaseServiceMachineRecipeCategory ]
-  id: ElectricGrillAdvancedCircuitboard
-  result: ElectricGrillAdvancedCircuitboard
-#SS220-grill-update-3 end
 
 - type: latheRecipe
   parent: [ BaseCircuitboardRecipe, BaseServiceMachineRecipeCategory ]
