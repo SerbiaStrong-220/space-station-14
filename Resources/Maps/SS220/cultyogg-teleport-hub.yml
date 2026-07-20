@@ -1,10 +1,10 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 267.4.0
+  engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 01/26/2026 12:43:34
+  time: 07/15/2026 16:59:48
   entityCount: 1354
 maps:
 - 4449
@@ -1229,6 +1229,13 @@ entities:
     - type: GravityShake
       shakeTimes: 10
     - type: RadiationGridResistance
+    - type: TileHistory
+      chunkHistory: {}
+    - type: ExplosionAirtightGrid
+    - type: Tag
+      tags:
+      - AstralBlocker
+      - MiGoBuildingBlocker
   - uid: 4449
     components:
     - type: MetaData
@@ -1470,7 +1477,7 @@ entities:
     - type: Transform
       pos: -0.5,38.5
       parent: 1
-- proto: CurbDarckSteel
+- proto: CurbDarkSteel
   entities:
   - uid: 409
     components:
@@ -1495,7 +1502,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 22.5,26.5
       parent: 1
-- proto: CurbDarckSteelCornerSmall
+- proto: CurbDarkSteelCornerSmall
   entities:
   - uid: 447
     components:
