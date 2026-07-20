@@ -527,6 +527,7 @@
   save: false
   abstract: true
   components:
+  - type: UnblockableSpeech #ss220 Borg update
   - type: RandomMetadata
     nameSegments:
     - NamesXenoborg
