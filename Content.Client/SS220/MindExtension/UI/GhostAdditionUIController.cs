@@ -90,8 +90,6 @@ public sealed partial class GhostAdditionUIController : UIController, IOnSystemC
         system.DeleteTrailPointResponse -= OnDeleteTrailPointResponse;
         system.ExtensionReturnResponse -= OnExtensionReturnResponse;
         system.RespawnedResponse -= OnRespawnedResponse;
-
-        system.RequestRespawnTimer();
     }
 
     #region UiEvents
