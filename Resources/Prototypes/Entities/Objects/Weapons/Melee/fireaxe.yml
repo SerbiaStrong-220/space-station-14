@@ -26,16 +26,17 @@
       types:
         # axes are kinda like sharp hammers, you know?
         Blunt: 5
-        Slash: 10
+        Slash: 10 #SS220 melee weapon extension begin
         Structural: 35 #ss220
     soundHit:
       collection: MetalThud
   - type: Wieldable
-  - type: IncreaseDamageOnWield
-    damage:
-      types:
-        Slash: 10
-        Structural: 135 #ss220
+  #SS220 melee weapon extension begin
+  - type: ItemExtensionMeleeWeapon
+  - type: ItemExtension
+    minimalStrengthToPickUp: 0.7
+    strengthRequirementToBeUsed: 1.1
+  #SS220 melee weapon extension end
   - type: Item
     size: Ginormous
   - type: Clothing

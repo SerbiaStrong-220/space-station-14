@@ -7,29 +7,27 @@
   - type: Sprite
     layers:
       - map: [ "enum.ColorableVisualLayer.CustomBase" ]
-        sprite: SS220/Objects/Mechs/chassis.rsi
+        sprite: SS220/Objects/Mechs/chassisfinal.rsi
         state: basichydraulic
-      #- map: [ "enum.ColorableVisualLayer.CustomColor" ]
-      #  sprite: SS220/Objects/Mechs/chassis.rsi
-      #  state: basichydrauliccolor
-    sprite: SS220/Objects/Mechs/chassis.rsi
-    state: basichydraulic
-  #- type: CustomColorableLayer
+      - map: [ "enum.ColorableVisualLayer.CustomColor" ]
+        sprite: SS220/Objects/Mechs/chassisfinal.rsi
+        state: basichydrauliccolor
+  - type: CustomColorableLayer
   - type: MechChassis
     maximalMass: 900
     baseMovementSpeed: 3.3
-    acceleration: 0.4
+    acceleration: 0.8
     efficiency: 0.01
   - type: MechPart
     integrity: 250
     maxIntegrity: 250
     ownMass: 300
     attachedSprite:
-      sprite: SS220/Objects/Mechs/chassis.rsi
+      sprite: SS220/Objects/Mechs/chassisfinal.rsi
       state: basichydraulic
-    #attachedColoredSprite:
-    #  sprite: SS220/Objects/Mechs/chassis.rsi
-    #  state: basichydrauliccolor
+    attachedColoredSprite:
+      sprite: SS220/Objects/Mechs/chassisfinal.rsi
+      state: basichydrauliccolor
   - type: Destructible
     thresholds:
     - trigger:
@@ -100,7 +98,7 @@
   - type: Sprite
     sprite: SS220/Objects/Mechs/chassis.rsi
     state: armoredsynth
-  - type: ArmorBlock # Ah yes,my beloved СБЭУ
+  - type: AltArmor # Ah yes,my beloved СБЭУ
     durabilitytresholddict:
         Radiation: 1000
         Poison: 1000

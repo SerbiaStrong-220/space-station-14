@@ -82,6 +82,12 @@
   - BaseSpeciesMobOrganic
   id: MobFelinid
   components:
+  - type: PhysicalParameters
+    parameterDict:
+      Strength: 0.4
+      ReactionSpeed: 1
+      Coordination: 1
+      PainTolerance: 1
   - type: InteractionPopup
     successChance: 1
     interactSuccessString: hugging-success-generic

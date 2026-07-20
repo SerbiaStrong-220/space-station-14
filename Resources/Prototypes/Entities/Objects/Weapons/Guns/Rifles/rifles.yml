@@ -21,6 +21,14 @@
     slots:
     - Back
     - suitStorage
+  #SS220 add physical parameters begin
+  - type: ItemExtensionRangedWeapon
+    angleIncrease: 3
+    maxAngle: 15.0
+  - type: ItemExtension
+    minimalStrengthToPickUp: 0.6
+    strengthRequirementToBeUsed: 1
+  #SS220 add physical parameters begin
   - type: AmmoCounter
   - type: Gun
     fireRate: 5

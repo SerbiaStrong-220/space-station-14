@@ -619,7 +619,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         var attackerEvent = new MeleeAttackerEvent(meleeUid, target.Value, damage);
         RaiseLocalEvent(user, ref attackerEvent);
 
-        if (attackerEvent.ModifiedDamage != new DamageSpecifier())
+        if (!attackerEvent.ModifiedDamage.Empty)
             damage = attackerEvent.ModifiedDamage;
         //ss220 extended weapon logic end
 

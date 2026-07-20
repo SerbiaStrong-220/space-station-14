@@ -6,7 +6,6 @@ using Content.Shared.SS220.PhysicalParameters;
 using Content.Shared.SS220.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
-using static Content.Shared.SS220.PhysicalParameters.PhysicalParametersSystem;
 
 namespace Content.Shared.SS220.Weapons.Ranged.Systems;
 
@@ -14,6 +13,7 @@ public sealed class ItemExtensionRangedWeaponSystem : EntitySystem
 {
     [Dependency] private SharedGunSystem _gun = default!;
     [Dependency] private PhysicalParametersSystem _parameters = default!;
+    [Dependency] private ItemExtensionSystem _itemExt = default!;
 
     public override void Initialize()
     {
@@ -64,15 +64,20 @@ public sealed class ItemExtensionRangedWeaponSystem : EntitySystem
         FixedPoint2 toDivide = extensionComp.StrengthRequirementToBeUsed - extensionComp.MinimalStrengthToPickUp;
 
         if (toDivide == 0)
-            toDivide = 1;
+            return; //If minimal and optimal strength are the same why did you use this component in the first place?
 
-        FixedPoint2 strengthModifier = (_parameters.GetParameterValue((userValidated, userParametersComp), Parameter.Strength) - extensionComp.MinimalStrengthToPickUp) / toDivide;
+        var handsUsed = _itemExt.TryGetNeededAmountOfHands(userValidated, ent.Owner);
+
+        if (handsUsed == -1)
+            handsUsed = 1;
+
+        FixedPoint2 strengthModifier = (_parameters.GetParameterValue((userValidated, userParametersComp), Parameter.Strength) * handsUsed - extensionComp.MinimalStrengthToPickUp) / toDivide;
 
         strengthModifier = FixedPoint2.Clamp(strengthModifier, 0, 1);
 
-        args.MinAngle += (ent.Comp.MinAngle.Theta * strengthModifier).Float();
-        args.MaxAngle += (ent.Comp.MaxAngle.Theta * strengthModifier).Float();
-        args.AngleDecay += (ent.Comp.AngleDecay.Theta * strengthModifier).Float();
-        args.AngleIncrease += (ent.Comp.AngleIncrease.Theta * strengthModifier).Float();
+        args.MinAngle = Math.Clamp(args.MinAngle + ent.Comp.MinAngle * (1 - strengthModifier.Float()), Math.Min(ent.Comp.MinAngleThreshold, args.MinAngle), args.MaxAngle + ent.Comp.MaxAngle);
+        args.MaxAngle = Math.Clamp(args.MaxAngle + ent.Comp.MaxAngle * (1 - strengthModifier.Float()), Math.Min(ent.Comp.MinAngleThreshold, args.MinAngle), args.MaxAngle + ent.Comp.MaxAngle);
+        args.AngleDecay += ent.Comp.AngleDecay * (1 - strengthModifier.Float());
+        args.AngleIncrease += ent.Comp.AngleIncrease * (1 - strengthModifier.Float());
     }
 }

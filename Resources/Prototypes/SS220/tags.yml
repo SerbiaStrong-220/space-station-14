@@ -14,7 +14,7 @@
   id: ReactionCleanable
 
 - type: Tag
-  id: GrenadeDusterArta
+  id: CartridgeArtilleryShell
 
 - type: Tag
   id: MagazineGrenadeArta
@@ -372,6 +372,9 @@
 
 - type: Tag
   id: AirDefenseTarget
+
+- type: Tag
+  id: Ipc
 
 - type: Tag
   id: CrystalPurple

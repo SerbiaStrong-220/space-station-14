@@ -5,8 +5,14 @@
   description: "Old but gold - hydraulic pistons, electromagnetic valves and tens of kilograms of steel. \nA heavy, unprecise and bulky but very strong manipulator."
   components:
   - type: Sprite
-    sprite: Objects/Specific/Mech/mecha_equipment.rsi
-    state: mecha_clamp
+    layers:
+      - map: [ "enum.ColorableVisualLayer.CustomBase" ]
+        sprite: SS220/Objects/Mechs/righthandfinal.rsi
+        state: basichydraulic
+      - map: [ "enum.ColorableVisualLayer.CustomColor" ]
+        sprite: SS220/Objects/Mechs/righthandfinal.rsi
+        state: basichydrauliccolor
+  - type: CustomColorableLayer
   - type: MechArm
     hands:
     - hand:
@@ -17,10 +23,10 @@
           - Gigantic
         damageOverride:
           types:
-            Blunt: 16
-            Structural: 50
+            Blunt: 14
+            Structural: 100
         altDisarm: false
-        strengthModifier: 6
+        strengthModifier: 9
         soundHit:
           path: /Audio/Effects/metal_thud1.ogg
           params:
@@ -49,8 +55,11 @@
     maxIntegrity: 150
     ownMass: 120
     attachedSprite:
-      sprite: SS220/Objects/Mechs/righthand.rsi
+      sprite: SS220/Objects/Mechs/righthandfinal.rsi
       state: basichydraulic
+    attachedColoredSprite:
+      sprite: SS220/Objects/Mechs/righthandfinal.rsi
+      state: basichydrauliccolor
 
 - type: entity
   id: RightServoArm
@@ -71,11 +80,11 @@
           - Huge
           - Large
           - Normal
-        strengthModifier: 3.8
+        strengthModifier: 6
         damageOverride:
           types:
-            Blunt: 20
-            Structural: 10
+            Blunt: 14
+            Structural: 30
         altDisarm: false
         attackRate: 1.5
   - type: Item

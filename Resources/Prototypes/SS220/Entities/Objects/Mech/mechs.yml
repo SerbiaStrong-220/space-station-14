@@ -18,11 +18,11 @@
         visible: false
       - map: [ "enum.MechPartVisualLayers.ChassisColored" ]
         visible: false
-      - sprite: SS220/Objects/Mechs/cores.rsi
+      - sprite: SS220/Objects/Mechs/coresfinal.rsi
         state: basicloader
         map: [ "enum.MechPartVisualLayers.Core" ]
         visible: true
-      - sprite: SS220/Objects/Mechs/cores.rsi
+      - sprite: SS220/Objects/Mechs/coresfinal.rsi
         state: basicloadercolor
         map: [ "enum.MechPartVisualLayers.CoreColored" ]
         color: "#ff6e52"
@@ -122,7 +122,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.45
-        density: 1000
+        density: 100000 #Rofls indeed do begin here
         mask:
         - MobMask
         layer:
@@ -184,23 +184,23 @@
       Poison: 1000
       Airloss: 1000
       Caustic: 1000
-      Piercing: 18 #Numbers higher compared to a strikeproof shield, bullets/lasers should be easily ignoring this due to AP
-      Blunt: 27
-      Heat: 13
-      Slash: 20
-      Shock: 30 # All the electronics is insulated in any industrial machine and the steel frame is not affected by it in any way
+      Piercing: 20 #Numbers higher compared to a strikeproof shield, anything starting from intermediate caliber will easily pierce that
+      Blunt: 40
+      Heat: 20
+      Slash: 45
+      Shock: 30 # All the electronics is insulated from the frame BY DEFAULT(otherwise there would be an instant short-circuit) and the steel frame is not affected by it in any way
     durabilitytresholddict:
       Radiation: 1000
       Poison: 1000
       Airloss: 1000
       Caustic: 1000
-      Piercing: 10
-      Blunt: 14
-      Heat: 7
-      Slash: 15
+      Piercing: 20
+      Blunt: 40
+      Heat: 15
+      Slash: 30
       Shock: 30
     attachedColoredSprite:
-      sprite: SS220/Objects/Mechs/altcores.rsi
+      sprite: SS220/Objects/Mechs/coresfinal.rsi
       state: basicloadercolor
   - type: FireProtection
     reduction: 0.5

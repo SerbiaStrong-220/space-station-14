@@ -1,4 +1,3 @@
-using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
@@ -20,12 +19,6 @@ public sealed partial class ClothingSpeedModifierComponent : Component
     //SS220 add physical parameters begin
     [DataField]
     public bool AffectedByParameters = false;
-
-    [DataField]
-    public FixedPoint2 MinimalStrengthToWear = 0;
-
-    [DataField]
-    public FixedPoint2 StrengthRequirementToBeWorn = 2;
     //SS220 add physical parameters end
 
     /// <summary>

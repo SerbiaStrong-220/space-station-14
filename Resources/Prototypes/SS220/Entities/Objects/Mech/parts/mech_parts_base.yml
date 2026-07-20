@@ -9,6 +9,7 @@
   - type: HeldSpeedModifier
     sprintModifier: 0.2 #You won't be able to run when holding something that has mass of more than hundreds of kilograms
     walkModifier: 0.4
+  - type: ArmorBlock
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Metallic
