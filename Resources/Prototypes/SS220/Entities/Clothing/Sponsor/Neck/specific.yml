@@ -12,20 +12,6 @@
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/Neck/Misc/neck-wreath.rsi
 
-# Шарф трубой
-- type: entity
-  parent: ClothingSponsorNeckBase
-  id: ClothingSponsorScarfTube
-  name: snood scarf
-  description: Warm inside, cold outside.
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Sponsor/Neck/Scarfs/scarf-tube.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Sponsor/Neck/Scarfs/scarf-tube.rsi
-  - type: Item
-    storedRotation: -90
-
 # Деревня дураков
 - type: entity
   parent: ClothingSponsorNeckBase
