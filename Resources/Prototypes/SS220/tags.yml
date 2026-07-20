@@ -399,3 +399,9 @@
 
 - type: Tag
   id: GasTank
+  
+- type: Tag
+  id: AstralBlocker
+
+- type: Tag
+  id: MiGoBuildingBlocker
