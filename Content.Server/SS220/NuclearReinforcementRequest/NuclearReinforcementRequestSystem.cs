@@ -1,5 +1,4 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
-using Content.Server.Antag;
 using Content.Server.Antag.Components;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.NukeOps;
@@ -19,7 +18,6 @@ public sealed partial class NuclearReinforcementRequestSystem : EntitySystem
     [Dependency] private TargetSystem _target = default!;
     [Dependency] private SharedPopupSystem _popupSystem = default!;
     [Dependency] private StoreSystem _store = default!;
-    [Dependency] private AntagSelectionSystem _antag = default!;
 
     private static readonly ProtoId<CurrencyPrototype> TelecrystalCurrencyPrototype = "Telecrystal";
 

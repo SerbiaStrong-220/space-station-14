@@ -46,6 +46,7 @@
             Psychologist: [ 1, 1 ]
             #science
             ResearchDirector: [ 1, 1 ]
+            Roboticist: [ 1, 1 ]
             SeniorResearcher: [ 1, 1]
             Scientist: [ 5, 5 ]
             ResearchAssistant: [ 8, 8 ]

@@ -55,6 +55,7 @@
             SeniorPhysician: [ 1, 1 ]
             #Science
             ResearchDirector: [ 1, 1 ]
+            Roboticist: [ 1, 1 ]
             Scientist: [ 8, 8 ]
             ResearchAssistant: [ 6, 6 ]
             StationAi: [ 1, 1 ]

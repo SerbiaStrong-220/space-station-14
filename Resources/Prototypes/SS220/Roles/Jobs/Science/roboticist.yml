@@ -1,0 +1,39 @@
+﻿- type: job
+  id: Roboticist
+  name: робототехник
+  description: Создавайте, обслуживайте и улучшайте робототехнику всех видов
+  playTimeTracker: JobRoboticist
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Science
+      time: 5h
+    - !type:SpeciesRequirement
+      inverted: true
+      species: [ Felinid, Vox, Diona, Arachnid ]
+  startingGear: RoboticistGear
+  experienceDefinition: SecurityPilotRoleExperience
+  icon: "JobIconRoboticist"
+  supervisors: job-supervisors-rd
+  canBeAntag: true
+  access:
+  - Research
+  - Maintenance
+  special:
+  - !type:AddImplantSpecial
+    implants: [ NeuralInterfaceImplant ]
+
+- type: startingGear
+  id: RoboticistGear
+  equipment:
+    ears: ClothingHeadsetScience
+
+- type: loadoutGroup
+  id: RoboticistPDA
+  name: loadout-group-scientist-id
+  loadouts:
+  - RoboticistPDA
+
+- type: loadout
+  id: RoboticistPDA
+  equipment:
+    id: RoboticistPDA
