@@ -6,202 +6,202 @@
     "x": 32,
     "y": 32
   },
-    "states": [
-        {
-            "name": "1984-icon"
-        },
-        {
-            "name": "1984-equipped-NECK",
-            "directions": 4
-        },
-        {
-            "name": "beer"
-        },
-        {
-            "name": "beer-equipped-NECK",
-            "directions": 4
-        },
-        {
-            "name": "catdespair"
-        },
-        {
-            "name": "catdespair-equipped-NECK",
-            "directions": 4
-        },
-        {
-            "name": "JRgreen"
-        },
-        {
-            "name": "JRgreen-equipped-NECK",
-            "directions": 4
-        },
-        {
-            "name": "JRwhite"
-        },
-        {
-            "name": "JRwhite-equipped-NECK",
-            "directions": 4
-        },
-        {
-            "name": "moth"
-        },
-        {
-            "name": "moth-equipped-NECK",
-            "directions": 4
-        },
-        {
-            "name": "dwarf"
-        },
-        {
-            "name": "dwarf-equipped-NECK",
-            "directions": 4
-        },
-        {
-            "name": "sheriff"
-        },
-        {
-            "name": "sheriff-equipped-NECK",
-            "directions": 4
-        },
-        {
-            "name": "love"
-        },
-        {
-            "name": "love-equipped-NECK",
-            "directions": 4
-        },
-        {
-            "name": "smokeworm"
-        },
-        {
-            "name": "smokeworm-equipped-NECK",
-            "directions": 4
-        },
-        {
-            "name": "star"
-        },
-        {
-            "name": "star-equipped-NECK",
-            "directions": 4
-        },
-        {
-            "name": "IPC"
-        },
-        {
-            "name": "IPC-equipped-NECK",
-            "directions": 4
-        },
-        {
-            "name": "slimegreen"
-        },
-        {
-            "name": "slimegreen-equipped-NECK",
-            "directions": 4
-        },
-        {
-            "name": "floppa"
-        },
-        {
-            "name": "floppa-equipped-NECK",
-            "directions": 4
-        },
-        {
-            "name": "donorsilver"
-        },
-        {
-            "name": "donorsilver-equipped-NECK",
-            "directions": 4
-        },
-        {
-            "name": "donorgold"
-        },
-        {
-            "name": "donorgold-equipped-NECK",
-            "directions": 4
-        },
-        {
-            "name": "grape"
-        },
-        {
-            "name": "grape-equipped-NECK",
-            "directions": 4
-        },
-        {
-            "name": "brushwood"
-        },
-        {
-            "name": "brushwood-equipped-NECK",
-            "directions": 4
-        },
-        {
-            "name": "TSFpin"
-        },
-        {
-            "name": "TSFpin-equipped-NECK",
-            "directions": 4
-        },
-        {
-            "name": "clover"
-        },
-        {
-            "name": "clover-equipped-NECK",
-            "directions": 4
-        },
-        {
-            "name": "human"
-        },
-        {
-            "name": "human-equipped-NECK",
-            "directions": 4
-        },
-        {
-            "name": "lizard"
-        },
-        {
-            "name": "lizard-equipped-NECK",
-            "directions": 4
-        },
-        {
-            "name": "arachnid"
-        },
-        {
-            "name": "arachnid-equipped-NECK",
-            "directions": 4
-        },
-        {
-            "name": "tajara"
-        },
-        {
-            "name": "tajara-equipped-NECK",
-            "directions": 4
-        },
-        {
-            "name": "vox"
-        },
-        {
-            "name": "vox-equipped-NECK",
-            "directions": 4
-        },
-        {
-            "name": "diona"
-        },
-        {
-            "name": "diona-equipped-NECK",
-            "directions": 4
-        },
-        {
-            "name": "slime"
-        },
-        {
-            "name": "slime-equipped-NECK",
-            "directions": 4
-        },
-        {
-            "name": "vulpear"
-        },
-        {
-            "name": "vulpear-equipped-NECK",
-            "directions": 4
-        }
-    ]
+  "states": [
+    {
+      "name": "1984-icon"
+    },
+    {
+      "name": "1984-equipped-NECK",
+      "directions": 4
+    },
+    {
+      "name": "beer"
+    },
+    {
+      "name": "beer-equipped-NECK",
+      "directions": 4
+    },
+    {
+      "name": "catdespair"
+    },
+    {
+      "name": "catdespair-equipped-NECK",
+      "directions": 4
+    },
+    {
+      "name": "JRgreen"
+    },
+    {
+      "name": "JRgreen-equipped-NECK",
+      "directions": 4
+    },
+    {
+      "name": "JRwhite"
+    },
+    {
+      "name": "JRwhite-equipped-NECK",
+      "directions": 4
+    },
+    {
+      "name": "moth"
+    },
+    {
+      "name": "moth-equipped-NECK",
+      "directions": 4
+    },
+    {
+      "name": "dwarf"
+    },
+    {
+      "name": "dwarf-equipped-NECK",
+      "directions": 4
+    },
+    {
+      "name": "sheriff"
+    },
+    {
+      "name": "sheriff-equipped-NECK",
+      "directions": 4
+    },
+    {
+      "name": "love"
+    },
+    {
+      "name": "love-equipped-NECK",
+      "directions": 4
+    },
+    {
+      "name": "smokeworm"
+    },
+    {
+      "name": "smokeworm-equipped-NECK",
+      "directions": 4
+    },
+    {
+      "name": "star"
+    },
+    {
+      "name": "star-equipped-NECK",
+      "directions": 4
+    },
+    {
+      "name": "IPC"
+    },
+    {
+      "name": "IPC-equipped-NECK",
+      "directions": 4
+    },
+    {
+      "name": "slimegreen"
+    },
+    {
+      "name": "slimegreen-equipped-NECK",
+      "directions": 4
+    },
+    {
+      "name": "floppa"
+    },
+    {
+      "name": "floppa-equipped-NECK",
+      "directions": 4
+    },
+    {
+      "name": "donorsilver"
+    },
+    {
+      "name": "donorsilver-equipped-NECK",
+      "directions": 4
+    },
+    {
+      "name": "donorgold"
+    },
+    {
+      "name": "donorgold-equipped-NECK",
+      "directions": 4
+    },
+    {
+      "name": "grape"
+    },
+    {
+      "name": "grape-equipped-NECK",
+      "directions": 4
+    },
+    {
+      "name": "brushwood"
+    },
+    {
+      "name": "brushwood-equipped-NECK",
+      "directions": 4
+    },
+    {
+      "name": "TSFpin"
+    },
+    {
+      "name": "TSFpin-equipped-NECK",
+      "directions": 4
+    },
+    {
+      "name": "clover"
+    },
+    {
+      "name": "clover-equipped-NECK",
+      "directions": 4
+    },
+    {
+      "name": "human"
+    },
+    {
+      "name": "human-equipped-NECK",
+      "directions": 4
+    },
+    {
+      "name": "lizard"
+    },
+    {
+      "name": "lizard-equipped-NECK",
+      "directions": 4
+    },
+    {
+      "name": "arachnid"
+    },
+    {
+      "name": "arachnid-equipped-NECK",
+      "directions": 4
+    },
+    {
+      "name": "tajara"
+    },
+    {
+      "name": "tajara-equipped-NECK",
+      "directions": 4
+    },
+    {
+      "name": "vox"
+    },
+    {
+      "name": "vox-equipped-NECK",
+      "directions": 4
+    },
+    {
+      "name": "diona"
+    },
+    {
+      "name": "diona-equipped-NECK",
+      "directions": 4
+    },
+    {
+      "name": "slime"
+    },
+    {
+      "name": "slime-equipped-NECK",
+      "directions": 4
+    },
+    {
+      "name": "vulpear"
+    },
+    {
+      "name": "vulpear-equipped-NECK",
+      "directions": 4
+    }
+  ]
 }
