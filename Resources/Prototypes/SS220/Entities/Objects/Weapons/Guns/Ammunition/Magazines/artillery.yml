@@ -1,0 +1,56 @@
+- type: entity
+  parent: BaseItem
+  id: BaseMagazineArtilleryShell
+  abstract: true
+  components:
+  - type: MultiHandedItem
+  - type: Tag
+    tags:
+    - MagazineGrenadeArta
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+        - CartridgeArtilleryShell
+    capacity: 5
+    soundRack:
+      path: /Audio/Weapons/Guns/Bolt/lmg_bolt_closed.ogg
+      params:
+        variation: 0.05
+    soundInsert:
+      path: /Audio/Weapons/Guns/MagIn/rifle_load.ogg
+      params:
+        variation: 0.05
+  - type: Item
+    size: Large
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/artillery.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-4
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 6
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: BaseMagazineArtilleryShell
+  id: MagazineArtilleryShell
+  name: artillery shell magazine
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeArtilleryShell
+
+- type: entity
+  parent: BaseMagazineArtilleryShell
+  id: MagazineArtilleryShellEMP
+  name: EMP artillery shell magazine
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeArtilleryShellEMP

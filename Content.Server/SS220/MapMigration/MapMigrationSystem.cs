@@ -41,15 +41,19 @@ public sealed partial class MapMigrationSystem_SS220 : EntitySystem
         if (!_rotateDoors)
             return;
 
-        // whitelist secret door
-        if (MetaData(entity).EntityPrototype is { } prototype
-            && (prototype.ID == BaseSecretDoorId || prototype.Parents.Contains(BaseSecretDoorId)))
-            RotateDoor(entity);
+        RotateDoor(entity);
     }
 
     private void OnDoorMapInit(Entity<DoorComponent> entity, ref MapInitEvent _)
     {
-        RotateDoor(entity, requireBothNeighbors: true);
+        // this event handler shouldn't affect airlocks
+        if (HasComp<AirlockComponent>(entity))
+            return;
+
+        // whitelist secret door
+        if (MetaData(entity).EntityPrototype is { } prototype
+            && (prototype.ID == BaseSecretDoorId || prototype.Parents.Contains(BaseSecretDoorId)))
+            RotateDoor(entity, requireBothNeighbors: true);
     }
 
     private bool CheckTileOccupied(Vector2i pos, EntityUid gridUid, MapGridComponent grid)

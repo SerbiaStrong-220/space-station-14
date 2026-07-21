@@ -274,7 +274,7 @@
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitERTLeaderGamma
     neck: ClothingBeltHolster
-    suitstorage: WeaponLaserCarabine
+    suitstorage: WeaponLaserCarbineIK60
     id: ERTLeaderPDA
     ears: ClothingHeadsetAltCentComm
     belt: ClothingBeltSecurity
@@ -337,7 +337,7 @@
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitERTSecurityGamma
     neck: ClothingBeltHolster
-    suitstorage: WeaponLaserCarabine
+    suitstorage: WeaponLaserCarbineIK60
     id: ERTSecurityPDA
     ears: ClothingHeadsetAltCentComm
     belt: ClothingBeltSecurity
@@ -401,7 +401,7 @@
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitERTMedicalGamma
     neck: ClothingBeltHolster
-    suitstorage: WeaponLaserCarabine
+    suitstorage: WeaponLaserCarbineIK60
     id: ERTMedicPDA
     ears: ClothingHeadsetAltCentComm
     belt: ClothingBeltERTGammaMedicalFilled
