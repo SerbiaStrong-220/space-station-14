@@ -66,3 +66,4 @@
         - id: TeacherCircuitBoard
         - id: MotherCircuitBoard
         - id: ClownCircuitBoard
+        - id: RenterCircuitBoard
