@@ -26,3 +26,6 @@ ent-LockerMagistrateFilled = { ent-LockerMagistrate }
 ent-LockerPrisoner9 = { ent-LockerPrisoner }
     .desc = { ent-LockerPrisoner.desc }
     .suffix = 9
+
+ent-AILawBoardsSafeFilled = сейф с платами ИИ
+    .desc = { ent-GunSafe.desc }
