@@ -1,0 +1,446 @@
+- type: entity
+  parent: ClothingNeckPinBase
+  id: ClothingNeck1984Pin
+  name: 1984 pin
+  description: Remember that you are being watched.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/pins.rsi
+    layers:
+    - state: 1984-icon
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/pins.rsi
+    clothingVisuals:
+      neck:
+      - state: 1984-equipped-NECK
+
+- type: entity
+  parent: ClothingNeckPinBase
+  id: ClothingNeckBeerPin
+  name: beer pin
+  description: Cheer!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/pins.rsi
+    layers:
+    - state: beer
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/pins.rsi
+    clothingVisuals:
+      neck:
+      - state: beer-equipped-NECK
+
+- type: entity
+  parent: ClothingNeckPinBase
+  id: ClothingNeckCatDespairPin
+  name: catdespair pin
+  description: Despondency and hopelessness.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/pins.rsi
+    layers:
+    - state: catdespair
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/pins.rsi
+    clothingVisuals:
+      neck:
+      - state: catdespair-equipped-NECK
+
+- type: entity
+  parent: ClothingNeckPinBase
+  id: ClothingNeckJRGreenPin
+  name: JR green pin
+  description: The pin is highly polished.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/pins.rsi
+    layers:
+    - state: JRgreen
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/pins.rsi
+    clothingVisuals:
+      neck:
+      - state: JRgreen-equipped-NECK
+
+- type: entity
+  parent: ClothingNeckJRGreenPin
+  id: ClothingNeckJRWhitePin
+  name: JR white pin
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/pins.rsi
+    layers:
+    - state: JRwhite
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/pins.rsi
+    clothingVisuals:
+      neck:
+      - state: JRwhite-equipped-NECK
+
+- type: entity
+  parent: ClothingNeckPinBase
+  id: ClothingNeckMothPin
+  name: moth pin
+  description: This race produces good poets.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/pins.rsi
+    layers:
+    - state: moth
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/pins.rsi
+    clothingVisuals:
+      neck:
+      - state: moth-equipped-NECK
+
+- type: entity
+  parent: ClothingNeckPinBase
+  id: ClothingNeckDwarfPin
+  name: dwarf pin
+  description: Beer, masculinity and craft.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/pins.rsi
+    layers:
+    - state: dwarf
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/pins.rsi
+    clothingVisuals:
+      neck:
+      - state: dwarf-equipped-NECK
+
+- type: entity
+  parent: ClothingNeckPinBase
+  id: ClothingNeckSheriffStarPin
+  name: sheriff star pin
+  description: Law and order in this sector.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/pins.rsi
+    layers:
+    - state: sheriff
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/pins.rsi
+    clothingVisuals:
+      neck:
+      - state: sheriff-equipped-NECK
+
+- type: entity
+  parent: ClothingNeckPinBase
+  id: ClothingNeckLovePin
+  name: love pin
+  description: I love you so much.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/pins.rsi
+    layers:
+    - state: love
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/pins.rsi
+    clothingVisuals:
+      neck:
+      - state: love-equipped-NECK
+
+- type: entity
+  parent: ClothingNeckPinBase
+  id: ClothingNeckSmokeWormPin
+  name: smoke worm pin
+  description: He can't finish his cigarette.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/pins.rsi
+    layers:
+    - state: smokeworm
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/pins.rsi
+    clothingVisuals:
+      neck:
+      - state: smokeworm-equipped-NECK
+
+- type: entity
+  parent: ClothingNeckPinBase
+  id: ClothingNeckStarPin
+  name: star pin
+  description: They say they can't be grabbed from the sky.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/pins.rsi
+    layers:
+    - state: star
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/pins.rsi
+    clothingVisuals:
+      neck:
+      - state: star-equipped-NECK
+
+- type: entity
+  parent: ClothingNeckPinBase
+  id: ClothingNeckIPCPin
+  name: IPC pin
+  description: Some kind of set of letters.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/pins.rsi
+    layers:
+    - state: IPC
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/pins.rsi
+    clothingVisuals:
+      neck:
+      - state: IPC-equipped-NECK
+
+- type: entity
+  parent: ClothingNeckPinBase
+  id: ClothingNeckSlimegreenPin
+  name: slime green pin
+  description: It's joyful and squelchy.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/pins.rsi
+    layers:
+    - state: slimegreen
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/pins.rsi
+    clothingVisuals:
+      neck:
+      - state: slimegreen-equipped-NECK
+
+- type: entity
+  parent: ClothingNeckPinBase
+  id: ClothingNeckBigFloppaPin
+  name: big floppa pin
+  description: He does not require to be represented.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/pins.rsi
+    layers:
+    - state: floppa
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/pins.rsi
+    clothingVisuals:
+      neck:
+      - state: floppa-equipped-NECK
+
+- type: entity
+  parent: ClothingNeckPinBase
+  id: ClothingNeckSilverBloodDonorPin
+  name: silver blood donor pin
+  description: The ultimate gift is the gift of life. You gave it freely.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/pins.rsi
+    layers:
+    - state: donorsilver
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/pins.rsi
+    clothingVisuals:
+      neck:
+      - state: donorsilver-equipped-NECK
+
+- type: entity
+  parent: ClothingNeckSilverBloodDonorPin
+  id: ClothingNeckGoldBloodDonorPin
+  name: gold blood donor pin
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/pins.rsi
+    layers:
+    - state: donorgold
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/pins.rsi
+    clothingVisuals:
+      neck:
+      - state: donorgold-equipped-NECK
+
+- type: entity
+  parent: ClothingNeckPinBase
+  id: ClothingNeckGrapePin
+  name: grape pin
+  description: Delicious and juicy grapes.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/pins.rsi
+    layers:
+    - state: grape
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/pins.rsi
+    clothingVisuals:
+      neck:
+      - state: grape-equipped-NECK
+
+- type: entity
+  parent: ClothingNeckPinBase
+  id: ClothingNeckBrushwoodPin
+  name: brushwood pin
+  description: It's probably necessary for starting a fire.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/pins.rsi
+    layers:
+    - state: brushwood
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/pins.rsi
+    clothingVisuals:
+      neck:
+      - state: brushwood-equipped-NECK
+
+- type: entity
+  parent: ClothingNeckPinBase
+  id: ClothingNeckTSFPin
+  name: TSF pin
+  description: The golden sun of the Federation shines upon your chest, lighting the dark edges of space.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/pins.rsi
+    layers:
+    - state: TSFpin
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/pins.rsi
+    clothingVisuals:
+      neck:
+      - state: TSFpin-equipped-NECK
+
+- type: entity
+  parent: ClothingNeckPinBase
+  id: ClothingNeckCloverPin
+  name: clover pin
+  description: Lady Luck is smiling on you today.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/pins.rsi
+    layers:
+    - state: clover
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/pins.rsi
+    clothingVisuals:
+      neck:
+      - state: clover-equipped-NECK
+
+- type: entity
+  parent: ClothingNeckPinBase
+  id: ClothingNeckHumanPin
+  name: human pin
+  description: They conquer space and conquer hearts.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/pins.rsi
+    layers:
+    - state: human
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/pins.rsi
+    clothingVisuals:
+      neck:
+      - state: human-equipped-NECK
+
+- type: entity
+  parent: ClothingNeckPinBase
+  id: ClothingNeckLizardPin
+  name: lizard pin
+  description: Strength, wisdom, and honor.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/pins.rsi
+    layers:
+    - state: lizard
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/pins.rsi
+    clothingVisuals:
+      neck:
+      - state: lizard-equipped-NECK
+
+- type: entity
+  parent: ClothingNeckPinBase
+  id: ClothingNeckArachnidPin
+  name: arachnid pin
+  description: The ancestral mother protects.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/pins.rsi
+    layers:
+    - state: arachnid
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/pins.rsi
+    clothingVisuals:
+      neck:
+      - state: arachnid-equipped-NECK
+
+- type: entity
+  parent: ClothingNeckPinBase
+  id: ClothingNeckTajaraPin
+  name: tajara pin
+  description: Will not give up the long-awaited freedom.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/pins.rsi
+    layers:
+    - state: tajara
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/pins.rsi
+    clothingVisuals:
+      neck:
+      - state: tajara-equipped-NECK
+
+- type: entity
+  parent: ClothingNeckPinBase
+  id: ClothingNeckVoxPin
+  name: vox pin
+  description: All for the Pack.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/pins.rsi
+    layers:
+    - state: vox
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/pins.rsi
+    clothingVisuals:
+      neck:
+      - state: vox-equipped-NECK
+
+- type: entity
+  parent: ClothingNeckPinBase
+  id: ClothingNeckDionaPin
+  name: diona pin
+  description: Give life, bloom, and make others happy.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/pins.rsi
+    layers:
+    - state: diona
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/pins.rsi
+    clothingVisuals:
+      neck:
+      - state: diona-equipped-NECK
+
+- type: entity
+  parent: ClothingNeckPinBase
+  id: ClothingNeckSlimePin
+  name: slime pin
+  description: How can you not love them? They're so cheerful and friendly.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/pins.rsi
+    layers:
+    - state: slime
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/pins.rsi
+    clothingVisuals:
+      neck:
+      - state: slime-equipped-NECK
+
+- type: entity
+  parent: ClothingNeckPinBase
+  id: ClothingNeckVulpearPin
+  name: vulpear pin
+  description: We don't know what it is.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/pins.rsi
+    layers:
+    - state: vulpear
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/pins.rsi
+    clothingVisuals:
+      neck:
+      - state: vulpear-equipped-NECK
+
