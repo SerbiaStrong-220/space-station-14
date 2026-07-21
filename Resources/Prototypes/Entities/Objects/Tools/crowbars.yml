@@ -21,7 +21,7 @@
     wideAnimationRotation: -135
     damage:
       types:
-        Blunt: 8
+        Blunt: 12 #SS220 melee weapon extension
     soundHit:
       collection: MetalThud
   - type: Tool
@@ -30,6 +30,12 @@
     useSound:
       path: /Audio/Items/crowbar.ogg
   - type: ToolTileCompatible
+  #SS220 melee weapon extension begin
+  - type: ItemExtensionMeleeWeapon
+  - type: ItemExtension
+    minimalStrengthToPickUp: 0.5
+    strengthRequirementToBeUsed: 1
+  #SS220 melee weapon extension begin
   - type: PhysicalComposition
     materialComposition:
       Steel: 100

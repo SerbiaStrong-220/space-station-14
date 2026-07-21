@@ -20,6 +20,12 @@
         Slash: 15
         Piercing: 15
         Structural: 20
+  #SS220 melee weapon extension begin
+  - type: ItemExtensionMeleeWeapon
+  - type: ItemExtension
+    minimalStrengthToPickUp: 0.6
+    strengthRequirementToBeUsed: 0.9
+  #SS220 melee weapon extension end
   - type: Item
     size: Normal
     sprite: Objects/Weapons/Melee/armblade.rsi

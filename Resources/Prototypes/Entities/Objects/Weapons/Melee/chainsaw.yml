@@ -18,6 +18,11 @@
   - type: Sprite
     sprite: Objects/Weapons/Melee/chainsaw.rsi
     state: icon
+  #SS220 melee weapon extension begin
+  - type: ItemExtension
+    minimalStrengthToPickUp: 0.85
+    strengthRequirementToBeUsed: 1.3
+  #SS220 melee weapon extension end
   - type: MeleeWeapon
     autoAttack: true
     angle: 0
