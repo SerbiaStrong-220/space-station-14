@@ -265,7 +265,7 @@ public abstract class SharedWieldableSystem : EntitySystem
             return false;
         }
 
-        if (_hands.CountFreeableHands((user, hands), except: uid) - Math.Max(_itemExt.TryGetNeededAmountOfHands(user, uid) - 1, 0) < component.FreeHandsRequired) //SS220 add physical parameters
+        if (_hands.CountFreeableHands((user, hands), except: uid) < component.FreeHandsRequired) //SS220 add physical parameters
         {
             if (!quiet)
             {

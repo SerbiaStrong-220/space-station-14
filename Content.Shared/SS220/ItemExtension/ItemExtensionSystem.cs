@@ -6,6 +6,8 @@ using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Item;
 using Content.Shared.Popups;
 using Content.Shared.SS220.ItemExtension;
+using Content.Shared.Wieldable;
+using Content.Shared.Wieldable.Components;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.PhysicalParameters;
@@ -19,6 +21,7 @@ public sealed class ItemExtensionSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedWieldableSystem _wield = default!;
 
     public override void Initialize()
     {
@@ -33,6 +36,9 @@ public sealed class ItemExtensionSystem : EntitySystem
 
     public void OnPickupAttempt(Entity<ItemExtensionComponent> ent, ref GettingPickedUpAttemptEvent args)
     {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
         FixedPoint2 userStrength = 1;
 
         if (TryComp<PhysicalParametersComponent>(args.User, out var parametersComp))
@@ -65,6 +71,9 @@ public sealed class ItemExtensionSystem : EntitySystem
 
     public void OnUserParametersChanged(Entity<ItemExtensionComponent> ent, ref UserParametersChangedEvent args)
     {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
         FixedPoint2 userStrength = 1;
 
         if (TryComp<PhysicalParametersComponent>(args.User, out var parametersComp))
@@ -91,7 +100,18 @@ public sealed class ItemExtensionSystem : EntitySystem
 
                 _virtualItem.DeleteInHandsMatching(args.User, ent.Owner);
 
-                for (var i = 0; i < ent.Comp.MinimalStrengthToPickUp / userStrength - 1; i++)
+                int handsUsedInWielding = 0;
+
+                if (TryComp<WieldableComponent>(ent.Owner, out var wieldableComponent) &&
+                    !wieldableComponent.Wielded &&
+                    wieldableComponent.FreeHandsRequired <= ent.Comp.MinimalStrengthToPickUp / userStrength &&
+                    _wield.TryWield(ent.Owner, wieldableComponent, args.User))
+                    handsUsedInWielding += wieldableComponent.FreeHandsRequired - 1;
+
+                if (wieldableComponent != null && wieldableComponent.Wielded)
+                    handsUsedInWielding += wieldableComponent.FreeHandsRequired - 1;
+
+                for (var i = 0; i < ent.Comp.MinimalStrengthToPickUp / userStrength - 1 - handsUsedInWielding; i++)
                     _virtualItem.TrySpawnVirtualItemInHand(ent.Owner, args.User);
 
                 return;
@@ -133,23 +153,46 @@ public sealed class ItemExtensionSystem : EntitySystem
 
     private void OnEquipped(Entity<ItemExtensionComponent> ent, ref GotEquippedHandEvent args)
     {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
         FixedPoint2 userStrength = 1;
 
         if (TryComp<PhysicalParametersComponent>(args.User, out var parametersComp))
             userStrength = _parametersSystem.GetParameterValue((args.User, parametersComp), Parameter.Strength);
 
-        for (var i = 0; i < ent.Comp.MinimalStrengthToPickUp / userStrength - 1; i++)
+        int handsUsedInWielding = 0;
+
+        if (TryComp<WieldableComponent>(ent.Owner, out var wieldableComponent) &&
+            !wieldableComponent.Wielded &&
+            wieldableComponent.FreeHandsRequired <= ent.Comp.MinimalStrengthToPickUp / userStrength &&
+            _wield.TryWield(ent.Owner, wieldableComponent, args.User))
+            handsUsedInWielding += wieldableComponent.FreeHandsRequired - 1;
+
+        if (wieldableComponent != null && wieldableComponent.Wielded)
+            handsUsedInWielding += wieldableComponent.FreeHandsRequired - 1;
+
+        for (var i = 0; i < ent.Comp.MinimalStrengthToPickUp / userStrength - 1 - handsUsedInWielding; i++)
             _virtualItem.TrySpawnVirtualItemInHand(ent.Owner, args.User);
     }
 
     private void OnUnequipped(Entity<ItemExtensionComponent> ent, ref GotUnequippedHandEvent args)
     {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
         _virtualItem.DeleteInHandsMatching(args.User, ent.Owner);
     }
 
     private void OnVirtualItemDeleted(Entity<ItemExtensionComponent> ent, ref VirtualItemDeletedEvent args)
     {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
         if (args.BlockingEntity != ent.Owner || _timing.ApplyingState)
+            return;
+
+        if (TryGetNeededAmountOfHands(args.User, ent.Owner) == 1)
             return;
 
         _hands.TryDrop(args.User, ent.Owner);
