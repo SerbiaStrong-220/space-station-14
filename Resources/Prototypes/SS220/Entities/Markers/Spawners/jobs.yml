@@ -141,5 +141,5 @@
   - type: Sprite
     layers:
     - state: green
-    - sprite: SS220/Mobs/Silicon/chassis.rsi
-      state: SecBorg
+    #- state: securityborg
+    #  sprite: SS220\Markers\jobs.rsi

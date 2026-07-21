@@ -406,7 +406,7 @@
 
 - type: entity
   name: borg laser carbine
-  parent: [BaseLaserRifle, BaseGunWieldable, BaseSecurityContraband]
+  parent:  WeaponLaserCarbine
   id: BorgWeaponLaserCarbine
   description: Favoured by Nanotrasen Security for being cheap and easy to use.
   components:
@@ -422,7 +422,7 @@
  
 - type: entity
   name: borg disabler
-  parent: [ WeaponDisablerPractice] # Ss220-delete-contraband
+  parent: WeaponDisablerPractice
   id: BorgWeaponDisabler
   description: A self-defense weapon that exhausts organic targets, weakening them until they collapse.
   components:

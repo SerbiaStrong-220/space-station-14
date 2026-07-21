@@ -27,8 +27,6 @@
     - BorgModuleSafety
     - BorgModuleLethal
     - BorgModuleSecurity
-    
-    
   - type: BorgModule
     borgFitTypes:
     - borg-type-security
@@ -152,7 +150,9 @@
   - type: Sprite
     layers:
     - state: security
+      sprite: Objects/Specific/Robotics/borgmodule.rsi
     - state: icon-safety
+      sprite: SS220/Objects/Specific/Robotics/borgmodule.rsi
   - type: ItemBorgModule
     hands:
     - item: Crowbar
@@ -176,7 +176,9 @@
   - type: Sprite
     layers:
     - state: security
+      sprite: Objects/Specific/Robotics/borgmodule.rsi
     - state: icon-lethal
+      sprite: SS220/Objects/Specific/Robotics/borgmodule.rsi
   - type: ItemBorgModule
     hands:
     - item: CombatKnife
