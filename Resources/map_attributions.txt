@@ -103,5 +103,5 @@
   authors: VictorBoum
 
 - files: ["gate.yml"]
-  authors: Abiergo, Adammatic, SVEDETEL, PandionSM, VoidCat
+  authors: Abiergo, Adammatic, SVEDETEL, PandionSM, Shiva_Meresh, VoidCat
 
