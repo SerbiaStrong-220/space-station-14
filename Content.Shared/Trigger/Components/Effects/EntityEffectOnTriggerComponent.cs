@@ -13,7 +13,7 @@ public sealed partial class EntityEffectOnTriggerComponent : BaseXOnTriggerCompo
     /// <summary>
     /// The effects to apply.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField, /* AutoNetworkedField SS220 EntityEffect not NetSerializable */]
     public EntityEffect[] Effects;
 
     /// <summary>
