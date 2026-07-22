@@ -7,3 +7,12 @@
   - ConstructionBase
   - ConstructionTrained
   - ConstructionProfessional
+
+- type: skillTree
+  id: ElectronicsConstruction
+  skillGroupId: SkillTreeEngineering
+  skillTreeName: electronics-construction-skill-tree-name
+  skillTree:
+  - ElectronicsConstructionInitial
+  - ElectronicsConstructionBase
+  - ElectronicsConstructionAdvanced

@@ -76,3 +76,25 @@
   knowledges:
   - ScienceKnowledge
   addSublevelPoints: 15
+
+- type: experienceDefinition
+  id: RoboticistRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    ExtravehicularActivity:
+      level: 2
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 2
+    Medicine:
+      level: 2
+    PhysicalTraining:
+      level: 1
+    ElectronicsConstruction:
+      level: 3
+  knowledges:
+  - ScienceKnowledge
+  addSublevelPoints: 15
+

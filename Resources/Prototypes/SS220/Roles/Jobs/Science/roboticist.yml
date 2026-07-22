@@ -11,7 +11,7 @@
       inverted: true
       species: [ Felinid, Vox, Diona, Arachnid ]
   startingGear: RoboticistGear
-  experienceDefinition: SecurityPilotRoleExperience
+  experienceDefinition: RoboticistRoleExperience
   icon: "JobIconRoboticist"
   supervisors: job-supervisors-rd
   canBeAntag: true

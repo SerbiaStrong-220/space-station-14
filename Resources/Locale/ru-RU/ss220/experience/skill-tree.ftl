@@ -7,3 +7,5 @@ medicine-skill-tree-name = Медицинская практика
 anatomy-skill-tree-name = Анатомия
 
 construction-skill-tree-name = Строительство
+
+electronics-construction-skill-tree-name = Сборка электроники
