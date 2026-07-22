@@ -247,3 +247,26 @@
     nameEntries:
     - [SyndicateAgentKnowledge, null]
     - [ServiceActorKnowledge, null]
+
+- type: entity
+  parent: ClothingHandsBase
+  id: ClothingHandsGauntletsPA
+  name: power armor gauntlets
+  description: Armored gloves that protect the user's hands from attacks and give advantages in hand-to-hand combat
+  components:
+  - type: Insulated
+  - type: Sprite
+    sprite: SS220/Clothing/Hands/Gloves/powerarmor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Hands/Gloves/powerarmor.rsi
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 10
+    strengthDamageMultiplier: 0.5
+    animation: WeaponArcFist
+    soundHit:
+      path: /Audio/SS220/Weapons/Melee/Punches/punch_ds.ogg
+  - type: Fiber
+    fiberMaterial: fibers-insulative
+  - type: FingerprintMask

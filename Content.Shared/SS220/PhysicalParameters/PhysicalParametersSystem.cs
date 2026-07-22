@@ -232,6 +232,7 @@ public sealed class PhysicalParametersSystem : EntitySystem
 
         return strengthModifier;
     }
+
     public void UpdateParameterValues(Entity<PhysicalParametersComponent> ent)
     {
         ent.Comp.ParameterDictModified = new Dictionary<Parameter, FixedPoint2>(ent.Comp.ParameterDict);
@@ -266,6 +267,8 @@ public sealed class PhysicalParametersSystem : EntitySystem
 
             ent.Comp.ParameterDictModified.Add(parameter, valueToAdd);
         }
+
+        _movementSystem.RefreshMovementSpeedModifiers(ent);
     }
 
     public void AddParameter(Entity<PhysicalParametersComponent> ent, Parameter parameter, FixedPoint2 value)
@@ -320,4 +323,7 @@ public record struct ParametersUpdateEvent() : IInventoryRelayEvent
 }
 
 [ByRefEvent]
-public readonly record struct UserParametersChangedEvent(EntityUid User);
+public readonly record struct UserParametersChangedEvent(EntityUid User) : IInventoryRelayEvent
+{
+    SlotFlags IInventoryRelayEvent.TargetSlots => ~SlotFlags.POCKET;
+}
