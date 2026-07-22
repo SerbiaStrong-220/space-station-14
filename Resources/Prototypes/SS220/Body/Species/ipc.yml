@@ -122,6 +122,7 @@
     modifyTime: 0
     showPopup: false
     checkHeadSlot: false
+    interactable: false
   #- type: ActivatableUI
   #  key: enum.MagicMirrorUiKey.Key
   #  singleUser: true

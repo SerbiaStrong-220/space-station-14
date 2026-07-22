@@ -33,6 +33,61 @@
       Steel: 15
 
 - type: entity
+  id: LivingRoots
+  parent: CableStackLive
+  name: live roots coil
+  suffix: Full
+  description: Corrupted coil of cables, covered with slime and strange roots, pulsates.
+  components:
+  - type: Stack
+    stackType: LivingRootsStack
+    baseLayer: base
+    layerStates:
+    - coilhv-10
+    - coilhv-20
+    - coilhv-30
+  - type: Sprite
+    state: coilhv-30
+    layers:
+    - state: coilhv-30
+      map: ["base"]
+  - type: Item
+    heldPrefix: coilhv
+  - type: Appearance
+  - type: Extractable
+    grindableSolutionName: hvcable
+  - type: SolutionContainerManager
+    solutions:
+      hvcable:
+        reagents:
+        - ReagentId: Iron
+          Quantity: 3
+        - ReagentId: Copper
+          Quantity: 2
+        - ReagentId: Carbon #steel-reinforced
+          Quantity: 1
+
+- type: entity
+  parent: LivingRoots
+  id: LivingRootsStack10
+  suffix: 10
+  components:
+  - type: Sprite
+    state: coilhv-10
+  - type: Stack
+    count: 10
+
+- type: entity
+  parent: LivingRoots
+  id: LivingRootsStack1
+  suffix: 1
+  components:
+  - type: Sprite
+    state: coilhv-10
+  - type: Stack
+    count: 1
+
+- type: entity
   id: CableHVStackLive
   parent: CableStackLive
   name: live roots coil (HV)
@@ -76,15 +131,6 @@
     state: coilhv-10
   - type: Stack
     count: 10
-
-# - type: entity
-#   parent: CableHVStack10Live
-#   id: CableHVStackLingering10Live
-#   suffix: Lingering, 10
-#   components:
-#   - type: Stack
-#     lingering: true
-#     count: 10
 
 - type: entity
   parent: CableHVStackLive
