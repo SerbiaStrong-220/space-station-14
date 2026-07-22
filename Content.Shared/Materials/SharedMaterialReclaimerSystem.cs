@@ -14,6 +14,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Timing;
 using Content.Shared.Emag.Components; //SS220-ReclaimerEmaggedTime
+using Content.Shared.SS220.Timing; //SS220-ReclaimerEmaggedTime
 
 namespace Content.Shared.Materials;
 
@@ -30,6 +31,7 @@ public abstract class SharedMaterialReclaimerSystem : EntitySystem
     [Dependency] protected readonly SharedContainerSystem Container = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly EmagSystem _emag = default!;
+    [Dependency] private ComponentTimedRemovalSystem _timedRemoval = default!; //SS220-ReclaimerEmaggedTime
 
     public const string ActiveReclaimerContainerId = "active-material-reclaimer-container";
 
@@ -42,6 +44,7 @@ public abstract class SharedMaterialReclaimerSystem : EntitySystem
         SubscribeLocalEvent<MaterialReclaimerComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<CollideMaterialReclaimerComponent, StartCollideEvent>(OnCollide);
         SubscribeLocalEvent<ActiveMaterialReclaimerComponent, ComponentStartup>(OnActiveStartup);
+        SubscribeLocalEvent<MaterialReclaimerComponent, ComponentTimedRemovalExpiredEvent>(OnEmagTimerExpired); //SS220-ReclaimerEmaggedTime
     }
 
     private void OnMapInit(EntityUid uid, MaterialReclaimerComponent component, MapInitEvent args)
@@ -59,8 +62,7 @@ public abstract class SharedMaterialReclaimerSystem : EntitySystem
         args.PushMarkup(Loc.GetString("recycler-count-items", ("items", component.ItemsProcessed)));
 
         //SS220-ReclaimerEmaggedTime begin
-
-        if (!TryComp<MaterialReclaimerEmagTimerComponent>(uid, out var timer))
+        if (!TryComp<ComponentTimedRemovalComponent>(uid, out var timer))
             return;
 
         var remaining = timer.EndTime - Timing.CurTime;
@@ -71,7 +73,6 @@ public abstract class SharedMaterialReclaimerSystem : EntitySystem
         args.PushMarkup(Loc.GetString("material-reclaimer-emag-time",
             ("minutes", remaining.Minutes),
             ("seconds", remaining.Seconds)));
-
         //SS220-ReclaimerEmaggedTime end
     }
 
@@ -86,11 +87,24 @@ public abstract class SharedMaterialReclaimerSystem : EntitySystem
         args.Handled = true;
 
         //SS220-ReclaimerEmaggedTime begin
-        var timer = EnsureComp<MaterialReclaimerEmagTimerComponent>(uid);
-        timer.EndTime = Timing.CurTime + component.EmagDuration;
-        Dirty(uid, timer);
+        _timedRemoval.StartTimer(uid, component.EmagDuration);
         //SS220-ReclaimerEmaggedTime end
     }
+
+    //SS220-ReclaimerEmaggedTime begin
+    private void OnEmagTimerExpired(EntityUid uid, MaterialReclaimerComponent component, ref ComponentTimedRemovalExpiredEvent args)
+    {
+        if (!TryComp<EmaggedComponent>(uid, out var emagged))
+            return;
+
+        emagged.EmagType &= ~EmagType.Interaction;
+
+        if (emagged.EmagType == EmagType.None)
+            RemComp<EmaggedComponent>(uid);
+        else
+            Dirty(uid, emagged);
+    }
+    //SS220-ReclaimerEmaggedTime end
 
     private void OnCollide(EntityUid uid, CollideMaterialReclaimerComponent component, ref StartCollideEvent args)
     {
@@ -275,26 +289,6 @@ public abstract class SharedMaterialReclaimerSystem : EntitySystem
                 continue;
             TryFinishProcessItem(uid, reclaimer, active);
         }
-
-        //SS220-ReclaimerEmaggedTime begin
-        var emagQuery = EntityQueryEnumerator<MaterialReclaimerEmagTimerComponent>();
-        while (emagQuery.MoveNext(out var uid, out var timer))
-        {
-            if (Timing.CurTime < timer.EndTime)
-                continue;
-
-            if (TryComp<EmaggedComponent>(uid, out var emagged))
-            {
-                emagged.EmagType &= ~EmagType.Interaction;
-                if (emagged.EmagType == EmagType.None)
-                    RemComp<EmaggedComponent>(uid);
-                else
-                    Dirty(uid, emagged);
-            }
-
-            RemComp<MaterialReclaimerEmagTimerComponent>(uid);
-        }
-        //SS220-ReclaimerEmaggedTime end
     }
 }
 
