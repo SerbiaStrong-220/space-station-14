@@ -1,4 +1,5 @@
 using Content.Shared.CCVar;
+using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Flash;
 using Content.Shared.Flash.Components;
 using Content.Shared.StatusEffect;
@@ -30,6 +31,8 @@ namespace Content.Client.Flash
         public float PercentComplete;
         public Texture? ScreenshotTexture;
 
+        public static readonly int ContentZIndex = (int)Shared.DrawDepth.DrawDepth.Overlays; // SS220 Fix flash & blind overlays overlapping
+
         public FlashOverlay()
         {
             IoCManager.InjectDependencies(this);
@@ -38,6 +41,8 @@ namespace Content.Client.Flash
             _statusSys = _entityManager.System<StatusEffectsSystem>();
 
             _configManager.OnValueChanged(CCVars.ReducedMotion, (b) => { _reducedMotion = b; }, invokeImmediately: true);
+
+            ZIndex = ContentZIndex; // SS220 Fix flash & blind overlays overlapping
         }
 
         protected override void FrameUpdate(FrameEventArgs args)

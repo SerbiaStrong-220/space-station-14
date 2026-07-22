@@ -15,6 +15,12 @@ public sealed partial class TemperatureComponent : Component
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public float CurrentTemperature = Atmospherics.T20C;
 
+
+    // SS220 fix rejuvenate temperature begin
+    [DataField]
+    public float DefaultTemperature = Atmospherics.T20C;
+    // SS220 fix rejuvenate temperature end
+
     /// <summary>
     /// Heat capacity per kg of mass.
     /// </summary>

@@ -184,3 +184,53 @@
       collection: Gasp
     CritGasp:
       collection: FemaleCritGasp
+
+- type: soundCollection
+  id: ResomiScreams
+  files:
+    - /Audio/SS220/Voice/Resomi/resomi_scream.ogg
+
+- type: soundCollection
+  id: ResomiLaugh
+  files:
+    - /Audio/SS220/Voice/Resomi/resomi_laugh.ogg
+
+- type: emoteSounds
+  id: MaleResomi
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: ResomiScreams
+    Laugh:
+      collection: ResomiLaugh
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Gasp:
+      collection: MaleGasp
+    CritGasp:
+      collection: MaleCritGasp
+    DefaultDeathgasp:
+      collection: DeathGasp
+
+- type: emoteSounds
+  id: FemaleResomi
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: ResomiScreams
+    Laugh:
+      collection: ResomiLaugh
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Gasp:
+      collection: FemaleGasp
+    CritGasp:
+      collection: FemaleCritGasp
+    DefaultDeathgasp:
+      collection: DeathGasp

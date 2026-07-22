@@ -1,0 +1,36 @@
+- type: quadHearingTarget
+  id: GunShoot
+  color: '#ff00004d' # red
+  waveSpeed: 2.6
+  hearingRange: 30.0
+
+- type: quadHearingTarget
+  id: Explosion
+  color: '#ff00004d' # red
+  waveSpeed: 2.6
+  hearingRange: 50.0
+
+- type: quadHearingTarget
+  id: FellDown
+  color: '#add8e64d' # light blue
+  hearingRange: 20.0
+
+- type: quadHearingTarget
+  id: Speak
+  color: '#ffff004d' # yellow
+  hearingRange: 20.0
+
+- type: quadHearingTarget
+  id: Whisper
+  color: '#ffff004d' # yellow
+  hearingRange: 12.0
+
+- type: quadHearingTarget
+  id: Scream
+  color: '#ffff004d' # yellow
+  hearingRange: 30.0
+
+- type: quadHearingTarget
+  id: Machine
+  color: '#9370db4d' # medium purple
+  hearingRange: 20.0

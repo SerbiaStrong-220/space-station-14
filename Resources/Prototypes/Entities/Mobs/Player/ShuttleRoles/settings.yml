@@ -8,7 +8,7 @@
 - type: randomHumanoidSettings
   id: VisitorHead
   parent: EventHumanoidMindShielded
-  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran] #SS220 LostSouls race ban
+  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran, Resomi] #SS220 LostSouls race ban
   components:
     - type: GhostRole
       name: ghost-role-information-command-name
@@ -100,7 +100,7 @@
 - type: randomHumanoidSettings
   id: VisitorSecurity
   parent: EventHumanoidMindShielded
-  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran] #SS220 LostSouls race ban
+  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran, Resomi] #SS220 LostSouls race ban
   components:
     - type: GhostRole
       name: ghost-role-information-security-name
@@ -154,7 +154,7 @@
 - type: randomHumanoidSettings
   id: VisitorCargonian
   parent: EventHumanoid
-  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran] #SS220 LostSouls race ban
+  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran, Resomi] #SS220 LostSouls race ban
   components:
     - type: GhostRole
       name: ghost-role-information-cargo-name
@@ -188,7 +188,7 @@
 - type: randomHumanoidSettings
   id: VisitorEngineering
   parent: EventHumanoid
-  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran] #SS220 LostSouls race ban
+  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran, Resomi] #SS220 LostSouls race ban
   components:
     - type: GhostRole
       name: ghost-role-information-engineering-name
@@ -232,7 +232,7 @@
 - type: randomHumanoidSettings
   id: VisitorMedical
   parent: EventHumanoid
-  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran] #SS220 LostSouls race ban
+  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran, Resomi] #SS220 LostSouls race ban
   components:
     - type: GhostRole
       name: ghost-role-information-medical-name
@@ -326,7 +326,7 @@
 - type: randomHumanoidSettings
   id: VisitorScience
   parent: EventHumanoid
-  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran] #SS220 LostSouls race ban
+  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran, Resomi] #SS220 LostSouls race ban
   components:
     - type: GhostRole
       name: ghost-role-information-science-name
@@ -360,7 +360,7 @@
 - type: randomHumanoidSettings
   id: VisitorCivilian
   parent: EventHumanoid
-  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran] #SS220 LostSouls race ban
+  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran, Resomi] #SS220 LostSouls race ban
   components:
     - type: GhostRole
       name: ghost-role-information-civilian-name

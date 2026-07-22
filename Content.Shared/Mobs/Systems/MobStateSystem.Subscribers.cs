@@ -1,4 +1,4 @@
-﻿using Content.Shared.Bed.Sleep;
+using Content.Shared.Bed.Sleep;
 using Content.Shared.Buckle.Components;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Damage;
@@ -15,6 +15,7 @@ using Content.Shared.Movement.Events;
 using Content.Shared.Pointing;
 using Content.Shared.Pulling.Events;
 using Content.Shared.Speech;
+using Content.Shared.SS220.Body.Events;
 using Content.Shared.SS220.Telepathy;
 using Content.Shared.Standing;
 using Content.Shared.Strip.Components;
@@ -51,6 +52,7 @@ public partial class MobStateSystem
         SubscribeLocalEvent<MobStateComponent, DamageModifyEvent>(OnDamageModify);
 
         SubscribeLocalEvent<MobStateComponent, UnbuckleAttemptEvent>(OnUnbuckleAttempt);
+        SubscribeLocalEvent<MobStateComponent, ProcessThermalRegulationAttemptEvent>(OnProcessThermalRegulationAttempt); // SS220 fix thermal regulation on dead mob
     }
 
     private void OnUnbuckleAttempt(Entity<MobStateComponent> ent, ref UnbuckleAttemptEvent args)

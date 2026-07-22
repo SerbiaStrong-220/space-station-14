@@ -40,6 +40,10 @@
       "directions": 4
     },
     {
+      "name": "boxers_resomi",
+      "directions": 4
+    },
+    {
       "name": "boxers_striped_primary",
       "directions": 4
     },
@@ -97,6 +101,10 @@
     },
     {
       "name": "tanktop_NT_secondary_vox",
+      "directions": 4
+    },
+    {
+      "name": "tanktop_resomi",
       "directions": 4
     },
     {
