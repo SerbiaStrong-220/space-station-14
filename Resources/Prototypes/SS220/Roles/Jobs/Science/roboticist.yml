@@ -1,7 +1,7 @@
 ﻿- type: job
   id: Roboticist
-  name: робототехник
-  description: Создавайте, обслуживайте и улучшайте робототехнику всех видов
+  name: job-name-roboticist
+  description: job-description-roboticist
   playTimeTracker: JobRoboticist
   requirements:
     - !type:DepartmentTimeRequirement
@@ -9,7 +9,11 @@
       time: 5h
     - !type:SpeciesRequirement
       inverted: true
-      species: [ Felinid, Vox, Diona, Arachnid ]
+      species:
+      - Felinid
+      - Vox
+      - Diona
+      - Arachnid
   startingGear: RoboticistGear
   experienceDefinition: RoboticistRoleExperience
   icon: "JobIconRoboticist"

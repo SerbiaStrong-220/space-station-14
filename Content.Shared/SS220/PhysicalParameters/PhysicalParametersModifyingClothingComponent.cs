@@ -7,7 +7,7 @@ namespace Content.Shared.SS220.PhysicalParameters;
 
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class PhysicalParametersModifyingClothingComponent : Component // This component represents a set of parameters common for most playable beings to determine their physiological capabilities so they can be used in other systems.
+public sealed partial class PhysicalParametersModifyingClothingComponent : Component
 {
     [DataField]
     [AutoNetworkedField]
@@ -15,4 +15,7 @@ public sealed partial class PhysicalParametersModifyingClothingComponent : Compo
     {
       { Parameter.Strength, 1}
     };
+
+    [DataField]
+    public bool DependsOnActivation = true;
 }

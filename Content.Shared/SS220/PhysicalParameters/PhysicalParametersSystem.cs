@@ -8,6 +8,7 @@ using Content.Shared.Humanoid;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
+using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.SS220.Grab;
 using Content.Shared.SS220.ItemExtension;
@@ -15,6 +16,7 @@ using Content.Shared.SS220.Weapons.Melee.Components;
 using Content.Shared.SS220.Weapons.Melee.Events;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Wieldable.Components;
+using Robust.Shared.Containers;
 
 namespace Content.Shared.SS220.PhysicalParameters;
 
@@ -23,9 +25,10 @@ public sealed class PhysicalParametersSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSystem = default!;
     [Dependency] private ItemExtensionSystem _itemExt = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
 
-    private readonly FixedPoint2 UngrabbableStrengthDifference = 1.7;
-    private readonly FixedPoint2 MultiHandedMultiplier = 1;
+    private readonly FixedPoint2 _ungrabbableStrengthDifference = 1.7;
+    private readonly FixedPoint2 _multiHandedMultiplier = 1;
 
     public override void Initialize()
     {
@@ -41,6 +44,8 @@ public sealed class PhysicalParametersSystem : EntitySystem
         SubscribeLocalEvent<PhysicalParametersModifyingClothingComponent, InventoryRelayedEvent<ParametersUpdateEvent>>(OnUpdateRelayedEvent);
         SubscribeLocalEvent<PhysicalParametersModifyingClothingComponent, ClothingGotEquippedEvent>(OnGotEquipped);
         SubscribeLocalEvent<PhysicalParametersModifyingClothingComponent, GotUnequippedEvent>(OnGotUnequipped);
+
+        SubscribeLocalEvent<PhysicalParametersModifyingClothingComponent, ItemToggledEvent>(OnActivated);
 
         base.Initialize();
     }
@@ -72,7 +77,7 @@ public sealed class PhysicalParametersSystem : EntitySystem
         if (TryComp<PhysicalParametersComponent>(grabberValidated, out var grabberComp))
             grabberStrength = GetParameterValue((grabberValidated, grabberComp), Parameter.Strength);
 
-        if (grabbedStrength >= grabberStrength * UngrabbableStrengthDifference)
+        if (grabbedStrength >= grabberStrength * _ungrabbableStrengthDifference)
         {
             args.Cancelled = true;
             return;
@@ -91,20 +96,20 @@ public sealed class PhysicalParametersSystem : EntitySystem
 
         if (TryComp<WieldableComponent>(args.Used, out var wieldableComp) && wieldableComp.Wielded)
         {
-            strengthModifier += strengthModifier * wieldableComp.FreeHandsRequired * MultiHandedMultiplier;
+            strengthModifier += strengthModifier * wieldableComp.FreeHandsRequired * _multiHandedMultiplier;
             countedHands += wieldableComp.FreeHandsRequired;
         }
 
         if (TryComp<MultiHandedItemComponent>(args.Used, out var multiHandedComp))
         {
-            strengthModifier += strengthModifier * multiHandedComp.HandsNeeded * MultiHandedMultiplier;
+            strengthModifier += strengthModifier * multiHandedComp.HandsNeeded * _multiHandedMultiplier;
             countedHands += multiHandedComp.HandsNeeded;
         }
 
         var handsNeeded = _itemExt.TryGetNeededAmountOfHands(ent.Owner, args.Used) - 1;
 
-        if (handsNeeded != -1)
-            strengthModifier += strengthModifier * MultiHandedMultiplier * Math.Clamp(handsNeeded - countedHands, 0, handsNeeded);
+        if (ent.Owner != args.Used && handsNeeded != -1)
+            strengthModifier += strengthModifier * _multiHandedMultiplier * Math.Clamp(handsNeeded - countedHands, 0, handsNeeded);
 
         if (HasComp<ItemExtensionMeleeWeaponComponent>(args.Used) && TryComp<ItemExtensionComponent>(args.Used, out var extensionComp))
         {
@@ -136,6 +141,9 @@ public sealed class PhysicalParametersSystem : EntitySystem
 
     public void OnUpdateRelayedEvent(Entity<PhysicalParametersModifyingClothingComponent> ent, ref InventoryRelayedEvent<ParametersUpdateEvent> args)
     {
+        if (ent.Comp.DependsOnActivation && TryComp<ItemToggleComponent>(ent.Owner, out var toggleComp) && !toggleComp.Activated)
+            return;
+
         foreach (var (parameter, value) in ent.Comp.ParameterDict)
         {
             if (!args.Args.ModifiedValues.ContainsKey(parameter))
@@ -164,6 +172,15 @@ public sealed class PhysicalParametersSystem : EntitySystem
         UpdateParameterValues((args.EquipTarget, parametersComp));
     }
 
+    public void OnActivated(Entity<PhysicalParametersModifyingClothingComponent> ent, ref ItemToggledEvent args)
+    {
+        if (ent.Comp.DependsOnActivation &&
+            _containerSystem.TryGetContainingContainer(ent.Owner, out var userContainer) &&
+            userContainer.Owner is { Valid: true } ownerValidated &&
+            TryComp<PhysicalParametersComponent>(ownerValidated, out var userParametersComp))
+            UpdateParameterValues((ownerValidated, userParametersComp));
+    }
+
     public void OnGrabAttempt(Entity<PhysicalParametersComponent> ent, ref GrabDelayModifiersEvent args)
     {
         FixedPoint2 grabbedStrength = 1;
@@ -188,7 +205,7 @@ public sealed class PhysicalParametersSystem : EntitySystem
         if (TryComp<PhysicalParametersComponent>(grabberValidated, out var grabberComp))
             grabberStrength = GetParameterValue((grabberValidated, grabberComp), Parameter.Strength);
 
-        if (grabbedStrength >= grabberStrength * UngrabbableStrengthDifference)
+        if (grabbedStrength >= grabberStrength * _ungrabbableStrengthDifference)
         {
             args.Chance += 1;
             return;

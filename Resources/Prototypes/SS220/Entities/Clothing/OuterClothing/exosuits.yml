@@ -33,6 +33,36 @@
 #Промышленный экзоскелет
 - type: entity
   parent: ClothingOuterBaseMedium
+  id: ClothingOuterExosuitBase
+  abstract: true
+  name: industrial exoskeleton
+  description: A specialised powered exoskeleton made to increase muscle strength.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Misc/industrial_exosuit.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Misc/industrial_exosuit.rsi
+    quickEquip: false
+    equipDelay: 4
+    unequipDelay: 4
+  - type: PhysicalParametersModifyingClothing
+    parameterDict:
+      Strength: 1.7
+  - type: PoweredClothing
+    selfPowered: false
+    drawRate: 0.03
+  - type: ItemToggle
+    activated: false
+  - type: RelayedIntegratedClothingPowerSource
+  - type: IntegratedClothing
+    clothingPrototypes:
+      back: ClothingBackpackExo
+      gloves: ClothingHandsGlovesCombat
+      shoes: ClothingShoesBootsMagExo
+    slots: [ back, gloves, shoes ]
+
+- type: entity
+  parent: ClothingOuterExosuitBase
   id: ClothingOuterExosuit
   name: industrial exoskeleton
   description: A specialised powered exoskeleton made to increase muscle strength.
@@ -50,12 +80,7 @@
   - type: ClothingSpeedModifier
     walkModifier: 1
     sprintModifier: 0.85
-  - type: IntegratedClothing
-    clothingPrototypes:
-      back: ClothingBackpackExo
-      gloves: ClothingHandsGlovesCombat
-      shoes: ClothingShoesBootsMagExo
-    slots: [ back, gloves, shoes ]
+    requireActivated: false
   - type: MultiHandedItem
   - type: Armor
     modifiers:
