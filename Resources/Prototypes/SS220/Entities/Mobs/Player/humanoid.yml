@@ -2,7 +2,7 @@
 
 - type: randomHumanoidSettings
   id: DeathSquadLeaderRandom
-  speciesBlacklist: [ Felinid, Diona, Arachnid, Dwarf, Moth, Vox, Reptilian, Skeleton, SlimePerson, Vulpkanin, Tajaran]
+  speciesBlacklist: [ Felinid, Diona, Arachnid, Dwarf, Moth, Vox, Reptilian, Skeleton, SlimePerson, Vulpkanin, Tajaran, Ipc]
   parent: EventHumanoidMindShielded
   randomizeName: false
   components:
@@ -222,7 +222,7 @@
 #ERT Gamma Leader
 - type: randomHumanoidSettings
   id: ERTLeaderGamma
-  speciesBlacklist: [ Felinid, Diona, Arachnid, Moth, Vox, Reptilian, Skeleton, SlimePerson, Vulpkanin, Tajaran]
+  speciesBlacklist: [ Felinid, Diona, Arachnid, Moth, Vox, Reptilian, Skeleton, SlimePerson, Vulpkanin, Tajaran, Ipc]
   parent: EventHumanoidMindShielded
   randomizeName: false
   components:
@@ -274,7 +274,7 @@
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitERTLeaderGamma
     neck: ClothingBeltHolster
-    suitstorage: WeaponLaserCarabine
+    suitstorage: WeaponLaserCarbineIK60
     id: ERTLeaderPDA
     ears: ClothingHeadsetAltCentComm
     belt: ClothingBeltSecurity
@@ -337,7 +337,7 @@
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitERTSecurityGamma
     neck: ClothingBeltHolster
-    suitstorage: WeaponLaserCarabine
+    suitstorage: WeaponLaserCarbineIK60
     id: ERTSecurityPDA
     ears: ClothingHeadsetAltCentComm
     belt: ClothingBeltSecurity
@@ -401,7 +401,7 @@
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitERTMedicalGamma
     neck: ClothingBeltHolster
-    suitstorage: WeaponLaserCarabine
+    suitstorage: WeaponLaserCarbineIK60
     id: ERTMedicPDA
     ears: ClothingHeadsetAltCentComm
     belt: ClothingBeltERTGammaMedicalFilled
@@ -422,7 +422,7 @@
 
 - type: randomHumanoidSettings
   id: CBURNLeader
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran, Ipc] #SS220-centcom-human-ERT-update
   parent: EventHumanoidCentcomm
   components:
     - type: Loadout

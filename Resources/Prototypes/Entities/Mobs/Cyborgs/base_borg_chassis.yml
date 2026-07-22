@@ -155,7 +155,7 @@
       Unsexed: UnisexSilicon
     wilhelmProbability: 0
   - type: DamagedSiliconAccent
-  - type: UnblockableSpeech
+  # - type: UnblockableSpeech #ss220 Borg update
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepBorg
@@ -237,7 +237,7 @@
     enabled: false
     mask: /Textures/Effects/LightMasks/cone.png
     autoRot: true
-    radius: 4
+    radius: 6 #ss220 Borg update
     netsync: false
   - type: Pullable
   - type: Puller
@@ -283,12 +283,22 @@
         Heat: 50
   #SS220 Cult hotfix 17 #3641 end
 
+  #ss220 Borg update bgn - needed for BorgChassisClownMime from ss220
+- type: entity
+  abstract: true
+  parent: BaseBorgChassisNotIonStormable
+  id: BaseBorgChassisSpeech
+  components:
+  - type: IonStormTarget
+  #ss220 Borg update end
+
 - type: entity
   abstract: true
   parent: BaseBorgChassisNotIonStormable
   id: BaseBorgChassis
   components:
   - type: IonStormTarget
+  - type: UnblockableSpeech #ss220 Borg update
 
 - type: entity
   abstract: true

@@ -1390,6 +1390,19 @@
     tags:
     - Vegetable
     - Mushroom
+  #SS220-grillables-update begin
+  - type: FoodSequenceElement
+    entries:
+      Burger: MushroomBurger
+  - type: Grillable
+    timeToCook: 10
+    cookingResult: FoodMushroomCooked
+  - type: Edible
+  - type: InternalTemperature
+    conductivity: 0.35
+    thickness: 0.001
+    area: 0.0225 # ~15x15cm
+  #SS220-grillables-update end
 
 # Slices
 
