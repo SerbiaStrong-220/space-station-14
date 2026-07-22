@@ -38,11 +38,10 @@ public sealed class MagicMirrorBoundUserInterface : BoundUserInterface
         if (state is not MagicMirrorUiState data)
             return;
 
-        //SS220-IPC begin
+        // _markingsModel.OrganData = data.OrganMarkingData; // SS220 moved to end
         _markingsModel.OrganProfileData = data.OrganProfileData;
         _markingsModel.Markings = data.AppliedMarkings;
-        //SS220-IPC end
-        _markingsModel.OrganData = data.OrganMarkingData;
+        _markingsModel.OrganData = data.OrganMarkingData; // SS220 magic mirror ui fix
     }
 }
 
