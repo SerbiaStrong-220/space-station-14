@@ -23,7 +23,6 @@
   #SS220 movement parameters begin
   - type: MovementSpeedModifier
     baseAcceleration: 4
-    baseFriction: 1.7
   #SS220 movement parameters end
   - type: Clickable
   - type: InteractionOutline
