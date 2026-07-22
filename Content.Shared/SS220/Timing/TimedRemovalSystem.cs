@@ -4,8 +4,6 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.Timing;
 
-[ByRefEvent]
-public record struct ComponentTimedRemovalExpiredEvent;
 public sealed partial class ComponentTimedRemovalSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
@@ -35,3 +33,5 @@ public sealed partial class ComponentTimedRemovalSystem : EntitySystem
     }
 }
 
+[ByRefEvent]
+public record struct ComponentTimedRemovalExpiredEvent;
