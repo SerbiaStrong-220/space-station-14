@@ -319,6 +319,32 @@
              Caustic: -5
   - type: Experience
   - type: StunVisuals
+  - type: TriggerOnInteractUsing
+    keyOut: ipcsleep
+    targetUsed: true
+    whitelist:
+      components:
+      - BurglarBug
+  - type: EntityEffectOnTrigger
+    keysIn:
+    - ipcsleep
+    targetUser: false
+    effects:
+    - !type:ModifyStatusEffect
+      conditions:
+      - !type:ComponentCondition
+          inverted: true
+          components:
+          - BibleUser
+          - CultYogg
+          - MindShield
+      effectProto: StatusEffectForcedSleeping
+      type: Add
+      time: 15
+  - type: DeleteOnTrigger
+    keysIn:
+    - ipcsleep
+    targetUser: true
 
 - type: entity
   parent: OrganBase
