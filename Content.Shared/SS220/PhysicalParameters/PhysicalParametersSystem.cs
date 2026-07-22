@@ -25,6 +25,7 @@ public sealed class PhysicalParametersSystem : EntitySystem
     [Dependency] private ItemExtensionSystem _itemExt = default!;
 
     private readonly FixedPoint2 UngrabbableStrengthDifference = 1.7;
+    private readonly FixedPoint2 MultiHandedMultiplier = 1;
 
     public override void Initialize()
     {
@@ -86,16 +87,24 @@ public sealed class PhysicalParametersSystem : EntitySystem
 
         FixedPoint2 strengthModifier = GetParameterValue(ent, Parameter.Strength);
 
+        int countedHands = 0;
+
         if (TryComp<WieldableComponent>(args.Used, out var wieldableComp) && wieldableComp.Wielded)
-            strengthModifier += strengthModifier * wieldableComp.FreeHandsRequired;
+        {
+            strengthModifier += strengthModifier * wieldableComp.FreeHandsRequired * MultiHandedMultiplier;
+            countedHands += wieldableComp.FreeHandsRequired;
+        }
 
         if (TryComp<MultiHandedItemComponent>(args.Used, out var multiHandedComp))
-            strengthModifier += strengthModifier * multiHandedComp.HandsNeeded;
+        {
+            strengthModifier += strengthModifier * multiHandedComp.HandsNeeded * MultiHandedMultiplier;
+            countedHands += multiHandedComp.HandsNeeded;
+        }
 
-        var handsUsed = _itemExt.TryGetNeededAmountOfHands(ent.Owner, args.Used);
+        var handsNeeded = _itemExt.TryGetNeededAmountOfHands(ent.Owner, args.Used) - 1;
 
-        if (handsUsed != -1)
-            strengthModifier += strengthModifier * handsUsed;
+        if (handsNeeded != -1)
+            strengthModifier += strengthModifier * MultiHandedMultiplier * Math.Clamp(handsNeeded - countedHands, 0, handsNeeded);
 
         if (HasComp<ItemExtensionMeleeWeaponComponent>(args.Used) && TryComp<ItemExtensionComponent>(args.Used, out var extensionComp))
         {

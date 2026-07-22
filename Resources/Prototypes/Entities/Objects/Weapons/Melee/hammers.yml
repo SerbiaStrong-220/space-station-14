@@ -10,8 +10,8 @@
   #SS220 melee weapon extension begin
   - type: ItemExtensionMeleeWeapon
   - type: ItemExtension
-    minimalStrengthToPickUp: 0.7
-    strengthRequirementToBeUsed: 1.4
+    minimalStrengthToPickUp: 0.85
+    strengthRequirementToBeUsed: 1.8
   #SS220 melee weapon extension end
   #SS220 new sound_drop effect begin
   - type: EmitSoundOnLand
@@ -24,8 +24,8 @@
     wideAnimationRotation: -135
     damage:
       types:
-        Blunt: 32 #SS220 melee weapon extension
-        Structural: 10
+        Blunt: 38 #SS220 melee weapon extension
+        Structural: 60 #SS220 melee weapon extension
     soundHit:
       collection: MetalThud
   - type: Wieldable
