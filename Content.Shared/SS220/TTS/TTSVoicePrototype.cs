@@ -18,8 +18,8 @@ public sealed partial class TTSVoicePrototype : IPrototype
     [DataField]
     public string Description = string.Empty;
 
-    [DataField(required: true)]
-    public TTSProvider Provider;
+    [DataField]
+    public TTSProvider Provider = TTSProvider.NTTS;
 
     [DataField(required: true)]
     public string Speaker = string.Empty;

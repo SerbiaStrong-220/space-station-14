@@ -5,6 +5,7 @@
          xmlns:ui="clr-namespace:Content.Client.Lobby.UI"
          xmlns:signature="clr-namespace:Content.Client.SS220.Signature"
          xmlns:profile="clr-namespace:Content.Client.Lobby.UI.ProfileEditorControls"
+         xmlns:ss220-tts="clr-namespace:Content.Client.SS220.TTS.UI"
          HorizontalExpand="True">
         <!-- Left side -->
         <BoxContainer Orientation="Vertical" Margin="10 10 10 10" HorizontalExpand="True">
@@ -87,20 +88,26 @@
                                     <Control HorizontalExpand="True"/>
                                     <Button Name="ShowClothes" Pressed="True" ToggleMode="True" Text="{Loc 'humanoid-profile-editor-clothing-show'}" HorizontalAlignment="Right" />
                                 </BoxContainer>
-                                <!-- Corvax-TTS-Start -->
-                                <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
-                                    <Label Text="{Loc 'humanoid-profile-editor-voice-label'}" />
-                                    <Control HorizontalExpand="True"/>
-                                    <OptionButton Name="CVoiceButton" HorizontalAlignment="Right" />
-                                    <Button Name="CVoicePlayButton" Text="{Loc 'humanoid-profile-editor-voice-play'}" MaxWidth="80" HorizontalAlignment="Right"/>
-                                </BoxContainer>
-                                <!-- Corvax-TTS-End -->
                                 <!-- Spawn Priority -->
                                 <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-spawn-priority-label'}" />
                                     <Control HorizontalExpand="True"/>
                                     <OptionButton Name="SpawnPriorityButton" HorizontalAlignment="Right" />
                                 </BoxContainer>
+                                <!-- SS220-TTS-Start -->
+                                <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                                    <Label Text="{Loc 'humanoid-profile-editor-voice-label'}" />
+                                    <Control HorizontalExpand="True"/>
+                                    <OptionButton Name="CVoiceButton" HorizontalAlignment="Right" />
+                                    <Button Name="CVoicePlayButton" Text="{Loc 'humanoid-profile-editor-voice-play'}" MaxWidth="80" HorizontalAlignment="Right"/>
+                                </BoxContainer>
+                                <Collapsible Orientation="Vertical" HorizontalExpand="True">
+                                    <CollapsibleHeading Title="Настройки голоса" />
+                                    <CollapsibleBody>
+                                        <ss220-tts:TTSVoicePreferencesTab HorizontalExpand="True"/>
+                                    </CollapsibleBody>
+                                </Collapsible>
+                                <!-- SS220-TTS-End -->
                             </BoxContainer>
                             <!-- Skin -->
                             <BoxContainer Margin="10" HorizontalExpand="True" Orientation="Vertical">

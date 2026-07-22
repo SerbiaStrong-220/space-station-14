@@ -37,6 +37,7 @@ using Content.Shared.IoC;
 using Content.Shared.Kitchen;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Players.RateLimiting;
+using Content.Shared.SS220.TTS;
 
 namespace Content.Server.IoC;
 
@@ -90,6 +91,7 @@ internal static class ServerContentIoC
         deps.Register<ISharedFeedbackManager, ServerFeedbackManager>();
         deps.Register<SponsorsManager>(); // Corvax-Sponsors
         deps.Register<JoinQueueManager>(); // Corvax-Queue
+        deps.Register<SharedTTSManager, TTSManager>(); // SS220 TTS
         deps.Register<TTSManager>(); // Corvax-TTS
         deps.Register<DiscordAuthManager>(); // Corvax-DiscordAuth
         deps.Register<DiscordPlayerManager>(); // SiS220 discord player manager

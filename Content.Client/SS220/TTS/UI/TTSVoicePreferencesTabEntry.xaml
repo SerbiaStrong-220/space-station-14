@@ -1,0 +1,31 @@
+<PanelContainer xmlns="https://spacestation14.io"
+              xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+              xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+              HorizontalExpand="True"
+              MouseFilter="Stop">
+    <BoxContainer Name="Header"  Orientation="Horizontal">
+        <Label Name="ProviderNameLabel" Text="Провайдер" MinWidth="250"/>
+        <customControls:VSeparator Margin="15 0"/>
+        <Label Name="VoicePrototypeIdLabel" Text="Id голоса" HorizontalExpand="True"/>
+        <Button Name="VoiceSelectorButton" Text="{Loc 'humanoid-profile-editor-voice-settings'}" Margin="5 0 0 0"/>
+        <Button Name="VoicePlayButton" Text="{Loc 'humanoid-profile-editor-voice-play'}" MaxWidth="80" HorizontalAlignment="Right"/>
+    </BoxContainer>
+    <PanelContainer Access="Public" Name="DimOverlay" Visible="false">
+        <PanelContainer.PanelOverride>
+            <gfx:StyleBoxFlat BackgroundColor="#1B1B1EFC"/>
+        </PanelContainer.PanelOverride>
+    </PanelContainer>
+
+    <!-- Temporariry here -->
+    <PanelContainer Name="LockOverlay" Visible="false">
+        <BoxContainer Orientation="Horizontal" VerticalAlignment="Center" >
+            <PanelContainer Margin="15 0" HorizontalExpand="True">
+                <customControls:HSeparator VerticalAlignment="Center"/>
+            </PanelContainer>
+            <Label Text="{Loc 'humanoid-profile-editor-voice-lock'}"/>
+            <PanelContainer Margin="15 0" HorizontalExpand="True">
+                <customControls:HSeparator VerticalAlignment="Center"/>
+            </PanelContainer>
+        </BoxContainer>
+    </PanelContainer>
+</PanelContainer>

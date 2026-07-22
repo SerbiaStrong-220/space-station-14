@@ -61,7 +61,7 @@ public sealed partial class TTSSystem : SharedTTSSystem
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
         SubscribeLocalEvent<TTSComponent, MapInitEvent>(OnInit);
 
-        SubscribeNetworkEvent<RequestGlobalTTSEvent>(OnRequestGlobalTTS);
+        SubscribeNetworkEvent<RequestTTSVoiceTestEvent>(OnRequestTTSVoiceTest);
 
         // remove if Robust PR for clientCVar subs merged
         SubscribeNetworkEvent<SessionSendTTSMessage>((msg, args) =>
@@ -196,14 +196,27 @@ public sealed partial class TTSSystem : SharedTTSSystem
         _ttsManager.ResetCache();
     }
 
-    private async void OnRequestGlobalTTS(RequestGlobalTTSEvent ev, EntitySessionEventArgs args)
+    // Kirus ToDo: перенести в датасет
+    private readonly List<string> _sampleText = new()
     {
-        if (!_isEnabled ||
-            ev.Text.Length > _maxMessageChars ||
-            !GetVoicePrototype(ev.VoiceId, out var protoVoice))
-            return;
+        "Съешь же ещё этих мягких французских булок, да выпей чаю.",
+        "Клоун, прекрати разбрасывать банановые кожурки офицерам под ноги!",
+        "Капитан, вы уверены что хотите назначить клоуна на должность главы персонала?",
+        "Эс Бэ! Тут человек в сером костюме, с тулбоксом и в маске! Помогите!!",
+        "Учёные, тут странная аномалия в баре! Она уже съела мима!",
+        "Я надеюсь что инженеры внимательно следят за сингулярностью...",
+        "Вы слышали эти странные крики в техах? Мне кажется туда ходить небезопасно.",
+        "Вы не видели Гамлета? Мне кажется он забегал к вам на кухню.",
+        "Здесь есть доктор? Человек умирает от отравленного пончика! Нужна помощь!",
+        "Вам нужно согласие и печать квартирмейстера, если вы хотите сделать заказ на партию дробовиков.",
+        "Возле эвакуационного шаттла разгерметизация! Инженеры, нам срочно нужна ваша помощь!",
+        "Бармен, налей мне самого крепкого вина, которое есть в твоих запасах!"
+    };
 
-        using var ttsResponse = await _ttsManager.ConvertTextToSpeech(ev.Text, protoVoice.Speaker, TtsKind.Default);
+    private async void OnRequestTTSVoiceTest(RequestTTSVoiceTestEvent ev, EntitySessionEventArgs args)
+    {
+        var text = _random.Pick(_sampleText);
+        using var ttsResponse = await _ttsManager.ConvertTextToSpeech(text, ev.VoiceId, TtsKind.VoiceTest);
         if (!ttsResponse.TryGetValue(out var audioData))
             return;
 

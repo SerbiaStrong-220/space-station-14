@@ -26,4 +26,5 @@ public enum TtsKind
     Whisper,
     Announce,
     Telepathy,
+    VoiceTest
 }

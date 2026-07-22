@@ -93,7 +93,7 @@ public sealed partial class HumanoidProfileEditor
             return;
 
         _ttsSys.ResetQueuesAndEndStreams();
-        _ttsSys.RequestGlobalTTS(_random.Pick(_sampleText), Profile.Voice);
+        // _ttsSys.RequestTTSVoiceTest(_random.Pick(_sampleText), Profile.Voice);
     }
 
 

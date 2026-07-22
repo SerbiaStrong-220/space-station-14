@@ -55,6 +55,11 @@ public sealed partial class TTSSystem : EntitySystem
                 if (_playDifferentRadioSourcesTogether)
                     ttsMetadata.Subkind = $"{ttsMetadata.Subkind}:{GetNetEntity(source).Id}";
                 break;
+
+            // Kirus ToDo something...
+            case TtsKind.VoiceTest:
+                ttsMetadata.Subkind = nameof(TtsKind.VoiceTest);
+                break;
         }
     }
 }

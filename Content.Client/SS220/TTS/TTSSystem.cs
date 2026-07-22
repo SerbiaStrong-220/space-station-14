@@ -1,7 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.IO;
-using Content.Shared.Corvax.CCCVars;
 using Content.Shared.SS220.CCVars;
 using Content.Shared.SS220.TTS;
 using Content.Shared.SS220.TTS.Commands;
@@ -77,9 +76,9 @@ public sealed partial class TTSSystem
         ResetQueuesAndEndStreams();
     }
 
-    public void RequestGlobalTTS(string text, ProtoId<TTSVoicePrototype> voiceId)
+    public void RequestTTSVoiceTest(ProtoId<TTSVoicePrototype> voiceId)
     {
-        RaiseNetworkEvent(new RequestGlobalTTSEvent(text, voiceId));
+        RaiseNetworkEvent(new RequestTTSVoiceTestEvent(voiceId));
     }
 
     private void OnTtsVolumeChanged(float volume)
