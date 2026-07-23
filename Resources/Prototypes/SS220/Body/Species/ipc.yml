@@ -138,6 +138,7 @@
     availableLanguages:
     - id: Galactic
     - id: Binary
+    - id: Ternary
   - type: Tag
     tags:
     - CanPilot
