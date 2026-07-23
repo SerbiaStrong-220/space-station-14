@@ -307,6 +307,7 @@
         damage:
           types:
              Heat: -5
+             Cold: -5
       - qualityNeeded: Pulsing
         doAfterDelay: 1.2
         damage:
