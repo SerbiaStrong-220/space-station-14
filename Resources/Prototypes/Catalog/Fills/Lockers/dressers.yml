@@ -93,13 +93,14 @@
         - id: ClothingUniformJumpskirtHoSAlt
         - id: ClothingUniformJumpsuitHoSAlt
         - id: ClothingUniformJumpskirtHosFormal
-        - id: ClothingUniformJumpsuitHosFormal
+#        - id: ClothingUniformJumpsuitHosFormal #SS220 Formal coat for HoS
         - id: ClothingOuterWinterHoS
 #        - id: ClothingNeckCloakHos #SS220-cloak-dress-tweak
         - id: ClothingHeadHatCapHoS # Corvax-SecFashion
         - id: ClothingOuterCoatHoSGreatcoat # Corvax-Resprite
         - id: ClothingOuterCoatHoSbomber # SS220-NewBomberForHos
         - id: ClothingHeadBigCapHoS # SS220-FreedomHoSCap
+        - id: ClothingOuterCoatHosFormal #SS220 Formal coat for HoS
 
 - type: entity
   id: DresserQuarterMasterFilled

@@ -30,6 +30,9 @@ public abstract partial class SharedSelfLinkedTeleportSystem : EntitySystem
 
         var ev = new TargetTeleportedEvent(args.Target);
         RaiseLocalEvent(ent, ref ev);
+
+        var targetEv = new AfterTeleportedEvent(ent);
+        RaiseLocalEvent(args.Target, ref targetEv);
     }
 
     private void OnTeleportUseAttempt(Entity<SelfLinkedTeleportComponent> ent, ref TeleportUseAttemptEvent args)
