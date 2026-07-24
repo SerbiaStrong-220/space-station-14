@@ -92,17 +92,17 @@ public abstract class SharedMaterialReclaimerSystem : EntitySystem
     }
 
     //SS220-ReclaimerEmaggedTime begin
-    private void OnEmagTimerExpired(EntityUid uid, MaterialReclaimerComponent component, ref ComponentTimedRemovalExpiredEvent args)
+    private void OnEmagTimerExpired(Entity<MaterialReclaimerComponent> ent, ref ComponentTimedRemovalExpiredEvent args)
     {
-        if (!TryComp<EmaggedComponent>(uid, out var emagged))
+        if (!TryComp<EmaggedComponent>(ent.Owner, out var emagged))
             return;
 
         emagged.EmagType &= ~EmagType.Interaction;
 
         if (emagged.EmagType == EmagType.None)
-            RemComp<EmaggedComponent>(uid);
+            RemComp<EmaggedComponent>(ent.Owner);
         else
-            Dirty(uid, emagged);
+            Dirty(ent.Owner, emagged);
     }
     //SS220-ReclaimerEmaggedTime end
 
