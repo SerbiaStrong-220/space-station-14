@@ -52,3 +52,22 @@
   id: JanitorWintercoat
   equipment:
     outerClothing: ClothingOuterWinterJani
+
+#SS220-JRNewThings begin
+- type: loadout
+  id: ClothingOuterWinterJanitorJR
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: JanitorJR
+  equipment:
+    outerClothing: ClothingOuterWinterJanitorJR
+
+- type: loadout
+  id: ClothingOuterCoatJanitorJRBomber
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: JanitorJR
+  equipment:
+    outerClothing: ClothingOuterCoatJanitorJRBomber
+  #SS220-JRNewThings end
+

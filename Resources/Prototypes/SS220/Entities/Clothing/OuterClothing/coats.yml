@@ -288,3 +288,15 @@
     sprite: SS220/Clothing/OuterClothing/Coats/ntr_coat.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Coats/ntr_coat.rsi
+
+#Уборщик JR
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatJanitorJRBomber
+  name: janitor JR bomber jacket
+  description: A moisture-resistant bomber jacket designed for JR specialists.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/bomber_JR.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/bomber_JR.rsi

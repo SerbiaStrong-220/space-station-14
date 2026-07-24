@@ -923,6 +923,15 @@
   minLimit: 0
   loadouts:
   - JRMopItem
+  - SoapJR
+
+- type: loadoutGroup
+  id: JanitorPDA
+  name: loadout-group-janitor-pda
+  minLimit: 0
+  loadouts:
+  - JanitorJRPDA
+
   # Уборщик (Конец)
 
  # Сервисный работник (Начало)

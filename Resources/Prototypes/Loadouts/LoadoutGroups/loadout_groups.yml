@@ -584,6 +584,10 @@
   minLimit: 0
   loadouts:
   - JanitorWintercoat
+  #SS220-JRNewThings begin
+  - ClothingOuterWinterJanitorJR
+  - ClothingOuterCoatJanitorJRBomber
+  #SS220-JRNewThings end
 
 - type: loadoutGroup
   id: JanitorJobTrinkets
