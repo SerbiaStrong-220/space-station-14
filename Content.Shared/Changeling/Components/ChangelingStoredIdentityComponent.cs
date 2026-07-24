@@ -1,3 +1,4 @@
+// SS220 Changeling
 using Robust.Shared.GameStates;
 using Robust.Shared.Player;
 
@@ -10,6 +11,12 @@ namespace Content.Shared.Changeling.Components;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class ChangelingStoredIdentityComponent : Component
 {
+    /// <summary>
+    /// Server-only owner of this stored sample. Transformation Sting backups leave this null.
+    /// </summary>
+    [DataField]
+    public EntityUid? ChangelingOwner;
+
     /// <summary>
     /// The original entity the identity was cloned from.
     /// </summary>
@@ -27,3 +34,10 @@ public sealed partial class ChangelingStoredIdentityComponent : Component
     [ViewVariables]
     public ICommonSession? OriginalSession;
 }
+
+/// <summary>
+/// Marks the paused map that owns changeling identity snapshots.
+/// Keeping this lifecycle state on an entity avoids mutable world state in an entity system.
+/// </summary>
+[RegisterComponent]
+public sealed partial class ChangelingIdentityStorageMapComponent : Component;

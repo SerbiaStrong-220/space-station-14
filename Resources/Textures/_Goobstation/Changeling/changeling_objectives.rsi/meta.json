@@ -1,0 +1,18 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Copied from Goob Station at commit cd55b544e9ee50f39555155dd4317fa410684c0f: https://github.com/Goob-Station/Goob-Station/tree/cd55b544e9ee50f39555155dd4317fa410684c0f/Resources/Textures/_Goobstation/Changeling/changeling_objectives.rsi . Original Goob attribution: Absorb made from chitinous armour and helmet. Survive made from a background-less fleshmend. modified by thebiggestbruh (github).",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "absorb"
+        },
+	{
+            "name": "survive"
+        }
+
+    ]
+}

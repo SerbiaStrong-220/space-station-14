@@ -7,9 +7,10 @@
   - type: ChangelingDevour
   - type: ChangelingIdentity
   - type: ChangelingTransform
+  # SS220 Changeling-begin
+  - type: ChangelingExtractDna
+  - type: ChangelingResource
+  # SS220 Changeling-end
   - type: ActionGrant
     actions:
     - ActionChangelingStore
-  - type: Store
-    balance:
-      ChangelingDNA: 50

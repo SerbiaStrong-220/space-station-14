@@ -1,3 +1,4 @@
+// SS220 Changeling
 using Content.Client.Stylesheets.Palette;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Changeling.Components;
@@ -9,13 +10,19 @@ using Robust.Shared.Utility;
 namespace Content.Client.Changeling.UI;
 
 [UsedImplicitly]
-public sealed partial class ChangelingTransformBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed partial class ChangelingTransformBoundUserInterface : BoundUserInterface
 {
     private SimpleRadialMenu? _menu;
+    private readonly bool _isTransformationSting;
     private static readonly Color SelectedOptionBackground = Palettes.Green.Element.WithAlpha(128);
     private static readonly Color DisabledOptionBackground = Palettes.Slate.Element.WithAlpha(128);
     private static readonly Color SelectedOptionHoverBackground = Palettes.Green.HoveredElement.WithAlpha(128);
     private static readonly Color DisabledOptionHoverBackground = Palettes.Slate.HoveredElement.WithAlpha(128);
+
+    public ChangelingTransformBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
+    {
+        _isTransformationSting = uiKey.Equals(ChangelingTransformUiKey.TransformationSting);
+    }
 
     protected override void Open()
     {
@@ -34,7 +41,7 @@ public sealed partial class ChangelingTransformBoundUserInterface(EntityUid owne
         if (!EntMan.TryGetComponent<ChangelingIdentityComponent>(Owner, out var lingIdentity))
             return;
 
-        var models = ConvertToButtons(lingIdentity.ConsumedIdentities.Keys, lingIdentity?.CurrentIdentity);
+        var models = ConvertToButtons(lingIdentity.StoredIdentities, lingIdentity.CurrentIdentity);
 
         _menu.SetButtons(models);
     }
@@ -59,6 +66,11 @@ public sealed partial class ChangelingTransformBoundUserInterface(EntityUid owne
             };
             buttons.Add(option);
 
+            // SS220 changeling transformation sting begin
+            if (_isTransformationSting)
+                continue;
+            // SS220 changeling transformation sting end
+
             // Options for dropping identities.
             var dropOption = new RadialMenuActionOption<NetEntity>(SendIdentityDrop, EntMan.GetNetEntity(identity))
             {
@@ -71,6 +83,11 @@ public sealed partial class ChangelingTransformBoundUserInterface(EntityUid owne
             };
             dropButtons.Add(dropOption);
         }
+
+        // SS220 changeling transformation sting begin
+        if (_isTransformationSting)
+            return buttons;
+        // SS220 changeling transformation sting end
 
         // Menu category for dropping identities.
         var dropMenuButton = new RadialMenuNestedLayerOption(dropButtons)
@@ -85,11 +102,19 @@ public sealed partial class ChangelingTransformBoundUserInterface(EntityUid owne
 
     private void SendIdentitySelect(NetEntity identityId)
     {
-        SendPredictedMessage(new ChangelingTransformIdentitySelectMessage(identityId));
+        // SS220 changeling transformation sting begin
+        if (_isTransformationSting)
+        {
+            SendMessage(new ChangelingTransformationStingIdentitySelectMessage(identityId));
+            return;
+        }
+        // SS220 changeling transformation sting end
+
+        SendMessage(new ChangelingTransformIdentitySelectMessage(identityId));
     }
 
     private void SendIdentityDrop(NetEntity identityId)
     {
-        SendPredictedMessage(new ChangelingTransformIdentityDropMessage(identityId));
+        SendMessage(new ChangelingTransformIdentityDropMessage(identityId));
     }
 }

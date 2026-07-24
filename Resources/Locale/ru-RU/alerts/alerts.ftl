@@ -86,3 +86,6 @@ alerts-stealthy-desc = Определяет режим скрытой кражи
 alerts-prying-name = Вскрытие
 
 alerts-prying-desc = Вы можете вскрывать двери, используя альтернативное взаимодействие.
+# SS220 Changeling
+alerts-changeling-chemicals-name = Химикаты генокрада
+alerts-changeling-chemicals-desc = Текущий запас химикатов для мутаций. Восстанавливается со временем.

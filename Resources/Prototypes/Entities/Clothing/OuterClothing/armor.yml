@@ -460,9 +460,10 @@
   description: Inflates the changeling's body into an all-consuming chitinous mass of armor.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Armor/lingarmor.rsi
+    sprite: _Goobstation/Changeling/ling_armor.rsi # SS220 Changeling
   - type: Clothing
-    sprite: Clothing/OuterClothing/Armor/lingarmor.rsi
+    sprite: _Goobstation/Changeling/ling_armor.rsi # SS220 Changeling
+    equippedPrefix: transform # SS220 Changeling
   - type: Armor
     modifiers:
       coefficients:

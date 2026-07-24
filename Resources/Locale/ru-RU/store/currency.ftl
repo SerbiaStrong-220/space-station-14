@@ -13,3 +13,5 @@ store-currency-display-stolen-essence = Украденная эссенция
 store-currency-display-silicon-memory = Память
 store-currency-display-wizcoin = Маг₭øин™
 store-currency-display-dna = ДНК
+# SS220 Changeling
+store-currency-display-evolution = Очки эволюции

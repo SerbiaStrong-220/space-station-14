@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Copied from Goob Station at commit cd55b544e9ee50f39555155dd4317fa410684c0f: https://github.com/Goob-Station/Goob-Station/tree/cd55b544e9ee50f39555155dd4317fa410684c0f/Resources/Textures/_Goobstation/Changeling/ling_armor.rsi . Original Goob attribution: Taken from tgstation at https://github.com/tgstation/tgstation/blob/master/icons/mob/clothing/suit.dmi , transform-equipped-OUTERCLOTHING created by the_biggestbruh using the armour as a base.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+        "name": "icon"
+    },
+    {
+        "name": "equipped-OUTERCLOTHING",
+        "directions": 4
+    },
+    {
+        "name": "transform-equipped-OUTERCLOTHING",
+        "directions": 4,
+        "delays": [
+                [ 0.5, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 1 ],
+                [ 0.5, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 1 ],
+                [ 0.5, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 1 ],
+                [ 0.5, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 1 ]
+            ]
+        }
+    ]
+}

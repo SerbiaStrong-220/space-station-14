@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Copied from Goob Station at commit cd55b544e9ee50f39555155dd4317fa410684c0f: https://github.com/Goob-Station/Goob-Station/tree/cd55b544e9ee50f39555155dd4317fa410684c0f/Resources/Textures/_Goobstation/Changeling/headcrab.rsi . Original Goob attribution: Taken from tg at https://github.com/tgstation/tgstation/blob/master/icons/mob/simple/animal.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "headcrab",
+      "directions": 4
+    },
+    {
+      "name": "headcrab_dead",
+      "directions": 4
+    }
+  ]
+}

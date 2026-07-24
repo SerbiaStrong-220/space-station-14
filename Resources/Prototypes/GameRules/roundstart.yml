@@ -309,6 +309,11 @@
   components:
   - type: GameRule
     minPlayers: 25
+  # SS220 Changeling-begin
+  - type: ChangelingRule
+  - type: DynamicRuleCost
+    cost: 150
+  # SS220 Changeling-end
   - type: AntagSelection
     agentName: changeling-round-end-agent-name
     selectionTime: IntraPlayerSpawn
@@ -328,23 +333,31 @@
       - type: ChangelingDevour
       - type: ChangelingIdentity
       - type: ChangelingTransform
+      # SS220 Changeling-begin
+      - type: ChangelingExtractDna
+      - type: ChangelingResource
+      # SS220 Changeling-end
       - type: ActionGrant
         actions:
         - ActionChangelingStore
       # TODO: Make it so the changeling gamerule changeling can inherit from the changeling store preset somehow
       - type: Store
         name: store-preset-name-changeling
+        # SS220 Changeling-begin
         categories:
-        - ChangelingAbilities
+        - ChangelingOffensive
+        - ChangelingDefensive
+        - ChangelingUtility
+        - ChangelingStings
         currencyWhitelist:
-        - ChangelingDNA
+        - ChangelingEvolution
         balance:
-          ChangelingDNA: 50
+          ChangelingEvolution: 20
+        ownerOnly: true
+        # SS220 Changeling-end
       mindRoles:
       - MindRoleChangeling
-  - type: AntagObjectives
-    objectives:
-    - ChangelingSurviveObjective
+  # SS220 Changeling objectives are assigned by ChangelingObjectiveSystem.
 
 - type: entity
   id: Revolutionary

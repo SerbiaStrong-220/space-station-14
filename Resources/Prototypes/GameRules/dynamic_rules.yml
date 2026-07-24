@@ -27,6 +27,15 @@
           - !type:MaxRuleOccurenceCondition
           - !type:PlayerCountCondition
             min: 20
+        # SS220 Changeling-begin
+        - id: Changeling
+          weight: 15
+          conditions:
+          - !type:HasBudgetCondition
+          - !type:MaxRuleOccurenceCondition
+          - !type:PlayerCountCondition
+            min: 25
+        # SS220 Changeling-end
         - id: Revolutionary
           weight: 5
           conditions:

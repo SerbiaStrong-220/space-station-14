@@ -1,0 +1,27 @@
+# SS220 Changeling
+- type: entity
+  parent: ClothingOuterBase
+  id: ChangelingChitinousArmorVisual
+  name: chitinous armor
+  description: A living shell formed from changeling biomass.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Changeling/ling_armor.rsi
+  - type: Clothing
+    sprite: _Goobstation/Changeling/ling_armor.rsi
+    equippedPrefix: transform
+  - type: Unremoveable
+
+- type: entity
+  parent: ClothingOuterBase
+  id: ChangelingOrganicSpaceSuitVisual
+  name: organic space suit
+  description: A pressure-resistant shell formed from changeling biomass.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Changeling/ling_spacesuit.rsi
+  - type: Clothing
+    sprite: _Goobstation/Changeling/ling_spacesuit.rsi
+  - type: Unremoveable

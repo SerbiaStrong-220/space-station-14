@@ -1,12 +1,16 @@
-﻿using System.Linq;
+﻿// SS220 Changeling
+using System.Linq;
 using System.Numerics;
 using Content.Shared.Body;
 using Content.Shared.Changeling.Components;
 using Content.Shared.Cloning;
+using Content.Shared.Cloning.Events;
+using Content.Shared.Forensics.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.NameModifier.EntitySystems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -24,8 +28,6 @@ public abstract class SharedChangelingIdentitySystem : EntitySystem
     [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
     [Dependency] private readonly SharedPvsOverrideSystem _pvsOverrideSystem = default!;
 
-    public MapId? PausedMapId;
-
     public override void Initialize()
     {
         base.Initialize();
@@ -37,6 +39,7 @@ public abstract class SharedChangelingIdentitySystem : EntitySystem
         SubscribeLocalEvent<ChangelingStoredIdentityComponent, ComponentRemove>(OnStoredRemove);
 
         SubscribeLocalEvent<ChangelingDevouredComponent, ComponentShutdown>(OnDevouredShutdown);
+        SubscribeLocalEvent<ChangelingDevouredComponent, CloningAttemptEvent>(OnDevouredCloningAttempt);
     }
 
     private void OnPlayerAttached(Entity<ChangelingIdentityComponent> ent, ref PlayerAttachedEvent args)
@@ -51,9 +54,23 @@ public abstract class SharedChangelingIdentitySystem : EntitySystem
 
     private void OnMapInit(Entity<ChangelingIdentityComponent> ent, ref MapInitEvent args)
     {
+        if (_net.IsClient || ent.Comp.IdentityInitialized)
+            return;
+
+        ent.Comp.IdentityInitialized = true;
+
         // Make a backup of our current identity so we can transform back.
-        var clone = CloneToPausedMap(ent, ent.Owner);
+        var clone = TryStoreIdentity(ent, ent.Owner, countForObjective: false, out var stored)
+            ? stored
+            : null;
         ent.Comp.CurrentIdentity = clone;
+        ent.Comp.CurrentGenome = GetGenomeId(ent.Owner);
+        Dirty(ent);
+    }
+
+    private void OnDevouredCloningAttempt(Entity<ChangelingDevouredComponent> ent, ref CloningAttemptEvent args)
+    {
+        args.Cancelled = true;
     }
 
     private void OnShutdown(Entity<ChangelingIdentityComponent> ent, ref ComponentShutdown args)
@@ -61,8 +78,60 @@ public abstract class SharedChangelingIdentitySystem : EntitySystem
         if (TryComp<ActorComponent>(ent, out var actor))
             CleanupPvsOverride(ent, actor.PlayerSession);
 
+        if (ent.Comp.SuppressShutdownCleanup)
+            return;
+
         CleanupChangelingNullspaceIdentities(ent);
         CleanupDevouredReferences(ent);
+    }
+
+    /// <summary>
+    /// Moves all persistent changeling identity state to a new physical body without deleting the paused
+    /// identity clones. Used by body swap and Last Resort.
+    /// </summary>
+    public bool TryTransferIdentity(Entity<ChangelingIdentityComponent?> source, EntityUid target)
+    {
+        if (!Resolve(source, ref source.Comp, false) ||
+            TerminatingOrDeleted(target) ||
+            HasComp<ChangelingIdentityComponent>(target))
+            return false;
+
+        // Construct the component fully before adding it. Adding a component to a map-initialized entity raises
+        // MapInit synchronously; IdentityInitialized tells that handler this is transferred state, not a new changeling.
+        var targetIdentity = new ChangelingIdentityComponent
+        {
+            IdentityInitialized = true,
+            MaxStoredIdentities = source.Comp.MaxStoredIdentities,
+            ConsumedIdentities = new Dictionary<EntityUid, EntityUid?>(source.Comp.ConsumedIdentities),
+            StoredIdentities = new HashSet<EntityUid>(source.Comp.StoredIdentities),
+            StoredGenomes = new Dictionary<EntityUid, string>(source.Comp.StoredGenomes),
+            AbsorbedGenomes = new HashSet<string>(source.Comp.AbsorbedGenomes),
+            CurrentIdentity = source.Comp.CurrentIdentity,
+            CurrentGenome = source.Comp.CurrentGenome,
+            IdentityCloningSettings = source.Comp.IdentityCloningSettings,
+        };
+        AddComp(target, targetIdentity);
+
+        foreach (var stored in targetIdentity.StoredIdentities)
+        {
+            if (TryComp<ChangelingStoredIdentityComponent>(stored, out var storedIdentity))
+                storedIdentity.ChangelingOwner = target;
+        }
+
+        // Devoured bodies remember the changeling that consumed them. Point those records at the new body
+        // so duplicate-devour checks and later cleanup continue to work.
+        var devouredQuery = EntityQueryEnumerator<ChangelingDevouredComponent>();
+        while (devouredQuery.MoveNext(out _, out var devoured))
+        {
+            if (!devoured.DevouredBy.Remove(source.Owner))
+                continue;
+
+            devoured.DevouredBy.Add(target);
+        }
+
+        source.Comp.SuppressShutdownCleanup = true;
+        RemComp<ChangelingIdentityComponent>(source.Owner);
+        return true;
     }
 
     // Set all references to this entity to null to prevent PVS errors when networking.
@@ -90,9 +159,24 @@ public abstract class SharedChangelingIdentitySystem : EntitySystem
 
     private void OnStoredRemove(Entity<ChangelingStoredIdentityComponent> ent, ref ComponentRemove args)
     {
-        // The last stored identity is being deleted, we can clean up the map.
-        if (_net.IsServer && PausedMapId != null && Count<ChangelingStoredIdentityComponent>() <= 1)
-            _map.QueueDeleteMap(PausedMapId.Value);
+        if (_net.IsServer &&
+            ent.Comp.ChangelingOwner is { } owner &&
+            TryComp<ChangelingIdentityComponent>(owner, out var identity))
+        {
+            var removed = identity.ConsumedIdentities.Remove(ent.Owner);
+            removed |= identity.StoredIdentities.Remove(ent.Owner);
+            removed |= identity.StoredGenomes.Remove(ent.Owner);
+            if (removed && identity.LifeStage < ComponentLifeStage.Stopping)
+                Dirty(owner, identity);
+        }
+
+        // The last stored identity is being deleted, so the shared storage map can be cleaned up.
+        if (_net.IsClient || Count<ChangelingStoredIdentityComponent>() > 1)
+            return;
+
+        var maps = AllEntityQuery<ChangelingIdentityStorageMapComponent, MapComponent>();
+        while (maps.MoveNext(out var mapUid, out _, out var map))
+            _map.QueueDeleteMap(map.MapId);
     }
 
     /// <summary>
@@ -121,8 +205,7 @@ public abstract class SharedChangelingIdentitySystem : EntitySystem
             if (!TryComp<ChangelingDevouredComponent>(devouredUid, out var devouredComp))
                 continue;
 
-            if (devouredComp.DevouredBy.Remove(ent.Owner))
-                Dirty(devouredUid.Value, devouredComp);
+            devouredComp.DevouredBy.Remove(ent.Owner);
         }
     }
 
@@ -142,8 +225,8 @@ public abstract class SharedChangelingIdentitySystem : EntitySystem
             || !_prototype.Resolve(humanoid.Species, out var speciesPrototype))
             return null;
 
-        EnsurePausedMap();
-        var clone = Spawn(speciesPrototype.Prototype, new MapCoordinates(Vector2.Zero, PausedMapId!.Value));
+        var storageMap = EnsurePausedMap();
+        var clone = Spawn(speciesPrototype.Prototype, new MapCoordinates(Vector2.Zero, storageMap));
 
         var storedIdentity = EnsureComp<ChangelingStoredIdentityComponent>(clone);
         storedIdentity.OriginalEntity = target; // TODO: network this once we have WeakEntityReference or the autonetworking source gen is fixed
@@ -168,36 +251,131 @@ public abstract class SharedChangelingIdentitySystem : EntitySystem
     /// <param name="target">The target to clone.</param>
     public EntityUid? CloneToPausedMap(Entity<ChangelingIdentityComponent> ent, EntityUid target)
     {
-        if (!_prototype.Resolve(ent.Comp.IdentityCloningSettings, out var settings))
-            return null;
-
-        var clone = CloneToPausedMap(settings, target);
-
-        if (clone == null)
-            return null;
-
-        ent.Comp.ConsumedIdentities.Add(clone.Value, target);
-
-        Dirty(ent);
-        HandlePvsOverride(ent, clone.Value);
-
-        return clone;
+        return TryStoreIdentity(ent, target, countForObjective: true, out var clone)
+            ? clone
+            : null;
     }
 
     /// <summary>
-    /// Drop a stored identity from the changeling's storage.
+    /// Attempts to create and store a usable identity sample. Storage is capped and never contains two
+    /// active copies of the same genome. A genome can be acquired again after its sample is consumed.
     /// </summary>
-    public void DropStoredIdentity(Entity<ChangelingIdentityComponent?> ent, EntityUid identity)
+    public bool TryStoreIdentity(
+        Entity<ChangelingIdentityComponent> ent,
+        EntityUid target,
+        bool countForObjective,
+        out EntityUid? clone)
     {
-        if (!Resolve(ent, ref ent.Comp))
-            return;
+        var genome = GetGenomeId(target);
+        if (genome == null)
+        {
+            clone = null;
+            return false;
+        }
 
-        if (!HasComp<ChangelingStoredIdentityComponent>(identity))
-            return; // Not a stored identity.
+        return TryStoreIdentity(ent, target, genome, target, countForObjective, out clone);
+    }
+
+    /// <summary>
+    /// Stores a clone using an explicitly supplied genome id. This is used for hive downloads, where the
+    /// paused identity clone is the appearance source but must retain the original victim's DNA identity.
+    /// </summary>
+    public bool TryStoreIdentity(
+        Entity<ChangelingIdentityComponent> ent,
+        EntityUid appearanceSource,
+        string genome,
+        EntityUid? originalEntity,
+        bool countForObjective,
+        out EntityUid? clone)
+    {
+        clone = null;
+        if (string.IsNullOrWhiteSpace(genome) || ent.Comp.StoredGenomes.ContainsValue(genome))
+            return false;
+
+        if (ent.Comp.ConsumedIdentities.Count >= ent.Comp.MaxStoredIdentities)
+            return false;
+
+        if (!_prototype.Resolve(ent.Comp.IdentityCloningSettings, out var settings))
+            return false;
+
+        clone = CloneToPausedMap(settings, appearanceSource);
+        if (clone == null)
+            return false;
+
+        Comp<ChangelingStoredIdentityComponent>(clone.Value).ChangelingOwner = ent.Owner;
+
+        ent.Comp.ConsumedIdentities.Add(clone.Value, originalEntity);
+        ent.Comp.StoredIdentities.Add(clone.Value);
+        ent.Comp.StoredGenomes.Add(clone.Value, genome);
+
+        if (countForObjective)
+            RecordAbsorbedGenome(ent, genome, originalEntity ?? appearanceSource);
+        Dirty(ent);
+        HandlePvsOverride(ent, clone.Value);
+
+        if (!countForObjective)
+        {
+            var acquired = new ChangelingGenomeAcquiredEvent(genome, originalEntity ?? appearanceSource, false, false);
+            RaiseLocalEvent(ent.Owner, ref acquired);
+        }
+        return true;
+    }
+
+    /// <summary>
+    /// Adds a genome to permanent round progress and raises the objective-facing acquisition event once.
+    /// </summary>
+    public bool RecordAbsorbedGenome(Entity<ChangelingIdentityComponent> ent, string genome, EntityUid source)
+    {
+        if (!ent.Comp.AbsorbedGenomes.Add(genome))
+            return false;
+
+        Dirty(ent);
+        var acquired = new ChangelingGenomeAcquiredEvent(genome, source, true, true);
+        RaiseLocalEvent(ent.Owner, ref acquired);
+        return true;
+    }
+
+    /// <summary>
+    /// Returns a stable genome identifier for a compatible humanoid.
+    /// </summary>
+    public string? GetGenomeId(EntityUid target)
+    {
+        if (!HasComp<HumanoidProfileComponent>(target))
+            return null;
+
+        if (TryComp<DnaComponent>(target, out var dna) && !string.IsNullOrWhiteSpace(dna.DNA))
+            return dna.DNA;
+
+        // Test humanoids and unusual species may omit forensic DNA.
+        return $"entity:{target.Id}";
+    }
+
+    public bool HasStoredGenome(Entity<ChangelingIdentityComponent?> ent, string genome)
+    {
+        return Resolve(ent, ref ent.Comp, false) && ent.Comp.StoredGenomes.ContainsValue(genome);
+    }
+
+    /// <summary>
+    /// Attempts to drop an identity owned by this changeling from storage.
+    /// </summary>
+    public bool TryDropStoredIdentity(Entity<ChangelingIdentityComponent?> ent, EntityUid identity)
+    {
+        if (!Resolve(ent, ref ent.Comp, false) ||
+            ent.Comp.CurrentIdentity == identity ||
+            !ent.Comp.StoredIdentities.Contains(identity) ||
+            !HasComp<ChangelingStoredIdentityComponent>(identity))
+        {
+            return false;
+        }
 
         PredictedQueueDel(identity);
-        if (ent.Comp.ConsumedIdentities.Remove(identity))
+        var removed = ent.Comp.ConsumedIdentities.Remove(identity);
+        removed |= ent.Comp.StoredIdentities.Remove(identity);
+        removed |= ent.Comp.StoredGenomes.Remove(identity);
+        if (removed)
             Dirty(ent);
+
+        return removed;
     }
 
     /// <summary>
@@ -242,14 +420,16 @@ public abstract class SharedChangelingIdentitySystem : EntitySystem
     /// <summary>
     /// Create a paused map for storing devoured identities as a clone of the player.
     /// </summary>
-    private void EnsurePausedMap()
+    private MapId EnsurePausedMap()
     {
-        if (_map.MapExists(PausedMapId))
-            return;
+        var maps = AllEntityQuery<ChangelingIdentityStorageMapComponent, MapComponent>();
+        if (maps.MoveNext(out _, out _, out var existingMap))
+            return existingMap.MapId;
 
         var mapUid = _map.CreateMap(out var newMapId);
+        AddComp<ChangelingIdentityStorageMapComponent>(mapUid);
         _metaSystem.SetEntityName(mapUid, Loc.GetString("changeling-paused-map-name"));
-        PausedMapId = newMapId;
         _map.SetPaused(mapUid, true);
+        return newMapId;
     }
 }

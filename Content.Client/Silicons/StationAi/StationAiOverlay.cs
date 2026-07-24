@@ -1,9 +1,12 @@
 using System.Numerics;
 using Content.Client.Graphics;
+using Content.Shared.Changeling.Mutations; // SS220 Changeling digital camouflage
 using Content.Shared.Silicons.StationAi;
+using Robust.Client.GameObjects; // SS220 Changeling digital camouflage
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
+using Robust.Shared.Map; // SS220 Changeling digital camouflage
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics;
 using Robust.Shared.Prototypes;
@@ -29,12 +32,24 @@ public sealed class StationAiOverlay : Overlay
 
     private readonly OverlayResourceCache<CachedResources> _resources = new();
 
+    // SS220 Changeling digital camouflage begin
+    private readonly ContainerSystem _containerSystem;
+    private readonly EntityLookupSystem _entityLookup;
+    private readonly SharedMapSystem _mapSystem;
+    // SS220 Changeling digital camouflage end
+
     private float _updateRate = 1f / 30f;
     private float _accumulator;
 
     public StationAiOverlay()
     {
         IoCManager.InjectDependencies(this);
+
+        // SS220 Changeling digital camouflage begin
+        _containerSystem = _entManager.System<ContainerSystem>();
+        _entityLookup = _entManager.System<EntityLookupSystem>();
+        _mapSystem = _entManager.System<SharedMapSystem>();
+        // SS220 Changeling digital camouflage end
     }
 
     protected override void Draw(in OverlayDrawArgs args)
@@ -127,10 +142,52 @@ public sealed class StationAiOverlay : Overlay
         worldHandle.UseShader(_proto.Index(StencilDrawShader).Instance());
         worldHandle.DrawTextureRect(res.StaticTexture!.Texture, worldBounds);
 
+        // SS220 Changeling digital camouflage begin
+        if (grid != null && broadphase != null)
+            DrawDigitalCamouflage(args, invMatrix, (gridUid, grid));
+        // SS220 Changeling digital camouflage end
+
         worldHandle.SetTransform(Matrix3x2.Identity);
         worldHandle.UseShader(null);
 
     }
+
+    // SS220 Changeling digital camouflage begin
+    private void DrawDigitalCamouflage(
+        in OverlayDrawArgs args,
+        Matrix3x2 inverseMatrix,
+        Entity<MapGridComponent> grid)
+    {
+        if (_player.LocalEntity is not { } player ||
+            !_entManager.TryGetComponent<StationAiDigitalCamouflageComponent>(player, out var camouflage))
+        {
+            return;
+        }
+
+        var worldHandle = args.WorldHandle;
+        worldHandle.SetTransform(inverseMatrix);
+        worldHandle.UseShader(_proto.Index(CameraStaticShader).Instance());
+
+        foreach (var netEntity in camouflage.CamouflagedEntities)
+        {
+            if (!_entManager.TryGetEntity(netEntity, out var uid) ||
+                _entManager.Deleted(uid) ||
+                !_entManager.TryGetComponent(uid, out TransformComponent? xform) ||
+                xform.MapID == MapId.Nullspace ||
+                xform.MapID != args.MapId ||
+                xform.GridUid != grid.Owner ||
+                !_visibleTiles.Contains(_mapSystem.LocalToTile(grid.Owner, grid.Comp, xform.Coordinates)) ||
+                _containerSystem.IsEntityOrParentInContainer(uid.Value, xform: xform))
+            {
+                continue;
+            }
+
+            var bounds = _entityLookup.GetWorldAABB(uid.Value, xform).Enlarged(0.15f);
+            if (bounds.Intersects(in args.WorldAABB))
+                worldHandle.DrawRect(bounds, Color.White);
+        }
+    }
+    // SS220 Changeling digital camouflage end
 
     protected override void DisposeBehavior()
     {

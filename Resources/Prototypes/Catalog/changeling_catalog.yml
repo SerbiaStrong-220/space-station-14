@@ -1,15 +1,3 @@
-# Abilities
-
-- type: listing
-  id: ChangelingArmBlade
-  name: changeling-arm-blade-name
-  description: changeling-arm-blade-desc
-  productAction: ActionRetractableItemArmBlade
-  applyToMob: true
-  cost:
-    ChangelingDNA: 25
-  categories:
-  - ChangelingAbilities
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 1
+# SS220 Changeling
+# Changeling mutation listings are split by behavior in
+# changeling_combat_mutations_catalog.yml and changeling_utility_catalog.yml.

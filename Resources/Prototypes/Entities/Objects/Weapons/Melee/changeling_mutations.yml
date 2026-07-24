@@ -1,0 +1,88 @@
+# SS220 Changeling
+- type: entity
+  parent: ArmBlade
+  id: ChangelingArmBlade
+  name: changeling arm blade
+  description: A living blade of hardened bone and flesh.
+  components:
+  - type: MeleeWeapon
+    attackRate: 1
+    damage:
+      types:
+        Slash: 20
+        Piercing: 5
+        Structural: 20
+  - type: Sprite
+    sprite: _Goobstation/Changeling/arm_blade.rsi
+    state: icon
+  - type: Item
+    sprite: _Goobstation/Changeling/arm_blade.rsi
+  - type: Unremoveable
+
+- type: entity
+  parent: BaseItem
+  id: ChangelingFakeArmBlade
+  name: dull arm blade
+  description: A temporary, blunt imitation of a changeling arm blade.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Changeling/arm_blade.rsi
+    state: icon
+  - type: Item
+    sprite: _Goobstation/Changeling/arm_blade.rsi
+  - type: Unremoveable
+  - type: MeleeWeapon
+    attackRate: 1
+    damage:
+      types:
+        Slash: 8
+        Structural: 5
+  - type: TimedDespawn
+    lifetime: 30
+
+- type: entity
+  parent: BaseItem
+  id: ChangelingBoneShard
+  name: bone shard
+  description: A razor-edged shard torn from living bone. It quickly becomes useless after being thrown.
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Changeling/bone_shard.rsi
+    state: icon
+  - type: Item
+    size: Tiny
+    sprite: _Goobstation/Changeling/bone_shard.rsi
+  - type: Sharp
+  - type: EmbeddableProjectile
+  - type: LandAtCursor
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Piercing: 20
+  - type: TimedDespawn
+    lifetime: 30
+
+- type: entity
+  parent: BaseItem
+  id: ChangelingOrganicShield
+  name: organic shield
+  description: A broad slab of living tissue capable of absorbing six attacks.
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Changeling/shields.rsi
+    state: ling-icon
+  - type: Item
+    size: Large
+    sprite: _Goobstation/Changeling/shields.rsi
+    heldPrefix: ling
+  - type: AltBlocking
+    rangeBlockProb: 1
+    meleeBlockProb: 1
+    activeRangeBlockProb: 1
+    activeMeleeBlockProb: 1
+    coveredZones: 4
+  - type: Unremoveable
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: ChangelingOrganicShield
