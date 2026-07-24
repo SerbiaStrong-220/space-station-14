@@ -79,6 +79,10 @@
   - type: Sprite
     state: bed-MED
   - type: HealOnBuckle
+  #SS220-MicroFixesIPC begin
+    speciesBlacklist:
+    - Ipc
+  #SS220-MicroFixesIPC end
     damage:
       types:
         Poison: -0.2

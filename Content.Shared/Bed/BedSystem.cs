@@ -7,6 +7,7 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Emag.Systems;
 using Content.Shared.Metabolism;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Humanoid; //SS220-MicroFixesIPC
 using Content.Shared.Power;
 using Content.Shared.Power.EntitySystems;
 using Robust.Shared.Timing;
@@ -150,6 +151,15 @@ public sealed class BedSystem : EntitySystem
             {
                 if (_mobStateSystem.IsDead(healedEntity))
                     continue;
+
+                //SS220-MicroFixesIPC begin
+                if (bedComponent.SpeciesBlacklist.Count > 0
+                    && TryComp<HumanoidProfileComponent>(healedEntity, out var profile)
+                    && bedComponent.SpeciesBlacklist.Contains(profile.Species))
+                {
+                    continue;
+                }
+                //SS220-MicroFixesIPC end
 
                 var damage = bedComponent.Damage;
 
