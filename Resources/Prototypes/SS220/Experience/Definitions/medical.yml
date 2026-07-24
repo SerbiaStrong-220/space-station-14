@@ -161,3 +161,24 @@
   knowledges:
   - MedicalKnowledge
   addSublevelPoints: 15
+
+- type: experienceDefinition
+  id: VirologistRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    ExtravehicularActivity:
+      level: 1
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 1
+    Medicine:
+      level: 2
+    Anatomy:
+      level: 2
+    PhysicalTraining:
+      level: 2
+  knowledges:
+  - MedicalKnowledge
+  addSublevelPoints: 15

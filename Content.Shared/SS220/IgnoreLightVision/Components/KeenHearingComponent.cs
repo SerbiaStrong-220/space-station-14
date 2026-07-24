@@ -10,7 +10,16 @@ public sealed partial class KeenHearingComponent : AddIgnoreLightVisionOverlayCo
 {
     public TimeSpan? ToggleTime;
 
+    [ViewVariables]
+    public bool ManualOn;
+
     public KeenHearingComponent(float radius, float closeRadius) : base(radius, closeRadius) { }
+}
+
+[ByRefEvent]
+public record struct GetKeenHearingModifiersEvent
+{
+    public bool ForceOn;
 }
 
 [DataDefinition]

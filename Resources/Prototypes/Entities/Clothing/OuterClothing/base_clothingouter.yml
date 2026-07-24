@@ -156,6 +156,11 @@
     walkModifier: 0.6
     sprintModifier: 0.6
     requireActivated: false #ss220 shield fix
+  # SS220-Start
+  - type: VirusProtection
+    vectors: Contact, Proximity, Splash
+    blockChance: 0.9
+  # SS220-End
   - type: HeldSpeedModifier
   - type: Item
     size: Ginormous
@@ -216,6 +221,11 @@
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8
+  # SS220-Start
+  - type: VirusProtection
+    vectors: Contact, Proximity, Splash
+    blockChance: 0.9
+  # SS220-End
   - type: HeldSpeedModifier
   - type: Item
     size: Huge

@@ -26,6 +26,10 @@ public sealed partial class StaminaComponent : Component
     [ViewVariables(VVAccess.ReadWrite), DataField, AutoNetworkedField]
     public float Decay = 3f;
 
+    [ViewVariables, AutoNetworkedField]
+    public float DecayModifier = 1f;
+    // SS220-End
+
     /// <summary>
     /// How much time after receiving damage until stamina starts decreasing.
     /// </summary>
@@ -174,3 +178,15 @@ public sealed partial class StaminaComponent : Component
 
     #endregion
 }
+
+// SS220 Virology start
+[ByRefEvent]
+public record struct RefreshStaminaDecayEvent
+{
+    public float Modifier = 1f;
+
+    public RefreshStaminaDecayEvent()
+    {
+    }
+}
+// SS220 Virology End

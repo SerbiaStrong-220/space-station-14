@@ -506,5 +506,10 @@ public enum LogType
     /// All related to experience system
     /// </summary>
     Experience = 10002,
+
+    /// <summary>
+    /// Virology - infection, symptom progression, suppression and vaccination.
+    /// </summary>
+    Virology = 10003,
     //SS220 log types end
 }

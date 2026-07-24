@@ -87,4 +87,17 @@
     </PanelContainer>
     <!-- SS220 ADD REAGENTS TO HEALTH ANALYZER END -->
 
+    <!-- SS220-Start virus diagnostics -->
+    <PanelContainer Name="VirusesSection" Visible="False" Margin="0 5">
+        <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True">
+            <PanelContainer StyleClasses="LowDivider"/>
+            <Label Text="{Loc 'health-analyzer-window-viruses-title'}"
+                   HorizontalExpand="True"
+                   VerticalAlignment="Top"
+                   Margin="0 0 0 2"/>
+            <BoxContainer Name="VirusesContainer" Orientation="Vertical" SeparationOverride="2" Margin="5 0 0 0"/>
+        </BoxContainer>
+    </PanelContainer>
+    <!-- SS220-End -->
+
 </BoxContainer>

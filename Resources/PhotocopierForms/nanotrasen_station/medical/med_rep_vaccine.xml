@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Form>
+  <FormId>med_rep_vaccine</FormId>
+  <PrototypeId>PaperNtFormMed</PrototypeId>
+  <EntityName>форма НТ-МЕД-ВАКЦ</EntityName>
+  <PhotocopierTitle>Справка о выпуске вакцины</PhotocopierTitle>
+  <Content><![CDATA[[bold]Форма НТ-МЕД-ВАКЦ[/bold]
+[head=2]Справка о выпуске вакцины[/head]
+
+[italic]Дата: ДЕНЬ/МЕСЯЦ/ГОД[/italic]
+
+$REPORT$
+
+[italic]Место для печатей – Главный врач[/italic]]]></Content>
+</Form>

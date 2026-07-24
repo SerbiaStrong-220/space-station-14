@@ -200,6 +200,7 @@
         Radiation: 0.75 #ss-220 armReb
   - type: GroupExamine
   - type: IngestionBlocker
+  - type: FireBreathSeal # SS220
   - type: Tag
     tags:
     - WhitelistChameleon

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Form>
+  <FormId>med_rep_virus</FormId>
+  <PrototypeId>PaperNtFormMed</PrototypeId>
+  <EntityName>форма НТ-МЕД-ВИР</EntityName>
+  <PhotocopierTitle>Справка о выявлении вируса</PhotocopierTitle>
+  <Content><![CDATA[[bold]Форма НТ-МЕД-ВИР[/bold]
+[head=2]Справка о выявлении вируса[/head]
+
+[italic]Дата: ДЕНЬ/МЕСЯЦ/ГОД[/italic]
+
+$REPORT$
+
+[italic]Место для печатей – Главный врач[/italic]]]></Content>
+</Form>

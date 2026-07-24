@@ -1,0 +1,19 @@
+- type: cargoProduct
+  id: VirusSampleKit
+  icon:
+    sprite: Objects/Specific/Chemistry/vial.rsi
+    state: vial
+  product: CrateVirusSamples
+  cost: 5000
+  category: cargoproduct-category-name-medical
+  group: market
+
+- type: cargoProduct
+  id: DiseaseMachineBoards
+  icon:
+    sprite: Objects/Misc/module.rsi
+    state: medical
+  product: CrateDiseaseMachineBoards
+  cost: 6000
+  category: cargoproduct-category-name-medical
+  group: market

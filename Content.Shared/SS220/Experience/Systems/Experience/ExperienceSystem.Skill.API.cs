@@ -26,6 +26,9 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     public bool TryChangeStudyingProgress(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, FixedPoint4 delta)
     {
+        if (HasComp<SkillSuppressionComponent>(entity))
+            return false;
+
         // for unpredicted events
         if (!_gameTiming.IsFirstTimePredicted)
             return false;
@@ -59,6 +62,9 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (HasComp<BypassSkillCheckComponent>(entity))
             return true;
 
+        if (HasComp<SkillSuppressionComponent>(entity))
+            return false;
+
         if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
             return false;
 
@@ -82,6 +88,12 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (HasComp<BypassSkillCheckComponent>(entity))
         {
             resultSkills = [.. treeProto.SkillTree];
+            return true;
+        }
+
+        if (HasComp<SkillSuppressionComponent>(entity))
+        {
+            resultSkills = [];
             return true;
         }
 
@@ -153,6 +165,9 @@ public sealed partial class ExperienceSystem : EntitySystem
             return true;
         }
 
+        if (HasComp<SkillSuppressionComponent>(entity))
+            return false;
+
         if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
             return false;
 
@@ -184,12 +199,21 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     public bool TryGetSkillTreeLevels(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, [NotNullWhen(true)] out int? level, [NotNullWhen(true)] out int? sublevel)
     {
-        if (!Resolve(entity.Owner, ref entity.Comp) || !entity.Comp.Skills.TryGetValue(skillTree, out var info))
-        {
-            level = null;
-            sublevel = null;
+        level = null;
+        sublevel = null;
+
+        if (!Resolve(entity.Owner, ref entity.Comp))
             return false;
-        }
+
+        if (HasComp<SkillSuppressionComponent>(entity) && !HasComp<BypassSkillCheckComponent>(entity))
+            return false;
+
+        // skill issue?
+        var info = entity.Comp.OverrideSkills.TryGetValue(skillTree, out var overrideInfo) ? overrideInfo :
+                    entity.Comp.Skills.TryGetValue(skillTree, out var skills) ? skills : null;
+
+        if (info is null)
+            return false;
 
         sublevel = info.Sublevel;
         level = info.Level;

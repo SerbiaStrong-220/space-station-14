@@ -16,6 +16,7 @@ using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.AutoInjector;
 using Content.Shared.SS220.Cryostasis.Events;
+using Content.Shared.SS220.Virology.Behaviors;
 using Content.Shared.Stacks;
 using Content.Shared.Standing;
 using Content.Shared.Timing;
@@ -222,6 +223,14 @@ public sealed partial class InjectorSystem : EntitySystem
             }
         }
         //ss220 needleprotection end
+
+        // SS220-Start
+        if (TryComp<VirusInjectionBlockComponent>(target, out var injectionBlock))
+        {
+            _popup.PopupClient(Loc.GetString(injectionBlock.Message), injector, user);
+            return false;
+        }
+        // SS220-End
 
         if (_useDelay.IsDelayed(injector.Owner) // Check for Delay.
             || !GetMobsDoAfterTime(injector, user, target, out var doAfterTime, out var amount)) // Get the DoAfter time.
@@ -518,6 +527,13 @@ public sealed partial class InjectorSystem : EntitySystem
         // Jugsuit blocking Hyposprays when
         if (ev.Cancelled)
         {
+            // SS220-Start: let the blocker supply its own message, matching the self-inject path above
+            if (ev.OverrideMessage != null)
+            {
+                _popup.PopupPredicted(ev.OverrideMessage, target, user, PopupType.SmallCaution);
+                return true;
+            }
+            // SS220-End
             var userMessage = Loc.GetString("injector-component-blocked-user");
             var otherMessage = Loc.GetString("injector-component-blocked-other", ("target", target), ("user", user));
             _popup.PopupPredicted(userMessage, otherMessage, target, user, PopupType.SmallCaution);

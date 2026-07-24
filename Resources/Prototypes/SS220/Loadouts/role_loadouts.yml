@@ -160,6 +160,26 @@
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - WorkerCash #SS220-Cash-personal
 
+  # Вирусолог
+- type: roleLoadout
+  id: JobVirologist
+  groups:
+  - GroupTankHarness
+  - MedicalNeck
+  - MedicalMask
+  - VirologistJumpsuit
+  - MedicalsGloves
+  - VirologistBackpack
+  - VirologistOuterClothing
+  - MedicalShoes
+  - Glasses
+  - SurvivalMedical
+  - SurvivalVox
+  - GroupSpeciesBreathToolMedical
+  - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - WorkerCash #SS220-Cash-personal
+
 #! Медицинский отдел (Конец)
 
 #! Инженерный отдел (Начало)

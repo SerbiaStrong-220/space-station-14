@@ -1,0 +1,219 @@
+# Cold
+- type: entity
+  id: VirusCold
+  parent: BaseVirus
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Virus
+    nameLoc: virus-cold-name
+    transmission:
+      proximityChance: 0.1
+      proximityRange: 2
+    symptoms:
+    - Sneezing
+
+# Quvot
+- type: entity
+  id: VirusQuvot
+  parent: BaseVirus
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Virus
+    nameLoc: virus-quvot-name
+    transmission:
+      contactChance: 0.5
+    symptoms:
+    - SkinBurst
+
+# Hemolacria
+- type: entity
+  id: VirusHemolacria
+  parent: BaseVirus
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Virus
+    nameLoc: virus-hemolacria-name
+    transmission:
+      contactChance: 0.5
+    symptoms:
+    - EyeBleeding
+
+# Mimosa
+- type: entity
+  id: VirusMimosa
+  parent: BaseVirus
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Virus
+    nameLoc: virus-mimosa-name
+    transmission:
+      proximityChance: 0.1
+      proximityRange: 2
+    symptoms:
+    - Muteness
+    - Drowsiness
+
+# Synthesia
+- type: entity
+  id: VirusSynthesia
+  parent: BaseVirus
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Virus
+    nameLoc: virus-synthesia-name
+    transmission:
+      contactChance: 0.5
+    symptoms:
+    - Synthification
+    - SteelStomach
+    - StoneSkin
+    - Electrophilia
+
+# Shitsec
+- type: entity
+  id: VirusShitsec
+  parent: BaseVirus
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Virus
+    nameLoc: virus-shitsec-name
+    transmission:
+      contactChance: 0.5
+    symptoms:
+    - RecoilWeakness
+    - Alcosia
+    - Drowsiness
+
+# Somnambula
+- type: entity
+  id: VirusSomnambula
+  parent: BaseVirus
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Virus
+    nameLoc: virus-somnambula-name
+    transmission:
+      contactChance: 0.5
+    symptoms:
+    - Lethalgy
+    - ChronicFatigue
+    - Hypersomnia
+
+# Sacrilia
+- type: entity
+  id: VirusSacrilia
+  parent: BaseVirus
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Virus
+    nameLoc: virus-sacrilia-name
+    transmission:
+      contactChance: 0.5
+    symptoms:
+    - LaserEyes
+    - EyeBleeding
+    - Narcophasia
+    - Bulimia
+
+# Ghoulification
+- type: entity
+  id: VirusGhoulification
+  parent: BaseVirus
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Virus
+    nameLoc: virus-ghoulification-name
+    transmission:
+      contactChance: 0.5
+    symptoms:
+    - Radiophasia
+    - BreathInversion
+    - NoodleArms
+    - DogVitality
+
+# Kenuraya
+- type: entity
+  id: VirusKenuraya
+  parent: BaseVirus
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Virus
+    nameLoc: virus-kenuraya-name
+    transmission:
+      contactChance: 0.5
+    symptoms:
+    - TricordTolerance
+    - Dehydration
+    - Hyperabsorption
+    - Autorespiration
+
+# Neurolock
+- type: entity
+  id: VirusNeurolock
+  parent: BaseVirus
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Virus
+    nameLoc: virus-neurolock-name
+    transmission:
+      proximityChance: 0.1
+      proximityRange: 2
+    symptoms:
+    - Dementia
+    - Stupefaction
+    - Clumsiness
+    - Sneezing
+    - Schizophrenia
+    - Paracusia
+
+# Red Death
+- type: entity
+  id: VirusRedDeath
+  parent: BaseVirus
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Virus
+    nameLoc: virus-red-death-name
+    transmission:
+      contactChance: 0.5
+      proximityChance: 0.1
+      proximityRange: 2
+    symptoms:
+    - Cough
+    - ChronicFatigue
+    - Necrosis
+    - EyeBleeding
+
+# Dragon Blood
+- type: entity
+  id: VirusDragonBlood
+  parent: BaseVirus
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Virus
+    nameLoc: virus-dragon-blood-name
+    transmission:
+      contactChance: 0.5
+    symptoms:
+    - BurningBlood
+    - Paracusia
+    - Hyperabsorption
+    - TricordTolerance
+
+# Oppressor
+- type: entity
+  id: VirusOppressor
+  parent: BaseVirus
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Virus
+    nameLoc: virus-oppressor-name
+    transmission:
+      contactChance: 0.5
+    symptoms:
+    - SharpHearing
+    - Strongman
+    - ToxinFiltration
+    - ToxicConversion
+    - ChronicFatigue
+    - Bulimia
