@@ -618,6 +618,7 @@
   - EmergencyNitrogenBrigmedicSponsor
   - EmergencyOxygenBrigmedic
   - EmergencyOxygenBrigmedicSponsor
+  - LoadoutSpeciesBrigmedicIpc
   # Бригмедик (Конец)
 
   # Врач (Начало)

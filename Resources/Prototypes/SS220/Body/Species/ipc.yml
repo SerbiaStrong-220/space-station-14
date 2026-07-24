@@ -138,6 +138,7 @@
     availableLanguages:
     - id: Galactic
     - id: Binary
+    - id: Ternary
   - type: Tag
     tags:
     - CanPilot
@@ -307,6 +308,7 @@
         damage:
           types:
              Heat: -5
+             Cold: -5
       - qualityNeeded: Pulsing
         doAfterDelay: 1.2
         damage:

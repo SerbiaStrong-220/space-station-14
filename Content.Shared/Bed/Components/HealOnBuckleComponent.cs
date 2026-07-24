@@ -1,6 +1,10 @@
 using Content.Shared.Damage;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+//SS220-MicroFixesIPC bedin
+using Content.Shared.Humanoid.Prototypes;
+using Robust.Shared.Prototypes;
+//SS220-MicroFixesIPC end
 
 namespace Content.Shared.Bed.Components
 {
@@ -36,5 +40,13 @@ namespace Content.Shared.Bed.Components
         /// </summary>
         [DataField, AutoNetworkedField]
         public EntityUid? SleepAction;
+
+        //SS220-MicroFixesIPC begin
+        /// <summary>
+        /// Species will not receive healing from this bed.
+        /// </summary>
+        [DataField]
+        public List<ProtoId<SpeciesPrototype>> SpeciesBlacklist = [];
+        //SS220-MicroFixesIPC end
     }
 }

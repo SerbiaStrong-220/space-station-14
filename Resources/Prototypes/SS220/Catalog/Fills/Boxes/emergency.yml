@@ -190,3 +190,20 @@
   id: BoxSurvivalEngineerIpc
   name: survival box engineer ipc
 
+- type: entity
+  parent: BoxSurvivalMedicalIpc
+  id: BoxSurvivalBrigmedicIpc
+  name: survival box brigmedic ipc
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingMaskBreathMedicalSecurity
+        - id: Flare
+        - id: CrowbarRed
+        - id: WelderMini
+        - id: PowerCellMedium
+        - id: EmergencyMedipen
+        - id: SpaceMedipen
+
