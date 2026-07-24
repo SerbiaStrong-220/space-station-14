@@ -47,3 +47,15 @@
   cost: 5000
   recipeUnlocks:
   - ClothingEyesHudMediChem
+
+- type: technology
+  id: AdvancedKitchenMachineryTech
+  name: research-technology-advanced-kitchen-machinery
+  icon:
+    sprite: SS220/Structures/Machines/grill_advanced.rsi
+    state: icon
+  discipline: CivilianServices
+  tier: 2
+  cost: 7500
+  recipeUnlocks:
+  - KitchenElectricGrillAdvancedCircuitboard
