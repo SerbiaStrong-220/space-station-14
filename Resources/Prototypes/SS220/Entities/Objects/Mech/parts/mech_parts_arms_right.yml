@@ -50,6 +50,11 @@
         node: start
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: Construction
+    graph: MechRightArm
+    node: rightarmhydraulic
+    containers:
+    - part-container
   - type: MechPart
     integrity: 150
     maxIntegrity: 150
@@ -418,7 +423,6 @@
         attackRate: 2.5
         altDisarm: false
         autoAttack: true
-    - hand:
     - hand:
         location: Right
         strengthModifier: 0.8

@@ -1,0 +1,96 @@
+- type: entity
+  id: PowerSupplyElectronics
+  parent: BaseElectronics
+  name: power supply control module
+  description: The electrical control center for the power supply of a device.
+  components:
+    - type: Item
+      storedRotation: 0
+    - type: Sprite
+      sprite: Objects/Misc/module.rsi
+      state: mainboard
+    - type: Tag
+      tags:
+      - PowerSupplyElectronics
+
+- type: entity
+  id: HydraulicsControlElectronics
+  parent: BaseElectronics
+  name: hydraulics control module
+  description: A circuitboard made to oversee and control systems of hydraulic pumps and valves.
+  components:
+    - type: Sprite
+      sprite: Objects/Misc/module.rsi
+      state: id_mod
+    - type: Tag
+      tags:
+      - HydraulicsControlElectronics
+
+- type: entity
+  id: ServoControlElectronics
+  parent: BaseElectronics
+  name: servo control module
+  description: A circuitboard made to oversee and control electric servo motors.
+  components:
+    - type: Sprite
+      sprite: Objects/Misc/module.rsi
+      state: id_mod
+    - type: Tag
+      tags:
+      - ServoControlElectronics
+
+- type: entity
+  id: OpticalProcessorElectronics
+  parent: BaseElectronics
+  name: optical processor electronics
+  description: A module with a GPU to process video streams.
+  components:
+    - type: Item
+      storedRotation: 0
+    - type: Sprite
+      sprite: Objects/Misc/module.rsi
+      state: mainboard
+    - type: Tag
+      tags:
+      - OpticalElectronics
+
+- type: entity
+  id: DimensionalOrientationElectronics
+  parent: BaseElectronics
+  name: dimensional orientation electronics
+  description: Basically a circuitboard with three-axis accelerometer and gyroscope on it. It is vital for any device that must know it's position in space.
+  components:
+    - type: Item
+      storedRotation: 0
+    - type: Sprite
+      sprite: Objects/Misc/module.rsi
+      state: mainboard
+    - type: Tag
+      tags:
+      - DimensionalElectronics
+
+- type: entity
+  id: PowerSupplyUnit
+  parent: BaseElectronics
+  name: PSU
+  description: A device that edits the voltage of incoming direct current, providing suitable voltage for various internal systems.
+  components:
+    - type: Sprite
+      sprite: Objects/Misc/module.rsi
+      state: id_mod
+    - type: Tag
+      tags:
+      - PowerSupplyUnit
+
+- type: entity
+  id: PowerSupplyUnitLarge
+  parent: BaseElectronics
+  name: large PSU
+  description: A device that edits the voltage of incoming direct current, providing suitable voltage for various internal systems. This one is rated for 10 kW max output.
+  components:
+    - type: Sprite
+      sprite: Objects/Misc/module.rsi
+      state: id_mod
+    - type: Tag
+      tags:
+      - PowerSupplyUnitLarge

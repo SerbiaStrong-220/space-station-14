@@ -358,7 +358,6 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
         EntityUid pilot = (EntityUid)ent.Comp.PilotSlot.ContainedEntity;
 
-        TransferMindIntoPilot(ent);
         if (TryComp<BarotraumaComponent>(pilot, out var barotraumaComp))
             barotraumaComp.HasImmunity = false;
 
@@ -370,7 +369,11 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
             if (barotraumaComp != null)
                 barotraumaComp.HasImmunity = true;
+
+            return;
         }
+
+        TransferMindIntoPilot(ent);
     }
 
     public void AddItemsToMech(EntityUid mech)

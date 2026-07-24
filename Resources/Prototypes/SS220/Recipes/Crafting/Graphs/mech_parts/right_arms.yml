@@ -1,0 +1,91 @@
+- type: constructionGraph
+  id: MechRightArm
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: rightarmframe
+          steps:
+            - material: Steel
+              amount: 15
+              doAfter: 15
+              store: part-container
+    - node: rightarmframe
+      entity: MechRightArmFrame
+      edges:
+        - to: rightarmframehydraulic
+          steps:
+            - tag: HydraulicPiston
+              doAfter: 5
+              store: part-container
+            - tool: Anchoring
+              doAfter: 5
+            - material: Cable
+              amount: 5
+              doAfter: 15
+              store: part-container
+            - tool: Screwing
+              doAfter: 5
+            - tag: HydraulicPiston
+              doAfter: 5
+              store: part-container
+            - tool: Anchoring
+              doAfter: 5
+            - material: Cable
+              amount: 5
+              doAfter: 15
+              store: part-container
+            - tool: Screwing
+              doAfter: 5
+            - tag: PowerSupplyElectronics
+            - tool: Screwing
+              doAfter: 5
+            - material: Cable
+              amount: 15
+              doAfter: 10
+              store: part-container
+            - tool: Screwing
+              doAfter: 15
+            - tool: Welding
+              doAfter: 10
+            - tool: Screwing
+              doAfter: 15
+    - node: rightarmframehydraulic
+      entity: MechRightArmFrameHydraulic
+      edges:
+        - to: rightarmhydraulic
+          steps:
+            - tag: HydraulicPiston
+              doAfter: 5
+              store: part-container
+            - tool: Anchoring
+              doAfter: 5
+            - material: Cable
+              amount: 5
+              doAfter: 5
+              store: part-container
+            - tool: Screwing
+              doAfter: 5
+            - tag: HydraulicPiston
+              doAfter: 5
+              store: part-container
+            - tool: Anchoring
+              doAfter: 5
+            - material: Cable
+              amount: 5
+              doAfter: 5
+              store: part-container
+            - tool: Screwing
+              doAfter: 5
+            - tag: HydraulicClaw
+              doAfter: 10
+            - tool: Anchoring
+              doAfter: 5
+            - material: Cable
+              amount: 5
+              doAfter: 5
+              store: part-container
+            - tool: Screwing
+              doAfter: 5
+    - node: rightarmhydraulic
+      entity: HydraulicRightArm

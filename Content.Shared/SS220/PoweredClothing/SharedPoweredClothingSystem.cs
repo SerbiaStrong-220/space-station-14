@@ -2,7 +2,6 @@
 
 using Content.Shared.ActionBlocker;
 using Content.Shared.Clothing;
-using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.SS220.Clothing.Components;
@@ -17,7 +16,7 @@ public abstract class SharedPoweredClothingSystem : EntitySystem
 {
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly ItemToggleSystem _itemToggle = default!;
-    [Dependency] private SharedContainerSystem _containerSystem = default!; 
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()

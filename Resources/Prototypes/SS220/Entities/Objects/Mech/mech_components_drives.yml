@@ -1,0 +1,39 @@
+- type: entity
+  id: ElectricServo
+  parent: BaseElectronics
+  name: electric servomotor
+  description: An electric motor with additional electronics that allow precise control over it's movement.
+  components:
+    - type: Sprite
+      sprite: Objects/Misc/module.rsi
+      state: id_mod
+    - type: Tag
+      tags:
+      - ServoMotor
+
+- type: entity
+  id: HydraulicPiston
+  parent: BaseElectronics
+  name: hydraulic piston
+  description: An extremely simple yet still effective device - dual-direction hydraulic piston.
+  components:
+    - type: Sprite
+      sprite: Objects/Misc/module.rsi
+      state: id_mod
+    - type: Tag
+      tags:
+      - HydraulicPiston
+
+- type: entity
+  id: ArtificialMuscle
+  parent: BaseElectronics
+  name: artificial muscle
+  description: The pinnacle of robotic drive technology - an electrolyte-based artificial muscle capable of swift, smooth and precise but still powerful movements.
+  components:
+    - type: Sprite
+      sprite: Objects/Misc/module.rsi
+      state: id_mod
+    - type: Tag
+      tags:
+      - ArtificialMuscle
+

@@ -202,6 +202,9 @@
     attachedColoredSprite:
       sprite: SS220/Objects/Mechs/coresfinal.rsi
       state: basicloadercolor
+  - type: Construction
+    graph: PowerloaderFrame
+    node: powerloader
   - type: FireProtection
     reduction: 0.5
   - type: AltMech

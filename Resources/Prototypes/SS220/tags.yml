@@ -178,6 +178,49 @@
 - type: Tag
   id: ThrusterShuntingMachineCircuitboard
 
+# mech-overhaul-circuitboards
+- type: Tag
+  id: PowerSupplyElectronics
+
+- type: Tag
+  id: HydraulicsControlElectronics
+
+- type: Tag
+  id: ServoControlElectronics
+
+- type: Tag
+  id: OpticalElectronics
+
+- type: Tag
+  id: DimensionalElectronics
+
+- type: Tag
+  id: PowerSupplyUnit
+
+- type: Tag
+  id: PowerSupplyUnitLarge
+
+- type: Tag
+  id: ServoMotor
+
+- type: Tag
+  id: HydraulicPiston
+
+- type: Tag
+  id: ArtificialMuscle
+
+- type: Tag
+  id: HydraulicClaw
+
+- type: Tag
+  id: OpticalCamera
+
+- type: Tag
+  id: AnatomicalCamera
+
+- type: Tag
+  id: ThermalCamera
+
 #HOCebent
 - type: Tag
   id: CartridgeUnitary
@@ -399,7 +442,7 @@
 
 - type: Tag
   id: GasTank
-  
+
 - type: Tag
   id: AstralBlocker
 
