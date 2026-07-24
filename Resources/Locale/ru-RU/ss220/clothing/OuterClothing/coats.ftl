@@ -40,3 +40,5 @@ ent-ClothingOuterCoatDanger = опасная куртка
 ent-ClothingOuterCoatDeadAnarchist = плащ мёртвого анархиста
     .desc = Легендарный кожаный плащ мёртвого анархиста. На спине изображён череп с кружкой пива и ниже надпись «Все пропьём, но панк не опозорим!»
     .suffix = За время в игре
+ent-ClothingOuterCoatJanitorJRBomber = бомбер уборщика JR
+    .desc = Влагостойкая куртка-бомбер, разработанная для специалистов JR.

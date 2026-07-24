@@ -12,6 +12,17 @@
   - type: Clothing
     sprite: SS220/Clothing/Head/Hoods/Coat/hoodcentcom.rsi
 
+- type: entity
+  parent: ClothingHeadHatHoodWinterBase
+  id: ClothingHeadHatHoodWinterJanitorJR
+  categories: [ HideSpawnMenu ]
+  name: JR winter coat hood
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hoods/janitor_JR.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hoods/janitor_JR.rsi
+
 #Экзокостюм утилизаторов - капюшон
 
 - type: entity

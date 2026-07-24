@@ -243,6 +243,9 @@
       "name": "pda-red-wings-medic"
     },
     {
+      "name": "pda-JR"
+    },
+    {
       "name": "screen-white",
       "delays": [
         [
@@ -469,6 +472,15 @@
     },
     {
       "name": "screen-ussp",
+      "delays": [
+        [
+          0.8,
+          0.8
+        ]
+      ]
+    },
+    {
+      "name": "screen-JR",
       "delays": [
         [
           0.8,
