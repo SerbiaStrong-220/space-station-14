@@ -23,6 +23,7 @@ public sealed partial class ObjectiveComponent : Component
     /// Organisation that issued this objective, used for grouping and as a header above common objectives.
     /// </summary>
     [DataField("issuer", required: true)]
+    [Access(Other = AccessPermissions.ReadWriteExecute)] // ss220-blood-brothers
     public LocId Issuer { get; set; } // ss220 add custom goals x2
 
     [ViewVariables(VVAccess.ReadOnly)]

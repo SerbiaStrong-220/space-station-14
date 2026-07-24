@@ -188,7 +188,10 @@ public sealed class CharacterUIController : UIController, IOnStateEntered<Gamepl
             var briefingControl = new ObjectiveBriefingControl();
             var text = new FormattedMessage();
             text.PushColor(Color.Yellow);
-            text.AddText(briefing);
+            // ss220-blood-brothers start
+            if (!text.TryAddMarkup(briefing, out _))
+                text.AddText(briefing);
+            // ss220-blood-brothers end
             briefingControl.Label.SetMessage(text);
             _window.Objectives.AddChild(briefingControl);
         }

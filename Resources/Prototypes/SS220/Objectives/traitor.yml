@@ -77,6 +77,17 @@
       damageGroup: Brute
       allowedState: [Alive]
       targetAmount: 280
+    filter:
+    - !type:BodyMindFilter
+      inverted: true
+      whitelist:
+        components:
+        - DamageReceivedTracker
+    - !type:HasRoleMindFilter
+      inverted: true
+      whitelist:
+        components:
+        - BloodBrothersRole
 
 - type: entity
   parent: BaseTraitorStealObjective
@@ -96,6 +107,17 @@
       damageGroup: Burn
       allowedState: [Alive]
       targetAmount: 160
+    filter:
+    - !type:BodyMindFilter
+      inverted: true
+      whitelist:
+        components:
+        - DamageReceivedTracker
+    - !type:HasRoleMindFilter
+      inverted: true
+      whitelist:
+        components:
+        - BloodBrothersRole
 
 - type: entity
   parent: BaseTraitorStealObjective
@@ -119,3 +141,14 @@
       damageGroup: Toxin
       allowedState: [Alive]
       targetAmount: 120
+    filter:
+    - !type:BodyMindFilter
+      inverted: true
+      whitelist:
+        components:
+        - DamageReceivedTracker
+    - !type:HasRoleMindFilter
+      inverted: true
+      whitelist:
+        components:
+        - BloodBrothersRole

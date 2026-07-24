@@ -26,6 +26,7 @@
   - BasicRoundstartVariation
   - SubModLowTraitorDynamic
   - SubGamemodesRule
+  - BloodBrothers # ss220-blood-brothers
   #- NoNewCrewAntagsStationEventScheduler
   - SpaceTrafficControlFriendlyEventScheduler
   - EmergencyShuttleAutoVote
@@ -48,6 +49,7 @@
   - SubModLowTraitorDynamic
   - SubGamemodesRule
   #- NoNewCrewAntagsStationEventScheduler
+  - BloodBrothers # ss220-blood-brothers
   - SpaceTrafficControlFriendlyEventScheduler
   - EmergencyShuttleAutoVote
 

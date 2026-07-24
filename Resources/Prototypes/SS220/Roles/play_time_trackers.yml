@@ -119,6 +119,9 @@
 - type: playTimeTracker
   id: AntagInitialInfected
 
+- type: playTimeTracker
+  id: AntagBloodBrothers
+
 # Centcom
 - type: playTimeTracker
   id: JobDeathSquadCommander
