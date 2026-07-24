@@ -128,7 +128,19 @@
   - type: AntagSelection
   - type: AntagLoadProfileRule
     speciesOverride: Human
-    speciesOverrideBlacklist:
+    speciesOverrideBlacklist: #Suddenly when all races stopped being human reskins this became a really important option
+    #SS220 add physical parameters begin
+    - Vox
+    - Dwarf
+    - Diona
+    - Ipc
+    - Reptilian
+    - Tajaran
+    - SlimePerson
+    - Arachnid
+    - Skeleton
+    - Felinid
+    #SS220 add physical parameters end
     #Species that do not work with nukies should be included in this list.
     #Once the issues are fixed the species should be removed from this list to be enabled.
     #Balance concerns are not a valid reason to disable a species, except for high-impact Nukie-specific exploits.

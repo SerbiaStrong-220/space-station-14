@@ -7,6 +7,12 @@
   - type: Sprite
     sprite: Objects/Weapons/Melee/sledgehammer.rsi
     state: icon
+  #SS220 melee weapon extension begin
+  - type: ItemExtensionMeleeWeapon
+  - type: ItemExtension
+    minimalStrengthToPickUp: 0.85
+    strengthRequirementToBeUsed: 1.8
+  #SS220 melee weapon extension end
   #SS220 new sound_drop effect begin
   - type: EmitSoundOnLand
     sound:
@@ -18,16 +24,11 @@
     wideAnimationRotation: -135
     damage:
       types:
-        Blunt: 10
-        Structural: 10
+        Blunt: 38 #SS220 melee weapon extension
+        Structural: 60 #SS220 melee weapon extension
     soundHit:
       collection: MetalThud
   - type: Wieldable
-  - type: IncreaseDamageOnWield
-    damage:
-      types:
-        Blunt: 10
-        Structural: 10
   - type: Item
     size: Large
 

@@ -20,10 +20,16 @@
     storageRemoveSound: /Audio/Items/toolbox_remove.ogg
   - type: Item
     size: Ginormous
+  #SS220 melee weapon extension begin
+  - type: ItemExtensionMeleeWeapon
+  - type: ItemExtension
+    minimalStrengthToPickUp: 0.6
+    strengthRequirementToBeUsed: 1.1
+  #SS220 melee weapon extension begin
   - type: MeleeWeapon
     damage:
       types:
-        Blunt: 12
+        Blunt: 17 #SS220 melee weapon extension
     soundHit:
       path: "/Audio/Weapons/smash.ogg"
   - type: Tag

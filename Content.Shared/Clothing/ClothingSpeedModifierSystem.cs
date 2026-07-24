@@ -1,8 +1,11 @@
 using Content.Shared.Examine;
+using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Movement.Systems;
+using Content.Shared.SS220.ItemExtension;
+using Content.Shared.SS220.PhysicalParameters;
 using Content.Shared.Standing;
 using Content.Shared.Verbs;
 using Robust.Shared.Containers;
@@ -18,6 +21,7 @@ public sealed class ClothingSpeedModifierSystem : EntitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private readonly PhysicalParametersSystem _parameters = default!;//SS220 add physical parameters
 
     public override void Initialize()
     {
@@ -26,7 +30,6 @@ public sealed class ClothingSpeedModifierSystem : EntitySystem
         SubscribeLocalEvent<ClothingSpeedModifierComponent, ComponentGetState>(OnGetState);
         SubscribeLocalEvent<ClothingSpeedModifierComponent, ComponentHandleState>(OnHandleState);
         SubscribeLocalEvent<ClothingSpeedModifierComponent, InventoryRelayedEvent<RefreshMovementSpeedModifiersEvent>>(OnRefreshMoveSpeed);
-        SubscribeLocalEvent<ClothingSpeedModifierComponent, GetVerbsEvent<ExamineVerb>>(OnClothingVerbExamine);
         SubscribeLocalEvent<ClothingSpeedModifierComponent, ItemToggledEvent>(OnToggled);
     }
 
@@ -62,56 +65,25 @@ public sealed class ClothingSpeedModifierSystem : EntitySystem
         if (component.Standing != null && !_standing.IsMatchingState(args.Owner, component.Standing.Value))
             return;
 
+        //SS220 add physical parameters begin
+        if (component.AffectedByParameters &&
+            TryComp<ItemExtensionComponent>(uid, out var itemExtensionComp) &&
+            TryComp<PhysicalParametersComponent>(args.Owner, out var parametersComp))
+        {
+            var ownerParameter = _parameters.GetParameterValue((args.Owner, parametersComp), Parameter.Strength, armStrengthCounted: false);
+
+            float parameterMultiplier = 0f;
+
+            if (itemExtensionComp.StrengthRequirementToBeUsed != itemExtensionComp.MinimalStrengthToPickUp)
+                parameterMultiplier = FixedPoint2.Clamp(1 - (ownerParameter - itemExtensionComp.MinimalStrengthToPickUp) / (itemExtensionComp.StrengthRequirementToBeUsed - itemExtensionComp.MinimalStrengthToPickUp), FixedPoint2.Zero, 1).Float();
+
+            args.Args.ModifySpeed(1 - (1 - component.WalkModifier) * parameterMultiplier, 1 - (1 - component.SprintModifier) * parameterMultiplier);
+            return;
+        }
+        //SS220 add physical parameters end
+
         args.Args.ModifySpeed(component.WalkModifier, component.SprintModifier);
     }
-
-    private void OnClothingVerbExamine(EntityUid uid, ClothingSpeedModifierComponent component, GetVerbsEvent<ExamineVerb> args)
-    {
-        if (!args.CanInteract || !args.CanAccess)
-            return;
-
-        var walkModifierPercentage = MathF.Round((1.0f - component.WalkModifier) * 100f, 1);
-        var sprintModifierPercentage = MathF.Round((1.0f - component.SprintModifier) * 100f, 1);
-
-        if (walkModifierPercentage == 0.0f && sprintModifierPercentage == 0.0f)
-            return;
-
-        var msg = new FormattedMessage();
-
-        if (MathHelper.CloseTo(walkModifierPercentage, sprintModifierPercentage, 0.5f))
-        {
-            if (walkModifierPercentage < 0.0f)
-                msg.AddMarkupOrThrow(Loc.GetString("clothing-speed-increase-equal-examine", ("walkSpeed", (int) MathF.Abs(walkModifierPercentage)), ("runSpeed", (int) MathF.Abs(sprintModifierPercentage))));
-            else
-                msg.AddMarkupOrThrow(Loc.GetString("clothing-speed-decrease-equal-examine", ("walkSpeed", (int) walkModifierPercentage), ("runSpeed", (int) sprintModifierPercentage)));
-        }
-        else
-        {
-            if (sprintModifierPercentage < 0.0f)
-            {
-                msg.AddMarkupOrThrow(Loc.GetString("clothing-speed-increase-run-examine", ("runSpeed", (int) MathF.Abs(sprintModifierPercentage))));
-            }
-            else if (sprintModifierPercentage > 0.0f)
-            {
-                msg.AddMarkupOrThrow(Loc.GetString("clothing-speed-decrease-run-examine", ("runSpeed", (int) sprintModifierPercentage)));
-            }
-            if (walkModifierPercentage != 0.0f && sprintModifierPercentage != 0.0f)
-            {
-                msg.PushNewline();
-            }
-            if (walkModifierPercentage < 0.0f)
-            {
-                msg.AddMarkupOrThrow(Loc.GetString("clothing-speed-increase-walk-examine", ("walkSpeed", (int) MathF.Abs(walkModifierPercentage))));
-            }
-            else if (walkModifierPercentage > 0.0f)
-            {
-                msg.AddMarkupOrThrow(Loc.GetString("clothing-speed-decrease-walk-examine", ("walkSpeed", (int) walkModifierPercentage)));
-            }
-        }
-
-        _examine.AddDetailedExamineVerb(args, component, msg, Loc.GetString("clothing-speed-examinable-verb-text"), "/Textures/Interface/VerbIcons/outfit.svg.192dpi.png", Loc.GetString("clothing-speed-examinable-verb-message"));
-    }
-
     private void OnToggled(Entity<ClothingSpeedModifierComponent> ent, ref ItemToggledEvent args)
     {
         if (!ent.Comp.RequireActivated)

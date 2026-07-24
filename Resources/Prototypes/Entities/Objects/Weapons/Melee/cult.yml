@@ -21,6 +21,12 @@
         Slash: 12
   - type: Item
     size: Normal
+  #SS220 melee weapon extension begin
+  - type: ItemExtensionMeleeWeapon
+  - type: ItemExtension
+    minimalStrengthToPickUp: 0.3
+    strengthRequirementToBeUsed: 0.7
+  #SS220 melee weapon extension end
   - type: Clothing
     sprite: Objects/Weapons/Melee/cult_dagger.rsi
     slots:
@@ -48,6 +54,12 @@
     damage:
       types:
         Slash: 16
+  #SS220 melee weapon extension begin
+  - type: ItemExtensionMeleeWeapon
+  - type: ItemExtension
+    minimalStrengthToPickUp: 0.5
+    strengthRequirementToBeUsed: 1
+  #SS220 melee weapon extension begin
   - type: Item
     size: Normal
   - type: Clothing
@@ -108,12 +120,12 @@
     soundHit:
       collection: MetalThud
   - type: Wieldable
-  - type: IncreaseDamageOnWield
-    damage:
-      types:
-        Blunt: 5
-        Slash: 5
-        Structural: 10
+  #SS220 melee weapon extension begin
+  - type: ItemExtensionMeleeWeapon
+  - type: ItemExtension
+    minimalStrengthToPickUp: 0.7
+    strengthRequirementToBeUsed: 1
+  #SS220 melee weapon extension begin
   - type: Item
     size: Ginormous
   - type: Clothing

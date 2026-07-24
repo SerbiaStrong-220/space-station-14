@@ -362,11 +362,14 @@ namespace Content.Shared.Hands
     [ByRefEvent]
     public sealed class HeldRelayedEvent<TEvent> : EntityEventArgs
     {
+        public EntityUid? Owner; //SS220 add user to held relayed events
+
         public TEvent Args;
 
-        public HeldRelayedEvent(TEvent args)
+        public HeldRelayedEvent(TEvent args, EntityUid? owner)//SS220 add user to held relayed events
         {
             Args = args;
+            Owner = owner;//SS220 add user to held relayed events
         }
     }
 

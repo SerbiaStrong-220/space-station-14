@@ -2,11 +2,13 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Damage;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Storage.EntitySystems;
+using Content.Shared.Weapons.Melee;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.Input.Binding;
@@ -30,6 +32,8 @@ public abstract partial class SharedHandsSystem
     public event Action<Entity<HandsComponent>, string, HandLocation>? OnPlayerAddHand;
     public event Action<Entity<HandsComponent>, string>? OnPlayerRemoveHand;
     protected event Action<Entity<HandsComponent>?>? OnHandSetActive;
+
+    private DamageSpecifier NoHandDamage = new DamageSpecifier();// SS220 add hand damage
 
     public override void Initialize()
     {
@@ -346,6 +350,47 @@ public abstract partial class SharedHandsSystem
             RaiseLocalEvent(newHeld.Value, new HandSelectedEvent(ent));
 
         RaiseLocalEvent(ent, new DidSwitchHandEvent(ent.Comp.ActiveHandId));//SS220 Cult_update2
+
+        //SS220 add hand damage begin
+        if (TryComp<MeleeWeaponComponent>(ent.Owner, out var meleeComp) && ent.Comp.Hands.ContainsKey(handId) && ent.Comp.HandsOverrideDamage)//or we overrdie all hands or we don't do it at all
+        {
+            var hand = ent.Comp.Hands[handId];
+
+            if (hand.DamageOverride != null)
+            {
+                meleeComp.Damage = hand.DamageOverride;
+
+                meleeComp.AttackRate = hand.AttackRate;
+
+                meleeComp.AltDisarm = hand.AltDisarm;
+
+                meleeComp.AutoAttack = hand.AutoAttack;
+
+                meleeComp.Range = hand.Range;
+
+                meleeComp.HitSound = hand.HitSound;
+
+                Dirty(ent);
+                Dirty(ent.Owner, meleeComp);
+
+                return true;
+            }
+
+            meleeComp.Damage = NoHandDamage;
+
+            meleeComp.AttackRate = 1f;
+
+            meleeComp.AltDisarm = false;
+
+            meleeComp.AutoAttack = false;
+
+            meleeComp.Range = 1.5f;
+
+            meleeComp.HitSound = null;
+
+            Dirty(ent.Owner, meleeComp);
+        }
+        //SS220 add hand damage end
 
         Dirty(ent);
         return true;
