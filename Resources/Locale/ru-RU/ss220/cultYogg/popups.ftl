@@ -17,6 +17,8 @@ cult-yogg-teleport-must-be-cultist = Цель телепорта должна п
 cult-yogg-teleport-out-of-range = Цель телепорта вне пределах досягаемости
 cult-yogg-teleport-cooldown = Телепорт будет доступен через {$time} сек
 
+cult-yogg-cant-buid-on-grid = Вы не можете здесь строить
+
 cult-yogg-heal-verb = [italic]Исцелить[/italic]
 cult-yogg-heal-only-cultists = Оболочка не принадлежит культу
 cult-yogg-cant-heal-this = МиГо не способен вылечить { $target }
@@ -39,10 +41,8 @@ cult-yogg-resurrected-by-heal = Мистические силы возвраща
 
 cult-yogg-cleansing-start = Вы чувствуете, как святая вода внутри вас убивает споры.
 
-cult-yogg-acsending-have-acsending = Один из членов культа в данный момент возносится
 cult-yogg-acsending-started = Вы чувствуете, как споры пришли в активность
 cult-yogg-acsending-stopped = Вы чувствуете, как споры внутри вас расщепились
-cult-yogg-acsending-should-be-station = Вы можете вознестись только на станции
 
 cult-yogg-burglar-bug-stick-success = Вы прикрепили жука-взломщика
 cult-yogg-burglar-bug-unstick-started = Вы пытаетесь отцепить жука-взломщика...
