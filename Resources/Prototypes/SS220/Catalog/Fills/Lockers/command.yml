@@ -36,3 +36,34 @@
         - id: WeaponBlasterKRS
         - id: PowerCellBlaster
           amount: 3
+
+- type: entity
+  parent: GunSafe
+  id: AILawBoardsSafeFilled
+  name: AI boards safe
+  components:
+  - type: AccessReader
+    access: [ [ "Command" ] ]
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: BookAILawCompendium
+        - id: CommandmentCircuitBoard
+        - id: StationEfficiencyCircuitBoard
+        - id: NutimovCircuitBoard
+        - id: PaladinCircuitBoard
+        - id: AsimovCircuitBoard
+        - id: PetrovichCircuitBoard
+        - id: RobocopCircuitBoard
+        - id: ReporterCircuitBoard
+        - id: GameMasterCircuitBoard
+        - id: ArtistCircuitBoard
+        - id: NTDefaultCircuitBoard
+        - id: CorporateCircuitBoard
+        - id: LiveLetLiveCircuitBoard
+        - id: WaffleHouseHostCircuitBoard
+        - id: TeacherCircuitBoard
+        - id: MotherCircuitBoard
+        - id: ClownCircuitBoard
+        - id: RenterCircuitBoard
