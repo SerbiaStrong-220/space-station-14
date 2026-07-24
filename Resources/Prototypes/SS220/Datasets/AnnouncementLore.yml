@@ -1,0 +1,35 @@
+- type: localizedDataset
+  id: AnnouncementLoreInternalAffairs
+  values:
+    prefix: announcement-lore-internal-affairs-dataset-
+    count: 2
+
+- type: localizedDataset
+  id: AnnouncementLoreAudit
+  values:
+    prefix: announcement-lore-audit-dataset-
+    count: 3
+
+- type: localizedDataset
+  id: AnnouncementLoreProtectionAsset
+  values:
+    prefix: announcement-lore-protection-asset-dataset-
+    count: 2
+
+- type: localizedDataset
+  id: AnnouncementLoreExternalRelations
+  values:
+    prefix: announcement-lore-external-relations-dataset-
+    count: 2
+
+- type: localizedDataset
+  id: AnnouncementLoreAssets
+  values:
+    prefix: announcement-lore-assets-dataset-
+    count: 2
+
+- type: localizedDataset
+  id: AnnouncementLoreLogistics
+  values:
+    prefix: announcement-lore-logistics-dataset-
+    count: 2
