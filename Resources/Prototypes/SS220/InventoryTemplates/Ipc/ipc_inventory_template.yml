@@ -72,6 +72,7 @@
       strippingWindowPos: 0,4
       displayName: Pocket 1
       stripHidden: true
+      fullyHidden: true
     - name: pocket2
       slotTexture: pocket
       fullTextureName: template_small
@@ -82,6 +83,7 @@
       strippingWindowPos: 1,4
       displayName: Pocket 2
       stripHidden: true
+      fullyHidden: true
     - name: suitstorage
       slotTexture: suit_storage
       slotFlags:   SUITSTORAGE
