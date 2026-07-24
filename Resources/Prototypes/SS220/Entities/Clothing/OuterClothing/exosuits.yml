@@ -53,6 +53,7 @@
     drawRate: 0.03
   - type: ItemToggle
     activated: false
+  - type: ComponentRequiringPoweredClothing
   - type: RelayedIntegratedClothingPowerSource
   - type: IntegratedClothing
     clothingPrototypes:

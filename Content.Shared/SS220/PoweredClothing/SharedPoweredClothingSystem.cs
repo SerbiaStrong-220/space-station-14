@@ -1,18 +1,24 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 
 using Content.Shared.ActionBlocker;
+using Content.Shared.Clothing;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.SS220.Clothing.Components;
 using Content.Shared.SS220.Clothing.Systems;
 using Content.Shared.SS220.PoweredClothing;
+using Content.Shared.Whitelist;
+using Robust.Shared.Containers;
 
 namespace Content.Shared.SS220.PhysicalParameters;
 
 public abstract class SharedPoweredClothingSystem : EntitySystem
 {
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private readonly ItemToggleSystem _itemToggle = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!; 
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
@@ -20,14 +26,28 @@ public abstract class SharedPoweredClothingSystem : EntitySystem
 
         SubscribeLocalEvent<PoweredClothingComponent, ComponentInit>(OnCompInit);
         SubscribeLocalEvent<RelayedIntegratedClothingPowerSourceComponent, MapInitEvent>(OnRelayCompMapInit, after: [typeof(IntegratedClothingSystem)]);
+
         SubscribeLocalEvent<PoweredClothingComponent, ItemToggleActivateAttemptEvent>(TryTurnOn);
         SubscribeLocalEvent<PoweredClothingComponent, ItemToggleDeactivateAttemptEvent>(TryTurnOff);
         SubscribeLocalEvent<PoweredClothingComponent, ItemToggledEvent>(OnActivated);
+
+        SubscribeLocalEvent<PoweredClothingComponent, ClothingGotUnequippedEvent>(OnGotUnEquipped);
     }
 
     public void TryTurnOn(Entity<PoweredClothingComponent> entity, ref ItemToggleActivateAttemptEvent args)
     {
-        if (args.User != null && !_actionBlocker.CanComplexInteract(args.User.Value))
+        if (args.User == null)
+            return;
+
+        if (!_actionBlocker.CanComplexInteract(args.User.Value))
+        {
+            args.Cancelled = true;
+            return;
+        }
+
+        if (!TryComp<ComponentRequiringPoweredClothingComponent>(entity.Owner, out var compReqiringComp) ||
+            !_containerSystem.TryGetContainingContainer(entity.Owner, out var userContainer) ||
+            !_whitelist.IsWhitelistPassOrNull(compReqiringComp.Whitelist, userContainer.Owner))
         {
             args.Cancelled = true;
             return;
@@ -53,7 +73,13 @@ public abstract class SharedPoweredClothingSystem : EntitySystem
 
     public void OnActivated(Entity<PoweredClothingComponent> entity, ref ItemToggledEvent args)
     {
-        EnsureComp<ActivePoweredClothingComponent>(entity.Owner);
+        if (args.Activated)
+        {
+            EnsureComp<ActivePoweredClothingComponent>(entity.Owner);
+            return;
+        }
+
+        RemComp<ActivePoweredClothingComponent>(entity.Owner);
     }
 
     public void OnRelayCompMapInit(Entity<RelayedIntegratedClothingPowerSourceComponent> ent, ref MapInitEvent args)
@@ -67,5 +93,10 @@ public abstract class SharedPoweredClothingSystem : EntitySystem
         powerComp.PowerSource = containedEntValidated;
 
         Dirty(ent.Owner, powerComp);
+    }
+
+    private void OnGotUnEquipped(Entity<PoweredClothingComponent> ent, ref ClothingGotUnequippedEvent args)
+    {
+        _itemToggle.TryDeactivate(ent.Owner);
     }
 }
