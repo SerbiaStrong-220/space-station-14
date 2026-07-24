@@ -1038,3 +1038,6 @@ CultYoggCocoonSpikegun: CocoonSpikegun
 CultYoggCocoonVenomancer: CocoonVenomancer
 CultYoggCocoonSpitballer: CocoonSpitballer
 CultYoggCocoonSedativeSting: CocoonSedativeSting
+
+# 2026-07-17 - SS220 Sponsor objects update
+ClothingSponsorScarfTube: ClothingMaskNeckGaiter
