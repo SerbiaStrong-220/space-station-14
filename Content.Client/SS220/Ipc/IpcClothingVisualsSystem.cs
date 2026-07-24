@@ -10,11 +10,11 @@ namespace Content.Client.SS220.Ipc;
 /// since IPC sprites don't have matching layers for it.
 /// TODO - replace by ipc module system
 /// </summary>
-public sealed class IpcClothingVisualsSystem : EntitySystem
+public sealed partial class IpcClothingVisualsSystem : EntitySystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
-    private static readonly HashSet<string> HiddenSlots = new() { "eyes", "ears" };
+    private static readonly HashSet<string> HiddenSlots = ["eyes", "ears"];
 
     public override void Initialize()
     {
