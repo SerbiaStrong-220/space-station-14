@@ -7,3 +7,6 @@ flavor-base-bnuuynyatina = не бнууйно
 flavor-base-driedbnuuynyatina = пламенно бнууйно
 flavor-complex-sawdustporridge = отчаяние
 flavor-complex-sawdustsoup = ужасно
+flavor-complex-stout = как горький шоколад
+flavor-complex-ipa = как фруктовый взрыв
+flavor-complex-plasmabeer = как глоток космоса

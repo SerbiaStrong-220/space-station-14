@@ -1,0 +1,1 @@
+radial_power.png, radial_eject.png - taken from https://github.com/Baystation12/Baystation12/blob/1df0db5784e3b3e35201682b1351a5de09fed27f/icons/screen/radial.dmi (cc-3.0-by-sa)

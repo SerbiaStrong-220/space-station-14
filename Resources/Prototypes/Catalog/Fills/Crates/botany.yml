@@ -26,6 +26,30 @@
           amount: 2
         - id: BungoSeeds
           amount: 2
+  - type: StorageFill
+    contents:
+      #ss220 remove ambrosia from vend start
+      - id: AmbrosiaVulgarisSeeds
+        amount: 2
+      #ss220 remove ambrosia from vend end
+      - id: EggySeeds
+        amount: 2
+      - id: TowercapSeeds
+        amount: 2
+      - id: TobaccoSeeds
+        amount: 2
+      - id: CannabisSeeds
+        amount: 2
+      - id: NettleSeeds
+        amount: 2
+      - id: FlyAmanitaSeeds
+        amount: 2
+      - id: BungoSeeds
+        amount: 2
+      # SS220-beer-update-start
+      - id: HopSeeds
+        amount: 2
+      # SS220-beer-update-end
 
 - type: entity
   parent: CrateHydroSecure

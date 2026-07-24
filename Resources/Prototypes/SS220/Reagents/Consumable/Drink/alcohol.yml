@@ -184,3 +184,152 @@
         - !type:MetabolizerTypeCondition
           type: [ Tajaran ]
   fizziness: 0.2
+
+
+- type: reagent
+  id: Stout
+  name: reagent-name-stout
+  parent: BaseAlcohol
+  desc: reagent-desc-stout
+  physicalDesc: reagent-physical-desc-fizzy-and-creamy
+  flavor: stout
+  color: "#2b1b0c"
+  metamorphicSprite:
+    sprite: Objects/Consumable/Drinks/beerglass.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 6
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: true
+  metabolism:
+    Drink:
+      effects:
+        - type: SatiateThirst
+          factor: 0.9
+        - type: SatiateHunger
+          factor: 0.3
+        - !type:AdjustReagent
+          reagent: Ethanol
+          amount: 0.09
+        - !type:MovementSpeedModifier
+          walkSpeedModifier: 0.8
+          sprintSpeedModifier: 0.8
+          conditions:
+            - !type:ReagentCondition
+              reagent: Stout
+              min: 30
+    Medicine:
+      effects:
+        - !type:HealthChange
+            damage:
+              types:
+                Radiation: -0.3
+                Blunt: -0.3
+                Poison: -0.3
+            conditions:
+              - !type:ReagentCondition
+                reagent: Stout
+                min: 15
+              - !type:MetabolizerTypeCondition
+                type: [ Dwarf ]
+  fizziness: 0.7
+
+- type: reagent
+  id: Ipa
+  name: reagent-name-ipa
+  parent: BaseAlcohol
+  desc: reagent-desc-ipa
+  physicalDesc: reagent-physical-desc-vibrant
+  flavor: ipa
+  color: "#b1a358"
+  metamorphicSprite:
+    sprite: Objects/Consumable/Drinks/beerglass.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 6
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: true
+  metabolism:
+    Drink:
+      effects:
+        - type: SatiateThirst
+          factor: 1.2
+        - type: SatiateHunger
+          factor: 0.15
+        - !type:AdjustReagent
+          reagent: Ethanol
+          amount: 0.12
+        - !type:MovementSpeedModifier
+          walkSpeedModifier: 0.9
+          sprintSpeedModifier: 0.9
+          conditions:
+            - !type:ReagentCondition
+              reagent: Ipa
+              min: 15
+    Medicine:
+      effects:
+      - !type:AdjustReagent
+        reagent: Histamine
+        amount: -0.4
+        conditions:
+          - !type:ReagentCondition
+            reagent: Ipa
+            min: 20
+      - !type:AdjustReagent
+        reagent: CarpoToxin
+        amount: -0.4
+        conditions:
+          - !type:ReagentCondition
+            reagent: Ipa
+            min: 20
+      - !type:AdjustReagent
+        reagent: MuteToxin
+        amount: -0.4
+        conditions:
+          - !type:ReagentCondition
+            reagent: Ipa
+            min: 20
+  fizziness: 0.11
+
+- type: reagent
+  id: PlasmaBeer
+  name: reagent-name-plasmabeer
+  parent: BaseAlcohol
+  desc: reagent-desc-plasmabeer
+  physicalDesc: reagent-physical-desc-exotic-smelling
+  flavor: plasmabeer
+  color: "#775685"
+  metamorphicSprite:
+    sprite: Objects/Consumable/Drinks/beerglass.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 6
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: true
+  metabolism:
+    Drink:
+      effects:
+        - type: SatiateThirst
+          factor: 0.6
+        - !type:AdjustReagent
+          reagent: Ethanol
+          amount: 1.5
+        - !type:MovementSpeedModifier
+          walkSpeedModifier: 0.6
+          sprintSpeedModifier: 0.6
+          conditions:
+            - !type:ReagentCondition
+              reagent: PlasmaBeer
+              min: 20
+        - !type:ModifyStatusEffect
+          effectProto: StatusEffectSeeingRainbow
+          type: Add
+          time: 8
+    Medicine:
+      effects:
+        - !type:HealthChange
+            damage:
+              types:
+                Radiation: 1
+            conditions:
+              - !type:ReagentCondition
+                reagent: PlasmaBeer
+                min: 10
+  fizziness: 0.8
