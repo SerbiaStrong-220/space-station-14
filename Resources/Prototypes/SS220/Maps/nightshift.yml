@@ -55,6 +55,7 @@
             SeniorPhysician: [ 1, 1 ]
             #Science
             ResearchDirector: [ 1, 1 ]
+            Roboticist: [ 1, 1 ]
             SeniorResearcher: [ 1, 1 ]
             Scientist: [ 1, 1 ]
             ResearchAssistant: [ 1, 1 ]

@@ -1,0 +1,18 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Equipped sprite made by Gtheglorious based on the sprite made by emisse for ss14 and modified by JustSmartgun, icon made by PorteRianes, https://github.com/PorteRianes and modified by JustSmartgun",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "icon"
+        },
+        {
+            "name": "equipped-FEET",
+            "directions": 4
+        }
+    ]
+}

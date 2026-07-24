@@ -1,12 +1,10 @@
-using System.Globalization;
-using System.Linq;
-using System.Text;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Server.Speech.EntitySystems;
 using Content.Server.Speech.Prototypes;
+using Content.Server.SS220.Language; // SS220-Add-Languages-end
 using Content.Server.Station.Systems;
 using Content.Shared.Access.Components;
 using Content.Shared.ActionBlocker;
@@ -15,6 +13,8 @@ using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Examine;
+using Content.Shared.FixedPoint;
+using Content.Shared.GameTicking;
 using Content.Shared.Ghost;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
@@ -26,26 +26,27 @@ using Content.Shared.Players;
 using Content.Shared.Players.RateLimiting;
 using Content.Shared.Radio;
 using Content.Shared.Silicons.Borgs.Components;
+using Content.Shared.SS220.Language.Systems;
+using Content.Shared.SS220.Mech.Components;
 using Content.Shared.SS220.Telepathy;
+using Content.Shared.SS220.TTS;
 using Content.Shared.Station.Components;
 using Content.Shared.Whitelist;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
 using Robust.Shared.Configuration;
 using Robust.Shared.Console;
+using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Replays;
-using Robust.Shared.Utility;
 using Robust.Shared.Timing;
-using Content.Server.SS220.Language; // SS220-Add-Languages-end
-using Robust.Shared.Map;
-using Content.Shared.SS220.Language.Systems;
-using Content.Shared.SS220.TTS;
-using Content.Shared.FixedPoint;
-using Content.Shared.GameTicking;
+using Robust.Shared.Utility;
+using System.Globalization;
+using System.Linq;
+using System.Text;
 
 namespace Content.Server.Chat.Systems;
 
@@ -192,11 +193,30 @@ public sealed partial class ChatSystem : SharedChatSystem
             return;
         }
 
+        //SS220 mech rework begin
+        if (TryComp<AltMechComponent>(source, out var mechComp) && mechComp.PilotSlot.ContainedEntity != null)
+        {
+            TrySendInGameICMessage(
+                mechComp.PilotSlot.ContainedEntity.Value,
+                message,
+                desiredType,
+                range,
+                hideLog,
+                shell,
+                player,
+                nameOverride,
+                checkRadioPrefix,
+                ignoreActionBlocker);
+
+            return;
+        }
+        //SS220 mech rework end
+
         if (player != null && _chatManager.HandleRateLimit(player) != RateLimitStatus.Allowed)
             return;
 
         // Sus
-        if (player?.AttachedEntity is { Valid: true } entity && source != entity)
+        if (player?.AttachedEntity is { Valid: true } entity && source != entity && (!TryComp<AltMechPilotComponent>(source, out var pilotComp) || entity != pilotComp.Mech))//SS220 mech rework
         {
             return;
         }

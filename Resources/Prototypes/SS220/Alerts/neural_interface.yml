@@ -1,0 +1,13 @@
+- type: alert
+  id: NeuralInterface
+  icons:
+  - sprite: /Textures/SS220/Interface/Alerts/neural_interface.rsi
+    state: interface0
+  - sprite: /Textures/SS220/Interface/Alerts/neural_interface.rsi
+    state: interface1
+  - sprite: /Textures/SS220/Interface/Alerts/neural_interface.rsi
+    state: interface2
+  name: neural-interface
+  description: neural-interface-desc
+  minSeverity: 0
+  maxSeverity: 2

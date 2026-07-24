@@ -1,0 +1,29 @@
+- type: skill
+  id: ElectronicsConstructionInitial
+  levelInfo:
+    maximumSublevel: 10
+    levelUpPopup: electronics-construction-initial-level-up-popup
+    sublevelUpPopup: electronics-construction-initial-sublevel-up-popup
+  levelDescription:
+    skillName: electronics-construction-initial-name
+    skillDescription: electronics-construction-initial-desc
+
+- type: skill
+  id: ElectronicsConstructionBase
+  levelInfo:
+    maximumSublevel: 5
+    levelUpPopup: electronics-construction-initial-level-up-popup
+    sublevelUpPopup: electronics-construction-initial-sublevel-up-popup
+  levelDescription:
+    skillName: electronics-construction-base-name
+    skillDescription: electronics-construction-base-desc
+
+- type: skill
+  id: ElectronicsConstructionAdvanced
+  levelInfo:
+    maximumSublevel: 5
+    levelUpPopup: electronics-construction-initial-level-up-popup
+    sublevelUpPopup: electronics-construction-initial-sublevel-up-popup
+  levelDescription:
+    skillName: electronics-construction-advanced-name
+    skillDescription: electronics-construction-advanced-desc

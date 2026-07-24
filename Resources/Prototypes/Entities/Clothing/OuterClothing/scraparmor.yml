@@ -76,9 +76,16 @@
         Radiation: 0.8 #Hey, it's a bunch of solid steel.
   - type: ExplosionResistance
     damageCoefficient: 0.80
-  - type: ClothingSpeedModifier #But that protection comes at a price.
-    walkModifier: 0.6
-    sprintModifier: 0.6
+  #SS220 add physical parameters begin
+  - type: ItemExtension
+    minimalStrengthToPickUp: 0.7
+    strengthRequirementToBeUsed: 1.4
+  - type: HeldSpeedModifier
+  - type: ClothingSpeedModifier
+    walkModifier: 0.5
+    sprintModifier: 0.5
+    affectedByParameters: true
+  #SS220 add physical parameters end
   - type: GroupExamine
   - type: Construction
     graph: scraparmor

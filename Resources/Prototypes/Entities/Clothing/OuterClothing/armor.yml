@@ -23,6 +23,16 @@
         Heat: 0.80
   - type: ExplosionResistance
     damageCoefficient: 0.90
+  #SS220 physical parameters begin
+  - type: ItemExtension
+    minimalStrengthToPickUp: 0.3
+    strengthRequirementToBeUsed: 1
+  - type: ClothingSpeedModifier
+    walkModifier: 0.8
+    sprintModifier: 0.65
+    affectedByParameters: true
+  - type: HeldSpeedModifier
+  #SS220 physical parameters begin
 
 #Standard armor vest, allowed for security only
 - type: entity

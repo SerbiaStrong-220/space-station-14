@@ -105,13 +105,15 @@ public sealed class AGhostCommand : LocalizedCommands
         //SS220 admin action log
         LogAdminAction(shell, args);
 
-        if (mind.VisitingEntity != default && _entities.TryGetComponent<GhostComponent>(mind.VisitingEntity, out var oldGhostComponent))
+        //SS220 mech rework begin
+        if (mind.VisitingEntity != default)
         {
             mindSystem.UnVisit(mindId, mind);
-            // If already an admin ghost, then return to body.
-            if (oldGhostComponent.CanGhostInteract)
-                return;
         }
+
+        if (_entities.TryGetComponent<GhostComponent>(mind.VisitingEntity, out var oldGhostComponent) && oldGhostComponent.CanGhostInteract)
+            return;
+        //SS220 mech rework end
 
         var canReturn = mind.CurrentEntity != null
                         && !_entities.HasComponent<GhostComponent>(mind.CurrentEntity);

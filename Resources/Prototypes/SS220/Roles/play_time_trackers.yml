@@ -26,6 +26,9 @@
   id: JobSecurityPilot
 
 - type: playTimeTracker
+  id: JobRoboticist
+
+- type: playTimeTracker
   id: JobBrigmedic
 
 - type: playTimeTracker

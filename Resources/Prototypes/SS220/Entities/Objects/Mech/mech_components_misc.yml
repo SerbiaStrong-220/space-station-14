@@ -1,0 +1,59 @@
+- type: entity
+  id: OpticalCamera
+  parent: BaseElectronics
+  name: optical camera
+  description: Name is self-speaking - this is indeed an optical camera. High-res, 120 FPS, dust, water and temperatureproof - a common standard of the 26th century.
+  components:
+    - type: Item
+      storedRotation: 0
+    - type: Sprite
+      sprite: Objects/Misc/module.rsi
+      state: mainboard
+    - type: Tag
+      tags:
+      - OpticalCamera
+
+- type: entity
+  id: AnatomicalSensor
+  parent: BaseElectronics
+  name: anatomical sensor
+  description: Quite interesting technical achievement - not a single sensor, but in fact a set of them, built with a single purpose - approximately examine one's physical condition from a distance with reasonable precision.
+  components:
+    - type: Item
+      storedRotation: 0
+    - type: Sprite
+      sprite: Objects/Misc/module.rsi
+      state: mainboard
+    - type: Tag
+      tags:
+      - AnatomicalCamera
+
+- type: entity
+  id: ThermalSensor
+  parent: BaseElectronics
+  name: thermal sensor
+  description: Good old IR-camera. It does what it's name says - allows one to detect thermal signatures.
+  components:
+    - type: Item
+      storedRotation: 0
+    - type: Sprite
+      sprite: Objects/Misc/module.rsi
+      state: mainboard
+    - type: Tag
+      tags:
+      - ThermalCamera
+
+- type: entity
+  id: HydraulicClaw
+  parent: BaseElectronics
+  name: hydraulic claw
+  description: As simple and obvious as you could expect - and equally reliable, cheap and useful.
+  components:
+    - type: Item
+      storedRotation: 0
+    - type: Sprite
+      sprite: Objects/Misc/module.rsi
+      state: mainboard
+    - type: Tag
+      tags:
+      - HydraulicClaw

@@ -11,6 +11,7 @@ using Content.Shared.Revolutionary.Components;
 using Content.Shared.Roles.Components;
 using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.CultYogg.Unenslavable;
+using Content.Shared.SS220.MindShield;
 using Robust.Shared.Containers;
 
 namespace Content.Server.Mindshield;
@@ -40,6 +41,12 @@ public sealed class MindShieldSystem : EntitySystem
     private void OnImplantImplanted(Entity<MindShieldImplantComponent> ent, ref ImplantImplantedEvent ev)
     {
         EnsureComp<MindShieldComponent>(ev.Implanted);
+
+        //SS220 Mindshield logic extension begin
+        var protectionGrantedEv = new MindshieldProtectionGrantedEvent(ent.Owner, ev.Implanted);
+        RaiseLocalEvent(ev.Implanted, ref protectionGrantedEv);
+        //SS220 Mindshield logic extension end
+
         MindShieldRemovalCheck(ev.Implanted, ev.Implant);
     }
 
@@ -71,6 +78,11 @@ public sealed class MindShieldSystem : EntitySystem
 
     private void OnImplantRemoved(Entity<MindShieldImplantComponent> ent, ref ImplantRemovedEvent args)
     {
+        //SS220 Mindshield logic extension begin
+        var protectionGrantedEv = new MindshieldProtectionRemovedEvent(ent.Owner, args.Implanted);
+        RaiseLocalEvent(args.Implanted, ref protectionGrantedEv);
+        //SS220 Mindshield logic extension end
+
         RemComp<MindShieldComponent>(args.Implanted);
     }
 

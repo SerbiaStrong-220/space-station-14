@@ -24,6 +24,12 @@
         Slash: 10
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
+  #SS220 melee weapon extension begin
+  - type: ItemExtensionMeleeWeapon
+  - type: ItemExtension
+    minimalStrengthToPickUp: 0.3
+    strengthRequirementToBeUsed: 0.7
+  #SS220 melee weapon extension end
   - type: Sprite
   - type: Item
     size: Small

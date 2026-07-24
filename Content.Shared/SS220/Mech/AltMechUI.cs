@@ -1,0 +1,81 @@
+// © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
+using Robust.Shared.Serialization;
+
+namespace Content.Shared.SS220.AltMech;
+
+/// <summary>
+/// UI event raised to remove a part from a mech
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class MechPartRemoveMessage : BoundUserInterfaceMessage
+{
+    public string Part;
+
+    public MechPartRemoveMessage(string part)
+    {
+        Part = part;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class AltMechEquipmentRemoveMessage : BoundUserInterfaceMessage
+{
+    public NetEntity Equipment;
+
+    public AltMechEquipmentRemoveMessage(NetEntity equipment)
+    {
+        Equipment = equipment;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class MechMaintenanceToggleMessage : BoundUserInterfaceMessage
+{
+    public bool Toggled;
+
+    public MechMaintenanceToggleMessage(bool toggled)
+    {
+        Toggled = toggled;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class MechSealMessage : BoundUserInterfaceMessage
+{
+    public bool Toggled;
+
+    public MechSealMessage(bool toggled)
+    {
+        Toggled = toggled;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class MechBoltMessage : BoundUserInterfaceMessage
+{
+    public bool Toggled;
+
+    public MechBoltMessage(bool toggled)
+    {
+        Toggled = toggled;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class MechDetachTankMessage : BoundUserInterfaceMessage
+{
+    public bool Toggled;
+
+    public MechDetachTankMessage(bool toggled)
+    {
+        Toggled = toggled;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class AltMechBoundUiState : BoundUserInterfaceState
+{
+    public Dictionary<NetEntity, BoundUserInterfaceState> EquipmentStates = new();
+
+    //public Dictionary<string, NetEntity?> Parts = new();
+}

@@ -1,0 +1,229 @@
+- type: entity
+  id: MechVisorBasic
+  parent: BaseMechHead
+  name: mech visor
+  description: Oldschool high-res camera module. Has integrated auto-shading lenses so you can weld while using it.
+  components:
+  - type: FlashImmunity
+  - type: EyeProtection
+  - type: Sprite
+    sprite: SS220/Objects/Mechs/items/mecha_parts.rsi
+    state: visor_basic
+  - type: MechPart
+    integrity: 70
+    maxIntegrity: 70
+    attachedSprite:
+      sprite: SS220/Objects/Mechs/heads.rsi
+      state: welding
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 70
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: MechVisorMedical
+  parent: BaseMechHead
+  name: anatomically aware mech visor
+  description: A camera module with a health analysing sensor array attached to it.
+  components:
+  - type: FlashImmunity
+  - type: EyeProtection
+  - type: Sprite
+    sprite: SS220/Objects/Mechs/items/mecha_parts.rsi
+    state: visor_basic
+  - type: MechPart
+    integrity: 50 #a large sensor array is not very durable
+    maxIntegrity: 50
+    attachedSprite:
+      sprite: SS220/Objects/Mechs/heads.rsi
+      state: medical
+  - type: ShowHealthBars
+  - type: ShowHealthIcons
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: MechVisorArmoredNT
+  parent: BaseMechHead
+  name: armored mech visor
+  description: A camera module made of military-grade steel. Has an integrated HUD that can read data from standard ID cards and mindshield implants
+  components:
+  - type: FlashImmunity
+  - type: EyeProtection
+  - type: Sprite
+    sprite: SS220/Objects/Mechs/items/mecha_parts.rsi
+    state: visor_basic
+  - type: MechPart
+    integrity: 90
+    maxIntegrity: 90
+    attachedSprite:
+      sprite: SS220/Objects/Mechs/heads.rsi
+      state: armored
+  - type: ShowMindShieldIcons
+  - type: ShowJobIcons
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 90
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: MechVisorArmoredSyndicate
+  parent: BaseMechHead
+  name: surplus mech visor
+  description: A surplus military mech visor with an integrated friend-or-foe HUD. Pretty outdated by current standarts but it does it's work and is good at it.
+  components:
+  - type: FlashImmunity
+  - type: EyeProtection
+  - type: Sprite
+    sprite: SS220/Objects/Mechs/items/mecha_parts.rsi
+    state: visor_basic
+  - type: MechPart
+    integrity: 90
+    maxIntegrity: 90
+    attachedSprite:
+      sprite: SS220/Objects/Mechs/heads.rsi
+      state: armoredsyndie
+  - type: ShowSyndicateIcons
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 90
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: MechVisorArmoredHeavy
+  parent: BaseMechHead
+  name: assault mech visor
+  description: This one is heavy, bulky, has no HUD, low FOV but is armored enough to endure multiple small arms shots
+  components:
+  - type: FlashImmunity
+  - type: EyeProtection
+  - type: Sprite
+    sprite: SS220/Objects/Mechs/items/mecha_parts.rsi
+    state: visor_basic
+  - type: MechPart
+    integrity: 120
+    maxIntegrity: 120
+    attachedSprite:
+      sprite: SS220/Objects/Mechs/heads.rsi
+      state: armoredsyndieheavy
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 120
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: MechVisorArmoredSyndicateMedical
+  parent: BaseMechHead
+  name: surplus medical mech visor
+  description: Nothing new in concept-just a military camera module with a medical scanner on it.
+  components:
+  - type: FlashImmunity
+  - type: EyeProtection
+  - type: Sprite
+    sprite: SS220/Objects/Mechs/items/mecha_parts.rsi
+    state: visor_basic
+  - type: MechPart
+    integrity: 75
+    maxIntegrity: 75
+    attachedSprite:
+      sprite: SS220/Objects/Mechs/heads.rsi
+      state: armoredsyndiemedical
+  - type: ShowSyndicateIcons
+  - type: ShowHealthBars
+  - type: ShowHealthIcons
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 75
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: MechVisorAdvancedArmored
+  parent: BaseMechHead
+  name: advanced mech visor
+  description: This optical module has everything one could need in combat-thermal camera, medical sensor array, multiple high-res cameras with crossing FOVs and of course heavy armor.
+  components:
+  - type: FlashImmunity
+  - type: EyeProtection
+  - type: Sprite
+    sprite: SS220/Objects/Mechs/items/mecha_parts.rsi
+    state: visor_basic
+  - type: MechPart
+    integrity: 110
+    maxIntegrity: 110
+    attachedSprite:
+      sprite: SS220/Objects/Mechs/heads.rsi
+      state: advancedarmored
+  - type: ShowSyndicateIcons
+  - type: ShowHealthBars
+  - type: ShowHealthIcons
+  - type: ShowMindShieldIcons
+  - type: ShowJobIcons
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 110
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]

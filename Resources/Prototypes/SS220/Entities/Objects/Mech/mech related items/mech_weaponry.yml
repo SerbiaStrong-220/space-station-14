@@ -1,0 +1,76 @@
+- type: entity
+  name: minigun
+  id: WeaponMinigunHeavy
+  parent: [ BaseWeaponHeavyMachineGun]
+  description: A machine gun with Chambered in 7,62x55. It's weight and reсoil are far too large to be used by any species
+  components:
+  - type: AmmoCounter
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/HMGs/minigun.rsi
+    layers:
+    - state: icon
+  - type: Item
+    sprite: Objects/Weapons/Guns/HMGs/minigun.rsi
+    size: Gigantic
+  - type: Gun
+    fireRate: 15
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/minigun.ogg
+  - type: BallisticAmmoProvider
+    proto: FullRifleCartridge
+    capacity: 1000
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+
+- type: entity
+  id: GrapplingHookLarge
+  name: grappling hook
+  parent: GrapplingHook
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Projectile
+      deleteOnCollide: false
+      damage:
+        types:
+          Piercing: 35
+
+- type: entity
+  name: large grappling gun
+  parent: WeaponGrapplingGun
+  id: WeaponGrapplingGunMech
+  components:
+    - type: EmitSoundOnLand
+      sound:
+        path: /Audio/SS220/Effects/Drop/revolver.ogg
+        params:
+          volume: 2
+    - type: Item
+      size: Large
+    - type: AmmoCounter
+    - type: GrapplingGun
+    - type: Gun
+      soundGunshot: /Audio/Weapons/Guns/Gunshots/harpoon.ogg
+      fireRate: 0.5
+      clumsyProof: true
+    - type: BasicEntityAmmoProvider
+      proto: GrapplingHookLarge
+      capacity: 1
+    - type: Sprite
+      sprite: Objects/Weapons/Guns/Launchers/grappling_gun.rsi
+      layers:
+        - state: base
+        - state: base-unshaded
+          map: [ "unshaded" ]
+          visible: true
+    - type: UseDelay
+      delay: 1.5
+    - type: Appearance
+    - type: GenericVisualizer
+      visuals:
+        enum.TetherVisualsStatus.Key:
+          unshaded:
+            True: { state: base-unshaded }
+            False: { state: base-unshaded-off }
+    - type: PacifismAllowedGun

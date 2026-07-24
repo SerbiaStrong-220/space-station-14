@@ -1,0 +1,8 @@
+- type: construction
+  id: PowerloaderFrame
+  name: construction-recipe-powerloader
+  graph: PowerloaderFrame
+  startNode: start
+  targetNode: powerloaderframe
+  category: construction-category-storage
+  objectType: Structure

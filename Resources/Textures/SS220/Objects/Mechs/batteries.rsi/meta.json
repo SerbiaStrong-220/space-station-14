@@ -1,0 +1,27 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Created by JustSmartgun for SS220",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "small",
+            "directions": 4
+        },
+        {
+            "name": "large",
+            "directions": 4
+        },
+        {
+            "name": "nuclear",
+            "directions": 4
+        },
+        {
+            "name": "armorednuclear",
+            "directions": 4
+        }
+    ]
+}

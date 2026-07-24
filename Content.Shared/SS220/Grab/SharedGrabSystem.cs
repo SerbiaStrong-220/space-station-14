@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Numerics;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Alert;
 using Content.Shared.Buckle.Components;
@@ -30,6 +29,8 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using System.Numerics;
+using System.Threading.Channels;
 
 namespace Content.Shared.SS220.Grab;
 
@@ -347,6 +348,12 @@ public abstract partial class SharedGrabSystem : EntitySystem
         if (checkCanPull)
             return _pulling.CanPull(grabber, grabbable, ignoreHands: true);
 
+        var cancelEv = new GrabCancelEvent(grabber.Owner, grabbable.Owner, false);
+        RaiseLocalEvent(grabbable.Owner, ref cancelEv);
+
+        if (cancelEv.Cancelled)
+            return false;
+
         return true;
     }
 
@@ -559,3 +566,6 @@ public abstract partial class SharedGrabSystem : EntitySystem
     }
     #endregion
 }
+
+[ByRefEvent]
+public record struct GrabCancelEvent(EntityUid? Grabber, EntityUid? Grabbable, bool Cancelled);

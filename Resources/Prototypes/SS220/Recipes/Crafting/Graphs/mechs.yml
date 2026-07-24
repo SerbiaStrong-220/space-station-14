@@ -1,0 +1,49 @@
+- type: constructionGraph
+  id: PowerloaderFrame
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: powerloaderframe
+          steps:
+            - material: Steel
+              amount: 30
+              doAfter: 30
+              store: part-container
+    - node: powerloaderframe
+      entity: MechLoaderFrame
+      edges:
+        - to: powerloader
+          steps:
+            - material: Steel
+              amount: 30
+              doAfter: 30
+              store: part-container
+            - tool: Welding
+              doAfter: 15
+            - material: Cable
+              amount: 30
+              doAfter: 15
+              store: part-container
+            - tag: PowerSupplyUnitLarge
+            - tool: Screwing
+              doAfter: 5
+            - tag: DimensionalElectronics
+            - tool: Screwing
+              doAfter: 5
+            - tag: PowerSupplyElectronics
+            - tool: Screwing
+              doAfter: 5
+            - tag: OpticalElectronics
+            - tool: Screwing
+              doAfter: 5
+            - material: Steel
+              amount: 15
+              doAfter: 10
+              store: part-container
+            - tool: Welding
+              doAfter: 10
+            - tool: Screwing
+              doAfter: 15
+    - node: powerloader
+      entity: MechLoader

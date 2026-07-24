@@ -174,6 +174,10 @@ public abstract partial class SharedLanguageSystem : EntitySystem
             return false;
 
         ent.Comp.SelectedLanguage = languageId;
+
+        var ev = new LanguageChangedEvent(languageId);
+        RaiseLocalEvent(ent, ref ev);
+
         Dirty(ent);
         return true;
     }
@@ -273,3 +277,7 @@ public abstract partial class SharedLanguageSystem : EntitySystem
         return result;
     }
 }
+
+[ByRefEvent]
+public readonly record struct LanguageChangedEvent(string newLanguageId); // There was no way to find out the language has changed so i had to shit here too :(
+

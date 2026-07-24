@@ -173,3 +173,78 @@
   #   slots:
   #   - Back
   #   - suitStorage
+
+- type: entity
+  name: large machete
+  parent: Machete
+  id: MacheteMech
+  description: A giant blade, much larger than any longsword. A fitting weapon to kill dragons..
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/machete.rsi
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 35
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: Item
+    storedSprite:
+      state: storage
+      sprite: Objects/Weapons/Melee/machete.rsi
+    shape:
+    - 0,0,0,2
+  - type: ItemExtension
+    minimalStrengthToPickUp: 1.7
+    strengthRequirementToBeUsed: 5
+  - type: Wieldable
+  - type: ItemExtensionMeleeWeapon
+  - type: DisarmMalus
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/blade.ogg
+      params:
+        volume: 2
+  - type: LandAtCursor
+  - type: ThrowingAngle
+    angle: 225
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 35
+
+
+# Высокочастотный нож меха ТСФ
+- type: entity
+  parent: CaptainSabre
+  id: KnifeHFMech
+  name: HF mech knife
+  description: "An enormous knife, much larger than a common sword. The words are engraved along the blade: 'Sol Custos'"
+  components:
+  - type: Sharp
+  - type: ItemExtension
+    minimalStrengthToPickUp: 3
+    strengthRequirementToBeUsed: 4
+  - type: ItemToggle
+  - type: MeleeWeapon
+    autoAttack: true
+    wideAnimationRotation: -135
+    attackRate: 3
+    damage:
+      types:
+          Slash: 65
+          Structural: 80
+  - type: ItemToggleMeleeWeapon
+    activatedDamage:
+      types:
+        Heat: 85
+        Structural: 200
+      armourPiercing: 90
+  - type: Item
+    size: Ginormous
+  - type: Appearance
+  - type: DisarmMalus
+    malus: 0

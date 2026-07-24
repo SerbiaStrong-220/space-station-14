@@ -28,3 +28,31 @@
   - type: TargetAction
   - type: EntityTargetAction
     event: !type:MechClothingGrabEvent
+
+- type: entity
+  parent: BaseMechAction
+  id: ActionPilotOpenUI
+  name: Control Panel
+  description: Opens the control panel for the mech
+  components:
+  - type: Action
+    useDelay: 1
+    icon:
+      sprite: Interface/Actions/actions_mecha.rsi
+      state: mech_view_stats
+  - type: InstantAction
+    event: !type:MechOpenUiEvent
+
+- type: entity
+  parent: BaseMechAction
+  id: ActionPilotEject
+  name: Eject
+  description: Ejects the pilot from the mech
+  components:
+  - type: Action
+    icon:
+      sprite: Interface/Actions/actions_mecha.rsi
+      state: mech_eject
+  - type: InstantAction
+    event: !type:MechEjectPilotEvent
+

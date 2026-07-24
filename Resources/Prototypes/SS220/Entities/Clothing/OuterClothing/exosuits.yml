@@ -29,3 +29,105 @@
     sprintModifier: 0.90
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodExosuitSalvage
+
+#Промышленный экзоскелет
+- type: entity
+  parent: ClothingOuterBaseMedium
+  id: ClothingOuterExosuitBase
+  abstract: true
+  name: industrial exoskeleton
+  description: A specialised powered exoskeleton made to increase muscle strength.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Misc/industrial_exosuit.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Misc/industrial_exosuit.rsi
+    quickEquip: false
+    equipDelay: 4
+    unequipDelay: 4
+  - type: PhysicalParametersModifyingClothing
+    parameterDict:
+      Strength: 1.7
+  - type: PoweredClothing
+    selfPowered: false
+    drawRate: 0.03
+  - type: ItemToggle
+    activated: false
+  - type: ComponentRequiringPoweredClothing
+  - type: RelayedIntegratedClothingPowerSource
+  - type: IntegratedClothing
+    clothingPrototypes:
+      back: ClothingBackpackExo
+      gloves: ClothingHandsGlovesCombat
+      shoes: ClothingShoesBootsMagExo
+    slots: [ back, gloves, shoes ]
+
+- type: entity
+  parent: ClothingOuterExosuitBase
+  id: ClothingOuterExosuit
+  name: industrial exoskeleton
+  description: A specialised powered exoskeleton made to increase muscle strength.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Misc/industrial_exosuit.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Misc/industrial_exosuit.rsi
+    quickEquip: false
+    equipDelay: 4
+    unequipDelay: 4
+  - type: PhysicalParametersModifyingClothing
+    parameterDict:
+      Strength: 1.7
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 0.85
+    requireActivated: false
+  - type: MultiHandedItem
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.85
+        Slash: 0.85
+        Piercing: 0.85
+        Heat: 0.85
+        Caustic: 0.85
+        Radiation: 0.85
+        Cold: 0.85
+  - type: StaminaResistance
+    damageCoefficient: 0.9
+
+#Экзоскелетный бронекостюм
+- type: entity
+  parent: ClothingOuterExosuit
+  id: ClothingOuterExosuitArmor
+  name: exoskeletal armor
+  description: A specialised powered exoskeleton made to increase muscle strength.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Misc/industrial_exosuit.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Misc/industrial_exosuit.rsi
+    quickEquip: false
+    equipDelay: 4
+    unequipDelay: 4
+  - type: PhysicalParametersModifyingClothing
+    parameterDict:
+      Strength: 1.1
+  - type: IntegratedClothing
+    clothingPrototypes:
+      back: ClothingBackpackExo
+      gloves: ClothingHandsGlovesCombat
+      shoes: ClothingShoesBootsMagExo
+    slots: [ back, gloves, shoes ]
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.5
+        Heat: 0.55
+        Caustic: 0.3
+        Radiation: 0.4
+        Cold: 0.3
+  - type: StaminaResistance
+    damageCoefficient: 0.2

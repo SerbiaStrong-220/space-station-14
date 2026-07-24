@@ -215,3 +215,61 @@
     sprite: SS220/Clothing/Shoes/Boots/senior_service_laceups.rsi
   - type: Clothing
     sprite: SS220/Clothing/Shoes/Boots/senior_service_laceups.rsi
+
+# Экзоскелеты
+- type: entity
+  parent: [ClothingShoesBase, BaseToggleClothing]
+  id: ClothingShoesBootsMagExo
+  name: exosuit integrated magboots
+  description: Integrated boots with magpads. They are much better than common ones because of access to exosuit's battery and electronics.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Boots/exomagboots.rsi
+    state: icon
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Boots/exomagboots.rsi
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 0.9
+  - type: FootstepModifier
+    footstepSoundCollection:
+      path: /Audio/Mecha/mechmove03.ogg
+  - type: ToggleClothing
+    action: ActionToggleMagboots
+    mustEquip: false
+  - type: ComponentToggler
+    components:
+    - type: NoSlip
+  - type: Magboots
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+
+- type: entity
+  parent: ClothingShoesBootsMagExo
+  id: ClothingShoesBootsMagPowerArmor
+  name: power armor integrated magboots
+  description: Integrated armored boots with magpads. They are much better than common ones because of access to exosuit's battery and electronics.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Boots/powerarmormagboots.rsi
+    state: icon
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Boots/powerarmormagboots.rsi
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 0.9
+  - type: FootstepModifier
+    footstepSoundCollection:
+      path: /Audio/Mecha/mechmove03.ogg
+  - type: ToggleClothing
+    action: ActionToggleMagboots
+    mustEquip: false
+  - type: ComponentToggler
+    components:
+    - type: NoSlip
+  - type: Magboots
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+

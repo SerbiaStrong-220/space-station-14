@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Made by alliedsmartgunofficial (discord)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+    "states": [
+        {
+            "name": "smallicon",
+            "directions": 1
+        },
+        {
+            "name": "largeicon",
+            "directions": 1
+        },
+        {
+            "name": "nuclearicon",
+            "directions": 1
+        },
+        {
+            "name": "armorednuclearicon",
+            "directions": 1
+        }
+    ]
+}

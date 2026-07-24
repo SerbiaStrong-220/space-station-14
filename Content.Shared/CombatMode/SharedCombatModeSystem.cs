@@ -39,7 +39,7 @@ public abstract class SharedCombatModeSystem : EntitySystem
         _mouseRotator.SetEnabled(uid, false); // SS220-Grabs
     }
 
-    private void OnActionPerform(EntityUid uid, CombatModeComponent component, ToggleCombatActionEvent args)
+    protected virtual void OnActionPerform(EntityUid uid, CombatModeComponent component, ToggleCombatActionEvent args)
     {
         if (args.Handled)
             return;

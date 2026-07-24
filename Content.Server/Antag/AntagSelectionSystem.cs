@@ -14,6 +14,8 @@ using Content.Server.Preferences.Managers;
 using Content.Server.Roles;
 using Content.Server.Roles.Jobs;
 using Content.Server.Shuttles.Systems;
+using Content.Server.SS220.Mech.Systems;//SS220 mech rework
+using Content.Server.SS220.MindSlave;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Antag;
 using Content.Shared.Clothing;
@@ -25,6 +27,8 @@ using Content.Shared.Humanoid;
 using Content.Shared.Mind;
 using Content.Shared.Players;
 using Content.Shared.Roles;
+using Content.Shared.SS220.Experience;
+using Content.Shared.SS220.Mech.Components;
 using Content.Shared.Whitelist;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
@@ -35,8 +39,6 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
-using Content.Server.SS220.MindSlave;
-using Content.Shared.SS220.Experience;
 
 namespace Content.Server.Antag;
 
@@ -57,6 +59,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly MindSlaveSystem _mindSlave = default!; // SS220 MindSlave
+    [Dependency] private readonly AltMechSystem _altmech = default!;//SS220 mech rework
     [Dependency] private readonly ArrivalsSystem _arrivals = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!; //SS220-experience-update
 
@@ -405,7 +408,17 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
 
             // we shouldn't be blocking the entity if they're just a ghost or smth.
             if (!HasComp<GhostComponent>(session.AttachedEntity))
-                antagEnt = session.AttachedEntity;
+            //SS220 mech rework begin
+            {
+                if (TryComp<AltMechComponent>(session.AttachedEntity, out var mechComp))
+                {
+                    if (mechComp.PilotSlot.ContainedEntity != null)
+                        antagEnt = (EntityUid)mechComp.PilotSlot.ContainedEntity;
+                }
+                else
+                    antagEnt = session.AttachedEntity;
+            }
+            //SS220 mech rework end
         }
         else if (!ignoreSpawner && def.SpawnerPrototype != null) // don't add spawners if we have a player, dummy.
         {
@@ -502,7 +515,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
                 curMind = _mind.CreateMind(session.UserId, Name(antagEnt.Value));
                 _mind.SetUserId(curMind.Value, session.UserId);
             }
-
+            
             _mind.TransferTo(curMind.Value, antagEnt, ghostCheckOverride: true);
             _role.MindAddRoles(curMind.Value, def.MindRoles, null, true);
             ent.Comp.AssignedMinds.Add((curMind.Value, Name(player)));
@@ -514,6 +527,11 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
 
         var afterEv = new AfterAntagEntitySelectedEvent(session, player, ent, def);
         RaiseLocalEvent(ent, ref afterEv, true);
+
+        //SS220 mech rework begin
+        if (TryComp<AltMechPilotComponent>(player, out var pilotComp) && TryComp<AltMechComponent>(pilotComp.Mech, out var playerMechComp))
+            _altmech.TransferMindIntoMech((pilotComp.Mech,playerMechComp));
+        //SS220 mech rework end
     }
 
     /// <summary>

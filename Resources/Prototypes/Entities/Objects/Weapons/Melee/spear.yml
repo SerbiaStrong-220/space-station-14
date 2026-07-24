@@ -18,6 +18,12 @@
     tags:
     - Spear
     - ScurretWearable
+  #SS220 melee weapon extension begin
+  - type: ItemExtensionMeleeWeapon
+  - type: ItemExtension
+    minimalStrengthToPickUp: 0.5
+    strengthRequirementToBeUsed: 1
+  #SS220 melee weapon extension begin
   - type: Fixtures
     fixtures:
       fix1:

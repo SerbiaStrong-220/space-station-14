@@ -232,3 +232,30 @@
       ScienceKnowledge: [ hidden-desc-DeathRattleImplanterInterdyne-research ]
       SecurityKnowledge: [ hidden-desc-DeathRattleImplanterInterdyne-security ]
     hiddenName: null
+
+- type: entity
+  parent: BaseSubdermalImplant
+  id: NeuralInterfaceImplant
+  name: neural interface implant
+  description: neural-interface-implant-desc
+  components:
+  - type: SubdermalImplant
+    permanent: true
+    implantComponents:
+    - type: NeuralInterface
+    blacklist:
+      components: [NeuralInterface]
+
+- type: entity
+  parent: BaseSubdermalImplant
+  id: MilitaryNeuralInterfaceImplant
+  name: neural interface implant
+  description: neural-interface-implant-desc
+  components:
+  - type: SubdermalImplant
+    permanent: true
+    implantComponents:
+    - type: NeuralInterface
+      interfaceType: 2
+    blacklist:
+      components: [NeuralInterface]

@@ -90,6 +90,9 @@ public partial class SharedGrabSystem
         if (chance <= 0)
             return;
 
+        var chanceModEv = new GrabBreakChanceModifyEvent(grabbable.Comp.GrabbedBy, grabbable.Owner, chance);
+        RaiseLocalEvent(grabbable.Owner, ref chanceModEv);
+
         // TODO: Once we have predicted randomness delete this for something sane...
         var seed = SharedRandomExtensions.HashCodeCombine((int)_timing.CurTick.Value, GetNetEntity(grabbable.Owner).Id);
         var rand = new System.Random(seed);
@@ -118,3 +121,6 @@ public partial class SharedGrabSystem
         resistance.CurrentStageBreakoutChance = ev.CurrentStageBreakoutChance;
     }
 }
+
+[ByRefEvent]
+public record struct GrabBreakChanceModifyEvent(EntityUid? Grabber, EntityUid? Grabbable, float Chance);

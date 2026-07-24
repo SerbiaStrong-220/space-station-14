@@ -81,6 +81,14 @@
   - BaseSpeciesMobOrganic
   id: MobTajaran
   components:
+  - type: PhysicalParameters
+    parameterDict:
+      Strength: 0.7
+      ReactionSpeed: 1
+      Coordination: 1
+      PainTolerance: 1
+    genderModifier:
+      Strength: -0.1
   - type: Damageable
     damageModifierSet: Tajaran
   - type: TajaranAccent

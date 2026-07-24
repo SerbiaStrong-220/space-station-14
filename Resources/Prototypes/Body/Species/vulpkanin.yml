@@ -153,6 +153,14 @@
         color: "#ccac1f"
       Burn:
         sprite: Mobs/Effects/burn_damage.rsi
+  #SS220 add physical parameters begin
+  - type: PhysicalParameters
+    parameterDict:
+      Strength: -10
+      ReactionSpeed: -10
+      Coordination: -10
+      PainTolerance: -10
+  #SS220 add physical parameters end
   - type: MessyDrinker
     spillChance: 0.33
   - type: Speech

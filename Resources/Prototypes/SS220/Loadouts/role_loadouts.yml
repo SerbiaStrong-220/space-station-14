@@ -204,6 +204,26 @@
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
 
+  # Робототехник
+- type: roleLoadout
+  id: JobRoboticist
+  groups:
+  - ScientistHead
+  - ScientistGlasses #SS220-Two Floppa Iteration
+  - ScientistNeck
+  - ScientistJumpsuit
+  - SeniorSciensistOuterClothing
+  - ScientistGloves
+  - ScientistBackpack
+  - ScientistShoes
+  - RoboticistPDA
+  - Survival
+  - SurvivalVox
+  - GroupSpeciesBreathTool
+  - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - WorkerCash
+
 #! Исследовательский отдел (Конец)
 
 #! Сервис (Начало)

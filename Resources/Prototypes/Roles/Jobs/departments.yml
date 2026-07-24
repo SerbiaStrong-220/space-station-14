@@ -152,6 +152,7 @@
   - SeniorResearcher #ss220
   - Scientist
   - ResearchAssistant
+  - Roboticist #SS220 add roboticist
 
 - type: department
   id: Cryo
