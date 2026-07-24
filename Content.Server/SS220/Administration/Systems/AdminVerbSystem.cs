@@ -13,12 +13,12 @@ using Robust.Shared.Player;
 
 namespace Content.Server.SS220.Administration.Systems;
 
-public sealed class AdminVerbSystem : EntitySystem
+public sealed partial class AdminVerbSystem : EntitySystem
 {
-    [Dependency] private readonly IAdminManager _adminManager = default!;
-    [Dependency] private readonly QuickDialogSystem _quickDialog = default!;
-    [Dependency] private readonly EuiManager _euiManager = default!;
-    [Dependency] private readonly SharedScaleVisualsSystem _scaleVisuals = default!;
+    [Dependency] private IAdminManager _adminManager = default!;
+    [Dependency] private QuickDialogSystem _quickDialog = default!;
+    [Dependency] private EuiManager _euiManager = default!;
+    [Dependency] private SharedScaleVisualsSystem _scaleVisuals = default!;
 
     public override void Initialize()
     {
@@ -26,6 +26,7 @@ public sealed class AdminVerbSystem : EntitySystem
 
         SubscribeLocalEvent<GetVerbsEvent<Verb>>(AddAdminVerbs);
     }
+
     private void AddAdminVerbs(GetVerbsEvent<Verb> args)
     {
         if (!TryComp(args.User, out ActorComponent? actor))
@@ -42,7 +43,6 @@ public sealed class AdminVerbSystem : EntitySystem
             {
                 Text = Loc.GetString("admin-verbs-lives-title"),
                 Category = VerbCategory.Debug,
-                // TODO need a proper icon here
                 Act = () =>
                 {
                     var maxLimit = reviveComp.ReviveLimit;
@@ -74,7 +74,6 @@ public sealed class AdminVerbSystem : EntitySystem
         {
             Text = Loc.GetString("admin-verbs-traits-title"),
             Category = VerbCategory.Debug,
-            // TODO need a proper icon here
             Act = () =>
             {
                 var traitsEui = new ManageTraitsEui(args.Target, Name(args.Target));
@@ -87,7 +86,6 @@ public sealed class AdminVerbSystem : EntitySystem
         {
             Text = Loc.GetString("admin-verbs-statuses-title"),
             Category = VerbCategory.Debug,
-            // TODO need a proper icon here
             Act = () =>
             {
                 var statusesEui = new ManageStatusesEui(args.Target, Name(args.Target));
@@ -100,7 +98,6 @@ public sealed class AdminVerbSystem : EntitySystem
         {
             Text = Loc.GetString("admin-verbs-scale-title"),
             Category = VerbCategory.Debug,
-            // TODO need a proper icon here
             Act = () =>
             {
                 var curScale = _scaleVisuals.GetSpriteScale(args.Target);

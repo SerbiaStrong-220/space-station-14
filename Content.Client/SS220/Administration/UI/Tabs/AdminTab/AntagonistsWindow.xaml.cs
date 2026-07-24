@@ -7,57 +7,67 @@ using Robust.Client.Console;
 using Robust.Client.Player;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
+using Robust.Client.UserInterface.XAML;
 
-namespace Content.Client.SS220.Administration.UI.Tabs.AdminTab
+namespace Content.Client.SS220.Administration.UI.Tabs.AdminTab;
+
+[GenerateTypedNameReferences]
+[UsedImplicitly]
+public sealed partial class AntagonistsWindow : DefaultWindow
 {
-    [GenerateTypedNameReferences]
-    [UsedImplicitly]
-    public sealed partial class AntagonistsWindow : DefaultWindow
+    [Dependency] private IClientConsoleHost _clientConsoleHost = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+
+    private PlayerInfo? _selectedAntagonist;
+
+    public AntagonistsWindow()
     {
-        private PlayerInfo? _selectedAntagonist;
+        RobustXamlLoader.Load(this);
+        IoCManager.InjectDependencies(this);
+    }
 
-        protected override void EnteredTree()
-        {
-            AntagonistsList.OnSelectionChanged += OnListOnOnSelectionChanged;
-            ListOfTargetsButton.OnPressed += ListOfTargetsButtonOnPressed;
-            //AddTargetButton.OnPressed += AddTargetButtonOnPressed;
-            AddTargetButton.OnWindowCreated += AddTargetButtonOnWindowCreated;
-        }
+    protected override void EnteredTree()
+    {
+        base.EnteredTree();
+        AntagonistsList.OnSelectionChanged += OnListOnOnSelectionChanged;
+        ListOfTargetsButton.OnPressed += ListOfTargetsButtonOnPressed;
+        AddTargetButton.OnWindowCreated += AddTargetButtonOnWindowCreated;
+    }
 
-        private void OnListOnOnSelectionChanged(PlayerInfo? obj)
-        {
-            _selectedAntagonist = obj;
-            var disableButtons = _selectedAntagonist == null;
-            ListOfTargetsButton.Disabled = disableButtons;
-            AddTargetButton.Disabled = disableButtons;
-        }
+    private void OnListOnOnSelectionChanged(PlayerInfo? obj)
+    {
+        _selectedAntagonist = obj;
+        var disableButtons = _selectedAntagonist == null;
+        ListOfTargetsButton.Disabled = disableButtons;
+        AddTargetButton.Disabled = disableButtons;
+    }
 
-        private void ListOfTargetsButtonOnPressed(BaseButton.ButtonEventArgs obj)
-        {
-            if (_selectedAntagonist == null)
-                return;
+    private void ListOfTargetsButtonOnPressed(BaseButton.ButtonEventArgs _)
+    {
+        if (_selectedAntagonist == null)
+            return;
 
-            IoCManager.Resolve<IClientConsoleHost>().ExecuteCommand(
-                $"openobjectives {_selectedAntagonist.SessionId}");
-        }
+        _clientConsoleHost.ExecuteCommand(
+            $"openobjectives {_selectedAntagonist.SessionId}");
+    }
 
-        private void AddTargetButtonOnWindowCreated(DefaultWindow window)
-        {
-            // This is dumb.
-            if (_selectedAntagonist is null)
-                return;
-            var addObjectiveWindow = (AddObjectiveWindow) window;
-            var antagSession = IoCManager.Resolve<IPlayerManager>().GetSessionById(_selectedAntagonist.SessionId);
-            addObjectiveWindow.SetAntagonist(antagSession);
-        }
+    private void AddTargetButtonOnWindowCreated(DefaultWindow window)
+    {
+        if (_selectedAntagonist is null)
+            return;
 
-        private void AddTargetButtonOnPressed(BaseButton.ButtonEventArgs obj)
-        {
-            if (_selectedAntagonist == null)
-                return;
+        var addObjectiveWindow = (AddObjectiveWindow) window;
+        if (!_playerManager.TryGetSessionById(_selectedAntagonist.SessionId, out var antagSession))
+            return;
 
-            //IoCManager.Resolve<IClientConsoleHost>().ExecuteCommand(
-            //    $"addtarget {_selectedAntagonist.EntityUid}");
-        }
+        addObjectiveWindow.SetAntagonist(antagSession);
+    }
+
+    protected override void ExitedTree()
+    {
+        base.ExitedTree();
+        AntagonistsList.OnSelectionChanged -= OnListOnOnSelectionChanged;
+        ListOfTargetsButton.OnPressed -= ListOfTargetsButtonOnPressed;
+        AddTargetButton.OnWindowCreated -= AddTargetButtonOnWindowCreated;
     }
 }

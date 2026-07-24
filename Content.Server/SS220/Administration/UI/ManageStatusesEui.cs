@@ -10,8 +10,8 @@ namespace Content.Server.Administration.UI;
 
 public sealed class ManageStatusesEui : BaseEui
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     private readonly StatusEffectsSystem _statusEffects;
     private readonly EntityUid _targetEntity;
