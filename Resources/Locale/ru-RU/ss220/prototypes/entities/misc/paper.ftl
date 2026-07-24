@@ -8,3 +8,7 @@ ent-RedWingsClientPaper = список клиентов "Красных Крыл
 ent-PaperInterdyneForm = бумага
     .desc = Лист белой бумаги с логотипом Interdyne
     .suffix = Форма Interdyne
+
+ent-BoxFolderRedWingsClient = папка с клиентами "Красных Крыльев"
+    .desc = Папка, заполненная совершенно секретными документами.
+
