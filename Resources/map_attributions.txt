@@ -101,3 +101,7 @@
 
 - files: ["tox.yml"]
   authors: VictorBoum
+
+- files: ["gate.yml"]
+  authors: Abiergo, Adammatic, SVEDETEL, PandionSM, Shiva_Meresh, VoidCat
+
