@@ -29,7 +29,7 @@ public abstract partial class SharedCultYoggSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<CultYoggComponent, ComponentStartup>(OnCompInit);
+        SubscribeLocalEvent<CultYoggComponent, ComponentStartup>(OnStartup);
 
         SubscribeLocalEvent<CultYoggComponent, ExaminedEvent>(OnExamined);
 
@@ -39,7 +39,7 @@ public abstract partial class SharedCultYoggSystem : EntitySystem
         SubscribeLocalEvent<CultYoggComponent, ComponentRemove>(OnRemove);
     }
 
-    protected virtual void OnCompInit(Entity<CultYoggComponent> uid, ref ComponentStartup args)
+    protected virtual void OnStartup(Entity<CultYoggComponent> uid, ref ComponentStartup args)
     {
         _actions.AddAction(uid, ref uid.Comp.CorruptItemActionEntity, uid.Comp.CorruptItemAction);
         _actions.AddAction(uid, ref uid.Comp.CorruptItemInHandActionEntity, uid.Comp.CorruptItemInHandAction);
