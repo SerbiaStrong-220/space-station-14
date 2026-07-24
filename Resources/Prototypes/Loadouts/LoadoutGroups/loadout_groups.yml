@@ -26,6 +26,7 @@
   - BoxFolderBaseThreePapers
   - BoxFolderPlasticClipboardThreePapers
   - BoxFolderClipboardThreePapers
+  - ClothingNeckTSFPin #SS220-NewPins
   - ClothingNeckLGBTPin
   - ClothingNeckAllyPin
   - ClothingNeckAromanticPin
@@ -45,6 +46,35 @@
   - ClothingNeckUSSPPin # ss220 add neck ussp pin to loadout
   - ClothingNeckAutismPin
   - ClothingNeckGoldAutismPin
+  #SS220-NewPins begin
+  - ClothingNeck1984Pin
+  - ClothingNeckBeerPin
+  - ClothingNeckCatDespairPin
+  - ClothingNeckJRGreenPin
+  - ClothingNeckJRWhitePin
+  - ClothingNeckMothPin
+  - ClothingNeckDwarfPin
+  - ClothingNeckSheriffStarPin
+  - ClothingNeckLovePin
+  - ClothingNeckSmokeWormPin
+  - ClothingNeckStarPin
+  - ClothingNeckIPCPin
+  - ClothingNeckSlimegreenPin
+  - ClothingNeckBigFloppaPin
+  - ClothingNeckSilverBloodDonorPin
+  - ClothingNeckGoldBloodDonorPin
+  - ClothingNeckGrapePin
+  - ClothingNeckBrushwoodPin
+  - ClothingNeckCloverPin
+  - ClothingNeckHumanPin
+  - ClothingNeckLizardPin
+  - ClothingNeckArachnidPin
+  - ClothingNeckTajaraPin
+  - ClothingNeckVoxPin
+  - ClothingNeckDionaPin
+  - ClothingNeckSlimePin
+  - ClothingNeckVulpearPin
+  #SS220-NewPins end
   - OffsetCane
   - OffsetCaneWood
   - OffsetCaneClown
