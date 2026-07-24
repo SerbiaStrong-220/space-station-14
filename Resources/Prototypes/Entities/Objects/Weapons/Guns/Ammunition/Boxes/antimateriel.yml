@@ -12,7 +12,9 @@
     proto: CartridgeAntiMateriel
     capacity: 10
   - type: Item
-    size: Small
+# SS220-sec-gear-size-fix-start
+    size: Normal
+# SS220-sec-gear-size-fix-end
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
