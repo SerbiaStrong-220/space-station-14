@@ -3,11 +3,14 @@ using Content.Shared.Kitchen;
 using Content.Shared.Power;
 using Content.Shared.PowerCell.Components;
 using Content.Shared.Rejuvenate;
+using Robust.Shared.Containers; //SS220-IPC
 
 namespace Content.Shared.PowerCell;
 
 public sealed partial class PowerCellSystem
 {
+    [Dependency] private SharedContainerSystem _container = default!; //SS220-IPC
+
     public void InitializeRelay()
     {
         SubscribeLocalEvent<PowerCellSlotComponent, BeingMicrowavedEvent>(RelayToCell);
@@ -32,9 +35,19 @@ public sealed partial class PowerCellSystem
 
     private void RelayToCellSlot<T>(Entity<PowerCellComponent> ent, ref T args) where T : notnull
     {
-        var parent = Transform(ent).ParentUid;
-        // Relay the event to the slot entity.
-        if (HasComp<PowerCellSlotComponent>(parent))
-            RaiseLocalEvent(parent, ref args);
+        //SS220-IPC begin
+        if (!_container.TryGetContainingContainer((ent.Owner, null, null), out var container))
+            return;
+
+        if (!TryComp<PowerCellSlotComponent>(container.Owner, out var slotComp))
+            return;
+
+        // Ensure that the battery is placed specifically in the device's power slot, 
+        // rather than in some other container (such as a pocket or bag).
+        if (container.ID != slotComp.CellSlotId)
+            return;
+        //SS220-IPC end
+
+        RaiseLocalEvent(container.Owner, ref args);
     }
 }
