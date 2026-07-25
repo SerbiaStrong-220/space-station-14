@@ -213,6 +213,10 @@
     - id: CableApcStack1
       amount: 4
   - type: Unrevivable
+  - type: DamageOnInteractProtection
+    damageProtection:
+      flatReductions:
+        Heat: 10
   - type: SleepEmitSound
     snore: /Audio/Machines/buzz-two.ogg
     interval: 30
