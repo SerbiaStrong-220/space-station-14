@@ -82,3 +82,37 @@
     prototype: ComputerPdaIdPainter
     stackRequirements:
       Manipulator: 7
+
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: MaltGrinderCircuitboard
+  name: MaltGrinder machine board
+  description: A machine printed circuit board for a MaltGrinder.
+  components:
+  - type: Sprite
+    state: service
+  - type: MachineBoard
+    prototype: MaltGrinder
+    stackRequirements:
+      Glass: 3
+      Manipulator: 3
+      Steel: 5
+    tagRequirements:
+        GlassBeaker:
+          amount: 1
+          defaultPrototype: Beaker
+
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: FermentationBarrelCircuitboard
+  name: fermentation barrel machine board
+  description: A machine printed circuit board for a Fermentation Barrel.
+  components:
+  - type: Sprite
+    state: service
+  - type: MachineBoard
+    prototype: FermentationBarrel
+    stackRequirements:
+      Glass: 2
+      Manipulator: 2
+      Steel: 3

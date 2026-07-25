@@ -21,9 +21,9 @@
     FoodCheese: 1
     FoodMeat: 6
     FoodCataria: 3 #SS220 add-cataria
+    FoodCondimentPacketYeast: 6 # SS220-beer-update
   contrabandInventory:
     EggBoxBroken: 1
     FoodBoxDonkpocket: 1
     FoodFrozenSandwich: 2
     FoodFrozenSandwichStrawberry: 2
-    

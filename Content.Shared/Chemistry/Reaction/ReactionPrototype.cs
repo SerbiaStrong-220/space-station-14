@@ -24,7 +24,7 @@ namespace Content.Shared.Chemistry.Reaction
         /// <summary>
         /// Reactants required for the reaction to occur.
         /// </summary>
-        [DataField("reactants", customTypeSerializer:typeof(PrototypeIdDictionarySerializer<ReactantPrototype, ReagentPrototype>))]
+        [DataField("reactants", customTypeSerializer: typeof(PrototypeIdDictionarySerializer<ReactantPrototype, ReagentPrototype>))]
         public Dictionary<string, ReactantPrototype> Reactants = new();
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Content.Shared.Chemistry.Reaction
         /// <summary>
         /// Reagents created when the reaction occurs.
         /// </summary>
-        [DataField("products", customTypeSerializer:typeof(PrototypeIdDictionarySerializer<FixedPoint2, ReagentPrototype>))]
+        [DataField("products", customTypeSerializer: typeof(PrototypeIdDictionarySerializer<FixedPoint2, ReagentPrototype>))]
         public Dictionary<string, FixedPoint2> Products = new();
 
         /// <summary>
@@ -94,6 +94,20 @@ namespace Content.Shared.Chemistry.Reaction
         /// </example>
         [DataField]
         public bool Source;
+
+        // SS220-beer-update-start
+        /// <summary>
+        /// Determines whether or not this reaction is a fermentation. Fermentation reaction will occur only in containers with
+        /// </summary>
+        [DataField("fermentation")]
+        public bool Fermentation = false;
+
+        /// <summary>
+        /// Determines duration of fermentation reaction in seconds.
+        /// </summary>
+        [DataField("fermentationDuration")]
+        public float FermentationDuration = 0f;
+        // SS220-beer-update-end
 
         /// <summary>
         ///     Comparison for creating a sorted set of reactions. Determines the order in which reactions occur.

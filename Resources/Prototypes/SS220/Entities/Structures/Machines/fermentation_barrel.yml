@@ -1,0 +1,99 @@
+- type: entity
+  id: FermentationBarrel
+  parent: [BaseStructureDynamic, ConstructibleMachine]
+  name: fermentation barrel
+  description: A large tank designed for fermenting various chemical solutions over time.
+  components:
+  - type: StationAiWhitelist
+  - type: Appearance
+  - type: Sprite
+    sprite: SS220/Structures/Storage/Tanks/barrel.rsi
+    snapCardinals: true
+    layers:
+    - state: barrel
+      map: ["enum.SolutionContainerLayers.Fill"]
+    # TODO: layers
+    # - state: barrel_top
+  - type: PointLight
+    radius: 0.8
+    energy: 1.5
+    color: "#b4a7d6"
+  - type: Machine
+    board: FermentationBarrelCircuitboard
+  - type: Rotatable
+  - type: Physics
+    bodyType: Static
+  - type: Transform
+    anchored: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        density: 150
+  - type: Anchorable
+    delay: 2
+  - type: InteractionOutline
+  - type: ApcPowerReceiver
+    powerLoad: 250
+  - type: ExtensionCableReceiver
+  - type: SolutionContainerManager
+    solutions:
+      barrel:
+        maxVol: 500
+        canReact: false
+  - type: RefillableSolution
+    solution: barrel
+  - type: ExaminableSolution
+    solution: barrel
+  - type: FermentationBarrel
+    solution: barrel
+  - type: ActivatableUI
+    inHandsOnly: false
+    singleUser: false
+    key: enum.FermentationBarrelUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.FermentationBarrelUiKey.Key:
+        type: FermentationBarrelBoundUserInterface
+  - type: ContainerContainer
+    containers:
+      barrel: !type:Container
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: Construction
+    graph: Machine
+    node: machine
+    containers:
+    - machine_parts
+    - machine_board
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: DamageOnHighSpeedImpact
+    damage:
+      types:
+        Blunt: 5
+    soundHit:
+      collection: MetalThud
+  - type: ExplosionResistance
+    damageCoefficient: 0.1
+  - type: Airtight

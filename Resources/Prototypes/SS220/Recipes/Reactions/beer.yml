@@ -1,0 +1,75 @@
+- type: reaction
+  id: WortBase
+  minTemp: 325
+  maxTemp: 352
+  reactants:
+    Malt:
+      amount: 1
+    Sugar:
+      amount: 1
+    Water:
+      amount: 1
+  products:
+    WortBase: 3
+
+- type: reaction
+  id: WortLager
+  minTemp: 325
+  maxTemp: 352
+  reactants:
+    WortBase:
+      amount: 1
+    HopsExtract:
+      amount: 1
+  products:
+    WortLager: 2
+
+- type: reaction
+  id: WortAle
+  minTemp: 335
+  maxTemp: 372
+  reactants:
+    WortBase:
+      amount: 1
+    Sugar:
+      amount: 1
+  products:
+    WortAle: 2
+
+- type: reaction
+  id: WortStout
+  minTemp: 345
+  maxTemp: 362
+  reactants:
+    WortAle:
+      amount: 1
+    Carbon:
+      amount: 1
+  products:
+    WortStout: 2
+
+- type: reaction
+  id: WortIpa
+  minTemp: 335
+  maxTemp: 352
+  reactants:
+    WortBase:
+      amount: 1
+    Malt:
+      amount: 1
+    HopsExtract:
+      amount: 1
+  products:
+    WortIpa: 3
+
+- type: reaction
+  id: WortPlasma
+  minTemp: 350
+  maxTemp: 370
+  reactants:
+    WortBase:
+      amount: 10
+    Plasma:
+      amount: 1
+  products:
+    WortPlasma: 2

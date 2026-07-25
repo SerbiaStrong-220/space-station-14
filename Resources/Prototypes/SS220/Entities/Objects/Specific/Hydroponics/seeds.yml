@@ -137,3 +137,14 @@
       seedId: watermelondog
     - type: Sprite
       sprite: SS220/Objects/Specific/Hydroponics/watermelondog.rsi
+
+
+- type: entity
+  parent: SeedBase
+  name: packet of hop seeds
+  id: HopSeeds
+  components:
+    - type: Seed
+      seedId: hop
+    - type: Sprite
+      sprite: SS220/Objects/Specific/Hydroponics/hop.rsi

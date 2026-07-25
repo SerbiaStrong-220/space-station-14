@@ -1,0 +1,19 @@
+- type: entity
+  parent: BaseFoodCondimentPacketDrink
+  id: FoodCondimentPacketYeast
+  name: yeast
+  description: A small packet of active yeast for fermentation.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Yeast
+          Quantity: 10
+  - type: Sprite
+  - type: Icon
+    state: packet-greygoo
+  - type: Appearance
+  - type: SolutionContainerVisuals
+    maxFillLevels: 2
+    fillBaseName: packet-solid-

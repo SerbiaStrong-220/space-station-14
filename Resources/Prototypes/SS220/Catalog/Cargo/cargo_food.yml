@@ -37,3 +37,13 @@
   cost: 2500
   category: cargoproduct-category-name-food
   group: market
+
+- type: cargoProduct
+  id: YeastBox
+  icon:
+    sprite: Objects/Consumable/Food/condiments.rsi
+    state: packet-greygoo
+  product: BoxYeast
+  cost: 250
+  category: cargoproduct-category-name-food
+  group: market

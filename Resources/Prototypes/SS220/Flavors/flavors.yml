@@ -93,3 +93,18 @@
   flavorType: Complex
   description: flavor-complex-sawdustsoup
 
+
+- type: flavor
+  id: stout
+  flavorType: Complex
+  description: flavor-complex-stout
+
+- type: flavor
+  id: ipa
+  flavorType: Complex
+  description: flavor-complex-ipa
+
+- type: flavor
+  id: plasmabeer
+  flavorType: Complex
+  description: flavor-complex-plasmabeer
