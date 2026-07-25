@@ -38,9 +38,9 @@
   - type: Pullable
 
 - type: entity
-  id: MechRightArmFrame
-  name: mech right arm frame
-  description: A 'skeleton' of large arm of a machine
+  id: BasicHydraulicChassisFrame
+  name: hydraulic chassis frame
+  description: Vrame of powerful hydraulic mech chassis
   components:
   - type: Clickable
   - type: InteractionOutline
@@ -63,15 +63,57 @@
   - type: Sprite
     noRot: true
     drawdepth: Items
-    sprite: SS220/Objects/Mechs/coresfinal.rsi
-    state: basicloader
+    sprite: SS220/Objects/Mechs/chassisfinal.rsi
+    state: basichydraulic
+  - type: Appearance
+  - type: ContainerContainer
+    containers:
+      part-container: !type:Container
+  - type: Construction
+    graph: PowerloaderFrame
+    node: powerloaderframe
+    containers:
+    - part-container
+  - type: Pullable
+
+- type: entity
+  id: MechRightArmBase
+  name: mech right arm base
+  description: A magnificently universal device - the connection port. All the possibilities begin here.
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Dynamic
+    fixedRotation: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 100
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+        restitution: 0.3
+        friction: 0.2
+  - type: Sprite
+    layers:
+      - map: [ "enum.ColorableVisualLayer.CustomBase" ]
+        sprite: SS220/Objects/Mechs/righthandfinal.rsi
+        state: basichydraulic
+      - map: [ "enum.ColorableVisualLayer.CustomColor" ]
+        sprite: SS220/Objects/Mechs/righthandfinal.rsi
+        state: basichydrauliccolor
   - type: Appearance
   - type: ContainerContainer
     containers:
       part-container: !type:Container
   - type: Construction
     graph: MechRightArm
-    node: rightarmframe
+    node: rightarmbase
     containers:
     - part-container
   - type: Pullable
@@ -100,10 +142,13 @@
         restitution: 0.3
         friction: 0.2
   - type: Sprite
-    noRot: true
-    drawdepth: Items
-    sprite: SS220/Objects/Mechs/coresfinal.rsi
-    state: basicloader
+    layers:
+      - map: [ "enum.ColorableVisualLayer.CustomBase" ]
+        sprite: SS220/Objects/Mechs/righthandfinal.rsi
+        state: basichydraulic
+      - map: [ "enum.ColorableVisualLayer.CustomColor" ]
+        sprite: SS220/Objects/Mechs/righthandfinal.rsi
+        state: basichydrauliccolor
   - type: Appearance
   - type: ContainerContainer
     containers:
@@ -111,6 +156,90 @@
   - type: Construction
     graph: MechRightArm
     node: rightarmframehydraulic
+    containers:
+    - part-container
+  - type: Pullable
+
+- type: entity
+  id: MechLeftArmBase
+  name: mech left arm base
+  description: A magnificently universal device - the connection port. All the possibilities begin here.
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Dynamic
+    fixedRotation: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 100
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+        restitution: 0.3
+        friction: 0.2
+  - type: Sprite
+    layers:
+      - map: [ "enum.ColorableVisualLayer.CustomBase" ]
+        sprite: SS220/Objects/Mechs/lefthandfinal.rsi
+        state: basichydraulic
+      - map: [ "enum.ColorableVisualLayer.CustomColor" ]
+        sprite: SS220/Objects/Mechs/lefthandfinal.rsi
+        state: basichydrauliccolor
+  - type: Appearance
+  - type: ContainerContainer
+    containers:
+      part-container: !type:Container
+  - type: Construction
+    graph: MechLeftArm
+    node: leftarmbase
+    containers:
+    - part-container
+  - type: Pullable
+
+- type: entity
+  id: MechLeftArmFrameHydraulic
+  name: mech left arm frame
+  description: A 'skeleton' of large arm of a machine. This one is fitted to use hydraulic pistons as drives.
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Dynamic
+    fixedRotation: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 100
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+        restitution: 0.3
+        friction: 0.2
+  - type: Sprite
+    layers:
+      - map: [ "enum.ColorableVisualLayer.CustomBase" ]
+        sprite: SS220/Objects/Mechs/lefthandfinal.rsi
+        state: basichydraulic
+      - map: [ "enum.ColorableVisualLayer.CustomColor" ]
+        sprite: SS220/Objects/Mechs/lefthandfinal.rsi
+        state: basichydrauliccolor
+  - type: Appearance
+  - type: ContainerContainer
+    containers:
+      part-container: !type:Container
+  - type: Construction
+    graph: MechLeftArm
+    node: leftarmframehydraulic
     containers:
     - part-container
   - type: Pullable

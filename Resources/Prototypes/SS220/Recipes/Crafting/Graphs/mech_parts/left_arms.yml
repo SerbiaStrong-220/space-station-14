@@ -1,19 +1,19 @@
 - type: constructionGraph
-  id: MechRightArm
+  id: MechLeftArm
   start: start
   graph:
     - node: start
       edges:
-        - to: rightarmbase
+        - to: leftarmbase
           steps:
             - material: Steel
               amount: 15
               doAfter: 15
               store: part-container
-    - node: rightarmbase
-      entity: MechRightArmFrame
+    - node: leftarmbase
+      entity: MechLeftArmFrame
       edges:
-        - to: rightarmframehydraulic
+        - to: leftarmframehydraulic
           steps:
             - tag: HydraulicPiston
               doAfter: 5
@@ -60,10 +60,10 @@
               doAfter: 10
             - tool: Screwing
               doAfter: 15
-    - node: rightarmframehydraulic
-      entity: MechRightArmFrameHydraulic
+    - node: leftarmframehydraulic
+      entity: MechLeftArmFrameHydraulic
       edges:
-        - to: rightarmhydraulic
+        - to: leftarmhydraulic
           steps:
             - tag: HydraulicPiston
               doAfter: 5
@@ -97,7 +97,7 @@
               store: part-container
             - tool: Screwing
               doAfter: 5
-        - to: rightarmhydraulicdrill
+        - to: leftarmhydraulicdrill
           steps:
             - tag: MechDrill
               doAfter: 5
@@ -132,7 +132,7 @@
               store: part-container
             - tool: Screwing
               doAfter: 5
-    - node: rightarmhydraulic
-      entity: HydraulicRightArm
-    - node: rightarmhydraulicdrill
-      entity: DrillRightArm
+    - node: leftarmhydraulic
+      entity: HydraulicLeftArm
+    - node: leftarmhydraulicdrill
+      entity: DrillLeftArm

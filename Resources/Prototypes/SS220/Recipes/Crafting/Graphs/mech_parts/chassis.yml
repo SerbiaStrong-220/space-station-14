@@ -1,0 +1,93 @@
+- type: constructionGraph
+  id: MechChassis
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: hydraulicchassisframe
+          steps:
+            - material: Steel
+              amount: 30
+              doAfter: 30
+              store: part-container
+    - node: hydraulicchassisframe
+      entity: BasicHydraulicChassisFrame
+      edges:
+        - to: basichydraulicchassis
+          steps:
+            - material: Steel
+              amount: 30
+              doAfter: 30
+              store: part-container
+            - tool: Welding
+              doAfter: 15
+            - material: Cable
+              amount: 30
+              doAfter: 15
+              store: part-container
+            - tag: PowerSupplyUnitLarge
+            - tool: Screwing
+              doAfter: 5
+            - tag: HydraulicsControlElectronics
+            - tool: Screwing
+              doAfter: 5
+            - material: Cable
+              amount: 15
+              doAfter: 10
+              store: part-container
+            - tool: Screwing
+              doAfter: 15
+            - tag: HydraulicPiston
+              doAfter: 5
+              store: part-container
+            - tool: Anchoring
+              doAfter: 5
+            - material: Cable
+              amount: 5
+              doAfter: 5
+              store: part-container
+            - tool: Screwing
+              doAfter: 5
+            - tag: HydraulicPiston
+              doAfter: 5
+              store: part-container
+            - tool: Anchoring
+              doAfter: 5
+            - material: Cable
+              amount: 5
+              doAfter: 5
+              store: part-container
+            - tool: Screwing
+              doAfter: 5
+            - tag: HydraulicPiston
+              doAfter: 5
+              store: part-container
+            - tool: Anchoring
+              doAfter: 5
+            - material: Cable
+              amount: 5
+              doAfter: 5
+              store: part-container
+            - tool: Screwing
+              doAfter: 5
+            - tag: HydraulicPiston
+              doAfter: 5
+              store: part-container
+            - tool: Anchoring
+              doAfter: 5
+            - material: Cable
+              amount: 5
+              doAfter: 5
+              store: part-container
+            - tool: Screwing
+              doAfter: 5
+            - material: Steel
+              amount: 15
+              doAfter: 10
+              store: part-container
+            - tool: Welding
+              doAfter: 10
+            - tool: Screwing
+              doAfter: 15
+    - node: basichydraulicchassis
+      entity: PowerloaderChassis

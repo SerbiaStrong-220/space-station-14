@@ -193,7 +193,7 @@
   id: DrillRightArm
   parent: BaseMechRightArm
   name: integrated industrial drill manipulator (right)
-  description: A manipulator with an industrial drill mounted to it. This one is designed to be installed in mech's right arm slot
+  description: A hydraulic manipulator with an industrial drill mounted on it. This one is designed to be installed in mech's right arm slot
   components:
   - type: Sprite
     sprite: Objects/Specific/Mech/mecha_equipment.rsi
@@ -220,6 +220,11 @@
     attachedSprite:
       sprite: SS220/Objects/Mechs/righthand.rsi
       state: hydraulicdrill
+  - type: Construction
+    graph: MechRightArm
+    node: rightarmhydraulicdrill
+    containers:
+    - part-container
   - type: Destructible
     thresholds:
     - trigger:

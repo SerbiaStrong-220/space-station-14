@@ -26,9 +26,17 @@
               doAfter: 15
               store: part-container
             - tag: PowerSupplyUnitLarge
+              name: construction-graph-tag-power-supply-unit-large
+              icon:
+                sprite: Objects/Fun/bikehorn.rsi
+                state: icon
             - tool: Screwing
               doAfter: 5
             - tag: DimensionalElectronics
+              name: construction-graph-tag-dimensional-electronics
+              icon:
+                sprite: Objects/Fun/bikehorn.rsi
+                state: icon
             - tool: Screwing
               doAfter: 5
             - tag: PowerSupplyElectronics

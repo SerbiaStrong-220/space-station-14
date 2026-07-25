@@ -3,6 +3,33 @@
   name: construction-recipe-powerloader
   graph: PowerloaderFrame
   startNode: start
-  targetNode: powerloaderframe
+  targetNode: powerloader
+  category: construction-category-storage
+  objectType: Structure
+
+- type: construction
+  id: MechChassis
+  name: construction-recipe-mech-chassis
+  graph: MechChassis
+  startNode: start
+  targetNode: basichydraulicchassis
+  category: construction-category-storage
+  objectType: Structure
+
+- type: construction
+  id: MechRightArm
+  name: construction-recipe-mech-right-arm
+  graph: MechRightArm
+  startNode: start
+  targetNode: rightarmframehydraulic
+  category: construction-category-storage
+  objectType: Structure
+
+- type: construction
+  id: MechLeftArm
+  name: construction-recipe-mech-left-arm
+  graph: MechLeftArm
+  startNode: start
+  targetNode: leftarmframehydraulic
   category: construction-category-storage
   objectType: Structure

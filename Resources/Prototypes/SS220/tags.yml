@@ -178,7 +178,7 @@
 - type: Tag
   id: ThrusterShuntingMachineCircuitboard
 
-# mech-overhaul-circuitboards
+# mech-overhaul-components
 - type: Tag
   id: PowerSupplyElectronics
 
@@ -199,6 +199,9 @@
 
 - type: Tag
   id: PowerSupplyUnitLarge
+
+- type: Tag
+  id: HydraulicPump
 
 - type: Tag
   id: ServoMotor

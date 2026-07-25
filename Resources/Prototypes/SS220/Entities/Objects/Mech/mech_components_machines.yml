@@ -1,0 +1,65 @@
+- type: entity
+  id: PowerSupplyUnit
+  parent: BaseElectronics
+  name: PSU
+  description: A device that edits the voltage of incoming direct current, providing suitable voltage for various internal systems.
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/Mechs/mech_components_machines.rsi
+      state: psu
+    - type: Tag
+      tags:
+      - PowerSupplyUnit
+
+- type: entity
+  id: PowerSupplyUnitLarge
+  parent: BaseElectronics
+  name: large PSU
+  description: A device that edits the voltage of incoming direct current, providing suitable voltage for various internal systems. This one is rated for 10 kW max output.
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/Mechs/mech_components_machines.rsi
+      state: large_psu
+    - type: Tag
+      tags:
+      - PowerSupplyUnitLarge
+
+- type: entity
+  id: HydraulicPump
+  parent: BaseElectronics
+  name: hydraulic pump
+  description: It is surprisingly a pump.
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/Mechs/mech_components_machines.rsi
+      state: hydraulic_pump
+    - type: Tag
+      tags:
+      - HydraulicPump
+
+- type: entity
+  id: HydraulicPiston
+  parent: BaseElectronics
+  name: hydraulic piston
+  description: Classic hydraulic piston, nothing more and nothing less.
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/Mechs/mech_components_machines.rsi
+      state: hydraulic_piston_black
+    - type: Tag
+      tags:
+      - HydraulicPiston
+
+- type: entity
+  id: HydraulicClamp
+  parent: BaseElectronics
+  name: hydraulic clamp
+  description: Two "jaws", joint and a covered doubledirectional hydraulic piston. A simple yet reliable design.
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/Mechs/mech_components_machines.rsi
+      state: hydraulic_clamp
+    - type: Tag
+      tags:
+      - HydraulicPump
+

@@ -7,6 +7,11 @@
   - type: Sprite
     sprite: Objects/Specific/Mech/mecha_equipment.rsi
     state: mecha_drill
+  - type: Construction
+    graph: MechLeftArm
+    node: leftarmhydraulicdrill
+    containers:
+    - part-container
   - type: MechArm
     hands:
     - hand:
@@ -103,6 +108,11 @@
         sprite: SS220/Objects/Mechs/lefthandfinal.rsi
         state: basichydrauliccolor
   - type: CustomColorableLayer
+  - type: Construction
+    graph: MechLeftArm
+    node: leftarmhydraulic
+    containers:
+    - part-container
   - type: MechArm
     hands:
     - hand:
