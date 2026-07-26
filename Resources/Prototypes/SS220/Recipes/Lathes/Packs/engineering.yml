@@ -17,3 +17,13 @@
   - ServoControlElectronics
   - OpticalProcessorElectronics
   - DimensionalOrientationElectronics
+
+- type: latheRecipePack
+  id: MechModules
+  recipes:
+  - ShoulderReinforcement
+  - FrameReinforcementMechMod
+  - CompositeFrameMechMod
+  - MagneticPadMechMod
+  - JetpackMechModBasic
+

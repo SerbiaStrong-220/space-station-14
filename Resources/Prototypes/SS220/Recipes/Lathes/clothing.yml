@@ -165,3 +165,14 @@
   materials:
     Cloth: 100
     Durathread: 50
+
+- type: latheRecipe
+  id: ClothingOuterExosuit
+  result: ClothingOuterExosuit
+  categories: [ Robotics ]
+  completetime: 10
+  materials:
+    Steel: 2000
+    Plastic: 1000
+    Silver: 1000
+    Gold: 500

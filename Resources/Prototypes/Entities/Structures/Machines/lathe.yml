@@ -348,8 +348,8 @@
     dynamicPacks:
     - Robotics
     - BorgModules
-    - MechParts
-    - MechEquipment
+    - MechModules #SS220 mech overhaul
+    - Exosuits #SS220 mech overhaul
   - type: MaterialStorage
     whitelist: *StandardMaterialWhitelist
   # SS220 Add access check for material eject begin

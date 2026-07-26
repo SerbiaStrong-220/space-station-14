@@ -15,3 +15,20 @@
   - HydraulicPiston
   - ServoLarge
   - HydraulicPump
+
+- type: technology
+  id: MechModules
+  name: research-technology-robotech-modifications
+  icon:
+    sprite: SS220/Objects/Mechs/mech_components_machines.rsi
+    state: large_psu
+  discipline: Industrial
+  tier: 2
+  cost: 13000
+  recipeUnlocks:
+  - ShoulderReinforcement
+  - FrameReinforcementMechMod
+  - CompositeFrameMechMod
+  - MagneticPadMechMod
+  - JetpackMechModBasic
+

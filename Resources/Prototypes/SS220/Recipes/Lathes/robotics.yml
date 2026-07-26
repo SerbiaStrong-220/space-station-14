@@ -128,3 +128,51 @@
     Plastic: 500
     Gold: 200
     Silver: 200
+
+- type: latheRecipe
+  id: ShoulderReinforcement
+  result: ShoulderReinforcement
+  categories: [ Robotics ]
+  completetime: 10
+  materials:
+    Plastic: 1000
+
+- type: latheRecipe
+  id: FrameReinforcementMechMod
+  result: FrameReinforcementMechMod
+  categories: [ Robotics ]
+  completetime: 10
+  materials:
+    Plasteel: 1000
+
+- type: latheRecipe
+  id: CompositeFrameMechMod
+  result: CompositeFrameMechMod
+  categories: [ Robotics ]
+  completetime: 10
+  materials:
+    Plastic: 500
+    Plasma: 300
+
+- type: latheRecipe
+  id: MagneticPadMechMod
+  result: MagneticPadMechMod
+  categories: [ Robotics ]
+  completetime: 10
+  materials:
+    Steel: 500
+    Plastic: 500
+    Gold: 300
+    Silver: 200
+
+- type: latheRecipe
+  id: JetpackMechModBasic
+  result: JetpackMechModBasic
+  categories: [ Robotics ]
+  completetime: 10
+  materials:
+    Steel: 700
+    Plastic: 200
+    Plasma: 300
+    Silver: 200
+

@@ -26,3 +26,15 @@
   - ServoControlElectronics
   - OpticalProcessorElectronics
   - DimensionalOrientationElectronics
+
+- type: technology
+  id: IndustrialExosuit
+  name: research-technology-industrial-exosuit
+  icon:
+    sprite: SS220/Clothing/OuterClothing/Misc/industrial_exosuit.rsi
+    state: icon
+  discipline: Experimental
+  tier: 1
+  cost: 6500
+  recipeUnlocks:
+  - ClothingOuterExosuit

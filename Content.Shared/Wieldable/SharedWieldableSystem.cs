@@ -44,7 +44,6 @@ public abstract class SharedWieldableSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
     [Dependency] private readonly UseDelaySystem _delay = default!;
-    [Dependency] private ItemExtensionSystem _itemExt = default!;//SS220 add physical parameters
 
     public override void Initialize()
     {
