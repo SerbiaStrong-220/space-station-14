@@ -12,19 +12,6 @@
       - ServoMotor
 
 - type: entity
-  id: HydraulicPiston
-  parent: BaseElectronics
-  name: hydraulic piston
-  description: An extremely simple yet still effective device - dual-direction hydraulic piston.
-  components:
-    - type: Sprite
-      sprite: Objects/Misc/module.rsi
-      state: id_mod
-    - type: Tag
-      tags:
-      - HydraulicPiston
-
-- type: entity
   id: ArtificialMuscle
   parent: BaseElectronics
   name: artificial muscle
