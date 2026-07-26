@@ -12,3 +12,119 @@
   parent: BaseGoldBorgModuleRecipe
   id: BorgModuleFireAxe
   result: BorgModuleFireAxe
+
+- type: latheRecipe
+  id: PowerSupplyUnit
+  result: PowerSupplyUnit
+  categories: [ Robotics ]
+  completetime: 3
+  materials:
+    Steel: 600
+    Glass: 600
+    Silver: 100
+    Gold: 100
+
+- type: latheRecipe
+  id: PowerSupplyUnitLarge
+  result: PowerSupplyUnitLarge
+  categories: [ Robotics ]
+  completetime: 3
+  materials:
+    Steel: 800
+    Glass: 800
+    Silver: 300
+    Gold: 300
+
+- type: latheRecipe
+  id: HydraulicPump
+  result: HydraulicPump
+  categories: [ Robotics ]
+  completetime: 3
+  materials:
+    Steel: 1500
+
+- type: latheRecipe
+  id: ServoLarge
+  result: ServoLarge
+  categories: [ Robotics ]
+  completetime: 3
+  materials:
+    Steel: 700
+    Gold: 500
+    Plastic: 1000
+
+- type: latheRecipe
+  id: MechDrill
+  result: MechDrill
+  categories: [ Robotics ]
+  completetime: 3
+  materials:
+    Steel: 1200
+
+- type: latheRecipe
+  id: HydraulicPiston
+  result: HydraulicPiston
+  categories: [ Robotics ]
+  completetime: 3
+  materials:
+    Steel: 1100
+
+- type: latheRecipe
+  id: HydraulicClamp
+  result: HydraulicClamp
+  categories: [ Robotics ]
+  completetime: 3
+  materials:
+    Steel: 1000
+    Gold: 200
+    Silver: 200
+
+- type: latheRecipe
+  id: PowerSupplyElectronics
+  result: PowerSupplyElectronics
+  categories: [ Robotics ]
+  completetime: 3
+  materials:
+    Plastic: 500
+    Gold: 200
+    Silver: 200
+
+- type: latheRecipe
+  id: HydraulicsControlElectronics
+  result: HydraulicsControlElectronics
+  categories: [ Robotics ]
+  completetime: 3
+  materials:
+    Plastic: 500
+    Gold: 200
+    Silver: 200
+
+- type: latheRecipe
+  id: ServoControlElectronics
+  result: ServoControlElectronics
+  categories: [ Robotics ]
+  completetime: 3
+  materials:
+    Plastic: 500
+    Gold: 200
+    Silver: 200
+
+- type: latheRecipe
+  id: OpticalProcessorElectronics
+  result: OpticalProcessorElectronics
+  categories: [ Robotics ]
+  completetime: 3
+  materials:
+    Plastic: 500
+    Gold: 200
+    Silver: 200
+
+- type: latheRecipe
+  id: DimensionalOrientationElectronics
+  result: DimensionalOrientationElectronics
+  categories: [ Robotics ]
+  completetime: 3
+  materials:
+    Plastic: 500
+    Gold: 200
+    Silver: 200

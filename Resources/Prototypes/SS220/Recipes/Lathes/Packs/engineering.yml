@@ -1,0 +1,19 @@
+- type: latheRecipePack
+  id: Robotech
+  recipes:
+  - PowerSupplyUnit
+  - PowerSupplyUnitLarge
+  - MechDrill
+  - HydraulicClamp
+  - HydraulicPiston
+  - ServoLarge
+  - HydraulicPump
+
+- type: latheRecipePack
+  id: RobotechBoards
+  recipes:
+  - PowerSupplyElectronics
+  - HydraulicsControlElectronics
+  - ServoControlElectronics
+  - OpticalProcessorElectronics
+  - DimensionalOrientationElectronics

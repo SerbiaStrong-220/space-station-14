@@ -12,6 +12,12 @@
         },
         {
             "name": "basichydrauliccolor"
+        },
+        {
+            "name": "hydraulicdrill"
+        },
+        {
+            "name": "hydraulicdrillcolor"
         }
     ]
 }

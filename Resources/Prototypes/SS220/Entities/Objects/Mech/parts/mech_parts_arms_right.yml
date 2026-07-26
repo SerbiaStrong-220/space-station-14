@@ -190,8 +190,13 @@
   description: A hydraulic manipulator with an industrial drill mounted on it. This one is designed to be installed in mech's right arm slot
   components:
   - type: Sprite
-    sprite: Objects/Specific/Mech/mecha_equipment.rsi
-    state: mecha_drill
+    layers:
+      - map: [ "enum.ColorableVisualLayer.CustomBase" ]
+        sprite: SS220/Objects/Mechs/righthandicons.rsi
+        state: hydraulicdrill
+      - map: [ "enum.ColorableVisualLayer.CustomColor" ]
+        sprite: SS220/Objects/Mechs/righthandicons.rsi
+        state: hydraulicdrillcolor
   - type: MechArm
     hands:
     - hand:
@@ -201,13 +206,17 @@
           sizes:
           - Ginormous
       item: MechMiningDrill
+  - type: CustomColorableLayer
   - type: MechPart
     integrity: 150
     maxIntegrity: 150
     ownMass: 175
     attachedSprite:
-      sprite: SS220/Objects/Mechs/righthand.rsi
+      sprite: SS220/Objects/Mechs/righthandfinal.rsi
       state: hydraulicdrill
+    attachedColoredSprite:
+      sprite: SS220/Objects/Mechs/righthandfinal.rsi
+      state: hydraulicdrillcolor
   - type: Construction
     graph: MechRightArm
     node: rightarmhydraulicdrill

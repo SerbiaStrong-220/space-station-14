@@ -1,0 +1,17 @@
+- type: technology
+  id: BasicRobotechComponents
+  name: research-technology-robotech-components
+  icon:
+    sprite: SS220/Objects/Mechs/mech_components_machines.rsi
+    state: hydraulic_clamp
+  discipline: Industrial
+  tier: 1
+  cost: 11000
+  recipeUnlocks:
+  - PowerSupplyUnit
+  - PowerSupplyUnitLarge
+  - MechDrill
+  - HydraulicClamp
+  - HydraulicPiston
+  - ServoLarge
+  - HydraulicPump

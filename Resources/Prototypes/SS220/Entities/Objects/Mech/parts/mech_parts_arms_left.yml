@@ -5,13 +5,19 @@
   description: A manipulator with an industrial drill mounted to it. This one is designed to be installed in mech's left arm slot
   components:
   - type: Sprite
-    sprite: Objects/Specific/Mech/mecha_equipment.rsi
-    state: mecha_drill
+    layers:
+      - map: [ "enum.ColorableVisualLayer.CustomBase" ]
+        sprite: SS220/Objects/Mechs/lefthandicons.rsi
+        state: hydraulicdrill
+      - map: [ "enum.ColorableVisualLayer.CustomColor" ]
+        sprite: SS220/Objects/Mechs/lefthandicons.rsi
+        state: hydraulicdrillcolor
   - type: Construction
     graph: MechLeftArm
     node: leftarmhydraulicdrill
     containers:
     - part-container
+  - type: CustomColorableLayer
   - type: MechArm
     hands:
     - hand:
@@ -26,8 +32,11 @@
     maxIntegrity: 150
     ownMass: 175
     attachedSprite:
-      sprite: SS220/Objects/Mechs/lefthand.rsi
+      sprite: SS220/Objects/Mechs/lefthandfinal.rsi
       state: hydraulicdrill
+    attachedColoredSprite:
+      sprite: SS220/Objects/Mechs/lefthandfinal.rsi
+      state: hydraulicdrillcolor
   - type: Destructible
     thresholds:
     - trigger:

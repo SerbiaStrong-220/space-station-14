@@ -234,6 +234,7 @@
     - Janitor
     - Instruments
     - Equipment
+    - Robotech #SS220 mech overhaul
   - type: EmagLatheRecipes
     emagDynamicPacks:
     - SecurityAmmo
@@ -290,6 +291,7 @@
     - CameraBoards
     - MechBoards
     - ShuttleBoards
+    - RobotechBoards #SS220 mech overhaul
   - type: EmagLatheRecipes
     emagDynamicPacks:
     - SecurityBoards
