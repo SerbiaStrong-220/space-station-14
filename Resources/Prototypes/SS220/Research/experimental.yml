@@ -21,10 +21,8 @@
   tier: 1
   cost: 11000
   recipeUnlocks:
-  - PowerSupplyUnit
-  - PowerSupplyUnitLarge
-  - MechDrill
-  - HydraulicClamp
-  - HydraulicPiston
-  - ServoLarge
-  - HydraulicPump
+  - PowerSupplyElectronics
+  - HydraulicsControlElectronics
+  - ServoControlElectronics
+  - OpticalProcessorElectronics
+  - DimensionalOrientationElectronics
