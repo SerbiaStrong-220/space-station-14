@@ -121,3 +121,72 @@
         - id: FoodSnackNutribrick
         - id: ClothingMaskBreath
         - id: CombatMedipen
+
+- type: entity
+  parent: BoxSurvival
+  id: BoxSurvivalIpc
+  name: survival box ipc
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WelderMini
+        - id: PowerCellSmall
+        - id: Flare
+        - id: CrowbarRed
+
+- type: entity
+  parent: BoxSurvival
+  id: BoxSurvivalSecurityIpc
+  name: survival box security ipc
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WelderMini
+        - id: PowerCellMedium
+        - id: Flare
+        - id: CrowbarRed
+
+- type: entity
+  parent: BoxSurvivalIpc
+  id: BoxSurvivalClownIpc
+  name: survival box clown ipc
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WhoopieCushion
+        - id: WelderMini
+        - id: PowerCellSmall
+        - id: Flare
+        - id: CrowbarRed
+
+- type: entity
+  parent: BoxSurvivalIpc
+  id: BoxSurvivalMimeIpc
+  name: survival box mime ipc
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: FoodBreadNutriBatard
+        - id: WelderMini
+        - id: PowerCellSmall
+        - id: Flare
+        - id: CrowbarRed
+
+- type: entity
+  parent: BoxSurvivalIpc
+  id: BoxSurvivalMedicalIpc
+  name: survival box ipc
+
+- type: entity
+  parent: BoxSurvivalSecurityIpc
+  id: BoxSurvivalEngineerIpc
+  name: survival box engineer ipc
+

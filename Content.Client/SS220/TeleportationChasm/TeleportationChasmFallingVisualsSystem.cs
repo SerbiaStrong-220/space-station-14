@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.Chasm;
 using Content.Shared.SS220.TeleportationChasm;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
@@ -15,7 +14,6 @@ public sealed partial class TeleportationChasmFallingVisualsSystem : EntitySyste
 {
     [Dependency] private AnimationPlayerSystem _anim = default!;
     [Dependency] private SpriteSystem _sprite = default!;
-
     private readonly string _chasmFallAnimationKey = "chasm_fall";
 
     public override void Initialize()

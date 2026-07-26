@@ -86,8 +86,9 @@
   name: loadout-group-ntr-head
   minLimit: 0
   loadouts:
-  - MagistratePwig
-  - MagistrateStreetJudge
+  - NanoTrasenRepresentativeCap
+  - NanoTrasenRepresentativeTophat
+  - NanoTrasenOfficerBeret
 
 - type: loadoutGroup
   id: NanoTrasenRepresentativeEyes
@@ -101,25 +102,11 @@
   - MagistrateMonocle
 
 - type: loadoutGroup
-  id: NanoTrasenRepresentativeNeck
-  name: loadout-group-ntr-neck
-  minLimit: 0
-  loadouts:
-  - LawyerNeck
-  - CloakJujutsuShlepa
-
-- type: loadoutGroup
   id: NanoTrasenRepresentativeJumpsuit
   name: loadout-group-ntr-jumpsuit
   minLimit: 1
   loadouts:
   - JumpsuitNTR
-  - LawyerJumpsuitRed
-  - LawyerJumpskirtRed
-  - LawyerJumpsuitGood
-  - LawyerJumpskirtGood
-  - JumpsuitTrustedLawyer
-  - JumpsuitJujutsuShlepa
 
 - type: loadoutGroup
   id: NanoTrasenRepresentativeBackpacks
@@ -140,8 +127,9 @@
   name: loadout-group-ntr-outerclothing
   minLimit: 0
   loadouts:
-  - MagistrateRobesJudge
-  - OuterClothingJujutsuShlepa
+  - NanoTrasenRepresentativeTrench
+  - NanoTrasenRepresentativeFormalCoat
+  - NanoTrasenRepresentativeFormalDress
 
 - type: loadoutGroup
   id: NanoTrasenRepresentativeHeadset
@@ -150,6 +138,14 @@
   loadouts:
   - NanoTrasenRepresentativeHeadset
   - NanoTrasenRepresentativeHeadsetAlt
+
+- type: loadoutGroup
+  id: NanoTrasenRepresentativeGloves
+  name: loadout-group-gloves
+  loadouts:
+  - GlovesWhite
+  - GlovesGray
+  - GlovesBlack
 
   # Магистрат
 - type: loadoutGroup
