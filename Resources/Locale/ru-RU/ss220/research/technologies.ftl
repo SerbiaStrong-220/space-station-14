@@ -8,3 +8,7 @@ research-technology-energy-transformer = Полеобразователь эне
 research-technology-heavy-ballistics = Крупнокалиберное баллистическое вооружение
 research-clothing-eyes-hud-medichem = Адаптивная оптохемодинамика 
 research-technology-automated-defence-systems = Автоматические системы защиты
+research-technology-robotech-components = Базовые технологические компоненты
+research-technology-robotech-circutry = Базовая компьютерная техника
+research-technology-industrial-exosuit = Промышленный экзокостюм
+research-technology-robotech-modifications = Модификации крупной техники

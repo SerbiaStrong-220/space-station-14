@@ -972,3 +972,8 @@ public enum MechPartVisualLayers : byte
     Power = 10,
     PowerColored = 11
 }
+
+public enum MechCameraVisualLayer : byte
+{
+    Camera = 0
+}

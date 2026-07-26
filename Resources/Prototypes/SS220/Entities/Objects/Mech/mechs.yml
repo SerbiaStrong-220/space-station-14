@@ -9,7 +9,6 @@
   - type: MechPart
   - type: ComplexInteraction
   - type: StatusEffectContainer
-  - type: MobMover
   - type: ArmorBlock
   - type: Stripping
   - type: Sprite
@@ -29,8 +28,16 @@
         visible: true
       - map: [ "enum.MechPartVisualLayers.Head" ]
         visible: false
+        sprite: SS220/Objects/Mechs/heads.rsi
+        state: basicloader
       - map: [ "enum.MechPartVisualLayers.HeadColored" ]
         visible: false
+        sprite: SS220/Objects/Mechs/heads.rsi
+        state: basicloadercolor
+      - map: [ "enum.MechCameraVisualLayer.Camera" ]
+        visible: false
+        sprite: SS220/Objects/Mechs/heads.rsi
+        state: basicloadercamera
       - map: [ "enum.MechPartVisualLayers.Power" ]
         visible: false
       - map: [ "enum.MechPartVisualLayers.PowerColored" ]
@@ -65,10 +72,11 @@
     lowPressureMultiplier: 1000
   - type: FireProtection
     reduction: 1
-  - type: MobCollision
-    colliding: false
-    strength: 150
-    fixtureId: "flammable"
+  #- type: MobMover #Removed because anybody could move the mech just by colldiding with it
+  #- type: MobCollision
+  #  colliding: false
+  #  strength: 150
+  #  fixtureId: "flammable"
   - type: DoAfter
   - type: UserInterface
     interfaces:
@@ -211,8 +219,6 @@
     baseState: basicloader
     openState: basicloader
     brokenState: basicloader
-    sealable: false
-    transparent: true
     integrity: 250
     maxIntegrity: 250
     maximalArmMass: 250

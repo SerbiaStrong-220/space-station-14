@@ -9,5 +9,6 @@ namespace Content.Shared.SS220.Mech.Parts.Components;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class MechOpticsComponent : Component
 {
-
+    [DataField]
+    public Color CameraLayerColor = Color.Black;
 }

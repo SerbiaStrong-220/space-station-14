@@ -15,26 +15,6 @@
   - ReagentGrinderIndustrialMachineCircuitboard
 
 - type: technology
-  id: CritterMechs
-  name: research-technology-critter-mechs
-  icon:
-    sprite: Objects/Specific/Mech/mecha.rsi
-    state: hamtr
-  discipline: CivilianServices
-  tier: 1
-  cost: 7500
-  recipeUnlocks:
-  - HamtrHarness
-  - HamtrLArm
-  - HamtrRArm
-  - HamtrLLeg
-  - HamtrRLeg
-  - HamtrCentralElectronics
-  - HamtrPeripheralsElectronics
-  - MechEquipmentGrabberSmall
-  - VimHarness
-
-- type: technology
   id: AudioVisualCommunication
   name: research-technology-audio-visual-communication
   icon:
@@ -152,26 +132,6 @@
   - TrashBagAdvanced #SS220 Borg Modules
   - MegaSprayBottle
   - BorgModuleAdvancedCleaning
-
-- type: technology
-  id: HONKMech
-  name: research-technology-honk-mech
-  icon:
-    sprite: Objects/Specific/Mech/mecha.rsi
-    state: honker
-  discipline: CivilianServices
-  tier: 2
-  cost: 7500
-  recipeUnlocks:
-  - HonkerHarness
-  - HonkerLArm
-  - HonkerRArm
-  - HonkerLLeg
-  - HonkerRLeg
-  - HonkerCentralElectronics
-  - HonkerPeripheralsElectronics
-  - HonkerTargetingElectronics
-  - MechEquipmentHorn
 
 - type: technology
   id: AdvancedSpray

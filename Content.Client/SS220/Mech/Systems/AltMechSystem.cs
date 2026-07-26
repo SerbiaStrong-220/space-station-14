@@ -15,6 +15,7 @@ using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
+using Robust.Shared.Utility;
 using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 
 namespace Content.Client.SS220.Mech;
@@ -196,22 +197,41 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         if (!TryComp<MechPartComponent>(localPart, out var partComp))
             return;
 
+        SpriteSpecifier? spriteToAdd = partComp.AttachedSprite;
+
+        SpriteSpecifier? coloredSpriteToAdd = partComp.AttachedColoredSprite;
+
+        if (partComp.slot == "head")
+        {
+            _sprite.LayerSetVisible((localMechValidated, spriteComp), mechComp.AttachedHeadSpriteLayer, args.Attached);
+            _sprite.LayerSetVisible((localMechValidated, spriteComp), mechComp.AttachedHeadColoredSpriteLayer, args.Attached);
+            _sprite.LayerSetVisible((localMechValidated, spriteComp), mechComp.CameraVisLayer, args.Attached);
+
+            _sprite.LayerSetColor((localMechValidated, spriteComp), mechComp.AttachedHeadColoredSpriteLayer, partComp.ColoredSpriteColor);
+
+            if (TryComp<MechOpticsComponent>(localPart, out var opticsComp))
+                _sprite.LayerSetColor((localMechValidated, spriteComp), mechComp.CameraVisLayer, opticsComp.CameraLayerColor);
+
+            return;
+        }
+
         if (_sprite.LayerMapTryGet((localMechValidated, spriteComp), partsVisuals[partComp.slot], out var layer, true))
         {
             _sprite.LayerSetVisible((localMechValidated, spriteComp), layer, args.Attached);
             if (args.Attached)
             {
-                if (partComp.AttachedSprite != null)
-                    _sprite.LayerSetSprite((localMechValidated, spriteComp), layer, partComp.AttachedSprite);
+                if (spriteToAdd != null)
+                    _sprite.LayerSetSprite((localMechValidated, spriteComp), layer, spriteToAdd);
             }
         }
-        if (partComp.AttachedColoredSprite != null && _sprite.LayerMapTryGet((localMechValidated, spriteComp), partsVisuals[partComp.slot] + 1, out var layerColored, true))
+
+        if (coloredSpriteToAdd != null && _sprite.LayerMapTryGet((localMechValidated, spriteComp), partsVisuals[partComp.slot] + 1, out var layerColored, true))
         {
             _sprite.LayerSetVisible((localMechValidated, spriteComp), layerColored, args.Attached);
             if (args.Attached)
             {
-                if (partComp.AttachedColoredSprite != null)
-                    _sprite.LayerSetSprite((localMechValidated, spriteComp), layerColored, partComp.AttachedColoredSprite);
+                if (coloredSpriteToAdd != null)
+                    _sprite.LayerSetSprite((localMechValidated, spriteComp), layerColored, coloredSpriteToAdd);
 
                 _sprite.LayerSetColor((localMechValidated, spriteComp), layerColored, partComp.ColoredSpriteColor);
             }

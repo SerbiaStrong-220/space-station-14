@@ -1,42 +1,22 @@
 {
-  "version": 1,
-  "license": "CC-BY-SA-3.0",
-  "copyright": "Made by alliedsmartgunofficial (discord)",
-  "size": {
-    "x": 32,
-    "y": 32
-  },
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Made by PorteRianes https://github.com/PorteRianes",
+    "size": {
+        "x": 64,
+        "y": 64
+    },
     "states": [
         {
-            "name": "welding",
+            "name": "basicloader",
             "directions": 4
         },
         {
-            "name": "medical",
+            "name": "basicloadercolor",
             "directions": 4
         },
         {
-            "name": "thermal",
-            "directions": 4
-        },
-        {
-            "name": "armored",
-            "directions": 4
-        },
-        {
-            "name": "armoredsyndie",
-            "directions": 4
-        },
-        {
-            "name": "armoredsyndieheavy",
-            "directions": 4
-        },
-        {
-            "name": "armoredsyndiemedical",
-            "directions": 4
-        },
-        {
-            "name": "advancedarmored",
+            "name": "basicloadercamera",
             "directions": 4
         }
     ]

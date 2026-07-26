@@ -114,8 +114,16 @@ public sealed partial class AltMechComponent : Component
     public ContainerSlot TankSlot = default!;
 
     [DataField]
-    [AutoNetworkedField]
     public MechPartVisualLayers AttachedColoredSpriteLayer = MechPartVisualLayers.CoreColored;
+
+    [DataField]
+    public MechPartVisualLayers AttachedHeadSpriteLayer = MechPartVisualLayers.Head;
+
+    [DataField]
+    public MechPartVisualLayers AttachedHeadColoredSpriteLayer = MechPartVisualLayers.HeadColored;
+
+    [DataField]
+    public MechCameraVisualLayer CameraVisLayer = MechCameraVisualLayer.Camera;
 
     [DataField]
     [AutoNetworkedField]
@@ -146,7 +154,7 @@ public sealed partial class AltMechComponent : Component
     public Dictionary<string, ContainerSlot> ContainerDict = new Dictionary<string, ContainerSlot>();
 
     [ViewVariables(VVAccess.ReadWrite)]
-    public List<string> ContainersToCreate = new List<string>{ "head", "right-arm", "left-arm", "chassis", "power" };
+    public List<string> ContainersToCreate = new List<string> { "head", "right-arm", "left-arm", "chassis", "power" };
 
     [DataField]
     [ViewVariables(VVAccess.ReadWrite)]
