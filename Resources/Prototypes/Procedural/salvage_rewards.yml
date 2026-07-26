@@ -40,7 +40,7 @@
     Katana: 0.25
     KukriKnife: 0.25
     WeaponLaserGun: 0.25
-    MakeshiftShield: 0.25
+    MakeshiftShieldAlt: 0.25 #SS220 shield rework
     # rare armor
     ClothingHeadHelmetSwat: 0.25
     ClothingOuterArmorBasicSlim: 0.25

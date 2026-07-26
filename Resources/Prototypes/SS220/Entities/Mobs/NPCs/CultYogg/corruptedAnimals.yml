@@ -33,7 +33,7 @@
         0: Alive
         120: Dead
     - type: Stamina
-      critThreshold: 100
+      baseCritThreshold: 100
     - type: Butcherable
       willRenameEnt: false
       spawned:
@@ -260,7 +260,7 @@
       0: Alive
       250: Dead
   - type: Stamina
-    critThreshold: 150
+    baseCritThreshold: 150
   - type: MeleeWeapon
     soundHit:
         path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg

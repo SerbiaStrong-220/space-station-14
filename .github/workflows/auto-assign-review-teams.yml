@@ -32,24 +32,15 @@ jobs:
             const owner = context.repo.owner;
             const repo = context.repo.repo;
 
-            console.log(`Processing PR #${prNumber}`);
+            // pr meta request
+            const [{ data: pullRequest }, { data: reviews }] = await Promise.all([
+              github.rest.pulls.get({ owner, repo, pull_number: prNumber }),
+              github.rest.pulls.listReviews({ owner, repo, pull_number: prNumber })
+            ]);
 
-            // I. REQUESTING
+            if (pullRequest.draft) return;
 
-            const { data: pullRequest } = await github.rest.pulls.get({
-              owner,
-              repo,
-              pull_number: prNumber
-            });
-
-            if (pullRequest.draft) {
-              console.log('PR is a draft. Skipping review assignment.');
-              return;
-            }
-
-            const prLabels = pullRequest.labels.map(label => label.name);
-            console.log('Found labels:', prLabels);
-
+            // check pr changes and teams
             const labelTeamMap = {
               'Changes: C#': 'review-code',
               'Changes: Localization': 'review-code',
@@ -61,62 +52,41 @@ jobs:
             };
 
             const potentialTeams = new Set();
-            for (const label of prLabels) {
-              if (labelTeamMap[label]) {
-                potentialTeams.add(labelTeamMap[label]);
+            for (const label of pullRequest.labels) {
+              if (labelTeamMap[label.name]) {
+                potentialTeams.add(labelTeamMap[label.name]);
               }
             }
 
-            if (potentialTeams.size === 0) {
-              console.log('No matching team labels found.');
-              return;
-            }
+            if (potentialTeams.size === 0) return;
 
-            // II. ACTIVE REVIEWERS
-            const currentReviewerLogins = pullRequest.requested_reviewers.map(u => u.login);
-            console.log('Current individual reviewers:', currentReviewerLogins);
+            // create list of all available and active reviewers for pr
+            const requestedReviewers = pullRequest.requested_reviewers.map(u => u.login);
+            const pastReviewers = reviews.map(r => r.user.login);
+            const involvedReviewers = new Set([...requestedReviewers, ...pastReviewers]);
 
             const teamsToActuallyAdd = [];
 
-            // III. DND TEAM IF...
+            // check available to add request team review
             for (const teamSlug of potentialTeams) {
-              console.log(`Checking team: ${teamSlug}...`);
+              const { data: members } = await github.rest.teams.listMembersInOrg({
+                org: owner,
+                team_slug: teamSlug
+              });
 
-              try {
-                const { data: members } = await github.rest.teams.listMembersInOrg({
-                  org: owner,
-                  team_slug: teamSlug
-                });
+              const alreadyHasReviewer = members.some(m => involvedReviewers.has(m.login));
 
-                const memberLogins = members.map(m => m.login);
-
-                const alreadyHasReviewer = memberLogins.some(login => currentReviewerLogins.includes(login));
-
-                if (alreadyHasReviewer) {
-                  console.log(`Skipping team "${teamSlug}".`);
-                } else {
-                  console.log(`Team "${teamSlug}" is valid for assignment.`);
-                  teamsToActuallyAdd.push(teamSlug);
-                }
-
-              } catch (error) {
-                console.error(`Failed to fetch members for team ${teamSlug}. Error: ${error.message}`);
+              if (!alreadyHasReviewer) {
+                teamsToActuallyAdd.push(teamSlug);
               }
             }
 
-            // IV. ADD REVIEW IF...
+            // request team review
             if (teamsToActuallyAdd.length > 0) {
-              try {
-                await github.rest.pulls.requestReviewers({
-                  owner,
-                  repo,
-                  pull_number: prNumber,
-                  team_reviewers: teamsToActuallyAdd
-                });
-                console.log(`Successfully requested review from teams: ${teamsToActuallyAdd.join(', ')}`);
-              } catch (error) {
-                console.error('API Error when requesting reviewers:', error.message);
-              }
-            } else {
-              console.log('No new teams need to be added (all filtered out).');
+              await github.rest.pulls.requestReviewers({
+                owner,
+                repo,
+                pull_number: prNumber,
+                team_reviewers: teamsToActuallyAdd
+              });
             }

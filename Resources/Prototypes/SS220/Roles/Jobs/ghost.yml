@@ -3,6 +3,7 @@
   playTimeTracker: JobGhostRole
   name: Ghost role
   description: Utility job for correct work job ban.
+  experienceDefinition: NoExperience
   setPreference: false
   canBeAntag: true
   dontUseNameForTitles: true

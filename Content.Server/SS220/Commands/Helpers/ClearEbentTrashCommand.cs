@@ -14,7 +14,7 @@ namespace Content.Server.SS220.Commands.Helpers;
 [AdminCommand(AdminFlags.Admin)]
 public sealed partial class ClearEbentTrashCommand : IConsoleCommand
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _entMan = default!;
 
     private static readonly ProtoId<TagPrototype> TrashTag = "Trash";
     private const string MagazineTag = "Magazine";

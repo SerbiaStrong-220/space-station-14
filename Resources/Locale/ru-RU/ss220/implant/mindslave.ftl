@@ -31,8 +31,9 @@ mindslave-notification-window-accept = Понятно
 ent-MindSlaveImplanter = { ent-Implanter }
     .desc = { ent-Implanter.desc }
     .suffix = Подчинитель
-ent-MindSlaveImplant = Подчинитель разума
+ent-MindSlaveImplant = { ent-BaseSubdermalImplant }
     .desc = { ent-BaseSubdermalImplant.desc }
+    .suffix = Подчинитель разума
 
 ent-MindslaveFixerCerebralImplant = конфигуратор имплантов
     .desc = Небольшое устройство, позволяющее произвести более тонкую настройку имплантов. На корпусе расположилось лого "Interdyne pharmaceutics".

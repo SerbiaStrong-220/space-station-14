@@ -1,5 +1,6 @@
 using Content.Shared.Interaction;
 using Content.Shared.Physics;
+using Content.Shared.PowerCell;
 using Content.Shared.PowerCell.Components;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Components;
@@ -17,13 +18,13 @@ namespace Content.Shared.SS220.AirDefense;
 
 public sealed partial class SharedAirDefenseSystem : EntitySystem
 {
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private INetManager _net = default!;
 
     private static readonly EntProtoId EffectEmpPulse = "EffectEmpPulse";
     private const string BulletFixture = "fly-by";
@@ -80,7 +81,7 @@ public sealed partial class SharedAirDefenseSystem : EntitySystem
 
         var targetCoords = Transform(target).Coordinates;
 
-        if (!_gun.AttemptShoot(ent, ent, gun, targetCoords))
+        if (!_gun.AttemptShoot(ent, (ent.Owner, gun), targetCoords))
             return;
 
         RotateToTarget(ent, target);

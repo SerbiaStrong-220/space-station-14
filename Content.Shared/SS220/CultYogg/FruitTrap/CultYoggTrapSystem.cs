@@ -13,10 +13,10 @@ namespace Content.Shared.SS220.CultYogg.FruitTrap;
 /// <summary>
 /// Modified <see cref="TrapSystem"/> for cult traps. All modifications add additional conditions.
 /// </summary>
-public sealed class CultYoggTrapSystem : EntitySystem
+public sealed partial class CultYoggTrapSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedStealthSystem _stealth = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedStealthSystem _stealth = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

@@ -46621,34 +46621,6 @@ entities:
       inSlotFlag: NECK
     - type: Physics
       canCollide: False
-    - type: MindContainer
-    - type: InputMover
-    - type: MobMover
-    - type: MovementSpeedModifier
-    - type: Speech
-      suffixSpeechVerbs:
-        chat-speech-verb-suffix-exclamation-strong: DefaultExclamationStrong
-        chat-speech-verb-suffix-exclamation: DefaultExclamation
-        chat-speech-verb-suffix-question: DefaultQuestion
-        chat-speech-verb-suffix-stutter: DefaultStutter
-        chat-speech-verb-suffix-mumble: DefaultMumble
-      clothingEmotes: []
-      allowedEmotes: []
-    - type: Emoting
-    - type: Examiner
-    - type: GhostRole
-      raffle:
-        settings: default
-      mindRoles:
-      - MindRoleGhostRoleNeutral
-      rules: >-
-        Вы не помните ничего из своей предыдущей жизни, если администратор не сказал вам обратное.
-                                         Вы не помните ничего из своей предыдущей жизни и не помните ничего из того, что узнали, будучи призраком.
-                                         Вам разрешается помнить знания об игре в целом, например, как готовить, как использовать предметы и т.д.
-                                         Вам [color=red]НЕ[/color] разрешается помнить, имя, внешность и т.д. вашего предыдущего персонажа.
-      description: Вы проецирование разума того кто вас носит, говорите ШЕПОТОМ так, чтобы никто не слышал ваш разговор с вашей суперзвездой
-      name: кошмарный галстук
-    - type: GhostTakeoverAvailable
 - proto: ClothingNeckPolarIIIMedal
   entities:
   - uid: 26245
@@ -61167,8 +61139,8 @@ entities:
     - type: MeleeWeapon
       attackRate: 1
       damage:
-        groups: null
-        types: null
+        types:
+          Blunt: 0
       bluntStaminaDamageFactor: 3
       range: 3
       soundNoDamage: !type:SoundCollectionSpecifier
@@ -126646,7 +126618,7 @@ entities:
         10.  Признаю одно крещение для прощения грехов.
 
 
-        11.  Ожидаю воскресения мертвых, 
+        11.  Ожидаю воскресения мертвых,
 
 
         12.  и жизни будущего века. Аминь (истинно так).
@@ -126708,7 +126680,7 @@ entities:
         10.  Признаю одно крещение для прощения грехов.
 
 
-        11.  Ожидаю воскресения мертвых, 
+        11.  Ожидаю воскресения мертвых,
 
 
         12.  и жизни будущего века. Аминь (истинно так).
@@ -146709,7 +146681,6 @@ entities:
       maxSupply: 5000
     - type: BatterySelfRecharger
       autoRechargeRate: 16000000
-      autoRecharge: True
   - uid: 16568
     components:
     - type: Transform
@@ -146717,7 +146688,6 @@ entities:
       parent: 2
     - type: BatterySelfRecharger
       autoRechargeRate: 16000000
-      autoRecharge: True
   - uid: 16569
     components:
     - type: Transform
@@ -146727,7 +146697,6 @@ entities:
       maxSupply: 5000
     - type: BatterySelfRecharger
       autoRechargeRate: 16000000
-      autoRecharge: True
   - uid: 16570
     components:
     - type: Transform
@@ -146735,7 +146704,6 @@ entities:
       parent: 2
     - type: BatterySelfRecharger
       autoRechargeRate: 16000000
-      autoRecharge: True
   - uid: 16571
     components:
     - type: Transform
@@ -146745,7 +146713,6 @@ entities:
       maxSupply: 5000
     - type: BatterySelfRecharger
       autoRechargeRate: 16000000
-      autoRecharge: True
   - uid: 16572
     components:
     - type: Transform
@@ -146755,7 +146722,6 @@ entities:
       maxSupply: 5000
     - type: BatterySelfRecharger
       autoRechargeRate: 16000000
-      autoRecharge: True
   - uid: 23026
     components:
     - type: Transform
@@ -213313,7 +213279,8 @@ entities:
       parent: 2
     missingComponents:
     - Item
-    - Blocking
+    - AltBlocking
+    - AltArmor
     - Construction
     - Destructible
     - StaticPrice

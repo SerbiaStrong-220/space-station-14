@@ -5,6 +5,7 @@
   playTimeTracker: AntagTraitor
   setPreference: false
   startingGear: PassengerGear
+  experienceDefinition: NoSpecialRoleExperience
   icon: "JobIconPassenger"
   supervisors: job-supervisors-everyone
   access:
@@ -15,6 +16,7 @@
   id: SyndicateBorg
   name: job-name-syndicate-borg
   description: job-description-syndicate-borg
+  experienceDefinition: SyndicateAssaultBorgRoleExperience
   setPreference: false
   playTimeTracker: AntagSyndicateBorg # Your syndie/NT views also influence your work :pepeAngry:
   requirements:
@@ -33,6 +35,7 @@
   id: SyndicateReinforcement
   name: job-name-syndicate-reinforcement
   description: job-description-syndicate-reinforcement
+  experienceDefinition: SyndicateReinforcementRoleExperience
   setPreference: false
   playTimeTracker: AntagSyndicateReinforcement
   requirements:

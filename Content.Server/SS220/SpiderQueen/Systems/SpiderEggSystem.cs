@@ -18,10 +18,10 @@ namespace Content.Server.SS220.SpiderQueen.Systems;
 
 public sealed partial class SpiderEggSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly NPCSystem _npc = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly SpiderWebSystem _spiderWeb = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private NPCSystem _npc = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private SpiderWebSystem _spiderWeb = default!;
 
     public override void Initialize()
     {
@@ -70,7 +70,7 @@ public sealed partial class SpiderEggSystem : EntitySystem
         foreach (var proto in protos)
         {
             var ent = Spawn(proto, coordinates);
-            if (TryComp<MindContainerComponent>(uid, out var mind) && mind.HasMind)
+            if (TryComp<MindContainerComponent>(uid, out var mind) && mind.Mind != null)
                 _mind.TransferTo(mind.Mind.Value, ent); // transferto сам по себе если не может зарезолвить mind, дает return, на проверки должно быть пофиг, но mind нужен
             if (component.EggOwner is { } owner)
                 _npc.SetBlackboard(ent, NPCBlackboard.FollowTarget, new EntityCoordinates(owner, Vector2.Zero));

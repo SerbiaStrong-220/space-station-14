@@ -77,7 +77,7 @@ public sealed class MessengerServerSystem : EntitySystem
         {
             foreach (var (entityUid, contactKey) in server.GetClientToContact())
             {
-                if (!_entityManager.TryGetComponent<IdCardComponent>(entityUid, out var card))
+                if (!TryComp<IdCardComponent>(entityUid, out var card))
                     continue;
 
                 server.UpdateContactName(contactKey, card.FullName);
@@ -319,7 +319,7 @@ public sealed class MessengerServerSystem : EntitySystem
     {
         idCardUid = null;
         idCardComponent = null;
-        
+
         //SS220-messenger-fix begin
         if (payload.TryGetValue(MessengerClientCartridgeSystem.NetworkKey.DeviceUid.ToString(), out NetEntity? netLoader))
             return GetIdCardComponent(GetEntity(netLoader), out idCardUid, out idCardComponent);
@@ -360,7 +360,7 @@ public sealed class MessengerServerSystem : EntitySystem
         if (!GetIdCardComponent(payload, out var idCardUid, out _))
             return false;
 
-        if (!EntityManager.TryGetComponent(serverUid, out AccessReaderComponent? reader))
+        if (!TryComp<AccessReaderComponent>(serverUid, out var reader))
             return false;
 
         if (!_accessSystem.IsAllowed(idCardUid.Value, serverUid, reader))
@@ -384,7 +384,7 @@ public sealed class MessengerServerSystem : EntitySystem
 
         foreach (var idCard in container.ContainedEntities)
         {
-            if (!_entityManager.TryGetComponent(idCard, out idCardComponent))
+            if (!TryComp(idCard, out idCardComponent))
                 continue;
 
             idCardUid = idCard;

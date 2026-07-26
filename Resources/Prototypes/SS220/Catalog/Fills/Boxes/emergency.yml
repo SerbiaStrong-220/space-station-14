@@ -1,19 +1,66 @@
 - type: entity
   name: survival box
-  parent: BoxSurvivalBrigmedic
+  parent: BoxCardboard
+  id: BoxSurvivalBrigmedic
+  description: It's a box with basic internals inside.
+  suffix: MedSec
+  components:
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,2,1
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,2,3
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingMaskBreathMedicalSecurity
+        - id: EmergencyOxygenTankFilled
+        - id: EmergencyMedipen
+        - id: SpaceMedipen
+        - id: Flare
+        - id: FoodSnackNutribrick
+        - id: DrinkWaterBottleFull
+        - id: CrowbarRed
+  - type: Sprite
+    layers:
+    - state: internals
+    - state: emergencytank
+
+- type: entity
+  name: survival box
+  parent: BoxCardboard
   id: BoxSurvivalBrigmedicNitrogen
   description: It's a box with basic internals inside.
   suffix: MedSec N2
   components:
-  - type: StorageFill
-    contents:
-    - id: ClothingMaskBreathMedicalSecurity
-    - id: EmergencyNitrogenTankFilled
-    - id: EmergencyMedipen
-    - id: SpaceMedipen # SS220 Revert deleted Medipen
-    - id: Flare
-    - id: FoodSnackNutribrick
-    - id: DrinkWaterBottleFull
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,2,1
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,2,3
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingMaskBreathMedicalSecurity
+        - id: EmergencyNitrogenTankFilled
+        - id: EmergencyMedipen
+        - id: SpaceMedipen
+        - id: Flare
+        - id: FoodSnackNutribrick
+        - id: DrinkWaterBottleFull
+        - id: CrowbarRed
+  - type: Sprite
+    layers:
+    - state: internals
+    - state: nitrogentank
   - type: Label
     currentLabel: reagent-name-nitrogen
 
@@ -22,16 +69,18 @@
   id: BoxSurvivalBeerDrinker
   suffix: Standard Beer
   components:
-  - type: StorageFill
-    contents:
-    - id: ClothingMaskBreath
-    - id: EmergencyOxygenTankFilled
-    - id: EmergencyMedipen
-    - id: SpaceMedipen # SS220 Revert deleted Medipen
-    - id: Flare
-    - id: FoodSnackNutribrick
-    - id: DrinkWaterBottleFull
-    - id: DrinkBeerCan
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingMaskBreath
+        - id: EmergencyOxygenTankFilled
+        - id: EmergencyMedipen
+        - id: SpaceMedipen
+        - id: Flare
+        - id: FoodSnackNutribrick
+        - id: DrinkBeerCan
+        - id: CrowbarRed
   - type: Sprite
     layers:
     - state: internals
@@ -54,19 +103,90 @@
     sprite: SS220/Objects/Storage/box.rsi
     size: Large
     shape:
-    - 0,0,2,1 
+    - 0,0,2,1
   - type: Storage
     maxItemSize: Small
     grid:
     - 0,0,3,3
-  - type: StorageFill
-    contents:
-    - id: ClothingMaskBreath
-    - id: DoubleEmergencyOxygenTankFilled
-    - id: CombatMedipen
-    - id: FlashlightSeclite
-    - id: FoodSnackNutribrick
-    - id: RadioHandheldCentcom
-    - id: CombatKnife
-    - id: Matchbox
-    - id: DrinkMREFlask
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: DoubleEmergencyOxygenTankFilled
+        - id: CombatKnife
+        - id: FlashlightSeclite
+        - id: RadioHandheldCentcom
+        - id: Matchbox
+        - id: DrinkMREFlask
+        - id: FoodSnackNutribrick
+        - id: ClothingMaskBreath
+        - id: CombatMedipen
+
+- type: entity
+  parent: BoxSurvival
+  id: BoxSurvivalIpc
+  name: survival box ipc
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WelderMini
+        - id: PowerCellSmall
+        - id: Flare
+        - id: CrowbarRed
+
+- type: entity
+  parent: BoxSurvival
+  id: BoxSurvivalSecurityIpc
+  name: survival box security ipc
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WelderMini
+        - id: PowerCellMedium
+        - id: Flare
+        - id: CrowbarRed
+
+- type: entity
+  parent: BoxSurvivalIpc
+  id: BoxSurvivalClownIpc
+  name: survival box clown ipc
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WhoopieCushion
+        - id: WelderMini
+        - id: PowerCellSmall
+        - id: Flare
+        - id: CrowbarRed
+
+- type: entity
+  parent: BoxSurvivalIpc
+  id: BoxSurvivalMimeIpc
+  name: survival box mime ipc
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: FoodBreadNutriBatard
+        - id: WelderMini
+        - id: PowerCellSmall
+        - id: Flare
+        - id: CrowbarRed
+
+- type: entity
+  parent: BoxSurvivalIpc
+  id: BoxSurvivalMedicalIpc
+  name: survival box ipc
+
+- type: entity
+  parent: BoxSurvivalSecurityIpc
+  id: BoxSurvivalEngineerIpc
+  name: survival box engineer ipc
+

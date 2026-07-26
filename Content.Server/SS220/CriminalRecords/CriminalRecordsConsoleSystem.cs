@@ -21,18 +21,18 @@ using Content.Shared.CrewManifest;
 
 namespace Content.Server.SS220.CriminalRecords;
 
-public sealed class GeneralStationRecordConsoleSystem : EntitySystem
+public sealed partial class GeneralStationRecordConsoleSystem : EntitySystem
 {
-    [Dependency] private readonly StationRecordsSystem _stationRecords = default!;
-    [Dependency] private readonly CriminalRecordSystem _criminalRecord = default!;
-    [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
-    [Dependency] private readonly AccessReaderSystem _accessReader = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly StationSystem _stationSystem = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly RadioSystem _radio = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private StationRecordsSystem _stationRecords = default!;
+    [Dependency] private CriminalRecordSystem _criminalRecord = default!;
+    [Dependency] private UserInterfaceSystem _userInterface = default!;
+    [Dependency] private AccessReaderSystem _accessReader = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private StationSystem _stationSystem = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private RadioSystem _radio = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private PopupSystem _popup = default!;
 
     private static readonly TimeSpan CooldownLagTolerance = TimeSpan.FromSeconds(0.5);
 

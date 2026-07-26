@@ -4,14 +4,9 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Shlepovend;
 
-public abstract class SharedShlepovendSystem : EntitySystem
+public abstract partial class SharedShlepovendSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-    }
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     public ShlepaRewardGroupPrototype? GetHighestTier(SponsorTier[] tiers)
     {

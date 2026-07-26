@@ -1,0 +1,6 @@
+- type: entity
+  parent: BaseObjective
+  id: SS220FreeObjective
+  components:
+  - type: Objective
+    issuer: free-objectives-name

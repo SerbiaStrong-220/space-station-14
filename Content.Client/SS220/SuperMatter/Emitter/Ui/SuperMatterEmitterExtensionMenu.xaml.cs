@@ -12,7 +12,7 @@ namespace Content.Client.SS220.SuperMatter.Emitter.Ui;
 [GenerateTypedNameReferences]
 public sealed partial class SuperMatterEmitterExtensionMenu : FancyWindow
 {
-    [Dependency] private readonly ILocalizationManager _localization = default!;
+    [Dependency] private ILocalizationManager _localization = default!;
 
     public event Action<BaseButton.ButtonEventArgs, int, int>? OnSubmitButtonPressed;
     public event Action<BaseButton.ButtonEventArgs>? OnEmitterActivatePressed;

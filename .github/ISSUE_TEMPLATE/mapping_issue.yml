@@ -1,9 +1,6 @@
 name: Сообщить о проблеме с игровой картой
 description: Если заметили недочёты на игровых картах
-title: "[MI] На карте проблема в "
-labels: []
-assignees:
-  - UrPrice
+labels: ["Mapping Issues"]
 body:
   - type: markdown
     id: markdown_with_multiline_content

@@ -3,9 +3,9 @@ using Content.Shared.SS220.ViewableStationMap;
 
 namespace Content.Server.SS220.ViewableStationMap;
 
-public sealed class ViewableStationMapSystem : EntitySystem
+public sealed partial class ViewableStationMapSystem : EntitySystem
 {
-    [Dependency] private readonly StationSystem _station = default!;
+    [Dependency] private StationSystem _station = default!;
 
     public override void Initialize()
     {

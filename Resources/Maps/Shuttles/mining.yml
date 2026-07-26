@@ -519,7 +519,7 @@ entities:
         chunkSize: 4
     - type: OccluderTree
     - type: Shuttle
-      fTLCooldown: 180
+      fTLCooldownOverride: 180
     - type: RadiationGridResistance
     - type: SpreaderGrid
     - type: GravityShake

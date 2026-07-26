@@ -28,3 +28,14 @@ ent-ClothingBeltChefApronRed = красный фартук
     .desc = { ent-ClothingBeltChefApronBase.desc }
 ent-ClothingBeltChefApronNanotrasen = синий фартук
     .desc = Фартук высокого качества с карманами, сделанный на заказ. Нужен для хранения кухонных ножей и быстрого доступа к приправам.
+
+ent-ClothingBeltChefApronWhiteFilled = { ent-ClothingBeltChefApronWhite }
+    .desc = { ent-ClothingBeltChefApronWhite.desc }
+ent-ClothingBeltChefApronGreenFilled = { ent-ClothingBeltChefApronGreen }
+    .desc = { ent-ClothingBeltChefApronGreen.desc }
+ent-ClothingBeltChefApronBlackFilled = { ent-ClothingBeltChefApronBlack }
+    .desc = { ent-ClothingBeltChefApronBlack.desc }
+ent-ClothingBeltChefApronRedFilled = { ent-ClothingBeltChefApronRed }
+    .desc = { ent-ClothingBeltChefApronRed.desc }
+ent-ClothingBeltChefApronNanotrasenFilled = { ent-ClothingBeltChefApronNanotrasen }
+    .desc = { ent-ClothingBeltChefApronNanotrasen.desc }

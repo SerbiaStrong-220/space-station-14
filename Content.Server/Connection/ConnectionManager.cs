@@ -60,7 +60,6 @@ namespace Content.Server.Connection
         [Dependency] private readonly IServerNetManager _netMgr = default!;
         [Dependency] private readonly IServerDbManager _db = default!;
         [Dependency] private readonly IConfigurationManager _cfg = default!;
-        [Dependency] private readonly SponsorsManager _sponsorsManager = default!; // Corvax-Sponsors
         [Dependency] private readonly IPlayerLocator _playerLocator = default!; // SS220-ad-login-into-ban-screen
         [Dependency] private readonly ILocalizationManager _loc = default!;
         [Dependency] private readonly ServerDbEntryManager _serverDbEntry = default!;
@@ -216,7 +215,7 @@ namespace Content.Server.Connection
          * TODO: Jesus H Christ what is this utter mess of a function
          * TODO: Break this apart into is constituent steps.
          */
-        private async Task<(ConnectionDenyReason, string, List<ServerBanDef>? bansHit)?> ShouldDeny(
+        private async Task<(ConnectionDenyReason, string, List<BanDef>? bansHit)?> ShouldDeny(
             NetConnectingArgs e)
         {
             // Check if banned.
@@ -237,11 +236,11 @@ namespace Content.Server.Connection
                 return (ConnectionDenyReason.NoHwid, Loc.GetString("hwid-required"), null);
             }
 
-            var bans = await _db.GetServerBansAsync(addr, userId, hwId, modernHwid, includeUnbanned: false);
+            var bans = await _db.GetBansAsync(addr, userId, hwId, modernHwid, includeUnbanned: false);
             if (bans.Count > 0)
             {
                 var firstBan = bans[0];
-                var name = firstBan.UserId.HasValue ? await _playerLocator.LookupIdAsync(firstBan.UserId.Value) : null; // SS220-ad-login-into-ban-screen
+                var name = firstBan.UserIds.Length > 0 ? await _playerLocator.LookupIdAsync(firstBan.UserIds[0]) : null; // SS220-ad-login-into-ban-screen
                 var message = firstBan.FormatBanMessage(_cfg, _loc, name?.Username); // SS220-ad-login-into-ban-screen
                 return (ConnectionDenyReason.Ban, message, bans);
             }

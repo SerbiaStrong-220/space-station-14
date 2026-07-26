@@ -6,12 +6,12 @@ using Content.Server.Administration.Managers;
 using Content.Server.Discord.WebhookMessages;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Presets;
-using Content.Server.Maps;
 using Content.Server.Roles;
 using Content.Server.RoundEnd;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Database;
+using Content.Shared.Maps;
 using Content.Shared.Players;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Voting;
@@ -306,10 +306,14 @@ namespace Content.Server.Voting.Managers
                 var ticker = _entityManager.EntitySysManager.GetEntitySystem<GameTicker>();
                 if (ticker.CanUpdateMap())
                 {
-                    if (_gameMapManager.TrySelectMapIfEligible(picked.ID))
+                    if (_gameMapManager.CheckMapExists(picked.ID))
                     {
-                        _gameMapManager.EnqueueMap(picked.ID);
+                        _gameMapManager.SelectMap(picked.ID);
                         ticker.UpdateInfoText();
+                    }
+                    else
+                    {
+                        _chatManager.DispatchServerAnnouncement(Loc.GetString("ui-vote-map-invalid", ("winner", maps[picked])));
                     }
                 }
                 else
@@ -372,14 +376,7 @@ namespace Content.Server.Voting.Managers
             }
             var targetUid = located.UserId;
             var targetHWid = located.LastHWId;
-            (IPAddress, int)? targetIP = null;
-
-            if (located.LastAddress is not null)
-            {
-                targetIP = located.LastAddress.AddressFamily is AddressFamily.InterNetwork
-                    ? (located.LastAddress, 32) // People with ipv4 addresses get a /32 address so we ban that
-                    : (located.LastAddress, 64); // This can only be an ipv6 address. People with ipv6 address should get /64 addresses so we ban that.
-            }
+            var targetIP = located.LastAddress;
 
             if (!_playerManager.TryGetSessionById(located.UserId, out ICommonSession? targetSession))
             {
@@ -546,7 +543,21 @@ namespace Content.Server.Voting.Managers
                         uint minutes = (uint)_cfg.GetCVar(CCVars.VotekickBanDuration);
                         var ticker = _entityManager.EntitySysManager.GetEntitySystem<GameTicker>();
 
-                        _bans.CreateServerBan(targetUid, target, null, null /* SS220 */, targetHWid, minutes, severity, null /* SS220*/, ticker.RoundId /* SS220 */, Loc.GetString("votekick-ban-reason", ("reason", reason)), false /* SS220 */);
+                        var banInfo = new CreateServerBanInfo(Loc.GetString("votekick-ban-reason", ("reason", reason)));
+                        banInfo.AddUser(targetUid, target);
+                        banInfo.AddHWId(targetHWid);
+                        banInfo.AddAddress(targetIP);
+                        banInfo.WithSeverity(severity);
+                        if (minutes > 0)
+                            banInfo.WithMinutes(minutes);
+
+                        // SS220-ban-begin
+                        banInfo.WithPostBanInfo(false);
+                        banInfo.WithBanningAdminName(null);
+                        banInfo.WithStatedRound(ticker.RoundId);
+                        // SS220-ban-end
+
+                        _bans.CreateServerBan(banInfo);
                     }
                 }
                 else

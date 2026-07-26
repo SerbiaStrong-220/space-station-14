@@ -34,10 +34,12 @@
   name: thick red jacket
   description: Smells like chemistry.
   components:
-  - type: StorageFill
-    contents:
-    - id: SponsorCigPack
-      amount: 1
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: SponsorCigPack
+          amount: 1
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/OuterClothing/redcoat.rsi
   - type: Clothing

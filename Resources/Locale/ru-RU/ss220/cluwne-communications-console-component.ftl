@@ -1,7 +1,11 @@
 ent-ComputerCluwneComms = консоль смешной связи
     .desc = Для создания шутеек прямо в оповещениях и кпк.
+ent-ComputerCluwneCommsUnconvertible = { ent-ComputerCluwneComms }
+    .desc = { ent-ComputerCluwneComms.desc }
 ent-CluwneCommsComputerCircuitboard = консоль смешной связи (машинная плата)
     .desc = Печатная плата для консоли смешной связи.
+ent-CluwneCommsComputerCircuitboardUnconvertible = { ent-CluwneCommsComputerCircuitboard }
+    .desc = Печатная плата для консоли смешной связи. Схемы полностью пропитаны бананиумом, пути назад нет.
 
 # User interface
 cluwne-comms-console-menu-title = Консоль смешной связи

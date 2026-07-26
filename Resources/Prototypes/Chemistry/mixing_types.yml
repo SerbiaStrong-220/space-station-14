@@ -56,7 +56,7 @@
   id: Shake
   verbText: mixing-verb-shake
   icon:
-    sprite: Objects/Consumable/Drinks/shaker.rsi
+    sprite: SS220/Objects/Consumable/Drinks/shaker.rsi #SS220 Resprite
     state: icon
 
 - type: mixingCategory

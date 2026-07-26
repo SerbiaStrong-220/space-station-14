@@ -68,6 +68,7 @@
     tags:
     - CannotSuicide
     - VimPilot
+    - Ian
   - type: StealTarget
     stealGroup: AnimalIan
 
@@ -1303,6 +1304,7 @@
         Bloodloss:
           -0.8
   - type: Temperature
+  - type: TemperatureDamage
     heatDamageThreshold: 800
     coldDamageThreshold: 0
   - type: MeleeWeapon

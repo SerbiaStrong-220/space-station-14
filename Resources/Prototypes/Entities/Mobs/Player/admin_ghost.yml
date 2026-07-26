@@ -16,6 +16,7 @@
     - SilentStorageUser
     - PreventAccessLogging
     - AllowBiomeLoading
+    - NotGhostnadoWarpable
   - type: Input
     context: "aghost"
   - type: Ghost
@@ -36,8 +37,8 @@
     needsHands: false
   - type: CombatMode
   - type: Physics
+    bodyType: Kinematic # Admin ghosts should ignore the laws of physics.
     ignorePaused: true
-    bodyType: Kinematic
   - type: Access
     groups:
     - AllAccess
@@ -108,6 +109,10 @@
   - type: IgnoreUIRange
   - type: ShowAntagIcons
   # - type: ShowContrabandDetails # SS220-useless-info
+  # SS220-experience-update-begin
+  - type: BypassKnowledgeCheck
+  - type: BypassSkillCheck
+  # SS220-experience-update-end
   - type: Inventory
     templateId: aghost
   - type: Loadout

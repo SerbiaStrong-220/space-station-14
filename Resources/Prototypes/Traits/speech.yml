@@ -16,7 +16,7 @@
     - type: OwOAccent #SS220
   # SS220 Fix Dwarf Accentless
   #  - type: ReplacementAccent
-  #    accent: dwarf
+  #    accent: scottish
   # SS220 Fix Dwarf Accentless
   #SS220-Vox accent Begin
     - type: TajaranAccent
@@ -36,28 +36,6 @@
   - type: SouthernAccent
 
 - type: trait
-  id: PirateAccent
-  name: trait-pirate-accent-name
-  description: trait-pirate-accent-desc
-  category: SpeechTraits
-  cost: 1
-  components:
-  - type: PirateAccent
-
-- type: trait
-  id: CowboyAccent
-  name: trait-cowboy-name
-  description: trait-cowboy-desc
-  category: SpeechTraits
-  cost: 1
-  components:
-  #SS220 Accent system begin
-  #- type: ReplacementAccent
-  #  accent: cowboy
-  - type: CowboyAccent
-  #SS220 Accent system end
-
-- type: trait
   id: GermanAccent
   name: trait-german-name
   description: trait-german-desc
@@ -65,19 +43,6 @@
   cost: 1
   components:
   - type: GermanAccent
-
-- type: trait
-  id: ItalianAccent
-  name: trait-italian-name
-  description: trait-italian-desc
-  category: SpeechTraits
-  cost: 1
-  components:
-  #SS220 Accent system begin
-  #- type: ReplacementAccent
-  #  accent: italian
-  - type: ItalianAccent
-  #SS220 Accent system end
 
 - type: trait
   id: FrenchAccent
@@ -109,6 +74,16 @@
   #  accent: liar
   - type: LiarAccent
   #SS220 Accent system end
+
+- type: trait
+  id: ScottishAccent
+  name: trait-scottish-name
+  description: trait-scottish-desc
+  category: SpeechTraits
+  cost: 1
+  components:
+  - type: ReplacementAccent
+    accent: scottish
 
 # 2 Cost
 

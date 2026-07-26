@@ -1,0 +1,32 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using Robust.Shared.GameStates;
+
+namespace Content.Shared.SS220.Experience.Skill.Components;
+
+/// <summary>
+/// This skill changes client info shown in HealthAnalyzer ui
+/// </summary>
+[RegisterComponent]
+[NetworkedComponent, AutoGenerateComponentState]
+public sealed partial class MedicineMachineUseSkillIssueComponent : Component
+{
+    [DataField]
+    [AutoNetworkedField]
+    public float HealthAnalyzerInfoShuffleChance = 0f;
+
+    [DataField]
+    [AutoNetworkedField]
+    public float DefibrillatorSelfDamageChance = 0f;
+
+    [DataField]
+    [AutoNetworkedField]
+    public float DefibrillatorFailureChance = 0f;
+}
+
+[ByRefEvent]
+public record struct GetDefibrillatorUseChances()
+{
+    public float SelfDamageChance = 0f;
+    public float FailureChance = 0f;
+}

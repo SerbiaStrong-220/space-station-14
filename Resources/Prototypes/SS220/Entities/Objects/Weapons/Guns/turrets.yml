@@ -67,7 +67,7 @@
         - FullAuto
       soundGunshot:
         path: /Audio/Weapons/Guns/Gunshots/laser.ogg
-    - type: HitscanBatteryAmmoProvider
+    - type: BatteryAmmoProvider
       proto: RedLaser
       fireCost: 1
     - type: Battery
@@ -207,7 +207,7 @@
     fireRate: 2
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/ship_svalinn.ogg
-  - type: HitscanBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: AirDefenseLaser
     fireCost: 62
   - type: PowerCellSlot

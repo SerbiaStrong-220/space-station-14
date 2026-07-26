@@ -3,8 +3,10 @@
   parent: BriefcaseBrown
   suffix: Magistrate
   components:
-    - type: StorageFill
-      contents:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
         - id: Paper
           amount: 3
         - id: CentCommNewPen #SS220-BriefcaseMagistrate
@@ -24,4 +26,4 @@
       locked: true
       whitelist:
         components:
-          - Gun
+        - Gun

@@ -251,29 +251,31 @@
   name: admin hats backpack
   description: A backpack containing all the special hats for admins.
   components:
-  - type: StorageFill
-    contents:
-    - id: ClothingHeadAdminHell
-    - id: ClothingHeadAdminDoubleBarrelShotgun
-    - id: ClothingHeadAdminMagicGuardian
-    - id: ClothingHeadAdminSingularityToy
-    - id: ClothingHeadAdminBuffRat
-    - id: ClothingHeadAdminJensenCoat
-    - id: ClothingHeadAdminHoloclownGuardian
-    - id: ClothingHeadAdminParrot
-    - id: ClothingHeadAdminGhostSheet
-    - id: ClothingHeadAdminMimebot
-    - id: ClothingHeadAdminTerminator
-    - id: ClothingHeadAdminTechGuardians
-    - id: ClothingHeadAdminCarpsuit
-    - id: ClothingHeadAdminRainbowSlime
-    - id: ClothingHeadAdminMinerGuardian
-    - id: ClothingHeadAdminMothroach
-    - id: ClothingHeadAdminPlushieLizard
-    - id: ClothingHeadAdminJudge
-    - id: ClothingHeadAdminWhiskeyBottle
-    - id: ClothingHeadAdminRevenant
-    - id: ClothingHeadAdminNuke
-    - id: ClothingHeadAdminWatermelon
-    - id: ClothingHeadAdminBlueSlime
-    - id: ClothingHeadAdminBehonker
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingHeadAdminHell
+        - id: ClothingHeadAdminDoubleBarrelShotgun
+        - id: ClothingHeadAdminMagicGuardian
+        - id: ClothingHeadAdminSingularityToy
+        - id: ClothingHeadAdminBuffRat
+        - id: ClothingHeadAdminJensenCoat
+        - id: ClothingHeadAdminHoloclownGuardian
+        - id: ClothingHeadAdminParrot
+        - id: ClothingHeadAdminGhostSheet
+        - id: ClothingHeadAdminMimebot
+        - id: ClothingHeadAdminTerminator
+        - id: ClothingHeadAdminTechGuardians
+        - id: ClothingHeadAdminCarpsuit
+        - id: ClothingHeadAdminRainbowSlime
+        - id: ClothingHeadAdminMinerGuardian
+        - id: ClothingHeadAdminMothroach
+        - id: ClothingHeadAdminPlushieLizard
+        - id: ClothingHeadAdminJudge
+        - id: ClothingHeadAdminWhiskeyBottle
+        - id: ClothingHeadAdminRevenant
+        - id: ClothingHeadAdminNuke
+        - id: ClothingHeadAdminWatermelon
+        - id: ClothingHeadAdminBlueSlime
+        - id: ClothingHeadAdminBehonker

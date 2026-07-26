@@ -31,7 +31,7 @@ public sealed partial class GunSignalControlSystem : EntitySystem
         if (!TryComp<AutoShootGunComponent>(gunControl, out var autoShootGun))
             return;
 
-        if (EntityManager.TryGetComponent(gunControl, out TransformComponent? transform) && !transform.Anchored && !autoShootGun.CanShootUnanchored)
+        if (TryComp(gunControl, out TransformComponent? transform) && !transform.Anchored && !autoShootGun.CanShootUnanchored)
             return;
 
         if (TryComp<ApcPowerReceiverComponent>(gunControl, out var apc) && !apc.Powered && autoShootGun.RequiredPower)
@@ -39,18 +39,18 @@ public sealed partial class GunSignalControlSystem : EntitySystem
         //SS220 ShuttleGuns_fix end (#3180)
 
         if (args.Port == gunControl.Comp.TriggerPort)
-            _gun.AttemptShoot(gunControl, gun);
+            _gun.AttemptShoot((gunControl, gun));
 
         if (!TryComp<AutoShootGunComponent>(gunControl, out var autoShoot))
             return;
 
         if (args.Port == gunControl.Comp.TogglePort)
-           _gun.SetEnabled(gunControl, autoShoot, !autoShoot.Enabled);
+            _gun.SetEnabled((gunControl, autoShoot), !autoShoot.Enabled);
 
         if (args.Port == gunControl.Comp.OnPort)
-            _gun.SetEnabled(gunControl, autoShoot, true);
+            _gun.SetEnabled((gunControl, autoShoot), true);
 
         if (args.Port == gunControl.Comp.OffPort)
-            _gun.SetEnabled(gunControl, autoShoot, false);
+            _gun.SetEnabled((gunControl, autoShoot), false);
     }
 }

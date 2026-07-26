@@ -2,16 +2,17 @@
 
 using Content.Shared.DoAfter;
 using Content.Shared.Popups;
+using Content.Shared.SS220.Teleport.Components;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 
 namespace Content.Shared.SS220.Teleport.Systems;
 
-public sealed class AltVerbTeleportSystem : EntitySystem
+public sealed partial class AltVerbTeleportSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -22,16 +23,19 @@ public sealed class AltVerbTeleportSystem : EntitySystem
 
     private void OnAddSwitchModeVerb(Entity<AltVerbTeleportComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
-        if (!args.CanAccess || !args.CanInteract)
+        if (!args.CanAccess || !args.CanInteract || args.Hands == null || !args.Using.HasValue)
             return;
 
         if (_whitelist.IsWhitelistFail(ent.Comp.UserWhitelist, args.User))
         {
             if (ent.Comp.WhitelistRejectedLoc != null)
                 _popup.PopupPredicted(Loc.GetString(ent.Comp.WhitelistRejectedLoc), ent, args.User, PopupType.MediumCaution);
-                
+
             return;
         }
+
+        if (_whitelist.IsWhitelistPass(ent.Comp.UserBlacklist, args.User))
+            return;
 
         TryStartTeleport(ent, args.User);
     }
@@ -52,7 +56,8 @@ public sealed class AltVerbTeleportSystem : EntitySystem
 
         var teleportDoAfter = new DoAfterArgs(EntityManager, user, ent.Comp.TeleportDoAfterTime.Value, new InteractionTeleportDoAfterEvent(), ent, user)
         {
-            BreakOnDamage = false,
+            BreakOnDamage = ent.Comp.DamageThreshold != null,
+            DamageThreshold = ent.Comp.DamageThreshold ?? 0,
             BreakOnMove = true,
             BlockDuplicate = true,
             CancelDuplicate = true,

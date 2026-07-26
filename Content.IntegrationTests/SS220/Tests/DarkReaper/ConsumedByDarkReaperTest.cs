@@ -4,6 +4,8 @@ using Content.Server.SS220.DarkReaper;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.SS220.DarkReaper;
@@ -44,17 +46,18 @@ public sealed class MobConsumedByDarkReaperTest
       0: Alive
       100: Critical
       200: Dead
-  - type: Temperature
+  - type: TemperatureDamage
     heatDamageThreshold: 325
     coldDamageThreshold: 260
-    currentTemperature: 310.15
-    specificHeat: 42
     coldDamage:
       types:
         Cold: 1
     heatDamage:
       types:
         Heat: 1.5
+  - type: Temperature
+    currentTemperature: 310.15
+    specificHeat: 42
   - type: Barotrauma
     damage:
       types:
@@ -78,7 +81,7 @@ public sealed class MobConsumedByDarkReaperTest
         var defMan = server.ResolveDependency<ITileDefinitionManager>();
         var mapSys = server.EntMan.System<MapSystem>();
         var atmosphereSys = server.EntMan.System<AtmosphereSystem>();
-
+        var damageableSys = server.EntMan.System<DamageableSystem>();
 
         // Create a 3x3 box with walls on the border
         const string tileId = "FloorSteel";
@@ -133,10 +136,12 @@ public sealed class MobConsumedByDarkReaperTest
 
         DamageableComponent mobDamageable = default;
         FixedPoint2 mobDeathDamage = default;
+        var totalDamage = damageableSys.GetTotalDamage(mob);
+
         await server.WaitPost(() =>
         {
             mobDamageable = server.EntMan.GetComponent<DamageableComponent>(mob);
-            mobDeathDamage = mobDamageable.TotalDamage;
+            mobDeathDamage = totalDamage;
         });
 
 
@@ -147,7 +152,7 @@ public sealed class MobConsumedByDarkReaperTest
             Assert.That(mixture.Pressure, Is.LessThan(Atmospherics.HazardLowPressure));
         });
         await pair.RunSeconds(5);
-        Assert.That(mobDamageable.TotalDamage, Is.EqualTo(mobDeathDamage));
+        Assert.That(damageableSys.GetTotalDamage(mob), Is.EqualTo(mobDeathDamage));
 
 
         // Test high pressure damage immunity
@@ -160,13 +165,13 @@ public sealed class MobConsumedByDarkReaperTest
             Assert.That(mixture.Pressure, Is.GreaterThan(Atmospherics.HazardHighPressure));
         });
         await pair.RunSeconds(5);
-        Assert.That(mobDamageable.TotalDamage, Is.EqualTo(mobDeathDamage));
+        Assert.That(damageableSys.GetTotalDamage(mob), Is.EqualTo(mobDeathDamage));
 
 
         // Test temperature damage immunity
         await server.WaitPost(() =>
         {
-            var temperatureComp = server.EntMan.GetComponent<TemperatureComponent>(mob);
+            var temperatureComp = server.EntMan.GetComponent<TemperatureDamageComponent>(mob);
 
             var mixture = atmosphereSys.GetTileMixture(mapData.Grid.Owner, null, centerTileCoords);
             if (mixture.Pressure <= 0)
@@ -177,7 +182,7 @@ public sealed class MobConsumedByDarkReaperTest
             Assert.That(mixture.Temperature, Is.GreaterThanOrEqualTo(tileTemperature));
         });
         await pair.RunSeconds(5);
-        Assert.That(mobDamageable.TotalDamage, Is.EqualTo(mobDeathDamage));
+        Assert.That(damageableSys.GetTotalDamage(mob), Is.EqualTo(mobDeathDamage));
 
         await pair.CleanReturnAsync();
     }
@@ -192,7 +197,7 @@ public sealed class MobConsumedByDarkReaperTest
         var defMan = server.ResolveDependency<ITileDefinitionManager>();
         var mapSys = server.EntMan.System<MapSystem>();
         var flammableSys = server.EntMan.System<FlammableSystem>();
-
+        var damageableSys = server.EntMan.System<DamageableSystem>();
 
         // Create test map & spawn dummies
         const string tileId = "FloorSteel";
@@ -208,10 +213,12 @@ public sealed class MobConsumedByDarkReaperTest
 
         DamageableComponent mobDamageable = default;
         FixedPoint2 mobDeathDamage = default;
+        var totalDamage = damageableSys.GetTotalDamage(mob);
+
         await server.WaitPost(() =>
         {
             mobDamageable = server.EntMan.GetComponent<DamageableComponent>(mob);
-            mobDeathDamage = mobDamageable.TotalDamage;
+            mobDeathDamage = totalDamage;
         });
 
 
@@ -230,7 +237,7 @@ public sealed class MobConsumedByDarkReaperTest
             });
         });
         await pair.RunSeconds(5);
-        Assert.That(mobDamageable.TotalDamage, Is.EqualTo(mobDeathDamage));
+        Assert.That(damageableSys.GetTotalDamage(mob), Is.EqualTo(mobDeathDamage));
 
         await pair.CleanReturnAsync();
     }
@@ -274,8 +281,10 @@ public sealed class MobConsumedByDarkReaperTest
             };
 
             var changedDamage = damageableSys.TryChangeDamage(mob, deathDamage, ignoreResistances: true, ignoreGlobalModifiers: true);
-            Assert.That(changedDamage, Is.Not.Null);
-            Assert.That(changedDamage.GetTotal(), Is.EqualTo(deathDamage.GetTotal()));
+            var totalDamage = damageableSys.GetTotalDamage(mob);
+
+            Assert.That(changedDamage, Is.True);
+            Assert.That(totalDamage, Is.EqualTo(deathDamage.GetTotal()));
             Assert.That(mobStateSys.IsDead(mob));
 
             reaperSys.ChangeForm(reaper, true);

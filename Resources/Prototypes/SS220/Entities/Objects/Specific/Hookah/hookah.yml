@@ -1,0 +1,273 @@
+
+- type: entity
+  id: HookahFlask
+  name: колба кальяна
+  description: Стеклянная колба. Основа кальяна — вставьте шахту.
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hookah/hookah_parts.rsi
+    state: flask
+  - type: Item
+    size: Normal
+  - type: HookahFlask
+    assemblySound:
+      path: /Audio/Items/welder.ogg
+
+- type: entity
+  id: HookahShaft
+  name: шахта кальяна
+  description: Металлическая шахта. Вставьте в колбу.
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hookah/hookah_parts.rsi
+    state: shaft
+  - type: Item
+    size: Normal
+  - type: HookahShaft
+
+- type: entity
+  id: HookahSaucer
+  name: блюдце кальяна
+  description: Металлическое блюдце. Вставьте в колбу с шахтой.
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hookah/hookah_parts.rsi
+    state: saucer
+  - type: Item
+    size: Small
+  - type: HookahSaucer
+
+- type: entity
+  id: HookahTubePart
+  name: трубка кальяна (деталь)
+  description: Изогнутая трубка. Завершает сборку кальяна.
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hookah/hookah_parts.rsi
+    state: tube-part
+  - type: Item
+    size: Normal
+  - type: HookahTubePart
+
+- type: entity
+  id: HookahPartial
+  name: колба с шахтой
+  description: Колба с вставленной шахтой. Добавьте блюдце.
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hookah/hookah_parts.rsi
+    state: partial-shaft
+  - type: Item
+    size: Huge
+  - type: HookahPartial
+    assemblySound:
+      path: /Audio/Items/welder.ogg
+
+- type: entity
+  id: HookahPartialFull
+  name: колба с шахтой и блюдцем
+  description: Почти готовый кальян. Вставьте трубку.
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hookah/hookah_parts.rsi
+    state: partial-full
+  - type: Item
+    size: Huge
+  - type: HookahPartialFull
+    assemblySound:
+      path: /Audio/Items/welder.ogg
+
+- type: entity
+  id: HookahBase
+  name: кальян
+  description: Изощрённый прибор для культурного употребления ароматных жидкостей. Курить — здоровью вредить.
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: Objects/Specific/Hookah/hookah.rsi
+    drawdepth: SmallObjects
+    noRot: true
+    layers:
+    - state: icon
+      map: ["base"]
+  - type: Appearance
+  - type: HookahVisuals
+    unlitState: icon
+    unlitNoHoseState: icon-no-hose
+    coalUnlitState: icon-coal
+    coalUnlitNoHoseState: icon-coal-no-hose
+    coalLitState: icon-lit
+    coalLitNoHoseState: icon-lit-no-hose
+  - type: Pullable
+  - type: Damageable
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:EmptyAllContainersBehaviour
+      - !type:SpillBehavior
+        solution: hookah
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Hookah
+    hosePrototype: HookahHose
+    inhaleAmount: 2
+    lightSound:
+      path: /Audio/Items/Lighters/lighter1.ogg
+    useSound:
+      path: /Audio/SS220/Hookah/hookah_drag.ogg
+    ropeSprite:
+      sprite: Objects/Specific/Hookah/hookah_rope.rsi
+      state: rope
+    exhaleGasType: WaterVapor
+    exhaleMoles: 15
+    extinguishSound:
+      path: /Audio/Effects/extinguish.ogg
+    coal_slot:
+      name: hookah-coal-slot-name
+      whitelist:
+        tags:
+        - HookahCoal
+      insertSound:
+        path: /Audio/Weapons/Guns/Empty/empty.ogg
+      ejectSound:
+        path: /Audio/Weapons/Guns/Empty/empty.ogg
+  - type: SmokingFuel
+    tobacco_slot:
+      name: hookah-tobacco-slot-name
+      whitelist:
+        components:
+        - Stack
+      insertSound:
+        path: /Audio/Weapons/Guns/Empty/empty.ogg
+  - type: ContainerContainer
+    containers:
+      coal_slot: !type:ContainerSlot
+      tobacco_slot: !type:ContainerSlot
+  - type: ItemSlots
+  - type: SolutionContainerManager
+    solutions:
+      hookah:
+        maxVol: 150
+        reagents:
+        - ReagentId: Water
+          Quantity: 100
+  - type: RefillableSolution
+    solution: hookah
+  - type: ExaminableSolution
+    solution: hookah
+  - type: Physics
+    bodyType: Dynamic
+    fixedRotation: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 200
+        mask:
+        - ItemMask
+        restitution: 0.1
+        friction: 1.0
+
+- type: entity
+  id: HookahHose
+  name: трубка кальяна
+  description: Гибкий шланг. Один конец — в кальян, другой — в лёгкие.
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: Objects/Specific/Hookah/hookah_hose.rsi
+    drawdepth: Items
+    noRot: false
+    layers:
+    - state: icon
+  - type: Item
+    size: Ginormous
+    sprite: Objects/Specific/Hookah/hookah_hose.rsi
+  - type: HookahHose
+    maxDistance: 3.0
+  - type: UseDelay
+    delay: 5.0
+  - type: Physics
+    bodyType: Dynamic
+    canCollide: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.15,-0.15,0.15,0.15"
+        density: 10
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+
+- type: entity
+  id: HookahCoal
+  name: уголь для кальяна
+  description: Специальный жаровой уголь. Разгорается быстро, держит жар долго.
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: Objects/Materials/ore.rsi
+    drawdepth: Items
+    scale: 0.5, 0.5
+    layers:
+    - state: coal
+  - type: Item
+    size: Tiny
+    sprite: Objects/Materials/ore.rsi
+    heldPrefix: coal
+  - type: Tag
+    tags:
+    - HookahCoal
+  - type: HookahCoal
+    fuelLeft: 120
+    fuelDrainIdle: 0.5
+  - type: Physics
+    bodyType: Dynamic
+    canCollide: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        density: 10
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+
+- type: entity
+  id: HookahCoalBox
+  name: коробка с углём для кальяна
+  parent: BoxCardboard
+  description: Картонная коробочка с брикетами жарового угля. Ровно на одну вечеринку.
+  components:
+  - type: Storage
+    maxItemSize: Tiny
+    grid:
+    - 0,0,2,2
+    whitelist:
+      tags:
+      - HookahCoal
+  - type: StorageFill
+    contents:
+    - id: HookahCoal
+      amount: 9

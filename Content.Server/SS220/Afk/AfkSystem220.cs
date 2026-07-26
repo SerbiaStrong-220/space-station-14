@@ -4,9 +4,9 @@ using Content.Shared.SS220.Afk;
 
 namespace Content.Server.SS220.Afk;
 
-public sealed class AfkSystem220 : EntitySystem
+public sealed partial class AfkSystem220 : EntitySystem
 {
-    [Dependency] private readonly IAfkManager _afkManager = default!;
+    [Dependency] private IAfkManager _afkManager = default!;
 
     public override void Initialize()
     {

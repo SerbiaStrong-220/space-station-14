@@ -9,7 +9,7 @@
     flavors:
       - punishment
       - savory
-  - type: Food
+  - type: Edible
   - type: SliceableFood
     count: 10
     slice: ThrowingSliceSynd
@@ -80,7 +80,7 @@
     flavors:
       - punishment
       - savory
-  - type: Food
+  - type: Edible
   - type: EmitSoundOnLand
     sound:
       path: /Audio/SS220/Effects/Drop/shiv.ogg
@@ -149,7 +149,7 @@
     flavors:
       - spicy
       - truenature
-  - type: Food
+  - type: Edible
   - type: SliceableFood
     count: 10
     slice: ThrowingSliceFood
@@ -214,7 +214,7 @@
     flavors:
       - spicy
       - truenature
-  - type: Food
+  - type: Edible
   - type: EmitSoundOnLand
     sound:
       path: /Audio/SS220/Effects/Drop/shiv.ogg
@@ -278,7 +278,9 @@
     - state: box
     - state: box-open
       map: ["enum.StorageVisualLayers.Door"]
-  - type: StorageFill
-    contents:
-    - id: SpicyPizzaSynd
-    - id: KnifePlastic
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: SpicyPizzaSynd
+        - id: KnifePlastic

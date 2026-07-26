@@ -275,7 +275,7 @@ public abstract partial class SharedToolSystem : EntitySystem
     #region DoAfterEvents
 
     [Serializable, NetSerializable]
-    protected sealed partial class ToolDoAfterEvent : DoAfterEvent
+    public sealed partial class ToolDoAfterEvent : DoAfterEvent // SS220-make-do-after-public
     {
         [DataField]
         public float Fuel;

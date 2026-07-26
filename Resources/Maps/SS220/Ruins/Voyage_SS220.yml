@@ -9301,7 +9301,6 @@ entities:
     - type: PoweredLight
       isBlinking: True
       lastGhostBlink: 10461.1895388
-    - type: Timer
   - uid: 458
     components:
     - type: Transform

@@ -6,7 +6,7 @@
   - type: FlavorProfile
     flavors:
       - bitter
-  - type: Food
+  - type: Edible
     transferAmount: 3
   - type: SolutionContainerManager
     solutions:

@@ -5,6 +5,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
+using Content.Shared.SS220.Experience;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Collections;
@@ -24,19 +25,10 @@ public abstract class SharedStationSpawningSystem : EntitySystem
     [Dependency] private readonly SharedStorageSystem _storage = default!;
     [Dependency] private readonly SharedTransformSystem _xformSystem = default!;
 
-    private EntityQuery<HandsComponent> _handsQuery;
-    private EntityQuery<InventoryComponent> _inventoryQuery;
-    private EntityQuery<StorageComponent> _storageQuery;
-    private EntityQuery<TransformComponent> _xformQuery;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-        _handsQuery = GetEntityQuery<HandsComponent>();
-        _inventoryQuery = GetEntityQuery<InventoryComponent>();
-        _storageQuery = GetEntityQuery<StorageComponent>();
-        _xformQuery = GetEntityQuery<TransformComponent>();
-    }
+    [Dependency] private readonly EntityQuery<HandsComponent> _handsQuery = default!;
+    [Dependency] private readonly EntityQuery<InventoryComponent> _inventoryQuery = default!;
+    [Dependency] private readonly EntityQuery<StorageComponent> _storageQuery = default!;
+    [Dependency] private readonly EntityQuery<TransformComponent> _xformQuery = default!;
 
     /// <summary>
     ///     Equips the data from a `RoleLoadout` onto an entity.
@@ -117,6 +109,14 @@ public abstract class SharedStationSpawningSystem : EntitySystem
     {
         if (startingGear == null)
             return;
+
+        // SS220-experience-update-begin
+        if (startingGear is StartingGearPrototype startingGearProto)
+        {
+            var skillRoleAddComp = EnsureComp<RoleExperienceAddComponent>(entity);
+            skillRoleAddComp.DefinitionId = startingGearProto.ExperienceDefinition ?? skillRoleAddComp.DefinitionId;
+        }
+        // SS220-experience-update-end
 
         var xform = _xformQuery.GetComponent(entity);
 

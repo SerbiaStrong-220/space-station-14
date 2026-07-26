@@ -38,6 +38,11 @@ public sealed partial class MouseRotatorComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool Simple4DirMode = true;
+
+    // SS220-Grabs-Start
+    [DataField, AutoNetworkedField]
+    public bool Enabled = false;
+    // SS220-Grabs-End
 }
 
 /// <summary>

@@ -70,3 +70,14 @@
     proto: Warehouseman
   equipment:
     outerClothing: ClothingOuterCoatQMWarehouseman
+
+# Headset
+- type: loadout
+  id: QuartermasterHeadset
+  equipment:
+    ears: ClothingHeadsetQM
+
+- type: loadout
+  id: QuartermasterHeadsetAlt
+  equipment:
+    ears: ClothingHeadsetAltCargo

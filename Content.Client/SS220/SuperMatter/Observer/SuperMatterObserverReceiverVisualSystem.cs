@@ -6,10 +6,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.SS220.SuperMatter.Observer;
 
-public sealed class SuperMatterObserverVisualReceiverSystem : EntitySystem
+public sealed partial class SuperMatterObserverVisualReceiverSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
 
     public override void Initialize()
     {

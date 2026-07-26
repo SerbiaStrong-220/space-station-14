@@ -22,3 +22,9 @@
     back:
     - ClothingNeckUSSPPin
   groupBy: "pin"
+
+- type: loadout
+  id: ExpensiveCane
+  storage:
+    back:
+    - ExpensiveCane

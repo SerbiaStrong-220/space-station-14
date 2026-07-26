@@ -22,3 +22,10 @@ ent-ClothingOuterHardsuitERTSecurityGamma = скафандр офицера бе
 
 ent-ClothingOuterHardsuitQuartermaster = скафандр квартирмейстера
     .desc = Прототип нового скафандра для Квартирмейстера, предназначенный для выполнения работ в опасных условиях.
+
+ent-ClothingOuterHardsuitRedWingsSec = скафандр офицера "Красных крыльев"
+    .desc = Тяжелобронированный скафандр, изготовленный компанией Cybersun для сотрудников службы безопасности Red Wings.
+ent-ClothingOuterHardsuitRedWingsMedic = скафандр медика "Красных крыльев"
+    .desc = Облегченная версия бронескафандра офицера безопасности Red Wings.
+ent-ClothingOuterHardsuitRedWingsPilot = скафандр пилота "Красных крыльев"
+    .desc = Легкий бронированный скафандр, обеспечивающий неограниченную свободу движений. Он оснащен портами для подключения к бортовому компьютеру.

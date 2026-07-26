@@ -280,7 +280,7 @@
   - Meat
 
 - type: foodSequenceElement
-  id: MeatSpiderBurger
+  id: MeatSpiderLegBurger #SS220-grillables-update
   name: food-sequence-burger-content-spider
   sprites:
   - sprite: Objects/Consumable/Food/meat.rsi
@@ -533,7 +533,7 @@
   id: Cabbage
   name: food-sequence-content-cabbage
   sprites:
-  - sprite: Objects/Specific/Hydroponics/cabbage.rsi # SS220 Fix #1975
+  - sprite: Objects/Specific/Hydroponics/cabbage.rsi
     state: produce
   tags:
   - Vegetable

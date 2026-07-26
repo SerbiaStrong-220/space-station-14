@@ -76,3 +76,12 @@
     Silver: 750
     Plasma: 1500
     Uranium: 600
+
+- type: latheRecipe
+  id: ClothingEyesHudMediChem
+  result: ClothingEyesHudMediChem
+  completetime: 5
+  materials:
+    Steel: 1000
+    Plastic: 500
+    Glass: 500

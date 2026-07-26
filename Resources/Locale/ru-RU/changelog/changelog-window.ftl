@@ -16,3 +16,5 @@ cmd-changelog-desc = Открыть историю обновлений.
 cmd-changelog-help = Использование: changelog
 
 changelog-tab-title-Changelog220 = Обновления SS220
+
+changelog-tab-title-Rules = Правила

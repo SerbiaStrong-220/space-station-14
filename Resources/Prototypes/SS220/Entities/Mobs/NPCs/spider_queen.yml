@@ -47,8 +47,10 @@
       amount: 1
       prob: 0.5
   - type: Bloodstream
-    bloodMaxVolume: 250
-    bloodReagent: Cryoxadone
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Cryoxadone
+        Quantity: 250
   - type: Fixtures
     fixtures:
       fix1:
@@ -99,17 +101,18 @@
     damageRecovery:
       types:
         Asphyxiation: -1.0
-  - type: Temperature
+  - type: TemperatureDamage
     heatDamageThreshold: 325
     coldDamageThreshold: 260
-    currentTemperature: 310.15
-    specificHeat: 42
     coldDamage:
       types:
         Cold: 0.1 #per second, scales with temperature & other constants
     heatDamage:
       types:
         Heat: 0.1 #per second, scales with temperature & other constants
+  - type: Temperature
+    currentTemperature: 310.15
+    specificHeat: 42
   - type: Speech #krik
     speechVerb: Arachnid
     speechSounds: Arachnid
@@ -139,7 +142,7 @@
     - id: SpiderTongue
       canSpeak: true
   - type: Stamina
-    critThreshold: 150
+    baseCritThreshold: 150
   - type: HTN
     rootTask:
       task: SpiderServantCompound
@@ -239,7 +242,7 @@
   - type: Puller
     needsHands: false
   - type: Stamina
-    critThreshold: 200
+    baseCritThreshold: 200
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -247,7 +250,6 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 350
     damage:
       types:
         Piercing: -0.30
@@ -255,8 +257,8 @@
         Slash: -0.15
         Heat: -0.30
         Cold: -0.15
-      groups:
-        Toxin: -4
+        Poison: -2
+        Radiation: -2
 
 #Spiders-servants
 - type: entity
@@ -287,7 +289,6 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 75
     damage:
       types:
         Piercing: -0.33
@@ -295,8 +296,8 @@
         Slash: -0.33
         Heat: -0.33
         Cold: -0.15
-      groups:
-        Toxin: -4
+        Poison: -2.0
+        Radiation: -2.0
   - type: MeleeWeapon #Damage
     hidden: true
     soundHit:
@@ -355,7 +356,6 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 130
     damage:
       types:
         Piercing: -0.5
@@ -363,8 +363,8 @@
         Slash: -0.25
         Heat: -0.5
         Cold: -0.25
-      groups:
-        Toxin: -4
+        Poison: -2.0
+        Radiation: -2.0
   - type: Barotrauma
     damage:
       types:
@@ -439,7 +439,6 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 110
     damage:
       types:
         Piercing: -0.5
@@ -447,8 +446,8 @@
         Slash: -0.25
         Heat: -0.5
         Cold: -0.25
-      groups:
-        Toxin: -4
+        Poison: -2
+        Radiation: -2
   - type: Barotrauma
     damage:
       types:
@@ -532,7 +531,6 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 90
     damage:
       types:
         Piercing: -0.30
@@ -540,8 +538,8 @@
         Slash: -0.15
         Heat: -0.30
         Cold: -0.15
-      groups:
-        Toxin: -4
+        Poison: -2
+        Radiation: -2
   - type: Barotrauma
     damage:
       types:
@@ -619,13 +617,19 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 40
     damage:
-      groups:
-        Brute: -0.5
-        Toxin: -0.5
-        Airloss: -0.5
-        Burn: -0.5
+      types:
+        Blunt: -0.17
+        Slash: -0.17
+        Piercing: -0.16
+        Heat: -0.13
+        Shock: -0.13
+        Cold: -0.12
+        Caustic: -0.12
+        Poison: -0.25
+        Radiation: -0.25
+        Asphyxiation: -0.25
+        Bloodloss: -0.25
   - type: MeleeWeapon
     hidden: true
     soundHit:

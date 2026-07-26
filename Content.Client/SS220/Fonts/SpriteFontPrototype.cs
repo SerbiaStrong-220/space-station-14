@@ -4,8 +4,8 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.SS220.Fonts;
 
-[Prototype("spriteFont")]
-public sealed class SpriteFontPrototype : IPrototype
+[Prototype]
+public sealed partial class SpriteFontPrototype : IPrototype
 {
     [IdDataField]
     public string ID { get; private set; } = default!;

@@ -1,4 +1,5 @@
 using Content.Shared.Alert;
+using Content.Shared.FixedPoint;
 using Content.Shared.Ninja.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -54,4 +55,12 @@ public sealed partial class SpaceNinjaComponent : Component
     /// </summary>
     [DataField]
     public ProtoId<AlertPrototype> SuitPowerAlert = "SuitPower";
+
+    // SS220 invis buff start
+    /// <summary>
+    /// Minimum health damage taken in a single hit to disable invis
+    /// </summary>
+    [DataField]
+    public FixedPoint2 RevealDamageThreshold = 8;
+    // SS220 invis buff end
 }

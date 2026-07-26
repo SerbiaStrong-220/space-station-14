@@ -6,12 +6,12 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototy
 namespace Content.Shared.SS220.CultYogg.FungusMachine;
 
 [Prototype]
-public sealed class FungusMachineInventoryPrototype : IPrototype
+public sealed partial class FungusMachineInventoryPrototype : IPrototype
 {
     [ViewVariables]
     [IdDataField]
     public string ID { get; private set; } = default!;
 
-    [DataField("startingInventory", customTypeSerializer:typeof(PrototypeIdDictionarySerializer<uint, EntityPrototype>))]
-    public Dictionary<string, uint> StartingInventory { get; private set; } = new();
+    [DataField("startingInventory")]
+    public Dictionary<EntProtoId, uint> StartingInventory { get; private set; } = new();
 }

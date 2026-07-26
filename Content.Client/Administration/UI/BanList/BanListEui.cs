@@ -1,8 +1,8 @@
+using System.Linq;
 using System.Numerics;
 using Content.Client.Administration.UI.BanList.Bans;
 using Content.Client.Administration.UI.BanList.RoleBans;
 using Content.Client.Eui;
-using Content.Client.SS220.Administration.UI.BanList.SpeciesBans;
 using Content.Shared.Administration.BanList;
 using Content.Shared.Eui;
 using JetBrains.Annotations;
@@ -32,13 +32,19 @@ public sealed class BanListEui : BaseEui
         SpeciesBanControl = BanWindow.SpeciesBanList;
         SpeciesBanControl.LineIdsClicked += OnLineIdsClicked;
         // SS220 Species bans end
+
+        // SS220 chat bans begin
+        ChatsBanControl = BanWindow.ChatsBanList;
+        ChatsBanControl.LineIdsClicked += OnLineIdsClicked;
+        // SS220 chat bans end
     }
 
     private BanListWindow BanWindow { get; }
 
     private BanListControl BanControl { get; }
     private RoleBanListControl RoleBanControl { get; }
-    private SpeciesBanListControl SpeciesBanControl { get; } // SS220 Species bans
+    private RoleBanListControl SpeciesBanControl { get; } // SS220 Species bans
+    private RoleBanListControl ChatsBanControl { get; } // SS220 chats bans
 
     private void OnClosed()
     {
@@ -68,7 +74,8 @@ public sealed class BanListEui : BaseEui
         s.Bans.Sort((a, b) => a.BanTime.CompareTo(b.BanTime));
         BanControl.SetBans(s.Bans);
         RoleBanControl.SetRoleBans(s.RoleBans);
-        SpeciesBanControl.SetSpeciesBans(s.SpeciesBans); // SS220 Species bans
+        SpeciesBanControl.SetRoleBans(s.SpeciesBans); // SS220 Species bans
+        ChatsBanControl.SetRoleBans(s.ChatBans); // SS220 chat bans
     }
 
     public override void Opened()
@@ -81,7 +88,7 @@ public sealed class BanListEui : BaseEui
         return date.ToString("MM/dd/yyyy h:mm tt");
     }
 
-    public static void SetData<T>(IBanListLine<T> line, SharedServerBan ban) where T : SharedServerBan
+    public static void SetData<T>(IBanListLine<T> line, SharedBan ban) where T : SharedBan
     {
         line.Reason.Text = ban.Reason;
         line.BanTime.Text = FormatDate(ban.BanTime);
@@ -102,20 +109,20 @@ public sealed class BanListEui : BaseEui
         line.BanningAdmin.Text = ban.BanningAdminName;
     }
 
-    private void OnLineIdsClicked<T>(IBanListLine<T> line) where T : SharedServerBan
+    private void OnLineIdsClicked<T>(IBanListLine<T> line) where T : SharedBan
     {
         _popup?.Close();
         _popup = null;
 
         var ban = line.Ban;
         var id = ban.Id == null ? string.Empty : Loc.GetString("ban-list-id", ("id", ban.Id.Value));
-        var ip = ban.Address == null
+        var ip = ban.Addresses.Length == 0
             ? string.Empty
-            : Loc.GetString("ban-list-ip", ("ip", ban.Address.Value.address));
-        var hwid = ban.HWId == null ? string.Empty : Loc.GetString("ban-list-hwid", ("hwid", ban.HWId));
-        var guid = ban.UserId == null
+            : Loc.GetString("ban-list-ip", ("ip", string.Join(',', ban.Addresses.Select(a => a.address))));
+        var hwid = ban.HWIds.Length == 0 ? string.Empty : Loc.GetString("ban-list-hwid", ("hwid", string.Join(',', ban.HWIds)));
+        var guid = ban.UserIds.Length == 0
             ? string.Empty
-            : Loc.GetString("ban-list-guid", ("guid", ban.UserId.Value.ToString()));
+            : Loc.GetString("ban-list-guid", ("guid", string.Join(',', ban.UserIds)));
 
         _popup = new BanListIdsPopup(id, ip, hwid, guid);
 
