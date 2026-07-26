@@ -36,10 +36,10 @@ public partial class GameMapManager
 
     private void OnMainStationMapLoaded(GameMapPrototype proto)
     {
-        AddInPlayedMapQueue(proto);
+        EnqueuePlayedMap(proto);
     }
 
-    private void AddInPlayedMapQueue(ProtoId<GameMapPrototype> proto)
+    private void EnqueuePlayedMap(ProtoId<GameMapPrototype> proto)
     {
         if (!_playedMapMemoryEnabled)
             return;
