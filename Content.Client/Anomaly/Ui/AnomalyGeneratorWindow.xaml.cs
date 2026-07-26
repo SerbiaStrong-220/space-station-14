@@ -103,7 +103,7 @@ public sealed partial class AnomalyGeneratorWindow : FancyWindow
         {
             var button = new Button
             {
-                StyleClasses = { StyleBase.ButtonOpenBoth },
+                StyleClasses = { StyleClass.ButtonOpenBoth },
                 SetSize = new Vector2(200, 32),
                 Text = beacon.Name,
             };

@@ -29,9 +29,6 @@ public sealed partial class AnomalySystem
 {
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-
-    [Dependency] private readonly EmagSystem _emag = default!;
-
     private void InitializeGenerator()
     {
         SubscribeLocalEvent<AnomalyGeneratorComponent, BoundUIOpenedEvent>(OnGeneratorBUIOpened);
@@ -182,10 +179,8 @@ public sealed partial class AnomalySystem
     {
         target = default;
 
-        var xform = Transform(grid);
-
         // no air-blocked areas.
-        if (_atmosphere.IsTileSpace(grid, gridComp.Owner, tile) ||
+        if (_atmosphere.IsTileSpace(grid, grid, tile) ||
             _atmosphere.IsTileAirBlocked(grid, tile, mapGridComp: gridComp))
         {
             return false;
