@@ -46,6 +46,7 @@ using Content.Shared.Whitelist;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Toolshed.Commands.Math;
@@ -118,6 +119,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
         SubscribeLocalEvent<AltMechComponent, UpdateCanMoveEvent>(OnMechCanMoveEvent);
         SubscribeLocalEvent<AltMechComponent, MassChangedEvent>(OnMassChanged);
+        SubscribeLocalEvent<AltMechComponent, EntInsertedIntoContainerMessage>(OnEntityInserted);
         SubscribeLocalEvent<AltMechPilotComponent, ToolUserAttemptUseEvent>(OnToolUseAttempt);
         SubscribeLocalEvent<AltMechPilotComponent, InhaleLocationEvent>(OnInhale);
 
@@ -347,16 +349,16 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
     private void ExitMech(Entity<AltMechComponent> ent)
     {
-        if (ent.Comp.PilotSlot.ContainedEntity == null)
+        if (ent.Comp.PilotSlot.ContainedEntity is not { Valid: true } pilotValid)
             return;
 
         if (ent.Comp.Bolted && !ent.Comp.BoltsSawed)
         {
-            _popup.PopupEntity(Loc.GetString("mech-bolted-no-exit"), (EntityUid)ent.Comp.PilotSlot.ContainedEntity);
+            _popup.PopupEntity(Loc.GetString("mech-bolted-no-exit"), pilotValid);
             return;
         }
 
-        EntityUid pilot = (EntityUid)ent.Comp.PilotSlot.ContainedEntity;
+        EntityUid pilot = pilotValid;
 
         if (TryComp<BarotraumaComponent>(pilot, out var barotraumaComp))
             barotraumaComp.HasImmunity = false;
@@ -557,9 +559,6 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
     public void UpdateUserInterface(Entity<AltMechComponent> ent)
     {
-        if (!HasComp<AltMechComponent>(ent))
-            return;
-
         var ev = new MechEquipmentUiStateReadyEvent();
         foreach (var part in ent.Comp.ContainerDict.Values)
         {
@@ -571,6 +570,20 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         }
 
         var state = new AltMechBoundUiState { EquipmentStates = ev.States };
+
+        FixedPoint2 pressure = FixedPoint2.Zero;
+        FixedPoint2 temperature = FixedPoint2.Zero;
+
+        if (ent.Comp.TankSlot != null &&
+            ent.Comp.TankSlot.ContainedEntity is { Valid: true } tankVerified &&
+            TryComp<GasTankComponent>(tankVerified, out var tankComp))
+        {
+            pressure = tankComp.Air.Pressure;
+            temperature = tankComp.Air.Temperature;
+        }
+
+        state.TankPressure = pressure;
+        state.TankTemperature = temperature;
 
         _ui.SetUiState(ent.Owner, MechUiKey.Key, state);
     }
@@ -587,9 +600,6 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
     public override void SetIntegrity(Entity<AltMechComponent> ent, FixedPoint2 value)
     {
-        if (!HasComp<AltMechComponent>(ent))
-            return;
-
         ent.Comp.Integrity = FixedPoint2.Clamp(value, 0, ent.Comp.MaxIntegrity);
 
         if (ent.Comp.Integrity <= 0)
@@ -652,17 +662,29 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
     #region Atmos Handling
     private void OnInhale(Entity<AltMechPilotComponent> ent, ref InhaleLocationEvent args)
     {
-        if (!TryComp<AltMechComponent>(ent.Comp.Mech, out var mechComp) || mechComp.TankSlot == null || mechComp.TankSlot.ContainedEntity == null)
+        if (!TryComp<AltMechComponent>(ent.Comp.Mech, out var mechComp))
             return;
 
-        if (!TryComp<GasTankComponent>(mechComp.TankSlot.ContainedEntity, out var tankComp))
-            return;
-
-        if (mechComp.Airtight)
+        if (!mechComp.Airtight || mechComp.TankSlot == null || mechComp.TankSlot.ContainedEntity is not { Valid: true } tankVerified)
         {
-            args.Gas = _gasTank.RemoveAirVolume((mechComp.TankSlot.ContainedEntity.Value, tankComp), args.Respirator.BreathVolume);
             _alerts.ShowAlert(ent.Owner, "Internals", GetSeverity((ent.Comp.Mech, mechComp)));
+            return;
         }
+
+        if (!TryComp<GasTankComponent>(tankVerified, out var tankComp))
+            return;
+
+        args.Gas = _gasTank.RemoveAirVolume((tankVerified, tankComp), args.Respirator.BreathVolume);
+        UpdateUserInterface((ent.Comp.Mech, mechComp));
+        _alerts.ShowAlert(ent.Owner, "Internals", GetSeverity((ent.Comp.Mech, mechComp)));
+    }
+
+    private void OnEntityInserted(Entity<AltMechComponent> ent, ref EntInsertedIntoContainerMessage args)
+    {
+        if (!HasComp<GasTankComponent>(args.Entity))
+            return;
+
+        UpdateUserInterface(ent);
     }
 
     private short GetSeverity(Entity<AltMechComponent> ent)

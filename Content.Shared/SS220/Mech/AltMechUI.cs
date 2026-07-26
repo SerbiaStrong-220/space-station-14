@@ -1,4 +1,5 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
+using Content.Shared.FixedPoint;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.AltMech;
@@ -76,6 +77,10 @@ public sealed class MechDetachTankMessage : BoundUserInterfaceMessage
 public sealed class AltMechBoundUiState : BoundUserInterfaceState
 {
     public Dictionary<NetEntity, BoundUserInterfaceState> EquipmentStates = new();
+
+    public FixedPoint2 TankPressure;
+
+    public FixedPoint2 TankTemperature;
 
     //public Dictionary<string, NetEntity?> Parts = new();
 }

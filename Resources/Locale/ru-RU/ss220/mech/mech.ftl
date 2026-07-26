@@ -6,3 +6,23 @@ ent-ActionMechClothingOpenUI = Панель управления
 
 mech-no-equipment-selected = нет выбранного снаряжения
 mech-not-enough-energy = недостаточно энергии
+
+mech-maintenance-mode-button = Техобслуживание
+
+mech-seal-button = Герметизация
+
+mech-detach-tank-button = Отсоединение баллона
+
+mech-bolt-button = Болтирование кабины
+
+mech-part-slot-occupied = Этот разъём уже занят!
+
+mech-maintenance-offline = Отключенный режим техобслуживания не позволяет вам это сделать!
+
+mech-arm-too-heavy = Эта рука слишком тяжёлая для этого корпуса!
+
+mech-tank-pressure = Давление дыхательной смеси: { $amount } кПа
+
+mech-tank-temperature = Температура дыхательной смеси: { $amount } К
+
+mech-equipment-slot-display = Свободное место: { $amount }

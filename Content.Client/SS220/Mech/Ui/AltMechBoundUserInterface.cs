@@ -63,6 +63,7 @@ public sealed class AltMechBoundUserInterface : BoundUserInterface
         _menu.OnDetachTankButtonPressed += _ => SendMessage(new MechDetachTankMessage(_));
 
         _menu?.UpdateMechStats();
+        _menu?.SetupMechTankData();
         _menu?.UpdateEquipmentView();
 
         _menu?.SetMaintenance(mechComp.MaintenanceMode);
@@ -79,6 +80,7 @@ public sealed class AltMechBoundUserInterface : BoundUserInterface
 
         UpdateEquipmentControls(msg);
         _menu?.UpdateMechStats();
+        _menu?.UpdateMechTankData(msg);
         _menu?.UpdateEquipmentView();
     }
 

@@ -2,6 +2,7 @@
 using Content.Shared.Access.Components;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
@@ -261,17 +262,17 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         foreach (var part in ent.Comp.ContainerDict)
         {
-            if (part.Key == "power" || part.Value == null || part.Value.ContainedEntity == null)
+            if (part.Key == "power" || part.Value == null || part.Value.ContainedEntity is not { Valid: true } partValid)
                 continue;
 
-            if (!TryGetNetEntity(part.Value.ContainedEntity, out var NetItem))
+            if (!TryGetNetEntity(partValid, out var netItem))
                 continue;
 
             //if (SharedRandomExtensions.PredictedProb(_timing, 0.16f, (NetEntity)NetMech, (NetEntity)NetItem))//this chance is hardcoded because using mech parts as shields is not planned, it's just a patch to make it work untill part damage UI is made
 
-            if (SharedRandomExtensions.PredictedProb(_timing, 0.16f, (NetEntity)NetItem))
+            if (SharedRandomExtensions.PredictedProb(_timing, 0.16f, (NetEntity)netItem))
             {
-                _damageable.TryChangeDamage((EntityUid)part.Value.ContainedEntity, damage);
+                _damageable.TryChangeDamage(partValid, damage);
                 return true;
             }
         }
@@ -709,28 +710,28 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     /// <returns>Whether or not the entity was inserted</returns>
     public bool TryInsert(Entity<AltMechComponent> ent, EntityUid? toInsert)
     {
-        if (toInsert == null || ent.Comp.PilotSlot.ContainedEntity == toInsert)
+        if (toInsert is not { Valid: true } toInsertValid || ent.Comp.PilotSlot.ContainedEntity == toInsertValid)
             return false;
 
-        if (TryComp<InventoryComponent>(toInsert, out var inventoryComp))
+        if (TryComp<InventoryComponent>(toInsertValid, out var inventoryComp))
         {
             foreach (var slot in ent.Comp.SlotsToDrop)
             {
-                _inventory.TryUnequip((EntityUid)toInsert, slot);
+                _inventory.TryUnequip(toInsertValid, slot);
             }
         }
 
-        if (!CanInsert(ent, toInsert.Value))
+        if (!CanInsert(ent, toInsertValid))
             return false;
 
-        SetupUser(ent, toInsert.Value);
-        _container.Insert(toInsert.Value, ent.Comp.PilotSlot);
+        SetupUser(ent, toInsertValid);
+        _container.Insert(toInsertValid, ent.Comp.PilotSlot);
 
         var ev = new OnMechEntryEvent();
         RaiseLocalEvent(ent, ref ev);
 
         if (TryComp<ArmorBlockComponent>(ent, out var blockComp))
-            blockComp.User = toInsert;
+            blockComp.User = toInsertValid;
 
         UpdateAppearance(ent);
         return true;
@@ -757,11 +758,11 @@ public abstract partial class SharedAltMechSystem : EntitySystem
             mechRadio.Channels.Clear();
         }
 
-        if (pilotComp.PilotUiActionEntity != null)
-            _actions.RemoveProvidedAction(pilot, ent.Owner, (EntityUid)pilotComp.PilotUiActionEntity);
+        if (pilotComp.PilotUiActionEntity is { Valid: true } pilotUiActionValid)
+            _actions.RemoveProvidedAction(pilot, ent.Owner, pilotUiActionValid);
 
-        if (pilotComp.PilotEjectActionEntity != null)
-            _actions.RemoveProvidedAction(pilot, ent.Owner, (EntityUid)pilotComp.PilotEjectActionEntity);
+        if (pilotComp.PilotEjectActionEntity is { Valid: true } pilotEjectActionValid)
+            _actions.RemoveProvidedAction(pilot, ent.Owner, pilotEjectActionValid);
 
         _container.RemoveEntity(ent.Owner, pilot);
 
