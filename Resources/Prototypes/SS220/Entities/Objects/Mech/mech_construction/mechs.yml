@@ -40,13 +40,22 @@
 - type: entity
   id: BasicHydraulicChassisFrame
   name: hydraulic chassis frame
-  description: Vrame of powerful hydraulic mech chassis
+  description: Frame of powerful hydraulic mech chassis
   components:
   - type: Clickable
   - type: InteractionOutline
   - type: Physics
     bodyType: Dynamic
     fixedRotation: false
+  - type: Item
+    size: Ginormous
+  - type: HeldSpeedModifier
+    sprintModifier: 0.2
+    walkModifier: 0.4
+    affectedByParameters: true
+  - type: ItemExtension
+    minimalStrengthToPickUp: 3.5
+    strengthRequirementToBeUsed: 7
   - type: Fixtures
     fixtures:
       fix1:
@@ -99,14 +108,18 @@
         - MobLayer
         restitution: 0.3
         friction: 0.2
+  - type: Item
+    size: Large
+    inhandVisuals:
+      left:
+      - state: inhand-left-big
+      right:
+      - state: inhand-right-big
   - type: Sprite
     layers:
       - map: [ "enum.ColorableVisualLayer.CustomBase" ]
-        sprite: SS220/Objects/Mechs/righthandfinal.rsi
-        state: basichydraulic
-      - map: [ "enum.ColorableVisualLayer.CustomColor" ]
-        sprite: SS220/Objects/Mechs/righthandfinal.rsi
-        state: basichydrauliccolor
+        sprite: SS220/Objects/Mechs/mech_components_machines.rsi
+        state: mech_arm_port
   - type: Appearance
   - type: ContainerContainer
     containers:
@@ -128,6 +141,20 @@
   - type: Physics
     bodyType: Dynamic
     fixedRotation: false
+  - type: HeldSpeedModifier
+    sprintModifier: 0.2
+    walkModifier: 0.4
+    affectedByParameters: true
+  - type: ItemExtension
+    minimalStrengthToPickUp: 3.5
+    strengthRequirementToBeUsed: 7
+  - type: Item
+    size: Large
+    inhandVisuals:
+      left:
+      - state: inhand-left-big
+      right:
+      - state: inhand-right-big
   - type: Fixtures
     fixtures:
       fix1:
@@ -144,11 +171,8 @@
   - type: Sprite
     layers:
       - map: [ "enum.ColorableVisualLayer.CustomBase" ]
-        sprite: SS220/Objects/Mechs/righthandfinal.rsi
-        state: basichydraulic
-      - map: [ "enum.ColorableVisualLayer.CustomColor" ]
-        sprite: SS220/Objects/Mechs/righthandfinal.rsi
-        state: basichydrauliccolor
+        sprite: SS220/Objects/Mechs/mech_crafts_intermediate/intermediare_arms_right.rsi
+        state: hydraulic
   - type: Appearance
   - type: ContainerContainer
     containers:
@@ -186,11 +210,15 @@
   - type: Sprite
     layers:
       - map: [ "enum.ColorableVisualLayer.CustomBase" ]
-        sprite: SS220/Objects/Mechs/lefthandfinal.rsi
-        state: basichydraulic
-      - map: [ "enum.ColorableVisualLayer.CustomColor" ]
-        sprite: SS220/Objects/Mechs/lefthandfinal.rsi
-        state: basichydrauliccolor
+        sprite: SS220/Objects/Mechs/mech_components_machines.rsi
+        state: mech_arm_port
+  - type: Item
+    size: Large
+    inhandVisuals:
+      left:
+      - state: inhand-left-big
+      right:
+      - state: inhand-right-big
   - type: Appearance
   - type: ContainerContainer
     containers:
@@ -212,6 +240,13 @@
   - type: Physics
     bodyType: Dynamic
     fixedRotation: false
+  - type: HeldSpeedModifier
+    sprintModifier: 0.2
+    walkModifier: 0.4
+    affectedByParameters: true
+  - type: ItemExtension
+    minimalStrengthToPickUp: 3.5
+    strengthRequirementToBeUsed: 7
   - type: Fixtures
     fixtures:
       fix1:
@@ -225,14 +260,18 @@
         - MobLayer
         restitution: 0.3
         friction: 0.2
+  - type: Item
+    size: Large
+    inhandVisuals:
+      left:
+      - state: inhand-left-big
+      right:
+      - state: inhand-right-big
   - type: Sprite
     layers:
       - map: [ "enum.ColorableVisualLayer.CustomBase" ]
-        sprite: SS220/Objects/Mechs/lefthandfinal.rsi
-        state: basichydraulic
-      - map: [ "enum.ColorableVisualLayer.CustomColor" ]
-        sprite: SS220/Objects/Mechs/lefthandfinal.rsi
-        state: basichydrauliccolor
+        sprite: SS220/Objects/Mechs/mech_crafts_intermediate/intermediare_arms_left.rsi
+        state: hydraulic
   - type: Appearance
   - type: ContainerContainer
     containers:

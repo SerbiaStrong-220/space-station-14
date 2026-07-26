@@ -7,10 +7,10 @@
   - type: Sprite
     layers:
       - map: [ "enum.ColorableVisualLayer.CustomBase" ]
-        sprite: SS220/Objects/Mechs/righthandfinal.rsi
+        sprite: SS220/Objects/Mechs/righthandicons.rsi
         state: basichydraulic
       - map: [ "enum.ColorableVisualLayer.CustomColor" ]
-        sprite: SS220/Objects/Mechs/righthandfinal.rsi
+        sprite: SS220/Objects/Mechs/righthandicons.rsi
         state: basichydrauliccolor
   - type: CustomColorableLayer
   - type: MechArm
@@ -31,12 +31,6 @@
           path: /Audio/Effects/metal_thud1.ogg
           params:
             variation: 0.10
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left-big
-      right:
-      - state: inhand-right-big
   - type: Destructible
     thresholds:
     - trigger:
@@ -207,12 +201,6 @@
           sizes:
           - Ginormous
       item: MechMiningDrill
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left-big
-      right:
-      - state: inhand-right-big
   - type: MechPart
     integrity: 150
     maxIntegrity: 150

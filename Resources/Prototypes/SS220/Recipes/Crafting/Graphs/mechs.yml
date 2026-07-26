@@ -28,21 +28,37 @@
             - tag: PowerSupplyUnitLarge
               name: construction-graph-tag-power-supply-unit-large
               icon:
-                sprite: Objects/Fun/bikehorn.rsi
-                state: icon
+                sprite: SS220/Objects/Mechs/mech_components_machines.rsi
+                state: large_psu
+              doAfter: 5
+              store: part-container
             - tool: Screwing
               doAfter: 5
             - tag: DimensionalElectronics
               name: construction-graph-tag-dimensional-electronics
               icon:
-                sprite: Objects/Fun/bikehorn.rsi
-                state: icon
+                sprite: Objects/Misc/module.rsi
+                state: mcontroller
+              doAfter: 5
+              store: part-container
             - tool: Screwing
               doAfter: 5
             - tag: PowerSupplyElectronics
+              name: construction-graph-tag-power-supply-electronics
+              icon:
+                sprite: Objects/Misc/module.rsi
+                state: mainboard
+              doAfter: 5
+              store: part-container
             - tool: Screwing
               doAfter: 5
             - tag: OpticalElectronics
+              name: construction-graph-tag-optical-electronics
+              icon:
+                sprite: Objects/Misc/module.rsi
+                state: std_mod
+              doAfter: 5
+              store: part-container
             - tool: Screwing
               doAfter: 5
             - material: Steel

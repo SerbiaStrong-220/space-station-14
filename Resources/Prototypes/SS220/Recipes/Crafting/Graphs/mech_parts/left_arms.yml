@@ -11,16 +11,24 @@
               doAfter: 15
               store: part-container
     - node: leftarmbase
-      entity: MechLeftArmFrame
+      entity: MechLeftArmBase
       edges:
         - to: leftarmframehydraulic
           steps:
             - tag: HydraulicPiston
+              name: construction-graph-tag-hydraulic-piston-large
+              icon:
+                sprite: SS220/Objects/Mechs/mech_components_machines.rsi
+                state: hydraulic_piston_black
               doAfter: 5
               store: part-container
             - tool: Anchoring
               doAfter: 5
             - tag: HydraulicPiston
+              name: construction-graph-tag-hydraulic-piston-large
+              icon:
+                sprite: SS220/Objects/Mechs/mech_components_machines.rsi
+                state: hydraulic_piston_black
               doAfter: 5
               store: part-container
             - tool: Anchoring
@@ -31,7 +39,26 @@
               store: part-container
             - tool: Screwing
               doAfter: 5
+            - material: Steel
+              amount: 15
+              doAfter: 15
+            - tool: Welding
+              doAfter: 10
+            - tool: Screwing
+              doAfter: 15
+              store: part-container
+    - node: leftarmframehydraulic
+      entity: MechLeftArmFrameHydraulic
+      edges:
+        - to: leftarmhydraulic
+          steps:
             - tag: PowerSupplyElectronics
+              name: construction-graph-tag-power-supply-electronics
+              icon:
+                sprite: Objects/Misc/module.rsi
+                state: mainboard
+              doAfter: 5
+              store: part-container
             - tool: Screwing
               doAfter: 5
             - material: Cable
@@ -39,6 +66,12 @@
               doAfter: 10
               store: part-container
             - tag: HydraulicsControlElectronics
+              name: construction-graph-tag-hydraulic-control-electronics
+              icon:
+                sprite: Objects/Misc/module.rsi
+                state: id_mod
+              doAfter: 5
+              store: part-container
             - tool: Screwing
               doAfter: 5
             - material: Cable
@@ -48,6 +81,12 @@
             - tool: Screwing
               doAfter: 15
             - tag: HydraulicPump
+              name: construction-graph-tag-hydraulic-pump
+              icon:
+                sprite: SS220/Objects/Mechs/mech_components_machines.rsi
+                state: hydraulic_pump
+              doAfter: 5
+              store: part-container
             - tool: Screwing
               doAfter: 5
             - material: Cable
@@ -60,12 +99,11 @@
               doAfter: 10
             - tool: Screwing
               doAfter: 15
-    - node: leftarmframehydraulic
-      entity: MechLeftArmFrameHydraulic
-      edges:
-        - to: leftarmhydraulic
-          steps:
             - tag: HydraulicPiston
+              name: construction-graph-tag-hydraulic-piston-large
+              icon:
+                sprite: SS220/Objects/Mechs/mech_components_machines.rsi
+                state: hydraulic_piston_black
               doAfter: 5
               store: part-container
             - tool: Anchoring
@@ -77,6 +115,10 @@
             - tool: Screwing
               doAfter: 5
             - tag: HydraulicPiston
+              name: construction-graph-tag-hydraulic-piston-large
+              icon:
+                sprite: SS220/Objects/Mechs/mech_components_machines.rsi
+                state: hydraulic_piston_black
               doAfter: 5
               store: part-container
             - tool: Anchoring
@@ -87,8 +129,13 @@
               store: part-container
             - tool: Screwing
               doAfter: 5
-            - tag: HydraulicClaw
+            - tag: HydraulicClamp
               doAfter: 10
+              name: construction-graph-tag-hydraulic-clamp
+              icon:
+                sprite: SS220/Objects/Mechs/mech_components_machines.rsi
+                state: hydraulic_clamp
+              store: part-container
             - tool: Anchoring
               doAfter: 5
             - material: Cable
@@ -100,8 +147,12 @@
         - to: leftarmhydraulicdrill
           steps:
             - tag: MechDrill
-              doAfter: 5
+              name: construction-graph-tag-mech-drill
+              icon:
+                sprite: SS220/Objects/Mechs/mech_components_machines.rsi
+                state: drill
               store: part-container
+              doAfter: 5
             - tool: Anchoring
               doAfter: 10
             - material: Cable
@@ -111,13 +162,25 @@
             - tool: Screwing
               doAfter: 5
             - tag: PowerSupplyUnit
+              name: construction-graph-tag-power-supply-unit
+              icon:
+                sprite: SS220/Objects/Mechs/mech_components_machines.rsi
+                state: psu
+              store: part-container
+              doAfter: 5
             - tool: Screwing
               doAfter: 5
             - material: Cable
               amount: 15
               doAfter: 10
               store: part-container
-            - tag: ServoMotor
+            - tag: ServoMotorLarge
+              name: construction-graph-tag-servo-large
+              icon:
+                sprite: SS220/Objects/Mechs/mech_components_machines.rsi
+                state: servo_large
+              store: part-container
+              doAfter: 5
             - tool: Screwing
               doAfter: 5
             - material: Cable

@@ -69,6 +69,8 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     public EntProtoId CombatModeToggleAction = "ActionCombatModeToggle";
     public EntProtoId MechRelayAction = "ActionMechRelay";
 
+    private static readonly LocId MechArmTooHeavy = "mech-arm-too-heavy";
+
     /// <inheritdoc/>
     public override void Initialize()
     {
@@ -293,12 +295,12 @@ public abstract partial class SharedAltMechSystem : EntitySystem
             if (part.Key == "power" || part.Value == null || part.Value.ContainedEntity != null)
                 continue;
 
-            if (!TryGetNetEntity(part.Value.ContainedEntity, out var NetItem))
+            if (!TryGetNetEntity(part.Value.ContainedEntity, out var netItem))
                 continue;
 
             //if (SharedRandomExtensions.PredictedProb(_timing, 0.16f, (NetEntity)NetMech, (NetEntity)NetItem))//this chance is hardcoded because using mech parts as shields is not planned, it's just a patch to make it work untill part damage UI is made
 
-            if (SharedRandomExtensions.PredictedProb(_timing, 0.16f, (NetEntity)NetItem))
+            if (SharedRandomExtensions.PredictedProb(_timing, 0.16f, (NetEntity)netItem))
             {
                 targetedPart = part.Value.ContainedEntity;
                 return true;
@@ -495,7 +497,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         if ((partComponent.slot == "left-arm" || partComponent.slot == "right-arm") && partComponent.OwnMass > component.MaximalArmMass)
         {
-            _popup.PopupEntity(Loc.GetString("mech-arm-too-heavy"), uid);
+            _popup.PopupEntity(Loc.GetString(MechArmTooHeavy), uid);
             return;
         }
 

@@ -21,12 +21,6 @@
           sizes:
           - Ginormous
       item: MechMiningDrill
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left-big
-      right:
-      - state: inhand-right-big
   - type: MechPart
     integrity: 150
     maxIntegrity: 150
@@ -102,10 +96,10 @@
   - type: Sprite
     layers:
       - map: [ "enum.ColorableVisualLayer.CustomBase" ]
-        sprite: SS220/Objects/Mechs/lefthandfinal.rsi
+        sprite: SS220/Objects/Mechs/lefthandicons.rsi
         state: basichydraulic
       - map: [ "enum.ColorableVisualLayer.CustomColor" ]
-        sprite: SS220/Objects/Mechs/lefthandfinal.rsi
+        sprite: SS220/Objects/Mechs/lefthandicons.rsi
         state: basichydrauliccolor
   - type: CustomColorableLayer
   - type: Construction
@@ -131,12 +125,6 @@
           path: /Audio/Effects/metal_thud1.ogg
           params:
             variation: 0.10
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left-big
-      right:
-      - state: inhand-right-big
   - type: MechPart
     integrity: 150
     maxIntegrity: 150

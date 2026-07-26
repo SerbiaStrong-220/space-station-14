@@ -7,8 +7,6 @@ using Content.Server.Mind;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Temperature.Components;
 using Content.Shared.ActionBlocker;
-using Content.Shared.Actions;
-using Content.Shared.Actions.Components;
 using Content.Shared.Alert;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
@@ -49,7 +47,6 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Toolshed.Commands.Math;
 using Robust.Shared.Utility;
 
 namespace Content.Server.SS220.Mech.Systems;
@@ -80,6 +77,14 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
     private readonly ProtoId<AlertPrototype> _mechIntegrityAlert = "MechHealth";
 
     public PrototypeFlags<ToolQualityPrototype> SawToolQualities = [];
+
+    private static readonly LocId MechSawBoltsVerb = "mech-saw-bolts-verb";
+    private static readonly LocId MechRepairBoltsVerb = "mech-repair-bolts-verb";
+    private static readonly LocId MechVerbEnter = "mech-verb-enter";
+    private static readonly LocId MechVerbExit = "mech-verb-exit";
+    private static readonly LocId MechEjectPilotAleert = "mech-eject-pilot-alert";
+    private static readonly LocId MechNoEnter = "mech-no-enter";
+    private static readonly LocId MechBoltedNoExit = "mech-bolted-no-exit";
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -172,10 +177,10 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
         if (_hands.TryGetActiveItem(args.User, out var item) && item is { Valid: true } itemValidated)
         {
-            var text = Loc.GetString("mech-saw-bolts-verb");
+            var text = Loc.GetString(MechSawBoltsVerb);
 
             if (ent.Comp.BoltsSawed)
-                text = Loc.GetString("mech-repair-bolts-verb");
+                text = Loc.GetString(MechRepairBoltsVerb);
 
             args.Verbs.Add(new AlternativeVerb
             {
@@ -198,7 +203,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         {
             var enterVerb = new AlternativeVerb
             {
-                Text = Loc.GetString("mech-verb-enter"),
+                Text = Loc.GetString(MechVerbEnter),
                 Act = () =>
                 {
                     var doAfterEventArgs = new DoAfterArgs(EntityManager, user, ent.Comp.EntryDelay, new MechEntryEvent(), ent, target: ent)
@@ -216,7 +221,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
             var ejectVerb = new AlternativeVerb
             {
-                Text = Loc.GetString("mech-verb-exit"),
+                Text = Loc.GetString(MechVerbExit),
                 Priority = 1,
                 Act = () =>
                 {
@@ -230,7 +235,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
                     {
                         BreakOnMove = true,
                     };
-                    _popup.PopupEntity(Loc.GetString("mech-eject-pilot-alert", ("item", ent), ("user", user)), ent, PopupType.Large);
+                    _popup.PopupEntity(Loc.GetString(MechEjectPilotAleert, ("item", ent), ("user", user)), ent, PopupType.Large);
 
                     _doAfter.TryStartDoAfter(doAfterEventArgs);
                 }
@@ -246,7 +251,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
         if (_whitelistSystem.IsWhitelistFail(ent.Comp.PilotWhitelist, args.User))
         {
-            _popup.PopupEntity(Loc.GetString("mech-no-enter", ("item", ent.Owner)), args.User);
+            _popup.PopupEntity(Loc.GetString(MechNoEnter, ("item", ent.Owner)), args.User);
             return;
         }
 
@@ -354,7 +359,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
         if (ent.Comp.Bolted && !ent.Comp.BoltsSawed)
         {
-            _popup.PopupEntity(Loc.GetString("mech-bolted-no-exit"), pilotValid);
+            _popup.PopupEntity(Loc.GetString(MechBoltedNoExit), pilotValid);
             return;
         }
 

@@ -7,8 +7,12 @@
     size: Ginormous
   - type: MechPart
   - type: HeldSpeedModifier
-    sprintModifier: 0.2 #You won't be able to run when holding something that has mass of more than hundreds of kilograms
+    sprintModifier: 0.2
     walkModifier: 0.4
+    affectedByParameters: true
+  - type: ItemExtension
+    minimalStrengthToPickUp: 3.5 #Gigantic weight, obviously
+    strengthRequirementToBeUsed: 7
   - type: ArmorBlock
   - type: Damageable
     damageContainer: Inorganic
@@ -32,7 +36,6 @@
   parent: MechPartBase
   abstract: true
   components:
-  - type: MultiHandedItem
   - type: MechPart
     slot: chassis
     ownMass: 200
@@ -61,7 +64,6 @@
   parent: MechPartBase
   abstract: true
   components:
-  - type: MultiHandedItem
   - type: MechPart
     slot: right-arm
     ownMass: 60
@@ -91,6 +93,9 @@
   - type: HeldSpeedModifier
     sprintModifier: 1.0
     walkModifier: 1.0
+  - type: ItemExtension
+    minimalStrengthToPickUp: 0.3
+    strengthRequirementToBeUsed: 0.4
   - type: MechPart
     slot: head
     ownMass: 25
@@ -115,7 +120,6 @@
   parent: MechPartBase
   abstract: true
   components:
-  - type: MultiHandedItem
   - type: MechPart
     slot: left-arm
     ownMass: 60
@@ -141,7 +145,12 @@
   parent: MechPartBase
   abstract: true
   components:
-  - type: MultiHandedItem
+  - type: HeldSpeedModifier
+    sprintModifier: 0.7
+    walkModifier: 1.0
+  - type: ItemExtension
+    minimalStrengthToPickUp: 0.7
+    strengthRequirementToBeUsed: 1.0
   - type: MechPart
     slot: power
     ownMass: 80

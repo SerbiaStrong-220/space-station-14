@@ -38,6 +38,32 @@
       - HydraulicPump
 
 - type: entity
+  id: ServoLarge
+  parent: BaseElectronics
+  name: large servomotor
+  description: A powerful servo used in large-scale machines.
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/Mechs/mech_components_machines.rsi
+      state: servo_large
+    - type: Tag
+      tags:
+      - ServoMotorLarge
+
+- type: entity
+  id: MechDrill
+  parent: BaseElectronics
+  name: mech drill
+  description: Large-scale industrial drill mechanism. Lacks any drives and power sources so proves to be pretty useless by itself.
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/Mechs/mech_components_machines.rsi
+      state: drill
+    - type: Tag
+      tags:
+      - MechDrill
+
+- type: entity
   id: HydraulicPiston
   parent: BaseElectronics
   name: hydraulic piston

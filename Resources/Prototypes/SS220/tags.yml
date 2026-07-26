@@ -204,7 +204,7 @@
   id: HydraulicPump
 
 - type: Tag
-  id: ServoMotor
+  id: ServoMotorLarge
 
 - type: Tag
   id: HydraulicPiston
@@ -214,6 +214,9 @@
 
 - type: Tag
   id: HydraulicClaw
+
+- type: Tag
+  id: MechDrill
 
 - type: Tag
   id: OpticalCamera

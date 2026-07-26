@@ -186,6 +186,19 @@ construction-graph-tag-toy-energy-sword = игрушечный энергоме�
 
 construction-graph-tag-power-cell-high = батарея высокой ёмкости
 
+#mechs
+construction-graph-tag-power-supply-unit-large = высокомощный блок питания
+construction-graph-tag-power-supply-unit = блок питания
+construction-graph-tag-dimensional-electronics = модуль пространственного ориентирования
+construction-graph-tag-power-supply-electronics = модуль контроля питания
+construction-graph-tag-optical-electronics = модуль обработки видеопотоков
+construction-graph-tag-hydraulic-piston-large = большой гидравлический поршень
+construction-graph-tag-hydraulic-control-electronics = модуль контроля гидравлики
+construction-graph-tag-hydraulic-pump = гидравлический насос
+construction-graph-tag-hydraulic-clamp = гидравлический зажим
+construction-graph-tag-mech-drill = буровой механизм
+construction-graph-tag-servo-large = высокомощный сервомотор
+
 # posters
 construction-graph-tag-Contrposter = Недопустимый постер
 construction-graph-tag-Legalposter = Допустимый постер

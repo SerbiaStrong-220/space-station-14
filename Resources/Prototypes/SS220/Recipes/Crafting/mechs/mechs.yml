@@ -21,7 +21,7 @@
   name: construction-recipe-mech-right-arm
   graph: MechRightArm
   startNode: start
-  targetNode: rightarmframehydraulic
+  targetNode: rightarmhydraulic
   category: construction-category-storage
   objectType: Structure
 
@@ -30,6 +30,6 @@
   name: construction-recipe-mech-left-arm
   graph: MechLeftArm
   startNode: start
-  targetNode: leftarmframehydraulic
+  targetNode: leftarmhydraulic
   category: construction-category-storage
   objectType: Structure
