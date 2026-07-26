@@ -87,6 +87,9 @@
       - type: Internals
   - type: TriggerOnSpawn
     keyOut: RemoveInternalsOnly
+  - type: DamageTypeImmunity
+    immuneTypes:
+    - Cold
   - type: DamageVisuals
     damageOverlayGroups:
       Brute:
