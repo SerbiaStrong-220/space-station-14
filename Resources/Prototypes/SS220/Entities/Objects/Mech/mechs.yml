@@ -193,7 +193,7 @@
     tresholdDict:
       Radiation: 1000 # As always mechs do not care about radiation/poison/airloss/etc.
       Poison: 1000
-      Airloss: 1000
+      #Airloss: 1000
       Caustic: 1000
       Piercing: 12 #Numbers higher compared to a strikeproof shield, anything starting from intermediate caliber will easily pierce that
       Blunt: 35
@@ -203,7 +203,7 @@
     durabilityTresholdDict:
       Radiation: 1000
       Poison: 1000
-      Airloss: 1000
+      #Airloss: 1000
       Caustic: 1000
       Piercing: 12
       Blunt: 25
@@ -219,7 +219,7 @@
     baseState: basicloader
     openState: basicloader
     brokenState: basicloader
-    integrity: 250
+    #integrity: 250
     maxIntegrity: 250
     maximalArmMass: 250
     ownMass: 250
@@ -238,7 +238,7 @@
     tresholdDict:
       Radiation: 1000 # As always mechs do not care about radiation/poison/airloss/etc.
       Poison: 1000
-      Airloss: 1000
+      #Airloss: 1000
       Caustic: 1000
       Piercing: 15 #Numbers a bit higher compared to a strikeproof shield, bullets/lasers should be easily ignoring this due to AP
       Blunt: 20
@@ -248,7 +248,7 @@
     durabilityTresholdDict:
       Radiation: 1000
       Poison: 1000
-      Airloss: 1000
+      #Airloss: 1000
       Caustic: 1000
       Piercing: 10
       Blunt: 13
@@ -259,7 +259,7 @@
     baseState: basiclight
     openState: basiclight
     brokenState: basiclight
-    integrity: 200
+    #integrity: 200
     maxIntegrity: 200
     ownMass: 150
     maximalArmMass: 145
@@ -291,7 +291,7 @@
     tresholdDict:
       Radiation: 1000
       Poison: 1000
-      Airloss: 1000
+      #Airloss: 1000
       Caustic: 1000
       Piercing: 245 #This is a DS frame and logically a tank
       Blunt: 270
@@ -301,7 +301,7 @@
     durabilityTresholdDict:
       Radiation: 1000
       Poison: 1000
-      Airloss: 1000
+      #Airloss: 1000
       Caustic: 1000
       Piercing: 110
       Blunt: 150
@@ -314,7 +314,7 @@
     baseState: basiclight
     openState: basiclight
     brokenState: basiclight
-    integrity: 300
+    #integrity: 300
     maxIntegrity: 300
     ownMass: 300
     maximalArmMass: 200

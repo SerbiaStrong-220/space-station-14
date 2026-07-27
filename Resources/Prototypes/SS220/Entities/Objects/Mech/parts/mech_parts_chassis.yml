@@ -9,7 +9,7 @@
     tresholdDict:
       Radiation: 1000 # As always mechs do not care about radiation/poison/airloss/etc.
       Poison: 1000
-      Airloss: 1000
+      #Airloss: 1000
       Caustic: 1000
       Piercing: 12 #Numbers higher compared to a strikeproof shield, anything starting from intermediate caliber will easily pierce that
       Blunt: 35
@@ -19,7 +19,7 @@
     durabilityTresholdDict:
       Radiation: 1000
       Poison: 1000
-      Airloss: 1000
+      #Airloss: 1000
       Caustic: 1000
       Piercing: 12
       Blunt: 25
@@ -38,8 +38,8 @@
   - type: MechChassis
     maximalMass: 900
     baseMovementSpeed: 3.3
-    acceleration: 0.8
-    efficiency: 0.01
+    acceleration: 1.2
+    efficiency: 0.003
   - type: MechPart
     integrity: 250
     maxIntegrity: 250

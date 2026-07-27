@@ -17,7 +17,7 @@
     tresholdDict:
       Radiation: 1000 # As always mechs do not care about radiation/poison/airloss/etc.
       Poison: 1000
-      Airloss: 1000
+      #Airloss: 1000
       Caustic: 1000
       Piercing: 12 #Numbers higher compared to a strikeproof shield, anything starting from intermediate caliber will easily pierce that
       Blunt: 35
@@ -27,7 +27,7 @@
     durabilityTresholdDict:
       Radiation: 1000
       Poison: 1000
-      Airloss: 1000
+      #Airloss: 1000
       Caustic: 1000
       Piercing: 12
       Blunt: 25
@@ -145,7 +145,7 @@
     tresholdDict:
       Radiation: 1000 # As always mechs do not care about radiation/poison/airloss/etc.
       Poison: 1000
-      Airloss: 1000
+      #Airloss: 1000
       Caustic: 1000
       Piercing: 20 #Numbers higher compared to a strikeproof shield, anything starting from intermediate caliber will easily pierce that
       Blunt: 40
@@ -155,7 +155,7 @@
     durabilityTresholdDict:
       Radiation: 1000
       Poison: 1000
-      Airloss: 1000
+      #Airloss: 1000
       Caustic: 1000
       Piercing: 20
       Blunt: 40
