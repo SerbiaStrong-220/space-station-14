@@ -12,12 +12,19 @@
       path: /Audio/SS220/Effects/Drop/sledgehammer.ogg
       params:
         volume: 2
+  - type: Item
+    size: Ginormous
+  - type: Clothing
+    sprite: SS220/Objects/Weapons/Melee/sledgehammer.rsi
+    quickEquip: false
+    slots:
+    - back
   - type: MeleeWeapon
     wideAnimationRotation: -135
     damage:
       types:
         Blunt: 10
-        Structural: 10
+        Structural: 20
     soundHit:
       collection: MetalThud
   - type: Wieldable
@@ -26,5 +33,3 @@
       types:
         Blunt: 16
         Structural: 140
-  - type: Item
-    size: Large
