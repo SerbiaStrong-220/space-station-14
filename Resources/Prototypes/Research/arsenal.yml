@@ -12,6 +12,7 @@
   recipeUnlocks:
   - WeaponProtoKineticAccelerator
   - ShuttleGunKineticCircuitboard
+  - AssaultSledgehammer #SS220 Energy shield
   # These are roundstart but not replenishable for salvage
 
 - type: technology

@@ -1,0 +1,30 @@
+- type: entity
+  name: sledgehammer
+  parent: Sledgehammer
+  id: AssaultSledgehammer
+  description: The perfect tool for wanton carnage.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Melee/sledgehammer.rsi
+    state: icon
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/sledgehammer.ogg
+      params:
+        volume: 2
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Blunt: 10
+        Structural: 10
+    soundHit:
+      collection: MetalThud
+  - type: Wieldable
+  - type: IncreaseDamageOnWield
+    damage:
+      types:
+        Blunt: 16
+        Structural: 140
+  - type: Item
+    size: Large

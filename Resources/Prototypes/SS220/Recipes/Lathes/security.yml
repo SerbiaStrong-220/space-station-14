@@ -141,3 +141,11 @@
     Gold: 400
     Silver: 400
     Plasma: 200
+
+- type: latheRecipe
+  id: AssaultSledgehammer
+  result: AssaultSledgehammer
+  completetime: 5
+  materials:
+    Steel: 2000
+    Plastic: 500
