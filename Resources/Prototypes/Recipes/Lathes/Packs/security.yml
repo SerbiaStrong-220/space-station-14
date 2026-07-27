@@ -83,7 +83,7 @@
   - RiotBulletShield #SS220 Shield rework
   - RiotLaserShield #SS220 Shield rework
   - FieldShieldGenerator #SS220 Energy shield
-  - AssaultSledgehammer #SS220 Energy shield
+  - AssaultSledgehammer #SS220 assault sledgehammer
 
 - type: latheRecipePack
   id: SecurityBoards
