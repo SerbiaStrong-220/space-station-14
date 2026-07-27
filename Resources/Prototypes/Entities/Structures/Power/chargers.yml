@@ -143,6 +143,12 @@
     sprite: Structures/Power/cage_recharger.rsi
   - type: PowerCellSlot
     cellSlotId: charger_slot
+    #SS220 mech overhaul begin
+    cellSlotWhitelist:
+      components:
+        - PowerCell
+        - MechPart
+    #SS220 mech overhaul end
   - type: ItemSlots
     slots:
       charger_slot:
@@ -151,6 +157,7 @@
         whitelist:
           tags:
           - PowerCage
+          - MechPowerGrid #SS220 mech overhaul
   - type: Machine
     board: PowerCageRechargerCircuitboard
   - type: StaticPrice

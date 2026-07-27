@@ -227,6 +227,9 @@
 - type: Tag
   id: ThermalCamera
 
+- type: Tag
+  id: MechPowerGrid
+
 #HOCebent
 - type: Tag
   id: CartridgeUnitary

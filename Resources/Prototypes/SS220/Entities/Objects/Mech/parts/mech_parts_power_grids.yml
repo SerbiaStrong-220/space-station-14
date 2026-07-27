@@ -50,9 +50,6 @@
     solutions:
       battery:
         maxVol: 5
-  - type: Tag
-    tags:
-      - PowerCell
   - type: Appearance
   - type: PowerCellVisuals
   - type: Riggable
@@ -99,9 +96,6 @@
     solutions:
       battery:
         maxVol: 5
-  - type: Tag
-    tags:
-      - PowerCell
   - type: Appearance
   - type: PowerCellVisuals
   - type: Riggable

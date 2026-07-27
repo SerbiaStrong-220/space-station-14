@@ -1,5 +1,5 @@
 - type: entity
-  parent: [BaseMob, StripableInventoryBase]
+  parent: [BaseControllable, StripableInventoryBase]
   id: BaseAltMech
   save: false
   abstract: true
@@ -67,6 +67,7 @@
   - type: StatusEffects
     allowed:
     - Flashed
+    - Drunk
   - type: PressureProtection #After some research i decided to get rid of MechAir as there will be basically no difference in game but larger amounts of work and space for bugs
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
@@ -110,6 +111,7 @@
   - type: GravityAffected
   - type: Clickable
   #- type: WiresPanel
+  - type: LagCompensation
   - type: Language
   - type: HealthExaminable
     examinableTypes:

@@ -168,7 +168,7 @@
         maxVol: 5
   - type: Tag
     tags:
-      - PowerCell
+      - MechPowerGrid
   - type: Appearance
   - type: PowerCellVisuals
   - type: Riggable

@@ -1,4 +1,5 @@
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.PowerCell.Components;
@@ -15,6 +16,14 @@ public sealed partial class PowerCellSlotComponent : Component
     /// </remarks>
     [DataField(required: true)]
     public string CellSlotId = string.Empty;
+
+    //SS220 make this a whitelist begin
+    [DataField]
+    public EntityWhitelist CellSlotWhitelist = new EntityWhitelist
+    {
+        Components = ["PowerCell"]
+    };
+    //SS220 make this a whitelist end
 
     /// <summary>
     /// Can this entity be inserted directly into a charging station? If false, you need to manually remove the power

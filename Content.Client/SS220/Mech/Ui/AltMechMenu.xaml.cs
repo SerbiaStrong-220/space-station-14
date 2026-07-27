@@ -1,7 +1,6 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Fragments;
-using Content.Shared.Atmos.Components;
 using Content.Shared.FixedPoint;
 using Content.Shared.SS220.AltMech;
 using Content.Shared.SS220.Mech.Components;

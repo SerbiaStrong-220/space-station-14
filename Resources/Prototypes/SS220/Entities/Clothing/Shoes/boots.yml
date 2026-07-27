@@ -233,7 +233,7 @@
     sprintModifier: 0.9
   - type: FootstepModifier
     footstepSoundCollection:
-      path: /Audio/Mecha/mechmove03.ogg
+      path: /Audio/Effects/stealthoff.ogg
   - type: ToggleClothing
     action: ActionToggleMagboots
     mustEquip: false
@@ -261,7 +261,7 @@
     sprintModifier: 0.9
   - type: FootstepModifier
     footstepSoundCollection:
-      path: /Audio/Mecha/mechmove03.ogg
+      path: /Audio/Effects/stealthoff.ogg
   - type: ToggleClothing
     action: ActionToggleMagboots
     mustEquip: false
