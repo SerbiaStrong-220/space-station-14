@@ -12,6 +12,28 @@
       - map: [ "enum.ColorableVisualLayer.CustomColor" ]
         sprite: SS220/Objects/Mechs/lefthandicons.rsi
         state: hydraulicdrillcolor
+  - type: ArmorBlock
+  - type: AltArmor # Ah yes,my beloved СБЭУ
+    tresholdDict:
+      Radiation: 1000 # As always mechs do not care about radiation/poison/airloss/etc.
+      Poison: 1000
+      Airloss: 1000
+      Caustic: 1000
+      Piercing: 20 #Numbers higher compared to a strikeproof shield, anything starting from intermediate caliber will easily pierce that
+      Blunt: 40
+      Heat: 20
+      Slash: 45
+      Shock: 30 # All the electronics is insulated from the frame BY DEFAULT(otherwise there would be an instant short-circuit) and the steel frame is not affected by it in any way
+    durabilityTresholdDict:
+      Radiation: 1000
+      Poison: 1000
+      Airloss: 1000
+      Caustic: 1000
+      Piercing: 20
+      Blunt: 40
+      Heat: 15
+      Slash: 30
+      Shock: 30
   - type: Construction
     graph: MechLeftArm
     node: leftarmhydraulicdrill
@@ -118,6 +140,28 @@
     containers:
     - part-container
     skill: ElectronicsConstructionAdvanced
+  - type: ArmorBlock
+  - type: AltArmor # Ah yes,my beloved СБЭУ
+    tresholdDict:
+      Radiation: 1000 # As always mechs do not care about radiation/poison/airloss/etc.
+      Poison: 1000
+      Airloss: 1000
+      Caustic: 1000
+      Piercing: 20 #Numbers higher compared to a strikeproof shield, anything starting from intermediate caliber will easily pierce that
+      Blunt: 40
+      Heat: 20
+      Slash: 45
+      Shock: 30 # All the electronics is insulated from the frame BY DEFAULT(otherwise there would be an instant short-circuit) and the steel frame is not affected by it in any way
+    durabilityTresholdDict:
+      Radiation: 1000
+      Poison: 1000
+      Airloss: 1000
+      Caustic: 1000
+      Piercing: 20
+      Blunt: 40
+      Heat: 15
+      Slash: 30
+      Shock: 30
   - type: MechArm
     hands:
     - hand:

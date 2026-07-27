@@ -13,6 +13,28 @@
         sprite: SS220/Objects/Mechs/righthandicons.rsi
         state: basichydrauliccolor
   - type: CustomColorableLayer
+  - type: ArmorBlock
+  - type: AltArmor # Ah yes,my beloved СБЭУ
+    tresholdDict:
+      Radiation: 1000 # As always mechs do not care about radiation/poison/airloss/etc.
+      Poison: 1000
+      Airloss: 1000
+      Caustic: 1000
+      Piercing: 20 #Numbers higher compared to a strikeproof shield, anything starting from intermediate caliber will easily pierce that
+      Blunt: 40
+      Heat: 20
+      Slash: 45
+      Shock: 30 # All the electronics is insulated from the frame BY DEFAULT(otherwise there would be an instant short-circuit) and the steel frame is not affected by it in any way
+    durabilityTresholdDict:
+      Radiation: 1000
+      Poison: 1000
+      Airloss: 1000
+      Caustic: 1000
+      Piercing: 20
+      Blunt: 40
+      Heat: 15
+      Slash: 30
+      Shock: 30
   - type: MechArm
     hands:
     - hand:
@@ -208,6 +230,28 @@
           - Ginormous
       item: MechMiningDrill
   - type: CustomColorableLayer
+  - type: ArmorBlock
+  - type: AltArmor # Ah yes,my beloved СБЭУ
+    tresholdDict:
+      Radiation: 1000 # As always mechs do not care about radiation/poison/airloss/etc.
+      Poison: 1000
+      Airloss: 1000
+      Caustic: 1000
+      Piercing: 20 #Numbers higher compared to a strikeproof shield, anything starting from intermediate caliber will easily pierce that
+      Blunt: 40
+      Heat: 20
+      Slash: 45
+      Shock: 30 # All the electronics is insulated from the frame BY DEFAULT(otherwise there would be an instant short-circuit) and the steel frame is not affected by it in any way
+    durabilityTresholdDict:
+      Radiation: 1000
+      Poison: 1000
+      Airloss: 1000
+      Caustic: 1000
+      Piercing: 20
+      Blunt: 40
+      Heat: 15
+      Slash: 30
+      Shock: 30
   - type: MechPart
     integrity: 150
     maxIntegrity: 150
@@ -292,17 +336,6 @@
   - type: Sprite
     sprite: Objects/Specific/Mech/mecha_equipment.rsi
     state: mecha_clamp
-  - type: ArmorBlock # Ah yes,my beloved СБЭУ
-    durabilityTresholdDict:
-        Radiation: 1000
-        Poison: 1000
-        Airloss: 1000
-        Caustic: 1000
-        Piercing: 110
-        Blunt: 100
-        Heat: 120
-        Slash: 70
-        Shock: 150
   - type: MechArm
     hands:
     - hand:

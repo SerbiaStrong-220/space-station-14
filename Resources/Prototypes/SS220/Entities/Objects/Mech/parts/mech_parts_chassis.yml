@@ -4,6 +4,7 @@
   name: powerloader hydraulic chassis
   description: Low-tier hydraulic chassis, heavy and slow but also very powerfull and reliable
   components:
+  - type: ArmorBlock
   - type: AltArmor # Ah yes,my beloved СБЭУ
     tresholdDict:
       Radiation: 1000 # As always mechs do not care about radiation/poison/airloss/etc.
