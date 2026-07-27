@@ -214,6 +214,7 @@
   parent: ClothingUniformBase #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitClownBanana
   name: banana clown suit
+  description: HONK! #SS220 folded-equipped-INNERCLOTHING resprite V3
   components:
   - type: Sprite
     sprite: Clothing/Uniforms/Jumpsuit/clown_banana.rsi
