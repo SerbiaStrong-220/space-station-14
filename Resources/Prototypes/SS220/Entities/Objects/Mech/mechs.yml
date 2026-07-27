@@ -195,18 +195,18 @@
       Poison: 1000
       Airloss: 1000
       Caustic: 1000
-      Piercing: 20 #Numbers higher compared to a strikeproof shield, anything starting from intermediate caliber will easily pierce that
-      Blunt: 40
+      Piercing: 12 #Numbers higher compared to a strikeproof shield, anything starting from intermediate caliber will easily pierce that
+      Blunt: 35
       Heat: 20
-      Slash: 45
+      Slash: 40
       Shock: 30 # All the electronics is insulated from the frame BY DEFAULT(otherwise there would be an instant short-circuit) and the steel frame is not affected by it in any way
     durabilityTresholdDict:
       Radiation: 1000
       Poison: 1000
       Airloss: 1000
       Caustic: 1000
-      Piercing: 20
-      Blunt: 40
+      Piercing: 12
+      Blunt: 25
       Heat: 15
       Slash: 30
       Shock: 30
