@@ -1,4 +1,3 @@
-using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Construction.Components;
 using Content.Server.Temperature.Components;
@@ -11,12 +10,15 @@ using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Prying.Systems;
 using Content.Shared.Radio.EntitySystems;
+using Content.Shared.SS220.Experience;
 using Content.Shared.Stacks;
 using Content.Shared.Temperature;
 using Content.Shared.Temperature.Components;
 using Content.Shared.Tools.Systems;
 using Robust.Shared.Containers;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using System.Linq;
 #if EXCEPTION_TOLERANCE
 // ReSharper disable once RedundantUsingDirective
 using Robust.Shared.Exceptions;
@@ -33,6 +35,8 @@ namespace Content.Server.Construction
 
         private readonly Queue<EntityUid> _constructionUpdateQueue = new();
         private readonly HashSet<EntityUid> _queuedUpdates = new();
+
+        private static readonly LocId InsufficientSkill = "construction-insufficient-skill";//SS220 add skill requiring constructions
 
         private void InitializeInteractions()
         {
@@ -239,6 +243,14 @@ namespace Content.Server.Construction
                 if (interactDoAfter.Cancelled)
                     return HandleResult.False;
 
+                //SS220 add skill requiring constructions begin
+                if (construction.Skill != null && !_experience.HaveSkill(interactDoAfter.User, (ProtoId<SkillPrototype>) construction.Skill))
+                {
+                    _popup.PopupEntity(Loc.GetString(InsufficientSkill), interactDoAfter.User);
+                    return HandleResult.False;
+                }
+                //SS220 add skill requiring constructions end
+
                 ev = new InteractUsingEvent(
                     interactDoAfter.User,
                     interactDoAfter.Used!.Value,
@@ -267,6 +279,14 @@ namespace Content.Server.Construction
                         break;
 
                     // TODO: Sanity checks.
+
+                    //SS220 add skill requiring constructions begin
+                    if (construction.Skill != null && !_experience.HaveSkill(interactUsing.User, (ProtoId<SkillPrototype>) construction.Skill))
+                    {
+                        _popup.PopupEntity(Loc.GetString(InsufficientSkill), interactUsing.User);
+                        return HandleResult.False;
+                    }
+                    //SS220 add skill requiring constructions end
 
                     user = interactUsing.User;
 
@@ -349,6 +369,14 @@ namespace Content.Server.Construction
                 {
                     if (ev is not InteractUsingEvent interactUsing)
                         break;
+
+                    //SS220 add skill requiring constructions begin
+                    if (construction.Skill != null && !_experience.HaveSkill(interactUsing.User, (ProtoId<SkillPrototype>) construction.Skill))
+                    {
+                        _popup.PopupEntity(Loc.GetString(InsufficientSkill), interactUsing.User);
+                        return HandleResult.False;
+                    }
+                    //SS220 add skill requiring constructions end
 
                     // TODO: Sanity checks.
 

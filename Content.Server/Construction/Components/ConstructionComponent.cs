@@ -1,5 +1,8 @@
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.DoAfter;
+using Content.Shared.SS220.Experience;
+using Content.Shared.Whitelist;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Server.Construction.Components
@@ -33,6 +36,8 @@ namespace Content.Server.Construction.Components
 
         [DataField("deconstructionTarget")]
         public string? DeconstructionNode { get; set; } = "start";
+
+        [DataField] public ProtoId<SkillPrototype>? Skill; //SS220 add skill requirement to the construction graph
 
         [ViewVariables]
         // TODO Force flush interaction queue before serializing to YAML.

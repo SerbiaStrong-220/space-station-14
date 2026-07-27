@@ -16,7 +16,7 @@ recipes-construction-curbdarksteel-corner = тёмный стальной бор
 recipes-construction-curbdarksteel-corner-small = тёмный стальной бордюр (угол маленький)
 recipes-construction-curbdarksteel-round = тёмный стальной бордюр (круглый)
 
-construction-recipe-powerloader = SMF-0-3-4
+construction-recipe-powerloader = CF-05
 construction-recipe-mech-chassis = гидравлическое шасси меха
 construction-recipe-mech-right-arm = правая рука меха
 construction-recipe-mech-left-arm = левая рука меха

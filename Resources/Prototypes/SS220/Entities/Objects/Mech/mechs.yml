@@ -11,6 +11,7 @@
   - type: StatusEffectContainer
   - type: ArmorBlock
   - type: Stripping
+  - type: MobMover
   - type: Sprite
     layers:
       - map: [ "enum.MechPartVisualLayers.Chassis" ]
@@ -189,7 +190,7 @@
   description: Name is self-speaking - this is a powerloader frame which has limited equipment space, high mass, cannot be sealed and provides little to no protection to the user but is still better than nothing
   components:
   - type: AltArmor # Ah yes,my beloved СБЭУ
-    tresholddict:
+    tresholdDict:
       Radiation: 1000 # As always mechs do not care about radiation/poison/airloss/etc.
       Poison: 1000
       Airloss: 1000
@@ -199,7 +200,7 @@
       Heat: 20
       Slash: 45
       Shock: 30 # All the electronics is insulated from the frame BY DEFAULT(otherwise there would be an instant short-circuit) and the steel frame is not affected by it in any way
-    durabilitytresholddict:
+    durabilityTresholdDict:
       Radiation: 1000
       Poison: 1000
       Airloss: 1000

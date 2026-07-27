@@ -17,6 +17,7 @@
     node: leftarmhydraulicdrill
     containers:
     - part-container
+    skill: ElectronicsConstructionAdvanced
   - type: CustomColorableLayer
   - type: MechArm
     hands:
@@ -116,6 +117,7 @@
     node: leftarmhydraulic
     containers:
     - part-container
+    skill: ElectronicsConstructionAdvanced
   - type: MechArm
     hands:
     - hand:

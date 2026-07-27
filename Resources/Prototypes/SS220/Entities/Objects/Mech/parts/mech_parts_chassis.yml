@@ -41,6 +41,12 @@
         node: start
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: Construction
+    graph: MechChassis
+    node: basichydraulicchassis
+    containers:
+    - part-container
+    skill: ElectronicsConstructionAdvanced
   - type: Item
     inhandVisuals:
       left:

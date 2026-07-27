@@ -213,7 +213,7 @@
   id: ArtificialMuscle
 
 - type: Tag
-  id: HydraulicClaw
+  id: HydraulicClamp
 
 - type: Tag
   id: MechDrill

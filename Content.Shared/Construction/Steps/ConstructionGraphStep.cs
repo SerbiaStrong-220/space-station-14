@@ -1,4 +1,5 @@
-﻿using Content.Shared.Examine;
+using Content.Shared.Examine;
+using Content.Shared.Whitelist;
 
 namespace Content.Shared.Construction.Steps
 {

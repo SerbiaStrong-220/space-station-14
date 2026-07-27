@@ -21,6 +21,7 @@
   tier: 1
   cost: 11000
   recipeUnlocks:
+  - PowerCageRechargerCircuitboard #It is here so we dont have to research t2 security to use mechs
   - PowerSupplyElectronics
   - HydraulicsControlElectronics
   - ServoControlElectronics
