@@ -211,7 +211,7 @@
     - ClothMade #SS220-pr: FIX CLOTHING TAGS
 
 - type: entity
-  parent: ClothingUniformJumpsuitClown
+  parent: ClothingUniformBase #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitClownBanana
   name: banana clown suit
   components:
@@ -1060,7 +1060,7 @@
     sprite: Clothing/Uniforms/Jumpsuit/ert_security.rsi
 
 - type: entity
-  parent: ClothingUniformJumpsuitClown
+  parent: ClothingUniformBase #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitCluwne
   name: cluwne suit
   suffix: Unremoveable
