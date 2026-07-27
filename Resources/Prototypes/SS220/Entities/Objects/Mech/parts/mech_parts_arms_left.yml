@@ -291,7 +291,7 @@
     sprite: Objects/Specific/Mech/mecha_equipment.rsi
     state: mecha_clamp
   - type: ArmorBlock # Ah yes,my beloved СБЭУ
-    durabilitytresholddict:
+    durabilityTresholdDict:
         Radiation: 1000
         Poison: 1000
         Airloss: 1000

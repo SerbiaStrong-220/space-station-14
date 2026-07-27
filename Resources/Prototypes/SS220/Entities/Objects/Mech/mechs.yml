@@ -210,9 +210,6 @@
       Heat: 15
       Slash: 30
       Shock: 30
-    attachedColoredSprite:
-      sprite: SS220/Objects/Mechs/coresfinal.rsi
-      state: basicloadercolor
   - type: Construction
     graph: PowerloaderFrame
     node: powerloader
@@ -238,7 +235,7 @@
     state: basiclight
     noRot: true
   - type: AltArmor # Ah yes,my beloved СБЭУ
-    tresholddict:
+    tresholdDict:
       Radiation: 1000 # As always mechs do not care about radiation/poison/airloss/etc.
       Poison: 1000
       Airloss: 1000
@@ -248,7 +245,7 @@
       Heat: 13
       Slash: 20
       Shock: 30 # All the electronics is insulated in any industrial machine and the steel frame is not affected by it in any way
-    durabilitytresholddict:
+    durabilityTresholdDict:
       Radiation: 1000
       Poison: 1000
       Airloss: 1000
@@ -291,7 +288,7 @@
     state: armoredsynth
     noRot: true
   - type: AltArmor
-    tresholddict:
+    tresholdDict:
       Radiation: 1000
       Poison: 1000
       Airloss: 1000
@@ -301,7 +298,7 @@
       Heat: 120
       Slash: 70
       Shock: 150
-    durabilitytresholddict:
+    durabilityTresholdDict:
       Radiation: 1000
       Poison: 1000
       Airloss: 1000

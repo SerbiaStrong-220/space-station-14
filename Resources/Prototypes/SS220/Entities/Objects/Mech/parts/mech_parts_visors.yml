@@ -13,9 +13,6 @@
   - type: MechPart
     integrity: 70
     maxIntegrity: 70
-    attachedSprite:
-      sprite: SS220/Objects/Mechs/heads.rsi
-      state: welding
   - type: Destructible
     thresholds:
     - trigger:
@@ -45,9 +42,6 @@
   - type: MechPart
     integrity: 50 #a large sensor array is not very durable
     maxIntegrity: 50
-    attachedSprite:
-      sprite: SS220/Objects/Mechs/heads.rsi
-      state: medical
   - type: ShowHealthBars
   - type: ShowHealthIcons
   - type: Destructible
@@ -79,9 +73,6 @@
   - type: MechPart
     integrity: 90
     maxIntegrity: 90
-    attachedSprite:
-      sprite: SS220/Objects/Mechs/heads.rsi
-      state: armored
   - type: ShowMindShieldIcons
   - type: ShowJobIcons
   - type: Destructible
@@ -112,9 +103,6 @@
   - type: MechPart
     integrity: 90
     maxIntegrity: 90
-    attachedSprite:
-      sprite: SS220/Objects/Mechs/heads.rsi
-      state: armoredsyndie
   - type: ShowSyndicateIcons
   - type: Destructible
     thresholds:
@@ -144,9 +132,6 @@
   - type: MechPart
     integrity: 120
     maxIntegrity: 120
-    attachedSprite:
-      sprite: SS220/Objects/Mechs/heads.rsi
-      state: armoredsyndieheavy
   - type: Destructible
     thresholds:
     - trigger:
@@ -175,9 +160,6 @@
   - type: MechPart
     integrity: 75
     maxIntegrity: 75
-    attachedSprite:
-      sprite: SS220/Objects/Mechs/heads.rsi
-      state: armoredsyndiemedical
   - type: ShowSyndicateIcons
   - type: ShowHealthBars
   - type: ShowHealthIcons
@@ -209,9 +191,6 @@
   - type: MechPart
     integrity: 110
     maxIntegrity: 110
-    attachedSprite:
-      sprite: SS220/Objects/Mechs/heads.rsi
-      state: advancedarmored
   - type: ShowSyndicateIcons
   - type: ShowHealthBars
   - type: ShowHealthIcons

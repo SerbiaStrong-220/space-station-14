@@ -4,6 +4,27 @@
   name: powerloader hydraulic chassis
   description: Low-tier hydraulic chassis, heavy and slow but also very powerfull and reliable
   components:
+  - type: AltArmor # Ah yes,my beloved СБЭУ
+    tresholdDict:
+      Radiation: 1000 # As always mechs do not care about radiation/poison/airloss/etc.
+      Poison: 1000
+      Airloss: 1000
+      Caustic: 1000
+      Piercing: 20 #Numbers higher compared to a strikeproof shield, anything starting from intermediate caliber will easily pierce that
+      Blunt: 40
+      Heat: 20
+      Slash: 45
+      Shock: 30 # All the electronics is insulated from the frame BY DEFAULT(otherwise there would be an instant short-circuit) and the steel frame is not affected by it in any way
+    durabilityTresholdDict:
+      Radiation: 1000
+      Poison: 1000
+      Airloss: 1000
+      Caustic: 1000
+      Piercing: 20
+      Blunt: 40
+      Heat: 15
+      Slash: 30
+      Shock: 30
   - type: Sprite
     layers:
       - map: [ "enum.ColorableVisualLayer.CustomBase" ]
@@ -80,58 +101,6 @@
     - trigger:
         !type:DamageTrigger
         damage: 175
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalBreak
-      - !type:ChangeConstructionNodeBehavior
-        node: start
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left-big
-      right:
-      - state: inhand-right-big
-
-- type: entity
-  id: ArmoredSynthChassis
-  parent: BaseMechChassis
-  name: executor-class chassis
-  description: Mech chassis driven by artificial muscles. It is lighter than hydraulic, has much higher reaction speed and way more flexible. This one has plastitanium frame and heavy armor.
-  components:
-  - type: Sprite
-    sprite: SS220/Objects/Mechs/chassis.rsi
-    state: armoredsynth
-  - type: AltArmor # Ah yes,my beloved СБЭУ
-    durabilitytresholddict:
-        Radiation: 1000
-        Poison: 1000
-        Airloss: 1000
-        Caustic: 1000
-        Piercing: 120
-        Blunt: 115
-        Heat: 120
-        Slash: 70
-        Shock: 150
-  - type: MechChassis
-    maximalMass: 950
-    baseMovementSpeed: 5.6
-    acceleration: 10
-    efficiency: 0.01
-  - type: MechPart
-    integrity: 300
-    maxIntegrity: 300
-    ownMass: 160
-    attachedSprite:
-      sprite: SS220/Objects/Mechs/chassis.rsi
-      state: armoredsynth
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 300
       behaviors:
       - !type:PlaySoundBehavior
         sound:
