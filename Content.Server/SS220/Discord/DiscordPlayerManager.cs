@@ -11,6 +11,7 @@ using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Administration.Managers;
+using Content.Server.Database;
 using Content.Shared.CCVar;
 using Content.Shared.Players;
 using Content.Shared.SS220.CCVars;
@@ -29,6 +30,7 @@ public sealed partial class DiscordPlayerManager : IPostInjectInit, IDisposable
     [Dependency] private IServerNetManager _netMgr = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IAdminManager _adminManager = default!;
+    [Dependency] private UserDbDataManager _userDb = default!;
 
     internal SponsorUsers? CachedSponsorUsers => _cachedSponsorUsers;
 
@@ -43,6 +45,7 @@ public sealed partial class DiscordPlayerManager : IPostInjectInit, IDisposable
     public event EventHandler<ICommonSession>? PlayerVerified;
 
     private volatile Dictionary<NetUserId, DiscordSponsorInfo?> _cachedSponsorInfo = new();
+    private volatile Dictionary<NetUserId, bool> _sponsorInfoFetchFailed = new();
 
     public List<SponsorTier> PriorityJoinTiers =
     [
@@ -78,6 +81,47 @@ public sealed partial class DiscordPlayerManager : IPostInjectInit, IDisposable
             dueTime: TimeSpan.FromSeconds(_cfg.GetCVar(CCVars220.DiscordSponsorsCacheLoadDelaySeconds)),
             period: TimeSpan.FromSeconds(_cfg.GetCVar(CCVars220.DiscordSponsorsCacheRefreshIntervalSeconds))
         );
+
+        // Fetch sponsor info as part of the user-db *load* step (the tasks that UserDbDataManager
+        // awaits via Task.WhenAll before running any "on finish load" callback, including
+        // ServerPreferencesManager.FinishLoad -> SanitizePreferences -> loadout validation).
+        // This guarantees ContentPlayerData.SponsorInfo is populated (or definitively marked as
+        // failed) before sponsor-gated loadout items are validated and before the player can spawn.
+        // Previously this ran off an independent PlayerStatusChanged subscription racing against
+        // GameTicker's own preferences load, which could strip sponsor loadout items if the HTTP
+        // fetch hadn't completed yet (especially right after a server restart with a cold connection).
+        _userDb.AddOnLoadPlayer(OnLoadPlayer);
+    }
+
+    private async Task OnLoadPlayer(ICommonSession session, CancellationToken cancel)
+    {
+        if (!_isDiscordLinkRequired && string.IsNullOrEmpty(_linkApiUrl))
+            return;
+
+        await UpdateSponsorInfo(session.UserId);
+        ApplySponsorInfo(session);
+    }
+
+    private void ApplySponsorInfo(ICommonSession session)
+    {
+        _cachedSponsorInfo.TryGetValue(session.UserId, out var info);
+        _sponsorInfoFetchFailed.TryGetValue(session.UserId, out var fetchFailed);
+
+        var contentPlayerData = session.ContentData();
+        if (contentPlayerData == null)
+            return;
+
+        contentPlayerData.SponsorInfo = info;
+        contentPlayerData.SponsorInfoFetchFailed = fetchFailed;
+
+        if (info is not null)
+        {
+            _netMgr.ServerSendMessage(new MsgUpdatePlayerDiscordStatus
+            {
+                Info = info
+            },
+            session.Channel);
+        }
     }
 
     private void ByPassDiscordCheck(MsgByPassDiscordCheck msg)
@@ -135,44 +179,24 @@ public sealed partial class DiscordPlayerManager : IPostInjectInit, IDisposable
             e.Session.Channel.SendMessage(msg);
         }
 
-        if (e.NewStatus == SessionStatus.InGame)
-        {
-            await UpdateUserDiscordRolesStatus(e);
-        }
-
         if (e.NewStatus == SessionStatus.Disconnected)
         {
             _cachedSponsorInfo.Remove(e.Session.UserId);
+            _sponsorInfoFetchFailed.Remove(e.Session.UserId);
         }
     }
 
-    private async Task UpdateUserDiscordRolesStatus(SessionStatusEventArgs e)
-    {
-        await UpdateSponsorInfo(e.Session.UserId);
-        _cachedSponsorInfo.TryGetValue(e.Session.UserId, out var info);
-
-        if (info is not null)
-        {
-            _netMgr.ServerSendMessage(new MsgUpdatePlayerDiscordStatus
-            {
-                Info = info
-            },
-            e.Session.Channel);
-
-            // Cache info in content data
-            var contentPlayerData = e.Session.ContentData();
-            if (contentPlayerData == null)
-                return;
-
-            contentPlayerData.SponsorInfo = info;
-        }
-    }
-
-    private async Task<DiscordSponsorInfo?> GetSponsorInfo(NetUserId userId)
+    /// <returns>
+    /// The fetched sponsor info (null if the player has no sponsor tiers), and whether the fetch
+    /// itself succeeded. A null result with <c>Success: true</c> means "we asked and the player has
+    /// no tiers"; <c>Success: false</c> means the premium-checker service was unavailable/errored and
+    /// we don't actually know the player's status.
+    /// </returns>
+    private async Task<(DiscordSponsorInfo? Info, bool Success)> GetSponsorInfo(NetUserId userId)
     {
         if (string.IsNullOrEmpty(_linkApiUrl))
         {
-            return null;
+            return (null, true);
         }
 
         try
@@ -189,17 +213,18 @@ public sealed partial class DiscordPlayerManager : IPostInjectInit, IDisposable
                     response.StatusCode,
                     errorText);
 
-                return null;
+                return (null, false);
             }
 
-            return await response.Content.ReadFromJsonAsync<DiscordSponsorInfo>(GetJsonSerializerOptions());
+            var info = await response.Content.ReadFromJsonAsync<DiscordSponsorInfo>(GetJsonSerializerOptions());
+            return (info, true);
         }
         catch (Exception exc)
         {
             _sawmill.Error(exc.Message);
         }
 
-        return null;
+        return (null, false);
     }
 
     public async Task<string> GetUserLink(NetUserId userId)
@@ -348,14 +373,16 @@ public sealed partial class DiscordPlayerManager : IPostInjectInit, IDisposable
 
     public async Task UpdateSponsorInfo(NetUserId userId)
     {
-        var sponsorInfo = await GetSponsorInfo(userId);
+        var (sponsorInfo, success) = await GetSponsorInfo(userId);
         _cachedSponsorInfo[userId] = sponsorInfo;
+        _sponsorInfoFetchFailed[userId] = !success;
     }
 
     public async Task<bool> HasPriorityJoinTierAsync(NetUserId userId)
     {
         await UpdateSponsorInfo(userId);
-        return HasPriorityJoinTier(await GetSponsorInfo(userId));
+        _cachedSponsorInfo.TryGetValue(userId, out var info);
+        return HasPriorityJoinTier(info);
     }
 
     public bool HasPriorityJoinTier(NetUserId userId)

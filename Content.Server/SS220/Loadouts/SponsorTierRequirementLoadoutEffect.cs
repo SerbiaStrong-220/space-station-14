@@ -16,7 +16,20 @@ public sealed partial class SponsorTierRequirementLoadoutEffect : SharedSponsorT
     public override bool Validate(HumanoidCharacterProfile profile, RoleLoadout loadout, ICommonSession? session, IDependencyCollection collection, [NotNullWhen(false)] out FormattedMessage? reason)
     {
         reason = new FormattedMessage();
-        if (session == null || session.ContentData()?.SponsorInfo?.Tiers is not { } playerTiers)
+        var contentData = session?.ContentData();
+        if (contentData == null)
+        {
+            reason = FormattedMessage.Empty;
+            return false;
+        }
+
+        // The premium-checker service was unavailable/errored when we tried to fetch this player's
+        // sponsor status, so we can't tell "not a sponsor" from "couldn't ask". Fail open rather than
+        // silently stripping an already-selected sponsor item on every restart/reconnect.
+        if (contentData.SponsorInfoFetchFailed)
+            return true;
+
+        if (contentData.SponsorInfo?.Tiers is not { } playerTiers)
         {
             reason = FormattedMessage.Empty;
             return false;
