@@ -14,7 +14,7 @@ public sealed class DamageTypeImmunitySystem : EntitySystem
         SubscribeLocalEvent<DamageTypeImmunityComponent, BeforeDamageChangedEvent>(OnBeforeDamageChanged);
     }
 
-    private void OnBeforeDamage(Entity<DamageTypeImmunityComponent> ent, ref BeforeDamageChangedEvent args)
+    private void OnBeforeDamageChanged(Entity<DamageTypeImmunityComponent> ent, ref BeforeDamageChangedEvent args)
     {
         if (args.Cancelled)
             return;
