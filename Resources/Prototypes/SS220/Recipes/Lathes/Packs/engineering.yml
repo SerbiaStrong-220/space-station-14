@@ -8,6 +8,9 @@
   - HydraulicPiston
   - ServoLarge
   - HydraulicPump
+  - MechVisorBasic
+  - MechVisorMedical
+  - MechVisorArmoredNT
 
 - type: latheRecipePack
   id: RobotechBoards
@@ -26,4 +29,7 @@
   - CompositeFrameMechMod
   - MagneticPadMechMod
   - JetpackMechModBasic
+  - MechBatterySmall
+  - MechBatteryMiddle
+  - MechBatterySmallNuclear
 

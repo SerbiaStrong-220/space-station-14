@@ -176,3 +176,70 @@
     Plasma: 300
     Silver: 200
 
+- type: latheRecipe
+  id: MechBatterySmall
+  result: MechBatterySmall
+  categories: [ Robotics ]
+  completetime: 10
+  materials:
+    Steel: 2000
+    Plastic: 700
+    Gold: 900
+    Silver: 900
+
+- type: latheRecipe
+  id: MechBatteryMiddle
+  result: MechBatteryMiddle
+  categories: [ Robotics ]
+  completetime: 10
+  materials:
+    Steel: 2500
+    Plastic: 700
+    Gold: 900
+    Plasma: 1000
+    Silver: 900
+
+- type: latheRecipe
+  id: MechBatterySmallNuclear
+  result: MechBatterySmallNuclear
+  categories: [ Robotics ]
+  completetime: 10
+  materials:
+    Steel: 2000
+    Plastic: 700
+    Uranium: 1500
+    Silver: 900
+
+- type: latheRecipe
+  id: MechVisorBasic
+  result: MechVisorBasic
+  categories: [ Robotics ]
+  completetime: 10
+  materials:
+    Steel: 500
+    Plastic: 700
+    Gold: 150
+    Silver: 80
+
+- type: latheRecipe
+  id: MechVisorMedical
+  result: MechVisorMedical
+  categories: [ Robotics ]
+  completetime: 10
+  materials:
+    Steel: 500
+    Plastic: 800
+    Gold: 150
+    Silver: 200
+
+- type: latheRecipe
+  id: MechVisorArmoredNT
+  result: MechVisorArmoredNT
+  categories: [ Robotics ]
+  completetime: 10
+  materials:
+    Steel: 1000
+    Plastic: 800
+    Gold: 80
+    Silver: 60
+

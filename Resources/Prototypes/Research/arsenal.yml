@@ -107,6 +107,7 @@
   - TelescopicShield
   - HoloprojectorSecurity
   - WeaponDisablerSMG
+  - MechVisorArmoredNT #SS220 mech overhaul
 
 - type: technology
   id: ExplosiveTechnology

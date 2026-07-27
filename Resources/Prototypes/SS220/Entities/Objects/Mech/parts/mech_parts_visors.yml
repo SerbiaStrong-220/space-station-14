@@ -6,6 +6,7 @@
   components:
   - type: FlashImmunity
   - type: EyeProtection
+  - type: CustomColorableLayer
   - type: Sprite
     sprite: SS220/Objects/Mechs/items/mecha_parts.rsi
     state: visor_basic
@@ -40,6 +41,7 @@
   - type: Sprite
     sprite: SS220/Objects/Mechs/items/mecha_parts.rsi
     state: visor_basic
+  - type: CustomColorableLayer
   - type: MechPart
     integrity: 50 #a large sensor array is not very durable
     maxIntegrity: 50
@@ -70,6 +72,7 @@
   components:
   - type: FlashImmunity
   - type: EyeProtection
+  - type: CustomColorableLayer
   - type: Sprite
     sprite: SS220/Objects/Mechs/items/mecha_parts.rsi
     state: visor_basic

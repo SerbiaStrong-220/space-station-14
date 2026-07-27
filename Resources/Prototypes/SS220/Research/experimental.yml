@@ -27,6 +27,8 @@
   - ServoControlElectronics
   - OpticalProcessorElectronics
   - DimensionalOrientationElectronics
+  - MechBatterySmall
+  - MechVisorBasic
 
 - type: technology
   id: IndustrialExosuit

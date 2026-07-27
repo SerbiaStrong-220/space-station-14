@@ -344,5 +344,7 @@ public sealed class MechPartSystem : EntitySystem
             return;
 
         ent.Comp.ColoredSpriteColor = args.DesiredColor;
+
+        Dirty(ent);
     }
 }

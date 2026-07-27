@@ -44,6 +44,7 @@
   - TurboItemRechargerCircuitboard
   - SMESAdvancedMachineCircuitboard
   - PowerCellBlaster                 #SS220 BlueShield
+  - MechBatteryMiddle #SS220 mech overhaul
 
 - type: technology
   id: MechanicalCompression
@@ -174,6 +175,7 @@
   recipeUnlocks:
   - Thermoelectricgenerator
   - ThermoelectricgeneratorTurbine
+  - MechBatterySmallNuclear #SS220 mech overhaul
   technologyPrerequisites:
   - PowerGeneration
 # ss220 end thermoelectric generator
