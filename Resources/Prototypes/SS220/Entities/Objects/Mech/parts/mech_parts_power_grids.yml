@@ -83,7 +83,7 @@
     maxIntegrity: 100
     attachedSprite:
       sprite: SS220/Objects/Mechs/batteries.rsi
-      state: largeicon
+      state: large
   - type: Battery
     maxCharge: 15000
     startingCharge: 15000

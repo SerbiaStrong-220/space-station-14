@@ -9,12 +9,14 @@ namespace Content.Shared.SS220.CustomColorableLayer;
 public sealed partial class CustomColorableLayerComponent : Component
 {
     [DataField]
-    [AutoNetworkedField]
     public ColorableVisualLayer AttachedColoredSpriteLayer = ColorableVisualLayer.CustomColor;
 
     [DataField]
     [AutoNetworkedField]
     public Color ColoredLayerColor = Color.White;
+
+    [DataField]
+    public TimeSpan TimeToPaint = TimeSpan.FromSeconds(20);
 }
 
 public enum ColorableVisualLayer : byte

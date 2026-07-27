@@ -136,6 +136,11 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         #endregion
     }
 
+    protected override void OnStartup(Entity<AltMechComponent> ent, ref ComponentStartup args)
+    {
+        base.OnStartup(ent, ref args);
+    }
+
     private void OnMechCanMoveEvent(Entity<AltMechComponent> ent, ref UpdateCanMoveEvent args)
     {
         if (ent.Comp.Broken || ent.Comp.Integrity <= 0 || !ent.Comp.Online)

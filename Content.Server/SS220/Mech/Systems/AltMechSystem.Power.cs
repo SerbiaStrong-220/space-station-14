@@ -15,6 +15,10 @@ public sealed partial class AltMechSystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
 
+    private readonly string ChassisSlot = "chassis";
+
+    private readonly string PowerSlot = "power";
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -32,7 +36,7 @@ public sealed partial class AltMechSystem
             if (curTime < comp.NextPowerDrain)
                 continue;
 
-            if (comp.ContainerDict["chassis"].ContainedEntity is not { Valid: true } chassisValid)
+            if (comp.ContainerDict[ChassisSlot].ContainedEntity is not { Valid: true } chassisValid)
                 continue;
 
             if (!TryComp<MechChassisComponent>(chassisValid, out var chassisComp))
@@ -51,16 +55,15 @@ public sealed partial class AltMechSystem
 
     public bool TryChangeMechCharge(Entity<AltMechComponent> ent, float amount)
     {
-        if (ent.Comp.ContainerDict["power"].ContainedEntity is not { Valid: true } batteryValid)
+        if (ent.Comp.ContainerDict[PowerSlot].ContainedEntity is not { Valid: true } batteryValid)
             return false;
 
-        if (!TryComp<BatteryComponent>(ent.Comp.ContainerDict["power"].ContainedEntity, out var batteryComp))
+        if (!TryComp<BatteryComponent>(ent.Comp.ContainerDict[PowerSlot].ContainedEntity, out var batteryComp))
             return false;
 
         var actualChange = _battery.ChangeCharge(batteryValid, amount);
         ent.Comp.Energy = batteryComp.LastCharge;
 
-        UpdateUserInterface(ent);
         Dirty(ent);
 
         if (actualChange == 0 && amount != 0)
@@ -71,8 +74,13 @@ public sealed partial class AltMechSystem
 
     private void OnChargeChanged(Entity<MechPartComponent> ent, ref ChargeChangedEvent args)
     {
-        if (ent.Comp.PartOwner is { Valid: true} mechValidated)
-            UpdateMechOnlineStatus(mechValidated, ent.Owner);
+        if (ent.Comp.PartOwner is not { Valid: true } mechValidated)
+            return;
+
+        UpdateMechOnlineStatus(mechValidated, ent.Owner);
+
+        if (TryComp<AltMechComponent>(mechValidated, out var mechComp))
+            UpdateUserInterface((mechValidated, mechComp));
     }
 
     public void UpdateMechOnlineStatus(EntityUid mech, EntityUid battery)
@@ -86,7 +94,7 @@ public sealed partial class AltMechSystem
 
             TransferMindIntoPilot((mech, mechComp));
 
-            if (mechComp.ContainerDict["chassis"].ContainedEntity is not { Valid: true })
+            if (mechComp.ContainerDict[ChassisSlot].ContainedEntity is not { Valid: true })
                 _actionBlocker.UpdateCanMove(mech);
         }
         if (mechComp.Energy > 0 && !mechComp.Online)
@@ -96,7 +104,7 @@ public sealed partial class AltMechSystem
             if (mechComp.PilotSlot.ContainedEntity is not { Valid: true })
                 TransferMindIntoMech((mech, mechComp));
 
-            if (mechComp.ContainerDict["chassis"].ContainedEntity is not { Valid: true })
+            if (mechComp.ContainerDict[ChassisSlot].ContainedEntity is not { Valid: true })
                 _actionBlocker.UpdateCanMove(mech);
         }
     }

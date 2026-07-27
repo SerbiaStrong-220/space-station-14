@@ -165,7 +165,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
             args.Protection += immunityComp.ProtectionTime;
     }
 
-    private void OnStartup(Entity<AltMechComponent> ent, ref ComponentStartup args)
+    protected virtual void OnStartup(Entity<AltMechComponent> ent, ref ComponentStartup args)
     {
         foreach (var part in ent.Comp.ContainersToCreate)
             ent.Comp.ContainerDict[part] = _container.EnsureContainer<ContainerSlot>(ent.Owner, part);
@@ -483,7 +483,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
     public void InsertPart(EntityUid uid, EntityUid toInsert)
     {
-        if (!TryComp<AltMechComponent>(uid,out var component))
+        if (!TryComp<AltMechComponent>(uid, out var component))
             return;
 
         if (!component.MaintenanceMode)
@@ -515,8 +515,12 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         var massEv = new MassChangedEvent();
         RaiseLocalEvent(uid, ref massEv);
 
-        if (TryGetNetEntity(uid, out var netMech) && TryGetNetEntity(toInsert, out var netPart))
-            RaiseNetworkEvent(new MechPartStatusChanged((NetEntity)netMech, (NetEntity)netPart, true, partComponent.slot));
+        //if (TryGetNetEntity(uid, out var netMech) && TryGetNetEntity(toInsert, out var netPart))
+        //{
+        //    RaiseNetworkEvent(new MechPartStatusChanged((NetEntity)netMech, (NetEntity)netPart, true, partComponent.slot));
+        //    Dirty<AltMechComponent>((uid, component));
+        //}
+        Dirty<AltMechComponent>((uid, component));
     }
 
     public void AddMass(AltMechComponent mechComp, FixedPoint2 Value)
@@ -630,8 +634,13 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         Dirty(uid, component);
 
-        if (TryGetNetEntity(uid, out var netMech) && TryGetNetEntity(toRemove, out var netPart))
-            RaiseNetworkEvent(new MechPartStatusChanged((NetEntity)netMech, (NetEntity)netPart, false, slot));
+        //if (TryGetNetEntity(uid, out var netMech) && TryGetNetEntity(toRemove, out var netPart))
+        //{
+        //    RaiseNetworkEvent(new MechPartStatusChanged((NetEntity)netMech, (NetEntity)netPart, false, slot));
+        //    Dirty<AltMechComponent>((uid, component));
+        //}
+
+        Dirty<AltMechComponent>((uid, component));
     }
 
     /// <summary>

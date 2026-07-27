@@ -9,10 +9,23 @@ public sealed partial class CustomColorableLayerSystem : SharedCustomColorableLa
 {
     [Dependency] private SpriteSystem _sprite = default!;
 
-    protected override void OnInteractedWith(Entity<CustomColorableLayerComponent> ent, ref AfterInteractUsingEvent args)
+    public override void Initialize()
     {
-        base.OnInteractedWith(ent, ref args);
+        base.Initialize();
 
+        SubscribeLocalEvent<CustomColorableLayerComponent, ComponentStartup>(OnComponentStartup);
+    }
+
+    protected override void OnPaintDoAfter(Entity<CustomColorableLayerComponent> ent, ref CustomColorPaintEvent args)
+    {
+        base.OnPaintDoAfter(ent, ref args);
+
+        if (TryComp<SpriteComponent>(ent.Owner, out var spriteComp))
+            _sprite.LayerSetColor((ent, spriteComp), ent.Comp.AttachedColoredSpriteLayer, ent.Comp.ColoredLayerColor);
+    }
+
+    public void OnComponentStartup(Entity<CustomColorableLayerComponent> ent, ref ComponentStartup args)
+    {
         if (TryComp<SpriteComponent>(ent.Owner, out var spriteComp))
             _sprite.LayerSetColor((ent, spriteComp), ent.Comp.AttachedColoredSpriteLayer, ent.Comp.ColoredLayerColor);
     }
