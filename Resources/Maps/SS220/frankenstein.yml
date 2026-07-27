@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 277.0.0
+  engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 06/28/2026 07:00:26
-  entityCount: 37034
+  time: 07/07/2026 06:11:50
+  entityCount: 37060
 maps:
 - 1
 grids:
@@ -17152,6 +17152,14 @@ entities:
       rot: 3.141592653589793 rad
       pos: 30.5,8.5
       parent: 2
+- proto: AirlockClownMaintLocked
+  entities:
+  - uid: 646
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 31.5,4.5
+      parent: 2
 - proto: AirlockCommandGlassLocked
   entities:
   - uid: 300
@@ -19986,30 +19994,6 @@ entities:
       parent: 2
 - proto: AirlockMaintTheatreLocked
   entities:
-  - uid: 645
-    components:
-    - type: MetaData
-      name: Технические тоннели коморки музыкантов
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 21.5,18.5
-      parent: 2
-  - uid: 646
-    components:
-    - type: MetaData
-      name: Технические тоннели каморки клоуна
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 31.5,4.5
-      parent: 2
-  - uid: 647
-    components:
-    - type: MetaData
-      name: Технические тоннели каморки мима
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 35.5,7.5
-      parent: 2
   - uid: 648
     components:
     - type: Transform
@@ -20311,6 +20295,29 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 33.5,11.5
+      parent: 2
+- proto: AirlockMimeMaintLocked
+  entities:
+  - uid: 647
+    components:
+    - type: Transform
+      pos: 35.5,7.5
+      parent: 2
+- proto: AirlockMusicianLocked
+  entities:
+  - uid: 759
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 23.5,16.5
+      parent: 2
+- proto: AirlockMusicianMaintLocked
+  entities:
+  - uid: 645
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 21.5,18.5
       parent: 2
 - proto: AirlockNanoTrasenRepresentativeGlassLocked
   entities:
@@ -20934,14 +20941,6 @@ entities:
       parent: 2
 - proto: AirlockTheatreLocked
   entities:
-  - uid: 759
-    components:
-    - type: MetaData
-      name: Каморка музыкантов
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 23.5,16.5
-      parent: 2
   - uid: 761
     components:
     - type: Transform
@@ -56202,6 +56201,51 @@ entities:
     components:
     - type: Transform
       pos: 33.5,36.5
+      parent: 2
+  - uid: 37035
+    components:
+    - type: Transform
+      pos: 22.5,-114.5
+      parent: 2
+  - uid: 37036
+    components:
+    - type: Transform
+      pos: 28.5,-119.5
+      parent: 2
+  - uid: 37037
+    components:
+    - type: Transform
+      pos: 34.5,-114.5
+      parent: 2
+  - uid: 37038
+    components:
+    - type: Transform
+      pos: 28.5,-118.5
+      parent: 2
+  - uid: 37039
+    components:
+    - type: Transform
+      pos: 28.5,-117.5
+      parent: 2
+  - uid: 37040
+    components:
+    - type: Transform
+      pos: 23.5,-114.5
+      parent: 2
+  - uid: 37041
+    components:
+    - type: Transform
+      pos: 24.5,-114.5
+      parent: 2
+  - uid: 37042
+    components:
+    - type: Transform
+      pos: 33.5,-114.5
+      parent: 2
+  - uid: 37043
+    components:
+    - type: Transform
+      pos: 32.5,-114.5
       parent: 2
 - proto: CableApcStack
   entities:
@@ -94028,6 +94072,16 @@ entities:
     - type: Transform
       pos: 29.242203,36.479084
       parent: 2
+  - uid: 37046
+    components:
+    - type: Transform
+      pos: 13.531446,-33.381012
+      parent: 2
+  - uid: 37047
+    components:
+    - type: Transform
+      pos: 16.51904,-33.360165
+      parent: 2
 - proto: ClothingMaskSterile
   entities:
   - uid: 14452
@@ -97884,7 +97938,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: -40.5,-53.5
       parent: 2
-- proto: CurbDarckSteel
+- proto: CurbDarkSteel
   entities:
   - uid: 15013
     components:
@@ -98015,7 +98069,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: 18.5,-8.5
       parent: 2
-- proto: CurbDarckSteelCornerSmall
+- proto: CurbDarkSteelCornerSmall
   entities:
   - uid: 15036
     components:
@@ -101142,6 +101196,23 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 7.5,27.5
+      parent: 2
+  - uid: 37054
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -22.5,-23.5
+      parent: 2
+  - uid: 37055
+    components:
+    - type: Transform
+      pos: -22.5,-22.5
+      parent: 2
+  - uid: 37056
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -24.5,-22.5
       parent: 2
 - proto: DisposalJunction
   entities:
@@ -106104,11 +106175,6 @@ entities:
     - type: Transform
       pos: -16.5,-22.5
       parent: 2
-  - uid: 16406
-    components:
-    - type: Transform
-      pos: -16.5,-23.5
-      parent: 2
   - uid: 16407
     components:
     - type: Transform
@@ -110074,6 +110140,52 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 0.5,-41.5
       parent: 2
+  - uid: 37049
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -17.5,-23.5
+      parent: 2
+  - uid: 37050
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -18.5,-23.5
+      parent: 2
+  - uid: 37051
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -19.5,-23.5
+      parent: 2
+  - uid: 37052
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -20.5,-23.5
+      parent: 2
+  - uid: 37053
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -21.5,-23.5
+      parent: 2
+  - uid: 37057
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -23.5,-22.5
+      parent: 2
+  - uid: 37058
+    components:
+    - type: Transform
+      pos: -24.5,-21.5
+      parent: 2
+  - uid: 37059
+    components:
+    - type: Transform
+      pos: -24.5,-20.5
+      parent: 2
 - proto: DisposalRouter
   entities:
   - uid: 1685
@@ -110084,6 +110196,14 @@ entities:
     - type: DisposalRouter
       tags:
       - mailroom
+  - uid: 16406
+    components:
+    - type: Transform
+      pos: -16.5,-23.5
+      parent: 2
+    - type: DisposalRouter
+      tags:
+      - cargo
   - uid: 17086
     components:
     - type: Transform
@@ -110134,7 +110254,7 @@ entities:
       parent: 2
     - type: DisposalRouter
       tags:
-      - hop
+      - head of personnel
 - proto: DisposalTrunk
   entities:
   - uid: 15167
@@ -110642,6 +110762,11 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 1.5,-41.5
+      parent: 2
+  - uid: 37060
+    components:
+    - type: Transform
+      pos: -24.5,-19.5
       parent: 2
 - proto: DisposalUnit
   entities:
@@ -113366,6 +113491,20 @@ entities:
       parent: 2
     - type: FaxMachine
       name: Адвокатский кабинет
+  - uid: 37044
+    components:
+    - type: Transform
+      pos: -2.5,42.5
+      parent: 2
+    - type: FaxMachine
+      name: Смотритель
+  - uid: 37045
+    components:
+    - type: Transform
+      pos: 45.5,-43.5
+      parent: 2
+    - type: FaxMachine
+      name: Главный врач
 - proto: FaxMachineCaptain
   entities:
   - uid: 17611
@@ -166695,7 +166834,8 @@ entities:
   - uid: 25044
     components:
     - type: Transform
-      pos: 45.443996,-43.41902
+      rot: 1.5707963267948966 rad
+      pos: 45.50755,-45.37995
       parent: 2
   - uid: 25045
     components:
@@ -167579,11 +167719,6 @@ entities:
       parent: 2
     - type: DeviceLinkSource
       linkedPorts:
-        26487:
-        - - On
-          - On
-        - - Off
-          - Off
         26486:
         - - On
           - On
@@ -169574,13 +169709,21 @@ entities:
     - type: Transform
       pos: -19.5,-11.5
       parent: 2
+    - type: MailingUnit
+      tag: mailroom
+    - type: Configuration
+      config:
+        tag: mailroom
   - uid: 25300
     components:
     - type: Transform
       pos: -7.5,-25.5
       parent: 2
+    - type: Configuration
+      config:
+        tag: head of personnel
     - type: MailingUnit
-      tag: Кабинет ГП
+      tag: head of personnel
   - uid: 25302
     components:
     - type: Transform
@@ -169606,6 +169749,9 @@ entities:
     - type: Transform
       pos: 4.5,42.5
       parent: 2
+    - type: Configuration
+      config:
+        tag: security
     - type: MailingUnit
       tag: security
   - uid: 25305
@@ -169613,8 +169759,21 @@ entities:
     - type: Transform
       pos: -5.5,-37.5
       parent: 2
+    - type: Configuration
+      config:
+        tag: engineering
     - type: MailingUnit
-      tag: Инженерный
+      tag: engineering
+  - uid: 37048
+    components:
+    - type: Transform
+      pos: -24.5,-19.5
+      parent: 2
+    - type: MailingUnit
+      tag: cargo
+    - type: Configuration
+      config:
+        tag: cargo
 - proto: MaintenanceFluffSpawner
   entities:
   - uid: 19472
@@ -173448,11 +173607,6 @@ entities:
     components:
     - type: Transform
       pos: 2.5,42.5
-      parent: 2
-  - uid: 25845
-    components:
-    - type: Transform
-      pos: -2.5,42.5
       parent: 2
   - uid: 25846
     components:
@@ -177794,8 +177948,8 @@ entities:
   - uid: 26487
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -2.5,42.5
+      rot: -1.5707963267948966 rad
+      pos: 0.5,43.5
       parent: 2
   - uid: 26488
     components:
@@ -203901,6 +204055,12 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -18.5,-13.5
+      parent: 2
+  - uid: 25845
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -2.5,42.5
       parent: 2
   - uid: 30813
     components:
@@ -234415,6 +234575,24 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 5.5,12.5
       parent: 2
+  - uid: 36475
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -3.5,-43.5
+      parent: 2
+  - uid: 36476
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 2.5,-44.5
+      parent: 2
+  - uid: 36477
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 2.5,-45.5
+      parent: 2
   - uid: 36502
     components:
     - type: Transform
@@ -234662,24 +234840,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 9.5,-41.5
       parent: 2
-  - uid: 36475
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 2.5,-44.5
-      parent: 2
-  - uid: 36476
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 2.5,-45.5
-      parent: 2
-  - uid: 36477
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -3.5,-43.5
-      parent: 2
 - proto: WindoorSecureArmoryLocked
   entities:
   - uid: 36478
@@ -234737,8 +234897,6 @@ entities:
   entities:
   - uid: 36492
     components:
-    - type: MetaData
-      name: Chemistry Desk
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 23.5,-17.5
@@ -234753,8 +234911,6 @@ entities:
       parent: 2
   - uid: 36494
     components:
-    - type: MetaData
-      name: Chemistry Desk
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 23.5,-19.5

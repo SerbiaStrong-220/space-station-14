@@ -1,0 +1,88 @@
+- type: constructionGraph
+  id: FractWarShuttleConsoleLocked
+  start: computer
+  graph:
+  - node: computer
+    entity: !type:BoardNodeEntity { container: board }
+
+- type: entity
+  parent: ComputerShuttleSyndie
+  id: FractWarShuttleConsoleSyndicate
+  suffix: Shitspawn, Ebent, FractWar
+  name: Syndicate shuttle control console
+  description: Used to pilot a Syndicate shuttle.
+  components:
+  - type: Anchorable
+    flags:
+    - Anchorable
+  - type: Lock
+    locked: true
+    showLockVerbs: false
+    unlockOnClick: false
+    unlockInHand: false
+  - type: LockedWiresPanel
+  - type: Construction
+    graph: FractWarShuttleConsoleLocked
+    node: computer
+    containers:
+    - board
+    deconstructionTarget: null
+  - type: ShuttleConsolePoints
+    fraction: flag-fraction-Synd
+    pointsOnDestroy: 500
+  - type: Explosive
+    explosionType: HardBomb
+    totalIntensity: 200
+    maxIntensity: 10
+    intensitySlope: 5
+    tileBreakScale: 2
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:ExplodeBehavior
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: ComputerShuttle
+  id: FractWarShuttleConsoleNT
+  suffix: Shitspawn, Ebent, FractWar
+  name: Nanotrasen shuttle control console
+  description: Used to pilot a Nanotrasen shuttle.
+  components:
+  - type: Anchorable
+    flags:
+    - Anchorable
+  - type: Lock
+    locked: true
+    showLockVerbs: false
+    unlockOnClick: false
+    unlockInHand: false
+  - type: LockedWiresPanel
+  - type: Construction
+    graph: FractWarShuttleConsoleLocked
+    node: computer
+    containers:
+    - board
+    deconstructionTarget: null
+  - type: ShuttleConsolePoints
+    fraction: flag-fraction-NT
+    pointsOnDestroy: 500
+  - type: Explosive
+    explosionType: HardBomb
+    totalIntensity: 200
+    maxIntensity: 10
+    intensitySlope: 5
+    tileBreakScale: 2
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:ExplodeBehavior
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
