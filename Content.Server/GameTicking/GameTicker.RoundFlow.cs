@@ -73,6 +73,8 @@ namespace Content.Server.GameTicking
             }
         }
 
+        public event Action<GameMapPrototype>? OnMainStationMapLoaded; // SS220 map vote fixes
+
         /// <summary>
         /// Returns true if the round's map is eligible to be updated.
         /// </summary>
@@ -147,6 +149,11 @@ namespace Content.Server.GameTicking
 
                 if (i == 0)
                     DefaultMap = mapId;
+
+                // SS220 map vote fixes begin
+                if (maps[i] == mainStationMap)
+                    OnMainStationMapLoaded?.Invoke(mainStationMap);
+                // SS220 map vote fixes end
             }
         }
 
