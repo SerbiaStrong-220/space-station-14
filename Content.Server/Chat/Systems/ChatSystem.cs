@@ -518,6 +518,10 @@ public sealed partial class ChatSystem : SharedChatSystem
         var languageMessage = _languageSystem.SanitizeMessage(source, message);
         foreach (var (session, data) in GetRecipients(source, VoiceRange))
         {
+            var entRange = MessageRangeCheck(session, data, range);
+            if (entRange == MessageRangeCheckResult.Disallowed)
+                continue;
+
             if (session.AttachedEntity is not { Valid: true } playerEntity)
                 continue;
 
@@ -533,12 +537,20 @@ public sealed partial class ChatSystem : SharedChatSystem
                 ("message", scrambledMessage /*SS220-Add-Languages*/));
 
             //SS220-Add-Languages begin
-            _chatManager.ChatMessageToOne(ChatChannel.Local, scrambledMessage, wrappedMessage, source, false, session.Channel);
+            var entHideChat = entRange == MessageRangeCheckResult.HideChat;
+            _chatManager.ChatMessageToOne(ChatChannel.Local, scrambledMessage, wrappedMessage, source, entHideChat, session.Channel);
         }
         //SS220-Add-Languages begin
         message = languageMessage.GetMessage(source, false);
 
-        //SendInVoiceRange(ChatChannel.Local, message, wrappedMessage, source, range);
+        var sourceWrappedMessage = Loc.GetString(speech.Bold ? "chat-manager-entity-say-bold-wrap-message" : "chat-manager-entity-say-wrap-message",
+            ("entityName", name),
+            ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
+            ("fontType", speech.FontId),
+            ("fontSize", speech.FontSize),
+            ("message", message));
+
+        _replay.RecordServerMessage(new ChatMessage(ChatChannel.Local, message, sourceWrappedMessage, GetNetEntity(source), null, MessageRangeHideChatForReplay(range)));
         var ev = new EntitySpokeEvent(source, message, originalMessage, null, null, languageMessage);
         RaiseLocalEvent(source, ev, true);
         //SS220-Add-Languages end
