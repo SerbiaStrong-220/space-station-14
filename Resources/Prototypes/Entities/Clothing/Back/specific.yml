@@ -139,8 +139,18 @@
       # This can be changed once we have per-hand displacement maps
       extra_hand_1:
         location: Middle
+        handOverride:
+          strengthModifier: 0.5
+          damageOverride:
+            damageDict:
+              Blunt: 5.0
       extra_hand_2:
         location: Middle
+        handOverride:
+          strengthModifier: 0.5
+          damageOverride:
+            damageDict:
+              Blunt: 5.0
 
 - type: entity
   parent: ClothingBackpack

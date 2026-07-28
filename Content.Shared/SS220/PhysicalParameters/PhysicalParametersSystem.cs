@@ -2,18 +2,15 @@
 
 using Content.Shared.Clothing;
 using Content.Shared.FixedPoint;
-using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Humanoid;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
-using Content.Shared.Item;
 using Content.Shared.Movement.Systems;
 using Content.Shared.SS220.Grab;
 using Content.Shared.SS220.ItemExtension;
 using Content.Shared.SS220.Weapons.Melee.Components;
 using Content.Shared.Weapons.Melee;
-using Content.Shared.Wieldable.Components;
 
 namespace Content.Shared.SS220.PhysicalParameters;
 
@@ -23,8 +20,8 @@ public sealed class PhysicalParametersSystem : EntitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _movementSystem = default!;
     [Dependency] private ItemExtensionSystem _itemExt = default!;
 
-    private readonly FixedPoint2 UngrabbableStrengthDifference = 1.7;
-    private readonly FixedPoint2 MultiHandedMultiplier = 1;
+    private readonly FixedPoint2 _ungrabbableStrengthDifference = 1.7;
+    private readonly FixedPoint2 _multiHandedMultiplier = 1;
 
     public override void Initialize()
     {
@@ -71,7 +68,7 @@ public sealed class PhysicalParametersSystem : EntitySystem
         if (TryComp<PhysicalParametersComponent>(grabberValidated, out var grabberComp))
             grabberStrength = GetParameterValue((grabberValidated, grabberComp), Parameter.Strength);
 
-        if (grabbedStrength >= grabberStrength * UngrabbableStrengthDifference)
+        if (grabbedStrength >= grabberStrength * _ungrabbableStrengthDifference)
         {
             args.Cancelled = true;
             return;
@@ -86,24 +83,7 @@ public sealed class PhysicalParametersSystem : EntitySystem
 
         FixedPoint2 strengthModifier = GetParameterValue(ent, Parameter.Strength);
 
-        int countedHands = 0;
-
-        if (TryComp<WieldableComponent>(args.Used, out var wieldableComp) && wieldableComp.Wielded)
-        {
-            strengthModifier += strengthModifier * wieldableComp.FreeHandsRequired * MultiHandedMultiplier;
-            countedHands += wieldableComp.FreeHandsRequired;
-        }
-
-        if (TryComp<MultiHandedItemComponent>(args.Used, out var multiHandedComp))
-        {
-            strengthModifier += strengthModifier * multiHandedComp.HandsNeeded * MultiHandedMultiplier;
-            countedHands += multiHandedComp.HandsNeeded;
-        }
-
-        var handsNeeded = _itemExt.TryGetNeededAmountOfHands(ent.Owner, args.Used) - 1;
-
-        if (handsNeeded != -1)
-            strengthModifier += strengthModifier * MultiHandedMultiplier * Math.Clamp(handsNeeded - countedHands, 0, handsNeeded);
+        strengthModifier = _itemExt.GetStrength(ent.Owner, args.used);
 
         if (HasComp<ItemExtensionMeleeWeaponComponent>(args.Used) && TryComp<ItemExtensionComponent>(args.Used, out var extensionComp))
         {
@@ -187,7 +167,7 @@ public sealed class PhysicalParametersSystem : EntitySystem
         if (TryComp<PhysicalParametersComponent>(grabberValidated, out var grabberComp))
             grabberStrength = GetParameterValue((grabberValidated, grabberComp), Parameter.Strength);
 
-        if (grabbedStrength >= grabberStrength * UngrabbableStrengthDifference)
+        if (grabbedStrength >= grabberStrength * _ungrabbableStrengthDifference)
         {
             args.Chance += 1;
             return;
@@ -205,12 +185,12 @@ public sealed class PhysicalParametersSystem : EntitySystem
             ent.Comp.ParameterDictModified.ContainsKey(parameter))
             strengthModifier = ent.Comp.ParameterDictModified[parameter];
 
-        if (armStrengthCounted &&
-            TryComp<HandsComponent>(ent.Owner, out var handsComp) &&
-            handsComp.ActiveHandId != null &&
-            _handsSystem.TryGetHand(ent.Owner, handsComp.ActiveHandId, out var activeHand) &&
-            activeHand.Value.StrengthModifier != null)
-            strengthModifier = (FixedPoint2)activeHand.Value.StrengthModifier;
+        //if (armStrengthCounted &&
+        //    TryComp<HandsComponent>(ent.Owner, out var handsComp) &&
+        //    handsComp.ActiveHandId != null &&
+        //    _handsSystem.TryGetHand(ent.Owner, handsComp.ActiveHandId, out var activeHand) &&
+        //    activeHand.Value.StrengthModifier != null)
+        //    strengthModifier = (FixedPoint2)activeHand.Value.StrengthModifier;
 
         return strengthModifier;
     }

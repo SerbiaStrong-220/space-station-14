@@ -351,24 +351,24 @@ public abstract partial class SharedHandsSystem
 
         RaiseLocalEvent(ent, new DidSwitchHandEvent(ent.Comp.ActiveHandId));//SS220 Cult_update2
 
-        //SS220 add hand damage begin
+        //SS220 hand override begin
         if (TryComp<MeleeWeaponComponent>(ent.Owner, out var meleeComp) && ent.Comp.Hands.ContainsKey(handId) && ent.Comp.HandsOverrideDamage)//or we overrdie all hands or we don't do it at all
         {
             var hand = ent.Comp.Hands[handId];
 
-            if (hand.DamageOverride != null)
+            if (hand.HandOverride != null)
             {
-                meleeComp.Damage = hand.DamageOverride;
+                meleeComp.Damage = hand.HandOverride.Value.DamageOverride;
 
-                meleeComp.AttackRate = hand.AttackRate;
+                meleeComp.AttackRate = hand.HandOverride.Value.AttackRate;
 
-                meleeComp.AltDisarm = hand.AltDisarm;
+                meleeComp.AltDisarm = hand.HandOverride.Value.AltDisarm;
 
-                meleeComp.AutoAttack = hand.AutoAttack;
+                meleeComp.AutoAttack = hand.HandOverride.Value.AutoAttack;
 
-                meleeComp.Range = hand.Range;
+                meleeComp.Range = hand.HandOverride.Value.Range;
 
-                meleeComp.HitSound = hand.HitSound;
+                meleeComp.HitSound = hand.HandOverride.Value.HitSound;
 
                 Dirty(ent);
                 Dirty(ent.Owner, meleeComp);
@@ -390,7 +390,7 @@ public abstract partial class SharedHandsSystem
 
             Dirty(ent.Owner, meleeComp);
         }
-        //SS220 add hand damage end
+        //SS220 hand override end
 
         Dirty(ent);
         return true;

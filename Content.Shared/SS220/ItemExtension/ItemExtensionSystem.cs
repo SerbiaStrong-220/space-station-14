@@ -1,6 +1,7 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
+using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Item;
@@ -8,7 +9,9 @@ using Content.Shared.Popups;
 using Content.Shared.SS220.ItemExtension;
 using Content.Shared.Wieldable;
 using Content.Shared.Wieldable.Components;
+using Robust.Shared.Containers;
 using Robust.Shared.Timing;
+using System.Linq;
 
 namespace Content.Shared.SS220.PhysicalParameters;
 
@@ -22,6 +25,7 @@ public sealed class ItemExtensionSystem : EntitySystem
     [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedWieldableSystem _wield = default!;
+    [Dependency] protected readonly SharedContainerSystem _container = default!;
 
     public override void Initialize()
     {
@@ -36,34 +40,54 @@ public sealed class ItemExtensionSystem : EntitySystem
 
     public void OnPickupAttempt(Entity<ItemExtensionComponent> ent, ref GettingPickedUpAttemptEvent args)
     {
+        if (!_timing.IsFirstTimePredicted)
+            return;
 
         FixedPoint2 userStrength = 1;
 
         if (TryComp<PhysicalParametersComponent>(args.User, out var parametersComp))
             userStrength = _parametersSystem.GetParameterValue((args.User, parametersComp), Parameter.Strength);
 
-        if (userStrength < ent.Comp.MinimalStrengthToPickUp)
+        FixedPoint2 usedStrength = userStrength;
+
+        FixedPoint2 totalFreeStrength = usedStrength;
+
+        var activeHandIdNullable = _hands.GetActiveHand(args.User);
+
+        if (activeHandIdNullable == null)
+            return;
+
+        string activeHandId = (string)activeHandIdNullable;
+
+        if (_hands.TryGetHand(args.User, activeHandId, out var activeHand) &&
+            activeHand.Value.HandOverride != null)
+            usedStrength = activeHand.Value.HandOverride.Value.StrengthModifier;
+
+        if (usedStrength >= ent.Comp.MinimalStrengthToPickUp)
+            return;
+
+        foreach (var handId in _hands.EnumerateHands(args.User))
         {
-            if (parametersComp == null)
-            {
-                args.Cancel();
-                _popup.PopupClient(Loc.GetString(CannotPickupMessage), args.User);
-                return;
-            }
+            if (handId == activeHandId)
+                continue;
 
-            if (parametersComp.StrengthAffectsArms)
+            if (_hands.HandIsEmpty(args.User, handId) &&
+                _hands.TryGetHand(args.User, handId, out var freeHand))
             {
-                if (_hands.CountFreeHands(args.User) * userStrength < ent.Comp.MinimalStrengthToPickUp || userStrength == 0)
+                if (freeHand.Value.HandOverride == null)
                 {
-                    args.Cancel();
-                    _popup.PopupClient(Loc.GetString(CannotPickupMessage), args.User);
-                    return;
+                    totalFreeStrength += userStrength;
+                    continue;
                 }
-
-                return;
+                totalFreeStrength += freeHand.Value.HandOverride.Value.StrengthModifier;
             }
+        }
+
+        if (totalFreeStrength < ent.Comp.MinimalStrengthToPickUp)
+        {
             args.Cancel();
             _popup.PopupClient(Loc.GetString(CannotPickupMessage), args.User);
+            return;
         }
     }
 
@@ -77,76 +101,133 @@ public sealed class ItemExtensionSystem : EntitySystem
         if (TryComp<PhysicalParametersComponent>(args.User, out var parametersComp))
             userStrength = _parametersSystem.GetParameterValue((args.User, parametersComp), Parameter.Strength);
 
+        FixedPoint2 usedStrength = GetStrength(args.User, ent.Owner);
+
+        if (usedStrength >= ent.Comp.MinimalStrengthToPickUp)
+            return;
+
         if (userStrength < ent.Comp.MinimalStrengthToPickUp)
         {
-            if (parametersComp == null)
+            FixedPoint2 totalFreeStrength = usedStrength;
+            Dictionary<FixedPoint2, string> freeHands = new Dictionary<FixedPoint2, string>();
+
+            foreach (var handId in _hands.EnumerateHands(args.User))
+            {
+                if (_hands.HandIsEmpty(args.User, handId) &&
+                    _hands.TryGetHand(args.User, handId, out var freeHand))
+                {
+                    if (freeHand.Value.HandOverride == null)
+                    {
+                        freeHands.Add(userStrength, handId);
+                        totalFreeStrength += userStrength;
+                        continue;
+                    }
+
+                    freeHands.Add(freeHand.Value.HandOverride.Value.StrengthModifier, handId);
+                    totalFreeStrength += freeHand.Value.HandOverride.Value.StrengthModifier;
+                }
+            }
+
+            if (totalFreeStrength < ent.Comp.MinimalStrengthToPickUp)
             {
                 _hands.TryDrop(args.User, ent.Owner, checkActionBlocker: false);
-                _virtualItem.DeleteInHandsMatching(args.User, ent.Owner);
                 _popup.PopupClient(Loc.GetString(CannotPickupMessage), args.User);
-                return;
             }
 
-            if (parametersComp.StrengthAffectsArms)
+            var sortedHands = freeHands
+                .OrderByDescending(pair => pair.Key)
+                .ToDictionary(pair => pair.Key, pair => pair.Value);
+
+            foreach (var (handStrength, handId) in sortedHands)
             {
-                if (_hands.CountFreeHands(args.User) * userStrength < ent.Comp.MinimalStrengthToPickUp || userStrength == 0)
-                {
-                    _hands.TryDrop(args.User, ent.Owner, checkActionBlocker: false);
-                    _popup.PopupClient(Loc.GetString(CannotPickupMessage), args.User);
+                usedStrength += handStrength;
+
+                _virtualItem.TrySpawnVirtualItemInHand(ent.Owner, args.User, empty: handId, virtualItem: out var _);
+
+                if (usedStrength >= ent.Comp.MinimalStrengthToPickUp)
                     return;
-                }
-
-                _virtualItem.DeleteInHandsMatching(args.User, ent.Owner);
-
-                int handsUsedInWielding = 0;
-
-                if (TryComp<WieldableComponent>(ent.Owner, out var wieldableComponent) &&
-                    !wieldableComponent.Wielded &&
-                    wieldableComponent.FreeHandsRequired <= ent.Comp.MinimalStrengthToPickUp / userStrength &&
-                    _wield.TryWield(ent.Owner, wieldableComponent, args.User))
-                    handsUsedInWielding += wieldableComponent.FreeHandsRequired - 1;
-
-                if (wieldableComponent != null && wieldableComponent.Wielded)
-                    handsUsedInWielding += wieldableComponent.FreeHandsRequired - 1;
-
-                for (var i = 0; i < ent.Comp.MinimalStrengthToPickUp / userStrength - 1 - handsUsedInWielding; i++)
-                    _virtualItem.TrySpawnVirtualItemInHand(ent.Owner, args.User);
-
-                return;
             }
-            _hands.TryDrop(args.User, ent.Owner, checkActionBlocker: false);
-            _popup.PopupClient(Loc.GetString(CannotPickupMessage), args.User);
         }
-        _virtualItem.DeleteInHandsMatching(args.User, ent.Owner);
     }
 
-    public int TryGetNeededAmountOfHands(EntityUid user, EntityUid used)
+    public FixedPoint2 GetStrength(EntityUid user, EntityUid used)
     {
-        if (!TryComp<ItemExtensionComponent>(used, out var itemComp))
-            return 1;
+        var handsDict = GetUsedHands(user, used);
 
-        FixedPoint2 userStrength = 1;
+        FixedPoint2 resultStrength = 0;
+
+        FixedPoint2 defaultUserParameter = 1;
 
         if (TryComp<PhysicalParametersComponent>(user, out var parametersComp))
-            userStrength = _parametersSystem.GetParameterValue((user, parametersComp), Parameter.Strength);
+            defaultUserParameter = _parametersSystem.GetParameterValue((user, parametersComp), Parameter.Strength);
 
-        if (userStrength < itemComp.MinimalStrengthToPickUp)
+        foreach (var (key, value) in handsDict)
         {
-            if (parametersComp == null)
-                return -1;
-
-            if (parametersComp.StrengthAffectsArms)
+            if (value.HandOverride == null)
             {
-                int neededHands = (itemComp.MinimalStrengthToPickUp / userStrength).Int();
+                resultStrength += defaultUserParameter;
+                continue;
+            }
 
-                if ((itemComp.MinimalStrengthToPickUp / userStrength) != ((itemComp.MinimalStrengthToPickUp / userStrength).Int()))
-                    neededHands += 1;
+            resultStrength += value.HandOverride.Value.StrengthModifier;
+        }
 
-                return neededHands;
+        return resultStrength;
+    }
+
+    public Dictionary<string, Hand> GetUsedHands(EntityUid user, EntityUid used)
+    {
+        var handsUsed = new Dictionary<string, Hand>();
+
+        if (!TryComp<HandsComponent>(user, out var handsComp))
+            return handsUsed;
+
+        if (_container.TryGetContainingContainer(used, out var container) &&
+                _hands.TryGetHand(user, container.ID, out var usedHand))
+        {
+            handsUsed.Add(container.ID, (Hand)usedHand);
+        }
+
+        foreach (var held in _hands.EnumerateHeld(user))
+        {
+            if (TryComp(held, out VirtualItemComponent? virt) &&
+                virt.BlockingEntity == used &&
+                _container.TryGetContainingContainer(used, out var containerHand) &&
+                !handsUsed.ContainsKey(containerHand.ID) &&
+                _hands.TryGetHand(user, containerHand.ID, out var handHoldingVirtual))
+            {
+                handsUsed.Add(containerHand.ID, handHoldingVirtual.Value);
             }
         }
 
-        return 1;
+        return handsUsed;
+    }
+
+    public Dictionary<string, Hand> OccupyHands(EntityUid user, EntityUid used)
+    {
+        var handsUsed = new Dictionary<string, Hand>();
+
+        if (!TryComp<HandsComponent>(user, out var handsComp))
+            return handsUsed;
+
+        if (_container.TryGetContainingContainer(used, out var container) &&
+                _hands.TryGetHand(user, container.ID, out var usedHand))
+        {
+            handsUsed.Add(container.ID, usedHand.Value);
+        }
+
+        foreach (var held in _hands.EnumerateHeld(user))
+        {
+            if (TryComp(held, out VirtualItemComponent? virt) &&
+                virt.BlockingEntity == used &&
+                _container.TryGetContainingContainer(used, out var containerHand) &&
+                _hands.TryGetHand(user, containerHand.ID, out var handHoldingVirtual))
+            {
+                handsUsed.Add(containerHand.ID, handHoldingVirtual.Value);
+            }
+        }
+
+        return handsUsed;
     }
 
     private void OnEquipped(Entity<ItemExtensionComponent> ent, ref GotEquippedHandEvent args)
@@ -159,19 +240,62 @@ public sealed class ItemExtensionSystem : EntitySystem
         if (TryComp<PhysicalParametersComponent>(args.User, out var parametersComp))
             userStrength = _parametersSystem.GetParameterValue((args.User, parametersComp), Parameter.Strength);
 
-        int handsUsedInWielding = 0;
+        FixedPoint2 usedStrength = userStrength;
 
-        if (TryComp<WieldableComponent>(ent.Owner, out var wieldableComponent) &&
-            !wieldableComponent.Wielded &&
-            wieldableComponent.FreeHandsRequired <= ent.Comp.MinimalStrengthToPickUp / userStrength &&
-            _wield.TryWield(ent.Owner, wieldableComponent, args.User))
-            handsUsedInWielding += wieldableComponent.FreeHandsRequired - 1;
+        var activeHandIdNullable = _hands.GetActiveHand(args.User);
 
-        if (wieldableComponent != null && wieldableComponent.Wielded)
-            handsUsedInWielding += wieldableComponent.FreeHandsRequired - 1;
+        if (activeHandIdNullable == null)
+            return;
 
-        for (var i = 0; i < ent.Comp.MinimalStrengthToPickUp / userStrength - 1 - handsUsedInWielding; i++)
-            _virtualItem.TrySpawnVirtualItemInHand(ent.Owner, args.User);
+        string activeHandId = (string)activeHandIdNullable;
+
+        if (_hands.TryGetHand(args.User, activeHandId, out var activeHand) &&
+            activeHand.Value.HandOverride != null)
+            usedStrength = activeHand.Value.HandOverride.Value.StrengthModifier;
+
+        if (usedStrength >= ent.Comp.MinimalStrengthToPickUp)
+            return;
+
+        if (TryComp<WieldableComponent>(ent.Owner, out var wieldableComp) &&
+            _wield.TryWield(ent.Owner, wieldableComp, args.User))
+            usedStrength = GetStrength(ent.Owner, args.User);
+
+        if (usedStrength >= ent.Comp.MinimalStrengthToPickUp)
+            return;
+
+        Dictionary<FixedPoint2, string> freeHands = new Dictionary<FixedPoint2, string>();
+
+        foreach (var handId in _hands.EnumerateHands(args.User))
+        {
+            if (handId == activeHandId)
+                continue;
+
+            if (_hands.HandIsEmpty(args.User, handId) &&
+                _hands.TryGetHand(args.User, handId, out var freeHand))
+            {
+                if (freeHand.Value.HandOverride == null)
+                {
+                    freeHands.Add(userStrength, handId);
+                    continue;
+                }
+
+                freeHands.Add(freeHand.Value.HandOverride.Value.StrengthModifier, handId);
+            }
+        }
+
+        var sortedHands = freeHands
+            .OrderByDescending(pair => pair.Key)
+            .ToDictionary(pair => pair.Key, pair => pair.Value);
+
+        foreach (var (handStrength, handId) in sortedHands)
+        {
+            usedStrength += handStrength;
+
+            _virtualItem.TrySpawnVirtualItemInHand(ent.Owner, args.User, empty: handId, virtualItem: out var _);
+
+            if (usedStrength >= ent.Comp.MinimalStrengthToPickUp)
+                return;
+        }
     }
 
     private void OnUnequipped(Entity<ItemExtensionComponent> ent, ref GotUnequippedHandEvent args)
@@ -190,7 +314,7 @@ public sealed class ItemExtensionSystem : EntitySystem
         if (args.BlockingEntity != ent.Owner || _timing.ApplyingState)
             return;
 
-        if (TryGetNeededAmountOfHands(args.User, ent.Owner) == 1)
+        if (GetStrength(args.User, ent.Owner) > ent.Comp.MinimalStrengthToPickUp)
             return;
 
         _hands.TryDrop(args.User, ent.Owner);
