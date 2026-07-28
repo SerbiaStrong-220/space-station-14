@@ -5,6 +5,7 @@
          xmlns:ui="clr-namespace:Content.Client.Lobby.UI"
          xmlns:signature="clr-namespace:Content.Client.SS220.Signature"
          xmlns:profile="clr-namespace:Content.Client.Lobby.UI.ProfileEditorControls"
+         xmlns:emoteWheel="clr-namespace:Content.Client.SS220.EmoteWheel"
          HorizontalExpand="True">
         <!-- Left side -->
         <BoxContainer Orientation="Vertical" Margin="10 10 10 10" HorizontalExpand="True">
@@ -173,6 +174,11 @@
                     </BoxContainer>
                     <!-- SS220 ADD SIGNATURE END -->
                 </BoxContainer>
+                <!-- SS220-emote-wheel-rework-begin -->
+                <BoxContainer Name="EmoteWheelContainer" Orientation="Vertical" Margin="10">
+                    <emoteWheel:EmoteWheelEditor Name="EmoteWheelEditor" VerticalExpand="True" HorizontalExpand="True" />
+                </BoxContainer>
+                <!-- SS220-emote-wheel-rework-end -->
             </TabContainer>
         </BoxContainer>
         <!-- Right side -->

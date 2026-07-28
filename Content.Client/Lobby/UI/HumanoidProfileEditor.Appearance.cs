@@ -189,6 +189,7 @@ public sealed partial class HumanoidProfileEditor
         RefreshLoadouts();
         UpdateSexControls(); // update sex for new species
         UpdateSpeciesGuidebookIcon();
+        EmoteWheelEditor.SetCharacter(Profile, newSpecies, Profile?.Sex ?? Sex.Unsexed); // SS220-emote-wheel-rework
         ReloadPreview();
     }
 
@@ -217,6 +218,7 @@ public sealed partial class HumanoidProfileEditor
 
         UpdateGenderControls();
         _markingsModel.SetOrganSexes(newSex);
+        EmoteWheelEditor.SetCharacter(Profile, Profile?.Species, newSex); // SS220-emote-wheel-rework
         ReloadPreview();
     }
 

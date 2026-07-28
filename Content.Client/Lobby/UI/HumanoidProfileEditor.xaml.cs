@@ -326,6 +326,10 @@ namespace Content.Client.Lobby.UI
 
             #endregion TeleportAfkToCryoStorage
 
+            // SS220-emote-wheel-rework: the wheel is a client preference, so this tab saves on edit and
+            // is independent of the profile save/reset buttons.
+            TabContainer.SetTabTitle(7, Loc.GetString("humanoid-profile-editor-emote-wheel-tab"));
+
             // ss220 add signature start
             #region Other
 
@@ -437,6 +441,7 @@ namespace Content.Client.Lobby.UI
             RefreshJobs();
             RefreshLoadouts();
             RefreshSpecies();
+            EmoteWheelEditor.SetCharacter(Profile, Profile?.Species, Profile?.Sex ?? Sex.Unsexed); // SS220-emote-wheel-rework
             RefreshTraits();
             RefreshFlavorText();
             ReloadPreview();
