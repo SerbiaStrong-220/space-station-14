@@ -17,10 +17,10 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared.SS220.PhysicalParameters;
 
-public sealed class PhysicalParametersSystem : EntitySystem
+public sealed partial class PhysicalParametersSystem : EntitySystem
 {
-    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSystem = default!;
+    [Dependency] private SharedHandsSystem _handsSystem = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSystem = default!;
     [Dependency] private ItemExtensionSystem _itemExt = default!;
     [Dependency] private SharedContainerSystem _containerSystem = default!;
 

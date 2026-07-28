@@ -13,7 +13,6 @@ using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
-using Content.Shared.SS220.PhysicalParameters;
 using Content.Shared.SS220.StuckOnEquip;
 using Content.Shared.Timing;
 using Content.Shared.Verbs;
