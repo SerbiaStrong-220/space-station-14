@@ -1,4 +1,3 @@
-using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Item.ItemToggle;
@@ -7,10 +6,8 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.SS220.ItemExtension;
 using Content.Shared.SS220.PhysicalParameters;
 using Content.Shared.Standing;
-using Content.Shared.Verbs;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
-using Robust.Shared.Utility;
 
 namespace Content.Shared.Clothing;
 
