@@ -14,6 +14,10 @@
     minimalStrengthToPickUp: 3.5 #Gigantic weight, obviously
     strengthRequirementToBeUsed: 7
   - type: ArmorBlock
+  - type: ComplexRepairable
+    material: Steel
+    materialRepairTreshold: 10.0
+    doAfterModifier: 1.2
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Metallic

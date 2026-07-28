@@ -42,18 +42,3 @@
     - type: Tag
       tags:
       - ThermalCamera
-
-- type: entity
-  id: HydraulicClaw
-  parent: BaseElectronics
-  name: hydraulic claw
-  description: As simple and obvious as you could expect - and equally reliable, cheap and useful.
-  components:
-    - type: Item
-      storedRotation: 0
-    - type: Sprite
-      sprite: Objects/Misc/module.rsi
-      state: mainboard
-    - type: Tag
-      tags:
-      - HydraulicClaw

@@ -46,7 +46,6 @@
               doAfter: 10
             - tool: Screwing
               doAfter: 15
-              store: part-container
     - node: leftarmframehydraulic
       entity: MechLeftArmFrameHydraulic
       edges:

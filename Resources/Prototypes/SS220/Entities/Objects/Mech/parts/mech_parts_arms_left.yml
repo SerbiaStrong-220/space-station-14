@@ -169,7 +169,6 @@
         whitelist:
           sizes:
           - Ginormous
-          - Gigantic
         damageOverride:
           types:
             Blunt: 14

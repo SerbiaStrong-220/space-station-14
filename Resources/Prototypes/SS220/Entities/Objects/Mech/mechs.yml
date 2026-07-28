@@ -91,9 +91,9 @@
   - type: InputMover
   - type: InteractionOutline
   - type: ComplexRepairable
-    material: SheetSteel
+    material: Steel
     materialRepairTreshold: 10.0
-    doAfterModifier: 3
+    doAfterModifier: 1.2
   - type: Inventory
     templateId: mech
   - type: TemperatureProtection
