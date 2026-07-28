@@ -137,20 +137,22 @@
     hands:
       # middle hands to prevent overlapping inhand sprites
       # This can be changed once we have per-hand displacement maps
+      #SS220 harmpack tweaks begin
       extra_hand_1:
         location: Middle
         handOverride:
           strengthModifier: 0.5
           damageOverride:
-            damageDict:
-              Blunt: 5.0
+            types:
+              Blunt: 5
       extra_hand_2:
         location: Middle
         handOverride:
           strengthModifier: 0.5
           damageOverride:
-            damageDict:
-              Blunt: 5.0
+            types:
+              Blunt: 5
+      #SS220 harmpack tweaks end
 
 - type: entity
   parent: ClothingBackpack
