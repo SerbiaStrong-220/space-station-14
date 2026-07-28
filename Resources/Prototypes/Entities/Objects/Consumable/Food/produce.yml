@@ -424,7 +424,10 @@
 
 - type: entity
   parent: BaseItem
-  id: TrashBananaPeel
+  #SS220-grillable-banana-peel-fix begin
+  id: BananaPeelBase
+  abstract: true
+  #SS220-grillable-banana-peel-fix end
   name: banana peel
   components:
   - type: Sprite
@@ -488,20 +491,9 @@
     slots:
     - HEAD
     quickEquip: false
-  # SS220-grilling-update-2 begin
-  - type: Grillable
-    timeToCook: 30
-    cookingResult: TrashBakedBananaPeel
-  - type: Temperature
-    currentTemperature: 290
-  - type: InternalTemperature
-    conductivity: 100 # to compensate for density
-    thickness: 0.001
-    area: 0.0225 # ~15x15cm
-  # SS220-grilling-update-2 end
 
 - type: entity
-  parent: TrashBananaPeel
+  parent: BananaPeelBase #SS220-grillable-banana-peel-fix
   id: TrashBakedBananaPeel
   name: baked banana peel
   components:
@@ -531,7 +523,7 @@
   # ss220 clown uplink end
 
 - type: entity
-  parent: TrashBananaPeel
+  parent: BananaPeelBase #SS220-grillable-banana-peel-fix
   id: TrashMimanaPeel
   name: mimana peel
   components:
@@ -556,7 +548,7 @@
   # ss220 clown uplink end
 
 - type: entity
-  parent: TrashBananaPeel
+  parent: BananaPeelBase #SS220-grillable-banana-peel-fix
   id: TrashBananiumPeel
   name: bananium peel
   components:
@@ -566,7 +558,7 @@
   - type: Item
     sprite: Objects/Materials/materials.rsi
     heldPrefix: peel
-  - type: Slippery
+#  - type: Slippery #SS220-grillable-banana-peel-fix
   - type: Clothing
     sprite: Objects/Materials/materials.rsi
     equippedPrefix: peel
