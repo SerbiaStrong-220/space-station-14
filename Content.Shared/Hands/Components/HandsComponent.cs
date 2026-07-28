@@ -149,26 +149,7 @@ public partial record struct Hand
 
     //SS220 added hand damage begin
     [DataField]
-    public DamageSpecifier? DamageOverride;
-
-    [DataField, AutoNetworkedField]
-    public float AttackRate = 1f;
-
-    [DataField, AutoNetworkedField]
-    public bool AltDisarm = true;
-
-    [DataField, AutoNetworkedField]
-    public bool AutoAttack;
-
-    [DataField, AutoNetworkedField]
-    public float Range = 1.5f;
-
-    [DataField, AutoNetworkedField]
-    public FixedPoint2? StrengthModifier = null;
-
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("soundHit"), AutoNetworkedField]
-    public SoundSpecifier? HitSound;
+    public HandOverrideData? HandOverride;
     //SS220 added hand damage end
 
     public Hand()
@@ -211,3 +192,31 @@ public enum HandLocation : byte
     Middle,
     Left
 }
+
+//SS220 hand override begin
+[DataDefinition]
+[Serializable, NetSerializable]
+public partial struct HandOverrideData
+{
+    [DataField, AutoNetworkedField]
+    public DamageSpecifier DamageOverride = new DamageSpecifier();
+
+    [DataField, AutoNetworkedField]
+    public float AttackRate = 1f;
+
+    [DataField, AutoNetworkedField]
+    public bool AltDisarm = true;
+
+    [DataField, AutoNetworkedField]
+    public bool AutoAttack = false;
+
+    [DataField, AutoNetworkedField]
+    public float Range = 1.5f;
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 StrengthModifier = 1f;
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? HitSound = null;
+}
+//SS220 hand override end

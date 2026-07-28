@@ -24,7 +24,7 @@ public sealed class ExtraHandsEquipmentSystem : EntitySystem
         {
             // add the NetEntity id to the container name to prevent multiple items with this component from conflicting
             var handId = $"{GetNetEntity(ent.Owner).Id}-{handName}";
-            _hands.AddHand((args.EquipTarget, handsComp), handId, hand.Location);
+            _hands.AddHand((args.EquipTarget, handsComp), handId, hand); //SS220 harmpack fix
         }
     }
 

@@ -66,12 +66,7 @@ public sealed class ItemExtensionRangedWeaponSystem : EntitySystem
         if (toDivide == 0)
             return; //If minimal and optimal strength are the same why did you use this component in the first place?
 
-        var handsUsed = _itemExt.TryGetNeededAmountOfHands(userValidated, ent.Owner);
-
-        if (handsUsed == -1)
-            handsUsed = 1;
-
-        FixedPoint2 strengthModifier = (_parameters.GetParameterValue((userValidated, userParametersComp), Parameter.Strength) * handsUsed - extensionComp.MinimalStrengthToPickUp) / toDivide;
+        FixedPoint2 strengthModifier = _itemExt.GetStrength(userValidated, ent.Owner) - extensionComp.MinimalStrengthToPickUp / toDivide;
 
         strengthModifier = FixedPoint2.Clamp(strengthModifier, 0, 1);
 
