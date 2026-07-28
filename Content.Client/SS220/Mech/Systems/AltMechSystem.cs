@@ -32,6 +32,8 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
     [Dependency] private MobThresholdSystem _mobThresholdSystem = default!;
     private DamageOverlay _damageOverlay = default!;
 
+    private static readonly string HeadSlotId = "head";
+
     /// <inheritdoc/>
     public override void Initialize()
     {
@@ -205,7 +207,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
         SpriteSpecifier? coloredSpriteToAdd = part.Comp.AttachedColoredSprite;
 
-        if (part.Comp.slot == "head")
+        if (part.Comp.slot == HeadSlotId)
         {
             _sprite.LayerSetVisible((mech, spriteComp), mech.Comp.AttachedHeadSpriteLayer, attached);
             _sprite.LayerSetVisible((mech, spriteComp), mech.Comp.AttachedHeadColoredSpriteLayer, attached);
