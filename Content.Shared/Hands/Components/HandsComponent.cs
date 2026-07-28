@@ -2,6 +2,7 @@ using Content.Shared.Damage;
 using Content.Shared.DisplacementMap;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Item;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -193,6 +194,7 @@ public enum HandLocation : byte
 }
 
 //SS220 hand override begin
+[DataDefinition]
 [Serializable, NetSerializable]
 public partial struct HandOverrideData
 {
