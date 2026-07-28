@@ -12,7 +12,6 @@ namespace Content.Shared.SS220.Weapons.Ranged.Systems;
 public sealed class ItemExtensionRangedWeaponSystem : EntitySystem
 {
     [Dependency] private SharedGunSystem _gun = default!;
-    [Dependency] private PhysicalParametersSystem _parameters = default!;
     [Dependency] private ItemExtensionSystem _itemExt = default!;
 
     public override void Initialize()

@@ -15,17 +15,17 @@ using System.Linq;
 
 namespace Content.Shared.SS220.PhysicalParameters;
 
-public sealed class ItemExtensionSystem : EntitySystem
+public sealed partial class ItemExtensionSystem : EntitySystem
 {
     private static readonly LocId CannotPickupMessage = "too-heavy-cant-pick-up";
 
-    [Dependency] private readonly PhysicalParametersSystem _parametersSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedWieldableSystem _wield = default!;
-    [Dependency] protected readonly SharedContainerSystem _container = default!;
+    [Dependency] private PhysicalParametersSystem _parametersSystem = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedVirtualItemSystem _virtualItem = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedWieldableSystem _wield = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
 
     public override void Initialize()
     {

@@ -13,7 +13,6 @@ using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
-using Content.Shared.SS220.PhysicalParameters;
 using Content.Shared.SS220.StuckOnEquip;
 using Content.Shared.Timing;
 using Content.Shared.Verbs;
@@ -44,7 +43,6 @@ public abstract class SharedWieldableSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
     [Dependency] private readonly UseDelaySystem _delay = default!;
-    [Dependency] private ItemExtensionSystem _itemExt = default!;//SS220 add physical parameters
 
     public override void Initialize()
     {
