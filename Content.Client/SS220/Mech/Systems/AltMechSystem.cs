@@ -196,31 +196,6 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
     }
 
-    private void OnPartMoved(MechPartStatusChanged args)
-    {
-        if (!TryGetEntity(args.Mech, out var localMech) || localMech is not { Valid: true } localMechValidated)
-            return;
-
-        if (!TryComp<SpriteComponent>(localMechValidated, out var spriteComp) || spriteComp == null)
-            return;
-
-        if (!TryGetEntity(args.Part, out var localPart) || localPart is not { Valid: true } localPartValidated)
-        {
-            if (args.Slot != null && _sprite.LayerMapTryGet((localMechValidated, spriteComp), partsVisuals[args.Slot], out var layerOfMissingPart, true))
-                _sprite.LayerSetVisible((localMechValidated, spriteComp), layerOfMissingPart, false);
-
-            return;
-        }
-
-        if (!TryComp<AltMechComponent>(localMechValidated, out var mechComp) || !TryComp(localMechValidated, out AppearanceComponent? appearance))
-            return;
-
-        if (!TryComp<MechPartComponent>(localPartValidated, out var partComp))
-            return;
-
-        ProcessPartVisuals((localMechValidated, mechComp), (localPartValidated, partComp), args.Attached, args.Slot);
-    }
-
     private void ProcessPartVisuals(Entity<AltMechComponent> mech, Entity<MechPartComponent> part, bool attached, string? slot)
     {
         if (!TryComp<SpriteComponent>(mech, out var spriteComp) || spriteComp == null)
