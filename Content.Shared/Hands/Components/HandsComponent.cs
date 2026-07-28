@@ -193,7 +193,6 @@ public enum HandLocation : byte
 }
 
 //SS220 hand override begin
-[DataDefinition]
 [Serializable, NetSerializable]
 public partial struct HandOverrideData
 {
