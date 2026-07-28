@@ -93,7 +93,8 @@
     hands:
     - hand:
         location: Left
-        strengthModifier: 1
+        handOverride:
+          strengthModifier: 1
         whitelist:
           sizes:
           - Ginormous
@@ -229,13 +230,14 @@
           - Huge
           - Large
           - Normal
-        damageOverride:
-          types:
-            Blunt: 14
-            Structural: 30
-        altDisarm: false
-        strengthModifier: 6
-        attackRate: 1.5
+        handOverride:
+          damageOverride:
+            types:
+              Blunt: 14
+              Structural: 30
+          altDisarm: false
+          strengthModifier: 6
+          attackRate: 1.5
   - type: Item
     inhandVisuals:
       left:
@@ -281,13 +283,14 @@
           - Tiny
           - Small
           - Normal
-        damageOverride:
-          types:
-            Slash: 5
-        attackRate: 2.5
-        autoAttack: true
-        strengthModifier: 0.3
-        altDisarm: false
+        handOverride:
+          damageOverride:
+            types:
+              Slash: 5
+          attackRate: 2.5
+          autoAttack: true
+          strengthModifier: 0.3
+          altDisarm: false
     - hand:
         location: Left
         whitelist:
@@ -295,12 +298,13 @@
           - Tiny
           - Small
           - Normal
-        damageOverride:
-          types:
-            Slash: 5
-        attackRate: 2.5
-        strengthModifier: 0.3
-        autoAttack: true
+        handOverride:
+          damageOverride:
+            types:
+              Slash: 5
+          attackRate: 2.5
+          strengthModifier: 0.3
+           autoAttack: true
     - hand:
         location: Left
       item: BorgHypo
