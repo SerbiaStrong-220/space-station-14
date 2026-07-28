@@ -207,6 +207,9 @@
   id: ServoMotorLarge
 
 - type: Tag
+  id: ServoMotor
+
+- type: Tag
   id: HydraulicPiston
 
 - type: Tag
