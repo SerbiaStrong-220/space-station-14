@@ -3,7 +3,7 @@ using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Timing;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.SS220.Weapons.Ranged.Events;
+namespace Content.Shared.SS220.Weapons.Ranged;
 
 /// <summary>
 ///     Raised when attemting to cycle the entity in your hands.

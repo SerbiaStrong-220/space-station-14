@@ -1,7 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.SS220.Weapons.Components;
 
-namespace Content.Shared.SS220.Weapons.Ranged.Events;
+namespace Content.Shared.SS220.Weapons.Ranged;
 
 [ByRefEvent]
 public record struct GasWeaponWrongGasEvent(Entity<GasWeaponComponent> ent, float amountOfMoles);

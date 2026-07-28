@@ -14,7 +14,6 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.SS220.AltBlocking;
-using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Shared.Standing;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
@@ -39,6 +38,7 @@ using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Shared.DoAfter;
+using Content.Shared.SS220.Weapons.Ranged;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
