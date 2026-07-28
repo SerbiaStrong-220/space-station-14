@@ -304,7 +304,7 @@
               Slash: 5
           attackRate: 2.5
           strengthModifier: 0.3
-           autoAttack: true
+          autoAttack: true
     - hand:
         location: Left
       item: BorgHypo
