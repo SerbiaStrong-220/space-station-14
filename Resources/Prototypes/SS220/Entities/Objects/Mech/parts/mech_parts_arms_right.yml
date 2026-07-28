@@ -49,7 +49,7 @@
               Structural: 100
           altDisarm: false
           strengthModifier: 9
-          soundHit:
+          hitSound:
             path: /Audio/Effects/metal_thud1.ogg
             params:
               variation: 0.10
@@ -180,8 +180,6 @@
           autoAttack: true
     - hand:
         location: Right
-        handOverride:
-          strengthModifier: 0.8
       item: BorgHypo
   - type: Item
     inhandVisuals:
@@ -234,7 +232,7 @@
         handOverride:
           altDisarm: false
           strengthModifier: 1
-          soundHit:
+          hitSound:
             path: /Audio/Effects/metal_thud1.ogg
             params:
               variation: 0.10

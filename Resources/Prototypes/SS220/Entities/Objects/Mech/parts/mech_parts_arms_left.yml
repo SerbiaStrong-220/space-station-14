@@ -51,7 +51,7 @@
         handOverride:
           altDisarm: false
           strengthModifier: 1
-          soundHit:
+          hitSound:
             path: /Audio/Effects/metal_thud1.ogg
             params:
               variation: 0.10
@@ -183,7 +183,7 @@
               Structural: 100
           strengthModifier: 9
           altDisarm: false
-          soundHit:
+          hitSound:
             path: /Audio/Effects/metal_thud1.ogg
             params:
               variation: 0.10
