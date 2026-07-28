@@ -78,6 +78,48 @@ public class RadialContainer : LayoutContainer
     /// </summary>
     public float OuterRadiusMultiplier { get; set; } = 1.5f;
 
+    // SS220-emote-wheel-rework-begin
+
+    /// <summary>
+    /// When set, overrides the dynamic <see cref="CalculatedRadius"/> computation with a fixed value in
+    /// virtual pixels. Use this when the amount of child buttons is fixed and the menu geometry should be
+    /// stable regardless of it.
+    /// </summary>
+    public float? FixedRadius { get; set; }
+
+    /// <summary>
+    /// When set, overrides <see cref="InnerRadiusMultiplier"/> with a fixed inner radius in virtual pixels.
+    /// </summary>
+    public float? FixedInnerRadius { get; set; }
+
+    /// <summary>
+    /// When set, overrides <see cref="OuterRadiusMultiplier"/> with a fixed outer radius in virtual pixels.
+    /// </summary>
+    public float? FixedOuterRadius { get; set; }
+
+    /// <summary>
+    /// If true, the first child is centered at the top of the circle instead of having its sector *start*
+    /// there. Without this the top of the wheel is a boundary between two sectors, which makes straight-up
+    /// pointer flicks ambiguous.
+    /// </summary>
+    public bool CenterFirstItemAtTop { get; set; }
+
+    /// <summary>
+    /// Sector inner radius as actually used for the last arrange pass, result of either
+    /// <see cref="FixedInnerRadius"/> or <see cref="CalculatedRadius"/> * <see cref="InnerRadiusMultiplier"/>.
+    /// </summary>
+    [ViewVariables(VVAccess.ReadOnly)]
+    public float CalculatedInnerRadius { get; private set; }
+
+    /// <summary>
+    /// Sector outer radius as actually used for the last arrange pass, result of either
+    /// <see cref="FixedOuterRadius"/> or <see cref="CalculatedRadius"/> * <see cref="OuterRadiusMultiplier"/>.
+    /// </summary>
+    [ViewVariables(VVAccess.ReadOnly)]
+    public float CalculatedOuterRadius { get; private set; }
+
+    // SS220-emote-wheel-rework-end
+
     /// <summary>
     /// Sets whether the container should reserve a space on the layout for child which are not currently visible
     /// </summary>
@@ -102,7 +144,11 @@ public class RadialContainer : LayoutContainer
         var childCount = children.Count();
 
         // Add padding from the center at higher child counts so they don't overlap.
-        CalculatedRadius = InitialRadius + (childCount * RadiusIncrement);
+        // SS220-emote-wheel-rework-begin: fixed radii opt out of the dynamic sizing entirely
+        CalculatedRadius = FixedRadius ?? InitialRadius + (childCount * RadiusIncrement);
+        CalculatedInnerRadius = FixedInnerRadius ?? CalculatedRadius * InnerRadiusMultiplier;
+        CalculatedOuterRadius = FixedOuterRadius ?? CalculatedRadius * OuterRadiusMultiplier;
+        // SS220-emote-wheel-rework-end
 
         var isAntiClockwise = RadialAlignment == RAlignment.AntiClockwise;
 
@@ -128,12 +174,17 @@ public class RadialContainer : LayoutContainer
 
         var controlCenter = finalSize * 0.5f;
 
+        // SS220-emote-wheel-rework-begin
+        // Rotating the whole wheel back by half a sector puts the first child's *center* at the top rather
+        // than its leading edge. Applied as an offset so sector bounds themselves stay within [0, Tau) and
+        // no wrap-around handling is needed in hit testing.
+        var angleOffset = MathF.PI * 0.5f - (CenterFirstItemAtTop ? sepAngle * 0.5f : 0f);
+        // SS220-emote-wheel-rework-end
+
         // Adjust the positions of all the child elements
         var query = children.Select((x, index) => (index, x));
         foreach (var (childIndex, child) in query)
         {
-            const float angleOffset = MathF.PI * 0.5f;
-
             var targetAngleOfChild = AngularRange.X + sepAngle * (childIndex + 0.5f) + angleOffset;
 
             // flooring values for snapping float values to physical grid -
@@ -152,8 +203,8 @@ public class RadialContainer : LayoutContainer
                 tb.AngleSectorFrom = sepAngle * childIndex;
                 tb.AngleSectorTo = sepAngle * (childIndex + 1);
                 tb.AngleOffset = angleOffset;
-                tb.InnerRadius = CalculatedRadius * InnerRadiusMultiplier;
-                tb.OuterRadius = CalculatedRadius * OuterRadiusMultiplier;
+                tb.InnerRadius = CalculatedInnerRadius; // SS220-emote-wheel-rework
+                tb.OuterRadius = CalculatedOuterRadius; // SS220-emote-wheel-rework
                 tb.ParentCenter = controlCenter;
             }
         }

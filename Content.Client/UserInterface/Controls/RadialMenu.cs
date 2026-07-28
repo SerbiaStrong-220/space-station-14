@@ -64,6 +64,28 @@ public class RadialMenu : BaseWindow
     private string? _backButtonStyleClass;
     private string? _closeButtonStyleClass;
 
+    // SS220-emote-wheel-rework-begin
+
+    private readonly HashSet<Control> _chrome = new();
+
+    /// <summary>
+    /// Adds a child as menu chrome - decoration such as a hub label that must never be treated as a
+    /// navigable layer, and which stays visible as layers change.
+    /// </summary>
+    protected void AddChrome(Control control)
+    {
+        _chrome.Add(control);
+        AddChild(control);
+    }
+
+    /// <summary>
+    /// True for children that are chrome rather than navigable layers.
+    /// </summary>
+    protected bool IsChrome(Control child)
+        => child == ContextualButton || child == MenuOuterAreaButton || _chrome.Contains(child);
+
+    // SS220-emote-wheel-rework-end
+
     /// <summary>
     /// A free floating menu which enables the quick display of one or more radial containers
     /// </summary>
@@ -102,6 +124,9 @@ public class RadialMenu : BaseWindow
         // Hide any further add children, unless its promoted to the active layer
         OnChildAdded += child =>
         {
+            if (IsChrome(child)) // SS220-emote-wheel-rework: chrome is not a layer and stays visible
+                return;
+
             child.Visible = GetCurrentActiveLayer() == child;
             SetupContextualButtonData(child);
         };
@@ -111,11 +136,18 @@ public class RadialMenu : BaseWindow
     {
         if (child is RadialContainer { Visible: true } container)
         {
-            var parentCenter = MinSize * 0.5f;
+            // SS220-emote-wheel-rework-begin
+            // The container centers its sectors on its own arranged size, so deriving the hub and
+            // outer-area hit areas from MinSize silently desyncs them from the sectors as soon as the
+            // menu is not exactly MinSize big. Before the first arrange pass the container has no size
+            // yet, so fall back to MinSize to keep the early OnChildAdded call usable.
+            var containerSize = container.Size.LengthSquared() > 0 ? container.Size : MinSize;
+            var parentCenter = container.Position + containerSize * 0.5f;
             ContextualButton.ParentCenter = parentCenter;
             MenuOuterAreaButton.ParentCenter = parentCenter;
-            ContextualButton.InnerRadius = container.CalculatedRadius * container.InnerRadiusMultiplier;
-            MenuOuterAreaButton.OuterRadius = container.CalculatedRadius * container.OuterRadiusMultiplier;
+            ContextualButton.InnerRadius = container.CalculatedInnerRadius;
+            MenuOuterAreaButton.OuterRadius = container.CalculatedOuterRadius;
+            // SS220-emote-wheel-rework-end
         }
     }
 
@@ -133,14 +165,14 @@ public class RadialMenu : BaseWindow
         return result;
     }
 
-    private Control? GetCurrentActiveLayer()
+    protected Control? GetCurrentActiveLayer() // SS220-emote-wheel-rework: was private
     {
-        var children = Children.Where(x => x != ContextualButton && x != MenuOuterAreaButton);
+        var children = Children.Where(x => !IsChrome(x)); // SS220-emote-wheel-rework
 
         if (!children.Any())
             return null;
 
-        return children.First(x => x.Visible);
+        return children.FirstOrDefault(x => x.Visible); // SS220-emote-wheel-rework: First throws when all layers are hidden
     }
 
     public bool TryToMoveToNewLayer(Control newLayer)
@@ -154,7 +186,7 @@ public class RadialMenu : BaseWindow
 
         foreach (var child in Children)
         {
-            if (child == ContextualButton || child == MenuOuterAreaButton)
+            if (IsChrome(child)) // SS220-emote-wheel-rework
                 continue;
 
             // Hide layers which are not of interest
@@ -210,7 +242,7 @@ public class RadialMenu : BaseWindow
         // Hide all children except the contextual button
         foreach (var child in Children)
         {
-            if (child != ContextualButton && child != MenuOuterAreaButton)
+            if (!IsChrome(child)) // SS220-emote-wheel-rework
                 child.Visible = false;
         }
 
@@ -302,9 +334,52 @@ public sealed class RadialMenuOuterAreaButton : RadialMenuButtonBase
 
     public Vector2? ParentCenter { get; set; }
 
+    // SS220-emote-wheel-rework-begin
+
+    /// <summary>
+    /// When true this button claims every point on screen rather than only the area outside the ring.
+    /// Virtual pointer mode moves it to the top of the menu's children and turns this on, which makes it
+    /// the single receiver of mouse motion for the whole menu and lets it draw the pointer above the
+    /// sectors.
+    /// </summary>
+    public bool CoverEverything { get; set; }
+
+    /// <summary>
+    /// Virtual pointer offset from <see cref="ParentCenter"/> in virtual pixels, or null to draw nothing.
+    /// </summary>
+    public Vector2? PointerPosition { get; set; }
+
+    /// <summary> Radius of the drawn virtual pointer, in virtual pixels. </summary>
+    public float PointerRadius { get; set; } = 6f;
+
+    /// <summary> Fill colour of the drawn virtual pointer. </summary>
+    public Color PointerColor { get; set; } = Color.White;
+
+    /// <summary> Outline colour of the drawn virtual pointer. </summary>
+    public Color PointerOutlineColor { get; set; } = Color.Black;
+
+    /// <inheritdoc />
+    protected override void Draw(DrawingHandleScreen handle)
+    {
+        base.Draw(handle);
+
+        if (PointerPosition is not { } pointer || ParentCenter is not { } center)
+            return;
+
+        // Same convention as the sector buttons: local coordinates scaled into physical pixels.
+        var origin = (center - Position + pointer) * UIScale;
+        handle.DrawCircle(origin, PointerRadius * UIScale, PointerColor);
+        handle.DrawCircle(origin, PointerRadius * UIScale, PointerOutlineColor, false);
+    }
+
+    // SS220-emote-wheel-rework-end
+
     /// <inheritdoc />
     protected override bool HasPoint(Vector2 point)
     {
+        if (CoverEverything) // SS220-emote-wheel-rework
+            return true; // SS220-emote-wheel-rework
+
         if (ParentCenter == null)
         {
             return base.HasPoint(point);
@@ -481,6 +556,46 @@ public class RadialMenuButtonWithSector : RadialMenuButton, IRadialMenuItemWithS
     /// </summary>
     public Color SeparatorColor { get; set; } = new Color(128, 128, 128, 128);
 
+    // SS220-emote-wheel-rework-begin
+
+    /// <summary>
+    /// Renders the sector in its hovered state regardless of where the real cursor is. Virtual pointer
+    /// mode drives selection by pointer angle rather than by real mouse hover, so the engine's own hover
+    /// tracking cannot be used for the highlight.
+    /// </summary>
+    public bool ForceHighlight { get; set; }
+
+    /// <summary>
+    /// How much further out, in virtual pixels, the sector is drawn while highlighted. Purely visual -
+    /// hit testing keeps using the unexpanded radius, so the bump cannot change what is selected.
+    /// </summary>
+    public float HighlightExpansion { get; set; }
+
+    /// <summary>
+    /// Tests whether an offset from the wheel centre falls inside this button's sector. Split out of
+    /// <see cref="HasPoint"/> so virtual pointer selection reuses the exact same geometry rather than
+    /// reimplementing it.
+    /// </summary>
+    public bool ContainsRadialOffset(Vector2 offsetFromCenter)
+    {
+        var distSquared = offsetFromCenter.LengthSquared();
+        if (distSquared >= _outerRadius * _outerRadius || distSquared <= _innerRadius * _innerRadius)
+            return false;
+
+        // Flip Y to get from ui coordinates to natural coordinates
+        var angle = MathF.Atan2(-offsetFromCenter.Y, offsetFromCenter.X) - _angleOffset;
+        if (angle < 0)
+        {
+            // atan2 range is -pi->pi, while angle sectors are
+            // 0->2pi, so remap the result into that range
+            angle = MathF.PI * 2 + angle;
+        }
+
+        return angle >= _angleSectorFrom && angle < _angleSectorTo;
+    }
+
+    // SS220-emote-wheel-rework-end
+
     /// <inheritdoc />
     float IRadialMenuItemWithSector.AngleSectorFrom
     {
@@ -535,26 +650,31 @@ public class RadialMenuButtonWithSector : RadialMenuButton, IRadialMenuItemWithS
 
         var angleFrom = _angleSectorFrom + _angleOffset;
         var angleTo = _angleSectorTo + _angleOffset;
+        // SS220-emote-wheel-rework-begin
+        var highlighted = DrawMode == DrawModeEnum.Hover || ForceHighlight;
+        var innerRadius = _innerRadius * UIScale;
+        var outerRadius = (highlighted ? _outerRadius + HighlightExpansion : _outerRadius) * UIScale;
+        // SS220-emote-wheel-rework-end
         if (DrawBackground)
         {
-            var segmentColor = DrawMode == DrawModeEnum.Hover
+            var segmentColor = highlighted // SS220-emote-wheel-rework
                 ? _hoverBackgroundColorSrgb
                 : _backgroundColorSrgb;
 
-            DrawAnnulusSector(handle, containerCenter, _innerRadius * UIScale, _outerRadius * UIScale, angleFrom, angleTo, segmentColor);
+            DrawAnnulusSector(handle, containerCenter, innerRadius, outerRadius, angleFrom, angleTo, segmentColor);
         }
 
         if (DrawBorder)
         {
-            var borderColor = DrawMode == DrawModeEnum.Hover
+            var borderColor = highlighted // SS220-emote-wheel-rework
                 ? _hoverBorderColorSrgb
                 : _borderColorSrgb;
-            DrawAnnulusSector(handle, containerCenter, _innerRadius * UIScale, _outerRadius * UIScale, angleFrom, angleTo, borderColor, false);
+            DrawAnnulusSector(handle, containerCenter, innerRadius, outerRadius, angleFrom, angleTo, borderColor, false);
         }
 
         if (!_isWholeCircle && DrawBorder)
         {
-            DrawSeparatorLines(handle, containerCenter, _innerRadius * UIScale, _outerRadius * UIScale, angleFrom, angleTo, SeparatorColor);
+            DrawSeparatorLines(handle, containerCenter, innerRadius, outerRadius, angleFrom, angleTo, SeparatorColor);
         }
     }
 
@@ -566,30 +686,7 @@ public class RadialMenuButtonWithSector : RadialMenuButton, IRadialMenuItemWithS
             return base.HasPoint(point);
         }
 
-        var outerRadiusSquared = _outerRadius * _outerRadius;
-        var innerRadiusSquared = _innerRadius * _innerRadius;
-
-        var distSquared = (point + Position - _parentCenter.Value).LengthSquared();
-        var isInRadius = distSquared < outerRadiusSquared && distSquared > innerRadiusSquared;
-        if (!isInRadius)
-        {
-            return false;
-        }
-
-        // difference from the center of the parent to the `point`
-        var pointFromParent = point + Position - _parentCenter.Value;
-
-        // Flip Y to get from ui coordinates to natural coordinates
-        var angle = MathF.Atan2(-pointFromParent.Y, pointFromParent.X) - _angleOffset;
-        if (angle < 0)
-        {
-            // atan2 range is -pi->pi, while angle sectors are
-            // 0->2pi, so remap the result into that range
-            angle = MathF.PI * 2 + angle;
-        }
-
-        var isInAngle = angle >= _angleSectorFrom && angle < _angleSectorTo;
-        return isInAngle;
+        return ContainsRadialOffset(point + Position - _parentCenter.Value); // SS220-emote-wheel-rework
     }
 
     /// <summary>
