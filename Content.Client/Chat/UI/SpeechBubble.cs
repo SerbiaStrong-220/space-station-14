@@ -61,6 +61,15 @@ namespace Content.Client.Chat.UI
 
         public Vector2 ContentSize { get; private set; }
 
+        // SS220-emote-wheel-rework-begin
+        /// <summary>
+        /// Detaches the bubble from its sender, so it stays put where it was placed instead of tracking an
+        /// entity. Lets the emote wheel editor show a real speech bubble rather than a lookalike, including
+        /// in the lobby where there is no body to attach one to.
+        /// </summary>
+        public bool Detached { get; init; }
+        // SS220-emote-wheel-rework-end
+
         // man down
         public event Action<EntityUid, SpeechBubble>? OnDied;
 
@@ -113,7 +122,8 @@ namespace Content.Client.Chat.UI
             base.FrameUpdate(args);
 
             var timeLeft = (float)(_deathTime - _timing.RealTime).TotalSeconds;
-            if (_entityManager.Deleted(_senderEntity) || timeLeft <= 0)
+            // SS220-emote-wheel-rework: a detached bubble has no sender to outlive, only its own timer
+            if ((!Detached && _entityManager.Deleted(_senderEntity)) || timeLeft <= 0)
             {
                 // Timer spawn to prevent concurrent modification exception.
                 Timer.Spawn(0, Die);
@@ -130,11 +140,18 @@ namespace Content.Client.Chat.UI
                 _verticalOffsetAchieved = MathHelper.Lerp(_verticalOffsetAchieved, VerticalOffset, 10 * args.DeltaSeconds);
             }
 
-            if (!_entityManager.TryGetComponent<TransformComponent>(_senderEntity, out var xform) || xform.MapID != _eyeManager.CurrentEye.Position.MapId)
+            // SS220-emote-wheel-rework-begin
+            // A detached bubble keeps whatever position it was given and only fades, so it must not be
+            // hidden for having no transform or for its sender being off the current map.
+            TransformComponent? xform = null;
+            if (!Detached
+                && (!_entityManager.TryGetComponent(_senderEntity, out xform)
+                    || xform.MapID != _eyeManager.CurrentEye.Position.MapId))
             {
                 Modulate = Color.White.WithAlpha(0);
                 return;
             }
+            // SS220-emote-wheel-rework-end
 
             if (timeLeft <= FadeTime.TotalSeconds)
             {
@@ -146,6 +163,9 @@ namespace Content.Client.Chat.UI
                 // Make opaque otherwise, because it might have been hidden before
                 Modulate = Color.White;
             }
+
+            if (Detached || xform == null) // SS220-emote-wheel-rework: nothing to follow, keep our position
+                return;
 
             var baseOffset = 0f;
 
