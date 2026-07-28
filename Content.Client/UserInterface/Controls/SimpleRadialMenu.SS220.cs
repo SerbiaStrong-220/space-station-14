@@ -59,6 +59,7 @@ public sealed partial class SimpleRadialMenu : RadialMenu
 
     private int _pageIndex;
     private bool _pointerSelectionDirty;
+    private bool _cursorCaptured;
 
     /// <summary>
     /// True while the menu is driven by the virtual pointer rather than by the real cursor.
@@ -204,6 +205,33 @@ public sealed partial class SimpleRadialMenu : RadialMenu
         args.Handle();
     }
 
+    /// <summary>
+    /// Locks the cursor in place and hides it while the pointer is driving, so aiming is unbounded and the
+    /// real cursor cannot wander off to a screen edge or another monitor. Motion keeps arriving as deltas,
+    /// which is all the virtual pointer needs. The platform puts the cursor back on release.
+    /// </summary>
+    private void CaptureCursor(bool capture)
+    {
+        if (_cursorCaptured == capture)
+            return;
+
+        // Best effort: a platform that refuses simply leaves the cursor alone, and the wheel still works
+        // because the pointer is driven by motion deltas either way.
+        _cursorCaptured = capture && _clyde.SetRelativeMouseMode(true);
+
+        if (!capture)
+            _clyde.SetRelativeMouseMode(false);
+    }
+
+    /// <inheritdoc />
+    protected override void ExitedTree()
+    {
+        base.ExitedTree();
+
+        // Whatever route the menu left by - closed, disposed, state change - the cursor must come back.
+        CaptureCursor(false);
+    }
+
     private void SetHubLabel(string? text)
     {
         if (_hubLabel != null)
@@ -226,6 +254,7 @@ public sealed partial class SimpleRadialMenu : RadialMenu
             return;
 
         _pointerMode = true;
+        CaptureCursor(true);
 
         // The menu defaults to ignoring mouse input, which would stop bubbled motion events reaching it.
         MouseFilter = MouseFilterMode.Pass;
@@ -266,6 +295,7 @@ public sealed partial class SimpleRadialMenu : RadialMenu
             return;
 
         _pointerMode = false;
+        CaptureCursor(false);
 
         // Paged menus keep listening for the wheel even when click-driven.
         MouseFilter = _pages.Count > 1 ? MouseFilterMode.Pass : MouseFilterMode.Ignore;
