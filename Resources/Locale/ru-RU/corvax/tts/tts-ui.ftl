@@ -6,3 +6,4 @@ humanoid-profile-editor-voice-label = Голос:
 humanoid-profile-editor-voice-play = ▶
 humanoid-profile-editor-voice-settings = ⚙
 humanoid-profile-editor-voice-lock = 🔒︎
+humanoid-profile-editor-voice-drag = ⠿

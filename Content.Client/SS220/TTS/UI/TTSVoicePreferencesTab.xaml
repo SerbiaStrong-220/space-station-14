@@ -1,21 +1,22 @@
 <BoxContainer xmlns="https://spacestation14.io"
-              xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+              xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+              xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
               Orientation="Horizontal"
-              HorizontalExpand="True">
-    <customControls:VSeparator/>
-        <BoxContainer Orientation="Vertical">
-            <customControls:HSeparator/>
-            <BoxContainer Name="Header"  Orientation="Horizontal">
-                <Label Name="ProviderHeaderLabel" Text="Провайдер" MinWidth="250"/>
-                <customControls:VSeparator Margin="15 0"/>
-                <Label Name="VoicePrototypeHeaderLabel" Text="Id голоса" HorizontalExpand="True"/>
-            </BoxContainer>
-            <customControls:HSeparator/>
-            <PanelContainer HorizontalExpand="True">
-                <BoxContainer Name="Content"  Orientation="Vertical" />
-                <PanelContainer Name="DragedEntryContainer" />
-            </PanelContainer>
-            <customControls:HSeparator/>
+              HorizontalExpand="True"
+              MouseFilter="Stop">
+    <cc:VSeparator/>
+    <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+        <cc:HSeparator/>
+        <PanelContainer Name="ProviderHeaderBackground">
+            <BoxContainer Orientation="Horizontal">
+                <Label Name="ProviderHeaderLabel" Text="Провайдер" Margin="5 0"/>
+                <cc:VSeparator/>
+                <Label Name="VoicePrototypeHeaderLabel" Text="Голос" HorizontalExpand="True" Margin="5 0"/>
         </BoxContainer>
-    <customControls:VSeparator/>
+        </PanelContainer>
+        <cc:HSeparator/>
+        <BoxContainer Name="EntriesContainer" Orientation="Vertical" HorizontalExpand="True"/>
+        <cc:HSeparator/>
+    </BoxContainer>
+    <cc:VSeparator/>
 </BoxContainer>
