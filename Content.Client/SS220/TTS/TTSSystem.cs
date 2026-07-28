@@ -23,7 +23,6 @@ public sealed partial class TTSSystem
     [Dependency] private IAudioManager _audioManager = default!;
     [Dependency] private AudioSystem _audio = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
-    [Dependency] private TTSManager _ttsManager = default!;
 
     private ISawmill _sawmill = default!;
 
@@ -57,11 +56,18 @@ public sealed partial class TTSSystem
         _cfg.OnValueChanged(CCVars220.TTSRadioVolume, OnTtsRadioVolumeChanged, true);
 
         SubscribeNetworkEvent<TtsQueueResetMessage>(OnQueueResetRequest);
-
-        _ttsManager.PlayTtsReceived += OnPlayTts;
+        SubscribeNetworkEvent<PlayTtsMessage>(OnPlayTtsMessage);
 
         InitializeAnnounces();
         InitializeMetadata();
+    }
+
+    private void OnPlayTtsMessage(PlayTtsMessage args)
+    {
+        var volume = AdjustVolume(args.Metadata.Kind);
+        var audioParams = AudioParams.Default.WithVolume(volume);
+
+        QueuePlayTts(args.AudioData, args.Metadata, GetEntity(args.Source), audioParams, args.Metadata.Kind == TtsKind.Telepathy);
     }
 
     public override void Shutdown()
@@ -69,8 +75,6 @@ public sealed partial class TTSSystem
         base.Shutdown();
         _cfg.UnsubValueChanged(CCVars220.TTSVolume, OnTtsVolumeChanged);
         _cfg.UnsubValueChanged(CCVars220.TTSRadioVolume, OnTtsRadioVolumeChanged);
-
-        _ttsManager.PlayTtsReceived -= OnPlayTts;
 
         ShutdownAnnounces();
         ResetQueuesAndEndStreams();
@@ -225,14 +229,6 @@ public sealed partial class TTSSystem
             if (sourceUid.HasValue && sourceUid.Value.IsValid())
                 TryQueuePlayByAudioStream(sourceUid.Value, audioStream, metadata, finalParams, globally);
         }
-    }
-
-    private void OnPlayTts(MsgPlayTts msg)
-    {
-        var volume = AdjustVolume(msg.Metadata.Kind);
-        var audioParams = AudioParams.Default.WithVolume(volume);
-
-        QueuePlayTts(msg.Data, msg.Metadata, GetEntity(msg.SourceUid), audioParams, msg.Metadata.Kind == TtsKind.Telepathy);
     }
 
     private float AdjustVolume(TtsKind kind)

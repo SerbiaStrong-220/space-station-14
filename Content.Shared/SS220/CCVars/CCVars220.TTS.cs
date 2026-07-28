@@ -4,23 +4,8 @@ namespace Content.Shared.SS220.CCVars;
 
 public sealed partial class CCVars220
 {
-    public static readonly CVarDef<bool> NTTSEnabled =
-        CVarDef.Create("tts.ntts_enabled", false, CVar.SERVERONLY);
-
-    /// <summary>
-    /// URL of the NTTS server API.
-    /// </summary>
-    public static readonly CVarDef<string> NTTSApiUrl =
-        CVarDef.Create("tts.ntts_api_url", "", CVar.SERVERONLY);
-
-    public static readonly CVarDef<bool> TTSSileroEnabled =
-         CVarDef.Create("tts.silero_enabled", false, CVar.SERVERONLY);
-
-    public static readonly CVarDef<string> TTSSileroApiUrl =
-        CVarDef.Create("tts.silero_api_url", "", CVar.SERVERONLY);
-
-    public static readonly CVarDef<string> TTSSileroApiToken =
-        CVarDef.Create("tts.silero_api_token", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
+    public static readonly CVarDef<bool> TTSEnabled =
+        CVarDef.Create("tts.enabled", false, CVar.SERVERONLY);
 
     /// <summary>
     /// Default volume setting of TTS sound
@@ -35,22 +20,10 @@ public sealed partial class CCVars220
         CVarDef.Create("tts.radio_volume", 0.50f, CVar.CLIENTONLY | CVar.ARCHIVE);
 
     /// <summary>
-    /// Count of in-memory cached tts voice lines.
-    /// </summary>
-    public static readonly CVarDef<int> TTSMaxCache =
-        CVarDef.Create("tts.max_cache", 250, CVar.SERVERONLY | CVar.ARCHIVE);
-
-    /// <summary>
     /// TTS request timeout in seconds.
     /// </summary>
     public static readonly CVarDef<float> TTSRequestTimeout =
         CVarDef.Create("tts.timeout", 5f, CVar.SERVERONLY | CVar.ARCHIVE);
-
-    /// <summary>
-    /// VoiceId for Announcement TTS
-    /// </summary>
-    public static readonly CVarDef<string> TTSAnnounceVoiceId =
-        CVarDef.Create("tts.announce_voice", "glados", CVar.SERVERONLY | CVar.ARCHIVE);
 
     /// <summary>
     /// Default volume setting of TTS Announce sound
@@ -108,4 +81,29 @@ public sealed partial class CCVars220
     /// </summary>
     public static readonly CVarDef<int> MaxCharInTTSAnnounceMessage =
         CVarDef.Create("tts.max_char_announce_message", 100 * 4, CVar.SERVERONLY | CVar.ARCHIVE);
+
+    #region NTTS
+    public static readonly CVarDef<bool> NTTSEnabled =
+        CVarDef.Create("tts.ntts.enabled", false, CVar.SERVERONLY);
+
+    public static readonly CVarDef<string> NTTSApiUrl =
+        CVarDef.Create("tts.ntts.api_url", "", CVar.SERVERONLY);
+
+    public static readonly CVarDef<int> NTTSMaxCache =
+        CVarDef.Create("tts.ntts.max_cache", 250, CVar.SERVERONLY | CVar.ARCHIVE);
+    #endregion
+
+    #region Silero
+    public static readonly CVarDef<bool> TTSSileroEnabled =
+         CVarDef.Create("tts.silero.enabled", false, CVar.SERVERONLY);
+
+    public static readonly CVarDef<string> TTSSileroApiUrl =
+        CVarDef.Create("tts.silero.api_url", "", CVar.SERVERONLY);
+
+    public static readonly CVarDef<string> TTSSileroApiToken =
+        CVarDef.Create("tts.silero.api_token", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
+
+    public static readonly CVarDef<int> TTSSileroMaxCache =
+        CVarDef.Create("tts.silero.max_cache", 250, CVar.SERVERONLY | CVar.ARCHIVE);
+    #endregion
 }

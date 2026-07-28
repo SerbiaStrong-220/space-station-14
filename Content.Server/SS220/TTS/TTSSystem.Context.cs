@@ -1,63 +1,54 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-
 using Content.Server.Chat.Systems;
 using Content.Shared.Chat;
 using Content.Shared.SS220.TTS;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
 
 namespace Content.Server.SS220.TTS;
 
-public static class TtsContextMaker
+public partial class TTSSystem
 {
-    #region Speak context
-
-    public static TtsContext New(IEntityManager entityManager, EntitySpokeEvent args)
+    public TtsContext GetContext(EntitySpokeEvent args)
     {
         return new()
         {
             ChannelPrototype = args.Channel?.ID + args.Frequency?.ToString(),
             IsRadio = args.IsRadio,
-            SpeakerContext = New(entityManager, args.Source),
+            SpeakerContext = GetSpeakerContext(args.Source),
         };
     }
 
-    public static TtsContext New(IEntityManager entityManager, RadioSpokeEvent args)
+    public TtsContext GetContext(RadioSpokeEvent args)
     {
         return new()
         {
             ChannelPrototype = args.Channel.ID + args.Frequency?.ToString(),
             IsRadio = true,
-            SpeakerContext = New(entityManager, args.Source)
+            SpeakerContext = GetSpeakerContext(args.Source)
         };
     }
 
-    public static TtsContext New(IEntityManager entityManager, TelepathySpokeEvent args)
+    public TtsContext GetContext(TelepathySpokeEvent args)
     {
         return new()
         {
             ChannelPrototype = args.Channel,
             IsRadio = true,
-            SpeakerContext = New(entityManager, args.Source)
+            SpeakerContext = GetSpeakerContext(args.Source)
         };
     }
-    #endregion
 
-    #region Speaker context
-
-    public static TtsSpeakerContext New(IEntityManager entityManager, EntityUid speaker)
+    private TtsSpeakerContext GetSpeakerContext(EntityUid speaker)
     {
-        entityManager.System<TTSSystem>().TryGetVoiceId(speaker, out var voiceId);
+        TryGetVoiceId(speaker, out var voiceId);
 
         return new()
         {
             Speaker = speaker,
-            NetSpeaker = entityManager.GetNetEntity(speaker),
+            NetSpeaker = GetNetEntity(speaker),
             VoiceId = voiceId
         };
     }
-
-    #endregion
 }
 
 public readonly record struct TtsContext

@@ -2,9 +2,35 @@
 
 using Content.Shared.Radio;
 using Content.Shared.SS220.Telepathy;
+using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.TTS;
+
+public sealed class PlayTtsMessage : EntityEventArgs
+{
+    public required TtsAudioData AudioData;
+    public TtsMetadata Metadata;
+    public NetEntity? Source;
+    public float VolumeModifier = 1f;
+}
+
+public sealed class PlayAnnounceTtsMessage : EntityEventArgs
+{
+    public TtsAudioData AudioData;
+    public SoundSpecifier AnnouncementSound = new SoundPathSpecifier("");
+    public AudioWithTTSPlayOperation PlayAudioMask = AudioWithTTSPlayOperation.PlayAll;
+}
+
+[Flags]
+public enum AudioWithTTSPlayOperation : byte
+{
+    NotPlay = 1 << 0,
+    PlayAudio = 1 << 1,
+    PlayTTS = 1 << 2,
+
+    PlayAll = PlayAudio | PlayTTS,
+}
 
 public sealed class TelepathySpokeEvent(EntityUid source, string message, EntityUid[] receivers, ProtoId<TelepathyChannelPrototype>? channel) : EntityEventArgs
 {

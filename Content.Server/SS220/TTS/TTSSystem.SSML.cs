@@ -1,7 +1,6 @@
 namespace Content.Server.SS220.TTS;
 
-// ReSharper disable once InconsistentNaming
-public sealed partial class TTSManager
+public partial class TTSSystem
 {
     private static string ToSsmlText(string text, SoundTraits traits = SoundTraits.None)
     {

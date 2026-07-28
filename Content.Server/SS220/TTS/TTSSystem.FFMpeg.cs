@@ -1,5 +1,3 @@
-// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-
 using Content.Server.SS220.TTS.FFMPegArguments;
 using Content.Shared.SS220.CCVars;
 using Content.Shared.SS220.TTS;
@@ -11,15 +9,11 @@ using System.Threading.Tasks;
 
 namespace Content.Server.SS220.TTS;
 
-// ReSharper disable once InconsistentNaming
-public sealed partial class TTSManager
+public partial class TTSSystem
 {
-    private bool _useFFMpegProcessing = true;
+    private static bool _useFFMpegProcessing = true;
 
-    private void InitializeFFMpeg()
-    {
-        _cfg.OnValueChanged(CCVars220.UseFFMpegProcessing, (x) => _useFFMpegProcessing = x, true);
-    }
+    private static readonly string[] SizeSuffixes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
 
     private static readonly Histogram ProcessEffectsTimings = Metrics.CreateHistogram("tts_ffmpeg_usage_time",
         "Milliseconds spent for ffmpeg processing (and pipe operations) on tts", new HistogramConfiguration
@@ -28,13 +22,17 @@ public sealed partial class TTSManager
             Buckets = Histogram.ExponentialBuckets(.1, 1.5, 10),
         });
 
+    private void InitializeFFMpeg()
+    {
+        _cfg.OnValueChanged(CCVars220.UseFFMpegProcessing, (x) => _useFFMpegProcessing = x, true);
+    }
 
-    private async Task<RecyclableMemoryStream?> AddFFMpegEffect(RecyclableMemoryStream audioDataStream, TtsKind kind)
+    private static async Task<RecyclableMemoryStream?> AddFFMpegEffect(RecyclableMemoryStream audioDataStream, TtsKind kind, ISawmill? sawmill = null)
     {
         if (!_useFFMpegProcessing)
             return null;
 
-        var outputStream = _memoryStreamPool.GetStream("TtsFFMpegStream", audioDataStream.Length);
+        var outputStream = MemoryStreamPool.GetStream("TtsFFMpegStream", audioDataStream.Length);
 
         var startTime = DateTime.UtcNow;
         try
@@ -46,7 +44,7 @@ public sealed partial class TTSManager
         }
         catch (Exception e)
         {
-            _sawmill.Error($"Got exception while adding effects by ffmpeg for tts kind {kind}\n [Exception]\n{e}");
+            sawmill?.Error($"Got exception while adding effects by ffmpeg for tts kind {kind}\n [Exception]\n{e}");
             ProcessEffectsTimings.WithLabels("exception").Observe((DateTime.UtcNow - startTime).TotalMilliseconds);
 
             outputStream.Dispose();
@@ -62,7 +60,7 @@ public sealed partial class TTSManager
         return outputStream;
     }
 
-    private void GetFilterOptionsFromKind(FFMpegArgumentOptions options, TtsKind kind)
+    private static void GetFilterOptionsFromKind(FFMpegArgumentOptions options, TtsKind kind)
     {
         switch (kind)
         {
@@ -91,10 +89,7 @@ public sealed partial class TTSManager
         options.ForceFormat(AudioFileExtension);
     }
 
-    private static readonly string[] SizeSuffixes =
-    ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
-
-    private string PrettyPrintBufferLength(long length, int decimalPlaces = 0)
+    private static string PrettyPrintBufferLength(long length, int decimalPlaces = 0)
     {
         if (length == 0)
             return string.Format("{0:n" + decimalPlaces + "} bytes", 0);
