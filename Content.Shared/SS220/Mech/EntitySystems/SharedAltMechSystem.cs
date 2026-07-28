@@ -515,11 +515,6 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         var massEv = new MassChangedEvent();
         RaiseLocalEvent(uid, ref massEv);
 
-        //if (TryGetNetEntity(uid, out var netMech) && TryGetNetEntity(toInsert, out var netPart))
-        //{
-        //    RaiseNetworkEvent(new MechPartStatusChanged((NetEntity)netMech, (NetEntity)netPart, true, partComponent.slot));
-        //    Dirty<AltMechComponent>((uid, component));
-        //}
         Dirty<AltMechComponent>((uid, component));
     }
 
@@ -906,24 +901,6 @@ public enum PartSlot : byte
     LeftArm = 3,
     Chassis = 4,
     Power = 5
-}
-
-[Serializable, NetSerializable]
-
-public sealed class MechPartStatusChanged : EntityEventArgs // not a by ref event because it is made for networking
-{
-    public NetEntity Mech;
-    public NetEntity Part;
-    public bool Attached;
-    public string? Slot;
-
-    public MechPartStatusChanged(NetEntity mech, NetEntity part, bool attached, string? slot)
-    {
-        Mech = mech;
-        Part = part;
-        Attached = attached;
-        Slot = slot;
-    }
 }
 
 [Serializable, NetSerializable]
