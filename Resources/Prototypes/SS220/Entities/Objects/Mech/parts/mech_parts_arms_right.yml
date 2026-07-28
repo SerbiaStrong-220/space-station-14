@@ -42,16 +42,17 @@
         whitelist:
           sizes:
           - Ginormous
-        damageOverride:
-          types:
-            Blunt: 14
-            Structural: 100
-        altDisarm: false
-        strengthModifier: 9
-        soundHit:
-          path: /Audio/Effects/metal_thud1.ogg
-          params:
-            variation: 0.10
+        handOverride:
+          damageOverride:
+            types:
+              Blunt: 14
+              Structural: 100
+          altDisarm: false
+          strengthModifier: 9
+          soundHit:
+            path: /Audio/Effects/metal_thud1.ogg
+            params:
+              variation: 0.10
   - type: Destructible
     thresholds:
     - trigger:
@@ -223,10 +224,16 @@
     hands:
     - hand:
         location: Right
-        strengthModifier: 1
         whitelist:
           sizes:
           - Ginormous
+        handOverride:
+          altDisarm: false
+          strengthModifier: 1
+          soundHit:
+            path: /Audio/Effects/metal_thud1.ogg
+            params:
+              variation: 0.10
       item: MechMiningDrill
   - type: CustomColorableLayer
   - type: ArmorBlock
