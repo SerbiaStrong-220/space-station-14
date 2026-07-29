@@ -13,7 +13,7 @@ public sealed partial class GasWeaponSystem : SharedGasWeaponSystem
         base.Initialize();
     }
 
-    protected override void OnShootAttempt(Entity<GasWeaponComponent>ent, ref ShotAttemptedEvent args)
+    protected override void OnShootAttempt(Entity<GasWeaponComponent> ent, ref ShotAttemptedEvent args)
     {
         base.OnShootAttempt(ent, ref args);
     }

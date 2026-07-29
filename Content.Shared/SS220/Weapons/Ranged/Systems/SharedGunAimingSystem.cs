@@ -1,9 +1,10 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.
 using Content.Shared.CombatMode;
-using Content.Shared.SS220.Weapons.Components;
 using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Movement.Systems;
+using Content.Shared.SS220.Weapons.Components;
+using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Network;
@@ -62,18 +63,18 @@ public abstract partial class SharedGunAimingSystem : EntitySystem
         if (aimableComp.AimedSprintSpeedModifier == null && aimableComp.AimedWalkingSpeedModifier == null)
             return;
 
-        float SprintMod = 1f;
-        float WalkMod = 1f;
+        float sprintMod = 1f;
+        float walkMod = 1f;
 
         if (aimableComp.IsAimed)
         {
             if (aimableComp.AimedSprintSpeedModifier != null)
-                SprintMod = (float)aimableComp.AimedSprintSpeedModifier;
+                sprintMod = (float)aimableComp.AimedSprintSpeedModifier;
 
             if (aimableComp.AimedWalkingSpeedModifier != null)
-                WalkMod = (float)aimableComp.AimedWalkingSpeedModifier;
+                walkMod = (float)aimableComp.AimedWalkingSpeedModifier;
 
-            args.ModifySpeed(WalkMod, SprintMod);
+            args.ModifySpeed(walkMod, sprintMod);
         }
     }
 

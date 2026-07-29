@@ -4,7 +4,7 @@ using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Hands;
 using Content.Shared.SS220.Weapons.Components;
-using Content.Shared.SS220.Weapons.Ranged.Events;
+using Content.Shared.SS220.Weapons.Ranged;
 using Content.Shared.SS220.Weapons.Ranged.Systems;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Containers;
