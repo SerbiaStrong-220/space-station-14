@@ -1,5 +1,6 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
+using Content.Server.Investigation;
 using Content.Server.Power.Components;
 using Content.Shared.Chat;
 using Content.Shared.Database;
@@ -32,6 +33,7 @@ public sealed class RadioSystem : EntitySystem
     [Dependency] private readonly INetManager _netMan = default!;
     [Dependency] private readonly IReplayRecordingManager _replay = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
+    [Dependency] private readonly IInvestigationRecorder _investigation = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     //[Dependency] private readonly PopupSystem _popup = default!; // ss220 remove unused dep
@@ -222,6 +224,8 @@ public sealed class RadioSystem : EntitySystem
         var radioSpokeEvent = new RadioSpokeEvent(messageSource, message, channel, ev.Receivers.ToArray(), frequency  /* SS220-add-frequency-radio */);
         RaiseLocalEvent(ref radioSpokeEvent);
         //ss220 add filter tts for ghost end
+
+        _investigation.OnChat(messageSource, "Radio", message, name);
 
         if (name != Name(messageSource))
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Radio message from {ToPrettyString(messageSource):user} as {name} on {channel.LocalizedName}: {message}");

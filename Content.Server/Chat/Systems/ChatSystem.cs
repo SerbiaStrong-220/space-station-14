@@ -5,6 +5,7 @@ using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
+using Content.Server.Investigation;
 using Content.Server.Speech.EntitySystems;
 using Content.Server.Speech.Prototypes;
 using Content.Server.Station.Systems;
@@ -65,6 +66,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
+    [Dependency] private readonly IInvestigationRecorder _investigation = default!;
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly StationSystem _stationSystem = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
@@ -549,6 +551,9 @@ public sealed partial class ChatSystem : SharedChatSystem
             return;
 
         var defaultLanguageId = _languageSystem.GetSelectedLanguage(source)?.ID ?? "none"; // SS220 languages
+
+        _investigation.OnChat(source, "Say", originalMessage, name);
+
         if (originalMessage == message)
         {
             if (name != Name(source))
@@ -659,23 +664,28 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         var defaultLanguageId = _languageSystem.GetSelectedLanguage(source)?.ID ?? "none";
         // SS220 languages end
-        if (!hideLog)
-            if (originalMessage == message)
-            {
-                if (name != Name(source))
-                    _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Whisper from {ToPrettyString(source):user} as {name}: {originalMessage}, defaultLanguage: {defaultLanguageId}."); // SS220 languages
-                else
-                    _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Whisper from {ToPrettyString(source):user}: {originalMessage}, defaultLanguage: {defaultLanguageId}."); // SS220 languages
-            }
+
+        if (hideLog)
+            return;
+
+        _investigation.OnChat(source, "Whisper", originalMessage, name);
+
+        if (originalMessage == message)
+        {
+            if (name != Name(source))
+                _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Whisper from {ToPrettyString(source):user} as {name}: {originalMessage}, defaultLanguage: {defaultLanguageId}."); // SS220 languages
             else
-            {
-                if (name != Name(source))
-                    _adminLogger.Add(LogType.Chat, LogImpact.Low,
+                _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Whisper from {ToPrettyString(source):user}: {originalMessage}, defaultLanguage: {defaultLanguageId}."); // SS220 languages
+        }
+        else
+        {
+            if (name != Name(source))
+                _adminLogger.Add(LogType.Chat, LogImpact.Low,
                     $"Whisper from {ToPrettyString(source):user} as {name}, original: {originalMessage}, transformed: {message}, defaultLanguage: {defaultLanguageId}."); // SS220 languages
-                else
-                    _adminLogger.Add(LogType.Chat, LogImpact.Low,
+            else
+                _adminLogger.Add(LogType.Chat, LogImpact.Low,
                     $"Whisper from {ToPrettyString(source):user}, original: {originalMessage}, transformed: {message}, defaultLanguage: {defaultLanguageId}."); // SS220 languages
-            }
+        }
     }
 
     protected override void SendEntityEmote(
@@ -734,6 +744,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             ("message", FormattedMessage.EscapeText(message)));
 
         SendInVoiceRange(ChatChannel.LOOC, message, wrappedMessage, source, hideChat ? ChatTransmitRange.HideChat : ChatTransmitRange.Normal, player.UserId);
+        _investigation.OnChat(source, "LOOC", message, player.Name);
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"LOOC from {player:Player}: {message}");
     }
 

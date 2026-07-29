@@ -31,4 +31,20 @@ public interface IInvestigationRecorder
     ///     structs, which is what lets us resolve positions without re-parsing the serialized JSON.
     /// </param>
     void OnAdminLog(LogType type, LogImpact impact, string message, Dictionary<string, object?> values);
+
+    /// <summary>
+    ///     Called for every in-character or out-of-character message, with the text as it was actually typed.
+    /// </summary>
+    /// <remarks>
+    ///     This exists because chat text is not recoverable from the admin log stream. Bare interpolation holes are
+    ///     dropped by <see cref="Content.Shared.Administration.Logs.LogStringHandler.AppendFormatted(string?)"/>,
+    ///     which does not call AddFormat, so the message text survives only inside the formatted string. Readers need
+    ///     speaker and text as separate fields to draw speech bubbles, and regex-recovering them from a localized,
+    ///     per-channel message format would be fragile.
+    /// </remarks>
+    /// <param name="source">The speaking entity, or null for channels with no in-world speaker (OOC).</param>
+    /// <param name="channel">Channel label: Say, Whisper, Radio, Emote, OOC, LOOC.</param>
+    /// <param name="text">The original, untransformed message. Not language-obfuscated, not accent-transformed.</param>
+    /// <param name="speakerName">Displayed name at the time, which may be a disguised identity.</param>
+    void OnChat(EntityUid? source, string channel, string text, string? speakerName);
 }

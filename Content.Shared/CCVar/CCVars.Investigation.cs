@@ -19,8 +19,13 @@ public sealed partial class CCVars
     /// <summary>
     ///     How often, in seconds, tracked entity positions are sampled.
     /// </summary>
+    /// <remarks>
+    ///     Positions outweigh every other stream by roughly 250:1, so this is the one knob that decides
+    ///     bundle size. 0.5s keeps a 2 hour round in the low tens of megabytes; 0.2s roughly triples it for
+    ///     resolution no investigation has been shown to need.
+    /// </remarks>
     public static readonly CVarDef<float> InvestigationPositionInterval =
-        CVarDef.Create("investigation.position_interval", 0.2f, CVar.SERVERONLY);
+        CVarDef.Create("investigation.position_interval", 0.5f, CVar.SERVERONLY);
 
     /// <summary>
     ///     Minimum distance, in tiles, a tracked entity must move before a new position row is written.

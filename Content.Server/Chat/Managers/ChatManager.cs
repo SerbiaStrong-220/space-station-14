@@ -6,6 +6,7 @@ using Content.Server.Administration.Managers;
 using Content.Server.Administration.Systems;
 using Content.Server.Corvax.Sponsors;
 using Content.Server.Discord.DiscordLink;
+using Content.Server.Investigation;
 using Content.Server.Players.RateLimiting;
 using Content.Server.Preferences.Managers;
 using Content.Shared.Players;
@@ -52,6 +53,7 @@ internal sealed partial class ChatManager : IChatManager
     [Dependency] private readonly IServerNetManager _netManager = default!;
     [Dependency] private readonly IAdminManager _adminManager = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
+    [Dependency] private readonly IInvestigationRecorder _investigation = default!;
     [Dependency] private readonly IServerPreferencesManager _preferencesManager = default!;
     [Dependency] private readonly IConfigurationManager _configurationManager = default!;
     [Dependency] private readonly INetConfigurationManager _netConfigManager = default!;
@@ -337,6 +339,7 @@ internal sealed partial class ChatManager : IChatManager
         //TODO: player.Name color, this will need to change the structure of the MsgChatMessage
         ChatMessageToAll(ChatChannel.OOC, message, wrappedMessage, EntityUid.Invalid, hideChat: false, recordReplay: true, colorOverride: colorOverride, author: player.UserId);
         _discordLink.SendMessage(message, player.Name, ChatChannel.OOC);
+        _investigation.OnChat(null, "OOC", message, player.Name);
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"OOC from {player:Player}: {message}");
     }
 

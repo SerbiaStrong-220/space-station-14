@@ -108,6 +108,110 @@ public sealed class InvestigationRecorderTests : GameTest
     }
 
     [Test]
+    public async Task RecordsChatWithBareTextAndInlinePosition()
+    {
+        var server = Pair.Server;
+        var entities = server.ResolveDependency<IEntityManager>();
+        var resources = server.ResolveDependency<IResourceManager>();
+        var recorder = server.ResolveDependency<InvestigationRecorder>();
+
+        await Pair.CreateTestMap();
+        var coordinates = Pair.TestMap!.GridCoords;
+
+        EntityUid speaker = default;
+
+        await server.WaitPost(() =>
+        {
+            recorder.StartRound(4243, "TestStation");
+
+            speaker = entities.SpawnEntity(null, coordinates);
+            recorder.TrackEntity(speaker, Guid.NewGuid(), "chatter", "Urist McSpeaker", "MobHuman");
+            recorder.WritePosition(speaker, null, new Vector2(7f, -3f), null, 0.15f);
+
+            recorder.OnChat(speaker, "Say", "привет, мир", "Urist McSpeaker");
+            recorder.OnChat(speaker, "Whisper", "тихо", "Замаскированный");
+            // No in-world speaker, so there must be no entity and no position.
+            recorder.OnChat(null, "OOC", "ooc line", "some_player");
+            // Blank messages must not produce rows at all.
+            recorder.OnChat(speaker, "Say", "   ", "Urist McSpeaker");
+
+            recorder.StopRound(TimeSpan.FromMinutes(1));
+        });
+
+        var dir = recorder.LastBundlePath!.Value;
+        var rows = ReadJsonl(resources, dir / "chat.jsonl.gz");
+
+        Assert.That(rows, Has.Count.EqualTo(3), "Blank chat should be dropped, everything else kept.");
+
+        var say = rows[0];
+        Assert.Multiple(() =>
+        {
+            // The whole point of this stream: the bare text, not a formatted log sentence.
+            Assert.That(say.GetProperty("msg").GetString(), Is.EqualTo("привет, мир"));
+            Assert.That(say.GetProperty("ch").GetString(), Is.EqualTo("Say"));
+            Assert.That(say.GetProperty("e").GetInt32(), Is.EqualTo((int) speaker));
+            // Carried inline so a reader can place a bubble with no join.
+            Assert.That(say.GetProperty("x").GetDouble(), Is.EqualTo(7d).Within(0.01));
+            Assert.That(say.GetProperty("y").GetDouble(), Is.EqualTo(-3d).Within(0.01));
+        });
+
+        // A voice mask means the displayed name differs from the character; both must survive.
+        Assert.That(rows[1].GetProperty("name").GetString(), Is.EqualTo("Замаскированный"));
+
+        var ooc = rows[2];
+        Assert.Multiple(() =>
+        {
+            Assert.That(ooc.GetProperty("ch").GetString(), Is.EqualTo("OOC"));
+            Assert.That(ooc.TryGetProperty("e", out _), Is.False, "OOC has no in-world speaker.");
+            Assert.That(ooc.TryGetProperty("x", out _), Is.False, "OOC must not carry a position.");
+        });
+    }
+
+    [Test]
+    public async Task WritesMetaAndRosterBeforeTheRoundEnds()
+    {
+        var server = Pair.Server;
+        var entities = server.ResolveDependency<IEntityManager>();
+        var resources = server.ResolveDependency<IResourceManager>();
+        var recorder = server.ResolveDependency<InvestigationRecorder>();
+
+        await Pair.CreateTestMap();
+        var coordinates = Pair.TestMap!.GridCoords;
+
+        ResPath dir = default;
+
+        await server.WaitPost(() =>
+        {
+            recorder.StartRound(4244, "TestStation");
+            dir = recorder.CurrentBundlePath!.Value;
+
+            var entity = entities.SpawnEntity(null, coordinates);
+            recorder.TrackEntity(entity, Guid.NewGuid(), "early", "Urist McEarly", "MobHuman");
+            recorder.Flush();
+        });
+
+        // Everything below is asserted while the round is still recording, which is what a crashed
+        // server would leave behind. Without this, meta.json only appeared at StopRound and a crash
+        // lost the roster entirely.
+        var meta = JsonDocument.Parse(ReadAllText(resources, dir / "meta.json")).RootElement;
+        Assert.Multiple(() =>
+        {
+            Assert.That(meta.GetProperty("roundId").GetInt32(), Is.EqualTo(4244));
+            Assert.That(meta.TryGetProperty("durationSeconds", out _), Is.False,
+                "An unfinished round must not claim a duration.");
+        });
+
+        var roster = ReadJsonl(resources, dir / "roster.jsonl.gz");
+        Assert.That(roster, Has.Count.EqualTo(1));
+        Assert.That(roster[0].GetProperty("name").GetString(), Is.EqualTo("Urist McEarly"));
+
+        await server.WaitPost(() => recorder.StopRound(TimeSpan.FromMinutes(2)));
+
+        var finalMeta = JsonDocument.Parse(ReadAllText(resources, dir / "meta.json")).RootElement;
+        Assert.That(finalMeta.GetProperty("durationSeconds").GetDouble(), Is.EqualTo(120d).Within(0.1));
+    }
+
+    [Test]
     public async Task DoesNotWriteWhenNotRecording()
     {
         var server = Pair.Server;

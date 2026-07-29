@@ -74,6 +74,20 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
     /// </summary>
     public ResPath? LastBundlePath { get; private set; }
 
+    /// <summary>
+    ///     Directory of the bundle currently being written, or null when not recording.
+    /// </summary>
+    public ResPath? CurrentBundlePath => _session?.Directory;
+
+    /// <summary>
+    ///     Flushes buffered rows to disk immediately, rather than waiting for the next interval.
+    /// </summary>
+    public void Flush()
+    {
+        if (_session is { } session)
+            FlushSession(session);
+    }
+
     public void Initialize()
     {
         _sawmill = _logManager.GetSawmill("investigation");
@@ -108,7 +122,13 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
                 NavMap = OpenStream(roundDir / "navmap.jsonl.gz"),
                 Characters = OpenStream(roundDir / "characters.jsonl.gz"),
                 Events = OpenStream(roundDir / "events.jsonl.gz"),
+                Chat = OpenStream(roundDir / "chat.jsonl.gz"),
+                Roster = OpenStream(roundDir / "roster.jsonl.gz"),
             };
+
+            // Written up front so a bundle from a crashed server is still identifiable and readable. Rewritten with
+            // the final tick counts and duration on a clean stop.
+            WriteMeta(_session, null);
 
             _sawmill.Info($"Started investigation recording for round {roundId} at {roundDir}");
         }
@@ -136,6 +156,8 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
             session.NavMap.Dispose();
             session.Characters.Dispose();
             session.Events.Dispose();
+            session.Chat.Dispose();
+            session.Roster.Dispose();
 
             LastBundlePath = session.Directory;
 
@@ -201,10 +223,24 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
     /// </summary>
     public void TrackEntity(EntityUid uid, Guid? playerGuid, string? userName, string name, string? prototype)
     {
-        if (_session == null || Roster.ContainsKey(uid))
+        if (_session is not { } session || Roster.ContainsKey(uid))
             return;
 
-        Roster[uid] = new RosterEntry(playerGuid, userName, name, prototype, _timing.CurTick.Value);
+        var entry = new RosterEntry(playerGuid, userName, name, prototype, _timing.CurTick.Value);
+        Roster[uid] = entry;
+
+        // Also appended to its own stream, so the roster survives a crash. meta.json is only complete on a clean
+        // stop; this stream is flushed on the normal interval like everything else.
+        session.Roster.Write(JsonSerializer.Serialize(new
+        {
+            e = uid.Id,
+            player = entry.PlayerGuid?.ToString(),
+            userName = entry.UserName,
+            name = entry.Name,
+            prototype = entry.Prototype,
+            firstTick = entry.FirstTick,
+        }, JsonOptions));
+        session.RowCount++;
     }
 
     public void UntrackEntity(EntityUid uid)
@@ -304,6 +340,34 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
 
     #endregion
 
+    #region Chat hook
+
+    public void OnChat(EntityUid? source, string channel, string text, string? speakerName)
+    {
+        if (_session is not { } session || string.IsNullOrWhiteSpace(text))
+            return;
+
+        SampledPosition position = default;
+        var located = source is { } src && _positions.TryGetValue(src, out position);
+
+        session.Chat.Write(JsonSerializer.Serialize(new
+        {
+            t = _timing.CurTick.Value,
+            e = source?.Id,
+            ch = channel,
+            name = speakerName,
+            msg = text,
+            // Carried inline so the reader can place a speech bubble without joining against the position stream.
+            g = located ? position.Grid?.Id : null,
+            x = located ? Math.Round(position.Local.X, 2) : (double?) null,
+            y = located ? Math.Round(position.Local.Y, 2) : (double?) null,
+            c = located ? position.Container?.Id : null,
+        }, JsonOptions));
+        session.RowCount++;
+    }
+
+    #endregion
+
     #region Admin log hook
 
     public void OnAdminLog(LogType type, LogImpact impact, string message, Dictionary<string, object?> values)
@@ -397,6 +461,8 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
             session.NavMap.Flush();
             session.Characters.Flush();
             session.Events.Flush();
+            session.Chat.Flush();
+            session.Roster.Flush();
         }
         catch (Exception e)
         {
@@ -443,6 +509,8 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
         public JsonlStream NavMap = default!;
         public JsonlStream Characters = default!;
         public JsonlStream Events = default!;
+        public JsonlStream Chat = default!;
+        public JsonlStream Roster = default!;
 
         public long RowCount;
 
