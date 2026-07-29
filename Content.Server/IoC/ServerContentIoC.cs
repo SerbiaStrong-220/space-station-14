@@ -17,6 +17,7 @@ using Content.Server.EUI;
 using Content.Server.FeedbackSystem;
 using Content.Server.GhostKick;
 using Content.Server.Info;
+using Content.Server.Investigation;
 using Content.Server.Mapping;
 using Content.Server.Maps;
 using Content.Server.NodeContainer.NodeGroups;
@@ -68,6 +69,8 @@ internal static class ServerContentIoC
         deps.Register<GhostKickManager>();
         deps.Register<ISharedAdminLogManager, AdminLogManager>();
         deps.Register<IAdminLogManager, AdminLogManager>();
+        deps.Register<IInvestigationRecorder, InvestigationRecorder>();
+        deps.Register<InvestigationRecorder>();
         deps.Register<PlayTimeTrackingManager>();
         deps.Register<UserDbDataManager>();
         deps.Register<ServerInfoManager>();

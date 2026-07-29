@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Content.Server.Administration.Systems;
 using Content.Server.Database;
 using Content.Server.GameTicking;
+using Content.Server.Investigation;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
@@ -38,6 +39,7 @@ public sealed partial class AdminLogManager : SharedAdminLogManager, IAdminLogMa
     [Dependency] private readonly ISharedPlaytimeManager _playtime = default!;
     [Dependency] private readonly ISharedChatManager _chat = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly IInvestigationRecorder _investigation = default!;
 
     public const string SawmillId = "admin.logs";
 
@@ -309,6 +311,11 @@ public sealed partial class AdminLogManager : SharedAdminLogManager, IAdminLogMa
         var message = handler.ToStringAndClear();
         if (!Enabled)
             return;
+
+        // Hooked before the drop threshold below: the investigation bundle is cheap to write, so it should keep a
+        // complete event stream even when the database queue is saturated and logs are being shed.
+        if (_investigation.IsRecording)
+            _investigation.OnAdminLog(type, impact, message, handler.Values);
 
         var preRound = _runLevel == GameRunLevel.PreRoundLobby;
         var count = preRound ? _preRoundLogQueue.Count : _logQueue.Count;
