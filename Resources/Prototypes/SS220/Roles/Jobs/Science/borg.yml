@@ -1,7 +1,7 @@
 - type: job
   id: SecurityBorg
-  name: job-name-secborg
-  description: job-description-secborg
+  name: job-name-security-borg
+  description: job-description-security-borg
   experienceDefinition: StationBorgsRoleExperience
   playTimeTracker: JobSecBorg
   requirements:
@@ -13,10 +13,10 @@
       time: 20h
   canBeAntag: false
   icon: JobIconSecBorg
-  supervisors: job-supervisors-rd
+  supervisors: job-supervisors-hos
   jobEntity: PlayerBorgChassisSecurityBattery
   applyTraits: false
-  special: #SS220-RenameStart - start
+  special:
   - !type:AddComponentSpecial
     components:
-    - type: RenameStart #SS220-RenameStart - end
+    - type: RenameStart

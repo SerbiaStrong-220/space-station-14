@@ -6,7 +6,7 @@
   description: A cyborg security service created to help security personnel maintain order at the station.
   components:  
   - type: BorgTransponder
-    name: sec borg
+    name: secborg
     sprite:
       sprite: SS220/Mobs/Silicon/chassis.rsi
       state: SecBorg

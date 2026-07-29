@@ -103,6 +103,10 @@
     - Robotics
     - Security
   - type: ShowJobIcons
+  - type: JobStatus
+    jobStatusIcon: JobIconSecBorg
+    isCrew: false
+  - type: StatusIcon
   - type: ShowCrewIcons
   - type: InteractionPopup
     interactSuccessSound:
