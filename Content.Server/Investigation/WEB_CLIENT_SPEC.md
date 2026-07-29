@@ -33,9 +33,11 @@ One directory per round:
 ```
 investigation/round-<roundId>_<yyyy-MM-dd_HH-mm-ss>/
 ├── meta.json              # plain JSON, not compressed
+├── roster.jsonl.gz
 ├── positions.jsonl.gz
 ├── navmap.jsonl.gz
 ├── characters.jsonl.gz
+├── chat.jsonl.gz
 └── events.jsonl.gz
 ```
 
@@ -94,8 +96,25 @@ absent and null as equivalent everywhere.
 }
 ```
 
+`meta.json` is written **twice**: once at round start, and again on a clean stop. A bundle from a
+crashed server therefore still has a readable `meta.json`, but with **`durationSeconds` and a final
+`endTick` absent**. Treat a missing `durationSeconds` as "this round did not end cleanly" — the streams
+are still valid up to wherever they stopped.
+
 `roster` is every entity that was *ever* player-controlled this round. Entities stay on the roster after
 the player leaves them — tracking a corpse being dragged away is intentional and often the point.
+
+Because the `roster` array here is only complete on a clean stop, prefer merging it with
+`roster.jsonl.gz` (§3.2), which is appended as players are tracked and survives a crash.
+
+### 3.1a `roster.jsonl.gz`
+
+```json
+{"e":4821,"player":"a3f2c1d0-…","userName":"Kypatop","name":"Urist McGriff","prototype":"MobHuman","firstTick":118420}
+```
+
+One row per tracked entity, appended at the moment it is first player-controlled. Identical fields to a
+`meta.roster` element. Union the two, keyed on `e`.
 
 `player` is the account GUID and `userName` the login; both may be absent for entities that were
 tracked without a session. **`name` is the character name at the moment of first attachment** and is not
@@ -108,9 +127,12 @@ updated — for the current name at time `t`, read the `characters` stream.
 {"t":118438,"e":4821,"g":17,"x":42.4,"y":-17.1,"c":9102}
 ```
 
-Sampled at `investigation.position_interval` (default 0.2s ≈ 5Hz) and deduplicated: a row is emitted only
+Sampled at `investigation.position_interval` (default 0.5s = 2Hz) and deduplicated: a row is emitted only
 when the entity moved more than `investigation.position_epsilon` (default 0.15 tiles) **or** when `g` or
 `c` changed.
+
+This stream outweighs every other one by roughly 250:1, so it is the only one whose size matters. A
+reader that is slow or memory-hungry will be slow here and nowhere else.
 
 Consequences the reader must handle:
 
@@ -208,6 +230,41 @@ printed on one card. `worn` maps slot id → entity prototype. Values throughout
 back to the entity name when an entity has no prototype. `carried` is storage contents to
 `investigation.storage_depth` (default 2 — the bag and what is in it).
 
+### 3.4a `chat.jsonl.gz`
+
+Everything anyone said, with the text as typed.
+
+```json
+{"t":118432,"e":4821,"ch":"Say","name":"Urist McGriff","msg":"привет, мир","g":17,"x":42.1,"y":-17.3}
+{"t":118450,"ch":"OOC","name":"Kypatop","msg":"ooc line"}
+```
+
+| Field | Meaning |
+|---|---|
+| `e` | Speaking entity. **Absent** for channels with no in-world speaker (OOC). |
+| `ch` | `Say`, `Whisper`, `Radio`, `LOOC`, `OOC`. |
+| `name` | Displayed name at the time, which may be a **disguised identity** (voice mask, agent ID). |
+| `msg` | The original text. Not language-obfuscated, not accent-transformed, not markup-wrapped. |
+| `g`/`x`/`y`/`c` | Speaker position, inline. Absent when the speaker had no sampled position. |
+
+Two things worth knowing:
+
+**Why this exists at all.** Chat also appears in `events.jsonl.gz` as `LogType.Chat`, but only as a
+finished sentence — `"Say from X (uid/nuid, proto, user): TEXT, defaultLanguage: Galactic."` The text is
+not a field there, because
+`Content.Shared/Administration/Logs/LogStringHandler.cs`'s `AppendFormatted(string?)` overload does not
+call `AddFormat`, so bare interpolation holes never reach the structured values. Recovering the words
+would mean parsing ~10 localized per-channel shapes whose text can itself contain `: ` and `, `.
+
+**Positions are inline on purpose.** Drawing a speech bubble needs no join against the position stream.
+
+Rows are tick-ascending, so a bubble layer can binary-search to the playhead and walk backwards until
+outside its display window.
+
+**Deliberate duplication.** The same message exists in both `chat` and `events`. That keeps the rule
+"`events` is the complete admin log stream, nothing removed" while giving readers clean text. A viewer
+showing both should filter `type == "Chat"` out of its admin-log view, or every line appears twice.
+
 ### 3.5 `events.jsonl.gz`
 
 Every admin log, in order, pre-joined to positions.
@@ -247,12 +304,9 @@ A second entry shape appears for the handful of call sites that log coordinates 
 Distinguish by the presence of `parent`. These are parent-relative, more precise than the sampled cache,
 and worth preferring when present.
 
-**Chat is in this stream**, as rows with `"type":"Chat"` — the recorder does not have a separate chat
-file. This is deliberate: chat already flows through the admin log path, where it carries the
-**unobfuscated original text** plus the disguised name when a voice mask was in use. (The engine replay's
-copy of the same message is post-processed — language obfuscation and whisper range applied — which is
-right for reproducing player experience and wrong for investigation.) Radio, whisper, OOC, LOOC and
-telepathy all appear here too.
+Chat appears here too, as rows with `"type":"Chat"`, but only as a formatted sentence. For anything that
+needs the words as data — speech bubbles, a saylog panel — use `chat.jsonl.gz` (§3.4a) instead, and
+filter `type == "Chat"` out of this stream to avoid showing each message twice.
 
 ---
 
@@ -368,3 +422,15 @@ change:
   carry them, and "which locker" comes up in exactly the body-disposal cases that matter most.
 - **Event-hooked access/weapon changes**, if the 10s character staleness proves too coarse in practice.
   Do not build this speculatively.
+- **Adaptive position sampling.** Today the rate is fixed and the only filter is a distance epsilon, so a
+  character walking a long straight corridor emits a row every interval even though two endpoints would
+  reconstruct the path exactly. Emitting a row only when the actual position deviates from a linear
+  prediction (dead reckoning off the last two emitted samples) by more than a threshold would keep full
+  fidelity through corners and fights while collapsing straight runs — plausibly another large cut on top
+  of the epsilon, since corridors are most of SS14 movement.
+
+  **This is a coupled change, not a server-only one.** Readers currently treat positions as a step
+  function (`positionAt` returns the last sample at or before the tick). With adaptive sampling the gaps
+  between samples become long and irregular, so a reader *must* interpolate linearly between consecutive
+  samples within the same `g`/`c` run, or motion will visibly stutter. Ship both halves together, and
+  bump the schema version when doing so.
