@@ -42,6 +42,17 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
         DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
     };
 
+    /// <summary>
+    ///     UTF-8 without a byte order mark.
+    /// </summary>
+    /// <remarks>
+    ///     <see cref="Encoding.UTF8"/> emits a BOM, which lands at the start of the first line of every
+    ///     stream and makes that line invalid JSON for any reader that splits on newlines and parses each
+    ///     line. Readers should still tolerate a BOM, because bundles written before this was fixed have
+    ///     one, but nothing new should produce it.
+    /// </remarks>
+    private static readonly Encoding Utf8NoBom = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
+
     private ISawmill _sawmill = default!;
     private bool _enabled;
     private float _flushInterval;
@@ -181,7 +192,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
     {
         var file = _res.UserData.Open(path, FileMode.Create, FileAccess.Write, FileShare.Read);
         var gzip = new GZipStream(file, CompressionLevel.Optimal);
-        return new JsonlStream(new StreamWriter(gzip, Encoding.UTF8));
+        return new JsonlStream(new StreamWriter(gzip, Utf8NoBom));
     }
 
     private void WriteMeta(Session session, TimeSpan? duration)
@@ -209,7 +220,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
         };
 
         using var file = _res.UserData.Open(session.Directory / "meta.json", FileMode.Create, FileAccess.Write, FileShare.Read);
-        using var writer = new StreamWriter(file, Encoding.UTF8);
+        using var writer = new StreamWriter(file, Utf8NoBom);
         writer.Write(JsonSerializer.Serialize(meta, JsonOptions));
     }
 

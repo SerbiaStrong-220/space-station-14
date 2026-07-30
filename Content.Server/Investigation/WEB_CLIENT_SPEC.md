@@ -44,6 +44,14 @@ investigation/round-<roundId>_<yyyy-MM-dd_HH-mm-ss>/
 `*.jsonl.gz` is gzipped newline-delimited JSON: one complete JSON object per line, no enclosing array,
 trailing newline after each row. Decompress in-browser with `DecompressionStream('gzip')`.
 
+Two robustness requirements for readers, both learned from real bundles:
+
+- **Tolerate a leading byte order mark.** Bundles written before the recorder switched to BOM-less UTF-8
+  begin every stream — and `meta.json` — with U+FEFF, which makes the first line invalid JSON. Those
+  files still exist, so strip it if present.
+- **Tolerate a truncated final member.** A server that dies mid-round leaves an unterminated gzip stream
+  and possibly a half-written last line. Keep what parsed and carry on; do not fail the whole round.
+
 Rows within a file are **append-ordered, therefore non-decreasing in `t`**. Do not assume strict
 monotonicity — several rows commonly share a tick.
 
@@ -242,7 +250,7 @@ Everything anyone said, with the text as typed.
 | Field | Meaning |
 |---|---|
 | `e` | Speaking entity. **Absent** for channels with no in-world speaker (OOC). |
-| `ch` | `Say`, `Whisper`, `Radio`, `LOOC`, `OOC`. |
+| `ch` | `Say`, `Whisper`, `Radio`, `Emote`, `LOOC`, `OOC`. |
 | `name` | Displayed name at the time, which may be a **disguised identity** (voice mask, agent ID). |
 | `msg` | The original text. Not language-obfuscated, not accent-transformed, not markup-wrapped. |
 | `g`/`x`/`y`/`c` | Speaker position, inline. Absent when the speaker had no sampled position. |
@@ -357,8 +365,16 @@ Canvas 2D. Per frame at scrub tick `T`, for the selected grid:
    changes between consecutive samples.**
 5. Entities with `c` set get an "inside container" marker rather than a plain dot.
 
-Grid selector in the corner; default to the grid holding the most tracked entities. One grid at a time —
-mixing frames is incorrect without world transforms, which v1 does not record.
+Grid selector in the corner. One grid at a time — mixing frames is incorrect without world transforms,
+which v1 does not record.
+
+**Choose the default grid by player presence, not by map size.** Counting position rows per grid picks
+where the round actually happened. Ranking by chunk count does not: salvage and expedition grids are
+routinely larger than the station *and* first appear tens of minutes in, so a size-ranked default opens on
+a grid with no geometry at the round start and renders nothing.
+
+For the same reason, **clamp the opening tick to the chosen grid's first navmap snapshot**, and when the
+playhead sits before it, say so — a grid that does not exist yet is not the same as a broken renderer.
 
 ### 5.2 Timeline scrubber
 

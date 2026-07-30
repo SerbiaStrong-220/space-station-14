@@ -717,6 +717,10 @@ public sealed partial class ChatSystem : SharedChatSystem
             return;
 
         SendInVoiceRange(ChatChannel.Emotes, action, wrappedMessage, source, range, author);
+
+        if (!hideLog)
+            _investigation.OnChat(source, "Emote", action, name);
+
         if (!hideLog)
             if (name != Name(source))
                 _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Emote from {ToPrettyString(source):user} as {name}: {action}");

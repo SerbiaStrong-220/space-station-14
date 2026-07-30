@@ -5,6 +5,7 @@ using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Humanoid;
+using Content.Server.Maps;
 using Content.Shared.Inventory;
 using Content.Shared.Mind;
 using Content.Shared.Pinpointer;
@@ -38,6 +39,7 @@ public sealed class InvestigationRecorderSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly SharedJobSystem _jobs = default!;
+    [Dependency] private readonly IGameMapManager _gameMap = default!;
 
     private float _positionInterval;
     private float _positionEpsilon;
@@ -98,7 +100,7 @@ public sealed class InvestigationRecorderSystem : EntitySystem
         _navMapAccumulator = 0f;
         _characterAccumulator = 0f;
 
-        _recorder.StartRound(ev.RoundId, null);
+        _recorder.StartRound(ev.RoundId, _gameMap.GetSelectedMap()?.MapName);
     }
 
     private void OnRoundEnded(RoundEndedEvent ev)
