@@ -69,6 +69,7 @@ public sealed class InvestigationRecorderSystem : EntitySystem
         base.Initialize();
 
         _recorder.Initialize();
+        _recorder.PositionResolver = ResolvePosition;
 
         _xformQuery = GetEntityQuery<TransformComponent>();
         _metaQuery = GetEntityQuery<MetaDataComponent>();
@@ -166,6 +167,31 @@ public sealed class InvestigationRecorderSystem : EntitySystem
     }
 
     #region Positions
+
+    /// <summary>
+    ///     Grid-local position of any entity, resolved on demand.
+    /// </summary>
+    /// <remarks>
+    ///     Used for speech from entities that are not on the roster, which never get a sampled position.
+    ///     Same container-aware resolution as <see cref="SamplePositions"/>.
+    /// </remarks>
+    private (EntityUid? Grid, Vector2 Local, EntityUid? Container)? ResolvePosition(EntityUid uid)
+    {
+        if (!_xformQuery.TryComp(uid, out var xform))
+            return null;
+
+        EntityUid? container = null;
+        if (_container.TryGetContainingContainer((uid, xform, null), out var containing))
+            container = containing.Owner;
+
+        var grid = xform.GridUid;
+        var worldPos = _transform.GetWorldPosition(uid);
+        var local = grid is { } gridUid
+            ? Vector2.Transform(worldPos, _transform.GetInvWorldMatrix(gridUid))
+            : worldPos;
+
+        return (grid, local, container);
+    }
 
     private void SamplePositions()
     {

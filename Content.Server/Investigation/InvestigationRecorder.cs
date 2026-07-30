@@ -78,6 +78,17 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
     /// </summary>
     private readonly Dictionary<EntityUid, int> _loadoutHashes = new();
 
+    /// <summary>
+    ///     Resolves an entity's grid-local position on demand, supplied by
+    ///     <see cref="InvestigationRecorderSystem"/>.
+    /// </summary>
+    /// <remarks>
+    ///     Needed because plenty of speech comes from entities that are not on the roster and therefore
+    ///     have no sampled position: mice, bots, and any mob that was never player-controlled. Without a
+    ///     live lookup those lines carry no coordinates and a reader cannot place a speech bubble for them.
+    /// </remarks>
+    public Func<EntityUid, (EntityUid? Grid, Vector2 Local, EntityUid? Container)?>? PositionResolver;
+
     public bool IsRecording => _session != null;
 
     /// <summary>
@@ -359,7 +370,19 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
             return;
 
         SampledPosition position = default;
-        var located = source is { } src && _positions.TryGetValue(src, out position);
+        var located = false;
+
+        if (source is { } src)
+        {
+            located = _positions.TryGetValue(src, out position);
+
+            // Untracked speaker: resolve it live rather than dropping the coordinates.
+            if (!located && PositionResolver?.Invoke(src) is { } resolved)
+            {
+                position = new SampledPosition(resolved.Grid, resolved.Local, resolved.Container);
+                located = true;
+            }
+        }
 
         session.Chat.Write(JsonSerializer.Serialize(new
         {
