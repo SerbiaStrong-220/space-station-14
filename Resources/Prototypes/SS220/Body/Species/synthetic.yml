@@ -1,0 +1,395 @@
+- type: markingsGroup
+  parent: Undergarments
+  id: Synth
+  limits:
+    enum.HumanoidVisualLayers.HeadTop:
+      limit: 0
+      required: false
+    enum.HumanoidVisualLayers.Hair:
+      limit: 0
+      required: false
+    enum.HumanoidVisualLayers.FacialHair:
+      limit: 0
+      required: false
+    enum.HumanoidVisualLayers.Chest:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.Snout:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LArm:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RArm:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LHand:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RHand:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LLeg:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RLeg:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LFoot:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RFoot:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.Tail:
+      limit: 0
+      required: false
+    enum.HumanoidVisualLayers.Special:
+      limit: 1
+      required: false
+
+- type: entity
+  parent: BaseSpeciesAppearance
+  id: AppearanceSynth
+  categories: [ HideSpawnMenu ]
+  name: synth appearance
+  components:
+  - type: InitialBody
+    organs:
+      Torso: OrganRoboticTorso
+      Head: OrganRoboticHead
+      ArmLeft: OrganRoboticArmLeft
+      ArmRight: OrganRoboticArmRight
+      HandRight: OrganRoboticHandRight
+      HandLeft: OrganRoboticHandLeft
+      LegLeft: OrganRoboticLegLeft
+      LegRight: OrganRoboticLegRight
+      FootLeft: OrganRoboticFootLeft
+      FootRight: OrganRoboticFootRight
+  - type: HumanoidProfile
+    species: Human
+
+- type: entity
+  parent: [BaseSpeciesMob, StripableInventoryBase]
+  id: BaseMobSilicon
+  abstract: true
+  save: false
+  components:
+  #- type: Flammable
+  - type: Experience
+  - type: Reactive
+    groups:
+      Acidic: [Touch]
+  - type: DamageOnHighSpeedImpact
+    damage:
+      types:
+        Blunt: 5
+    soundHit:
+      collection: MetalThud
+  - type: CombatMode
+  - type: NoSlip
+  - type: StaticPrice
+    price: 1250
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 300
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 2.5
+    baseSprintSpeed : 4.5
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      100: Critical
+      300: Dead # Same as destruction threshold. Borgs act exactly like crit when dead, except for ghosting on move
+    stateAlertDict:
+      Alive: BorgHealth
+      Critical: BorgCrit
+      Dead: BorgDead
+    showOverlays: false
+    allowRevives: true
+  - type: HealthExaminable
+    examinableTypes:
+      - Blunt
+      - Slash
+      - Piercing
+      - Heat
+      - Shock
+    locPrefix: silicon
+  - type: UserInterface
+    interfaces:
+      enum.SiliconUiKey.Key:
+        type: SiliconBoundUserInterface
+  - type: ActivatableUI
+    key: enum.SiliconUiKey.Key
+  - type: Inventory
+    templateId: borg
+  - type: Hands
+  - type: ComplexInteraction
+  - type: IntrinsicRadioReceiver
+  - type: IntrinsicRadioTransmitter
+    channels:
+    - Binary
+    - Common
+    - Science
+  - type: ActiveRadio
+    channels:
+    - Binary
+    - Common
+    - Science
+  - type: ZombieImmune
+  - type: Repairable
+    damageValue: -10 # 10 seconds to repair from crit
+    doAfterDelay: 1
+    fuelCost: 0.5
+    allowSelfRepair: false
+  #- type: BorgChassis
+  - type: WiresPanel
+  - type: ActivatableUIRequiresPanel
+  - type: ContainerContainer
+    containers:
+      borg_brain: !type:ContainerSlot { }
+      cell_slot: !type:ContainerSlot { }
+      borg_module: !type:Container { }
+      part-container: !type:Container
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+    fitsInCharger: true
+  - type: PowerCellDraw
+    drawRate: 0.6
+    enabled: false # the borg is only activated when a player takes over, otherwise the battery is likely empty
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        blacklist:
+          tags:
+          - E-N
+  - type: Body
+  - type: StatusEffects
+    allowed:
+    - Flashed
+  - type: TypingIndicator
+    proto: robot
+  - type: Speech
+    speechVerb: Robotic
+    speechSounds: Borg
+  - type: Vocal
+    sounds:
+      Unsexed: UnisexSilicon
+    wilhelmProbability: 0
+  - type: DamagedSiliconAccent
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepBoots
+  - type: Lock
+    locked: true
+    unlockOnClick: false
+  - type: UIRequiresLock
+    userInterfaceKeys:
+    - enum.SiliconUiKey.Key
+    blacklist:
+      tags:
+      - NoConsoleSound
+  - type: LockedWiresPanel
+  - type: Damageable
+    damageContainer: Silicon
+    damageModifierSet: Silicon
+  - type: ExplosionResistance
+    damageCoefficient: 0.7
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 75
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Machines/warning_buzzer.ogg
+          params:
+            volume: 5
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:EmptyContainersBehaviour
+        containers:
+        - borg_brain
+        - borg_module
+        - cell_slot
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  #- type: HandheldLight
+  #  toggleOnInteract: false
+  #  wattage: 0.2
+  #  blinkingBehaviourId: blinking
+  #  radiatingBehaviourId: radiating
+  #- type: ItemTogglePointLight
+  #- type: ToggleableVisuals
+  #  spriteLayer: light
+  #- type: LightBehaviour
+  #  behaviours:
+  #  - !type:FadeBehaviour
+  #    id: radiating
+  #    maxDuration: 2.0
+  #    startValue: 3.0
+  #    endValue: 2.0
+  #    isLooped: true
+  #    reverseWhenFinished: true
+  #  - !type:PulseBehaviour
+  #    id: blinking
+  #    interpolate: Nearest
+  #    maxDuration: 1.0
+  #    startValue: 0.1
+  #    endValue: 2.0
+  #    isLooped: true
+  #- type: PointLight
+  #  enabled: false
+  #  mask: /Textures/Effects/LightMasks/cone.png
+  #  autoRot: true
+  #  radius: 6 #ss220 Borg update
+  #  netsync: false
+  - type: Pullable
+  - type: Puller
+    needsHands: true
+  - type: StandingState
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - FootstepSound
+    - CanPilot
+    - SiliconEmotes
+    - Unimplantable
+  - type: Emoting
+  - type: GuideHelp
+    guides:
+    - Cyborgs
+    - Robotics
+  - type: TTS
+    randomVoicesList: Borg
+  - type: ProtectedFromStepTriggers
+  - type: DamageOnInteractProtection
+    damageProtection:
+      flatReductions:
+        Heat: 10 # capable of touching light bulbs and stoves without feeling pain!
+  - type: BypassLock
+    openWiresPanel: true
+  - type: BypassLockRequiresMobState
+    requiredMobState:
+    - Critical
+    - Dead
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    - id: Binary
+    - id: Universal
+
+- type: entity
+  parent:
+  - AppearanceSynth
+  - BaseMobSilicon
+  id: MobSynthetic
+  name: Urist McBot
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.375
+        density: 185
+        restitution: 0.0
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Inventory
+    templateId: synth
+  - type: SiliconComponents
+  - type: Language
+    selectedLanguage: Galactic
+    availableLanguages:
+    - id: Galactic
+    - id: SolCommon
+  - type: ScaleVisuals
+    scale: 1.1, 1.1
+
+- type: entity
+  parent: OrganBase
+  id: OrganRobotic
+  abstract: true
+  suffix: synthetic
+
+- type: entity
+  parent: OrganRobotic
+  id: OrganRoboticExternal
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: SS220/Mobs/Species/Synthetic/parts.rsi
+  - type: VisualOrgan
+    data:
+      sprite: SS220/Mobs/Species/Synthetic/parts.rsi
+  - type: VisualOrganMarkings
+    markingData:
+      group: Synth
+
+- type: entity
+  parent: [ OrganBaseTorso, OrganRoboticExternal ]
+  id: OrganRoboticTorso
+
+- type: entity
+  parent: [ OrganBaseHead, OrganRoboticExternal ]
+  id: OrganRoboticHead
+  components:
+  - type: VisualOrganMarkings
+    hideableLayers:
+    - enum.HumanoidVisualLayers.Hair
+    - enum.HumanoidVisualLayers.Snout
+
+- type: entity
+  parent: [ OrganBaseArmLeft, OrganRoboticExternal ]
+  id: OrganRoboticArmLeft
+
+- type: entity
+  parent: [ OrganBaseArmRight, OrganRoboticExternal ]
+  id: OrganRoboticArmRight
+
+- type: entity
+  parent: [ OrganBaseHandLeft, OrganRoboticExternal ]
+  id: OrganRoboticHandLeft
+
+- type: entity
+  parent: [ OrganBaseHandRight, OrganRoboticExternal ]
+  id: OrganRoboticHandRight
+
+- type: entity
+  parent: [ OrganBaseLegLeft, OrganRoboticExternal ]
+  id: OrganRoboticLegLeft
+
+- type: entity
+  parent: [ OrganBaseLegRight, OrganRoboticExternal ]
+  id: OrganRoboticLegRight
+
+- type: entity
+  parent: [ OrganBaseFootLeft, OrganRoboticExternal ]
+  id: OrganRoboticFootLeft
+
+- type: entity
+  parent: [ OrganBaseFootRight, OrganRoboticExternal ]
+  id: OrganRoboticFootRight

@@ -1,0 +1,11 @@
+- type: species
+  id: Synth
+  name: species-name-synth
+  roundStart: true
+  prototype: MobSynthetic
+  defaultSkinTone: "#ffffff"
+  dollPrototype: AppearanceSynth
+  skinColoration: Hues
+  youngAge: 0 #You can't tell a synth's age by it's appearance
+  oldAge: 9999
+  maxAge: 99
