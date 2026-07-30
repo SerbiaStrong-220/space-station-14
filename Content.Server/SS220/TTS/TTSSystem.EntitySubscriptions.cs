@@ -29,10 +29,11 @@ public partial class TTSSystem
         if (!_isEnabled || args.Message.Length > _maxMessageChars)
             return;
 
-        var context = GetContext(args);
-
-        if (!context.Valid)
+        var meta = GetDefaultMeta(args.Source);
+        if (!meta.Valid)
             return;
+
+        meta.ChannelPrototype = args.Channel.ID + args.Frequency?.ToString();
 
         var receivers = new List<RadioEventReceiver>();
 
@@ -45,7 +46,7 @@ public partial class TTSSystem
                 receivers.Add(receiver);
         }
 
-        HandleRadio([.. receivers], args.Message, context);
+        HandleRadio([.. receivers], args.Message, meta);
     }
 
     private async void OnAnnouncementSpoke(AnnouncementSpokeEvent args)
@@ -93,15 +94,23 @@ public partial class TTSSystem
                 receivers.Add(ent);
         }
 
-        var context = GetContext(args);
-
-        if (!context.SpeakerContext.Valid)
+        var meta = GetDefaultMeta(uid);
+        if (!meta.Valid)
             return;
 
+        meta.ChannelPrototype = args.Channel?.ID + args.Frequency?.ToString();
+
+        if (args.ObfuscatedMessage is { } objMessage)
+        {
+            meta.Kind = TtsKind.Whisper;
+
+        }
+
+
         if (args.LanguageMessage is { } languageMessage)
-            HandleEntitySpokeWithLanguage(receivers, languageMessage, context, args.ObfuscatedMessage);
+            HandleEntitySpokeWithLanguage(receivers, languageMessage, meta, args.ObfuscatedMessage);
         else
-            HandleEntitySpoke(receivers, args.Message, context, args.ObfuscatedMessage);
+            HandleEntitySpoke(receivers, args.Message, meta, args.ObfuscatedMessage);
     }
 
     private async void OnTelepathySpoke(TelepathySpokeEvent args)
@@ -109,12 +118,14 @@ public partial class TTSSystem
         if (args.Receivers.Length == 0)
             return;
 
-        var speakerContext = GetSpeakerContext(args.Source);
-
-        if (!speakerContext.Valid)
+        var meta = GetDefaultMeta(args.Source);
+        if (!meta.Valid)
             return;
 
-        using var soundData = await ConvertTextToSpeech(speakerContext.VoiceId, args.Message, TtsKind.Telepathy);
+        meta.Kind = TtsKind.Telepathy;
+        meta.ChannelPrototype = args.Channel is null ? string.Empty : args.Channel;
+
+        using var soundData = await ConvertTextToSpeech(args.Message, meta);
         if (soundData is null)
             return;
 
@@ -139,7 +150,7 @@ public partial class TTSSystem
                 AudioData = audioData,
                 // we may need to differ source and entity where we play
                 Source = GetNetEntity(receiver),
-                Metadata = new(TtsKind.Telepathy, args.Channel is null ? string.Empty : args.Channel)
+                Metadata = meta.ToSharedMetadata()
             }, session);
         }
     }

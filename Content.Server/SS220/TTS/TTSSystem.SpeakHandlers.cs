@@ -3,29 +3,38 @@ using Content.Shared.Chat;
 using Content.Shared.SS220.Language.Systems;
 using Content.Shared.SS220.TTS;
 using Robust.Shared.Player;
+using Robust.Shared.Utility;
 
 namespace Content.Server.SS220.TTS;
 
 public partial class TTSSystem
 {
-    private async void HandleEntitySpokeWithLanguage(IEnumerable<EntityUid> receivers, LanguageMessage languageMessage, TtsContext context, string? obfuscatedMessage = null)
+    private async void HandleEntitySpokeWithLanguage(IEnumerable<EntityUid> receivers, LanguageMessage languageMessage, ServerTtsMetadata meta, string? obfMessage = null)
     {
-        Dictionary<string, (HashSet<EntityUid>, string?)> messageListenersDict = new();
+        Dictionary<string, HashSet<EntityUid>> receiversDict = new();
         foreach (var receiver in receivers)
         {
-            string sanitizedMessage = languageMessage.GetMessage(receiver, true, false);
-            if (obfuscatedMessage != null)
-                obfuscatedMessage = languageMessage.GetObfuscatedMessage(receiver, true);
-
-            if (messageListenersDict.TryGetValue(sanitizedMessage, out var listeners))
-                listeners.Item1.Add(receiver);
+            string sanitizedMessage;
+            if (meta.Kind == TtsKind.Whisper)
+                sanitizedMessage = languageMessage.GetObfuscatedMessage(receiver, true);
             else
-                messageListenersDict[sanitizedMessage] = ([receiver], obfuscatedMessage);
+                sanitizedMessage = languageMessage.GetMessage(receiver, true, false);
+
+            receiversDict.GetOrNew(sanitizedMessage).Add(receiver);
         }
 
-        foreach (var (key, value) in messageListenersDict)
+        foreach (var (key, value) in receiversDict)
         {
-            HandleEntitySpoke(value.Item1, key, context, value.Item2);
+            HandleEntitySpoke(receivers, key, meta);
+        }
+    }
+
+    private Dictionary<string, HashSet<EntityUid>> SplitReceiversByLanguangeMessage(IEnumerable<EntityUid> receivers, LanguageMessage languageMessage)
+    {
+        var result = new Dictionary<string, HashSet<EntityUid>>();
+        foreach (var receiver in receivers)
+        {
+
         }
     }
 
@@ -34,14 +43,14 @@ public partial class TTSSystem
         HandleEntitySpoke([listener], message, context, obfuscatedMessage);
     }
 
-    private async void HandleEntitySpoke(IEnumerable<EntityUid> receivers, string message, TtsContext context, string? obfuscatedMessage = null)
+    private async void HandleEntitySpoke(IEnumerable<EntityUid> receivers, string message, ServerTtsMetadata meta, string? obfuscatedMessage = null)
     {
         if (!_isEnabled || message.Length > _maxMessageChars)
             return;
 
         if (obfuscatedMessage != null)
         {
-            HandleWhisperToMany(receivers, message, obfuscatedMessage, context);
+            HandleWhisperToMany(receivers, message, obfuscatedMessage, meta);
             return;
         }
 
@@ -126,51 +135,53 @@ public partial class TTSSystem
         HandleWhisperToMany(receivers, message, obfMessage, context);
     }
 
-    private async void HandleWhisperToMany(IEnumerable<ICommonSession> receivers, string message, string obfMessage, TtsContext context)
+    private async void HandleWhisperToMany(IEnumerable<ICommonSession> receivers, string message, string obfMessage, ServerTtsMetadata meta)
     {
+        meta.Kind = TtsKind.Whisper;
+
         PlayTtsMessage? ttsMessage = null;
-        using var ttsResponse = await ConvertTextToSpeech(context.SpeakerContext.VoiceId, message, TtsKind.Whisper);
+        using var ttsResponse = await ConvertTextToSpeech(message, meta);
         if (ttsResponse.TryGetValue(out var audioData))
         {
             ttsMessage = new PlayTtsMessage
             {
                 AudioData = audioData,
-                Source = context.SpeakerContext.NetSpeaker,
-                Metadata = new(TtsKind.Whisper, context.ChannelPrototype)
+                Source = meta.SpeakerMeta.NetSpeaker,
+                Metadata = meta.ToSharedMetadata()
             };
         }
 
         PlayTtsMessage? obfttsMessage = null;
-        using var obfTtsResponse = await ConvertTextToSpeech(context.SpeakerContext.VoiceId, obfMessage, TtsKind.Whisper);
+        using var obfTtsResponse = await ConvertTextToSpeech(obfMessage, meta);
         if (obfTtsResponse.TryGetValue(out var obfAudioData))
         {
             obfttsMessage = new PlayTtsMessage
             {
                 AudioData = obfAudioData,
-                Source = context.SpeakerContext.NetSpeaker,
-                Metadata = new(TtsKind.Whisper, context.ChannelPrototype)
+                Source = meta.SpeakerMeta.NetSpeaker,
+                Metadata = new(TtsKind.Whisper, meta.ChannelPrototype)
             };
         }
 
         foreach (var receiver in receivers)
         {
-            HandleWhisperToOne(receiver, message, obfMessage, context, ttsMessage, obfttsMessage);
+            HandleWhisperToOne(receiver, message, obfMessage, meta, ttsMessage, obfttsMessage);
         }
     }
 
-    private async void HandleWhisperToOne(EntityUid target, string message, string obfMessage, TtsContext context)
+    private async void HandleWhisperToOne(EntityUid target, string message, string obfMessage, ServerTtsMetadata meta)
     {
         if (!_playerManager.TryGetSessionByEntity(target, out var receiver))
             return;
 
-        HandleWhisperToOne(receiver, message, obfMessage, context);
+        HandleWhisperToOne(receiver, message, obfMessage, meta);
     }
 
     private async void HandleWhisperToOne(
         ICommonSession receiver,
         string message,
         string obfMessage,
-        TtsContext context,
+        ServerTtsMetadata meta,
         PlayTtsMessage? ttsMessage = null,
         PlayTtsMessage? obfTtsMessage = null)
     {
@@ -181,7 +192,7 @@ public partial class TTSSystem
             return;
 
         var xformQuery = GetEntityQuery<TransformComponent>();
-        var sourcePos = _xforms.GetWorldPosition(xformQuery.GetComponent(context.SpeakerContext.Speaker), xformQuery);
+        var sourcePos = _xforms.GetWorldPosition(xformQuery.GetComponent(meta.SpeakerMeta.Speaker), xformQuery);
 
         var xform = xformQuery.GetComponent(receiver.AttachedEntity.Value);
         var distance = (sourcePos - _xforms.GetWorldPosition(xform, xformQuery)).Length();
@@ -189,17 +200,19 @@ public partial class TTSSystem
         if (distance > SharedChatSystem.WhisperMuffledRange)
             return;
 
+        meta.Kind = TtsKind.Whisper;
+
         if (distance > SharedChatSystem.WhisperClearRange)
         {
             if (obfTtsMessage == null)
             {
-                using var obfTtsResponse = await ConvertTextToSpeech(context.SpeakerContext.VoiceId, obfMessage, TtsKind.Whisper);
+                using var obfTtsResponse = await ConvertTextToSpeech(obfMessage, meta);
                 if (!obfTtsResponse.TryGetValue(out var obfAudioData)) return;
                 obfTtsMessage = new PlayTtsMessage
                 {
                     AudioData = obfAudioData,
-                    Source = context.SpeakerContext.NetSpeaker,
-                    Metadata = new(TtsKind.Whisper, context.ChannelPrototype)
+                    Source = meta.SpeakerMeta.NetSpeaker,
+                    Metadata = new(TtsKind.Whisper, meta.ChannelPrototype)
                 };
 
                 SendTtsMessage(obfTtsMessage, receiver);
@@ -211,13 +224,13 @@ public partial class TTSSystem
         {
             if (ttsMessage == null)
             {
-                using var ttsResponse = await ConvertTextToSpeech(context.SpeakerContext.VoiceId, message, TtsKind.Whisper);
+                using var ttsResponse = await ConvertTextToSpeech(message, meta;
                 if (!ttsResponse.TryGetValue(out var audioData)) return;
                 ttsMessage = new PlayTtsMessage
                 {
                     AudioData = audioData,
-                    Source = context.SpeakerContext.NetSpeaker,
-                    Metadata = new(TtsKind.Whisper, context.ChannelPrototype)
+                    Source = meta.SpeakerMeta.NetSpeaker,
+                    Metadata = new(TtsKind.Whisper, meta.ChannelPrototype)
                 };
 
                 SendTtsMessage(ttsMessage, receiver);
@@ -227,9 +240,11 @@ public partial class TTSSystem
         }
     }
 
-    private async void HandleRadio(RadioEventReceiver[] receivers, string message, TtsContext context)
+    private async void HandleRadio(RadioEventReceiver[] receivers, string message, ServerTtsMetadata meta)
     {
-        using var soundData = await ConvertTextToSpeech(context.SpeakerContext.VoiceId, message, TtsKind.Radio);
+        meta.Kind = TtsKind.Radio;
+
+        using var soundData = await ConvertTextToSpeech(message, meta);
         if (soundData is null)
             return;
 
@@ -242,7 +257,7 @@ public partial class TTSSystem
             {
                 AudioData = audioData,
                 Source = GetNetEntity(receiver.PlayTarget.EntityId),
-                Metadata = new(TtsKind.Radio, context.ChannelPrototype)
+                Metadata = meta.ToSharedMetadata(),
             }, session);
         }
     }

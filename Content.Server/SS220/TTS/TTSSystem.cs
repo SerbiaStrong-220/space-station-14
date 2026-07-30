@@ -136,18 +136,23 @@ public sealed partial class TTSSystem : SharedTTSSystem
         SendTtsMessage(new PlayTtsMessage { AudioData = audioData }, args.SenderSession);
     }
 
-    public async Task<ReferenceCounter<TtsAudioData>.Handle?> ConvertTextToSpeech(ProtoId<TTSVoicePrototype>? protoId, string text, TtsKind kind)
+    public async Task<ReferenceCounter<TtsAudioData>.Handle?> ConvertTextToSpeech(string text, ServerTtsMetadata meta)
     {
-        if (protoId == null && !TryGetDefaultPreferredVoice(out protoId))
-            return default;
-
-        if (!_prototypeManager.TryIndex(protoId, out var proto))
-            return default;
-
-        return await ConvertTextToSpeech(proto.Provider, proto.Speaker, text, kind);
+        return await ConvertTextToSpeech(text, meta.SpeakerMeta.VoiceId, meta.Kind);
     }
 
-    public async Task<ReferenceCounter<TtsAudioData>.Handle?> ConvertTextToSpeech(TTSProvider provider, string speaker, string text, TtsKind kind)
+    public async Task<ReferenceCounter<TtsAudioData>.Handle?> ConvertTextToSpeech(string text, ProtoId<TTSVoicePrototype>? protoId, TtsKind kind)
+    {
+        if (protoId == null && !TryGetDefaultPreferredVoice(out protoId))
+            return null;
+
+        if (!_prototypeManager.TryIndex(protoId, out var proto))
+            return null;
+
+        return await ConvertTextToSpeech(text, proto.Provider, proto.Speaker, kind);
+    }
+
+    public async Task<ReferenceCounter<TtsAudioData>.Handle?> ConvertTextToSpeech(string text, TtsProvider provider, string speaker, TtsKind kind)
     {
         if (!IsProviderEnabled(provider))
             return null;
@@ -167,8 +172,8 @@ public sealed partial class TTSSystem : SharedTTSSystem
 
             return provider switch
             {
-                TTSProvider.NTTS => await NTTSHandler.ConvertTextToSpeech(speaker, textSsml, kind),
-                TTSProvider.Silero => await SileroTTSHandler.ConvertTextToSpeech(speaker, textSsml, kind),
+                TtsProvider.NTTS => await NTTSHandler.ConvertTextToSpeech(speaker, textSsml, kind),
+                TtsProvider.Silero => await SileroTTSHandler.ConvertTextToSpeech(speaker, textSsml, kind),
                 _ => null
             };
         }
@@ -182,24 +187,24 @@ public sealed partial class TTSSystem : SharedTTSSystem
 
     public void ClearCache()
     {
-        ClearCache(Enum.GetValues<TTSProvider>());
+        ClearCache(Enum.GetValues<TtsProvider>());
     }
 
-    public void ClearCache(params TTSProvider[] providers)
+    public void ClearCache(params TtsProvider[] providers)
     {
         foreach (var provider in providers)
             ClearCache(provider);
     }
 
-    public void ClearCache(TTSProvider provider)
+    public void ClearCache(TtsProvider provider)
     {
         switch (provider)
         {
-            case TTSProvider.NTTS:
+            case TtsProvider.NTTS:
                 NTTSHandler.Cache.Clear();
                 break;
 
-            case TTSProvider.Silero:
+            case TtsProvider.Silero:
                 SileroTTSHandler.Cache.Clear();
                 break;
         }
@@ -217,7 +222,7 @@ public sealed partial class TTSSystem : SharedTTSSystem
         RaiseNetworkEvent(message, recipient);
     }
 
-    private static string GenerateCacheKey(string text, TTSProvider? provider = null, string? speaker = null, TtsKind? kind = null)
+    private static string GenerateCacheKey(string text, TtsProvider? provider = null, string? speaker = null, TtsKind? kind = null)
     {
         var sb = new StringBuilder();
         sb.Append(text);
@@ -251,10 +256,10 @@ public sealed partial class TTSSystem : SharedTTSSystem
         return "?" + string.Join("&", array);
     }
 
-    private sealed class TTSCache()
+    private sealed class TtsCache()
     {
-        private readonly ConcurrentDictionary<string, TTSResponse> _lookup = new();
-        private readonly ConcurrentQueue<string> _keysQueue = new();
+        private readonly ConcurrentDictionary<TtsCacheKey, TTSResponse> _lookup = new();
+        private readonly ConcurrentQueue<TtsCacheKey> _keysQueue = new();
 
         public int Limit
         {
@@ -264,12 +269,12 @@ public sealed partial class TTSSystem : SharedTTSSystem
 
         private int _limit = 1;
 
-        public TTSCache(int limit) : this()
+        public TtsCache(int limit) : this()
         {
             Limit = limit;
         }
 
-        public void Cache(string key, TTSResponse value)
+        public void Cache(TtsCacheKey key, TTSResponse value)
         {
             var currentCount = _lookup.Count;
             while (currentCount > 0 && currentCount + 1 > Limit)
@@ -288,7 +293,7 @@ public sealed partial class TTSSystem : SharedTTSSystem
             }
         }
 
-        public bool TryGet(string key, [NotNullWhen(true)] out TTSResponse? responce)
+        public bool TryGet(TtsCacheKey key, [NotNullWhen(true)] out TTSResponse? responce)
         {
             if (Limit == 0)
             {

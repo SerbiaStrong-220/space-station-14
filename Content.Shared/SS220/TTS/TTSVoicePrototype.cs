@@ -19,7 +19,7 @@ public sealed partial class TTSVoicePrototype : IPrototype
     public string Description = string.Empty;
 
     [DataField]
-    public TTSProvider Provider = TTSProvider.NTTS;
+    public TtsProvider Provider = TtsProvider.NTTS;
 
     [DataField(required: true)]
     public string Speaker = string.Empty;
@@ -37,4 +37,4 @@ public sealed partial class TTSVoicePrototype : IPrototype
     public bool SponsorOnly = false;
 }
 
-public sealed class TTSVoiceDef : Dictionary<TTSProvider, ProtoId<TTSVoicePrototype>> { }
+public sealed class TTSVoiceDef : Dictionary<TtsProvider, ProtoId<TTSVoicePrototype>> { }

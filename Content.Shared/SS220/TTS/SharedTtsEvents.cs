@@ -10,7 +10,7 @@ namespace Content.Shared.SS220.TTS;
 public sealed class PlayTtsMessage : EntityEventArgs
 {
     public required TtsAudioData AudioData;
-    public TtsMetadata Metadata;
+    public SharedTtsMetadata Metadata;
     public NetEntity? Source;
     public float VolumeModifier = 1f;
 }

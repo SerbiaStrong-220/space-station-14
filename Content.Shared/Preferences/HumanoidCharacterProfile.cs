@@ -86,8 +86,8 @@ namespace Content.Shared.Preferences
         [DataField]
         public TTSVoicePreferences VoicePreferences = new()
         {
-            [TTSProvider.Silero] = "",
-            [TTSProvider.NTTS] = "father_grigori"
+            [TtsProvider.Silero] = "",
+            [TtsProvider.NTTS] = "father_grigori"
         };
         // SS220 TTS end
 

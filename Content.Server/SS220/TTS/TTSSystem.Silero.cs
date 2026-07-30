@@ -28,7 +28,7 @@ public partial class TTSSystem
             SileroTTSHandler.HttpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", v);
             SileroTTSHandler.ApiToken = v;
         }, true);
-        _cfg.OnValueChanged(CCVars220.TTSMaxCache, v =>
+        _cfg.OnValueChanged(CCVars220.TTSSileroMaxCache, v =>
         {
             SileroTTSHandler.Cache.Limit = v;
             SileroTTSHandler.Cache.Trim();
@@ -42,15 +42,15 @@ public partial class TTSSystem
         public static ISawmill? Sawmill = null;
 
         public static readonly HttpClient HttpClient = new();
-        public static readonly TTSCache Cache = new();
+        public static readonly TtsCache Cache = new();
 
-        private static readonly ConcurrentDictionary<string, TTSResponse> ResponsesInProgress = new();
+        private static readonly ConcurrentDictionary<TtsCacheKey, TTSResponse> ResponsesInProgress = new();
 
         public static async Task<ReferenceCounter<TtsAudioData>.Handle?> ConvertTextToSpeech(string speaker, string text, TtsKind kind)
         {
             WantedCount.Inc();
 
-            var cacheKey = GenerateCacheKey(text, speaker: speaker, kind: kind);
+            var cacheKey = new TtsCacheKey(TtsCacheKey.DefaultDivider, text, speaker, kind.ToString());
 
             if (Cache.TryGet(cacheKey, out var data))
             {

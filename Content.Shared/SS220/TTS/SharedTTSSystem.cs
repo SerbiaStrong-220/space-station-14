@@ -10,26 +10,26 @@ public abstract partial class SharedTTSSystem : EntitySystem
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IPrototypeManager _proto = default!;
 
-    private readonly HashSet<TTSProvider> _enabledProviders = [];
+    private readonly HashSet<TtsProvider> _enabledProviders = [];
 
-    public static readonly IReadOnlyDictionary<TTSProvider, ProtoId<TTSVoicePrototype>> DefaultVoicePreferences =
-        new Dictionary<TTSProvider, ProtoId<TTSVoicePrototype>>()
+    public static readonly IReadOnlyDictionary<TtsProvider, ProtoId<TTSVoicePrototype>> DefaultVoicePreferences =
+        new Dictionary<TtsProvider, ProtoId<TTSVoicePrototype>>()
         {
-            [TTSProvider.Silero] = "SileroDefault",
-            [TTSProvider.NTTS] = "father_grigori"
+            [TtsProvider.Silero] = "SileroDefault",
+            [TtsProvider.NTTS] = "father_grigori"
         };
 
-    public static readonly IReadOnlyDictionary<TTSProvider, ProtoId<TTSVoicePrototype>> DefaultAnnouncementVoicePreferences =
-        new Dictionary<TTSProvider, ProtoId<TTSVoicePrototype>>()
+    public static readonly IReadOnlyDictionary<TtsProvider, ProtoId<TTSVoicePrototype>> DefaultAnnouncementVoicePreferences =
+        new Dictionary<TtsProvider, ProtoId<TTSVoicePrototype>>()
         {
-            [TTSProvider.Silero] = "SileroDefault",
-            [TTSProvider.NTTS] = "glados"
+            [TtsProvider.Silero] = "SileroDefault",
+            [TtsProvider.NTTS] = "glados"
         };
 
     public override void Initialize()
     {
-        _cfg.OnValueChanged(CCVars220.NTTSEnabled, v => UpdateProviderEnabled(TTSProvider.NTTS, v), true);
-        _cfg.OnValueChanged(CCVars220.TTSSileroEnabled, v => UpdateProviderEnabled(TTSProvider.Silero, v), true);
+        _cfg.OnValueChanged(CCVars220.NTTSEnabled, v => UpdateProviderEnabled(TtsProvider.NTTS, v), true);
+        _cfg.OnValueChanged(CCVars220.TTSSileroEnabled, v => UpdateProviderEnabled(TtsProvider.Silero, v), true);
     }
 
     public bool TryGetVoice(EntityUid uid, [NotNullWhen(true)] out TTSVoicePrototype? voice)
@@ -59,13 +59,13 @@ public abstract partial class SharedTTSSystem : EntitySystem
         return false;
     }
 
-    protected bool TryGetPreferredVoice(IEnumerable<KeyValuePair<TTSProvider, ProtoId<TTSVoicePrototype>>> voices, [NotNullWhen(true)] out TTSVoicePrototype? voice)
+    protected bool TryGetPreferredVoice(IEnumerable<KeyValuePair<TtsProvider, ProtoId<TTSVoicePrototype>>> voices, [NotNullWhen(true)] out TTSVoicePrototype? voice)
     {
         voice = null;
         return TryGetPreferredVoiceId(voices, out var id) && _proto.TryIndex(id, out voice);
     }
 
-    protected bool TryGetPreferredVoiceId(IEnumerable<KeyValuePair<TTSProvider, ProtoId<TTSVoicePrototype>>> voices, [NotNullWhen(true)] out ProtoId<TTSVoicePrototype>? voiceId)
+    protected bool TryGetPreferredVoiceId(IEnumerable<KeyValuePair<TtsProvider, ProtoId<TTSVoicePrototype>>> voices, [NotNullWhen(true)] out ProtoId<TTSVoicePrototype>? voiceId)
     {
         foreach (var pair in voices)
         {
@@ -80,7 +80,7 @@ public abstract partial class SharedTTSSystem : EntitySystem
         return false;
     }
 
-    public bool IsProviderEnabled(TTSProvider provider)
+    public bool IsProviderEnabled(TtsProvider provider)
     {
         return _enabledProviders.Contains(provider);
     }
@@ -108,7 +108,7 @@ public abstract partial class SharedTTSSystem : EntitySystem
         return protoId != null;
     }
 
-    private void UpdateProviderEnabled(TTSProvider provider, bool enabled)
+    private void UpdateProviderEnabled(TtsProvider provider, bool enabled)
     {
         if (enabled)
             _enabledProviders.Add(provider);
@@ -119,11 +119,11 @@ public abstract partial class SharedTTSSystem : EntitySystem
 
 public sealed class GetTTSVoiceOverrideEvent() : EntityEventArgs
 {
-    private readonly Dictionary<TTSProvider, ProtoId<TTSVoicePrototype>> _overrides = new();
+    private readonly Dictionary<TtsProvider, ProtoId<TTSVoicePrototype>> _overrides = new();
 
-    public IReadOnlyDictionary<TTSProvider, ProtoId<TTSVoicePrototype>> Overrides => _overrides;
+    public IReadOnlyDictionary<TtsProvider, ProtoId<TTSVoicePrototype>> Overrides => _overrides;
 
-    public void Add(TTSProvider provider, ProtoId<TTSVoicePrototype> protoId, bool force = false)
+    public void Add(TtsProvider provider, ProtoId<TTSVoicePrototype> protoId, bool force = false)
     {
         if (_overrides.ContainsKey(provider) && !force)
             return;

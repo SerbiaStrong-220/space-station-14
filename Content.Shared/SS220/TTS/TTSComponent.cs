@@ -18,10 +18,10 @@ public sealed partial class TTSComponent : Component
     public ProtoId<TTSVoicePrototype>? VoicePrototypeId { get; set; }
 
     [DataField]
-    public Dictionary<TTSProvider, ProtoId<TTSVoicePrototype>> PreferredVoice = new()
+    public Dictionary<TtsProvider, ProtoId<TTSVoicePrototype>> PreferredVoice = new()
     {
-        [TTSProvider.NTTS] = "",
-        [TTSProvider.Silero] = ""
+        [TtsProvider.NTTS] = "",
+        [TtsProvider.Silero] = ""
     };
 
     /// <summary>

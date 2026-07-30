@@ -12,23 +12,23 @@ using System.Collections;
 namespace Content.Shared.SS220.TTS;
 
 [Serializable]
-public sealed class TTSVoicePreferences : IEnumerable<KeyValuePair<TTSProvider, ProtoId<TTSVoicePrototype>>>
+public sealed class TTSVoicePreferences : IEnumerable<KeyValuePair<TtsProvider, ProtoId<TTSVoicePrototype>>>
 {
     [NonSerialized]
-    private readonly OrderedDictionary<TTSProvider, ProtoId<TTSVoicePrototype>> _dict = [];
+    private readonly OrderedDictionary<TtsProvider, ProtoId<TTSVoicePrototype>> _dict = [];
 
-    public ProtoId<TTSVoicePrototype> this[TTSProvider key]
+    public ProtoId<TTSVoicePrototype> this[TtsProvider key]
     {
         get => _dict[key];
         set => _dict[key] = value;
     }
 
-    public bool Add(TTSProvider provider, ProtoId<TTSVoicePrototype> protoId)
+    public bool Add(TtsProvider provider, ProtoId<TTSVoicePrototype> protoId)
     {
         return _dict.TryAdd(provider, protoId);
     }
 
-    public bool Insert(int index, TTSProvider provider, ProtoId<TTSVoicePrototype> protoId)
+    public bool Insert(int index, TtsProvider provider, ProtoId<TTSVoicePrototype> protoId)
     {
         if (_dict.ContainsKey(provider))
             return false;
@@ -37,7 +37,7 @@ public sealed class TTSVoicePreferences : IEnumerable<KeyValuePair<TTSProvider, 
         return true;
     }
 
-    public IEnumerator<KeyValuePair<TTSProvider, ProtoId<TTSVoicePrototype>>> GetEnumerator()
+    public IEnumerator<KeyValuePair<TtsProvider, ProtoId<TTSVoicePrototype>>> GetEnumerator()
     {
         foreach (var pair in _dict)
             yield return pair;
@@ -64,7 +64,7 @@ public sealed class TTSVoicePreferencesSerializer : ITypeSerializer<TTSVoicePref
         var pref = new TTSVoicePreferences();
         foreach (var (key, data) in node.Children)
         {
-            if (!Enum.TryParse<TTSProvider>(key, out var provider))
+            if (!Enum.TryParse<TtsProvider>(key, out var provider))
                 continue;
 
             var value = _protoIdSerializer.Read(serializationManager, (ValueDataNode)data, dependencies, hookCtx, context);
@@ -88,7 +88,7 @@ public sealed class TTSVoicePreferencesSerializer : ITypeSerializer<TTSVoicePref
             var valueValidationNode = _protoIdSerializer.Validate(serializationManager, (ValueDataNode)data, dependencies, context);
 
             ValidationNode keyValidationNode;
-            if (Enum.TryParse<TTSProvider>(key, out var provider))
+            if (Enum.TryParse<TtsProvider>(key, out var provider))
             {
                 keyValidationNode = new ValidatedValueNode(node.GetKeyNode(key));
                 if (valueValidationNode is not ErrorNode &&

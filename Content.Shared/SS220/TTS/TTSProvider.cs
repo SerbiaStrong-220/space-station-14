@@ -1,6 +1,6 @@
 namespace Content.Shared.SS220.TTS;
 
-public enum TTSProvider
+public enum TtsProvider
 {
     NTTS,
     Silero
