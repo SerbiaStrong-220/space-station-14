@@ -17,7 +17,7 @@ using Content.Server.EUI;
 using Content.Server.FeedbackSystem;
 using Content.Server.GhostKick;
 using Content.Server.Info;
-using Content.Server.Investigation;
+using Content.Server.SS220.Investigation; // SS220 investigation recorder
 using Content.Server.Mapping;
 using Content.Server.Maps;
 using Content.Server.NodeContainer.NodeGroups;
@@ -69,8 +69,13 @@ internal static class ServerContentIoC
         deps.Register<GhostKickManager>();
         deps.Register<ISharedAdminLogManager, AdminLogManager>();
         deps.Register<IAdminLogManager, AdminLogManager>();
+        // SS220 investigation recorder begin
+        // Both keys resolve to the same instance: the IoC container dedupes registrations that share an
+        // implementation type. Hooks take the interface; InvestigationRecorderSystem takes the concrete type
+        // because it drives the sampling loops and needs more than the hook surface.
         deps.Register<IInvestigationRecorder, InvestigationRecorder>();
         deps.Register<InvestigationRecorder>();
+        // SS220 investigation recorder end
         deps.Register<PlayTimeTrackingManager>();
         deps.Register<UserDbDataManager>();
         deps.Register<ServerInfoManager>();

@@ -34,10 +34,12 @@ One directory per round:
 investigation/round-<roundId>_<yyyy-MM-dd_HH-mm-ss>/
 ├── meta.json              # plain JSON, not compressed
 ├── roster.jsonl.gz
+├── control.jsonl.gz
 ├── positions.jsonl.gz
 ├── navmap.jsonl.gz
 ├── characters.jsonl.gz
 ├── chat.jsonl.gz
+├── health.jsonl.gz
 └── events.jsonl.gz
 ```
 
@@ -63,7 +65,7 @@ monotonicity — several rows commonly share a tick.
 | `e` | Entity id (int). This is the server-side `EntityUid`, a per-round monotonic counter that is never recycled — it is the join key across every stream, and the same value admin logs record. |
 | `g` | Grid entity id (int), or `null` when the entity is off-grid (in space, or parented to the map). |
 | `c` | Container entity id (int) — the thing the entity is *inside* (locker, crate, body bag, mech). |
-| `x`, `y` | **Grid-local** coordinates in tiles, 2 decimal places. |
+| `x`, `y` | **Grid-local** coordinates in tiles. One decimal place in `positions`, two everywhere else (see §3.2). |
 
 **Coordinates are grid-local, not world.** This is deliberate: a character standing on the evac shuttle
 keeps stable coordinates whether it is docked or in flight, so tracks do not smear when a grid moves.
@@ -91,6 +93,10 @@ absent and null as equivalent everywhere.
   "endTick": 334120,
   "tickRate": 30,
   "durationSeconds": 7204.5,
+  "languages": [
+    { "id": "Galactic", "key": "%g", "name": "Общегалактический" },
+    { "id": "Codespeak", "key": "%c", "name": "Кодспик", "color": "#8F4A4BFF" }
+  ],
   "roster": [
     {
       "e": 4821,
@@ -108,6 +114,11 @@ absent and null as equivalent everywhere.
 crashed server therefore still has a readable `meta.json`, but with **`durationSeconds` and a final
 `endTick` absent**. Treat a missing `durationSeconds` as "this round did not end cleanly" — the streams
 are still valid up to wherever they stopped.
+
+`languages` is every language prototype that was loaded, with the `%key` prefix that selects it in chat,
+its localized name and its in-game colour (`RRGGBBAA`, absent when the language does not recolour speech).
+It is here so a reader can resolve the prefixes embedded in `chat.jsonl.gz`'s `msg` without hardcoding a
+copy of the game's prototypes; see §3.4a. Absent on bundles recorded before this field existed.
 
 `roster` is every entity that was *ever* player-controlled this round. Entities stay on the roster after
 the player leaves them — tracking a corpse being dragged away is intentional and often the point.
@@ -128,6 +139,35 @@ One row per tracked entity, appended at the moment it is first player-controlled
 tracked without a session. **`name` is the character name at the moment of first attachment** and is not
 updated — for the current name at time `t`, read the `characters` stream.
 
+**`player` here is the *first* account to control the entity, and is not the answer to "who was driving
+this at time `t`."** Use `control.jsonl.gz` (§3.1b) for that. Attributing a whole round of a body's
+actions to whoever held it first is wrong the moment it is cloned, borged, revived by someone else, or
+possessed by an admin.
+
+**Ghosts are not on the roster.** Entities carrying `GhostComponent` are excluded entirely — no roster
+entry, no positions, no control rows — because they pass through walls, exist in numbers late in a round,
+and cannot act on anything. Ghost-like *mobs* that can act, notably the revenant, are ordinary roster
+members and appear as usual.
+
+### 3.1b `control.jsonl.gz`
+
+```json
+{"t":118420,"e":4821,"player":"a3f2c1d0-…","userName":"Kypatop","action":"attach"}
+{"t":141902,"e":4821,"player":"a3f2c1d0-…","userName":"Kypatop","action":"detach"}
+{"t":142310,"e":4821,"player":"7d90bb31-…","userName":"Someone","action":"attach"}
+```
+
+One row every time a player takes control of an entity or lets go of it. `action` is `attach` or
+`detach`. This is the stream that answers **"who was driving this body at tick `T`"**: fold it per entity
+into intervals, and the controller at `T` is whoever attached most recently without a later detach.
+
+An entity with no `attach` covering `T` was unpiloted then — a corpse, an SSD body, a borg with nobody in
+it. That is a meaningful state and worth rendering distinctly rather than falling back to the roster
+entry.
+
+Rows are cheap and rare: a quiet round produces roughly one pair per player. `player`/`userName` are
+absent for control changes with no session behind them.
+
 ### 3.2 `positions.jsonl.gz`
 
 ```json
@@ -135,24 +175,49 @@ updated — for the current name at time `t`, read the `characters` stream.
 {"t":118438,"e":4821,"g":17,"x":42.4,"y":-17.1,"c":9102}
 ```
 
-Sampled at `investigation.position_interval` (default 0.5s = 2Hz) and deduplicated: a row is emitted only
-when the entity moved more than `investigation.position_epsilon` (default 0.15 tiles) **or** when `g` or
-`c` changed.
+Sampled at `investigation.position_interval` (default 0.5s = 2Hz), then filtered twice before a row is
+written:
 
-This stream outweighs every other one by roughly 250:1, so it is the only one whose size matters. A
-reader that is slow or memory-hungry will be slow here and nowhere else.
+1. **Movement.** Nothing is emitted unless the entity moved more than `investigation.position_epsilon`
+   (default 0.15 tiles), or `g`/`c` changed. A stationary character costs nothing.
+2. **Dead reckoning.** A sample that lies on the straight line between the previous emitted row and the
+   next sample — within the same epsilon — is dropped, because a reader can reconstruct it. Movement in
+   SS14 is mostly straight lines down corridors, so this removes the large majority of remaining rows.
+
+> **A row is a vertex of a path, not a snapshot of a moment.** This is the one thing about this stream
+> that a reader must get right. Stepping to "the last row at or before `T`" makes entities teleport
+> between corners instead of walking to them. Interpolate between the row at or before `T` and the next
+> row, by tick.
+
+Coordinates carry **one decimal place**. The epsilon below which movement is not recorded at all is 0.15
+tiles, so a second decimal would encode only sampling jitter, on every row of by far the largest stream.
+
+Even after both filters this stream outweighs every other one by two orders of magnitude, so it is the
+only one whose size matters. A reader that is slow or memory-hungry will be slow here and nowhere else.
 
 Consequences the reader must handle:
 
-- **Rows are sparse and irregular.** A stationary character emits nothing for minutes. To get a position
-  at arbitrary tick `T`, binary-search that entity's rows for the last row with `t <= T`.
+- **Rows are sparse and irregular.** A stationary character emits nothing for minutes, and a walking one
+  emits only at direction changes. To get a position at arbitrary tick `T`, binary-search that entity's
+  rows for the last row with `t <= T`, then interpolate towards the next row.
 - **A change in `g` or `c` is a discontinuity, not movement.** Never interpolate across one. Break the
   track: walking from station onto a shuttle, or being stuffed into a locker, makes coordinates jump to a
-  different frame. Interpolating produces a fictional path straight through walls.
+  different frame. Interpolating produces a fictional path straight through walls. The recorder applies
+  the same rule and never elides a sample across a discontinuity, so the two ends always agree.
+- **A repeated position at a later tick is a deliberate anchor, not a duplicate.** When an entity stops and
+  later moves off again, the recorder re-emits the position it was holding, dated at the last tick it was
+  still there. Without it the interpolation would run from wherever the previous row was — possibly minutes
+  earlier — straight to the next one, and a character who stood still would render as slowly drifting. Do
+  not deduplicate consecutive rows with equal coordinates; the tick is the payload.
 - **An entity with no row at all before `T` did not exist / was not tracked yet.** Render nothing.
 - **`c` present means the entity is inside something.** Its `x`/`y` are the *container's* position. Render
   it as inside-a-thing (badge, stacked marker) rather than a bare dot — "the body was in that locker" is
   a distinct fact from "the body was at those coordinates".
+
+Setting `investigation.position_epsilon` to 0 disables both filters and restores a plain sample per
+interval. How much larger that is depends entirely on how much the crew moved — measured on two recorded
+rounds, dead reckoning alone removed 31% of rows on one and 96% on the other. Nothing but debugging
+should need it.
 
 ### 3.3 `navmap.jsonl.gz`
 
@@ -217,7 +282,7 @@ actually needs.
 {
   "t":118400, "e":4821, "name":"Urist McGriff",
   "species":"Human", "gender":"Male", "age":34,
-  "job":"SecurityOfficer",
+  "job":"SecurityOfficer", "department":"Security", "departmentColor":"DE3A3AFF",
   "access":["Armory","Security"],
   "worn":{"outerClothing":"ClothingOuterHardsuitSecurity","id":"SecurityPDA"},
   "hands":["WeaponPistolMk58"],
@@ -238,21 +303,59 @@ printed on one card. `worn` maps slot id → entity prototype. Values throughout
 back to the entity name when an entity has no prototype. `carried` is storage contents to
 `investigation.storage_depth` (default 2 — the bag and what is in it).
 
+`department` and `departmentColor` are resolved from `job` server-side, against the same
+`DepartmentPrototype` set the game uses, so a reader gets the canonical grouping and palette without
+reimplementing the job→department mapping or inventing its own colours. `departmentColor` is RRGGBBAA hex
+with no leading `#`, matching the beacon convention. Both are absent when the entity has no job — a
+passenger, a monkey, an unassigned corpse.
+
+### 3.4b `health.jsonl.gz`
+
+```json
+{"t":118432,"e":4821,"dmg":37.5,"state":"Alive","crit":100.0,"dead":200.0}
+```
+
+| Field | Meaning |
+|---|---|
+| `dmg` | Total damage across every type, rounded to 2 decimals. |
+| `state` | `MobState` name: `Alive`, `Critical`, `Dead`, or `Invalid`. |
+| `crit` | Damage at which this entity goes into crit. Absent when it has no such threshold. |
+| `dead` | Damage at which this entity dies. Absent when it has no such threshold. |
+
+Sampled from the position loop, so it inherits `investigation.position_interval` (default 0.5s) rather
+than the much slower character interval — health during a fight changes in well under a second, and a 10s
+snapshot would miss the whole thing.
+
+A row is written **only when `dmg` or `state` changed**, so an unharmed character costs one row for the
+round. Same lookup pattern as positions and characters: last row with `t <= T`. Entities with no
+`DamageableComponent` never appear at all.
+
+`crit`/`dead` ride along on every row so a reader can render a bar as a fraction rather than an opaque
+number — they are per-entity constants in practice, not a time series.
+
+Deliberately reduced to one number: the per-type breakdown (brute vs burn vs asphyxiation) is not here,
+because it is already in `events.jsonl.gz` as `Damaged` log rows. This stream exists to draw a bar and to
+mark the tick somebody went critical.
+
 ### 3.4a `chat.jsonl.gz`
 
 Everything anyone said, with the text as typed.
 
 ```json
-{"t":118432,"e":4821,"ch":"Say","name":"Urist McGriff","msg":"привет, мир","g":17,"x":42.1,"y":-17.3}
+{"t":118432,"e":4821,"ch":"Say","name":"Urist McGriff","msg":"привет, мир","lang":"Galactic","g":17,"x":42.1,"y":-17.3}
+{"t":118440,"e":4821,"ch":"Radio","name":"Urist McGriff","msg":"code red","lang":"Galactic","rc":"Security"}
 {"t":118450,"ch":"OOC","name":"Kypatop","msg":"ooc line"}
 ```
 
 | Field | Meaning |
 |---|---|
-| `e` | Speaking entity. **Absent** for channels with no in-world speaker (OOC). |
-| `ch` | `Say`, `Whisper`, `Radio`, `Emote`, `LOOC`, `OOC`. |
+| `e` | Speaking entity. **Absent** for channels with no in-world speaker (`OOC`, `AdminChat`). |
+| `ch` | `Say`, `Whisper`, `Radio`, `Emote`, `LOOC`, `Dead`, `OOC`, `AdminChat`. |
 | `name` | Displayed name at the time, which may be a **disguised identity** (voice mask, agent ID). |
-| `msg` | The original text. Not language-obfuscated, not accent-transformed, not markup-wrapped. |
+| `msg` | The original text. Not language-obfuscated, not accent-transformed, not markup-wrapped. **`%key` language prefixes are left in.** |
+| `lang` | The speaker's *selected* language (`Galactic`, `SolCommon`, `Codespeak`, …) — what the un-prefixed part of `msg` was spoken in. Absent on channels that carry no language (`Emote`, `LOOC`, `OOC`) and on bundles recorded before this field existed. |
+| `langs` | Present **only** when one line mixed two or more languages, as the full ordered list of what the sanitizer found. |
+| `rc` | Radio channel prototype id (`Security`, `Common`, `Syndicate`, …). Present only on `ch == "Radio"`. |
 | `g`/`x`/`y`/`c` | Speaker position, inline. Absent when the speaker had no sampled position. |
 
 Two things worth knowing:
@@ -268,6 +371,21 @@ would mean parsing ~10 localized per-channel shapes whose text can itself contai
 
 Rows are tick-ascending, so a bubble layer can binary-search to the playhead and walk backwards until
 outside its display window.
+
+**Language is recorded as three separate facts, not one.** SS14 encodes language in the text itself: a
+`%key` prefix switches language part-way through a sentence, and everything before the first prefix is in
+whatever the speaker had selected. Flattening that to a single "the language of this line" would throw
+away the thing an investigator most wants to see. So the bundle keeps all of it: `lang` is the selected
+default, `msg` keeps its prefixes so the runs can be recovered, and `langs` flags the lines where doing so
+is actually necessary. The key → language table is in `meta.json` (§3.1), so a reader never has to carry
+its own copy of the prototypes.
+
+**Out-of-character channels are included, and two of them are sensitive.** `Dead` carries a speaking
+entity (the ghost), so it still gets a position resolved live; `AdminChat` has no in-world speaker at all.
+Both are recorded because metacommunications complaints are the single most common thing that cannot be
+resolved from in-character channels alone. Anyone distributing a bundle outside the admin team should
+strip `ch` in `{"OOC","LOOC","Dead","AdminChat"}` first — the engine draws the same line with
+`replay.record_admin_chat`, which defaults to off for exactly this reason.
 
 **Deliberate duplication.** The same message exists in both `chat` and `events`. That keeps the rule
 "`events` is the complete admin log stream, nothing removed" while giving readers clean text. A viewer
@@ -330,6 +448,8 @@ Indices:
   meta            : parsed meta.json; roster as Map<entityId, RosterEntry>
   positions       : Map<entityId, PositionRow[]>          // per entity, ascending t
   characters      : Map<entityId, CharacterRow[]>         // per entity, ascending t
+  health          : Map<entityId, HealthRow[]>            // per entity, ascending t
+  control         : Map<entityId, ControlRow[]>           // per entity, ascending t
   navmapChunks    : NavChunkRow[]                         // ascending t, fold on demand
   navmapBeacons   : Map<gridId, BeaconRow[]>              // ascending t
   events          : EventRow[]                            // ascending t
@@ -340,6 +460,10 @@ Core accessors:
 
 - `positionAt(entityId, t)` — binary search, last row `t' <= t`. Returns `{g,x,y,c}` or null.
 - `characterAt(entityId, t)` — same pattern.
+- `healthAt(entityId, t)` — same pattern. Returns `{dmg, state, crit, dead}` or null.
+- `controllerAt(entityId, t)` — last row `t' <= t`; returns its `{player, userName}` if that row was an
+  `attach`, otherwise null (nobody was driving). Prefer this over `roster[e].player` everywhere a bundle
+  attributes an action to an account.
 - `navmapAt(gridId, t)` — fold chunk rows with `t' <= t` into `Map<"cx,cy", tiles>`. Cache the fold and
   advance it incrementally while scrubbing forward; only rebuild from scratch on a backward seek.
 - `roomAt(gridId, x, y, t)` — nearest beacon. Cheap and high value.
@@ -420,6 +544,11 @@ This is the highest-leverage feature — it is what admins currently assemble by
 
 Read `meta.schema` first and refuse bundles with a major version you do not know, rather than
 mis-rendering. Field additions within schema 1 are allowed; readers must ignore unknown keys.
+
+**Whole streams are added within schema 1 too**, so a reader must treat every file except `meta.json` as
+optional and degrade rather than fail when one is missing. `health.jsonl.gz` and `control.jsonl.gz` are
+both absent from bundles recorded before they existed. Only a change to the *shape* of an existing row
+bumps the schema.
 
 Bundles are self-describing and build-independent — no `typeHash` / `componentHash` matching, no
 NetSerializer, no content assembly. A bundle from any build reads on any client version that knows its

@@ -1,3 +1,4 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 #nullable enable
 using System.Collections.Generic;
 using System.IO;
@@ -7,13 +8,13 @@ using System.Numerics;
 using System.Text.Json;
 using Content.IntegrationTests.Fixtures;
 using Content.Server.Administration.Logs;
-using Content.Server.Investigation;
+using Content.Server.SS220.Investigation;
 using Content.Shared.Database;
 using Robust.Shared.ContentPack;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Utility;
 
-namespace Content.IntegrationTests.Tests.Investigation;
+namespace Content.IntegrationTests.SS220.Tests.Investigation;
 
 [TestFixture]
 [TestOf(typeof(InvestigationRecorder))]
@@ -107,6 +108,61 @@ public sealed class InvestigationRecorderTests : GameTest
         });
     }
 
+    /// <summary>
+    ///     A body that changes hands has to record every controller, not just the first, or the bundle
+    ///     attributes a whole round of one player's actions to another.
+    /// </summary>
+    [Test]
+    public async Task RecordsEveryControllerOfABody()
+    {
+        var server = Pair.Server;
+        var entities = server.ResolveDependency<IEntityManager>();
+        var resources = server.ResolveDependency<IResourceManager>();
+        var recorder = server.ResolveDependency<InvestigationRecorder>();
+
+        await Pair.CreateTestMap();
+        var coordinates = Pair.TestMap!.GridCoords;
+
+        var firstPlayer = Guid.NewGuid();
+        var secondPlayer = Guid.NewGuid();
+
+        await server.WaitPost(() =>
+        {
+            recorder.StartRound(4246, "TestStation");
+
+            var body = entities.SpawnEntity(null, coordinates);
+            recorder.TrackEntity(body, firstPlayer, "first", "Urist McCloned", "MobHuman");
+
+            // One player spawns into the body, leaves it, and a different account picks it up — cloning,
+            // borging and admin possession all look like this.
+            recorder.WriteControl(body, firstPlayer, "first", attached: true);
+            recorder.WriteControl(body, firstPlayer, "first", attached: false);
+            recorder.WriteControl(body, secondPlayer, "second", attached: true);
+
+            recorder.StopRound(TimeSpan.FromMinutes(1));
+        });
+
+        var rows = ReadJsonl(resources, recorder.LastBundlePath!.Value / "control.jsonl.gz");
+
+        Assert.That(rows, Has.Count.EqualTo(3), "Every control change must produce a row.");
+        Assert.Multiple(() =>
+        {
+            Assert.That(rows[0].GetProperty("action").GetString(), Is.EqualTo("attach"));
+            Assert.That(rows[1].GetProperty("action").GetString(), Is.EqualTo("detach"));
+            Assert.That(rows[2].GetProperty("action").GetString(), Is.EqualTo("attach"));
+
+            // The whole point: the second controller is a different account, and the bundle says so.
+            Assert.That(rows[2].GetProperty("player").GetString(), Is.EqualTo(secondPlayer.ToString()));
+            Assert.That(rows[2].GetProperty("userName").GetString(), Is.EqualTo("second"));
+        });
+
+        // The roster still names whoever held it first — that is its job, and it must not have been rewritten.
+        var meta = JsonDocument.Parse(ReadAllText(resources, recorder.LastBundlePath!.Value / "meta.json")).RootElement;
+        var roster = meta.GetProperty("roster").EnumerateArray().ToList();
+        Assert.That(roster, Has.Count.EqualTo(1));
+        Assert.That(roster[0].GetProperty("player").GetString(), Is.EqualTo(firstPlayer.ToString()));
+    }
+
     [Test]
     public async Task RecordsChatWithBareTextAndInlinePosition()
     {
@@ -164,6 +220,63 @@ public sealed class InvestigationRecorderTests : GameTest
             Assert.That(ooc.GetProperty("ch").GetString(), Is.EqualTo("OOC"));
             Assert.That(ooc.TryGetProperty("e", out _), Is.False, "OOC has no in-world speaker.");
             Assert.That(ooc.TryGetProperty("x", out _), Is.False, "OOC must not carry a position.");
+        });
+    }
+
+    /// <summary>
+    ///     A stationary stretch has to be closed by a row before the entity moves again, or a reader
+    ///     interpolating between the rows either side of it draws a slow drift across the room where the
+    ///     character was actually standing still.
+    /// </summary>
+    [Test]
+    public async Task ClosesAStationaryStretchBeforeMovingAgain()
+    {
+        var server = Pair.Server;
+        var entities = server.ResolveDependency<IEntityManager>();
+        var resources = server.ResolveDependency<IResourceManager>();
+        var recorder = server.ResolveDependency<InvestigationRecorder>();
+
+        await Pair.CreateTestMap();
+        var coordinates = Pair.TestMap!.GridCoords;
+
+        EntityUid entity = default;
+
+        // Deliberately never tracked: the roster is what the recorder's own sampling loop walks, and rows it
+        // added between the ticks below would be indistinguishable from the ones under test.
+        await server.WaitPost(() =>
+        {
+            recorder.StartRound(4245, "TestStation");
+            entity = entities.SpawnEntity(null, coordinates);
+            recorder.WritePosition(entity, null, new Vector2(0f, 0f), null, 0.15f);
+        });
+
+        // Standing perfectly still. None of these may produce a row on their own.
+        for (var stationarySample = 0; stationarySample < 3; stationarySample++)
+        {
+            await server.WaitRunTicks(5);
+            await server.WaitPost(() => recorder.WritePosition(entity, null, new Vector2(0f, 0f), null, 0.15f));
+        }
+
+        // Then walking away in a straight line, which the dead reckoning collapses to its endpoints.
+        await server.WaitRunTicks(5);
+        await server.WaitPost(() => recorder.WritePosition(entity, null, new Vector2(2f, 0f), null, 0.15f));
+        await server.WaitRunTicks(5);
+        await server.WaitPost(() => recorder.WritePosition(entity, null, new Vector2(4f, 0f), null, 0.15f));
+
+        await server.WaitPost(() => recorder.StopRound(TimeSpan.FromMinutes(1)));
+
+        var rows = ReadJsonl(resources, recorder.LastBundlePath!.Value / "positions.jsonl.gz");
+
+        // Spawn, the anchor closing the stationary stretch, and the last sample flushed at round end.
+        Assert.That(rows, Has.Count.EqualTo(3), "Expected exactly one row closing the stationary stretch.");
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(rows[1].GetProperty("x").GetDouble(), Is.EqualTo(0d).Within(0.01),
+                "The anchor must repeat the position that was held, not the one moved to.");
+            Assert.That(rows[1].GetProperty("t").GetUInt32(), Is.GreaterThan(rows[0].GetProperty("t").GetUInt32()),
+                "The anchor must be dated at the end of the stationary stretch, not at its start.");
+            Assert.That(rows[2].GetProperty("x").GetDouble(), Is.EqualTo(4d).Within(0.01));
         });
     }
 

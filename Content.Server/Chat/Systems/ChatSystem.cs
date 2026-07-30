@@ -5,7 +5,7 @@ using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
-using Content.Server.Investigation;
+using Content.Server.SS220.Investigation; // SS220 investigation recorder
 using Content.Server.Speech.EntitySystems;
 using Content.Server.Speech.Prototypes;
 using Content.Server.Station.Systems;
@@ -66,7 +66,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IInvestigationRecorder _investigation = default!;
+    [Dependency] private readonly IInvestigationRecorder _investigation = default!; // SS220 investigation recorder
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly StationSystem _stationSystem = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
@@ -552,7 +552,13 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         var defaultLanguageId = _languageSystem.GetSelectedLanguage(source)?.ID ?? "none"; // SS220 languages
 
-        _investigation.OnChat(source, "Say", originalMessage, name);
+        // SS220 investigation recorder begin
+        if (_investigation.IsRecording)
+        {
+            var (defaultLanguage, spokenLanguages) = SpokenLanguages(source, languageMessage);
+            _investigation.OnChat(source, "Say", originalMessage, name, defaultLanguage, spokenLanguages);
+        }
+        // SS220 investigation recorder end
 
         if (originalMessage == message)
         {
@@ -668,7 +674,13 @@ public sealed partial class ChatSystem : SharedChatSystem
         if (hideLog)
             return;
 
-        _investigation.OnChat(source, "Whisper", originalMessage, name);
+        // SS220 investigation recorder begin
+        if (_investigation.IsRecording)
+        {
+            var (defaultLanguage, spokenLanguages) = SpokenLanguages(source, languageMessage);
+            _investigation.OnChat(source, "Whisper", originalMessage, name, defaultLanguage, spokenLanguages);
+        }
+        // SS220 investigation recorder end
 
         if (originalMessage == message)
         {
@@ -718,14 +730,18 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         SendInVoiceRange(ChatChannel.Emotes, action, wrappedMessage, source, range, author);
 
-        if (!hideLog)
-            _investigation.OnChat(source, "Emote", action, name);
+        if (hideLog)
+            return;
 
-        if (!hideLog)
-            if (name != Name(source))
-                _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Emote from {ToPrettyString(source):user} as {name}: {action}");
-            else
-                _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Emote from {ToPrettyString(source):user}: {action}");
+        // SS220 investigation recorder begin
+        if (_investigation.IsRecording)
+            _investigation.OnChat(source, "Emote", action, name);
+        // SS220 investigation recorder end
+
+        if (name != Name(source))
+            _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Emote from {ToPrettyString(source):user} as {name}: {action}");
+        else
+            _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Emote from {ToPrettyString(source):user}: {action}");
     }
 
     // ReSharper disable once InconsistentNaming
@@ -748,7 +764,12 @@ public sealed partial class ChatSystem : SharedChatSystem
             ("message", FormattedMessage.EscapeText(message)));
 
         SendInVoiceRange(ChatChannel.LOOC, message, wrappedMessage, source, hideChat ? ChatTransmitRange.HideChat : ChatTransmitRange.Normal, player.UserId);
-        _investigation.OnChat(source, "LOOC", message, player.Name);
+
+        // SS220 investigation recorder begin
+        if (_investigation.IsRecording)
+            _investigation.OnChat(source, "LOOC", message, player.Name);
+        // SS220 investigation recorder end
+
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"LOOC from {player:Player}: {message}");
     }
 
@@ -780,11 +801,38 @@ public sealed partial class ChatSystem : SharedChatSystem
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Dead chat from {player:Player}: {message}");
         }
 
+        // SS220 investigation recorder begin
+        // The speaker is passed through so the line still gets a position: a ghost has no sampled position, but
+        // the recorder resolves untracked speakers live, and "who was hovering where when they said this" is
+        // occasionally the thing that identifies a metacomms complaint.
+        if (_investigation.IsRecording)
+            _investigation.OnChat(source, "Dead", message, player.Name);
+        // SS220 investigation recorder end
+
         _chatManager.ChatMessageToMany(ChatChannel.Dead, message, wrappedMessage, source, hideChat, true, clients.ToList(), author: player.UserId);
     }
     #endregion
 
     #region Utility
+
+    // SS220 investigation recorder begin
+    /// <summary>
+    ///     Languages a spoken line was recorded in, for the investigation bundle.
+    /// </summary>
+    /// <remarks>
+    ///     Two separate facts, because a line can carry both. <c>Default</c> is what the speaker had selected, and
+    ///     is what the un-prefixed part of the message was said in. <c>All</c> is every language the sanitizer
+    ///     actually found, which differs whenever a <c>%key</c> switched language part-way through the sentence.
+    ///     The message itself is recorded with its prefixes intact, so a reader can put the two back together.
+    /// </remarks>
+    private (string? Default, List<string> All) SpokenLanguages(EntityUid source, LanguageMessage? languageMessage)
+    {
+        var selected = _languageSystem.GetSelectedLanguage(source)?.ID;
+
+        // A message that never reached the sanitizer has no nodes, and would otherwise record as language-less.
+        return (selected, languageMessage.SpokenLanguageIds(selected));
+    }
+    // SS220 investigation recorder end
 
     private enum MessageRangeCheckResult
     {
