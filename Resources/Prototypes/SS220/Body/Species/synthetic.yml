@@ -207,6 +207,7 @@
   - type: Damageable
     damageContainer: Silicon
     damageModifierSet: Silicon
+  - type: Blindable
   - type: ExplosionResistance
     damageCoefficient: 0.7
   - type: Destructible
@@ -320,6 +321,31 @@
         - MobLayer
   - type: Inventory
     templateId: synth
+  - type: ContainerContainer
+    containers:
+      cell_slot: !type:ContainerSlot { }
+      borg_module: !type:Container { }
+      part-container: !type:Container
+  - type: ItemSlots
+    slots:
+      #cell_slot:
+      #  name: power-cell-slot-component-slot-name-default
+      #  startingItem: PowerCellMedium
+      silicon_component_Optics:
+        startingItem: SynthModTest
+        locked: true
+      silicon_component_Servo:
+        #startingItem: PowerCellMedium
+        locked: true
+      silicon_component_Brain:
+        #startingItem: PowerCellMedium
+        locked: true
+      silicon_component_Spine:
+        #startingItem: PowerCellMedium
+        locked: true
+      silicon_component_Drive:
+        #startingItem: PowerCellMedium
+        locked: true
   - type: SiliconComponents
   - type: Language
     selectedLanguage: Galactic

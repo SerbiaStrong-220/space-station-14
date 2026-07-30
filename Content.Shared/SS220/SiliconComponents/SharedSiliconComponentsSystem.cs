@@ -3,6 +3,8 @@
 using Content.Shared.Actions.Components;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
+using Content.Shared.Eye.Blinding.Components;
+using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
@@ -10,6 +12,7 @@ using Content.Shared.PowerCell;
 using Content.Shared.Wires;
 using Robust.Shared.Containers;
 using Robust.Shared.Serialization;
+using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.SiliconComponents;
 
@@ -20,6 +23,8 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly PowerCellSystem _powerCell = default!;
+    [Dependency] private BlindableSystem _blindable = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private static readonly LocId NotEnoughSpace = "silicon-component-not-enough-space";
     private static readonly LocId InstallationBegun = "silicon-component-begin-install";
@@ -49,6 +54,9 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
         if (!TryComp<ContainerManagerComponent>(ent.Owner, out var containerManager))
             return;
 
+        if (TryComp<BlindableComponent>(ent.Owner, out var ownerBlindableComp))
+            _blindable.UpdateIsBlind(ent.Owner);
+
         foreach (PartType part in Enum.GetValues(typeof(PartType)))
         {
             if (ent.Comp.Parts.ContainsKey(part))
@@ -77,7 +85,7 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
         if (TryComp<WiresPanelComponent>(ent.Owner, out var panelComp) && !panelComp.Open)
             return;
 
-        if (!ent.Comp.Parts.TryGetValue(partComp.Type, out var container))
+        if (!ent.Comp.Parts.TryGetValue(partComp.PartType, out var container))
             return;
 
         if (container.ContainedEntity != null)
@@ -88,7 +96,7 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
 
         _popup.PopupEntity(Loc.GetString(InstallationBegun, ("item", args.Used)), ent.Owner);
 
-        var doAfterEventArgs = new DoAfterArgs(EntityManager, args.User, partComp.TimeToInstall, new InstallSiliconPartEvent(partComp.Type), ent.Owner, target: ent.Owner, used: args.Used)
+        var doAfterEventArgs = new DoAfterArgs(EntityManager, args.User, partComp.TimeToInstall, new InstallSiliconPartEvent(partComp.PartType), ent.Owner, target: ent.Owner, used: args.Used)
         {
             BreakOnMove = true,
         };
@@ -99,18 +107,49 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
 
     private void OnEntityInserted(Entity<SiliconComponentsComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
         UpdateUI(ent.AsNullable());
+
+        if (TryComp<SiliconPartComponent>(args.Entity, out var partComp))
+        {
+            partComp.PartOwner = ent.Owner;
+
+            var insertedEv = new ComponentGotInsertedIntoUser(ent.Owner);
+            RaiseLocalEvent(args.Entity, ref insertedEv);
+
+            var userEv = new ComponentInsertedIntoUser(args.Entity);
+            RaiseLocalEvent(ent.Owner, ref userEv);
+        }
     }
 
     private void OnEntityRemoved(Entity<SiliconComponentsComponent> ent, ref EntRemovedFromContainerMessage args)
     {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
         UpdateUI(ent.AsNullable());
+
+        if (TryComp<SiliconPartComponent>(args.Entity, out var partComp))
+        {
+            partComp.PartOwner = null;
+
+            var removedEv = new ComponentGotRemovedFromUser(ent.Owner);
+            RaiseLocalEvent(args.Entity, ref removedEv);
+
+            var userEv = new ComponentRemovedFromUser(args.Entity);
+            RaiseLocalEvent(ent.Owner, ref userEv);
+        }
     }
 
     public virtual void UpdateUI(Entity<SiliconComponentsComponent?> ent) { }
 
     private void OnEjectPartBuiMessage(Entity<SiliconComponentsComponent> ent, ref SiliconEjectPartBuiMessage args)
     {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
         if (!ent.Comp.Parts.TryGetValue(args.DesiredPart, out var container))
             return;
 
@@ -120,7 +159,7 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
         if (TryComp<WiresPanelComponent>(ent.Owner, out var panelComp) && !panelComp.Open)
             return;
 
-        if (!TryComp<SiliconPartComponent>(ent.Owner, out var partComp))
+        if (!TryComp<SiliconPartComponent>(part, out var partComp))
             return;
 
         _popup.PopupEntity(Loc.GetString(RemovalBegun, ("item", args.Actor)), ent.Owner);
@@ -135,12 +174,18 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
 
     private void OnEjectBatteryBuiMessage(Entity<SiliconComponentsComponent> ent, ref SiliconEjectBatteryBuiMessage args)
     {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
         if (_powerCell.TryEjectBatteryFromSlot(ent.Owner, out var powerCell, args.Actor))
             _hands.TryPickupAnyHand(args.Actor, powerCell.Value);
     }
 
     private void OnRemoveModuleBuiMessage(Entity<SiliconComponentsComponent> ent, ref SiliconRemoveModuleBuiMessage args)
     {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
         var module = GetEntity(args.Module);
 
         if (!ent.Comp.ModuleContainer.Contains(module))
@@ -157,6 +202,9 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
 
     private void OnPartInstall(Entity<SiliconComponentsComponent> ent, ref InstallSiliconPartEvent args)
     {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
         if (args.Used is not { Valid: true } partValidated)
             return;
 
@@ -169,17 +217,19 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
         if (TryComp<WiresPanelComponent>(ent.Owner, out var panelComp) && !panelComp.Open)
             return;
 
-        if (!TryComp<SiliconPartComponent>(args.Used, out var partComp))
+        if (!TryComp<SiliconPartComponent>(partValidated, out var partComp))
             return;
 
         _container.Insert(partValidated, container);
 
-        var insertedEv = new ComponentGotInsertedIntoUser(ent.Owner);
-        RaiseLocalEvent(partValidated, ref insertedEv);
+        Dirty(partValidated, partComp);
     }
 
     private void OnPartRemove(Entity<SiliconComponentsComponent> ent, ref RemoveSiliconPartEvent args)
     {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
         if (!ent.Comp.Parts.TryGetValue(args.Slot, out var container))
             return;
 
@@ -195,8 +245,7 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
         _container.Remove(part, container);
         _hands.TryPickupAnyHand(args.User, part);
 
-        var removedEv = new ComponentGotRemovedFromUser(ent.Owner);
-        RaiseLocalEvent(part, ref removedEv);
+        Dirty(part, partComp);
 
         args.Handled = true;
     }
@@ -231,6 +280,16 @@ public record struct ComponentGotInsertedIntoUser(EntityUid Owner)
 
 [ByRefEvent]
 public record struct ComponentGotRemovedFromUser(EntityUid Owner)
+{
+}
+
+[ByRefEvent]
+public record struct ComponentInsertedIntoUser(EntityUid Part)
+{
+}
+
+[ByRefEvent]
+public record struct ComponentRemovedFromUser(EntityUid Part)
 {
 }
 

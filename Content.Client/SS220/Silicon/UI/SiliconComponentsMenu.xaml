@@ -17,20 +17,20 @@
                     <BoxContainer Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 45 0" MaxWidth="375">
                         <Control MinHeight="10"/>
                         <TextureButton HorizontalExpand="True" Name="OpticsButton" HorizontalAlignment="Right" ToggleMode="False" SetSize="75 75" StyleClasses="OpenLeft">
-                            <SpriteView Name="OpticsView" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <SpriteView Name="OpticsView" HorizontalAlignment="Center" VerticalAlignment="Center" Scale="5 5"/>
                         </TextureButton>
                         <Control MinHeight="60"/>
-                        <BoxContainer Orientation="Horizontal" HorizontalAlignment="Right" VerticalExpand="True" HorizontalExpand="True" >
+                        <BoxContainer Orientation="Horizontal" HorizontalAlignment="Right" VerticalExpand="True" HorizontalExpand="True" Margin="0 20 0 20" >
                             <TextureButton HorizontalExpand="True" Name="ServoButton" ToggleMode="False" Margin="20 0 0 0" SetSize="75 75" StyleClasses="OpenLeft">
-                                <SpriteView Name="ServoView" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <SpriteView Name="ServoView" HorizontalAlignment="Center" VerticalAlignment="Center" Scale="5 5"/>
                             </TextureButton>
                             <Control MinWidth="75"/>
                             <TextureButton HorizontalExpand="True" Name="BrainButton" ToggleMode="False" Margin="0" SetSize="75 75" StyleClasses="OpenLeft">
-                                <SpriteView Name="BrainView" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <SpriteView Name="BrainView" HorizontalAlignment="Center" VerticalAlignment="Center" Scale="5 5"/>
                             </TextureButton>
                             <Control MinWidth="75"/>
                             <TextureButton HorizontalExpand="True" Name="SpineButton" ToggleMode="False" Margin="0 0 20 0" SetSize="75 75" StyleClasses="OpenLeft">
-                                <SpriteView Name="SpineView" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <SpriteView Name="SpineView" HorizontalAlignment="Center" VerticalAlignment="Center" Scale="5 5"/>
                             </TextureButton>
                         </BoxContainer>
                         <Control MinHeight="10"/>

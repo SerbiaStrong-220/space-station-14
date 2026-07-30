@@ -17,7 +17,7 @@ public sealed partial class SiliconPartComponent : Component //Yeah-yeah the nam
     public EntityUid? PartOwner = null;
 
     [DataField]
-    public PartType Type;
+    public PartType PartType;
 
     [DataField]
     public int OccupiedSpace;
