@@ -7,14 +7,20 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Humanoid;
 using Content.Server.Maps;
 using Content.Shared.Inventory;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Mind;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Pinpointer;
+using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.Storage;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Server.Investigation;
@@ -40,6 +46,9 @@ public sealed class InvestigationRecorderSystem : EntitySystem
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly SharedJobSystem _jobs = default!;
     [Dependency] private readonly IGameMapManager _gameMap = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly MobThresholdSystem _thresholds = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
     private float _positionInterval;
     private float _positionEpsilon;
@@ -221,7 +230,43 @@ public sealed class InvestigationRecorderSystem : EntitySystem
                 : worldPos;
 
             _recorder.WritePosition(uid, grid, local, container, _positionEpsilon);
+            SampleHealth(uid);
         }
+    }
+
+    /// <summary>
+    ///     Records total damage, mob state and the crit/dead thresholds for one entity.
+    /// </summary>
+    /// <remarks>
+    ///     Sampled here rather than in the slow character loop because health during a fight changes in
+    ///     well under a second, and a ten second snapshot would miss the entire fight. The thresholds ride
+    ///     along so a reader can render a bar as a fraction rather than an opaque number.
+    /// </remarks>
+    private void SampleHealth(EntityUid uid)
+    {
+        if (!TryComp<DamageableComponent>(uid, out var damageable))
+            return;
+
+        // GetTotalDamage is marked obsolete because content should not generally reduce damage to one
+        // number. An investigation tool is the exception: a health bar is exactly that reduction, and the
+        // per-type breakdown is already available from the admin log damage events.
+#pragma warning disable CS0618
+        var total = (float) _damageable.GetTotalDamage((uid, damageable));
+#pragma warning restore CS0618
+
+        // Copied to a local first: MobStateComponent is [Access]-restricted to read-only for us, and
+        // calling ToString straight off the member counts as an execute access to the analyzer.
+        var state = "Unknown";
+        if (TryComp<MobStateComponent>(uid, out var mobState))
+        {
+            var current = mobState.CurrentState;
+            state = current.ToString();
+        }
+
+        float? crit = _thresholds.TryGetIncapThreshold(uid, out var incap) ? (float) incap.Value : null;
+        float? dead = _thresholds.TryGetDeadThreshold(uid, out var deadAt) ? (float) deadAt.Value : null;
+
+        _recorder.WriteHealthIfChanged(uid, total, state, crit, dead);
     }
 
     #endregion
@@ -302,6 +347,24 @@ public sealed class InvestigationRecorderSystem : EntitySystem
         if (_mind.TryGetMind(uid, out var mindId, out _) && _jobs.MindTryGetJobId(mindId, out var jobProto))
             job = jobProto?.Id;
 
+        // Department and its canonical colour are resolved here so the reader does not have to
+        // reimplement the job-to-department mapping or invent its own palette.
+        string? department = null;
+        string? departmentColor = null;
+        if (job != null)
+        {
+            foreach (var dept in _prototypes.EnumeratePrototypes<DepartmentPrototype>())
+            {
+                if (!dept.Roles.Contains(job))
+                    continue;
+
+                department = dept.ID;
+                var colour = dept.Color;
+                departmentColor = colour.ToHex();
+                break;
+            }
+        }
+
         var access = _accessReader.FindAccessTags(uid)
             .Select(a => a.Id)
             .OrderBy(a => a, StringComparer.Ordinal)
@@ -358,6 +421,8 @@ public sealed class InvestigationRecorderSystem : EntitySystem
             gender,
             age,
             job,
+            department,
+            departmentColor,
             access,
             worn,
             hands = held,

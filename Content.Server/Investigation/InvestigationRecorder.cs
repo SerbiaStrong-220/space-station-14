@@ -79,6 +79,11 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
     private readonly Dictionary<EntityUid, int> _loadoutHashes = new();
 
     /// <summary>
+    ///     Last written health sample per tracked entity, so an unharmed character costs one row per round.
+    /// </summary>
+    private readonly Dictionary<EntityUid, int> _healthHashes = new();
+
+    /// <summary>
     ///     Resolves an entity's grid-local position on demand, supplied by
     ///     <see cref="InvestigationRecorderSystem"/>.
     /// </summary>
@@ -146,6 +151,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
                 Events = OpenStream(roundDir / "events.jsonl.gz"),
                 Chat = OpenStream(roundDir / "chat.jsonl.gz"),
                 Roster = OpenStream(roundDir / "roster.jsonl.gz"),
+                Health = OpenStream(roundDir / "health.jsonl.gz"),
             };
 
             // Written up front so a bundle from a crashed server is still identifiable and readable. Rewritten with
@@ -180,6 +186,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
             session.Events.Dispose();
             session.Chat.Dispose();
             session.Roster.Dispose();
+            session.Health.Dispose();
 
             LastBundlePath = session.Directory;
 
@@ -196,6 +203,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
             Roster.Clear();
             _positions.Clear();
             _loadoutHashes.Clear();
+            _healthHashes.Clear();
         }
     }
 
@@ -270,6 +278,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
         // Deliberately keeps the roster entry: it is the record of who this entity was. Only the live caches go.
         _positions.Remove(uid);
         _loadoutHashes.Remove(uid);
+        _healthHashes.Remove(uid);
     }
 
     #endregion
@@ -340,6 +349,45 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
             t = _timing.CurTick.Value,
             g = grid.Id,
             beacons,
+        }, JsonOptions));
+        session.RowCount++;
+    }
+
+    /// <summary>
+    ///     Records a health sample, but only when it differs from the last one written for this entity.
+    /// </summary>
+    /// <remarks>
+    ///     Polled from the position loop rather than hooked onto DamageChangedEvent. Continuous damage
+    ///     sources — suffocation, fire, bleeding, pressure — raise that event on their own tick cadence, so
+    ///     a hull breach with a dozen casualties would produce an unbounded stream. Polling is bounded by
+    ///     the sample rate, and it also gives every healthy character a baseline row, which an event-driven
+    ///     stream never would.
+    /// </remarks>
+    public void WriteHealthIfChanged(
+        EntityUid uid,
+        float damage,
+        string state,
+        float? critThreshold,
+        float? deadThreshold)
+    {
+        if (_session is not { } session)
+            return;
+
+        // Thresholds are effectively static per entity, so the dedupe key is damage plus state.
+        var key = HashCode.Combine(Math.Round(damage, 2), state);
+        if (_healthHashes.TryGetValue(uid, out var previous) && previous == key)
+            return;
+
+        _healthHashes[uid] = key;
+
+        session.Health.Write(JsonSerializer.Serialize(new
+        {
+            t = _timing.CurTick.Value,
+            e = uid.Id,
+            dmg = Math.Round(damage, 2),
+            state,
+            crit = critThreshold.HasValue ? Math.Round(critThreshold.Value, 2) : (double?) null,
+            dead = deadThreshold.HasValue ? Math.Round(deadThreshold.Value, 2) : (double?) null,
         }, JsonOptions));
         session.RowCount++;
     }
@@ -497,6 +545,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
             session.Events.Flush();
             session.Chat.Flush();
             session.Roster.Flush();
+            session.Health.Flush();
         }
         catch (Exception e)
         {
@@ -545,6 +594,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
         public JsonlStream Events = default!;
         public JsonlStream Chat = default!;
         public JsonlStream Roster = default!;
+        public JsonlStream Health = default!;
 
         public long RowCount;
 
