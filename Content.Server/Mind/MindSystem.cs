@@ -188,10 +188,10 @@ public sealed class MindSystem : SharedMindSystem
         _players.SetAttachedEntity(session, owned);
 
         //SS220 add mind visit events begin
-        if(mind.OwnedEntity != null)
+        if(mind.OwnedEntity is { Valid: true } ownedEntValid)
         {
             var ev = new EntityUnvisitedEvent(mindId, mind);
-            RaiseLocalEvent((EntityUid)mind.OwnedEntity, ref ev);
+            RaiseLocalEvent(ownedEntValid, ref ev);
         }
         //SS220 add mind visit events end
 
