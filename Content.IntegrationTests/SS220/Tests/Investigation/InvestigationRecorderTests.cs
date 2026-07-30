@@ -163,6 +163,66 @@ public sealed class InvestigationRecorderTests : GameTest
         Assert.That(roster[0].GetProperty("player").GetString(), Is.EqualTo(firstPlayer.ToString()));
     }
 
+    /// <summary>
+    ///     Objectives are recorded as a timeline, not a final tally: a row every time progress moves, so the
+    ///     tick an objective was completed is recoverable.
+    /// </summary>
+    [Test]
+    public async Task RecordsObjectiveProgressAndTheTickItCompleted()
+    {
+        var server = Pair.Server;
+        var entities = server.ResolveDependency<IEntityManager>();
+        var resources = server.ResolveDependency<IResourceManager>();
+        var recorder = server.ResolveDependency<InvestigationRecorder>();
+
+        await Pair.CreateTestMap();
+        var coordinates = Pair.TestMap!.GridCoords;
+
+        EntityUid antagonist = default;
+        EntityUid objective = default;
+
+        await server.WaitPost(() =>
+        {
+            recorder.SetGamemode("Traitor", "Traitor");
+            recorder.StartRound(4247, "TestStation");
+
+            antagonist = entities.SpawnEntity(null, coordinates);
+            objective = entities.SpawnEntity(null, coordinates);
+            recorder.TrackEntity(antagonist, Guid.NewGuid(), "traitor", "Urist McTraitor", "MobHuman");
+
+            // Untouched, then halfway, then done. The middle value must survive as its own row.
+            recorder.WriteObjectiveIfChanged(objective, antagonist, "KillPersonObjective", "Kill the HoS", null, 0f);
+            recorder.WriteObjectiveIfChanged(objective, antagonist, "KillPersonObjective", "Kill the HoS", null, 0.5f);
+            // Repeated identical progress must not produce a second row.
+            recorder.WriteObjectiveIfChanged(objective, antagonist, "KillPersonObjective", "Kill the HoS", null, 0.5f);
+            recorder.WriteObjectiveIfChanged(objective, antagonist, "KillPersonObjective", "Kill the HoS", null, 1f);
+
+            recorder.StopRound(TimeSpan.FromMinutes(1));
+        });
+
+        var directory = recorder.LastBundlePath!.Value;
+        var rows = ReadJsonl(resources, directory / "objectives.jsonl.gz");
+
+        Assert.That(rows, Has.Count.EqualTo(3), "One row per real change, and no row for a repeat.");
+        Assert.Multiple(() =>
+        {
+            Assert.That(rows[0].GetProperty("progress").GetDouble(), Is.EqualTo(0d).Within(0.001));
+            Assert.That(rows[0].GetProperty("done").GetBoolean(), Is.False);
+            Assert.That(rows[1].GetProperty("progress").GetDouble(), Is.EqualTo(0.5d).Within(0.001));
+
+            // The whole point of the stream: which row says it was finished, and therefore when.
+            Assert.That(rows[2].GetProperty("done").GetBoolean(), Is.True);
+            Assert.That(rows[2].GetProperty("o").GetInt32(), Is.EqualTo((int) objective));
+            Assert.That(rows[2].GetProperty("e").GetInt32(), Is.EqualTo((int) antagonist));
+            Assert.That(rows[2].GetProperty("proto").GetString(), Is.EqualTo("KillPersonObjective"));
+            Assert.That(rows[2].GetProperty("title").GetString(), Is.EqualTo("Kill the HoS"));
+        });
+
+        // Gamemode has to reach meta.json, or the antag list cannot be interpreted.
+        var meta = JsonDocument.Parse(ReadAllText(resources, directory / "meta.json")).RootElement;
+        Assert.That(meta.GetProperty("gamemode").GetString(), Is.EqualTo("Traitor"));
+    }
+
     [Test]
     public async Task RecordsChatWithBareTextAndInlinePosition()
     {

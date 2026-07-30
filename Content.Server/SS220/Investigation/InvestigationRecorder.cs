@@ -54,6 +54,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
     private const string RosterFile = "roster.jsonl.gz";
     private const string HealthFile = "health.jsonl.gz";
     private const string ControlFile = "control.jsonl.gz";
+    private const string ObjectivesFile = "objectives.jsonl.gz";
     private const string MetaFile = "meta.json";
 
     /// <summary>
@@ -61,6 +62,13 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
     ///     happens to share the directory is ever deleted.
     /// </summary>
     private const string BundlePrefix = "round-";
+
+    /// <summary>
+    ///     Progress at or above which an objective counts as done. Matches
+    ///     <c>SharedObjectivesSystem.IsCompleted</c>, which the round end screen uses, so the bundle and the
+    ///     scoreboard never disagree about whether something was achieved.
+    /// </summary>
+    private const float CompletionThreshold = 0.999f;
 
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
@@ -135,6 +143,22 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
     private readonly Dictionary<EntityUid, HealthSample> _healthSamples = new();
 
     /// <summary>
+    ///     Last written progress per objective entity, so an objective nobody is making progress on costs one row.
+    /// </summary>
+    /// <remarks>
+    ///     Keyed on the objective entity rather than on its owner: objectives belong to the mind, and a mind moves
+    ///     between bodies. Keying on the body would re-emit every objective from scratch each time somebody was
+    ///     cloned or borged.
+    /// </remarks>
+    private readonly Dictionary<EntityUid, ObjectiveSample> _objectiveSamples = new();
+
+    /// <summary>
+    ///     The game preset this round is running, resolved past "secret". See <see cref="SetGamemode"/>.
+    /// </summary>
+    private string? _gamemode;
+    private string? _gamemodeTitle;
+
+    /// <summary>
     ///     Resolves an entity's grid-local position on demand. See <see cref="SetPositionSource"/>.
     /// </summary>
     private IInvestigationPositionSource? _positionSource;
@@ -175,6 +199,23 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
     public void SetPositionSource(IInvestigationPositionSource source)
     {
         _positionSource = source;
+    }
+
+    /// <summary>
+    ///     Records which game preset the round is running under.
+    /// </summary>
+    /// <remarks>
+    ///     Set at round start and again at round end, because "secret" resolves to a real preset and an admin can
+    ///     change it mid-round. meta.json is written at both points, so the finished bundle always carries the
+    ///     preset the round actually ran, not the one it was scheduled with.
+    ///
+    ///     Without this the antag list is unreadable: "three traitors and a nuke op" means one thing in Nuclear
+    ///     Emergency and something else entirely in Secret.
+    /// </remarks>
+    public void SetGamemode(string? id, string? title)
+    {
+        _gamemode = id;
+        _gamemodeTitle = title;
     }
 
     public void Initialize()
@@ -241,6 +282,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
                 Roster = Open(RosterFile),
                 Health = Open(HealthFile),
                 Control = Open(ControlFile),
+                Objectives = Open(ObjectivesFile),
             };
 
             session.AllStreams = openedStreams.ToArray();
@@ -305,6 +347,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
             _tracks.Clear();
             _loadoutHashes.Clear();
             _healthSamples.Clear();
+            _objectiveSamples.Clear();
         }
     }
 
@@ -389,6 +432,8 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
             schema = SchemaVersion,
             roundId = session.RoundId,
             map = session.Map,
+            gamemode = _gamemode,
+            gamemodeTitle = _gamemodeTitle,
             serverName = _cfg.GetCVar(CCVars.AdminLogsServerName),
             startedUtc = session.StartedUtc.ToString("O", CultureInfo.InvariantCulture),
             startTick = session.StartTick,
@@ -750,6 +795,55 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
     }
 
     /// <summary>
+    ///     Records an objective's progress, but only when it moved since the last row.
+    /// </summary>
+    /// <remarks>
+    ///     The point of this stream is the tick, not the final tally. Whether an antagonist completed their
+    ///     objectives is already on the round end screen; <em>when</em> they completed them is not recorded
+    ///     anywhere, and it is what turns "they killed the HoS" into "they killed the HoS twenty minutes before
+    ///     the shuttle, having had the objective since round start".
+    ///
+    ///     Progress is rounded to two decimals before comparison, so an objective that inches forward — a steal
+    ///     objective counting items, a kill objective tracking a crit — produces a row per real step rather than
+    ///     one per float wobble.
+    /// </remarks>
+    public void WriteObjectiveIfChanged(
+        EntityUid objective,
+        EntityUid owner,
+        string? prototype,
+        string title,
+        string? description,
+        float progress)
+    {
+        if (_session is not { } session)
+            return;
+
+        var rounded = Math.Round(progress, 2);
+        var complete = progress >= CompletionThreshold;
+        var sample = new ObjectiveSample(rounded, complete);
+
+        if (_objectiveSamples.TryGetValue(objective, out var previous) && previous == sample)
+            return;
+
+        _objectiveSamples[objective] = sample;
+
+        session.Objectives.Write(JsonSerializer.Serialize(new
+        {
+            t = _timing.CurTick.Value,
+            // The objective entity, stable for the round, so a reader can follow one objective over time.
+            o = objective.Id,
+            // The body whose mind holds it. Follows the mind, so this changes if the player is cloned or borged.
+            e = owner.Id,
+            proto = prototype,
+            title,
+            desc = description,
+            progress = rounded,
+            done = complete,
+        }, JsonOptions));
+        session.RowCount++;
+    }
+
+    /// <summary>
     ///     Writes a character loadout snapshot, but only if it differs from the last one written for this entity.
     /// </summary>
     public void WriteCharacterIfChanged(EntityUid uid, object snapshot, int fingerprint)
@@ -1066,6 +1160,15 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
     /// </summary>
     private readonly record struct HealthSample(double Damage, string State);
 
+    /// <summary>
+    ///     What the objectives stream deduplicates on.
+    /// </summary>
+    /// <remarks>
+    ///     Completion is carried separately from progress rather than derived on read, so that the row where an
+    ///     objective flips to done is always emitted even if the rounded progress did not visibly change.
+    /// </remarks>
+    private readonly record struct ObjectiveSample(double Progress, bool Complete);
+
     private sealed class Session
     {
         public readonly int RoundId;
@@ -1083,6 +1186,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
         public JsonlStream Roster = default!;
         public JsonlStream Health = default!;
         public JsonlStream Control = default!;
+        public JsonlStream Objectives = default!;
 
         /// <summary>
         ///     Every stream, for the operations that treat them uniformly. Rebuilding this per flush would

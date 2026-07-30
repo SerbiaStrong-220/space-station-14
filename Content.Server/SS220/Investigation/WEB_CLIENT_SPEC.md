@@ -35,6 +35,7 @@ investigation/round-<roundId>_<yyyy-MM-dd_HH-mm-ss>/
 ├── meta.json              # plain JSON, not compressed
 ├── roster.jsonl.gz
 ├── control.jsonl.gz
+├── objectives.jsonl.gz
 ├── positions.jsonl.gz
 ├── navmap.jsonl.gz
 ├── characters.jsonl.gz
@@ -87,6 +88,8 @@ absent and null as equivalent everywhere.
   "schema": 1,
   "roundId": 4242,
   "map": "TestStation",
+  "gamemode": "Traitor",
+  "gamemodeTitle": "Traitor",
   "serverName": "ss220-main",
   "startedUtc": "2026-07-29T14:03:11.4820000Z",
   "startTick": 118000,
@@ -119,6 +122,12 @@ are still valid up to wherever they stopped.
 its localized name and its in-game colour (`RRGGBBAA`, absent when the language does not recolour speech).
 It is here so a reader can resolve the prefixes embedded in `chat.jsonl.gz`'s `msg` without hardcoding a
 copy of the game's prototypes; see §3.4a. Absent on bundles recorded before this field existed.
+
+`gamemode` is the `GamePresetPrototype` id the round actually ran, with `gamemodeTitle` its localized
+name. It is read at round start **and again at round end**, so a `Secret` round records the preset it
+resolved to rather than "Secret", and an admin changing the preset mid-round is reflected in the final
+write. Without it the antag list is uninterpretable — three traitors and a nuke op mean very different
+things in Nuclear Emergency than in Survival.
 
 `roster` is every entity that was *ever* player-controlled this round. Entities stay on the roster after
 the player leaves them — tracking a corpse being dragged away is intentional and often the point.
@@ -283,6 +292,7 @@ actually needs.
   "t":118400, "e":4821, "name":"Urist McGriff",
   "species":"Human", "gender":"Male", "age":34,
   "job":"SecurityOfficer", "department":"Security", "departmentColor":"DE3A3AFF",
+  "antag":true, "roles":[{"id":"Traitor","name":"Traitor"}],
   "access":["Armory","Security"],
   "worn":{"outerClothing":"ClothingOuterHardsuitSecurity","id":"SecurityPDA"},
   "hands":["WeaponPistolMk58"],
@@ -303,11 +313,65 @@ printed on one card. `worn` maps slot id → entity prototype. Values throughout
 back to the entity name when an entity has no prototype. `carried` is storage contents to
 `investigation.storage_depth` (default 2 — the bag and what is in it).
 
+`antag` and `roles` are **present only on antagonists** — both are absent on an ordinary crew row, so
+`antag !== true` is the test for "not an antag". `roles[].id` is the antag prototype id and is what a
+reader should branch on; `roles[].name` is localized at record time so the bundle stays readable without
+shipping the game's locale files. Job roles are deliberately excluded — those are already `job`.
+
+Because these ride on the ordinary character row, **antag status is a time series, not a fact about the
+round.** A revolutionary who was converted at 14:20 has crew rows before that tick and antag rows after
+it, and `characterAt(e, t)` gives the right answer at any `t`. Do not read the last row and apply it
+backwards over the whole round.
+
+Two caveats. Status is discovered by the same 10s sweep as the rest of the row, so a conversion can land
+up to ~10s late. And this is the *mind's* roles: if a player is cloned or borged, the roles follow them
+to the new body, so cross-reference `control.jsonl.gz` before attributing anything.
+
 `department` and `departmentColor` are resolved from `job` server-side, against the same
 `DepartmentPrototype` set the game uses, so a reader gets the canonical grouping and palette without
 reimplementing the job→department mapping or inventing its own colours. `departmentColor` is RRGGBBAA hex
 with no leading `#`, matching the beacon convention. Both are absent when the entity has no job — a
 passenger, a monkey, an unassigned corpse.
+
+### 3.4c `objectives.jsonl.gz`
+
+```json
+{"t":118500,"o":9931,"e":4821,"proto":"KillPersonObjective","title":"Kill Ian Doe","progress":0.0,"done":false}
+{"t":186200,"o":9931,"e":4821,"proto":"KillPersonObjective","title":"Kill Ian Doe","progress":1.0,"done":true}
+```
+
+| Field | Meaning |
+|---|---|
+| `o` | Objective entity id. Stable for the round — this is the key to group rows by. |
+| `e` | The body whose mind holds it. Changes if the player is cloned or borged. |
+| `proto` | Objective entity prototype id, e.g. `KillPersonObjective`, `StealObjective`. |
+| `title` | Human-readable objective text, localized at record time (`Kill Ian Doe`, `Steal the hand teleporter`). |
+| `desc` | Longer description, when the objective has one. |
+| `progress` | 0.0–1.0, two decimals. |
+| `done` | `progress >= 0.999`, matching `SharedObjectivesSystem.IsCompleted` — so this never disagrees with the round end screen. |
+
+**The point of this stream is the tick, not the tally.** Whether an antagonist completed their objectives
+is already on the round end scoreboard; *when* they completed them is recorded nowhere else, and it is
+what turns "they killed the HoS" into "they killed the HoS twenty minutes before the shuttle, having held
+the objective since round start".
+
+A row is written **only when progress moved**, so:
+
+- The first row for an objective is its assignment (usually `progress: 0`).
+- **The completion tick is the `t` of the first row where `done` flips to `true`.** That is the number to
+  show in a timeline.
+- Objectives that partially progress (steal objectives counting items, multi-kill objectives) produce a
+  row per real step, so you can draw the curve.
+- An objective that was never completed simply has no `done: true` row. Absence is the answer.
+- An objective assigned and never touched costs exactly one row.
+
+**Timing granularity is the character sweep — 10s by default.** Objectives are pull-based in SS14 (each
+computes progress on demand; there is no completion event to hook), so this is polled. Treat a completion
+tick as accurate to ~10s, and read `events.jsonl.gz` around it for the exact moment — which is what an
+investigator would do anyway.
+
+To reconstruct "who had which objectives": group rows by `o`, take any row's `e`, then resolve the
+controller through `control.jsonl.gz` (§3.1b). Do not assume `e` identifies the player directly.
 
 ### 3.4b `health.jsonl.gz`
 
@@ -450,6 +514,7 @@ Indices:
   characters      : Map<entityId, CharacterRow[]>         // per entity, ascending t
   health          : Map<entityId, HealthRow[]>            // per entity, ascending t
   control         : Map<entityId, ControlRow[]>           // per entity, ascending t
+  objectives      : Map<objectiveId, ObjectiveRow[]>      // per objective, ascending t
   navmapChunks    : NavChunkRow[]                         // ascending t, fold on demand
   navmapBeacons   : Map<gridId, BeaconRow[]>              // ascending t
   events          : EventRow[]                            // ascending t
@@ -464,6 +529,10 @@ Core accessors:
 - `controllerAt(entityId, t)` — last row `t' <= t`; returns its `{player, userName}` if that row was an
   `attach`, otherwise null (nobody was driving). Prefer this over `roster[e].player` everywhere a bundle
   attributes an action to an account.
+- `antagsAt(t)` — every entity whose `characterAt(e, t)` has `antag === true`. Cheap, and it is the
+  backbone of an "antag timeline" view.
+- `objectiveOutcome(objectiveId)` — group `objectives` by `o`; the last row gives final progress, and the
+  first row with `done === true` gives the completion tick (null if never completed).
 - `navmapAt(gridId, t)` — fold chunk rows with `t' <= t` into `Map<"cx,cy", tiles>`. Cache the fold and
   advance it incrementally while scrubbing forward; only rebuild from scratch on a backward seek.
 - `roomAt(gridId, x, y, t)` — nearest beacon. Cheap and high value.
@@ -547,8 +616,8 @@ mis-rendering. Field additions within schema 1 are allowed; readers must ignore 
 
 **Whole streams are added within schema 1 too**, so a reader must treat every file except `meta.json` as
 optional and degrade rather than fail when one is missing. `health.jsonl.gz` and `control.jsonl.gz` are
-both absent from bundles recorded before they existed. Only a change to the *shape* of an existing row
-bumps the schema.
+both absent from bundles recorded before they existed, as are `control.jsonl.gz` and
+`objectives.jsonl.gz`. Only a change to the *shape* of an existing row bumps the schema.
 
 Bundles are self-describing and build-independent — no `typeHash` / `componentHash` matching, no
 NetSerializer, no content assembly. A bundle from any build reads on any client version that knows its

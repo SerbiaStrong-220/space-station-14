@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using System.Linq;
 using System.Numerics;
+using System.Text.Json.Serialization;
 using Content.Shared.Access.Systems;
 using Content.Shared.SS220.CCVars;
 using Content.Shared.GameTicking;
@@ -20,6 +21,8 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Pinpointer;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
+using Content.Shared.Objectives.Systems;
+using Content.Server.GameTicking;
 using Content.Shared.Storage;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
@@ -54,6 +57,9 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly MobThresholdSystem _thresholds = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly SharedRoleSystem _roles = default!;
+    [Dependency] private readonly SharedObjectivesSystem _objectives = default!;
+    [Dependency] private readonly GameTicker _gameTicker = default!;
 
     private float _positionInterval;
     private float _positionEpsilon;
@@ -188,7 +194,24 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
         _characterAccumulator = 0f;
         _dirtyAccumulator = 0f;
 
+        // Before StartRound, because that writes the first meta.json.
+        RefreshGamemode();
+
         _recorder.StartRound(ev.RoundId, _gameMap.GetSelectedMap()?.MapName);
+    }
+
+    /// <summary>
+    ///     Copies the current game preset into the recorder.
+    /// </summary>
+    /// <remarks>
+    ///     Read rather than cached because "secret" is resolved to a real preset around round start, and an admin
+    ///     can change the preset mid-round. Called at both ends of the round, so meta.json ends up carrying what
+    ///     the round actually ran.
+    /// </remarks>
+    private void RefreshGamemode()
+    {
+        var preset = _gameTicker.CurrentPreset;
+        _recorder.SetGamemode(preset?.ID, preset is null ? null : Loc.GetString(preset.ModeTitle));
     }
 
     private void OnRoundEnded(RoundEndedEvent ev)
@@ -214,6 +237,9 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
         // a hitch on the tick the round ends costs nothing anybody is playing through.
         if (_recorder.IsRecording)
         {
+            // Re-read the preset: "secret" has resolved by now, and an admin may have changed it mid-round.
+            RefreshGamemode();
+
             SamplePositions();
             SampleNavMap();
 
@@ -613,8 +639,52 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
 
     private void SampleCharacter(EntityUid uid)
     {
-        var snapshot = BuildCharacterSnapshot(uid, out var fingerprint);
+        // Resolved once and shared: both the loadout snapshot and the objectives need it, and TryGetMind is a
+        // container walk rather than a component lookup.
+        EntityUid? mindId = _mind.TryGetMind(uid, out var mind, out _) ? mind : null;
+
+        var snapshot = BuildCharacterSnapshot(uid, mindId, out var fingerprint);
         _recorder.WriteCharacterIfChanged(uid, snapshot, fingerprint);
+
+        if (mindId is { } ownedMind)
+            SampleObjectives(uid, ownedMind);
+    }
+
+    /// <summary>
+    ///     Records progress on every objective this mind holds.
+    /// </summary>
+    /// <remarks>
+    ///     Polled on the character sweep rather than hooked to a completion event, because there is no such event:
+    ///     objectives are pull-based, each computing its progress on demand from an
+    ///     <c>ObjectiveGetProgressEvent</c>. Polling here also means the cost rides on the sweep's existing
+    ///     amortisation instead of adding a fourth cadence.
+    ///
+    ///     The consequence is that completion ticks carry the sweep's granularity — ten seconds by default. That
+    ///     is precise enough to place a completion in the round, and the exact moment is recoverable by reading
+    ///     the events stream around it, which is what an investigator would do anyway.
+    /// </remarks>
+    private void SampleObjectives(EntityUid owner, EntityUid mindId)
+    {
+        if (!TryComp<MindComponent>(mindId, out var mind) || mind.Objectives.Count == 0)
+            return;
+
+        foreach (var objective in mind.Objectives)
+        {
+            // Returns null when an objective is malformed — a missing icon, or a progress handler that never set
+            // a value. That is already logged as an error by the objectives system; skipping is all we can do.
+            if (_objectives.GetInfo(objective, mindId, mind) is not { } info)
+                continue;
+
+            var prototype = _metaQuery.TryComp(objective, out var meta) ? meta.EntityPrototype?.ID : null;
+
+            _recorder.WriteObjectiveIfChanged(
+                objective,
+                owner,
+                prototype,
+                info.Title,
+                info.Description,
+                info.Progress);
+        }
     }
 
     /// <summary>
@@ -630,7 +700,7 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
             _dirtyCharacters.Add(uid);
     }
 
-    private object BuildCharacterSnapshot(EntityUid uid, out int fingerprint)
+    private object BuildCharacterSnapshot(EntityUid uid, EntityUid? mindId, out int fingerprint)
     {
         string? species = null;
         string? gender = null;
@@ -649,8 +719,15 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
         }
 
         string? job = null;
-        if (_mind.TryGetMind(uid, out var mindId, out _) && _jobs.MindTryGetJobId(mindId, out var jobProto))
-            job = jobProto?.Id;
+        List<AntagRole>? antagRoles = null;
+
+        if (mindId is { } mind)
+        {
+            if (_jobs.MindTryGetJobId(mind, out var jobProto))
+                job = jobProto?.Id;
+
+            antagRoles = BuildAntagRoles(mind);
+        }
 
         // Department and its canonical colour are resolved here so the reader does not have to
         // reimplement the job-to-department mapping or invent its own palette.
@@ -712,7 +789,7 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
 
         var name = _metaQuery.TryComp(uid, out var meta) ? meta.EntityName : null;
 
-        fingerprint = ComputeFingerprint(species, job, name, access, worn, held, carried);
+        fingerprint = ComputeFingerprint(species, job, name, antagRoles, access, worn, held, carried);
 
         return new
         {
@@ -725,11 +802,46 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
             job,
             department,
             departmentColor,
+            // Present only on antagonists, so the common row does not grow a field that is almost always empty.
+            antag = antagRoles is { Count: > 0 } ? true : (bool?) null,
+            roles = antagRoles is { Count: > 0 } ? antagRoles : null,
             access,
             worn,
             hands = held,
             carried,
         };
+    }
+
+    /// <summary>
+    ///     The antagonist roles on a mind, as prototype id plus localized name.
+    /// </summary>
+    /// <remarks>
+    ///     Antag status was previously recoverable only by reading <c>LogType.Mind</c> prose out of the events
+    ///     stream — "Traitor added to mind of …" — which means any reader wanting to mark an antagonist has to
+    ///     parse English. Recording it structurally is what makes "was this person an antag, and since when"
+    ///     answerable, and it rides on a mind lookup the snapshot was already paying for.
+    ///
+    ///     Both halves are kept on purpose. <c>id</c> is the prototype and is what a reader should branch on;
+    ///     <c>name</c> is localized at record time, so a bundle stays readable without shipping the game's
+    ///     locale files. Job roles are filtered out — they are already on the snapshot as <c>job</c>.
+    ///
+    ///     Roles are recorded per snapshot rather than once, so a mid-round conversion — a revolutionary being
+    ///     converted, a zombie infecting somebody — appears at the tick it happened rather than being backdated.
+    /// </remarks>
+    private List<AntagRole>? BuildAntagRoles(EntityUid mindId)
+    {
+        List<AntagRole>? antagRoles = null;
+
+        foreach (var role in _roles.MindGetAllRoleInfo(mindId))
+        {
+            if (!role.Antagonist)
+                continue;
+
+            antagRoles ??= new List<AntagRole>();
+            antagRoles.Add(new AntagRole(role.Prototype, Loc.GetString(role.Name)));
+        }
+
+        return antagRoles;
     }
 
     private void CollectStorage(EntityUid container, int depth, List<string> into)
@@ -744,6 +856,17 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
         }
     }
 
+    /// <summary>
+    ///     One antagonist role on a character row.
+    /// </summary>
+    /// <param name="Id">Antag prototype id — the stable value a reader should branch on.</param>
+    /// <param name="Name">
+    ///     Localized at record time, so the bundle stays readable without shipping the game's locale files.
+    /// </param>
+    private readonly record struct AntagRole(
+        [property: JsonPropertyName("id")] string Id,
+        [property: JsonPropertyName("name")] string Name);
+
     private string DescribeItem(EntityUid item)
     {
         if (!_metaQuery.TryComp(item, out var meta))
@@ -756,6 +879,7 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
         string? species,
         string? job,
         string? name,
+        List<AntagRole>? antagRoles,
         List<string> access,
         Dictionary<string, string> worn,
         List<string> held,
@@ -765,6 +889,17 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
         hash.Add(species);
         hash.Add(job);
         hash.Add(name);
+
+        // Only the prototype ids are hashed. MindGetAllRoleInfo walks the role container in insertion order,
+        // which is stable for a given mind, so gaining a role changes the hash and re-reading the same roles
+        // does not. The localized name is derived from the id and would add nothing.
+        if (antagRoles != null)
+        {
+            foreach (var role in antagRoles)
+            {
+                hash.Add(role.Id);
+            }
+        }
 
         foreach (var tag in access)
             hash.Add(tag);
