@@ -6,8 +6,8 @@
   components:
 #ss220 mothership fix start
   - type: Transform
-#ss220 mothership fix end
     anchored: true
+#ss220 mothership fix end
   - type: InputMover # needs this to pilot the mothership
   - type: BlockMovement # They should never be moving!
     blockInteraction: false
