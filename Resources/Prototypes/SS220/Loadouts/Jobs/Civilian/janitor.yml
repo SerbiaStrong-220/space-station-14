@@ -187,3 +187,21 @@
     proto: JanitorJR
   equipment:
     belt: ClothingBeltJanitorJRFilled
+ 
+ #Outer clothing
+- type: loadout
+  id: ClothingOuterWinterJanitorJR
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: JanitorJR
+  equipment:
+    outerClothing: ClothingOuterWinterJanitorJR
+
+- type: loadout
+  id: ClothingOuterCoatJanitorJRBomber
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: JanitorJR
+  equipment:
+    outerClothing: ClothingOuterCoatJanitorJRBomber
+
