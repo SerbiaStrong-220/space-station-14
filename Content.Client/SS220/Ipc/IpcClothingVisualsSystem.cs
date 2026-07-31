@@ -1,8 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Client.Clothing;
 using Content.Shared.Clothing;
-using Content.Shared.Item;
 using Content.Shared.SS220.Ipc;
 
 namespace Content.Client.SS220.Ipc;
@@ -14,25 +12,19 @@ namespace Content.Client.SS220.Ipc;
 /// </summary>
 public sealed partial class IpcClothingVisualsSystem : EntitySystem
 {
-    private static readonly HashSet<string> HiddenSlots = ["eyes", "ears"];
-
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ItemComponent, GetEquipmentVisualsEvent>(
-            OnGetVisuals,
-            after: [typeof(ClientClothingSystem)]);
+        SubscribeLocalEvent<IpcComponent, BeforeRenderEquipmentEvent>(OnBeforeRenderEquipment);
     }
 
-    private void OnGetVisuals(Entity<ItemComponent> ent, ref GetEquipmentVisualsEvent args)
+    private void OnBeforeRenderEquipment(Entity<IpcComponent> ent, ref BeforeRenderEquipmentEvent args)
     {
-        if (!HiddenSlots.Contains(args.Slot))
+        if (args.Cancelled)
             return;
 
-        if (!HasComp<IpcComponent>(args.Equipee))
-            return;
-
-        args.Layers.Clear();
+        if (ent.Comp.HiddenClothingSlots.Contains(args.Slot))
+            args.Cancel();
     }
 }

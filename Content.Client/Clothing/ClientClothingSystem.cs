@@ -255,6 +255,14 @@ public sealed class ClientClothingSystem : ClothingSystem
             inventorySlots.VisualLayerKeys[slot] = revealedLayers;
         }
 
+        // SS220-IPC begin
+        var beforeEv = new BeforeRenderEquipmentEvent(equipee, equipment, slot);
+        RaiseLocalEvent(equipee, beforeEv);
+        RaiseLocalEvent(equipment, beforeEv);
+        if (beforeEv.Cancelled)
+            return;
+        // SS220-IPC end
+
         var ev = new GetEquipmentVisualsEvent(equipee, slot);
         RaiseLocalEvent(equipment, ev);
 
