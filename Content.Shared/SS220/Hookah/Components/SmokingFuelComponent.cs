@@ -8,7 +8,6 @@ public sealed partial class SmokingFuelComponent : Component
 {
     public const string TobaccoSlotId = "tobacco_slot";
 
-    [DataField("tobacco_slot")]
     public ItemSlot TobaccoSlot = new();
 
     [DataField]

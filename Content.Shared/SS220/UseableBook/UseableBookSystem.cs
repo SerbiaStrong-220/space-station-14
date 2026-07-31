@@ -9,12 +9,12 @@ using Robust.Shared.Network;
 
 namespace Content.Shared.SS220.UseableBook;
 
-public sealed class UseableBookSystem : EntitySystem
+public sealed partial class UseableBookSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly ISerializationManager _serialization = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private ISerializationManager _serialization = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {

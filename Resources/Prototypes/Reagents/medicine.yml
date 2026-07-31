@@ -568,9 +568,10 @@
       - !type:GenericStatusEffect
         key: PressureImmunity
         component: PressureImmunity
-      - !type:GenericStatusEffect
-        key: Stutter
-        component: StutteringAccent
+      #ss220 stutter effect fix start
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectStutter
+      #ss220 stutter effect fix end
       - !type:Jitter
       - !type:Emote
         emote: Scream

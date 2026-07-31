@@ -6,12 +6,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.ChangeSpeedDoAfters;
 
-public sealed class ChangeSpeedDoAftersSystem : EntitySystem
+public sealed partial class ChangeSpeedDoAftersSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {

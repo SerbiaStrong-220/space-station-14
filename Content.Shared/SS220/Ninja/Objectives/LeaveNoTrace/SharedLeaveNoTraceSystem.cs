@@ -16,12 +16,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.Ninja.Objectives.LeaveNoTrace;
 
-public abstract class SharedLeaveNoTraceSystem : EntitySystem
+public abstract partial class SharedLeaveNoTraceSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ExamineSystemShared _examineSystem = default!;
-    [Dependency] private readonly EntityLookupSystem _lookupSystem = default!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ExamineSystemShared _examineSystem = default!;
+    [Dependency] private EntityLookupSystem _lookupSystem = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
 
     public override void Initialize()
     {

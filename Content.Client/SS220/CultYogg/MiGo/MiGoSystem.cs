@@ -6,11 +6,10 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client.SS220.CultYogg.MiGo;
 
-public sealed class MiGoSystem : SharedMiGoSystem
+public sealed partial class MiGoSystem : SharedMiGoSystem
 {
-    [Dependency] private readonly ContentEyeSystem _contentEye = default!;
-    [Dependency] private readonly PointLightSystem _pointLightSystem = default!;
-
+    [Dependency] private ContentEyeSystem _contentEye = default!;
+    [Dependency] private PointLightSystem _pointLightSystem = default!;
 
     public override void Initialize()
     {

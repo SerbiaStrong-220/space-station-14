@@ -12,10 +12,11 @@ namespace Content.Shared.SS220.Cooking.Grilling;
 /// <summary>
 /// Handles <see cref="GrillComponent"/> events.
 /// </summary>
-public abstract class SharedGrillSystem : EntitySystem
+public abstract partial class SharedGrillSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private INetManager _net = default!;
+
     /// <inheritdoc/>
     public override void Initialize()
     {

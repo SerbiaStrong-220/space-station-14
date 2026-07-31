@@ -18,11 +18,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.Experience.Skill.Systems;
 
-public sealed class DisarmOnDamageSkillSystem : SkillEntitySystem
+public sealed partial class DisarmOnDamageSkillSystem : SkillEntitySystem
 {
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     private readonly ProtoId<SkillTreePrototype> _affectedSkillTree = "PhysicalTraining";
     private readonly FixedPoint4 _damageToExperience = 150;

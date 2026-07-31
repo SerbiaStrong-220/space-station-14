@@ -99,9 +99,11 @@
   - type: ShowHealthBars
     damageContainers:
       - Biological
+      - Ipc #SS220-MicroFixesIPC
   - type: ShowHealthIcons
     damageContainers:
       - Biological
+      - Ipc #SS220-MicroFixesIPC
   # SS220 ADD GHOST HUD'S END
   - type: ShowEventRoleIcons # SS220 Add event role icons
   - type: ShowElectrocutionHUD
@@ -139,6 +141,7 @@
       enum.RadarConsoleUiKey.Key:
         toggleAction: ActionGhostShowRadar
   # ss220 add ghost's radar end
+  - type: ArenaLobbyGhostAction # SS220 Arena
 
 # proto for player ghosts specifically
 - type: entity

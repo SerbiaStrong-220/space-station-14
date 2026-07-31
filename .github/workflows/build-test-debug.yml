@@ -47,27 +47,11 @@ jobs:
     - name: Run Content.Tests
       run: dotnet test --no-build --configuration DebugOpt Content.Tests/Content.Tests.csproj -- NUnit.ConsoleOut=0 NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
 
-    # SS220-separate-tests-begin
-    - name: Run Content.IntegrationTests Entity & Prototypes test
-      shell: pwsh
-      run: |
-        $env:DOTNET_gcServer=1
-        dotnet test --filter 'FullyQualifiedName~Validate|FullyQualifiedName~Prototype' --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
-    # SS220-separate-tests-end
-
     - name: Run Content.IntegrationTests
       shell: pwsh
       run: |
         $env:DOTNET_gcServer=1
-        dotnet test --filter 'FullyQualifiedName!~Map&FullyQualifiedName!~Validate&FullyQualifiedName!~Prototype&FullyQualifiedName~ApcLoad' --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
-
-    # SS220-separate-tests-begin
-    - name: Run Content.IntegrationTests Maps test
-      shell: pwsh
-      run: |
-        $env:DOTNET_gcServer=1
-        dotnet test --filter 'FullyQualifiedName~Map|FullyQualifiedName~ApcLoad' --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
-    # SS220-separate-tests-end
+        dotnet test --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
 
     - name: Archive NUnit3 test results.
       if: always()

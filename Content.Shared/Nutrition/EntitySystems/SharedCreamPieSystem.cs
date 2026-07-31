@@ -1,3 +1,4 @@
+using Content.Shared.SS220.InstastunResist;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Fluids;
@@ -119,6 +120,14 @@ public abstract class SharedCreamPieSystem : EntitySystem
     {
         if (creamPied.Comp.CreamPied || !Exists(args.Thrown) || !TryComp<CreamPieComponent>(args.Thrown, out var creamPie))
             return;
+
+        //SS220 instastun resist begin
+        var resistEv = new StunAttemptEvent(StunSource.Creampie);
+        RaiseLocalEvent(creamPied.Owner, ref resistEv);
+
+        if (resistEv.StunCancelled)
+            return;
+        //SS220 instastun resist end
 
         // TODO: Check if they even have a head that can be hit.
         SetCreamPied(creamPied.AsNullable(), true);

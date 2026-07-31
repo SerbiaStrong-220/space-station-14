@@ -41,31 +41,31 @@ using Content.Shared.Damage.Systems;
 
 namespace Content.Shared.SS220.DarkReaper;
 
-public abstract class SharedDarkReaperSystem : EntitySystem
+public abstract partial class SharedDarkReaperSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _speedModifier = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
-    [Dependency] private readonly PullingSystem _puller = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffectsSystem = default!;
-    [Dependency] private readonly LifestealSystem _lifesteal = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private MovementSpeedModifierSystem _speedModifier = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedPointLightSystem _pointLight = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private NpcFactionSystem _npcFaction = default!;
+    [Dependency] private PullingSystem _puller = default!;
+    [Dependency] private StatusEffectsSystem _statusEffectsSystem = default!;
+    [Dependency] private LifestealSystem _lifesteal = default!;
 
     public override void Initialize()
     {

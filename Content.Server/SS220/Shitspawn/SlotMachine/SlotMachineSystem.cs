@@ -11,15 +11,15 @@ using Content.Shared.Hands.EntitySystems;
 
 namespace Content.Server.SS220.Shitspawn.SlotMachine;
 
-public sealed class SlotMachineSystem : EntitySystem
+public sealed partial class SlotMachineSystem : EntitySystem
 {
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly StackSystem _stack = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private UserInterfaceSystem _uiSystem = default!;
+    [Dependency] private StackSystem _stack = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private static readonly TimeSpan SpinDuration = TimeSpan.FromSeconds(2.5);
 

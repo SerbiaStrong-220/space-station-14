@@ -14,10 +14,11 @@ namespace Content.Client.SS220.TextureFade;
 /// <summary>
 /// Performs alpha clip on the privided texture with variable threshold (threshold filter). See <see cref="TextureFadeOverlayComponent"/> for more automatic use.
 /// </summary>
-public sealed class TextureFadeOverlay : StackableOverlay
+public sealed partial class TextureFadeOverlay : StackableOverlay
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+
     private readonly SpriteSystem _spriteSystem;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;

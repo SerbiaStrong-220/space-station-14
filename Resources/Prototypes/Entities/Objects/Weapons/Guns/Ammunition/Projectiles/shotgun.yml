@@ -7,6 +7,10 @@
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     state: slug
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    weightedRandomProviderEntity: LargeHeavyCaliberFragment
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
@@ -24,6 +28,11 @@
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     layers:
     - state: bullet #just reapplying to here so it can be shaded
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.1
+    weightedRandomProviderEntity: LargeHeavyCaliberFragment
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
@@ -37,6 +46,11 @@
   categories: [ HideSpawnMenu ]
   name: pellet (.50)
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.05
+    weightedRandomProviderEntity: LargeHeavyCaliberFragment
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
@@ -59,6 +73,10 @@
   categories: [ HideSpawnMenu ]
   name: pellet (.50 incendiary)
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.02
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
@@ -109,6 +127,11 @@
     layers:
     - state: shard
       shader: unshaded
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.05
+    weightedRandomProviderEntity: PelletFragment
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
@@ -196,6 +219,11 @@
   categories: [ HideSpawnMenu ]
   name: pellet (.50 uranium)
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.05
+    weightedRandomProviderEntity: PelletFragment
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
@@ -224,6 +252,11 @@
     layers:
     - state: grapeshot
       shader: unshaded
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.02
+    weightedRandomProviderEntity: PelletFragment
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
@@ -253,6 +286,11 @@
     - state: shard
   - type: EmbeddableProjectile
     deleteOnRemove: true
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.05
+    weightedRandomProviderEntity: PelletFragment
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     deleteOnCollide: false
     damage:

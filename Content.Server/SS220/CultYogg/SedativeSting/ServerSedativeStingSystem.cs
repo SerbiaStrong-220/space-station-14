@@ -26,16 +26,16 @@ using System.Linq;
 
 namespace Content.Server.SS220.CultYogg.SedativeSting;
 
-public sealed class ServerSedativeStingSystem : EntitySystem
+public sealed partial class ServerSedativeStingSystem : EntitySystem
 {
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainers = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly ReactiveSystem _reactiveSystem = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainers = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private ReactiveSystem _reactiveSystem = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     public override void Initialize()
     {

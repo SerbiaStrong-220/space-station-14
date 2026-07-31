@@ -8,11 +8,11 @@ using Content.Shared.Clothing.Components;
 
 namespace Content.Server.SS220.Clothing;
 
-public sealed class LimitedEquipSystem : EntitySystem
+public sealed partial class LimitedEquipSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     public override void Initialize()
     {

@@ -15,16 +15,16 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.MindSlave.Systems;
 
-public sealed class MindSlaveDisfunctionSystem : EntitySystem
+public sealed partial class MindSlaveDisfunctionSystem : EntitySystem
 {
-    [Dependency] private readonly IComponentFactory _component = default!;
-    [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private IComponentFactory _component = default!;
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
 
     private const float SecondsBetweenStageDamage = 4f;
 

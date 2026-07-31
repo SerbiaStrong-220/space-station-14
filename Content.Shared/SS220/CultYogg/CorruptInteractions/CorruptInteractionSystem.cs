@@ -9,11 +9,12 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared.SS220.CultYogg.CorruptInteractions;
 
-public sealed class CorruptInteractionsSystem : EntitySystem
+public sealed partial class CorruptInteractionsSystem : EntitySystem
 {
-    [Dependency] private readonly WeldableSystem _weldable = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private WeldableSystem _weldable = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+
     public override void Initialize()
     {
         base.Initialize();

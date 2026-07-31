@@ -5,9 +5,15 @@
   setPreference: true
   objective: roles-antag-mothership-core-objective
   requirements:
-  - !type:RoleTimeRequirement
-    role: JobBorg
-    time: 18000  # 5 hrs
+  # ss220 - post upstream tweaks - xenoborgs req hours tweak & play tracker - bgn
+  # - !type:RoleTimeRequirement
+  #   role: JobBorg
+  #   time: 18000  # 5 hrs
+  - !type:OverallPlaytimeRequirement
+    time: 20h
+  playTimeTracker: AntagXenoborgMothershipCore
+  antagColor: Blue
+  # ss220 - post upstream tweaks - xenoborgs req hours tweak & play tracker - end
   guides: [ Xenoborgs ]
 
 - type: antag
@@ -17,7 +23,13 @@
   setPreference: true
   objective: roles-antag-xenoborg-objective
   requirements:
-  - !type:RoleTimeRequirement
-    role: JobBorg
-    time: 18000  # 5 hrs
+  # ss220 - post upstream tweaks - xenoborgs req hours tweak & play tracker - bgn
+  # - !type:RoleTimeRequirement
+  #   role: JobBorg
+  #   time: 18000  # 5 hrs
+  - !type:OverallPlaytimeRequirement
+    time: 20h
+  playTimeTracker: AntagXenoborg
+  antagColor: Blue
+  # ss220 - post upstream tweaks - xenoborgs req hours tweak & play tracker - end
   guides: [ Xenoborgs ]

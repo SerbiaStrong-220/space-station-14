@@ -89,6 +89,23 @@
     Gold: 50
 
 - type: latheRecipe
+  id: RiotLaserShield
+  result: RiotLaserShieldAlt
+  completetime: 5
+  materials:
+    Steel: 900
+    Plastic: 300
+
+- type: latheRecipe
+  id: RiotBulletShield
+  result: RiotBulletShieldAlt
+  completetime: 5
+  materials:
+    Steel: 900
+    Plastic: 300
+    Uranium: 700
+
+- type: latheRecipe
   id: WeaponSniperCompact
   result: WeaponSniperCompact
   completetime: 5
@@ -98,3 +115,29 @@
     Plastic: 300
     Gold: 200
     Silver: 200
+
+- type: latheRecipe
+  parent: [ BaseGoldCircuitboardRecipe, BaseMachineRecipeCategory ]
+  id: ShuttleGunMLGSWCircuitboard
+  result: ShuttleGunMLGSWCircuitboard
+  completetime: 12
+
+- type: latheRecipe
+  id: WeaponEnergyTurretSecurityMachineCircuitboard
+  result: WeaponEnergyTurretSecurityMachineCircuitboard
+  completetime: 5
+  materials:
+    Glass: 400
+    Gold: 400
+    Silver: 400
+    Plasma: 200
+
+- type: latheRecipe
+  id: WeaponEnergyTurretSecurityControlPanelElectronics
+  result: WeaponEnergyTurretSecurityControlPanelElectronics
+  completetime: 5
+  materials:
+    Glass: 400
+    Gold: 400
+    Silver: 400
+    Plasma: 200

@@ -35,6 +35,7 @@
     - TrackingImplant
     - StorageImplant
     - AdrenalImplant # SS220 implant-removing fix
+    - NanoSurgeryMachinesImplant # SS220 implant-removing fix
     - ThermalVisionImplant # SS220 implant-removing fix
     - FreedomImplant
     - UplinkImplant

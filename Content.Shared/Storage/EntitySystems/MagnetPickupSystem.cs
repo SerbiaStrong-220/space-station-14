@@ -48,11 +48,17 @@ public sealed class MagnetPickupSystem : EntitySystem
             comp.NextScan += ScanDelay;
             Dirty(uid, comp);
 
-            if (!_inventory.TryGetContainingSlot((uid, xform, meta), out var slotDef))
-                continue;
+            // SS220-OreBagBorgMagnet begin
+            if (!comp.WorksOutsideSlot)
+            {
 
-            if ((slotDef.SlotFlags & comp.SlotFlags) == 0x0)
+             if (!_inventory.TryGetContainingSlot((uid, xform, meta), out var slotDef))
                 continue;
+            
+             if ((slotDef.SlotFlags & comp.SlotFlags) == 0x0)
+                continue;
+            }
+            // SS220-OreBagBorgMagnet end
 
             // No space
             if (!_storage.HasSpace((uid, storage)))

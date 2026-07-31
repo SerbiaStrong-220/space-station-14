@@ -175,7 +175,7 @@
     allowedStates:
     - Dead
   - type: Rootable
-#SS220-TweakDamageSpecies-Begin
+  #SS220-TweakDamageSpecies-Begin
   - type: MeleeWeapon
     soundHit:
       collection: Punch
@@ -185,7 +185,14 @@
       types:
         Blunt: 10
         Structural: 7.5
-#SS220-TweakDamageSpecies-End
+  #SS220-TweakDamageSpecies-End
+  # SS220-Add-Languages begin
+  - type: Language
+    selectedLanguage: Galactic
+    availableLanguages:
+    - id: Galactic
+    - id: Rootspeak
+  # SS220-Add-Languages end
 
 - type: entity
   parent: OrganBase

@@ -4,9 +4,9 @@ using Content.Shared.Alert;
 
 namespace Content.Shared.SS220.PolymorphTimer;
 
-public abstract class SharedPolymorphTimerSystem : EntitySystem
+public abstract partial class SharedPolymorphTimerSystem : EntitySystem
 {
-    [Dependency] private readonly AlertsSystem _alerts = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
 
     public override void Initialize()
     {

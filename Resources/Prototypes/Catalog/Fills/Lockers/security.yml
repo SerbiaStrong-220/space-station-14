@@ -48,6 +48,7 @@
       amount: 2
     - id: NetworkConfigurator
     - id: Binoculars
+    - id: WeaponEnergyShotgun #SS220-fix
     - id: PlushieLizardJobWarden
       prob: 0.02
 
@@ -127,6 +128,7 @@
     # SS220 Return trackers for brigmed Begin
     - id: TrackingImplanter
       amount: 2
+    - id: HandHeldImplantMedicalScanner # SS220-surgery-scanner
     # SS220 Return trackers for brigmed End
     - id: ClothingOuterHardsuitBrigmedic
     - id: OxygenTankFilled   #SS220 add-tanks-brigmed
@@ -179,6 +181,7 @@
     - id: Telescopichka # SS220 Ya-lybly-translit
     - id: ClothingEyesHudSecurity # Dec is sec
     - id: BodySecurityCamera #SS220-Bodycam
+    - id: HandHeldImplantMedicalScanner # SS220-surgery-scanner
     # SS220-our-stuff-end
     - id: ClothingEyesGlassesNoir
     - id: ClothingHeadHatDetGadget

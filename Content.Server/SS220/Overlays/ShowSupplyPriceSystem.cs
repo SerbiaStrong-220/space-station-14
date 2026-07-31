@@ -5,11 +5,11 @@ using Content.Shared.SS220.Overlays;
 
 namespace Content.Server.SS220.Overlays;
 
-public sealed class ShowSupplyPriceSystem : EntitySystem
+public sealed partial class ShowSupplyPriceSystem : EntitySystem
 {
-    [Dependency] private readonly PricingSystem _pricingSystem = default!;
-    [Dependency] private readonly InventorySystem _invSystem = default!;
-    [Dependency] private readonly CargoSystem _bountySystem = default!;
+    [Dependency] private PricingSystem _pricingSystem = default!;
+    [Dependency] private InventorySystem _invSystem = default!;
+    [Dependency] private CargoSystem _bountySystem = default!;
 
     public override void Initialize()
     {

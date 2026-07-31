@@ -8,10 +8,9 @@ namespace Content.Client.SS220.CultYogg.Cultists;
 /// <summary>
 /// Сontrols the visual during the acsending to the Mi-Go.
 /// </summary>
-public sealed class AcsendingVisualizerSystem : VisualizerSystem<AcsendingComponent>
+public sealed partial class AcsendingVisualizerSystem : VisualizerSystem<AcsendingComponent>
 {
-
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

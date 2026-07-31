@@ -7,9 +7,9 @@ using Content.Shared.SS220.ButtScan;
 
 namespace Content.Client.SS220.ButtScan;
 
-public sealed class ButtScanBoundUserInterface : BoundUserInterface
+public sealed partial class ButtScanBoundUserInterface : BoundUserInterface
 {
-    [Dependency] private readonly IEntityManager _entityMgr = default!;
+    [Dependency] private IEntityManager _entityMgr = default!;
 
     private ButtScanWindow? _window;
     private readonly EntityUid _paperEntity;

@@ -8,7 +8,7 @@ namespace Content.Shared.SS220.EntityEffects.Effects;
 
 public sealed partial class StaminaDamageEntityEffectSystem : EntityEffectSystem<StaminaComponent, StaminaChange>
 {
-    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
+    [Dependency] private SharedStaminaSystem _stamina = default!;
 
     protected override void Effect(Entity<StaminaComponent> entity, ref EntityEffectEvent<StaminaChange> args)
     {

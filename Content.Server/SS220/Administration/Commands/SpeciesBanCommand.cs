@@ -13,13 +13,13 @@ using Robust.Shared.Prototypes;
 namespace Content.Server.SS220.Administration.Commands;
 
 [AdminCommand(AdminFlags.Ban)]
-public sealed class SpeciesBanCommand : LocalizedCommands
+public sealed partial class SpeciesBanCommand : LocalizedCommands
 {
-    [Dependency] private readonly IPlayerLocator _locator = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly ILogManager _log = default!;
-    [Dependency] private readonly IBanManager _ban = default!;
+    [Dependency] private IPlayerLocator _locator = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private ILogManager _log = default!;
+    [Dependency] private IBanManager _ban = default!;
 
     private ISawmill? _sawmill;
 

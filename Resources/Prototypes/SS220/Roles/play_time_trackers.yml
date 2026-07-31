@@ -137,6 +137,12 @@
 
 - type: playTimeTracker
   id: JobRedWingsMedic
-  
+
 - type: playTimeTracker
   id: JobRedWingsPilot
+
+- type: playTimeTracker
+  id: AntagXenoborg
+
+- type: playTimeTracker
+  id: AntagXenoborgMothershipCore

@@ -15,14 +15,14 @@ using Content.Shared.SS220.CCVars;
 namespace Content.Client.SS220.SuperMatter.Observer;
 // It isn't a warCrime if you make shittyCode... kinda...
 
-public sealed class SuperMatterObserverSystem : EntitySystem
+public sealed partial class SuperMatterObserverSystem : EntitySystem
 {
-    [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
-    [Dependency] private readonly IRobustRandom _robustRandom = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private UserInterfaceSystem _userInterface = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private SharedAppearanceSystem _appearanceSystem = default!;
+    [Dependency] private IRobustRandom _robustRandom = default!;
+    [Dependency] private IConfigurationManager _config = default!;
 
     // 120 like 2 minutes with update rate 1 sec
     public const int MAX_CACHED_AMOUNT = 120;

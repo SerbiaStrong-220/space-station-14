@@ -13,7 +13,7 @@ namespace Content.Client.SS220.ChameleonStructure.UI;
 [GenerateTypedNameReferences]
 public sealed partial class ChameleonStructureMenu : DefaultWindow
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     public event Action<EntProtoId>? OnIdSelected;
 

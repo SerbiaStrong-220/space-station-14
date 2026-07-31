@@ -25,6 +25,11 @@
   id: DoctorGear
   equipment:
     ears: ClothingHeadsetMedical
+  # ss220-surgery-update-begin
+  storage:
+    back:
+    - FilledSurgeryMedkit
+  # ss220-surgery-update-end
 
 - type: chameleonOutfit
   id: MedicalDoctorChameleonOutfit

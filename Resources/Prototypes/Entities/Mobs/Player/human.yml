@@ -15,6 +15,11 @@
   - type: NpcFactionMember
     factions:
     - Syndicate
+  # SS220-experience-update-begin
+  - type: AntagAddKnowledge
+    knowledgesToAdd:
+    - SyndicateAgentKnowledge
+  # SS220-experience-update-end
 
 - type: entity
   parent: MobHumanSyndicateAgentBase
@@ -58,6 +63,10 @@
   id: MobHumanSyndicateAgentNukeops # Reinforcement exclusive to nukeops uplink
   suffix: Human, NukeOps
   components:
+  # SS220-experience-update-begin
+  - type: RoleExperienceAdd
+    definitionId: SyndicateOperativeRoleExperience
+  # SS220-experience-update-end
   - type: NukeOperative
   - type: RandomMetadata
     nameSegments:

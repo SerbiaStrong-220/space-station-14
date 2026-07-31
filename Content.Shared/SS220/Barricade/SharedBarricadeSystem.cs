@@ -10,7 +10,7 @@ namespace Content.Shared.SS220.Barricade;
 
 public abstract partial class SharedBarricadeSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;
 
     public override void Initialize()
     {

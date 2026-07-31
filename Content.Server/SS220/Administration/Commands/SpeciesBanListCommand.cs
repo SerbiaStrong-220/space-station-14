@@ -13,11 +13,11 @@
 // [ATTENTION] Now admins can see them in all wide menu. Kept in case of my misunderstanding what it does
 // -----------
 // [AdminCommand(AdminFlags.Ban)]
-// public sealed class SpeciesBanListCommand : LocalizedCommands
+// public sealed partial class SpeciesBanListCommand : LocalizedCommands
 // {
-//     [Dependency] private readonly IServerDbManager _db = default!;
-//     [Dependency] private readonly EuiManager _eui = default!;
-//     [Dependency] private readonly IPlayerLocator _locator = default!;
+//     [Dependency] private IServerDbManager _db = default!;
+//     [Dependency] private EuiManager _eui = default!;
+//     [Dependency] private IPlayerLocator _locator = default!;
 
 //     public override string Command => "speciesbanlist";
 //     public override string Description => Loc.GetString("cmd-speciesbanlist-desc");

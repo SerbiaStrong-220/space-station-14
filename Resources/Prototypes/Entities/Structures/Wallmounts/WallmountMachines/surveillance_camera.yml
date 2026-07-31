@@ -25,13 +25,14 @@
         layer:
         - TabletopMachineLayer
   - type: CameraActiveOnCollide
-    requiresPower: false # TODO: Change this when AI can no longer see via unpowered cameras
+    # requiresPower: false # SS220 ai-seccam
   - type: PointLight
     enabled: false
     radius: 5
   - type: SlimPoweredLight
     enabled: false
   - type: StationAiVision
+    needsPower: true #SS220 ai-seccam
   - type: Clickable
   - type: InteractionOutline
   - type: Construction

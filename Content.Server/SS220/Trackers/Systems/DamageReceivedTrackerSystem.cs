@@ -9,10 +9,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.Trackers.Systems;
 
-public sealed class DamageReceivedTrackerSystem : EntitySystem
+public sealed partial class DamageReceivedTrackerSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private const float ResetDamageOwnerDelaySeconds = 2.5f;
 

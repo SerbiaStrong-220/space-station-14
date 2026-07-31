@@ -15,3 +15,64 @@
   storage:
     back:
     - BoxSurvivalBrigmedicNitrogen
+
+- type: loadoutEffectGroup
+  id: EffectSpeciesIpc
+  effects:
+  - !type:SpeciesLoadoutEffect
+    species:
+    - Ipc
+
+- type: loadout
+  id: LoadoutSpeciesIpc
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    back:
+    - BoxSurvivalIpc
+
+- type: loadout
+  id: LoadoutSpeciesEngineerIpc
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    back:
+    - BoxSurvivalEngineerIpc
+
+- type: loadout
+  id: LoadoutSpeciesSecurityIpc
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    back:
+    - BoxSurvivalSecurityIpc
+
+- type: loadout
+  id: LoadoutSpeciesClownIpc
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    back:
+    - BoxSurvivalClownIpc
+
+- type: loadout
+  id: LoadoutSpeciesMimeIpc
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    back:
+    - BoxSurvivalMimeIpc
+
+- type: loadout
+  id: LoadoutSpeciesMedicalIpc
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    back:
+    - BoxSurvivalMedicalIpc

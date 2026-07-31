@@ -2,6 +2,7 @@ using Content.Shared.Examine;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Preferences;
+using Content.Shared.SS220.TTS;
 using Robust.Shared.GameObjects.Components.Localization;
 using Robust.Shared.Prototypes;
 
@@ -37,6 +38,11 @@ public sealed class HumanoidProfileSystem : EntitySystem
         {
             _grammar.SetGender((ent, grammar), profile.Gender);
         }
+
+        // SS220-TTS-begin
+        var ttsComp = EnsureComp<TTSComponent>(ent);
+        ttsComp.VoicePrototypeId = profile.Voice;
+        // SS220-TTS-end
     }
 
     private void OnExamined(Entity<HumanoidProfileComponent> ent, ref ExaminedEvent args)

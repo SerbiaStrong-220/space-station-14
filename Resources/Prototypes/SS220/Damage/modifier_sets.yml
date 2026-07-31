@@ -204,3 +204,11 @@
     Slash: 0.7
     Piercing: 0.7
     Heat: 0.9
+
+- type: damageModifierSet
+  id: Ipc
+  coefficients:
+    Blunt: 1.5
+    Slash: 1.5
+    Piercing: 1.5
+    Heat: 1.5

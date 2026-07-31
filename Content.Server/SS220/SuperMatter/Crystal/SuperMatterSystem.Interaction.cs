@@ -10,8 +10,8 @@ namespace Content.Server.SS220.SuperMatter.Crystal;
 
 public sealed partial class SuperMatterSystem
 {
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
 
     public void ConsumeObject(EntityUid targetUid, Entity<SuperMatterComponent> crystal, bool spawnEntity = false)
     {

@@ -40,6 +40,7 @@
   - type: Tag
     tags:
     - Footwraps
+    - WhitelistChameleon
   - type: FootstepModifier
     footstepSoundCollection:
       collection: BarestepHard

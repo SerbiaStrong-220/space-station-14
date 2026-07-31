@@ -136,6 +136,10 @@
         type: HumanoidMarkingModifierBoundUserInterface
       enum.StrippingUiKey.Key:
         type: StrippableBoundUserInterface
+      # SS220-surgery-update-begin
+      enum.SurgeryEdgeSelectorUi.Key:
+        type: EdgeSelectorBUI
+      # SS220-surgery-update-end
   - type: Puller
   - type: Speech
     speechSounds: Alto
@@ -243,7 +247,8 @@
         Asphyxiation: -1.0
   - type: FireVisuals
     alternateState: Standing
-  - type: Surgable #SS220 Surgery
+  - type: SurgeryPatient #SS220 Surgery
+  - type: PathologyHolder #SS220 Pathology
   - type: Experience # SS220 Experience update
   - type: StunVisuals
   - type: LimitationRevive #SS220 LimitationRevive

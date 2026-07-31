@@ -8,13 +8,13 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.DarkReaper;
 
-public sealed class DarkReaperRuneSharedSystem : EntitySystem
+public sealed partial class DarkReaperRuneSharedSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedMindSystem _mindSystem = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SharedMindSystem _mindSystem = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     private readonly ISawmill _sawmill = Logger.GetSawmill("dark-reaper-spawn");
 

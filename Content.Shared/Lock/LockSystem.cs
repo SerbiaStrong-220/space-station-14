@@ -13,6 +13,7 @@ using Content.Shared.UserInterface;
 using Content.Shared.Verbs;
 using Content.Shared.Wires;
 using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.Whitelist;
 using JetBrains.Annotations;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Serialization;
@@ -33,6 +34,7 @@ public sealed class LockSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _sharedPopupSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!; // ss220 prevent sound spam from ghost on borg
 
     private readonly LocId _defaultDenyReason = "lock-comp-has-user-access-fail";
 
@@ -485,6 +487,11 @@ public sealed class LockSystem : EntitySystem
         {
             _sharedPopupSystem.PopupClient(Loc.GetString(component.Popup), uid, args.User);
         }
+
+        // ss220 prevent sound spam from ghost on borg start
+        if (_whitelist.IsWhitelistPass(component.Blacklist, args.User))
+            return;
+        // ss220 prevent sound spam from ghost on borg end
 
         _audio.PlayPredicted(component.AccessDeniedSound, uid, args.User);
     }

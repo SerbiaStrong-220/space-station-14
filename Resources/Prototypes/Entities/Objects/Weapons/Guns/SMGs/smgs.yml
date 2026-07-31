@@ -314,18 +314,18 @@
       left:
         - sprite: Objects/Storage/Briefcases/briefcase_brown.rsi
           state: inhand-left
-        - state: inhand-left-muzzle
+        # - state: inhand-left-muzzle # ss220 - post upstream - WeaponSubMachineGunBriefcase sprite fix
       right:
         - sprite: Objects/Storage/Briefcases/briefcase_brown.rsi
           state: inhand-right
-        - state: inhand-right-muzzle
+        # - state: inhand-right-muzzle # ss220 - post upstream - WeaponSubMachineGunBriefcase sprite fix
   - type: Sprite
-    sprite: Objects/Weapons/Guns/SMGs/briefcase.rsi
+    sprite: Objects/Storage/Briefcases/briefcase_brown.rsi # ss220 - post upstream - WeaponSubMachineGunBriefcase sprite fix
     layers:
     - sprite: Objects/Storage/Briefcases/briefcase_brown.rsi
       state: icon
-    - state: icon-muzzle
-      map: ["enum.GunVisualLayers.Base"]
+    # - state: icon-muzzle # ss220 - post upstream - WeaponSubMachineGunBriefcase sprite fix
+    #   map: ["enum.GunVisualLayers.Base"] # ss220 - post upstream - WeaponSubMachineGunBriefcase sprite fix
   - type: Gun
     fireRate: 9
     minAngle: 25

@@ -11,9 +11,9 @@ namespace Content.Shared.SS220.StuckOnEquip;
 
 public sealed partial class SharedStuckOnEquipSystem : EntitySystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ISharedAdminManager _adminManager = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private ISharedAdminManager _adminManager = default!;
 
     public override void Initialize()
     {

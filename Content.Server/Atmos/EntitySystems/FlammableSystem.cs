@@ -32,6 +32,9 @@ using Robust.Shared.Input.Binding;
 using Content.Shared.SS220.Input;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
+using Content.Shared.SS220.Projectiles.Components;
+using Content.Server.Projectiles;
+
 
 namespace Content.Server.Atmos.EntitySystems
 {
@@ -70,14 +73,14 @@ namespace Content.Server.Atmos.EntitySystems
 
             SubscribeLocalEvent<FlammableComponent, MapInitEvent>(OnMapInit);
             SubscribeLocalEvent<FlammableComponent, InteractUsingEvent>(OnInteractUsing);
-            SubscribeLocalEvent<FlammableComponent, StartCollideEvent>(OnCollide);
+            SubscribeLocalEvent<FlammableComponent, StartCollideEvent>(OnCollide, after: [typeof(ProjectileSystem)]);//SS220 shield rework
             SubscribeLocalEvent<FlammableComponent, IsHotEvent>(OnIsHot);
             SubscribeLocalEvent<FlammableComponent, TileFireEvent>(OnTileFire);
             SubscribeLocalEvent<FlammableComponent, RejuvenateEvent>(OnRejuvenate);
             SubscribeLocalEvent<FlammableComponent, ResistFireAlertEvent>(OnResistFireAlert);
             Subs.SubscribeWithRelay<FlammableComponent, ExtinguishEvent>(OnExtinguishEvent);
 
-            SubscribeLocalEvent<IgniteOnCollideComponent, StartCollideEvent>(IgniteOnCollide);
+            SubscribeLocalEvent<IgniteOnCollideComponent, StartCollideEvent>(IgniteOnCollide, after: [typeof(ProjectileSystem)]);//SS220 shield rework
             SubscribeLocalEvent<IgniteOnCollideComponent, LandEvent>(OnIgniteLand);
 
             SubscribeLocalEvent<IgniteOnMeleeHitComponent, MeleeHitEvent>(OnMeleeHit);
@@ -122,6 +125,13 @@ namespace Content.Server.Atmos.EntitySystems
         {
             if (!args.OtherFixture.Hard || component.Count == 0)
                 return;
+
+            //SS220 shield rework begin
+            if (TryComp<BlockedProjectileComponent>(uid, out var blockedProjectile)
+                && TryGetEntity(blockedProjectile.BlockerEntity, out var localBlocker)
+                && localBlocker == args.OtherEntity)
+                return;
+            //SS220 shield rework end
 
             var otherEnt = args.OtherEntity;
 

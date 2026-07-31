@@ -32,7 +32,7 @@
     shoes: ClothingShoesBootsMagAdv
     id: DeathsquadPDA
     pocket1: EnergySword
-    pocket2: EnergyShield
+    pocket2: EnergyShieldAlt #SS220 shield rework
     belt: ClothingBeltMilitaryWebbingMedFilled
   storage:
     back:

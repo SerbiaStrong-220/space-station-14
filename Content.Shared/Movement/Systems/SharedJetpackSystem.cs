@@ -99,7 +99,8 @@ public abstract class SharedJetpackSystem : EntitySystem
     private void OnJetpackUserEntParentChanged(EntityUid uid, JetpackUserComponent component, ref EntParentChangedMessage args)
     {
         if (TryComp<JetpackComponent>(component.Jetpack, out var jetpack) &&
-            (!CanEnableOnGrid(args.Transform.GridUid) || !CheckMagboots(uid))) // SS220 Magboots with jet fix
+            (!CanEnableOnGrid(args.Transform.GridUid) || HasActiveMagboots(uid)) && // SS220 Magboots with jet fix
+            !HasMoonBoots(uid)) // ss220-fix-jetpack-effect
         {
             SetEnabled(component.Jetpack, jetpack, false, uid);
 
@@ -164,7 +165,7 @@ public abstract class SharedJetpackSystem : EntitySystem
         //ss220 magboots with jet on gravity fix end
 
         //SS220 Magboots with jet fix begin
-        if (!CheckMagboots(args.Performer))
+        if (HasActiveMagboots(args.Performer))
         {
             _popup.PopupClient(Loc.GetString("jetpack-no-magboots-on-grid"), uid, args.Performer);
             return;
@@ -222,11 +223,11 @@ public abstract class SharedJetpackSystem : EntitySystem
     /// <returns>
     ///     true if entity can use jet with magboots
     /// </returns>
-    private bool CheckMagboots(EntityUid user)
+    private bool HasActiveMagboots(EntityUid user)
     {
         var xform = Transform(user);
         if (xform.GridUid is null)
-            return true;
+            return false;
 
         var slotEnumerator = _inventory.GetSlotEnumerator(user);
         while (slotEnumerator.NextItem(out var item))
@@ -234,12 +235,29 @@ public abstract class SharedJetpackSystem : EntitySystem
             if (HasComp<MagbootsComponent>(item) &&
                 TryComp<ItemToggleComponent>(item, out var itemToggle) &&
                 itemToggle.Activated)
-                return false;
+                return true;
         }
 
-        return true;
+        return false;
     }
     // SS220 Magboots with jet fix end
+
+    // ss220-fix-jetpack-effect-begin
+    private bool HasMoonBoots(EntityUid user)
+    {
+        var slotEnumerator = _inventory.GetSlotEnumerator(user);
+        while (slotEnumerator.NextItem(out var item, out var slot))
+        {
+            if (slot.SlotFlags != SlotFlags.FEET)
+                continue;
+
+            if (HasComp<AntiGravityClothingComponent>(item))
+                return true;
+        }
+
+        return false;
+    }
+    // ss220-fix-jetpack-effect-end
 
     private void OnJetpackGetAction(EntityUid uid, JetpackComponent component, GetItemActionsEvent args)
     {

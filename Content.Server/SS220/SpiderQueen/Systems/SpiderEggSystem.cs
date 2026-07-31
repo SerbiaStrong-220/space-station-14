@@ -18,10 +18,10 @@ namespace Content.Server.SS220.SpiderQueen.Systems;
 
 public sealed partial class SpiderEggSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly NPCSystem _npc = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly SpiderWebSystem _spiderWeb = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private NPCSystem _npc = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private SpiderWebSystem _spiderWeb = default!;
 
     public override void Initialize()
     {

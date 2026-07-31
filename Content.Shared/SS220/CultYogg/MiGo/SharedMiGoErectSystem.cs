@@ -28,25 +28,25 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
 
-public sealed class SharedMiGoErectSystem : EntitySystem
+public sealed partial class SharedMiGoErectSystem : EntitySystem
 {
-    [Dependency] private readonly SharedUserInterfaceSystem _userInterfaceSystem = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
-    [Dependency] private readonly SharedStackSystem _stackSystem = default!;
-    [Dependency] private readonly MetaDataSystem _metaDataSystem = default!;
-    [Dependency] private readonly TurfSystem _turfSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
-    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedChameleonStructureSystem _chameleonStructureSystem = default!;
-    [Dependency] private readonly SharedStationSystem _station = default!;
+    [Dependency] private SharedUserInterfaceSystem _userInterfaceSystem = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private ActionBlockerSystem _actionBlockerSystem = default!;
+    [Dependency] private SharedStackSystem _stackSystem = default!;
+    [Dependency] private MetaDataSystem _metaDataSystem = default!;
+    [Dependency] private TurfSystem _turfSystem = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private INetManager _netManager = default!;
+    [Dependency] private SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedChameleonStructureSystem _chameleonStructureSystem = default!;
+    [Dependency] private SharedStationSystem _station = default!;
 
     //private readonly List<EntityUid> _dropEntitiesBuffer = [];
 

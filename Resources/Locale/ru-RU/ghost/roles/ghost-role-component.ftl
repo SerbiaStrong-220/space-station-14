@@ -291,3 +291,19 @@ ghost-role-information-syndicate-smuggler-name = Контрабандист Си
 ghost-role-information-syndicate-smuggler-description = Вы - специально обученный контрабандист Синдиката. Отправляйтесь на поиски выданной вам цели и отыщите её любыми средствами.
 
 
+
+ghost-role-information-rules-team-antagonist = Вы [color={role-type-team-antagonist-color}][bold]{role-type-team-antagonist-name}[/bold][/color]. Ваши намерения ясны и враждебны станции и ее экипажу. Вы должны [bold]работать со своей командой[/bold] или следовать разумным указаниям командиров. Вы не помните ничего из своей прошлой жизни, и вы не помните ничего, что узнали, будучи призраком. Вам разрешено помнить общие игровые знания, такие как: как готовить, как использовать предметы и т.д. Вам абсолютно [color=red]ЗАПРЕЩЕНО[/color] помнить имя, внешность и т.д. вашего предыдущего персонажа.
+
+ghost-role-information-angry-slimes-name = Слайм
+
+ghost-role-information-paradox-clone-name = Парадоксальный клон
+
+ghost-role-information-paradox-clone-description = Ужасающая пространственно-временная аномалия телепортировала вас в другую реальность! Теперь вам нужно найти своего двойника, убить его и занять его место.
+
+ghost-role-information-mothership-core-name = Ядро Материнского Корабля
+
+ghost-role-information-mothership-core-desc = Вы ядро материнского корабля ксеноборгов, помогайте им размножаться, боргируя любой мозг, который они вам принесут.
+
+ghost-role-information-xenoborg-name = Ксеноборг
+
+ghost-role-information-xenoborg-desc = Странный киборг, созданный для репликации самого себя и захвата станции путем превращения любых разумных существ в ксеноборгов.

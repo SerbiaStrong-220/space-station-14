@@ -88,9 +88,6 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
             return false;
 
-        if (!entity.Comp.OverrideSkills.ContainsKey(skillTree) || !entity.Comp.Skills.ContainsKey(skillTree))
-            return false;
-
         var treeInfo = entity.Comp.OverrideSkills.TryGetValue(skillTree, out var overrideSkills) ? overrideSkills :
                         entity.Comp.Skills.TryGetValue(skillTree, out var skills) ? skills : null;
 
@@ -139,6 +136,40 @@ public sealed partial class ExperienceSystem : EntitySystem
             return false;
 
         return entity.Comp.OverrideSkills.TryGetValue(skillTree, out overrideInfo);
+    }
+
+    public bool TryGetSkillTreeLevel(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype>? skillTreeInput, [NotNullWhen(true)] out ProtoId<SkillPrototype>? skill)
+    {
+        skill = null;
+        if (skillTreeInput is not { } skillTree)
+            return false;
+
+        if (!_prototype.Resolve(skillTree, out var treeProto))
+            return false;
+
+        if (HasComp<BypassSkillCheckComponent>(entity))
+        {
+            skill = treeProto.SkillTree.Last();
+            return true;
+        }
+
+        if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
+            return false;
+
+        var treeInfo = entity.Comp.OverrideSkills.TryGetValue(skillTree, out var overrideSkills) ? overrideSkills :
+                        entity.Comp.Skills.TryGetValue(skillTree, out var skills) ? skills : null;
+
+        if (treeInfo is null)
+            return false;
+
+        skill = treeProto.SkillTree[treeInfo.SkillTreeIndex];
+        return true;
+    }
+
+    public int? GetSkillTreeLevel(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree)
+    {
+        TryGetSkillTreeLevels(entity, skillTree, out var level, out _);
+        return level;
     }
 
     public bool TryGetSkillTreeLevel(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, [NotNullWhen(true)] out int? level)

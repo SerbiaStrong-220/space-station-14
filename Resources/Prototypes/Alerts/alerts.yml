@@ -30,6 +30,7 @@
     - alertType: Stealthy
     - alertType: CountDown #SS220 CultYogg
     - alertType: ClinkGlasses #SS220-clink-glasses
+    - alertType: ActiveBlocking #SS220 shield rework
 
 - type: entity
   id: AlertSpriteView

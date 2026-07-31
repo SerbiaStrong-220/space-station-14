@@ -79,16 +79,18 @@
   - type: Clothing
     sprite: Clothing/Head/Helmets/swat.rsi
   - type: Armor #This is intentionally not spaceproof, when the time comes to port the values from SS13 this should be buffed from what it was.
+  #SS220 new armor begin
     modifiers:
       coefficients:
-        Blunt: 0.80
-        Slash: 0.80
-        Piercing: 0.80
-        Heat: 0.80
-        Radiation: 0.80
+        Blunt: 0.85
+        Slash: 0.85
+        Piercing: 0.85
+        Heat: 0.9
+        Radiation: 0.9
         Caustic: 0.95
   - type: ExplosionResistance
-    damageCoefficient: 0.75
+    damageCoefficient: 0.9
+  #SS220 new armor end
   - type: HideLayerClothing
     layers:
       Hair: HEAD
@@ -353,9 +355,9 @@
   description: An atmos fire helmet, able to keep the user cool in any situation.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Helmets/atmos_firehelmet.rsi
+    sprite: SS220/Clothing/Head/Helmets/atmos_firehelmet.rsi #SS220 atmos firesuit resprite
   - type: Clothing
-    sprite: Clothing/Head/Helmets/atmos_firehelmet.rsi
+    sprite: SS220/Clothing/Head/Helmets/atmos_firehelmet.rsi #SS220 atmos firesuit resprite
     quickEquip: true
   - type: IngestionBlocker
   - type: TemperatureProtection

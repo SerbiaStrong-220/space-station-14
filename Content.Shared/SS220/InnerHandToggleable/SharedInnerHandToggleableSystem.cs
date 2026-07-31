@@ -13,16 +13,16 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared.SS220.InnerHandToggleable;
 
-public sealed class SharedInnerHandToggleableSystem : EntitySystem
+public sealed partial class SharedInnerHandToggleableSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
-    [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly SharedHandsSystem _hand = default!;
-    [Dependency] private readonly SharedStuckOnEquipSystem _stuckOnEquip = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private ActionContainerSystem _actionContainer = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private SharedHandsSystem _hand = default!;
+    [Dependency] private SharedStuckOnEquipSystem _stuckOnEquip = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
 
     public const string InnerHandPrefix = "inner_";
 

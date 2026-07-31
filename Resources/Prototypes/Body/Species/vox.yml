@@ -293,6 +293,7 @@
     - id: Galactic
     - id: VoxPidgin
   # SS220-Add-Languages end
+  - type: VoxAccent #SS220-Vox Accent
 
 - type: entity
   parent: OrganBase

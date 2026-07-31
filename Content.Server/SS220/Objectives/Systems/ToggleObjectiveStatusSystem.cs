@@ -8,11 +8,11 @@ using Robust.Shared.Player;
 
 namespace Content.Server.SS220.Objectives.Systems;
 
-public sealed class ToggleObjectiveStatusSystem : EntitySystem
+public sealed partial class ToggleObjectiveStatusSystem : EntitySystem
 {
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly SharedObjectivesSystem _objectives = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private SharedObjectivesSystem _objectives = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
 
     public override void Initialize()
     {

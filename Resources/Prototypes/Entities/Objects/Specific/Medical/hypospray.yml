@@ -129,6 +129,12 @@
     solutions:
       hypospray:
         maxVol: 15
+  # SS220-injector-skill-begin
+  - type: LearningOnDoAfterEndWith
+    progress:
+      Medicine:
+        baseLearning: 0.05
+  # SS220-injector-skill-end
   - type: SolutionContainerVisuals
     maxFillLevels: 3
     fillBaseName: jetinjector_filled
@@ -547,12 +553,12 @@
   - type: SolutionContainerManager
     solutions:
       pen:
-        maxVol: 30
+        maxVol: 20 #SS220-CosmoMedipen-Tweak
         reagents:
           - ReagentId: Leporazine
             Quantity: 10
           - ReagentId: Barozine
-            Quantity: 20
+            Quantity: 10 #SS220-CosmoMedipen-Tweak
 
 - type: entity
   parent: [ChemicalMedipen, BaseSyndicateContraband]

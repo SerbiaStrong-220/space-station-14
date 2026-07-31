@@ -28,6 +28,7 @@
   abstract: true
   id: BaseSyringeMode
   transferAmounts:
+  - 1 # SS220-add-1-transfer
   - 5
   - 10
   - 15
@@ -36,6 +37,7 @@
   abstract: true
   id: BaseCryostasisSyringeMode
   transferAmounts:
+  - 1 # SS220-add-1-transfer
   - 5
   - 10
 
@@ -45,6 +47,7 @@
   mobTime: 2.5
   delayPerVolume: 0.05
   transferAmounts:
+  - 1 # SS220-add-1-transfer
   - 5
   - 10
   - 15

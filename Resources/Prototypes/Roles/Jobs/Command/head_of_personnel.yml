@@ -89,7 +89,7 @@
     shoes: ClothingShoesColorBrown
     id: HoPPDA
     gloves: ClothingHandsGlovesHop
-    ears: ClothingHeadsetAltCommand
+    #ears: ClothingHeadsetAltCommand #SS220 Headsetloadout
     belt: BoxFolderClipboardThreePapers
     eyes: ClothingEyesHudCommand
   storage:

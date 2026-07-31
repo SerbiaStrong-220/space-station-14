@@ -46,8 +46,6 @@
     maxModules: 0
     hasMindState: robot_e
     noMindState: robot_e_r
-  - type: TypingIndicator
-    proto: robot
   - type: Speech
     speechVerb: Robotic
     speechSounds: Borg

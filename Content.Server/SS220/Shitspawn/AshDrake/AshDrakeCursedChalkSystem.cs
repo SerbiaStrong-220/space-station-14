@@ -9,11 +9,11 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Server.SS220.Shitspawn.AshDrake;
 
-public sealed class AshDrakeCursedChalkSystem : EntitySystem
+public sealed partial class AshDrakeCursedChalkSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly DoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private DoAfterSystem _doAfter = default!;
 
     private static readonly AudioParams DrawAudio = AudioParams.Default.WithVolume(4f);
 

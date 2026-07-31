@@ -25,18 +25,6 @@
 
 - type: loadout
   id: ExpensiveCane
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: JobNanoTrasenRepresentative
-      time: 3600 # 1 hr
-  sponsorTierLoadoutEffects:
-  - !type:GroupLoadoutEffect
-    proto: SeniorDevTeamTier
-  - !type:GroupLoadoutEffect
-    proto: AdministratorSponsorTier
   storage:
     back:
     - ExpensiveCane
-  groupBy: "canes"

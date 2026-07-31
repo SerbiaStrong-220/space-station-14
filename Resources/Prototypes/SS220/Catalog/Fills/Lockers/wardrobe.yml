@@ -22,3 +22,7 @@
         - id: PrisonerIDCard
           amount: 2
         # SS220 PrisonerIDCard End
+        # SS220 PrisonerHeadset Begin
+        - id: ClothingHeadsetPrisoner
+          amount: 2
+        # SS220 PrisonerHeadset End

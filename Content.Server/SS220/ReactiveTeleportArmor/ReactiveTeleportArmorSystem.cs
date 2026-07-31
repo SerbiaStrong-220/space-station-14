@@ -22,18 +22,18 @@ using Timer = Robust.Shared.Timing.Timer;
 
 namespace Content.Server.SS220.ReactiveTeleportArmor;
 
-public sealed class ReactiveTeleportArmorSystem : EntitySystem
+public sealed partial class ReactiveTeleportArmorSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly PullingSystem _pullingSystem = default!;
-    [Dependency] private readonly EntityLookupSystem _lookupSystem = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly ExplosionSystem _explosion = default!;
-    [Dependency] private readonly SharedItemSystem _item = default!;
-    [Dependency] private readonly ClothingSystem _clothing = default!;
-    [Dependency] private readonly ItemToggleSystem _toggle = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private PullingSystem _pullingSystem = default!;
+    [Dependency] private EntityLookupSystem _lookupSystem = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private ExplosionSystem _explosion = default!;
+    [Dependency] private SharedItemSystem _item = default!;
+    [Dependency] private ClothingSystem _clothing = default!;
+    [Dependency] private ItemToggleSystem _toggle = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private readonly HashSet<Entity<MapGridComponent>> _targetGrids = [];

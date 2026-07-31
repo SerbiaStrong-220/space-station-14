@@ -210,12 +210,14 @@ corvax-chatsan-word-105 = шатл
 corvax-chatsan-replacement-105 = шаттл
 corvax-chatsan-word-106 = афк
 corvax-chatsan-replacement-106 = ссд
-corvax-chatsan-word-107 = админ
-corvax-chatsan-replacement-107 = бог
-corvax-chatsan-word-108 = админы
-corvax-chatsan-replacement-108 = боги
-corvax-chatsan-word-109 = админов
-corvax-chatsan-replacement-109 = богов
+# SS220 admin-replacement-fix (start)
+# corvax-chatsan-word-107 = админ
+# corvax-chatsan-replacement-107 = бог
+# corvax-chatsan-word-108 = админы
+# corvax-chatsan-replacement-108 = боги
+# corvax-chatsan-word-109 = админов
+# corvax-chatsan-replacement-109 = богов
+# SS220 admin-replacement-fix (end)
 corvax-chatsan-word-110 = забанят
 corvax-chatsan-replacement-110 = покарают
 corvax-chatsan-word-111 = бан

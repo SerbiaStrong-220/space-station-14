@@ -7,10 +7,10 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.Experience.Systems;
 
-public sealed partial class ExperienceSystem : EntitySystem
+public sealed partial class ExperienceSystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private INetManager _net = default!;
 
     private HashSet<Type> _subscribedToExperienceComponentTypes = [];
 

@@ -17,11 +17,11 @@ namespace Content.Server.SS220.CultYogg.MiGo;
 
 public sealed partial class MiGoSystem : SharedMiGoSystem
 {
-    [Dependency] private readonly StatusEffectsSystem _statusEffectsSystem = default!;
-    [Dependency] private readonly StomachSystem _stomach = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly JobSystem _jobSystem = default!;
-    [Dependency] private readonly CultYoggRuleSystem _cultRuleSystem = default!;
+    [Dependency] private StatusEffectsSystem _statusEffectsSystem = default!;
+    [Dependency] private StomachSystem _stomach = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private JobSystem _jobSystem = default!;
+    [Dependency] private CultYoggRuleSystem _cultRuleSystem = default!;
 
     private readonly ProtoId<ReagentPrototype> _ascensionReagent = "TheBloodOfYogg";
 

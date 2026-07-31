@@ -19,7 +19,9 @@ using Content.Shared.SS220.CultYogg.Buildings;
 using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.CultYogg.Rave;
 using Content.Shared.SS220.CultYogg.Sacrificials;
+using Content.Shared.SS220.Teleport;
 using Content.Shared.Verbs;
+using Content.Shared.Whitelist;
 using Content.Shared.Zombies;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
@@ -31,21 +33,22 @@ using System.Linq;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
 
-public abstract class SharedMiGoSystem : EntitySystem
+public abstract partial class SharedMiGoSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedMiGoErectSystem _miGoErectSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _userInterfaceSystem = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedMiGoErectSystem _miGoErectSystem = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedUserInterfaceSystem _userInterfaceSystem = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
@@ -60,6 +63,8 @@ public abstract class SharedMiGoSystem : EntitySystem
         SubscribeLocalEvent<MiGoComponent, MiGoEnslavementActionEvent>(OnMiGoEnslaveAction);
 
         SubscribeLocalEvent<MiGoComponent, BoundUIOpenedEvent>(OnBoundUIOpened);
+
+        SubscribeLocalEvent<MiGoComponent, AfterTeleportedEvent>(OnAfterTeleported);
 
         SubscribeLocalEvent<GetVerbsEvent<Verb>>(OnGetVerb);
 
@@ -177,13 +182,26 @@ public abstract class SharedMiGoSystem : EntitySystem
     #endregion
 
     #region Erect
-    private void MiGoErectAction(Entity<MiGoComponent> entity, ref MiGoErectActionEvent args)
+    private void MiGoErectAction(Entity<MiGoComponent> ent, ref MiGoErectActionEvent args)
     {
         //will wait when sw will update ui parts to copy paste, cause rn it has an errors
-        if (args.Handled || !TryComp<ActorComponent>(entity, out var actor))
+        if (args.Handled || !TryComp<ActorComponent>(ent, out var actor))
             return;
 
-        _miGoErectSystem.OpenUI(entity, actor);
+        EntityUid? currentGrid = Transform(ent).GridUid;
+
+        if (ent.Comp.ConstructionGridsBlacklist != null && _whitelist.IsValid(ent.Comp.ConstructionGridsBlacklist, currentGrid))
+        {
+            _popup.PopupClient(Loc.GetString("cult-yogg-cant-buid-on-grid"), ent, ent);
+            return;
+        }
+
+        _miGoErectSystem.OpenUI(ent, actor);
+    }
+
+    private void OnAfterTeleported(Entity<MiGoComponent> ent, ref AfterTeleportedEvent args)
+    {
+        _userInterfaceSystem.CloseUis(ent.Owner);
     }
     #endregion
 
@@ -236,8 +254,8 @@ public abstract class SharedMiGoSystem : EntitySystem
             BlockDuplicate = true,
             CancelDuplicate = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
-            DistanceThreshold = 2.5f,
-            MovementThreshold = 2.5f
+            DistanceThreshold = 2f,
+            MovementThreshold = 2f
         };
 
         var started = _doAfter.TryStartDoAfter(sacrificeDoAfter);
@@ -304,7 +322,7 @@ public abstract class SharedMiGoSystem : EntitySystem
             return false;
         }
 
-        if (!_mobState.IsAlive(target))
+        if (_mobState.IsDead(target))
         {
             reason = Loc.GetString("cult-yogg-enslave-must-be-alive");
             return false;

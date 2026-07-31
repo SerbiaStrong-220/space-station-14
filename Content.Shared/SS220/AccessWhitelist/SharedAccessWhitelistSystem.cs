@@ -5,9 +5,9 @@ using Content.Shared.Whitelist;
 
 namespace Content.Shared.SS220.AccessWhitelist;
 
-public sealed class SharedAccessWhitelistSystem : EntitySystem
+public sealed partial class SharedAccessWhitelistSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {

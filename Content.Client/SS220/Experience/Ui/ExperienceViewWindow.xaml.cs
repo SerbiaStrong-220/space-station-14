@@ -17,7 +17,8 @@ namespace Content.Client.SS220.Experience.Ui;
 [GenerateTypedNameReferences]
 public sealed partial class ExperienceViewWindow : FancyWindow
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+
     private ISawmill _sawmill = default!;
 
     public Action<PlayerChangeSkill>? OnSubmitChangeAction;

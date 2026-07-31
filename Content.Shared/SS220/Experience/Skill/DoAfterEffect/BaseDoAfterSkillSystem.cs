@@ -15,7 +15,7 @@ namespace Content.Shared.SS220.Experience.DoAfterEffect;
 public abstract partial class BaseDoAfterSkillSystem<TComp, TEvent> : SkillEntitySystem where TComp : BaseDoAfterSkillComponent
                                                                                     where TEvent : DoAfterEvent
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

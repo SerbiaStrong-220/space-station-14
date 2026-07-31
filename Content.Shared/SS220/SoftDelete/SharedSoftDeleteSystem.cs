@@ -7,10 +7,10 @@ namespace Content.Shared.SS220.SoftDelete;
 /// <summary>
 /// Allows to fully disable an entity without completely deleting it, and then restore it back.
 /// </summary>
-public sealed class SharedSoftDeleteSystem : EntitySystem
+public sealed partial class SharedSoftDeleteSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
 
     private EntityUid? PausedMap { get; set; }
 

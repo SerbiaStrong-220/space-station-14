@@ -6,9 +6,9 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Appearance;
 
-public sealed class ToggleAppearanceOnUseSystem : EntitySystem
+public sealed partial class ToggleAppearanceOnUseSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {

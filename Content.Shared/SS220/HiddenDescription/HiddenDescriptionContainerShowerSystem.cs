@@ -5,10 +5,10 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared.SS220.HiddenDescription;
 
-public sealed class HiddenDescriptionContainerShowerSystem : EntitySystem
+public sealed partial class HiddenDescriptionContainerShowerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedHiddenDescriptionSystem _hiddenDescription = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedHiddenDescriptionSystem _hiddenDescription = default!;
 
     public override void Initialize()
     {

@@ -15,9 +15,9 @@ namespace Content.Client.SS220.UserInterface.System.Chat.Controls.LanguageSettin
 [GenerateTypedNameReferences]
 public sealed partial class LanguageSettingsPopup : Popup
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly LanguageManager _languageManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private LanguageManager _languageManager = default!;
 
     private readonly Dictionary<LanguagePrototype, Button> _buttonsDict = new();
     private Button? _selectedLanguage;

@@ -5,15 +5,18 @@
   groups:
   - GroupTankHarness
   - ChiefMedicalOfficerHead
+  - ChiefMedicalOfficerHeadset #SS220 Headsetloadout
   - ChiefMedicalOfficerGlasses #SS220-TwoOne-Floppa-Iteration / ss220 cmo new
   - MedicalMask
   - ChiefMedicalOfficerJumpsuit
+  - MedicalsGloves #SS220 gloves-for-med
   - MedicalBackpack
   - ChiefMedicalOfficerOuterClothing
   - ChiefMedicalOfficerNeck
   - ChiefMedicalOfficerShoes
   - Glasses
   - SurvivalMedical
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
 #  - ChiefMedicalOfficerJobTrinkets
   - GroupSpeciesBreathToolMedical
@@ -29,12 +32,14 @@
   - MedicalDoctorHead
   - MedicalMask
   - MedicalDoctorJumpsuit
+  - MedicalsGloves #SS220 gloves-for-med
   - MedicalBackpack
   - MedicalDoctorOuterClothing
   - MedicalShoes
   - MedicalDoctorPDA
   - Glasses
   - SurvivalMedical
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
 #  - MedicalDoctorJobTrinkets
   - GroupSpeciesBreathToolMedical
@@ -50,9 +55,11 @@
   - GroupTankHarness
   - MedicalNeck #SS220-WhiteScarf
   - MedicalInternJumpsuit
+  - MedicalsGloves #SS220 gloves-for-med
   - MedicalBackpack
   - Glasses
   - SurvivalMedical
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
 #  - MedicalInternJobTrinkets
   - GroupSpeciesBreathToolMedical
@@ -66,11 +73,13 @@
   - MedicalNeck #SS220-WhiteScarf
   - MedicalMask
   - ChemistJumpsuit
+  - MedicalsGloves #SS220 gloves-for-med
   - ChemistBackpack
   - ChemistOuterClothing
   - MedicalShoes
   - Glasses
   - SurvivalMedical
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
 #  - ChemistJobTrinkets
   - GroupSpeciesBreathToolMedical
@@ -86,11 +95,13 @@
   - MedicalMask
 # - MedicalGlasses #SS220-Two Floppa Iteration
   - ParamedicJumpsuit
+  - MedicalsGloves #SS220 gloves-for-med
   - MedicalBackpack
   - ParamedicOuterClothing
   - ParamedicShoes
   - Glasses
   - SurvivalMedical
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   - ParamedicBelt #ss220 ParamedInterdyne
 #  - ParamedicJobTrinkets

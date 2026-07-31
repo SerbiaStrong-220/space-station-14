@@ -17,6 +17,8 @@
     - id: ClothingWristWatchGold # SS220 Wrist Watch
     - id: GlassCaseEngravedKnuckledusterFilled # SS220 New Qm highrisk
     - id: AstroNavCartridge
+    - id: ClothingOuterMechLoaderFull # SS220 AddMechToClothing
+    - id: DeviceCalculator # SS220 Calculator
     # - id: ClothingHandsKnuckleDustersQM # SS220-QM-own-knuckle-duster
     - id: PlushieLizardJobQuartermaster
       prob: 0.02
@@ -58,7 +60,7 @@
     - id: WeaponDisabler
     - id: ClothingWristWatchGold # SS220 Wrist Watch
     - id: ClothingEyesGlassesCommand
-    - id: OrganSkeletonPersonHead # A skull to accompany your skeleton crew
+    - id: OrganSkeletonAssistantPersonHead #SS220-AssistantSkeletonCaptainLocker
       conditions:
       - !type:PlayerCountCondition
         max: 15
