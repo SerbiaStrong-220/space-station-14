@@ -46,20 +46,6 @@
     maxModules: 0
     hasMindState: robot_e
     noMindState: robot_e_r
-  - type: Speech
-    speechVerb: Robotic
-    speechSounds: Borg
-    allowedEmotes:
-    - Laugh
-  - type: Vocal
-    sounds:
-      Unsexed: UnisexSilicon
-    wilhelmProbability: 0
-  - type: DamagedSiliconAccent
-  - type: UnblockableSpeech
-  - type: FootstepModifier
-    footstepSoundCollection:
-      collection: FootstepBorg
   - type: NpcFactionMember
     factions:
     - NanoTrasen
