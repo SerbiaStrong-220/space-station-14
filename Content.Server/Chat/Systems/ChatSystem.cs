@@ -516,41 +516,12 @@ public sealed partial class ChatSystem : SharedChatSystem
         name = FormattedMessage.EscapeText(name);
         // SS220-Add-Languages begin
         var languageMessage = _languageSystem.SanitizeMessage(source, message);
-        foreach (var (session, data) in GetRecipients(source, VoiceRange))
-        {
-            var entRange = MessageRangeCheck(session, data, range);
-            if (entRange == MessageRangeCheckResult.Disallowed)
-                continue;
+        var verb = Loc.GetString(_random.Pick(speech.SpeechVerbStrings));
 
-            if (session.AttachedEntity is not { Valid: true } playerEntity)
-                continue;
+        //SendInVoiceRange(ChatChannel.Local, message, wrappedMessage, source, range);
+        SendInVoiceRangeWithLanguage(languageMessage, name, verb, speech, source, range);
 
-            var listener = session.AttachedEntity.Value;
-            var scrambledMessage = languageMessage.GetMessage(listener, true);
-        // SS220-Add-Languages end
-
-            var wrappedMessage = Loc.GetString(speech.Bold ? "chat-manager-entity-say-bold-wrap-message" : "chat-manager-entity-say-wrap-message",
-                ("entityName", name),
-                ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
-                ("fontType", speech.FontId),
-                ("fontSize", speech.FontSize),
-                ("message", scrambledMessage /*SS220-Add-Languages*/));
-
-            //SS220-Add-Languages begin
-            var entHideChat = entRange == MessageRangeCheckResult.HideChat;
-            _chatManager.ChatMessageToOne(ChatChannel.Local, scrambledMessage, wrappedMessage, source, entHideChat, session.Channel);
-        }
-        //SS220-Add-Languages begin
         message = languageMessage.GetMessage(source, false);
-
-        var sourceWrappedMessage = Loc.GetString(speech.Bold ? "chat-manager-entity-say-bold-wrap-message" : "chat-manager-entity-say-wrap-message",
-            ("entityName", name),
-            ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
-            ("fontType", speech.FontId),
-            ("fontSize", speech.FontSize),
-            ("message", message));
-
-        _replay.RecordServerMessage(new ChatMessage(ChatChannel.Local, message, sourceWrappedMessage, GetNetEntity(source), null, MessageRangeHideChatForReplay(range)));
         var ev = new EntitySpokeEvent(source, message, originalMessage, null, null, languageMessage);
         RaiseLocalEvent(source, ev, true);
         //SS220-Add-Languages end
