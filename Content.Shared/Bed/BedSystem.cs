@@ -7,9 +7,9 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Emag.Systems;
 using Content.Shared.Metabolism;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Humanoid; //SS220-MicroFixesIPC
 using Content.Shared.Power;
 using Content.Shared.Power.EntitySystems;
+using Content.Shared.Whitelist; //SS220-MicroFixesIPC
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -26,6 +26,7 @@ public sealed class BedSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
     [Dependency] private readonly SharedPowerReceiverSystem _powerReceiver = default!;
     [Dependency] private readonly SleepingSystem _sleepingSystem = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!; //SS220-MicroFixesIPC
 
     [Dependency] private readonly EntityQuery<SleepingComponent> _sleepingQuery = default!;
 
@@ -153,12 +154,8 @@ public sealed class BedSystem : EntitySystem
                     continue;
 
                 //SS220-MicroFixesIPC begin
-                if (bedComponent.SpeciesBlacklist.Count > 0
-                    && TryComp<HumanoidProfileComponent>(healedEntity, out var profile)
-                    && bedComponent.SpeciesBlacklist.Contains(profile.Species))
-                {
+                if (_whitelist.IsWhitelistPass(bedComponent.Blacklist, healedEntity))
                     continue;
-                }
                 //SS220-MicroFixesIPC end
 
                 var damage = bedComponent.Damage;

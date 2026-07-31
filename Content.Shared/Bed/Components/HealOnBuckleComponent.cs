@@ -1,10 +1,7 @@
 using Content.Shared.Damage;
+using Content.Shared.Whitelist; //SS220-MicroFixesIPC
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-//SS220-MicroFixesIPC bedin
-using Content.Shared.Humanoid.Prototypes;
-using Robust.Shared.Prototypes;
-//SS220-MicroFixesIPC end
 
 namespace Content.Shared.Bed.Components
 {
@@ -43,10 +40,10 @@ namespace Content.Shared.Bed.Components
 
         //SS220-MicroFixesIPC begin
         /// <summary>
-        /// Species will not receive healing from this bed.
+        /// Blacklist for entities that should not receive treatment from the bed
         /// </summary>
         [DataField]
-        public List<ProtoId<SpeciesPrototype>> SpeciesBlacklist = [];
+        public EntityWhitelist? Blacklist;
         //SS220-MicroFixesIPC end
     }
 }
