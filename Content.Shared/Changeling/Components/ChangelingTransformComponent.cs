@@ -1,5 +1,7 @@
+// SS220 Changeling
 using Content.Shared.Changeling.Systems;
 using Content.Shared.Cloning;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -30,7 +32,13 @@ public sealed partial class ChangelingTransformComponent : Component
     /// Time it takes to Transform
     /// </summary>
     [DataField, AutoNetworkedField]
-    public TimeSpan TransformWindup = TimeSpan.FromSeconds(5);
+    public TimeSpan TransformWindup = TimeSpan.Zero;
+
+    /// <summary>
+    /// Chemical cost paid when a stored identity is selected.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 ChemicalCost = FixedPoint2.New(5);
 
     /// <summary>
     /// The noise used when attempting to transform
@@ -52,4 +60,3 @@ public sealed partial class ChangelingTransformComponent : Component
 
     public override bool SendOnlyToOwner => true;
 }
-

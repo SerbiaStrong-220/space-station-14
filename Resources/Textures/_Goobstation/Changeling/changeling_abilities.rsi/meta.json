@@ -1,0 +1,122 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Copied from Goob Station at commit cd55b544e9ee50f39555155dd4317fa410684c0f: https://github.com/Goob-Station/Goob-Station/tree/cd55b544e9ee50f39555155dd4317fa410684c0f/Resources/Textures/_Goobstation/Changeling/changeling_abilities.rsi . evolution_menu is the unchanged Goob state from that commit (byte-identical to the station14.ru image supplied during development). Original Goob attribution: base abilities taken and edited from Paradise Station wiki https://paradisestation.org/wiki/index.php/Changeling ; sting_transform and sting_armblade retextures by whateverusername0; absorb_biomatter by Ilya246 using elements from absorb_dna and chitinous_armor; void_adaption by the_biggestbruh using space_adapation as a base; fleshmend_status by the_biggestbruh using the fleshmend background as a base; awakened_instinct by the_biggestbruh; darkness_adaption from tgstation actions_changeling.dmi.",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "absorb_biomatter"
+        },
+        {
+            "name": "absorb_dna"
+        },
+        {
+            "name": "anatomic_panacea"
+        },
+        {
+            "name": "armblade"
+        },
+        {
+            "name": "augmented_eyesight"
+        },
+        {
+            "name": "biodegrade"
+        },
+        {
+            "name": "bone_shard"
+        },
+        {
+            "name": "chameleon_skin"
+        },
+        {
+            "name": "chitinous_armor"
+        },
+        {
+            "name": "epinephrine_overdose"
+        },
+        {
+            "name": "evolution_menu"
+        },
+        {
+            "name": "fleshmend"
+        },
+	{
+	    "name": "fleshmend_status"
+	},
+        {
+            "name": "hivemind_access"
+        },
+        {
+            "name": "lesser_form"
+        },
+        {
+            "name": "last_resort"
+        },
+        {
+            "name": "lay_egg"
+        },
+        {
+            "name": "organic_shield"
+        },
+        {
+            "name": "shriek_dissonant"
+        },
+        {
+            "name": "shriek_resonant"
+        },
+        {
+            "name": "space_adaptation"
+        },
+        {
+            "name": "stasis_enter"
+        },
+        {
+            "name": "stasis_exit"
+        },
+        {
+            "name": "sting_armblade"
+        },
+        {
+            "name": "sting_blind"
+        },
+        {
+            "name": "sting_cryo"
+        },
+        {
+            "name": "sting_extractdna"
+        },
+        {
+            "name": "sting_lethargic"
+        },
+        {
+            "name": "sting_mute"
+        },
+        {
+            "name": "sting_transform"
+        },
+        {
+            "name": "strained_muscles"
+        },
+        {
+            "name": "regrow"
+        },
+        {
+            "name": "transform"
+        },
+        {
+            "name": "transform_cycle"
+        },
+	{
+            "name": "void_adaptation"
+        },
+	{
+	    "name": "awakened_instinct"
+	},
+	{
+	    "name": "darkness_adaption"
+	}
+    ]
+}

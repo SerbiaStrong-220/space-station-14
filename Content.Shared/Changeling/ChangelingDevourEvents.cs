@@ -2,6 +2,7 @@
 using Content.Shared.DoAfter;
 using Robust.Shared.Serialization;
 
+// SS220 Changeling
 namespace Content.Shared.Changeling;
 
 /// <summary>
@@ -13,10 +14,22 @@ public sealed partial class ChangelingDevourActionEvent : EntityTargetActionEven
 /// A windup has either successfully been completed or has been canceled. If successful start the devouring DoAfter.
 /// </summary>
 [Serializable, NetSerializable]
-public sealed partial class ChangelingDevourWindupDoAfterEvent : SimpleDoAfterEvent;
+public sealed partial class ChangelingDevourWindupDoAfterEvent : SimpleDoAfterEvent
+{
+    public override bool IsDuplicate(DoAfterEvent other)
+    {
+        return other is ChangelingDevourWindupDoAfterEvent or ChangelingDevourConsumeDoAfterEvent;
+    }
+}
 
 /// <summary>
 /// The Consumption DoAfter has either successfully been completed or was canceled.
 /// </summary>
 [Serializable, NetSerializable]
-public sealed partial class ChangelingDevourConsumeDoAfterEvent : SimpleDoAfterEvent;
+public sealed partial class ChangelingDevourConsumeDoAfterEvent : SimpleDoAfterEvent
+{
+    public override bool IsDuplicate(DoAfterEvent other)
+    {
+        return other is ChangelingDevourWindupDoAfterEvent or ChangelingDevourConsumeDoAfterEvent;
+    }
+}

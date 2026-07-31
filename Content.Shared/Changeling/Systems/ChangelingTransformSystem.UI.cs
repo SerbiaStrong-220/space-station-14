@@ -1,4 +1,5 @@
-﻿using Robust.Shared.Serialization;
+﻿// SS220 Changeling
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Changeling.Systems;
 
@@ -26,8 +27,21 @@ public sealed class ChangelingTransformIdentityDropMessage(NetEntity targetIdent
     public readonly NetEntity TargetIdentity = targetIdentity;
 }
 
+// SS220 changeling transformation sting begin
+/// <summary>
+/// Sent when a changeling selects the identity that should be imposed on a previously selected sting target.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class ChangelingTransformationStingIdentitySelectMessage(NetEntity targetIdentity) : BoundUserInterfaceMessage
+{
+    public readonly NetEntity TargetIdentity = targetIdentity;
+}
+// SS220 changeling transformation sting end
+
 [Serializable, NetSerializable]
 public enum ChangelingTransformUiKey : byte
 {
     Key,
+    // SS220 changeling transformation sting
+    TransformationSting,
 }

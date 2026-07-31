@@ -17,6 +17,11 @@ store-discounted-items = Discounts
 
 # Revenant
 store-category-abilities = Abilities
+# SS220 Changeling
+store-category-changeling-offensive = Combat Mutations
+store-category-changeling-defensive = Defensive Mutations
+store-category-changeling-utility = Utility Mutations
+store-category-changeling-stings = Sting Mutations
 
 # Wizard
 store-caregory-spellbook-offensive = Offensive Spells

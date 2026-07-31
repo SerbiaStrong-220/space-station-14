@@ -1,0 +1,14 @@
+# SS220 Changeling
+- type: entity
+  parent: BaseAction
+  id: ActionChangelingExtractDna
+  name: Extract DNA Sting
+  description: Silently extract and store a humanoid genome.
+  components:
+  - type: Action
+    icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: sting_extractdna }
+    useDelay: 1
+    temporary: false
+  - type: TargetAction
+  - type: EntityTargetAction
+    event: !type:ChangelingExtractDnaActionEvent

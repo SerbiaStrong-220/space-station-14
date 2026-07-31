@@ -1,0 +1,12 @@
+# SS220 Changeling
+- type: polymorph
+  id: ChangelingLesserForm
+  configuration:
+    entity: MobMonkey
+    forced: true
+    inventory: Drop
+    transferName: true
+    transferDamage: true
+    transferReagents: true
+    revertOnCrit: false
+    revertOnDeath: false

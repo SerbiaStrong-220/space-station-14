@@ -49,10 +49,18 @@
   components:
   - type: Store
     name: store-preset-name-changeling
+    # SS220 Changeling-begin
     categories:
-    - ChangelingAbilities
+    - ChangelingOffensive
+    - ChangelingDefensive
+    - ChangelingUtility
+    - ChangelingStings
     currencyWhitelist:
-    - ChangelingDNA
+    - ChangelingEvolution
+    balance:
+      ChangelingEvolution: 20
+    ownerOnly: true
+    # SS220 Changeling-end
 
 - type: entity
   parent: StorePresetUplink

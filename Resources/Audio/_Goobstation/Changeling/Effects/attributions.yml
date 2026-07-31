@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# SS220 Changeling
+
+- files: ["armour_transform.ogg", "armour_strip.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "made by thebiggestbruh using samples from /Organs and /Bone"
+  source: "https://github.com/Goob-Station/Goob-Station/tree/cd55b544e9ee50f39555155dd4317fa410684c0f/Resources/Audio/_Goobstation/Changeling/Effects"

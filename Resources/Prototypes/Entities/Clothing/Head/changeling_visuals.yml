@@ -1,0 +1,27 @@
+# SS220 Changeling
+- type: entity
+  parent: ClothingHeadBase
+  id: ChangelingChitinousHelmetVisual
+  name: chitinous helmet
+  description: A living shell formed from changeling biomass.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Changeling/ling_armor_helmet.rsi
+  - type: Clothing
+    sprite: _Goobstation/Changeling/ling_armor_helmet.rsi
+    equippedPrefix: transform
+  - type: Unremoveable
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ChangelingOrganicSpaceSuitHelmetVisual
+  name: organic space helmet
+  description: A pressure-resistant shell formed from changeling biomass.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Changeling/ling_spacesuit_helmet.rsi
+  - type: Clothing
+    sprite: _Goobstation/Changeling/ling_spacesuit_helmet.rsi
+  - type: Unremoveable

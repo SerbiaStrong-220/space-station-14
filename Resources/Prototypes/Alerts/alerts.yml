@@ -3,34 +3,38 @@
   # List below can contain alert type or category, if both are present the id will take precedence.
   # If item is not in list it will go at the bottom (ties broken by alert type enum value)
   id: BaseAlertOrder
+  # SS220 Changeling alert order-begin
   order:
-    - alertType: BloodPoints #SS220 Spider queen antag
-    - category: Health
-    - category: Stamina
-    - alertType: SuitPower
-    - category: Internals
-    - alertType: Fire
-    - alertType: Handcuffed
-    - alertType: Ensnared
-    - category: Buckled
-    - alertType: Pulling
-    - alertType: Walking
-    - category: Piloting
-    - alertType: Corporeal
-    - alertType: Stun
-    - category: Breathing # Vox gang not calling this oxygen
-    - category: Pressure
-    - alertType: Bleed
-    - category: Temperature
-    - category: Hunger
-    - category: Thirst
-    - alertType: Magboots
-    - alertType: Rooted
-    - alertType: Pacified
-    - alertType: Stealthy
-    - alertType: CountDown #SS220 CultYogg
-    - alertType: ClinkGlasses #SS220-clink-glasses
-    - alertType: ActiveBlocking #SS220 shield rework
+  - alertType: ChangelingApexTarget
+  - alertType: ChangelingChemicals
+  - alertType: BloodPoints #SS220 Spider queen antag
+  - category: Health
+  - category: Stamina
+  - alertType: SuitPower
+  - category: Internals
+  - alertType: Fire
+  - alertType: Handcuffed
+  - alertType: Ensnared
+  - category: Buckled
+  - alertType: Pulling
+  - alertType: Walking
+  - category: Piloting
+  - alertType: Corporeal
+  - alertType: Stun
+  - category: Breathing # Vox gang not calling this oxygen
+  - category: Pressure
+  - alertType: Bleed
+  - category: Temperature
+  - category: Hunger
+  - category: Thirst
+  - alertType: Magboots
+  - alertType: Rooted
+  - alertType: Pacified
+  - alertType: Stealthy
+  - alertType: CountDown #SS220 CultYogg
+  - alertType: ClinkGlasses #SS220-clink-glasses
+  - alertType: ActiveBlocking #SS220 shield rework
+  # SS220 Changeling alert order-end
 
 - type: entity
   id: AlertSpriteView

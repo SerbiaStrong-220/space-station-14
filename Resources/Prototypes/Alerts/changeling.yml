@@ -1,0 +1,38 @@
+# SS220 Changeling
+- type: alert
+  id: ChangelingApexTarget
+  icons:
+  - sprite: /Textures/Objects/Devices/pinpointer.rsi
+    state: pinondirect
+  name: alerts-changeling-apex-target-name
+  description: alerts-changeling-apex-target-desc
+
+- type: alert
+  id: ChangelingChemicals
+  icons:
+  - sprite: /Textures/_Goobstation/Changeling/changeling_chemicals.rsi
+    state: "0"
+  alertViewEntity: AlertChangelingChemicalsSpriteView
+  name: alerts-changeling-chemicals-name
+  description: alerts-changeling-chemicals-desc
+
+- type: entity
+  id: AlertChangelingChemicalsSpriteView
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: GenericCounterAlert
+    alertSize: 32, 32
+    glyphWidth: 5
+  - type: Sprite
+    layers:
+    - sprite: /Textures/_Goobstation/Changeling/changeling_chemicals.rsi
+      state: "0"
+      map: [ "enum.AlertVisualLayers.Base" ]
+    - sprite: /Textures/Interface/Alerts/essence_counter.rsi
+      state: "0"
+      map: [ "1" ]
+      offset: 0.32, 0
+    - sprite: /Textures/Interface/Alerts/essence_counter.rsi
+      state: "0"
+      map: [ "10" ]
+      offset: 0.16, 0

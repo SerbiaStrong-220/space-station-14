@@ -1,0 +1,273 @@
+# SS220 Changeling
+- type: entity
+  abstract: true
+  parent: BaseAction
+  id: BaseChangelingUtilityAction
+  components:
+  - type: Action
+    icon: { sprite: Interface/Actions/changeling.rsi, state: transform }
+
+- type: entity
+  abstract: true
+  parent: BaseChangelingUtilityAction
+  id: BaseChangelingStingAction
+  components:
+  - type: Action
+    icon: { sprite: Interface/Actions/changeling.rsi, state: devour }
+  - type: TargetAction
+
+# SS220 changeling Apex tracker begin
+- type: entity
+  parent: BaseChangelingUtilityAction
+  id: ActionChangelingApexPredator
+  name: Apex Predator
+  description: Choose a living crew member and track them with a directional HUD arrow.
+  components:
+  - type: Action
+    icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: awakened_instinct }
+  - type: InstantAction
+    event: !type:ChangelingApexPredatorActionEvent
+# SS220 changeling Apex tracker end
+
+- type: entity
+  parent: BaseChangelingUtilityAction
+  id: ActionChangelingAugmentedEyesight
+  name: Augmented Eyesight
+  description: Toggle evolved eye protection and penetrating vision.
+  components:
+  - type: Action
+    checkCanInteract: false
+    itemIconStyle: BigAction
+    icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: augmented_eyesight }
+  - type: InstantAction
+    event: !type:ChangelingAugmentedEyesightActionEvent
+
+- type: entity
+  parent: BaseChangelingUtilityAction
+  id: ActionChangelingChameleonSkin
+  name: Chameleon Skin
+  description: Spend chemicals to become nearly invisible; toggle again to reveal yourself.
+  components:
+  - type: Action
+    checkCanInteract: false
+    icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: chameleon_skin }
+  - type: InstantAction
+    event: !type:ChangelingChameleonSkinActionEvent
+
+- type: entity
+  parent: BaseChangelingUtilityAction
+  id: ActionChangelingContortBody
+  name: Contort Body
+  description: Reshape your body to slip beneath unbolted doors without opening them.
+  components:
+  - type: Action
+    checkCanInteract: false
+    icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: transform_cycle }
+  - type: InstantAction
+    event: !type:ChangelingContortBodyActionEvent
+
+- type: entity
+  parent: BaseChangelingUtilityAction
+  id: ActionChangelingDigitalCamouflage
+  name: Digital Camouflage
+  description: Toggle interference that replaces you with static in station AI camera vision.
+  components:
+  - type: Action
+    checkCanInteract: false
+    icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: chameleon_skin }
+  - type: InstantAction
+    event: !type:ChangelingDigitalCamouflageActionEvent
+
+- type: entity
+  parent: BaseChangelingUtilityAction
+  id: ActionChangelingHivemind
+  name: Hivemind Access
+  description: Spend chemicals to join the hive and synchronize stored genomes.
+  components:
+  - type: Action
+    checkCanInteract: false
+    icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: hivemind_access }
+  - type: InstantAction
+    event: !type:ChangelingHivemindActionEvent
+
+# SS220 changeling mutations begin
+- type: entity
+  parent: BaseChangelingUtilityAction
+  id: ActionChangelingDarknessAdaptation
+  name: Darkness Adaptation
+  description: Blend into actual darkness at the cost of slower chemical regeneration. Light reveals you.
+  components:
+  - type: Action
+    checkCanInteract: false
+    icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: darkness_adaption }
+  - type: InstantAction
+    event: !type:ChangelingDarknessAdaptationActionEvent
+      chemicalCost: 10
+      regenerationModifier: 0.85
+      darknessVisibility: 0.2
+      lightSearchRadius: 16
+      lightThreshold: 0.15
+
+- type: entity
+  parent: BaseChangelingUtilityAction
+  id: ActionChangelingVoidAdaptation
+  name: Void Adaptation
+  description: Adapt your body to vacuum and extreme temperatures while continuously consuming chemicals.
+  components:
+  - type: Action
+    checkCanInteract: false
+    icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: void_adaptation }
+  - type: InstantAction
+    event: !type:ChangelingVoidAdaptationActionEvent
+      chemicalCost: 20
+      upkeepCost: 2
+      temperatureCoefficient: 0.1
+# SS220 changeling mutations end
+
+- type: entity
+  parent: BaseChangelingUtilityAction
+  id: ActionChangelingLesserForm
+  name: Lesser Form
+  description: Shed all equipment and assume the form of a monkey.
+  components:
+  - type: Action
+    checkCanInteract: false
+    icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: lesser_form }
+  - type: InstantAction
+    event: !type:ChangelingLesserFormActionEvent
+
+- type: entity
+  parent: BaseChangelingUtilityAction
+  id: ActionChangelingHumanForm
+  name: Human Form
+  description: Return from lesser form to your humanoid body.
+  components:
+  - type: Action
+    checkCanInteract: false
+    icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: regrow }
+  - type: InstantAction
+    event: !type:ChangelingHumanFormActionEvent
+
+- type: entity
+  parent: BaseChangelingUtilityAction
+  id: ActionChangelingMimicVoice
+  name: Mimic Voice
+  description: Cycle through the voices of stored identities; cycle past the end to disable.
+  components:
+  - type: Action
+    icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: transform }
+  - type: InstantAction
+    event: !type:ChangelingMimicVoiceActionEvent
+
+- type: entity
+  parent: BaseChangelingUtilityAction
+  id: ActionChangelingOrganicSpaceSuit
+  name: Organic Space Suit
+  description: Toggle a pressure- and temperature-resistant shell.
+  components:
+  - type: Action
+    checkCanInteract: false
+    icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: space_adaptation }
+  - type: InstantAction
+    event: !type:ChangelingOrganicSpaceSuitActionEvent
+
+- type: entity
+  parent: BaseChangelingUtilityAction
+  id: ActionChangelingDissonantShriek
+  name: Dissonant Shriek
+  description: Emit an electromagnetic pulse around yourself.
+  components:
+  - type: Action
+    useDelay: 5
+    checkCanInteract: false
+    icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: shriek_dissonant }
+  - type: InstantAction
+    event: !type:ChangelingDissonantShriekActionEvent
+
+- type: entity
+  parent: BaseChangelingUtilityAction
+  id: ActionChangelingSpreadInfestation
+  name: Spread Infestation
+  description: Release two rapidly maturing hostile spiders. Requires seven absorbed genomes.
+  components:
+  - type: Action
+    useDelay: 10
+    icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: absorb_biomatter }
+  - type: InstantAction
+    event: !type:ChangelingSpreadInfestationActionEvent
+
+- type: entity
+  parent: BaseChangelingStingAction
+  id: ActionChangelingMuteSting
+  name: Mute Sting
+  description: Silently prevent a victim from speaking for a short time.
+  components:
+  - type: Action
+    icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: sting_mute }
+  - type: EntityTargetAction
+    event: !type:ChangelingMuteStingActionEvent
+
+- type: entity
+  parent: BaseChangelingStingAction
+  id: ActionChangelingBlindSting
+  name: Blind Sting
+  description: Silently blind a victim and permanently damage their eyesight.
+  components:
+  - type: Action
+    icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: sting_blind }
+  - type: EntityTargetAction
+    event: !type:ChangelingBlindStingActionEvent
+
+- type: entity
+  parent: BaseChangelingStingAction
+  id: ActionChangelingCryogenicSting
+  name: Cryogenic Sting
+  description: Inject a victim with a freezing compound.
+  components:
+  - type: Action
+    icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: sting_cryo }
+  - type: EntityTargetAction
+    event: !type:ChangelingCryogenicStingActionEvent
+
+- type: entity
+  parent: BaseChangelingStingAction
+  id: ActionChangelingLethargicSting
+  name: Lethargic Sting
+  description: Inject a nonlethal compound that slows and incapacitates a victim.
+  components:
+  - type: Action
+    icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: sting_lethargic }
+  - type: EntityTargetAction
+    event: !type:ChangelingLethargicStingActionEvent
+
+- type: entity
+  parent: BaseChangelingStingAction
+  id: ActionChangelingFakeArmbladeSting
+  name: Fake Armblade Sting
+  description: Silently force a victim to grow a weak, temporary arm blade.
+  components:
+  - type: Action
+    icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: sting_armblade }
+  - type: EntityTargetAction
+    canTargetSelf: false
+    event: !type:ChangelingFakeArmbladeStingActionEvent
+
+# SS220 changeling transformation sting begin
+- type: entity
+  parent: BaseChangelingStingAction
+  id: ActionChangelingTransformationSting
+  name: Transformation Sting
+  description: Choose a stored identity and temporarily force a living humanoid victim to assume it.
+  components:
+  - type: Action
+    icon: { sprite: _Goobstation/Changeling/changeling_abilities.rsi, state: sting_transform }
+  - type: EntityTargetAction
+    canTargetSelf: false
+    whitelist:
+      components:
+      - HumanoidProfile
+      - MobState
+    event: !type:ChangelingTransformationStingActionEvent
+      chemicalCost: 40
+      stingRange: 1.5
+# SS220 changeling transformation sting end

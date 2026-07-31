@@ -1,0 +1,120 @@
+# SS220 Changeling
+- type: listing
+  id: ChangelingArmBladeMutation
+  name: changeling-arm-blade-name
+  description: changeling-arm-blade-desc
+  productAction: ActionChangelingArmBlade
+  applyToMob: true
+  cost: { ChangelingEvolution: 4 }
+  categories: [ ChangelingOffensive ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]
+
+- type: listing
+  id: ChangelingBoneShardMutation
+  name: changeling-bone-shard-name
+  description: changeling-bone-shard-desc
+  productAction: ActionChangelingBoneShard
+  applyToMob: true
+  cost: { ChangelingEvolution: 3 }
+  categories: [ ChangelingOffensive ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]
+
+- type: listing
+  id: ChangelingResonantShriekMutation
+  name: changeling-resonant-shriek-name
+  description: changeling-resonant-shriek-desc
+  productAction: ActionChangelingResonantShriek
+  applyToMob: true
+  cost: { ChangelingEvolution: 2 }
+  categories: [ ChangelingOffensive ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]
+
+- type: listing
+  id: ChangelingSwapFormsMutation
+  name: changeling-swap-forms-name
+  description: changeling-swap-forms-desc
+  productAction: ActionChangelingSwapForms
+  applyToMob: true
+  cost: { ChangelingEvolution: 2 }
+  categories: [ ChangelingUtility ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]
+
+- type: listing
+  id: ChangelingLastResortMutation
+  name: changeling-last-resort-name
+  description: changeling-last-resort-desc
+  productAction: ActionChangelingLastResort
+  applyToMob: true
+  cost: { ChangelingEvolution: 2 }
+  categories: [ ChangelingDefensive ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]
+
+- type: listing
+  id: ChangelingBiodegradeMutation
+  name: changeling-biodegrade-name
+  description: changeling-biodegrade-desc
+  productAction: ActionChangelingBiodegrade
+  applyToMob: true
+  cost: { ChangelingEvolution: 4 }
+  categories: [ ChangelingDefensive ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]
+
+- type: listing
+  id: ChangelingEpinephrineMutation
+  name: changeling-epinephrine-name
+  description: changeling-epinephrine-desc
+  productAction: ActionChangelingEpinephrine
+  applyToMob: true
+  cost: { ChangelingEvolution: 4 }
+  categories: [ ChangelingDefensive ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]
+
+- type: listing
+  id: ChangelingFleshmendMutation
+  name: changeling-fleshmend-name
+  description: changeling-fleshmend-desc
+  productAction: ActionChangelingFleshmend
+  applyToMob: true
+  cost: { ChangelingEvolution: 5 }
+  categories: [ ChangelingDefensive ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]
+
+- type: listing
+  id: ChangelingOrganicShieldMutation
+  name: changeling-organic-shield-name
+  description: changeling-organic-shield-desc
+  productAction: ActionChangelingOrganicShield
+  applyToMob: true
+  cost: { ChangelingEvolution: 2 }
+  categories: [ ChangelingDefensive ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]
+
+- type: listing
+  id: ChangelingChitinousArmorMutation
+  name: changeling-chitinous-armor-name
+  description: changeling-chitinous-armor-desc
+  productAction: ActionChangelingChitinousArmor
+  applyToMob: true
+  cost: { ChangelingEvolution: 4 }
+  categories: [ ChangelingDefensive ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]
+
+- type: listing
+  id: ChangelingAnatomicPanaceaMutation
+  name: changeling-anatomic-panacea-name
+  description: changeling-anatomic-panacea-desc
+  productAction: ActionChangelingAnatomicPanacea
+  applyToMob: true
+  cost: { ChangelingEvolution: 2 }
+  categories: [ ChangelingDefensive ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]
+
+- type: listing
+  id: ChangelingStrainedMusclesMutation
+  name: changeling-strained-muscles-name
+  description: changeling-strained-muscles-desc
+  productAction: ActionChangelingStrainedMuscles
+  applyToMob: true
+  cost: { ChangelingEvolution: 2 }
+  categories: [ ChangelingDefensive ]
+  conditions: [ !type:ListingLimitedStockCondition { stock: 1 } ]

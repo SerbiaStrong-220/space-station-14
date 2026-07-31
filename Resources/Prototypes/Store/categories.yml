@@ -122,11 +122,27 @@
   id: PAIAbilities
   name: store-category-abilities
 
-#changeling
-#todo: add actual categories when changeling design/abilities are fleshed out
+# SS220 Changeling-begin
 - type: storeCategory
-  id: ChangelingAbilities
-  name: store-category-abilities
+  id: ChangelingOffensive
+  name: store-category-changeling-offensive
+  priority: 0
+
+- type: storeCategory
+  id: ChangelingDefensive
+  name: store-category-changeling-defensive
+  priority: 1
+
+- type: storeCategory
+  id: ChangelingUtility
+  name: store-category-changeling-utility
+  priority: 2
+
+- type: storeCategory
+  id: ChangelingStings
+  name: store-category-changeling-stings
+  priority: 3
+# SS220 Changeling-end
 
 - type: storeCategory
   id: DiscountedItems
