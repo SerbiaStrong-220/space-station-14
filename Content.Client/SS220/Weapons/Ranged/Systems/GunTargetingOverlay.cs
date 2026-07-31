@@ -10,17 +10,17 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.SS220.Weapons;
 
-public sealed class GunTargetingOverlay : Overlay
+public sealed partial class GunTargetingOverlay : Overlay
 {
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
     private IEntityManager _entManager;
-    private readonly IEyeManager _eye;
-    private readonly IGameTiming _timing;
-    private readonly IInputManager _input;
-    private readonly IPlayerManager _player;
-    private readonly GunSystem _guns;
-    private readonly SharedTransformSystem _transform;
+    private IEyeManager _eye;
+    private IGameTiming _timing;
+    private IInputManager _input;
+    private IPlayerManager _player;
+    private GunSystem _guns;
+    private SharedTransformSystem _transform;
 
     public GunTargetingOverlay(IEntityManager entManager, IEyeManager eyeManager, IGameTiming timing, IInputManager input, IPlayerManager player, GunSystem system, SharedTransformSystem transform)
     {
