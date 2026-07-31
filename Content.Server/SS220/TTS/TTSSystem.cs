@@ -136,12 +136,12 @@ public sealed partial class TTSSystem : SharedTTSSystem
         SendTtsMessage(new PlayTtsMessage { AudioData = audioData }, args.SenderSession);
     }
 
-    public async Task<ReferenceCounter<TtsAudioData>.Handle?> ConvertTextToSpeech(string text, ServerTtsMetadata meta)
+    public async Task<TtsResponse.Reference?> ConvertTextToSpeech(string text, ServerTtsMetadata meta)
     {
         return await ConvertTextToSpeech(text, meta.SpeakerMeta.VoiceId, meta.Kind);
     }
 
-    public async Task<ReferenceCounter<TtsAudioData>.Handle?> ConvertTextToSpeech(string text, ProtoId<TTSVoicePrototype>? protoId, TtsKind kind)
+    public async Task<TtsResponse.Reference?> ConvertTextToSpeech(string text, ProtoId<TTSVoicePrototype>? protoId, TtsKind kind)
     {
         if (protoId == null && !TryGetDefaultPreferredVoice(out protoId))
             return null;
@@ -152,7 +152,7 @@ public sealed partial class TTSSystem : SharedTTSSystem
         return await ConvertTextToSpeech(text, proto.Provider, proto.Speaker, kind);
     }
 
-    public async Task<ReferenceCounter<TtsAudioData>.Handle?> ConvertTextToSpeech(string text, TtsProvider provider, string speaker, TtsKind kind)
+    public async Task<TtsResponse.Reference?> ConvertTextToSpeech(string text, TtsProvider provider, string speaker, TtsKind kind)
     {
         if (!IsProviderEnabled(provider))
             return null;
@@ -160,9 +160,8 @@ public sealed partial class TTSSystem : SharedTTSSystem
         try
         {
             var textSanitized = Sanitize(text);
-            if (textSanitized == "") return default;
-            if (char.IsLetter(textSanitized[^1]))
-                textSanitized += ".";
+            if (textSanitized == "")
+                return null;
 
             var ssmlTraits = SoundTraits.RateFast;
             if (kind == TtsKind.Whisper)
@@ -179,8 +178,7 @@ public sealed partial class TTSSystem : SharedTTSSystem
         }
         catch (Exception e)
         {
-            // Catch TTS exceptions to prevent a server crash.
-            Log.Error($"TTS System error: {e.Message}");
+            Log.Error(e.Message);
             return null;
         }
     }
@@ -258,7 +256,7 @@ public sealed partial class TTSSystem : SharedTTSSystem
 
     private sealed class TtsCache()
     {
-        private readonly ConcurrentDictionary<TtsCacheKey, TTSResponse> _lookup = new();
+        private readonly ConcurrentDictionary<TtsCacheKey, TtsResponse.Reference> _lookup = new();
         private readonly ConcurrentQueue<TtsCacheKey> _keysQueue = new();
 
         public int Limit
@@ -274,26 +272,25 @@ public sealed partial class TTSSystem : SharedTTSSystem
             Limit = limit;
         }
 
-        public void Cache(TtsCacheKey key, TTSResponse value)
+        public void Cache(TtsCacheKey key, TtsResponse value)
         {
             var currentCount = _lookup.Count;
             while (currentCount > 0 && currentCount + 1 > Limit)
             {
                 if (_keysQueue.TryDequeue(out var firstKey) && _lookup.TryRemove(firstKey, out var reuseBuffer))
-                    reuseBuffer.GetHandle().Dispose();
+                    reuseBuffer.GetReference().Dispose();
 
                 currentCount = _lookup.Count;
             }
 
             if (Limit != 0)
             {
-                value.GetHandle();
-                _lookup[key] = value;
+                _lookup[key] = value.GetReference();
                 _keysQueue.Enqueue(key);
             }
         }
 
-        public bool TryGet(TtsCacheKey key, [NotNullWhen(true)] out TTSResponse? responce)
+        public bool TryGet(TtsCacheKey key, [NotNullWhen(true)] out TtsResponse.Reference? responce)
         {
             if (Limit == 0)
             {
@@ -315,7 +312,7 @@ public sealed partial class TTSSystem : SharedTTSSystem
             while (_lookup.Count > Limit)
             {
                 if (_keysQueue.TryDequeue(out var firstKey) && _lookup.TryRemove(firstKey, out var reuseBuffer))
-                    reuseBuffer.GetHandle().Dispose();
+                    reuseBuffer.GetReference().Dispose();
             }
 
         }
@@ -343,50 +340,51 @@ public sealed partial class TTSSystem : SharedTTSSystem
 public class ReferenceCounter<T>(T value)
 {
     public T Value = value;
-    public int ReferenceCount => _referenceCount;
+    public int ReferenceCount { get; private set; } = 0;
 
-    private int _referenceCount = 0;
-
-    public Handle GetHandle()
+    public Reference GetReference()
     {
-        _referenceCount++;
+        ReferenceCount++;
         return new(this);
     }
 
-    protected virtual void OnHandleDisposed()
+    protected virtual void OnReferenceDisposed()
     {
-        _referenceCount--;
+        ReferenceCount--;
     }
 
-    public struct Handle(ReferenceCounter<T> counter) : IDisposable
+    public struct Reference(ReferenceCounter<T> counter) : IDisposable
     {
         private readonly ReferenceCounter<T> _counter = counter;
-        private bool _isValid = true;
+        private bool _disposed = false;
 
         public void Dispose()
         {
-            if (!_isValid) return;
-            _isValid = false;
-            _counter.OnHandleDisposed();
+            if (_disposed)
+                return;
+
+            _disposed = true;
+            _counter.OnReferenceDisposed();
         }
 
-        public readonly Handle GetHandle()
+        public readonly Reference GetReference()
         {
-            return _counter.GetHandle();
+            return _counter.GetReference();
         }
 
-        public readonly bool TryGetValue([NotNullWhen(true)] out T value)
+        public readonly bool TryGetValue([NotNullWhen(true)] out T? value)
         {
             value = _counter.Value;
-            return _isValid;
+            return _disposed && value != null;
         }
     }
 }
-public static class ReferenceCounterExtensions
+
+public static class ReferenceCounterExtentions
 {
-    public static bool TryGetValue<T>(this ReferenceCounter<T>.Handle? handle, [NotNullWhen(true)] out T? value)
+    public static bool TryGetValue<T>(this ReferenceCounter<T>.Reference? reference, [NotNullWhen(true)] out T? value)
     {
         value = default;
-        return handle.HasValue && handle.Value.TryGetValue(out value);
+        return reference != null && reference.Value.TryGetValue(out value);
     }
 }

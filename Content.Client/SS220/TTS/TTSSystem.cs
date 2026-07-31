@@ -212,7 +212,7 @@ public sealed partial class TTSSystem
 
     private void QueuePlayTts(TtsAudioData data, TtsMetadata metadata, EntityUid? sourceUid = null, AudioParams? audioParams = null, bool globally = false)
     {
-        if (data.Length == 0)
+        if (data.RentedLength == 0)
             return;
 
         var finalParams = audioParams ?? AudioParams.Default;

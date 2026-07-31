@@ -33,6 +33,10 @@ public sealed partial class TTSSystem
         text = DigitsRegex().Replace(text, ReplaceWord2Num);
 
         text = text.Trim();
+
+        if (char.IsLetter(text[^1]))
+            text += ".";
+
         return text;
     }
 

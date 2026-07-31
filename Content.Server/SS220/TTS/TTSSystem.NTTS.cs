@@ -29,9 +29,9 @@ public partial class TTSSystem
         public static readonly HttpClient HttpClient = new();
         public static readonly TtsCache Cache = new();
 
-        private static readonly ConcurrentDictionary<TtsCacheKey, TTSResponse> ResponsesInProgress = new();
+        private static readonly ConcurrentDictionary<TtsCacheKey, TtsResponse> ResponsesInProgress = new();
 
-        public static async Task<ReferenceCounter<TtsAudioData>.Handle?> ConvertTextToSpeech(string speaker, string text, TtsKind kind)
+        public static async Task<TtsResponse.Reference?> ConvertTextToSpeech(string speaker, string text, TtsKind kind)
         {
             WantedCount.Inc();
 
@@ -40,14 +40,14 @@ public partial class TTSSystem
             if (Cache.TryGet(cacheKey, out var data))
             {
                 Sawmill?.Debug($"Use cached sound for '{text}' speech by '{speaker}' speaker");
-                return data.GetHandle();
+                return data.GetReference();
             }
 
             try
             {
                 if (!ResponsesInProgress.TryGetValue(cacheKey, out var response) || response.Task is null)
                 {
-                    response = TTSResponseManager.Rent();
+                    response = TtsResponseManager.Rent();
                     var task = StartRequest(response);
                     response.Task = task;
                     ResponsesInProgress[cacheKey] = response;
@@ -58,7 +58,7 @@ public partial class TTSSystem
                 if (isSuccess)
                 {
                     Cache.Cache(cacheKey, response);
-                    return response.GetHandle();
+                    return response.GetReference();
                 }
                 else
                 {
@@ -70,7 +70,7 @@ public partial class TTSSystem
                 ResponsesInProgress.TryRemove(cacheKey, out _);
             }
 
-            async Task<bool> StartRequest(TTSResponse response)
+            async Task<bool> StartRequest(TtsResponse response)
             {
                 Sawmill?.Verbose($"Generate new sound for '{text}' speech by '{speaker}' speaker with kind '{kind}'");
 
@@ -126,10 +126,10 @@ public partial class TTSSystem
                     var streamToRead = effectStream ?? memoryStream;
 
                     streamToRead.Position = 0;
-                    TTSResponseManager.AllocBuffer(response, (int)streamToRead.Length);
-                    streamToRead.ReadExactly(response.Value.Buffer, 0, response.Value.Length);
+                    TtsResponseManager.AllocBuffer(response, (int)streamToRead.Length);
+                    streamToRead.ReadExactly(response.Value.Buffer, 0, response.Value.RentedLength);
 
-                    Sawmill?.Verbose($"Generated new sound for '{text}' speech by '{speaker}' speaker with kind '{kind}' ({response.Value.Length} bytes)");
+                    Sawmill?.Verbose($"Generated new sound for '{text}' speech by '{speaker}' speaker with kind '{kind}' ({response.Value.RentedLength} bytes)");
                     RequestTimings.WithLabels("Success").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
                     return true;
                 }

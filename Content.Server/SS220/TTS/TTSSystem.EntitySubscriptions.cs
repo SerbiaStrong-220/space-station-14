@@ -57,7 +57,7 @@ public partial class TTSSystem
             return;
 
         var ttsRequired = (args.PlayAudioMask & AudioWithTTSPlayOperation.PlayTTS) == AudioWithTTSPlayOperation.PlayTTS;
-        ReferenceCounter<TtsAudioData>.Handle? ttsResponse = default;
+        ReferenceCounter<TtsAudioData>.Reference? ttsResponse = default;
 
         if (_isEnabled && ttsRequired
             && args.Message.Length <= _maxAnnounceMessageChars
