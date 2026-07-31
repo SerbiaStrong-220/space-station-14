@@ -1,0 +1,73 @@
+- type: entity
+  parent: BaseHookah
+  id: HookahElectric
+  name: электрический кальян
+  description: Современный кальян с электрическим нагревателем. Без углей, без огня - только табак и батарейка.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/HookahElectric/hookah_electric.rsi
+    drawdepth: SmallObjects
+    noRot: true
+    layers:
+    - state: icon
+      map: ["enum.HookahElectricVisualLayers.Base"]
+    - state: left-hose
+      map: ["enum.HookahElectricVisualLayers.LeftHose"]
+    - state: right-hose
+      map: ["enum.HookahElectricVisualLayers.RightHose"]
+  - type: Appearance
+  - type: HookahElectricVisuals
+  - type: Hookah
+    hosePrototype: HookahElectricHose
+    ropeSprite:
+      sprite: SS220/Objects/Specific/HookahElectric/hookah_electric_rope.rsi
+      state: rope
+  - type: HookahElectric
+    toggleOnSound:
+      path: /Audio/Machines/button.ogg
+    toggleOffSound:
+      path: /Audio/Machines/button.ogg
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+  - type: PowerCellDraw
+    drawRate: 1.5
+    enabled: false
+  - type: ContainerContainer
+    containers:
+      cell_slot: !type:ContainerSlot {}
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        disableEject: true
+
+- type: entity
+  parent: SponsorBoxBase
+  id: HookahElectricSponsorBox
+  name: коробка с электрическим кальяном
+  description: Внутри современный электрический кальян. Без углей, без огня - только табак и батарейка.
+  components:
+  - type: SpawnItemsOnUse
+    items:
+    - id: HookahElectric
+    - id: LeavesTobaccoDried
+      amount: 10
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: BaseHookahHose
+  id: HookahElectricHose
+  name: трубка электрического кальяна
+  description: Гибкий шланг. Один конец - в кальян, другой - в лёгкие.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/HookahElectric/hookah_electric_hose.rsi
+    drawdepth: Items
+    noRot: false
+    layers:
+    - state: icon
+  - type: Item
+    size: Ginormous
+    sprite: SS220/Objects/Specific/HookahElectric/hookah_electric_hose.rsi
+  - type: HookahElectricHose
