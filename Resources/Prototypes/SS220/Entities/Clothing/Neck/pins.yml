@@ -65,9 +65,10 @@
       - state: JRgreen-equipped-NECK
 
 - type: entity
-  parent: ClothingNeckJRGreenPin
+  parent: ClothingNeckPinBase
   id: ClothingNeckJRWhitePin
   name: JR white pin
+  description: The pin is highly polished.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Neck/pins.rsi
@@ -240,9 +241,10 @@
       - state: donorsilver-equipped-NECK
 
 - type: entity
-  parent: ClothingNeckSilverBloodDonorPin
+  parent: ClothingNeckPinBase
   id: ClothingNeckGoldBloodDonorPin
   name: gold blood donor pin
+  description: The ultimate gift is the gift of life. You gave it freely.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Neck/pins.rsi
