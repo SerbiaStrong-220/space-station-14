@@ -671,33 +671,31 @@ public sealed partial class ChatSystem : SharedChatSystem
         var defaultLanguageId = _languageSystem.GetSelectedLanguage(source)?.ID ?? "none";
         // SS220 languages end
 
-        if (hideLog)
-            return;
-
         // SS220 investigation recorder begin
-        if (_investigation.IsRecording)
+        if (!hideLog && _investigation.IsRecording)
         {
             var (defaultLanguage, spokenLanguages) = SpokenLanguages(source, languageMessage);
             _investigation.OnChat(source, "Whisper", originalMessage, name, defaultLanguage, spokenLanguages);
         }
         // SS220 investigation recorder end
 
-        if (originalMessage == message)
-        {
-            if (name != Name(source))
-                _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Whisper from {ToPrettyString(source):user} as {name}: {originalMessage}, defaultLanguage: {defaultLanguageId}."); // SS220 languages
+        if (!hideLog)
+            if (originalMessage == message)
+            {
+                if (name != Name(source))
+                    _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Whisper from {ToPrettyString(source):user} as {name}: {originalMessage}, defaultLanguage: {defaultLanguageId}."); // SS220 languages
+                else
+                    _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Whisper from {ToPrettyString(source):user}: {originalMessage}, defaultLanguage: {defaultLanguageId}."); // SS220 languages
+            }
             else
-                _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Whisper from {ToPrettyString(source):user}: {originalMessage}, defaultLanguage: {defaultLanguageId}."); // SS220 languages
-        }
-        else
-        {
-            if (name != Name(source))
-                _adminLogger.Add(LogType.Chat, LogImpact.Low,
+            {
+                if (name != Name(source))
+                    _adminLogger.Add(LogType.Chat, LogImpact.Low,
                     $"Whisper from {ToPrettyString(source):user} as {name}, original: {originalMessage}, transformed: {message}, defaultLanguage: {defaultLanguageId}."); // SS220 languages
-            else
-                _adminLogger.Add(LogType.Chat, LogImpact.Low,
+                else
+                    _adminLogger.Add(LogType.Chat, LogImpact.Low,
                     $"Whisper from {ToPrettyString(source):user}, original: {originalMessage}, transformed: {message}, defaultLanguage: {defaultLanguageId}."); // SS220 languages
-        }
+            }
     }
 
     protected override void SendEntityEmote(
@@ -730,18 +728,16 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         SendInVoiceRange(ChatChannel.Emotes, action, wrappedMessage, source, range, author);
 
-        if (hideLog)
-            return;
-
         // SS220 investigation recorder begin
-        if (_investigation.IsRecording)
+        if (!hideLog && _investigation.IsRecording)
             _investigation.OnChat(source, "Emote", action, name);
         // SS220 investigation recorder end
 
-        if (name != Name(source))
-            _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Emote from {ToPrettyString(source):user} as {name}: {action}");
-        else
-            _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Emote from {ToPrettyString(source):user}: {action}");
+        if (!hideLog)
+            if (name != Name(source))
+                _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Emote from {ToPrettyString(source):user} as {name}: {action}");
+            else
+                _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Emote from {ToPrettyString(source):user}: {action}");
     }
 
     // ReSharper disable once InconsistentNaming
@@ -802,9 +798,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         }
 
         // SS220 investigation recorder begin
-        // The speaker is passed through so the line still gets a position: a ghost has no sampled position, but
-        // the recorder resolves untracked speakers live, and "who was hovering where when they said this" is
-        // occasionally the thing that identifies a metacomms complaint.
+        // Speaker passed through so the line still gets a position: ghosts are resolved live, not sampled.
         if (_investigation.IsRecording)
             _investigation.OnChat(source, "Dead", message, player.Name);
         // SS220 investigation recorder end
@@ -817,19 +811,12 @@ public sealed partial class ChatSystem : SharedChatSystem
 
     // SS220 investigation recorder begin
     /// <summary>
-    ///     Languages a spoken line was recorded in, for the investigation bundle.
+    ///     <c>Default</c> is the speaker's selected language; <c>All</c> is every language the sanitizer found,
+    ///     which differs when a <c>%key</c> switched language part-way through the sentence.
     /// </summary>
-    /// <remarks>
-    ///     Two separate facts, because a line can carry both. <c>Default</c> is what the speaker had selected, and
-    ///     is what the un-prefixed part of the message was said in. <c>All</c> is every language the sanitizer
-    ///     actually found, which differs whenever a <c>%key</c> switched language part-way through the sentence.
-    ///     The message itself is recorded with its prefixes intact, so a reader can put the two back together.
-    /// </remarks>
     private (string? Default, List<string> All) SpokenLanguages(EntityUid source, LanguageMessage? languageMessage)
     {
         var selected = _languageSystem.GetSelectedLanguage(source)?.ID;
-
-        // A message that never reached the sanitizer has no nodes, and would otherwise record as language-less.
         return (selected, languageMessage.SpokenLanguageIds(selected));
     }
     // SS220 investigation recorder end

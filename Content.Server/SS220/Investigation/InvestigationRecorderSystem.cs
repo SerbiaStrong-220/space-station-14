@@ -33,14 +33,8 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.Investigation;
 
-/// <summary>
-///     Drives the sampling loops that feed <see cref="InvestigationRecorder"/>.
-/// </summary>
-/// <remarks>
-///     Three independent cadences, because the data changes at wildly different rates:
-///     positions (fast, continuous), navmap (slow, event-driven), character loadouts (slow, bursty).
-///     Sampling all three at position rate would multiply the bundle size for no investigative benefit.
-/// </remarks>
+/// <summary>Drives the sampling loops that feed <see cref="InvestigationRecorder"/>.</summary>
+/// <remarks>Three cadences, because positions, navmap and loadouts change at wildly different rates.</remarks>
 public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPositionSource
 {
     [Dependency] private readonly InvestigationRecorder _recorder = default!;
@@ -73,51 +67,27 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
     private float _characterAccumulator;
     private float _dirtyAccumulator;
 
-    /// <summary>
-    ///     Tracked entities whose loadout is known to have changed and have not been re-snapshotted yet.
-    /// </summary>
-    /// <remarks>
-    ///     Equipment events are the trigger, but they are not acted on inline. Filling a backpack raises one per
-    ///     item, and each would rebuild the entity's whole snapshot; worse, the events fire mid-transaction, so
-    ///     the state read would not be the settled one. Coalescing into a set and draining it a moment later
-    ///     costs one snapshot per entity per drain no matter how many events arrived.
-    /// </remarks>
+    /// <summary>Tracked entities whose loadout changed and have not been re-snapshotted yet.</summary>
+    /// <remarks>Coalesced rather than acted on inline: equipment events fire per item and mid-transaction.</remarks>
     private readonly HashSet<EntityUid> _dirtyCharacters = new();
 
-    /// <summary>
-    ///     How many characters the backstop sweep snapshots per tick. See <see cref="AdvanceCharacterSweep"/>.
-    /// </summary>
+    /// <summary>How many characters the backstop sweep snapshots per tick.</summary>
     private const int SweepBatchSize = 4;
 
-    /// <summary>
-    ///     Roster entities still to be visited by the current backstop sweep, drained a few per tick so the sweep
-    ///     never lands as one spike.
-    /// </summary>
+    /// <summary>Roster entities still to be visited by the current sweep, drained a few per tick.</summary>
     private readonly Queue<EntityUid> _sweepQueue = new();
 
-    /// <summary>
-    ///     Inverse world matrix per grid, valid for the duration of one position sweep. See <see cref="SamplePositions"/>.
-    /// </summary>
+    /// <summary>Inverse world matrix per grid, valid for the duration of one position sweep.</summary>
     private readonly Dictionary<EntityUid, Matrix3x2> _gridMatrices = new();
 
-    /// <summary>
-    ///     Job prototype id to its department and that department's colour.
-    /// </summary>
-    /// <remarks>
-    ///     Built once instead of scanning every <see cref="DepartmentPrototype"/> and its role list per character
-    ///     per snapshot, which is what this used to do. Rebuilt on prototype reload, which is the only thing that
-    ///     can invalidate it.
-    /// </remarks>
+    /// <summary>Job prototype id to its department and that department's colour.</summary>
+    /// <remarks>Built once rather than scanned per character per snapshot. Rebuilt on prototype reload.</remarks>
     private Dictionary<string, (string Department, string Color)>? _departmentsByJob;
 
-    /// <summary>
-    ///     Tick of the last navmap sweep. Chunks dirtied at or after this are re-emitted.
-    /// </summary>
+    /// <summary>Tick of the last navmap sweep. Chunks dirtied at or after this are re-emitted.</summary>
     private GameTick _lastNavMapTick = GameTick.Zero;
 
-    /// <summary>
-    ///     Grids we have already emitted a full navmap snapshot for, plus their last known beacon count.
-    /// </summary>
+    /// <summary>Grids already emitted a full navmap snapshot for, plus their last known beacon count.</summary>
     private readonly Dictionary<EntityUid, int> _seenGrids = new();
 
     private EntityQuery<TransformComponent> _xformQuery;
@@ -145,23 +115,15 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
         SubscribeLocalEvent<RoundStartedEvent>(OnRoundStarted);
         SubscribeLocalEvent<RoundEndedEvent>(OnRoundEnded);
 
-        // RoundEndedEvent only fires on the normal end-of-round path. An admin `restartround`, `golobby`, the
-        // update-restart and the game rules that cut a round short all call GameTicker.RestartRound directly,
-        // which raises this and nothing else. Without it those rounds would never stop recording, the next
-        // StartRound would find a live session, and a whole shift would be appended to the previous round's
-        // bundle under the previous round's id.
+        // RoundEndedEvent only fires on the normal path. `restartround`, `golobby`, the update-restart and
+        // rules that cut a round short call RestartRound directly, and would otherwise never stop recording.
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
 
         SubscribeLocalEvent<PlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<PlayerDetachedEvent>(OnPlayerDetached);
 
-        // Equipment changes are what make a loadout snapshot stale, so they drive re-sampling rather than the
-        // ten second poll noticing after the fact. "Who was holding the weapon at 14:32" is the question this
-        // stream exists to answer, and a ten second window is wide enough to miss a whole fight.
-        //
-        // All six are directed at the wearer or holder rather than at the item, so the subscription's own uid is
-        // the character to re-snapshot. Filtered on MindContainerComponent purely to keep item-to-item traffic
-        // out of the handler; roster membership is what actually decides, inside MarkCharacterDirty.
+        // Equipment changes drive re-sampling rather than the ten second poll noticing after the fact.
+        // All six are directed at the wearer or holder, so the subscription's own uid is the character.
         SubscribeLocalEvent<MindContainerComponent, DidEquipEvent>((uid, _, _) => MarkCharacterDirty(uid));
         SubscribeLocalEvent<MindContainerComponent, DidUnequipEvent>((uid, _, _) => MarkCharacterDirty(uid));
         SubscribeLocalEvent<MindContainerComponent, DidEquipHandEvent>((uid, _, _) => MarkCharacterDirty(uid));
@@ -200,14 +162,8 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
         _recorder.StartRound(ev.RoundId, _gameMap.GetSelectedMap()?.MapName);
     }
 
-    /// <summary>
-    ///     Copies the current game preset into the recorder.
-    /// </summary>
-    /// <remarks>
-    ///     Read rather than cached because "secret" is resolved to a real preset around round start, and an admin
-    ///     can change the preset mid-round. Called at both ends of the round, so meta.json ends up carrying what
-    ///     the round actually ran.
-    /// </remarks>
+    /// <summary>Copies the current game preset into the recorder.</summary>
+    /// <remarks>Read rather than cached: "secret" resolves around round start and admins can change it mid-round.</remarks>
     private void RefreshGamemode()
     {
         var preset = _gameTicker.CurrentPreset;
@@ -219,10 +175,7 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
         StopRecording(ev.RoundDuration);
     }
 
-    /// <summary>
-    ///     Backstop for rounds that are restarted without ending. Runs before the entities are flushed, so a
-    ///     final sample is still meaningful.
-    /// </summary>
+    /// <summary>Backstop for rounds restarted without ending. Runs before the entities are flushed.</summary>
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
         // Already stopped on the normal path, where RoundEndedEvent came first.
@@ -232,9 +185,7 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
 
     private void StopRecording(TimeSpan? duration)
     {
-        // Take one final sample of everything so the bundle ends on a complete picture rather than mid-interval.
-        // Deliberately not amortised the way the in-round sweep is: there is no next tick to spread it over, and
-        // a hitch on the tick the round ends costs nothing anybody is playing through.
+        // One final sample so the bundle ends on a complete picture. Not amortised: there is no next tick.
         if (_recorder.IsRecording)
         {
             // Re-read the preset: "secret" has resolved by now, and an admin may have changed it mid-round.
@@ -253,17 +204,9 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
         _recorder.StopRound(duration);
     }
 
-    /// <summary>
-    ///     The first time an entity is ever player-controlled it joins the roster, and stays there for the rest of the
-    ///     round. Tracking bodies after the player has left them is deliberate: a corpse being dragged off and stuffed
-    ///     into a locker is exactly the kind of thing investigations turn on.
-    /// </summary>
-    /// <remarks>
-    ///     Every attachment also writes a control row, including ones for entities already on the roster. The roster
-    ///     records who an entity was; the control stream records who was driving it at a given moment, and those
-    ///     stop being the same answer the moment a body is cloned, borged, revived by somebody else, or possessed
-    ///     by an admin.
-    /// </remarks>
+    /// <summary>Joins the roster on first player control, and stays there for the rest of the round.</summary>
+    /// <remarks>Every attachment also writes a control row: the roster records who an entity was, the control
+    /// stream who was driving it, and those diverge the moment a body is cloned, borged or possessed.</remarks>
     private void OnPlayerAttached(PlayerAttachedEvent ev)
     {
         if (!_recorder.IsRecording || IsUninterestingObserver(ev.Entity))
@@ -280,33 +223,19 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
         _recorder.WriteControl(ev.Entity, ev.Player.UserId.UserId, ev.Player.Name, attached: true);
     }
 
-    /// <summary>
-    ///     Closes the control row opened by <see cref="OnPlayerAttached"/>, so the bundle says when a body stopped
-    ///     being driven as well as when it started.
-    /// </summary>
+    /// <summary>Closes the control row opened by <see cref="OnPlayerAttached"/>.</summary>
     private void OnPlayerDetached(PlayerDetachedEvent ev)
     {
-        // Not gated on roster membership: an entity can only be detached from if it was attached to, and if it was
-        // attached to while recording it is on the roster. Gating would only ever drop the closing half of a pair.
+        // Not gated on roster membership: gating would only ever drop the closing half of a pair.
         if (!_recorder.IsRecording || IsUninterestingObserver(ev.Entity))
             return;
 
         _recorder.WriteControl(ev.Entity, ev.Player.UserId.UserId, ev.Player.Name, attached: false);
     }
 
-    /// <summary>
-    ///     Whether an entity is a pure observer whose movement carries no investigative meaning.
-    /// </summary>
-    /// <remarks>
-    ///     Ghosts fly through walls at high speed, exist in large numbers late in a round, and cannot touch
-    ///     anything, so sampling them costs a real share of the position stream to record nothing anybody would
-    ///     ever ask about.
-    ///
-    ///     Keyed on <see cref="GhostComponent"/> specifically, not on "looks incorporeal". A revenant is
-    ///     incorporeal and spectral but is a mob that acts on the station, and where it went is exactly the sort
-    ///     of thing an investigation needs; it carries no <see cref="GhostComponent"/>, so it is kept. The same
-    ///     goes for any other ghost-like antagonist built on <c>Incorporeal</c>.
-    /// </remarks>
+    /// <summary>Whether an entity is a pure observer whose movement carries no investigative meaning.</summary>
+    /// <remarks>Keyed on <see cref="GhostComponent"/> specifically: a revenant is incorporeal but acts on the
+    /// station and carries no such component, so it is kept.</remarks>
     private bool IsUninterestingObserver(EntityUid uid)
     {
         return _ghostQuery.HasComp(uid);
@@ -324,21 +253,21 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
         _positionAccumulator += frameTime;
         if (_positionAccumulator >= _positionInterval)
         {
-            _positionAccumulator = 0f;
+            _positionAccumulator -= _positionInterval;
             SamplePositions();
         }
 
         _navMapAccumulator += frameTime;
         if (_navMapAccumulator >= _navMapInterval)
         {
-            _navMapAccumulator = 0f;
+            _navMapAccumulator -= _navMapInterval;
             SampleNavMap();
         }
 
         _characterAccumulator += frameTime;
         if (_characterAccumulator >= _characterInterval)
         {
-            _characterAccumulator = 0f;
+            _characterAccumulator -= _characterInterval;
             BeginCharacterSweep();
         }
 
@@ -352,7 +281,7 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
             _dirtyAccumulator += frameTime;
             if (_dirtyAccumulator >= _dirtyInterval)
             {
-                _dirtyAccumulator = 0f;
+                _dirtyAccumulator -= _dirtyInterval;
                 DrainDirtyCharacters();
             }
         }
@@ -363,11 +292,7 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
     #region Positions
 
     /// <inheritdoc/>
-    /// <remarks>
-    ///     Used for speech from entities that are not on the roster, which never get a sampled position.
-    ///     Same container-aware resolution as <see cref="SamplePositions"/>, but without the per-sweep matrix
-    ///     cache: this is called once per line of speech from an untracked entity, not in a loop.
-    /// </remarks>
+    /// <remarks>Used for speech from entities that are not on the roster, which have no sampled position.</remarks>
     public bool TryGetPosition(EntityUid uid, out EntityUid? grid, out Vector2 local, out EntityUid? container)
     {
         grid = null;
@@ -391,10 +316,8 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
 
     private void SamplePositions()
     {
-        // Inverting a grid's world matrix is not free, and essentially everyone is standing on the same grid —
-        // the station. Resolving it per entity meant ~one matrix inversion per player per sample for a value
-        // that is identical across almost all of them. Cached for the duration of the sweep, which is exactly as
-        // long as it stays valid: grids move between ticks, never within one.
+            // Inverting a grid matrix is not free and nearly everyone shares one grid. Cached for the sweep,
+            // which is exactly as long as it stays valid: grids move between ticks, never within one.
         _gridMatrices.Clear();
 
         foreach (var uid in _recorder.Roster.Keys)
@@ -406,9 +329,7 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
                 continue;
             }
 
-            // Resolve through containers: an entity inside a locker or a bag reports the *container's* world
-            // position, which is what we want on the map, but we also record which container it is in so the
-            // reader can render "inside X" rather than a bare dot.
+                // Through containers: an entity in a locker reports the container's position, which is what we want.
             EntityUid? container = null;
             if (_container.TryGetContainingContainer((uid, xform, null), out var containing))
                 container = containing.Owner;
@@ -416,8 +337,7 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
             var grid = xform.GridUid;
             var worldPos = _transform.GetWorldPosition(uid);
 
-            // Grid-local coordinates are stable under grid motion, so a body on a moving shuttle does not smear
-            // across the map. Entities off-grid (in space, on the map directly) fall back to world coordinates.
+                // Grid-local so a body on a moving shuttle does not smear. Off-grid falls back to world coordinates.
             var local = grid is { } gridUid
                 ? Vector2.Transform(worldPos, GetInvGridMatrix(gridUid))
                 : worldPos;
@@ -437,28 +357,20 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
         return matrix;
     }
 
-    /// <summary>
-    ///     Records total damage, mob state and the crit/dead thresholds for one entity.
-    /// </summary>
-    /// <remarks>
-    ///     Sampled here rather than in the slow character loop because health during a fight changes in
-    ///     well under a second, and a ten second snapshot would miss the entire fight. The thresholds ride
-    ///     along so a reader can render a bar as a fraction rather than an opaque number.
-    /// </remarks>
+    /// <summary>Records total damage, mob state and the crit/dead thresholds for one entity.</summary>
+    /// <remarks>Sampled here rather than in the slow character loop: a ten second snapshot would miss a whole fight.</remarks>
     private void SampleHealth(EntityUid uid)
     {
         if (!TryComp<DamageableComponent>(uid, out var damageable))
             return;
 
-        // GetTotalDamage is marked obsolete because content should not generally reduce damage to one
-        // number. An investigation tool is the exception: a health bar is exactly that reduction, and the
-        // per-type breakdown is already available from the admin log damage events.
+        // GetTotalDamage is obsolete because content should not generally reduce damage to one number.
+        // An investigation health bar is exactly that reduction, so it is the intended exception.
 #pragma warning disable CS0618
         var total = (float) _damageable.GetTotalDamage((uid, damageable));
 #pragma warning restore CS0618
 
-        // Copied to a local first: MobStateComponent is [Access]-restricted to read-only for us, and
-        // calling ToString straight off the member counts as an execute access to the analyzer.
+        // Copied to a local: MobStateComponent is [Access]-restricted, and a direct call reads as execute access.
         var state = "Unknown";
         if (TryComp<MobStateComponent>(uid, out var mobState))
         {
@@ -495,8 +407,7 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
                 _recorder.WriteNavMapChunk(uid, origin, chunk.TileData);
             }
 
-            // Beacons are the station's room labels, which is what lets the reader answer "which room was this"
-            // without any rendering at all. They change rarely, so they are only re-emitted when they change.
+            // Beacons are the room labels a reader needs to answer "which room". Re-emitted only when they change.
             var beacons = ComputeBeaconHash(navMap);
             if (firstSeen || _seenGrids[uid] != beacons)
             {
@@ -513,19 +424,9 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
         }
     }
 
-    /// <summary>
-    ///     Fingerprint of a grid's whole beacon set.
-    /// </summary>
-    /// <remarks>
-    ///     This used to be the beacon count, which missed every change that kept the count the same: renaming a
-    ///     room, recolouring a department, or moving a beacon after a remap. Each beacon row is the complete set
-    ///     for that grid, so a missed change meant the reader kept labelling rooms by their old names for the
-    ///     rest of the round.
-    ///
-    ///     Beacons live in a dictionary whose enumeration order is not guaranteed across mutations, so the
-    ///     per-beacon hashes are combined with XOR rather than fed into a <see cref="HashCode"/> in sequence:
-    ///     order-independent, which is what makes the comparison stable.
-    /// </remarks>
+    /// <summary>Fingerprint of a grid's whole beacon set.</summary>
+    /// <remarks>Not the beacon count, which missed renames and recolours. Combined with XOR because dictionary
+    /// enumeration order is not stable across mutations.</remarks>
     private static int ComputeBeaconHash(NavMapComponent navMap)
     {
         var combined = navMap.Beacons.Count;
@@ -565,24 +466,13 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
         }
     }
 
-    /// <summary>
-    ///     Queues every tracked character for re-snapshotting. The periodic backstop for anything no event
-    ///     covers — surgery, admin verbs, gibbing, prototype hotswaps.
-    /// </summary>
-    /// <remarks>
-    ///     Queued rather than done inline. A snapshot is not cheap — effective access resolved through the ID
-    ///     slot and every PDA, the full inventory, both hands, and storage contents to
-    ///     <c>investigation.storage_depth</c>, plus the collections each of those allocates — and doing the whole
-    ///     roster at once put all of that on one tick. On a full server that is a spike proportional to the
-    ///     player count landing every ten seconds, which is the shape of hitch players notice even when the
-    ///     average cost is invisible.
-    /// </remarks>
+    /// <summary>Queues every tracked character for re-snapshotting; the backstop for anything no event covers.</summary>
+    /// <remarks>Queued rather than inline: a snapshot is expensive, and the whole roster at once is a spike
+    /// proportional to player count landing every ten seconds.</remarks>
     private void BeginCharacterSweep()
     {
-        // The previous sweep has not finished. Refilling now would clear the tail it never reached and restart
-        // from the top of the roster, so the same entities would be sampled forever and the ones after them
-        // never. Only reachable if the character interval is set shorter than a sweep takes to drain, but the
-        // failure mode is silent and permanent, so it is worth the branch.
+        // The previous sweep has not finished. Refilling would clear the tail it never reached and restart from
+        // the top, so the same entities would be sampled forever and the ones after them never.
         if (_sweepQueue.Count > 0)
             return;
 
@@ -595,34 +485,19 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
         _dirtyCharacters.Clear();
     }
 
-    /// <summary>
-    ///     Snapshots the next slice of the queued backstop sweep.
-    /// </summary>
-    /// <remarks>
-    ///     Sized so the whole roster is covered well inside one character interval no matter how many players
-    ///     are on: at the default 10s interval and 30 ticks per second, <see cref="SweepBatchSize"/> per tick
-    ///     drains a 300-player roster in a tenth of the interval. The point is only to spread the work, not to
-    ///     slow it down.
-    /// </remarks>
+    /// <summary>Snapshots the next slice of the queued backstop sweep.</summary>
+    /// <remarks>Sized to cover the whole roster well inside one character interval; the point is to spread the work.</remarks>
     private void AdvanceCharacterSweep()
     {
         for (var sampled = 0; sampled < SweepBatchSize && _sweepQueue.TryDequeue(out var uid); sampled++)
         {
-            // Entities die between the sweep being queued and reaching them; the roster keeps the entry either
-            // way, but there is nothing left to snapshot.
+            // Entities die between being queued and reached; the roster keeps the entry, but there is nothing to snapshot.
             if (_metaQuery.HasComp(uid))
                 SampleCharacter(uid);
         }
     }
 
-    /// <summary>
-    ///     Re-snapshots only the characters whose equipment changed since the last drain.
-    /// </summary>
-    /// <remarks>
-    ///     This is what keeps loadout records current without paying for the full roster. In a quiet second the
-    ///     set is empty and this costs a branch; in a busy one it costs a handful of snapshots instead of every
-    ///     player's.
-    /// </remarks>
+    /// <summary>Re-snapshots only the characters whose equipment changed since the last drain.</summary>
     private void DrainDirtyCharacters()
     {
         if (_dirtyCharacters.Count == 0)
@@ -639,8 +514,7 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
 
     private void SampleCharacter(EntityUid uid)
     {
-        // Resolved once and shared: both the loadout snapshot and the objectives need it, and TryGetMind is a
-        // container walk rather than a component lookup.
+        // Resolved once and shared: TryGetMind is a container walk rather than a component lookup.
         EntityUid? mindId = _mind.TryGetMind(uid, out var mind, out _) ? mind : null;
 
         var snapshot = BuildCharacterSnapshot(uid, mindId, out var fingerprint);
@@ -650,19 +524,9 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
             SampleObjectives(uid, ownedMind);
     }
 
-    /// <summary>
-    ///     Records progress on every objective this mind holds.
-    /// </summary>
-    /// <remarks>
-    ///     Polled on the character sweep rather than hooked to a completion event, because there is no such event:
-    ///     objectives are pull-based, each computing its progress on demand from an
-    ///     <c>ObjectiveGetProgressEvent</c>. Polling here also means the cost rides on the sweep's existing
-    ///     amortisation instead of adding a fourth cadence.
-    ///
-    ///     The consequence is that completion ticks carry the sweep's granularity — ten seconds by default. That
-    ///     is precise enough to place a completion in the round, and the exact moment is recoverable by reading
-    ///     the events stream around it, which is what an investigator would do anyway.
-    /// </remarks>
+    /// <summary>Records progress on every objective this mind holds.</summary>
+    /// <remarks>Polled rather than hooked, because there is no completion event: objectives compute progress on
+    /// demand. Completion ticks therefore carry the sweep's granularity.</remarks>
     private void SampleObjectives(EntityUid owner, EntityUid mindId)
     {
         if (!TryComp<MindComponent>(mindId, out var mind) || mind.Objectives.Count == 0)
@@ -670,8 +534,7 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
 
         foreach (var objective in mind.Objectives)
         {
-            // Returns null when an objective is malformed — a missing icon, or a progress handler that never set
-            // a value. That is already logged as an error by the objectives system; skipping is all we can do.
+            // Null when an objective is malformed. Already logged by the objectives system; skipping is all we can do.
             if (_objectives.GetInfo(objective, mindId, mind) is not { } info)
                 continue;
 
@@ -687,13 +550,8 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
         }
     }
 
-    /// <summary>
-    ///     Marks a tracked entity for re-snapshotting on the next drain.
-    /// </summary>
-    /// <remarks>
-    ///     Deliberately does no work of its own: this runs inside equipment events, on the hot path of every
-    ///     player picking anything up, so it must stay a roster lookup and a set insert.
-    /// </remarks>
+    /// <summary>Marks a tracked entity for re-snapshotting on the next drain.</summary>
+    /// <remarks>Does no work of its own: this runs inside equipment events, on the hot path of picking anything up.</remarks>
     private void MarkCharacterDirty(EntityUid uid)
     {
         if (_recorder.IsRecording && _recorder.Roster.ContainsKey(uid))
@@ -708,8 +566,7 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
 
         if (TryComp<HumanoidProfileComponent>(uid, out var profile))
         {
-            // Copied to locals first: the component is [Access]-restricted to read-only for us, and calling methods
-            // straight off the members counts as an execute access to the analyzer.
+            // Copied to locals: the component is [Access]-restricted, and direct calls read as execute access.
             var speciesProto = profile.Species;
             var profileGender = profile.Gender;
 
@@ -729,8 +586,7 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
             antagRoles = BuildAntagRoles(mind);
         }
 
-        // Department and its canonical colour are resolved here so the reader does not have to
-        // reimplement the job-to-department mapping or invent its own palette.
+        // Resolved here so the reader need not reimplement the job-to-department mapping or invent a palette.
         string? department = null;
         string? departmentColor = null;
         if (job != null && DepartmentsByJob.TryGetValue(job, out var jobDepartment))
@@ -761,8 +617,7 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
             .Select(DescribeItem)
             .ToList();
 
-        // Carried contents matter for "did they actually have the weapon they claim they didn't". Depth is capped
-        // so a bag of bags cannot blow up the snapshot.
+        // Depth is capped so a bag of bags cannot blow up the snapshot.
         var carried = new List<string>();
         if (_storageDepth > 0)
         {
@@ -781,9 +636,7 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
                 CollectStorage(item, _storageDepth, carried);
             }
 
-            // Sorted here, once, rather than inside the fingerprint. The fingerprint has to be order-independent
-            // or shuffling a bag would look like a loadout change, and doing it here means the written row is
-            // deterministic too — the same bag always serialises the same way.
+            // Sorted here rather than in the fingerprint, which must be order-independent, so rows stay deterministic.
             carried.Sort(StringComparer.Ordinal);
         }
 
@@ -812,22 +665,9 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
         };
     }
 
-    /// <summary>
-    ///     The antagonist roles on a mind, as prototype id plus localized name.
-    /// </summary>
-    /// <remarks>
-    ///     Antag status was previously recoverable only by reading <c>LogType.Mind</c> prose out of the events
-    ///     stream — "Traitor added to mind of …" — which means any reader wanting to mark an antagonist has to
-    ///     parse English. Recording it structurally is what makes "was this person an antag, and since when"
-    ///     answerable, and it rides on a mind lookup the snapshot was already paying for.
-    ///
-    ///     Both halves are kept on purpose. <c>id</c> is the prototype and is what a reader should branch on;
-    ///     <c>name</c> is localized at record time, so a bundle stays readable without shipping the game's
-    ///     locale files. Job roles are filtered out — they are already on the snapshot as <c>job</c>.
-    ///
-    ///     Roles are recorded per snapshot rather than once, so a mid-round conversion — a revolutionary being
-    ///     converted, a zombie infecting somebody — appears at the tick it happened rather than being backdated.
-    /// </remarks>
+    /// <summary>The antagonist roles on a mind, as prototype id plus localized name.</summary>
+    /// <remarks>Recorded structurally so readers need not parse English out of <c>LogType.Mind</c> prose. Per
+    /// snapshot rather than once, so a mid-round conversion appears at the tick it happened.</remarks>
     private List<AntagRole>? BuildAntagRoles(EntityUid mindId)
     {
         List<AntagRole>? antagRoles = null;
@@ -856,13 +696,9 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
         }
     }
 
-    /// <summary>
-    ///     One antagonist role on a character row.
-    /// </summary>
+    /// <summary>One antagonist role on a character row.</summary>
     /// <param name="Id">Antag prototype id — the stable value a reader should branch on.</param>
-    /// <param name="Name">
-    ///     Localized at record time, so the bundle stays readable without shipping the game's locale files.
-    /// </param>
+    /// <param name="Name">Localized at record time, so the bundle reads without the game's locale files.</param>
     private readonly record struct AntagRole(
         [property: JsonPropertyName("id")] string Id,
         [property: JsonPropertyName("name")] string Name);
@@ -890,9 +726,8 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
         hash.Add(job);
         hash.Add(name);
 
-        // Only the prototype ids are hashed. MindGetAllRoleInfo walks the role container in insertion order,
-        // which is stable for a given mind, so gaining a role changes the hash and re-reading the same roles
-        // does not. The localized name is derived from the id and would add nothing.
+        // Only prototype ids are hashed: the role container enumerates in a stable insertion order, and the
+        // localized name is derived from the id.
         if (antagRoles != null)
         {
             foreach (var role in antagRoles)
@@ -904,8 +739,7 @@ public sealed class InvestigationRecorderSystem : EntitySystem, IInvestigationPo
         foreach (var tag in access)
             hash.Add(tag);
 
-        // Slots come out of the inventory template in a fixed order and access and carried are both sorted by
-        // their callers, so nothing here needs to re-sort to be stable.
+        // Slots come out in a fixed order and access and carried are sorted by their callers.
         foreach (var (slot, item) in worn)
         {
             hash.Add(slot);

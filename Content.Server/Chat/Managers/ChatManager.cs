@@ -376,7 +376,6 @@ internal sealed partial class ChatManager : IChatManager
         _discordLink.SendMessage(message, player.Name, ChatChannel.AdminChat);
 
         // SS220 investigation recorder begin
-        // No in-world speaker: admin chat is out of character and has no position, same as OOC.
         if (_investigation.IsRecording)
             _investigation.OnChat(null, "AdminChat", message, player.Name);
         // SS220 investigation recorder end

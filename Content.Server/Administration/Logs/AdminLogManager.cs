@@ -313,8 +313,7 @@ public sealed partial class AdminLogManager : SharedAdminLogManager, IAdminLogMa
             return;
 
         // SS220 investigation recorder begin
-        // Hooked before the drop threshold below: the investigation bundle is cheap to write, so it should keep a
-        // complete event stream even when the database queue is saturated and logs are being shed.
+        // Before the drop threshold below, so the bundle keeps a complete stream even when logs are being shed.
         if (_investigation.IsRecording)
             _investigation.OnAdminLog(type, impact, message, handler.Values);
         // SS220 investigation recorder end

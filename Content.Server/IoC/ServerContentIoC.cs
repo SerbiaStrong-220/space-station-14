@@ -70,9 +70,7 @@ internal static class ServerContentIoC
         deps.Register<ISharedAdminLogManager, AdminLogManager>();
         deps.Register<IAdminLogManager, AdminLogManager>();
         // SS220 investigation recorder begin
-        // Both keys resolve to the same instance: the IoC container dedupes registrations that share an
-        // implementation type. Hooks take the interface; InvestigationRecorderSystem takes the concrete type
-        // because it drives the sampling loops and needs more than the hook surface.
+        // Both keys resolve to one instance: BuildGraph dedupes registrations sharing an implementation type.
         deps.Register<IInvestigationRecorder, InvestigationRecorder>();
         deps.Register<InvestigationRecorder>();
         // SS220 investigation recorder end

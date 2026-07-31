@@ -21,31 +21,15 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.SS220.Investigation;
 
-/// <summary>
-///     Writes the per-round investigation bundle. See <see cref="IInvestigationRecorder"/>.
-/// </summary>
-/// <remarks>
-///     Everything here runs on the main game thread: the sampling loops are driven by
-///     <see cref="InvestigationRecorderSystem"/> and the admin log hook is called synchronously from
-///     <see cref="Content.Server.Administration.Logs.AdminLogManager.Add"/>. Rows are buffered in memory and
-///     flushed to gzip streams on an interval so that disk I/O stays off the hot path.
-/// </remarks>
+/// <summary>Writes the per-round investigation bundle. See <see cref="IInvestigationRecorder"/>.</summary>
+/// <remarks>Everything here runs on the main game thread; rows are buffered and flushed on an interval.</remarks>
 public sealed class InvestigationRecorder : IInvestigationRecorder
 {
-    /// <summary>
-    ///     Bump this when the on-disk row shapes change in a way readers must care about.
-    /// </summary>
+    /// <summary>Bump when the on-disk row shapes change in a way readers must care about.</summary>
     public const int SchemaVersion = 1;
 
-    /// <summary>
-    ///     How long round end waits for buffered rows to reach disk before giving up on them.
-    /// </summary>
     private static readonly TimeSpan WriterShutdownTimeout = TimeSpan.FromSeconds(15);
 
-    /// <summary>
-    ///     Names of the streams in a bundle, in the order they are opened. Also the order
-    ///     <see cref="FlushSession"/> and <see cref="CloseSession"/> walk them.
-    /// </summary>
     private const string PositionsFile = "positions.jsonl.gz";
     private const string NavMapFile = "navmap.jsonl.gz";
     private const string CharactersFile = "characters.jsonl.gz";
@@ -57,17 +41,10 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
     private const string ObjectivesFile = "objectives.jsonl.gz";
     private const string MetaFile = "meta.json";
 
-    /// <summary>
-    ///     Prefix every bundle directory is named with. Also what retention matches on, so that nothing else that
-    ///     happens to share the directory is ever deleted.
-    /// </summary>
+    /// <summary>Prefix every bundle directory is named with. Retention matches on it, so nothing else is deleted.</summary>
     private const string BundlePrefix = "round-";
 
-    /// <summary>
-    ///     Progress at or above which an objective counts as done. Matches
-    ///     <c>SharedObjectivesSystem.IsCompleted</c>, which the round end screen uses, so the bundle and the
-    ///     scoreboard never disagree about whether something was achieved.
-    /// </summary>
+    /// <summary>Progress at or above which an objective counts as done. Matches <c>SharedObjectivesSystem.IsCompleted</c>.</summary>
     private const float CompletionThreshold = 0.999f;
 
     [Dependency] private readonly IConfigurationManager _cfg = default!;
@@ -82,15 +59,8 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
         DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
     };
 
-    /// <summary>
-    ///     UTF-8 without a byte order mark.
-    /// </summary>
-    /// <remarks>
-    ///     <see cref="Encoding.UTF8"/> emits a BOM, which lands at the start of the first line of every
-    ///     stream and makes that line invalid JSON for any reader that splits on newlines and parses each
-    ///     line. Readers should still tolerate a BOM, because bundles written before this was fixed have
-    ///     one, but nothing new should produce it.
-    /// </remarks>
+    /// <summary>UTF-8 without a byte order mark.</summary>
+    /// <remarks><see cref="Encoding.UTF8"/> emits a BOM, which makes the first line of a stream invalid JSON.</remarks>
     private static readonly Encoding Utf8NoBom = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
 
     private ISawmill _sawmill = default!;
@@ -100,118 +70,56 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
 
     private Session? _session;
 
-    /// <summary>
-    ///     Reused to build position rows by hand. Positions are by far the largest stream, and building each row
-    ///     through the serializer would allocate an anonymous object and a string per sample.
-    /// </summary>
+    /// <summary>Reused to build position rows by hand; the serializer would allocate per sample.</summary>
     private readonly StringBuilder _rowBuilder = new();
 
     private readonly Dictionary<EntityUid, RosterEntry> _roster = new();
 
     /// <summary>
-    ///     Every entity that has ever been player-controlled this round, and is therefore tracked for the rest of it.
-    ///     Keyed by <see cref="EntityUid.Id"/>, which is the same value admin logs record, and which is never
-    ///     recycled within a round (see <c>EntityManager.GenerateEntityUid</c>).
+    ///     Every entity ever player-controlled this round. Keyed by <see cref="EntityUid.Id"/>, which is what admin
+    ///     logs record and is never recycled within a round.
     /// </summary>
-    /// <remarks>
-    ///     Read-only to callers on purpose: membership is decided by <see cref="TrackEntity"/>, which also has to
-    ///     append a roster row, and an outside write would produce an entity that is sampled but never named.
-    /// </remarks>
     public IReadOnlyDictionary<EntityUid, RosterEntry> Roster => _roster;
 
-    /// <summary>
-    ///     Latest observed position of each tracked entity, used to enrich admin logs and chat. Always the most
-    ///     recent reading, even when that reading was not written as a row.
-    /// </summary>
+    /// <summary>Latest observed position of each tracked entity, used to enrich admin logs and chat.</summary>
     private readonly Dictionary<EntityUid, SampledPosition> _positions = new();
 
-    /// <summary>
-    ///     Dead-reckoning state per tracked entity: what was last written, and what is being held back.
-    ///     Kept separate from <see cref="_positions"/> so "where is it" and "what have we emitted" never get
-    ///     confused with each other.
-    /// </summary>
+    /// <summary>Dead-reckoning state per tracked entity: what was last written, and what is being held back.</summary>
     private readonly Dictionary<EntityUid, PositionTrack> _tracks = new();
 
-    /// <summary>
-    ///     Last written loadout fingerprint per tracked entity, so we only emit a character row when it changes.
-    /// </summary>
     private readonly Dictionary<EntityUid, int> _loadoutHashes = new();
 
-    /// <summary>
-    ///     Last written health sample per tracked entity, so an unharmed character costs one row per round.
-    /// </summary>
     private readonly Dictionary<EntityUid, HealthSample> _healthSamples = new();
 
-    /// <summary>
-    ///     Last written progress per objective entity, so an objective nobody is making progress on costs one row.
-    /// </summary>
-    /// <remarks>
-    ///     Keyed on the objective entity rather than on its owner: objectives belong to the mind, and a mind moves
-    ///     between bodies. Keying on the body would re-emit every objective from scratch each time somebody was
-    ///     cloned or borged.
-    /// </remarks>
+    /// <summary>Last written progress per objective entity.</summary>
+    /// <remarks>Keyed on the objective entity, not its owner: objectives follow the mind, which moves between bodies.</remarks>
     private readonly Dictionary<EntityUid, ObjectiveSample> _objectiveSamples = new();
 
-    /// <summary>
-    ///     The game preset this round is running, resolved past "secret". See <see cref="SetGamemode"/>.
-    /// </summary>
     private string? _gamemode;
     private string? _gamemodeTitle;
 
-    /// <summary>
-    ///     Resolves an entity's grid-local position on demand. See <see cref="SetPositionSource"/>.
-    /// </summary>
     private IInvestigationPositionSource? _positionSource;
 
     public bool IsRecording => _session != null;
 
-    /// <summary>
-    ///     Directory of the most recently completed bundle, or null if no round has finished recording yet.
-    /// </summary>
     public ResPath? LastBundlePath { get; private set; }
 
-    /// <summary>
-    ///     Directory of the bundle currently being written, or null when not recording.
-    /// </summary>
     public ResPath? CurrentBundlePath => _session?.Directory;
 
-    /// <summary>
-    ///     Flushes buffered rows to disk immediately, rather than waiting for the next interval.
-    /// </summary>
     public void Flush()
     {
         if (_session is { } session)
             FlushSession(session);
     }
 
-    /// <summary>
-    ///     Supplies the live position lookup used to place speech from entities that are not on the roster.
-    /// </summary>
-    /// <remarks>
-    ///     The recorder is an IoC manager and the only thing that can walk transforms is an entity system, so the
-    ///     dependency has to point this way round. <see cref="InvestigationRecorderSystem"/> calls this once from
-    ///     its own Initialize.
-    ///
-    ///     It exists because plenty of speech comes from entities that were never player-controlled and therefore
-    ///     have no sampled position: mice, bots, PAIs, announcement consoles. Without a live lookup those lines
-    ///     carry no coordinates and a reader cannot place a speech bubble for them.
-    /// </remarks>
+    /// <summary>Supplies the live position lookup for speech from entities that are not on the roster.</summary>
     public void SetPositionSource(IInvestigationPositionSource source)
     {
         _positionSource = source;
     }
 
-    /// <summary>
-    ///     Records which game preset the round is running under.
-    /// </summary>
-    /// <remarks>
-    ///     Set at round start and again at round end, because "secret" resolves to a real preset and an admin can
-    ///     change it mid-round. meta.json is written at both points, so the finished bundle always carries the
-    ///     preset the round actually ran, not the one it was scheduled with.
-    ///
-    ///     Without this the antag list is unreadable: "three traitors and a nuke op" means one thing in Nuclear
-    ///     Emergency and something else entirely in Secret.
-    /// </remarks>
+    /// <summary>Records which game preset the round is running under.</summary>
+    /// <remarks>Set at round start and again at round end, because "secret" resolves to a real preset.</remarks>
     public void SetGamemode(string? id, string? title)
     {
         _gamemode = id;
@@ -240,9 +148,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
 
         if (_session is { } running)
         {
-            // A round always stops before the next one starts, so reaching this means a lifecycle hook was
-            // missed. Keep the running session rather than silently folding two rounds into one bundle, and
-            // say so, because the alternative is a bundle nobody can trust.
+            // Reaching this means a lifecycle hook was missed. Keep the running session rather than folding two rounds.
             _sawmill.Warning(
                 $"Round {roundId} started while round {running.RoundId} was still recording. Ignoring the new round.");
             return;
@@ -287,8 +193,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
 
             session.AllStreams = openedStreams.ToArray();
 
-            // Written up front so a bundle from a crashed server is still identifiable and readable. Rewritten with
-            // the final tick counts and duration on a clean stop.
+            // Written up front so a crashed server still leaves an identifiable bundle. Rewritten on a clean stop.
             WriteMeta(session, null);
 
             _session = session;
@@ -297,9 +202,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
         }
         catch (Exception e)
         {
-            // Whatever was opened before the failure still holds a file handle, and the writer thread is already
-            // running and parked on its queue. Without this a start that keeps failing — a full disk, a bad
-            // directory cvar — leaks one thread and a handful of handles every round.
+            // Without this a repeatedly failing start leaks a thread and a handful of handles every round.
             _sawmill.Error($"Failed to start investigation recording: {e}");
             _session = null;
 
@@ -317,8 +220,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
         if (_session is not { } session)
             return;
 
-        // Held-back samples exist only in memory, and flushing them needs a live session to write into, so this
-        // runs before the session is torn down. It touches no I/O of its own — it only appends rows to buffers.
+        // Held-back samples live only in memory and need a live session to write into.
         FlushPendingPositions();
 
         // Null out before the rest: if anything below throws we must not be left holding half-closed streams.
@@ -351,15 +253,8 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
         }
     }
 
-    /// <summary>
-    ///     Deletes bundles older than <c>investigation.retention_days</c>.
-    /// </summary>
-    /// <remarks>
-    ///     Age comes from the timestamp in the directory name rather than from the filesystem, because a restore,
-    ///     a copy or an rsync rewrites modification times and would make retention delete a fresh archive or keep
-    ///     an ancient one. A directory whose name does not parse is left alone: it was not written by this
-    ///     recorder, and this method deletes recursively.
-    /// </remarks>
+    /// <summary>Deletes bundles older than <c>investigation.retention_days</c>.</summary>
+    /// <remarks>Age comes from the directory name, not the filesystem: a copy or restore rewrites mtimes.</remarks>
     private void PruneOldBundles(ResPath baseDir)
     {
         var retentionDays = _cfg.GetCVar(CCVars220.InvestigationRetentionDays);
@@ -380,8 +275,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
                 if (!_res.UserData.IsDir(directory))
                     continue;
 
-                // "round-{id}_{yyyy-MM-dd_HH-mm-ss}". Only the part after the first underscore is the timestamp;
-                // the round id is a plain integer and never contains one.
+                // "round-{id}_{timestamp}": only the part after the first underscore is the timestamp.
                 var separator = entry.IndexOf('_');
                 if (separator < 0)
                     continue;
@@ -413,11 +307,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
             _sawmill.Info($"Deleted {deleted} investigation bundles older than {retentionDays} days.");
     }
 
-    /// <remarks>
-    ///     <see cref="CompressionLevel.Fastest"/> rather than Optimal: measured on real bundles the ratio
-    ///     difference is around a tenth, on streams that are already single-digit megabytes, while the CPU cost
-    ///     is several times lower. Cheap compression that never stalls beats tight compression that might.
-    /// </remarks>
+    /// <remarks>Fastest rather than Optimal: about a tenth worse ratio for several times less CPU.</remarks>
     private JsonlStream OpenStream(StreamWriterThread thread, ResPath path)
     {
         var file = _res.UserData.Open(path, FileMode.Create, FileAccess.Write, FileShare.Read);
@@ -440,10 +330,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
             endTick = _timing.CurTick.Value,
             tickRate = _timing.TickRate,
             durationSeconds = duration?.TotalSeconds,
-            // Chat text keeps its `%key` language prefixes, which are meaningless without the key table that
-            // was loaded when the round ran. Writing it into the bundle means a reader can split a mixed
-            // sentence into per-language runs without shipping — and then failing to update — its own copy of
-            // the prototypes. Cheap: this is one array, once, not a per-row cost.
+            // Chat keeps its `%key` prefixes, which need the round's key table to split into per-language runs.
             languages = _prototype.EnumeratePrototypes<LanguagePrototype>()
                 .OrderBy(language => language.ID)
                 .Select(language => new
@@ -473,10 +360,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
 
     #region Roster
 
-    /// <summary>
-    ///     Registers an entity as tracked. Once registered it stays tracked for the rest of the round even after the
-    ///     player leaves it, because a corpse being moved around is exactly what investigations care about.
-    /// </summary>
+    /// <summary>Registers an entity as tracked. It stays tracked for the rest of the round, corpse included.</summary>
     public void TrackEntity(EntityUid uid, Guid? playerGuid, string? userName, string name, string? prototype)
     {
         if (_session is not { } session || _roster.ContainsKey(uid))
@@ -485,8 +369,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
         var entry = new RosterEntry(playerGuid, userName, name, prototype, _timing.CurTick.Value);
         _roster[uid] = entry;
 
-        // Also appended to its own stream, so the roster survives a crash. meta.json is only complete on a clean
-        // stop; this stream is flushed on the normal interval like everything else.
+        // Also appended to its own stream, so the roster survives a crash.
         session.Roster.Write(JsonSerializer.Serialize(new
         {
             e = uid.Id,
@@ -499,17 +382,8 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
         session.RowCount++;
     }
 
-    /// <summary>
-    ///     Records a player taking control of an entity, or letting go of it.
-    /// </summary>
-    /// <remarks>
-    ///     The roster answers "who was this entity", once, at first attachment. It cannot answer "who was driving
-    ///     it at 14:32", and that is a different question with a different answer every time a body changes hands:
-    ///     cloning, borging, revival by somebody else, an admin taking possession, or simply a player
-    ///     disconnecting and another spawning into the same shell. Attributing a whole round of a body's actions
-    ///     to whoever happened to hold it first is exactly the kind of mistake an investigation tool must not
-    ///     make, so every transfer gets a row.
-    /// </remarks>
+    /// <summary>Records a player taking control of an entity, or letting go of it.</summary>
+    /// <remarks>Bodies change hands — cloning, borging, revival, admin possession — so every transfer gets a row.</remarks>
     public void WriteControl(EntityUid uid, Guid? playerGuid, string? userName, bool attached)
     {
         if (_session is not { } session)
@@ -528,9 +402,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
 
     public void UntrackEntity(EntityUid uid)
     {
-        // The entity is gone, so no later sample will ever arrive to justify the one being held back. Write it
-        // now or its last known position is lost — which for a body that was just destroyed is the one position
-        // an investigation actually wants.
+        // No later sample will arrive to justify the held one. Write it now or the last known position is lost.
         if (_tracks.TryGetValue(uid, out var track))
         {
             FlushPending(uid, ref track);
@@ -547,24 +419,11 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
 
     #region Row writers
 
-    /// <summary>
-    ///     Records a position sample, emitting a row only when the reader could not reconstruct it.
-    /// </summary>
+    /// <summary>Records a position sample, emitting a row only when the reader could not reconstruct it.</summary>
     /// <remarks>
-    ///     Two filters, in order.
-    ///
-    ///     The first is the epsilon: an entity that has not moved produces no rows at all. That already covers
-    ///     most of a round, since people stand still a lot.
-    ///
-    ///     The second is dead reckoning, and it is what makes walking cheap. Movement in SS14 is mostly straight
-    ///     lines down corridors, and every sample along a straight line is implied by its endpoints. So one
-    ///     sample is held back rather than written immediately, and when the next one arrives we ask whether the
-    ///     held sample lands on the line between the last row we emitted and the new one. If it does, within
-    ///     <paramref name="epsilon"/>, it is dropped — the reader will interpolate it back. Only genuine
-    ///     direction changes become rows, which turns a corridor walk into two rows instead of forty.
-    ///
-    ///     The cost is that samples are written one behind, and that readers must interpolate rather than step.
-    ///     Grid and container changes are discontinuities: they are never interpolated across, and always flush.
+    ///     Two filters: an epsilon that drops unmoved entities, and dead reckoning that holds one sample back and
+    ///     drops it when it lands on the line between the last emitted row and the next. Only direction changes
+    ///     become rows, so samples are written one behind. Grid and container changes always flush.
     /// </remarks>
     public bool WritePosition(EntityUid uid, EntityUid? grid, Vector2 local, EntityUid? container, float epsilon)
     {
@@ -574,8 +433,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
         var tick = _timing.CurTick.Value;
         var observed = new SampledPosition(grid, local, container);
 
-        // Always the latest reading, regardless of what gets written: this is what admin logs and chat join
-        // against, and a forensic timestamp should not be one sample stale to save disk.
+        // Always the latest reading, regardless of what gets written: this is what admin logs and chat join against.
         _positions[uid] = observed;
 
         if (!_tracks.TryGetValue(uid, out var track))
@@ -600,18 +458,13 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
             // Nothing held back. Hold this one only if the entity has actually moved.
             if (!observed.DiffersFrom(track.WrittenSample, epsilon))
             {
-                // Standing still still costs no rows, but the tick has to be remembered: it is where the
-                // stationary stretch ends, and the anchor below is written at it.
+                // Standing still costs no rows, but the tick is where the stationary stretch ends.
                 _tracks[uid] = track with { LastSampleTick = tick };
                 return false;
             }
 
-            // Movement resuming after a stationary stretch needs a row closing that stretch, or the reader
-            // interpolates from the last row it has — which may be minutes old — straight to the next one.
-            // Somebody who stood at their locker for ten minutes and then walked off would render as
-            // drifting slowly across the room for the whole ten, which is exactly the kind of thing an
-            // investigation would read as suspicious. Re-emit the written position at the last tick it was
-            // still observed at, so the flat stretch is explicit.
+            // Movement resuming after a stationary stretch needs a row closing it, or the reader interpolates from
+            // a row that may be minutes old and renders the entity drifting across the room for the whole time.
             var anchored = false;
             if (track.LastSampleTick > track.WrittenTick)
             {
@@ -642,14 +495,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
         return true;
     }
 
-    /// <summary>
-    ///     Writes out any sample being held back for an entity.
-    /// </summary>
-    /// <remarks>
-    ///     Held samples are speculative: they are only dropped once a later sample proves them redundant. If no
-    ///     later sample ever arrives — round end, or the entity being destroyed — the held sample is the entity's
-    ///     last known position and must not be lost.
-    /// </remarks>
+    /// <remarks>If no later sample arrives, the held sample is the last known position and must not be lost.</remarks>
     private void FlushPending(EntityUid uid, ref PositionTrack track)
     {
         if (track.PendingTick is not { } pendingTick)
@@ -659,9 +505,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
         track = new PositionTrack(pendingTick, track.PendingSample, null, default, track.LastSampleTick);
     }
 
-    /// <summary>
-    ///     Flushes every held position sample. Called at round end so no entity's last movement is dropped.
-    /// </summary>
+    /// <summary>Flushes every held position sample. Called at round end so no last movement is dropped.</summary>
     public void FlushPendingPositions()
     {
         if (_session is null)
@@ -676,11 +520,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
         }
     }
 
-    /// <remarks>
-    ///     One decimal place, not two. The epsilon below which movement is not recorded at all is 0.15 tiles, so
-    ///     a second decimal encodes nothing but sampling jitter — it costs bytes on every row of the largest
-    ///     stream to record noise the recorder has already decided to ignore.
-    /// </remarks>
+    /// <remarks>One decimal: the movement epsilon is 0.15 tiles, so a second encodes only sampling jitter.</remarks>
     private void EmitPosition(EntityUid uid, uint tick, SampledPosition sample)
     {
         if (_session is not { } session)
@@ -708,14 +548,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
         session.RowCount++;
     }
 
-    /// <summary>
-    ///     Formats one coordinate as a JSON number.
-    /// </summary>
-    /// <remarks>
-    ///     A non-finite coordinate would format as <c>NaN</c> or <c>Infinity</c>, neither of which is valid JSON,
-    ///     and one such row makes the line it lands on unparseable for every reader. Physics can produce them
-    ///     after a bad teleport or a detached transform, so they are clamped to zero rather than written out.
-    /// </remarks>
+    /// <remarks>A non-finite coordinate is not valid JSON and would make its whole line unparseable, so it is clamped.</remarks>
     private static string FormatCoordinate(float value)
     {
         if (!float.IsFinite(value))
@@ -754,16 +587,8 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
         session.RowCount++;
     }
 
-    /// <summary>
-    ///     Records a health sample, but only when it differs from the last one written for this entity.
-    /// </summary>
-    /// <remarks>
-    ///     Polled from the position loop rather than hooked onto DamageChangedEvent. Continuous damage
-    ///     sources — suffocation, fire, bleeding, pressure — raise that event on their own tick cadence, so
-    ///     a hull breach with a dozen casualties would produce an unbounded stream. Polling is bounded by
-    ///     the sample rate, and it also gives every healthy character a baseline row, which an event-driven
-    ///     stream never would.
-    /// </remarks>
+    /// <summary>Records a health sample, but only when it differs from the last one written.</summary>
+    /// <remarks>Polled rather than hooked to DamageChangedEvent: continuous damage would produce an unbounded stream.</remarks>
     public void WriteHealthIfChanged(
         EntityUid uid,
         float damage,
@@ -774,8 +599,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
         if (_session is not { } session)
             return;
 
-        // Compared by value rather than by hash: a 32-bit hash collision here would silently drop a row, and
-        // the row it drops is as likely as not the one recording somebody dying.
+        // Compared by value, not by hash: a collision would silently drop a row, quite possibly one recording a death.
         var sample = new HealthSample(Math.Round(damage, 2), state);
         if (_healthSamples.TryGetValue(uid, out var previous) && previous == sample)
             return;
@@ -794,19 +618,8 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
         session.RowCount++;
     }
 
-    /// <summary>
-    ///     Records an objective's progress, but only when it moved since the last row.
-    /// </summary>
-    /// <remarks>
-    ///     The point of this stream is the tick, not the final tally. Whether an antagonist completed their
-    ///     objectives is already on the round end screen; <em>when</em> they completed them is not recorded
-    ///     anywhere, and it is what turns "they killed the HoS" into "they killed the HoS twenty minutes before
-    ///     the shuttle, having had the objective since round start".
-    ///
-    ///     Progress is rounded to two decimals before comparison, so an objective that inches forward — a steal
-    ///     objective counting items, a kill objective tracking a crit — produces a row per real step rather than
-    ///     one per float wobble.
-    /// </remarks>
+    /// <summary>Records an objective's progress, but only when it moved since the last row.</summary>
+    /// <remarks>The point of this stream is the tick, not the tally: when an objective completed is recorded nowhere else.</remarks>
     public void WriteObjectiveIfChanged(
         EntityUid objective,
         EntityUid owner,
@@ -843,9 +656,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
         session.RowCount++;
     }
 
-    /// <summary>
-    ///     Writes a character loadout snapshot, but only if it differs from the last one written for this entity.
-    /// </summary>
+    /// <summary>Writes a character loadout snapshot, but only if it differs from the last one written.</summary>
     public void WriteCharacterIfChanged(EntityUid uid, object snapshot, int fingerprint)
     {
         if (_session is not { } session)
@@ -863,16 +674,8 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
 
     #region Foreign call sites
 
-    /// <summary>
-    ///     Runs one of the hooks that foreign code calls into, swallowing anything it throws.
-    /// </summary>
-    /// <remarks>
-    ///     <see cref="OnChat"/> and <see cref="OnAdminLog"/> run synchronously inside <c>ChatSystem</c> and
-    ///     <c>AdminLogManager.Add</c>, and <see cref="OnAnyCommandExecuted"/> inside the console host. An
-    ///     exception escaping any of them takes down chat, admin logging, or the console for the rest of the
-    ///     round, which is a catastrophic price for a nice-to-have forensic bundle. So the recorder fails alone:
-    ///     it logs once and stops recording, and the game carries on without it.
-    /// </remarks>
+    /// <summary>Runs one of the hooks foreign code calls into, swallowing anything it throws.</summary>
+    /// <remarks>An exception escaping one would take down chat, admin logging or the console, so the recorder fails alone.</remarks>
     private void Guarded(Action write)
     {
         try
@@ -883,8 +686,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
         {
             _sawmill.Error($"Investigation recording threw and has been stopped for this round: {e}");
 
-            // Deliberately not left running: whatever produced the exception will almost certainly produce it
-            // again on the next row, and a hook that throws every time is worse than no hook at all.
+            // Not left running: a hook that throws once will almost certainly throw on the next row.
             try
             {
                 StopRound(null);
@@ -948,10 +750,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
             ch = channel,
             name = speakerName,
             msg = text,
-            // `lang` is the speaker's selected language: what `msg` is in wherever it carries no `%key` prefix.
-            // `langs` lists every language actually used and only appears on the rare line that mixed two or
-            // more, so the common case stays one cheap scalar. `msg` keeps its prefixes either way, which is
-            // what lets a reader colour a sentence run by run rather than as a single language.
+            // `lang` is the speaker's selected language; `langs` only appears on lines that mixed two or more.
             lang = defaultLanguage ?? (languages is { Count: > 0 } ? languages[0] : null),
             langs = languages is { Count: > 1 } ? languages : null,
             rc = radioChannel,
@@ -987,8 +786,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
                 {
                     entities ??= new List<object>();
 
-                    // Resolve against the live position cache. This is why the join happens here rather than in the
-                    // reader: at this exact moment we have the entity's sampled position for free.
+                    // Resolved here rather than in the reader: the sampled position is free at this moment.
                     var known = _positions.TryGetValue(entity.Uid, out var position);
 
                     entities.Add(new
@@ -1005,8 +803,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
                     });
                     break;
                 }
-                // A small number of call sites pass coordinates directly (e.g. PointingSystem). Those are more
-                // precise than our sampled cache, so keep them verbatim alongside the resolved entities.
+                // Some call sites pass coordinates directly (e.g. PointingSystem); those beat the sampled cache.
                 case EntityCoordinates coordinates:
                 {
                     entities ??= new List<object>();
@@ -1038,9 +835,6 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
 
     #region Flushing
 
-    /// <summary>
-    ///     Driven from the system's update loop. Flushes buffered rows to disk on an interval.
-    /// </summary>
     public void Update(float frameTime)
     {
         if (_session is not { } session)
@@ -1050,18 +844,10 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
         if (_flushAccumulator < _flushInterval)
             return;
 
-        _flushAccumulator = 0f;
+        _flushAccumulator -= _flushInterval;
         FlushSession(session);
     }
 
-    /// <summary>
-    ///     Hands every stream's buffered rows to the writer thread.
-    /// </summary>
-    /// <remarks>
-    ///     Cheap by construction: each stream swaps a list reference and enqueues it. A write that actually fails
-    ///     does so on the writer thread and is surfaced here on the next flush, so teardown always happens on the
-    ///     game thread.
-    /// </remarks>
     private void FlushSession(Session session)
     {
         foreach (var stream in session.AllStreams)
@@ -1072,21 +858,14 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
         if (session.Writer.Failure is null)
             return;
 
-        // The bundle is already damaged, so stop rather than keep appending to streams that may be dead. Teardown
-        // is the same path as a normal stop: the streams still get closed, so whatever did reach disk stays
-        // readable rather than being left without a gzip trailer.
+        // The bundle is already damaged. Streams still get closed, so what reached disk stays readable.
         _session = null;
         CloseSession(session);
     }
 
-    /// <summary>
-    ///     Closes every stream and shuts the writer thread down, reporting anything that went wrong.
-    /// </summary>
     private void CloseSession(Session session)
     {
-        // A failed flush tears the session down mid-stop, and then StopRound reaches its own CloseSession with
-        // the same session. Closing twice would push a second round of disposes at a queue that has already
-        // been completed for adding.
+        // A failed flush tears the session down mid-stop, and StopRound then reaches CloseSession with the same session.
         if (session.Closed)
             return;
 
@@ -1120,10 +899,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
 
     private readonly record struct SampledPosition(EntityUid? Grid, Vector2 Local, EntityUid? Container)
     {
-        /// <summary>
-        ///     Grid and container changes are discontinuities and always warrant a row; plain movement only does if it
-        ///     exceeded the epsilon.
-        /// </summary>
+        /// <summary>Grid and container changes always warrant a row; plain movement only past the epsilon.</summary>
         public bool DiffersFrom(SampledPosition other, float epsilon)
         {
             if (IsDiscontinuousFrom(other))
@@ -1132,21 +908,12 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
             return (Local - other.Local).LengthSquared() >= epsilon * epsilon;
         }
 
-        /// <summary>
-        ///     Whether moving between these two samples is a teleport rather than travel. Interpolating across one
-        ///     draws a path through walls, so the recorder never elides samples across a discontinuity.
-        /// </summary>
+        /// <summary>Whether this is a teleport rather than travel. Interpolating across one draws a path through walls.</summary>
         public bool IsDiscontinuousFrom(SampledPosition other) => Grid != other.Grid || Container != other.Container;
     }
 
-    /// <summary>
-    ///     Per-entity dead-reckoning state: the last row actually emitted, plus at most one sample held back
-    ///     pending the decision to write or drop it. See <see cref="WritePosition"/>.
-    /// </summary>
-    /// <param name="LastSampleTick">
-    ///     Tick of the most recent sample, written or not. Only used to date the anchor row that closes a
-    ///     stationary stretch; see <see cref="WritePosition"/>.
-    /// </param>
+    /// <summary>Per-entity dead-reckoning state: last row emitted, plus at most one sample held back.</summary>
+    /// <param name="LastSampleTick">Tick of the most recent sample, written or not. Dates the anchor row closing a stationary stretch.</param>
     private readonly record struct PositionTrack(
         uint WrittenTick,
         SampledPosition WrittenSample,
@@ -1154,19 +921,11 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
         SampledPosition PendingSample,
         uint LastSampleTick);
 
-    /// <summary>
-    ///     What the health stream deduplicates on. Thresholds are effectively static per entity, so damage and
-    ///     mob state are the whole of what can change.
-    /// </summary>
+    /// <summary>What the health stream deduplicates on. Thresholds are static per entity.</summary>
     private readonly record struct HealthSample(double Damage, string State);
 
-    /// <summary>
-    ///     What the objectives stream deduplicates on.
-    /// </summary>
-    /// <remarks>
-    ///     Completion is carried separately from progress rather than derived on read, so that the row where an
-    ///     objective flips to done is always emitted even if the rounded progress did not visibly change.
-    /// </remarks>
+    /// <summary>What the objectives stream deduplicates on.</summary>
+    /// <remarks>Completion is carried separately so the row where an objective flips to done is always emitted.</remarks>
     private readonly record struct ObjectiveSample(double Progress, bool Complete);
 
     private sealed class Session
@@ -1188,18 +947,12 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
         public JsonlStream Control = default!;
         public JsonlStream Objectives = default!;
 
-        /// <summary>
-        ///     Every stream, for the operations that treat them uniformly. Rebuilding this per flush would
-        ///     allocate; it is set once, right after the streams are opened.
-        /// </summary>
+        /// <summary>Set once, right after the streams are opened; rebuilding per flush would allocate.</summary>
         public JsonlStream[] AllStreams = default!;
 
         public long RowCount;
 
-        /// <summary>
-        ///     Set once the streams have been handed to the writer thread for closing, so a second attempt is a
-        ///     no-op rather than an enqueue against a completed queue.
-        /// </summary>
+        /// <summary>Set once streams are handed off for closing, so a second attempt is a no-op.</summary>
         public bool Closed;
 
         public Session(
@@ -1219,15 +972,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
         }
     }
 
-    /// <summary>
-    ///     A newline-delimited JSON stream that buffers rows on the game thread and hands whole batches to a
-    ///     background <see cref="StreamWriterThread"/> to be compressed and written.
-    /// </summary>
-    /// <remarks>
-    ///     The game thread only ever appends to a list and, on flush, swaps that list for an empty one. Deflate
-    ///     and the file write — the genuinely expensive parts — happen on the writer thread, so recording adds no
-    ///     periodic hitch to the tick regardless of player count.
-    /// </remarks>
+    /// <summary>Newline-delimited JSON stream; buffers rows on the game thread, writes on the writer thread.</summary>
     private sealed class JsonlStream
     {
         private readonly StreamWriterThread _thread;
@@ -1242,10 +987,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
 
         public void Write(string row) => _buffer.Add(row);
 
-        /// <summary>
-        ///     Hands the buffered rows to the writer thread. Returns false if the queue was full and the batch was
-        ///     dropped, which the caller reports; the rows are gone either way, so the buffer is always reset.
-        /// </summary>
+        /// <summary>Hands buffered rows to the writer thread. False if the queue was full and the batch was dropped.</summary>
         public bool Flush()
         {
             if (_buffer.Count == 0)
@@ -1256,34 +998,17 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
             return _thread.Enqueue(_writer, batch);
         }
 
-        /// <summary>
-        ///     Flushes and closes the underlying file. Called on the writer thread during shutdown, never from the
-        ///     game thread, so it cannot block a tick on a slow disk.
-        /// </summary>
+        /// <summary>Flushes and closes the file on the writer thread, never on the game thread.</summary>
         public void Close() => _thread.EnqueueClose(_writer);
     }
 
-    /// <summary>
-    ///     Single background thread that owns all disk I/O for a recording session.
-    /// </summary>
-    /// <remarks>
-    ///     Deliberately one thread for every stream rather than one per stream: the streams are written in the
-    ///     same order they are produced, there is no contention worth parallelising, and one thread is one
-    ///     lifetime to get right. The queue is bounded — if the disk cannot keep up, batches are dropped and
-    ///     counted rather than growing the heap until the server dies. Losing rows from a forensic bundle is
-    ///     bad; taking the game server down with it is worse.
-    /// </remarks>
+    /// <summary>Single background thread that owns all disk I/O for a recording session.</summary>
+    /// <remarks>Bounded queue: if the disk cannot keep up, batches are dropped and counted rather than growing the heap.</remarks>
     private sealed class StreamWriterThread
     {
-        /// <summary>
-        ///     Roughly a minute of backlog for a busy server at the default flush interval. Reaching this means
-        ///     the disk is badly unhealthy, not that the server is busy.
-        /// </summary>
+        /// <summary>Reaching this means the disk is unhealthy, not that the server is busy.</summary>
         private const int QueueCapacity = 64;
 
-        /// <summary>
-        ///     How long a stream close may wait for room in the queue before it is given up on.
-        /// </summary>
         private static readonly TimeSpan CloseEnqueueTimeout = TimeSpan.FromSeconds(2);
 
         private readonly BlockingCollection<Action> _queue = new(QueueCapacity);
@@ -1292,10 +1017,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
 
         private int _droppedBatches;
 
-        /// <summary>
-        ///     Set by the writer thread when a write throws, read by the game thread. The session is torn down on
-        ///     the next tick rather than from the writer thread, so state is only ever mutated on one thread.
-        /// </summary>
+        /// <summary>Written by the writer thread, read by the game thread; teardown happens on the game thread.</summary>
         private volatile string? _failure;
 
         public StreamWriterThread(ISawmill sawmill)
@@ -1331,10 +1053,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
 
         public void EnqueueClose(StreamWriter writer)
         {
-            // Not routed through Post, because a close dropped on the first full queue costs the gzip trailer and
-            // leaves a file readers have to salvage. It still gives up eventually: a plain blocking Add would park
-            // the game thread on a hung disk for as long as the disk stays hung, which is exactly what Stop()'s
-            // timeout exists to prevent.
+            // Not routed through Post: a dropped close costs the gzip trailer. Bounded so a hung disk cannot park the tick.
             if (_queue.IsAddingCompleted || !_queue.TryAdd(() => writer.Dispose(), CloseEnqueueTimeout))
                 _sawmill.Error("Could not queue an investigation stream close; that file will have no gzip trailer.");
         }
@@ -1350,14 +1069,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
             return true;
         }
 
-        /// <summary>
-        ///     Stops the thread, waiting for queued work so the bundle on disk is complete.
-        /// </summary>
-        /// <remarks>
-        ///     Bounded wait: a hung disk must not hang round end. If the timeout expires the thread is abandoned
-        ///     (it is a background thread, so it cannot keep the process alive) and the bundle is left truncated,
-        ///     which readers already tolerate because that is what a server crash produces.
-        /// </remarks>
+        /// <summary>Stops the thread, waiting for queued work. Bounded: a hung disk must not hang round end.</summary>
         public void Stop(TimeSpan timeout)
         {
             _queue.CompleteAdding();
@@ -1378,8 +1090,7 @@ public sealed class InvestigationRecorder : IInvestigationRecorder
                     }
                     catch (Exception e)
                     {
-                        // Record the first failure and keep draining. Later items are cheap no-ops against a dead
-                        // stream, and draining means Stop() still returns promptly.
+                        // Record the first failure and keep draining.
                         _failure ??= e.ToString();
                     }
                 }
