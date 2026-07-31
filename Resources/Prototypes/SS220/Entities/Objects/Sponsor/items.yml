@@ -640,6 +640,10 @@
         children:
         - id: SponsorFoodPackage
           amount: 9
+  - type: Item
+    size: Small
+    shape:
+    - 0,0,1,0
 
 - type: entity
   parent: SponsorBoxBase

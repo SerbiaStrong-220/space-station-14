@@ -181,6 +181,11 @@
       - state: generic-pink-inhand-left
       right:
       - state: generic-pink-inhand-right
+    #SS220-grillables-update begin
+  - type: Grillable
+    timeToCook: 30
+    cookingResult: FoodMeatFishCooked
+    #SS220-grillables-update end
 
 - type: entity
   # bacon is cured so not raw = cant rot
@@ -207,10 +212,15 @@
     conductivity: 0.44
     thickness: 0.004 # bacon is thin so faster to cook than a steak
     area: 0.0075 # ~5x15cm
-  - type: Construction
-    graph: Bacon
-    node: start
-    defaultTarget: bacon
+    #SS220-grillables-update begin
+#  - type: Construction
+#    graph: Bacon
+#    node: start
+#    defaultTarget: bacon
+  - type: Grillable
+    timeToCook: 10
+    cookingResult: FoodMeatBaconCooked
+    #SS220-grillables-update end
   - type: Item
     storedOffset: -1,0
     inhandVisuals:
@@ -238,10 +248,16 @@
   - type: SliceableFood
     count: 3
     slice: FoodMeatBearCutlet
-  - type: Construction
-    graph: BearSteak
-    node: start
-    defaultTarget: filet migrawr
+    #SS220-grillables-update begin
+#  - type: Construction
+#    graph: BearSteak
+#    node: start
+#    defaultTarget: filet migrawr
+  - type: Grillable
+    timeToCook: 30
+    cookingResult: FoodMeatBearCooked
+    #SS220-grillables-update end
+    #SS220-grill-update-2 begin
   - type: Item
     storedOffset: -1,2
     inhandVisuals:
@@ -271,10 +287,15 @@
   - type: SliceableFood
     count: 3
     slice: FoodMeatPenguinCutlet
-  - type: Construction
-    graph: PenguinSteak
-    node: start
-    defaultTarget: cooked penguin
+    #SS220-grillables-update begin
+#  - type: Construction
+#    graph: PenguinSteak
+#    node: start
+#    defaultTarget: cooked penguin
+  - type: Grillable
+    timeToCook: 30
+    cookingResult: FoodMeatPenguinCooked
+    #SS220-grillables-update end
   - type: Item
     storedOffset: -1,1
     inhandVisuals:
@@ -304,10 +325,15 @@
     slice: FoodMeatChickenCutlet
   - type: InternalTemperature
     conductivity: 0.41
-  - type: Construction
-    graph: ChickenSteak
-    node: start
-    defaultTarget: cooked chicken
+    #SS220-grillables-update begin
+#  - type: Construction
+#    graph: ChickenSteak
+#    node: start
+#    defaultTarget: cooked chicken
+  - type: Grillable
+    timeToCook: 30
+    cookingResult: FoodMeatChickenCooked
+    #SS220-grillables-update end
   - type: Item
     storedOffset: -1,1
     inhandVisuals:
@@ -335,10 +361,15 @@
   - type: SliceableFood
     count: 3
     slice: FoodMeatDuckCutlet
-  - type: Construction
-    graph: DuckSteak
-    node: start
-    defaultTarget: cooked duck
+    #SS220-grillables-update begin
+#  - type: Construction
+#    graph: DuckSteak
+#    node: start
+#    defaultTarget: cooked duck
+  - type: Grillable
+    timeToCook: 30
+    cookingResult: FoodMeatDuckCooked
+    #SS220-grillables-update end
   - type: Item
     storedOffset: -1,1
     inhandVisuals:
@@ -399,10 +430,15 @@
           Quantity: 1
         - ReagentId: Fat
           Quantity: 2
-  - type: Construction
-    graph: CrabSteak
-    node: start
-    defaultTarget: cooked crab
+    #SS220-grillables-update begin
+#  - type: Construction
+#    graph: CrabSteak
+#    node: start
+#    defaultTarget: cooked crab
+  - type: Grillable
+    timeToCook: 30
+    cookingResult: FoodMeatCrabCooked
+    #SS220-grillables-update end
     #SS220-grill-update-2 begin
   - type: InternalTemperature
     conductivity: 0.58
@@ -429,10 +465,16 @@
   - type: InternalTemperature
     thickness: 0.27 # very big, do cook it in lava. SS220-grill-update-2
     conductivity: 0.4 #SS220-grill-update-2
-  - type: Construction
-    graph: GoliathSteak
-    node: start
-    defaultTarget: goliath steak
+    #SS220-grillables-update begin
+#  - type: Construction
+#    graph: GoliathSteak
+#    node: start
+#    defaultTarget: goliath steak
+  - type: Grillable
+    timeToCook: 30
+    cookingResult: FoodMeatGoliathCooked
+    #SS220-grillables-update end
+    #SS220-grill-update-2 begin
   - type: Item
     storedOffset: -1,0
     inhandVisuals:
@@ -470,10 +512,15 @@
   - type: SliceableFood
     count: 3
     slice: FoodMeatDragonCutlet
-  - type: Construction
-    graph: DragonSteak
-    node: start
-    defaultTarget: dragon steak
+    #SS220-grillables-update begin
+#  - type: Construction
+#    graph: DragonSteak
+#    node: start
+#    defaultTarget: dragon steak
+  - type: Grillable
+    timeToCook: 30
+    cookingResult: FoodMeatDragonCooked
+    #SS220-grillables-update end
   - type: Item
     storedOffset: -2,1
     inhandVisuals:
@@ -532,10 +579,15 @@
   - type: SliceableFood
     count: 3
     slice: FoodMeatLizardCutlet
-  - type: Construction
-    graph: LizardSteak
-    node: start
-    defaultTarget: lizard steak
+    #SS220-grilling-cutlets-tweaks begin
+#  - type: Construction
+#    graph: LizardSteak
+#    node: start
+#    defaultTarget: lizard steak
+  - type: Grillable
+    timeToCook: 30
+    cookingResult: FoodMeatLizardCooked
+  #SS220-grilling-cutlets-tweaks end
   - type: Item
     storedOffset: -1,1
     inhandVisuals:
@@ -750,6 +802,11 @@
       right:
       - state: plain-inhand-right
         color: "#6EFF41"
+    #SS220-grillables-update begin
+  - type: Grillable
+    timeToCook: 30
+    cookingResult: FoodMeatXenoCooked
+    #SS220-grillables-update end
 
 - type: entity
   name: raw rouny meat
@@ -775,10 +832,15 @@
         reagents:
         - ReagentId: SulfuricAcid
           Quantity: 20
-  - type: Construction
-    graph: RounySteak
-    node: start
-    defaultTarget: rouny steak
+  #SS220-grillables-update begin
+#  - type: Construction
+#    graph: RounySteak
+#    node: start
+#    defaultTarget: rouny steak
+  - type: Grillable
+    timeToCook: 30
+    cookingResult: FoodMeatRounyCooked
+    #SS220-grillables-update end
   - type: Item
     inhandVisuals:
       left:
@@ -907,10 +969,15 @@
     state: raw_patty
   - type: InternalTemperature
     conductivity: 0.43
-  - type: Construction
-    graph: CookedPatty
-    node: start
-    defaultTarget: cooked meat patty
+    #SS220-grillables-update begin
+#  - type: Construction
+#    graph: CookedPatty
+#    node: start
+#    defaultTarget: cooked meat patty
+  - type: Grillable
+    timeToCook: 30
+    cookingResult: FoodMeatPattyCooked
+    #SS220-grillables-update end
   - type: Item
     size: Tiny
     shape:
@@ -998,10 +1065,15 @@
   - type: InternalTemperature
     conductivity: 0.4 #SS220-grill-update-2
     thickness: 0.25 #SS220-grill-update-2
-  - type: Construction
-    graph: AnomalyMeatSteak
-    node: start
-    defaultTarget: anomaly steak
+    #SS220-grillables-update begin
+#  - type: Construction
+#    graph: AnomalyMeatSteak
+#    node: start
+#    defaultTarget: anomaly steak
+  - type: Grillable
+    timeToCook: 30
+    cookingResult: FoodMeatAnomalyCooked
+    #SS220-grillables-update end
   - type: Tag
     tags:
     - Meat
@@ -1534,7 +1606,7 @@
           Quantity: 5
   - type: FoodSequenceElement
     entries:
-      Burger: MeatSpiderBurger
+      Burger: MeatSpiderLegBurger #SS220-grillables-update
       Taco: MeatSpider
   - type: Item
     storedOffset: -1,-1

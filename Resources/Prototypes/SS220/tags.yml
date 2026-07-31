@@ -35,7 +35,7 @@
   id: ReactionCleanable
 
 - type: Tag
-  id: GrenadeDusterArta
+  id: CartridgeArtilleryShell
 
 - type: Tag
   id: MagazineGrenadeArta
@@ -404,6 +404,9 @@
   id: AirDefenseTarget
 
 - type: Tag
+  id: Ipc
+
+- type: Tag
   id: CrystalPurple
 
 - type: Tag
@@ -423,3 +426,9 @@
 
 - type: Tag
   id: HookahCoal
+
+- type: Tag
+  id: AstralBlocker
+
+- type: Tag
+  id: MiGoBuildingBlocker

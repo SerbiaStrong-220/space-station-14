@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 275.2.1
+  engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 06/14/2026 22:38:56
-  entityCount: 33275
+  time: 07/02/2026 12:17:30
+  entityCount: 33271
 maps:
 - 1
 grids:
@@ -22323,6 +22323,14 @@ entities:
       rot: 3.141592653589793 rad
       pos: 36.5,-19.5
       parent: 2
+- proto: AirlockMusicianLocked
+  entities:
+  - uid: 566
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 36.5,-8.5
+      parent: 2
 - proto: AirlockNanoTrasenRepresentativeGlassLocked
   entities:
   - uid: 483
@@ -22846,13 +22854,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 2.5,49.5
-      parent: 2
-- proto: AirlockTheatreLocked
-  entities:
-  - uid: 566
-    components:
-    - type: Transform
-      pos: 36.5,-8.5
       parent: 2
 - proto: AirlockVirologyGlass
   entities:
@@ -50330,10 +50331,30 @@ entities:
     - type: Transform
       pos: -17.5,-7.5
       parent: 2
+  - uid: 11607
+    components:
+    - type: Transform
+      pos: -68.5,-65.5
+      parent: 2
+  - uid: 11611
+    components:
+    - type: Transform
+      pos: -68.5,-66.5
+      parent: 2
   - uid: 14897
     components:
     - type: Transform
       pos: 6.5,-34.5
+      parent: 2
+  - uid: 23645
+    components:
+    - type: Transform
+      pos: -63.5,-84.5
+      parent: 2
+  - uid: 23648
+    components:
+    - type: Transform
+      pos: -63.5,-85.5
       parent: 2
   - uid: 26567
     components:
@@ -82617,7 +82638,7 @@ entities:
     - type: Transform
       pos: -55.5,19.5
       parent: 2
-- proto: CurbDarckSteel
+- proto: CurbDarkSteel
   entities:
   - uid: 11447
     components:
@@ -82870,7 +82891,7 @@ entities:
     - type: Transform
       pos: -35.5,17.5
       parent: 2
-- proto: CurbDarckSteelCorner
+- proto: CurbDarkSteelCorner
   entities:
   - uid: 11492
     components:
@@ -83010,7 +83031,7 @@ entities:
     - type: Transform
       pos: -8.5,10.5
       parent: 2
-- proto: CurbDarckSteelCornerSmall
+- proto: CurbDarkSteelCornerSmall
   entities:
   - uid: 11516
     components:
@@ -83185,12 +83206,25 @@ entities:
       rot: 3.141592653589793 rad
       pos: -9.5,10.5
       parent: 2
-- proto: CurbDarckSteelRound
+- proto: CurbDarkSteelRound
   entities:
   - uid: 11546
     components:
     - type: Transform
       pos: -3.5,14.5
+      parent: 2
+- proto: CurbSteelCornerSmall
+  entities:
+  - uid: 23379
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -30.5,-0.5
+      parent: 2
+  - uid: 23609
+    components:
+    - type: Transform
+      pos: -30.5,0.5
       parent: 2
 - proto: CurtainsBlack
   entities:
@@ -83406,7 +83440,7 @@ entities:
       pos: 61.5,-1.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -105267.37
+      secondsUntilStateChange: -105538.36
       state: Opening
   - uid: 11577
     components:
@@ -83601,12 +83635,6 @@ entities:
     - type: Transform
       pos: -31.5,-15.5
       parent: 2
-  - uid: 11607
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -31.5,-0.5
-      parent: 2
   - uid: 11608
     components:
     - type: Transform
@@ -83627,12 +83655,6 @@ entities:
     components:
     - type: Transform
       pos: -30.5,-15.5
-      parent: 2
-  - uid: 11611
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -31.5,0.5
       parent: 2
   - uid: 11612
     components:
@@ -166877,8 +166899,8 @@ entities:
   - uid: 23327
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -31.5,-2.5
+      rot: -1.5707963267948966 rad
+      pos: -30.5,2.5
       parent: 2
   - uid: 23328
     components:
@@ -167169,22 +167191,17 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -2.5,14.5
       parent: 2
-  - uid: 23379
-    components:
-    - type: Transform
-      pos: -31.5,-0.5
-      parent: 2
   - uid: 23380
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -31.5,2.5
+      rot: -1.5707963267948966 rad
+      pos: -30.5,1.5
       parent: 2
   - uid: 23381
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -31.5,0.5
+      rot: -1.5707963267948966 rad
+      pos: -30.5,-1.5
       parent: 2
   - uid: 23382
     components:
@@ -168362,6 +168379,12 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 74.5,26.5
       parent: 2
+  - uid: 23638
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -30.5,-2.5
+      parent: 2
   - uid: 32954
     components:
     - type: Transform
@@ -168565,17 +168588,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -3.5,16.5
       parent: 2
-  - uid: 23608
-    components:
-    - type: Transform
-      pos: -31.5,1.5
-      parent: 2
-  - uid: 23609
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -31.5,-1.5
-      parent: 2
   - uid: 23610
     components:
     - type: Transform
@@ -168744,12 +168756,6 @@ entities:
       parent: 2
 - proto: RailingCornerSmall
   entities:
-  - uid: 23638
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -30.5,1.5
-      parent: 2
   - uid: 23639
     components:
     - type: Transform
@@ -168779,18 +168785,6 @@ entities:
     - type: Transform
       pos: -32.5,6.5
       parent: 2
-  - uid: 23644
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -32.5,-1.5
-      parent: 2
-  - uid: 23645
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -32.5,-0.5
-      parent: 2
   - uid: 23646
     components:
     - type: Transform
@@ -168802,12 +168796,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -26.5,-30.5
-      parent: 2
-  - uid: 23648
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -30.5,-0.5
       parent: 2
   - uid: 23649
     components:
@@ -169035,28 +169023,6 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -33.5,15.5
-      parent: 2
-  - uid: 23682
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -32.5,1.5
-      parent: 2
-  - uid: 23683
-    components:
-    - type: Transform
-      pos: -30.5,0.5
-      parent: 2
-  - uid: 23684
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -32.5,0.5
-      parent: 2
-  - uid: 23685
-    components:
-    - type: Transform
-      pos: -30.5,-1.5
       parent: 2
   - uid: 23686
     components:
@@ -183615,6 +183581,22 @@ entities:
     components:
     - type: Transform
       pos: 43.5,17.5
+      parent: 2
+- proto: SteelStairsLeft
+  entities:
+  - uid: 23644
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -31.5,-0.5
+      parent: 2
+- proto: SteelStairsRight
+  entities:
+  - uid: 23608
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -31.5,0.5
       parent: 2
 - proto: Stool
   entities:

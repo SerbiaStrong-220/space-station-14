@@ -10,6 +10,7 @@
     - !type:SpeciesRequirement
       species:
       - Human
+      - Ipc
   weight: 20
   startingGear: NanoTrasenRepresentativeGear
   experienceDefinition: IAARoleExperience

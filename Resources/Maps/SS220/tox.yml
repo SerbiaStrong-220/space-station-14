@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 275.2.1
+  engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 06/05/2026 12:26:14
-  entityCount: 59534
+  time: 07/07/2026 06:14:38
+  entityCount: 59536
 maps:
 - 1
 grids:
@@ -37400,11 +37400,17 @@ entities:
   entities:
   - uid: 529
     components:
-    - type: MetaData
-      name: клоун
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 35.5,33.5
+      parent: 2
+- proto: AirlockClownMaintLocked
+  entities:
+  - uid: 1029
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 32.5,37.5
       parent: 2
 - proto: AirlockCommandGlassLocked
   entities:
@@ -37544,7 +37550,7 @@ entities:
       pos: -10.5,-8.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -28088.229
+      secondsUntilStateChange: -28432.387
       state: Opening
   - uid: 548
     components:
@@ -40058,14 +40064,10 @@ entities:
   entities:
   - uid: 846
     components:
-    - type: MetaData
-      name: мим
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 25.5,33.5
       parent: 2
-    - type: AccessReader
-      accessListsOriginal: []
 - proto: AirlockGlassMusicianLocked
   entities:
   - uid: 847
@@ -41190,22 +41192,6 @@ entities:
       parent: 2
 - proto: AirlockMaintTheatreLocked
   entities:
-  - uid: 1027
-    components:
-    - type: Transform
-      pos: 28.5,37.5
-      parent: 2
-  - uid: 1028
-    components:
-    - type: Transform
-      pos: 32.5,37.5
-      parent: 2
-  - uid: 1029
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 34.5,39.5
-      parent: 2
   - uid: 1030
     components:
     - type: Transform
@@ -41459,6 +41445,21 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 20.5,-37.5
+      parent: 2
+- proto: AirlockMimeMaintLocked
+  entities:
+  - uid: 1027
+    components:
+    - type: Transform
+      pos: 28.5,37.5
+      parent: 2
+- proto: AirlockMusicianMaintLocked
+  entities:
+  - uid: 1028
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 34.5,39.5
       parent: 2
 - proto: AirlockNanoTrasenRepresentativeLocked
   entities:
@@ -93162,6 +93163,16 @@ entities:
     components:
     - type: Transform
       pos: 42.5,-75.5
+      parent: 2
+  - uid: 59535
+    components:
+    - type: Transform
+      pos: 53.5,-118.5
+      parent: 2
+  - uid: 59536
+    components:
+    - type: Transform
+      pos: 53.5,-119.5
       parent: 2
 - proto: CableApcStack
   entities:
@@ -154030,7 +154041,7 @@ entities:
     - type: Transform
       pos: 81.5,-71.5
       parent: 2
-- proto: CurbDarckSteel
+- proto: CurbDarkSteel
   entities:
   - uid: 22135
     components:
@@ -154509,7 +154520,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: 111.5,-62.5
       parent: 2
-- proto: CurbDarckSteelCorner
+- proto: CurbDarkSteelCorner
   entities:
   - uid: 22217
     components:
@@ -154636,7 +154647,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 110.5,-63.5
       parent: 2
-- proto: CurbDarckSteelCornerSmall
+- proto: CurbDarkSteelCornerSmall
   entities:
   - uid: 22239
     components:
@@ -154885,7 +154896,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: 111.5,-62.5
       parent: 2
-- proto: CurbDarckSteelRound
+- proto: CurbDarkSteelRound
   entities:
   - uid: 22282
     components:
@@ -390581,6 +390592,30 @@ entities:
     - type: Transform
       pos: -59.5,13.5
       parent: 2
+  - uid: 58594
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -5.5,49.5
+      parent: 2
+  - uid: 58595
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 41.5,-8.5
+      parent: 2
+  - uid: 58601
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 77.5,-7.5
+      parent: 2
+  - uid: 58602
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 87.5,-7.5
+      parent: 2
 - proto: WindoorHydroponicsLocked
   entities:
   - uid: 58580
@@ -390620,6 +390655,14 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 46.5,0.5
+      parent: 2
+- proto: WindoorPlasma
+  entities:
+  - uid: 58681
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 31.5,-10.5
       parent: 2
 - proto: WindoorSecure
   entities:
@@ -390668,18 +390711,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: -7.5,51.5
       parent: 2
-  - uid: 58594
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -5.5,49.5
-      parent: 2
-  - uid: 58595
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 41.5,-8.5
-      parent: 2
   - uid: 58596
     components:
     - type: Transform
@@ -390708,18 +390739,6 @@ entities:
     components:
     - type: Transform
       pos: 75.5,76.5
-      parent: 2
-  - uid: 58601
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 77.5,-7.5
-      parent: 2
-  - uid: 58602
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 87.5,-7.5
       parent: 2
   - uid: 58603
     components:
@@ -391193,12 +391212,6 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 23.5,-5.5
-      parent: 2
-  - uid: 58681
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 31.5,-10.5
       parent: 2
 - proto: WindoorSecureScienceLocked
   entities:
