@@ -164,7 +164,6 @@
       sprite: SS220/Objects/Specific/Robotics/borgmodule.rsi
   - type: ItemBorgModule
     hands:
-    - item: Crowbar
     - item: BorgWeaponDisabler
     - item: BorgFlash
     - hand:

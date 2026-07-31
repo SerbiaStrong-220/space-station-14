@@ -25,7 +25,7 @@
       map: ["light"]
       visible: false
   - type: BorgChassis
-    maxModules: 4
+    maxModules: 5
     moduleWhitelist:
       tags:
       - BorgModuleSecurity
@@ -43,6 +43,7 @@
       borg_module:
       - BorgModuleSafety
       - BorgModuleLethal
+      - BorgModulePrying
   - type: ShowHealthBars
     damageContainers:
     - Inorganic

@@ -207,6 +207,7 @@
       borg_module:
         - BorgModuleSafety
         - BorgModuleLethal
+        - BorgModulePrying
   - type: ItemSlots
     slots:
       cell_slot:
