@@ -70,7 +70,171 @@
     species: Human
 
 - type: entity
-  parent: [BaseSpeciesMob, StripableInventoryBase]
+  abstract: true
+  parent:
+  - BaseMob
+  - MobCombat
+  - MobPolymorphable
+  - StripableInventoryBase
+  - BaseSpeciesAppearance
+  id: BaseSpeciesMobAlternative
+  save: false
+  components:
+  - type: DamageVisuals
+    thresholds: [ 10, 20, 30, 50, 70, 100 ]
+    targetLayers:
+    - "enum.HumanoidVisualLayers.Chest"
+    - "enum.HumanoidVisualLayers.Head"
+    - "enum.HumanoidVisualLayers.LArm"
+    - "enum.HumanoidVisualLayers.LLeg"
+    - "enum.HumanoidVisualLayers.RArm"
+    - "enum.HumanoidVisualLayers.RLeg"
+    damageOverlayGroups:
+      Brute:
+        sprite: Mobs/Effects/brute_damage.rsi
+        color: "#FF0000"
+      Burn:
+        sprite: Mobs/Effects/burn_damage.rsi
+  - type: StatusIcon
+    bounds: -0.5,-0.5,0.5,0.5
+  - type: JobStatus
+  - type: RotationVisuals
+    defaultRotation: 90
+    horizontalRotation: 90
+  - type: HumanoidProfile
+  - type: TypingIndicator
+  - type: Fixtures
+    fixtures: # TODO: This needs a second fixture just for mob collisions.
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 185
+        restitution: 0.0
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: FloorOcclusion
+  - type: RangedDamageSound
+    soundGroups:
+      Brute:
+        collection:
+          MeatBulletImpact
+    soundTypes:
+      Heat:
+        collection:
+          MeatLaserImpact
+  - type: Reactive
+    groups:
+      Flammable: [ Touch ]
+      Extinguish: [ Touch ]
+      Acidic: [Touch, Ingestion]
+    reactions:
+    - reagents: [Water, SpaceCleaner]
+      methods: [Touch]
+      effects:
+      - !type:WashCreamPie
+  - type: StatusEffects
+    allowed:
+    - Electrocution
+    - PressureImmunity
+    - TemporaryBlindness
+    - Pacified
+    - Flashed
+    #- TemporaryWaddle  #SS220 Temporary waddle status effect # UPD. SS220 Temporary remove
+  - type: Identity
+  - type: IdExaminable
+  - type: FloatingVisuals
+  - type: Climbing
+  - type: Cuffable
+  - type: Ensnareable
+    sprite: Objects/Misc/ensnare.rsi
+    state: icon
+  - type: AnimationPlayer
+  - type: Buckle
+  - type: CombatMode
+    canDisarm: true
+  - type: MeleeWeapon
+    soundHit:
+      collection: Punch
+    angle: 30
+    animation: WeaponArcFist
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 5
+  - type: TTS # Corvax-TTS
+  - type: SleepEmitSound
+  - type: StandingState
+  - type: Crawler
+  - type: MindContainer
+  - type: CanEnterCryostorage
+  - type: InteractionPopup
+    successChance: 1
+    interactSuccessString: hugging-success-generic
+    interactSuccessSound: /Audio/Effects/thudswoosh.ogg
+    messagePerceivedByOthers: hugging-success-generic-others
+  - type: CanHostGuardian
+  - type: NpcFactionMember
+    factions:
+    - NanoTrasen
+  - type: CreamPied
+    sprite:
+      sprite: Effects/creampie.rsi
+      state: creampie_human
+  - type: ParcelWrapOverride
+    parcelPrototype: WrappedParcelHumanoid
+    wrapDelay: 5
+  - type: Stripping
+  - type: UserInterface
+    interfaces:
+      enum.HumanoidMarkingModifierKey.Key:
+        type: HumanoidMarkingModifierBoundUserInterface
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+      # SS220-surgery-update-begin
+      enum.SurgeryEdgeSelectorUi.Key:
+        type: EdgeSelectorBUI
+      # SS220-surgery-update-end
+  - type: Puller
+  - type: Speech
+    speechSounds: Alto
+  - type: Vocal
+    sounds:
+      Male: MaleHuman
+      Female: FemaleHuman
+      Unsexed: MaleHuman
+  - type: Emoting
+    chatEmoteCooldown: 5.0 #ss220 emote 5 sec
+  - type: BodyEmotes
+    soundsId: GeneralBodyEmotes
+  - type: Grammar
+    attributes:
+      proper: true
+  - type: MobPrice
+    price: 1500 # Kidnapping a living person and selling them for cred is a good move.
+    deathPenalty: 0.01 # However they really ought to be living and intact, otherwise they're worth 100x less.
+  # SS220-MartialArts-Start
+  - type: MartialArtist
+  - type: MartialArtsTarget
+  # SS220-MartialArts-End
+  # SS220-Grabs-Start
+  - type: Grabber
+  - type: Grabbable
+  - type: GrabResistance
+  # SS220-Grabs-End
+  - type: RandomPrice
+    maxRandomPrice: 20000
+  - type: Tag
+    tags:
+    - CanPilot
+    - FootstepSound
+    - DoorBumpOpener
+    - AnomalyHost
+
+- type: entity
+  parent: [BaseSpeciesMobAlternative, StripableInventoryBase]
   id: BaseMobSilicon
   abstract: true
   save: false
@@ -86,6 +250,10 @@
         Blunt: 5
     soundHit:
       collection: MetalThud
+  - type: RaceExperienceAdd
+    skills:
+      PhysicalTraining:
+        level: 4
   - type: CombatMode
   - type: NoSlip
   - type: StaticPrice
@@ -168,8 +336,8 @@
     cellSlotId: cell_slot
     fitsInCharger: true
   - type: PowerCellDraw
-    drawRate: 0.6
-    enabled: false # the borg is only activated when a player takes over, otherwise the battery is likely empty
+    drawRate: 0 #custom logic will be created
+    #enabled: true # the borg is only activated when a player takes over, otherwise the battery is likely empty
   - type: ItemSlots
     slots:
       cell_slot:
@@ -197,6 +365,12 @@
   - type: Lock
     locked: true
     unlockOnClick: false
+    lockOnClick: false
+    onlyOwnerCanUnlock: true
+    breakOnAccessBreaker: false
+  - type: ItemSlotsLock
+    slots:
+      - cell_slot
   - type: UIRequiresLock
     userInterfaceKeys:
     - enum.SiliconUiKey.Key
@@ -294,6 +468,7 @@
     requiredMobState:
     - Critical
     - Dead
+  - type: MindTrailIgnore
   - type: Language
     availableLanguages:
     - id: Galactic
@@ -321,31 +496,32 @@
         - MobLayer
   - type: Inventory
     templateId: synth
+  - type: StatusEffects
+    allowed:
+      - StatusEffectPoweroffline
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+    fitsInCharger: true
+    showOnExamine: false
   - type: ContainerContainer
     containers:
       cell_slot: !type:ContainerSlot { }
       borg_module: !type:Container { }
       part-container: !type:Container
-  - type: ItemSlots
-    slots:
-      #cell_slot:
-      #  name: power-cell-slot-component-slot-name-default
-      #  startingItem: PowerCellMedium
+  - type: ContainerFill
+    containers:
+      cell_slot:
+        - PowerCellMedium
       silicon_component_Optics:
-        startingItem: SynthModTest
-        locked: true
-      silicon_component_Servo:
+        - SynthOpticsTest
+      #silicon_component_Servo:
         #startingItem: PowerCellMedium
-        locked: true
       silicon_component_Brain:
+        - SynthBrainTest
+      #silicon_component_Spine:
         #startingItem: PowerCellMedium
-        locked: true
-      silicon_component_Spine:
+      #silicon_component_Drive:
         #startingItem: PowerCellMedium
-        locked: true
-      silicon_component_Drive:
-        #startingItem: PowerCellMedium
-        locked: true
   - type: SiliconComponents
   - type: Language
     selectedLanguage: Galactic

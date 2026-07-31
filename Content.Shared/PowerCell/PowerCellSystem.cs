@@ -115,6 +115,9 @@ public sealed partial class PowerCellSystem : EntitySystem
 
     private void OnCellSlotExamined(Entity<PowerCellSlotComponent> ent, ref ExaminedEvent args)
     {
+        if (!ent.Comp.ShowOnExamine) //SS220 add disableable powercellslot examine
+            return; //SS220 add disableable powercellslot examine
+
         if (TryGetBatteryFromSlot(ent.AsNullable(), out var battery))
             OnBatteryExamined(battery.Value, ref args);
         else

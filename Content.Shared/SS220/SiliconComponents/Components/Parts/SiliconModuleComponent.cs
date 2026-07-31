@@ -6,18 +6,11 @@ namespace Content.Shared.SS220.SiliconComponents;
 
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class SiliconPartComponent : Component //Yeah-yeah the naming is pretty messed up
+public sealed partial class SiliconModuleComponent : Component //Yeah-yeah the naming is pretty messed up
 {
     [DataField]
     [AutoNetworkedField]
-    public bool Active = true;
-
-    [DataField]
-    [AutoNetworkedField]
-    public EntityUid? PartOwner = null;
-
-    [DataField]
-    public PartType PartType;
+    public EntityUid? ModuleOwner = null;
 
     [DataField]
     public int OccupiedSpace = 1;

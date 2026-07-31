@@ -1,0 +1,7 @@
+- type: entity
+  parent: MobStatusEffectDebuff
+  id: StatusEffectPowerOffline
+  name: power outage
+  components:
+  - type: StunnedStatusEffect
+  - type: KnockdownStatusEffect

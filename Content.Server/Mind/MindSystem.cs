@@ -1,23 +1,24 @@
 using Content.Server.Administration.Logs;
 using Content.Server.GameTicking;
 using Content.Server.Ghost;
+using Content.Server.Polymorph.Systems; //SS220-cryo-mobs-fix
+using Content.Server.SS220.MindExtension;
+using Content.Shared.Body;
+using Content.Shared.Body.Systems; //SS220-cryo-mobs-fix
 using Content.Shared.Database;
 using Content.Shared.Ghost;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Players;
 using Content.Shared.Polymorph;
+using Content.Shared.SS220.Containers; //SS220-cryo-mobs-fix
+using Content.Shared.SS220.Mind;
 using Robust.Server.GameStates;
 using Robust.Server.Player;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
-using Content.Shared.SS220.Containers; //SS220-cryo-mobs-fix
-using Content.Server.Polymorph.Systems; //SS220-cryo-mobs-fix
-using Content.Shared.Body.Systems; //SS220-cryo-mobs-fix
-using Content.Server.SS220.MindExtension;
-using Content.Shared.Body;
 
 namespace Content.Server.Mind;
 
@@ -144,7 +145,7 @@ public sealed class MindSystem : SharedMindSystem
             return;
         }
 
-        _mindExtension.TransferExtension(oldEntity, entity, mind.UserId); //SS220-mind-extension
+        _mindExtension.TransferExtension(oldEntity, entity, mind.UserId, false); //SS220-mind-extension
 
         mind.VisitingEntity = entity;
 
@@ -156,6 +157,11 @@ public sealed class MindSystem : SharedMindSystem
         // which will run ghosting twice.
         if (_players.TryGetSessionById(mind.UserId, out var session))
             _players.SetAttachedEntity(session, entity);
+
+        //SS220 add mind visit events begin
+        var ev = new EntityVisitedEvent(mindId, mind);
+        RaiseLocalEvent(entity, ref ev);
+        //SS220 add mind visit events end
 
         Log.Info($"Session {session?.Name} visiting entity {entity}.");
     }
@@ -170,6 +176,8 @@ public sealed class MindSystem : SharedMindSystem
         if (mind.VisitingEntity == null)
             return;
 
+        var formerEnt = mind.VisitingEntity;//SS220 add mind visit events
+
         RemoveVisitingEntity(mindId, mind);
 
         if (mind.UserId == null || !_players.TryGetSessionById(mind.UserId.Value, out var session))
@@ -180,6 +188,14 @@ public sealed class MindSystem : SharedMindSystem
 
         var owned = mind.OwnedEntity;
         _players.SetAttachedEntity(session, owned);
+
+        //SS220 add mind visit events begin
+        if (mind.OwnedEntity is { Valid: true } ownedEntValid)
+        {
+            var ev = new EntityUnvisitedEvent(mindId, mind, formerEnt);
+            RaiseLocalEvent(ownedEntValid, ref ev);
+        }
+        //SS220 add mind visit events end
 
         if (owned.HasValue)
         {

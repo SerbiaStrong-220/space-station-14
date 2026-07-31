@@ -1,10 +1,19 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 
+using Content.Shared.Body.Components;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.FixedPoint;
+using Content.Shared.Mind;
+using Content.Shared.Mind.Components;
+using Content.Shared.Pointing;
+using Content.Shared.Silicons.Borgs.Components;
+using Content.Shared.SS220.AltBlocking;
+using Content.Shared.SS220.Mind;
+using Robust.Shared.Containers;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.SiliconComponents;
@@ -14,9 +23,16 @@ public sealed partial class SiliconPartSystem : EntitySystem
     [Dependency] private DamageableSystem _damageableSystem = default!;
     [Dependency] private BlindableSystem _blindable = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
+
+    private static readonly string PartContainerPrefix = "silicon_component";
 
     public override void Initialize()
     {
+        base.Initialize();
+
         SubscribeLocalEvent<DamabeableSiliconPartComponent, ComponentStartup>(OnComponentStartup);
         SubscribeLocalEvent<DamabeableSiliconPartComponent, ComponentShutdown>(OnComponentShutdown);
 
@@ -25,6 +41,14 @@ public sealed partial class SiliconPartSystem : EntitySystem
         SubscribeLocalEvent<ActiveOpticsComponent, ComponentGotInsertedIntoUser>(OnOpticsInserted);
         SubscribeLocalEvent<ActiveOpticsComponent, ComponentGotRemovedFromUser>(OnOpticsRemoved);
         SubscribeLocalEvent<ActiveOpticsComponent, DamageChangedEvent>(OnOpticsDamageChanged);
+
+        SubscribeLocalEvent<BrainComponent, ComponentGotInsertedIntoUser>(OnBrainInserted);
+        SubscribeLocalEvent<BrainComponent, ComponentGotRemovedFromUser>(OnBrainRemoved);
+
+        SubscribeLocalEvent<SiliconPartComponent, EntityUnvisitedEvent>(OnMindVisited);
+
+        SubscribeLocalEvent<SiliconPartComponent, MindAddedMessage>(OnBrainMindAdded);
+        SubscribeLocalEvent<SiliconComponentsComponent, MindAddedMessage>(OnSiliconMindAdded);
 
         SubscribeLocalEvent<ActiveOpticsComponent, SiliconPartStatusOnline>(OnPartOnline);
         SubscribeLocalEvent<ActiveOpticsComponent, SiliconPartStatusOffline>(OnPartOffline);
@@ -71,6 +95,12 @@ public sealed partial class SiliconPartSystem : EntitySystem
         if (!_timing.IsFirstTimePredicted)
             return;
 
+        if (!ent.Comp.Online)
+        {
+            args.Cancel();
+            return;
+        }
+
         if (!ent.Comp.Parts.TryGetValue(PartType.Optics, out var opticsContainer) || opticsContainer.ContainedEntity is not { Valid: true } opticsValidated)
         {
             args.Cancel();
@@ -89,6 +119,102 @@ public sealed partial class SiliconPartSystem : EntitySystem
         {
             _blindable.AdjustEyeDamage(ent.Owner, FixedPoint2.Clamp(_damageableSystem.GetTotalDamage(ent.Owner) / damageablePartComp.MaxDamageToRemainFunctional * 9, 0, 9).Int() - blindableComp.EyeDamage);
         }
+    }
+
+    private void OnBrainInserted(Entity<BrainComponent> ent, ref ComponentGotInsertedIntoUser args)
+    {
+        if (!TryComp<SiliconPartComponent>(ent.Owner, out var partComp))
+            return;
+
+        if (!_container.TryGetContainingContainer(ent.Owner, out var container))
+            return;
+
+        if (partComp.PartOwner is not { Valid: true } ownerValidated)
+            return;
+
+        if (!TryComp<SiliconComponentsComponent>(ownerValidated, out var siliconComp) ||
+            container.ID != PartContainerPrefix + "_" + PartType.Brain)
+            return;
+
+        if (TryComp<AntagGearRelayComponent>(ent.Owner, out var antagGearRelay))
+            antagGearRelay.User = ownerValidated;
+
+        if (!_mind.TryGetMind(ent.Owner, out var mindId, out var mind) ||
+            !_player.TryGetSessionById(mind.UserId, out var session))
+            return;
+
+        _mind.Visit(mindId, ownerValidated, mind: mind);
+    }
+
+    private void OnBrainRemoved(Entity<BrainComponent> ent, ref ComponentGotRemovedFromUser args)
+    {
+        if (!TryComp<SiliconPartComponent>(ent.Owner, out var partComp))
+            return;
+
+        if (TryComp<AntagGearRelayComponent>(ent.Owner, out var antagGearRelay))
+            antagGearRelay.User = null;
+
+        if (!_mind.TryGetMind(ent.Owner, out var mindId, out var mind) ||
+            !_player.TryGetSessionById(mind.UserId, out var session))
+            return;
+
+        _mind.UnVisit(mindId);
+    }
+
+    private void OnMindVisited(Entity<SiliconPartComponent> ent, ref EntityUnvisitedEvent args)
+    {
+        if (!_container.TryGetContainingContainer(ent.Owner, out var container))
+            return;
+
+        if (ent.Comp.PartOwner is not { Valid: true } ownerValidated)
+            return;
+
+        if (!TryComp<SiliconComponentsComponent>(ownerValidated, out var siliconComp) ||
+            container.ID != PartContainerPrefix + "_" + PartType.Brain)
+            return;
+
+        if (TryComp<AntagGearRelayComponent>(ent.Owner, out var antagGearRelay))
+            antagGearRelay.User = ownerValidated;
+
+        if (!_mind.TryGetMind(ent.Owner, out var mindId, out var mind) ||
+            !_player.TryGetSessionById(mind.UserId, out var session))
+            return;
+
+        _mind.Visit(mindId, ownerValidated, mind: mind);
+    }
+
+    private void OnBrainMindAdded(Entity<SiliconPartComponent> ent, ref MindAddedMessage args)
+    {
+        if (!_container.TryGetContainingContainer(ent.Owner, out var container))
+            return;
+
+        if (ent.Comp.PartOwner is not { Valid: true } ownerValidated)
+            return;
+
+        if (!TryComp<SiliconComponentsComponent>(ownerValidated, out var siliconComp) ||
+            container.ID != PartContainerPrefix + "_" + PartType.Brain)
+            return;
+
+        if (!_mind.TryGetMind(ent.Owner, out var mindId, out var mind) ||
+            !_player.TryGetSessionById(mind.UserId, out var session))
+            return;
+
+        _mind.Visit(mindId, ownerValidated, mind: mind);
+    }
+
+    private void OnSiliconMindAdded(Entity<SiliconComponentsComponent> ent, ref MindAddedMessage args)
+    {
+        if (!ent.Comp.Parts.TryGetValue(PartType.Brain, out var brainContainer))
+            return;
+
+        if (brainContainer.ContainedEntity is not { Valid: true } brainValidated || !HasComp<BrainComponent>(brainValidated))
+            return;
+
+        if (!_mind.TryGetMind(ent.Owner, out var mindId, out var mind) ||
+            !_player.TryGetSessionById(mind.UserId, out var session))
+            return;
+
+        _mind.TransferTo(mindId, brainValidated, mind: mind);
     }
 
     private void OnOpticsInserted(Entity<ActiveOpticsComponent> ent, ref ComponentGotInsertedIntoUser args)

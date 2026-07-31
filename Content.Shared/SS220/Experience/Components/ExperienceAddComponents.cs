@@ -34,3 +34,7 @@ public sealed partial class RoleExperienceAddComponent : BaseExperienceAddCompon
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class AdminForcedExperienceAddComponent : BaseExperienceAddComponent { }
+
+[RegisterComponent]
+[NetworkedComponent, AutoGenerateComponentState]
+public sealed partial class RaceExperienceAddComponent : BaseExperienceAddComponent { }
