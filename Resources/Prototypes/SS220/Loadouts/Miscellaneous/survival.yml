@@ -76,3 +76,12 @@
   storage:
     back:
     - BoxSurvivalMedicalIpc
+
+- type: loadout
+  id: LoadoutSpeciesBrigmedicIpc
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    back:
+    - BoxSurvivalBrigmedicIpc
