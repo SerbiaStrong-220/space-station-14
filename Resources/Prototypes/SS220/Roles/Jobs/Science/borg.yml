@@ -3,7 +3,7 @@
   name: job-name-security-borg
   description: job-description-security-borg
   experienceDefinition: StationBorgsRoleExperience
-  playTimeTracker: JobSecBorg
+  playTimeTracker: JobSecurityBorg
   requirements:
     - !type:OverallPlaytimeRequirement
       role: JobBorg
