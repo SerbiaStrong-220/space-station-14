@@ -329,10 +329,6 @@ Completion tick: the `t` of the first row with `done == true`.
 Every row also appears in §4.10 with `type == "Chat"`, without a text field. `AHelp` is the exception: it
 is not an admin log and appears only here.
 
-An `AHelp` line is keyed on `thread`, not on the sender — a staff reply carries the *player's* GUID there,
-so one conversation is `thread == player`, and `adm` says which side spoke. `e` is the sender's body when
-they had one, which staff usually do not.
-
 ### 4.10 `events.jsonl.gz`
 
 ```json
@@ -392,12 +388,6 @@ they had one, which staff usually do not.
 
 Sampled on `investigation.navmap_interval` (default `1`). Written when the pose moves more than 0.05
 tiles or radians, or `m` changes.
-
-`meta.grids[]` is populated from the grid entity's own name at the tick each row is written, last write
-winning per `g`. Most grids never get one set — a raw `MapGrid` entity has no name unless something
-(station setup, a shuttle prototype, mapping) explicitly assigned it — so `meta.grids` typically covers
-stations and named shuttles only. A `g` with no matching entry in `meta.grids` had no name at any sampled
-tick; readers MUST fall back to the raw id for those.
 
 ### 4.12 `admins.jsonl.gz`
 
