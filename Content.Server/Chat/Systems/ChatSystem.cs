@@ -779,8 +779,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Dead chat from {player:Player}: {message}");
         }
 
-        // SS220 investigation recorder: source passed through so the line still gets a position, since ghosts are resolved live rather than sampled
-        RecordInvestigationChat(source, "Dead", message, player.Name);
+        RecordInvestigationChat(source, "Dead", message, player.Name);        // SS220 investigation recorder
 
         _chatManager.ChatMessageToMany(ChatChannel.Dead, message, wrappedMessage, source, hideChat, true, clients.ToList(), author: player.UserId);
     }

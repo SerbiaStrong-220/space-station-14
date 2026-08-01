@@ -33,7 +33,6 @@ public sealed partial class InvestigationRecorderSystem
 
     private void BeginCharacterSweep()
     {
-        // Refilling mid-sweep would drop the tail it never reached and restart from the top, forever.
         if (_sweepQueue.Count > 0)
             return;
 
@@ -230,7 +229,6 @@ public sealed partial class InvestigationRecorderSystem
         return meta.EntityPrototype?.ID ?? meta.EntityName;
     }
 
-    /// <remarks>Deliberately skips tick, entity, gender, age and department: none of them can change alone.</remarks>
     private static int ComputeFingerprint(in CharacterSnapshot snapshot)
     {
         var hash = new HashCode();
@@ -269,7 +267,6 @@ public readonly record struct AntagRole(
     [property: JsonPropertyName("id")] string Id,
     [property: JsonPropertyName("name")] string Name);
 
-/// <remarks>Serialized as one <c>characters</c> row; property names are the on-disk field names (§4.6).</remarks>
 public readonly record struct CharacterSnapshot(
     [property: JsonPropertyName("t")] uint Tick,
     [property: JsonPropertyName("e")] int Entity,

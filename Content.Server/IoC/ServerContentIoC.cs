@@ -70,7 +70,6 @@ internal static class ServerContentIoC
         deps.Register<ISharedAdminLogManager, AdminLogManager>();
         deps.Register<IAdminLogManager, AdminLogManager>();
         // SS220 investigation recorder begin
-        // Both keys resolve to one instance: BuildGraph dedupes registrations sharing an implementation type.
         deps.Register<IInvestigationRecorder, InvestigationRecorder>();
         deps.Register<InvestigationRecorder>();
         // SS220 investigation recorder end

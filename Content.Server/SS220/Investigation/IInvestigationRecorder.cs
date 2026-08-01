@@ -15,10 +15,8 @@ public interface IInvestigationRecorder
 {
     bool IsRecording { get; }
 
-    /// <param name="values">Entity holes are live <see cref="EntityStringRepresentation"/> structs.</param>
     void OnAdminLog(LogType type, LogImpact impact, string message, Dictionary<string, object?> values);
 
-    /// <param name="text">Untransformed, with its <c>%key</c> language prefixes left in.</param>
     void OnChat(
         EntityUid? source,
         string channel,
@@ -28,7 +26,6 @@ public interface IInvestigationRecorder
         IReadOnlyList<string>? languages = null,
         string? radioChannel = null);
 
-    /// <param name="thread">Account the conversation belongs to, which is not the sender when staff reply.</param>
     void OnAhelp(
         EntityUid? source,
         Guid thread,

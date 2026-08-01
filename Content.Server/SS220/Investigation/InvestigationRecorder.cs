@@ -183,7 +183,6 @@ public sealed partial class InvestigationRecorder : IInvestigationRecorder
         if (_session is not { } session)
             return;
 
-        // Held samples exist only on the tracked components and need a live session to write into.
         _positionSource?.FlushPendingPositions();
 
         _session = null;
@@ -214,7 +213,7 @@ public sealed partial class InvestigationRecorder : IInvestigationRecorder
         }
     }
 
-    /// <remarks>Age comes from the directory name: a copy or restore rewrites mtimes.</remarks>
+    /// <remarks>Age comes from the directory name.
     private void PruneOldBundles(ResPath baseDir)
     {
         var retentionDays = _cfg.GetCVar(CCVars220.InvestigationRetentionDays);

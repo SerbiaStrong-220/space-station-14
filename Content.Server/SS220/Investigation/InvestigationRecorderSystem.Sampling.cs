@@ -55,8 +55,8 @@ public sealed partial class InvestigationRecorderSystem
     }
 
     /// <remarks>
-    ///     Two filters, both aimed at a reader that interpolates between rows: an epsilon that drops entities
-    ///     which have not moved, and dead reckoning, which keeps only the ticks where the path changes direction.
+    ///     Two filters.
+    ///     Epsilon that drops entities which have not moved  and dead reckoning.
     /// </remarks>
     public void RecordPosition(Entity<InvestigationTrackedComponent> ent, uint tick, SampledPosition observed)
     {
