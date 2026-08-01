@@ -921,6 +921,7 @@
   id: JanitorEquipment
   name: loadout-group-janitor-equipment
   minLimit: 0
+  maxLimit: 2
   loadouts:
   - JRMopItem
   - SoapJR
@@ -928,8 +929,10 @@
 - type: loadoutGroup
   id: JanitorPDA
   name: loadout-group-janitor-pda
-  minLimit: 0
+  minLimit: 1
+  maxLimit: 1
   loadouts:
+  - JanitorPDA
   - JanitorJRPDA
 
   # Уборщик (Конец)

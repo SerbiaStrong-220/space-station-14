@@ -132,6 +132,11 @@
   equipment:
     id: JanitorJRPDA
 
+- type: loadout
+  id: JanitorPDA
+  equipment:
+    id: JanitorPDA
+
 #Head
 - type: loadout
   id: JanitorOrangeHat
