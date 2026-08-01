@@ -37,10 +37,11 @@ public sealed partial class FungusMachineComponent : Component
     [DataField]
     public EntityWhitelist UsersWhitelist = new()
     {
-        Components = new[]
-        {
+        Components =
+        [
             "MiGo",
-        },
+            "CultYogg"
+        ],
     };
 }
 
