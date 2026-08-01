@@ -5,3 +5,11 @@
   components:
   - type: StunnedStatusEffect
   - type: KnockdownStatusEffect
+
+- type: entity
+  parent: MobStatusEffectDebuff
+  id: MotoricFailure
+  name: motoric failure
+  components:
+  - type: StunnedStatusEffect
+  - type: KnockdownStatusEffect

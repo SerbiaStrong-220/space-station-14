@@ -16,6 +16,9 @@ public sealed partial class ComponentAddingSiliconComponentSystem : EntitySystem
 
         SubscribeLocalEvent<ComponentAddingSiliconPartComponent, SiliconPartStatusOnline>(OnPartOnline);
         SubscribeLocalEvent<ComponentAddingSiliconPartComponent, SiliconPartStatusOffline>(OnPartOffline);
+
+        SubscribeLocalEvent<ComponentAddingSiliconModuleComponent, SiliconModuleGotInserted>(OnModuleInserted);
+        SubscribeLocalEvent<ComponentAddingSiliconModuleComponent, SiliconModuleGotRemoved>(OnModuleRemoved);
     }
 
     private void OnEntityInserted(Entity<ComponentAddingSiliconPartComponent> ent, ref ComponentGotInsertedIntoUser args)
@@ -79,5 +82,22 @@ public sealed partial class ComponentAddingSiliconComponentSystem : EntitySystem
             return;
 
         _entManager.RemoveComponents(ownerValidated, ent.Comp.Components);
+    }
+
+    private void OnModuleInserted(Entity<ComponentAddingSiliconModuleComponent> ent, ref SiliconModuleGotInserted args)
+    {
+        if (!HasComp<SiliconComponentsComponent>(args.Owner))
+            return;
+
+
+        _entManager.AddComponents(args.Owner, ent.Comp.Components);
+    }
+
+    private void OnModuleRemoved(Entity<ComponentAddingSiliconModuleComponent> ent, ref SiliconModuleGotRemoved args)
+    {
+        if (!TryComp<SiliconComponentsComponent>(args.Owner, out var ownerComp))
+            return;
+
+        _entManager.RemoveComponents(args.Owner, ent.Comp.Components);
     }
 }

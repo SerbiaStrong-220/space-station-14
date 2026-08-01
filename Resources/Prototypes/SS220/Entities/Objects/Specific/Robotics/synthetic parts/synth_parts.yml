@@ -1,0 +1,156 @@
+- type: entity
+  id: SynthPartBase
+  parent: BaseItem
+  name: base synth mod
+  abstract: true
+  components:
+  - type: SiliconPart
+  - type: Item
+    storedRotation: -90
+    inhandVisuals:
+      left:
+      - state: base-icon-inhand-left
+        color: "#8FCBCB"
+      - state: base-module-inhand-left
+        color: "#A1A1A1"
+      - state: base-part-inhand-left
+      - state: base-stripes-inhand-left
+        color: "#7D7D7D"
+      right:
+      - state: base-icon-inhand-right
+        color: "#8FCBCB"
+      - state: base-module-inhand-right
+        color: "#A1A1A1"
+      - state: base-part-inhand-right
+      - state: base-stripes-inhand-right
+        color: "#7D7D7D"
+  - type: Sprite
+    sprite: Objects/Specific/Robotics/borgmodule.rsi
+    state: engineering
+
+- type: entity
+  id: SynthOpticsTest
+  parent: SynthPartBase
+  name: base synth optics
+  components:
+  - type: SiliconPart
+    partType: Optics
+  - type: ActiveOptics
+  - type: Item
+    storedRotation: -90
+    inhandVisuals:
+      left:
+      - state: base-icon-inhand-left
+        color: "#8FCBCB"
+      - state: base-module-inhand-left
+        color: "#A1A1A1"
+      - state: base-part-inhand-left
+      - state: base-stripes-inhand-left
+        color: "#7D7D7D"
+      right:
+      - state: base-icon-inhand-right
+        color: "#8FCBCB"
+      - state: base-module-inhand-right
+        color: "#A1A1A1"
+      - state: base-part-inhand-right
+      - state: base-stripes-inhand-right
+        color: "#7D7D7D"
+  - type: Sprite
+    sprite: Objects/Specific/Robotics/borgmodule.rsi
+    state: engineering
+
+- type: entity
+  id: SynthBrainTest
+  parent: SynthPartBase
+  name: base synth brain
+  components:
+  - type: MindExaminable
+  - type: AntagGearRelay
+  - type: AntagSelection
+  - type: SiliconPart
+    partType: Brain
+  - type: Brain
+  - type: Item
+    storedRotation: -90
+    inhandVisuals:
+      left:
+      - state: base-icon-inhand-left
+        color: "#8FCBCB"
+      - state: base-module-inhand-left
+        color: "#A1A1A1"
+      - state: base-part-inhand-left
+      - state: base-stripes-inhand-left
+        color: "#7D7D7D"
+      right:
+      - state: base-icon-inhand-right
+        color: "#8FCBCB"
+      - state: base-module-inhand-right
+        color: "#A1A1A1"
+      - state: base-part-inhand-right
+      - state: base-stripes-inhand-right
+        color: "#7D7D7D"
+  - type: Sprite
+    sprite: Objects/Specific/Robotics/borgmodule.rsi
+    state: engineering
+
+- type: entity
+  id: SynthServoTest
+  parent: SynthPartBase
+  name: base synth servo
+  components:
+  - type: MindExaminable
+  - type: SiliconPart
+    partType: Brain
+  - type: Item
+    storedRotation: -90
+    inhandVisuals:
+      left:
+      - state: base-icon-inhand-left
+        color: "#8FCBCB"
+      - state: base-module-inhand-left
+        color: "#A1A1A1"
+      - state: base-part-inhand-left
+      - state: base-stripes-inhand-left
+        color: "#7D7D7D"
+      right:
+      - state: base-icon-inhand-right
+        color: "#8FCBCB"
+      - state: base-module-inhand-right
+        color: "#A1A1A1"
+      - state: base-part-inhand-right
+      - state: base-stripes-inhand-right
+        color: "#7D7D7D"
+  - type: Sprite
+    sprite: Objects/Specific/Robotics/borgmodule.rsi
+    state: engineering
+
+- type: entity
+  id: SynthServoTest
+  parent: SynthPartBase
+  name: base synth servo
+  components:
+  - type: MindExaminable
+  - type: SiliconPart
+    partType: Brain
+  - type: Item
+    storedRotation: -90
+    inhandVisuals:
+      left:
+      - state: base-icon-inhand-left
+        color: "#8FCBCB"
+      - state: base-module-inhand-left
+        color: "#A1A1A1"
+      - state: base-part-inhand-left
+      - state: base-stripes-inhand-left
+        color: "#7D7D7D"
+      right:
+      - state: base-icon-inhand-right
+        color: "#8FCBCB"
+      - state: base-module-inhand-right
+        color: "#A1A1A1"
+      - state: base-part-inhand-right
+      - state: base-stripes-inhand-right
+        color: "#7D7D7D"
+  - type: Sprite
+    sprite: Objects/Specific/Robotics/borgmodule.rsi
+    state: engineering

@@ -8,6 +8,8 @@ using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
+using Content.Shared.Movement.Systems;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.SS220.AltBlocking;
 using Content.Shared.SS220.Experience;
 using Content.Shared.SS220.Mind;
@@ -28,6 +30,8 @@ public sealed partial class SiliconPartSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private IEntityManager _entManager = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private MovementSpeedModifierSystem _movement = default!;
 
     private static readonly string PartContainerPrefix = "silicon_component";
 
@@ -40,12 +44,20 @@ public sealed partial class SiliconPartSystem : EntitySystem
 
         SubscribeLocalEvent<SiliconComponentsComponent, CanSeeAttemptEvent>(OnCanSeeCheck);
 
+        SubscribeLocalEvent<SiliconComponentsComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovementSpeed);
+
         SubscribeLocalEvent<ActiveOpticsComponent, ComponentGotInsertedIntoUser>(OnOpticsInserted);
         SubscribeLocalEvent<ActiveOpticsComponent, ComponentGotRemovedFromUser>(OnOpticsRemoved);
         SubscribeLocalEvent<ActiveOpticsComponent, DamageChangedEvent>(OnOpticsDamageChanged);
 
         SubscribeLocalEvent<BrainComponent, ComponentGotInsertedIntoUser>(OnBrainInserted);
         SubscribeLocalEvent<BrainComponent, ComponentGotRemovedFromUser>(OnBrainRemoved);
+
+        SubscribeLocalEvent<ServoComponent, ComponentGotInsertedIntoUser>(OnServoInserted);
+        SubscribeLocalEvent<ServoComponent, ComponentGotRemovedFromUser>(OnServoRemoved);
+
+        SubscribeLocalEvent<MovementSpeedModifyingPartComponent, ComponentGotInsertedIntoUser>(OnMovementModifierInserted);
+        SubscribeLocalEvent<MovementSpeedModifyingPartComponent, ComponentGotRemovedFromUser>(OnMovementModifierRemoved);
 
         SubscribeLocalEvent<SiliconPartComponent, EntityUnvisitedEvent>(OnMindVisited);
 
@@ -121,6 +133,40 @@ public sealed partial class SiliconPartSystem : EntitySystem
         {
             _blindable.AdjustEyeDamage(ent.Owner, FixedPoint2.Clamp(_damageableSystem.GetTotalDamage(ent.Owner) / damageablePartComp.MaxDamageToRemainFunctional * 9, 0, 9).Int() - blindableComp.EyeDamage);
         }
+    }
+
+    private void OnRefreshMovementSpeed(Entity<SiliconComponentsComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
+    {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
+        foreach (var part in ent.Comp.Parts.Values)
+        {
+            if (!TryComp<MovementSpeedModifyingPartComponent>(part.ContainedEntity, out var speedModComp))
+                continue;
+
+            args.ModifySpeed(speedModComp.SpeedMod.SprintSpeedModifier, speedModComp.SpeedMod.WalkSpeedModifier);
+        }
+    }
+
+    private void OnServoInserted(Entity<ServoComponent> ent, ref ComponentGotInsertedIntoUser args)
+    {
+        _statusEffects.TryRemoveStatusEffect(args.Owner, "StatusEffectPowerOffline");
+    }
+
+    private void OnServoRemoved(Entity<ServoComponent> ent, ref ComponentGotRemovedFromUser args)
+    {
+        _statusEffects.TrySetStatusEffectDuration(args.Owner, "StatusEffectPowerOffline", new TimeSpan(0, 0, 30));
+    }
+
+    private void OnMovementModifierInserted(Entity<MovementSpeedModifyingPartComponent> ent, ref ComponentGotInsertedIntoUser args)
+    {
+        _movement.RefreshMovementSpeedModifiers(ent);
+    }
+
+    private void OnMovementModifierRemoved(Entity<MovementSpeedModifyingPartComponent> ent, ref ComponentGotRemovedFromUser args)
+    {
+        _movement.RefreshMovementSpeedModifiers(ent);
     }
 
     private void OnBrainInserted(Entity<BrainComponent> ent, ref ComponentGotInsertedIntoUser args)

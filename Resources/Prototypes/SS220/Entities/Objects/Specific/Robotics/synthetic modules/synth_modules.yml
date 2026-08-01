@@ -1,10 +1,10 @@
 - type: entity
-  id: SynthPartBase
+  id: SynthModuleBase
   parent: BaseItem
   name: base synth mod
   abstract: true
   components:
-  - type: SiliconPart
+  - type: SiliconModule
   - type: Item
     storedRotation: -90
     inhandVisuals:
@@ -29,13 +29,10 @@
     state: engineering
 
 - type: entity
-  id: SynthOpticsTest
-  parent: SynthPartBase
+  id: SynthModTest
+  parent: SynthModuleBase
   name: base synth mod
   components:
-  - type: SiliconPart
-    partType: Optics
-  - type: ActiveOptics
   - type: Item
     storedRotation: -90
     inhandVisuals:
@@ -60,16 +57,36 @@
     state: engineering
 
 - type: entity
-  id: SynthBrainTest
-  parent: SynthPartBase
-  name: base synth mod
+  id: SynthModHiddenUplink
+  parent: BaseUplinkRadio20TC
+  name: portable radio
+  description: It looks like it could be easily hidden somewhere..
   components:
-  - type: MindExaminable
-  - type: AntagGearRelay
-  - type: AntagSelection
-  - type: SiliconPart
-    partType: Brain
-  - type: Brain
+  - type: SiliconModule
+  - type: Sprite
+    sprite: Objects/Devices/communication.rsi
+    layers:
+    - state: old-radio
+  - type: Item
+    sprite: Objects/Devices/communication.rsi
+    heldPrefix: old-radio
+  - type: UserInterface
+    interfaces:
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
+  - type: ActivatableUI
+    key: enum.StoreUiKey.Key
+  - type: Store
+    balance:
+      Telecrystal: 0
+  - type: ScaleVisuals
+    scale: 0.8, 0.8
+
+- type: entity
+  id: SynthModLightIntensifier
+  parent: SynthModTest
+  name: image intensifier module
+  components:
   - type: Item
     storedRotation: -90
     inhandVisuals:
@@ -89,6 +106,14 @@
       - state: base-part-inhand-right
       - state: base-stripes-inhand-right
         color: "#7D7D7D"
+  - type: Tag
+    tags: [ImageIntensifierModule]
+  - type: ComponentAddingSiliconModule
+    components:
+    - type: ScotopicVision
+  - type: SiliconModuleBlacklist
+    moduleBlacklist:
+      tags: [ImageIntensifierModule]
   - type: Sprite
     sprite: Objects/Specific/Robotics/borgmodule.rsi
     state: engineering

@@ -6,7 +6,7 @@ namespace Content.Shared.SS220.SiliconComponents;
 
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class SiliconModuleComponent : Component //Yeah-yeah the naming is pretty messed up
+public sealed partial class SiliconModuleComponent : Component
 {
     [DataField]
     [AutoNetworkedField]

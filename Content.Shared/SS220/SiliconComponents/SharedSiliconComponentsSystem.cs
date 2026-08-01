@@ -4,23 +4,18 @@ using Content.Shared.ActionBlocker;
 using Content.Shared.DoAfter;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
-using Content.Shared.Ghost;
-using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
-using Content.Shared.Lock;
 using Content.Shared.Popups;
 using Content.Shared.PowerCell;
 using Content.Shared.Speech.Muting;
 using Content.Shared.StatusEffectNew;
-using Content.Shared.UserInterface;
 using Content.Shared.Verbs;
 using Content.Shared.Wires;
 using Robust.Shared.Containers;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using System.Reflection.PortableExecutable;
 
 namespace Content.Shared.SS220.SiliconComponents;
 
@@ -34,8 +29,9 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
     [Dependency] private BlindableSystem _blindable = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private StatusEffectsSystem _statusEffects = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly ActionBlockerSystem _blockerSystem = default!;
+    [Dependency] private SharedUserInterfaceSystem _uiSystem = default!;
+    [Dependency] private ActionBlockerSystem _blockerSystem = default!;
+    [Dependency] private SiliconModuleSystem _module = default!;
 
     private static readonly LocId NotEnoughSpace = "silicon-component-not-enough-space";
     private static readonly LocId InstallationBegun = "silicon-component-begin-install";
@@ -101,7 +97,6 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
             Dirty(uid, siliconComponent);
 
             // If we aren't drawing and suddenly get enough power to draw again, reenable.
-            //TryActivate((uid, siliconComponent));
             if (_powerCell.TryUseCharge(uid, siliconComponent.ChargeToUse.Float()))
             {
                 if (siliconComponent.Online)
@@ -129,6 +124,9 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
 
     private void OnSiliconInteractedWith(Entity<SiliconComponentsComponent> ent, ref AfterInteractUsingEvent args)
     {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
         if (args.Handled || !args.CanReach || args.Target == null)
             return;
 
@@ -400,12 +398,15 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
         if (TryComp<WiresPanelComponent>(ent.Owner, out var panelComp) && !panelComp.Open)
             return;
 
-        if (!TryComp<SiliconModuleComponent>(modValidated, out var partComp))
+        if (!TryComp<SiliconModuleComponent>(modValidated, out var modComp))
+            return;
+
+        if (!_module.CanInsertModule(ent, (modValidated, modComp)))
             return;
 
         _container.Insert(modValidated, ent.Comp.ModuleContainer);
 
-        Dirty(modValidated, partComp);
+        Dirty(modValidated, modComp);
     }
 
     private void OnModRemove(Entity<SiliconComponentsComponent> ent, ref RemoveSiliconModuleEvent args)
