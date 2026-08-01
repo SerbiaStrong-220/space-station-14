@@ -5,7 +5,6 @@ using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
-using Content.Server.SS220.Investigation; // SS220 investigation recorder
 using Content.Server.Speech.EntitySystems;
 using Content.Server.Speech.Prototypes;
 using Content.Server.Station.Systems;
@@ -66,7 +65,6 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IInvestigationRecorder _investigation = default!; // SS220 investigation recorder
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly StationSystem _stationSystem = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
@@ -552,13 +550,7 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         var defaultLanguageId = _languageSystem.GetSelectedLanguage(source)?.ID ?? "none"; // SS220 languages
 
-        // SS220 investigation recorder begin
-        if (_investigation.IsRecording)
-        {
-            var (defaultLanguage, spokenLanguages) = SpokenLanguages(source, languageMessage);
-            _investigation.OnChat(source, "Say", originalMessage, name, defaultLanguage, spokenLanguages);
-        }
-        // SS220 investigation recorder end
+        RecordInvestigationChat(source, "Say", originalMessage, name, languageMessage); // SS220 investigation recorder
 
         if (originalMessage == message)
         {
@@ -671,13 +663,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         var defaultLanguageId = _languageSystem.GetSelectedLanguage(source)?.ID ?? "none";
         // SS220 languages end
 
-        // SS220 investigation recorder begin
-        if (!hideLog && _investigation.IsRecording)
-        {
-            var (defaultLanguage, spokenLanguages) = SpokenLanguages(source, languageMessage);
-            _investigation.OnChat(source, "Whisper", originalMessage, name, defaultLanguage, spokenLanguages);
-        }
-        // SS220 investigation recorder end
+        if (!hideLog)
+            RecordInvestigationChat(source, "Whisper", originalMessage, name, languageMessage); // SS220 investigation recorder
 
         if (!hideLog)
             if (originalMessage == message)
@@ -728,10 +715,8 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         SendInVoiceRange(ChatChannel.Emotes, action, wrappedMessage, source, range, author);
 
-        // SS220 investigation recorder begin
-        if (!hideLog && _investigation.IsRecording)
-            _investigation.OnChat(source, "Emote", action, name);
-        // SS220 investigation recorder end
+        if (!hideLog)
+            RecordInvestigationChat(source, "Emote", action, name); // SS220 investigation recorder
 
         if (!hideLog)
             if (name != Name(source))
@@ -761,10 +746,7 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         SendInVoiceRange(ChatChannel.LOOC, message, wrappedMessage, source, hideChat ? ChatTransmitRange.HideChat : ChatTransmitRange.Normal, player.UserId);
 
-        // SS220 investigation recorder begin
-        if (_investigation.IsRecording)
-            _investigation.OnChat(source, "LOOC", message, player.Name);
-        // SS220 investigation recorder end
+        RecordInvestigationChat(source, "LOOC", message, player.Name); // SS220 investigation recorder
 
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"LOOC from {player:Player}: {message}");
     }
@@ -797,29 +779,14 @@ public sealed partial class ChatSystem : SharedChatSystem
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Dead chat from {player:Player}: {message}");
         }
 
-        // SS220 investigation recorder begin
-        // Speaker passed through so the line still gets a position: ghosts are resolved live, not sampled.
-        if (_investigation.IsRecording)
-            _investigation.OnChat(source, "Dead", message, player.Name);
-        // SS220 investigation recorder end
+        // SS220 investigation recorder: source passed through so the line still gets a position, since ghosts are resolved live rather than sampled
+        RecordInvestigationChat(source, "Dead", message, player.Name);
 
         _chatManager.ChatMessageToMany(ChatChannel.Dead, message, wrappedMessage, source, hideChat, true, clients.ToList(), author: player.UserId);
     }
     #endregion
 
     #region Utility
-
-    // SS220 investigation recorder begin
-    /// <summary>
-    ///     <c>Default</c> is the speaker's selected language; <c>All</c> is every language the sanitizer found,
-    ///     which differs when a <c>%key</c> switched language part-way through the sentence.
-    /// </summary>
-    private (string? Default, List<string> All) SpokenLanguages(EntityUid source, LanguageMessage? languageMessage)
-    {
-        var selected = _languageSystem.GetSelectedLanguage(source)?.ID;
-        return (selected, languageMessage.SpokenLanguageIds(selected));
-    }
-    // SS220 investigation recorder end
 
     private enum MessageRangeCheckResult
     {

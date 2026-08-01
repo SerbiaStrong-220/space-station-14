@@ -127,5 +127,4 @@ public sealed partial class InvestigationRecorder
             }
         }
     }
-
 }

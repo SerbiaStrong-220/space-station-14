@@ -1,5 +1,4 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using System.Linq;
 using System.Text.Json.Serialization;
 using Content.Shared.Humanoid;
 using Content.Shared.Inventory;
@@ -112,7 +111,7 @@ public sealed partial class InvestigationRecorderSystem
             tracked.DirtyLoadout = true;
     }
 
-    private object BuildCharacterSnapshot(EntityUid uid, EntityUid? mindId, out int fingerprint)
+    private CharacterSnapshot BuildCharacterSnapshot(EntityUid uid, EntityUid? mindId, out int fingerprint)
     {
         string? species = null;
         string? gender = null;
@@ -120,11 +119,9 @@ public sealed partial class InvestigationRecorderSystem
 
         if (TryComp<HumanoidProfileComponent>(uid, out var profile))
         {
-            // Copied to locals: the component is [Access]-restricted, and direct calls read as execute access.
-            var speciesProto = profile.Species;
             var profileGender = profile.Gender;
 
-            species = speciesProto.Id;
+            species = profile.Species.Id;
             gender = profileGender.ToString();
             age = profile.Age;
         }
@@ -144,12 +141,18 @@ public sealed partial class InvestigationRecorderSystem
         if (job != null && DepartmentsByJob.TryGetValue(job, out var jobDepartment))
             department = jobDepartment;
 
-        var access = _accessReader.FindAccessTags(uid)
-            .Select(tag => tag.Id)
-            .OrderBy(tag => tag, StringComparer.Ordinal)
-            .ToList();
+        var access = new List<string>();
+        foreach (var tag in _accessReader.FindAccessTags(uid))
+        {
+            access.Add(tag.Id);
+        }
+
+        access.Sort(StringComparer.Ordinal);
 
         var worn = new Dictionary<string, string>();
+        var held = new List<string>();
+        var carried = new List<string>();
+
         if (TryComp<InventoryComponent>(uid, out var inventory))
         {
             var slots = _inventory.GetSlotEnumerator((uid, inventory));
@@ -159,55 +162,36 @@ public sealed partial class InvestigationRecorderSystem
                     continue;
 
                 worn[container.ID] = DescribeItem(item);
-            }
-        }
-
-        var held = _hands.EnumerateHeld(uid)
-            .Select(DescribeItem)
-            .ToList();
-
-        var carried = new List<string>();
-        if (_storageDepth > 0)
-        {
-            if (inventory != null)
-            {
-                var slots = _inventory.GetSlotEnumerator((uid, inventory));
-                while (slots.MoveNext(out var container))
-                {
-                    if (container.ContainedEntity is { } item)
-                        CollectStorage(item, _storageDepth, carried);
-                }
-            }
-
-            foreach (var item in _hands.EnumerateHeld(uid))
-            {
                 CollectStorage(item, _storageDepth, carried);
             }
-
-            carried.Sort(StringComparer.Ordinal);
         }
 
-        var name = _metaQuery.TryComp(uid, out var meta) ? meta.EntityName : null;
-
-        fingerprint = ComputeFingerprint(species, job, name, antagRoles, access, worn, held, carried);
-
-        return new
+        foreach (var item in _hands.EnumerateHeld(uid))
         {
-            t = _timing.CurTick.Value,
-            e = uid.Id,
-            name,
+            held.Add(DescribeItem(item));
+            CollectStorage(item, _storageDepth, carried);
+        }
+
+        carried.Sort(StringComparer.Ordinal);
+
+        var snapshot = new CharacterSnapshot(
+            _timing.CurTick.Value,
+            uid.Id,
+            _metaQuery.TryComp(uid, out var meta) ? meta.EntityName : null,
             species,
             gender,
             age,
             job,
             department,
-            antag = antagRoles is { Count: > 0 } ? true : (bool?) null,
-            roles = antagRoles is { Count: > 0 } ? antagRoles : null,
+            antagRoles is { Count: > 0 } ? true : null,
+            antagRoles is { Count: > 0 } ? antagRoles : null,
             access,
             worn,
-            hands = held,
-            carried,
-        };
+            held,
+            carried);
+
+        fingerprint = ComputeFingerprint(snapshot);
+        return snapshot;
     }
 
     private List<AntagRole>? BuildAntagRoles(EntityUid mindId)
@@ -238,10 +222,6 @@ public sealed partial class InvestigationRecorderSystem
         }
     }
 
-    private readonly record struct AntagRole(
-        [property: JsonPropertyName("id")] string Id,
-        [property: JsonPropertyName("name")] string Name);
-
     private string DescribeItem(EntityUid item)
     {
         if (!_metaQuery.TryComp(item, out var meta))
@@ -250,44 +230,58 @@ public sealed partial class InvestigationRecorderSystem
         return meta.EntityPrototype?.ID ?? meta.EntityName;
     }
 
-    private static int ComputeFingerprint(
-        string? species,
-        string? job,
-        string? name,
-        List<AntagRole>? antagRoles,
-        List<string> access,
-        Dictionary<string, string> worn,
-        List<string> held,
-        List<string> carried)
+    /// <remarks>Deliberately skips tick, entity, gender, age and department: none of them can change alone.</remarks>
+    private static int ComputeFingerprint(in CharacterSnapshot snapshot)
     {
         var hash = new HashCode();
-        hash.Add(species);
-        hash.Add(job);
-        hash.Add(name);
+        hash.Add(snapshot.Species);
+        hash.Add(snapshot.Job);
+        hash.Add(snapshot.Name);
 
-        if (antagRoles != null)
+        if (snapshot.Roles != null)
         {
-            foreach (var role in antagRoles)
+            foreach (var role in snapshot.Roles)
             {
                 hash.Add(role.Id);
             }
         }
 
-        foreach (var tag in access)
+        foreach (var tag in snapshot.Access)
             hash.Add(tag);
 
-        foreach (var (slot, item) in worn)
+        foreach (var (slot, item) in snapshot.Worn)
         {
             hash.Add(slot);
             hash.Add(item);
         }
 
-        foreach (var item in held)
+        foreach (var item in snapshot.Hands)
             hash.Add(item);
 
-        foreach (var item in carried)
+        foreach (var item in snapshot.Carried)
             hash.Add(item);
 
         return hash.ToHashCode();
     }
 }
+
+public readonly record struct AntagRole(
+    [property: JsonPropertyName("id")] string Id,
+    [property: JsonPropertyName("name")] string Name);
+
+/// <remarks>Serialized as one <c>characters</c> row; property names are the on-disk field names (§4.6).</remarks>
+public readonly record struct CharacterSnapshot(
+    [property: JsonPropertyName("t")] uint Tick,
+    [property: JsonPropertyName("e")] int Entity,
+    [property: JsonPropertyName("name")] string? Name,
+    [property: JsonPropertyName("species")] string? Species,
+    [property: JsonPropertyName("gender")] string? Gender,
+    [property: JsonPropertyName("age")] int Age,
+    [property: JsonPropertyName("job")] string? Job,
+    [property: JsonPropertyName("department")] string? Department,
+    [property: JsonPropertyName("antag")] bool? Antag,
+    [property: JsonPropertyName("roles")] List<AntagRole>? Roles,
+    [property: JsonPropertyName("access")] List<string> Access,
+    [property: JsonPropertyName("worn")] Dictionary<string, string> Worn,
+    [property: JsonPropertyName("hands")] List<string> Hands,
+    [property: JsonPropertyName("carried")] List<string> Carried);

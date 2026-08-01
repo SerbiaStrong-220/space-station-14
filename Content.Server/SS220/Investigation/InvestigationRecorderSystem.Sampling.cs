@@ -1,5 +1,4 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using System.Linq;
 using System.Numerics;
 using Content.Shared.Damage.Components;
 using Content.Shared.Mobs.Components;
@@ -10,7 +9,6 @@ namespace Content.Server.SS220.Investigation;
 
 public sealed partial class InvestigationRecorderSystem
 {
-    /// <inheritdoc/>
     public bool TryGetPosition(EntityUid uid, out SampledPosition position)
     {
         position = default;
@@ -57,9 +55,8 @@ public sealed partial class InvestigationRecorderSystem
     }
 
     /// <remarks>
-    ///    Two filters:
-    ///     An epsilon that drops unmoved entities
-    ///     Dead reckoning. Only direction changes become rows.
+    ///     Two filters, both aimed at a reader that interpolates between rows: an epsilon that drops entities
+    ///     which have not moved, and dead reckoning, which keeps only the ticks where the path changes direction.
     /// </remarks>
     public void RecordPosition(Entity<InvestigationTrackedComponent> ent, uint tick, SampledPosition observed)
     {
@@ -155,7 +152,7 @@ public sealed partial class InvestigationRecorderSystem
         if (!TryComp<DamageableComponent>(uid, out var damageable))
             return;
 
-        // GetTotalDamage is obsolete; a health bar is exactly the one-number reduction it warns about.
+        // GetTotalDamage is obsolete; a health bar is exactly the one-number reduction it warns against.
 #pragma warning disable CS0618
         var total = (float) _damageable.GetTotalDamage((uid, damageable));
 #pragma warning restore CS0618
@@ -194,7 +191,8 @@ public sealed partial class InvestigationRecorderSystem
             grid.Pose = pose;
 
             var mapName = _metaQuery.TryComp(xform.MapUid, out var mapMeta) ? mapMeta.EntityName : null;
-            _recorder.WriteGridPose(uid, pose, mapName);
+            var gridName = _metaQuery.TryComp(uid, out var gridMeta) ? gridMeta.EntityName : null;
+            _recorder.WriteGridPose(uid, pose, mapName, gridName);
         }
     }
 
@@ -257,17 +255,21 @@ public sealed partial class InvestigationRecorderSystem
             grid.SentFullSnapshot = true;
 
             var beacons = ComputeBeaconHash(navMap);
-            if (grid.BeaconHash != beacons)
-            {
-                _recorder.WriteNavMapBeacons(uid, navMap.Beacons.Values.Select(object (beacon) => new
-                {
-                    name = beacon.Text,
-                    x = Math.Round(beacon.Position.X, 2),
-                    y = Math.Round(beacon.Position.Y, 2),
-                }));
+            if (grid.BeaconHash == beacons)
+                continue;
 
-                grid.BeaconHash = beacons;
+            grid.BeaconHash = beacons;
+
+            var rows = new List<InvestigationRecorder.BeaconRow>(navMap.Beacons.Count);
+            foreach (var beacon in navMap.Beacons.Values)
+            {
+                rows.Add(new InvestigationRecorder.BeaconRow(
+                    beacon.Text,
+                    Math.Round(beacon.Position.X, 2),
+                    Math.Round(beacon.Position.Y, 2)));
             }
+
+            _recorder.WriteNavMapBeacons(uid, rows);
         }
     }
 

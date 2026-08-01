@@ -1,13 +1,13 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using System.Numerics;
 using Content.Shared.Access.Systems;
+using Content.Shared.Damage.Systems;
 using Content.Shared.SS220.CCVars;
 using Content.Shared.GameTicking;
 using Content.Shared.Ghost;
 using Content.Shared.Hands.EntitySystems;
 using Content.Server.Maps;
 using Content.Shared.Inventory;
-using Content.Shared.Damage.Systems;
 using Content.Shared.Hands;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Mind;
@@ -17,6 +17,7 @@ using Content.Shared.Pinpointer;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.Objectives.Systems;
+using Content.Server.Administration.Managers;
 using Content.Server.GameTicking;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
@@ -46,11 +47,17 @@ public sealed partial class InvestigationRecorderSystem : EntitySystem, IInvesti
     [Dependency] private readonly SharedRoleSystem _roles = default!;
     [Dependency] private readonly SharedObjectivesSystem _objectives = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private readonly IAdminManager _admin = default!;
+
+    private const int SweepBatchSize = 4;
+    private const float GridPoseEpsilon = 0.05f;
 
     private TimeSpan _positionInterval;
     private TimeSpan _navMapInterval;
     private TimeSpan _characterInterval;
     private TimeSpan _dirtyInterval;
+    private TimeSpan _flushInterval;
     private float _positionEpsilon;
     private int _storageDepth;
 
@@ -58,19 +65,14 @@ public sealed partial class InvestigationRecorderSystem : EntitySystem, IInvesti
     private TimeSpan _nextNavMapSample;
     private TimeSpan _nextCharacterSweep;
     private TimeSpan _nextDirtyDrain;
+    private TimeSpan _nextFlush;
     private bool _wasRecording;
 
-    private const int SweepBatchSize = 4;
-
     private readonly Queue<EntityUid> _sweepQueue = new();
-
     private readonly Dictionary<EntityUid, Matrix3x2> _gridMatrices = new();
 
     private Dictionary<string, string>? _departmentsByJob;
-
     private GameTick _lastNavMapTick = GameTick.Zero;
-
-    private const float GridPoseEpsilon = 0.05f;
 
     private EntityQuery<TransformComponent> _xformQuery;
     private EntityQuery<MetaDataComponent> _metaQuery;
@@ -96,6 +98,7 @@ public sealed partial class InvestigationRecorderSystem : EntitySystem, IInvesti
         _cfg.OnValueChanged(CCVars220.InvestigationNavMapInterval, i => _navMapInterval = TimeSpan.FromSeconds(i), true);
         _cfg.OnValueChanged(CCVars220.InvestigationCharacterInterval, i => _characterInterval = TimeSpan.FromSeconds(i), true);
         _cfg.OnValueChanged(CCVars220.InvestigationDirtyInterval, i => _dirtyInterval = TimeSpan.FromSeconds(i), true);
+        _cfg.OnValueChanged(CCVars220.InvestigationFlushInterval, i => _flushInterval = TimeSpan.FromSeconds(i), true);
         _cfg.OnValueChanged(CCVars220.InvestigationStorageDepth, depth => _storageDepth = depth, true);
 
         SubscribeLocalEvent<RoundStartedEvent>(OnRoundStarted);
@@ -115,13 +118,22 @@ public sealed partial class InvestigationRecorderSystem : EntitySystem, IInvesti
         SubscribeLocalEvent<MindContainerComponent, MindAddedMessage>(OnMindAdded);
         SubscribeLocalEvent<MindContainerComponent, MindRemovedMessage>(OnMindRemoved);
 
-        _prototypes.PrototypesReloaded += _ => _departmentsByJob = null;
+        InitializeAdmins();
+
+        _prototypes.PrototypesReloaded += OnPrototypesReloaded;
     }
 
     public override void Shutdown()
     {
         base.Shutdown();
+        _prototypes.PrototypesReloaded -= OnPrototypesReloaded;
+        ShutdownAdmins();
         _recorder.Shutdown();
+    }
+
+    private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
+    {
+        _departmentsByJob = null;
     }
 
     private void OnRoundStarted(RoundStartedEvent ev)
@@ -135,6 +147,14 @@ public sealed partial class InvestigationRecorderSystem : EntitySystem, IInvesti
         RefreshGamemode();
 
         _recorder.StartRound(ev.RoundId, _gameMap.GetSelectedMap()?.MapName);
+
+        foreach (var session in _player.Sessions)
+        {
+            if (session.AttachedEntity is { } attached)
+                TrackAttached(attached, session);
+        }
+
+        SnapshotAdmins();
     }
 
     private void RefreshGamemode()
@@ -150,8 +170,7 @@ public sealed partial class InvestigationRecorderSystem : EntitySystem, IInvesti
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
-        if (_recorder.IsRecording)
-            StopRecording(null);
+        StopRecording(null);
     }
 
     private void StopRecording(TimeSpan? duration)
@@ -170,7 +189,6 @@ public sealed partial class InvestigationRecorderSystem : EntitySystem, IInvesti
             {
                 SampleCharacter((uid, tracked));
             }
-
         }
 
         _recorder.StopRound(duration);
@@ -178,30 +196,34 @@ public sealed partial class InvestigationRecorderSystem : EntitySystem, IInvesti
 
     private void OnPlayerAttached(PlayerAttachedEvent ev)
     {
-        if (!_recorder.IsRecording || IsUninterestingObserver(ev.Entity))
+        TrackAttached(ev.Entity, ev.Player);
+    }
+
+    private void TrackAttached(EntityUid uid, ICommonSession session)
+    {
+        if (!_recorder.IsRecording || _ghostQuery.HasComp(uid))
             return;
 
-        if (!_trackedQuery.HasComp(ev.Entity))
+        if (!_trackedQuery.HasComp(uid))
         {
-            var name = _metaQuery.TryComp(ev.Entity, out var meta) ? meta.EntityName : "<unknown>";
+            var name = _metaQuery.TryComp(uid, out var meta) ? meta.EntityName : "<unknown>";
             var prototype = meta?.EntityPrototype?.ID;
 
-            _recorder.TrackEntity(ev.Entity, ev.Player.UserId.UserId, ev.Player.Name, name, prototype);
-            AddComp<InvestigationTrackedComponent>(ev.Entity);
+            _recorder.TrackEntity(uid, session.UserId.UserId, session.Name, name, prototype);
+            AddComp<InvestigationTrackedComponent>(uid);
         }
 
-        _recorder.WriteControl(ev.Entity, ev.Player.UserId.UserId, ev.Player.Name, attached: true);
+        _recorder.WriteControl(uid, session.UserId.UserId, session.Name, attached: true);
     }
 
     private void OnPlayerDetached(PlayerDetachedEvent ev)
     {
-        if (!_recorder.IsRecording || IsUninterestingObserver(ev.Entity))
+        if (!_recorder.IsRecording || _ghostQuery.HasComp(ev.Entity))
             return;
 
         _recorder.WriteControl(ev.Entity, ev.Player.UserId.UserId, ev.Player.Name, attached: false);
     }
 
-    /// <summary>Keyed on <see cref="GhostComponent"/>: a revenant is incorporeal but acts, so it is kept.</summary>
     private void ResetGridState()
     {
         var query = EntityQueryEnumerator<InvestigationGridComponent>();
@@ -219,6 +241,7 @@ public sealed partial class InvestigationRecorderSystem : EntitySystem, IInvesti
         _nextNavMapSample = now + _navMapInterval;
         _nextCharacterSweep = now + _characterInterval;
         _nextDirtyDrain = now + _dirtyInterval;
+        _nextFlush = now + _flushInterval;
     }
 
     private static bool Elapsed(ref TimeSpan next, TimeSpan interval, TimeSpan now)
@@ -244,11 +267,6 @@ public sealed partial class InvestigationRecorderSystem : EntitySystem, IInvesti
     private void OnMindAdded(Entity<MindContainerComponent> ent, ref MindAddedMessage args) => MarkCharacterDirty(ent);
 
     private void OnMindRemoved(Entity<MindContainerComponent> ent, ref MindRemovedMessage args) => MarkCharacterDirty(ent);
-
-    private bool IsUninterestingObserver(EntityUid uid)
-    {
-        return _ghostQuery.HasComp(uid);
-    }
 
     public override void Update(float frameTime)
     {
@@ -286,6 +304,7 @@ public sealed partial class InvestigationRecorderSystem : EntitySystem, IInvesti
         else if (Elapsed(ref _nextDirtyDrain, _dirtyInterval, now))
             DrainDirtyCharacters();
 
-        _recorder.Update();
+        if (Elapsed(ref _nextFlush, _flushInterval, now))
+            _recorder.Flush();
     }
 }

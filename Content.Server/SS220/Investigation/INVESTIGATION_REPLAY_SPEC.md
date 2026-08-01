@@ -10,11 +10,15 @@ The producer is authoritative. Where this document and the code disagree, the co
 
 ## 1. Bundle layout
 
+One bundle is one round. Bundles live under the server's user-data directory, in the folder named by
+`investigation.directory` (default `investigation`):
+
 ```
-investigation/round-<roundId>_<yyyy-MM-dd_HH-mm-ss>/
+<server user data>/investigation/round-<roundId>_<yyyy-MM-dd_HH-mm-ss>/
 ```
 
-`<roundId>` is a decimal integer. The timestamp is UTC, at recording start.
+`<roundId>` is a decimal integer. The timestamp is UTC, at recording start. Recording is off entirely when
+`investigation.enabled` is `false`, in which case no directory is created.
 
 | File | Compression | Content |
 |---|---|---|
@@ -29,6 +33,15 @@ investigation/round-<roundId>_<yyyy-MM-dd_HH-mm-ss>/
 | `objectives.jsonl.gz` | gzip | Objective progress samples (§4.8) |
 | `chat.jsonl.gz` | gzip | Chat lines (§4.9) |
 | `events.jsonl.gz` | gzip | Admin log stream (§4.10) |
+| `admins.jsonl.gz` | gzip | Admin presence transitions (§4.12) |
+
+Every file in the table is created at round start, so a missing file means the bundle was cut short, not
+that the round had nothing to say. A present file may still hold zero rows — a round with no admin online
+gets an empty `admins.jsonl.gz`, not a missing one.
+
+Bundles are pruned at round start: a bundle whose directory name is older than
+`investigation.retention_days` is deleted, and `0` (the default) keeps everything forever. Age comes from
+the name, not the mtime, so copying or restoring a bundle does not reset its clock.
 
 ---
 
@@ -47,7 +60,7 @@ investigation/round-<roundId>_<yyyy-MM-dd_HH-mm-ss>/
 |---|---|---|
 | `t` | uint | Absolute game tick. Elapsed seconds = `(t - meta.startTick) / meta.tickRate`. |
 | `e` | int | Entity id (`EntityUid`). Join key across all streams. |
-| `g` | int \| null | Grid entity id. `null` when the entity is off-grid. |
+| `g` | int \| null | Grid entity id. `null` when the entity is off-grid. Names are in `meta.grids` (§4.1). |
 | `c` | int | Container entity id. Absent when not contained. |
 | `x`, `y` | number | Position in tiles. 1 decimal in `positions`, 2 decimals elsewhere. |
 | `m` | int | Map id. Names are in `meta.maps` (§4.1). |
@@ -84,6 +97,7 @@ Written at round start and again on clean stop.
 | `durationSeconds` | number | Round duration. Absent when the round did not stop cleanly. |
 | `languages` | array | Language table. Absent on bundles predating the field. |
 | `maps` | array | `{id, name}` for every map a grid pose was written for. Absent on bundles predating the field. |
+| `grids` | array | `{id, name}` for every grid a grid pose was written for. Absent on bundles predating the field. |
 | `roster` | array | Roster entries, same shape as §4.2. Complete only on clean stop. |
 
 `languages[]`:
@@ -146,7 +160,7 @@ Controller at tick `T`: the most recent row with `t <= T`; its `player`/`userNam
 | `c` | int | Container id. Absent when not contained. |
 | `m` | int | Map id. Present only when `g` is `null`. |
 
-Key order within a row is fixed: `t`, `e`, `g`, `x`, `y`, `c`.
+Key order within a row is fixed: `t`, `e`, `g`, `x`, `y`, `c`, `m`.
 
 Sampled every `investigation.position_interval` (default `0.5`). A row is written when:
 
@@ -235,9 +249,9 @@ Each row replaces the prior beacon set for that grid.
 | `e` | int | Entity id. |
 | `name` | string | Displayed name at `t`. |
 | `species`, `gender` | string | Absent for non-humanoids. |
-| `age` | int | Absent for non-humanoids. |
+| `age` | int | Always present. `0` for non-humanoids, which is not a real age. |
 | `job` | string | Job prototype id. Absent when the entity has no job. |
-| `department` | string | Department prototype id. Absent with `job`. |
+| `department` | string | Department prototype id. Absent whenever `job` is absent, and when no department claims that job. |
 | `antag` | bool | `true`. Present only on antagonists. |
 | `roles` | array | Present only on antagonists. |
 | `access` | string[] | Sorted ordinal. |
@@ -261,7 +275,7 @@ Written when the loadout fingerprint changes, evaluated every `investigation.cha
 | `t` | uint | Sample tick. |
 | `e` | int | Entity id. |
 | `dmg` | number | Total damage, 2 decimals. |
-| `state` | string | `MobState` name: `Alive`, `Critical`, `Dead`, `Invalid`. |
+| `state` | string | `MobState` name: `Alive`, `Critical`, `Dead`, `Invalid`. `Unknown` when the entity has no mob state at all. |
 | `crit` | number | Absent when undefined for the entity. |
 | `dead` | number | Absent when undefined for the entity. |
 
@@ -301,15 +315,23 @@ Completion tick: the `t` of the first row with `done == true`.
 |---|---|---|
 | `t` | uint | Tick. |
 | `e` | int | Speaking entity. Absent for `OOC`, `AdminChat`. |
-| `ch` | string | `Say`, `Whisper`, `Radio`, `Emote`, `LOOC`, `Dead`, `OOC`, `AdminChat`. |
+| `ch` | string | `Say`, `Whisper`, `Radio`, `Emote`, `LOOC`, `Dead`, `OOC`, `AdminChat`, `AHelp`. |
 | `name` | string | Displayed name at `t`. |
 | `msg` | string | Untransformed text. `%key` language prefixes are retained. |
 | `lang` | string | Speaker's selected language id. Absent on `Emote`, `LOOC`, `OOC`, and on bundles predating the field. |
 | `langs` | string[] | Present only when the line contains two or more languages. |
 | `rc` | string | Present only when `ch == "Radio"`. |
+| `thread` | string | Present only when `ch == "AHelp"`. Account GUID the conversation belongs to. |
+| `adm` | bool | Present only when `ch == "AHelp"` and the sender held `Adminhelp`. |
+| `only` | bool | Present only when `ch == "AHelp"` and the line was an admin-only note the player never saw. |
 | `g`, `x`, `y`, `c` | — | Speaker position at `t`. Absent when no position could be resolved. |
 
-Every row also appears in §4.10 with `type == "Chat"`, without a text field.
+Every row also appears in §4.10 with `type == "Chat"`, without a text field. `AHelp` is the exception: it
+is not an admin log and appears only here.
+
+An `AHelp` line is keyed on `thread`, not on the sender — a staff reply carries the *player's* GUID there,
+so one conversation is `thread == player`, and `adm` says which side spoke. `e` is the sender's body when
+they had one, which staff usually do not.
 
 ### 4.10 `events.jsonl.gz`
 
@@ -363,13 +385,49 @@ Every row also appears in §4.10 with `type == "Chat"`, without a text field.
 | Field | Type | Meaning |
 |---|---|---|
 | `t` | uint | Sample tick. |
-| `g` | int | Grid entity id. |
+| `g` | int | Grid entity id. Names are in `meta.grids` (§4.1). |
 | `m` | int | Map id. Names are in `meta.maps` (§4.1). |
 | `wx`, `wy` | number | Grid origin in the map frame, 2 decimals. |
 | `rot` | number | Grid rotation in radians, 4 decimals. |
 
 Sampled on `investigation.navmap_interval` (default `1`). Written when the pose moves more than 0.05
 tiles or radians, or `m` changes.
+
+`meta.grids[]` is populated from the grid entity's own name at the tick each row is written, last write
+winning per `g`. Most grids never get one set — a raw `MapGrid` entity has no name unless something
+(station setup, a shuttle prototype, mapping) explicitly assigned it — so `meta.grids` typically covers
+stations and named shuttles only. A `g` with no matching entry in `meta.grids` had no name at any sampled
+tick; readers MUST fall back to the raw id for those.
+
+### 4.12 `admins.jsonl.gz`
+
+```json
+{"t":118400,"player":"c7e1b904-…","userName":"Ipatov","active":true}
+{"t":141902,"player":"c7e1b904-…","userName":"Ipatov","active":false}
+```
+
+| Field | Type | Meaning |
+|---|---|---|
+| `t` | uint | Tick of the transition. |
+| `player` | string | Account GUID. Join key to `roster.player`, `control.player`, `events[].player` and `chat.thread`. |
+| `userName` | string | Login at the time of the row. |
+| `active` | bool | `true` while adminned, `false` on deadmin or disconnect. |
+
+Every admin online at round start is written at `meta.startTick` with `active == true`, so the stream is
+self-contained: readers never need a prior round to know who was already watching. Transitions after that
+come from admin/deadmin, from connecting or reconnecting as an admin, and from disconnect. A flag edit
+that leaves an admin adminned writes no row, so consecutive rows for one account always alternate.
+
+There is no terminating row at round end. An account whose last row is `active == true` was still watching
+when the bundle stopped.
+
+Stealth is not honoured here. A stealthed admin is hidden from the player list, not from this stream, and
+appears exactly like any other.
+
+This is presence, not identity: an admin with no body and an admin playing a character both appear here
+and only here. Deadminned is recorded as absent, since the question the stream answers is who was
+*watching*, not who could have been. Reading it as accountability of a specific admin action is a mistake
+— for that, join `player` into §4.10, which names the actor of each logged action.
 
 ---
 
@@ -387,6 +445,8 @@ tiles or radians, or `m` changes.
 | Grid pose at `T` | Last `gridpose` row for that `g` with `t <= T`. |
 | Beacon set at `T` | Last `navmap` beacon row for that `g` with `t <= T`. |
 | Room containing a position | Nearest beacon on the same `g`. |
+| Admins watching at `T` | Accounts whose last `admins` row with `t <= T` has `active == true`. |
+| Ahelp conversation for an account | `chat` rows with `ch == "AHelp"` and matching `thread`, in `t` order. |
 
 ---
 
@@ -397,6 +457,7 @@ Readers MUST read `meta.schema` first and reject a major version they do not imp
 Within schema `1`:
 
 - Fields MAY be added to any object.
-- Streams MAY be added. Every file other than `meta.json` is OPTIONAL.
+- Streams MAY be added. Every file other than `meta.json` is OPTIONAL to a reader: this producer writes
+  them all (§1), but a reader MUST degrade rather than fail on one it does not find.
 
 A change to the shape or meaning of an existing field increments `schema`.

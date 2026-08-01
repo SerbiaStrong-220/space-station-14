@@ -58,21 +58,7 @@ public sealed partial class InvestigationRecorder
         if (_session is not { } session)
             return;
 
-        SampledPosition position = default;
-        var located = false;
-
-        if (source is { } speaker)
-        {
-            located = _positions.TryGetValue(speaker, out position);
-
-            if (!located
-                && _positionSource is { } positionSource
-                && positionSource.TryGetPosition(speaker, out var resolved))
-            {
-                position = resolved;
-                located = true;
-            }
-        }
+        var located = TryResolvePosition(source, out var position);
 
         session.Chat.Write(JsonSerializer.Serialize(new
         {
@@ -84,6 +70,64 @@ public sealed partial class InvestigationRecorder
             lang = defaultLanguage ?? (languages is { Count: > 0 } ? languages[0] : null),
             langs = languages is { Count: > 1 } ? languages : null,
             rc = radioChannel,
+            g = located ? position.Grid?.Id : null,
+            x = located ? Math.Round(position.Local.X, 2) : (double?) null,
+            y = located ? Math.Round(position.Local.Y, 2) : (double?) null,
+            c = located ? position.Container?.Id : null,
+        }, JsonOptions));
+        session.RowCount++;
+    }
+
+    private bool TryResolvePosition(EntityUid? source, out SampledPosition position)
+    {
+        position = default;
+
+        if (source is not { } uid)
+            return false;
+
+        if (_positions.TryGetValue(uid, out position))
+            return true;
+
+        return _positionSource is { } positionSource && positionSource.TryGetPosition(uid, out position);
+    }
+
+    public void OnAhelp(
+        EntityUid? source,
+        Guid thread,
+        string senderName,
+        string text,
+        bool senderIsAdmin,
+        bool adminOnly)
+    {
+        if (_session is null || string.IsNullOrWhiteSpace(text))
+            return;
+
+        Guarded(() => WriteAhelp(source, thread, senderName, text, senderIsAdmin, adminOnly));
+    }
+
+    private void WriteAhelp(
+        EntityUid? source,
+        Guid thread,
+        string senderName,
+        string text,
+        bool senderIsAdmin,
+        bool adminOnly)
+    {
+        if (_session is not { } session)
+            return;
+
+        var located = TryResolvePosition(source, out var position);
+
+        session.Chat.Write(JsonSerializer.Serialize(new
+        {
+            t = _timing.CurTick.Value,
+            e = source?.Id,
+            ch = "AHelp",
+            name = senderName,
+            msg = text,
+            thread = thread.ToString(),
+            adm = senderIsAdmin ? true : (bool?) null,
+            only = adminOnly ? true : (bool?) null,
             g = located ? position.Grid?.Id : null,
             x = located ? Math.Round(position.Local.X, 2) : (double?) null,
             y = located ? Math.Round(position.Local.Y, 2) : (double?) null,

@@ -228,15 +228,9 @@ public sealed class RadioSystem : EntitySystem
         // SS220 investigation recorder begin
         if (_investigation.IsRecording)
         {
-            var defaultLanguage = _languageSystem.GetSelectedLanguage(messageSource)?.ID;
-            _investigation.OnChat(
-                messageSource,
-                "Radio",
-                message,
-                name,
-                defaultLanguage,
-                languageMessage.SpokenLanguageIds(defaultLanguage),
-                channel.ID);
+            var language = _languageSystem.GetSelectedLanguage(messageSource)?.ID;
+            var spoken = languageMessage.SpokenLanguageIds(language);
+            _investigation.OnChat(messageSource, "Radio", message, name, language, spoken, channel.ID);
         }
         // SS220 investigation recorder end
 

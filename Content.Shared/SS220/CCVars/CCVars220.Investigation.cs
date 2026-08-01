@@ -13,7 +13,7 @@ public sealed partial class CCVars220
 
     /// <summary>Bundles older than this are deleted when a round starts. 0 keeps everything forever.</summary>
     public static readonly CVarDef<int> InvestigationRetentionDays =
-        CVarDef.Create("investigation.retention_days", 0, CVar.SERVERONLY);
+        CVarDef.Create("investigation.retention_days", 30, CVar.SERVERONLY);
 
     public static readonly CVarDef<float> InvestigationPositionInterval =
         CVarDef.Create("investigation.position_interval", 0.5f, CVar.SERVERONLY);

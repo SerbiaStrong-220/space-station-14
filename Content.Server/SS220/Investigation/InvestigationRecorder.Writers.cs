@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using System.Globalization;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Content.Server.SS220.Investigation;
 
@@ -42,14 +43,24 @@ public sealed partial class InvestigationRecorder
         session.RowCount++;
     }
 
+    public void WriteAdminPresence(Guid player, string? userName, bool active)
+    {
+        if (_session is not { } session)
+            return;
+
+        session.Admins.Write(JsonSerializer.Serialize(new
+        {
+            t = _timing.CurTick.Value,
+            player = player.ToString(),
+            userName,
+            active,
+        }, JsonOptions));
+        session.RowCount++;
+    }
+
     public void UpdateKnownPosition(EntityUid uid, SampledPosition sample)
     {
         _positions[uid] = sample;
-    }
-
-    public void ForgetKnownPosition(EntityUid uid)
-    {
-        _positions.Remove(uid);
     }
 
     public void WritePositionRow(EntityUid uid, uint tick, SampledPosition sample)
@@ -92,13 +103,16 @@ public sealed partial class InvestigationRecorder
         return value.ToString("0.#", CultureInfo.InvariantCulture);
     }
 
-    public void WriteGridPose(EntityUid grid, GridPose pose, string? mapName)
+    public void WriteGridPose(EntityUid grid, GridPose pose, string? mapName, string? gridName)
     {
         if (_session is not { } session)
             return;
 
         if (mapName != null)
             _maps[pose.Map] = mapName;
+
+        if (!string.IsNullOrEmpty(gridName))
+            _grids[grid.Id] = gridName;
 
         session.GridPose.Write(JsonSerializer.Serialize(new
         {
@@ -128,7 +142,7 @@ public sealed partial class InvestigationRecorder
         session.RowCount++;
     }
 
-    public void WriteNavMapBeacons(EntityUid grid, IEnumerable<object> beacons)
+    public void WriteNavMapBeacons(EntityUid grid, List<BeaconRow> beacons)
     {
         if (_session is not { } session)
             return;
@@ -193,7 +207,7 @@ public sealed partial class InvestigationRecorder
         session.RowCount++;
     }
 
-    public void WriteCharacterRow(object snapshot)
+    public void WriteCharacterRow(CharacterSnapshot snapshot)
     {
         if (_session is not { } session)
             return;
@@ -208,6 +222,11 @@ public sealed partial class InvestigationRecorder
         string Name,
         string? Prototype,
         uint FirstTick);
+
+    public readonly record struct BeaconRow(
+        [property: JsonPropertyName("name")] string Name,
+        [property: JsonPropertyName("x")] double X,
+        [property: JsonPropertyName("y")] double Y);
 
     private readonly record struct ObjectiveSample(double Progress, bool Complete);
 }

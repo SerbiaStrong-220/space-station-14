@@ -5,6 +5,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Content.Shared.CCVar;
 using Content.Shared.SS220.CCVars;
 using Content.Shared.SS220.Language;
@@ -32,11 +33,21 @@ public sealed partial class InvestigationRecorder : IInvestigationRecorder
     private const string ControlFile = "control.jsonl.gz";
     private const string ObjectivesFile = "objectives.jsonl.gz";
     private const string GridPoseFile = "gridpose.jsonl.gz";
+    private const string AdminsFile = "admins.jsonl.gz";
     private const string MetaFile = "meta.json";
 
     private const string BundlePrefix = "round-";
 
     private const float CompletionThreshold = 0.999f;
+
+    private static readonly JsonSerializerOptions JsonOptions = new()
+    {
+        WriteIndented = false,
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+    };
+
+    /// <remarks>A BOM would make the first line of a stream invalid JSON.</remarks>
+    private static readonly Encoding Utf8NoBom = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
 
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
@@ -44,38 +55,20 @@ public sealed partial class InvestigationRecorder : IInvestigationRecorder
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ILogManager _logManager = default!;
 
-    private static readonly JsonSerializerOptions JsonOptions = new()
-    {
-        WriteIndented = false,
-        DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
-    };
-
-    /// <remarks>A BOM would make the first line of a stream invalid JSON.</remarks>
-    private static readonly Encoding Utf8NoBom = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
+    private readonly StringBuilder _rowBuilder = new();
+    private readonly Dictionary<EntityUid, RosterEntry> _roster = new();
+    private readonly Dictionary<EntityUid, SampledPosition> _positions = new();
+    private readonly Dictionary<EntityUid, ObjectiveSample> _objectiveSamples = new();
+    private readonly Dictionary<int, string> _maps = new();
+    private readonly Dictionary<int, string> _grids = new();
 
     private ISawmill _sawmill = default!;
     private bool _enabled;
-    private TimeSpan _flushInterval;
-    private TimeSpan _nextFlush;
-
     private Session? _session;
-
-    private readonly StringBuilder _rowBuilder = new();
-
-    private readonly Dictionary<EntityUid, RosterEntry> _roster = new();
-
-    public IReadOnlyDictionary<EntityUid, RosterEntry> Roster => _roster;
-
-    private readonly Dictionary<EntityUid, SampledPosition> _positions = new();
-
-    private readonly Dictionary<EntityUid, ObjectiveSample> _objectiveSamples = new();
-
-    private readonly Dictionary<int, string> _maps = new();
+    private IInvestigationPositionSource? _positionSource;
 
     private string? _gamemode;
     private string? _gamemodeTitle;
-
-    private IInvestigationPositionSource? _positionSource;
 
     public bool IsRecording => _session != null;
 
@@ -104,7 +97,6 @@ public sealed partial class InvestigationRecorder : IInvestigationRecorder
     {
         _sawmill = _logManager.GetSawmill("investigation");
         _cfg.OnValueChanged(CCVars220.InvestigationEnabled, enabled => _enabled = enabled, true);
-        _cfg.OnValueChanged(CCVars220.InvestigationFlushInterval, i => _flushInterval = TimeSpan.FromSeconds(i), true);
     }
 
     public void Shutdown()
@@ -132,7 +124,7 @@ public sealed partial class InvestigationRecorder : IInvestigationRecorder
         {
             var baseDir = new ResPath(_cfg.GetCVar(CCVars220.InvestigationDirectory)).ToRootedPath();
             var stamp = DateTime.UtcNow.ToString("yyyy-MM-dd_HH-mm-ss", CultureInfo.InvariantCulture);
-            var roundDir = baseDir / $"round-{roundId}_{stamp}";
+            var roundDir = baseDir / $"{BundlePrefix}{roundId}_{stamp}";
 
             _res.UserData.CreateDir(roundDir);
 
@@ -160,6 +152,7 @@ public sealed partial class InvestigationRecorder : IInvestigationRecorder
                 Control = Open(ControlFile),
                 Objectives = Open(ObjectivesFile),
                 GridPose = Open(GridPoseFile),
+                Admins = Open(AdminsFile),
             };
 
             session.AllStreams = openedStreams.ToArray();
@@ -167,7 +160,6 @@ public sealed partial class InvestigationRecorder : IInvestigationRecorder
             // Written up front so a crashed server still leaves an identifiable bundle.
             WriteMeta(session, null);
 
-            _nextFlush = _timing.CurTime + _flushInterval;
             _session = session;
 
             _sawmill.Info($"Started investigation recording for round {roundId} at {roundDir}");
@@ -218,6 +210,7 @@ public sealed partial class InvestigationRecorder : IInvestigationRecorder
             _positions.Clear();
             _objectiveSamples.Clear();
             _maps.Clear();
+            _grids.Clear();
         }
     }
 
@@ -307,6 +300,11 @@ public sealed partial class InvestigationRecorder : IInvestigationRecorder
                 id = entry.Key,
                 name = entry.Value,
             }),
+            grids = _grids.Select(entry => new
+            {
+                id = entry.Key,
+                name = entry.Value,
+            }),
             roster = _roster.Select(entry => new
             {
                 e = entry.Key.Id,
@@ -321,22 +319,6 @@ public sealed partial class InvestigationRecorder : IInvestigationRecorder
         using var file = _res.UserData.Open(session.Directory / MetaFile, FileMode.Create, FileAccess.Write, FileShare.Read);
         using var writer = new StreamWriter(file, Utf8NoBom);
         writer.Write(JsonSerializer.Serialize(meta, JsonOptions));
-    }
-
-    public void Update()
-    {
-        if (_session is not { } session)
-            return;
-
-        var now = _timing.CurTime;
-        if (now < _nextFlush)
-            return;
-
-        _nextFlush += _flushInterval;
-        if (_nextFlush <= now)
-            _nextFlush = now + _flushInterval;
-
-        FlushSession(session);
     }
 
     private void FlushSession(Session session)
@@ -374,14 +356,20 @@ public sealed partial class InvestigationRecorder : IInvestigationRecorder
             _sawmill.Warning($"Dropped {session.Writer.DroppedBatches} investigation batches: disk could not keep up.");
     }
 
-    private sealed class Session
+    private sealed class Session(
+        int roundId,
+        ResPath directory,
+        string? map,
+        DateTime startedUtc,
+        uint startTick,
+        StreamWriterThread writer)
     {
-        public readonly int RoundId;
-        public readonly ResPath Directory;
-        public readonly string? Map;
-        public readonly DateTime StartedUtc;
-        public readonly uint StartTick;
-        public readonly StreamWriterThread Writer;
+        public readonly int RoundId = roundId;
+        public readonly ResPath Directory = directory;
+        public readonly string? Map = map;
+        public readonly DateTime StartedUtc = startedUtc;
+        public readonly uint StartTick = startTick;
+        public readonly StreamWriterThread Writer = writer;
 
         public JsonlStream Positions = default!;
         public JsonlStream NavMap = default!;
@@ -393,27 +381,11 @@ public sealed partial class InvestigationRecorder : IInvestigationRecorder
         public JsonlStream Control = default!;
         public JsonlStream Objectives = default!;
         public JsonlStream GridPose = default!;
+        public JsonlStream Admins = default!;
 
         public JsonlStream[] AllStreams = default!;
 
         public long RowCount;
-
         public bool Closed;
-
-        public Session(
-            int roundId,
-            ResPath directory,
-            string? map,
-            DateTime startedUtc,
-            uint startTick,
-            StreamWriterThread writer)
-        {
-            RoundId = roundId;
-            Directory = directory;
-            Map = map;
-            StartedUtc = startedUtc;
-            StartTick = startTick;
-            Writer = writer;
-        }
     }
 }

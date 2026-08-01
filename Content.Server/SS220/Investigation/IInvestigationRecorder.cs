@@ -27,4 +27,13 @@ public interface IInvestigationRecorder
         string? defaultLanguage = null,
         IReadOnlyList<string>? languages = null,
         string? radioChannel = null);
+
+    /// <param name="thread">Account the conversation belongs to, which is not the sender when staff reply.</param>
+    void OnAhelp(
+        EntityUid? source,
+        Guid thread,
+        string senderName,
+        string text,
+        bool senderIsAdmin,
+        bool adminOnly);
 }
