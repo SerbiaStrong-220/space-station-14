@@ -4,3 +4,4 @@ food-processor-popup-busy = Кухонный комбайн уже работа�
 food-processor-popup-invalid = Это нельзя обработать.
 food-processor-popup-full = Кухонный комбайн заполнен.
 food-processor-popup-no-power = Кухонный комбайн не получает питание.
+process-action = Включить переработку

@@ -1,13 +1,16 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.Linq;
+using Content.Server.Power.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Jittering;
 using Content.Shared.Popups;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.SS220.Kitchen.FoodProcessor;
+using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
+using Robust.Shared.Utility;
 
 namespace Content.Server.SS220.Kitchen.FoodProcessor;
 
@@ -29,17 +32,17 @@ public sealed class FoodProcessorSystem : SharedFoodProcessorSystem
         SubscribeLocalEvent<FoodProcessorComponent, ContainerIsInsertingAttemptEvent>(OnInsertAttempt);
         SubscribeLocalEvent<FoodProcessorComponent, ContainerIsRemovingAttemptEvent>(OnRemoveAttempt);
         SubscribeLocalEvent<FoodProcessorComponent, InteractUsingEvent>(OnInteractUsing);
-        SubscribeLocalEvent<FoodProcessorComponent, InteractHandEvent>(OnInteractHand);
+        SubscribeLocalEvent<FoodProcessorComponent, GetVerbsEvent<AlternativeVerb>>(OnAltInteract);
     }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
-        var query = EntityQueryEnumerator<FoodProcessorComponent>();
-        while (query.MoveNext(out var uid, out var component))
+        var query = EntityQueryEnumerator<FoodProcessorComponent, ApcPowerReceiverComponent>();
+        while (query.MoveNext(out var uid, out var component, out var power))
         {
-            if(!component.IsProcessing)
+            if(!power.Powered || !IsProcessing(uid)) // Its electric!
                 continue;
 
             if(component.RemainingProcessingTime > 0)
@@ -116,13 +119,10 @@ public sealed class FoodProcessorSystem : SharedFoodProcessorSystem
         args.Handled = true;
     }
 
-    private void OnInteractHand(Entity<FoodProcessorComponent> ent, ref InteractHandEvent args)
+    private void OnAltInteract(Entity<FoodProcessorComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
-        // Another interaction handler already dealt with this click.
-        if (args.Handled)
+        if (!args.CanAccess || !args.CanInteract)
             return;
-
-        args.Handled = true;
 
         // Do not start another cycle while the processor is already running.
         if (IsProcessing(ent.AsNullable()))
@@ -142,10 +142,19 @@ public sealed class FoodProcessorSystem : SharedFoodProcessorSystem
             return;
         }
 
-        StartProcessing(ent);
+        args.Verbs.Add(new AlternativeVerb
+        {
+            Text = Loc.GetString("process-action"),
+            Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/VerbIcons/settings.svg.192dpi.png")),
+            Priority = 1,
+            Act = () =>
+            {
+                StartProcessing(ent);
+            }
+        });
     }
 
-    public bool IsProcessing(Entity<FoodProcessorComponent?> ent)
+    private bool IsProcessing(Entity<FoodProcessorComponent?> ent)
     {
         return Resolve(ent, ref ent.Comp, false) && ent.Comp.RemainingProcessingTime > 0f;
     }
@@ -157,7 +166,6 @@ public sealed class FoodProcessorSystem : SharedFoodProcessorSystem
         _jitter.AddJitter(ent, -10, 100);
         _powerState.TrySetWorkingState(ent.Owner, true);
         ent.Comp.AudioStream = _audio.PlayPvs(ent.Comp.ProcessingSound, ent)?.Entity;
-        ent.Comp.IsProcessing = true;
     }
 
     private void FinishProcessing(Entity<FoodProcessorComponent> ent)
@@ -180,7 +188,5 @@ public sealed class FoodProcessorSystem : SharedFoodProcessorSystem
             _container.Remove(ingredient, ent.Comp.InputContainer, reparent: false, force: true);
             QueueDel(ingredient);
         }
-
-        ent.Comp.IsProcessing = false;
     }
 }

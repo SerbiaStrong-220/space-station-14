@@ -27,9 +27,6 @@ public sealed partial class FoodProcessorComponent : Component
     public Container InputContainer = default!;
 
     [ViewVariables]
-    public bool IsProcessing;
-
-    [ViewVariables]
     public float RemainingProcessingTime;
 
     [ViewVariables]

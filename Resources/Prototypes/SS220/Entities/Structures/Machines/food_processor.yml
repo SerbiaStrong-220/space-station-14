@@ -27,10 +27,10 @@
     layers:
     - state: processor
   - type: ApcPowerReceiver
-    powerLoad: 0
+    powerLoad: 300
   - type: PowerState
-    idlePowerDraw: 0
-    workingPowerDraw: 750
+    idlePowerDraw: 5
+    workingPowerDraw: 600
   - type: Destructible
     thresholds:
     - trigger:
