@@ -57,6 +57,7 @@ public sealed partial class GrillableSystem : EntitySystem
         if (ent.Comp.CurrentCookTime >= ent.Comp.TimeToCook)
         {
             var newEnt = Spawn(ent.Comp.CookingResult, _transformSystem.GetMapCoordinates(ent));
+            _transformSystem.SetLocalRotation(newEnt, Angle.Zero);
 
             _audio.PlayPvs(ent.Comp.CookingDoneSound, newEnt);
 

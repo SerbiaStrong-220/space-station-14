@@ -236,3 +236,18 @@
     containers:
       payloadSlot: !type:ContainerSlot
   - type: Edible
+
+# banana peel
+- type: entity
+  parent: BananaPeelBase
+  id: TrashBananaPeel
+  components:
+  - type: Grillable
+    timeToCook: 30
+    cookingResult: TrashBakedBananaPeel
+  - type: Temperature
+    currentTemperature: 290
+  - type: InternalTemperature
+    conductivity: 100 # to compensate for density
+    thickness: 0.001
+    area: 0.0225 # ~15x15cm

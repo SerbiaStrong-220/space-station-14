@@ -2,6 +2,7 @@
 
 using Content.Shared.ActionBlocker;
 using Content.Shared.Light.Components;
+using Content.Shared.SS220.Teleport;
 using Content.Shared.SS220.TeleportationChasm;
 using Content.Shared.Station;
 using Robust.Shared.Map;
@@ -19,6 +20,8 @@ public sealed partial class TeleportationChasmSystem : SharedTeleportationChasmS
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SharedStationSystem _station = default!;
 
+    private List<Entity<TeleportationChasmFallingComponent>> _toTeleportBuffer = [];
+
     public override void Initialize()
     {
         base.Initialize();
@@ -27,8 +30,6 @@ public sealed partial class TeleportationChasmSystem : SharedTeleportationChasmS
     public override void Update(float frameTime)//we cant teleport in shared, cause wierd shit happened
     {
         base.Update(frameTime);
-
-        List<EntityUid> toTeleport = [];
 
         var query = EntityQueryEnumerator<TeleportationChasmFallingComponent>();
         while (query.MoveNext(out var uid, out var chasmFalling))
@@ -42,15 +43,32 @@ public sealed partial class TeleportationChasmSystem : SharedTeleportationChasmS
                 continue;
             }
 
-            toTeleport.Add(uid);
+            _toTeleportBuffer.Add((uid, chasmFalling));
         }
 
-        foreach (var uid in toTeleport)
+        foreach (var ent in _toTeleportBuffer)
         {
-            TeleportToRandomLocation(uid);
-            RemComp<TeleportationChasmFallingComponent>(uid);
-            _blocker.UpdateCanMove(uid);
+            if (ent.Comp.ChasmEnt != null)
+            {
+                var teleporter = ent.Comp.ChasmEnt.Value;
+
+                var beforeEv = new BeforeTeleportTargetEvent(ent, ent);
+                RaiseLocalEvent(teleporter, ref beforeEv);
+
+                TeleportToRandomLocation(ent);
+
+                var ev = new TargetTeleportedEvent(ent);
+                RaiseLocalEvent(teleporter, ref ev);
+
+                var targetEv = new TargetTeleportedEvent(teleporter);
+                RaiseLocalEvent(ent, ref targetEv);
+            }
+
+            RemComp<TeleportationChasmFallingComponent>(ent);
+            _blocker.UpdateCanMove(ent);
         }
+
+        _toTeleportBuffer.Clear();
     }
 
     private void TeleportToRandomLocation(EntityUid ent)

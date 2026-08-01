@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 275.2.1
+  engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 06/05/2026 13:48:07
-  entityCount: 58465
+  time: 07/07/2026 06:16:22
+  entityCount: 58471
 maps:
 - 1
 grids:
@@ -48838,7 +48838,7 @@ entities:
       pos: -27.5,-28.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -145733.55
+      secondsUntilStateChange: -146103.5
       state: Opening
   - uid: 555
     components:
@@ -48892,7 +48892,7 @@ entities:
       pos: -27.5,-27.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -145763.8
+      secondsUntilStateChange: -146133.75
       state: Opening
   - uid: 562
     components:
@@ -49047,6 +49047,22 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 69.5,-41.5
+      parent: 2
+- proto: AirlockClownLocked
+  entities:
+  - uid: 1235
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -7.5,-26.5
+      parent: 2
+- proto: AirlockClownMaintLocked
+  entities:
+  - uid: 1073
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -7.5,-21.5
       parent: 2
 - proto: AirlockCommandGlassLocked
   entities:
@@ -51766,6 +51782,21 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -23.5,20.5
       parent: 2
+- proto: AirlockGlassMimeLocked
+  entities:
+  - uid: 1072
+    components:
+    - type: Transform
+      pos: -13.5,-26.5
+      parent: 2
+- proto: AirlockGlassMusicianLocked
+  entities:
+  - uid: 1238
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 10.5,-26.5
+      parent: 2
 - proto: AirlockGlassShuttle
   entities:
   - uid: 903
@@ -52784,11 +52815,6 @@ entities:
       parent: 2
 - proto: AirlockMaintServiceLocked
   entities:
-  - uid: 1068
-    components:
-    - type: Transform
-      pos: 16.5,-20.5
-      parent: 2
   - uid: 1069
     components:
     - type: Transform
@@ -52800,27 +52826,17 @@ entities:
     - type: Transform
       pos: -5.5,7.5
       parent: 2
+  - uid: 1074
+    components:
+    - type: Transform
+      pos: 16.5,-20.5
+      parent: 2
 - proto: AirlockMaintTheatreLocked
   entities:
   - uid: 1071
     components:
     - type: Transform
       pos: -52.5,47.5
-      parent: 2
-  - uid: 1072
-    components:
-    - type: Transform
-      pos: -7.5,-21.5
-      parent: 2
-  - uid: 1073
-    components:
-    - type: Transform
-      pos: -13.5,-21.5
-      parent: 2
-  - uid: 1074
-    components:
-    - type: Transform
-      pos: 10.5,-20.5
       parent: 2
 - proto: AirlockMedicalGlass
   entities:
@@ -53159,6 +53175,13 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 30.5,-16.5
       parent: 2
+- proto: AirlockMimeMaintLocked
+  entities:
+  - uid: 1239
+    components:
+    - type: Transform
+      pos: -13.5,-21.5
+      parent: 2
 - proto: AirlockMiningGlass
   entities:
   - uid: 1119
@@ -53215,6 +53238,14 @@ entities:
     - type: AccessReader
       access:
       - - Engineering
+- proto: AirlockMusicianMaintLocked
+  entities:
+  - uid: 1068
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 10.5,-20.5
+      parent: 2
 - proto: AirlockNanoTrasenRepresentativeGlassLocked
   entities:
   - uid: 925
@@ -53783,7 +53814,7 @@ entities:
       pos: -29.5,23.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -403507
+      secondsUntilStateChange: -403876.97
       state: Opening
   - uid: 1197
     components:
@@ -54099,14 +54130,6 @@ entities:
       parent: 2
 - proto: AirlockTheatreGlassLocked
   entities:
-  - uid: 1235
-    components:
-    - type: MetaData
-      name: каюта клоуна
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -7.5,-26.5
-      parent: 2
   - uid: 1236
     components:
     - type: Transform
@@ -54119,20 +54142,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -50.5,46.5
-      parent: 2
-  - uid: 1238
-    components:
-    - type: MetaData
-      name: каюта музыканта
-    - type: Transform
-      pos: 10.5,-26.5
-      parent: 2
-  - uid: 1239
-    components:
-    - type: MetaData
-      name: каюта мима
-    - type: Transform
-      pos: -13.5,-26.5
       parent: 2
 - proto: AirlockTheatreLocked
   entities:
@@ -104212,6 +104221,36 @@ entities:
     components:
     - type: Transform
       pos: 128.5,53.5
+      parent: 2
+  - uid: 49870
+    components:
+    - type: Transform
+      pos: 95.5,59.5
+      parent: 2
+  - uid: 49872
+    components:
+    - type: Transform
+      pos: 95.5,51.5
+      parent: 2
+  - uid: 49873
+    components:
+    - type: Transform
+      pos: 114.5,61.5
+      parent: 2
+  - uid: 49877
+    components:
+    - type: Transform
+      pos: 115.5,61.5
+      parent: 2
+  - uid: 58470
+    components:
+    - type: Transform
+      pos: 114.5,49.5
+      parent: 2
+  - uid: 58471
+    components:
+    - type: Transform
+      pos: 115.5,49.5
       parent: 2
 - proto: CableApcStack
   entities:
@@ -165645,7 +165684,7 @@ entities:
     - type: Transform
       pos: 44.553814,-35.382313
       parent: 2
-- proto: CurbDarckSteel
+- proto: CurbDarkSteel
   entities:
   - uid: 21725
     components:
@@ -166068,7 +166107,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -17.5,30.5
       parent: 2
-- proto: CurbDarckSteelCorner
+- proto: CurbDarkSteelCorner
   entities:
   - uid: 21802
     components:
@@ -166161,7 +166200,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -16.5,29.5
       parent: 2
-- proto: CurbDarckSteelCornerSmall
+- proto: CurbDarkSteelCornerSmall
   entities:
   - uid: 21818
     components:
@@ -167188,7 +167227,7 @@ entities:
       pos: 0.5,30.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -55269.316
+      secondsUntilStateChange: -55639.258
       state: Closing
   - uid: 21989
     components:
@@ -167376,7 +167415,7 @@ entities:
       pos: 0.5,-33.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -2910931.5
+      secondsUntilStateChange: -2911301.5
       state: Closing
   - uid: 22021
     components:
@@ -167423,7 +167462,7 @@ entities:
       pos: 57.5,-64.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1646504.9
+      secondsUntilStateChange: -1646874.9
       state: Closing
   - uid: 22029
     components:
@@ -167490,7 +167529,7 @@ entities:
       pos: 88.5,-62.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -967170.2
+      secondsUntilStateChange: -967540.06
       state: Closing
 - proto: CurtainsPink
   entities:
@@ -167557,7 +167596,7 @@ entities:
       pos: -46.5,-15.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -615171.4
+      secondsUntilStateChange: -615541.25
       state: Closing
   - uid: 22049
     components:
@@ -185764,7 +185803,7 @@ entities:
     - type: Label
       currentLabel: кофейный ликёр
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.6893183
+      sprayFizzinessThresholdRoll: 0.16320968
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -185789,7 +185828,7 @@ entities:
     - type: Label
       currentLabel: коньяк
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.0803003
+      sprayFizzinessThresholdRoll: 0.8536235
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -185982,7 +186021,7 @@ entities:
     - type: Label
       currentLabel: джин
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.0197897
+      sprayFizzinessThresholdRoll: 0.345647
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -187144,7 +187183,7 @@ entities:
     - type: Label
       currentLabel: ром
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.70989186
+      sprayFizzinessThresholdRoll: 0.48206383
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -187769,7 +187808,7 @@ entities:
     - type: Label
       currentLabel: текила
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.7226385
+      sprayFizzinessThresholdRoll: 0.7368134
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -187822,7 +187861,7 @@ entities:
     - type: Label
       currentLabel: вермут
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.76832545
+      sprayFizzinessThresholdRoll: 0.0139815435
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -187858,7 +187897,7 @@ entities:
     - type: Label
       currentLabel: водка
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.24536529
+      sprayFizzinessThresholdRoll: 0.0054053767
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -188205,7 +188244,7 @@ entities:
     - type: Label
       currentLabel: виски
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.25482434
+      sprayFizzinessThresholdRoll: 0.799945
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -281650,7 +281689,7 @@ entities:
       pos: 24.5,101.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -306250.62
+      secondsUntilStateChange: -306620.6
       state: Closing
   - uid: 38277
     components:
