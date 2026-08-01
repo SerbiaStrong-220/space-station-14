@@ -11,8 +11,10 @@ using Content.Shared.Mind.Components;
 using Content.Shared.Pointing;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.SS220.AltBlocking;
+using Content.Shared.SS220.Experience;
 using Content.Shared.SS220.Mind;
 using Robust.Shared.Containers;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
@@ -26,6 +28,7 @@ public sealed partial class SiliconPartSystem : EntitySystem
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private INetManager _net = default!;
 
     private static readonly string PartContainerPrefix = "silicon_component";
 
@@ -139,11 +142,67 @@ public sealed partial class SiliconPartSystem : EntitySystem
         if (TryComp<AntagGearRelayComponent>(ent.Owner, out var antagGearRelay))
             antagGearRelay.User = ownerValidated;
 
-        if (!_mind.TryGetMind(ent.Owner, out var mindId, out var mind) ||
-            !_player.TryGetSessionById(mind.UserId, out var session))
+        if (_mind.TryGetMind(ent.Owner, out var mindId, out var mind) &&
+            _player.TryGetSessionById(mind.UserId, out var session))
+            _mind.Visit(mindId, ownerValidated, mind: mind);
+
+        if (TryComp<ExperienceComponent>(ent.Owner, out var brainExperience))
+        {
+            if (_net.IsClient)
+                return;
+
+            if (TryComp<AdminForcedExperienceAddComponent>(ent.Owner, out var brainAdminExperience)) // I feel guilty for creating this
+            {
+                var userAdminExperience = EnsureComp<AdminForcedExperienceAddComponent>(ownerValidated);
+
+                userAdminExperience.AddSublevelPoints = brainAdminExperience.AddSublevelPoints;
+                userAdminExperience.Skills = brainAdminExperience.Skills;
+                userAdminExperience.Knowledges = brainAdminExperience.Knowledges;
+                userAdminExperience.DefinitionId = brainAdminExperience.DefinitionId;
+
+                RemComp<AdminForcedExperienceAddComponent>(ent.Owner);
+            }
+            if (TryComp<RoleExperienceAddComponent>(ent.Owner, out var brainRoleExperience))
+            {
+                var userRoleExperience = EnsureComp<RoleExperienceAddComponent>(ownerValidated);
+
+                userRoleExperience.AddSublevelPoints = brainRoleExperience.AddSublevelPoints;
+                userRoleExperience.Skills = brainRoleExperience.Skills;
+                userRoleExperience.Knowledges = brainRoleExperience.Knowledges;
+                userRoleExperience.DefinitionId = brainRoleExperience.DefinitionId;
+
+                RemComp<RoleExperienceAddComponent>(ent.Owner);
+            }
+            if (TryComp<RaceExperienceAddComponent>(ent.Owner, out var brainRaceExperience))
+            {
+                var userRaceExperience = EnsureComp<RaceExperienceAddComponent>(ownerValidated);
+
+                userRaceExperience.AddSublevelPoints = brainRaceExperience.AddSublevelPoints;
+                userRaceExperience.Skills = brainRaceExperience.Skills;
+                userRaceExperience.Knowledges = brainRaceExperience.Knowledges;
+                userRaceExperience.DefinitionId = brainRaceExperience.DefinitionId;
+
+                RemComp<RaceExperienceAddComponent>(ent.Owner);
+            }
+            if (TryComp<JobBackgroundSublevelAddComponent>(ent.Owner, out var brainBackgroundExperience))
+            {
+                var userBackgroundExperience = EnsureComp<JobBackgroundSublevelAddComponent>(ownerValidated);
+
+                userBackgroundExperience.Skills = brainBackgroundExperience.Skills;
+                userBackgroundExperience.SpentSublevelPoints = brainBackgroundExperience.SpentSublevelPoints;
+
+                RemComp<JobBackgroundSublevelAddComponent>(ent.Owner);
+            }
+
+            var afterGainedEv = new RecalculateEntityExperience();
+            RaiseLocalEvent(ent.Owner, ref afterGainedEv);
+            RaiseLocalEvent(ownerValidated, ref afterGainedEv);
+
             return;
 
-        _mind.Visit(mindId, ownerValidated, mind: mind);
+        }
+
+        brainExperience = EnsureComp<ExperienceComponent>(ent.Owner);
     }
 
     private void OnBrainRemoved(Entity<BrainComponent> ent, ref ComponentGotRemovedFromUser args)
@@ -154,11 +213,65 @@ public sealed partial class SiliconPartSystem : EntitySystem
         if (TryComp<AntagGearRelayComponent>(ent.Owner, out var antagGearRelay))
             antagGearRelay.User = null;
 
-        if (!_mind.TryGetMind(ent.Owner, out var mindId, out var mind) ||
-            !_player.TryGetSessionById(mind.UserId, out var session))
+        if (_mind.TryGetMind(ent.Owner, out var mindId, out var mind) &&
+            _player.TryGetSessionById(mind.UserId, out var session))
+            _mind.UnVisit(mindId);
+
+
+        if (!TryComp<ExperienceComponent>(ent.Owner, out var brainExperience))
             return;
 
-        _mind.UnVisit(mindId);
+        if (_net.IsClient)
+            return;
+
+        if (TryComp<AdminForcedExperienceAddComponent>(args.Owner, out var userAdminExperience))
+        {
+            var brainAdminExperience = EnsureComp<AdminForcedExperienceAddComponent>(ent.Owner);
+
+            brainAdminExperience.AddSublevelPoints = userAdminExperience.AddSublevelPoints;
+            brainAdminExperience.Skills = userAdminExperience.Skills;
+            brainAdminExperience.Knowledges = userAdminExperience.Knowledges;
+            brainAdminExperience.DefinitionId = userAdminExperience.DefinitionId;
+
+            RemComp<AdminForcedExperienceAddComponent>(args.Owner);
+        }
+        if (TryComp<RoleExperienceAddComponent>(args.Owner, out var userRoleExperience))
+        {
+            var brainRoleExperience = EnsureComp<RoleExperienceAddComponent>(ent.Owner);
+
+            brainRoleExperience.AddSublevelPoints = userRoleExperience.AddSublevelPoints;
+            brainRoleExperience.Skills = userRoleExperience.Skills;
+            brainRoleExperience.Knowledges = userRoleExperience.Knowledges;
+            brainRoleExperience.DefinitionId = userRoleExperience.DefinitionId;
+
+            RemComp<RoleExperienceAddComponent>(args.Owner);
+        }
+        if (TryComp<RaceExperienceAddComponent>(args.Owner, out var userRaceExperience))
+        {
+            var brainRaceExperience = EnsureComp<RaceExperienceAddComponent>(ent.Owner);
+
+            brainRaceExperience.AddSublevelPoints = userRaceExperience.AddSublevelPoints;
+            brainRaceExperience.Skills = userRaceExperience.Skills;
+            brainRaceExperience.Knowledges = userRaceExperience.Knowledges;
+            brainRaceExperience.DefinitionId = userRaceExperience.DefinitionId;
+
+            RemComp<RaceExperienceAddComponent>(args.Owner);
+        }
+        if (TryComp<JobBackgroundSublevelAddComponent>(args.Owner, out var userBackgroundExperience))
+        {
+            var brainBackgroundExperience = EnsureComp<JobBackgroundSublevelAddComponent>(ent.Owner);
+
+            brainBackgroundExperience.Skills = userBackgroundExperience.Skills;
+            brainBackgroundExperience.SpentSublevelPoints = userBackgroundExperience.SpentSublevelPoints;
+
+            RemComp<JobBackgroundSublevelAddComponent>(args.Owner);
+        }
+
+        var afterGainedEv = new RecalculateEntityExperience();
+        RaiseLocalEvent(ent.Owner, ref afterGainedEv);
+        RaiseLocalEvent(args.Owner, ref afterGainedEv);
+
+        return;
     }
 
     private void OnMindVisited(Entity<SiliconPartComponent> ent, ref EntityUnvisitedEvent args)
@@ -197,9 +310,12 @@ public sealed partial class SiliconPartSystem : EntitySystem
 
         if (!_mind.TryGetMind(ent.Owner, out var mindId, out var mind) ||
             !_player.TryGetSessionById(mind.UserId, out var session))
+            _mind.Visit(mindId, ownerValidated, mind: mind);
+
+        if (TryComp<ExperienceComponent>(ent.Owner, out var brainExperience))
             return;
 
-        _mind.Visit(mindId, ownerValidated, mind: mind);
+        brainExperience = EnsureComp<ExperienceComponent>(ent.Owner);
     }
 
     private void OnSiliconMindAdded(Entity<SiliconComponentsComponent> ent, ref MindAddedMessage args)

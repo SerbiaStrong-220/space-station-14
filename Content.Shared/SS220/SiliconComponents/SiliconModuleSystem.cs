@@ -20,14 +20,8 @@ namespace Content.Shared.SS220.SiliconComponents;
 
 public sealed partial class SiliconModuleSystem : EntitySystem
 {
-    [Dependency] private DamageableSystem _damageableSystem = default!;
-    [Dependency] private BlindableSystem _blindable = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
 
-    private static readonly string PartContainerPrefix = "silicon_component";
+    //private static readonly string PartContainerPrefix = "silicon_component";
 
     public override void Initialize()
     {

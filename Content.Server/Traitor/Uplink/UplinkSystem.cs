@@ -108,7 +108,8 @@ public sealed class UplinkSystem : EntitySystem
         EntityUid storeEntity,
         bool giveDiscounts = false,
         bool bindToPda = false,
-        bool useDynamics = false)
+        bool useDynamics = false,
+        bool mustHaveCode = true)
     {
         code = null;
         uplinkEntity ??= FindUplinkTarget(user);
@@ -119,7 +120,7 @@ public sealed class UplinkSystem : EntitySystem
         var ev = new GenerateUplinkCodeEvent();
         RaiseLocalEvent(storeEntity, ref ev);
 
-        if (ev.Code == null)
+        if (ev.Code == null && mustHaveCode)
         {
             QueueDel(storeEntity);
             return false;
@@ -141,7 +142,7 @@ public sealed class UplinkSystem : EntitySystem
     /// <summary>
     /// Configure TC for the uplink
     /// </summary>
-    private void SetUplink(EntityUid user, EntityUid store, FixedPoint2 balance, bool giveDiscounts, bool useDynamics) // SS220 DynamicTraitor
+    public void SetUplink(EntityUid user, EntityUid store, FixedPoint2 balance, bool giveDiscounts, bool useDynamics) // SS220 DynamicTraitor
     {
         if (!_mind.TryGetMind(user, out var mind, out _))
             return;

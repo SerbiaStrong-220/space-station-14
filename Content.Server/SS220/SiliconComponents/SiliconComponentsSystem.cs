@@ -14,7 +14,6 @@ public sealed partial class SiliconComponentsSystem : SharedSiliconComponentsSys
     [Dependency] private UplinkSystem _uplink = default!;
     [Dependency] private SharedContainerSystem _container = default!;
 
-    public static readonly EntProtoId<StoreComponent> TraitorUplinkStore = "StorePresetRemoteUplink";
     public static readonly EntProtoId<StoreComponent> HiddenUplink = "SynthModHiddenUplink";
 
     public override void Initialize()
@@ -34,9 +33,11 @@ public sealed partial class SiliconComponentsSystem : SharedSiliconComponentsSys
         if (!_container.Insert(uplinkEnt, ent.Comp.ModuleContainer))
             return;
 
-        var storeEntity = Spawn(TraitorUplinkStore, MapCoordinates.Nullspace);
-
-        if (_uplink.TryAddEntityUplink(ent, args.Balance, out var generatedCode, uplinkEnt, storeEntity, args.GiveDiscounts, false, args.UseDynamics))
+        if (_uplink.TryAddEntityUplink(ent, args.Balance, out var generatedCode, uplinkEnt, uplinkEnt, args.GiveDiscounts, false, args.UseDynamics, mustHaveCode: false))
             args.Handled = true;
+
+        //_ringer.SetBoundUplinkEntity((storeEntity, accessComp), uplinkEntity.Value);
+        //_uplink.SetUplink(ent, storeEntity, args.Balance, args.GiveDiscounts, args.UseDynamics);
+        //args.Handled = true;
     }
 }

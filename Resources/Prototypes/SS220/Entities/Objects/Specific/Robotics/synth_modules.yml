@@ -63,5 +63,21 @@
   description: It looks like it could be easily hidden somewhere..
   components:
   - type: SiliconModule
+  - type: Sprite
+    sprite: Objects/Devices/communication.rsi
+    layers:
+    - state: old-radio
+  - type: Item
+    sprite: Objects/Devices/communication.rsi
+    heldPrefix: old-radio
+  - type: UserInterface
+    interfaces:
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
+  - type: ActivatableUI
+    key: enum.StoreUiKey.Key
+  - type: Store
+    balance:
+      Telecrystal: 0
   - type: ScaleVisuals
     scale: 0.8, 0.8
