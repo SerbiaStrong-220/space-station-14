@@ -5,11 +5,7 @@ namespace Content.Server.SS220.Investigation;
 
 public static class LanguageMessageExtensions
 {
-    /// <summary>
-    ///     Distinct language ids of the non-empty nodes, in the order they appear in the sentence. Not the
-    ///     speaker's selected language: a key prefix can switch language part-way through a line.
-    /// </summary>
-    /// <param name="fallback">Reported when the message yielded none, normally the speaker's selected language.</param>
+    /// <summary>Language ids in sentence order. Not the selected language: a %key can switch mid-line.</summary>
     public static List<string> SpokenLanguageIds(this LanguageMessage? message, string? fallback = null)
     {
         var result = new List<string>();
@@ -23,7 +19,6 @@ public static class LanguageMessageExtensions
 
                 var id = node.LanguageId.Id;
 
-                // Linear scan: a sentence mixes a handful of languages at most, so a HashSet would cost more.
                 if (!result.Contains(id))
                     result.Add(id);
             }

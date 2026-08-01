@@ -10,8 +10,12 @@ using Content.IntegrationTests.Fixtures;
 using Content.Server.Administration.Logs;
 using Content.Server.SS220.Investigation;
 using Content.Shared.Database;
+using Content.Shared.SS220.CCVars;
+using Robust.Shared.Configuration;
 using Robust.Shared.ContentPack;
 using Robust.Shared.GameObjects;
+using Robust.Shared.IoC;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.IntegrationTests.SS220.Tests.Investigation;
@@ -50,8 +54,8 @@ public sealed class InvestigationRecorderTests : GameTest
             recorder.TrackEntity(entity, Guid.NewGuid(), "test_user", "Urist McTest", "MobHuman");
 
             // Two samples: the second is far enough away that it must produce its own row.
-            recorder.WritePosition(entity, null, new Vector2(10f, 20f), null, 0.15f);
-            recorder.WritePosition(entity, null, new Vector2(15f, 25f), null, 0.15f);
+            SamplePosition(entities, entity, new Vector2(10f, 20f));
+            SamplePosition(entities, entity, new Vector2(15f, 25f));
 
             // Goes through the real AdminLogManager.Add path, which is where the recorder hook lives.
             adminLogs.Add(LogType.MeleeHit, LogImpact.High, $"{entity:actor} did a test thing");
@@ -242,7 +246,7 @@ public sealed class InvestigationRecorderTests : GameTest
 
             speaker = entities.SpawnEntity(null, coordinates);
             recorder.TrackEntity(speaker, Guid.NewGuid(), "chatter", "Urist McSpeaker", "MobHuman");
-            recorder.WritePosition(speaker, null, new Vector2(7f, -3f), null, 0.15f);
+            SamplePosition(entities, speaker, new Vector2(7f, -3f));
 
             recorder.OnChat(speaker, "Say", "привет, мир", "Urist McSpeaker");
             recorder.OnChat(speaker, "Whisper", "тихо", "Замаскированный");
@@ -295,33 +299,35 @@ public sealed class InvestigationRecorderTests : GameTest
         var entities = server.ResolveDependency<IEntityManager>();
         var resources = server.ResolveDependency<IResourceManager>();
         var recorder = server.ResolveDependency<InvestigationRecorder>();
+        var cfg = server.ResolveDependency<IConfigurationManager>();
 
         await Pair.CreateTestMap();
         var coordinates = Pair.TestMap!.GridCoords;
 
         EntityUid entity = default;
 
-        // Deliberately never tracked: the roster is what the recorder's own sampling loop walks, and rows it
-        // added between the ticks below would be indistinguishable from the ones under test.
+        // The automatic sampler walks every tracked entity, and rows it added between the ticks below would be
+        // indistinguishable from the ones under test. Pushed out of reach so only the samples here produce rows.
+        cfg.SetCVar(CCVars220.InvestigationPositionInterval, 3600f);
         await server.WaitPost(() =>
         {
             recorder.StartRound(4245, "TestStation");
             entity = entities.SpawnEntity(null, coordinates);
-            recorder.WritePosition(entity, null, new Vector2(0f, 0f), null, 0.15f);
+            SamplePosition(entities, entity, new Vector2(0f, 0f));
         });
 
         // Standing perfectly still. None of these may produce a row on their own.
         for (var stationarySample = 0; stationarySample < 3; stationarySample++)
         {
             await server.WaitRunTicks(5);
-            await server.WaitPost(() => recorder.WritePosition(entity, null, new Vector2(0f, 0f), null, 0.15f));
+            await server.WaitPost(() => SamplePosition(entities, entity, new Vector2(0f, 0f)));
         }
 
         // Then walking away in a straight line, which the dead reckoning collapses to its endpoints.
         await server.WaitRunTicks(5);
-        await server.WaitPost(() => recorder.WritePosition(entity, null, new Vector2(2f, 0f), null, 0.15f));
+        await server.WaitPost(() => SamplePosition(entities, entity, new Vector2(2f, 0f)));
         await server.WaitRunTicks(5);
-        await server.WaitPost(() => recorder.WritePosition(entity, null, new Vector2(4f, 0f), null, 0.15f));
+        await server.WaitPost(() => SamplePosition(entities, entity, new Vector2(4f, 0f)));
 
         await server.WaitPost(() => recorder.StopRound(TimeSpan.FromMinutes(1)));
 
@@ -338,6 +344,8 @@ public sealed class InvestigationRecorderTests : GameTest
                 "The anchor must be dated at the end of the stationary stretch, not at its start.");
             Assert.That(rows[2].GetProperty("x").GetDouble(), Is.EqualTo(4d).Within(0.01));
         });
+
+        cfg.SetCVar(CCVars220.InvestigationPositionInterval, 0.5f);
     }
 
     [Test]
@@ -398,6 +406,16 @@ public sealed class InvestigationRecorderTests : GameTest
             // Must be a no-op rather than throwing: admin logs fire constantly outside of rounds.
             adminLogs.Add(LogType.Unknown, LogImpact.Low, $"log outside of a round");
         });
+    }
+
+    /// <summary>Drives one position sample through the system, which owns the dead-reckoning filter.</summary>
+    private static void SamplePosition(IEntityManager entities, EntityUid uid, Vector2 local)
+    {
+        var system = entities.System<InvestigationRecorderSystem>();
+        var tracked = entities.EnsureComponent<InvestigationTrackedComponent>(uid);
+        var tick = IoCManager.Resolve<IGameTiming>().CurTick.Value;
+
+        system.RecordPosition((uid, tracked), tick, new SampledPosition(null, 0, local, null));
     }
 
     private static string ReadAllText(IResourceManager resources, ResPath path)
