@@ -15,6 +15,7 @@ using Robust.Client.ResourceManagement;
 using Robust.Shared.Serialization.TypeSerializers.Implementations;
 using Robust.Shared.Utility;
 using static Robust.Client.GameObjects.SpriteComponent;
+using Content.Shared.SS220.Clothing; // SS220-IPC
 
 namespace Content.Client.Clothing;
 
