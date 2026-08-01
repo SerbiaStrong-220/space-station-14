@@ -7,7 +7,7 @@ ent-ActionDrainBattery = Опустошить заряд
 ent-ActionIpcChangeFace = Сменить интерфейс КПБ
     .desc = Открывает меню выбора интерфейса КПБ.
 
-sleep-ipc = КПБ уходит в режим сна.
+sleep-ipc = КПБ в режиме сна.
 
 ipc-drain-enabled = Опустошение заряда активно
 ipc-drain-disabled = Опустошение заряда отключено
