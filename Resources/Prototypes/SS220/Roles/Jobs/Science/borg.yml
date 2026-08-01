@@ -5,12 +5,12 @@
   experienceDefinition: StationBorgsRoleExperience
   playTimeTracker: JobSecurityBorg
   requirements:
-    - !type:OverallPlaytimeRequirement
-      role: JobBorg
-      time: 20h 
-    - !type:OverallPlaytimeRequirement
-      role: Security
-      time: 20h
+  - !type:OverallPlaytimeRequirement
+    role: JobBorg
+    time: 20h 
+  - !type:OverallPlaytimeRequirement
+    role: Security
+    time: 20h
   canBeAntag: false
   icon: JobIconSecBorg
   supervisors: job-supervisors-hos
