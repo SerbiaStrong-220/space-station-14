@@ -55,8 +55,10 @@ public sealed partial class InvestigationRecorderSystem
     }
 
     /// <remarks>
-    ///     Two filters.
-    ///     Epsilon that drops entities which have not moved  and dead reckoning.
+    ///     Two filters: an epsilon that drops entities which have not moved, and dead reckoning that drops
+    ///     samples a reader can reconstruct by interpolating. Only the epsilon can recognise standing
+    ///     still, so it is checked against the held sample before dead reckoning gets a say — see the note
+    ///     on that branch for what happens when a standstill reaches the dead reckoning instead.
     /// </remarks>
     public void RecordPosition(Entity<InvestigationTrackedComponent> ent, uint tick, SampledPosition observed)
     {
@@ -96,6 +98,23 @@ public sealed partial class InvestigationRecorderSystem
             }
 
             tracked.Track = track with { PendingTick = tick, PendingSample = observed, LastSampleTick = tick };
+            return;
+        }
+
+        // Standing still has to end the span before dead reckoning sees it, because dead reckoning cannot
+        // recognise it. The prediction is taken along the line from the written sample to the *current*
+        // observation, and the held sample sits all but the newest interval along that line, so while an
+        // entity stays put the prediction stays glued to where it already is and the error stays at zero.
+        // A stationary stretch is therefore absorbed whole, however long it runs, and the row that finally
+        // closes it is dated at the moment the entity moved off rather than the moment it arrived. That
+        // hands a reader one span covering the last real step before stopping plus the entire standstill,
+        // and interpolating it draws the character creeping across the room for as long as their player
+        // stood at a workstation. Closing at the pending sample keeps the step and the standstill apart;
+        // the stretch itself is then anchored by the epsilon branch above when the entity moves again.
+        if (!observed.DiffersFrom(track.PendingSample, _positionEpsilon))
+        {
+            _recorder.WritePositionRow(uid, pendingTick, track.PendingSample);
+            tracked.Track = new PositionTrack(pendingTick, track.PendingSample, null, default, tick);
             return;
         }
 

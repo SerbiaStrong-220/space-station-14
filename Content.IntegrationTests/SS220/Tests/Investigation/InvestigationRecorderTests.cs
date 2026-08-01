@@ -32,6 +32,13 @@ public sealed class InvestigationRecorderTests : GameTest
         Connected = false,
     };
 
+    /// <remarks>The test suite disables recording by default so ordinary round starts stay disk-free.</remarks>
+    [SetUp]
+    public void EnableInvestigationRecording()
+    {
+        Pair.Server.ResolveDependency<IConfigurationManager>().SetCVar(CCVars220.InvestigationEnabled, true);
+    }
+
     [Test]
     public async Task RecordsPositionsAndEnrichesAdminLogs()
     {
@@ -344,6 +351,77 @@ public sealed class InvestigationRecorderTests : GameTest
                 "The anchor must be dated at the end of the stationary stretch, not at its start.");
             Assert.That(rows[2].GetProperty("x").GetDouble(), Is.EqualTo(4d).Within(0.01));
         });
+
+        cfg.SetCVar(CCVars220.InvestigationPositionInterval, 0.5f);
+    }
+
+    /// <summary>
+    ///     The same rule once dead reckoning is already holding a sample back, which is the state an entity
+    ///     is in whenever it stops after walking rather than standing still from the start.
+    /// </summary>
+    /// <remarks>
+    ///     Dead reckoning predicts towards the current observation, so a standstill fits its prediction
+    ///     perfectly and is absorbed for as long as it lasts. Left to it, the last step before stopping and
+    ///     the whole standstill arrive as one span, which a reader interpolates into a slow drift.
+    /// </remarks>
+    [Test]
+    public async Task ClosesAStationaryStretchThatDeadReckoningWouldAbsorb()
+    {
+        var server = Pair.Server;
+        var entities = server.ResolveDependency<IEntityManager>();
+        var resources = server.ResolveDependency<IResourceManager>();
+        var recorder = server.ResolveDependency<InvestigationRecorder>();
+        var cfg = server.ResolveDependency<IConfigurationManager>();
+
+        await Pair.CreateTestMap();
+        var coordinates = Pair.TestMap!.GridCoords;
+
+        EntityUid entity = default;
+
+        cfg.SetCVar(CCVars220.InvestigationPositionInterval, 3600f);
+        await server.WaitPost(() =>
+        {
+            recorder.StartRound(4248, "TestStation");
+            entity = entities.SpawnEntity(null, coordinates);
+            SamplePosition(entities, entity, new Vector2(0f, 0f));
+        });
+
+        // Walking, which leaves dead reckoning holding a pending sample.
+        await server.WaitRunTicks(5);
+        await server.WaitPost(() => SamplePosition(entities, entity, new Vector2(2f, 0f)));
+        await server.WaitRunTicks(5);
+        await server.WaitPost(() => SamplePosition(entities, entity, new Vector2(4f, 0f)));
+
+        // Then stopping, and standing there for a long stretch.
+        for (var stationarySample = 0; stationarySample < 6; stationarySample++)
+        {
+            await server.WaitRunTicks(5);
+            await server.WaitPost(() => SamplePosition(entities, entity, new Vector2(4f, 0f)));
+        }
+
+        // Then genuinely walking away, at right angles so the standstill cannot hide inside a straight line.
+        await server.WaitRunTicks(5);
+        await server.WaitPost(() => SamplePosition(entities, entity, new Vector2(4f, 5f)));
+
+        await server.WaitPost(() => recorder.StopRound(TimeSpan.FromMinutes(1)));
+
+        var rows = ReadJsonl(resources, recorder.LastBundlePath!.Value / "positions.jsonl.gz");
+
+        // The standstill has to arrive as its own flat span: a row when the entity got there, and a row
+        // when it left, both at 4.0. Without them the walk in and the standstill are one span, and a
+        // reader interpolating it slides the character across the room for the whole stretch.
+        var atRest = rows
+            .Where(row => row.GetProperty("x").GetDouble() is > 3.5d and < 4.5d
+                && row.GetProperty("y").GetDouble() < 0.5d)
+            .Select(row => row.GetProperty("t").GetUInt32())
+            .ToList();
+
+        Assert.That(atRest, Has.Count.GreaterThanOrEqualTo(2),
+            "A standstill must be bracketed by a row at each end, not absorbed into the step that led "
+            + "into it.");
+        Assert.That(atRest[^1] - atRest[0], Is.GreaterThan(20u),
+            "The bracketing rows must span the standstill, so a reader has nothing to interpolate across "
+            + "it.");
 
         cfg.SetCVar(CCVars220.InvestigationPositionInterval, 0.5f);
     }
