@@ -13,9 +13,9 @@ namespace Content.Server.SS220.Cooking.Grilling;
 /// <summary>
 /// This handles grill cooking
 /// </summary>
-public sealed class GrillSystem : SharedGrillSystem
+public sealed partial class GrillSystem : SharedGrillSystem
 {
-    [Dependency] private readonly SharedOvercookingSystem _overcooking = default!;
+    [Dependency] private SharedOvercookingSystem _overcooking = default!;
 
     public override void Update(float frameTime)
     {
@@ -30,10 +30,12 @@ public sealed class GrillSystem : SharedGrillSystem
 
             foreach (var ent in placer.PlacedEntities)
             {
-                var canCook = HasComp<GrillableComponent>(ent) || _overcooking.CanBeOvercooked(ent);
+                var canBeCooked = HasComp<GrillableComponent>(ent) || _overcooking.CanBeOvercooked(ent);
 
-                if(canCook)
-                    UpdateBeingCooked(ent, activelyCooking);
+                if (!canBeCooked)
+                    continue;
+
+                UpdateBeingCooked(ent, canBeCooked);
 
                 if (_overcooking.UpdateOvercooking(ent, frameTime))
                     continue;

@@ -15,9 +15,9 @@ public sealed partial class SharedOvercookingSystem : EntitySystem
 {
     private static readonly ProtoId<TagPrototype> CookedTag = "Cooked";
 
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     public override void Initialize()
     {

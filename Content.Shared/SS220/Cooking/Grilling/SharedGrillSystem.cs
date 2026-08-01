@@ -17,7 +17,7 @@ public abstract partial class SharedGrillSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] private readonly SharedOvercookingSystem _overcooking = default!;
+    [Dependency] private SharedOvercookingSystem _overcooking = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

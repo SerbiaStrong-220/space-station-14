@@ -8,11 +8,11 @@ namespace Content.Client.SS220.Cooking.Overcooking;
 /// <summary>
 /// Handles client-side visuals for food that is in the process of overcooking.
 /// </summary>
-public sealed class OvercookingVisualsSystem : EntitySystem
+public sealed partial class OvercookingVisualsSystem : EntitySystem
 {
     private static readonly Color BurntColor = Color.FromHex("#4a2b1f");
 
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
