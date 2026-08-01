@@ -27,7 +27,7 @@
     layers:
     - state: processor
   - type: ApcPowerReceiver
-    powerLoad: 300
+    powerLoad: 5
   - type: PowerState
     idlePowerDraw: 5
     workingPowerDraw: 600
