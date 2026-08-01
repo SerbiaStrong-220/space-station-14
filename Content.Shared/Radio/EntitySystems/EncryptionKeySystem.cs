@@ -221,6 +221,11 @@ public sealed partial class EncryptionKeySystem : EntitySystem
 
     private void OnHolderExamined(EntityUid uid, EncryptionKeyHolderComponent component, ExaminedEvent args)
     {
+        //SS220 add hide encryption keys on examine begin
+        if (!component.ShowOnExamine)
+            return;
+        //SS220 add hide encryption keys on examine end
+
         if (!args.IsInDetailsRange)
             return;
 

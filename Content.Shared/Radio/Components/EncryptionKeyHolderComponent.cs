@@ -49,4 +49,9 @@ public sealed partial class EncryptionKeyHolderComponent : Component
     /// </summary>
     [ViewVariables]
     public string? DefaultChannel;
+
+    //SS220 add hide encryption keys on examine begin
+    [DataField]
+    public bool ShowOnExamine = true;
+    //SS220 add hide encryption keys on examine end
 }

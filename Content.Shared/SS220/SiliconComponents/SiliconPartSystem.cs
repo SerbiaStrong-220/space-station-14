@@ -8,8 +8,6 @@ using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
-using Content.Shared.Pointing;
-using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.SS220.AltBlocking;
 using Content.Shared.SS220.Experience;
 using Content.Shared.SS220.Mind;
@@ -29,6 +27,7 @@ public sealed partial class SiliconPartSystem : EntitySystem
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private INetManager _net = default!;
+    [Dependency] private IEntityManager _entManager = default!;
 
     private static readonly string PartContainerPrefix = "silicon_component";
 
@@ -146,7 +145,7 @@ public sealed partial class SiliconPartSystem : EntitySystem
             _player.TryGetSessionById(mind.UserId, out var session))
             _mind.Visit(mindId, ownerValidated, mind: mind);
 
-        if (TryComp<ExperienceComponent>(ent.Owner, out var brainExperience))
+        if (HasComp<ExperienceComponent>(ent.Owner) && HasComp<ExperienceComponent>(ownerValidated))
         {
             if (_net.IsClient)
                 return;
@@ -155,10 +154,7 @@ public sealed partial class SiliconPartSystem : EntitySystem
             {
                 var userAdminExperience = EnsureComp<AdminForcedExperienceAddComponent>(ownerValidated);
 
-                userAdminExperience.AddSublevelPoints = brainAdminExperience.AddSublevelPoints;
-                userAdminExperience.Skills = brainAdminExperience.Skills;
-                userAdminExperience.Knowledges = brainAdminExperience.Knowledges;
-                userAdminExperience.DefinitionId = brainAdminExperience.DefinitionId;
+                _entManager.CopyComponent(ent.Owner, args.Owner, brainAdminExperience);
 
                 RemComp<AdminForcedExperienceAddComponent>(ent.Owner);
             }
@@ -166,30 +162,15 @@ public sealed partial class SiliconPartSystem : EntitySystem
             {
                 var userRoleExperience = EnsureComp<RoleExperienceAddComponent>(ownerValidated);
 
-                userRoleExperience.AddSublevelPoints = brainRoleExperience.AddSublevelPoints;
-                userRoleExperience.Skills = brainRoleExperience.Skills;
-                userRoleExperience.Knowledges = brainRoleExperience.Knowledges;
-                userRoleExperience.DefinitionId = brainRoleExperience.DefinitionId;
+                _entManager.CopyComponent(ent.Owner, args.Owner, brainRoleExperience);
 
                 RemComp<RoleExperienceAddComponent>(ent.Owner);
-            }
-            if (TryComp<RaceExperienceAddComponent>(ent.Owner, out var brainRaceExperience))
-            {
-                var userRaceExperience = EnsureComp<RaceExperienceAddComponent>(ownerValidated);
-
-                userRaceExperience.AddSublevelPoints = brainRaceExperience.AddSublevelPoints;
-                userRaceExperience.Skills = brainRaceExperience.Skills;
-                userRaceExperience.Knowledges = brainRaceExperience.Knowledges;
-                userRaceExperience.DefinitionId = brainRaceExperience.DefinitionId;
-
-                RemComp<RaceExperienceAddComponent>(ent.Owner);
             }
             if (TryComp<JobBackgroundSublevelAddComponent>(ent.Owner, out var brainBackgroundExperience))
             {
                 var userBackgroundExperience = EnsureComp<JobBackgroundSublevelAddComponent>(ownerValidated);
 
-                userBackgroundExperience.Skills = brainBackgroundExperience.Skills;
-                userBackgroundExperience.SpentSublevelPoints = brainBackgroundExperience.SpentSublevelPoints;
+                _entManager.CopyComponent(ent.Owner, args.Owner, brainBackgroundExperience);
 
                 RemComp<JobBackgroundSublevelAddComponent>(ent.Owner);
             }
@@ -202,7 +183,7 @@ public sealed partial class SiliconPartSystem : EntitySystem
 
         }
 
-        brainExperience = EnsureComp<ExperienceComponent>(ent.Owner);
+        EnsureComp<ExperienceComponent>(ent.Owner);
     }
 
     private void OnBrainRemoved(Entity<BrainComponent> ent, ref ComponentGotRemovedFromUser args)
@@ -228,10 +209,7 @@ public sealed partial class SiliconPartSystem : EntitySystem
         {
             var brainAdminExperience = EnsureComp<AdminForcedExperienceAddComponent>(ent.Owner);
 
-            brainAdminExperience.AddSublevelPoints = userAdminExperience.AddSublevelPoints;
-            brainAdminExperience.Skills = userAdminExperience.Skills;
-            brainAdminExperience.Knowledges = userAdminExperience.Knowledges;
-            brainAdminExperience.DefinitionId = userAdminExperience.DefinitionId;
+            _entManager.CopyComponent(args.Owner, ent.Owner, userAdminExperience);
 
             RemComp<AdminForcedExperienceAddComponent>(args.Owner);
         }
@@ -239,30 +217,15 @@ public sealed partial class SiliconPartSystem : EntitySystem
         {
             var brainRoleExperience = EnsureComp<RoleExperienceAddComponent>(ent.Owner);
 
-            brainRoleExperience.AddSublevelPoints = userRoleExperience.AddSublevelPoints;
-            brainRoleExperience.Skills = userRoleExperience.Skills;
-            brainRoleExperience.Knowledges = userRoleExperience.Knowledges;
-            brainRoleExperience.DefinitionId = userRoleExperience.DefinitionId;
+            _entManager.CopyComponent(args.Owner, ent.Owner, userRoleExperience);
 
             RemComp<RoleExperienceAddComponent>(args.Owner);
-        }
-        if (TryComp<RaceExperienceAddComponent>(args.Owner, out var userRaceExperience))
-        {
-            var brainRaceExperience = EnsureComp<RaceExperienceAddComponent>(ent.Owner);
-
-            brainRaceExperience.AddSublevelPoints = userRaceExperience.AddSublevelPoints;
-            brainRaceExperience.Skills = userRaceExperience.Skills;
-            brainRaceExperience.Knowledges = userRaceExperience.Knowledges;
-            brainRaceExperience.DefinitionId = userRaceExperience.DefinitionId;
-
-            RemComp<RaceExperienceAddComponent>(args.Owner);
         }
         if (TryComp<JobBackgroundSublevelAddComponent>(args.Owner, out var userBackgroundExperience))
         {
             var brainBackgroundExperience = EnsureComp<JobBackgroundSublevelAddComponent>(ent.Owner);
 
-            brainBackgroundExperience.Skills = userBackgroundExperience.Skills;
-            brainBackgroundExperience.SpentSublevelPoints = userBackgroundExperience.SpentSublevelPoints;
+            _entManager.CopyComponent(args.Owner, ent.Owner, userBackgroundExperience);
 
             RemComp<JobBackgroundSublevelAddComponent>(args.Owner);
         }
@@ -308,8 +271,8 @@ public sealed partial class SiliconPartSystem : EntitySystem
             container.ID != PartContainerPrefix + "_" + PartType.Brain)
             return;
 
-        if (!_mind.TryGetMind(ent.Owner, out var mindId, out var mind) ||
-            !_player.TryGetSessionById(mind.UserId, out var session))
+        if (_mind.TryGetMind(ent.Owner, out var mindId, out var mind) &&
+            _player.TryGetSessionById(mind.UserId, out var session))
             _mind.Visit(mindId, ownerValidated, mind: mind);
 
         if (TryComp<ExperienceComponent>(ent.Owner, out var brainExperience))

@@ -1,21 +1,26 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 
-using Content.Shared.Actions.Components;
-using Content.Shared.Bed.Sleep;
-using Content.Shared.Damage;
+using Content.Shared.ActionBlocker;
 using Content.Shared.DoAfter;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
+using Content.Shared.Ghost;
+using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Lock;
 using Content.Shared.Popups;
 using Content.Shared.PowerCell;
-using Content.Shared.Silicons.Borgs.Components;
+using Content.Shared.Speech.Muting;
 using Content.Shared.StatusEffectNew;
+using Content.Shared.UserInterface;
+using Content.Shared.Verbs;
 using Content.Shared.Wires;
 using Robust.Shared.Containers;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
+using System.Reflection.PortableExecutable;
 
 namespace Content.Shared.SS220.SiliconComponents;
 
@@ -29,10 +34,14 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
     [Dependency] private BlindableSystem _blindable = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
+    [Dependency] private readonly ActionBlockerSystem _blockerSystem = default!;
 
     private static readonly LocId NotEnoughSpace = "silicon-component-not-enough-space";
     private static readonly LocId InstallationBegun = "silicon-component-begin-install";
     private static readonly LocId RemovalBegun = "silicon-component-begin-removal";
+    private static readonly LocId BuiAltVerb = "ui-silicon-open";
+    private static readonly SiliconUiKey UiKey = SiliconUiKey.Key;
 
     private static readonly string PartContainerPrefix = "silicon_component";
 
@@ -56,6 +65,8 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
         SubscribeLocalEvent<SiliconComponentsComponent, SiliconEjectPartBuiMessage>(OnEjectPartBuiMessage);
         SubscribeLocalEvent<SiliconComponentsComponent, SiliconEjectBatteryBuiMessage>(OnEjectBatteryBuiMessage);
         SubscribeLocalEvent<SiliconComponentsComponent, SiliconRemoveModuleBuiMessage>(OnRemoveModuleBuiMessage);
+
+        SubscribeLocalEvent<SiliconComponentsComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbs);
     }
 
     private void OnComponentStartup(Entity<SiliconComponentsComponent> ent, ref ComponentStartup args)
@@ -97,6 +108,7 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
                     return;
 
                 _statusEffects.TryRemoveStatusEffect(uid, "StatusEffectPowerOffline");
+                RemComp<MutedComponent>(uid);
                 siliconComponent.Online = true;
                 Dirty(uid, siliconComponent);
                 _blindable.UpdateIsBlind(uid);
@@ -108,6 +120,7 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
                 return;
 
             _statusEffects.TrySetStatusEffectDuration(uid, "StatusEffectPowerOffline", new TimeSpan(0, 0, 30));
+            EnsureComp<MutedComponent>(uid);
             siliconComponent.Online = false;
             Dirty(uid, siliconComponent);
             _blindable.UpdateIsBlind(uid);
@@ -420,6 +433,41 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
 
         args.Handled = true;
     }
+
+    private void OnGetVerbs(Entity<SiliconComponentsComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!args.CanInteract || !args.CanAccess || args.Hands == null)
+            return;
+
+        if (TryComp<WiresPanelComponent>(ent.Owner, out var panelComp) && !panelComp.Open)
+            return;
+
+        var user = args.User;
+
+        args.Verbs.Add(new AlternativeVerb
+        {
+            Act = () => InteractUI(user, ent),
+            Text = Loc.GetString(BuiAltVerb),
+            Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/VerbIcons/settings.svg.192dpi.png")),
+        });
+    }
+
+    private void InteractUI(EntityUid user, EntityUid uiEntity) //Activteable ui is hardcoded to a single ui key unfortunately((((
+    {
+        if (!_uiSystem.HasUi(uiEntity, UiKey))
+            return;
+
+        if (_uiSystem.IsUiOpen(uiEntity, UiKey, user))
+        {
+            _uiSystem.CloseUi(uiEntity, UiKey, user);
+            return;
+        }
+
+        if (!_blockerSystem.CanInteract(user, uiEntity))
+            return;
+
+        _uiSystem.OpenUi(uiEntity, UiKey, user);
+    }
 }
 
 [Serializable, NetSerializable]
@@ -473,4 +521,3 @@ public record struct ComponentInsertedIntoUser(EntityUid Part)
 public record struct ComponentRemovedFromUser(EntityUid Part)
 {
 }
-

@@ -142,7 +142,6 @@
     - TemporaryBlindness
     - Pacified
     - Flashed
-    #- TemporaryWaddle  #SS220 Temporary waddle status effect # UPD. SS220 Temporary remove
   - type: Identity
   - type: IdExaminable
   - type: FloatingVisuals
@@ -187,16 +186,22 @@
     parcelPrototype: WrappedParcelHumanoid
     wrapDelay: 5
   - type: Stripping
+  - type: HeadsetToggled
+  - type: Headset
+  - type: EncryptionKeyHolder
+    showOnExamine: false
+    keySlots: 10
+    keysExtractionMethod: Prying
   - type: UserInterface
     interfaces:
       enum.HumanoidMarkingModifierKey.Key:
         type: HumanoidMarkingModifierBoundUserInterface
       enum.StrippingUiKey.Key:
         type: StrippableBoundUserInterface
-      # SS220-surgery-update-begin
       enum.SurgeryEdgeSelectorUi.Key:
         type: EdgeSelectorBUI
-      # SS220-surgery-update-end
+      enum.HeadsetKey.Key:
+        type: HeadsetBoundUserInterface
   - type: Puller
   - type: Speech
     speechSounds: Alto
@@ -206,24 +211,20 @@
       Female: FemaleHuman
       Unsexed: MaleHuman
   - type: Emoting
-    chatEmoteCooldown: 5.0 #ss220 emote 5 sec
+    chatEmoteCooldown: 5.0
   - type: BodyEmotes
     soundsId: GeneralBodyEmotes
   - type: Grammar
     attributes:
       proper: true
   - type: MobPrice
-    price: 1500 # Kidnapping a living person and selling them for cred is a good move.
-    deathPenalty: 0.01 # However they really ought to be living and intact, otherwise they're worth 100x less.
-  # SS220-MartialArts-Start
+    price: 1500
+    deathPenalty: 0.01
   - type: MartialArtist
   - type: MartialArtsTarget
-  # SS220-MartialArts-End
-  # SS220-Grabs-Start
   - type: Grabber
   - type: Grabbable
   - type: GrabResistance
-  # SS220-Grabs-End
   - type: RandomPrice
     maxRandomPrice: 20000
   - type: Tag
@@ -241,6 +242,7 @@
   components:
   #- type: Flammable
   - type: Experience
+  - type: IgnoreDisarmOnDamageSkill
   - type: Reactive
     groups:
       Acidic: [Touch]
@@ -250,10 +252,6 @@
         Blunt: 5
     soundHit:
       collection: MetalThud
-  - type: RaceExperienceAdd
-    skills:
-      PhysicalTraining:
-        level: 4
   - type: CombatMode
   - type: NoSlip
   - type: StaticPrice
@@ -281,7 +279,7 @@
     thresholds:
       0: Alive
       100: Critical
-      300: Dead # Same as destruction threshold. Borgs act exactly like crit when dead, except for ghosting on move
+      300: Dead
     stateAlertDict:
       Alive: BorgHealth
       Critical: BorgCrit
@@ -298,10 +296,18 @@
     locPrefix: silicon
   - type: UserInterface
     interfaces:
+      enum.HumanoidMarkingModifierKey.Key:
+        type: HumanoidMarkingModifierBoundUserInterface
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+      enum.SurgeryEdgeSelectorUi.Key:
+        type: EdgeSelectorBUI
+      enum.HeadsetKey.Key:
+        type: HeadsetBoundUserInterface
       enum.SiliconUiKey.Key:
         type: SiliconBoundUserInterface
   - type: ActivatableUI
-    key: enum.SiliconUiKey.Key
+    key: enum.HeadsetKey.Key
   - type: Inventory
     templateId: borg
   - type: Hands
@@ -323,7 +329,6 @@
     doAfterDelay: 1
     fuelCost: 0.5
     allowSelfRepair: false
-  #- type: BorgChassis
   - type: WiresPanel
   - type: ActivatableUIRequiresPanel
   - type: ContainerContainer
@@ -332,12 +337,12 @@
       cell_slot: !type:ContainerSlot { }
       borg_module: !type:Container { }
       part-container: !type:Container
+      key_slots: !type:Container
   - type: PowerCellSlot
     cellSlotId: cell_slot
     fitsInCharger: true
   - type: PowerCellDraw
-    drawRate: 0 #custom logic will be created
-    #enabled: true # the borg is only activated when a player takes over, otherwise the battery is likely empty
+    drawRate: 0
   - type: ItemSlots
     slots:
       cell_slot:
@@ -409,36 +414,6 @@
         - cell_slot
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  #- type: HandheldLight
-  #  toggleOnInteract: false
-  #  wattage: 0.2
-  #  blinkingBehaviourId: blinking
-  #  radiatingBehaviourId: radiating
-  #- type: ItemTogglePointLight
-  #- type: ToggleableVisuals
-  #  spriteLayer: light
-  #- type: LightBehaviour
-  #  behaviours:
-  #  - !type:FadeBehaviour
-  #    id: radiating
-  #    maxDuration: 2.0
-  #    startValue: 3.0
-  #    endValue: 2.0
-  #    isLooped: true
-  #    reverseWhenFinished: true
-  #  - !type:PulseBehaviour
-  #    id: blinking
-  #    interpolate: Nearest
-  #    maxDuration: 1.0
-  #    startValue: 0.1
-  #    endValue: 2.0
-  #    isLooped: true
-  #- type: PointLight
-  #  enabled: false
-  #  mask: /Textures/Effects/LightMasks/cone.png
-  #  autoRot: true
-  #  radius: 6 #ss220 Borg update
-  #  netsync: false
   - type: Pullable
   - type: Puller
     needsHands: true
@@ -522,6 +497,8 @@
         #startingItem: PowerCellMedium
       #silicon_component_Drive:
         #startingItem: PowerCellMedium
+      key_slots:
+      - EncryptionKeyCommon
   - type: SiliconComponents
   - type: Language
     selectedLanguage: Galactic
