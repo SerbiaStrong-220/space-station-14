@@ -17,25 +17,6 @@ public sealed partial class DamageableSystem
         return _supportedTypesByContainer[container.Value].Contains(type);
     }
 
-    //SS220-MicroFixesIPC begin
-    public bool SupportsGroup(ProtoId<DamageContainerPrototype>? container, ProtoId<DamageGroupPrototype> groupId)
-    {
-        if (container is null)
-            return true;
-
-        if (!_prototypeManager.TryIndex(groupId, out var group))
-            return false;
-
-        foreach (var damageType in group.DamageTypes)
-        {
-            if (SupportsType(container, damageType))
-                return true;
-        }
-
-        return false;
-    }
-    //SS220-MicroFixesIPC end
-
     /// <summary>
     ///     Directly sets the damage in a damageable component.
     ///     This method keeps the damage types supported by the DamageContainerPrototype in the component.
