@@ -82,14 +82,7 @@ public sealed partial class DiscordPlayerManager : IPostInjectInit, IDisposable
             period: TimeSpan.FromSeconds(_cfg.GetCVar(CCVars220.DiscordSponsorsCacheRefreshIntervalSeconds))
         );
 
-        // Fetch sponsor info as part of the user-db *load* step (the tasks that UserDbDataManager
-        // awaits via Task.WhenAll before running any "on finish load" callback, including
-        // ServerPreferencesManager.FinishLoad -> SanitizePreferences -> loadout validation).
-        // This guarantees ContentPlayerData.SponsorInfo is populated (or definitively marked as
-        // failed) before sponsor-gated loadout items are validated and before the player can spawn.
-        // Previously this ran off an independent PlayerStatusChanged subscription racing against
-        // GameTicker's own preferences load, which could strip sponsor loadout items if the HTTP
-        // fetch hadn't completed yet (especially right after a server restart with a cold connection).
+        // Runs as a load hook so the fetch is awaited before preferences are sanitized and validated.
         _userDb.AddOnLoadPlayer(OnLoadPlayer);
     }
 
@@ -186,12 +179,7 @@ public sealed partial class DiscordPlayerManager : IPostInjectInit, IDisposable
         }
     }
 
-    /// <returns>
-    /// The fetched sponsor info (null if the player has no sponsor tiers), and whether the fetch
-    /// itself succeeded. A null result with <c>Success: true</c> means "we asked and the player has
-    /// no tiers"; <c>Success: false</c> means the premium-checker service was unavailable/errored and
-    /// we don't actually know the player's status.
-    /// </returns>
+    /// <returns><c>Success: false</c> means the service could not be reached, not that the player has no tiers.</returns>
     private async Task<(DiscordSponsorInfo? Info, bool Success)> GetSponsorInfo(NetUserId userId)
     {
         if (string.IsNullOrEmpty(_linkApiUrl))

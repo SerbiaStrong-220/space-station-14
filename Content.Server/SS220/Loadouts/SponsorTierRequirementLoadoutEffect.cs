@@ -23,9 +23,7 @@ public sealed partial class SponsorTierRequirementLoadoutEffect : SharedSponsorT
             return false;
         }
 
-        // The premium-checker service was unavailable/errored when we tried to fetch this player's
-        // sponsor status, so we can't tell "not a sponsor" from "couldn't ask". Fail open rather than
-        // silently stripping an already-selected sponsor item on every restart/reconnect.
+        // Fail open: the fetch failed, so "not a sponsor" is indistinguishable from "could not ask".
         if (contentData.SponsorInfoFetchFailed)
             return true;
 

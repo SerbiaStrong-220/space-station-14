@@ -40,12 +40,7 @@ public sealed class ContentPlayerData
     [ViewVariables(VVAccess.ReadOnly)]
     public DiscordSponsorInfo? SponsorInfo = null;
 
-    /// <summary>
-    /// True if the last attempt to fetch <see cref="SponsorInfo"/> from the premium-checker service
-    /// failed or timed out (as opposed to succeeding with no sponsor tiers). Loadout validation should
-    /// fail open (not strip sponsor items) in this case, since we can't distinguish "not a sponsor"
-    /// from "couldn't ask".
-    /// </summary>
+    /// <summary>Set when the fetch failed, as opposed to succeeding with no tiers.</summary>
     [ViewVariables(VVAccess.ReadOnly)]
     public bool SponsorInfoFetchFailed = false;
     //SS220 Shlepovend end
