@@ -152,8 +152,9 @@ public sealed class DamageVisualsSystem : VisualizerSystem<DamageVisualsComponen
 
         // If the damage container on our entity's DamageableComponent
         // is not null, we can try to check through its groups.
-        if (damageComponent.DamageContainerID != null
-            && _prototypeManager.Resolve<DamageContainerPrototype>(damageComponent.DamageContainerID, out var damageContainer))
+        //SS220-MicroFixesIPC begin
+        if (damageComponent.DamageContainerID != null)
+        //SS220-MicroFixesIPC end
         {
             // Are we using damage overlay sprites by group?
             // Check if the container matches the supported groups,
@@ -162,7 +163,9 @@ public sealed class DamageVisualsSystem : VisualizerSystem<DamageVisualsComponen
             {
                 foreach (var damageType in damageVisComp.DamageOverlayGroups.Keys)
                 {
-                    if (!damageContainer.SupportedGroups.Contains(damageType))
+                    //SS220-MicroFixesIPC begin
+                    if (!_damageable.SupportsGroup(damageComponent.DamageContainerID, damageType))
+                    //SS220-MicroFixesIPC end
                     {
                         Log.Error($"Damage key {damageType} was invalid for entity {entity}.");
                         damageVisComp.Valid = false;
@@ -176,7 +179,9 @@ public sealed class DamageVisualsSystem : VisualizerSystem<DamageVisualsComponen
             // See if that group is in our entity's damage container.
             else if (!damageVisComp.Overlay && damageVisComp.DamageGroup != null)
             {
-                if (!damageContainer.SupportedGroups.Contains(damageVisComp.DamageGroup.Value))
+                //SS220-MicroFixesIPC begin
+                if (!_damageable.SupportsGroup(damageComponent.DamageContainerID, damageVisComp.DamageGroup.Value))
+                //SS220-MicroFixesIPC end
                 {
                     Log.Error($"Damage keys were invalid for entity {entity}.");
                     damageVisComp.Valid = false;
