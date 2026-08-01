@@ -23,7 +23,8 @@ jobs:
         with:
           github-token: ${{ steps.app-token.outputs.token }}
           script: |
-            if (context.payload.comment.user.login !== context.payload.pull_request.user.login) {
+            // issue_comment payload has no top-level `pull_request`; PR author is issue.user
+            if (context.payload.comment.user.login !== context.payload.issue.user.login) {
               return;
             }
             try {
