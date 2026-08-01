@@ -198,6 +198,44 @@ public sealed partial class InvestigationRecorderSystem
         }
     }
 
+    /// <summary>
+    ///     Floor footprint for grids with no <see cref="NavMapComponent"/> — shuttles, salvage wrecks, debris.
+    ///     Emitted once.
+    /// </summary>
+    private void SampleGridFootprints()
+    {
+        var query = EntityQueryEnumerator<MapGridComponent>();
+        while (query.MoveNext(out var uid, out var mapGrid))
+        {
+            if (_navMapQuery.HasComp(uid))
+                continue;
+
+            var grid = EnsureComp<InvestigationGridComponent>(uid);
+            if (grid.SentFullSnapshot)
+                continue;
+
+            grid.SentFullSnapshot = true;
+
+            var chunks = new Dictionary<Vector2i, int[]>();
+            foreach (var tile in _map.GetAllTiles(uid, mapGrid))
+            {
+                var indices = tile.GridIndices;
+                var origin = SharedMapSystem.GetChunkIndices(indices, SharedNavMapSystem.ChunkSize);
+
+                if (!chunks.TryGetValue(origin, out var tiles))
+                    chunks[origin] = tiles = new int[SharedNavMapSystem.ArraySize];
+
+                var relative = SharedMapSystem.GetChunkRelative(indices, SharedNavMapSystem.ChunkSize);
+                tiles[SharedNavMapSystem.GetTileIndex(relative)] |= SharedNavMapSystem.FloorMask;
+            }
+
+            foreach (var (origin, tiles) in chunks)
+            {
+                _recorder.WriteNavMapChunk(uid, origin, tiles);
+            }
+        }
+    }
+
     private void SampleNavMap()
     {
         var sweepTick = _lastNavMapTick;

@@ -370,7 +370,6 @@ Every row also appears in §4.10 with `type == "Chat"`, without a text field.
 
 Sampled on `investigation.navmap_interval` (default `1`). Written when the pose moves more than 0.05
 tiles or radians, or `m` changes.
-A grid may have a pose with no corresponding rows in `navmap` (§4.5).
 
 ---
 

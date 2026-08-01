@@ -13,6 +13,7 @@ using Content.Shared.Inventory.Events;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Pinpointer;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.Objectives.Systems;
@@ -31,6 +32,7 @@ public sealed partial class InvestigationRecorderSystem : EntitySystem, IInvesti
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly AccessReaderSystem _accessReader = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
@@ -74,6 +76,7 @@ public sealed partial class InvestigationRecorderSystem : EntitySystem, IInvesti
     private EntityQuery<MetaDataComponent> _metaQuery;
     private EntityQuery<GhostComponent> _ghostQuery;
     private EntityQuery<InvestigationTrackedComponent> _trackedQuery;
+    private EntityQuery<NavMapComponent> _navMapQuery;
 
     public override void Initialize()
     {
@@ -86,6 +89,7 @@ public sealed partial class InvestigationRecorderSystem : EntitySystem, IInvesti
         _metaQuery = GetEntityQuery<MetaDataComponent>();
         _ghostQuery = GetEntityQuery<GhostComponent>();
         _trackedQuery = GetEntityQuery<InvestigationTrackedComponent>();
+        _navMapQuery = GetEntityQuery<NavMapComponent>();
 
         _cfg.OnValueChanged(CCVars220.InvestigationPositionInterval, i => _positionInterval = TimeSpan.FromSeconds(i), true);
         _cfg.OnValueChanged(CCVars220.InvestigationPositionEpsilon, epsilon => _positionEpsilon = epsilon, true);
@@ -159,6 +163,7 @@ public sealed partial class InvestigationRecorderSystem : EntitySystem, IInvesti
             SamplePositions();
             SampleGridPoses();
             SampleNavMap();
+            SampleGridFootprints();
 
             var query = EntityQueryEnumerator<InvestigationTrackedComponent>();
             while (query.MoveNext(out var uid, out var tracked))
@@ -270,6 +275,7 @@ public sealed partial class InvestigationRecorderSystem : EntitySystem, IInvesti
         {
             SampleGridPoses();
             SampleNavMap();
+            SampleGridFootprints();
         }
 
         if (Elapsed(ref _nextCharacterSweep, _characterInterval, now))
