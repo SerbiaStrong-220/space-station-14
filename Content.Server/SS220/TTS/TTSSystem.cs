@@ -28,7 +28,6 @@ public sealed partial class TTSSystem : SharedTTSSystem
     [Dependency] private IPlayerManager _playerManager = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private IServerNetManager _netManager = default!;
     [Dependency] private SharedTransformSystem _xforms = default!;
 
     #region Prometheus
@@ -88,31 +87,17 @@ public sealed partial class TTSSystem : SharedTTSSystem
     {
         base.Initialize();
 
-        //_netManager.RegisterNetMessage<PlayTtsMessage>();
-        //_netManager.RegisterNetMessage<MsgPlayAnnounceTts>();
-
-        _cfg.OnValueChanged(CCVars220.MaxCharInTTSAnnounceMessage, x => _maxAnnounceMessageChars = x, true);
-        _cfg.OnValueChanged(CCVars220.MaxCharInTTSMessage, x => _maxMessageChars = x, true);
-        _cfg.OnValueChanged(CCVars220.TTSEnabled, v => _isEnabled = v, true);
-        _cfg.OnValueChanged(CCVars220.TTSRequestTimeout, v => _requestTimeout = v, true);
+        Subs.CVar(_cfg, CCVars220.MaxCharInTTSAnnounceMessage, x => _maxAnnounceMessageChars = x, true);
+        Subs.CVar(_cfg, CCVars220.MaxCharInTTSMessage, x => _maxMessageChars = x, true);
+        Subs.CVar(_cfg, CCVars220.TTSEnabled, v => _isEnabled = v, true);
+        Subs.CVar(_cfg, CCVars220.TTSRequestTimeout, v => _requestTimeout = v, true);
 
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
         SubscribeNetworkEvent<RequestTTSVoiceTestEvent>(OnRequestTTSVoiceTest);
 
         // remove if Robust PR for clientCVar subs merged
-        SubscribeNetworkEvent<SessionSendTTSMessage>((msg, args) =>
-        {
-            if (!msg.Value)
-                _sessionsNotToSend.Add(args.SenderSession);
-            else
-                _sessionsNotToSend.Remove(args.SenderSession);
-        });
-
-        _playerManager.PlayerStatusChanged += (_, x) =>
-        {
-            if (x.NewStatus == SessionStatus.Disconnected)
-                _sessionsNotToSend.Remove(x.Session);
-        };
+        SubscribeNetworkEvent<ReceiveTtsCVarChanged>(OnReceiveTtsCVarChanged);
+        _playerManager.PlayerStatusChanged += OnPlayerStatusChanged;
         // end
 
         InitializeEntitySubscriptions();
@@ -126,19 +111,35 @@ public sealed partial class TTSSystem : SharedTTSSystem
         ClearCache();
     }
 
-    private async void OnRequestTTSVoiceTest(RequestTTSVoiceTestEvent ev, EntitySessionEventArgs args)
+    private void OnRequestTTSVoiceTest(RequestTTSVoiceTestEvent ev, EntitySessionEventArgs args)
     {
-        var text = _random.Pick(_sampleText);
-        using var ttsResponse = await ConvertTextToSpeech(text, ev.VoiceId, TtsKind.VoiceTest);
-        if (!ttsResponse.TryGetValue(out var audioData))
+        if (!_prototypeManager.TryIndex(ev.VoiceId, out var voice))
             return;
 
-        SendTtsMessage(new PlayTtsMessage { AudioData = audioData }, args.SenderSession);
+        var text = _random.Pick(_sampleText);
+
+        var request = new TtsVoiceTestRequest()
+        {
+            Voice = voice,
+            Text = _random.Pick(_sampleText),
+            Receivers = [args.SenderSession]
+        };
+
+        RunTaskWithTryCatch(() => HandleVoiceTestRequest(request));
     }
 
-    public async Task<TtsResponse.Reference?> ConvertTextToSpeech(string text, ServerTtsMetadata meta)
+    private void OnReceiveTtsCVarChanged(ReceiveTtsCVarChanged msg, EntitySessionEventArgs args)
     {
-        return await ConvertTextToSpeech(text, meta.SpeakerMeta.VoiceId, meta.Kind);
+        if (!msg.Value)
+            _sessionsNotToSend.Add(args.SenderSession);
+        else
+            _sessionsNotToSend.Remove(args.SenderSession);
+    }
+
+    private void OnPlayerStatusChanged(object? sender, SessionStatusEventArgs e)
+    {
+        if (e.NewStatus == SessionStatus.Disconnected)
+            _sessionsNotToSend.Remove(e.Session);
     }
 
     public async Task<TtsResponse.Reference?> ConvertTextToSpeech(string text, ProtoId<TTSVoicePrototype>? protoId, TtsKind kind)
@@ -149,7 +150,12 @@ public sealed partial class TTSSystem : SharedTTSSystem
         if (!_prototypeManager.TryIndex(protoId, out var proto))
             return null;
 
-        return await ConvertTextToSpeech(text, proto.Provider, proto.Speaker, kind);
+        return await ConvertTextToSpeech(text, proto, kind);
+    }
+
+    public async Task<TtsResponse.Reference?> ConvertTextToSpeech(string text, TTSVoicePrototype voice, TtsKind kind)
+    {
+        return await ConvertTextToSpeech(text, voice.Provider, voice.Speaker, kind);
     }
 
     public async Task<TtsResponse.Reference?> ConvertTextToSpeech(string text, TtsProvider provider, string speaker, TtsKind kind)
@@ -208,18 +214,6 @@ public sealed partial class TTSSystem : SharedTTSSystem
         }
     }
 
-    // Masks NetManagerMethod for handling client setting
-    private void SendTtsMessage(EntityEventArgs message, ICommonSession recipient)
-    {
-        if (_sessionsNotToSend.Contains(recipient))
-            return;
-
-        if (recipient.Status == SessionStatus.Disconnected)
-            return;
-
-        RaiseNetworkEvent(message, recipient);
-    }
-
     private static string GenerateCacheKey(string text, TtsProvider? provider = null, string? speaker = null, TtsKind? kind = null)
     {
         var sb = new StringBuilder();
@@ -254,6 +248,71 @@ public sealed partial class TTSSystem : SharedTTSSystem
         return "?" + string.Join("&", array);
     }
 
+    private void RunTaskWithTryCatch(Func<Task> task)
+    {
+        if (task == null)
+            return;
+
+        Task.Run(async () =>
+        {
+            try
+            {
+                await task().ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                Log.Error($"{e.Message}\n{e.StackTrace}");
+            }
+        });
+    }
+
+    /// <summary>
+    /// Set random voice from RandomVoicesList
+    /// If RandomVoicesList is null - doesn`t set new voice
+    /// </summary>
+    private void SetRandomVoice(Entity<TTSComponent?> entity)
+    {
+        if (!Resolve(entity.Owner, ref entity.Comp))
+            return;
+
+        var protoId = entity.Comp.RandomVoicesList;
+
+        if (protoId is null)
+            return;
+
+        entity.Comp.VoicePrototypeId = _random.Pick(_prototypeManager.Index<RandomVoicesListPrototype>(protoId).VoicesList);
+    }
+
+    private IEnumerable<ICommonSession> ToValidReceivers(IEnumerable<EntityUid> entities)
+    {
+        return ToValidReceivers(EntitiesToSessions(entities));
+    }
+
+    private IEnumerable<ICommonSession> ToValidReceivers(IEnumerable<ICommonSession> receivers)
+    {
+        return receivers.Where(IsValidReceiver);
+    }
+
+    private IEnumerable<ICommonSession> EntitiesToSessions(IEnumerable<EntityUid> entities)
+    {
+        foreach (var entity in entities)
+        {
+            if (_playerManager.TryGetSessionByEntity(entity, out var receiver))
+                yield return receiver;
+        }
+    }
+
+    private bool IsValidReceiver(ICommonSession receiver)
+    {
+        if (_sessionsNotToSend.Contains(receiver))
+            return false;
+
+        if (receiver.Status == SessionStatus.Disconnected)
+            return false;
+
+        return true;
+    }
+
     private sealed class TtsCache()
     {
         private readonly ConcurrentDictionary<TtsCacheKey, TtsResponse.Reference> _lookup = new();
@@ -277,8 +336,8 @@ public sealed partial class TTSSystem : SharedTTSSystem
             var currentCount = _lookup.Count;
             while (currentCount > 0 && currentCount + 1 > Limit)
             {
-                if (_keysQueue.TryDequeue(out var firstKey) && _lookup.TryRemove(firstKey, out var reuseBuffer))
-                    reuseBuffer.GetReference().Dispose();
+                if (_keysQueue.TryDequeue(out var firstKey) && _lookup.TryRemove(firstKey, out var responce))
+                    responce.Dispose();
 
                 currentCount = _lookup.Count;
             }
@@ -292,13 +351,12 @@ public sealed partial class TTSSystem : SharedTTSSystem
 
         public bool TryGet(TtsCacheKey key, [NotNullWhen(true)] out TtsResponse.Reference? responce)
         {
-            if (Limit == 0)
-            {
-                responce = null;
+            responce = null;
+            if (!_lookup.TryGetValue(key, out var exist))
                 return false;
-            }
 
-            return _lookup.TryGetValue(key, out responce);
+            responce = exist;
+            return true;
         }
 
         public void Clear()
@@ -318,21 +376,49 @@ public sealed partial class TTSSystem : SharedTTSSystem
         }
     }
 
-    /// <summary>
-    /// Set random voice from RandomVoicesList
-    /// If RandomVoicesList is null - doesn`t set new voice
-    /// </summary>
-    private void SetRandomVoice(Entity<TTSComponent?> entity)
+    private struct ServerTtsMessage() : IDisposable
     {
-        if (!Resolve(entity.Owner, ref entity.Comp))
-            return;
+        public required TtsResponse.Reference ResponceReference;
+        public SharedTtsMetadata Metadata;
+        public NetEntity? Source;
 
-        var protoId = entity.Comp.RandomVoicesList;
+        public bool Disposed { get; private set; } = false;
 
-        if (protoId is null)
-            return;
+        public ServerTtsMessage WithResponce(TtsResponse.Reference responceRef)
+        {
+            return new()
+            {
+                ResponceReference = responceRef.GetReference(),
+                Metadata = Metadata,
+                Source = Source
+            };
+        }
 
-        entity.Comp.VoicePrototypeId = _random.Pick(_prototypeManager.Index<RandomVoicesListPrototype>(protoId).VoicesList);
+        public ServerTtsMessage WithMetadata(SharedTtsMetadata meta)
+        {
+            return new()
+            {
+                ResponceReference = ResponceReference.GetReference(),
+                Metadata = meta,
+                Source = Source
+            };
+        }
+
+        public ServerTtsMessage WithSource(NetEntity source)
+        {
+            return new()
+            {
+                ResponceReference = ResponceReference.GetReference(),
+                Metadata = Metadata,
+                Source = Source
+            };
+        }
+
+        public void Dispose()
+        {
+            ResponceReference.Dispose();
+            Disposed = true;
+        }
     }
 }
 

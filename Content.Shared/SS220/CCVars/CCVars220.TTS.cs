@@ -59,16 +59,16 @@ public sealed partial class CCVars220
         CVarDef.Create("tts.use_ffmpeg_processing", true, CVar.SERVERONLY | CVar.ARCHIVE);
 
     /// <summary>
-    /// Maximum entity capacity for tts queue
+    /// Maximum number of TtsPlayRequest's in one queue.
     /// </summary>
-    public static readonly CVarDef<int> MaxQueuedPerEntity =
-        CVarDef.Create("tts.max_queued_entity", 20, CVar.CLIENTONLY | CVar.ARCHIVE);
+    public static readonly CVarDef<int> TtsPlayQueueSizeLimit =
+        CVarDef.Create("tts.play_queue_size_limit", 20, CVar.CLIENTONLY | CVar.ARCHIVE);
 
     /// <summary>
-    /// Maximum of queued tts entities
+    /// Maximum number of different TtsPlayRequest's queues.
     /// </summary>
-    public static readonly CVarDef<int> MaxEntitiesQueued =
-        CVarDef.Create("tts.max_entities_queued", 30, CVar.CLIENTONLY | CVar.ARCHIVE);
+    public static readonly CVarDef<int> TtsPlayQueuesCountLimit =
+        CVarDef.Create("tts.play_queue_count_limit", 30, CVar.CLIENTONLY | CVar.ARCHIVE);
 
     /// <summary>
     /// Defines how long messages can be processed into audio by tts

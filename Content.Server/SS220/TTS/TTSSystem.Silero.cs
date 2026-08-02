@@ -55,7 +55,7 @@ public partial class TTSSystem
             if (Cache.TryGet(cacheKey, out var data))
             {
                 Sawmill?.Debug($"Use cached sound for '{text}' speech by '{speaker}' speaker");
-                return data.GetReference();
+                return data.Value.GetReference();
             }
 
             try
@@ -149,9 +149,9 @@ public partial class TTSSystem
 
                     streamToRead.Position = 0;
                     TtsResponseManager.AllocBuffer(response, (int)streamToRead.Length);
-                    await streamToRead.ReadExactlyAsync(response.Value.Buffer, 0, response.Value.RentedLength, cts.Token);
+                    await streamToRead.ReadExactlyAsync(response.Value.Buffer, 0, response.Value.Length, cts.Token);
 
-                    Sawmill?.Verbose($"Generated new sound for '{text}' speech by '{speaker}' speaker with kind '{kind}' ({response.Value.RentedLength} bytes)");
+                    Sawmill?.Verbose($"Generated new sound for '{text}' speech by '{speaker}' speaker with kind '{kind}' ({response.Value.Length} bytes)");
                     RequestTimings.WithLabels("Success").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
                     return true;
                 }

@@ -1,6 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-
 using System.IO;
+using System.Linq;
 using Content.Shared.SS220.CCVars;
 using Content.Shared.SS220.TTS;
 using Content.Shared.SS220.TTS.Commands;
@@ -17,272 +17,221 @@ namespace Content.Client.SS220.TTS;
 /// <summary>
 /// Plays TTS audio in world
 /// </summary>
-// ReSharper disable once InconsistentNaming
 public sealed partial class TTSSystem
 {
     [Dependency] private IAudioManager _audioManager = default!;
     [Dependency] private AudioSystem _audio = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
 
-    private ISawmill _sawmill = default!;
-
     /// <summary>
-    /// Reducing the volume of the TTS when whispering. Will be converted to logarithm.
+    /// Reducing the volume of the TTS when whispering.
     /// </summary>
     private const float WhisperFade = 4f;
 
-    private float _volume = 0.0f;
-    private float _radioVolume = 0.0f;
+    private float _volume;
+    private float _radioVolume;
+    private float _announcementVolume;
 
-    private int _maxQueuedPerEntity = 20;
-    private int _maxEntitiesQueued = 30;
+    private int _queueSizeLimit = 20;
+    private int _queuesCountLimit = 30;
 
-    private readonly Dictionary<TtsMetadata, Queue<PlayRequest>> _playQueues = new();
-    private readonly Dictionary<TtsMetadata, EntityUid?> _playingStreams = new();
+    private readonly Dictionary<TtsCacheKey, Queue<PlayRequest>> _playQueues = [];
+    private readonly Dictionary<TtsCacheKey, EntityUid?> _playingStreams = [];
 
-    private readonly EntityUid _fakeRecipient = new();
+    private readonly HashSet<TtsCacheKey> _queuesToRemoveBuffer = [];
 
     public override void Initialize()
     {
-        _sawmill = Logger.GetSawmill("tts");
-
         // remove if Robust PR for clientCVar subs merged
-        _cfg.OnValueChanged(CCVars220.RecieveTTS, x => RaiseNetworkEvent(new SessionSendTTSMessage(x)), true);
+        _cfg.OnValueChanged(CCVars220.RecieveTTS, x => RaiseNetworkEvent(new ReceiveTtsCVarChanged(x)), true);
         //end
 
-        Subs.CVar(_cfg, CCVars220.MaxQueuedPerEntity, (x) => _maxQueuedPerEntity = x, true);
-        Subs.CVar(_cfg, CCVars220.MaxEntitiesQueued, (x) => _maxEntitiesQueued = x, true);
-        _cfg.OnValueChanged(CCVars220.TTSVolume, OnTtsVolumeChanged, true);
-        _cfg.OnValueChanged(CCVars220.TTSRadioVolume, OnTtsRadioVolumeChanged, true);
+        Subs.CVar(_cfg, CCVars220.TtsPlayQueueSizeLimit, x => _queueSizeLimit = x, true);
+        Subs.CVar(_cfg, CCVars220.TtsPlayQueuesCountLimit, x => _queuesCountLimit = x, true);
+        Subs.CVar(_cfg, CCVars220.TTSVolume, x => _volume = x, true);
+        Subs.CVar(_cfg, CCVars220.TTSRadioVolume, x => _radioVolume = x, true);
+        Subs.CVar(_cfg, CCVars220.TTSAnnounceVolume, x => _announcementVolume = x, true);
 
         SubscribeNetworkEvent<TtsQueueResetMessage>(OnQueueResetRequest);
         SubscribeNetworkEvent<PlayTtsMessage>(OnPlayTtsMessage);
+        SubscribeNetworkEvent<PlayAnnouncementTtsMessage>(OnPlayAnnouncementMessage);
 
-        InitializeAnnounces();
-        InitializeMetadata();
-    }
-
-    private void OnPlayTtsMessage(PlayTtsMessage args)
-    {
-        var volume = AdjustVolume(args.Metadata.Kind);
-        var audioParams = AudioParams.Default.WithVolume(volume);
-
-        QueuePlayTts(args.AudioData, args.Metadata, GetEntity(args.Source), audioParams, args.Metadata.Kind == TtsKind.Telepathy);
-    }
-
-    public override void Shutdown()
-    {
-        base.Shutdown();
-        _cfg.UnsubValueChanged(CCVars220.TTSVolume, OnTtsVolumeChanged);
-        _cfg.UnsubValueChanged(CCVars220.TTSRadioVolume, OnTtsRadioVolumeChanged);
-
-        ShutdownAnnounces();
-        ResetQueuesAndEndStreams();
-    }
-
-    public void RequestTTSVoiceTest(ProtoId<TTSVoicePrototype> voiceId)
-    {
-        RaiseNetworkEvent(new RequestTTSVoiceTestEvent(voiceId));
-    }
-
-    private void OnTtsVolumeChanged(float volume)
-    {
-        _volume = volume;
-    }
-
-    private void OnTtsRadioVolumeChanged(float volume)
-    {
-        _radioVolume = volume;
-    }
-
-    private void OnQueueResetRequest(TtsQueueResetMessage ev)
-    {
-        ResetQueuesAndEndStreams();
-        _sawmill.Debug("TTS queue was cleared by request from the server.");
-    }
-
-    public void ResetQueuesAndEndStreams()
-    {
-        foreach (var key in _playingStreams.Keys)
-        {
-            _playingStreams[key] = _audio.Stop(_playingStreams[key]);
-        }
-
-        _playingStreams.Clear();
-        _playQueues.Clear();
+        InitializeCacheKeyGeneration();
     }
 
     // Process sound queues on frame update
     public override void FrameUpdate(float frameTime)
     {
-        var streamsToRemove = new HashSet<TtsMetadata>();
+        foreach (var (key, stream) in _playingStreams.Where(p => !HasComp<AudioComponent>(p.Value)))
+            _playingStreams.Remove(key);
 
-        foreach (var (metadata, stream) in _playingStreams)
+        foreach (var (key, queue) in _playQueues)
         {
-            if (!TryComp(stream, out AudioComponent? _))
+            if (_playingStreams.ContainsKey(key))
+                continue;
+
+            var stream = PlayNextRequest(queue);
+            if (stream == null)
             {
-                streamsToRemove.Add(metadata);
+                _queuesToRemoveBuffer.Add(key);
+                continue;
             }
+
+            _playingStreams.Add(key, stream.Value);
         }
 
-        foreach (var metadata in streamsToRemove)
+        foreach (var key in _queuesToRemoveBuffer)
+            _playQueues.Remove(key);
+
+        Entity<AudioComponent>? PlayNextRequest(Queue<PlayRequest> queue, bool recursive = true)
         {
-            _playingStreams.Remove(metadata);
-        }
-
-        var queueUidsToRemove = new HashSet<TtsMetadata>();
-
-        foreach (var (metadata, queue) in _playQueues)
-        {
-            if (_playingStreams.ContainsKey(metadata))
-                continue;
-
             if (!queue.TryDequeue(out var request))
-                continue;
+                return null;
 
-            if (queue.Count == 0)
-                queueUidsToRemove.Add(metadata);
-
-            AudioStream? audioStream;
-            (EntityUid Entity, AudioComponent Component)? stream;
+            Entity<AudioComponent>? stream;
             switch (request)
             {
-                case PlayRequestByAudioStream playRequestByAudio:
-                    audioStream = playRequestByAudio.AudioStream;
-
-                    if (request.PlayGlobal)
-                        stream = _audio.PlayGlobal(audioStream, null, request.Params);
+                case PlayRequestByAudioStream byAudio:
+                    if (request.Meta.Source != null)
+                        stream = _audio.PlayEntity(byAudio.AudioStream, GetEntity(request.Meta.Source.Value), null, request.Params);
                     else
-                        stream = _audio.PlayEntity(audioStream, request.Source, null, request.Params);
+                        stream = _audio.PlayGlobal(byAudio.AudioStream, null, request.Params);
                     break;
 
-                case PlayRequestBySoundSpecifier playRequestBySoundSpecifier:
-                    if (request.PlayGlobal)
-                        stream = _audio.PlayGlobal(playRequestBySoundSpecifier.Sound, Filter.Local(), false);
+                case PlayRequestBySoundSpecifier bySoundSpecifier:
+                    if (request.Meta.Source != null)
+                        stream = _audio.PlayEntity(bySoundSpecifier.Sound, Filter.Local(), GetEntity(request.Meta.Source.Value), false);
                     else
-                        stream = _audio.PlayEntity(playRequestBySoundSpecifier.Sound, _fakeRecipient, request.Source);
+                        stream = _audio.PlayGlobal(bySoundSpecifier.Sound, Filter.Local(), false);
                     break;
 
                 default:
-                    continue;
+                    stream = null;
+                    break;
             }
 
-            if (stream.HasValue && stream.Value.Component is not null)
-            {
-                _playingStreams.Add(metadata, stream.Value.Entity);
-            }
-        }
+            if (stream == null && recursive)
+                return PlayNextRequest(queue, recursive);
 
-        foreach (var queueMetadata in queueUidsToRemove)
-        {
-            _playQueues.Remove(queueMetadata);
+            return stream;
         }
     }
 
-    public void TryQueueRequest(TtsMetadata metadata, PlayRequest request)
+    private void OnQueueResetRequest(TtsQueueResetMessage ev)
     {
-        ModifyMetadata(ref metadata, request.Source);
+        ResetQueuesAndEndStreams();
+        Log.Debug("TTS queue was cleared by request from the server.");
+    }
 
-        if (!_playQueues.TryGetValue(metadata, out var queue))
+    private void OnPlayTtsMessage(PlayTtsMessage args)
+    {
+        var volume = GetVolume(args.Metadata.Kind);
+        var audioParams = AudioParams.Default.WithVolume(volume);
+
+        QueuePlayTts(args.Data, args.Metadata, audioParams);
+    }
+
+    private void OnPlayAnnouncementMessage(PlayAnnouncementTtsMessage args)
+    {
+        var volume = GetVolume(TtsKind.Announce);
+        var audioParams = AudioParams.Default.WithVolume(volume);
+
+        if (args.Sound is { } sound)
+            QueuePlayTts(sound, args.Metadata, audioParams);
+
+        if (args.AudioData is { } audio)
+            QueuePlayTts(audio, args.Metadata, audioParams);
+    }
+
+    public void RequestVoiceTest(ProtoId<TTSVoicePrototype> voiceId)
+    {
+        RaiseNetworkEvent(new RequestTTSVoiceTestEvent(voiceId));
+    }
+
+    public void ResetQueuesAndEndStreams()
+    {
+        foreach (var stream in _playingStreams.Values)
+            _audio.Stop(stream);
+
+        _playingStreams.Clear();
+        _playQueues.Clear();
+    }
+
+    public override void Shutdown()
+    {
+        base.Shutdown();
+        ResetQueuesAndEndStreams();
+    }
+
+    private void QueuePlayTts(ITtsData ttsData, TtsMetadata meta, AudioParams? audioParams = null)
+    {
+        audioParams ??= AudioParams.Default;
+        switch (ttsData)
         {
-            if (_playQueues.Count >= _maxEntitiesQueued)
-                return;
+            case TtsAudioBufferData audioBuffer:
+                if (audioBuffer.Length == 0)
+                    break;
+
+                using (var memoryStream = new MemoryStream(audioBuffer.Buffer))
+                {
+                    var audioStream = _audioManager.LoadAudioOggVorbis(memoryStream);
+                    TryQueueRequest(new PlayRequestByAudioStream(audioStream, meta, audioParams.Value));
+                }
+                break;
+
+            case TtsSoundSpecifierData soundSpecifier:
+                TryQueueRequest(new PlayRequestBySoundSpecifier(soundSpecifier.SoundSpecifier, meta, audioParams.Value));
+                break;
+        }
+    }
+
+    private bool TryQueueRequest(PlayRequest request)
+    {
+        var cacheKey = GenerateCacheKey(request.Meta);
+
+        if (!_playQueues.TryGetValue(cacheKey, out var queue))
+        {
+            if (_playQueues.Count >= _queuesCountLimit)
+                return false;
 
             queue = new();
-            _playQueues.Add(metadata, queue);
+            _playQueues.Add(cacheKey, queue);
         }
 
-        if (queue.Count >= _maxQueuedPerEntity)
-            return;
+        if (queue.Count >= _queueSizeLimit)
+            return false;
 
         queue.Enqueue(request);
+        return true;
     }
 
-    public void TryQueuePlayByAudioStream(EntityUid entity, AudioStream audioStream, TtsMetadata metadata, AudioParams audioParams, bool globally = false)
-    {
-        var request = new PlayRequestByAudioStream(audioStream, entity, audioParams, globally);
-        TryQueueRequest(metadata, request);
-    }
-
-    private void PlaySoundQueued(EntityUid entity, SoundSpecifier sound, TtsMetadata metadata, bool globally = false)
-    {
-        var request = new PlayRequestBySoundSpecifier(sound, entity, globally);
-        TryQueueRequest(metadata, request);
-    }
-
-    private void QueuePlayTts(TtsAudioData data, TtsMetadata metadata, EntityUid? sourceUid = null, AudioParams? audioParams = null, bool globally = false)
-    {
-        if (data.RentedLength == 0)
-            return;
-
-        var finalParams = audioParams ?? AudioParams.Default;
-
-        using MemoryStream stream = new(data.Buffer);
-        var audioStream = _audioManager.LoadAudioOggVorbis(stream);
-
-        if (sourceUid == null)
-        {
-            _audio.PlayGlobal(audioStream, null);
-        }
-        else
-        {
-            if (sourceUid.HasValue && sourceUid.Value.IsValid())
-                TryQueuePlayByAudioStream(sourceUid.Value, audioStream, metadata, finalParams, globally);
-        }
-    }
-
-    private float AdjustVolume(TtsKind kind)
+    private float GetVolume(TtsKind kind)
     {
         var volume = kind switch
         {
             TtsKind.Radio => _radioVolume,
-            TtsKind.Announce => VolumeAnnounce,
+            TtsKind.Announce => _announcementVolume,
+            TtsKind.Whisper => _volume / WhisperFade,
             _ => _volume,
         };
 
         volume = SharedAudioSystem.GainToVolume(volume);
-
-        if (kind == TtsKind.Whisper)
-        {
-            volume -= SharedAudioSystem.GainToVolume(WhisperFade);
-        }
-
         return volume;
     }
 
-    // Play requests //
-    public abstract class PlayRequest
+    private abstract class PlayRequest(TtsMetadata meta, AudioParams audioParams)
     {
-        public readonly AudioParams Params = AudioParams.Default;
-        public readonly bool PlayGlobal = false;
-        public readonly EntityUid Source;
-
-        public PlayRequest(EntityUid? source = null, AudioParams? audioParams = null, bool playGlobal = false)
-        {
-            Source = source ?? EntityUid.FirstUid;
-            PlayGlobal = playGlobal;
-            if (audioParams.HasValue)
-                Params = audioParams.Value;
-        }
+        public readonly TtsMetadata Meta = meta;
+        public readonly AudioParams Params = audioParams;
     }
 
-    public sealed class PlayRequestByAudioStream : PlayRequest
+    private sealed class PlayRequestByAudioStream(AudioStream audioStream, TtsMetadata meta, AudioParams audioParams) : PlayRequest(meta, audioParams)
     {
-        public readonly AudioStream AudioStream;
-
-        public PlayRequestByAudioStream(AudioStream audioStream, EntityUid? source = null, AudioParams? audioParams = null, bool playGlobal = false) : base(source, audioParams, playGlobal)
-        {
-            AudioStream = audioStream;
-        }
+        public readonly AudioStream AudioStream = audioStream;
     }
 
-    public sealed class PlayRequestBySoundSpecifier : PlayRequest
+    private sealed class PlayRequestBySoundSpecifier(SoundSpecifier sound, TtsMetadata meta, AudioParams audioParams) : PlayRequest(meta, audioParams)
     {
-        public readonly SoundSpecifier Sound;
-
-        public PlayRequestBySoundSpecifier(SoundSpecifier sound, EntityUid? source = null,  bool playGlobal = false) : base(source, sound.Params, playGlobal)
-        {
-            Sound = sound;
-        }
+        public readonly SoundSpecifier Sound = sound;
     }
 }

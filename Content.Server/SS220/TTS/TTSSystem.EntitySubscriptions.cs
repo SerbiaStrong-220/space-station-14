@@ -3,6 +3,7 @@ using Content.Shared.Chat;
 using Content.Shared.SS220.TTS;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Server.SS220.TTS;
 
@@ -11,8 +12,8 @@ public partial class TTSSystem
     private void InitializeEntitySubscriptions()
     {
         SubscribeLocalEvent<TTSComponent, MapInitEvent>(OnInit);
-        SubscribeLocalEvent<TransformSpeechEvent>(OnTransformSpeech);
         SubscribeLocalEvent<TTSComponent, EntitySpokeEvent>(OnEntitySpoke);
+        SubscribeLocalEvent<TransformSpeechEvent>(OnTransformSpeech);
         SubscribeLocalEvent<RadioSpokeEvent>(OnRadioReceiveEvent);
         SubscribeLocalEvent<AnnouncementSpokeEvent>(OnAnnouncementSpoke);
         SubscribeLocalEvent<TelepathySpokeEvent>(OnTelepathySpoke);
@@ -20,7 +21,6 @@ public partial class TTSSystem
 
     private void OnInit(Entity<TTSComponent> ent, ref MapInitEvent _)
     {
-
         SetRandomVoice(ent.AsNullable());
     }
 
@@ -29,14 +29,11 @@ public partial class TTSSystem
         if (!_isEnabled || args.Message.Length > _maxMessageChars)
             return;
 
-        var meta = GetDefaultMeta(args.Source);
-        if (!meta.Valid)
+
+        if (!TryGetEntitySpeakerData(args.Source, out var speakerData))
             return;
 
-        meta.ChannelPrototype = args.Channel.ID + args.Frequency?.ToString();
-
         var receivers = new List<RadioEventReceiver>();
-
         foreach (var receiver in args.Receivers)
         {
             var ev = new RadioTtsSendAttemptEvent(args.Channel);
@@ -46,46 +43,18 @@ public partial class TTSSystem
                 receivers.Add(receiver);
         }
 
-        HandleRadio([.. receivers], args.Message, meta);
-    }
-
-    private async void OnAnnouncementSpoke(AnnouncementSpokeEvent args)
-    {
-        var voice = args.SpokeVoiceId;
-
-        if (string.IsNullOrWhiteSpace(voice) && !TryGetPreferredVoiceId(DefaultAnnouncementVoicePreferences, out voice))
-            return;
-
-        var ttsRequired = (args.PlayAudioMask & AudioWithTTSPlayOperation.PlayTTS) == AudioWithTTSPlayOperation.PlayTTS;
-        ReferenceCounter<TtsAudioData>.Reference? ttsResponse = default;
-
-        if (_isEnabled && ttsRequired
-            && args.Message.Length <= _maxAnnounceMessageChars
-            && !string.IsNullOrWhiteSpace(voice))
+        var request = new TtsRadioRequest()
         {
-            ttsResponse = await ConvertTextToSpeech(voice, args.Message, TtsKind.Announce);
-        }
-
-        var message = new PlayAnnounceTtsMessage
-        {
-            AnnouncementSound = args.AnnouncementSound,
-            PlayAudioMask = args.PlayAudioMask
+            SpeakerData = speakerData.Value,
+            Text = args.Message,
+            ChannelPrototype = args.Channel.ID + args.Frequency?.ToString(),
+            Receivers = receivers
         };
 
-        if (ttsRequired && ttsResponse.TryGetValue(out var audioData))
-        {
-            message.AudioData = audioData;
-        }
-
-        foreach (var session in args.Source.Recipients)
-        {
-            SendTtsMessage(message, session);
-        }
-
-        ttsResponse?.Dispose();
+        RunTaskWithTryCatch(() => HandleRadioRequest(request));
     }
 
-    private async void OnEntitySpoke(EntityUid uid, TTSComponent component, EntitySpokeEvent args)
+    private void OnEntitySpoke(EntityUid uid, TTSComponent component, EntitySpokeEvent args)
     {
         HashSet<EntityUid> receivers = [];
         foreach (var receiver in Filter.Pvs(uid).Recipients)
@@ -94,65 +63,79 @@ public partial class TTSSystem
                 receivers.Add(ent);
         }
 
-        var meta = GetDefaultMeta(uid);
-        if (!meta.Valid)
+        if (!TryGetEntitySpeakerData(uid, out var speakerData))
             return;
 
-        meta.ChannelPrototype = args.Channel?.ID + args.Frequency?.ToString();
-
-        if (args.ObfuscatedMessage is { } objMessage)
+        ITtsSpokeRequest requestData;
+        if (args.ObfuscatedMessage != null)
         {
-            meta.Kind = TtsKind.Whisper;
-
+            requestData = new TtsWhisperRequest()
+            {
+                SpeakerData = speakerData.Value,
+                Text = args.Message,
+                ObfuscatedText = args.ObfuscatedMessage,
+                Receivers = [.. EntitiesToSessions(receivers)]
+            };
+        }
+        else
+        {
+            requestData = new TtsSayRequest()
+            {
+                SpeakerData = speakerData.Value,
+                Text = args.Message,
+                Receivers = [.. EntitiesToSessions(receivers)]
+            };
         }
 
-
         if (args.LanguageMessage is { } languageMessage)
-            HandleEntitySpokeWithLanguage(receivers, languageMessage, meta, args.ObfuscatedMessage);
+            RunTaskWithTryCatch(() => HandleEntitySpokeWithLanguage(requestData, languageMessage));
         else
-            HandleEntitySpoke(receivers, args.Message, meta, args.ObfuscatedMessage);
+            RunTaskWithTryCatch(() => HandleSpokeRequest(requestData));
     }
 
-    private async void OnTelepathySpoke(TelepathySpokeEvent args)
+    private void OnAnnouncementSpoke(AnnouncementSpokeEvent args)
+    {
+        TTSVoicePrototype? voice = null;
+
+        var playSound = args.PlayAudioMask.HasFlag(AudioWithTTSPlayOperation.PlayAudio);
+        var playTts = args.PlayAudioMask.HasFlag(AudioWithTTSPlayOperation.PlayTTS) && TryGetVoice(out voice);
+
+        var request = new TtsAnnouncementRequest()
+        {
+            AnnouncementSound = playSound ? args.AnnouncementSound : null,
+            Text = playTts ? args.Message : null,
+            Voice = playTts ? voice : null,
+            Receivers = [.. args.Source.Recipients]
+        };
+
+        RunTaskWithTryCatch(() => HandleAnnouncementRequest(request));
+
+        bool TryGetVoice([NotNullWhen(true)] out TTSVoicePrototype? voice)
+        {
+            if (_prototypeManager.TryIndex(args.SpokeVoiceId, out voice))
+                return true;
+
+            return TryGetPreferredVoice(DefaultAnnouncementVoicePreferences, out voice);
+        }
+    }
+
+    private void OnTelepathySpoke(TelepathySpokeEvent args)
     {
         if (args.Receivers.Length == 0)
             return;
 
-        var meta = GetDefaultMeta(args.Source);
-        if (!meta.Valid)
+        if (!TryGetEntitySpeakerData(args.Source, out var speakerData))
             return;
 
-        meta.Kind = TtsKind.Telepathy;
-        meta.ChannelPrototype = args.Channel is null ? string.Empty : args.Channel;
-
-        using var soundData = await ConvertTextToSpeech(args.Message, meta);
-        if (soundData is null)
-            return;
-
-        foreach (var receiver in args.Receivers)
+        var request = new TtsTelepathyRequest()
         {
-            if (!_playerManager.TryGetSessionByEntity(receiver, out var session)
-                || !soundData.TryGetValue(out var audioData))
-                continue;
+            SpeakerData = speakerData.Value,
+            Text = args.Message,
+            ChannelPrototype = args.Channel,
+            Receivers = [.. EntitiesToSessions(args.Receivers)],
+        };
 
-            // Double check to prevent pointless event raising
-            if (_sessionsNotToSend.Contains(session))
-                continue;
-
-            var ev = new TelepathyTtsSendAttemptEvent(receiver, args.Channel);
-            RaiseLocalEvent(receiver, ev);
-
-            if (ev.Cancelled)
-                continue;
-
-            SendTtsMessage(new PlayTtsMessage
-            {
-                AudioData = audioData,
-                // we may need to differ source and entity where we play
-                Source = GetNetEntity(receiver),
-                Metadata = meta.ToSharedMetadata()
-            }, session);
-        }
+        RunTaskWithTryCatch(() => HandleTelepathyRequest(request));
     }
 
     private void OnTransformSpeech(TransformSpeechEvent args)

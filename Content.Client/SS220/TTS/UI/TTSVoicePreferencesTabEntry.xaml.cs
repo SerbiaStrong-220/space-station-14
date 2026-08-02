@@ -35,7 +35,7 @@ public sealed partial class TTSVoicePreferencesTabEntry : PanelContainer
 
         Refresh();
 
-        VoicePlayButton.OnPressed += _ => _tTSSystem.RequestTTSVoiceTest(protoId);
+        VoicePlayButton.OnPressed += _ => _tTSSystem.RequestVoiceTest(protoId);
     }
 
     public void Refresh()

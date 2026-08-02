@@ -1,20 +1,31 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Robust.Shared.Audio;
+using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.TTS;
 
-public struct TtsAudioData
+public interface ITtsData;
+
+[Serializable, NetSerializable]
+public struct TtsAudioBufferData : ITtsData
 {
     public byte[] Buffer = [];
-    public int RentedLength;
+    public int Length;
 
-    public readonly bool IsEmpty => RentedLength == 0;
+    public readonly bool IsEmpty => Length == 0;
 
-    public TtsAudioData(byte[] bytes, int rentedLength)
+    public TtsAudioBufferData(byte[] bytes, int length)
     {
         Buffer = bytes;
-        RentedLength = rentedLength;
-        DebugTools.Assert(RentedLength <= Buffer.Length);
+        Length = length;
+        DebugTools.Assert(Length <= Buffer.Length);
     }
+}
+
+[Serializable, NetSerializable]
+public struct TtsSoundSpecifierData(SoundSpecifier specifier) : ITtsData
+{
+    public SoundSpecifier SoundSpecifier = specifier;
 }

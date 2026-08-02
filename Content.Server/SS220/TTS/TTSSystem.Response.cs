@@ -40,7 +40,7 @@ public partial class TTSSystem
         }
     }
 
-    private sealed class TtsResponse() : ReferenceCounter<TtsAudioData>(new())
+    private sealed class TtsResponse() : ReferenceCounter<TtsAudioBufferData>(new())
     {
         public Task<bool>? Task;
 

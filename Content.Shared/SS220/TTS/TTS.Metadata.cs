@@ -6,26 +6,22 @@ using System.Linq;
 namespace Content.Shared.SS220.TTS;
 
 [Serializable, NetSerializable]
-public record struct TtsMetadata
+public struct TtsMetadata
 {
-    public static readonly string NullChannel = string.Empty;
+    public required TtsKind Kind;
 
-    public TtsKind Kind;
-    public string Subkind;
-
-    public TtsMetadata(TtsKind kind, string? subkind)
-    {
-        Kind = kind;
-        Subkind = subkind ?? NullChannel;
-    }
+    public TtsProvider? Provider;
+    public string? ChannelPrototype;
+    public NetEntity? Source;
+    public NetEntity? PlayEntity;
 }
 
 [Serializable, NetSerializable]
-public record struct SharedTtsMetadata(TtsKind Kind, string? ChannelPrototype);
+public record struct SharedTtsMetadata(TtsProvider Provider, TtsKind Kind, string? ChannelPrototype = null, NetEntity? Source = null);
 
 public enum TtsKind
 {
-    Default = 0,
+    Say = 0,
     Radio,
     Whisper,
     Announce,

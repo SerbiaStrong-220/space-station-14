@@ -2,24 +2,23 @@
 
 using Content.Shared.Radio;
 using Content.Shared.SS220.Telepathy;
-using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.TTS;
 
-public sealed class PlayTtsMessage : EntityEventArgs
+public abstract class BasePlayTtsMessage : EntityEventArgs { }
+
+public sealed class PlayTtsMessage : BasePlayTtsMessage
 {
-    public required TtsAudioData AudioData;
-    public SharedTtsMetadata Metadata;
-    public NetEntity? Source;
-    public float VolumeModifier = 1f;
+    public required ITtsData Data;
+    public required TtsMetadata Metadata;
 }
 
-public sealed class PlayAnnounceTtsMessage : EntityEventArgs
+public sealed class PlayAnnouncementTtsMessage : BasePlayTtsMessage
 {
-    public TtsAudioData AudioData;
-    public SoundSpecifier AnnouncementSound = new SoundPathSpecifier("");
-    public AudioWithTTSPlayOperation PlayAudioMask = AudioWithTTSPlayOperation.PlayAll;
+    public TtsAudioBufferData? AudioData;
+    public TtsSoundSpecifierData? Sound;
+    public required TtsMetadata Metadata;
 }
 
 [Flags]
@@ -46,12 +45,7 @@ public sealed class TelepathyTtsSendAttemptEvent(EntityUid user, ProtoId<Telepat
     public readonly ProtoId<TelepathyChannelPrototype>? Channel = channel;
 }
 
-public sealed partial class RadioTtsSendAttemptEvent : CancellableEntityEventArgs
+public sealed partial class RadioTtsSendAttemptEvent(RadioChannelPrototype channel) : CancellableEntityEventArgs
 {
-    public readonly RadioChannelPrototype Channel;
-
-    public RadioTtsSendAttemptEvent(RadioChannelPrototype channel)
-    {
-        Channel = channel;
-    }
+    public readonly RadioChannelPrototype Channel = channel;
 }
