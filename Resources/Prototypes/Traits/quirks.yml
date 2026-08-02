@@ -13,6 +13,11 @@
   name: trait-lightweight-name
   description: trait-lightweight-desc
   category: Quirks
+  #SS220-Ipc begin
+  blacklist:
+    components:
+      - Ipc
+  #SS220-Ipc end
   components:
   - type: LightweightDrunk
     boozeStrengthMultiplier: 2
@@ -22,5 +27,10 @@
   name: trait-snoring-name
   description: trait-snoring-desc
   category: Quirks
+  #SS220-Ipc begin
+  blacklist:
+    components:
+      - Ipc
+  #SS220-Ipc end
   components:
   - type: Snoring

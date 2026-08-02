@@ -42,6 +42,11 @@
   name: trait-unrevivable-name
   description: trait-unrevivable-desc
   category: Disabilities
+  #SS220-Ipc begin
+  blacklist:
+    components:
+      - Ipc
+  #SS220-Ipc end
   components:
     - type: Unrevivable
       cloneable: true
@@ -70,6 +75,11 @@
   name: trait-paracusia-name
   description: trait-paracusia-desc
   category: Disabilities
+  #SS220-Ipc begin
+  blacklist:
+    components:
+      - Ipc
+  #SS220-Ipc end
   components:
     - type: Paracusia
       minTimeBetweenIncidents: 0.1
@@ -93,6 +103,11 @@
   name: trait-hemophilia-name
   description: trait-hemophilia-desc
   category: Disabilities
+  #SS220-Ipc begin
+  blacklist:
+    components:
+      - Ipc
+  #SS220-Ipc end
   specials:
   - !type:ApplyStatusEffectSpecial
     statusEffects:

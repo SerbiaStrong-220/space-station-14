@@ -3,6 +3,9 @@
   name: trait-slowness-name
   description: trait-slowness-desc
   category: Disabilities
+  blacklist:
+    components:
+      - Ipc
   mutuallyExclusiveWith:
     - Nervousness
   components:
@@ -16,6 +19,9 @@
   mutuallyExclusiveWith:
     - Slowness
   category: Disabilities
+  blacklist:
+    components:
+      - Ipc
   components:
   - type: ChangeSpeedDoAfters
     coefficient: 0.7
@@ -26,6 +32,9 @@
   name: trait-chronic-cough-name
   description: trait-chronic-cough-desc
   category: Disabilities
+  blacklist:
+    components:
+      - Ipc
   components:
   - type: AutoEmote
     emotes:
