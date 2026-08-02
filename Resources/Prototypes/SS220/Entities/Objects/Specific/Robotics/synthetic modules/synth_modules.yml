@@ -117,3 +117,38 @@
   - type: Sprite
     sprite: Objects/Specific/Robotics/borgmodule.rsi
     state: engineering
+
+- type: entity
+  id: SynthModIntegratedSMG
+  parent: SynthModTest
+  name: integrated SMG synth installation (right)
+  components:
+  - type: Item
+    storedRotation: -90
+    inhandVisuals:
+      left:
+      - state: base-icon-inhand-left
+        color: "#8FCBCB"
+      - state: base-module-inhand-left
+        color: "#A1A1A1"
+      - state: base-part-inhand-left
+      - state: base-stripes-inhand-left
+        color: "#7D7D7D"
+      right:
+      - state: base-icon-inhand-right
+        color: "#8FCBCB"
+      - state: base-module-inhand-right
+        color: "#A1A1A1"
+      - state: base-part-inhand-right
+      - state: base-stripes-inhand-right
+        color: "#7D7D7D"
+  - type: SiliconModuleArmInstallation
+    item: WeaponSubMachineGunWt550
+  - type: Tag
+    tags: [ArmInstallationRight]
+  - type: SiliconModuleBlacklist
+    moduleBlacklist:
+      tags: [ArmInstallationRight]
+  - type: Sprite
+    sprite: Objects/Specific/Robotics/borgmodule.rsi
+    state: engineering

@@ -427,6 +427,7 @@
     - CanPilot
     - SiliconEmotes
     - Unimplantable
+    - Synthetic
   - type: Emoting
   - type: GuideHelp
     guides:
@@ -471,11 +472,36 @@
         - MobMask
         layer:
         - MobLayer
+  - type: AltArmor
+    tresholdDict:
+      Piercing: 10
+      Blunt: 25
+      Heat: 15
+      Slash: 30
+      Radiation: 1000
+      Poison: 1000
+      Caustic: 1000
+      Asphyxiation: 1000
+      Bloodloss: 1000
+      Shock: 30
+      Cold: 20
+    durabilityTresholdDict:
+      Piercing: 5
+      Blunt: 9
+      Heat: 5
+      Slash: 10
+      Radiation: 50
+      Caustic: 15
+      Shock: 30
+      Cold: 30
+  - type: InternalComponentDamageRelay
+    containers: SynthParts
   - type: Inventory
     templateId: synth
   - type: StatusEffects
     allowed:
       - StatusEffectPoweroffline
+      - MotoricFailure
   - type: PowerCellSlot
     cellSlotId: cell_slot
     fitsInCharger: true
@@ -490,15 +516,15 @@
       cell_slot:
         - PowerCellMedium
       silicon_component_Optics:
-        - SynthOpticsTest
-      #silicon_component_Servo:
-        #startingItem: PowerCellMedium
+        - SynthOpticsDefault
+      silicon_component_Servo:
+        - SynthServoBase
       silicon_component_Brain:
-        - SynthBrainTest
+        - SynthBrainBase
       #silicon_component_Spine:
         #startingItem: PowerCellMedium
-      #silicon_component_Drive:
-        #startingItem: PowerCellMedium
+      silicon_component_Drive:
+        - SynthDriveBase
       key_slots:
       - EncryptionKeyCommon
   - type: SiliconComponents
@@ -509,6 +535,11 @@
     - id: SolCommon
   - type: ScaleVisuals
     scale: 1.1, 1.1
+
+- type: entity
+  parent: MobSynthetic
+  id: MobSyntheticHuman
+  name: Urist McCyborg
 
 - type: entity
   parent: OrganBase

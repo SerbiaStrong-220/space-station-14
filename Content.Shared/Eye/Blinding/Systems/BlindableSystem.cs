@@ -2,6 +2,7 @@ using Content.Shared.Camera;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Rejuvenate;
+using Content.Shared.SS220.SiliconComponents;
 using JetBrains.Annotations;
 
 namespace Content.Shared.Eye.Blinding.Systems;
@@ -125,7 +126,7 @@ public sealed class CanSeeAttemptEvent : CancellableEntityEventArgs, IInventoryR
     public SlotFlags TargetSlots => SlotFlags.EYES | SlotFlags.MASK | SlotFlags.HEAD;
 }
 
-public sealed class GetEyeProtectionEvent : EntityEventArgs, IInventoryRelayEvent
+public sealed class GetEyeProtectionEvent : EntityEventArgs, IInventoryRelayEvent, ISiliconPartRelayEvent //SS220 add synthetic
 {
     /// <summary>
     ///     Time to subtract from any temporary blindness sources.
@@ -133,4 +134,6 @@ public sealed class GetEyeProtectionEvent : EntityEventArgs, IInventoryRelayEven
     public TimeSpan Protection;
 
     public SlotFlags TargetSlots => SlotFlags.EYES | SlotFlags.MASK | SlotFlags.HEAD;
+
+    PartType ISiliconPartRelayEvent.Parts => PartType.ALL; //SS220 add synthetic
 }

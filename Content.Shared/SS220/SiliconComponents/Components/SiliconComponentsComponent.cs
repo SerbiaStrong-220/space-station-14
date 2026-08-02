@@ -80,5 +80,7 @@ public enum PartType : byte
     Servo,
     Brain,
     Spine,
-    Drive
+    Drive,
+    ALL,
+    NONE
 }

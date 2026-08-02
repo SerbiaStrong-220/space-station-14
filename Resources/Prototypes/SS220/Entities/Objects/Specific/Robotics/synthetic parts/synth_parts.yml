@@ -2,7 +2,7 @@
   id: SynthPartBase
   parent: BaseItem
   name: base synth mod
-  abstract: true
+  #abstract: true
   components:
   - type: SiliconPart
   - type: Item
@@ -29,8 +29,9 @@
     state: engineering
 
 - type: entity
-  id: SynthOpticsTest
+  id: SynthOpticsBase
   parent: SynthPartBase
+  #abstract: true
   name: base synth optics
   components:
   - type: SiliconPart
@@ -60,8 +61,9 @@
     state: engineering
 
 - type: entity
-  id: SynthBrainTest
+  id: SynthBrainBase
   parent: SynthPartBase
+  #abstract: true
   name: base synth brain
   components:
   - type: MindExaminable
@@ -94,13 +96,14 @@
     state: engineering
 
 - type: entity
-  id: SynthServoTest
+  id: SynthServoBase
   parent: SynthPartBase
+  #abstract: true
   name: base synth servo
   components:
-  - type: MindExaminable
+  - type: Servo
   - type: SiliconPart
-    partType: Brain
+    partType: Servo
   - type: Item
     storedRotation: -90
     inhandVisuals:
@@ -125,13 +128,14 @@
     state: engineering
 
 - type: entity
-  id: SynthServoTest
+  id: SynthDriveBase
   parent: SynthPartBase
-  name: base synth servo
+  #abstract: true
+  name: base synth drive
   components:
-  - type: MindExaminable
+  - type: Drive
   - type: SiliconPart
-    partType: Brain
+    partType: Drive
   - type: Item
     storedRotation: -90
     inhandVisuals:

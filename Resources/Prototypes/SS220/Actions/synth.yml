@@ -1,0 +1,11 @@
+- type: entity
+  parent: BaseAction
+  id: ActionToggleArmInstallation
+  name: Toggle the installation
+  description: Extend the installation, gaining access to the tool it provides.
+  components:
+  - type: Action
+    itemIconStyle: BigItem
+    useDelay: 0.5
+  - type: InstantAction
+    event: !type:SiliconModuleArmInstallationToggledEvent

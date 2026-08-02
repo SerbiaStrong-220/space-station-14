@@ -35,7 +35,7 @@
                         </BoxContainer>
                         <Control MinHeight="10"/>
                         <TextureButton HorizontalExpand="True" Name="DriveButton" HorizontalAlignment="Right" ToggleMode="False" Margin="0" SetSize="75 75" StyleClasses="OpenLeft">
-                            <SpriteView Name="DriveView" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <SpriteView Name="DriveView" HorizontalAlignment="Center" VerticalAlignment="Center" Scale="5 5"/>
                         </TextureButton>
                     </BoxContainer>
                 </SpriteView>

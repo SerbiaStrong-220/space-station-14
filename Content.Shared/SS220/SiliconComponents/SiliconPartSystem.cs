@@ -9,10 +9,10 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Movement.Systems;
-using Content.Shared.StatusEffectNew;
 using Content.Shared.SS220.AltBlocking;
 using Content.Shared.SS220.Experience;
 using Content.Shared.SS220.Mind;
+using Content.Shared.Stunnable;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -30,7 +30,6 @@ public sealed partial class SiliconPartSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private IEntityManager _entManager = default!;
-    [Dependency] private StatusEffectsSystem _statusEffects = default!;
     [Dependency] private MovementSpeedModifierSystem _movement = default!;
 
     private static readonly string PartContainerPrefix = "silicon_component";
@@ -48,13 +47,23 @@ public sealed partial class SiliconPartSystem : EntitySystem
 
         SubscribeLocalEvent<ActiveOpticsComponent, ComponentGotInsertedIntoUser>(OnOpticsInserted);
         SubscribeLocalEvent<ActiveOpticsComponent, ComponentGotRemovedFromUser>(OnOpticsRemoved);
-        SubscribeLocalEvent<ActiveOpticsComponent, DamageChangedEvent>(OnOpticsDamageChanged);
+
+        SubscribeLocalEvent<ActiveOpticsComponent, SiliconPartStatusOnline>(OnPartOnline);
+        SubscribeLocalEvent<ActiveOpticsComponent, SiliconPartStatusOffline>(OnPartOffline);
+
+        SubscribeLocalEvent<ActiveOpticsComponent, SiliconPartDamageModifierChanged>(OnPartDamageModChanged);
 
         SubscribeLocalEvent<BrainComponent, ComponentGotInsertedIntoUser>(OnBrainInserted);
         SubscribeLocalEvent<BrainComponent, ComponentGotRemovedFromUser>(OnBrainRemoved);
 
         SubscribeLocalEvent<ServoComponent, ComponentGotInsertedIntoUser>(OnServoInserted);
         SubscribeLocalEvent<ServoComponent, ComponentGotRemovedFromUser>(OnServoRemoved);
+
+        SubscribeLocalEvent<ServoComponent, SiliconPartStatusOnline>(OnServoOnline);
+        SubscribeLocalEvent<ServoComponent, SiliconPartStatusOffline>(OnServoOffline);
+
+        SubscribeLocalEvent<MovementSpeedModifyingPartComponent, SiliconPartStatusOnline>(OnMovementModifierOnline);
+        SubscribeLocalEvent<MovementSpeedModifyingPartComponent, SiliconPartStatusOffline>(OnMovementModifierOffline);
 
         SubscribeLocalEvent<MovementSpeedModifyingPartComponent, ComponentGotInsertedIntoUser>(OnMovementModifierInserted);
         SubscribeLocalEvent<MovementSpeedModifyingPartComponent, ComponentGotRemovedFromUser>(OnMovementModifierRemoved);
@@ -63,9 +72,6 @@ public sealed partial class SiliconPartSystem : EntitySystem
 
         SubscribeLocalEvent<SiliconPartComponent, MindAddedMessage>(OnBrainMindAdded);
         SubscribeLocalEvent<SiliconComponentsComponent, MindAddedMessage>(OnSiliconMindAdded);
-
-        SubscribeLocalEvent<ActiveOpticsComponent, SiliconPartStatusOnline>(OnPartOnline);
-        SubscribeLocalEvent<ActiveOpticsComponent, SiliconPartStatusOffline>(OnPartOffline);
 
         SubscribeLocalEvent<DamabeableSiliconPartComponent, DamageChangedEvent>(OnDamageChanged);
     }
@@ -90,10 +96,23 @@ public sealed partial class SiliconPartSystem : EntitySystem
         if (!TryComp<SiliconPartComponent>(ent.Owner, out var partComp))
             return;
 
+        if (TryGetIntegrityModifier(ent.AsNullable(), out FixedPoint2 modifier) &&
+            ent.Comp.CurrentDamageEfficiencyModifier != modifier)
+        {
+            ent.Comp.CurrentDamageEfficiencyModifier = modifier;
+
+            var damageModEvent = new SiliconPartDamageModifierChanged(modifier);
+            RaiseLocalEvent(ent.Owner, ref damageModEvent);
+        }
+
         if (_damageableSystem.GetTotalDamage(ent.Owner) > ent.Comp.MaxDamageToRemainFunctional && partComp.Active)
         {
             var offlineEv = new SiliconPartStatusOffline(partComp.PartOwner);
             RaiseLocalEvent(ent.Owner, ref offlineEv);
+
+            partComp.Active = false;
+            Dirty(ent);
+
             return;
         }
 
@@ -101,7 +120,14 @@ public sealed partial class SiliconPartSystem : EntitySystem
         {
             var onlineEv = new SiliconPartStatusOnline(partComp.PartOwner);
             RaiseLocalEvent(ent.Owner, ref onlineEv);
+
+            partComp.Active = true;
+            Dirty(ent);
+
+            return;
         }
+
+        Dirty(ent);
     }
 
     private void OnCanSeeCheck(Entity<SiliconComponentsComponent> ent, ref CanSeeAttemptEvent args)
@@ -142,7 +168,8 @@ public sealed partial class SiliconPartSystem : EntitySystem
 
         foreach (var part in ent.Comp.Parts.Values)
         {
-            if (!TryComp<MovementSpeedModifyingPartComponent>(part.ContainedEntity, out var speedModComp))
+            if (!TryComp<MovementSpeedModifyingPartComponent>(part.ContainedEntity, out var speedModComp) ||
+                !TryComp<SiliconPartComponent>(part.ContainedEntity, out var partComp) || !partComp.Active)
                 continue;
 
             args.ModifySpeed(speedModComp.SpeedMod.SprintSpeedModifier, speedModComp.SpeedMod.WalkSpeedModifier);
@@ -151,12 +178,41 @@ public sealed partial class SiliconPartSystem : EntitySystem
 
     private void OnServoInserted(Entity<ServoComponent> ent, ref ComponentGotInsertedIntoUser args)
     {
-        _statusEffects.TryRemoveStatusEffect(args.Owner, "StatusEffectPowerOffline");
+        if (TerminatingOrDeleted(ent) || TerminatingOrDeleted(args.Owner))
+            return;
+
+        if (TryComp<SiliconPartComponent>(ent.Owner, out var partComp) && partComp.Active)
+            RemComp<StunnedComponent>(args.Owner);
     }
 
     private void OnServoRemoved(Entity<ServoComponent> ent, ref ComponentGotRemovedFromUser args)
     {
-        _statusEffects.TrySetStatusEffectDuration(args.Owner, "StatusEffectPowerOffline", new TimeSpan(0, 0, 30));
+        if (TerminatingOrDeleted(ent) || TerminatingOrDeleted(args.Owner))
+            return;
+
+        EnsureComp<StunnedComponent>(args.Owner);
+
+    }
+
+    private void OnServoOnline(Entity<ServoComponent> ent, ref SiliconPartStatusOnline args)
+    {
+        if (TerminatingOrDeleted(ent) || TerminatingOrDeleted(args.Owner))
+            return;
+
+        if (TryComp<SiliconPartComponent>(ent.Owner, out var partComp) &&
+            partComp.PartOwner is { Valid: true } partOwnerValid &&
+            partComp.Active)
+            RemComp<StunnedComponent>(partOwnerValid);
+    }
+
+    private void OnServoOffline(Entity<ServoComponent> ent, ref SiliconPartStatusOffline args)
+    {
+        if (TerminatingOrDeleted(ent) || TerminatingOrDeleted(args.Owner))
+            return;
+
+        if (TryComp<SiliconPartComponent>(ent.Owner, out var partComp) &&
+            partComp.PartOwner is { Valid: true } partOwnerValid)
+            EnsureComp<StunnedComponent>(partOwnerValid);
     }
 
     private void OnMovementModifierInserted(Entity<MovementSpeedModifyingPartComponent> ent, ref ComponentGotInsertedIntoUser args)
@@ -165,6 +221,16 @@ public sealed partial class SiliconPartSystem : EntitySystem
     }
 
     private void OnMovementModifierRemoved(Entity<MovementSpeedModifyingPartComponent> ent, ref ComponentGotRemovedFromUser args)
+    {
+        _movement.RefreshMovementSpeedModifiers(ent);
+    }
+
+    private void OnMovementModifierOnline(Entity<MovementSpeedModifyingPartComponent> ent, ref SiliconPartStatusOnline args)
+    {
+        _movement.RefreshMovementSpeedModifiers(ent);
+    }
+
+    private void OnMovementModifierOffline(Entity<MovementSpeedModifyingPartComponent> ent, ref SiliconPartStatusOffline args)
     {
         _movement.RefreshMovementSpeedModifiers(ent);
     }
@@ -350,8 +416,9 @@ public sealed partial class SiliconPartSystem : EntitySystem
         if (!TryComp<SiliconPartComponent>(ent.Owner, out var partComp) || args.Owner is not { Valid: true } || !partComp.Active)
             return;
 
-        if (!TryComp<BlindableComponent>(args.Owner, out var ownerBlindableComp))
-            return;
+        if (TryComp<DamabeableSiliconPartComponent>(args.Owner, out var damageablePartComp))
+            if (TryComp<BlindableComponent>(args.Owner, out var ownerBlindableComp))
+                _blindable.AdjustEyeDamage(args.Owner, Math.Max(ent.Comp.EyeDamage, (ownerBlindableComp.MaxDamage * damageablePartComp.CurrentDamageEfficiencyModifier).Int()) - ownerBlindableComp.EyeDamage);
 
         _blindable.UpdateIsBlind(args.Owner);
     }
@@ -360,6 +427,9 @@ public sealed partial class SiliconPartSystem : EntitySystem
     {
         if (!TryComp<SiliconComponentsComponent>(args.Owner, out var ownerComp))
             return;
+
+        if (TryComp<BlindableComponent>(args.Owner, out var ownerBlindableComp))
+            _blindable.AdjustEyeDamage(args.Owner, -ownerBlindableComp.EyeDamage);
 
         _blindable.UpdateIsBlind(args.Owner);
     }
@@ -380,15 +450,33 @@ public sealed partial class SiliconPartSystem : EntitySystem
         _blindable.UpdateIsBlind(ownerValidated);
     }
 
-    private void OnOpticsDamageChanged(Entity<ActiveOpticsComponent> ent, ref DamageChangedEvent args)
+    private void OnPartDamageModChanged(Entity<ActiveOpticsComponent> ent, ref SiliconPartDamageModifierChanged args)
     {
-        if (!TryComp<SiliconPartComponent>(ent.Owner, out var partComp) || partComp.PartOwner is not { Valid: true } ownerValid)
+        if (!TryComp<SiliconPartComponent>(ent.Owner, out var partComp) || partComp.PartOwner is not { Valid: true } ownerValidated)
             return;
 
-        if (!HasComp<SiliconComponentsComponent>(ownerValid))
+        if (!TryComp<BlindableComponent>(ownerValidated, out var blindableComp))
             return;
 
-        _blindable.UpdateIsBlind(ownerValid);
+        _blindable.AdjustEyeDamage(ownerValidated, (blindableComp.MaxDamage * args.Modifier).Int() - blindableComp.EyeDamage);
+
+        _blindable.UpdateIsBlind(ownerValidated);
+    }
+
+    public bool TryGetIntegrityModifier(Entity<DamabeableSiliconPartComponent?> part, out FixedPoint2 modifier)
+    {
+        modifier = 1;
+
+        if (!Resolve(part.Owner, ref part.Comp))
+            return false;
+
+        modifier = FixedPoint2.Clamp(
+            (_damageableSystem.GetTotalDamage(part.Owner) - part.Comp.MinDamageToMalfunction) /
+            (part.Comp.MaxDamageToRemainFunctional - part.Comp.MinDamageToMalfunction),
+            0,
+            1);
+
+        return true;
     }
 
 }
@@ -400,6 +488,11 @@ public record struct SiliconPartStatusOnline(EntityUid? Owner)
 
 [ByRefEvent]
 public record struct SiliconPartStatusOffline(EntityUid? Owner)
+{
+}
+
+[ByRefEvent]
+public record struct SiliconPartDamageModifierChanged(FixedPoint2 Modifier)
 {
 }
 
