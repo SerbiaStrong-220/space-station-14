@@ -2,7 +2,7 @@
   id: SynthPartBase
   parent: BaseItem
   name: base synth mod
-  #abstract: true
+  abstract: true
   components:
   - type: SiliconPart
   - type: Item
@@ -63,9 +63,32 @@
 - type: entity
   id: SynthBrainBase
   parent: SynthPartBase
-  #abstract: true
+  abstract: true
   name: base synth brain
   components:
+  - type: Input
+    context: human
+  - type: BlockMovement
+  - type: Examiner
+  - type: NameIdentifier
+    group: PositronicBrain
+  - type: DoAfter
+  - type: Actions
+  - type: Speech
+    speechSounds: Pai
+  - type: Alerts
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Dead
+  - type: Appearance
+  - type: Tag
+    tags:
+    - CannotSuicide
+  - type: ChangeVoiceInContainer
+    whitelist:
+      components:
+      - SecretStash
   - type: MindExaminable
   - type: AntagGearRelay
   - type: AntagSelection
@@ -74,26 +97,6 @@
   - type: Brain
   - type: Item
     storedRotation: -90
-    inhandVisuals:
-      left:
-      - state: base-icon-inhand-left
-        color: "#8FCBCB"
-      - state: base-module-inhand-left
-        color: "#A1A1A1"
-      - state: base-part-inhand-left
-      - state: base-stripes-inhand-left
-        color: "#7D7D7D"
-      right:
-      - state: base-icon-inhand-right
-        color: "#8FCBCB"
-      - state: base-module-inhand-right
-        color: "#A1A1A1"
-      - state: base-part-inhand-right
-      - state: base-stripes-inhand-right
-        color: "#7D7D7D"
-  - type: Sprite
-    sprite: Objects/Specific/Robotics/borgmodule.rsi
-    state: engineering
 
 - type: entity
   id: SynthServoBase

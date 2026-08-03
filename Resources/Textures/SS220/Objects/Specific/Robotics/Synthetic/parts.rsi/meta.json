@@ -1,11 +1,23 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "",
+    "copyright": "Made by JustSmartgun, frame sprite made based on exoskeleton by PorteRianes",
     "size": {
         "x": 32,
         "y": 32
     },
     "states": [
+        {
+            "name": "frame_carbon"
+        },
+        {
+            "name": "frame_steel"
+        },
+        {
+            "name": "frame_plasteel"
+        },
+        {
+            "name": "biocapsule"
+        }
     ]
 }

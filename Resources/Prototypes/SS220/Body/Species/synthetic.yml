@@ -520,7 +520,7 @@
       silicon_component_Servo:
         - SynthServoBase
       silicon_component_Brain:
-        - SynthBrainBase
+        - SynthBrainPositronic
       #silicon_component_Spine:
         #startingItem: PowerCellMedium
       silicon_component_Drive:
@@ -532,7 +532,7 @@
     selectedLanguage: Galactic
     availableLanguages:
     - id: Galactic
-    - id: SolCommon
+    - id: Binary
   - type: ScaleVisuals
     scale: 1.1, 1.1
 
@@ -540,6 +540,28 @@
   parent: MobSynthetic
   id: MobSyntheticHuman
   name: Urist McCyborg
+  components:
+  - type: ContainerFill
+    containers:
+      cell_slot:
+        - PowerCellMedium
+      silicon_component_Optics:
+        - SynthOpticsDefault
+      silicon_component_Servo:
+        - SynthServoBase
+      silicon_component_Brain:
+        - SynthBrainCapsule
+      #silicon_component_Spine:
+        #startingItem: PowerCellMedium
+      silicon_component_Drive:
+        - SynthDriveBase
+      key_slots:
+      - EncryptionKeyCommon
+  - type: Language
+    selectedLanguage: Galactic
+    availableLanguages:
+    - id: Galactic
+    - id: SolCommon
 
 - type: entity
   parent: OrganBase
