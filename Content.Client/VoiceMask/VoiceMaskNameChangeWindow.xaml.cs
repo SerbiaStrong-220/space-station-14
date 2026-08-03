@@ -12,7 +12,7 @@ namespace Content.Client.VoiceMask;
 [GenerateTypedNameReferences]
 public sealed partial class VoiceMaskNameChangeWindow : FancyWindow
 {
-    private readonly List<TTSVoicePrototype> _voices; // Corvax-TTS
+    private readonly List<TtsVoicePrototype> _voices; // Corvax-TTS
 
     public Action<string>? OnNameChange;
     public Action<string>? OnVoiceChange; // Corvax-TTS
@@ -42,7 +42,7 @@ public sealed partial class VoiceMaskNameChangeWindow : FancyWindow
         };
         _voices = IoCManager
             .Resolve<IPrototypeManager>()
-            .EnumeratePrototypes<TTSVoicePrototype>()
+            .EnumeratePrototypes<TtsVoicePrototype>()
             .Where(o => o.RoundStart)
             .OrderBy(o => Loc.GetString(o.Name))
             .ToList();

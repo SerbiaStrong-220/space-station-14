@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using Content.Shared.SS220.CCVars;
 using Content.Shared.SS220.TTS;
-using Content.Shared.SS220.TTS.Commands;
 using Robust.Client.Audio;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Components;
@@ -52,7 +51,7 @@ public sealed partial class TTSSystem
         Subs.CVar(_cfg, CCVars220.TTSRadioVolume, x => _radioVolume = x, true);
         Subs.CVar(_cfg, CCVars220.TTSAnnounceVolume, x => _announcementVolume = x, true);
 
-        SubscribeNetworkEvent<TtsQueueResetMessage>(OnQueueResetRequest);
+        SubscribeNetworkEvent<TtsClearAllQueuesMessage>(OnClearAllQueues);
         SubscribeNetworkEvent<PlayTtsMessage>(OnPlayTtsMessage);
         SubscribeNetworkEvent<PlayAnnouncementTtsMessage>(OnPlayAnnouncementMessage);
 
@@ -117,10 +116,10 @@ public sealed partial class TTSSystem
         }
     }
 
-    private void OnQueueResetRequest(TtsQueueResetMessage ev)
+    private void OnClearAllQueues(TtsClearAllQueuesMessage ev)
     {
-        ResetQueuesAndEndStreams();
-        Log.Debug("TTS queue was cleared by request from the server.");
+        ClearAllQueuesAndStreams();
+        Log.Debug("TTS queues was cleared by server request");
     }
 
     private void OnPlayTtsMessage(PlayTtsMessage args)
@@ -143,12 +142,12 @@ public sealed partial class TTSSystem
             QueuePlayTts(audio, args.Metadata, audioParams);
     }
 
-    public void RequestVoiceTest(ProtoId<TTSVoicePrototype> voiceId)
+    public void RequestVoiceTest(ProtoId<TtsVoicePrototype> voiceId)
     {
         RaiseNetworkEvent(new RequestTTSVoiceTestEvent(voiceId));
     }
 
-    public void ResetQueuesAndEndStreams()
+    public void ClearAllQueuesAndStreams()
     {
         foreach (var stream in _playingStreams.Values)
             _audio.Stop(stream);
@@ -160,7 +159,7 @@ public sealed partial class TTSSystem
     public override void Shutdown()
     {
         base.Shutdown();
-        ResetQueuesAndEndStreams();
+        ClearAllQueuesAndStreams();
     }
 
     private void QueuePlayTts(ITtsData ttsData, TtsMetadata meta, AudioParams? audioParams = null)

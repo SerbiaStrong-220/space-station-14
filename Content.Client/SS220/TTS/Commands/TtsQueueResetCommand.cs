@@ -1,4 +1,4 @@
-﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Robust.Shared.Console;
 
@@ -14,7 +14,7 @@ public sealed partial class TtsQueueResetCommand : IConsoleCommand
     public void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         var ttsSys = _entitySystemManager.GetEntitySystem<TTSSystem>();
-        ttsSys.ResetQueuesAndEndStreams();
+        ttsSys.ClearAllQueuesAndStreams();
 
         shell.WriteLine("Local TTS queue has been reset.");
     }

@@ -13,7 +13,7 @@ namespace Content.Client.Lobby.UI;
 public sealed partial class HumanoidProfileEditor
 {
     private TTSSystem _ttsSys = default!;
-    private List<TTSVoicePrototype> _voiceList = default!;
+    private List<TtsVoicePrototype> _voiceList = default!;
     private readonly List<string> _sampleText = new()
     {
         "Съешь же ещё этих мягких французских булок, да выпей чаю.",
@@ -37,7 +37,7 @@ public sealed partial class HumanoidProfileEditor
 
         _ttsSys = entMan.System<TTSSystem>();
         _voiceList = prototypeManager
-            .EnumeratePrototypes<TTSVoicePrototype>()
+            .EnumeratePrototypes<TtsVoicePrototype>()
             .Where(o => o.RoundStart)
             .OrderBy(o => Loc.GetString(o.Name))
             .ToList();
@@ -92,7 +92,7 @@ public sealed partial class HumanoidProfileEditor
         if (Profile is null)
             return;
 
-        _ttsSys.ResetQueuesAndEndStreams();
+        _ttsSys.ClearAllQueuesAndStreams();
         // _ttsSys.RequestTTSVoiceTest(_random.Pick(_sampleText), Profile.Voice);
     }
 
@@ -104,7 +104,7 @@ public sealed partial class HumanoidProfileEditor
     }
 
     // SS220 TTS begin
-    private void SetVoicePreferences(TTSVoicePreferences preferences)
+    private void SetVoicePreferences(TtsVoicePreferences preferences)
     {
         Profile = Profile?.WithVoicePreferences(preferences);
         IsDirty = true;

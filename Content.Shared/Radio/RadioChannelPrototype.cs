@@ -5,7 +5,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared.Radio;
 
 [Prototype]
-public sealed partial class RadioChannelPrototype : IHearableChannelPrototype //ss220 add telepathy mute for ghosts
+public sealed partial class RadioChannelPrototype : ITtsHearableChannelPrototype //ss220 add telepathy mute for ghosts
 {
     /// <summary>
     /// Human-readable name for the channel.

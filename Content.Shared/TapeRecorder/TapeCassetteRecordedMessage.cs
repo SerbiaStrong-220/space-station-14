@@ -40,7 +40,7 @@ public sealed partial class TapeCassetteRecordedMessage : IComparable<TapeCasset
     /// TTS Voice used for this message.
     /// </summary>
     [DataField]
-    public ProtoId<TTSVoicePrototype>? TtsVoice;
+    public ProtoId<TtsVoicePrototype>? TtsVoice;
     // SS220 Tape recorder TTS end
 
     // SS220 languages begin
@@ -50,7 +50,7 @@ public sealed partial class TapeCassetteRecordedMessage : IComparable<TapeCasset
 
     // SS220 Tape recorder TTS begin
     //public TapeCassetteRecordedMessage(float timestamp, string name, ProtoId<SpeechVerbPrototype> verb, string message)
-    public TapeCassetteRecordedMessage(float timestamp, string name, ProtoId<SpeechVerbPrototype> verb, string message, ProtoId<TTSVoicePrototype>? ttsVoice, LanguageMessage? languageMessage /* SS220 languages*/)
+    public TapeCassetteRecordedMessage(float timestamp, string name, ProtoId<SpeechVerbPrototype> verb, string message, ProtoId<TtsVoicePrototype>? ttsVoice, LanguageMessage? languageMessage /* SS220 languages*/)
     // SS220 Tape recorder TTS end
     {
         Timestamp = timestamp;

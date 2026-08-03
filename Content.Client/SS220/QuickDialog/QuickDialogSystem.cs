@@ -67,12 +67,12 @@ public sealed class QuickDialogSystem : EntitySystem
             return;
         }
 
-        var currentId = CompOrNull<TTSComponent>(target)?.VoicePrototypeId;
+        var currentId = CompOrNull<TtsComponent>(target)?.VoicePrototypeId;
 
         var window = new DialogWindowTTSProtoId(ev.Title, ev.Description, ev.Prompts,
         prototype =>
         {
-            if (prototype is not TTSVoicePrototype voicePrototype)
+            if (prototype is not TtsVoicePrototype voicePrototype)
                 return false;
 
             return voicePrototype.RoundStart && (voicePrototype.Sex == Sex.Unsexed || humanoidProfile.Sex == Sex.Unsexed || voicePrototype.Sex == humanoidProfile.Sex);

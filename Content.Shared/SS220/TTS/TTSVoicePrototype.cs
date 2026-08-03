@@ -6,8 +6,8 @@ namespace Content.Shared.SS220.TTS;
 /// <summary>
 /// Prototype represent available TTS voices
 /// </summary>
-[Prototype("ttsVoice")]
-public sealed partial class TTSVoicePrototype : IPrototype
+[Prototype]
+public sealed partial class TtsVoicePrototype : IPrototype
 {
     [IdDataField]
     public string ID { get; private set; } = default!;
@@ -36,5 +36,3 @@ public sealed partial class TTSVoicePrototype : IPrototype
     [DataField]
     public bool SponsorOnly = false;
 }
-
-public sealed class TTSVoiceDef : Dictionary<TtsProvider, ProtoId<TTSVoicePrototype>> { }

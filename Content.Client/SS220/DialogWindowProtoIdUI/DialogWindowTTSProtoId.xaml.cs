@@ -62,7 +62,7 @@ public sealed partial class DialogWindowTTSProtoId : FancyWindow
 
         // estimated possible voice count
         _ids = new(200);
-        foreach (var prototype in _prototype.EnumeratePrototypes<TTSVoicePrototype>())
+        foreach (var prototype in _prototype.EnumeratePrototypes<TtsVoicePrototype>())
         {
             if (!prototypeSelector(prototype))
                 continue;

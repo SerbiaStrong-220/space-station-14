@@ -1,85 +1,40 @@
 using Content.Shared.Chat;
 using Content.Shared.SS220.Language.Systems;
 using Content.Shared.SS220.TTS;
-using Robust.Shared.Audio;
-using Robust.Shared.Enums;
 using Robust.Shared.Player;
+using Robust.Shared.Utility;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Content.Server.SS220.TTS;
 
-public partial class TTSSystem
+public partial class TtsSystem
 {
-    private async Task HandleEntitySpokeWithLanguage(ITtsSpokeRequest requestData, LanguageMessage languageMessage)
+    public void RunTtsRequestHandle(ITtsRequest request)
     {
-        Dictionary<string, ITtsSpokeRequest> splitedRequests = [];
-
-        foreach (var receiver in requestData.Receivers)
-        {
-            if (receiver.AttachedEntity is not { } entity)
-                continue;
-
-            var sanitizedText = languageMessage.GetMessage(entity, true, colored: false);
-
-            if (splitedRequests.TryGetValue(sanitizedText, out var request))
-                request.Receivers.Add(receiver);
-            else
-            {
-                ITtsSpokeRequest newRequest;
-                switch (requestData)
-                {
-                    case TtsSayRequest sayRequest:
-                        newRequest = new TtsSayRequest()
-                        {
-                            SpeakerData = sayRequest.SpeakerData,
-                            Text = sanitizedText,
-                            Receivers = [receiver]
-                        };
-                        break;
-
-                    case TtsWhisperRequest whisperRequest:
-                        newRequest = new TtsWhisperRequest()
-                        {
-                            SpeakerData = whisperRequest.SpeakerData,
-                            Text = sanitizedText,
-                            ObfuscatedText = languageMessage.GetObfuscatedMessage(entity, true),
-                            Receivers = [receiver]
-                        };
-                        break;
-
-                    default:
-                        continue;
-                }
-
-                splitedRequests[sanitizedText] = newRequest;
-            }
-        }
-
-        var tasks = new List<Task>();
-        foreach (var request in splitedRequests.Values)
-            tasks.Add(HandleSpokeRequest(request));
-
-        Task.WaitAll(tasks);
+        RunTaskWithTryCatch(() => HandleTtsRequest(request));
     }
 
-    private async Task HandleSpokeRequest(ITtsSpokeRequest request)
+    public Task HandleTtsRequest(ITtsRequest request)
     {
-        switch (request)
+        return request switch
         {
-            case TtsSayRequest sayRequest:
-                await HandleSayRequest(sayRequest);
-                break;
+            ITtsSpokeRequest spoke => HandleSpokeRequest(spoke),
+            TtsRadioRequest radio => HandleRadioRequest(radio),
+            TtsAnnouncementRequest announcement => HandleAnnouncementRequest(announcement),
+            TtsTelepathyRequest telepathy => HandleTelepathyRequest(telepathy),
+            _ => throw new NotImplementedException(),
+        };
+    }
 
-            case TtsWhisperRequest whisperData:
-                await HandleWhisperRequest(whisperData);
-                break;
-
-#if DEBUG
-            default:
-                throw new NotImplementedException();
-#endif
-        }
+    private Task HandleSpokeRequest(ITtsSpokeRequest request)
+    {
+        return request switch
+        {
+            TtsSayRequest say => HandleSayRequest(say),
+            TtsWhisperRequest whisper => HandleWhisperRequest(whisper),
+            _ => throw new NotImplementedException()
+        };
     }
 
     private async Task HandleSayRequest(TtsSayRequest sayRequest)
@@ -321,5 +276,55 @@ public partial class TTSSystem
 
         foreach (var receiver in validReceivers)
             RaiseNetworkEvent(msg, receiver);
+    }
+
+    private IEnumerable<ITtsSpokeRequest> SplitRequestByLanguage(ITtsSpokeRequest request, LanguageMessage languageMessage)
+    {
+        DebugTools.Assert(request.Text == languageMessage.OriginalMessage);
+
+        Dictionary<string, ITtsSpokeRequest> result = [];
+
+        foreach (var receiver in request.Receivers)
+        {
+            if (receiver.AttachedEntity is not { } entity)
+                continue;
+
+            var sanitizedText = languageMessage.GetMessage(entity, true, colored: false);
+
+            if (result.TryGetValue(sanitizedText, out var exist))
+                exist.Receivers.Add(receiver);
+            else
+            {
+                ITtsSpokeRequest newRequest;
+                switch (request)
+                {
+                    case TtsSayRequest sayRequest:
+                        newRequest = new TtsSayRequest()
+                        {
+                            SpeakerData = sayRequest.SpeakerData,
+                            Text = sanitizedText,
+                            Receivers = [receiver]
+                        };
+                        break;
+
+                    case TtsWhisperRequest whisperRequest:
+                        newRequest = new TtsWhisperRequest()
+                        {
+                            SpeakerData = whisperRequest.SpeakerData,
+                            Text = sanitizedText,
+                            ObfuscatedText = languageMessage.GetObfuscatedMessage(entity, true),
+                            Receivers = [receiver]
+                        };
+                        break;
+
+                    default:
+                        continue;
+                }
+
+                result[sanitizedText] = newRequest;
+            }
+        }
+
+        return result.Values;
     }
 }

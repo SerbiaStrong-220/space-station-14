@@ -9,7 +9,6 @@ using Content.Server.Connection;
 using Content.Server.Corvax.DiscordAuth;
 using Content.Server.Corvax.JoinQueue;
 using Content.Server.Corvax.Sponsors;
-using Content.Server.SS220.TTS;
 using Content.Server.Database;
 using Content.Server.Discord.DiscordLink;
 using Content.Server.EUI;
@@ -93,7 +92,6 @@ namespace Content.Server.Entry
         [Dependency] private readonly DiscordAuthManager _discordAuthManager = default!; // Corvax-DiscordAuth
         [Dependency] private readonly SponsorsManager _sponsorsManager = default!; // Corvax-Sponsors
         [Dependency] private readonly JoinQueueManager _joinQueueManager = default!; // Corvax-Queue
-        [Dependency] private readonly TTSManager _ttsManager = default!; // Corvax-TTS
         [Dependency] private readonly DiscordPlayerManager _discordPlayerManager = default!; // SS220 discord player manager
         [Dependency] private readonly DiscordBanPostManager _discordBanPostManager = default!; // SS220 discord ban post manager
         [Dependency] private readonly ServerControlController _serverControlController = default!; // SS220 Backend-Api
@@ -145,7 +143,6 @@ namespace Content.Server.Entry
             _discordAuthManager.Initialize(); // Corvax-DiscordAuth
             _sponsorsManager.Initialize(); // Corvax-Sponsors
             _joinQueueManager.Initialize(); // Corvax-Queue
-            _ttsManager.Initialize(); // Corvax-TTS
             _discordPlayerManager.Initialize(); // SS220 discord player manager
             _discordBanPostManager.Initialize(); // SS220 discord ban post manager
             _serverControlController.Initialize(); // SS220 Backend-Api

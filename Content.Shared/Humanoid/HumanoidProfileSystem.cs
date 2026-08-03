@@ -40,7 +40,7 @@ public sealed class HumanoidProfileSystem : EntitySystem
         }
 
         // SS220-TTS-begin
-        var ttsComp = EnsureComp<TTSComponent>(ent);
+        var ttsComp = EnsureComp<TtsComponent>(ent);
         ttsComp.VoicePrototypeId = profile.Voice;
         // SS220-TTS-end
     }

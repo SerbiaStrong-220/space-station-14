@@ -15,9 +15,9 @@ public sealed partial class TTSVoicePreferencesTabEntry : PanelContainer
     private readonly TTSSystem _tTSSystem = default!;
 
     public readonly TtsProvider Provider;
-    public readonly ProtoId<TTSVoicePrototype> ProtoId;
+    public readonly ProtoId<TtsVoicePrototype> ProtoId;
 
-    public TTSVoicePreferencesTabEntry(TtsProvider provider, ProtoId<TTSVoicePrototype> protoId)
+    public TTSVoicePreferencesTabEntry(TtsProvider provider, ProtoId<TtsVoicePrototype> protoId)
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);

@@ -65,7 +65,7 @@ public sealed partial class HumanoidCharacterProfileV1
 
     // SS220-TTS begin
     [DataField]
-    public ProtoId<TTSVoicePrototype> Voice;
+    public ProtoId<TtsVoicePrototype> Voice;
     // SS220-TTS end
 
     [DataField]

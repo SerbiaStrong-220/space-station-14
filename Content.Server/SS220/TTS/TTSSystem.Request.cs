@@ -3,12 +3,11 @@ using Content.Server.Chat.Systems;
 using Content.Shared.SS220.TTS;
 using Robust.Shared.Audio;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Server.SS220.TTS;
 
-public partial class TTSSystem
+public partial class TtsSystem
 {
     private bool TryGetEntitySpeakerData(EntityUid uid, [NotNullWhen(true)] out TtsEntitySpeakerData? data)
     {
@@ -30,9 +29,8 @@ public struct TtsEntitySpeakerData
 {
     public required EntityUid Speaker;
     public required NetEntity NetSpeaker;
-    public required TTSVoicePrototype Voice;
+    public required TtsVoicePrototype Voice;
 }
-
 
 public interface ITtsRequest { }
 
@@ -70,7 +68,7 @@ public struct TtsAnnouncementRequest() : ITtsRequest
 {
     public SoundSpecifier? AnnouncementSound;
     public string? Text;
-    public TTSVoicePrototype? Voice;
+    public TtsVoicePrototype? Voice;
     public required HashSet<ICommonSession> Receivers;
 }
 
@@ -84,7 +82,7 @@ public struct TtsTelepathyRequest : ITtsRequest
 
 public struct TtsVoiceTestRequest : ITtsRequest
 {
-    public required TTSVoicePrototype Voice;
+    public required TtsVoicePrototype Voice;
     public required string Text;
     public required HashSet<ICommonSession> Receivers;
 }

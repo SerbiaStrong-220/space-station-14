@@ -203,7 +203,7 @@ public sealed partial class VoiceMaskSystem : EntitySystem
     //ss220 change voice in mask when clicking on target start
     private void OnInteract(Entity<VoiceMaskComponent> ent, ref AfterInteractEvent args)
     {
-        if (!TryComp<TTSComponent>(args.Target, out var ttsComponent)
+        if (!TryComp<TtsComponent>(args.Target, out var ttsComponent)
             || ttsComponent.VoicePrototypeId == null)
             return;
 

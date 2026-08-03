@@ -36,10 +36,10 @@ public sealed partial class GhostHearingSystem : SharedGhostHearingSystem
     {
         var radioProtos =
             _prototypeManager.EnumeratePrototypes<RadioChannelPrototype>()
-            .Cast<IHearableChannelPrototype>();
+            .Cast<ITtsHearableChannelPrototype>();
         var telepathyProtos =
             _prototypeManager.EnumeratePrototypes<TelepathyChannelPrototype>()
-            .Cast<IHearableChannelPrototype>();
+            .Cast<ITtsHearableChannelPrototype>();
 
         var allChannels = radioProtos.Concat(telepathyProtos);
 

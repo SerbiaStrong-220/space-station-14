@@ -252,7 +252,7 @@ namespace Content.Server.Communications
                 RaiseLocalEvent(tryGetIdentityShortInfoEvent);
                 author = tryGetIdentityShortInfoEvent.Title;
 
-                if (TryComp<TTSComponent>(mob, out var tts))
+                if (TryComp<TtsComponent>(mob, out var tts))
                 {
                     voiceId = tts.VoicePrototypeId;
                 }

@@ -162,7 +162,7 @@ public sealed partial class TelepathySystem : EntitySystem
         else
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Announce telepathy message: {message}, were send in telepathy channel: {rightTelepathyChannel.Id}");
 
-        if (senderUid != null && HasComp<TTSComponent>(senderUid))
+        if (senderUid != null && HasComp<TtsComponent>(senderUid))
         {
             RaiseLocalEvent(new TelepathySpokeEvent(senderUid.Value, message, [.. telephatyTtsRecievers], rightTelepathyChannel));
         }

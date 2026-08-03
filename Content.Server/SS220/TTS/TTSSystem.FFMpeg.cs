@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace Content.Server.SS220.TTS;
 
-public partial class TTSSystem
+public partial class TtsSystem
 {
-    private static bool _useFFMpegProcessing = true;
+    private bool _useFFMpegProcessing = true;
 
-    private static readonly string[] SizeSuffixes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+    private readonly string[] _sizeSuffixes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
 
-    private static readonly Histogram ProcessEffectsTimings = Metrics.CreateHistogram("tts_ffmpeg_usage_time",
+    private readonly Histogram _ffmpegProcessEffectsTimings = Metrics.CreateHistogram("tts_ffmpeg_usage_time",
         "Milliseconds spent for ffmpeg processing (and pipe operations) on tts", new HistogramConfiguration
         {
-            LabelNames = new[] { "effect" },
+            LabelNames = ["effect"],
             Buckets = Histogram.ExponentialBuckets(.1, 1.5, 10),
         });
 
@@ -27,40 +27,40 @@ public partial class TTSSystem
         _cfg.OnValueChanged(CCVars220.UseFFMpegProcessing, (x) => _useFFMpegProcessing = x, true);
     }
 
-    private static async Task<RecyclableMemoryStream?> AddFFMpegEffect(RecyclableMemoryStream audioDataStream, TtsKind kind, ISawmill? sawmill = null)
+    private async Task<RecyclableMemoryStream?> AddFFMpegEffect(RecyclableMemoryStream audioDataStream, TtsKind kind)
     {
         if (!_useFFMpegProcessing)
             return null;
 
-        var outputStream = MemoryStreamPool.GetStream("TtsFFMpegStream", audioDataStream.Length);
+        var outputStream = _memoryStreamPool.GetStream("TtsFFMpegStream", audioDataStream.Length);
 
         var startTime = DateTime.UtcNow;
         try
         {
             await FFMpegArguments
                 .FromPipeInput(new StreamPipeSource(audioDataStream))
-                .OutputToPipe(new StreamPipeSink(outputStream), options => GetFilterOptionsFromKind(options, kind))
+                .OutputToPipe(new StreamPipeSink(outputStream), options => FFMpeg_GetFilterOptionsFromKind(options, kind))
                 .ProcessAsynchronously();
         }
         catch (Exception e)
         {
-            sawmill?.Error($"Got exception while adding effects by ffmpeg for tts kind {kind}\n [Exception]\n{e}");
-            ProcessEffectsTimings.WithLabels("exception").Observe((DateTime.UtcNow - startTime).TotalMilliseconds);
+            Log.Error($"Got exception while adding effects by ffmpeg for tts kind {kind}\n [Exception]\n{e}");
+            _ffmpegProcessEffectsTimings.WithLabels("exception").Observe((DateTime.UtcNow - startTime).TotalMilliseconds);
 
             outputStream.Dispose();
             return null;
         }
         finally
         {
-            ProcessEffectsTimings
-                .WithLabels($"{kind}/{PrettyPrintBufferLength(audioDataStream.Length)}")
+            _ffmpegProcessEffectsTimings
+                .WithLabels($"{kind}/{FFMpeg_PrettyPrintBufferLength(audioDataStream.Length)}")
                 .Observe((DateTime.UtcNow - startTime).TotalMilliseconds);
         }
 
         return outputStream;
     }
 
-    private static void GetFilterOptionsFromKind(FFMpegArgumentOptions options, TtsKind kind)
+    private void FFMpeg_GetFilterOptionsFromKind(FFMpegArgumentOptions options, TtsKind kind)
     {
         switch (kind)
         {
@@ -89,14 +89,14 @@ public partial class TTSSystem
         options.ForceFormat(AudioFileExtension);
     }
 
-    private static string PrettyPrintBufferLength(long length, int decimalPlaces = 0)
+    private string FFMpeg_PrettyPrintBufferLength(long length, int decimalPlaces = 0)
     {
         if (length == 0)
             return string.Format("{0:n" + decimalPlaces + "} bytes", 0);
 
-        int magnitude = (int)Math.Log(length, 1024);
-        double scaledValue = (double)length / Math.Pow(1024, magnitude);
+        var magnitude = (int)Math.Log(length, 1024);
+        var scaledValue = length / Math.Pow(1024, magnitude);
 
-        return string.Format("{0:n" + decimalPlaces + "} {1}", scaledValue, SizeSuffixes[magnitude]);
+        return string.Format("{0:n" + decimalPlaces + "} {1}", scaledValue, _sizeSuffixes[magnitude]);
     }
 }

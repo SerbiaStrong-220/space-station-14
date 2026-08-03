@@ -2,12 +2,11 @@
 using Content.Shared.GameTicking;
 using Content.Shared.SS220.CCVars;
 using Content.Shared.SS220.TTS;
-using Content.Shared.SS220.TTS.Commands;
+using Microsoft.IO;
 using Prometheus;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -22,7 +21,7 @@ using System.Web;
 namespace Content.Server.SS220.TTS;
 
 // ReSharper disable once InconsistentNaming
-public sealed partial class TTSSystem : SharedTTSSystem
+public sealed partial class TtsSystem : SharedTtsSystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IPlayerManager _playerManager = default!;
@@ -63,8 +62,10 @@ public sealed partial class TTSSystem : SharedTTSSystem
 
     private HashSet<ICommonSession> _sessionsNotToSend = new();
 
-    private static float _requestTimeout = 1f;
+    private float _requestTimeout = 1f;
     private const string AudioFileExtension = "ogg";
+
+    private readonly RecyclableMemoryStreamManager _memoryStreamPool = new();
 
     // Kirus ToDo: перенести в датасет
     private readonly List<string> _sampleText =
@@ -142,53 +143,6 @@ public sealed partial class TTSSystem : SharedTTSSystem
             _sessionsNotToSend.Remove(e.Session);
     }
 
-    public async Task<TtsResponse.Reference?> ConvertTextToSpeech(string text, ProtoId<TTSVoicePrototype>? protoId, TtsKind kind)
-    {
-        if (protoId == null && !TryGetDefaultPreferredVoice(out protoId))
-            return null;
-
-        if (!_prototypeManager.TryIndex(protoId, out var proto))
-            return null;
-
-        return await ConvertTextToSpeech(text, proto, kind);
-    }
-
-    public async Task<TtsResponse.Reference?> ConvertTextToSpeech(string text, TTSVoicePrototype voice, TtsKind kind)
-    {
-        return await ConvertTextToSpeech(text, voice.Provider, voice.Speaker, kind);
-    }
-
-    public async Task<TtsResponse.Reference?> ConvertTextToSpeech(string text, TtsProvider provider, string speaker, TtsKind kind)
-    {
-        if (!IsProviderEnabled(provider))
-            return null;
-
-        try
-        {
-            var textSanitized = Sanitize(text);
-            if (textSanitized == "")
-                return null;
-
-            var ssmlTraits = SoundTraits.RateFast;
-            if (kind == TtsKind.Whisper)
-                ssmlTraits |= SoundTraits.PitchVerylow;
-
-            var textSsml = ToSsmlText(textSanitized, ssmlTraits);
-
-            return provider switch
-            {
-                TtsProvider.NTTS => await NTTSHandler.ConvertTextToSpeech(speaker, textSsml, kind),
-                TtsProvider.Silero => await SileroTTSHandler.ConvertTextToSpeech(speaker, textSsml, kind),
-                _ => null
-            };
-        }
-        catch (Exception e)
-        {
-            Log.Error(e.Message);
-            return null;
-        }
-    }
-
     public void ClearCache()
     {
         ClearCache(Enum.GetValues<TtsProvider>());
@@ -202,16 +156,16 @@ public sealed partial class TTSSystem : SharedTTSSystem
 
     public void ClearCache(TtsProvider provider)
     {
-        switch (provider)
-        {
-            case TtsProvider.NTTS:
-                NTTSHandler.Cache.Clear();
-                break;
+        if (!TryGetProviderHandler(provider, out var handler))
+            return;
 
-            case TtsProvider.Silero:
-                SileroTTSHandler.Cache.Clear();
-                break;
-        }
+        handler.ClearCache();
+    }
+
+    public void ClearClientsQueues()
+    {
+        var ev = new TtsClearAllQueuesMessage();
+        RaiseNetworkEvent(ev);
     }
 
     private static string GenerateCacheKey(string text, TtsProvider? provider = null, string? speaker = null, TtsKind? kind = null)
@@ -264,23 +218,6 @@ public sealed partial class TTSSystem : SharedTTSSystem
                 Log.Error($"{e.Message}\n{e.StackTrace}");
             }
         });
-    }
-
-    /// <summary>
-    /// Set random voice from RandomVoicesList
-    /// If RandomVoicesList is null - doesn`t set new voice
-    /// </summary>
-    private void SetRandomVoice(Entity<TTSComponent?> entity)
-    {
-        if (!Resolve(entity.Owner, ref entity.Comp))
-            return;
-
-        var protoId = entity.Comp.RandomVoicesList;
-
-        if (protoId is null)
-            return;
-
-        entity.Comp.VoicePrototypeId = _random.Pick(_prototypeManager.Index<RandomVoicesListPrototype>(protoId).VoicesList);
     }
 
     private IEnumerable<ICommonSession> ToValidReceivers(IEnumerable<EntityUid> entities)
@@ -373,51 +310,6 @@ public sealed partial class TTSSystem : SharedTTSSystem
                     reuseBuffer.GetReference().Dispose();
             }
 
-        }
-    }
-
-    private struct ServerTtsMessage() : IDisposable
-    {
-        public required TtsResponse.Reference ResponceReference;
-        public SharedTtsMetadata Metadata;
-        public NetEntity? Source;
-
-        public bool Disposed { get; private set; } = false;
-
-        public ServerTtsMessage WithResponce(TtsResponse.Reference responceRef)
-        {
-            return new()
-            {
-                ResponceReference = responceRef.GetReference(),
-                Metadata = Metadata,
-                Source = Source
-            };
-        }
-
-        public ServerTtsMessage WithMetadata(SharedTtsMetadata meta)
-        {
-            return new()
-            {
-                ResponceReference = ResponceReference.GetReference(),
-                Metadata = meta,
-                Source = Source
-            };
-        }
-
-        public ServerTtsMessage WithSource(NetEntity source)
-        {
-            return new()
-            {
-                ResponceReference = ResponceReference.GetReference(),
-                Metadata = Metadata,
-                Source = Source
-            };
-        }
-
-        public void Dispose()
-        {
-            ResponceReference.Dispose();
-            Disposed = true;
         }
     }
 }

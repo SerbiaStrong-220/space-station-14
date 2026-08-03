@@ -127,9 +127,9 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
         var speaker = entity.Comp.Speaker != null ? entity.Comp.Speaker.Value.Owner : entity.Owner;
 
         // SS220 Holopad adapt begin
-        if (TryComp<TTSComponent>(args.MessageSource, out var sourceTts))
+        if (TryComp<TtsComponent>(args.MessageSource, out var sourceTts))
         {
-            var ttsComponent = EnsureComp<TTSComponent>(speaker);
+            var ttsComponent = EnsureComp<TtsComponent>(speaker);
             ttsComponent.VoicePrototypeId = sourceTts.VoicePrototypeId;
         }
         // SS220 Holopad adapt end

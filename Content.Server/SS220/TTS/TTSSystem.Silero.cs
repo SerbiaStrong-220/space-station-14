@@ -1,6 +1,6 @@
 using Content.Shared.SS220.CCVars;
 using Content.Shared.SS220.TTS;
-using Microsoft.IO;
+using Robust.Shared.Configuration;
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Net;
@@ -13,40 +13,40 @@ using System.Threading.Tasks;
 
 namespace Content.Server.SS220.TTS;
 
-public partial class TTSSystem
+public partial class TtsSystem
 {
-    private static readonly HttpClient HttpClient = new();
-    private static readonly RecyclableMemoryStreamManager MemoryStreamPool = new();
-
     private void InitializeSilero()
     {
-        SileroTTSHandler.Sawmill = Logger.GetSawmill("silero_tts");
-
-        _cfg.OnValueChanged(CCVars220.TTSSileroApiUrl, v => SileroTTSHandler.ApiUrl = v, true);
-        _cfg.OnValueChanged(CCVars220.TTSSileroApiToken, v =>
-        {
-            SileroTTSHandler.HttpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", v);
-            SileroTTSHandler.ApiToken = v;
-        }, true);
-        _cfg.OnValueChanged(CCVars220.TTSSileroMaxCache, v =>
-        {
-            SileroTTSHandler.Cache.Limit = v;
-            SileroTTSHandler.Cache.Trim();
-        }, true);
+        RegisterProviderHandler(TtsProvider.Silero, new TtsSileroHandler(this, _cfg));
     }
 
-    private static class SileroTTSHandler
+    private sealed class TtsSileroHandler : TtsProviderHandler
     {
-        public static string ApiUrl = string.Empty;
-        public static string ApiToken = string.Empty;
-        public static ISawmill? Sawmill = null;
+        private string _apiUrl = string.Empty;
+        private string _apiToken = string.Empty;
 
-        public static readonly HttpClient HttpClient = new();
-        public static readonly TtsCache Cache = new();
+        private readonly HttpClient _httpClient = new();
 
-        private static readonly ConcurrentDictionary<TtsCacheKey, TtsResponse> ResponsesInProgress = new();
+        private readonly ConcurrentDictionary<TtsCacheKey, TtsResponse> _responsesInProgress = new();
 
-        public static async Task<TtsResponse.Reference?> ConvertTextToSpeech(string speaker, string text, TtsKind kind)
+        protected override string SawmillName => "silero_handler";
+
+        public TtsSileroHandler(TtsSystem ttsSystem, IConfigurationManager cfg) : base(ttsSystem, cfg)
+        {
+            ConfigurationManager.OnValueChanged(CCVars220.TTSSileroApiUrl, v => _apiUrl = v, true);
+            ConfigurationManager.OnValueChanged(CCVars220.TTSSileroApiToken, v =>
+            {
+                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", v);
+                _apiToken = v;
+            }, true);
+            ConfigurationManager.OnValueChanged(CCVars220.TTSSileroMaxCache, v =>
+            {
+                Cache.Limit = v;
+                Cache.Trim();
+            }, true);
+        }
+
+        public override async Task<ReferenceCounter<TtsAudioBufferData>.Reference?> ConvertTextToSpeech(string text, string speaker, TtsKind kind)
         {
             WantedCount.Inc();
 
@@ -54,18 +54,18 @@ public partial class TTSSystem
 
             if (Cache.TryGet(cacheKey, out var data))
             {
-                Sawmill?.Debug($"Use cached sound for '{text}' speech by '{speaker}' speaker");
+                Log.Debug($"Use cached sound for '{text}' speech by '{speaker}' speaker");
                 return data.Value.GetReference();
             }
 
             try
             {
-                if (!ResponsesInProgress.TryGetValue(cacheKey, out var response) || response.Task is null)
+                if (!_responsesInProgress.TryGetValue(cacheKey, out var response) || response.Task is null)
                 {
                     response = TtsResponseManager.Rent();
-                    var task = StartRequest(response);
+                    var task = StartRequest(text, speaker, kind, response);
                     response.Task = task;
-                    ResponsesInProgress[cacheKey] = response;
+                    _responsesInProgress[cacheKey] = response;
                 }
 
                 var isSuccess = await response.Task;
@@ -82,91 +82,91 @@ public partial class TTSSystem
             }
             finally
             {
-                ResponsesInProgress.TryRemove(cacheKey, out _);
+                _responsesInProgress.TryRemove(cacheKey, out _);
             }
+        }
 
-            async Task<bool> StartRequest(TtsResponse response)
+        private async Task<bool> StartRequest(string text, string speaker, TtsKind kind, TtsResponse response)
+        {
+            Log.Verbose($"Generate new sound for '{text}' speech by '{speaker}' speaker with kind '{kind}'");
+            var body = new SileroHttpRequestBody()
             {
-                Sawmill?.Verbose($"Generate new sound for '{text}' speech by '{speaker}' speaker with kind '{kind}'");
-                var body = new SileroHttpRequestBody()
-                {
-                    ApiToken = ApiToken,
-                    Text = text,
-                    Speaker = speaker
-                };
+                ApiToken = _apiToken,
+                Text = text,
+                Speaker = speaker
+            };
 
-                var reqTime = DateTime.UtcNow;
-                try
-                {
-                    var cts = new CancellationTokenSource(TimeSpan.FromSeconds(_requestTimeout));
+            var reqTime = DateTime.UtcNow;
+            try
+            {
+                var cts = new CancellationTokenSource(TimeSpan.FromSeconds(TtsSystem._requestTimeout));
 
-                    var httpResponse = await HttpClient.PostAsJsonAsync(ApiUrl, body, cts.Token);
-                    if (!httpResponse.IsSuccessStatusCode)
+                var httpResponse = await _httpClient.PostAsJsonAsync(_apiUrl, body, cts.Token);
+                if (!httpResponse.IsSuccessStatusCode)
+                {
+                    if (httpResponse.StatusCode == HttpStatusCode.TooManyRequests)
                     {
-                        if (httpResponse.StatusCode == HttpStatusCode.TooManyRequests)
-                        {
-                            Sawmill?.Warning("Silero TTS request was rate limited");
-                            return false;
-                        }
-
-                        Sawmill?.Error($"Silero TTS request returned bad status code: {httpResponse.StatusCode}");
+                        Log.Warning("Silero TTS request was rate limited");
                         return false;
                     }
 
-                    using var jsonStream = MemoryStreamPool.GetStream("SileroJsonStream", 1024 * 16);
-                    jsonStream.Position = 0;
-                    jsonStream.SetLength(0);
-
-                    await httpResponse.Content.CopyToAsync(jsonStream, cts.Token);
-                    jsonStream.Position = 0;
-
-                    var json = await JsonSerializer.DeserializeAsync<SileroHttpResponseBody>(jsonStream, cancellationToken: cts.Token);
-
-                    if (json.Results.Count == 0)
-                    {
-                        Sawmill?.Error("Silero response missing results");
-                        return false;
-                    }
-
-                    var audioBase64 = json.Results.First().Audio;
-                    if (string.IsNullOrEmpty(audioBase64))
-                    {
-                        Sawmill?.Error("Silero response missing audio data");
-                        return false;
-                    }
-
-                    var soundData = Convert.FromBase64String(audioBase64);
-
-                    using var audioStream = MemoryStreamPool.GetStream("SileroAudioStream", soundData.Length);
-                    audioStream.Position = 0;
-                    audioStream.SetLength(0);
-
-                    await audioStream.WriteAsync(soundData, cts.Token);
-                    audioStream.Position = 0;
-
-                    using var effectStream = await AddFFMpegEffect(audioStream, kind, Sawmill);
-                    var streamToRead = effectStream ?? audioStream;
-
-                    streamToRead.Position = 0;
-                    TtsResponseManager.AllocBuffer(response, (int)streamToRead.Length);
-                    await streamToRead.ReadExactlyAsync(response.Value.Buffer, 0, response.Value.Length, cts.Token);
-
-                    Sawmill?.Verbose($"Generated new sound for '{text}' speech by '{speaker}' speaker with kind '{kind}' ({response.Value.Length} bytes)");
-                    RequestTimings.WithLabels("Success").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
-                    return true;
-                }
-                catch (TaskCanceledException)
-                {
-                    RequestTimings.WithLabels("Timeout").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
-                    Sawmill?.Error($"Timeout of request generation new audio for '{text}' speech by '{speaker}' speaker");
+                    Log.Error($"Silero TTS request returned bad status code: {httpResponse.StatusCode}");
                     return false;
                 }
-                catch (Exception e)
+
+                using var jsonStream = TtsSystem._memoryStreamPool.GetStream("SileroJsonStream", 1024 * 16);
+                jsonStream.Position = 0;
+                jsonStream.SetLength(0);
+
+                await httpResponse.Content.CopyToAsync(jsonStream, cts.Token);
+                jsonStream.Position = 0;
+
+                var json = await JsonSerializer.DeserializeAsync<SileroHttpResponseBody>(jsonStream, cancellationToken: cts.Token);
+
+                if (json.Results.Count == 0)
                 {
-                    RequestTimings.WithLabels("Error").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
-                    Sawmill?.Error($"Failed of request generation new sound for '{text}' speech by '{speaker}' speaker\n{e}");
+                    Log.Error("Silero response missing results");
                     return false;
                 }
+
+                var audioBase64 = json.Results.First().Audio;
+                if (string.IsNullOrEmpty(audioBase64))
+                {
+                    Log.Error("Silero response missing audio data");
+                    return false;
+                }
+
+                var soundData = Convert.FromBase64String(audioBase64);
+
+                using var audioStream = TtsSystem._memoryStreamPool.GetStream("SileroAudioStream", soundData.Length);
+                audioStream.Position = 0;
+                audioStream.SetLength(0);
+
+                await audioStream.WriteAsync(soundData, cts.Token);
+                audioStream.Position = 0;
+
+                using var effectStream = await TtsSystem.AddFFMpegEffect(audioStream, kind);
+                var streamToRead = effectStream ?? audioStream;
+
+                streamToRead.Position = 0;
+                TtsResponseManager.AllocBuffer(response, (int)streamToRead.Length);
+                await streamToRead.ReadExactlyAsync(response.Value.Buffer, 0, response.Value.Length, cts.Token);
+
+                Log.Verbose($"Generated new sound for '{text}' speech by '{speaker}' speaker with kind '{kind}' ({response.Value.Length} bytes)");
+                RequestTimings.WithLabels("Success").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
+                return true;
+            }
+            catch (TaskCanceledException)
+            {
+                RequestTimings.WithLabels("Timeout").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
+                Log.Error($"Timeout of request generation new audio for '{text}' speech by '{speaker}' speaker");
+                return false;
+            }
+            catch (Exception e)
+            {
+                RequestTimings.WithLabels("Error").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
+                Log.Error($"Failed of request generation new sound for '{text}' speech by '{speaker}' speaker\n{e}");
+                return false;
             }
         }
 

@@ -26,7 +26,7 @@ public sealed partial class ChangeTTSAction : ISurgeryGraphEdgeAction
             Loc.GetString(QuiPrompt),
             newVoice =>
             {
-                entityManager.System<TTSSystem>().TrySetTTS(uid, newVoice);
+                entityManager.System<TtsSystem>().TrySetTTS(uid, newVoice);
             },
             uid);
     }

@@ -1,19 +1,21 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-
 using Content.Shared.Radio;
 using Content.Shared.SS220.Telepathy;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.TTS;
 
 public abstract class BasePlayTtsMessage : EntityEventArgs { }
 
+[Serializable, NetSerializable]
 public sealed class PlayTtsMessage : BasePlayTtsMessage
 {
     public required ITtsData Data;
     public required TtsMetadata Metadata;
 }
 
+[Serializable, NetSerializable]
 public sealed class PlayAnnouncementTtsMessage : BasePlayTtsMessage
 {
     public TtsAudioBufferData? AudioData;
@@ -21,16 +23,20 @@ public sealed class PlayAnnouncementTtsMessage : BasePlayTtsMessage
     public required TtsMetadata Metadata;
 }
 
-[Flags]
-public enum AudioWithTTSPlayOperation : byte
+[Serializable, NetSerializable]
+public sealed class RequestTTSVoiceTestEvent(ProtoId<TtsVoicePrototype> voiceId) : EntityEventArgs
 {
-    NotPlay = 1 << 0,
-    PlayAudio = 1 << 1,
-    PlayTTS = 1 << 2,
-
-    PlayAll = PlayAudio | PlayTTS,
+    public readonly ProtoId<TtsVoicePrototype> VoiceId = voiceId;
 }
 
+[Serializable, NetSerializable]
+public sealed class TtsClearAllQueuesMessage : EntityEventArgs { }
+
+[Serializable, NetSerializable]
+public sealed class ReceiveTtsCVarChanged(bool value) : EntityEventArgs
+{
+    public bool Value { get; init; } = value;
+}
 public sealed class TelepathySpokeEvent(EntityUid source, string message, EntityUid[] receivers, ProtoId<TelepathyChannelPrototype>? channel) : EntityEventArgs
 {
     public readonly EntityUid Source = source;

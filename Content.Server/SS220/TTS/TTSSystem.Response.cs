@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Content.Server.SS220.TTS;
 
-public partial class TTSSystem
+public partial class TtsSystem
 {
     private static class TtsResponseManager
     {

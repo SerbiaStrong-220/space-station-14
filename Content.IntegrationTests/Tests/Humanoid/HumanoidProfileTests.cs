@@ -15,7 +15,7 @@ namespace Content.IntegrationTests.Tests.Humanoid;
 public sealed class HumanoidProfileTests : GameTest
 {
     private static readonly ProtoId<SpeciesPrototype> Vox = "Vox";
-    private static readonly ProtoId<TTSVoicePrototype> Voice = "father_grigori";
+    private static readonly ProtoId<TtsVoicePrototype> Voice = "father_grigori";
 
     [Test]
     public async Task EnsureValidLoading()
@@ -45,7 +45,7 @@ public sealed class HumanoidProfileTests : GameTest
             Assert.That(humanoidComponent.Species, Is.EqualTo(Vox));
 
             // SS220-tts-tests-begin
-            Assert.That(entityManager.TryGetComponent<TTSComponent>(human, out var ttsComponent));
+            Assert.That(entityManager.TryGetComponent<TtsComponent>(human, out var ttsComponent));
             Assert.That(ttsComponent.VoicePrototypeId, Is.EqualTo(Voice));
             // SS220-tts-tests-end
 

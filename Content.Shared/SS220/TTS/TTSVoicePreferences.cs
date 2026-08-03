@@ -12,23 +12,23 @@ using System.Collections;
 namespace Content.Shared.SS220.TTS;
 
 [Serializable]
-public sealed class TTSVoicePreferences : IEnumerable<KeyValuePair<TtsProvider, ProtoId<TTSVoicePrototype>>>
+public sealed class TtsVoicePreferences() : IEnumerable<KeyValuePair<TtsProvider, ProtoId<TtsVoicePrototype>>>
 {
     [NonSerialized]
-    private readonly OrderedDictionary<TtsProvider, ProtoId<TTSVoicePrototype>> _dict = [];
+    private readonly OrderedDictionary<TtsProvider, ProtoId<TtsVoicePrototype>> _dict = [];
 
-    public ProtoId<TTSVoicePrototype> this[TtsProvider key]
+    public ProtoId<TtsVoicePrototype> this[TtsProvider key]
     {
         get => _dict[key];
         set => _dict[key] = value;
     }
 
-    public bool Add(TtsProvider provider, ProtoId<TTSVoicePrototype> protoId)
+    public bool Add(TtsProvider provider, ProtoId<TtsVoicePrototype> protoId)
     {
         return _dict.TryAdd(provider, protoId);
     }
 
-    public bool Insert(int index, TtsProvider provider, ProtoId<TTSVoicePrototype> protoId)
+    public bool Insert(int index, TtsProvider provider, ProtoId<TtsVoicePrototype> protoId)
     {
         if (_dict.ContainsKey(provider))
             return false;
@@ -37,7 +37,12 @@ public sealed class TTSVoicePreferences : IEnumerable<KeyValuePair<TtsProvider, 
         return true;
     }
 
-    public IEnumerator<KeyValuePair<TtsProvider, ProtoId<TTSVoicePrototype>>> GetEnumerator()
+    public bool ContainsKey(TtsProvider provider)
+    {
+        return _dict.ContainsKey(provider);
+    }
+
+    public IEnumerator<KeyValuePair<TtsProvider, ProtoId<TtsVoicePrototype>>> GetEnumerator()
     {
         foreach (var pair in _dict)
             yield return pair;
@@ -47,21 +52,53 @@ public sealed class TTSVoicePreferences : IEnumerable<KeyValuePair<TtsProvider, 
     {
         return GetEnumerator();
     }
+
+    public void HardMergeWith(TtsVoicePreferences other)
+    {
+        foreach (var (key, value) in other)
+            this[key] = value;
+    }
+
+    public void SoftMergeWith(TtsVoicePreferences other)
+    {
+        foreach (var (key, value) in other)
+            Add(key, value);
+    }
+
+    public TtsVoicePreferences Clone()
+    {
+        return FromEnumerable(this);
+    }
+
+    public static TtsVoicePreferences FromDictionary(IDictionary<TtsProvider, ProtoId<TtsVoicePrototype>> dict)
+    {
+        return FromEnumerable(dict);
+    }
+
+    public static TtsVoicePreferences FromEnumerable(IEnumerable<KeyValuePair<TtsProvider, ProtoId<TtsVoicePrototype>>> pairs)
+    {
+        var preferences = new TtsVoicePreferences();
+
+        foreach (var (key, value) in pairs)
+            preferences.Add(key, value);
+
+        return preferences;
+    }
 }
 
 [TypeSerializer]
-public sealed class TTSVoicePreferencesSerializer : ITypeSerializer<TTSVoicePreferences, MappingDataNode>
+public sealed class TTSVoicePreferencesSerializer : ITypeSerializer<TtsVoicePreferences, MappingDataNode>
 {
-    private readonly ProtoIdSerializer<TTSVoicePrototype> _protoIdSerializer = new();
+    private readonly ProtoIdSerializer<TtsVoicePrototype> _protoIdSerializer = new();
 
-    public TTSVoicePreferences Read(ISerializationManager serializationManager,
+    public TtsVoicePreferences Read(ISerializationManager serializationManager,
         MappingDataNode node,
         IDependencyCollection dependencies,
         SerializationHookContext hookCtx,
         ISerializationContext? context = null,
-        ISerializationManager.InstantiationDelegate<TTSVoicePreferences>? instanceProvider = null)
+        ISerializationManager.InstantiationDelegate<TtsVoicePreferences>? instanceProvider = null)
     {
-        var pref = new TTSVoicePreferences();
+        var pref = new TtsVoicePreferences();
         foreach (var (key, data) in node.Children)
         {
             if (!Enum.TryParse<TtsProvider>(key, out var provider))
@@ -92,7 +129,7 @@ public sealed class TTSVoicePreferencesSerializer : ITypeSerializer<TTSVoicePref
             {
                 keyValidationNode = new ValidatedValueNode(node.GetKeyNode(key));
                 if (valueValidationNode is not ErrorNode &&
-                    protoMan.TryIndex<TTSVoicePrototype>(value.Value, out var ttsVoice) &&
+                    protoMan.TryIndex<TtsVoicePrototype>(value.Value, out var ttsVoice) &&
                     ttsVoice.Provider != provider)
                 {
                     valueValidationNode = new ErrorNode(value,
@@ -109,7 +146,7 @@ public sealed class TTSVoicePreferencesSerializer : ITypeSerializer<TTSVoicePref
     }
 
     public DataNode Write(ISerializationManager serializationManager,
-        TTSVoicePreferences value,
+        TtsVoicePreferences value,
         IDependencyCollection dependencies,
         bool alwaysWrite = false,
         ISerializationContext? context = null)

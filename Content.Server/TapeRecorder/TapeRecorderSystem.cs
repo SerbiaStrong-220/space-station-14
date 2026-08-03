@@ -43,7 +43,7 @@ public sealed class TapeRecorderSystem : SharedTapeRecorderSystem
     {
         var voice = EnsureComp<VoiceOverrideComponent>(ent);
         var speech = EnsureComp<SpeechComponent>(ent);
-        TryComp<TTSComponent>(ent, out var tts); // SS220 Tape recorder TTS
+        TryComp<TtsComponent>(ent, out var tts); // SS220 Tape recorder TTS
 
         foreach (var message in tape.RecordedData)
         {
@@ -101,7 +101,7 @@ public sealed class TapeRecorderSystem : SharedTapeRecorderSystem
         var name = nameEv.VoiceName;
         // SS220 Tape recorder TTS begin
         //cassette.Comp.Buffer.Add(new TapeCassetteRecordedMessage(cassette.Comp.CurrentPosition, name, verb, args.Message));
-        TryComp<TTSComponent>(args.Source, out var tts);
+        TryComp<TtsComponent>(args.Source, out var tts);
         var voiceId = tts?.VoicePrototypeId;
         if (voiceId is { } && _ttsContext.TryGetVoiceMaskUid(args.Source, out var maskUid))
         {

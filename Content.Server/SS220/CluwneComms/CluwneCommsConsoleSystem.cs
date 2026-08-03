@@ -152,7 +152,7 @@ public sealed partial class CluwneCommsConsoleSystem : EntitySystem
             if (tryGetIdentityShortInfoEvent.Title is not null)
                 author = tryGetIdentityShortInfoEvent.Title;
 
-            if (TryComp<TTSComponent>(mob, out var tts))
+            if (TryComp<TtsComponent>(mob, out var tts))
                 voiceId = tts.VoicePrototypeId;
         }
 

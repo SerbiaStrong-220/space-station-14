@@ -33,7 +33,7 @@ namespace Content.Shared.Preferences
     public sealed partial class HumanoidCharacterProfile
     {
         public static readonly ProtoId<SpeciesPrototype> DefaultSpecies = "Human";
-        public static readonly ProtoId<TTSVoicePrototype> DefaultVoice = "father_grigori"; // SS220-add-tts
+        public static readonly ProtoId<TtsVoicePrototype> DefaultVoice = "father_grigori"; // SS220-add-tts
         private static readonly Regex RestrictedNameRegex = new(@"[^А-Яа-яёЁ0-9' -]"); // Corvax: Only cyrillic names
         private static readonly Regex ICNameCaseRegex = new(@"^(?<word>\w)|\b(?<word>\w)(?=\w*$)");
 
@@ -84,7 +84,7 @@ namespace Content.Shared.Preferences
 
         // SS220 TTS begin
         [DataField]
-        public TTSVoicePreferences VoicePreferences = new()
+        public TtsVoicePreferences VoicePreferences = new()
         {
             [TtsProvider.Silero] = "",
             [TtsProvider.NTTS] = "father_grigori"
@@ -282,7 +282,7 @@ namespace Content.Shared.Preferences
 
             // Corvax-TTS-Start
             var voiceId = random.Pick(prototypeManager
-                .EnumeratePrototypes<TTSVoicePrototype>()
+                .EnumeratePrototypes<TtsVoicePrototype>()
                 .Where(o => CanHaveVoice(o, sex)).ToArray()
             ).ID;
             // Corvax-TTS-End
@@ -351,7 +351,7 @@ namespace Content.Shared.Preferences
         // Corvax-TTS-End
 
         // SS220 TTS begin
-        public HumanoidCharacterProfile WithVoicePreferences(TTSVoicePreferences preferences)
+        public HumanoidCharacterProfile WithVoicePreferences(TtsVoicePreferences preferences)
         {
             return new(this) { VoicePreferences = preferences };
         }
@@ -722,7 +722,7 @@ namespace Content.Shared.Preferences
             }
 
             // Corvax-TTS-Start
-            prototypeManager.TryIndex<TTSVoicePrototype>(Voice, out var voice);
+            prototypeManager.TryIndex<TtsVoicePrototype>(Voice, out var voice);
             if (voice is null || !CanHaveVoice(voice, Sex))
                 Voice = DefaultVoice;
             // Corvax-TTS-End
@@ -730,7 +730,7 @@ namespace Content.Shared.Preferences
 
         // Corvax-TTS-Start
         // MUST NOT BE PUBLIC, BUT....
-        public static bool CanHaveVoice(TTSVoicePrototype voice, Sex sex)
+        public static bool CanHaveVoice(TtsVoicePrototype voice, Sex sex)
         {
             return voice.RoundStart && sex == Sex.Unsexed || (voice.Sex == sex || voice.Sex == Sex.Unsexed);
         }

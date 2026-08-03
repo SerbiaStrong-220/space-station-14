@@ -1,12 +1,10 @@
 using System.Text;
 using System.Text.RegularExpressions;
-using Content.Server.Chat.Systems;
-using Content.Shared.Chat;
 
 namespace Content.Server.SS220.TTS;
 
 // ReSharper disable once InconsistentNaming
-public sealed partial class TTSSystem
+public sealed partial class TtsSystem
 {
     [GeneratedRegex(@"(?<![a-zA-Zа-яёА-ЯЁ])[a-zA-Zа-яёА-ЯЁ]+?(?![a-zA-Zа-яёА-ЯЁ])", RegexOptions.Multiline | RegexOptions.IgnoreCase)]
     private static partial Regex WordRegex();

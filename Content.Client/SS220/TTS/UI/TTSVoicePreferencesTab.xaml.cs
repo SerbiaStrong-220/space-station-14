@@ -23,13 +23,13 @@ public sealed partial class TTSVoicePreferencesTab : BoxContainer
     public static readonly Color CellBackgroundColor = Color.FromHex("#2F2F3B");
     public const float ProviderColumnWidth = 250f;
 
-    public TTSVoicePreferences VoicePreferences { get; private set; }
+    public TtsVoicePreferences VoicePreferences { get; private set; }
 
     private TTSVoicePreferencesTabEntry? _draggedEntry;
 
     public TTSVoicePreferencesTab() : this(null) { }
 
-    public TTSVoicePreferencesTab(TTSVoicePreferences? preferences = null)
+    public TTSVoicePreferencesTab(TtsVoicePreferences? preferences = null)
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
@@ -41,6 +41,10 @@ public sealed partial class TTSVoicePreferencesTab : BoxContainer
         ProviderHeaderLabel.SetWidth = ProviderColumnWidth;
 
         preferences ??= [];
+
+        // fill not setted providers
+        preferences.SoftMergeWith(SharedTtsSystem.DefaultVoicePreferences);
+
         FillWithAllProviders(preferences);
 
         VoicePreferences = preferences;
@@ -125,7 +129,7 @@ public sealed partial class TTSVoicePreferencesTab : BoxContainer
         StopDragEntry();
     }
 
-    public void SetPreferences(TTSVoicePreferences pref)
+    public void SetPreferences(TtsVoicePreferences pref)
     {
         VoicePreferences = pref;
         Refresh();
@@ -148,11 +152,5 @@ public sealed partial class TTSVoicePreferencesTab : BoxContainer
 
         _draggedEntry.LightOverlay.Visible = false;
         _draggedEntry = null;
-    }
-
-    private static void FillWithAllProviders(TTSVoicePreferences pref)
-    {
-        foreach (var (provider, protoId) in SharedTTSManager.DefaultVoicePreferences)
-            pref.Add(provider, protoId);
     }
 }

@@ -1,5 +1,6 @@
 using Content.Server.Speech.Components;
 using Content.Server.SS220.TTS;
+using Content.Shared.SS220.VoiceMask;
 using Content.Shared.VoiceMask;
 
 namespace Content.Server.VoiceMask;

@@ -1,6 +1,6 @@
 namespace Content.Server.SS220.TTS;
 
-public partial class TTSSystem
+public partial class TtsSystem
 {
     private static string ToSsmlText(string text, SoundTraits traits = SoundTraits.None)
     {
