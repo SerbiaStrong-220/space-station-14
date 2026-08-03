@@ -165,7 +165,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         string? nameOverride = null,
         bool checkRadioPrefix = true,
         bool ignoreActionBlocker = false,
-        bool bypassEnglishFilter = false) // SS220 FIX wizard spell speak
+        bool bypassEnglishFilter = true) // SS220 FIX wizard spell speak
     {
         TrySendInGameICMessage(source, message, desiredType, hideChat ? ChatTransmitRange.HideChat : ChatTransmitRange.Normal, hideLog, shell, player, nameOverride, checkRadioPrefix, ignoreActionBlocker, bypassEnglishFilter); // SS220 FIX wizard spell speak
     }
@@ -182,7 +182,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         string? nameOverride = null,
         bool checkRadioPrefix = true,
         bool ignoreActionBlocker = false,
-        bool bypassEnglishFilter = false // SS220 FIX wizard spell speak
+        bool bypassEnglishFilter = true // SS220 FIX wizard spell speak
         )
     {
         if (HasComp<GhostComponent>(source))
