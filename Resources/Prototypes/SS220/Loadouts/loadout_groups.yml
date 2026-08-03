@@ -618,6 +618,7 @@
   - EmergencyNitrogenBrigmedicSponsor
   - EmergencyOxygenBrigmedic
   - EmergencyOxygenBrigmedicSponsor
+  - LoadoutSpeciesBrigmedicIpc
   # Бригмедик (Конец)
 
   # Врач (Начало)
@@ -921,8 +922,20 @@
   id: JanitorEquipment
   name: loadout-group-janitor-equipment
   minLimit: 0
+  maxLimit: 2
   loadouts:
   - JRMopItem
+  - SoapJR
+
+- type: loadoutGroup
+  id: JanitorPDA
+  name: loadout-group-janitor-pda
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - JanitorPDA
+  - JanitorJRPDA
+
   # Уборщик (Конец)
 
  # Сервисный работник (Начало)
