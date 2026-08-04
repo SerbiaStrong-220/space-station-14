@@ -32,7 +32,7 @@
 
 - type: entity
   id: WhiteChocolatePinSpawner
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: EntityTableSpawner
     table: !type:NestedSelector
