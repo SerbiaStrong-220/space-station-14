@@ -7,34 +7,65 @@ using Robust.Shared.Serialization.Markdown.Validation;
 using Robust.Shared.Serialization.Markdown.Value;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Generic;
 using Robust.Shared.Serialization.TypeSerializers.Interfaces;
+using Robust.Shared.Utility;
 using System.Collections;
+using System.Linq;
 
 namespace Content.Shared.SS220.TTS;
 
-[Serializable]
-public sealed class TtsVoicePreferences() : IEnumerable<KeyValuePair<TtsProvider, ProtoId<TtsVoicePrototype>>>
+[DataDefinition]
+[Serializable, NetSerializable]
+public sealed partial class TtsVoicePreferences : IEnumerable<KeyValuePair<TtsProvider, ProtoId<TtsVoicePrototype>>>, ISerializationHooks
 {
-    [NonSerialized]
-    private readonly OrderedDictionary<TtsProvider, ProtoId<TtsVoicePrototype>> _dict = [];
+    private readonly Dictionary<TtsProvider, ProtoId<TtsVoicePrototype>> _dict = [];
+    private readonly List<TtsProvider> _keys = [];
 
     public ProtoId<TtsVoicePrototype> this[TtsProvider key]
     {
         get => _dict[key];
-        set => _dict[key] = value;
+        set
+        {
+            if (!_dict.ContainsKey(key))
+            {
+                Add(key, value);
+                return;
+            }
+
+            _dict[key] = value;
+        }
     }
 
     public bool Add(TtsProvider provider, ProtoId<TtsVoicePrototype> protoId)
     {
-        return _dict.TryAdd(provider, protoId);
+        if (!InternalAdd(provider, protoId))
+            return false;
+
+        _keys.Add(provider);
+        return true;
     }
 
     public bool Insert(int index, TtsProvider provider, ProtoId<TtsVoicePrototype> protoId)
     {
-        if (_dict.ContainsKey(provider))
+        if (!InternalAdd(provider, protoId))
             return false;
 
-        _dict.Insert(index, provider, protoId);
+        _keys.Insert(index, provider);
         return true;
+    }
+
+    private bool InternalAdd(TtsProvider provider, ProtoId<TtsVoicePrototype> protoId)
+    {
+        if (!_dict.TryAdd(provider, protoId))
+            return false;
+
+        DebugTools.Assert(!_keys.Contains(provider));
+        return true;
+    }
+
+    public void Clear()
+    {
+        _dict.Clear();
+        _keys.Clear();
     }
 
     public bool ContainsKey(TtsProvider provider)
@@ -44,8 +75,8 @@ public sealed class TtsVoicePreferences() : IEnumerable<KeyValuePair<TtsProvider
 
     public IEnumerator<KeyValuePair<TtsProvider, ProtoId<TtsVoicePrototype>>> GetEnumerator()
     {
-        foreach (var pair in _dict)
-            yield return pair;
+        foreach (var key in _keys)
+            yield return new KeyValuePair<TtsProvider, ProtoId<TtsVoicePrototype>>(key, _dict[key]);
     }
 
     IEnumerator IEnumerable.GetEnumerator()
@@ -53,15 +84,21 @@ public sealed class TtsVoicePreferences() : IEnumerable<KeyValuePair<TtsProvider
         return GetEnumerator();
     }
 
-    public void HardMergeWith(TtsVoicePreferences other)
+    public void SetValuesFrom(IEnumerable<KeyValuePair<TtsProvider, ProtoId<TtsVoicePrototype>>> pairs)
     {
-        foreach (var (key, value) in other)
+        Clear();
+        SoftMergeWith(pairs);
+    }
+
+    public void HardMergeWith(IEnumerable<KeyValuePair<TtsProvider, ProtoId<TtsVoicePrototype>>> pairs)
+    {
+        foreach (var (key, value) in pairs)
             this[key] = value;
     }
 
-    public void SoftMergeWith(TtsVoicePreferences other)
+    public void SoftMergeWith(IEnumerable<KeyValuePair<TtsProvider, ProtoId<TtsVoicePrototype>>> pairs)
     {
-        foreach (var (key, value) in other)
+        foreach (var (key, value) in pairs)
             Add(key, value);
     }
 
@@ -79,14 +116,20 @@ public sealed class TtsVoicePreferences() : IEnumerable<KeyValuePair<TtsProvider
     {
         var preferences = new TtsVoicePreferences();
 
-        foreach (var (key, value) in pairs)
-            preferences.Add(key, value);
-
+        preferences.SoftMergeWith(pairs);
         return preferences;
+    }
+
+    void ISerializationHooks.AfterDeserialization()
+    {
+        var missing = _keys.Except(_dict.Keys).ToList();
+        var extra = _dict.Keys.Except(_keys).ToList();
+
+        if (missing.Count != 0 || extra.Count != 0)
+            Logger.GetSawmill(nameof(TtsVoicePreferences)).Error($"Key mismatch: missing [{string.Join(",", missing)}], extra [{string.Join(",", extra)}]");
     }
 }
 
-[TypeSerializer]
 public sealed class TTSVoicePreferencesSerializer : ITypeSerializer<TtsVoicePreferences, MappingDataNode>
 {
     private readonly ProtoIdSerializer<TtsVoicePrototype> _protoIdSerializer = new();

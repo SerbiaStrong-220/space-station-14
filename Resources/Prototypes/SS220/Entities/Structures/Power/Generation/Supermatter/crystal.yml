@@ -44,7 +44,7 @@
     maxTileBreak: 128
   - type: NameIdentifier
     group: GenericNumber
-  - type: TTS
+  - type: Tts
     voice: glados
     # randomVoicesList: SuperMatterVoices uncomment when map load/save test fixed
   - type: AmbientSound

@@ -41,7 +41,7 @@ public sealed class HumanoidProfileSystem : EntitySystem
 
         // SS220-TTS-begin
         var ttsComp = EnsureComp<TtsComponent>(ent);
-        ttsComp.VoicePrototypeId = profile.Voice;
+        ttsComp.VoicePreferences = profile.VoicePreferences.Clone();
         // SS220-TTS-end
     }
 

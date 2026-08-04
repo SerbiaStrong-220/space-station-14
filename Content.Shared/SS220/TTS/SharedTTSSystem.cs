@@ -3,7 +3,6 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 
 namespace Content.Shared.SS220.TTS;
 
@@ -34,31 +33,40 @@ public abstract partial class SharedTtsSystem : EntitySystem
         _cfg.OnValueChanged(CCVars220.TTSSileroEnabled, v => UpdateProviderEnabled(TtsProvider.Silero, v), true);
     }
 
-    public bool TryGetVoice(EntityUid uid, [NotNullWhen(true)] out TtsVoicePrototype? voice)
+    public bool TryGetVoicePreferences(Entity<TtsComponent?> entity, [NotNullWhen(true)] out TtsVoicePreferences? pref, bool allowOverride = true)
     {
-        voice = null;
-        return TryGetVoiceId(uid, out var id) && _proto.TryIndex(id, out voice);
+        pref = null;
+        if (!Resolve(entity, ref entity.Comp, logMissing: false))
+            return false;
+
+        pref = entity.Comp.VoicePreferences.Clone();
+        if (allowOverride)
+        {
+            var ev = new GetTtsVoiceOverrideEvent();
+            RaiseLocalEvent(entity, ev);
+
+            pref.HardMergeWith(ev.Overrides);
+        }
+
+        return true;
     }
 
-    public bool TryGetVoiceId(EntityUid uid, [NotNullWhen(true)] out ProtoId<TtsVoicePrototype>? voiceId)
+    public bool TryGetAvailableVoice(Entity<TtsComponent?> entity, [NotNullWhen(true)] out TtsVoicePrototype? voice, bool allowOverride = true)
+    {
+        voice = null;
+        return TryGetAvailableVoiceId(entity, out var id, allowOverride) && _proto.TryIndex(id, out voice);
+    }
+
+    public bool TryGetAvailableVoiceId(Entity<TtsComponent?> entity, [NotNullWhen(true)] out ProtoId<TtsVoicePrototype>? voiceId, bool allowOverride = true)
     {
         voiceId = null;
         if (IsAnyProviderEnabled())
             return false;
 
-        var ev = new GetTtsVoiceOverrideEvent();
-        RaiseLocalEvent(uid, ev);
-
-        if (TryGetPreferredVoiceId(ev.Overrides, out voiceId))
-            return true;
-
-        if (!TryComp<TtsComponent>(uid, out var ttsComp))
+        if (!TryGetVoicePreferences(entity, out var preferences))
             return false;
 
-        if (TryGetPreferredVoiceId(ttsComp.VoicePreferences, out voiceId))
-            return true;
-
-        return false;
+        return TryGetPreferredVoiceId(preferences, out voiceId);
     }
 
     protected bool TryGetPreferredVoice(IEnumerable<KeyValuePair<TtsProvider, ProtoId<TtsVoicePrototype>>> voices, [NotNullWhen(true)] out TtsVoicePrototype? voice)
@@ -121,25 +129,26 @@ public abstract partial class SharedTtsSystem : EntitySystem
 
 public sealed class GetTtsVoiceOverrideEvent() : EntityEventArgs
 {
-    private readonly TtsVoicePreferences _override = [];
-
-    public IReadOnlyDictionary<TtsProvider, ProtoId<TtsVoicePrototype>> Overrides => _override.ToDictionary();
+    public readonly TtsVoicePreferences Overrides = [];
 
     public void Add(TtsProvider provider, ProtoId<TtsVoicePrototype> protoId, bool force = false)
     {
-        if (_override.ContainsKey(provider) && !force)
+        if (Overrides.ContainsKey(provider) && !force)
             return;
 
-        _override[provider] = protoId;
+        Overrides[provider] = protoId;
     }
 }
-public enum TtsProvider
+
+[Serializable, NetSerializable]
+public enum TtsProvider : byte
 {
     NTTS,
     Silero
 }
 
-public enum TtsKind
+[Serializable, NetSerializable]
+public enum TtsKind : byte
 {
     Say,
     Radio,

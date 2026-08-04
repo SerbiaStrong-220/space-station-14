@@ -129,8 +129,10 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
         // SS220 Holopad adapt begin
         if (TryComp<TtsComponent>(args.MessageSource, out var sourceTts))
         {
+            // Kirus ToDo: телефон не учитывает преображение голоса маской??
+
             var ttsComponent = EnsureComp<TtsComponent>(speaker);
-            ttsComponent.VoicePrototypeId = sourceTts.VoicePrototypeId;
+            ttsComponent.VoicePreferences = sourceTts.VoicePreferences.Clone();
         }
         // SS220 Holopad adapt end
 

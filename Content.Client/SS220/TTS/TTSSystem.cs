@@ -53,7 +53,6 @@ public sealed partial class TTSSystem
 
         SubscribeNetworkEvent<TtsClearAllQueuesMessage>(OnClearAllQueues);
         SubscribeNetworkEvent<PlayTtsMessage>(OnPlayTtsMessage);
-        SubscribeNetworkEvent<PlayAnnouncementTtsMessage>(OnPlayAnnouncementMessage);
 
         InitializeCacheKeyGeneration();
     }
@@ -124,22 +123,13 @@ public sealed partial class TTSSystem
 
     private void OnPlayTtsMessage(PlayTtsMessage args)
     {
-        var volume = GetVolume(args.Metadata.Kind);
-        var audioParams = AudioParams.Default.WithVolume(volume);
+        foreach (var data in args.Datas)
+        {
+            var volume = GetVolume(data.TtsMetadata.Kind);
+            var audioParams = AudioParams.Default.WithVolume(volume);
 
-        QueuePlayTts(args.Data, args.Metadata, audioParams);
-    }
-
-    private void OnPlayAnnouncementMessage(PlayAnnouncementTtsMessage args)
-    {
-        var volume = GetVolume(TtsKind.Announce);
-        var audioParams = AudioParams.Default.WithVolume(volume);
-
-        if (args.Sound is { } sound)
-            QueuePlayTts(sound, args.Metadata, audioParams);
-
-        if (args.AudioData is { } audio)
-            QueuePlayTts(audio, args.Metadata, audioParams);
+            QueuePlayTts(data.TtsData, data.TtsMetadata, audioParams);
+        }
     }
 
     public void RequestVoiceTest(ProtoId<TtsVoicePrototype> voiceId)

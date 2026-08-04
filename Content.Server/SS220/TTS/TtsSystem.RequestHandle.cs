@@ -47,17 +47,17 @@ public partial class TtsSystem
         if (!ttsResponce.TryGetValue(out var audioData))
             return;
 
-        var msg = new PlayTtsMessage
+        var msg = new PlayTtsMessage(new PlayTtsMessageData
         {
-            Data = audioData,
-            Metadata = new TtsMetadata()
+            TtsData = audioData,
+            TtsMetadata = new TtsMetadata()
             {
                 Provider = sayRequest.SpeakerData.Voice.Provider,
                 Kind = TtsKind.Say,
                 Source = sayRequest.SpeakerData.NetSpeaker,
                 PlayEntity = sayRequest.SpeakerData.NetSpeaker
             }
-        };
+        });
 
         foreach (var receiver in validReceivers)
             RaiseNetworkEvent(msg, receiver);
@@ -95,17 +95,17 @@ public partial class TtsSystem
             using var ttsResponce = await ConvertTextToSpeech(whisperRequest.Text, whisperRequest.SpeakerData.Voice, TtsKind.Whisper);
             if (ttsResponce.TryGetValue(out var audioData))
             {
-                var msg = new PlayTtsMessage
+                var msg = new PlayTtsMessage(new PlayTtsMessageData
                 {
-                    Data = audioData,
-                    Metadata = new TtsMetadata()
+                    TtsData = audioData,
+                    TtsMetadata = new TtsMetadata()
                     {
                         Provider = whisperRequest.SpeakerData.Voice.Provider,
                         Kind = TtsKind.Whisper,
                         Source = whisperRequest.SpeakerData.NetSpeaker,
                         PlayEntity = whisperRequest.SpeakerData.NetSpeaker
                     }
-                };
+                });
 
                 foreach (var receiver in textReceivers)
                     RaiseNetworkEvent(msg, receiver);
@@ -117,17 +117,17 @@ public partial class TtsSystem
             using var obfTtsResponce = await ConvertTextToSpeech(whisperRequest.ObfuscatedText, whisperRequest.SpeakerData.Voice, TtsKind.Whisper);
             if (obfTtsResponce.TryGetValue(out var obfAudioData))
             {
-                var obfMsg = new PlayTtsMessage
+                var obfMsg = new PlayTtsMessage(new PlayTtsMessageData
                 {
-                    Data = obfAudioData,
-                    Metadata = new TtsMetadata()
+                    TtsData = obfAudioData,
+                    TtsMetadata = new TtsMetadata()
                     {
                         Provider = whisperRequest.SpeakerData.Voice.Provider,
                         Kind = TtsKind.Whisper,
                         Source = whisperRequest.SpeakerData.NetSpeaker,
                         PlayEntity = whisperRequest.SpeakerData.NetSpeaker
                     }
-                };
+                });
 
                 foreach (var receiver in obfTextReceivers)
                     RaiseNetworkEvent(obfMsg, receiver);
@@ -161,10 +161,10 @@ public partial class TtsSystem
 
         foreach (var (session, playEntity) in validReceivers)
         {
-            var msg = new PlayTtsMessage()
+            var msg = new PlayTtsMessage(new PlayTtsMessageData
             {
-                Data = audioData,
-                Metadata = new TtsMetadata()
+                TtsData = audioData,
+                TtsMetadata = new TtsMetadata
                 {
                     Provider = radioData.SpeakerData.Voice.Provider,
                     Kind = TtsKind.Radio,
@@ -172,7 +172,7 @@ public partial class TtsSystem
                     Source = radioData.SpeakerData.NetSpeaker,
                     PlayEntity = GetNetEntity(playEntity)
                 }
-            };
+            });
 
             RaiseNetworkEvent(msg, session);
         }
@@ -187,31 +187,49 @@ public partial class TtsSystem
         if (!validReceivers.Any())
             return;
 
-        TtsSoundSpecifierData? sound = request.AnnouncementSound != null ? new(request.AnnouncementSound) : null;
-
         TtsResponse.Reference? responce = null;
-        if (request.Text != null && request.Voice != null)
-            responce = await ConvertTextToSpeech(request.Text, request.Voice, TtsKind.Announce);
-
-        var hasAudio = responce.TryGetValue(out var audioData);
-        if (request.AnnouncementSound == null && !hasAudio)
-            return;
-
-        var msg = new PlayAnnouncementTtsMessage()
+        try
         {
-            AudioData = audioData,
-            Sound = sound,
-            Metadata = new TtsMetadata()
+            var ttsMeta = new TtsMetadata()
             {
                 Kind = TtsKind.Announce,
                 Provider = request.Voice?.Provider,
+            };
+
+            var msg = new PlayTtsMessage();
+
+            if (request.AnnouncementSound != null)
+            {
+                msg.Datas.Add(new PlayTtsMessageData
+                {
+                    TtsData = new TtsSoundSpecifierData(request.AnnouncementSound),
+                    TtsMetadata = ttsMeta
+                });
             }
-        };
 
-        foreach (var receiver in validReceivers)
-            RaiseNetworkEvent(msg, receiver);
+            if (request.Text != null && request.Voice != null)
+            {
+                responce = await ConvertTextToSpeech(request.Text, request.Voice, TtsKind.Announce);
+                if (responce.TryGetValue(out var audioData))
+                {
+                    msg.Datas.Add(new PlayTtsMessageData
+                    {
+                        TtsData = audioData,
+                        TtsMetadata = ttsMeta
+                    });
+                }
+            }
 
-        responce?.Dispose();
+            if (msg.Datas.Count == 0)
+                return;
+
+            foreach (var receiver in validReceivers)
+                RaiseNetworkEvent(msg, receiver);
+        }
+        finally
+        {
+            responce?.Dispose();
+        }
     }
 
     private async Task HandleTelepathyRequest(TtsTelepathyRequest request)
@@ -238,17 +256,17 @@ public partial class TtsSystem
         if (!responce.TryGetValue(out var audioData))
             return;
 
-        var msg = new PlayTtsMessage()
+        var msg = new PlayTtsMessage(new PlayTtsMessageData
         {
-            Data = audioData,
-            Metadata = new TtsMetadata()
+            TtsData = audioData,
+            TtsMetadata = new TtsMetadata()
             {
                 Kind = TtsKind.Telepathy,
                 Provider = request.SpeakerData.Voice.Provider,
                 Source = request.SpeakerData.NetSpeaker,
                 ChannelPrototype = request.ChannelPrototype,
             }
-        };
+        });
 
         foreach (var receiver in validReceivers)
             RaiseNetworkEvent(msg, receiver);
@@ -264,15 +282,15 @@ public partial class TtsSystem
         if (!responce.TryGetValue(out var audioData))
             return;
 
-        var msg = new PlayTtsMessage()
+        var msg = new PlayTtsMessage(new PlayTtsMessageData
         {
-            Data = audioData,
-            Metadata = new TtsMetadata()
+            TtsData = audioData,
+            TtsMetadata = new TtsMetadata()
             {
                 Kind = TtsKind.VoiceTest,
                 Provider = request.Voice.Provider
             }
-        };
+        });
 
         foreach (var receiver in validReceivers)
             RaiseNetworkEvent(msg, receiver);

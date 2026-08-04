@@ -251,7 +251,7 @@
     guides:
     - Cyborgs
     - Robotics
-  - type: TTS
+  - type: Tts
     randomVoicesList: Borg
   - type: ProtectedFromStepTriggers
   - type: DamageOnInteractProtection

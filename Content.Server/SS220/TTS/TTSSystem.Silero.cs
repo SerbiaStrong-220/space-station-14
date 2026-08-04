@@ -46,7 +46,7 @@ public partial class TtsSystem
             }, true);
         }
 
-        public override async Task<ReferenceCounter<TtsAudioBufferData>.Reference?> ConvertTextToSpeech(string text, string speaker, TtsKind kind)
+        public override async Task<TtsResponse.Reference?> ConvertTextToSpeech(string text, string speaker, TtsKind kind)
         {
             WantedCount.Inc();
 

@@ -10,7 +10,7 @@ namespace Content.Shared.SS220.TTS;
 [NetworkedComponent, AutoGenerateComponentState(true)]
 public sealed partial class TtsComponent : Component
 {
-    [DataField, AutoNetworkedField]
+    [DataField(customTypeSerializer: typeof(TTSVoicePreferencesSerializer)), AutoNetworkedField]
     public TtsVoicePreferences VoicePreferences = TtsVoicePreferences.FromEnumerable(SharedTtsSystem.DefaultVoicePreferences);
 
     [DataField]

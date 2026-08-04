@@ -6,21 +6,20 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.TTS;
 
-public abstract class BasePlayTtsMessage : EntityEventArgs { }
-
 [Serializable, NetSerializable]
-public sealed class PlayTtsMessage : BasePlayTtsMessage
+public sealed class PlayTtsMessage(params PlayTtsMessageData[] datas) : EntityEventArgs
 {
-    public required ITtsData Data;
-    public required TtsMetadata Metadata;
+    public List<PlayTtsMessageData> Datas = [.. datas];
+
+    public PlayTtsMessage() : this([]) { }
 }
 
+// Kirus ToDo: мб стоит ITtsData записывать тоже в TtsMetadata
 [Serializable, NetSerializable]
-public sealed class PlayAnnouncementTtsMessage : BasePlayTtsMessage
+public struct PlayTtsMessageData
 {
-    public TtsAudioBufferData? AudioData;
-    public TtsSoundSpecifierData? Sound;
-    public required TtsMetadata Metadata;
+    public required ITtsData TtsData;
+    public required TtsMetadata TtsMetadata;
 }
 
 [Serializable, NetSerializable]

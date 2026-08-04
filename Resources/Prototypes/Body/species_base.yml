@@ -104,7 +104,7 @@
     damage:
       types:
         Blunt: 5
-  - type: TTS # Corvax-TTS
+  - type: Tts # SS220 Tts
   - type: SleepEmitSound
   - type: SSDIndicator
   - type: StandingState

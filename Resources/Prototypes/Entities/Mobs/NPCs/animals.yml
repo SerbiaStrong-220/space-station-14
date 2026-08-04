@@ -2440,7 +2440,7 @@
       reagents:
       - ReagentId: Blood
         Quantity: 50
-  - type: TTS # Corvax-TTS
+  - type: Tts # SS220 Tts
     voice: ziggs
 
 - type: entity

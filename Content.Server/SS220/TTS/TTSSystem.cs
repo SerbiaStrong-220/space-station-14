@@ -35,7 +35,7 @@ public sealed partial class TtsSystem : SharedTtsSystem
         "Timings of TTS API requests",
         new HistogramConfiguration()
         {
-            LabelNames = new[] { "type" },
+            LabelNames = ["type"],
             Buckets = Histogram.ExponentialBuckets(.1, 1.5, 10),
         });
 
@@ -195,7 +195,7 @@ public sealed partial class TtsSystem : SharedTtsSystem
     {
         var array = (
             from key in nvc.AllKeys
-            from value in nvc.GetValues(key) ?? Array.Empty<string>()
+            from value in nvc.GetValues(key) ?? []
             select $"{key}={HttpUtility.UrlEncode(value)}"
             ).ToArray();
 

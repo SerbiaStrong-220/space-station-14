@@ -24,8 +24,8 @@ public sealed class TapeRecorderSystem : SharedTapeRecorderSystem
     [Dependency] private readonly HandsSystem _hands = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly PaperSystem _paper = default!;
-    [Dependency] private readonly TTSContextSystem _ttsContext = default!; // SS220 Tape recorder TTS
-    [Dependency] private readonly LanguageSystem _languageSystem = default!; // SS220 languages
+    [Dependency] private TtsSystem _tts = default!;
+    [Dependency] private LanguageSystem _languageSystem = default!; // SS220 languages
 
     public override void Initialize()
     {
@@ -58,7 +58,10 @@ public sealed class TapeRecorderSystem : SharedTapeRecorderSystem
             // SS220 Tape recorder TTS begin
             if (tts is { })
             {
-                tts.VoicePrototypeId = message.TtsVoice;
+                tts.VoicePreferences.Clear();
+
+                if (message.TtsVoicePreferences != null)
+                    tts.VoicePreferences.SoftMergeWith(message.TtsVoicePreferences);
             }
             // SS220 Tape recorder TTS end
             //Play the message
@@ -101,15 +104,9 @@ public sealed class TapeRecorderSystem : SharedTapeRecorderSystem
         var name = nameEv.VoiceName;
         // SS220 Tape recorder TTS begin
         //cassette.Comp.Buffer.Add(new TapeCassetteRecordedMessage(cassette.Comp.CurrentPosition, name, verb, args.Message));
-        TryComp<TtsComponent>(args.Source, out var tts);
-        var voiceId = tts?.VoicePrototypeId;
-        if (voiceId is { } && _ttsContext.TryGetVoiceMaskUid(args.Source, out var maskUid))
-        {
-            var voiceEv = new TransformSpeakerVoiceEvent(maskUid.Value, voiceId);
-            RaiseLocalEvent(maskUid.Value, ref voiceEv);
-            voiceId = voiceEv.VoiceId;
-        }
-        cassette.Comp.Buffer.Add(new TapeCassetteRecordedMessage(cassette.Comp.CurrentPosition, name, verb, args.Message, voiceId, args.LanguageMessage));
+        _tts.TryGetVoicePreferences(ent.Owner, out var voicePref);
+
+        cassette.Comp.Buffer.Add(new TapeCassetteRecordedMessage(cassette.Comp.CurrentPosition, name, verb, args.Message, voicePref, args.LanguageMessage));
         // SS220 Tape recorder TTS end
     }
 

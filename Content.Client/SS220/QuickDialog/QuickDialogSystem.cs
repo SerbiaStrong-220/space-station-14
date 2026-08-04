@@ -67,7 +67,9 @@ public sealed class QuickDialogSystem : EntitySystem
             return;
         }
 
-        var currentId = CompOrNull<TtsComponent>(target)?.VoicePrototypeId;
+        // Kirus ToDo: разобраться для чего это
+        string? currentId = null;
+        // var currentId = CompOrNull<TtsComponent>(target)?.VoicePrototypeId;
 
         var window = new DialogWindowTTSProtoId(ev.Title, ev.Description, ev.Prompts,
         prototype =>

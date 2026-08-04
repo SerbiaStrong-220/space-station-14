@@ -74,7 +74,7 @@
     followEntity: true
   - type: TypingIndicator
     proto: robot
-  - type: TTS # Corvax-TTS
+  - type: Tts # SS220 Tts
     voice: adventure_core
   - type: Speech
     speechVerb: Robotic

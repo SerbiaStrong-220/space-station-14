@@ -12,7 +12,7 @@ public partial class TtsSystem
     private bool TryGetEntitySpeakerData(EntityUid uid, [NotNullWhen(true)] out TtsEntitySpeakerData? data)
     {
         data = null;
-        if (!TryGetVoice(uid, out var voice))
+        if (!TryGetAvailableVoice(uid, out var voice))
             return false;
 
         data = new TtsEntitySpeakerData()

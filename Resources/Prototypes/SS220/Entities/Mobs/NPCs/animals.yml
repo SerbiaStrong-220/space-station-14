@@ -233,7 +233,7 @@
     fuelCost: 10
   - type: MobPrice
     price: 1000
-  - type: TTS
+  - type: Tts
     randomVoicesList: Borg
   - type: Tag
     tags:
@@ -555,7 +555,7 @@
       Male: Mouse
       Female: Mouse
       Unsexed: Mouse
-  - type: TTS
+  - type: Tts
     voice: mana
   - type: GhostRole
     allowMovement: true
@@ -649,7 +649,7 @@
       Male: Mouse
       Female: Mouse
       Unsexed: Mouse
-  - type: TTS
+  - type: Tts
     voice: horner
   - type: Butcherable
     spawned:

@@ -45,8 +45,6 @@ public sealed partial class TTSVoicePreferencesTab : BoxContainer
         // fill not setted providers
         preferences.SoftMergeWith(SharedTtsSystem.DefaultVoicePreferences);
 
-        FillWithAllProviders(preferences);
-
         VoicePreferences = preferences;
 
         OnKeyBindUp += args =>

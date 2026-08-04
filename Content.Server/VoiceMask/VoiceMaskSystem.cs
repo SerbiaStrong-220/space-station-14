@@ -203,11 +203,13 @@ public sealed partial class VoiceMaskSystem : EntitySystem
     //ss220 change voice in mask when clicking on target start
     private void OnInteract(Entity<VoiceMaskComponent> ent, ref AfterInteractEvent args)
     {
-        if (!TryComp<TtsComponent>(args.Target, out var ttsComponent)
-            || ttsComponent.VoicePrototypeId == null)
-            return;
+        // Kirus ToDo: починить копирование голоса маской
 
-        RaiseLocalEvent(ent.Owner, new VoiceMaskChangeVoiceMessage(ttsComponent.VoicePrototypeId));
+        //if (!TryComp<TtsComponent>(args.Target, out var ttsComponent)
+        //    || ttsComponent.VoicePrototypeId == null)
+        //    return;
+
+        //RaiseLocalEvent(ent.Owner, new VoiceMaskChangeVoiceMessage(ttsComponent.VoicePrototypeId));
     }
     //ss220 change voice in mask when clicking on target end
     #endregion

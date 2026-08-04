@@ -27,6 +27,7 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Server.Station.Systems;
 using Robust.Server.GameObjects;
 using Robust.Shared.Random;
+using Content.Server.SS220.TTS;
 
 namespace Content.Server.SS220.CluwneComms;
 
@@ -47,6 +48,7 @@ public sealed partial class CluwneCommsConsoleSystem : EntitySystem
     [Dependency] private UserInterfaceSystem _ui = default!;
     [Dependency] private StationSystem _station = default!;
     [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private TtsSystem _tts = default!;
 
     public override void Initialize()
     {
@@ -137,7 +139,7 @@ public sealed partial class CluwneCommsConsoleSystem : EntitySystem
         var maxLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
         var msg = SharedChatSystem.SanitizeAnnouncement(args.Message, maxLength);
         var author = Loc.GetString("cluwne-comms-console-announcement-unknown-sender");
-        var voiceId = string.Empty;
+        ProtoId<TtsVoicePrototype>? voiceId = null;
 
         if (args.Actor is { Valid: true } mob)
         {
@@ -152,8 +154,7 @@ public sealed partial class CluwneCommsConsoleSystem : EntitySystem
             if (tryGetIdentityShortInfoEvent.Title is not null)
                 author = tryGetIdentityShortInfoEvent.Title;
 
-            if (TryComp<TtsComponent>(mob, out var tts))
-                voiceId = tts.VoicePrototypeId;
+            _tts.TryGetAvailableVoiceId(mob, out voiceId);
         }
 
         // allow admemes with vv
