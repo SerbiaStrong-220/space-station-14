@@ -184,6 +184,9 @@ tiles-red-arcade-floor = аркадный красный пол
 
 tiles-mono-floor = обрамлённая плитка
 tiles-linoleum-floor = линолеумный пол
+tiles-linoleum-gray-floor = линолеумный пол серый
+tiles-linoleum-lightbrown-floor = линолеумный пол светло-коричневый
+tiles-linoleum-redbrown-floor = линолеумный пол красно-коричневый
 tiles-elevator-shaft = пол шахты лифта
 tiles-diamond-plate-floor = пол из алмазных плит
 tiles-blue-tile = голубая плитка
