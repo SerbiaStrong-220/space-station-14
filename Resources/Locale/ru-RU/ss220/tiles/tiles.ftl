@@ -427,3 +427,8 @@ floor-grayconcrete-pavement-horizontal = бетонное серое гориз�
 floor-grayconcrete-pavement-vertical = бетонное серое вертикальное покрытие
 floor-oldconcrete-pavement-horizontal = бетонное старое горизонтальное покрытие
 floor-oldconcrete-pavement-vertical = бетонное старое вертикальное покрытие
+
+## ЛИНОЛЕУМ
+floor-lino-gray = { ent-FloorItemLinoGray }
+floor-lino-light-brown = { ent-FloorItemLinoLightBrown }
+floor-lino-red-brown = { ent-FloorItemLinoRedBrown } 

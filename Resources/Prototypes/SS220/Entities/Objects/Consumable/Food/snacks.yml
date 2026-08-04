@@ -38,7 +38,7 @@
           FoodSnackChocolateWhiteBar:
             min: 1
             max: 1
-          WhiteChocolateBadgeSpawner:
+          WhiteChocolatePinSpawner:
             min: 1
             max: 1
       - !type:DoActsBehavior
