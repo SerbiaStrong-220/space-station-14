@@ -9,8 +9,8 @@
     role: JobBorg
     time: 20h 
   - !type:DepartmentTimeRequirement
-    role: Security
-    time: 20h
+    department: Security
+    time: 72000
   canBeAntag: false
   icon: JobIconSecBorg
   supervisors: job-supervisors-hos
