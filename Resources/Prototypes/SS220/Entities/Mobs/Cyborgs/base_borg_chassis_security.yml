@@ -15,7 +15,7 @@
     thresholds:
       0: Alive
       100: Critical
-      300: Dead 
+      330: Dead 
   - type: MovementSpeedModifier
     baseWalkSpeed : 2.25
     baseSprintSpeed : 4.05
