@@ -33,10 +33,11 @@
             Warden: [ 1, 1 ]
             Detective: [ 1, 1 ]
             SecurityPilot: [ 1, 2 ]
-            SecurityOfficer: [ 4, 5 ]
+            SecurityOfficer: [ 3, 4 ]
             SecurityCadet: [ 1, 2 ]
             Brigmedic: [ 1, 1 ]
             SeniorOfficer: [ 1, 1 ]
+            SecurityBorg: [ 1, 1 ]
             #Engineering
             ChiefEngineer: [ 1, 1 ]
             StationEngineer: [ 8, 8 ]

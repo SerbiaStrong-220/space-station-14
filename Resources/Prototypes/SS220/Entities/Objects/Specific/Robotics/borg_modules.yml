@@ -1,4 +1,37 @@
 - type: entity
+  id: BaseBorgModuleSecurity
+  parent: BaseBorgModule
+  abstract: true
+  components:
+  - type: Item
+    sprite: Objects/Specific/Robotics/borgmodule.rsi
+    inhandVisuals:
+      left:
+      - state: base-icon-inhand-left
+        color: "#EBD8B7"
+      - state: base-module-inhand-left
+        color: "#34476c"
+      - state: base-part-inhand-left
+      - state: base-stripes-inhand-left
+        color: "#404040"
+      right:
+      - state: base-icon-inhand-right
+        color: "#EBD8B7"
+      - state: base-module-inhand-right
+        color: "#34476c"
+      - state: base-part-inhand-right
+      - state: base-stripes-inhand-right
+        color: "#404040"
+  - type: Tag
+    tags:
+    - BorgModuleSafety
+    - BorgModuleLethal
+    - BorgModuleSecurity
+  - type: BorgModule
+    borgFitTypes:
+    - borg-type-security
+ 
+- type: entity
   id: BorgModuleProtoKineticAccelerator
   parent: [ BaseBorgModuleCargo, BaseProviderBorgModule ]
   name: protokinetic cyborg module
@@ -116,3 +149,48 @@
   - type: Sprite
     sprite: SS220/Placeholders/seeds.rsi
     state: seed
+
+    
+- type: entity
+  id: BorgModuleSafety
+  parent: [ BaseBorgModuleSecurity, BaseProviderBorgModule ]
+  name: safety cyborg module
+  components:
+  - type: Sprite
+    layers:
+    - state: security
+      sprite: Objects/Specific/Robotics/borgmodule.rsi
+    - state: icon-safety
+      sprite: SS220/Objects/Specific/Robotics/borgmodule.rsi
+  - type: ItemBorgModule
+    hands:
+    - item: BorgWeaponDisabler
+    - item: BorgFlash
+    - hand:
+        emptyLabel: borg-slot-zipties-empty
+        emptyRepresentative: Zipties
+        whitelist:
+          tags:
+          - Zipties
+    - item: BoxZiptie
+  - type: BorgModuleIcon
+    icon: { sprite: SS220/Interface/Actions/actions_borg.rsi, state: safety-module }
+
+- type: entity
+  id: BorgModuleLethal
+  parent: [ BaseBorgModuleSecurity, BaseProviderBorgModule ]
+  name: lethal cyborg module
+  components:
+  - type: Sprite
+    layers:
+    - state: security
+      sprite: Objects/Specific/Robotics/borgmodule.rsi
+    - state: icon-lethal
+      sprite: SS220/Objects/Specific/Robotics/borgmodule.rsi
+  - type: ItemBorgModule
+    hands:
+    - item: CombatKnife
+    - item: BorgWeaponLaserCarbine
+    - item: RadioHandheldSecurity
+  - type: BorgModuleIcon
+    icon: { sprite: SS220/Interface/Actions/actions_borg.rsi, state: lethal-module }  
