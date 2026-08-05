@@ -24,11 +24,16 @@
   <Import Project="..\RobustToolbox\MSBuild\Robust.Properties.targets" />
   <Import Project="..\RobustToolbox\MSBuild\XamlIL.targets" />
   <ItemGroup>
-    <AdditionalFiles Update="SS220\TTS\UI\TTSVoicePreferencesTab.xaml">
+    <AdditionalFiles Update="SS220\TTS\UI\TtsVoicePreferencesTab.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AdditionalFiles>
     <AdditionalFiles Update="SS220\TTS\UI\TTSVoicePreferencesTabEntry.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AdditionalFiles>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="SS220\TTS\UI\TtsVoicePreferencesTab.xaml.cs">
+      <DependentUpon>TtsVoicePreferencesTab.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

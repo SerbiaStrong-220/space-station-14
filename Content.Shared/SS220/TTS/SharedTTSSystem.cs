@@ -15,6 +15,8 @@ public abstract partial class SharedTtsSystem : EntitySystem
 
     private readonly HashSet<TtsProvider> _enabledProviders = [];
 
+    protected bool TtsEnabled = false;
+
     public static readonly TtsVoicePreferences DefaultVoicePreferences = new()
     {
         [TtsProvider.Silero] = "SileroDefault",
@@ -29,8 +31,11 @@ public abstract partial class SharedTtsSystem : EntitySystem
 
     public override void Initialize()
     {
-        _cfg.OnValueChanged(CCVars220.NTTSEnabled, v => UpdateProviderEnabled(TtsProvider.NTTS, v), true);
-        _cfg.OnValueChanged(CCVars220.TTSSileroEnabled, v => UpdateProviderEnabled(TtsProvider.Silero, v), true);
+        _cfg.OnValueChanged(CCVars220.TTSEnabled, v => TtsEnabled = v, true);
+        _cfg.OnValueChanged(CCVars220.TtsNTTSEnabled, v => UpdateProviderEnabled(TtsProvider.NTTS, v), true);
+        _cfg.OnValueChanged(CCVars220.TtsSileroEnabled, v => UpdateProviderEnabled(TtsProvider.Silero, v), true);
+
+        InitializeVoiceCaches();
     }
 
     public bool TryGetVoicePreferences(Entity<TtsComponent?> entity, [NotNullWhen(true)] out TtsVoicePreferences? pref, bool allowOverride = true)
@@ -92,12 +97,12 @@ public abstract partial class SharedTtsSystem : EntitySystem
 
     public bool IsProviderEnabled(TtsProvider provider)
     {
-        return _enabledProviders.Contains(provider);
+        return TtsEnabled && _enabledProviders.Contains(provider);
     }
 
     public bool IsAnyProviderEnabled()
     {
-        return _enabledProviders.Count > 0;
+        return TtsEnabled && _enabledProviders.Count > 0;
     }
 
     public bool TryGetDefaultPreferredVoice([NotNullWhen(true)] out ProtoId<TtsVoicePrototype>? protoId)

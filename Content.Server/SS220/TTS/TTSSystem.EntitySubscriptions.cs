@@ -76,9 +76,8 @@ public partial class TtsSystem
 
     private void OnRadioReceiveEvent(ref RadioSpokeEvent args)
     {
-        if (!_isEnabled || args.Message.Length > _maxMessageChars)
+        if (!TtsEnabled || args.Message.Length > _maxMessageChars)
             return;
-
 
         if (!TryGetEntitySpeakerData(args.Source, out var speakerData))
             return;
@@ -153,7 +152,7 @@ public partial class TtsSystem
     // Kirus ToDo: проверить зачем это
     private void OnTransformSpeech(TransformSpeechEvent args)
     {
-        if (!_isEnabled)
+        if (!TtsEnabled)
             return;
 
         args.Message = args.Message.Replace("+", "");

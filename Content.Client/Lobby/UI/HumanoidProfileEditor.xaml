@@ -104,7 +104,7 @@
                                 <Collapsible Orientation="Vertical" HorizontalExpand="True">
                                     <CollapsibleHeading Title="Настройки голоса" />
                                     <CollapsibleBody>
-                                        <ss220-tts:TTSVoicePreferencesTab HorizontalExpand="True"/>
+                                        <ss220-tts:TtsVoicePreferencesTab HorizontalExpand="True"/>
                                     </CollapsibleBody>
                                 </Collapsible>
                                 <!-- SS220-TTS-End -->

@@ -58,7 +58,6 @@ public sealed partial class TtsSystem : SharedTtsSystem
 
     private int _maxMessageChars;
     private int _maxAnnounceMessageChars;
-    private bool _isEnabled = false;
 
     private HashSet<ICommonSession> _sessionsNotToSend = new();
 
@@ -90,7 +89,6 @@ public sealed partial class TtsSystem : SharedTtsSystem
 
         Subs.CVar(_cfg, CCVars220.MaxCharInTTSAnnounceMessage, x => _maxAnnounceMessageChars = x, true);
         Subs.CVar(_cfg, CCVars220.MaxCharInTTSMessage, x => _maxMessageChars = x, true);
-        Subs.CVar(_cfg, CCVars220.TTSEnabled, v => _isEnabled = v, true);
         Subs.CVar(_cfg, CCVars220.TTSRequestTimeout, v => _requestTimeout = v, true);
 
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);

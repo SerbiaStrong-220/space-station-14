@@ -4,7 +4,7 @@ using Content.Shared.SS220.TTS;
 
 namespace Content.Client.SS220.TTS;
 
-public sealed partial class TTSSystem : EntitySystem
+public partial class TtsSystem
 {
     private bool _playDifferentRadioTogether = true;
     private bool _playDifferentTalkingTogether = true;

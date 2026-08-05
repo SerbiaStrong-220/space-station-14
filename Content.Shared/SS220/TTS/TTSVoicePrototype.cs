@@ -19,6 +19,9 @@ public sealed partial class TtsVoicePrototype : IPrototype
     public string Description = string.Empty;
 
     [DataField]
+    public List<ProtoId<TtsVoiceCategoryPrototype>> Categories = [];
+
+    [DataField]
     public TtsProvider Provider = TtsProvider.NTTS;
 
     [DataField(required: true)]

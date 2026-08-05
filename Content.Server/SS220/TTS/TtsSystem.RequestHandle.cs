@@ -137,9 +137,6 @@ public partial class TtsSystem
 
     private async Task HandleRadioRequest(TtsRadioRequest radioData)
     {
-        if (!_isEnabled)
-            return;
-
         List<(ICommonSession Session, EntityUid PlayEntity)> validReceivers = [];
         foreach (var receiver in radioData.Receivers)
         {
@@ -180,9 +177,6 @@ public partial class TtsSystem
 
     private async Task HandleAnnouncementRequest(TtsAnnouncementRequest request)
     {
-        if (!_isEnabled)
-            return;
-
         var validReceivers = ToValidReceivers(request.Receivers);
         if (!validReceivers.Any())
             return;
@@ -234,9 +228,6 @@ public partial class TtsSystem
 
     private async Task HandleTelepathyRequest(TtsTelepathyRequest request)
     {
-        if (!_isEnabled)
-            return;
-
         var validReceivers = ToValidReceivers(request.Receivers)
             .Where(x =>
             {

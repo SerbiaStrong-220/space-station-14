@@ -1,0 +1,7 @@
+- type: ttsVoice
+  id: SileroTest
+  name: Силеро Тест
+  description: описание
+  speaker: silero_test
+  provider: Silero
+  sex: Male

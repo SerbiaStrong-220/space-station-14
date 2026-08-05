@@ -8,7 +8,7 @@
             <Label Name="ProviderNameLabel" Margin="5 0"/>
             <cc:VSeparator/>
             <Label Name="VoicePrototypeIdLabel" HorizontalExpand="True" Margin="5 0"/>
-            <Button Name="VoiceSelectorButton" Text="{Loc 'humanoid-profile-editor-voice-settings'}" />
+            <Button Name="VoiceSelectorButton" Text="{Loc 'humanoid-profile-editor-voice-settings'}" Access="Public" ToggleMode="True" />
             <Button Name="VoicePlayButton" Text="{Loc 'humanoid-profile-editor-voice-play'}" HorizontalAlignment="Right" />
         </BoxContainer>
     </PanelContainer>

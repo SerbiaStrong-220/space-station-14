@@ -10,12 +10,11 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Input;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using SixLabors.ImageSharp.Processing.Processors.Filters;
 
 namespace Content.Client.SS220.TTS.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class TTSVoicePreferencesTab : BoxContainer
+public sealed partial class TtsVoicePreferencesTab : BoxContainer
 {
     [Dependency] private IUserInterfaceManager _ui = default!;
     [Dependency] private IInputManager _input = default!;
@@ -25,11 +24,14 @@ public sealed partial class TTSVoicePreferencesTab : BoxContainer
 
     public TtsVoicePreferences VoicePreferences { get; private set; }
 
-    private TTSVoicePreferencesTabEntry? _draggedEntry;
+    private TtsVoicePreferencesTabEntry? _draggedEntry;
+    private TtsProviderVoiceSelectorWindow? _selectorWindow;
 
-    public TTSVoicePreferencesTab() : this(null) { }
+    private Dictionary<TtsProvider, TtsVoicePreferencesTabEntry> _entriesDict = new();
 
-    public TTSVoicePreferencesTab(TtsVoicePreferences? preferences = null)
+    public TtsVoicePreferencesTab() : this(null) { }
+
+    public TtsVoicePreferencesTab(TtsVoicePreferences? preferences = null)
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
@@ -92,30 +94,6 @@ public sealed partial class TTSVoicePreferencesTab : BoxContainer
         }
     }
 
-    public void Refresh()
-    {
-        EntriesContainer.DisposeAllChildren();
-
-        var first = true;
-        foreach (var (provider, protoId) in VoicePreferences)
-        {
-            if (first)
-                first = false;
-            else
-                EntriesContainer.AddChild(new HSeparator());
-
-            var entry = new TTSVoicePreferencesTabEntry(provider, protoId);
-            entry.OnKeyBindDown += args =>
-            {
-                if (args.Function != EngineKeyFunctions.UIClick)
-                    return;
-
-                StartDragEntry(entry);
-            };
-            EntriesContainer.AddChild(entry);
-        }
-    }
-
     protected override void MouseExited()
     {
         base.MouseExited();
@@ -127,13 +105,79 @@ public sealed partial class TTSVoicePreferencesTab : BoxContainer
         StopDragEntry();
     }
 
+    public void Refresh()
+    {
+        EntriesContainer.RemoveAllChildren();
+        _entriesDict.Clear();
+
+        var first = true;
+        foreach (var (provider, protoId) in VoicePreferences)
+        {
+            if (first)
+                first = false;
+            else
+                EntriesContainer.AddChild(new HSeparator());
+
+            var entry = new TtsVoicePreferencesTabEntry(provider, protoId);
+            entry.OnKeyBindDown += args =>
+            {
+                if (args.Function != EngineKeyFunctions.UIClick)
+                    return;
+
+                StartDragEntry(entry);
+            };
+
+            entry.VoiceSelectorButton.OnPressed += _ => OpenSelectorWindow(provider);
+
+            EntriesContainer.AddChild(entry);
+            _entriesDict.Add(provider, entry);
+        }
+    }
+
     public void SetPreferences(TtsVoicePreferences pref)
     {
         VoicePreferences = pref;
         Refresh();
     }
 
-    private void StartDragEntry(TTSVoicePreferencesTabEntry entry)
+    private void OpenSelectorWindow(TtsProvider provider)
+    {
+        if (_selectorWindow != null)
+            CloseSelecotorWindow();
+
+        if (!_entriesDict.TryGetValue(provider, out var entry))
+            return;
+
+        entry.VoiceSelectorButton.Pressed = true;
+
+        var window = new TtsProviderVoiceSelectorWindow(provider);
+        window.OnClose += CloseSelecotorWindow;
+        window.OnVoiceSelected += voice =>
+        {
+            VoicePreferences[provider] = voice;
+            CloseSelecotorWindow();
+            Refresh();
+        };
+
+        window.OpenCentered();
+        _selectorWindow = window;
+    }
+
+    private void CloseSelecotorWindow()
+    {
+        if (_selectorWindow == null)
+            return;
+
+        var temp = _selectorWindow;
+        _selectorWindow = null;
+
+        if (_entriesDict.TryGetValue(temp.Provider, out var entry))
+            entry.VoiceSelectorButton.Pressed = false;
+
+        temp.Close();
+    }
+
+    private void StartDragEntry(TtsVoicePreferencesTabEntry entry)
     {
         StopDragEntry();
 

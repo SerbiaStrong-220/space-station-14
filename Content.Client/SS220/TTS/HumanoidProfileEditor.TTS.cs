@@ -12,7 +12,7 @@ namespace Content.Client.Lobby.UI;
 
 public sealed partial class HumanoidProfileEditor
 {
-    private TTSSystem _ttsSys = default!;
+    private TtsSystem _ttsSys = default!;
     private List<TtsVoicePrototype> _voiceList = default!;
     private readonly List<string> _sampleText = new()
     {
@@ -35,7 +35,7 @@ public sealed partial class HumanoidProfileEditor
         var entMan = IoCManager.Resolve<IEntityManager>();
         var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
 
-        _ttsSys = entMan.System<TTSSystem>();
+        _ttsSys = entMan.System<TtsSystem>();
         _voiceList = prototypeManager
             .EnumeratePrototypes<TtsVoicePrototype>()
             .Where(o => o.RoundStart)

@@ -16,7 +16,7 @@ namespace Content.Client.SS220.TTS;
 /// <summary>
 /// Plays TTS audio in world
 /// </summary>
-public sealed partial class TTSSystem
+public sealed partial class TtsSystem : SharedTtsSystem
 {
     [Dependency] private IAudioManager _audioManager = default!;
     [Dependency] private AudioSystem _audio = default!;
@@ -41,6 +41,8 @@ public sealed partial class TTSSystem
 
     public override void Initialize()
     {
+        base.Initialize();
+
         // remove if Robust PR for clientCVar subs merged
         _cfg.OnValueChanged(CCVars220.RecieveTTS, x => RaiseNetworkEvent(new ReceiveTtsCVarChanged(x)), true);
         //end

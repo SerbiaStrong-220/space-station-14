@@ -8,27 +8,27 @@ using Robust.Shared.Prototypes;
 namespace Content.Client.SS220.TTS.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class TTSVoicePreferencesTabEntry : PanelContainer
+public sealed partial class TtsVoicePreferencesTabEntry : PanelContainer
 {
     [Dependency] private IEntityManager _entity = default!;
 
-    private readonly TTSSystem _tTSSystem = default!;
+    private readonly TtsSystem _tTSSystem = default!;
 
     public readonly TtsProvider Provider;
     public readonly ProtoId<TtsVoicePrototype> ProtoId;
 
-    public TTSVoicePreferencesTabEntry(TtsProvider provider, ProtoId<TtsVoicePrototype> protoId)
+    public TtsVoicePreferencesTabEntry(TtsProvider provider, ProtoId<TtsVoicePrototype> protoId)
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
 
-        _tTSSystem = _entity.System<TTSSystem>();
+        _tTSSystem = _entity.System<TtsSystem>();
 
         Background.PanelOverride = new StyleBoxFlat()
         {
-            BackgroundColor = TTSVoicePreferencesTab.CellBackgroundColor
+            BackgroundColor = TtsVoicePreferencesTab.CellBackgroundColor
         };
-        ProviderNameLabel.SetWidth = TTSVoicePreferencesTab.ProviderColumnWidth;
+        ProviderNameLabel.SetWidth = TtsVoicePreferencesTab.ProviderColumnWidth;
 
         Provider = provider;
         ProtoId = protoId;
@@ -44,8 +44,8 @@ public sealed partial class TTSVoicePreferencesTabEntry : PanelContainer
         VoicePrototypeIdLabel.Text = ProtoId;
     }
 
-    public TTSVoicePreferencesTabEntry Clone()
+    public TtsVoicePreferencesTabEntry Clone()
     {
-        return new TTSVoicePreferencesTabEntry(Provider, ProtoId);
+        return new TtsVoicePreferencesTabEntry(Provider, ProtoId);
     }
 }

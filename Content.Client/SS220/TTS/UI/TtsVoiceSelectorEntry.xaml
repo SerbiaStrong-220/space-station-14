@@ -1,0 +1,7 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              Orientation="Horizontal"
+              HorizontalExpand="True">
+    <Label Name="NameLabel" HorizontalExpand="True"/>
+    <Button Name="SelectButton" Text="Выбрать"/>
+    <Button Name="PlayButton" Text="{Loc 'humanoid-profile-editor-voice-play'}" HorizontalAlignment="Right"/>
+</BoxContainer>
