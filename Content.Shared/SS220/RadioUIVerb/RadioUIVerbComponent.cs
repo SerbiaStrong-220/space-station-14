@@ -1,8 +1,9 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 
-namespace Content.Shared.SS220.SiliconComponents;
+namespace Content.Shared.SS220.RadioUIVerb;
 
 [RegisterComponent]
-public sealed partial class DriveComponent : Component
+
+public sealed partial class RadioUIVerbComponent : Component
 {
 }

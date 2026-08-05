@@ -12,7 +12,7 @@ public readonly record struct EntityVisitedEvent(EntityUid MindEntity, MindCompo
 }
 
 [ByRefEvent]
-public readonly record struct EntityUnvisitedEvent(EntityUid MindEntity, MindComponent MindComp, EntityUid? FormerEntity)
+public readonly record struct EntityUnvisitConpleteEvent(EntityUid MindEntity, MindComponent MindComp, EntityUid? FormerEntity)
 {
     public readonly EntityUid MindEntity = MindEntity;
 

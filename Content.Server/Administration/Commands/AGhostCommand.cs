@@ -106,12 +106,17 @@ public sealed class AGhostCommand : LocalizedCommands
         LogAdminAction(shell, args);
 
         //SS220 mech rework begin
+        bool isAghost = false;
+
         if (mind.VisitingEntity != default)
         {
+            if (_entities.TryGetComponent<GhostComponent>(mind.VisitingEntity, out var oldGhostComponent) && oldGhostComponent.CanGhostInteract)
+                isAghost = true;
+
             mindSystem.UnVisit(mindId, mind);
         }
 
-        if (_entities.TryGetComponent<GhostComponent>(mind.VisitingEntity, out var oldGhostComponent) && oldGhostComponent.CanGhostInteract)
+        if (isAghost)
             return;
         //SS220 mech rework end
 

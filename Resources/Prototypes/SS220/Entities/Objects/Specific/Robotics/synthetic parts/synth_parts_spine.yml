@@ -1,0 +1,35 @@
+- type: entity
+  id: SynthSpineSteel
+  parent: SynthSpineBase
+  name: steel synth frame
+  components:
+  - type: DamabeableSiliconPart
+    minDamageToMalfunction: 40
+    maxDamageToRemainFunctional: 60
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Robotics/Synthetic/parts.rsi
+    state: frame_steel
+
+- type: entity
+  id: SynthSpineCarbon
+  parent: SynthSpineBase
+  name: carbon synth frame
+  components:
+  - type: DamabeableSiliconPart
+    minDamageToMalfunction: 30
+    maxDamageToRemainFunctional: 45
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Robotics/Synthetic/parts.rsi
+    state: frame_carbon
+
+- type: entity
+  id: SynthSpinePlasteel
+  parent: SynthSpineBase
+  name: plasteel synth frame
+  components:
+  - type: DamabeableSiliconPart
+    minDamageToMalfunction: 50
+    maxDamageToRemainFunctional: 80
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Robotics/Synthetic/parts.rsi
+    state: frame_plasteel

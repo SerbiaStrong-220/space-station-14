@@ -44,7 +44,7 @@ public sealed class MindSystem : SharedMindSystem
 
     private void OnMindShutdown(EntityUid uid, MindComponent mind, ComponentShutdown args)
     {
-        if (mind.UserId is {} user)
+        if (mind.UserId is { } user)
         {
             UserMinds.Remove(user);
             if (_players.TryGetPlayerData(user, out var data) && data.ContentData() is { } oldData)
@@ -190,9 +190,9 @@ public sealed class MindSystem : SharedMindSystem
         _players.SetAttachedEntity(session, owned);
 
         //SS220 add mind visit events begin
-        if (mind.OwnedEntity is { Valid: true } ownedEntValid)
+        if (mind.OwnedEntity is { Valid: true } ownedEntValid) // I know that there is an event with similar name but it is raised A BIT BEFORE so this one is not completely identical!!!!!1!!!!
         {
-            var ev = new EntityUnvisitedEvent(mindId, mind, formerEnt);
+            var ev = new EntityUnvisitConpleteEvent(mindId, mind, formerEnt);
             RaiseLocalEvent(ownedEntValid, ref ev);
         }
         //SS220 add mind visit events end

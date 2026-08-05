@@ -12,7 +12,6 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.SS220.AltBlocking;
 using Content.Shared.SS220.Experience;
 using Content.Shared.SS220.Mind;
-using Content.Shared.Stunnable;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -48,19 +47,13 @@ public sealed partial class SiliconPartSystem : EntitySystem
         SubscribeLocalEvent<ActiveOpticsComponent, ComponentGotInsertedIntoUser>(OnOpticsInserted);
         SubscribeLocalEvent<ActiveOpticsComponent, ComponentGotRemovedFromUser>(OnOpticsRemoved);
 
+        SubscribeLocalEvent<BrainComponent, ComponentGotInsertedIntoUser>(OnBrainInserted);
+        SubscribeLocalEvent<BrainComponent, ComponentGotRemovedFromUser>(OnBrainRemoved);
+
         SubscribeLocalEvent<ActiveOpticsComponent, SiliconPartStatusOnline>(OnPartOnline);
         SubscribeLocalEvent<ActiveOpticsComponent, SiliconPartStatusOffline>(OnPartOffline);
 
         SubscribeLocalEvent<ActiveOpticsComponent, SiliconPartDamageModifierChanged>(OnPartDamageModChanged);
-
-        SubscribeLocalEvent<BrainComponent, ComponentGotInsertedIntoUser>(OnBrainInserted);
-        SubscribeLocalEvent<BrainComponent, ComponentGotRemovedFromUser>(OnBrainRemoved);
-
-        SubscribeLocalEvent<ServoComponent, ComponentGotInsertedIntoUser>(OnServoInserted);
-        SubscribeLocalEvent<ServoComponent, ComponentGotRemovedFromUser>(OnServoRemoved);
-
-        SubscribeLocalEvent<ServoComponent, SiliconPartStatusOnline>(OnServoOnline);
-        SubscribeLocalEvent<ServoComponent, SiliconPartStatusOffline>(OnServoOffline);
 
         SubscribeLocalEvent<MovementSpeedModifyingPartComponent, SiliconPartStatusOnline>(OnMovementModifierOnline);
         SubscribeLocalEvent<MovementSpeedModifyingPartComponent, SiliconPartStatusOffline>(OnMovementModifierOffline);
@@ -68,7 +61,7 @@ public sealed partial class SiliconPartSystem : EntitySystem
         SubscribeLocalEvent<MovementSpeedModifyingPartComponent, ComponentGotInsertedIntoUser>(OnMovementModifierInserted);
         SubscribeLocalEvent<MovementSpeedModifyingPartComponent, ComponentGotRemovedFromUser>(OnMovementModifierRemoved);
 
-        SubscribeLocalEvent<SiliconPartComponent, EntityUnvisitedEvent>(OnMindVisited);
+        SubscribeLocalEvent<SiliconPartComponent, EntityUnvisitConpleteEvent>(OnMindReturnedToBrain);
 
         SubscribeLocalEvent<SiliconPartComponent, MindAddedMessage>(OnBrainMindAdded);
         SubscribeLocalEvent<SiliconComponentsComponent, MindAddedMessage>(OnSiliconMindAdded);
@@ -169,50 +162,11 @@ public sealed partial class SiliconPartSystem : EntitySystem
         foreach (var part in ent.Comp.Parts.Values)
         {
             if (!TryComp<MovementSpeedModifyingPartComponent>(part.ContainedEntity, out var speedModComp) ||
-                !TryComp<SiliconPartComponent>(part.ContainedEntity, out var partComp) || !partComp.Active)
+                !TryComp<SiliconPartComponent>(part.ContainedEntity, out var partComp) || !partComp.Active && speedModComp.RequiresActive)
                 continue;
 
             args.ModifySpeed(speedModComp.SpeedMod.SprintSpeedModifier, speedModComp.SpeedMod.WalkSpeedModifier);
         }
-    }
-
-    private void OnServoInserted(Entity<ServoComponent> ent, ref ComponentGotInsertedIntoUser args)
-    {
-        if (TerminatingOrDeleted(ent) || TerminatingOrDeleted(args.Owner))
-            return;
-
-        if (TryComp<SiliconPartComponent>(ent.Owner, out var partComp) && partComp.Active)
-            RemComp<StunnedComponent>(args.Owner);
-    }
-
-    private void OnServoRemoved(Entity<ServoComponent> ent, ref ComponentGotRemovedFromUser args)
-    {
-        if (TerminatingOrDeleted(ent) || TerminatingOrDeleted(args.Owner))
-            return;
-
-        EnsureComp<StunnedComponent>(args.Owner);
-
-    }
-
-    private void OnServoOnline(Entity<ServoComponent> ent, ref SiliconPartStatusOnline args)
-    {
-        if (TerminatingOrDeleted(ent) || TerminatingOrDeleted(args.Owner))
-            return;
-
-        if (TryComp<SiliconPartComponent>(ent.Owner, out var partComp) &&
-            partComp.PartOwner is { Valid: true } partOwnerValid &&
-            partComp.Active)
-            RemComp<StunnedComponent>(partOwnerValid);
-    }
-
-    private void OnServoOffline(Entity<ServoComponent> ent, ref SiliconPartStatusOffline args)
-    {
-        if (TerminatingOrDeleted(ent) || TerminatingOrDeleted(args.Owner))
-            return;
-
-        if (TryComp<SiliconPartComponent>(ent.Owner, out var partComp) &&
-            partComp.PartOwner is { Valid: true } partOwnerValid)
-            EnsureComp<StunnedComponent>(partOwnerValid);
     }
 
     private void OnMovementModifierInserted(Entity<MovementSpeedModifyingPartComponent> ent, ref ComponentGotInsertedIntoUser args)
@@ -300,23 +254,6 @@ public sealed partial class SiliconPartSystem : EntitySystem
 
     private void OnBrainRemoved(Entity<BrainComponent> ent, ref ComponentGotRemovedFromUser args)
     {
-        if (!TryComp<SiliconPartComponent>(ent.Owner, out var partComp))
-            return;
-
-        if (TryComp<AntagGearRelayComponent>(ent.Owner, out var antagGearRelay))
-            antagGearRelay.User = null;
-
-        if (_mind.TryGetMind(ent.Owner, out var mindId, out var mind) &&
-            _player.TryGetSessionById(mind.UserId, out var session))
-            _mind.UnVisit(mindId);
-
-
-        if (!TryComp<ExperienceComponent>(ent.Owner, out var brainExperience))
-            return;
-
-        if (_net.IsClient)
-            return;
-
         if (TryComp<AdminForcedExperienceAddComponent>(args.Owner, out var userAdminExperience))
         {
             var brainAdminExperience = EnsureComp<AdminForcedExperienceAddComponent>(ent.Owner);
@@ -346,10 +283,20 @@ public sealed partial class SiliconPartSystem : EntitySystem
         RaiseLocalEvent(ent.Owner, ref afterGainedEv);
         RaiseLocalEvent(args.Owner, ref afterGainedEv);
 
-        return;
+        if (!TryComp<SiliconPartComponent>(ent.Owner, out var partComp))
+            return;
+
+        if (TryComp<AntagGearRelayComponent>(ent.Owner, out var antagGearRelay))
+            antagGearRelay.User = null;
+
+        if (_mind.TryGetMind(ent.Owner, out var mindId, out var mind) &&
+            _player.TryGetSessionById(mind.UserId, out var session) &&
+            TryComp<VisitingMindComponent>(args.Owner, out var ownerVisitComp) &&
+            ownerVisitComp.MindId == mindId)
+            _mind.UnVisit(mindId);
     }
 
-    private void OnMindVisited(Entity<SiliconPartComponent> ent, ref EntityUnvisitedEvent args)
+    private void OnMindReturnedToBrain(Entity<SiliconPartComponent> ent, ref EntityUnvisitConpleteEvent args)
     {
         if (!_container.TryGetContainingContainer(ent.Owner, out var container))
             return;

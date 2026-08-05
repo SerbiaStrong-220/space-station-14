@@ -18,6 +18,18 @@
         },
         {
             "name": "biocapsule"
+        },
+        {
+            "name": "camera_default"
+        },
+        {
+            "name": "camera_med"
+        },
+        {
+            "name": "camera_sec"
+        },
+        {
+            "name": "camera_welding"
         }
     ]
 }

@@ -280,12 +280,10 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      100: Critical
-      300: Dead
+      200: Critical
     stateAlertDict:
       Alive: BorgHealth
       Critical: BorgCrit
-      Dead: BorgDead
     showOverlays: false
     allowRevives: true
   - type: HealthExaminable
@@ -309,7 +307,8 @@
       enum.SiliconUiKey.Key:
         type: SiliconBoundUserInterface
   - type: ActivatableUI
-    key: enum.HeadsetKey.Key
+    key: enum.SiliconUiKey.Key
+  - type: RadioUIVerb
   - type: Inventory
     templateId: borg
   - type: Hands
@@ -395,25 +394,21 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 75
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          path: /Audio/Machines/warning_buzzer.ogg
-          params:
-            volume: 5
-    - trigger:
-        !type:DamageTrigger
-        damage: 300
+        damage: 500
       behaviors:
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
       - !type:EmptyContainersBehaviour
         containers:
-        - borg_brain
-        - borg_module
+        - silicon_component_Brain
         - cell_slot
+        - silicon_component_Optics
+        - silicon_component_Servo
+        - silicon_component_Brain
+        - silicon_component_Spine
+        - silicon_component_Drive
+        - key_slots
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: Pullable
@@ -521,8 +516,8 @@
         - SynthServoBase
       silicon_component_Brain:
         - SynthBrainPositronic
-      #silicon_component_Spine:
-        #startingItem: PowerCellMedium
+      silicon_component_Spine:
+        - SynthSpineSteel
       silicon_component_Drive:
         - SynthDriveBase
       key_slots:
@@ -551,8 +546,8 @@
         - SynthServoBase
       silicon_component_Brain:
         - SynthBrainCapsule
-      #silicon_component_Spine:
-        #startingItem: PowerCellMedium
+      silicon_component_Spine:
+        - SynthSpineSteel
       silicon_component_Drive:
         - SynthDriveBase
       key_slots:

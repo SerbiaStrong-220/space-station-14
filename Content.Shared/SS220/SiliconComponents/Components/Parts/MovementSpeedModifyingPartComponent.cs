@@ -8,5 +8,8 @@ namespace Content.Shared.SS220.SiliconComponents;
 public sealed partial class MovementSpeedModifyingPartComponent : Component
 {
     [DataField]
+    public bool RequiresActive = true;
+
+    [DataField]
     public MovementSpeedModifier SpeedMod = new MovementSpeedModifier();
 }

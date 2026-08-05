@@ -3,6 +3,7 @@
 using Content.Shared.Alert;
 using Content.Shared.FixedPoint;
 using Content.Shared.Whitelist;
+using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -37,6 +38,9 @@ public sealed partial class SiliconComponentsComponent : Component
     [DataField]
     public string ModuleContainerId = "silicon_component_modules";
 
+    [DataField]
+    public List<PartType> PartsRequiredToOperate = new List<PartType> { PartType.Servo, PartType.Spine };
+
     [ViewVariables]
     public Container ModuleContainer = default!;
 
@@ -52,15 +56,9 @@ public sealed partial class SiliconComponentsComponent : Component
     public string NoMindState = string.Empty;
     #endregion
 
-    /// <summary>
-    /// The battery charge alert.
-    /// </summary>
     [DataField]
     public ProtoId<AlertPrototype> BatteryAlert = "BorgBattery";
 
-    /// <summary>
-    /// The alert for a missing battery.
-    /// </summary>
     [DataField]
     public ProtoId<AlertPrototype> NoBatteryAlert = "BorgBatteryNone";
 
@@ -72,6 +70,17 @@ public sealed partial class SiliconComponentsComponent : Component
     [AutoNetworkedField, AutoPausedField]
     public TimeSpan NextBatteryUpdate = TimeSpan.Zero;
 
+    [DataField]
+    public SoundSpecifier? UnlockSound = new SoundPathSpecifier("/Audio/Machines/door_lock_off.ogg")
+    {
+        Params = AudioParams.Default.WithVolume(-5f),
+    };
+
+    [DataField]
+    public SoundSpecifier? LockSound = new SoundPathSpecifier("/Audio/Machines/door_lock_on.ogg")
+    {
+        Params = AudioParams.Default.WithVolume(-5f)
+    };
 }
 
 public enum PartType : byte

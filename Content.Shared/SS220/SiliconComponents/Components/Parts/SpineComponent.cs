@@ -3,6 +3,6 @@
 namespace Content.Shared.SS220.SiliconComponents;
 
 [RegisterComponent]
-public sealed partial class DriveComponent : Component
+public sealed partial class SpineComponent : Component
 {
 }

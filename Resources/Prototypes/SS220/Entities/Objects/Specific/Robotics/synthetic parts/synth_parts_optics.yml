@@ -9,26 +9,9 @@
     maxDamageToRemainFunctional: 35
   - type: Item
     storedRotation: -90
-    inhandVisuals:
-      left:
-      - state: base-icon-inhand-left
-        color: "#8FCBCB"
-      - state: base-module-inhand-left
-        color: "#A1A1A1"
-      - state: base-part-inhand-left
-      - state: base-stripes-inhand-left
-        color: "#7D7D7D"
-      right:
-      - state: base-icon-inhand-right
-        color: "#8FCBCB"
-      - state: base-module-inhand-right
-        color: "#A1A1A1"
-      - state: base-part-inhand-right
-      - state: base-stripes-inhand-right
-        color: "#7D7D7D"
   - type: Sprite
-    sprite: Objects/Specific/Robotics/borgmodule.rsi
-    state: engineering
+    sprite: SS220/Objects/Specific/Robotics/Synthetic/parts.rsi
+    state: camera_default
 
 - type: entity
   id: SynthOpticsWeldproof
@@ -40,26 +23,9 @@
   - type: FlashImmunity
   - type: Item
     storedRotation: -90
-    inhandVisuals:
-      left:
-      - state: base-icon-inhand-left
-        color: "#8FCBCB"
-      - state: base-module-inhand-left
-        color: "#A1A1A1"
-      - state: base-part-inhand-left
-      - state: base-stripes-inhand-left
-        color: "#7D7D7D"
-      right:
-      - state: base-icon-inhand-right
-        color: "#8FCBCB"
-      - state: base-module-inhand-right
-        color: "#A1A1A1"
-      - state: base-part-inhand-right
-      - state: base-stripes-inhand-right
-        color: "#7D7D7D"
   - type: Sprite
-    sprite: Objects/Specific/Robotics/borgmodule.rsi
-    state: engineering
+    sprite: SS220/Objects/Specific/Robotics/Synthetic/parts.rsi
+    state: camera_welding
 
 - type: entity
   id: SynthOpticsSec
@@ -78,26 +44,9 @@
   - type: FlashImmunity
   - type: Item
     storedRotation: -90
-    inhandVisuals:
-      left:
-      - state: base-icon-inhand-left
-        color: "#8FCBCB"
-      - state: base-module-inhand-left
-        color: "#A1A1A1"
-      - state: base-part-inhand-left
-      - state: base-stripes-inhand-left
-        color: "#7D7D7D"
-      right:
-      - state: base-icon-inhand-right
-        color: "#8FCBCB"
-      - state: base-module-inhand-right
-        color: "#A1A1A1"
-      - state: base-part-inhand-right
-      - state: base-stripes-inhand-right
-        color: "#7D7D7D"
   - type: Sprite
-    sprite: Objects/Specific/Robotics/borgmodule.rsi
-    state: engineering
+    sprite: SS220/Objects/Specific/Robotics/Synthetic/parts.rsi
+    state: camera_sec
 
 - type: entity
   id: SynthOpticsMed
@@ -109,24 +58,6 @@
   - type: ShowHealthIcons
   - type: Item
     storedRotation: -90
-    inhandVisuals:
-      left:
-      - state: base-icon-inhand-left
-        color: "#8FCBCB"
-      - state: base-module-inhand-left
-        color: "#A1A1A1"
-      - state: base-part-inhand-left
-      - state: base-stripes-inhand-left
-        color: "#7D7D7D"
-      right:
-      - state: base-icon-inhand-right
-        color: "#8FCBCB"
-      - state: base-module-inhand-right
-        color: "#A1A1A1"
-      - state: base-part-inhand-right
-      - state: base-stripes-inhand-right
-        color: "#7D7D7D"
   - type: Sprite
-    sprite: Objects/Specific/Robotics/borgmodule.rsi
-    state: engineering
-
+    sprite: SS220/Objects/Specific/Robotics/Synthetic/parts.rsi
+    state: camera_med
