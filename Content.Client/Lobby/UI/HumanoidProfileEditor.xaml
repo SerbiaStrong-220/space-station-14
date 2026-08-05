@@ -95,16 +95,10 @@
                                     <OptionButton Name="SpawnPriorityButton" HorizontalAlignment="Right" />
                                 </BoxContainer>
                                 <!-- SS220-TTS-Start -->
-                                <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
-                                    <Label Text="{Loc 'humanoid-profile-editor-voice-label'}" />
-                                    <Control HorizontalExpand="True"/>
-                                    <OptionButton Name="CVoiceButton" HorizontalAlignment="Right" />
-                                    <Button Name="CVoicePlayButton" Text="{Loc 'humanoid-profile-editor-voice-play'}" MaxWidth="80" HorizontalAlignment="Right"/>
-                                </BoxContainer>
                                 <Collapsible Orientation="Vertical" HorizontalExpand="True">
-                                    <CollapsibleHeading Title="Настройки голоса" />
+                                    <CollapsibleHeading Title="{Loc 'ui-humanoid-profile-editor-tts-settings'}" />
                                     <CollapsibleBody>
-                                        <ss220-tts:TtsVoicePreferencesTab HorizontalExpand="True"/>
+                                        <ss220-tts:TtsVoicePreferencesTab Name="TtsVoicePreferencesTab" HorizontalExpand="True"/>
                                     </CollapsibleBody>
                                 </Collapsible>
                                 <!-- SS220-TTS-End -->

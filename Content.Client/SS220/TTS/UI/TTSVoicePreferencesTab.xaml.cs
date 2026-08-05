@@ -19,6 +19,8 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
     [Dependency] private IUserInterfaceManager _ui = default!;
     [Dependency] private IInputManager _input = default!;
 
+    public event Action? OnPreferencesChanged;
+
     public static readonly Color CellBackgroundColor = Color.FromHex("#2F2F3B");
     public const float ProviderColumnWidth = 250f;
 
@@ -138,6 +140,8 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
     {
         VoicePreferences = pref;
         Refresh();
+
+        OnPreferencesChanged?.Invoke();
     }
 
     private void OpenSelectorWindow(TtsProvider provider)
@@ -157,6 +161,8 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
             VoicePreferences[provider] = voice;
             CloseSelecotorWindow();
             Refresh();
+
+            OnPreferencesChanged?.Invoke();
         };
 
         window.OpenCentered();

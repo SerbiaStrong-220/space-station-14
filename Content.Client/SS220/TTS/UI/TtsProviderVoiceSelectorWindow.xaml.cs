@@ -10,6 +10,8 @@ public sealed partial class TtsProviderVoiceSelectorWindow : DefaultWindow
 {
     private readonly TtsSystem _tts;
 
+    public const float BetweenCategoriesMargin = 30f;
+
     public event Action<TtsVoicePrototype>? OnVoiceSelected;
 
     public readonly TtsProvider Provider;
@@ -22,7 +24,7 @@ public sealed partial class TtsProviderVoiceSelectorWindow : DefaultWindow
 
         Provider = provider;
 
-        Title = Loc.GetString("ui-tts-provider-voice-selector-window-title", ("providerName", Provider));
+        Title = Loc.GetString("ui-tts-provider-voice-selector-window-title", ("providerName", Provider.ToString()));
 
         Refresh();
     }
@@ -31,10 +33,16 @@ public sealed partial class TtsProviderVoiceSelectorWindow : DefaultWindow
     {
         ContentContainer.RemoveAllChildren();
 
+        var first = true;
         foreach (var (category, voices) in _tts.EnumerateProviderVoiceCategories(Provider))
         {
             var categoryEntry = new TtsVoiceSelectorCategoryEntry(category, voices);
             categoryEntry.OnVoiceSelected += voice => OnVoiceSelected?.Invoke(voice);
+
+            if (first)
+                first = false;
+            else
+                categoryEntry.Margin = new Thickness(0, BetweenCategoriesMargin, 0, 0);
 
             ContentContainer.AddChild(categoryEntry);
         }

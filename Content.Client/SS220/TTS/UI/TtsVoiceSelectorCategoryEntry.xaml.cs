@@ -4,6 +4,7 @@ using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
+using Robust.Shared.Utility;
 
 namespace Content.Client.SS220.TTS.UI;
 
@@ -11,6 +12,8 @@ namespace Content.Client.SS220.TTS.UI;
 public sealed partial class TtsVoiceSelectorCategoryEntry : BoxContainer
 {
     [Dependency] private IResourceCache _cache = default!;
+
+    public const float BetweenVoicesMargin = 4f;
 
     public event Action<TtsVoicePrototype>? OnVoiceSelected;
 
@@ -31,15 +34,20 @@ public sealed partial class TtsVoiceSelectorCategoryEntry : BoxContainer
 
     public void Refresh()
     {
-        CategoryNameLabel.Text = Category.LocalizedName;
-        CategoryNameLabel.FontOverride = new VectorFont(_cache.GetResource<FontResource>("/Fonts/NotoSans/NotoSans-Bold.ttf"), 14);
+        CategoryNameLabel.SetMessage(FormattedMessage.FromMarkupPermissive(Category.LocalizedName));
 
         VoiceEntriesContainer.RemoveAllChildren();
 
+        var first = true;
         foreach (var voice in _voices)
         {
             var entry = new TtsVoiceSelectorEntry(voice);
             entry.OnVoiceSelected += voice => OnVoiceSelected?.Invoke(voice);
+
+            if (first)
+                first = false;
+            else
+                entry.Margin = new Thickness(0, BetweenVoicesMargin, 0, 0);
 
             VoiceEntriesContainer.AddChild(entry);
         }

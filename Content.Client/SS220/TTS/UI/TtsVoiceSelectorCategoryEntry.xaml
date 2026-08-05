@@ -2,7 +2,7 @@
               xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
               Orientation="Vertical"
               HorizontalExpand="True">
-    <Label Name="CategoryNameLabel" HorizontalExpand="True"/>
+    <RichTextLabel Name="CategoryNameLabel" HorizontalExpand="True"/>
     <cc:HSeparator Margin="0 5" />
     <BoxContainer Name="VoiceEntriesContainer" Orientation="Vertical" HorizontalExpand="True" />
 </BoxContainer>

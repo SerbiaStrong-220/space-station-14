@@ -1,1 +1,1 @@
-tts-voice-category-misc-name = Прочие
+tts-voice-category-misc-name = [bold][font size=14]Прочие[/font][/bold]

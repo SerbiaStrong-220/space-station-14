@@ -1,1 +1,3 @@
-ui-tts-provider-voice-selector-window-title = Окно выбора голоса TTS-провайдера {providerName}
+ui-humanoid-profile-editor-tts-settings = Найтрокий голоса
+
+ui-tts-provider-voice-selector-window-title = Выбор голоса провайдера {providerName}
