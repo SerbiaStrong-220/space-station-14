@@ -84,11 +84,7 @@ namespace Content.Shared.Preferences
 
         // SS220 TTS begin
         [DataField]
-        public TtsVoicePreferences VoicePreferences = new()
-        {
-            [TtsProvider.Silero] = "",
-            [TtsProvider.NTTS] = "father_grigori"
-        };
+        public TtsVoicePreferences VoicePreferences = SharedTtsSystem.DefaultVoicePreferences.Clone();
         // SS220 TTS end
 
         /// <summary>
@@ -155,7 +151,6 @@ namespace Content.Shared.Preferences
             string name,
             string flavortext,
             string species,
-            string voice, // Corvax-TTS
             int age,
             Sex sex,
             Gender gender,
@@ -166,13 +161,13 @@ namespace Content.Shared.Preferences
             HashSet<ProtoId<AntagPrototype>> antagPreferences,
             HashSet<ProtoId<TraitPrototype>> traitPreferences,
             Dictionary<string, RoleLoadout> loadouts,
+            TtsVoicePreferences? voicePreferences = null, // SS220 TTS
             SignatureData? signatureData = null, // ss220 add signature
             bool lateTeleportAfkToCryoStorage = true) //SS220 Cryo-Teleport
         {
             Name = name;
             FlavorText = flavortext;
             Species = species;
-            Voice = voice; // Corvax-TTS
             Age = age;
             Sex = sex;
             Gender = gender;
@@ -185,6 +180,11 @@ namespace Content.Shared.Preferences
             TeleportAfkToCryoStorage = lateTeleportAfkToCryoStorage; // SS220 Cryo-Teleport
             SignatureData = signatureData; // ss220 add signature
             _loadouts = loadouts;
+
+            // SS220 tts begin
+            if (voicePreferences != null)
+                VoicePreferences = voicePreferences;
+            // SS220 tts end
 
             var hasHighPrority = false;
             foreach (var (key, value) in _jobPriorities)
@@ -206,7 +206,6 @@ namespace Content.Shared.Preferences
             : this(other.Name,
                 other.FlavorText,
                 other.Species,
-                other.Voice, // Corvax-TTS
                 other.Age,
                 other.Sex,
                 other.Gender,
@@ -217,6 +216,7 @@ namespace Content.Shared.Preferences
                 new HashSet<ProtoId<AntagPrototype>>(other.AntagPreferences),
                 new HashSet<ProtoId<TraitPrototype>>(other.TraitPreferences),
                 new Dictionary<string, RoleLoadout>(other.Loadouts),
+                other.VoicePreferences.Clone(), // SS220 TTS
                 other.SignatureData?.Clone(), // ss220 add signature
                 other.TeleportAfkToCryoStorage)
         {
@@ -342,13 +342,6 @@ namespace Content.Shared.Preferences
         {
             return new(this) { Species = species };
         }
-
-        // Corvax-TTS-Start
-        public HumanoidCharacterProfile WithVoice(string voice)
-        {
-            return new(this) { Voice = voice };
-        }
-        // Corvax-TTS-End
 
         // SS220 TTS begin
         public HumanoidCharacterProfile WithVoicePreferences(TtsVoicePreferences preferences)

@@ -33,7 +33,7 @@ public sealed class HumanoidProfileTests : GameTest
             humanoidProfile.ApplyProfileTo(human, new HumanoidCharacterProfile()
                 .WithSex(Sex.Female)
                 .WithAge(67)
-                .WithVoice(Voice) // SS220-tts-tests
+                .WithVoicePreferences(SharedTtsSystem.DefaultVoicePreferences.Clone()) // SS220 tts
                 .WithGender(Gender.Neuter)
                 .WithSpecies(Vox));
             var humanoidComponent = entityManager.GetComponent<HumanoidProfileComponent>(human);
@@ -46,7 +46,7 @@ public sealed class HumanoidProfileTests : GameTest
 
             // SS220-tts-tests-begin
             Assert.That(entityManager.TryGetComponent<TtsComponent>(human, out var ttsComponent));
-            // Assert.That(ttsComponent.VoicePrototypeId, Is.EqualTo(Voice));
+            Assert.That(ttsComponent.VoicePreferences, Is.EqualTo(SharedTtsSystem.DefaultVoicePreferences));
             // SS220-tts-tests-end
 
             Assert.That(voiceComponent.Sounds, Is.Not.Null, message: "the MobHuman spawned by this test needs to have sex-specific sound set");

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <OutputPath>..\bin\Content.Client\</OutputPath>
@@ -27,13 +27,16 @@
     <AdditionalFiles Update="SS220\TTS\UI\TtsVoicePreferencesTab.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AdditionalFiles>
-    <AdditionalFiles Update="SS220\TTS\UI\TTSVoicePreferencesTabEntry.xaml">
+    <AdditionalFiles Update="SS220\TTS\UI\TtsVoicePreferencesTabEntry.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AdditionalFiles>
   </ItemGroup>
   <ItemGroup>
     <Compile Update="SS220\TTS\UI\TtsVoicePreferencesTab.xaml.cs">
       <DependentUpon>TtsVoicePreferencesTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="SS220\TTS\UI\TtsVoicePreferencesTabEntry.xaml.cs">
+      <DependentUpon>TtsVoicePreferencesTabEntry.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

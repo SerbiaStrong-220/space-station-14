@@ -9,6 +9,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Generic;
 using Robust.Shared.Serialization.TypeSerializers.Interfaces;
 using Robust.Shared.Utility;
 using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Content.Shared.SS220.TTS;
@@ -35,27 +36,60 @@ public sealed partial class TtsVoicePreferences : IEnumerable<KeyValuePair<TtsPr
         }
     }
 
-    public bool Add(TtsProvider provider, ProtoId<TtsVoicePrototype> protoId)
+    public bool Add(TtsProvider provider, ProtoId<TtsVoicePrototype> voice)
     {
-        if (!InternalAdd(provider, protoId))
+        if (!InternalAdd(provider, voice))
             return false;
 
         _keys.Add(provider);
         return true;
     }
 
-    public bool Insert(int index, TtsProvider provider, ProtoId<TtsVoicePrototype> protoId)
+    public bool Insert(int index, TtsProvider provider, ProtoId<TtsVoicePrototype> voice)
     {
-        if (!InternalAdd(provider, protoId))
+        if (!InternalAdd(provider, voice))
             return false;
 
         _keys.Insert(index, provider);
         return true;
     }
 
-    private bool InternalAdd(TtsProvider provider, ProtoId<TtsVoicePrototype> protoId)
+    public bool Remove(int index)
     {
-        if (!_dict.TryAdd(provider, protoId))
+        return Remove(index, out _);
+    }
+
+    public bool Remove(int index, [NotNullWhen(true)] out ProtoId<TtsVoicePrototype>? voice)
+    {
+        voice = null;
+        if (_keys.Count > index - 1)
+            return false;
+
+        return Remove(_keys[index], out voice);
+    }
+
+    public bool Remove(TtsProvider provider)
+    {
+        return Remove(provider, out _);
+    }
+
+    public bool Remove(TtsProvider provider, [NotNullWhen(true)] out ProtoId<TtsVoicePrototype>? voice)
+    {
+        voice = null;
+        if (!_dict.Remove(provider, out var exist))
+            return false;
+
+        voice = exist;
+
+        DebugTools.Assert(_keys.Contains(provider));
+        _keys.Remove(provider);
+
+        return true;
+    }
+
+    private bool InternalAdd(TtsProvider provider, ProtoId<TtsVoicePrototype> voice)
+    {
+        if (!_dict.TryAdd(provider, voice))
             return false;
 
         DebugTools.Assert(!_keys.Contains(provider));

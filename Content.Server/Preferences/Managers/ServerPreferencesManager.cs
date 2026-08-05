@@ -181,7 +181,6 @@ namespace Content.Server.Preferences.Managers
                 profile.CharacterName,
                 profile.FlavorText,
                 species,
-                profile.Voice,
                 profile.Age,
                 sex,
                 gender,
@@ -197,6 +196,7 @@ namespace Content.Server.Preferences.Managers
                 antags.ToHashSet(),
                 traits.ToHashSet(),
                 loadouts,
+                null, // SS220 tts Kirus ToDo: fix this
                 signatureData,
                 profile.TeleportAfkToCryoStorage
             );

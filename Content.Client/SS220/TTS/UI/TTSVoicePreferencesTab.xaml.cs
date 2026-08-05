@@ -26,6 +26,7 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
 
     public TtsVoicePreferences VoicePreferences { get; private set; }
 
+    private int? _draggedEntryStartPos;
     private TtsVoicePreferencesTabEntry? _draggedEntry;
     private TtsProviderVoiceSelectorWindow? _selectorWindow;
 
@@ -191,6 +192,8 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
 
         _draggedEntry = entry;
         _draggedEntry.LightOverlay.Visible = true;
+
+        _draggedEntryStartPos = _draggedEntry.GetPositionInParent();
     }
 
     private void StopDragEntry()
@@ -199,6 +202,18 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
             return;
 
         _draggedEntry.LightOverlay.Visible = false;
+
+        var newPos = _draggedEntry.GetPositionInParent();
+        if (newPos != _draggedEntryStartPos)
+        {
+            VoicePreferences.Remove(_draggedEntry.Provider);
+            VoicePreferences.Insert(newPos, _draggedEntry.Provider, _draggedEntry.ProtoId);
+            Refresh();
+
+            OnPreferencesChanged?.Invoke();
+        }
+
         _draggedEntry = null;
+        _draggedEntryStartPos = null;
     }
 }
