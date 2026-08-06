@@ -13,6 +13,17 @@
   abstract: true
   name: base synth optics
   components:
+  - type: Damageable
+    damageContainer: Synthetic
+    damageModifierSet: Synthetic
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 40
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
   - type: SiliconPart
     partType: Optics
   - type: ActiveOptics
@@ -56,6 +67,17 @@
   #abstract: true
   name: base synth servo
   components:
+  - type: Damageable
+    damageContainer: Synthetic
+    damageModifierSet: Synthetic
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 50
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
   - type: Servo
   - type: SiliconPart
     partType: Servo
@@ -64,10 +86,21 @@
 - type: entity
   id: SynthDriveBase
   parent: SynthPartBase
-  #abstract: true
+  abstract: true
   name: base synth drive
   components:
   - type: Drive
+  - type: Damageable
+    damageContainer: Synthetic
+    damageModifierSet: Synthetic
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 40
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
   - type: SiliconPart
     partType: Drive
   - type: Item
@@ -80,6 +113,17 @@
   components:
   - type: SiliconPart
     partType: Spine
+  - type: Damageable
+    damageContainer: Synthetic
+    damageModifierSet: Synthetic
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 80
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
   - type: Item
     size: Ginormous
 

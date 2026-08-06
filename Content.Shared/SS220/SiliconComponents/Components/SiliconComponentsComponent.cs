@@ -71,6 +71,9 @@ public sealed partial class SiliconComponentsComponent : Component
     public TimeSpan NextBatteryUpdate = TimeSpan.Zero;
 
     [DataField]
+    public ProtoId<AlertPrototype> MalfunctionAlertProto = "Malfunctions";
+
+    [DataField]
     public SoundSpecifier? UnlockSound = new SoundPathSpecifier("/Audio/Machines/door_lock_off.ogg")
     {
         Params = AudioParams.Default.WithVolume(-5f),

@@ -39,7 +39,7 @@ public sealed partial class InternalComponentDamageRelaySystem : EntitySystem
         if (!TryGetNetEntity(ent.Owner, out var netEnt))
             return;
 
-        var rand = new System.Random((int)_gameTiming.CurFrame + netEnt.Value.Id);
+        var rand = new System.Random(_gameTiming.CurTick.GetHashCode() + netEnt.Value.Id);
 
         var containerID = _prototype.Index(ent.Comp.Containers).Pick(rand);
 

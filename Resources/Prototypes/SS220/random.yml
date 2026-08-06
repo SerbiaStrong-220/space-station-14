@@ -2,7 +2,7 @@
   id: SynthParts
   weights:
     silicon_component_Optics: 1
-    silicon_component_Servo: 3
-    silicon_component_Drive: 3
-    silicon_component_Spine: 7
-    None: 10
+    #silicon_component_Servo: 3
+    #silicon_component_Drive: 3
+    silicon_component_Spine: 2
+    №None: 7

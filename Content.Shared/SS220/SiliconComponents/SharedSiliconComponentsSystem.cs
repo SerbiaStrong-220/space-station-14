@@ -1,6 +1,9 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 
 using Content.Shared.ActionBlocker;
+using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
@@ -21,6 +24,7 @@ using Content.Shared.Wires;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -38,19 +42,21 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
     [Dependency] private BlindableSystem _blindable = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private StatusEffectsSystem _statusEffects = default!;
-    [Dependency] private SharedUserInterfaceSystem _uiSystem = default!;
-    [Dependency] private ActionBlockerSystem _blockerSystem = default!;
     [Dependency] private SiliconModuleSystem _module = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedWiresSystem _wires = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SiliconPartSystem _parts = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private static readonly LocId NotEnoughSpace = "silicon-component-not-enough-space";
     private static readonly LocId InstallationBegun = "silicon-component-begin-install";
     private static readonly LocId RemovalBegun = "silicon-component-begin-removal";
     private static readonly LocId BuiAltVerbOpen = "ui-silicon-open-wires";
     private static readonly LocId BuiAltVerbClose = "ui-silicon-close-wires";
-    private static readonly SiliconUiKey UiKey = SiliconUiKey.Key;
+
+    private static readonly ProtoId<DamageTypePrototype> EyeDamageType = "Heat";
 
     private static readonly string PartContainerPrefix = "silicon_component";
 
@@ -80,6 +86,8 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
         SubscribeLocalEvent<SiliconComponentsComponent, SiliconEjectPartBuiMessage>(OnEjectPartBuiMessage);
         SubscribeLocalEvent<SiliconComponentsComponent, SiliconEjectBatteryBuiMessage>(OnEjectBatteryBuiMessage);
         SubscribeLocalEvent<SiliconComponentsComponent, SiliconRemoveModuleBuiMessage>(OnRemoveModuleBuiMessage);
+
+        SubscribeLocalEvent<SiliconComponentsComponent, DamageChangedEvent>(OnDamageChanged);
 
         SubscribeLocalEvent<SiliconComponentsComponent, FlashAttemptEvent>(RefRelayPartEvent);
         SubscribeLocalEvent<SiliconComponentsComponent, GetEyeProtectionEvent>(RefRelayPartEvent);
@@ -257,6 +265,8 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
             var userEv = new ComponentInsertedIntoUser(args.Entity);
             RaiseLocalEvent(ent.Owner, ref userEv);
 
+            _parts.RefreshAlerts(ent.AsNullable());
+
             UpdateUI(ent.AsNullable());
         }
 
@@ -296,6 +306,8 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
 
             var userEv = new ComponentRemovedFromUser(args.Entity);
             RaiseLocalEvent(ent.Owner, ref userEv);
+
+            _parts.RefreshAlerts(ent.AsNullable());
 
             UpdateUI(ent.AsNullable());
         }
@@ -382,6 +394,11 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
         };
 
         _doAfter.TryStartDoAfter(doAfterEventArgs);
+    }
+
+    private void OnDamageChanged(Entity<SiliconComponentsComponent> ent, ref DamageChangedEvent args)
+    {
+        _parts.RefreshAlerts(ent.AsNullable());
     }
 
     private void OnPartInstall(Entity<SiliconComponentsComponent> ent, ref InstallSiliconPartEvent args)
@@ -537,16 +554,6 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
         args.Handled = true;
     }
 
-    private void OnEyeDamage(Entity<SiliconComponentsComponent> ent, ref EyeDamageChangedEvent args)
-    {
-        if (!_timing.IsFirstTimePredicted)
-            return;
-
-        if (TryGetPart(ent.AsNullable(), PartType.Optics, out var opticsUid) &&
-            TryComp<ActiveOpticsComponent>(opticsUid, out var opticsComp))
-            opticsComp.EyeDamage = args.Damage;
-    }
-
     public bool TryGetPart(Entity<SiliconComponentsComponent?> ent, PartType type, out EntityUid? partUid)
     {
         partUid = null;
@@ -652,7 +659,7 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
 
     private void OnGetVerbs(Entity<SiliconComponentsComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
-        if (!args.CanInteract || !args.CanAccess || args.Hands == null)
+        if (args.User != ent.Owner)
             return;
 
         if (TryComp<LockComponent>(ent.Owner, out var lockComp) &&
@@ -672,6 +679,24 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
             Text = Loc.GetString(messageId),
             Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/VerbIcons/settings.svg.192dpi.png")),
         });
+    }
+
+    private void OnEyeDamage(Entity<SiliconComponentsComponent> ent, ref EyeDamageChangedEvent args)
+    {
+        if (!TryGetPart(ent.AsNullable(), PartType.Optics, out var opticsEnt) ||
+            opticsEnt is not { Valid: true } opticsEntValidated)
+            return;
+
+        if (!TryComp<DamabeableSiliconPartComponent>(opticsEntValidated, out var damageablePartComp))
+            return;
+
+        if (!TryComp<BlindableComponent>(opticsEntValidated, out var blindableComp))
+            return;
+
+        var requiredDamage = damageablePartComp.MaxDamageToRemainFunctional * (blindableComp.EyeDamage / blindableComp.MaxDamage);
+
+        if (_damageableSystem.GetTotalDamage(opticsEntValidated) < requiredDamage)
+            _damageableSystem.TryChangeDamage(opticsEntValidated, new DamageSpecifier(_prototype.Index(EyeDamageType), requiredDamage - _damageableSystem.GetTotalDamage(opticsEntValidated)));
     }
 
     private void TogglePanel(Entity<SiliconComponentsComponent> ent, bool open)

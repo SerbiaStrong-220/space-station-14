@@ -15,3 +15,14 @@
   - Shock
   - Caustic
 
+- type: damageContainer
+  id: Synthetic
+  supportedGroups:
+    - Brute
+  supportedTypes:
+    - Heat
+    - Shock
+    - Cold
+    - Radiation
+
+

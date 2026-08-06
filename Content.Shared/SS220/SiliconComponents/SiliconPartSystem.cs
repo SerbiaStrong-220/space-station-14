@@ -1,7 +1,7 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 
+using Content.Shared.Alert;
 using Content.Shared.Body.Components;
-using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
@@ -12,6 +12,7 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.SS220.AltBlocking;
 using Content.Shared.SS220.Experience;
 using Content.Shared.SS220.Mind;
+using Content.Shared.Stunnable;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -23,13 +24,15 @@ public sealed partial class SiliconPartSystem : EntitySystem
 {
     [Dependency] private DamageableSystem _damageableSystem = default!;
     [Dependency] private BlindableSystem _blindable = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private IEntityManager _entManager = default!;
     [Dependency] private MovementSpeedModifierSystem _movement = default!;
+    [Dependency] private SharedSiliconComponentsSystem _siliconComponents = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
 
     private static readonly string PartContainerPrefix = "silicon_component";
 
@@ -67,6 +70,8 @@ public sealed partial class SiliconPartSystem : EntitySystem
         SubscribeLocalEvent<SiliconComponentsComponent, MindAddedMessage>(OnSiliconMindAdded);
 
         SubscribeLocalEvent<DamabeableSiliconPartComponent, DamageChangedEvent>(OnDamageChanged);
+
+        SubscribeLocalEvent<DamabeableSiliconPartComponent, ComponentGotInsertedIntoUser>(OnDamageableInserted);
     }
 
     private void OnComponentStartup(Entity<DamabeableSiliconPartComponent> ent, ref ComponentStartup args)
@@ -82,6 +87,11 @@ public sealed partial class SiliconPartSystem : EntitySystem
     private void OnDamageChanged(Entity<DamabeableSiliconPartComponent> ent, ref DamageChangedEvent args)
     {
         UpdateDamageStatus(ent);
+    }
+
+    private void OnDamageableInserted(Entity<DamabeableSiliconPartComponent> ent, ref ComponentGotInsertedIntoUser args)
+    {
+        RefreshAlerts(args.Owner);
     }
 
     private void UpdateDamageStatus(Entity<DamabeableSiliconPartComponent> ent)
@@ -100,10 +110,11 @@ public sealed partial class SiliconPartSystem : EntitySystem
 
         if (_damageableSystem.GetTotalDamage(ent.Owner) > ent.Comp.MaxDamageToRemainFunctional && partComp.Active)
         {
+            partComp.Active = false;
+
             var offlineEv = new SiliconPartStatusOffline(partComp.PartOwner);
             RaiseLocalEvent(ent.Owner, ref offlineEv);
 
-            partComp.Active = false;
             Dirty(ent);
 
             return;
@@ -111,13 +122,10 @@ public sealed partial class SiliconPartSystem : EntitySystem
 
         if (_damageableSystem.GetTotalDamage(ent.Owner) < ent.Comp.MaxDamageToRemainFunctional && !partComp.Active)
         {
+            partComp.Active = true;
+
             var onlineEv = new SiliconPartStatusOnline(partComp.PartOwner);
             RaiseLocalEvent(ent.Owner, ref onlineEv);
-
-            partComp.Active = true;
-            Dirty(ent);
-
-            return;
         }
 
         Dirty(ent);
@@ -144,13 +152,6 @@ public sealed partial class SiliconPartSystem : EntitySystem
         {
             args.Cancel();
             return;
-        }
-
-        if (TryComp<DamabeableSiliconPartComponent>(opticsValidated, out var damageablePartComp) &&
-            TryComp<DamageableComponent>(opticsValidated, out var damageableComp) &&
-            TryComp<BlindableComponent>(ent.Owner, out var blindableComp))
-        {
-            _blindable.AdjustEyeDamage(ent.Owner, FixedPoint2.Clamp(_damageableSystem.GetTotalDamage(ent.Owner) / damageablePartComp.MaxDamageToRemainFunctional * 9, 0, 9).Int() - blindableComp.EyeDamage);
         }
     }
 
@@ -191,6 +192,9 @@ public sealed partial class SiliconPartSystem : EntitySystem
 
     private void OnBrainInserted(Entity<BrainComponent> ent, ref ComponentGotInsertedIntoUser args)
     {
+        if (TerminatingOrDeleted(ent) || TerminatingOrDeleted(args.Owner))
+            return;
+
         if (!TryComp<SiliconPartComponent>(ent.Owner, out var partComp))
             return;
 
@@ -254,6 +258,9 @@ public sealed partial class SiliconPartSystem : EntitySystem
 
     private void OnBrainRemoved(Entity<BrainComponent> ent, ref ComponentGotRemovedFromUser args)
     {
+        if (TerminatingOrDeleted(ent) || TerminatingOrDeleted(args.Owner))
+            return;
+
         if (TryComp<AdminForcedExperienceAddComponent>(args.Owner, out var userAdminExperience))
         {
             var brainAdminExperience = EnsureComp<AdminForcedExperienceAddComponent>(ent.Owner);
@@ -360,12 +367,12 @@ public sealed partial class SiliconPartSystem : EntitySystem
         if (!HasComp<SiliconComponentsComponent>(args.Owner))
             return;
 
-        if (!TryComp<SiliconPartComponent>(ent.Owner, out var partComp) || args.Owner is not { Valid: true } || !partComp.Active)
+        if (!TryComp<SiliconPartComponent>(ent.Owner, out var partComp) || args.Owner is not { Valid: true })
             return;
 
-        if (TryComp<DamabeableSiliconPartComponent>(args.Owner, out var damageablePartComp))
+        if (TryComp<DamabeableSiliconPartComponent>(ent.Owner, out var damageablePartComp))
             if (TryComp<BlindableComponent>(args.Owner, out var ownerBlindableComp))
-                _blindable.AdjustEyeDamage(args.Owner, Math.Max(ent.Comp.EyeDamage, (ownerBlindableComp.MaxDamage * damageablePartComp.CurrentDamageEfficiencyModifier).Int()) - ownerBlindableComp.EyeDamage);
+                _blindable.AdjustEyeDamage(args.Owner, (ownerBlindableComp.MaxDamage * damageablePartComp.CurrentDamageEfficiencyModifier).Int() - ownerBlindableComp.EyeDamage);
 
         _blindable.UpdateIsBlind(args.Owner);
     }
@@ -426,6 +433,48 @@ public sealed partial class SiliconPartSystem : EntitySystem
         return true;
     }
 
+    public void RefreshAlerts(Entity<SiliconComponentsComponent?> ent)
+    {
+        if (!Resolve(ent.Owner, ref ent.Comp))
+            return;
+
+        short severity = -1;
+
+        foreach (var part in ent.Comp.Parts.Keys)
+        {
+            if (!_siliconComponents.TryGetPart(ent, part, out var partUid) ||
+                partUid is not { Valid: true } partValidated ||
+                !TryComp<DamabeableSiliconPartComponent>(partValidated, out var partDamageableComp))
+                continue;
+
+            if (_damageableSystem.GetTotalDamage(partValidated) >= partDamageableComp.MinDamageToMalfunction)
+                severity += 1;
+        }
+
+        if (severity == -1)
+        {
+            _alerts.ClearAlert(ent.Owner, ent.Comp.MalfunctionAlertProto);
+            return;
+        }
+
+        _alerts.UpdateAlert(ent.Owner, ent.Comp.MalfunctionAlertProto, severity: severity);
+    }
+
+    public void SetOperational(Entity<SiliconComponentsComponent?> ent, bool operational)
+    {
+        if (!Resolve(ent.Owner, ref ent.Comp))
+            return;
+
+        if (operational)
+        {
+            RemComp<StunnedComponent>(ent);
+            RemComp<KnockedDownComponent>(ent);
+            return;
+        }
+
+        EnsureComp<StunnedComponent>(ent);
+        EnsureComp<KnockedDownComponent>(ent);
+    }
 }
 
 [ByRefEvent]

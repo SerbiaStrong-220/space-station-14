@@ -385,8 +385,8 @@
       - NoConsoleSound
   - type: LockedWiresPanel
   - type: Damageable
-    damageContainer: Silicon
-    damageModifierSet: Silicon
+    damageContainer: Synthetic
+    damageModifierSet: Synthetic
   - type: Blindable
   - type: ExplosionResistance
     damageCoefficient: 0.7
@@ -519,7 +519,7 @@
       silicon_component_Spine:
         - SynthSpineSteel
       silicon_component_Drive:
-        - SynthDriveBase
+        - SynthDrive
       key_slots:
       - EncryptionKeyCommon
   - type: SiliconComponents

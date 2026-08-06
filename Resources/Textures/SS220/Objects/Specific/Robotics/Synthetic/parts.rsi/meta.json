@@ -30,6 +30,12 @@
         },
         {
             "name": "camera_welding"
+        },
+        {
+            "name": "basic_drive"
+        },
+        {
+            "name": "advanced_drive"
         }
     ]
 }

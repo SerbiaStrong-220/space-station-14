@@ -5,11 +5,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared.SS220.SiliconComponents;
 
 [RegisterComponent]
-[NetworkedComponent, AutoGenerateComponentState]
 
 public sealed partial class ActiveOpticsComponent : Component
 {
-    [DataField]
-    [AutoNetworkedField]
-    public int EyeDamage = 0;
 }
