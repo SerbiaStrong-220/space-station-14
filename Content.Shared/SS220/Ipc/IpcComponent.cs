@@ -69,7 +69,7 @@ public sealed partial class IpcComponent : Component
     /// Damage taken by IPC from EMP.
     /// </summary>
     [DataField]
-    public float DamageFromEmp = 0; /// ICP remove EMP damage fix.
+    public float DamageFromEmp = 30;
 
     /// <summary>
     /// The minimum difference from the NormalBodyTemperature
