@@ -21,7 +21,7 @@ namespace Content.Server.Database.Migrations.Postgres
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.0")
+                .HasAnnotation("ProductVersion", "10.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -835,7 +835,7 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("integer")
                         .HasColumnName("ban_id");
 
-                    b.Property<string>("Discriminator")
+                    b.Property<string>("discriminator")
                         .IsRequired()
                         .HasMaxLength(13)
                         .HasColumnType("character varying(13)")
@@ -849,7 +849,7 @@ namespace Content.Server.Database.Migrations.Postgres
 
                     b.ToTable("iban_role", (string)null);
 
-                    b.HasDiscriminator().HasValue("IBanRole");
+                    b.HasDiscriminator<string>("discriminator").HasValue("IBanRole");
 
                     b.UseTphMappingStrategy();
                 });
@@ -1137,11 +1137,6 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Property<bool>("TeleportAfkToCryoStorage")
                         .HasColumnType("boolean")
                         .HasColumnName("teleport_afk_to_cryo_storage");
-
-                    b.Property<string>("Voice")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("voice");
 
                     b.HasKey("Id")
                         .HasName("PK_profile");
