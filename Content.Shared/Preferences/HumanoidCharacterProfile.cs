@@ -77,11 +77,6 @@ namespace Content.Shared.Preferences
         [DataField]
         public string FlavorText { get; set; } = string.Empty;
 
-        // Corvax-TTS begin
-        [DataField]
-        public string Voice { get; private set; } = DefaultVoice;
-        // Corvax-TTS end
-
         // SS220 TTS begin
         [DataField]
         public TtsVoicePreferences VoicePreferences = SharedTtsSystem.DefaultVoicePreferences.Clone();
@@ -280,12 +275,16 @@ namespace Content.Shared.Preferences
                 age = random.Next(speciesPrototype.MinAge, speciesPrototype.OldAge); // people don't look and keep making 119 year old characters with zero rp, cap it at middle aged
             }
 
-            // Corvax-TTS-Start
-            var voiceId = random.Pick(prototypeManager
-                .EnumeratePrototypes<TtsVoicePrototype>()
-                .Where(o => CanHaveVoice(o, sex)).ToArray()
-            ).ID;
-            // Corvax-TTS-End
+            // SS220 tts begin
+            var ttsSystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<SharedTtsSystem>();
+            var voicePreferences = new TtsVoicePreferences();
+            foreach (var provider in Enum.GetValues<TtsProvider>())
+            {
+                // Kirus ToDo: добавить выборку по доступным голосам (по полу, спонсорке и т.д.)
+                var providerVoice = random.Pick(ttsSystem.EnumerateProviderVoices(provider).ToArray());
+                voicePreferences.Add(provider, providerVoice);
+            }
+            // SS220 tts end
 
             var gender = Gender.Epicene;
 
@@ -309,7 +308,7 @@ namespace Content.Shared.Preferences
                 Gender = gender,
                 Species = species,
                 Appearance = HumanoidCharacterAppearance.Random(species, sex),
-                Voice = voiceId // ss220 edit
+                VoicePreferences = voicePreferences // SS220 tts
             };
         }
 
@@ -536,6 +535,8 @@ namespace Content.Shared.Preferences
             if (other.SignatureData != null && !other.SignatureData.Equals(SignatureData)) return false;
             // ss220 add signature end
 
+            if (!VoicePreferences.SequenceEqual(other.VoicePreferences)) return false; // SS220 tts
+
             if (SpawnPriority != other.SpawnPriority) return false;
             if (!_jobPriorities.SequenceEqual(other._jobPriorities)) return false;
             if (!_antagPreferences.SequenceEqual(other._antagPreferences)) return false;
@@ -714,10 +715,12 @@ namespace Content.Shared.Preferences
                 _loadouts.Remove(value);
             }
 
+
+            // Kirus ToDo: исправить как будет механ ограничения голосов
             // Corvax-TTS-Start
-            prototypeManager.TryIndex<TtsVoicePrototype>(Voice, out var voice);
-            if (voice is null || !CanHaveVoice(voice, Sex))
-                Voice = DefaultVoice;
+            //prototypeManager.TryIndex<TtsVoicePrototype>(Voice, out var voice);
+            //if (voice is null || !CanHaveVoice(voice, Sex))
+            //    Voice = DefaultVoice;
             // Corvax-TTS-End
         }
 

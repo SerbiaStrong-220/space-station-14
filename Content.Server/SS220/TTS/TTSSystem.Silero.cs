@@ -48,6 +48,9 @@ public partial class TtsSystem
 
         public override async Task<TtsResponse.Reference?> ConvertTextToSpeech(string text, string speaker, TtsKind kind)
         {
+            if (string.IsNullOrEmpty(_apiUrl) || string.IsNullOrEmpty(_apiToken))
+                return null;
+
             WantedCount.Inc();
 
             var cacheKey = new TtsCacheKey(TtsCacheKey.DefaultDivider, text, speaker, kind.ToString());

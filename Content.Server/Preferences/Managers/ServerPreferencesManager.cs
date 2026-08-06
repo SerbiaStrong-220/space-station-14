@@ -15,6 +15,7 @@ using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
+using Content.Shared.SS220.TTS;
 using Content.Shared.Traits;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
@@ -101,11 +102,18 @@ namespace Content.Server.Preferences.Managers
             if (Enum.TryParse<Sex>(profile.Sex, true, out var sexVal))
                 sex = sexVal;
 
-            // Corvax-TTS-Start
-            var voice = profile.Voice;
-            if (voice == String.Empty)
-                voice = HumanoidCharacterProfile.DefaultVoice;
-            // Corvax-TTS-End
+            // SS220 tts begin
+            var voicePreferences = new TtsVoicePreferences();
+            foreach (var (providerIndex, voiceId) in profile.VoicePreferences)
+            {
+                if (!Enum.IsDefined(typeof(TtsProvider), providerIndex))
+                    continue;
+
+                voicePreferences.Add((TtsProvider)providerIndex, voiceId);
+            }
+
+            voicePreferences.SoftMergeWith(SharedTtsSystem.DefaultVoicePreferences);
+            // SS220 tts end
 
             var spawnPriority = (SpawnPriorityPreference) profile.SpawnPriority;
 
@@ -196,7 +204,7 @@ namespace Content.Server.Preferences.Managers
                 antags.ToHashSet(),
                 traits.ToHashSet(),
                 loadouts,
-                null, // SS220 tts Kirus ToDo: fix this
+                voicePreferences, // SS220 tts
                 signatureData,
                 profile.TeleportAfkToCryoStorage
             );

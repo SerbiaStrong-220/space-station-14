@@ -19,7 +19,7 @@ public abstract partial class SharedTtsSystem : EntitySystem
 
     public static readonly TtsVoicePreferences DefaultVoicePreferences = new()
     {
-        [TtsProvider.Silero] = "SileroDefault",
+        [TtsProvider.Silero] = "SileroTest",
         [TtsProvider.NTTS] = "father_grigori"
     };
 
@@ -65,7 +65,7 @@ public abstract partial class SharedTtsSystem : EntitySystem
     public bool TryGetAvailableVoiceId(Entity<TtsComponent?> entity, [NotNullWhen(true)] out ProtoId<TtsVoicePrototype>? voiceId, bool allowOverride = true)
     {
         voiceId = null;
-        if (IsAnyProviderEnabled())
+        if (!IsAnyProviderEnabled())
             return false;
 
         if (!TryGetVoicePreferences(entity, out var preferences))

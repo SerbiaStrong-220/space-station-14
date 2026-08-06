@@ -26,6 +26,6 @@ public partial class HumanoidProfileEditor
     private void SetVoicePreferences(TtsVoicePreferences preferences)
     {
         Profile = Profile?.WithVoicePreferences(preferences.Clone());
-        IsDirty = true;
+        SetDirty();
     }
 }

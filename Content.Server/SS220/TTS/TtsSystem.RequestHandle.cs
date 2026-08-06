@@ -287,10 +287,8 @@ public partial class TtsSystem
             RaiseNetworkEvent(msg, receiver);
     }
 
-    private IEnumerable<ITtsSpokeRequest> SplitRequestByLanguage(ITtsSpokeRequest request, LanguageMessage languageMessage)
+    private static IEnumerable<ITtsSpokeRequest> SplitRequestByLanguage(ITtsSpokeRequest request, LanguageMessage languageMessage)
     {
-        DebugTools.Assert(request.Text == languageMessage.OriginalMessage);
-
         Dictionary<string, ITtsSpokeRequest> result = [];
 
         foreach (var receiver in request.Receivers)

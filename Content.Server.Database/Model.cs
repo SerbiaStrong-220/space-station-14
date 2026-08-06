@@ -333,7 +333,6 @@ namespace Content.Server.Database
         public string Sex { get; set; } = null!;
         public string Gender { get; set; } = null!;
         public string Species { get; set; } = null!;
-        public string Voice { get; set; } = null!; // Corvax-TTS
         [Column(TypeName = "jsonb")] public JsonDocument? OrganMarkings { get; set; } = null!;
         [Column(TypeName = "jsonb")] public JsonDocument? Markings { get; set; } = null!;
         public string HairName { get; set; } = null!;
@@ -346,6 +345,7 @@ namespace Content.Server.Database
         public List<Job> Jobs { get; } = new();
         public List<Antag> Antags { get; } = new();
         public List<Trait> Traits { get; } = new();
+        public List<KeyValuePair<int, string>> VoicePreferences { get; } = []; // SS220 tts 
         public string? SignatureData { get; set; } // ss220 add signature
         public bool TeleportAfkToCryoStorage { get; set; } = true; // SS220-teleport-to-cryo-storage
 

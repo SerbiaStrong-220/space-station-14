@@ -5,7 +5,7 @@ namespace Content.Shared.SS220.CCVars;
 public sealed partial class CCVars220
 {
     public static readonly CVarDef<bool> TTSEnabled =
-        CVarDef.Create("tts.enabled", false, CVar.SERVER | CVar.REPLICATED | CVar.NOTIFY);
+        CVarDef.Create("tts.enabled", true, CVar.SERVER | CVar.REPLICATED | CVar.NOTIFY);
 
     /// <summary>
     /// Default volume setting of TTS sound
@@ -95,7 +95,7 @@ public sealed partial class CCVars220
 
     #region Silero
     public static readonly CVarDef<bool> TtsSileroEnabled =
-         CVarDef.Create("tts.silero.enabled", false, CVar.SERVER | CVar.REPLICATED | CVar.NOTIFY);
+         CVarDef.Create("tts.silero.enabled", true, CVar.SERVER | CVar.REPLICATED | CVar.NOTIFY);
 
     public static readonly CVarDef<string> TTSSileroApiUrl =
         CVarDef.Create("tts.silero.api_url", "", CVar.SERVERONLY);

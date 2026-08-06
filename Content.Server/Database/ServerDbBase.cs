@@ -216,7 +216,6 @@ namespace Content.Server.Database
             profile.CharacterName = humanoid.Name;
             profile.FlavorText = humanoid.FlavorText;
             profile.Species = humanoid.Species;
-            profile.Voice = humanoid.Voice; // Corvax-TTS
             profile.Age = humanoid.Age;
             profile.Sex = humanoid.Sex.ToString();
             profile.Gender = humanoid.Gender.ToString();
@@ -251,6 +250,11 @@ namespace Content.Server.Database
                 profile.SignatureData = SignatureSerializer.Serialize(humanoid.SignatureData);
             }
             // ss220 add signature end
+
+            // SS220 tts begin
+            profile.VoicePreferences.Clear();
+            profile.VoicePreferences.AddRange(humanoid.VoicePreferences.Select(x => new KeyValuePair<int, string>((int)x.Key, x.Value)));
+            // SS220 tts end
 
             profile.Jobs.Clear();
             profile.Jobs.AddRange(
