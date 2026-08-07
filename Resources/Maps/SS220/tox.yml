@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 07/07/2026 06:14:38
-  entityCount: 59536
+  time: 08/07/2026 03:59:34
+  entityCount: 59539
 maps:
 - 1
 grids:
@@ -37550,7 +37550,7 @@ entities:
       pos: -10.5,-8.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -28432.387
+      secondsUntilStateChange: -28536.94
       state: Opening
   - uid: 548
     components:
@@ -56163,6 +56163,30 @@ entities:
           - AutoClose
         - - Timer
           - Open
+    - type: Fixtures
+      fixtures: {}
+  - uid: 59537
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -5.5,77.5
+      parent: 2
+    - type: Fixtures
+      fixtures: {}
+  - uid: 59538
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -5.5,76.5
+      parent: 2
+    - type: Fixtures
+      fixtures: {}
+  - uid: 59539
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -5.5,75.5
+      parent: 2
     - type: Fixtures
       fixtures: {}
 - proto: BrokenBorgEngineer
@@ -180242,8 +180266,8 @@ entities:
   - uid: 26681
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -6.5,77.5
+      rot: 1.5707963267948966 rad
+      pos: -10.5,75.5
       parent: 2
   - uid: 26682
     components:
@@ -276037,17 +276061,12 @@ entities:
   - uid: 39336
     components:
     - type: Transform
-      pos: -6.5,77.5
-      parent: 2
-  - uid: 39337
-    components:
-    - type: Transform
-      pos: -6.5,76.5
+      pos: -10.5,76.5
       parent: 2
   - uid: 39338
     components:
     - type: Transform
-      pos: -6.5,75.5
+      pos: -10.5,75.5
       parent: 2
   - uid: 39339
     components:
@@ -276129,6 +276148,11 @@ entities:
     components:
     - type: Transform
       pos: 97.5,-14.5
+      parent: 2
+  - uid: 58290
+    components:
+    - type: Transform
+      pos: -10.5,77.5
       parent: 2
 - proto: LockerFreezerBase
   entities:
@@ -388740,20 +388764,20 @@ entities:
       bodyType: Static
 - proto: WardrobePrisonSecureFilled
   entities:
+  - uid: 39337
+    components:
+    - type: Transform
+      pos: -6.5,76.5
+      parent: 2
   - uid: 58288
     components:
     - type: Transform
-      pos: -10.5,77.5
+      pos: -6.5,77.5
       parent: 2
   - uid: 58289
     components:
     - type: Transform
-      pos: -10.5,76.5
-      parent: 2
-  - uid: 58290
-    components:
-    - type: Transform
-      pos: -10.5,75.5
+      pos: -6.5,75.5
       parent: 2
 - proto: WardrobeReporter
   entities:

@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 07/02/2026 12:17:30
-  entityCount: 33271
+  time: 08/07/2026 03:54:22
+  entityCount: 33277
 maps:
 - 1
 grids:
@@ -30676,6 +30676,34 @@ entities:
           - AutoClose
         - - Timer
           - Open
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21239
+    components:
+    - type: Transform
+      pos: -44.5,-2.5
+      parent: 2
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21240
+    components:
+    - type: Transform
+      pos: -45.5,-2.5
+      parent: 2
+    - type: Fixtures
+      fixtures: {}
+  - uid: 33276
+    components:
+    - type: Transform
+      pos: -43.5,-2.5
+      parent: 2
+    - type: Fixtures
+      fixtures: {}
+  - uid: 33277
+    components:
+    - type: Transform
+      pos: -46.5,-2.5
+      parent: 2
     - type: Fixtures
       fixtures: {}
 - proto: BrokenBorgEngineer
@@ -83440,7 +83468,7 @@ entities:
       pos: 61.5,-1.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -105538.36
+      secondsUntilStateChange: -105613.805
       state: Opening
   - uid: 11577
     components:
@@ -152341,16 +152369,6 @@ entities:
     - type: Transform
       pos: -29.5,-25.5
       parent: 2
-  - uid: 21239
-    components:
-    - type: Transform
-      pos: -47.5,-0.5
-      parent: 2
-  - uid: 21240
-    components:
-    - type: Transform
-      pos: -46.5,-0.5
-      parent: 2
   - uid: 21241
     components:
     - type: Transform
@@ -217562,6 +217580,28 @@ entities:
     components:
     - type: Transform
       pos: -38.5,-26.5
+      parent: 2
+- proto: WardrobePrisonSecureFilled
+  entities:
+  - uid: 23682
+    components:
+    - type: Transform
+      pos: -47.5,-0.5
+      parent: 2
+  - uid: 23683
+    components:
+    - type: Transform
+      pos: -46.5,-0.5
+      parent: 2
+  - uid: 23684
+    components:
+    - type: Transform
+      pos: -40.5,-0.5
+      parent: 2
+  - uid: 23685
+    components:
+    - type: Transform
+      pos: -41.5,-0.5
       parent: 2
 - proto: WardrobeSecurityFilled
   entities:
