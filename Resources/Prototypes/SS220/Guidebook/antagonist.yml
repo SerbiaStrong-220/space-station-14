@@ -3,3 +3,8 @@
   id: CultYogg
   name: guide-entry-cult-yogg
   text: "/ServerInfo/SS220/Guidebook/Antagonist/CultYogg.xml"
+
+- type: guideEntry
+  id: PirateExpansion
+  name: guide-entry-pirates
+  text: "/ServerInfo/SS220/Guidebook/Antagonist/Pirates.xml"
