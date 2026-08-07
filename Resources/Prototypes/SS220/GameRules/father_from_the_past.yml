@@ -1,0 +1,31 @@
+﻿- type: entity
+  parent: BaseGameRule
+  id: FatherFromThePastSpawn
+  components:
+  - type: StationEvent
+    weight: 2
+    duration: null
+    earliestStart: 30
+    maxOccurrences: 1
+    minimumPlayers: 15
+  - type: FatherFromThePastRule
+    yearDisplacement: 15
+  - type: AntagObjectives
+    objectives:
+    - FatherFromThePastObjective
+  - type: AntagSelection
+    agentName: father-from-the-past-round-end-agent-name
+    definitions:
+    - spawnerPrototype: SpawnPointGhostFatherFromThePast
+      min: 1
+      max: 1
+      pickPlayer: false
+      startingGear: GearFatherFromThePast
+      roleLoadout:
+      - RoleSurvivalVoxTank
+      briefing:
+        text: father-from-the-past-role-greeting
+- type: cloningSettings
+  id: FatherFromThePastCloningSettings
+  parent: ParadoxCloningSettings
+  copyEquipment: null
