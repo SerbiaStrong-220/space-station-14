@@ -515,7 +515,7 @@
     - id: Binary
 #SS220 languages revive end
   - type: SiliconLawProvider
-    laws: Crewsimov
+    laws: NTDefault #SS220-TweakRoundstartLawAI
   - type: SiliconLawBound
   - type: ActionGrant
     actions:
