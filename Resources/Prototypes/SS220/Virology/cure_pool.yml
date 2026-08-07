@@ -1,0 +1,17 @@
+# Every strain's cure (and per-symptom accelerants) is rolled from this pool. Prototype strains roll once per
+# round and cache it (same cure all round, different next round); superviruses roll their own on merge. Keep
+# `accelerants` disjoint from `natural`/`synthesized` — an accelerant must not cure.
+- type: virusCurePool
+  id: Default
+  natural:
+  - EZNutrient
+  - Cream
+  - Omnizine
+  synthesized:
+  - Tricordrazine
+  - Bruizine
+  - Dylovene
+  accelerants:
+  - HeartbreakerToxin
+  - Aloe
+  - Plasma

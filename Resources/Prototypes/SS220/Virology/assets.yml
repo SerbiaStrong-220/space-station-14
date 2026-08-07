@@ -1,0 +1,35 @@
+# Entity prototypes spawned at runtime by virology systems (projectiles and other thrown objects).
+
+# The fire-breathing projectile: a lighter fireball than the wizard's — heat damage + sets the target
+# alight + a small ~3-tile blast on impact that doesn't break tiles (BulletRocket triggers the explosion
+# on collision). Thrown by the ActionVirusFireBreathing action (see actions.yml).
+- type: entity
+  parent: BulletRocket
+  id: ProjectileVirusFireball
+  name: fireball
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: PointLight
+    color: "#E25822"
+    radius: 2.0
+    energy: 5.0
+  - type: Projectile
+    damage:
+      types:
+        Heat: 8
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/magic.rsi
+    layers:
+    - state: fireball
+      shader: unshaded
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 35
+    intensitySlope: 2
+    maxIntensity: 8
+    maxTileBreak: 0
+  - type: IgnitionSource
+    temperature: 400
+    ignited: true
+  - type: IgniteOnCollide
+    fireStacks: 2

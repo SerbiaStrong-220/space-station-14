@@ -1,3 +1,11 @@
+#Implants
+uplink-virus-immunity-implanter-name = Virus immunity implant
+uplink-virus-immunity-implanter-desc = A subdermal chip overclocking immune system, not very healthy long-term, but body can resist every virus.
+
+# Chemicals
+uplink-red-death-name = "Red Death" virus vial
+uplink-red-death-desc = A vial of stable mutagen seeded with the Red Death strain — a contagious plague that wracks the host with coughing, drains their stamina, and rots flesh and eyes alike. Spreads by both touch and proximity.
+
 #Misc
 
 uplink-clothing-eyes-hud-syndicate-agent-name = Syndicate agent Visor

@@ -53,6 +53,7 @@
     - RadioImplant
     - ChameleonControllerImplant
     - VoiceMaskImplant
+    - VirusImmunityImplant # SS220 virus immunity implant (removable so the immunity is cleared on extraction)
     deimplantFailureDamage:
       types:
         Cellular: 50

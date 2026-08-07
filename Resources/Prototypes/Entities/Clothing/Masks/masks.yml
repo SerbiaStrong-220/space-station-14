@@ -16,6 +16,11 @@
     resistedStunTypes:
       - Creampie
   #SS220 shield rework end
+  # SS220-Start
+  - type: VirusProtection
+    vectors: Proximity
+    blockChance: 0.9
+  # SS220-End
   - type: Tag
     tags:
     - HamsterWearable
@@ -167,6 +172,11 @@
     materialComposition:
       Steel: 50
       Plastic: 50
+  # SS220-Start
+  - type: VirusProtection
+    vectors: Proximity
+    blockChance: 0.6
+  # SS220-End
 
 - type: entity
   parent: ClothingMaskBreathMedical
@@ -215,6 +225,11 @@
       Plastic: 100
   - type: StaticPrice
     price: 30 # increases in price after decomposed into raw materials
+  # SS220-Start
+  - type: VirusProtection
+    vectors: Proximity
+    blockChance: 0.6
+  # SS220-End
 
 - type: entity
   parent: ClothingMaskBase
@@ -377,6 +392,10 @@
       Plastic: 25
   - type: StaticPrice
     price: 5
+  # SS220-Start
+  - type: VirusProtection
+    vectors: Proximity
+  # SS220-End
 
 - type: entity
   parent: ClothingMaskBase
@@ -419,6 +438,11 @@
     slots:
     - Snout
     hideOnToggle: true
+  # SS220-Start
+  - type: VirusProtection
+    vectors: Proximity
+    blockChance: 0.9
+  # SS220-End
 
 - type: entity
   parent: ClothingMaskClownBase

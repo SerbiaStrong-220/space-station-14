@@ -19,6 +19,7 @@
     tags:
     - Trash
     - CentrifugeCompatible # unique feature of vials
+  - type: VirusReactive # SS220 Virology
 
 ## Entities
 

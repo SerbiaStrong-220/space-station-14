@@ -6,3 +6,4 @@ ent-CrateCargoLottery5 = ящик лотерейных билетов
 
 ent-CrateCargoLottery10 = большой ящик лотерейных билетов
     .desc = { ent-CrateCargoLottery5.desc }
+

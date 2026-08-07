@@ -1,0 +1,59 @@
+# Broad antivirals
+# Ganoderma
+- type: reagent
+  id: GanodermaExtract
+  name: reagent-name-ganoderma-extract
+  group: Medicine
+  desc: reagent-desc-ganoderma-extract
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: bitter
+  color: "#6b3410"
+  metabolisms:
+    Bloodstream:
+      effects: []
+
+# Birfungin
+- type: reagent
+  id: Birfungin
+  name: reagent-name-birfungin
+  group: Medicine
+  desc: reagent-desc-birfungin
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: bitter
+  color: "#8fae6b"
+  metabolisms:
+    Bloodstream:
+      effects: []
+
+# Stable mutagen
+- type: reagent
+  id: StableMutagen
+  name: reagent-name-stable-mutagen
+  group: Toxins
+  desc: reagent-desc-stable-mutagen
+  physicalDesc: reagent-physical-desc-glowing
+  flavor: bitter
+  color: "#3aa856"
+
+- type: reaction
+  id: StableMutagen
+  reactants:
+    TranexamicAcid:
+      amount: 1
+    UnstableMutagen:
+      amount: 1
+    RobustHarvest:
+      amount: 1
+  products:
+    StableMutagen: 4
+
+# Vaccine
+- type: reagent
+  id: Vaccine
+  name: reagent-name-vaccine
+  group: Medicine
+  desc: reagent-desc-vaccine
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: bitter
+  color: "#dfe9f2"
+

@@ -1,5 +1,16 @@
 - type: entity
   parent: BaseSubdermalImplant
+  id: VirusImmunityImplant
+  name: virus immunity implant
+  description: A microscopic chip that renders the bearer immune to every virus.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SubdermalImplant
+    implantComponents:
+    - type: VirusImmunity
+
+- type: entity
+  parent: BaseSubdermalImplant
   id: MindSlaveImplant
   name: mind-slave implant
   description: lmaoooo

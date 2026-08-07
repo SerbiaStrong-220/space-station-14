@@ -1,24 +1,84 @@
 - type: entity
   id: Vaccinator
-  parent: BaseMachinePowered
+  # parent: BaseMachinePowered
+  parent: [ BaseMachinePowered, SmallConstructibleMachine ] # SS220
   name: vaccinator
   description: A machine that creates vaccines.
   placement:
     mode: SnapgridCenter
   components:
+  # SS220-Start
+  # - type: Sprite
+  #   sprite: Structures/Machines/vaccinator.rsi
+  #   layers:
+  #   - state: icon
+  #     map: ["enum.DiseaseMachineVisualLayers.IsRunning"]
+  #   - state: unlit
+  #     shader: unshaded
+  #     map: ["enum.DiseaseMachineVisualLayers.IsOn"]
   - type: Sprite
-    sprite: Structures/Machines/vaccinator.rsi
+    sprite: SS220/Structures/Machines/vaccinator.rsi
+    snapCardinals: true
     layers:
     - state: icon
-      map: ["enum.DiseaseMachineVisualLayers.IsRunning"]
-    - state: unlit
-      shader: unshaded
-      map: ["enum.DiseaseMachineVisualLayers.IsOn"]
+    - state: turned_on
+      map: ["enum.VaccinatorVisualLayers.Powered"]
+      visible: false
+    - state: running
+      map: ["enum.VaccinatorVisualLayers.Running"]
+      visible: false
+    - state: vial_installed_empty
+      map: ["enum.VaccinatorVisualLayers.Vial"]
+      visible: false
+    - state: fill-1
+      map: ["enum.VaccinatorVisualLayers.Buffer"]
+      visible: false
+  # SS220-End
   - type: Appearance
+  # SS220-Start
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.VaccinatorVisualLayers.Powered:
+          "True": { visible: true }
+          "False": { visible: false }
+      enum.VaccinatorVisuals.Running:
+        enum.VaccinatorVisualLayers.Running:
+          "True": { visible: true }
+          "False": { visible: false }
+      enum.VaccinatorVisuals.Vial:
+        enum.VaccinatorVisualLayers.Vial:
+          "None": { visible: false }
+          "Empty": { visible: true, state: vial_installed_empty }
+          "Tricordrazine": { visible: true, state: vial_installed_tricordrazine }
+          "Blood": { visible: true, state: vial_installed_blood }
+  - type: VaccinatorBufferVisuals
+  # SS220-End
   - type: Machine
     board: VaccinatorMachineCircuitboard
   - type: ContainerContainer
     containers:
       machine_board: !type:Container
       machine_parts: !type:Container
+      vaccinatorSlot: !type:ContainerSlot # SS220
   - type: RequireProjectileTarget
+  # SS220-Start
+  - type: Vaccinator
+  - type: ItemSlots
+    slots:
+      vaccinatorSlot:
+        whitelist:
+          components:
+          - FitsInDispenser
+  - type: SolutionContainerManager
+    solutions:
+      buffer:
+        maxVol: 100
+  - type: ActivatableUI
+    key: enum.VaccinatorUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.VaccinatorUiKey.Key:
+        type: VaccinatorBoundUserInterface
+  # SS220-End

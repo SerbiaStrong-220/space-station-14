@@ -1,0 +1,85 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+const highp float TAU = 6.28318530718;
+const highp float PI = 3.14159265359;
+const highp float HALF_PI = 1.57079632679;
+
+uniform highp float progress;
+uniform highp float wave_scale;
+uniform highp float rungs_per_wave;
+uniform highp float rung_inset;
+uniform highp float rung_peak_bias;
+uniform highp float amp;
+uniform highp float scale;
+uniform highp vec2 rect_size;
+uniform highp vec4 strand_a;
+uniform highp vec4 strand_a_dim;
+uniform highp vec4 strand_b;
+uniform highp vec4 strand_b_dim;
+uniform highp vec4 background;
+
+void fragment()
+{
+    highp vec2 px = UV * rect_size;
+    highp float midY = rect_size.y * 0.5;
+    highp float ampPx = rect_size.y * amp;
+    highp float aa = 1.0;
+
+    highp float wavelength = rect_size.y * wave_scale;
+    highp float freq = TAU / wavelength;
+
+    highp float phase = px.x * freq;
+    highp float s = sin(phase) * ampPx;
+    highp float slope = cos(phase) * ampPx * freq;
+    highp float perp = inversesqrt(1.0 + slope * slope);
+
+    lowp float litX = step(UV.x, progress);
+
+    lowp vec4 col = background;
+
+    highp float rungSpacing = wavelength / rungs_per_wave;
+    highp float k = floor(px.x / rungSpacing);
+    highp float ph0 = (k + 0.5) * rungSpacing * freq;
+    highp float peakPh = HALF_PI + floor((ph0 - HALF_PI) / PI + 0.5) * PI;
+    highp float rPh = mix(ph0, peakPh, rung_peak_bias);
+    highp float rxPx = rPh / freq;
+    highp float rxUv = rxPx / rect_size.x;
+    highp float sRung = sin(rPh) * ampPx;
+    highp float rungReach = abs(sRung) * (1.0 - rung_inset);
+    lowp float litRung = step(rxUv, progress);
+
+    lowp float even = step(mod(k, 2.0), 0.5);
+    lowp vec4 rungLit = mix(strand_b, strand_a, even);
+    lowp vec4 rungDim = mix(strand_b_dim, strand_a_dim, even);
+    lowp vec4 rungSel = mix(rungDim, rungLit, litRung);
+    lowp float rungMask =
+        (1.0 - smoothstep(0.9 * scale - aa, 0.9 * scale + aa, abs(px.x - rxPx))) *
+        (1.0 - smoothstep(rungReach - aa, rungReach + aa, abs(px.y - midY)));
+    col = mix(col, rungSel, rungMask * rungSel.a);
+
+    highp float distA = abs(px.y - (midY + s)) * perp;
+    highp float distB = abs(px.y - (midY - s)) * perp;
+    lowp float maskA = 1.0 - smoothstep(1.6 * scale - aa, 1.6 * scale + aa, distA);
+    lowp float maskB = 1.0 - smoothstep(1.6 * scale - aa, 1.6 * scale + aa, distB);
+    lowp vec4 aStrand = mix(strand_a_dim, strand_a, litX);
+    lowp vec4 bStrand = mix(strand_b_dim, strand_b, litX);
+    col = mix(col, aStrand, maskA * aStrand.a);
+    col = mix(col, bStrand, maskB * bStrand.a);
+
+    highp float distNodeA = length(vec2(px.x - rxPx, px.y - (midY + sRung)));
+    highp float distNodeB = length(vec2(px.x - rxPx, px.y - (midY - sRung)));
+    lowp vec4 aNode = mix(strand_a_dim, strand_a, litRung);
+    lowp vec4 bNode = mix(strand_b_dim, strand_b, litRung);
+    col = mix(col, aNode, (1.0 - smoothstep(2.5 * scale - aa, 2.5 * scale + aa, distNodeA)) * aNode.a);
+    col = mix(col, bNode, (1.0 - smoothstep(2.5 * scale - aa, 2.5 * scale + aa, distNodeB)) * bNode.a);
+
+    // --- frontier marker ---
+    if (progress > 0.0 && progress < 1.0)
+    {
+        highp float distF = abs(px.x - progress * rect_size.x);
+        lowp float fMask = 1.0 - smoothstep(0.75 * scale - aa, 0.75 * scale + aa, distF);
+        col = mix(col, vec4(1.0, 1.0, 1.0, 0.4), fMask);
+    }
+
+    COLOR = col;
+}

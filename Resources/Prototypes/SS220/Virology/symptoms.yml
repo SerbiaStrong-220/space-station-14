@@ -1,0 +1,1490 @@
+# Sneezing
+- type: virusSymptom
+  id: Sneezing
+  name: pathology-sneezing-name
+  genome: Rna
+  stages:
+  - detection:
+      description: pathology-sneezing-detection
+    manifestation:
+      visible: true
+      examineText: pathology-sneezing-examine
+      emote: Sneeze
+      emoteChance: 1
+      emoteInterval: 20
+      emoteIntervalMax: 30
+  speciesOverrides:
+    Arachnid:
+      manifestationOverride:
+        visible: true
+        examineText: pathology-sneezing-examine
+        emote: Cough
+        emoteChance: 1
+        emoteInterval: 20
+        emoteIntervalMax: 30
+
+# Cough
+- type: virusSymptom
+  id: Cough
+  name: pathology-cough-name
+  genome: Dna
+  stages:
+  - detection:
+      description: pathology-cough-detection
+    manifestation:
+      visible: true
+      examineText: pathology-cough-examine
+      emote: Cough
+      emoteChance: 1
+      emoteInterval: 20
+      emoteIntervalMax: 30
+  speciesOverrides:
+    Reptilian:
+      manifestationOverride:
+        visible: true
+        examineText: pathology-sneezing-examine
+        emote: Sneeze
+        emoteChance: 1
+        emoteInterval: 20
+        emoteIntervalMax: 30
+    Moth:
+      manifestationOverride:
+        visible: true
+        examineText: pathology-sneezing-examine
+        emote: Sneeze
+        emoteChance: 1
+        emoteInterval: 20
+        emoteIntervalMax: 30
+
+# Drowsiness
+- type: virusSymptom
+  id: Drowsiness
+  name: pathology-drowsiness-name
+  genome: Rna
+  stages:
+  - detection:
+      description: pathology-drowsiness-detection
+    manifestation:
+      visible: true
+      examineText: pathology-drowsiness-examine
+      emote: Yawn
+      emoteChance: 1
+      emoteInterval: 20
+      emoteIntervalMax: 30
+
+# Skin burst
+- type: virusSymptom
+  id: SkinBurst
+  name: pathology-skin-burst-name
+  genome: Dna
+  stages:
+  # Stage 1
+  - effects:
+    - !type:VirusDamageEffect
+      damage:
+        types:
+          Slash: 0.1
+    detection:
+      description: pathology-skin-burst-detection
+    manifestation:
+      visible: true
+      examineText: pathology-skin-burst-examine-1
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 2
+  - progressMessage: pathology-skin-burst-progress-2
+    progressMessageColor: "#8B0000"
+    effects:
+    - !type:VirusDamageEffect
+      damage:
+        types:
+          Slash: 0.2
+    detection:
+      description: pathology-skin-burst-detection
+    manifestation:
+      visible: true
+      examineText: pathology-skin-burst-examine-2
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 3
+  - progressMessage: pathology-skin-burst-progress-3
+    progressMessageColor: "#8B0000"
+    effects:
+    - !type:VirusDamageEffect
+      damage:
+        types:
+          Slash: 0.5
+    detection:
+      description: pathology-skin-burst-detection
+    manifestation:
+      visible: true
+      examineText: pathology-skin-burst-examine-3
+
+# Necrosis
+- type: virusSymptom
+  id: Necrosis
+  name: pathology-necrosis-name
+  genome: Dna
+  stages:
+  # Stage 1
+  - effects:
+    - !type:VirusDamageEffect
+      damage:
+        types:
+          Slash: 0.1
+    detection:
+      description: pathology-necrosis-detection
+    manifestation:
+      visible: true
+      examineText: pathology-necrosis-examine-1
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 2
+  - progressMessage: pathology-necrosis-progress-2
+    progressMessageColor: "#8B0000"
+    effects:
+    - !type:VirusDamageEffect
+      damage:
+        types:
+          Slash: 0.2
+    detection:
+      description: pathology-necrosis-detection
+    manifestation:
+      visible: true
+      examineText: pathology-necrosis-examine-2
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 3
+  - progressMessage: pathology-necrosis-progress-3
+    progressMessageColor: "#8B0000"
+    effects:
+    - !type:VirusDamageEffect
+      damage:
+        types:
+          Slash: 0.5
+    detection:
+      description: pathology-necrosis-detection
+    manifestation:
+      visible: true
+      examineText: pathology-necrosis-examine-3
+  speciesOverrides:
+    Reptilian:
+      suppressEffects: true
+      manifestationOverride:
+        visible: true
+        examineText: pathology-necrosis-unathi-examine
+
+# Eye bleeding
+- type: virusSymptom
+  id: EyeBleeding
+  name: pathology-eye-bleeding-name
+  genome: Dna
+  stages:
+  # Stage 1
+  - effects:
+    - !type:VirusBleedEffect
+      amount: 0.5
+    detection:
+      description: pathology-eye-bleeding-detection
+    manifestation:
+      visible: true
+      examineText: pathology-eye-bleeding-examine-1
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 2
+  - progressMessage: pathology-eye-bleeding-progress-2
+    effects:
+    - !type:VirusBleedEffect
+      amount: 1.5
+    detection:
+      description: pathology-eye-bleeding-detection
+    manifestation:
+      visible: true
+      examineText: pathology-eye-bleeding-examine-2
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 3
+  - progressMessage: pathology-eye-bleeding-progress-3
+    effects:
+    - !type:VirusBleedEffect
+      amount: 3
+    - !type:VirusEyeDamageEffect
+      timeToFull: 5m
+    detection:
+      description: pathology-eye-bleeding-detection
+    manifestation:
+      visible: true
+      examineText: pathology-eye-bleeding-examine-3
+  speciesOverrides:
+    Moth:
+      immune: true
+
+# Muteness
+- type: virusSymptom
+  id: Muteness
+  name: pathology-muteness-name
+  genome: Rna
+  stages:
+  # Stage 1
+  - detection:
+      description: pathology-muteness-detection
+    manifestation:
+      visible: true
+      emoteMessage: pathology-muteness-drool
+      selfMessage: pathology-muteness-numbness
+      selfMessageColor: "#88AABB"
+      emoteChance: 0.3
+      emoteInterval: 20
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 5m
+      - !type:VirusReagentProgressCondition
+  # Stage 2
+  - progressMessage: pathology-muteness-progress-2
+    components:
+    - type: Muted
+    detection:
+      description: pathology-muteness-detection
+  speciesOverrides:
+    Moth:
+      immune: true
+
+# Stupefaction
+- type: virusSymptom
+  id: Stupefaction
+  name: pathology-stupefaction-name
+  genome: Rna
+  stages:
+  - components:
+    - type: SkillSuppression
+    detection:
+      description: pathology-stupefaction-detection
+
+# Hyperabsorption
+- type: virusSymptom
+  id: Hyperabsorption
+  name: pathology-hyperabsorption-name
+  genome: Rna
+  stages:
+  # Stage 1
+  - effects:
+    - !type:VirusNutritionEffect
+      hunger: 0.2
+    components:
+    - type: VirusHyperabsorption
+    detection:
+      description: pathology-hyperabsorption-detection
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 2
+  - progressMessage: pathology-hyperabsorption-progress-2
+    effects:
+    - !type:VirusNutritionEffect
+      hunger: 0.35
+    components:
+    - type: VirusHyperabsorption
+    detection:
+      description: pathology-hyperabsorption-detection
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 3
+  - progressMessage: pathology-hyperabsorption-progress-3
+    effects:
+    - !type:VirusNutritionEffect
+      hunger: 0.7
+    components:
+    - type: VirusHyperabsorption
+    detection:
+      description: pathology-hyperabsorption-detection
+
+# Autorespiration
+- type: virusSymptom
+  id: Autorespiration
+  name: pathology-autorespiration-name
+  genome: Rna
+  stages:
+  - effects:
+    - !type:VirusInjectReagentEffect
+      reagent: Dexalin
+      amount: 0.6
+    detection:
+      description: pathology-autorespiration-detection
+
+# Burning blood
+- type: virusSymptom
+  id: BurningBlood
+  name: pathology-burning-blood-name
+  genome: Rna
+  stages:
+  # Stage 1
+  - effects:
+    - !type:VirusTemperatureEffect
+      temperature: 318.15
+    detection:
+      description: pathology-burning-blood-detection
+    manifestation:
+      visible: true
+      examineText: pathology-burning-blood-examine-1
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 2
+  - progressMessage: pathology-burning-blood-progress-2
+    effects:
+    - !type:VirusTemperatureEffect
+      temperature: 318.15
+    - !type:VirusIgniteEffect
+      fireStacks: 2
+      chance: 0.0083
+    detection:
+      description: pathology-burning-blood-detection
+    manifestation:
+      visible: true
+      examineText: pathology-burning-blood-examine-2
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 3
+  - progressMessage: pathology-burning-blood-progress-3
+    effects:
+    - !type:VirusTemperatureEffect
+      temperature: 318.15
+    components:
+    - type: FireBreathing
+    detection:
+      description: pathology-burning-blood-detection
+    manifestation:
+      visible: true
+      examineText: pathology-burning-blood-examine-3
+
+# Tricordrazine tolerance
+- type: virusSymptom
+  id: TricordTolerance
+  name: pathology-tricord-tolerance-name
+  genome: Rna
+  stages:
+  - components:
+    - type: ReagentMetabolismBlock
+      reagents:
+      - Tricordrazine
+    detection:
+      description: pathology-tricord-tolerance-detection
+
+# Dementia
+- type: virusSymptom
+  id: Dementia
+  name: pathology-dementia-name
+  genome: Rna
+  stages:
+  # Stage 1
+  - effects:
+    - !type:VirusDamageEffect
+      damage:
+        types:
+          Cerebral: 0.01
+    detection:
+      description: pathology-dementia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-dementia-examine-1
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 2
+  - progressMessage: pathology-dementia-progress-2
+    effects:
+    - !type:VirusDamageEffect
+      damage:
+        types:
+          Cerebral: 0.05
+    detection:
+      description: pathology-dementia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-dementia-examine-2
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 300
+      - !type:VirusReagentProgressCondition
+  # Stage 3
+  - progressMessage: pathology-dementia-progress-3
+    effects:
+    - !type:VirusDamageEffect
+      damage:
+        types:
+          Cerebral: 0.1
+    detection:
+      description: pathology-dementia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-dementia-examine-3
+
+# Synthification
+- type: virusSymptom
+  id: Synthification
+  name: pathology-synthification-name
+  genome: Rna
+  stages:
+  # Stage 1
+  - components:
+    - type: SiliconLawBound
+    - type: VirusSynthification
+    detection:
+      description: pathology-synthification-detection
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 2
+  - progressMessage: pathology-synthification-progress-2
+    components:
+    - type: SiliconLawBound
+    - type: VirusSynthification
+      addBinary: true
+    detection:
+      description: pathology-synthification-detection
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 3
+  - progressMessage: pathology-synthification-progress-3
+    components:
+    - type: SiliconLawBound
+    - type: VirusSynthification
+      onlyBinary: true
+    detection:
+      description: pathology-synthification-detection
+
+# Alcosia
+- type: virusSymptom
+  id: Alcosia
+  name: pathology-alcosia-name
+  genome: Rna
+  stages:
+  - effects:
+    - !type:VirusInjectReagentEffect
+      reagent: Ethanol
+      amount: 0.2
+    detection:
+      description: pathology-alcosia-detection
+
+# Radiophasia
+- type: virusSymptom
+  id: Radiophasia
+  name: pathology-radiophasia-name
+  genome: Dna
+  stages:
+  # Stage 1
+  - components:
+    - type: VirusRadiophasia
+      healPerRad:
+        types:
+          Radiation: -1
+          Blunt: -1
+          Slash: -1
+          Piercing: -1
+          Heat: -1
+          Shock: -1
+          Cold: -1
+    - type: VirusGlow
+      lightColor: LimeGreen
+      lightRadius: 1.5
+      lightEnergy: 1
+    detection:
+      description: pathology-radiophasia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-radiophasia-examine-1
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 2
+  - progressMessage: pathology-radiophasia-progress-2
+    components:
+    - type: VirusRadiophasia
+      healPerRad:
+        types:
+          Radiation: -1
+          Blunt: -1
+          Slash: -1
+          Piercing: -1
+          Heat: -1
+          Shock: -1
+          Cold: -1
+    - type: VirusGlow
+      lightColor: LimeGreen
+      lightRadius: 1.5
+      lightEnergy: 1
+    detection:
+      description: pathology-radiophasia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-radiophasia-examine-2
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 3
+  - progressMessage: pathology-radiophasia-progress-3
+    components:
+    - type: VirusRadiophasia
+      healPerRad:
+        types:
+          Radiation: -1
+          Blunt: -1
+          Slash: -1
+          Piercing: -1
+          Heat: -1
+          Shock: -1
+          Cold: -1
+    - type: VirusGlow
+      lightColor: LimeGreen
+      lightRadius: 1.5
+      lightEnergy: 1
+    detection:
+      description: pathology-radiophasia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-radiophasia-examine-3
+
+# Hypersomnia
+- type: virusSymptom
+  id: Hypersomnia
+  name: pathology-hypersomnia-name
+  genome: Dna
+  stages:
+  # Stage 1
+  - components:
+    - type: VirusHypersomnia
+    detection:
+      description: pathology-hypersomnia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-hypersomnia-examine-1
+      emote: Yawn
+      emoteChance: 1
+      emoteInterval: 20
+      emoteIntervalMax: 30
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 2
+  - progressMessage: pathology-hypersomnia-progress-2
+    components:
+    - type: VirusHypersomnia
+    detection:
+      description: pathology-hypersomnia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-hypersomnia-examine-2
+      emote: Yawn
+      emoteChance: 1
+      emoteInterval: 15
+      emoteIntervalMax: 20
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 3
+  - progressMessage: pathology-hypersomnia-progress-3
+    components:
+    - type: VirusHypersomnia
+    detection:
+      description: pathology-hypersomnia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-hypersomnia-examine-3
+      emote: Yawn
+      emoteChance: 1
+      emoteInterval: 7
+      emoteIntervalMax: 15
+
+# Dog vitality
+- type: virusSymptom
+  id: DogVitality
+  name: pathology-dog-vitality-name
+  genome: Dna
+  stages:
+  # Stage 1
+  - components:
+    - type: VirusDogVitality
+    detection:
+      description: pathology-dog-vitality-detection
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 20m
+      - !type:VirusReagentProgressCondition
+  # Stage 2
+  - progressMessage: pathology-dog-vitality-progress-2
+    components:
+    - type: VirusDogVitality
+    detection:
+      description: pathology-dog-vitality-detection
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 20m
+      - !type:VirusReagentProgressCondition
+  # Stage 3
+  - progressMessage: pathology-dog-vitality-progress-3
+    components:
+    - type: VirusDogVitality
+    detection:
+      description: pathology-dog-vitality-detection
+
+# Narcophasia
+- type: virusSymptom
+  id: Narcophasia
+  name: pathology-narcophasia-name
+  genome: Dna
+  stages:
+  - effects:
+    - !type:VirusInjectReagentEffect
+      reagent: SpaceDrugs
+      amount: 0.75
+    detection:
+      description: pathology-narcophasia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-narcophasia-examine-1
+
+# Stuffy nose
+- type: virusSymptom
+  id: StuffyNose
+  name: pathology-stuffy-nose-name
+  genome: Dna
+  stages:
+  # Stage 1
+  - effects:
+    - !type:VirusDamageEffect
+      requireSlot: mask
+      damage:
+        types:
+          Asphyxiation: 0.5
+    detection:
+      description: pathology-stuffy-nose-detection
+    manifestation:
+      visible: true
+      examineText: pathology-stuffy-nose-examine-1
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 2
+  - progressMessage: pathology-stuffy-nose-progress-2
+    effects:
+    - !type:VirusDamageEffect
+      requireSlot: mask
+      damage:
+        types:
+          Asphyxiation: 1
+    detection:
+      description: pathology-stuffy-nose-detection
+    manifestation:
+      visible: true
+      examineText: pathology-stuffy-nose-examine-2
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 3
+  - progressMessage: pathology-stuffy-nose-progress-3
+    effects:
+    - !type:VirusDamageEffect
+      requireSlot: mask
+      damage:
+        types:
+          Asphyxiation: 1.5
+    detection:
+      description: pathology-stuffy-nose-detection
+    manifestation:
+      visible: true
+      examineText: pathology-stuffy-nose-examine-3
+
+# Bulimia
+- type: virusSymptom
+  id: Bulimia
+  name: pathology-bulimia-name
+  genome: Dna
+  stages:
+  - components:
+    - type: Bulimia
+    detection:
+      description: pathology-bulimia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-bulimia-examine
+
+# Breath inversion
+- type: virusSymptom
+  id: BreathInversion
+  name: pathology-breath-inversion-name
+  genome: Dna
+  stages:
+  - components:
+    - type: BreathInversion
+    detection:
+      description: pathology-breath-inversion-detection
+    manifestation:
+      visible: true
+      examineText: pathology-breath-inversion-examine
+
+# Noodle arms
+- type: virusSymptom
+  id: NoodleArms
+  name: pathology-noodle-arms-name
+  genome: Dna
+  stages:
+  # Stage 1
+  - components:
+    - type: VirusNoodleArms
+    detection:
+      description: pathology-noodle-arms-detection
+    manifestation:
+      visible: true
+      examineText: pathology-noodle-arms-examine-1
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 2
+  - progressMessage: pathology-noodle-arms-progress-2
+    components:
+    - type: VirusNoodleArms
+    detection:
+      description: pathology-noodle-arms-detection
+    manifestation:
+      visible: true
+      examineText: pathology-noodle-arms-examine-2
+
+# Sharp hearing
+- type: virusSymptom
+  id: SharpHearing
+  name: pathology-sharp-hearing-name
+  genome: Dna
+  stages:
+  # Stage 1
+  - components:
+    - type: KeenHearing
+      visionRadius: 5
+      highSensitiveVisionRadius: 2
+    - type: VirusSharpHearing
+      forceKeen: true
+    detection:
+      description: pathology-sharp-hearing-detection
+    manifestation:
+      visible: true
+      examineText: pathology-sharp-hearing-examine-1
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 2
+  - progressMessage: pathology-sharp-hearing-progress-2
+    components:
+    - type: KeenHearing
+      visionRadius: 5
+      highSensitiveVisionRadius: 2
+    - type: VirusSharpHearing
+      forceKeen: true
+    detection:
+      description: pathology-sharp-hearing-detection
+    manifestation:
+      visible: true
+      examineText: pathology-sharp-hearing-examine-2
+  speciesOverrides:
+    Tajaran:
+      minStage: 1
+
+# Lethalgy
+- type: virusSymptom
+  id: Lethalgy
+  name: pathology-lethalgy-name
+  genome: Dna
+  stages:
+  # Stage 1
+  - effects:
+    - !type:VirusDamageEffect
+      whileRecumbent: true
+      damage:
+        types:
+          Asphyxiation: 1
+    detection:
+      description: pathology-lethalgy-detection
+    manifestation:
+      visible: true
+      examineText: pathology-lethalgy-examine-1
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 2
+  - progressMessage: pathology-lethalgy-progress-2
+    effects:
+    - !type:VirusDamageEffect
+      whileRecumbent: true
+      damage:
+        types:
+          Asphyxiation: 2
+    detection:
+      description: pathology-lethalgy-detection
+    manifestation:
+      visible: true
+      examineText: pathology-lethalgy-examine-2
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 3
+  - progressMessage: pathology-lethalgy-progress-3
+    effects:
+    - !type:VirusDamageEffect
+      whileRecumbent: true
+      damage:
+        types:
+          Asphyxiation: 3
+    detection:
+      description: pathology-lethalgy-detection
+    manifestation:
+      visible: true
+      examineText: pathology-lethalgy-examine-3
+
+# Chronic fatigue
+- type: virusSymptom
+  id: ChronicFatigue
+  name: pathology-chronic-fatigue-name
+  genome: Dna
+  stages:
+  # Stage 1
+  - effects:
+    - !type:VirusStaminaDamageEffect
+      amount: 3
+    detection:
+      description: pathology-chronic-fatigue-detection
+    manifestation:
+      visible: true
+      examineText: pathology-chronic-fatigue-examine-1
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 2
+  - progressMessage: pathology-chronic-fatigue-progress-2
+    effects:
+    - !type:VirusStaminaDamageEffect
+      amount: 6
+    detection:
+      description: pathology-chronic-fatigue-detection
+    manifestation:
+      visible: true
+      examineText: pathology-chronic-fatigue-examine-2
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 3
+  - progressMessage: pathology-chronic-fatigue-progress-3
+    effects:
+    - !type:VirusStaminaDamageEffect
+      amount: 9
+    detection:
+      description: pathology-chronic-fatigue-detection
+    manifestation:
+      visible: true
+      examineText: pathology-chronic-fatigue-examine-3
+
+# Recoil weakness
+- type: virusSymptom
+  id: RecoilWeakness
+  name: pathology-recoil-weakness-name
+  genome: Rna
+  stages:
+  - components:
+    - type: RecoilWeakness
+    detection:
+      description: pathology-recoil-weakness-detection
+    manifestation:
+      visible: true
+      examineText: pathology-recoil-weakness-examine
+
+# Stone skin
+- type: virusSymptom
+  id: StoneSkin
+  name: pathology-stone-skin-name
+  genome: Rna
+  stages:
+  - components:
+    - type: VirusInjectionBlock
+      message: pathology-stone-skin-too-hard
+    - type: VirusDamageModifier
+      modifier:
+        coefficients:
+          Piercing: 0.85
+          Slash: 0.85
+    detection:
+      description: pathology-stone-skin-detection
+    manifestation:
+      visible: true
+      examineText: pathology-stone-skin-examine
+
+# Electrophilia
+- type: virusSymptom
+  id: Electrophilia
+  name: pathology-electrophilia-name
+  genome: Rna
+  stages:
+  # Stage 1
+  - components:
+    - type: VirusElectrophilia
+    detection:
+      description: pathology-electrophilia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-electrophilia-examine-1
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 30m
+      - !type:VirusReagentProgressCondition
+  # Stage 2
+  - progressMessage: pathology-electrophilia-progress-2
+    components:
+    - type: VirusElectrophilia
+      shockCoefficient: 0
+    detection:
+      description: pathology-electrophilia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-electrophilia-examine-2
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 30m
+      - !type:VirusReagentProgressCondition
+  # Stage 3
+  - progressMessage: pathology-electrophilia-progress-3
+    components:
+    - type: VirusElectrophilia
+      shockCoefficient: 0
+      healFraction: 1
+      withdrawal: true
+    detection:
+      description: pathology-electrophilia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-electrophilia-examine-3
+
+# Schizophrenia
+- type: virusSymptom
+  id: Schizophrenia
+  name: pathology-schizophrenia-name
+  genome: Rna
+  stages:
+  # Stage 1
+  - components:
+    - type: VirusMovementModifier
+      walk: 1.03
+      sprint: 1.03
+    - type: VirusSchizophrenia
+      minInterval: 90
+      maxInterval: 150
+    detection:
+      description: pathology-schizophrenia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-schizophrenia-examine-1
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 2
+  - progressMessage: pathology-schizophrenia-progress-2
+    components:
+    - type: VirusMovementModifier
+      walk: 1.06
+      sprint: 1.06
+    - type: VirusSchizophrenia
+      minInterval: 50
+      maxInterval: 90
+    detection:
+      description: pathology-schizophrenia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-schizophrenia-examine-2
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 3
+  - progressMessage: pathology-schizophrenia-progress-3
+    components:
+    - type: VirusMovementModifier
+      walk: 1.10
+      sprint: 1.10
+    - type: VirusSchizophrenia
+      minInterval: 30
+      maxInterval: 70
+    detection:
+      description: pathology-schizophrenia-detection
+    manifestation:
+      visible: true
+      examineText: pathology-schizophrenia-examine-3
+
+# Toxic conversion
+- type: virusSymptom
+  id: ToxicConversion
+  name: pathology-toxic-conversion-name
+  genome: Dna
+  stages:
+  # Stage 1
+  - effects:
+    - !type:VirusToxicConversionEffect
+      rate: 0.3
+    detection:
+      description: pathology-toxic-conversion-detection
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 2
+  - progressMessage: pathology-toxic-conversion-progress-2
+    effects:
+    - !type:VirusToxicConversionEffect
+      rate: 0.6
+    detection:
+      description: pathology-toxic-conversion-detection
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 3
+  - progressMessage: pathology-toxic-conversion-progress-3
+    effects:
+    - !type:VirusToxicConversionEffect
+      rate: 1
+    detection:
+      description: pathology-toxic-conversion-detection
+
+# Toxin filtration
+- type: virusSymptom
+  id: ToxinFiltration
+  name: pathology-toxin-filtration-name
+  genome: Dna
+  stages:
+  # Stage 1
+  - effects:
+    - !type:VirusDamageEffect
+      damage:
+        types:
+          Poison: -0.3
+    components:
+    - type: VirusStaminaSlow
+      slowFraction: 0.2
+    detection:
+      description: pathology-toxin-filtration-detection
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 2
+  - progressMessage: pathology-toxin-filtration-progress-2
+    effects:
+    - !type:VirusDamageEffect
+      damage:
+        types:
+          Poison: -0.6
+    components:
+    - type: VirusStaminaSlow
+      slowFraction: 0.4
+    detection:
+      description: pathology-toxin-filtration-detection
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 3
+  - progressMessage: pathology-toxin-filtration-progress-3
+    effects:
+    - !type:VirusDamageEffect
+      damage:
+        types:
+          Poison: -1
+    components:
+    - type: VirusStaminaSlow
+      slowFraction: 0.6
+    detection:
+      description: pathology-toxin-filtration-detection
+
+# Strongman
+- type: virusSymptom
+  id: Strongman
+  name: pathology-strongman-name
+  genome: Dna
+  stages:
+  - components:
+    - type: Prying
+      pryPowered: true
+      force: true
+    - type: VirusGunLock
+    detection:
+      description: pathology-strongman-detection
+
+# Viral aggression RNA variant
+- type: virusSymptom
+  id: ViralAggressionRna
+  name: pathology-viral-aggression-name
+  genome: Rna
+  stages:
+  - effects:
+    - !type:VirusAggressionEffect
+    detection:
+      description: pathology-viral-aggression-detection
+    manifestation:
+      visible: true
+      examineText: pathology-viral-aggression-examine
+
+# Viral aggression DNA variant
+- type: virusSymptom
+  id: ViralAggressionDna
+  name: pathology-viral-aggression-name
+  genome: Dna
+  stages:
+  - effects:
+    - !type:VirusAggressionEffect
+    detection:
+      description: pathology-viral-aggression-detection
+    manifestation:
+      visible: true
+      examineText: pathology-viral-aggression-examine
+
+# Viral fragility RNA variant 
+- type: virusSymptom
+  id: ViralFragilityRna
+  name: pathology-viral-fragility-name
+  genome: Rna
+  bloodBorneOnly: true
+  stages:
+  - detection:
+      description: pathology-viral-fragility-detection
+    manifestation:
+      visible: true
+      examineText: pathology-viral-fragility-examine
+
+# Viral fragility DNA variant 
+- type: virusSymptom
+  id: ViralFragilityDna
+  name: pathology-viral-fragility-name
+  genome: Dna
+  bloodBorneOnly: true
+  stages:
+  - detection:
+      description: pathology-viral-fragility-detection
+    manifestation:
+      visible: true
+      examineText: pathology-viral-fragility-examine
+
+# Dehydration
+- type: virusSymptom
+  id: Dehydration
+  name: pathology-dehydration-name
+  genome: Rna
+  stages:
+  # Stage 1
+  - effects:
+    - !type:VirusNutritionEffect
+      thirst: 0.3
+    - !type:VirusBleedEffect
+      amount: -0.5
+    detection:
+      description: pathology-dehydration-detection
+    manifestation:
+      visible: true
+      examineText: pathology-dehydration-examine-1
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 2
+  - progressMessage: pathology-dehydration-progress-2
+    effects:
+    - !type:VirusNutritionEffect
+      thirst: 0.6
+    - !type:VirusBleedEffect
+      amount: -1
+    detection:
+      description: pathology-dehydration-detection
+    manifestation:
+      visible: true
+      examineText: pathology-dehydration-examine-2
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 3
+  - progressMessage: pathology-dehydration-progress-3
+    effects:
+    - !type:VirusNutritionEffect
+      thirst: 1.0
+    - !type:VirusBleedEffect
+      amount: -2
+    detection:
+      description: pathology-dehydration-detection
+    manifestation:
+      visible: true
+      examineText: pathology-dehydration-examine-3
+
+# Steel stomach
+- type: virusSymptom
+  id: SteelStomach
+  name: pathology-steel-stomach-name
+  genome: Rna
+  stages:
+  # Stage 1
+  - effects:
+    - !type:VirusNutritionEffect
+      hunger: -0.3
+      thirst: -0.3
+    components:
+    - type: VirusMetabolismSlow
+      reduction: 0.1
+    detection:
+      description: pathology-steel-stomach-detection
+    manifestation:
+      visible: true
+      examineText: pathology-steel-stomach-examine-1
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 2
+  - progressMessage: pathology-steel-stomach-progress-2
+    effects:
+    - !type:VirusNutritionEffect
+      hunger: -0.6
+      thirst: -0.6
+    components:
+    - type: VirusMetabolismSlow
+      reduction: 0.2
+    detection:
+      description: pathology-steel-stomach-detection
+    manifestation:
+      visible: true
+      examineText: pathology-steel-stomach-examine-2
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 3
+  - progressMessage: pathology-steel-stomach-progress-3
+    effects:
+    - !type:VirusNutritionEffect
+      hunger: -1.0
+      thirst: -1.0
+    components:
+    - type: VirusMovementModifier
+      sprint: 0.85
+    - type: VirusMetabolismSlow
+      reduction: 0.3
+    detection:
+      description: pathology-steel-stomach-detection
+    manifestation:
+      visible: true
+      examineText: pathology-steel-stomach-examine-3
+
+# Clumsiness
+- type: virusSymptom
+  id: Clumsiness
+  name: pathology-clumsiness-name
+  genome: Rna
+  stages:
+  - components:
+    - type: Clumsy
+      clumsyDefaultCheck: 0.3
+    detection:
+      description: pathology-clumsiness-detection
+    manifestation:
+      visible: true
+      examineText: pathology-clumsiness-examine
+
+# Laser eyes
+- type: virusSymptom
+  id: LaserEyes
+  name: pathology-laser-eyes-name
+  genome: Dna
+  stages:
+  # Stage 1
+  - components:
+    - type: VirusLaserEyes
+      damage:
+        types:
+          Heat: 12
+    - type: VirusGlow
+      lightColor: Red
+      lightRadius: 1.2
+      lightEnergy: 0.5
+    detection:
+      description: pathology-laser-eyes-detection
+    manifestation:
+      visible: true
+      examineText: pathology-laser-eyes-examine-1
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 2
+  - progressMessage: pathology-laser-eyes-progress-2
+    components:
+    - type: VirusLaserEyes
+      damage:
+        types:
+          Heat: 24
+    - type: VirusGlow
+      lightColor: Red
+      lightRadius: 1.2
+      lightEnergy: 0.5
+    detection:
+      description: pathology-laser-eyes-detection
+    manifestation:
+      visible: true
+      examineText: pathology-laser-eyes-examine-2
+    progressConditions:
+    - !type:VirusAnyProgressCondition
+      conditions:
+      - !type:VirusTimeProgressCondition
+        delay: 3m
+      - !type:VirusReagentProgressCondition
+  # Stage 3
+  - progressMessage: pathology-laser-eyes-progress-3
+    components:
+    - type: VirusLaserEyes
+      damage:
+        types:
+          Heat: 36
+    - type: VirusGlow
+      lightColor: Red
+      lightRadius: 1.2
+      lightEnergy: 0.5
+    detection:
+      description: pathology-laser-eyes-detection
+    manifestation:
+      visible: true
+      examineText: pathology-laser-eyes-examine-3
+
+# Paracusia
+- type: virusSymptom
+  id: Paracusia
+  name: pathology-paracusia-name
+  genome: Rna
+  stages:
+  - detection:
+      description: pathology-paracusia-detection
+    components:
+    - type: Paracusia
+      minTimeBetweenIncidents: 0.1
+      maxTimeBetweenIncidents: 300
+      maxSoundDistance: 7
+      sounds:
+        collection: Paracusia

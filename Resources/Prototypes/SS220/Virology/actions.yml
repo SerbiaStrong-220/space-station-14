@@ -1,0 +1,43 @@
+# Action prototypes granted to a carrier by virus symptoms. Each id is referenced by the symptom's
+# behavior component (VirusLaserEyesComponent / FireBreathingComponent).
+
+# "Laser eyes": fire a laser at a clicked tile on a cooldown. Damage scales with the symptom's stage
+# and every shot burns the caster's own eyes. Granted by the laser-eyes symptom.
+- type: entity
+  parent: BaseAction
+  id: VirusActionLaserEyes
+  name: laser eyes
+  description: Fire a laser from your eyes at a chosen spot. Every shot scorches your own eyes.
+  components:
+  - type: Action
+    useDelay: 4
+    itemIconStyle: BigAction
+    # placeholder icon — swap for a proper laser-eyes one
+    icon:
+      sprite: SS220/Interface/Actions/magic_spells.rsi
+      state: fireball
+  - type: TargetAction
+    checkCanAccess: false
+    range: 20
+  - type: WorldTargetAction
+    event: !type:VirusLaserEyesActionEvent
+
+# Terminal "burning blood": hurl a fireball at a clicked tile on a cooldown, catching fire yourself.
+# Granted by the burning-blood symptom's terminal stage.
+- type: entity
+  parent: BaseAction
+  id: ActionVirusFireBreathing
+  name: fire breathing
+  description: Hurl a fireball at a chosen spot. It burns the target, and you catch fire too.
+  components:
+  - type: Action
+    useDelay: 20
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/magic_spells.rsi
+      state: fireball
+  - type: TargetAction
+    checkCanAccess: false
+    range: 20
+  - type: WorldTargetAction
+    event: !type:FireBreathingActionEvent

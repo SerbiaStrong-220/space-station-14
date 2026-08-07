@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Text;
 using Content.Server.Medical.Components;
+using Content.Server.SS220.Virology;
 using Content.Shared.Atmos;
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
@@ -38,6 +39,7 @@ public sealed partial class HealthAnalyzerPrintSystem : EntitySystem
     [Dependency] private SharedAudioSystem _audio = default!; // SS220-health-analyzer-report
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private VirologySystem _virology = default!;
 
     public override void Initialize()
     {
@@ -215,6 +217,14 @@ public sealed partial class HealthAnalyzerPrintSystem : EntitySystem
 
         if (!hasReagents)
             builder.AppendLine(Loc.GetString("health-analyzer-report-none"));
+
+        builder.AppendLine();
+        builder.AppendLine(Loc.GetString("health-analyzer-report-section-viruses"));
+        var virusLines = _virology.GetAnalyzerVirusLines(target);
+        if (virusLines.Count == 0)
+            builder.AppendLine(Loc.GetString("health-analyzer-report-none"));
+        else
+            builder.AppendJoin('\n', virusLines);
 
         return builder.ToString();
     }

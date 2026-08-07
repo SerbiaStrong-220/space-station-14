@@ -47,3 +47,16 @@
   cost: 5000
   recipeUnlocks:
   - ClothingEyesHudMediChem
+
+- type: technology
+  id: DiseaseMachinesTech
+  name: research-technology-disease-machines
+  icon:
+    sprite: SS220/Structures/Machines/diagnoser.rsi
+    state: icon
+  discipline: CivilianServices
+  tier: 2
+  cost: 10000
+  recipeUnlocks:
+  - DiagnoserMachineCircuitboard
+  - VaccinatorMachineCircuitboard

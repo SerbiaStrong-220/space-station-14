@@ -1,0 +1,10 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              Orientation="Vertical"
+              Margin="0 0 0 8">
+    <Label Name="NameLabel" />
+    <Label Name="SuppressedLabel" Visible="False" />
+    <BoxContainer Name="SymptomsContainer" Orientation="Vertical" />
+    <Label Name="TransmissionLabel" Visible="False" />
+    <Label Name="UnreadableLabel" Visible="False" StyleClasses="LabelSubText" />
+    <Label Name="CureLabel" Visible="False" />
+</BoxContainer>

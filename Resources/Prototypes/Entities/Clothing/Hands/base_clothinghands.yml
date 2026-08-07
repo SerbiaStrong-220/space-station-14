@@ -39,6 +39,11 @@
     damageProtection:
       flatReductions:
         Heat: 5 # the average lightbulb only does around four damage!
+  # SS220-Start
+  - type: VirusProtection
+    vectors: Contact
+    blockChance: 0.3
+  # SS220-End
 
 - type: entity
   abstract: true

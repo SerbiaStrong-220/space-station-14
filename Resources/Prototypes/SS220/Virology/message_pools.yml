@@ -1,0 +1,23 @@
+- type: virusMessagePool
+  id: SchizophreniaThoughts
+  messages:
+  - pathology-schizophrenia-msg-1
+  - pathology-schizophrenia-msg-2
+  - pathology-schizophrenia-msg-3
+  - pathology-schizophrenia-msg-4
+  - pathology-schizophrenia-msg-5
+  - pathology-schizophrenia-msg-6
+  - pathology-schizophrenia-msg-7
+  - pathology-schizophrenia-msg-8
+  - pathology-schizophrenia-msg-9
+  - pathology-schizophrenia-msg-10
+  - pathology-schizophrenia-msg-11
+  - pathology-schizophrenia-msg-12
+  - pathology-schizophrenia-msg-13
+  - pathology-schizophrenia-msg-14
+  - pathology-schizophrenia-msg-15
+  - pathology-schizophrenia-msg-16
+  - pathology-schizophrenia-msg-17
+  - pathology-schizophrenia-msg-18
+  - pathology-schizophrenia-msg-19
+  - pathology-schizophrenia-msg-20

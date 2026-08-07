@@ -1,0 +1,56 @@
+# Jumpsuits
+- type: loadout
+  id: VirologistJumpsuit
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitVirology
+
+- type: loadout
+  id: VirologistJumpskirt
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtVirology
+
+# Back
+- type: loadout
+  id: VirologistBackpack
+  equipment:
+    back: ClothingBackpackVirology
+
+- type: loadout
+  id: VirologistSatchel
+  equipment:
+    back: ClothingBackpackSatchelVirology
+
+- type: loadout
+  id: VirologistDuffel
+  equipment:
+    back: ClothingBackpackDuffelVirology
+
+# Outer
+- type: loadout
+  id: VirologistBioSuit
+  equipment:
+    outerClothing: ClothingOuterBioVirology
+
+# Groups
+- type: loadoutGroup
+  id: VirologistJumpsuit
+  name: loadout-group-virologist-jumpsuit
+  loadouts:
+  - VirologistJumpsuit
+  - VirologistJumpskirt
+
+- type: loadoutGroup
+  id: VirologistBackpack
+  name: loadout-group-virologist-backpack
+  loadouts:
+  - VirologistBackpack
+  - VirologistSatchel
+  - VirologistDuffel
+
+- type: loadoutGroup
+  id: VirologistOuterClothing
+  name: loadout-group-virologist-outerclothing
+  minLimit: 0
+  loadouts:
+  - RegularLabCoat
+  - VirologistBioSuit
