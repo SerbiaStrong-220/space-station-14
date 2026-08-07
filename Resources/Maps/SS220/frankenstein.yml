@@ -4,7 +4,7 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 08/07/2026 03:41:48
+  time: 08/07/2026 04:37:56
   entityCount: 37214
 maps:
 - 1
@@ -113970,6 +113970,8 @@ entities:
     - type: Transform
       pos: 47.5,-44.5
       parent: 2
+    - type: FaxMachine
+      name: Главаный врач
   - uid: 17597
     components:
     - type: Transform
