@@ -557,9 +557,9 @@
   description: A lasertag vest. Its pained red.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Armor/lasertagred.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/lasertagred.rsi
   - type: Clothing 
-    sprite: Clothing/OuterClothing/Armor/lasertagred.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/lasertagred.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -575,9 +575,9 @@
   description: A lasertag vest. Its pained blue.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Armor/lasertagblue.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/lasertagblue.rsi
   - type: Clothing
-    sprite: Clothing/OuterClothing/Armor/lasertagblue.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/lasertagblue.rsi
   - type: Armor
     modifiers:
       coefficients:
