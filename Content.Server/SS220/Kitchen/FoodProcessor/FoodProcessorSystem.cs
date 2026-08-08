@@ -33,6 +33,7 @@ public sealed class FoodProcessorSystem : SharedFoodProcessorSystem
         SubscribeLocalEvent<FoodProcessorComponent, ContainerIsRemovingAttemptEvent>(OnRemoveAttempt);
         SubscribeLocalEvent<FoodProcessorComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<FoodProcessorComponent, GetVerbsEvent<AlternativeVerb>>(OnAltInteract);
+        SubscribeLocalEvent<FoodProcessorComponent, GetVerbsEvent<Verb>>(OnRightClick);
     }
 
     public override void Update(float frameTime)
@@ -144,7 +145,7 @@ public sealed class FoodProcessorSystem : SharedFoodProcessorSystem
 
         args.Verbs.Add(new AlternativeVerb
         {
-            Text = Loc.GetString("process-action"),
+            Text = Loc.GetString("food-processor-start-processing"),
             Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/VerbIcons/settings.svg.192dpi.png")),
             Priority = 1,
             Act = () =>
@@ -152,6 +153,39 @@ public sealed class FoodProcessorSystem : SharedFoodProcessorSystem
                 StartProcessing(ent);
             }
         });
+    }
+
+    private void OnRightClick(Entity<FoodProcessorComponent> ent, ref GetVerbsEvent<Verb> args)
+    {
+        if (!args.CanAccess || !args.CanInteract)
+            return;
+
+        // Ingredients cannot be ejected while they are being processed.
+        if (IsProcessing(ent.AsNullable()))
+            return;
+
+        // Processor is empty, nothing to eject
+        if (ent.Comp.InputContainer.ContainedEntities.Count == 0)
+            return;
+
+        args.Verbs.Add(new Verb
+        {
+            Text = Loc.GetString("food-processor-verb-eject"),
+            Category = VerbCategory.Eject,
+            Act = () => EjectIngredients(ent),
+        });
+    }
+
+    private void EjectIngredients(Entity<FoodProcessorComponent> ent)
+    {
+        // Recheck because the state could change while the context menu is open.
+        if (IsProcessing(ent.AsNullable()))
+            return;
+
+        _container.EmptyContainer(
+            ent.Comp.InputContainer,
+            force: true,
+            destination: Transform(ent).Coordinates);
     }
 
     private bool IsProcessing(Entity<FoodProcessorComponent?> ent)
