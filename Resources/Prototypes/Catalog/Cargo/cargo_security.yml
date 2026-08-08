@@ -95,7 +95,7 @@
     sprite: SS220/Clothing/OuterClothing/Armor/lasertagred.rsi
     state: icon
   product: CrateLaserTagEquipmentRed
-  cost: 5000
+  cost: 8000
   category: cargoproduct-category-name-security
   group: market
 
@@ -105,7 +105,7 @@
     sprite: SS220/Clothing/OuterClothing/Armor/lasertagblue.rsi
     state: icon
   product: CrateLaserTagEquipmentBlue
-  cost: 5000
+  cost: 8000
   category: cargoproduct-category-name-security
   group: market
 #ss220 lasertag end
