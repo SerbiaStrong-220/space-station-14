@@ -135,6 +135,8 @@
           amount: 3
         - id: WeaponLaserCarbinePractice
           amount: 3
+        - id: ClothingUniformJumpsuitColorRed
+         amount: 3
 
 - type: entity
   parent: CrateSecgear
@@ -150,4 +152,7 @@
           amount: 3
         - id: WeaponLaserCarbinePractice
           amount: 3
+        - id: ClothingUniformJumpsuitColorBlue
+         amount: 3
+
 #ss220 lasertag end
