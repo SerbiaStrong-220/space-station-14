@@ -87,3 +87,25 @@
   cost: 250
   category: cargoproduct-category-name-security
   group: market
+
+#ss220 lasertag start
+- type: cargoProduct
+  id: CrateLaserTagEquipmentRed
+  icon:
+    sprite: Clothing/OuterClothing/Armor/bulletproof.rsi
+    state: icon
+  product: CrateLaserTagEquipmentRed
+  cost: 5000
+  category: cargoproduct-category-name-security
+  group: market
+
+- type: cargoProduct
+  id: CrateLaserTagEquipmentBlue
+  icon:
+    sprite: Clothing/OuterClothing/Armor/bulletproof.rsi
+    state: icon
+  product: CrateLaserTagEquipmentBlue
+  cost: 5000
+  category: cargoproduct-category-name-security
+  group: market
+#ss220 lasertag end

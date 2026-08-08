@@ -548,3 +548,39 @@
   - type: Construction
     graph: cardArmour
     node: cardarmour
+
+# ss220 lasertag start
+- type: entity
+  parent: ClothingOuterArmorBasic
+  id: ClothingOuterArmorLasertagRed
+  name: Red lasertag vest
+  description: A lasertag vest. Its pained red.
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Armor/bulletproof.rsi
+  - type: Clothing 
+    sprite: Clothing/OuterClothing/Armor/bulletproof.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Heat: 0.9
+
+- type: entity
+  parent: ClothingOuterArmorBasic
+  id: ClothingOuterArmorLasertagBlue
+  name: Blue lasertag vest
+  description: A lasertag vest. Its pained blue.
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Armor/bulletproof.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Armor/bulletproof.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Heat: 0.9
+# ss220 lasertag end
