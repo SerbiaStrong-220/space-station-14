@@ -557,15 +557,16 @@
   description: A lasertag vest. Its pained red.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Armor/bulletproof.rsi
+    sprite: Clothing/OuterClothing/Armor/lasertagred.rsi
   - type: Clothing 
-    sprite: Clothing/OuterClothing/Armor/bulletproof.rsi
+    sprite: Clothing/OuterClothing/Armor/lasertagred.rsi
   - type: Armor
     modifiers:
       coefficients:
         Blunt: 0.9
         Slash: 0.9
         Heat: 0.9
+  - type: DamagePopup
 
 - type: entity
   parent: ClothingOuterArmorBasic
@@ -574,13 +575,14 @@
   description: A lasertag vest. Its pained blue.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Armor/bulletproof.rsi
+    sprite: Clothing/OuterClothing/Armor/lasertagblue.rsi
   - type: Clothing
-    sprite: Clothing/OuterClothing/Armor/bulletproof.rsi
+    sprite: Clothing/OuterClothing/Armor/lasertagblue.rsi
   - type: Armor
     modifiers:
       coefficients:
         Blunt: 0.9
         Slash: 0.9
         Heat: 0.9
+  - type: DamagePopup
 # ss220 lasertag end
