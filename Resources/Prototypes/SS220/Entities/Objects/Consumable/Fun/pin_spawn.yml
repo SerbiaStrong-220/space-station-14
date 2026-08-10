@@ -1,0 +1,40 @@
+- type: entityTable
+  id: WhiteChocolatePinTable
+  table: !type:GroupSelector
+    children:
+    - id: ClothingNeck1984Pin
+    - id: ClothingNeckBeerPin
+    - id: ClothingNeckCatDespairPin
+    - id: ClothingNeckJRGreenPin
+    - id: ClothingNeckJRWhitePin
+    - id: ClothingNeckMothPin
+    - id: ClothingNeckDwarfPin
+    - id: ClothingNeckSheriffStarPin
+    - id: ClothingNeckLovePin
+    - id: ClothingNeckSmokeWormPin
+    - id: ClothingNeckStarPin
+    - id: ClothingNeckIPCPin
+    - id: ClothingNeckSlimegreenPin
+    - id: ClothingNeckBigFloppaPin
+    - id: ClothingNeckSilverBloodDonorPin
+    - id: ClothingNeckGoldBloodDonorPin
+    - id: ClothingNeckGrapePin
+    - id: ClothingNeckBrushwoodPin
+    - id: ClothingNeckCloverPin
+    - id: ClothingNeckHumanPin
+    - id: ClothingNeckLizardPin
+    - id: ClothingNeckArachnidPin
+    - id: ClothingNeckTajaraPin
+    - id: ClothingNeckVoxPin
+    - id: ClothingNeckDionaPin
+    - id: ClothingNeckSlimePin
+    - id: ClothingNeckVulpearPin
+
+- type: entity
+  id: WhiteChocolatePinSpawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: WhiteChocolatePinTable
+

@@ -1075,6 +1075,20 @@
           components:
           - FitsInDispenser
     - item: GeigerCounter
+#SS220 Generic borg rework START
+    - hand:
+        emptyRepresentative: BorgModuleArtifactsPlaceholder
+        emptyLabel: borg-slot-artifact-placeholder-empty
+        whitelist:
+          components:
+          - XenoArtifact
+    - hand:
+        emptyRepresentative: BorgModuleMusiqueInstrumentsPlaceholder
+        emptyLabel: borg-slot-instruments-empty
+        whitelist:
+          components:
+          - Instrument
+#SS220 Generic borg rework END
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: node-scanner-module }
 
