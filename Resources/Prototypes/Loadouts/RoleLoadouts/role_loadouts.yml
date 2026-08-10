@@ -182,7 +182,10 @@
   - JanitorHead
   - JanitorJumpsuit
   - JanitorGloves
-  - CommonBackpack
+  #SS220-BackpackJR begin
+  #- CommonBackpack
+  - JanitorBackpack
+  #SS220-BackpackJR end
   - JanitorOuterClothing
   - JanitorShoes #SS220-OrangeJanitor
   - JanitorBelt #SS220-JunkRecyclesJanitor
