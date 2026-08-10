@@ -21,14 +21,12 @@
   - type: Tag
     tags:
     - HudMedical
+    - WhitelistChameleon #ss220 add chameleon
   - type: EyeProtection
   - type: FlashImmunity
-  - type: ChameleonClothing #ss220 add chameleon start
-    slot: [eyes]
-    default: ClothingEyesHudSyndChem 
-  - type: Tag
-    tags:
-    - WhitelistChameleon #ss220 add chameleon end
+  - type: ChameleonClothing #ss220 add chameleon
+    slot: [eyes] #ss220 add chameleon
+    default: ClothingEyesHudSyndChem #ss220 add chameleon
 
 - type: entity
   parent: [ClothingEyesBase, ClothingEyesGlassesSecurity]
