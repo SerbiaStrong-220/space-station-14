@@ -18,19 +18,4 @@
             <gfx:StyleBoxFlat BackgroundColor="#969696B3"/>
         </PanelContainer.PanelOverride>
     </PanelContainer>
-
-    <!-- Temporariry here -->
-    <!--
-    <PanelContainer Name="LockOverlay" Visible="false">
-        <BoxContainer Orientation="Horizontal" VerticalAlignment="Center" >
-            <PanelContainer Margin="15 0" HorizontalExpand="True">
-                <customControls:HSeparator VerticalAlignment="Center"/>
-            </PanelContainer>
-            <Label Text="{Loc 'humanoid-profile-editor-voice-lock'}"/>
-            <PanelContainer Margin="15 0" HorizontalExpand="True">
-                <customControls:HSeparator VerticalAlignment="Center"/>
-            </PanelContainer>
-        </BoxContainer>
-    </PanelContainer>
-    -->
 </PanelContainer>

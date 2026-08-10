@@ -16,13 +16,31 @@ public sealed partial class TtsProviderVoiceSelectorWindow : DefaultWindow
 
     public readonly TtsProvider Provider;
 
-    public TtsProviderVoiceSelectorWindow(TtsProvider provider)
+    public TtsVoiceRequirementCheckData? RequirementsCheckData
+    {
+        get => _requirementsCheckData;
+        set
+        {
+            _requirementsCheckData = value;
+            foreach (var child in ContentContainer.Children)
+            {
+                if (child is not TtsVoiceSelectorCategoryEntry entry)
+                    continue;
+
+                entry.RequirementsCheckData = value;
+            }
+        }
+    }
+    private TtsVoiceRequirementCheckData? _requirementsCheckData;
+
+    public TtsProviderVoiceSelectorWindow(TtsProvider provider, TtsVoiceRequirementCheckData? checkData = null)
     {
         RobustXamlLoader.Load(this);
 
         _tts = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<TtsSystem>();
 
         Provider = provider;
+        _requirementsCheckData = checkData;
 
         Title = Loc.GetString("ui-tts-provider-voice-selector-window-title", ("providerName", Provider.ToString()));
 
@@ -36,15 +54,18 @@ public sealed partial class TtsProviderVoiceSelectorWindow : DefaultWindow
         var first = true;
         foreach (var (category, voices) in _tts.EnumerateProviderVoiceCategories(Provider))
         {
-            var categoryEntry = new TtsVoiceSelectorCategoryEntry(category, voices);
-            categoryEntry.OnVoiceSelected += voice => OnVoiceSelected?.Invoke(voice);
+            var entry = new TtsVoiceSelectorCategoryEntry(category, voices)
+            {
+                RequirementsCheckData = _requirementsCheckData
+            };
+            entry.OnVoiceSelected += voice => OnVoiceSelected?.Invoke(voice);
 
             if (first)
                 first = false;
             else
-                categoryEntry.Margin = new Thickness(0, BetweenCategoriesMargin, 0, 0);
+                entry.Margin = new Thickness(0, BetweenCategoriesMargin, 0, 0);
 
-            ContentContainer.AddChild(categoryEntry);
+            ContentContainer.AddChild(entry);
         }
     }
 }

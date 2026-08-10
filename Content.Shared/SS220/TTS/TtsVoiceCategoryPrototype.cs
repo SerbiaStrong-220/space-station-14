@@ -14,10 +14,10 @@ public sealed partial class TtsVoiceCategoryPrototype : IPrototype, IEquatable<T
 
     [DataField]
     public LocId Description = string.Empty;
-    public string LocalizedDescription => Loc.GetString(Description);
+    public string LocalizedDescription => string.IsNullOrEmpty(Description) ? string.Empty : Loc.GetString(Description);
 
     [DataField]
-    public Color? Color;
+    public Color Color = Color.White.WithAlpha(0.375f);
 
     public override bool Equals(object? obj)
     {

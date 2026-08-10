@@ -728,7 +728,8 @@ namespace Content.Shared.Preferences
         // MUST NOT BE PUBLIC, BUT....
         public static bool CanHaveVoice(TtsVoicePrototype voice, Sex sex)
         {
-            return voice.RoundStart && sex == Sex.Unsexed || (voice.Sex == sex || voice.Sex == Sex.Unsexed);
+            return true;
+            // return voice.RoundStart && sex == Sex.Unsexed || (voice.Sex == sex || voice.Sex == Sex.Unsexed);
         }
         // Corvax-TTS-End
 

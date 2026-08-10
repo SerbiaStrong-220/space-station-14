@@ -1,4 +1,5 @@
 using Content.Shared.Humanoid;
+using Content.Shared.SS220.TTS.Requirements;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.TTS;
@@ -12,11 +13,13 @@ public sealed partial class TtsVoicePrototype : IPrototype
     [IdDataField]
     public string ID { get; private set; } = default!;
 
-    [DataField]
-    public string Name = string.Empty;
+    [DataField(required: true)]
+    public LocId Name = string.Empty;
+    public string LocalizedName => Loc.GetString(Name);
 
     [DataField]
-    public string Description = string.Empty;
+    public LocId Description = string.Empty;
+    public string LocalizedDescription => string.IsNullOrEmpty(Description) ? string.Empty : Loc.GetString(Description);
 
     [DataField]
     public List<ProtoId<TtsVoiceCategoryPrototype>> Categories = [];
@@ -27,15 +30,12 @@ public sealed partial class TtsVoicePrototype : IPrototype
     [DataField(required: true)]
     public string Speaker = string.Empty;
 
-    [DataField(required: true)]
-    public Sex Sex;
+    [DataField]
+    public TtsVoiceRequirement? Requirement;
 
     /// <summary>
-    /// Whether the species is available "at round start" (In the character editor)
+    /// Whether the voice is hidden from the voice editors
     /// </summary>
     [DataField]
-    public bool RoundStart = true;
-
-    [DataField]
-    public bool SponsorOnly = false;
+    public bool EditorHidden = false;
 }

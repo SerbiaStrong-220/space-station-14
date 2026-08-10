@@ -27,10 +27,23 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
     public TtsVoicePreferences VoicePreferences { get; private set; }
 
     private int? _draggedEntryStartPos;
-    private TtsVoicePreferencesTabEntry? _draggedEntry;
+    private TtsVoicePreferencesTabEntry? _draggingEntry;
+
     private TtsProviderVoiceSelectorWindow? _selectorWindow;
+    private TtsVoicePreferencesTabEntry? _editingEntry;
 
     private Dictionary<TtsProvider, TtsVoicePreferencesTabEntry> _entriesDict = new();
+
+    public TtsVoiceRequirementCheckData? RequirementsCheckData
+    {
+        get => _requirementsCheckData;
+        set
+        {
+            _requirementsCheckData = value;
+            _selectorWindow?.RequirementsCheckData = value;
+        }
+    }
+    private TtsVoiceRequirementCheckData? _requirementsCheckData;
 
     public TtsVoicePreferencesTab() : this(null) { }
 
@@ -65,13 +78,13 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
 
     protected override void FrameUpdate(FrameEventArgs args)
     {
-        if (_draggedEntry != null)
+        if (_draggingEntry != null)
         {
             const int swapStep = 2; // entry + HSeprator
             const float swapThreshold = 5f;
 
-            var entryBox = _draggedEntry.SizeBox;
-            var entryMousePos = _ui.MousePositionScaled.Position - _draggedEntry.GlobalPosition;
+            var entryBox = _draggingEntry.SizeBox;
+            var entryMousePos = _ui.MousePositionScaled.Position - _draggingEntry.GlobalPosition;
 
             var indexDelta = 0;
             if (entryMousePos.Y < entryBox.Top - swapThreshold)
@@ -82,7 +95,7 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
             if (indexDelta == 0)
                 return;
 
-            var oldIndex = _draggedEntry.GetPositionInParent();
+            var oldIndex = _draggingEntry.GetPositionInParent();
             var newIndex = Math.Clamp(oldIndex + indexDelta, 0, EntriesContainer.ChildCount - 1);
 
             if (newIndex == oldIndex)
@@ -90,7 +103,7 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
 
             var childOnNewIndex = EntriesContainer.GetChild(newIndex);
 
-            _draggedEntry.SetPositionInParent(newIndex);
+            _draggingEntry.SetPositionInParent(newIndex);
             childOnNewIndex.SetPositionInParent(oldIndex);
 
             EntriesContainer.InvalidateMeasure();
@@ -106,6 +119,12 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
             return;
 
         StopDragEntry();
+    }
+
+    protected override void ExitedTree()
+    {
+        base.ExitedTree();
+        CloseSelecotorWindow();
     }
 
     public void Refresh()
@@ -131,6 +150,14 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
             };
 
             entry.VoiceSelectorButton.OnPressed += _ => OpenSelectorWindow(provider);
+            entry.OnExitedTree += () =>
+            {
+                if (entry != _editingEntry)
+                    return;
+
+                CloseSelecotorWindow();
+            };
+
 
             EntriesContainer.AddChild(entry);
             _entriesDict.Add(provider, entry);
@@ -155,7 +182,7 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
 
         entry.VoiceSelectorButton.Pressed = true;
 
-        var window = new TtsProviderVoiceSelectorWindow(provider);
+        var window = new TtsProviderVoiceSelectorWindow(provider, _requirementsCheckData);
         window.OnClose += CloseSelecotorWindow;
         window.OnVoiceSelected += voice =>
         {
@@ -168,6 +195,7 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
 
         window.OpenCentered();
         _selectorWindow = window;
+        _editingEntry = entry;
     }
 
     private void CloseSelecotorWindow()
@@ -175,45 +203,43 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
         if (_selectorWindow == null)
             return;
 
-        var temp = _selectorWindow;
+        _selectorWindow.Close();
         _selectorWindow = null;
 
-        if (_entriesDict.TryGetValue(temp.Provider, out var entry))
-            entry.VoiceSelectorButton.Pressed = false;
-
-        temp.Close();
+        _editingEntry?.VoiceSelectorButton.Pressed = false;
+        _editingEntry = null;
     }
 
     private void StartDragEntry(TtsVoicePreferencesTabEntry entry)
     {
         StopDragEntry();
 
-        DebugTools.Assert(_draggedEntry == null);
+        DebugTools.Assert(_draggingEntry == null);
 
-        _draggedEntry = entry;
-        _draggedEntry.LightOverlay.Visible = true;
+        _draggingEntry = entry;
+        _draggingEntry.LightOverlay.Visible = true;
 
-        _draggedEntryStartPos = _draggedEntry.GetPositionInParent();
+        _draggedEntryStartPos = _draggingEntry.GetPositionInParent();
     }
 
     private void StopDragEntry()
     {
-        if (_draggedEntry == null)
+        if (_draggingEntry == null)
             return;
 
-        _draggedEntry.LightOverlay.Visible = false;
+        _draggingEntry.LightOverlay.Visible = false;
 
-        var newPos = _draggedEntry.GetPositionInParent();
+        var newPos = _draggingEntry.GetPositionInParent();
         if (newPos != _draggedEntryStartPos)
         {
-            VoicePreferences.Remove(_draggedEntry.Provider);
-            VoicePreferences.Insert(newPos, _draggedEntry.Provider, _draggedEntry.ProtoId);
+            VoicePreferences.Remove(_draggingEntry.Provider);
+            VoicePreferences.Insert(newPos, _draggingEntry.Provider, _draggingEntry.ProtoId);
             Refresh();
 
             OnPreferencesChanged?.Invoke();
         }
 
-        _draggedEntry = null;
+        _draggingEntry = null;
         _draggedEntryStartPos = null;
     }
 }

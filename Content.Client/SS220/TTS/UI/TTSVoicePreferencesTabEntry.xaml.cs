@@ -12,6 +12,8 @@ public sealed partial class TtsVoicePreferencesTabEntry : PanelContainer
 {
     [Dependency] private IEntityManager _entity = default!;
 
+    public Action? OnExitedTree;
+
     private readonly TtsSystem _tTSSystem = default!;
 
     public readonly TtsProvider Provider;
@@ -36,6 +38,12 @@ public sealed partial class TtsVoicePreferencesTabEntry : PanelContainer
         Refresh();
 
         VoicePlayButton.OnPressed += _ => _tTSSystem.RequestVoiceTest(protoId);
+    }
+
+    protected override void ExitedTree()
+    {
+        base.ExitedTree();
+        OnExitedTree?.Invoke();
     }
 
     public void Refresh()

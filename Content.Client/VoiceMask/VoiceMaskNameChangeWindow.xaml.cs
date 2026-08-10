@@ -43,7 +43,7 @@ public sealed partial class VoiceMaskNameChangeWindow : FancyWindow
         _voices = IoCManager
             .Resolve<IPrototypeManager>()
             .EnumeratePrototypes<TtsVoicePrototype>()
-            .Where(o => o.RoundStart)
+            //.Where(o => o.RoundStart) // Kirus Todo: fix this
             .OrderBy(o => Loc.GetString(o.Name))
             .ToList();
         for (var i = 0; i < _voices.Count; i++)

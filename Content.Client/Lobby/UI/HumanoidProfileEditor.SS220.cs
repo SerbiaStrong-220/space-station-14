@@ -1,3 +1,4 @@
+using Content.Client.SS220.TTS.UI;
 using Content.Shared.SS220.TTS;
 
 namespace Content.Client.Lobby.UI;
@@ -21,6 +22,11 @@ public partial class HumanoidProfileEditor
             return;
 
         TtsVoicePreferencesTab.SetPreferences(Profile.VoicePreferences.Clone());
+        TtsVoicePreferencesTab.RequirementsCheckData = new TtsVoiceRequirementCheckData
+        {
+            Session = _playerManager.LocalSession,
+            Profile = Profile
+        };
     }
 
     private void SetVoicePreferences(TtsVoicePreferences preferences)

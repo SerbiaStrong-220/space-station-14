@@ -4,4 +4,23 @@
   description: описание
   speaker: aidar
   provider: Silero
-  sex: Male
+  requirement: !type:TtsAnyRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Unsexed ]
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+
+- type: ttsVoice
+  id: SileroSponsorTest
+  name: Силеро Спонсор Тест
+  description: описание
+  speaker: aidar
+  provider: Silero
+  categories: [ Sponsor ]
+  requirement: !type:TtsAnyRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Unsexed ]
+    - !type:TtsSexRequirement
+      sexes: [ Male ]

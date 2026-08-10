@@ -1,7 +1,20 @@
-<BoxContainer xmlns="https://spacestation14.io"
-              Orientation="Horizontal"
-              HorizontalExpand="True">
-    <Label Name="NameLabel" HorizontalExpand="True"/>
-    <Button Name="SelectButton" Text="Выбрать"/>
-    <Button Name="PlayButton" Text="{Loc 'humanoid-profile-editor-voice-play'}" HorizontalAlignment="Right"/>
-</BoxContainer>
+<PanelContainer xmlns="https://spacestation14.io"
+                xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls;assembly=Content.Client"
+                HorizontalExpand="True"
+                MouseFilter="Stop">
+    <PanelContainer Name="ContentPanel">
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+            <Label Name="NameLabel" HorizontalExpand="True"/>
+            <Button Name="SelectButton" Text="Выбрать"/>
+            <Button Name="PlayButton" Text="{Loc 'humanoid-profile-editor-voice-play'}" HorizontalAlignment="Right"/>
+        </BoxContainer>
+    </PanelContainer>
+
+    <PanelContainer Name="LockedOverlay" Visible="False" MouseFilter="Stop">
+        <BoxContainer Orientation="Horizontal" VerticalAlignment="Center" Margin="5 0">
+            <controls:HLine Color="#4F5376FF" Thickness="2" HorizontalExpand="True" VerticalAlignment="Center"/>
+            <TextureRect Name="LockIcon" ModulateSelfOverride="#4F5376FF" Stretch="Scale" TexturePath="/Textures/Interface/VerbIcons/lock.svg.192dpi.png" SetSize="20 20" Margin="5 0"/>
+            <controls:HLine Color="#4F5376FF" Thickness="2" HorizontalExpand="True" VerticalAlignment="Center"/>
+        </BoxContainer>
+    </PanelContainer>
+</PanelContainer>
