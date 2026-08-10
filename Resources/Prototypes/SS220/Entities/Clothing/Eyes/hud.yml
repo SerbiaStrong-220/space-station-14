@@ -1,7 +1,7 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-  parent: ClothingEyesChameleon #ss220 add chameleon
+  parent: ClothingEyesChameleon #ss220 syndie chem add chameleon
   id: ClothingEyesHudSyndChem
   name: syndie chem med hud
   description: A heads-up display that scans the humanoids in view and provides accurate data about their health status.
@@ -21,12 +21,12 @@
   - type: Tag
     tags:
     - HudMedical
-    - WhitelistChameleon #ss220 add chameleon
+    - WhitelistChameleon #ss220 syndie chem add chameleon
   - type: EyeProtection
   - type: FlashImmunity
-  - type: ChameleonClothing #ss220 add chameleon
-    slot: [eyes] #ss220 add chameleon
-    default: ClothingEyesHudSyndChem #ss220 add chameleon
+  - type: ChameleonClothing #ss220 syndie chem add chameleon
+    slot: [eyes] #ss220 syndie chem add chameleon
+    default: ClothingEyesHudSyndChem #ss220 syndie chem add chameleon
 
 - type: entity
   parent: [ClothingEyesBase, ClothingEyesGlassesSecurity]
