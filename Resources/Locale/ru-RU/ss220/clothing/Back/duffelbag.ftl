@@ -8,5 +8,5 @@ ent-ClothingBackpackDuffelCBURNFilled = { ent-ClothingBackpackDuffelCBURN }
 ent-ClothingBackpackWhiteDuffelCaptain = белый вещмешок капитана
     .desc = Дорогая белая сумка, выданная за выслугу лет капитану.
 
-ent-ClothingBackpackJanitorJRDuffel = вещмешок уборщика JR
+ent-ClothingBackpackJanitorJRDuffel = вещмешок JR
     .desc = { ent-ClothingBackpackJanitorJR.desc }

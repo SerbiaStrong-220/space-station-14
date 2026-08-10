@@ -4,5 +4,5 @@ ent-ClothingBackpackNoirSatchel = нуарная кожаная сумка
     .desc = Модная сумка в нуарном стиле, ушедшая из нашей эпохи.
 ent-ClothingBackpackCentCommFilled = кожаная сумка
     .desc = Слегка обветшалая сумка, которую не меняли на ЦК уже много лет — бюджета, говорят, не выделили.
-ent-ClothingBackpackJanitorJRSatchel = сумка уборщика JR
+ent-ClothingBackpackJanitorJRSatchel = сумка JR
     .desc = { ent-ClothingBackpackJanitorJR.desc }

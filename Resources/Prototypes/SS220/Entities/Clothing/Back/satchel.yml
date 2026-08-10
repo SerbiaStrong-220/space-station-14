@@ -22,7 +22,7 @@
 - type: entity
   parent: ClothingBackpackSatchel
   id: ClothingBackpackJanitorJRSatchel
-  name: janitor JR satchel
+  name: JR satchel
   description: A convenient, water resistant backpack designed for cleaners JR.
   components:
   - type: Sprite

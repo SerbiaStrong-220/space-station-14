@@ -13,7 +13,7 @@
 - type: entity
   parent: ClothingBackpack
   id: ClothingBackpackJanitorJR
-  name: janitor JR backpack
+  name: JR backpack
   description: A convenient, water resistant backpack designed for cleaners JR.
   components:
   - type: Sprite

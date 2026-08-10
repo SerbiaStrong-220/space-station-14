@@ -939,15 +939,13 @@
 - type: loadoutGroup
   id: JanitorBackpack
   name: loadout-group-janitor-backpack
-  minLimit: 1
-  maxLimit: 1
   loadouts:
   - CommonBackpack
   - CommonSatchel
   - CommonDuffel
   - ClothingBackpackJanitorJR
-  - ClothingBackpackJanitorJRDuffel
   - ClothingBackpackJanitorJRSatchel
+  - ClothingBackpackJanitorJRDuffel
 
   # Уборщик (Конец)
 

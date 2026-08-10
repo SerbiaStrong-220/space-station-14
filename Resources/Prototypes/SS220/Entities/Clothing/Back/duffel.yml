@@ -13,7 +13,7 @@
 - type: entity
   parent: ClothingBackpackDuffel
   id: ClothingBackpackJanitorJRDuffel
-  name: janitor JR duffel bag
+  name: JR duffel bag
   description: A convenient, water resistant backpack designed for cleaners JR.
   components:
   - type: Sprite
