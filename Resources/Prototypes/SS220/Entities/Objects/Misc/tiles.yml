@@ -2805,3 +2805,58 @@
       - FloorOldconcretePavementVertical
   - type: Stack
     stackType: FloorItemStacksOldconcretePavementVertical
+
+- type: entity
+  name: gray lino floor
+  id: FloorItemLinoGray
+  parent: FloorTileItemBase
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/lino.rsi
+    state: linogray-icon
+  - type: Item
+    sprite: SS220/Objects/Tiles/lino.rsi
+    heldPrefix: linogray
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorLinoGray
+  - type: Stack
+    stackType: FloorItemStacksLinoGray
+
+- type: entity
+  name: light brown lino floor
+  id: FloorItemLinoLightBrown
+  parent: FloorTileItemBase
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/lino.rsi
+    state: linolightbrown-icon
+  - type: Item
+    sprite: SS220/Objects/Tiles/lino.rsi
+    heldPrefix: linolightbrown
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorLinoLightBrown
+  - type: Stack
+    stackType: FloorItemStacksLinoLightBrown
+
+- type: entity
+  name: red brown lino floor
+  id: FloorItemLinoRedBrown
+  parent: FloorTileItemBase
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/lino.rsi
+    state: linoredbrown-icon
+  - type: Item
+    sprite: SS220/Objects/Tiles/lino.rsi
+    heldPrefix: linoredbrown
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorLinoRedBrown
+  - type: Stack
+    stackType: FloorItemStacksLinoRedBrown
+

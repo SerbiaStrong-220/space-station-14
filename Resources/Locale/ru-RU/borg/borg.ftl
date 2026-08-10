@@ -28,9 +28,11 @@ borg-select-type-menu-information = Информация
 borg-select-type-menu-select-type = Выберите тип шасси для просмотра информации
 borg-select-type-menu-confirm = Подтвердите выбор
 borg-select-type-menu-guidebook = Руководство
-borg-type-generic-name = Универсал
-borg-type-generic-desc = Может всё, но одинаково не очень хорошо. Выполняйте различные случайные поручения на станции, или, быть может, окажите помощь научному отделу, который вас построил.
-borg-type-generic-transponder = обычный киборг
+#SS220 generic borg rework START
+borg-type-generic-name = Учёный
+borg-type-generic-desc = Работайте на благо научного отдела, который вас и создал. Помогайте содержать аномалии, изучать артефакты и заробатывать очки исследования.
+borg-type-generic-transponder = киборг-ученый
+#SS220 generic borg rework END
 borg-type-engineering-name = Инженер
 borg-type-engineering-desc = Помогайте команде инженеров в строительстве станции, ликвидации повреждений или исправлении проблем с электричеством и атмосферой.
 borg-type-engineering-transponder = киборг-инженер

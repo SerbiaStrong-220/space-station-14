@@ -659,3 +659,35 @@
   components:
   - type: Pda
     id: RedWingsOfficerIDCard
+
+- type: entity
+  parent: JanitorPDA
+  id: JanitorJRPDA
+  name: janitor JR PDA
+  description: A special PDA for a janitor JR.
+  components:
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-JR
+  - type: PdaBorderColor
+    borderColor: "#5eb052"
+    accentHColor: "#936042"
+    accentVColor: "#5eb052"
+  - type: Sprite
+    layers:
+    - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda-JR"
+    - state: "screen-JR"
+      shader: "unshaded"
+    - state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      visible: false
+  - type: Icon
+    state: pda-JR
+
