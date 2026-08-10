@@ -194,6 +194,7 @@
   - GroupSpeciesBreathTool
   - WorkerCash #SS220-Cash-personal
   - JanitorEquipment #SS220-JREquipmentUpdate
+  - JanitorPDA #SS220-JRNewThings
 
 - type: roleLoadout
   id: JobBotanist

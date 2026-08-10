@@ -4,26 +4,42 @@ using Content.Server.Power.Components;
 using Content.Server.Temperature.Components;
 using Content.Shared.Atmos;
 using Content.Shared.Placeable;
+using Content.Shared.SS220.Cooking;
 using Content.Shared.SS220.Cooking.Grilling;
+using Content.Shared.SS220.Cooking.Overcooking;
 
 namespace Content.Server.SS220.Cooking.Grilling;
 
 /// <summary>
 /// This handles grill cooking
 /// </summary>
-public sealed class GrillSystem : SharedGrillSystem
+public sealed partial class GrillSystem : SharedGrillSystem
 {
+    [Dependency] private SharedOvercookingSystem _overcooking = default!;
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
         var query = EntityQueryEnumerator<GrillComponent, ItemPlacerComponent, ApcPowerReceiverComponent>();
         while (query.MoveNext(out _, out var grill, out var placer, out var power))
         {
-            if (!power.Powered || grill.GrillSettings == Shared.Temperature.EntityHeaterSetting.Off)
-                continue;
+            var activelyCooking = power.Powered && grill.GrillSettings != Shared.Temperature.EntityHeaterSetting.Off;
+
+            if (!activelyCooking)
+                return;
 
             foreach (var ent in placer.PlacedEntities)
             {
+                var canBeCooked = HasComp<GrillableComponent>(ent) || _overcooking.CanBeOvercooked(ent);
+
+                if (!canBeCooked)
+                    continue;
+
+                UpdateBeingCooked(ent, canBeCooked);
+
+                if (_overcooking.UpdateOvercooking(ent, frameTime))
+                    continue;
+
                 if (TryComp<InternalTemperatureComponent>(ent, out var temp) &&
                     TryComp<GrillableComponent>(ent, out var grillable))
                 {
@@ -44,7 +60,7 @@ public sealed class GrillSystem : SharedGrillSystem
                             break;
                     }
 
-                    grillable.CurrentCookTime += (cookingSpeed + grill.CookingSpeed) * frameTime;
+                    grillable.CurrentCookTime += (cookingSpeed + grill.CookingSpeed) * grill.CookingModifier * frameTime;
                     Dirty(ent, grillable);
 
                     var ev = new CookTimeChanged(ent);
@@ -52,5 +68,16 @@ public sealed class GrillSystem : SharedGrillSystem
                 }
             }
         }
+    }
+
+    private void UpdateBeingCooked(EntityUid uid, bool activelyCooking)
+    {
+        if (!activelyCooking)
+        {
+            RemComp<BeingCookedComponent>(uid);
+            return;
+        }
+
+        EnsureComp<BeingCookedComponent>(uid);
     }
 }
