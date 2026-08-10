@@ -26,6 +26,7 @@
   - BoxFolderBaseThreePapers
   - BoxFolderPlasticClipboardThreePapers
   - BoxFolderClipboardThreePapers
+  - ClothingNeckTSFPin #SS220-NewPins
   - ClothingNeckLGBTPin
   - ClothingNeckAllyPin
   - ClothingNeckAromanticPin
@@ -45,6 +46,35 @@
   - ClothingNeckUSSPPin # ss220 add neck ussp pin to loadout
   - ClothingNeckAutismPin
   - ClothingNeckGoldAutismPin
+  #SS220-NewPins begin
+  - ClothingNeck1984Pin
+  - ClothingNeckBeerPin
+  - ClothingNeckCatDespairPin
+  - ClothingNeckJRGreenPin
+  - ClothingNeckJRWhitePin
+  - ClothingNeckMothPin
+  - ClothingNeckDwarfPin
+  - ClothingNeckSheriffStarPin
+  - ClothingNeckLovePin
+  - ClothingNeckSmokeWormPin
+  - ClothingNeckStarPin
+  - ClothingNeckIPCPin
+  - ClothingNeckSlimegreenPin
+  - ClothingNeckBigFloppaPin
+  - ClothingNeckSilverBloodDonorPin
+  - ClothingNeckGoldBloodDonorPin
+  - ClothingNeckGrapePin
+  - ClothingNeckBrushwoodPin
+  - ClothingNeckCloverPin
+  - ClothingNeckHumanPin
+  - ClothingNeckLizardPin
+  - ClothingNeckArachnidPin
+  - ClothingNeckTajaraPin
+  - ClothingNeckVoxPin
+  - ClothingNeckDionaPin
+  - ClothingNeckSlimePin
+  - ClothingNeckVulpearPin
+  #SS220-NewPins end
   - OffsetCane
   - OffsetCaneWood
   - OffsetCaneClown
@@ -170,6 +200,8 @@
   - CaptainMantle
   - CaptainFormalWhiteCloak #ss220-loadout-captain
   - CaptainWhiteMantle #ss220-loadout-fullwhitecap
+  - CaptainShoulderMantle # SS220 Add Shoulder Mantles
+  - CaptainWhiteShoulderMantle # SS220 Add Shoulder Mantles
 
 - type: loadoutGroup
   id: CaptainBackpack
@@ -584,6 +616,10 @@
   minLimit: 0
   loadouts:
   - JanitorWintercoat
+  #SS220-JRNewThings begin
+  - ClothingOuterWinterJanitorJR
+  - ClothingOuterCoatJanitorJRBomber
+  #SS220-JRNewThings end
 
 - type: loadoutGroup
   id: JanitorJobTrinkets
@@ -1397,6 +1433,7 @@
   - HeadofSecurityMantle
   - SecurityHolster #SS220-HoS-Holster
   - MantleHOSShoulder #ss220 sec loadout update
+  - HOSShoulderMantle # SS220 Add Shoulder Mantles
 
 - type: loadoutGroup
   id: HeadofSecurityOuterClothing

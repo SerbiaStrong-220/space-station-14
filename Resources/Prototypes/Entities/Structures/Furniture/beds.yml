@@ -5,6 +5,11 @@
   description: This is used to lie in, sleep in or strap on. Resting here provides extremely slow healing.
   components:
   - type: HealOnBuckle
+    #SS220-MicroFixesIPC begin
+    blacklist: 
+      components:
+      - Ipc
+    #SS220-MicroFixesIPC end
     damage:
       types:
         Poison: -0.1
@@ -79,6 +84,11 @@
   - type: Sprite
     state: bed-MED
   - type: HealOnBuckle
+    #SS220-MicroFixesIPC begin
+    blacklist: 
+      components:
+      - Ipc
+    #SS220-MicroFixesIPC end
     damage:
       types:
         Poison: -0.2

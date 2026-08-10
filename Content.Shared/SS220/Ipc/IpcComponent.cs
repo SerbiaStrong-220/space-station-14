@@ -105,6 +105,12 @@ public sealed partial class IpcComponent : Component
     /// </summary>
     [DataField]
     public float CritDrawRate = 5.0f;
+
+    /// <summary>
+    /// Hiding layers of clothing that are incorrectly displayed on IPC.
+    /// </summary>
+    [DataField]
+    public HashSet<string> HiddenClothingSlots = ["eyes", "ears"];
 }
 
 public sealed partial class ToggleDrainActionEvent : InstantActionEvent;

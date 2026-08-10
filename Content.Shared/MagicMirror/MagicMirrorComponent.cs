@@ -50,5 +50,8 @@ public sealed partial class MagicMirrorComponent : Component
 
     [DataField]
     public bool CheckHeadSlot = true;
+
+    [DataField]
+    public bool Interactable = true;
     //SS220-IPC end
 }
