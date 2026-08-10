@@ -1,0 +1,22 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: BriefcaseWeapon
+  id: BriefcaseWeaponBlueshield
+  name: secure weapon case
+  suffix: Gun, Empty
+  description: A case for storing weapons, used by officers of the Blue Shield.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/Briefcases/bs_weapon_case_large.rsi
+
+- type: entity
+  parent: BriefcaseWeaponSmall
+  id: BriefcaseWeaponSmallBlueshield
+  suffix: Gun, Small, Empty
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/Briefcases/bs_weapon_case.rsi
+  - type: Storage
+    grid:
+    - 0,0,5,1

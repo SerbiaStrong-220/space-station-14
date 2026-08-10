@@ -1,0 +1,173 @@
+- type: selectableSet
+  id: WeaponBlasterKRSSet
+  name: selectable-set-weapon-blaster-krs-name
+  description: selectable-set-weapon-blaster-krs-description
+  sprite:
+    sprite: SS220/Objects/Weapons/Guns/Battery/blaster.rsi
+    state: icon
+  content:
+  - WeaponBlasterKRS
+  - PowerCellBlaster
+  - PowerCellBlaster
+  - PowerCellBlaster
+
+- type: selectableSet
+  id: WeaponDrozdSet
+  name: selectable-set-weapon-drozd-name
+  description: selectable-set-weapon-drozd-description
+  sprite:
+    sprite: SS220/Objects/Weapons/Guns/SMGs/drozd.rsi
+    state: icon
+  content:
+  - WeaponSubMachineGunDrozd
+  - MagazinePistolSubMachineGun
+  - MagazinePistolSubMachineGun
+  - MagazinePistolSubMachineGun
+
+- type: selectableSet
+  id: WeaponEnergyRevolverSet
+  name: selectable-set-weapon-energy-revolver-name
+  description: selectable-set-weapon-energy-revolver-description
+  sprite:
+    sprite: SS220/Objects/Weapons/Guns/Battery/laser_revolver.rsi
+    state: icon
+  content:
+  - WeaponEnergyGunRevolver
+
+- type: selectableSet
+  id: ClothingBeltHolsterBlueshieldSet
+  name: selectable-set-clothing-belt-holster-blueshield-name
+  description: selectable-set-clothing-belt-holster-blueshield-description
+  sprite:
+    sprite: SS220/Clothing/Neck/Misc/bs_holster.rsi
+    state: icon
+  content:
+  - ClothingBeltHolsterBlueshield
+
+- type: selectableSet
+  id: CorporateJudoManualSet
+  name: selectable-set-corporate-judo-manual-name
+  description: selectable-set-corporate-judo-manual-description
+  sprite:
+    sprite: SS220/Objects/Misc/manual.rsi
+    state: judo
+  content:
+  - CorporateJudoManual
+
+- type: selectableSet
+  id: TelescopicShieldSet
+  name: selectable-set-telescopic-shield-name
+  description: selectable-set-telescopic-shield-description
+  sprite:
+    sprite: Objects/Weapons/Melee/teleriot_shield.rsi
+    state: teleriot-icon
+  content:
+  - TelescopicShieldAlt
+
+- type: selectableSet
+  id: BlueshieldMedicalSet
+  name: selectable-set-blueshield-medical-name
+  description: selectable-set-blueshield-medical-description
+  sprite:
+    sprite: Objects/Devices/cartridge.rsi
+    state: cart-med
+  content:
+  - MedTekCartridge
+
+- type: selectableSet
+  id: BlueshieldParamedicSet
+  name: selectable-set-blueshield-paramedic-name
+  description: selectable-set-blueshield-paramedic-description
+  sprite:
+    sprite: Objects/Specific/Medical/defibsmall.rsi
+    state: icon
+  content:
+  - DefibrillatorCompact
+
+
+- type: entity
+  id: SetSelectorBase
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: Objects/Tools/Toolboxes/toolbox_thief.rsi
+    state: icon
+  - type: SetSelector
+  - type: ActivatableUI
+    key: enum.SetSelectorUIKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.SetSelectorUIKey.Key:
+        type: SetSelectorBoundUserInterface
+
+
+- type: entity
+  id: SetSelectorBriefcaseBase
+  parent: SetSelectorBase
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/Briefcases/weapon_case_large.rsi
+    layers:
+    - state: icon
+    - state: unlocked
+  - type: Item
+    size: Ginormous
+
+- type: entity
+  id: SetCaseBlueshieldPriamryWeapon
+  parent: SetSelectorBriefcaseBase
+  name: blueshield primary gun case
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/Briefcases/bs_weapon_case_large.rsi
+  - type: SetSelector
+    spawnedStoragePrototype: BriefcaseWeaponBlueshield
+    maxSelectedSets: 1
+    possibleSets:
+    - WeaponBlasterKRSSet
+    - WeaponDrozdSet
+
+- type: entity
+  id: SetCaseBlueshieldSecondaryEquipment
+  parent: SetSelectorBriefcaseBase
+  name: blueshield secondary equipment case
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/Briefcases/bs_weapon_case.rsi
+  - type: Item
+    size: Large
+  - type: SetSelector
+    spawnedStoragePrototype: BriefcaseWeaponSmallBlueshield
+    maxSelectedSets: 3
+    possibleSets:
+    - WeaponEnergyRevolverSet
+    - ClothingBeltHolsterBlueshieldSet
+    - TelescopicShieldSet
+    - CorporateJudoManualSet
+    - BlueshieldMedicalSet
+    - BlueshieldParamedicSet
+
+- type: selectableSet
+  id: WeaponRevolverUnikaSet
+  name: selectable-set-weapon-revolver-unika-name
+  description: selectable-set-weapon-revolver-unika-description
+  sprite:
+    sprite: SS220/Objects/Weapons/Guns/Revolvers/unika.rsi
+    state: icon
+  content:
+  - WeaponRevolverMatebaSouvenir
+  - SpeedLoaderMagnum
+  - SpeedLoaderMagnum
+
+- type: selectableSet
+  id: WeaponEnergyMagnumSet
+  name: selectable-set-weapon-energy-magnum-name
+  description: selectable-set-weapon-energy-magnum-description
+  sprite:
+    sprite: Objects/Weapons/Guns/Battery/energy_magnum.rsi
+    state: icon
+  content:
+  - WeaponEnergyMagnum
+

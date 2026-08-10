@@ -104,7 +104,7 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Guns/Battery/ert_blaster.rsi
+    sprite: SS220/Objects/Weapons/Guns/Battery/blaster.rsi
     layers:
       - state: base
         map: ["enum.GunVisualLayers.Base"]
@@ -114,7 +114,7 @@
         map: ["enum.GunVisualLayers.MagUnshaded"]
         shader: unshaded
   - type: Clothing
-    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Guns/Battery/ert_blaster.rsi
+    sprite: SS220/Objects/Weapons/Guns/Battery/blaster.rsi
     quickEquip: false
     slots:
       - Back
@@ -145,9 +145,9 @@
   description: An old reliable blaster rifle. There is only a semi-automatic type of shooting.
   components:
   - type: Gun
-    selectedMode: Burst
+    selectedMode: SemiAuto
     availableModes:
-      - Burst
+      - SemiAuto
   - type: BatteryAmmoProvider
     proto: BulletBlasterBolt
     fireCost: 62.5

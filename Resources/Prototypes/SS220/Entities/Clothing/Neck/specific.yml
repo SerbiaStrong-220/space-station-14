@@ -56,7 +56,7 @@
   id: ClothingNeckGoldenCross
   name: golden cross
   description: Beautiful golden cross.
-  components: 
+  components:
     - type: Sprite
       sprite: SS220/Clothing/Neck/Misc/golden_cross.rsi
     - type: Clothing
@@ -67,9 +67,34 @@
   id: ClothingNeckSilverCross
   name: silver cross
   description: Beautiful silver cross.
-  components: 
+  components:
     - type: Sprite
       sprite: SS220/Clothing/Neck/Misc/silver_cross.rsi
     - type: Clothing
       sprite: SS220/Clothing/Neck/Misc/silver_cross.rsi
 
+- type: entity
+  parent: ClothingBeltBase
+  id: ClothingBeltHolsterBlueshield
+  name: blueshield shoulder holster
+  description:
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Misc/bs_holster.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Misc/bs_holster.rsi
+    slots: [neck]
+  - type: Charger
+    chargeRate: 60
+    slotId: charger_slot
+    portable: true
+  - type: ContainerContainer
+    containers:
+      charger_slot: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      charger_slot:
+        ejectOnInteract: false
+        whitelist:
+          tags:
+          - Sidearm
