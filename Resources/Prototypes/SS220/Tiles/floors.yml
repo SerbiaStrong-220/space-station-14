@@ -2373,7 +2373,7 @@
   parent: BaseStationTile
   name: tiles-linoleum-gray-floor
   tags: [ tile-tag-other ]
-  sprite: /Textures/SS220/Objects/Tiles/lino.rsi/linogray.png
+  sprite: /Textures/SS220/Tiles/linogray.png
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorItemLinoGray
@@ -2383,7 +2383,7 @@
   parent: BaseStationTile
   name: tiles-linoleum-lightbrown-floor
   tags: [ tile-tag-other ]
-  sprite: /Textures/SS220/Objects/Tiles/lino.rsi/linolightbrown.png
+  sprite: /Textures/SS220/Tiles/linolightbrown.png
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorItemLinoLightBrown
@@ -2393,7 +2393,7 @@
   parent: BaseStationTile
   name: tiles-linoleum-redbrown-floor
   tags: [ tile-tag-other ]
-  sprite: /Textures/SS220/Objects/Tiles/lino.rsi/linoredbrown.png
+  sprite: /Textures/SS220/Tiles/linoredbrown.png
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorItemLinoRedBrown
