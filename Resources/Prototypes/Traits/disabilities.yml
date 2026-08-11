@@ -75,11 +75,6 @@
   name: trait-paracusia-name
   description: trait-paracusia-desc
   category: Disabilities
-  #SS220-Ipc begin
-  blacklist:
-    components:
-      - Ipc
-  #SS220-Ipc end
   components:
     - type: Paracusia
       minTimeBetweenIncidents: 0.1
