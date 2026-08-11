@@ -169,10 +169,10 @@
     screamAction: ActionIpcScream
   - type: MeleeWeapon
     soundHit:
-      collection: AlienClaw
+      collection: MetalThud
     damage:
       types:
-        Slash: 5
+        Blunt: 5
   - type: Damageable
     damageContainer: Ipc
     damageModifierSet: Ipc
