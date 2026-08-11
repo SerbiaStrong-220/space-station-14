@@ -8,6 +8,7 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Input;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -18,6 +19,9 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
 {
     [Dependency] private IUserInterfaceManager _ui = default!;
     [Dependency] private IInputManager _input = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+
+    private readonly TtsSystem _tts;
 
     public event Action? OnPreferencesChanged;
 
@@ -32,7 +36,11 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
     private TtsProviderVoiceSelectorWindow? _selectorWindow;
     private TtsVoicePreferencesTabEntry? _editingEntry;
 
-    private Dictionary<TtsProvider, TtsVoicePreferencesTabEntry> _entriesDict = new();
+    private readonly Dictionary<TtsProvider, TtsVoicePreferencesTabEntry> _entriesDict = [];
+
+    private static readonly Color EntryLowWarningColor = Color.Yellow.WithAlpha(0.7f);
+    private static readonly Color EntryHighWarningColor = Color.Red.WithAlpha(0.7f);
+    private static readonly Color DraggingEntryColor = Color.FromHex("#969696B3");
 
     public TtsVoiceRequirementCheckData? RequirementsCheckData
     {
@@ -41,6 +49,9 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
         {
             _requirementsCheckData = value;
             _selectorWindow?.RequirementsCheckData = value;
+
+            foreach (var entry in _entriesDict.Values)
+                RefreshEntryState(entry);
         }
     }
     private TtsVoiceRequirementCheckData? _requirementsCheckData;
@@ -51,6 +62,8 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
+
+        _tts = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<TtsSystem>();
 
         ProviderHeaderBackground.PanelOverride = new StyleBoxFlat()
         {
@@ -72,6 +85,8 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
 
             StopDragEntry();
         };
+
+        _tts.OnTtsProviderStateChanged += OnProviderStateChanged;
 
         Refresh();
     }
@@ -124,7 +139,17 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
     protected override void ExitedTree()
     {
         base.ExitedTree();
+
         CloseSelecotorWindow();
+        _tts.OnTtsProviderStateChanged -= OnProviderStateChanged;
+    }
+
+    private void OnProviderStateChanged(TtsProvider provider, bool enabled)
+    {
+        if (!_entriesDict.TryGetValue(provider, out var entry))
+            return;
+
+        RefreshEntryState(entry);
     }
 
     public void Refresh()
@@ -135,12 +160,20 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
         var first = true;
         foreach (var (provider, protoId) in VoicePreferences)
         {
+            if (!_proto.TryIndex(protoId, out var proto))
+            {
+                DebugTools.Assert($"Failed to index voice prototype with id {protoId}");
+                continue;
+            }
+
+            DebugTools.Assert(provider == proto.Provider, $"Prototype {protoId} does not use provider {provider.ToString()}");
+
             if (first)
                 first = false;
             else
                 EntriesContainer.AddChild(new HSeparator());
 
-            var entry = new TtsVoicePreferencesTabEntry(provider, protoId);
+            var entry = new TtsVoicePreferencesTabEntry(proto);
             entry.OnKeyBindDown += args =>
             {
                 if (args.Function != EngineKeyFunctions.UIClick)
@@ -161,6 +194,8 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
 
             EntriesContainer.AddChild(entry);
             _entriesDict.Add(provider, entry);
+
+            RefreshEntryState(entry);
         }
     }
 
@@ -170,6 +205,32 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
         Refresh();
 
         OnPreferencesChanged?.Invoke();
+    }
+
+    private void RefreshEntryState(TtsVoicePreferencesTabEntry entry)
+    {
+        Color? highlightColor = null;
+        FormattedMessage? tooltipMsg = null;
+
+        if (entry == _draggingEntry)
+            highlightColor = DraggingEntryColor;
+        else if (_requirementsCheckData is { } checkData && !_tts.IsPassVoiceRequirements(entry.Prototype, checkData, out var reason))
+        {
+            // highlightColor = EntryHighWarningColor;
+            // highlightColor = Color.Red.WithAlpha(0.2f);
+            entry.SetBackgroundColor(Color.Red.WithAlpha(0.5f));
+            tooltipMsg = FormattedMessage.FromMarkupPermissive(Loc.GetString("ui-tts-voice-preferences-tab-voice-not-allowed", ("reason", reason.ToMarkup())));
+        }
+        else if (!_tts.IsProviderEnabled(entry.Prototype.Provider))
+        {
+            // highlightColor = EntryLowWarningColor;
+            // highlightColor = Color.Yellow.WithAlpha(0.2f);
+            entry.SetBackgroundColor(Color.Yellow.WithAlpha(0.25f));
+            tooltipMsg = FormattedMessage.FromMarkupPermissive(Loc.GetString("ui-tts-voice-preferences-tab-provider-disabled", ("provider", entry.Prototype.Provider.ToString())));
+        }
+
+        entry.SetHighlightColor(highlightColor);
+        entry.SetTooltipMsg(tooltipMsg);
     }
 
     private void OpenSelectorWindow(TtsProvider provider)
@@ -217,9 +278,9 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
         DebugTools.Assert(_draggingEntry == null);
 
         _draggingEntry = entry;
-        _draggingEntry.LightOverlay.Visible = true;
-
         _draggedEntryStartPos = _draggingEntry.GetPositionInParent();
+
+        RefreshEntryState(entry);
     }
 
     private void StopDragEntry()
@@ -227,13 +288,13 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
         if (_draggingEntry == null)
             return;
 
-        _draggingEntry.LightOverlay.Visible = false;
+        var entry = _draggingEntry;
 
-        var newPos = _draggingEntry.GetPositionInParent();
+        var newPos = entry.GetPositionInParent();
         if (newPos != _draggedEntryStartPos)
         {
-            VoicePreferences.Remove(_draggingEntry.Provider);
-            VoicePreferences.Insert(newPos, _draggingEntry.Provider, _draggingEntry.ProtoId);
+            VoicePreferences.Remove(entry.Prototype.Provider);
+            VoicePreferences.Insert(newPos, entry.Prototype.Provider, entry.Prototype);
             Refresh();
 
             OnPreferencesChanged?.Invoke();
@@ -241,5 +302,7 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
 
         _draggingEntry = null;
         _draggedEntryStartPos = null;
+
+        RefreshEntryState(entry);
     }
 }

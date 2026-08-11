@@ -13,6 +13,8 @@ public abstract partial class SharedTtsSystem : EntitySystem
 
     public const string TtsCommandsPrefix = "tts.";
 
+    public event Action<TtsProvider, bool>? OnTtsProviderStateChanged;
+
     private readonly HashSet<TtsProvider> _enabledProviders = [];
 
     protected bool TtsEnabled = false;
@@ -125,10 +127,14 @@ public abstract partial class SharedTtsSystem : EntitySystem
 
     private void UpdateProviderEnabled(TtsProvider provider, bool enabled)
     {
+        bool changed;
         if (enabled)
-            _enabledProviders.Add(provider);
+            changed = _enabledProviders.Add(provider);
         else
-            _enabledProviders.Remove(provider);
+            changed = _enabledProviders.Remove(provider);
+
+        if (changed)
+            OnTtsProviderStateChanged?.Invoke(provider, enabled);
     }
 }
 
