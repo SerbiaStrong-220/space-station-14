@@ -23,6 +23,10 @@ using Content.Shared.Temperature;
 using Content.Shared.MagicMirror;
 using Content.Shared.Power;
 using Content.Server.Body.Components;
+using Content.Server.EUI;
+using Content.Server.Ghost;
+using Content.Shared.Mind;
+using Robust.Shared.Player;
 
 namespace Content.Server.SS220.Ipc;
 
@@ -38,6 +42,9 @@ public sealed partial class IpcSystem : EntitySystem
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private MobThresholdSystem _mobThresholdSystem = default!;
+    [Dependency] private EuiManager _eui = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
 
     private static readonly LocId IpcDrainReady = "ipc-drain-enabled";
     private static readonly LocId IpcDrainDisabled = "ipc-drain-disabled";
@@ -212,6 +219,7 @@ public sealed partial class IpcSystem : EntitySystem
 
     /// <summary>
     /// IPC easily return from a dead state to a critical state if they are repaired.
+    /// Notify a disconnected ghost that their IPC body is repaired and can be returned to.
     /// </summary>
     private void OnDamageChanged(Entity<IpcComponent> ent, ref DamageChangedEvent args)
     {
@@ -231,6 +239,13 @@ public sealed partial class IpcSystem : EntitySystem
             return;
 
         _mobState.ChangeMobState(ent, MobState.Critical);
+
+        if (_mind.TryGetMind(ent.Owner, out _, out var mindComp) &&
+            _player.TryGetSessionById(mindComp.UserId, out var playerSession) &&
+            mindComp.CurrentEntity != ent.Owner)
+        {
+            _eui.OpenEui(new ReturnToBodyEui(mindComp, _mind, _player), playerSession);
+        }
     }
 
     /// <summary>
