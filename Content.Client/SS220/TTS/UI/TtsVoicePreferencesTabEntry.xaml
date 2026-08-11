@@ -13,9 +13,5 @@
         </BoxContainer>
     </PanelContainer>
 
-    <PanelContainer Access="Public" Name="HighlightOverlay" Visible="false">
-        <PanelContainer.PanelOverride>
-            <gfx:StyleBoxFlat BackgroundColor="#969696B3"/>
-        </PanelContainer.PanelOverride>
-    </PanelContainer>
+    <PanelContainer Name="HighlightOverlay" Visible="false" />
 </PanelContainer>
