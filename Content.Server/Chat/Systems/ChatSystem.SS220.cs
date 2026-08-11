@@ -8,10 +8,6 @@ namespace Content.Server.Chat.Systems;
 
 public sealed partial class ChatSystem
 {
-    /// <summary>
-    ///     Language aware version of <see cref="SendInVoiceRange"/>.
-    ///     Every listener receives its own variant of the message.
-    /// </summary>
     private void SendInVoiceRangeWithLanguage(
         LanguageMessage languageMessage,
         string name,
@@ -20,8 +16,6 @@ public sealed partial class ChatSystem
         EntityUid source,
         ChatTransmitRange range)
     {
-        var wrapId = speech.Bold ? "chat-manager-entity-say-bold-wrap-message" : "chat-manager-entity-say-wrap-message";
-
         foreach (var (session, data) in GetRecipients(source, VoiceRange))
         {
             var entRange = MessageRangeCheck(session, data, range);
@@ -33,13 +27,19 @@ public sealed partial class ChatSystem
 
             var scrambledMessage = languageMessage.GetMessage(listener, true);
             var entHideChat = entRange == MessageRangeCheckResult.HideChat;
-            _chatManager.ChatMessageToOne(ChatChannel.Local, scrambledMessage, Wrap(scrambledMessage), source, entHideChat, session.Channel);
+            var wrappedMessage = WrapSpokenMessage(scrambledMessage, name, verb, speech);
+            _chatManager.ChatMessageToOne(ChatChannel.Local, scrambledMessage, wrappedMessage, source, entHideChat, session.Channel);
         }
 
         var sourceMessage = languageMessage.GetMessage(source, false);
-        _replay.RecordServerMessage(new ChatMessage(ChatChannel.Local, sourceMessage, Wrap(sourceMessage), GetNetEntity(source), null, MessageRangeHideChatForReplay(range)));
+        var sourceWrappedMessage = WrapSpokenMessage(sourceMessage, name, verb, speech);
+        _replay.RecordServerMessage(new ChatMessage(ChatChannel.Local, sourceMessage, sourceWrappedMessage, GetNetEntity(source), null, MessageRangeHideChatForReplay(range)));
+    }
 
-        string Wrap(string message) => Loc.GetString(wrapId,
+    private string WrapSpokenMessage(string message, string name, string verb, SpeechVerbPrototype speech)
+    {
+        var wrapId = speech.Bold ? "chat-manager-entity-say-bold-wrap-message" : "chat-manager-entity-say-wrap-message";
+        return Loc.GetString(wrapId,
             ("entityName", name),
             ("verb", verb),
             ("fontType", speech.FontId),
