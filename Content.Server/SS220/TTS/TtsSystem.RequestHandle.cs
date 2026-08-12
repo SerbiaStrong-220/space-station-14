@@ -9,6 +9,9 @@ namespace Content.Server.SS220.TTS;
 
 public partial class TtsSystem
 {
+    /// <summary>
+    /// Starts asynchronous handling of the <paramref name="request"/>.
+    /// </summary>
     public void RunTtsRequestHandle(ITtsRequest request)
     {
         RunTaskWithTryCatch(() => HandleTtsRequest(request));
@@ -28,13 +31,16 @@ public partial class TtsSystem
         };
     }
 
-    private async Task HandleSayRequest(TtsSayRequest sayRequest)
+    private async Task HandleSayRequest(TtsSayRequest request)
     {
-        var validReceivers = ToValidReceivers(sayRequest.Receivers);
+        if (!TtsEnabled || !IsAnyProviderEnabled() || request.Text.Length > _maxMessageChars)
+            return;
+
+        var validReceivers = ToValidReceivers(request.Receivers);
         if (!validReceivers.Any())
             return;
 
-        using var ttsResponce = await ConvertTextToSpeech(sayRequest.Text, sayRequest.SpeakerData.Voice, TtsKind.Say);
+        using var ttsResponce = await ConvertTextToSpeech(request.Text, request.SpeakerData.Voice, TtsKind.Say);
         if (!ttsResponce.TryGetValue(out var audioData))
             return;
 
@@ -43,10 +49,10 @@ public partial class TtsSystem
             TtsData = audioData,
             TtsMetadata = new TtsMetadata()
             {
-                Provider = sayRequest.SpeakerData.Voice.Provider,
+                Provider = request.SpeakerData.Voice.Provider,
                 Kind = TtsKind.Say,
-                Source = sayRequest.SpeakerData.NetSpeaker,
-                PlayEntity = sayRequest.SpeakerData.NetSpeaker
+                Source = request.SpeakerData.NetSpeaker,
+                PlayEntity = request.SpeakerData.NetSpeaker
             }
         });
 
@@ -54,20 +60,23 @@ public partial class TtsSystem
             RaiseNetworkEvent(msg, receiver);
     }
 
-    private async Task HandleWhisperRequest(TtsWhisperRequest whisperRequest)
+    private async Task HandleWhisperRequest(TtsWhisperRequest request)
     {
+        if (!TtsEnabled || !IsAnyProviderEnabled() || request.Text.Length > _maxMessageChars)
+            return;
+
         var textReceivers = new List<ICommonSession>();
         var obfTextReceivers = new List<ICommonSession>();
 
         var muffledRangeSqr = SharedChatSystem.WhisperMuffledRange * SharedChatSystem.WhisperMuffledRange;
         var clearRangeSqr = SharedChatSystem.WhisperClearRange * SharedChatSystem.WhisperClearRange;
-        foreach (var receiver in ToValidReceivers(whisperRequest.Receivers))
+        foreach (var receiver in ToValidReceivers(request.Receivers))
         {
             if (!receiver.AttachedEntity.HasValue)
                 continue;
 
             var xformQuery = GetEntityQuery<TransformComponent>();
-            var sourcePos = _xforms.GetWorldPosition(xformQuery.GetComponent(whisperRequest.SpeakerData.Speaker), xformQuery);
+            var sourcePos = _xforms.GetWorldPosition(xformQuery.GetComponent(request.SpeakerData.Speaker), xformQuery);
 
             var xform = xformQuery.GetComponent(receiver.AttachedEntity.Value);
             var distanceSqr = (sourcePos - _xforms.GetWorldPosition(xform, xformQuery)).LengthSquared();
@@ -83,7 +92,7 @@ public partial class TtsSystem
 
         if (textReceivers.Count > 0)
         {
-            using var ttsResponce = await ConvertTextToSpeech(whisperRequest.Text, whisperRequest.SpeakerData.Voice, TtsKind.Whisper);
+            using var ttsResponce = await ConvertTextToSpeech(request.Text, request.SpeakerData.Voice, TtsKind.Whisper);
             if (ttsResponce.TryGetValue(out var audioData))
             {
                 var msg = new PlayTtsMessage(new PlayTtsMessageData
@@ -91,10 +100,10 @@ public partial class TtsSystem
                     TtsData = audioData,
                     TtsMetadata = new TtsMetadata()
                     {
-                        Provider = whisperRequest.SpeakerData.Voice.Provider,
+                        Provider = request.SpeakerData.Voice.Provider,
                         Kind = TtsKind.Whisper,
-                        Source = whisperRequest.SpeakerData.NetSpeaker,
-                        PlayEntity = whisperRequest.SpeakerData.NetSpeaker
+                        Source = request.SpeakerData.NetSpeaker,
+                        PlayEntity = request.SpeakerData.NetSpeaker
                     }
                 });
 
@@ -105,7 +114,7 @@ public partial class TtsSystem
 
         if (obfTextReceivers.Count > 0)
         {
-            using var obfTtsResponce = await ConvertTextToSpeech(whisperRequest.ObfuscatedText, whisperRequest.SpeakerData.Voice, TtsKind.Whisper);
+            using var obfTtsResponce = await ConvertTextToSpeech(request.ObfuscatedText, request.SpeakerData.Voice, TtsKind.Whisper);
             if (obfTtsResponce.TryGetValue(out var obfAudioData))
             {
                 var obfMsg = new PlayTtsMessage(new PlayTtsMessageData
@@ -113,10 +122,10 @@ public partial class TtsSystem
                     TtsData = obfAudioData,
                     TtsMetadata = new TtsMetadata()
                     {
-                        Provider = whisperRequest.SpeakerData.Voice.Provider,
+                        Provider = request.SpeakerData.Voice.Provider,
                         Kind = TtsKind.Whisper,
-                        Source = whisperRequest.SpeakerData.NetSpeaker,
-                        PlayEntity = whisperRequest.SpeakerData.NetSpeaker
+                        Source = request.SpeakerData.NetSpeaker,
+                        PlayEntity = request.SpeakerData.NetSpeaker
                     }
                 });
 
@@ -126,10 +135,13 @@ public partial class TtsSystem
         }
     }
 
-    private async Task HandleRadioRequest(TtsRadioRequest radioData)
+    private async Task HandleRadioRequest(TtsRadioRequest request)
     {
+        if (!TtsEnabled || !IsAnyProviderEnabled() || request.Text.Length > _maxMessageChars)
+            return;
+
         List<(ICommonSession Session, EntityUid PlayEntity)> validReceivers = [];
-        foreach (var receiver in radioData.Receivers)
+        foreach (var receiver in request.Receivers)
         {
             if (!_playerManager.TryGetSessionByEntity(receiver.Actor, out var session))
                 continue;
@@ -143,7 +155,7 @@ public partial class TtsSystem
         if (validReceivers.Count == 0)
             return;
 
-        using var ttsResponce = await ConvertTextToSpeech(radioData.Text, radioData.SpeakerData.Voice, TtsKind.Radio);
+        using var ttsResponce = await ConvertTextToSpeech(request.Text, request.SpeakerData.Voice, TtsKind.Radio);
         if (!ttsResponce.TryGetValue(out var audioData))
             return;
 
@@ -154,10 +166,10 @@ public partial class TtsSystem
                 TtsData = audioData,
                 TtsMetadata = new TtsMetadata
                 {
-                    Provider = radioData.SpeakerData.Voice.Provider,
+                    Provider = request.SpeakerData.Voice.Provider,
                     Kind = TtsKind.Radio,
-                    ChannelPrototype = radioData.ChannelPrototype,
-                    Source = radioData.SpeakerData.NetSpeaker,
+                    ChannelPrototype = request.ChannelPrototype,
+                    Source = request.SpeakerData.NetSpeaker,
                     PlayEntity = GetNetEntity(playEntity)
                 }
             });
@@ -168,6 +180,9 @@ public partial class TtsSystem
 
     private async Task HandleAnnouncementRequest(TtsAnnouncementRequest request)
     {
+        if (!TtsEnabled)
+            return;
+
         var validReceivers = ToValidReceivers(request.Receivers);
         if (!validReceivers.Any())
             return;
@@ -192,7 +207,7 @@ public partial class TtsSystem
                 });
             }
 
-            if (request.Text != null && request.Voice != null)
+            if (IsAnyProviderEnabled() && request.Text != null && request.Voice != null && request.Text.Length > _maxAnnounceMessageChars)
             {
                 responce = await ConvertTextToSpeech(request.Text, request.Voice, TtsKind.Announce);
                 if (responce.TryGetValue(out var audioData))
@@ -219,6 +234,9 @@ public partial class TtsSystem
 
     private async Task HandleTelepathyRequest(TtsTelepathyRequest request)
     {
+        if (!TtsEnabled || !IsAnyProviderEnabled() || request.Text.Length > _maxMessageChars)
+            return;
+
         var validReceivers = ToValidReceivers(request.Receivers)
             .Where(x =>
             {
@@ -256,6 +274,9 @@ public partial class TtsSystem
 
     private async Task HandleVoiceTestRequest(TtsVoiceTestRequest request)
     {
+        if (!TtsEnabled || !IsAnyProviderEnabled() || request.Text.Length > _maxMessageChars)
+            return;
+
         var validReceivers = ToValidReceivers(request.Receivers);
         if (!validReceivers.Any())
             return;

@@ -76,9 +76,6 @@ public partial class TtsSystem
 
     private void OnRadioReceiveEvent(ref RadioSpokeEvent args)
     {
-        if (!TtsEnabled || args.Message.Length > _maxMessageChars)
-            return;
-
         if (!TryGetEntitySpeakerData(args.Source, out var speakerData))
             return;
 
@@ -125,7 +122,7 @@ public partial class TtsSystem
             if (_prototypeManager.TryIndex(args.SpokeVoiceId, out voice))
                 return true;
 
-            return TryGetPreferredVoice(DefaultAnnouncementVoicePreferences, out voice);
+            return TryGetAvailableVoice(DefaultAnnouncementVoicePreferences, out voice);
         }
     }
 

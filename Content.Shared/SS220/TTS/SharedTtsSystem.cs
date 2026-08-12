@@ -16,9 +16,9 @@ public abstract partial class SharedTtsSystem : EntitySystem
 
     public event Action<TtsProvider, bool>? OnTtsProviderStateChanged;
 
-    private readonly HashSet<TtsProvider> _enabledProviders = [];
-
     protected bool TtsEnabled = false;
+
+    private readonly HashSet<TtsProvider> _enabledProviders = [];
 
     public static readonly TtsVoicePreferences DefaultVoicePreferences = new()
     {
@@ -34,13 +34,17 @@ public abstract partial class SharedTtsSystem : EntitySystem
 
     public override void Initialize()
     {
-        _cfg.OnValueChanged(CCVars220.TTSEnabled, v => TtsEnabled = v, true);
+        _cfg.OnValueChanged(CCVars220.TtsEnabled, v => TtsEnabled = v, true);
         _cfg.OnValueChanged(CCVars220.TtsNTTSEnabled, v => UpdateProviderEnabled(TtsProvider.NTTS, v), true);
         _cfg.OnValueChanged(CCVars220.TtsSileroEnabled, v => UpdateProviderEnabled(TtsProvider.Silero, v), true);
 
         InitializeVoiceCaches();
     }
 
+    /// <summary>
+    /// Tries to get voice preferences for the specified <paramref name="entity"/>.
+    /// </summary>
+    /// <param name="allowOverride">Whether to allow overriding the entity's voice preferences via <see cref="GetTtsVoiceOverrideEvent"/>.</param>
     public bool TryGetVoicePreferences(Entity<TtsComponent?> entity, [NotNullWhen(true)] out TtsVoicePreferences? pref, bool allowOverride = true)
     {
         pref = null;
@@ -59,33 +63,51 @@ public abstract partial class SharedTtsSystem : EntitySystem
         return true;
     }
 
+    /// <summary>
+    /// Tries to get the currently available voice for the specified <paramref name="entity"/>, excluding those whose provider is disabled.
+    /// </summary>
+    /// <param name="allowOverride">Whether to allow overriding the entity's voice preferences via <see cref="GetTtsVoiceOverrideEvent"/>.</param>
     public bool TryGetAvailableVoice(Entity<TtsComponent?> entity, [NotNullWhen(true)] out TtsVoicePrototype? voice, bool allowOverride = true)
     {
         voice = null;
         return TryGetAvailableVoiceId(entity, out var id, allowOverride) && _proto.TryIndex(id, out voice);
     }
 
+    /// <summary>
+    /// Tries to get the currently available voice from the <paramref name="preferences"/>, excluding those whose provider is disabled.
+    /// </summary>
+    public bool TryGetAvailableVoice(TtsVoicePreferences preferences, [NotNullWhen(true)] out TtsVoicePrototype? voice)
+    {
+        voice = null;
+        return TryGetAvailableVoiceId(preferences, out var voiceId) && _proto.TryIndex(voiceId, out voice);
+    }
+
+    /// <inheritdoc cref="TryGetAvailableVoice(Entity{TtsComponent?}, out TtsVoicePrototype?, bool)"/>
     public bool TryGetAvailableVoiceId(Entity<TtsComponent?> entity, [NotNullWhen(true)] out ProtoId<TtsVoicePrototype>? voiceId, bool allowOverride = true)
     {
         voiceId = null;
         if (!IsAnyProviderEnabled())
             return false;
 
-        if (!TryGetVoicePreferences(entity, out var preferences))
+        if (!TryGetVoicePreferences(entity, out var preferences, allowOverride))
             return false;
 
-        return TryGetPreferredVoiceId(preferences, out voiceId);
+        foreach (var pair in preferences)
+        {
+            if (IsProviderEnabled(pair.Key))
+            {
+                voiceId = pair.Value;
+                return true;
+            }
+        }
+
+        return false;
     }
 
-    protected bool TryGetPreferredVoice(IEnumerable<KeyValuePair<TtsProvider, ProtoId<TtsVoicePrototype>>> voices, [NotNullWhen(true)] out TtsVoicePrototype? voice)
+    /// <inheritdoc cref="TryGetAvailableVoice(TtsVoicePreferences, out TtsVoicePrototype?)"/>
+    public bool TryGetAvailableVoiceId(TtsVoicePreferences preferences, [NotNullWhen(true)] out ProtoId<TtsVoicePrototype>? voiceId)
     {
-        voice = null;
-        return TryGetPreferredVoiceId(voices, out var id) && _proto.TryIndex(id, out voice);
-    }
-
-    protected bool TryGetPreferredVoiceId(IEnumerable<KeyValuePair<TtsProvider, ProtoId<TtsVoicePrototype>>> voices, [NotNullWhen(true)] out ProtoId<TtsVoicePrototype>? voiceId)
-    {
-        foreach (var pair in voices)
+        foreach (var pair in preferences)
         {
             if (IsProviderEnabled(pair.Key))
             {
@@ -139,6 +161,9 @@ public abstract partial class SharedTtsSystem : EntitySystem
     }
 }
 
+/// <summary>
+/// Event used to collect TTS voice preference overrides for an entity (e.g., from a voice mask).
+/// </summary>
 public sealed class GetTtsVoiceOverrideEvent() : EntityEventArgs, IInventoryRelayEvent
 {
     public readonly TtsVoicePreferences Overrides = [];

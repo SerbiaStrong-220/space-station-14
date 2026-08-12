@@ -29,8 +29,8 @@ public partial class TtsSystem
 
         public TtsNTTSHandler(TtsSystem ttsSystem, IConfigurationManager cfg) : base(ttsSystem, cfg)
         {
-            ConfigurationManager.OnValueChanged(CCVars220.NTTSApiUrl, v => _apiUrl = v, true);
-            ConfigurationManager.OnValueChanged(CCVars220.NTTSMaxCache, v =>
+            ConfigurationManager.OnValueChanged(CCVars220.TtsNTTSApiUrl, v => _apiUrl = v, true);
+            ConfigurationManager.OnValueChanged(CCVars220.TtsNTTSMaxCache, v =>
             {
                 Cache.Limit = v;
                 Cache.Trim();

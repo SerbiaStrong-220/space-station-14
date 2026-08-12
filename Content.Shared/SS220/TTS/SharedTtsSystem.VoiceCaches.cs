@@ -18,15 +18,21 @@ public partial class SharedTtsSystem
         BuildVoiceCaches();
     }
 
-    public IEnumerable<TtsVoicePrototype> EnumerateCategoryVoices(TtsVoiceCategoryPrototype proto)
+    /// <summary>
+    /// Enumerates all voices for the specified <paramref name="categoryPrototype"/>
+    /// </summary>
+    public IEnumerable<TtsVoicePrototype> EnumerateCategoryVoices(TtsVoiceCategoryPrototype categoryPrototype)
     {
-        if (!_categoryVoicesCache.TryGetValue(proto, out var voices))
+        if (!_categoryVoicesCache.TryGetValue(categoryPrototype, out var voices))
             yield break;
 
         foreach (var voice in voices)
             yield return voice;
     }
 
+    /// <summary>
+    /// Enumerates all voices for the specified <paramref name="provider"/>
+    /// </summary>
     public IEnumerable<TtsVoicePrototype> EnumerateProviderVoices(TtsProvider provider)
     {
         if (!_providerVoicesCache.TryGetValue(provider, out var categoryCache))
@@ -42,6 +48,9 @@ public partial class SharedTtsSystem
         }
     }
 
+    /// <summary>
+    /// Enumerates all voice categories for the specified <paramref name="provider"/>, along with their associated voices.
+    /// </summary>
     public IEnumerable<KeyValuePair<TtsVoiceCategoryPrototype, List<TtsVoicePrototype>>> EnumerateProviderVoiceCategories(TtsProvider provider)
     {
         if (!_providerVoicesCache.TryGetValue(provider, out var categoryCache))

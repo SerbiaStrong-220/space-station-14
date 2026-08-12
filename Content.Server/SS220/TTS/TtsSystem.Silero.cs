@@ -33,13 +33,13 @@ public partial class TtsSystem
 
         public TtsSileroHandler(TtsSystem ttsSystem, IConfigurationManager cfg) : base(ttsSystem, cfg)
         {
-            ConfigurationManager.OnValueChanged(CCVars220.TTSSileroApiUrl, v => _apiUrl = v, true);
-            ConfigurationManager.OnValueChanged(CCVars220.TTSSileroApiToken, v =>
+            ConfigurationManager.OnValueChanged(CCVars220.TtsSileroApiUrl, v => _apiUrl = v, true);
+            ConfigurationManager.OnValueChanged(CCVars220.TtsSileroApiToken, v =>
             {
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", v);
                 _apiToken = v;
             }, true);
-            ConfigurationManager.OnValueChanged(CCVars220.TTSSileroMaxCache, v =>
+            ConfigurationManager.OnValueChanged(CCVars220.TtsSileroMaxCache, v =>
             {
                 Cache.Limit = v;
                 Cache.Trim();

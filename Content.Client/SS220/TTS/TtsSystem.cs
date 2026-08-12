@@ -44,14 +44,14 @@ public sealed partial class TtsSystem : SharedTtsSystem
         base.Initialize();
 
         // remove if Robust PR for clientCVar subs merged
-        _cfg.OnValueChanged(CCVars220.RecieveTTS, x => RaiseNetworkEvent(new ReceiveTtsCVarChanged(x)), true);
+        _cfg.OnValueChanged(CCVars220.RecieveTts, x => RaiseNetworkEvent(new ReceiveTtsCVarChanged(x)), true);
         //end
 
         Subs.CVar(_cfg, CCVars220.TtsPlayQueueSizeLimit, x => _queueSizeLimit = x, true);
         Subs.CVar(_cfg, CCVars220.TtsPlayQueuesCountLimit, x => _queuesCountLimit = x, true);
-        Subs.CVar(_cfg, CCVars220.TTSVolume, x => _volume = x, true);
-        Subs.CVar(_cfg, CCVars220.TTSRadioVolume, x => _radioVolume = x, true);
-        Subs.CVar(_cfg, CCVars220.TTSAnnounceVolume, x => _announcementVolume = x, true);
+        Subs.CVar(_cfg, CCVars220.TtsVolume, x => _volume = x, true);
+        Subs.CVar(_cfg, CCVars220.TtsRadioVolume, x => _radioVolume = x, true);
+        Subs.CVar(_cfg, CCVars220.TtsAnnounceVolume, x => _announcementVolume = x, true);
 
         SubscribeNetworkEvent<TtsClearAllQueuesMessage>(OnClearAllQueues);
         SubscribeNetworkEvent<PlayTtsMessage>(OnPlayTtsMessage);

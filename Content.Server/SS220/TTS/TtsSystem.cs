@@ -21,7 +21,6 @@ using System.Web;
 
 namespace Content.Server.SS220.TTS;
 
-// ReSharper disable once InconsistentNaming
 public sealed partial class TtsSystem : SharedTtsSystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
@@ -57,13 +56,12 @@ public sealed partial class TtsSystem : SharedTtsSystem
         "Amount of reused TTS audio from cache.");
     #endregion
 
-    // Kirus ToDo: добавить учет этого
     private int _maxMessageChars;
     private int _maxAnnounceMessageChars;
 
-    private HashSet<ICommonSession> _sessionsNotToSend = new();
+    private readonly HashSet<ICommonSession> _sessionsNotToSend = [];
 
-    private float _requestTimeout = 1f;
+    private float _requestTimeout;
     private const string AudioFileExtension = "ogg";
 
     private readonly RecyclableMemoryStreamManager _memoryStreamPool = new();
@@ -79,7 +77,7 @@ public sealed partial class TtsSystem : SharedTtsSystem
 
         Subs.CVar(_cfg, CCVars220.MaxCharInTTSAnnounceMessage, x => _maxAnnounceMessageChars = x, true);
         Subs.CVar(_cfg, CCVars220.MaxCharInTTSMessage, x => _maxMessageChars = x, true);
-        Subs.CVar(_cfg, CCVars220.TTSRequestTimeout, v => _requestTimeout = v, true);
+        Subs.CVar(_cfg, CCVars220.TtsRequestTimeout, v => _requestTimeout = v, true);
 
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
         SubscribeNetworkEvent<RequestTtsVoiceTestEvent>(OnRequestTtsVoiceTest);
@@ -130,17 +128,26 @@ public sealed partial class TtsSystem : SharedTtsSystem
             _sessionsNotToSend.Remove(e.Session);
     }
 
+    /// <summary>
+    /// Clears all TTS response caches.
+    /// </summary>
     public void ClearCache()
     {
         ClearCache(Enum.GetValues<TtsProvider>());
     }
 
+    /// <summary>
+    /// Clears TTS response caches for the specified <paramref name="providers"/>.
+    /// </summary>
     public void ClearCache(params TtsProvider[] providers)
     {
         foreach (var provider in providers)
             ClearCache(provider);
     }
 
+    /// <summary>
+    /// Clears TTS response cache for the specified <paramref name="provider"/>.
+    /// </summary>
     public void ClearCache(TtsProvider provider)
     {
         if (!TryGetProviderHandler(provider, out var handler))
@@ -149,33 +156,31 @@ public sealed partial class TtsSystem : SharedTtsSystem
         handler.ClearCache();
     }
 
-    public void ClearClientsQueues()
+    /// <summary>
+    /// Clears TTS audio queues for all connected clients.
+    /// </summary>
+    public void ClearClientQueues()
     {
         var ev = new TtsClearAllQueuesMessage();
         RaiseNetworkEvent(ev);
     }
 
-    private static string GenerateCacheKey(string text, TtsProvider? provider = null, string? speaker = null, TtsKind? kind = null)
+    /// <summary>
+    /// Clears TTS audio queues for the specified <paramref name="sessions"/>.
+    /// </summary>
+    public void ClearClientQueues(params ICommonSession[] sessions)
     {
-        var sb = new StringBuilder();
-        sb.Append(text);
+        foreach (var session in sessions)
+            ClearClientQueues(session);
+    }
 
-        TryAddInfo(provider?.ToString());
-        TryAddInfo(speaker);
-        TryAddInfo(kind?.ToString());
-
-        var key = sb.ToString();
-        var keyData = Encoding.UTF8.GetBytes(key);
-        var bytes = System.Security.Cryptography.SHA256.HashData(keyData);
-        return Convert.ToHexString(bytes);
-
-        void TryAddInfo(string? info)
-        {
-            if (info == null)
-                return;
-
-            sb.Append("/" + info);
-        }
+    /// <summary>
+    /// Clears TTS audio queues for the specified <paramref name="session"/>.
+    /// </summary>
+    public void ClearClientQueues(ICommonSession session)
+    {
+        var ev = new TtsClearAllQueuesMessage();
+        RaiseNetworkEvent(ev, session);
     }
 
     private static string ToQueryString(NameValueCollection nvc)

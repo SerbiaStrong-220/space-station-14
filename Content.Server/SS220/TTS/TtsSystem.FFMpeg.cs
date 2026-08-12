@@ -24,7 +24,7 @@ public partial class TtsSystem
 
     private void InitializeFFMpeg()
     {
-        _cfg.OnValueChanged(CCVars220.UseFFMpegProcessing, (x) => _useFFMpegProcessing = x, true);
+        _cfg.OnValueChanged(CCVars220.TtsUseFFMpegProcessing, (x) => _useFFMpegProcessing = x, true);
     }
 
     private async Task<RecyclableMemoryStream?> AddFFMpegEffect(RecyclableMemoryStream audioDataStream, TtsKind kind)

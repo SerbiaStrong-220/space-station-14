@@ -12,9 +12,9 @@ public partial class TtsSystem
 
     private void InitializeCacheKeyGeneration()
     {
-        _cfg.OnValueChanged(CCVars220.PlayDifferentRadioTogether, x => _playDifferentRadioTogether = x, true);
-        _cfg.OnValueChanged(CCVars220.PlayDifferentRadioSourcesTogether, x => _playDifferentRadioSourcesTogether = x, true);
-        _cfg.OnValueChanged(CCVars220.PlayDifferentTalkingTogether, x => _playDifferentTalkingTogether = x, true);
+        _cfg.OnValueChanged(CCVars220.TtsPlayDifferentRadioTogether, x => _playDifferentRadioTogether = x, true);
+        _cfg.OnValueChanged(CCVars220.TtsPlayDifferentRadioSourcesTogether, x => _playDifferentRadioSourcesTogether = x, true);
+        _cfg.OnValueChanged(CCVars220.TtsPlayDifferentTalkingTogether, x => _playDifferentTalkingTogether = x, true);
     }
 
     private TtsCacheKey GenerateCacheKey(TtsMetadata meta)

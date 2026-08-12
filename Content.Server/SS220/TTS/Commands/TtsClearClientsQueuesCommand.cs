@@ -19,7 +19,7 @@ public sealed partial class TtsClearClientsQueuesCommand : LocalizedCommands
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         var ttsSys = _entitySystemManager.GetEntitySystem<TtsSystem>();
-        ttsSys.ClearClientsQueues();
+        ttsSys.ClearClientQueues();
 
         _chat.DispatchServerAnnouncement(Loc.GetString("command-tts-clear-request-dispatch"));
         shell.WriteLine(Loc.GetString("cmd-tts-clear-clients-queues-request-sended"));

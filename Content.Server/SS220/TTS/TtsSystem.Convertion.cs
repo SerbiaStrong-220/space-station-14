@@ -10,15 +10,12 @@ public partial class TtsSystem
 {
     private readonly Dictionary<TtsProvider, TtsProviderHandler> _providerHandlers = [];
 
-    public async Task<TtsResponse.Reference?> ConvertTextToSpeech(string text, ProtoId<TtsVoicePrototype>? protoId, TtsKind kind)
+    public async Task<TtsResponse.Reference?> ConvertTextToSpeech(string text, TtsKind kind)
     {
-        if (protoId == null && !TryGetDefaultPreferredVoice(out protoId))
+        if (!TryGetAvailableVoice(DefaultVoicePreferences, out var voice))
             return null;
 
-        if (!_prototypeManager.TryIndex(protoId, out var proto))
-            return null;
-
-        return await ConvertTextToSpeech(text, proto, kind);
+        return await ConvertTextToSpeech(text, voice.Provider, voice.Speaker, kind);
     }
 
     public async Task<TtsResponse.Reference?> ConvertTextToSpeech(string text, TtsVoicePrototype voice, TtsKind kind)
