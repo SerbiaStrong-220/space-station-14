@@ -26,6 +26,10 @@ using Content.Server.Body.Components;
 using Content.Server.EUI;
 using Content.Server.Ghost;
 using Content.Shared.Mind;
+using Content.Shared.Chat;
+using Content.Shared.Interaction.Events;
+using Content.Shared.IdentityManagement;
+using Content.Server.Chat;
 using Robust.Shared.Player;
 
 namespace Content.Server.SS220.Ipc;
@@ -45,6 +49,7 @@ public sealed partial class IpcSystem : EntitySystem
     [Dependency] private EuiManager _eui = default!;
     [Dependency] private ISharedPlayerManager _player = default!;
     [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SharedSuicideSystem _suicide = default!;
 
     private static readonly LocId IpcDrainReady = "ipc-drain-enabled";
     private static readonly LocId IpcDrainDisabled = "ipc-drain-disabled";
@@ -67,6 +72,7 @@ public sealed partial class IpcSystem : EntitySystem
         SubscribeLocalEvent<IpcComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<IpcComponent, RefreshChargeRateEvent>(OnRefreshChargeRate);
         SubscribeLocalEvent<IpcComponent, OnTemperatureChangeEvent>(OnTemperatureChange);
+        SubscribeLocalEvent<IpcComponent, SuicideEvent>(IpcSuicide, before: [typeof(SuicideSystem)]);
     }
 
     private void OnMapInit(Entity<IpcComponent> ent, ref MapInitEvent args)
@@ -270,5 +276,23 @@ public sealed partial class IpcSystem : EntitySystem
             newDrawRate = ent.Comp.OverDrawRate;
 
         _powerCell.SetDrawRate((ent.Owner, draw), newDrawRate);
+    }
+
+    private void IpcSuicide(Entity<IpcComponent> ent, ref SuicideEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        var othersMessage = Loc.GetString("suicide-command-ipc-text-others", ("name", Identity.Entity(ent, EntityManager)));
+        _popup.PopupEntity(othersMessage, ent, Filter.PvsExcept(ent), true);
+
+        var selfMessage = Loc.GetString("suicide-command-ipc-text-self");
+        _popup.PopupEntity(selfMessage, ent, ent);
+
+        args.DamageType = "Shock";
+        args.Handled = true;
+
+        if (TryComp<DamageableComponent>(ent, out var damageable))
+            _suicide.ApplyLethalDamage((ent.Owner, damageable), args.DamageType);
     }
 }
