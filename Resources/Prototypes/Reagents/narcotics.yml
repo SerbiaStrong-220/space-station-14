@@ -259,7 +259,7 @@
         type: Local
         visualType: Medium
         messages: [ "leporazine-effect-temperature-adjusting" ]
-        probability: 0.2 #ss220 end
+        probability: 0.2
       #SS220 Hyperzine lepo effect buff end
 
 - type: reagent
