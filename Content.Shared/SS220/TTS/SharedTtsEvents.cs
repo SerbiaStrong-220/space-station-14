@@ -14,7 +14,6 @@ public sealed class PlayTtsMessage(params PlayTtsMessageData[] datas) : EntityEv
     public PlayTtsMessage() : this([]) { }
 }
 
-// Kirus ToDo: мб стоит ITtsData записывать тоже в TtsMetadata
 [Serializable, NetSerializable]
 public struct PlayTtsMessageData
 {

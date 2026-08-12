@@ -731,22 +731,36 @@ namespace Content.Shared.Preferences
             }
 
 
-            // Kirus ToDo: исправить как будет механ ограничения голосов
-            // Corvax-TTS-Start
-            //prototypeManager.TryIndex<TtsVoicePrototype>(Voice, out var voice);
-            //if (voice is null || !CanHaveVoice(voice, Sex))
-            //    Voice = DefaultVoice;
-            // Corvax-TTS-End
-        }
+            // SS220 tts begin
+            var ttsSys = collection.Resolve<IEntitySystemManager>().GetEntitySystem<SharedTtsSystem>();
 
-        // Corvax-TTS-Start
-        // MUST NOT BE PUBLIC, BUT....
-        public static bool CanHaveVoice(TtsVoicePrototype voice, Sex sex)
-        {
-            return true;
-            // return voice.RoundStart && sex == Sex.Unsexed || (voice.Sex == sex || voice.Sex == Sex.Unsexed);
+            var checkData = new TtsVoiceRequirementCheckData()
+            {
+                Profile = this,
+                Session = session
+            };
+
+            var notValidKeys = new List<TtsProvider>();
+            foreach (var (provider, voiceId) in VoicePreferences)
+            {
+                var valid = prototypeManager.TryIndex(voiceId, out var voice) &&
+                    ttsSys.IsPassVoiceRequirements(voice, checkData, out _);
+
+                if (valid)
+                    continue;
+
+                notValidKeys.Add(provider);
+            }
+
+            foreach (var provider in notValidKeys)
+            {
+                if (SharedTtsSystem.DefaultVoicePreferences.TryGetValue(provider, out var defaultVoice))
+                    VoicePreferences[provider] = defaultVoice;
+                else
+                    VoicePreferences.Remove(provider);
+            }
+            // SS220 tts end
         }
-        // Corvax-TTS-End
 
         /// <summary>
         /// Takes in an IEnumerable of traits and returns a List of the valid traits.

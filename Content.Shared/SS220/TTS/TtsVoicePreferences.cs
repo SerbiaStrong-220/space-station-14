@@ -59,9 +59,9 @@ public sealed partial class TtsVoicePreferences : IEnumerable<KeyValuePair<TtsPr
         return Remove(index, out _);
     }
 
-    public bool Remove(int index, [NotNullWhen(true)] out ProtoId<TtsVoicePrototype>? voice)
+    public bool Remove(int index, out ProtoId<TtsVoicePrototype> voice)
     {
-        voice = null;
+        voice = default;
         if (_keys.Count > index - 1)
             return false;
 
@@ -73,18 +73,20 @@ public sealed partial class TtsVoicePreferences : IEnumerable<KeyValuePair<TtsPr
         return Remove(provider, out _);
     }
 
-    public bool Remove(TtsProvider provider, [NotNullWhen(true)] out ProtoId<TtsVoicePrototype>? voice)
+    public bool Remove(TtsProvider provider, out ProtoId<TtsVoicePrototype> voice)
     {
-        voice = null;
-        if (!_dict.Remove(provider, out var exist))
+        if (!_dict.Remove(provider, out voice))
             return false;
-
-        voice = exist;
 
         DebugTools.Assert(_keys.Contains(provider));
         _keys.Remove(provider);
 
         return true;
+    }
+
+    public bool TryGetValue(TtsProvider provider, out ProtoId<TtsVoicePrototype> voice)
+    {
+        return _dict.TryGetValue(provider, out voice);
     }
 
     private bool InternalAdd(TtsProvider provider, ProtoId<TtsVoicePrototype> voice)
