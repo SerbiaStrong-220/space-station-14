@@ -143,9 +143,9 @@
           - type: Gravity
             enabled: true
             inherent: true
-          - type: IFF
-            flags: HideLabel
-            color: "#88b0d1"
+          #- type: IFF #ss220 removed so vgroid is visible on the map again.
+            # flags: HideLabel #ss220 removed so vgroid is visible on the map again.
+            # color: "#88b0d1" #ss220 removed so vgroid is visible on the map again.
           protos:
           - ChunkDebrisSmall
           - ChunkDebrisSmall
