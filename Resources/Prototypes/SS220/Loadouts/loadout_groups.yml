@@ -936,6 +936,17 @@
   - JanitorPDA
   - JanitorJRPDA
 
+- type: loadoutGroup
+  id: JanitorBackpack
+  name: loadout-group-janitor-backpack
+  loadouts:
+  - CommonBackpack
+  - CommonSatchel
+  - CommonDuffel
+  - ClothingBackpackJanitorJR
+  - ClothingBackpackJanitorJRSatchel
+  - ClothingBackpackJanitorJRDuffel
+
   # Уборщик (Конец)
 
  # Сервисный работник (Начало)

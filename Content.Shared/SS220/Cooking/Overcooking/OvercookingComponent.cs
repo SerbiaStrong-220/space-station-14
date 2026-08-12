@@ -18,7 +18,7 @@ public sealed partial class OvercookingComponent : Component
 
     // Minimum time, at which the entity is considered "Overcooked", so it won't be 0.1s after cooking is done
     [DataField, AutoNetworkedField]
-    public float MinOvercookingTime = 5f;
+    public float MinOvercookingTime = 8f;
 
     [DataField]
     public EntProtoId OvercookedEntity = "FoodBadRecipe";
