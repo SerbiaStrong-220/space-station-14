@@ -15,7 +15,7 @@ public sealed partial class CCVars220
     /// Enables the NTTS provider.
     /// </summary>
     public static readonly CVarDef<bool> TtsNTTSEnabled =
-        CVarDef.Create("tts.ntts.enabled", false, CVar.SERVER | CVar.REPLICATED | CVar.NOTIFY);
+        CVarDef.Create("tts.ntts.enabled", true, CVar.SERVER | CVar.REPLICATED | CVar.NOTIFY);
 
     public static readonly CVarDef<string> TtsNTTSApiUrl =
         CVarDef.Create("tts.ntts.api_url", "", CVar.SERVERONLY);
