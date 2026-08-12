@@ -22,7 +22,7 @@ public struct PlayTtsMessageData
 }
 
 [Serializable, NetSerializable]
-public sealed class RequestTTSVoiceTestEvent(ProtoId<TtsVoicePrototype> voiceId) : EntityEventArgs
+public sealed class RequestTtsVoiceTestEvent(ProtoId<TtsVoicePrototype> voiceId) : EntityEventArgs
 {
     public readonly ProtoId<TtsVoicePrototype> VoiceId = voiceId;
 }

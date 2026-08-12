@@ -1,0 +1,24 @@
+- type: localizedDataset
+  id: TtsSanitizerWorldReplacementKeys
+  values:
+    prefix: tts-sanitizer-world-replacement-key-
+    count: 374
+
+- type: localizedDataset
+  id: TtsSanitizerWorldReplacementValues
+  values:
+    prefix: tts-sanitizer-world-replacement-value-
+    count: 374
+
+
+- type: localizedDataset
+  id: TtsSanitizerTranslitReplacementKeys
+  values:
+    prefix: tts-sanitizer-translit-replacement-key-
+    count: 37
+
+- type: localizedDataset
+  id: TtsSanitizerTranslitReplacementValues
+  values:
+    prefix: tts-sanitizer-translit-replacement-value-
+    count: 37

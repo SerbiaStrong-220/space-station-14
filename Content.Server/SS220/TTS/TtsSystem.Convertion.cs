@@ -46,7 +46,7 @@ public partial class TtsSystem
 
             var textSsml = ToSsmlText(textSanitized, ssmlTraits);
 
-            return await handler.ConvertTextToSpeech(text, speaker, kind);
+            return await handler.ConvertTextToSpeech(textSsml, speaker, kind);
         }
         catch (Exception e)
         {

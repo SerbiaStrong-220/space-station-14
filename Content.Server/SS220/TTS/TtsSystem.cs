@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Shared.Dataset;
 using Content.Shared.GameTicking;
 using Content.Shared.SS220.CCVars;
 using Content.Shared.SS220.TTS;
@@ -56,6 +57,7 @@ public sealed partial class TtsSystem : SharedTtsSystem
         "Amount of reused TTS audio from cache.");
     #endregion
 
+    // Kirus ToDo: добавить учет этого
     private int _maxMessageChars;
     private int _maxAnnounceMessageChars;
 
@@ -66,41 +68,30 @@ public sealed partial class TtsSystem : SharedTtsSystem
 
     private readonly RecyclableMemoryStreamManager _memoryStreamPool = new();
 
-    // Kirus ToDo: перенести в датасет
-    private readonly List<string> _sampleText =
-    [
-        "Съешь же ещё этих мягких французских булок, да выпей чаю.",
-        "Клоун, прекрати разбрасывать банановые кожурки офицерам под ноги!",
-        "Капитан, вы уверены что хотите назначить клоуна на должность главы персонала?",
-        "Эс Бэ! Тут человек в сером костюме, с тулбоксом и в маске! Помогите!!",
-        "Учёные, тут странная аномалия в баре! Она уже съела мима!",
-        "Я надеюсь что инженеры внимательно следят за сингулярностью...",
-        "Вы слышали эти странные крики в техах? Мне кажется туда ходить небезопасно.",
-        "Вы не видели Гамлета? Мне кажется он забегал к вам на кухню.",
-        "Здесь есть доктор? Человек умирает от отравленного пончика! Нужна помощь!",
-        "Вам нужно согласие и печать квартирмейстера, если вы хотите сделать заказ на партию дробовиков.",
-        "Возле эвакуационного шаттла разгерметизация! Инженеры, нам срочно нужна ваша помощь!",
-        "Бармен, налей мне самого крепкого вина, которое есть в твоих запасах!"
-    ];
+    private static readonly ProtoId<LocalizedDatasetPrototype> VoiceTestSamplesDatasetId = "TtsVoiceTestSamples";
+    private LocalizedDatasetPrototype _voiceTestSamplesDataset = default!;
 
     public override void Initialize()
     {
         base.Initialize();
+
+        _voiceTestSamplesDataset = _prototypeManager.Index(VoiceTestSamplesDatasetId);
 
         Subs.CVar(_cfg, CCVars220.MaxCharInTTSAnnounceMessage, x => _maxAnnounceMessageChars = x, true);
         Subs.CVar(_cfg, CCVars220.MaxCharInTTSMessage, x => _maxMessageChars = x, true);
         Subs.CVar(_cfg, CCVars220.TTSRequestTimeout, v => _requestTimeout = v, true);
 
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
-        SubscribeNetworkEvent<RequestTTSVoiceTestEvent>(OnRequestTTSVoiceTest);
+        SubscribeNetworkEvent<RequestTtsVoiceTestEvent>(OnRequestTtsVoiceTest);
 
         // remove if Robust PR for clientCVar subs merged
         SubscribeNetworkEvent<ReceiveTtsCVarChanged>(OnReceiveTtsCVarChanged);
         _playerManager.PlayerStatusChanged += OnPlayerStatusChanged;
         // end
 
+        InitializeSanitizer();
+        InitializeFFMpeg();
         InitializeEntitySubscriptions();
-
         InitializeNTTS();
         InitializeSilero();
     }
@@ -110,21 +101,19 @@ public sealed partial class TtsSystem : SharedTtsSystem
         ClearCache();
     }
 
-    private void OnRequestTTSVoiceTest(RequestTTSVoiceTestEvent ev, EntitySessionEventArgs args)
+    private void OnRequestTtsVoiceTest(RequestTtsVoiceTestEvent ev, EntitySessionEventArgs args)
     {
         if (!_prototypeManager.TryIndex(ev.VoiceId, out var voice))
             return;
 
-        var text = _random.Pick(_sampleText);
-
         var request = new TtsVoiceTestRequest()
         {
             Voice = voice,
-            Text = _random.Pick(_sampleText),
+            Text = Loc.GetString(_random.Pick(_voiceTestSamplesDataset.Values)),
             Receivers = [args.SenderSession]
         };
 
-        RunTaskWithTryCatch(() => HandleVoiceTestRequest(request));
+        RunTtsRequestHandle(request);
     }
 
     private void OnReceiveTtsCVarChanged(ReceiveTtsCVarChanged msg, EntitySessionEventArgs args)

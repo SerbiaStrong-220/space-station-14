@@ -136,7 +136,7 @@ public sealed partial class TtsSystem : SharedTtsSystem
 
     public void RequestVoiceTest(ProtoId<TtsVoicePrototype> voiceId)
     {
-        RaiseNetworkEvent(new RequestTTSVoiceTestEvent(voiceId));
+        RaiseNetworkEvent(new RequestTtsVoiceTestEvent(voiceId));
     }
 
     public void ClearAllQueuesAndStreams()

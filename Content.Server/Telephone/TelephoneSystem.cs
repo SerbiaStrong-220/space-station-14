@@ -24,6 +24,7 @@ using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.SS220.TTS;
 using Content.Shared.SS220.CCVars;
 using Robust.Shared.Configuration;
+using Content.Server.SS220.TTS;
 
 namespace Content.Server.Telephone;
 
@@ -39,6 +40,7 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly IReplayRecordingManager _replay = default!;
+    [Dependency] private TtsSystem _tts = default!; // SS220 tts
 
     // SS220 performance-test-begin
     [Dependency] private readonly IConfigurationManager _configManager = default!;
@@ -127,13 +129,13 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
         var speaker = entity.Comp.Speaker != null ? entity.Comp.Speaker.Value.Owner : entity.Owner;
 
         // SS220 Holopad adapt begin
-        if (TryComp<TtsComponent>(args.MessageSource, out var sourceTts))
+        if (_tts.TryGetVoicePreferences(args.MessageSource, out var voicePref))
         {
-            // Kirus ToDo: телефон не учитывает преображение голоса маской??
-
             var ttsComponent = EnsureComp<TtsComponent>(speaker);
-            ttsComponent.VoicePreferences = sourceTts.VoicePreferences.Clone();
+            ttsComponent.VoicePreferences = voicePref.Clone();
         }
+        else
+            RemComp<TtsComponent>(speaker);
         // SS220 Holopad adapt end
 
         var name = Loc.GetString("chat-telephone-name-relay",

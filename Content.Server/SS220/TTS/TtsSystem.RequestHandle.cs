@@ -2,7 +2,6 @@ using Content.Shared.Chat;
 using Content.Shared.SS220.Language.Systems;
 using Content.Shared.SS220.TTS;
 using Robust.Shared.Player;
-using Robust.Shared.Utility;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,21 +18,13 @@ public partial class TtsSystem
     {
         return request switch
         {
-            ITtsSpokeRequest spoke => HandleSpokeRequest(spoke),
+            TtsSayRequest say => HandleSayRequest(say),
+            TtsWhisperRequest whisper => HandleWhisperRequest(whisper),
             TtsRadioRequest radio => HandleRadioRequest(radio),
             TtsAnnouncementRequest announcement => HandleAnnouncementRequest(announcement),
             TtsTelepathyRequest telepathy => HandleTelepathyRequest(telepathy),
+            TtsVoiceTestRequest voiceTest => HandleVoiceTestRequest(voiceTest),
             _ => throw new NotImplementedException(),
-        };
-    }
-
-    private Task HandleSpokeRequest(ITtsSpokeRequest request)
-    {
-        return request switch
-        {
-            TtsSayRequest say => HandleSayRequest(say),
-            TtsWhisperRequest whisper => HandleWhisperRequest(whisper),
-            _ => throw new NotImplementedException()
         };
     }
 
