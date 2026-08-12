@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <OutputPath>..\bin\Content.Client\</OutputPath>
@@ -23,20 +23,4 @@
   </ItemGroup>
   <Import Project="..\RobustToolbox\MSBuild\Robust.Properties.targets" />
   <Import Project="..\RobustToolbox\MSBuild\XamlIL.targets" />
-  <ItemGroup>
-    <AdditionalFiles Update="SS220\TTS\UI\TtsVoicePreferencesTab.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </AdditionalFiles>
-    <AdditionalFiles Update="SS220\TTS\UI\TtsVoicePreferencesTabEntry.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </AdditionalFiles>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="SS220\TTS\UI\TtsVoicePreferencesTab.xaml.cs">
-      <DependentUpon>TtsVoicePreferencesTab.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="SS220\TTS\UI\TtsVoicePreferencesTabEntry.xaml.cs">
-      <DependentUpon>TtsVoicePreferencesTabEntry.xaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
 </Project>
