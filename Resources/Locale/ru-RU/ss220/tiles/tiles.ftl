@@ -184,6 +184,9 @@ tiles-red-arcade-floor = аркадный красный пол
 
 tiles-mono-floor = обрамлённая плитка
 tiles-linoleum-floor = линолеумный пол
+tiles-linoleum-gray-floor = линолеумный пол серый
+tiles-linoleum-lightbrown-floor = линолеумный пол светло-коричневый
+tiles-linoleum-redbrown-floor = линолеумный пол красно-коричневый
 tiles-elevator-shaft = пол шахты лифта
 tiles-diamond-plate-floor = пол из алмазных плит
 tiles-blue-tile = голубая плитка
@@ -424,3 +427,8 @@ floor-grayconcrete-pavement-horizontal = бетонное серое гориз�
 floor-grayconcrete-pavement-vertical = бетонное серое вертикальное покрытие
 floor-oldconcrete-pavement-horizontal = бетонное старое горизонтальное покрытие
 floor-oldconcrete-pavement-vertical = бетонное старое вертикальное покрытие
+
+## ЛИНОЛЕУМ
+floor-lino-gray = { ent-FloorItemLinoGray }
+floor-lino-light-brown = { ent-FloorItemLinoLightBrown }
+floor-lino-red-brown = { ent-FloorItemLinoRedBrown } 

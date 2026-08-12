@@ -174,3 +174,24 @@
       path: "/Audio/Effects/Fluids/splat.ogg"
       params:
         volume: -20
+
+- type: entity
+  parent: SS220Soap
+  id: SoapJR
+  name: soap JR
+  description: It cleanses the blood so well!
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Janitorial/soap.rsi
+    layers:
+    - state: JR-4
+      map: ["enum.SolutionContainerLayers.Fill"]
+  - type: SolutionContainerVisuals
+    maxFillLevels: 4
+    fillBaseName: JR-
+    changeColor: false
+  - type: Item
+    sprite: SS220/Objects/Specific/Janitorial/soap.rsi
+    storedRotation: -90
+    heldPrefix: JR
+

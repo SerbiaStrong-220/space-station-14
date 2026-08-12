@@ -104,6 +104,7 @@
   equipment:
     shoes: ClothingBootsJanitorJR
 
+#Equipment
 - type: loadout
   id: JRMopItem
   effects:
@@ -112,6 +113,29 @@
   storage:
     back: 
     - JRMopItem
+
+- type: loadout
+  id: SoapJR
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: JanitorJR
+  storage:
+    back: 
+    - SoapJR
+
+#PDA
+- type: loadout
+  id: JanitorJRPDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: JanitorJR
+  equipment:
+    id: JanitorJRPDA
+
+- type: loadout
+  id: JanitorPDA
+  equipment:
+    id: JanitorPDA
 
 #Head
 - type: loadout
@@ -168,3 +192,21 @@
     proto: JanitorJR
   equipment:
     belt: ClothingBeltJanitorJRFilled
+ 
+ #Outer clothing
+- type: loadout
+  id: ClothingOuterWinterJanitorJR
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: JanitorJR
+  equipment:
+    outerClothing: ClothingOuterWinterJanitorJR
+
+- type: loadout
+  id: ClothingOuterCoatJanitorJRBomber
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: JanitorJR
+  equipment:
+    outerClothing: ClothingOuterCoatJanitorJRBomber
+

@@ -19,7 +19,9 @@ using Content.Shared.SS220.CultYogg.Buildings;
 using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.CultYogg.Rave;
 using Content.Shared.SS220.CultYogg.Sacrificials;
+using Content.Shared.SS220.Teleport;
 using Content.Shared.Verbs;
+using Content.Shared.Whitelist;
 using Content.Shared.Zombies;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
@@ -46,6 +48,7 @@ public abstract partial class SharedMiGoSystem : EntitySystem
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private EntityLookupSystem _entityLookup = default!;
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
@@ -60,6 +63,8 @@ public abstract partial class SharedMiGoSystem : EntitySystem
         SubscribeLocalEvent<MiGoComponent, MiGoEnslavementActionEvent>(OnMiGoEnslaveAction);
 
         SubscribeLocalEvent<MiGoComponent, BoundUIOpenedEvent>(OnBoundUIOpened);
+
+        SubscribeLocalEvent<MiGoComponent, AfterTeleportedEvent>(OnAfterTeleported);
 
         SubscribeLocalEvent<GetVerbsEvent<Verb>>(OnGetVerb);
 
@@ -177,13 +182,26 @@ public abstract partial class SharedMiGoSystem : EntitySystem
     #endregion
 
     #region Erect
-    private void MiGoErectAction(Entity<MiGoComponent> entity, ref MiGoErectActionEvent args)
+    private void MiGoErectAction(Entity<MiGoComponent> ent, ref MiGoErectActionEvent args)
     {
         //will wait when sw will update ui parts to copy paste, cause rn it has an errors
-        if (args.Handled || !TryComp<ActorComponent>(entity, out var actor))
+        if (args.Handled || !TryComp<ActorComponent>(ent, out var actor))
             return;
 
-        _miGoErectSystem.OpenUI(entity, actor);
+        EntityUid? currentGrid = Transform(ent).GridUid;
+
+        if (ent.Comp.ConstructionGridsBlacklist != null && _whitelist.IsValid(ent.Comp.ConstructionGridsBlacklist, currentGrid))
+        {
+            _popup.PopupClient(Loc.GetString("cult-yogg-cant-buid-on-grid"), ent, ent);
+            return;
+        }
+
+        _miGoErectSystem.OpenUI(ent, actor);
+    }
+
+    private void OnAfterTeleported(Entity<MiGoComponent> ent, ref AfterTeleportedEvent args)
+    {
+        _userInterfaceSystem.CloseUis(ent.Owner);
     }
     #endregion
 
@@ -304,7 +322,7 @@ public abstract partial class SharedMiGoSystem : EntitySystem
             return false;
         }
 
-        if (!_mobState.IsAlive(target))
+        if (_mobState.IsDead(target))
         {
             reason = Loc.GetString("cult-yogg-enslave-must-be-alive");
             return false;

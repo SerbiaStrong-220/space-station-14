@@ -396,3 +396,9 @@
 
 - type: Tag
   id: HookahCoal
+
+- type: Tag
+  id: AstralBlocker
+
+- type: Tag
+  id: MiGoBuildingBlocker
