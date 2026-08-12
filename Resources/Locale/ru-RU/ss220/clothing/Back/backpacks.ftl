@@ -9,7 +9,7 @@ ent-ClothingBackpackWhiteCaptain = белый рюкзак капитана
     .desc = Дорогая белая сумка, выданная за выслугу лет капитану.
 
 ent-ClothingBackpackJanitorJR = рюкзак JR
-    .desc = Удобный и водостойкий, предназначено для уборщиков Junk Recyclers.
+    .desc = Удобный и водостойкий, предназначен для уборщиков Junk Recyclers.
 
 ent-ClothingBackpackBlueShieldHight = { ent-ClothingBackpackBlueShield }
     .desc = { ent-ClothingBackpackBlueShield.desc }
