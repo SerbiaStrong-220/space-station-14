@@ -1,3 +1,4 @@
+using Content.Shared.Inventory;
 using Content.Shared.SS220.CCVars;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
@@ -138,9 +139,16 @@ public abstract partial class SharedTtsSystem : EntitySystem
     }
 }
 
-public sealed class GetTtsVoiceOverrideEvent() : EntityEventArgs
+public sealed class GetTtsVoiceOverrideEvent() : EntityEventArgs, IInventoryRelayEvent
 {
     public readonly TtsVoicePreferences Overrides = [];
+
+    public SlotFlags TargetSlots => SlotFlags.MASK;
+
+    public void Add(TtsVoicePreferences other, bool force = false)
+    {
+        Overrides.MergeWith(other, hard: force);
+    }
 
     public void Add(TtsProvider provider, ProtoId<TtsVoicePrototype> protoId, bool force = false)
     {

@@ -1,5 +1,6 @@
 using Content.Shared.Preferences;
 using Content.Shared.Speech;
+using Content.Shared.SS220.TTS;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.VoiceMask;
@@ -15,9 +16,6 @@ namespace Content.Shared.VoiceMask;
 [RegisterComponent]
 public sealed partial class VoiceMaskComponent : Component
 {
-    [ViewVariables(VVAccess.ReadWrite)]
-    public string VoiceId = HumanoidCharacterProfile.DefaultVoice; // Corvax-TTS
-
     /// <summary>
     ///     The name that will override an entities default name. If null, it will use the default override.
     /// </summary>
@@ -65,5 +63,10 @@ public sealed partial class VoiceMaskComponent : Component
     /// </summary>
     [DataField]
     public bool ChangeIDName = false;
+
+    // SS220 tts begin
+    [DataField(customTypeSerializer: typeof(TTSVoicePreferencesSerializer))]
+    public TtsVoicePreferences VoicePreferences = SharedTtsSystem.DefaultVoicePreferences.Clone();
+    // SS220 tts end
 }
 

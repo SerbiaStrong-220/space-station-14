@@ -12,10 +12,8 @@ namespace Content.Client.VoiceMask;
 [GenerateTypedNameReferences]
 public sealed partial class VoiceMaskNameChangeWindow : FancyWindow
 {
-    private readonly List<TtsVoicePrototype> _voices; // Corvax-TTS
-
     public Action<string>? OnNameChange;
-    public Action<string>? OnVoiceChange; // Corvax-TTS
+    public Action<TtsVoicePreferences>? OnVoicePreferencesChanged; // SS220 tts
     public Action<string?>? OnVerbChange;
     public Action? OnToggle;
     public Action? OnAccentToggle;
@@ -33,26 +31,10 @@ public sealed partial class VoiceMaskNameChangeWindow : FancyWindow
             OnNameChange?.Invoke(NameSelector.Text);
         };
 
-        // Corvax-TTS-Start
-        VoiceSelector.OnItemSelected += args =>
-        {
-            VoiceSelector.SelectId(args.Id);
-            if (VoiceSelector.SelectedMetadata != null)
-                OnVoiceChange!((string)VoiceSelector.SelectedMetadata);
-        };
-        _voices = IoCManager
-            .Resolve<IPrototypeManager>()
-            .EnumeratePrototypes<TtsVoicePrototype>()
-            //.Where(o => o.RoundStart) // Kirus Todo: fix this
-            .OrderBy(o => Loc.GetString(o.Name))
-            .ToList();
-        for (var i = 0; i < _voices.Count; i++)
-        {
-            var name = Loc.GetString(_voices[i].Name);
-            VoiceSelector.AddItem(name);
-            VoiceSelector.SetItemMetadata(i, _voices[i].ID);
-        }
-        // Corvax-TTS-End
+        // SS220 tts begin
+        TtsVoicePreferencesTab.SetPreferences(SharedTtsSystem.DefaultVoicePreferences.Clone(), silent: true);
+        TtsVoicePreferencesTab.OnPreferencesChanged += () => OnVoicePreferencesChanged?.Invoke(TtsVoicePreferencesTab.VoicePreferences);
+        // SS220 tts end
 
         SpeechVerbSelector.OnItemSelected += args =>
         {
@@ -95,18 +77,14 @@ public sealed partial class VoiceMaskNameChangeWindow : FancyWindow
             SpeechVerbSelector.SelectId(id);
     }
 
-    public void UpdateState(string name, string? verb, string voice /* Corvax-TTS */, bool active, bool accentHide)
+    public void UpdateState(string name, string? verb, bool active, bool accentHide, TtsVoicePreferences voicePreferences /* SS220 tts */)
     {
         NameSelector.Text = name;
         _verb = verb;
         ToggleButton.Pressed = active;
         ToggleAccentButton.Pressed = accentHide;
 
-        // Corvax-TTS-Start
-        var voiceIdx = _voices.FindIndex(v => v.ID == voice);
-        if (voiceIdx != -1)
-            VoiceSelector.Select(voiceIdx);
-        // Corvax-TTS-End
+        TtsVoicePreferencesTab.SetPreferences(voicePreferences, silent: true); // SS220 tts
 
         for (int id = 0; id < SpeechVerbSelector.ItemCount; id++)
         {

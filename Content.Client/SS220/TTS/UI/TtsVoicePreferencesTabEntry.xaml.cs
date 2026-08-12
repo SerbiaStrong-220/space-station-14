@@ -9,7 +9,7 @@ using Robust.Shared.Utility;
 namespace Content.Client.SS220.TTS.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class TtsVoicePreferencesTabEntry : PanelContainer
+public sealed partial class TtsVoicePreferencesTabEntry : BoxContainer
 {
     [Dependency] private IEntityManager _entity = default!;
 
@@ -51,25 +51,6 @@ public sealed partial class TtsVoicePreferencesTabEntry : PanelContainer
     {
         ProviderNameLabel.Text = Prototype.Provider.ToString();
         VoiceNameLabel.Text = Prototype.LocalizedName;
-    }
-
-    public void SetBackgroundColor(Color? color)
-    {
-        if (color == null)
-        {
-            Background.Visible = false;
-            return;
-        }
-
-        Background.Visible = true;
-
-        if (Background.PanelOverride is not StyleBoxFlat styleBoxFlat)
-        {
-            styleBoxFlat = new StyleBoxFlat();
-            Background.PanelOverride = styleBoxFlat;
-        }
-
-        styleBoxFlat.BackgroundColor = color.Value;
     }
 
     public void SetHighlightColor(Color? color)

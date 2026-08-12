@@ -21,7 +21,7 @@ public partial class HumanoidProfileEditor
         if (Profile is null)
             return;
 
-        TtsVoicePreferencesTab.SetPreferences(Profile.VoicePreferences.Clone());
+        TtsVoicePreferencesTab.SetPreferences(Profile.VoicePreferences.Clone(), silent: true);
         TtsVoicePreferencesTab.RequirementsCheckData = new TtsVoiceRequirementCheckData
         {
             Session = _playerManager.LocalSession,

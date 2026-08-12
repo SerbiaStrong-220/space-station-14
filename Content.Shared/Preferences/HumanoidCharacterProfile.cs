@@ -275,17 +275,6 @@ namespace Content.Shared.Preferences
                 age = random.Next(speciesPrototype.MinAge, speciesPrototype.OldAge); // people don't look and keep making 119 year old characters with zero rp, cap it at middle aged
             }
 
-            // SS220 tts begin
-            var ttsSystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<SharedTtsSystem>();
-            var voicePreferences = new TtsVoicePreferences();
-            foreach (var provider in Enum.GetValues<TtsProvider>())
-            {
-                // Kirus ToDo: добавить выборку по доступным голосам (по полу, спонсорке и т.д.)
-                var providerVoice = random.Pick(ttsSystem.EnumerateProviderVoices(provider).ToArray());
-                voicePreferences.Add(provider, providerVoice);
-            }
-            // SS220 tts end
-
             var gender = Gender.Epicene;
 
             switch (sex)
@@ -300,16 +289,42 @@ namespace Content.Shared.Preferences
 
             var name = GetName(species, gender);
 
-            return new HumanoidCharacterProfile()
+            // SS220 tts begin
+            var profile = new HumanoidCharacterProfile()
             {
                 Name = name,
                 Sex = sex,
                 Age = age,
                 Gender = gender,
                 Species = species,
-                Appearance = HumanoidCharacterAppearance.Random(species, sex),
-                VoicePreferences = voicePreferences // SS220 tts
+                Appearance = HumanoidCharacterAppearance.Random(species, sex)
             };
+
+            var ttsSystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<SharedTtsSystem>();
+            var voicePreferences = new TtsVoicePreferences();
+
+            var checkData = new TtsVoiceRequirementCheckData()
+            {
+                Profile = profile,
+
+                // ToDo: Add support for server side sessions
+                Session = IoCManager.Resolve<ISharedPlayerManager>().LocalSession
+            };
+
+            foreach (var provider in Enum.GetValues<TtsProvider>())
+            {
+                var avaliableVoices = ttsSystem.EnumerateProviderVoices(provider)
+                    .Where(x => ttsSystem.IsPassVoiceRequirements(x, checkData, out _))
+                    .ToArray();
+
+                var providerVoice = random.Pick(avaliableVoices);
+                voicePreferences.Add(provider, providerVoice);
+            }
+
+            profile = profile.WithVoicePreferences(voicePreferences);
+
+            return profile;
+            // SS220 tts end
         }
 
         public HumanoidCharacterProfile WithName(string name)

@@ -197,7 +197,7 @@ public sealed partial class VoiceMaskSystem : EntitySystem
     private void UpdateUI(Entity<VoiceMaskComponent> entity)
     {
         if (_uiSystem.HasUi(entity, VoiceMaskUIKey.Key))
-            _uiSystem.SetUiState(entity.Owner, VoiceMaskUIKey.Key, new VoiceMaskBuiState(GetCurrentVoiceName(entity), entity.Comp.VoiceMaskSpeechVerb, entity.Comp.Active, entity.Comp.AccentHide, entity.Comp.VoiceId)); //Corvax-TTS 
+            _uiSystem.SetUiState(entity.Owner, VoiceMaskUIKey.Key, new VoiceMaskBuiState(GetCurrentVoiceName(entity), entity.Comp.VoiceMaskSpeechVerb, entity.Comp.Active, entity.Comp.AccentHide, entity.Comp.VoicePreferences)); //Corvax-TTS 
     }
 
     //ss220 change voice in mask when clicking on target start

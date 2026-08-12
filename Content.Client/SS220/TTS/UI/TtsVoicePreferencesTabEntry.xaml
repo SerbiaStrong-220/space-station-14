@@ -1,17 +1,21 @@
-<PanelContainer xmlns="https://spacestation14.io"
+<BoxContainer xmlns="https://spacestation14.io"
               xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
               xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+              Orientation="Vertical"
               HorizontalExpand="True"
               MouseFilter="Pass">
-    <PanelContainer Name="Background" HorizontalExpand="True">
-        <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
-            <Label Name="ProviderNameLabel" Margin="5 0"/>
-            <cc:VSeparator/>
-            <Label Name="VoiceNameLabel" HorizontalExpand="True" Margin="5 0"/>
-            <Button Name="VoiceSelectorButton" Text="{Loc 'humanoid-profile-editor-voice-settings'}" Access="Public" ToggleMode="True" />
-            <Button Name="VoicePlayButton" Text="{Loc 'humanoid-profile-editor-voice-play'}" HorizontalAlignment="Right" />
-        </BoxContainer>
-    </PanelContainer>
+    <cc:HSeparator Access="Public" Name="BeforeContentDivider" Visible="False"/>
+    <Control>
+        <PanelContainer Name="Background" HorizontalExpand="True">
+            <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                <Label Name="ProviderNameLabel" Margin="5 0"/>
+                <cc:VSeparator/>
+                <Label Name="VoiceNameLabel" HorizontalExpand="True" Margin="5 0"/>
+                <Button Name="VoiceSelectorButton" Text="{Loc 'humanoid-profile-editor-voice-settings'}" Access="Public" ToggleMode="True" />
+                <Button Name="VoicePlayButton" Text="{Loc 'humanoid-profile-editor-voice-play'}" HorizontalAlignment="Right" />
+            </BoxContainer>
+        </PanelContainer>
 
-    <PanelContainer Name="HighlightOverlay" Visible="false" />
-</PanelContainer>
+        <PanelContainer Name="HighlightOverlay" Visible="false" />
+    </Control>
+</BoxContainer>

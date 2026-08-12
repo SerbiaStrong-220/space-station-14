@@ -124,6 +124,14 @@ public sealed partial class TtsVoicePreferences : IEnumerable<KeyValuePair<TtsPr
         SoftMergeWith(pairs);
     }
 
+    public void MergeWith(IEnumerable<KeyValuePair<TtsProvider, ProtoId<TtsVoicePrototype>>> pairs, bool hard = false)
+    {
+        if (hard)
+            HardMergeWith(pairs);
+        else
+            SoftMergeWith(pairs);
+    }
+
     public void HardMergeWith(IEnumerable<KeyValuePair<TtsProvider, ProtoId<TtsVoicePrototype>>> pairs)
     {
         foreach (var (key, value) in pairs)
@@ -164,7 +172,7 @@ public sealed partial class TtsVoicePreferences : IEnumerable<KeyValuePair<TtsPr
     }
 }
 
-public sealed class TTSVoicePreferencesSerializer : ITypeSerializer<TtsVoicePreferences, MappingDataNode>
+public sealed class TTSVoicePreferencesSerializer : ITypeSerializer<TtsVoicePreferences, MappingDataNode>, ITypeCopier<TtsVoicePreferences>
 {
     private readonly ProtoIdSerializer<TtsVoicePrototype> _protoIdSerializer = new();
 
@@ -233,5 +241,16 @@ public sealed class TTSVoicePreferencesSerializer : ITypeSerializer<TtsVoicePref
             mapping.Add(key.ToString(), _protoIdSerializer.Write(serializationManager, protoId, dependencies, alwaysWrite, context));
 
         return mapping;
+    }
+
+    public void CopyTo(ISerializationManager serializationManager,
+        TtsVoicePreferences source,
+        ref TtsVoicePreferences target,
+        IDependencyCollection dependencies,
+        SerializationHookContext hookCtx,
+        ISerializationContext? context = null)
+    {
+        target.Clear();
+        target.MergeWith(source);
     }
 }

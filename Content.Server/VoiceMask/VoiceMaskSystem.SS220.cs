@@ -1,5 +1,5 @@
-using Content.Server.Speech.Components;
-using Content.Server.SS220.TTS;
+using Content.Shared.Inventory;
+using Content.Shared.SS220.TTS;
 using Content.Shared.SS220.VoiceMask;
 using Content.Shared.VoiceMask;
 
@@ -9,31 +9,28 @@ public partial class VoiceMaskSystem
 {
     private void InitializeTTS()
     {
-        SubscribeLocalEvent<VoiceMaskComponent, TransformSpeakerVoiceEvent>(OnSpeakerVoiceTransform);
-        SubscribeLocalEvent<VoiceMaskComponent, VoiceMaskChangeVoiceMessage>(OnChangeVoice);
+        SubscribeLocalEvent<VoiceMaskComponent, GetTtsVoiceOverrideEvent>(OnGetVoiceOverride);
+        SubscribeLocalEvent<VoiceMaskComponent, InventoryRelayedEvent<GetTtsVoiceOverrideEvent>>(OnInventoryGetVoiceOverride);
+
+        SubscribeLocalEvent<VoiceMaskComponent, VoiceMaskChangeTtsVoicePreferencesMessage>(OnChangeVoice);
     }
 
-    private void OnSpeakerVoiceTransform(Entity<VoiceMaskComponent> entity, ref TransformSpeakerVoiceEvent args)
+    private void OnGetVoiceOverride(Entity<VoiceMaskComponent> entity, ref GetTtsVoiceOverrideEvent args)
     {
-        args.VoiceId = entity.Comp.VoiceId;
+        args.Add(entity.Comp.VoicePreferences);
     }
 
-    private void OnChangeVoice(Entity<VoiceMaskComponent> ent, ref VoiceMaskChangeVoiceMessage message)
+    private void OnInventoryGetVoiceOverride(Entity<VoiceMaskComponent> entity, ref InventoryRelayedEvent<GetTtsVoiceOverrideEvent> args)
     {
-        ent.Comp.VoiceId = message.Voice;
+        OnGetVoiceOverride(entity, ref args.Args);
+    }
 
-        _popupSystem.PopupCursor(Loc.GetString("voice-mask-voice-popup-success"), message.Actor);
+    private void OnChangeVoice(Entity<VoiceMaskComponent> ent, ref VoiceMaskChangeTtsVoicePreferencesMessage msg)
+    {
+        ent.Comp.VoicePreferences = msg.VoicePreferences;
 
-        TrySetLastKnownVoice(message.Actor, message.Voice);
+        _popupSystem.PopupCursor(Loc.GetString("voice-mask-voice-popup-success"), msg.Actor);
 
         UpdateUI(ent);
-    }
-
-    private void TrySetLastKnownVoice(EntityUid maskWearer, string? voiceId)
-    {
-        if (!TryComp<VoiceOverrideComponent>(maskWearer, out var comp))
-            return;
-
-        comp.LastSetVoice = voiceId;
     }
 }

@@ -95,7 +95,7 @@
                                     <OptionButton Name="SpawnPriorityButton" HorizontalAlignment="Right" />
                                 </BoxContainer>
                                 <!-- SS220-TTS-Start -->
-                                <Collapsible Orientation="Vertical" HorizontalExpand="True">
+                                <Collapsible Orientation="Vertical" HorizontalExpand="True" BodyVisible="True">
                                     <CollapsibleHeading Title="{Loc 'ui-humanoid-profile-editor-tts-settings'}" />
                                     <CollapsibleBody>
                                         <ss220-tts:TtsVoicePreferencesTab Name="TtsVoicePreferencesTab" HorizontalExpand="True"/>

@@ -148,7 +148,6 @@ public partial class TtsSystem
         RunTtsRequestHandle(request);
     }
 
-
     // Kirus ToDo: проверить зачем это
     private void OnTransformSpeech(TransformSpeechEvent args)
     {
@@ -158,6 +157,3 @@ public partial class TtsSystem
         args.Message = args.Message.Replace("+", "");
     }
 }
-
-[ByRefEvent]
-public record struct TransformSpeakerVoiceEvent(EntityUid Sender, ProtoId<TtsVoicePrototype>? VoiceId) { }
