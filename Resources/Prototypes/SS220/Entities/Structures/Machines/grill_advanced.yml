@@ -1,0 +1,21 @@
+- type: entity
+  parent: KitchenElectricGrill
+  id: KitchenElectricGrillAdvanced
+  name: Advanced Electric Grill
+  description: A premium grade electric grill, for all your meat.
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Machines/grill_advanced.rsi
+    drawdepth: SmallObjects
+    snapCardinals: true
+    layers:
+    - state: icon
+    - map: ["enum.EntityHeaterVisuals.Setting"]
+      shader: unshaded
+      visible: false
+  - type: Machine
+    board: KitchenElectricGrillAdvancedCircuitboard
+  - type: Grill
+    cookingModifier: 1.5
+  - type: ItemPlacer
+    maxEntities: 6

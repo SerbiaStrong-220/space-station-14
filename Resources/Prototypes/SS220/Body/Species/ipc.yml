@@ -264,6 +264,7 @@
         Blunt: 0
         Heat: 0
   - type: Ipc
+    damageFromEmp: 0 #IPC EMP damage removed.
   - type: PowerCellSlot
     cellSlotId: cell_slot
     fitsInCharger: true

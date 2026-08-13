@@ -559,6 +559,11 @@
       - state: plain-inhand-left
       right:
       - state: plain-inhand-right
+# SS220-Grill-Hotfix begin
+  - type: Grillable
+    timeToCook: 30
+    cookingResult: FoodMeatCooked
+# SS220-Grill-Hotfix end
 
 - type: entity
   parent: FoodMeatRawBase
