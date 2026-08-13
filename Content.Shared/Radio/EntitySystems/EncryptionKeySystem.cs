@@ -16,6 +16,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
+using Content.Shared.SS220.Language.Components; // SS220-DecryptionKey
 using SharedToolSystem = Content.Shared.Tools.Systems.SharedToolSystem;
 
 namespace Content.Shared.Radio.EntitySystems;
@@ -255,6 +256,27 @@ public sealed partial class EncryptionKeySystem : EntitySystem
             return;
         }
         // SS220-add-frequency-radio-end
+
+        // SS220-DecryptionKey begin
+        var languageNames = new List<string>();
+        foreach (var keyEntity in component.KeyContainer.ContainedEntities)
+        {
+            if (!TryComp<LanguageEncryptionKeyComponent>(keyEntity, out var languageKey))
+                continue;
+
+            foreach (var language in languageKey.Language)
+            {
+                if (_protoManager.TryIndex(language, out var languageProto))
+                    languageNames.Add(Loc.GetString(languageProto.Name));
+            }
+        }
+
+        if (languageNames.Count == 0)
+            return;
+
+        args.PushMarkup(Loc.GetString("examine-key-holder-language-keys", ("languages", string.Join(", ", languageNames))));
+        // SS220-DecryptionKey end
+
     }
 
     private void OnKeyExamined(EntityUid uid, EncryptionKeyComponent component, ExaminedEvent args)
