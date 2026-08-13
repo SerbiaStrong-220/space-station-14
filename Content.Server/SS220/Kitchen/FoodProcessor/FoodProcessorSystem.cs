@@ -32,8 +32,8 @@ public sealed class FoodProcessorSystem : SharedFoodProcessorSystem
         SubscribeLocalEvent<FoodProcessorComponent, ContainerIsInsertingAttemptEvent>(OnInsertAttempt);
         SubscribeLocalEvent<FoodProcessorComponent, ContainerIsRemovingAttemptEvent>(OnRemoveAttempt);
         SubscribeLocalEvent<FoodProcessorComponent, InteractUsingEvent>(OnInteractUsing);
-        SubscribeLocalEvent<FoodProcessorComponent, GetVerbsEvent<AlternativeVerb>>(OnAltInteract);
-        SubscribeLocalEvent<FoodProcessorComponent, GetVerbsEvent<Verb>>(OnRightClick);
+        SubscribeLocalEvent<FoodProcessorComponent, GetVerbsEvent<AlternativeVerb>>(OnGetAlternativeVerb);
+        SubscribeLocalEvent<FoodProcessorComponent, GetVerbsEvent<Verb>>(OnGetVerbs);
     }
 
     public override void Update(float frameTime)
@@ -120,7 +120,7 @@ public sealed class FoodProcessorSystem : SharedFoodProcessorSystem
         args.Handled = true;
     }
 
-    private void OnAltInteract(Entity<FoodProcessorComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    private void OnGetAlternativeVerb(Entity<FoodProcessorComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
         if (!args.CanAccess || !args.CanInteract)
             return;
@@ -155,7 +155,7 @@ public sealed class FoodProcessorSystem : SharedFoodProcessorSystem
         });
     }
 
-    private void OnRightClick(Entity<FoodProcessorComponent> ent, ref GetVerbsEvent<Verb> args)
+    private void OnGetVerbs(Entity<FoodProcessorComponent> ent, ref GetVerbsEvent<Verb> args)
     {
         if (!args.CanAccess || !args.CanInteract)
             return;
