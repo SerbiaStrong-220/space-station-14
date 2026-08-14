@@ -26,7 +26,7 @@ using Content.Server.Body.Components;
 
 namespace Content.Server.SS220.Ipc;
 
-public sealed partial class IpcSystem : EntitySystem
+public sealed partial class IpcSystem : SharedIpcSystem
 {
     [Dependency] private SharedActionsSystem _action = default!;
     [Dependency] private SharedBatteryDrainerSystem _batteryDrainer = default!;
