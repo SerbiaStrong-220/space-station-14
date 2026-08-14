@@ -238,7 +238,7 @@
   description: Let your voice be heard throughout the station!
   components:
   - type: Sprite
-    sprite: SS220\Structures\Machines\RadioStation.rsi
+    sprite: SS220/Structures/Machines/RadioStation.rsi
     state: radister
   - type: Machine
     board: RadioStationCircuitboard
