@@ -7,3 +7,4 @@ flavor-base-bnuuynyatina = не бнууйно
 flavor-base-driedbnuuynyatina = пламенно бнууйно
 flavor-complex-sawdustporridge = отчаяние
 flavor-complex-sawdustsoup = ужасно
+flavor-complex-chocolatewhite = как ванильная карамель

@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Administration.Logs;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
@@ -11,7 +12,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.Repairable;
 
-public sealed class MultiRepairableSystem : EntitySystem
+public sealed partial class MultiRepairableSystem : EntitySystem
 {
     [Dependency] private SharedToolSystem _toolSystem = default!;
     [Dependency] private DamageableSystem _damageableSystem = default!;
@@ -34,7 +35,7 @@ public sealed class MultiRepairableSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (_damageableSystem.GetTotalDamage(ent.Owner) == 0)
+        if (!TryComp<DamageableComponent>(ent.Owner, out var damageable))
             return;
 
         foreach (var option in ent.Comp.Options)
@@ -42,13 +43,11 @@ public sealed class MultiRepairableSystem : EntitySystem
             if (!_toolSystem.HasQuality(args.Used, option.QualityNeeded))
                 continue;
 
-            var delay = option.DoAfterDelay;
-            if (args.User == ent.Owner)
-            {
-                if (!ent.Comp.AllowSelfRepair)
-                    return;
-                delay *= ent.Comp.SelfRepairPenalty;
-            }
+            if (!HasRepairableDamageType((ent.Owner, damageable), option))
+                continue;
+
+            if (!TryGetRepairDelay(ent, args.User, option, out var delay))
+                return;
 
             args.Handled = _toolSystem.UseTool(
                 args.Used,
@@ -85,6 +84,58 @@ public sealed class MultiRepairableSystem : EntitySystem
         RaiseLocalEvent(ent, ref ev);
 
         args.Handled = true;
+
+        var toolEntity = args.Args.Used.Value;
+        var toolExists = Exists(toolEntity);
+
+        if (toolExists
+            && TryComp<DamageableComponent>(ent.Owner, out var damageable)
+            && HasRepairableDamageType((ent.Owner, damageable), option))
+        {
+            if (!TryGetRepairDelay(ent, args.User, option, out var delay))
+                return;
+
+            _toolSystem.UseTool(
+                toolEntity,
+                args.User,
+                ent,
+                delay,
+                option.QualityNeeded,
+                new MultiRepairDoAfterEvent(option),
+                option.FuelCost
+            );
+        }
+    }
+
+    private bool TryGetRepairDelay(Entity<MultiRepairableComponent> ent, EntityUid user, RepairOption option, out float delay)
+    {
+        delay = option.DoAfterDelay;
+
+        if (user == ent.Owner)
+        {
+            if (!ent.Comp.AllowSelfRepair)
+                return false;
+
+            delay *= ent.Comp.SelfRepairPenalty;
+        }
+
+        return true;
+    }
+
+    private bool HasRepairableDamageType(Entity<DamageableComponent> ent, RepairOption option)
+    {
+        if (option.Damage == null)
+            return false;
+
+        var positiveDamage = _damageableSystem.GetPositiveDamage(ent);
+
+        foreach (var type in option.Damage.DamageDict.Keys)
+        {
+            if (positiveDamage.DamageDict.ContainsKey(type))
+                return true;
+        }
+
+        return false;
     }
 }
 
@@ -95,6 +146,11 @@ public readonly record struct MultiRepairedEvent(EntityUid Target, EntityUid Use
 public sealed partial class MultiRepairDoAfterEvent : DoAfterEvent
 {
     public readonly RepairOption RepairOption;
-    public MultiRepairDoAfterEvent(RepairOption option) => RepairOption = option;
+
+    public MultiRepairDoAfterEvent(RepairOption option)
+    {
+        RepairOption = option;
+    }
+
     public override DoAfterEvent Clone() => this;
 }

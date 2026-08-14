@@ -58,7 +58,7 @@ public sealed partial class IpcSystem : EntitySystem
         SubscribeLocalEvent<IpcComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<IpcComponent, OpenIpcFaceActionEvent>(OnOpenIpcFaceAction);
         SubscribeLocalEvent<IpcComponent, DamageChangedEvent>(OnDamageChanged);
-        SubscribeLocalEvent<IpcComponent, BatteryStateChangedEvent>(OnBatteryStateChanged);
+        SubscribeLocalEvent<IpcComponent, RefreshChargeRateEvent>(OnRefreshChargeRate);
         SubscribeLocalEvent<IpcComponent, OnTemperatureChangeEvent>(OnTemperatureChange);
     }
 
@@ -79,7 +79,7 @@ public sealed partial class IpcSystem : EntitySystem
     /// <summary>
     /// If the battery is present but discharged, the movement speed is reduced.
     /// </summary>
-    private void OnBatteryStateChanged(Entity<IpcComponent> ent, ref BatteryStateChangedEvent args)
+    private void OnRefreshChargeRate(Entity<IpcComponent> ent, ref RefreshChargeRateEvent args)
     {
         if (Terminating(ent))
             return;
@@ -147,7 +147,7 @@ public sealed partial class IpcSystem : EntitySystem
     }
 
     /// <summary>
-    /// The movement speed of the IPS is reduced if they are out of charge.
+    /// The movement speed of the IPC is reduced if they are out of charge.
     /// </summary>
     private void OnRefreshMovementSpeedModifiers(Entity<IpcComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
@@ -179,7 +179,7 @@ public sealed partial class IpcSystem : EntitySystem
     }
 
     /// <summary>
-    /// IPS take damage from EMP.
+    /// IPC take damage from EMP.
     /// </summary>
     private void OnEmpPulse(Entity<IpcComponent> ent, ref EmpPulseEvent args)
     {
@@ -192,7 +192,7 @@ public sealed partial class IpcSystem : EntitySystem
     }
 
     /// <summary>
-    /// Organic beings in critical condition make sounds of labored breathing. IPS - beeps.
+    /// Organic beings in critical condition make sounds of labored breathing. IPC - beeps.
     /// </summary>
     private void OnMobStateChanged(Entity<IpcComponent> ent, ref MobStateChangedEvent args)
     {
@@ -211,7 +211,7 @@ public sealed partial class IpcSystem : EntitySystem
     }
 
     /// <summary>
-    /// IPS easily return from a dead state to a critical state if they are repaired.
+    /// IPC easily return from a dead state to a critical state if they are repaired.
     /// </summary>
     private void OnDamageChanged(Entity<IpcComponent> ent, ref DamageChangedEvent args)
     {
@@ -247,7 +247,7 @@ public sealed partial class IpcSystem : EntitySystem
 
         var delta = Math.Abs(args.CurrentTemperature - regulator.NormalBodyTemperature);
 
-        float newDrawRate = ent.Comp.BaseDrawRate;
+        var newDrawRate = ent.Comp.BaseDrawRate;
 
         if (delta > ent.Comp.CritDelta)
             newDrawRate = ent.Comp.CritDrawRate;

@@ -16,7 +16,7 @@
       required: false
     enum.HumanoidVisualLayers.Snout: #screen
       limit: 1
-      required: true
+      required: false
       default: [ ScreenStatic ]
     enum.HumanoidVisualLayers.Chest:
       limit: 1
@@ -122,6 +122,7 @@
     modifyTime: 0
     showPopup: false
     checkHeadSlot: false
+    interactable: false
   #- type: ActivatableUI
   #  key: enum.MagicMirrorUiKey.Key
   #  singleUser: true
@@ -137,6 +138,7 @@
     availableLanguages:
     - id: Galactic
     - id: Binary
+    - id: Ternary
   - type: Tag
     tags:
     - CanPilot
@@ -211,6 +213,10 @@
     - id: CableApcStack1
       amount: 4
   - type: Unrevivable
+  - type: DamageOnInteractProtection
+    damageProtection:
+      flatReductions:
+        Heat: 10
   - type: SleepEmitSound
     snore: /Audio/Machines/buzz-two.ogg
     interval: 30
@@ -258,6 +264,7 @@
         Blunt: 0
         Heat: 0
   - type: Ipc
+    damageFromEmp: 0 #IPC EMP damage removed.
   - type: PowerCellSlot
     cellSlotId: cell_slot
     fitsInCharger: true
@@ -306,6 +313,7 @@
         damage:
           types:
              Heat: -5
+             Cold: -5 #delete in future
       - qualityNeeded: Pulsing
         doAfterDelay: 1.2
         damage:
@@ -318,6 +326,32 @@
              Caustic: -5
   - type: Experience
   - type: StunVisuals
+  - type: TriggerOnInteractUsing
+    keyOut: ipcsleep
+    targetUsed: true
+    whitelist:
+      components:
+      - BurglarBug
+  - type: EntityEffectOnTrigger
+    keysIn:
+    - ipcsleep
+    targetUser: false
+    effects:
+    - !type:ModifyStatusEffect
+      conditions:
+      - !type:ComponentCondition
+          inverted: true
+          components:
+          - BibleUser
+          - CultYogg
+          - MindShield
+      effectProto: StatusEffectForcedSleeping
+      type: Add
+      time: 15
+  - type: DeleteOnTrigger
+    keysIn:
+    - ipcsleep
+    targetUser: true
 
 - type: entity
   parent: OrganBase
