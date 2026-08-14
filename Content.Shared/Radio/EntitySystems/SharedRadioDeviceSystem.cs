@@ -1,5 +1,6 @@
 using Content.Shared.Popups;
 using Content.Shared.Radio.Components;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Radio.EntitySystems;
 
@@ -44,10 +45,29 @@ public abstract class SharedRadioDeviceSystem : EntitySystem
 
         _appearance.SetData(uid, RadioDeviceVisuals.Speaker, component.Enabled);
         if (component.Enabled)
-            EnsureComp<ActiveRadioComponent>(uid).Channels.UnionWith(component.Channels);
-        else
-            RemCompDeferred<ActiveRadioComponent>(uid);
-    }
-    #endregion
-}
+        {
+            var activeRadio = EnsureComp<ActiveRadioComponent>(uid);
+            activeRadio.Channels.UnionWith(component.Channels);
 
+            // SS220-listen-only-radio-begin
+            // Direct initialization of ListenOnlyChannels from encryption keys
+            HashSet<ProtoId<RadioChannelPrototype>> listenOnly = new();
+            if (TryComp<EncryptionKeyHolderComponent>(uid, out var keyHolder))
+            {
+                foreach (var keyUid in keyHolder.KeyContainer.ContainedEntities)
+                {
+                    if (TryComp<EncryptionKeyComponent>(keyUid, out var key))
+                    {
+                        listenOnly.UnionWith(key.ListenOnlyChannels);
+                    }
+                }
+            }
+            activeRadio.ListenOnlyChannels = listenOnly;
+            Log.Info($"[SS220 Radio INIT] Initialized ListenOnlyChannels for {uid}. Count: {listenOnly.Count}");
+            // SS220-listen-only-radio-end
+
+            Dirty(uid, activeRadio);
+        }
+    #endregion
+    }
+}

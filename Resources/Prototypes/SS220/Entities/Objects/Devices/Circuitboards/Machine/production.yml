@@ -82,3 +82,16 @@
     prototype: ComputerPdaIdPainter
     stackRequirements:
       Manipulator: 7
+
+- type: entity
+  id: RadioStationCircuitboard
+  parent: BaseMachineCircuitboard
+  name: radio station machine board
+  components:
+  - type: Sprite
+    state: service
+  - type: MachineBoard
+    prototype: RadioStation
+    stackRequirements:
+      Manipulator: 5
+      Steel: 3

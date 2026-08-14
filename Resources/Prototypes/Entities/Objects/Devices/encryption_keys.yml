@@ -20,6 +20,9 @@
   - type: EncryptionKey
     channels:
     - Common
+    - News #SS220-news-intercom
+    listenOnlyChannels:
+    - News  #SS220-news-intercom
     defaultChannel: Common
   - type: Sprite
     layers:
@@ -78,7 +81,10 @@
     - Security
     - Service
     - Supply
+    - News #SS220-news-intercom
     defaultChannel: Command
+    listenOnlyChannels:
+    - News  #SS220-news-intercom
   - type: Sprite
     layers:
     - state: crypt_gold
