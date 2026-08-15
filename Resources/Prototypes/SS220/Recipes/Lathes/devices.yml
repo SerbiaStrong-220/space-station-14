@@ -92,7 +92,7 @@
   completetime: 5
   materials:
     Gold: 100
-    Steel: 400
+    Steel: 100
     Plastic: 200
 
 - type: latheRecipe
@@ -101,7 +101,7 @@
   completetime: 5
   materials:
     Gold: 100
-    Steel: 400
+    Steel: 100
     Plastic: 200
 
 - type: latheRecipe
@@ -110,7 +110,7 @@
   completetime: 5
   materials:
     Gold: 100
-    Steel: 400
+    Steel: 100
     Plastic: 200
 
 - type: latheRecipe
@@ -119,7 +119,7 @@
   completetime: 5
   materials:
     Gold: 100
-    Steel: 400
+    Steel: 100
     Plastic: 200
 
 - type: latheRecipe
@@ -128,7 +128,7 @@
   completetime: 5
   materials:
     Gold: 100
-    Steel: 400
+    Steel: 100
     Plastic: 200
 
 - type: latheRecipe
@@ -137,7 +137,7 @@
   completetime: 5
   materials:
     Gold: 100
-    Steel: 400
+    Steel: 100
     Plastic: 200
 
 - type: latheRecipe
@@ -146,7 +146,7 @@
   completetime: 5
   materials:
     Gold: 100
-    Steel: 400
+    Steel: 100
     Plastic: 200
 
 - type: latheRecipe
@@ -155,7 +155,7 @@
   completetime: 5
   materials:
     Gold: 100
-    Steel: 400
+    Steel: 100
     Plastic: 200
 
 - type: latheRecipe
@@ -164,7 +164,7 @@
   completetime: 5
   materials:
     Gold: 100
-    Steel: 400
+    Steel: 100
     Plastic: 200
 
 - type: latheRecipe
@@ -173,6 +173,6 @@
   completetime: 5
   materials:
     Gold: 100
-    Steel: 400
+    Steel: 100
     Plastic: 200
 
