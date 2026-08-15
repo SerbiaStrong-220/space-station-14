@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 08/07/2026 03:59:26
-  entityCount: 25004
+  time: 08/15/2026 07:26:17
+  entityCount: 25003
 maps:
 - 1
 grids:
@@ -25495,7 +25495,7 @@ entities:
       pos: 31.5,22.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -67391.22
+      secondsUntilStateChange: -67448.23
       state: Opening
   - uid: 385
     components:
@@ -77514,7 +77514,7 @@ entities:
       pos: 35.5,3.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -68022.97
+      secondsUntilStateChange: -68079.98
       state: Closing
 - proto: CurtainsCyanOpen
   entities:
@@ -95206,26 +95206,10 @@ entities:
       parent: 2
 - proto: FoodCondimentBottleEnzyme
   entities:
-  - uid: 12673
+  - uid: 8560
     components:
     - type: Transform
-      pos: 5.760515,-2.3945255
-      parent: 2
-- proto: FoodCondimentPacketCornoil
-  entities:
-  - uid: 12674
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 5.6112094,-2.091825
-      parent: 2
-- proto: FoodCondimentPacketHotsauce
-  entities:
-  - uid: 12675
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 5.7266245,-1.508225
+      pos: 4.047634,1.7362158
       parent: 2
 - proto: FoodCondimentPacketSoy
   entities:
@@ -117513,6 +117497,13 @@ entities:
     - type: Transform
       pos: 50.5,-7.5
       parent: 2
+- proto: KitchenFoodProcessor
+  entities:
+  - uid: 8564
+    components:
+    - type: Transform
+      pos: 5.5,-2.5
+      parent: 2
 - proto: KitchenKnife
   entities:
   - uid: 15871
@@ -134323,10 +134314,10 @@ entities:
       parent: 2
 - proto: ReagentContainerFlour
   entities:
-  - uid: 18563
+  - uid: 12673
     components:
     - type: Transform
-      pos: 5.186503,-2.3486967
+      pos: 5.374681,-1.6758759
       parent: 2
 - proto: ReagentSlimeSpawner
   entities:
@@ -143128,7 +143119,7 @@ entities:
       pos: 55.5,-35.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -505795.34
+      secondsUntilStateChange: -505852.34
       state: Opening
 - proto: SpaceCarpCube
   entities:

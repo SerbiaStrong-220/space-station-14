@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 08/10/2026 16:07:01
-  entityCount: 59443
+  time: 08/15/2026 07:19:49
+  entityCount: 59444
 maps:
 - 1
 grids:
@@ -37760,7 +37760,7 @@ entities:
       pos: -10.5,-8.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -33238.336
+      secondsUntilStateChange: -33315.695
       state: Opening
   - uid: 548
     components:
@@ -179194,7 +179194,7 @@ entities:
   - uid: 26485
     components:
     - type: Transform
-      pos: 43.427795,0.90037584
+      pos: 42.94157,1.3422531
       parent: 2
   - uid: 26486
     components:
@@ -179372,7 +179372,7 @@ entities:
   - uid: 26510
     components:
     - type: Transform
-      pos: 43.68821,0.681474
+      pos: 43.139584,1.9364151
       parent: 2
 - proto: DrinkSpaceGlue
   entities:
@@ -193767,7 +193767,7 @@ entities:
   - uid: 28356
     components:
     - type: Transform
-      pos: 42.463478,0.85650235
+      pos: 42.337105,0.9565681
       parent: 2
 - proto: FoodCocoaBeans
   entities:
@@ -273327,6 +273327,13 @@ entities:
     - type: Transform
       pos: -72.5,26.5
       parent: 2
+- proto: KitchenFoodProcessor
+  entities:
+  - uid: 41550
+    components:
+    - type: Transform
+      pos: 43.5,0.5
+      parent: 2
 - proto: KitchenKnife
   entities:
   - uid: 26374
@@ -311968,6 +311975,11 @@ entities:
       parent: 2
 - proto: RollingPin
   entities:
+  - uid: 41549
+    components:
+    - type: Transform
+      pos: 42.681023,0.6125803
+      parent: 2
   - uid: 45401
     components:
     - type: Transform
@@ -311977,11 +311989,6 @@ entities:
     components:
     - type: Transform
       pos: -17.33742,85.63772
-      parent: 2
-  - uid: 45403
-    components:
-    - type: Transform
-      pos: 42.973896,0.6063281
       parent: 2
 - proto: RrrantaVendingSpawner
   entities:

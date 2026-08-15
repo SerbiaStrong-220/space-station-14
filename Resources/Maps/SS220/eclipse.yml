@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 08/07/2026 03:52:53
-  entityCount: 43549
+  time: 08/15/2026 07:23:02
+  entityCount: 43551
 maps:
 - 1
 grids:
@@ -34147,7 +34147,7 @@ entities:
       pos: 21.5,-6.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -218482.8
+      secondsUntilStateChange: -218587.73
       state: Opening
 - proto: AirlockServiceLocked
   entities:
@@ -131401,7 +131401,7 @@ entities:
       - DrinkBottle
       - Trash
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.9507675
+      sprayFizzinessThresholdRoll: 0.053460978
     - type: SolutionTransfer
       transferAmount: 50
     - type: ContainerContainer
@@ -131424,7 +131424,7 @@ entities:
       - DrinkBottle
       - Trash
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.23108792
+      sprayFizzinessThresholdRoll: 0.75037163
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -131471,7 +131471,7 @@ entities:
       - DrinkBottle
       - Trash
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.1733586
+      sprayFizzinessThresholdRoll: 0.38638276
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -131492,7 +131492,7 @@ entities:
       - DrinkBottle
       - Trash
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.5264244
+      sprayFizzinessThresholdRoll: 0.77800757
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -146712,7 +146712,7 @@ entities:
   - uid: 20534
     components:
     - type: Transform
-      pos: -5.217231,11.637292
+      pos: -5.0661993,11.721545
       parent: 2
   - uid: 20535
     components:
@@ -147036,11 +147036,6 @@ entities:
       parent: 2
 - proto: FoodDough
   entities:
-  - uid: 20588
-    components:
-    - type: Transform
-      pos: 71.692184,4.152648
-      parent: 2
   - uid: 20589
     components:
     - type: Transform
@@ -147051,12 +147046,17 @@ entities:
     - type: Transform
       pos: 19.628946,-18.751497
       parent: 2
-- proto: FoodDoughFlat
-  entities:
   - uid: 20591
     components:
     - type: Transform
-      pos: 71.46301,3.6422315
+      pos: 71.64176,4.272617
+      parent: 2
+- proto: FoodDoughFlat
+  entities:
+  - uid: 20588
+    components:
+    - type: Transform
+      pos: 71.47501,4.376856
       parent: 2
 - proto: FoodDoughSlice
   entities:
@@ -147884,12 +147884,12 @@ entities:
   - uid: 20693
     components:
     - type: Transform
-      pos: 71.660934,4.496398
+      pos: 71.74598,4.8702536
       parent: 2
   - uid: 20694
     components:
     - type: Transform
-      pos: 71.27551,4.350565
+      pos: 71.71124,4.793812
       parent: 2
   - uid: 20695
     components:
@@ -148546,7 +148546,7 @@ entities:
   - uid: 20806
     components:
     - type: Transform
-      pos: -6.195437,14.860139
+      pos: -4.1073904,14.515152
       parent: 2
 - proto: FoodShakerSalt
   entities:
@@ -148588,7 +148588,7 @@ entities:
   - uid: 20814
     components:
     - type: Transform
-      pos: -6.374819,14.860139
+      pos: -4.7535443,14.463033
       parent: 2
 - proto: FoodShawarmaOnGrill
   entities:
@@ -200351,6 +200351,18 @@ entities:
     - type: Transform
       pos: 8.5,58.5
       parent: 2
+- proto: KitchenFoodProcessor
+  entities:
+  - uid: 43550
+    components:
+    - type: Transform
+      pos: -6.5,14.5
+      parent: 2
+  - uid: 43551
+    components:
+    - type: Transform
+      pos: 71.5,3.5
+      parent: 2
 - proto: KitchenKnife
   entities:
   - uid: 27811
@@ -231059,7 +231071,7 @@ entities:
   - uid: 32676
     components:
     - type: Transform
-      pos: 71.57761,3.6005647
+      pos: 68.48742,4.397703
       parent: 2
 - proto: RrrantaVendingSpawner
   entities:
@@ -253038,7 +253050,7 @@ entities:
   - uid: 36080
     components:
     - type: Transform
-      pos: -6.535394,14.768092
+      pos: -6.0458527,11.950871
       parent: 2
 - proto: ToyFigurineChemist
   entities:

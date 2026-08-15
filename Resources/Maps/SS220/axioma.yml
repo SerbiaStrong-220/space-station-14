@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 08/07/2026 03:48:45
-  entityCount: 39111
+  time: 08/15/2026 07:20:26
+  entityCount: 39112
 maps:
 - 1
 grids:
@@ -118743,7 +118743,7 @@ entities:
       pos: 33.5,-93.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -983120.5
+      secondsUntilStateChange: -983149.9
       state: Closing
   - uid: 17525
     components:
@@ -122924,7 +122924,7 @@ entities:
       pos: 43.5,-95.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -801178.3
+      secondsUntilStateChange: -801207.7
       state: Closing
   - uid: 17932
     components:
@@ -122933,7 +122933,7 @@ entities:
       pos: 43.5,-94.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -801179.6
+      secondsUntilStateChange: -801209
       state: Closing
   - uid: 17933
     components:
@@ -122942,7 +122942,7 @@ entities:
       pos: 43.5,-93.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -801180.9
+      secondsUntilStateChange: -801210.25
       state: Closing
   - uid: 17934
     components:
@@ -122950,7 +122950,7 @@ entities:
       pos: 60.5,-82.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -801158.3
+      secondsUntilStateChange: -801187.7
       state: Closing
   - uid: 17935
     components:
@@ -122958,7 +122958,7 @@ entities:
       pos: 61.5,-82.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -801157.5
+      secondsUntilStateChange: -801186.9
       state: Closing
   - uid: 17936
     components:
@@ -180731,6 +180731,13 @@ entities:
     - type: Transform
       pos: -60.5,-37.5
       parent: 2
+- proto: KitchenFoodProcessor
+  entities:
+  - uid: 26331
+    components:
+    - type: Transform
+      pos: -20.5,14.5
+      parent: 2
 - proto: KitchenKnife
   entities:
   - uid: 26166
@@ -199978,15 +199985,15 @@ entities:
       parent: 2
 - proto: ReagentContainerFlour
   entities:
+  - uid: 26330
+    components:
+    - type: Transform
+      pos: -19.83256,14.688231
+      parent: 2
   - uid: 29015
     components:
     - type: Transform
       pos: 37.287373,-1.1937997
-      parent: 2
-  - uid: 29016
-    components:
-    - type: Transform
-      pos: -20.497475,14.616948
       parent: 2
   - uid: 29017
     components:
