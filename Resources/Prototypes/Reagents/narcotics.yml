@@ -238,6 +238,29 @@
         factor: 1
       - !type:SatiateThirst
         factor: 1
+      #SS220 Hyperzine lepo effect buff start
+      - !type:AdjustTemperature 
+        conditions:
+        - !type:ReagentCondition
+          reagent: Stimulants
+          min: 10
+        - !type:TemperatureCondition
+          max: 293.15
+        amount: 100000 # thermal energy, not temperature!
+      - !type:AdjustTemperature
+        conditions:
+        - !type:ReagentCondition
+          reagent: Stimulants
+          min: 10
+        - !type:TemperatureCondition
+          min: 293.15
+        amount: -10000 # thermal energy, not temperature!
+      - !type:PopupMessage
+        type: Local
+        visualType: Medium
+        messages: [ "leporazine-effect-temperature-adjusting" ]
+        probability: 0.2
+      #SS220 Hyperzine lepo effect buff end
 
 - type: reagent
   id: THC
