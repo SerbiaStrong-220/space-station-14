@@ -244,39 +244,35 @@ public sealed partial class EncryptionKeySystem : EntitySystem
             }
         }
 
-        // SS220-add-frequency-radio-begin
+        var languageNames = new HashSet<string>(); //SS220-decryption-key
         foreach (var keyEntity in component.KeyContainer.ContainedEntities)
         {
-            if (!TryComp<RadioEncryptionKeyComponent>(keyEntity, out var radioEncryptionKey))
-                continue;
-
-            args.PushMarkup(Loc.GetString("examine-key-holder-radio-encryption-key", ("min", radioEncryptionKey.LowerFrequencyBorder.Float()),
-                ("max", radioEncryptionKey.UpperFrequencyBorder.Float()), ("freq", radioEncryptionKey.RadioFrequency.Float())));
-
-            return;
-        }
-        // SS220-add-frequency-radio-end
-
-        // SS220-DecryptionKey begin
-        var languageNames = new List<string>();
-        foreach (var keyEntity in component.KeyContainer.ContainedEntities)
-        {
-            if (!TryComp<LanguageEncryptionKeyComponent>(keyEntity, out var languageKey))
-                continue;
-
-            foreach (var language in languageKey.Languages)
+            // SS220-add-frequency-radio-begin
+            if (TryComp<RadioEncryptionKeyComponent>(keyEntity, out var radioEncryptionKey))
             {
-                if (_protoManager.TryIndex(language, out var languageProto))
-                    languageNames.Add(Loc.GetString(languageProto.Name));
+                args.PushMarkup(Loc.GetString("examine-key-holder-radio-encryption-key",
+                    ("min", radioEncryptionKey.LowerFrequencyBorder.Float()),
+                    ("max", radioEncryptionKey.UpperFrequencyBorder.Float()),
+                    ("freq", radioEncryptionKey.RadioFrequency.Float())));
             }
+            // SS220-add-frequency-radio-end
+
+            //SS220-decryption-key begin
+            if (TryComp<LanguageEncryptionKeyComponent>(keyEntity, out var languageKey))
+            {
+                foreach (var language in languageKey.Languages)
+                {
+                    if (_protoManager.TryIndex(language, out var languageProto))
+                        languageNames.Add(Loc.GetString(languageProto.Name));
+                }
+            }
+            //SS220-decryption-key end
         }
 
-        if (languageNames.Count == 0)
-            return;
-
-        args.PushMarkup(Loc.GetString("examine-key-holder-language-keys", ("languages", string.Join(", ", languageNames))));
-        // SS220-DecryptionKey end
-
+        //SS220-decryption-key begin
+        if (languageNames.Count > 0)
+            args.PushMarkup(Loc.GetString("examine-key-holder-language-keys", ("languages", string.Join(", ", languageNames))));
+        //SS220-decryption-key end
     }
 
     private void OnKeyExamined(EntityUid uid, EncryptionKeyComponent component, ExaminedEvent args)
