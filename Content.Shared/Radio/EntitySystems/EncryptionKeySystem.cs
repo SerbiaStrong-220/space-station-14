@@ -264,7 +264,7 @@ public sealed partial class EncryptionKeySystem : EntitySystem
             if (!TryComp<LanguageEncryptionKeyComponent>(keyEntity, out var languageKey))
                 continue;
 
-            foreach (var language in languageKey.Language)
+            foreach (var language in languageKey.Languages)
             {
                 if (_protoManager.TryIndex(language, out var languageProto))
                     languageNames.Add(Loc.GetString(languageProto.Name));

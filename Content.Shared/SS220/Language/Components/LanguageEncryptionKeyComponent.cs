@@ -10,6 +10,6 @@ namespace Content.Shared.SS220.Language.Components;
 public sealed partial class LanguageEncryptionKeyComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
-    public HashSet<ProtoId<LanguagePrototype>> Language = [];
+    public HashSet<ProtoId<LanguagePrototype>> Languages = [];
 }
 

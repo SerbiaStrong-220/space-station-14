@@ -17,14 +17,14 @@ public sealed partial class LanguageEncryptionKeySystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<LanguageEncryptionKeyComponent, EntGotInsertedIntoContainerMessage>(KeyInserted);
-        SubscribeLocalEvent<LanguageEncryptionKeyComponent, EntGotRemovedFromContainerMessage>(KeyRemoved);
+        SubscribeLocalEvent<LanguageEncryptionKeyComponent, EntGotInsertedIntoContainerMessage>(OnKeyInserted);
+        SubscribeLocalEvent<LanguageEncryptionKeyComponent, EntGotRemovedFromContainerMessage>(OnKeyRemoved);
 
         SubscribeLocalEvent<GotEquippedEvent>(OnEquipped);
         SubscribeLocalEvent<GotUnequippedEvent>(OnUnequipped);
     }
 
-    private void KeyInserted(Entity<LanguageEncryptionKeyComponent> ent, ref EntGotInsertedIntoContainerMessage args)
+    private void OnKeyInserted(Entity<LanguageEncryptionKeyComponent> ent, ref EntGotInsertedIntoContainerMessage args)
     {
         if (args.Container.ID != EncryptionKeyHolderComponent.KeyContainerName)
             return;
@@ -35,10 +35,10 @@ public sealed partial class LanguageEncryptionKeySystem : EntitySystem
         if (!TryComp<LanguageComponent>(wearer, out var langComp))
             return;
 
-        _language.AddLanguages((wearer.Value, langComp), ent.Comp.Language, canSpeak: false);
+        _language.AddLanguages((wearer.Value, langComp), ent.Comp.Languages, canSpeak: false);
     }
 
-    private void KeyRemoved(Entity<LanguageEncryptionKeyComponent> ent, ref EntGotRemovedFromContainerMessage args)
+    private void OnKeyRemoved(Entity<LanguageEncryptionKeyComponent> ent, ref EntGotRemovedFromContainerMessage args)
     {
         if (args.Container.ID != EncryptionKeyHolderComponent.KeyContainerName)
             return;
@@ -49,7 +49,7 @@ public sealed partial class LanguageEncryptionKeySystem : EntitySystem
         if (!TryComp<LanguageComponent>(wearer, out var langComp))
             return;
 
-        foreach (var language in ent.Comp.Language)
+        foreach (var language in ent.Comp.Languages)
             RemoveIfOurs((wearer.Value, langComp), language);
     }
 
@@ -82,7 +82,7 @@ public sealed partial class LanguageEncryptionKeySystem : EntitySystem
             if (!TryComp<LanguageEncryptionKeyComponent>(key, out var langKey))
                 continue;
 
-            _language.AddLanguages((wearer, langComp), langKey.Language, canSpeak: false);
+            _language.AddLanguages((wearer, langComp), langKey.Languages, canSpeak: false);
         }
     }
 
@@ -99,12 +99,14 @@ public sealed partial class LanguageEncryptionKeySystem : EntitySystem
             if (!TryComp<LanguageEncryptionKeyComponent>(key, out var langKey))
                 continue;
 
-            foreach (var language in langKey.Language)
-                RemoveIfOurs((wearer, langComp), language);
+            foreach (var language in langKey.Languages)
+            {
+                RemoveKeyLanguage((wearer, langComp), language);
+            }
         }
     }
 
-    private void RemoveIfOurs(Entity<LanguageComponent> ent, ProtoId<LanguagePrototype> language)
+    private void RemoveKeyLanguage(Entity<LanguageComponent> ent, ProtoId<LanguagePrototype> language)
     {
         var def = SharedLanguageSystem.GetLanguageDef(ent, language);
         if (def is { CanSpeak: false })
