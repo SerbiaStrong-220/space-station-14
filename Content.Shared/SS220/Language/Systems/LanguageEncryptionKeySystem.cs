@@ -50,7 +50,7 @@ public sealed partial class LanguageEncryptionKeySystem : EntitySystem
             return;
 
         foreach (var language in ent.Comp.Languages)
-            RemoveIfOurs((wearer.Value, langComp), language);
+            RemoveKeyLanguage((wearer.Value, langComp), language);
     }
 
     private void OnEquipped(GotEquippedEvent args)
