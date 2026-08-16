@@ -269,15 +269,12 @@
     damageFromEmp: 0 #IPC EMP damage removed.
   - type: IntrinsicRadioReceiver
     channels:
-    - Binary
     - Common
   - type: IntrinsicRadioTransmitter
     channels:
-    - Binary
     - Common
   - type: ActiveRadio
     channels:
-    - Binary
     - Common
   - type: EncryptionKeyHolder
     keySlots: 4
