@@ -11,6 +11,8 @@
       components:
         - type: StationEmergencyShuttle
           emergencyShuttlePath: /Maps/SS220/Shuttles/emergency/emergency_stargate.yml
+        - type: StationCargoShuttle
+          path: /Maps/SS220/Shuttles/ss220-cargogate.yml
         - type: StationNameSetup
           mapNameTemplate: '{0} Stargate {1}'
           nameGenerator:
@@ -91,5 +93,17 @@
           - ComplexPVO
           - SportComplex
           #Station special
-          - 
-
+          - Emergshelter
+          - Emergshuttleeng
+          - Emergshuttleservice
+          - Secshuttle
+          - Airsofttournament
+          - Voxvip
+          - JRoffice
+          - Cargomisery
+          - Bloodsample
+          - Botanicgarden
+          - Secretcloning
+          - Starchef
+          - Theatr
+          - Сoldreagentroom
