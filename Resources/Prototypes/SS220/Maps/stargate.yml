@@ -3,7 +3,7 @@
 - type: gameMap
   id: Stargate
   mapName: 'NSS Stargate'
-  mapPath: /Maps/SS220/Stargate.yml
+  mapPath: /Maps/SS220/stargate.yml
   minPlayers: 0 # normal limit: 45
   stations:
     Stargate:
