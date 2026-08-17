@@ -26,7 +26,7 @@ public sealed partial class GrillSystem : SharedGrillSystem
             var activelyCooking = power.Powered && grill.GrillSettings != Shared.Temperature.EntityHeaterSetting.Off;
 
             if (!activelyCooking)
-                return;
+                continue;
 
             foreach (var ent in placer.PlacedEntities)
             {

@@ -99,3 +99,16 @@
       Igniter:
         amount: 1
         defaultPrototype: Igniter
+
+- type: entity
+  id: FoodProcessorMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: food processor machine board
+  description: A machine printed circuit board for a food processor.
+  components:
+  - type: Sprite
+    state: service
+  - type: MachineBoard
+    prototype: KitchenFoodProcessor
+    stackRequirements:
+      Manipulator: 4

@@ -516,29 +516,12 @@ public sealed partial class ChatSystem : SharedChatSystem
         name = FormattedMessage.EscapeText(name);
         // SS220-Add-Languages begin
         var languageMessage = _languageSystem.SanitizeMessage(source, message);
-        foreach (var (session, data) in GetRecipients(source, VoiceRange))
-        {
-            if (session.AttachedEntity is not { Valid: true } playerEntity)
-                continue;
-
-            var listener = session.AttachedEntity.Value;
-            var scrambledMessage = languageMessage.GetMessage(listener, true);
-        // SS220-Add-Languages end
-
-            var wrappedMessage = Loc.GetString(speech.Bold ? "chat-manager-entity-say-bold-wrap-message" : "chat-manager-entity-say-wrap-message",
-                ("entityName", name),
-                ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
-                ("fontType", speech.FontId),
-                ("fontSize", speech.FontSize),
-                ("message", scrambledMessage /*SS220-Add-Languages*/));
-
-            //SS220-Add-Languages begin
-            _chatManager.ChatMessageToOne(ChatChannel.Local, scrambledMessage, wrappedMessage, source, false, session.Channel);
-        }
-        //SS220-Add-Languages begin
-        message = languageMessage.GetMessage(source, false);
+        var verb = Loc.GetString(_random.Pick(speech.SpeechVerbStrings));
 
         //SendInVoiceRange(ChatChannel.Local, message, wrappedMessage, source, range);
+        SendInVoiceRangeWithLanguage(languageMessage, name, verb, speech, source, range);
+
+        message = languageMessage.GetMessage(source, false);
         var ev = new EntitySpokeEvent(source, message, originalMessage, null, null, languageMessage);
         RaiseLocalEvent(source, ev, true);
         //SS220-Add-Languages end
