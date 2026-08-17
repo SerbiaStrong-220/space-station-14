@@ -268,8 +268,6 @@
   - type: Ipc
     damageFromEmp: 0 #IPC EMP damage removed.
   - type: IntrinsicRadioReceiver
-    channels:
-    - Common
   - type: IntrinsicRadioTransmitter
     channels:
     - Common
