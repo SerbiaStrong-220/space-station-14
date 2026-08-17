@@ -10,3 +10,5 @@ ent-ShuttleGunMLGSWCircuitboard = SPG-300 "Мародёр" (машинная п�
     .desc = Печатная плата SPG-300 "Мародёр"
 ent-KitchenElectricGrillAdvancedCircuitboard = продвинутый электрогриль (машинная плата)
     .desc = Печатная плата для продвинутого электрогриля.
+ent-FoodProcessorMachineCircuitboard = кухонный комбайн (машинная плата)
+    .desc = Печатная плата для кухонного комбайна.
