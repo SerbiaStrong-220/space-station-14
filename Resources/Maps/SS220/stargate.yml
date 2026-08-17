@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 08/17/2026 21:02:33
-  entityCount: 46152
+  time: 08/17/2026 22:32:54
+  entityCount: 46146
 maps:
 - 1
 grids:
@@ -24247,18 +24247,6 @@ entities:
     - type: Transform
       pos: 0.4563446,-2.5673122
       parent: 37842
-- proto: ActionToggleInternals
-  entities:
-  - uid: 1780
-    components:
-    - type: Transform
-      parent: 11597
-- proto: ActionToggleJetpack
-  entities:
-  - uid: 1770
-    components:
-    - type: Transform
-      parent: 11597
 - proto: AirAlarm
   entities:
   - uid: 246
@@ -26709,7 +26697,7 @@ entities:
       pos: -102.5,24.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -38162.023
+      secondsUntilStateChange: -38263.77
       state: Opening
   - uid: 19248
     components:
@@ -27125,7 +27113,7 @@ entities:
       pos: -98.5,18.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -37980.36
+      secondsUntilStateChange: -38082.105
       state: Opening
   - uid: 23859
     components:
@@ -27139,7 +27127,7 @@ entities:
       pos: -98.5,17.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -37977.324
+      secondsUntilStateChange: -38079.07
       state: Opening
   - uid: 24259
     components:
@@ -28452,7 +28440,7 @@ entities:
       pos: 1.5,161.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1420224.6
+      secondsUntilStateChange: -1420326.4
       changeAirtight: False
       state: Opening
     - type: Docking
@@ -28468,7 +28456,7 @@ entities:
       pos: -0.5,161.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1420222.6
+      secondsUntilStateChange: -1420324.4
       changeAirtight: False
       state: Opening
     - type: Docking
@@ -113041,7 +113029,7 @@ entities:
       pos: 45.5,58.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -313911.66
+      secondsUntilStateChange: -314013.4
       state: Closing
     - type: DeviceLinkSource
       lastSignals:
@@ -137814,22 +137802,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -106.5,94.5
       parent: 2
-- proto: DisposalSignaller
-  entities:
-  - uid: 42946
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 18.5,101.5
-      parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-    - type: DeviceLinkSource
-      linkedPorts:
-        43907:
-        - - ItemDetected
-          - Toggle
 - proto: DisposalTrunk
   entities:
   - uid: 1712
@@ -139353,7 +139325,7 @@ entities:
     - type: Openable
       opened: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.8976427
+      sprayFizzinessThresholdRoll: 0.3235027
     - type: MeleeWeapon
       nextAttack: -13.2999857
     - type: EmitSoundOnCollide
@@ -139675,7 +139647,7 @@ entities:
     - type: EmitSoundOnCollide
       nextSound: -20188.979811
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.3140655
+      sprayFizzinessThresholdRoll: 0.47678217
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -139730,7 +139702,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.39044335
+      sprayFizzinessThresholdRoll: 0.65713733
     - type: NameModifier
       baseName: бутылка Гильдлагер
     - type: ContainerContainer
@@ -140695,7 +140667,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.544699
+      sprayFizzinessThresholdRoll: 0.79330206
     - type: NameModifier
       baseName: Особый Запас Дядюшки Гита
     - type: ContainerContainer
@@ -140749,7 +140721,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.61511016
+      sprayFizzinessThresholdRoll: 0.6107771
     - type: NameModifier
       baseName: вино Особое Двухбородое Бородатое
     - type: ContainerContainer
@@ -140788,7 +140760,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.7668441
+      sprayFizzinessThresholdRoll: 0.47427124
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -140820,7 +140792,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.81682926
+      sprayFizzinessThresholdRoll: 0.640969
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -143766,7 +143738,7 @@ entities:
       - 40096
       - 40106
     - type: Door
-      secondsUntilStateChange: -1329488.8
+      secondsUntilStateChange: -1329590.5
       state: Closing
   - uid: 9985
     components:
@@ -143846,7 +143818,7 @@ entities:
       deviceLists:
       - 14877
     - type: Door
-      secondsUntilStateChange: -1248163.8
+      secondsUntilStateChange: -1248265.5
       state: Closing
   - uid: 11562
     components:
@@ -145683,7 +145655,7 @@ entities:
       pos: -82.5,35.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -352609.66
+      secondsUntilStateChange: -352711.4
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -209909,24 +209881,6 @@ entities:
     - type: Transform
       pos: -12.569962,84.759544
       parent: 2
-- proto: JetpackMiniFilled
-  entities:
-  - uid: 11597
-    components:
-    - type: Transform
-      pos: -39.5489,-15.375725
-      parent: 2
-    - type: GasTank
-      toggleActionEntity: 1780
-    - type: Jetpack
-      toggleActionEntity: 1770
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 1770
-          - 1780
 - proto: JetpackSecurityFilled
   entities:
   - uid: 29138
@@ -210252,6 +210206,19 @@ entities:
       parent: 2
 - proto: KnifeSwinch
   entities:
+  - uid: 1770
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 23.5,103.5
+      parent: 2
+    - type: DeviceLinkSource
+      linkedPorts:
+        43907:
+        - - Status
+          - Toggle
+    - type: Fixtures
+      fixtures: {}
   - uid: 2747
     components:
     - type: Transform
@@ -294848,7 +294815,7 @@ entities:
       pos: -52.5,187.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -400153.72
+      secondsUntilStateChange: -400255.47
       state: Opening
   - uid: 23105
     components:
@@ -294874,7 +294841,7 @@ entities:
       pos: -53.5,188.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -364436.53
+      secondsUntilStateChange: -364538.28
       state: Opening
   - uid: 38967
     components:
@@ -294915,7 +294882,7 @@ entities:
       parent: 2
     - type: Door
       canCrush: True
-      secondsUntilStateChange: -180566.36
+      secondsUntilStateChange: -180668.11
       clickOpen: False
       canPry: False
       state: Opening
@@ -294944,17 +294911,21 @@ entities:
       parent: 2
     - type: Door
       canCrush: True
+      secondsUntilStateChange: -55.45972
       clickOpen: False
       canPry: False
+      state: Opening
     - type: DoorSignalControl
     - type: DeviceLinkSink
+      invokeCounter: 1
       ports:
       - Open
       - Close
       - Toggle
     - type: DeviceLinkSource
       linkedPorts: {}
-      lastSignals: {}
+      lastSignals:
+        DoorStatus: True
       ports:
       - DoorStatus
 - proto: SpaceCash
@@ -352718,42 +352689,6 @@ entities:
       - 6642
       - 20326
       - 5987
-- proto: WeaponEnergyTurretCommand
-  entities:
-  - uid: 31814
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -43.5,108.5
-      parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 43900
-  - uid: 31815
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -37.5,108.5
-      parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 43900
-- proto: WeaponEnergyTurretCommandControlPanel
-  entities:
-  - uid: 43900
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -41.5,106.5
-      parent: 2
-    - type: DeviceList
-      devices:
-      - 31814
-      - 31815
 - proto: WeaponEnergyTurretSecurity
   entities:
   - uid: 8530
