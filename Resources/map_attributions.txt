@@ -103,5 +103,5 @@
   authors: VictorBoum
 
 - files: ["stargate.yml"]
-  authors: Abiergo, Adammatic, SVEDETEL, PandionSM, Shiva_Meresh, VoidCat, darkzist
+  authors: Ed, Arcanis, Jojo Cat, Jeb, Zarxis, Xomak404, NikaVich, Abiergo, Adammatic, SVEDETEL, PandionSM, Shiva_Meresh, VoidCat, darkzist, misyk0
 
