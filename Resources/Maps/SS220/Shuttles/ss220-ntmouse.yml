@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 08/10/2026 15:08:48
-  entityCount: 141
+  time: 08/17/2026 19:24:48
+  entityCount: 145
 maps:
 - 71
 grids:
@@ -645,6 +645,41 @@ entities:
       parent: 1
     - type: Label
       currentLabel: NT-SPPOD "Mouse"
+- proto: Lightswitch
+  entities:
+  - uid: 144
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 3.4813077,2.6649296
+      parent: 1
+    - type: DeviceLinkSource
+      linkedPorts:
+        133:
+        - - Status
+          - Toggle
+        36:
+        - - Status
+          - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 145
+    components:
+    - type: MetaData
+      name: выключатель тробоскопов
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 3.4813077,2.3524296
+      parent: 1
+    - type: SignalSwitch
+      state: False
+    - type: DeviceLinkSource
+      linkedPorts:
+        140:
+        - - Status
+          - Toggle
+    - type: Fixtures
+      fixtures: {}
 - proto: Mattress
   entities:
   - uid: 85
@@ -25711,12 +25746,16 @@ entities:
       rot: 3.141592653589793 rad
       pos: 0.5,4.5
       parent: 1
+    - type: DeviceLinkSink
+      invokeCounter: 1
   - uid: 133
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 2.5,4.5
       parent: 1
+    - type: DeviceLinkSink
+      invokeCounter: 1
 - proto: PoweredlightRed
   entities:
   - uid: 110
@@ -25744,6 +25783,22 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 2.5,-3.5
+      parent: 1
+- proto: PoweredStrobeLightPolice
+  entities:
+  - uid: 140
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,4.5
+      parent: 1
+    - type: DeviceLinkSink
+      invokeCounter: 1
+  - uid: 143
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.5,4.5
       parent: 1
 - proto: PoweredWarmSmallLight
   entities:
@@ -25941,6 +25996,12 @@ entities:
       rot: 3.141592653589793 rad
       pos: 0.5,0.5
       parent: 1
+  - uid: 32
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 2.5,-5.5
+      parent: 1
   - uid: 40
     components:
     - type: Transform
@@ -25952,11 +26013,29 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 4.5,-1.5
       parent: 1
+  - uid: 44
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -0.5,1.5
+      parent: 1
   - uid: 49
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 4.5,-3.5
+      parent: 1
+  - uid: 50
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 0.5,-5.5
+      parent: 1
+  - uid: 59
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 3.5,1.5
       parent: 1
   - uid: 61
     components:
@@ -25969,49 +26048,23 @@ entities:
     - type: Transform
       pos: -1.5,-1.5
       parent: 1
+  - uid: 73
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 0.5,3.5
+      parent: 1
   - uid: 91
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 2.5,-4.5
       parent: 1
-- proto: WallShuttleDarkDiagonal
-  entities:
-  - uid: 24
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 3.5,-6.5
-      parent: 1
-  - uid: 32
-    components:
-    - type: Transform
-      pos: -1.5,2.5
-      parent: 1
-  - uid: 50
+  - uid: 107
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
-      pos: -0.5,-6.5
-      parent: 1
-  - uid: 59
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 4.5,2.5
-      parent: 1
-- proto: WallShuttleDiagonal
-  entities:
-  - uid: 12
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 3.5,3.5
-      parent: 1
-  - uid: 30
-    components:
-    - type: Transform
-      pos: -0.5,3.5
+      pos: 2.5,3.5
       parent: 1
 - proto: WallShuttleRed
   entities:
@@ -26044,21 +26097,10 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 3.5,0.5
       parent: 1
-  - uid: 17
-    components:
-    - type: Transform
-      pos: 2.5,-5.5
-      parent: 1
   - uid: 20
     components:
     - type: Transform
       pos: 3.5,-4.5
-      parent: 1
-  - uid: 22
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -0.5,1.5
       parent: 1
   - uid: 23
     components:
@@ -26071,11 +26113,6 @@ entities:
     - type: Transform
       pos: 3.5,-5.5
       parent: 1
-  - uid: 27
-    components:
-    - type: Transform
-      pos: 0.5,-5.5
-      parent: 1
   - uid: 41
     components:
     - type: Transform
@@ -26085,12 +26122,6 @@ entities:
     components:
     - type: Transform
       pos: -0.5,-0.5
-      parent: 1
-  - uid: 44
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 3.5,1.5
       parent: 1
   - uid: 47
     components:
@@ -26118,17 +26149,41 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 4.5,-0.5
       parent: 1
-  - uid: 73
+- proto: WallShuttleRedDiagonal
+  entities:
+  - uid: 12
     components:
     - type: Transform
       rot: 3.141592653589793 rad
-      pos: 0.5,3.5
+      pos: 3.5,-6.5
       parent: 1
-  - uid: 107
+  - uid: 17
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 2.5,3.5
+      pos: -1.5,2.5
+      parent: 1
+  - uid: 22
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -0.5,-6.5
+      parent: 1
+  - uid: 24
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 4.5,2.5
+      parent: 1
+  - uid: 27
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 3.5,3.5
+      parent: 1
+  - uid: 30
+    components:
+    - type: Transform
+      pos: -0.5,3.5
       parent: 1
 - proto: WallWeaponCapacitorRecharger
   entities:
