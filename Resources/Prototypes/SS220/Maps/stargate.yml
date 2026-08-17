@@ -7,7 +7,7 @@
   minPlayers: 0 # normal limit: 45
   stations:
     Stargate:
-      stationProto: StargateNanotrasenStation
+      stationProto: StandardNanotrasenStation
       components:
         - type: StationEmergencyShuttle
           emergencyShuttlePath: /Maps/SS220/Shuttles/emergency/emergency_stargate.yml
