@@ -479,26 +479,6 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
-    - type: Joint
-      joints:
-        docking51973: !type:WeldJoint
-          bodyB: 30902
-          bodyA: invalid
-          id: docking51973
-          localAnchorB: 2.5,-4
-          localAnchorA: -0.5,161
-          referenceAngle: 3.1415927
-          damping: 621.5432
-          stiffness: 5578.9595
-        docking51974: !type:WeldJoint
-          bodyB: 30902
-          bodyA: invalid
-          id: docking51974
-          localAnchorB: 0.49999997,-4
-          localAnchorA: 1.5,161
-          referenceAngle: 3.1415927
-          damping: 621.5432
-          stiffness: 5578.9595
     - type: TileHistory
       chunkHistory: {}
     - type: ImplicitRoof
@@ -516,9 +496,6 @@ entities:
       - - Medical
     - type: Door
       changeAirtight: False
-    - type: Docking
-      dockJointId: docking51974
-      dockedWith: invalid
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: False
@@ -534,9 +511,6 @@ entities:
       - - Medical
     - type: Door
       changeAirtight: False
-    - type: Docking
-      dockJointId: docking51973
-      dockedWith: invalid
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: False

@@ -458,17 +458,6 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
-    - type: Joint
-      joints:
-        docking457717: !type:WeldJoint
-          bodyB: 37842
-          bodyA: invalid
-          id: docking457717
-          localAnchorB: -3,-1.5
-          localAnchorA: -8.5,8
-          referenceAngle: 1.5707964
-          damping: 753.86066
-          stiffness: 6766.638
     - type: TileHistory
       chunkHistory: {}
     - type: ImplicitRoof
@@ -523,9 +512,6 @@ entities:
       parent: 37842
     - type: Door
       changeAirtight: False
-    - type: Docking
-      dockJointId: docking457717
-      dockedWith: invalid
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: False
