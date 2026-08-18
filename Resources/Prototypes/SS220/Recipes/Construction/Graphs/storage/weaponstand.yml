@@ -1,0 +1,28 @@
+- type: constructionGraph
+  id: WeaponStand
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: WeaponStandNode
+      steps:
+      - material: WoodPlank
+        amount: 5
+        doAfter: 2
+
+  - node: WeaponStandNode
+    entity: WeaponStand
+    edges:
+    - to: start
+      steps:
+      - tool: Screwing
+        doAfter: 5
+      conditions:
+      - !type:ContainerEmpty
+        container: "ItemCabinet"
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 2
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity
