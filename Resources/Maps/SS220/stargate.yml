@@ -232,7 +232,7 @@ entities:
       name: StarGate
     - type: Transform
     - type: Map
-      mapPaused: False
+      mapPaused: True
     - type: GridTree
     - type: Broadphase
     - type: OccluderTree
