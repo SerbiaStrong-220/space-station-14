@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 08/18/2026 07:57:09
-  entityCount: 46683
+  time: 08/18/2026 10:43:01
+  entityCount: 46668
 maps:
 - 1
 grids:
@@ -27309,7 +27309,7 @@ entities:
       pos: -102.5,24.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -47870.117
+      secondsUntilStateChange: -48078.082
       state: Opening
   - uid: 19248
     components:
@@ -27725,7 +27725,7 @@ entities:
       pos: -98.5,18.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -47688.453
+      secondsUntilStateChange: -47896.418
       state: Opening
   - uid: 23859
     components:
@@ -27739,7 +27739,7 @@ entities:
       pos: -98.5,17.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -47685.418
+      secondsUntilStateChange: -47893.383
       state: Opening
   - uid: 24259
     components:
@@ -29074,7 +29074,7 @@ entities:
       pos: 1.5,161.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1429932.8
+      secondsUntilStateChange: -1430140.8
       changeAirtight: False
       state: Opening
     - type: Docking
@@ -29090,7 +29090,7 @@ entities:
       pos: -0.5,161.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1429930.8
+      secondsUntilStateChange: -1430138.8
       changeAirtight: False
       state: Opening
     - type: Docking
@@ -115198,7 +115198,7 @@ entities:
       pos: 45.5,58.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -323619.75
+      secondsUntilStateChange: -323827.72
       state: Closing
     - type: DeviceLinkSource
       lastSignals:
@@ -141420,7 +141420,7 @@ entities:
     - type: Openable
       opened: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.7425145
+      sprayFizzinessThresholdRoll: 0.512723
     - type: MeleeWeapon
       nextAttack: -13.2999857
     - type: EmitSoundOnCollide
@@ -141742,7 +141742,7 @@ entities:
     - type: EmitSoundOnCollide
       nextSound: -20188.979811
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.88685423
+      sprayFizzinessThresholdRoll: 0.24586003
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -141797,7 +141797,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.75076723
+      sprayFizzinessThresholdRoll: 0.8406454
     - type: NameModifier
       baseName: бутылка Гильдлагер
     - type: ContainerContainer
@@ -142832,7 +142832,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.83507484
+      sprayFizzinessThresholdRoll: 0.17641278
     - type: NameModifier
       baseName: Особый Запас Дядюшки Гита
     - type: ContainerContainer
@@ -142886,7 +142886,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.768446
+      sprayFizzinessThresholdRoll: 0.8321964
     - type: NameModifier
       baseName: вино Особое Двухбородое Бородатое
     - type: ContainerContainer
@@ -142925,7 +142925,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.66531104
+      sprayFizzinessThresholdRoll: 0.3512949
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -142957,7 +142957,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.22537793
+      sprayFizzinessThresholdRoll: 0.08296496
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -146010,7 +146010,7 @@ entities:
       - 40096
       - 40106
     - type: Door
-      secondsUntilStateChange: -1339196.9
+      secondsUntilStateChange: -1339404.9
       state: Closing
   - uid: 9985
     components:
@@ -146090,7 +146090,7 @@ entities:
       deviceLists:
       - 14877
     - type: Door
-      secondsUntilStateChange: -1257871.9
+      secondsUntilStateChange: -1258079.9
       state: Closing
   - uid: 11562
     components:
@@ -147927,7 +147927,7 @@ entities:
       pos: -82.5,35.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -362317.75
+      secondsUntilStateChange: -362525.72
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -274143,12 +274143,6 @@ entities:
     - type: Transform
       pos: 82.5,48.5
       parent: 2
-  - uid: 38981
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -51.5,184.5
-      parent: 2
   - uid: 43176
     components:
     - type: Transform
@@ -281550,17 +281544,6 @@ entities:
     - type: Transform
       pos: 40.358818,45.638397
       parent: 2
-  - uid: 38980
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -50.979286,184.48041
-      parent: 2
-    - type: RandomSpawner
-      chance: 0.05
-      prototypes: []
-      rarePrototypes: []
-      gameRules: []
 - proto: Railing
   entities:
   - uid: 1035
@@ -297779,7 +297762,7 @@ entities:
       pos: -52.5,187.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -409861.8
+      secondsUntilStateChange: -410069.78
       state: Opening
   - uid: 23105
     components:
@@ -297811,7 +297794,7 @@ entities:
       pos: -53.5,188.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -374144.62
+      secondsUntilStateChange: -374352.6
       state: Opening
   - uid: 38967
     components:
@@ -297852,7 +297835,7 @@ entities:
       parent: 2
     - type: Door
       canCrush: True
-      secondsUntilStateChange: -190274.45
+      secondsUntilStateChange: -190482.42
       clickOpen: False
       canPry: False
       state: Opening
@@ -297881,7 +297864,7 @@ entities:
       parent: 2
     - type: Door
       canCrush: True
-      secondsUntilStateChange: -9661.806
+      secondsUntilStateChange: -9869.771
       clickOpen: False
       canPry: False
       state: Opening
