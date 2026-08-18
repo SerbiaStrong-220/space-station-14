@@ -144202,28 +144202,6 @@ entities:
     - type: Transform
       pos: -73.5,174.5
       parent: 2
-- proto: ExplosivePayload
-  entities:
-  - uid: 38982
-    components:
-    - type: Transform
-      pos: -50.599976,184.8247
-      parent: 2
-    - type: RandomSpawner
-      chance: 0.05
-      prototypes: []
-      rarePrototypes: []
-      gameRules: []
-  - uid: 38983
-    components:
-    - type: Transform
-      pos: -50.318726,184.55908
-      parent: 2
-    - type: RandomSpawner
-      chance: 0.05
-      prototypes: []
-      rarePrototypes: []
-      gameRules: []
 - proto: ExplosivesSignMed
   entities:
   - uid: 31453
