@@ -4,13 +4,13 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 08/17/2026 19:24:48
-  entityCount: 145
-maps:
-- 71
+  time: 08/18/2026 07:50:48
+  entityCount: 144
+maps: []
 grids:
 - 1
-orphans: []
+orphans:
+- 1
 nullspace: []
 tilemap:
   0: Space
@@ -33,7 +33,7 @@ entities:
       name: NT-SPPOD "Mouse"
     - type: Transform
       pos: -0.4375,-0.671875
-      parent: 71
+      parent: invalid
     - type: SkipAutoVariantize
     - type: MapGrid
       chunks:
@@ -219,17 +219,6 @@ entities:
       chunkHistory: {}
     - type: ImplicitRoof
     - type: ExplosionAirtightGrid
-  - uid: 71
-    components:
-    - type: MetaData
-      name: Map Entity
-    - type: Transform
-    - type: Map
-      mapPaused: True
-    - type: GridTree
-    - type: Broadphase
-    - type: OccluderTree
-    - type: SkipAutoVariantize
 - proto: AirlockExternalShuttleLocked
   entities:
   - uid: 65

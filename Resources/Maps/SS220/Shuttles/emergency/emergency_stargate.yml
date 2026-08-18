@@ -4,13 +4,13 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 08/17/2026 14:49:24
-  entityCount: 981
-maps:
-- 1
+  time: 08/18/2026 07:52:55
+  entityCount: 980
+maps: []
 grids:
 - 2
-orphans: []
+orphans:
+- 2
 nullspace: []
 tilemap:
   3: Space
@@ -28,24 +28,13 @@ tilemap:
 entities:
 - proto: ""
   entities:
-  - uid: 1
-    components:
-    - type: MetaData
-      name: Map Entity
-    - type: Transform
-    - type: Map
-      mapPaused: True
-    - type: GridTree
-    - type: Broadphase
-    - type: OccluderTree
-    - type: SkipAutoVariantize
   - uid: 2
     components:
     - type: MetaData
       name: NT-Evac "Agony"
     - type: Transform
       pos: -0.515625,-0.5
-      parent: 1
+      parent: invalid
     - type: MapGrid
       chunks:
         0,0:
