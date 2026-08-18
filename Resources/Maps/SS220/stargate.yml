@@ -294146,11 +294146,6 @@ entities:
     - type: Transform
       pos: -98.5,157.5
       parent: 2
-  - uid: 19871
-    components:
-    - type: Transform
-      pos: -99.5,157.5
-      parent: 2
   - uid: 19872
     components:
     - type: Transform
