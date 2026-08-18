@@ -1,0 +1,265 @@
+- type: loadout
+  id: CaptainIpcKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeyStationMaster
+    - EncryptionKeyLaw
+
+- type: loadoutGroup
+  id: CAPHeadsetIpc
+  name: loadout-group-cap-headset-ipc
+  hidden: true
+  loadouts:
+  - CaptainIpcKeys
+
+- type: loadout
+  id: CommandIpcKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeyStationMaster
+
+- type: loadoutGroup
+  id: CommandHeadsetIpc
+  name: loadout-group-command-headset-ipc
+  hidden: true
+  loadouts:
+  - CommandIpcKeys
+
+- type: loadout
+  id: ChiefEngineerIpcKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeyEngineering
+    - EncryptionKeyCommand
+
+- type: loadoutGroup
+  id: ChiefEngineerHeadsetIpc
+  name: loadout-group-chief-engineer-headset-ipc
+  hidden: true
+  loadouts:
+  - ChiefEngineerIpcKeys
+
+- type: loadout
+  id: ChiefMedicalOfficerIpcKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeyMedical
+    - EncryptionKeyCommand
+
+- type: loadoutGroup
+  id: ChiefMedicalOfficerHeadsetIpc
+  name: loadout-group-chief-medical-officer-headset-ipc
+  hidden: true
+  loadouts:
+  - ChiefMedicalOfficerIpcKeys
+
+- type: loadout
+  id: QuartermasterIpcKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeyCargo
+    - EncryptionKeyCommand
+
+- type: loadoutGroup
+  id: QuartermasterHeadsetIpc
+  name: loadout-group-quartermaster-headset-ipc
+  hidden: true
+  loadouts:
+  - QuartermasterIpcKeys
+
+- type: loadout
+  id: ResearchDirectorIpcKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeyScience
+    - EncryptionKeyCommand
+
+- type: loadoutGroup
+  id: ResearchDirectorHeadsetIpc
+  name: loadout-group-research-director-headset-ipc
+  hidden: true
+  loadouts:
+  - ResearchDirectorIpcKeys
+
+- type: loadout
+  id: HeadOfSecurityIpcKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeySecurity
+    - EncryptionKeyCommand
+
+- type: loadoutGroup
+  id: HeadOfSecurityHeadsetIpc
+  name: loadout-group-head-of-security-headset-ipc
+  hidden: true
+  loadouts:
+  - HeadOfSecurityIpcKeys
+
+- type: loadout
+  id: BrigmedicIpcKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeyMedical
+    - EncryptionKeySecurity
+
+- type: loadoutGroup
+  id: BrigmedicHeadsetIpc
+  name: loadout-group-brigmedic-headset-ipc
+  hidden: true
+  loadouts:
+  - BrigmedicIpcKeys
+
+- type: loadout
+  id: LawyerIpcKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeyLaw
+    - EncryptionKeySecurity
+
+- type: loadoutGroup
+  id: LawyerHeadsetIpc
+  name: loadout-group-lawyer-headset-ipc
+  hidden: true
+  loadouts:
+  - LawyerIpcKeys
+
+- type: loadout
+  id: NanoTrasenRepresentativeIpcKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeyLaw
+    - EncryptionKeySecurity
+    - EncryptionKeyCommand
+
+- type: loadoutGroup
+  id: NanoTrasenRepresentativeHeadsetIpc
+  name: loadout-group-nano-trasen-representative-headset-ipc
+  hidden: true
+  loadouts:
+  - NanoTrasenRepresentativeIpcKeys
+
+- type: loadout
+  id: CargoIpcKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeyCargo
+
+- type: loadoutGroup
+  id: CargoHeadsetIpc
+  name: loadout-group-cargo-headset-ipc
+  hidden: true
+  loadouts:
+  - CargoIpcKeys
+
+- type: loadout
+  id: EngineeringIpcKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeyEngineering
+
+- type: loadoutGroup
+  id: EngineeringHeadsetIpc
+  name: loadout-group-engineering-headset-ipc
+  hidden: true
+  loadouts:
+  - EngineeringIpcKeys
+
+- type: loadout
+  id: MedicalIpcKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeyMedical
+
+- type: loadoutGroup
+  id: MedicalHeadsetIpc
+  name: loadout-group-medical-headset-ipc
+  hidden: true
+  loadouts:
+  - MedicalIpcKeys
+
+- type: loadout
+  id: ScienceIpcKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeyScience
+
+- type: loadoutGroup
+  id: ScienceHeadsetIpc
+  name: loadout-group-science-headset-ipc
+  hidden: true
+  loadouts:
+  - ScienceIpcKeys
+
+- type: loadout
+  id: SecurityIpcKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeySecurity
+
+- type: loadoutGroup
+  id: SecurityHeadsetIpc
+  name: loadout-group-security-headset-ipc
+  hidden: true
+  loadouts:
+  - SecurityIpcKeys
+
+- type: loadout
+  id: ServiceIpcKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeyService
+
+- type: loadoutGroup
+  id: ServiceHeadsetIpc
+  name: loadout-group-service-headset-ipc
+  hidden: true
+  loadouts:
+  - ServiceIpcKeys

@@ -276,6 +276,7 @@
     - Common
   - type: EncryptionKeyHolder
     keySlots: 4
+    examineHidden: true
   - type: PowerCellSlot
     cellSlotId: cell_slot
     fitsInCharger: true

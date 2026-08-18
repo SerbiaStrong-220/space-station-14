@@ -239,6 +239,11 @@ public sealed partial class EncryptionKeySystem : EntitySystem
         if (!args.IsInDetailsRange)
             return;
 
+        // SS220-ipc-builtin-radio begin
+        if (component.ExamineHidden)
+            return;
+        // SS220-ipc-builtin-radio end
+
         if (component.KeyContainer.ContainedEntities.Count == 0)
         {
             args.PushMarkup(Loc.GetString("encryption-keys-no-keys"));
