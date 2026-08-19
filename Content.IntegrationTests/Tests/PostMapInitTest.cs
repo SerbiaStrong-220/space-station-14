@@ -62,12 +62,6 @@ namespace Content.IntegrationTests.Tests
             // SS220 maps end
         };
 
-        private static readonly string[] GameMaps =
-        {
-            // SS220 Maps
-            "Stargate",
-        };
-
         /// <summary>
         /// A dictionary linking maps to collections of entity prototype ids that should be exempt from "DoNotMap" restrictions.
         /// </summary>
