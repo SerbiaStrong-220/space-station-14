@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 08/19/2026 13:09:09
-  entityCount: 46402
+  time: 08/19/2026 13:28:31
+  entityCount: 46408
 maps:
 - 1
 grids:
@@ -26052,7 +26052,7 @@ entities:
       pos: -102.5,24.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -69054.83
+      secondsUntilStateChange: -69966.39
       state: Opening
   - uid: 1760
     components:
@@ -27803,7 +27803,7 @@ entities:
       pos: 1.5,161.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1451117.4
+      secondsUntilStateChange: -1452028.9
       changeAirtight: False
       state: Opening
     - type: DeviceLinkSource
@@ -41460,6 +41460,12 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -60.5,95.5
       parent: 2
+  - uid: 20214
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 59.264877,57.549213
+      parent: 2
   - uid: 21648
     components:
     - type: Transform
@@ -41593,6 +41599,16 @@ entities:
     components:
     - type: Transform
       pos: -19.5,180.5
+      parent: 2
+  - uid: 35114
+    components:
+    - type: Transform
+      pos: 60.5,47.5
+      parent: 2
+  - uid: 35118
+    components:
+    - type: Transform
+      pos: 58.5,47.5
       parent: 2
   - uid: 36293
     components:
@@ -114325,7 +114341,7 @@ entities:
       pos: 45.5,58.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -344804.5
+      secondsUntilStateChange: -345716.06
       state: Closing
     - type: DeviceLinkSource
       lastSignals:
@@ -140489,7 +140505,7 @@ entities:
     - type: Openable
       opened: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.9825105
+      sprayFizzinessThresholdRoll: 0.7074189
     - type: MeleeWeapon
       nextAttack: -13.2999857
     - type: EmitSoundOnCollide
@@ -140811,7 +140827,7 @@ entities:
     - type: EmitSoundOnCollide
       nextSound: -20188.979811
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.6437171
+      sprayFizzinessThresholdRoll: 0.1526041
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -140866,7 +140882,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.7570244
+      sprayFizzinessThresholdRoll: 0.6880383
     - type: NameModifier
       baseName: бутылка Гильдлагер
     - type: ContainerContainer
@@ -141890,7 +141906,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.2507974
+      sprayFizzinessThresholdRoll: 0.534817
     - type: NameModifier
       baseName: Особый Запас Дядюшки Гита
     - type: ContainerContainer
@@ -141944,7 +141960,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.0074243173
+      sprayFizzinessThresholdRoll: 0.75407124
     - type: NameModifier
       baseName: вино Особое Двухбородое Бородатое
     - type: ContainerContainer
@@ -141983,7 +141999,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.74281067
+      sprayFizzinessThresholdRoll: 0.36629993
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -142015,7 +142031,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.12987444
+      sprayFizzinessThresholdRoll: 0.9027936
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -145046,7 +145062,7 @@ entities:
       - 40096
       - 40106
     - type: Door
-      secondsUntilStateChange: -1360381.5
+      secondsUntilStateChange: -1361293
       state: Closing
   - uid: 9985
     components:
@@ -145126,7 +145142,7 @@ entities:
       deviceLists:
       - 14877
     - type: Door
-      secondsUntilStateChange: -1279056.5
+      secondsUntilStateChange: -1279968
       state: Closing
   - uid: 11562
     components:
@@ -146988,7 +147004,7 @@ entities:
     - type: Firelock
       emergencyCloseCooldown: 8075.4252599
     - type: Door
-      secondsUntilStateChange: -383502.5
+      secondsUntilStateChange: -384414.06
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -211303,6 +211319,11 @@ entities:
     - type: Transform
       pos: -129.5,17.5
       parent: 2
+  - uid: 35050
+    components:
+    - type: Transform
+      pos: 51.5,23.5
+      parent: 2
   - uid: 41436
     components:
     - type: Transform
@@ -212431,27 +212452,6 @@ entities:
           - Off
     - type: Fixtures
       fixtures: {}
-  - uid: 20214
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 59.25933,57.52439
-      parent: 2
-    - type: SignalSwitch
-      state: False
-    - type: DeviceLinkSource
-      linkedPorts:
-        33532:
-        - - Status
-          - Toggle
-        33529:
-        - - Status
-          - Toggle
-        33530:
-        - - Status
-          - Toggle
-    - type: Fixtures
-      fixtures: {}
   - uid: 21651
     components:
     - type: Transform
@@ -213077,6 +213077,55 @@ entities:
         - - Status
           - Toggle
         38660:
+        - - Status
+          - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 35107
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 59.264877,57.533783
+      parent: 2
+    - type: SignalSwitch
+      state: False
+    - type: DeviceLinkSource
+      linkedPorts:
+        33532:
+        - - Status
+          - Toggle
+        33529:
+        - - Status
+          - Toggle
+        33530:
+        - - Status
+          - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 35122
+    components:
+    - type: Transform
+      pos: 60.5,47.5
+      parent: 2
+    - type: SignalSwitch
+      state: False
+    - type: DeviceLinkSource
+      linkedPorts:
+        21371:
+        - - Status
+          - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 35129
+    components:
+    - type: Transform
+      pos: 58.5,47.5
+      parent: 2
+    - type: SignalSwitch
+      state: False
+    - type: DeviceLinkSource
+      linkedPorts:
+        19837:
         - - Status
           - Toggle
     - type: Fixtures
@@ -249462,6 +249511,10 @@ entities:
       rot: 3.141592653589793 rad
       pos: 57.5,43.5
       parent: 2
+    - type: PoweredLight
+      on: False
+    - type: DeviceLinkSink
+      invokeCounter: 1
   - uid: 19934
     components:
     - type: Transform
@@ -249562,6 +249615,10 @@ entities:
       rot: 3.141592653589793 rad
       pos: 61.5,43.5
       parent: 2
+    - type: PoweredLight
+      on: False
+    - type: DeviceLinkSink
+      invokeCounter: 1
   - uid: 21458
     components:
     - type: Transform
@@ -271213,7 +271270,7 @@ entities:
       pos: -52.5,187.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -431046.56
+      secondsUntilStateChange: -431958.12
       state: Opening
   - uid: 23105
     components:
@@ -271286,7 +271343,7 @@ entities:
       pos: -53.5,188.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -395329.38
+      secondsUntilStateChange: -396240.94
       state: Opening
   - uid: 38967
     components:
