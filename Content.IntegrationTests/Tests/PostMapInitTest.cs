@@ -78,7 +78,7 @@ namespace Content.IntegrationTests.Tests
             {"/Maps/Shuttles/ShuttleEvent/syndie_evacpod.yml", ["RubberStampSyndicate"]},
             {"/Maps/Shuttles/ShuttleEvent/cruiser.yml", ["ShuttleGunPerforator"]},
             {"/Maps/Shuttles/ShuttleEvent/instigator.yml", ["ShuttleGunFriendship"]},
-            {"/Maps/SS220/stargate.yml", ["CentCommFlippo"]},
+            {"/Maps/SS220/stargate.yml", ["CentCommFlippo, ShuttleGunPerforator"]},
         };
 
         /// <summary>
