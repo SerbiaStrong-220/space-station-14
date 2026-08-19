@@ -215196,13 +215196,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -119.5,116.5
       parent: 2
-- proto: MaintsRoomMarker
-  entities:
-  - uid: 38511
-    components:
-    - type: Transform
-      pos: -108.5,127.5
-      parent: 2
 - proto: Mannequin
   entities:
   - uid: 35488
