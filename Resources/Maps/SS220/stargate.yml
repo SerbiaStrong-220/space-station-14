@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 08/19/2026 13:28:31
-  entityCount: 46408
+  time: 08/19/2026 13:29:25
+  entityCount: 46409
 maps:
 - 1
 grids:
@@ -26052,7 +26052,7 @@ entities:
       pos: -102.5,24.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -69966.39
+      secondsUntilStateChange: -70017
       state: Opening
   - uid: 1760
     components:
@@ -27803,7 +27803,7 @@ entities:
       pos: 1.5,161.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1452028.9
+      secondsUntilStateChange: -1452079.5
       changeAirtight: False
       state: Opening
     - type: DeviceLinkSource
@@ -114341,7 +114341,7 @@ entities:
       pos: 45.5,58.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -345716.06
+      secondsUntilStateChange: -345766.7
       state: Closing
     - type: DeviceLinkSource
       lastSignals:
@@ -145062,7 +145062,7 @@ entities:
       - 40096
       - 40106
     - type: Door
-      secondsUntilStateChange: -1361293
+      secondsUntilStateChange: -1361343.6
       state: Closing
   - uid: 9985
     components:
@@ -145142,7 +145142,7 @@ entities:
       deviceLists:
       - 14877
     - type: Door
-      secondsUntilStateChange: -1279968
+      secondsUntilStateChange: -1280018.6
       state: Closing
   - uid: 11562
     components:
@@ -147004,7 +147004,7 @@ entities:
     - type: Firelock
       emergencyCloseCooldown: 8075.4252599
     - type: Door
-      secondsUntilStateChange: -384414.06
+      secondsUntilStateChange: -384464.7
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -271270,7 +271270,7 @@ entities:
       pos: -52.5,187.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -431958.12
+      secondsUntilStateChange: -432008.75
       state: Opening
   - uid: 23105
     components:
@@ -271343,7 +271343,7 @@ entities:
       pos: -53.5,188.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -396240.94
+      secondsUntilStateChange: -396291.56
       state: Opening
   - uid: 38967
     components:
@@ -329779,6 +329779,14 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -89.5,62.5
+      parent: 2
+- proto: WindoorSecureArmoryLocked
+  entities:
+  - uid: 35181
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 62.5,53.5
       parent: 2
 - proto: WindoorSecureBrigLocked
   entities:
