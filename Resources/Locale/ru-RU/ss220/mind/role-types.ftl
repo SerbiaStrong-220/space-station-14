@@ -10,6 +10,7 @@ role-type-update-message = Ваша роль: [color = {$color}]{$role}[/color]
 
 # Ideally, subtype names should be short
 role-subtype-traitor = Предатель
+role-subtype-blood-brothers = Кровные Братья
 role-subtype-thief = Вор
 role-subtype-ninja = Ниндзя
 role-subtype-nukie = Ядерный оперативник

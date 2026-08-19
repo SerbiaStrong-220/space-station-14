@@ -1,0 +1,10 @@
+- type: antag
+  id: BloodBrothers
+  name: roles-antag-blood-brothers-name
+  antagonist: true
+  setPreference: true
+  objective: roles-antag-blood-brothers-objective
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 20h
+  playTimeTracker: AntagBloodBrothers
