@@ -200484,7 +200484,7 @@ entities:
       pos: -108.5,129.5
       parent: 2
     - type: Gateway
-      enabled: True
+      enabled: False
 - proto: Gauze
   entities:
   - uid: 20301
