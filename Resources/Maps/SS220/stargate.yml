@@ -1,11 +1,11 @@
 meta:
-  format: 8
+  format: 7
   category: Map
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 08/20/2026 12:38:46
-  entityCount: 43507
+  time: 08/20/2026 13:32:25
+  entityCount: 43497
 maps:
 - 1
 grids:
@@ -19151,7 +19151,8 @@ entities:
           14,6:
             0: 33727
           14,7:
-            0: 49402
+            0: 33018
+            3: 16384
           14,3:
             0: 28672
             1: 36608
@@ -19809,7 +19810,7 @@ entities:
           -3,19:
             0: 30579
           -3,15:
-            3: 65520
+            4: 65520
           -3,20:
             0: 32631
           -2,16:
@@ -20376,10 +20377,10 @@ entities:
             0: 65280
           -22,24:
             0: 5135
-            3: 51200
+            4: 51200
           -21,24:
             0: 60685
-            3: 4096
+            4: 4096
           -12,25:
             0: 4607
           -13,25:
@@ -20478,7 +20479,7 @@ entities:
             1: 96
           -22,25:
             0: 21
-            3: 8
+            4: 8
           -22,26:
             1: 32800
             0: 2240
@@ -22406,11 +22407,11 @@ entities:
           -26,7:
             0: 15133
           -28,4:
-            4: 34
+            5: 34
             0: 63624
           -29,4:
             0: 52428
-            5: 273
+            6: 273
           -28,5:
             0: 65535
           -29,5:
@@ -22422,7 +22423,7 @@ entities:
             0: 53452
             1: 17
           -28,3:
-            4: 8192
+            5: 8192
             0: 35071
           -27,4:
             0: 65535
@@ -22462,7 +22463,7 @@ entities:
             0: 61152
           -30,4:
             0: 819
-            5: 2184
+            6: 2184
           -30,5:
             0: 4880
             1: 52428
@@ -22471,10 +22472,10 @@ entities:
             1: 204
           -30,3:
             0: 4915
-            6: 2184
+            7: 2184
           -29,3:
             0: 52428
-            6: 273
+            7: 273
           -40,4:
             1: 17476
           -40,3:
@@ -22762,6 +22763,11 @@ entities:
         - volume: 2500
           temperature: 293.15
           moles: {}
+        - volume: 2500
+          temperature: 293.15
+          moles:
+            Oxygen: 21.823984
+            Nitrogen: 82.09976
         - volume: 2500
           temperature: 235
           moles:
@@ -26052,7 +26058,7 @@ entities:
       pos: -102.5,24.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -74745.79
+      secondsUntilStateChange: -75579.91
       state: Opening
   - uid: 1760
     components:
@@ -27803,7 +27809,7 @@ entities:
       pos: 1.5,161.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1456808.2
+      secondsUntilStateChange: -1457642.4
       changeAirtight: False
       state: Opening
     - type: DeviceLinkSource
@@ -114341,7 +114347,7 @@ entities:
       pos: 45.5,58.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -350495.47
+      secondsUntilStateChange: -351329.6
       state: Closing
     - type: DeviceLinkSource
       lastSignals:
@@ -126003,7 +126009,7 @@ entities:
     - type: Openable
       opened: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.6765197
+      sprayFizzinessThresholdRoll: 0.31105268
     - type: MeleeWeapon
       nextAttack: -13.2999857
     - type: EmitSoundOnCollide
@@ -126325,7 +126331,7 @@ entities:
     - type: EmitSoundOnCollide
       nextSound: -20188.979811
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.7278817
+      sprayFizzinessThresholdRoll: 0.16846684
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -126380,7 +126386,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.070554495
+      sprayFizzinessThresholdRoll: 0.99155396
     - type: NameModifier
       baseName: бутылка Гильдлагер
     - type: ContainerContainer
@@ -127404,7 +127410,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.078426994
+      sprayFizzinessThresholdRoll: 0.70952207
     - type: NameModifier
       baseName: Особый Запас Дядюшки Гита
     - type: ContainerContainer
@@ -127458,7 +127464,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.5514261
+      sprayFizzinessThresholdRoll: 0.88602084
     - type: NameModifier
       baseName: вино Особое Двухбородое Бородатое
     - type: ContainerContainer
@@ -127497,7 +127503,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.48937365
+      sprayFizzinessThresholdRoll: 0.49218026
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -127529,7 +127535,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.47500804
+      sprayFizzinessThresholdRoll: 0.21493196
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -130560,7 +130566,7 @@ entities:
       - 40096
       - 40106
     - type: Door
-      secondsUntilStateChange: -1366072.4
+      secondsUntilStateChange: -1366906.5
       state: Closing
   - uid: 9985
     components:
@@ -130640,7 +130646,7 @@ entities:
       deviceLists:
       - 14877
     - type: Door
-      secondsUntilStateChange: -1284747.4
+      secondsUntilStateChange: -1285581.5
       state: Closing
   - uid: 11562
     components:
@@ -132502,7 +132508,7 @@ entities:
     - type: Firelock
       emergencyCloseCooldown: 8075.4252599
     - type: Door
-      secondsUntilStateChange: -389193.47
+      secondsUntilStateChange: -390027.6
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -199215,19 +199221,8 @@ entities:
         immutable: False
         temperature: 293.14673
         moles:
-          Oxygen: 1.8968438
-          Nitrogen: 7.1357465
-    - type: ContainerContainer
-      containers:
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 31442
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
+          Oxygen: 1.8977377
+          Nitrogen: 7.139109
 - proto: LockerElectricalSuppliesFilled
   entities:
   - uid: 15062
@@ -256759,7 +256754,7 @@ entities:
       pos: -52.5,187.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -436737.53
+      secondsUntilStateChange: -437571.66
       state: Opening
   - uid: 23105
     components:
@@ -256832,7 +256827,7 @@ entities:
       pos: -53.5,188.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -401020.34
+      secondsUntilStateChange: -401854.47
       state: Opening
   - uid: 38967
     components:
@@ -256945,167 +256940,6 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: SpaceHeaterEnabled
-  entities:
-  - uid: 7400
-    components:
-    - type: Transform
-      pos: -27.5,181.5
-      parent: 2
-  - uid: 7467
-    components:
-    - type: Transform
-      pos: -126.5,30.5
-      parent: 2
-    - type: ApcPowerReceiver
-      needsPower: False
-    - type: SpaceHeater
-      maxTemperature: 323.15
-    - type: GasThermoMachine
-      targetTemperature: 323.15
-    - type: Stealth
-    - type: StealthOnMove
-    missingComponents:
-    - Anchorable
-  - uid: 8028
-    components:
-    - type: Transform
-      pos: -116.5,61.5
-      parent: 2
-    - type: ActivatableUI
-      adminOnly: True
-    - type: ApcPowerReceiver
-      needsPower: False
-    - type: SpaceHeater
-      maxTemperature: 323.15
-      powerLevel: High
-      mode: Heat
-    - type: GasThermoMachine
-      coefficientOfPerformance: 1
-      targetTemperature: 323.15
-      heatCapacity: 7000
-    - type: Stealth
-    - type: StealthOnMove
-    missingComponents:
-    - Anchorable
-  - uid: 8029
-    components:
-    - type: Transform
-      pos: -115.5,50.5
-      parent: 2
-    - type: ActivatableUI
-      adminOnly: True
-    - type: ApcPowerReceiver
-      needsPower: False
-    - type: SpaceHeater
-      maxTemperature: 323.15
-      powerLevel: High
-      mode: Heat
-    - type: GasThermoMachine
-      targetTemperature: 323.15
-      heatCapacity: 7000
-    - type: Stealth
-    - type: StealthOnMove
-    missingComponents:
-    - Anchorable
-  - uid: 8030
-    components:
-    - type: Transform
-      pos: -108.5,43.5
-      parent: 2
-    - type: ActivatableUI
-      adminOnly: True
-    - type: ApcPowerReceiver
-      needsPower: False
-    - type: SpaceHeater
-      maxTemperature: 323.15
-      powerLevel: High
-      mode: Heat
-    - type: GasThermoMachine
-      targetTemperature: 323.15
-      heatCapacity: 7000
-    - type: Stealth
-    - type: StealthOnMove
-    missingComponents:
-    - Anchorable
-  - uid: 8031
-    components:
-    - type: Transform
-      pos: -115.5,33.5
-      parent: 2
-    - type: ActivatableUI
-      adminOnly: True
-    - type: ApcPowerReceiver
-      needsPower: False
-    - type: SpaceHeater
-      maxTemperature: 323.15
-      powerLevel: High
-      mode: Heat
-    - type: GasThermoMachine
-      coefficientOfPerformance: 1
-      targetTemperature: 323.15
-      heatCapacity: 7000
-    - type: Stealth
-    - type: StealthOnMove
-    missingComponents:
-    - Anchorable
-  - uid: 8032
-    components:
-    - type: Transform
-      pos: -116.5,31.5
-      parent: 2
-    - type: SpaceHeater
-      maxTemperature: 323.15
-      powerLevel: High
-      mode: Heat
-    - type: GasThermoMachine
-      targetTemperature: 323.15
-      heatCapacity: 7000
-    - type: Stealth
-    - type: StealthOnMove
-    missingComponents:
-    - Anchorable
-  - uid: 8033
-    components:
-    - type: Transform
-      pos: -112.5,51.5
-      parent: 2
-    - type: ActivatableUI
-      adminOnly: True
-    - type: ApcPowerReceiver
-      needsPower: False
-    - type: SpaceHeater
-      maxTemperature: 323.15
-      powerLevel: High
-      mode: Heat
-    - type: GasThermoMachine
-      targetTemperature: 323.15
-      heatCapacity: 7000
-    - type: Stealth
-    - type: StealthOnMove
-    missingComponents:
-    - Anchorable
-  - uid: 8034
-    components:
-    - type: Transform
-      pos: -111.5,60.5
-      parent: 2
-    - type: ActivatableUI
-      adminOnly: True
-    - type: ApcPowerReceiver
-      needsPower: False
-    - type: SpaceHeater
-      maxTemperature: 323.15
-      powerLevel: High
-      mode: Heat
-    - type: GasThermoMachine
-      coefficientOfPerformance: 1
-      targetTemperature: 323.15
-      heatCapacity: 7000
-    - type: Stealth
-    - type: StealthOnMove
-    missingComponents:
-    - Anchorable
 - proto: SpacemenFigurineSpawner90
   entities:
   - uid: 41804
@@ -318176,16 +318010,6 @@ entities:
     - type: Transform
       pos: -32.32906,100.55324
       parent: 2
-  - uid: 31442
-    components:
-    - type: MetaData
-      desc: Надёжная латунная зажигалка, рассчитанная на длительный срок службы. С изображением чёрной лисы.
-    - type: Transform
-      parent: 31438
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-      storage: 31438
 - proto: Zipties
   entities:
   - uid: 14
