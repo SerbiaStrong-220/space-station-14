@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 08/19/2026 16:23:13
-  entityCount: 46409
+  time: 08/20/2026 22:23:21
+  entityCount: 46411
 maps:
 - 1
 grids:
@@ -26052,7 +26052,7 @@ entities:
       pos: -102.5,24.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -80374.64
+      secondsUntilStateChange: -80407.1
       state: Opening
   - uid: 1760
     components:
@@ -27803,7 +27803,7 @@ entities:
       pos: 1.5,161.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1462437.2
+      secondsUntilStateChange: -1462469.8
       changeAirtight: False
       state: Opening
     - type: DeviceLinkSource
@@ -114341,7 +114341,7 @@ entities:
       pos: 45.5,58.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -356124.3
+      secondsUntilStateChange: -356156.78
       state: Closing
     - type: DeviceLinkSource
       lastSignals:
@@ -140505,7 +140505,7 @@ entities:
     - type: Openable
       opened: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.7074189
+      sprayFizzinessThresholdRoll: 0.6532151
     - type: MeleeWeapon
       nextAttack: -13.2999857
     - type: EmitSoundOnCollide
@@ -140827,7 +140827,7 @@ entities:
     - type: EmitSoundOnCollide
       nextSound: -20188.979811
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.1526041
+      sprayFizzinessThresholdRoll: 0.8313275
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -140882,7 +140882,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.6880383
+      sprayFizzinessThresholdRoll: 0.39990032
     - type: NameModifier
       baseName: бутылка Гильдлагер
     - type: ContainerContainer
@@ -141906,7 +141906,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.534817
+      sprayFizzinessThresholdRoll: 0.057901904
     - type: NameModifier
       baseName: Особый Запас Дядюшки Гита
     - type: ContainerContainer
@@ -141960,7 +141960,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.75407124
+      sprayFizzinessThresholdRoll: 0.90333676
     - type: NameModifier
       baseName: вино Особое Двухбородое Бородатое
     - type: ContainerContainer
@@ -141999,7 +141999,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.36629993
+      sprayFizzinessThresholdRoll: 0.22539715
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -142031,7 +142031,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.9027936
+      sprayFizzinessThresholdRoll: 0.4801618
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -145062,7 +145062,7 @@ entities:
       - 40096
       - 40106
     - type: Door
-      secondsUntilStateChange: -1371701.4
+      secondsUntilStateChange: -1371733.9
       state: Closing
   - uid: 9985
     components:
@@ -145142,7 +145142,7 @@ entities:
       deviceLists:
       - 14877
     - type: Door
-      secondsUntilStateChange: -1290376.4
+      secondsUntilStateChange: -1290408.9
       state: Closing
   - uid: 11562
     components:
@@ -147004,7 +147004,7 @@ entities:
     - type: Firelock
       emergencyCloseCooldown: 8075.4252599
     - type: Door
-      secondsUntilStateChange: -394822.3
+      secondsUntilStateChange: -394854.78
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -271270,7 +271270,7 @@ entities:
       pos: -52.5,187.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -442366.38
+      secondsUntilStateChange: -442398.84
       state: Opening
   - uid: 23105
     components:
@@ -271343,7 +271343,7 @@ entities:
       pos: -53.5,188.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -406649.2
+      secondsUntilStateChange: -406681.66
       state: Opening
   - uid: 38967
     components:
@@ -272267,6 +272267,18 @@ entities:
     components:
     - type: Transform
       pos: -23.5,193.5
+      parent: 2
+- proto: SpawnPointActualFuckingLawyer
+  entities:
+  - uid: 35629
+    components:
+    - type: Transform
+      pos: -74.5,74.5
+      parent: 2
+  - uid: 35998
+    components:
+    - type: Transform
+      pos: -76.5,75.5
       parent: 2
 - proto: SpawnPointAtmos
   entities:
