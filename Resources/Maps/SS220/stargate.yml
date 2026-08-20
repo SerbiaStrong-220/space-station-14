@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 08/20/2026 11:20:58
-  entityCount: 43508
+  time: 08/20/2026 12:38:46
+  entityCount: 43507
 maps:
 - 1
 grids:
@@ -26052,7 +26052,7 @@ entities:
       pos: -102.5,24.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -70119.28
+      secondsUntilStateChange: -74745.79
       state: Opening
   - uid: 1760
     components:
@@ -27803,7 +27803,7 @@ entities:
       pos: 1.5,161.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1452181.8
+      secondsUntilStateChange: -1456808.2
       changeAirtight: False
       state: Opening
     - type: DeviceLinkSource
@@ -114341,7 +114341,7 @@ entities:
       pos: 45.5,58.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -345868.97
+      secondsUntilStateChange: -350495.47
       state: Closing
     - type: DeviceLinkSource
       lastSignals:
@@ -130560,7 +130560,7 @@ entities:
       - 40096
       - 40106
     - type: Door
-      secondsUntilStateChange: -1361445.9
+      secondsUntilStateChange: -1366072.4
       state: Closing
   - uid: 9985
     components:
@@ -130640,7 +130640,7 @@ entities:
       deviceLists:
       - 14877
     - type: Door
-      secondsUntilStateChange: -1280120.9
+      secondsUntilStateChange: -1284747.4
       state: Closing
   - uid: 11562
     components:
@@ -132502,7 +132502,7 @@ entities:
     - type: Firelock
       emergencyCloseCooldown: 8075.4252599
     - type: Door
-      secondsUntilStateChange: -384566.97
+      secondsUntilStateChange: -389193.47
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -256759,7 +256759,7 @@ entities:
       pos: -52.5,187.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -432111.03
+      secondsUntilStateChange: -436737.53
       state: Opening
   - uid: 23105
     components:
@@ -256832,7 +256832,7 @@ entities:
       pos: -53.5,188.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -396393.84
+      secondsUntilStateChange: -401020.34
       state: Opening
   - uid: 38967
     components:
@@ -258032,13 +258032,6 @@ entities:
     components:
     - type: Transform
       pos: -18.5,76.5
-      parent: 2
-- proto: SpawnPointLatejoin
-  entities:
-  - uid: 38564
-    components:
-    - type: Transform
-      pos: 111.5,45.5
       parent: 2
 - proto: SpawnPointLawyer
   entities:
