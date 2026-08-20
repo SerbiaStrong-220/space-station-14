@@ -100,6 +100,7 @@ public sealed partial class RoundEndSummaryUIController : UIController,
         var sponsors = message.Sponsors;
 
 #if DEBUG
+        if (IS_DEBUG_MODE)
         {
             players = players.Concat(Faker.FakeArray(50, () => new RoundEndMessageEvent.RoundEndPlayerInfo
             {
