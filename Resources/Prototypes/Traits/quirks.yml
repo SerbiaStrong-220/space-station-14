@@ -16,7 +16,7 @@
   # SS220-IPC begin
   blacklist:
     components:
-      - Ipc
+    - Ipc
   # SS220-IPC end
   components:
   - type: LightweightDrunk
@@ -30,7 +30,7 @@
   # SS220-IPC begin
   blacklist:
     components:
-      - Ipc
+    - Ipc
   # SS220-IPC end
   components:
   - type: Snoring

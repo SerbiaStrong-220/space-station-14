@@ -5,7 +5,7 @@
   category: Disabilities
   blacklist:
     components:
-      - Ipc
+    - Ipc
   mutuallyExclusiveWith:
     - Nervousness
   components:
@@ -21,7 +21,7 @@
   category: Disabilities
   blacklist:
     components:
-      - Ipc
+    - Ipc
   components:
   - type: ChangeSpeedDoAfters
     coefficient: 0.7
@@ -34,7 +34,7 @@
   category: Disabilities
   blacklist:
     components:
-      - Ipc
+    - Ipc
   components:
   - type: AutoEmote
     emotes:

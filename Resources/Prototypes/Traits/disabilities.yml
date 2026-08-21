@@ -45,7 +45,7 @@
   # SS220-IPC begin
   blacklist:
     components:
-      - Ipc
+    - Ipc
   # SS220-IPC end
   components:
     - type: Unrevivable
@@ -101,7 +101,7 @@
   # SS220-IPC begin
   blacklist:
     components:
-      - Ipc
+    - Ipc
   # SS220-IPC end
   specials:
   - !type:ApplyStatusEffectSpecial
