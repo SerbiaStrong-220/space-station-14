@@ -52,5 +52,5 @@ public enum IntimidatePersonDescriptionType
 {
     Start = 0,
     Success,
-    Catatoinic, // SS220 rewrite: brings from handle ssd state to catatonic
+    Catatoinic,
 }
