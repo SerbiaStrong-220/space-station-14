@@ -36,7 +36,7 @@ public sealed partial class IntimidatePersonConditionComponent : Component
     /// Description will be applied if target gets SSDs.
     /// </summary>
     [DataField(required: true)]
-    public string? CatatonicDescription; // SS220 rewrite: brings from handle ssd state to catatonic
+    public string? CatatonicDescription;
 
     [DataField]
     public MindPool Pool = new AliveHumansPool();
