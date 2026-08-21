@@ -50,7 +50,7 @@
             SeniorPhysician: [ 1, 1]
             MedicalDoctor: [ 7, 7 ]
             Chemist: [ 2, 2 ]
-            Psychologist: [ 1, 1 ]
+            Psychologist: [ 2, 2 ]
             MedicalIntern: [ 6, 6 ]
             Paramedic: [ 1, 1 ]
             #Science

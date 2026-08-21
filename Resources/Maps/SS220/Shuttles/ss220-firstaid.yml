@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 08/18/2026 11:59:25
-  entityCount: 129
+  time: 08/21/2026 17:31:23
+  entityCount: 131
 maps: []
 grids:
 - 30902
@@ -232,7 +232,6 @@ entities:
       name: MED "First aid"
     - type: Transform
       rot: 3.141592653589793 rad
-      pos: 40.83828,68.43776
       parent: invalid
     - type: MapGrid
       chunks:
@@ -893,6 +892,20 @@ entities:
       rot: 3.141592653589793 rad
       pos: -0.41904068,-1.7511673
       parent: 30902
+- proto: LedLightBulb
+  entities:
+  - uid: 1
+    components:
+    - type: Transform
+      parent: 46110
+    - type: Physics
+      canCollide: False
+  - uid: 2
+    components:
+    - type: Transform
+      parent: 46111
+    - type: Physics
+      canCollide: False
 - proto: Lightswitch
   entities:
   - uid: 46112
@@ -988,6 +1001,16 @@ entities:
       rot: 3.141592653589793 rad
       pos: 3.5,3.5
       parent: 30902
+    - type: ContainerContainer
+      containers:
+        light_bulb: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: 1
+    - type: ApcPowerReceiver
+      powerLoad: 0
+    - type: DamageOnInteract
+      isDamageActive: False
     - type: DeviceLinkSink
       invokeCounter: 1
   - uid: 46111
@@ -996,6 +1019,16 @@ entities:
       rot: 3.141592653589793 rad
       pos: -0.5,3.5
       parent: 30902
+    - type: ContainerContainer
+      containers:
+        light_bulb: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: 2
+    - type: ApcPowerReceiver
+      powerLoad: 0
+    - type: DamageOnInteract
+      isDamageActive: False
     - type: DeviceLinkSink
       invokeCounter: 1
 - proto: RollerBedSpawnFolded

@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 08/18/2026 07:50:48
-  entityCount: 144
+  time: 08/21/2026 17:31:41
+  entityCount: 147
 maps: []
 grids:
 - 1
@@ -348,6 +348,11 @@ entities:
     - type: Transform
       pos: 0.5,1.5
       parent: 1
+  - uid: 147
+    components:
+    - type: Transform
+      pos: 1.5,3.5
+      parent: 1
 - proto: CableHV
   entities:
   - uid: 82
@@ -634,6 +639,20 @@ entities:
       parent: 1
     - type: Label
       currentLabel: NT-SPPOD "Mouse"
+- proto: LedLightBulb
+  entities:
+  - uid: 71
+    components:
+    - type: Transform
+      parent: 140
+    - type: Physics
+      canCollide: False
+  - uid: 146
+    components:
+    - type: Transform
+      parent: 143
+    - type: Physics
+      canCollide: False
 - proto: Lightswitch
   entities:
   - uid: 144
@@ -665,6 +684,9 @@ entities:
     - type: DeviceLinkSource
       linkedPorts:
         140:
+        - - Status
+          - Toggle
+        143:
         - - Status
           - Toggle
     - type: Fixtures
@@ -25781,6 +25803,16 @@ entities:
       rot: 3.141592653589793 rad
       pos: 2.5,4.5
       parent: 1
+    - type: ContainerContainer
+      containers:
+        light_bulb: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: 71
+    - type: ApcPowerReceiver
+      powerLoad: 0
+    - type: DamageOnInteract
+      isDamageActive: False
     - type: DeviceLinkSink
       invokeCounter: 1
   - uid: 143
@@ -25789,6 +25821,18 @@ entities:
       rot: 3.141592653589793 rad
       pos: 0.5,4.5
       parent: 1
+    - type: ContainerContainer
+      containers:
+        light_bulb: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: 146
+    - type: ApcPowerReceiver
+      powerLoad: 0
+    - type: DeviceLinkSink
+      invokeCounter: 1
+    - type: DamageOnInteract
+      isDamageActive: False
 - proto: PoweredWarmSmallLight
   entities:
   - uid: 96
