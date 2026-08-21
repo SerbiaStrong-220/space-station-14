@@ -80,7 +80,7 @@ public sealed partial class TtsVoicePreferences : IReadOnlyTtsVoicePreferences, 
                 return;
             }
 
-            SetPosition(provider, index);
+            SetIndex(provider, index);
             _dict[provider] = voiceId;
         }
     }
@@ -109,7 +109,7 @@ public sealed partial class TtsVoicePreferences : IReadOnlyTtsVoicePreferences, 
         return true;
     }
 
-    public bool SetPosition(TtsProvider provider, int index)
+    public bool SetIndex(TtsProvider provider, int index)
     {
         if (index < 0)
             return false;
@@ -202,18 +202,18 @@ public sealed partial class TtsVoicePreferences : IReadOnlyTtsVoicePreferences, 
         SoftMergeWith(pairs);
     }
 
-    public void MergeWith(IEnumerable<KeyValuePair<TtsProvider, ProtoId<TtsVoicePrototype>>> pairs, bool hard = false)
+    public void HardMergeWith(IEnumerable<KeyValuePair<TtsProvider, ProtoId<TtsVoicePrototype>>> pairs, bool withIndexes = false)
     {
-        if (hard)
-            HardMergeWith(pairs);
-        else
-            SoftMergeWith(pairs);
-    }
-
-    public void HardMergeWith(IEnumerable<KeyValuePair<TtsProvider, ProtoId<TtsVoicePrototype>>> pairs)
-    {
+        var i = 0;
         foreach (var (key, value) in pairs)
+        {
             this[key] = value;
+
+            if (withIndexes)
+                SetIndex(key, i);
+
+            i++;
+        }
     }
 
     public void SoftMergeWith(IEnumerable<KeyValuePair<TtsProvider, ProtoId<TtsVoicePrototype>>> pairs)
@@ -382,7 +382,6 @@ public sealed class TtsVoicePreferencesSerializer : ITypeSerializer<TtsVoicePref
         SerializationHookContext hookCtx,
         ISerializationContext? context = null)
     {
-        target.Clear();
-        target.MergeWith(source);
+        target.SetValuesFrom(source);
     }
 }

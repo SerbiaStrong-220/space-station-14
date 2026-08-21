@@ -68,7 +68,7 @@ public abstract partial class SharedTtsSystem : EntitySystem
             var ev = new GetTtsVoiceOverrideEvent();
             RaiseLocalEvent(entity, ev);
 
-            pref.HardMergeWith(ev.Overrides);
+            pref.HardMergeWith(ev.Overrides, withIndexes: true);
         }
 
         return true;
@@ -180,19 +180,6 @@ public sealed class GetTtsVoiceOverrideEvent() : EntityEventArgs, IInventoryRela
     public readonly TtsVoicePreferences Overrides = [];
 
     public SlotFlags TargetSlots => SlotFlags.MASK;
-
-    public void Add(TtsVoicePreferences other, bool force = false)
-    {
-        Overrides.MergeWith(other, hard: force);
-    }
-
-    public void Add(TtsProvider provider, ProtoId<TtsVoicePrototype> protoId, bool force = false)
-    {
-        if (Overrides.ContainsKey(provider) && !force)
-            return;
-
-        Overrides[provider] = protoId;
-    }
 }
 
 [Serializable, NetSerializable]

@@ -1,11 +1,11 @@
 using Content.Server.Speech;
+using Content.Server.SS220.TTS;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Clothing;
 using Content.Shared.Database;
-using Content.Shared.Interaction;
 using Content.Shared.IdentityManagement;
 using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Implants;
@@ -13,7 +13,6 @@ using Content.Shared.Inventory;
 using Content.Shared.Lock;
 using Content.Shared.Popups;
 using Content.Shared.Speech;
-using Content.Shared.SS220.TTS;
 using Content.Shared.VoiceMask;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
@@ -33,6 +32,7 @@ public sealed partial class VoiceMaskSystem : EntitySystem
     [Dependency] private readonly LockSystem _lock = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly IdentitySystem _identity = default!;
+    [Dependency] private TtsSystem _tts = default!;
 
     // CCVar.
     private int _maxNameLength;

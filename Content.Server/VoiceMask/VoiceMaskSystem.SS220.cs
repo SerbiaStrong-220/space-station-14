@@ -1,4 +1,4 @@
-using Content.Server.SS220.TTS;
+using Content.Shared.Implants;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.SS220.TTS;
@@ -9,13 +9,12 @@ namespace Content.Server.VoiceMask;
 
 public partial class VoiceMaskSystem
 {
-    [Dependency] private TtsSystem _tts = default!;
-
     private void InitializeSS220()
     {
         SubscribeLocalEvent<VoiceMaskComponent, VoiceMaskChangeTtsVoicePreferencesMessage>(OnChangeVoice);
         SubscribeLocalEvent<VoiceMaskComponent, GetTtsVoiceOverrideEvent>(OnGetVoiceOverride);
         SubscribeLocalEvent<VoiceMaskComponent, InventoryRelayedEvent<GetTtsVoiceOverrideEvent>>(OnInventoryGetVoiceOverride);
+        SubscribeLocalEvent<VoiceMaskComponent, ImplantRelayEvent<GetTtsVoiceOverrideEvent>>(OnImplantGetVoiceOverride);
         SubscribeLocalEvent<VoiceMaskComponent, AfterInteractEvent>(OnInteract);
     }
 
@@ -29,12 +28,17 @@ public partial class VoiceMaskSystem
 
     private void OnGetVoiceOverride(Entity<VoiceMaskComponent> entity, ref GetTtsVoiceOverrideEvent args)
     {
-        args.Add(entity.Comp.VoicePreferences);
+        args.Overrides.HardMergeWith(entity.Comp.VoicePreferences, withIndexes: true);
     }
 
     private void OnInventoryGetVoiceOverride(Entity<VoiceMaskComponent> entity, ref InventoryRelayedEvent<GetTtsVoiceOverrideEvent> args)
     {
         OnGetVoiceOverride(entity, ref args.Args);
+    }
+
+    private void OnImplantGetVoiceOverride(Entity<VoiceMaskComponent> entity, ref ImplantRelayEvent<GetTtsVoiceOverrideEvent> args)
+    {
+        OnGetVoiceOverride(entity, ref args.Event);
     }
 
     private void OnInteract(Entity<VoiceMaskComponent> ent, ref AfterInteractEvent args)
