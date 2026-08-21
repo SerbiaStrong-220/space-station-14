@@ -1,3 +1,4 @@
+using Content.Server.SS220.TTS;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.SS220.TTS;
@@ -8,6 +9,8 @@ namespace Content.Server.VoiceMask;
 
 public partial class VoiceMaskSystem
 {
+    [Dependency] private TtsSystem _tts = default!;
+
     private void InitializeSS220()
     {
         SubscribeLocalEvent<VoiceMaskComponent, VoiceMaskChangeTtsVoicePreferencesMessage>(OnChangeVoice);
@@ -39,7 +42,7 @@ public partial class VoiceMaskSystem
         if (!TryComp<TtsComponent>(args.Target, out var targetTts))
             return;
 
-        ent.Comp.VoicePreferences = targetTts.VoicePreferences.Clone();
+        _tts.SetVoicePreferences(ent.Owner, targetTts.VoicePreferencesRO.Clone());
         _popupSystem.PopupCursor(Loc.GetString("voice-mask-popup-voice-copied"), args.User);
 
         UpdateUI(ent);

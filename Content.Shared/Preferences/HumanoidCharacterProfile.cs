@@ -311,16 +311,23 @@ namespace Content.Shared.Preferences
                 Session = IoCManager.Resolve<ISharedPlayerManager>().LocalSession
             };
 
-            foreach (var provider in Enum.GetValues<TtsProvider>())
+            var providers = Enum.GetValues<TtsProvider>();
+            providers.Shuffle(random);
+
+            foreach (var provider in providers)
             {
                 var avaliableVoices = ttsSystem.EnumerateProviderVoices(provider)
                     .Where(x => ttsSystem.IsPassVoiceRequirements(x, checkData, out _))
-                    .ToArray();
+                    .ToList();
+
+                if (avaliableVoices.Count == 0)
+                    continue;
 
                 var providerVoice = random.Pick(avaliableVoices);
                 voicePreferences.Add(provider, providerVoice);
             }
 
+            voicePreferences.SoftMergeWith(SharedTtsSystem.DefaultVoicePreferences);
             profile = profile.WithVoicePreferences(voicePreferences);
 
             return profile;

@@ -65,7 +65,7 @@ public sealed partial class VoiceMaskComponent : Component
     public bool ChangeIDName = false;
 
     // SS220 tts begin
-    [DataField(customTypeSerializer: typeof(TTSVoicePreferencesSerializer))]
+    [DataField(customTypeSerializer: typeof(TtsVoicePreferencesSerializer))]
     public TtsVoicePreferences VoicePreferences = SharedTtsSystem.DefaultVoicePreferences.Clone();
     // SS220 tts end
 }

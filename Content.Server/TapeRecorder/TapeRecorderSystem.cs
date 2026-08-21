@@ -57,12 +57,7 @@ public sealed class TapeRecorderSystem : SharedTapeRecorderSystem
             speech.SpeechVerb = _proto.Index<SpeechVerbPrototype>(verb);
             // SS220 Tape recorder TTS begin
             if (tts is { })
-            {
-                tts.VoicePreferences.Clear();
-
-                if (message.TtsVoicePreferences != null)
-                    tts.VoicePreferences.SoftMergeWith(message.TtsVoicePreferences);
-            }
+                _tts.SetVoicePreferences(ent.Owner, tts.VoicePreferencesRO.Clone());
             // SS220 Tape recorder TTS end
             //Play the message
 

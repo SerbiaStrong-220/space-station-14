@@ -7,7 +7,7 @@ public partial class HumanoidProfileEditor
 {
     private void InitializeSS220()
     {
-        TtsVoicePreferencesTab.OnPreferencesChanged += () => SetVoicePreferences(TtsVoicePreferencesTab.VoicePreferences);
+        TtsVoicePreferencesTable.OnPreferencesChanged += () => SetVoicePreferences(TtsVoicePreferencesTable.VoicePreferences);
     }
 
     private void UpdateSS220()
@@ -21,8 +21,8 @@ public partial class HumanoidProfileEditor
         if (Profile is null)
             return;
 
-        TtsVoicePreferencesTab.SetPreferences(Profile.VoicePreferences.Clone(), silent: true);
-        TtsVoicePreferencesTab.RequirementsCheckData = new TtsVoiceRequirementCheckData
+        TtsVoicePreferencesTable.SetPreferences(Profile.VoicePreferences.Clone(), silent: true);
+        TtsVoicePreferencesTable.RequirementsCheckData = new TtsVoiceRequirementCheckData
         {
             Session = _playerManager.LocalSession,
             Profile = Profile

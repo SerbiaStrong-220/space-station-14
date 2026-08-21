@@ -9,7 +9,7 @@ using Robust.Shared.Utility;
 namespace Content.Client.SS220.TTS.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class TtsVoicePreferencesTabEntry : BoxContainer
+public sealed partial class TtsVoicePreferencesTableEntry : BoxContainer
 {
     [Dependency] private IEntityManager _entity = default!;
 
@@ -21,7 +21,7 @@ public sealed partial class TtsVoicePreferencesTabEntry : BoxContainer
 
     private Tooltip? _tooltip;
 
-    public TtsVoicePreferencesTabEntry(TtsVoicePrototype proto)
+    public TtsVoicePreferencesTableEntry(TtsVoicePrototype proto)
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
@@ -30,9 +30,9 @@ public sealed partial class TtsVoicePreferencesTabEntry : BoxContainer
 
         Background.PanelOverride = new StyleBoxFlat()
         {
-            BackgroundColor = TtsVoicePreferencesTab.CellBackgroundColor
+            BackgroundColor = TtsVoicePreferencesTable.CellBackgroundColor
         };
-        ProviderNameLabel.SetWidth = TtsVoicePreferencesTab.ProviderColumnWidth;
+        ProviderNameLabel.SetWidth = TtsVoicePreferencesTable.ProviderColumnWidth;
 
         Prototype = proto;
 

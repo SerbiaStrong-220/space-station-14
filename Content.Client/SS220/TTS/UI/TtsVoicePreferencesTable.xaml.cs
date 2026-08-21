@@ -14,7 +14,7 @@ using Robust.Shared.Utility;
 namespace Content.Client.SS220.TTS.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class TtsVoicePreferencesTab : BoxContainer
+public sealed partial class TtsVoicePreferencesTable : BoxContainer
 {
     [Dependency] private IUserInterfaceManager _ui = default!;
     [Dependency] private IInputManager _input = default!;
@@ -30,12 +30,12 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
     public TtsVoicePreferences VoicePreferences { get; private set; }
 
     private int? _draggedEntryStartPos;
-    private TtsVoicePreferencesTabEntry? _draggingEntry;
+    private TtsVoicePreferencesTableEntry? _draggingEntry;
 
     private TtsProviderVoiceSelectorWindow? _selectorWindow;
-    private TtsVoicePreferencesTabEntry? _editingEntry;
+    private TtsVoicePreferencesTableEntry? _editingEntry;
 
-    private readonly Dictionary<TtsProvider, TtsVoicePreferencesTabEntry> _entriesDict = [];
+    private readonly Dictionary<TtsProvider, TtsVoicePreferencesTableEntry> _entriesDict = [];
 
     private static readonly Color EntryLowWarningColor = Color.Yellow.WithAlpha(0.2f);
     private static readonly Color EntryHighWarningColor = Color.Red.WithAlpha(0.2f);
@@ -46,6 +46,9 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
         get => _requirementsCheckData;
         set
         {
+            if (_requirementsCheckData == value)
+                return;
+
             _requirementsCheckData = value;
             _selectorWindow?.RequirementsCheckData = value;
 
@@ -55,9 +58,9 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
     }
     private TtsVoiceRequirementCheckData? _requirementsCheckData;
 
-    public TtsVoicePreferencesTab() : this(null) { }
+    public TtsVoicePreferencesTable() : this(null) { }
 
-    public TtsVoicePreferencesTab(TtsVoicePreferences? preferences = null)
+    public TtsVoicePreferencesTable(TtsVoicePreferences? preferences = null)
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
@@ -123,7 +126,7 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
             {
                 _draggingEntry.BeforeContentDivider.Visible = false;
 
-                if (childOnNewIndex is TtsVoicePreferencesTabEntry entry)
+                if (childOnNewIndex is TtsVoicePreferencesTableEntry entry)
                     entry.BeforeContentDivider.Visible = true;
             }
 
@@ -174,7 +177,7 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
 
             DebugTools.Assert(provider == proto.Provider, $"Prototype {protoId} does not use provider {provider.ToString()}");
 
-            var entry = new TtsVoicePreferencesTabEntry(proto);
+            var entry = new TtsVoicePreferencesTableEntry(proto);
             entry.OnKeyBindDown += args =>
             {
                 if (args.Function != EngineKeyFunctions.UIClick)
@@ -216,7 +219,7 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
             OnPreferencesChanged?.Invoke();
     }
 
-    private void RefreshEntryState(TtsVoicePreferencesTabEntry entry)
+    private void RefreshEntryState(TtsVoicePreferencesTableEntry entry)
     {
         Color? highlightColor = null;
         FormattedMessage? tooltipMsg = null;
@@ -276,7 +279,7 @@ public sealed partial class TtsVoicePreferencesTab : BoxContainer
         _editingEntry = null;
     }
 
-    private void StartDragEntry(TtsVoicePreferencesTabEntry entry)
+    private void StartDragEntry(TtsVoicePreferencesTableEntry entry)
     {
         StopDragEntry();
 

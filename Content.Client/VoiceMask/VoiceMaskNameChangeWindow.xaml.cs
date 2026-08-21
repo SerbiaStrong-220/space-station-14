@@ -32,8 +32,8 @@ public sealed partial class VoiceMaskNameChangeWindow : FancyWindow
         };
 
         // SS220 tts begin
-        TtsVoicePreferencesTab.SetPreferences(SharedTtsSystem.DefaultVoicePreferences.Clone(), silent: true);
-        TtsVoicePreferencesTab.OnPreferencesChanged += () => OnVoicePreferencesChanged?.Invoke(TtsVoicePreferencesTab.VoicePreferences);
+        TtsVoicePreferencesTable.SetPreferences(SharedTtsSystem.DefaultVoicePreferences.Clone(), silent: true);
+        TtsVoicePreferencesTable.OnPreferencesChanged += () => OnVoicePreferencesChanged?.Invoke(TtsVoicePreferencesTable.VoicePreferences);
         // SS220 tts end
 
         SpeechVerbSelector.OnItemSelected += args =>
@@ -84,7 +84,7 @@ public sealed partial class VoiceMaskNameChangeWindow : FancyWindow
         ToggleButton.Pressed = active;
         ToggleAccentButton.Pressed = accentHide;
 
-        TtsVoicePreferencesTab.SetPreferences(voicePreferences, silent: true); // SS220 tts
+        TtsVoicePreferencesTable.SetPreferences(voicePreferences, silent: true); // SS220 tts
 
         for (int id = 0; id < SpeechVerbSelector.ItemCount; id++)
         {

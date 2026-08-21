@@ -21,6 +21,18 @@
   <ItemGroup>
     <ProjectReference Include="..\Content.Shared\Content.Shared.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="SS220\DialogWindowTtsVoicePreferencesUI\DialogWindowTtsVoicePreferences.xaml.cs">
+      <DependentUpon>DialogWindowTtsVoicePreferences.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="SS220\TTS\UI\TtsVoicePreferencesTableEntry.xaml.cs">
+      <DependentUpon>TtsVoicePreferencesTableEntry.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="SS220\TTS\UI\TtsVoicePreferencesTable.xaml.cs">
+      <DependentUpon>TtsVoicePreferencesTable.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
   <Import Project="..\RobustToolbox\MSBuild\Robust.Properties.targets" />
   <Import Project="..\RobustToolbox\MSBuild\XamlIL.targets" />
 </Project>

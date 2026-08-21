@@ -98,7 +98,7 @@
                                 <Collapsible Orientation="Vertical" HorizontalExpand="True" BodyVisible="True">
                                     <CollapsibleHeading Title="{Loc 'ui-humanoid-profile-editor-tts-settings'}" />
                                     <CollapsibleBody>
-                                        <ss220-tts:TtsVoicePreferencesTab Name="TtsVoicePreferencesTab" HorizontalExpand="True"/>
+                                        <ss220-tts:TtsVoicePreferencesTable Name="TtsVoicePreferencesTable" HorizontalExpand="True"/>
                                     </CollapsibleBody>
                                 </Collapsible>
                                 <!-- SS220-TTS-End -->

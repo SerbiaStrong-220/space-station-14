@@ -41,6 +41,17 @@ public abstract partial class SharedTtsSystem : EntitySystem
         InitializeVoiceCaches();
     }
 
+    public void SetVoicePreferences(Entity<TtsComponent?> entity, TtsVoicePreferences preferences, TtsVoiceRequirementCheckData? checkData = null)
+    {
+        if (checkData != null)
+            preferences = RemoveNotAvailableVoices(preferences, checkData.Value);
+
+        entity.Comp = EnsureComp<TtsComponent>(entity);
+        entity.Comp.VoicePreferences = preferences;
+
+        Dirty(entity);
+    }
+
     /// <summary>
     /// Tries to get voice preferences for the specified <paramref name="entity"/>.
     /// </summary>

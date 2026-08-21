@@ -25,6 +25,9 @@ public sealed partial class TtsVoiceSelectorCategoryEntry : BoxContainer
         get => _requirementsCheckData;
         set
         {
+            if (_requirementsCheckData ==  value)
+                return;
+
             _requirementsCheckData = value;
             RefreshLockedState();
         }

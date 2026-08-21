@@ -7,13 +7,12 @@ using System.Text.RegularExpressions;
 
 namespace Content.Server.SS220.TTS;
 
-// ReSharper disable once InconsistentNaming
 public sealed partial class TtsSystem
 {
     [GeneratedRegex(@"(?<![a-zA-Zа-яёА-ЯЁ])[a-zA-Zа-яёА-ЯЁ]+?(?![a-zA-Zа-яёА-ЯЁ])", RegexOptions.Multiline | RegexOptions.IgnoreCase)]
     private static partial Regex WordRegex();
 
-    [GeneratedRegex(@"[^a-zA-Zа-яА-ЯёЁ0-9,\-+?!. ]")]
+    [GeneratedRegex(@"[^a-zA-Zа-яА-ЯёЁ0-9,\-?!. ]")]
     private static partial Regex CleanCharsRegex();
 
     [GeneratedRegex(@"[a-zA-Z]", RegexOptions.Multiline | RegexOptions.IgnoreCase)]

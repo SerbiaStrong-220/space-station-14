@@ -4,12 +4,6 @@
   description: описание
   speaker: aidar
   provider: Silero
-  requirement: !type:TtsAnyRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Unsexed ]
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
 
 - type: ttsVoice
   id: SileroSponsorTest
@@ -18,9 +12,9 @@
   speaker: aidar
   provider: Silero
   categories: [ Sponsor ]
-  requirement: !type:TtsAnyRequirement
+  requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
-      sexes: [ Unsexed ]
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
+      sexes: [ Unsexed, Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa

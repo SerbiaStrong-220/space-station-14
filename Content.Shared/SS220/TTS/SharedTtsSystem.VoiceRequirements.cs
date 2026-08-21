@@ -8,6 +8,11 @@ namespace Content.Shared.SS220.TTS;
 
 public partial class SharedTtsSystem
 {
+    public bool IsPassVoiceRequirements(TtsVoicePrototype proto, TtsVoiceRequirementCheckData data)
+    {
+        return IsPassVoiceRequirements(proto, data, out _);
+    }
+
     public bool IsPassVoiceRequirements(TtsVoicePrototype proto, TtsVoiceRequirementCheckData data, [NotNullWhen(false)] out FormattedMessage? reason)
     {
         reason = null;
@@ -18,6 +23,23 @@ public partial class SharedTtsSystem
             return true;
 
         return proto.Requirement.Check(EntityManager, data, out reason);
+    }
+
+    public TtsVoicePreferences RemoveNotAvailableVoices(TtsVoicePreferences preferences, TtsVoiceRequirementCheckData data)
+    {
+        var result = new TtsVoicePreferences();
+        foreach (var (provider, voiceId) in preferences)
+        {
+            if (!_proto.TryIndex(voiceId, out var voice))
+                continue;
+
+            if (!IsPassVoiceRequirements(voice, data))
+                continue;
+
+            result.Add(provider, voiceId);
+        }
+
+        return result;
     }
 }
 
@@ -32,7 +54,7 @@ public abstract partial class TtsVoiceRequirement
 }
 
 
-public struct TtsVoiceRequirementCheckData
+public record struct TtsVoiceRequirementCheckData
 {
     public ICommonSession? Session;
     public HumanoidCharacterProfile? Profile;

@@ -8,9 +8,13 @@ namespace Content.Shared.SS220.TTS;
 /// </summary>
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState(true)]
+[Access(typeof(SharedTtsSystem), Other = AccessPermissions.Read)]
 public sealed partial class TtsComponent : Component
 {
-    [DataField(customTypeSerializer: typeof(TTSVoicePreferencesSerializer)), AutoNetworkedField]
+    [Access(Other = AccessPermissions.ReadExecute)]
+    public IReadOnlyTtsVoicePreferences VoicePreferencesRO => VoicePreferences;
+
+    [DataField(customTypeSerializer: typeof(TtsVoicePreferencesSerializer)), AutoNetworkedField]
     public TtsVoicePreferences VoicePreferences = TtsVoicePreferences.FromEnumerable(SharedTtsSystem.DefaultVoicePreferences);
 
     [DataField]

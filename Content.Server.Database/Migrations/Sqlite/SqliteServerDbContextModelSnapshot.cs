@@ -1296,6 +1296,46 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.ToTable("trait", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.TtsVoicePreference", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("tts_voice_preference_id");
+
+                    b.Property<int>("PositionIndex")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("position_index");
+
+                    b.Property<int>("ProfileId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("profile_id");
+
+                    b.Property<string>("ProviderName")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("provider_name");
+
+                    b.Property<string>("VoiceId")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("voice_id");
+
+                    b.HasKey("Id")
+                        .HasName("PK_tts_voice_preference");
+
+                    b.HasIndex("ProfileId", "PositionIndex")
+                        .IsUnique();
+
+                    b.HasIndex("ProfileId", "ProviderName")
+                        .IsUnique();
+
+                    b.HasIndex("ProfileId", "VoiceId")
+                        .IsUnique();
+
+                    b.ToTable("tts_voice_preference", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.Unban", b =>
                 {
                     b.Property<int>("Id")
@@ -1962,6 +2002,18 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Navigation("Profile");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.TtsVoicePreference", b =>
+                {
+                    b.HasOne("Content.Server.Database.Profile", "Profile")
+                        .WithMany("TtsVoicePreferences")
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_tts_voice_preference_profile_profile_id");
+
+                    b.Navigation("Profile");
+                });
+
             modelBuilder.Entity("Content.Server.Database.Unban", b =>
                 {
                     b.HasOne("Content.Server.Database.Ban", "Ban")
@@ -2079,6 +2131,8 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Navigation("Loadouts");
 
                     b.Navigation("Traits");
+
+                    b.Navigation("TtsVoicePreferences");
                 });
 
             modelBuilder.Entity("Content.Server.Database.ProfileLoadoutGroup", b =>

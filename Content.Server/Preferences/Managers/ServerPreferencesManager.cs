@@ -104,12 +104,12 @@ namespace Content.Server.Preferences.Managers
 
             // SS220 tts begin
             var voicePreferences = new TtsVoicePreferences();
-            foreach (var (providerIndex, voiceId) in profile.VoicePreferences)
+            foreach (var pref in profile.TtsVoicePreferences.OrderBy(x => x.PositionIndex))
             {
-                if (!Enum.IsDefined(typeof(TtsProvider), providerIndex))
+                if (!Enum.TryParse<TtsProvider>(pref.ProviderName, out var provider))
                     continue;
 
-                voicePreferences.Add((TtsProvider)providerIndex, voiceId);
+                voicePreferences.Add(provider, pref.VoiceId);
             }
 
             voicePreferences.SoftMergeWith(SharedTtsSystem.DefaultVoicePreferences);

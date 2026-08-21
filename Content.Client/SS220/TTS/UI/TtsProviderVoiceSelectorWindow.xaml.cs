@@ -21,6 +21,9 @@ public sealed partial class TtsProviderVoiceSelectorWindow : DefaultWindow
         get => _requirementsCheckData;
         set
         {
+            if (_requirementsCheckData == value)
+                return;
+
             _requirementsCheckData = value;
             foreach (var child in ContentContainer.Children)
             {

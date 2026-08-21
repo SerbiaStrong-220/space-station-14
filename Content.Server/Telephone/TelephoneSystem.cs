@@ -132,7 +132,7 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
         if (_tts.TryGetVoicePreferences(args.MessageSource, out var voicePref))
         {
             var ttsComponent = EnsureComp<TtsComponent>(speaker);
-            ttsComponent.VoicePreferences = voicePref.Clone();
+            _tts.SetVoicePreferences(speaker, voicePref.Clone());
         }
         else
             RemComp<TtsComponent>(speaker);

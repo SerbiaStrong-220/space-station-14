@@ -10,15 +10,13 @@ namespace Content.Server.SS220.TTS;
 
 public partial class TtsSystem
 {
-    private void InitializeEntitySubscriptions()
+    private void InitializeEntityAPI()
     {
         SubscribeLocalEvent<TtsComponent, MapInitEvent>(OnInit);
         SubscribeLocalEvent<TtsComponent, EntitySpokeEvent>(OnEntitySpoke);
         SubscribeLocalEvent<RadioSpokeEvent>(OnRadioReceiveEvent);
         SubscribeLocalEvent<AnnouncementSpokeEvent>(OnAnnouncementSpoke);
         SubscribeLocalEvent<TelepathySpokeEvent>(OnTelepathySpoke);
-
-        SubscribeLocalEvent<TransformSpeechEvent>(OnTransformSpeech);
     }
 
     private void OnInit(Entity<TtsComponent> ent, ref MapInitEvent args)
@@ -26,7 +24,7 @@ public partial class TtsSystem
         if (_prototypeManager.TryIndex(ent.Comp.RandomVoicePreferences, out var randomPreferences) && randomPreferences.Preferences.Count != 0)
         {
             var preferences = _random.Pick(randomPreferences.Preferences);
-            ent.Comp.VoicePreferences = preferences.Clone();
+            SetVoicePreferences(ent.AsNullable(), preferences.Clone());
         }
     }
 
@@ -143,14 +141,5 @@ public partial class TtsSystem
         };
 
         RunTtsRequestHandle(request);
-    }
-
-    // Kirus ToDo: проверить зачем это
-    private void OnTransformSpeech(TransformSpeechEvent args)
-    {
-        if (!TtsEnabled)
-            return;
-
-        args.Message = args.Message.Replace("+", "");
     }
 }

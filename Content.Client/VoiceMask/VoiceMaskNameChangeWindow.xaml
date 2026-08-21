@@ -13,7 +13,7 @@
         <Collapsible Orientation="Vertical" HorizontalExpand="True" BodyVisible="True">
             <CollapsibleHeading Title="{Loc 'voice-mask-voice-change-info'}" />
             <CollapsibleBody>
-                <ss220-tts:TtsVoicePreferencesTab Name="TtsVoicePreferencesTab" HorizontalExpand="True"/>
+                <ss220-tts:TtsVoicePreferencesTable Name="TtsVoicePreferencesTable" HorizontalExpand="True"/>
             </CollapsibleBody>
         </Collapsible>
         <!-- SS220 tts end -->

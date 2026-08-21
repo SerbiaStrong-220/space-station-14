@@ -70,6 +70,20 @@ namespace Content.Server.Database
                 .HasIndex(p => new {HumanoidProfileId = p.ProfileId, p.TraitName})
                 .IsUnique();
 
+            // SS220 Tts begin
+            modelBuilder.Entity<TtsVoicePreference>()
+                .HasIndex(p => new { HumanoidProfileId = p.ProfileId, p.PositionIndex })
+                .IsUnique();
+
+            modelBuilder.Entity<TtsVoicePreference>()
+                .HasIndex(p => new { HumanoidProfileId = p.ProfileId, p.ProviderName })
+                .IsUnique();
+
+            modelBuilder.Entity<TtsVoicePreference>()
+                .HasIndex(p => new { HumanoidProfileId = p.ProfileId, p.VoiceId })
+                .IsUnique();
+            // SS220 Tts end
+
             modelBuilder.Entity<ProfileRoleLoadout>()
                 .HasOne(e => e.Profile)
                 .WithMany(e => e.Loadouts)
@@ -345,7 +359,7 @@ namespace Content.Server.Database
         public List<Job> Jobs { get; } = new();
         public List<Antag> Antags { get; } = new();
         public List<Trait> Traits { get; } = new();
-        public List<KeyValuePair<int, string>> VoicePreferences { get; } = []; // SS220 tts 
+        public List<TtsVoicePreference> TtsVoicePreferences { get; } = []; // SS220 tts 
         public string? SignatureData { get; set; } // ss220 add signature
         public bool TeleportAfkToCryoStorage { get; set; } = true; // SS220-teleport-to-cryo-storage
 
@@ -393,6 +407,19 @@ namespace Content.Server.Database
 
         public string TraitName { get; set; } = null!;
     }
+
+    // SS220 Tts begin
+    public class TtsVoicePreference
+    {
+        public int Id { get; set; }
+        public Profile Profile { get; set; } = null!;
+        public int ProfileId { get; set; }
+
+        public int PositionIndex { get; set; }
+        public string ProviderName { get; set; } = null!;
+        public string VoiceId { get; set; } = null!;
+    }
+    // SS220 Tts end
 
     #region Loadouts
 

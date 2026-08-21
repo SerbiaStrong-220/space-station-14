@@ -89,7 +89,7 @@ public sealed partial class TtsSystem : SharedTtsSystem
 
         InitializeSanitizer();
         InitializeFFMpeg();
-        InitializeEntitySubscriptions();
+        InitializeEntityAPI();
         InitializeNTTS();
         InitializeSilero();
     }
