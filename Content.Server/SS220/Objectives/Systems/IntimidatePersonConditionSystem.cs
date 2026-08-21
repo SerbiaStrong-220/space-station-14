@@ -38,7 +38,6 @@ public sealed partial class IntimidatePersonConditionSystem : EntitySystem
             return;
         }
 
-        //SS220 rewrite: brings from handle ssd state to catatonic
         if (!TryComp<MindExaminableComponent>(entity.Comp.TargetMob, out var mindExaminable)
             || mindExaminable.State == MindState.Catatonic)
         {
