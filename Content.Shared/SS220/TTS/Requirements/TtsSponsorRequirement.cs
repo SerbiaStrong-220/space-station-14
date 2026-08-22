@@ -12,6 +12,8 @@ public sealed partial class TtsSponsorRequirement : TtsVoiceRequirement
     [DataField(required: true)]
     public SponsorTier SponsorTier = SponsorTier.None;
 
+    private static readonly Color SponsorTierMarkupColor = Color.Yellow;
+
     public override bool Check(IEntityManager entityManager, TtsVoiceRequirementCheckData data, [NotNullWhen(false)] out FormattedMessage? reason)
     {
         reason = null;
@@ -27,7 +29,7 @@ public sealed partial class TtsSponsorRequirement : TtsVoiceRequirement
             if (sponsorInfo != null && sponsorInfo.Tiers.Contains(SponsorTier))
                 return true;
 
-            reason = FormattedMessage.FromMarkupPermissive(Loc.GetString("tts-sponsor-requirement-whitelist-not-pass", ("sponsorTier", SponsorTier.ToString())));
+            reason = FormattedMessage.FromMarkupPermissive(Loc.GetString("tts-sponsor-requirement-whitelist-not-pass", ("sponsorTier", GetSponsorTierMarkup())));
             return false;
         }
         else
@@ -35,8 +37,19 @@ public sealed partial class TtsSponsorRequirement : TtsVoiceRequirement
             if (sponsorInfo == null || !sponsorInfo.Tiers.Contains(SponsorTier))
                 return true;
 
-            reason = FormattedMessage.FromMarkupPermissive(Loc.GetString("tts-sponsor-requirement-blacklist-not-pass", ("sponsorTier", SponsorTier.ToString())));
+            reason = FormattedMessage.FromMarkupPermissive(Loc.GetString("tts-sponsor-requirement-blacklist-not-pass", ("sponsorTier", GetSponsorTierMarkup())));
             return false;
+        }
+
+        string GetSponsorTierMarkup()
+        {
+            var msg = new FormattedMessage();
+
+            msg.PushColor(SponsorTierMarkupColor);
+            msg.AddText(SponsorTier.ToString());
+            msg.Pop();
+
+            return msg.ToMarkup();
         }
     }
 }

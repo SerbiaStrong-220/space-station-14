@@ -10,7 +10,6 @@ using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.IdentityManagement;
-using Content.Shared.SS220.TTS;
 using Robust.Shared.Configuration;
 using Content.Shared.SS220.CluwneComms;
 using Robust.Shared.Timing;
@@ -28,6 +27,7 @@ using Content.Server.Station.Systems;
 using Robust.Server.GameObjects;
 using Robust.Shared.Random;
 using Content.Server.SS220.TTS;
+using Content.Shared.SS220.TTS.Prototypes;
 
 namespace Content.Server.SS220.CluwneComms;
 

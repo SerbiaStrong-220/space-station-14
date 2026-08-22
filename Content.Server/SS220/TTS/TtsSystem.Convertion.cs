@@ -1,6 +1,6 @@
-using Content.Shared.SS220.TTS;
+using Content.Shared.SS220.TTS.Prototypes;
+using Content.Shared.SS220.TTS.Systems;
 using Robust.Shared.Configuration;
-using Robust.Shared.Prototypes;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 

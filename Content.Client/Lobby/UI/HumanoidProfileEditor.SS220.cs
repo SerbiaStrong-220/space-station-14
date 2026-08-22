@@ -1,5 +1,6 @@
 using Content.Client.SS220.TTS.UI;
 using Content.Shared.SS220.TTS;
+using Content.Shared.SS220.TTS.Requirements;
 
 namespace Content.Client.Lobby.UI;
 

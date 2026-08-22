@@ -4,15 +4,14 @@
               Orientation="Vertical"
               HorizontalExpand="True"
               MouseFilter="Pass">
-    <cc:HSeparator Access="Public" Name="BeforeContentDivider" Visible="False"/>
     <Control>
         <PanelContainer Name="Background" HorizontalExpand="True">
             <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
                 <Label Name="ProviderNameLabel" Margin="5 0"/>
                 <cc:VSeparator/>
                 <Label Name="VoiceNameLabel" HorizontalExpand="True" Margin="5 0"/>
-                <Button Name="VoiceSelectorButton" Text="{Loc 'humanoid-profile-editor-voice-settings'}" Access="Public" ToggleMode="True" />
-                <Button Name="VoicePlayButton" Text="{Loc 'humanoid-profile-editor-voice-play'}" HorizontalAlignment="Right" />
+                <Button Name="VoiceSelectorButton" StyleClasses="OpenRight" Text="{Loc 'humanoid-profile-editor-voice-settings'}" Access="Public" ToggleMode="True" />
+                <Button Name="VoicePlayButton" StyleClasses="OpenLeft" Text="{Loc 'humanoid-profile-editor-voice-play'}" HorizontalAlignment="Right" />
             </BoxContainer>
         </PanelContainer>
 

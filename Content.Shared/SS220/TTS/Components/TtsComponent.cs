@@ -1,7 +1,9 @@
+using Content.Shared.SS220.TTS.Prototypes;
+using Content.Shared.SS220.TTS.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.SS220.TTS;
+namespace Content.Shared.SS220.TTS.Components;
 
 /// <summary>
 /// Apply TTS for entity chat say messages

@@ -21,10 +21,10 @@ using Robust.Shared.Replays;
 using System.Linq;
 using Content.Shared.Silicons.StationAi;
 using Content.Shared.Silicons.Borgs.Components;
-using Content.Shared.SS220.TTS;
 using Content.Shared.SS220.CCVars;
 using Robust.Shared.Configuration;
 using Content.Server.SS220.TTS;
+using Content.Shared.SS220.TTS.Components;
 
 namespace Content.Server.Telephone;
 

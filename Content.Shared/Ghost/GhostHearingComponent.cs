@@ -1,4 +1,4 @@
-using Content.Shared.SS220.TTS;
+using Content.Shared.SS220.TTS.Prototypes;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.Ghost;

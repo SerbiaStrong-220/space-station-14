@@ -22,6 +22,9 @@ using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 using Robust.Shared;
 using YamlDotNet.RepresentationModel;
+using Content.Shared.SS220.TTS.Prototypes;
+using Content.Shared.SS220.TTS.Systems;
+using Content.Shared.SS220.TTS.Requirements;
 
 namespace Content.Shared.Preferences
 {

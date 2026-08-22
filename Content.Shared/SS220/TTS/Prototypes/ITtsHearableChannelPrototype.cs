@@ -2,7 +2,7 @@
 
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.SS220.TTS;
+namespace Content.Shared.SS220.TTS.Prototypes;
 
 public interface ITtsHearableChannelPrototype : IPrototype
 {

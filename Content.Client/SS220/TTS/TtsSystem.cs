@@ -3,7 +3,10 @@ using System.IO;
 using System.Linq;
 using Content.Shared.SS220.CCVars;
 using Content.Shared.SS220.TTS;
+using Content.Shared.SS220.TTS.Prototypes;
+using Content.Shared.SS220.TTS.Systems;
 using Robust.Client.Audio;
+using Robust.Client.Player;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Components;
 using Robust.Shared.Audio.Systems;
@@ -19,8 +22,9 @@ namespace Content.Client.SS220.TTS;
 public sealed partial class TtsSystem : SharedTtsSystem
 {
     [Dependency] private IAudioManager _audioManager = default!;
-    [Dependency] private AudioSystem _audio = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private AudioSystem _audio = default!;
 
     /// <summary>
     /// Reducing the volume of the TTS when whispering.
@@ -136,7 +140,14 @@ public sealed partial class TtsSystem : SharedTtsSystem
 
     public void RequestVoiceTest(ProtoId<TtsVoicePrototype> voiceId)
     {
+        if (_player.LocalSession is not { } session)
+            return;
+
+        if (IsVoiceTestCooldowned(session))
+            return;
+
         RaiseNetworkEvent(new RequestTtsVoiceTestEvent(voiceId));
+        SetVoiceTestCooldown(session, DefaultVoiceTestRequestCooldown);
     }
 
     public void ClearAllQueuesAndStreams()

@@ -1,3 +1,5 @@
+using Content.Shared.SS220.TTS.Prototypes;
+using Content.Shared.SS220.TTS.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.Manager;
@@ -304,6 +306,7 @@ public sealed partial class TtsVoicePreferences : IReadOnlyTtsVoicePreferences, 
     }
 }
 
+[TypeSerializer]
 public sealed class TtsVoicePreferencesSerializer : ITypeSerializer<TtsVoicePreferences, MappingDataNode>, ITypeCopier<TtsVoicePreferences>
 {
     private readonly ProtoIdSerializer<TtsVoicePrototype> _protoIdSerializer = new();

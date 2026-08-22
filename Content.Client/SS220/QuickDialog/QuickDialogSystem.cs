@@ -3,7 +3,8 @@ using Content.Client.SS220.DialogWindowDescUI;
 using Content.Client.SS220.DialogWindowTtsVoicePreferencesUI;
 using Content.Shared.Administration;
 using Content.Shared.Humanoid;
-using Content.Shared.SS220.TTS;
+using Content.Shared.SS220.TTS.Components;
+using Content.Shared.SS220.TTS.Requirements;
 using Robust.Client.Player;
 
 namespace Content.Client.SS220.QuickDialog;

@@ -2,7 +2,7 @@
 using Content.Server.Administration;
 using Content.Server.Chat.Managers;
 using Content.Shared.Administration;
-using Content.Shared.SS220.TTS;
+using Content.Shared.SS220.TTS.Systems;
 using Robust.Shared.Console;
 
 namespace Content.Server.SS220.TTS.Commands;

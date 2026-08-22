@@ -6,7 +6,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
 using Content.Shared.Radio;
 using Content.Shared.Speech;
-using Content.Shared.SS220.TTS;
+using Content.Shared.SS220.TTS.Prototypes;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;

@@ -1,8 +1,10 @@
 using Content.Server.Chat.Systems;
 using Content.Shared.Chat;
 using Content.Shared.SS220.TTS;
+using Content.Shared.SS220.TTS.Components;
+using Content.Shared.SS220.TTS.Prototypes;
+using Content.Shared.SS220.TTS.Systems;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using System.Diagnostics.CodeAnalysis;
 
@@ -14,6 +16,7 @@ public partial class TtsSystem
     {
         SubscribeLocalEvent<TtsComponent, MapInitEvent>(OnInit);
         SubscribeLocalEvent<TtsComponent, EntitySpokeEvent>(OnEntitySpoke);
+
         SubscribeLocalEvent<RadioSpokeEvent>(OnRadioReceiveEvent);
         SubscribeLocalEvent<AnnouncementSpokeEvent>(OnAnnouncementSpoke);
         SubscribeLocalEvent<TelepathySpokeEvent>(OnTelepathySpoke);

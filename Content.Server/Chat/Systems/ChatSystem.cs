@@ -46,6 +46,8 @@ using Content.Shared.SS220.Language.Systems;
 using Content.Shared.SS220.TTS;
 using Content.Shared.FixedPoint;
 using Content.Shared.GameTicking;
+using Content.Shared.SS220.TTS.Prototypes;
+using Content.Shared.SS220.TTS.Systems;
 
 namespace Content.Server.Chat.Systems;
 

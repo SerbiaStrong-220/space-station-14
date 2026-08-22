@@ -4,6 +4,7 @@ using Content.Shared.Radio;
 using Content.Shared.SS220.GhostHearing;
 using Content.Shared.SS220.Telepathy;
 using Content.Shared.SS220.TTS;
+using Content.Shared.SS220.TTS.Prototypes;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 

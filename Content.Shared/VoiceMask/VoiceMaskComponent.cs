@@ -1,6 +1,7 @@
 using Content.Shared.Preferences;
 using Content.Shared.Speech;
 using Content.Shared.SS220.TTS;
+using Content.Shared.SS220.TTS.Systems;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.VoiceMask;

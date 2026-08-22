@@ -3,6 +3,7 @@ using Content.Shared.Dataset;
 using Content.Shared.GameTicking;
 using Content.Shared.SS220.CCVars;
 using Content.Shared.SS220.TTS;
+using Content.Shared.SS220.TTS.Systems;
 using Microsoft.IO;
 using Prometheus;
 using Robust.Server.Player;
@@ -15,7 +16,6 @@ using System.Collections.Concurrent;
 using System.Collections.Specialized;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -101,6 +101,9 @@ public sealed partial class TtsSystem : SharedTtsSystem
 
     private void OnRequestTtsVoiceTest(RequestTtsVoiceTestEvent ev, EntitySessionEventArgs args)
     {
+        if (IsVoiceTestCooldowned(args.SenderSession))
+            return;
+
         if (!_prototypeManager.TryIndex(ev.VoiceId, out var voice))
             return;
 
@@ -112,6 +115,7 @@ public sealed partial class TtsSystem : SharedTtsSystem
         };
 
         RunTtsRequestHandle(request);
+        SetVoiceTestCooldown(args.SenderSession, DefaultVoiceTestRequestCooldown);
     }
 
     private void OnReceiveTtsCVarChanged(ReceiveTtsCVarChanged msg, EntitySessionEventArgs args)

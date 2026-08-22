@@ -1,7 +1,8 @@
 using Content.Shared.Implants;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
-using Content.Shared.SS220.TTS;
+using Content.Shared.SS220.TTS.Components;
+using Content.Shared.SS220.TTS.Systems;
 using Content.Shared.SS220.VoiceMask;
 using Content.Shared.VoiceMask;
 

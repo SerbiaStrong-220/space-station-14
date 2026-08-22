@@ -1,6 +1,6 @@
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.SS220.TTS;
+namespace Content.Shared.SS220.TTS.Prototypes;
 
 [Prototype]
 public sealed partial class TtsVoiceCategoryPrototype : IPrototype, IEquatable<TtsVoiceCategoryPrototype>
@@ -18,6 +18,9 @@ public sealed partial class TtsVoiceCategoryPrototype : IPrototype, IEquatable<T
 
     [DataField]
     public Color Color = Color.White.WithAlpha(0.375f);
+
+    [DataField]
+    public int SortPriority;
 
     public override bool Equals(object? obj)
     {

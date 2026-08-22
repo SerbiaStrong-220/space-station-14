@@ -1,16 +1,21 @@
 using Content.Shared.Inventory;
 using Content.Shared.SS220.CCVars;
+using Content.Shared.SS220.TTS.Components;
+using Content.Shared.SS220.TTS.Prototypes;
+using Content.Shared.SS220.TTS.Requirements;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Timing;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Content.Shared.SS220.TTS;
+namespace Content.Shared.SS220.TTS.Systems;
 
 public abstract partial class SharedTtsSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public const string TtsCommandsPrefix = "tts.";
 
@@ -39,6 +44,14 @@ public abstract partial class SharedTtsSystem : EntitySystem
         _cfg.OnValueChanged(CCVars220.TtsSileroEnabled, v => UpdateProviderEnabled(TtsProvider.Silero, v), true);
 
         InitializeVoiceCaches();
+        InitializeVoiceTest();
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        UpdateVoiceTest();
     }
 
     public void SetVoicePreferences(Entity<TtsComponent?> entity, TtsVoicePreferences preferences, TtsVoiceRequirementCheckData? checkData = null)

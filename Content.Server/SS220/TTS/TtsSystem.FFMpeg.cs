@@ -1,6 +1,6 @@
 using Content.Server.SS220.TTS.FFMPegArguments;
 using Content.Shared.SS220.CCVars;
-using Content.Shared.SS220.TTS;
+using Content.Shared.SS220.TTS.Systems;
 using FFMpegCore;
 using FFMpegCore.Pipes;
 using Microsoft.IO;

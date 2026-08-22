@@ -3,11 +3,11 @@ using Content.Server.Hands.Systems;
 using Content.Server.Speech;
 using Content.Server.Speech.Components;
 using Content.Server.SS220.Language;
-using Content.Server.SS220.TTS; // SS220 Tape recorder TTS
+using Content.Server.SS220.TTS;
 using Content.Shared.Chat;
 using Content.Shared.Paper;
 using Content.Shared.Speech;
-using Content.Shared.SS220.TTS; // SS220 Tape recorder TTS
+using Content.Shared.SS220.TTS.Components;
 using Content.Shared.TapeRecorder;
 using Content.Shared.TapeRecorder.Components;
 using Content.Shared.TapeRecorder.Events;

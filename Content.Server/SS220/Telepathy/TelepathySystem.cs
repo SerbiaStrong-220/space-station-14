@@ -7,6 +7,7 @@ using Content.Shared.Database;
 using Content.Shared.GameTicking;
 using Content.Shared.SS220.Telepathy;
 using Content.Shared.SS220.TTS;
+using Content.Shared.SS220.TTS.Components;
 using Content.Shared.SS220.UpdateChannels;
 using Robust.Shared.Network;
 using Robust.Shared.Player;

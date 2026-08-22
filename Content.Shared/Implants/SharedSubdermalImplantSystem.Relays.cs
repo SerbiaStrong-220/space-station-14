@@ -4,6 +4,7 @@ using Content.Shared.Implants.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs;
 using Content.Shared.SS220.TTS;
+using Content.Shared.SS220.TTS.Systems;
 using Content.Shared.Store;
 
 namespace Content.Shared.Implants;

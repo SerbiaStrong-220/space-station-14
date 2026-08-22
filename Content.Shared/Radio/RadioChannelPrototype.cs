@@ -1,5 +1,5 @@
 using Content.Shared.FixedPoint;
-using Content.Shared.SS220.TTS;
+using Content.Shared.SS220.TTS.Prototypes;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Radio;

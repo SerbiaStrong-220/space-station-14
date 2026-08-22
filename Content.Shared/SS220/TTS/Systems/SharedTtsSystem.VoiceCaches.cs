@@ -1,8 +1,9 @@
+using Content.Shared.SS220.TTS.Prototypes;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using System.Linq;
 
-namespace Content.Shared.SS220.TTS;
+namespace Content.Shared.SS220.TTS.Systems;
 
 public partial class SharedTtsSystem
 {

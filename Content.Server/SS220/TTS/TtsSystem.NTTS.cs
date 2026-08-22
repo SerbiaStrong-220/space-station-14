@@ -1,5 +1,6 @@
 using Content.Shared.SS220.CCVars;
 using Content.Shared.SS220.TTS;
+using Content.Shared.SS220.TTS.Systems;
 using Robust.Shared.Configuration;
 using System.Collections.Concurrent;
 using System.Collections.Specialized;

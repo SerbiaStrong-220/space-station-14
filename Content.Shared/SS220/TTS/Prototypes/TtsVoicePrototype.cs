@@ -1,8 +1,8 @@
-using Content.Shared.Humanoid;
 using Content.Shared.SS220.TTS.Requirements;
+using Content.Shared.SS220.TTS.Systems;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.SS220.TTS;
+namespace Content.Shared.SS220.TTS.Prototypes;
 
 /// <summary>
 /// Prototype represent available TTS voices

@@ -3,10 +3,13 @@
                 HorizontalExpand="True"
                 MouseFilter="Stop">
     <PanelContainer Name="ContentPanel">
-        <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
-            <Label Name="NameLabel" HorizontalExpand="True"/>
-            <Button Name="SelectButton" Text="Выбрать"/>
-            <Button Name="PlayButton" Text="{Loc 'humanoid-profile-editor-voice-play'}" HorizontalAlignment="Right"/>
+        <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+            <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                <Label Name="NameLabel" HorizontalExpand="True" Access="Public"/>
+                <Button Name="SelectButton" StyleClasses="OpenRight" Text="Выбрать" />
+                <Button  Name="PlayButton" StyleClasses="OpenLeft" Text="{Loc 'humanoid-profile-editor-voice-play'}" HorizontalAlignment="Right"/>
+            </BoxContainer>
+            <controls:HLine Name="DividerLine" Thickness="2" Margin="0 3" HorizontalExpand="True" Access="Public"/>
         </BoxContainer>
     </PanelContainer>
 

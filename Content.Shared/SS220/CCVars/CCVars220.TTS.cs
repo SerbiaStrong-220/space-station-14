@@ -71,6 +71,9 @@ public sealed partial class CCVars220
     public static readonly CVarDef<int> MaxCharInTTSAnnounceMessage =
         CVarDef.Create("tts.max_char_announce_message", 100 * 4, CVar.SERVERONLY | CVar.ARCHIVE);
 
+    public static readonly CVarDef<float> TtsVoiceTestRequestCooldown =
+        CVarDef.Create("tts.voice_test_request_cooldown", 5f, CVar.SERVER | CVar.REPLICATED | CVar.NOTIFY);
+
     #region ClientSettings
     /// <summary>
     /// Default volume setting of TTS sound

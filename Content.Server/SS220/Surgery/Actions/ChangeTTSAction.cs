@@ -4,6 +4,7 @@ using Content.Server.Administration;
 using Content.Server.SS220.TTS;
 using Content.Shared.SS220.Surgery.Graph;
 using Content.Shared.SS220.TTS;
+using Content.Shared.SS220.TTS.Requirements;
 using Robust.Shared.Player;
 
 namespace Content.Server.SS220.Surgery.Action;
