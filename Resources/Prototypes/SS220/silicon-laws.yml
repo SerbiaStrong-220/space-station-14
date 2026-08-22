@@ -146,3 +146,273 @@
   - Quarantine3
   - Quarantine4
   obeysTo: laws-owner-station
+
+- type: siliconLaw
+  id: Reporter1
+  order: 1
+  lawString: law-Reporter-1
+
+- type: siliconLaw
+  id: Reporter2
+  order: 2
+  lawString: law-Reporter-2
+
+- type: siliconLaw
+  id: Reporter3
+  order: 3
+  lawString: law-Reporter-3
+
+- type: siliconLaw
+  id: Reporter4
+  order: 4
+  lawString: law-Reporter-4
+
+- type: siliconLawset
+  id: ReporterLawset
+  name: law-Reporter-name
+  laws:
+  - Reporter1
+  - Reporter2
+  - Reporter3
+  - Reporter4
+  obeysTo: laws-owner-station
+
+- type: siliconLaw
+  id: Petrovich1
+  order: 1
+  lawString: law-Petrovich-1
+
+- type: siliconLaw
+  id: Petrovich2
+  order: 2
+  lawString: law-Petrovich-2
+
+- type: siliconLaw
+  id: Petrovich3
+  order: 3
+  lawString: law-Petrovich-3
+
+- type: siliconLaw
+  id: Petrovich4
+  order: 4
+  lawString: law-Petrovich-4
+
+- type: siliconLaw
+  id: Petrovich5
+  order: 5
+  lawString: law-Petrovich-5
+
+- type: siliconLawset
+  id: PetrovichLawset
+  name: law-Petrovich-name
+  laws:
+  - Petrovich1
+  - Petrovich2
+  - Petrovich3
+  - Petrovich4
+  - Petrovich5
+  obeysTo: laws-owner-station
+
+- type: siliconLaw
+  id: Renter1
+  order: 1
+  lawString: law-Renter-1
+
+- type: siliconLaw
+  id: Renter2
+  order: 2
+  lawString: law-Renter-2
+
+- type: siliconLaw
+  id: Renter3
+  order: 3
+  lawString: law-Renter-3
+
+- type: siliconLaw
+  id: Renter4
+  order: 4
+  lawString: law-Renter-4
+
+- type: siliconLawset
+  id: RenterLawset
+  name: law-Renter-name
+  laws:
+  - Renter1
+  - Renter2
+  - Renter3
+  - Renter4
+  obeysTo: laws-owner-station
+
+- type: siliconLaw
+  id: Clown1
+  order: 1
+  lawString: law-Clown-1
+
+- type: siliconLaw
+  id: Clown2
+  order: 2
+  lawString: law-Clown-2
+
+- type: siliconLaw
+  id: Clown3
+  order: 3
+  lawString: law-Clown-3
+
+- type: siliconLaw
+  id: Clown4
+  order: 4
+  lawString: law-Clown-4
+
+- type: siliconLaw
+  id: Clown5
+  order: 5
+  lawString: law-Clown-5
+
+- type: siliconLaw
+  id: Clown6
+  order: 6
+  lawString: law-Clown-6
+
+- type: siliconLawset
+  id: ClownLawset
+  name: law-Clown-name
+  laws:
+  - Clown1
+  - Clown2
+  - Clown3
+  - Clown4
+  - Clown5
+  - Clown6
+  obeysTo: laws-owner-station
+
+- type: siliconLaw
+  id: Teacher1
+  order: 1
+  lawString: law-Teacher-1
+
+- type: siliconLaw
+  id: Teacher2
+  order: 2
+  lawString: law-Teacher-2
+
+- type: siliconLaw
+  id: Teacher3
+  order: 3
+  lawString: law-Teacher-3
+
+- type: siliconLaw
+  id: Teacher4
+  order: 4
+  lawString: law-Teacher-4
+
+- type: siliconLaw
+  id: Teacher5
+  order: 5
+  lawString: law-Teacher-5
+
+- type: siliconLawset
+  id: TeacherLawset
+  name: law-Teacher-name
+  laws:
+  - Teacher1
+  - Teacher2
+  - Teacher3
+  - Teacher4
+  - Teacher5
+  obeysTo: laws-owner-station
+
+- type: siliconLaw
+  id: Mother1
+  order: 1
+  lawString: law-Mother-1
+
+- type: siliconLaw
+  id: Mother2
+  order: 2
+  lawString: law-Mother-2
+
+- type: siliconLaw
+  id: Mother3
+  order: 3
+  lawString: law-Mother-3
+
+- type: siliconLaw
+  id: Mother4
+  order: 4
+  lawString: law-Mother-4
+
+- type: siliconLaw
+  id: Mother5
+  order: 5
+  lawString: law-Mother-5
+
+- type: siliconLaw
+  id: Mother6
+  order: 6
+  lawString: law-Mother-6
+
+- type: siliconLaw
+  id: Mother7
+  order: 7
+  lawString: law-Mother-7
+
+- type: siliconLaw
+  id: Mother8
+  order: 8
+  lawString: law-Mother-8
+
+- type: siliconLawset
+  id: MotherLawset
+  name: law-Mother-name
+  laws:
+  - Mother1
+  - Mother2
+  - Mother3
+  - Mother4
+  - Mother5
+  - Mother6
+  - Mother7
+  - Mother8
+  obeysTo: laws-owner-station
+
+- type: siliconLaw
+  id: WaffleHouseHost1
+  order: 1
+  lawString: law-WaffleHouseHost-1
+
+- type: siliconLaw
+  id: WaffleHouseHost2
+  order: 2
+  lawString: law-WaffleHouseHost-2
+
+- type: siliconLaw
+  id: WaffleHouseHost3
+  order: 3
+  lawString: law-WaffleHouseHost-3
+
+- type: siliconLaw
+  id: WaffleHouseHost4
+  order: 4
+  lawString: law-WaffleHouseHost-4
+
+- type: siliconLaw
+  id: WaffleHouseHost5
+  order: 5
+  lawString: law-WaffleHouseHost-5
+
+- type: siliconLaw
+  id: WaffleHouseHost6
+  order: 6
+  lawString: law-WaffleHouseHost-6
+
+- type: siliconLawset
+  id: WaffleHouseHostLawset
+  name: law-WaffleHouseHost-name
+  laws:
+  - WaffleHouseHost1
+  - WaffleHouseHost2
+  - WaffleHouseHost3
+  - WaffleHouseHost4
+  - WaffleHouseHost5
+  - WaffleHouseHost6
+  obeysTo: laws-owner-station

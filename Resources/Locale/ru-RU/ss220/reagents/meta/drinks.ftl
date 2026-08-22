@@ -28,3 +28,6 @@ reagent-name-skooma = скума
 reagent-desc-skooma = Не давать таяранам. Не говорить о ней таяранам.
 reagent-name-catariajuice = мятный сок
 reagent-desc-catariajuice = Притягивает кошек.
+reagent-name-YotunBreath = соус "Дыхание Ётуна"
+reagent-desc-YotunBreath = Этот соус пропитан дыханием вечного холода. Он способен проморозить вас до костей.
+yotun-breath-effect-freeze = Вас пробирает ледяной озноб, вы ощущаете дыхание Ётуна!

@@ -35,7 +35,7 @@
   - type: IntimidatePersonCondition
     startDescription: objective-condition-intimidate-target-brute-desc
     successDescription: objective-condition-intimidate-target-brute-desc-success
-    sSDDescription: objective-condition-intimidate-target-brute-desc-ssd
+    catatonicDescription: objective-condition-intimidate-target-brute-desc-catatonic
     damageTrackerSpecifier:
       damageGroup: Brute
       allowedState: [Alive]
@@ -54,7 +54,7 @@
   - type: IntimidatePersonCondition
     startDescription: objective-condition-intimidate-target-burn-desc
     successDescription: objective-condition-intimidate-target-burn-desc-success
-    sSDDescription: objective-condition-intimidate-target-burn-desc-ssd
+    catatonicDescription: objective-condition-intimidate-target-burn-desc-catatonic
     damageTrackerSpecifier:
       damageGroup: Burn
       allowedState: [Alive]
@@ -73,7 +73,7 @@
   - type: IntimidatePersonCondition
     startDescription: objective-condition-intimidate-target-toxin-desc
     successDescription: objective-condition-intimidate-target-toxin-desc-success
-    sSDDescription: objective-condition-intimidate-target-toxin-desc-ssd
+    catatonicDescription: objective-condition-intimidate-target-toxin-desc-catatonic
     filter:
     - !type:SpeciesMindFilter
       species:
