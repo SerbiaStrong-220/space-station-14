@@ -280,7 +280,7 @@ public sealed partial class IpcSystem : SharedIpcSystem
     }
 
     /// <summary>
-    /// Checks if the IPC's battery has more than the critical charge threshold (1%).
+    /// Checks if the IPC battery has more than the critical charge threshold (1%).
     /// Used to gate functionality that should stop working when the battery is nearly empty
     /// (movement speed, radio).
     /// </summary>
