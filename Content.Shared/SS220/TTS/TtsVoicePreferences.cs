@@ -353,11 +353,11 @@ public sealed class TtsVoicePreferencesSerializer : ITypeSerializer<TtsVoicePref
                     ttsVoice.Provider != provider)
                 {
                     valueValidationNode = new ErrorNode(value,
-                        $"Provider mismatch: key '{provider}' does not match prototype '{value.Value}' with provider '{ttsVoice.Provider}'");
+                        $"Provider mismatch: key '{provider}' does not match prototype '{value.Value}' with provider '{ttsVoice.Provider}'.");
                 }
             }
             else
-                keyValidationNode = new ErrorNode(node.GetKeyNode(key), $"Failed to parse Provider: {key}");
+                keyValidationNode = new ErrorNode(node.GetKeyNode(key), $"Failed to parse \"{key}\" as {nameof(TtsProvider)}.");
 
             dict.Add(keyValidationNode, valueValidationNode);
         }
