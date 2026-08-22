@@ -28,6 +28,11 @@ hidden-desc-DeathRattleImplanterInterdyne-research = [color=#D381C9]Внутри
 hidden-desc-DeathRattleImplanterInterdyne-security = [color=#009ae1]Внутри имплантера находится имплант "Предсмертный хрип" гражданского образца.[/color]
 hidden-desc-DeathRattleImplanterInterdyne-syndicate = [color=#e31735]Внутри имплант "Предсмертный хрип" гражданского образца. Сообщит в защищенный радиоканал, если носитель окажется в критическом состоянии или погибнет.[/color]
 
+hidden-desc-DeathRattleImplantStation-medical = [color=#52B4E9]Сверив серийные номера, вы понимаете, что внутри легальный, сертифицированный имплант "Предсмертный хрип".[/color]
+hidden-desc-DeathRattleImplantStation-research = [color=#D381C9]Внутри находится имплант "Предсмертный хрип" станционного образца.[/color]
+hidden-desc-DeathRattleImplantStation-security = [color=#009ae1]Внутри находится имплант "Предсмертный хрип" станционного образца.[/color]
+hidden-desc-DeathRattleImplantStation-syndicate = [color=#e31735]Внутри имплант "Предсмертный хрип" станционного образца. Сообщит в выбранный радиоканал, если носитель окажется в критическом состоянии или погибнет.[/color]
+
 # Regular decriptions below
 
 ent-ThermalVisorImplanter = { ent-Implanter }
