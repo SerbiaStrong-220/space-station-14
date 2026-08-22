@@ -19,14 +19,14 @@ public sealed partial class RaveSystem : SharedRaveSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RaveComponent, ComponentAdd>(OnAdded);
+        SubscribeLocalEvent<RaveComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<RaveComponent, ComponentRemove>(OnRemoved);
         SubscribeLocalEvent<RaveComponent, LocalPlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<RaveComponent, LocalPlayerDetachedEvent>(OnPlayerDetached);
         SubscribeLocalEvent<RaveComponent, OnChemRemoveHallucinationsEvent>(OnVisionCleansed);
     }
 
-    private void OnAdded(Entity<RaveComponent> entity, ref ComponentAdd args)
+    private void OnInit(Entity<RaveComponent> entity, ref ComponentInit args)
     {
         EnsureEffect(entity);
     }

@@ -1,0 +1,32 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: VoidPortalGate
+  suffix: CultYogg
+  name: Gates from the void
+  description: A gate that allows one to escape beyond the Void.
+  components:
+  - type: Clickable
+  - type: PointLight
+    radius: 3.0
+    energy: 1.5
+    color: "#9dc8c8"
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.55,-0.4,0.55,0.4"
+        density: 1000
+        layer:
+        - WallLayer
+  - type: Sprite
+    sprite: SS220/Structures/CultYogg/void_portal_gate.rsi
+    layers:
+    - state: base
+    - state: light
+      shader: unshaded
+    drawdepth: Overdoors
+    offset: "0.0,0.5"

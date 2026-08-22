@@ -1,0 +1,74 @@
+{
+    "version": 1,
+    "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+    "copyright": "By ci24v3n for SS220",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "fruit",
+            "delays": [
+                [
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2
+                ]
+            ]
+        },
+        {
+            "name": "inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "inhand-right",
+            "directions": 4
+        },
+        {
+            "name": "seed"
+        },
+        {
+            "name": "dead"
+        },
+        {
+            "name": "plant"
+        },
+        {
+            "name": "plant_0"
+        },
+        {
+            "name": "plant_1"
+        },
+        {
+            "name": "plant_2"
+        },
+        {
+            "name": "plant_3"
+        },
+        {
+            "name": "plant_4"
+        },
+        {
+            "name": "plant_5"
+        },
+        {
+            "name": "plant_6"
+        },
+        {
+            "name": "growth1"
+        },
+        {
+            "name": "growth2"
+        },
+        {
+            "name": "growth3"
+        }
+    ]
+}

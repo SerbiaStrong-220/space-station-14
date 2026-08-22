@@ -125,9 +125,6 @@ public sealed partial class InteractionTeleportSystem : EntitySystem
 
     private void SendTeleporting(Entity<InteractionTeleportComponent> ent, EntityUid target, EntityUid user)
     {
-        var beforeEv = new TeleportTargetEvent(target, user);
-        RaiseLocalEvent(ent, ref beforeEv);
-
         var ev = new TeleportTargetEvent(target, user);
         RaiseLocalEvent(ent, ref ev);
     }
