@@ -11,7 +11,6 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Input;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Client.SS220.TTS.UI;
@@ -96,52 +95,11 @@ public sealed partial class TtsVoicePreferencesTable : BoxContainer
         Refresh();
     }
 
-    protected override void FrameUpdate(FrameEventArgs args)
-    {
-        //if (_draggingEntry != null && _draggingEntry.Parent != null)
-        //{
-        //    const float swapThreshold = 5f;
-
-        //    var entryBox = _draggingEntry.SizeBox;
-        //    var entryMousePos = _ui.MousePositionScaled.Position - _draggingEntry.GlobalPosition;
-
-        //    var indexDelta = 0;
-        //    if (entryMousePos.Y < entryBox.Top - swapThreshold)
-        //        indexDelta = -1;
-        //    else if (entryMousePos.Y > entryBox.Bottom + swapThreshold)
-        //        indexDelta = 1;
-
-        //    if (indexDelta == 0)
-        //        return;
-
-        //    var oldIndex = _draggingEntry.GetPositionInParent();
-        //    var newIndex = Math.Clamp(oldIndex + indexDelta, 0, EntriesContainer.ChildCount - 1);
-
-        //    if (newIndex == oldIndex)
-        //        return;
-
-        //    var childOnNewIndex = EntriesContainer.GetChild(newIndex);
-
-        //    _draggingEntry.SetPositionInParent(newIndex);
-        //    childOnNewIndex.SetPositionInParent(oldIndex);
-
-        //    if (newIndex == 0)
-        //    {
-        //        _draggingEntry.BeforeContentDivider.Visible = false;
-
-        //        if (childOnNewIndex is TtsVoicePreferencesTableEntry entry)
-        //            entry.BeforeContentDivider.Visible = true;
-        //    }
-
-        //    EntriesContainer.InvalidateMeasure();
-        //}
-    }
-
     protected override void MouseExited()
     {
         base.MouseExited();
 
-        var hoveredControl = _ui.MouseGetControl(_input.MouseScreenPosition);
+        var hoveredControl = UserInterfaceTools.GetControlUnderMouse(_ui, _input);
         if (hoveredControl != null && hoveredControl.IsChildOf(this, recurcive: true))
             return;
 
@@ -153,26 +111,6 @@ public sealed partial class TtsVoicePreferencesTable : BoxContainer
         base.MouseMove(args);
 
         UpdateDraggingEntryPosition();
-    }
-
-    private void UpdateDraggingEntryPosition()
-    {
-        if (_draggingEntry != null && _draggingEntry.Parent != null)
-        {
-            var hoveredControl = _ui.MouseGetControl(_input.MouseScreenPosition);
-            if (hoveredControl == _draggingEntry ||
-                hoveredControl is not TtsVoicePreferencesTableEntry ||
-                !hoveredControl.IsChildOf(this, recurcive: true))
-                return;
-
-            var curIndex = _draggingEntry.GetPositionInParent();
-            var newIndex = hoveredControl.GetPositionInParent();
-
-            _draggingEntry.SetPositionInParent(newIndex);
-            hoveredControl.SetPositionInParent(curIndex);
-
-            EntriesContainer.InvalidateMeasure();
-        }
     }
 
     protected override void ExitedTree()
@@ -269,6 +207,26 @@ public sealed partial class TtsVoicePreferencesTable : BoxContainer
 
         entry.SetHighlightColor(highlightColor);
         entry.SetTooltipMsg(tooltipMsg);
+    }
+
+    private void UpdateDraggingEntryPosition()
+    {
+        if (_draggingEntry != null && _draggingEntry.Parent != null)
+        {
+            var hoveredControl = UserInterfaceTools.GetControlUnderMouse(_ui, _input);
+            if (hoveredControl == _draggingEntry ||
+                hoveredControl is not TtsVoicePreferencesTableEntry ||
+                !hoveredControl.IsChildOf(this, recurcive: true))
+                return;
+
+            var curIndex = _draggingEntry.GetPositionInParent();
+            var newIndex = hoveredControl.GetPositionInParent();
+
+            _draggingEntry.SetPositionInParent(newIndex);
+            hoveredControl.SetPositionInParent(curIndex);
+
+            EntriesContainer.InvalidateMeasure();
+        }
     }
 
     private void OpenSelectorWindow(TtsProvider provider)

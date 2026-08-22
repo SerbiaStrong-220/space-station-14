@@ -11,7 +11,7 @@
                 <cc:VSeparator/>
                 <Label Name="VoiceNameLabel" HorizontalExpand="True" Margin="5 0"/>
                 <Button Name="VoiceSelectorButton" StyleClasses="OpenRight" Text="{Loc 'humanoid-profile-editor-voice-settings'}" Access="Public" ToggleMode="True" />
-                <Button Name="VoicePlayButton" StyleClasses="OpenLeft" Text="{Loc 'humanoid-profile-editor-voice-play'}" HorizontalAlignment="Right" />
+                <Button Name="VoicePlayButton" StyleClasses="OpenLeft" Text="{Loc 'ui-humanoid-profile-editor-voice-play'}" HorizontalAlignment="Right" />
             </BoxContainer>
         </PanelContainer>
 

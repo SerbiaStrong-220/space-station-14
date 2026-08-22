@@ -363,7 +363,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         Color? colorOverride = null,
         bool playTTS = true, // SS220-fix-double-event-announce
         bool playPrerecordedSound = true, // SS220-fix-double-event-announce
-        ProtoId<TtsVoicePrototype>? voiceId = null) // SS2220-tts
+        ProtoId<TtsVoicePrototype>? voiceId = null) // SS220 tts
     {
         sender ??= Loc.GetString("chat-manager-sender-announcement");
 
@@ -403,7 +403,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         Color? colorOverride = null,
         bool playTTS = true, // SS220-fix-double-event-announce
         bool playPrerecordedSound = true, // SS220-fix-double-event-announce
-        ProtoId<TtsVoicePrototype>? voiceId = null) // SS2220-tts
+        ProtoId<TtsVoicePrototype>? voiceId = null) // SS220 tts
     {
         sender ??= Loc.GetString("chat-manager-sender-announcement");
 
@@ -438,7 +438,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         Color? colorOverride = null,
         bool playTTS = true, // SS220-fix-double-event-announce
         bool playPrerecordedSound = true, // SS220-fix-double-event-announce
-        ProtoId<TtsVoicePrototype>? voiceId = null) // SS2220-tts
+        ProtoId<TtsVoicePrototype>? voiceId = null) // SS220 tts
     {
         sender ??= Loc.GetString("chat-manager-sender-announcement");
 

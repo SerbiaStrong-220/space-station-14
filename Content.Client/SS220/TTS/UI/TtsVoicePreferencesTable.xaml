@@ -15,7 +15,9 @@
         </BoxContainer>
         </PanelContainer>
         <cc:HSeparator/>
-        <BoxContainer Name="EntriesContainer" Orientation="Vertical" HorizontalExpand="True"/>
+        <BoxContainer Name="EntriesContainer" Orientation="Vertical" HorizontalExpand="True">
+            <!-- Added by code -->
+        </BoxContainer>
         <cc:HSeparator/>
     </BoxContainer>
     <cc:VSeparator/>

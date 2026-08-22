@@ -36,7 +36,6 @@ namespace Content.Shared.Preferences
     public sealed partial class HumanoidCharacterProfile
     {
         public static readonly ProtoId<SpeciesPrototype> DefaultSpecies = "Human";
-        public static readonly ProtoId<TtsVoicePrototype> DefaultVoice = "father_grigori"; // SS220-add-tts
         private static readonly Regex RestrictedNameRegex = new(@"[^А-Яа-яёЁ0-9' -]"); // Corvax: Only cyrillic names
         private static readonly Regex ICNameCaseRegex = new(@"^(?<word>\w)|\b(?<word>\w)(?=\w*$)");
 
