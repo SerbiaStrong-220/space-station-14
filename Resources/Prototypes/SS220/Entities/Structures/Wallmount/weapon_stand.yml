@@ -28,6 +28,9 @@
           MaterialWoodPlank1:
             min: 1
             max: 4
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Glass
   - type: Construction
     graph: WeaponStand
     node: WeaponStandNode
