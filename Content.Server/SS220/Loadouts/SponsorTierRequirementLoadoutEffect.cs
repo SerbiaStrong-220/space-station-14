@@ -16,7 +16,18 @@ public sealed partial class SponsorTierRequirementLoadoutEffect : SharedSponsorT
     public override bool Validate(HumanoidCharacterProfile profile, RoleLoadout loadout, ICommonSession? session, IDependencyCollection collection, [NotNullWhen(false)] out FormattedMessage? reason)
     {
         reason = new FormattedMessage();
-        if (session == null || session.ContentData()?.SponsorInfo?.Tiers is not { } playerTiers)
+        var contentData = session?.ContentData();
+        if (contentData == null)
+        {
+            reason = FormattedMessage.Empty;
+            return false;
+        }
+
+        // Fail open: the fetch failed, so "not a sponsor" is indistinguishable from "could not ask".
+        if (contentData.SponsorInfoFetchFailed)
+            return true;
+
+        if (contentData.SponsorInfo?.Tiers is not { } playerTiers)
         {
             reason = FormattedMessage.Empty;
             return false;
