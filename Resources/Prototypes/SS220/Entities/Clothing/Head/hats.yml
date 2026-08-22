@@ -483,6 +483,19 @@
     - HamsterWearable
     - WhitelistChameleon
 
+  # Священник
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatFollower
+  name: follower's hat
+  description: It's heaven's time.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/chaplain_hat_follower.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/chaplain_hat_follower.rsi
+
 # Служба безопасности
 
   # ГСБ
