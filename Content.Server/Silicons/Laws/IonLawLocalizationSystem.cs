@@ -18,6 +18,9 @@ public sealed class IonLawLocalizationSystem : EntitySystem
         // var culture = _loc.DefaultCulture;
         foreach (var culture in _loc.GetFoundCultures())
         {
+            if (!_loc.HasCulture(culture))
+                continue;
+
             if (culture == null)
             {
                 _sawmill.Error("Culture was null when trying to generate Ion Law");
