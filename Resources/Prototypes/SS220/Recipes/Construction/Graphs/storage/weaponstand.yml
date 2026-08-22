@@ -9,6 +9,9 @@
       - material: WoodPlank
         amount: 5
         doAfter: 2
+      - material: Steel
+        amount: 2
+        doAfter: 2
 
   - node: WeaponStandNode
     entity: WeaponStand
@@ -22,7 +25,7 @@
         container: "ItemCabinet"
       completed:
       - !type:SpawnPrototype
-        prototype: SheetSteel1
-        amount: 2
+        prototype: MaterialWoodPlank1
+        amount: 3
       - !type:EmptyAllContainers
       - !type:DeleteEntity

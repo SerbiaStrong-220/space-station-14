@@ -28,6 +28,9 @@
           MaterialWoodPlank1:
             min: 1
             max: 4
+  - type: Construction
+    graph: WeaponStand
+    node: WeaponStandNode
   - type: Sprite
     sprite: /Textures/SS220/Structures/Wallmounts/weapon_stand.rsi
     layers:
@@ -47,11 +50,17 @@
         whitelist:
           tags:
           - WeaponShotgunDoubleBarreled
-  - type: AccessReader
-    access: [["Security"], ["Bar"]]
 
 - type: entity
   parent: WeaponStand
+  id: WeaponStandClosed
+  suffix: Bar access
+  components:
+  - type: AccessReader
+    access: [["Bar"]]
+
+- type: entity
+  parent: WeaponStandClosed
   id: WeaponStandOpen
   suffix: Open
   components:
@@ -61,14 +70,14 @@
     locked: false
 
 - type: entity
-  parent: WeaponStand
+  parent: WeaponStandClosed
   id: WeaponStandFilled
   suffix: Filled
   components:
   - type: ContainerFill
     containers:
       ItemCabinet:
-      - WeaponShotgunDoubleBarreled
+      - WeaponShotgunDoubleBarreledRubber
 
 - type: entity
   parent: [WeaponStandFilled, WeaponStandOpen]

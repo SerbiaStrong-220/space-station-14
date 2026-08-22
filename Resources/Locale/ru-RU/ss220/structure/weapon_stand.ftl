@@ -1,5 +1,7 @@
 ent-WeaponStand = стойка для двустволки
     .desc = Изящная стойка для того, чтобы все видели, владельцем какого красивого оружия вы являетесь.
+ent-WeaponStandClosed = { ent-WeaponStand }
+    .suffix = Доступ бар
 ent-WeaponStandOpen = { ent-WeaponStand }
     .desc = { ent-WeaponStand.desc }
     .suffix = Открытый
