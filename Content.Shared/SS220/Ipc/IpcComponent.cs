@@ -110,7 +110,7 @@ public sealed partial class IpcComponent : Component
     /// Hiding layers of clothing that are incorrectly displayed on IPC.
     /// </summary>
     [DataField]
-    public HashSet<string> HiddenClothingSlots = ["eyes", "ears"];
+    public HashSet<string> HiddenClothingSlots = ["eyes"];
 }
 
 public sealed partial class ToggleDrainActionEvent : InstantActionEvent;

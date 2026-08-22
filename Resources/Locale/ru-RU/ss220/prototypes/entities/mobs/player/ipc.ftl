@@ -11,7 +11,9 @@ sleep-ipc = КПБ в режиме сна.
 
 ipc-drain-enabled = Опустошение заряда активно
 ipc-drain-disabled = Опустошение заряда отключено
+
 ipc-no-battery = Отсутствует батарея
+ipc-no-power = Батарея разряжена
 
 id-card-access-level-ipc = КПБ
 
