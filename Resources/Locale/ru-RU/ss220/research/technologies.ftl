@@ -8,3 +8,5 @@ research-technology-energy-transformer = Полеобразователь эне
 research-technology-heavy-ballistics = Крупнокалиберное баллистическое вооружение
 research-clothing-eyes-hud-medichem = Адаптивная оптохемодинамика 
 research-technology-automated-defence-systems = Автоматические системы защиты
+research-decryption-keys = Ксенолингвистический адаптер
+research-decryption-key-advanced = Дешифровка жаргонов и диалектов
