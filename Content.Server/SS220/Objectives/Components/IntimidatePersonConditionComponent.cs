@@ -36,7 +36,7 @@ public sealed partial class IntimidatePersonConditionComponent : Component
     /// Description will be applied if target gets SSDs.
     /// </summary>
     [DataField(required: true)]
-    public string? SSDDescription;
+    public string? CatatonicDescription;
 
     [DataField]
     public MindPool Pool = new AliveHumansPool();
@@ -52,5 +52,5 @@ public enum IntimidatePersonDescriptionType
 {
     Start = 0,
     Success,
-    SSD
+    Catatoinic,
 }

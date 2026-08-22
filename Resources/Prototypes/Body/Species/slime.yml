@@ -109,6 +109,7 @@
     containers:
       storagebase: !type:Container
         ents: []
+        occludes: False # SS220-fixslimeflashlight
   - type: UserInterface
     interfaces:
       enum.StorageUiKey.Key:
