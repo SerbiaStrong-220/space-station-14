@@ -3,11 +3,13 @@
 using Content.Server.Administration;
 using Content.Server.SS220.TTS;
 using Content.Shared.SS220.Surgery.Graph;
+using Content.Shared.SS220.TTS;
+using Content.Shared.SS220.TTS.Requirements;
 using Robust.Shared.Player;
 
 namespace Content.Server.SS220.Surgery.Action;
 
-public sealed partial class ChangeTTSAction : ISurgeryGraphEdgeAction
+public sealed partial class ChangeTtsAction : ISurgeryGraphEdgeAction
 {
     private static readonly LocId QuiTitle = "tts-change-surgery-window-title";
     private static readonly LocId QuiDescription = "tts-change-surgery-window-description";
@@ -20,13 +22,22 @@ public sealed partial class ChangeTTSAction : ISurgeryGraphEdgeAction
         if (!entityManager.TryGetComponent<ActorComponent>(userUid, out var actorComp))
             return;
 
-        quiSystem.OpenDialogForTTSPrototypeId(actorComp.PlayerSession,
+        quiSystem.OpenDialogForTtsVoicePrefereces(actorComp.PlayerSession,
             Loc.GetString(QuiTitle),
             Loc.GetString(QuiDescription),
             Loc.GetString(QuiPrompt),
-            newVoice =>
+            newPreferencesStr =>
             {
-                entityManager.System<TTSSystem>().TrySetTTS(uid, newVoice);
+                if (!TtsVoicePreferences.TryParse(newPreferencesStr, out var pref))
+                    return;
+
+                var checkData = new TtsVoiceRequirementCheckData()
+                {
+                    Session = actorComp.PlayerSession,
+                    Entity = uid
+                };
+
+                entityManager.System<TtsSystem>().SetVoicePreferences(uid, pref, checkData);
             },
             uid);
     }

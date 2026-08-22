@@ -1,0 +1,20 @@
+- type: ttsVoice
+  id: SileroTest
+  name: Силеро Тест
+  description: описание
+  speaker: aidar
+  provider: Silero
+
+- type: ttsVoice
+  id: SileroSponsorTest
+  name: Силеро Спонсор Тест
+  description: описание
+  speaker: aidar
+  provider: Silero
+  categories: [ Sponsor ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Unsexed, Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa

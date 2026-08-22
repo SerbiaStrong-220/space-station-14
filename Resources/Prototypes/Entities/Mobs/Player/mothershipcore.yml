@@ -243,10 +243,10 @@
   - type: ShowElectrocutionHUD
   - type: PowerMonitoringCableNetworks
   - type: RadarConsole
-  #SS220-AddMotherShipTTS begin
-  - type: TTS
+  #SS220-AddMotherShip begin
+  - type: Tts
     voice: glados
-  #SS220-AddMotherShipTTS end
+  #SS220-AddMotherShip end
 
 - type: entity
   parent: BaseAGhostAction

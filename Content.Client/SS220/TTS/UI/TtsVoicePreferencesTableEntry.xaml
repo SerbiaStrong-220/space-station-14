@@ -1,0 +1,20 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+              xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+              Orientation="Vertical"
+              HorizontalExpand="True"
+              MouseFilter="Pass">
+    <Control>
+        <PanelContainer Name="Background" HorizontalExpand="True">
+            <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                <Label Name="ProviderNameLabel" Margin="5 0"/>
+                <cc:VSeparator/>
+                <Label Name="VoiceNameLabel" HorizontalExpand="True" Margin="5 0"/>
+                <Button Name="VoiceSelectorButton" StyleClasses="OpenRight" Text="{Loc 'ui-humanoid-profile-editor-voice-settings'}" Access="Public" ToggleMode="True" />
+                <Button Name="VoicePlayButton" StyleClasses="OpenLeft" Text="{Loc 'ui-humanoid-profile-editor-voice-play'}" HorizontalAlignment="Right" />
+            </BoxContainer>
+        </PanelContainer>
+
+        <PanelContainer Name="HighlightOverlay" Visible="false" />
+    </Control>
+</BoxContainer>

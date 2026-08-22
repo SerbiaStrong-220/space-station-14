@@ -218,6 +218,7 @@ public sealed partial class HumanoidProfileEditor
         UpdateGenderControls();
         _markingsModel.SetOrganSexes(newSex);
         ReloadPreview();
+        UpdateTtsVoicesControls(); // SS220 Tts
     }
 
     private void SetGender(Gender newGender)
