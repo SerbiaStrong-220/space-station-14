@@ -3,6 +3,7 @@ using Content.Shared.SS220.Discord;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 namespace Content.Shared.SS220.TTS.Requirements;
 
@@ -11,6 +12,12 @@ public sealed partial class TtsSponsorRequirement : TtsVoiceRequirement
 {
     [DataField(required: true)]
     public SponsorTier SponsorTier = SponsorTier.None;
+
+    /// <summary>
+    /// Is this exact tier required? Use this for stuff like developer rewards.
+    /// </summary>
+    [DataField]
+    public bool IsExact = false;
 
     private static readonly Color SponsorTierMarkupColor = Color.Yellow;
 
@@ -26,18 +33,22 @@ public sealed partial class TtsSponsorRequirement : TtsVoiceRequirement
         var sponsorInfo = session.ContentData()?.SponsorInfo;
         if (!Inverted)
         {
-            if (sponsorInfo != null && sponsorInfo.Tiers.Contains(SponsorTier))
+            if (sponsorInfo != null && IsPassRequirement(sponsorInfo.Tiers))
                 return true;
 
-            reason = FormattedMessage.FromMarkupPermissive(Loc.GetString("tts-sponsor-requirement-whitelist-not-pass", ("sponsorTier", GetSponsorTierMarkup())));
+            reason = FormattedMessage.FromMarkupPermissive(Loc.GetString("tts-sponsor-requirement-whitelist-not-pass",
+                ("isExact", IsExact),
+                ("sponsorTier", GetSponsorTierMarkup())));
             return false;
         }
         else
         {
-            if (sponsorInfo == null || !sponsorInfo.Tiers.Contains(SponsorTier))
+            if (sponsorInfo == null || !IsPassRequirement(sponsorInfo.Tiers))
                 return true;
 
-            reason = FormattedMessage.FromMarkupPermissive(Loc.GetString("tts-sponsor-requirement-blacklist-not-pass", ("sponsorTier", GetSponsorTierMarkup())));
+            reason = FormattedMessage.FromMarkupPermissive(Loc.GetString("tts-sponsor-requirement-blacklist-not-pass",
+                ("isExact", IsExact),
+                ("sponsorTier", GetSponsorTierMarkup())));
             return false;
         }
 
@@ -51,5 +62,10 @@ public sealed partial class TtsSponsorRequirement : TtsVoiceRequirement
 
             return msg.ToMarkup();
         }
+    }
+
+    private bool IsPassRequirement(IEnumerable<SponsorTier> tiers)
+    {
+        return tiers.Any(t => IsExact ? t == SponsorTier : t >= SponsorTier);
     }
 }
