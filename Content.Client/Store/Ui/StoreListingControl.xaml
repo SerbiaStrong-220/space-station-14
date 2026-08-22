@@ -2,6 +2,9 @@
     <BoxContainer Margin="8,0,8,8" Orientation="Vertical">
         <BoxContainer Orientation="Horizontal">
             <Label Name="StoreItemName" HorizontalExpand="True" />
+            <!-- SS220 pirate market begin -->
+            <Label Name="RemainingStockText" HorizontalAlignment="Right" />
+            <!-- SS220 pirate market end -->
         </BoxContainer>
         <PanelContainer StyleClasses="HighDivider" Margin="0,1,0,2"/>
         <BoxContainer HorizontalExpand="True" Orientation="Horizontal">
