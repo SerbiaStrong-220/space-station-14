@@ -13,6 +13,7 @@ namespace Content.Client.SS220.Administration.UI.Tabs.RoundTab;
 public sealed partial class ActiveGameRulesWindow : DefaultWindow
 {
     [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IClientConsoleHost _clientConsoleHost = default!;
 
     private GameRuleInfo? _selectedGamerule;
 
@@ -24,6 +25,7 @@ public sealed partial class ActiveGameRulesWindow : DefaultWindow
 
     protected override void EnteredTree()
     {
+        base.EnteredTree();
         SubmitEndGameruleButton.OnPressed += SubmitEndGameruleButtonOnPressed;
         SubmitClearGamerulesButton.OnPressed += SubmitClearGamerulesButtonOnPressed;
         GameRulesList.OnSelectionChanged += OnListOnOnSelectionChanged;
@@ -35,23 +37,31 @@ public sealed partial class ActiveGameRulesWindow : DefaultWindow
         SubmitEndGameruleButton.Disabled = _selectedGamerule == null;
     }
 
-    private void SubmitEndGameruleButtonOnPressed(BaseButton.ButtonEventArgs obj)
+    private void SubmitEndGameruleButtonOnPressed(BaseButton.ButtonEventArgs _)
     {
         if (_selectedGamerule == null)
             return;
 
-        IoCManager.Resolve<IClientConsoleHost>().ExecuteCommand(
+        _clientConsoleHost.ExecuteCommand(
             $"endgamerule {_entMan.GetEntity(_selectedGamerule.Entity)}");
 
         SubmitEndGameruleButton.Disabled = true;
     }
 
-    private void SubmitClearGamerulesButtonOnPressed(BaseButton.ButtonEventArgs obj)
+    private void SubmitClearGamerulesButtonOnPressed(BaseButton.ButtonEventArgs _)
     {
-        IoCManager.Resolve<IClientConsoleHost>().ExecuteCommand(
+        _clientConsoleHost.ExecuteCommand(
             $"cleargamerules");
 
         SubmitEndGameruleButton.Disabled = true;
         SubmitClearGamerulesButton.Disabled = true;
+    }
+
+    protected override void ExitedTree()
+    {
+        base.ExitedTree();
+        SubmitEndGameruleButton.OnPressed -= SubmitEndGameruleButtonOnPressed;
+        SubmitClearGamerulesButton.OnPressed -= SubmitClearGamerulesButtonOnPressed;
+        GameRulesList.OnSelectionChanged -= OnListOnOnSelectionChanged;
     }
 }

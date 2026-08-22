@@ -1,4 +1,3 @@
-using System.Linq;
 using Content.Client.Administration.Systems;
 using Content.Client.UserInterface.Controls;
 using Content.Client.Verbs.UI;
@@ -15,30 +14,37 @@ namespace Content.Client.SS220.Administration.UI.CustomControls;
 [GenerateTypedNameReferences]
 public sealed partial class GameRulesListControl : BoxContainer
 {
-    private readonly AdminSystem _adminSystem;
-    private readonly IEntityManager _entityManager;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IUserInterfaceManager _userInterfaceManager = default!;
 
-    private List<GameRuleInfo> _gameRulesList = new();
+    private readonly AdminSystem _adminSystem;
 
     public event Action<GameRuleInfo?>? OnSelectionChanged;
 
     public Func<GameRuleInfo, string, string>? OverrideText;
-    public Comparison<GameRuleInfo>? Comparison;
 
     public GameRulesListControl()
     {
-        _entityManager = IoCManager.Resolve<IEntityManager>();
+        IoCManager.InjectDependencies(this);
         _adminSystem = _entityManager.System<AdminSystem>();
 
-        IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
-        // Fill the Option data
         GameRulesListContainer.ItemPressed += GameRulesListItemPressed;
         GameRulesListContainer.GenerateItem += GenerateButton;
+        BackgroundPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = AdminListControlHelper.ListBackgroundColor };
+    }
 
-        PopulateList(_adminSystem.GameRulesList);
+    protected override void EnteredTree()
+    {
+        base.EnteredTree();
         _adminSystem.GameRulesListChanged += PopulateList;
-        BackgroundPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = new Color(32, 32, 40) };
+        PopulateList(_adminSystem.GameRulesList);
+    }
+
+    protected override void ExitedTree()
+    {
+        base.ExitedTree();
+        _adminSystem.GameRulesListChanged -= PopulateList;
     }
 
     private void GameRulesListItemPressed(BaseButton.ButtonEventArgs? args, ListData? data)
@@ -48,19 +54,19 @@ public sealed partial class GameRulesListControl : BoxContainer
 
         if (data is not GameRuleListData { Info: var selectedGameRule })
             return;
+
         if (args.Event.Function == EngineKeyFunctions.UIClick)
         {
             OnSelectionChanged?.Invoke(selectedGameRule);
 
-            // update label text. Only required if there is some override (e.g. unread bwoink count).
-            if (OverrideText != null && args.Button.Children.FirstOrDefault()?.Children?.FirstOrDefault() is Label label)
-                label.Text = GetText(selectedGameRule);
+            if (OverrideText != null)
+                AdminListControlHelper.UpdateButtonLabel(args.Button, GetText(selectedGameRule));
         }
         else if (args.Event.Function == EngineKeyFunctions.UseSecondary && selectedGameRule.Entity != null)
         {
             var entity = _entityManager.GetEntity(selectedGameRule.Entity.Value);
             if (_entityManager.EntityExists(entity))
-                IoCManager.Resolve<IUserInterfaceManager>().GetUIController<VerbMenuUIController>().OpenVerbMenu(entity);
+                _userInterfaceManager.GetUIController<VerbMenuUIController>().OpenVerbMenu(entity);
         }
     }
 
@@ -68,15 +74,19 @@ public sealed partial class GameRulesListControl : BoxContainer
     {
         gameRules ??= _adminSystem.GameRulesList;
 
-        _gameRulesList = gameRules.ToList();
+        var listData = new List<ListData>(gameRules.Count);
 
-        if (_gameRulesList is not null)
-            GameRulesListContainer.PopulateList(_gameRulesList.Select(info => new GameRuleListData(info)).ToList());
+        foreach (var gameRule in gameRules)
+        {
+            listData.Add(new GameRuleListData(gameRule));
+        }
+
+        GameRulesListContainer.PopulateList(listData);
     }
 
     private string GetText(GameRuleInfo info)
     {
-        var text = $"n{info.Entity} - {info.Name}";
+        var text = $"{info.Entity} - {info.Name}";
         if (OverrideText != null)
             text = OverrideText.Invoke(info, text);
         return text;
