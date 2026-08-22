@@ -12,7 +12,9 @@
     proto: CartridgeLightRifle
     capacity: 60
   - type: Item
-    size: Small
+# SS220-sec-gear-size-fix-start
+    size: Normal
+# SS220-sec-gear-size-fix-end
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
@@ -34,6 +36,10 @@
   - type: BallisticAmmoProvider
     capacity: 200
     proto: CartridgeLightRifle
+# SS220-sec-gear-size-fix-start
+  - type: Item
+    size: Large
+# SS220-sec-gear-size-fix-end
   - type: Sprite
     layers:
     - state: base
