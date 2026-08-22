@@ -1,5 +1,7 @@
 ui-humanoid-profile-editor-tts-settings = Настройки голоса
 
+ui-admin-tab-player-actions-tts-queues-clear = Сбросить очереди TTS
+
 ui-tts-provider-voice-selector-window-title = Выбор голоса провайдера { $providerName }
 ui-tts-provider-voice-selector-window-search-placeholder = Поиск...
 

@@ -68,7 +68,11 @@ public sealed partial class TtsVoiceSelectorCategoryEntry : BoxContainer
 
         VoiceEntriesContainer.RemoveAllChildren();
 
-        foreach (var voice in _voices.OrderBy(x => x.LocalizedName))
+        var sortedVocies = _voices
+            .Where(x => !x.EditorHidden)
+            .OrderBy(x => x.LocalizedName);
+
+        foreach (var voice in sortedVocies)
         {
             var entry = new TtsVoiceSelectorEntry(voice);
             entry.OnVoiceSelected += voice => OnVoiceSelected?.Invoke(voice);

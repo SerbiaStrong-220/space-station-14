@@ -60,6 +60,7 @@ public sealed partial class TtsProviderVoiceSelectorWindow : DefaultWindow
         CategoryEntriesContainer.RemoveAllChildren();
 
         var sortedCategories = _tts.EnumerateProviderVoiceCategories(Provider)
+            .Where(x => x.Value.Any(v => !v.EditorHidden))
             .OrderByDescending(x => x.Key.SortPriority)
             .ThenBy(x => x.Key.LocalizedName);
 

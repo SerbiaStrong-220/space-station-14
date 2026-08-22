@@ -38,6 +38,9 @@ public partial class SharedTtsSystem
         }
     }
 
+    /// <summary>
+    /// Whether the <paramref name="session"/> is currently on voice test cooldown.
+    /// </summary>
     public bool IsVoiceTestCooldowned(ICommonSession session)
     {
         return _sessionVoiceTestCooldowns.ContainsKey(session);

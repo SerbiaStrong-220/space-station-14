@@ -8,12 +8,12 @@ using Robust.Shared.Console;
 namespace Content.Server.SS220.TTS.Commands;
 
 [AdminCommand(AdminFlags.Admin)]
-public sealed partial class TtsClearClientsQueuesCommand : LocalizedCommands
+public sealed partial class TtsClearAllClientsQueuesCommand : LocalizedCommands
 {
     [Dependency] private IEntitySystemManager _entitySystemManager = default!;
     [Dependency] private IChatManager _chat = default!;
 
-    public override string Command => SharedTtsSystem.TtsCommandsPrefix + "clear_clients_queues";
+    public override string Command => SharedTtsSystem.TtsCommandsPrefix + "clear_all_clients_queues";
     public override string Description => Loc.GetString("cmd-tts-clear-clients-queues-desc");
 
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
@@ -21,7 +21,7 @@ public sealed partial class TtsClearClientsQueuesCommand : LocalizedCommands
         var ttsSys = _entitySystemManager.GetEntitySystem<TtsSystem>();
         ttsSys.ClearClientQueues();
 
-        _chat.DispatchServerAnnouncement(Loc.GetString("command-tts-clear-request-dispatch"));
         shell.WriteLine(Loc.GetString("cmd-tts-clear-clients-queues-request-sended"));
+        _chat.DispatchServerAnnouncement(Loc.GetString("cmd-tts-clear-clients-queues-public-announcement"));
     }
 }
