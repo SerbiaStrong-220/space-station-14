@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Content.Server.Administration.Systems;
 using Content.Server.Database;
 using Content.Server.GameTicking;
+using Content.Server.SS220.Investigation; // SS220 investigation recorder
 using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
@@ -38,6 +39,7 @@ public sealed partial class AdminLogManager : SharedAdminLogManager, IAdminLogMa
     [Dependency] private readonly ISharedPlaytimeManager _playtime = default!;
     [Dependency] private readonly ISharedChatManager _chat = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly IInvestigationRecorder _investigation = default!; // SS220 investigation recorder
 
     public const string SawmillId = "admin.logs";
 
@@ -309,6 +311,12 @@ public sealed partial class AdminLogManager : SharedAdminLogManager, IAdminLogMa
         var message = handler.ToStringAndClear();
         if (!Enabled)
             return;
+
+        // SS220 investigation recorder begin
+        // Before the drop threshold below, so the bundle keeps a complete stream even when logs are being shed.
+        if (_investigation.IsRecording)
+            _investigation.OnAdminLog(type, impact, message, handler.Values);
+        // SS220 investigation recorder end
 
         var preRound = _runLevel == GameRunLevel.PreRoundLobby;
         var count = preRound ? _preRoundLogQueue.Count : _logQueue.Count;
