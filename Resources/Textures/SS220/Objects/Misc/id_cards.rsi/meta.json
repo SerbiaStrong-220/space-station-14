@@ -320,10 +320,12 @@
       "name": "ipc_master"
     },
     {
-      "name": "ipc-master-inhand-left"
+      "name": "ipc-master-inhand-left",
+      "directions": 4
     },
     {
-      "name": "ipc-master-inhand-right"
+      "name": "ipc-master-inhand-right",
+      "directions": 4
     }
   ]
 }
