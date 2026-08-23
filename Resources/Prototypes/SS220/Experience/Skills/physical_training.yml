@@ -27,7 +27,7 @@
     damageThreshold: 20.
   - type: PullingSpeedModifierChanger
     speedModifierToIgnore: 0.05
-    speedPenaltyModifier: 0.1
+    speedPenaltyModifier: 0.9
 
 - type: skill
   id: PhysicalTrainingTrained
@@ -44,7 +44,7 @@
     damageThreshold: 30.
   - type: PullingSpeedModifierChanger
     speedModifierToIgnore: 0.05
-    speedPenaltyModifier: 0.2
+    speedPenaltyModifier: 0.8
 
 - type: skill
   id: PhysicalTrainingProfessional
@@ -61,4 +61,4 @@
     damageThreshold: 40.
   - type: PullingSpeedModifierChanger
     speedModifierToIgnore: 0.1
-    speedPenaltyModifier: 0.35
+    speedPenaltyModifier: 0.65
