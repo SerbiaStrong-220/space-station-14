@@ -1,0 +1,16 @@
+- type: entity
+  id: BulletPeas
+  name: peas
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Projectile
+      damage:
+        types:
+          Blunt: 5
+    - type: Sprite
+      sprite: SS220\Objects\Weapons\Guns\Projectiles\peas_bullet.rsi
+      layers:
+        - state: peas_bullet
+    - type: Ammo
+      muzzleFlash: null

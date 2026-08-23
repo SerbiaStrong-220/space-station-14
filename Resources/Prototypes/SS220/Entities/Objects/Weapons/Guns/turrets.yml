@@ -224,3 +224,106 @@
   - type: ContainerContainer
     containers:
       cell_slot: !type:ContainerSlot
+
+- type: entity
+  parent: BaseWeaponBallisticTurret
+  id: WeaponTurretPeashooter
+  name: peashooter
+  description: Shoots 9mm acid projectiles.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Turrets/peashooter.rsi
+    noRot: true
+    layers:
+    - state: peashooter
+  - type: BallisticAmmoProvider
+    proto: BulletPeas
+    capacity: 500
+  - type: Gun
+    fireRate: 1
+    selectedMode: FullAuto
+    soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg
+  - type: HTN
+    rootTask:
+      task: TurretCompound
+    blackboard:
+      SoundTargetInLOS: !type:SoundPathSpecifier
+        path: /Audio/Animals/snake_hiss.ogg
+  - type: Damageable
+    damageContainer: Biological
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/gib1.ogg
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodMeatXeno:
+            min: 3
+            max: 5
+  - type: InteractionPopup
+    interactDelay: 1.0
+    successChance: 0.8
+    interactSuccessString: petting-success-generic--
+    interactFailureString: petting-failure-generic
+    interactSuccessSound:
+      path: /Audio/Animals/snake_hiss.ogg
+
+- type: entity
+  parent: BaseWeaponBallisticTurret
+  id: WeaponTurretPeashooterSyndicate
+  name: syndicate peashooter
+  description: Shoots 9mm acid projectiles. --------------
+  components:
+  - type: NpcFactionMember
+    factions:
+    - Syndicate
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Turrets/peashooter_syndicat.rsi
+    noRot: true
+    layers:
+    - state: peashooter_syndicate
+  - type: BallisticAmmoProvider
+    proto: BulletAcid
+    capacity: 500
+  - type: Gun
+    fireRate: 1
+    selectedMode: FullAuto
+    soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg
+  - type: HTN
+    rootTask:
+      task: TurretCompound
+    blackboard:
+      SoundTargetInLOS: !type:SoundPathSpecifier
+        path: /Audio/Animals/snake_hiss.ogg
+  - type: Damageable
+    damageContainer: Biological
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/gib1.ogg
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodMeatXeno:
+            min: 3
+            max: 5
+  - type: InteractionPopup
+    interactDelay: 1.0
+    successChance: 0.8
+    interactSuccessString: petting-success-generic--
+    interactFailureString: petting-failure-generic
+    interactSuccessSound:
+      path: /Audio/Animals/snake_hiss.ogg

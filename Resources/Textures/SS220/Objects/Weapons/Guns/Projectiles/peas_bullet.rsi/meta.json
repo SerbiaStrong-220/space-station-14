@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "By Hvoev for SS220",
+  "size": {
+    "x": 6,
+    "y": 6
+  },
+  "states": [
+    {
+      "name": "peas_bullet"
+    }
+  ]
+}
