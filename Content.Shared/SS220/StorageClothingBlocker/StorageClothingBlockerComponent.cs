@@ -10,5 +10,5 @@ namespace Content.Shared.SS220.StorageClothingBlocker;
 public sealed partial class StorageClothingBlockerComponent : Component
 {
     [DataField]
-    public SlotFlags SlotFlags = SlotFlags.INNERCLOTHING;
+    public SlotFlags SlotFlags = SlotFlags.TORSO;
 }
