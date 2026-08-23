@@ -12,3 +12,6 @@ research-technology-automated-defence-systems = Автоматические с�
 research-technology-cloning-technology = Технология клонирования
 research-technology-handheld-electrical-propulsion = Ручные электродвигатели
 research-technology-advanced-kitchen-machinery = Продвинутая кухонная техника
+
+research-decryption-keys = Ксенолингвистический адаптер
+research-decryption-key-advanced = Дешифровка жаргонов и диалектов

@@ -1,0 +1,18 @@
+- type: latheRecipePack
+  id: DecryptionKeys
+  recipes:
+  - DecryptionKeyTernary
+  - DecryptionKeySintaunathi
+  - DecryptionKeySiiktajr
+  - DecryptionKeyVoxPidgin
+  - DecryptionKeyRootspeak
+  - DecryptionKeyBubblish
+  - DecryptionKeyTkachi
+  - DecryptionKeyArati
+  - DecryptionKeySolCommon
+
+- type: latheRecipePack
+  id: DecryptionKeyAdvanced
+  recipes:
+  - DecryptionKeyAdvanced
+
