@@ -4,6 +4,7 @@ using Content.Server.Objectives.Components;
 using Content.Server.Objectives.Systems;
 using Content.Server.SS220.Objectives.Components;
 using Content.Server.SS220.Trackers.Components;
+using Content.Shared.Mind.Components;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Objectives.Systems;
 using Content.Shared.SSDIndicator;
@@ -37,12 +38,11 @@ public sealed partial class IntimidatePersonConditionSystem : EntitySystem
             return;
         }
 
-        //HandleSSDMoment
-        if (!TryComp<SSDIndicatorComponent>(entity.Comp.TargetMob, out var ssdIndicator)
-            || ssdIndicator.IsSSD)
+        if (!TryComp<MindExaminableComponent>(entity.Comp.TargetMob, out var mindExaminable)
+            || mindExaminable.State == MindState.Catatonic)
         {
             args.Progress = 1f;
-            SetDescription(entity, IntimidatePersonDescriptionType.SSD);
+            SetDescription(entity, IntimidatePersonDescriptionType.Catatoinic);
             return;
         }
 
@@ -112,7 +112,7 @@ public sealed partial class IntimidatePersonConditionSystem : EntitySystem
         {
             IntimidatePersonDescriptionType.Start => component.StartDescription,
             IntimidatePersonDescriptionType.Success => component.SuccessDescription,
-            IntimidatePersonDescriptionType.SSD => component.SSDDescription,
+            IntimidatePersonDescriptionType.Catatoinic => component.CatatonicDescription,
             _ => null
         };
 

@@ -1418,10 +1418,12 @@
   - type: IconSmooth
     key: walls
     base: mining
-  - type: RandomIconSmooth
-    randomStates:
-    - mining
-    - miningB
+  #SS220-WallMiningFix begin
+  #- type: RandomIconSmooth
+  # randomStates:
+  # - mining
+  # - miningB
+  #SS220-WallMiningFix end
   - type: Appearance
 
 - type: entity

@@ -486,7 +486,7 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: Soap #Make a soap group and pick between when i'm not lazy
+        - id: SoapJR #Make a soap group and pick between when i'm not lazy
         - id: SprayBottleSpaceCleaner
         - id: CleanerGrenade
           amount: 2

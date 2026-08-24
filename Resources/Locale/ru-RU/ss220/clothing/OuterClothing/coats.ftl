@@ -49,3 +49,6 @@ ent-ClothingOuterCoatNTRFormalDress = торжественное платье п
     .desc = Платье для особых случаев... Черт, ты в этом просто отлично выглядишь!
 ent-ClothingOuterCoatNTRTrench = тренчкот представителя НаноТрейзен
     .desc = Отличный повседневный тренчкот для верного слуги корпорации.
+
+ent-ClothingOuterCoatJanitorJRBomber = бомбер уборщика JR
+    .desc = Влагостойкая куртка-бомбер, разработанная для специалистов JR.
