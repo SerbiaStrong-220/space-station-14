@@ -5,7 +5,7 @@ using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
-using Content.Shared.Lock; // SS220-Ipc-builtin-radio
+using Content.Shared.Lock; // SS220-ipc-builtin-radio
 using Content.Shared.Popups;
 using Content.Shared.Radio.Components;
 using Content.Shared.SS220.Radio.Components;
@@ -153,7 +153,7 @@ public sealed partial class EncryptionKeySystem : EntitySystem
             args.Handled = true;
             TryInsertKey(uid, component, args);
         }
-        else if (!IsLocked(uid) // SS220-Ipc-builtin-radio
+        else if (!IsLocked(uid) // SS220-ipc-builtin-radio
                  && TryComp<ToolComponent>(args.Used, out var tool)
                  && _tool.HasQuality(args.Used, component.KeysExtractionMethod, tool)
                  && component.KeyContainer.ContainedEntities.Count > 0) // dont block deconstruction
@@ -163,20 +163,22 @@ public sealed partial class EncryptionKeySystem : EntitySystem
         }
     }
 
-    // SS220-Ipc-builtin-radio-begin
+    // SS220-ipc-builtin-radio begin
     private bool IsLocked(EntityUid uid)
     {
         return TryComp<LockComponent>(uid, out var lockComp) && lockComp.Locked;
     }
-    // SS220-Ipc-builtin-radio-end
+    // SS220-ipc-builtin-radio end
 
     private void TryInsertKey(EntityUid uid, EncryptionKeyHolderComponent component, InteractUsingEvent args)
     {
-        if (IsLocked(uid)) // SS220-Ipc-builtin-radio
+        // SS220-ipc-builtin-radio begin
+        if (IsLocked(uid))
         {
             _popup.PopupClient(Loc.GetString("encryption-keys-are-locked"), uid, args.User);
             return;
         }
+        // SS220-ipc-builtin-radio end
 
         if (!component.KeysUnlocked)
         {
