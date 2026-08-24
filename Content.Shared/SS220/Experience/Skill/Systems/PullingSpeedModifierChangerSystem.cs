@@ -16,20 +16,23 @@ public sealed partial class PullingSpeedModifierChangerSystem : SkillEntitySyste
 
     private void OnModifyPullingSpeed(Entity<PullingSpeedModifierChangerComponent> entity, ref ModifyPullingSpeed args)
     {
-        if (args.RunSpeedModifier < 1f)
+        var runSpeedPenalty = 1f - args.RunSpeedModifier;
+        var walkSpeedPenalty = 1f - args.WalkSpeedModifier;
+
+        if (runSpeedPenalty > 0)
         {
-            args.RunSpeedModifier = ChangeModifier(entity, args.RunSpeedModifier);
+            args.RunSpeedModifier = 1f - GetChangedPenalty(entity, runSpeedPenalty);
         }
 
-        if (args.WalkSpeedModifier < 1f)
+        if (walkSpeedPenalty > 0)
         {
-            args.WalkSpeedModifier = ChangeModifier(entity, args.WalkSpeedModifier);
+            args.WalkSpeedModifier = 1f - GetChangedPenalty(entity, walkSpeedPenalty);
         }
     }
 
-    private float ChangeModifier(Entity<PullingSpeedModifierChangerComponent> entity, float modifier)
+    private float GetChangedPenalty(Entity<PullingSpeedModifierChangerComponent> entity, float penalty)
     {
-        return modifier >= 1f - entity.Comp.SpeedModifierToIgnore ? 1f : 1f - (1f - modifier) * entity.Comp.SpeedPenaltyModifier;
+        return penalty <= entity.Comp.SpeedModifierToIgnore ? 0f : penalty * entity.Comp.SpeedPenaltyModifier;
     }
 }
 
