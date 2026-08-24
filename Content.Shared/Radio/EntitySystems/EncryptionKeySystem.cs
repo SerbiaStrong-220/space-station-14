@@ -5,7 +5,6 @@ using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
-using Content.Shared.Lock; // SS220-ipc-builtin-radio
 using Content.Shared.Popups;
 using Content.Shared.Radio.Components;
 using Content.Shared.SS220.Radio.Components;
@@ -162,13 +161,6 @@ public sealed partial class EncryptionKeySystem : EntitySystem
             TryRemoveKey(uid, component, args, tool);
         }
     }
-
-    // SS220-ipc-builtin-radio begin
-    private bool IsLocked(EntityUid uid)
-    {
-        return TryComp<LockComponent>(uid, out var lockComp) && lockComp.Locked;
-    }
-    // SS220-ipc-builtin-radio end
 
     private void TryInsertKey(EntityUid uid, EncryptionKeyHolderComponent component, InteractUsingEvent args)
     {

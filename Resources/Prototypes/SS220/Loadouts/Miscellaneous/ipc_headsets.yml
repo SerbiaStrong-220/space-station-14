@@ -1,5 +1,5 @@
 - type: loadout
-  id: CaptainIpcKeys
+  id: CaptainInnerEncryptionKeys
   effects:
   - !type:GroupLoadoutEffect
     proto: EffectSpeciesIpc
@@ -9,14 +9,14 @@
     - EncryptionKeyLaw
 
 - type: loadoutGroup
-  id: CAPHeadsetIpc
-  name: loadout-group-cap-headset-ipc
+  id: CaptainInnerEncryptionKeys
+  name: loadout-group-captain-inner-encryption-keys
   hidden: true
   loadouts:
-  - CaptainIpcKeys
+  - CaptainInnerEncryptionKeys
 
 - type: loadout
-  id: CommandIpcKeys
+  id: CommandInnerEncryptionKeys
   effects:
   - !type:GroupLoadoutEffect
     proto: EffectSpeciesIpc
@@ -25,14 +25,14 @@
     - EncryptionKeyStationMaster
 
 - type: loadoutGroup
-  id: CommandHeadsetIpc
-  name: loadout-group-command-headset-ipc
+  id: CommandInnerEncryptionKeys
+  name: loadout-group-command-inner-encryption-keys
   hidden: true
   loadouts:
-  - CommandIpcKeys
+  - CommandInnerEncryptionKeys
 
 - type: loadout
-  id: ChiefEngineerIpcKeys
+  id: ChiefEngineerInnerEncryptionKeys
   effects:
   - !type:GroupLoadoutEffect
     proto: EffectSpeciesIpc
@@ -42,14 +42,14 @@
     - EncryptionKeyCommand
 
 - type: loadoutGroup
-  id: ChiefEngineerHeadsetIpc
-  name: loadout-group-chief-engineer-headset-ipc
+  id: ChiefEngineerInnerEncryptionKeys
+  name: loadout-group-chief-engineer-inner-encryption-keys
   hidden: true
   loadouts:
-  - ChiefEngineerIpcKeys
+  - ChiefEngineerInnerEncryptionKeys
 
 - type: loadout
-  id: ChiefMedicalOfficerIpcKeys
+  id: ChiefMedicalOfficerInnerEncryptionKeys
   effects:
   - !type:GroupLoadoutEffect
     proto: EffectSpeciesIpc
@@ -59,14 +59,14 @@
     - EncryptionKeyCommand
 
 - type: loadoutGroup
-  id: ChiefMedicalOfficerHeadsetIpc
-  name: loadout-group-chief-medical-officer-headset-ipc
+  id: ChiefMedicalOfficerInnerEncryptionKeys
+  name: loadout-group-chief-medical-officer-inner-encryption-keys
   hidden: true
   loadouts:
-  - ChiefMedicalOfficerIpcKeys
+  - ChiefMedicalOfficerInnerEncryptionKeys
 
 - type: loadout
-  id: QuartermasterIpcKeys
+  id: QuartermasterInnerEncryptionKeys
   effects:
   - !type:GroupLoadoutEffect
     proto: EffectSpeciesIpc
@@ -76,14 +76,14 @@
     - EncryptionKeyCommand
 
 - type: loadoutGroup
-  id: QuartermasterHeadsetIpc
-  name: loadout-group-quartermaster-headset-ipc
+  id: QuartermasterInnerEncryptionKeys
+  name: loadout-group-quartermaster-inner-encryption-keys
   hidden: true
   loadouts:
-  - QuartermasterIpcKeys
+  - QuartermasterInnerEncryptionKeys
 
 - type: loadout
-  id: ResearchDirectorIpcKeys
+  id: ResearchDirectorInnerEncryptionKeys
   effects:
   - !type:GroupLoadoutEffect
     proto: EffectSpeciesIpc
@@ -93,14 +93,14 @@
     - EncryptionKeyCommand
 
 - type: loadoutGroup
-  id: ResearchDirectorHeadsetIpc
-  name: loadout-group-research-director-headset-ipc
+  id: ResearchDirectorInnerEncryptionKeys
+  name: loadout-group-research-director-inner-encryption-keys
   hidden: true
   loadouts:
-  - ResearchDirectorIpcKeys
+  - ResearchDirectorInnerEncryptionKeys
 
 - type: loadout
-  id: HeadOfSecurityIpcKeys
+  id: HeadOfSecurityInnerEncryptionKeys
   effects:
   - !type:GroupLoadoutEffect
     proto: EffectSpeciesIpc
@@ -110,14 +110,14 @@
     - EncryptionKeyCommand
 
 - type: loadoutGroup
-  id: HeadOfSecurityHeadsetIpc
-  name: loadout-group-head-of-security-headset-ipc
+  id: HeadOfSecurityInnerEncryptionKeys
+  name: loadout-group-head-of-security-inner-encryption-keys
   hidden: true
   loadouts:
-  - HeadOfSecurityIpcKeys
+  - HeadOfSecurityInnerEncryptionKeys
 
 - type: loadout
-  id: BrigmedicIpcKeys
+  id: BrigmedicInnerEncryptionKeys
   effects:
   - !type:GroupLoadoutEffect
     proto: EffectSpeciesIpc
@@ -127,14 +127,14 @@
     - EncryptionKeySecurity
 
 - type: loadoutGroup
-  id: BrigmedicHeadsetIpc
-  name: loadout-group-brigmedic-headset-ipc
+  id: BrigmedicInnerEncryptionKeys
+  name: loadout-group-brigmedic-inner-encryption-keys
   hidden: true
   loadouts:
-  - BrigmedicIpcKeys
+  - BrigmedicInnerEncryptionKeys
 
 - type: loadout
-  id: LawyerIpcKeys
+  id: LawyerInnerEncryptionKeys
   effects:
   - !type:GroupLoadoutEffect
     proto: EffectSpeciesIpc
@@ -144,14 +144,14 @@
     - EncryptionKeySecurity
 
 - type: loadoutGroup
-  id: LawyerHeadsetIpc
-  name: loadout-group-lawyer-headset-ipc
+  id: LawyerInnerEncryptionKeys
+  name: loadout-group-lawyer-inner-encryption-keys
   hidden: true
   loadouts:
-  - LawyerIpcKeys
+  - LawyerInnerEncryptionKeys
 
 - type: loadout
-  id: NanoTrasenRepresentativeIpcKeys
+  id: NanoTrasenRepresentativeInnerEncryptionKeys
   effects:
   - !type:GroupLoadoutEffect
     proto: EffectSpeciesIpc
@@ -162,14 +162,14 @@
     - EncryptionKeyCommand
 
 - type: loadoutGroup
-  id: NanoTrasenRepresentativeHeadsetIpc
-  name: loadout-group-nano-trasen-representative-headset-ipc
+  id: NanoTrasenRepresentativeInnerEncryptionKeys
+  name: loadout-group-nano-trasen-representative-inner-encryption-keys
   hidden: true
   loadouts:
-  - NanoTrasenRepresentativeIpcKeys
+  - NanoTrasenRepresentativeInnerEncryptionKeys
 
 - type: loadout
-  id: CargoIpcKeys
+  id: CargoInnerEncryptionKeys
   effects:
   - !type:GroupLoadoutEffect
     proto: EffectSpeciesIpc
@@ -178,14 +178,14 @@
     - EncryptionKeyCargo
 
 - type: loadoutGroup
-  id: CargoHeadsetIpc
-  name: loadout-group-cargo-headset-ipc
+  id: CargoInnerEncryptionKeys
+  name: loadout-group-cargo-inner-encryption-keys
   hidden: true
   loadouts:
-  - CargoIpcKeys
+  - CargoInnerEncryptionKeys
 
 - type: loadout
-  id: EngineeringIpcKeys
+  id: EngineeringInnerEncryptionKeys
   effects:
   - !type:GroupLoadoutEffect
     proto: EffectSpeciesIpc
@@ -194,14 +194,14 @@
     - EncryptionKeyEngineering
 
 - type: loadoutGroup
-  id: EngineeringHeadsetIpc
-  name: loadout-group-engineering-headset-ipc
+  id: EngineeringInnerEncryptionKeys
+  name: loadout-group-engineering-inner-encryption-keys
   hidden: true
   loadouts:
-  - EngineeringIpcKeys
+  - EngineeringInnerEncryptionKeys
 
 - type: loadout
-  id: MedicalIpcKeys
+  id: MedicalInnerEncryptionKeys
   effects:
   - !type:GroupLoadoutEffect
     proto: EffectSpeciesIpc
@@ -210,14 +210,14 @@
     - EncryptionKeyMedical
 
 - type: loadoutGroup
-  id: MedicalHeadsetIpc
-  name: loadout-group-medical-headset-ipc
+  id: MedicalInnerEncryptionKeys
+  name: loadout-group-medical-inner-encryption-keys
   hidden: true
   loadouts:
-  - MedicalIpcKeys
+  - MedicalInnerEncryptionKeys
 
 - type: loadout
-  id: ScienceIpcKeys
+  id: ScienceInnerEncryptionKeys
   effects:
   - !type:GroupLoadoutEffect
     proto: EffectSpeciesIpc
@@ -226,14 +226,14 @@
     - EncryptionKeyScience
 
 - type: loadoutGroup
-  id: ScienceHeadsetIpc
-  name: loadout-group-science-headset-ipc
+  id: ScienceInnerEncryptionKeys
+  name: loadout-group-science-inner-encryption-keys
   hidden: true
   loadouts:
-  - ScienceIpcKeys
+  - ScienceInnerEncryptionKeys
 
 - type: loadout
-  id: SecurityIpcKeys
+  id: SecurityInnerEncryptionKeys
   effects:
   - !type:GroupLoadoutEffect
     proto: EffectSpeciesIpc
@@ -242,14 +242,14 @@
     - EncryptionKeySecurity
 
 - type: loadoutGroup
-  id: SecurityHeadsetIpc
-  name: loadout-group-security-headset-ipc
+  id: SecurityInnerEncryptionKeys
+  name: loadout-group-security-inner-encryption-keys
   hidden: true
   loadouts:
-  - SecurityIpcKeys
+  - SecurityInnerEncryptionKeys
 
 - type: loadout
-  id: ServiceIpcKeys
+  id: ServiceInnerEncryptionKeys
   effects:
   - !type:GroupLoadoutEffect
     proto: EffectSpeciesIpc
@@ -258,8 +258,8 @@
     - EncryptionKeyService
 
 - type: loadoutGroup
-  id: ServiceHeadsetIpc
-  name: loadout-group-service-headset-ipc
+  id: ServiceInnerEncryptionKeys
+  name: loadout-group-service-inner-encryption-keys
   hidden: true
   loadouts:
-  - ServiceIpcKeys
+  - ServiceInnerEncryptionKeys
