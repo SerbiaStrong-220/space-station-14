@@ -283,16 +283,18 @@ public sealed partial class IpcSystem : EntitySystem
         if (args.Handled)
             return;
 
+        if (!TryComp<DamageableComponent>(ent, out var damageable))
+            return;
+            
+        args.DamageType = "Shock";
+        _suicide.ApplyLethalDamage((ent.Owner, damageable), args.DamageType);
+
         var othersMessage = Loc.GetString("suicide-command-ipc-text-others", ("name", Identity.Entity(ent, EntityManager)));
         _popup.PopupEntity(othersMessage, ent, Filter.PvsExcept(ent), true);
 
         var selfMessage = Loc.GetString("suicide-command-ipc-text-self");
         _popup.PopupEntity(selfMessage, ent, ent);
 
-        args.DamageType = "Shock";
         args.Handled = true;
-
-        if (TryComp<DamageableComponent>(ent, out var damageable))
-            _suicide.ApplyLethalDamage((ent.Owner, damageable), args.DamageType);
     }
 }
