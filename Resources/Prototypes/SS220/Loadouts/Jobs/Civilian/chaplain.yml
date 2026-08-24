@@ -22,7 +22,7 @@
     requirement:
       !type:RoleTimeRequirement
       role: JobChaplain
-      time: 72000 #20 часов
+      time: 20h
   sponsorTierLoadoutEffects:
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier
