@@ -98,6 +98,9 @@
         layer:
         - MobLayer
 # SS220-change-races-height end
+  # SS220 add storage clothing blocker start
+  - type: StorageClothingBlocker
+  # SS220 add storage clothing blocker end
   - type: Storage
     clickInsert: false
     grid:
@@ -109,6 +112,7 @@
     containers:
       storagebase: !type:Container
         ents: []
+        occludes: False # SS220-fixslimeflashlight
   - type: UserInterface
     interfaces:
       enum.StorageUiKey.Key:
