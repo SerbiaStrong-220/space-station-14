@@ -2599,23 +2599,46 @@
     sprite: SS220/Objects/Devices/pda.rsi #SS220 Resprite Senior Courier PDA
     state: pda-seniorcourier #SS220 Resprite Senior Courier PDA
 
-# SS220 Remove ninja pda start
-#- type: entity
-#  parent: [ BaseHighlyIllegalContraband, BasePDA ]
-#  id: NinjaPDA
-#  name: ninja PDA
-#  description: You stealthy bastard, you!
-#  components:
-#  - type: Pda
-#    id: NinjaIDCard
-#  - type: Appearance
-#    appearanceDataInit:
-#      enum.PdaVisuals.PdaType:
-#        !type:String
-#        pda-ninja
-#  - type: Icon
-#    state: pda-ninja
-# SS220 Remove ninja pda end
+- type: entity
+  parent: [ BaseHighlyIllegalContraband, BasePDA ]
+  id: NinjaPDA
+  name: ninja PDA
+  description: You stealthy bastard, you!
+  components:
+  - type: Pda
+    id: NinjaIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-ninja
+  - type: Icon
+    state: pda-ninja
+  #SS220 PDA-Resprite BGN
+  - type: PdaBorderColor
+    borderColor: "#2d2c35"
+  - type: Sprite
+    layers:
+    - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda-ninja"
+    - state: "screen-ninja"
+      shader: "unshaded"
+    - state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      visible: false
+  #SS220 PDA-Resprite END
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: [ BaseMajorContraband, SyndiPDA ]
