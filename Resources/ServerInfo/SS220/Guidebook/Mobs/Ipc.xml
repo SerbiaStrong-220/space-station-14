@@ -100,4 +100,13 @@
  <GuideEntityEmbed Entity="EncryptionKeySyndie"/>
  </Box>
 
+ # Мастер-карта КПБ
+ Специальная ID карта, предназначенная для разблокировки сервисной панели КПБ. Лежит в шкафчике смотрителя [color=#ffa500]в единственном экземпляре[/color].
+ Чтобы разблокировать КПБ, возьмите карту в руки, наведите курсор на КПБ и нажмите [color=yellow][bold][keybind="UIRightClick"/][/bold][/color], в появившемся
+ [color=cyan]контекстном меню[/color] нажмите [bold]Разблокировать[/bold].
+ <Box>
+ <GuideEntityEmbed Entity="MastercardIPC"/>
+ <GuideEntityEmbed Entity="LockerWarden"/>
+ </Box>
+
 </Document>
