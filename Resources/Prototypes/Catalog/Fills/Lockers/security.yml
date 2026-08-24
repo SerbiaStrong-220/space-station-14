@@ -158,6 +158,7 @@
         weight: 1.8
     - id: ClothingNeckCloakMoth #bzzz Moth-pocalypse
       prob: 0.15
+    - id: ClothingBackpackDuffelSurgeryFilled #SS220 add Surgery Duffel for brigmed
 
 - type: entity
   id: LockerDetectiveFilled
