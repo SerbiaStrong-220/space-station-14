@@ -154,7 +154,7 @@ public sealed partial class IpcSystem : SharedIpcSystem
     /// </summary>
     private void OnRefreshMovementSpeedModifiers(Entity<IpcComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
-        if (!HasCriticalCharge(ent))
+        if (HasCriticalCharge(ent))
             args.ModifySpeed(ent.Comp.LowChargeSpeed);
     }
 
@@ -263,7 +263,7 @@ public sealed partial class IpcSystem : SharedIpcSystem
     /// </summary>
     private void OnRadioSendAttempt(Entity<IpcComponent> ent, ref RadioSendAttemptEvent args)
     {
-        if (HasCriticalCharge(ent))
+        if (!HasCriticalCharge(ent))
             return;
 
         args.Cancelled = true;
@@ -275,7 +275,7 @@ public sealed partial class IpcSystem : SharedIpcSystem
     /// </summary>
     private void OnRadioReceiveAttempt(Entity<IpcComponent> ent, ref RadioReceiveAttemptEvent args)
     {
-        if (!HasCriticalCharge(ent))
+        if (HasCriticalCharge(ent))
             args.Cancelled = true;
     }
 
@@ -287,6 +287,6 @@ public sealed partial class IpcSystem : SharedIpcSystem
     private bool HasCriticalCharge(Entity<IpcComponent> ent)
     {
         return _powerCell.TryGetBatteryFromSlot(ent.Owner, out var battery)
-            && _battery.GetCharge(battery.Value.AsNullable()) / battery.Value.Comp.MaxCharge >= ent.Comp.CritCharge;
+            && _battery.GetCharge(battery.Value.AsNullable()) / battery.Value.Comp.MaxCharge <= ent.Comp.CritCharge;
     }
 }
