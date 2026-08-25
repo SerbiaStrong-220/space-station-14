@@ -25,6 +25,9 @@
   - type: DisarmOnDamageSkill
     disarmChance: 0.35
     damageThreshold: 20.
+  - type: PullingSpeedModifierChanger
+    speedModifierToIgnore: 0.05
+    speedPenaltyModifier: 0.9
 
 - type: skill
   id: PhysicalTrainingTrained
@@ -39,6 +42,9 @@
   - type: DisarmOnDamageSkill
     disarmChance: 0.3
     damageThreshold: 30.
+  - type: PullingSpeedModifierChanger
+    speedModifierToIgnore: 0.05
+    speedPenaltyModifier: 0.8
 
 - type: skill
   id: PhysicalTrainingProfessional
@@ -53,3 +59,6 @@
   - type: DisarmOnDamageSkill
     disarmChance: 0.2
     damageThreshold: 40.
+  - type: PullingSpeedModifierChanger
+    speedModifierToIgnore: 0.1
+    speedPenaltyModifier: 0.65
