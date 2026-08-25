@@ -208,7 +208,7 @@ public partial class TtsSystem
                 });
             }
 
-            if (IsAnyProviderEnabled() && request.Text != null && request.Voice != null && request.Text.Length > _maxAnnounceMessageChars)
+            if (IsAnyProviderEnabled() && request.Text != null && request.Voice != null && request.Text.Length <= _maxAnnounceMessageChars)
             {
                 responce = await ConvertTextToSpeech(request.Text, request.Voice, TtsKind.Announce);
                 if (responce.TryGetValue(out var audioData))

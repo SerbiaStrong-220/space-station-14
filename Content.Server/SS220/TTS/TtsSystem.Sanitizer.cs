@@ -28,8 +28,8 @@ public sealed partial class TtsSystem
     private static readonly ProtoId<LocalizedDatasetPrototype> WordReplacementValuesDatasetId = "TtsSanitizerWorldReplacementValues";
     private FrozenDictionary<string, string> _wordReplacement = default!;
 
-    private static readonly ProtoId<LocalizedDatasetPrototype> TranslitReplacementKeysDatasetId = "TtsSanitizerWorldReplacementKeys";
-    private static readonly ProtoId<LocalizedDatasetPrototype> TranslitReplacementValuesDatasetId = "TtsSanitizerWorldReplacementValues";
+    private static readonly ProtoId<LocalizedDatasetPrototype> TranslitReplacementKeysDatasetId = "TtsSanitizerTranslitReplacementKeys";
+    private static readonly ProtoId<LocalizedDatasetPrototype> TranslitReplacementValuesDatasetId = "TtsSanitizerTranslitReplacementValues";
     private FrozenDictionary<string, string> _translitReplacement = default!;
 
     private void InitializeSanitizer()

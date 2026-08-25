@@ -42,6 +42,7 @@ public sealed partial class TtsSystem : SharedTtsSystem
     private readonly Dictionary<TtsCacheKey, EntityUid?> _playingStreams = [];
 
     private readonly HashSet<TtsCacheKey> _queuesToRemoveBuffer = [];
+    private readonly HashSet<TtsCacheKey> _playingStreamsToRemoveBuffer = [];
 
     public override void Initialize()
     {
@@ -66,8 +67,11 @@ public sealed partial class TtsSystem : SharedTtsSystem
     // Process sound queues on frame update
     public override void FrameUpdate(float frameTime)
     {
+        _queuesToRemoveBuffer.Clear();
+        _playingStreamsToRemoveBuffer.Clear();
+
         foreach (var (key, stream) in _playingStreams.Where(p => !HasComp<AudioComponent>(p.Value)))
-            _playingStreams.Remove(key);
+            _playingStreamsToRemoveBuffer.Add(key);
 
         foreach (var (key, queue) in _playQueues)
         {
@@ -86,6 +90,9 @@ public sealed partial class TtsSystem : SharedTtsSystem
 
         foreach (var key in _queuesToRemoveBuffer)
             _playQueues.Remove(key);
+
+        foreach (var key in _playingStreamsToRemoveBuffer)
+            _playingStreams.Remove(key);
 
         Entity<AudioComponent>? PlayNextRequest(Queue<PlayRequest> queue, bool recursive = true)
         {
