@@ -280,13 +280,13 @@ public sealed partial class IpcSystem : SharedIpcSystem
     }
 
     /// <summary>
-    /// Checks if the IPC battery has more than the critical charge threshold (1%).
+    /// Checks if the IPC battery has a charge below the critical threshold <see cref="IpcComponent.CritCharge"/>.
     /// Used to gate functionality that should stop working when the battery is nearly empty
     /// (movement speed, radio).
     /// </summary>
     private bool HasCriticalCharge(Entity<IpcComponent> ent)
     {
         return _powerCell.TryGetBatteryFromSlot(ent.Owner, out var battery)
-            && _battery.GetCharge(battery.Value.AsNullable()) / battery.Value.Comp.MaxCharge >= 0.01f;
+            && _battery.GetCharge(battery.Value.AsNullable()) / battery.Value.Comp.MaxCharge >= ent.Comp.CritCharge;
     }
 }

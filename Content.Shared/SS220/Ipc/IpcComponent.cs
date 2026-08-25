@@ -107,6 +107,12 @@ public sealed partial class IpcComponent : Component
     public float CritDrawRate = 5.0f;
 
     /// <summary>
+    /// The charge level below which IPC loses its abilities.
+    /// </summary>
+    [DataField]
+    public float CritCharge = 0.01f;
+
+    /// <summary>
     /// Hiding layers of clothing that are incorrectly displayed on IPC.
     /// </summary>
     [DataField]
