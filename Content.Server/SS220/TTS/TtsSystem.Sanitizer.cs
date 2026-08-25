@@ -67,8 +67,8 @@ public sealed partial class TtsSystem
 
     private FrozenDictionary<string, string> BuildReplacementCache(ProtoId<LocalizedDatasetPrototype> keysDatasetId, ProtoId<LocalizedDatasetPrototype> valuesDatasetId)
     {
-        var keysDataset = _prototypeManager.Index(WordReplacementKeysDatasetId);
-        var valuesDataset = _prototypeManager.Index(WordReplacementValuesDatasetId);
+        var keysDataset = _prototypeManager.Index(keysDatasetId);
+        var valuesDataset = _prototypeManager.Index(valuesDatasetId);
 
         DebugTools.Assert(keysDataset.Values.Count == valuesDataset.Values.Count);
 
