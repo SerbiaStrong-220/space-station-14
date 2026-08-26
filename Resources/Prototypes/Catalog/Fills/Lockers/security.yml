@@ -102,7 +102,7 @@
       prob: 0.02
     - id: PlushieLizardJobSecurityofficer
       prob: 0.02
-    - id: ClothingBeltCorporateJudo # SS220-CorporateJudo
+    - id: ClothingBeltCorporateJudoFilled # SS220-CorporateJudo
 
 - type: entity
   id: LockerBrigmedicFilled
