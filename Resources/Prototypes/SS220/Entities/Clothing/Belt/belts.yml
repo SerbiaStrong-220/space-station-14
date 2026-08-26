@@ -547,3 +547,19 @@
           amount: 2
         - id: SyringeSaline
           amount: 2
+
+- type: entity
+  parent: ClothingBeltCorporateJudo
+  id: ClothingBeltCorporateJudoFilled
+  name: Corporate Judo Belt
+  description: Teaches the wearer NT Corporate Judo.
+  suffix: Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: Handcuffs
+          amount: 2
+        - id: HoloprojectorSecurity
+        - id: RadioHandheldSecurity

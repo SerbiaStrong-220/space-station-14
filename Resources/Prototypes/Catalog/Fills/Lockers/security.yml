@@ -96,7 +96,7 @@
       prob: 0.1
     - id: HoloprojectorSecurity
       # prob: 0.6 #ss220-guarantee projector
-    - id: BookSpaceLaw
+    - id: BookSpaceLaws #SS220 our laws forewer
       prob: 1.0 #SS220 space-law
     - id: PlushieLizardJobSecuritycadet
       prob: 0.02
@@ -335,6 +335,8 @@
       amount: 2
     - id: BoxLethalshot
       amount: 4
+    - id: ClothingBeltBandolier
+      amount: 2    
 
 - type: entity
   id: GunSafeSubMachineGunWt550
