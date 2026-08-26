@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 08/15/2026 07:26:17
-  entityCount: 25003
+  time: 08/26/2026 06:04:43
+  entityCount: 25004
 maps:
 - 1
 grids:
@@ -25495,7 +25495,7 @@ entities:
       pos: 31.5,22.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -67448.23
+      secondsUntilStateChange: -68139.92
       state: Opening
   - uid: 385
     components:
@@ -77514,7 +77514,7 @@ entities:
       pos: 35.5,3.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -68079.98
+      secondsUntilStateChange: -68771.67
       state: Closing
 - proto: CurtainsCyanOpen
   entities:
@@ -95260,6 +95260,8 @@ entities:
     - type: Transform
       pos: 3.5476933,1.7878168
       parent: 2
+    - type: CollisionWake
+      enabled: False
 - proto: FoodDonutPoison
   entities:
   - uid: 12681
@@ -117490,6 +117492,9 @@ entities:
     - type: Transform
       pos: 3.5,1.5
       parent: 2
+    - type: ItemPlacer
+      placedEntities:
+      - 12680
 - proto: KitchenElectricGrillBroken
   entities:
   - uid: 15870
@@ -143119,7 +143124,7 @@ entities:
       pos: 55.5,-35.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -505852.34
+      secondsUntilStateChange: -506544.03
       state: Opening
 - proto: SpaceCarpCube
   entities:
@@ -144280,6 +144285,13 @@ entities:
     components:
     - type: Transform
       pos: -19.5,-16.5
+      parent: 2
+- proto: SpawnPointSecBorg
+  entities:
+  - uid: 12674
+    components:
+    - type: Transform
+      pos: 24.5,20.5
       parent: 2
 - proto: SpawnPointSecurityCadet
   entities:

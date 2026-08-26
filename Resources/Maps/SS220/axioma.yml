@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 08/15/2026 07:20:26
-  entityCount: 39112
+  time: 08/26/2026 05:49:26
+  entityCount: 39113
 maps:
 - 1
 grids:
@@ -118743,7 +118743,7 @@ entities:
       pos: 33.5,-93.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -983149.9
+      secondsUntilStateChange: -983240.3
       state: Closing
   - uid: 17525
     components:
@@ -122924,7 +122924,7 @@ entities:
       pos: 43.5,-95.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -801207.7
+      secondsUntilStateChange: -801298.1
       state: Closing
   - uid: 17932
     components:
@@ -122933,7 +122933,7 @@ entities:
       pos: 43.5,-94.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -801209
+      secondsUntilStateChange: -801299.44
       state: Closing
   - uid: 17933
     components:
@@ -122942,7 +122942,7 @@ entities:
       pos: 43.5,-93.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -801210.25
+      secondsUntilStateChange: -801300.7
       state: Closing
   - uid: 17934
     components:
@@ -122950,7 +122950,7 @@ entities:
       pos: 60.5,-82.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -801187.7
+      secondsUntilStateChange: -801278.1
       state: Closing
   - uid: 17935
     components:
@@ -122958,7 +122958,7 @@ entities:
       pos: 61.5,-82.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -801186.9
+      secondsUntilStateChange: -801277.3
       state: Closing
   - uid: 17936
     components:
@@ -216055,6 +216055,13 @@ entities:
     components:
     - type: Transform
       pos: -36.5,-14.5
+      parent: 2
+- proto: SpawnPointSecBorg
+  entities:
+  - uid: 26332
+    components:
+    - type: Transform
+      pos: 64.5,-1.5
       parent: 2
 - proto: SpawnPointSecurityCadet
   entities:

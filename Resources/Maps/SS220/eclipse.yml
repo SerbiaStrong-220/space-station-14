@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 08/15/2026 07:23:02
-  entityCount: 43551
+  time: 08/26/2026 05:33:37
+  entityCount: 43552
 maps:
 - 1
 grids:
@@ -34147,7 +34147,7 @@ entities:
       pos: 21.5,-6.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -218587.73
+      secondsUntilStateChange: -218652.64
       state: Opening
 - proto: AirlockServiceLocked
   entities:
@@ -131401,7 +131401,7 @@ entities:
       - DrinkBottle
       - Trash
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.053460978
+      sprayFizzinessThresholdRoll: 0.43009377
     - type: SolutionTransfer
       transferAmount: 50
     - type: ContainerContainer
@@ -131424,7 +131424,7 @@ entities:
       - DrinkBottle
       - Trash
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.75037163
+      sprayFizzinessThresholdRoll: 0.89864933
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -131471,7 +131471,7 @@ entities:
       - DrinkBottle
       - Trash
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.38638276
+      sprayFizzinessThresholdRoll: 0.9403733
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -131492,7 +131492,7 @@ entities:
       - DrinkBottle
       - Trash
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.77800757
+      sprayFizzinessThresholdRoll: 0.11805054
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -147470,6 +147470,8 @@ entities:
     - type: Transform
       pos: 19.484507,-11.206419
       parent: 2
+    - type: CollisionWake
+      enabled: False
   - uid: 20643
     components:
     - type: Transform
@@ -148597,6 +148599,8 @@ entities:
     - type: Transform
       pos: 19.484507,-10.270779
       parent: 2
+    - type: CollisionWake
+      enabled: False
 - proto: FoodSnackChocolate
   entities:
   - uid: 20816
@@ -200334,11 +200338,17 @@ entities:
     - type: Transform
       pos: 19.5,-10.5
       parent: 2
+    - type: ItemPlacer
+      placedEntities:
+      - 20815
   - uid: 27808
     components:
     - type: Transform
       pos: 19.5,-11.5
       parent: 2
+    - type: ItemPlacer
+      placedEntities:
+      - 20642
 - proto: KitchenElectricGrillBroken
   entities:
   - uid: 27809
@@ -240996,6 +241006,13 @@ entities:
     components:
     - type: Transform
       pos: -0.5,75.5
+      parent: 2
+- proto: SpawnPointSecBorg
+  entities:
+  - uid: 43552
+    components:
+    - type: Transform
+      pos: -13.5,-50.5
       parent: 2
 - proto: SpawnPointSecurityCadet
   entities:

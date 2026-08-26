@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 08/15/2026 07:21:09
-  entityCount: 37215
+  time: 08/26/2026 05:20:49
+  entityCount: 37216
 maps:
 - 1
 grids:
@@ -198969,6 +198969,13 @@ entities:
     components:
     - type: Transform
       pos: 61.5,-39.5
+      parent: 2
+- proto: SpawnPointSecBorg
+  entities:
+  - uid: 37216
+    components:
+    - type: Transform
+      pos: 6.5,46.5
       parent: 2
 - proto: SpawnPointSecurityCadet
   entities:
