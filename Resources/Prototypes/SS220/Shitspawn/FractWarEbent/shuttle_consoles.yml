@@ -27,6 +27,8 @@
     containers:
     - board
     deconstructionTarget: null
+  - type: RequireProjectileTarget
+    active: false
   - type: ShuttleConsolePoints
     fraction: flag-fraction-NT
     pointsOnDestroy: 500
@@ -68,6 +70,8 @@
     containers:
     - board
     deconstructionTarget: null
+  - type: RequireProjectileTarget
+    active: false
   - type: ShuttleConsolePoints
     fraction: flag-fraction-Synd
     pointsOnDestroy: 500
