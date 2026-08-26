@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 08/25/2026 10:16:44
-  entityCount: 59445
+  time: 08/15/2026 07:19:49
+  entityCount: 59444
 maps:
 - 1
 grids:
@@ -37760,7 +37760,7 @@ entities:
       pos: -10.5,-8.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -34000.84
+      secondsUntilStateChange: -33315.695
       state: Opening
   - uid: 548
     components:
@@ -178338,9 +178338,6 @@ entities:
         21257:
           position: 4,2
           _rotation: South
-        45415:
-          position: 5,2
-          _rotation: South
     - type: ContainerContainer
       containers:
         storagebase: !type:Container
@@ -178356,7 +178353,6 @@ entities:
           - 21254
           - 21253
           - 21257
-          - 45415
 - proto: DresserBlueShieldFilled
   entities:
   - uid: 26328
@@ -276252,11 +276248,6 @@ entities:
     - type: Transform
       pos: 2.5,63.5
       parent: 2
-    - type: UserInterface
-      actors:
-        enum.GenpopLockerUiKey.Key:
-        - invalid
-    - type: ActiveUserInterface
 - proto: LockerPrisoner4
   entities:
   - uid: 2123
@@ -312067,9 +312058,8 @@ entities:
   - uid: 45415
     components:
     - type: Transform
-      parent: 21252
-    - type: Physics
-      canCollide: False
+      pos: -22.37483,54.52884
+      parent: 2
   - uid: 45416
     components:
     - type: Transform
@@ -326824,13 +326814,6 @@ entities:
     components:
     - type: Transform
       pos: 88.5,-20.5
-      parent: 2
-- proto: SpawnPointSecBorg
-  entities:
-  - uid: 42125
-    components:
-    - type: Transform
-      pos: -27.5,58.5
       parent: 2
 - proto: SpawnPointSecurityCadet
   entities:
