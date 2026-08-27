@@ -141,5 +141,5 @@
   - type: Sprite
     layers:
     - state: green
-    #- state: securityborg
-    #  sprite: SS220\Markers\jobs.rsi
+    - state: securityborg
+      sprite: /Textures/SS220/Markers/jobs.rsi
