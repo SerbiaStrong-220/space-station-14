@@ -224,6 +224,9 @@
   - type: Stack
     stackType: LeavesTobaccoDried
     count: 1
+  - type: Tag
+    tags:
+    - HookahTobacco
   - type: SolutionContainerManager
     solutions:
       food:
@@ -258,6 +261,7 @@
     node: ground
   - type: Tag
     tags:
-      - Smokable
+    - Smokable
+    - HookahTobacco
   - type: Item
     size: Tiny
