@@ -152,7 +152,8 @@ public sealed partial class EncryptionKeySystem : EntitySystem
             args.Handled = true;
             TryInsertKey(uid, component, args);
         }
-        else if (TryComp<ToolComponent>(args.Used, out var tool)
+        else if (!IsLocked(uid) // SS220-ipc-builtin-radio
+                 && TryComp<ToolComponent>(args.Used, out var tool)
                  && _tool.HasQuality(args.Used, component.KeysExtractionMethod, tool)
                  && component.KeyContainer.ContainedEntities.Count > 0) // dont block deconstruction
         {
@@ -163,6 +164,14 @@ public sealed partial class EncryptionKeySystem : EntitySystem
 
     private void TryInsertKey(EntityUid uid, EncryptionKeyHolderComponent component, InteractUsingEvent args)
     {
+        // SS220-ipc-builtin-radio begin
+        if (IsLocked(uid))
+        {
+            _popup.PopupClient(Loc.GetString("encryption-keys-are-locked"), uid, args.User);
+            return;
+        }
+        // SS220-ipc-builtin-radio end
+
         if (!component.KeysUnlocked)
         {
             _popup.PopupClient(Loc.GetString("encryption-keys-are-locked"), uid, args.User);
@@ -224,6 +233,11 @@ public sealed partial class EncryptionKeySystem : EntitySystem
     {
         if (!args.IsInDetailsRange)
             return;
+
+        // SS220-ipc-builtin-radio begin
+        if (component.ExamineHidden)
+            return;
+        // SS220-ipc-builtin-radio end
 
         if (component.KeyContainer.ContainedEntities.Count == 0)
         {

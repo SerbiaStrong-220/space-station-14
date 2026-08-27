@@ -245,6 +245,7 @@
       - !type:EmptyContainersBehaviour
         containers:
         - cell_slot
+        - key_slots
       - !type:GibBehavior {}
     - trigger: !type:DamageTypeTrigger
         damageType: Blunt
@@ -253,6 +254,7 @@
       - !type:EmptyContainersBehaviour
         containers:
         - cell_slot
+        - key_slots
       - !type:GibBehavior {}
   - type: FireVisuals
     alternateState: Standing
@@ -265,6 +267,16 @@
         Heat: 0
   - type: Ipc
     damageFromEmp: 0 #IPC EMP damage removed.
+  - type: IntrinsicRadioReceiver
+  - type: IntrinsicRadioTransmitter
+    channels:
+    - Common
+  - type: ActiveRadio
+    channels:
+    - Common
+  - type: EncryptionKeyHolder
+    keySlots: 4
+    examineHidden: true
   - type: PowerCellSlot
     cellSlotId: cell_slot
     fitsInCharger: true
@@ -289,6 +301,11 @@
   - type: ContainerContainer
     containers:
       cell_slot: !type:ContainerSlot { }
+      key_slots: !type:Container
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCommon
   - type: MultiRepairable
     selfRepairPenalty: 2
     options:
