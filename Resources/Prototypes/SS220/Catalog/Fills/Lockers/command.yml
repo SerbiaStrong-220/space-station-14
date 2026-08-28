@@ -19,6 +19,27 @@
         - id: PinpointerCrew
 
 - type: entity
+  id: LockerBlueshieldFilledSetCase
+  suffix: Filled
+  parent: LockerBlueshield
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: WeaponDisabler
+        - id: MedkitAdvancedFilled
+        - id: ExpensiveLighterShield
+        - id: ClothingHeadHelmetTactical
+        - id: RubberStampBlueShield
+        - id: JetpackMiniBlueFilled
+        - id: ClothingMaskGasBlueShield
+        - id: PinpointerCrew
+        - id: SetCaseBlueshieldPriamryWeapon
+        - id: SetCaseBlueshieldSecondaryWeapon
+        - id: SetCaseBlueshieldSecondaryEquipment
+
+- type: entity
   parent: GunSafe
   id: GunSafeBlueshield
   name: blue shield's gun safe
@@ -30,4 +51,5 @@
       entity_storage: !type:AllSelector
         children:
         - id: SetCaseBlueshieldPriamryWeapon
+        - id: SetCaseBlueshieldSecondaryWeapon
         - id: SetCaseBlueshieldSecondaryEquipment

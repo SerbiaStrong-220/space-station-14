@@ -1,0 +1,76 @@
+- type: entity
+  id: SetSelectorBase
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: Objects/Tools/Toolboxes/toolbox_thief.rsi
+    state: icon
+  - type: SetSelector
+  - type: ActivatableUI
+    key: enum.SetSelectorUIKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.SetSelectorUIKey.Key:
+        type: SetSelectorBoundUserInterface
+
+- type: entity
+  id: SetSelectorBriefcaseBase
+  parent: SetSelectorBase
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/Briefcases/weapon_case_large.rsi
+    layers:
+    - state: icon
+    - state: unlocked
+  - type: Item
+    size: Ginormous
+
+- type: entity
+  id: SetCaseBlueshieldPriamryWeapon
+  parent: SetSelectorBriefcaseBase
+  name: blueshield primary gun case
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/Briefcases/bs_weapon_case_large.rsi
+  - type: SetSelector
+    spawnedStoragePrototype: BriefcaseWeaponBlueshield
+    maxSelectedSets: 1
+    possibleSets:
+    - WeaponBlasterKRSSet
+    - WeaponDrozdSet
+
+- type: entity
+  id: SetCaseBlueshieldSecondaryWeapon
+  parent: SetSelectorBriefcaseBase
+  name: blueshield secondary gun case
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/Briefcases/bs_weapon_case.rsi
+  - type: Item
+    size: Large
+  - type: SetSelector
+    spawnedStoragePrototype: BriefcaseWeaponSmallBlueshield
+    maxSelectedSets: 1
+    possibleSets:
+    - WeaponEnergyRevolverSet
+    - CorporateJudoManualSet
+
+- type: entity
+  id: SetCaseBlueshieldSecondaryEquipment
+  parent: SetSelectorBriefcaseBase
+  name: blueshield secondary equipment case
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/Briefcases/bs_weapon_case.rsi
+  - type: Item
+    size: Large
+  - type: SetSelector
+    spawnedStoragePrototype: BriefcaseWeaponSmallBlueshield
+    maxSelectedSets: 2
+    possibleSets:
+    - ClothingBeltHolsterBlueshieldSet
+    - TelescopicShieldSet
+    - BlueshieldMedicalSet
+

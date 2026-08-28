@@ -66,6 +66,10 @@
     fireRate: 1.2
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+  - type: Tag
+    tags:
+    - Sidearm
+    - BSHolsterSupport
   - type: BatteryAmmoProvider
     proto: LaserEnhanced
     fireCost: 150
@@ -150,18 +154,18 @@
       - SemiAuto
   - type: BatteryAmmoProvider
     proto: BulletBlasterBolt
-    fireCost: 62.5
+    fireCost: 33.33
   - type: BatteryWeaponFireModes
     fireModes:
       - proto: BulletBlasterBolt
         name: firemode-name-blaster
-        fireCost: 62.5
+        fireCost: 33.33
       - proto: BulletBlasterBoltPiercingWindow
         name: firemode-name-blaster-piercing-window
-        fireCost: 62.5
+        fireCost: 33.33
       - proto: BulletDisablerSmg
         name: firemode-name-disabler
-        fireCost: 40
+        fireCost: 20
   - type: ItemSlots
     slots:
       cell_slot:
@@ -187,15 +191,15 @@
       - FullAuto
   - type: BatteryAmmoProvider
     proto: BulletBlasterPulse
-    fireCost: 87.5
+    fireCost: 50
   - type: BatteryWeaponFireModes
     fireModes:
       - proto: BulletBlasterPulse
         name: firemode-name-blaster
-        fireCost: 87.5
+        fireCost: 50
       - proto: BulletDisablerSmg
         name: firemode-name-disabler
-        fireCost: 40
+        fireCost: 20
   - type: ItemSlots
     slots:
       cell_slot:

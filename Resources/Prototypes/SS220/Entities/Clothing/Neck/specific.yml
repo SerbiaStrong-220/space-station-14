@@ -85,7 +85,7 @@
     sprite: SS220/Clothing/Neck/Misc/bs_holster.rsi
     slots: [neck]
   - type: Charger
-    chargeRate: 60
+    chargeRate: 40
     slotId: charger_slot
     portable: true
   - type: ContainerContainer
@@ -97,4 +97,4 @@
         ejectOnInteract: false
         whitelist:
           tags:
-          - Sidearm
+          - BSHolsterSupport
