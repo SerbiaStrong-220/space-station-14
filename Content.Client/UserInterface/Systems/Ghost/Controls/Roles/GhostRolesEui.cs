@@ -57,11 +57,13 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls.Roles
             };
         }
 
-        public override void Opened()
-        {
-            base.Opened();
-            _window.OpenCentered();
-        }
+        // ss220 add verb for ghost role start
+        // public override void Opened()
+        // {
+        //     base.Opened();
+        //     _window.OpenCentered();
+        // }
+        // ss220 add verb for ghost role end
 
         public override void Closed()
         {
@@ -74,8 +76,25 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls.Roles
         {
             base.HandleState(state);
 
+            // ss220 add verb for ghost role start
+            if (state is GhostRoleRuleEuiState ghostRoleState)
+            {
+                _windowRules = new GhostRoleRulesWindow(ghostRoleState.Rules,
+                    _ =>
+                    {
+                        SendMessage(new RequestGhostRoleMessage(ghostRoleState.Identifier));
+                        Closed();
+                    });
+
+                _windowRules.OpenCentered();
+                return;
+            }
+            // ss220 add verb for ghost role end
+
             if (state is not GhostRolesEuiState ghostState)
                 return;
+
+            _window.OpenCentered(); // ss220 add verb for ghost role
 
             // We must save BodyVisible state, so all Collapsible boxes will not close
             // on adding new ghost role.

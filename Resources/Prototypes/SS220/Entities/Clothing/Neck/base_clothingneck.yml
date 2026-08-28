@@ -60,3 +60,17 @@
     - state: icon_flipped
       map: ["foldedLayer"]
       visible: true
+
+- type: entity
+  abstract: true
+  parent: [ClothingNeckBase, BaseFoldable]
+  id: ClothingNeckOtherShoulderBaseNoneIcon
+  components:
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: fold-other-shoulder-verb
+    foldVerbText: fold-other-shoulder-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: other-shoulder
+    foldedHeldPrefix: other-shoulder
