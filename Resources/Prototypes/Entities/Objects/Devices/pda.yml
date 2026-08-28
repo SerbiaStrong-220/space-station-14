@@ -606,6 +606,11 @@
     preinstalled:
     - CrewManifestCartridge
     - NewsReaderCartridge
+    #SS220 mime pda fix START
+    - NotekeeperCartridge
+    - NanoTaskCartridge
+    - MessengerCartridgeClient 
+    #SS220 mime pda fix END
   - type: Appearance
     appearanceDataInit:
      enum.PdaVisuals.PdaType:
