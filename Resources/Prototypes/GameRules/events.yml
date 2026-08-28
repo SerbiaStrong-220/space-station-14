@@ -298,6 +298,10 @@
         highSensitiveVisionRadius: 4
         state: half
       # SS220 Ninja Keen-Hearing-end
+      #SS220-NightVision-BGN
+      - type: ScotopicVision
+        energy: 1
+      #SS220-NightVision-END
       # SS220-add-ninja-thieving-begin
       - type: Thieving
         stripTimeReduction: 2

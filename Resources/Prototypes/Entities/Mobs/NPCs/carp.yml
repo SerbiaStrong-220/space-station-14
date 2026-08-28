@@ -90,6 +90,10 @@
       interactFailureString: petting-failure-carp
       interactFailureSound:
         path: /Audio/Effects/bite.ogg
+    #SS220-NightVision-BGN
+    - type: ScotopicVision
+      energy: 0.48
+    #SS220-NightVision-END
 
 - type: entity
   parent: BaseMobCarp
