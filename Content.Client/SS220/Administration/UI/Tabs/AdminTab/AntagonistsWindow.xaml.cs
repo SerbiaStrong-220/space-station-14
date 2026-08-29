@@ -18,10 +18,26 @@ namespace Content.Client.SS220.Administration.UI.Tabs.AdminTab
 
         protected override void EnteredTree()
         {
+            base.EnteredTree();
             AntagonistsList.OnSelectionChanged += OnListOnOnSelectionChanged;
             ListOfTargetsButton.OnPressed += ListOfTargetsButtonOnPressed;
-            //AddTargetButton.OnPressed += AddTargetButtonOnPressed;
             AddTargetButton.OnWindowCreated += AddTargetButtonOnWindowCreated;
+            CustomObjectivesFilter.OnToggled += OnCustomObjectivesFilterToggled;
+            IoCManager.Resolve<IClientConsoleHost>().ExecuteCommand("requestcustomobjectives");
+        }
+
+        protected override void ExitedTree()
+        {
+            base.ExitedTree();
+            AntagonistsList.OnSelectionChanged -= OnListOnOnSelectionChanged;
+            ListOfTargetsButton.OnPressed -= ListOfTargetsButtonOnPressed;
+            AddTargetButton.OnWindowCreated -= AddTargetButtonOnWindowCreated;
+            CustomObjectivesFilter.OnToggled -= OnCustomObjectivesFilterToggled;
+        }
+
+        private void OnCustomObjectivesFilterToggled(BaseButton.ButtonToggledEventArgs args)
+        {
+            AntagonistsList.SetCustomObjectivesFilter(args.Pressed);
         }
 
         private void OnListOnOnSelectionChanged(PlayerInfo? obj)
@@ -43,21 +59,12 @@ namespace Content.Client.SS220.Administration.UI.Tabs.AdminTab
 
         private void AddTargetButtonOnWindowCreated(DefaultWindow window)
         {
-            // This is dumb.
             if (_selectedAntagonist is null)
                 return;
+
             var addObjectiveWindow = (AddObjectiveWindow) window;
             var antagSession = IoCManager.Resolve<IPlayerManager>().GetSessionById(_selectedAntagonist.SessionId);
             addObjectiveWindow.SetAntagonist(antagSession);
-        }
-
-        private void AddTargetButtonOnPressed(BaseButton.ButtonEventArgs obj)
-        {
-            if (_selectedAntagonist == null)
-                return;
-
-            //IoCManager.Resolve<IClientConsoleHost>().ExecuteCommand(
-            //    $"addtarget {_selectedAntagonist.EntityUid}");
         }
     }
 }
