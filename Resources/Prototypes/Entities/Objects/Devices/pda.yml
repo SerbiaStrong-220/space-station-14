@@ -603,14 +603,11 @@
       whitelist:
         components:
         - Cartridge
-    preinstalled:
-    - CrewManifestCartridge
-    - NewsReaderCartridge
-    #SS220 mime pda fix START
-    - NotekeeperCartridge
-    - NanoTaskCartridge
-    - MessengerCartridgeClient 
-    #SS220 mime pda fix END
+    # SS220 mime pda fix begin
+    # preinstalled:
+    # - CrewManifestCartridge
+    # - NewsReaderCartridge
+    # SS220 mime pda fix end
   - type: Appearance
     appearanceDataInit:
      enum.PdaVisuals.PdaType:
