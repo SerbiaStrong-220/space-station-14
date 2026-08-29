@@ -394,11 +394,7 @@ public abstract partial class SharedMindSystem : EntitySystem
         _adminLogger.Add(LogType.Mind, LogImpact.Low, $"Objective {objective} ({title}) added to mind of {MindOwnerLoggingString(mind)}");
         mind.Objectives.Add(objective);
         Dirty(mindId, mind);
-
         var objectivesChangedEv = new MindObjectivesChangedEvent(objective, true);
-
-        var objectivesChangedEv = new MindObjectivesChangedEvent(objective);
-        
         RaiseLocalEvent(mindId, ref objectivesChangedEv);
     }
 
@@ -417,11 +413,7 @@ public abstract partial class SharedMindSystem : EntitySystem
         _adminLogger.Add(LogType.Mind, LogImpact.Low, $"Objective {objective} ({title}) removed from the mind of {MindOwnerLoggingString(mind)}");
         mind.Objectives.Remove(objective);
         Dirty(mindId, mind);
-
         var objectivesChangedEv = new MindObjectivesChangedEvent(objective, false);
-=======
-        var objectivesChangedEv = new MindObjectivesChangedEvent(objective);
-
         RaiseLocalEvent(mindId, ref objectivesChangedEv);
 
         // garbage collection - only delete the objective entity if no mind uses it anymore
@@ -738,11 +730,7 @@ public record struct GetCharactedDeadIcEvent(bool? Dead);
 public record struct GetCharacterUnrevivableIcEvent(bool? Unrevivable);
 
 [ByRefEvent]
-
 public readonly record struct MindObjectivesChangedEvent(EntityUid Objective, bool Added);
-
-public readonly record struct MindObjectivesChangedEvent(EntityUid Objective);
-
 
 public sealed record MindStringRepresentation(EntityStringRepresentation? OwnedEntity, bool PlayerPresent, NetUserId? Player) : IAdminLogsPlayerValue
 {
