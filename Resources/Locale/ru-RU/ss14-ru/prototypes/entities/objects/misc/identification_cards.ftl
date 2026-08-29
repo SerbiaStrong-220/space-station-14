@@ -134,11 +134,9 @@ ent-ERTSecurityIDCard = ID-карта офицера ОБР
     .desc = { ent-IDCardStandard.desc }
 ent-CentcomIDCardDeathsquad = ID-карта эскадрона смерти
     .desc = { ent-IDCardStandard.desc }
-# SS220-change-transaltion-begin
 ent-CBURNIDcard = ID-карта РХБЗ
     .desc = { ent-IDCardStandard.desc }
     .suffix = РХБЗ
-# SS220-change-transaltion-end
 ent-UniversalIDCard = универсальная ID-карта
     .desc = ID-карта, которая позволит вам осуществить свои самые сокровенные желания.
     .suffix = Админ
