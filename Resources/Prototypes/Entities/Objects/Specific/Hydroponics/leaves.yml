@@ -264,6 +264,6 @@
   - type: Tag
     tags:
     - Smokable
-    - HookahTobacco
+    - HookahTobacco # SS220 hookah
   - type: Item
     size: Tiny
