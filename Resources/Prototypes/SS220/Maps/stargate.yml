@@ -5,6 +5,8 @@
   mapName: 'NSS Stargate'
   mapPath: /Maps/SS220/stargate.yml
   minPlayers: 0 # normal limit: 45
+  maxRandomOffset: 0
+  randomRotation: false
   stations:
     StarGate:
       stationProto: StandardNanotrasenStation
@@ -43,14 +45,14 @@
             TechnicalAssistant: [ 6, 6 ]
             #Cargo
             Quartermaster: [ 1, 1 ]
-            CargoTechnician: [ 6, 6 ]
+            CargoTechnician: [ 5, 5 ]
             SalvageSpecialist: [ 3, 3 ]
             #Medical
             ChiefMedicalOfficer: [ 1, 1 ]
             SeniorPhysician: [ 1, 1]
-            MedicalDoctor: [ 7, 7 ]
+            MedicalDoctor: [ 4, 4 ]
             Chemist: [ 2, 2 ]
-            Psychologist: [ 2, 2 ]
+            Psychologist: [ 1, 1 ]
             MedicalIntern: [ 6, 6 ]
             Paramedic: [ 1, 1 ]
             #Science
@@ -62,17 +64,17 @@
             StationAi: [ 1, 1 ]
             #Service
             SeniorService: [ 1, 1 ]
-            Bartender: [ 2, 2 ]
+            Bartender: [ 1, 1 ]
             Botanist: [ 3, 3 ]
-            Chef: [ 2, 2 ]
+            Chef: [ 1, 1 ]
             Clown: [ 1, 1 ]
             Janitor: [ 3, 3 ]
             Mime: [ 1, 1 ]
             Chaplain: [ 1, 1 ]
             Librarian: [ 1, 1 ]
-            Musician: [ 2, 2 ]
-            Reporter: [ 2, 2 ]
-            ServiceWorker: [ 2, 2 ]
+            Musician: [ 1, 1 ]
+            Reporter: [ 1, 1 ]
+            ServiceWorker: [ 4, 4 ]
             Lawyer: [ 2, 2 ]
             Zookeeper: [ 1, 1 ]
         - type: StationGoal
