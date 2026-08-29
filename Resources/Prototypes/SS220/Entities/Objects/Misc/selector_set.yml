@@ -42,22 +42,6 @@
     - WeaponDrozdSet
 
 - type: entity
-  id: SetCaseBlueshieldSecondaryWeapon
-  parent: SetSelectorBriefcaseBase
-  name: blueshield secondary gun case
-  components:
-  - type: Sprite
-    sprite: SS220/Objects/Storage/Briefcases/bs_weapon_case.rsi
-  - type: Item
-    size: Large
-  - type: SetSelector
-    spawnedStoragePrototype: BriefcaseWeaponSmallBlueshield
-    maxSelectedSets: 1
-    possibleSets:
-    - WeaponEnergyRevolverSet
-    - CorporateJudoManualSet
-
-- type: entity
   id: SetCaseBlueshieldSecondaryEquipment
   parent: SetSelectorBriefcaseBase
   name: blueshield secondary equipment case
@@ -70,7 +54,8 @@
     spawnedStoragePrototype: BriefcaseWeaponSmallBlueshield
     maxSelectedSets: 2
     possibleSets:
-    - ClothingBeltHolsterBlueshieldSet
-    - TelescopicShieldSet
-    - BlueshieldMedicalSet
+    - BlueshieldSheriffSet
+    - BlueshieldMasterSet
+    - BlueshieldDefenderSet
+    - BlueshieldCombatMedicSet
 

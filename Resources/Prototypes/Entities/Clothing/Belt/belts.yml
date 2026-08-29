@@ -138,10 +138,10 @@
   description: 'A holster to carry a handgun and ammo. WARNING: Badasses only.'
   components:
   - type: Sprite
-    sprite: Clothing/Belt/holster.rsi
+    sprite: SS220/Clothing/Neck/Misc/holster.rsi #SS220 resprite
   - type: Clothing
     slots: [neck]  #SS220 holster to neck
-    sprite: Clothing/Belt/holster.rsi
+    sprite: SS220/Clothing/Neck/Misc/holster.rsi #SS220 resprite
   - type: Storage
     maxItemSize: Huge #SS220 holster maximum item size
     grid:
@@ -165,10 +165,10 @@
   description: A deep shoulder holster capable of holding many types of ballistics.
   components:
   - type: Sprite
-    sprite: Clothing/Belt/syndieholster.rsi
+    sprite: SS220/Clothing/Neck/Misc/syndieholster.rsi #SS220 resprite
   - type: Clothing
     slots: [neck]  #SS220 holster to neck
-    sprite: Clothing/Belt/syndieholster.rsi
+    sprite: SS220/Clothing/Neck/Misc/syndieholster.rsi #SS220 resprite
   - type: Storage
     maxItemSize: Huge
     grid:

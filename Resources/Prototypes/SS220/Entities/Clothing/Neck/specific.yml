@@ -80,10 +80,12 @@
   description:
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Neck/Misc/bs_holster.rsi
+    sprite: SS220/Clothing/Neck/Misc/bsoholster.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Neck/Misc/bs_holster.rsi
+    sprite: SS220/Clothing/Neck/Misc/bsoholster.rsi
     slots: [neck]
+  - type: Item
+    size: Ginormous
   - type: Charger
     chargeRate: 40
     slotId: charger_slot

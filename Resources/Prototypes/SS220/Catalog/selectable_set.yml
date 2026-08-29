@@ -25,29 +25,19 @@
   - MagazinePistolSubMachineGun
 
 - type: selectableSet
-  id: WeaponEnergyRevolverSet
-  name: selectable-set-weapon-energy-revolver-name
-  description: selectable-set-weapon-energy-revolver-description
+  id: BlueshieldSheriffSet
+  name: selectable-set-blueshield-sheriff-name
+  description: selectable-set-blueshield-sheriff-description
   sprite:
     sprite: SS220/Objects/Weapons/Guns/Battery/laser_revolver.rsi
     state: icon
   content:
-  - WeaponEnergyGunRevolver
+  - ClothingBeltHolsterBlueshieldFilled
 
 - type: selectableSet
-  id: ClothingBeltHolsterBlueshieldSet
-  name: selectable-set-clothing-belt-holster-blueshield-name
-  description: selectable-set-clothing-belt-holster-blueshield-description
-  sprite:
-    sprite: SS220/Clothing/Neck/Misc/bs_holster.rsi
-    state: icon
-  content:
-  - ClothingBeltHolsterBlueshield
-
-- type: selectableSet
-  id: CorporateJudoManualSet
-  name: selectable-set-corporate-judo-manual-name
-  description: selectable-set-corporate-judo-manual-description
+  id: BlueshieldMasterSet
+  name: selectable-set-blueshield-master-name
+  description: selectable-set-blueshield-master-description
   sprite:
     sprite: SS220/Objects/Misc/manual.rsi
     state: judo
@@ -55,9 +45,9 @@
   - CorporateJudoManual
 
 - type: selectableSet
-  id: TelescopicShieldSet
-  name: selectable-set-telescopic-shield-name
-  description: selectable-set-telescopic-shield-description
+  id: BlueshieldDefenderSet
+  name: selectable-set-blueshield-defender-name
+  description: selectable-set-blueshield-defender-description
   sprite:
     sprite: Objects/Weapons/Melee/teleriot_shield.rsi
     state: teleriot-icon
@@ -65,7 +55,7 @@
   - TelescopicShieldAlt
 
 - type: selectableSet
-  id: BlueshieldMedicalSet
+  id: BlueshieldCombatMedicSet
   name: selectable-set-blueshield-medical-name
   description: selectable-set-blueshield-medical-description
   sprite:
@@ -73,7 +63,6 @@
     state: icon
   content:
   - DefibrillatorCompact
-  - MedTekCartridge
 
 - type: selectableSet
   id: WeaponRevolverUnikaSet

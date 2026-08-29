@@ -16,6 +16,10 @@ ent-ClothingBeltLegendaryMarksmanHolsterFilled = плечевая кобура �
 ent-ClothingBeltBlackAngelHolsterFilled = плечевая кобура Чёрного ангела
     .desc = Кобура для ношения пистолета и боеприпасов. ВНИМАНИЕ: Только для крутых.
 
+ent-ClothingBeltHolsterBlueshieldFilled = плечевая кобура синего щита
+    .desc = Кобура, сочетающая высокие технологии и безупречный стиль. Вырабатывает впечатляющие 40 Вт энергии.
+    .suffix = Заполненный
+
 ent-ClothingBeltChefApronBase = фартук
     .desc = Фартук, который используют первоклассные повара, с карманами для хранения кухонных ножей и быстрого доступа к приправам.
 ent-ClothingBeltChefApronWhite = белый фартук
