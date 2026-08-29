@@ -11,7 +11,7 @@
     soundHit:
       path: /Audio/SS220/Weapons/Guns/Hits/peashooter_hit.ogg
   - type: Sprite
-    sprite: SS220\Objects\Weapons\Guns\Projectiles\peas_bullet.rsi
+    sprite: SS220/Objects/Weapons/Guns/Projectiles/peas_bullet.rsi
     layers:
       - state: peas_bullet
   - type: Ammo
@@ -39,7 +39,7 @@
     soundHit:
       path: /Audio/SS220/Weapons/Guns/Hits/peashooter_hit.ogg
   - type: Sprite
-    sprite: SS220\Objects\Weapons\Guns\Projectiles\peas_bullet_syndi.rsi
+    sprite: /SS220/Objects/Weapons/Guns/Projectiles/peas_bullet_syndi.rsi
     layers:
       - state: peas_bullet_syndi
   - type: Ammo
