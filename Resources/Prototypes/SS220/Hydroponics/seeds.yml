@@ -356,7 +356,6 @@
     Water:
       Min: 1
       Max: 10
-      PotencyDivisor: 10
     Vitamin:
       Min: 1
       Max: 5
@@ -371,11 +370,11 @@
   packetPrototype: PeashooterSeeds
   productPrototypes:
     - FoodPeashooterPlant
-  lifespan: 30
-  maturation: 10
+  lifespan: 40
+  maturation: 15
   production: 1
   yield: 1
-  potency: 10
+  potency: 1
   growthStages: 3
   waterConsumption: 0.60
   chemicals:
@@ -397,11 +396,11 @@
   packetPrototype: PeashooterSyndiSeeds
   productPrototypes:
     - FoodPeashooterSyndiPlant
-  lifespan: 30
-  maturation: 10
+  lifespan: 40
+  maturation: 15
   production: 1
   yield: 1
-  potency: 10
+  potency: 1
   growthStages: 3
   waterConsumption: 0.60
   chemicals:
