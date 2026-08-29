@@ -361,3 +361,55 @@
       Min: 1
       Max: 5
       PotencyDivisor: 20
+
+- type: seed
+  id: peashooter
+  name: seeds-peashooter-name
+  noun: seeds-noun-seeds
+  displayName: seeds-peashooter-display-name
+  plantRsi: SS220/Objects/Specific/Hydroponics/peashooter.rsi
+  packetPrototype: PeashooterSeeds
+  productPrototypes:
+    - FoodPeashooterPlant
+  lifespan: 30
+  maturation: 10
+  production: 1
+  yield: 1
+  potency: 10
+  growthStages: 3
+  waterConsumption: 0.60
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 10
+    Vitamin:
+      Min: 1
+      Max: 4
+      PotencyDivisor: 25
+
+- type: seed
+  id: peashootersyndi
+  name: seeds-sergeantpeashooter-name
+  noun: seeds-noun-seeds
+  displayName: стручок сержанта горохострела
+  plantRsi: SS220/Objects/Specific/Hydroponics/peashooter_syndi.rsi
+  packetPrototype: PeashooterSyndiSeeds
+  productPrototypes:
+    - FoodPeashooterSyndiPlant
+  lifespan: 30
+  maturation: 10
+  production: 1
+  yield: 1
+  potency: 10
+  growthStages: 3
+  waterConsumption: 0.60
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 10
+    Vitamin:
+      Min: 1
+      Max: 4
+      PotencyDivisor: 25

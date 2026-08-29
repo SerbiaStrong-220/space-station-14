@@ -4,13 +4,53 @@
   parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
-    - type: Projectile
-      damage:
-        types:
-          Blunt: 5
-    - type: Sprite
-      sprite: SS220\Objects\Weapons\Guns\Projectiles\peas_bullet.rsi
-      layers:
-        - state: peas_bullet
-    - type: Ammo
-      muzzleFlash: null
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 6
+    soundHit:
+      path: /Audio/SS220/Weapons/Guns/Hits/peashooter_hit.ogg
+  - type: Sprite
+    sprite: SS220\Objects\Weapons\Guns\Projectiles\peas_bullet.rsi
+    layers:
+      - state: peas_bullet
+  - type: Ammo
+    muzzleFlash: null
+  - type: TimedDespawn
+    lifetime: 0.5 # Very short range
+  - type: StunOnCollide
+    stunAmount: 0
+    knockdownAmount: 0
+    drop: false
+    slowdownAmount: 2.5
+    walkSpeedModifier: 0.8
+    sprintSpeedModifier: 0.8
+
+- type: entity
+  id: BulletPeasSyndi
+  name: peas
+  parent: BulletPeas
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 4
+    soundHit:
+      path: /Audio/SS220/Weapons/Guns/Hits/peashooter_hit.ogg
+  - type: Sprite
+    sprite: SS220\Objects\Weapons\Guns\Projectiles\peas_bullet_syndi.rsi
+    layers:
+      - state: peas_bullet_syndi
+  - type: Ammo
+    muzzleFlash: null
+  - type: TimedDespawn
+    lifetime: 0.5 # Very short range
+  - type: StunOnCollide
+    stunAmount: 0
+    knockdownAmount: 0
+    drop: false
+    slowdownAmount: 2.5
+    walkSpeedModifier: 0.8
+    sprintSpeedModifier: 0.8
+  
