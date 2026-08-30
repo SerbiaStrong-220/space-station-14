@@ -20,7 +20,7 @@
         - id: RubberStampBlueShield
         - id: JetpackMiniBlueFilled
         - id: PinpointerCrew
-        - id: DeathRattleImplanterStation
+        - id: BoxStationDeathRattleImplanter
 
 - type: entity
   parent: GunSafe

@@ -11,13 +11,12 @@ namespace Content.Shared.SS220.Trigger;
 
 /// <summary>
 /// Picks the radio channel of a death rattle implant through the context menu of the implanter holding it.
-/// Injecting moves the implant out of the implanter, so the verbs go away on their own and the pick
-/// becomes final without needing an explicit "is it implanted yet" check.
+/// Injecting moves the implant out of the implanter, so the verbs go away too
 /// </summary>
-public sealed class RattleChannelSelectorSystem : EntitySystem
+public sealed partial class RattleChannelSelectorSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -31,36 +30,33 @@ public sealed class RattleChannelSelectorSystem : EntitySystem
         if (!args.CanAccess || !args.CanInteract)
             return;
 
-        if (!TryGetImplant(ent, out var implant))
+        if (ent.Comp.ImplanterSlot.ContainerSlot?.ContainedEntity is not { } contained)
+            return;
+
+        if (!TryComp<RattleChannelSelectorComponent>(contained, out var selector)
+            || !TryComp<RattleOnTriggerComponent>(contained, out var rattle))
             return;
 
         var user = args.User;
-
-        // Verbs are held in a SortedSet, so these end up alphabetical by channel name regardless of
-        // the order Channels happens to enumerate in.
-        foreach (var channelId in implant.Comp1.Channels)
+        foreach (var channelId in selector.Channels)
         {
-            if (!_proto.TryIndex(channelId, out var channel))
+            if (!_prototype.TryIndex(channelId, out var channel))
                 continue;
 
-            var isCurrent = implant.Comp2.RadioChannel == channelId;
+            var selected = rattle.RadioChannel == channelId;
 
             args.Verbs.Add(new Verb
             {
                 Text = channel.LocalizedName,
                 Category = VerbCategory.ChannelSelect,
-                Disabled = isCurrent,
-                Message = isCurrent ? Loc.GetString("rattle-channel-selector-already-selected") : null,
-                Act = () => SetChannel((implant.Owner, implant.Comp2), channel, ent, user),
+                Disabled = selected,
+                Message = selected ? Loc.GetString("rattle-channel-selector-already-selected") : null,
+                Act = () => SetChannel((ent.Owner, rattle), channel, ent, user),
             });
         }
     }
 
-    private void SetChannel(
-        Entity<RattleOnTriggerComponent> implant,
-        RadioChannelPrototype channel,
-        EntityUid implanter,
-        EntityUid user)
+    private void SetChannel(Entity<RattleOnTriggerComponent> implant, RadioChannelPrototype channel, EntityUid implanter, EntityUid user)
     {
         if (implant.Comp.RadioChannel == channel.ID)
             return;
@@ -68,25 +64,6 @@ public sealed class RattleChannelSelectorSystem : EntitySystem
         implant.Comp.RadioChannel = channel.ID;
         Dirty(implant);
 
-        _popup.PopupClient(Loc.GetString("rattle-channel-selector-set", ("channel", channel.LocalizedName)),
-            implanter,
-            user);
-    }
-
-    private bool TryGetImplant(
-        Entity<ImplanterComponent> implanter,
-        out Entity<RattleChannelSelectorComponent, RattleOnTriggerComponent> implant)
-    {
-        implant = default;
-
-        if (implanter.Comp.ImplanterSlot.ContainerSlot?.ContainedEntity is not { } contained)
-            return false;
-
-        if (!TryComp<RattleChannelSelectorComponent>(contained, out var selector) ||
-            !TryComp<RattleOnTriggerComponent>(contained, out var rattle))
-            return false;
-
-        implant = (contained, selector, rattle);
-        return true;
+        _popup.PopupClient(Loc.GetString("rattle-channel-selector-set", ("channel", channel.LocalizedName)), implanter, user);
     }
 }

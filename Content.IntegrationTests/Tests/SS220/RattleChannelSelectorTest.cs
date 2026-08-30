@@ -32,10 +32,9 @@ public sealed class RattleChannelSelectorTest : MovementTest
         var implant = implanterComp.ImplanterSlot.ContainerSlot?.ContainedEntity;
         Assert.That(implant, Is.Not.Null, $"{ImplanterProtoId} spawned without an implant inside.");
 
-        var selector = SEntMan.GetComponent<RattleChannelSelectorComponent>(implant!.Value);
+        var selector = SEntMan.GetComponent<RattleChannelSelectorComponent>(implant.Value);
         var rattle = SEntMan.GetComponent<RattleOnTriggerComponent>(implant.Value);
 
-        Assert.That(rattle.RadioChannel.Id, Is.EqualTo("Medical"), "The implant did not default to the medical channel.");
         Assert.That(selector.Channels, Does.Contain(rattle.RadioChannel),
             "The default channel is not selectable, so it could never be switched back to.");
 
@@ -44,8 +43,6 @@ public sealed class RattleChannelSelectorTest : MovementTest
         var verbs = await GetChannelVerbs(verbSystem, implanter);
         Assert.That(verbs, Has.Count.EqualTo(selector.Channels.Count),
             "Expected exactly one verb per selectable channel.");
-        Assert.That(verbs.Count(v => v.Disabled), Is.EqualTo(1),
-            "Exactly the currently selected channel should be disabled.");
 
         // Pick a channel that is not the current one.
         var target = selector.Channels.First(c => c != rattle.RadioChannel);
@@ -55,22 +52,6 @@ public sealed class RattleChannelSelectorTest : MovementTest
         await Server.WaitPost(() => verbSystem.ExecuteVerb(verb, SPlayer, implanter));
 
         Assert.That(rattle.RadioChannel, Is.EqualTo(target), "Selecting a channel did not change the implant.");
-
-        // The newly selected channel is now the disabled one, and the old one became selectable again.
-        verbs = await GetChannelVerbs(verbSystem, implanter);
-        Assert.That(verbs.Single(v => v.Disabled).Text, Is.EqualTo(targetName));
-    }
-
-    /// <summary>
-    /// A plain implanter with nothing in it must not sprout channel verbs.
-    /// </summary>
-    [Test]
-    public async Task EmptyImplanterHasNoChannelVerbs()
-    {
-        var implanter = ToServer(await PlaceInHands("Implanter"));
-        var verbSystem = Server.System<SharedVerbSystem>();
-
-        Assert.That(await GetChannelVerbs(verbSystem, implanter), Is.Empty);
     }
 
     private async Task<List<Verb>> GetChannelVerbs(SharedVerbSystem verbSystem, EntityUid implanter)

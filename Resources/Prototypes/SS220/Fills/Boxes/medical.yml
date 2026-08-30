@@ -1,0 +1,10 @@
+- type: entity
+  parent: BoxCardboard
+  id: BoxStationDeathRattleImplanter
+  description: This box is filled with station death rattle implants
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: DeathRattleImplanterStation
+        amount: 3
