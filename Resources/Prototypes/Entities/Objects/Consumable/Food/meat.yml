@@ -71,6 +71,11 @@
     entity: FoodMeatRotten
     # once it would say bloated, turn into the rotten prototype
     stage: 1
+  # SS220-kitchen-processor begin
+  - type: FoodProcessorIngredient
+    result: FoodMeatMeatball
+    resultCount: 3
+  # SS220-kitchen-processor end
 
 # Raw
 
@@ -559,6 +564,11 @@
       - state: plain-inhand-left
       right:
       - state: plain-inhand-right
+# SS220-Grill-Hotfix begin
+  - type: Grillable
+    timeToCook: 30
+    cookingResult: FoodMeatCooked
+# SS220-Grill-Hotfix end
 
 - type: entity
   parent: FoodMeatRawBase
@@ -950,8 +960,13 @@
   - type: Sprite
     state: meatball
   - type: Construction
-    graph: MeatMeatballCooked
+    graph: MeatMeatballRolled # SS220-meatball-roll-fix
     node: start
+# SS220-kitchen-processor begin
+  - type: Grillable
+    timeToCook: 10
+    cookingResult: FoodMeatMeatballCooked
+# SS220-kitchen-processor end
 
 # meat patty - grillin' time
 
@@ -969,10 +984,10 @@
     state: raw_patty
   - type: InternalTemperature
     conductivity: 0.43
+  - type: Construction
+    graph: MeatMeatballRolled #SS220-meatball-roll-fix
+    node: meat patty #SS220-meatball-roll-fix
     #SS220-grillables-update begin
-#  - type: Construction
-#    graph: CookedPatty
-#    node: start
 #    defaultTarget: cooked meat patty
   - type: Grillable
     timeToCook: 30

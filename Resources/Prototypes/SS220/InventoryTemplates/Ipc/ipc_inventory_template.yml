@@ -49,13 +49,6 @@
       uiWindowPos: 0,3
       strippingWindowPos: 0,0
       displayName: Eyes
-    - name: ears
-      slotTexture: ears
-      slotFlags: EARS
-      stripTime: 3
-      uiWindowPos: 2,2
-      strippingWindowPos: 2,0
-      displayName: Ears
     - name: head
       slotTexture: head
       slotFlags: HEAD
@@ -72,6 +65,7 @@
       strippingWindowPos: 0,4
       displayName: Pocket 1
       stripHidden: true
+      fullyHidden: true
     - name: pocket2
       slotTexture: pocket
       fullTextureName: template_small
@@ -82,6 +76,7 @@
       strippingWindowPos: 1,4
       displayName: Pocket 2
       stripHidden: true
+      fullyHidden: true
     - name: suitstorage
       slotTexture: suit_storage
       slotFlags:   SUITSTORAGE

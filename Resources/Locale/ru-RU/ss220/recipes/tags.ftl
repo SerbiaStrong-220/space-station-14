@@ -189,3 +189,5 @@ construction-graph-tag-power-cell-high = батарея высокой ёмко�
 # posters
 construction-graph-tag-Contrposter = Недопустимый постер
 construction-graph-tag-Legalposter = Допустимый постер
+
+construction-graph-tag-butter-slice = ломтик сливочного масла

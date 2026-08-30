@@ -16,7 +16,7 @@
       required: false
     enum.HumanoidVisualLayers.Snout: #screen
       limit: 1
-      required: true
+      required: false
       default: [ ScreenStatic ]
     enum.HumanoidVisualLayers.Chest:
       limit: 1
@@ -138,6 +138,7 @@
     availableLanguages:
     - id: Galactic
     - id: Binary
+    - id: Ternary
   - type: Tag
     tags:
     - CanPilot
@@ -212,6 +213,10 @@
     - id: CableApcStack1
       amount: 4
   - type: Unrevivable
+  - type: DamageOnInteractProtection
+    damageProtection:
+      flatReductions:
+        Heat: 10
   - type: SleepEmitSound
     snore: /Audio/Machines/buzz-two.ogg
     interval: 30
@@ -240,6 +245,7 @@
       - !type:EmptyContainersBehaviour
         containers:
         - cell_slot
+        - key_slots
       - !type:GibBehavior {}
     - trigger: !type:DamageTypeTrigger
         damageType: Blunt
@@ -248,6 +254,7 @@
       - !type:EmptyContainersBehaviour
         containers:
         - cell_slot
+        - key_slots
       - !type:GibBehavior {}
   - type: FireVisuals
     alternateState: Standing
@@ -259,6 +266,17 @@
         Blunt: 0
         Heat: 0
   - type: Ipc
+    damageFromEmp: 0 #IPC EMP damage removed.
+  - type: IntrinsicRadioReceiver
+  - type: IntrinsicRadioTransmitter
+    channels:
+    - Common
+  - type: ActiveRadio
+    channels:
+    - Common
+  - type: EncryptionKeyHolder
+    keySlots: 4
+    examineHidden: true
   - type: PowerCellSlot
     cellSlotId: cell_slot
     fitsInCharger: true
@@ -283,6 +301,11 @@
   - type: ContainerContainer
     containers:
       cell_slot: !type:ContainerSlot { }
+      key_slots: !type:Container
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCommon
   - type: MultiRepairable
     selfRepairPenalty: 2
     options:
@@ -307,6 +330,7 @@
         damage:
           types:
              Heat: -5
+             Cold: -5 #delete in future
       - qualityNeeded: Pulsing
         doAfterDelay: 1.2
         damage:

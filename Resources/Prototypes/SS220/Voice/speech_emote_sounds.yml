@@ -184,3 +184,67 @@
       collection: Gasp
     CritGasp:
       collection: FemaleCritGasp
+
+- type: emoteSounds
+  id: MaleMoth
+  params:
+    variation: 0.125
+  sounds:
+    Buzz:
+      path: /Audio/Voice/Moth/moth_scream.ogg
+    Scream:
+      path: /Audio/Voice/Moth/moth_scream.ogg
+    Laugh:
+      path: /Audio/Voice/Moth/moth_laugh.ogg
+    Chitter:
+      path: /Audio/Voice/Moth/moth_chitter.ogg
+    Squeak:
+      path: /Audio/Voice/Moth/moth_squeak.ogg
+    Cough:
+      collection: MaleCoughs
+    BloodCough:
+      collection: MaleCoughs
+    DefaultDeathgasp:
+      collection: Deathgasp
+    Gasp:
+      collection: Gasp
+    CritGasp:
+      collection: MaleCritGasp
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Honk:
+      collection: BikeHorn
+
+- type: emoteSounds
+  id: FemaleMoth
+  params:
+    variation: 0.125
+  sounds:
+    Buzz:
+      path: /Audio/Voice/Moth/moth_scream.ogg
+    Scream:
+      path: /Audio/Voice/Moth/moth_scream.ogg
+    Laugh:
+      path: /Audio/Voice/Moth/moth_laugh.ogg
+    Chitter:
+      path: /Audio/Voice/Moth/moth_chitter.ogg
+    Squeak:
+      path: /Audio/Voice/Moth/moth_squeak.ogg
+    Cough:
+      collection: FemaleCoughs
+    BloodCough:
+      collection: FemaleCoughs
+    DefaultDeathgasp:
+      collection: Deathgasp
+    Gasp:
+      collection: Gasp
+    CritGasp:
+      collection: FemaleCritGasp
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Honk:
+      collection: BikeHorn

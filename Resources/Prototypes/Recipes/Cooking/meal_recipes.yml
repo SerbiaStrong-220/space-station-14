@@ -741,12 +741,18 @@
   id: RecipeBoiledSpaghetti
   name: boiled spaghetti recipe
   result: FoodNoodlesBoiled
-  time: 15
+  time: 10 # SS220-kitchen-processor
   group: Pasta
   reagents:
-    Flour: 15
-    Egg: 6
+    # SS220-kitchen-processor begin
+    Water: 15
+    #Egg: 6
+    # SS220-kitchen-processor end
     OilOlive: 5
+  # SS220-kitchen-processor begin
+  solids:
+    FoodSpaghetti: 1
+  # SS220-kitchen-processor end
 
 - type: microwaveMealRecipe
   id: RecipePastaTomato
@@ -2339,7 +2345,6 @@
   group: Dessert
   solids:
     FoodCroissantRaw: 1
-    FoodButterSlice: 1
 
 - type: microwaveMealRecipe
   id: RecipeCroissantCotton
@@ -2349,7 +2354,6 @@
   group: Moth
   solids:
     FoodCroissantRawCotton: 1
-    FoodButterSlice: 1
 
 - type: microwaveMealRecipe
   id: RecipeThrowingCroissant
@@ -2360,7 +2364,6 @@
   group: Secret
   solids:
     FoodCroissantRaw: 1
-    FoodButterSlice: 1
     ShardGlass: 1
 
 - type: microwaveMealRecipe

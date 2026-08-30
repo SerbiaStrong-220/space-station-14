@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Administration.Logs;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
@@ -34,12 +35,15 @@ public sealed partial class MultiRepairableSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (_damageableSystem.GetTotalDamage(ent.Owner) == 0)
+        if (!TryComp<DamageableComponent>(ent.Owner, out var damageable))
             return;
 
         foreach (var option in ent.Comp.Options)
         {
             if (!_toolSystem.HasQuality(args.Used, option.QualityNeeded))
+                continue;
+
+            if (!HasRepairableDamageType((ent.Owner, damageable), option))
                 continue;
 
             if (!TryGetRepairDelay(ent, args.User, option, out var delay))
@@ -81,11 +85,12 @@ public sealed partial class MultiRepairableSystem : EntitySystem
 
         args.Handled = true;
 
-        var totalDamage = _damageableSystem.GetTotalDamage(ent.Owner);
         var toolEntity = args.Args.Used.Value;
         var toolExists = Exists(toolEntity);
 
-        if (totalDamage > 0 && toolExists)
+        if (toolExists
+            && TryComp<DamageableComponent>(ent.Owner, out var damageable)
+            && HasRepairableDamageType((ent.Owner, damageable), option))
         {
             if (!TryGetRepairDelay(ent, args.User, option, out var delay))
                 return;
@@ -115,6 +120,22 @@ public sealed partial class MultiRepairableSystem : EntitySystem
         }
 
         return true;
+    }
+
+    private bool HasRepairableDamageType(Entity<DamageableComponent> ent, RepairOption option)
+    {
+        if (option.Damage == null)
+            return false;
+
+        var positiveDamage = _damageableSystem.GetPositiveDamage(ent);
+
+        foreach (var type in option.Damage.DamageDict.Keys)
+        {
+            if (positiveDamage.DamageDict.ContainsKey(type))
+                return true;
+        }
+
+        return false;
     }
 }
 

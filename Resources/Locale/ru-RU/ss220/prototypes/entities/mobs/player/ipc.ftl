@@ -7,13 +7,17 @@ ent-ActionDrainBattery = Опустошить заряд
 ent-ActionIpcChangeFace = Сменить интерфейс КПБ
     .desc = Открывает меню выбора интерфейса КПБ.
 
-sleep-ipc = КПБ уходит в режим сна.
+sleep-ipc = КПБ в режиме сна.
 
 ipc-drain-enabled = Опустошение заряда активно
 ipc-drain-disabled = Опустошение заряда отключено
+
 ipc-no-battery = Отсутствует батарея
+ipc-no-power = Батарея разряжена
 
 id-card-access-level-ipc = КПБ
+
+ipc-master-card = Мастер-карта КПБ
 
 ent-OrganIpcBrain = мозг КПБ
     .desc = Источник невероятного, бесконечного интеллекта.
