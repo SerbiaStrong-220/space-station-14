@@ -7,3 +7,4 @@ ent-DeathRattleImplanterStation = { ent-Implanter }
 
 ent-DeathRattleImplantStation = имплант "Предсмертный хрип"
     .desc = Микрочип, который вживляют под кожу. Перед введением можно выбрать радиоканал для оповещения.
+    .true-name = имплант "Предсмертный хрип" образца НаноТрейзен

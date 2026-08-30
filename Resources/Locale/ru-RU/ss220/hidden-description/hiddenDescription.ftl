@@ -78,11 +78,11 @@ ent-ActionActivateNanoSurgeryMachinesImplant = Активировать нано
 
 ent-DeathRattleImplanterInterdyne = { ent-Implanter }
     .desc = { ent-Implanter.desc }
-    .suffix = Interdyne Rattle
+    .suffix = Предсмертный хрип, Интердайн
 
 ent-DeathRattleImplantInterdyne = имплант Предсмертный хрип Интердайн
     .desc = Микрочип, который вживляют под кожу.
-
+    .true-name = имплант "Предсмертный хрип" образца Интердайн
 # Uplink locale
 
 uplink-thermal-glasses-name = Термальные очки
