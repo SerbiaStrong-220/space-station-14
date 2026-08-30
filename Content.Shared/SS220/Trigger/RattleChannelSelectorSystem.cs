@@ -51,7 +51,7 @@ public sealed partial class RattleChannelSelectorSystem : EntitySystem
                 Category = VerbCategory.ChannelSelect,
                 Disabled = selected,
                 Message = selected ? Loc.GetString("rattle-channel-selector-already-selected") : null,
-                Act = () => SetChannel((ent.Owner, rattle), channel, ent, user),
+                Act = () => SetChannel((contained, rattle), channel, ent, user),
             });
         }
     }
