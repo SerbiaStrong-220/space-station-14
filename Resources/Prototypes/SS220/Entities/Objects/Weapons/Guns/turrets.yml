@@ -240,7 +240,7 @@
     factions:
     - PetsNT
     addFriendlyFactions:
-      - PlantsFract
+    - PlantsFract
   - type: BallisticAmmoProvider
     proto: BulletPeas
     capacity: 500
@@ -290,6 +290,8 @@
   - type: NpcFactionMember
     factions:
     - Syndicate
+    addFriendlyFactions:
+    - PlantsFract
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/Turrets/peashooter_syndicat.rsi
     noRot: true
