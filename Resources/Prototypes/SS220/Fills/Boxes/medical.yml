@@ -1,8 +1,12 @@
 - type: entity
   parent: BoxCardboard
   id: BoxStationDeathRattleImplanter
-  description: This box is filled with station death rattle implants
+  description: This box is filled with station death rattle implants.
   components:
+  - type: Sprite
+    layers:
+    - state: box
+    - state: syringe
   - type: EntityTableContainerFill
     containers:
       storagebase:
