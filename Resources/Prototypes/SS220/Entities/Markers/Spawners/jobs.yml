@@ -132,7 +132,7 @@
 #Борг СБ
 
 - type: entity
-  id: SpawnPointSecBorg
+  id: SpawnPointSecurityBorg
   parent: SpawnPointJobBase
   name: security cyborg
   components:

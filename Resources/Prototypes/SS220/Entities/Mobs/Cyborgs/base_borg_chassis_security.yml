@@ -88,7 +88,7 @@
     - Security
   - type: ShowJobIcons
   - type: JobStatus
-    jobStatusIcon: JobIconSecBorg
+    jobStatusIcon: JobIconSecurityBorg
     isCrew: false
   - type: StatusIcon
   - type: ShowCrewIcons
