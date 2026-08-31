@@ -12,7 +12,7 @@
     department: Security
     time: 72000
   canBeAntag: false
-  icon: JobIconSecBorg
+  icon: JobIconSecurityBorg
   supervisors: job-supervisors-hos
   jobEntity: PlayerBorgChassisSecurityBattery
   applyTraits: false
