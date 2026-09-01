@@ -17,6 +17,7 @@
         - id: JetpackMiniBlueFilled
         - id: ClothingMaskGasBlueShield
         - id: PinpointerCrew
+        - id: BoxStationDeathRattleImplanter
 
 - type: entity
   id: LockerBlueshieldFilledSetCase
@@ -35,6 +36,7 @@
         - id: JetpackMiniBlueFilled
         - id: ClothingMaskGasBlueShield
         - id: PinpointerCrew
+        - id: BoxStationDeathRattleImplanter
         - id: SetCaseBlueshieldPriamryWeapon
         - id: SetCaseBlueshieldSecondaryEquipment
 

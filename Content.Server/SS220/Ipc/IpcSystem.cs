@@ -23,6 +23,14 @@ using Content.Shared.Temperature;
 using Content.Shared.MagicMirror;
 using Content.Shared.Power;
 using Content.Server.Body.Components;
+using Content.Server.EUI;
+using Content.Server.Ghost;
+using Content.Shared.Mind;
+using Content.Shared.Chat;
+using Content.Shared.Interaction.Events;
+using Content.Shared.IdentityManagement;
+using Content.Server.Chat;
+using Robust.Shared.Player;
 using Content.Server.Radio;
 
 namespace Content.Server.SS220.Ipc;
@@ -39,6 +47,10 @@ public sealed partial class IpcSystem : SharedIpcSystem
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private MobThresholdSystem _mobThresholdSystem = default!;
+    [Dependency] private EuiManager _eui = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SharedSuicideSystem _suicide = default!;
 
     private static readonly LocId IpcDrainReady = "ipc-drain-enabled";
     private static readonly LocId IpcDrainDisabled = "ipc-drain-disabled";
@@ -61,6 +73,7 @@ public sealed partial class IpcSystem : SharedIpcSystem
         SubscribeLocalEvent<IpcComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<IpcComponent, RefreshChargeRateEvent>(OnRefreshChargeRate);
         SubscribeLocalEvent<IpcComponent, OnTemperatureChangeEvent>(OnTemperatureChange);
+        SubscribeLocalEvent<IpcComponent, SuicideEvent>(IpcSuicide, before: [typeof(SuicideSystem)]);
         SubscribeLocalEvent<IpcComponent, RadioSendAttemptEvent>(OnRadioSendAttempt);
         SubscribeLocalEvent<IpcComponent, RadioReceiveAttemptEvent>(OnRadioReceiveAttempt);
     }
@@ -213,6 +226,7 @@ public sealed partial class IpcSystem : SharedIpcSystem
 
     /// <summary>
     /// IPC easily return from a dead state to a critical state if they are repaired.
+    /// Notify a disconnected ghost that their IPC body is repaired and can be returned to.
     /// </summary>
     private void OnDamageChanged(Entity<IpcComponent> ent, ref DamageChangedEvent args)
     {
@@ -232,6 +246,13 @@ public sealed partial class IpcSystem : SharedIpcSystem
             return;
 
         _mobState.ChangeMobState(ent, MobState.Critical);
+
+        if (_mind.TryGetMind(ent.Owner, out _, out var mindComp) &&
+            _player.TryGetSessionById(mindComp.UserId, out var playerSession) &&
+            mindComp.CurrentEntity != ent.Owner)
+        {
+            _eui.OpenEui(new ReturnToBodyEui(mindComp, _mind, _player), playerSession);
+        }
     }
 
     /// <summary>
@@ -258,6 +279,26 @@ public sealed partial class IpcSystem : SharedIpcSystem
         _powerCell.SetDrawRate((ent.Owner, draw), newDrawRate);
     }
 
+    private void IpcSuicide(Entity<IpcComponent> ent, ref SuicideEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (!TryComp<DamageableComponent>(ent, out var damageable))
+            return;
+            
+        args.DamageType = "Shock";
+        _suicide.ApplyLethalDamage((ent.Owner, damageable), args.DamageType);
+
+        var othersMessage = Loc.GetString("suicide-command-ipc-text-others", ("name", Identity.Entity(ent, EntityManager)));
+        _popup.PopupEntity(othersMessage, ent, Filter.PvsExcept(ent), true);
+
+        var selfMessage = Loc.GetString("suicide-command-ipc-text-self");
+        _popup.PopupEntity(selfMessage, ent, ent);
+
+        args.Handled = true;
+    }
+        
     /// <summary>
     /// IPC radio stops working when the battery is low.
     /// </summary>
