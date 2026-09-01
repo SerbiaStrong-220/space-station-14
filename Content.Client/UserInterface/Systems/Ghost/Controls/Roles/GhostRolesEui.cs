@@ -94,7 +94,10 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls.Roles
             if (state is not GhostRolesEuiState ghostState)
                 return;
 
-            _window.OpenCentered(); // ss220 add verb for ghost role
+            // ss220 add verb for ghost role start
+            if (!_window.IsOpen)
+                _window.OpenCentered();
+            // ss220 add verb for ghost role end
 
             // We must save BodyVisible state, so all Collapsible boxes will not close
             // on adding new ghost role.
