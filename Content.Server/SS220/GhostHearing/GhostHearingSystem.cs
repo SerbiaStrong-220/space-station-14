@@ -4,6 +4,7 @@ using Content.Shared.Radio;
 using Content.Shared.SS220.GhostHearing;
 using Content.Shared.SS220.Telepathy;
 using Content.Shared.SS220.TTS;
+using Content.Shared.SS220.TTS.Prototypes;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
@@ -36,10 +37,10 @@ public sealed partial class GhostHearingSystem : SharedGhostHearingSystem
     {
         var radioProtos =
             _prototypeManager.EnumeratePrototypes<RadioChannelPrototype>()
-            .Cast<IHearableChannelPrototype>();
+            .Cast<ITtsHearableChannelPrototype>();
         var telepathyProtos =
             _prototypeManager.EnumeratePrototypes<TelepathyChannelPrototype>()
-            .Cast<IHearableChannelPrototype>();
+            .Cast<ITtsHearableChannelPrototype>();
 
         var allChannels = radioProtos.Concat(telepathyProtos);
 

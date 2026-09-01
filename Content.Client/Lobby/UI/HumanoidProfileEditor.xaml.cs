@@ -202,9 +202,7 @@ namespace Content.Client.Lobby.UI
 
             #endregion Gender
 
-            // Corvax-TTS-Start
-            InitializeVoice();
-            // Corvax-TTS-End
+            InitializeSS220(); // SS220
 
             RefreshSpecies();
 
@@ -430,8 +428,7 @@ namespace Content.Client.Lobby.UI
             UpdateEyePickers();
             UpdateSaveButton();
             UpdateMarkings();
-            UpdateTTSVoicesControls(); // Corvax-TTS
-            UpdateSignature(); // ss220 add signature
+            UpdateSS220(); // SS220
 
             RefreshAntags();
             RefreshJobs();

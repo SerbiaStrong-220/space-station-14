@@ -7,6 +7,7 @@ using Content.Shared.Database;
 using Content.Shared.GameTicking;
 using Content.Shared.SS220.Telepathy;
 using Content.Shared.SS220.TTS;
+using Content.Shared.SS220.TTS.Components;
 using Content.Shared.SS220.UpdateChannels;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -162,7 +163,7 @@ public sealed partial class TelepathySystem : EntitySystem
         else
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Announce telepathy message: {message}, were send in telepathy channel: {rightTelepathyChannel.Id}");
 
-        if (senderUid != null && HasComp<TTSComponent>(senderUid))
+        if (senderUid != null && HasComp<TtsComponent>(senderUid))
         {
             RaiseLocalEvent(new TelepathySpokeEvent(senderUid.Value, message, [.. telephatyTtsRecievers], rightTelepathyChannel));
         }

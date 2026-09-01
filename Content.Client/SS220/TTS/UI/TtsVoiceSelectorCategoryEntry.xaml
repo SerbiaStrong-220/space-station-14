@@ -1,0 +1,10 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls;assembly=Content.Client"
+              Orientation="Vertical"
+              HorizontalExpand="True">
+    <RichTextLabel Name="CategoryNameLabel" HorizontalExpand="True" MouseFilter="Stop" Access="Public"/>
+    <controls:HLine Name="Divider" Color="#4F5376FF" Thickness="4" HorizontalExpand="True" VerticalAlignment="Center" Margin="0 5"/>
+    <BoxContainer Name="VoiceEntriesContainer" Orientation="Vertical" HorizontalExpand="True" Access="Public">
+        <!-- Added by code -->
+    </BoxContainer>
+</BoxContainer>

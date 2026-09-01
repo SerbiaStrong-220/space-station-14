@@ -6,7 +6,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
 using Content.Shared.Radio;
 using Content.Shared.Speech;
-using Content.Shared.SS220.TTS;
+using Content.Shared.SS220.TTS.Prototypes;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -461,7 +461,7 @@ public abstract partial class SharedChatSystem : EntitySystem
         Color? colorOverride = null,
         bool playTTS = true, // SS220-fix-double-event-announce
         bool playPrerecordedSound = true, // SS220-fix-double-event-announce
-        ProtoId<TTSVoicePrototype>? voiceId = null) // SS2220-tts
+        ProtoId<TtsVoicePrototype>? voiceId = null) // SS220 tts
     { }
 
     /// <summary>
@@ -484,7 +484,7 @@ public abstract partial class SharedChatSystem : EntitySystem
         Color? colorOverride = null,
         bool playTTS = true, // SS220-fix-double-event-announce
         bool playPrerecordedSound = true, // SS220-fix-double-event-announce
-        ProtoId<TTSVoicePrototype>? voiceId = null) // SS2220-tts
+        ProtoId<TtsVoicePrototype>? voiceId = null) // SS220 tts
     { }
 
     /// <summary>
@@ -505,7 +505,7 @@ public abstract partial class SharedChatSystem : EntitySystem
         Color? colorOverride = null,
         bool playTTS = true, // SS220-fix-double-event-announce
         bool playPrerecordedSound = true, // SS220-fix-double-event-announce
-        ProtoId<TTSVoicePrototype>? voiceId = null) // SS2220-tts
+        ProtoId<TtsVoicePrototype>? voiceId = null) // SS220 tts
     { }
 }
 

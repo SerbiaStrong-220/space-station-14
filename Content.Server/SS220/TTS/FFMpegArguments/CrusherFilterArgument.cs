@@ -1,5 +1,4 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-
 using System.Globalization;
 using System.Linq;
 using FFMpegCore.Arguments;
@@ -8,7 +7,7 @@ namespace Content.Server.SS220.TTS.FFMPegArguments;
 
 public sealed class CrusherFilterArgument : IAudioFilterArgument
 {
-    private readonly Dictionary<string, string> _arguments = new Dictionary<string, string>();
+    private readonly Dictionary<string, string> _arguments = [];
 
     public CrusherFilterArgument(
         double levelIn = 1d,

@@ -1,0 +1,10 @@
+- type: ttsVoiceCategory
+  id: Misc
+  name: tts-voice-category-misc-name
+  sortPriority: -999
+
+- type: ttsVoiceCategory
+  id: Sponsor
+  name: tts-voice-category-sponsor-name
+  description: tts-voice-category-sponsor-desc
+  color: "#FFD70060"

@@ -82,7 +82,7 @@
   - type: FlashImmunity
   - type: Speech
     speechVerb: LargeMob
-  - type: TTS
+  - type: Tts
     voice: forester
   - type: Language
     availableLanguages:
