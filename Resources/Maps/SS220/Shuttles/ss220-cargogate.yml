@@ -1231,7 +1231,6 @@ entities:
       pos: -0.5,5.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
       deviceLists:
       - 255
     - type: AtmosPipeLayers
@@ -1267,7 +1266,6 @@ entities:
       pos: 1.5,5.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
       deviceLists:
       - 255
     - type: AtmosPipeLayers

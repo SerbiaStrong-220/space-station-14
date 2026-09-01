@@ -191791,7 +191791,6 @@ entities:
       pos: -4.5,-8.5
       parent: 2
     - type: DeviceNetwork
-      configurators:
       deviceLists:
       - 13812
     - type: AtmosPipeLayers
@@ -194970,7 +194969,6 @@ entities:
       pos: -4.5,-6.5
       parent: 2
     - type: DeviceNetwork
-      configurators:
       deviceLists:
       - 13812
     - type: AtmosPipeLayers
@@ -327031,7 +327029,6 @@ entities:
       pos: -73.5,7.5
       parent: 2
     - type: DeviceNetwork
-      configurators:
       deviceLists:
       - 39660
     - type: BatteryAmmoProvider
@@ -327045,7 +327042,6 @@ entities:
       pos: -75.5,7.5
       parent: 2
     - type: DeviceNetwork
-      configurators:
       deviceLists:
       - 39660
     - type: BatteryAmmoProvider
