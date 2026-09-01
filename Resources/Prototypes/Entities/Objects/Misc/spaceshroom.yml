@@ -82,13 +82,19 @@
         - ItemMask
         restitution: 0.3
         friction: 0.2
-  - type: Construction
-    graph: CookedSpaceshroom
-    node: start
-    defaultTarget: cooked spaceshroom
+    #SS220-grillables-update begin
+#  - type: Construction
+#    graph: CookedSpaceshroom
+#    node: start
+#    defaultTarget: cooked spaceshroom
+  - type: Grillable
+    timeToCook: 15
+    cookingResult: FoodSpaceshroomCooked
+    #SS220-grillables-update end
   - type: AtmosExposed
   - type: Temperature
     currentTemperature: 290
+  - type: TemperatureDamage
   - type: InternalTemperature
     thickness: 0.02
     area: 0.02
@@ -146,6 +152,11 @@
   - type: Produce
   - type: StaticPrice
     price: 40
-  - type: Construction
-    graph: CookedSpaceshroom
-    node: cooked spaceshroom
+    #SS220-grillables-update begin
+#  - type: Construction
+#    graph: CookedSpaceshroom
+#    node: cooked spaceshroom
+  - type: FoodSequenceElement
+    entries:
+      Burger: SpaceshroomBurger
+    #SS220-grillables-update end

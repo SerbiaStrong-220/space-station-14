@@ -3,9 +3,11 @@ using Content.Server.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Events;
+using Content.Shared.Damage;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Shared.Tag;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Collections;
@@ -43,6 +45,14 @@ public sealed class SolutionInjectOnCollideSystem : EntitySystem
 
     private void HandleEmbed(Entity<SolutionInjectOnEmbedComponent> entity, ref EmbedEvent args)
     {
+        //SS220 shield rework begin
+        var blockEv = new ThrowableProjectileBlockAttemptEvent(new DamageSpecifier(), entity.Owner);
+
+        RaiseLocalEvent(args.Embedded, ref blockEv);
+        if (blockEv.Cancelled)
+            return;
+
+        //SS220 shield rework end
         DoInjection((entity.Owner, entity.Comp), args.Embedded, args.Shooter);
     }
 
@@ -148,7 +158,7 @@ public sealed class SolutionInjectOnCollideSystem : EntitySystem
             // Take our portion of the adjusted solution for this target
             var individualInjection = solutionToInject.SplitSolution(volumePerBloodstream);
             // Inject our portion into the target's bloodstream
-            if (_bloodstream.TryAddToChemicals(targetBloodstream.AsNullable(), individualInjection))
+            if (_bloodstream.TryAddToBloodstream(targetBloodstream.AsNullable(), individualInjection))
                 anySuccess = true;
         }
 

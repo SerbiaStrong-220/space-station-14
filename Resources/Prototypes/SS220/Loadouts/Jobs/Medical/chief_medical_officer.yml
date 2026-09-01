@@ -84,3 +84,14 @@
   id: CMOStethoscope
   equipment:
     neck: ClothingNeckStethoscope
+
+# Headset
+- type: loadout
+  id: ChiefMedicalOfficerHeadset
+  equipment:
+    ears: ClothingHeadsetCMO
+
+- type: loadout
+  id: ChiefMedicalOfficerHeadsetAlt
+  equipment:
+    ears: ClothingHeadsetAltMedical

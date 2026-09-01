@@ -1,3 +1,7 @@
 - type: metabolizerType
   id: Hydroponic
   name: metabolizer-type-hydroponic
+
+- type: metabolizerType
+  id: Tajaran
+  name: metabolizer-type-tajaran

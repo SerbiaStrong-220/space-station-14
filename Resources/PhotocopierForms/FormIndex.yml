@@ -87,6 +87,8 @@
     - /PhotocopierForms/nanotrasen_station/law/law_anonymousdenunciation.xml
     - /PhotocopierForms/nanotrasen_station/law/law_request.xml #SS220-Law Department
     - /PhotocopierForms/nanotrasen_station/law/law_pic.xml
+    - /PhotocopierForms/nanotrasen_station/law/law_cc_req.xml
+    - /PhotocopierForms/nanotrasen_station/law/law_hod.xml
   - Id: security
     Name: Служба Безопасности
     Color: "#DD4040FF"
@@ -105,6 +107,7 @@
     - /PhotocopierForms/nanotrasen_station/security/sup_ord_wep.xml
     - /PhotocopierForms/nanotrasen_station/security/sec_sitrep.xml
     - /PhotocopierForms/nanotrasen_station/security/sec_prig.xml
+    - /PhotocopierForms/nanotrasen_station/security/sec_den.xml
   - Id: medical
     Name: Медицинский отдел
     Color: "#8585FFFF"
@@ -132,11 +135,13 @@
     Color: "#AB2EFFFF"
     IconPath: /Textures/SS220/DepartmentIcons/Sci_dep.png
     Forms:
+    - /PhotocopierForms/nanotrasen_station/science/rnd_sitrep.xml
     - /PhotocopierForms/nanotrasen_station/science/rnd_ord.xml
     - /PhotocopierForms/nanotrasen_station/science/rnd_rnt.xml
     - /PhotocopierForms/nanotrasen_station/science/rnd_rar.xml
     - /PhotocopierForms/nanotrasen_station/science/rnd_ror.xml
     - /PhotocopierForms/nanotrasen_station/science/rnd_dfct.xml
+    - /PhotocopierForms/nanotrasen_station/science/rnd_dob.xml
   - Id: cargo
     Name: Отдел снабжения
     Color: "#C2904AFF"

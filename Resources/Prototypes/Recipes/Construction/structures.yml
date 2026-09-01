@@ -1296,7 +1296,7 @@
   description: recipes-secret-door-desc
   graph: Girder # SS220 Graph changed (SecretSolidDoor Recipe Update)
   startNode: start
-  targetNode: secretWall # SS220 Graph changed (SecretSolidDoor Recipe Update)
+  targetNode: solidSecretDoor # SS220 Graph changed (SecretSolidDoor Recipe Update)
   category: construction-category-structures
   objectType: Structure
   placementMode: SnapgridCenter
@@ -1316,3 +1316,42 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+
+- type: construction
+  id: StationAiCore
+  graph: StationAiCore
+  startNode: start
+  targetNode: stationAiCore
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: Bonfire
+  graph: Bonfire
+  startNode: start
+  targetNode: bonfire
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+
+- type: construction
+  id: BonfireStake
+  graph: Bonfire
+  startNode: start
+  targetNode: bonfireStake
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked

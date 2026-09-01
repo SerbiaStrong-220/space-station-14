@@ -93,3 +93,9 @@
     proto: BigShlopaSponsorTier
   equipment:
     outerClothing: ClothingSponsorCyberJacketRnD
+
+# Head
+- type: loadout
+  id: ScientistBeret
+  equipment:
+    head: ClothingHeadHatBeretRND

@@ -3,6 +3,8 @@
          xmlns:humanoid="clr-namespace:Content.Client.Humanoid"
          xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
          xmlns:ui="clr-namespace:Content.Client.Lobby.UI"
+         xmlns:signature="clr-namespace:Content.Client.SS220.Signature"
+         xmlns:profile="clr-namespace:Content.Client.Lobby.UI.ProfileEditorControls"
          HorizontalExpand="True">
         <!-- Left side -->
         <BoxContainer Orientation="Vertical" Margin="10 10 10 10" HorizontalExpand="True">
@@ -106,11 +108,6 @@
                                 <Slider HorizontalExpand="True" Name="Skin" MinValue="0" MaxValue="100" Value="20" />
                                 <BoxContainer Name="RgbSkinColorContainer" Visible="False" Orientation="Vertical" HorizontalExpand="True"></BoxContainer>
                             </BoxContainer>
-                            <!-- Hair -->
-                            <BoxContainer Margin="10" Orientation="Horizontal">
-                                <humanoid:SingleMarkingPicker Name="HairStylePicker" Category="Hair" />
-                                <humanoid:SingleMarkingPicker Name="FacialHairPicker" Category="FacialHair" />
-                            </BoxContainer>
                             <!-- Eyes -->
                             <BoxContainer Margin="10" Orientation="Vertical">
                                 <Label Text="{Loc 'humanoid-profile-editor-eyes-label'}" />
@@ -140,19 +137,47 @@
                 </BoxContainer>
                 <BoxContainer Name="MarkingsTab" Orientation="Vertical" Margin="10">
                     <!-- Markings -->
-                    <ScrollContainer VerticalExpand="True">
-                        <humanoid:MarkingPicker Name="Markings" IgnoreCategories="Hair,FacialHair" />
-                    </ScrollContainer>
+                    <humanoid:MarkingPicker Name="Markings" HorizontalExpand="True" VerticalExpand="True" />
                 </BoxContainer>
                 <BoxContainer Name="CAfkPreferences" Orientation="Vertical" Margin="10">
                     <!-- Afk preferences -->
                    <CheckBox Name="CTeleportAfkToCryoStorage" Text="{Loc 'humanoid-profile-editor-afkPreferences-teleport-to-cryo-storage'}"/> <!-- SS220 loc fix -->
+                <!-- SS220 ADD SIGNATURE START -->
+                </BoxContainer>
+                <BoxContainer Name="OtherContainer" Orientation="Vertical" Margin="10">
+                    <BoxContainer Name="SavedSignatureContainer" Orientation="Horizontal" Margin="10">
+                        <RichTextLabel Text="{Loc 'humanoid-profile-signature-saved-label'}" Margin="0 0 20 0"/>
+                        <BoxContainer>
+                            <BoxContainer Orientation="Horizontal">
+                                <BoxContainer Orientation="Vertical" Margin="0 0 20 0">
+                                    <Label Text="{Loc 'humanoid-profile-signature-brush-write'}" HorizontalAlignment="Center"/>
+                                    <ItemList Name="BrushWriteSizesList" SetSize="140 80" Margin="0 0 0 20"/>
+                                </BoxContainer>
+                                <BoxContainer Orientation="Vertical">
+                                    <Label Text="{Loc 'humanoid-profile-signature-brush-erase'}" HorizontalAlignment="Center"/>
+                                    <ItemList Name="BrushEraseSizesList" SetSize="140 80"/>
+                                </BoxContainer>
+
+                            </BoxContainer>
+                            <signature:SignatureControl Name="Signature"
+                                                        SetSize="250 100"
+                                                        CanvasSize="250 100"
+                                                        Access="Public"
+                                                        MouseFilter="Stop"
+                                                        HorizontalExpand="True"
+                                                        VerticalExpand="True"
+                                                        Margin="20 0 0 0"
+                                                        VerticalAlignment="Center"
+                                                        HorizontalAlignment="Right"/>
+                        </BoxContainer>
+                    </BoxContainer>
+                    <!-- SS220 ADD SIGNATURE END -->
                 </BoxContainer>
             </TabContainer>
         </BoxContainer>
         <!-- Right side -->
         <BoxContainer Orientation="Vertical" VerticalExpand="True" VerticalAlignment="Center">
-            <SpriteView Name="SpriteView" Scale="8 8" Margin="4" SizeFlagsStretchRatio="1" />
+            <profile:ProfilePreviewSpriteView Name="SpriteView" Scale="8 8" Margin="4" SizeFlagsStretchRatio="1" />
             <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 5">
                 <Button Name="SpriteRotateLeft" Text="◀" StyleClasses="OpenRight" />
                 <cc:VSeparator Margin="2 0 3 0" />

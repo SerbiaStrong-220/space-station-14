@@ -9,10 +9,10 @@ using Robust.Shared.Physics.Systems;
 
 namespace Content.Server.SS220.ShapeCollisionTracker;
 
-public sealed class ShapeCollisionTrackerSystem : EntitySystem
+public sealed partial class ShapeCollisionTrackerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedBroadphaseSystem _broadphase = default!;
-    [Dependency] private readonly FixtureSystem _fixtures = default!;
+    [Dependency] private SharedBroadphaseSystem _broadphase = default!;
+    [Dependency] private FixtureSystem _fixtures = default!;
 
     private readonly HashSet<(EntityUid, ShapeCollisionTrackerComponent)> _trackerDebounce = new();
 
@@ -75,8 +75,7 @@ public sealed class ShapeCollisionTrackerSystem : EntitySystem
         ShapeCollisionTrackerComponent component,
         MapInitEvent args)
     {
-        component.Enabled = !component.RequiresAnchored ||
-                            EntityManager.GetComponent<TransformComponent>(uid).Anchored;
+        component.Enabled = !component.RequiresAnchored || Comp<TransformComponent>(uid).Anchored;
 
         if (!TryComp<PhysicsComponent>(uid, out _))
             return;

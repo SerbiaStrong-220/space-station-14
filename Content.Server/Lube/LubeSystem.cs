@@ -1,9 +1,11 @@
 using Content.Server.Administration.Logs;
 using Content.Shared.Database;
+using Content.Shared.Doors.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Item;
 using Content.Shared.Lube;
+using Content.Shared.SS220.Doors;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
@@ -63,6 +65,11 @@ public sealed class LubeSystem : EntitySystem
 
     private bool TryLube(Entity<LubeComponent> entity, EntityUid target, EntityUid actor)
     {
+        // SS220 Add door lubrication (begin)
+        if (HasComp<DoorComponent>(target))
+            return TryLubeDoor(entity, target, actor);
+        // SS220 Add door lubrication (end)
+
         if (HasComp<LubedComponent>(target) || !HasComp<ItemComponent>(target))
         {
             _popup.PopupEntity(Loc.GetString("lube-failure", ("target", Identity.Entity(target, EntityManager))), actor, actor, PopupType.Medium);
@@ -86,4 +93,32 @@ public sealed class LubeSystem : EntitySystem
         _popup.PopupEntity(Loc.GetString("lube-failure", ("target", Identity.Entity(target, EntityManager))), actor, actor, PopupType.Medium);
         return false;
     }
+
+    // SS220 Add door lubrication (begin)
+    private bool TryLubeDoor(Entity<LubeComponent> entity, EntityUid target, EntityUid actor)
+    {
+        if (!HasComp<DoorComponent>(target))
+        {
+            _popup.PopupEntity(Loc.GetString("lube-failure", ("target", Identity.Entity(target, EntityManager))), actor, actor, PopupType.Medium);
+            return false;
+        }
+
+        if (_solutionContainer.TryGetSolution(entity.Owner, entity.Comp.Solution, out _, out var solution))
+        {
+            var quantity = solution.RemoveReagent(entity.Comp.Reagent, entity.Comp.Consumption);
+            if (quantity > 0)
+            {
+                var lubed = EnsureComp<DoorLubedComponent>(target);
+                lubed.SilentUsesLeft += _random.Next(entity.Comp.MinSlips * quantity.Int(), entity.Comp.MaxSlips * quantity.Int());
+                Dirty(target, lubed);
+                _adminLogger.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(actor):actor} lubed {ToPrettyString(target):subject} with {ToPrettyString(entity.Owner):tool}");
+                _audio.PlayPvs(entity.Comp.Squeeze, entity.Owner);
+                _popup.PopupEntity(Loc.GetString("lube-success", ("target", Identity.Entity(target, EntityManager))), actor, actor, PopupType.Medium);
+                return true;
+            }
+        }
+        _popup.PopupEntity(Loc.GetString("lube-failure", ("target", Identity.Entity(target, EntityManager))), actor, actor, PopupType.Medium);
+        return false;
+    }
+    // SS220 Add door lubrication (end)
 }

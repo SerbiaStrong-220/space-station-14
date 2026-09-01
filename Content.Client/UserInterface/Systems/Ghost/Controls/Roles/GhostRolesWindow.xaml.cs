@@ -26,7 +26,7 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls.Roles
         public void ClearEntries()
         {
             NoRolesMessage.Visible = true;
-            EntryContainer.DisposeAllChildren();
+            EntryContainer.RemoveAllChildren();
             _collapsibleBoxes.Clear();
         }
 
@@ -96,6 +96,11 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls.Roles
             {
                 EntryContainer.AddChild(buttons);
             }
+
+            // ss220 fix ghost roles menu start
+            EntryScrollContainer.InvalidateArrange();
+            EntryScrollContainer.InvalidateMeasure();
+            // ss220 fix ghost roles menu end
         }
     }
 }

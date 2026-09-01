@@ -17,6 +17,7 @@ using Content.Shared.Alert;
 using Content.Shared.Body.Events;
 using Content.Shared.Cloning.Events;
 using Content.Shared.CombatMode.Pacification;
+using Content.Shared.Gibbing;
 using Content.Shared.Implants;
 using Content.Shared.Implants.Components;
 using Content.Shared.Mindshield.Components;
@@ -34,40 +35,33 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.MindSlave;
 
-public sealed class MindSlaveSystem : EntitySystem
+public sealed partial class MindSlaveSystem : EntitySystem
 {
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly MindSlaveStopWordSystem _mindSlaveStopWord = default!;
-    [Dependency] private readonly MindSlaveDisfunctionSystem _mindSlaveDisfunction = default!;
-    [Dependency] private readonly RoleSystem _role = default!;
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
-    [Dependency] private readonly AntagSelectionSystem _antagSelection = default!;
-    [Dependency] private readonly SharedObjectivesSystem _objectives = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly TargetObjectiveSystem _targetObjective = default!;
-    [Dependency] private readonly TelepathySystem _telepathy = default!;
-    [Dependency] private readonly AlertsSystem _alert = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly EuiManager _eui = default!;
-    [Dependency] private readonly SharedSubdermalImplantSystem _implant = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private MindSlaveStopWordSystem _mindSlaveStopWord = default!;
+    [Dependency] private MindSlaveDisfunctionSystem _mindSlaveDisfunction = default!;
+    [Dependency] private RoleSystem _role = default!;
+    [Dependency] private NpcFactionSystem _npcFaction = default!;
+    [Dependency] private AntagSelectionSystem _antagSelection = default!;
+    [Dependency] private SharedObjectivesSystem _objectives = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private TargetObjectiveSystem _targetObjective = default!;
+    [Dependency] private TelepathySystem _telepathy = default!;
+    [Dependency] private AlertsSystem _alert = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private EuiManager _eui = default!;
+    [Dependency] private SharedSubdermalImplantSystem _implant = default!;
 
-    [ValidatePrototypeId<EntityPrototype>]
-    private const string MindSlaveAntagId = "MindRoleMindSlave";
+    private static readonly EntProtoId MindSlaveAntagId = "MindRoleMindSlave";
+    private static readonly EntProtoId MindSlaveObjectiveId = "MindSlaveObeyObjective";
 
-    [ValidatePrototypeId<EntityPrototype>]
-    private const string MindSlaveObjectiveId = "MindSlaveObeyObjective";
+    private static readonly ProtoId<NpcFactionPrototype> NanoTrasenFactionId = "NanoTrasen";
+    private static readonly ProtoId<NpcFactionPrototype> SyndicateFactionId = "Syndicate";
 
-    [ValidatePrototypeId<NpcFactionPrototype>]
-    private const string NanoTrasenFactionId = "NanoTrasen";
-
-    [ValidatePrototypeId<NpcFactionPrototype>]
-    private const string SyndicateFactionId = "Syndicate";
+    private static readonly ProtoId<AlertPrototype> EnslavedAlert = "MindSlaved";
 
     private readonly SoundSpecifier GreetSoundNotification = new SoundPathSpecifier("/Audio/Ambience/Antag/traitor_start.ogg");
-
-    [ValidatePrototypeId<AlertPrototype>]
-    private const string EnslavedAlert = "MindSlaved";
 
     /// <summary>
     /// Dictionary, containing list of all enslaved minds (as a key), and their master (as a value).
@@ -143,13 +137,12 @@ public sealed class MindSlaveSystem : EntitySystem
 
     private void OnMindSlaveImplanted(Entity<MindSlaveImplantComponent> entity, ref ImplantImplantedEvent args)
     {
-        if (args.Implanted is not { } target ||
-            !TryComp<SubdermalImplantComponent>(entity, out var implantComponent) ||
-            implantComponent.user is not { } user)
+        if (!TryComp<SubdermalImplantComponent>(entity, out var implantComponent) ||
+            implantComponent.User is not { } user)
             return;
 
-        if (!TryMakeSlave(target, user))
-            _implant.ForceRemove(target, args.Implant);
+        if (!TryMakeSlave(args.Implanted, user))
+            _implant.ForceRemove(args.Implanted, args.Implant);
     }
 
     private void OnMindSlaveRemoved(Entity<SubdermalImplantComponent> mind, ref MindSlaveRemoved args)

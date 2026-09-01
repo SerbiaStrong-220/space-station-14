@@ -3,8 +3,8 @@
 - type: entity
   parent: ClothingNeckBase
   id: ClothingNeckProtectBundle
-  name: защитный комплект СБ
-  description: Защитный комплект состоящий из пары наколенников и налокотников идеально впишутся в ваш рабочий процесс по устранению беспорядков!
+  name: security protection bundle
+  description: A protection bundle consisting of a pair of knee and elbow pads. Fits perfectly into your riot control workflow!
   components:
     - type: Sprite
       sprite: SS220/Clothing/Neck/Misc/tactical.rsi
@@ -19,8 +19,8 @@
 - type: entity
   parent: ClothingNeckProtectBundle
   id: ClothingNeckProtectBundleBlue
-  name: защитный комплект
-  description: Защитный комплект состоящий из пары наколенников и налокотников идеально впишутся в ваш рабочий процесс по устранению беспорядков!
+  name: protection bundle
+  description: A protection bundle consisting of a pair of knee and elbow pads. Fits perfectly into your riot control workflow!
   components:
     - type: Sprite
       sprite: SS220/Clothing/Neck/Misc/tactical_blue.rsi
@@ -50,3 +50,26 @@
       sprite: SS220/Clothing/Neck/Misc/whiteruff.rsi
     - type: Clothing
       sprite: SS220/Clothing/Neck/Misc/whiteruff.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckGoldenCross
+  name: golden cross
+  description: Beautiful golden cross.
+  components: 
+    - type: Sprite
+      sprite: SS220/Clothing/Neck/Misc/golden_cross.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Neck/Misc/golden_cross.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckSilverCross
+  name: silver cross
+  description: Beautiful silver cross.
+  components: 
+    - type: Sprite
+      sprite: SS220/Clothing/Neck/Misc/silver_cross.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Neck/Misc/silver_cross.rsi
+

@@ -177,3 +177,5 @@ accent-italian-words-47 = мы
 accent-italian-words-replace-47 = noi
 accent-italian-words-48 = и
 accent-italian-words-replace-48 = é
+accent-italian-words-49 = да
+accent-italian-words-replace-49 = si

@@ -5,7 +5,8 @@
   playTimeTracker: JobCBURN
   setPreference: false
   startingGear: CBURNGear
-  icon: "JobIconNanotrasen"
+  experienceDefinition: CBURNRoleExperience # SS220-experience
+  icon: "JobIconCBURN"
   supervisors: job-supervisors-centcom
   canBeAntag: false
   accessGroups:
@@ -18,14 +19,16 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
-  #SS220 LimitationRevive - start
-  - !type:AddComponentSpecial
-    components:
-    - type: DefibrillatorSkill
-  #SS220 LimitationRevive - end
+  # SS220-playtime-restrictions-begin
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 20h
+  # SS220-playtime-restrictions-begin
 
 - type: startingGear
   id: CBURNGear
+  experienceDefinition: CBURNRoleExperience # SS220-experience
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorBrown
     back: ClothingBackpackDuffelCBURN

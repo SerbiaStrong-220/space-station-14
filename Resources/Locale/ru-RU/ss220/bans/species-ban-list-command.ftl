@@ -7,7 +7,7 @@ cmd-speciesbanlist-invalid-argument-2 = Аргумент 2 не является
 cmd-speciesbanlist-invalid-player = Не удалось найти пользователя с именем (или id): { $player }
 
 cmd-speciesbanlist-player-has-not-bans = { $player } не имеет банов рас
-cmd-speciesbanlist-ban-info = ID: { $id } Раса: { $species } Причина: { $reason } Разбанен: { $unbaned }
+cmd-speciesbanlist-ban-info = ID: { $id } Раса: { $species } Причина: { $reason } Разбанен: { $unbanned }
 
 cmd-speciesbanlist-hint-1 = <имя или ID пользователя>
 cmd-speciesbanlist-hint-2 = [включая разбаненные (необязательно)]

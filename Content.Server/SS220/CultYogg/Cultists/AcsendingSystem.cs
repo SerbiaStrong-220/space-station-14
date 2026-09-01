@@ -1,16 +1,16 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Examine;
 using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.CultYogg.CultYoggIcons;
 using Robust.Shared.Timing;
-using Content.Shared.Examine;
 
 namespace Content.Server.SS220.CultYogg.Cultists;
 
-public sealed class AcsendingSystem : EntitySystem
+public sealed partial class AcsendingSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly CultYoggSystem _cultYogg = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private CultYoggSystem _cultYogg = default!;
 
     public override void Initialize()
     {
@@ -31,7 +31,7 @@ public sealed class AcsendingSystem : EntitySystem
                 continue;
 
             if (TerminatingOrDeleted(ent))//idk what the bug that was, mb this will help
-                return;
+                continue;
 
             if (TryComp<CultYoggComponent>(ent, out var cult))
                 _cultYogg.AcsendCultist((ent, cult));

@@ -11,4 +11,7 @@ public sealed partial class CCVars220
     /// </summary>
     public static readonly CVarDef<string> SpeciesBanDefaultSeverity =
         CVarDef.Create("admin.species_ban_default_severity", "medium", CVar.ARCHIVE | CVar.SERVER | CVar.REPLICATED);
+
+    public static readonly CVarDef<string> ChatBanDefaultSeverity =
+        CVarDef.Create("admin.chat_ban_default_severity", "medium", CVar.ARCHIVE | CVar.SERVER | CVar.REPLICATED);
 }

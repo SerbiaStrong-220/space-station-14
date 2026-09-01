@@ -17,31 +17,58 @@
     - id: MimicVendorRule
     - id: MouseMigration
     - id: PowerGridCheck
+    - id: GravityGeneratorAnomaly # SS220-add-gravity-anomaly
     - id: RandomSentience
-    - id: SlimesSpawn
+    - id: SlimesSpawnHorde
     - id: SolarFlare
-    - id: SnakeSpawn
-    - id: SpiderClownSpawn
-    - id: SpiderSpawn
+    - id: SnakeSpawnHorde
+    - id: SpiderClownSpawnHorde
+    - id: SpiderSpawnHorde
     - id: VentClog
+    - id: RandomMindShieldCombustion #SS220 CombustedMindShieldEvent #3500
 
 - type: entityTable
   id: BasicAntagEventsTable
   table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
     children:
     # - id: ClosetSkeleton # SS220 No-Closet-Skeletons
-    - id: DragonSpawn
     - id: KingRatMigration
+    - id: RevenantSpawn
+    - !type:NestedSelector
+      tableId: DerelictBorgEventTable
+
+- type: entityTable
+  id: ModerateAntagEventsTable
+  table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
+    children:
+    - id: DragonSpawn
     - id: NinjaSpawn
     - id: ParadoxCloneSpawn
-    - id: RevenantSpawn
     - id: SleeperAgents
     - id: ZombieOutbreak
     - id: DarkReaperSpawn #ss220 darkreaper middle event
     - id: SpiderQueenSpawn #SS220 spider queen midround event
     # - id: LoneOpsSpawn # SS220 No-LoneOps
-    - id: DerelictCyborgSpawn
     - id: WizardSpawn
+    - !type:NestedSelector
+      tableId: DerelictBorgEventTable
+
+- type: entityTable
+  id: DerelictBorgEventTable #For Derelict Borg spawns
+  table: !type:GroupSelector
+    children:
+    - !type:GroupSelector # Standard NT Borgs
+      weight: 85
+      children:
+        - id: DerelictEngineerCyborgSpawn
+        - id: DerelictGenericCyborgSpawn
+        - id: DerelictJanitorCyborgSpawn
+        - id: DerelictMedicalCyborgSpawn
+        - id: DerelictMiningCyborgSpawn
+    - !type:GroupSelector # Other Borgs
+      weight: 15
+      children:
+        - id: DerelictSyndicateAssaultCyborgSpawn
 
 - type: entity
   id: BaseStationEvent
@@ -81,6 +108,7 @@
     startAnnouncementColor: "#18abf5"
     weight: 8
     duration: 35
+    playTTS: false # SS220-fix-double-announce-audio
     startAudio: # Corvax-Announcements
       path: /Audio/Corvax/Announcements/flux.ogg
       params:
@@ -99,6 +127,7 @@
     startAnnouncementColor: "#18abf5"
     weight: 8
     duration: 35
+    playTTS: false # SS220-fix-double-announce-audio
     startAudio: # Corvax-Announcements
       path: /Audio/Corvax/Announcements/blusp_anomalies.ogg
       params:
@@ -151,6 +180,10 @@
   - type: BureaucraticErrorRule
     ignoredJobs:
     - StationAi
+    - ResearchAssistant
+    - MedicalIntern
+    - SecurityCadet
+    - TechnicalAssistant
 
 - type: entity
   id: ClericalError
@@ -188,7 +221,7 @@
   id: DragonSpawn
   components:
   - type: StationEvent
-    weight: 6.5
+    weight: 9.5 # ss220 upraise midround events
     earliestStart: 40
     reoccurrenceDelay: 20
     minimumPlayers: 20
@@ -211,13 +244,15 @@
       pickPlayer: false
       mindRoles:
       - MindRoleDragon
+  - type: DynamicRuleCost
+    cost: 75
 
 - type: entity
   parent: BaseGameRule
   id: NinjaSpawn
   components:
   - type: StationEvent
-    weight: 6
+    weight: 9 # ss220 upraise midround events
     duration: null
     earliestStart: 30
     reoccurrenceDelay: 20
@@ -247,8 +282,10 @@
       max: 1
       pickPlayer: false
       startingGear: SpaceNinjaGear
-      roleLoadout:
-      - RoleSurvivalEVA
+      # SS220 Ninja Resprite Begin
+      # roleLoadout:
+      # - RoleSurvivalSpaceNinja
+      # SS220 Ninja Resprite End
       briefing:
         text: ninja-role-greeting
         color: Green
@@ -272,6 +309,7 @@
       - type: AutoImplant
         implants:
         - DeathAcidifierImplant
+        - NanoSurgeryMachinesImplant # SS220-add-projectile-fragments
       - type: RandomMetadata
         nameSegments:
         - NamesNinjaTitle
@@ -279,13 +317,15 @@
         nameFormat: name-format-ninja
       mindRoles:
       - MindRoleNinja
+  - type: DynamicRuleCost
+    cost: 75
 
 - type: entity
   parent: BaseGameRule
   id: ParadoxCloneSpawn
   components:
   - type: StationEvent
-    weight: 5
+    weight: 8 # ss220 upraise midround events
     duration: null
     earliestStart: 20
     reoccurrenceDelay: 20
@@ -315,13 +355,15 @@
         sound: /Audio/Misc/paradox_clone_greeting.ogg
       mindRoles:
       - MindRoleParadoxClone
+  - type: DynamicRuleCost
+    cost: 50
 
 - type: entity
   parent: BaseGameRule
   id: RevenantSpawn
   components:
   - type: StationEvent
-    weight: 7.5
+    weight: 10.5 # ss220 upraise midround events
     duration: 1
     earliestStart: 45
     minimumPlayers: 20
@@ -333,11 +375,11 @@
   id: WizardSpawn
   components:
   - type: StationEvent
-    weight: 0.1 # SS 220 0.1 weight wiz spawn midround
+    weight: 0.2 # ss220 upraise midround events
     duration: 1
     earliestStart: 30
     reoccurrenceDelay: 60
-    minimumPlayers: 30  # SS 220 MidRound Wiz Req 30 players min
+    minimumPlayers: 30
   - type: AntagSelection
     agentName: wizard-round-end-name
     definitions:
@@ -382,6 +424,7 @@
   parent: BaseStationEventShortDelay
   components:
   - type: StationEvent
+    playTTS: false # SS220-fix-double-announce-audio
     startAnnouncement: station-event-gas-leak-start-announcement
     startAudio:
       path: /Audio/Announcements/gasleak_start.ogg # Corvax-Announcements
@@ -416,6 +459,7 @@
     weight: 5
     startAnnouncement: station-event-power-grid-check-start-announcement
     endAnnouncement: station-event-power-grid-check-end-announcement
+    playTTS: false # SS220-fix-double-announce-audio
     startAudio:
       path: /Audio/Announcements/power_off.ogg
       params:
@@ -432,6 +476,7 @@
     weight: 8
     startAnnouncement: station-event-solar-flare-start-announcement
     endAnnouncement: station-event-solar-flare-end-announcement
+    playTTS: false # SS220-fix-double-announce-audio
     startAudio: # Corvax-Announcements
       path: /Audio/Corvax/Announcements/comms_blackout.ogg
       params:
@@ -453,6 +498,13 @@
     extraCount: 2
     lightBreakChancePerSecond: 0.0003
     doorToggleChancePerSecond: 0.001
+  #ss220 mindshield destructiuon #3500 start
+  - type: ExtraEvents
+    rules:
+      combustion: !type:EntSelector
+        id: RandomMindShieldCombustion
+        prob: 0.1
+  #ss220 mindshield destructiuon #3500 end
 
 - type: entity
   id: VentClog
@@ -460,6 +512,7 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-vent-clog-start-announcement
+    playTTS: false # SS220-fix-double-announce-audio
     startAudio:
       path: /Audio/Announcements/ventclog.ogg # Corvax-Announcements
       params:
@@ -470,12 +523,15 @@
     duration: 60
   - type: VentClogRule
 
+# Critters
+
 - type: entity
-  id: SlimesSpawn
+  id: SlimesSpawnHorde
   parent: BaseStationEventShortDelay
   components:
   - type: StationEvent
-    startAnnouncement: station-event-vent-creatures-start-announcement
+    playTTS: false # SS220-fix-double-announce-audio
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
   # SS220 MoreAnonces (sound and alert upgrades) bgn
     startAudio:
       path: /Audio/SS220/Announcements/lifesigns.ogg
@@ -485,22 +541,23 @@
     earliestStart: 20
     minimumPlayers: 15
     weight: 5
-    duration: 60
-  - type: VentCrittersRule
-    entries:
-    - id: MobAdultSlimesBlueAngry
-      prob: 0.02
-    - id: MobAdultSlimesGreenAngry
-      prob: 0.02
-    - id: MobAdultSlimesYellowAngry
-      prob: 0.02
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobAdultSlimesBlueAngry
+      - id: MobAdultSlimesGreenAngry
+      - id: MobAdultSlimesYellowAngry
 
 - type: entity
-  id: SnakeSpawn
+  id: SnakeSpawnHorde
   parent: BaseStationEventShortDelay
   components:
   - type: StationEvent
-    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
+    playTTS: false # SS220-fix-double-announce-audio
   # SS220 MoreAnonces (sound and alert upgrades) bgn
     startAudio:
       path: /Audio/SS220/Announcements/lifesigns.ogg
@@ -510,31 +567,25 @@
     earliestStart: 20
     minimumPlayers: 15
     weight: 5
-    duration: 60
-  - type: VentCrittersRule
-    entries:
-    #SS220-snake-ghost-role (muted official entries)
-    #- id: MobPurpleSnake
-    #  prob: 0.02
-    #- id: MobSmallPurpleSnake
-    #  prob: 0.02
-    #- id: MobCobraSpace
-    #  prob: 0.02
-    #SS220-snake-ghost-role-entries
-    - id: MobPurpleSnakeGhostRole
-      prob: 0.02
-    - id: MobSmallPurpleSnakeGhostRole
-      prob: 0.02
-    - id: MobCobraSpaceGhostRole
-      prob: 0.02
-    #SS220-snake-ghost-role-entries-end
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      #SS220-snake-ghost-role-entries
+      - id: MobPurpleSnakeGhostRole
+      - id: MobSmallPurpleSnakeGhostRole
+      - id: MobCobraSpaceGhostRole
+      #SS220-snake-ghost-role-entries-end
 
 - type: entity
-  id: SpiderSpawn
+  id: SpiderSpawnHorde
   parent: BaseStationEventShortDelay
   components:
   - type: StationEvent
-    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
+    playTTS: false # SS220-fix-double-announce-audio
   # SS220 MoreAnonces (sound and alert upgrades) bgn
     startAudio:
       path: /Audio/SS220/Announcements/lifesigns.ogg
@@ -544,18 +595,21 @@
     earliestStart: 20
     minimumPlayers: 15
     weight: 5
-    duration: 60
-  - type: VentCrittersRule
-    entries:
-    - id: MobGiantSpiderAngry
-      prob: 0.05
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobGiantSpiderAngry
 
 - type: entity
-  id: SpiderClownSpawn
+  id: SpiderClownSpawnHorde
   parent: BaseStationEventShortDelay
   components:
   - type: StationEvent
-    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
+    playTTS: false # SS220-fix-double-announce-audio
   # SS220 MoreAnonces (sound and alert upgrades) bgn
     startAudio:
       path: /Audio/SS220/Announcements/lifesigns.ogg
@@ -565,11 +619,13 @@
     earliestStart: 20
     minimumPlayers: 20
     weight: 1.5
-    duration: 60
-  - type: VentCrittersRule
-    entries:
-    - id: MobClownSpider
-      prob: 0.05
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobClownSpider
 
 - type: entity
   id: ZombieOutbreak
@@ -578,8 +634,9 @@
   - type: StationEvent
     earliestStart: 50
     minimumPlayers: 30
-    weight: 1 # SS220 Zombie tweak
+    weight: 5 # ss220 upraise midround events
     duration: 1
+    occursDuringRoundEnd: false
   - type: ZombieRule
   - type: AntagSelection
     definitions:
@@ -608,6 +665,8 @@
       # Corvax
       mindRoles:
       - MindRoleInitialInfected
+  - type: DynamicRuleCost
+    cost: 200
 
 - type: entity
   parent: BaseNukeopsRule
@@ -618,7 +677,7 @@
     earliestStart: 35
     weight: 5.5
     minimumPlayers: 20
-    duration: null # LoneOpsSpawn needs an infinite duration so that it inherits the NukeOpsRule things of an actually appropriate end scrreen (not always "Neutral outcome!") and... ending the game if the station is nuked.
+    duration: null # LoneOpsSpawn needs an infinite duration so that it inherits the NukeOpsRule things of an actually appropriate end screen (not always "Neutral outcome!") and... ending the game if the station is nuked.
   - type: RuleGrids
   - type: LoadMapRule
     gridPath: /Maps/Shuttles/ShuttleEvent/striker.yml
@@ -636,6 +695,10 @@
       roleLoadout:
       - RoleSurvivalNukie
       components:
+      # SS220-experience-update-begin
+      - type: RoleExperienceAdd
+        definitionId: SyndicateCommanderRoleExperience
+      # SS220-experience-update-end
       - type: NukeOperative
       - type: RandomMetadata
         nameSegments:
@@ -646,7 +709,9 @@
         factions:
         - Syndicate
       mindRoles:
-      - MindRoleNukeops
+      - MindRoleLoneops
+  - type: DynamicRuleCost
+    cost: 75
 
 - type: entity
   parent: BaseTraitorRule
@@ -654,7 +719,7 @@
   components:
   - type: StationEvent
     earliestStart: 30
-    weight: 8
+    weight: 9 # ss220 upraise midround events
     minimumPlayers: 15
     maxOccurrences: 1 # can only happen once per round
     startAnnouncement: station-event-communication-interception
@@ -675,6 +740,14 @@
         - AntagImmune
       mindRoles:
       - MindRoleTraitorSleeper
+      # SS220-experience-update-begin
+      components:
+      - type: AntagFreeSublevelPointsAdd
+        addFreeSublevelPoints: 10
+      - type: AntagAddKnowledge
+        knowledgesToAdd:
+        - SyndicateAgentKnowledge
+      # SS220-experience-update-end
 
 - type: entity
   id: MassHallucinations
@@ -697,6 +770,7 @@
   id: IonStorm
   components:
   - type: StationEvent
+    playTTS: false # SS220-fix-double-announce-audio
   # SS220 MoreAnonces (sound and alert upgrades) bgn
     #ss220 tweak ion storm start
     endAnnouncementColor: "#18abf5"
@@ -714,6 +788,13 @@
     maxDuration: 1200
     #ss220 tweak ion storm end
   - type: IonStormRule
+  #ss220 mindshield destructiuon #3500 start
+  - type: ExtraEvents
+    rules:
+      combustion: !type:EntSelector
+        id: RandomMindShieldCombustion
+        prob: 0.1
+  #ss220 mindshield destructiuon #3500 end
 
 - type: entity
   id: MimicVendorRule
@@ -731,6 +812,7 @@
   parent: BaseStationEventShortDelay
   components:
   - type: StationEvent
+    playTTS: false # SS220-fix-double-announce-audio
   # SS220 MoreAnonces (sound and alert upgrades) bgn
     startAudio:
       path: /Audio/SS220/Announcements/greytide.ogg
@@ -749,26 +831,33 @@
     - Service
     blacklist:
     - External # don't space everything
+  #ss220 mindshield destructiuon #3500 start
+  - type: ExtraEvents
+    rules:
+      combustion: !type:EntSelector
+        id: RandomMindShieldCombustion
+        prob: 0.1
+  #ss220 mindshield destructiuon #3500 end
 
 - type: entity
   parent: BaseGameRule
   id: SmugglerStashVariationPass
   components:
   - type: StationEvent
-    earliestStart: 0
+    earliestStart: 20
     duration: 1
     minimumPlayers: 1
-    maxOccurrences: 2
-    weight: 10
+    maxOccurrences: 1
+    weight: 1
   - type: RandomSpawnRule
     prototype: RandomSatchelSpawner
 
 - type: entity
   parent: BaseGameRule
-  id: DerelictCyborgSpawn
+  id: DerelictEngineerCyborgSpawn
   components:
   - type: StationEvent
-    weight: 5
+    weight: 2.5
     earliestStart: 15
     reoccurrenceDelay: 20
     minimumPlayers: 4
@@ -776,10 +865,115 @@
   - type: SpaceSpawnRule
     spawnDistance: 0
   - type: AntagSpawner
-    prototype: PlayerBorgDerelict
+    prototype: PlayerEngineeringBorgDerelictGhostRole
+  - type: AntagSelection
+    definitions:
+    - spawnerPrototype: SpawnPointGhostDerelictEngineeringCyborg
+      min: 1
+      max: 1
+      pickPlayer: false
+
+- type: entity
+  parent: BaseGameRule
+  id: DerelictGenericCyborgSpawn
+  components:
+  - type: StationEvent
+    weight: 2.5
+    earliestStart: 15
+    reoccurrenceDelay: 20
+    minimumPlayers: 4
+    duration: null
+  - type: SpaceSpawnRule
+    spawnDistance: 0
+  - type: AntagSpawner
+    prototype: PlayerBorgDerelictGhostRole
   - type: AntagSelection
     definitions:
     - spawnerPrototype: SpawnPointGhostDerelictCyborg
+      min: 1
+      max: 1
+      pickPlayer: false
+
+- type: entity
+  parent: BaseGameRule
+  id: DerelictJanitorCyborgSpawn
+  components:
+  - type: StationEvent
+    weight: 2.5
+    earliestStart: 15
+    reoccurrenceDelay: 20
+    minimumPlayers: 4
+    duration: null
+  - type: SpaceSpawnRule
+    spawnDistance: 0
+  - type: AntagSpawner
+    prototype: PlayerJanitorBorgDerelictGhostRole
+  - type: AntagSelection
+    definitions:
+    - spawnerPrototype: SpawnPointGhostDerelictJanitorCyborg
+      min: 1
+      max: 1
+      pickPlayer: false
+
+- type: entity
+  parent: BaseGameRule
+  id: DerelictMedicalCyborgSpawn
+  components:
+  - type: StationEvent
+    weight: 2.5
+    earliestStart: 15
+    reoccurrenceDelay: 20
+    minimumPlayers: 4
+    duration: null
+  - type: SpaceSpawnRule
+    spawnDistance: 0
+  - type: AntagSpawner
+    prototype: PlayerMedicalBorgDerelictGhostRole
+  - type: AntagSelection
+    definitions:
+    - spawnerPrototype: SpawnPointGhostDerelictMedicalCyborg
+      min: 1
+      max: 1
+      pickPlayer: false
+
+- type: entity
+  parent: BaseGameRule
+  id: DerelictMiningCyborgSpawn
+  components:
+  - type: StationEvent
+    weight: 2.5
+    earliestStart: 15
+    reoccurrenceDelay: 20
+    minimumPlayers: 4
+    duration: null
+  - type: SpaceSpawnRule
+    spawnDistance: 0
+  - type: AntagSpawner
+    prototype: PlayerMiningBorgDerelictGhostRole
+  - type: AntagSelection
+    definitions:
+    - spawnerPrototype: SpawnPointGhostDerelictMiningCyborg
+      min: 1
+      max: 1
+      pickPlayer: false
+
+- type: entity
+  parent: BaseGameRule
+  id: DerelictSyndicateAssaultCyborgSpawn
+  components:
+  - type: StationEvent
+    weight: 2.5
+    earliestStart: 25
+    reoccurrenceDelay: 20
+    minimumPlayers: 15
+    duration: null
+  - type: SpaceSpawnRule
+    spawnDistance: 0
+  - type: AntagSpawner
+    prototype: PlayerBorgSyndicateDerelictGhostRole
+  - type: AntagSelection
+    definitions:
+    - spawnerPrototype: SpawnPointGhostDerelictSyndicateAssaultCyborg
       min: 1
       max: 1
       pickPlayer: false

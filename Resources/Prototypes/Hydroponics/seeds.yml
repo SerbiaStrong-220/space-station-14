@@ -627,6 +627,7 @@
   plantLogImpact: High
   harvestLogImpact: High
   packetPrototype: KillerTomatoSeeds
+  autoSpawnMob: true #SS220-Mob-Spawn-Nerf
   productPrototypes:
     - MobTomatoKiller
   harvestRepeat: Repeat
@@ -1296,10 +1297,6 @@
       Min: 1
       Max: 5
       PotencyDivisor: 20
-    Desoxyephedrine:
-      Min: 1
-      Max: 10
-      PotencyDivisor: 10
     Vitamin:
       Min: 1
       Max: 2
@@ -1334,10 +1331,6 @@
       Min: 1
       Max: 5
       PotencyDivisor: 20
-    Desoxyephedrine:
-      Min: 1
-      Max: 10
-      PotencyDivisor: 10
 
 - type: seed
   id: galaxythistle
@@ -1384,6 +1377,10 @@
       Min: 1
       Max: 25
       PotencyDivisor: 4
+    Desoxyephedrine: # meff!!
+      Min: 1
+      Max: 10
+      PotencyDivisor: 10
 
 - type: seed
   id: flyAmanita
@@ -1635,6 +1632,7 @@
     - FoodWatermelon
   mutationPrototypes:
     - holymelon
+    - watermelondog # SS220-watermelondog
   lifespan: 55
   maturation: 12
   production: 3

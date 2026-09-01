@@ -1,0 +1,203 @@
+- type: entity
+  name: Random Derelict Cyborg Spawner 0.5
+  id: SpawnBorgDerelict05
+  suffix: 50% chance
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: RandomSpawner
+    prototypes:
+    - PlayerBorgDerelictGhostRole
+    chance: 0.5
+  placement:
+    mode: AlignTileAny
+
+- type: entity
+  name: Random Derelict Cyborg Spawner 0.1
+  id: SpawnBorgDerelict01
+  suffix: 10% chance
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: RandomSpawner
+    prototypes:
+    - PlayerBorgDerelictGhostRole
+    chance: 0.1
+  placement:
+    mode: AlignTileAny
+
+- type: entity
+  name: Random Derelict Engineer Cyborg Spawner 0.5
+  id: SpawnEngineeringBorgDerelict05
+  suffix: 50% chance
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: RandomSpawner
+    prototypes:
+    - PlayerEngineeringBorgDerelictGhostRole
+    chance: 0.5
+  placement:
+    mode: AlignTileAny
+
+- type: entity
+  name: Random Derelict Engineer Cyborg Spawner 0.1
+  id: SpawnEngineeringBorgDerelict01
+  suffix: 10% chance
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: RandomSpawner
+    prototypes:
+    - PlayerEngineeringBorgDerelictGhostRole
+    chance: 0.1
+  placement:
+    mode: AlignTileAny
+
+- type: entity
+  name: Random Derelict Janitor Cyborg Spawner 0.5
+  id: SpawnJanitorBorgDerelict05
+  suffix: 50% chance
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: RandomSpawner
+    prototypes:
+    - PlayerJanitorBorgDerelictGhostRole
+    chance: 0.5
+  placement:
+    mode: AlignTileAny
+
+- type: entity
+  name: Random Derelict Janitor Cyborg Spawner 0.1
+  id: SpawnJanitorBorgDerelict01
+  suffix: 10% chance
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: RandomSpawner
+    prototypes:
+    - PlayerJanitorBorgDerelictGhostRole
+    chance: 0.1
+  placement:
+    mode: AlignTileAny
+
+- type: entity
+  name: Random Derelict Medical Cyborg Spawner 0.5
+  id: SpawnMedicalBorgDerelict05
+  suffix: 50% chance
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: RandomSpawner
+    prototypes:
+    - PlayerMedicalBorgDerelictGhostRole
+    chance: 0.5
+  placement:
+    mode: AlignTileAny
+
+- type: entity
+  name: Random Derelict Medical Cyborg Spawner 0.1
+  id: SpawnMedicalBorgDerelict01
+  suffix: 10% chance
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: RandomSpawner
+    prototypes:
+    - PlayerMedicalBorgDerelictGhostRole
+    chance: 0.1
+  placement:
+    mode: AlignTileAny
+
+- type: entity
+  name: Random Derelict Salvage Cyborg Spawner 0.5
+  id: SpawnMiningBorgDerelict05
+  suffix: 50% chance
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: RandomSpawner
+    prototypes:
+    - PlayerMiningBorgDerelictGhostRole
+    chance: 0.5
+  placement:
+    mode: AlignTileAny
+
+- type: entity
+  name: Random Derelict Salvage Cyborg Spawner 0.1
+  id: SpawnMiningBorgDerelict01
+  suffix: 10% chance
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: RandomSpawner
+    prototypes:
+    - PlayerMiningBorgDerelictGhostRole
+    chance: 0.1
+  placement:
+    mode: AlignTileAny
+
+- type: entity
+  name: Random Derelict Syndicate Cyborg Spawner 0.5
+  id: SpawnBorgSyndicateDerelict05
+  suffix: 50% chance
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: RandomSpawner
+    prototypes:
+    - PlayerBorgSyndicateDerelictGhostRole
+    chance: 0.5
+  placement:
+    mode: AlignTileAny
+
+- type: entity
+  name: Random Derelict Syndicate Cyborg Spawner 0.1
+  id: SpawnBorgSyndicateDerelict01
+  suffix: 10% chance
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: RandomSpawner
+    prototypes:
+    - PlayerBorgSyndicateDerelictGhostRole
+    chance: 0.1
+  placement:
+    mode: AlignTileAny

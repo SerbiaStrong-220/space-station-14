@@ -1,0 +1,113 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: GifCurb
+  suffix: CultYogg
+  parent: BaseStructure
+  components:
+  - type: Sprite
+    drawdepth: FloorTiles
+    sprite: SS220/Structures/CultYogg/curb.rsi
+    state: curbcult
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,-0.4"
+        density: 1000
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+
+- type: entity
+  parent: GifCurb
+  id: GifCurbCorner
+  components:
+  - type: Sprite
+    drawdepth: FloorTiles
+    sprite: SS220/Structures/CultYogg/curb.rsi
+    state: curbcult_corner
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,-0.4"
+        density: 1000
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+      fix2:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "0.49,0.49,0.4,-0.49"
+        density: 1000
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+
+
+- type: entity
+  parent: GifCurb
+  id: GifCurbCornerSmall
+  components:
+  - type: Sprite
+    drawdepth: FloorTiles
+    sprite: SS220/Structures/CultYogg/curb.rsi
+    state: curbcult_small
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,0.49,-0.25,0.25"
+        density: 1000
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+
+- type: entity
+  parent: GifCurb
+  id: GifCurbRound
+  components:
+  - type: Sprite
+    drawdepth: FloorTiles
+    sprite: SS220/Structures/CultYogg/curb.rsi
+    state: curbcult_round
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,-0.4"
+        density: 1000
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+      fix2:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,-0.4,0.49"
+        density: 1000
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+      fix3:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "0.4,-0.49,0.49,0.49"
+        density: 1000
+        mask:
+        - TableMask
+        layer:
+        - TableLayer

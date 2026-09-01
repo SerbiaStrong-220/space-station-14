@@ -106,7 +106,7 @@ public sealed class MoverController : SharedMoverController
         }
 
         // Server-side should just be handled on its own so we'll just do this shizznit
-        HandleMobMovement((player, mover), frameTime);
+        HandleMobMovement((player, mover), frameTime, false, ref AroundColliderSet); // SS220-make-mover-parallel
     }
 
     protected override bool CanSound()
@@ -120,8 +120,8 @@ public sealed class MoverController : SharedMoverController
         base.SetSprinting(entity, subTick, walking);
 
         if (walking && _cfg.GetCVar(CCVars.ToggleWalk))
-            _alerts.ShowAlert(entity, WalkingAlert, showCooldown: false, autoRemove: false);
+            _alerts.ShowAlert(entity.Owner, WalkingAlert, showCooldown: false, autoRemove: false);
         else
-            _alerts.ClearAlert(entity, WalkingAlert);
+            _alerts.ClearAlert(entity.Owner, WalkingAlert);
     }
 }

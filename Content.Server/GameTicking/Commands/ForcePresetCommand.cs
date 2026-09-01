@@ -1,7 +1,9 @@
 ﻿using System.Linq;
 using Content.Server.Administration;
+using Content.Server.Administration.Logs;
 using Content.Server.GameTicking.Presets;
 using Content.Shared.Administration;
+using Content.Shared.Database;
 using Robust.Shared.Console;
 using Robust.Shared.Prototypes;
 
@@ -10,6 +12,7 @@ namespace Content.Server.GameTicking.Commands
     [AdminCommand(AdminFlags.Round)]
     public sealed class ForcePresetCommand : LocalizedEntityCommands
     {
+        [Dependency] private readonly IAdminLogManager _adminLogger = default!; // SS220-add-logs
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
         [Dependency] private readonly GameTicker _ticker = default!;
 
@@ -35,6 +38,8 @@ namespace Content.Server.GameTicking.Commands
                 shell.WriteLine(Loc.GetString($"cmd-forcepreset-no-preset-found", ("preset", name)));
                 return;
             }
+
+            _adminLogger.Add(LogType.AdminCommand, $"{shell.Player} used forcepreset with preset id: {type.ID}");  // SS220-add-logs
 
             _ticker.SetGamePreset(type, true);
             shell.WriteLine(Loc.GetString($"cmd-forcepreset-success", ("preset", name)));

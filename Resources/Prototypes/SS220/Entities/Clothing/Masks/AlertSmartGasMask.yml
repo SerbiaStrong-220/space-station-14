@@ -18,3 +18,14 @@
   alertSound: /Audio/SS220/Items/SmartGasMask/sound_voice_complionator_halt.ogg
   locIdMessage: ["smartgasmask-halt-message-1", "smartgasmask-halt-message-2", "smartgasmask-halt-message-3"]
   coolDown: 10
+
+- type: alertSmartGasMask
+  id: AlertSmartGasMaskERTSupport
+  name: alert-smart-gas-mask-ert-support
+  icon: 
+    sprite: Clothing/Mask/gassecurity.rsi
+    state: icon
+  notificationType: Support
+  locIdMessage: ["smartgasmask-ert-support-message"]
+  coolDown: 120
+  

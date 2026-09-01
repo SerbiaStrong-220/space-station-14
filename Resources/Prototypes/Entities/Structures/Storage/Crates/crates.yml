@@ -419,6 +419,19 @@
     access: [["Command"]]
 
 - type: entity
+  parent: CrateBaseSecure
+  id: CrateSyndicateSecure
+  name: secure syndicate crate
+  description: A dark steel crate with red bands and a letter S embossed on the front.
+  components:
+  - type: Icon
+    sprite: Structures/Storage/Crates/syndicate_secure.rsi
+  - type: Sprite
+    sprite: Structures/Storage/Crates/syndicate_secure.rsi
+  - type: AccessReader
+    access: [["SyndicateAgent", "NuclearOperative"]]
+
+- type: entity
   parent: CrateGeneric
   id: CrateLivestock
   name: livestock crate
@@ -461,8 +474,10 @@
     fixtures:
       fix1:
         shape:
-          !type:PhysShapeAabb
-          bounds: "-0.4,-0.4,0.4,0.29"
+          #SS220-TweakHitbox begin
+          !type:PhysShapeCircle
+          radius: 0.40
+          #SS220-TweakHitbox end
         density: 135
         mask:
         - CrateMask #this is so they can go under plastic flaps
@@ -484,6 +499,8 @@
   - type: Sprite
     sprite: Structures/Storage/Crates/cage.rsi
     offset: 0, 0 #SS220 Crate-tg-resprite
+    drawdepth: LargeObjects
+    snapCardinals: true
     layers:
     - state: base
     - state: closed
@@ -529,12 +546,12 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.4,-0.4,0.4,0.29"
+          bounds: "-0.4,-0.2,0.4,0.29"
         density: 80
         mask:
-        - CrateMask
+        - TabletopMachineMask
         layer:
-        - LargeMobLayer
+        - TabletopMachineLayer
   - type: StaticPrice
     price: 75
 
@@ -575,6 +592,8 @@
         - CrateMask #this is so they can go under plastic flaps
         layer:
         - MachineLayer
+  - type: Paintable
+    group: null
 
 - type: entity
   id: CrateLockBoxEngineering
@@ -826,6 +845,19 @@
     node: cratecoffin
     containers:
     - entity_storage
+  #SS220-TweakHitbox begin
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 50
+        mask:
+        - CrateMask
+        layer:
+        - MachineLayer
+  #SS220-TweakHitbox end
 
 - type: entity
   parent: CrateGeneric
@@ -909,7 +941,7 @@
 - type: entity
   parent: CrateGenericSteel
   id: CrateSyndicate
-  name: Syndicate crate
+  name: syndicate crate
   description: A dark steel crate with red bands and a letter S embossed on the front.
   components:
   - type: Icon
@@ -942,8 +974,9 @@
       map: ["enum.PaperLabelVisuals.Layer"]
   - type: Cart #SS220-Cart-system
 #SS220 RatKing tweaks and changes start
-  - type: RatKingRummageable
-    rummageLoot: RatKingLootTrashCans
+  - type: Rummageable
+    table: !type:NestedSelector
+      tableId: RatKingLootTrashCans
   - type: RegalRatSpawnLocation
 #SS220 RatKing tweaks and changes here
 #SS220 CollisionTrash bgn

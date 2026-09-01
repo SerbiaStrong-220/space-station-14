@@ -77,7 +77,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 300
+        damage: 200
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
@@ -96,14 +96,16 @@
     interfaces:
       enum.ChameleonStructureUiKey.Key:
         type: ChameleonStructureBoundUserInterface
+  - type: CultYoggChamelenBlocker
   - type: HiddenDescription
     entries:
-    - label: hidden-desc-chameleon-structure-cultyogg
-      whitelistMindRoles: #WhitelistBody isnt working, so i using this one
-      - CultYoggRole
+      CultYoggKnowledge: [ hidden-desc-chameleon-structure-cultyogg ]
+    nameEntries:
+    - [CultYoggKnowledge, null]
+    hiddenName: ent-BaseWall
 
 - type: entity
-  parent: BaseMaterialDoor
+  parent: BaseSecretDoor
   id: CultYoggDoor
   suffix: CultYogg, secret door
   name: cursed secreddoor
@@ -156,14 +158,20 @@
         type: ChameleonStructureBoundUserInterface
   - type: HiddenDescription
     entries:
-    - label: hidden-desc-chameleon-structure-cultyogg
-      whitelistMindRoles: #WhitelistBody isnt working, so i using this one
-      - CultYoggRole
+      CultYoggKnowledge: [ hidden-desc-chameleon-structure-cultyogg ]
+    nameEntries:
+    - [CultYoggKnowledge, null]
+    hiddenName: ent-CultYoggDoor
   - type: Tag
     tags:
       - Structure
       - Wall
       - WhitelistChameleonStructureSecretDoor
+  - type: Weldable
+    fuel: 5
+    time: 3
+  - type: WeldCorruptInteraction
+  - type: CultYoggChamelenBlocker
 
 - type: entity
   parent: Bed
@@ -200,7 +208,6 @@
     - state: closed_unlit
       shader: unshaded
       map: ["enum.DoorVisualLayers.BaseUnlit"]
-      visible: false
     - state: welded
       map: ["enum.WeldableLayers.BaseWelded"]
     - state: bolted_unlit
@@ -257,7 +264,7 @@
     fuel: 5
     time: 3
   - type: Airlock
-    openUnlitVisible: true # Corvax-Resprite-Airlocks
+    openUnlitVisible: true
   - type: NavMapDoor
   - type: DoorBolt
   - type: Appearance
@@ -302,7 +309,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 500
+        damage: 150
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
@@ -342,10 +349,23 @@
      - AirlockScience
      - AirlockCargo
      - AirlockClown
+     - AirlockExternalGlass
+     - AirlockGlass
+     - AirlockSecurityGlass
+     - AirlockCommandGlass
+     - AirlockVirologyGlass
+     - AirlockHydroponicsGlass
+     - AirlockEngineeringGlass
+     - AirlockMedicalGlass
+     - AirlockScienceGlass
+     - AirlockCargoGlass
   - type: CultYoggBuilding
     eraseTime: 3
+  - type: WeldCorruptInteraction
+  - type: CultYoggChamelenBlocker
   - type: HiddenDescription
     entries:
-    - label: hidden-desc-chameleon-structure-cultyogg
-      whitelistMindRoles: #WhitelistBody isnt working, so i using this one
-      - CultYoggRole
+      CultYoggKnowledge: [ hidden-desc-chameleon-structure-cultyogg ]
+    nameEntries:
+    - [CultYoggKnowledge, null]
+    hiddenName: ent-CultYoggAirlock

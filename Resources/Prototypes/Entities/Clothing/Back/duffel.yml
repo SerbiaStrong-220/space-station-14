@@ -87,6 +87,12 @@
   - type: Storage
     storageOpenSound:
       collection: BikeHorn
+      params:
+        variation: 0.125
+    storageInsertSound:
+      collection: FootstepClown
+      params:
+        variation: 0.125
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-textile
@@ -172,10 +178,8 @@
   - type: Sprite
     sprite: Clothing/Back/Duffels/mime.rsi
   - type: Storage
-    storageOpenSound:
-      collection: null
-    storageInsertSound:
-      collection: null
+    storageOpenSound: null
+    storageInsertSound: null
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-textile
@@ -352,22 +356,8 @@
     walkModifier: 1
     sprintModifier: 1
   - type: HeldSpeedModifier
+  #SS220 CBURN Explosition resistance fix start
+  - type: ExplosionResistance
+    damageCoefficient: 0
+  #SS220 CBURN Explosition resistance fix end
 
-#SS220 RETURNED FOR CENTCOMM MAP
-- type: entity
-  id: ClothingBackpackDuffelCBURNFilled
-  parent: ClothingBackpackDuffelCBURN
-  suffix: Filled
-  components:
-  - type: StorageFill
-    contents:
-    - id: BoxSurvivalEngineering
-    - id: WeaponShotgunDoubleBarreled
-    - id: BoxShotgunIncendiary
-      amount: 2
-    - id: GrenadeFlashBang
-      amount: 2
-    - id: PillAmbuzolPlus
-    - id: PillAmbuzol
-      amount: 4
-#SS220 RETURNED FOR CENTCOMM MAP

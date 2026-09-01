@@ -3,7 +3,8 @@
   id: BluespaceCrayon
   name: rainbow crayon
   components:
-  - type: CrayonRechargeable
+  - type: AutoRecharge
+    rechargeDuration: 2.3
   - type: Sprite
     layers:
     - state: icon

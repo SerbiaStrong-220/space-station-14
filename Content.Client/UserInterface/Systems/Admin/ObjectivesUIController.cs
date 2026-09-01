@@ -11,6 +11,8 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Network;
 using Robust.Shared.Utility;
 using System.Linq;
+using Content.Shared.SS220.Objectives;
+using Robust.Client.Player;
 using static Content.Client.CharacterInfo.AntagonistInfoSystem;
 
 namespace Content.Client.UserInterface.Systems.Admin
@@ -20,6 +22,8 @@ namespace Content.Client.UserInterface.Systems.Admin
     {
         private AdminSystem? _adminSystem;
         private IEntityManager? _entityManager;
+        private IPlayerManager? _player; // ss220 add custom goals x2
+
         [UISystemDependency] private readonly AntagonistInfoSystem _antagonistInfo = default!;
         [UISystemDependency] private readonly SpriteSystem _sprite = default!;
 
@@ -94,6 +98,36 @@ namespace Content.Client.UserInterface.Systems.Admin
                     conditionControl.Description.SetMessage(descriptionMessage);
 
                     objectiveControl.AddChild(conditionControl);
+
+                    // ss220 add custom goals x2 start
+                    var toggleStatusContainer = new BoxContainer
+                    {
+                        Orientation = BoxContainer.LayoutOrientation.Vertical,
+                    };
+
+                    var toggleStatusObjectiveButton = new Button
+                    {
+                        Text = Loc.GetString("ui-toggle-status-objective-button"),
+                    };
+
+                    toggleStatusContainer.AddChild(toggleStatusObjectiveButton);
+                    conditionControl.ObjectiveContainer.AddChild(toggleStatusContainer);
+
+                    toggleStatusObjectiveButton.OnPressed += _ =>
+                    {
+                        var admin = _player?.LocalEntity;
+                        if (admin == null)
+                            return;
+
+                        var toggleObjectiveStatusEvent = new ToggleObjectiveStatusEvent(
+                            EntityManager.GetNetEntity(entity),
+                            EntityManager.GetNetEntity(admin.Value),
+                            condition);
+
+                        EntityManager.RaisePredictiveEvent(toggleObjectiveStatusEvent);
+                    };
+
+                    // ss220 add custom goals x2 end
                 }
 
                 _window.Objectives.AddChild(objectiveControl);
@@ -112,12 +146,14 @@ namespace Content.Client.UserInterface.Systems.Admin
         {
             _adminSystem = system;
             _entityManager = IoCManager.Resolve<IEntityManager>();
+            _player = IoCManager.Resolve<IPlayerManager>(); // ss220 add custom goals x2
         }
 
         public void OnSystemUnloaded(AdminSystem system)
         {
             _adminSystem = system;
             _entityManager = IoCManager.Resolve<IEntityManager>();
+            _player = IoCManager.Resolve<IPlayerManager>(); // ss220 add custom goals x2
         }
 
         public void OnSystemLoaded(AntagonistInfoSystem system)

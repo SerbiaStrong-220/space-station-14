@@ -16,6 +16,7 @@
     size: Normal
     sprite: Objects/Weapons/Melee/cane.rsi
   - type: Appearance
+  - type: MobilityAid
   - type: MeleeWeapon
     wideAnimationRotation: 45
     damage:
@@ -33,7 +34,7 @@
 
 - type: entity
   name: cane blade
-  parent: [BaseItem]
+  parent: [BaseSword]
   id: CaneBlade
   description: A sharp blade with a cane shaped hilt.
   components:
@@ -42,20 +43,17 @@
       path: /Audio/SS220/Effects/Drop/cane_blade.ogg ##new sound_drop effect, add MIXnikita
       params:
         volume: 2
-  - type: Sharp
   - type: Sprite
     sprite: Objects/Weapons/Melee/cane_blade.rsi
-    state: icon
   - type: MeleeWeapon
     wideAnimationRotation: 65
     attackRate: 1.5
     damage:
       types:
-        Slash: 14
+        Slash: 17
     soundHit:
         path: /Audio/Weapons/bladeslice.ogg
   - type: Item
-    size: Normal
     sprite: Objects/Weapons/Melee/cane_blade.rsi
   - type: Tag
     tags:
@@ -63,7 +61,7 @@
   - type: DisarmMalus
 
 - type: entity
-  parent: [Cane, VoiceLock]
+  parent: [Cane, SelectableLock]
   id: CaneSheath
   suffix: Empty
   components:
@@ -93,6 +91,7 @@
           - CaneBlade
         insertSound: /Audio/Items/sheath.ogg
         ejectSound: /Audio/Items/unsheath.ogg
+        priority: 3
   - type: ItemMapper
     mapLayers:
       cane:

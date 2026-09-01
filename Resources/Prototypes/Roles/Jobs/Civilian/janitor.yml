@@ -4,22 +4,23 @@
   description: job-description-janitor
   playTimeTracker: JobJanitor
   startingGear: JanitorGear
+  experienceDefinition: JanitorRoleExperience # SS220-experience
   icon: "JobIconJanitor"
   supervisors: job-supervisors-hop
   access:
   - Service
   - Janitor
   - Maintenance
-  special:
-  - !type:GiveItemOnHolidaySpecial
-    holiday: GarbageDay
-    prototype: WeaponRevolverInspector
+  #special: #SS220-removeInspectorHoliday begin
+  #- !type:GiveItemOnHolidaySpecial
+  #  holiday: GarbageDay
+  #  prototype: WeaponRevolverInspector #SS220-removeInspectorHoliday end
 
 - type: startingGear
   id: JanitorGear
   equipment:
 #    shoes: ClothingShoesGaloshes #SS220-OrangeJanitor
-    id: JanitorPDA
+#   id: JanitorPDA #SS220-JRNewThings
     ears: ClothingHeadsetService
 #    belt: ClothingBeltJanitorFilled #SS220-JRJanitor
   #storage:

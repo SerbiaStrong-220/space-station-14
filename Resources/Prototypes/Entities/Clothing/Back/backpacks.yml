@@ -44,6 +44,7 @@
     tags:
     - WhitelistChameleon
     - Backpack
+  - type: DragDropContainerTransfer #ss220 add drag drop container
 
 - type: entity
   parent: ClothingBackpack
@@ -56,6 +57,12 @@
   - type: Storage
     storageOpenSound:
       collection: BikeHorn
+      params:
+        variation: 0.125
+    storageInsertSound:
+      collection: FootstepClown
+      params:
+        variation: 0.125
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-textile
@@ -176,6 +183,9 @@
     microFiberMaterial: micro-fibers-textile
     microFiberColor: micro-fibers-white
 #SS220 Micro_fibers end
+  - type: Storage
+    storageOpenSound: null
+    storageInsertSound: null
 
 - type: entity
   parent: ClothingBackpack
@@ -294,7 +304,7 @@
   parent: [ ClothingBackpack]
   id: ClothingBackpackERTLeader
   name: ERT leader backpack
-  description: A spacious backpack with lots of pockets, worn by the Commander of an Emergency Response Team.
+  description: A spacious backpack with lots of pockets, worn by the Leader of an Emergency Response Team.
   components:
   - type: Sprite
     sprite: Clothing/Back/Backpacks/ertleader.rsi
@@ -412,21 +422,22 @@
 
 #SS220 RETURNED FOR CENTCOMM MAP
 - type: entity
-
   parent: ClothingBackpackERTSecurity
   id: ClothingBackpackDeathSquadFilled
   name: death squad backpack
   description: Holds the kit of CentComm's most feared agents.
   components:
-    #ss220-fix-sprite-begin
-    - type: Sprite
-      sprite: Corvax/Back/Backpacks/deathsquad-backpack.rsi
-    #ss220-fix-sprite-end
-    - type: Storage
-      grid:
-      - 0,0,8,6 # SS220 Bigger-Ert-Backpacks
-    - type: StorageFill
-      contents:
+  #ss220-fix-sprite-begin
+  - type: Sprite
+    sprite: Corvax/Back/Backpacks/deathsquad-backpack.rsi
+  #ss220-fix-sprite-end
+  - type: Storage
+    grid:
+    - 0,0,8,6 # SS220 Bigger-Ert-Backpacks
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
         - id: BoxSurvivalEngineering
         - id: WeaponPulseRifle
         - id: WeaponPulsePistol
@@ -545,7 +556,7 @@
   id: ClothingBackpackDebug
   name: wackpack
   description: What the fuck is this?
-  suffix: Debug
+  suffix: DEBUG
   components:
   - type: Storage
     grid:
@@ -561,7 +572,7 @@
   id: ClothingBackpackDebug2
   name: big wackpack
   description: What the fuck is this?
-  suffix: Debug
+  suffix: DEBUG
   components:
   - type: Storage
     grid:
@@ -572,7 +583,7 @@
   id: ClothingBackpackDebug3
   name: gay wackpack
   description: What the fuck is this?
-  suffix: Debug
+  suffix: DEBUG
   components:
   - type: Storage
     grid:
@@ -593,7 +604,7 @@
   id: ClothingBackpackDebug4
   name: offset wackpack
   description: What the fuck is this?
-  suffix: Debug
+  suffix: DEBUG
   components:
   - type: Storage
     grid:

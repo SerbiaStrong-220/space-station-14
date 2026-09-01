@@ -17,14 +17,14 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.CultYogg.Fungus;
 
-public sealed class FungusSystem : EntitySystem
+public sealed partial class FungusSystem : EntitySystem
 {
-    [Dependency] private readonly BotanySystem _botany = default!;
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly HandsSystem _hands = default!;
+    [Dependency] private BotanySystem _botany = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private HandsSystem _hands = default!;
 
     public override void Initialize()
     {

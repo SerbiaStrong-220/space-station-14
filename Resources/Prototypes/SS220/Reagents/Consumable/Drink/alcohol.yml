@@ -2,7 +2,7 @@
 
 - type: reagent
   id: Glintwine
-  name: reagent-name-glintwine 
+  name: reagent-name-glintwine
   parent: BaseAlcohol
   desc: reagent-desc-glintwine
   physicalDesc: reagent-physical-desc-piquant
@@ -13,7 +13,7 @@
     sprite: SS220/Objects/Consumable/Drinks/glintveinglass.rsi
     state: icon
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 2
@@ -39,18 +39,19 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 2
       - !type:AdjustReagent
         reagent: Ethanol
         amount: 0.4
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         conditions:
-          - !type:ReagentThreshold
+          - !type:ReagentCondition
+            reagent: VodkaKazaki
             min: 10
         damage:
           types:
@@ -73,7 +74,7 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 2
@@ -99,7 +100,7 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 1
@@ -108,20 +109,23 @@
         amount: 1.5
       - !type:Jitter
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Bacchus
           min: 1
       - !type:Drunk
         boozePower: 20
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Bacchus
           min: 1
       - !type:HealthChange
         conditions:
-          - !type:ReagentThreshold
+          - !type:ReagentCondition
+            reagent: Bacchus
             min: 1
-          - !type:OrganType
-            type: Dwarf #dwarfs dont care
-            shouldHave: false
+          - !type:MetabolizerTypeCondition
+            type: [ Dwarf ]
+            inverted: true
         damage:
           types:
             Poison: 2
@@ -143,3 +147,40 @@
   metamorphicMaxFillLevels: 6
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
+
+#Skooma
+
+- type: reagent
+  id: Skooma
+  name: reagent-name-skooma
+  parent: BaseAlcohol
+  desc: reagent-desc-skooma
+  physicalDesc: reagent-physical-desc-exotic-smelling
+  flavor: Skooma
+  color: "#dcdedc"
+  metamorphicSprite:
+    sprite: SS220/Objects/Consumable/Drinks/skooma.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 2
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+  metabolisms:
+    Digestion:
+      effects:
+      - !type:SatiateThirst
+        factor: 1
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.4
+      - !type:Jitter
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Tajaran ]
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectSeeingRainbow
+        type: Add
+        time: 10
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Tajaran ]
+  fizziness: 0.2

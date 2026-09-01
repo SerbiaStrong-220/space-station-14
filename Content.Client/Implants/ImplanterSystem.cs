@@ -24,15 +24,17 @@ public sealed class ImplanterSystem : SharedImplanterSystem
     {
         if (_uiSystem.TryGetOpenUi<DeimplantBoundUserInterface>(uid, DeimplantUiKey.Key, out var bui))
         {
+            // TODO: Don't use protoId for deimplanting
+            // and especially not raw strings!
             Dictionary<string, string> implants = new();
             foreach (var implant in component.DeimplantWhitelist)
             {
-                if (_proto.TryIndex(implant, out var proto))
+                if (_proto.Resolve(implant, out var proto))
                 // SS220-implant-name-fix-begin
                 {
                     var locData = Loc.GetEntityData(proto.ID);
                     var name = locData.Attributes.FirstOrNull(x => x.Key == "true-name")?.Value ??
-                                string.Join(" ", proto.Name, locData.Suffix);
+                                $"{proto.Name} {locData.Suffix}";
                     implants.Add(proto.ID, name);
                 }
                 // SS220-implant-name-fix-end

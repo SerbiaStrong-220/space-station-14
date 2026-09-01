@@ -10,6 +10,7 @@ using Content.Shared.Voting;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
+using Content.Shared.Maps;
 using Content.Shared.Mind;
 using Content.Shared.Players;
 using Content.Shared.Preferences;
@@ -37,7 +38,7 @@ namespace Content.Server.GameTicking
         [Dependency] private readonly RoleSystem _role = default!;
         [Dependency] private readonly ITaskManager _taskManager = default!;
         //ss220 add additional info for round start
-        [Dependency] private readonly RoundEndInfoSystem _roundEndInfo = default!;
+        [Dependency] private RoundEndInfoSystem _roundEndInfo = default!;
         //ss220 add additional info for round end
 
         private static readonly Counter RoundNumberMetric = Metrics.CreateCounter(
@@ -78,6 +79,8 @@ namespace Content.Server.GameTicking
                 RaiseLocalEvent(new GameRunLevelChangedEvent(old, value));
             }
         }
+
+        public event Action<GameMapPrototype>? OnMainStationMapLoaded; // SS220 map vote fixes
 
         /// <summary>
         /// Returns true if the round's map is eligible to be updated.
@@ -153,6 +156,11 @@ namespace Content.Server.GameTicking
 
                 if (i == 0)
                     DefaultMap = mapId;
+
+                // SS220 map vote fixes begin
+                if (maps[i] == mainStationMap)
+                    OnMainStationMapLoaded?.Invoke(mainStationMap);
+                // SS220 map vote fixes end
             }
         }
 
@@ -401,7 +409,9 @@ namespace Content.Server.GameTicking
                 }
                 else
                 {
-                    profile = HumanoidCharacterProfile.Random();
+                    var speciesToBlacklist =
+                        new HashSet<string>(_cfg.GetCVar(CCVars.ICNewAccountSpeciesBlacklist).Split(","));
+                    profile = HumanoidCharacterProfile.Random(speciesToBlacklist);
                 }
                 readyPlayerProfiles.Add(userId, profile);
             }
@@ -630,7 +640,6 @@ namespace Content.Server.GameTicking
             );
             RaiseNetworkEvent(roundEndMessageEvent);
             RaiseLocalEvent(roundEndMessageEvent);
-
             RaiseLocalEvent(new RoundEndedEvent(RoundId, roundDuration)); // Corvax-RoundNotifications
 
             _replayRoundPlayerInfo = listOfPlayerInfoFinal;

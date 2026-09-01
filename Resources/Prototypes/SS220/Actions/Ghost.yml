@@ -1,16 +1,4 @@
 - type: entity
-  id: ActionRespawn
-  name: Возродиться
-  description: Возвращение в лобби. Вы обязаны выбрать другого персонажа и "забыть" все, что видели, согласно правилам сервера.
-  components:
-  - type: Action
-    useDelay: 1200
-    icon: SS220/Interface/Actions/respawn.png
-    checkCanInteract: false
-  - type: InstantAction
-    event: !type:RespawnActionEvent
-
-- type: entity
   id: ActionToggleAGhostBodyVisuals
   name: Скрыть тело
   description: Скрыть тело призрака, оставив только шляпу.

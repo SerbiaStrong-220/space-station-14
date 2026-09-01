@@ -1,0 +1,14 @@
+<controls:DisposalFilterNewWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client.SS220.Pipes.DisposalFilter"
+    xmlns:userInterface="clr-namespace:Content.Client.SS220.UserInterface">
+
+    <BoxContainer Orientation="Vertical">
+        <userInterface:ShapeButton Name="FilterByName" MinSize="128 32" Text="{Loc 'filter-disposal-by-name'}"/>
+        <userInterface:ShapeButton Name="FilterIsOre" ToggleMode="True" MinSize="128 32" Text="{Loc 'filter-disposal-is-ore'}"/>
+        <userInterface:ShapeButton Name="FilterIsMob" ToggleMode="True" MinSize="128 32" Text="{Loc 'filter-disposal-is-mob'}"/>
+        <userInterface:ShapeButton Name="FilterIsMail" ToggleMode="True" MinSize="128 32" Text="{Loc 'filter-disposal-is-mail'}"/>
+        <userInterface:ShapeButton Name="FilterIsStackable" ToggleMode="True" MinSize="128 32" Text="{Loc 'filter-disposal-is-stack'}"/>
+    </BoxContainer>
+
+</controls:DisposalFilterNewWindow>

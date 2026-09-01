@@ -4,6 +4,7 @@
   name: chat-emote-name-bubbles
   category: Vocal
   available: false
+  icon: SS220/Interface/Emotes/seethe.png
   whitelist:
     components:
     - Vocal
@@ -20,112 +21,13 @@
     - бурлит
     - бурлит.
     - бурлит!
-#SS220 Howls for vulps
-- type: emote
-  id: Howl
-  name: chat-emote-name-howl
-  category: Vocal
-  available: false
-  icon: Interface/Actions/scream.png
-  whitelist:
-    components:
-    - Vocal
-  blacklist:
-    components:
-    - BorgChassis
-  chatMessages: ["chat-emote-msg-howl"]
-  chatTriggers:
-  - howl
-  - howl.
-  - howl!
-  - howls
-  - howls.
-  - howls!
-  - выть
-  - выть.
-  - выть!
-  - выть?
-  - воет
-  - воет.
-  - воет!
-  - воет?
-  - завыл
-  - завыл.
-  - завыл!
-  - завыл?
-  - завывает
-  - завывает.
-  - завывает!
-  - завывает?
-
-- type: emote
-  id: Growl
-  name: chat-emote-name-growl
-  category: Vocal
-  available: false
-  icon: Interface/Actions/scream.png
-  whitelist:
-    components:
-    - Vocal
-  blacklist:
-    components:
-    - BorgChassis
-  chatMessages: ["chat-emote-msg-growl"]
-  chatTriggers:
-  - growl
-  - growl.
-  - growl!
-  - growls
-  - growls.
-  - growls!
-  - рычать
-  - рычать.
-  - рычать?
-  - рычать!
-  - рычит
-  - рычит.
-  - рычит!
-  - рычит?
-  - ррр
-
-- type: emote
-  id: Bark
-  name: chat-emote-name-bark
-  category: Vocal
-  available: false
-  icon: Interface/Actions/scream.png
-  whitelist:
-    components:
-    - Vocal
-  blacklist:
-    components:
-    - BorgChassis
-  chatMessages: ["chat-emote-msg-bark"]
-  chatTriggers:
-  - bars
-  - bark.
-  - bark!
-  - barks
-  - barks.
-  - barks!
-  - лает
-  - лает.
-  - лает?
-  - лает!
-  - гавкнул
-  - гавкнул.
-  - гавкнул?
-  - гавкнул!
-  - гавкает
-  - гавкает.
-  - гавкает!
-  - гавкает?
 
 ## spo9k vocal emotes start
 - type: emote
   id: Meow
   name: chat-emote-name-meow
   available: false
+  icon: SS220/Interface/Emotes/meow.png
   whitelist:
     components:
     - Vocal
@@ -172,6 +74,7 @@
   id: Purr
   name: chat-emote-name-purr
   available: false
+  icon: SS220/Interface/Emotes/purring.png
   whitelist:
     components:
     - Vocal
@@ -191,6 +94,7 @@
   id: Mrow
   name: chat-emote-name-mrow
   available: false
+  icon: SS220/Interface/Emotes/angry_meow.png
   whitelist:
     components:
     - Vocal

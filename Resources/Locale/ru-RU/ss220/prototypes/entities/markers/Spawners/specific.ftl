@@ -1,0 +1,9 @@
+ent-BearTrapArmed075 = случайный спавнер { ent-BearTrap }
+    .desc = { ent-MarkerBase.desc }
+    .suffix = Шанс 75%
+ent-BearTrapArmed05 = случайный спавнер { ent-BearTrap }
+    .desc = { ent-MarkerBase.desc }
+    .suffix = Шанс 50%
+ent-BearTrapArmed025 = случайный спавнер { ent-BearTrap }
+    .desc = { ent-MarkerBase.desc }
+    .suffix = Шанс 25%

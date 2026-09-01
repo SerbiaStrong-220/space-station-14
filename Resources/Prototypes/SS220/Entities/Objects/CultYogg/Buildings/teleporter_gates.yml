@@ -1,0 +1,83 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: VoidTeleportEnter
+  parent: BaseSelfLinkedPortalCult
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/CultYogg/portal_gates.rsi
+    layers:
+    - state: base
+    - state: portal
+      map: ["portalLayer"]
+      shader: unshaded
+      visible: false
+  - type: Appearance
+  - type: PointLight #maybe later figure out color differentiation
+    color: SkyBlue
+    radius: 3
+    energy: 1
+    netsync: true
+    enabled: false
+  - type: SelfLinkedTeleport
+    whitelistLinked:
+      tags:
+      - CultYoggTeleportExit
+  - type: Tag
+    tags:
+    - CultYoggTeleportEnter
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: GenericVisualizer
+    visuals:
+      enum.SelfLinkedVisuals.State:
+        portalLayer:
+          True: {visible: true}
+          False: {visible: false}
+
+- type: entity
+  id: VoidTeleportExit
+  parent: BaseSelfLinkedPortalCult
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/CultYogg/portal_gates.rsi
+    layers:
+    - state: base
+    - state: portal
+      map: ["portalLayer"]
+      shader: unshaded
+      visible: false
+  - type: Appearance
+  - type: PointLight #maybe later figure out color differentiation
+    color: SkyBlue
+    radius: 3
+    energy: 1
+    netsync: true
+    enabled: false
+  - type: SelfLinkedTeleport
+    whitelistLinked:
+      tags:
+      - CultYoggTeleportEnter
+  - type: Tag
+    tags:
+    - CultYoggTeleportExit
+  - type: GenericVisualizer
+    visuals:
+      enum.SelfLinkedVisuals.State:
+        portalLayer:
+          True: {visible: true}
+          False: {visible: false}

@@ -1,20 +1,28 @@
 - type: entity
-  id: BulletHeavyRifle
-  name: bullet (.20 rifle)
   parent: BaseBullet
+  id: BulletHeavyRifle
   categories: [ HideSpawnMenu ]
+  name: bullet (.10 rifle)
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.5
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
         Piercing: 32 #ss220lowTTKUpdate
 
 - type: entity
-  id: BulletMinigun
-  name: minigun bullet (.10 rifle)
   parent: BulletHeavyRifle
+  id: BulletMinigun
   categories: [ HideSpawnMenu ]
+  name: minigun bullet (.10 rifle)
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.15
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:

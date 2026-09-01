@@ -29,6 +29,7 @@ entities:
       parent: invalid
     - type: ProtectedGrid
     - type: EscapePod
+    - type: SkipAutoVariantize      
     - type: MapGrid
       chunks:
         -1,-1:

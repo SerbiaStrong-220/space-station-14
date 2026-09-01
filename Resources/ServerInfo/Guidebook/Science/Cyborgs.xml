@@ -55,7 +55,7 @@
     <GuideEntityEmbed Entity="BorgModuleMining" Caption="Шахтёрский"/>
     <GuideEntityEmbed Entity="BorgModuleCleaning" Caption="Чистящий"/>
     <GuideEntityEmbed Entity="BorgModuleService" Caption="Сервисный"/>
-    <GuideEntityEmbed Entity="BorgModuleAdvancedChemical" Caption="Лечащий"/>
+    <GuideEntityEmbed Entity="BorgModuleAdvancedTopical" Caption="Лечащий"/>
   </Box>
   <Box>
     [italic]Примеры специализированных модулей. Обратите внимание на цвета корпуса и печатной платы.

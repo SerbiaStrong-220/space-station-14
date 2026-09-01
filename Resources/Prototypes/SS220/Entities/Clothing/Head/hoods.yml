@@ -12,14 +12,25 @@
   - type: Clothing
     sprite: SS220/Clothing/Head/Hoods/Coat/hoodcentcom.rsi
 
+- type: entity
+  parent: ClothingHeadHatHoodWinterBase
+  id: ClothingHeadHatHoodWinterJanitorJR
+  categories: [ HideSpawnMenu ]
+  name: JR winter coat hood
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hoods/janitor_JR.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hoods/janitor_JR.rsi
+
 #Экзокостюм утилизаторов - капюшон
 
 - type: entity
   parent: ClothingHeadHatHoodWinterBase
   id: ClothingHeadHatHoodExosuitSalvage
   categories: [ HideSpawnMenu ]
-  name: капюшон экзокостюма утилизатора
-  description: Капюшон из крепкой ткани, обеспечивающий небольшую защиту.
+  name: salvage exosuit hood
+  description: A hood made of durable fabric, providing a small amount of protection.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Head/Hoods/salvage_exosuit.rsi
@@ -70,8 +81,8 @@
 - type: entity
   parent: ClothingHeadHatHoodWinterBase
   id: ClothingHeadHatHoodHeartFinaly
-  name: сердечный капюшон
-  description: Капюшон.
+  name: heart hood
+  description: A hood.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Head/Hoods/heart.rsi

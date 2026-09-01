@@ -16,14 +16,14 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.CriminalRecords;
 
-public sealed class CriminalRecordSystem : SharedCriminalRecordSystem
+public sealed partial class CriminalRecordSystem : SharedCriminalRecordSystem
 {
-    [Dependency] private readonly StationRecordsSystem _stationRecords = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IAdminLogManager _logManager = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly IdCardSystem _idCard = default!;
-    [Dependency] private readonly RadioSystem _radio = default!;
+    [Dependency] private StationRecordsSystem _stationRecords = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IAdminLogManager _logManager = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private IdCardSystem _idCard = default!;
+    [Dependency] private RadioSystem _radio = default!;
 
     private static readonly ProtoId<AccessLevelPrototype> AccessForChangeStatus = "Brig";
     private static readonly ProtoId<RadioChannelPrototype> ReportRadioChannel = "Security";
@@ -211,13 +211,14 @@ public sealed class CriminalRecordSystem : SharedCriminalRecordSystem
             }
         }
 
+        var currentRoundTime = (int)_gameTicker.RoundDuration().TotalSeconds;
         var criminalRecord = new CriminalRecord
         {
             Message = message,
-            RecordType = validatedRecordType
+            RecordType = validatedRecordType,
+            RecordSetAt = TimeSpan.FromSeconds(currentRoundTime),
         };
 
-        var currentRoundTime = (int)_gameTicker.RoundDuration().TotalSeconds;
         if (!catalog.Records.TryAdd(currentRoundTime, criminalRecord))
             return false;
 

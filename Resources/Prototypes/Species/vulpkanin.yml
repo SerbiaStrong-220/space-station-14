@@ -1,0 +1,16 @@
+- type: species
+  id: Vulpkanin
+  name: species-name-vulpkanin
+  roundStart: false #SS220-port-vulpkanins
+  prototype: MobVulpkanin
+  defaultSkinTone: "#5a3f2d"
+  dollPrototype: AppearanceVulpkanin
+  skinColoration: VulpkaninColors
+  maleFirstNames: names_vulpkanin_male
+  femaleFirstNames: names_vulpkanin_female
+  # SS220-fix-last-names-begin
+  maleLastNames: names_vulpkanin_last
+  femaleLastNames: names_vulpkanin_last
+  # lastNames: names_vulpkanin_last # wizden one
+  # SS220-fix-last-names-end
+  buttScanTexture: /Textures/SS220/Interface/Butts/vulp.png #SS220-port-vulpkanins

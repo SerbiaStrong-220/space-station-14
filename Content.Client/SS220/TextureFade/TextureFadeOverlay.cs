@@ -14,10 +14,11 @@ namespace Content.Client.SS220.TextureFade;
 /// <summary>
 /// Performs alpha clip on the privided texture with variable threshold (threshold filter). See <see cref="TextureFadeOverlayComponent"/> for more automatic use.
 /// </summary>
-public sealed class TextureFadeOverlay : StackableOverlay
+public sealed partial class TextureFadeOverlay : StackableOverlay
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+
     private readonly SpriteSystem _spriteSystem;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
@@ -28,12 +29,13 @@ public sealed class TextureFadeOverlay : StackableOverlay
     public bool Loop = true;
 
     private readonly ShaderInstance _shader;
+    private static readonly ProtoId<ShaderPrototype> TextureFadeSharedId = "TextureFade";
 
     public TextureFadeOverlay()
     {
         IoCManager.InjectDependencies(this);
         _spriteSystem = _entityManager.EntitySysManager.GetEntitySystem<SpriteSystem>();
-        _shader = _prototypeManager.Index<ShaderPrototype>("TextureFade").InstanceUnique();
+        _shader = _prototypeManager.Index(TextureFadeSharedId).InstanceUnique();
     }
 
     protected override void FrameUpdate(FrameEventArgs args)

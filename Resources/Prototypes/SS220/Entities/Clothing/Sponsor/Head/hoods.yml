@@ -2,11 +2,24 @@
 - type: entity
   parent: ClothingHeadHatHoodWinterBase
   id: ClothingHeadHatWikiCloak
-  name: «тень редактора»
+  name: editor's shadow
+  description: A cloak woven from shadows, granting its wearer mystery and the mystical ability to alter information about the world.
   categories: [ HideSpawnMenu ]
-  description: Плащ, сотканный из теней, придаёт своему обладателю загадочность и мистические способности изменения информации о мире.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Head/Hoods/wikihood.rsi
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/Head/Hoods/wikihood.rsi
+
+# Капюшон для плаща лороведов
+- type: entity
+  parent: ClothingHeadHatHoodWinterBase
+  id: ClothingHeadHatLorovedCloak
+  name: the cloak of storytelling
+  description: A special cloak given to the guardians, whose purpose is to preserve the memory of the world.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Head/Hoods/lorovedhood.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Head/Hoods/lorovedhood.rsi

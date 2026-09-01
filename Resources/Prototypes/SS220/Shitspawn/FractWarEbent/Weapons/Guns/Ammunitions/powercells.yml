@@ -38,5 +38,12 @@
     tags:
     - BlasterPowerCell
   - type: Appearance
-  - type: PowerCellVisuals
+  - type: BatteryVisuals
+  - type: GenericVisualizer
+    visuals:
+      enum.BatteryVisuals.State:
+        enum.PowerCellVisualLayers.Unshaded:
+          Full: { visible: true, state: o2 }
+          Neither: { visible: true, state: o1 }
+          Empty: { visible: false }
   - type: Riggable

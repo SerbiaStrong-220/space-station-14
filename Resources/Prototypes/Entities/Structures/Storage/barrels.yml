@@ -60,6 +60,7 @@
   components:
   - type: Sprite
     state: radbarrel
+  - type: RadiationDecrease # SS220 radioactiveness fix
   - type: RadiationSource
     intensity: 1.0
     slope: 0.25

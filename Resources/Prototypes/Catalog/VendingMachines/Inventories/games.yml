@@ -17,6 +17,7 @@
     MysteryFigureBox: 2
     BookStationsAndAgents: 4 # Corvax-Tabletop
     BooksBag: 3
+    Magic9Ball: 2
     GameCardsColode: 3 # SS220-GameCard
     GameCardsInHand: 12 # SS220-InHandCards
   contrabandInventory:

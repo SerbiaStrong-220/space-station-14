@@ -60,6 +60,11 @@
         <!-- Footer -->
         <BoxContainer Orientation="Vertical" Name="TraitorFooter">
             <PanelContainer StyleClasses="LowDivider" />
+            <!-- SS220-show-rp-dynamic-start -->
+            <BoxContainer Orientation="Horizontal" Name="DynamicFooter" Margin="10 2 5 0" VerticalAlignment="Bottom">
+                <Label Text="{Loc 'dynamic-type-label'}" StyleClasses="WindowFooterText" Name="DynamicLabel" />
+            <!-- SS220-show-rp-dynamic-end -->
+            </BoxContainer>
             <BoxContainer Orientation="Horizontal" Margin="10 2 5 0" VerticalAlignment="Bottom">
                 <Label Text="{Loc 'store-ui-traitor-flavor'}" StyleClasses="WindowFooterText" />
                 <Label Text="{Loc 'store-ui-traitor-warning'}" StyleClasses="WindowFooterText"

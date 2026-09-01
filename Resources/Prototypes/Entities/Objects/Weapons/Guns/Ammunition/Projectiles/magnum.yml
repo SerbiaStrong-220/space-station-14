@@ -1,19 +1,24 @@
 - type: entity
-  id: BulletMagnum
-  name: bullet (.45 magnum)
   parent: BaseBullet
+  id: BulletMagnum
   categories: [ HideSpawnMenu ]
+  name: bullet (.45 magnum)
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.6
+    weightedRandomProviderEntity: 45ACPCaliberFragment
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
         Piercing: 40 #ss220lowTTKUpdate
 
 - type: entity
-  id: BulletMagnumPractice
-  name: bullet (.45 magnum practice)
   parent: BaseBulletPractice
+  id: BulletMagnumPractice
   categories: [ HideSpawnMenu ]
+  name: bullet (.45 magnum practice)
   components:
   - type: Projectile
     damage:
@@ -21,11 +26,15 @@
         Blunt: 1
 
 - type: entity
-  id: BulletMagnumIncendiary
   parent: BaseBulletIncendiary
-  name: bullet (.45 magnum incendiary)
+  id: BulletMagnumIncendiary
   categories: [ HideSpawnMenu ]
+  name: bullet (.45 magnum incendiary)
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    weightedRandomProviderEntity: 45ACPCaliberFragment
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
@@ -33,11 +42,15 @@
         Heat: 3 #ss220weaponBalance
 
 - type: entity
-  id: BulletMagnumAP
-  name: bullet (.45 magnum armor-piercing)
   parent: BaseBulletAP
+  id: BulletMagnumAP
   categories: [ HideSpawnMenu ]
+  name: bullet (.45 magnum armor-piercing)
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.15
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
@@ -45,11 +58,15 @@
     ignoreResistances: true
 
 - type: entity
-  id: BulletMagnumUranium
-  name: bullet (.45 magnum uranium)
   parent: BaseBulletUranium
+  id: BulletMagnumUranium
   categories: [ HideSpawnMenu ]
+  name: bullet (.45 magnum uranium)
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    weightedRandomProviderEntity: 45ACPCaliberFragment
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:

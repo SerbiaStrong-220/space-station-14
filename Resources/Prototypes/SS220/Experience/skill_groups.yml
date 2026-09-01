@@ -1,0 +1,15 @@
+- type: skillTreeGroup
+  id: SkillGroupGeneral
+  groupName: skill-group-general
+
+- type: skillTreeGroup
+  id: SkillGroupMedicine
+  groupName: skill-group-medicine
+
+- type: skillTreeGroup
+  id: SkillTreeSecurity
+  groupName: skill-group-security
+
+- type: skillTreeGroup
+  id: SkillTreeEngineering
+  groupName: skill-group-engineering

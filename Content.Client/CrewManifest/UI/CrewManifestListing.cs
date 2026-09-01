@@ -13,6 +13,8 @@ public sealed class CrewManifestListing : BoxContainer
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     private readonly SpriteSystem _spriteSystem;
 
+    private static readonly ProtoId<DepartmentPrototype> CryoDepartmentId = "Cryo";
+
     public CrewManifestListing()
     {
         IoCManager.InjectDependencies(this);
@@ -61,7 +63,7 @@ public sealed class CrewManifestListing : BoxContainer
         // SS220 Cryo-Manifest
         if (cryoList.Count > 0)
         {
-            if (_prototypeManager.TryIndex<DepartmentPrototype>("Cryo", out var cryoDepartment))
+            if (_prototypeManager.TryIndex(CryoDepartmentId, out var cryoDepartment))
                 AddChild(new CrewManifestSection(_prototypeManager, _spriteSystem, cryoDepartment, cryoList));
         }
     }

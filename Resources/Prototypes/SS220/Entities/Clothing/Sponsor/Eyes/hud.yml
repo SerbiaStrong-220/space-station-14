@@ -4,8 +4,8 @@
 - type: entity
   parent: [ ClothingSponsorEyesBaseUnshaded, ClothingEyesGlassesSecurity ]
   id: ClothingSponsorCyberSecVisor
-  name: кибервизор охраны
-  description: Несмотря на свой грозный вид не защищает от вспышек и папарацций.
+  name: security cybervisor
+  description: Despite its menacing appearance, it provides no protection against flashes or paparazzi.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/secvisor.rsi
@@ -15,8 +15,8 @@
 - type: entity
   parent: [ ClothingSponsorEyesBaseUnshaded, ClothingEyesGlassesMeson ]
   id: ClothingSponsorCyberEngVisor
-  name: киберсварочные очки
-  description: Комически большим размером удалось добиться увеличения эффективности очков на целых 0,42%!
+  name: cyber-welding goggles
+  description: Their comically large size has somehow managed to increase efficiency by a whopping 0.42%!
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/engivisor.rsi
@@ -26,8 +26,8 @@
 - type: entity
   parent: [ ClothingSponsorEyesBaseUnshaded, ClothingEyesHudMedical ]
   id: ClothingSponsorCyberMedVisor
-  name: медицинский кибервизор
-  description: За свою цену он обязан показывать гораздо больше, чем просто состояние пациента, но это лишь мечты...
+  name: medical cybervisor
+  description: For this price, it should show way more than just the patient's condition, but that's just a dream...
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/medvisor.rsi
@@ -37,8 +37,8 @@
 - type: entity
   parent: [ ClothingSponsorEyesBaseUnshaded, ClothingEyesGlassesChemical ]
   id: ClothingSponsorCyberChemVisor
-  name: кибервизор химического анализа
-  description: Для гарантии точности анализа были установлены дополнительные датчики, что повысило её габариты. Теперь никто по вашим глазам не узнает спите ли вы или нет.
+  name: chemical analysis cybervisor
+  description: To guarantee analytical precision, additional sensors were installed, increasing its overall size. Now, no one can tell by your eyes whether you're awake or asleep.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/chemvisor.rsi
@@ -48,8 +48,8 @@
 - type: entity
   parent: ClothingSponsorEyesBaseUnshaded
   id: ClothingSponsorCyberCevVisor
-  name: белый визор
-  description: Визор гражданского типа. Используя продвинутые материалы удалось добиться свечению в темноте без надобности в электроэнергии.
+  name: white visor
+  description: A civilian-grade visor. By using advanced materials, it manages to glow in the dark without the need for electricity.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/civvisor.rsi

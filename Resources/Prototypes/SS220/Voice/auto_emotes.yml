@@ -1,0 +1,6 @@
+- type: autoEmote
+  id: Cough
+  emote: Cough
+  minInterval: 60
+  maxInterval: 120
+  hiddenFromChatWindow: true

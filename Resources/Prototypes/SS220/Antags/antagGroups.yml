@@ -6,3 +6,11 @@
   - Nukeops
   - NukeopsMedic
   - NukeopsCommander
+
+- type: antagGroup
+  id: Xenoborgs
+  name: antag-group-xenoborgs
+  color: blue
+  roles:
+  - MothershipCore
+  - Xenoborg

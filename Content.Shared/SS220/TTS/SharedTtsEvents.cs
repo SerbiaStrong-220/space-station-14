@@ -2,21 +2,22 @@
 
 using Content.Shared.Radio;
 using Content.Shared.SS220.Telepathy;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.TTS;
 
-public sealed class TelepathySpokeEvent(EntityUid source, string message, EntityUid[] receivers, TelepathyChannelPrototype? channel) : EntityEventArgs
+public sealed class TelepathySpokeEvent(EntityUid source, string message, EntityUid[] receivers, ProtoId<TelepathyChannelPrototype>? channel) : EntityEventArgs
 {
     public readonly EntityUid Source = source;
     public readonly string Message = message;
     public readonly EntityUid[] Receivers = receivers;
-    public readonly TelepathyChannelPrototype? Channel = channel;
+    public readonly ProtoId<TelepathyChannelPrototype>? Channel = channel;
 }
 
-public sealed class TelepathyTtsSendAttemptEvent(EntityUid user, TelepathyChannelPrototype? channel) : CancellableEntityEventArgs
+public sealed class TelepathyTtsSendAttemptEvent(EntityUid user, ProtoId<TelepathyChannelPrototype>? channel) : CancellableEntityEventArgs
 {
     public EntityUid User = user;
-    public readonly TelepathyChannelPrototype? Channel = channel;
+    public readonly ProtoId<TelepathyChannelPrototype>? Channel = channel;
 }
 
 public sealed partial class RadioTtsSendAttemptEvent : CancellableEntityEventArgs

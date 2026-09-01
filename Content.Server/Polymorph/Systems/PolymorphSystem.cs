@@ -2,9 +2,12 @@ using Content.Server.Actions;
 using Content.Server.Humanoid;
 using Content.Server.Inventory;
 using Content.Server.Polymorph.Components;
+using Content.Shared.Alert;
+using Content.Shared.Body;
 using Content.Shared.Buckle;
 using Content.Shared.Coordinates;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Destructible;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
@@ -14,6 +17,11 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition;
 using Content.Shared.Polymorph;
 using Content.Shared.Popups;
+using Content.Shared.SS220.PolymorphTimer;
+using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.FixedPoint;
+using Content.Shared.Inventory;
 using Robust.Server.Audio;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
@@ -33,15 +41,17 @@ public sealed partial class PolymorphSystem : EntitySystem
     [Dependency] private readonly SharedBuckleSystem _buckle = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
     [Dependency] private readonly ServerInventorySystem _inventory = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
     [Dependency] private readonly SharedMindSystem _mindSystem = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private readonly AlertsSystem _alerts = default!;//SS220_cult_hotfix_23
+    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;//SS220_slime-to-geras_fix
 
     public const string EffectDesynchronizer = "EffectDesynchronizer"; //SS220-cryo-mobs-fix
 
@@ -57,6 +67,7 @@ public sealed partial class PolymorphSystem : EntitySystem
 
         SubscribeLocalEvent<PolymorphedEntityComponent, BeforeFullySlicedEvent>(OnBeforeFullySliced);
         SubscribeLocalEvent<PolymorphedEntityComponent, DestructionEventArgs>(OnDestruction);
+        SubscribeLocalEvent<PolymorphedEntityComponent, EntityTerminatingEvent>(OnPolymorphedTerminating);
 
         InitializeMap();
     }
@@ -75,6 +86,16 @@ public sealed partial class PolymorphSystem : EntitySystem
                 Revert((uid, comp));
                 continue;
             }
+
+            //SS220-cult-hotfix-23-start #3988
+            if (TryComp<PolymorphTimerComponent>(uid, out var timerComp) && comp.Configuration.Duration != null)
+            {
+                timerComp.AlertTime = (int)(comp.Configuration.Duration - comp.Time);
+                Dirty(uid, timerComp);
+
+                _alerts.ShowAlert(uid, timerComp.PolymorphTimerAlert);
+            }
+            //SS220-cult-hotfix-23-end #3988
 
             if (!TryComp<MobStateComponent>(uid, out var mob))
                 continue;
@@ -113,7 +134,7 @@ public sealed partial class PolymorphSystem : EntitySystem
 
     private void OnPolymorphActionEvent(Entity<PolymorphableComponent> ent, ref PolymorphActionEvent args)
     {
-        if (!_proto.TryIndex(args.ProtoId, out var prototype) || args.Handled)
+        if (!_proto.Resolve(args.ProtoId, out var prototype) || args.Handled)
             return;
 
         PolymorphEntity(ent, prototype.Configuration);
@@ -129,12 +150,11 @@ public sealed partial class PolymorphSystem : EntitySystem
 
     private void OnBeforeFullySliced(Entity<PolymorphedEntityComponent> ent, ref BeforeFullySlicedEvent args)
     {
-        var (_, comp) = ent;
-        if (comp.Configuration.RevertOnEat)
-        {
-            args.Cancel();
-            Revert((ent, ent));
-        }
+        if (ent.Comp.Reverted || !ent.Comp.Configuration.RevertOnEat)
+            return;
+
+        args.Cancel();
+        Revert((ent, ent));
     }
 
     /// <summary>
@@ -143,10 +163,23 @@ public sealed partial class PolymorphSystem : EntitySystem
     /// </summary>
     private void OnDestruction(Entity<PolymorphedEntityComponent> ent, ref DestructionEventArgs args)
     {
-        if (ent.Comp.Configuration.RevertOnDeath)
-        {
-            Revert((ent, ent));
-        }
+        if (ent.Comp.Reverted || !ent.Comp.Configuration.RevertOnDeath)
+            return;
+
+        Revert((ent, ent));
+    }
+
+    private void OnPolymorphedTerminating(Entity<PolymorphedEntityComponent> ent, ref EntityTerminatingEvent args)
+    {
+        if (ent.Comp.Reverted)
+            return;
+
+        if (ent.Comp.Configuration.RevertOnDelete)
+            Revert(ent.AsNullable());
+
+        // Remove our original entity too
+        // Note that Revert will set Parent to null, so reverted entities will not be deleted
+        QueueDel(ent.Comp.Parent);
     }
 
     /// <summary>
@@ -222,19 +255,24 @@ public sealed partial class PolymorphSystem : EntitySystem
             _mobThreshold.GetScaledDamage(uid, child, out var damage) &&
             damage != null)
         {
-            _damageable.SetDamage(child, damageParent, damage);
+            _damageable.SetDamage((child, damageParent), damage);
         }
 
-        if (configuration.Inventory == PolymorphInventoryChange.Transfer)
+        // ss220 fix polymorph fail start
+        if (HasComp<InventoryComponent>(uid) && HasComp<InventoryComponent>(child))
         {
-            _inventory.TransferEntityInventories(uid, child);
-            foreach (var hand in _hands.EnumerateHeld(uid))
+            if (configuration.Inventory == PolymorphInventoryChange.Transfer)
             {
-                _hands.TryDrop(uid, hand, checkActionBlocker: false);
-                _hands.TryPickupAnyHand(child, hand);
+                _inventory.TransferEntityInventories(uid, child);
+                foreach (var hand in _hands.EnumerateHeld(uid))
+                {
+                    _hands.TryDrop(uid, hand, checkActionBlocker: false);
+                    _hands.TryPickupAnyHand(child, hand);
+                }
             }
         }
-        else if (configuration.Inventory == PolymorphInventoryChange.Drop)
+
+        if (HasComp<InventoryComponent>(uid) && configuration.Inventory == PolymorphInventoryChange.Drop)
         {
             if (_inventory.TryGetContainerSlotEnumerator(uid, out var enumerator))
             {
@@ -249,14 +287,20 @@ public sealed partial class PolymorphSystem : EntitySystem
                 _hands.TryDrop(uid, held);
             }
         }
+        // ss220 fix polymorph fail end
 
         if (configuration.TransferName && TryComp(uid, out MetaDataComponent? targetMeta))
             _metaData.SetEntityName(child, targetMeta.EntityName);
 
         if (configuration.TransferHumanoidAppearance)
         {
-            _humanoid.CloneAppearance(uid, child);
+            _visualBody.CopyAppearanceFrom(uid, child);
         }
+
+        // SS220 Geras reagents fix begin
+        if (configuration.TransferReagents)
+            TransferSolutions(uid, child);
+        //SS220 Geras reagents fix end
 
         if (_mindSystem.TryGetMind(uid, out var mindId, out var mind))
             _mindSystem.TransferTo(mindId, child, mind: mind);
@@ -291,12 +335,18 @@ public sealed partial class PolymorphSystem : EntitySystem
         if (Deleted(uid))
             return null;
 
-        var parent = component.Parent;
+        if (component.Parent is not { } parent)
+            return null;
+
         if (Deleted(parent))
             return null;
 
         var uidXform = Transform(uid);
         var parentXform = Transform(parent);
+
+        // Don't swap back onto a terminating grid
+        if (TerminatingOrDeleted(uidXform.ParentUid))
+            return null;
 
         if (component.Configuration.ExitPolymorphSound != null)
             _audio.PlayPvs(component.Configuration.ExitPolymorphSound, uidXform.Coordinates);
@@ -304,13 +354,20 @@ public sealed partial class PolymorphSystem : EntitySystem
         _transform.SetParent(parent, parentXform, uidXform.ParentUid);
         _transform.SetCoordinates(parent, parentXform, uidXform.Coordinates, uidXform.LocalRotation);
 
+        component.Reverted = true;
+
         if (component.Configuration.TransferDamage &&
             TryComp<DamageableComponent>(parent, out var damageParent) &&
             _mobThreshold.GetScaledDamage(uid, parent, out var damage) &&
             damage != null)
         {
-            _damageable.SetDamage(parent, damageParent, damage);
+            _damageable.SetDamage((parent, damageParent), damage);
         }
+
+        // SS220 Geras reagents fix begin
+        if (component.Configuration.TransferReagents)
+            TransferSolutions(uid, parent);
+        // SS220 Geras reagents fix end
 
         if (component.Configuration.Inventory == PolymorphInventoryChange.Transfer)
         {
@@ -349,6 +406,7 @@ public sealed partial class PolymorphSystem : EntitySystem
         // Raise an event to inform anything that wants to know about the entity swap
         var ev = new PolymorphedEvent(uid, parent, true);
         RaiseLocalEvent(uid, ref ev);
+        RaiseLocalEvent(parent, ref ev);//SS220-cult-hotfix-24 #4167
 
         // visual effect spawn
         if (component.Configuration.EffectProto != null)
@@ -364,6 +422,31 @@ public sealed partial class PolymorphSystem : EntitySystem
         return parent;
     }
 
+    //SS220 Geras reagents fix start
+    private void TransferSolutions(EntityUid from, EntityUid to)
+    {
+        if (!TryComp<SolutionContainerManagerComponent>(from, out var fromManager) ||
+            !TryComp<SolutionContainerManagerComponent>(to, out var toManager))
+            return;
+        foreach (var (solutionName, fromSolutionEnt ) in _solutionContainer.EnumerateSolutions((from, fromManager)))
+        {
+            if (fromSolutionEnt.Comp.Solution.Volume <= FixedPoint2.Zero)
+                continue;
+
+            if (!_solutionContainer.TryGetSolution((to, toManager), solutionName, out var toSolutionEnt, out var toSolution ))
+                continue;
+
+            var transferVolume = FixedPoint2.Min(fromSolutionEnt.Comp.Solution.Volume, toSolution.AvailableVolume);
+            if (transferVolume < FixedPoint2.Zero)
+                continue;
+
+            var movedSolution = _solutionContainer.SplitSolution(fromSolutionEnt, transferVolume);
+            _solutionContainer.TryAddSolution(toSolutionEnt.Value, movedSolution);
+        }
+
+    }
+    //SS220 Geras reagents end
+
     /// <summary>
     /// Creates a sidebar action for an entity to be able to polymorph at will
     /// </summary>
@@ -375,7 +458,7 @@ public sealed partial class PolymorphSystem : EntitySystem
         if (target.Comp.PolymorphActions.ContainsKey(id))
             return;
 
-        if (!_proto.TryIndex(id, out var polyProto))
+        if (!_proto.Resolve(id, out var polyProto))
             return;
 
         var entProto = _proto.Index(polyProto.Configuration.Entity);

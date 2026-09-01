@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Shared.ActionBlocker;
@@ -9,6 +10,7 @@ using Content.Shared.Maps;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
+using Content.Shared.Shuttles.Components;
 using Content.Shared.Tag;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -19,9 +21,11 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Controllers;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using YamlDotNet.Core.Tokens;
 using PullableComponent = Content.Shared.Movement.Pulling.Components.PullableComponent;
 
 namespace Content.Shared.Movement.Systems;
@@ -46,19 +50,22 @@ public abstract partial class SharedMoverController : VirtualController
     [Dependency] private   readonly SharedTransformSystem _transform = default!;
     [Dependency] private   readonly TagSystem _tags = default!;
 
-    protected EntityQuery<CanMoveInAirComponent> CanMoveInAirQuery;
-    protected EntityQuery<FootstepModifierComponent> FootstepModifierQuery;
-    protected EntityQuery<InputMoverComponent> MoverQuery;
-    protected EntityQuery<MapComponent> MapQuery;
-    protected EntityQuery<MapGridComponent> MapGridQuery;
-    protected EntityQuery<MobMoverComponent> MobMoverQuery;
-    protected EntityQuery<MovementRelayTargetComponent> RelayTargetQuery;
-    protected EntityQuery<MovementSpeedModifierComponent> ModifierQuery;
-    protected EntityQuery<NoRotateOnMoveComponent> NoRotateQuery;
-    protected EntityQuery<PhysicsComponent> PhysicsQuery;
-    protected EntityQuery<RelayInputMoverComponent> RelayQuery;
-    protected EntityQuery<PullableComponent> PullableQuery;
-    protected EntityQuery<TransformComponent> XformQuery;
+    [Dependency] protected readonly EntityQuery<CanMoveInAirComponent> CanMoveInAirQuery = default!;
+    [Dependency] protected readonly EntityQuery<FootstepModifierComponent> FootstepModifierQuery = default!;
+    [Dependency] protected readonly EntityQuery<FTLComponent> FTLQuery = default!;
+    [Dependency] protected readonly EntityQuery<InputMoverComponent> MoverQuery = default!;
+    [Dependency] protected readonly EntityQuery<MapComponent> MapQuery = default!;
+    [Dependency] protected readonly EntityQuery<MapGridComponent> MapGridQuery = default!;
+    [Dependency] protected readonly EntityQuery<MobMoverComponent> MobMoverQuery = default!;
+    [Dependency] protected readonly EntityQuery<MovementRelayTargetComponent> RelayTargetQuery = default!;
+    [Dependency] protected readonly EntityQuery<MovementSpeedModifierComponent> ModifierQuery = default!;
+    [Dependency] protected readonly EntityQuery<NoRotateOnMoveComponent> NoRotateQuery = default!;
+    [Dependency] protected readonly EntityQuery<PhysicsComponent> PhysicsQuery = default!;
+    [Dependency] protected readonly EntityQuery<PilotComponent> PilotQuery = default!;
+    [Dependency] protected readonly EntityQuery<PreventPilotComponent> PreventPilotQuery = default!;
+    [Dependency] protected readonly EntityQuery<RelayInputMoverComponent> RelayQuery = default!;
+    [Dependency] protected readonly EntityQuery<PullableComponent> PullableQuery = default!;
+    [Dependency] protected readonly EntityQuery<TransformComponent> XformQuery = default!;
 
     private static readonly ProtoId<TagPrototype> FootstepSoundTag = "FootstepSound";
 
@@ -72,28 +79,25 @@ public abstract partial class SharedMoverController : VirtualController
     /// </summary>
     public Dictionary<EntityUid, bool> UsedMobMovement = new();
 
-    private readonly HashSet<EntityUid> _aroundColliderSet = [];
+    // SS220-make-mob-movement-parallel-begin
+    protected readonly record struct QueuedSound(SoundSpecifier Sound, EntityUid Key, EntityUid User, AudioParams AudioParams);
+    protected readonly ConcurrentQueue<QueuedSound> SoundQueue = new();
+
+    protected readonly record struct QueuedSetLocalRotation(EntityUid Target, Angle Value, TransformComponent Xform);
+    protected readonly ConcurrentQueue<QueuedSetLocalRotation> SetLocalRotationQueue = new();
+    // SS220-make-mob-movement-parallel-end
+
+    protected HashSet<EntityUid> AroundColliderSet = []; // SS220 make collider hashset changeable
 
     public override void Initialize()
     {
         UpdatesBefore.Add(typeof(TileFrictionController));
         base.Initialize();
 
-        MoverQuery = GetEntityQuery<InputMoverComponent>();
-        MobMoverQuery = GetEntityQuery<MobMoverComponent>();
-        ModifierQuery = GetEntityQuery<MovementSpeedModifierComponent>();
-        RelayTargetQuery = GetEntityQuery<MovementRelayTargetComponent>();
-        PhysicsQuery = GetEntityQuery<PhysicsComponent>();
-        RelayQuery = GetEntityQuery<RelayInputMoverComponent>();
-        PullableQuery = GetEntityQuery<PullableComponent>();
-        XformQuery = GetEntityQuery<TransformComponent>();
-        NoRotateQuery = GetEntityQuery<NoRotateOnMoveComponent>();
-        CanMoveInAirQuery = GetEntityQuery<CanMoveInAirComponent>();
-        FootstepModifierQuery = GetEntityQuery<FootstepModifierComponent>();
-        MapGridQuery = GetEntityQuery<MapGridComponent>();
-        MapQuery = GetEntityQuery<MapComponent>();
-
         SubscribeLocalEvent<MovementSpeedModifierComponent, TileFrictionEvent>(OnTileFriction);
+        SubscribeLocalEvent<InputMoverComponent, ComponentStartup>(OnMoverStartup);
+        SubscribeLocalEvent<InputMoverComponent, PhysicsBodyTypeChangedEvent>(OnPhysicsBodyChanged);
+        SubscribeLocalEvent<InputMoverComponent, UpdateCanMoveEvent>(OnCanMove);
 
         InitializeInput();
         InitializeRelay();
@@ -101,6 +105,11 @@ public abstract partial class SharedMoverController : VirtualController
         Subs.CVar(_configManager, CCVars.MinFriction, value => _minDamping = value, true);
         Subs.CVar(_configManager, CCVars.AirFriction, value => _airDamping = value, true);
         Subs.CVar(_configManager, CCVars.OffgridFriction, value => _offGridDamping = value, true);
+    }
+
+    protected virtual void OnMoverStartup(Entity<InputMoverComponent> ent, ref ComponentStartup args)
+    {
+       _blocker.UpdateCanMove(ent, ent.Comp);
     }
 
     public override void Shutdown()
@@ -120,7 +129,9 @@ public abstract partial class SharedMoverController : VirtualController
     /// </summary>
     protected void HandleMobMovement(
         Entity<InputMoverComponent> entity,
-        float frameTime)
+        float frameTime,
+        bool calledInParallel, // SS220-add-parallel-update
+        ref HashSet<EntityUid> threadColliderSet) // SS220-add-parallel-update
     {
         var uid = entity.Owner;
         var mover = entity.Comp;
@@ -190,9 +201,46 @@ public abstract partial class SharedMoverController : VirtualController
             || !PhysicsQuery.TryComp(uid, out var physicsComponent)
             || PullableQuery.TryGetComponent(uid, out var pullable) && pullable.BeingPulled)
         {
-            UsedMobMovement[uid] = false;
+            // SS220-optimize-UsedMobMovement-for-concurrent-begin
+            if (calledInParallel)
+                DebugTools.Assert(UsedMobMovement.TryGetValue(uid, out var used) && used == false);
+            else
+                UsedMobMovement[uid] = false;
+            // SS220-optimize-UsedMobMovement-for-concurrent-end
             return;
         }
+
+        // SS220-try-to-reduce-idle-computing-cost-begin
+        if (AssertValidWish(mover, MovementSpeedModifierComponent.DefaultBaseWalkSpeed, MovementSpeedModifierComponent.DefaultBaseSprintSpeed) == Vector2.Zero
+            && physicsComponent.LinearVelocity.LengthSquared() < 0.00001f)
+        {
+            if (calledInParallel) // SS220-optimize-UsedMobMovement-for-concurrent
+                DebugTools.Assert(UsedMobMovement.ContainsKey(uid)); // SS220-optimize-UsedMobMovement-for-concurrent
+            UsedMobMovement[uid] = true;
+
+            if (physicsComponent.AngularVelocity != 0f)
+                PhysicsSystem.SetAngularVelocity(uid, 0, body: physicsComponent);
+
+            return;
+        }
+        // SS220-try-to-reduce-idle-computing-cost-end
+
+        /*
+         * This assert is here because any entity using inputs to move should be a Kinematic Controller.
+         * Kinematic Controllers are not built to use the entirety of the Physics engine by intention and
+         * setting an input mover to Dynamic will cause the Physics engine to occasionally throw asserts.
+         * In addition, SharedMoverController applies its own forms of fake impulses and friction outside
+         * Physics simulation, which will cause issues for Dynamic bodies (Such as Friction being applied twice).
+         * Kinematic bodies have even less Physics options and as such aren't suitable for a player, especially
+         * when we move to Box2D v3 where there will be more support for players updating outside of simulation.
+         * However, Kinematic bodies are useful currently for mobs which explicitly ignore physics, you should use
+         * this type extremely sparingly and only for mobs which *explicitly* disobey the laws of physics (A-Ghosts).
+         * Lastly, static bodies can't move so they shouldn't be updated. If a static body makes it here we're
+         * doing unnecessary calculations.
+         * Only a Kinematic Controller should be making it to this point.
+         */
+        DebugTools.Assert(physicsComponent.BodyType == BodyType.KinematicController || physicsComponent.BodyType == BodyType.Kinematic,
+            $"Input mover: {ToPrettyString(uid)} in HandleMobMovement is not the correct BodyType, BodyType found: {physicsComponent.BodyType}, expected: KinematicController.");
 
         // If the body is in air but isn't weightless then it can't move
         var weightless = _gravity.IsWeightless(uid);
@@ -202,12 +250,20 @@ public abstract partial class SharedMoverController : VirtualController
         {
             if (!weightless)
             {
-                UsedMobMovement[uid] = false;
+                // SS220-optimize-UsedMobMovement-for-concurrent-begin
+                if (calledInParallel)
+                    DebugTools.Assert(UsedMobMovement.TryGetValue(uid, out var used) && used == false);
+                else
+                    UsedMobMovement[uid] = false;
+                // SS220-optimize-UsedMobMovement-for-concurrent-end
                 return;
             }
             inAirHelpless = true;
         }
-
+        // SS220-optimize-UsedMobMovement-for-concurrent-begin
+        if (calledInParallel)
+            DebugTools.Assert(UsedMobMovement.ContainsKey(uid));
+        // SS220-optimize-UsedMobMovement-for-concurrent-end
         UsedMobMovement[uid] = true;
 
         var moveSpeedComponent = ModifierQuery.CompOrNull(uid);
@@ -237,7 +293,7 @@ public abstract partial class SharedMoverController : VirtualController
 
             // If we're not on a grid, and not able to move in space check if we're close enough to a grid to touch.
             if (!touching && MobMoverQuery.TryComp(uid, out var mobMover))
-                touching |= IsAroundCollider(_lookup, (uid, physicsComponent, mobMover, xform));
+                touching |= IsAroundCollider(_lookup, (uid, physicsComponent, mobMover, xform), ref threadColliderSet); // SS220-make-collider-set-thread-safe
 
             // If we're touching then use the weightless values
             if (touching)
@@ -325,17 +381,45 @@ public abstract partial class SharedMoverController : VirtualController
                 // island solver"??. So maybe SetRotation needs an argument to avoid raising an event?
                 var worldRot = _transform.GetWorldRotation(xform);
 
-                _transform.SetLocalRotation(uid, xform.LocalRotation + wishDir.ToWorldAngle() - worldRot, xform);
+                // SS220-make-handle-mob-movement-parallel-begin
+                if (calledInParallel)
+                    SetLocalRotationQueue.Enqueue(new(uid, xform.LocalRotation + wishDir.ToWorldAngle() - worldRot, xform));
+                else
+                // SS220-make-handle-mob-movement-parallel-end
+                    _transform.SetLocalRotation(uid, xform.LocalRotation + wishDir.ToWorldAngle() - worldRot, xform);
             }
 
             if (!weightless && MobMoverQuery.TryGetComponent(uid, out var mobMover) &&
                 TryGetSound(weightless, uid, mover, mobMover, xform, out var sound, tileDef: tileDef))
             {
-                var soundModifier = mover.Sprinting ? 3.5f : 1.5f;
+                var soundModifier = mover.Sprinting ? InputMoverComponent.SprintingSoundModifier : InputMoverComponent.WalkingSoundModifier;
 
+                // SS220 - softy footsteps feature - start
                 var audioParams = sound.Params
-                    .WithVolume(sound.Params.Volume + soundModifier)
                     .WithVariation(sound.Params.Variation ?? mobMover.FootstepVariation);
+
+                if (!mover.Sprinting)
+                {
+                    const float softFootstepVolumeReduction = 8f;
+                    const float defaultMaxDistance = 15f;
+                    const float softFootstepDistanceMultiplier = 0.4f;
+
+                    soundModifier -= softFootstepVolumeReduction;
+
+                    var currentDist = (audioParams.MaxDistance > 0f) ? audioParams.MaxDistance : defaultMaxDistance;
+                    audioParams = audioParams.WithMaxDistance(currentDist * softFootstepDistanceMultiplier);
+                }
+
+                audioParams = audioParams.WithVolume(sound.Params.Volume + soundModifier);
+                // SS220 - softy footsteps feature - end
+
+                // SS220-make-mover-controller-parallel-begin
+                if (calledInParallel)
+                {
+                    SoundQueue.Enqueue(new(sound, uid, relaySource ?? uid, audioParams));
+                    return;
+                }
+                // SS220-make-mover-controller-parallel-end
 
                 // If we're a relay target then predict the sound for all relays.
                 if (relaySource != null)
@@ -450,14 +534,14 @@ public abstract partial class SharedMoverController : VirtualController
     /// <summary>
     /// Used for weightlessness to determine if we are near a wall.
     /// </summary>
-    private bool IsAroundCollider(EntityLookupSystem lookupSystem, Entity<PhysicsComponent, MobMoverComponent, TransformComponent> entity)
+    private bool IsAroundCollider(EntityLookupSystem lookupSystem, Entity<PhysicsComponent, MobMoverComponent, TransformComponent> entity, ref HashSet<EntityUid> threadColliderSet) //  SS220-make-collider-set-thread-safe
     {
         var (uid, collider, mover, transform) = entity;
         var enlargedAABB = _lookup.GetWorldAABB(entity.Owner, transform).Enlarged(mover.GrabRange);
 
-        _aroundColliderSet.Clear();
-        lookupSystem.GetEntitiesIntersecting(transform.MapID, enlargedAABB, _aroundColliderSet);
-        foreach (var otherEntity in _aroundColliderSet)
+        threadColliderSet.Clear(); //  SS220-make-collider-set-thread-safe
+        lookupSystem.GetEntitiesIntersecting(transform.MapID, enlargedAABB, threadColliderSet); //  SS220-make-collider-set-thread-safe
+        foreach (var otherEntity in threadColliderSet) //  SS220-make-collider-set-thread-safe
         {
             if (otherEntity == uid)
                 continue; // Don't try to push off of yourself!
@@ -468,9 +552,9 @@ public abstract partial class SharedMoverController : VirtualController
             // Only allow pushing off of anchored things that have collision.
             if (otherCollider.BodyType != BodyType.Static ||
                 !otherCollider.CanCollide ||
-                ((collider.CollisionMask & otherCollider.CollisionLayer) == 0 &&
-                (otherCollider.CollisionMask & collider.CollisionLayer) == 0) ||
-                (TryComp(otherEntity, out PullableComponent? pullable) && pullable.BeingPulled))
+                (collider.CollisionMask & otherCollider.CollisionLayer) == 0 &&
+                (otherCollider.CollisionMask & collider.CollisionLayer) == 0 ||
+                PullableQuery.TryComp(otherEntity, out var pullable) && pullable.BeingPulled)
             {
                 continue;
             }
@@ -620,12 +704,24 @@ public abstract partial class SharedMoverController : VirtualController
 
     private void OnTileFriction(Entity<MovementSpeedModifierComponent> ent, ref TileFrictionEvent args)
     {
-        if (!TryComp<PhysicsComponent>(ent, out var physicsComponent) || !XformQuery.TryComp(ent, out var xform))
+        if (!PhysicsQuery.TryComp(ent, out var physicsComponent))
             return;
 
         if (physicsComponent.BodyStatus != BodyStatus.OnGround || _gravity.IsWeightless(ent.Owner))
             args.Modifier *= ent.Comp.BaseWeightlessFriction;
         else
             args.Modifier *= ent.Comp.BaseFriction;
+    }
+
+    private void OnPhysicsBodyChanged(Entity<InputMoverComponent> entity, ref PhysicsBodyTypeChangedEvent args)
+    {
+        _blocker.UpdateCanMove(entity);
+    }
+
+    private void OnCanMove(Entity<InputMoverComponent> entity, ref UpdateCanMoveEvent args)
+    {
+        // If we don't have a physics component, or have a static body type then we can't move.
+        if (!PhysicsQuery.TryComp(entity, out var body) || body.BodyType == BodyType.Static)
+            args.Cancel();
     }
 }

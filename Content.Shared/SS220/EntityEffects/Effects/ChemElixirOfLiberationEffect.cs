@@ -10,9 +10,9 @@ namespace Content.Shared.SS220.EntityEffects.Effects;
 /// Used when someone eats MiGoShroom
 /// </summary>
 [UsedImplicitly]
-public sealed partial class ChemElixirOfLiberationEffect : EventEntityEffect<ChemElixirOfLiberationEffect>
+public sealed partial class ChemElixirOfLiberationEffect : EntityEffectBase<ChemElixirOfLiberationEffect>
 {
-    protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
+    public override string EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
         return Loc.GetString("reagent-effect-guidebook-ss220-free-from-burden");
     }

@@ -7,6 +7,12 @@
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/welder_drop.ogg
+  # SS220-construction-skill-begin
+  - type: LearningOnDoAfterEndWith
+    progress:
+      Construction:
+        baseLearning: 0.03
+  # SS220-construction-skill-end
   - type: Sprite
     sprite: Objects/Tools/welder.rsi
     layers:
@@ -204,8 +210,8 @@
 - type: entity
   parent: [ Welder, BaseXenoborgContraband ]
   id: RefuelingWelder
-  name: refuling welding tool
-  description: "An slow welder that can refuel itself over time."
+  name: refueling welding tool
+  description: "A slow welder that can refuel itself over time."
   components:
   - type: Tool
     speedModifier: 0.5

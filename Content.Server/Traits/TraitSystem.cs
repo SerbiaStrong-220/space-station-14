@@ -29,7 +29,7 @@ public sealed class TraitSystem : EntitySystem
     {
         // Check if player's job allows to apply traits
         if (args.JobId == null ||
-            !_prototypeManager.TryIndex<JobPrototype>(args.JobId ?? string.Empty, out var protoJob) ||
+            !_prototypeManager.Resolve<JobPrototype>(args.JobId, out var protoJob) ||
             !protoJob.ApplyTraits)
         {
             return;
@@ -39,21 +39,18 @@ public sealed class TraitSystem : EntitySystem
         {
             if (!_prototypeManager.TryIndex<TraitPrototype>(traitId, out var traitPrototype))
             {
-                Log.Warning($"No trait found with ID {traitId}!");
+                Log.Error($"No trait found with ID {traitId}!");
                 return;
             }
 
             if (_whitelistSystem.IsWhitelistFail(traitPrototype.Whitelist, args.Mob) ||
-                _whitelistSystem.IsBlacklistPass(traitPrototype.Blacklist, args.Mob))
+                _whitelistSystem.IsWhitelistPass(traitPrototype.Blacklist, args.Mob))
                 continue;
 
             // Add all components required by the prototype
-            // SS220 fix null components begin
-            if (traitPrototype.Components is { } components)
-                EntityManager.AddComponents(args.Mob, components, false);
+            if (traitPrototype.Components?.Count > 0) // SS220 Add trait components nullable
+                EntityManager.AddComponents(args.Mob, traitPrototype.Components, false);
 
-            // EntityManager.AddComponents(args.Mob, traitPrototype.Components, false);
-            // SS220 fix null components end
             // SS220-Add-Languages begin
             if (traitPrototype.LearnedLanguages.Count > 0)
             {
@@ -61,6 +58,12 @@ public sealed class TraitSystem : EntitySystem
                 _language.AddLanguages((args.Mob, language), traitPrototype.LearnedLanguages);
             }
             // SS220-Add-Languages end
+
+            // Add all JobSpecials required by the prototype
+            foreach (var special in traitPrototype.Specials)
+            {
+                special.AfterEquip(args.Mob);
+            }
 
             // Add item required by the trait
             if (traitPrototype.TraitGear == null)
@@ -77,4 +80,63 @@ public sealed class TraitSystem : EntitySystem
                 handsComp: handsComponent);
         }
     }
+
+    // SS220-traits-debug-begin
+    public List<string> GetActiveTraits(EntityUid uid)
+    {
+        var activeTraits = new List<string>();
+        foreach (var trait in _prototypeManager.EnumeratePrototypes<TraitPrototype>())
+        {
+            if (trait.Components == null || trait.Components.Count == 0) continue;
+            var hasAllComponents = true;
+            foreach (var entry in trait.Components.Values)
+            {
+                if (!HasComp(uid, entry.Component.GetType()))
+                {
+                    hasAllComponents = false;
+                    break;
+                }
+            }
+            if (hasAllComponents) activeTraits.Add(trait.ID);
+        }
+        return activeTraits;
+    }
+
+    public void AddTrait(EntityUid uid, string traitId, bool spawnGear = true)
+    {
+        if (!_prototypeManager.TryIndex<TraitPrototype>(traitId, out var traitPrototype)) return;
+
+        if (traitPrototype.Components?.Count > 0)
+            EntityManager.AddComponents(uid, traitPrototype.Components, false);
+
+        if (traitPrototype.LearnedLanguages.Count > 0)
+        {
+            var language = EnsureComp<LanguageComponent>(uid);
+            _language.AddLanguages((uid, language), traitPrototype.LearnedLanguages);
+        }
+
+        foreach (var special in traitPrototype.Specials)
+        {
+            special.AfterEquip(uid);
+        }
+
+        if (spawnGear && traitPrototype.TraitGear != null && TryComp(uid, out HandsComponent? handsComponent))
+        {
+            var coords = Transform(uid).Coordinates;
+            var inhandEntity = Spawn(traitPrototype.TraitGear, coords);
+            _sharedHandsSystem.TryPickup(uid, inhandEntity, checkActionBlocker: false, handsComp: handsComponent);
+        }
+    }
+
+    public void RemoveTrait(EntityUid uid, string traitId)
+    {
+        if (!_prototypeManager.TryIndex<TraitPrototype>(traitId, out var traitPrototype)) return;
+        if (traitPrototype.Components == null || traitPrototype.Components.Count == 0) return;
+
+        foreach (var entry in traitPrototype.Components.Values)
+        {
+            RemComp(uid, entry.Component.GetType());
+        }
+    }
+    // SS220-traits-debug-end
 }

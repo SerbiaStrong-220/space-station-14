@@ -4,11 +4,13 @@
   description: job-description-librarian
   playTimeTracker: JobLibrarian
   startingGear: LibrarianGear
+  experienceDefinition: LibrarianRoleExperience # SS220-experience
   icon: "JobIconLibrarian"
   supervisors: job-supervisors-hop
   access:
   - Service
   - Maintenance
+  - Librarian #SS220 New_accesses_and_some_tweaks
 
 - type: startingGear
   id: LibrarianGear

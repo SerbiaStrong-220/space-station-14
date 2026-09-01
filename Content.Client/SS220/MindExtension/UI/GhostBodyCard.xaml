@@ -1,0 +1,50 @@
+<local:GhostBodyCard xmlns="https://spacestation14.io"
+                     xmlns:local="clr-namespace:Content.Client.SS220.MindExtension.UI"
+                     xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+                     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                     HorizontalExpand="True"
+                     Margin="10 10 10 0">
+
+    <PanelContainer StyleClasses="AngleRect"
+                    HorizontalExpand="True">
+
+        <PanelContainer HorizontalExpand="True">
+
+            <BoxContainer Orientation="Vertical"
+                          Margin="0 0 190 0"
+                          HorizontalExpand="True">
+
+                <RichTextLabel Name="BodyNameLabel"
+                               StyleClasses="LabelKeyText"/>
+                <Label Name="BodyStateLabel"
+                       StyleClasses="LabelSubText"/>
+                <RichTextLabel Name="BodyDescriptionLabel"
+                               StyleClasses="LabelSubText"/>
+            </BoxContainer>
+
+            <BoxContainer HorizontalAlignment="Right">
+                <customControls:VSeparator HorizontalAlignment="Right"
+                                           Margin="5"
+                                           SetWidth="1"/>
+
+                <BoxContainer Orientation="Vertical"
+                              VerticalAlignment="Center"
+                              MinWidth="170">
+                    <Button Name="FollowButton"
+                            Disabled="true"
+                            Text="{Loc 'mind-ext-follow-button'}"/>
+                    <Button Name="ToBodyButton"
+                            Disabled="true"
+                            Text="{Loc 'mind-ext-return-button'}"/>
+                    <controls:ConfirmButton Name="DeleteButton"
+                                        Text="{ Loc 'mind-ext-delete-button-text'}"
+                                        ConfirmationText="{ Loc 'mind-ext-delete-button-confirmation-text'}"/>
+                </BoxContainer>
+                
+            </BoxContainer>
+
+            
+        </PanelContainer>
+    </PanelContainer>
+
+</local:GhostBodyCard>

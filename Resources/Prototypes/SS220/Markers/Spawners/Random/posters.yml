@@ -8,7 +8,7 @@
       - sprite: Structures/Wallmounts/posters.rsi
         state: random_legit
   - type: Construction
-    graph: randomPosterLegal
+    graph: RandomPosterLegal
     node: legalposter
   - type: RandomSpawner
     offset: 0
@@ -62,6 +62,10 @@
       - PosterLegitSafetyMothSSD
       - PosterLegitOppenhopper
       - PosterLegitTyrone
+      - PosterJRSaviorsOfTheWorld
+      - PosterJRAnnualReport
+      - PosterJRSpaceJunk
+      - PosterJRCarpLivesImportant
     chance: 1
 
 - type: entity
@@ -74,7 +78,7 @@
       - sprite: Structures/Wallmounts/posters.rsi
         state: random_contraband
   - type: Construction
-    graph: randomPosterContraband
+    graph: RandomPosterContraband
     node: contrposter
   - type: RandomSpawner
     offset: 0
@@ -144,4 +148,6 @@
       - PosterContrabandExoAcid
       - PosterContrabandExoRun
       - PosterContrabandExoChomp
+      - PosterJRDestroyersOfTheWorld
+      - PosterJRTragicAccident
     chance: 1

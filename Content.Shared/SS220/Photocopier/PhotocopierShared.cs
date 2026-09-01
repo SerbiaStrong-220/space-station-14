@@ -85,6 +85,8 @@ public sealed class PhotocopierStopMessage : BoundUserInterfaceMessage
 public interface IPhotocopiedComponentData
 {
     public void RestoreFromData(EntityUid uid, Component someComponent);
+
+    public bool NeedToEnsure => false;
 }
 
 public interface IPhotocopyableComponent

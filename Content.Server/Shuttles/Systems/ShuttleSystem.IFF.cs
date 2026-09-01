@@ -12,7 +12,7 @@ public sealed partial class ShuttleSystem
     {
         SubscribeLocalEvent<IFFConsoleComponent, AnchorStateChangedEvent>(OnIFFConsoleAnchor);
         SubscribeLocalEvent<IFFConsoleComponent, IFFShowIFFMessage>(OnIFFShow);
-        SubscribeLocalEvent<IFFConsoleComponent, IFFShowVesselMessage>(OnIFFShowVessel);
+        SubscribeLocalEvent<IFFConsoleComponent, MapInitEvent>(OnInitIFFConsole);
         SubscribeLocalEvent<GridSplitEvent>(OnGridSplit);
     }
 
@@ -37,37 +37,32 @@ public sealed partial class ShuttleSystem
 
     private void OnIFFShow(EntityUid uid, IFFConsoleComponent component, IFFShowIFFMessage args)
     {
-        if (!TryComp(uid, out TransformComponent? xform) || xform.GridUid == null ||
-            (component.AllowedFlags & IFFFlags.HideLabel) == 0x0)
+        if (!TryComp(uid, out TransformComponent? xform) || xform.GridUid == null)
         {
             return;
         }
 
         if (!args.Show)
         {
-            AddIFFFlag(xform.GridUid.Value, IFFFlags.HideLabel);
+            AddAllSupportedIFFFlags(xform, component);
         }
         else
         {
             RemoveIFFFlag(xform.GridUid.Value, IFFFlags.HideLabel);
+            RemoveIFFFlag(xform.GridUid.Value, IFFFlags.Hide);
         }
     }
 
-    private void OnIFFShowVessel(EntityUid uid, IFFConsoleComponent component, IFFShowVesselMessage args)
+    private void OnInitIFFConsole(EntityUid uid, IFFConsoleComponent component, MapInitEvent args)
     {
-        if (!TryComp(uid, out TransformComponent? xform) || xform.GridUid == null ||
-            (component.AllowedFlags & IFFFlags.Hide) == 0x0)
+        if (!TryComp(uid, out TransformComponent? xform) || xform.GridUid == null)
         {
             return;
         }
 
-        if (!args.Show)
+        if (component.HideOnInit)
         {
-            AddIFFFlag(xform.GridUid.Value, IFFFlags.Hide);
-        }
-        else
-        {
-            RemoveIFFFlag(xform.GridUid.Value, IFFFlags.Hide);
+            AddAllSupportedIFFFlags(xform, component);
         }
     }
 
@@ -111,4 +106,64 @@ public sealed partial class ShuttleSystem
             });
         }
     }
+
+    // Made this method to avoid copy and pasting.
+    /// <summary>
+    /// Adds all IFF flags that are allowed by AllowedFlags to the grid.
+    /// </summary>
+    private void AddAllSupportedIFFFlags(TransformComponent xform, IFFConsoleComponent component)
+    {
+        if (xform.GridUid == null)
+        {
+            return;
+        }
+
+        if ((component.AllowedFlags & IFFFlags.HideLabel) != 0x0)
+        {
+            AddIFFFlag(xform.GridUid.Value, IFFFlags.HideLabel);
+        }
+        if ((component.AllowedFlags & IFFFlags.Hide) != 0x0)
+        {
+            AddIFFFlag(xform.GridUid.Value, IFFFlags.Hide);
+        }
+    }
+
+    //ss220 spacewar begin
+    public void UpdateIFF()
+    {
+        var curtime = _gameTiming.CurTime;
+        var consoles = EntityQueryEnumerator<IFFConsoleComponent, TransformComponent>();
+        while (consoles.MoveNext(out var consoleEnt,out var iffConsole, out var transform))
+        {
+            if (!TryComp<IFFComponent>(transform.GridUid, out var iff))
+                continue;
+
+            if (curtime > iffConsole.StealthUntil && iffConsole.StealthUntil != TimeSpan.Zero)
+                RemoveIFFFlag(transform.GridUid.Value, IFFFlags.Hide, iff);
+
+            if (iffConsole.StealthCooldown == TimeSpan.Zero)
+                continue;
+
+            SendIFFConsoleState(consoleEnt, iffConsole, iff);
+        }
+    }
+
+    private TimeSpan GetRemainingTime(TimeSpan until, TimeSpan curtime)
+    {
+        return until > curtime ? until - curtime : TimeSpan.Zero;
+    }
+
+    private void SendIFFConsoleState(EntityUid consoleEnt, IFFConsoleComponent iffConsole, IFFComponent? iff)
+    {
+        var curtime = _gameTiming.CurTime;
+
+        _uiSystem.SetUiState(consoleEnt, IFFConsoleUiKey.Key, new IFFConsoleBoundUserInterfaceState()
+        {
+            AllowedFlags = iffConsole.AllowedFlags,
+            Flags = iff?.Flags ?? iffConsole.AllowedFlags,
+            Cooldown = GetRemainingTime(iffConsole.CooldownUntil, curtime),
+            StealthDuration = GetRemainingTime(iffConsole.StealthUntil, curtime),
+        });
+    }
+    //ss220 spacewar end
 }

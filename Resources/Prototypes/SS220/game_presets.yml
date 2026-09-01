@@ -16,14 +16,20 @@
   id: CultYoggPresetMidPop
   alias:
     - cultyoggmidpop
-  name: roles-antag-cult-yogg-name
+  name: cult-yogg-title
   description: roles-antag-cult-yogg-objective
   showInVote: false
   minPlayers: 35 # WARNING: this should be always synced with other cult game rules and presets!
   maxPlayers: 59 # WARNING: this should be always synced with other cult game rules and presets!
   rules:
-    - CultYoggRuleMidPop
-    - NoNewCrewAntagsStationEventScheduler
+  - CultYoggRuleMidPop
+  - BasicRoundstartVariation
+  - SubModLowTraitorDynamic
+  - SubGamemodesRule
+  #- NoNewCrewAntagsStationEventScheduler
+  - SpaceTrafficControlFriendlyEventScheduler
+  - EmergencyShuttleAutoVote
+
 
 # 60+ players Cult Yogg
 - type: gamePreset
@@ -35,8 +41,30 @@
   showInVote: false
   minPlayers: 60 # WARNING: this should be always synced with other cult game rules and presets!
   rules:
-    - CultYoggRuleHighPop
-    - NoNewCrewAntagsStationEventScheduler
+  - CultYoggRuleHighPop
+  - BasicRoundstartVariation
+  - SubGamemodesRule
+  - MeteorSwarmScheduler
+  - SubModLowTraitorDynamic
+  - SubGamemodesRule
+  #- NoNewCrewAntagsStationEventScheduler
+  - SpaceTrafficControlFriendlyEventScheduler
+  - EmergencyShuttleAutoVote
+
+- type: gamePreset
+  id: DynamicTraitor
+  name: dynamic-traitor-tile
+  description: traitor-description
+  minPlayers: 5
+  rules:
+  - TraitorDynamic
+  - BasicStationEventScheduler
+  - EmergencyShuttleAutoVote
+  - DummyNonAntagChance
+  - SubGamemodesRule
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlFriendlyEventScheduler
+  - BasicRoundstartVariation
 
 # event schedulers
 
@@ -72,12 +100,11 @@
     - id: KingRatMigration
     - id: NinjaSpawn
     - id: RevenantSpawn
-    #- id: SleeperAgents
-    #- id: ZombieOutbreak
+    - id: SleeperAgents
+    # - id: ZombieOutbreak
     - id: DarkReaperSpawn #ss220 darkreaper middle event
     - id: SpiderQueenSpawn #SS220 spider queen midround event
     - id: LoneOpsSpawn
-    - id: DerelictCyborgSpawn
 
 - type: gamePreset
   id: FractWar

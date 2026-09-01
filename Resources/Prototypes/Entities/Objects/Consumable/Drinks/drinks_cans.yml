@@ -1,69 +1,27 @@
 # When adding new drinks also add to random spawner located in Resources\Prototypes\Entities\Markers\Spawners\Random\Food_Drinks\drinks_soda.yml
 - type: entity
-  parent: BaseItem
-  id: DrinkCanBaseFull
   abstract: true
+  parent: [ DrinkBaseMaterialMetal, DrinkBase, DrinkBaseOpenable, DrinkVisualsOpenable ]
+  id: DrinkCanBaseFull
+  suffix: Full
   components:
-  - type: Drink
-  - type: Openable
-  - type: Shakeable
   - type: SolutionContainerManager
     solutions:
       drink:
-        reagents:
-        - ReagentId: Cola
-          Quantity: 30
         maxVol: 30
-      grindable:
+      grindable: &grindable
         reagents: # 5u -> 1/2 steel sheet (10u)
         - ReagentId: Aluminium # Fun fact: soda can makeup is approx. 75% aluminium and 25% tin/iron.
           Quantity: 4
         - ReagentId: Iron
           Quantity: 1
-  - type: MixableSolution
-    solution: drink
   - type: SolutionTransfer
     canChangeTransferAmount: true
     maxTransferAmount: 15
   - type: Extractable
     grindableSolutionName: grindable
-  - type: UserInterface
-    interfaces:
-      enum.TransferAmountUiKey.Key:
-        type: TransferAmountBoundUserInterface
-  - type: Sprite
-    state: icon
-    layers:
-      - state: icon
-        map: ["enum.OpenableVisuals.Layer"]
   - type: FitsInDispenser
     solution: drink
-  - type: DrawableSolution
-    solution: drink
-  - type: RefillableSolution
-    solution: drink
-  - type: DrainableSolution
-    solution: drink
-  - type: PressurizedSolution
-    solution: drink
-  - type: ExaminableSolution
-    solution: drink
-    examinableWhileClosed: false
-  - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.OpenableVisuals.Opened:
-        enum.OpenableVisuals.Layer:
-          True: {state: "icon_open"}
-          False: {state: "icon"}
-  - type: Spillable
-    solution: drink
-  - type: MeleeWeapon
-    soundNoDamage:
-      path: "/Audio/Effects/Fluids/splat.ogg"
-    damage:
-      types:
-        Blunt: 0
   - type: Tool
     qualities:
     - Rolling
@@ -77,7 +35,11 @@
   - type: Tag
     tags:
     - DrinkCan
-  - type: DnaSubstanceTrace
+  #ss220-can-crush start
+  - type: EmptyCanCrush
+  #ss220-can-crush end
+
+## Filled
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -92,51 +54,35 @@
         reagents:
         - ReagentId: Cola
           Quantity: 30
-      grindable:
-        reagents:
-        - ReagentId: Aluminium
-          Quantity: 4
-        - ReagentId: Iron
-          Quantity: 1
+      grindable: *grindable
   - type: Tag
     tags:
     - Cola
     - DrinkCan
-    - Recyclable
   - type: Sprite
     sprite: Objects/Consumable/Drinks/cola.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/cola.rsi
+  #ss220-can-crush start
+  - type: EmptyCanCrush
+    crushedCan: CrushedCanCola
+  #ss220-can-crush end
 
 # created when taking apart an ied
 - type: entity
-  parent: DrinkColaCan
+  parent: [ DrinkBaseOpenableOpen, DrinkColaCan ]
   id: DrinkColaCanEmpty
-  suffix: empty
+  suffix: Empty
   components:
   - type: SolutionContainerManager
     solutions:
       drink:
         maxVol: 30
-      grindable:
-        reagents:
-        - ReagentId: Aluminium
-          Quantity: 4
-        - ReagentId: Iron
-          Quantity: 1
-  - type: Openable
-    opened: true
-  - type: Sprite
-    sprite: Objects/Consumable/Drinks/cola.rsi
-    layers:
-    - state: icon_open
-  - type: Item
-    sprite: Objects/Consumable/Drinks/cola.rsi
+      grindable: *grindable
   - type: Tag
     tags:
     - Cola
     - DrinkCan
-    - Recyclable
     - Trash
 
 - type: entity
@@ -152,16 +98,15 @@
         reagents:
         - ReagentId: IcedTea
           Quantity: 30
-      grindable:
-        reagents:
-        - ReagentId: Aluminium
-          Quantity: 4
-        - ReagentId: Iron
-          Quantity: 1
+      grindable: *grindable
   - type: Sprite
     sprite: Objects/Consumable/Drinks/ice_tea_can.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/ice_tea_can.rsi
+  #ss220-can-crush start
+  - type: EmptyCanCrush
+    crushedCan: CrushedCanIcedTea
+  #ss220-can-crush end
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -176,16 +121,15 @@
         reagents:
         - ReagentId: LemonLime
           Quantity: 30
-      grindable:
-        reagents:
-        - ReagentId: Aluminium
-          Quantity: 4
-        - ReagentId: Iron
-          Quantity: 1
+      grindable: *grindable
   - type: Sprite
     sprite: Objects/Consumable/Drinks/lemon-lime.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/lemon-lime.rsi
+  #ss220-can-crush start
+  - type: EmptyCanCrush
+    crushedCan: CrushedCanLemonLime
+  #ss220-can-crush end
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -200,12 +144,7 @@
         reagents:
         - ReagentId: LemonLimeCranberry
           Quantity: 30
-      grindable:
-        reagents:
-        - ReagentId: Aluminium
-          Quantity: 4
-        - ReagentId: Iron
-          Quantity: 1
+      grindable: *grindable
   - type: Sprite
     sprite: Objects/Consumable/Drinks/lemon-lime-cranberry.rsi
   - type: Item
@@ -243,6 +182,10 @@
       types:
         Blunt: 1
         Cold: 2 # Refreshing
+  #ss220-can-crush start
+  - type: EmptyCanCrush
+    crushedCan: CrushedCanLemonLimeCranberry
+  #ss220-can-crush end
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -257,16 +200,15 @@
         reagents:
         - ReagentId: GrapeSoda
           Quantity: 30
-      grindable:
-        reagents:
-        - ReagentId: Aluminium
-          Quantity: 4
-        - ReagentId: Iron
-          Quantity: 1
+      grindable: *grindable
   - type: Sprite
     sprite: Objects/Consumable/Drinks/purple_can.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/purple_can.rsi
+  #ss220-can-crush start
+  - type: EmptyCanCrush
+    crushedCan: CrushedCanGrape
+  #ss220-can-crush end
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -281,12 +223,7 @@
         reagents:
         - ReagentId: RootBeer
           Quantity: 30
-      grindable:
-        reagents:
-        - ReagentId: Aluminium
-          Quantity: 4
-        - ReagentId: Iron
-          Quantity: 1
+      grindable: *grindable
   - type: Sprite
     sprite: Objects/Consumable/Drinks/rootbeer.rsi
   - type: Item
@@ -294,6 +231,11 @@
   - type: Tag
     tags:
     - Beer
+    - DrinkCan
+  #ss220-can-crush start
+  - type: EmptyCanCrush
+    crushedCan: CrushedCanRootBeer
+  #ss220-can-crush end
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -308,15 +250,15 @@
         reagents:
         - ReagentId: SodaWater
           Quantity: 30
-      grindable:
-        reagents:
-        - ReagentId: Aluminium
-          Quantity: 4
-        - ReagentId: Iron
-          Quantity: 1
-  - type: Drink
+      grindable: *grindable
   - type: Sprite
     sprite: Objects/Consumable/Drinks/sodawater.rsi
+  - type: Item
+    sprite: Objects/Consumable/Drinks/sodawater.rsi
+  #ss220-can-crush start
+  - type: EmptyCanCrush
+    crushedCan: CrushedCanSodaWater
+  #ss220-can-crush end
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -331,16 +273,15 @@
         reagents:
         - ReagentId: SpaceMountainWind
           Quantity: 30
-      grindable:
-        reagents:
-        - ReagentId: Aluminium
-          Quantity: 4
-        - ReagentId: Iron
-          Quantity: 1
+      grindable: *grindable
   - type: Sprite
     sprite: Objects/Consumable/Drinks/space_mountain_wind.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/space_mountain_wind.rsi
+  #ss220-can-crush start
+  - type: EmptyCanCrush
+    crushedCan: CrushedCanSpaceMountainWind
+  #ss220-can-crush end
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -355,16 +296,15 @@
         reagents:
         - ReagentId: SpaceUp
           Quantity: 30
-      grindable:
-        reagents:
-        - ReagentId: Aluminium
-          Quantity: 4
-        - ReagentId: Iron
-          Quantity: 1
+      grindable: *grindable
   - type: Sprite
     sprite: Objects/Consumable/Drinks/space-up.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/space-up.rsi
+  #ss220-can-crush start
+  - type: EmptyCanCrush
+    crushedCan: CrushedCanSpaceUp
+  #ss220-can-crush end
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -379,16 +319,15 @@
         reagents:
         - ReagentId: SolDry
           Quantity: 30
-      grindable:
-        reagents:
-        - ReagentId: Aluminium
-          Quantity: 4
-        - ReagentId: Iron
-          Quantity: 1
+      grindable: *grindable
   - type: Sprite
     sprite: SS220/Objects/Consumable/Drinks/sol_dry.rsi #ss220-drinks-can-resprite
   - type: Item
     sprite: SS220/Objects/Consumable/Drinks/sol_dry.rsi #ss220-drinks-can-resprite
+  #ss220-can-crush start
+  - type: EmptyCanCrush
+    crushedCan: CrushedCanSolDry
+  #ss220-can-crush end
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -403,40 +342,15 @@
         reagents:
         - ReagentId: Starkist
           Quantity: 30
-      grindable:
-        reagents:
-        - ReagentId: Aluminium
-          Quantity: 4
-        - ReagentId: Iron
-          Quantity: 1
+      grindable: *grindable
   - type: Sprite
     sprite: Objects/Consumable/Drinks/starkist.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/starkist.rsi
-
-- type: entity
-  parent: DrinkCanBaseFull
-  id: DrinkRelaxingPeachCan
-  name: Расслабляющая Персиковая Газировка
-  description: Ходят слухи, что ежедневное употребление данного напитка сделает вас добрее и эмпатичнее к окружающим. Но это лишь слухи! Продается под взрывной маркой "РПГ"!
-  components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 30
-        reagents:
-        - ReagentId: KiraSpecial
-          Quantity: 8
-        - ReagentId: RootBeerFloat
-          Quantity: 8
-        - ReagentId: Antifreeze
-          Quantity: 8
-        - ReagentId: DoctorsDelight
-          Quantity: 6
-  - type: Sprite
-    sprite: Objects/Consumable/Drinks/starkist.rsi
-  - type: Item
-    sprite: Objects/Consumable/Drinks/starkist.rsi
+  #ss220-can-crush start
+  - type: EmptyCanCrush
+    crushedCan: CrushedCanStarkist
+  #ss220-can-crush end
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -451,15 +365,15 @@
         reagents:
         - ReagentId: TonicWater
           Quantity: 30
-      grindable:
-        reagents:
-        - ReagentId: Aluminium
-          Quantity: 4
-        - ReagentId: Iron
-          Quantity: 1
-  - type: Drink
+      grindable: *grindable
   - type: Sprite
     sprite: Objects/Consumable/Drinks/tonic.rsi
+  - type: Item
+    sprite: Objects/Consumable/Drinks/tonic.rsi
+  #ss220-can-crush start
+  - type: EmptyCanCrush
+    crushedCan: CrushedCanTonicWater
+  #ss220-can-crush end
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -474,16 +388,15 @@
         reagents:
         - ReagentId: FourteenLoko
           Quantity: 30
-      grindable:
-        reagents:
-        - ReagentId: Aluminium
-          Quantity: 4
-        - ReagentId: Iron
-          Quantity: 1
+      grindable: *grindable
   - type: Sprite
     sprite: Objects/Consumable/Drinks/fourteen_loko.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/fourteen_loko.rsi
+  #ss220-can-crush start
+  - type: EmptyCanCrush
+    crushedCan: CrushedCanFourteenLoko
+  #ss220-can-crush end
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -498,17 +411,15 @@
         reagents:
         - ReagentId: ChangelingSting
           Quantity: 30
-      grindable:
-        reagents:
-        - ReagentId: Aluminium
-          Quantity: 4
-        - ReagentId: Iron
-          Quantity: 1
-  - type: Drink
+      grindable: *grindable
   - type: Sprite
     sprite: Objects/Consumable/Drinks/changelingsting.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/changelingsting.rsi
+  #ss220-can-crush start
+  - type: EmptyCanCrush
+    crushedCan: CrushedCanChangelingSting
+  #ss220-can-crush end
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -523,17 +434,15 @@
         reagents:
         - ReagentId: DrGibb
           Quantity: 30
-      grindable:
-        reagents:
-        - ReagentId: Aluminium
-          Quantity: 4
-        - ReagentId: Iron
-          Quantity: 1
-  - type: Drink
+      grindable: *grindable
   - type: Sprite
     sprite: Objects/Consumable/Drinks/dr_gibb.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/dr_gibb.rsi
+  #ss220-can-crush start
+  - type: EmptyCanCrush
+    crushedCan: CrushedCanDrGibb
+  #ss220-can-crush end
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -552,20 +461,15 @@
           Quantity: 20
         - ReagentId: Ice
           Quantity: 5
-      grindable:
-        reagents:
-        - ReagentId: Aluminium
-          Quantity: 4
-        - ReagentId: Iron
-          Quantity: 1
-  - type: Tag
-    tags:
-    - DrinkCan
-    - Recyclable
+      grindable: *grindable
   - type: Sprite
     sprite: Objects/Consumable/Drinks/robustnukie.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/robustnukie.rsi
+  #ss220-can-crush start
+  - type: EmptyCanCrush
+    crushedCan: CrushedCanNukie
+  #ss220-can-crush end
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -580,70 +484,15 @@
         reagents:
         - ReagentId: EnergyDrink
           Quantity: 30
-      grindable:
-        reagents:
-        - ReagentId: Aluminium
-          Quantity: 4
-        - ReagentId: Iron
-          Quantity: 1
-  - type: Drink
+      grindable: *grindable
   - type: Sprite
     sprite: Objects/Consumable/Drinks/energy_drink.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/energy_drink.rsi
-
-- type: entity
-  id: DrinkCanPack
-  parent: BaseStorageItem
-  name: 6pack
-  components:
-  - type: Sprite
-    sprite: Objects/Misc/6pack.rsi
-    layers:
-      - state: plastic-thingy
-      - state: 6pack1
-        map: ["6pack1"]
-        visible: false
-      - state: 6pack2
-        map: ["6pack2"]
-        visible: false
-      - state: 6pack3
-        map: ["6pack3"]
-        visible: false
-      - state: 6pack4
-        map: ["6pack4"]
-        visible: false
-      - state: 6pack5
-        map: ["6pack5"]
-        visible: false
-      - state: 6pack6
-        map: ["6pack6"]
-        visible: false
-  - type: Item
-    size: Normal
-  - type: Storage
-    grid:
-    - 0,0,2,3
-    whitelist:
-      tags:
-        - Cola
-    hideStackVisualsWhenClosed: false
-  - type: StorageFill
-    contents:
-      - id: DrinkColaCan
-        amount: 6
-  - type: ItemCounter
-    count:
-      tags: [Cola]
-    composite: true
-    layerStates:
-    - 6pack1
-    - 6pack2
-    - 6pack3
-    - 6pack4
-    - 6pack5
-    - 6pack6
-  - type: Appearance
+  #ss220-can-crush start
+  - type: EmptyCanCrush
+    crushedCan: CrushedCanEnergyDrink
+  #ss220-can-crush end
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -658,17 +507,15 @@
         reagents:
         - ReagentId: ShamblersJuice
           Quantity: 30
-      grindable:
-        reagents:
-        - ReagentId: Aluminium
-          Quantity: 4
-        - ReagentId: Iron
-          Quantity: 1
-  - type: Drink
+      grindable: *grindable
   - type: Sprite
     sprite: Objects/Consumable/Drinks/shamblersjuice.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/shamblersjuice.rsi
+  #ss220-can-crush start
+  - type: EmptyCanCrush
+    crushedCan: CrushedCanShamblersJuice
+  #ss220-can-crush end
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -683,17 +530,15 @@
         reagents:
         - ReagentId: PwrGame
           Quantity: 30
-      grindable:
-        reagents:
-        - ReagentId: Aluminium
-          Quantity: 4
-        - ReagentId: Iron
-          Quantity: 1
-  - type: Drink
+      grindable: *grindable
   - type: Sprite
     sprite: Objects/Consumable/Drinks/pwrgame.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/pwrgame.rsi
+  #ss220-can-crush start
+  - type: EmptyCanCrush
+    crushedCan: CrushedCanPwrGame
+  #ss220-can-crush end
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -708,13 +553,7 @@
         reagents:
         - ReagentId: Beer
           Quantity: 30
-      grindable:
-        reagents:
-        - ReagentId: Aluminium
-          Quantity: 4
-        - ReagentId: Iron
-          Quantity: 1
-  - type: Drink
+      grindable: *grindable
   - type: Sprite
     sprite: SS220/Objects/Consumable/Drinks/beer_can.rsi #ss220-drinks-can-resprite
   - type: Item
@@ -722,6 +561,11 @@
   - type: Tag
     tags:
     - Beer
+    - DrinkCan
+  #ss220-can-crush start
+  - type: EmptyCanCrush
+    crushedCan: CrushedCanBeer
+  #ss220-can-crush end
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -736,13 +580,7 @@
         reagents:
         - ReagentId: Wine
           Quantity: 30
-      grindable:
-        reagents:
-        - ReagentId: Aluminium
-          Quantity: 4
-        - ReagentId: Iron
-          Quantity: 1
-  - type: Drink
+      grindable: *grindable
   - type: Sprite
     sprite: SS220/Objects/Consumable/Drinks/wine_can.rsi #ss220-drinks-can-resprite
   - type: Item
@@ -750,3 +588,8 @@
   - type: Tag
     tags:
     - Wine
+    - DrinkCan
+  #ss220-can-crush start
+  - type: EmptyCanCrush
+    crushedCan: CrushedCanWine
+  #ss220-can-crush end

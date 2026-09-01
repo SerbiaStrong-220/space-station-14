@@ -1,2 +1,10 @@
-ent-ServiceWorkerIDCard = ID карта сервисного работника
-    .desc = { ent-PassengerIDCard.desc }
+ent-CBURNIDLeadercard = ID карта лидера отряда РХБЗ
+    .desc = { ent-CentcomIDCard.desc }
+    .suffix = РХБЗ
+ent-CIAgentIDCard = ID карта Агента Контрразведки
+    .desc = { ent-CentcomIDCard.desc }
+ent-CIOfficerIDCard = ID карта Офицера Контрразведки
+    .desc = { ent-CentcomIDCard.desc }
+ent-FakeCaptainIDCard = { ent-CaptainIDCard }
+    .desc = { ent-CaptainIDCard.desc }
+    .suffix = Фальшивая

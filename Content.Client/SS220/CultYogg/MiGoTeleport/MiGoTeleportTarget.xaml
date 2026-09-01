@@ -1,0 +1,14 @@
+<BoxContainer xmlns="https://spacestation14.io"
+            Orientation="Horizontal"
+            HorizontalExpand="True"
+            Margin="0 1"
+            SeparationOverride="4">
+    <PanelContainer Name="Panel" Access="Public">
+        <BoxContainer Orientation="Vertical">
+            <Label Name="NameLabel" HorizontalAlignment="Center"/>
+            <BoxContainer Orientation="Horizontal">
+                <Button Name="Teleport" Access="Public" Text="{Loc 'migo-teleport-action-button'}" StyleClasses="OpenRight"/>
+            </BoxContainer>
+        </BoxContainer>
+    </PanelContainer>
+</BoxContainer>

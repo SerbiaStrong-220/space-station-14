@@ -4,9 +4,7 @@
   roundStart: true
   prototype: MobDwarf
   maxAge: 250 #ss220-maxage-tweak
-  sprites: MobHumanSprites
-  markingLimits: MobHumanMarkingLimits
-  dollPrototype: MobDwarfDummy
+  dollPrototype: AppearanceDwarf
   skinColoration: HumanToned
   #SS220-new-species-naming begin
   maleFirstNames: NamesDwarfMale

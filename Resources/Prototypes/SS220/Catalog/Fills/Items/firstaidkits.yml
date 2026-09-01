@@ -1,0 +1,13 @@
+- type: entity
+  name: combat medical kit
+  description: For the big weapons among us.
+  id: StimkitCombatFilled
+  suffix: Stimkit, Filled
+  parent: MedkitCombat
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: StimpackERT
+          amount: 6

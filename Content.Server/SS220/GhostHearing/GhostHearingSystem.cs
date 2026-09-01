@@ -9,10 +9,10 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.GhostHearing;
 
-public sealed class GhostHearingSystem : SharedGhostHearingSystem
+public sealed partial class GhostHearingSystem : SharedGhostHearingSystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     private const string Handheld = "Handheld";
 
@@ -146,7 +146,7 @@ public sealed class GhostHearingSystem : SharedGhostHearingSystem
         if (ev.Channel is null)
             return;
 
-        if (!_prototypeManager.TryIndex<TelepathyChannelPrototype>(ev.Channel.ID, out var channelProto))
+        if (!_prototypeManager.TryIndex(ev.Channel, out var channelProto))
             return;
 
         if (ghost.RadioChannels.TryGetValue(channelProto, out var canHear) && !canHear)

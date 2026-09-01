@@ -42,7 +42,7 @@
   suffix: Salvage
   components:
   - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/salvage.rsi
+    sprite: SS220/Structures/Doors/Airlocks/Standard/salvage.rsi #SS220 salvage_airlock
   - type: Wires
     layoutId: AirlockCargo
 
@@ -163,6 +163,16 @@
 
 - type: entity
   parent: Airlock
+  id: AirlockXenoborg
+  name: xenoborg airlock
+  components:
+  - type: Sprite
+    sprite: Structures/Doors/Airlocks/Standard/xenoborg.rsi
+  - type: Paintable
+    group: null
+
+- type: entity
+  parent: Airlock
   id: AirlockHatchMaintenance
   name: maintenance hatch
   components:
@@ -170,6 +180,15 @@
     sprite: Structures/Doors/Airlocks/Standard/hatch_maint.rsi
   - type: Paintable
     group: null
+
+- type: entity
+  parent: Airlock
+  id: AirlockHatchSyndicate
+  name: airtight hatch
+  suffix: Syndicate
+  components:
+  - type: Sprite
+    sprite: Structures/Doors/Airlocks/Standard/hatch_syndicate.rsi
 
 # Glass
 - type: entity
@@ -214,7 +233,7 @@
   suffix: Salvage
   components:
   - type: Sprite
-    sprite: Structures/Doors/Airlocks/Glass/salvage.rsi
+    sprite: SS220/Structures/Doors/Airlocks/Glass/salvage.rsi #SS220 salvage_airlock
   - type: Wires
     layoutId: AirlockCargo
 

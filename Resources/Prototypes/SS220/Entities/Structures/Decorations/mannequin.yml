@@ -146,6 +146,7 @@
         showEnts: False
         occludes: True
         ent: null
+      body_organs: !type:Container { }
   - type: Inventory
     templateId: human
   - type: Hands
@@ -158,5 +159,5 @@
     - hands_right
     - hands_left
   - type: Body
-    prototype: Mannequin
+
 

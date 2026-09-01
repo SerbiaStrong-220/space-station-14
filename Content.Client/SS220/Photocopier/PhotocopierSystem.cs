@@ -5,9 +5,9 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client.SS220.Photocopier;
 
-public sealed class PhotocopierSystem : EntitySystem
+public sealed partial class PhotocopierSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
+    [Dependency] private SharedAppearanceSystem _appearanceSystem = default!;
 
     private readonly PhotocopierCombinedVisualState _fallbackVisualState =
         new(PhotocopierVisualState.Off, false, false, false);

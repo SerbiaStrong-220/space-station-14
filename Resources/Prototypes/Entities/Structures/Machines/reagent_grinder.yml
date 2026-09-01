@@ -3,8 +3,12 @@
   parent: [ BaseMachinePowered, SmallConstructibleMachine ]
   name: reagent grinder
   description: From BlenderTech. Will It Blend? Let's find out!
-  suffix: grinder/juicer
   components:
+  # SS220 reagent-grinder-update begin
+  - type: Tag
+    tags:
+    - ReagentGrinder
+  # SS220 reagent-grinder-update end
   - type: ReagentGrinder
   - type: ActivatableUI
     key: enum.ReagentGrinderUiKey.Key
@@ -39,7 +43,10 @@
     - map: [ "grinder" ]
       state: "grinder_empty"
   - type: ApcPowerReceiver
-    powerLoad: 300
+    powerLoad: 0
+  - type: PowerState
+    idlePowerDraw: 0
+    workingPowerDraw: 750 # medium power blender
   - type: ItemSlots
     slots:
       beakerSlot:
@@ -64,6 +71,26 @@
       inputContainer: !type:Container
       machine_board: !type:Container
       machine_parts: !type:Container
+
+- type: entity
+  id: KitchenReagentGrinderBeaker
+  parent: KitchenReagentGrinder
+  suffix: beaker
+  components:
+  - type: ContainerFill
+    containers:
+      beakerSlot:
+      - Beaker
+
+- type: entity
+  id: KitchenReagentGrinderBeakerLarge
+  parent: KitchenReagentGrinder
+  suffix: large beaker
+  components:
+  - type: ContainerFill
+    containers:
+      beakerSlot:
+      - LargeBeaker
 
 - type: entity
   parent: Recycler #too different so different parent

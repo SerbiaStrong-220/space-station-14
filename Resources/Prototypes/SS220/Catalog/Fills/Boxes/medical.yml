@@ -7,18 +7,20 @@
   id: BoxBottleChief
   description: A box full of bottles for  medical chief.
   components:
-  - type: StorageFill
-    contents:
-      - id: ChemistryBottleOmnizine
-        amount: 1
-      - id: ChemistryBottleCognizine
-        amount: 1
-      - id: BicaridineChemistryBottle
-        amount: 1
-      - id: DexalinPlusChemistryBottle
-        amount: 1
-      - id: CerebrinChemistryBottle
-        amount: 2
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ChemistryBottleOmnizine
+          amount: 1
+        - id: ChemistryBottleCognizine
+          amount: 1
+        - id: BicaridineChemistryBottle
+          amount: 1
+        - id: DexalinPlusChemistryBottle
+          amount: 1
+        - id: CerebrinChemistryBottle
+          amount: 2
   - type: Sprite
     layers:
       - state: box

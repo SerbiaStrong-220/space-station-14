@@ -6,10 +6,10 @@ using Robust.Shared.Containers;
 
 namespace Content.Server.SS220.CultYogg.FungusMachine;
 
-public sealed class FungusMachineSystem : SharedFungusMachineSystem
+public sealed partial class FungusMachineSystem : SharedFungusMachineSystem
 {
-    [Dependency] private readonly UserInterfaceSystem _userInterfaceSystem = default!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
+    [Dependency] private UserInterfaceSystem _userInterfaceSystem = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
 
     public override void Initialize()
     {

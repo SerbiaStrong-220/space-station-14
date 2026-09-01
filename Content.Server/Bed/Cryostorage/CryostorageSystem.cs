@@ -30,12 +30,13 @@ using Robust.Shared.Player;
 using Content.Server.Forensics;
 using Robust.Shared.Utility;
 using Content.Shared.Roles; // SS220 Cryostorage ghost role fix
-using Robust.Shared.Prototypes; // SS220 Cryostorage ghost role fix
 using Content.Server.SS220.Bed.Cryostorage; // SS220 cryo department record
 using Content.Shared.Forensics.Components; //SS220 Cult_hotfix_4
 using Content.Shared.SS220.Containers; //SS220 cryo mobs fix
 using Content.Shared.Body.Systems;
-using Content.Server.Guardian; //SS220 cryo mobs fix
+using Content.Server.Guardian;
+using Content.Shared.Body;
+using Content.Shared.Clothing.Components; //SS220 cryo mobs fix
 
 
 namespace Content.Server.Bed.Cryostorage;
@@ -59,7 +60,6 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
     [Dependency] private readonly StationRecordsSystem _stationRecords = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!; // SS220 Cryostorage ghost role fix
     [Dependency] private readonly SharedContainerSystemExtensions _containerSystemExtensions = default!; //SS220 Cryo mobs fix
 
     /// <inheritdoc/>
@@ -189,7 +189,7 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
         if (!TryComp<CryostorageComponent>(cryostorageEnt, out var cryostorageComponent))
             return;
 
-        _containerSystemExtensions.RemoveEntitiesFromAllContainers<MindContainerComponent>(ent.Owner, [SharedBodySystem.BodyRootContainerId, GuardianHostComponent.GuardianContainerId]); //SS220-cryo-mobs-fix
+        _containerSystemExtensions.RemoveEntitiesFromAllContainers<MindContainerComponent>(ent.Owner, [BodyComponent.ContainerID, GuardianHostComponent.GuardianContainerId]); //SS220-cryo-mobs-fix
 
         // if we have a session, we use that to add back in all the job slots the player had.
         if (userId != null)
@@ -343,6 +343,11 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
         var enumerator = _inventory.GetSlotEnumerator(uid);
         while (enumerator.NextItem(out var item, out var slotDef))
         {
+            // ss220 fix attached item in cryo storage start
+            if (HasComp<AttachedClothingComponent>(item))
+                continue;
+            // ss220 fix attached item in cryo storage end
+
             data.ItemSlots.Add(slotDef.Name, Name(item));
         }
 

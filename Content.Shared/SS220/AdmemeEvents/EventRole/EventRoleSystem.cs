@@ -7,7 +7,7 @@ namespace Content.Shared.SS220.AdmemeEvents.EventRole;
 
 public sealed partial class EventRoleSystem : EntitySystem
 {
-    [Dependency] private readonly ISerializationManager _serialization = default!;
+    [Dependency] private ISerializationManager _serialization = default!;
 
     public override void Initialize()
     {

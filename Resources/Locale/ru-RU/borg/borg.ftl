@@ -6,6 +6,8 @@ borg-mind-removed = { CAPITALIZE($name) } выключается!
 borg-module-too-many = Для ещё одного модуля не хватает места...
 borg-module-duplicate = Этот модуль уже установлен в этого киборга.
 borg-module-whitelist-deny = Этот модуль не подходит для данного типа киборгов...
+borg-module-action-name = Активировать { $moduleName }
+borg-module-action-description = Выбрать { $moduleName }, чтобы использовать предоставляемые им инструменты.
 borg-construction-guide-string = Конечности и туловище киборга должны быть прикреплены к эндоскелету.
 borg-ui-menu-title = Интерфейс киборга
 borg-ui-charge-label = Заряд: { $charge }%
@@ -26,9 +28,11 @@ borg-select-type-menu-information = Информация
 borg-select-type-menu-select-type = Выберите тип шасси для просмотра информации
 borg-select-type-menu-confirm = Подтвердите выбор
 borg-select-type-menu-guidebook = Руководство
-borg-type-generic-name = Универсал
-borg-type-generic-desc = Может всё, но одинаково не очень хорошо. Выполняйте различные случайные поручения на станции, или, быть может, окажите помощь научному отделу, который вас построил.
-borg-type-generic-transponder = обычный киборг
+#SS220 generic borg rework START
+borg-type-generic-name = Учёный
+borg-type-generic-desc = Работайте на благо научного отдела, который вас и создал. Помогайте содержать аномалии, изучать артефакты и заробатывать очки исследования.
+borg-type-generic-transponder = киборг-ученый
+#SS220 generic borg rework END
 borg-type-engineering-name = Инженер
 borg-type-engineering-desc = Помогайте команде инженеров в строительстве станции, ликвидации повреждений или исправлении проблем с электричеством и атмосферой.
 borg-type-engineering-transponder = киборг-инженер
@@ -42,5 +46,7 @@ borg-type-medical-name = Медик
 borg-type-medical-desc = Оказывайте медицинскую помощь нуждающемуся экипажу в медотсеке или в опасных зонах, куда обычные парамедики не могут добраться.
 borg-type-medical-transponder = киборг-доктор
 borg-type-service-name = Сервисный
-borg-type-service-desc = Помогайте членам экипажа в самых разных ситуациях - от подачи закусок и напитков до занятий ботаникой и развлечений.
+borg-type-service-desc = Помогайте членам экипажа в самых разных ситуациях — от подачи закусок и напитков до занятий ботаникой и развлечений.
 borg-type-service-transponder = киборг-официант
+
+borg-module-incompatible = Этот модуль не совместим с { THE($existing) }.

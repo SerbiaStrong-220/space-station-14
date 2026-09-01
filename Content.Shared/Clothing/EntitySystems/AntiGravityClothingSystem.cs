@@ -50,7 +50,7 @@ public sealed class AntiGravityClothingSystem : EntitySystem
     }
 
     //SS220 Moonboots with jet fix begin
-    private void OnUnequipped(Entity<AntiGravityClothingComponent> ent, ref ClothingGotUnequippedEvent args)
+    private void OnUnequipped(Entity<AntiGravityClothingComponent> entity, ref ClothingGotUnequippedEvent args)
     {
         // This clothing item does nothing if we're not standing
         if (_standing.IsDown(args.Wearer))

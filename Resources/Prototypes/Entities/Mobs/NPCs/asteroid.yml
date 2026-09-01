@@ -5,6 +5,7 @@
   - MobDamageable
   - MobAtmosExposed
   - MobCombat
+  - BaseMobAnimal
   abstract: true
   components:
   - type: Reactive
@@ -12,17 +13,13 @@
       Flammable: [Touch]
       Extinguish: [Touch]
       Acidic: [Touch, Ingestion]
-  - type: Body
-    prototype: Animal
   - type: Climbing
   - type: NameIdentifier
     group: GenericNumber
   - type: StatusEffects
     allowed:
-    - Stutter
     - Electrocution
     - TemporaryBlindness
-    - RadiationProtection
     - Adrenaline
   - type: StandingState
   - type: Tag
@@ -50,12 +47,14 @@
     baseWalkSpeed : 2.00
     baseSprintSpeed : 2.00
   - type: Bloodstream
-    bloodMaxVolume: 350
-    chemicalMaxVolume: 0
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 350
   - type: MobThresholds
     thresholds:
       0: Alive
-      150: Dead
+      250: Dead # SS220 Revert Wizden balance #38131
   - type: MeleeWeapon
     soundHit:
       path: "/Audio/Weapons/smash.ogg"
@@ -94,6 +93,10 @@
       amount: 3
     - id: MaterialGoliathHide1
       amount: 3
+    #SS220-GoliathDrop-Tweak begin
+    - id: MaterialBones1
+      amount: 1
+    #SS220-GoliathDrop-Tweak end
 
 - type: entity
   parent: BaseAction
@@ -332,6 +335,8 @@
   - type: Tag
     tags:
     - HivelordRemains
+    - Meat
+    - Raw
 
 - type: entity
   id: FoodHivelordRemainsInert
@@ -351,7 +356,8 @@
   - type: Tag
     tags:
     - HivelordRemains
-
+    - Meat
+    - Raw
 
 - type: entity
   id: MobBasilisk
@@ -376,7 +382,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      45: Dead
+      75: Dead # SS220 Revert Wizden balance #38131
   - type: MeleeWeapon
     angle: 0
     animation: WeaponArcBite
@@ -402,8 +408,10 @@
     capacity: 1
     count: 1
   - type: Bloodstream
-    bloodMaxVolume: 200
-    chemicalMaxVolume: 0
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 200
   - type: NpcFactionMember
     factions:
     - SimpleHostile

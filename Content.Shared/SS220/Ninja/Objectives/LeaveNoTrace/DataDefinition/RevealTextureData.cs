@@ -22,7 +22,7 @@ public sealed partial class TextureGlitchParametersData
     /// A sprite that will gradually transform as the ninja is revealed.
     /// </summary>
     [DataField]
-    public ResPath RevealSpritePath = new("/Textures/SS220/Interface/Misc/Ninja/eye.png");
+    public ResPath RevealSpritePath = new("/Textures/SS220/Interface/Misc/ninja/eye.png");
 
     /// <summary>
     /// Eye glitch params

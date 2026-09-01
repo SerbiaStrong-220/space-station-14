@@ -3,8 +3,13 @@
   name: id-card-access-level-magistrate
   canBeSwitchableInReader: false
 
+- type: accessLevel
+  id: NanoTrasenRepresentative
+  name: id-card-access-level-nanotrasen-representative
+  canBeSwitchableInReader: false
+
 - type: accessGroup
   id: Lawyer
   tags:
-  - Magistrate
+  - NanoTrasenRepresentative #SS220 ntr add
   - Lawyer

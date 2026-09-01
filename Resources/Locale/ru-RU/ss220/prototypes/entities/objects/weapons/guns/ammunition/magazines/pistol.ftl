@@ -1,2 +1,3 @@
-ent-MagazinePistolSubMachineGunIncendiary = магазин ПП (.35 авто зажигательные)
+ent-MagazinePistolSubMachineGunAcp = магазин ПП (.45 авто)
     .desc = { ent-BaseMagazinePistolSubMachineGun.desc }
+

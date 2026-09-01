@@ -13,7 +13,6 @@ public sealed class MovingPoint
     private Vector2 _pointPosition;
     /// <summary> Fake move direction </summary>
     private Vector2 _moveDirection;
-    private UIBox2 _uIBox2 = new();
     public MovingPoint()
     {
         _moveDirection = new();
@@ -34,8 +33,8 @@ public sealed class MovingPoint
     }
     public void DrawMovingDirection(DrawingHandleScreen handle)
     {
-        DrawArrow(handle, _pointPosition, _pointPosition + 10 * _moveDirection, 6f, MoveDirectionColor, true);
-        DrawArrow(handle, _pointPosition - 10 * _moveDirection, _pointPosition, 6f, MoveDirectionColor, false);
+        DrawArrow(handle, _pointPosition, _pointPosition + _moveDirection, 6f, MoveDirectionColor, true);
+        DrawArrow(handle, _pointPosition - _moveDirection, _pointPosition, 6f, MoveDirectionColor, false);
     }
 
     private void DrawArrow(DrawingHandleScreen handle, Vector2 from, Vector2 to, float arrowRange, Color color, bool ArrowFront)

@@ -16,6 +16,7 @@ using Content.Shared.Rejuvenate;
 using Content.Shared.Rounding;
 using Content.Shared.SS220.RoundEndInfo; //ss220 add additional info for round
 using Content.Shared.SS220.StaminaConvertArmor;
+using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
@@ -48,9 +49,11 @@ public abstract partial class SharedStaminaSystem : EntitySystem
     [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] protected readonly SharedStunSystem StunSystem = default!;
 
+    [Dependency] private readonly EntityQuery<StaminaComponent> _stamQuery = default!;
+
     //ss220 add additional info for round start
-    [Dependency] private readonly IRoundEndInfoManager _infoManager = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private IRoundEndInfoManager _infoManager = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
     //ss220 add additional info for round end
 
     /// <summary>
@@ -102,11 +105,14 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         {
             RemCompDeferred<ActiveStaminaComponent>(entity);
         }
-        _alerts.ClearAlert(entity, entity.Comp.StaminaAlert);
+        _alerts.ClearAlert(entity.Owner, entity.Comp.StaminaAlert);
     }
 
     private void OnStartup(Entity<StaminaComponent> entity, ref ComponentStartup args)
     {
+        // Set the base threshold here since ModifiedCritThreshold can't be modified via yaml.
+        entity.Comp.CritThreshold = entity.Comp.BaseCritThreshold;
+
         UpdateStaminaVisuals(entity);
     }
 
@@ -144,7 +150,8 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         if (component.Critical)
             return;
 
-        var damage = args.PushProbability * component.CritThreshold;
+        // var damage = args.PushProbability * component.CritThreshold; [wizden-code] SS220-make-stamina-damage-cap
+        var damage = MathF.Min(args.PushProbability, args.MaxPercentStaminaDamage) * component.CritThreshold; // SS220-make-stamina-damage-cap
         TakeStaminaDamage(uid, damage, component, source: args.Source);
 
         args.PopupPrefix = "disarm-action-shove-";
@@ -167,13 +174,12 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         if (ev.Cancelled)
             return;
 
-        var stamQuery = GetEntityQuery<StaminaComponent>();
         var toHit = new List<(EntityUid Entity, StaminaComponent Component)>();
 
         // Split stamina damage between all eligible targets.
         foreach (var ent in args.HitEntities)
         {
-            if (!stamQuery.TryGetComponent(ent, out var stam))
+            if (!_stamQuery.TryGetComponent(ent, out var stam))
                 continue;
 
             toHit.Add((ent, stam));
@@ -212,11 +218,27 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         if (!TryComp<StaminaComponent>(args.Embedded, out var stamina))
             return;
 
+        //SS220 shield rework begin
+        var blockEv = new ThrowableProjectileBlockAttemptEvent(new DamageSpecifier(), uid);
+
+        RaiseLocalEvent(args.Embedded, ref blockEv);
+        if (blockEv.Cancelled)
+            return;
+        //SS220 shield rework end
+
         TakeStaminaDamage(args.Embedded, component.Damage, stamina, source: uid, ignoreResist: component.IgnoreResistance /* SS220 Add ingnore resistance */);
     }
 
     private void OnThrowHit(EntityUid uid, StaminaDamageOnCollideComponent component, ThrowDoHitEvent args)
     {
+        //SS220 shield rework begin
+        var blockEv = new ThrowableProjectileBlockAttemptEvent(new DamageSpecifier(), uid);
+
+        RaiseLocalEvent(args.Target, ref blockEv);
+        if (blockEv.Cancelled)
+            return;
+        //SS220 shield rework end
+
         OnCollide(uid, component, args.Target, component.IgnoreResistance /* SS220 Add ingnore resistance */);
     }
 
@@ -361,14 +383,13 @@ public abstract partial class SharedStaminaSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        var stamQuery = GetEntityQuery<StaminaComponent>();
         var query = EntityQueryEnumerator<ActiveStaminaComponent>();
         var curTime = Timing.CurTime;
 
         while (query.MoveNext(out var uid, out _))
         {
             // Just in case we have active but not stamina we'll check and account for it.
-            if (!stamQuery.TryGetComponent(uid, out var comp) ||
+            if (!_stamQuery.TryComp(uid, out var comp) ||
                 comp.StaminaDamage <= 0f && !comp.Critical)
             {
                 RemComp<ActiveStaminaComponent>(uid);
@@ -465,7 +486,7 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         {
             var key = thres.Key.Float();
 
-            if (ent.Comp.StaminaDamage >= key && key > closest && closest < ent.Comp.CritThreshold)
+            if ((ent.Comp.StaminaDamage / ent.Comp.CritThreshold) >= key && key > closest && closest < 1f)
                 closest = thres.Key;
         }
 

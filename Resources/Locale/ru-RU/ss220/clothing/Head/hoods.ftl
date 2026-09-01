@@ -15,3 +15,7 @@ ent-ClothingHeadHatHoodWinterSyndieCapArmored = капюшон куртки си
 ent-ClothingHeadHatHoodWinterSyndieCap = капюшон куртки синдиката
     .desc = { ent-ClothingHeadHatHoodWinterBase.desc }
 ent-ClothingHeadHatHoodOwl = капюшон героя-совы
+ent-ClothingHeadHatHoodExosuitSalvage = капюшон экзокостюма утилизатора
+    .desc = Капюшон из крепкой ткани, обеспечивающий небольшую защиту.
+ent-ClothingHeadHatHoodHeartFinaly = сердечный капюшон
+    .desc = Капюшон.

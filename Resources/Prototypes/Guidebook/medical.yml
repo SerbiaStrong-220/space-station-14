@@ -12,6 +12,11 @@
   id: MedicalDoctor
   name: guide-entry-medicaldoctor
   text: "/ServerInfo/Guidebook/Medical/MedicalDoctor.xml"
+  # SS220-medical-changes-begin
+  children:
+  - Surgery
+  - Pathology
+  # SS220-medical-changes-end
 
 - type: guideEntry
   id: Cloning

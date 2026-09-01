@@ -35,8 +35,10 @@
   - MicrowaveMachineCircuitboard
   - ReagentGrinderMachineCircuitboard
   - ElectricGrillMachineCircuitboard
+  - FoodProcessorMachineCircuitboard # SS220 kitchen-processor
   - BoozeDispenserMachineCircuitboard
   - SodaDispenserMachineCircuitboard
+  - SmartFridgeCircuitboard
 
 ## Dynamic
 
@@ -67,3 +69,4 @@
   - ReagentGrinderIndustrialMachineCircuitboard
   - JukeboxCircuitBoard
   - DawInstrumentMachineCircuitboard
+  - KitchenElectricGrillAdvancedCircuitboard #SS220-grill-update-3
