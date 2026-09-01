@@ -6,7 +6,7 @@
   name: roles-antag-darkreaper-name
   description: darkreaper-preset-description
   showInVote: false
-  minPlayers: 30
+  minPlayers: 45
   rules:
     - DarkReaperSpawnMajor
     - BasicStationEventScheduler

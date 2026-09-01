@@ -8,7 +8,7 @@
     weight: 7.5
     duration: 1
     earliestStart: 45
-    minimumPlayers: 30
+    minimumPlayers: 45
   - type: AntagSelection
     definitions:
     - spawnerPrototype: SpawnPointGhostDarkReaperRune
@@ -24,7 +24,7 @@
   categories: [ GameRules ]
   components:
   - type: GameRule
-    minPlayers: 30
+    minPlayers: 45
   - type: AntagSelection
     selectionTime: PrePlayerSpawn
     definitions:
