@@ -49,6 +49,18 @@
       Steel: 100
   - type: StaticPrice
     price: 30
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Tools/wirecutter_pickup.ogg
+      params:
+        volume: 2
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Tools/wirecutter_drop.ogg
+      params:
+        volume: 2
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   name: screwdriver
@@ -112,6 +124,18 @@
       types:
         Piercing: 5
 # SS220 Throwable Changes end
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Tools/screwdriver_pickup.ogg
+      params:
+        volume: 2
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Tools/screwdriver_drop.ogg
+      params:
+        volume: 2
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   name: wrench
@@ -161,6 +185,18 @@
   - type: GuideHelp
     guides:
     - Construction
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Tools/wrench_pickup.ogg
+      params:
+        volume: 2
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Tools/wrench_drop.ogg
+      params:
+        volume: 2
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   name: multitool
@@ -221,6 +257,18 @@
     - WirePanels
     - Airlocks
     - InspectingPower
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Tools/multitool_pickup.ogg
+      params:
+        volume: 2
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Tools/multitool_drop.ogg
+      params:
+        volume: 2
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   name: network configurator
@@ -272,6 +320,18 @@
     - type: GuideHelp
       guides:
       - Networking
+    # SS220-place-and-pickup-sounds begin
+    - type: EmitSoundOnPickup
+      sound:
+        path: /Audio/SS220/Items/Tools/multitool_pickup.ogg
+        params:
+          volume: 2
+    - type: EmitSoundOnDrop
+      sound:
+        path: /Audio/SS220/Items/Tools/multitool_drop.ogg
+        params:
+          volume: 2
+    # SS220-place-and-pickup-sounds end
 
 #Power tools
 #Later on these should switch probably switch damage when changing the tool behavior.
@@ -334,6 +394,18 @@
         Piercing: 10
     soundHit:
       path: "/Audio/Items/drill_hit.ogg"
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Tools/rpd_pickup.ogg
+      params:
+        volume: 2
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Tools/rpd_drop.ogg
+      params:
+        volume: 2
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   id: RCD
@@ -409,6 +481,18 @@
   - type: ActivatableUI
     inHandsOnly: true
     key: enum.RcdUiKey.Key
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Tools/rcd_pickup.ogg
+      params:
+        volume: 2
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Tools/rcd_drop.ogg
+      params:
+        volume: 2
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   id: RCDEmpty

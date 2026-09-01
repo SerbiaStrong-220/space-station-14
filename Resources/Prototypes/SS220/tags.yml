@@ -398,6 +398,9 @@
   id: HookahCoal
 
 - type: Tag
+  id: HookahTobacco
+
+- type: Tag
   id: AstralBlocker
 
 - type: Tag

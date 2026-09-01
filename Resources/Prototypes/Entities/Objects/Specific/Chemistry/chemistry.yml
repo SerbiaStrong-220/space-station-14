@@ -97,6 +97,18 @@
   - type: StaticPrice
     price: 30
   - type: DnaSubstanceTrace
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/beaker_pickup.ogg
+      params:
+        volume: 2
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/beaker_place.ogg
+      params:
+        volume: 2
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   parent: BaseItem

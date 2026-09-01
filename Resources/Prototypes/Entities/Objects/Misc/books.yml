@@ -44,6 +44,18 @@
     damage:
       types:
         Blunt: 1
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/book_pickup.ogg
+      params:
+        volume: 2
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/book_drop.ogg
+      params:
+        volume: 2
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   parent: BaseItem
