@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 08/21/2026 17:31:41
-  entityCount: 147
+  time: 08/31/2026 12:11:29
+  entityCount: 145
 maps: []
 grids:
 - 1
@@ -250,7 +250,9 @@ entities:
     - type: Fixtures
       fixtures: {}
     missingComponents:
-    - AccessReader
+    - type: AccessReader
+      access:
+      - - Security
 - proto: BarricadePlasteelDirectional
   entities:
   - uid: 95
@@ -661,6 +663,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 3.4813077,2.6649296
       parent: 1
+    - type: SignalSwitch
+      state: False
     - type: DeviceLinkSource
       linkedPorts:
         133:
@@ -25757,6 +25761,8 @@ entities:
       rot: 3.141592653589793 rad
       pos: 0.5,4.5
       parent: 1
+    - type: PoweredLight
+      on: False
     - type: DeviceLinkSink
       invokeCounter: 1
   - uid: 133
@@ -25765,22 +25771,10 @@ entities:
       rot: 3.141592653589793 rad
       pos: 2.5,4.5
       parent: 1
+    - type: PoweredLight
+      on: False
     - type: DeviceLinkSink
       invokeCounter: 1
-- proto: PoweredlightRed
-  entities:
-  - uid: 110
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -1.5,0.5
-      parent: 1
-  - uid: 139
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 4.5,0.5
-      parent: 1
 - proto: PoweredSmallLight
   entities:
   - uid: 137
