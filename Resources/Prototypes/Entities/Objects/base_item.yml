@@ -13,13 +13,9 @@
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/SS220/Items/pickup.ogg
-      params:
-        volume: 2
   - type: EmitSoundOnDrop
     sound:
       path: /Audio/SS220/Items/place.ogg
-      params:
-        volume: 2
   # SS220-place-and-pickup-sounds end
   - type: EmitSoundOnCollide
     sound:
