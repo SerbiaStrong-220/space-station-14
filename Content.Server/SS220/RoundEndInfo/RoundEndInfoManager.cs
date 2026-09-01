@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared.SS220.RoundEndInfo;
 
 namespace Content.Server.SS220.RoundEndInfo;
@@ -26,11 +27,11 @@ public sealed class RoundEndInfoManager : IRoundEndInfoManager
         return instance;
     }
 
-    public bool TryGetInfo<T>(out T info) where T : IRoundEndInfo
+    public bool TryGetInfo<T>([NotNullWhen(true)] out T? info) where T : IRoundEndInfo
     {
         if (!_infos.TryGetValue(typeof(T), out var existing))
         {
-            info = default!;
+            info = default;
             return false;
         }
 

@@ -45,7 +45,7 @@ namespace Content.Server.RoundEnd
         [Dependency] private readonly SharedAudioSystem _audio = default!;
         [Dependency] private readonly StationSystem _stationSystem = default!;
         //ss220 add additional info for round start
-        [Dependency] private readonly IRoundEndInfoManager _infoManager = default!;
+        [Dependency] private IRoundEndInfoManager _infoManager = default!;
         //ss220 add additional info for round end
 
         public TimeSpan DefaultCooldownDuration { get; set; } = TimeSpan.FromSeconds(30);

@@ -31,7 +31,8 @@ namespace Content.Server.Cargo.Systems
         [Dependency] private readonly EmagSystem _emag = default!;
         [Dependency] private readonly IGameTiming _timing = default!;
         // ss220 add round end info start
-        [Dependency] private readonly MindSystem _mind = default!;
+        [Dependency] private MindSystem _mind = default!;
+        [Dependency] private IRoundEndInfoManager _infoManager = default!;
         // ss220 add round end info end
 
         private void InitializeConsole()
@@ -267,7 +268,7 @@ namespace Content.Server.Cargo.Systems
 
             // ss220 add round end info start
             if (_mind.TryGetMind(player, out var mind, out _))
-                _infoManager.EnsureInfo<CargoInfo>().RecordOrder(mind, order.ProductName, order.OrderQuantity, order.Price);
+                _infoManager.EnsureInfo<CargoInfo>().RecordOrder(mind, order.Product, order.OrderQuantity, cost);
             // ss220 add round end info end
         }
 

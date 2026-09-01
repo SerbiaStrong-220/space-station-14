@@ -29,9 +29,8 @@ public sealed partial class StoreSystem
     [Dependency] private readonly StackSystem _stack = default!;
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
     //ss220 add additional info for round start
-    [Dependency] private readonly IRoundEndInfoManager _infoManager = default!;
+    [Dependency] private IRoundEndInfoManager _infoManager = default!;
     //ss220 add additional info for round end
 
     private void InitializeUi()
@@ -242,7 +241,7 @@ public sealed partial class StoreSystem
         //ss220 add additional info for round start
         if (listing.Cost.TryGetValue(UplinkSystem.TelecrystalCurrencyPrototype, out var costTc))
         {
-            if (_mind.TryGetMind(msg.Actor, out var mind, out _))
+            if (Mind.TryGetMind(msg.Actor, out var mind, out _))
             {
                 var tcAmount = costTc.Int();
                 _infoManager.EnsureInfo<AntagPurchaseInfo>().RecordPurchase(mind, listing.ID, tcAmount);

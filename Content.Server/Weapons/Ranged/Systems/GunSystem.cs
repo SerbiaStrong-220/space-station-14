@@ -32,7 +32,7 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private readonly PricingSystem _pricing = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     //ss220 add additional info for round start
-    [Dependency] private readonly IRoundEndInfoManager _infoManager = default!;
+    [Dependency] private IRoundEndInfoManager _infoManager = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     //ss220 add additional info for round end
 

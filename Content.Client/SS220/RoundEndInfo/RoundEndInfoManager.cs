@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared.SS220.RoundEndInfo;
 
 namespace Content.Client.SS220.RoundEndInfo;
@@ -16,10 +17,10 @@ public sealed class RoundEndInfoManager : IRoundEndInfoManager
     /// <summary>
     /// Must always return nothing
     /// </summary>
-    /// <returns>Nothing</returns>
-    public bool TryGetInfo<T>(out T info) where T : IRoundEndInfo
+    /// <returns>Always false</returns>
+    public bool TryGetInfo<T>([NotNullWhen(true)] out T? info) where T : IRoundEndInfo
     {
-        info = default!;
+        info = default;
         return false;
     }
 

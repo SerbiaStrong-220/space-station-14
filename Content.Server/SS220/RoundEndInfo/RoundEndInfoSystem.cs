@@ -12,10 +12,10 @@ namespace Content.Server.SS220.RoundEndInfo;
 /// Gathers statistics from <see cref="IRoundEndInfoDisplay"/> sources and broadcasts them
 /// as structured blocks. Also handles <see cref="AntagPurchaseInfo"/>.
 /// </summary>
-public sealed class RoundEndInfoSystem : SharedRoundEndInfoSystem
+public sealed partial class RoundEndInfoSystem : SharedRoundEndInfoSystem
 {
-    [Dependency] private readonly AdminTestArenaSystem _arena = default!;
-    [Dependency] private readonly IRoundEndInfoManager _infoManager = default!;
+    [Dependency] private  AdminTestArenaSystem _arena = default!;
+    [Dependency] private IRoundEndInfoManager _infoManager = default!;
 
     public override void Initialize()
     {

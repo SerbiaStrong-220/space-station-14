@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.Mind;
 using Robust.Shared.Network;
@@ -11,7 +12,7 @@ namespace Content.Shared.SS220.RoundEndInfo;
 public interface IRoundEndInfoManager
 {
     T EnsureInfo<T>() where T : class, IRoundEndInfo, new();
-    bool TryGetInfo<T>(out T info) where T : IRoundEndInfo;
+    bool TryGetInfo<T>([NotNullWhen(true)] out T? info) where T : IRoundEndInfo;
     void ClearAllData();
     IEnumerable<IRoundEndInfo> GetAllInfos();
 }

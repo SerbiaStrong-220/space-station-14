@@ -18,7 +18,7 @@ namespace Content.Client.RoundEnd
     public sealed class RoundEndSummaryWindow : DefaultWindow
     {
         //ss220 add additional info for round start
-        [Dependency] private readonly IPrototypeManager _proto = default!;
+        [Dependency] private IPrototypeManager _proto = default!;
         //ss220 add additional info for round end
 
         private readonly IEntityManager _entityManager;
@@ -110,9 +110,7 @@ namespace Content.Client.RoundEnd
             roundEndSummaryContainerScrollbox.AddChild(roundEndSummaryContainer);
             roundEndSummaryTab.AddChild(roundEndSummaryContainerScrollbox);
 
-            //ss220 add additional info for round start
-            _summaryContentContainer = roundEndSummaryContainer;
-            //ss220 add additional info for round end
+            _summaryContentContainer = roundEndSummaryContainer; //ss220 add additional info for round
 
             return roundEndSummaryTab;
         }
@@ -170,7 +168,6 @@ namespace Content.Client.RoundEnd
             _antagSection.AddChild(content);
             _summaryContentContainer?.AddChild(_antagSection);
         }
-        //ss220 add additional info for round end
 
         private void MakeAntagItem(RoundEndAntagPurchaseData data)
         {
@@ -227,7 +224,7 @@ namespace Content.Client.RoundEnd
         /// Creates a styled panel containing a title and summary body for a single info block.
         /// Used to display grouped round-end statistics such as kills, economy, or deaths.
         /// </summary>
-        private PanelContainer MakeBlocks(RoundEndInfoDisplayBlock block)
+        private static PanelContainer MakeBlocks(RoundEndInfoDisplayBlock block)
         {
             var sectionPanel = new PanelContainer
             {
@@ -267,6 +264,7 @@ namespace Content.Client.RoundEnd
 
             return sectionPanel;
         }
+        //ss220 add additional info for round end
 
         private BoxContainer MakePlayerManifestTab(RoundEndMessageEvent.RoundEndPlayerInfo[] playersInfo)
         {
