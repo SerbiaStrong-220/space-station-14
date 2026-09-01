@@ -21,32 +21,7 @@ public sealed partial class HumanoidProfileEditor
         if (!_prototypeManager.TryIndex<EntityPrototype>(speciesProto.Prototype, out var entityProto))
             return true;
 
-        if (trait.Blacklist?.Components is { } blacklistComponents)
-        {
-            foreach (var compName in blacklistComponents)
-            {
-                if (entityProto.Components.ContainsKey(compName))
-                    return false;
-            }
-        }
-
-        if (trait.Whitelist?.Components is { } whitelistComponents)
-        {
-            var hasAny = false;
-            foreach (var compName in whitelistComponents)
-            {
-                if (entityProto.Components.ContainsKey(compName))
-                {
-                    hasAny = true;
-                    break;
-                }
-            }
-
-            if (!hasAny)
-                return false;
-        }
-
-        return true;
+        return _whitelistSystem.CheckBothPrototype(entityProto, trait.Blacklist, trait.Whitelist);
     }
 }
 
