@@ -249,10 +249,6 @@ entities:
       canDischarge: False
     - type: Fixtures
       fixtures: {}
-    missingComponents:
-    - type: AccessReader
-      access:
-      - - Security
 - proto: BarricadePlasteelDirectional
   entities:
   - uid: 95
