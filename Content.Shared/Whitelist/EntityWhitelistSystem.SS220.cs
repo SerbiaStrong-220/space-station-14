@@ -24,6 +24,7 @@ public sealed partial class EntityWhitelistSystem
             var present = proto.Components.ContainsKey(compName);
             if (present && !list.RequireAll)
                 return true;
+                
             if (!present && list.RequireAll)
                 return false;
         }
