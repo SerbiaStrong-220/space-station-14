@@ -1232,7 +1232,6 @@ entities:
       parent: 1
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 255
     - type: AtmosPipeLayers
@@ -1269,7 +1268,6 @@ entities:
       parent: 1
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 255
     - type: AtmosPipeLayers

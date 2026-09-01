@@ -191792,7 +191792,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 13812
     - type: AtmosPipeLayers
@@ -194972,7 +194971,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 13812
     - type: AtmosPipeLayers
@@ -327034,7 +327032,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 39660
     - type: BatteryAmmoProvider
@@ -327049,7 +327046,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 39660
     - type: BatteryAmmoProvider
