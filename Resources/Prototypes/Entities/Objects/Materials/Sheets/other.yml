@@ -187,13 +187,9 @@
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/SS220/Items/Materials/plastic_pick_up.ogg
-      params:
-        volume: 2
   - type: EmitSoundOnDrop
     sound:
       path: /Audio/SS220/Items/Materials/plastic_drop.ogg
-      params:
-        volume: 2
   # SS220-place-and-pickup-sounds end
 
 - type: entity
