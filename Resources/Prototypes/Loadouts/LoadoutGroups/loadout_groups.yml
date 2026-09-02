@@ -1460,6 +1460,7 @@
   loadouts:
   - WardenHead
   - WardenBeret
+  - WardenHeadCommissar #SS220 Commissar
 
 - type: loadoutGroup
   id: WardenJumpsuit
@@ -1468,6 +1469,7 @@
   - WardenJumpsuit
   - WardenJumpskirt
   - WardenJumpsuitTurtleneck #SS220-MoreTurtleneck
+  - WardenJumpsuitCommissar #SS220 Commissar
 
 - type: loadoutGroup
   id: WardenOuterClothing
@@ -1475,6 +1477,7 @@
   loadouts:
   - WardenCoat
   - WardenArmoredWinterCoat
+  - WardenOuterCoatCommissar #SS220 Commissar
   - CyberVestSecurity #SS220-Two Floppa Iteration
 
 - type: loadoutGroup

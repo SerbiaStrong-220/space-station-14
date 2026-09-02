@@ -255,6 +255,19 @@
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Coats/hos_formal.rsi
 
+# Warden
+- type: entity
+  parent: [ ClothingOuterArmorWarden, ClothingOuterStorageFoldableBase]
+  id: ClothingOuterCoatWardenCommissar
+  name: the commissar's overcoat
+  description: Courage and bravery, not stones and walls, make a fortress impregnable.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/commissar.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/commissar.rsi
+
 # ПНТ
 - type: entity
   parent: ClothingOuterStorageBase
