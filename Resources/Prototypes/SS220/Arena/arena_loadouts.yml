@@ -7,6 +7,11 @@
   - CrayonInfinite
 
 - type: startingGear
+  id: ArenaLoadoutChameleon
+  equipment:
+    back: ClothingBackpackChameleonFill
+
+- type: startingGear
   id: ArenaLoadoutDust
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorBrown

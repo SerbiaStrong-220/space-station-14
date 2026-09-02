@@ -219,3 +219,17 @@
     maps:
     - path: /Maps/SS220/Arenas/canvas_arena.yml
       loadout: ArenaLoadoutCanvas
+
+- type: entity
+  id: ArenaLobbyGhostBar
+  parent: BaseArenaLobbyRule
+  components:
+  - type: ArenaRule
+    displayName: ГостБар
+    description: Бар для призраков. Хамелеон-сет и пять мест.
+    displayCategory: misc
+    mode: Creative
+    maxPlayers: 5
+    maps:
+    - path: /Maps/SS220/Arenas/ghost_bar.yml
+      loadout: ArenaLoadoutChameleon
