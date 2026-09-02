@@ -225,8 +225,8 @@
   parent: BaseArenaLobbyRule
   components:
   - type: ArenaRule
-    displayName: ГостБар
-    description: Бар для призраков. Хамелеон-сет и пять мест.
+    displayName: arena-lobby-ghost-bar-name
+    description: arena-lobby-ghost-bar-desc
     displayCategory: misc
     mode: Creative
     maxPlayers: 5
@@ -239,8 +239,8 @@
   parent: BaseArenaLobbyRule
   components:
   - type: ArenaRule
-    displayName: Химия
-    description: Химическая лаборатория для одного призрака.
+    displayName: arena-lobby-chemistry-name
+    description: arena-lobby-chemistry-desc
     displayCategory: misc
     mode: Creative
     maxPlayers: 1
