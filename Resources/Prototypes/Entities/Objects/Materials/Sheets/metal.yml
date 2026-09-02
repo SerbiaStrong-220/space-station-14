@@ -85,6 +85,14 @@
         - ReagentId: Lead
           Quantity: 0.2
         #SS220 tweak produce lead end
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Materials/metal_pick_up.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Materials/metal_drop.ogg
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   parent: SheetSteel
