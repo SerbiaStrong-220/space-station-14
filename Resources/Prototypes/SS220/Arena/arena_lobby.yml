@@ -233,3 +233,17 @@
     maps:
     - path: /Maps/SS220/Arenas/ghost_bar.yml
       loadout: ArenaLoadoutChameleon
+
+- type: entity
+  id: ArenaLobbyChemistry
+  parent: BaseArenaLobbyRule
+  components:
+  - type: ArenaRule
+    displayName: Химия
+    description: Химическая лаборатория для одного призрака.
+    displayCategory: misc
+    mode: Creative
+    maxPlayers: 1
+    maps:
+    - path: /Maps/SS220/Arenas/chem_arena.yml
+      loadout: ArenaLoadoutChemist
