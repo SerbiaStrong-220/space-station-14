@@ -248,6 +248,8 @@
     fireRate: 0.75
     projectileSpeed: 20
     selectedMode: FullAuto
+    availableModes:
+    - FullAuto
     soundGunshot: /Audio/SS220/Weapons/Guns/Gunshots/peas_shot.ogg
   - type: HTN
     rootTask:
@@ -305,6 +307,8 @@
     shotsPerBurst: 3
     burstCooldown: 1
     selectedMode: Burst
+    availableModes:
+    - Burst
     burstFireRate: 20
     projectileSpeed: 20
     soundGunshot: /Audio/SS220/Weapons/Guns/Gunshots/peas_burst.ogg
