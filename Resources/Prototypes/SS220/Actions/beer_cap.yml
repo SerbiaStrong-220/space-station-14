@@ -1,7 +1,7 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-  id: ActionDrinkCap
+  id: ActionBeerCap
   name: Take a sip
   description: Take a sip of the drink stored in your cap.
   components:
@@ -9,5 +9,5 @@
     itemIconStyle: BigItem
     useDelay: 1
   - type: InstantAction
-    event: !type:DrinkCapActionEvent
+    event: !type:BeerCapActionEvent
 

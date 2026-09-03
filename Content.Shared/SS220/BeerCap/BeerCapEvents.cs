@@ -2,7 +2,7 @@
 
 using Content.Shared.Actions;
 
-namespace Content.Shared.SS220.DrinkCap;
+namespace Content.Shared.SS220.BeerCap;
 
-public sealed partial class DrinkCapActionEvent : InstantActionEvent { }
+public sealed partial class BeerCapActionEvent : InstantActionEvent { }
 

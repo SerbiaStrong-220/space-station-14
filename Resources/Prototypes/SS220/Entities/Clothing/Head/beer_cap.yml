@@ -50,9 +50,12 @@
         type: TransferAmountBoundUserInterface
   - type: ActionGrant
     actions:
-    - ActionDrinkCap
+    - ActionBeerCap
   - type: ItemActionGrant
     actions:
-    - ActionDrinkCap
+    - ActionBeerCap
     activeIfWorn: true
+  - type: Construction
+    graph: BeerCapGraph
+    node: beer_cap
 

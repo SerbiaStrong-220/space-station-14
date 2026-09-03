@@ -3,9 +3,9 @@
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 
-namespace Content.Shared.SS220.DrinkCap;
+namespace Content.Shared.SS220.BeerCap;
 
-public sealed partial class SharedDrinkCapSystem : EntitySystem
+public sealed partial class SharedBeerCapSystem : EntitySystem
 {
     [Dependency] private IngestionSystem _ingestion = default!;
 
@@ -13,10 +13,10 @@ public sealed partial class SharedDrinkCapSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<EdibleComponent, DrinkCapActionEvent>(OnDrinkAction);
+        SubscribeLocalEvent<EdibleComponent, BeerCapActionEvent>(OnDrinkAction);
     }
 
-    private void OnDrinkAction(Entity<EdibleComponent> entity, ref DrinkCapActionEvent args)
+    private void OnDrinkAction(Entity<EdibleComponent> entity, ref BeerCapActionEvent args)
     {
         args.Handled = _ingestion.TryIngest(args.Performer, args.Performer, entity);
     }

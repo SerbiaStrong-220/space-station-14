@@ -1,0 +1,33 @@
+- type: constructionGraph
+  id: BeerCapGraph
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: beer_cap
+      steps:
+      - prototype: ClothingHeadHatRedsoft
+        icon:
+          sprite: Clothing/Head/Soft/redsoft.rsi
+          state: icon
+        name: construction-graph-tag-red-cap
+      - prototype: Cablecuffs
+        icon:
+          sprite: Objects/Misc/cablecuffs.rsi
+          state: cuff
+          color: red
+        name: construction-graph-tag-cablecuffs
+      - tag: Beer
+        icon:
+          sprite: SS220/Objects/Consumable/Drinks/beer_can.rsi
+          state: icon
+        name: construction-graph-tag-beer-can
+      - tag: Beer
+        icon:
+          sprite: SS220/Objects/Consumable/Drinks/beer_can.rsi
+          state: icon
+        name: construction-graph-tag-beer-can
+        doAfter: 5
+  - node: beer_cap
+    entity: ClothingHeadBeerCap
+
