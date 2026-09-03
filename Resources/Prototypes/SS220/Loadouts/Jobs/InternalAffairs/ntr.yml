@@ -1,5 +1,18 @@
-# Headset
+- type: loadoutEffectGroup
+  id: NanoTrasenRepresentativeCloakShoulder
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobNanoTrasenRepresentative
+      time: 108000 # 30 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
+# Headset
 - type: loadout
   id: NanoTrasenRepresentativeHeadset
   equipment:
@@ -25,6 +38,15 @@
   id: NanoTrasenRepresentativeTophat
   equipment:
     head: ClothingHeadNTRTophat
+
+# Neck
+- type: loadout
+  id: NanoTrasenRepresentativeShoulderMantle
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: NanoTrasenRepresentativeCloakShoulder
+  equipment:
+    neck: ClothingNeckWhiteMantleCentcomShoulder
 
 # Outerclothing
 - type: loadout

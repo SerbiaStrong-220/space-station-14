@@ -31,5 +31,5 @@ ent-ClothingNeckWhiteMantleCapShoulder = белая наплечная мант�
 ent-ClothingNeckMantleShoulderHOS = наплечная мантия главы службы безопасности
     .desc = Длинная наплечная мантия с усиленными краями. Закрывает верхнюю часть тела и подчёркивает статус носителя.
     .suffix = За время в игре
-ent-ClothingNeckWhiteMantleCentcomShoulder = наплечная мантия центрального командования
+ent-ClothingNeckWhiteMantleCentcomShoulder = наплечная мантия офицера
     .desc = Длинная наплечная мантия с усиленными краями. Закрывает верхнюю часть тела и подчёркивает статус носителя.
