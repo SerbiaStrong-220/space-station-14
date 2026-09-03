@@ -45,6 +45,15 @@ namespace Content.Shared.Ghost.Roles
         }
     }
 
+    // ss220 add verb for ghost role start
+    [NetSerializable, Serializable]
+    public sealed class GhostRoleRuleEuiState(uint identifier, string rules) : EuiStateBase
+    {
+        public uint Identifier { get; } = identifier;
+        public string Rules { get; } = rules;
+    }
+    // ss220 add verb for ghost role end
+
     [NetSerializable, Serializable]
     public sealed class RequestGhostRoleMessage : EuiMessageBase
     {

@@ -52,6 +52,14 @@
       types:
         Blunt: 6
    # SS220 crowbar-damage-on-hit end
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Tools/crowbar_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Tools/crowbar_drop.ogg
+  # SS220-place-and-pickup-sounds end
 
 # Standard (grey) Crowbar
 - type: entity
