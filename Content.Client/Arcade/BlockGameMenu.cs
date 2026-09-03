@@ -64,7 +64,7 @@ namespace Content.Client.Arcade
         {
             Title = Loc.GetString("blockgame-menu-title");
 
-            MinSize = SetSize = new Vector2(410, 490);
+            MinSize = SetSize = new Vector2(415, 495); //SS220-block-game-visuals
 
             var resourceCache = IoCManager.Resolve<IResourceCache>();
             var backgroundTexture = resourceCache.GetTexture("/Textures/Interface/Nano/button.svg.96dpi.png");
