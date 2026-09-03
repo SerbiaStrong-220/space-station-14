@@ -17,12 +17,12 @@
           state: cuff
           color: red
         name: construction-graph-tag-cablecuffs
-      - tag: Beer
+      - prototype: DrinkBeerCan
         icon:
           sprite: SS220/Objects/Consumable/Drinks/beer_can.rsi
           state: icon
         name: construction-graph-tag-beer-can
-      - tag: Beer
+      - prototype: DrinkBeerCan
         icon:
           sprite: SS220/Objects/Consumable/Drinks/beer_can.rsi
           state: icon
