@@ -53,19 +53,19 @@ namespace Content.Shared.Arcade
             return inColor switch
             {
                 //SS220-block-game-visuals begin
-                BlockGameBlockColor.Red => new(230, 80, 84),
+                BlockGameBlockColor.Red => new(220, 32, 32),
                 BlockGameBlockColor.Orange => Color.Orange,
-                BlockGameBlockColor.Yellow => new(189, 134, 0),
-                BlockGameBlockColor.Green => new(0, 163, 42),
-                BlockGameBlockColor.Blue => new(53, 53, 222),
-                BlockGameBlockColor.Purple => new(76, 40, 130),
+                BlockGameBlockColor.Yellow => Color.Yellow,
+                BlockGameBlockColor.Green => Color.Lime,
+                BlockGameBlockColor.Blue => new(32, 96, 220),
+                BlockGameBlockColor.Purple => new(128, 0, 220),
                 BlockGameBlockColor.LightBlue => Color.Cyan,
-                BlockGameBlockColor.GhostRed => new(230, 80, 84, 85),
+                BlockGameBlockColor.GhostRed => new(220, 32, 32, 85),
                 BlockGameBlockColor.GhostOrange => Color.Orange.WithAlpha(0.33f),
-                BlockGameBlockColor.GhostYellow => new(189, 134, 0, 85),
-                BlockGameBlockColor.GhostGreen => new(0, 163, 42, 85),
-                BlockGameBlockColor.GhostBlue => new(53, 53, 222, 85),
-                BlockGameBlockColor.GhostPurple => new(76, 40, 130),
+                BlockGameBlockColor.GhostYellow => Color.Yellow.WithAlpha(0.33f),
+                BlockGameBlockColor.GhostGreen => Color.Lime.WithAlpha(0.33f),
+                BlockGameBlockColor.GhostBlue => new(32, 96, 220, 85),
+                BlockGameBlockColor.GhostPurple => new(128, 0, 220, 85),
                 BlockGameBlockColor.GhostLightBlue => Color.Cyan.WithAlpha(0.33f),
                 //SS220-block-game-visuals end
                 _ => Color.Olive //olive is error
