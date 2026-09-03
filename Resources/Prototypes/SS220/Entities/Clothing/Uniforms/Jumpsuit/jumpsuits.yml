@@ -114,10 +114,10 @@
 
 # Юридический
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220]
   id: ClothingUniformJumpsuitNTR
-  name: NanoTrasen Representative uniform
-  description: The uniform of the NanoTrasen Representative. Carry the truth of the corporation with your own hands.
+  name: uniform NanoTrasen Representative
+  description: A well-ironed dress shirt and matching set of black pants.
   suffix: For playtime
   components:
   - type: Sprite

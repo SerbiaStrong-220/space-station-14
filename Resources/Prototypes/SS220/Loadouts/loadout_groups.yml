@@ -127,6 +127,7 @@
   name: loadout-group-ntr-outerclothing
   minLimit: 0
   loadouts:
+  - NanoTrasenRepresentativeJacket
   - NanoTrasenRepresentativeTrench
   - NanoTrasenRepresentativeFormalCoat
   - NanoTrasenRepresentativeFormalDress

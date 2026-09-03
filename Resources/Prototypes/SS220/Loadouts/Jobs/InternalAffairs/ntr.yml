@@ -39,6 +39,12 @@
   equipment:
     head: ClothingHeadNTRTophat
 
+# Jumpsuit
+- type: loadout
+  id: JumpsuitNTR
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitNTR
+
 # Neck
 - type: loadout
   id: NanoTrasenRepresentativeShoulderMantle
@@ -49,6 +55,11 @@
     neck: ClothingNeckWhiteMantleCentcomShoulder
 
 # Outerclothing
+- type: loadout
+  id: NanoTrasenRepresentativeJacket
+  equipment:
+    outerClothing: ClothingOuterCoatNTRJacket
+
 - type: loadout
   id: NanoTrasenRepresentativeTrench
   equipment:

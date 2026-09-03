@@ -258,6 +258,17 @@
 # ПНТ
 - type: entity
   parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatNTRJacket
+  name: NTR's jacket
+  description: A fancy black jacket; standard issue to Nanotrasen Representatives.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/ntr.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/ntr.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
   id: ClothingOuterCoatNTRFormalDress
   name: NTR's formal dress
   description: A dress for special occasions... Damn, you really look great in that!
