@@ -1,0 +1,47 @@
+{
+    "version": 1,
+    "license": "EULA/CLA with a hosting restriction, full text: https://githubusercontent.com",
+    "copyright": "Made by y0jamb0/GrinItn (Discord/GitHub) for SS220",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "scanner",
+            "directions": 1
+        },
+        {
+            "name": "scanner_glow",
+            "directions": 1,
+            "delays": [
+                [
+                    0.5,
+                    0.5,
+                    0.5,
+                    0.5,
+                    0.5,
+                    0.5,
+                    0.5,
+                    0.5,
+                    0.5,
+                    0.5,
+                    0.5,
+                    0.5
+                ]
+            ]
+        },
+        {
+            "name": "scanner-inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "scanner-inhand-right",
+            "directions": 4
+        },
+        {
+            "name": "icon",
+            "directions": 1
+        }
+    ]
+}
