@@ -45,6 +45,7 @@ ent-ClothingOuterCoatHosFormal = торжественное пальто гла�
     .desc = Пальто для особых случаев.
 ent-ClothingOuterCoatWardenCommissar = шинель комиссара
     .desc = Неприступной крепость делают мужество и отвага, а не камни и стены.
+    .suffix = За время в игре
 ent-ClothingOuterCoatNTRFormalCoat = торжественное пальто представителя НаноТрейзен
     .desc = Покажите им истинный стиль корпорации с этим парадным пальто!
 ent-ClothingOuterCoatNTRFormalDress = торжественное платье представителя НаноТрейзен

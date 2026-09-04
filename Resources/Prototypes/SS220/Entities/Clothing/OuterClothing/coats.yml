@@ -257,7 +257,7 @@
 
 # Warden
 - type: entity
-  parent: [ ClothingOuterArmorWarden, ClothingOuterStorageFoldableBase]
+  parent: [ClothingOuterArmorWarden, ClothingOuterStorageFoldableBase]
   id: ClothingOuterCoatWardenCommissar
   name: the commissar's overcoat
   description: Courage and bravery, not stones and walls, make a fortress impregnable.
