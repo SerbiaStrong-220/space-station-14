@@ -176,7 +176,7 @@
   - type: Damageable
     damageContainer: Ipc
     damageModifierSet: Ipc
-  - type: HealthExaminable
+  - type: HealthExaminable #rerun
     locPrefix: ipc
     examinableTypes:
     - Blunt
