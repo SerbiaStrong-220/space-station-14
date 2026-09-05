@@ -1,0 +1,61 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: BaseItem
+  id: ClothingHeadBeerCap
+  name: beer cap
+  description: A cap with two beer cans. Pour your favorite drink inside and quench your thirst on the go.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/beercap.rsi
+    state: icon
+  - type: Item
+    size: Small
+    storedRotation: -90
+  - type: Clothing
+    slots:
+    - HEAD
+    sprite: SS220/Clothing/Head/Hats/beercap.rsi
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/clothing_head.ogg
+      params:
+        volume: 2
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: StaticPrice
+    price: 10
+  - type: Edible
+    edible: Drink
+    destroyOnEmpty: false
+    solution: drink
+  - type: RefillableSolution
+    solution: drink
+  - type: DrainableSolution
+    solution: drink
+  - type: ExaminableSolution
+    solution: drink
+  - type: SolutionItemStatus
+    solution: drink
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 60
+  - type: SolutionTransfer
+    canChangeTransferAmount: true
+  - type: UserInterface
+    interfaces:
+      enum.TransferAmountUiKey.Key:
+        type: TransferAmountBoundUserInterface
+  - type: ActionGrant
+    actions:
+    - ActionBeerCap
+  - type: ItemActionGrant
+    actions:
+    - ActionBeerCap
+    activeIfWorn: true
+  - type: Construction
+    graph: BeerCapGraph
+    node: beer_cap
+
