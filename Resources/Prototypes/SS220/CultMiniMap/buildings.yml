@@ -1,0 +1,72 @@
+- type: cultMiniMapTrackingRule
+  abstract: true
+  id: CultYoggMiniMapBuildingBase
+  component: CultYoggBuilding
+  color: Red
+  showInList: false
+  showHealth: false
+
+- type: cultMiniMapTrackingRule
+  parent: CultYoggMiniMapBuildingBase
+  id: CultYoggMiniMapWall
+  prototypes: [ WallCultYogg ]
+  label: cult-mini-map-wall
+  markerType: Wall
+
+- type: cultMiniMapTrackingRule
+  parent: CultYoggMiniMapBuildingBase
+  id: CultYoggMiniMapSecretDoor
+  prototypes: [ CultYoggDoor ]
+  label: cult-mini-map-secret-door
+  markerType: SecretDoor
+
+- type: cultMiniMapTrackingRule
+  parent: CultYoggMiniMapBuildingBase
+  id: CultYoggMiniMapAirlock
+  prototypes: [ CultYoggAirlock ]
+  label: cult-mini-map-airlock
+  markerType: Airlock
+
+- type: cultMiniMapTrackingRule
+  parent: CultYoggMiniMapBuildingBase
+  id: CultYoggMiniMapPod
+  prototypes: [ CultYoggPod ]
+  label: cult-mini-map-pod
+  icon: /Textures/SS220/Interface/NavMap/cult_pod.png
+
+- type: cultMiniMapTrackingRule
+  parent: CultYoggMiniMapBuildingBase
+  id: CultYoggMiniMapFungus
+  prototypes: [ CultYoggFungusHydroponic ]
+  label: cult-mini-map-fungus
+  icon: /Textures/SS220/Interface/NavMap/cult_fungus.png
+
+- type: cultMiniMapTrackingRule
+  parent: CultYoggMiniMapBuildingBase
+  id: CultYoggMiniMapAltar
+  prototypes: [ CultYoggAltar ]
+  label: cult-mini-map-altar
+  icon: /Textures/SS220/Interface/NavMap/cult_altar.png
+
+- type: cultMiniMapTrackingRule
+  parent: CultYoggMiniMapBuildingBase
+  id: CultYoggMiniMapPond
+  prototypes: [ CultYoggPond ]
+  label: cult-mini-map-pond
+  icon: /Textures/SS220/Interface/NavMap/cult_pond.png
+
+- type: cultMiniMapTrackingRule
+  parent: CultYoggMiniMapBuildingBase
+  id: CultYoggMiniMapTeleporter
+  component: SelfLinkedTeleport
+  prototypes: [ VoidTeleportEnter, VoidTeleportExit ]
+  label: cult-mini-map-teleporter
+  icon: /Textures/SS220/Interface/NavMap/cult_gate.png
+
+- type: cultMiniMapTrackingRule
+  parent: CultYoggMiniMapBuildingBase
+  id: CultYoggMiniMapBuilding
+  label: cult-mini-map-building
+  icon: /Textures/Interface/NavMap/beveled_square.png
+  color: Orange
+  scale: 0.8
