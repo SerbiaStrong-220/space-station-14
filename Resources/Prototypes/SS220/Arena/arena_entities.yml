@@ -97,6 +97,14 @@
     state: ertleader
 
 - type: entity
+  id: ArenaGhostBarSlot
+  name: ghost bar player slot
+  parent: MarkerBase
+  components:
+  - type: ArenaParticipant
+    team: a
+
+- type: entity
   parent: ClothingShoesBootsSpeed
   id: ClothingShoesBootsSpeedArenaMicroreactor
   suffix: Arena, Microreactor

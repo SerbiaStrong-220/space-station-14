@@ -37,6 +37,10 @@ arena-lobby-category-duel = Duels
 arena-lobby-category-creative = Creative
 arena-lobby-category-social = Social
 arena-lobby-category-misc = Misc
+arena-lobby-ghost-bar-name = Ghost Bar
+arena-lobby-ghost-bar-desc = A bar for ghosts. A chameleon set and five slots.
+arena-lobby-chemistry-name = Chemistry
+arena-lobby-chemistry-desc = A chemistry laboratory for one ghost.
 arena-lobby-template-size = { $count ->
     [one] {$count} player
    *[other] {$count} players

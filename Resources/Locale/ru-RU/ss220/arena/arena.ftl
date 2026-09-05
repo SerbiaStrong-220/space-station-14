@@ -37,6 +37,10 @@ arena-lobby-category-duel = Дуэли
 arena-lobby-category-creative = Творчество
 arena-lobby-category-social = Социальные
 arena-lobby-category-misc = Разное
+arena-lobby-ghost-bar-name = ГостБар
+arena-lobby-ghost-bar-desc = Бар для призраков. Хамелеон-сет и пять мест.
+arena-lobby-chemistry-name = Химия
+arena-lobby-chemistry-desc = Химическая лаборатория для одного призрака.
 arena-lobby-template-size = { $count ->
     [one] {$count} игрок
     [few] {$count} игрока

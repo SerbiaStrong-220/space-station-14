@@ -219,3 +219,31 @@
     maps:
     - path: /Maps/SS220/Arenas/canvas_arena.yml
       loadout: ArenaLoadoutCanvas
+
+- type: entity
+  id: ArenaLobbyGhostBar
+  parent: BaseArenaLobbyRule
+  components:
+  - type: ArenaRule
+    displayName: arena-lobby-ghost-bar-name
+    description: arena-lobby-ghost-bar-desc
+    displayCategory: misc
+    mode: Creative
+    maxPlayers: 5
+    maps:
+    - path: /Maps/SS220/Arenas/ghost_bar.yml
+      loadout: ArenaLoadoutChameleon
+
+- type: entity
+  id: ArenaLobbyChemistry
+  parent: BaseArenaLobbyRule
+  components:
+  - type: ArenaRule
+    displayName: arena-lobby-chemistry-name
+    description: arena-lobby-chemistry-desc
+    displayCategory: misc
+    mode: Creative
+    maxPlayers: 1
+    maps:
+    - path: /Maps/SS220/Arenas/chem_arena.yml
+      loadout: ArenaLoadoutChemist
