@@ -486,7 +486,6 @@
 # Служба безопасности
 
   # ГСБ
-
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadBigCapHoS
@@ -498,6 +497,18 @@
     - type: Clothing
       sprite: SS220/Clothing/Head/Hats/hos_bigcap.rsi
 
+  # Смотритель
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadBigCapCommissar
+  name: the commissioner's cap
+  description: Reflections give rise to heresy. Heresy gives rise to retribution.
+  suffix: For playtime
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Head/Hats/commissar.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Head/Hats/commissar.rsi
 
   # Пилот
 - type: entity

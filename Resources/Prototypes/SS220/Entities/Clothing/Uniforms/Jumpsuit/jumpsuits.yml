@@ -662,6 +662,19 @@
 
 # Служба Безопасности
 
+  # Смотритель
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitCommissar
+  name: commissar's tunic
+  description: A commissar does not demand respect. He embodies it.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/commissar.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/commissar.rsi
+
   # Офицер СБ
 - type: entity
   parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220]
