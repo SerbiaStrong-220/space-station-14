@@ -12,3 +12,16 @@
     useDelay: 1 # equip noise spam.
   - type: InstantAction
     event: !type:ToggleInnerHandEvent
+
+- type: entity
+  id: ActionToggleNightVision
+  name: Toggle Night Vision
+  description: Toggle Night Vision
+  components:
+  - type: Action
+    useDelay: 1
+    itemIconStyle: NoItem
+    icon: { sprite: SS220/Interface/Actions/action_inner_toggle.rsi, state: in } # TODO: SPRITES
+    iconOn: { sprite: SS220/Interface/Actions/action_inner_toggle.rsi, state: out } # TODO: SPRITES
+  - type: InstantAction
+    event: !type:ToggleActionEvent
