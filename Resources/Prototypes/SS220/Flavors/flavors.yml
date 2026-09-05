@@ -82,3 +82,8 @@
   id: driedbnuuynyatina
   flavorType: Base
   description: flavor-base-driedbnuuynyatina
+
+- type: flavor
+  id: OrionNebula
+  flavorType: Complex
+  description: flavor-complex-Orion-Nebula

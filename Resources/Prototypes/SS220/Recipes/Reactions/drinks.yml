@@ -131,3 +131,19 @@
     amount: 1 
   products: 
     Skooma: 4
+    
+- type: reaction
+  id: OrionNebula
+  reactants:
+    Gin:
+      amount: 3
+    BlueCuracao:
+      amount: 1
+    JuiceBerry:
+      amount: 2
+    SodaWater:
+      amount: 3
+    Ice:
+      amount: 1
+  products:
+    OrionNebula: 10
