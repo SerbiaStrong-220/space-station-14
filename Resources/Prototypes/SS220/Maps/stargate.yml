@@ -1,0 +1,112 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: gameMap
+  id: Stargate
+  mapName: 'NSS Stargate'
+  mapPath: /Maps/SS220/stargate.yml
+  minPlayers: 0 # normal limit: 45
+  maxRandomOffset: 0
+  randomRotation: false
+  stations:
+    StarGate:
+      stationProto: StandardNanotrasenStation
+      components:
+        - type: StationEmergencyShuttle
+          emergencyShuttlePath: /Maps/SS220/Shuttles/emergency/emergency_stargate.yml
+        - type: StationCargoShuttle
+          path: /Maps/SS220/Shuttles/ss220-cargogate.yml
+        - type: StationNameSetup
+          mapNameTemplate: '{0} Stargate {1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '-SS220'
+        - type: StationJobs
+          availableJobs:
+            Passenger: [ -1, -1 ]
+            #Command
+            Captain: [ 1, 1 ]
+            BlueShield: [ 1, 1 ]
+            HeadOfPersonnel: [ 1, 1 ]
+            NanoTrasenRepresentative: [ 1, 1 ]
+            #Security
+            HeadOfSecurity: [ 1, 1 ]
+            Warden: [ 1, 1 ]
+            SeniorOfficer: [ 1, 1 ]
+            Detective: [ 1, 1 ]
+            SecurityPilot: [ 1, 2 ]
+            SecurityOfficer: [ 4, 5 ]
+            SecurityCadet: [ 2, 2 ]
+            Brigmedic: [ 1, 1 ]
+            #Engineering
+            ChiefEngineer: [ 1, 1 ]
+            SeniorEngineer: [ 1, 1]
+            StationEngineer: [ 8, 8 ]
+            AtmosphericTechnician: [ 3, 3 ]
+            TechnicalAssistant: [ 6, 6 ]
+            #Cargo
+            Quartermaster: [ 1, 1 ]
+            CargoTechnician: [ 5, 5 ]
+            SalvageSpecialist: [ 3, 3 ]
+            #Medical
+            ChiefMedicalOfficer: [ 1, 1 ]
+            SeniorPhysician: [ 1, 1]
+            MedicalDoctor: [ 4, 4 ]
+            Chemist: [ 2, 2 ]
+            Psychologist: [ 1, 1 ]
+            MedicalIntern: [ 6, 6 ]
+            Paramedic: [ 1, 1 ]
+            #Science
+            ResearchDirector: [ 1, 1 ]
+            SeniorResearcher: [ 1, 1 ]
+            Scientist: [ 8, 8 ]
+            ResearchAssistant: [ 6, 6 ]
+            Borg: [ 3, 3 ]
+            StationAi: [ 1, 1 ]
+            #Service
+            SeniorService: [ 1, 1 ]
+            Bartender: [ 1, 1 ]
+            Botanist: [ 3, 3 ]
+            Chef: [ 1, 1 ]
+            Clown: [ 1, 1 ]
+            Janitor: [ 3, 3 ]
+            Mime: [ 1, 1 ]
+            Chaplain: [ 1, 1 ]
+            Librarian: [ 1, 1 ]
+            Musician: [ 1, 1 ]
+            Reporter: [ 1, 1 ]
+            ServiceWorker: [ 4, 4 ]
+            Lawyer: [ 2, 2 ]
+            Zookeeper: [ 1, 1 ]
+        - type: StationGoal
+          goals:
+          #Base
+          - Shuttle
+          - Singularity
+          - SolarPanels
+          - Artifacts
+          - Bank
+          - Zoo
+          - Tesla
+          #SS220
+          - Saveplanet
+          - Expedition
+          - Guests
+          - Robotisation
+          - Homekeepers
+          - ComplexPVO
+          - SportComplex
+          #Station special
+          - Emergshelter
+          - Emergshuttleeng
+          - Emergshuttleservice
+          - Secshuttle
+          - Airsofttournament
+          - Voxvip
+          - JRoffice
+          - Cargomisery
+          - Bloodsample
+          - Botanicgarden
+          - Secretcloning
+          - Starchef
+          - Theatr
+          - Coldreagentroom 
