@@ -194,11 +194,11 @@
   desc: reagent-desc-Orion-Nebula
   physicalDesc: reagent-physical-desc-cosmic
   flavor: OrionNebula
-  color: "#20174D"
+  color: "#4F459B"
   metamorphicSprite:
     sprite: SS220/Objects/Consumable/Drinks/orionnebula.rsi
     state: icon_empty
-  metamorphicMaxFillLevels: 4
+  metamorphicMaxFillLevels: 6
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   fizziness: 0.2
