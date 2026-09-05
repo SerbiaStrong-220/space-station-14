@@ -13,6 +13,8 @@ job-description-migo = Вы - возвысившийся культист. Ва�
 
 job-description-security-pet = Питомец службы безопасности. Издевайтесь над офицерами или помогайте им.
 
+job-description-security-borg = Придерживайтесь своих законов помогая офицерам в обеспечении порядка на станции.
+
 job-description-space-dragon = { roles-antag-dragon-objective }
 
 job-description-syndicate-borg = { ghost-role-information-syndicate-cyborg-description }
