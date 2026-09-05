@@ -133,6 +133,11 @@
     graph: ShotgunSawn
     node: start
     deconstructionTarget: null
+#SS220 add tag for double-barreled
+  - type: Tag
+    tags:
+    - WeaponShotgunDoubleBarreled
+#SS220 add tag for double-barreled
 
 - type: entity
   name: double-barreled shotgun
