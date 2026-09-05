@@ -10,6 +10,14 @@
     size: Normal
   - type: Sprite
     sprite: Objects/Storage/boxes.rsi
+  # SS220-place-and-pickup-sounds-2 begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/ammobox_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/ammobox_drop.ogg
+  # SS220-place-and-pickup-sounds-2 end
 
 - type: entity
   abstract: true

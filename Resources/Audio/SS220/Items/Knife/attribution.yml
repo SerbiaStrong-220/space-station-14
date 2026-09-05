@@ -1,0 +1,10 @@
+- files:
+  - knife_drop1.ogg
+  - knife_drop2.ogg
+  - knife_drop3.ogg
+  - knife_pickup1.ogg
+  - knife_pickup2.ogg
+  - knife_pickup3.ogg
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from BandaStation"
+  source: "https://github.com/ss220club/BandaStation/commit/81c3d921295d6b925ff063bef13f623687d7bdbd"

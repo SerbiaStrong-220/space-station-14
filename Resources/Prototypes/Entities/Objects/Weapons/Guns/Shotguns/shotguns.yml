@@ -48,6 +48,14 @@
         ents: []
   - type: StaticPrice
     price: 500
+  # SS220-place-and-pickup-sounds-2 begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Weapons/shotgun_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Weapons/shotgun_drop.ogg
+  # SS220-place-and-pickup-sounds-2 end
 
 - type: entity
   name: Bulldog
@@ -111,6 +119,14 @@
   - type: Appearance
   - type: StaticPrice
     price: 5000
+  # SS220-place-and-pickup-sounds-2 begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Weapons/shotgun_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Weapons/shotgun_drop.ogg
+  # SS220-place-and-pickup-sounds-2 end
 
 - type: entity
   name: double-barreled shotgun
