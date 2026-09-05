@@ -15,14 +15,17 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
+using Content.Shared.Mind;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
+using Content.Shared.SS220.RoundEndInfo;
 using Content.Shared.Tools.EntitySystems;
 using Content.Shared.UserInterface;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Nutrition.EntitySystems;
@@ -55,6 +58,12 @@ public sealed partial class IngestionSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+
+    //ss220 add additional info for round start
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private IRoundEndInfoManager _infoManager = default!;
+    [Dependency] private INetManager _net = default!;
+    //ss220 add additional info for round end
 
     // Body Component Dependencies
     [Dependency] private readonly BodySystem _body = default!;
@@ -403,6 +412,11 @@ public sealed partial class IngestionSystem : EntitySystem
 
         var eventArgs = new DestructionEventArgs();
         RaiseLocalEvent(food, eventArgs);
+
+        //ss220 add additional info for round start
+        if (_net.IsServer && _mind.TryGetMind(args.User, out var mind, out _))
+            _infoManager.EnsureInfo<FoodInfo>().Record(mind);
+        //ss220 add additional info for round end
 
         PredictedDel(food);
 

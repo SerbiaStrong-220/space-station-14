@@ -4,12 +4,14 @@ using Content.Server.Administration.Logs;
 using Content.Server.SS220.TraitorDynamics;
 using Content.Server.Stack;
 using Content.Server.Store.Components;
+using Content.Server.Traitor.Uplink;
 using Content.Shared.Actions;
 using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.NPC.Systems;
+using Content.Shared.SS220.RoundEndInfo;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Content.Shared.UserInterface;
@@ -27,6 +29,9 @@ public sealed partial class StoreSystem
     [Dependency] private readonly StackSystem _stack = default!;
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    //ss220 add additional info for round start
+    [Dependency] private IRoundEndInfoManager _infoManager = default!;
+    //ss220 add additional info for round end
 
     private void InitializeUi()
     {
@@ -232,6 +237,17 @@ public sealed partial class StoreSystem
         listing.PurchaseAmount++; //track how many times something has been purchased
         if (msg.SoundSource != null && GetEntity(msg.SoundSource) != null)
             _audio.PlayEntity(component.BuySuccessSound, msg.Actor, GetEntity(msg.SoundSource.Value)); //cha-ching!
+
+        //ss220 add additional info for round start
+        if (listing.Cost.TryGetValue(UplinkSystem.TelecrystalCurrencyPrototype, out var costTc))
+        {
+            if (Mind.TryGetMind(msg.Actor, out var mind, out _))
+            {
+                var tcAmount = costTc.Int();
+                _infoManager.EnsureInfo<AntagPurchaseInfo>().RecordPurchase(mind, listing.ID, tcAmount);
+            }
+        }
+        //ss220 add additional info for round end
 
         var buyFinished = new StoreBuyFinishedEvent
         {
