@@ -9,6 +9,7 @@
   - Revolutionary
   - AllHostile
   - Wizard
+  - Xenoborg
   - DeathSquad #SS220 dq update
   - SpiderQueen #ss220 spider queen
   - CultYogg #SS220 CultYogg
@@ -16,6 +17,7 @@
 - type: npcFaction
   id: NanoTrasen
   hostile:
+  - PlantsFract #SS220 PlatFraction
   - SimpleHostile
   - Syndicate
   - Xeno
@@ -39,14 +41,16 @@
 
 - type: npcFaction
   id: PetsNT
+  friendly:
+  - NanoTrasen
   hostile:
+  - PlantsFract #SS220 PlatFraction
   - Mouse
   - SimpleHostile
   - Zombie
   - Xeno
   - SpiderQueen #ss220 spider queen
   - AllHostile
-  - Wizard
   - Dragon
 
 - type: npcFaction
@@ -72,6 +76,7 @@
 - type: npcFaction
   id: Syndicate
   hostile:
+  - PlantsFract #SS220 PlatFraction
   - NanoTrasen
   - DeathSquad #SS220 dq update
   - SimpleHostile
@@ -105,6 +110,7 @@
 - type: npcFaction
   id: Zombie
   hostile:
+  - PlantsFract #SS220 PlatFraction
   - NanoTrasen
   - DeathSquad #SS220 dq update
   - SimpleNeutral
@@ -123,6 +129,7 @@
 - type: npcFaction
   id: Revolutionary
   hostile:
+  - PlantsFract #SS220 PlatFraction
   - NanoTrasen
   - DeathSquad #SS220 dq update
   - Zombie
@@ -137,6 +144,7 @@
 - type: npcFaction
   id: AllHostile
   hostile:
+  - PlantsFract #SS220 PlatFraction
   - NanoTrasen
   - Dragon
   - Mouse
@@ -167,6 +175,7 @@
 - type: npcFaction
   id: Wizard
   hostile:
+  - PlantsFract #SS220 PlatFraction
   - NanoTrasen
   - Dragon
   - Mouse
@@ -190,6 +199,7 @@
   - Zombie
   - Revolutionary
   - Wizard
+  - PlantsFract #SS220 PlatFraction
 
   - Xeno # rivalry
 

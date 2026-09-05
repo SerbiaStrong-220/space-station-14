@@ -42,6 +42,11 @@
   name: trait-unrevivable-name
   description: trait-unrevivable-desc
   category: Disabilities
+  # SS220-IPC begin
+  blacklist:
+    components:
+    - Ipc
+  # SS220-IPC end
   components:
     - type: Unrevivable
       cloneable: true
@@ -83,16 +88,25 @@
   name: trait-painnumbness-name
   description: trait-painnumbness-desc
   category: Disabilities
-  components:
-  - type: PainNumbness
+  specials:
+  - !type:ApplyStatusEffectSpecial
+    statusEffects:
+    - TraitStatusEffectPainNumbness
 
 - type: trait
   id: Hemophilia
   name: trait-hemophilia-name
   description: trait-hemophilia-desc
   category: Disabilities
-  components:
-  - type: Hemophilia
+  # SS220-IPC begin
+  blacklist:
+    components:
+    - Ipc
+  # SS220-IPC end
+  specials:
+  - !type:ApplyStatusEffectSpecial
+    statusEffects:
+    - TraitStatusEffectHemophilia
 
 - type: trait
   id: ImpairedMobility

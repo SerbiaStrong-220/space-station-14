@@ -196,3 +196,13 @@
     Cold: 1.5
     Poison: 0.6
     Radiation: 0.5
+
+- type: damageModifierSet
+  id: Ipc
+  coefficients:
+    Blunt: 1.4
+    Slash: 1.4
+    Piercing: 1.4
+    Heat: 1.4
+    Shock: 1.4
+    Caustic: 1.4

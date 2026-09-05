@@ -55,7 +55,7 @@
   id: QuartermasterGear
   equipment:
     id: QuartermasterPDA
-    ears: ClothingHeadsetQM
+ #ears: ClothingHeadsetQM #SS220 HeadsetLoadout
     belt: BoxFolderClipboardThreePapers
     pocket1: AppraisalTool
   storage:

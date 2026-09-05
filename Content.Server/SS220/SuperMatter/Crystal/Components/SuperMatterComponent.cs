@@ -14,7 +14,7 @@ public sealed partial class SuperMatterComponent : Component
     // SM constants
     public const float MaximumIntegrity = 100f;
     public const float MinimumIntegrity = 0.01f;
-    public const float MinimumMatter = 280f;
+    public const float MinimumMatter = 465f;
     public const float MinimumInternalEnergy = 2120f;
 
     // State flags

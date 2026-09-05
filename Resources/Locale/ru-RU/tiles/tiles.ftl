@@ -134,5 +134,3 @@
 ## tiles-astro-ice = астро-лёд
 ## tiles-astro-snow = астро-снег
 ## tiles-wood-large = большой деревянный пол
-
-## SS220 Migration and renaming

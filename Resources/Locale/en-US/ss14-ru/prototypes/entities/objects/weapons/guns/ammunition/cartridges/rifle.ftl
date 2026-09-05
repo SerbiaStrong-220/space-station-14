@@ -6,5 +6,3 @@ ent-CartridgeRifleHighVelocity = cartridge (.20 rifle high-velocity)
     .desc = { ent-BaseCartridgeRifle.desc }
 ent-CartridgeRiflePractice = cartridge (.20 rifle practice)
     .desc = { ent-BaseCartridgeRifle.desc }
-ent-CartridgeRifleRubber = cartridge (.20 rifle rubber)
-    .desc = { ent-BaseCartridgeRifle.desc }

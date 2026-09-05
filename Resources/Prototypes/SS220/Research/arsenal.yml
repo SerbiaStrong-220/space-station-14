@@ -23,6 +23,19 @@
   - WeaponSniperCompact
 
 - type: technology
+  id: AutomatedDefenceSystems
+  name: research-technology-automated-defence-systems
+  icon:
+    sprite: Structures/Wallmounts/turret_controls.rsi
+    state: base
+  discipline: Arsenal
+  tier: 2
+  cost: 15000
+  recipeUnlocks:
+  - WeaponEnergyTurretSecurityControlPanelElectronics
+  - WeaponEnergyTurretSecurityMachineCircuitboard
+
+- type: technology
   id: PlasmaConverterAcceleration
   name: research-technology-plasma-converter-acceleration
   icon:

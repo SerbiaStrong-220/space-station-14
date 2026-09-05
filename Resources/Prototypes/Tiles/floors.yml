@@ -1,180 +1,177 @@
 - type: tile
+  id: BaseStationTile
+  abstract: true
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  heatCapacity: 10000
+  baseTurf: Plating
+  baseWhitelist:
+  - PlatingBrass
+  - FloorAsteroidIronsand
+  - FloorAsteroidSand
+  - FloorAsteroidSandBorderless
+  - FloorAsteroidIronsandBorderless
+  - FloorAsteroidSandRedBorderless
+  - PlatingAsteroid
+  - PlatingSnow
+  - FloorPlanetDirt
+  - FloorDesert
+  - FloorLowDesert
+  - FloorPlanetGrass
+  - FloorSnow
+  - FloorDirt
+  - PlatingRCD
+  - FloorHullReinforced
+
+- type: tile
   id: FloorSteel
+  parent: BaseStationTile
   name: tiles-steel-floor
-  sprite: /Textures/SS220/Tiles/steel.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/steel.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
+  # SS220 Tiles Retexture end
   itemDrop: FloorTileItemSteel
-  heatCapacity: 10000
 
 - type: tile
   id: FloorSteelCheckerLight
+  parent: BaseStationTile
   name: tiles-steel-floor-checker-light
-  sprite: /Textures/SS220/Tiles/cafeteria.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/cafeteria.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
+  # SS220 Tiles Retexture end
   itemDrop: FloorTileItemSteelCheckerLight
-  heatCapacity: 10000
 
 - type: tile
   id: FloorSteelCheckerDark
+  parent: BaseStationTile
   name: tiles-steel-floor-checker-dark
-  sprite: /Textures/SS220/Tiles/checker_dark.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/checker_dark.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
+  # SS220 Tiles Retexture end
   itemDrop: FloorTileItemSteelCheckerDark
-  heatCapacity: 10000
 
 - type: tile
   id: FloorSteelMini
+  parent: BaseStationTile
   name: tiles-steel-floor-mini
-  sprite: /Textures/SS220/Tiles/steel_mini.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/steel_mini.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
+  # SS220 Tiles Retexture end
   itemDrop: FloorTileItemSteelMini
-  heatCapacity: 10000
 
 - type: tile
   id: FloorSteelPavement
+  parent: BaseStationTile
   name: tiles-steel-floor-pavement
-  sprite: /Textures/SS220/Tiles/steel_pavement.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/steel_pavement.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
+  # SS220 Tiles Retexture end
   itemDrop: FloorTileItemSteelPavement
-  heatCapacity: 10000
 
 - type: tile
   id: FloorSteelDiagonal
+  parent: BaseStationTile
   name: tiles-steel-floor-diagonal
-  sprite: /Textures/SS220/Tiles/steel_diagonal.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/steel_diagonal.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
+  # SS220 Tiles Retexture end
   itemDrop: FloorTileItemSteelDiagonal
-  heatCapacity: 10000
 
 - type: tile
   id: FloorSteelOffset
+  parent: BaseStationTile
   name: tiles-steel-floor-offset
   sprite: /Textures/SS220/Tiles/steel_offset.png # SS220 Tiles Retexture
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
   itemDrop: FloorTileItemSteelOffset
-  heatCapacity: 10000
 
 - type: tile
   id: FloorSteelMono
+  parent: BaseStationTile
   name: tiles-steel-floor-mono
-  sprite: /Textures/SS220/Tiles/steel_mono.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/steel_mono.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepTile
+  # SS220 Tiles Retexture end
   itemDrop: FloorTileItemSteelMono
-  heatCapacity: 10000
 
 - type: tile
   id: FloorSteelPavementVertical
+  parent: BaseStationTile
   name: tiles-steel-floor-pavement-vertical
-  sprite: /Textures/SS220/Tiles/steel_pavement_vertical.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/steel_pavement_vertical.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepTile
+  # SS220 Tiles Retexture end
   itemDrop: FloorTileItemSteelPavementVertical
-  heatCapacity: 10000
 
 - type: tile
   id: FloorSteelHerringbone
+  parent: BaseStationTile
   name: tiles-steel-floor-herringbone
-  sprite: /Textures/SS220/Tiles/steel_herringbone.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/steel_herringbone.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepTile
+  # SS220 Tiles Retexture end
   itemDrop: FloorTileItemSteelHerringbone
-  heatCapacity: 10000
 
 - type: tile
   id: FloorSteelDiagonalMini
+  parent: BaseStationTile
   name: tiles-steel-floor-diagonal-mini
+  # SS220 Tiles Retexture begin
   sprite: /Textures/SS220/Tiles/steel_diagonal_mini.png # SS220 Tiles Retexture
   variants: 1
 #  placementVariants:
@@ -182,58 +179,90 @@
 #  - 1.0
 #  - 1.0
 #  - 1.0
+  # SS220 Tiles Retexture end
   baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemSteelDiagonalMini
-  heatCapacity: 10000
+
+- type: tile
+  parent: BaseStationTile
+  id: FloorSteelSlatsContinuous
+  name: tiles-steel-floor-slats-continuous
+  sprite: /Textures/Tiles/steel_slats_continuous.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  itemDrop: FloorTileItemSteelSlatsContinuous
+  allowRotationMirror: true
+
+- type: tile
+  parent: BaseStationTile
+  id: FloorSteelHorizontalSlatsBordered
+  name: tiles-steel-floor-horizontal-slats-bordered
+  sprite: /Textures/Tiles/steel_horizontal_slats_bordered.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  itemDrop: FloorTileItemSteelHorizontalSlatsBordered
+
+- type: tile
+  parent: BaseStationTile
+  id: FloorSteelVerticalSlatsBordered
+  name: tiles-steel-floor-vertical-slats-bordered
+  sprite: /Textures/Tiles/steel_vertical_slats_bordered.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  itemDrop: FloorTileItemSteelVerticalSlatsBordered
 
 - type: tile
   id: FloorBrassFilled
+  parent: BaseStationTile
   name: tiles-brass-floor-filled
   sprite: /Textures/Tiles/Misc/clockwork/clockwork_floor_filled.png
-  baseTurf: PlatingBrass
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepHull
   itemDrop: FloorTileItemBrassFilled
-  heatCapacity: 10000
 
 - type: tile
   id: FloorBrassReebe
+  parent: BaseStationTile
   name: tiles-brass-floor-reebe
   sprite: /Textures/Tiles/Misc/clockwork/reebe.png
-  baseTurf: PlatingBrass
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepHull
   itemDrop: FloorTileItemBrassReebe
-  heatCapacity: 10000
 
 - type: tile
   id: FloorPlastic
+  parent: BaseStationTile
   name: tiles-plastic-floor
-  sprite: /Textures/SS220/Tiles/plastic.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/plastic.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
+  # SS220 Tiles Retexture end
   itemDrop: FloorTileItemSteel
-  heatCapacity: 10000
 
 - type: tile
   id: FloorWood
+  parent: BaseStationTile
   name: tiles-wood
   sprite: /Textures/Tiles/wood.png
   variants: 4
@@ -242,211 +271,235 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepWood
   barestepSounds:
     collection: BarestepWood
   itemDrop: FloorTileItemWood
-  heatCapacity: 10000
 
 - type: tile
   id: FloorWhite
+  parent: BaseStationTile
   name: tiles-white-floor
-  sprite: /Textures/SS220/Tiles/white.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/white.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
+  # SS220 Tiles Retexture end
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemWhite
-  heatCapacity: 10000
 
 - type: tile
   id: FloorWhiteMini
+  parent: BaseStationTile
   name: tiles-white-floor-mini
-  sprite: /Textures/SS220/Tiles/white_mini.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/white_mini.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
+  # SS220 Tiles Retexture end
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemWhiteMini
-  heatCapacity: 10000
+
+- type: tile
+  parent: BaseStationTile
+  id: FloorWhiteSlatsContinuous
+  name: tiles-white-floor-slats-continuous
+  sprite: /Textures/Tiles/white_slats_continuous.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  itemDrop: FloorTileItemWhiteSlatsContinuous
+  allowRotationMirror: true
+
+- type: tile
+  parent: BaseStationTile
+  id: FloorWhiteVerticalSlatsBordered
+  name: tiles-white-floor-vertical-slats-bordered
+  sprite: /Textures/Tiles/white_vertical_slats_bordered.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  itemDrop: FloorTileItemWhiteVerticalSlatsBordered
+
+- type: tile
+  parent: BaseStationTile
+  id: FloorWhiteHorizontalSlatsBordered
+  name: tiles-white-floor-horizontal-slats-bordered
+  sprite: /Textures/Tiles/white_horizontal_slats_bordered.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  itemDrop: FloorTileItemWhiteHorizontalSlatsBordered
 
 - type: tile
   id: FloorWhitePavement
+  parent: BaseStationTile
   name: tiles-white-floor-pavement
-  sprite: /Textures/SS220/Tiles/white_pavement.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/white_pavement.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
+  # SS220 Tiles Retexture end
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemWhitePavement
-  heatCapacity: 10000
 
 - type: tile
   id: FloorWhiteDiagonal
+  parent: BaseStationTile
   name: tiles-white-floor-diagonal
-  sprite: /Textures/SS220/Tiles/white_diagonal.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/white_diagonal.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
+  # SS220 Tiles Retexture end
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemWhiteDiagonal
-  heatCapacity: 10000
 
 - type: tile
   id: FloorWhiteOffset
+  parent: BaseStationTile
   name: tiles-white-floor-offset
   sprite: /Textures/SS220/Tiles/white_offset.png # SS220 Tiles Retexture
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemWhiteOffset
-  heatCapacity: 10000
 
 - type: tile
   id: FloorWhiteMono
+  parent: BaseStationTile
   name: tiles-white-floor-mono
-  sprite: /Textures/SS220/Tiles/white_mono.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/white_mono.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
+  # SS220 Tiles Retexture end
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemWhiteMono
-  heatCapacity: 10000
 
 - type: tile
   id: FloorWhitePavementVertical
+  parent: BaseStationTile
   name: tiles-white-floor-pavement-vertical
-  sprite: /Textures/SS220/Tiles/white_pavement_vertical.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/white_pavement_vertical.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
+  # SS220 Tiles Retexture end
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemWhitePavementVertical
-  heatCapacity: 10000
 
 - type: tile
   id: FloorWhiteHerringbone
+  parent: BaseStationTile
   name: tiles-white-floor-herringbone
-  sprite: /Textures/SS220/Tiles/white_herringbone.png # SS220 Tiles Retexture
-  variants: 1
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/white_herringbone.png
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
+  # SS220 Tiles Retexture end
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemWhiteHerringbone
-  heatCapacity: 10000
 
 - type: tile
   id: FloorWhiteDiagonalMini
+  parent: BaseStationTile
   name: tiles-white-floor-diagonal-mini
-  sprite: /Textures/SS220/Tiles/white_diagonal_mini.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/white_diagonal_mini.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
+  # SS220 Tiles Retexture end
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemWhiteDiagonalMini
-  heatCapacity: 10000
 
 - type: tile
   id: FloorWhitePlastic
+  parent: BaseStationTile
   name: tiles-plastic-white-floor
-  sprite: /Textures/SS220/Tiles/white_plastic.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/white_plastic.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
+  # SS220 Tiles Retexture end
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemWhite
-  heatCapacity: 10000
 
 - type: tile
   id: FloorDark
+  parent: BaseStationTile
   name: tiles-dark-floor
-  sprite: /Textures/SS220/Tiles/dark.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/dark.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
+  # SS220 Tiles Retexture end
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemDark
-  heatCapacity: 10000
 
 - type: tile
   id: FloorDarkMini
+  parent: BaseStationTile
   name: tiles-dark-floor-mini
+  # SS220 Tiles Retexture begin
   sprite: /Textures/SS220/Tiles/dark_mini.png # SS220 Tiles Retexture
   variants: 1
 #  placementVariants:
@@ -454,216 +507,229 @@
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
+  # SS220 Tiles Retexture end
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemDarkMini
-  heatCapacity: 10000
+
+- type: tile
+  parent: BaseStationTile
+  id: FloorDarkSlatsContinuous
+  name: tiles-dark-floor-slats-continuous
+  sprite: /Textures/Tiles/dark_slats_continuous.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  itemDrop: FloorTileItemDarkSlatsContinuous
+  allowRotationMirror: true
+
+- type: tile
+  parent: BaseStationTile
+  id: FloorDarkVerticalSlatsBordered
+  name: tiles-dark-floor-vertical-slats-bordered
+  sprite: /Textures/Tiles/dark_vertical_slats_bordered.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  itemDrop: FloorTileItemDarkVerticalSlatsBordered
+
+- type: tile
+  parent: BaseStationTile
+  id: FloorDarkHorizontalSlatsBordered
+  name: tiles-dark-floor-horizontal-slats-bordered
+  sprite: /Textures/Tiles/dark_horizontal_slats_bordered.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  itemDrop: FloorTileItemDarkHorizontalSlatsBordered
 
 - type: tile
   id: FloorDarkPavement
+  parent: BaseStationTile
   name: tiles-dark-floor-pavement
-  sprite: /Textures/SS220/Tiles/dark_pavement.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/dark_pavement.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
+  # SS220 Tiles Retexture end
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemDarkPavement
-  heatCapacity: 10000
 
 - type: tile
   id: FloorDarkDiagonal
+  parent: BaseStationTile
   name: tiles-dark-floor-diagonal
-  sprite: /Textures/SS220/Tiles/dark_diagonal.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/dark_diagonal.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
+  # SS220 Tiles Retexture end
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemDarkDiagonal
-  heatCapacity: 10000
 
 - type: tile
   id: FloorDarkOffset
+  parent: BaseStationTile
   name: tiles-dark-floor-offset
   sprite: /Textures/SS220/Tiles/dark_offset.png # SS220 Tiles Retexture
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemDarkOffset
-  heatCapacity: 10000
 
 - type: tile
   id: FloorDarkMono
+  parent: BaseStationTile
   name: tiles-dark-floor-mono
-  sprite: /Textures/SS220/Tiles/dark_mono.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/dark_mono.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
+  # SS220 Tiles Retexture end
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemDarkMono
-  heatCapacity: 10000
 
 - type: tile
   id: FloorDarkPavementVertical
+  parent: BaseStationTile
   name: tiles-dark-floor-pavement-vertical
-  sprite: /Textures/SS220/Tiles/dark_pavement_vertical.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/dark_pavement_vertical.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
+  # SS220 Tiles Retexture end
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemDarkPavementVertical
-  heatCapacity: 10000
 
 - type: tile
   id: FloorDarkHerringbone
+  parent: BaseStationTile
   name: tiles-dark-floor-herringbone
-  sprite: /Textures/SS220/Tiles/dark_herringbone.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/dark_herringbone.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
+  # SS220 Tiles Retexture end
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemDarkHerringbone
-  heatCapacity: 10000
 
 - type: tile
   id: FloorDarkDiagonalMini
+  parent: BaseStationTile
   name: tiles-dark-floor-diagonal-mini
-  sprite: /Textures/SS220/Tiles/dark_diagonal_mini.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/dark_diagonal_mini.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
+  # SS220 Tiles Retexture end
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemDarkDiagonalMini
-  heatCapacity: 10000
 
 - type: tile
   id: FloorDarkPlastic
+  parent: BaseStationTile
   name: tiles-plastic-dark-floor
-  sprite: /Textures/SS220/Tiles/dark_plastic.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/dark_plastic.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
+  # SS220 Tiles Retexture end
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemDark
-  heatCapacity: 10000
 
 - type: tile
   id: FloorTechMaint
+  parent: BaseStationTile
   name: tiles-techmaint-floor
   sprite: /Textures/SS220/Tiles/tech_maint.png # SS220 Tiles Retexture
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepHull
   itemDrop: FloorTileItemTechmaint
-  heatCapacity: 10000
 
 - type: tile
   id: FloorTechMaintDark
+  parent: BaseStationTile
   name: tiles-techmaint-floor-dark
   sprite: /Textures/Tiles/tech_maint_dark.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepHull
   itemDrop: FloorTileItemTechmaintDark
-  heatCapacity: 10000
 
 - type: tile
   id: FloorReinforced
+  parent: BaseStationTile
   name: tiles-reinforced-floor
   sprite: /Textures/SS220/Tiles/reinforced.png # SS220 Tiles Retexture
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepHull
   itemDrop: PartRodMetal1
-  heatCapacity: 10000
 
 - type: tile
   id: FloorMono
+  parent: BaseStationTile
   name: tiles-mono-floor
   tags: [ tile-tag-other ] # SS220 Tiles Resprite
   sprite: /Textures/SS220/Tiles/mono.png # SS220 Tiles Retexture
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemMono
-  heatCapacity: 10000
 
 - type: tile
   id: FloorLino
+  parent: BaseStationTile
   name: tiles-linoleum-floor
   tags: [ tile-tag-other ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/lino.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemLino
-  heatCapacity: 10000
 
 - type: tile
   id: FloorSteelDirty
+  parent: BaseStationTile
   name: tiles-dirty-steel-floor
   sprite: /Textures/Tiles/steel_dirty.png
   #SS220-our-tiles-begin
@@ -674,44 +740,36 @@
   # - 1.0
   # - 1.0
   #SS220-our-tiles-end
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepPlating
   itemDrop: FloorTileItemDirty
-  heatCapacity: 10000
 
 - type: tile
   id: FloorElevatorShaft
+  parent: BaseStationTile
   name: tiles-elevator-shaft
   tags: [ tile-tag-other ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/elevator_shaft.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepHull
   itemDrop: FloorTileItemElevatorShaft
-  heatCapacity: 10000
 
 - type: tile
   id: FloorMetalDiamond
+  parent: BaseStationTile
   name: tiles-diamond-plate-floor
   tags: [ tile-tag-other ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/metaldiamond.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepHull
   itemDrop: FloorTileItemMetalDiamond
-  heatCapacity: 10000
 
 - type: tile
   id: FloorRockVault
+  parent: BaseStationTile
   name: tiles-rock-floor
-  sprite: /Textures/SS220/Tiles/rock_vault.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/rock_vault.png
   variants: 16
   placementVariants:
   - 1.0
@@ -730,193 +788,144 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
+  # SS220 Tiles Retexture end
   footstepSounds:
     collection: FootstepAsteroid
   itemDrop: FloorTileItemRockVault
-  heatCapacity: 10000
 
 - type: tile
   id: FloorBlue
+  parent: BaseStationTile
   name: tiles-blue-tile
   tags: [ tile-tag-other ] # SS220 Tiles Resprite
   sprite: /Textures/SS220/Tiles/blue.png # SS220 Tiles Retexture
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemBlue
-  heatCapacity: 10000
 
 - type: tile
   id: FloorSteelLime
+  parent: BaseStationTile
   name: tiles-lime-floor
-  tags: [ tile-tag-other ] # SS220 Tiles Resprite
-  sprite: /Textures/SS220/Tiles/lime.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  tags: [ tile-tag-other ]
+  sprite: /Textures/SS220/Tiles/lime.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
+  # SS220 Tiles Retexture end
   itemDrop: FloorTileItemLime
-  heatCapacity: 10000
 
 - type: tile
   id: FloorMining
+  parent: BaseStationTile
   name: tiles-mining-tile
   sprite: /Textures/SS220/Tiles/mining_floor.png # SS220 Tiles Retexture
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemMining
-  heatCapacity: 10000
 
 - type: tile
   id: FloorMiningDark
+  parent: BaseStationTile
   name: tiles-mining-dark-tile
   sprite: /Textures/SS220/Tiles/mining_floor_dark.png # SS220 Tiles Retexture
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemMiningDark
-  heatCapacity: 10000
 
 - type: tile
   id: FloorMiningLight
+  parent: BaseStationTile
   name: tiles-mining-light-tile
   sprite: /Textures/SS220/Tiles/mining_floor_light.png # SS220 Tiles Retexture
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemMiningLight
-  heatCapacity: 10000
 
 # Departmental
 - type: tile
   id: FloorFreezer
+  parent: BaseStationTile
   name: tiles-freezer
   sprite: /Textures/SS220/Tiles/freezer.png # SS220 Tiles Retexture
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepHull
   itemDrop: FloorTileItemFreezer
-  heatCapacity: 10000
 
 - type: tile
   id: FloorShowroom
+  parent: BaseStationTile
   name: tiles-showroom-floor
   sprite: /Textures/SS220/Tiles/showroom.png # SS220 Tiles Retexture
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
   itemDrop: FloorTileItemShowroom
-  heatCapacity: 10000
 
 - type: tile
   id: FloorHydro
+  parent: BaseStationTile
   name: tiles-hydro-floor
   tags: [ tile-tag-other ] # SS220 Tiles Resprite
   sprite: /Textures/SS220/Tiles/hydro.png # SS220 Tiles Retexture
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
   itemDrop: FloorTileItemHydro
-  heatCapacity: 10000
 
 - type: tile
   id: FloorBar
+  parent: BaseStationTile
   name: tiles-bar-floor
-  tags: [ tile-tag-other ] # SS220 Tiles Resprite
-  sprite: /Textures/SS220/Tiles/bar.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  tags: [ tile-tag-other ]
+  sprite: /Textures/SS220/Tiles/bar.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
+  # SS220 Tiles Retexture end
   itemDrop: FloorTileItemBar
-  heatCapacity: 10000
 
 - type: tile
   id: FloorClown
+  parent: BaseStationTile
   name: tiles-clown-floor
   tags: [ tile-tag-other ] # SS220 Tiles Resprite
   sprite: /Textures/SS220/Tiles/clown.png # SS220 Tiles Retexture
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
   itemDrop: FloorTileItemClown
-  heatCapacity: 10000
 
 - type: tile
   id: FloorMime
+  parent: BaseStationTile
   name: tiles-mime-floor
   tags: [ tile-tag-other ] # SS220 Tiles Resprite
   sprite: /Textures/SS220/Tiles/mime.png # SS220 Tiles Retexture
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
   itemDrop: FloorTileItemMime
-  heatCapacity: 10000
 
 - type: tile
   id: FloorKitchen
+  parent: BaseStationTile
   name: tiles-kitchen-floor
   tags: [ tile-tag-other ] # SS220 Tiles Resprite
   sprite: /Textures/SS220/Tiles/kitchen.png # SS220 Tiles Retexture
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemKitchen
-  heatCapacity: 10000
 
 - type: tile
   id: FloorLaundry
+  parent: BaseStationTile
   name: tiles-laundry-floor
   tags: [ tile-tag-other ] # SS220 Tiles Resprite
   sprite: /Textures/SS220/Tiles/laundry.png # SS220 Tiles Retexture
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemLaundry
-  heatCapacity: 10000
 
 - type: tile
   id: FloorSteelDamaged
+  parent: BaseStationTile
   name: tiles-steel-floor
   sprite: /Textures/Tiles/steel_damaged.png
   variants: 5
@@ -926,17 +935,12 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
   itemDrop: FloorTileItemSteel #This should probably be made null when it becomes possible to make it such, in SS13 prying destroyed tiles wouldn't give you anything.
-  heatCapacity: 10000
 
 # Concrete
 - type: tile
   id: FloorConcrete
+  parent: BaseStationTile
   name: tiles-concrete-tile
   sprite: /Textures/SS220/Tiles/concrete.png # SS220 Tiles Retexture
   variants: 4
@@ -945,16 +949,13 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemConcrete
-  heatCapacity: 10000
 
 - type: tile
   id: FloorConcreteMono
+  parent: BaseStationTile
   name: tiles-concrete-slab
   sprite: /Textures/SS220/Tiles/concrete_mono.png # SS220 Tiles Retexture
   variants: 4
@@ -963,16 +964,13 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemConcreteMono
-  heatCapacity: 10000
 
 - type: tile
   id: FloorConcreteSmooth
+  parent: BaseStationTile
   name: tiles-concrete-smooth
   sprite: /Textures/SS220/Tiles/concrete_smooth.png # SS220 Tiles Retexture
   variants: 4
@@ -981,16 +979,13 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemConcreteSmooth
-  heatCapacity: 10000
 
 - type: tile
   id: FloorGrayConcrete
+  parent: BaseStationTile
   name: tiles-gray-concrete-tile
   sprite: /Textures/SS220/Tiles/grayconcrete.png # SS220 Tiles Retexture
   variants: 4
@@ -999,16 +994,13 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemGrayConcrete
-  heatCapacity: 10000
 
 - type: tile
   id: FloorGrayConcreteMono
+  parent: BaseStationTile
   name: tiles-gray-concrete-slab
   sprite: /Textures/SS220/Tiles/grayconcrete_mono.png # SS220 Tiles Retexture
   variants: 4
@@ -1017,16 +1009,13 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemGrayConcreteMono
-  heatCapacity: 10000
 
 - type: tile
   id: FloorGrayConcreteSmooth
+  parent: BaseStationTile
   name: tiles-gray-concrete-smooth
   sprite: /Textures/SS220/Tiles/grayconcrete_smooth.png # SS220 Tiles Retexture
   variants: 4
@@ -1035,16 +1024,13 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemGrayConcreteSmooth
-  heatCapacity: 10000
 
 - type: tile
   id: FloorOldConcrete
+  parent: BaseStationTile
   name: tiles-old-concrete-tile
   sprite: /Textures/SS220/Tiles/oldconcrete.png # SS220 Tiles Retexture
   variants: 4
@@ -1053,16 +1039,13 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemOldConcrete
-  heatCapacity: 10000
 
 - type: tile
   id: FloorOldConcreteMono
+  parent: BaseStationTile
   name: tiles-old-concrete-slab
   sprite: /Textures/SS220/Tiles/oldconcrete_mono.png # SS220 Tiles Retexture
   variants: 4
@@ -1071,16 +1054,13 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemOldConcreteMono
-  heatCapacity: 10000
 
 - type: tile
   id: FloorOldConcreteSmooth
+  parent: BaseStationTile
   name: tiles-old-concrete-smooth
   sprite: /Textures/SS220/Tiles/oldconcrete_smooth.png # SS220 Tiles Retexture
   variants: 4
@@ -1089,110 +1069,89 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemOldConcreteSmooth
-  heatCapacity: 10000
 
 # Carpets (non smoothing)
 - type: tile
   id: FloorArcadeBlue
+  parent: BaseStationTile
   name: tiles-blue-arcade-floor
   sprite: /Textures/Tiles/arcadeblue.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepCarpet
   barestepSounds:
     collection: BarestepCarpet
   friction: 1.25
   itemDrop: FloorTileItemArcadeBlue
-  heatCapacity: 10000
 
 - type: tile
   id: FloorArcadeBlue2
+  parent: BaseStationTile
   name: tiles-blue-arcade-floor
   sprite: /Textures/Tiles/arcadeblue2.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepCarpet
   barestepSounds:
     collection: BarestepCarpet
   friction: 1.25
   itemDrop: FloorTileItemArcadeBlue2
-  heatCapacity: 10000
 
 - type: tile
   id: FloorArcadeRed
+  parent: BaseStationTile
   name: tiles-red-arcade-floor
   sprite: /Textures/Tiles/arcadered.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepCarpet
   barestepSounds:
     collection: BarestepCarpet
   friction: 1.25
   itemDrop: FloorTileItemArcadeRed
-  heatCapacity: 10000
 
 - type: tile
   id: FloorEighties
+  parent: BaseStationTile
   name: tiles-eighties-floor
   tags: [ tile-tag-other ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/eighties.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepCarpet
   barestepSounds:
     collection: BarestepCarpet
   friction: 1.25
   itemDrop: FloorTileItemEighties
-  heatCapacity: 10000
 
 - type: tile
   id: FloorCarpetClown
+  parent: BaseStationTile
   name: tiles-clown-carpet-floor
   tags: [ tile-tag-other ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/carpetclown.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepCarpet
   barestepSounds:
     collection: BarestepCarpet
   friction: 1.25
   itemDrop: FloorTileItemCarpetClown
-  heatCapacity: 10000
 
 - type: tile
   id: FloorCarpetOffice
+  parent: BaseStationTile
   name: tiles-office-carpet-floor
   tags: [ tile-tag-other ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/carpetoffice.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepCarpet
   barestepSounds:
     collection: BarestepCarpet
   friction: 1.25
   itemDrop: FloorTileItemCarpetOffice
-  heatCapacity: 10000
 
 - type: tile
   id: FloorBoxing
+  parent: BaseStationTile
   name: tiles-boxing-ring-floor
   tags: [ tile-tag-other ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/boxing.png
@@ -1202,17 +1161,12 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
   friction: 1.25
   itemDrop: FloorTileItemBoxing
-  heatCapacity: 10000
 
 - type: tile
   id: FloorGym
+  parent: BaseStationTile
   name: tiles-gym-floor
   tags: [ tile-tag-other ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/gym.png
@@ -1222,215 +1176,167 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
   friction: 1.25
   itemDrop: FloorTileItemGym
-  heatCapacity: 10000
 
 # Shuttle
 - type: tile
   id: FloorShuttleWhite
+  parent: BaseStationTile
   name: tiles-white-shuttle-floor
   tags: [ tile-tag-shuttle ] # SS220 Resprite Tiles
   sprite: /Textures/Tiles/shuttlewhite.png
-  # variants: 4
-  # placementVariants:
-  # - 1.0
-  # - 1.0
-  # - 1.0
-  # - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
+  variants: 1
+#  placementVariants:
+#  - 1.0
+#  - 1.0
+#  - 1.0
+#  - 1.0
   itemDrop: FloorTileItemShuttleWhite
-  heatCapacity: 10000
 
 - type: tile
   id: FloorShuttleGrey
+  parent: BaseStationTile
   name: tiles-grey-shuttle-floor
   tags: [ tile-tag-shuttle ] # SS220 Resprite Tiles
   sprite: /Textures/Tiles/shuttlegrey.png
-  # variants: 4
-  # placementVariants:
-  # - 1.0
-  # - 1.0
-  # - 1.0
-  # - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
+  variants: 1
+#  placementVariants:
+#  - 1.0
+#  - 1.0
+#  - 1.0
+#  - 1.0
   itemDrop: FloorTileItemShuttleGrey
-  heatCapacity: 10000
 
 - type: tile
   id: FloorShuttleBlack
+  parent: BaseStationTile
   name: tiles-black-shuttle-floor
   tags: [ tile-tag-shuttle ] # SS220 Resprite Tiles
   sprite: /Textures/Tiles/shuttleblack.png
-  # variants: 4
-  # placementVariants:
-  # - 1.0
-  # - 1.0
-  # - 1.0
-  # - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
+  variants: 1
+#  placementVariants:
+#  - 1.0
+#  - 1.0
+#  - 1.0
+#  - 1.0
   itemDrop: FloorTileItemShuttleBlack
-  heatCapacity: 10000
 
 - type: tile
   id: FloorShuttleBlue
+  parent: BaseStationTile
   name: tiles-blue-shuttle-floor
   tags: [ tile-tag-shuttle ] # SS220 Resprite Tiles
   sprite: /Textures/Tiles/shuttleblue.png
-  # variants: 4
-  # placementVariants:
-  # - 1.0
-  # - 1.0
-  # - 1.0
-  # - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
+  variants: 1
+#  placementVariants:
+#  - 1.0
+#  - 1.0
+#  - 1.0
+#  - 1.0
   itemDrop: FloorTileItemShuttleBlue
-  heatCapacity: 10000
 
 - type: tile
   id: FloorShuttleOrange
+  parent: BaseStationTile
   name: tiles-orange-shuttle-floor
   tags: [ tile-tag-shuttle ] # SS220 Resprite Tiles
   sprite: /Textures/Tiles/shuttleorange.png
-  # variants: 4
-  # placementVariants:
-  # - 1.0
-  # - 1.0
-  # - 1.0
-  # - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
+  variants: 1
+#  placementVariants:
+#  - 1.0
+#  - 1.0
+#  - 1.0
+#  - 1.0
   itemDrop: FloorTileItemShuttleOrange
-  heatCapacity: 10000
 
 - type: tile
   id: FloorShuttlePurple
+  parent: BaseStationTile
   name: tiles-purple-shuttle-floor
   tags: [ tile-tag-shuttle ] # SS220 Resprite Tiles
   sprite: /Textures/Tiles/shuttlepurple.png
-  # variants: 4
-  # placementVariants:
-  # - 1.0
-  # - 1.0
-  # - 1.0
-  # - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
+  variants: 1
+#  placementVariants:
+#  - 1.0
+#  - 1.0
+#  - 1.0
+#  - 1.0
   itemDrop: FloorTileItemShuttlePurple
-  heatCapacity: 10000
 
 - type: tile
   id: FloorShuttleRed
+  parent: BaseStationTile
   name: tiles-red-shuttle-floor
   tags: [ tile-tag-shuttle ] # SS220 Resprite Tiles
   sprite: /Textures/Tiles/shuttlered.png
-  # variants: 4
-  # placementVariants:
-  # - 1.0
-  # - 1.0
-  # - 1.0
-  # - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
+  variants: 1
+#  placementVariants:
+#  - 1.0
+#  - 1.0
+#  - 1.0
+#  - 1.0
   itemDrop: FloorTileItemShuttleRed
-  heatCapacity: 10000
 
 
 # Materials
 - type: tile
   id: FloorGold
+  parent: BaseStationTile
   name: tiles-gold-tile
   tags: [ tile-tag-other ] # SS220 Tiles Resprite
   sprite: /Textures/SS220/Tiles/gold.png # SS220 Tiles Retexture
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemGold
-  heatCapacity: 10000
 
 - type: tile
   id: FloorSilver
+  parent: BaseStationTile
   name: tiles-silver-tile
   tags: [ tile-tag-other ] # SS220 Tiles Resprite
   sprite: /Textures/SS220/Tiles/silver.png # SS220 Tiles Retexture
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemSilver
-  heatCapacity: 10000
 
 - type: tile
   id: FloorGlass
+  parent: BaseStationTile
   name: tiles-glass-floor
-  sprite: /Textures/SS220/Tiles/glass.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/glass.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
+  # SS220 Tiles Retexture end
   footstepSounds:
     collection: FootstepTile
   itemDrop: SheetGlass1
-  heatCapacity: 10000
 
 - type: tile
   id: FloorRGlass
+  parent: BaseStationTile
   name: tiles-reinforced-glass-floor
-  sprite: /Textures/SS220/Tiles/rglass.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/rglass.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
+  # SS220 Tiles Retexture end
   footstepSounds:
     collection: FootstepTile
   itemDrop: SheetRGlass1
-  heatCapacity: 10000
 
 - type: tile
   id: FloorMetalFoam
+  parent: BaseStationTile
   name: tiles-metal-foam
   tags: [ tile-tag-other ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/foammetal.png
@@ -1442,17 +1348,14 @@
 #  - 1.0
   placementVariants:
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepHull
   itemDrop: SheetSteel1
-  heatCapacity: 10000
 
 # Circuits
 - type: tile
   id: FloorGreenCircuit
+  parent: BaseStationTile
   name: tiles-green-circuit-floor
   sprite: /Textures/SS220/Tiles/green_circuit.png # SS220 Tiles Retexture
   variants: 4 # SS220 Tile Resprite start
@@ -1461,16 +1364,13 @@
   - 1.0
   - 1.0
   - 1.0 # SS220 Tile Resprite end
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepHull
   itemDrop: FloorTileItemGCircuit
-  heatCapacity: 10000
 
 - type: tile
   id: FloorBlueCircuit
+  parent: BaseStationTile
   name: tiles-blue-circuit-floor
   sprite: /Textures/SS220/Tiles/blue_circuit.png # SS220 Tiles Retexture
   variants: 4 # SS220 Tile Resprite start
@@ -1479,25 +1379,20 @@
   - 1.0
   - 1.0
   - 1.0 # SS220 Tile Resprite end
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepHull
   itemDrop: FloorTileItemBCircuit
-  heatCapacity: 10000
 
+# SS220-own-tiles-begin
 # - type: tile
 #   id: FloorRedCircuit
+#   parent: BaseStationTile
 #   name: tiles-red-circuit-floor
 #   sprite: /Textures/Tiles/red_circuit.png
-#   baseTurf: Plating
-#   isSubfloor: false
-#   deconstructTools: [ Prying ]
 #   footstepSounds:
 #     collection: FootstepHull
 #   itemDrop: FloorTileItemRCircuit
-#   heatCapacity: 10000
+# SS220-own-tiles-end
 
 # Terrain
 - type: tile
@@ -1613,19 +1508,19 @@
   sprite: /Textures/Tiles/Asteroid/asteroid.png
   variants: 13
   placementVariants:
-  - 0.8
-  - 0.0166 #Should be roughly 20%.... I think??? I don't know dude, I'm just a YAML monkey.
-  - 0.0166
-  - 0.0166
-  - 0.0166
-  - 0.0166
-  - 0.0166
-  - 0.0166
-  - 0.0166
-  - 0.0166
-  - 0.0166
-  - 0.0116
-  - 0.0116
+    - 0.8
+    - 0.0166 #Should be roughly 20%.... I think??? I don't know dude, I'm just a YAML monkey.
+    - 0.0166
+    - 0.0166
+    - 0.0166
+    - 0.0166
+    - 0.0166
+    - 0.0166
+    - 0.0166
+    - 0.0166
+    - 0.0166
+    - 0.0116
+    - 0.0116
   baseTurf: Space
   isSubfloor: true
   footstepSounds:
@@ -1872,6 +1767,7 @@
 
 - type: tile
   id: FloorFlesh
+  parent: BaseStationTile
   name: tiles-flesh-floor
   tags: [ tile-tag-other ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/meat.png
@@ -1881,47 +1777,40 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepBlood
   itemDrop: FloorTileItemFlesh
   friction: 0.25 #slippy
-  heatCapacity: 10000
 
 - type: tile
   id: FloorTechMaint2
+  parent: BaseStationTile
   name: tiles-techmaint2-floor
   sprite: /Textures/SS220/Tiles/steel_maint.png # SS220 Tiles Retexture
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepHull
   itemDrop: FloorTileItemSteelMaint
-  heatCapacity: 10000
 
 - type: tile
   id: FloorTechMaint3
+  parent: BaseStationTile
   name: tiles-techmaint3-floor
-  sprite: /Textures/SS220/Tiles/grating_maint.png # SS220 Tiles Retexture
+  # SS220 Tiles Retexture begin
+  sprite: /Textures/SS220/Tiles/grating_maint.png
   variants: 1
 #  placementVariants:
 #  - 1.0
 #  - 1.0
 #  - 1.0
 #  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
+  # SS220 Tiles Retexture end
   footstepSounds:
     collection: FootstepHull
   itemDrop: FloorTileItemGratingMaint
-  heatCapacity: 10000
 
 - type: tile
   id: FloorWoodTile
+  parent: BaseStationTile
   name: tiles-wood2
   sprite: /Textures/SS220/Tiles/wood_tile.png # SS220 Tiles Retexture
   variants: 4
@@ -1930,18 +1819,15 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepWood
   barestepSounds:
     collection: BarestepWood
   itemDrop: FloorTileItemWoodPattern
-  heatCapacity: 10000
 
 - type: tile
   id: FloorBrokenWood
+  parent: BaseStationTile
   name: tiles-wood3
   sprite: /Textures/SS220/Tiles/wood_broken.png # SS220 Tiles Retexture
   variants: 7
@@ -1953,30 +1839,23 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepWood
   barestepSounds:
     collection: BarestepWood
   itemDrop: MaterialWoodPlank1
-  heatCapacity: 10000
 
 - type: tile
   id: FloorWebTile
+  parent: BaseStationTile
   name: tiles-web
   tags: [ tile-tag-other ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/Misc/Web/web_tile.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepCarpet
   barestepSounds:
     collection: BarestepCarpet
   itemDrop: FloorTileItemWeb
-  heatCapacity: 10000
 
 - type: tile
   id: FloorChromite
@@ -2001,35 +1880,20 @@
 #Hull tiles
 - type: tile
   id: FloorHull
+  parent: BaseStationTile
   name: tiles-hull
   tags: [ tile-tag-other ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/hull.png
-  baseTurf: Plating
   isSubfloor: true # SS220 04.11 Mapping Update, tile under SuperMatterCrystal
   footstepSounds:
     collection: FootstepHull
   itemDrop: FloorTileItemSteel #probably should not be normally obtainable, but the game shits itself and dies when you try to put null here
-  heatCapacity: 10000
-
-- type: tile
-  id: FloorHullReinforced
-  tags: [ tile-tag-other ] # SS220 Tiles Resprite
-  name: tiles-hull-reinforced
-  sprite: /Textures/Tiles/hull_reinforced.png
-  baseTurf: Plating
-  isSubfloor: true # SS220 04.11 Mapping Update, tile under SuperMatterCrystal
-  footstepSounds:
-    collection: FootstepHull
-  itemDrop: FloorTileItemSteel
-  heatCapacity: 100000 #/tg/ has this set as "INFINITY." I don't know if that exists here so I've just added an extra 0
-  indestructible: true
 
 - type: tile
   id: FloorReinforcedHardened
+  parent: BaseStationTile
   name: tiles-super-reinforced-floor
   sprite: /Textures/SS220/Tiles/super_reinforced.png # SS220 Tiles Retexture
-  baseTurf: Plating
-  isSubfloor: false
   footstepSounds:
     collection: FootstepHull
   itemDrop: PartRodMetal1 #same case as FloorHull
@@ -2039,6 +1903,7 @@
 # Grass
 - type: tile
   id: FloorAstroGrass
+  parent: BaseStationTile
   name: tiles-astro-grass
   tags: [ tile-tag-nature-astro ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/Planet/Grass/grass.png
@@ -2058,30 +1923,25 @@
     East: /Textures/Tiles/Planet/Grass/double_edge.png
     North: /Textures/Tiles/Planet/Grass/double_edge.png
     West: /Textures/Tiles/Planet/Grass/double_edge.png
-  baseTurf: Plating
-  isSubfloor: false
   deconstructTools: [ Cutting ]
   footstepSounds:
     collection: FootstepGrass
   itemDrop: FloorTileItemAstroGrass
-  heatCapacity: 10000
 
 - type: tile
   id: FloorMowedAstroGrass
+  parent: [ BaseStationTile, FloorGrass ]
   name: tiles-mowed-astro-grass
   tags: [ tile-tag-nature-astro ] # SS220 Tiles Resprite
-  parent: FloorGrass
-  baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Cutting ]
   itemDrop: FloorTileItemMowedAstroGrass
 
 - type: tile
   id: FloorJungleAstroGrass
+  parent: [ BaseStationTile, FloorGrassJungle ]
   name: tiles-jungle-astro-grass
   tags: [ tile-tag-nature-astro ] # SS220 Tiles Resprite
-  parent: FloorGrassJungle
-  baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Cutting ]
   itemDrop: FloorTileItemJungleAstroGrass
@@ -2107,24 +1967,20 @@
 # Ice
 - type: tile
   id: FloorAstroIce
+  parent: BaseStationTile
   name: tiles-astro-ice
   tags: [ tile-tag-nature-astro ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/Planet/Snow/ice.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   friction: 0.05
-  heatCapacity: 10000
   mobFriction: 0.05
   mobAcceleration: 0.1
   itemDrop: FloorTileItemAstroIce
 
 - type: tile
   id: FloorAstroSnow
+  parent: [ BaseStationTile, FloorSnow ]
   name: tiles-astro-snow
   tags: [ tile-tag-nature-astro ] # SS220 Tiles Resprite
-  parent: FloorSnow
-  baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Prying ]
   itemDrop: FloorTileItemAstroSnow
@@ -2132,9 +1988,8 @@
 # Asteroid Sand
 - type: tile
   id: FloorAstroAsteroidSand
+  parent: [ BaseStationTile, FloorAsteroidSand ]
   name: tiles-astro-asteroid-sand
-  parent: FloorAsteroidSand
-  baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Prying ]
   itemDrop: FloorTileItemAstroAsteroidSand
@@ -2142,9 +1997,8 @@
 
 - type: tile
   id: FloorAstroAsteroidSandBorderless
+  parent: [ BaseStationTile, FloorAsteroidSandBorderless ]
   name: tiles-astro-asteroid-sand-borderless
-  parent: FloorAsteroidSandBorderless
-  baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Prying ]
   itemDrop: FloorTileItemAstroAsteroidSand
@@ -2161,7 +2015,28 @@
   weather: false
 
 - type: tile
+  id: FloorAstroIronsand
+  name: tiles-astro-ironsand
+  parent: FloorAsteroidIronsand
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  itemDrop: FloorTileItemAstroIronsand
+  weather: false
+
+- type: tile
+  id: FloorAstroIronsandBorderless
+  name: tiles-astro-ironsand-borderless
+  parent: FloorAsteroidIronsandBorderless
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  itemDrop: FloorTileItemAstroIronsandBorderless
+  weather: false
+
+- type: tile
   id: FloorWoodLarge
+  parent: BaseStationTile
   name: tiles-wood-large
   sprite: /Textures/SS220/Tiles/wood_large.png # SS220 Tiles Retexture
   variants: 4
@@ -2170,15 +2045,11 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepWood
   barestepSounds:
     collection: BarestepWood
   itemDrop: FloorTileItemWoodLarge
-  heatCapacity: 10000
 
 - type: tile
   id: FloorXenoborg
@@ -2194,44 +2065,36 @@
 
 - type: tile
   id: FloorXeno
+  parent: BaseStationTile
   name: tiles-xeno-floor
   sprite: /Textures/Tiles/xeno_flooring.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepBlood
   itemDrop: FloorTileItemXeno
-  heatCapacity: 10000
 
 - type: tile
   id: FloorXenoSteel
+  parent: BaseStationTile
   name: tiles-xeno-steel
   sprite: /Textures/Tiles/xeno_steel.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemXenoSteel
-  heatCapacity: 10000
   allowRotationMirror: true
 
 - type: tile
   id: FloorXenoSteelCorner
+  parent: BaseStationTile
   name: tiles-xeno-steel-corner
   sprite: /Textures/Tiles/xeno_steel_corner.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemXenoSteelCorner
-  heatCapacity: 10000
   allowRotationMirror: true
 
 - type: tile
   id: FloorDarkSquiggly
+  parent: BaseStationTile
   name: tiles-dark-squiggly
   sprite: /Textures/Tiles/dark_squiggly.png
   variants: 4
@@ -2240,29 +2103,21 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
   itemDrop: FloorTileItemDarkSquiggly
-  heatCapacity: 10000
   allowRotationMirror: true
 
 - type: tile
   id: FloorXenoMaint
+  parent: BaseStationTile
   name: tiles-xeno-maint
   sprite: /Textures/Tiles/xeno_maint.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepHull
   itemDrop: FloorTileItemXenoMaint
-  heatCapacity: 10000
 
 - type: tile
   id: FloorWhiteMarble
+  parent: BaseStationTile
   name: tiles-white-marble
   sprite: /Textures/Tiles/white_marble.png
   variants: 8
@@ -2275,17 +2130,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   friction: 0.8
   itemDrop: FloorTileItemWhiteMarble
-  heatCapacity: 10000
 
 - type: tile
   id: FloorDarkMarble
+  parent: BaseStationTile
   name: tiles-dark-marble
   sprite: /Textures/Tiles/dark_marble.png
   variants: 8
@@ -2298,17 +2150,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   friction: 0.8
   itemDrop: FloorTileItemDarkMarble
-  heatCapacity: 10000
 
 - type: tile
   id: FloorPlasmaMarble
+  parent: BaseStationTile
   name: tiles-plasma-marble
   sprite: /Textures/Tiles/plasmarble.png
   variants: 8
@@ -2321,17 +2170,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   friction: 0.8
   itemDrop: FloorTileItemPlasmaMarble
-  heatCapacity: 10000
 
 - type: tile
   id: FloorUraniumMarble
+  parent: BaseStationTile
   name: tiles-uranium-marble
   sprite: /Textures/Tiles/uranium_marble.png
   variants: 8
@@ -2344,11 +2190,7 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   friction: 0.8
   itemDrop: FloorTileItemUraniumMarble
-  heatCapacity: 10000

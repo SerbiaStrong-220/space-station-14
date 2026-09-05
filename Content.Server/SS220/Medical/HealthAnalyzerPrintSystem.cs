@@ -7,7 +7,9 @@ using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
@@ -15,6 +17,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Paper;
 using Content.Shared.Popups;
+using Content.Shared.SS220.LimitationRevive;
 using Content.Shared.SS220.MedicalScanner;
 using Content.Shared.SS220.Paper;
 using Robust.Shared.Audio.Systems;
@@ -23,17 +26,18 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.Medical;
 
-public sealed class HealthAnalyzerPrintSystem : EntitySystem
+public sealed partial class HealthAnalyzerPrintSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-    [Dependency] private readonly PaperSystem _paperSystem = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
-    [Dependency] private readonly SharedDocumentHelperSystem _documentHelper = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!; // SS220-health-analyzer-report
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedHandsSystem _handsSystem = default!;
+    [Dependency] private PaperSystem _paperSystem = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
+    [Dependency] private SharedDocumentHelperSystem _documentHelper = default!;
+    [Dependency] private SharedAudioSystem _audio = default!; // SS220-health-analyzer-report
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
 
     public override void Initialize()
     {
@@ -87,7 +91,11 @@ public sealed class HealthAnalyzerPrintSystem : EntitySystem
         bool? unrevivable,
         int? counterDeath)
     {
+        string status;
         var builder = new StringBuilder();
+        TryComp<LimitationReviveComponent>(target, out var revive);
+        TryComp<MobStateComponent>(target, out var mobState);
+        var clinicalDeathTimeRemaining = SharedLimitationReviveSystem.GetClinicalDeathTimeRemaining(revive, mobState);
 
         builder.AppendLine(Loc.GetString("health-analyzer-report-section-patient"));
         builder.AppendLine(Loc.GetString("health-analyzer-report-name", ("name", scannedName)));
@@ -95,15 +103,36 @@ public sealed class HealthAnalyzerPrintSystem : EntitySystem
         var dateTime = $"{_documentHelper.GetGameDate()} {_documentHelper.GetStationTime()}";
         builder.AppendLine(Loc.GetString("health-analyzer-report-date-time", ("dateTime", dateTime)));
 
-        var species = TryComp<HumanoidAppearanceComponent>(target, out var humanoidAppearance)
-            ? Loc.GetString(_prototypeManager.Index<SpeciesPrototype>(humanoidAppearance.Species).Name)
+        var species = TryComp<HumanoidProfileComponent>(target, out var humanoidAppearance)
+            ? Loc.GetString(_prototypeManager.Index(humanoidAppearance.Species).Name)
             : Loc.GetString("health-analyzer-window-entity-unknown-species-text");
         builder.AppendLine(Loc.GetString("health-analyzer-report-species", ("species", species)));
 
-        var status = TryComp<MobStateComponent>(target, out var mobState)
-            ? GetStatus(mobState.CurrentState)
-            : Loc.GetString("health-analyzer-window-entity-unknown-text");
+        if (mobState != null)
+        {
+            status = mobState.CurrentState == MobState.Dead && clinicalDeathTimeRemaining > TimeSpan.Zero
+                ? Loc.GetString("health-analyzer-window-entity-clinical-dead-text")
+                : GetStatus(mobState.CurrentState);
+        }
+        else
+        {
+            status = Loc.GetString("health-analyzer-window-entity-unknown-text");
+        }
+
         builder.AppendLine(Loc.GetString("health-analyzer-report-status", ("value", status)));
+
+        if (clinicalDeathTimeRemaining is { } timeLeft)
+        {
+            var brainStatus = timeLeft > TimeSpan.Zero
+                ? Loc.GetString("health-analyzer-window-clinical-death-decay", ("timeLeft", timeLeft.ToString(@"mm\:ss")))
+                : Loc.GetString(revive != null && revive.DeathCounter >= revive.ReviveLimit
+                    ? "health-analyzer-window-clinical-death-expired"
+                    : "health-analyzer-window-clinical-death-revivable");
+
+            builder.AppendLine($"{Loc.GetString("health-analyzer-window-clinical-death-text")} {brainStatus}");
+        }
+
+        builder.AppendLine();
 
         var temperature = !float.IsNaN(bodyTemperature)
             ? $"{bodyTemperature - Atmospherics.T0C:F1} °C ({bodyTemperature:F1} K)"
@@ -115,9 +144,14 @@ public sealed class HealthAnalyzerPrintSystem : EntitySystem
             : Loc.GetString("health-analyzer-window-entity-unknown-value-text");
         builder.AppendLine(Loc.GetString("health-analyzer-report-blood-level", ("value", blood)));
 
-        var deathCount = counterDeath?.ToString() ?? Loc.GetString("health-analyzer-window-entity-unknown-value-text");
+        var deathCount = revive != null
+            ? revive.DeathCounter.ToString()
+            : Loc.GetString("health-analyzer-window-entity-unknown-value-text");
+
+        var allDamage = _damageable.GetAllDamage(target);
+
         builder.AppendLine(Loc.GetString("health-analyzer-report-death-counter", ("value", deathCount)));
-        builder.AppendLine(Loc.GetString("health-analyzer-report-total-damage", ("value", damageable.TotalDamage)));
+        builder.AppendLine(Loc.GetString("health-analyzer-report-total-damage", ("value", allDamage.GetTotal())));
         builder.AppendLine();
 
         builder.AppendLine(Loc.GetString("health-analyzer-report-section-alerts"));
@@ -130,7 +164,7 @@ public sealed class HealthAnalyzerPrintSystem : EntitySystem
         builder.AppendLine();
 
         builder.AppendLine(Loc.GetString("health-analyzer-report-section-damage"));
-        var damageGroups = damageable.DamagePerGroup.OrderByDescending(damage => damage.Value).ToList();
+        var damageGroups = allDamage.GetDamagePerGroup(_prototypeManager).OrderByDescending(damage => damage.Value).ToList();
         var hasDamageGroups = false;
         foreach (var (damageGroupId, damageAmount) in damageGroups)
         {
@@ -140,13 +174,13 @@ public sealed class HealthAnalyzerPrintSystem : EntitySystem
             hasDamageGroups = true;
             builder.AppendLine(Loc.GetString(
                 "health-analyzer-window-damage-group-text",
-                ("damageGroup", _prototypeManager.Index<DamageGroupPrototype>(damageGroupId).LocalizedName),
+                ("damageGroup", _prototypeManager.Index(damageGroupId).LocalizedName),
                 ("amount", damageAmount)));
 
-            var group = _prototypeManager.Index<DamageGroupPrototype>(damageGroupId);
+            var group = _prototypeManager.Index(damageGroupId);
             foreach (var type in group.DamageTypes)
             {
-                if (!damageable.Damage.DamageDict.TryGetValue(type, out var typeAmount) || typeAmount <= 0)
+                if (!allDamage.DamageDict.TryGetValue(type, out var typeAmount) || typeAmount <= 0)
                     continue;
 
                 builder.AppendLine($" · {Loc.GetString(
@@ -164,7 +198,7 @@ public sealed class HealthAnalyzerPrintSystem : EntitySystem
 
         var hasReagents = false;
         if (TryComp<SolutionContainerManagerComponent>(target, out var solComp) &&
-            _solutionContainerSystem.TryGetSolution((target, solComp), BloodstreamComponent.DefaultChemicalsSolutionName, out var solution))
+            _solutionContainerSystem.TryGetSolution((target, solComp), BloodstreamComponent.DefaultBloodSolutionName, out var solution))
         {
             foreach (var (reagent, valueReagent) in solution.Value.Comp.Solution.Contents)
             {

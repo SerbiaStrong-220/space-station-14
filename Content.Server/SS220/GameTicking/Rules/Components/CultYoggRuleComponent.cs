@@ -41,7 +41,7 @@ public sealed partial class CultYoggRuleComponent : Component
     /// Time for the cultists before the whole station finds out about them
     /// </summary>
     [DataField]
-    public TimeSpan BeforeAlertTime = TimeSpan.FromSeconds(60);
+    public TimeSpan BeforeAlertTime = TimeSpan.FromSeconds(30);
 
     /// <summary>
     /// The time when the announcement will be made

@@ -31,7 +31,7 @@ public sealed class EntitySpawnVariationPassSystem : VariationPassSystem<EntityS
 
             foreach (var checkedTakedEntities in listTakedEntites)
             {
-                if (_whitelistSystem.IsBlacklistPass(ent.Comp.Blacklist, checkedTakedEntities))
+                if (_whitelistSystem.IsWhitelistPass(ent.Comp.Blacklist, checkedTakedEntities))
                     isCanSpawn = false;
             }
             if (!isCanSpawn)

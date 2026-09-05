@@ -5,7 +5,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared.SS220.Experience;
 
 [Prototype]
-public sealed class ExperienceDefinitionPrototype : IPrototype
+public sealed partial class ExperienceDefinitionPrototype : IPrototype
 {
     [ViewVariables]
     [IdDataField]
@@ -13,13 +13,13 @@ public sealed class ExperienceDefinitionPrototype : IPrototype
 
     [DataField]
     [AlwaysPushInheritance]
-    public Dictionary<ProtoId<SkillTreePrototype>, SkillTreeInfo> Skills = new();
+    public Dictionary<ProtoId<SkillTreePrototype>, SkillTreeInfo> Skills { get; private set; } = new();
 
     [DataField]
     [AlwaysPushInheritance]
-    public HashSet<ProtoId<KnowledgePrototype>> Knowledges = new();
+    public HashSet<ProtoId<KnowledgePrototype>> Knowledges { get; private set; } = new();
 
     [DataField]
     [AlwaysPushInheritance]
-    public int AddSublevelPoints;
+    public int AddSublevelPoints { get; private set; }
 }

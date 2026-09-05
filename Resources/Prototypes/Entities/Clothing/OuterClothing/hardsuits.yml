@@ -42,7 +42,6 @@
     clothingPrototype: ClothingHeadHelmetHardsuitAtmos
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
 
@@ -92,7 +91,6 @@
   #ss220 special_sounds end
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
 
@@ -140,7 +138,6 @@
     - Hardsuit
     - WhitelistChameleon
     - HardsuitSpatio
-    - CorgiWearable
 
 #Salvage Hardsuit
 - type: entity
@@ -186,7 +183,6 @@
     clothingPrototype: ClothingHeadHelmetHardsuitSalvage
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
 
@@ -230,7 +226,6 @@
     node: hardsuitGoliath
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
 
@@ -296,14 +291,13 @@
     damageCoefficient: 0.4
   # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
-    walkModifier: 0.75
-    sprintModifier: 0.75
+    walkModifier: 0.85 #SS220 sec hardsuit buff
+    sprintModifier: 0.85 #SS220 sec hardsuit buff
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSecurity
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
 
@@ -403,8 +397,8 @@
       coefficients:
         Blunt: 0.8
         Slash: 0.8
-        Piercing: 0.6
-        Heat: 0.5
+        Piercing: 0.55
+        Heat: 0.55
         Radiation: 0.5
         Caustic: 0.6
   # SS220 add stamina resistance begin
@@ -412,14 +406,13 @@
     damageCoefficient: 0.35
   # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
-    walkModifier: 0.8
-    sprintModifier: 0.8
+    walkModifier: 0.9 #SS220 crew hardsuit buff
+    sprintModifier: 0.9 #SS220 crew hardsuit buff
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitCap
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
 
@@ -471,7 +464,6 @@
   #ss220 special_sounds end
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
 
@@ -507,7 +499,6 @@
     clothingPrototype: ClothingHeadHelmetHardsuitMedical
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
 
@@ -552,7 +543,6 @@
     tags:
     - WhitelistChameleon
     - HighRiskItem
-    - CorgiWearable
     - Hardsuit
   #ss220 pinpointer ui add start
   - type: TrackedItem
@@ -586,7 +576,7 @@
         Blunt: 0.6
         Slash: 0.5
         Piercing: 0.5
-        Heat: 0.8
+        Heat: 0.6 #SS220 sec hardsuit buff
         Radiation: 0.5
         Caustic: 0.6
   # SS220 add stamina resistance begin
@@ -594,8 +584,8 @@
     damageCoefficient: 0.35
   # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
-    walkModifier: 0.8
-    sprintModifier: 0.8
+    walkModifier: 0.9 #SS220 sec hardsuit buff
+    sprintModifier: 0.9 #SS220 sec hardsuit buff
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSecurityRed
@@ -649,7 +639,7 @@
 #ANTAG HARDSUITS
 #Blood-red Hardsuit
 - type: entity
-  parent: [ ClothingOuterHardsuitBase]
+  parent: [ ClothingOuterHardsuitBase, BaseToggleClothing] # SS220-toggle-shield
   id: ClothingOuterHardsuitSyndie
   name: blood-red hardsuit
   description: A heavily armored hardsuit designed for work in special operations. Property of Gorlex Marauders.
@@ -689,6 +679,9 @@
       color: "#D82000"
       radius: 1
       energy: 4
+  - type: ToggleClothing
+    action: ActionTogglePersonalShield
+    disableOnUnequip: true
   # SS220-MIT-add-field-shields-end
   # SS220 add stamina resistance begin
   - type: StaminaResistance
@@ -713,14 +706,13 @@
     - MonkeyWearable
     - Hardsuit
     - WhitelistChameleon
-    - CorgiWearable
     - ScurretWearable
   - type: StaticPrice
     price: 5000
 
 # Syndicate Medic Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitSyndie]
+  parent: [ClothingOuterHardsuitSyndie, BaseToggleClothing] # SS220-toggle-shield
   id: ClothingOuterHardsuitSyndieMedic
   name: blood-red medic hardsuit
   description: A heavily armored and agile advanced hardsuit specifically designed for field medic operations.
@@ -760,6 +752,9 @@
       color: "#D82000"
       radius: 1
       energy: 4
+  - type: ToggleClothing
+    action: ActionTogglePersonalShield
+    disableOnUnequip: true
   # SS220-MIT-add-field-shields-end
   - type: ClothingSpeedModifier
     walkModifier: 0.9 #ss-220 armReb
@@ -773,7 +768,7 @@
 
 #Syndicate Elite Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase]
+  parent: [ClothingOuterHardsuitBase, BaseToggleClothing] # SS220-toggle-shield
   id: ClothingOuterHardsuitSyndieElite
   name: syndicate elite hardsuit
   description: An elite version of the blood-red hardsuit, with improved radiation resistance and fireproofing. Property of Gorlex Marauders.
@@ -820,6 +815,9 @@
       color: "#D82000"
       radius: 1
       energy: 4
+  - type: ToggleClothing
+    action: ActionTogglePersonalShield
+    disableOnUnequip: true
   # SS220-MIT-add-field-shields-end
   - type: Item
     size: Huge
@@ -841,13 +839,12 @@
   #ss220 special_sounds end
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
 
 #Syndicate Commander Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase]
+  parent: [ClothingOuterHardsuitBase, BaseToggleClothing] # SS220-toggle-shield
   id: ClothingOuterHardsuitSyndieCommander
   name: syndicate commander hardsuit
   description: A bulked up version of the blood-red hardsuit, purpose-built for the commander of a syndicate operative squad. Has significantly improved armor for those deadly front-lines firefights.
@@ -889,6 +886,9 @@
       color: "#D82000"
       radius: 1
       energy: 4
+  - type: ToggleClothing
+    action: ActionTogglePersonalShield
+    disableOnUnequip: true
   # SS220-MIT-add-field-shields-end
   - type: ClothingSpeedModifier
     walkModifier: 0.9
@@ -906,14 +906,13 @@
   #ss220 special_sounds end
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
 
 
 #Cybersun Juggernaut Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase]
+  parent: [ClothingOuterHardsuitBase, BaseToggleClothing] # SS220-toggle-shield
   id: ClothingOuterHardsuitJuggernaut
   name: cybersun juggernaut suit
   description: A suit made by the cutting edge R&D department at cybersun to be hyper resilient.
@@ -957,6 +956,9 @@
       color: "#D82000"
       radius: 1.5
       energy: 6
+  - type: ToggleClothing
+    action: ActionTogglePersonalShield
+    disableOnUnequip: true
   # SS220-MIT-add-field-shields-end
   - type: ClothingSpeedModifier
     walkModifier: 0.65
@@ -967,7 +969,6 @@
   - type: Tag
     tags:
     - MonkeyWearable
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
   #ss220 special_sounds start
@@ -1016,7 +1017,6 @@
     clothingPrototype: ClothingHeadHelmetHardsuitWizard
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
 
@@ -1134,7 +1134,7 @@
 #CENTCOMM / ERT HARDSUITS
 #ERT Leader Hardsuit
 - type: entity
-  parent: [ ClothingOuterHardsuitSyndieCommander ]
+  parent: [ ClothingOuterHardsuitSyndieCommander, BaseToggleClothing ] # SS220-toggle-shield
   id: ClothingOuterHardsuitERTLeader
   name: ERT leader's hardsuit
   description: A protective hardsuit worn by the leader of an emergency response team.
@@ -1158,11 +1158,14 @@
       color: "#0061d8"
       radius: 1
       energy: 4
+  - type: ToggleClothing
+    action: ActionTogglePersonalShield
+    disableOnUnequip: true
   # SS220-MIT-add-field-shields-end
 
 #ERT Chaplain Hardsuit
 - type: entity
-  parent: [ ClothingOuterHardsuitJuggernaut ]
+  parent: [ BaseCentcommContraband, ClothingOuterHardsuitSyndie ]
   id: ClothingOuterHardsuitERTChaplain
   name: ERT chaplain's hardsuit
   description: A protective hardsuit worn by the chaplains of an Emergency Response Team.
@@ -1176,7 +1179,7 @@
 
 #ERT Engineer Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitCBURN
+  parent: [ BaseCentcommContraband, ClothingOuterHardsuitSyndieElite ]
   id: ClothingOuterHardsuitERTEngineer
   name: ERT engineer's hardsuit
   description: A protective hardsuit worn by the engineers of an emergency response team.
@@ -1192,7 +1195,7 @@
 
 #ERT Medic Hardsuit
 - type: entity
-  parent: [ ClothingOuterHardsuitSyndieMedic ]
+  parent: [ ClothingOuterHardsuitSyndieMedic, BaseToggleClothing ] # SS220-toggle-shield
   id: ClothingOuterHardsuitERTMedical
   name: ERT medic's hardsuit
   description: A protective hardsuit worn by the medics of an emergency response team.
@@ -1216,11 +1219,14 @@
       color: "#0061d8"
       radius: 1
       energy: 4
+  - type: ToggleClothing
+    action: ActionTogglePersonalShield
+    disableOnUnequip: true
   # SS220-MIT-add-field-shields-end
 
 #ERT Security Hardsuit
 - type: entity
-  parent: [ ClothingOuterHardsuitSyndie ]
+  parent: [ ClothingOuterHardsuitSyndie, BaseToggleClothing ] # SS220-toggle-shield
   id: ClothingOuterHardsuitERTSecurity
   name: ERT security's hardsuit
   description: A protective hardsuit worn by the security officers of an emergency response team.
@@ -1248,11 +1254,14 @@
       color: "#0061d8"
       radius: 1
       energy: 4
+  - type: ToggleClothing
+    action: ActionTogglePersonalShield
+    disableOnUnequip: true
   # SS220-MIT-add-field-shields-end
 
 #ERT Janitor Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitCBURN
+  parent: [ BaseCentcommContraband, ClothingOuterHardsuitSyndieElite ]
   id: ClothingOuterHardsuitERTJanitor
   name: ERT janitor's hardsuit
   description: A protective hardsuit worn by the janitors of an emergency response team.
@@ -1324,7 +1333,7 @@
 
 #CBURN Hardsuit
 - type: entity
-  parent: [ ClothingOuterHardsuitBase ]
+  parent: [ ClothingOuterHardsuitBase, BaseToggleClothing ] # SS220-toggle-shield
   id: ClothingOuterHardsuitCBURN
   name: CBURN exosuit
   description: A lightweight yet strong exosuit used for special cleanup operations.
@@ -1379,6 +1388,9 @@
       color: "#0061d8"
       radius: 1
       energy: 4
+  - type: ToggleClothing
+    action: ActionTogglePersonalShield
+    disableOnUnequip: true
   # SS220-MIT-add-field-shields-end
 
 #MISC. HARDSUITS

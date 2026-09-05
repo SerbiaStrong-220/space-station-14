@@ -61,6 +61,11 @@ public sealed class AirlockSystem : SharedAirlockSystem
         if (!comp.AnimatePanel)
             return;
 
+        // For some reason the open panel sprite is used for both open and
+        // closed sprites. I really don't get it.
+        door.OpenSpriteStates.Add((WiresVisualLayers.MaintenancePanel, comp.OpenPanelSpriteState));
+        door.ClosedSpriteStates.Add((WiresVisualLayers.MaintenancePanel, comp.OpenPanelSpriteState));
+
         ((Animation)door.OpeningAnimation).AnimationTracks.Add(new AnimationTrackSpriteFlick()
         {
             LayerKey = WiresVisualLayers.MaintenancePanel,
@@ -117,16 +122,17 @@ public sealed class AirlockSystem : SharedAirlockSystem
             );
         }
 
-        switch (state)
-        {
-            case DoorState.Open:
-                _sprite.LayerSetRsiState((uid, args.Sprite), DoorVisualLayers.BaseUnlit, comp.ClosingSpriteState);
-                _sprite.LayerSetAnimationTime((uid, args.Sprite), DoorVisualLayers.BaseUnlit, 0);
-                break;
-            case DoorState.Closed:
-                _sprite.LayerSetRsiState((uid, args.Sprite), DoorVisualLayers.BaseUnlit, comp.OpeningSpriteState);
-                _sprite.LayerSetAnimationTime((uid, args.Sprite), DoorVisualLayers.BaseUnlit, 0);
-                break;
-        }
+        return; // SS220-fix-unlit-sprites-issue-begin
+        // switch (state)
+        // {
+        //     case DoorState.Open:
+        //         _sprite.LayerSetRsiState((uid, args.Sprite), DoorVisualLayers.BaseUnlit, comp.ClosingSpriteState);
+        //         _sprite.LayerSetAnimationTime((uid, args.Sprite), DoorVisualLayers.BaseUnlit, 0);
+        //         break;
+        //     case DoorState.Closed:
+        //         _sprite.LayerSetRsiState((uid, args.Sprite), DoorVisualLayers.BaseUnlit, comp.OpeningSpriteState);
+        //         _sprite.LayerSetAnimationTime((uid, args.Sprite), DoorVisualLayers.BaseUnlit, 0);
+        //         break;
+        // }  // SS220-fix-unlit-sprites-issue-end
     }
 }

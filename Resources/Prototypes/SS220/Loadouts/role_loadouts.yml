@@ -4,18 +4,21 @@
 
   # Представитель НаноТрейзен
 - type: roleLoadout
-  id: JobNanoTrasenRepresentative #SS220 TODO NanoTraisen Representative
+  id: JobNanoTrasenRepresentative
   groups:
-  - IAAHead
-  - IAAHeadset
-  - IAAGlasses
-  - IAANeck
-  - IAAJumpsuit
-  - IAAOuterclothing
-  - IAABackpacks #ss220 iaa loadout fix
+  - NanoTrasenRepresentativeHead
+  - NanoTrasenRepresentativeHeadset
+  - NanoTrasenRepresentativeInnerEncryptionKeys #SS220-ipc-builtin-radio
+  - NanoTrasenRepresentativeEyes
+  - NanoTrasenRepresentativeJumpsuit
+  - NanoTrasenRepresentativeOuterClothing
+  - NanoTrasenRepresentativeBackpacks
+  - NanoTrasenRepresentativeTrinket
+  - NanoTrasenRepresentativeGloves
   - Survival
+  - SurvivalVox
+  - GroupSpeciesBreathTool
   - Trinkets
-  - Gloves
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
   # Магистрат
@@ -23,13 +26,15 @@
   id: JobMagistrate
   groups:
   - MagistrateHead
-  - MagistrateEyes
   - MagistrateHeadset
+  - MagistrateEyes
   - MagistrateJumpsuit
   - MagistrateOuterClothing
   - IAABackpacks
-  - Trinkets
   - Survival
+  - SurvivalVox
+  - GroupSpeciesBreathTool
+  - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
 
@@ -43,10 +48,12 @@
   - IAANeck
   - IAAJumpsuit
   - IAAOuterclothing
+  - Gloves
   - IAABackpacks #ss220 iaa loadout fix
   - Survival
+  - SurvivalVox
+  - GroupSpeciesBreathTool
   - Trinkets
-  - Gloves
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
 
@@ -60,11 +67,14 @@
   - BlueShieldNeck
   - BlueShieldJumpsuit
   - BlueShieldOuterclothing
-  - BlueShieldBelt
   - BlueShieldBackpack
+  - BlueShieldBelt
   - BlueShieldShoes
   - Survival
+  - SurvivalVox
+  - GroupSpeciesBreathToolSecurity
   - Trinkets
+  - CommandInnerEncryptionKeys #SS220-ipc-builtin-radio
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
 
@@ -76,16 +86,19 @@
   groups:
   - SecurityHead
   - SecurityGlasses #SS220-TwoOne-Floppa-Iteration
-  - SecurityNeck  #holster loadout
   - SecurityMask #SS220 Security Tactical Gas Mask
-  - SecurityGloves #Sec Tactical Gloves for Senior Officer
+  - SecurityNeck  #holster loadout
   - SeniorSecJumpsuit
-  - SecurityBackpack
   - SecurityOuterClothing
-  - SurvivalSecurity
+  - SecurityGloves #Sec Tactical Gloves for Senior Officer
+  - SecurityBackpack
   - SecurityShoes
   - SecurityBelt
+  - SurvivalSecurity
+  - SurvivalVox
+  - GroupSpeciesBreathToolSecurity
   - Trinkets
+  - SecurityInnerEncryptionKeys #SS220-ipc-builtin-radio
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
 
@@ -95,16 +108,19 @@
   groups:
   - SecurityPilotHead
   - SecurityGlasses #SS220-TwoOne-Floppa-Iteration
-  - SecurityNeck #holster loadout
   - SecurityMask #SS220 Security Tactical Gas Mask
+  - SecurityNeck #holster loadout
   - SecurityJumpsuit
-  - SecurityBackpack
   - SecurityPilotOuterClothing
-  - SurvivalSecurity
+  - SecurityBackpack
   - SecurityShoes
+  - SurvivalSecurity
+  - SurvivalVox
+  - GroupSpeciesBreathToolSecurity
   - Trinkets
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SecurityInnerEncryptionKeys #SS220-ipc-builtin-radio
   - WorkerCash #SS220-Cash-personal
+
 #! Служба безопасности (Конец)
 
 #! Медицинский отдел (Начало)
@@ -114,20 +130,42 @@
   id: JobSeniorPhysician
   groups:
   - HatSeniorMedical
-  - MedicalNeck
-# - MedicalGlasses #SS220-TwoOne-Floppa-Iteration
-  - SeniorMedicalJumpsuit
-  - MedicalGloves
-  - MedicalsBackpack
-  - MedicalsMask
-  - SeniorMedicalOuterClothing
-  - SurvivalMedical
-  - SeniorShoes
   - MedicalEyewear
-#  - Glasses #SS220-TwoOne-Floppa-Iteration
+  - MedicalNeck
+  - MedicalsMask
+  - SeniorMedicalJumpsuit
+  - SeniorMedicalOuterClothing
+  - MedicalsGloves
+  - MedicalsBackpack
+  - SeniorShoes
+  - SurvivalMedical
+  - SurvivalVox
+  - GroupSpeciesBreathToolMedical
   - Trinkets
+  - MedicalInnerEncryptionKeys #SS220-ipc-builtin-radio
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
+
+  # Бригемдик
+- type: roleLoadout
+  id: JobBrigmedic
+  groups:
+  - BrigmedicHead
+  - BrigmedicGlasses #SS220-TwoOne-Floppa-Iteration
+  - BrigmedicMask
+  - MedicalNeck #SS220-WhiteScarf
+  - BrigmedicJumpsuit
+  - BrigmedicOuterClothing
+  - MedicalsGloves
+  - BrigmedicBackpack
+  - BrigmedicShoes
+  - SurvivalBrigMedic #SS220-Brigmedic SurvivalBox Fix
+  - SurvivalVox
+  - Trinkets
+  - BrigmedicInnerEncryptionKeys #SS220-ipc-builtin-radio
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - WorkerCash #SS220-Cash-personal
+
 #! Медицинский отдел (Конец)
 
 #! Инженерный отдел (Начало)
@@ -139,13 +177,17 @@
   - HatSeniorEngineer
   - EngineerGlasses #SS220-TwoOne-Floppa-Iteration
   - SeniorsEngineerJumpsuit
-  - StationEngineerBackpack
   - SeniorsEngineerOuterClothing
-  - SurvivalExtended
+  - StationEngineerBackpack
   - StationEngineerShoes
+  - SurvivalExtended
+  - SurvivalVox
+  - GroupSpeciesBreathTool
   - Trinkets
+  - EngineeringInnerEncryptionKeys #SS220-ipc-builtin-radio
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
+
 #! Инженерный отдел (Конец)
 
 #! Исследовательский отдел (Начало)
@@ -158,15 +200,18 @@
   - ScientistGlasses #SS220-Two Floppa Iteration
   - ScientistNeck
   - SeniorSciensistJumpsuit
-  - ScientistBackpack
   - SeniorSciensistOuterClothing
   - ScientistGloves
+  - ScientistBackpack
   - ScientistShoes
   - Survival
-#  - Glasses #SS220-TwoOne-Floppa-Iteration
+  - SurvivalVox
+  - GroupSpeciesBreathTool
   - Trinkets
+  - ScienceInnerEncryptionKeys #SS220-ipc-builtin-radio
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
+
 #! Исследовательский отдел (Конец)
 
 #! Сервис (Начало)
@@ -176,12 +221,52 @@
   id: JobSeniorService
   groups:
   - HatSeniorService
+  - Glasses
   - SeniorServiceJumpsuit
   - CommonBackpack
-  - Survival
-  - Glasses
   - SeniorServiceShoes
+  - Survival
+  - SurvivalVox
+  - GroupSpeciesBreathTool
   - Trinkets
+  - ServiceInnerEncryptionKeys #SS220-ipc-builtin-radio
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
+
 #! Сервис (Конец)
+
+#! Эксклюзивы карт (Начало)
+
+  #Зоотех
+- type: roleLoadout
+  id: JobZookeeper
+  groups:
+  - GroupTankHarness
+  - Glasses
+  - CommonBackpack
+  - GroupSpeciesBreathTool
+  - Survival
+  - SurvivalVox
+  - GroupSpeciesBreathTool
+  - Trinkets
+  - ServiceInnerEncryptionKeys #SS220-ipc-builtin-radio
+  - WorkerCash #SS220-Cash-personal
+
+  #Боксер
+- type: roleLoadout
+  id: JobBoxer
+  groups:
+  - GroupTankHarness
+  - Glasses
+  - BoxerJumpsuit
+  - BoxerGloves
+  - CommonBackpack
+  - GroupSpeciesBreathTool
+  - Survival
+  - SurvivalVox
+  - GroupSpeciesBreathTool
+  - Trinkets
+  - ServiceInnerEncryptionKeys #SS220-ipc-builtin-radio
+  - WorkerCash #SS220-Cash-personal
+
+#! Эксклюзивы карт (Конец)

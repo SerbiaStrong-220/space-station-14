@@ -2,6 +2,7 @@ using Content.Server.Explosion.EntitySystems;
 using Content.Server.Pointing.Components;
 using Content.Shared.Pointing.Components;
 using JetBrains.Annotations;
+using Robust.Shared.Map;
 using Robust.Shared.Random;
 
 namespace Content.Server.Pointing.EntitySystems
@@ -19,10 +20,16 @@ namespace Content.Server.Pointing.EntitySystems
             if (!Resolve(uid, ref component, ref transform))
                 return null;
 
+            var arrowMapPos = _transformSystem.GetMapCoordinates(uid); // SS220 Fix PointingArrowAngering range
             var targets = new List<Entity<PointingArrowAngeringComponent>>();
             var query = EntityQueryEnumerator<PointingArrowAngeringComponent>();
             while (query.MoveNext(out var angeringUid, out var angeringComp))
             {
+                // SS220 Fix PointingArrowAngering range begin
+                if (!ValidTarget(uid, (angeringUid, angeringComp), arrowMapPos))
+                    continue;
+                // SS220 Fix PointingArrowAngering range end
+
                 targets.Add((angeringUid, angeringComp));
             }
 
@@ -60,7 +67,7 @@ namespace Content.Server.Pointing.EntitySystems
             {
                 component.Chasing ??= RandomNearbyPlayer(uid, component, transform);
 
-                if (component.Chasing is not {Valid: true} chasing || Deleted(chasing))
+                if (component.Chasing is not {Valid: true} chasing || !ValidTarget(uid, chasing) /* SS220 Fix PointingArrowAngering range */)
                 {
                     QueueDel(uid);
                     continue;
@@ -102,5 +109,27 @@ namespace Content.Server.Pointing.EntitySystems
                 QueueDel(uid);
             }
         }
+
+        // SS220 Fix PointingArrowAngering range begin
+        private bool ValidTarget(EntityUid arrow, Entity<PointingArrowAngeringComponent?> target, MapCoordinates? arrowMapPos = null)
+        {
+            if (Deleted(target))
+                return false;
+
+            if (!Resolve(target, ref target.Comp))
+                return false;
+
+            arrowMapPos ??= _transformSystem.GetMapCoordinates(arrow);
+            var targetMapPos = _transformSystem.GetMapCoordinates(target);
+            if (arrowMapPos.Value.MapId != targetMapPos.MapId)
+                return false;
+
+            var delta = arrowMapPos.Value.Position - targetMapPos.Position;
+            if (delta.LengthSquared() > target.Comp.MaxRange * target.Comp.MaxRange)
+                return false;
+
+            return true;
+        }
+        // SS220 Fix PointingArrowAngering range end
     }
 }

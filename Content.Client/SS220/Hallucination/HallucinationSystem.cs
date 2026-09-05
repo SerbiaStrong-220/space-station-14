@@ -15,13 +15,13 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.SS220.Hallucination;
 
-public sealed class HallucinationSystem : SharedHallucinationSystem
+public sealed partial class HallucinationSystem : SharedHallucinationSystem
 {
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly TransformSystem _transformSystem = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private TransformSystem _transformSystem = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     private const float HallucinationRadius = 5f;
 
@@ -93,8 +93,7 @@ public sealed class HallucinationSystem : SharedHallucinationSystem
         if (!_prototypeManager.TryIndex<EntityPrototype>(randomWeightedPrototypes.Pick(_random), out var randomProto))
             return;
 
-        var spawnedEntityUid = EntityManager.SpawnAtPosition(randomProto.ID,
-                                                            Transform(_playerManager.LocalEntity!.Value).Coordinates);
+        var spawnedEntityUid = SpawnAtPosition(randomProto.ID, Transform(_playerManager.LocalEntity!.Value).Coordinates);
         var randomCoordinates = _transformSystem.GetWorldPosition(_playerManager.LocalEntity!.Value)
                                 + new Vector2(_random.NextFloat(-HallucinationRadius, HallucinationRadius), _random.NextFloat(-HallucinationRadius, HallucinationRadius));
         _transformSystem.SetWorldPosition(spawnedEntityUid, randomCoordinates);

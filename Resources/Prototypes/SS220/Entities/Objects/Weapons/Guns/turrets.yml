@@ -67,7 +67,7 @@
         - FullAuto
       soundGunshot:
         path: /Audio/Weapons/Guns/Gunshots/laser.ogg
-    - type: HitscanBatteryAmmoProvider
+    - type: BatteryAmmoProvider
       proto: RedLaser
       fireCost: 1
     - type: Battery
@@ -207,7 +207,7 @@
     fireRate: 2
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/ship_svalinn.ogg
-  - type: HitscanBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: AirDefenseLaser
     fireCost: 62
   - type: PowerCellSlot
@@ -224,3 +224,122 @@
   - type: ContainerContainer
     containers:
       cell_slot: !type:ContainerSlot
+
+- type: entity
+  parent: BaseWeaponBallisticTurret
+  id: WeaponTurretPeashooter
+  name: peashooter
+  description: Peas ready for defense and shooting zombies.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Turrets/peashooter.rsi
+    noRot: true
+    layers:
+    - state: peashooter
+  - type: NpcFactionMember
+    factions:
+    - PetsNT
+    addFriendlyFactions:
+    - PlantsFract
+  - type: BallisticAmmoProvider
+    proto: BulletPeas
+    capacity: 500
+  - type: Gun
+    fireRate: 0.75
+    projectileSpeed: 20
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot: /Audio/SS220/Weapons/Guns/Gunshots/peas_shot.ogg
+  - type: HTN
+    rootTask:
+      task: TurretCompound
+    blackboard:
+      SoundTargetInLOS: !type:SoundPathSpecifier
+        path: /Audio/SS220/Effects/peashooter_target.ogg
+  - type: Damageable
+    damageContainer: Biological
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 75
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/gib1.ogg
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodPeaPod:
+            min: 3
+            max: 5
+  - type: InteractionPopup
+    interactDelay: 1.0
+    successChance: 0.8
+    interactSuccessString: petting-success-peashooter
+    interactFailureString: petting-failure-peashooter
+    interactSuccessSound:
+      path: /Audio/SS220/Effects/peashooter_pet.ogg
+
+- type: entity
+  parent: BaseWeaponBallisticTurret
+  id: WeaponTurretPeashooterSyndi
+  name: sergeant peashooter
+  description: Peas, having seen a lot, will certainly knock the helmets off a couple of officers...
+  components:
+  - type: NpcFactionMember
+    factions:
+    - Syndicate
+    addFriendlyFactions:
+    - PlantsFract
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Turrets/peashooter_syndicat.rsi
+    noRot: true
+    layers:
+    - state: peashooter_syndicate
+  - type: BallisticAmmoProvider
+    proto: BulletPeasSyndi
+    capacity: 500
+  - type: Gun
+    fireRate: 0.75
+    shotsPerBurst: 3
+    burstCooldown: 1
+    selectedMode: Burst
+    availableModes:
+    - Burst
+    burstFireRate: 20
+    projectileSpeed: 20
+    soundGunshot: /Audio/SS220/Weapons/Guns/Gunshots/peas_burst.ogg
+  - type: HTN
+    rootTask:
+      task: TurretCompound
+    blackboard:
+      SoundTargetInLOS: !type:SoundPathSpecifier
+        path: /Audio/SS220/Effects/peashooter_target.ogg
+  - type: Damageable
+    damageContainer: Biological
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/gib1.ogg
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodPeaPod:
+            min: 3
+            max: 5
+  - type: InteractionPopup
+    interactDelay: 1.0
+    successChance: 0.8
+    interactSuccessString: petting-success-peashootersyndi
+    interactFailureString: petting-failure-peashootersyndi
+    interactSuccessSound:
+      path: /Audio/SS220/Effects/peashooter_pet.ogg

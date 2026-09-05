@@ -3,9 +3,9 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client.SS220.LocateAi;
 
-public sealed class LocateAiSystem : SharedLocateAiSystem
+public sealed partial class LocateAiSystem : SharedLocateAiSystem
 {
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {

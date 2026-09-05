@@ -14,9 +14,9 @@ namespace Content.Client.SS220.Shitspawn.SlotMachine.Ui;
 [GenerateTypedNameReferences]
 public sealed partial class SlotMachineWindow : DefaultWindow
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
 
     public event Action<int>? OnSpin;
     public event Action<int>? OnInsert;

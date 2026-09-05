@@ -17,16 +17,16 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.EventCapturePoint;
 
-public sealed class EventCapturePointSystem : EntitySystem
+public sealed partial class EventCapturePointSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly FractWarRuleSystem _fractWarRule = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private FractWarRuleSystem _fractWarRule = default!;
 
     private const float RefreshWinPointsRate = 60f;
 
@@ -110,7 +110,7 @@ public sealed class EventCapturePointSystem : EntitySystem
 
         if (entity.Comp.FlagEntity.HasValue &&
             entity.Comp.FlagEntity.Value.Valid &&
-            EntityManager.EntityExists(entity.Comp.FlagEntity.Value))
+            Exists(entity.Comp.FlagEntity.Value))
         {
             RemoveFlagInstantly(entity);
         }

@@ -43,6 +43,7 @@ public sealed partial class BanPanel : DefaultWindow
     // have to know how the controls are nested, which makes the code more complicated.
     // Role group name -> the role buttons themselves.
     private readonly List<CheckBox> _speciesCheckboxes = []; // SS220 Species bans
+    private readonly List<CheckBox> _chatsCheckboxes = []; // SS220 chats bans
     private readonly Dictionary<string, List<(Button, IPrototype)>> _roleCheckboxes = new();
     private readonly ISawmill _banPanelSawmill;
 
@@ -65,7 +66,8 @@ public sealed partial class BanPanel : DefaultWindow
         //Text,
         Players,
         Roles,
-        Species // SS220 Species bans
+        Species, // SS220 Species bans
+        Chats, // SS220 chats bans
     }
 
     private enum Multipliers
@@ -84,7 +86,8 @@ public sealed partial class BanPanel : DefaultWindow
         None,
         Server,
         Role,
-        Species // SS220 Species bans
+        Species, // SS220 Species bans
+        Chats, // SS220 Chats bans
     }
 
     public BanPanel()
@@ -170,10 +173,16 @@ public sealed partial class BanPanel : DefaultWindow
         Tabs.SetTabVisible((int)TabNumbers.Species, false);
         // SS220 Species bans end
 
+        // SS220 chat bans begin
+        Tabs.SetTabTitle((int)TabNumbers.Chats, Loc.GetString("ban-panel-tabs-chats"));
+        Tabs.SetTabVisible((int)TabNumbers.Chats, false);
+        // SS220 chat bans end
+
         TypeOption.AddItem(Loc.GetString("ban-panel-select"), (int)Types.None);
         TypeOption.AddItem(Loc.GetString("ban-panel-server"), (int)Types.Server);
         TypeOption.AddItem(Loc.GetString("ban-panel-role"), (int)Types.Role);
         TypeOption.AddItem(Loc.GetString("ban-panel-species"), (int)Types.Species); // SS220 Species bans
+        TypeOption.AddItem(Loc.GetString("ban-panel-chats"), (int)Types.Chats); // SS220 Species bans
 
         ReasonTextEdit.Placeholder = new Rope.Leaf(Loc.GetString("ban-panel-reason"));
 
@@ -201,7 +210,15 @@ public sealed partial class BanPanel : DefaultWindow
         foreach (var species in _protoMan.EnumeratePrototypes<SpeciesPrototype>().OrderBy(x => Loc.GetString(x.Name)))
             AddSpeciesCheckbox(species);
         // SS220 Species bans end
+        // SS220 chats bans begin
+        foreach (var chat in Enum.GetValues<BannableChats>())
+        {
+            if (chat == BannableChats.Invalid)
+                continue;
 
+            AddChatsCheckbox(chat);
+        }
+        // SS220 chats bans end
     }
 
     /// <summary>
@@ -331,19 +348,19 @@ public sealed partial class BanPanel : DefaultWindow
     }
 
     /// <summary>
-    /// Adds a check button specifically for one "role" in a "group"
+    /// Adds a toggle button specifically for one "role" in a "group"
     /// E.g. it would add the Chief Medical Officer "role" into the "Medical" group.
     /// </summary>
     private void AddRoleCheckbox(string group, string role, GridContainer roleGroupInnerContainer, Button roleGroupCheckbox)
     {
         var roleCheckboxContainer = new BoxContainer();
-        var roleCheckButton = new Button
+        var roleToggleButton = new Button
         {
             Name = role,
             Text = role,
             ToggleMode = true,
         };
-        roleCheckButton.OnToggled += args =>
+        roleToggleButton.OnToggled += args =>
         {
             // Checks the role group checkbox if all the children are pressed
             if (args.Pressed && _roleCheckboxes[group].All(e => e.Item1.Pressed))
@@ -380,12 +397,12 @@ public sealed partial class BanPanel : DefaultWindow
             roleCheckboxContainer.AddChild(jobIconTexture);
         }
 
-        roleCheckboxContainer.AddChild(roleCheckButton);
+        roleCheckboxContainer.AddChild(roleToggleButton);
 
         roleGroupInnerContainer.AddChild(roleCheckboxContainer);
 
         _roleCheckboxes.TryAdd(group, []);
-        _roleCheckboxes[group].Add((roleCheckButton, rolePrototype));
+        _roleCheckboxes[group].Add((roleToggleButton, rolePrototype));
     }
 
     // SS220 Species bans begin
@@ -404,6 +421,25 @@ public sealed partial class BanPanel : DefaultWindow
 
         SpeciesContainer.AddChild(checkbox);
         SpeciesContainer.AddChild(new HSeparator());
+    }
+    // SS220 Species bans end
+
+    // SS220 Species bans begin
+    private const string ChatsCheckboxNamePrefix = "ChatsCheckbox";
+
+    private void AddChatsCheckbox(BannableChats chat)
+    {
+        var checkbox = new CheckBox()
+        {
+            Name = $"{ChatsCheckboxNamePrefix}{chat}",
+            Text = $"{chat}",
+            Margin = new Thickness(5, 0, 0, 0)
+        };
+
+        _chatsCheckboxes.Add(checkbox);
+
+        ChatsContainer.AddChild(checkbox);
+        ChatsContainer.AddChild(new HSeparator());
     }
     // SS220 Species bans end
 
@@ -568,6 +604,7 @@ public sealed partial class BanPanel : DefaultWindow
         TypeOption.ModulateSelfOverride = null;
         Tabs.SetTabVisible((int) TabNumbers.Roles, TypeOption.SelectedId == (int)Types.Role);
         Tabs.SetTabVisible((int)TabNumbers.Species, TypeOption.SelectedId == (int)Types.Species); // SS220 Species bans
+        Tabs.SetTabVisible((int)TabNumbers.Chats, TypeOption.SelectedId == (int)Types.Chats); // SS220 chats bans
         NoteSeverity? newSeverity = null;
         switch (TypeOption.SelectedId)
         {
@@ -601,6 +638,14 @@ public sealed partial class BanPanel : DefaultWindow
                     _banPanelSawmill.Warning("Species ban severity could not be parsed from config!");
                 break;
             // SS220 Species bans end
+            // SS220 chats bans begin
+            case (int)Types.Chats:
+                if (Enum.TryParse(_cfg.GetCVar(CCVars220.ChatBanDefaultSeverity), true, out NoteSeverity chatsSeverity))
+                    newSeverity = chatsSeverity;
+                else
+                    _banPanelSawmill.Warning("Species ban severity could not be parsed from config!");
+                break;
+            // SS220 chats bans end
         }
 
         if (newSeverity != null)
@@ -644,7 +689,8 @@ public sealed partial class BanPanel : DefaultWindow
     {
         ProtoId<JobPrototype>[]? jobs = null;
         ProtoId<AntagPrototype>[]? antags = null;
-        ProtoId<SpeciesPrototype>[]? species = null;
+        ProtoId<SpeciesPrototype>[]? species = null; // SS220-add-species-bans
+        BannableChats[]? chats = null; // SS220-add-chats-bans
 
         if (TypeOption.SelectedId == (int) Types.Role)
         {
@@ -683,6 +729,7 @@ public sealed partial class BanPanel : DefaultWindow
             antags = antagList.ToArray();
         }
 
+        // SS220-add-species-bans-begin
         if (TypeOption.SelectedId == (int)Types.Species)
         {
             var speciesList = new List<ProtoId<SpeciesPrototype>>();
@@ -708,6 +755,47 @@ public sealed partial class BanPanel : DefaultWindow
 
             species = [.. speciesList];
         }
+        // SS220-add-species-bans-end
+        // SS220-add-chat-bans-begin
+        if (TypeOption.SelectedId == (int) Types.Chats)
+        {
+            var chatsList = new HashSet<BannableChats>();
+            if (_chatsCheckboxes.Count == 0)
+            {
+                _banPanelSawmill.Error("ChatsCheckboxes was empty");
+                return;
+            }
+
+            foreach (var checkbox in _chatsCheckboxes)
+            {
+                if (checkbox is not { Pressed: true, Name: not null })
+                    continue;
+
+                var parsedChat = BannableChats.Invalid;
+                try
+                {
+                    parsedChat = Enum.Parse<BannableChats>(checkbox.Name.Replace(ChatsCheckboxNamePrefix, null));
+                }
+                catch (Exception ex)
+                {
+                    Log.Error($"Got exception while tried to parse BannableChat enum, exception is\n{ex}");
+                    continue;
+                }
+                finally
+                {
+                    chatsList.Add(parsedChat);
+                }
+            }
+
+            if (chatsList.Count == 0)
+            {
+                Tabs.CurrentTab = (int)TabNumbers.Chats;
+                return;
+            }
+
+            chats = [.. chatsList];
+        }
+        // SS220-add-chat-bans-end
 
         if (TypeOption.SelectedId == (int)Types.None)
         {
@@ -745,6 +833,24 @@ public sealed partial class BanPanel : DefaultWindow
         var erase = EraseCheckbox.Pressed;
         var postBanInfo = PostBanInfoCheckbox.Pressed;
 
+        // SS220-correct-ban-type-begin
+        var databaseBanType = TypeOption.SelectedId switch
+        {
+            (int)Types.Chats => BanType.Chat,
+            (int)Types.Role => BanType.Role,
+            (int)Types.Species => BanType.Species,
+            (int)Types.Server => BanType.Server,
+            _ => (BanType?)null
+        };
+
+        if (databaseBanType is null)
+        {
+            TypeOption.ModulateSelfOverride = Color.Red;
+            Tabs.CurrentTab = (int)TabNumbers.BasicInfo;
+            return;
+        }
+        // SS220-correct-ban-type-end
+
         var ban = new Ban(
             player,
             IpAddress,
@@ -754,12 +860,14 @@ public sealed partial class BanPanel : DefaultWindow
             (uint)(TimeEntered * Multiplier),
             reason,
             severity,
-            StatedRoundEntered,
+            StatedRoundEntered, // SS220-add-stated-round
+            databaseBanType.Value, // SS220-correct-ban-type
             jobs,
             antags,
-            species,
+            species, // SS220-add-species-ban
+            chats, // SS220-add-chats-ban
             erase,
-            postBanInfo
+            postBanInfo // SS220-add-post-ban-info
         );
 
         BanSubmitted?.Invoke(ban);

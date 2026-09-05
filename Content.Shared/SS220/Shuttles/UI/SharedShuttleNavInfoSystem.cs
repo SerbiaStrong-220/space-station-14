@@ -7,9 +7,21 @@ namespace Content.Shared.SS220.Shuttles.UI;
 
 public abstract class SharedShuttleNavInfoSystem : EntitySystem
 {
-    public void AddHitscan(MapCoordinates fromCoordinates, float distance, Angle angle, HitscanPrototype prototype)
+    private EntityQuery<ShowNavInfoComponent> _showNavInfoQuery = new();
+
+    public override void Initialize()
     {
-        if (prototype.ShuttleNavHitscanInfo is not { } info)
+        base.Initialize();
+
+        _showNavInfoQuery = GetEntityQuery<ShowNavInfoComponent>();
+    }
+
+    public void AddHitscan(MapCoordinates fromCoordinates, float distance, Angle angle, EntityUid hitscan)
+    {
+        if (!_showNavInfoQuery.TryComp(hitscan, out var showNavInfo))
+            return;
+
+        if (showNavInfo.NavInfo is not ShuttleNavHitscanInfo info)
             return;
 
         AddHitscan(fromCoordinates, distance, angle, info);
@@ -22,9 +34,12 @@ public abstract class SharedShuttleNavInfoSystem : EntitySystem
         AddHitscan(fromCoordinates, toCoordinates, info);
     }
 
-    public void AddHitscan(MapCoordinates fromCoordinates, MapCoordinates toCoordinates, HitscanPrototype prototype)
+    public void AddHitscan(MapCoordinates fromCoordinates, MapCoordinates toCoordinates, EntityUid hitscan)
     {
-        if (prototype.ShuttleNavHitscanInfo is not { } info)
+        if (!_showNavInfoQuery.TryComp(hitscan, out var showNavInfo))
+            return;
+
+        if (showNavInfo.NavInfo is not ShuttleNavHitscanInfo info)
             return;
 
         AddHitscan(fromCoordinates, toCoordinates, info);

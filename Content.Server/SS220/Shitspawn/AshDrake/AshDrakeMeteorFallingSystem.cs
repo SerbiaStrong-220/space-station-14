@@ -4,9 +4,9 @@ using System.Numerics;
 
 namespace Content.Server.SS220.Shitspawn.AshDrake;
 
-public sealed class AshDrakeMeteorFallingSystem : EntitySystem
+public sealed partial class AshDrakeMeteorFallingSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Update(float frameTime)
     {
@@ -15,19 +15,17 @@ public sealed class AshDrakeMeteorFallingSystem : EntitySystem
         var query = EntityQueryEnumerator<AshDrakeMeteorFallingComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
-            if (!TryComp<TransformComponent>(uid, out var xform))
-                continue;
-            var cur = _transform.GetWorldPosition(xform);
+            var cur = _transform.GetWorldPosition(uid);
             var dir = comp.Target - cur;
 
             if (dir.Length() <= comp.Speed * frameTime)
             {
-                _transform.SetWorldPosition(xform, comp.Target);
+                _transform.SetWorldPosition(uid, comp.Target);
                 RemComp<AshDrakeMeteorFallingComponent>(uid);
                 continue;
             }
 
-            _transform.SetWorldPosition(xform, cur + Vector2.Normalize(dir) * comp.Speed * frameTime);
+            _transform.SetWorldPosition(uid, cur + Vector2.Normalize(dir) * comp.Speed * frameTime);
         }
     }
 }

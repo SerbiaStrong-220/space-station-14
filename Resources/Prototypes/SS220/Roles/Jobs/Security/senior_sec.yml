@@ -47,12 +47,12 @@
 #    eyes: ClothingEyesGlassesSecurity #SS220-TwoOne-Floppa-Iteration
     id: SeniorOfficerPDA
     ears: ClothingHeadsetSecurity
-    pocket1: WeaponPistolMk58Nonlethal
+    pocket1: WeaponPistolMk58
   storage:
     back:
     - Flash
-    - MagazinePistolRubber #SS220-DeleteSecurityLetal-Begin
-    - MagazinePistolRubber
+    - MagazinePistol
+    - MagazinePistol
     - FlashlightSeclite
     - DrinkRelaxingPeachCan #SS220-DeleteSecurityLetal-End
 

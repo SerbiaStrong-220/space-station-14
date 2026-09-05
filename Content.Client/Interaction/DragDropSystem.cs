@@ -51,6 +51,7 @@ public sealed class DragDropSystem : SharedDragDropSystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private readonly EntityQuery<SpriteComponent> _spriteQuery = default!;
 
     // ss220 add drag drop container start
     [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
@@ -446,11 +447,9 @@ public sealed class DragDropSystem : SharedDragDropSystem
         var bounds = new Box2(mousePos.Position - expansion, mousePos.Position + expansion);
         var pvsEntities = _lookup.GetEntitiesIntersecting(mousePos.MapId, bounds);
 
-        var spriteQuery = GetEntityQuery<SpriteComponent>();
-
         foreach (var entity in pvsEntities)
         {
-            if (!spriteQuery.TryGetComponent(entity, out var inRangeSprite) ||
+            if (!_spriteQuery.TryGetComponent(entity, out var inRangeSprite) ||
                 !inRangeSprite.Visible ||
                 entity == _draggedEntity)
             {

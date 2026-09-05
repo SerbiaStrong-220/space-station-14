@@ -8,17 +8,19 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: AccessReader
-    access: [[ Command ]]
-  - type: StorageFill
-    contents:
-    - id: ClothingUniformJumpsuitColorBlack
-    - id: ClothingUniformJumpsuitColorRed
-    - id: ClothingUniformJumpsuitHoS
-    - id: ClothingUniformJumpsuitSeniorOfficer
-    - id: ClothingUniformJumpsuitSec
-    - id: ClothingUniformJumpsuitTacticool
-    - id: ClothingHeadHatBeretNavyBlue
-    - id: CigPackBlack
+    access: [ [ Command ] ]
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: ClothingUniformJumpsuitColorBlack
+        - id: ClothingUniformJumpsuitColorRed
+        - id: ClothingUniformJumpsuitHoS
+        - id: ClothingUniformJumpsuitSeniorOfficer
+        - id: ClothingUniformJumpsuitSec
+        - id: ClothingUniformJumpsuitTacticool
+        - id: ClothingHeadHatBeretNavyBlue
+        - id: CigPackBlack
 
 - type: entity
   parent: LockerCaptain
@@ -28,31 +30,33 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: AccessReader
-    access: [[ Command ]]
-  - type: StorageFill
-    contents:
-    - id: ClothingHeadHatERTLeaderBeret
-    - id: ClothingNeckEarthPin
-    - id: ClothingHeadHatCaptain
-    - id: ClothingNeckMantleERTLeader
-    - id: ClothingShoesCentcomBlack
-    - id: ClothingNeckCloakNanotrasen
-    - id: ClothingNeckCloakCap
-    - id: ClothingNeckCloakCapFormal
-    - id: ClothingHeadCapCentcomBlack
-    - id: ClothingUniformJumpsuitCapFormal
-    - id: WeaponRevolverMatebaSouvenir
-    - id: ClothingUniformJumpsuitColorBlack
-    - id: ClothingUniformJumpsuitCentcomOfficerBlack
-    - id: ClothingNeckPolarIMedal
-      amount: 2
-    - id: ClothingNeckPolarIIMedal
-      amount: 3
-    - id: ClothingNeckPolarIIIMedal
-      amount: 4
-    - id: EnergySwordEbentDouble
-    - id: JobIconChangerNT
-    - id: Binoculars
+    access: [ [ Command ] ]
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: ClothingHeadHatERTLeaderBeret
+        - id: ClothingNeckEarthPin
+        - id: ClothingHeadHatCaptain
+        - id: ClothingNeckMantleERTLeader
+        - id: ClothingShoesCentcomBlack
+        - id: ClothingNeckCloakNanotrasen
+        - id: ClothingNeckCloakCap
+        - id: ClothingNeckCloakCapFormal
+        - id: ClothingHeadCapCentcomBlack
+        - id: ClothingUniformJumpsuitCapFormal
+        - id: WeaponRevolverMatebaSouvenir
+        - id: ClothingUniformJumpsuitColorBlack
+        - id: ClothingUniformJumpsuitCentcomOfficerBlack
+        - id: ClothingNeckPolarIMedal
+          amount: 2
+        - id: ClothingNeckPolarIIMedal
+          amount: 3
+        - id: ClothingNeckPolarIIIMedal
+          amount: 4
+        - id: EnergySwordEbentDouble
+        - id: JobIconChangerNT
+        - id: Binoculars
 
 - type: entity
   parent: LockerChiefMedicalOfficer
@@ -62,25 +66,27 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: AccessReader
-    access: [[ Command ]]
-  - type: StorageFill
-    contents:
-    - id: ClothingHeadHatBeretCmo
-    - id: BoxBeaker
-      amount: 2
-    - id: Hypospray
-    - id: EmergencyRollerBedSpawnFolded
-      amount: 2
-    - id: ClothingNeckEarthPin
-    - id: ClothingOuterCoatLabCmo
-    - id: ClothingCloakCmo
-    - id: ClothingNeckCloakNanotrasen
-    - id: ClothingUniformJumpsuitColorBlack
-    - id: ClothingNeckMantleERTLeader
-    - id: ClothingEyesHudMedSec
-    - id: JobIconChangerNT
-    - id: DefibrillatorCompact
-    - id: Binoculars
+    access: [ [ Command ] ]
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: ClothingHeadHatBeretCmo
+        - id: BoxBeaker
+          amount: 2
+        - id: Hypospray
+        - id: EmergencyRollerBedSpawnFolded
+          amount: 2
+        - id: ClothingNeckEarthPin
+        - id: ClothingOuterCoatLabCmo
+        - id: ClothingCloakCmo
+        - id: ClothingNeckCloakNanotrasen
+        - id: ClothingUniformJumpsuitColorBlack
+        - id: ClothingNeckMantleERTLeader
+        - id: ClothingEyesHudMedSec
+        - id: JobIconChangerNT
+        - id: DefibrillatorCompact
+        - id: Binoculars
 
 - type: entity
   parent: LockerEngineer
@@ -90,23 +96,25 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: AccessReader
-    access: [[ Command ]]
-  - type: StorageFill
-    contents:
-    - id: JetpackVoidFilled
-    - id: ClothingNeckMantleERTLeader
-    - id: ClothingEyesGlassesMeson
-    - id: ClothingNeckEarthPin
-    - id: ClothingNeckCloakCe
-    - id: ClothingNeckCloakNanotrasen
-    - id: ClothingBeltChiefEngineerFilled
-    - id: ClothingUniformJumpsuitColorBlack
-    - id: JawsOfLife
-    - id: RCD
-    - id: RCDAmmo
-      amount: 4
-    - id: JobIconChangerNT
-    - id: Binoculars
+    access: [ [ Command ] ]
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: JetpackVoidFilled
+        - id: ClothingNeckMantleERTLeader
+        - id: ClothingEyesGlassesMeson
+        - id: ClothingNeckEarthPin
+        - id: ClothingNeckCloakCe
+        - id: ClothingNeckCloakNanotrasen
+        - id: ClothingBeltChiefEngineerFilled
+        - id: ClothingUniformJumpsuitColorBlack
+        - id: JawsOfLife
+        - id: RCD
+        - id: RCDAmmo
+          amount: 4
+        - id: JobIconChangerNT
+        - id: Binoculars
 
 - type: entity
   parent: LockerMedical
@@ -116,16 +124,18 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: AccessReader
-    access: [[ Command ]]
-  - type: StorageFill
-    contents:
-    - id: BoxBeaker
-      amount: 2
-    - id: Hypospray
-    - id: EmergencyRollerBedSpawnFolded
-      amount: 2
-    - id: ClothingEyesHudMedSec
-    - id: DefibrillatorCompact
+    access: [ [ Command ] ]
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: BoxBeaker
+          amount: 2
+        - id: Hypospray
+        - id: EmergencyRollerBedSpawnFolded
+          amount: 2
+        - id: ClothingEyesHudMedSec
+        - id: DefibrillatorCompact
 
 #Leader
 - type: startingGear
@@ -151,30 +161,30 @@
   name: 1Спавнер Офицера Специальных Операций
   suffix: Shitspawn, Ebent, FractWar
   components:
-    - type: Sprite
-      sprite: Markers/jobs.rsi
-      state: ertleader
-    - type: RandomHumanoidSpawner
-      settings: EbentSpecOpsLeader
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    state: ertleader
+  - type: RandomHumanoidSpawner
+    settings: EbentSpecOpsLeader
 
 - type: randomHumanoidSettings
   id: EbentSpecOpsLeader
   randomizeName: true
   speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran ]
   components:
-    - type: Loadout
-      prototypes: [ EbentSpecOpsLeaderGear ]
-    - type: EventRole
-      roleGroupKey: SpecOps
-      statusIcon: NTSpecOpsOfficer
-    - type: NpcFactionMember
-      factions:
-      - EbentNanoTrasen
-    - type: LimitationRevive
-      reviveLimit: 3
-      beforeDamageDelay: 180
-    - type: RandomHumanoidAppearance
-      randomizeName: false
+  - type: Loadout
+    prototypes: [ EbentSpecOpsLeaderGear ]
+  - type: EventRole
+    roleGroupKey: SpecOps
+    statusIcon: NTSpecOpsOfficer
+  - type: NpcFactionMember
+    factions:
+    - EbentNanoTrasen
+  - type: LimitationRevive
+    reviveLimit: 3
+    beforeDamageDelay: 180
+  - type: RandomHumanoidAppearance
+    randomizeName: false
 
 - type: job
   id: SpecOpsLeader
@@ -213,30 +223,30 @@
   name: 2Спавнер Старшего Инженера Специальных Операций
   suffix: Shitspawn, Ebent, FractWar
   components:
-    - type: Sprite
-      sprite: Markers/jobs.rsi
-      state: ertleader
-    - type: RandomHumanoidSpawner
-      settings: EbentSpecOpsEngineer
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    state: ertleader
+  - type: RandomHumanoidSpawner
+    settings: EbentSpecOpsEngineer
 
 - type: randomHumanoidSettings
   id: EbentSpecOpsEngineer
   randomizeName: true
   speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran ]
   components:
-    - type: Loadout
-      prototypes: [ EbentSpecOpsEngineerGear ]
-    - type: EventRole
-      roleGroupKey: SpecOps
-      statusIcon: NTEngineerOfficer
-    - type: NpcFactionMember
-      factions:
-      - EbentNanoTrasen
-    - type: LimitationRevive
-      reviveLimit: 3
-      beforeDamageDelay: 180
-    - type: RandomHumanoidAppearance
-      randomizeName: false
+  - type: Loadout
+    prototypes: [ EbentSpecOpsEngineerGear ]
+  - type: EventRole
+    roleGroupKey: SpecOps
+    statusIcon: NTEngineerOfficer
+  - type: NpcFactionMember
+    factions:
+    - EbentNanoTrasen
+  - type: LimitationRevive
+    reviveLimit: 3
+    beforeDamageDelay: 180
+  - type: RandomHumanoidAppearance
+    randomizeName: false
 
 - type: job
   id: SpecOpsEngineer
@@ -275,35 +285,35 @@
   name: 5Спавнер Парамедика Специальных Операций
   suffix: Shitspawn, Ebent, FractWar
   components:
-    - type: Sprite
-      sprite: Markers/jobs.rsi
-      state: ertleader
-    - type: RandomHumanoidSpawner
-      settings: EbentSpecOpsCorpsman
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    state: ertleader
+  - type: RandomHumanoidSpawner
+    settings: EbentSpecOpsCorpsman
 
 - type: randomHumanoidSettings
   id: EbentSpecOpsCorpsman
   randomizeName: true
   speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran ]
   components:
-    - type: Loadout
-      prototypes: [ EbentSpecOpsCorpsmanGear ]
-    - type: GhostRole
-      makeSentient: true
-      name: Парамедик Специальных Операций
-      job: SpecOpsCorpsman
-    - type: GhostTakeoverAvailable
-    - type: EventRole
-      roleGroupKey: SpecOps
-      statusIcon: NTMedic
-    - type: NpcFactionMember
-      factions:
-      - EbentNanoTrasen
-    - type: LimitationRevive
-      reviveLimit: 3
-      beforeDamageDelay: 180
-    - type: RandomHumanoidAppearance
-      randomizeName: false
+  - type: Loadout
+    prototypes: [ EbentSpecOpsCorpsmanGear ]
+  - type: GhostRole
+    makeSentient: true
+    name: Парамедик Специальных Операций
+    job: SpecOpsCorpsman
+  - type: GhostTakeoverAvailable
+  - type: EventRole
+    roleGroupKey: SpecOps
+    statusIcon: NTMedic
+  - type: NpcFactionMember
+    factions:
+    - EbentNanoTrasen
+  - type: LimitationRevive
+    reviveLimit: 3
+    beforeDamageDelay: 180
+  - type: RandomHumanoidAppearance
+    randomizeName: false
 
 - type: job
   id: SpecOpsCorpsman
@@ -342,30 +352,30 @@
   name: 3Спавнер Главного Врача Специальных Операций
   suffix: Shitspawn, Ebent, FractWar
   components:
-    - type: Sprite
-      sprite: Markers/jobs.rsi
-      state: ertleader
-    - type: RandomHumanoidSpawner
-      settings: EbentSpecOpsCMO
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    state: ertleader
+  - type: RandomHumanoidSpawner
+    settings: EbentSpecOpsCMO
 
 - type: randomHumanoidSettings
   id: EbentSpecOpsCMO
   randomizeName: true
   speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran ]
   components:
-    - type: Loadout
-      prototypes: [ EbentSpecOpsCMOGear ]
-    - type: EventRole
-      roleGroupKey: SpecOps
-      statusIcon: NTMedicalOfficer
-    - type: RandomHumanoidAppearance
-      randomizeName: false
-    - type: NpcFactionMember
-      factions:
-      - EbentNanoTrasen
-    - type: LimitationRevive
-      reviveLimit: 3
-      beforeDamageDelay: 180
+  - type: Loadout
+    prototypes: [ EbentSpecOpsCMOGear ]
+  - type: EventRole
+    roleGroupKey: SpecOps
+    statusIcon: NTMedicalOfficer
+  - type: RandomHumanoidAppearance
+    randomizeName: false
+  - type: NpcFactionMember
+    factions:
+    - EbentNanoTrasen
+  - type: LimitationRevive
+    reviveLimit: 3
+    beforeDamageDelay: 180
 
 - type: job
   id: SpecOpsCMO
@@ -403,35 +413,35 @@
   name: 4Спавнер Рядового Специальных Операций
   suffix: Shitspawn, Ebent, FractWar
   components:
-    - type: Sprite
-      sprite: Markers/jobs.rsi
-      state: ertleader
-    - type: RandomHumanoidSpawner
-      settings: EbentSpecOpsTrooper
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    state: ertleader
+  - type: RandomHumanoidSpawner
+    settings: EbentSpecOpsTrooper
 
 - type: randomHumanoidSettings
   id: EbentSpecOpsTrooper
   randomizeName: true
   speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran ]
   components:
-    - type: Loadout
-      prototypes: [ EbentSpecOpsTrooperGear ]
-    - type: GhostRole
-      makeSentient: true
-      name: Рядовой Специальных Операций
-      job: SpecOpsFighter
-    - type: GhostTakeoverAvailable
-    - type: RandomHumanoidAppearance
-      randomizeName: false
-    - type: EventRole
-      roleGroupKey: SpecOps
-      statusIcon: NTCombatant
-    - type: NpcFactionMember
-      factions:
-      - EbentNanoTrasen
-    - type: LimitationRevive
-      reviveLimit: 3
-      beforeDamageDelay: 180
+  - type: Loadout
+    prototypes: [ EbentSpecOpsTrooperGear ]
+  - type: GhostRole
+    makeSentient: true
+    name: Рядовой Специальных Операций
+    job: SpecOpsFighter
+  - type: GhostTakeoverAvailable
+  - type: RandomHumanoidAppearance
+    randomizeName: false
+  - type: EventRole
+    roleGroupKey: SpecOps
+    statusIcon: NTCombatant
+  - type: NpcFactionMember
+    factions:
+    - EbentNanoTrasen
+  - type: LimitationRevive
+    reviveLimit: 3
+    beforeDamageDelay: 180
 
 - type: job
   id: SpecOpsFighter

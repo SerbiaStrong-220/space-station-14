@@ -8,10 +8,10 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.Experience;
 
-public sealed class ExperienceEditorSystem : EntitySystem
+public sealed partial class ExperienceEditorSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IUserInterfaceManager _userInterface = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IUserInterfaceManager _userInterface = default!;
 
     public Dictionary<int, KnowledgePrototype> CachedIndexedKnowledge { private set; get; } = new();
 

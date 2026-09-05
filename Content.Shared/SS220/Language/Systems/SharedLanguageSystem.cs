@@ -13,8 +13,8 @@ namespace Content.Shared.SS220.Language.Systems;
 
 public abstract partial class SharedLanguageSystem : EntitySystem
 {
-    [Dependency] private readonly LanguageManager _language = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private LanguageManager _language = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public readonly string UniversalLanguage = "Universal";
     public readonly string GalacticLanguage = "Galactic";

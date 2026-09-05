@@ -21,12 +21,6 @@
   equipment:
     id: ChemistryPDA
     ears: ClothingHeadsetMedical
-    belt: ChemBag
-    pocket1: HandLabeler
-#    eyes: ClothingEyesGlassesChemical #SS220-TwoOne-Floppa-Iterations
-  #storage:
-    #back:
-    #- Stuff
 
 - type: chameleonOutfit
   id: ChemistChameleonOutfit

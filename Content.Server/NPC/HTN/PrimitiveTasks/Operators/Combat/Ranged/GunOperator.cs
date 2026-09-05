@@ -5,14 +5,18 @@ using Content.Shared.CombatMode;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
+using Content.Shared.Prototypes;
+using Content.Shared.Weapons.Hitscan.Components;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Audio;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.NPC.HTN.PrimitiveTasks.Operators.Combat.Ranged;
 
 public sealed partial class GunOperator : HTNOperator, IHtnConditionalShutdown
 {
     [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!; //SS220 Change laser turrets AI
 
     [DataField("shutdownState")]
     public HTNPlanState ShutdownState { get; private set; } = HTNPlanState.TaskFinished;
@@ -81,7 +85,8 @@ public sealed partial class GunOperator : HTNOperator, IHtnConditionalShutdown
 
         //SS220 Change laser turrets AI begin
         var owner = blackboard.GetValue<EntityUid>(NPCBlackboard.Owner);
-        if (_entManager.HasComponent<HitscanBatteryAmmoProviderComponent>(owner))
+        if (_entManager.TryGetComponent<BatteryAmmoProviderComponent>(owner, out var batteryAmmoProvider) &&
+            _proto.Index(batteryAmmoProvider.Prototype).HasComponent<HitscanBasicDamageComponent>())
         {
             ranged.CollisionGroup = CollisionGroup.Opaque;
         }

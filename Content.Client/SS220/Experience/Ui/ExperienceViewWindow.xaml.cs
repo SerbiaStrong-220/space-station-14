@@ -17,7 +17,8 @@ namespace Content.Client.SS220.Experience.Ui;
 [GenerateTypedNameReferences]
 public sealed partial class ExperienceViewWindow : FancyWindow
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+
     private ISawmill _sawmill = default!;
 
     public Action<PlayerChangeSkill>? OnSubmitChangeAction;
@@ -118,7 +119,7 @@ public sealed partial class ExperienceViewWindow : FancyWindow
         {
             divider = new PanelContainer
             {
-                StyleClasses = { StyleBase.ClassLowDivider },
+                StyleClasses = { StyleClass.LowDivider },
             };
             ExperienceTreeGroupsContainer.AddChild(control);
             ExperienceTreeGroupsContainer.AddChild(divider);
@@ -137,7 +138,7 @@ public sealed partial class ExperienceViewWindow : FancyWindow
         {
             divider = new PanelContainer
             {
-                StyleClasses = { StyleBase.ClassLowDivider },
+                StyleClasses = { StyleClass.LowDivider },
             };
             var knowledgeControl = new KnowledgeLabel();
             knowledgeControl.SetKnowledge(knowledge);

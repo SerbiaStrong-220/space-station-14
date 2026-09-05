@@ -33,8 +33,8 @@
   - type: StaticPrice
     price: 40
   - type: LimitedCharges
-    maxCharges: 15
-    lastCharges: 15
+    maxCharges: 30 #SS220 Increasing the spray gun capacity
+    lastCharges: 30 #SS220 Increasing the spray gun capacity
   - type: PhysicalComposition
     materialComposition:
       Steel: 100
@@ -46,6 +46,16 @@
   components:
   - type: AutoRecharge
     rechargeDuration: 1
+
+- type: entity
+  parent: SprayPainter
+  name: experimental spray painter
+  description: An experimental recharging spray painter that can infinitely replicate compressed paint.
+  id: SprayPainterBorg
+  suffix: Borg
+  components:
+  - type: AutoRecharge
+    rechargeDuration: 5
 
 - type: entity
   parent: SprayPainter
@@ -62,6 +72,7 @@
   description: A cartridge of highly compressed paint, commonly used in spray painters.
   components:
   - type: SprayPainterAmmo
+    charges: 30 #SS220 Increasing the spray gun capacity
   - type: Sprite
     sprite: Objects/Tools/spray_painter.rsi
     state: ammo

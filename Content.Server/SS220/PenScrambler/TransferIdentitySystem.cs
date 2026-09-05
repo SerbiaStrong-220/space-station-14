@@ -3,9 +3,9 @@ using Content.Shared.SS220.PenScrambler;
 
 namespace Content.Server.SS220.PenScrambler;
 
-public sealed class TransferIdentitySystem : EntitySystem
+public sealed partial class TransferIdentitySystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

@@ -6,6 +6,12 @@
   requirements:
     - !type:OverallPlaytimeRequirement
       time: 1h # SS220-RoleTime 2
+    # SS220-RoleTime begin
+    # - !type:DepartmentTimeRequirement
+    #   department: Engineering
+    #   time: 10h
+    #   inverted: true # stop playing intern if you're good at engineering!
+    # SS220-RoleTime end
   startingGear: TechnicalAssistantGear
   experienceDefinition: TechnicalAssistantRoleExperience # SS220-experience
   icon: "JobIconTechnicalAssistant"

@@ -1,13 +1,10 @@
 using Content.Server.Medical.Components;
-using Content.Server.PowerCell;
 using Content.Shared.Body.Components;
 using Content.Server.SS220.LimitationRevive; //SS220 LimitationRevive
 using Content.Server.SS220.Medical;
-using Content.Shared.Traits.Assorted;
 using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.DoAfter;
-using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
@@ -15,15 +12,16 @@ using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.MedicalScanner;
 using Content.Shared.Mobs.Components;
-using Content.Shared.Paper;
 using Content.Shared.Popups;
+using Content.Shared.PowerCell;
 using Content.Shared.Temperature.Components;
 using Content.Shared.Traits.Assorted;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Content.Server.Body.Systems;
+using Content.Shared.SS220.LimitationRevive;
 
 namespace Content.Server.Medical;
 
@@ -38,13 +36,8 @@ public sealed class HealthAnalyzerSystem : EntitySystem
     [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
     [Dependency] private readonly TransformSystem _transformSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    // SS220-health-analyzer-report - bgn
-    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-    [Dependency] private readonly PaperSystem _paperSystem = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly HealthAnalyzerPrintSystem _healthSystem = default!;
-    // SS220-health-analyzer-report - end
+    [Dependency] private readonly BloodstreamSystem _bloodstreamSystem = default!;
+    [Dependency] private readonly HealthAnalyzerPrintSystem _healthAnalyzerPrint = default!; // ss220 add health analyzer
 
     public override void Initialize()
     {
@@ -80,11 +73,12 @@ public sealed class HealthAnalyzerSystem : EntitySystem
             var patientCoordinates = Transform(patient).Coordinates;
             if (component.MaxScanRange != null && !_transformSystem.InRange(patientCoordinates, transform.Coordinates, component.MaxScanRange.Value))
             {
-                //Range too far, disable updates
-                StopAnalyzingEntity((uid, component), patient);
+                //Range too far, disable updates until they are back in range
+                PauseAnalyzingEntity((uid, component), patient);
                 continue;
             }
 
+            component.IsAnalyzerActive = true;
             UpdateScannedUser(uid, patient, true);
         }
     }
@@ -94,7 +88,7 @@ public sealed class HealthAnalyzerSystem : EntitySystem
     /// </summary>
     private void OnAfterInteract(Entity<HealthAnalyzerComponent> uid, ref AfterInteractEvent args)
     {
-        if (args.Target == null || !args.CanReach || !HasComp<MobStateComponent>(args.Target) || !_cell.HasDrawCharge(uid, user: args.User))
+        if (args.Target == null || !args.CanReach || !HasComp<MobStateComponent>(args.Target) || !_cell.HasDrawCharge(uid.Owner, user: args.User))
             return;
 
         _audio.PlayPvs(uid.Comp.ScanningBeginSound, uid);
@@ -114,7 +108,7 @@ public sealed class HealthAnalyzerSystem : EntitySystem
 
     private void OnDoAfter(Entity<HealthAnalyzerComponent> uid, ref HealthAnalyzerDoAfterEvent args)
     {
-        if (args.Handled || args.Cancelled || args.Target == null || !_cell.HasDrawCharge(uid, user: args.User))
+        if (args.Handled || args.Cancelled || args.Target == null || !_cell.HasDrawCharge(uid.Owner, user: args.User))
             return;
 
         if (!uid.Comp.Silent)
@@ -190,6 +184,21 @@ public sealed class HealthAnalyzerSystem : EntitySystem
         UpdateScannedUser(healthAnalyzer, target, false);
     }
 
+
+    /// <summary>
+    /// If the scanner is active, sends one last update and sets it to inactive.
+    /// </summary>
+    /// <param name="healthAnalyzer">The health analyzer that's receiving the updates</param>
+    /// <param name="target">The entity to analyze</param>
+    private void PauseAnalyzingEntity(Entity<HealthAnalyzerComponent> healthAnalyzer, EntityUid target)
+    {
+        if (!healthAnalyzer.Comp.IsAnalyzerActive)
+            return;
+
+        UpdateScannedUser(healthAnalyzer, target, false);
+        healthAnalyzer.Comp.IsAnalyzerActive = false;
+    }
+
     /// <summary>
     /// Send an update for the target to the healthAnalyzer
     /// </summary>
@@ -198,15 +207,34 @@ public sealed class HealthAnalyzerSystem : EntitySystem
     /// <param name="scanMode">True makes the UI show ACTIVE, False makes the UI show INACTIVE</param>
     public void UpdateScannedUser(EntityUid healthAnalyzer, EntityUid target, bool scanMode)
     {
-        if (!TryComp<HealthAnalyzerComponent>(healthAnalyzer, out var healthAnalyzerComp)) // SS220-health-analyzer-report
+        if (!_uiSystem.HasUi(healthAnalyzer, HealthAnalyzerUiKey.Key)
+            || !HasComp<DamageableComponent>(target))
             return;
 
-        if (!TryComp<DamageableComponent>(target, out var damageable)) // SS220-health-analyzer-report
-            return;
+        var uiState = GetHealthAnalyzerUiState(target, healthAnalyzer); // ss220 add health analyzer
+        uiState.ScanMode = scanMode;
 
+        _uiSystem.ServerSendUiMessage(
+            healthAnalyzer,
+            HealthAnalyzerUiKey.Key,
+            new HealthAnalyzerScannedUserMessage(uiState)
+        );
+    }
+
+    /// <summary>
+    /// Creates a HealthAnalyzerState based on the current state of an entity.
+    /// </summary>
+    /// <param name="target">The entity being scanned</param>
+    /// <returns></returns>
+    public HealthAnalyzerUiState GetHealthAnalyzerUiState(EntityUid? target, EntityUid healthAnalyzer) // ss220 add health analyzer
+    {
+        if (!target.HasValue || !TryComp<DamageableComponent>(target, out var damageable)) // ss220 add health analyzer
+            return new HealthAnalyzerUiState();
+
+        var entity = target.Value;
         var bodyTemperature = float.NaN;
 
-        if (TryComp<TemperatureComponent>(target, out var temp))
+        if (TryComp<TemperatureComponent>(entity, out var temp))
             bodyTemperature = temp.CurrentTemperature;
 
         var bloodAmount = float.NaN;
@@ -214,50 +242,51 @@ public sealed class HealthAnalyzerSystem : EntitySystem
         var unrevivable = false;
         int? counterDeath = null; //SS220 LimitationRevive
 
-        if (TryComp<BloodstreamComponent>(target, out var bloodstream) &&
-            _solutionContainerSystem.ResolveSolution(target, bloodstream.BloodSolutionName,
+        if (TryComp<BloodstreamComponent>(entity, out var bloodstream) &&
+            _solutionContainerSystem.ResolveSolution(entity, bloodstream.BloodSolutionName,
                 ref bloodstream.BloodSolution, out var bloodSolution))
         {
-            bloodAmount = bloodSolution.FillFraction;
+            bloodAmount = _bloodstreamSystem.GetBloodLevel(entity);
             bleeding = bloodstream.BleedAmount > 0;
         }
 
-        if (TryComp<UnrevivableComponent>(target, out var unrevivableComp) && unrevivableComp.Analyzable)
+        if (TryComp<UnrevivableComponent>(entity, out var unrevivableComp) && unrevivableComp.Analyzable)
             unrevivable = true;
 
         //SS220 LimitationRevive - start
         if (TryComp<LimitationReviveComponent>(target, out var reviveComp))
-             counterDeath = reviveComp.DeathCounter;
+            counterDeath = reviveComp.DeathCounter;
         //SS220 LimitationRevive - end
 
-        // SS220-health-analyzer-report - bgn
+        // ss220 add health analyzer start
         var scannedName = HasComp<MetaDataComponent>(target)
-            ? Identity.Name(target, EntityManager)
+            ? Identity.Name(target.Value, EntityManager)
             : Loc.GetString("health-analyzer-window-entity-unknown-text");
 
-        healthAnalyzerComp.LastScannedName = scannedName;
-        healthAnalyzerComp.LastScannedReport = _healthSystem.BuildScanReport(
-            target,
-            damageable,
-            scannedName,
-            bodyTemperature,
-            bloodAmount,
-            bleeding,
-            unrevivable,
-            counterDeath);
+        if (TryComp<HealthAnalyzerComponent>(healthAnalyzer, out var healthAnalyzerComp))
+        {
+            healthAnalyzerComp.LastScannedName = scannedName;
+            healthAnalyzerComp.LastScannedReport = _healthAnalyzerPrint.BuildScanReport(
+                target.Value,
+                damageable,
+                scannedName,
+                bodyTemperature,
+                bloodAmount,
+                bleeding,
+                unrevivable,
+                counterDeath);
+        }
+        // ss220 add health analyzer end
 
-        if (!_uiSystem.HasUi(healthAnalyzer, HealthAnalyzerUiKey.Key))
-            return;
-        // SS220-health-analyzer-report - end
-        _uiSystem.ServerSendUiMessage(healthAnalyzer, HealthAnalyzerUiKey.Key, new HealthAnalyzerScannedUserMessage(
-            GetNetEntity(target),
+        return new HealthAnalyzerUiState(
+            GetNetEntity(entity),
             bodyTemperature,
             bloodAmount,
-            healthAnalyzerComp.CanPrint, // SS220-health-analyzer-report
-            scanMode,
+            null,
             bleeding,
             unrevivable,
-            counterDeath //SS220 LimitationRevive
-        ));
+            counterDeath, //SS220 LimitationRevive
+            healthAnalyzerComp?.CanPrint ?? false // SS220-health-analyzer-report
+        );
     }
 }

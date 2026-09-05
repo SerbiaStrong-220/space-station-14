@@ -28,6 +28,13 @@ public sealed class MedicineMachineUseSkillIssueSystem : SkillEntitySystem
 
     private void OnGetDefibrillatorUseChances(Entity<MedicineMachineUseSkillIssueComponent> entity, ref GetDefibrillatorUseChances args)
     {
+        // TODO: this should be moved somewhere generic
+        if (ResolveExperienceEntityFromSkillEntity(entity, out var experienceEntity) && HasComp<BypassSkillCheckComponent>(experienceEntity))
+        {
+            args.FailureChance = 0f;
+            args.SelfDamageChance = 0f;
+        }
+
         var newFailureChance = ComputeNewChance(entity.Comp.DefibrillatorFailureChance, args.FailureChance);
         var newSelfDamageChance = ComputeNewChance(entity.Comp.DefibrillatorSelfDamageChance, args.SelfDamageChance);
 

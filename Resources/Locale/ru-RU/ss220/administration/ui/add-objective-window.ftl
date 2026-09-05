@@ -16,3 +16,5 @@ ui-add-objective-force-assign-text = Принудительное добавле
 ui-add-objective-chat-manager-announce = Ваш список целей был обновлен! Ознакомиться с ними можно через меню персонажа.
 
 ui-toggle-status-objective-button = Сменить статус цели
+
+ui-add-objective-line-edit-placeholder = ID прототипа цели

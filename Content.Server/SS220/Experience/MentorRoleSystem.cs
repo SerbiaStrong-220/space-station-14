@@ -1,16 +1,16 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Server.Chat.Systems;
+using Content.Shared.Chat;
 using Content.Shared.SS220.Experience;
 using Content.Shared.SS220.Experience.Components;
 using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.Experience;
 
-public sealed class MentorRoleSystem : EntitySystem
+public sealed partial class MentorRoleSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
 
     public override void Initialize()
     {

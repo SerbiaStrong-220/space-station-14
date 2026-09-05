@@ -3,8 +3,10 @@
   parent: ClothingBackpackDuffel
   id: ClothingBackpackDuffelIAAFilled
   components:
-    - type: StorageFill
-      contents:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
         - id: BoxSurvival
         - id: Telescopichka
         - id: ExpensiveLighterNanotrasen #SS220-Zippo
@@ -14,7 +16,9 @@
   parent: ClothingBackpackDuffelMedical
   id: ClothingBackpackDuffelPsychologistFilled
   components:
-    - type: StorageFill
-      contents:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
         - id: BoxSurvivalMedical
         - id: RubberStampPsychologist

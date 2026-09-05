@@ -17,8 +17,6 @@ public abstract class SharedObjectivesSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _protoMan = default!;
     [Dependency] private readonly MetaDataSystem _meta = default!; // ss220 add custom goals x2
 
-    private EntityQuery<MetaDataComponent> _metaQuery;
-
     private static readonly EntProtoId FreeObjectiveProto = "SS220FreeObjective"; // ss220 add custom goals x2
 
     public IEnumerable<string>? ObjectivesQuery; // ss220 add custom goals x2
@@ -26,8 +24,6 @@ public abstract class SharedObjectivesSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-
-        _metaQuery = GetEntityQuery<MetaDataComponent>();
 
         // ss220 add custom goals x2 start
         CreateCompletions();
@@ -60,10 +56,10 @@ public abstract class SharedObjectivesSystem : EntitySystem
         // only check for duplicate prototypes if it's unique
         if (comp.Unique)
         {
-            var proto = _metaQuery.GetComponent(uid).EntityPrototype?.ID;
+            var proto = MetaData(uid).EntityPrototype?.ID;
             foreach (var objective in mind.Objectives)
             {
-                if (_metaQuery.GetComponent(objective).EntityPrototype?.ID == proto)
+                if (MetaData(objective).EntityPrototype?.ID == proto)
                     return false;
             }
         }

@@ -31,6 +31,6 @@
   components:
   - type: Objective
     icon:
-      sprite: SS220/Objects/CultYogg/migomycete.rsi
+      sprite: SS220/Objects/CultYogg/Botany/migomycete.rsi
       state: produce
   - type: CultYoggEnslaveCondition

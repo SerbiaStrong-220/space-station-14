@@ -5,9 +5,9 @@ using Robust.Shared.Map;
 
 namespace Content.Server.SS220.CultYogg.StrangeFruit;
 
-public sealed class TileSpawnInRangeOnTriggerSystem : EntitySystem
+public sealed partial class TileSpawnInRangeOnTriggerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
 
     public override void Initialize()
     {

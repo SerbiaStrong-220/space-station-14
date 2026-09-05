@@ -4,8 +4,14 @@
   description: job-description-research-assistant
   playTimeTracker: JobResearchAssistant
   requirements:
+    # SS220-RoleTime begin
     - !type:OverallPlaytimeRequirement
-      time: 1h # SS220-RoleTime №2
+      time: 1h
+    # - !type:DepartmentTimeRequirement
+    #   department: Science
+    #   time: 10h
+    #   inverted: true # stop playing intern if you're good at science!
+    # SS220-RoleTime end
   startingGear: ResearchAssistantGear
   experienceDefinition: ResearchAssistantRoleExperience # SS220-experience
   icon: "JobIconResearchAssistant"

@@ -12,10 +12,10 @@ namespace Content.Server.SS220.IgnoreLightVision.KeenHearing;
 /// <summary>
 /// Handles enabling of KeenHearing by action
 /// </summary>
-public sealed class KeenHearingSystem : SharedAddIgnoreLightVisionOverlaySystem<KeenHearingComponent>
+public sealed partial class KeenHearingSystem : SharedAddIgnoreLightVisionOverlaySystem<KeenHearingComponent>
 {
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
 
     private readonly EntProtoId _actionProto = "ActionToggleKeenHearing";
 

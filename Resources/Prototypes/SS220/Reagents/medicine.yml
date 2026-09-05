@@ -7,7 +7,7 @@
   flavor: medicine
   color: "#afdd9a"
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:GenericStatusEffect
         key: Jitter
@@ -31,7 +31,7 @@
   flavor: medicine
   color: "#ded0ee"
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         probability: 0.2
@@ -117,7 +117,7 @@
   flavor: soothing
   color: "#9400D3"
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:GenericStatusEffect
         key: Pacified
@@ -127,8 +127,6 @@
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Arachnid ]
-    Narcotic:
-      effects:
       - !type:GenericStatusEffect
         key: SeeingRainbows
         component: SeeingRainbows
@@ -154,15 +152,22 @@
   flavor: HolyMoly
   color: "#e8e8e8"
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
-          groups:
-            Brute: -10
-            Burn: -10
-            Airloss: -10
-            Toxin: -10
+          types:
+            Blunt: -3.34
+            Slash: -3.33
+            Piercing: -3.33
+            Heat: -2.5
+            Shock: -2.5
+            Cold: -2.5
+            Caustic: -2.5
+            Poison: -5
+            Radiation: -5
+            Asphyxiation: -5
+            Bloodloss: -5
 
 - type: reagent
   id: Nicotizine
@@ -173,7 +178,7 @@
   flavor: medicine
   color: "#ff867d"
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         probability: 0.3
@@ -213,7 +218,7 @@
   color: "#e832ff"
   worksOnTheDead: true
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 0.25
       effects:
         - !type:HealthChange
@@ -234,7 +239,7 @@
   color: "#e4a010"
   worksOnTheDead: true
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:ChemicalAdaptationEffect
         reagent: Nicergoline

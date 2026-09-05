@@ -14,6 +14,7 @@
     department: Command
     time: 30h # SS220-AITime-30H
   # SS220-AITime-end
+  weight: 10
   canBeAntag: false
   icon: JobIconStationAi
   experienceDefinition: StationAiRoleExperience # SS220-experience

@@ -30,3 +30,6 @@ reagent-name-catariajuice = мятный сок
 reagent-desc-catariajuice = Притягивает кошек.
 reagent-name-Orion-Nebula = туманность Ориона
 reagent-desc-Orion-Nebula = Космический коктейль. С ним невзрачные и уже привычные космические пейзажи обретут новые краски.
+reagent-name-YotunBreath = соус "Дыхание Ётуна"
+reagent-desc-YotunBreath = Этот соус пропитан дыханием вечного холода. Он способен проморозить вас до костей.
+yotun-breath-effect-freeze = Вас пробирает ледяной озноб, вы ощущаете дыхание Ётуна!

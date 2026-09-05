@@ -165,6 +165,7 @@
   - type: Store
     balance:
       Telecrystal: 99999
+    expectedFaction: #nulls out the expected faction
   # SS220-debug-uplink-fix-begin
   - type: Tag
     tags:

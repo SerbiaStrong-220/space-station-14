@@ -90,7 +90,7 @@
       # SS220 Changes invis so that box is less visible at all times.
     - type: StealthOnMove
       passiveVisibilityRate: -1
-      movementVisibilityRate: 0
+      movementVisibilityRate: 0.20
     # SS220-hidden-desc-begin
     - type: HiddenDescription
       entries:

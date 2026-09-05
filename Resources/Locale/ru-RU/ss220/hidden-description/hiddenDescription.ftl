@@ -28,6 +28,11 @@ hidden-desc-DeathRattleImplanterInterdyne-research = [color=#D381C9]Внутри
 hidden-desc-DeathRattleImplanterInterdyne-security = [color=#009ae1]Внутри имплантера находится имплант "Предсмертный хрип" гражданского образца.[/color]
 hidden-desc-DeathRattleImplanterInterdyne-syndicate = [color=#e31735]Внутри имплант "Предсмертный хрип" гражданского образца. Сообщит в защищенный радиоканал, если носитель окажется в критическом состоянии или погибнет.[/color]
 
+hidden-desc-DeathRattleImplantStation-medical = [color=#52B4E9]Сверив серийные номера, вы понимаете, что внутри легальный, сертифицированный имплант "Предсмертный хрип".[/color]
+hidden-desc-DeathRattleImplantStation-research = [color=#D381C9]Внутри находится имплант "Предсмертный хрип" станционного образца.[/color]
+hidden-desc-DeathRattleImplantStation-security = [color=#009ae1]Внутри находится имплант "Предсмертный хрип" станционного образца.[/color]
+hidden-desc-DeathRattleImplantStation-syndicate = [color=#e31735]Внутри имплант "Предсмертный хрип" станционного образца. Сообщит в выбранный радиоканал, если носитель окажется в критическом состоянии или погибнет.[/color]
+
 # Regular decriptions below
 
 ent-ThermalVisorImplanter = { ent-Implanter }
@@ -50,6 +55,7 @@ ent-BoxDnaCopyImplant = { ent-BoxCardboard }
 
 ent-PaperDnaCopyImplanter = { ent-Paper }
     .desc = { ent-Paper.desc }
+
 ent-AdrenalImplanter = { ent-Implanter }
     .desc = { ent-Implanter.desc }
     .suffix = Адреналин
@@ -60,13 +66,23 @@ ent-AdrenalImplant = имплант Адреналина
 ent-ActionActivateAdrenalImplant = Ввести жидкость
     .desc = Вводит небольшую дозу разных лечащих веществ, эффект держится около 45 секунд. Можно ввести в предсмертном состоянии
 
+ent-NanoSurgeryMachinesImplanter = { ent-Implanter }
+    .desc = { ent-Implanter.desc }
+    .suffix = Наномашины-хирурги
+
+ent-NanoSurgeryMachinesImplant = имплант наномашин-хирургов
+    .desc = Микрочип, который вживляют под кожу.
+
+ent-ActionActivateNanoSurgeryMachinesImplant = Активировать наномашин-хирургов
+    .desc = Запускает синхроимпульс для работы наномашин-хирургов, удаляющие застрявшие осколки из тела. Работает в предсмертном состоянии.
+
 ent-DeathRattleImplanterInterdyne = { ent-Implanter }
     .desc = { ent-Implanter.desc }
-    .suffix = Interdyne Rattle
+    .suffix = Предсмертный хрип, Интердайн
 
 ent-DeathRattleImplantInterdyne = имплант Предсмертный хрип Интердайн
     .desc = Микрочип, который вживляют под кожу.
-
+    .true-name = имплант "Предсмертный хрип" образца Интердайн
 # Uplink locale
 
 uplink-thermal-glasses-name = Термальные очки
@@ -80,6 +96,12 @@ uplink-dna-copy-implanter-desc = Новейшая разработка синд�
 
 uplink-adrenal-implanter-name = Имплант Адреналина
 uplink-adrenal-implanter-desc = Внутри импланта содержится жидкость, которая ускоренно восстанавливает организм. Впрыскивается по малейшему импульсу даже в предсмертном состоянии
+
+uplink-nano-surgery-machines-implanter-name = Имплантер наномашин-хирургов
+uplink-nano-surgery-machines-implanter-desc = Вживляет чип для экстренной полевой хирургии. Активирует рой наномашин для удаления осколков из тела. Работает в критическом состоянии.
+
+uplink-syndicate-fragment-extractor-name = магнитный экстрактор осколков
+uplink-syndicate-fragment-extractor-desc = Компактный хирургический электромагнит военного образца. Позволяет быстро вытянуть пули и шрапнель из плоти прямо на поле боя, не прибегая к помощи врачей. Поставляется с заряженной батареей.
 
 # silent shoes
 hidden-desc-SilentShoes-syndicate = [color=#e31735]Разработанные специально для шпионских миссий Синдиката, эти ботинки совершенно бесшумны на любых поверхностях[/color]

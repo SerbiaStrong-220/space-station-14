@@ -8,25 +8,25 @@ using Robust.Shared.Utility;
 namespace Content.Shared.SS220.Experience;
 
 [Prototype]
-public sealed class SkillPrototype : IPrototype, ISerializationHooks
+public sealed partial class SkillPrototype : IPrototype, ISerializationHooks
 {
     [ViewVariables]
     [IdDataField]
     public string ID { get; private set; } = default!;
 
     [DataField(required: true)]
-    public SkillLevelInfo LevelInfo;
+    public SkillLevelInfo LevelInfo { get; private set; }
 
     [DataField(required: true)]
-    public SkillLevelDescription LevelDescription;
+    public SkillLevelDescription LevelDescription { get; private set; }
 
     [DataField]
     [AlwaysPushInheritance]
-    public ComponentRegistry Components { get; } = [];
+    public ComponentRegistry Components { get; private set; } = [];
 
     [DataField]
     [AlwaysPushInheritance]
-    public ComponentRegistry RemoveComponents { get; } = [];
+    public ComponentRegistry RemoveComponents { get; private set; } = [];
 
     /// <summary>
     /// Deletes and then adds component if component with same type existed

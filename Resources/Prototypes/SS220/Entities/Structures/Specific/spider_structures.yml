@@ -241,8 +241,6 @@
     state: webpassage
   - type: CollisionPassage
     whitelist:
-      components:
-      - ShardCrystalBlueXeno
       tags:
       - SpiderQueen
       - SpiderServant

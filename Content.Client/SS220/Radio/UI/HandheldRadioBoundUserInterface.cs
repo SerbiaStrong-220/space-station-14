@@ -9,9 +9,9 @@ using Content.Shared.Radio;
 namespace Content.Client.SS220.Radio.UI;
 
 [UsedImplicitly]
-public sealed class HandheldRadioBoundUserInterface : BoundUserInterface
+public sealed partial class HandheldRadioBoundUserInterface : BoundUserInterface
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     [ViewVariables]
     private HandheldRadioMenu? _menu;
@@ -41,7 +41,7 @@ public sealed class HandheldRadioBoundUserInterface : BoundUserInterface
             SendMessage(new SelectHandheldRadioChannelMessage(channel));
         };
         SetChannelBorders(_menu);
-        _menu.Opened = false;
+        _menu.MenuOpened = false;
 
         _menu.OnClose += Close;
         _menu.OpenCentered();

@@ -33,12 +33,12 @@
     id: SecurityPilotPDA #SS220 SD-pda-some-fixes
     belt: ClothingBeltSecurityFilled
     gloves: ClothingHandsGlovesCombat
-    pocket1: WeaponPistolMk58Nonlethal
+    pocket1: WeaponPistolMk58
   storage:
     back:
     - Flash
-    - MagazinePistolRubber
-    - MagazinePistolRubber
+    - MagazinePistol
+    - MagazinePistol
     - FlashlightSeclite
     - DrinkRelaxingPeachCan
 

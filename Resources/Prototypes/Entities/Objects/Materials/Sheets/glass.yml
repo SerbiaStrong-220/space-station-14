@@ -49,6 +49,14 @@
     solutions:
       glass:
         canReact: false
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Materials/glass_pick_up.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Materials/glass_drop.ogg
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   parent: SheetGlassBase
@@ -554,7 +562,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: Extractable
-    grindableSolutionName: brassglass
+    grindableSolutionName: cglass
   - type: SolutionContainerManager
     solutions:
       cglass:

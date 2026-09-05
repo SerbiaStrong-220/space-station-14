@@ -6,9 +6,9 @@ using Robust.Shared.Random;
 
 namespace Content.Server.SS220.MindSlave.DisfunctionSystems;
 
-public sealed class MindSlaveDisfunctionAccentSystem : EntitySystem
+public sealed partial class MindSlaveDisfunctionAccentSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     private readonly List<string> _vowels = ["а", "е", "у", "о", "и", "я"];
     private readonly List<string> _consonants = ["в", "п", "р", "к", "м", "т", "с"];

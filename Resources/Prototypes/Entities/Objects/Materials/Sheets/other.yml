@@ -114,10 +114,6 @@
         - ReagentId: Plasma
           Quantity: 10
         canReact: false
-  - type: Tag # Redundant
-    tags:
-    - Sheet
-    - ConstructionMaterial
 
 - type: entity
   parent: SheetPlasma
@@ -187,6 +183,14 @@
         - ReagentId: Phosphorus
           Quantity: 5
         canReact: false
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Materials/plastic_pick_up.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Materials/plastic_drop.ogg
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   parent: SheetPlastic

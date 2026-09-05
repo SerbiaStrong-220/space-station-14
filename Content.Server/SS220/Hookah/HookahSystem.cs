@@ -1,11 +1,11 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Systems;
 using Content.Shared.Atmos;
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry;
-using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DoAfter;
@@ -19,7 +19,9 @@ using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.SS220.Hookah;
 using Content.Shared.SS220.Hookah.Components;
+using Content.Shared.SS220.HookahElectric.Components;
 using Content.Shared.Stacks;
+using Content.Shared.Tag;
 using Content.Shared.Temperature;
 using Content.Shared.Timing;
 using Robust.Server.GameObjects;
@@ -30,8 +32,24 @@ using Robust.Shared.Map.Components;
 
 namespace Content.Server.SS220.Hookah;
 
-public sealed class HookahSystem : EntitySystem
+public sealed partial class HookahSystem : EntitySystem
 {
+    [Dependency] private AtmosphereSystem _atmos = default!;
+    [Dependency] private BloodstreamSystem _bloodstream = default!;
+    [Dependency] private ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private ReactiveSystem _reactive = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutions = default!;
+    [Dependency] private SharedStackSystem _stack = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
+
     private static readonly LocId HookahHoseAlreadyConnected = "hookah-hose-already-connected";
     private static readonly LocId HookahAlreadyLit = "hookah-already-lit";
     private static readonly LocId HookahNoCoal = "hookah-no-coal";
@@ -50,26 +68,11 @@ public sealed class HookahSystem : EntitySystem
     private static readonly LocId HookahExamineTobacco = "hookah-examine-tobacco";
     private static readonly LocId HookahExamineCoal = "hookah-examine-coal";
 
-    [Dependency] private readonly AtmosphereSystem _atmos = default!;
-    [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
-    [Dependency] private readonly ReactiveSystem _reactive = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutions = default!;
-    [Dependency] private readonly SharedStackSystem _stack = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
-
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<HookahComponent, ComponentInit>(OnInit);
+        SubscribeLocalEvent<HookahComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<HookahComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<HookahComponent, InteractHandEvent>(OnInteractHand);
         SubscribeLocalEvent<HookahComponent, InteractUsingEvent>(OnInteractUsing);
@@ -81,8 +84,7 @@ public sealed class HookahSystem : EntitySystem
         SubscribeLocalEvent<HookahHoseComponent, DroppedEvent>(OnHoseDropped);
         SubscribeLocalEvent<HookahHoseComponent, EntParentChangedMessage>(OnHoseParentChanged);
 
-        SubscribeLocalEvent<SmokingFuelComponent, ComponentInit>(OnFuelInit);
-        SubscribeLocalEvent<SmokingFuelComponent, ComponentShutdown>(OnFuelShutdown);
+        InitializeElectric();
     }
 
     public override void Update(float frameTime)
@@ -91,38 +93,54 @@ public sealed class HookahSystem : EntitySystem
         UpdateCoal(frameTime);
     }
 
-    private void OnFuelInit(Entity<SmokingFuelComponent> ent, ref ComponentInit args)
+    private void OnStartup(Entity<HookahComponent> ent, ref ComponentStartup args)
     {
-        _itemSlots.AddItemSlot(ent, SmokingFuelComponent.TobaccoSlotId, ent.Comp.TobaccoSlot);
-    }
+        if (!HasComp<ItemSlotsComponent>(ent))
+        {
+            UpdateAppearance(ent);
+            return;
+        }
 
-    private void OnFuelShutdown(Entity<SmokingFuelComponent> ent, ref ComponentShutdown args)
-    {
-        _itemSlots.RemoveItemSlot(ent, ent.Comp.TobaccoSlot);
-    }
+        if (TryComp<HookahCoalHolderComponent>(ent, out var coalHolder))
+        {
+            if (_itemSlots.TryGetSlot(ent, HookahCoalHolderComponent.CoalSlotId, out var slot))
+                coalHolder.CoalSlot = slot;
 
-    private void OnInit(Entity<HookahComponent> ent, ref ComponentInit args)
-    {
-        _itemSlots.AddItemSlot(ent, HookahComponent.CoalSlotId, ent.Comp.CoalSlot);
-
-        if (ent.Comp.IsLit)
-            EnsureComp<ActiveHookahComponent>(ent);
+            if (ent.Comp.IsLit)
+                EnsureComp<ActiveHookahComponent>(ent);
+        }
 
         UpdateAppearance(ent);
     }
 
     private void OnShutdown(Entity<HookahComponent> ent, ref ComponentShutdown args)
     {
-        _itemSlots.RemoveItemSlot(ent, ent.Comp.CoalSlot);
+        if (TryComp(ent.Owner, out HookahElectricComponent? electric))
+        {
+            QueueElectricHose(electric.LeftHose);
+            QueueElectricHose(electric.RightHose);
+            return;
+        }
 
-        if (ent.Comp.ConnectedHose is { } hose && !TerminatingOrDeleted(hose))
-            QueueDel(hose);
+        QueueElectricHose(ent.Comp.ConnectedHose);
+    }
+
+    private void QueueElectricHose(EntityUid? hose)
+    {
+        if (hose is { } uid && !TerminatingOrDeleted(uid))
+            QueueDel(uid);
     }
 
     private void OnInteractHand(Entity<HookahComponent> ent, ref InteractHandEvent args)
     {
         if (args.Handled)
             return;
+
+        if (TryComp(ent.Owner, out HookahElectricComponent? electric))
+        {
+            TryTakeElectricHose(ent, electric, ref args);
+            return;
+        }
 
         if (ent.Comp.ConnectedHose is { } existing && !TerminatingOrDeleted(existing))
         {
@@ -131,24 +149,34 @@ public sealed class HookahSystem : EntitySystem
             return;
         }
 
+        ent.Comp.ConnectedHose = SpawnHookahHose(ent, args.User, new Vector2(0.15f, 0f));
+        Dirty(ent);
+        UpdateAppearance(ent);
+        args.Handled = true;
+    }
+
+    private EntityUid SpawnHookahHose(
+        Entity<HookahComponent> ent,
+        EntityUid user,
+        Vector2 offset,
+        HookahElectricHoseSide? side = null)
+    {
         var hose = Spawn(ent.Comp.HosePrototype, _transform.GetMapCoordinates(ent));
         var hoseComp = EnsureComp<HookahHoseComponent>(hose);
         hoseComp.HookahUid = ent;
 
-        ent.Comp.ConnectedHose = hose;
-        Dirty(ent);
+        if (side is { } hoseSide)
+            EnsureComp<HookahElectricHoseComponent>(hose).Side = hoseSide;
 
         var visuals = EnsureComp<JointVisualsComponent>(hose);
         visuals.Sprite = ent.Comp.RopeSprite;
         visuals.Target = ent;
-        visuals.OffsetB = new Vector2(0.15f, 0f);
+        visuals.OffsetB = offset;
         Dirty(hose, visuals);
 
-        _hands.TryPickupAnyHand(args.User, hose);
+        _hands.TryPickupAnyHand(user, hose);
         RefreshHose((hose, hoseComp));
-        UpdateAppearance(ent);
-
-        args.Handled = true;
+        return hose;
     }
 
     private void OnInteractUsing(Entity<HookahComponent> ent, ref InteractUsingEvent args)
@@ -156,15 +184,19 @@ public sealed class HookahSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (HasComp<HookahCoalComponent>(args.Used))
+        if (TryComp<SmokingFuelComponent>(ent, out var fuel) && IsTobacco(args.Used, fuel))
         {
-            InsertCoal(ent, ref args);
+            InsertTobacco(ent, ref args);
             return;
         }
 
-        if (TryComp<SmokingFuelComponent>(ent, out var fuel) && IsTobacco(args.Used, fuel))
+        if (HasComp<HookahElectricComponent>(ent.Owner) ||
+            !TryComp<HookahCoalHolderComponent>(ent, out var coalHolder))
+            return;
+
+        if (HasComp<HookahCoalComponent>(args.Used))
         {
-            InsertTobacco(ent, ref args, fuel);
+            InsertCoal(ent, coalHolder, ref args);
             return;
         }
 
@@ -181,48 +213,54 @@ public sealed class HookahSystem : EntitySystem
             return;
         }
 
-        if (ent.Comp.CoalSlot.Item == null)
+        if (coalHolder.CoalSlot.Item == null)
         {
             _popup.PopupEntity(Loc.GetString(HookahNoCoal), ent, args.User);
             args.Handled = true;
             return;
         }
 
-        SetLit(ent, true);
+        SetLit(ent, coalHolder, true);
         _popup.PopupEntity(Loc.GetString(HookahLit), ent, args.User);
         args.Handled = true;
     }
 
-    private void InsertCoal(Entity<HookahComponent> ent, ref InteractUsingEvent args)
+    private void InsertCoal(
+        Entity<HookahComponent> ent,
+        HookahCoalHolderComponent coalHolder,
+        ref InteractUsingEvent args)
     {
-        if (ent.Comp.CoalSlot.Item != null)
+        if (coalHolder.CoalSlot.Item != null)
         {
             _popup.PopupEntity(Loc.GetString(HookahCoalSlotFull), ent, args.User);
             args.Handled = true;
             return;
         }
 
-        if (!_itemSlots.TryInsert(ent, ent.Comp.CoalSlot, args.Used, args.User))
+        if (!_itemSlots.TryInsert(ent, coalHolder.CoalSlot, args.Used, args.User))
             return;
 
-        _itemSlots.SetLock(ent, ent.Comp.CoalSlot, true);
+        _itemSlots.SetLock(ent, coalHolder.CoalSlot, true);
         _popup.PopupEntity(Loc.GetString(HookahCoalInserted), ent, args.User);
         UpdateAppearance(ent);
         args.Handled = true;
     }
 
-    private void InsertTobacco(Entity<HookahComponent> ent, ref InteractUsingEvent args, SmokingFuelComponent fuel)
+    private void InsertTobacco(Entity<HookahComponent> ent, ref InteractUsingEvent args)
     {
-        if (fuel.TobaccoSlot.Item != null)
+        if (!TryGetTobaccoSlot(ent, out var tobaccoSlot))
+            return;
+
+        if (tobaccoSlot.Item != null)
         {
             _popup.PopupEntity(Loc.GetString(HookahTobaccoSlotFull), ent, args.User);
             args.Handled = true;
             return;
         }
 
-        if (_itemSlots.TryInsert(ent, fuel.TobaccoSlot, args.Used, args.User))
+        if (_itemSlots.TryInsert(ent, tobaccoSlot, args.Used, args.User))
         {
-            _itemSlots.SetLock(ent, fuel.TobaccoSlot, true);
+            _itemSlots.SetLock(ent, tobaccoSlot, true);
             _popup.PopupEntity(Loc.GetString(HookahTobaccoInserted), ent, args.User);
         }
 
@@ -291,7 +329,7 @@ public sealed class HookahSystem : EntitySystem
             return;
         }
 
-        if (!_solutions.TryGetSolution(ent.Comp.HookahUid, hookah.SolutionName, out var solutionEnt, out var solution))
+        if (!_solutions.TryGetSolution(ent.Comp.HookahUid, hookah.SolutionName, out var solutionEnt, out _))
         {
             args.Handled = true;
             return;
@@ -302,7 +340,7 @@ public sealed class HookahSystem : EntitySystem
         if (TryComp<BloodstreamComponent>(args.User, out var bloodstream))
         {
             _reactive.DoEntityReaction(args.User, inhaled, ReactionMethod.Ingestion);
-            _bloodstream.TryAddToChemicals((args.User, bloodstream), inhaled);
+            _bloodstream.TryAddToBloodstream((args.User, bloodstream), inhaled);
         }
 
         Exhale(args.User, hookah);
@@ -315,7 +353,7 @@ public sealed class HookahSystem : EntitySystem
     {
         if (!hookah.Comp.IsLit)
         {
-            _popup.PopupEntity(Loc.GetString(HookahNotLit), hose, user);
+            _popup.PopupEntity(Loc.GetString(GetInactiveLocId(hookah.Owner)), hose, user);
             return false;
         }
 
@@ -329,6 +367,13 @@ public sealed class HookahSystem : EntitySystem
         return false;
     }
 
+    private LocId GetInactiveLocId(EntityUid uid)
+    {
+        return HasComp<HookahElectricComponent>(uid)
+            ? HookahElectricNotOn
+            : HookahNotLit;
+    }
+
     private bool TakeTobacco(Entity<HookahComponent> hookah, EntityUid hose, EntityUid user)
     {
         if (!TryComp<SmokingFuelComponent>(hookah, out var fuel))
@@ -340,23 +385,25 @@ public sealed class HookahSystem : EntitySystem
             return true;
         }
 
-        if (fuel.TobaccoSlot.Item is not { } tobacco || !IsTobacco(tobacco, fuel))
+        if (!TryGetTobaccoSlot(hookah, out var tobaccoSlot) ||
+            tobaccoSlot.Item is not { } tobacco ||
+            !IsTobacco(tobacco, fuel))
         {
             _popup.PopupEntity(Loc.GetString(HookahTobaccoEmpty), hose, user);
             return false;
         }
 
-        _itemSlots.SetLock(hookah, fuel.TobaccoSlot, false);
+        _itemSlots.SetLock(hookah, tobaccoSlot, false);
 
         if (TryComp<StackComponent>(tobacco, out var stack) && stack.Count > 1)
         {
-            _stack.Use(tobacco, 1, stack);
-            _itemSlots.SetLock(hookah, fuel.TobaccoSlot, true);
+            _stack.TryUse((tobacco, stack), 1);
+            _itemSlots.SetLock(hookah, tobaccoSlot, true);
         }
         else
         {
-            if (fuel.TobaccoSlot.ContainerSlot != null)
-                _container.Remove(tobacco, fuel.TobaccoSlot.ContainerSlot);
+            if (tobaccoSlot.ContainerSlot != null)
+                _container.Remove(tobacco, tobaccoSlot.ContainerSlot);
 
             QueueDel(tobacco);
         }
@@ -367,7 +414,12 @@ public sealed class HookahSystem : EntitySystem
 
     private bool IsTobacco(EntityUid uid, SmokingFuelComponent fuel)
     {
-        return MetaData(uid).EntityPrototype?.ID is { } id && id == fuel.TobaccoId;
+        return _tag.HasTag(uid, fuel.TobaccoTag);
+    }
+
+    private bool TryGetTobaccoSlot(Entity<HookahComponent> hookah, [NotNullWhen(true)] out ItemSlot? slot)
+    {
+        return _itemSlots.TryGetSlot(hookah, SmokingFuelComponent.TobaccoSlotId, out slot);
     }
 
     private void Exhale(EntityUid user, HookahComponent hookah)
@@ -387,8 +439,34 @@ public sealed class HookahSystem : EntitySystem
 
     private void OnHoseShutdown(Entity<HookahHoseComponent> ent, ref ComponentShutdown args)
     {
-        if (!TryComp<HookahComponent>(ent.Comp.HookahUid, out var hookah) ||
-            hookah.ConnectedHose != ent.Owner)
+        if (!TryComp<HookahComponent>(ent.Comp.HookahUid, out var hookah))
+            return;
+
+        if (TryComp<HookahElectricComponent>(hookah.Owner, out var electric))
+        {
+            var changed = false;
+
+            if (electric.LeftHose == ent.Owner)
+            {
+                electric.LeftHose = null;
+                changed = true;
+            }
+
+            if (electric.RightHose == ent.Owner)
+            {
+                electric.RightHose = null;
+                changed = true;
+            }
+
+            if (!changed)
+                return;
+
+            Dirty(hookah.Owner, electric);
+            UpdateElectricAppearance((hookah.Owner, hookah), electric);
+            return;
+        }
+
+        if (hookah.ConnectedHose != ent.Owner)
             return;
 
         hookah.ConnectedHose = null;
@@ -470,19 +548,19 @@ public sealed class HookahSystem : EntitySystem
 
     private void UpdateCoal(float frameTime)
     {
-        var query = EntityQueryEnumerator<HookahComponent, ActiveHookahComponent>();
-        while (query.MoveNext(out var uid, out var hookah, out _))
+        var query = EntityQueryEnumerator<HookahComponent, HookahCoalHolderComponent, ActiveHookahComponent>();
+        while (query.MoveNext(out var uid, out var hookah, out var coalHolder, out _))
         {
-            if (hookah.CoalSlot.Item is not { } coalUid)
+            if (coalHolder.CoalSlot.Item is not { } coalUid)
             {
-                SetLit((uid, hookah), false);
+                SetLit((uid, hookah), coalHolder, false);
                 continue;
             }
 
             if (!TryComp<HookahCoalComponent>(coalUid, out var coal))
             {
                 Log.Warning($"{ToPrettyString(uid)} has non-coal entity {ToPrettyString(coalUid)} in its coal slot.");
-                SetLit((uid, hookah), false);
+                SetLit((uid, hookah), coalHolder, false);
                 continue;
             }
 
@@ -498,11 +576,11 @@ public sealed class HookahSystem : EntitySystem
             if (coal.FuelLeft > 0f)
                 continue;
 
-            SetLit((uid, hookah), false);
+            SetLit((uid, hookah), coalHolder, false);
             CoalOutPopup((uid, hookah));
 
-            _itemSlots.SetLock(uid, hookah.CoalSlot, false);
-            _itemSlots.TryEject(uid, hookah.CoalSlot, null, out _);
+            _itemSlots.SetLock(uid, coalHolder.CoalSlot, false);
+            _itemSlots.TryEject(uid, coalHolder.CoalSlot, null, out _);
             QueueDel(coalUid);
         }
     }
@@ -518,7 +596,7 @@ public sealed class HookahSystem : EntitySystem
         _popup.PopupEntity(Loc.GetString(HookahCoalOut), container.Owner, container.Owner);
     }
 
-    private void SetLit(Entity<HookahComponent> ent, bool lit)
+    private void SetLit(Entity<HookahComponent> ent, HookahCoalHolderComponent coalHolder, bool lit)
     {
         if (ent.Comp.IsLit == lit)
             return;
@@ -531,17 +609,26 @@ public sealed class HookahSystem : EntitySystem
         else
             RemComp<ActiveHookahComponent>(ent);
 
-        _itemSlots.SetLock(ent, ent.Comp.CoalSlot, lit);
+        _itemSlots.SetLock(ent, coalHolder.CoalSlot, lit);
         UpdateAppearance(ent);
-        _audio.PlayPvs(lit ? ent.Comp.LightSound : ent.Comp.ExtinguishSound, ent);
+        _audio.PlayPvs(lit ? coalHolder.LightSound : coalHolder.ExtinguishSound, ent);
     }
 
     private void UpdateAppearance(Entity<HookahComponent> ent)
     {
+        if (TryComp(ent.Owner, out HookahElectricComponent? electric))
+        {
+            UpdateElectricAppearance(ent, electric);
+            return;
+        }
+
+        if (!TryComp<HookahCoalHolderComponent>(ent, out var coalHolder))
+            return;
+
         var hoseOut = ent.Comp.ConnectedHose != null;
         var state = ent.Comp.IsLit
             ? hoseOut ? HookahVisualState.CoalLitNoHose : HookahVisualState.CoalLit
-            : ent.Comp.CoalSlot.Item != null
+            : coalHolder.CoalSlot.Item != null
                 ? hoseOut ? HookahVisualState.CoalUnlitNoHose : HookahVisualState.CoalUnlit
                 : hoseOut ? HookahVisualState.UnlitNoHose : HookahVisualState.Unlit;
 
@@ -553,10 +640,13 @@ public sealed class HookahSystem : EntitySystem
         if (!args.IsInDetailsRange || !TryComp<SmokingFuelComponent>(ent, out var fuel))
             return;
 
-        if (fuel.TobaccoPuffs > 0 || fuel.TobaccoSlot.Item != null)
+        if (fuel.TobaccoPuffs > 0 ||
+            TryGetTobaccoSlot(ent, out var tobaccoSlot) && tobaccoSlot.Item != null)
             args.PushText(Loc.GetString(HookahExamineTobacco, ("puffs", fuel.TobaccoPuffs)));
 
-        if (ent.Comp.IsLit && fuel.CoalTime > 0f)
+        if (TryComp<HookahCoalHolderComponent>(ent, out _) &&
+            ent.Comp.IsLit &&
+            fuel.CoalTime > 0f)
             args.PushText(Loc.GetString(HookahExamineCoal, ("seconds", (int) fuel.CoalTime)));
     }
 }

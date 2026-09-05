@@ -2,18 +2,24 @@ using Content.Shared.Gravity;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
-using Content.Shared.Physics;
 using Content.Shared.SS220.ChangeSpeedDoAfters.Events;
-using Robust.Shared.Utility;
+using Robust.Shared.Exceptions;
+using Robust.Shared.Network;
 
 namespace Content.Shared.DoAfter;
 
 public abstract partial class SharedDoAfterSystem : EntitySystem
 {
     [Dependency] private readonly IDynamicTypeFactory _factory = default!;
+#if EXCEPTION_TOLERANCE
+    [Dependency] private readonly INetManager _netManager = default!;
+    [Dependency] private readonly IRuntimeLog _runtimeLog = default!;
+#endif
     [Dependency] private readonly SharedGravitySystem _gravity = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+
+    [Dependency] private readonly EntityQuery<HandsComponent> _handsQuery = default!;
 
     private DoAfter[] _doAfters = Array.Empty<DoAfter>();
 
@@ -22,13 +28,59 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         base.Update(frameTime);
 
         var time = GameTiming.CurTime;
-        var xformQuery = GetEntityQuery<TransformComponent>();
-        var handsQuery = GetEntityQuery<HandsComponent>();
 
         var enumerator = EntityQueryEnumerator<ActiveDoAfterComponent, DoAfterComponent>();
         while (enumerator.MoveNext(out var uid, out var active, out var comp))
         {
-            Update(uid, active, comp, time, xformQuery, handsQuery);
+
+            try
+            {
+                Update(uid, active, comp, time);
+            }
+            // ReSharper disable once RedundantCatchClause
+#if EXCEPTION_TOLERANCE
+            catch (Exception e)
+#else
+            catch (Exception)
+#endif
+            {
+#if EXCEPTION_TOLERANCE
+                // Doafter in question failed to complete..
+                // Doafters are kind of a critical game mechanic, so we specially handle failure.
+                _runtimeLog.LogException(e, $"{nameof(SharedDoAfterSystem)} on {ToPrettyString(uid)}");
+
+                if (_netManager.IsClient)
+                    continue; // Move along, we can't cancel these ourselves and just need to not completely die.
+
+                // Cancel all the doafters for this entity to avoid repeats.
+                // We don't try to remove them ourselves to keep the logic reasonable.
+                foreach (var (key, doAfter) in comp.DoAfters)
+                {
+                    try
+                    {
+                        InternalCancel(doAfter, comp);
+                    }
+                    catch (Exception e2)
+                    {
+                        _runtimeLog.LogException(e2, $"{nameof(SharedDoAfterSystem)} failed to cleanup {doAfter} @ {key} while handling a failure.");
+                        // REMARK: As written, InternalCancel will always do the necessary side effect of
+                        //         configuring the cancellation time. We need this side effect, so dear reader
+                        //         if you ever make it so InternalCancel can throw an exception before that
+                        //         happens, update this to set cancel time itself in a finally block.
+                        //
+                        //         If the doafter is one using async, this CAN result in that task leaking forever.
+                        //         So we check that here, too.
+                        if (comp.AwaitedDoAfters.Remove(doAfter.Index, out var tcs))
+                        {
+                            tcs.TrySetCanceled();
+                        }
+                    }
+                }
+#else
+                throw; // No tolerance, just rethrow.
+#endif
+            }
+
         }
     }
 
@@ -36,9 +88,7 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         EntityUid uid,
         ActiveDoAfterComponent active,
         DoAfterComponent comp,
-        TimeSpan time,
-        EntityQuery<TransformComponent> xformQuery,
-        EntityQuery<HandsComponent> handsQuery)
+        TimeSpan time)
     {
         var dirty = false;
 
@@ -76,7 +126,7 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
                 continue;
             }
 
-            if (ShouldCancel(doAfter, xformQuery, handsQuery))
+            if (ShouldCancel(doAfter))
             {
                 InternalCancel(doAfter, comp);
                 dirty = true;
@@ -118,7 +168,7 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         else
             RaiseLocalEvent(doAfter.AttemptEvent);
 
-        var ev = (CancellableEntityEventArgs) doAfter.AttemptEvent;
+        var ev = (CancellableEntityEventArgs)doAfter.AttemptEvent;
         if (!ev.Cancelled)
             return true;
 
@@ -167,27 +217,24 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         }
     }
 
-    private bool ShouldCancel(DoAfter doAfter,
-        EntityQuery<TransformComponent> xformQuery,
-        EntityQuery<HandsComponent> handsQuery)
+    private bool ShouldCancel(DoAfter doAfter)
     {
         var args = doAfter.Args;
 
-        //re-using xformQuery for Exists() checks.
-        if (args.Used is { } used && !xformQuery.HasComponent(used))
+        if (args.Used is { } used && !Exists(used))
             return true;
 
-        if (args.EventTarget is {Valid: true} eventTarget && !xformQuery.HasComponent(eventTarget))
+        if (args.EventTarget is { Valid: true } eventTarget && !Exists(eventTarget))
             return true;
 
-        if (!xformQuery.TryGetComponent(args.User, out var userXform))
+        if (!TryComp(args.User, out TransformComponent? userXform))
             return true;
 
         TransformComponent? targetXform = null;
-        if (args.Target is { } target && !xformQuery.TryGetComponent(target, out targetXform))
+        if (args.Target is { } target && !TryComp(target, out targetXform))
             return true;
 
-        if (args.Used is { } @using && !xformQuery.HasComp(@using))
+        if (args.Used is { } @using && !Exists(@using))
             return true;
 
         // TODO: Re-use existing xform query for these calculations.
@@ -236,13 +283,13 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         // This does not mean their hand needs to be empty.
         if (args.NeedHand)
         {
-            if (!handsQuery.TryGetComponent(args.User, out var hands) || hands.Count == 0)
+            if (!_handsQuery.TryGetComponent(args.User, out var hands) || hands.Count == 0)
                 return true;
 
             // If an item was in the user's hand to begin with,
             // check if the user is no longer holding the item.
             if (args.BreakOnDropItem && doAfter.InitialItem != null && !_hands.IsHolding((args.User, hands), doAfter.InitialItem))
-                    return true;
+                return true;
 
             // If the user changes which hand is active at all, interrupt the do-after
             if (args.BreakOnHandChange && hands.ActiveHandId != doAfter.InitialHand)

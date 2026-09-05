@@ -13,7 +13,6 @@ public sealed class MovingPoint
     private Vector2 _pointPosition;
     /// <summary> Fake move direction </summary>
     private Vector2 _moveDirection;
-    private UIBox2 _uIBox2 = new();
     public MovingPoint()
     {
         _moveDirection = new();

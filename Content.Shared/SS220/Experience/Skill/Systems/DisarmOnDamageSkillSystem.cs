@@ -2,6 +2,7 @@
 
 using System.Linq;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
@@ -17,11 +18,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.Experience.Skill.Systems;
 
-public sealed class DisarmOnDamageSkillSystem : SkillEntitySystem
+public sealed partial class DisarmOnDamageSkillSystem : SkillEntitySystem
 {
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     private readonly ProtoId<SkillTreePrototype> _affectedSkillTree = "PhysicalTraining";
     private readonly FixedPoint4 _damageToExperience = 150;
@@ -51,7 +52,7 @@ public sealed class DisarmOnDamageSkillSystem : SkillEntitySystem
         TryChangeStudyingProgress(entity, _affectedSkillTree, DamageSpecifier.GetPositive(args.DamageDelta).GetTotal() / _damageToExperience);
 
         // And after that we check if we lost our precious items
-        if (!GetPredictedRandomOnCurTick(new() { GetNetEntity(entity).Id, args.DamageDelta.GetTotal().Int() }).Prob(entity.Comp.DisarmChance))
+        if (!GetPredictedRandomOnCurTick(GetNetEntity(entity), GetNetEntity(args.Origin)).Prob(entity.Comp.DisarmChance))
             return;
 
         if (_hands.EnumerateHeld(experienceEntity.Value.Owner).Count() == 0)

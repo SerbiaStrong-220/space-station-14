@@ -31,8 +31,8 @@
   - Quartermaster
   - ResearchDirector
   - Blueshield #SS220 Blueshield
-  - Magistrate #SS220 Law Department
-  #- NanoTrasenRepresentative #SS220 TODO NanoTraisen Representative
+  - NanoTrasenRepresentative #SS220 ntr-add
+
 - type: accessLevel
   id: EmergencyShuttleRepealAll
   name: id-card-access-level-emergency-shuttle-repeal

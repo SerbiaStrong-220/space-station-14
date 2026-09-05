@@ -2,6 +2,9 @@ job-name-magistrate = магистрат
 job-name-nanotrasen-representative = представитель НаноТрейзен
 job-name-tourist = турист
 
+job-name-blueshield = офицер "Синий щит"
+JobBlueShield = офицер "Синий щит"
+
 job-name-cc-default = ЦК
 job-name-cc-agent = агент ЦК
 job-name-cc-oficier = офицер ЦК

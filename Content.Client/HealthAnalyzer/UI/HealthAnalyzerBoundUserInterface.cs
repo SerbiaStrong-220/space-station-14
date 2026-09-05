@@ -22,7 +22,7 @@ namespace Content.Client.HealthAnalyzer.UI
             _window = this.CreateWindow<HealthAnalyzerWindow>();
 
             _window.Title = EntMan.GetComponent<MetaDataComponent>(Owner).EntityName;
-            _window.PrintButton.OnPressed += _ => SendMessage(new HealthAnalyzerPrintMessage()); // SS220-health-analyzer-report
+            _window.HealthAnalyzer.PrintButton.OnPressed += _ => SendMessage(new HealthAnalyzerPrintMessage()); // SS220-health-analyzer-report
         }
 
         protected override void ReceiveMessage(BoundUserInterfaceMessage message)

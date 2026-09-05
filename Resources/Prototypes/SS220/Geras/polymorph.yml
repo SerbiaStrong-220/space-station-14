@@ -6,5 +6,6 @@
     transferHumanoidAppearance: false
     inventory: Drop
     transferDamage: true
+    transferReagents: true
     revertOnDeath: true
     revertOnCrit: true

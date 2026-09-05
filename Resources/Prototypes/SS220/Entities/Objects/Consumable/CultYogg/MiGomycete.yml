@@ -17,7 +17,7 @@
         - ReagentId: TheBloodOfYogg
           Quantity: 2.0
   - type: Sprite
-    sprite: SS220/Objects/CultYogg/migomycete.rsi
+    sprite: SS220/Objects/CultYogg/Botany/migomycete.rsi
     state: produce
   - type: Produce
     seedId: MiGoSpores
@@ -39,14 +39,14 @@
     - type: Seed
       seedId: MiGoSpores
     - type: Sprite
-      sprite: SS220/Objects/CultYogg/migomycete.rsi
+      sprite: SS220/Objects/CultYogg/Botany/migomycete.rsi
 
 - type: seed
   id: MiGoSpores
   name: seeds-migo-name
   noun: seeds-noun-spores
   displayName: seeds-migo-display-name
-  plantRsi: SS220/Objects/CultYogg/migomycete.rsi
+  plantRsi: SS220/Objects/CultYogg/Botany/migomycete.rsi
   packetPrototype: MiGomyceteSeeds
   productPrototypes:
     - FoodMiGomyceteCult

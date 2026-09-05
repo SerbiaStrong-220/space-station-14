@@ -57,5 +57,5 @@
         - id: ClownMimeCyborgInstruction #ss220-clownmimecyborg-update
         - id: MaterialBananium1 #ss220-clownmimecyborg-update
         - id: MaterialBananium1 #ss220-clownmimecyborg-update
-        - id: ClothingBackpackNinjaSetFake 
+        - id: ClothingBackpackNinjaSetFake
           prob: 0.10

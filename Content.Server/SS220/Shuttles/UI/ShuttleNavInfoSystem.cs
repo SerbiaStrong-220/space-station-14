@@ -14,10 +14,10 @@ using static Content.Server.Shuttles.Systems.ShuttleConsoleSystem;
 
 namespace Content.Server.SS220.Shuttles.UI;
 
-public sealed class ShuttleNavInfoSystem : SharedShuttleNavInfoSystem
+public sealed partial class ShuttleNavInfoSystem : SharedShuttleNavInfoSystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private PvsOverrideSystem _pvsOverride = default!;
 
     private readonly HashSet<ICommonSession> _receivers = [];
     private readonly Dictionary<ICommonSession, HashSet<EntityUid>> _pvsOverrides = [];

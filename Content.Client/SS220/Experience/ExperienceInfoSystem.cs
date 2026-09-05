@@ -7,11 +7,11 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.Experience;
 
-public sealed class ExperienceInfoSystem : EntitySystem
+public sealed partial class ExperienceInfoSystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly ExperienceSystem _experience = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private ExperienceSystem _experience = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     public Action<ExperienceData, int>? OnExperienceUpdated;
 

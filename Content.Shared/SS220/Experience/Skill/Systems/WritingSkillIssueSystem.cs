@@ -25,7 +25,7 @@ public sealed class WritingSkillIssueSystem : SkillEntitySystem
     {
         if (entity.Comp.ShuffleMarkupTags)
         {
-            args.TransformedContent = ShuffleTags(args.Paper.Comp.Content, args.TransformedContent, GetPredictedRandomOnCurTick(new() { GetNetEntity(entity).Id, args.NewContent.Length }));
+            args.TransformedContent = ShuffleTags(args.Paper.Comp.Content, args.TransformedContent, GetPredictedRandomOnCurTick(GetNetEntity(entity), GetNetEntity(args.Paper)));
         }
     }
 
