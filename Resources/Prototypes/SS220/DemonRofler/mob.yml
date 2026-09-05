@@ -44,6 +44,8 @@
     description: ghost-role-information-dark-reaper-description
     rules: ghost-role-information-dark-reaper-rules
     job: DarkReaper
+  - type: ScotopicVision
+    energy: 0.48
 
   # Visuals and appearance
   - type: Sprite
