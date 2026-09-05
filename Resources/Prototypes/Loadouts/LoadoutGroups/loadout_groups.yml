@@ -26,6 +26,10 @@
   - BoxFolderBaseThreePapers
   - BoxFolderPlasticClipboardThreePapers
   - BoxFolderClipboardThreePapers
+  #SS220 Add Cross in Trinkets begin
+  - ChaplainNeckGoldenCross
+  - ChaplainNeckSilverCross
+  #SS220 Add Cross in Trinkets end
   - ClothingNeckTSFPin #SS220-NewPins
   - ClothingNeckLGBTPin
   - ClothingNeckAllyPin
@@ -521,6 +525,7 @@
   - ChaplainPlagueHat
   - ChaplainWitchHat
   - ChaplainWitchHatAlt
+  - ChaplainHatFollower #SS220 new chaplain clothing
 
 - type: loadoutGroup
   id: ChaplainMask
@@ -537,6 +542,7 @@
   - ChaplainJumpskirt
   - ChaplainRobesLight
   - ChaplainRobesDark
+  - ChaplainJumpsuitFollower #SS220 new chaplain clothing
 
 - type: loadoutGroup
   id: ChaplainOuterClothing
