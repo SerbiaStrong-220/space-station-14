@@ -6,14 +6,14 @@ using Robust.Shared.Prototypes;
 namespace Content.Server.SS220.Teleport.Components;
 
 /// <summary>
-///     Polymorph teleported entity after its being teleported
+///     Polymorphs the target after teleportation.
 /// </summary>
 [RegisterComponent]
-public sealed partial class PolymorphTeleportTargetComponent : Component
+public sealed partial class PolymorphAfterTeleportComponent : Component
 {
     /// <summary>
-    ///     The entity we polymorph into
+    ///     Polymorph prototype applied to the target.
     /// </summary>
     [DataField(required: true)]
-    public ProtoId<PolymorphPrototype> PolymorphEnt;
+    public ProtoId<PolymorphPrototype> PolymorphPrototype;
 }

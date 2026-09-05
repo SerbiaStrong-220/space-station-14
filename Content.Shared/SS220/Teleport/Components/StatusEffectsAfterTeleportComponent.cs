@@ -5,11 +5,11 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared.SS220.Teleport.Components;
 
 /// <summary>
-///     Applies status effects from the Dictionary to the target after teleporting
+///     Applies the configured status effects to the target after teleporting.
 /// </summary>
 [RegisterComponent]
-public sealed partial class AfterTeleportStatusEffectComponent : Component
+public sealed partial class StatusEffectsAfterTeleportComponent : Component
 {
     [DataField(required: true)]
-    public Dictionary<EntProtoId, TimeSpan> EffectsList;
+    public Dictionary<EntProtoId, TimeSpan> Effects;
 }

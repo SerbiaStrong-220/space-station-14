@@ -362,7 +362,7 @@
   id: CultYoggTeleportExit
 
 - type: Tag
-  id: VoidTeleporationTarget
+  id: VoidTeleportDestination
 
 - type: Tag
   id: EnvelopeWhitelist

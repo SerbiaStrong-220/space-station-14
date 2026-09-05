@@ -64,7 +64,7 @@ public abstract partial class SharedMiGoSystem : EntitySystem
 
         SubscribeLocalEvent<MiGoComponent, BoundUIOpenedEvent>(OnBoundUIOpened);
 
-        SubscribeLocalEvent<MiGoComponent, AfterTeleportedEvent>(OnAfterTeleported);
+        SubscribeLocalEvent<MiGoComponent, TeleportedEvent>(OnTeleported);
 
         SubscribeLocalEvent<GetVerbsEvent<Verb>>(OnGetVerb);
 
@@ -199,7 +199,7 @@ public abstract partial class SharedMiGoSystem : EntitySystem
         _miGoErectSystem.OpenUI(ent, actor);
     }
 
-    private void OnAfterTeleported(Entity<MiGoComponent> ent, ref AfterTeleportedEvent args)
+    private void OnTeleported(Entity<MiGoComponent> ent, ref TeleportedEvent args)
     {
         _userInterfaceSystem.CloseUis(ent.Owner);
     }
