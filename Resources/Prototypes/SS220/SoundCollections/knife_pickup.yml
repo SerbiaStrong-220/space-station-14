@@ -1,0 +1,6 @@
+- type: soundCollection
+  id: KnifePickup
+  files:
+  - /Audio/SS220/Items/Knife/knife_pickup1.ogg
+  - /Audio/SS220/Items/Knife/knife_pickup2.ogg
+  - /Audio/SS220/Items/Knife/knife_pickup3.ogg

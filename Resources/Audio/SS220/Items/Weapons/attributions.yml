@@ -1,0 +1,21 @@
+- files:
+  - gun_drop.ogg
+  - gun_pickup.ogg
+  - pistol_drop.ogg
+  - pistol_pickup.ogg
+  - rifle_drop.ogg
+  - rifle_pickup.ogg
+  - shotgun_drop.ogg
+  - shotgun_pickup.ogg
+  - smg_drop.ogg
+  - smg_pickup.ogg
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from BandaStation"
+  source: "https://github.com/ss220club/BandaStation/commit/81c3d921295d6b925ff063bef13f623687d7bdbd"
+  
+- files:
+  - gun_drop.ogg
+  - gun_pickup.ogg
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from pickupplasticobject.wav track of j1987, modified by TonyBigShoes for SS220"
+  source: "https://freesound.org/people/j1987/sounds/123011/"
