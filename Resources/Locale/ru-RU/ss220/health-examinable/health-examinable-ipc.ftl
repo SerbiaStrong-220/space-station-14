@@ -32,7 +32,7 @@ health-examinable-ipc-Heat-75 = [color=red]{ CAPITALIZE(POSS-ADJ($target)) } к�
 health-examinable-ipc-Heat-100 = [color=red]{ CAPITALIZE(POSS-ADJ($target)) } корпус выглядит почти расплавленным.[/color]
 health-examinable-ipc-Heat-200 = [color=crimson]{ CAPITALIZE(POSS-ADJ($target)) } корпус полностью расплавлен![/color]
 
-health-examinable-ipc-Shock-8 = [color=lightgoldenrodyellow]На { POSS-ADJ($target) } проводке лёгкие повреждения изоляции.[/color]
+health-examinable-ipc-Shock-8 = [color=lightgoldenrodyellow]На { POSS-ADJ($target) } проводке заметны лёгкие повреждения изоляции.[/color]
 health-examinable-ipc-Shock-15 = [color=lightgoldenrodyellow]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } несколько обугленных проводов.[/color]
 health-examinable-ipc-Shock-30 = [color=lightgoldenrodyellow]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } множество повреждений проводки.[/color]
 health-examinable-ipc-Shock-50 = [color=lightgoldenrodyellow]{ CAPITALIZE(POSS-ADJ($target)) } электроника имеет заметные повреждения.[/color]
@@ -45,6 +45,6 @@ health-examinable-ipc-Caustic-15 = [color=yellowgreen]{ CAPITALIZE(POSS-ADJ($tar
 health-examinable-ipc-Caustic-30 = [color=yellowgreen]{ CAPITALIZE(POSS-ADJ($target)) } корпус покрыт множеством следов коррозии.[/color]
 health-examinable-ipc-Caustic-50 = [color=yellowgreen]{ CAPITALIZE(POSS-ADJ($target)) } корпус покрыт большими областями коррозии.[/color]
 health-examinable-ipc-Caustic-75 = [color=yellowgreen]{ CAPITALIZE(POSS-ADJ($target)) } корпус серьёзно повреждён коррозией.[/color]
-health-examinable-ipc-Caustic-100 = [color=yellowgreen]{ CAPITALIZE(POSS-ADJ($target)) } корпус почти полностью разъело от коррозии.[/color]
+health-examinable-ipc-Caustic-100 = [color=yellowgreen]{ CAPITALIZE(POSS-ADJ($target)) } корпус почти полностью разъеден коррозией.[/color]
 health-examinable-ipc-Caustic-200 = [color=yellowgreen]Весь { POSS-ADJ($target) } корпус разъеден коррозией![/color]
 
