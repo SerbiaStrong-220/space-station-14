@@ -1695,20 +1695,16 @@
   suffix: Ninja
   components:
   - type: Sprite
-    sprite: Objects/Misc/id_cards.rsi
+  # SS220-own-sprites-begin
     layers:
     - state: ninja
-    - state: stripe_top
-      color: "#38D848"
-    - state: stripe_bottom
-      color: "#309000"
-# ss220 remove sprite layer start
+    - state: idninja
 #    - sprite: icon-rsi
 #      offset: icon-offset
 #      state: Ninja
-# ss220 remove sprite layer end
-  - type: Item
-    heldPrefix: green
+  # - type: Item
+  #   heldPrefix: green
+  # SS220-own-sprites-end
   - type: AgentIDCard
   - type: IdCard
     jobIcon: JobIconNinja
@@ -1752,7 +1748,6 @@
   name: wizard ID card
   components:
   - type: Sprite
-    sprite: SS220/Objects/Misc/id_cards.rsi # SS220 Wizard getting used to
     # SS220-own-sprites-begin
     layers:
     - state: wizard
