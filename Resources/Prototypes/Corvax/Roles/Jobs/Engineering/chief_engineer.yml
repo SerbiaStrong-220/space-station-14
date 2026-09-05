@@ -21,6 +21,7 @@
       time: 180000 # SS220-RoleTime
     - !type:AgeRequirement
       requiredAge: 20
+      ageCheckIgnore: [ Ipc ] #SS220-JobsAgeIPC
     - !type:SpeciesRequirement #SS220-jobbans begin
       inverted: true
       species:

@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared.Humanoid.Prototypes; //SS220-JobsAgeIPC
 using Content.Shared.Preferences;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
@@ -17,6 +18,11 @@ public sealed partial class AgeRequirement : JobRequirement
     [DataField(required: true)]
     public int RequiredAge;
 
+    //SS220-JobsAgeIPC begin
+    [DataField]
+    public HashSet<ProtoId<SpeciesPrototype>> AgeCheckIgnore = [];
+    //SS220-JobsAgeIPC end
+
     public override bool Check(IEntityManager entManager,
         IPrototypeManager protoManager,
         HumanoidCharacterProfile? profile,
@@ -27,6 +33,11 @@ public sealed partial class AgeRequirement : JobRequirement
 
         if (profile is null) //the profile could be null if the player is a ghost. In this case we don't need to block the role selection for ghostrole
             return true;
+
+        //SS220-JobsAgeIPC begin
+        if (AgeCheckIgnore.Contains(profile.Species))
+            return true;
+        //SS220-JobsAgeIPC end
 
         if (!Inverted)
         {
