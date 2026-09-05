@@ -29,4 +29,4 @@ reagent-desc-skooma = Не давать таяранам. Не говорить 
 reagent-name-catariajuice = мятный сок
 reagent-desc-catariajuice = Притягивает кошек.
 reagent-name-Orion-Nebula = туманность Ориона
-reagent-desc-Orion-Nebula = Космический коктейль. С ним незврачные и уже привычные космические пейзажи обретут новые краски.
+reagent-desc-Orion-Nebula = Космический коктейль. С ним невзрачные и уже привычные космические пейзажи обретут новые краски.
