@@ -84,6 +84,11 @@
   description: flavor-base-driedbnuuynyatina
 
 - type: flavor
+  id: OrionNebula
+  flavorType: Complex
+  description: flavor-complex-Orion-Nebula
+  
+- type: flavor
   id: sawdustporridge
   flavorType: Complex
   description: flavor-complex-sawdustporridge
