@@ -2,7 +2,7 @@
   id: HandheldBlueShieldMonitor
   parent: HandheldCrewMonitor
   name: портативный монитор Синего Щита
-  description: "Портативный монитор экипажа, аппаратно настроенный на отслеживание жизненных показателей только руководящего состава станции."
+  description: "Портативный монитор экипажа, аппаратно настроенный на отслеживание жизненных показателей исключительно руководящего состава станции и неопознанных лиц без ID-карт."
   components:
   - type: BlueShieldMonitor 
 
@@ -12,7 +12,15 @@
     - state: scanner
     - state: scanner_glow
       shader: unshaded
-    
+
+  - type: ActivatableUI
+    key: enum.CrewMonitoringUIKey.Key
+
+  - type: UserInterface
+    interfaces:
+      enum.CrewMonitoringUIKey.Key:
+        type: CrewMonitoringBoundUserInterface
+
   - type: Item
     heldPrefix: scanner
     storedRotation: 270

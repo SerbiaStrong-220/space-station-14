@@ -43,6 +43,13 @@ public sealed class CrewMonitoringConsoleSystem : EntitySystem
         if (!payload.TryGetValue(SuitSensorConstants.NET_STATUS_COLLECTION, out Dictionary<string, SuitSensorStatus>? sensorStatus))
             return;
 
+        //SS220-new-feature begin
+        if (HasComp<Content.Shared.SS220.Medical.BlueShieldMonitorComponent>(uid))
+        {
+            sensorStatus = FilterBlueShieldSensors(sensorStatus);
+        }
+        //SS220-new-feature end
+
         component.ConnectedSensors = sensorStatus;
         UpdateUserInterface(uid, component);
     }
@@ -73,4 +80,39 @@ public sealed class CrewMonitoringConsoleSystem : EntitySystem
         var allSensors = component.ConnectedSensors.Values.ToList();
         _uiSystem.SetUiState(uid, CrewMonitoringUIKey.Key, new CrewMonitoringState(allSensors));
     }
+
+    //SS220-new-feature begin
+    private Dictionary<string, SuitSensorStatus> FilterBlueShieldSensors(Dictionary<string, SuitSensorStatus> sensors)
+    {
+        var filtered = new Dictionary<string, SuitSensorStatus>();
+
+        foreach (var (address, sensor) in sensors)
+        {
+            var jobLower = sensor.Job.ToLower().Trim();
+            var nameLower = sensor.Name.ToLower().Trim();
+
+            if (jobLower == "н/д" || nameLower == "неизвестно" || string.IsNullOrWhiteSpace(sensor.Job))
+            {
+                filtered.Add(address, sensor);
+                continue;
+            }
+
+            if (jobLower.Contains("капитан") ||
+                jobLower.Contains("глава персонала") ||
+                jobLower.Contains("представитель нанотрейзен") ||
+                jobLower.Contains("старший инженер") ||
+                jobLower.Contains("главный врач") ||
+                jobLower.Contains("глава службы безопасности") ||
+                jobLower.Contains("квартирмейстер") ||
+                jobLower.Contains("научный руководитель") ||
+                jobLower.Contains("синий щит") ||
+                jobLower.Contains("врио"))
+            {
+                filtered.Add(address, sensor);
+            }
+        }
+
+        return filtered;
+    }
+    //SS220-new-feature end
 }

@@ -1,12 +1,17 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://githubusercontent.com
 
-using Robust.Shared.GameStates;
+using Content.Shared.Medical.CrewMonitoring;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Medical;
 
-/// Компонент-маркер для фильтра списка глав
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent]
 public sealed partial class BlueShieldMonitorComponent : Component
 {
-    // просто метка
+}
+
+[Serializable, NetSerializable]
+public enum BlueShieldMonitorUIKey : byte
+{
+    Key
 }
