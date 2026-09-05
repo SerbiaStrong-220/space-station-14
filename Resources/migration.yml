@@ -1041,3 +1041,6 @@ CultYoggCocoonSedativeSting: CocoonSedativeSting
 
 # 2026-07-17 - SS220 Sponsor objects update
 ClothingSponsorScarfTube: ClothingMaskNeckGaiter
+
+# 2026-08-10 - SS220 SetSelector
+LockedUnicaBox: LockedSecureRevolverSetSelectorCase

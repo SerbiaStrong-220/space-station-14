@@ -1,0 +1,87 @@
+- type: selectableSet
+  id: WeaponBlasterKRSSet
+  name: selectable-set-weapon-blaster-krs-name
+  description: selectable-set-weapon-blaster-krs-description
+  sprite:
+    sprite: SS220/Objects/Weapons/Guns/Battery/blaster.rsi
+    state: icon
+  content:
+  - WeaponBlasterKRS
+  - PowerCellBlaster
+  - PowerCellBlaster
+  - PowerCellBlaster
+
+- type: selectableSet
+  id: WeaponDrozdSet
+  name: selectable-set-weapon-drozd-name
+  description: selectable-set-weapon-drozd-description
+  sprite:
+    sprite: SS220/Objects/Weapons/Guns/SMGs/drozd.rsi
+    state: icon
+  content:
+  - WeaponSubMachineGunDrozd
+  - MagazinePistolSubMachineGun
+  - MagazinePistolSubMachineGun
+  - MagazinePistolSubMachineGun
+
+- type: selectableSet
+  id: BlueshieldSheriffSet
+  name: selectable-set-blueshield-sheriff-name
+  description: selectable-set-blueshield-sheriff-description
+  sprite:
+    sprite: SS220/Objects/Weapons/Guns/Battery/laser_revolver.rsi
+    state: icon
+  content:
+  - ClothingBeltHolsterBlueshieldFilled
+
+- type: selectableSet
+  id: BlueshieldMasterSet
+  name: selectable-set-blueshield-master-name
+  description: selectable-set-blueshield-master-description
+  sprite:
+    sprite: SS220/Objects/Misc/manual.rsi
+    state: judo
+  content:
+  - CorporateJudoManual
+
+- type: selectableSet
+  id: BlueshieldDefenderSet
+  name: selectable-set-blueshield-defender-name
+  description: selectable-set-blueshield-defender-description
+  sprite:
+    sprite: Objects/Weapons/Melee/teleriot_shield.rsi
+    state: teleriot-icon
+  content:
+  - TelescopicShieldAlt
+
+- type: selectableSet
+  id: BlueshieldCombatMedicSet
+  name: selectable-set-blueshield-medical-name
+  description: selectable-set-blueshield-medical-description
+  sprite:
+    sprite: Objects/Specific/Medical/defibsmall.rsi
+    state: icon
+  content:
+  - DefibrillatorCompact
+
+- type: selectableSet
+  id: WeaponRevolverUnikaSet
+  name: selectable-set-weapon-revolver-unika-name
+  description: selectable-set-weapon-revolver-unika-description
+  sprite:
+    sprite: SS220/Objects/Weapons/Guns/Revolvers/unika.rsi
+    state: icon
+  content:
+  - WeaponRevolverMatebaSouvenir
+  - SpeedLoaderMagnum
+  - SpeedLoaderMagnum
+
+- type: selectableSet
+  id: WeaponEnergyMagnumSet
+  name: selectable-set-weapon-energy-magnum-name
+  description: selectable-set-weapon-energy-magnum-description
+  sprite:
+    sprite: Objects/Weapons/Guns/Battery/energy_magnum.rsi
+    state: icon
+  content:
+  - WeaponEnergyMagnum

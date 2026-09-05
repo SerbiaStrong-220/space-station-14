@@ -405,3 +405,6 @@
 
 - type: Tag
   id: MiGoBuildingBlocker
+
+- type: Tag
+  id: BSHolsterSupport

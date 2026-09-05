@@ -475,7 +475,7 @@
     impactEffect: BulletImpactEffectBlaster
     damage:
       types:
-        Heat: 14
+        Heat: 15
         Piercing: 5
     soundHit:
       collection: WeakHit
@@ -490,7 +490,7 @@
   - type: Projectile
     damage:
       types:
-        Heat: 14
+        Heat: 16
   - type: Fixtures
     fixtures:
       projectile:
