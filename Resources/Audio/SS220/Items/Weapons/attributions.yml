@@ -15,7 +15,7 @@
   
 - files:
   - gun_drop.ogg
-  - gun_pickup.ogg
+  - gun_pick_up.ogg
   license: "CC-BY-SA-3.0"
   copyright: "Taken from pickupplasticobject.wav track of j1987, modified by TonyBigShoes for SS220"
   source: "https://freesound.org/people/j1987/sounds/123011/"
