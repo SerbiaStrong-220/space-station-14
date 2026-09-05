@@ -14,11 +14,11 @@
     enum.HumanoidVisualLayers.Tail:
       limit: 1
       required: true
-      default: [ FelinidTails ]
+      default: [ FelinidTail1 ]
     enum.HumanoidVisualLayers.HeadTop:
       limit: 1
       required: true
-      default: [ FelinidEars ]
+      default: [ FelinidEars1 ]
     enum.HumanoidVisualLayers.Chest:
       limit: 1
       required: false
@@ -67,9 +67,9 @@
       Appendix: OrganFelinidAppendix
       Ears: OrganFelinidEars
       Lungs: OrganFelinidLungs
-      Heart: OrganAnimalHeart
+      Heart: OrganFelinidHeart
       Stomach: OrganFelinidStomach
-      Liver: OrganAnimalLiver
+      Liver: OrganFelinidLiver
       Kidneys: OrganFelinidKidneys
   - type: HumanoidProfile
     species: Felinid
@@ -95,6 +95,25 @@
       Male: MaleFelinid
       Female: FemaleFelinid
       Unsexed: MaleFelinid
+  - type: Damageable
+    damageModifierSet: Felinid
+  - type: ExplosionResistance
+    damageCoefficient: 1.1
+    worn: false
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      80: Critical
+      160: Dead
+  - type: Hunger
+    baseDecayRate: 0.0217
+  - type: Thirst
+    baseDecayRate: 0.13
+  - type: DashSpeedModifier
+  - type: DodgeChance
+  - type: ClimbSpeedModifier
+  - type: DisposalPipeCrawler
+  - type: GunRecoilModifier
   - type: CombatMode # remove disarm ability
 
 - type: entity
@@ -108,12 +127,8 @@
   abstract: true
   components:
   - type: Metabolizer
-    maxReagents: 3
+    updateInterval: 0.8333
     metabolizerTypes: [ Animal ]
-    groups:
-    - id: Food
-    - id: Drink
-    - id: Omnivorous
 
 - type: entity
   parent: OrganFelinid
@@ -129,10 +144,10 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: Mobs/Species/Human/parts.rsi
+    sprite: SS220/Mobs/Species/Felinid/parts.rsi
   - type: VisualOrgan
     data:
-      sprite: Mobs/Species/Human/parts.rsi
+      sprite: SS220/Mobs/Species/Felinid/parts.rsi
   - type: VisualOrganMarkings
     markingData:
       group: Felinid
