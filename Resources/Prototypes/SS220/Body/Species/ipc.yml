@@ -169,13 +169,22 @@
     screamAction: ActionIpcScream
   - type: MeleeWeapon
     soundHit:
-      collection: AlienClaw
+      collection: MetalThud
     damage:
       types:
-        Slash: 5
+        Blunt: 5
   - type: Damageable
     damageContainer: Ipc
     damageModifierSet: Ipc
+  - type: HealthExaminable
+    locPrefix: ipc
+    examinableTypes:
+    - Blunt
+    - Slash
+    - Piercing
+    - Heat
+    - Shock
+    - Caustic
   - type: ToggleableVisuals
     spriteLayer: light 
   - type: PointLight

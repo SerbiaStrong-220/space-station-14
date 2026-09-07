@@ -1,0 +1,12 @@
+- type: entity
+  id: CrateStationDeathRattleImplants
+  parent: CrateMedicalSecure
+  name: station death rattle implant crate
+  description: Contains a handful of station death rattle implanters. Good for ones who afraid to die alone in crowded station.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: BoxStationDeathRattleImplanter
+          amount: 2
