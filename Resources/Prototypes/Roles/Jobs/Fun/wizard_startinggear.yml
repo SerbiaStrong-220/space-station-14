@@ -13,6 +13,11 @@
     belt: ClothingBeltWand
     pocket1: WizardTeleportScroll
     pocket2: WizardsGrimoire
+  #SS220-ipc-builtin-radio begin
+  storage:
+    key_slots:
+    - EncryptionKeyStationMaster
+  #SS220-ipc-builtin-radio end
 
 - type: startingGear
   id: WizardRedGear

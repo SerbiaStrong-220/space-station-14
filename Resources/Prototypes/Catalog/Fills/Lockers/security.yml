@@ -40,6 +40,7 @@
     - id: RubberStampWarden
     - id: DoorRemoteArmory
     - id: HoloprojectorSecurity
+    - id: MastercardIPC #SS220-ipc-builtin-radio
     # - id: BookSpaceLaw # SS220-replace-space-law
     - id: BookSpaceLaws # SS220-space-law
     - id: ClothingBackpackElectropack
