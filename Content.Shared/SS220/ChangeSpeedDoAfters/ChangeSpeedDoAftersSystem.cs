@@ -21,6 +21,9 @@ public sealed partial class ChangeSpeedDoAftersSystem : EntitySystem
 
     private void OnDoAfterProccess(Entity<ChangeSpeedDoAftersComponent> ent, ref BeforeDoAfterStartEvent args)
     {
+        if (args.Args.ArgFlags.HasFlag(DoAfterArgFlags.IgnoreTraitsModification))
+            return;
+
         args.Args.DelayModifier *= ent.Comp.Coefficient;
 
         if (ent.Comp.ChanceToFail == null)

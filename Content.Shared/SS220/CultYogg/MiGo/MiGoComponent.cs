@@ -105,6 +105,12 @@ public sealed partial class MiGoComponent : Component
     /// List of capruring results
     /// <summary>
     public Dictionary<string, TimeSpan> CaptureCooldowns = [];
+
+    /// <summary>
+    /// Grids where construction is blocked
+    /// <summary>
+    [DataField]
+    public EntityWhitelist? ConstructionGridsBlacklist;
     #endregion
 
     /// <summary>

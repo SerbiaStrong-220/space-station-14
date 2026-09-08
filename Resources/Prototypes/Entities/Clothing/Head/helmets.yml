@@ -355,9 +355,9 @@
   description: An atmos fire helmet, able to keep the user cool in any situation.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Helmets/atmos_firehelmet.rsi
+    sprite: SS220/Clothing/Head/Helmets/atmos_firehelmet.rsi #SS220 atmos firesuit resprite
   - type: Clothing
-    sprite: Clothing/Head/Helmets/atmos_firehelmet.rsi
+    sprite: SS220/Clothing/Head/Helmets/atmos_firehelmet.rsi #SS220 atmos firesuit resprite
     quickEquip: true
   - type: IngestionBlocker
   - type: TemperatureProtection

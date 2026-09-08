@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 275.2.0
+  engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 05/12/2026 14:25:54
-  entityCount: 25002
+  time: 08/15/2026 07:26:17
+  entityCount: 25003
 maps:
 - 1
 grids:
@@ -24992,6 +24992,13 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 1.5,38.5
       parent: 2
+- proto: AirlockGlassMimeLocked
+  entities:
+  - uid: 435
+    components:
+    - type: Transform
+      pos: -3.5,-16.5
+      parent: 2
 - proto: AirlockGlassShuttle
   entities:
   - uid: 306
@@ -25488,7 +25495,7 @@ entities:
       pos: 31.5,22.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -67091.95
+      secondsUntilStateChange: -67448.23
       state: Opening
   - uid: 385
     components:
@@ -25881,16 +25888,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 2.5,-4.5
-      parent: 2
-- proto: AirlockTheatreGlassLocked
-  entities:
-  - uid: 435
-    components:
-    - type: MetaData
-      desc: Только тсс...
-      name: каюта мима
-    - type: Transform
-      pos: -3.5,-16.5
       parent: 2
 - proto: AirlockVirologyLocked
   entities:
@@ -34132,6 +34129,20 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 29.5,20.5
+      parent: 2
+    - type: Fixtures
+      fixtures: {}
+  - uid: 5687
+    components:
+    - type: Transform
+      pos: 23.5,25.5
+      parent: 2
+    - type: Fixtures
+      fixtures: {}
+  - uid: 8557
+    components:
+    - type: Transform
+      pos: 23.5,24.5
       parent: 2
     - type: Fixtures
       fixtures: {}
@@ -75154,7 +75165,7 @@ entities:
     - type: Transform
       pos: 13.5,17.5
       parent: 2
-- proto: CurbDarckSteel
+- proto: CurbDarkSteel
   entities:
   - uid: 9443
     components:
@@ -76187,7 +76198,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -38.5,10.5
       parent: 2
-- proto: CurbDarckSteelCorner
+- proto: CurbDarkSteelCorner
   entities:
   - uid: 9621
     components:
@@ -76271,7 +76282,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -38.5,9.5
       parent: 2
-- proto: CurbDarckSteelCornerSmall
+- proto: CurbDarkSteelCornerSmall
   entities:
   - uid: 9635
     components:
@@ -76845,7 +76856,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: 34.5,56.5
       parent: 2
-- proto: CurbDarckSteelRound
+- proto: CurbDarkSteelRound
   entities:
   - uid: 9734
     components:
@@ -77503,7 +77514,7 @@ entities:
       pos: 35.5,3.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -67723.7
+      secondsUntilStateChange: -68079.98
       state: Closing
 - proto: CurtainsCyanOpen
   entities:
@@ -95195,26 +95206,10 @@ entities:
       parent: 2
 - proto: FoodCondimentBottleEnzyme
   entities:
-  - uid: 12673
+  - uid: 8560
     components:
     - type: Transform
-      pos: 5.760515,-2.3945255
-      parent: 2
-- proto: FoodCondimentPacketCornoil
-  entities:
-  - uid: 12674
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 5.6112094,-2.091825
-      parent: 2
-- proto: FoodCondimentPacketHotsauce
-  entities:
-  - uid: 12675
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 5.7266245,-1.508225
+      pos: 4.047634,1.7362158
       parent: 2
 - proto: FoodCondimentPacketSoy
   entities:
@@ -117502,6 +117497,13 @@ entities:
     - type: Transform
       pos: 50.5,-7.5
       parent: 2
+- proto: KitchenFoodProcessor
+  entities:
+  - uid: 8564
+    components:
+    - type: Transform
+      pos: 5.5,-2.5
+      parent: 2
 - proto: KitchenKnife
   entities:
   - uid: 15871
@@ -118427,16 +118429,6 @@ entities:
     components:
     - type: Transform
       pos: 28.5,17.5
-      parent: 2
-  - uid: 15983
-    components:
-    - type: Transform
-      pos: 24.5,25.5
-      parent: 2
-  - uid: 15984
-    components:
-    - type: Transform
-      pos: 24.5,24.5
       parent: 2
   - uid: 15985
     components:
@@ -134322,10 +134314,10 @@ entities:
       parent: 2
 - proto: ReagentContainerFlour
   entities:
-  - uid: 18563
+  - uid: 12673
     components:
     - type: Transform
-      pos: 5.186503,-2.3486967
+      pos: 5.374681,-1.6758759
       parent: 2
 - proto: ReagentSlimeSpawner
   entities:
@@ -135919,7 +135911,7 @@ entities:
     - type: Transform
       pos: 39.74323,45.88721
       parent: 2
-- proto: RiotShield
+- proto: RiotShieldAlt
   entities:
   - uid: 8886
     components:
@@ -143127,7 +143119,7 @@ entities:
       pos: 55.5,-35.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -505496.06
+      secondsUntilStateChange: -505852.34
       state: Opening
 - proto: SpaceCarpCube
   entities:
@@ -169691,6 +169683,18 @@ entities:
     components:
     - type: Transform
       pos: 26.5,24.5
+      parent: 2
+- proto: WardrobePrisonSecureFilled
+  entities:
+  - uid: 5672
+    components:
+    - type: Transform
+      pos: 24.5,25.5
+      parent: 2
+  - uid: 5676
+    components:
+    - type: Transform
+      pos: 24.5,24.5
       parent: 2
 - proto: WardrobeReporter
   entities:

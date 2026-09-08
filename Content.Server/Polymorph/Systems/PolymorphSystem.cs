@@ -21,6 +21,7 @@ using Content.Shared.SS220.PolymorphTimer;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.FixedPoint;
+using Content.Shared.Inventory;
 using Robust.Server.Audio;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
@@ -257,16 +258,21 @@ public sealed partial class PolymorphSystem : EntitySystem
             _damageable.SetDamage((child, damageParent), damage);
         }
 
-        if (configuration.Inventory == PolymorphInventoryChange.Transfer)
+        // ss220 fix polymorph fail start
+        if (HasComp<InventoryComponent>(uid) && HasComp<InventoryComponent>(child))
         {
-            _inventory.TransferEntityInventories(uid, child);
-            foreach (var hand in _hands.EnumerateHeld(uid))
+            if (configuration.Inventory == PolymorphInventoryChange.Transfer)
             {
-                _hands.TryDrop(uid, hand, checkActionBlocker: false);
-                _hands.TryPickupAnyHand(child, hand);
+                _inventory.TransferEntityInventories(uid, child);
+                foreach (var hand in _hands.EnumerateHeld(uid))
+                {
+                    _hands.TryDrop(uid, hand, checkActionBlocker: false);
+                    _hands.TryPickupAnyHand(child, hand);
+                }
             }
         }
-        else if (configuration.Inventory == PolymorphInventoryChange.Drop)
+
+        if (HasComp<InventoryComponent>(uid) && configuration.Inventory == PolymorphInventoryChange.Drop)
         {
             if (_inventory.TryGetContainerSlotEnumerator(uid, out var enumerator))
             {
@@ -281,6 +287,7 @@ public sealed partial class PolymorphSystem : EntitySystem
                 _hands.TryDrop(uid, held);
             }
         }
+        // ss220 fix polymorph fail end
 
         if (configuration.TransferName && TryComp(uid, out MetaDataComponent? targetMeta))
             _metaData.SetEntityName(child, targetMeta.EntityName);

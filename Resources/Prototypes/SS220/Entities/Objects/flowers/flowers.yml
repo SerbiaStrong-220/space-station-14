@@ -156,7 +156,7 @@
     - lflower
 
 - type: entity
-  parent: FoodFlowerBase
+  parent: [FoodFlowerBase, ClothingMaskBase]
   id: rrose
   name: red rose
   description: This is a real love.
@@ -166,12 +166,14 @@
     state: icon
   - type: Item
     sprite: SS220/Objects/Consumable/Flowers/rrose.rsi
+  - type: Clothing
+    sprite: SS220/Objects/Consumable/Flowers/rrose.rsi
   - type: Tag
     tags:
     - rrose
 
 - type: entity
-  parent: FoodFlowerBase
+  parent: [FoodFlowerBase, ClothingMaskBase]
   id: wrose
   name: white rose
   description: This is a real love.
@@ -180,6 +182,8 @@
     sprite: SS220/Objects/Consumable/Flowers/wrose.rsi
     state: icon
   - type: Item
+    sprite: SS220/Objects/Consumable/Flowers/wrose.rsi
+  - type: Clothing
     sprite: SS220/Objects/Consumable/Flowers/wrose.rsi
   - type: Tag
     tags:

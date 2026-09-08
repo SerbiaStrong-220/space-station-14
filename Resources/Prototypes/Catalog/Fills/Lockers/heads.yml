@@ -60,7 +60,7 @@
     - id: WeaponDisabler
     - id: ClothingWristWatchGold # SS220 Wrist Watch
     - id: ClothingEyesGlassesCommand
-    - id: OrganSkeletonPersonHead # A skull to accompany your skeleton crew
+    - id: OrganSkeletonAssistantPersonHead #SS220-AssistantSkeletonCaptainLocker
       conditions:
       - !type:PlayerCountCondition
         max: 15

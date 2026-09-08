@@ -491,6 +491,12 @@
   - type: Tag
     tags:
     - Meat
+  #SS220-grillables-update begin - We now eat it with utensils and throw trash, like a civilized being
+  - type: Edible
+    trash: [ FoodPlateSmall ]
+    utensil:
+    - Fork
+  #SS220-grillables-update end
 # Tastes like egg, salt, pepper.
 
 - type: entity

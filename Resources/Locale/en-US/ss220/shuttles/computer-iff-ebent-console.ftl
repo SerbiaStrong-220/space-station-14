@@ -1,0 +1,9 @@
+computer-iff-ebent-console-window-title = Stealth console
+computer-iff-ebent-console-label = Stealth mode
+computer-iff-ebent-console-activate = Activate Stealth
+computer-iff-ebent-console-active = Stealth Active
+computer-iff-ebent-console-cooldown = Cooldown
+computer-iff-ebent-console-time = Stealth: {$seconds}s
+computer-iff-ebent-console-cooldown-time = Cooldown: {$seconds}s
+fractwar-console-destroyed-sender = {$grid} - {$fraction}
+fractwar-console-destroyed-announcement = Destroyed.

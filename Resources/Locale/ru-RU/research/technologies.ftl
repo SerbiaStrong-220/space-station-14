@@ -73,6 +73,3 @@ research-technology-advanced-spray = Продвинутые спреи
 research-technology-clowning-utilities = Клоунские принадлежности
 research-technology-quantum-fiber-weaving = Плетение квантового волокна
 research-technology-bluespace-cargo-transport = Блюспейс-транспортировка грузов
-#SS220
-research-technology-cloning-technology = Технология клонирования
-research-technology-handheld-electrical-propulsion = Ручные электродвигатели

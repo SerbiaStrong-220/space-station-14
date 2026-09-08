@@ -1,0 +1,1 @@
+material-reclaimer-emag-time = Защита отключена на [color=white]{$minutes} мин. {$seconds} сек.[/color]

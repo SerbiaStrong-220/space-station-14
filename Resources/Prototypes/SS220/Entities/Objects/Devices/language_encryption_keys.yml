@@ -1,0 +1,167 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: EncryptionKey
+  id: DecryptionKeyTernary
+  name: decryption key ternary
+  description: A small cryptographic chip. Allows you to understand another language.
+  components:
+  - type: LanguageEncryptionKey
+    languages:
+    - Ternary
+  - type: Sprite
+    sprite: SS220/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: decrypt_ipc
+
+- type: entity
+  parent: EncryptionKey
+  id: DecryptionKeySintaunathi
+  name: decryption key sintaunathi
+  description: A small cryptographic chip. Allows you to understand another language.
+  components:
+  - type: LanguageEncryptionKey
+    languages:
+    - Sintaunathi
+  - type: Sprite
+    sprite: SS220/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: decrypt_unath
+
+- type: entity
+  parent: EncryptionKey
+  id: DecryptionKeySiiktajr
+  name: decryption key siiktajr
+  description: A small cryptographic chip. Allows you to understand another language.
+  components:
+  - type: LanguageEncryptionKey
+    languages:
+    - Siiktajr
+  - type: Sprite
+    sprite: SS220/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: decrypt_cat
+
+- type: entity
+  parent: EncryptionKey
+  id: DecryptionKeyVoxPidgin
+  name: decryption key voxpidgin
+  description: A small cryptographic chip. Allows you to understand another language.
+  components:
+  - type: LanguageEncryptionKey
+    languages:
+    - VoxPidgin
+  - type: Sprite
+    sprite: SS220/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: decrypt_vox
+
+- type: entity
+  parent: EncryptionKey
+  id: DecryptionKeyRootspeak
+  name: decryption key rootspeak
+  description: A small cryptographic chip. Allows you to understand another language.
+  components:
+  - type: LanguageEncryptionKey
+    languages:
+    - Rootspeak
+  - type: Sprite
+    sprite: SS220/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: decrypt_diona
+
+- type: entity
+  parent: EncryptionKey
+  id: DecryptionKeyBubblish
+  name: decryption key bubblish
+  description: A small cryptographic chip. Allows you to understand another language.
+  components:
+  - type: LanguageEncryptionKey
+    languages:
+    - Bubblish
+  - type: Sprite
+    sprite: SS220/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: decrypt_slime
+
+- type: entity
+  parent: EncryptionKey
+  id: DecryptionKeyTkachi
+  name: decryption key tkachi
+  description: A small cryptographic chip. Allows you to understand another language.
+  components:
+  - type: LanguageEncryptionKey
+    languages:
+    - Tkachi
+  - type: Sprite
+    sprite: SS220/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: decrypt_nian
+
+- type: entity
+  parent: EncryptionKey
+  id: DecryptionKeyArati
+  name: decryption key arati
+  description: A small cryptographic chip. Allows you to understand another language.
+  components:
+  - type: LanguageEncryptionKey
+    languages:
+    - Arati
+  - type: Sprite
+    sprite: SS220/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: decrypt_arahnid
+
+- type: entity
+  parent: EncryptionKey
+  id: DecryptionKeySolCommon
+  name: decryption key solCommon
+  description: A small cryptographic chip. Allows you to understand another language.
+  components:
+  - type: LanguageEncryptionKey
+    languages:
+    - SolCommon
+  - type: Sprite
+    sprite: SS220/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: decrypt_human
+
+- type: entity
+  parent: EncryptionKey
+  id: DecryptionKeyCentCom
+  name: decryption key centcom
+  description: A small cryptographic chip. Allows you to understand another language.
+  components:
+  - type: LanguageEncryptionKey
+    languages:
+    - Ternary
+    - Sintaunathi
+    - Siiktajr
+    - VoxPidgin
+    - Rootspeak
+    - Bubblish
+    - Tkachi
+    - Arati
+    - SolCommon
+  - type: Sprite
+    sprite: SS220/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: decrypt_centcom
+
+- type: entity
+  parent: EncryptionKey
+  id: DecryptionKeyAdvanced
+  name: decryption key advanced
+  description: A small cryptographic chip. Allows you to understand another language.
+  components:
+  - type: LanguageEncryptionKey
+    languages:
+    - Tradeband
+    - Gutter
+    - Clownish
+    - NeoRusskiya
+  - type: Sprite
+    sprite: SS220/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: decrypt_advanced
+

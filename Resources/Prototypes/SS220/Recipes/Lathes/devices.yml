@@ -85,3 +85,94 @@
     Steel: 1000
     Plastic: 500
     Glass: 500
+
+- type: latheRecipe
+  id: DecryptionKeyTernary
+  result: DecryptionKeyTernary
+  completetime: 5
+  materials:
+    Gold: 100
+    Steel: 100
+    Plastic: 200
+
+- type: latheRecipe
+  id: DecryptionKeySintaunathi
+  result: DecryptionKeySintaunathi
+  completetime: 5
+  materials:
+    Gold: 100
+    Steel: 100
+    Plastic: 200
+
+- type: latheRecipe
+  id: DecryptionKeySiiktajr
+  result: DecryptionKeySiiktajr
+  completetime: 5
+  materials:
+    Gold: 100
+    Steel: 100
+    Plastic: 200
+
+- type: latheRecipe
+  id: DecryptionKeyVoxPidgin
+  result: DecryptionKeyVoxPidgin
+  completetime: 5
+  materials:
+    Gold: 100
+    Steel: 100
+    Plastic: 200
+
+- type: latheRecipe
+  id: DecryptionKeyRootspeak
+  result: DecryptionKeyRootspeak
+  completetime: 5
+  materials:
+    Gold: 100
+    Steel: 100
+    Plastic: 200
+
+- type: latheRecipe
+  id: DecryptionKeyBubblish
+  result: DecryptionKeyBubblish
+  completetime: 5
+  materials:
+    Gold: 100
+    Steel: 100
+    Plastic: 200
+
+- type: latheRecipe
+  id: DecryptionKeyTkachi
+  result: DecryptionKeyTkachi
+  completetime: 5
+  materials:
+    Gold: 100
+    Steel: 100
+    Plastic: 200
+
+- type: latheRecipe
+  id: DecryptionKeyArati
+  result: DecryptionKeyArati
+  completetime: 5
+  materials:
+    Gold: 100
+    Steel: 100
+    Plastic: 200
+
+- type: latheRecipe
+  id: DecryptionKeySolCommon
+  result: DecryptionKeySolCommon
+  completetime: 5
+  materials:
+    Gold: 100
+    Steel: 100
+    Plastic: 200
+
+- type: latheRecipe
+  id: DecryptionKeyAdvanced
+  result: DecryptionKeyAdvanced
+  completetime: 5
+  materials:
+    Gold: 100
+    Steel: 100
+    Plastic: 200
+

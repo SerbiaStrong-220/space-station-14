@@ -14,6 +14,7 @@
   <GuideEntityEmbed Entity="AppearanceReptilian" Caption="Унатх"/>
   <GuideEntityEmbed Entity="AppearanceSlimePerson" Caption="Слаймолюд"/>
   <GuideEntityEmbed Entity="AppearanceTajaran" Caption="Таяран"/> <!-- SS220 Tajaran -->
+  <GuideEntityEmbed Entity="AppearanceIpc" Caption="КПБ"/> <!-- SS220 Ipc -->
   <GuideEntityEmbed Entity="AppearanceVox" Caption="Вокс"/>
   </Box>
   <Box>

@@ -10,9 +10,6 @@ anomaly-particles-sigma = Сигма-частицы
 anomaly-scanner-component-scan-complete = Сканирование завершено!
 anomaly-scanner-ui-title = сканер аномалий
 anomaly-scanner-no-anomaly = Нет просканированной аномалии.
-# BEGIN SS220 no anomaly msg for anomalyscanner
-anomaly-scanner-isnt-anomaly = [bold][color = red]ОШИБКА:[/color][/bold] ОБЪЕКТ НЕ ЯВЛЯЕТСЯ АНОМАЛИЕЙ!
-# END SS220 no anomaly msg for anomalyscanner
 anomaly-scanner-severity-percentage = Текущая опасность: [color=gray]{ $percent }[/color]
 anomaly-scanner-severity-percentage-unknown = Текущая опасность: [color=red]ОШИБКА[/color]
 anomaly-scanner-stability-low = Текущее состояние аномалии: [color=gold]Распад[/color]

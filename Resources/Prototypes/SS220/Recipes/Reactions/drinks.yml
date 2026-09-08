@@ -89,6 +89,18 @@
     ReaperSauce: 4
 
 - type: reaction
+  id: YotunBreath
+  reactants:
+    FrostOil:
+      amount: 2
+    Nitrogen:
+      amount: 1
+    Ice:
+      amount: 1
+  products:
+    YotunBreath: 4
+
+- type: reaction
   id: Bacchus
   requiredMixerCategories:
   - Shake

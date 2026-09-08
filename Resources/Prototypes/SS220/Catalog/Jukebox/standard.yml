@@ -211,3 +211,22 @@
   name: Wycc - Sixteen Tons
   path:
     path: /Audio/SS220/Jukebox/Wycc_SixteenTons.ogg
+
+- type: jukebox
+  id: space_asshole
+  name: Chris Remo - Space Asshole
+  path:
+    path: /Audio/Lobby/space_asshole.ogg
+
+- type: jukebox
+  id: the_wizard
+  name: Chris Remo - The Wizard
+  path:
+    path: /Audio/Lobby/the_wizard.ogg
+
+- type: jukebox
+  id: pwmur
+  name: Sunbeamstress - Phoron Will Make Us Rich
+  path:
+    path: /Audio/Lobby/pwmur.ogg
+

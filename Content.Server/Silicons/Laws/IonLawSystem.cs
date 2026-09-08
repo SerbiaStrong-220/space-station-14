@@ -1,5 +1,6 @@
-﻿using Content.Server.StationRecords.Systems;
+using Content.Server.StationRecords.Systems;
 using Content.Shared.Dataset;
+using Content.Shared.Random.Helpers;
 using Content.Shared.Silicons.Laws;
 using Content.Shared.Station;
 using Content.Shared.StationRecords;
@@ -23,6 +24,11 @@ public sealed class IonLawSystem : EntitySystem
     private ISawmill _sawmill = default!;
     private readonly Dictionary<string, List<IonLawSelector>> _selectors = new();
     private IonLawPrototype? _ionLaw;
+
+    // SS220 IonStrom Laws start
+    private readonly static ProtoId<DatasetPrototype> BrickedLaw = "IonStormBrickedLaws";
+    private const float ChanceToPickBricked = 0.75f;
+    // SS220 IonStrom Laws end
 
     public override void Initialize()
     {
@@ -134,6 +140,11 @@ public sealed class IonLawSystem : EntitySystem
     /// <returns>A formatted string representing the new ion law.</returns>
     public string GetIonLaw()
     {
+        // SS220 IonStrom Laws start
+        if (_random.Prob(ChanceToPickBricked) && _prototypeManager.Resolve(BrickedLaw, out var resolvedBrickedLawProto))
+            return _random.Pick(resolvedBrickedLawProto);
+        // SS220 IonStrom Laws end
+
         var laws = _prototypeManager.EnumeratePrototypes<IonLawPrototype>().ToList();
         if (laws.Count == 0)
         {

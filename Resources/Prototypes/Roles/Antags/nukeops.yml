@@ -99,6 +99,7 @@
     outerClothing: ClothingOuterHardsuitSyndieCommander
   inhand:
   - NukeOpsDeclarationOfWar
+  - NukeOpsReinforcementUplink #SS220 add reinforcement uplink
 
 - type: chameleonOutfit
   id: NukeopsCommanderOutfit

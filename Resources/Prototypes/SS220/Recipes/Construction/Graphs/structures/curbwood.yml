@@ -1,0 +1,86 @@
+- type: constructionGraph
+  id: CurbWood
+  start: start
+  graph:
+  - node: start
+    edges:
+      - to: curbWood
+        completed:
+          - !type:SnapToGrid { }
+        steps:
+          - material: WoodPlank
+            amount: 1
+            doAfter: 2
+      - to: curbWoodCorner
+        completed:
+          - !type:SnapToGrid { }
+        steps:
+          - material: WoodPlank
+            amount: 2
+            doAfter: 2.5
+      - to: curbWoodCornerSmall
+        completed:
+          - !type:SnapToGrid { }
+        steps:
+          - material: WoodPlank
+            amount: 1
+            doAfter: 2
+      - to: curbWoodRound
+        completed:
+          - !type:SnapToGrid { }
+        steps:
+          - material: WoodPlank
+            amount: 2
+            doAfter: 2
+
+  - node: curbWood
+    entity: CurbWoodDecoration
+    edges:
+      - to: start
+        completed:
+          - !type:SpawnPrototype
+            prototype: MaterialWoodPlank1
+            amount: 1
+          - !type:DeleteEntity
+        steps:
+          - tool: Screwing
+            doAfter: 0.25
+
+  - node: curbWoodCorner
+    entity: CurbWoodCornerDecoration
+    edges:
+      - to: start
+        completed:
+          - !type:SpawnPrototype
+            prototype: MaterialWoodPlank1
+            amount: 2
+          - !type:DeleteEntity
+        steps:
+          - tool: Screwing
+            doAfter: 0.5
+
+  - node: curbWoodCornerSmall
+    entity: CurbWoodCornerSmallDecoration
+    edges:
+      - to: start
+        completed:
+          - !type:SpawnPrototype
+            prototype: MaterialWoodPlank1
+            amount: 1
+          - !type:DeleteEntity
+        steps:
+          - tool: Screwing
+            doAfter: 0.25
+
+  - node: curbWoodRound
+    entity: CurbWoodRoundDecoration
+    edges:
+      - to: start
+        completed:
+          - !type:SpawnPrototype
+            prototype: MaterialWoodPlank1
+            amount: 2
+          - !type:DeleteEntity
+        steps:
+          - tool: Screwing
+            doAfter: 0.5

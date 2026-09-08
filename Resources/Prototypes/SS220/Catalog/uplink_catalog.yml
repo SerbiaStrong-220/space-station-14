@@ -772,3 +772,23 @@
       Telecrystal: 1
     HardDynamic:
       Telecrystal: 1
+
+- type: listing
+  id: UplinkPeashooterSyndiSeed
+  name: uplink-peashooter-sergeant-name
+  description: uplink-peashooter-sergeant-desc
+  icon: { sprite: SS220/Objects/Specific/Hydroponics/peashooter_syndi.rsi, state: seed }
+  productEntity: PeashooterSyndiSeeds
+  discountCategory: rareDiscounts
+  discountDownTo:
+    Telecrystal: 4
+  cost:
+    Telecrystal: 6
+  categories:
+  - UplinkJob
+  conditions:
+  - !type:BuyerJobCondition
+    whitelist:
+    - Botanist
+  - !type:ListingLimitedStockCondition
+      stock: 1

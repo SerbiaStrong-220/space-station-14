@@ -1,0 +1,79 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: cult cocoon
+  parent: CultYoggRestrictedItem
+  id: CultYoggCocoonBase
+  suffix: CultYogg
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/CultYogg/CorruptedItems/cocoon.rsi
+    layers:
+      - state: icon
+  - type: Tag
+    tags:
+    - CultYoggStealthProvidable
+
+- type: entity
+  id: CocoonSpikegun
+  parent: [CultYoggCocoonBase, BaseItem]
+  components:
+  - type: CultYoggCocoon
+    item: SpikegunCultYogg
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: CocoonVenomancer
+  parent: [CultYoggCocoonBase, BaseItem]
+  components:
+  - type: CultYoggCocoon
+    item: Venomancer
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: CocoonSpitballer
+  parent: [CultYoggCocoonBase, BaseItem]
+  components:
+  - type: CultYoggCocoon
+    item: Spitballer
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: CocoonClaw
+  parent: [CultYoggCocoonBase, BaseItem]
+  components:
+  - type: CultYoggCocoon
+    item: ClawCultYogg
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: CocoonBeach
+  parent: [CultYoggCocoonBase, BaseItem]
+  components:
+  - type: CultYoggCocoon
+    item: BeachCultYogg
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: CocoonSedativeSting
+  parent: [CultYoggCocoonBase, BaseItem]
+  components:
+  - type: CultYoggCocoon
+    item: SedativeStingCultYogg
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: CocoonDagonsScale
+  parent: [CultYoggCocoonBase, BaseItem]
+  components:
+  - type: CultYoggCocoon
+    item: DagonsScale
+    sound:
+      path: /Audio/Effects/unwrap.ogg

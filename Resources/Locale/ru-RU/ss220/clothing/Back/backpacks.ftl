@@ -8,6 +8,9 @@ ent-ClothingBackpackBlueShield = рюкзак синего щита
 ent-ClothingBackpackWhiteCaptain = белый рюкзак капитана
     .desc = Дорогая белая сумка, выданная за выслугу лет капитану.
 
+ent-ClothingBackpackJanitorJR = рюкзак JR
+    .desc = Удобный и водостойкий, предназначен для уборщиков Junk Recyclers.
+
 ent-ClothingBackpackBlueShieldHight = { ent-ClothingBackpackBlueShield }
     .desc = { ent-ClothingBackpackBlueShield.desc }
     .suffix = Тяжелый скафандр

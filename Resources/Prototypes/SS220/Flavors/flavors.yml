@@ -93,3 +93,8 @@
   flavorType: Complex
   description: flavor-complex-sawdustsoup
 
+- type: flavor
+  id: chocolatewhite
+  flavorType: Complex
+  description: flavor-complex-chocolatewhite
+

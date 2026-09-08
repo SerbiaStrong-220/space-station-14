@@ -7,77 +7,77 @@
   id: BaseWeaponPistol
   from:
     parentPrototypeId: BaseWeaponPistol
-  result: CultYoggCocoonSpikegun
+  result: CocoonSpikegun
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 - type: corrupted
   id: BaseWeaponSubMachineGun
   from:
     parentPrototypeId: BaseWeaponSubMachineGun
-  result: CultYoggCocoonSpikegun
+  result: CocoonSpikegun
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 - type: corrupted
   id: CorruptBaseWeaponRifle
   from:
     parentPrototypeId: BaseWeaponRifle
-  result: CultYoggCocoonSpikegun
+  result: CocoonSpikegun
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 - type: corrupted
   id: BaseWeaponShotgun
   from:
     parentPrototypeId: BaseWeaponShotgun
-  result: CultYoggCocoonVenomancer
+  result: CocoonVenomancer
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 - type: corrupted
   id: WeaponShotgunBulldog
   from:
     prototypeId: WeaponShotgunBulldog
-  result: CultYoggCocoonVenomancer
+  result: CocoonVenomancer
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 - type: corrupted
   id: WeaponSprayNozzle
   from:
     prototypeId: WeaponSprayNozzle
-  result: CultYoggCocoonVenomancer
+  result: CocoonVenomancer
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 - type: corrupted
   id: WeaponImprovisedPneumaticCannonParent
   from:
     parentPrototypeId: WeaponImprovisedPneumaticCannon
-  result: CultYoggCocoonSpitballer
+  result: CocoonSpitballer
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 - type: corrupted
   id: WeaponImprovisedPneumaticCannon
   from:
     prototypeId: WeaponImprovisedPneumaticCannon
-  result: CultYoggCocoonSpitballer
+  result: CocoonSpitballer
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 - type: corrupted
   id: BaseWeaponBattery
   from:
     parentPrototypeId: BaseWeaponBattery
-  result: CultYoggCocoonSpitballer
+  result: CocoonSpitballer
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 - type: corrupted
   id: BaseWeaponBatterySmall
   from:
     parentPrototypeId: BaseWeaponBatterySmall
-  result: CultYoggCocoonSpitballer
+  result: CocoonSpitballer
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 - type: corrupted
   id: WeaponLaserCarbine
   from:
     prototypeId: WeaponLaserCarbine
-  result: CultYoggCocoonSpitballer
+  result: CocoonSpitballer
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 #Range Weaponds end
@@ -94,21 +94,21 @@
   id: CableHVlive
   from:
     stackType: CableHV
-  result: CableHVStack1Live
+  result: LivingRootsStack1
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 - type: corrupted
   id: CableMVlive
   from:
     stackType: CableMV
-  result: CableMVStack1Live
+  result: LivingRootsStack1
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 - type: corrupted
   id: Cablelive
   from:
     stackType: Cable
-  result: CableApcStack1Live
+  result: LivingRootsStack1
 #Resources end
 
 - type: corrupted
@@ -174,56 +174,63 @@
   id: ClawCultYoggWirecutter
   from:
     prototypeId: Wirecutter
-  result: CultYoggCocoonClaw
+  result: CocoonClaw
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 - type: corrupted
-  id: BaseCrowbarCultYoggCocoonBeach
+  id: ClawCultYoggWrench
+  from:
+    prototypeId: Wrench
+  result: CocoonClaw
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: BaseCrowbarCocoonBeach
   from:
     parentPrototypeId: BaseCrowbar
-  result: CultYoggCocoonBeach
+  result: CocoonBeach
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 - type: corrupted
-  id: BaseBallBatCultYoggCocoonBeach
+  id: BaseBallBatCocoonBeach
   from:
     prototypeId: BaseBallBat
-  result: CultYoggCocoonBeach
+  result: CocoonBeach
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 - type: corrupted
-  id: StunbatonCultYoggCocoonBeach
+  id: StunbatonCocoonBeach
   from:
     prototypeId: Stunbaton
-  result: CultYoggCocoonBeach
+  result: CocoonBeach
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 - type: corrupted
   id: Truncheon
   from:
     prototypeId: Truncheon
-  result: CultYoggCocoonBeach
+  result: CocoonBeach
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 - type: corrupted
   id: Telescopichka
   from:
     prototypeId: Telescopichka
-  result: CultYoggCocoonBeach
+  result: CocoonBeach
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 - type: corrupted
   id: Stunprod
   from:
     prototypeId: Stunprod
-  result: CultYoggCocoonBeach
+  result: CocoonBeach
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 - type: corrupted
   id: RollingPin
   from:
     prototypeId: RollingPin
-  result: CultYoggCocoonBeach
+  result: CocoonBeach
   corruptionReverseEffect: ExorcismUncorruptEffect
 #MeleWeapons end
 
@@ -232,35 +239,35 @@
   id: PenSedativestingCultYogg
   from:
     tag: Pen
-  result: CultYoggCocoonSedativeSting
+  result: CocoonSedativeSting
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 - type: corrupted
   id: SyringeSedativestingCultYogg
   from:
     parentPrototypeId: BaseSyringe
-  result: CultYoggCocoonSedativeSting
+  result: CocoonSedativeSting
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 - type: corrupted
   id: ScrewdriverSedativestingCultYogg
   from:
     prototypeId: Screwdriver
-  result: CultYoggCocoonSedativeSting
+  result: CocoonSedativeSting
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 - type: corrupted
   id: ForkPlasticSedativestingCultYogg
   from:
     prototypeId: ForkPlastic
-  result: CultYoggCocoonSedativeSting
+  result: CocoonSedativeSting
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 - type: corrupted
   id: ForkSedativestingCultYogg
   from:
     prototypeId: Fork
-  result: CultYoggCocoonSedativeSting
+  result: CocoonSedativeSting
   corruptionReverseEffect: ExorcismUncorruptEffect
 #SedativeSting end
 

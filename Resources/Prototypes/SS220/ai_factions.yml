@@ -29,6 +29,7 @@
 - type: npcFaction
   id: SpiderQueen
   hostile:
+  - PlantsFract #SS220 PlatFraction
   - NanoTrasen
   - DeathSquad #SS220 dq update
   - Syndicate
@@ -60,6 +61,7 @@
 - type: npcFaction
   id: DeathSquad
   hostile:
+  - PlantsFract #SS220 PlatFraction
   - NanoTrasen
   - Syndicate
   - Xeno
@@ -77,6 +79,7 @@
 - type: npcFaction
   id: CultYogg
   hostile:
+  - PlantsFract #SS220 PlatFraction
   - SimpleHostile
   - Syndicate
   - Xeno
@@ -88,3 +91,20 @@
   - BloodCult
   - SpiderQueen
   - AllHostile
+
+- type: npcFaction
+  id: PlantsFract
+  hostile:
+  - NanoTrasen
+  - Syndicate
+  - Passive
+  - PetsNT
+  - Zombie
+  - Revolutionary
+  - Dragon
+  - Xeno
+  - SpiderQueen #ss220 spider queen
+  - CultYogg #SS220 CultYogg
+  - AllHostile
+  - Wizard
+  - Xenoborg

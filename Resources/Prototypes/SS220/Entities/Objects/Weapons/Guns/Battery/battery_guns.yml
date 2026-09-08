@@ -265,7 +265,7 @@
 - type: entity
   name: IK 60 Laser Carbine
   parent: BaseWeaponBlaster
-  id: WeaponLaserCarabine
+  id: WeaponLaserCarbineIK60
   description: A powerful laser carbine resembling a rifle, which relies more on battery cartridges than on an integrated power cell. It is used by NanoTrasen Corporate Security squads in combat operations.
   components:
   - type: Sprite

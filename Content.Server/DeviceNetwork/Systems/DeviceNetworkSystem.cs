@@ -189,7 +189,12 @@ namespace Content.Server.DeviceNetwork.Systems
             if (!_networks.TryGetValue(device.DeviceNetId, out var deviceNet))
                 return false;
 
-            return deviceNet.Devices.ContainsValue(device);
+            // ss220 fix optimization start
+            if (!deviceNet.Devices.TryGetValue(device.Address, out var connectedDevice))
+                return false;
+
+            return connectedDevice == device;
+            // ss220 fix optimization end
         }
 
         /// <summary>

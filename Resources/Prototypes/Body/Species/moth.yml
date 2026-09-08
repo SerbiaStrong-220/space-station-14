@@ -186,8 +186,8 @@
   - type: MothAccent
   - type: Vocal
     sounds:
-      Male: UnisexMoth
-      Female: UnisexMoth
+      Male: MaleMoth #ss220-fix
+      Female: FemaleMoth #ss220-fix
       Unsexed: UnisexMoth
   - type: BodyEmotes
     soundsId: MothBodyEmotes
