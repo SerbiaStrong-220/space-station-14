@@ -26,6 +26,10 @@
   - BoxFolderBaseThreePapers
   - BoxFolderPlasticClipboardThreePapers
   - BoxFolderClipboardThreePapers
+  #SS220 Add Cross in Trinkets begin
+  - ChaplainNeckGoldenCross
+  - ChaplainNeckSilverCross
+  #SS220 Add Cross in Trinkets end
   - ClothingNeckTSFPin #SS220-NewPins
   - ClothingNeckLGBTPin
   - ClothingNeckAllyPin
@@ -521,6 +525,7 @@
   - ChaplainPlagueHat
   - ChaplainWitchHat
   - ChaplainWitchHatAlt
+  - ChaplainHatFollower #SS220 new chaplain clothing
 
 - type: loadoutGroup
   id: ChaplainMask
@@ -537,6 +542,7 @@
   - ChaplainJumpskirt
   - ChaplainRobesLight
   - ChaplainRobesDark
+  - ChaplainJumpsuitFollower #SS220 new chaplain clothing
 
 - type: loadoutGroup
   id: ChaplainOuterClothing
@@ -1014,6 +1020,11 @@
   - SalvageSpecialistBackpack
   - SalvageSpecialistSatchel
   - SalvageSpecialistDuffel
+  #SS220-JRNewThings begin
+  - ClothingBackpackJRSalvage
+  - ClothingBackpackJRSalvageSatchel
+  - ClothingBackpackJRSalvageDuffel
+  #SS220-JRNewThings end
 
 - type: loadoutGroup
   id: SalvageSpecialistOuterClothing
@@ -1021,6 +1032,10 @@
   minLimit: 0
   loadouts:
   - SalvageSpecialistWintercoat
+  #SS220-JRNewThings begin
+  - ClothingOuterCoatJRSalvageTrench
+  - ClothingOuterWinterJRSalvage
+  #SS220-JRNewThings end
 
 - type: loadoutGroup
   id: SalvageSpecialistShoes
@@ -1028,6 +1043,7 @@
   loadouts:
   - SalvageBoots
   - CargoWinterBoots
+  - ClothingShoesBootsJRSalvage #SS220-JRNewThings
 
 #- type: loadoutGroup
 #  id: SalvageSpecialistJobTrinkets

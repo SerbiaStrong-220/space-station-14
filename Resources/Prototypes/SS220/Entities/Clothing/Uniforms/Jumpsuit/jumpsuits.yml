@@ -424,6 +424,19 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/musician_bard.rsi
 
+  # Священник
+- type: entity
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220]
+  id: ClothingUniformJumpsuitFollower
+  name: follower's jumpsuit
+  description: Even closer to paradise.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/chaplain_follower.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/chaplain_follower.rsi
+
 # Medical
 
   # Интерн
@@ -541,6 +554,18 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/salvage_specialist_experditor.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/salvage_specialist_experditor.rsi
+
+- type: entity
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220]
+  id: ClothingUniformJumpsuitJRSalvage
+  name: jr salvage uniform
+  description: Provides enhanced comfort during cleanup.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/jr_uniform_salvage.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/jr_uniform_salvage.rsi
 
 # Инженерия
 

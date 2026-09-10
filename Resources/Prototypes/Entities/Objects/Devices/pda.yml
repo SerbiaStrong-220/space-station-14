@@ -603,9 +603,11 @@
       whitelist:
         components:
         - Cartridge
-    preinstalled:
-    - CrewManifestCartridge
-    - NewsReaderCartridge
+    # SS220 mime pda fix begin
+    # preinstalled:
+    # - CrewManifestCartridge
+    # - NewsReaderCartridge
+    # SS220 mime pda fix end
   - type: Appearance
     appearanceDataInit:
      enum.PdaVisuals.PdaType:
@@ -2647,7 +2649,7 @@
   description: Yargh!
   components:
   - type: Pda
-    id: PirateIDCard
+    id: PirateSyndicateIDCard
   #SS220 PDA-Resprite-Start
   - type: PdaBorderColor
     borderColor: "#4b474f"

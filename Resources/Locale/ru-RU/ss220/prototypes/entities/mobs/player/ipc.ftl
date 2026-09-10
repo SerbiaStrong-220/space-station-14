@@ -40,3 +40,5 @@ ent-ActionIpcToggleLight = {ent-ActionToggleLighting}
 ent-ActionIpcScream = {ent-ActionScream}
     .desc = {ent-ActionScream.desc}
 
+suicide-command-ipc-text-others = { CAPITALIZE($name) } запускает протокол деактивации!
+suicide-command-ipc-text-self = Запускает протокол деактивации!

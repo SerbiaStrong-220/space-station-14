@@ -483,6 +483,19 @@
     - HamsterWearable
     - WhitelistChameleon
 
+  # Священник
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatFollower
+  name: follower's hat
+  description: It's heaven's time.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/chaplain_hat_follower.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/chaplain_hat_follower.rsi
+
 # Служба безопасности
 
   # ГСБ
@@ -569,6 +582,18 @@
       sprite: SS220/Clothing/Head/Hats/beret_salvage_specialist.rsi
     - type: Clothing
       sprite: SS220/Clothing/Head/Hats/beret_salvage_specialist.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadBeretJRSalvage
+  name: jr salvage beret
+  description: The ranking system for recyclers in Junk Recyclers is extremely extensive. This beret proves that you are at its top.
+  suffix: For playtime
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Head/Hats/jr_beret_salvage.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Head/Hats/jr_beret_salvage.rsi
 
 - type: entity
   parent: ClothingHeadBase

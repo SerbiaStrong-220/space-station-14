@@ -48,6 +48,7 @@
     - MindSlaveImplant # SS220 implant-removing fix
     - DeathRattleImplant
     - DeathRattleImplantInterdyne # SS220 Interdyne-death-rattle-removing fix
+    - DeathRattleImplantStation # SS220 station-death-rattle
     - MindShieldImplant
     - FakeMindShieldImplant
     - RadioImplant
