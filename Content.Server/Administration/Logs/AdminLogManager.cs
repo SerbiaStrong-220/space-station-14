@@ -20,6 +20,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Reflection;
+using Robust.Shared.SS220.Player;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -321,6 +322,17 @@ public sealed partial class AdminLogManager : SharedAdminLogManager, IAdminLogMa
         var json = JsonSerializer.SerializeToDocument(handler.Values, _jsonOptions);
         var id = NextLogId;
         var players = GetPlayers(handler.Values, id);
+
+// ss220 add debug player session start
+#if DEBUG
+        if (players.Exists(player =>
+            _player.TryGetSessionById(new NetUserId(player.PlayerUserId), out var session)
+            && session.Channel is DebugNetChannel))
+        {
+            return;
+        }
+#endif
+// ss220 add debug player session end
 
         // PostgreSQL does not support storing null chars in text values.
         if (message.Contains('\0'))
