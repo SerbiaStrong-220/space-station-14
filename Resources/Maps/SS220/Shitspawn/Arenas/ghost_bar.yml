@@ -4,7 +4,7 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 09/12/2026 13:35:29
+  time: 09/12/2026 14:26:20
   entityCount: 635
 maps: []
 grids:
@@ -1984,6 +1984,8 @@ entities:
     - type: Transform
       pos: 8.5,-1.5
       parent: 1
+    missingComponents:
+    - AccessReader
 - proto: CrateNPCCowLocked
   entities:
   - uid: 245
@@ -2711,17 +2713,17 @@ entities:
   - uid: 338
     components:
     - type: Transform
-      pos: 5.592364,9.385092
+      pos: 5.6116056,9.413066
       parent: 1
   - uid: 339
     components:
     - type: Transform
-      pos: 5.2694473,9.343426
+      pos: 5.351189,9.308899
       parent: 1
   - uid: 340
     components:
     - type: Transform
-      pos: 5.384031,9.603842
+      pos: 5.351189,9.569316
       parent: 1
 - proto: Jukebox
   entities:
