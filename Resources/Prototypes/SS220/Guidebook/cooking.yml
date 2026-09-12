@@ -1,0 +1,5 @@
+- type: guideEntry
+  id: FoodProcessorRecipes
+  name: guide-entry-food-processor-recipes
+  text: "/ServerInfo/SS220/Guidebook/Service/FoodProcessorRecipes.xml"
+  filterEnabled: True
