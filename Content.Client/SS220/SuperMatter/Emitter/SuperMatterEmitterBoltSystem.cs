@@ -7,9 +7,9 @@ using Content.Shared.Projectiles;
 
 namespace Content.Client.SS220.SuperMatter.Emitter;
 
-public sealed class SuperMatterEmitterSystem : EntitySystem
+public sealed partial class SuperMatterEmitterSystem : EntitySystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
