@@ -25,6 +25,7 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Robust.Shared.Timing;
+using Content.Server.Shuttles.Components;
 
 namespace Content.Server.Nuke;
 
@@ -225,7 +226,11 @@ public sealed class NukeSystem : EntitySystem
             var worldPos = _transform.GetWorldPosition(xform);
 
             // SS220 edit start
-            if (!HasComp<BecomesStationComponent>(xform.GridUid))
+            if (HasComp<BecomesStationComponent>(xform.GridUid) || HasComp<EmergencyShuttleComponent>(xform.GridUid))
+            {
+                // nothing :)
+            }
+            else
             {
                 _popups.PopupEntity(Loc.GetString("nuke-component-cant-anchor-shuttle"), uid, args.Actor, PopupType.MediumCaution);
                 return;
