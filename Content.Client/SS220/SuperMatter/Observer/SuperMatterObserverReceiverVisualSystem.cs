@@ -10,7 +10,7 @@ public sealed partial class SuperMatterObserverVisualReceiverSystem : EntitySyst
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private IGameTiming _gameTiming = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
