@@ -12,7 +12,6 @@ using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Overlays;
 using Content.Shared.Radio.Components;
-using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Components;
@@ -45,7 +44,6 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 
     // SS220 random lawset begin
     private readonly Dictionary<EntityUid, ProtoId<SiliconLawsetPrototype>> _stationLawsetCache = new();
-    private static readonly ProtoId<WeightedRandomPrototype> SiliconLawsetWeights = "RandomSiliconLawsets";
     // SS220 random lawset end
 
     private static readonly ProtoId<SiliconLawsetPrototype> DefaultCrewLawset = "Crewsimov";
@@ -85,8 +83,11 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
         if (!_stationLawsetCache.TryGetValue(station, out var lawset))
         {
             lawset = entity.Comp.Laws;
-            if (_prototype.TryIndex(SiliconLawsetWeights, out var weights) && weights.Weights.Count > 0)
-                lawset = weights.Pick(_random);
+            var weights = _prototype.EnumeratePrototypes<SiliconLawsetPrototype>()
+                .Where(proto => proto.Randomizable && proto.Weight is > 0 && float.IsFinite(proto.Weight.Value))
+                .ToDictionary(proto => new ProtoId<SiliconLawsetPrototype>(proto.ID), proto => proto.Weight!.Value);
+            if (weights.Count > 0)
+                lawset = _random.Pick(weights);
 
             _stationLawsetCache[station] = lawset;
         }
@@ -355,7 +356,8 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
         if (component.Lawset == null)
             component.Lawset = new SiliconLawset();
 
-        component.Lawset.Laws = newLaws;
+        // SS220 random lawset: each recipient must own its laws after an upload.
+        component.Lawset.Laws = newLaws.Select(law => law.ShallowClone()).ToList();
         NotifyLawsChanged(target, cue);
     }
 
