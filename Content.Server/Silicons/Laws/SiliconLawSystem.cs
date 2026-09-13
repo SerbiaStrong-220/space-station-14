@@ -43,7 +43,7 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     [Dependency] private readonly IRobustRandom _random = default!; // SS220 random lawset
 
     // SS220 random lawset begin
-    private readonly Dictionary<EntityUid, ProtoId<SiliconLawsetPrototype>> _stationLawsetCache = new();
+    private readonly Dictionary<EntityUid, (ProtoId<SiliconLawsetPrototype> Id, SiliconLawset Laws)> _stationLawsetCache = new();
     // SS220 random lawset end
 
     private static readonly ProtoId<SiliconLawsetPrototype> DefaultCrewLawset = "Crewsimov";
@@ -82,17 +82,38 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
         var station = _station.GetOwningStation(entity.Owner) ?? entity.Owner;
         if (!_stationLawsetCache.TryGetValue(station, out var lawset))
         {
-            lawset = entity.Comp.Laws;
+            var lawsetId = entity.Comp.Laws;
             var weights = _prototype.EnumeratePrototypes<SiliconLawsetPrototype>()
                 .Where(proto => proto.Randomizable && proto.Weight is > 0 && float.IsFinite(proto.Weight.Value))
                 .ToDictionary(proto => new ProtoId<SiliconLawsetPrototype>(proto.ID), proto => proto.Weight!.Value);
             if (weights.Count > 0)
-                lawset = _random.Pick(weights);
+                lawsetId = _random.Pick(weights);
 
+            lawset = (lawsetId, GetLawset(lawsetId));
             _stationLawsetCache[station] = lawset;
         }
 
-        entity.Comp.Laws = lawset;
+        entity.Comp.Laws = lawset.Id;
+        entity.Comp.Lawset = lawset.Laws.Clone();
+        UpdateCrewLawIndicator(entity.Owner, lawset.Id);
+    }
+
+    private void UpdateCrewLawIndicator(EntityUid uid, ProtoId<SiliconLawsetPrototype> lawset)
+    {
+        if (!TryComp<ShowCrewIconsComponent>(uid, out var crewIconComp))
+            return;
+
+        crewIconComp.UncertainCrewBorder = DefaultCrewLawset != lawset;
+        Dirty(uid, crewIconComp);
+    }
+
+    private void ApplyUploadedLawset(Entity<SiliconLawProviderComponent> entity,
+        ProtoId<SiliconLawsetPrototype> id, SiliconLawset lawset, SoundSpecifier? cue)
+    {
+        entity.Comp.Laws = id;
+        entity.Comp.Lawset = lawset.Clone();
+        UpdateCrewLawIndicator(entity.Owner, id);
+        NotifyLawsChanged(entity.Owner, cue);
     }
     // SS220 random lawset end
 
@@ -148,12 +169,19 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 
     private void OnBoundUIOpened(EntityUid uid, SiliconLawBoundComponent component, BoundUIOpenedEvent args)
     {
-        TryComp(uid, out IntrinsicRadioTransmitterComponent? intrinsicRadio);
+        UpdateLawsUi((uid, component)); // SS220 random lawset
+    }
+
+    // SS220 random lawset begin
+    private void UpdateLawsUi(Entity<SiliconLawBoundComponent> entity)
+    {
+        TryComp(entity.Owner, out IntrinsicRadioTransmitterComponent? intrinsicRadio);
         var radioChannels = intrinsicRadio?.Channels;
 
-        var state = new SiliconLawBuiState(GetLaws(uid).Laws, radioChannels);
-        _userInterface.SetUiState(args.Entity, SiliconLawsUiKey.Key, state);
+        var state = new SiliconLawBuiState(GetLaws(entity.Owner, entity.Comp).Laws, radioChannels);
+        _userInterface.SetUiState(entity.Owner, SiliconLawsUiKey.Key, state);
     }
+    // SS220 random lawset end
 
     private void OnPlayerSpawnComplete(EntityUid uid, SiliconLawBoundComponent component, PlayerSpawnCompleteEvent args)
     {
@@ -315,6 +343,10 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     {
         base.NotifyLawsChanged(uid, cue);
 
+        // SS220 random lawset: refresh an existing laws screen without reopening it.
+        if (TryComp<SiliconLawBoundComponent>(uid, out var bound))
+            UpdateLawsUi((uid, bound));
+
         if (!TryComp<ActorComponent>(uid, out var actor))
             return;
 
@@ -363,23 +395,38 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 
     protected override void OnUpdaterInsert(Entity<SiliconLawUpdaterComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
-        // TODO: Prediction dump this
         if (!TryComp<SiliconLawProviderComponent>(args.Entity, out var provider))
             return;
 
         var lawset = provider.Lawset ?? GetLawset(provider.Laws);
+        // SS220 random lawset begin
+        if (ent.Comp.UpdateStationLawset)
+        {
+            if (_station.GetOwningStation(ent.Owner) is not { } station)
+                return;
 
+            // Store a snapshot, not the board's mutable laws, for future station silicons.
+            _stationLawsetCache[station] = (provider.Laws, lawset.Clone());
+
+            var stationQuery = EntityQueryEnumerator<SiliconLawProviderComponent, SiliconLawBoundComponent>();
+            while (stationQuery.MoveNext(out var uid, out var targetProvider, out _))
+            {
+                if (!targetProvider.UseRandomLawset || targetProvider.Subverted ||
+                    _station.GetOwningStation(uid) != station)
+                    continue;
+
+                ApplyUploadedLawset((uid, targetProvider), provider.Laws, lawset, provider.LawUploadSound);
+            }
+            return;
+        }
+        // Other updaters retain their explicitly configured target selection.
         var query = EntityManager.CompRegistryQueryEnumerator(ent.Comp.Components);
-
         while (query.MoveNext(out var update))
         {
-            if (TryComp<ShowCrewIconsComponent>(update, out var crewIconComp))
-            {
-                crewIconComp.UncertainCrewBorder = DefaultCrewLawset != provider.Laws;
-                Dirty(update, crewIconComp);
-            }
-            SetLaws(lawset.Laws, update, provider.LawUploadSound);
+            if (TryComp<SiliconLawProviderComponent>(update, out var targetProvider))
+                ApplyUploadedLawset((update, targetProvider), provider.Laws, lawset, provider.LawUploadSound);
         }
+        // SS220 random lawset end
     }
 }
 

@@ -1699,6 +1699,7 @@
   - type: Lock
     unlockOnClick: false
   - type: SiliconLawUpdater
+    updateStationLawset: true # SS220 random lawset
     components:
     - type: StationAiHeld
   - type: ItemSlotsLock
