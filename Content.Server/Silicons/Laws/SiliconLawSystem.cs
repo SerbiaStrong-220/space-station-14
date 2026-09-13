@@ -20,29 +20,32 @@ using Robust.Server.Player;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
+using Content.Shared.Random;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
 using Robust.Shared.Toolshed;
+using Robust.Shared.Random;
 
 namespace Content.Server.Silicons.Laws;
 
 /// <inheritdoc/>
-public sealed class SiliconLawSystem : SharedSiliconLawSystem
+public sealed partial class SiliconLawSystem : SharedSiliconLawSystem
 {
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedRoleSystem _roles = default!;
-    [Dependency] private readonly IRobustRandom _random = default!; // SS220 random lawset
     [Dependency] private readonly IBanManager _banManager = default!; // SS220 Antag ban fix
     [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
     [Dependency] private readonly EmagSystem _emag = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!; // SS220 Antag ban fix
+    [Dependency] private readonly IRobustRandom _random = default!; // SS220 random lawset
 
-    // SS220 random lawset begin - кэш для хранения выбранных lawsets
-    private Dictionary<EntityUid, ProtoId<SiliconLawsetPrototype>> _stationLawsetCache = new();
-    // SS220 random lawset end
+    // SS220 random lawset - хранилище для глобального станционного lawset
+    private Dictionary<EntityUid, ProtoId<SiliconLawsetPrototype>> _stationLawsetMap = new();
+
+    // SS220 random lawset
+    private const string SiliconLawsetWeightsId = "RandomSiliconLawsets";
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -61,17 +64,15 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
         SubscribeLocalEvent<SiliconLawProviderComponent, MindRemovedMessage>(OnLawProviderMindRemoved);
         SubscribeLocalEvent<SiliconLawProviderComponent, SiliconEmaggedEvent>(OnEmagLawsAdded);
 
-        // SS220 random lawset begin - очистка кэша при ресете раунда
+        // SS220 random lawset - подписка на события смены раунда
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
-        // SS220 random lawset end
     }
 
-    // SS220 random lawset begin
+    // SS220 random lawset - очистка при рестарте раунда
     private void OnRoundRestart(RoundRestartCleanupEvent ev)
     {
-        _stationLawsetCache.Clear();
+        _stationLawsetMap.Clear();
     }
-    // SS220 random lawset end
 
     private void OnMapInit(EntityUid uid, SiliconLawBoundComponent component, MapInitEvent args)
     {
@@ -133,6 +134,80 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     private void OnPlayerSpawnComplete(EntityUid uid, SiliconLawBoundComponent component, PlayerSpawnCompleteEvent args)
     {
         component.LastLawProvider = args.Station;
+        // SS220 random lawset - назначаем станционный lawset при спавне киборга
+        if (args.Station is { } station) // SS220 random lawset - pattern matching
+        {
+            EnsureStationLawset(station);
+        }
+    }
+
+    // SS220 random lawset - метод для получения или создания станционного lawset
+    private void EnsureStationLawset(EntityUid station)
+    {
+        if (!_stationLawsetMap.ContainsKey(station))
+        {
+            // Выбираем случайный lawset на основе весов
+            var lawsetId = GetRandomLawset();
+            _stationLawsetMap[station] = lawsetId;
+        }
+    }
+
+    // SS220 random lawset - метод для получения случайного lawset на основе весов
+    private ProtoId<SiliconLawsetPrototype> GetRandomLawset()
+    {
+        if (!_prototype.TryIndex<WeightedRandomPrototype>(SiliconLawsetWeightsId, out var weights)) // SS220 random lawset - используем константу
+            return new ProtoId<SiliconLawsetPrototype>("Asimov"); // SS220 random lawset - возвращаем дефолтное значение
+
+        if (weights.Weights.Count == 0)
+            return new ProtoId<SiliconLawsetPrototype>("Asimov"); // SS220 random lawset - возвращаем дефолтное значение
+
+        var selected = _random.Pick(weights.Weights);
+        return new ProtoId<SiliconLawsetPrototype>(selected.Key);
+    }
+
+    // SS220 random lawset - метод для установки станционного lawset (используется консолью загрузки)
+    public void SetStationLawset(EntityUid station, ProtoId<SiliconLawsetPrototype> lawsetId)
+    {
+        _stationLawsetMap[station] = lawsetId;
+
+        // Обновляем законы у всех киборгов на станции
+        UpdateStationSilicons(station);
+    }
+
+    // SS220 random lawset - обновление законов у всех киборгов на станции
+    private void UpdateStationSilicons(EntityUid station)
+    {
+        var query = EntityQueryEnumerator<SiliconLawProviderComponent, SiliconLawBoundComponent>();
+        while (query.MoveNext(out var uid, out var provider, out var bound))
+        {
+            // Пропускаем субординированных киборгов
+            if (provider.Subverted)
+                continue;
+
+            // Проверяем, принадлежит ли киборг этой станции
+            if (_station.GetOwningStation(uid) != station)
+                continue;
+
+            // Обновляем laws provider
+            UpdateLawProvider(uid, provider, station);
+        }
+    }
+
+    // SS220 random lawset - обновление law provider на основе станционного lawset
+    private void UpdateLawProvider(EntityUid uid, SiliconLawProviderComponent provider, EntityUid station)
+    {
+        if (!_stationLawsetMap.TryGetValue(station, out var lawsetId))
+            return;
+
+        // Не обновляем, если киборг уже имеет этот lawset
+        if (provider.Laws == lawsetId)
+            return;
+
+        provider.Laws = lawsetId;
+        provider.Lawset = null; // Сбрасываем кэш
+
+        // Уведомляем об изменении законов
+        NotifyLawsChanged(uid);
     }
 
     private void OnDirectedGetLaws(EntityUid uid, SiliconLawProviderComponent component, ref GetSiliconLawsEvent args)
@@ -140,97 +215,28 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
         if (args.Handled)
             return;
 
-        // SS220 random lawset begin - выбираем lawset в зависимости от конфигурации
-        if (component.Lawset == null)
+        // SS220 random lawset - проверяем, нужно ли использовать станционный lawset
+        if (!component.Subverted &&
+            _station.GetOwningStation(uid) is { } station &&
+            _stationLawsetMap.TryGetValue(station, out var stationLawsetId))
         {
-            if (component.UseRandomLawset)
-            {
-                // Для киборгов с рандомным lawset
-                var stationLawset = GetStationLawset(uid);
-                if (stationLawset != null)
-                {
-                    // Используем сохраненный lawset для станции
-                    component.Laws = stationLawset.Value;
-                    component.Lawset = GetLawset(stationLawset.Value);
-                }
-                else
-                {
-                    // Если для станции еще нет lawset, выбираем случайный
-                    var randomLawset = SelectRandomLawset();
-                    if (randomLawset != null)
-                    {
-                        component.Laws = randomLawset.Value;
-                        component.Lawset = GetLawset(randomLawset.Value);
-
-                        // Сохраняем выбранный lawset для станции
-                        SaveStationLawset(uid, randomLawset.Value);
-                    }
-                    else
-                    {
-                        // Fallback на дефолтный
-                        component.Lawset = GetLawset(component.Laws);
-                    }
-                }
-            }
-            else
-            {
-                // Для киборгов с фиксированным lawset
-                component.Lawset = GetLawset(component.Laws);
-            }
+            // Используем станционный lawset вместо дефолтного
+            component.Laws = stationLawsetId;
         }
-        // SS220 random lawset end
+
+        if (component.Lawset == null)
+            component.Lawset = GetLawset(component.Laws);
 
         args.Laws = component.Lawset;
         args.Handled = true;
     }
-
-    // SS220 random lawset begin
-    /// <summary>
-    /// Получает сохраненный lawset для станции
-    /// </summary>
-    private ProtoId<SiliconLawsetPrototype>? GetStationLawset(EntityUid uid)
-    {
-        // Ищем станцию для этого entity
-        if (_station.GetOwningStation(uid) is { } station)
-        {
-            if (_stationLawsetCache.TryGetValue(station, out var lawset))
-            {
-                return lawset;
-            }
-        }
-
-        // Проверяем глобальный кэш (если entity сама станция)
-        if (_stationLawsetCache.TryGetValue(uid, out var globalLawset))
-        {
-            return globalLawset;
-        }
-
-        return null;
-    }
-
-    /// <summary>
-    /// Сохраняет lawset для станции
-    /// </summary>
-    private void SaveStationLawset(EntityUid uid, ProtoId<SiliconLawsetPrototype> lawset)
-    {
-        // Сохраняем для станции
-        if (_station.GetOwningStation(uid) is { } station)
-        {
-            _stationLawsetCache[station] = lawset;
-        }
-        else
-        {
-            // Если не можем найти станцию, сохраняем для самого entity
-            _stationLawsetCache[uid] = lawset;
-        }
-    }
-    // SS220 random lawset end
 
     private void OnIonStormLaws(EntityUid uid, SiliconLawProviderComponent component, ref IonStormLawsEvent args)
     {
         // Emagged borgs are immune to ion storm
         if (!_emag.CheckFlag(uid, EmagType.Interaction))
         {
+            // SS220 random lawset - сохраняем текущий lawset как subverted
             component.Lawset = args.Lawset;
 
             // gotta tell player to check their laws
@@ -247,6 +253,7 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 
     private void OnEmagLawsAdded(EntityUid uid, SiliconLawProviderComponent component, ref SiliconEmaggedEvent args)
     {
+        // SS220 random lawset - получаем текущий lawset (не меняем его на случайный)
         if (component.Lawset == null)
             component.Lawset = GetLawset(component.Laws);
 
@@ -322,6 +329,8 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 
         if (_station.GetOwningStation(uid, xform) is { } station)
         {
+            // SS220 random lawset - убеждаемся, что у станции есть lawset
+            EnsureStationLawset(station);
             RaiseLocalEvent(station, ref ev);
             if (ev.Handled)
             {
@@ -393,45 +402,6 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
         return laws;
     }
 
-    // SS220 random lawset begin
-    /// <summary>
-    /// Selects a random lawset with weights from all available lawsets.
-    /// </summary>
-    public ProtoId<SiliconLawsetPrototype>? SelectRandomLawset()
-    {
-        // Get all lawsets that are randomizable
-        var allLawsets = _prototype.EnumeratePrototypes<SiliconLawsetPrototype>()
-            .Where(proto => proto.Randomizable)
-            .ToList();
-
-        if (allLawsets.Count == 0)
-            return null;
-
-        float totalWeight = 0f;
-        foreach (var lawset in allLawsets)
-        {
-            totalWeight += lawset.Weight;
-        }
-
-        if (totalWeight <= 0)
-            return allLawsets[0].ID;
-
-        var randomValue = _random.NextFloat() * totalWeight;
-        float cumulative = 0f;
-
-        foreach (var lawset in allLawsets)
-        {
-            cumulative += lawset.Weight;
-            if (randomValue <= cumulative)
-            {
-                return lawset.ID;
-            }
-        }
-
-        return allLawsets[0].ID;
-    }
-    // SS220 random lawset end
-
     /// <summary>
     /// Set the laws of a silicon entity while notifying the player.
     /// </summary>
@@ -462,63 +432,6 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
             SetLaws(lawset.Laws, update, provider.LawUploadSound);
         }
     }
-
-    // SS220 random lawset begin
-    /// <summary>
-    /// Sets a random lawset for a silicon entity.
-    /// </summary>
-    public void SetRandomLawset(EntityUid uid, SiliconLawProviderComponent? component = null)
-    {
-        if (!Resolve(uid, ref component))
-            return;
-
-        var randomLawset = SelectRandomLawset();
-        if (randomLawset != null)
-        {
-            component.Laws = randomLawset.Value;
-            component.Lawset = null; // Reset cached lawset
-
-            // Сохраняем выбранный lawset для станции
-            SaveStationLawset(uid, randomLawset.Value);
-
-            // Force refresh laws
-            var laws = GetLaws(uid);
-            NotifyLawsChanged(uid);
-        }
-    }
-
-    /// <summary>
-    /// Получает текущий lawset для станции
-    /// </summary>
-    public ProtoId<SiliconLawsetPrototype>? GetCurrentStationLawset(EntityUid station)
-    {
-        if (_stationLawsetCache.TryGetValue(station, out var lawset))
-        {
-            return lawset;
-        }
-        return null;
-    }
-
-    /// <summary>
-    /// Устанавливает lawset для станции
-    /// </summary>
-    public void SetStationLawset(EntityUid station, ProtoId<SiliconLawsetPrototype> lawset)
-    {
-        _stationLawsetCache[station] = lawset;
-    }
-
-    /// <summary>
-    /// Включает или выключает использование случайного lawset для киборга
-    /// </summary>
-    public void SetUseRandomLawset(EntityUid uid, bool useRandom, SiliconLawProviderComponent? component = null)
-    {
-        if (!Resolve(uid, ref component))
-            return;
-
-        component.UseRandomLawset = useRandom;
-        component.Lawset = null; // Сбрасываем кэш, чтобы при следующем обращении был выбран новый lawset
-    }
-    // SS220 random lawset end
 }
 
 [ToolshedCommand, AdminCommand(AdminFlags.Admin)]
@@ -546,36 +459,4 @@ public sealed class LawsCommand : ToolshedCommand
             yield return $"law {law.LawIdentifierOverride ?? law.Order.ToString()}: {Loc.GetString(law.LawString)}";
         }
     }
-
-    // SS220 random lawset begin
-    [CommandImplementation("setrandom")]
-    public void SetRandom([PipedArgument] EntityUid entity)
-    {
-        _law ??= GetSys<SiliconLawSystem>();
-        _law.SetRandomLawset(entity);
-    }
-
-    [CommandImplementation("getstationlawset")]
-    public string? GetStationLawset([PipedArgument] EntityUid station)
-    {
-        _law ??= GetSys<SiliconLawSystem>();
-        var lawset = _law.GetCurrentStationLawset(station);
-        return lawset?.ToString();
-    }
-
-    [CommandImplementation("setstationlawset")]
-    public void SetStationLawset([PipedArgument] EntityUid station, string lawsetId)
-    {
-        _law ??= GetSys<SiliconLawSystem>();
-        var lawset = new ProtoId<SiliconLawsetPrototype>(lawsetId);
-        _law.SetStationLawset(station, lawset);
-    }
-
-    [CommandImplementation("userandom")]
-    public void UseRandom([PipedArgument] EntityUid entity, bool useRandom)
-    {
-        _law ??= GetSys<SiliconLawSystem>();
-        _law.SetUseRandomLawset(entity, useRandom);
-    }
-    // SS220 random lawset end
 }
