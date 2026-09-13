@@ -517,7 +517,9 @@
 #SS220 languages revive end
   - type: SiliconLawProvider
     laws: Crewsimov
-    useRandomLawset: true # SS220 Random lawset
+    # SS220 random lawset begin
+    useRandomLawset: true
+    # SS220 random lawset end
   - type: SiliconLawBound
   - type: ActionGrant
     actions:

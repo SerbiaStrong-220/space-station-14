@@ -12,21 +12,27 @@ using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Overlays;
 using Content.Shared.Radio.Components;
+// SS220 random lawset begin
 using Content.Shared.Random.Helpers;
+// SS220 random lawset end
 using Content.Shared.Roles;
 using Content.Shared.Roles.Components;
 using Content.Shared.Silicons.Laws;
 using Content.Shared.Silicons.Laws.Components;
+// SS220 random lawset begin
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Silicons.StationAi;
 using Content.Shared.SS220.Silicons.Laws;
+// SS220 random lawset end
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+// SS220 random lawset begin
 using Robust.Shared.Random;
+// SS220 random lawset end
 using Robust.Shared.Toolshed;
 
 namespace Content.Server.Silicons.Laws;
@@ -43,9 +49,9 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
     [Dependency] private readonly EmagSystem _emag = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!; // SS220 Antag ban fix
-    [Dependency] private readonly IRobustRandom _random = default!; // SS220 random lawset
-
     // SS220 random lawset begin
+    [Dependency] private readonly IRobustRandom _random = default!;
+
     private readonly Dictionary<EntityUid, (ProtoId<SiliconLawsetPrototype> Id, SiliconLawset Laws)> _stationLawsetCache = new();
     private readonly Dictionary<(EntityUid Station, LawUploadTarget Target),
         (ProtoId<SiliconLawsetPrototype> Id, SiliconLawset Laws)> _stationLawsetOverrides = new();
@@ -69,7 +75,9 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
         SubscribeLocalEvent<SiliconLawProviderComponent, MindAddedMessage>(OnLawProviderMindAdded);
         SubscribeLocalEvent<SiliconLawProviderComponent, MindRemovedMessage>(OnLawProviderMindRemoved);
         SubscribeLocalEvent<SiliconLawProviderComponent, SiliconEmaggedEvent>(OnEmagLawsAdded);
-        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart); // SS220 random lawset
+        // SS220 random lawset begin
+        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
+        // SS220 random lawset end
     }
 
     // SS220 random lawset begin
@@ -230,7 +238,9 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 
     private void OnBoundUIOpened(EntityUid uid, SiliconLawBoundComponent component, BoundUIOpenedEvent args)
     {
-        UpdateLawsUi((uid, component)); // SS220 random lawset
+        // SS220 random lawset begin
+        UpdateLawsUi((uid, component));
+        // SS220 random lawset end
     }
 
     // SS220 random lawset begin
@@ -254,7 +264,9 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
         if (args.Handled)
             return;
 
-        InitializeRandomLawset((uid, component)); // SS220 random lawset
+        // SS220 random lawset begin
+        InitializeRandomLawset((uid, component));
+        // SS220 random lawset end
 
         if (component.Lawset == null)
             component.Lawset = GetLawset(component.Laws);
@@ -286,7 +298,9 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 
     private void OnEmagLawsAdded(EntityUid uid, SiliconLawProviderComponent component, ref SiliconEmaggedEvent args)
     {
-        InitializeRandomLawset((uid, component)); // SS220 random lawset
+        // SS220 random lawset begin
+        InitializeRandomLawset((uid, component));
+        // SS220 random lawset end
 
         if (component.Lawset == null)
             component.Lawset = GetLawset(component.Laws);
@@ -404,9 +418,11 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     {
         base.NotifyLawsChanged(uid, cue);
 
-        // SS220 random lawset: refresh an existing laws screen without reopening it.
+        // SS220 random lawset begin
+        // Refresh an existing laws screen without reopening it.
         if (TryComp<SiliconLawBoundComponent>(uid, out var bound))
             UpdateLawsUi((uid, bound));
+        // SS220 random lawset end
 
         if (!TryComp<ActorComponent>(uid, out var actor))
             return;
@@ -449,16 +465,20 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
         if (component.Lawset == null)
             component.Lawset = new SiliconLawset();
 
-        // SS220 random lawset: each recipient must own its laws after an upload.
+        // SS220 random lawset begin
+        // Each recipient must own its laws after an upload.
         component.Lawset.Laws = newLaws.Select(law => law.ShallowClone()).ToList();
+        // SS220 random lawset end
         NotifyLawsChanged(target, cue);
     }
 
     protected override void OnUpdaterInsert(Entity<SiliconLawUpdaterComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
-        // SS220: interactive upload consoles require explicit confirmation.
+        // SS220 random lawset begin
+        // Interactive upload consoles require explicit confirmation.
         if (HasComp<LawUploadConsoleComponent>(ent))
             return;
+        // SS220 random lawset end
 
         if (!TryComp<SiliconLawProviderComponent>(args.Entity, out var provider))
             return;
