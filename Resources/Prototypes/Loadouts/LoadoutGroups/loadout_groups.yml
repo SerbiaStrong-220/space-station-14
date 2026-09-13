@@ -946,6 +946,7 @@
   loadouts:
   - QuartermasterWintercoat
   - QuartermasterOuterCoatQMWarehouseman #SS220-QM-Trip
+  - QuartermasterOuterCoatQMExpensive #SS220 QM exp coat
 
 - type: loadoutGroup
   id: QuartermasterShoes
