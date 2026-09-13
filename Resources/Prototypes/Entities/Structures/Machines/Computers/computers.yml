@@ -1696,21 +1696,31 @@
     board: StationAiUploadCircuitboard
   - type: AccessReader
     access: [ [ "ResearchDirector" ] ]
-  - type: Lock
-    unlockOnClick: false
+  # SS220 law upload console begin
+  - type: LawUploadConsole
+  - type: ActivatableUI
+    key: enum.LawUploadUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.LawUploadUiKey.Key:
+        type: LawUploadBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  # SS220 law upload console end
   - type: SiliconLawUpdater
     updateStationLawset: true # SS220 random lawset
     components:
     - type: StationAiHeld
-  - type: ItemSlotsLock
-    slots:
-    - circuit_holder
   - type: ItemSlotRequiresPower
   - type: ItemSlots
     slots:
+      law_upload_id: # SS220 law upload console
+        name: law-upload-card-slot
+        whitelist:
+          components:
+          - IdCard
       circuit_holder:
         name: circuit-holder
-        insertSuccessPopup: silicon-laws-updated
         whitelist:
           requireAll: true
           components:
@@ -1718,6 +1728,7 @@
           - Item
   - type: ContainerContainer
     containers:
+      law_upload_id: !type:ContainerSlot # SS220 law upload console
       circuit_holder: !type:ContainerSlot
       board: !type:Container
 

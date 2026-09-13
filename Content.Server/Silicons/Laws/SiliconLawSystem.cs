@@ -17,6 +17,9 @@ using Content.Shared.Roles;
 using Content.Shared.Roles.Components;
 using Content.Shared.Silicons.Laws;
 using Content.Shared.Silicons.Laws.Components;
+using Content.Shared.Silicons.Borgs.Components;
+using Content.Shared.Silicons.StationAi;
+using Content.Shared.SS220.Silicons.Laws;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
@@ -44,6 +47,8 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 
     // SS220 random lawset begin
     private readonly Dictionary<EntityUid, (ProtoId<SiliconLawsetPrototype> Id, SiliconLawset Laws)> _stationLawsetCache = new();
+    private readonly Dictionary<(EntityUid Station, LawUploadTarget Target),
+        (ProtoId<SiliconLawsetPrototype> Id, SiliconLawset Laws)> _stationLawsetOverrides = new();
     // SS220 random lawset end
 
     private static readonly ProtoId<SiliconLawsetPrototype> DefaultCrewLawset = "Crewsimov";
@@ -71,6 +76,7 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     private void OnRoundRestart(RoundRestartCleanupEvent ev)
     {
         _stationLawsetCache.Clear();
+        _stationLawsetOverrides.Clear();
     }
 
     private void InitializeRandomLawset(Entity<SiliconLawProviderComponent> entity)
@@ -80,9 +86,21 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
             return;
 
         var station = _station.GetOwningStation(entity.Owner) ?? entity.Owner;
+        var lawset = GetStationLawset(station, GetLawUploadTarget(entity.Owner) ?? LawUploadTarget.All, entity.Comp.Laws);
+        entity.Comp.Laws = lawset.Id;
+        entity.Comp.Lawset = lawset.Laws;
+        UpdateCrewLawIndicator(entity.Owner, lawset.Id);
+    }
+
+    public (ProtoId<SiliconLawsetPrototype> Id, SiliconLawset Laws) GetStationLawset(
+        EntityUid station, LawUploadTarget target, ProtoId<SiliconLawsetPrototype>? fallback = null)
+    {
+        if (_stationLawsetOverrides.TryGetValue((station, target), out var overridden))
+            return (overridden.Id, overridden.Laws.Clone());
+
         if (!_stationLawsetCache.TryGetValue(station, out var lawset))
         {
-            var lawsetId = entity.Comp.Laws;
+            var lawsetId = fallback ?? DefaultCrewLawset;
             var weights = _prototype.EnumeratePrototypes<SiliconLawsetPrototype>()
                 .Where(proto => proto.Randomizable && proto.Weight is > 0 && float.IsFinite(proto.Weight.Value))
                 .ToDictionary(proto => new ProtoId<SiliconLawsetPrototype>(proto.ID), proto => proto.Weight!.Value);
@@ -93,9 +111,52 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
             _stationLawsetCache[station] = lawset;
         }
 
-        entity.Comp.Laws = lawset.Id;
-        entity.Comp.Lawset = lawset.Laws.Clone();
-        UpdateCrewLawIndicator(entity.Owner, lawset.Id);
+        return (lawset.Id, lawset.Laws.Clone());
+    }
+
+    private LawUploadTarget? GetLawUploadTarget(EntityUid uid)
+    {
+        if (HasComp<BorgChassisComponent>(uid))
+            return LawUploadTarget.Borgs;
+
+        return HasComp<StationAiCustomizationComponent>(uid) ? LawUploadTarget.Ai : null;
+    }
+
+    /// <summary>
+    /// Stores a separate snapshot for future spawns and updates eligible station silicons.
+    /// The caller is responsible for authenticating the console user.
+    /// </summary>
+    public int UploadStationLawset(EntityUid station, LawUploadTarget target,
+        ProtoId<SiliconLawsetPrototype> id, SiliconLawset lawset, SoundSpecifier? cue = null)
+    {
+        if (!Enum.IsDefined(target))
+            return 0;
+
+        if (target == LawUploadTarget.All)
+        {
+            _stationLawsetCache[station] = (id, lawset.Clone());
+            _stationLawsetOverrides.Remove((station, LawUploadTarget.Ai));
+            _stationLawsetOverrides.Remove((station, LawUploadTarget.Borgs));
+        }
+        else
+            _stationLawsetOverrides[(station, target)] = (id, lawset.Clone());
+
+        var count = 0;
+        var query = EntityQueryEnumerator<SiliconLawProviderComponent, SiliconLawBoundComponent>();
+        while (query.MoveNext(out var uid, out var provider, out _))
+        {
+            if (!provider.UseRandomLawset || provider.Subverted ||
+                _station.GetOwningStation(uid) != station ||
+                GetLawUploadTarget(uid) is not { } kind ||
+                (target != LawUploadTarget.All && kind != target))
+                continue;
+
+            ApplyUploadedLawset((uid, provider), id, lawset, cue);
+            count++;
+        }
+
+        RaiseLocalEvent(new StationLawsetsChangedEvent(station));
+        return count;
     }
 
     private void UpdateCrewLawIndicator(EntityUid uid, ProtoId<SiliconLawsetPrototype> lawset)
@@ -395,6 +456,10 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 
     protected override void OnUpdaterInsert(Entity<SiliconLawUpdaterComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
+        // SS220: interactive upload consoles require explicit confirmation.
+        if (HasComp<LawUploadConsoleComponent>(ent))
+            return;
+
         if (!TryComp<SiliconLawProviderComponent>(args.Entity, out var provider))
             return;
 
@@ -405,18 +470,7 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
             if (_station.GetOwningStation(ent.Owner) is not { } station)
                 return;
 
-            // Store a snapshot, not the board's mutable laws, for future station silicons.
-            _stationLawsetCache[station] = (provider.Laws, lawset.Clone());
-
-            var stationQuery = EntityQueryEnumerator<SiliconLawProviderComponent, SiliconLawBoundComponent>();
-            while (stationQuery.MoveNext(out var uid, out var targetProvider, out _))
-            {
-                if (!targetProvider.UseRandomLawset || targetProvider.Subverted ||
-                    _station.GetOwningStation(uid) != station)
-                    continue;
-
-                ApplyUploadedLawset((uid, targetProvider), provider.Laws, lawset, provider.LawUploadSound);
-            }
+            UploadStationLawset(station, LawUploadTarget.All, provider.Laws, lawset, provider.LawUploadSound);
             return;
         }
         // Other updaters retain their explicitly configured target selection.
