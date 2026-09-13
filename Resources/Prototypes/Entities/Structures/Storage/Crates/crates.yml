@@ -419,6 +419,19 @@
     access: [["Command"]]
 
 - type: entity
+  parent: CrateBaseSecure
+  id: CrateSyndicateSecure
+  name: secure syndicate crate
+  description: A dark steel crate with red bands and a letter S embossed on the front.
+  components:
+  - type: Icon
+    sprite: Structures/Storage/Crates/syndicate_secure.rsi
+  - type: Sprite
+    sprite: Structures/Storage/Crates/syndicate_secure.rsi
+  - type: AccessReader
+    access: [["SyndicateAgent", "NuclearOperative"]]
+
+- type: entity
   parent: CrateGeneric
   id: CrateLivestock
   name: livestock crate
@@ -461,8 +474,10 @@
     fixtures:
       fix1:
         shape:
-          !type:PhysShapeAabb
-          bounds: "-0.4,-0.4,0.4,0.29"
+          #SS220-TweakHitbox begin
+          !type:PhysShapeCircle
+          radius: 0.40
+          #SS220-TweakHitbox end
         density: 135
         mask:
         - CrateMask #this is so they can go under plastic flaps
@@ -830,6 +845,19 @@
     node: cratecoffin
     containers:
     - entity_storage
+  #SS220-TweakHitbox begin
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 50
+        mask:
+        - CrateMask
+        layer:
+        - MachineLayer
+  #SS220-TweakHitbox end
 
 - type: entity
   parent: CrateGeneric
@@ -913,7 +941,7 @@
 - type: entity
   parent: CrateGenericSteel
   id: CrateSyndicate
-  name: Syndicate crate
+  name: syndicate crate
   description: A dark steel crate with red bands and a letter S embossed on the front.
   components:
   - type: Icon

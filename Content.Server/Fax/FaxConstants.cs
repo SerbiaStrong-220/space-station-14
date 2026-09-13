@@ -35,4 +35,5 @@ public static class FaxConstants
     public const string FaxPaperDataToCopy = "fax_data_to_copy";
     public const string FaxPaperMetaData = "fax_data_meta";
     // SS220 Photocopy end
+    public const string FaxPaperSenderFaxNameData = "fax_data_sender_fax_name";
 }

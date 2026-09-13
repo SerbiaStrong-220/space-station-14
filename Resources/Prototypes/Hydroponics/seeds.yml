@@ -627,6 +627,7 @@
   plantLogImpact: High
   harvestLogImpact: High
   packetPrototype: KillerTomatoSeeds
+  autoSpawnMob: true #SS220-Mob-Spawn-Nerf
   productPrototypes:
     - MobTomatoKiller
   harvestRepeat: Repeat
@@ -1631,6 +1632,7 @@
     - FoodWatermelon
   mutationPrototypes:
     - holymelon
+    - watermelondog # SS220-watermelondog
   lifespan: 55
   maturation: 12
   production: 3
@@ -1803,6 +1805,8 @@
   packetPrototype: PeaSeeds
   productPrototypes:
     - FoodWorldPeas
+  mutationPrototypes:
+    - peashooter #SS220 Peashooter update
   lifespan: 25
   growthStages: 3
   maturation: 20

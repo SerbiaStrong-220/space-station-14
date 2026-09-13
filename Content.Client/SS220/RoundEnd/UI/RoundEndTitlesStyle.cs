@@ -98,6 +98,7 @@ public sealed class RoundEndTitlesStyle : QuickStyle
             "Silicon" => "Silicon_dep.png",
             "GhostRoles" => "Ghost_dep.png",
             "Law" => "Law_dep.png",
+            "RedWings" => "Ghost_dep.png",
             _ => "empty.png",
         });
     }

@@ -1,26 +1,45 @@
 ﻿using System.Text;
 using System.Text.RegularExpressions;
 using Content.Server.Chat.Systems;
+using Content.Shared.Chat;
 
 namespace Content.Server.SS220.TTS;
 
 // ReSharper disable once InconsistentNaming
 public sealed partial class TTSSystem
 {
+    [GeneratedRegex(@"(?<![a-zA-Zа-яёА-ЯЁ])[a-zA-Zа-яёА-ЯЁ]+?(?![a-zA-Zа-яёА-ЯЁ])", RegexOptions.Multiline | RegexOptions.IgnoreCase)]
+    private static partial Regex WordRegex();
+
+    [GeneratedRegex(@"[^a-zA-Zа-яА-ЯёЁ0-9,\-+?!. ]")]
+    private static partial Regex CleanCharsRegex();
+
+    [GeneratedRegex(@"[a-zA-Z]", RegexOptions.Multiline | RegexOptions.IgnoreCase)]
+    private static partial Regex Lat2CyrRegex();
+
+    [GeneratedRegex(@"(?<=[1-90])(\.|,)(?=[1-90])")]
+    private static partial Regex DecimalSeparatorRegex();
+
+    [GeneratedRegex(@"\d+")]
+    private static partial Regex DigitsRegex();
+
     private void OnTransformSpeech(TransformSpeechEvent args)
     {
-        if (!_isEnabled) return;
+        if (!_isEnabled)
+            return;
+
         args.Message = args.Message.Replace("+", "");
     }
 
     private string Sanitize(string text)
     {
         text = text.Trim();
-        text = Regex.Replace(text, @"(?<![a-zA-Zа-яёА-ЯЁ])[a-zA-Zа-яёА-ЯЁ]+?(?![a-zA-Zа-яёА-ЯЁ])", ReplaceMatchedWord, RegexOptions.Multiline | RegexOptions.IgnoreCase);
-        text = Regex.Replace(text, @"[^a-zA-Zа-яА-ЯёЁ0-9,\-+?!. ]", "");
-        text = Regex.Replace(text, @"[a-zA-Z]", ReplaceLat2Cyr, RegexOptions.Multiline | RegexOptions.IgnoreCase);
-        text = Regex.Replace(text, @"(?<=[1-90])(\.|,)(?=[1-90])", " целых ");
-        text = Regex.Replace(text, @"\d+", ReplaceWord2Num);
+        text = WordRegex().Replace(text, ReplaceMatchedWord);
+        text = CleanCharsRegex().Replace(text, "");
+        text = Lat2CyrRegex().Replace(text, ReplaceLat2Cyr);
+        text = DecimalSeparatorRegex().Replace(text, " целых ");
+        text = DigitsRegex().Replace(text, ReplaceWord2Num);
+
         text = text.Trim();
         return text;
     }

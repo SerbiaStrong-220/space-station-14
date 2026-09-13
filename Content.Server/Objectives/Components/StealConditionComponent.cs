@@ -10,11 +10,19 @@ namespace Content.Server.Objectives.Components;
 [RegisterComponent, Access(typeof(StealConditionSystem))]
 public sealed partial class StealConditionComponent : Component
 {
+    // ss220 add custom antag goals start
     /// <summary>
     /// A group of items to be stolen
     /// </summary>
-    [DataField(required: true)]
-    public ProtoId<StealTargetGroupPrototype> StealGroup;
+    [DataField]
+    public ProtoId<StealTargetGroupPrototype>? StealGroup;
+
+    [DataField]
+    public EntityUid? StealTarget;
+
+    [DataField]
+    public EntProtoId? StealTargetProto;
+    // ss220 add custom antag goals end
 
     /// <summary>
     /// When enabled, disables generation of this target if there is no entity on the map (disable for objects that can be created mid-round).

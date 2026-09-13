@@ -9,12 +9,12 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.Headset;
 
-public sealed class HeadsetToggledSystem : SharedHeadsetToggledSystem
+public sealed partial class HeadsetToggledSystem : SharedHeadsetToggledSystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly SharedRoleSystem _role = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SharedRoleSystem _role = default!;
 
     public override void Initialize()
     {

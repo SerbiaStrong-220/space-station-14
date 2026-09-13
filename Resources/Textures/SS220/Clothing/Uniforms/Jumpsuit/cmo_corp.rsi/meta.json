@@ -11,11 +11,14 @@
       "name": "icon"
     },
     {
+      "name": "icon_tie"
+    },
+    {
       "name": "equipped-INNERCLOTHING",
       "directions": 4
     },
     {
-      "name": "folded-equipped-INNERCLOTHING",
+      "name": "tie-equipped-INNERCLOTHING",
       "directions": 4
     },
     {

@@ -1,0 +1,43 @@
+# Loadouts
+- type: loadout
+  id: CivilianCash
+  storage:
+    back:
+    - SpaceCash250
+
+- type: loadout
+  id: WorkerCash
+  storage:
+    back:
+    - SpaceCash500
+
+- type: loadout
+  id: SeniorStaffCash
+  storage:
+    back:
+    - SpaceCash700
+
+# Loadouts group
+- type: loadoutGroup
+  id: CivilianCash
+  name: loadout-group-civilian-cash
+  hidden: true
+  minLimit: 1
+  loadouts:
+  - CivilianCash
+
+- type: loadoutGroup
+  id: WorkerCash
+  name: loadout-group-worker-cash
+  hidden: true
+  minLimit: 1
+  loadouts:
+  - WorkerCash
+
+- type: loadoutGroup
+  id: SeniorStaffCash
+  hidden: true
+  name: loadout-group-senior-staff-cash
+  minLimit: 1
+  loadouts:
+  - SeniorStaffCash

@@ -58,7 +58,7 @@ entities:
     - type: OccluderTree
     - type: SpreaderGrid
     - type: Shuttle
-      fTLCooldown: 220
+      fTLCooldownOverride: 220
       dampingModifier: 0.25
     - type: GridPathfinding
     - type: Gravity

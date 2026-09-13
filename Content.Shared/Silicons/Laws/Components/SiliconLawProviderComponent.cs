@@ -1,4 +1,4 @@
-using Robust.Shared.Prototypes;
+﻿using Robust.Shared.Prototypes;
 using Robust.Shared.Audio;
 
 namespace Content.Shared.Silicons.Laws.Components;
@@ -37,9 +37,9 @@ public sealed partial class SiliconLawProviderComponent : Component
 
     // SS220 Random lawset begin
     /// <summary>
-    /// Should we randomize lawset or no
+    /// Whether this provider uses the station's randomly selected default lawset.
     /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public bool UseRandomLawset = false;
     // SS220 Random lawset end
 }

@@ -1,0 +1,18 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: constructionGraph
+  id: RandomPosterContraband
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: contrposter
+          steps:
+            - tag: Contrposter
+              name: construction-graph-tag-Contrposter
+              icon:
+                sprite: SS220/Objects/Misc/Contrposter.rsi
+                state: contrposter
+              doAfter: 1
+    - node: contrposter
+      entity: PosterContrabandSpawner

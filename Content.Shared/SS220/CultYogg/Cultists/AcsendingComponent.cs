@@ -20,5 +20,5 @@ public sealed partial class AcsendingComponent : Component
     public TimeSpan AcsendingTime;
 
     [DataField]
-    public SpriteSpecifier.Rsi Sprite = new(new("SS220/Effects/cult_yogg_acsending.rsi"), "acsendingEffect");
+    public SpriteSpecifier.Rsi Sprite = new(new("SS220/Effects/CultYogg/acsending.rsi"), "acsendingEffect");
 }

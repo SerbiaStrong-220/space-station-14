@@ -79,10 +79,11 @@
     sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/ENG.rsi
   - type: Item
     sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/ENG.rsi
-  - type: StorageFill
-    contents:
-    - id: CigaretteENG
-      amount: 10
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: CigaretteENG
+        amount: 10
 
 - type: entity
   id: CigPackMED
@@ -94,10 +95,11 @@
     sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/MED.rsi
   - type: Item
     sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/MED.rsi
-  - type: StorageFill
-    contents:
-    - id: CigaretteMED
-      amount: 10
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: CigaretteMED
+        amount: 10
 
 - type: entity
   id: CigPackSEC
@@ -109,10 +111,11 @@
     sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/SEC.rsi
   - type: Item
     sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/SEC.rsi
-  - type: StorageFill
-    contents:
-    - id: CigaretteSEC
-      amount: 10
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: CigaretteSEC
+        amount: 10
 
 - type: entity
   id: CigPackRnD
@@ -124,10 +127,11 @@
     sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/RnD.rsi
   - type: Item
     sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/RnD.rsi
-  - type: StorageFill
-    contents:
-    - id: CigaretteRnD
-      amount: 10
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: CigaretteRnD
+        amount: 10
 
 - type: entity
   id: CigPackWEH
@@ -139,10 +143,11 @@
     sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/WEH.rsi
   - type: Item
     sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/WEH.rsi
-  - type: StorageFill
-    contents:
-    - id: CigaretteWeh
-      amount: 10
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: CigaretteWeh
+        amount: 10
 
 - type: entity
   id: CigPackAVD
@@ -154,7 +159,8 @@
     sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/AVD.rsi
   - type: Item
     sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/AVD.rsi
-  - type: StorageFill
-    contents:
-    - id: CigaretteAVD
-      amount: 10
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: CigaretteAVD
+        amount: 10

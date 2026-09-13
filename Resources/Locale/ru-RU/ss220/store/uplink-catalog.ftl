@@ -15,6 +15,10 @@ uplink-clothing-briefcase-with-double-bottom-desc = Чемодан с двойн
 
 uplink-pinpointer-syndie-name = Пинпоинтер Cиндиката
 uplink-pinpointer-syndie-desc = Пинпоинтер, способный отследить любой ценный предмет на станции, а так же любое существо по ДНК.
+
+uplink-cqc-manual-name = Старый мануал
+uplink-cqc-manual-desc = Небольшое черное руководство. Внутри есть нарисованные инструкции по тактическому рукопашному бою.
+
 # Disruption
 
 uplink-syndicate-pen-signaller = Ручка-передатчик
@@ -28,7 +32,7 @@ uplink-shutdown-nearest-apc-desc = Внимание! Активируется с
 
 # Implants
 uplink-mindslave-implanter-name = Имплантер Подчинитель разума
-uplink-mindslave-implanter-desc = { ent-MindSlaveImplant.desc }
+uplink-mindslave-implanter-desc = Получите полный контроль над другим разумным существом! Внимание: продолжительное использование имплантера подчинения может быть вредно для здоровья подчинённого.
 
 uplink-mindslave-fix-surgery-bundle-name = Конфигуратор подчинителя разума
 uplink-mindslave-fix-surgery-bundle-desc = Позволяет вашим подчинённым прожить дольше, требует вмешательства каждый раз при возникновении проблем. Идёт вместе с хирургическим набором и инструкцией!
@@ -43,6 +47,12 @@ uplink-fake-ops-desc = Набор высококачественных репл�
 # Pointless
 uplink-expensive-lighter-name = { ent-ExpensiveLighterSyndicate }
 uplink-expensive-lighter-desc = { ent-ExpensiveLighterSyndicate.desc }
+
+uplink-syndicate-folder-name = Папка синдиката
+uplink-syndicate-folder-desc = Папка, с долей вероятности содержащая информацию о вражеской корпорации. Проверим?
+
+uplink-diplomat-suit-name = Костюм дипломата
+uplink-diplomat-suit-desc = Костюм дипломата преступного синдиката, ничего необычного.
 
 # Masks-Boxes
 uplink-special-delivery-name = Особая посылка
@@ -67,3 +77,21 @@ uplink-silent-shoes-desc = Совершенно бесшумные ботинк�
 
 uplink-outer-electrification-name = Броня электрификации
 uplink-outer-electrification-desc = Броня, позволяющая конвертировать урон по выносливости в шоковый.
+
+uplink-suit-electrification-name = Костюм электрификации
+uplink-suit-electrification-desc = Костюм, позволяющий конвертировать урон по выносливости в шоковый. Имеет встроенную функцию хамелеона.
+
+uplink-fake-captain-id-card-name = Фальшивая ID карта капитана
+uplink-fake-captain-id-card-desc = ID карта со сломанным модулем доступов, внешне неотличимая от ID карты капитана. Они не заметят подмены.
+
+uplink-clothing-outer-vest-web-elite-name = Огнеупорный тактический жилет
+uplink-clothing-outer-vest-web-elite-desc = Бронежилет класса IIIA с дополнительными огнеупорными элементами.
+
+uplink-assault-suit-name = Штурмовой бронекостюм
+uplink-assault-suit-desc = Костюм,состоящий из бронежилета IV класса, несъёмного встроенного шлема и комплектов защиты для предплечий, шеи и паха.
+
+uplink-chameleon-vest-name = Бронежилет-хамелеон
+uplink-chameleon-vest-desc = Бронежилет III класса, имеющий встроеную маскировку. Идентичен противопульному бронежилету.
+
+uplink-peashooter-sergeant-name = Пакет семян (cержант горохострел)
+uplink-peashooter-sergeant-desc = Пакет семян генно-модифицированного горохострела, выведенный лучшими умами ботаников Синдиката. Данный вид растения прошёл военную подготовку и побывал в горячих грядочных точках. Растение обучено распознавать агентов Синдиката и чрезвычайно плохо настроено к тем, кто ими не является.

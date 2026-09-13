@@ -8,11 +8,11 @@ using Robust.Shared.Random;
 
 namespace Content.Server.SS220.GameCardsColode;
 
-public sealed class GameCardsColodeSystem : EntitySystem
+public sealed partial class GameCardsColodeSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ContainerSystem _container = default!;
+    [Dependency] private PopupSystem _popup = default!;
 
     public override void Initialize()
     {

@@ -9,7 +9,7 @@ job-name-cc-ci-officer = counterintelligence officer
 
 job-name-cburn-agent = CBURN agent
 job-name-cburn-leader = CBURN Ledaer
-job-name-cc-bs-operative = Blue Shield Operative
+job-name-cc-srt-operative = SRT Operative
 job-name-ert-commander = ERT Leader
 job-name-ert-chaplain = ERT Chaplain
 

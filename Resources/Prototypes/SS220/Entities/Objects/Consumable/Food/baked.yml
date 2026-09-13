@@ -1,0 +1,25 @@
+- type: entity
+  parent: FoodMeatRabbitSteak
+  id: FoodMeatRabbitBnuuyBakedOrange
+  name: baked bnuuy with oranges
+  description: High cuisine requires sacrifices, served with the warden's tears.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - bnuuynyatina
+      - orange
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/Baked/baked.rsi
+    state: rabbit_baked
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 14
+        - ReagentId: Protein
+          Quantity: 6
+        - ReagentId: Stimulants
+          Quantity: 4
+        - ReagentId: JuiceOrange
+          Quantity: 15

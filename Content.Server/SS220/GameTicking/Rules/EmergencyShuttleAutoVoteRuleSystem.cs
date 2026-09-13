@@ -15,14 +15,14 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.GameTicking.Rules;
 
-public sealed class EmergencyShuttleAutoVoteRuleSystem : GameRuleSystem<EmergencyShuttleAutoVoteRuleComponent>
+public sealed partial class EmergencyShuttleAutoVoteRuleSystem : GameRuleSystem<EmergencyShuttleAutoVoteRuleComponent>
 {
-    [Dependency] private readonly IAdminLogManager _adminLog = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly RoundEndSystem _roundEnd = default!;
-    [Dependency] private readonly IVoteManager _voteManager = default!;
-    [Dependency] private readonly EmergencyShuttleSystem _emergencyShuttle = default!;
+    [Dependency] private IAdminLogManager _adminLog = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private RoundEndSystem _roundEnd = default!;
+    [Dependency] private IVoteManager _voteManager = default!;
+    [Dependency] private EmergencyShuttleSystem _emergencyShuttle = default!;
 
     private TimeSpan RoundTime => _gameTiming.CurTime - _gameTicker.RoundStartTimeSpan;
 
@@ -62,9 +62,22 @@ public sealed class EmergencyShuttleAutoVoteRuleSystem : GameRuleSystem<Emergenc
         MakeEmergencyShuttleVote(component);
     }
 
+    private float GetRequiredEvacVoteRatio(int voteCount)
+    {
+        return voteCount switch
+        {
+            1 => 0.70f,
+            2 => 0.60f,
+            _ => 0.50f
+        };
+    }
+
     private void MakeEmergencyShuttleVote(EmergencyShuttleAutoVoteRuleComponent component)
     {
+        component.EvacVoteCount++;
         component.LastEvacVoteTime = RoundTime;
+
+        float requiredRatio = GetRequiredEvacVoteRatio(component.EvacVoteCount);
 
         var voteOptions = new VoteOptions()
         {
@@ -82,11 +95,13 @@ public sealed class EmergencyShuttleAutoVoteRuleSystem : GameRuleSystem<Emergenc
 
         vote.OnFinished += (_, args) =>
         {
-            var callEvac = false;
-            if (args.Winner is bool winner)
-                callEvac = winner;
+            var votesYes = vote.VotesPerOption.GetValueOrDefault(true, 0);
+            var votesNo = vote.VotesPerOption.GetValueOrDefault(false, 0);
+            var total = votesYes + votesNo;
 
-            _adminLog.Add(LogType.Vote, LogImpact.Medium, $"Auto call emergency shuttle vote finished, result is {callEvac}");
+            var callEvac = total > 0 && (float)votesYes / total >= requiredRatio;
+
+            _adminLog.Add(LogType.Vote, LogImpact.Medium, $"Auto call emergency shuttle vote number {component.EvacVoteCount} finished, result is {callEvac}");
 
             VoteTimeResult.WithLabels(callEvac.ToString()).Observe(RoundTime.TotalHours);
 
@@ -99,7 +114,7 @@ public sealed class EmergencyShuttleAutoVoteRuleSystem : GameRuleSystem<Emergenc
 
     private void CallUnRecallableEmergencyShuttle()
     {
-        _roundEnd.RequestRoundEnd(null, false, "round-end-system-shuttle-auto-called-announcement");
+        _roundEnd.RequestRoundEnd(null, null, false, "round-end-system-shuttle-auto-called-announcement");
 
         EvacCallTime.Observe(RoundTime.TotalHours);
 

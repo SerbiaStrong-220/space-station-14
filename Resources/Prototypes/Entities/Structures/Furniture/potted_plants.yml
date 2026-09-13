@@ -22,7 +22,7 @@
         - HighImpassable
   - type: Sprite
     drawdepth: Overdoors
-    offset: "0.0,0.3"
+    offset: "0.0,0.1" #SS220 PottedUpdate
     sprite: SS220/Structures/Furniture/PottedPlants/potted_plants.rsi #SS220 Resprite
     noRot: true
   - type: Speech
@@ -124,7 +124,7 @@
   components:
   - type: Sprite
     state: plant-09
-  - type: PointLight
+  - type: PointLight #SS220 PottedUpdate
     radius: 2
     color: "#2cb2e8"
 
@@ -205,6 +205,12 @@
   components:
   - type: Sprite
     state: plant-20
+  #SS220 PottedUpdate begin
+  - type: PointLight
+    radius: 1.5
+    energy: 3
+    color: "#f5c96d"
+  #SS220 PottedUpdate end
 
 - type: entity
   id: PottedPlant21

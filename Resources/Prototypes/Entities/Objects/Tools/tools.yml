@@ -7,6 +7,12 @@
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/wirecutter_drop.ogg
+  # SS220-construction-skill-begin
+  - type: LearningOnDoAfterEndWith
+    progress:
+      Construction:
+        baseLearning: 0.02
+  # SS220-construction-skill-end
   - type: Tag
     tags:
     - PlantSampleTaker
@@ -43,6 +49,14 @@
       Steel: 100
   - type: StaticPrice
     price: 30
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Tools/wirecutter_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Tools/wirecutter_drop.ogg
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   name: screwdriver
@@ -53,6 +67,12 @@
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/screwdriver_drop.ogg
+  # SS220-construction-skill-begin
+  - type: LearningOnDoAfterEndWith
+    progress:
+      Construction:
+        baseLearning: 0.02
+  # SS220-construction-skill-end
   - type: Tag
     tags:
     - Screwdriver
@@ -100,6 +120,14 @@
       types:
         Piercing: 5
 # SS220 Throwable Changes end
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Tools/screwdriver_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Tools/screwdriver_drop.ogg
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   name: wrench
@@ -111,6 +139,12 @@
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/wrench_drop.ogg
+  # SS220-construction-skill-begin
+  - type: LearningOnDoAfterEndWith
+    progress:
+      Construction:
+        baseLearning: 0.02
+  # SS220-construction-skill-end
   - type: Tag
     tags:
     - Wrench
@@ -143,6 +177,14 @@
   - type: GuideHelp
     guides:
     - Construction
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Tools/wrench_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Tools/wrench_drop.ogg
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   name: multitool
@@ -153,6 +195,12 @@
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/multitool_drop.ogg
+  # SS220-construction-skill-begin
+  - type: LearningOnDoAfterEndWith
+    progress:
+      Construction:
+        baseLearning: 0.02
+  # SS220-construction-skill-end
   - type: Sprite
     sprite: Objects/Tools/multitool.rsi
     layers:
@@ -197,6 +245,14 @@
     - WirePanels
     - Airlocks
     - InspectingPower
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Tools/multitool_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Tools/multitool_drop.ogg
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   name: network configurator
@@ -248,6 +304,14 @@
     - type: GuideHelp
       guides:
       - Networking
+    # SS220-place-and-pickup-sounds begin
+    - type: EmitSoundOnPickup
+      sound:
+        path: /Audio/SS220/Items/Tools/multitool_pickup.ogg
+    - type: EmitSoundOnDrop
+      sound:
+        path: /Audio/SS220/Items/Tools/multitool_drop.ogg
+    # SS220-place-and-pickup-sounds end
 
 #Power tools
 #Later on these should switch probably switch damage when changing the tool behavior.
@@ -257,6 +321,12 @@
   id: PowerDrill
   description: A simple powered hand drill.
   components:
+  # SS220-construction-skill-begin
+  - type: LearningOnDoAfterEndWith
+    progress:
+      Construction:
+        baseLearning: 0.02
+  # SS220-construction-skill-end
   - type: Tag
     tags:
     - Powerdrill
@@ -304,6 +374,14 @@
         Piercing: 10
     soundHit:
       path: "/Audio/Items/drill_hit.ogg"
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Tools/rpd_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Tools/rpd_drop.ogg
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   id: RCD
@@ -311,6 +389,12 @@
   name: RCD
   description: The rapid construction device can be used to quickly place and remove various station structures and fixtures. Requires compressed matter to function.
   components:
+  # SS220-construction-skill-begin
+  - type: LearningOnDoAfterEndWith
+    progress:
+      Construction:
+        baseLearning: 0.01
+  # SS220-construction-skill-end
   - type: RCD
     availablePrototypes:
     - WallSolid
@@ -373,6 +457,14 @@
   - type: ActivatableUI
     inHandsOnly: true
     key: enum.RcdUiKey.Key
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Tools/rcd_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Tools/rcd_drop.ogg
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   id: RCDEmpty
@@ -436,6 +528,12 @@
   - type: Item
     sprite: Objects/Tools/omnitool.rsi
     size: Normal
+  # SS220-construction-skill-begin
+  - type: LearningOnDoAfterEndWith
+    progress:
+      Construction:
+        baseLearning: 0.01
+  # SS220-construction-skill-end
   - type: Tag
     tags:
     - Multitool

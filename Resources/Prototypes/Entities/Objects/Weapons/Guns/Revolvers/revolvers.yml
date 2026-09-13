@@ -99,7 +99,6 @@
   - type: Item
     storedOffset: 0,-2
   - type: RevolverAmmoProvider
-    proto: CartridgeMagnumRubber #ss-220 civDec
     capacity: 6
     chambers: [ True, True, True, True, True, True ]
     ammoSlots: [ null, null, null, null, null, null ]
@@ -163,10 +162,6 @@
   suffix: armor-piercing
   components:
   - type: RevolverAmmoProvider
-    whitelist: # Redundant
-      tags:
-        - CartridgeMagnum
-        - SpeedLoaderMagnum
     proto: CartridgeMagnumAP
 
 

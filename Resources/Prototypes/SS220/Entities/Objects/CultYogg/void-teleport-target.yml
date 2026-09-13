@@ -10,6 +10,7 @@
   - type: Appearance
   - type: Transform
     anchored: true
+  #ToDo_SS220 figure out how to make sprites visinle for mappers
   #- type: Sprite
   #  sprite: SS220/Objects/CultYogg/strangefruit.rsi
   #  state: kudzu_11

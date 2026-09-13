@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Client.UserInterface.Systems.Alerts.Controls;
 using Content.Client.UserInterface.Systems.Alerts.Widgets;
+using Content.IntegrationTests.Fixtures;
 using Content.Shared.Alert;
 using Robust.Client.UserInterface;
 using Robust.Server.Player;
@@ -10,16 +11,18 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components.Mobs
 {
     [TestFixture]
     [TestOf(typeof(AlertsComponent))]
-    public sealed class AlertsComponentTests
+    public sealed class AlertsComponentTests : GameTest
     {
+        public override PoolSettings PoolSettings => new()
+        {
+            Connected = true,
+            DummyTicker = false
+        };
+
         [Test]
         public async Task AlertsTest()
         {
-            await using var pair = await PoolManager.GetServerClient(new PoolSettings
-            {
-                Connected = true,
-                DummyTicker = false
-            });
+            var pair = Pair;
             var server = pair.Server;
             var client = pair.Client;
 
@@ -87,8 +90,16 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components.Mobs
                 Assert.That(clientAlertsUI.AlertContainer.ChildCount, Is.GreaterThanOrEqualTo(3));
                 var alertControls = clientAlertsUI.AlertContainer.Children.Select(c => (AlertControl) c);
                 var alertIDs = alertControls.Select(ac => ac.Alert.ID).ToArray();
-                var expectedIDs = new[] { "HumanHealth", "Debug1", "Debug2" };
+                var expectedIDs = new[] { "Debug1", "Debug2" }; // ss220 fix alert test
                 Assert.That(alertIDs, Is.SupersetOf(expectedIDs));
+
+                // ss220 fix alert test start
+                var alertComp = clientEntManager.GetComponent<AlertsComponent>(controlled.Value);
+                var hasHeartAlert =
+                    alertComp.Alerts.Any(x => pair.Client.ProtoMan.Index(x.Value.Type).Category == "Health");
+
+                Assert.That(hasHeartAlert, Is.True);
+                // ss220 fix alert test end
             });
 
             await server.WaitAssertion(() =>
@@ -104,11 +115,17 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components.Mobs
                 Assert.That(clientAlertsUI.AlertContainer.ChildCount, Is.GreaterThanOrEqualTo(2));
                 var alertControls = clientAlertsUI.AlertContainer.Children.Select(c => (AlertControl) c);
                 var alertIDs = alertControls.Select(ac => ac.Alert.ID).ToArray();
-                var expectedIDs = new[] { "HumanHealth", "Debug2" };
+                var expectedIDs = new[] { "Debug2" }; // ss220 fix alert test
                 Assert.That(alertIDs, Is.SupersetOf(expectedIDs));
-            });
 
-            await pair.CleanReturnAsync();
+                // ss220 fix alert test start
+                var alertComp = clientEntManager.GetComponent<AlertsComponent>(client.AttachedEntity.Value);
+                var hasHeartAlert =
+                    alertComp.Alerts.Any(x => pair.Client.ProtoMan.Index(x.Value.Type).Category == "Health");
+
+                Assert.That(hasHeartAlert, Is.True);
+                // ss220 fix alert test end
+            });
         }
     }
 }

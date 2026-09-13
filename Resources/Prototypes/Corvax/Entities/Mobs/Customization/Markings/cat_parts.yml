@@ -1,8 +1,7 @@
 - type: marking
   id: CatEarsStubby
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Human]
+  groupWhitelist: [Human]
   sponsorOnly: false # Corvax-Sponsors
   abstract: true #ss220 no cat tail n ears
   coloring:
@@ -26,8 +25,7 @@
 - type: marking
   id: CatEarsCurled
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Human]
+  groupWhitelist: [Human]
   sponsorOnly: false # Corvax-Sponsors
   abstract: true #ss220 no cat tail n ears
   coloring:
@@ -51,8 +49,7 @@
 - type: marking
   id: CatEarsTorn
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Human]
+  groupWhitelist: [Human]
   sponsorOnly: false # Corvax-Sponsors
   abstract: true #ss220 no cat tail n ears
   coloring:
@@ -76,8 +73,7 @@
 - type: marking
   id: CatTailStripes
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Human]
+  groupWhitelist: [Human]
   sponsorOnly: false # Corvax-Sponsors
   abstract: true #ss220 no cat tail n ears
   coloring:

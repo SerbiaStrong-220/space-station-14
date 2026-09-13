@@ -219,7 +219,7 @@ public sealed partial class DisposalFilterWindow : FancyWindow
 
             var lowDivider = new PanelContainer
             {
-                StyleClasses = { StyleBase.ClassLowDivider },
+                StyleClasses = { StyleClass.LowDivider },
                 HorizontalExpand = true,
             };
 

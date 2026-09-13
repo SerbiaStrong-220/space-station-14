@@ -1,0 +1,171 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "sprited by dinazewwr (discord)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "binder",
+      "directions": 4
+    },
+    {
+      "name": "binder_vox",
+      "directions": 4
+    },
+    {
+      "name": "boxers",
+      "directions": 4
+    },
+    {
+      "name": "boxers_polkadot_primary",
+      "directions": 4
+    },
+    {
+      "name": "boxers_polkadot_primary_reptilian",
+      "directions": 4
+    },
+    {
+      "name": "boxers_polkadot_secondary",
+      "directions": 4
+    },
+    {
+      "name": "boxers_polkadot_secondary_reptilian",
+      "directions": 4
+    },
+    {
+      "name": "boxers_reptilian",
+      "directions": 4
+    },
+    {
+      "name": "boxers_striped_primary",
+      "directions": 4
+    },
+    {
+      "name": "boxers_striped_primary_reptilian",
+      "directions": 4
+    },
+    {
+      "name": "boxers_striped_secondary",
+      "directions": 4
+    },
+    {
+      "name": "boxers_striped_secondary_reptilian",
+      "directions": 4
+    },
+    {
+      "name": "shorts",
+      "directions": 4
+    },
+    {
+      "name": "shorts_reptilian",
+      "directions": 4
+    },
+    {
+      "name": "tanktop",
+      "directions": 4
+    },
+    {
+      "name": "tanktop_heart_primary",
+      "directions": 4
+    },
+    {
+      "name": "tanktop_heart_primary_vox",
+      "directions": 4
+    },
+    {
+      "name": "tanktop_heart_secondary",
+      "directions": 4
+    },
+    {
+      "name": "tanktop_heart_secondary_vox",
+      "directions": 4
+    },
+    {
+      "name": "tanktop_NT_primary",
+      "directions": 4
+    },
+    {
+      "name": "tanktop_NT_primary_vox",
+      "directions": 4
+    },
+    {
+      "name": "tanktop_NT_secondary",
+      "directions": 4
+    },
+    {
+      "name": "tanktop_NT_secondary_vox",
+      "directions": 4
+    },
+    {
+      "name": "tanktop_skull_primary",
+      "directions": 4
+    },
+    {
+      "name": "tanktop_skull_primary_vox",
+      "directions": 4
+    },
+    {
+      "name": "tanktop_skull_secondary",
+      "directions": 4
+    },
+    {
+      "name": "tanktop_skull_secondary_vox",
+      "directions": 4
+    },
+    {
+      "name": "tanktop_striped_primary",
+      "directions": 4
+    },
+    {
+      "name": "tanktop_striped_primary_vox",
+      "directions": 4
+    },
+    {
+      "name": "tanktop_striped_secondary",
+      "directions": 4
+    },
+    {
+      "name": "tanktop_striped_secondary_vox",
+      "directions": 4
+    },
+    {
+      "name": "tanktop_ussp",
+      "directions": 4
+    },
+    {
+      "name": "tanktop_vox",
+      "directions": 4
+    },
+    {
+      "name": "tights",
+      "directions": 4
+    },
+    {
+      "name": "nylon_sock",
+      "directions": 4
+    },
+    {
+      "name": "sock",
+      "directions": 4
+    },
+    {
+      "name": "sock_polkadot_primary",
+      "directions": 4
+    },
+    {
+      "name": "sock_polkadot_secondary",
+      "directions": 4
+    },
+    {
+      "name": "sock_striped_primary",
+      "directions": 4
+    },
+    {
+      "name": "sock_striped_secondary",
+      "directions": 4
+    }
+  ]
+}

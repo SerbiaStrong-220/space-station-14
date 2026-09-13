@@ -5,6 +5,8 @@
   categories: [ HideSpawnMenu ]
   parent: PelletShotgun
   components:
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0
   - type: Projectile
     damage:
       types:

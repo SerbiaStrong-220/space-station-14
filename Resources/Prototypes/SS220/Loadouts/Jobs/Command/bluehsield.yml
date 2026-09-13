@@ -2,20 +2,6 @@
 
 # Job Time
 - type: loadoutEffectGroup
-  id: BlueShieldTurtleneck
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: JobBlueShield
-      time: 108000 # 30 hrs
-  sponsorTierLoadoutEffects:
-  - !type:GroupLoadoutEffect
-    proto: SeniorDevTeamTier
-  - !type:GroupLoadoutEffect
-    proto: AdministratorSponsorTier
-
-- type: loadoutEffectGroup
   id: BlueShieldFive
   effects:
   - !type:JobRequirementLoadoutEffect
@@ -79,6 +65,11 @@
 
 - type: loadout
   id: BlueshieldBlueBeret
+  equipment:
+    head: ClothingHeadBeretBlue
+
+- type: loadout
+  id: BlueshieldNavyBlueBeret
   effects:
   - !type:GroupLoadoutEffect
     proto: BlueShieldFive
@@ -89,7 +80,7 @@
 - type: loadout
   id: BlueshieldGlasses
   equipment:
-    eyes: ClothingEyesBlueShieldGlasses
+    eyes: ClothingEyesGlassesBlueShield
 
 - type: loadout
   id: BlueshieldTacticGlasses
@@ -99,6 +90,25 @@
   equipment:
     eyes: ClothingEyesBlueShieldTacticGlasses
 
+- type: loadout
+  id: BlueshieldBallisticGlasses
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BlueShieldFive
+  equipment:
+    eyes: ClothingEyesGlassesBallisticBlueShield
+
+# Mask
+- type: loadout
+  id: MaskBlueshieldGaiter
+  equipment:
+    mask: ClothingMaskNeckGaiter
+
+- type: loadout
+  id: MaskBlueshieldBalaclava
+  equipment:
+    mask: ClothingMaskBalaclava2
+
 # Jumpsuit
 - type: loadout
   id: BlueShieldCombez
@@ -106,9 +116,9 @@
     jumpsuit: ClothingUniformJumpsuitBlueShieldCombez
 
 - type: loadout
-  id: BlueShieldJumpsuit
+  id: BlueShieldJumpsuitTurtle
   equipment:
-    jumpsuit: ClothingUniformJumpsuitBlueShield
+    jumpsuit: ClothingUniformJumpsuitBlueShieldTurtle
 
 - type: loadout
   id: BlueShieldJumpsuitOperative
@@ -116,7 +126,7 @@
   - !type:GroupLoadoutEffect
     proto: BlueShieldFive
   equipment:
-    jumpsuit: ClothingUniformJumpsuitBlueShieldOperative
+    jumpsuit: ClothingUniformJumpsuitSRTOperative
 
 - type: loadout
   id: BlueShieldJumpsuitShirt
@@ -142,43 +152,30 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitBlueShieldCombat
 
-- type: loadout
-  id: BlueShieldJumpsuitTurtle
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: BlueShieldTurtleneck
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitBlueShieldTurtle
-
 # neck
 - type: loadout
-  id: BlueShieldNeckCloak
+  id: CloakCape
   equipment:
-    neck: ClothingCloakBlueShield
+    neck: ClothingNeckCloakCape
 
 - type: loadout
-  id: ProtectGearBlue
+  id: CloakCapeBlue
   equipment:
-    neck: ClothingNeckProtectBundleBlue
+    neck: ClothingNeckCloakCapeBlue
 
 # Outer clothing
 - type: loadout
-  id: BlueShieldArmorAssault
+  id: BlueShieldArmorBulletproof
   equipment:
-    outerClothing: ClothingOuterArmorBlueShieldAssault
+    outerClothing: ClothingOuterArmorBlueShieldBulletproof
 
 - type: loadout
-  id: BlueShieldArmorScale
-  equipment:
-    outerClothing: ClothingOuterArmorBlueShieldScale
-
-- type: loadout
-  id: BlueShieldOperativeCoat
+  id: BlueShieldSRTCoat
   effects:
   - !type:GroupLoadoutEffect
     proto: BlueShieldFive
   equipment:
-    outerClothing: ClothingOuterBSOCoat
+    outerClothing: ClothingOuterSRTCoat
 
 # Belt
 - type: loadout
@@ -196,3 +193,14 @@
   id: BlueShieldBackpack
   equipment:
     back: ClothingBackpackBlueShield
+
+# Shoes
+- type: loadout
+  id: BlueShieldJackBoots
+  equipment:
+    shoes: ClothingShoesBootsBlueShieldJackFilled
+
+- type: loadout
+  id: BlueShieldWinterBoots
+  equipment:
+    shoes: ClothingShoesBootsWinterBSFilled

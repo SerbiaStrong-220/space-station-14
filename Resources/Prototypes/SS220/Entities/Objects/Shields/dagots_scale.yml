@@ -1,0 +1,20 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: DagonsScale
+  parent: BaseShieldAlt
+  name: Dagon's Scale
+  description: Dagon scale used by cultists as protection
+  suffix: CultYogg
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Melee/CultYogg/shield.rsi
+    state: icon
+  - type: CultYoggWeapon
+    item: CocoonDagonsScale
+  - type: StuckOnEquip
+    inHandItem: true
+  - type: Tag
+    tags:
+    - CultYoggStealthProvidable
+    - CultYoggInnerHandToggleable

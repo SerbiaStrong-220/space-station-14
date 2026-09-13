@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Chat.Systems;
+using Content.Shared.Chat;
 using Content.Shared.SS220.TTS;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -17,7 +18,7 @@ public static class TtsContextMaker
         {
             ChannelPrototype = args.Channel?.ID + args.Frequency?.ToString(),
             IsRadio = args.IsRadio,
-            SpeakerContext = New(entityManager, args.Source)
+            SpeakerContext = New(entityManager, args.Source),
         };
     }
 

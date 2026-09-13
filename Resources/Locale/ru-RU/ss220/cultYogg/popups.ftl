@@ -10,11 +10,14 @@ cult-yogg-enslave-mindshield = Разум кандидата защищен им
 cult-yogg-enslave-another-fraction = Разум кандидата порабощен противником культа
 cult-yogg-enslave-should-eat-shroom = Кандидат не имеет спор внутри
 cult-yogg-enslave-cant-be-a-chaplain = Кандидат слишком свят
-cult-yogg-enslave-is-sacraficial = Существо ценно, как жертва
+cult-yogg-enslave-is-sacrificial = Существо ценно, как жертва
 
 cult-yogg-teleport-must-be-in-astral = Для телепортации необходимо находится в астрале
 cult-yogg-teleport-must-be-cultist = Цель телепорта должна принадлежать культу
 cult-yogg-teleport-out-of-range = Цель телепорта вне пределах досягаемости
+cult-yogg-teleport-cooldown = Телепорт будет доступен через {$time} сек
+
+cult-yogg-cant-buid-on-grid = Вы не можете здесь строить
 
 cult-yogg-heal-verb = [italic]Исцелить[/italic]
 cult-yogg-heal-only-cultists = Оболочка не принадлежит культу
@@ -23,7 +26,7 @@ cult-yogg-heal-already-have-effect = Высшие силы уже исцеляю
 cult-yogg-digest-no-nutritions = Недостаточно питательных веществ
 cult-yogg-digest-no-water = Недостаточно воды в организме
 
-cult-yogg-cant-sacrafice-in-astral = Невозможно выполнять призыв находясь в астрале
+cult-yogg-cant-sacrifice-in-astral = Невозможно выполнять призыв находясь в астрале
 cult-yogg-sacrifice-no-altars = Нет достаточно близких алтарей для старта жертвоприношения
 cult-yogg-sacrifice-started = {$user} начинает жертвоприношение, тело {$target} медленно поднимается в воздух
 cult-yogg-buckle-attempt = {$user} не является целью жертвоприношения
@@ -38,10 +41,8 @@ cult-yogg-resurrected-by-heal = Мистические силы возвраща
 
 cult-yogg-cleansing-start = Вы чувствуете, как святая вода внутри вас убивает споры.
 
-cult-yogg-acsending-have-acsending = Один из членов культа в данный момент возносится
 cult-yogg-acsending-started = Вы чувствуете, как споры пришли в активность
 cult-yogg-acsending-stopped = Вы чувствуете, как споры внутри вас расщепились
-cult-yogg-acsending-should-be-station = Вы можете вознестись только на станции
 
 cult-yogg-burglar-bug-stick-success = Вы прикрепили жука-взломщика
 cult-yogg-burglar-bug-unstick-started = Вы пытаетесь отцепить жука-взломщика...

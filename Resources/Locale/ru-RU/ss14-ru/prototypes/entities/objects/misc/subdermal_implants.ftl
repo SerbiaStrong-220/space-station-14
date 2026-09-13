@@ -1,3 +1,5 @@
+# TODO:
+# On upstream don't move it all to our locale, instead use HiddenDescriptionComponent.
 ent-BaseSubdermalImplant = имплант
     .desc = Имплант без подписи.
 
@@ -33,6 +35,9 @@ ent-ScramImplant = { ent-BaseSubdermalImplant }
 ent-DnaScramblerImplant = { ent-BaseSubdermalImplant }
     .suffix = Миксер ДНК
     .desc = { ent-BaseSubdermalImplant.desc }
+ent-ChameleonControllerImplant = { ent-BaseSubdermalImplant }
+    .suffix = Контроллер хамелеона
+    .desc = { ent-BaseSubdermalImplant.desc }
 ent-MicroBombImplant = { ent-BaseSubdermalImplant }
     .suffix = Микробомба
     .desc = { ent-BaseSubdermalImplant.desc }
@@ -43,8 +48,9 @@ ent-DeathAcidifierImplant = { ent-BaseSubdermalImplant }
     .suffix = Посмертный растворитель
     .desc = { ent-BaseSubdermalImplant.desc }
 ent-DeathRattleImplant = { ent-BaseSubdermalImplant }
-    .suffix = Предсмертный хрип
+    .suffix = Предсмертный хрип, Синдикат
     .desc = { ent-BaseSubdermalImplant.desc }
+    .true-name = имплант "Предсмертный хрип" образца Синдикат
 ent-MindShieldImplant = { ent-BaseSubdermalImplant }
     .suffix = Щит разума
     .desc = { ent-BaseSubdermalImplant.desc }

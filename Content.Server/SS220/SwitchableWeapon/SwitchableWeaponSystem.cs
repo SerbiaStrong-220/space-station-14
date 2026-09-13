@@ -11,11 +11,11 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Server.SS220.SwitchableWeapon;
 
-public sealed class SwitchableWeaponSystem : EntitySystem
+public sealed partial class SwitchableWeaponSystem : EntitySystem
 {
-    [Dependency] private readonly SharedItemSystem _item = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private SharedItemSystem _item = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {

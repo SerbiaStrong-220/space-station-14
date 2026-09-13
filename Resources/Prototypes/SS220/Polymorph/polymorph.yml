@@ -1,0 +1,8 @@
+- type: polymorph
+  id: WizardSpiderGhost
+  configuration:
+    entity: MobSpiderGhostWizard #Not angry so ghosts can't just take over the wizard
+    transferName: true
+    inventory: None
+    revertOnDeath: true
+    revertOnCrit: true

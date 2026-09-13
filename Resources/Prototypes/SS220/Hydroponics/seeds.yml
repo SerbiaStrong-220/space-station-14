@@ -331,3 +331,85 @@
       Min: 1
       Max: 20
       PotencyDivisor: 20
+
+- type: seed
+  id: watermelondog
+  name: seeds-watermelondog-name
+  noun: seeds-noun-seeds
+  displayName: seeds-watermelondog-display-name
+  plantRsi: SS220/Objects/Specific/Hydroponics/watermelondog.rsi
+  harvestLogImpact: Medium
+  packetPrototype: WatermelonDogSeeds
+  autoSpawnMob: true
+  productPrototypes:
+    - MobWatermelonDog
+  lifespan: 50
+  maturation: 15
+  production: 6
+  yield: 1
+  idealLight: 8
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 10
+    Water:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 10
+    Vitamin:
+      Min: 1
+      Max: 5
+      PotencyDivisor: 20
+
+- type: seed
+  id: peashooter
+  name: seeds-peashooter-name
+  noun: seeds-noun-seeds
+  displayName: seeds-peashooter-display-name
+  plantRsi: SS220/Objects/Specific/Hydroponics/peashooter.rsi
+  packetPrototype: PeashooterSeeds
+  productPrototypes:
+    - FoodPeashooterPlant
+  lifespan: 40
+  maturation: 15
+  production: 1
+  yield: 1
+  potency: 1
+  growthStages: 3
+  waterConsumption: 0.60
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 10
+    Vitamin:
+      Min: 1
+      Max: 4
+      PotencyDivisor: 25
+
+- type: seed
+  id: peashootersyndi
+  name: seeds-sergeantpeashooter-name
+  noun: seeds-noun-seeds
+  displayName: seeds-sergeantpeashooter-display-name
+  plantRsi: SS220/Objects/Specific/Hydroponics/peashooter_syndi.rsi
+  packetPrototype: PeashooterSyndiSeeds
+  productPrototypes:
+    - FoodPeashooterSyndiPlant
+  lifespan: 40
+  maturation: 15
+  production: 1
+  yield: 1
+  potency: 1
+  growthStages: 3
+  waterConsumption: 0.60
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 10
+    Vitamin:
+      Min: 1
+      Max: 4
+      PotencyDivisor: 25

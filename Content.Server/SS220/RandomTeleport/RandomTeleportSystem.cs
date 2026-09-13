@@ -4,21 +4,21 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
-using Content.Shared.SS220.InteractionTeleport;
+using Content.Shared.SS220.Teleport;
 using Content.Shared.Whitelist;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
 
 namespace Content.Server.SS220.RandomTeleport;
 
-public sealed class RandomTeleportSystem : EntitySystem
+public sealed partial class RandomTeleportSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private IComponentFactory _componentFactory = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private PullingSystem _pulling = default!;
 
     public override void Initialize()
     {
@@ -29,10 +29,16 @@ public sealed class RandomTeleportSystem : EntitySystem
 
     private void OnTeleportTarget(Entity<RandomTeleportComponent> ent, ref TeleportTargetEvent args)
     {
+        var beforeEv = new BeforeTeleportTargetEvent(args.User, args.Target);
+        RaiseLocalEvent(ent, ref beforeEv);
+
         Warp(ent, args.Target, args.User);
 
         var ev = new TargetTeleportedEvent(args.Target);
         RaiseLocalEvent(ent, ref ev);
+
+        var targetEv = new AfterTeleportedEvent(ent);
+        RaiseLocalEvent(args.Target, ref targetEv);
     }
 
     private void Warp(Entity<RandomTeleportComponent> ent, EntityUid teleported, EntityUid user)

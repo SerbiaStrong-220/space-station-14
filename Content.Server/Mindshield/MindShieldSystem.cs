@@ -10,6 +10,7 @@ using Content.Shared.Mindshield.Components;
 using Content.Shared.Revolutionary.Components;
 using Content.Shared.Roles.Components;
 using Content.Shared.SS220.CultYogg.Cultists;
+using Content.Shared.SS220.CultYogg.Unenslavable;
 using Robust.Shared.Containers;
 
 namespace Content.Server.Mindshield;
@@ -24,23 +25,20 @@ public sealed class MindShieldSystem : EntitySystem
     [Dependency] private readonly RoleSystem _roleSystem = default!;
     [Dependency] private readonly MindSystem _mindSystem = default!;
     [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly MindSlaveSystem _mindSlave = default!;
-    [Dependency] private readonly SharedSubdermalImplantSystem _sharedSubdermalImplant = default!;
+
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<MindShieldImplantComponent, ImplantImplantedEvent>(OnImplantImplanted);
         SubscribeLocalEvent<MindShieldImplantComponent, ImplantRemovedEvent>(OnImplantRemoved);
-		SubscribeLocalEvent<MindShieldComponent, ComponentRemove>(OnRemove);//SS220 CombustedMindShieldEvent #3500
-		SubscribeLocalEvent<MindShieldComponent, GotCultifiedEvent>(OnGotCultified);//Cult hotfix 16 #3599
+        SubscribeLocalEvent<MindShieldComponent, ComponentStartup>(OnStartup);//SS220-cult-update-3-1
+        SubscribeLocalEvent<MindShieldComponent, ComponentRemove>(OnRemove);//SS220 CombustedMindShieldEvent #3500
+        SubscribeLocalEvent<MindShieldComponent, GotCultifiedEvent>(OnGotCultified);//Cult hotfix 16 #3599
     }
 
     private void OnImplantImplanted(Entity<MindShieldImplantComponent> ent, ref ImplantImplantedEvent ev)
     {
-        if (ev.Implanted == null)
-            return;
-
         EnsureComp<MindShieldComponent>(ev.Implanted);
         MindShieldRemovalCheck(ev.Implanted, ev.Implant);
     }
@@ -76,10 +74,17 @@ public sealed class MindShieldSystem : EntitySystem
         RemComp<MindShieldComponent>(args.Implanted);
     }
 
+    ////SS220-cult-update-3-1 start
+    private void OnStartup(Entity<MindShieldComponent> ent, ref ComponentStartup args)
+    {
+        EnsureComp<UnenslavableComponent>(ent);
+    }
+    ////SS220-cult-update-3-1 end
     //SS220 CombustedMindShieldEvent #3500 start
     private void OnRemove(Entity<MindShieldComponent> ent, ref ComponentRemove args)
     {
         RemComp<CombustingMindShieldComponent>(ent);
+        RemComp<UnenslavableComponent>(ent);
     }
     //SS220 CombustedMindShieldEvent #3500 end
     //Cult hotfix 16 #3599 start

@@ -1,4 +1,7 @@
+using System.Linq;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Inventory;
 using Robust.Shared.Audio;
@@ -43,39 +46,40 @@ public sealed partial class BlockingSystem
 
     private void OnUserDamageModified(EntityUid uid, BlockingUserComponent component, DamageModifyEvent args)
     {
-        if (TryComp<BlockingComponent>(component.BlockingItem, out var blocking))
+        if (component.BlockingItem is not { } item || !TryComp<BlockingComponent>(item, out var blocking))
+            return;
+
+        if (args.Damage.GetTotal() <= 0)
+            return;
+
+        // A shield should only block damage it can itself absorb. To determine that we need the Damageable component on it.
+        if (!TryComp<DamageableComponent>(item, out var dmgComp))
+            return;
+
+        var blockFraction = blocking.IsBlocking ? blocking.ActiveBlockFraction : blocking.PassiveBlockFraction;
+
+        // SS220 equip shield on back begin
+        if (_inventory.TryGetContainingSlot(component.BlockingItem.Value, out var slotDefinition) && blocking.AvaliableSlots.TryGetValue(slotDefinition.SlotFlags, out var coef))
         {
-            if (args.Damage.GetTotal() <= 0)
-                return;
+            blockFraction *= coef;
+        }
+        // SS220 equip shield on back end
 
-            var blockFraction = blocking.IsBlocking ? blocking.ActiveBlockFraction : blocking.PassiveBlockFraction;
+        var modifier = blocking.IsBlocking ? blocking.ActiveBlockDamageModifier : blocking.PassiveBlockDamageModifer;
+        blockFraction = Math.Clamp(blockFraction, 0, 1);
+        _damageable.TryChangeDamage((item, dmgComp), blockFraction * args.OriginalDamage);
 
-            // A shield should only block damage it can itself absorb. To determine that we need the Damageable component on it.
-            if (!TryComp<DamageableComponent>(component.BlockingItem, out var dmgComp))
-                return;
+        var modify = new DamageModifierSet();
+        foreach (var key in modifier.Coefficients.Keys.Concat(modifier.FlatReduction.Keys))
+        {
+            modify.Coefficients.TryAdd(key, 1 - blockFraction);
+        }
 
-            // SS220 equip shield on back begin
-            if (_inventory.TryGetContainingSlot(component.BlockingItem.Value, out var slotDefinition) && blocking.AvaliableSlots.TryGetValue(slotDefinition.SlotFlags, out var coef))
-            {
-                blockFraction *= coef;
-            }
-            // SS220 equip shield on back end
+        args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, modify);
 
-            blockFraction = Math.Clamp(blockFraction, 0, 1);
-            _damageable.TryChangeDamage(component.BlockingItem, blockFraction * args.OriginalDamage);
-
-            var modify = new DamageModifierSet();
-            foreach (var key in dmgComp.Damage.DamageDict.Keys)
-            {
-                modify.Coefficients.TryAdd(key, 1 - blockFraction);
-            }
-
-            args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, modify);
-
-            if (blocking.IsBlocking && !args.Damage.Equals(args.OriginalDamage))
-            {
-                _audio.PlayPvs(blocking.BlockSound, uid);
-            }
+        if (blocking.IsBlocking && !args.Damage.Equals(args.OriginalDamage))
+        {
+            _audio.PlayPvs(blocking.BlockSound, uid);
         }
     }
 

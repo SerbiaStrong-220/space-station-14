@@ -7,10 +7,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.CombustingMindShield;
 
-public sealed class CombustingMindShieldSystem : EntitySystem
+public sealed partial class CombustingMindShieldSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _time = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _time = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+
     public override void Initialize()
     {
         base.Initialize();

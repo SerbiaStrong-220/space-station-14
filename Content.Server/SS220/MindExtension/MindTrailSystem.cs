@@ -11,7 +11,7 @@ using Robust.Shared.Network;
 
 namespace Content.Server.SS220.MindExtension;
 
-public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
+public partial class MindExtensionSystem //MindTrailSystem
 {
     private void SubscribeTrailSystemEvents()
     {
@@ -24,7 +24,7 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
 
     private void OnExtensionReturnActionEvent(ExtensionReturnRequest ev, EntitySessionEventArgs args)
     {
-        if (!TryGetMindExtension(args.SenderSession.UserId, out var mindExtEnt))
+        if (!TryGetExtension(args.SenderSession.UserId, out var data))
             return;
 
         if (!TryGetEntity(ev.Target, out var target))
@@ -34,9 +34,7 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
             return;
 
         if (!_admin.IsAdmin(args.SenderSession) &&
-            IsAvailableToEnterEntity(target.Value,
-            mindExtEnt.Value.Comp,
-            args.SenderSession.UserId) != BodyStateToEnter.Available)
+            IsAvailableToEnterEntity(target.Value, data, args.SenderSession.UserId) != BodyStateToEnter.Available)
             return;
 
         _mind.TransferTo(mind.Value, target.Value);
@@ -47,46 +45,33 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
 
     private void OnGhostBodyListRequestEvent(GhostBodyListRequest ev, EntitySessionEventArgs args)
     {
-        if (!TryComp<MindExtensionContainerComponent>(args.SenderSession.AttachedEntity, out var mindContExt))
-        {
-            RaiseNetworkEvent(new GhostBodyListResponse([]), args.SenderSession.Channel);
-            return;
-        }
-
-        if (!TryComp<MindExtensionComponent>(mindContExt.MindExtension, out var mindExt))
+        if (!TryGetExtension(args.SenderSession.UserId, out var data))
         {
             RaiseNetworkEvent(new GhostBodyListResponse([]), args.SenderSession.Channel);
             return;
         }
 
         var bodyList = new List<TrailPoint>();
-        foreach (var (target, trailMetaData) in mindExt.Trail)
+        foreach (var (targetNet, trailMetaData) in data.Trail)
         {
-            TrailPointMetaData finalMetaData = trailMetaData;
-            var targetEnt = GetEntity(target);
+            var targetEnt = GetEntity(targetNet);
+            var finalMetaData = trailMetaData;
+            var state = IsAvailableToEnterEntity(targetEnt, data, args.SenderSession.UserId);
 
-            var state = IsAvailableToEnterEntity(targetEnt, mindExt, args.SenderSession.UserId);
-
-            if (TryComp<BorgBrainComponent>(targetEnt, out var borgBrain))
+            if (HasComp<BorgBrainComponent>(targetEnt))
             {
                 if (_container.TryGetContainingContainer(targetEnt, out var container) &&
                     HasComp<BorgChassisComponent>(container.Owner))
                 {
-                    targetEnt = container.Owner;
-
-                    var metaData = Comp<MetaDataComponent>(targetEnt);
-
-                    finalMetaData.EntityName = metaData.EntityName;
+                    var chassis = container.Owner;
+                    var meta = MetaData(chassis);
+                    finalMetaData.EntityName = meta.EntityName;
                     finalMetaData.EntityDescription = $"({Loc.GetString("mind-ext-borg-contained",
-                        ("borgname", trailMetaData.EntityName))}) {metaData.EntityDescription}";
+                        ("borgname", trailMetaData.EntityName))}) {meta.EntityDescription}";
                 }
             }
 
-            bodyList.Add(new TrailPoint(
-                target,
-                finalMetaData,
-                state,
-                _admin.IsAdmin(args.SenderSession)));
+            bodyList.Add(new TrailPoint(targetNet, finalMetaData, state, _admin.IsAdmin(args.SenderSession)));
         }
 
         RaiseNetworkEvent(new GhostBodyListResponse(bodyList), args.SenderSession.Channel);
@@ -94,82 +79,62 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
 
     private void OnDeleteTrailPointRequest(DeleteTrailPointRequest ev, EntitySessionEventArgs args)
     {
-        var mindExt = GetMindExtension(args.SenderSession.UserId);
-
-        if (mindExt.Comp.Trail.Remove(ev.Entity))
-        {
-            var eventArgs = new DeleteTrailPointResponse(ev.Entity);
-            RaiseNetworkEvent(eventArgs, args.SenderSession.Channel);
-        }
+        if (TryGetExtension(args.SenderSession.UserId, out var data) && data.Trail.Remove(ev.Entity))
+            RaiseNetworkEvent(new DeleteTrailPointResponse(ev.Entity), args.SenderSession.Channel);
     }
 
     #endregion
 
-    private void ChangeOrAddTrailPoint(MindExtensionComponent comp, EntityUid entity, bool isAbandoned)
+    /// <summary>
+    /// Adds a new entity to the players trail or updates the status of an existing one.
+    /// </summary>
+    private void ChangeOrAddTrailPoint(MindExtensionData data, EntityUid entity, bool isAbandoned)
     {
-        var netEntity = GetNetEntity(entity);
-
         if (HasComp<GhostComponent>(entity))
             return;
 
-        //If borg mind slot is not empty - write borg mind instead.
-        if (TryComp<BorgChassisComponent>(entity, out var chassisComp))
-        {
-            if (chassisComp.BrainContainer.ContainedEntity is null)
-                return;
-
+        if (TryComp<BorgChassisComponent>(entity, out var chassisComp) && chassisComp.BrainContainer.ContainedEntity != null)
             entity = chassisComp.BrainContainer.ContainedEntity.Value;
-            netEntity = GetNetEntity(chassisComp.BrainContainer.ContainedEntity.Value);
-        }
 
-        if (comp.Trail.ContainsKey(netEntity))
+        var netEntity = GetNetEntity(entity);
+        if (data.Trail.TryGetValue(netEntity, out var existing))
         {
-            var trailMetaData = comp.Trail[netEntity];
-            trailMetaData.IsAbandoned = isAbandoned;
-            comp.Trail[netEntity] = trailMetaData;
+            existing.IsAbandoned = isAbandoned;
+            data.Trail[netEntity] = existing;
             return;
         }
 
-        TryComp(entity, out MetaDataComponent? metaData);
+        var meta = MetaData(entity);
 
-        comp.Trail.Add(netEntity, new TrailPointMetaData()
+        var trailData = new TrailPointMetaData
         {
-            EntityName = metaData?.EntityName ?? "",
-            EntityDescription = metaData?.EntityDescription ?? "",
-            IsAbandoned = isAbandoned
-        });
+            EntityName = meta.EntityName,
+            EntityDescription = meta.EntityDescription,
+            IsAbandoned = isAbandoned,
+        };
+
+        data.Trail.Add(netEntity, trailData);
     }
 
     /// <summary>
     /// Main check is whether one can return to the essence.
     /// </summary>
-    private BodyStateToEnter IsAvailableToEnterEntity(
-        EntityUid target,
-        MindExtensionComponent mindExtension,
-        NetUserId session)
+    private BodyStateToEnter IsAvailableToEnterEntity(EntityUid target, MindExtensionData data, NetUserId user)
     {
-
-        if (!EntityManager.EntityExists(target))
+        if (!Exists(target))
             return BodyStateToEnter.Destroyed;
 
-        if (TryComp<CryostorageContainedComponent>(target, out var cryo))
+        if (HasComp<CryostorageContainedComponent>(target))
             return BodyStateToEnter.InCryo;
 
-        //When visiting, the MindConatainer may remain, as may the Mind.
-        //It's necessary to check whether this Mind is your own.
-        //If the Mind isn't your own, then the body is occupied.
-        if (TryComp<MindContainerComponent>(target, out var mindContainer)
-            && mindContainer.Mind is not null)
-            if (TryComp<MindComponent>(mindContainer.Mind, out var mind)
-                && mind.UserId is not null
-                && mind.UserId != session)
-                return BodyStateToEnter.Engaged;
-
-        if (mindExtension.Trail.TryGetValue(GetNetEntity(target), out var metaData))
+        if (TryComp<MindContainerComponent>(target, out var mindContainer) && mindContainer.Mind != null)
         {
-            if (metaData.IsAbandoned)
-                return BodyStateToEnter.Abandoned;
+            if (TryComp<MindComponent>(mindContainer.Mind, out var mind) && mind.UserId != null && mind.UserId != user)
+                return BodyStateToEnter.Engaged;
         }
+
+        if (data.Trail.TryGetValue(GetNetEntity(target), out var meta) && meta.IsAbandoned)
+            return BodyStateToEnter.Abandoned;
 
         return BodyStateToEnter.Available;
     }

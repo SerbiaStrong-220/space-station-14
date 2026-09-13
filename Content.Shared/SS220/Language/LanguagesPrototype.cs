@@ -5,8 +5,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Language;
 
-[Prototype("language")]
-[Serializable, NetSerializable]
+[Prototype]
 public sealed partial class LanguagePrototype : IPrototype
 {
     [ViewVariables, IdDataField]
@@ -26,7 +25,7 @@ public sealed partial class LanguagePrototype : IPrototype
     public string KeyWithPrefix { get => LanguageManager.KeyPrefix + Key; }
 
     /// <summary>
-    ///  The color of the language in which messages will be recolored, 
+    ///  The color of the language in which messages will be recolored,
     ///  an empty value will not be recolored
     /// </summary>
     [DataField]

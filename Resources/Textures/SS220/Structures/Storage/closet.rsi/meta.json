@@ -609,6 +609,21 @@
     },
     {
       "name": "paper"
+    },
+    {
+      "name": "interdyne"
+    },
+    {
+      "name": "interdyne_door"
+    },
+    {
+      "name": "interdyne_armored_door"
+    },
+    {
+      "name": "interdyne_armory_door"
+    },
+    {
+      "name": "interdyne_armory_armored_door"
     }
   ]
 }

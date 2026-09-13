@@ -1,0 +1,9 @@
+computer-iff-ebent-console-window-title = Консоль маскировки
+computer-iff-ebent-console-label = Режим маскировки
+computer-iff-ebent-console-activate = Активировать маскировку
+computer-iff-ebent-console-active = Маскировка активна
+computer-iff-ebent-console-cooldown = Перезарядка
+computer-iff-ebent-console-time = Маскировка: {$seconds}с
+computer-iff-ebent-console-cooldown-time = Перезарядка: {$seconds}с
+fractwar-console-destroyed-sender = {$grid} - {$fraction}
+fractwar-console-destroyed-announcement = Уничтожен.

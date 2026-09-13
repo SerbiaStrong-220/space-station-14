@@ -9,7 +9,8 @@ namespace Content.Server.SS220.Weapons.Ranged;
 
 public sealed partial class AutoShootGunSystem : EntitySystem
 {
-    [Dependency] private readonly SharedGunSystem _gun = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -29,7 +30,7 @@ public sealed partial class AutoShootGunSystem : EntitySystem
         if (apc.Powered)
             return;
 
-        _gun.SetEnabled(ent, ent.Comp, false);
+        _gun.SetEnabled(ent, false);
     }
 
     private void OnAnchorStateChanged(Entity<AutoShootGunComponent> ent, ref AnchorStateChangedEvent args)
@@ -40,6 +41,6 @@ public sealed partial class AutoShootGunSystem : EntitySystem
         if (args.Transform.Anchored)
             return;
 
-        _gun.SetEnabled(ent, ent.Comp, false);
+        _gun.SetEnabled(ent, false);
     }
 }

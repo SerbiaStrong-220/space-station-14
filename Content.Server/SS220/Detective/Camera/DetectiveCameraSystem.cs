@@ -8,11 +8,11 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Server.SS220.Detective.Camera;
 
-public sealed class DetectiveCameraSystem : EntitySystem
+public sealed partial class DetectiveCameraSystem : EntitySystem
 {
-    [Dependency] private readonly SurveillanceCameraSystem _camera = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private SurveillanceCameraSystem _camera = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private PopupSystem _popup = default!;
 
     public override void Initialize()
     {

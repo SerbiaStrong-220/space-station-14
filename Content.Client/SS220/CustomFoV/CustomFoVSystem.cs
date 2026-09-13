@@ -5,10 +5,10 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.CustomFoV;
 
-public sealed class CustomFoVSystem : EntitySystem
+public sealed partial class CustomFoVSystem : EntitySystem
 {
-    [Dependency] private readonly IOverlayManager _overlay = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private CustomFoVOverlay? _fovOverlay;
 

@@ -1,0 +1,73 @@
+- type: entity
+  parent: Windoor
+  id: WindoorNanoTrasenRepresentativeLocked
+  suffix: NanoTrasen Representative, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsNanoTrasenRepresentative ]
+  - type: WiresPanelSecurity
+    securityLevel: medSecurity
+  - type: Wires
+    layoutId: AirlockCommand
+
+- type: entity
+  parent: WindoorSecureCommandLocked
+  id: WindoorSecureNanoTrasenRepresentativeLocked
+  suffix: NanoTrasen Representative, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsNanoTrasenRepresentative ]
+
+- type: entity
+  parent: WindoorPlasma
+  id: PlasmaWindoorNanoTrasenRepresentativeLocked
+  suffix: NanoTrasen Representative, Locked, Plasma
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsNanoTrasenRepresentative ]
+  - type: WiresPanelSecurity
+    securityLevel: medSecurity
+  - type: Wires
+    layoutId: AirlockCommand
+
+- type: entity
+  parent: WindoorSecurePlasma
+  id: PlasmaWindoorSecureNanoTrasenRepresentativeLocked
+  suffix: NanoTrasen Representative, Locked, Plasma
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsNanoTrasenRepresentative ]
+  - type: WiresPanelSecurity
+    securityLevel: medSecurity
+  - type: Wires
+    layoutId: AirlockCommand
+
+- type: entity
+  parent: WindoorUranium
+  id: UraniumWindoorNanoTrasenRepresentativeLocked
+  suffix: NanoTrasen Representative, Locked, Uranium
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsNanoTrasenRepresentative ]
+  - type: WiresPanelSecurity
+    securityLevel: medSecurity
+  - type: Wires
+    layoutId: AirlockCommand
+
+- type: entity
+  parent: WindoorSecureUranium
+  id: UraniumWindoorSecureNanoTrasenRepresentativeLocked
+  suffix: NanoTrasen Representative, Locked, Uranium
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsNanoTrasenRepresentative ]
+  - type: WiresPanelSecurity
+    securityLevel: medSecurity
+  - type: Wires
+    layoutId: AirlockCommand

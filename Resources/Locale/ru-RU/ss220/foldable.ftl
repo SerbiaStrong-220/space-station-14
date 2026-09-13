@@ -1,2 +1,2 @@
-halo-verb = отправиться в рай
-halo-hell-verb = отправиться в ад
+halo-verb = Отправиться в рай
+halo-hell-verb = Отправиться в ад

@@ -8,9 +8,9 @@ using Robust.Shared.Console;
 namespace Content.Server.SS220.Administration.Commands;
 
 [AdminCommand(AdminFlags.Ban)]
-public sealed class SpeciesUnbanCommand : LocalizedCommands
+public sealed partial class SpeciesUnbanCommand : LocalizedCommands
 {
-    [Dependency] private readonly IBanManager _ban = default!;
+    [Dependency] private IBanManager _ban = default!;
 
     public override string Command => "speciesunban";
     public override string Description => Loc.GetString("cmd-speciesunban-desc");

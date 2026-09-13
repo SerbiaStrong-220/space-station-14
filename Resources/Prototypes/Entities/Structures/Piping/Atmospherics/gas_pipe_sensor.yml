@@ -20,9 +20,9 @@
       shader: unshaded
   - type: AtmosPipeLayers
     spriteRsiPaths:
-      Primary: Structures/Piping/Atmospherics/gas_pipe_sensor.rsi
-      Secondary: Structures/Piping/Atmospherics/gas_pipe_sensor_alt1.rsi
-      Tertiary: Structures/Piping/Atmospherics/gas_pipe_sensor_alt2.rsi
+      Primary: SS220/Structures/Piping/Atmospherics/gas_pipe_sensor.rsi # SS220 atmospherics-sprite-update
+      Secondary: SS220/Structures/Piping/Atmospherics/gas_pipe_sensor_alt1.rsi # SS220 atmospherics-sprite-update
+      Tertiary: SS220/Structures/Piping/Atmospherics/gas_pipe_sensor_alt2.rsi # SS220 atmospherics-sprite-update
     alternativePrototypes:
       Primary: GasPipeSensor
       Secondary: GasPipeSensorAlt1

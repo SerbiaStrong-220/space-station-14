@@ -9,9 +9,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.CultYogg.Rave;
 
-public sealed class RaveSystem : SharedRaveSystem
+public sealed partial class RaveSystem : SharedRaveSystem
 {
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
 
     private readonly EntProtoId _effectPrototype = "CultYoggRaveEffect";
 

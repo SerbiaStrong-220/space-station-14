@@ -1,6 +1,6 @@
-ent-HighSecCentcommLockedBSO = { ent-HighSecDoor }
+ent-HighSecCentcommLockedSRT = { ent-HighSecDoor }
     .desc = { ent-HighSecDoor.desc }
-    .suffix = CC, Locked, BSO
+    .suffix = CC, Locked, SRT
 
 ent-HighSecCentcommLockedERT = { ent-HighSecDoor }
     .desc = { ent-HighSecDoor.desc }

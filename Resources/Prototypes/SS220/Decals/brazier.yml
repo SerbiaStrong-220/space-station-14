@@ -1,0 +1,16 @@
+#© SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: decal
+  id: sticks
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/brazier.rsi
+    state: sticks
+
+- type: decal
+  id: coal
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/brazier.rsi
+    state: coal
+

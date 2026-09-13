@@ -40,6 +40,8 @@ using Content.Shared.SS220.DarkReaper;
 using Content.Shared.Ghost.Roles.Components;
 using Content.Server.SS220.MindExtension;
 using Content.Shared.Roles.Components;
+using Content.Server.SS220.Language;
+using Content.Shared.SS220.Language.Components;
 
 namespace Content.Server.Ghost.Roles;
 
@@ -62,6 +64,7 @@ public sealed class GhostRoleSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly MindExtensionSystem _ghostExtension = default!; //SS220-mind-extension
+    [Dependency] private readonly LanguageSystem _language = default!; //SS220 Sentience event language fix
 
     private uint _nextRoleIdentifier;
     private bool _needsUpdateGhostRoleCount = true;
@@ -94,6 +97,7 @@ public sealed class GhostRoleSystem : EntitySystem
         SubscribeLocalEvent<GhostRoleComponent, ComponentShutdown>(OnRoleShutdown);
         SubscribeLocalEvent<GhostRoleComponent, EntityPausedEvent>(OnPaused);
         SubscribeLocalEvent<GhostRoleComponent, EntityUnpausedEvent>(OnUnpaused);
+        SubscribeLocalEvent<GhostRoleComponent, GetVerbsEvent<Verb>>(OnGetVerb); // ss220 add verb for ghost role
 
         SubscribeLocalEvent<GhostRoleRaffleComponent, ComponentInit>(OnRaffleInit);
         SubscribeLocalEvent<GhostRoleRaffleComponent, ComponentShutdown>(OnRaffleShutdown);
@@ -829,6 +833,36 @@ public sealed class GhostRoleSystem : EntitySystem
         UpdateAllEui();
     }
 
+    // ss220 add verb for ghost role start
+    private void OnGetVerb(Entity<GhostRoleComponent> ent, ref GetVerbsEvent<Verb> args)
+    {
+        if (!_ghostRoles.TryGetValue(ent.Comp.Identifier, out var ghostRole) || ghostRole.Owner != ent.Owner)
+            return;
+
+        if (!HasComp<GhostComponent>(args.User))
+            return;
+
+        if (!TryComp<ActorComponent>(args.User, out var actor))
+            return;
+
+        args.Verbs.Add(new Verb
+        {
+            Text = Loc.GetString("ghost-role-verb-take-ghost-text"),
+            Act = () =>
+            {
+                var eui = new GhostRolesEui
+                {
+                    Identifier = ent.Comp.Identifier,
+                    Rules = ent.Comp.RoleRules,
+                };
+
+                _euiManager.OpenEui(eui, actor.PlayerSession);
+                eui.StateDirty();
+            },
+        });
+    }
+    // ss220 add verb for ghost role end
+
     private void OnMapInit(Entity<GhostRoleComponent> ent, ref MapInitEvent args)
     {
         if (ent.Comp.Probability < 1f && !_random.Prob(ent.Comp.Probability))
@@ -864,7 +898,7 @@ public sealed class GhostRoleSystem : EntitySystem
         RaiseLocalEvent(mob, spawnedEvent);
 
         if (ghostRole.MakeSentient)
-            _mindSystem.MakeSentient(mob, ghostRole.AllowMovement, ghostRole.AllowSpeech);
+            MakeSentientWithLanguage(mob, ghostRole.AllowMovement, ghostRole.AllowSpeech); //SS220 Sentience event language fix
 
         EnsureComp<MindContainerComponent>(mob);
 
@@ -929,7 +963,7 @@ public sealed class GhostRoleSystem : EntitySystem
         }
 
         if (ghostRole.MakeSentient)
-            _mindSystem.MakeSentient(uid, ghostRole.AllowMovement, ghostRole.AllowSpeech);
+            MakeSentientWithLanguage(uid, ghostRole.AllowMovement, ghostRole.AllowSpeech); //SS220 Sentience event language fix
 
         GhostRoleInternalCreateMindAndTransfer(args.Player, uid, uid, ghostRole);
         UnregisterGhostRole((uid, ghostRole));
@@ -1013,6 +1047,18 @@ public sealed class GhostRoleSystem : EntitySystem
 
         SetMode(entity.Owner, ghostRoleProto, ghostRoleProto.Name, entity.Comp);
     }
+    //SS220 Sentience event language fix begin
+    private void MakeSentientWithLanguage(EntityUid entity, bool allowMovement, bool allowSpeech)
+    {
+        _mindSystem.MakeSentient(entity, allowMovement, allowSpeech);
+
+        if (allowSpeech)
+        {
+            var languageComp = EnsureComp<LanguageComponent>(entity);
+            _language.AddLanguage((entity, languageComp), _language.GalacticLanguage, true);
+        }
+    }
+    //SS220 Sentience event language fix end
 }
 
 [AnyCommand]

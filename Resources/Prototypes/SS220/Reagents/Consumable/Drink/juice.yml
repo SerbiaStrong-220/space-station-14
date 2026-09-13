@@ -19,7 +19,7 @@
   color: "#c275ca"
   recognizable: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 1

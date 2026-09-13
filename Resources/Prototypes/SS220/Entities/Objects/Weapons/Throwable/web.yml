@@ -1,0 +1,41 @@
+- type: entity
+  parent: BaseItem
+  id: StickyWeb
+  name: sticky web
+  description: "A sticky web that is excellent for restricting the target's movement."
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Throwable/web_sticky.rsi
+    state: icon
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+  - type: Ensnaring
+    freeTime: 1.0
+    breakoutTime: 1.5
+    walkSpeed: 0.4
+    sprintSpeed: 0.4
+    staminaDamage: 0
+    canThrowTrigger: true
+    canMoveBreakout: false
+    maxEnsnares: 1
+  - type: LandAtCursor
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PhysShapeCircle
+          radius: 0.4
+        density: 20 # derived from base_item
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2

@@ -25,7 +25,9 @@ public static class KeyFunctions220
     public static readonly BoundKeyFunction CalculatorClear = "CalculatorClear";
     public static readonly BoundKeyFunction ItemOffer = "ItemOffer";
     public static readonly BoundKeyFunction ResistFire = "ResistFire";
+    public static readonly BoundKeyFunction OpenExperienceViewerMenu = "OpenExperienceViewerMenu";
     public static readonly BoundKeyFunction PinUI = "PinUI";
+    public static readonly BoundKeyFunction FireShuttle = "FireShuttle";
 
     public static void AddCalculatorKeys(IInputCmdContext context)
     {
