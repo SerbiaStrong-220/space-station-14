@@ -102,12 +102,10 @@ public abstract class SharedDisposalUnitSystem : EntitySystem
         if (!args.CanAccess || !args.CanInteract)
             return;
 
-        // SS220 fix 4554 begin
-        // An astral Dark Reaper must not be able to probe a disposal unit by
-        // seeing whether the eject/flush verbs are available.
+        // SS220 fix #4554 begin
         if (TryComp<DarkReaperComponent>(args.User, out var reaper) && !reaper.PhysicalForm)
             return;
-        // SS220 fix 4554 begin end
+        // SS220 fix #4554 begin end 
         var uid = ent.Owner;
         var component = ent.Comp;
 
