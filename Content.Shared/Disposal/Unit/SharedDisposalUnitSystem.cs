@@ -19,6 +19,7 @@ using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.Power.EntitySystems;
+using Content.Shared.SS220.DarkReaper;
 using Content.Shared.Storage.Components;
 using Content.Shared.Throwing;
 using Content.Shared.Verbs;
@@ -101,6 +102,12 @@ public abstract class SharedDisposalUnitSystem : EntitySystem
         if (!args.CanAccess || !args.CanInteract)
             return;
 
+        // SS220 fix 4554 begin
+        // An astral Dark Reaper must not be able to probe a disposal unit by
+        // seeing whether the eject/flush verbs are available.
+        if (TryComp<DarkReaperComponent>(args.User, out var reaper) && !reaper.PhysicalForm)
+            return;
+        // SS220 fix 4554 begin end
         var uid = ent.Owner;
         var component = ent.Comp;
 
