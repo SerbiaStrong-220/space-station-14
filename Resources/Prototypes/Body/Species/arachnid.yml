@@ -50,6 +50,10 @@
       ArmRight: OrganArachnidArmRight
       HandRight: OrganArachnidHandRight
       HandLeft: OrganArachnidHandLeft
+      #SS220-feature begin
+      SecondHandLeft: OrganArachnidHandLeftSecondary
+      SecondHandRight: OrganArachnidHandRightSecondary
+      #SS220-feature end
       LegLeft: OrganArachnidLegLeft
       LegRight: OrganArachnidLegRight
       FootLeft: OrganArachnidFootLeft
