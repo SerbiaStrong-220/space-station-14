@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Whitelist;
 using Robust.Shared.GameObjects;
 
 namespace Content.Shared.SS220.Medical;
@@ -10,6 +11,12 @@ public sealed partial class BlueShieldMonitorComponent : Component
     /// <summary>
     ///     Job prototype IDs considered high clearance. Always shown on the Blue Shield monitor.
     /// </summary>
+    /// <remarks>
+    ///     Matched against two sources: the job role on the person's mind (server-assigned, unforgeable)
+    ///     and the JobPrototype of their ID card, but only when the card is not an agent ID card.
+    ///     Agent ID cards let their owner rewrite card job data at will, so their card data is never
+    ///     trusted; disguised agents are detected via <see cref="HighClearanceIcons"/> instead.
+    /// </remarks>
     [DataField]
     public HashSet<string> HighClearanceProtos = new()
     {
@@ -42,14 +49,12 @@ public sealed partial class BlueShieldMonitorComponent : Component
     };
 
     /// <summary>
-    ///     Job icon prototype IDs treated as "unidentified". Always shown on the Blue Shield monitor.
-    ///     "JobIconNoId" is the fallback icon when a person wears no ID card at all,
-    ///     "JobIconUnknown" is the default icon of a blank ID card.
+    ///     Components that mark a suit sensor as a subdermal tracking implant.
+    ///     Only people which are currently implanted with such an implant can be listed as unidentified.
     /// </summary>
     [DataField]
-    public HashSet<string> UnknownJobIcons = new()
+    public EntityWhitelist TrackingImplantWhitelist = new()
     {
-        "JobIconNoId",
-        "JobIconUnknown",
+        Components = new[] { "SubdermalImplant" },
     };
 }
