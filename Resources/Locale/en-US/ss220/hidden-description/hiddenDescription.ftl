@@ -44,3 +44,8 @@ hidden-desc-toy-shield-clown = [color=#cc0099]Have a toy sword battle with this 
 
 hidden-desc-toy-armour-syndicate = [color=#e31735]It's a cloth replica of real armour, offering no protection whatsoever.[/color]
 hidden-desc-toy-armour-clown = [color=#cc0099]Looks 1 in 1 like the real thing! But it's really just a rag![/color]
+
+hidden-desc-DeathRattleImplantStation-medical = [color=#52B4E9]Checking the serial numbers, you realise this is a legal, certified "Death Rattle" implant.[/color]
+hidden-desc-DeathRattleImplantStation-research = [color=#D381C9]Inside is a station-issue "Death Rattle" implant.[/color]
+hidden-desc-DeathRattleImplantStation-security = [color=#009ae1]Inside is a station-issue "Death Rattle" implant.[/color]
+hidden-desc-DeathRattleImplantStation-syndicate = [color=#e31735]Inside is a station-issue "Death Rattle" implant. It reports the wearer's location over a preset radio channel should they fall into critical condition or die.[/color]

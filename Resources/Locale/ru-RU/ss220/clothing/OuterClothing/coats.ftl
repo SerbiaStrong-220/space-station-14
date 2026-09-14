@@ -49,3 +49,9 @@ ent-ClothingOuterCoatNTRFormalDress = торжественное платье п
     .desc = Платье для особых случаев... Черт, ты в этом просто отлично выглядишь!
 ent-ClothingOuterCoatNTRTrench = тренчкот представителя НаноТрейзен
     .desc = Отличный повседневный тренчкот для верного слуги корпорации.
+
+ent-ClothingOuterCoatJanitorJRBomber = бомбер уборщика JR
+    .desc = Влагостойкая куртка-бомбер, разработанная для специалистов Junk Recyclers.
+ent-ClothingOuterCoatJRSalvageTrench = плащ утилизатора JR
+    .desc = Износостойкий и стильный тренч, защищающий в том числе от мелкодисперсной пыли.
+    .suffix = { ent-ClothingOuterCoatDeadAnarchist.suffix }

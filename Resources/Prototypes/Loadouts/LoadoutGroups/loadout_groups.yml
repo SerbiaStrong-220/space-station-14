@@ -26,6 +26,10 @@
   - BoxFolderBaseThreePapers
   - BoxFolderPlasticClipboardThreePapers
   - BoxFolderClipboardThreePapers
+  #SS220 Add Cross in Trinkets begin
+  - ChaplainNeckGoldenCross
+  - ChaplainNeckSilverCross
+  #SS220 Add Cross in Trinkets end
   - ClothingNeckTSFPin #SS220-NewPins
   - ClothingNeckLGBTPin
   - ClothingNeckAllyPin
@@ -200,6 +204,8 @@
   - CaptainMantle
   - CaptainFormalWhiteCloak #ss220-loadout-captain
   - CaptainWhiteMantle #ss220-loadout-fullwhitecap
+  - CaptainShoulderMantle # SS220 Add Shoulder Mantles
+  - CaptainWhiteShoulderMantle # SS220 Add Shoulder Mantles
 
 - type: loadoutGroup
   id: CaptainBackpack
@@ -519,6 +525,7 @@
   - ChaplainPlagueHat
   - ChaplainWitchHat
   - ChaplainWitchHatAlt
+  - ChaplainHatFollower #SS220 new chaplain clothing
 
 - type: loadoutGroup
   id: ChaplainMask
@@ -535,6 +542,7 @@
   - ChaplainJumpskirt
   - ChaplainRobesLight
   - ChaplainRobesDark
+  - ChaplainJumpsuitFollower #SS220 new chaplain clothing
 
 - type: loadoutGroup
   id: ChaplainOuterClothing
@@ -614,6 +622,10 @@
   minLimit: 0
   loadouts:
   - JanitorWintercoat
+  #SS220-JRNewThings begin
+  - ClothingOuterWinterJanitorJR
+  - ClothingOuterCoatJanitorJRBomber
+  #SS220-JRNewThings end
 
 - type: loadoutGroup
   id: JanitorJobTrinkets
@@ -933,6 +945,7 @@
   minLimit: 0
   loadouts:
   - QuartermasterWintercoat
+  - QuartermasterOuterCoatQMExpensive #SS220 QM exp coat
   - QuartermasterOuterCoatQMWarehouseman #SS220-QM-Trip
 
 - type: loadoutGroup
@@ -1008,6 +1021,11 @@
   - SalvageSpecialistBackpack
   - SalvageSpecialistSatchel
   - SalvageSpecialistDuffel
+  #SS220-JRNewThings begin
+  - ClothingBackpackJRSalvage
+  - ClothingBackpackJRSalvageSatchel
+  - ClothingBackpackJRSalvageDuffel
+  #SS220-JRNewThings end
 
 - type: loadoutGroup
   id: SalvageSpecialistOuterClothing
@@ -1015,6 +1033,10 @@
   minLimit: 0
   loadouts:
   - SalvageSpecialistWintercoat
+  #SS220-JRNewThings begin
+  - ClothingOuterCoatJRSalvageTrench
+  - ClothingOuterWinterJRSalvage
+  #SS220-JRNewThings end
 
 - type: loadoutGroup
   id: SalvageSpecialistShoes
@@ -1022,6 +1044,7 @@
   loadouts:
   - SalvageBoots
   - CargoWinterBoots
+  - ClothingShoesBootsJRSalvage #SS220-JRNewThings
 
 #- type: loadoutGroup
 #  id: SalvageSpecialistJobTrinkets
@@ -1427,6 +1450,7 @@
   - HeadofSecurityMantle
   - SecurityHolster #SS220-HoS-Holster
   - MantleHOSShoulder #ss220 sec loadout update
+  - HOSShoulderMantle # SS220 Add Shoulder Mantles
 
 - type: loadoutGroup
   id: HeadofSecurityOuterClothing

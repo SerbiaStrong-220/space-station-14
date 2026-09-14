@@ -428,6 +428,7 @@
     tags:
     - Trash
     - VimPilot
+    - ReptilianFood #SS220-ReptilianFoodFix
   - type: Destructible
     thresholds:
     - trigger:
@@ -4040,6 +4041,11 @@
     popupText: diona-reform-attempt
     reformPrototype: MobDionaReformed
   - type: IgnoreKudzu #ss220 kudzu nymph fix
+  #SS220-NymphLanguageFix begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+  #SS220-NymphLanguageFix end
 
 - type: entity
   parent: MobDionaNymph

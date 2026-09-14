@@ -23,6 +23,7 @@ namespace Content.Client.Singularity
         ///     If this value is changed, the shader itself also needs to be updated.
         /// </summary>
         public const int MaxCount = 5;
+        private readonly Vector2 _safeDeltaValue = new(.1f, .1f); // SS220 fixsingularitydrop
 
         private const float MaxDistance = 20f;
 
@@ -130,7 +131,7 @@ namespace Content.Client.Singularity
 
                 var localPosition = _positions[i];
                 localPosition.Y = args.Viewport.Size.Y - localPosition.Y;
-                var delta = args.VisiblePosition - localPosition;
+                var delta = Vector2.Max(args.VisiblePosition - localPosition, _safeDeltaValue); // SS220 fixsingularitydrop
                 var distance = (delta / (args.Viewport.RenderScale * args.Viewport.Eye.Scale)).Length();
 
                 var deformation = _intensities[i] / MathF.Pow(distance, _falloffPowers[i]);

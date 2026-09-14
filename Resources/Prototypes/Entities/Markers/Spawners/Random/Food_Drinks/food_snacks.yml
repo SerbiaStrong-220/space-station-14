@@ -39,6 +39,7 @@
     - id: FoodSnackChips
     - id: FoodSnackChocolate
     - id: FoodSnackChocolateBar
+    - id: FoodSnackChocolateWhite #SS220-NewThings
     - id: FoodSnackChowMein
     - id: FoodSnackCookieFortune
     - id: FoodSnackDanDanNoodles
