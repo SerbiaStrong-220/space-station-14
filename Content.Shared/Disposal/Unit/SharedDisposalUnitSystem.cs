@@ -95,7 +95,18 @@ public abstract class SharedDisposalUnitSystem : EntitySystem
 
         SubscribeLocalEvent<DisposalUnitComponent, GetDumpableVerbEvent>(OnGetDumpableVerb);
         SubscribeLocalEvent<DisposalUnitComponent, DumpEvent>(OnDump);
+
+        // SS220 fix #4554
+        SubscribeLocalEvent<DisposalUnitComponent, ContainerIsInsertingAttemptEvent>(OnContainerInsertAttempt);
     }
+
+    // SS220 fix #4554 begin
+    private void OnContainerInsertAttempt(Entity<DisposalUnitComponent> ent, ref ContainerIsInsertingAttemptEvent args)
+    {
+        if (args.Container.ID == DisposalUnitComponent.ContainerId && HasComp<DarkReaperComponent>(args.EntityUid))
+            args.Cancel();
+    }
+    // SS220 fix #4554 end
 
     private void AddDisposalAltVerbs(Entity<DisposalUnitComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
