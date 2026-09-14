@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 09/01/2026 10:19:53
-  entityCount: 45345
+  time: 09/14/2026 15:56:59
+  entityCount: 45402
 maps:
 - 1
 grids:
@@ -17876,25 +17876,14 @@ entities:
             id: bushsnowa1
           decals:
             9257: -6.7162323,183.85156
-            9259: -21.311659,187.76062
             9289: -15.160728,178.4784
             9337: -7.855053,179.14464
-            9338: -9.886303,180.09776
-            9339: -9.511303,180.91026
-            9346: -10.149176,183.47649
             18024: -13.595289,211.92648
             18025: -17.28279,211.06711
         - node:
             color: '#FFFFFFFF'
-            id: bushsnowa2
-          decals:
-            9340: -9.261303,180.42589
-            9343: -10.996065,183.38274
-        - node:
-            color: '#FFFFFFFF'
             id: bushsnowa3
           decals:
-            9347: -9.852301,182.97649
             11595: -84.20444,183.09305
             11596: -75.975006,181.15555
         - node:
@@ -17904,18 +17893,11 @@ entities:
             9256: -5.522297,183.65762
             9258: -7.8173523,182.8746
             9260: -19.505325,188.60703
-            9344: -11.277315,183.02336
         - node:
             color: '#8D1C99FF'
             id: bushsnowb2
           decals:
             18230: -76.32526,167.42636
-        - node:
-            color: '#FFFFFFFF'
-            id: bushsnowb2
-          decals:
-            9341: -10.323803,180.87901
-            9345: -10.589815,183.08586
         - node:
             color: '#FFFFFFFF'
             id: bushsnowb3
@@ -18197,6 +18179,7 @@ entities:
             18047: 19.937592,178.46074
             18077: 4.1904106,197.54813
             18078: 5.2529106,198.79813
+            21621: -9.060253,180.53723
         - node:
             cleanable: True
             color: '#FFFFFFFF'
@@ -18232,7 +18215,6 @@ entities:
             9238: -6.0507126,183.10312
             9241: -7.4725876,181.75937
             9242: -13.9857025,183.0676
-            9250: -21.93648,187.99362
             9253: -21.963234,185.53023
             9261: -19.059017,186.42667
             9269: -21.884583,196.1297
@@ -18249,6 +18231,7 @@ entities:
             9328: -7.8733463,178.34811
             9331: -9.107721,179.72311
             17992: 0.97273636,210.90079
+            21622: -10.904003,183.09973
         - node:
             cleanable: True
             color: '#FFFFFFFF'
@@ -18281,7 +18264,6 @@ entities:
             9229: -3.2703323,188.07169
             9230: -3.9578323,188.16544
             9236: -0.10268402,183.32957
-            9249: -21.16721,188.13055
             9254: -21.978859,184.8896
             9290: -15.864328,177.21017
             9299: -11.394167,175.44893
@@ -18306,6 +18288,7 @@ entities:
             18057: -32.002663,184.27213
             18058: -30.955788,176.83446
             18059: -24.90207,176.93576
+            21623: -10.185253,183.1466
         - node:
             cleanable: True
             color: '#FFFFFFFF'
@@ -18336,7 +18319,6 @@ entities:
             9318: -17.191042,175.29268
             9323: -7.9670963,174.01999
             9325: -7.9670963,176.67624
-            9333: -10.076471,180.20749
             18081: 4.6747856,195.98563
         - node:
             cleanable: True
@@ -18369,7 +18351,6 @@ entities:
             9295: -11.941042,176.29268
             9314: -15.284792,175.0583
             9326: -8.029596,177.41061
-            9334: -9.832024,181.06128
             11600: -75.943756,181.67117
             11601: -83.955795,180.13992
             11618: -75.90802,182.95596
@@ -18420,7 +18401,6 @@ entities:
             9279: -26.993958,194.78595
             9284: -16.035728,179.8985
             9301: -14.316042,175.66768
-            9335: -8.832024,180.6394
             17996: -4.9967194,211.0633
             17997: -5.5123444,212.8133
             18000: -18.510332,209.89142
@@ -18471,6 +18451,8 @@ entities:
             18011: -30.584377,208.44748
             18012: -28.13119,207.9631
             18013: -25.801691,207.96573
+            21620: -9.872753,180.55286
+            21624: -9.841503,183.56848
         - node:
             cleanable: True
             color: '#FFFFFFFF'
@@ -26667,7 +26649,7 @@ entities:
       pos: -102.5,24.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -149285.66
+      secondsUntilStateChange: -149798.03
       state: Opening
   - uid: 1760
     components:
@@ -28389,7 +28371,7 @@ entities:
       pos: 1.5,161.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1531348
+      secondsUntilStateChange: -1531860.4
       changeAirtight: False
       state: Opening
     - type: DeviceLinkSource
@@ -110280,12 +110262,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -2.5,207.5
       parent: 2
-  - uid: 43742
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 12.5,200.5
-      parent: 2
 - proto: CrystalBlue
   entities:
   - uid: 22438
@@ -117096,6 +117072,28 @@ entities:
     - type: Transform
       pos: -7.5,-2.5
       parent: 2
+  - uid: 44173
+    components:
+    - type: Transform
+      pos: 8.5,189.5
+      parent: 2
+  - uid: 44174
+    components:
+    - type: Transform
+      pos: 9.5,189.5
+      parent: 2
+  - uid: 44175
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 10.5,188.5
+      parent: 2
+  - uid: 44176
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 10.5,187.5
+      parent: 2
   - uid: 45822
     components:
     - type: Transform
@@ -117926,6 +117924,12 @@ entities:
       rot: 3.141592653589793 rad
       pos: -5.5,-1.5
       parent: 2
+  - uid: 44177
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 10.5,189.5
+      parent: 2
 - proto: CurbWoodCornerSmallDecoration
   entities:
   - uid: 1239
@@ -118175,7 +118179,7 @@ entities:
       pos: 45.5,58.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -425035.3
+      secondsUntilStateChange: -425547.7
       state: Closing
     - type: DeviceLinkSource
       lastSignals:
@@ -135219,7 +135223,7 @@ entities:
     - type: Openable
       opened: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.9570232
+      sprayFizzinessThresholdRoll: 0.8118757
     - type: MeleeWeapon
       nextAttack: -13.2999857
     - type: EmitSoundOnCollide
@@ -135525,7 +135529,7 @@ entities:
     - type: EmitSoundOnCollide
       nextSound: -20188.979811
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.2411984
+      sprayFizzinessThresholdRoll: 0.59155077
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -135588,7 +135592,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.15038928
+      sprayFizzinessThresholdRoll: 0.28596073
     - type: NameModifier
       baseName: бутылка Гильдлагер
     - type: ContainerContainer
@@ -136617,7 +136621,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.84743834
+      sprayFizzinessThresholdRoll: 0.6938119
     - type: NameModifier
       baseName: Особый Запас Дядюшки Гита
     - type: ContainerContainer
@@ -136671,7 +136675,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.9753011
+      sprayFizzinessThresholdRoll: 0.52144325
     - type: NameModifier
       baseName: вино Особое Двухбородое Бородатое
     - type: ContainerContainer
@@ -136710,7 +136714,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.5496744
+      sprayFizzinessThresholdRoll: 0.21913299
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -136742,7 +136746,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.37887204
+      sprayFizzinessThresholdRoll: 0.78215075
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -139826,7 +139830,7 @@ entities:
       - 40096
       - 40106
     - type: Door
-      secondsUntilStateChange: -1440612.1
+      secondsUntilStateChange: -1441124.5
       state: Closing
   - uid: 9985
     components:
@@ -139912,7 +139916,7 @@ entities:
       deviceLists:
       - 46086
     - type: Door
-      secondsUntilStateChange: -1359287.1
+      secondsUntilStateChange: -1359799.5
       state: Closing
   - uid: 11562
     components:
@@ -141823,7 +141827,7 @@ entities:
     - type: Firelock
       emergencyCloseCooldown: 8075.4252599
     - type: Door
-      secondsUntilStateChange: -463733.3
+      secondsUntilStateChange: -464245.7
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -147218,6 +147222,329 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 41.5,20.5
+      parent: 2
+- proto: FloraBamboo
+  entities:
+  - uid: 4884
+    components:
+    - type: Transform
+      pos: 12.577854,199.62404
+      parent: 2
+  - uid: 44135
+    components:
+    - type: Transform
+      pos: 14.984104,199.59279
+      parent: 2
+- proto: FloraBushG
+  entities:
+  - uid: 44140
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 9.110676,193.96458
+      parent: 2
+- proto: FloraBushI
+  entities:
+  - uid: 44137
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 14.735676,189.73021
+      parent: 2
+  - uid: 44138
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.251301,188.96458
+      parent: 2
+  - uid: 44139
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 16.704426,189.02708
+      parent: 2
+- proto: FloraBushJ
+  entities:
+  - uid: 44167
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 14.558746,189.13995
+      parent: 2
+  - uid: 44168
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 9.4817505,193.82187
+      parent: 2
+  - uid: 44169
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 12.91481,199.02051
+      parent: 2
+  - uid: 44170
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 14.930435,197.78613
+      parent: 2
+  - uid: 44171
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 13.19606,194.95801
+      parent: 2
+  - uid: 44172
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 10.388123,189.0698
+      parent: 2
+- proto: FloraBushK
+  entities:
+  - uid: 44136
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 13.203419,194.39627
+      parent: 2
+- proto: FloraBushL
+  entities:
+  - uid: 44178
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 9.595802,188.06927
+      parent: 2
+  - uid: 44179
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 9.064552,193.32779
+      parent: 2
+- proto: FloraBushM
+  entities:
+  - uid: 44141
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -0.8241768,190.29657
+      parent: 2
+  - uid: 44142
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -8.982689,184.11978
+      parent: 2
+  - uid: 44143
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -9.763378,183.0841
+      parent: 2
+  - uid: 44144
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -16.139866,184.91869
+      parent: 2
+  - uid: 44147
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -18.392382,183.22156
+      parent: 2
+  - uid: 44148
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -2.2968788,188.25696
+      parent: 2
+  - uid: 44149
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 1.3712921,193.25482
+      parent: 2
+  - uid: 44155
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -9.931456,202.26038
+      parent: 2
+  - uid: 44156
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -7.2439556,203.29163
+      parent: 2
+  - uid: 44157
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -13.239904,201.61493
+      parent: 2
+  - uid: 44158
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -20.245739,200.33368
+      parent: 2
+- proto: FloraBushSnowA
+  entities:
+  - uid: 43742
+    components:
+    - type: Transform
+      pos: -8.542875,181.76765
+      parent: 2
+  - uid: 44128
+    components:
+    - type: Transform
+      pos: -9.65225,180.70515
+      parent: 2
+  - uid: 44129
+    components:
+    - type: Transform
+      pos: -18.540524,186.24216
+      parent: 2
+  - uid: 44132
+    components:
+    - type: Transform
+      pos: -19.660746,188.12973
+      parent: 2
+  - uid: 44133
+    components:
+    - type: Transform
+      pos: -20.683388,188.5409
+      parent: 2
+  - uid: 44134
+    components:
+    - type: Transform
+      pos: -20.417763,188.25964
+      parent: 2
+  - uid: 44145
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -15.999241,185.84056
+      parent: 2
+  - uid: 44150
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 0.77706146,191.19177
+      parent: 2
+  - uid: 44154
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -1.8595581,194.71143
+      parent: 2
+  - uid: 44159
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -20.073864,200.9743
+      parent: 2
+  - uid: 44161
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -75.77558,180.32483
+      parent: 2
+  - uid: 44163
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -7.4016304,174.01483
+      parent: 2
+  - uid: 44166
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -7.8235054,177.15546
+      parent: 2
+  - uid: 44180
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -11.240768,203.15588
+      parent: 2
+- proto: FloraBushSnowB
+  entities:
+  - uid: 44125
+    components:
+    - type: Transform
+      pos: -9.6835,181.1114
+      parent: 2
+  - uid: 44126
+    components:
+    - type: Transform
+      pos: -9.1835,180.58015
+      parent: 2
+  - uid: 44127
+    components:
+    - type: Transform
+      pos: -8.105375,181.3614
+      parent: 2
+  - uid: 44130
+    components:
+    - type: Transform
+      pos: -18.27012,186.44052
+      parent: 2
+  - uid: 44131
+    components:
+    - type: Transform
+      pos: -20.004496,188.42725
+      parent: 2
+  - uid: 44146
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -15.046116,184.91869
+      parent: 2
+  - uid: 44151
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 0.94893646,191.5824
+      parent: 2
+  - uid: 44152
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 0.41768646,190.98865
+      parent: 2
+  - uid: 44153
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.656067,193.24268
+      parent: 2
+  - uid: 44160
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -19.323864,201.31805
+      parent: 2
+  - uid: 44162
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -83.22871,181.37708
+      parent: 2
+  - uid: 44164
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -10.68288,173.23358
+      parent: 2
+  - uid: 44165
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -8.68288,178.26483
       parent: 2
 - proto: FloraGreyStalagmite
   entities:
@@ -252836,11 +253163,6 @@ entities:
     - type: Transform
       pos: -87.5,180.5
       parent: 2
-  - uid: 4884
-    components:
-    - type: Transform
-      pos: -90.5,180.5
-      parent: 2
   - uid: 5163
     components:
     - type: Transform
@@ -254232,6 +254554,11 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -2.5,196.5
+      parent: 2
+  - uid: 44124
+    components:
+    - type: Transform
+      pos: -90.5,180.5
       parent: 2
   - uid: 46210
     components:
@@ -268832,7 +269159,7 @@ entities:
       parent: 2
     - type: Door
       canCrush: True
-      secondsUntilStateChange: -67529
+      secondsUntilStateChange: -68041.38
       clickOpen: False
       state: Opening
     - type: DoorSignalControl
@@ -268867,7 +269194,7 @@ entities:
       pos: -52.5,187.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -511277.38
+      secondsUntilStateChange: -511789.75
       state: Opening
   - uid: 23105
     components:
@@ -268943,7 +269270,7 @@ entities:
       parent: 2
     - type: Door
       canCrush: True
-      secondsUntilStateChange: -67498.13
+      secondsUntilStateChange: -68010.516
       clickOpen: False
       state: Opening
     - type: DoorSignalControl
@@ -268978,7 +269305,7 @@ entities:
       pos: -53.5,188.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -475560.2
+      secondsUntilStateChange: -476072.56
       state: Opening
   - uid: 38967
     components:
