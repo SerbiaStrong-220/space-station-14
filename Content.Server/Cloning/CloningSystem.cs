@@ -19,6 +19,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Server.SS220.Traits;
 
 namespace Content.Server.Cloning;
 
@@ -56,6 +57,14 @@ public sealed partial class CloningSystem : SharedCloningSystem
 
         if (!_prototype.Resolve(humanoid.Species, out var speciesPrototype))
             return false; // invalid species
+
+        // SS220 uncloneable revert begin
+        if (HasComp<UncloneableComponent>(original))
+        {
+            Loc.GetString("cloning-console-uncloneable-trait-error");
+            return false;
+        }
+        // SS220 uncloneable revert end
 
         var attemptEv = new CloningAttemptEvent(settings);
         RaiseLocalEvent(original, ref attemptEv);
