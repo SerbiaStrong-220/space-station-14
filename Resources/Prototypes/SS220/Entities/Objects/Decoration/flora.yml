@@ -1,0 +1,31 @@
+- type: entity
+  parent: BaseTree
+  id: BambooTree
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Decoration/Flora/flora_bamboo.rsi
+    offset: 0,0.8
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.58,-0.1,0.58,0.1"
+        density: 2000
+        layer:
+        - WallLayer
+
+- type: entity
+  parent: BambooTree
+  id: FloraBamboo
+  name: bamboo
+  components:
+  - type: Sprite
+    layers:
+    - state: bamboo01
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        bamboo01: ""

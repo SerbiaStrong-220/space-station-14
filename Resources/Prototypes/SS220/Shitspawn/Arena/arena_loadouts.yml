@@ -1,0 +1,14 @@
+- type: startingGear
+  id: ArenaLoadoutChameleon
+  equipment:
+    back: ClothingBackpackChameleonFill
+
+- type: startingGear
+  id: ArenaLoadoutChemist
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitChemistry
+    outerClothing: ClothingOuterCoatLabChem
+    shoes: ClothingShoesColorWhite
+    gloves: ClothingHandsGlovesLatex
+    eyes: ClothingEyesGlassesChemical
+    back: ClothingBackpackChemistry

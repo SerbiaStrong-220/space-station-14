@@ -23,7 +23,7 @@
   id: SalvageSpecialistGear
   equipment:
 #    jumpsuit: ClothingUniformJumpsuitSalvageSpecialist SS220-SalvageSpecialist-Loadout-fix
-    id: SalvagePDA
+#    id: SalvagePDA # SS220-JRNewThings
     ears: ClothingHeadsetCargo
   #storage:
     #back:

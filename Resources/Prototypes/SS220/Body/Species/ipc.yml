@@ -176,6 +176,15 @@
   - type: Damageable
     damageContainer: Ipc
     damageModifierSet: Ipc
+  - type: HealthExaminable
+    locPrefix: ipc
+    examinableTypes:
+    - Blunt
+    - Slash
+    - Piercing
+    - Heat
+    - Shock
+    - Caustic
   - type: ToggleableVisuals
     spriteLayer: light 
   - type: PointLight
