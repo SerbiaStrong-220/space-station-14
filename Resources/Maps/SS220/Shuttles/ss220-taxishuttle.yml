@@ -4,7 +4,7 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 09/12/2026 21:35:28
+  time: 09/14/2026 15:19:22
   entityCount: 233
 maps: []
 grids:
@@ -1558,16 +1558,16 @@ entities:
     components:
     - type: Transform
       rot: 3.141592653589793 rad
-      pos: 1.8943056,-0.4626929
+      pos: 1.8593737,-0.49731734
       parent: 37842
     - type: SignalSwitch
       state: False
     - type: DeviceLinkSource
       linkedPorts:
-        37964:
+        37963:
         - - Status
           - Toggle
-        37959:
+        37964:
         - - Status
           - Toggle
     - type: Fixtures
@@ -1648,8 +1648,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -1.5,-2.5
       parent: 37842
-    - type: PoweredLight
-      on: False
     - type: DeviceLinkSink
       invokeCounter: 1
 - proto: PoweredlightLED
@@ -1665,6 +1663,8 @@ entities:
       rot: 3.141592653589793 rad
       pos: -0.5,3.5
       parent: 37842
+    - type: PoweredLight
+      on: False
     - type: DeviceLinkSink
       invokeCounter: 1
   - uid: 37964
@@ -1673,6 +1673,8 @@ entities:
       rot: 3.141592653589793 rad
       pos: 1.5,3.5
       parent: 37842
+    - type: PoweredLight
+      on: False
     - type: DeviceLinkSink
       invokeCounter: 1
 - proto: Railing
