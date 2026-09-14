@@ -555,6 +555,18 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/salvage_specialist_experditor.rsi
 
+- type: entity
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220]
+  id: ClothingUniformJumpsuitJRSalvage
+  name: jr salvage uniform
+  description: Provides enhanced comfort during cleanup.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/jr_uniform_salvage.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/jr_uniform_salvage.rsi
+
 # Инженерия
 
   #Ассистент

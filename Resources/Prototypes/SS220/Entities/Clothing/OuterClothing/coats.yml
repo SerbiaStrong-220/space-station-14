@@ -300,3 +300,17 @@
     sprite: SS220/Clothing/OuterClothing/Coats/bomber_JR.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Coats/bomber_JR.rsi
+
+#Утилизатор JR
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatJRSalvageTrench
+  name: salvager jr trench
+  description: A durable and stylish trench coat that also protects against fine dust.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/jr_salvage_trench.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/jr_salvage_trench.rsi
+

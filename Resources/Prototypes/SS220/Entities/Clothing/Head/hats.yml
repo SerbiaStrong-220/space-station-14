@@ -585,6 +585,18 @@
 
 - type: entity
   parent: ClothingHeadBase
+  id: ClothingHeadBeretJRSalvage
+  name: jr salvage beret
+  description: The ranking system for recyclers in Junk Recyclers is extremely extensive. This beret proves that you are at its top.
+  suffix: For playtime
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Head/Hats/jr_beret_salvage.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Head/Hats/jr_beret_salvage.rsi
+
+- type: entity
+  parent: ClothingHeadBase
   id: ClothingHeadTiaraDruid #SS220 druid loadout
   name: druid tiara
   description: A symbol of harmony with nature, even among the stars and planets.

@@ -1020,6 +1020,11 @@
   - SalvageSpecialistBackpack
   - SalvageSpecialistSatchel
   - SalvageSpecialistDuffel
+  #SS220-JRNewThings begin
+  - ClothingBackpackJRSalvage
+  - ClothingBackpackJRSalvageSatchel
+  - ClothingBackpackJRSalvageDuffel
+  #SS220-JRNewThings end
 
 - type: loadoutGroup
   id: SalvageSpecialistOuterClothing
@@ -1027,6 +1032,10 @@
   minLimit: 0
   loadouts:
   - SalvageSpecialistWintercoat
+  #SS220-JRNewThings begin
+  - ClothingOuterCoatJRSalvageTrench
+  - ClothingOuterWinterJRSalvage
+  #SS220-JRNewThings end
 
 - type: loadoutGroup
   id: SalvageSpecialistShoes
@@ -1034,6 +1043,7 @@
   loadouts:
   - SalvageBoots
   - CargoWinterBoots
+  - ClothingShoesBootsJRSalvage #SS220-JRNewThings
 
 #- type: loadoutGroup
 #  id: SalvageSpecialistJobTrinkets
