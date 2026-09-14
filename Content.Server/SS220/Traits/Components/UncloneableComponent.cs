@@ -1,4 +1,4 @@
-namespace Content.Server.SS220.Traits;
+namespace Content.Server.SS220.Traits.Components;
 
 /// <summary>
 /// This is used for the uncloneable trait.

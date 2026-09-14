@@ -19,7 +19,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Server.SS220.Traits;
+using Content.Server.SS220.Traits.Components;
 
 namespace Content.Server.Cloning;
 

@@ -28,4 +28,3 @@ cloning-console-component-msg-no-mind = Не готово: Душа неакти
 cloning-console-chat-error = ОШИБКА: НЕХВАТКА БИОМАССЫ. КЛОНИРОВАНИЕ ЭТОГО ТЕЛА ТРЕБУЕТ { $units } ЕДИНИЦ БИОМАССЫ.
 cloning-console-uncloneable-trait-error = ОШИБКА: КЛОНИРОВАНИЕ НЕВОЗМОЖНО ИЗ-ЗА АНОМАЛЬНОГО СТРОЕНИЯ ТЕЛА.
 cloning-console-cellular-warning = ВНИМАНИЕ: ОЦЕНКА ДОСТОВЕРНОСТИ ЦЕЛОСТНОСТИ ГЕНОВ СОСТАВЛЯЕТ { $percent }%. КЛОНИРОВАНИЕ МОЖЕТ ПРИВЕСТИ К НЕОЖИДАННЫМ РЕЗУЛЬТАТАМ.
-cloning-console-uncloneable-trait-error = ОШИБКА: ДУША ОТСУТСТВУЕТ - КЛОНИРОВАНИЕ НЕВОЗМОЖНО. #SS220 uncloneable revert
