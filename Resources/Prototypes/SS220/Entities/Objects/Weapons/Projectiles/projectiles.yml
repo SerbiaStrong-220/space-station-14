@@ -7,7 +7,7 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 6
+        Blunt: 12
     soundHit:
       path: /Audio/SS220/Weapons/Guns/Hits/peashooter_hit.ogg
   - type: Sprite
@@ -17,7 +17,7 @@
   - type: Ammo
     muzzleFlash: null
   - type: TimedDespawn
-    lifetime: 0.5 # Very short range
+    lifetime: 0.8 # Very short range
   - type: StunOnCollide
     stunAmount: 0
     knockdownAmount: 0
@@ -35,7 +35,7 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 4
+        Blunt: 8
     soundHit:
       path: /Audio/SS220/Weapons/Guns/Hits/peashooter_hit.ogg
   - type: Sprite
@@ -45,7 +45,7 @@
   - type: Ammo
     muzzleFlash: null
   - type: TimedDespawn
-    lifetime: 0.5 # Very short range
+    lifetime: 0.8 # Very short range
   - type: StunOnCollide
     stunAmount: 0
     knockdownAmount: 0

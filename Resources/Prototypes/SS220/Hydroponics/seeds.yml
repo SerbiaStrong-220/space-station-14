@@ -369,6 +369,7 @@
   displayName: seeds-peashooter-display-name
   plantRsi: SS220/Objects/Specific/Hydroponics/peashooter.rsi
   packetPrototype: PeashooterSeeds
+  autoSpawnMob: true
   productPrototypes:
     - FoodPeashooterPlant
   lifespan: 40
@@ -395,6 +396,7 @@
   displayName: seeds-sergeantpeashooter-display-name
   plantRsi: SS220/Objects/Specific/Hydroponics/peashooter_syndi.rsi
   packetPrototype: PeashooterSyndiSeeds
+  autoSpawnMob: true
   productPrototypes:
     - FoodPeashooterSyndiPlant
   lifespan: 40
