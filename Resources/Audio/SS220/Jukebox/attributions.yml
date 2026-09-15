@@ -65,8 +65,9 @@
 
 - files: ["mechanismeight.ogg"]
   license: "CC-BY-3.0"
-  copyright: "Mechanism 8 for Unreal Tournament '99, written by Andrew 'Necros' Sega, Remixed by Rivgane for SS220"
+  copyright: "Mechanism 8 for Unreal Tournament '99, by Andrew 'Necros' Sega, remixed by Rivgane"
   source: "https://github.com/SerbiaStrong-220"
+  # Remix used with permission from Rivgane given on 03/22/25
 
 - files: [Vivaldi_Autumn.ogg, Vivaldi_Spring.ogg, Vivaldi_Summer.ogg, Vivaldi_Winter.ogg]
   license: "Custom"
