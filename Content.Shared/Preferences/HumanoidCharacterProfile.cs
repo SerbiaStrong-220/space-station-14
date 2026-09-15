@@ -589,7 +589,7 @@ namespace Content.Shared.Preferences
 
             if (configManager.GetCVar(CCVars.RestrictedNames))
             {
-                name = RestrictedNameRegex.Replace(name, string.Empty);
+                name = SanitizeRestrictedName(speciesPrototype, name); //SS220-IPCnaming
             }
 
             if (configManager.GetCVar(CCVars.ICNameCase))

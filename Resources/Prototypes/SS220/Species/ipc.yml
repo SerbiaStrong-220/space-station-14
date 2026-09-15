@@ -13,3 +13,5 @@
   maleLastNames: NamesIpcLast
   femaleLastNames: NamesIpcLast
   minAge: 0
+  latinNamesAllowed: true
+
