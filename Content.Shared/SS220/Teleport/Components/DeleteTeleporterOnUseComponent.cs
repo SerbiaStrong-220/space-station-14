@@ -8,16 +8,16 @@ namespace Content.Shared.SS220.Teleport.Components;
 ///     Removes the teleportation device entity after its use is exhausted.
 /// </summary>
 [RegisterComponent]
-public sealed partial class DeleteOnTeleportedComponent : Component
+public sealed partial class DeleteTeleporterOnUseComponent : Component
 {
     /// <summary>
-    ///     Number of uses before deletion
+    ///     Number of remaining uses before deletion.
     /// </summary>
     [DataField]
-    public int Amount = 1;
+    public int RemainingUses = 1;
 
     /// <summary>
-    ///     Sound played when deleting
+    ///     Sound played when the teleporter is deleted.
     /// </summary>
     [DataField]
     public SoundSpecifier? DeleteSound;

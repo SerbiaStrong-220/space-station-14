@@ -3,41 +3,41 @@
 using Content.Shared.FixedPoint;
 using Content.Shared.Whitelist;
 
-namespace Content.Shared.SS220.Teleport.Components;
+namespace Content.Shared.SS220.Teleport.Triggers;
 
 /// <summary>
-///     Used when you need to teleport through AltVerb
+///     Requests teleportation through a verb or drag-and-drop interaction.
 /// </summary>
 [RegisterComponent]
-public sealed partial class AltVerbTeleportComponent : Component
+public sealed partial class InteractionTeleportTriggerComponent : Component
 {
     /// <summary>
-    ///     Which entities can use teleportation
+    ///     Entities allowed to be teleported.
     /// </summary>
     [DataField]
-    public EntityWhitelist? UserWhitelist;
+    public EntityWhitelist? TargetWhitelist;
 
     /// <summary>
-    ///     Which entities can't use teleportation
+    ///     Entities prevented from being teleported.
     /// </summary>
     [DataField]
-    public EntityWhitelist? UserBlacklist;
+    public EntityWhitelist? TargetBlacklist;
 
     /// <summary>
-    ///     Message when whitelisting is rejected
+    ///     Message shown when the target does not pass the whitelist.
     /// </summary>
     [DataField]
     public LocId? WhitelistRejectedLoc;
 
     /// <summary>
-    ///     How long we are entering teleport
-    ///     Null if DoAfter shouldn't happen
+    ///     Time required to enter the teleporter.
+    ///     Null when teleportation should be immediate.
     /// </summary>
     [DataField]
     public TimeSpan? TeleportDoAfterTime;
 
     /// <summary>
-    ///     The amount of damage required to interrupt a DoAfter of the teleport
+    ///     Damage required to interrupt the teleport DoAfter.
     /// </summary>
     [DataField]
     public FixedPoint2? DamageThreshold;
