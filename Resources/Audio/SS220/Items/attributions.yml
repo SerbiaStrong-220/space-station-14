@@ -12,6 +12,10 @@
   - book_pickup.ogg
   - paper_drop.ogg
   - paper_pickup.ogg
+  - toolbox_drop.ogg
+  - toolbox_pickup.ogg
+  - cardboardbox_drop.ogg
+  - cardboardbox_pickup.ogg
   license: "CC-BY-SA-3.0"
   copyright: "Taken from BandaStation"
   source: "https://github.com/ss220club/BandaStation/commit/81c3d921295d6b925ff063bef13f623687d7bdbd"
@@ -22,3 +26,10 @@
   license: "Custom"
   copyright: "Taken from 72 track of Garage Foley sounds"
   source: "https://99sounds.org/garage-foley/"
+  
+- files:
+  - id_card_drop.ogg
+  - id_card_pickup.ogg
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from BandaStation"
+  source: "https://github.com/tgstation/tgstation/commit/2ca81868242ba70cbe31c4a95fec0a5d532e81a5"

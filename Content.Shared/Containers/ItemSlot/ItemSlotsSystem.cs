@@ -257,9 +257,9 @@ namespace Content.Shared.Containers.ItemSlots
                 }
                 return;
             }
-
+            
             // Drop the held item onto the floor. Return if the user cannot drop.
-            if (!_handsSystem.TryDrop(args.User, args.Used))
+            if (!_handsSystem.CanDrop(args.User, args.Used)) // SS220-pickup-and-place-sounds-2
                 return;
 
             slots.Sort(SortEmpty);
