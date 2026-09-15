@@ -1,0 +1,157 @@
+# empty for example
+
+- type: entity
+  id: ModularPartWoodenCabinetEmptyw1h1
+  categories: [ HideSpawnMenu ]
+  parent: ModularPartWoodenCabinetw1h1
+
+# Maintenance
+
+- type: entity
+  id: ModularPartCabinetMaintenanceLootw1h1
+  categories: [ HideSpawnMenu ]
+  parent: ModularPartCabinetw1h1
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:NestedSelector
+        tableId: MaintenanceCabinetDrawerLoot
+
+# Should thought of changing all to loot tables simultaneous with Wizdens
+# Science
+
+- type: entity
+  id: ModularPartCabinetScienceEquipFilledw1h1
+  categories: [ HideSpawnMenu ]
+  parent: ModularPartCabinetw1h1
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:NestedSelector
+        tableId: ScienceCabinetDrawerEquipment
+
+- type: entity
+  id: ModularPartCabinetScienceClothFilledw1h1
+  categories: [ HideSpawnMenu ]
+  parent: ModularPartCabinetw1h1
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:NestedSelector
+        tableId: ScienceCabinetDrawerClothes
+
+- type: entity
+  id: ModularPartDoubleCabinetScienceEquipFilledw1h1
+  categories: [ HideSpawnMenu ]
+  parent: ModularPartDoubleCabinetw1h1
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:NestedSelector
+        tableId: ScienceCabinetDrawerEquipment
+
+- type: entity
+  id: ModularPartDoubleCabinetScienceClothFilledw1h1
+  categories: [ HideSpawnMenu ]
+  parent: ModularPartDoubleCabinetw1h1
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:NestedSelector
+        tableId: ScienceCabinetDrawerClothes
+
+# Engineer
+
+- type: entity
+  id: ModularPartCabinetEngineerEquipFilledw1h1
+  categories: [ HideSpawnMenu ]
+  parent: ModularPartCabinetw1h1
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:NestedSelector
+        tableId: EngineerCabinetDrawerEquipment
+
+- type: entity
+  id: ModularPartCabinetEngineerClothFilledw1h1
+  categories: [ HideSpawnMenu ]
+  parent: ModularPartCabinetw1h1
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:NestedSelector
+        tableId: EngineerCabinetDrawerClothes
+
+- type: entity
+  id: ModularPartDoubleCabinetEngineerClothFilledw1h1
+  categories: [ HideSpawnMenu ]
+  parent: ModularPartDoubleCabinetw1h1
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:NestedSelector
+        tableId: EngineerCabinetDrawerClothes
+
+- type: entity
+  id: ModularPartDoubleCabinetEngineerEquipFilledw1h1
+  categories: [ HideSpawnMenu ]
+  parent: ModularPartDoubleCabinetw1h1
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:NestedSelector
+        tableId: EngineerCabinetDrawerEquipment
+
+# Medical
+
+- type: entity
+  id: ModularPartCabinetMedicalEquipFilledw1h1
+  categories: [ HideSpawnMenu ]
+  parent: ModularPartCabinetw1h1
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:NestedSelector
+        tableId: MedicalCabinetDrawerEquipment
+
+- type: entity
+  id: ModularPartCabinetMedicalClothFilledw1h1
+  categories: [ HideSpawnMenu ]
+  parent:  ModularPartCabinetw1h1
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:NestedSelector
+        tableId: MedicalCabinetDrawerClothes
+
+- type: entity
+  id: ModularPartDoubleCabinetMedicalEquipFilledw1h1
+  categories: [ HideSpawnMenu ]
+  parent: ModularPartDoubleCabinetw1h1
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:NestedSelector
+        tableId: MedicalCabinetDrawerEquipment
+
+- type: entity
+  id: ModularPartDoubleCabinetMedicalClothFilledw1h1
+  categories: [ HideSpawnMenu ]
+  parent: ModularPartDoubleCabinetw1h1
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:NestedSelector
+        tableId: MedicalCabinetDrawerClothes
+
+# Lawyer
+
+- type: entity
+  id: ModularPartFillingCabinetLawyerEquipFilledw1h1
+  categories: [ HideSpawnMenu ]
+  parent: ModularPartFillingCabinetw1h1
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:NestedSelector
+        tableId: LawyerCabinetDrawerEquipment
