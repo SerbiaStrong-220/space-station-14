@@ -15,7 +15,7 @@ using Robust.Shared.SS220.Player;
 
 namespace Content.Server.SS220.Administration.Commands;
 
-[AdminCommand(AdminFlags.Debug)]
+[AdminCommand(AdminFlags.Host)]
 public sealed partial class DebugSpawnPlayerCommand : IConsoleCommand
 {
     [Dependency] private IEntityManager _entityManager = default!;
