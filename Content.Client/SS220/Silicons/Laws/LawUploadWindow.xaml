@@ -1,0 +1,35 @@
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+<ui:FancyWindow xmlns="https://spacestation14.io"
+                xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls"
+                Title="{Loc 'law-upload-title'}"
+                MinSize="620 500" SetSize="700 650">
+    <BoxContainer Orientation="Vertical" SeparationOverride="10" Margin="8">
+        <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+            <Button Name="EjectCard" Text="{Loc 'law-upload-eject-card'}" HorizontalExpand="True"/>
+            <Button Name="EjectBoard" Text="{Loc 'law-upload-eject-board'}" HorizontalExpand="True"/>
+        </BoxContainer>
+        <RichTextLabel Name="Status"/>
+        <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+            <BoxContainer Orientation="Vertical" SeparationOverride="8">
+                <Label Text="{Loc 'law-upload-current'}" StyleClasses="LabelHeading"/>
+                <RichTextLabel Name="AiTitle"/>
+                <RichTextLabel Name="AiLaws"/>
+                <RichTextLabel Name="BorgTitle"/>
+                <RichTextLabel Name="BorgLaws"/>
+                <PanelContainer Margin="0 8">
+                    <BoxContainer Orientation="Vertical" SeparationOverride="6" Margin="8">
+                        <Label Text="{Loc 'law-upload-preview'}" StyleClasses="LabelHeading"/>
+                        <RichTextLabel Name="BoardTitle"/>
+                        <RichTextLabel Name="BoardLaws"/>
+                    </BoxContainer>
+                </PanelContainer>
+            </BoxContainer>
+        </ScrollContainer>
+        <RichTextLabel Text="{Loc 'law-upload-scope-hint'}"/>
+        <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+            <Button Name="ApplyAi" Text="{Loc 'law-upload-apply-ai'}" HorizontalExpand="True" Disabled="True"/>
+            <Button Name="ApplyBorgs" Text="{Loc 'law-upload-apply-borgs'}" HorizontalExpand="True" Disabled="True"/>
+            <Button Name="ApplyAll" Text="{Loc 'law-upload-apply-all'}" HorizontalExpand="True" Disabled="True"/>
+        </BoxContainer>
+    </BoxContainer>
+</ui:FancyWindow>
