@@ -27,4 +27,12 @@ public sealed partial class EncryptionKeyComponent : Component
     [DataField]
     public ProtoId<RadioChannelPrototype>? DefaultFrequencyChannel;
     // SS220-add-frequency-radio-end
+
+    // SS220-listen-only-radio-begin
+    /// <summary>
+    ///     Channels that the headset/key can listen to, but cannot transmit to.
+    /// </summary>
+    [DataField]
+    public HashSet<ProtoId<RadioChannelPrototype>> ListenOnlyChannels = new();
+    // SS220-listen-only-radio-end
 }

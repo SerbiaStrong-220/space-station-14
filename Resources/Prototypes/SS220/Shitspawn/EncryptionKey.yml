@@ -51,6 +51,40 @@
     defaultChannel: ChannelOmega
 
 - type: entity
+  parent: EncryptionKey
+  id: EncryptionKeyShitNews
+  suffix: Shitspawn
+  name: station news encryption key
+  description: Cutting-edge technology that bypasses monstrous radio stations!
+  components:
+  - type: EncryptionKey
+    channels:
+    - News
+    defaultChannel: News
+  - type: Sprite
+    layers:
+    - state: crypt_blue
+    - state: service_label
+
+- type: entity
+  parent: EncryptionKey
+  id: EncryptionKeySindyPeek
+  suffix: Shitspawn
+  name: frequency syndicate wiretapping key
+  description: Don't interfere with the broadcast — record it
+  components:
+  - type: EncryptionKey
+    channels:
+    - Syndicate
+    defaultChannel: Syndicate
+    listenOnlyChannels:
+    - Syndicate
+  - type: Sprite
+    layers:
+    - state: crypt_blue
+    - state: synd_label
+
+- type: entity
   parent: EncryptionKeyMafia
   id: EncryptionKeyTraders
   suffix: AdminV

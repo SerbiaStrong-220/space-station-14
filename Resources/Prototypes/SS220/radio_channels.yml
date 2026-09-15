@@ -209,3 +209,12 @@
   frequency: 1001
   color: "#60b781"
   longRange: true
+
+# Reporter
+- type: radioChannel
+  id: News
+  name: chat-radio-news
+  keycode: 'р'
+  frequency: 1178
+  color: "#2e9455"
+  longRange: true

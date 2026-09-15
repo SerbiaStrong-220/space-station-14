@@ -61,6 +61,10 @@ public sealed class RadioDeviceSystem : SharedRadioDeviceSystem
         SubscribeLocalEvent<HandheldRadioComponent, ToggleHandheldRadioSpeakerMessage>(OnToggleHandheldRadioSpeaker);
         SubscribeLocalEvent<HandheldRadioComponent, SelectHandheldRadioChannelMessage>(OnSelectHandheldRadioChannel);
         // SS220 HandheldRadio end
+
+        // SS220-news-intercom-init-begin
+        SubscribeLocalEvent<IntercomComponent, ComponentInit>(OnIntercomInit);
+        // SS220-news-intercom-init-end
     }
 
     public override void Update(float frameTime)
@@ -348,4 +352,23 @@ public sealed class RadioDeviceSystem : SharedRadioDeviceSystem
         _ui.SetUiState(uid, HandheldRadioUiKey.Key, state);
     }
     // SS220 HandheldRadio end
+
+    // SS220-news-intercom-init-begin
+    private void OnIntercomInit(Entity<IntercomComponent> ent, ref ComponentInit args)
+    {
+        if (!ent.Comp.CurrentChannel.HasValue)
+            return;
+
+        var channel = ent.Comp.CurrentChannel.Value;
+
+        if (!ent.Comp.SupportedChannels.Contains(channel))
+            ent.Comp.SupportedChannels.Add(channel);
+
+        SetIntercomChannel(ent, channel);
+
+        var activeRadio = EnsureComp<ActiveRadioComponent>(ent);
+        activeRadio.Channels.Clear();
+        activeRadio.Channels.Add(channel);
+    }
+    // SS220-news-intercom-init-end
 }

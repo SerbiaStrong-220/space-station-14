@@ -230,3 +230,58 @@
           CluwneCommsComputerCircuitboardUnconvertible:
             min: 1
             max: 1
+
+- type: entity
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  id: RadioStation
+  name: radio station
+  description: Let your voice be heard throughout the station!
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Machines/radiostation.rsi
+    state: radister
+  - type: Machine
+    board: RadioStationCircuitboard
+  - type: DeviceNetworkRequiresPower
+  - type: Transform
+    anchored: true
+    noRot: false
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Speech
+    speechVerb: Robotic
+  - type: TelecomExempt
+  - type: Language
+    knowAllLanguages: true
+  - type: Intercom
+    supportedChannels:
+    - News
+    currentChannel: News
+  - type: RadioMicrophone
+    powerRequired: true
+    unobstructedRequired: true
+    listenRange: 2
+    toggleOnInteract: false
+  - type: RadioSpeaker
+    toggleOnInteract: false
+    channels:
+    - News
+  - type: ActivatableUI
+    key: enum.IntercomUiKey.Key
+  - type: ActivatableUIRequiresVision
+  - type: UserInterface
+    interfaces:
+      enum.IntercomUiKey.Key:
+        type: IntercomBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
