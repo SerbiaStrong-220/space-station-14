@@ -691,3 +691,34 @@
   - type: Icon
     state: pda-JR
 
+- type: entity
+  parent: SalvagePDA
+  id: SalvagePDAJR
+  name: salvager JR PDA
+  description: A special PDA for Junk Recyclers recycler.
+  suffix: For playtime
+  components:
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-salvage-JR
+  - type: PdaBorderColor
+    borderColor: "#363235"
+    accentHColor: "#7f482a"
+  - type: Sprite
+    layers:
+    - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda"
+    - state: "screen-JR"
+      shader: "unshaded"
+    - state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      visible: false
+  - type: Icon
+    state: pda-salvage-JR
+

@@ -5,6 +5,7 @@ flavor-complex-skooma = как сладкие мечты
 flavor-complex-olivier = как праздник
 flavor-base-bnuuynyatina = не бнууйно
 flavor-base-driedbnuuynyatina = пламенно бнууйно
+flavor-complex-Orion-Nebula = как ягодный джин-тоник
 flavor-complex-sawdustporridge = отчаяние
 flavor-complex-sawdustsoup = ужасно
 flavor-complex-chocolatewhite = как ванильная карамель

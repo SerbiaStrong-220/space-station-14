@@ -1,0 +1,51 @@
+- type: entity
+  id: KitchenFoodProcessor
+  parent: [ BaseMachinePowered, SmallConstructibleMachine ]
+  name: food processor
+  description: An industrial machine for processing meat and other food. Keep your hands clear of the intake.
+  components:
+  - type: FoodProcessor
+    capacity: 6
+    processingTime: 3.5
+  - type: InteractionOutline
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.17,0,0.20,0.4"
+        mask:
+        - TabletopMachineMask
+        layer:
+        - TabletopMachineLayer
+  - type: Sprite
+    sprite: SS220/Structures/Machines/food_processor.rsi
+    drawdepth: LargeObjects
+    snapCardinals: true
+    offset: "0.0,0.25"
+    layers:
+    - state: processor
+  - type: ApcPowerReceiver
+    powerLoad: 5
+  - type: PowerState
+    idlePowerDraw: 5
+    workingPowerDraw: 600
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Breakage" ]
+  - type: Machine
+    board: FoodProcessorMachineCircuitboard
+  - type: ContainerContainer
+    containers:
+      foodProcessorInput: !type:Container
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: EmptyOnMachineDeconstruct
+    containers:
+    - foodProcessorInput

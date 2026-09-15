@@ -137,6 +137,31 @@
   equipment:
     id: JanitorPDA
 
+#Backpack
+- type: loadout
+  id: ClothingBackpackJanitorJR
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: JanitorJR
+  equipment:
+    back: ClothingBackpackJanitorJR
+
+- type: loadout
+  id: ClothingBackpackJanitorJRDuffel
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: JanitorJR
+  equipment:
+    back: ClothingBackpackJanitorJRDuffel
+
+- type: loadout
+  id: ClothingBackpackJanitorJRSatchel
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: JanitorJR
+  equipment:
+    back: ClothingBackpackJanitorJRSatchel
+
 #Head
 - type: loadout
   id: JanitorOrangeHat
