@@ -153,6 +153,18 @@
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Coats/qm_warehouseman.rsi
 
+- type: entity
+  parent: ClothingOuterStorageFoldableBase
+  id: ClothingOuterCoatQMExpensiveCoat
+  name: quartermaster's expensive coat
+  description: An expensive natural fur coat. You definitely shouldn't have spent the station's budget on buying it... Beware of internal investigations.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/qm_expensive_coat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/qm_expensive_coat.rsi
+
 # Engineering
 - type: entity
   parent: ClothingOuterStorageBase
