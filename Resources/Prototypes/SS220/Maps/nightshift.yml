@@ -35,6 +35,7 @@
             SecurityCadet: [ 2, 2 ]
             SecurityPilot: [ 1, 1 ]
             SeniorOfficer: [ 1, 1 ]
+            #SecurityBorg: [ 1, 1 ] #SS220 ToDo SecurityBorg
             #Engineering
             ChiefEngineer: [ 1, 1 ]
             StationEngineer: [ 2, 2 ]
