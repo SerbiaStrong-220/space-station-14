@@ -3,4 +3,4 @@
 - type: flavor
   id: menacing
   flavorType: Complex
-  description: На вкус зловеще
+  description: flavor-complex-menacing
