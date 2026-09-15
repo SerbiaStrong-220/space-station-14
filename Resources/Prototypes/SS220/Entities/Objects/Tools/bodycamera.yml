@@ -1,21 +1,26 @@
 - type: entity
   abstract: true
   parent: BaseItem
-  id: BodyCamera
+  id: BaseBodyCamera
   name: нагрудная камера
-  description: Нагрудная камера, за вами всегда будут смотреть.
+  description: За вами всегда будут смотреть.
   components:
-  - type: Item
-    size: Tiny
   - type: Sprite
     sprite: SS220/Objects/Tools/bodycam.rsi
     state: icon
-  - type: Eye
-  - type: WirelessNetworkConnection
+  - type: Clothing
+    sprite: SS220/Objects/Tools/bodycam.rsi
+    quickEquip: false
+    slots:
+    - neck
+  - type: Item
+    size: Normal
+
   - type: UserInterface
     interfaces:
       enum.SurveillanceCameraSetupUiKey.Camera:
         type: SurveillanceCameraSetupBoundUi
+  - type: WirelessNetworkConnection
   - type: DeviceNetwork
     deviceNetId: Wired
     receiveFrequencyId: SurveillanceBodyCameraSecurity
@@ -28,28 +33,53 @@
   - type: SurveillanceCameraMicrophone
     blacklist:
       components:
-        - SurveillanceCamera
-        - SurveillanceCameraMonitor
-        - RadioSpeaker
+      - SurveillanceCamera
+      - SurveillanceCameraMonitor
+      - RadioSpeaker
+
   - type: ActiveListener
-    range: 10
+    range: 6
+
   - type: StationAiVision
+  - type: Eye
   - type: DetectiveCamera
   - type: WearableCamera
+
   - type: Tag
     tags:
-    - DetectiveCamera
+      - DetectiveCamera
 
 - type: entity
-  id: BodySecurityCamera
-  parent: BodyCamera
+  id: BodyCameraSecurity
+  parent: BaseBodyCamera
+  name: нагрудная камера
+  description: Нагрудная камера с функцией записи звука. Позволяет сохранять аудиозаписи и автоматически создавать их текстовую стенограмму.
   components:
   - type: SurveillanceCamera
     networkSet: true
     id: "Нагрудная камера"
     active: false
-  - type: Clothing
-    sprite: SS220/Objects/Tools/bodycam.rsi
-    quickEquip: false
+  - type: TapeRecorder
+  - type: UseDelay
+    delay: 1
+  - type: ContainerContainer
+    containers:
+      cassette_tape: !type:ContainerSlot
+  - type: ItemSlots
     slots:
-    - neck
+      cassette_tape:
+        priority: 4
+        whitelist:
+          components:
+          - FitsInTapeRecorder
+  - type: UserInterface
+    interfaces:
+      enum.SurveillanceCameraSetupUiKey.Camera:
+        type: SurveillanceCameraSetupBoundUi
+      enum.TapeRecorderUIKey.Key:
+        type: TapeRecorderBoundUserInterface
+  - type: ActivatableUI
+    key: enum.TapeRecorderUIKey.Key
+    inHandsOnly: true
+    requireActiveHand: false
+    verbOnly: true
