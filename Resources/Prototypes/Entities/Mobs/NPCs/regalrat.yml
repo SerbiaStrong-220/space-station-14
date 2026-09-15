@@ -153,6 +153,10 @@
   - type: TTS
     voice: hagraven
   #SS220-AddTTSRatKing end
+  #SS220-NightVision-BGN
+  - type: ScotopicVision
+    energy: 0.48
+  #SS220-NightVision-END
 
 - type: entity
   id: MobRatKingBuff
@@ -335,6 +339,10 @@
   - type: FireVisuals
     sprite: Mobs/Effects/onfire.rsi
     normalState: Mouse_burning
+  #SS220-NightVision-BGN
+  - type: ScotopicVision
+    energy: 0.48
+  #SS220-NightVision-END
 
 - type: entityTable
   id: RatKingLoot

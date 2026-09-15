@@ -131,6 +131,9 @@
     telepathyChannelPrototype: TelepathyChannelHive
   - type: FlashImmunity
   - type: Lifesteal
+  - type: ScotopicVision
+    radius: 8
+    energy: 0.48
 
 - type: entity
   parent: BaseMobSpiderQueen
