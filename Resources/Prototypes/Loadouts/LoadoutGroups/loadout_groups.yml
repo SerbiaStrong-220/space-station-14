@@ -1558,6 +1558,7 @@
   loadouts:
   - SecurityBelt
   - SecurityWebbing
+  - SecurityCorporateJudo #SS220 add corp judo in loadout
 
 - type: loadoutGroup
   id: SecurityOuterClothing
