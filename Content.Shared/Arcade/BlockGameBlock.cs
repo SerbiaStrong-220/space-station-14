@@ -1,4 +1,4 @@
-﻿using Robust.Shared.Serialization;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Arcade
 {
@@ -52,20 +52,22 @@ namespace Content.Shared.Arcade
         {
             return inColor switch
             {
-                BlockGameBlockColor.Red => Color.Red,
+                //SS220-block-game-visuals begin
+                BlockGameBlockColor.Red => new(220, 32, 32),
                 BlockGameBlockColor.Orange => Color.Orange,
                 BlockGameBlockColor.Yellow => Color.Yellow,
                 BlockGameBlockColor.Green => Color.Lime,
-                BlockGameBlockColor.Blue => Color.Blue,
-                BlockGameBlockColor.Purple => Color.DarkOrchid,
+                BlockGameBlockColor.Blue => new(32, 96, 220),
+                BlockGameBlockColor.Purple => new(128, 0, 220),
                 BlockGameBlockColor.LightBlue => Color.Cyan,
-                BlockGameBlockColor.GhostRed => Color.Red.WithAlpha(0.33f),
+                BlockGameBlockColor.GhostRed => new(220, 32, 32, 85),
                 BlockGameBlockColor.GhostOrange => Color.Orange.WithAlpha(0.33f),
                 BlockGameBlockColor.GhostYellow => Color.Yellow.WithAlpha(0.33f),
                 BlockGameBlockColor.GhostGreen => Color.Lime.WithAlpha(0.33f),
-                BlockGameBlockColor.GhostBlue => Color.Blue.WithAlpha(0.33f),
-                BlockGameBlockColor.GhostPurple => Color.DarkOrchid.WithAlpha(0.33f),
+                BlockGameBlockColor.GhostBlue => new(32, 96, 220, 85),
+                BlockGameBlockColor.GhostPurple => new(128, 0, 220, 85),
                 BlockGameBlockColor.GhostLightBlue => Color.Cyan.WithAlpha(0.33f),
+                //SS220-block-game-visuals end
                 _ => Color.Olive //olive is error
             };
         }
