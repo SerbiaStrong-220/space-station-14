@@ -21,7 +21,6 @@
 - type: loadoutGroup
   id: CAPHeadset
   name: loadout-group-cap-headset
-  minLimit: 1
   loadouts:
   - CaptainHeadset
   - CaptainHeadsetAlt
@@ -31,7 +30,6 @@
 - type: loadoutGroup
   id: HoPHeadset
   name: loadout-group-hop-headset
-  minLimit: 1
   loadouts:
   - HoPHeadset
   - HoPHeadsetAlt
@@ -41,7 +39,6 @@
 - type: loadoutGroup
   id: ChiefEngineerHeadset
   name: loadout-group-chief-engineer-headset
-  minLimit: 1
   loadouts:
   - ChiefEngineerHeadset
   - ChiefEngineerHeadsetAlt
@@ -51,7 +48,6 @@
 - type: loadoutGroup
   id: ChiefMedicalOfficerHeadset
   name: loadout-group-chief-medical-officer-headset
-  minLimit: 1
   loadouts:
   - ChiefMedicalOfficerHeadset
   - ChiefMedicalOfficerHeadsetAlt
@@ -59,9 +55,8 @@
 
   # Квартирмейстер (Начало)
 - type: loadoutGroup
-  id: QuartermasterHeadset 
+  id: QuartermasterHeadset
   name: loadout-group-quartermaster-headset
-  minLimit: 1
   loadouts:
   - QuartermasterHeadset
   - QuartermasterHeadsetAlt
@@ -71,7 +66,6 @@
 - type: loadoutGroup
   id: ResearchDirectorHeadset
   name: loadout-group-research-director-headset
-  minLimit: 1
   loadouts:
   - ResearchDirectorHeadset
   - ResearchDirectorHeadsetAlt
@@ -102,9 +96,15 @@
   - MagistrateMonocle
 
 - type: loadoutGroup
+  id: NanoTrasenRepresentativeNeck
+  name: loadout-group-ntr-neck
+  minLimit: 0
+  loadouts:
+  - NanoTrasenRepresentativeShoulderMantle
+
+- type: loadoutGroup
   id: NanoTrasenRepresentativeJumpsuit
   name: loadout-group-ntr-jumpsuit
-  minLimit: 1
   loadouts:
   - JumpsuitNTR
 
@@ -127,6 +127,7 @@
   name: loadout-group-ntr-outerclothing
   minLimit: 0
   loadouts:
+  - NanoTrasenRepresentativeJacket
   - NanoTrasenRepresentativeTrench
   - NanoTrasenRepresentativeFormalCoat
   - NanoTrasenRepresentativeFormalDress
@@ -134,7 +135,6 @@
 - type: loadoutGroup
   id: NanoTrasenRepresentativeHeadset
   name: loadout-group-ntr-headset
-  minLimit: 1
   loadouts:
   - NanoTrasenRepresentativeHeadset
   - NanoTrasenRepresentativeHeadsetAlt
@@ -184,7 +184,6 @@
 - type: loadoutGroup
   id: MagistrateHeadset
   name: loadout-group-magistrate-headset
-  minLimit: 1
   loadouts:
   - MagistrateHeadset
   - MagistrateHeadsetAlt
@@ -252,7 +251,6 @@
 - type: loadoutGroup
   id: IAAHeadset
   name: loadout-group-iaa-headset
-  minLimit: 1
   loadouts:
   - IAAHeadset
   - IAAHeadsetAlt
@@ -277,7 +275,6 @@
 - type: loadoutGroup
   id: LawyerHeadset
   name: loadout-group-lawyer-headset
-  minLimit: 1
   loadouts:
   - LawHeadset
   - LawHeadsetAlt
@@ -285,7 +282,6 @@
 - type: loadoutGroup
   id: LawyerBackpack
   name: loadout-group-lawyer-backpack
-  minLimit: 1
   loadouts:
   - CommonBackpack
   - CommonSatchel
