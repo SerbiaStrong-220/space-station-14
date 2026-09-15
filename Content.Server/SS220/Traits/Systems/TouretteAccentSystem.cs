@@ -5,8 +5,9 @@ using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Content.Shared.Speech;
+using Content.Server.SS220.Traits.Components;
 
-namespace Content.Server.SS220.TouretteSyndrome;
+namespace Content.Server.SS220.Traits.Systems;
 
 public sealed partial class TouretteAccentSystem : EntitySystem
 {
