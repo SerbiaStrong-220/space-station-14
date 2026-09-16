@@ -178,6 +178,10 @@
   - type: Cuffable
     handsPerCuff: 4
   #SS220-ArahnidHandReturn end
+  #SS220-arachnid-diet begin
+  - type: Hunger
+    baseDecayRate: 0.025 # x1.5
+  #SS220-arachnid-diet end
 
 - type: entity
   parent: OrganBase
@@ -290,6 +294,15 @@
 - type: entity
   parent: [ OrganBaseStomach, OrganArachnidInternal, OrganAnimalMetabolizer ]
   id: OrganArachnidStomach
+  #SS220-arachnid-diet begin
+  components:
+  - type: Stomach
+    specialDigestible:
+      tags:
+      - Meat
+      - Pill
+      - Omnivorous
+  #SS220-arachnid-diet end
 
 - type: entity
   parent: [ OrganBaseLiver, OrganSpriteHumanInternal, OrganArachnidInternal, OrganAnimalMetabolizer ]
