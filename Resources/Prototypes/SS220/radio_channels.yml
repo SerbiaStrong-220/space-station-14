@@ -214,7 +214,7 @@
 - type: radioChannel
   id: News
   name: chat-radio-news
-  keycode: 'р'
+  keycode: 'г'
   frequency: 1178
   color: "#2e9455"
   longRange: true

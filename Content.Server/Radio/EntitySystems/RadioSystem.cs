@@ -63,16 +63,15 @@ public sealed class RadioSystem : EntitySystem
         if (args.Channel != null && (component.Channels.Contains(args.Channel.ID) ||
             component.EncryptionKeyChannels.Contains(args.Channel.ID))) //SS220 PAI with encryption keys
         {
-            // SS220-listen-only-radio-begin
-            // Check if the channel is listen-only for this transmitter
+            // SS220-listen-only-radio begin
+            // Cannot transmit into a channel this transmitter only holds as listen-only
             var targetChannelId = new ProtoId<RadioChannelPrototype>(args.Channel.ID);
             if (component.ListenOnlyChannels.Contains(targetChannelId))
             {
-                // Cannot transmit to listen-only channels
                 args.Channel = null;
                 return;
             }
-            // SS220-listen-only-radio-end
+            // SS220-listen-only-radio end
 
             SendRadioMessage(uid, args.Message, args.Channel, uid, languageMessage: args.LanguageMessage /* SS220 languages */);
             args.Channel = null; // prevent duplicate messages from other listeners.
@@ -107,27 +106,22 @@ public sealed class RadioSystem : EntitySystem
     /// <param name="radioSource">Entity that picked up the message and will send it, e.g. headset</param>
     public void SendRadioMessage(EntityUid messageSource, string message, RadioChannelPrototype channel, EntityUid radioSource, bool escapeMarkup = true, LanguageMessage? languageMessage = null, FixedPoint2? frequency = null  /* SS220-add-frequency-radio */)
     {
-        // SS220-listen-only-radio-begin
-        if (TryComp<EncryptionKeyHolderComponent>(radioSource, out var keyHolder))
+        // SS220-listen-only-radio begin
+        // Block transmission if the radio source only holds this channel as listen-only.
+        // Both aggregated sets already exclude one another (see EncryptionKeySystem.UpdateChannels),
+        // so a plain Contains check here is enough — no need to walk the key container.
+        if (TryComp<EncryptionKeyHolderComponent>(radioSource, out var keyHolder)
+            && keyHolder.ListenOnlyChannels.Contains(channel.ID))
         {
-            foreach (var keyUid in keyHolder.KeyContainer.ContainedEntities)
-            {
-                if (TryComp<EncryptionKeyComponent>(keyUid, out var key))
-                {
-                    if (key.ListenOnlyChannels.Contains(channel.ID))
-                    {
-                        return;
-                    }
-                }
-            }
+            return;
         }
 
-        if (TryComp<IntrinsicRadioTransmitterComponent>(radioSource, out var transmitter))
+        if (TryComp<IntrinsicRadioTransmitterComponent>(radioSource, out var transmitter)
+            && transmitter.ListenOnlyChannels.Contains(channel.ID))
         {
-            if (transmitter.ListenOnlyChannels.Contains(channel.ID))
-                return;
+            return;
         }
-        // SS220-listen-only-radio-end
+        // SS220-listen-only-radio end
 
         // TODO if radios ever garble / modify messages, feedback-prevention needs to be handled better than this.
         if (!_messages.Add(message))
@@ -192,14 +186,14 @@ public sealed class RadioSystem : EntitySystem
         {
             if (!radio.ReceiveAllChannels)
             {
-                // SS220-listen-only-radio-begin
+                // SS220-listen-only-radio begin
                 var targetChannelId = new ProtoId<RadioChannelPrototype>(channel.ID);
-                if (!((radio.Channels.Contains(targetChannelId) || radio.ListenOnlyChannels.Contains(targetChannelId)) 
+                if (!((radio.Channels.Contains(targetChannelId) || radio.ListenOnlyChannels.Contains(targetChannelId))
                     || radio.FrequencyChannels.Contains(targetChannelId)  /* SS220-add-frequency-radio */)
-                || (TryComp<IntercomComponent>(receiver, out var intercom) &&
-                                                             !intercom.SupportedChannels.Contains(channel.ID)))
+                    || (TryComp<IntercomComponent>(receiver, out var intercom) &&
+                        !intercom.SupportedChannels.Contains(channel.ID)))
                     continue;
-                // SS220-listen-only-radio-end
+                // SS220-listen-only-radio end
             }
 
             if (!channel.LongRange && transform.MapID != sourceMapId && !radio.GlobalReceive)
@@ -372,23 +366,19 @@ public sealed class RadioSystem : EntitySystem
     //SS220 PAI with encryption keys begin
     private void OnEncryptionChannelsChangeTransmitter(Entity<IntrinsicRadioTransmitterComponent> entity, ref EncryptionChannelsChangedEvent args)
     {
-        if (args.Component.Channels.Count == 0)
+        if (args.Component.Channels.Count == 0 && args.Component.ListenOnlyChannels.Count == 0)
         {
             entity.Comp.EncryptionKeyChannels.Clear();
-            // SS220-listen-only-radio-begin
-            entity.Comp.ListenOnlyChannels.Clear();
-            // SS220-listen-only-radio-end
+            entity.Comp.ListenOnlyChannels.Clear(); // SS220-listen-only-radio
         }
         else
         {
             entity.Comp.EncryptionKeyChannels = new(args.Component.Channels);
-            // SS220-listen-only-radio-begin
-            // Copy listen-only channels from encryption key
-            if (TryComp<EncryptionKeyComponent>(args.Component.Owner, out var key))
-            {
-                entity.Comp.ListenOnlyChannels = new(key.ListenOnlyChannels);
-            }
-            // SS220-listen-only-radio-end
+
+            // SS220-listen-only-radio begin
+            // Already aggregated on the holder — no need to look up EncryptionKeyComponent here.
+            entity.Comp.ListenOnlyChannels = new(args.Component.ListenOnlyChannels);
+            // SS220-listen-only-radio end
         }
     }
 
@@ -399,22 +389,15 @@ public sealed class RadioSystem : EntitySystem
         channels.UnionWith(args.Component.Channels);
         channels.UnionWith(entity.Comp.Channels);
 
-        // SS220-listen-only-radio-begin
-        HashSet<ProtoId<RadioChannelPrototype>> listenOnlyChannels = new();
-        if (TryComp<EncryptionKeyComponent>(args.Component.Owner, out var key))
-        {
-            listenOnlyChannels.UnionWith(key.ListenOnlyChannels);
-        }
-        // SS220-listen-only-radio-end
+        // SS220-listen-only-radio begin
+        HashSet<ProtoId<RadioChannelPrototype>> listenOnlyChannels = new(args.Component.ListenOnlyChannels);
+        // SS220-listen-only-radio end
 
         if (channels.Count > 0 || listenOnlyChannels.Count > 0)
         {
             var activeRadio = EnsureComp<ActiveRadioComponent>(entity.Owner);
             activeRadio.Channels = channels;
-
-            // SS220-listen-only-radio-begin
-            activeRadio.ListenOnlyChannels = listenOnlyChannels;
-            // SS220-listen-only-radio-end
+            activeRadio.ListenOnlyChannels = listenOnlyChannels; // SS220-listen-only-radio
 
             Dirty(entity.Owner, activeRadio);
         }

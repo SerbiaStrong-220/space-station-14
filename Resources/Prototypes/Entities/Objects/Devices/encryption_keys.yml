@@ -20,7 +20,6 @@
   - type: EncryptionKey
     channels:
     - Common
-    - News #SS220-news-intercom
     listenOnlyChannels:
     - News  #SS220-news-intercom
     defaultChannel: Common
@@ -81,7 +80,6 @@
     - Security
     - Service
     - Supply
-    - News #SS220-news-intercom
     defaultChannel: Command
     listenOnlyChannels:
     - News  #SS220-news-intercom

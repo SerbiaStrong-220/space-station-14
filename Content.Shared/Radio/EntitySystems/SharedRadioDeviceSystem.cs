@@ -44,30 +44,22 @@ public abstract class SharedRadioDeviceSystem : EntitySystem
         }
 
         _appearance.SetData(uid, RadioDeviceVisuals.Speaker, component.Enabled);
+
         if (component.Enabled)
         {
             var activeRadio = EnsureComp<ActiveRadioComponent>(uid);
             activeRadio.Channels.UnionWith(component.Channels);
 
-            // SS220-listen-only-radio-begin
-            // Direct initialization of ListenOnlyChannels from encryption keys
-            HashSet<ProtoId<RadioChannelPrototype>> listenOnly = new();
+            // SS220-listen-only-radio begin
+            // Listen-only channels are already aggregated on the key holder itself
+            // (see EncryptionKeySystem.UpdateChannels) — just pull them in, no need
+            // to walk the key container here.
             if (TryComp<EncryptionKeyHolderComponent>(uid, out var keyHolder))
-            {
-                foreach (var keyUid in keyHolder.KeyContainer.ContainedEntities)
-                {
-                    if (TryComp<EncryptionKeyComponent>(keyUid, out var key))
-                    {
-                        listenOnly.UnionWith(key.ListenOnlyChannels);
-                    }
-                }
-            }
-            activeRadio.ListenOnlyChannels = listenOnly;
-            Log.Info($"[SS220 Radio INIT] Initialized ListenOnlyChannels for {uid}. Count: {listenOnly.Count}");
-            // SS220-listen-only-radio-end
+                activeRadio.ListenOnlyChannels.UnionWith(keyHolder.ListenOnlyChannels);
+            // SS220-listen-only-radio end
 
             Dirty(uid, activeRadio);
         }
-    #endregion
     }
+    #endregion
 }

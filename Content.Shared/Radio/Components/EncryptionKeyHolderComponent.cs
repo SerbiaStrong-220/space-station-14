@@ -19,6 +19,14 @@ public sealed partial class EncryptionKeyHolderComponent : Component
     [DataField]
     public bool KeysUnlocked = true;
 
+    // SS220-ipc-builtin-radio begin
+    /// <summary>
+    ///     Whether channels are hidden from the examine menu (e.g. built-in radios).
+    /// </summary>
+    [DataField]
+    public bool ExamineHidden = false;
+    // SS220-ipc-builtin-radio end
+
     /// <summary>
     ///     The tool required to extract the encryption keys from the headset.
     /// </summary>
@@ -43,6 +51,17 @@ public sealed partial class EncryptionKeyHolderComponent : Component
     /// </summary>
     [ViewVariables]
     public HashSet<ProtoId<RadioChannelPrototype>> Channels = new();
+
+    // SS220-listen-only-radio begin
+    /// <summary>
+    ///     Combined set of listen-only radio channels provided by all contained keys.
+    ///     Kept separate from <see cref="Channels"/> on purpose — a channel should never
+    ///     be written into both sets at once (see EncryptionKeySystem.UpdateChannels,
+    ///     which is the single place that fills this in).
+    /// </summary>
+    [ViewVariables]
+    public HashSet<ProtoId<RadioChannelPrototype>> ListenOnlyChannels = new();
+    // SS220-listen-only-radio end
 
     /// <summary>
     ///     This is the channel that will be used when using the default/department prefix (<see cref="SharedChatSystem.DefaultChannelKey"/>).

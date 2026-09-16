@@ -1,6 +1,8 @@
 using Content.Shared.Chat;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Set;
 
 namespace Content.Shared.Radio.Components;
 
@@ -28,11 +30,14 @@ public sealed partial class EncryptionKeyComponent : Component
     public ProtoId<RadioChannelPrototype>? DefaultFrequencyChannel;
     // SS220-add-frequency-radio-end
 
-    // SS220-listen-only-radio-begin
     /// <summary>
-    ///     Channels that the headset/key can listen to, but cannot transmit to.
+    /// SS220 Radiostation
+    /// Channels this key allows ONLY listening on (no transmission).
+    /// A channel must never appear in both <see cref="Channels"/> and this set —
+    /// pick one or the other, never both, to avoid double bookkeeping.
     /// </summary>
-    [DataField]
-    public HashSet<ProtoId<RadioChannelPrototype>> ListenOnlyChannels = new();
-    // SS220-listen-only-radio-end
+    [DataField("listenOnlyChannels", customTypeSerializer: typeof(PrototypeIdHashSetSerializer<RadioChannelPrototype>))]
+    public HashSet<string> ListenOnlyChannels = new();
+    // SS220 Radiostation end
+
 }
