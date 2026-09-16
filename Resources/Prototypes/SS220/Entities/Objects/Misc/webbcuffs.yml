@@ -36,6 +36,9 @@
   id: WebCuffsBroken
   parent: BaseHandcuffsBroken
   components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/webbcuffs.rsi
+    state: handcuff_web
   - type: TimedDespawn
     lifetime: 0.1
 
