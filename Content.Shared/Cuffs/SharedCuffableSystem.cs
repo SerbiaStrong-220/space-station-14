@@ -463,15 +463,17 @@ namespace Content.Shared.Cuffs
 
                 _hands.DoDrop(uid, hand, true);
                 freeHands++;
-                if (freeHands == 2)
+                if (freeHands == component.HandsPerCuff) //SS220-ArahnidHandReturn
                     break;
             }
 
-            if (_virtualItem.TrySpawnVirtualItemInHand(handcuff, uid, out var virtItem1))
-                EnsureComp<UnremoveableComponent>(virtItem1.Value);
-
-            if (_virtualItem.TrySpawnVirtualItemInHand(handcuff, uid, out var virtItem2))
-                EnsureComp<UnremoveableComponent>(virtItem2.Value);
+            //SS220-ArahnidHandReturn begin
+            for (var i = 0; i < component.HandsPerCuff; i++)
+            {
+                if (_virtualItem.TrySpawnVirtualItemInHand(handcuff, uid, out var virtItem))
+                    EnsureComp<UnremoveableComponent>(virtItem.Value);
+            }
+            //SS220-ArahnidHandReturn end
         }
 
         /// <summary>

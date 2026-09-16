@@ -72,6 +72,7 @@
       uiWindowPos: 3,1
       strippingWindowPos: 1,5
       displayName: Belt
+    #SS220-ArahnidHandReturn begin
     #- name: back
     #  slotTexture: back
     #  fullTextureName: template_small
@@ -103,6 +104,7 @@
     #  uiWindowPos: 0,4
     #  strippingWindowPos: 0,3
     #  displayName: Pocket 3
+    #SS220-ArahnidHandReturn end
     - name: outerClothing
       slotTexture: suit
       slotFlags: OUTERCLOTHING

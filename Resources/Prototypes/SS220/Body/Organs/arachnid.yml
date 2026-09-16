@@ -1,5 +1,11 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+- type: organCategory
+  id: SecondHandLeft
+
+- type: organCategory
+  id: SecondHandRight
+
 - type: entity
   parent: OrganArachnid
   id: OrganArachnidHandLeftSecondary
