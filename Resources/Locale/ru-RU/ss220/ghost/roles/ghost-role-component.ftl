@@ -7,10 +7,6 @@ ghost-role-information-lost-cargo-technical-name = Пропавший грузч
 ghost-role-information-lost-cargo-technical-description = Что-то пошло не так, и ваш грузовой шаттл с грузом был телепо…
 ghost-role-information-lost-cargo-technical-rules = Вы - обычный грузчик с другой станции. Делайте то, что делают обычн…
 
-ghost-role-information-disaster-victim-name = Жертва катастрофы
-ghost-role-information-disaster-victim-description = Вы спаслись на спасательной капсуле с другой станции, которую постигла ужасная участь. Возможно, вас найдут и спасут.
-ghost-role-information-disaster-victim-rules = Действуют обычные правила для экипажа станции.
-
 ghost-role-information-clown-troupe-name = Космический клоун
 ghost-role-information-clown-troupe-description = Вы и ваша труппа прибыли, чтобы развеселить эту станцию своими лучшим…
 ghost-role-information-clown-troupe-rules = Действуют обычные правила для экипажа станции.
@@ -54,7 +50,7 @@ ghost-role-information-redwings-officer-rules =
     Ваши задачи: [color=red][bold]Избегайте ненужного боя[/bold][/color].
     Руководите отрядом.
     Координируйте спасательные операции.
-    Ваш главный приоритет  успешная эвакуация клиентов и выполнение контракта по страховке. 
+    Ваш главный приоритет  успешная эвакуация клиентов и выполнение контракта по страховке.
 # Lost souls roles end
 
 ghost-role-information-giant-fly-name = Веспия

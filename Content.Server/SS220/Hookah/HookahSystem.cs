@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Systems;
@@ -20,6 +21,7 @@ using Content.Shared.SS220.Hookah;
 using Content.Shared.SS220.Hookah.Components;
 using Content.Shared.SS220.HookahElectric.Components;
 using Content.Shared.Stacks;
+using Content.Shared.Tag;
 using Content.Shared.Temperature;
 using Content.Shared.Timing;
 using Robust.Server.GameObjects;
@@ -44,6 +46,7 @@ public sealed partial class HookahSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedSolutionContainerSystem _solutions = default!;
     [Dependency] private SharedStackSystem _stack = default!;
+    [Dependency] private TagSystem _tag = default!;
     [Dependency] private TransformSystem _transform = default!;
     [Dependency] private UseDelaySystem _useDelay = default!;
 
@@ -69,7 +72,7 @@ public sealed partial class HookahSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<HookahComponent, ComponentInit>(OnInit);
+        SubscribeLocalEvent<HookahComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<HookahComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<HookahComponent, InteractHandEvent>(OnInteractHand);
         SubscribeLocalEvent<HookahComponent, InteractUsingEvent>(OnInteractUsing);
@@ -81,9 +84,6 @@ public sealed partial class HookahSystem : EntitySystem
         SubscribeLocalEvent<HookahHoseComponent, DroppedEvent>(OnHoseDropped);
         SubscribeLocalEvent<HookahHoseComponent, EntParentChangedMessage>(OnHoseParentChanged);
 
-        SubscribeLocalEvent<SmokingFuelComponent, ComponentInit>(OnFuelInit);
-        SubscribeLocalEvent<SmokingFuelComponent, ComponentShutdown>(OnFuelShutdown);
-
         InitializeElectric();
     }
 
@@ -93,20 +93,7 @@ public sealed partial class HookahSystem : EntitySystem
         UpdateCoal(frameTime);
     }
 
-    private void OnFuelInit(Entity<SmokingFuelComponent> ent, ref ComponentInit args)
-    {
-        if (!HasComp<ItemSlotsComponent>(ent))
-            return;
-
-        if (_itemSlots.TryGetSlot(ent, SmokingFuelComponent.TobaccoSlotId, out var slot))
-            ent.Comp.TobaccoSlot = slot;
-    }
-
-    private void OnFuelShutdown(Entity<SmokingFuelComponent> ent, ref ComponentShutdown args)
-    {
-    }
-
-    private void OnInit(Entity<HookahComponent> ent, ref ComponentInit args)
+    private void OnStartup(Entity<HookahComponent> ent, ref ComponentStartup args)
     {
         if (!HasComp<ItemSlotsComponent>(ent))
         {
@@ -199,7 +186,7 @@ public sealed partial class HookahSystem : EntitySystem
 
         if (TryComp<SmokingFuelComponent>(ent, out var fuel) && IsTobacco(args.Used, fuel))
         {
-            InsertTobacco(ent, ref args, fuel);
+            InsertTobacco(ent, ref args);
             return;
         }
 
@@ -259,18 +246,21 @@ public sealed partial class HookahSystem : EntitySystem
         args.Handled = true;
     }
 
-    private void InsertTobacco(Entity<HookahComponent> ent, ref InteractUsingEvent args, SmokingFuelComponent fuel)
+    private void InsertTobacco(Entity<HookahComponent> ent, ref InteractUsingEvent args)
     {
-        if (fuel.TobaccoSlot.Item != null)
+        if (!TryGetTobaccoSlot(ent, out var tobaccoSlot))
+            return;
+
+        if (tobaccoSlot.Item != null)
         {
             _popup.PopupEntity(Loc.GetString(HookahTobaccoSlotFull), ent, args.User);
             args.Handled = true;
             return;
         }
 
-        if (_itemSlots.TryInsert(ent, fuel.TobaccoSlot, args.Used, args.User))
+        if (_itemSlots.TryInsert(ent, tobaccoSlot, args.Used, args.User))
         {
-            _itemSlots.SetLock(ent, fuel.TobaccoSlot, true);
+            _itemSlots.SetLock(ent, tobaccoSlot, true);
             _popup.PopupEntity(Loc.GetString(HookahTobaccoInserted), ent, args.User);
         }
 
@@ -395,23 +385,25 @@ public sealed partial class HookahSystem : EntitySystem
             return true;
         }
 
-        if (fuel.TobaccoSlot.Item is not { } tobacco || !IsTobacco(tobacco, fuel))
+        if (!TryGetTobaccoSlot(hookah, out var tobaccoSlot) ||
+            tobaccoSlot.Item is not { } tobacco ||
+            !IsTobacco(tobacco, fuel))
         {
             _popup.PopupEntity(Loc.GetString(HookahTobaccoEmpty), hose, user);
             return false;
         }
 
-        _itemSlots.SetLock(hookah, fuel.TobaccoSlot, false);
+        _itemSlots.SetLock(hookah, tobaccoSlot, false);
 
         if (TryComp<StackComponent>(tobacco, out var stack) && stack.Count > 1)
         {
             _stack.TryUse((tobacco, stack), 1);
-            _itemSlots.SetLock(hookah, fuel.TobaccoSlot, true);
+            _itemSlots.SetLock(hookah, tobaccoSlot, true);
         }
         else
         {
-            if (fuel.TobaccoSlot.ContainerSlot != null)
-                _container.Remove(tobacco, fuel.TobaccoSlot.ContainerSlot);
+            if (tobaccoSlot.ContainerSlot != null)
+                _container.Remove(tobacco, tobaccoSlot.ContainerSlot);
 
             QueueDel(tobacco);
         }
@@ -422,7 +414,12 @@ public sealed partial class HookahSystem : EntitySystem
 
     private bool IsTobacco(EntityUid uid, SmokingFuelComponent fuel)
     {
-        return MetaData(uid).EntityPrototype?.ID is { } id && id == fuel.TobaccoId;
+        return _tag.HasTag(uid, fuel.TobaccoTag);
+    }
+
+    private bool TryGetTobaccoSlot(Entity<HookahComponent> hookah, [NotNullWhen(true)] out ItemSlot? slot)
+    {
+        return _itemSlots.TryGetSlot(hookah, SmokingFuelComponent.TobaccoSlotId, out slot);
     }
 
     private void Exhale(EntityUid user, HookahComponent hookah)
@@ -643,7 +640,8 @@ public sealed partial class HookahSystem : EntitySystem
         if (!args.IsInDetailsRange || !TryComp<SmokingFuelComponent>(ent, out var fuel))
             return;
 
-        if (fuel.TobaccoPuffs > 0 || fuel.TobaccoSlot.Item != null)
+        if (fuel.TobaccoPuffs > 0 ||
+            TryGetTobaccoSlot(ent, out var tobaccoSlot) && tobaccoSlot.Item != null)
             args.PushText(Loc.GetString(HookahExamineTobacco, ("puffs", fuel.TobaccoPuffs)));
 
         if (TryComp<HookahCoalHolderComponent>(ent, out _) &&
