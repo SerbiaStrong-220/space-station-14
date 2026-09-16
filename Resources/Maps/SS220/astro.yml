@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 09/16/2026 09:17:12
-  entityCount: 58529
+  time: 09/16/2026 10:21:33
+  entityCount: 58517
 maps:
 - 1
 grids:
@@ -37608,7 +37608,8 @@ entities:
           1,7:
             0: 61901
           1,8:
-            0: 4095
+            0: 4093
+            3: 2
           2,5:
             0: 20479
           2,6:
@@ -37727,12 +37728,12 @@ entities:
             0: 8176
           3,17:
             0: 2176
-            3: 14128
+            4: 14128
           4,18:
             0: 29047
           3,18:
             0: 61576
-            3: 51
+            4: 51
           4,19:
             0: 1911
           3,19:
@@ -37966,10 +37967,10 @@ entities:
             0: 65520
           2,17:
             0: 4368
-            3: 52424
+            4: 52424
           2,18:
             0: 61457
-            3: 204
+            4: 204
           2,19:
             0: 65535
           2,20:
@@ -38048,7 +38049,7 @@ entities:
             2: 57344
           16,11:
             0: 61491
-            4: 136
+            5: 136
           16,16:
             2: 61183
           17,12:
@@ -38062,7 +38063,7 @@ entities:
             2: 12288
           17,11:
             0: 61440
-            4: 221
+            5: 221
           17,16:
             2: 13311
           18,12:
@@ -38076,7 +38077,7 @@ entities:
             2: 49152
           18,11:
             0: 61440
-            4: 102
+            5: 102
           18,16:
             2: 15
           19,12:
@@ -38090,7 +38091,7 @@ entities:
             2: 28672
           19,11:
             0: 64648
-            4: 51
+            5: 51
           19,16:
             2: 15
           20,14:
@@ -39305,7 +39306,7 @@ entities:
           20,11:
             0: 1
             2: 8750
-            4: 34816
+            5: 34816
           17,4:
             2: 2552
           17,5:
@@ -39636,7 +39637,7 @@ entities:
             0: 65523
           3,-8:
             0: 65288
-            3: 3
+            4: 3
           4,-7:
             0: 30495
           3,-7:
@@ -39689,16 +39690,16 @@ entities:
             0: 56575
           2,-8:
             0: 65297
-            3: 76
+            4: 76
           2,-7:
             0: 65359
           2,-6:
             0: 20479
           2,-9:
             0: 4575
-            3: 59392
+            4: 59392
           3,-9:
-            3: 12544
+            4: 12544
             0: 34995
           -4,-9:
             0: 61679
@@ -39714,16 +39715,16 @@ entities:
             0: 62719
           -3,-8:
             0: 65280
-            3: 78
+            4: 78
           -3,-7:
             0: 56591
           -3,-6:
             0: 61661
           -3,-9:
-            3: 59392
+            4: 59392
             0: 221
           -2,-8:
-            3: 3
+            4: 3
             0: 65484
           -2,-7:
             0: 30495
@@ -39732,7 +39733,7 @@ entities:
           -2,-5:
             0: 3831
           -2,-9:
-            3: 4352
+            4: 4352
             0: 52447
           -1,-9:
             0: 55807
@@ -40409,7 +40410,7 @@ entities:
             0: 65423
           10,24:
             0: 30479
-            4: 34816
+            5: 34816
           11,20:
             2: 15
             0: 53232
@@ -40422,7 +40423,7 @@ entities:
             0: 65343
           11,24:
             0: 52239
-            4: 13056
+            5: 13056
           12,21:
             2: 1023
             0: 53248
@@ -40741,12 +40742,12 @@ entities:
             2: 1
           20,12:
             2: 8738
-            4: 34952
+            5: 34952
           20,13:
             2: 226
             0: 57344
           21,12:
-            4: 13107
+            5: 13107
             0: 3072
             2: 32904
           21,13:
@@ -40758,7 +40759,7 @@ entities:
           21,15:
             2: 247
           21,11:
-            4: 13056
+            5: 13056
             0: 16400
             2: 34959
           22,12:
@@ -41495,7 +41496,7 @@ entities:
             0: 32736
           10,25:
             0: 47879
-            4: 8
+            5: 8
           10,26:
             0: 13243
             2: 32768
@@ -41508,7 +41509,7 @@ entities:
             2: 31
             0: 57344
           11,25:
-            4: 3
+            5: 3
             0: 47900
           11,26:
             0: 443
@@ -42409,6 +42410,11 @@ entities:
         - volume: 2500
           immutable: True
           moles: {}
+        - volume: 2500
+          temperature: 293.14975
+          moles:
+            Oxygen: 20.078888
+            Nitrogen: 75.53487
         - volume: 2500
           temperature: 293.15
           moles:
@@ -48848,7 +48854,7 @@ entities:
       pos: -27.5,-28.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -146698.98
+      secondsUntilStateChange: -146759.86
       state: Opening
   - uid: 555
     components:
@@ -48902,7 +48908,7 @@ entities:
       pos: -27.5,-27.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -146729.23
+      secondsUntilStateChange: -146790.11
       state: Opening
   - uid: 562
     components:
@@ -53824,7 +53830,7 @@ entities:
       pos: -29.5,23.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -404472.44
+      secondsUntilStateChange: -404533.3
       state: Opening
   - uid: 1197
     components:
@@ -69286,12 +69292,6 @@ entities:
     - type: Transform
       pos: 8.5834055,28.596117
       parent: 2
-  - uid: 3633
-    components:
-    - type: Transform
-      parent: 3632
-    - type: Physics
-      canCollide: False
   - uid: 3646
     components:
     - type: Transform
@@ -69316,12 +69316,6 @@ entities:
       parent: 2
 - proto: BookChemicalCompendium
   entities:
-  - uid: 3634
-    components:
-    - type: Transform
-      parent: 3632
-    - type: Physics
-      canCollide: False
   - uid: 3650
     components:
     - type: Transform
@@ -69370,12 +69364,6 @@ entities:
       parent: 2
 - proto: BookEngineersHandbook
   entities:
-  - uid: 3635
-    components:
-    - type: Transform
-      parent: 3632
-    - type: Physics
-      canCollide: False
   - uid: 3661
     components:
     - type: Transform
@@ -69405,12 +69393,6 @@ entities:
       parent: 2
 - proto: BookHowToCookForFortySpaceman
   entities:
-  - uid: 3636
-    components:
-    - type: Transform
-      parent: 3632
-    - type: Physics
-      canCollide: False
   - uid: 3666
     components:
     - type: Transform
@@ -69423,12 +69405,6 @@ entities:
       parent: 2
 - proto: BookHowToKeepStationClean
   entities:
-  - uid: 3637
-    components:
-    - type: Transform
-      parent: 3632
-    - type: Physics
-      canCollide: False
   - uid: 3668
     components:
     - type: Transform
@@ -69441,12 +69417,6 @@ entities:
       parent: 2
 - proto: BookHowToRockAndStone
   entities:
-  - uid: 3638
-    components:
-    - type: Transform
-      parent: 3632
-    - type: Physics
-      canCollide: False
   - uid: 3670
     components:
     - type: Transform
@@ -69454,12 +69424,6 @@ entities:
       parent: 2
 - proto: BookHowToSurvive
   entities:
-  - uid: 3639
-    components:
-    - type: Transform
-      parent: 3632
-    - type: Physics
-      canCollide: False
   - uid: 3671
     components:
     - type: Transform
@@ -69531,12 +69495,6 @@ entities:
       parent: 2
 - proto: BookLeafLoversSecret
   entities:
-  - uid: 3640
-    components:
-    - type: Transform
-      parent: 3632
-    - type: Physics
-      canCollide: False
   - uid: 3693
     components:
     - type: Transform
@@ -69575,12 +69533,6 @@ entities:
       canCollide: False
 - proto: BookMedicalReferenceBook
   entities:
-  - uid: 3641
-    components:
-    - type: Transform
-      parent: 3632
-    - type: Physics
-      canCollide: False
   - uid: 3701
     components:
     - type: Transform
@@ -69755,12 +69707,6 @@ entities:
       parent: 2
 - proto: BookScientistsGuidebook
   entities:
-  - uid: 3642
-    components:
-    - type: Transform
-      parent: 3632
-    - type: Physics
-      canCollide: False
   - uid: 3728
     components:
     - type: Transform
@@ -69789,12 +69735,6 @@ entities:
       parent: 2
 - proto: BookSecurity
   entities:
-  - uid: 3643
-    components:
-    - type: Transform
-      parent: 3632
-    - type: Physics
-      canCollide: False
   - uid: 3733
     components:
     - type: Transform
@@ -69842,72 +69782,6 @@ entities:
           occludes: True
           ents:
           - 3276
-  - uid: 3632
-    components:
-    - type: Transform
-      pos: 4.5,30.5
-      parent: 2
-    - type: UserInterface
-      actors:
-        enum.StorageUiKey.Key:
-        - invalid
-    - type: Storage
-      storedItems:
-        3643:
-          position: 0,0
-          _rotation: South
-        3633:
-          position: 1,0
-          _rotation: South
-        3641:
-          position: 2,0
-          _rotation: South
-        3635:
-          position: 3,0
-          _rotation: South
-        3642:
-          position: 4,0
-          _rotation: South
-        3636:
-          position: 5,0
-          _rotation: South
-        3634:
-          position: 6,0
-          _rotation: South
-        3638:
-          position: 7,0
-          _rotation: South
-        3637:
-          position: 8,0
-          _rotation: South
-        3640:
-          position: 9,0
-          _rotation: South
-        3639:
-          position: 10,0
-          _rotation: South
-        3644:
-          position: 11,0
-          _rotation: South
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 3643
-          - 3633
-          - 3641
-          - 3635
-          - 3642
-          - 3636
-          - 3634
-          - 3638
-          - 3637
-          - 3640
-          - 3639
-          - 3644
-    - type: ActiveUserInterface
   - uid: 3656
     components:
     - type: Transform
@@ -70308,14 +70182,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -37.508556,99.617065
       parent: 2
-- proto: BookTheBookOfControl
-  entities:
-  - uid: 3644
-    components:
-    - type: Transform
-      parent: 3632
-    - type: Physics
-      canCollide: False
 - proto: BookWatched
   entities:
   - uid: 3675
@@ -165150,12 +165016,27 @@ entities:
     - type: Transform
       pos: 5.5,32.5
       parent: 2
+    - type: EntityStorage
+      air:
+        volume: 200
+        immutable: False
+        temperature: 293.14673
+        moles:
+          Oxygen: 1.7459903
+          Nitrogen: 6.568249
 - proto: CrateServiceCustomSmokable
   entities:
   - uid: 21629
     components:
     - type: Transform
       pos: 62.5,-31.5
+      parent: 2
+- proto: CrateServiceGuidebooks
+  entities:
+  - uid: 1990
+    components:
+    - type: Transform
+      pos: 4.5,30.5
       parent: 2
 - proto: CrateServiceJanitorialSupplies
   entities:
@@ -167413,7 +167294,7 @@ entities:
       pos: 0.5,30.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -56234.734
+      secondsUntilStateChange: -56295.6
       state: Closing
   - uid: 21989
     components:
@@ -167601,7 +167482,7 @@ entities:
       pos: 0.5,-33.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -2911897
+      secondsUntilStateChange: -2911957.8
       state: Closing
   - uid: 22021
     components:
@@ -167648,7 +167529,7 @@ entities:
       pos: 57.5,-64.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1647470.4
+      secondsUntilStateChange: -1647531.2
       state: Closing
   - uid: 22029
     components:
@@ -167715,7 +167596,7 @@ entities:
       pos: 88.5,-62.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -968135.56
+      secondsUntilStateChange: -968196.44
       state: Closing
 - proto: CurtainsPink
   entities:
@@ -167782,7 +167663,7 @@ entities:
       pos: -46.5,-15.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -616136.75
+      secondsUntilStateChange: -616197.6
       state: Closing
   - uid: 22049
     components:
@@ -185989,7 +185870,7 @@ entities:
     - type: Label
       currentLabel: кофейный ликёр
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.65522367
+      sprayFizzinessThresholdRoll: 0.1362892
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -186014,7 +185895,7 @@ entities:
     - type: Label
       currentLabel: коньяк
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.6506934
+      sprayFizzinessThresholdRoll: 0.21554875
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -186207,7 +186088,7 @@ entities:
     - type: Label
       currentLabel: джин
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.611435
+      sprayFizzinessThresholdRoll: 0.9921617
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -187369,7 +187250,7 @@ entities:
     - type: Label
       currentLabel: ром
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.24205992
+      sprayFizzinessThresholdRoll: 0.5090603
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -187994,7 +187875,7 @@ entities:
     - type: Label
       currentLabel: текила
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.48291856
+      sprayFizzinessThresholdRoll: 0.9224861
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -188047,7 +187928,7 @@ entities:
     - type: Label
       currentLabel: вермут
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.28740472
+      sprayFizzinessThresholdRoll: 0.20770523
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -188083,7 +187964,7 @@ entities:
     - type: Label
       currentLabel: водка
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.153111
+      sprayFizzinessThresholdRoll: 0.18900552
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -188430,7 +188311,7 @@ entities:
     - type: Label
       currentLabel: виски
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.37014288
+      sprayFizzinessThresholdRoll: 0.032812253
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -281991,7 +281872,7 @@ entities:
       pos: 24.5,101.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -307216.06
+      secondsUntilStateChange: -307276.94
       state: Closing
   - uid: 38277
     components:
