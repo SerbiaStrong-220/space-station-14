@@ -72,20 +72,19 @@
       uiWindowPos: 3,1
       strippingWindowPos: 1,5
       displayName: Belt
+    - name: back
+      slotTexture: back
+      fullTextureName: template_small
+      slotFlags: BACK
+      slotGroup: SecondHotbar
+      stripTime: 6
+      uiWindowPos: 3,0
+      strippingWindowPos: 0,5
+      displayName: Back
+      blacklist:
+        tags:
+        - PetOnly
     #SS220-ArahnidHandReturn begin
-    #- name: back
-    #  slotTexture: back
-    #  fullTextureName: template_small
-    #  slotFlags: BACK
-    #  slotGroup: SecondHotbar
-    #  stripTime: 6
-    #  uiWindowPos: 3,0
-    # strippingWindowPos: 0,5
-    # displayName: Back
-    #  blacklist:
-    #    tags:
-    #    - PetOnly
-
     #- name: pocket4
     #  slotTexture: web
     #  fullTextureName: template_small
@@ -140,14 +139,16 @@
       #ss220 add fully hidden pockets start
       fullyHidden: true
       #ss220 add fully hidden pockets end
-    - name: suitstorage
-      slotTexture: suit_storage
-      slotFlags:   SUITSTORAGE
-      slotGroup: MainHotbar
-      stripTime: 3
-      uiWindowPos: 2,0
-      strippingWindowPos: 2,5
-      dependsOn: outerClothing
-      dependsOnComponents:
-      - type: AllowSuitStorage
-      displayName: Suit Storage
+    #SS220-ArahnidHandReturn begin 
+    #- name: suitstorage
+    # slotTexture: suit_storage
+    # slotFlags:   SUITSTORAGE
+    # slotGroup: MainHotbar
+    # stripTime: 3
+    # uiWindowPos: 2,0
+    # strippingWindowPos: 2,5
+    # dependsOn: outerClothing
+    # dependsOnComponents:
+    # - type: AllowSuitStorage
+    # displayName: Suit Storage
+    #SS220-ArahnidHandReturn end
