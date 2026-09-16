@@ -12,7 +12,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.SS220.Ipc;
 
-public sealed partial class IpcSystem : EntitySystem
+public sealed partial class IpcSystem : SharedIpcSystem
 {
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private IGameTiming _timing = default!;

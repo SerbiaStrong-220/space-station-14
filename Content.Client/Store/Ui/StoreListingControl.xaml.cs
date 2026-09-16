@@ -37,6 +37,7 @@ public sealed partial class StoreListingControl : Control
         StoreItemName.Text = ListingLocalisationHelpers.GetLocalisedNameOrEntityName(_data, _prototype);
         StoreItemDescription.SetMessage(ListingLocalisationHelpers.GetLocalisedDescriptionOrEntityDescription(_data, _prototype));
 
+        UpdateRemainingStockText(); // SS220 pirate market
         UpdateBuyButtonText();
         StoreItemBuyButton.Disabled = !CanBuy();
 
@@ -48,12 +49,28 @@ public sealed partial class StoreListingControl : Control
         if (!_hasBalance)
             return false;
 
+        // SS220 pirate market begin
+        if (_data.PurchaseLimit is { } purchaseLimit && _data.PurchaseAmount >= purchaseLimit)
+            return false;
+        // SS220 pirate market end
+
         var stationTime = _timing.CurTime.Subtract(_ticker.RoundStartTimeSpan);
         if (_data.RestockTime > stationTime)
             return false;
 
         return true;
     }
+
+    // SS220 pirate market begin
+    private void UpdateRemainingStockText()
+    {
+        if (_data.PurchaseLimit is not { } purchaseLimit)
+            return;
+
+        var remaining = Math.Max(0, purchaseLimit - _data.PurchaseAmount);
+        RemainingStockText.Text = Loc.GetString("store-ui-stock-remaining", ("remaining", remaining));
+    }
+    // SS220 pirate market end
 
     private void UpdateBuyButtonText()
     {

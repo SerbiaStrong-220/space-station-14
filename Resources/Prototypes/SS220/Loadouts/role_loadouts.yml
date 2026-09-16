@@ -8,6 +8,7 @@
   groups:
   - NanoTrasenRepresentativeHead
   - NanoTrasenRepresentativeHeadset
+  - NanoTrasenRepresentativeInnerEncryptionKeys #SS220-ipc-builtin-radio
   - NanoTrasenRepresentativeEyes
   - NanoTrasenRepresentativeJumpsuit
   - NanoTrasenRepresentativeOuterClothing
@@ -73,6 +74,7 @@
   - SurvivalVox
   - GroupSpeciesBreathToolSecurity
   - Trinkets
+  - CommandInnerEncryptionKeys #SS220-ipc-builtin-radio
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
 
@@ -96,6 +98,7 @@
   - SurvivalVox
   - GroupSpeciesBreathToolSecurity
   - Trinkets
+  - SecurityInnerEncryptionKeys #SS220-ipc-builtin-radio
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
 
@@ -115,6 +118,7 @@
   - SurvivalVox
   - GroupSpeciesBreathToolSecurity
   - Trinkets
+  - SecurityInnerEncryptionKeys #SS220-ipc-builtin-radio
   - WorkerCash #SS220-Cash-personal
 
 #! Служба безопасности (Конец)
@@ -138,6 +142,7 @@
   - SurvivalVox
   - GroupSpeciesBreathToolMedical
   - Trinkets
+  - MedicalInnerEncryptionKeys #SS220-ipc-builtin-radio
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
 
@@ -157,6 +162,7 @@
   - SurvivalBrigMedic #SS220-Brigmedic SurvivalBox Fix
   - SurvivalVox
   - Trinkets
+  - BrigmedicInnerEncryptionKeys #SS220-ipc-builtin-radio
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - WorkerCash #SS220-Cash-personal
 
@@ -178,6 +184,7 @@
   - SurvivalVox
   - GroupSpeciesBreathTool
   - Trinkets
+  - EngineeringInnerEncryptionKeys #SS220-ipc-builtin-radio
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
 
@@ -201,6 +208,7 @@
   - SurvivalVox
   - GroupSpeciesBreathTool
   - Trinkets
+  - ScienceInnerEncryptionKeys #SS220-ipc-builtin-radio
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
 
@@ -221,6 +229,7 @@
   - SurvivalVox
   - GroupSpeciesBreathTool
   - Trinkets
+  - ServiceInnerEncryptionKeys #SS220-ipc-builtin-radio
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
 
@@ -240,6 +249,7 @@
   - SurvivalVox
   - GroupSpeciesBreathTool
   - Trinkets
+  - ServiceInnerEncryptionKeys #SS220-ipc-builtin-radio
   - WorkerCash #SS220-Cash-personal
 
   #Боксер
@@ -256,6 +266,7 @@
   - SurvivalVox
   - GroupSpeciesBreathTool
   - Trinkets
+  - ServiceInnerEncryptionKeys #SS220-ipc-builtin-radio
   - WorkerCash #SS220-Cash-personal
 
 #! Эксклюзивы карт (Конец)

@@ -111,6 +111,14 @@
     price: 40
   - type: IgnitionSource
     temperature: 700
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Tools/weldingtool_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Tools/weldingtool_drop.ogg
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   name: industrial welding tool
