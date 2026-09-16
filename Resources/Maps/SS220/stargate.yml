@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 09/16/2026 14:27:47
-  entityCount: 45739
+  time: 09/16/2026 14:52:10
+  entityCount: 45735
 maps:
 - 1
 grids:
@@ -26649,7 +26649,7 @@ entities:
       pos: -102.5,24.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -158085.92
+      secondsUntilStateChange: -159537.05
       state: Opening
   - uid: 1760
     components:
@@ -28371,7 +28371,7 @@ entities:
       pos: 1.5,161.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1540148.2
+      secondsUntilStateChange: -1541599.4
       changeAirtight: False
       state: Opening
     - type: DeviceLinkSource
@@ -120356,7 +120356,7 @@ entities:
       pos: 45.5,58.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -433835.56
+      secondsUntilStateChange: -435286.7
       state: Closing
     - type: DeviceLinkSource
       lastSignals:
@@ -142014,7 +142014,7 @@ entities:
       - 40096
       - 40106
     - type: Door
-      secondsUntilStateChange: -1449412.4
+      secondsUntilStateChange: -1450863.5
       state: Closing
   - uid: 9985
     components:
@@ -142100,7 +142100,7 @@ entities:
       deviceLists:
       - 46086
     - type: Door
-      secondsUntilStateChange: -1368087.4
+      secondsUntilStateChange: -1369538.5
       state: Closing
   - uid: 11562
     components:
@@ -144011,7 +144011,7 @@ entities:
     - type: Firelock
       emergencyCloseCooldown: 8075.4252599
     - type: Door
-      secondsUntilStateChange: -472533.56
+      secondsUntilStateChange: -473984.7
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -270941,7 +270941,7 @@ entities:
       parent: 2
     - type: Door
       canCrush: True
-      secondsUntilStateChange: -76329.266
+      secondsUntilStateChange: -77780.39
       clickOpen: False
       state: Opening
     - type: DoorSignalControl
@@ -270976,7 +270976,7 @@ entities:
       pos: -52.5,187.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -520077.62
+      secondsUntilStateChange: -521528.75
       state: Opening
   - uid: 23105
     components:
@@ -271052,7 +271052,7 @@ entities:
       parent: 2
     - type: Door
       canCrush: True
-      secondsUntilStateChange: -76298.4
+      secondsUntilStateChange: -77749.52
       clickOpen: False
       state: Opening
     - type: DoorSignalControl
@@ -271087,7 +271087,7 @@ entities:
       pos: -53.5,188.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -484360.44
+      secondsUntilStateChange: -485811.56
       state: Opening
   - uid: 38967
     components:
@@ -285001,15 +285001,6 @@ entities:
     - type: Transform
       pos: -20.5,71.5
       parent: 2
-  - uid: 43998
-    components:
-    - type: Transform
-      pos: -3.5,-7.5
-      parent: 2
-    - type: VendingMachine
-      broken: True
-    - type: Destructible
-      isBroken: True
 - proto: VendingMachineAtmosDrobe
   entities:
   - uid: 22205
@@ -285226,15 +285217,6 @@ entities:
     - type: Transform
       pos: -77.5,5.5
       parent: 2
-  - uid: 43977
-    components:
-    - type: Transform
-      pos: -3.5,-6.5
-      parent: 2
-    - type: VendingMachine
-      broken: True
-    - type: Destructible
-      isBroken: True
 - proto: VendingMachineClothing
   entities:
   - uid: 12359
@@ -285337,15 +285319,6 @@ entities:
     - type: Transform
       pos: 56.5,50.5
       parent: 2
-  - uid: 43991
-    components:
-    - type: Transform
-      pos: -5.5,-8.5
-      parent: 2
-    - type: VendingMachine
-      broken: True
-    - type: Destructible
-      isBroken: True
 - proto: VendingMachineEngiDrobe
   entities:
   - uid: 28877
@@ -285514,15 +285487,6 @@ entities:
     - type: Transform
       pos: -68.5,174.5
       parent: 2
-  - uid: 43957
-    components:
-    - type: Transform
-      pos: -5.5,-6.5
-      parent: 2
-    - type: VendingMachine
-      broken: True
-    - type: Destructible
-      isBroken: True
 - proto: VendingMachineRrranta
   entities:
   - uid: 5207
