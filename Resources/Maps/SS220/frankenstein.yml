@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 09/16/2026 09:39:18
-  entityCount: 37468
+  time: 09/16/2026 09:49:14
+  entityCount: 37469
 maps:
 - 1
 grids:
@@ -177377,6 +177377,11 @@ entities:
       parent: 2
 - proto: PlasticCanEmpty
   entities:
+  - uid: 1308
+    components:
+    - type: Transform
+      pos: 23.488758,-18.02595
+      parent: 2
   - uid: 26375
     components:
     - type: Transform
