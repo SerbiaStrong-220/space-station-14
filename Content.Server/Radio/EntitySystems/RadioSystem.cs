@@ -94,7 +94,7 @@ public sealed class RadioSystem : EntitySystem
     /// </summary>
     /// <param name="messageSource">Entity that spoke the message</param>
     /// <param name="radioSource">Entity that picked up the message and will send it, e.g. headset</param>
-    public void SendRadioMessage(EntityUid messageSource, string message, RadioChannelPrototype channel, EntityUid radioSource, bool escapeMarkup = true, LanguageMessage? languageMessage = null, FixedPoint2? frequency = null /* SS220-add-frequency-radio */)
+    public void SendRadioMessage(EntityUid messageSource, string message, RadioChannelPrototype channel, EntityUid radioSource, bool escapeMarkup = true, LanguageMessage? languageMessage = null, FixedPoint2? frequency = null  /* SS220-add-frequency-radio */)
     {
         // SS220-listen-only-radio begin
         // Block transmission if the radio source only holds this channel as listen-only.
@@ -177,8 +177,8 @@ public sealed class RadioSystem : EntitySystem
             if (!radio.ReceiveAllChannels)
             {
                 if (!(radio.Channels.Contains(channel.ID) || radio.ListenOnlyChannels.Contains(channel.ID) /* SS220-listen-only-radio */ || radio.FrequencyChannels.Contains(channel.ID)) /* SS220-add-frequency-radio */
-                    || (TryComp<IntercomComponent>(receiver, out var intercom) &&
-                        !intercom.SupportedChannels.Contains(channel.ID)))
+                || (TryComp<IntercomComponent>(receiver, out var intercom) &&
+                                                            !intercom.SupportedChannels.Contains(channel.ID)))
                     continue;
             }
 
