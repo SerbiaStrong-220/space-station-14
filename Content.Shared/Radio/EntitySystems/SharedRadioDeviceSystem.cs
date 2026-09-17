@@ -60,6 +60,10 @@ public abstract class SharedRadioDeviceSystem : EntitySystem
 
             Dirty(uid, activeRadio);
         }
+        else
+        {
+            RemCompDeferred<ActiveRadioComponent>(uid);
+        }
     }
     #endregion
 }
