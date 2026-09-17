@@ -7,7 +7,7 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 12
+        Blunt: 20
     soundHit:
       path: /Audio/SS220/Weapons/Guns/Hits/peashooter_hit.ogg
   - type: Sprite
@@ -35,7 +35,7 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 8
+        Blunt: 15
     soundHit:
       path: /Audio/SS220/Weapons/Guns/Hits/peashooter_hit.ogg
   - type: Sprite
