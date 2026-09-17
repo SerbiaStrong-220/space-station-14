@@ -178,7 +178,7 @@ public sealed class RadioSystem : EntitySystem
             {
                 if (!(radio.Channels.Contains(channel.ID) || radio.ListenOnlyChannels.Contains(channel.ID) /* SS220-listen-only-radio */ || radio.FrequencyChannels.Contains(channel.ID)) /* SS220-add-frequency-radio */
                 || (TryComp<IntercomComponent>(receiver, out var intercom) &&
-                                                            !intercom.SupportedChannels.Contains(channel.ID)))
+                                                             !intercom.SupportedChannels.Contains(channel.ID)))
                     continue;
             }
 
