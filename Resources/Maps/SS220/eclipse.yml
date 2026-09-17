@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 09/16/2026 09:17:48
-  entityCount: 43562
+  time: 09/17/2026 20:15:22
+  entityCount: 43577
 maps:
 - 1
 grids:
@@ -34165,7 +34165,7 @@ entities:
       pos: 21.5,-6.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -219114.2
+      secondsUntilStateChange: -219259.28
       state: Opening
 - proto: AirlockServiceLocked
   entities:
@@ -43144,11 +43144,6 @@ entities:
     components:
     - type: Transform
       pos: -18.148783,40.8311
-      parent: 2
-  - uid: 2269
-    components:
-    - type: Transform
-      pos: -31.505692,44.640213
       parent: 2
   - uid: 2270
     components:
@@ -68454,6 +68449,56 @@ entities:
     components:
     - type: Transform
       pos: -42.5,76.5
+      parent: 2
+  - uid: 43564
+    components:
+    - type: Transform
+      pos: -25.5,12.5
+      parent: 2
+  - uid: 43565
+    components:
+    - type: Transform
+      pos: -24.5,12.5
+      parent: 2
+  - uid: 43566
+    components:
+    - type: Transform
+      pos: -24.5,13.5
+      parent: 2
+  - uid: 43567
+    components:
+    - type: Transform
+      pos: -24.5,15.5
+      parent: 2
+  - uid: 43568
+    components:
+    - type: Transform
+      pos: -24.5,14.5
+      parent: 2
+  - uid: 43569
+    components:
+    - type: Transform
+      pos: -27.5,12.5
+      parent: 2
+  - uid: 43570
+    components:
+    - type: Transform
+      pos: -28.5,12.5
+      parent: 2
+  - uid: 43571
+    components:
+    - type: Transform
+      pos: -28.5,13.5
+      parent: 2
+  - uid: 43572
+    components:
+    - type: Transform
+      pos: -28.5,14.5
+      parent: 2
+  - uid: 43573
+    components:
+    - type: Transform
+      pos: -28.5,15.5
       parent: 2
 - proto: CableApcStack
   entities:
@@ -106231,7 +106276,7 @@ entities:
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
-      pos: -27.157791,-8.716219
+      pos: -27.608376,-8.869545
       parent: 2
   - uid: 14471
     components:
@@ -118141,10 +118186,44 @@ entities:
       parent: 2
 - proto: CrayonBox
   entities:
+  - uid: 2269
+    components:
+    - type: Transform
+      pos: -31.52746,44.609207
+      parent: 2
   - uid: 16198
     components:
     - type: Transform
       pos: 9.47868,-25.367794
+      parent: 2
+  - uid: 28235
+    components:
+    - type: Transform
+      pos: -0.48461103,-10.398884
+      parent: 2
+  - uid: 28827
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 38.52671,-19.603872
+      parent: 2
+  - uid: 43574
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 5.517771,26.38204
+      parent: 2
+  - uid: 43575
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 7.4916267,25.949762
+      parent: 2
+  - uid: 43576
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -17.401588,20.697025
       parent: 2
 - proto: CrayonMime
   entities:
@@ -131393,7 +131472,7 @@ entities:
       - DrinkBottle
       - Trash
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.622691
+      sprayFizzinessThresholdRoll: 0.033797488
     - type: SolutionTransfer
       transferAmount: 50
     - type: ContainerContainer
@@ -131416,7 +131495,7 @@ entities:
       - DrinkBottle
       - Trash
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.89188015
+      sprayFizzinessThresholdRoll: 0.97821975
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -131463,7 +131542,7 @@ entities:
       - DrinkBottle
       - Trash
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.7706221
+      sprayFizzinessThresholdRoll: 0.45005882
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -131484,7 +131563,7 @@ entities:
       - DrinkBottle
       - Trash
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.5391662
+      sprayFizzinessThresholdRoll: 0.7502122
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -142640,6 +142719,12 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 10.535297,55.789032
+      parent: 2
+  - uid: 43563
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -19.497807,-38.118977
       parent: 2
 - proto: FloodlightBroken
   entities:
@@ -203633,6 +203718,14 @@ entities:
     - type: Transform
       pos: -37.614044,47.092384
       parent: 2
+- proto: MailCart
+  entities:
+  - uid: 43577
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -26.5,-8.5
+      parent: 2
 - proto: MailingUnit
   entities:
   - uid: 28228
@@ -203688,11 +203781,6 @@ entities:
     components:
     - type: Transform
       pos: -32.5,-58.5
-      parent: 2
-  - uid: 28235
-    components:
-    - type: Transform
-      pos: -0.5,-10.5
       parent: 2
   - uid: 28236
     components:
@@ -207668,11 +207756,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -23.338474,25.71603
-      parent: 2
-  - uid: 28827
-    components:
-    - type: Transform
-      pos: -17.34593,21.110748
       parent: 2
   - uid: 28828
     components:
