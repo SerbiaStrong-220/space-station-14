@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 09/16/2026 09:49:14
-  entityCount: 37469
+  time: 09/17/2026 20:14:33
+  entityCount: 37470
 maps:
 - 1
 grids:
@@ -102737,6 +102737,12 @@ entities:
       parent: 2
 - proto: DisposalJunction
   entities:
+  - uid: 2007
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -7.5,-60.5
+      parent: 2
   - uid: 15698
     components:
     - type: Transform
@@ -110456,12 +110462,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: -7.5,-61.5
       parent: 2
-  - uid: 17042
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -7.5,-60.5
-      parent: 2
   - uid: 17043
     components:
     - type: Transform
@@ -111676,6 +111676,12 @@ entities:
       - head of personnel
 - proto: DisposalTrunk
   entities:
+  - uid: 15212
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -6.5,-60.5
+      parent: 2
   - uid: 17242
     components:
     - type: Transform
