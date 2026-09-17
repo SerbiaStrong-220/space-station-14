@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 09/17/2026 20:14:33
-  entityCount: 37470
+  time: 09/17/2026 20:47:27
+  entityCount: 37487
 maps:
 - 1
 grids:
@@ -329,7 +329,7 @@ entities:
           version: 7
         2,-1:
           ind: 2,-1
-          tiles: jQAAAAAAAH0AAAAAAAB9AAAAAAAAfQAAAAAAAI0AAAAAAACNAAAAAAAAZQAAAAAAAI0AAAAAAACNAAAAAAAAjQAAAAAAAI0AAAAAAACNAAAAAAAAKAAAAAAAAI0AAAAAAACNAAAAAAAAjQAAAAAAAGUAAAAAAABlAAAAAAAAZQAAAAAAAGUAAAAAAABlAAAAAAAAZQAAAAAAAGUAAAAAAABlAAAAAAAAZQAAAAAAAAYAAAAAAABlAAAAAAAAZQAAAAAAAGUAAAAAAABlAAAAAAAAZQAAAAAAAGUAAAAAAABlAAAAAAAAZQAAAAAAAGUAAAAAAABlAAAAAAAAZQAAAAAAAGUAAAAAAABlAAAAAAAAZQAAAAAAAGUAAAAAAAAGAAAAAAAAZQAAAAAAAGUAAAAAAABlAAAAAAAAZQAAAAAAAGUAAAAAAABlAAAAAAAAZQAAAAAAAGUAAAAAAABlAAAAAAAAZQAAAAAAAGUAAAAAAABlAAAAAAAAZQAAAAAAAGUAAAAAAABlAAAAAAAABgAAAAAAAGUAAAAAAABlAAAAAAAAZQAAAAAAAGUAAAAAAABlAAAAAAAAZQAAAAAAAI0AAAAAAABlAAAAAAAAZQAAAAAAAGUAAAAAAABlAAAAAAAAjQAAAAAAAI0AAAAAAACNAAAAAAAAjQAAAAAAAI0AAAAAAACNAAAAAAAAKAAAAAAAACgAAAAAAACNAAAAAAAAZQAAAAAAAGUAAAAAAABDAAAAAAAAQwAAAAAAAEMAAAAAAABDAAAAAAAAcgAAAAAAACwAAAAAAAAsAAAAAAAALAAAAAAAACwAAAAAAACNAAAAAAAAKAAAAAAAACgAAAAAAAAoAAAAAAAAjQAAAAAAAI0AAAAAAAAoAAAAAAAAQwAAAAAAAEMAAAAAAABDAAAAAAAAQwAAAAAAAHIAAAAAAAAsAAAAAAAAZAAAAAAAAGQAAAAAAAAsAAAAAAAAjQAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAEMAAAAAAABDAAAAAAAAQwAAAAAAAEMAAAAAAAByAAAAAAAALAAAAAAAAGQAAAAAAABkAAAAAAAALAAAAAAAAI0AAAAAAAAFAAAAAAAABQAAAAAAAAUAAAAAAAAFAAAAAAAABQAAAAAAAAUAAAAAAABDAAAAAAAAQwAAAAAAAEMAAAAAAABDAAAAAAAAcgAAAAAAACwAAAAAAAAsAAAAAAAALAAAAAAAACwAAAAAAACNAAAAAAAABQAAAAAAACwAAAAAAAAsAAAAAAAABQAAAAAAAAUAAAAAAAAsAAAAAAAAQwAAAAAAAEMAAAAAAABDAAAAAAAAQwAAAAAAAHIAAAAAAAByAAAAAAAAcgAAAAAAAHIAAAAAAAByAAAAAAAAjQAAAAAAAAUAAAAAAAAsAAAAAAAALAAAAAAAAAUAAAAAAAAFAAAAAAAALAAAAAAAAEMAAAAAAABDAAAAAAAAQwAAAAAAAEMAAAAAAABDAAAAAAAAQwAAAAAAAEMAAAAAAABDAAAAAAAAQwAAAAAAACgAAAAAAAAFAAAAAAAALAAAAAAAACwAAAAAAAAFAAAAAAAABQAAAAAAACwAAAAAAABDAAAAAAAAQwAAAAAAAEMAAAAAAABDAAAAAAAAQwAAAAAAAEMAAAAAAABDAAAAAAAAQwAAAAAAAEMAAAAAAAAoAAAAAAAABQAAAAAAACwAAAAAAAAsAAAAAAAABQAAAAAAAAUAAAAAAAAsAAAAAAAAjQAAAAAAAI0AAAAAAAByAAAAAAAAcgAAAAAAAHIAAAAAAAByAAAAAAAAcgAAAAAAAHIAAAAAAAByAAAAAAAAKAAAAAAAAAUAAAAAAAAFAAAAAAAABQAAAAAAAAUAAAAAAAAFAAAAAAAABQAAAAAAAFsAAAAAAACNAAAAAAAAjQAAAAAAAI0AAAAAAACNAAAAAAAAjQAAAAAAAI0AAAAAAABvAAAAAAAAjQAAAAAAAI0AAAAAAABlAAAAAAAAZQAAAAAAAGUAAAAAAABlAAAAAAAAZQAAAAAAAGUAAAAAAABcAAAAAAAAXAAAAAAAAI0AAAAAAABaAAAAAAAAWgAAAAAAAFoAAAAAAABaAAAAAAAAWgAAAAAAAFoAAAAAAACNAAAAAAAAjQAAAAAAAI0AAAAAAACNAAAAAAAAjQAAAAAAAI0AAAAAAACNAAAAAAAAbgAAAAAAAFwAAAAAAACNAAAAAAAAWgAAAAAAAFoAAAAAAABaAAAAAAAAWgAAAAAAAFoAAAAAAABaAAAAAAAAjQAAAAAAAEEAAAAAAABBAAAAAAAAQQAAAAAAAEEAAAAAAABBAAAAAAAAQQAAAAAAAA==
+          tiles: jQAAAAAAAH0AAAAAAAB9AAAAAAAAfQAAAAAAAI0AAAAAAACNAAAAAAAAZQAAAAAAAI0AAAAAAACNAAAAAAAAjQAAAAAAAI0AAAAAAACNAAAAAAAAKAAAAAAAAI0AAAAAAACNAAAAAAAAjQAAAAAAAGUAAAAAAABlAAAAAAAAZQAAAAAAAGUAAAAAAABlAAAAAAAAZQAAAAAAAGUAAAAAAABlAAAAAAAAZQAAAAAAAAYAAAAAAABlAAAAAAAAZQAAAAAAAGUAAAAAAABlAAAAAAAAZQAAAAAAAGUAAAAAAABlAAAAAAAAZQAAAAAAAGUAAAAAAABlAAAAAAAAZQAAAAAAAGUAAAAAAABlAAAAAAAAZQAAAAAAAGUAAAAAAAAGAAAAAAAAZQAAAAAAAGUAAAAAAABlAAAAAAAAZQAAAAAAAGUAAAAAAABlAAAAAAAAZQAAAAAAAGUAAAAAAABlAAAAAAAAZQAAAAAAAGUAAAAAAABlAAAAAAAAZQAAAAAAAGUAAAAAAABlAAAAAAAABgAAAAAAAGUAAAAAAABlAAAAAAAAZQAAAAAAAGUAAAAAAABlAAAAAAAAZQAAAAAAAI0AAAAAAABlAAAAAAAAZQAAAAAAAGUAAAAAAABlAAAAAAAAjQAAAAAAAI0AAAAAAACNAAAAAAAAjQAAAAAAAI0AAAAAAACNAAAAAAAAKAAAAAAAACgAAAAAAACNAAAAAAAAZQAAAAAAAGUAAAAAAABDAAAAAAAAQwAAAAAAAEMAAAAAAABDAAAAAAAAcgAAAAAAACsAAAAAAAArAAAAAAAAKwAAAAAAACsAAAAAAACNAAAAAAAAKAAAAAAAACgAAAAAAAAoAAAAAAAAjQAAAAAAAI0AAAAAAAAoAAAAAAAAQwAAAAAAAEMAAAAAAABDAAAAAAAAQwAAAAAAAHIAAAAAAAAsAAAAAAAAZAAAAAAAAGQAAAAAAAAsAAAAAAAAjQAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAEMAAAAAAABDAAAAAAAAQwAAAAAAAEMAAAAAAAByAAAAAAAALAAAAAAAAGQAAAAAAABkAAAAAAAALAAAAAAAAI0AAAAAAAAFAAAAAAAABQAAAAAAAAUAAAAAAAAFAAAAAAAABQAAAAAAAAUAAAAAAABDAAAAAAAAQwAAAAAAAEMAAAAAAABDAAAAAAAAcgAAAAAAACwAAAAAAAAsAAAAAAAALAAAAAAAACwAAAAAAACNAAAAAAAABQAAAAAAACwAAAAAAAAsAAAAAAAABQAAAAAAAAUAAAAAAAAsAAAAAAAAQwAAAAAAAEMAAAAAAABDAAAAAAAAQwAAAAAAAHIAAAAAAAByAAAAAAAAcgAAAAAAAHIAAAAAAAByAAAAAAAAjQAAAAAAAAUAAAAAAAAsAAAAAAAALAAAAAAAAAUAAAAAAAAFAAAAAAAALAAAAAAAAEMAAAAAAABDAAAAAAAAQwAAAAAAAEMAAAAAAABDAAAAAAAAQwAAAAAAAEMAAAAAAABDAAAAAAAAQwAAAAAAACgAAAAAAAAFAAAAAAAALAAAAAAAACwAAAAAAAAFAAAAAAAABQAAAAAAACwAAAAAAABDAAAAAAAAQwAAAAAAAEMAAAAAAABDAAAAAAAAQwAAAAAAAEMAAAAAAABDAAAAAAAAQwAAAAAAAEMAAAAAAAAoAAAAAAAABQAAAAAAACwAAAAAAAAsAAAAAAAABQAAAAAAAAUAAAAAAAAsAAAAAAAAjQAAAAAAAI0AAAAAAAByAAAAAAAAcgAAAAAAAHIAAAAAAAByAAAAAAAAcgAAAAAAAHIAAAAAAAByAAAAAAAAKAAAAAAAAAUAAAAAAAAFAAAAAAAABQAAAAAAAAUAAAAAAAAFAAAAAAAABQAAAAAAAFsAAAAAAACNAAAAAAAAjQAAAAAAAI0AAAAAAACNAAAAAAAAjQAAAAAAAI0AAAAAAABvAAAAAAAAjQAAAAAAAI0AAAAAAABlAAAAAAAAZQAAAAAAAGUAAAAAAABlAAAAAAAAZQAAAAAAAGUAAAAAAABcAAAAAAAAXAAAAAAAAI0AAAAAAABaAAAAAAAAWgAAAAAAAFoAAAAAAABaAAAAAAAAWgAAAAAAAFoAAAAAAACNAAAAAAAAjQAAAAAAAI0AAAAAAACNAAAAAAAAjQAAAAAAAI0AAAAAAACNAAAAAAAAbgAAAAAAAFwAAAAAAACNAAAAAAAAWgAAAAAAAFoAAAAAAABaAAAAAAAAWgAAAAAAAFoAAAAAAABaAAAAAAAAjQAAAAAAAEEAAAAAAABBAAAAAAAAQQAAAAAAAEEAAAAAAABBAAAAAAAAQQAAAAAAAA==
           version: 7
         3,1:
           ind: 3,1
@@ -2432,18 +2432,6 @@ entities:
           decals:
             10572: 43.15546,-5.9778643
         - node:
-            zIndex: -1
-            color: '#FFFFFFFF'
-            id: Bushd3
-          decals:
-            10549: 36.829765,-9.8958435
-        - node:
-            zIndex: -1
-            color: '#FFFFFFFF'
-            id: Bushd4
-          decals:
-            10550: 39.54639,-11.105016
-        - node:
             color: '#FFFFFFFF'
             id: Bushf1
           decals:
@@ -2459,11 +2447,10 @@ entities:
           decals:
             10570: 43.989204,-6.9577107
         - node:
-            zIndex: -1
             color: '#FFFFFFFF'
-            id: Bushg1
+            id: Bushg2
           decals:
-            10551: 40.136963,-9.555328
+            10606: 39.97986,-9.332134
         - node:
             color: '#FFFFFFFF'
             id: Caution
@@ -2941,11 +2928,11 @@ entities:
             10322: 37,14
             10566: 37,-8
         - node:
-            zIndex: -2
+            zIndex: -1
             color: '#FFFFFFFF'
             id: DarkWoodTrimThinCornerSe
           decals:
-            10561: 40,-11
+            10598: 40,-11
         - node:
             color: '#FFFFFFFF'
             id: DarkWoodTrimThinCornerSe
@@ -2958,11 +2945,11 @@ entities:
             10327: 35,13
             10328: 31,13
         - node:
-            zIndex: -2
+            zIndex: -1
             color: '#FFFFFFFF'
             id: DarkWoodTrimThinCornerSw
           decals:
-            10560: 37,-11
+            10595: 37,-11
         - node:
             color: '#FFFFFFFF'
             id: DarkWoodTrimThinCornerSw
@@ -2974,7 +2961,12 @@ entities:
             10349: 29,13
             10350: 33,13
             10351: 37,13
-            10564: 37,-11
+        - node:
+            zIndex: -1
+            color: '#FFFFFFFF'
+            id: DarkWoodTrimThinLineE
+          decals:
+            10594: 40,-10
         - node:
             color: '#FFFFFFFF'
             id: DarkWoodTrimThinLineE
@@ -3001,7 +2993,6 @@ entities:
             10353: 40,18
             10354: 40,17
             10567: 40,-9
-            10568: 40,-10
         - node:
             zIndex: -2
             color: '#FFFFFFFF'
@@ -3032,12 +3023,12 @@ entities:
             10342: 34,14
             10343: 30,14
         - node:
-            zIndex: -2
+            zIndex: -1
             color: '#FFFFFFFF'
             id: DarkWoodTrimThinLineS
           decals:
-            10556: 38,-11
-            10557: 39,-11
+            10596: 38,-11
+            10597: 39,-11
         - node:
             color: '#FFFFFFFF'
             id: DarkWoodTrimThinLineS
@@ -3072,15 +3063,18 @@ entities:
             10363: 36,16
             10364: 37,16
             10365: 38,16
-            10558: 38,-11
-            10559: 39,-11
         - node:
             zIndex: -2
             color: '#FFFFFFFF'
             id: DarkWoodTrimThinLineW
           decals:
             10562: 37,-9
-            10563: 37,-10
+        - node:
+            zIndex: -1
+            color: '#FFFFFFFF'
+            id: DarkWoodTrimThinLineW
+          decals:
+            10593: 37,-10
         - node:
             color: '#FFFFFFFF'
             id: DarkWoodTrimThinLineW
@@ -3094,7 +3088,6 @@ entities:
             9882: 63,0
             10355: 29,18
             10356: 29,17
-            10565: 37,-10
         - node:
             cleanable: True
             color: '#DE3A3A96'
@@ -5370,7 +5363,7 @@ entities:
             color: '#FFFFFFFF'
             id: Flowersy2
           decals:
-            10547: 38.122074,-9.965336
+            10600: 38.1424,-9.998972
         - node:
             color: '#FFFFFFFF'
             id: Flowersy2
@@ -5490,6 +5483,12 @@ entities:
           decals:
             7805: -4.2531743,-34.044106
         - node:
+            zIndex: -1
+            color: '#FFFFFFFF'
+            id: Grassb1
+          decals:
+            10602: 37.172745,-10.870239
+        - node:
             color: '#FFFFFFFF'
             id: Grassb1
           decals:
@@ -5507,12 +5506,24 @@ entities:
             6845: 0.09751856,-28.328035
             6847: 0.49416256,-28.949112
         - node:
+            zIndex: -1
+            color: '#FFFFFFFF'
+            id: Grassb2
+          decals:
+            10603: 38.140816,-10.95363
+        - node:
             color: '#FFFFFFFF'
             id: Grassb2
           decals:
             6923: 4.07089,-20.941881
             10576: 47.150497,-6.818725
             10580: 44.03089,-4.928524
+        - node:
+            zIndex: -1
+            color: '#FFFFFFFF'
+            id: Grassb3
+          decals:
+            10604: 39.030148,-11.004592
         - node:
             color: '#FFFFFFFF'
             id: Grassb3
@@ -5550,6 +5561,7 @@ entities:
             id: Grassc1
           decals:
             10543: 38.052597,-7.9778447
+            10605: 39.98912,-9.350665
         - node:
             color: '#FFFFFFFF'
             id: Grassc1
@@ -5561,7 +5573,7 @@ entities:
             color: '#FFFFFFFF'
             id: Grassc3
           decals:
-            10544: 37.462025,-10.020929
+            10599: 37.317036,-10.114716
         - node:
             color: '#FFFFFFFF'
             id: Grassc3
@@ -5576,12 +5588,6 @@ entities:
           decals:
             4074: 69,25
             4075: 62,26
-        - node:
-            zIndex: -1
-            color: '#FFFFFFFF'
-            id: Grassc4
-          decals:
-            10545: 38.00396,-11.000777
         - node:
             color: '#FFFFFFFF'
             id: Grassc4
@@ -5603,7 +5609,6 @@ entities:
             id: Grassd1
           decals:
             10537: 37.038204,-7.963946
-            10548: 39.956318,-10.68111
         - node:
             color: '#FFFFFFFF'
             id: Grassd1
@@ -5629,6 +5634,7 @@ entities:
             id: Grassd2
           decals:
             10542: 39.970215,-8.2558155
+            10601: 39.812943,-10.629331
         - node:
             color: '#FFFFFFFF'
             id: Grassd2
@@ -5678,12 +5684,6 @@ entities:
             4069: 70,24
             4070: 60,26
         - node:
-            zIndex: -1
-            color: '#FFFFFFFF'
-            id: Grasse1
-          decals:
-            10540: 38.816864,-11.077219
-        - node:
             color: '#FFFFFFFF'
             id: Grasse1
           decals:
@@ -5692,12 +5692,6 @@ entities:
             7807: -4.2730064,-34.044106
             7815: 2.576144,-33.984642
             7834: 80.92875,-8.607874
-        - node:
-            zIndex: -1
-            color: '#FFFFFFFF'
-            id: Grasse2
-          decals:
-            10539: 37.059048,-10.806197
         - node:
             color: '#FFFFFFFF'
             id: Grasse2
@@ -24505,6 +24499,13 @@ entities:
       parent: 2
     - type: Fixtures
       fixtures: {}
+- proto: AppleSeeds
+  entities:
+  - uid: 29711
+    components:
+    - type: Transform
+      pos: 40.358315,-10.325701
+      parent: 2
 - proto: ArrivalsShuttleTimer
   entities:
   - uid: 1068
@@ -25775,6 +25776,13 @@ entities:
     components:
     - type: Transform
       pos: 31.433563,7.630931
+      parent: 2
+- proto: BananaSeeds
+  entities:
+  - uid: 29725
+    components:
+    - type: Transform
+      pos: 40.63623,-10.464686
       parent: 2
 - proto: BannerCargo
   entities:
@@ -120673,6 +120681,54 @@ entities:
       rot: 5.66483074656582 rad
       pos: 48.515907,-89.51461
       parent: 2
+- proto: FloraBamboo
+  entities:
+  - uid: 25293
+    components:
+    - type: Transform
+      pos: 81.50114,-11.298251
+      parent: 2
+- proto: FloraBushH
+  entities:
+  - uid: 25977
+    components:
+    - type: Transform
+      pos: 80.545044,-11.423338
+      parent: 2
+  - uid: 25981
+    components:
+    - type: Transform
+      pos: 82.493935,-11.392066
+      parent: 2
+  - uid: 26307
+    components:
+    - type: Transform
+      pos: 82.54604,-7.430982
+      parent: 2
+  - uid: 29168
+    components:
+    - type: Transform
+      pos: 80.5242,-7.4831023
+      parent: 2
+- proto: FloraBushJ
+  entities:
+  - uid: 25292
+    components:
+    - type: Transform
+      pos: 79.72172,-9.734665
+      parent: 2
+  - uid: 25746
+    components:
+    - type: Transform
+      pos: 83.43189,-10.745784
+      parent: 2
+- proto: FloraBushK
+  entities:
+  - uid: 25354
+    components:
+    - type: Transform
+      pos: 79.52099,-8.567188
+      parent: 2
 - proto: FloraRockSolid
   entities:
   - uid: 18474
@@ -120698,6 +120754,11 @@ entities:
       parent: 2
 - proto: FloraTree
   entities:
+  - uid: 17042
+    components:
+    - type: Transform
+      pos: 81.678314,-9.088383
+      parent: 2
   - uid: 18478
     components:
     - type: Transform
@@ -120709,12 +120770,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 60.562702,26.130713
-      parent: 2
-  - uid: 18480
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 82.14271,-10.575664
       parent: 2
 - proto: FolderSpawner
   entities:
@@ -169093,6 +169148,21 @@ entities:
       parent: 2
 - proto: hydroponicsSoil
   entities:
+  - uid: 25115
+    components:
+    - type: Transform
+      pos: 37.5,-10.5
+      parent: 2
+  - uid: 25116
+    components:
+    - type: Transform
+      pos: 38.5,-10.5
+      parent: 2
+  - uid: 25117
+    components:
+    - type: Transform
+      pos: 39.5,-10.5
+      parent: 2
   - uid: 25294
     components:
     - type: Transform
@@ -169220,6 +169290,12 @@ entities:
     - type: Transform
       pos: -48.5866,2.3727891
       parent: 2
+  - uid: 30962
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 37.600002,-10.525682
+      parent: 2
 - proto: HydroponicsToolSpade
   entities:
   - uid: 25318
@@ -169246,6 +169322,12 @@ entities:
       parent: 2
 - proto: hydroponicsTray
   entities:
+  - uid: 18480
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 42.5,-0.5
+      parent: 2
   - uid: 25104
     components:
     - type: Transform
@@ -184685,6 +184767,11 @@ entities:
       parent: 2
 - proto: Rack
   entities:
+  - uid: 25291
+    components:
+    - type: Transform
+      pos: 40.5,-10.5
+      parent: 2
   - uid: 27512
     components:
     - type: Transform
@@ -194705,6 +194792,11 @@ entities:
     - type: Transform
       pos: -29.59727,-38.459442
       parent: 2
+  - uid: 30961
+    components:
+    - type: Transform
+      pos: 40.53896,-10.372798
+      parent: 2
 - proto: ShowcaseRobotAntique
   entities:
   - uid: 29317
@@ -198375,12 +198467,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -17.5,41.5
       parent: 2
-  - uid: 29725
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 42.5,-0.5
-      parent: 2
   - uid: 29726
     components:
     - type: Transform
@@ -198410,6 +198496,12 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 31.5,36.5
+      parent: 2
+  - uid: 31253
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 45.5,-0.5
       parent: 2
 - proto: SmartFridge
   entities:
