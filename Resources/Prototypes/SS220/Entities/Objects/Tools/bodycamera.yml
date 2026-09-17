@@ -60,6 +60,7 @@
     id: "Нагрудная камера"
     active: false
   - type: TapeRecorder
+    recordingOnly: true
   - type: UseDelay
     delay: 1
   - type: ContainerContainer
@@ -80,6 +81,5 @@
         type: TapeRecorderBoundUserInterface
   - type: ActivatableUI
     key: enum.TapeRecorderUIKey.Key
-    inHandsOnly: true
     requireActiveHand: false
     verbOnly: true
