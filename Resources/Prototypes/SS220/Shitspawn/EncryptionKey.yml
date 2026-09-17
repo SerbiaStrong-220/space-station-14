@@ -74,8 +74,6 @@
   description: Don't interfere with the broadcast — record it
   components:
   - type: EncryptionKey
-    channels:
-    - Syndicate
     defaultChannel: Syndicate
     listenOnlyChannels:
     - Syndicate
