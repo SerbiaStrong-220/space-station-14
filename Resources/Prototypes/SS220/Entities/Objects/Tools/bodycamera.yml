@@ -99,3 +99,4 @@
     key: enum.TapeRecorderUIKey.Key
     requireActiveHand: false
     verbOnly: true
+  - type: Appearance
