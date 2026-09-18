@@ -28,6 +28,8 @@
 
 - type: npcFaction
   id: SpiderQueen
+  friendly:
+  - SpiderHostile
   hostile:
   - PlantsFract #SS220 PlatFraction
   - NanoTrasen
