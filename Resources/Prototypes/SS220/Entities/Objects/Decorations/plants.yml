@@ -6138,7 +6138,7 @@
         acts: [ "Destruction" ]
       - !type:SpawnEntitiesBehavior
         spawn:
-          FoodSugarcane:
+          Sugarcane:
             min: 2
             max: 4
 
