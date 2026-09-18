@@ -81,6 +81,7 @@
   components:
   - type: Sprite
     sprite: SS220/Clothing/Neck/Misc/sec_badge.rsi
+    state: icon
   - type: Clothing
     sprite: SS220/Clothing/Neck/Misc/sec_badge.rsi
   - type: Item

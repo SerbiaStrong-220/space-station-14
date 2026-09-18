@@ -7,7 +7,7 @@
   components:
   - type: Sprite
     sprite: SS220/Objects/Tools/bodycam.rsi
-    state: icon
+    state: bodycam
   - type: Clothing
     sprite: SS220/Objects/Tools/bodycam.rsi
     quickEquip: false
@@ -55,14 +55,30 @@
   name: body camera
   description: Body camera with audio recording function. Allows recording audio and automatically creating their text transcriptions.
   components:
+  - type: Sprite
+    layers:
+    - state: bodycam_empty
+    - state: bodycam
+      map: ["tape"]
+      visible: false
   - type: SurveillanceCamera
     networkSet: true
     id: "surveillance-camera-bodycam"
     active: false
-  - type: TapeRecorder
-    recordingOnly: true
   - type: UseDelay
     delay: 1
+  - type: TapeRecorder
+    recordingOnly: true
+  - type: GenericVisualizer
+    visuals:
+      enum.TapeRecorderVisuals.Mode:
+        tape:
+          Stopped: { state: "bodycam" }
+          Recording: { state: "bodycam_recording" }
+      enum.TapeRecorderVisuals.TapeInserted:
+        tape:
+          True: { visible: true }
+          False: { visible: false }
   - type: ContainerContainer
     containers:
       cassette_tape: !type:ContainerSlot

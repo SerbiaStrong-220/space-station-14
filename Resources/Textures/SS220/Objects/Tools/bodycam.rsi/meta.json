@@ -8,7 +8,13 @@
   },
   "states": [
     {
-      "name": "icon"
+      "name": "bodycam"
+    },
+    {
+      "name": "bodycam_empty"
+    },
+    {
+      "name": "bodycam_recording"
     },
     {
       "name": "equipped-NECK",
