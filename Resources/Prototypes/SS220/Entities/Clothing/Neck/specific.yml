@@ -77,7 +77,7 @@
   parent: BaseBodyCamera
   id: ClothingNeckBadgeSecurity
   name: security badge
-  description: This glowing red badge marks the holder as THE LAW.
+  description: This glowing red badge marks the holder as THE LAW. It is equipped with a built‑in camera that broadcasts a recording of what is happening.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Neck/Misc/sec_badge.rsi
@@ -87,5 +87,9 @@
     size: Small
   - type: SurveillanceCamera
     networkSet: true
-    id: "Нагрудная камера"
+    id: "surveillance-camera-bodycam"
     active: false
+  - type: Badge
+    label: "badge-label-security"
+    department: "badge-department-security"
+    color: "gold"

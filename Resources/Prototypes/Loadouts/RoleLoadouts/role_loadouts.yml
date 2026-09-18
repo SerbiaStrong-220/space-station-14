@@ -514,6 +514,7 @@
   - SecurityHoSSiutstorage #SS220-OfficerCutlass
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
+  - SecurityBadge #SS220 TapeRecorder & BodyCamera update
 
 - type: roleLoadout
   id: JobWarden
@@ -535,6 +536,7 @@
   - GroupSpeciesBreathToolSecurity
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
+  - SecurityBadge #SS220 TapeRecorder & BodyCamera update
 
 - type: roleLoadout
   id: JobSecurityOfficer
@@ -558,6 +560,7 @@
   - GroupSpeciesBreathToolSecurity
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - WorkerCash #SS220-Cash-personal
+  - SecurityBadge #SS220 TapeRecorder & BodyCamera update
 
 - type: roleLoadout
   id: JobDetective
@@ -577,6 +580,7 @@
   - GroupSpeciesBreathToolSecurity
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - WorkerCash #SS220-Cash-personal
+  - SecurityBadge #SS220 TapeRecorder & BodyCamera update
 
 - type: roleLoadout
   id: JobSecurityCadet
@@ -590,6 +594,7 @@
   #- SecurityCadetJobTrinkets
   - GroupSpeciesBreathToolSecurity
   - CivilianCash #SS220-Cash-personal
+  - SecurityBadge #SS220 TapeRecorder & BodyCamera update
 
 # Wildcards
 - type: roleLoadout

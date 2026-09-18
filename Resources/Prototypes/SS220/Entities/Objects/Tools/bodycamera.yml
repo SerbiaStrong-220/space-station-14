@@ -2,8 +2,8 @@
   abstract: true
   parent: BaseItem
   id: BaseBodyCamera
-  name: нагрудная камера
-  description: За вами всегда будут смотреть.
+  name: body camera
+  description: You will always be watched.
   components:
   - type: Sprite
     sprite: SS220/Objects/Tools/bodycam.rsi
@@ -52,12 +52,12 @@
 - type: entity
   id: BodyCameraSecurity
   parent: BaseBodyCamera
-  name: нагрудная камера
-  description: Нагрудная камера с функцией записи звука. Позволяет сохранять аудиозаписи и автоматически создавать их текстовую стенограмму.
+  name: body camera
+  description: Body camera with audio recording function. Allows recording audio and automatically creating their text transcriptions.
   components:
   - type: SurveillanceCamera
     networkSet: true
-    id: "Нагрудная камера"
+    id: "surveillance-camera-bodycam"
     active: false
   - type: TapeRecorder
     recordingOnly: true
