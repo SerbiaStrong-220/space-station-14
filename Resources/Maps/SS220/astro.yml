@@ -4,7 +4,7 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 09/17/2026 20:12:53
+  time: 09/18/2026 11:57:37
   entityCount: 58520
 maps:
 - 1
@@ -48854,7 +48854,7 @@ entities:
       pos: -27.5,-28.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -146903.8
+      secondsUntilStateChange: -146951.42
       state: Opening
   - uid: 555
     components:
@@ -48908,7 +48908,7 @@ entities:
       pos: -27.5,-27.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -146934.05
+      secondsUntilStateChange: -146981.67
       state: Opening
   - uid: 562
     components:
@@ -53830,7 +53830,7 @@ entities:
       pos: -29.5,23.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -404677.28
+      secondsUntilStateChange: -404724.9
       state: Opening
   - uid: 1197
     components:
@@ -167017,6 +167017,47 @@ entities:
       parent: 2
 - proto: CurbWoodCornerSmall
   entities:
+  - uid: 1996
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -49.5,46.5
+      parent: 2
+  - uid: 2125
+    components:
+    - type: Transform
+      pos: -46.5,39.5
+      parent: 2
+  - uid: 3632
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -41.5,44.5
+      parent: 2
+  - uid: 3633
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -46.5,46.5
+      parent: 2
+  - uid: 3634
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -41.5,42.5
+      parent: 2
+  - uid: 3635
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -41.5,39.5
+      parent: 2
+  - uid: 3636
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -41.5,41.5
+      parent: 2
   - uid: 21942
     components:
     - type: Transform
@@ -167092,18 +167133,6 @@ entities:
     - type: Transform
       pos: 0.5,-42.5
       parent: 2
-  - uid: 21955
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -41.5,44.5
-      parent: 2
-  - uid: 21956
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -41.5,41.5
-      parent: 2
   - uid: 21957
     components:
     - type: Transform
@@ -167132,37 +167161,6 @@ entities:
     - type: Transform
       pos: 6.5,-35.5
       parent: 2
-  - uid: 21962
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -41.5,39.5
-      parent: 2
-  - uid: 21963
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -41.5,42.5
-      parent: 2
-  - uid: 21964
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -46.5,46.5
-      parent: 2
-  - uid: 21965
-    components:
-    - type: Transform
-      pos: -46.5,39.5
-      parent: 2
-  - uid: 21966
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -49.5,46.5
-      parent: 2
-    - type: Physics
-      canCollide: True
   - uid: 21967
     components:
     - type: Transform
@@ -167299,7 +167297,7 @@ entities:
       pos: 0.5,30.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -56439.54
+      secondsUntilStateChange: -56487.164
       state: Closing
   - uid: 21989
     components:
@@ -167487,7 +167485,7 @@ entities:
       pos: 0.5,-33.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -2912101.5
+      secondsUntilStateChange: -2912149
       state: Closing
   - uid: 22021
     components:
@@ -167534,7 +167532,7 @@ entities:
       pos: 57.5,-64.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1647675.2
+      secondsUntilStateChange: -1647722.9
       state: Closing
   - uid: 22029
     components:
@@ -167601,7 +167599,7 @@ entities:
       pos: 88.5,-62.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -968340.4
+      secondsUntilStateChange: -968388
       state: Closing
 - proto: CurtainsPink
   entities:
@@ -167668,7 +167666,7 @@ entities:
       pos: -46.5,-15.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -616341.56
+      secondsUntilStateChange: -616389.2
       state: Closing
   - uid: 22049
     components:
@@ -185875,7 +185873,7 @@ entities:
     - type: Label
       currentLabel: кофейный ликёр
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.9225963
+      sprayFizzinessThresholdRoll: 0.49351642
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -185900,7 +185898,7 @@ entities:
     - type: Label
       currentLabel: коньяк
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.8953625
+      sprayFizzinessThresholdRoll: 0.2086523
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -186093,7 +186091,7 @@ entities:
     - type: Label
       currentLabel: джин
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.74303424
+      sprayFizzinessThresholdRoll: 0.37835944
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -187255,7 +187253,7 @@ entities:
     - type: Label
       currentLabel: ром
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.5548162
+      sprayFizzinessThresholdRoll: 0.22029394
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -187880,7 +187878,7 @@ entities:
     - type: Label
       currentLabel: текила
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.23993154
+      sprayFizzinessThresholdRoll: 0.3468702
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -187933,7 +187931,7 @@ entities:
     - type: Label
       currentLabel: вермут
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.6511016
+      sprayFizzinessThresholdRoll: 0.6734212
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -187969,7 +187967,7 @@ entities:
     - type: Label
       currentLabel: водка
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.19383357
+      sprayFizzinessThresholdRoll: 0.86030585
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -188316,7 +188314,7 @@ entities:
     - type: Label
       currentLabel: виски
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.44943565
+      sprayFizzinessThresholdRoll: 0.5107201
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -281883,7 +281881,7 @@ entities:
       pos: 24.5,101.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -307420.9
+      secondsUntilStateChange: -307468.53
       state: Closing
   - uid: 38277
     components:
