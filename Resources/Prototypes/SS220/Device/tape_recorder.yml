@@ -1,0 +1,41 @@
+- type: entity
+  parent: TapeRecorder
+  id: TapeRecorderStationary
+  name: stationary tape recorder
+  description: Anything said into this device can and will be used against you in a court of space law.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Devices/stationary_tape_recorder.rsi
+    # Так как на данный момент GenericVisualizer для TapeRecorder не работает,
+    # то в rsi стейт idle это копия стейта playing, чтобы была анимация экрана.
+  - type: Item
+    size: Normal
+    shape:
+    - 0,0,2,1
+  - type: ActiveListener
+    range: 6
+  - type: ItemSlots
+    slots:
+      cassette_tape:
+        priority: 4
+        whitelist:
+          components:
+          - FitsInTapeRecorder
+  - type: ActivatableUI
+    key: enum.TapeRecorderUIKey.Key
+    inHandsOnly: false
+    requireActiveHand: false
+
+- type: entity
+  parent: CassetteTape
+  id: CassetteTapeLargeCapacity
+  name: large capacity cassette tape
+  description: A magnetic tape that can hold up to six minutes of content on either side.
+  components:
+  - type: Item
+    size: Small
+  - type: TapeCassette
+    maxCapacity: 1080
+  - type: Tag
+    tags:
+    - CassetteTapeLargeCapacity

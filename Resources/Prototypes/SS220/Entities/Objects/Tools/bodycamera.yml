@@ -38,7 +38,7 @@
       - RadioSpeaker
 
   - type: ActiveListener
-    range: 6
+    range: 5
 
   - type: StationAiVision
   - type: Eye

@@ -51,6 +51,11 @@
     - id: WeaponEnergyShotgun #SS220-fix
     - id: PlushieLizardJobWarden
       prob: 0.02
+    # SS220 TapeRecorder & BodyCam update BGN
+    - id: TapeRecorderStationary
+    - id: CassetteTapeLargeCapacity
+      amount: 3
+    # SS220 TapeRecorder & BodyCam update END
 
 - type: entityTable
   id: FillLockerWardenHarduit
@@ -200,6 +205,11 @@
     - id: HandLabeler
     - id: PlushieLizardJobDetective
       prob: 0.02
+    # SS220 TapeRecorder & BodyCam update BGN
+    - id: TapeRecorderStationary
+    - id: CassetteTapeLargeCapacity
+      amount: 3
+    # SS220 TapeRecorder & BodyCam update END
 
 - type: entity
   id: ClosetBombFilled
