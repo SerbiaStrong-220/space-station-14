@@ -375,6 +375,7 @@
   maturation: 15
   production: 1
   yield: 1
+  maxYield: 1
   potency: 1
   growthStages: 3
   waterConsumption: 0.60
@@ -401,6 +402,7 @@
   maturation: 15
   production: 1
   yield: 1
+  maxYield: 1
   potency: 1
   growthStages: 3
   waterConsumption: 0.60
