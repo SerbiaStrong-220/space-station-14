@@ -3,7 +3,7 @@ using Robust.Shared.GameStates;
 
 namespace Content.Shared.SS220.Badge;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class BadgeComponent : Component
 {
     [DataField]
@@ -15,12 +15,12 @@ public sealed partial class BadgeComponent : Component
     [DataField]
     public string Color = "gold";
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public string? FullName;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public string? JobName;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public string? SerialNumber;
 }
