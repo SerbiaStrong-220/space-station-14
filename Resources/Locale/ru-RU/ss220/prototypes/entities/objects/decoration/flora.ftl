@@ -1,676 +1,676 @@
-ent-FloraBamboo = Бамбук
+ent-FloraBamboo = бамбук
     .desc = Высокое многолетнее растение с жёсткими стеблями. Часто используется для озеленения помещений и создания уюта. На самом деле - трава, но очень крупная.
 
 # Aloe
-ent-FloraAloe = Алоэ
+ent-FloraAloe = алоэ
     .desc = Суккулент с мясистыми листьями, наполненными целебным гелем.
-ent-FloraAloeRandom = Алоэ
+ent-FloraAloeRandom = алоэ
     .desc = Суккулент с мясистыми листьями, наполненными целебным гелем.
-ent-FloraAloeDead = Мёртвое алоэ
+ent-FloraAloeDead = мёртвое алоэ
     .desc = Высохшие остатки суккулента.
 
 # Ambrosia Deus
-ent-FloraAmbrosiaDeus = Амброзия деус
+ent-FloraAmbrosiaDeus = амброзия деус
     .desc = Редкое растение с целебными свойствами и лёгким галлюциногенным эффектом.
-ent-FloraAmbrosiaDeusRandom = Амброзия деус
+ent-FloraAmbrosiaDeusRandom = амброзия деус
     .desc = Редкое растение с целебными свойствами и лёгким галлюциногенным эффектом.
-ent-FloraAmbrosiaDeusDead = Мёртвая амброзия деус
+ent-FloraAmbrosiaDeusDead = мёртвая амброзия деус
     .desc = Увядшее растение, потерявшее свои свойства.
 
 # Ambrosia Vulgaris
-ent-FloraAmbrosiaVulgaris = Амброзия вульгарис
+ent-FloraAmbrosiaVulgaris = амброзия вульгарис
     .desc = Растение с целебными свойствами, используется в народной медицине.
-ent-FloraAmbrosiaVulgarisRandom = Амброзия вульгарис
+ent-FloraAmbrosiaVulgarisRandom = амброзия вульгарис
     .desc = Растение с целебными свойствами, используется в народной медицине.
-ent-FloraAmbrosiaVulgarisDead = Мёртвая амброзия вульгарис
+ent-FloraAmbrosiaVulgarisDead = мёртвая амброзия вульгарис
     .desc = Увядшее растение, потерявшее свои свойства.
 
 # Anomaly Berry
-ent-FloraAnomalyBerry = Аномальные ягоды
+ent-FloraAnomalyBerry = аномальные ягоды
     .desc = Странные ягоды, излучающие слабое аномальное поле.
-ent-FloraAnomalyBerryRandom = Аномальные ягоды
+ent-FloraAnomalyBerryRandom = аномальные ягоды
     .desc = Странные ягоды, излучающие слабое аномальное поле.
-ent-FloraAnomalyBerryDead = Мёртвые аномальные ягоды
+ent-FloraAnomalyBerryDead = мёртвые аномальные ягоды
     .desc = Увядший куст, больше не излучающий аномалий.
 
 # Apple
-ent-FloraApple = Яблоня
+ent-FloraApple = яблоня
     .desc = Плодовое дерево, дающее сочные наливные яблоки.
-ent-FloraAppleRandom = Яблоня
+ent-FloraAppleRandom = яблоня
     .desc = Плодовое дерево, дающее сочные наливные яблоки.
-ent-FloraAppleEmpty = Пустая яблоня
+ent-FloraAppleEmpty = пустая яблоня
     .desc = Яблоня, с которой уже собрали весь урожай.
-ent-FloraAppleDead = Мёртвая яблоня
+ent-FloraAppleDead = мёртвая яблоня
     .desc = Засохшее дерево без единого листа.
 
 # Banana
-ent-FloraBanana = Банановый куст
+ent-FloraBanana = банановый куст
     .desc = Тропическое растение с крупными жёлтыми плодами.
-ent-FloraBananaRandom = Банановый куст
+ent-FloraBananaRandom = банановый куст
     .desc = Тропическое растение с крупными жёлтыми плодами.
-ent-FloraBananaEmpty = Пустой банановый куст
+ent-FloraBananaEmpty = пустой банановый куст
     .desc = Банановый куст, с которого уже собрали весь урожай.
-ent-FloraBananaDead = Мёртвый банановый куст
+ent-FloraBananaDead = мёртвый банановый куст
     .desc = Засохшее тропическое растение.
 
 # Berries
-ent-FloraBerries = Ягодный куст
+ent-FloraBerries = ягодный куст
     .desc = Небольшой кустарник, усыпанный мелкими съедобными ягодами.
-ent-FloraBerriesRandom = Ягодный куст
+ent-FloraBerriesRandom = ягодный куст
     .desc = Небольшой кустарник, усыпанный мелкими съедобными ягодами.
-ent-FloraBerriesEmpty = Пустой ягодный куст
+ent-FloraBerriesEmpty = пустой ягодный куст
     .desc = Кустарник, с которого уже собрали все ягоды.
-ent-FloraBerriesDead = Мёртвый ягодный куст
+ent-FloraBerriesDead = мёртвый ягодный куст
     .desc = Засохший кустарник без единой ягоды.
 
 # Blood Tomato
-ent-FloraBloodTomato = Кровяной томат
+ent-FloraBloodTomato = кровяной томат
     .desc = Томат, наполненный тёмно-красной жидкостью, подозрительно похожей на кровь.
-ent-FloraBloodTomatoRandom = Кровяной томат
+ent-FloraBloodTomatoRandom = кровяной томат
     .desc = Томат, наполненный тёмно-красной жидкостью, подозрительно похожей на кровь.
-ent-FloraBloodTomatoEmpty = Пустой кровяной томат
+ent-FloraBloodTomatoEmpty = пустой кровяной томат
     .desc = Куст томата, с которого уже собрали весь урожай.
-ent-FloraBloodTomatoDead = Мёртвый кровяной томат
+ent-FloraBloodTomatoDead = мёртвый кровяной томат
     .desc = Засохший куст, больше не источающий зловещий вид.
 
 # Bloonion
-ent-FloraBloonion = Лук-летун
+ent-FloraBloonion = лук-летун
     .desc = Странный луковичный овощ с синеватым оттенком.
-ent-FloraBloonionRandom = Лук-летун
+ent-FloraBloonionRandom = лук-летун
     .desc = Странный луковичный овощ с синеватым оттенком.
 
 # Blue Pumpkin
-ent-FloraBluePumpkin = Синяя тыква
+ent-FloraBluePumpkin = синяя тыква
     .desc = Необычная тыква синего цвета с плотной сладкой мякотью.
-ent-FloraBluePumpkinRandom = Синяя тыква
+ent-FloraBluePumpkinRandom = синяя тыква
     .desc = Необычная тыква синего цвета с плотной сладкой мякотью.
-ent-FloraBluePumpkinEmpty = Пустая синяя тыква
+ent-FloraBluePumpkinEmpty = пустая синяя тыква
     .desc = Стебель тыквы, с которого уже сняли плод.
-ent-FloraBluePumpkinDead = Мёртвая синяя тыква
+ent-FloraBluePumpkinDead = мёртвая синяя тыква
     .desc = Засохший стебель необычной тыквы.
 
 # Blue Tomato
-ent-FloraBlueTomato = Синий томат
+ent-FloraBlueTomato = синий томат
     .desc = Томат необычного синего цвета с мягким сладковатым вкусом.
-ent-FloraBlueTomatoRandom = Синий томат
+ent-FloraBlueTomatoRandom = синий томат
     .desc = Томат необычного синего цвета с мягким сладковатым вкусом.
-ent-FloraBlueTomatoEmpty = Пустой синий томат
+ent-FloraBlueTomatoEmpty = пустой синий томат
     .desc = Куст томата, с которого уже собрали весь урожай.
-ent-FloraBlueTomatoDead = Мёртвый синий томат
+ent-FloraBlueTomatoDead = мёртвый синий томат
     .desc = Засохший куст необычного томата.
 
 # Bungo
-ent-FloraBungo = Бунго
+ent-FloraBungo = бунго
     .desc = Экзотическое дерево с крупными сочными плодами.
-ent-FloraBungoRandom = Бунго
+ent-FloraBungoRandom = бунго
     .desc = Экзотическое дерево с крупными сочными плодами.
-ent-FloraBungoEmpty = Пустое бунго
+ent-FloraBungoEmpty = пустое бунго
     .desc = Дерево бунго, с которого уже собрали все плоды.
-ent-FloraBungoDead = Мёртвое бунго
+ent-FloraBungoDead = мёртвое бунго
     .desc = Засохшее экзотическое дерево.
 
 # Cabbage
-ent-FloraCabbage = Капуста
+ent-FloraCabbage = капуста
     .desc = Овощная культура с плотными листьями, богатая витаминами.
-ent-FloraCabbageEmpty = Пустая капуста
+ent-FloraCabbageEmpty = пустая капуста
     .desc = Кочан, с которого уже срезали все листья.
-ent-FloraCabbageDead = Мёртвая капуста
+ent-FloraCabbageDead = мёртвая капуста
     .desc = Увядшие остатки овощной культуры.
 
 # Cannabis
-ent-FloraCannabis = Конопля
+ent-FloraCannabis = конопля
     .desc = Растение с характерными резными листьями, используемое в медицине и не только.
-ent-FloraCannabisRandom = Конопля
+ent-FloraCannabisRandom = конопля
     .desc = Растение с характерными резными листьями, используемое в медицине и не только.
-ent-FloraCannabisDead = Мёртвая конопля
+ent-FloraCannabisDead = мёртвая конопля
     .desc = Засохшее растение с поникшими листьями.
 
 # Capfruit
-ent-FloraCapfruit = Пистофрукт
+ent-FloraCapfruit = пистофрукт
     .desc = Плод, содержащий капсаицин — вещество с сильным согревающим эффектом.
-ent-FloraCapfruitRandom = Пистофрукт
+ent-FloraCapfruitRandom = пистофрукт
     .desc = Плод, содержащий капсаицин — вещество с сильным согревающим эффектом.
-ent-FloraCapfruitEmpty = Пустой пистофрукт
+ent-FloraCapfruitEmpty = пустой пистофрукт
     .desc = Стебель пистофрукта, с которого уже сняли плод.
-ent-FloraCapfruitDead = Мёртвый пистофрукт
+ent-FloraCapfruitDead = мёртвый пистофрукт
     .desc = Засохший стебель.
 
 # Carrot
-ent-FloraCarrot = Морковь
+ent-FloraCarrot = морковь
     .desc = Корнеплод оранжевого цвета, богатый витаминами.
-ent-FloraCarrotRandom = Морковь
+ent-FloraCarrotRandom = морковь
     .desc = Корнеплод оранжевого цвета, богатый витаминами.
-ent-FloraCarrotEmpty = Пустая морковь
+ent-FloraCarrotEmpty = пустая морковь
     .desc = Грядка, с которой уже выкопали весь урожай.
-ent-FloraCarrotDead = Мёртвая морковь
+ent-FloraCarrotDead = мёртвая морковь
     .desc = Засохшая ботва без корнеплода.
 
 # Chanterelle
-ent-FloraChanterelle = Лисички
+ent-FloraChanterelle = лисички
     .desc = Съедобный гриб с ярко-жёлтой шляпкой и приятным ароматом.
-ent-FloraChanterelleRandom = Лисички
+ent-FloraChanterelleRandom = лисички
     .desc = Съедобный гриб с ярко-жёлтой шляпкой и приятным ароматом.
-ent-FloraChanterelleDead = Мёртвые лисички
+ent-FloraChanterelleDead = мёртвые лисички
     .desc = Высохший гриб, потерявший свой аромат.
 
 # Cherry
-ent-FloraCherry = Вишнёвое дерево
+ent-FloraCherry = вишнёвое дерево
     .desc = Плодовое дерево с мелкими кисло-сладкими плодами.
-ent-FloraCherryRandom = Вишнёвое дерево
+ent-FloraCherryRandom = вишнёвое дерево
     .desc = Плодовое дерево с мелкими кисло-сладкими плодами.
-ent-FloraCherryEmpty = Пустое вишнёвое дерево
+ent-FloraCherryEmpty = пустое вишнёвое дерево
     .desc = Дерево, с которого уже собрали все вишни.
-ent-FloraCherryDead = Мёртвое вишнёвое дерево
+ent-FloraCherryDead = мёртвое вишнёвое дерево
     .desc = Засохшее плодовое дерево.
 
 # Chili
-ent-FloraChili = Перец чили
+ent-FloraChili = перец чили
     .desc = Острый перец, добавляющий блюдам жгучий вкус.
-ent-FloraChiliRandom = Перец чили
+ent-FloraChiliRandom = перец чили
     .desc = Острый перец, добавляющий блюдам жгучий вкус.
-ent-FloraChiliEmpty = Пустой перец чили
+ent-FloraChiliEmpty = пустой перец чили
     .desc = Куст перца, с которого уже собрали весь урожай.
-ent-FloraChiliDead = Мёртвый перец чили
+ent-FloraChiliDead = мёртвый перец чили
     .desc = Засохший куст острого перца.
 
 # Chilly
-ent-FloraChilly = Перец чилли
+ent-FloraChilly = перец чилли
     .desc = Разновидность острого перца с холодящим послевкусием.
-ent-FloraChillyRandom = Перец чилли
+ent-FloraChillyRandom = перец чилли
     .desc = Разновидность острого перца с холодящим послевкусием.
-ent-FloraChillyEmpty = Пустой перец чилли
+ent-FloraChillyEmpty = пустой перец чилли
     .desc = Куст перца, с которого уже собрали весь урожай.
-ent-FloraChillyDead = Мёртвый перец чилли
+ent-FloraChillyDead = мёртвый перец чилли
     .desc = Засохший куст холодящего перца.
 
 # Cocoa
-ent-FloraCocoa = Какао-бобы
+ent-FloraCocoa = какао-бобы
     .desc = Тропическое дерево, плоды которого используют для производства шоколада.
-ent-FloraCocoaRandom = Какао-бобы
+ent-FloraCocoaRandom = какао-бобы
     .desc = Тропическое дерево, плоды которого используют для производства шоколада.
-ent-FloraCocoaEmpty = Пустое какао-дерево
+ent-FloraCocoaEmpty = пустое какао-дерево
     .desc = Дерево, с которого уже собрали все плоды.
-ent-FloraCocoaDead = Мёртвое какао-дерево
+ent-FloraCocoaDead = мёртвое какао-дерево
     .desc = Засохшее тропическое дерево.
 
 # Corn
-ent-FloraCorn = Кукуруза
+ent-FloraCorn = кукуруза
     .desc = Злаковое растение с крупными жёлтыми зёрнами.
-ent-FloraCornRandom = Кукуруза
+ent-FloraCornRandom = кукуруза
     .desc = Злаковое растение с крупными жёлтыми зёрнами.
-ent-FloraCornEmpty = Пустая кукуруза
+ent-FloraCornEmpty = пустая кукуруза
     .desc = Стебель, с которого уже собрали все початки.
-ent-FloraCornDead = Мёртвая кукуруза
+ent-FloraCornDead = мёртвая кукуруза
     .desc = Засохший злаковый стебель.
 
 # Cotton
-ent-FloraCotton = Хлопок
+ent-FloraCotton = хлопок
     .desc = Растение, дающее мягкое волокно для изготовления тканей.
-ent-FloraCottonRandom = Хлопок
+ent-FloraCottonRandom = хлопок
     .desc = Растение, дающее мягкое волокно для изготовления тканей.
-ent-FloraCottonEmpty = Пустой хлопок
+ent-FloraCottonEmpty = пустой хлопок
     .desc = Стебель, с которого уже собрали всё волокно.
-ent-FloraCottonDead = Мёртвый хлопок
+ent-FloraCottonDead = мёртвый хлопок
     .desc = Засохший стебель хлопчатника.
 
 # Death Nettle
-ent-FloraDeathNettle = Смертокрапива
+ent-FloraDeathNettle = смертокрапива
     .desc = Опасное растение, оставляющее на коже ядовитые ожоги. Лучше не трогать.
-ent-FloraDeathNettleRandom = Смертокрапива
+ent-FloraDeathNettleRandom = смертокрапива
     .desc = Опасное растение, оставляющее на коже ядовитые ожоги. Лучше не трогать.
-ent-FloraDeathNettleEmpty = Пустая смертокрапива
+ent-FloraDeathNettleEmpty = пустая смертокрапива
     .desc = Опасное растение, с которого уже собрали листья.
-ent-FloraDeathNettleDead = Мёртвая смертокрапива
+ent-FloraDeathNettleDead = мёртвая смертокрапива
     .desc = Засохшее опасное растение.
 
 # Eggplant
-ent-FloraEggplant = Баклажан
+ent-FloraEggplant = баклажан
     .desc = Овощ с тёмно-фиолетовой кожицей и плотной мякотью.
-ent-FloraEggplantRandom = Баклажан
+ent-FloraEggplantRandom = баклажан
     .desc = Овощ с тёмно-фиолетовой кожицей и плотной мякотью.
-ent-FloraEggplantEmpty = Пустой баклажан
+ent-FloraEggplantEmpty = пустой баклажан
     .desc = Куст, с которого уже собрали все плоды.
-ent-FloraEggplantDead = Мёртвый баклажан
+ent-FloraEggplantDead = мёртвый баклажан
     .desc = Засохший куст баклажана.
 
 # Eggy
-ent-FloraEggy = Яйцефрут
+ent-FloraEggy = яйцефрут
     .desc = Странное растение, на котором вместо плодов растут яйца.
-ent-FloraEggyRandom = Яйцефрут
+ent-FloraEggyRandom = яйцефрут
     .desc = Странное растение, на котором вместо плодов растут яйца.
-ent-FloraEggyEmpty = Пустой яйцефрут
+ent-FloraEggyEmpty = пустой яйцефрут
     .desc = Странное растение, с которого уже собрали все яйца.
-ent-FloraEggyDead = Мёртвый яйцефрут
+ent-FloraEggyDead = мёртвый яйцефрут
     .desc = Засохшее странное растение.
 
 # Extradimensional Orange
-ent-FloraExtradimensionalOrange = Внепространственный апельсин
+ent-FloraExtradimensionalOrange = внепространственный апельсин
     .desc = Апельсиновое дерево из другого измерения, плоды которого мерцают.
-ent-FloraExtradimensionalOrangeRandom = Внепространственный апельсин
+ent-FloraExtradimensionalOrangeRandom = внепространственный апельсин
     .desc = Апельсиновое дерево из другого измерения, плоды которого мерцают.
-ent-FloraExtradimensionalOrangeEmpty = Пустой внепространственный апельсин
+ent-FloraExtradimensionalOrangeEmpty = пустой внепространственный апельсин
     .desc = Дерево из другого измерения, с которого уже собрали все плоды.
-ent-FloraExtradimensionalOrangeDead = Мёртвый внепространственный апельсин
+ent-FloraExtradimensionalOrangeDead = мёртвый внепространственный апельсин
     .desc = Засохшее дерево из другого измерения.
 
 # Fly Amanita
-ent-FloraFlyAmanita = Мухомор
+ent-FloraFlyAmanita = мухомор
     .desc = Ярко-красный гриб с белыми пятнами. Ядовит.
-ent-FloraFlyAmanitaRandom = Мухомор
+ent-FloraFlyAmanitaRandom = мухомор
     .desc = Ярко-красный гриб с белыми пятнами. Ядовит.
-ent-FloraFlyAmanitaDead = Мёртвый мухомор
+ent-FloraFlyAmanitaDead = мёртвый мухомор
     .desc = Высохший ядовитый гриб.
 
 # Galaxy Thistle
-ent-FloraGalaxyThistle = Галакточертополох
+ent-FloraGalaxyThistle = галакточертополох
     .desc = Колючее растение с цветками, похожими на звёзды.
-ent-FloraGalaxyThistleRandom = Галакточертополох
+ent-FloraGalaxyThistleRandom = галакточертополох
     .desc = Колючее растение с цветками, похожими на звёзды.
-ent-FloraGalaxyThistleEmpty = Пустой галакточертополох
+ent-FloraGalaxyThistleEmpty = пустой галакточертополох
     .desc = Колючее растение, с которого уже собрали цветки.
-ent-FloraGalaxyThistleDead = Мёртвый галакточертополох
+ent-FloraGalaxyThistleDead = мёртвый галакточертополох
     .desc = Засохшее колючее растение.
 
 # Garlic
-ent-FloraGarlic = Чеснок
+ent-FloraGarlic = чеснок
     .desc = Острая луковица с характерным запахом, отпугивающая нечисть.
-ent-FloraGarlicRandom = Чеснок
+ent-FloraGarlicRandom = чеснок
     .desc = Острая луковица с характерным запахом, отпугивающая нечисть.
-ent-FloraGarlicEmpty = Пустой чеснок
+ent-FloraGarlicEmpty = пустой чеснок
     .desc = Грядка, с которой уже выкопали весь урожай.
-ent-FloraGarlicDead = Мёртвый чеснок
+ent-FloraGarlicDead = мёртвый чеснок
     .desc = Засохшая ботва чеснока.
 
 # Gatfruit
-ent-FloraGatfruit = Гатфрукт
+ent-FloraGatfruit = гатфрукт
     .desc = Подозрительный плод, из которого так и хочется выстрелить.
-ent-FloraGatfruitRandom = Гатфрукт
+ent-FloraGatfruitRandom = гатфрукт
     .desc = Подозрительный плод, из которого так и хочется выстрелить.
-ent-FloraGatfruitEmpty = Пустой гатфрукт
+ent-FloraGatfruitEmpty = пустой гатфрукт
     .desc = Дерево, с которого уже собрали все плоды.
-ent-FloraGatfruitDead = Мёртвый гатфрукт
+ent-FloraGatfruitDead = мёртвый гатфрукт
     .desc = Засохшее подозрительное дерево.
 
 # Glasstle
-ent-FloraGlasstle = Стеклополох
+ent-FloraGlasstle = стеклополох
     .desc = Растение со стеклянными колючками, легко ранящими кожу.
-ent-FloraGlasstleRandom = Стеклополох
+ent-FloraGlasstleRandom = стеклополох
     .desc = Растение со стеклянными колючками, легко ранящими кожу.
-ent-FloraGlasstleEmpty = Пустой стеклополох
+ent-FloraGlasstleEmpty = пустой стеклополох
     .desc = Растение, с которого уже собрали все стеклянные плоды.
-ent-FloraGlasstleDead = Мёртвый стеклополох
+ent-FloraGlasstleDead = мёртвый стеклополох
     .desc = Засохшее колючее растение.
 
 # Golden Apple
-ent-FloraGoldenAppleTree = Золотая яблоня
+ent-FloraGoldenAppleTree = золотая яблоня
     .desc = Легендарное дерево, приносящее золотые яблоки.
-ent-FloraGoldenAppleTreeRandom = Золотая яблоня
+ent-FloraGoldenAppleTreeRandom = золотая яблоня
     .desc = Легендарное дерево, приносящее золотые яблоки.
-ent-FloraGoldenAppleEmpty = Пустая золотая яблоня
+ent-FloraGoldenAppleEmpty = пустая золотая яблоня
     .desc = Дерево, с которого уже собрали все золотые яблоки.
-ent-FloraGoldenApplTreeeDead = Мёртвая золотая яблоня
+ent-FloraGoldenApplTreeeDead = мёртвая золотая яблоня
     .desc = Засохшее легендарное дерево.
 
 # Grape
-ent-FloraGrape = Виноград
+ent-FloraGrape = виноград
     .desc = Вьющееся растение с гроздьями сладких ягод.
-ent-FloraGrapeRandom = Виноград
+ent-FloraGrapeRandom = виноград
     .desc = Вьющееся растение с гроздьями сладких ягод.
-ent-FloraGrapeEmpty = Пустой виноград
+ent-FloraGrapeEmpty = пустой виноград
     .desc = Лоза, с которой уже собрали все гроздья.
-ent-FloraGrapeDead = Мёртвый виноград
+ent-FloraGrapeDead = мёртвый виноград
     .desc = Засохшая виноградная лоза.
 
 # Holymelon
-ent-FloraHolymelon = Святой арбуз
+ent-FloraHolymelon = святой арбуз
     .desc = Арбуз, излучающий слабое святое сияние.
-ent-FloraHolymelonRandom = Святой арбуз
+ent-FloraHolymelonRandom = святой арбуз
     .desc = Арбуз, излучающий слабое святое сияние.
-ent-FloraHolymelonEmpty = Пустой святой арбуз
+ent-FloraHolymelonEmpty = пустой святой арбуз
     .desc = Стебель, с которого уже сняли святой плод.
-ent-FloraHolymelonDead = Мёртвый святой арбуз
+ent-FloraHolymelonDead = мёртвый святой арбуз
     .desc = Засохший стебель святого арбуза.
 
 # Koibean
-ent-FloraKoibean = КоиБобы
+ent-FloraKoibean = коиБобы
     .desc = Бобовая культура с яркими плодами, напоминающими карпов кои.
-ent-FloraKoibeanRandom = КоиБобы
+ent-FloraKoibeanRandom = коиБобы
     .desc = Бобовая культура с яркими плодами, напоминающими карпов кои.
-ent-FloraKoibeanEmpty = Пустые КоиБобы
+ent-FloraKoibeanEmpty = пустые коиБобы
     .desc = Куст, с которого уже собрали все бобы.
-ent-FloraKoibeanDead = Мёртвые КоиБобы
+ent-FloraKoibeanDead = мёртвые коиБобы
     .desc = Засохший куст бобовой культуры.
 
 # Laughin Pea
-ent-FloraLaughinPea = Смешной горошек
+ent-FloraLaughinPea = смешной горошек
     .desc = Горох, при употреблении вызывающий приступы неконтролируемого смеха.
-ent-FloraLaughinPeaRandom = Смешной горошек
+ent-FloraLaughinPeaRandom = смешной горошек
     .desc = Горох, при употреблении вызывающий приступы неконтролируемого смеха.
-ent-FloraLaughinPeaEmpty = Пустой смешной горошек
+ent-FloraLaughinPeaEmpty = пустой смешной горошек
     .desc = Растение, с которого уже собрали все стручки.
-ent-FloraLaughinPeaDead = Мёртвый смешной горошек
+ent-FloraLaughinPeaDead = мёртвый смешной горошек
     .desc = Засохшее растение.
 
 # Lemon
-ent-FloraLemon = Лимонное дерево
+ent-FloraLemon = лимонное дерево
     .desc = Цитрусовое дерево с кислыми жёлтыми плодами.
-ent-FloraLemonRandom = Лимонное дерево
+ent-FloraLemonRandom = лимонное дерево
     .desc = Цитрусовое дерево с кислыми жёлтыми плодами.
-ent-FloraLemonEmpty = Пустое лимонное дерево
+ent-FloraLemonEmpty = пустое лимонное дерево
     .desc = Дерево, с которого уже собрали все лимоны.
-ent-FloraLemonDead = Мёртвое лимонное дерево
+ent-FloraLemonDead = мёртвое лимонное дерево
     .desc = Засохшее цитрусовое дерево.
 
 # Lemoon
-ent-FloraLemoon = Лилун
+ent-FloraLemoon = лилун
     .desc = Странное дерево с плодами, светящимися в темноте.
-ent-FloraLemoonRandom = Лилун
+ent-FloraLemoonRandom = лилун
     .desc = Странное дерево с плодами, светящимися в темноте.
-ent-FloraLemoonEmpty = Пустой лилун
+ent-FloraLemoonEmpty = пустой лилун
     .desc = Дерево, с которого уже собрали все светящиеся плоды.
-ent-FloraLemoonDead = Мёртвый лилун
+ent-FloraLemoonDead = мёртвый лилун
     .desc = Засохшее странное дерево.
 
 # Lily
-ent-FloraLily = Лилия
+ent-FloraLily = лилия
     .desc = Изящный цветок с крупными ароматными лепестками.
-ent-FloraLilyRandom = Лилия
+ent-FloraLilyRandom = лилия
     .desc = Изящный цветок с крупными ароматными лепестками.
-ent-FloraLilyEmpty = Пустая лилия
+ent-FloraLilyEmpty = пустая лилия
     .desc = Цветок, с которого уже собрали все лепестки.
-ent-FloraLilyDead = Мёртвая лилия
+ent-FloraLilyDead = мёртвая лилия
     .desc = Увядший цветок.
 
 # Lime
-ent-FloraLime = Лаймовое дерево
+ent-FloraLime = лаймовое дерево
     .desc = Небольшое цитрусовое дерево с зелёными кислыми плодами.
-ent-FloraLimeRandom = Лаймовое дерево
+ent-FloraLimeRandom = лаймовое дерево
     .desc = Небольшое цитрусовое дерево с зелёными кислыми плодами.
-ent-FloraLimeEmpty = Пустое лаймовое дерево
+ent-FloraLimeEmpty = пустое лаймовое дерево
     .desc = Дерево, с которого уже собрали все лаймы.
-ent-FloraLimeDead = Мёртвое лаймовое дерево
+ent-FloraLimeDead = мёртвое лаймовое дерево
     .desc = Засохшее цитрусовое дерево.
 
 # Lingzhi
-ent-FloraLingzhi = Линчжи
+ent-FloraLingzhi = линчжи
     .desc = Трутовик с целебными свойствами, известный как гриб бессмертия.
-ent-FloraLingzhiRandom = Линчжи
+ent-FloraLingzhiRandom = линчжи
     .desc = Трутовик с целебными свойствами, известный как гриб бессмертия.
-ent-FloraLingzhiEmpty = Пустой линчжи
+ent-FloraLingzhiEmpty = пустой линчжи
     .desc = Гриб, с которого уже срезали все шляпки.
-ent-FloraLingzhiDead = Мёртвый линчжи
+ent-FloraLingzhiDead = мёртвый линчжи
     .desc = Высохший целебный гриб.
 
 # Meatwheat
-ent-FloraMeatwheat = Мясница
+ent-FloraMeatwheat = мясница
     .desc = Странный злак, зёрна которого напоминают кусочки мяса.
-ent-FloraMeatwheatRandom = Мясница
+ent-FloraMeatwheatRandom = мясница
     .desc = Странный злак, зёрна которого напоминают кусочки мяса.
-ent-FloraMeatwheatEmpty = Пустая мясница
+ent-FloraMeatwheatEmpty = пустая мясница
     .desc = Стебель, с которого уже собрали все зёрна.
-ent-FloraMeatwheatDead = Мёртвая мясница
+ent-FloraMeatwheatDead = мёртвая мясница
     .desc = Засохший странный злак.
 
 # Mimana
-ent-FloraMimana = Миман
+ent-FloraMimana = миман
     .desc = Странное растение, вызывающее временную немоту.
-ent-FloraMimanaRandom = Миман
+ent-FloraMimanaRandom = миман
     .desc = Странное растение, вызывающее временную немоту.
-ent-FloraMimanaEmpty = Пустой миман
+ent-FloraMimanaEmpty = пустой миман
     .desc = Растение, с которого уже собрали все плоды.
-ent-FloraMimanaDead = Мёртвый миман
+ent-FloraMimanaDead = мёртвый миман
     .desc = Засохшее странное растение.
 
 # Nettle
-ent-FloraNettle = Крапива
+ent-FloraNettle = крапива
     .desc = Жгучее растение, оставляющее зудящие волдыри на коже.
-ent-FloraNettleRandom = Крапива
+ent-FloraNettleRandom = крапива
     .desc = Жгучее растение, оставляющее зудящие волдыри на коже.
-ent-FloraNettleEmpty = Пустая крапива
+ent-FloraNettleEmpty = пустая крапива
     .desc = Жгучее растение, с которого уже собрали листья.
-ent-FloraNettleDead = Мёртвая крапива
+ent-FloraNettleDead = мёртвая крапива
     .desc = Засохшее жгучее растение.
 
 # Oat
-ent-FloraOat = Овёс
+ent-FloraOat = овёс
     .desc = Злаковая культура, используемая в пищу и на корм скоту.
-ent-FloraOatRandom = Овёс
+ent-FloraOatRandom = овёс
     .desc = Злаковая культура, используемая в пищу и на корм скоту.
-ent-FloraOatEmpty = Пустой овёс
+ent-FloraOatEmpty = пустой овёс
     .desc = Стебель, с которого уже собрали все зёрна.
-ent-FloraOatDead = Мёртвый овёс
+ent-FloraOatDead = мёртвый овёс
     .desc = Засохший злаковый стебель.
 
 # Onion
-ent-FloraOnion = Лук
+ent-FloraOnion = лук
     .desc = Овощ с характерным запахом и вкусом, вызывающий слёзы при нарезке.
-ent-FloraOnionRandom = Лук
+ent-FloraOnionRandom = лук
     .desc = Овощ с характерным запахом и вкусом, вызывающий слёзы при нарезке.
-ent-FloraOnionDead = Мёртвый лук
+ent-FloraOnionDead = мёртвый лук
     .desc = Засохшая ботва лука.
 
 # Red Onion
-ent-FloraOnionRed = Красный лук
+ent-FloraOnionRed = красный лук
     .desc = Разновидность лука с более сладким и мягким вкусом.
-ent-FloraOnionRedRandom = Красный лук
+ent-FloraOnionRedRandom = красный лук
     .desc = Разновидность лука с более сладким и мягким вкусом.
-ent-FloraOnionRedDead = Мёртвый красный лук
+ent-FloraOnionRedDead = мёртвый красный лук
     .desc = Засохшая ботва красного лука.
 
 # Orange
-ent-FloraOrange = Апельсиновое дерево
+ent-FloraOrange = апельсиновое дерево
     .desc = Цитрусовое дерево с сочными оранжевыми плодами.
-ent-FloraOrangeRandom = Апельсиновое дерево
+ent-FloraOrangeRandom = апельсиновое дерево
     .desc = Цитрусовое дерево с сочными оранжевыми плодами.
-ent-FloraOrangeEmpty = Пустое апельсиновое дерево
+ent-FloraOrangeEmpty = пустое апельсиновое дерево
     .desc = Дерево, с которого уже собрали все апельсины.
-ent-FloraOrangeDead = Мёртвое апельсиновое дерево
+ent-FloraOrangeDead = мёртвое апельсиновое дерево
     .desc = Засохшее цитрусовое дерево.
 
 # Papercane
-ent-FloraPapercane = Бумажный тростник
+ent-FloraPapercane = бумажный тростник
     .desc = Растение, стебли которого используют для производства бумаги.
-ent-FloraPapercaneRandom = Бумажный тростник
+ent-FloraPapercaneRandom = бумажный тростник
     .desc = Растение, стебли которого используют для производства бумаги.
-ent-FloraPapercaneEmpty = Пустой бумажный тростник
+ent-FloraPapercaneEmpty = пустой бумажный тростник
     .desc = Стебель, с которого уже срезали всю бумажную массу.
-ent-FloraPapercaneDead = Мёртвый бумажный тростник
+ent-FloraPapercaneDead = мёртвый бумажный тростник
     .desc = Засохший стебель бумажного тростника.
 
 # Pea
-ent-FloraPea = Горох
+ent-FloraPea = горох
     .desc = Вьющееся растение с питательными зелёными горошинами.
-ent-FloraPeaRandom = Горох
+ent-FloraPeaRandom = горох
     .desc = Вьющееся растение с питательными зелёными горошинами.
-ent-FloraPeaEmpty = Пустой горох
+ent-FloraPeaEmpty = пустой горох
     .desc = Растение, с которого уже собрали все стручки.
-ent-FloraPeaDead = Мёртвый горох
+ent-FloraPeaDead = мёртвый горох
     .desc = Засохшее вьющееся растение.
 
 # Pineapple
-ent-FloraPineapple = Ананас
+ent-FloraPineapple = ананас
     .desc = Тропическое растение с крупным колючим плодом.
-ent-FloraPineappleRandom = Ананас
+ent-FloraPineappleRandom = ананас
     .desc = Тропическое растение с крупным колючим плодом.
-ent-FloraPineappleEmpty = Пустой ананас
+ent-FloraPineappleEmpty = пустой ананас
     .desc = Растение, с которого уже сняли плод.
-ent-FloraPineappleDead = Мёртвый ананас
+ent-FloraPineappleDead = мёртвый ананас
     .desc = Засохшее тропическое растение.
 
 # Poppy
-ent-FloraPoppy = Мак
+ent-FloraPoppy = мак
     .desc = Яркий цветок, из которого получают опиум.
-ent-FloraPoppyRandom = Мак
+ent-FloraPoppyRandom = мак
     .desc = Яркий цветок, из которого получают опиум.
-ent-FloraPoppyEmpty = Пустой мак
+ent-FloraPoppyEmpty = пустой мак
     .desc = Цветок, с которого уже собрали все лепестки.
-ent-FloraPoppyDead = Мёртвый мак
+ent-FloraPoppyDead = мёртвый мак
     .desc = Увядший цветок.
 
 # Potato
-ent-FloraPotato = Картофель
+ent-FloraPotato = картофель
     .desc = Клубневое растение, второй хлеб.
-ent-FloraPotatoRandom = Картофель
+ent-FloraPotatoRandom = картофель
     .desc = Клубневое растение, второй хлеб.
-ent-FloraPotatoEmpty = Пустой картофель
+ent-FloraPotatoEmpty = пустой картофель
     .desc = Грядка, с которой уже выкопали весь урожай.
-ent-FloraPotatoDead = Мёртвый картофель
+ent-FloraPotatoDead = мёртвый картофель
     .desc = Засохшая ботва картофеля.
 
 # Pumpkin
-ent-FloraPumpkin = Тыква
+ent-FloraPumpkin = тыква
     .desc = Крупный оранжевый плод с плотной мякотью.
-ent-FloraPumpkinRandom = Тыква
+ent-FloraPumpkinRandom = тыква
     .desc = Крупный оранжевый плод с плотной мякотью.
-ent-FloraPumpkinEmpty = Пустая тыква
+ent-FloraPumpkinEmpty = пустая тыква
     .desc = Стебель, с которого уже сняли плод.
-ent-FloraPumpkinDead = Мёртвая тыква
+ent-FloraPumpkinDead = мёртвая тыква
     .desc = Засохший стебель тыквы.
 
 # Pyrotton
-ent-FloraPyrotton = Пирохлопок
+ent-FloraPyrotton = пирохлопок
     .desc = Растение с плодами, которые могут внезапно воспламениться.
-ent-FloraPyrottonRandom = Пирохлопок
+ent-FloraPyrottonRandom = пирохлопок
     .desc = Растение с плодами, которые могут внезапно воспламениться.
-ent-FloraPyrottonEmpty = Пустой пирохлопок
+ent-FloraPyrottonEmpty = пустой пирохлопок
     .desc = Растение, с которого уже собрали все огнеопасные плоды.
-ent-FloraPyrottonDead = Мёртвый пирохлопок
+ent-FloraPyrottonDead = мёртвый пирохлопок
     .desc = Засохшее огнеопасное растение.
 
 # Rainbow Cannabis
-ent-FloraRainbowCannabis = Радужная конопля
+ent-FloraRainbowCannabis = радужная конопля
     .desc = Конопля с радужными листьями необычайной красоты.
-ent-FloraRainbowCannabisRandom = Радужная конопля
+ent-FloraRainbowCannabisRandom = радужная конопля
     .desc = Конопля с радужными листьями необычайной красоты.
-ent-FloraRainbowCannabisEmpty = Пустая радужная конопля
+ent-FloraRainbowCannabisEmpty = пустая радужная конопля
     .desc = Растение, с которого уже собрали все радужные листья.
-ent-FloraRainbowCannabisDead = Мёртвая радужная конопля
+ent-FloraRainbowCannabisDead = мёртвая радужная конопля
     .desc = Засохшее радужное растение.
 
 # Rice
-ent-FloraRice = Рис
+ent-FloraRice = рис
     .desc = Злак, дающий белые зёрна — основа многих блюд.
-ent-FloraRiceRandom = Рис
+ent-FloraRiceRandom = рис
     .desc = Злак, дающий белые зёрна — основа многих блюд.
-ent-FloraRiceEmpty = Пустой рис
+ent-FloraRiceEmpty = пустой рис
     .desc = Стебель, с которого уже собрали все зёрна.
-ent-FloraRiceDead = Мёртвый рис
+ent-FloraRiceDead = мёртвый рис
     .desc = Засохший злаковый стебель.
 
 # Soybeans
-ent-FloraSoybeans = Соя
+ent-FloraSoybeans = соя
     .desc = Бобовая культура, богатая белком.
-ent-FloraSoybeansRandom = Соя
+ent-FloraSoybeansRandom = соя
     .desc = Бобовая культура, богатая белком.
-ent-FloraSoybeansEmpty = Пустая соя
+ent-FloraSoybeansEmpty = пустая соя
     .desc = Куст, с которого уже собрали все бобы.
-ent-FloraSoybeansDead = Мёртвая соя
+ent-FloraSoybeansDead = мёртвая соя
     .desc = Засохший куст бобовой культуры.
 
 # Spaceman's Trumpet
-ent-FloraSpacemansTrumpet = Космонавтская труба
+ent-FloraSpacemansTrumpet = космонавтская труба
     .desc = Растение с цветками, похожими на раструб скафандра.
-ent-FloraSpacemansTrumpetRandom = Космонавтская труба
+ent-FloraSpacemansTrumpetRandom = космонавтская труба
     .desc = Растение с цветками, похожими на раструб скафандра.
-ent-FloraSpacemansTrumpetEmpty = Пустая космонавтская труба
+ent-FloraSpacemansTrumpetEmpty = пустая космонавтская труба
     .desc = Растение, с которого уже собрали все цветки.
-ent-FloraSpacemansTrumpetDead = Мёртвая космонавтская труба
+ent-FloraSpacemansTrumpetDead = мёртвая космонавтская труба
     .desc = Засохшее растение с поникшими цветками.
 
 # Steelcap
-ent-FloraSteelcap = Сталешляпник
+ent-FloraSteelcap = сталешляпник
     .desc = Гриб с металлической шляпкой, из которой получают сталь.
-ent-FloraSteelcapRandom = Сталешляпник
+ent-FloraSteelcapRandom = сталешляпник
     .desc = Гриб с металлической шляпкой, из которой получают сталь.
-ent-FloraSteelcapEmpty = Пустой сталешляпник
+ent-FloraSteelcapEmpty = пустой сталешляпник
     .desc = Гриб, с которого уже срезали шляпку.
-ent-FloraSteelcapDead = Мёртвый сталешляпник
+ent-FloraSteelcapDead = мёртвый сталешляпник
     .desc = Высохший металлический гриб.
 
 # Sugarcane
-ent-FloraSugarcane = Сахарный тростник
+ent-FloraSugarcane = сахарный тростник
     .desc = Высокое растение, из стеблей которого добывают сахар.
-ent-FloraSugarcaneRandom = Сахарный тростник
+ent-FloraSugarcaneRandom = сахарный тростник
     .desc = Высокое растение, из стеблей которого добывают сахар.
-ent-FloraSugarcaneEmpty = Пустой сахарный тростник
+ent-FloraSugarcaneEmpty = пустой сахарный тростник
     .desc = Стебель, из которого уже выжали весь сок.
-ent-FloraSugarcaneDead = Мёртвый сахарный тростник
+ent-FloraSugarcaneDead = мёртвый сахарный тростник
     .desc = Засохший стебель сахарного тростника.
 
 # Tea Plant
-ent-FloraTeaPlant = Чайный куст
+ent-FloraTeaPlant = чайный куст
     .desc = Растение, листья которого используют для приготовления чая.
-ent-FloraTeaPlantRandom = Чайный куст
+ent-FloraTeaPlantRandom = чайный куст
     .desc = Растение, листья которого используют для приготовления чая.
-ent-FloraTeaPlantEmpty = Пустой чайный куст
+ent-FloraTeaPlantEmpty = пустой чайный куст
     .desc = Куст, с которого уже собрали все листья.
-ent-FloraTeaPlantDead = Мёртвый чайный куст
+ent-FloraTeaPlantDead = мёртвый чайный куст
     .desc = Засохший чайный куст.
 
 # Tobacco
-ent-FloraTobacco = Табачный куст
+ent-FloraTobacco = табачный куст
     .desc = Растение с листьями, используемыми для курения.
-ent-FloraTobaccoRandom = Табачный куст
+ent-FloraTobaccoRandom = табачный куст
     .desc = Растение с листьями, используемыми для курения.
-ent-FloraTobaccoEmpty = Пустой табачный куст
+ent-FloraTobaccoEmpty = пустой табачный куст
     .desc = Растение, с которого уже собрали все листья.
-ent-FloraTobaccoDead = Мёртвый табачный куст
+ent-FloraTobaccoDead = мёртвый табачный куст
     .desc = Засохшее растение табака.
 
 # Tomato
-ent-FloraTomato = Томат
+ent-FloraTomato = томат
     .desc = Овощ с сочными красными плодами.
-ent-FloraTomatoRandom = Томат
+ent-FloraTomatoRandom = томат
     .desc = Овощ с сочными красными плодами.
-ent-FloraTomatoEmpty = Пустой томат
+ent-FloraTomatoEmpty = пустой томат
     .desc = Куст, с которого уже собрали все плоды.
-ent-FloraTomatoDead = Мёртвый томат
+ent-FloraTomatoDead = мёртвый томат
     .desc = Засохший куст томата.
 
 # Tomato Killer
-ent-FloraTomatoKiller = Томат-убийца
+ent-FloraTomatoKiller = томат-убийца
     .desc = Плотоядный томат, атакующий всё, что движется.
-ent-FloraTomatoKillerRandom = Томат-убийца
+ent-FloraTomatoKillerRandom = томат-убийца
     .desc = Плотоядный томат, атакующий всё, что движется.
-ent-FloraTomatoKillerDead = Мёртвый томат-убийца
+ent-FloraTomatoKillerDead = мёртвый томат-убийца
     .desc = Засохший плотоядный куст.
 
 # Towercap
-ent-FloraTowercap = Грибошляпник
+ent-FloraTowercap = грибошляпник
     .desc = Крупный гриб, используемый для получения древесины.
-ent-FloraTowercapRandom = Грибошляпник
+ent-FloraTowercapRandom = грибошляпник
     .desc = Крупный гриб, используемый для получения древесины.
-ent-FloraTowercapEmpty = Пустой грибошляпник
+ent-FloraTowercapEmpty = пустой грибошляпник
     .desc = Гриб, с которого уже срезали всю шляпку.
-ent-FloraTowercapDead = Мёртвый грибошляпник
+ent-FloraTowercapDead = мёртвый грибошляпник
     .desc = Высохший крупный гриб.
 
 # Watermelon
-ent-FloraWatermelon = Арбуз
+ent-FloraWatermelon = арбуз
     .desc = Крупная полосатая ягода с сочной красной мякотью.
-ent-FloraWatermelonRandom = Арбуз
+ent-FloraWatermelonRandom = арбуз
     .desc = Крупная полосатая ягода с сочной красной мякотью.
-ent-FloraWatermelonEmpty = Пустой арбуз
+ent-FloraWatermelonEmpty = пустой арбуз
     .desc = Стебель, с которого уже сняли плод.
-ent-FloraWatermelonDead = Мёртвый арбуз
+ent-FloraWatermelonDead = мёртвый арбуз
     .desc = Засохший стебель арбуза.
 
 # Wheat
-ent-FloraWheat = Пшеница
+ent-FloraWheat = пшеница
     .desc = Злаковая культура, основа хлебопечения.
-ent-FloraWheatRandom = Пшеница
+ent-FloraWheatRandom = пшеница
     .desc = Злаковая культура, основа хлебопечения.
-ent-FloraWheatEmpty = Пустая пшеница
+ent-FloraWheatEmpty = пустая пшеница
     .desc = Стебель, с которого уже собрали все зёрна.
-ent-FloraWheatDead = Мёртвая пшеница
+ent-FloraWheatDead = мёртвая пшеница
     .desc = Засохший злаковый стебель.
 
 # World Pea
-ent-FloraWorldPea = Горох мира
+ent-FloraWorldPea = горох мира
     .desc = Гигантский горох, плоды которого достигают невероятных размеров.
-ent-FloraWorldPeaRandom = Горох мира
+ent-FloraWorldPeaRandom = горох мира
     .desc = Гигантский горох, плоды которого достигают невероятных размеров.
-ent-FloraWorldPeaEmpty = Пустой горох мира
+ent-FloraWorldPeaEmpty = пустой горох мира
     .desc = Гигантское растение, с которого уже собрали все стручки.
-ent-FloraWorldPeaDead = Мёртвый горох мира
+ent-FloraWorldPeaDead = мёртвый горох мира
     .desc = Засохшее гигантское растение.
