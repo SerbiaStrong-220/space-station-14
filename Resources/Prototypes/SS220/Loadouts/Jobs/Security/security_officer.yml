@@ -179,3 +179,10 @@
     proto: TacSec
   equipment:
     gloves: ClothingHandsGlovesSecTactical
+
+# Storage
+- type: loadout
+  id: SecurityBadge
+  storage:
+    back:
+    - ClothingNeckBadgeSecurity

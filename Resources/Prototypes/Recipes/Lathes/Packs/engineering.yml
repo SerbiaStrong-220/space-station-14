@@ -27,6 +27,7 @@
   - DeviceCalculator #SS220 Calculator
   - CassetteTape # SS220 Tape Recorder #32234 early merge
   - TapeRecorder # SS220 Tape Recorder #32234 early merge
+  - CassetteTapeLargeCapacity # SS220 Tape Recorder & BodyCam update
 
 - type: latheRecipePack
   id: AtmosStatic

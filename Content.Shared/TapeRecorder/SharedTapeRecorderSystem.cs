@@ -94,6 +94,11 @@ public abstract class SharedTapeRecorderSystem : EntitySystem
     /// </summary>
     private void OnChangeModeMessage(Entity<TapeRecorderComponent> ent, ref ChangeModeTapeRecorderMessage args)
     {
+        // SS220 TapeRecorder & Bodycam update BGN
+        if (args.Mode == TapeRecorderMode.Recording && ent.Comp.RecordingOnly)
+            return;
+        // SS220 TapeRecorder & Bodycam update END
+
         SetMode(ent, args.Mode);
     }
 
@@ -336,6 +341,12 @@ public abstract class SharedTapeRecorderSystem : EntitySystem
     /// <param name="mode">The new mode</param>
     private void SetMode(Entity<TapeRecorderComponent> ent, TapeRecorderMode mode)
     {
+
+        // SS220 TapeRecorder & Bodycam update BGN
+        if (mode == TapeRecorderMode.Recording && ent.Comp.RecordingOnly)
+            return;
+        // SS220 TapeRecorder & Bodycam update END
+
         if (mode == ent.Comp.Mode)
             return;
 
