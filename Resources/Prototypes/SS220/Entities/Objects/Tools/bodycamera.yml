@@ -47,7 +47,7 @@
 
   - type: Tag
     tags:
-      - DetectiveCamera
+    - DetectiveCamera
 
 - type: entity
   id: BodyCameraSecurity
