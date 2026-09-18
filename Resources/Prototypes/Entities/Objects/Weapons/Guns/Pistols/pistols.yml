@@ -210,14 +210,43 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
     sprite: Objects/Weapons/Guns/Pistols/mk58.rsi
+  - type: ChamberMagazineAmmoProvider
+    soundBoltClosed: 
+      path: /Audio/SS220/Weapons/Guns/Bolt/mk_slide_closed.ogg # SS220 MK Resound by Rivgane
+    soundBoltOpened: 
+      path: /Audio/SS220/Weapons/Guns/Bolt/mk_slide_open.ogg # SS220 MK Resound by Rivgane
+    soundRack: 
+      path: /Audio/SS220/Weapons/Guns/Cock/mk_cock.ogg # SS220 MK Resound by Rivgane
   - type: Item
     storedOffset: 0,-2
   - type: Gun
     fireRate: 5
     availableModes:
     - SemiAuto
+    soundMode:
+      path: /Audio/SS220/Weapons/Guns/Misc/mk_selector.ogg # SS220 MK Resound by Rivgane (though it is unused)
     soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/mk58.ogg
+      path: /Audio/SS220/Weapons/Guns/Gunshots/mk_shot.ogg # SS220 MK Resound by Rivgane
+    soundEmpty: /Audio/SS220/Weapons/Guns/Empty/mk_dryfire.ogg # SS220 MK Resound by Rivgane
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazinePistol
+        insertSound: /Audio/SS220/Weapons/Guns/MagIn/mk_magin.ogg # SS220 MK Resound by Rivgane
+        ejectSound: /Audio/SS220/Weapons/Guns/MagOut/mk_magout.ogg # SS220 MK Resound by Rivgane
+        priority: 2
+        whitelist:
+          tags:
+            - MagazinePistol
+            - MagazinePistolHighCapacity
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgePistol
   - type: StealTarget
     stealGroup: OfficerHandgun
 
