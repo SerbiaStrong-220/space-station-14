@@ -1916,8 +1916,7 @@
     sprite: /Textures/Objects/Specific/Hydroponics/chanterelle.rsi
     noRot: true
     offset: 0, 0.15
-    renderLayer: Mobs
-    drawdepth: Overdoors
+    renderLayer: Item
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -1925,10 +1924,12 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.1,0.1"
-        density: 100
-        layer:
-        - WallLayer
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Wood
@@ -7406,7 +7407,6 @@
     - random:
         stage-1: ""
         stage-2: ""
-        stage-3: ""
 
 - type: entity
   parent: FloraSteelcapBase
@@ -7441,15 +7441,6 @@
           SteelLog:
             min: 2
             max: 6
-
-- type: entity
-  parent: FloraSteelcapBase
-  id: FloraSteelcapEmpty
-  name: Empty Steelcap
-  components:
-  - type: Sprite
-    layers:
-    - state: stage-3
 
 - type: entity
   parent: FloraSteelcapBase
@@ -8024,7 +8015,6 @@
     - random:
         stage-1: ""
         stage-2: ""
-        stage-3: ""
 
 - type: entity
   parent: FloraTowercapBase
@@ -8059,15 +8049,6 @@
           Log:
             min: 2
             max: 4
-
-- type: entity
-  parent: FloraTowercapBase
-  id: FloraTowercapEmpty
-  name: Empty Towercap
-  components:
-  - type: Sprite
-    layers:
-    - state: stage-3
 
 - type: entity
   parent: FloraTowercapBase
