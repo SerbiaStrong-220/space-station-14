@@ -49,13 +49,6 @@
       uiWindowPos: 0,3
       strippingWindowPos: 0,0
       displayName: Eyes
-    - name: ears
-      slotTexture: ears
-      slotFlags: EARS
-      stripTime: 3
-      uiWindowPos: 2,2
-      strippingWindowPos: 2,0
-      displayName: Ears
     - name: head
       slotTexture: head
       slotFlags: HEAD

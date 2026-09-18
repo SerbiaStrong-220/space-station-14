@@ -1,4 +1,3 @@
-#SS220 shield rework begin
 ent-BaseShield = базовый щит
     .desc = Щит!
 .suffix = старый
@@ -40,4 +39,3 @@ ent-BrokenEnergyShield = сломанное подозрительное уст�
 ent-TelescopicShield = телескопический щит
     .desc = Продвинутый щит на случай беспорядков, изготовлен из облегчённых материалов, способен складываться для удобства хранения.
     .suffix = старый
-#SS220 shield rework end

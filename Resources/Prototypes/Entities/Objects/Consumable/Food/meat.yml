@@ -959,10 +959,10 @@
     - Meat
   - type: Sprite
     state: meatball
+  - type: Construction
+    graph: MeatMeatballRolled # SS220-meatball-roll-fix
+    node: start
 # SS220-kitchen-processor begin
-#  - type: Construction
-#    graph: MeatMeatballCooked
-#    node: start
   - type: Grillable
     timeToCook: 10
     cookingResult: FoodMeatMeatballCooked
@@ -984,10 +984,10 @@
     state: raw_patty
   - type: InternalTemperature
     conductivity: 0.43
+  - type: Construction
+    graph: MeatMeatballRolled #SS220-meatball-roll-fix
+    node: meat patty #SS220-meatball-roll-fix
     #SS220-grillables-update begin
-#  - type: Construction
-#    graph: CookedPatty
-#    node: start
 #    defaultTarget: cooked meat patty
   - type: Grillable
     timeToCook: 30
