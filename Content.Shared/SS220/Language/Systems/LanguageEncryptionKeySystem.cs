@@ -20,6 +20,8 @@ public sealed partial class LanguageEncryptionKeySystem : EntitySystem
     [Dependency] private SharedBatterySystem _battery = default!;
     [Dependency] private PowerCellSystem _powerCell = default!;
 
+    private const float EmptyChargeLevel = 0f;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -152,7 +154,7 @@ public sealed partial class LanguageEncryptionKeySystem : EntitySystem
         if (!_powerCell.TryGetBatteryFromSlot(ent, out var battery))
             return false;
 
-        return _battery.GetChargeLevel(battery.Value.AsNullable()) > 0f;
+        return _battery.GetChargeLevel(battery.Value.AsNullable()) > EmptyChargeLevel;
     }
 
     private void AddLanguagesFromHeadset(EntityUid headsetUid, EntityUid wearer)
