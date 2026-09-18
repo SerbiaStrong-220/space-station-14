@@ -19,7 +19,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -56,7 +56,7 @@
 - type: entity
   parent: FloraAloeBase
   id: FloraAloeRandom
-  name: Aloebush
+  name: Random Aloe
   components:
   - type: Sprite
     layers:
@@ -74,7 +74,7 @@
 - type: entity
   parent: FloraAloeBase
   id: FloraAloe
-  name: aloe
+  name: Aloe
   components:
   - type: Sprite
     layers:
@@ -135,7 +135,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -172,7 +172,7 @@
 - type: entity
   parent: FloraAmbrosiaDeusBase
   id: FloraAmbrosiaDeusRandom
-  name: Ambrosia Deus
+  name: Random Ambrosia Deus
   components:
   - type: Sprite
     layers:
@@ -251,7 +251,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -288,7 +288,7 @@
 - type: entity
   parent: FloraAmbrosiaVulgarisBase
   id: FloraAmbrosiaVulgarisRandom
-  name: Ambrosia Vulgaris
+  name: Random Ambrosia Vulgaris
   components:
   - type: Sprite
     layers:
@@ -358,8 +358,7 @@
     sprite: /Textures/Objects/Specific/Hydroponics/anomaly_berry.rsi
     noRot: true
     offset: 0, 0.15
-    renderLayer: Mobs
-    drawdepth: Overdoors
+    renderLayer: Item
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -367,10 +366,12 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
-        density: 100
-        layer:
-        - WallLayer
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Wood
@@ -404,7 +405,7 @@
 - type: entity
   parent: FloraAnomalyBerryBase
   id: FloraAnomalyBerryRandom
-  name: Anomaly Berry
+  name: Random Anomaly Berry
   components:
   - type: Sprite
     layers:
@@ -480,7 +481,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -566,8 +567,8 @@
             min: 2
             max: 12
           Log:
-            min: 2
-            max: 4
+            min: 1
+            max: 2
 
 - type: entity
   parent: FloraAppleBase
@@ -608,7 +609,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -694,8 +695,8 @@
             min: 2
             max: 10
           Log:
-            min: 2
-            max: 4
+            min: 1
+            max: 2
 
 - type: entity
   parent: FloraBananaBase
@@ -736,7 +737,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -861,7 +862,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -987,7 +988,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -1093,8 +1094,8 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
-        density: 100
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 200
         layer:
         - WallLayer
   - type: Damageable
@@ -1215,7 +1216,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -1340,7 +1341,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -1424,8 +1425,8 @@
             min: 5
             max: 17
           Log:
-            min: 2
-            max: 4
+            min: 1
+            max: 2
 
 - type: entity
   parent: FloraBungoBase
@@ -1466,7 +1467,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -1573,7 +1574,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -1653,7 +1654,7 @@
         acts: [ "Destruction" ]
       - !type:SpawnEntitiesBehavior
         spawn:
-          FoodCannabis:
+          LeavesCannabis:
             min: 1
             max: 5
 
@@ -1687,7 +1688,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -1766,7 +1767,7 @@
         acts: [ "Destruction" ]
       - !type:SpawnEntitiesBehavior
         spawn:
-          FoodCapfruit:
+          FoodRealCapfruit:
             min: 2
             max: 4
 
@@ -1797,11 +1798,10 @@
   - type: SpriteFade
   - type: Clickable
   - type: Sprite
-    sprite: /Textures/Objects/Specific/Hydroponics/carrot.rsi
+    drawdepth: Items
     noRot: true
+    sprite: /Textures/Objects/Specific/Hydroponics/carrot.rsi
     offset: 0, 0.15
-    renderLayer: Mobs
-    drawdepth: Overdoors
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -1809,10 +1809,12 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
-        density: 100
-        layer:
-        - WallLayer
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Wood
@@ -1895,15 +1897,6 @@
 
 - type: entity
   parent: FloraCarrotBase
-  id: FloraCarrotEmpty
-  name: Empty Carrot
-  components:
-  - type: Sprite
-    layers:
-    - state: stage-3
-
-- type: entity
-  parent: FloraCarrotBase
   id: FloraCarrotDead
   name: Dead Carrot
   components:
@@ -1932,7 +1925,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -2012,7 +2005,7 @@
         acts: [ "Destruction" ]
       - !type:SpawnEntitiesBehavior
         spawn:
-          FoodChanterelle:
+          FoodMushroom:
             min: 1
             max: 6
 
@@ -2046,7 +2039,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -2132,8 +2125,8 @@
             min: 4
             max: 8
           Log:
-            min: 2
-            max: 4
+            min: 1
+            max: 2
 
 - type: entity
   parent: FloraCherryBase
@@ -2174,7 +2167,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -2256,7 +2249,7 @@
         acts: [ "Destruction" ]
       - !type:SpawnEntitiesBehavior
         spawn:
-          FoodChili:
+          FoodChiliPepper:
             min: 2
             max: 8
 
@@ -2299,7 +2292,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -2381,7 +2374,7 @@
         acts: [ "Destruction" ]
       - !type:SpawnEntitiesBehavior
         spawn:
-          FoodChilly:
+          FoodChillyPepper:
             min: 2
             max: 8
 
@@ -2424,7 +2417,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -2506,12 +2499,12 @@
         acts: [ "Destruction" ]
       - !type:SpawnEntitiesBehavior
         spawn:
-          FoodCocoa:
+          FoodCocoaPod:
             min: 1
             max: 6
           Log:
-            min: 2
-            max: 4
+            min: 1
+            max: 2
 
 - type: entity
   parent: FloraCocoaBase
@@ -2552,7 +2545,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -2665,8 +2658,7 @@
     sprite: /Textures/Objects/Specific/Hydroponics/cotton.rsi
     noRot: true
     offset: 0, 0.15
-    renderLayer: Mobs
-    drawdepth: Overdoors
+    renderLayer: Items
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -2674,10 +2666,12 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
-        density: 100
-        layer:
-        - WallLayer
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Wood
@@ -2797,7 +2791,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -2847,7 +2841,6 @@
         stage-2: ""
         stage-3: ""
         stage-4: ""
-        stage-5: ""
 
 - type: entity
   parent: FloraDeathNettleBase
@@ -2879,7 +2872,7 @@
         acts: [ "Destruction" ]
       - !type:SpawnEntitiesBehavior
         spawn:
-          FoodDeathNettle:
+          DeathNettle:
             min: 1
             max: 3
   - type: SpeedModifierContacts
@@ -2930,7 +2923,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -3053,7 +3046,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -3135,7 +3128,7 @@
         acts: [ "Destruction" ]
       - !type:SpawnEntitiesBehavior
         spawn:
-          FoodEggy:
+          FoodEgg:
             min: 2
             max: 14
 
@@ -3178,7 +3171,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -3265,8 +3258,8 @@
             min: 2
             max: 8
           Log:
-            min: 2
-            max: 4
+            min: 1
+            max: 2
 
 - type: entity
   parent: FloraExtradimensionalOrangeBase
@@ -3298,8 +3291,7 @@
     sprite: /Textures/Objects/Specific/Hydroponics/fly_amanita.rsi
     noRot: true
     offset: 0, 0.15
-    renderLayer: Mobs
-    drawdepth: Overdoors
+    renderLayer: Item
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -3307,10 +3299,12 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
-        density: 100
-        layer:
-        - WallLayer
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Wood
@@ -3420,7 +3414,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -3506,15 +3500,6 @@
 
 - type: entity
   parent: FloraGalaxyThistleBase
-  id: FloraGalaxyThistleEmpty
-  name: Empty Galaxy Thistle
-  components:
-  - type: Sprite
-    layers:
-    - state: stage-3
-
-- type: entity
-  parent: FloraGalaxyThistleBase
   id: FloraGalaxyThistleDead
   name: Dead Galaxy Thistle
   components:
@@ -3534,8 +3519,7 @@
     sprite: /Textures/Objects/Specific/Hydroponics/garlic.rsi
     noRot: true
     offset: 0, 0.15
-    renderLayer: Mobs
-    drawdepth: Overdoors
+    renderLayer: Item
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -3543,10 +3527,12 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
-        density: 100
-        layer:
-        - WallLayer
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Wood
@@ -3629,15 +3615,6 @@
 
 - type: entity
   parent: FloraGarlicBase
-  id: FloraGarlicEmpty
-  name: Empty Garlic
-  components:
-  - type: Sprite
-    layers:
-    - state: stage-3
-
-- type: entity
-  parent: FloraGarlicBase
   id: FloraGarlicDead
   name: Dead Garlic
   components:
@@ -3666,7 +3643,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -3749,8 +3726,8 @@
             min: 3
             max: 3
           Log:
-            min: 2
-            max: 4
+            min: 1
+            max: 2
 
 - type: entity
   parent: FloraGatfruitBase
@@ -3791,7 +3768,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -3884,15 +3861,6 @@
 
 - type: entity
   parent: FloraGlasstleBase
-  id: FloraGlasstleEmpty
-  name: Empty Glasstle
-  components:
-  - type: Sprite
-    layers:
-    - state: stage-3
-
-- type: entity
-  parent: FloraGlasstleBase
   id: FloraGlasstleDead
   name: Dead Glasstle
   components:
@@ -3921,7 +3889,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -4008,8 +3976,8 @@
             min: 2
             max: 10
           Log:
-            min: 2
-            max: 4
+            min: 1
+            max: 2
 
 - type: entity
   parent: FloraGoldenAppleTreeBase
@@ -4050,7 +4018,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -4172,7 +4140,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -4297,7 +4265,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -4421,7 +4389,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -4469,7 +4437,6 @@
     - random:
         stage-1: ""
         stage-2: ""
-        stage-3: ""
 
 - type: entity
   parent: FloraLaughinPeaBase
@@ -4501,7 +4468,7 @@
         acts: [ "Destruction" ]
       - !type:SpawnEntitiesBehavior
         spawn:
-          FoodLaughinPea:
+          FoodLaughinPeaPod:
             min: 2
             max: 6
 
@@ -4544,7 +4511,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -4630,8 +4597,8 @@
             min: 2
             max: 12
           Log:
-            min: 2
-            max: 4
+            min: 1
+            max: 2
 
 - type: entity
   parent: FloraLemonBase
@@ -4672,7 +4639,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -4797,7 +4764,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -4920,7 +4887,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -5006,8 +4973,8 @@
             min: 2
             max: 12
           Log:
-            min: 2
-            max: 4
+            min: 1
+            max: 2
 
 - type: entity
   parent: FloraLimeBase
@@ -5039,8 +5006,7 @@
     sprite: /Textures/Objects/Specific/Hydroponics/lingzhi.rsi
     noRot: true
     offset: 0, 0.15
-    renderLayer: Mobs
-    drawdepth: Overdoors
+    renderLayer: item
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -5048,10 +5014,12 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
-        density: 100
-        layer:
-        - WallLayer
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Wood
@@ -5170,11 +5138,11 @@
     fixtures:
       fix1:
         shape:
-          !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
-        density: 100
-        layer:
-        - WallLayer
+          !type:PhysShapeCircle
+          radius: 0.1
+        density: 190
+        mask:
+        - HighImpassable
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Wood
@@ -5297,7 +5265,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -5423,7 +5391,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -5505,7 +5473,7 @@
         acts: [ "Destruction" ]
       - !type:SpawnEntitiesBehavior
         spawn:
-          FoodNettle:
+          Nettle:
             min: 2
             max: 4
   - type: SpeedModifierContacts
@@ -5554,11 +5522,11 @@
     fixtures:
       fix1:
         shape:
-          !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
-        density: 100
-        layer:
-        - WallLayer
+          !type:PhysShapeCircle
+          radius: 0.1
+        density: 190
+        mask:
+        - HighImpassable
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Wood
@@ -5672,8 +5640,7 @@
     sprite: /Textures/Objects/Specific/Hydroponics/onion.rsi
     noRot: true
     offset: 0, 0.15
-    renderLayer: Mobs
-    drawdepth: Overdoors
+    renderLayer: Item
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -5681,10 +5648,12 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
-        density: 100
-        layer:
-        - WallLayer
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Wood
@@ -5767,15 +5736,6 @@
 
 - type: entity
   parent: FloraOnionBase
-  id: FloraOnionEmpty
-  name: Empty Onion
-  components:
-  - type: Sprite
-    layers:
-    - state: stage-3
-
-- type: entity
-  parent: FloraOnionBase
   id: FloraOnionDead
   name: Dead Onion
   components:
@@ -5795,8 +5755,7 @@
     sprite: /Textures/Objects/Specific/Hydroponics/onion_red.rsi
     noRot: true
     offset: 0, 0.15
-    renderLayer: Mobs
-    drawdepth: Overdoors
+    renderLayer: Item
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -5804,10 +5763,12 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
-        density: 100
-        layer:
-        - WallLayer
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Wood
@@ -5890,15 +5851,6 @@
 
 - type: entity
   parent: FloraOnionRedBase
-  id: FloraOnionRedEmpty
-  name: Empty Red Onion
-  components:
-  - type: Sprite
-    layers:
-    - state: stage-3
-
-- type: entity
-  parent: FloraOnionRedBase
   id: FloraOnionRedDead
   name: Dead Red Onion
   components:
@@ -5927,7 +5879,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -6014,8 +5966,8 @@
             min: 2
             max: 16
           Log:
-            min: 2
-            max: 4
+            min: 1
+            max: 2
 
 - type: entity
   parent: FloraOrangeBase
@@ -6056,7 +6008,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -6179,7 +6131,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -6259,7 +6211,7 @@
         acts: [ "Destruction" ]
       - !type:SpawnEntitiesBehavior
         spawn:
-          FoodPea:
+          FoodPeaPod:
             min: 4
             max: 8
 
@@ -6302,7 +6254,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -6388,15 +6340,6 @@
 
 - type: entity
   parent: FloraPineappleBase
-  id: FloraPineappleEmpty
-  name: Empty Pineapple
-  components:
-  - type: Sprite
-    layers:
-    - state: stage-3
-
-- type: entity
-  parent: FloraPineappleBase
   id: FloraPineappleDead
   name: Dead Pineapple
   components:
@@ -6425,7 +6368,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -6539,8 +6482,7 @@
     sprite: /Textures/Objects/Specific/Hydroponics/potato.rsi
     noRot: true
     offset: 0, 0.15
-    renderLayer: Mobs
-    drawdepth: Overdoors
+    renderLayer: Item
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -6548,10 +6490,12 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
-        density: 100
-        layer:
-        - WallLayer
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Wood
@@ -6672,7 +6616,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -6786,8 +6730,7 @@
     sprite: /Textures/Objects/Specific/Hydroponics/pyrotton.rsi
     noRot: true
     offset: 0, 0.15
-    renderLayer: Mobs
-    drawdepth: Overdoors
+    renderLayer: Item
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -6795,10 +6738,12 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
-        density: 100
-        layer:
-        - WallLayer
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Wood
@@ -6875,7 +6820,7 @@
         acts: [ "Destruction" ]
       - !type:SpawnEntitiesBehavior
         spawn:
-          FoodPyrotton:
+          PyrottonBol:
             min: 2
             max: 8
 
@@ -6918,7 +6863,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -6998,7 +6943,7 @@
         acts: [ "Destruction" ]
       - !type:SpawnEntitiesBehavior
         spawn:
-          FoodRainbowCannabis:
+          LeavesCannabisRainbow:
             min: 2
             max: 6
 
@@ -7040,11 +6985,11 @@
     fixtures:
       fix1:
         shape:
-          !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
-        density: 100
-        layer:
-        - WallLayer
+          !type:PhysShapeCircle
+          radius: 0.1
+        density: 190
+        mask:
+        - HighImpassable
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Wood
@@ -7122,7 +7067,7 @@
         acts: [ "Destruction" ]
       - !type:SpawnEntitiesBehavior
         spawn:
-          FoodRice:
+          RiceBushel:
             min: 2
             max: 16
 
@@ -7165,7 +7110,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -7289,7 +7234,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -7413,7 +7358,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -7516,252 +7461,6 @@
     - state: dead
 
 - type: entity
-  id: FloraStobaccoBase
-  name: Stobacco
-  description: Stobacco.
-  abstract: true
-  components:
-  - type: SpriteFade
-  - type: Clickable
-  - type: Sprite
-    sprite: /Textures/Objects/Specific/Hydroponics/stobacco.rsi
-    noRot: true
-    offset: 0, 0.15
-    renderLayer: Mobs
-    drawdepth: Overdoors
-  - type: Physics
-    bodyType: Static
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
-        density: 100
-        layer:
-        - WallLayer
-  - type: Damageable
-    damageContainer: StructuralInorganic
-    damageModifierSet: Wood
-  - type: MeleeSound
-    soundGroups:
-      Brute:
-        path: /Audio/Effects/plant_rustle.ogg
-        params:
-          variation: 0.05
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
-        damage: 50
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          path: /Audio/Effects/plant_rustle.ogg
-          params:
-            volume: 5
-            variation: 0.05
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-
-- type: entity
-  parent: FloraStobaccoBase
-  id: FloraStobaccoRandom
-  name: Random Stobacco
-  components:
-  - type: Sprite
-    layers:
-    - state: stage-3
-      map: ["random"]
-  - type: RandomSprite
-    available:
-    - random:
-        stage-1: ""
-        stage-2: ""
-        stage-3: ""
-
-- type: entity
-  parent: FloraStobaccoBase
-  id: FloraStobacco
-  name: Stobacco
-  components:
-  - type: Sprite
-    layers:
-    - state: harvest
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 400
-      behaviors:
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
-        damage: 50
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          path: /Audio/Effects/plant_rustle.ogg
-          params:
-            volume: 5
-            variation: 0.05
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          FoodStobacco:
-            min: 2
-            max: 8
-
-- type: entity
-  parent: FloraStobaccoBase
-  id: FloraStobaccoEmpty
-  name: Empty Stobacco
-  components:
-  - type: Sprite
-    layers:
-    - state: stage-3
-
-- type: entity
-  parent: FloraStobaccoBase
-  id: FloraStobaccoDead
-  name: Dead Stobacco
-  components:
-  - type: Sprite
-    layers:
-    - state: dead
-
-- type: entity
-  id: FloraStobaccoBase
-  name: Stobacco
-  description: Stobacco.
-  abstract: true
-  components:
-  - type: SpriteFade
-  - type: Clickable
-  - type: Sprite
-    sprite: /Textures/Objects/Specific/Hydroponics/stobacco.rsi
-    noRot: true
-    offset: 0, 0.15
-    renderLayer: Mobs
-    drawdepth: Overdoors
-  - type: Physics
-    bodyType: Static
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
-        density: 100
-        layer:
-        - WallLayer
-  - type: Damageable
-    damageContainer: StructuralInorganic
-    damageModifierSet: Wood
-  - type: MeleeSound
-    soundGroups:
-      Brute:
-        path: /Audio/Effects/plant_rustle.ogg
-        params:
-          variation: 0.05
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
-        damage: 50
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          path: /Audio/Effects/plant_rustle.ogg
-          params:
-            volume: 5
-            variation: 0.05
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-
-- type: entity
-  parent: FloraStobaccoBase
-  id: FloraStobaccoRandom
-  name: Random Stobacco
-  components:
-  - type: Sprite
-    layers:
-    - state: stage-2
-      map: ["random"]
-  - type: RandomSprite
-    available:
-    - random:
-        stage-1: ""
-        stage-2: ""
-        stage-3: ""
-
-- type: entity
-  parent: FloraStobaccoBase
-  id: FloraStobacco
-  name: Stobacco
-  components:
-  - type: Sprite
-    layers:
-    - state: harvest
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 400
-      behaviors:
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
-        damage: 50
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          path: /Audio/Effects/plant_rustle.ogg
-          params:
-            volume: 5
-            variation: 0.05
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          FoodStobacco:
-            min: 2
-            max: 8
-
-- type: entity
-  parent: FloraStobaccoBase
-  id: FloraStobaccoEmpty
-  name: Empty Stobacco
-  components:
-  - type: Sprite
-    layers:
-    - state: stage-3
-
-- type: entity
-  parent: FloraStobaccoBase
-  id: FloraStobaccoDead
-  name: Dead Stobacco
-  components:
-  - type: Sprite
-    layers:
-    - state: dead
-
-- type: entity
   id: FloraTeaPlantBase
   name: Tea Plant
   description: Tea plant.
@@ -7782,7 +7481,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -7864,7 +7563,7 @@
         acts: [ "Destruction" ]
       - !type:SpawnEntitiesBehavior
         spawn:
-          FoodTeaPlant:
+          LeavesTea:
             min: 2
             max: 8
 
@@ -7907,7 +7606,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -7987,7 +7686,7 @@
         acts: [ "Destruction" ]
       - !type:SpawnEntitiesBehavior
         spawn:
-          FoodTobacco:
+          LeavesTobacco:
             min: 2
             max: 8
 
@@ -8030,7 +7729,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -8156,7 +7855,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -8235,7 +7934,7 @@
         acts: [ "Destruction" ]
       - !type:SpawnEntitiesBehavior
         spawn:
-          FoodTomatoKiller:
+          MobTomatoKiller:
             min: 2
             max: 4
   - type: SpeedModifierContacts
@@ -8277,7 +7976,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -8359,7 +8058,7 @@
         spawn:
           Log:
             min: 2
-            max: 2
+            max: 4
 
 - type: entity
   parent: FloraTowercapBase
@@ -8400,7 +8099,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -8525,11 +8224,11 @@
     fixtures:
       fix1:
         shape:
-          !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
-        density: 100
-        layer:
-        - WallLayer
+          !type:PhysShapeCircle
+          radius: 0.1
+        density: 190
+        mask:
+        - HighImpassable
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Wood
@@ -8652,7 +8351,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.01,-0.01,0.01,0.01"
+          bounds: "-0.01,-0.01,0.1,0.1"
         density: 100
         layer:
         - WallLayer
@@ -8714,7 +8413,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 400
+        damage: 100
       behaviors:
         - !type:DoActsBehavior
           acts: [ "Destruction" ]
@@ -8732,7 +8431,7 @@
         acts: [ "Destruction" ]
       - !type:SpawnEntitiesBehavior
         spawn:
-          FoodWorldPea:
+          FoodWorldPeas:
             min: 2
             max: 5
 
