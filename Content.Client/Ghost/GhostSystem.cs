@@ -115,36 +115,10 @@ namespace Content.Client.Ghost
             args.Handled = true;
         }
 
+        //SS220 colourful ghost begin
+        // Changing FoV must not modify the server-selected ghost color.
         private void OnToggleFoV(EntityUid uid, EyeComponent component, ToggleFoVActionEvent args)
         {
-            //SS220-colorful-ghosts begin
-            if (TryComp<SpriteComponent>(uid, out var sprite))
-            {
-                var _random = new Random();
-                var color = new Color(_random.Next(1, 255), _random.Next(1, 255), _random.Next(1, 255));
-
-                // sprite.Color = color;
-
-                //sprite.Rotation += Angle.FromDegrees(180.0f);  //SS220 Ghost rotation fix
-
-                sprite.Color = sprite.Color.WithBlue(10);
-                //var t = sprite.GetType();
-
-                //var pr = t.GetProperties();
-
-                //var col =  pr.FirstOrDefault(x => x.Name == "Color");
-
-                //if (col is not null)
-                //{
-
-                //    col.GetSetMethod(true)!.Invoke(sprite, new object[] { color });
-                //}
-
-                // sprite.
-                // PlayerUpdated?.Invoke(Player);
-            }
-            //SS220-colorful-ghosts end
-
             if (args.Handled)
                 return;
 
@@ -152,6 +126,7 @@ namespace Content.Client.Ghost
             _contentEye.RequestToggleFov(uid, component);
             args.Handled = true;
         }
+        //SS220 colourful ghost end
 
         private void OnToggleGhosts(EntityUid uid, GhostComponent component, ToggleGhostsActionEvent args)
         {
@@ -212,33 +187,20 @@ namespace Content.Client.Ghost
             PlayerRemoved?.Invoke(component);
         }
 
+        //SS220 colourful ghost begin
+        // Attaching a player must not replace the networked color with a local random tint.
         private void OnGhostPlayerAttach(EntityUid uid, GhostComponent component, LocalPlayerAttachedEvent localPlayerAttachedEvent)
         {
-            // SS220 colorful ghost begin
-            if (TryComp<SpriteComponent>(uid, out var sprite))
-            {
-                var random = new Random();
-
-                var color = new Color(
-                    (float) random.Next(1, 255) / byte.MaxValue,
-                    (float) random.Next(1, 255) / byte.MaxValue,
-                    (float) random.Next(1, 255) / byte.MaxValue,
-                    sprite.Color.A);
-
-                sprite.Color = color;
-            }
-            // SS220 colorful ghost end
-
             ResetGhostVisibility(); // SS220-Fix ghosts visibility for other entities
             PlayerAttached?.Invoke(component);
         }
+        //SS220 colourful ghost end
 
         private void OnGhostState(EntityUid uid, GhostComponent component, ref AfterAutoHandleStateEvent args)
         {
             if (TryComp<SpriteComponent>(uid, out var sprite))
             {
-                //SS220-colorful-ghosts
-                //_sprite.LayerSetColor((uid, sprite), 0, component.Color);
+                _sprite.LayerSetColor((uid, sprite), 0, component.Color); //SS220 colourful ghost
 
                 //SS220-ghost-hats
                 SetBodyVisuals(uid, sprite, component.BodyVisible);
