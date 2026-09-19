@@ -33,3 +33,17 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from BandaStation"
   source: "https://github.com/tgstation/tgstation/commit/2ca81868242ba70cbe31c4a95fec0a5d532e81a5"
+  
+- files:
+  - handcuffs_drop.ogg
+  - handcuffs_pick_up.ogg
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from BandaStation"
+  source: "https://github.com/ss220club/BandaStation/commit/f0575ec415470207f1d05ab74ddb5b360a0add54"
+  
+- files:
+  - component_drop.ogg
+  - component_pickup.ogg
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from BandaStation"
+  source: "https://github.com/ss220club/BandaStation/commit/aba80b9b45fe3554d315c5e8fa0f5e0ebf05e39e"
