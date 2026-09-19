@@ -135,6 +135,7 @@
     - SimpleHostile #Doesn't get attacked by flesh anomaly spawns
 
   # Damageable
+  - type: ZombieImmune # Fix #4538
   - type: MobState
     allowedStates:
     - Alive
