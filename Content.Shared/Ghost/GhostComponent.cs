@@ -119,12 +119,14 @@ public sealed partial class GhostComponent : Component
     [DataField, AutoNetworkedField]
     public bool CanReturnToBody;
 
+    //SS220 colourful ghost begin
     /// <summary>
-    /// Ghost color
+    /// Networked tint of the ghost's body layer. Randomized on the server when left white.
     /// </summary>
-    /// <remarks>Used to allow admins to change ghost colors. Should be removed if the capability to edit existing sprite colors is ever added back.</remarks>
+    /// <remarks>Also allows admins to change the color. Sprite transparency is applied separately.</remarks>
     [DataField, AutoNetworkedField]
     public Color Color = Color.White;
+    //SS220 colourful ghost end
 }
 
 /// <summary>
