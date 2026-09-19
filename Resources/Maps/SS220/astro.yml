@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 09/18/2026 11:57:37
-  entityCount: 58520
+  time: 09/19/2026 00:27:00
+  entityCount: 58524
 maps:
 - 1
 grids:
@@ -45571,6 +45571,7 @@ entities:
       - 26745
       - 26846
       - 26555
+      - 21964
     - type: Fixtures
       fixtures: {}
   - uid: 260
@@ -47056,6 +47057,7 @@ entities:
       - 26751
       - 26357
       - 26687
+      - 21965
     - type: Fixtures
       fixtures: {}
   - uid: 361
@@ -48854,7 +48856,7 @@ entities:
       pos: -27.5,-28.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -146951.42
+      secondsUntilStateChange: -147097.33
       state: Opening
   - uid: 555
     components:
@@ -48908,7 +48910,7 @@ entities:
       pos: -27.5,-27.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -146981.67
+      secondsUntilStateChange: -147127.58
       state: Opening
   - uid: 562
     components:
@@ -53830,7 +53832,7 @@ entities:
       pos: -29.5,23.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -404724.9
+      secondsUntilStateChange: -404870.84
       state: Opening
   - uid: 1197
     components:
@@ -72386,6 +72388,11 @@ entities:
       parent: 2
 - proto: BrbSign
   entities:
+  - uid: 3638
+    components:
+    - type: Transform
+      pos: -31.472578,-0.46477288
+      parent: 2
   - uid: 4214
     components:
     - type: Transform
@@ -72397,15 +72404,10 @@ entities:
     - type: Transform
       pos: 31.685932,14.471665
       parent: 2
-  - uid: 4216
-    components:
-    - type: Transform
-      pos: -31.21467,-9.2742815
-      parent: 2
   - uid: 4217
     components:
     - type: Transform
-      pos: -31.162857,0.6203538
+      pos: -34.464928,-9.287687
       parent: 2
   - uid: 4218
     components:
@@ -148019,6 +148021,12 @@ entities:
       parent: 2
 - proto: ChairOfficeDark
   entities:
+  - uid: 3639
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -32.11262,-9.417082
+      parent: 2
   - uid: 19058
     components:
     - type: Transform
@@ -148452,12 +148460,6 @@ entities:
     - type: Transform
       pos: -46.518684,3.6681714
       parent: 2
-  - uid: 19134
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -32.5463,-9.317189
-      parent: 2
   - uid: 19135
     components:
     - type: Transform
@@ -148467,7 +148469,7 @@ entities:
   - uid: 19136
     components:
     - type: Transform
-      pos: -32.478764,0.66005933
+      pos: -31.883343,0.65230536
       parent: 2
   - uid: 19137
     components:
@@ -167297,7 +167299,7 @@ entities:
       pos: 0.5,30.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -56487.164
+      secondsUntilStateChange: -56633.08
       state: Closing
   - uid: 21989
     components:
@@ -167485,7 +167487,7 @@ entities:
       pos: 0.5,-33.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -2912149
+      secondsUntilStateChange: -2912295
       state: Closing
   - uid: 22021
     components:
@@ -167532,7 +167534,7 @@ entities:
       pos: 57.5,-64.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1647722.9
+      secondsUntilStateChange: -1647868.8
       state: Closing
   - uid: 22029
     components:
@@ -167599,7 +167601,7 @@ entities:
       pos: 88.5,-62.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -968388
+      secondsUntilStateChange: -968533.94
       state: Closing
 - proto: CurtainsPink
   entities:
@@ -167666,7 +167668,7 @@ entities:
       pos: -46.5,-15.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -616389.2
+      secondsUntilStateChange: -616535.1
       state: Closing
   - uid: 22049
     components:
@@ -185873,7 +185875,7 @@ entities:
     - type: Label
       currentLabel: кофейный ликёр
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.49351642
+      sprayFizzinessThresholdRoll: 0.8623963
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -185898,7 +185900,7 @@ entities:
     - type: Label
       currentLabel: коньяк
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.2086523
+      sprayFizzinessThresholdRoll: 0.93242764
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -186091,7 +186093,7 @@ entities:
     - type: Label
       currentLabel: джин
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.37835944
+      sprayFizzinessThresholdRoll: 0.073001236
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -187253,7 +187255,7 @@ entities:
     - type: Label
       currentLabel: ром
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.22029394
+      sprayFizzinessThresholdRoll: 0.7685089
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -187878,7 +187880,7 @@ entities:
     - type: Label
       currentLabel: текила
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.3468702
+      sprayFizzinessThresholdRoll: 0.08108446
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -187931,7 +187933,7 @@ entities:
     - type: Label
       currentLabel: вермут
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.6734212
+      sprayFizzinessThresholdRoll: 0.5508723
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -187967,7 +187969,7 @@ entities:
     - type: Label
       currentLabel: водка
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.86030585
+      sprayFizzinessThresholdRoll: 0.49470994
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -188314,7 +188316,7 @@ entities:
     - type: Label
       currentLabel: виски
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.5107201
+      sprayFizzinessThresholdRoll: 0.5153668
     - type: Physics
       canCollide: False
     - type: NameModifier
@@ -197620,6 +197622,22 @@ entities:
       parent: 2
 - proto: FirelockGlass
   entities:
+  - uid: 21964
+    components:
+    - type: Transform
+      pos: -31.5,-8.5
+      parent: 2
+    - type: DeviceNetwork
+      deviceLists:
+      - 259
+  - uid: 21965
+    components:
+    - type: Transform
+      pos: -31.5,-0.5
+      parent: 2
+    - type: DeviceNetwork
+      deviceLists:
+      - 360
   - uid: 26728
     components:
     - type: Transform
@@ -265586,23 +265604,11 @@ entities:
       rot: 3.141592653589793 rad
       pos: -27.5,-1.5
       parent: 2
-  - uid: 35397
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -31.5,-8.5
-      parent: 2
   - uid: 35398
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -30.5,-0.5
-      parent: 2
-  - uid: 35399
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -31.5,-0.5
       parent: 2
   - uid: 35400
     components:
@@ -281881,7 +281887,7 @@ entities:
       pos: 24.5,101.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -307468.53
+      secondsUntilStateChange: -307614.47
       state: Closing
   - uid: 38277
     components:
@@ -291919,6 +291925,12 @@ entities:
       parent: 2
 - proto: MicroManipulatorStockPart
   entities:
+  - uid: 3643
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -34.802376,-13.658365
+      parent: 2
   - uid: 39403
     components:
     - type: Transform
@@ -291935,11 +291947,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 55.267124,112.71133
-      parent: 2
-  - uid: 39406
-    components:
-    - type: Transform
-      pos: -31.141752,-9.534698
       parent: 2
   - uid: 39407
     components:
@@ -325093,12 +325100,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -30.5,-8.5
       parent: 2
-  - uid: 44403
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -31.5,-8.5
-      parent: 2
   - uid: 44404
     components:
     - type: Transform
@@ -325696,12 +325697,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -29.5,-8.5
-      parent: 2
-  - uid: 44511
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -31.5,-0.5
       parent: 2
   - uid: 44512
     components:
@@ -329072,6 +329067,16 @@ entities:
       parent: 2
 - proto: RubberStampApproved
   entities:
+  - uid: 4216
+    components:
+    - type: Transform
+      pos: -34.68726,-9.496165
+      parent: 2
+  - uid: 21457
+    components:
+    - type: Transform
+      pos: -34.6433,0.56482494
+      parent: 2
   - uid: 45112
     components:
     - type: MetaData
@@ -329130,16 +329135,6 @@ entities:
       parent: 2
     - type: Stamp
       stampedName: Junk Recyclers
-  - uid: 45120
-    components:
-    - type: Transform
-      pos: -31.68686,-9.292464
-      parent: 2
-  - uid: 45121
-    components:
-    - type: Transform
-      pos: -31.709732,0.6984788
-      parent: 2
   - uid: 45122
     components:
     - type: MetaData
@@ -329176,6 +329171,16 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+  - uid: 21962
+    components:
+    - type: Transform
+      pos: -34.28201,0.7663536
+      parent: 2
+  - uid: 21963
+    components:
+    - type: Transform
+      pos: -34.249542,-9.45447
+      parent: 2
   - uid: 45125
     components:
     - type: Transform
@@ -329219,16 +329224,6 @@ entities:
       parent: 2
     - type: Stamp
       stampedName: МУСОР
-  - uid: 45132
-    components:
-    - type: Transform
-      pos: -31.46811,-9.573714
-      parent: 2
-  - uid: 45133
-    components:
-    - type: Transform
-      pos: -31.459732,0.5266038
-      parent: 2
   - uid: 45134
     components:
     - type: MetaData
@@ -353462,6 +353457,16 @@ entities:
       parent: 2
 - proto: Table
   entities:
+  - uid: 3637
+    components:
+    - type: Transform
+      pos: -34.5,-9.5
+      parent: 2
+  - uid: 3640
+    components:
+    - type: Transform
+      pos: -34.5,0.5
+      parent: 2
   - uid: 48548
     components:
     - type: Transform
@@ -356233,6 +356238,21 @@ entities:
       parent: 2
 - proto: TableReinforced
   entities:
+  - uid: 3641
+    components:
+    - type: Transform
+      pos: -31.5,-8.5
+      parent: 2
+  - uid: 3644
+    components:
+    - type: Transform
+      pos: -31.5,-0.5
+      parent: 2
+  - uid: 19134
+    components:
+    - type: Transform
+      pos: -32.5,-8.5
+      parent: 2
   - uid: 49046
     components:
     - type: Transform
@@ -356792,12 +356812,6 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -7.5,61.5
-      parent: 2
-  - uid: 49149
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -32.5,-8.5
       parent: 2
   - uid: 49150
     components:
@@ -357997,12 +358011,6 @@ entities:
     - type: Transform
       pos: 23.5,99.5
       parent: 2
-  - uid: 49368
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -31.5,-9.5
-      parent: 2
   - uid: 49369
     components:
     - type: Transform
@@ -358023,11 +358031,6 @@ entities:
     components:
     - type: Transform
       pos: -32.5,-13.5
-      parent: 2
-  - uid: 49373
-    components:
-    - type: Transform
-      pos: -31.5,0.5
       parent: 2
   - uid: 49374
     components:
@@ -360613,6 +360616,11 @@ entities:
       parent: 2
 - proto: ToolboxMechanicalFilled
   entities:
+  - uid: 21883
+    components:
+    - type: Transform
+      pos: -34.37855,-13.616671
+      parent: 2
   - uid: 38799
     components:
     - type: Transform
@@ -360719,11 +360727,6 @@ entities:
     components:
     - type: Transform
       pos: 29.35926,113.483116
-      parent: 2
-  - uid: 49838
-    components:
-    - type: Transform
-      pos: -34.5227,-13.633311
       parent: 2
   - uid: 49839
     components:
@@ -406920,6 +406923,17 @@ entities:
       parent: 2
 - proto: WindoorSecure
   entities:
+  - uid: 3642
+    components:
+    - type: Transform
+      pos: -31.5,-0.5
+      parent: 2
+  - uid: 3723
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -31.5,-8.5
+      parent: 2
   - uid: 57824
     components:
     - type: Transform
@@ -407432,6 +407446,17 @@ entities:
       parent: 2
 - proto: WindoorSecureScienceLocked
   entities:
+  - uid: 21955
+    components:
+    - type: Transform
+      pos: -31.5,-8.5
+      parent: 2
+  - uid: 21956
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -31.5,-0.5
+      parent: 2
   - uid: 57909
     components:
     - type: Transform
