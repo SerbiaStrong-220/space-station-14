@@ -237,36 +237,46 @@ public static class Program
             info.Error = WeaponAnalyzeError.NoAmmoFound;
             return info;
         }
-        _prototypeManager.TryIndex<EntityPrototype>(ammoId, out var ammoProto);
-        if (ammoProto?.TryGetComponent<CartridgeAmmoComponent>(out var cartridgeAmmo, _componentFactory) ?? false)
+        // A loaded magazine normally points to a cartridge, which in turn points to a projectile.
+        // Keep the original cartridge ID and unwrap providers until we reach the damage-dealing entity.
+        var seenAmmo = new HashSet<string>();
+        while (seenAmmo.Add(ammoId))
         {
-            ammoId = cartridgeAmmo.Prototype;
-            info.CartridgeId = ammoId;
-            _prototypeManager.TryIndex(ammoId, out ammoProto);
-        }
-        if (ammoProto?.TryGetComponent<ProjectileSpreadComponent>(out var projectileSpread, _componentFactory) ?? false)
-        {
-            ammoId = projectileSpread.Proto;
-            info.SpreadCount = projectileSpread.Count;
-            _prototypeManager.TryIndex(ammoId, out ammoProto);
-        }
-        if (ammoProto?.TryGetComponent<ProjectileComponent>(out var projectile, _componentFactory) ?? false)
-        {
-            info.AmmoId = ammoId;
-            info.HitDamage = projectile.Damage;
-            info.IgnoreResistances = projectile.IgnoreResistances;
-            if (ammoProto.TryGetComponent<StaminaDamageOnCollideComponent>(out var staminaDamageOnCollide, _componentFactory))
-                info.HitStaminaDamage = staminaDamageOnCollide.Damage;
-            return info;
-        }
-        if (ammoProto?.TryGetComponent<HitscanBasicDamageComponent>(out var hitscanBasicDamage, _componentFactory) ?? false)
-        {
-            // =(
-            info.AmmoId = ammoId;
-            info.HitDamage = hitscanBasicDamage.Damage ?? info.HitDamage;
-            // info.HitStaminaDamage = hitscan.StaminaDamage;
-            // info.SpreadCount = hitscan.HitscanSpread?.Count ?? 1;
-            return info;
+            if (!_prototypeManager.TryIndex<EntityPrototype>(ammoId, out var ammoProto))
+                break;
+
+            if (ammoProto.TryGetComponent<CartridgeAmmoComponent>(out var cartridgeAmmo, _componentFactory))
+            {
+                info.CartridgeId ??= ammoId;
+                ammoId = cartridgeAmmo.Prototype;
+                continue;
+            }
+
+            if (ammoProto.TryGetComponent<ProjectileSpreadComponent>(out var projectileSpread, _componentFactory))
+            {
+                info.SpreadCount *= projectileSpread.Count;
+                ammoId = projectileSpread.Proto;
+                continue;
+            }
+
+            if (ammoProto.TryGetComponent<ProjectileComponent>(out var projectile, _componentFactory))
+            {
+                info.AmmoId = ammoId;
+                info.HitDamage = projectile.Damage;
+                info.IgnoreResistances = projectile.IgnoreResistances;
+                if (ammoProto.TryGetComponent<StaminaDamageOnCollideComponent>(out var staminaDamageOnCollide, _componentFactory))
+                    info.HitStaminaDamage = staminaDamageOnCollide.Damage;
+                return info;
+            }
+
+            if (ammoProto.TryGetComponent<HitscanBasicDamageComponent>(out var hitscanBasicDamage, _componentFactory))
+            {
+                info.AmmoId = ammoId;
+                info.HitDamage = hitscanBasicDamage.Damage ?? info.HitDamage;
+                return info;
+            }
+
+            break;
         }
 
         info.Error = WeaponAnalyzeError.InvalidAmmo;
@@ -276,6 +286,7 @@ public static class Program
     private static bool TryGetAmmo(EntityPrototype proto, WeaponInfo info, [NotNullWhen(true)] out string? ammoId)
     {
         EntityPrototype? powerCellProto = null;
+        string? chamberAmmoId = null;
 
         Console.WriteLine($"Trying to get ammo of {proto}");
         if (proto.TryGetComponent<ItemSlotsComponent>(out var itemSlots, _componentFactory))
@@ -288,7 +299,12 @@ public static class Program
                     proto = resolvedProto;
                 info.MagazineId = magazine.StartingItem;
             }
-            else if (itemSlots.Slots.TryGetValue("cell_slot", out var cell) &&
+            if (itemSlots.Slots.TryGetValue("gun_chamber", out var chamber) &&
+                chamber.StartingItem != null)
+            {
+                chamberAmmoId = chamber.StartingItem;
+            }
+            if (itemSlots.Slots.TryGetValue("cell_slot", out var cell) &&
                 cell.StartingItem != null)
             {
                 if (_prototypeManager.Resolve(cell.StartingItem, out var resolvedProto))
@@ -303,15 +319,35 @@ public static class Program
             info.Capacity = ballisticProvider.Capacity;
             return ammoId != null;
         }
+        if (proto.TryGetComponent<RevolverAmmoProviderComponent>(out var revolverProvider, _componentFactory))
+        {
+            ammoId = revolverProvider.FillPrototype;
+            info.Capacity = revolverProvider.Capacity;
+            return ammoId != null;
+        }
+        if (proto.TryGetComponent<BasicEntityAmmoProviderComponent>(out var basicProvider, _componentFactory))
+        {
+            ammoId = basicProvider.Proto;
+            info.Capacity = basicProvider.Capacity ?? 1;
+            return true;
+        }
         if (proto.TryGetComponent<BatteryAmmoProviderComponent>(out var projectileBatteryProvider, _componentFactory))
         {
             ammoId = projectileBatteryProvider.Prototype;
             if (proto.TryGetComponent<BatteryComponent>(out var battery, _componentFactory)
                 || (powerCellProto is not null && powerCellProto.TryGetComponent<BatteryComponent>(out battery, _componentFactory)))
-                info.Capacity = (int)(battery.MaxCharge / projectileBatteryProvider.FireCost);
+                info.Capacity = projectileBatteryProvider.FireCost > 0
+                    ? (int)(battery.MaxCharge / projectileBatteryProvider.FireCost)
+                    : 0;
             else
                 info.Error = WeaponAnalyzeError.BatteryNotFound;
             return ammoId != null;
+        }
+
+        if (chamberAmmoId != null)
+        {
+            ammoId = chamberAmmoId;
+            return true;
         }
 
         ammoId = null;
