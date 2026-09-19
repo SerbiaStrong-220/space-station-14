@@ -6,19 +6,19 @@ using Robust.Shared.Utility;
 namespace Content.Shared.SS220.CultYogg.Cultists;
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class AcsendingComponent : Component
+public sealed partial class AscendingComponent : Component
 {
     /// <summary>
     /// Time needed for ascension
     /// </summary>
     [DataField]
-    public TimeSpan AcsendingInterval = TimeSpan.FromSeconds(60);
+    public TimeSpan AscendingInterval = TimeSpan.FromSeconds(60);
 
     /// <summary>
     /// Buffer that contains next event
     /// </summary>
-    public TimeSpan AcsendingTime;
+    public TimeSpan AscendingTime;
 
     [DataField]
-    public SpriteSpecifier.Rsi Sprite = new(new("SS220/Effects/CultYogg/acsending.rsi"), "acsendingEffect");
+    public SpriteSpecifier.Rsi Sprite = new(new("SS220/Effects/CultYogg/ascending.rsi"), "ascendingEffect");
 }

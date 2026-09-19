@@ -3,8 +3,71 @@
   id: CultYogg
   name: guide-entry-cult-yogg
   text: "/ServerInfo/SS220/Guidebook/Antagonist/CultYogg.xml"
+  children:
+  - CultYoggAbilities
+  - CultYoggMiGo
+  - CultYoggConversion
+  - CultYoggBase
+  - CultYoggEquipment
+  - CultYoggAbyss
+  - CultYoggRitual
+  - CultYoggCounterplay
 
+- type: guideEntry
+  id: CultYoggAbilities
+  name: guide-entry-cult-yogg-abilities
+  priority: 1
+  text: "/ServerInfo/SS220/Guidebook/Antagonist/CultYoggAbilities.xml"
+
+- type: guideEntry
+  id: CultYoggMiGo
+  name: guide-entry-cult-yogg-migo
+  priority: 2
+  text: "/ServerInfo/SS220/Guidebook/Antagonist/CultYoggMiGo.xml"
+
+- type: guideEntry
+  id: CultYoggConversion
+  name: guide-entry-cult-yogg-conversion
+  priority: 3
+  text: "/ServerInfo/SS220/Guidebook/Antagonist/CultYoggConversion.xml"
+
+- type: guideEntry
+  id: CultYoggBase
+  name: guide-entry-cult-yogg-base
+  priority: 4
+  text: "/ServerInfo/SS220/Guidebook/Antagonist/CultYoggBase.xml"
+
+- type: guideEntry
+  id: CultYoggEquipment
+  name: guide-entry-cult-yogg-equipment
+  priority: 5
+  text: "/ServerInfo/SS220/Guidebook/Antagonist/CultYoggEquipment.xml"
+  children:
+  - CultYoggRecipes
+
+- type: guideEntry
+  id: CultYoggRecipes
+  name: guide-entry-cult-yogg-recipes
+  text: "/ServerInfo/SS220/Guidebook/Antagonist/CultYoggRecipes.xml"
+
+- type: guideEntry
+  id: CultYoggAbyss
+  name: guide-entry-cult-yogg-abyss
+  priority: 6
+  text: "/ServerInfo/SS220/Guidebook/Antagonist/CultYoggAbyss.xml"
+
+- type: guideEntry
+  id: CultYoggRitual
+  name: guide-entry-cult-yogg-ritual
+  priority: 7
+  text: "/ServerInfo/SS220/Guidebook/Antagonist/CultYoggRitual.xml"
+
+- type: guideEntry
+  id: CultYoggCounterplay
+  name: guide-entry-cult-yogg-counterplay
+  priority: 8
+  text: "/ServerInfo/SS220/Guidebook/Antagonist/CultYoggCounterplay.xml"
 - type: guideEntry
   id: PirateExpansion
   name: guide-entry-pirates
-  text: "/ServerInfo/SS220/Guidebook/Antagonist/Pirates.xml"
+  text: "/ServerInfo/SS220/Guidebook/Antagonist/Pirates.xml
