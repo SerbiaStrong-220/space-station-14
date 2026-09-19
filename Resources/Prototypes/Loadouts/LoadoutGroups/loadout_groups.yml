@@ -542,7 +542,6 @@
   - ChaplainJumpskirt
   - ChaplainRobesLight
   - ChaplainRobesDark
-  - ChaplainJumpsuitFollower #SS220 new chaplain clothing
 
 - type: loadoutGroup
   id: ChaplainOuterClothing
@@ -554,6 +553,7 @@
   - ChaplainBlackHoodie
   - ChaplainHoodie
   - HoodieChaplainWhite #SS220-Clothes
+  - ChaplainOuterHoodieFollower #SS220 Follower clothing redux
 
 - type: loadoutGroup
   id: ChaplainNeck
