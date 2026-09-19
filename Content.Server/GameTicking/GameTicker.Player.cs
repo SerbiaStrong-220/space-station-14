@@ -10,6 +10,7 @@ using Robust.Server.Player;
 using Robust.Shared.Audio;
 using Robust.Shared.Enums;
 using Robust.Shared.Player;
+using Robust.Shared.SS220.Player;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -43,7 +44,12 @@ namespace Content.Server.GameTicking
             {
                 case SessionStatus.Connected:
                 {
+// ss220 add debug player session start
+#if DEBUG
+                    if (args.Session.Channel is not DebugNetChannel)
+#endif
                     AddPlayerToDb(args.Session.UserId.UserId);
+// ss220 add debug player session end
 
                     // Always make sure the client has player data.
                     if (session.Data.ContentDataUncast == null)
@@ -198,7 +204,12 @@ namespace Content.Server.GameTicking
                 _chatManager.DispatchServerMessage(session, Loc.GetString("game-ticker-player-join-game-message"));
 
             _playerGameStatuses[session.UserId] = PlayerGameStatus.JoinedGame;
+// ss220 add debug player session start
+#if DEBUG
+            if (session.Channel is not DebugNetChannel)
+#endif
             _db.AddRoundPlayers(RoundId, session.UserId);
+// ss220 add debug player session end
 
             if (_adminManager.HasAdminFlag(session, AdminFlags.Admin))
             {
@@ -215,7 +226,12 @@ namespace Content.Server.GameTicking
         private void PlayerJoinLobby(ICommonSession session)
         {
             _playerGameStatuses[session.UserId] = LobbyEnabled ? PlayerGameStatus.NotReadyToPlay : PlayerGameStatus.ReadyToPlay;
+// ss220 add debug player session start
+#if DEBUG
+            if (session.Channel is not DebugNetChannel)
+#endif
             _db.AddRoundPlayers(RoundId, session.UserId);
+// ss220 add debug player session end
 
             var client = session.Channel;
             RaiseNetworkEvent(new TickerJoinLobbyEvent(), client);
