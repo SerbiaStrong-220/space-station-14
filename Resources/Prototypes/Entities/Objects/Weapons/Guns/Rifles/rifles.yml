@@ -58,6 +58,14 @@
       gun_chamber: !type:ContainerSlot
   - type: StaticPrice
     price: 500
+  # SS220-place-and-pickup-sounds-2 begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Weapons/rifle_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Weapons/rifle_drop.ogg
+  # SS220-place-and-pickup-sounds-2 end
 
 - type: entity
   name: AKMS
