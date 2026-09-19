@@ -1,0 +1,6 @@
+- type: entity
+  parent: MobStatusEffectDebuff
+  id: StatusEffectPacifism
+  name: Pacifism
+  components:
+  - type: PacifiedStatusEffect
