@@ -95,7 +95,7 @@ public abstract class SharedTapeRecorderSystem : EntitySystem
     private void OnChangeModeMessage(Entity<TapeRecorderComponent> ent, ref ChangeModeTapeRecorderMessage args)
     {
         // SS220 TapeRecorder & Bodycam update BGN
-        if (args.Mode == TapeRecorderMode.Recording && ent.Comp.RecordingOnly)
+        if (ent.Comp.RecordingOnly && args.Mode is TapeRecorderMode.Playing or TapeRecorderMode.Rewinding)
             return;
         // SS220 TapeRecorder & Bodycam update END
 
@@ -343,7 +343,7 @@ public abstract class SharedTapeRecorderSystem : EntitySystem
     {
 
         // SS220 TapeRecorder & Bodycam update BGN
-        if (mode == TapeRecorderMode.Recording && ent.Comp.RecordingOnly)
+        if (ent.Comp.RecordingOnly && mode is TapeRecorderMode.Playing or TapeRecorderMode.Rewinding)
             return;
         // SS220 TapeRecorder & Bodycam update END
 

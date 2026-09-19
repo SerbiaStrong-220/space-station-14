@@ -31,6 +31,7 @@
     isOffable: true
     isOffableVisuals: true
   - type: SurveillanceCameraMicrophone
+    range: 5
     blacklist:
       components:
       - SurveillanceCamera
@@ -89,6 +90,9 @@
         whitelist:
           components:
           - FitsInTapeRecorder
+        blacklist:
+          tags:
+          - CassetteTapeLargeCapacity
   - type: UserInterface
     interfaces:
       enum.SurveillanceCameraSetupUiKey.Camera:
