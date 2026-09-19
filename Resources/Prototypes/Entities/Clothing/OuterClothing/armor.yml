@@ -548,3 +548,68 @@
   - type: Construction
     graph: cardArmour
     node: cardarmour
+
+# ss220 lasertag start
+- type: entity
+  parent: [ ClothingOuterArmorBasic, BaseToggleClothing ]
+  id: ClothingOuterArmorLasertagRed
+  name: Red lasertag vest
+  description: A lasertag vest. Its pained red.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Armor/lasertagred.rsi
+  - type: Clothing 
+    sprite: SS220/Clothing/OuterClothing/Armor/lasertagred.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+  - type: FieldShieldProvider
+    rechargeShieldData:
+      rechargeTime: 60
+    shieldData:
+      shieldMaxCharge: 3
+      shieldSprite:
+        sprite: SS220/Effects/field_shield.rsi
+        state: red
+    lightData:
+      color: "#D82000"
+      radius: 1
+      energy: 4
+  - type: ToggleClothing
+    action: ActionTogglePersonalShield
+    disableOnUnequip: true
+
+
+- type: entity
+  parent: [ ClothingOuterArmorBasic, BaseToggleClothing ]
+  id: ClothingOuterArmorLasertagBlue
+  name: Blue lasertag vest
+  description: A lasertag vest. Its pained blue.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Armor/lasertagblue.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Armor/lasertagblue.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+  - type: FieldShieldProvider
+    rechargeShieldData:
+      rechargeTime: 60
+    shieldData:
+      shieldMaxCharge: 3
+      shieldSprite:
+        sprite: SS220/Effects/field_shield.rsi
+        state: blue
+    lightData:
+      color: "#0061d8"
+      radius: 1
+      energy: 4
+  - type: ToggleClothing
+    action: ActionTogglePersonalShield
+    disableOnUnequip: true
+
+
+# ss220 lasertag end
