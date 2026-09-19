@@ -3,7 +3,7 @@
 namespace Content.Server.SS220.RandomTeleport;
 
 /// <summary>
-/// If you don't have a component to teleport to, use this + tag
+///     Marks an entity as a possible destination for random teleportation.
 /// </summary>
 [RegisterComponent]
-public sealed partial class RandomTeleportTargetComponent : Component { }
+public sealed partial class RandomTeleportDestinationComponent : Component { }
