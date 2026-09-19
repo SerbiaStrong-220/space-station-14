@@ -1,3 +1,3 @@
-ent-ClothingOuterHoodieFollower = одеяние последователя
+ent-ClothingOuterHoodieFollower = роба последователя
     .desc = Еще ближе к раю.
     .suffix = За время в игре
