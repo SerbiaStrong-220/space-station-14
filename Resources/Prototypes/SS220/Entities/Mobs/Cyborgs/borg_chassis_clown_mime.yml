@@ -77,6 +77,7 @@
   components:
   - type: Sprite
     layers:
+    - sprite: SS220/Mobs/Silicon/chassis.rsi
     - state: ClownMime
     - state: ClownMime_e_r
       map: ["enum.BorgVisualLayers.Light"]

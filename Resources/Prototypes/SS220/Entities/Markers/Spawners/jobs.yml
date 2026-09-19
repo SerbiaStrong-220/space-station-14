@@ -128,3 +128,18 @@
     layers:
     - state: green
     - state: boxer
+
+#Борг СБ
+
+- type: entity
+  id: SpawnPointSecurityBorg
+  parent: SpawnPointJobBase
+  name: security cyborg
+  components:
+  - type: SpawnPoint
+    job_id: SecurityBorg
+  - type: Sprite
+    layers:
+    - state: green
+    - state: securityborg
+      sprite: /Textures/SS220/Markers/jobs.rsi

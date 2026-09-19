@@ -192,3 +192,31 @@
     raffle:
       settings: default
   - type: GhostTakeoverAvailable
+  
+- type: entity
+  id: PlayerBorgChassisSecurityBattery
+  parent: BorgChassisSecurity
+  name: security borg
+  description: A cyborg security service created to help security personnel maintain order at the station.
+  suffix: Battery, Module, Ghost role
+  components:
+  - type: ContainerFill
+    containers:
+      borg_brain:
+        - PositronicBrain
+      borg_module:
+        - BorgModuleSafety
+        - BorgModuleLethal
+        - BorgModulePrying
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellHigh
+  - type: GhostRole
+    name: ghost-role-information-security-cyborg-name
+    description: ghost-role-information-security-cyborg-description
+    rules: ghost-role-information-silicon-rules
+    raffle:
+      settings: default
+  - type: GhostTakeoverAvailable
