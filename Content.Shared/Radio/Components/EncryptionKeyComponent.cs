@@ -27,4 +27,15 @@ public sealed partial class EncryptionKeyComponent : Component
     [DataField]
     public ProtoId<RadioChannelPrototype>? DefaultFrequencyChannel;
     // SS220-add-frequency-radio-end
+
+    // SS220-listen-only-radio begin
+    /// <summary>
+    ///     Channels this key allows ONLY listening on (no transmission).
+    ///     A channel must never appear in both <see cref="Channels"/> and this set —
+    ///     pick one or the other, never both, to avoid double bookkeeping
+    ///     (enforced centrally in EncryptionKeySystem.UpdateChannels).
+    /// </summary>
+    [DataField]
+    public HashSet<ProtoId<RadioChannelPrototype>> ListenOnlyChannels = new();
+    // SS220-listen-only-radio end
 }

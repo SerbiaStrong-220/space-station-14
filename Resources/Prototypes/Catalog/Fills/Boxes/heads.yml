@@ -53,6 +53,7 @@
         - id: IDComputerCircuitboard
         - id: FundingAllocationComputerCircuitboard
         - id: CargoRequestServiceComputerCircuitboard
+        - id: RadioStationCircuitboard
 
 - type: entity
   parent: BoxStamps
