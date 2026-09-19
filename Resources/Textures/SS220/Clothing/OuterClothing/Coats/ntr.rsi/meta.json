@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "license": "CC-BY-SA-4.0",
-  "copyright": "Sprited by EstKemran (Github) & dinazewwr for SS220",
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Made by EstKemran (Github) For SS220",
   "size": {
     "x": 32,
     "y": 32
@@ -11,14 +11,7 @@
       "name": "icon"
     },
     {
-      "name": "icon_tie"
-    },
-    {
-      "name": "equipped-INNERCLOTHING",
-      "directions": 4
-    },
-    {
-      "name": "tie-equipped-INNERCLOTHING",
+      "name": "equipped-OUTERCLOTHING",
       "directions": 4
     },
     {
@@ -31,4 +24,3 @@
     }
   ]
 }
-
