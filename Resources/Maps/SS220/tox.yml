@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 09/17/2026 20:19:44
-  entityCount: 59478
+  time: 09/19/2026 00:26:13
+  entityCount: 59482
 maps:
 - 1
 grids:
@@ -35133,6 +35133,7 @@ entities:
       - 36584
       - 28040
       - 28031
+      - 45129
     - type: Fixtures
       fixtures: {}
   - uid: 309
@@ -35153,6 +35154,7 @@ entities:
       - 27378
       - 27379
       - 28032
+      - 45128
     - type: Fixtures
       fixtures: {}
   - uid: 310
@@ -37785,7 +37787,7 @@ entities:
       pos: -10.5,-8.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -33896.426
+      secondsUntilStateChange: -33966.785
       state: Opening
   - uid: 548
     components:
@@ -192201,6 +192203,24 @@ entities:
       deviceLists:
       - 203
       - 4563
+  - uid: 45128
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 77.5,-8.5
+      parent: 2
+    - type: DeviceNetwork
+      deviceLists:
+      - 309
+  - uid: 45129
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 87.5,-8.5
+      parent: 2
+    - type: DeviceNetwork
+      deviceLists:
+      - 308
 - proto: Fireplace
   entities:
   - uid: 28113
@@ -261858,11 +261878,6 @@ entities:
     - type: Transform
       pos: 90.5,-40.5
       parent: 2
-  - uid: 36977
-    components:
-    - type: Transform
-      pos: 77.5,-8.5
-      parent: 2
   - uid: 36978
     components:
     - type: Transform
@@ -265767,11 +265782,6 @@ entities:
     components:
     - type: Transform
       pos: 31.5,-117.5
-      parent: 2
-  - uid: 37791
-    components:
-    - type: Transform
-      pos: 87.5,-8.5
       parent: 2
   - uid: 37792
     components:
@@ -311406,16 +311416,6 @@ entities:
     - type: Transform
       pos: 69.5,-13.5
       parent: 2
-  - uid: 45280
-    components:
-    - type: Transform
-      pos: 87.5,-8.5
-      parent: 2
-  - uid: 45281
-    components:
-    - type: Transform
-      pos: 77.5,-8.5
-      parent: 2
   - uid: 45282
     components:
     - type: Transform
@@ -336948,6 +336948,18 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 7.5,64.5
+      parent: 2
+  - uid: 37791
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 87.5,-8.5
+      parent: 2
+  - uid: 44781
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 77.5,-8.5
       parent: 2
   - uid: 48911
     components:
@@ -390366,6 +390378,18 @@ entities:
       canCollide: False
 - proto: Windoor
   entities:
+  - uid: 36977
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 77.5,-8.5
+      parent: 2
+  - uid: 44782
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 87.5,-8.5
+      parent: 2
   - uid: 58577
     components:
     - type: Transform
@@ -391004,6 +391028,18 @@ entities:
       parent: 2
 - proto: WindoorSecureScienceLocked
   entities:
+  - uid: 44783
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 87.5,-8.5
+      parent: 2
+  - uid: 44784
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 77.5,-8.5
+      parent: 2
   - uid: 58682
     components:
     - type: Transform
