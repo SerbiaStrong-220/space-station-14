@@ -1,0 +1,8627 @@
+- type: entity
+  id: FloraAloeBase
+  name: Aloe
+  description: Aloe.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/aloe.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraAloeBase
+  id: FloraAloeRandom
+  name: Random Aloe
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-5
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+        stage-5: ""
+
+- type: entity
+  parent: FloraAloeBase
+  id: FloraAloe
+  name: Aloe
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodAloe:
+            min: 1
+            max: 4
+
+- type: entity
+  parent: FloraAloeBase
+  id: FloraAloeDead
+  name: Dead Aloe
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraAmbrosiaDeusBase
+  name: Ambrosia Deus
+  description: Ambrosia deus.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/ambrosia_deus.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraAmbrosiaDeusBase
+  id: FloraAmbrosiaDeusRandom
+  name: Random Ambrosia Deus
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-5
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+        stage-5: ""
+
+- type: entity
+  parent: FloraAmbrosiaDeusBase
+  id: FloraAmbrosiaDeus
+  name: Ambrosia Deus
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodAmbrosiaDeus:
+            min: 1
+            max: 6
+
+- type: entity
+  parent: FloraAmbrosiaDeusBase
+  id: FloraAmbrosiaDeusDead
+  name: Dead Ambrosia Deus
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraAmbrosiaVulgarisBase
+  name: Ambrosia Vulgaris
+  description: Ambrosia vulgaris.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/ambrosia_vulgaris.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraAmbrosiaVulgarisBase
+  id: FloraAmbrosiaVulgarisRandom
+  name: Random Ambrosia Vulgaris
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-5
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+        stage-5: ""
+
+- type: entity
+  parent: FloraAmbrosiaVulgarisBase
+  id: FloraAmbrosiaVulgaris
+  name: Ambrosia Vulgaris
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodAmbrosiaVulgaris:
+            min: 1
+            max: 6
+
+- type: entity
+  parent: FloraAmbrosiaVulgarisBase
+  id: FloraAmbrosiaVulgarisDead
+  name: Dead Ambrosia Vulgaris
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraAnomalyBerryBase
+  name: Anomaly Berry
+  description: Anomaly berry.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/anomaly_berry.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Item
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraAnomalyBerryBase
+  id: FloraAnomalyBerryRandom
+  name: Random Anomaly Berry
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+
+- type: entity
+  parent: FloraAnomalyBerryBase
+  id: FloraAnomalyBerry
+  name: Anomaly Berry
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodAnomalyBerry:
+            min: 1
+            max: 2
+
+- type: entity
+  parent: FloraAnomalyBerryBase
+  id: FloraAnomalyBerryDead
+  name: Dead Anomaly Berry
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraAppleBase
+  name: Apple Tree
+  description: Apple tree.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/apple.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraAppleBase
+  id: FloraAppleRandom
+  name: Random Apple Tree
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-5
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+        stage-5: ""
+
+- type: entity
+  parent: FloraAppleBase
+  id: FloraApple
+  name: Apple Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodApple:
+            min: 2
+            max: 12
+          Log:
+            min: 1
+            max: 2
+
+- type: entity
+  parent: FloraAppleBase
+  id: FloraAppleEmpty
+  name: Empty Apple Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-6
+
+- type: entity
+  parent: FloraAppleBase
+  id: FloraAppleDead
+  name: Dead Apple Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraBananaBase
+  name: Banana Tree
+  description: Banana tree.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/banana.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraBananaBase
+  id: FloraBananaRandom
+  name: Random Banana Tree
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-5
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+        stage-5: ""
+
+- type: entity
+  parent: FloraBananaBase
+  id: FloraBanana
+  name: Banana Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodBanana:
+            min: 2
+            max: 10
+          Log:
+            min: 1
+            max: 2
+
+- type: entity
+  parent: FloraBananaBase
+  id: FloraBananaEmpty
+  name: Empty Banana Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-6
+
+- type: entity
+  parent: FloraBananaBase
+  id: FloraBananaDead
+  name: Dead Banana Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraBerriesBase
+  name: Berries Bush
+  description: Berries bush.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/berries.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraBerriesBase
+  id: FloraBerriesRandom
+  name: Random Berries Bush
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-5
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+        stage-5: ""
+
+- type: entity
+  parent: FloraBerriesBase
+  id: FloraBerries
+  name: Berries Bush
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodBerries:
+            min: 2
+            max: 8
+
+- type: entity
+  parent: FloraBerriesBase
+  id: FloraBerriesEmpty
+  name: Empty Berries Bush
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-6
+
+- type: entity
+  parent: FloraBerriesBase
+  id: FloraBerriesDead
+  name: Dead Berries Bush
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraBloodTomatoBase
+  name: Blood Tomato
+  description: Blood tomato.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/blood_tomato.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraBloodTomatoBase
+  id: FloraBloodTomatoRandom
+  name: Random Blood Tomato
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-6
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+        stage-5: ""
+        stage-6: ""
+
+- type: entity
+  parent: FloraBloodTomatoBase
+  id: FloraBloodTomato
+  name: Blood Tomato
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodBloodTomato:
+            min: 2
+            max: 8
+
+- type: entity
+  parent: FloraBloodTomatoBase
+  id: FloraBloodTomatoEmpty
+  name: Empty Blood Tomato
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-6
+
+- type: entity
+  parent: FloraBloodTomatoBase
+  id: FloraBloodTomatoDead
+  name: Dead Blood Tomato
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraBloonionBase
+  name: Bloonion
+  description: Bloonion.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/bloonion.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraBloonionBase
+  id: FloraBloonionRandom
+  name: Random Bloonion
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-4
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+
+- type: entity
+  parent: FloraBloonionBase
+  id: FloraBloonion
+  name: Bloonion
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodBloonion:
+            min: 1
+            max: 4
+
+- type: entity
+  id: FloraBluePumpkinBase
+  name: Blue Pumpkin
+  description: Blue pumpkin.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/blue_pumpkin.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 200
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraBluePumpkinBase
+  id: FloraBluePumpkinRandom
+  name: Random Blue Pumpkin
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+
+- type: entity
+  parent: FloraBluePumpkinBase
+  id: FloraBluePumpkin
+  name: Blue Pumpkin
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodBluePumpkin:
+            min: 1
+            max: 1
+
+- type: entity
+  parent: FloraBluePumpkinBase
+  id: FloraBluePumpkinEmpty
+  name: Empty Blue Pumpkin
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-3
+
+- type: entity
+  parent: FloraBluePumpkinBase
+  id: FloraBluePumpkinDead
+  name: Dead Blue Pumpkin
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraBlueTomatoBase
+  name: Blue Tomato
+  description: Blue tomato.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/blue_tomato.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraBlueTomatoBase
+  id: FloraBlueTomatoRandom
+  name: Random Blue Tomato
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-6
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+        stage-5: ""
+
+- type: entity
+  parent: FloraBlueTomatoBase
+  id: FloraBlueTomato
+  name: Blue Tomato
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodBlueTomato:
+            min: 2
+            max: 8
+
+- type: entity
+  parent: FloraBlueTomatoBase
+  id: FloraBlueTomatoEmpty
+  name: Empty Blue Tomato
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-6
+
+- type: entity
+  parent: FloraBlueTomatoBase
+  id: FloraBlueTomatoDead
+  name: Dead Blue Tomato
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraBungoBase
+  name: Bungo Tree
+  description: Bungo tree.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/bungo.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraBungoBase
+  id: FloraBungoRandom
+  name: Random Bungo Tree
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-4
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+
+- type: entity
+  parent: FloraBungoBase
+  id: FloraBungo
+  name: Bungo Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodBungo:
+            min: 5
+            max: 17
+          Log:
+            min: 1
+            max: 2
+
+- type: entity
+  parent: FloraBungoBase
+  id: FloraBungoEmpty
+  name: Empty Bungo Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-4
+
+- type: entity
+  parent: FloraBungoBase
+  id: FloraBungoDead
+  name: Dead Bungo Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraCabbageBase
+  name: Cabbage
+  description: Cabbage.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/cabbage.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraCabbageBase
+  id: FloraCabbage
+  name: Cabbage
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodCabbage:
+            min: 1
+            max: 1
+
+- type: entity
+  parent: FloraCabbageBase
+  id: FloraCabbageEmpty
+  name: Empty Cabbage
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-1
+
+- type: entity
+  parent: FloraCabbageBase
+  id: FloraCabbageDead
+  name: Dead Cabbage
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraCannabisBase
+  name: Cannabis
+  description: Cannabis.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/cannabis.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraCannabisBase
+  id: FloraCannabisRandom
+  suffix: Random
+  name: Random Cannabis
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-3
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+
+- type: entity
+  parent: FloraCannabisBase
+  id: FloraCannabis
+  name: Cannabis
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          LeavesCannabis:
+            min: 1
+            max: 5
+
+- type: entity
+  parent: FloraCannabisBase
+  id: FloraCannabisDead
+  name: Dead Cannabis
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraCapfruitBase
+  name: Capfruit
+  description: Capfruit.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/capfruit.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraCapfruitBase
+  id: FloraCapfruitRandom
+  name: Random Capfruit
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+
+- type: entity
+  parent: FloraCapfruitBase
+  id: FloraCapfruit
+  name: Capfruit
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodRealCapfruit:
+            min: 2
+            max: 4
+
+- type: entity
+  parent: FloraCapfruitBase
+  id: FloraCapfruitEmpty
+  name: Empty Capfruit
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+
+- type: entity
+  parent: FloraCapfruitBase
+  id: FloraCapfruitDead
+  name: Dead Capfruit
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraCarrotBase
+  name: Carrot
+  description: Carrot.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    drawdepth: Items
+    noRot: true
+    sprite: /Textures/Objects/Specific/Hydroponics/carrot.rsi
+    offset: 0, 0.15
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraCarrotBase
+  id: FloraCarrotRandom
+  name: Random Carrot
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-3
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+
+- type: entity
+  parent: FloraCarrotBase
+  id: FloraCarrot
+  name: Carrot
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodCarrot:
+            min: 2
+            max: 8
+
+- type: entity
+  parent: FloraCarrotBase
+  id: FloraCarrotDead
+  name: Dead Carrot
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraChanterelleBase
+  name: Chanterelle
+  description: Chanterelle.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/chanterelle.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Item
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraChanterelleBase
+  id: FloraChanterelleRandom
+  suffix: Random
+  name: Random Chanterelle
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-3
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+
+- type: entity
+  parent: FloraChanterelleBase
+  id: FloraChanterelle
+  name: Chanterelle
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodMushroom:
+            min: 1
+            max: 6
+
+- type: entity
+  parent: FloraChanterelleBase
+  id: FloraChanterelleDead
+  name: Dead Chanterelle
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraCherryBase
+  name: Cherry Tree
+  description: Cherry tree.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/cherry.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraCherryBase
+  id: FloraCherryRandom
+  name: Random Cherry Tree
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-5
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+        stage-5: ""
+
+- type: entity
+  parent: FloraCherryBase
+  id: FloraCherry
+  name: Cherry Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodCherry:
+            min: 4
+            max: 8
+          Log:
+            min: 1
+            max: 2
+
+- type: entity
+  parent: FloraCherryBase
+  id: FloraCherryEmpty
+  name: Empty Cherry Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-6
+
+- type: entity
+  parent: FloraCherryBase
+  id: FloraCherryDead
+  name: Dead Cherry Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraChiliBase
+  name: Chili
+  description: Chili.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/chili.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraChiliBase
+  id: FloraChiliRandom
+  name: Random Chili
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-5
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+        stage-5: ""
+
+- type: entity
+  parent: FloraChiliBase
+  id: FloraChili
+  name: Chili
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodChiliPepper:
+            min: 2
+            max: 8
+
+- type: entity
+  parent: FloraChiliBase
+  id: FloraChiliEmpty
+  name: Empty Chili
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-6
+
+- type: entity
+  parent: FloraChiliBase
+  id: FloraChiliDead
+  name: Dead Chili
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraChillyBase
+  name: Chilly
+  description: Chilly.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/chilly.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraChillyBase
+  id: FloraChillyRandom
+  name: Random Chilly
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-5
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+        stage-5: ""
+
+- type: entity
+  parent: FloraChillyBase
+  id: FloraChilly
+  name: Chilly
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodChillyPepper:
+            min: 2
+            max: 8
+
+- type: entity
+  parent: FloraChillyBase
+  id: FloraChillyEmpty
+  name: Empty Chilly
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-6
+
+- type: entity
+  parent: FloraChillyBase
+  id: FloraChillyDead
+  name: Dead Chilly
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraCocoaBase
+  name: Cocoa Tree
+  description: Cocoa tree.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/cocoa.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraCocoaBase
+  id: FloraCocoaRandom
+  name: Random Cocoa Tree
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-5
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+        stage-5: ""
+
+- type: entity
+  parent: FloraCocoaBase
+  id: FloraCocoa
+  name: Cocoa Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodCocoaPod:
+            min: 1
+            max: 6
+          Log:
+            min: 1
+            max: 2
+
+- type: entity
+  parent: FloraCocoaBase
+  id: FloraCocoaEmpty
+  name: Empty Cocoa Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-6
+
+- type: entity
+  parent: FloraCocoaBase
+  id: FloraCocoaDead
+  name: Dead Cocoa Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraCornBase
+  name: Corn
+  description: Corn.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/corn.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraCornBase
+  id: FloraCornRandom
+  name: Random Corn
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+
+- type: entity
+  parent: FloraCornBase
+  id: FloraCorn
+  name: Corn
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodCorn:
+            min: 1
+            max: 5
+
+- type: entity
+  parent: FloraCornBase
+  id: FloraCornEmpty
+  name: Empty Corn
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-3
+
+- type: entity
+  parent: FloraCornBase
+  id: FloraCornDead
+  name: Dead Corn
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraCottonBase
+  name: Cotton
+  description: Cotton.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/cotton.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Items
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraCottonBase
+  id: FloraCottonRandom
+  name: Random Cotton
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+
+- type: entity
+  parent: FloraCottonBase
+  id: FloraCotton
+  name: Cotton
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialCotton:
+            min: 2
+            max: 8
+
+- type: entity
+  parent: FloraCottonBase
+  id: FloraCottonEmpty
+  name: Empty Cotton
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-3
+
+- type: entity
+  parent: FloraCottonBase
+  id: FloraCottonDead
+  name: Dead Cotton
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraDeathNettleBase
+  name: Death Nettle
+  description: Death nettle.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/death_nettle.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraDeathNettleBase
+  id: FloraDeathNettleRandom
+  name: Random Death Nettle
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-4
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+
+- type: entity
+  parent: FloraDeathNettleBase
+  id: FloraDeathNettle
+  name: Death Nettle
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          DeathNettle:
+            min: 1
+            max: 3
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 0.25
+    sprintSpeedModifier: 0.25
+  - type: DamageContacts
+    damage:
+      types:
+        Poison: 4
+        Heat: 4
+
+- type: entity
+  parent: FloraDeathNettleBase
+  id: FloraDeathNettleEmpty
+  name: Empty Death Nettle
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-5
+
+- type: entity
+  parent: FloraDeathNettleBase
+  id: FloraDeathNettleDead
+  name: Dead Death Nettle
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraEggplantBase
+  name: Eggplant
+  description: Eggplant.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/eggplant.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraEggplantBase
+  id: FloraEggplantRandom
+  name: Random Eggplant
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+
+- type: entity
+  parent: FloraEggplantBase
+  id: FloraEggplant
+  name: Eggplant
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodEggplant:
+            min: 2
+            max: 5
+
+- type: entity
+  parent: FloraEggplantBase
+  id: FloraEggplantEmpty
+  name: Empty Eggplant
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-3
+
+- type: entity
+  parent: FloraEggplantBase
+  id: FloraEggplantDead
+  name: Dead Eggplant
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraEggyBase
+  name: Eggy
+  description: Eggy.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/eggy.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraEggyBase
+  id: FloraEggyRandom
+  name: Random Eggy
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-5
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+        stage-5: ""
+
+- type: entity
+  parent: FloraEggyBase
+  id: FloraEggy
+  name: Eggy
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodEgg:
+            min: 2
+            max: 14
+
+- type: entity
+  parent: FloraEggyBase
+  id: FloraEggyEmpty
+  name: Empty Eggy
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-6
+
+- type: entity
+  parent: FloraEggyBase
+  id: FloraEggyDead
+  name: Dead Eggy
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraExtradimensionalOrangeBase
+  name: Extradimensional Orange Tree
+  description: Extradimensional orange tree.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/extradimensional_orange.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraExtradimensionalOrangeBase
+  id: FloraExtradimensionalOrangeRandom
+  name: Random Extradimensional Orange Tree
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-5
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+        stage-5: ""
+        stage-6: ""
+
+- type: entity
+  parent: FloraExtradimensionalOrangeBase
+  id: FloraExtradimensionalOrange
+  name: Extradimensional Orange Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodExtradimensionalOrange:
+            min: 2
+            max: 8
+          Log:
+            min: 1
+            max: 2
+
+- type: entity
+  parent: FloraExtradimensionalOrangeBase
+  id: FloraExtradimensionalOrangeEmpty
+  name: Empty Extradimensional Orange Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-6
+
+- type: entity
+  parent: FloraExtradimensionalOrangeBase
+  id: FloraExtradimensionalOrangeDead
+  name: Dead Extradimensional Orange Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraFlyAmanitaBase
+  name: Fly Amanita
+  description: Fly amanita.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/fly_amanita.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Item
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraFlyAmanitaBase
+  id: FloraFlyAmanitaRandom
+  name: Random Fly Amanita
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+
+- type: entity
+  parent: FloraFlyAmanitaBase
+  id: FloraFlyAmanita
+  name: Fly Amanita
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodFlyAmanita:
+            min: 2
+            max: 2
+
+- type: entity
+  parent: FloraFlyAmanitaBase
+  id: FloraFlyAmanitaDead
+  name: Dead Fly Amanita
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraGalaxyThistleBase
+  name: Galaxy Thistle
+  description: Galaxy thistle.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/galaxythistle.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraGalaxyThistleBase
+  id: FloraGalaxyThistleRandom
+  name: Random Galaxy Thistle
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-3
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+
+- type: entity
+  parent: FloraGalaxyThistleBase
+  id: FloraGalaxyThistle
+  name: Galaxy Thistle
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodGalaxythistle:
+            min: 3
+            max: 3
+
+- type: entity
+  parent: FloraGalaxyThistleBase
+  id: FloraGalaxyThistleDead
+  name: Dead Galaxy Thistle
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraGarlicBase
+  name: Garlic
+  description: Garlic.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/garlic.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Item
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraGarlicBase
+  id: FloraGarlicRandom
+  name: Random Garlic
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+
+- type: entity
+  parent: FloraGarlicBase
+  id: FloraGarlic
+  name: Garlic
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodGarlic:
+            min: 6
+            max: 6
+
+- type: entity
+  parent: FloraGarlicBase
+  id: FloraGarlicDead
+  name: Dead Garlic
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraGatfruitBase
+  name: Gatfruit Tree
+  description: Gatfruit tree.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/gatfruit.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraGatfruitBase
+  id: FloraGatfruitRandom
+  name: Random Gatfruit Tree
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-1
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+
+- type: entity
+  parent: FloraGatfruitBase
+  id: FloraGatfruit
+  name: Gatfruit Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodGatfruit:
+            min: 3
+            max: 3
+          Log:
+            min: 1
+            max: 2
+
+- type: entity
+  parent: FloraGatfruitBase
+  id: FloraGatfruitEmpty
+  name: Empty Gatfruit Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+
+- type: entity
+  parent: FloraGatfruitBase
+  id: FloraGatfruitDead
+  name: Dead Gatfruit Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraGlasstleBase
+  name: Glasstle
+  description: Glasstle.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/glasstle.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraGlasstleBase
+  id: FloraGlasstleRandom
+  name: Random Glasstle
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+
+- type: entity
+  parent: FloraGlasstleBase
+  id: FloraGlasstle
+  name: Glasstle
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodGlasstle:
+            min: 3
+            max: 3
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 0.25
+    sprintSpeedModifier: 0.25
+  - type: DamageContacts
+    damage:
+      types:
+        Piercing: 2
+
+- type: entity
+  parent: FloraGlasstleBase
+  id: FloraGlasstleDead
+  name: Dead Glasstle
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraGoldenAppleTreeBase
+  name: Golden Apple Tree
+  description: Golden apple tree.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/golden_apple.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraGoldenAppleTreeBase
+  id: FloraGoldenAppleTreeRandom
+  name: Random Golden Apple Tree
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-6
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+        stage-5: ""
+        stage-6: ""
+
+- type: entity
+  parent: FloraGoldenAppleTreeBase
+  id: FloraGoldenAppleTree
+  name: Golden Apple Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodGoldenApple:
+            min: 2
+            max: 10
+          Log:
+            min: 1
+            max: 2
+
+- type: entity
+  parent: FloraGoldenAppleTreeBase
+  id: FloraGoldenAppleEmpty
+  name: Empty Golden Apple Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-6
+
+- type: entity
+  parent: FloraGoldenAppleTreeBase
+  id: FloraGoldenApplTreeeDead
+  name: Dead Golden Apple Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraGrapeBase
+  name: Grape
+  description: Grape.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/grape.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraGrapeBase
+  id: FloraGrapeRandom
+  name: Random Grape
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+
+- type: entity
+  parent: FloraGrapeBase
+  id: FloraGrape
+  name: Grape
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodGrape:
+            min: 2
+            max: 12
+
+- type: entity
+  parent: FloraGrapeBase
+  id: FloraGrapeEmpty
+  name: Empty Grape
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+
+- type: entity
+  parent: FloraGrapeBase
+  id: FloraGrapeDead
+  name: Dead Grape
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraHolymelonBase
+  name: Holymelon
+  description: Holymelon.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/holymelon.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraHolymelonBase
+  id: FloraHolymelonRandom
+  name: Random Holymelon
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-5
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+        stage-5: ""
+
+- type: entity
+  parent: FloraHolymelonBase
+  id: FloraHolymelon
+  name: Holymelon
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodHolymelon:
+            min: 1
+            max: 2
+
+- type: entity
+  parent: FloraHolymelonBase
+  id: FloraHolymelonEmpty
+  name: Empty Holymelon
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-6
+
+- type: entity
+  parent: FloraHolymelonBase
+  id: FloraHolymelonDead
+  name: Dead Holymelon
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraKoibeanBase
+  name: Koibean
+  description: Koibean.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/koibean.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraKoibeanBase
+  id: FloraKoibeanRandom
+  name: Random Koibean
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-3
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+
+- type: entity
+  parent: FloraKoibeanBase
+  id: FloraKoibean
+  name: Koibean
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodKoibean:
+            min: 3
+            max: 5
+
+- type: entity
+  parent: FloraKoibeanBase
+  id: FloraKoibeanEmpty
+  name: Empty Koibean
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-4
+
+- type: entity
+  parent: FloraKoibeanBase
+  id: FloraKoibeanDead
+  name: Dead Koibean
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraLaughinPeaBase
+  name: Laughin Pea
+  description: Laughin pea.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/laughin_pea.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraLaughinPeaBase
+  id: FloraLaughinPeaRandom
+  name: Random Laughin Pea
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+
+- type: entity
+  parent: FloraLaughinPeaBase
+  id: FloraLaughinPea
+  name: Laughin Pea
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodLaughinPeaPod:
+            min: 2
+            max: 6
+
+- type: entity
+  parent: FloraLaughinPeaBase
+  id: FloraLaughinPeaEmpty
+  name: Empty Laughin Pea
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-3
+
+- type: entity
+  parent: FloraLaughinPeaBase
+  id: FloraLaughinPeaDead
+  name: Dead Laughin Pea
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraLemonBase
+  name: Lemon Tree
+  description: Lemon tree.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/lemon.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraLemonBase
+  id: FloraLemonRandom
+  name: Random Lemon Tree
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-5
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+        stage-5: ""
+
+- type: entity
+  parent: FloraLemonBase
+  id: FloraLemon
+  name: Lemon Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodLemon:
+            min: 2
+            max: 12
+          Log:
+            min: 1
+            max: 2
+
+- type: entity
+  parent: FloraLemonBase
+  id: FloraLemonEmpty
+  name: Empty Lemon Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-6
+
+- type: entity
+  parent: FloraLemonBase
+  id: FloraLemonDead
+  name: Dead Lemon Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraLemoonBase
+  name: Lemoon Tree
+  description: Lemoon tree.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/lemoon.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraLemoonBase
+  id: FloraLemoonRandom
+  name: Random Lemoon Tree
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-5
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+        stage-5: ""
+
+- type: entity
+  parent: FloraLemoonBase
+  id: FloraLemoon
+  name: Lemoon Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodLemoon:
+            min: 2
+            max: 12
+
+- type: entity
+  parent: FloraLemoonBase
+  id: FloraLemoonEmpty
+  name: Empty Lemoon Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-6
+
+- type: entity
+  parent: FloraLemoonBase
+  id: FloraLemoonDead
+  name: Dead Lemoon Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraLilyBase
+  name: Lily
+  description: Lily.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/lily.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraLilyBase
+  id: FloraLilyRandom
+  name: Random Lily
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+
+- type: entity
+  parent: FloraLilyBase
+  id: FloraLily
+  name: Lily
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodLily:
+            min: 1
+            max: 2
+
+- type: entity
+  parent: FloraLilyBase
+  id: FloraLilyEmpty
+  name: Empty Lily
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-3
+
+- type: entity
+  parent: FloraLilyBase
+  id: FloraLilyDead
+  name: Dead Lily
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraLimeBase
+  name: Lime Tree
+  description: Lime tree.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/lime.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraLimeBase
+  id: FloraLimeRandom
+  name: Random Lime Tree
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-5
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+        stage-5: ""
+
+- type: entity
+  parent: FloraLimeBase
+  id: FloraLime
+  name: Lime Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodLime:
+            min: 2
+            max: 12
+          Log:
+            min: 1
+            max: 2
+
+- type: entity
+  parent: FloraLimeBase
+  id: FloraLimeEmpty
+  name: Empty Lime Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-6
+
+- type: entity
+  parent: FloraLimeBase
+  id: FloraLimeDead
+  name: Dead Lime Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraLingzhiBase
+  name: Lingzhi
+  description: Lingzhi.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/lingzhi.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: item
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraLingzhiBase
+  id: FloraLingzhiRandom
+  name: Random Lingzhi
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+
+- type: entity
+  parent: FloraLingzhiBase
+  id: FloraLingzhi
+  name: Lingzhi
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodLingzhi:
+            min: 2
+            max: 12
+
+- type: entity
+  parent: FloraLingzhiBase
+  id: FloraLingzhiEmpty
+  name: Empty Lingzhi
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-3
+
+- type: entity
+  parent: FloraLingzhiBase
+  id: FloraLingzhiDead
+  name: Dead Lingzhi
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraMeatwheatBase
+  name: Meatwheat
+  description: Meatwheat.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/meatwheat.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.1
+        density: 190
+        mask:
+        - HighImpassable
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraMeatwheatBase
+  id: FloraMeatwheatRandom
+  name: Random Meatwheat
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-5
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+        stage-5: ""
+        stage-6: ""
+
+- type: entity
+  parent: FloraMeatwheatBase
+  id: FloraMeatwheat
+  name: Meatwheat
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodMeatWheat:
+            min: 4
+            max: 16
+
+- type: entity
+  parent: FloraMeatwheatBase
+  id: FloraMeatwheatEmpty
+  name: Empty Meatwheat
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-6
+
+- type: entity
+  parent: FloraMeatwheatBase
+  id: FloraMeatwheatDead
+  name: Dead Meatwheat
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraMimanaBase
+  name: Mimana
+  description: Mimana.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/mimana.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraMimanaBase
+  id: FloraMimanaRandom
+  name: Random Mimana
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-5
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+        stage-5: ""
+        stage-6: ""
+
+- type: entity
+  parent: FloraMimanaBase
+  id: FloraMimana
+  name: Mimana
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodMimana:
+            min: 2
+            max: 12
+
+- type: entity
+  parent: FloraMimanaBase
+  id: FloraMimanaEmpty
+  name: Empty Mimana
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-6
+
+- type: entity
+  parent: FloraMimanaBase
+  id: FloraMimanaDead
+  name: Dead Mimana
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraNettleBase
+  name: Nettle
+  description: Nettle.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/nettle.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraNettleBase
+  id: FloraNettleRandom
+  name: Random Nettle
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-4
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+        stage-5: ""
+
+- type: entity
+  parent: FloraNettleBase
+  id: FloraNettle
+  name: Nettle
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          Nettle:
+            min: 2
+            max: 4
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 0.25
+    sprintSpeedModifier: 0.25
+  - type: DamageContacts
+    damage:
+      types:
+        Heat: 2
+
+- type: entity
+  parent: FloraNettleBase
+  id: FloraNettleEmpty
+  name: Empty Nettle
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-5
+
+- type: entity
+  parent: FloraNettleBase
+  id: FloraNettleDead
+  name: Dead Nettle
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraOatBase
+  name: Oat
+  description: Oat.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/oat.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.1
+        density: 190
+        mask:
+        - HighImpassable
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraOatBase
+  id: FloraOatRandom
+  name: Random Oat
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-5
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+        stage-5: ""
+        stage-6: ""
+
+- type: entity
+  parent: FloraOatBase
+  id: FloraOat
+  name: Oat
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          OatBushel:
+            min: 4
+            max: 8
+
+- type: entity
+  parent: FloraOatBase
+  id: FloraOatEmpty
+  name: Empty Oat
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-6
+
+- type: entity
+  parent: FloraOatBase
+  id: FloraOatDead
+  name: Dead Oat
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraOnionBase
+  name: Onion
+  description: Onion.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/onion.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Item
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraOnionBase
+  id: FloraOnionRandom
+  name: Random Onion
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+
+- type: entity
+  parent: FloraOnionBase
+  id: FloraOnion
+  name: Onion
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodOnion:
+            min: 4
+            max: 6
+
+- type: entity
+  parent: FloraOnionBase
+  id: FloraOnionDead
+  name: Dead Onion
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraOnionRedBase
+  name: Red Onion
+  description: Red onion.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/onion_red.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Item
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraOnionRedBase
+  id: FloraOnionRedRandom
+  name: Random Red Onion
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+
+- type: entity
+  parent: FloraOnionRedBase
+  id: FloraOnionRed
+  name: Red Onion
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodOnionRed:
+            min: 4
+            max: 6
+
+- type: entity
+  parent: FloraOnionRedBase
+  id: FloraOnionRedDead
+  name: Dead Red Onion
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraOrangeBase
+  name: Orange Tree
+  description: Orange tree.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/orange.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraOrangeBase
+  id: FloraOrangeRandom
+  name: Random Orange Tree
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-5
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+        stage-5: ""
+        stage-6: ""
+
+- type: entity
+  parent: FloraOrangeBase
+  id: FloraOrange
+  name: Orange Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodOrange:
+            min: 2
+            max: 16
+          Log:
+            min: 1
+            max: 2
+
+- type: entity
+  parent: FloraOrangeBase
+  id: FloraOrangeEmpty
+  name: Empty Orange Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-6
+
+- type: entity
+  parent: FloraOrangeBase
+  id: FloraOrangeDead
+  name: Dead Orange Tree
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraSugarcaneBase
+  name: Sugarcane
+  description: Sugarcane.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/sugarcane.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.01,0.01"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraSugarcaneBase
+  id: FloraSugarcaneRandom
+  name: Random Sugarcane
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+
+- type: entity
+  parent: FloraSugarcaneBase
+  id: FloraSugarcane
+  name: Sugarcane
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          Sugarcane:
+            min: 2
+            max: 4
+
+- type: entity
+  parent: FloraSugarcaneBase
+  id: FloraSugarcaneEmpty
+  name: Empty Sugarcane
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-3
+
+- type: entity
+  parent: FloraSugarcaneBase
+  id: FloraSugarcaneDead
+  name: Dead Sugarcane
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraPapercaneBase
+  name: Papercane
+  description: Papercane.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/papercane.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraPapercaneBase
+  id: FloraPapercaneRandom
+  name: Random Papercane
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+
+- type: entity
+  parent: FloraPapercaneBase
+  id: FloraPapercane
+  name: Papercane
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          Papercane:
+            min: 2
+            max: 8
+
+- type: entity
+  parent: FloraPapercaneBase
+  id: FloraPapercaneEmpty
+  name: Empty Papercane
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-3
+
+- type: entity
+  parent: FloraPapercaneBase
+  id: FloraPapercaneDead
+  name: Dead Papercane
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraPeaBase
+  name: Pea
+  description: Pea.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/pea.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraPeaBase
+  id: FloraPeaRandom
+  name: Random Pea
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+
+- type: entity
+  parent: FloraPeaBase
+  id: FloraPea
+  name: Pea
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodPeaPod:
+            min: 4
+            max: 8
+
+- type: entity
+  parent: FloraPeaBase
+  id: FloraPeaEmpty
+  name: Empty Pea
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-3
+
+- type: entity
+  parent: FloraPeaBase
+  id: FloraPeaDead
+  name: Dead Pea
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraPineappleBase
+  name: Pineapple
+  description: Pineapple.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/pineapple.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraPineappleBase
+  id: FloraPineappleRandom
+  name: Random Pineapple
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+
+- type: entity
+  parent: FloraPineappleBase
+  id: FloraPineapple
+  name: Pineapple
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodPineapple:
+            min: 1
+            max: 1
+
+- type: entity
+  parent: FloraPineappleBase
+  id: FloraPineappleDead
+  name: Dead Pineapple
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraPoppyBase
+  name: Poppy
+  description: Poppy.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/poppy.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraPoppyBase
+  id: FloraPoppyRandom
+  name: Random Poppy
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+
+- type: entity
+  parent: FloraPoppyBase
+  id: FloraPoppy
+  name: Poppy
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodPoppy:
+            min: 1
+            max: 2
+
+- type: entity
+  parent: FloraPoppyBase
+  id: FloraPoppyEmpty
+  name: Empty Poppy
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-3
+
+- type: entity
+  parent: FloraPoppyBase
+  id: FloraPoppyDead
+  name: Dead Poppy
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraPotatoBase
+  name: Potato
+  description: Potato.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/potato.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Item
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraPotatoBase
+  id: FloraPotatoRandom
+  name: Random Potato
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-3
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+
+- type: entity
+  parent: FloraPotatoBase
+  id: FloraPotato
+  name: Potato
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodPotato:
+            min: 2
+            max: 16
+
+- type: entity
+  parent: FloraPotatoBase
+  id: FloraPotatoEmpty
+  name: Empty Potato
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-4
+
+- type: entity
+  parent: FloraPotatoBase
+  id: FloraPotatoDead
+  name: Dead Potato
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraPumpkinBase
+  name: Pumpkin
+  description: Pumpkin.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/pumpkin.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraPumpkinBase
+  id: FloraPumpkinRandom
+  name: Random Pumpkin
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+
+- type: entity
+  parent: FloraPumpkinBase
+  id: FloraPumpkin
+  name: Pumpkin
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodPumpkin:
+            min: 1
+            max: 1
+
+- type: entity
+  parent: FloraPumpkinBase
+  id: FloraPumpkinEmpty
+  name: Empty Pumpkin
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-3
+
+- type: entity
+  parent: FloraPumpkinBase
+  id: FloraPumpkinDead
+  name: Dead Pumpkin
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraPyrottonBase
+  name: Pyrotton
+  description: Pyrotton.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/pyrotton.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Item
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraPyrottonBase
+  id: FloraPyrottonRandom
+  name: Random Pyrotton
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+
+- type: entity
+  parent: FloraPyrottonBase
+  id: FloraPyrotton
+  name: Pyrotton
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          PyrottonBol:
+            min: 2
+            max: 8
+
+- type: entity
+  parent: FloraPyrottonBase
+  id: FloraPyrottonEmpty
+  name: Empty Pyrotton
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-3
+
+- type: entity
+  parent: FloraPyrottonBase
+  id: FloraPyrottonDead
+  name: Dead Pyrotton
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraRainbowCannabisBase
+  name: Rainbow Cannabis
+  description: Rainbow cannabis.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/rainbow_cannabis.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraRainbowCannabisBase
+  id: FloraRainbowCannabisRandom
+  name: Random Rainbow Cannabis
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+
+- type: entity
+  parent: FloraRainbowCannabisBase
+  id: FloraRainbowCannabis
+  name: Rainbow Cannabis
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          LeavesCannabisRainbow:
+            min: 2
+            max: 6
+
+- type: entity
+  parent: FloraRainbowCannabisBase
+  id: FloraRainbowCannabisEmpty
+  name: Empty Rainbow Cannabis
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-3
+
+- type: entity
+  parent: FloraRainbowCannabisBase
+  id: FloraRainbowCannabisDead
+  name: Dead Rainbow Cannabis
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraRiceBase
+  name: Rice
+  description: Rice.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/rice.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.1
+        density: 190
+        mask:
+        - HighImpassable
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraRiceBase
+  id: FloraRiceRandom
+  name: Random Rice
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-3
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+
+- type: entity
+  parent: FloraRiceBase
+  id: FloraRice
+  name: Rice
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          RiceBushel:
+            min: 2
+            max: 16
+
+- type: entity
+  parent: FloraRiceBase
+  id: FloraRiceEmpty
+  name: Empty Rice
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-4
+
+- type: entity
+  parent: FloraRiceBase
+  id: FloraRiceDead
+  name: Dead Rice
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraSoybeansBase
+  name: Soybeans
+  description: Soybeans.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/soybeans.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraSoybeansBase
+  id: FloraSoybeansRandom
+  name: Random Soybeans
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-3
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+
+- type: entity
+  parent: FloraSoybeansBase
+  id: FloraSoybeans
+  name: Soybeans
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodSoybeans:
+            min: 2
+            max: 8
+
+- type: entity
+  parent: FloraSoybeansBase
+  id: FloraSoybeansEmpty
+  name: Empty Soybeans
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-4
+
+- type: entity
+  parent: FloraSoybeansBase
+  id: FloraSoybeansDead
+  name: Dead Soybeans
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraSpacemansTrumpetBase
+  name: Spaceman's Trumpet
+  description: Spaceman's trumpet.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/spacemans_trumpet.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraSpacemansTrumpetBase
+  id: FloraSpacemansTrumpetRandom
+  name: Random Spaceman's Trumpet
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-3
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+
+- type: entity
+  parent: FloraSpacemansTrumpetBase
+  id: FloraSpacemansTrumpet
+  name: Spaceman's Trumpet
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodSpacemansTrumpet:
+            min: 1
+            max: 1
+
+- type: entity
+  parent: FloraSpacemansTrumpetBase
+  id: FloraSpacemansTrumpetEmpty
+  name: Empty Spaceman's Trumpet
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-4
+
+- type: entity
+  parent: FloraSpacemansTrumpetBase
+  id: FloraSpacemansTrumpetDead
+  name: Dead Spaceman's Trumpet
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraSteelcapBase
+  name: Steelcap
+  description: Steelcap.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/steelcap.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraSteelcapBase
+  id: FloraSteelcapRandom
+  name: Random Steelcap
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+
+- type: entity
+  parent: FloraSteelcapBase
+  id: FloraSteelcap
+  name: Steelcap
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SteelLog:
+            min: 2
+            max: 6
+
+- type: entity
+  parent: FloraSteelcapBase
+  id: FloraSteelcapDead
+  name: Dead Steelcap
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraTeaPlantBase
+  name: Tea Plant
+  description: Tea plant.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/tea_plant.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraTeaPlantBase
+  id: FloraTeaPlantRandom
+  name: Random Tea Plant
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-4
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+        stage-5: ""
+
+- type: entity
+  parent: FloraTeaPlantBase
+  id: FloraTeaPlant
+  name: Tea Plant
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          LeavesTea:
+            min: 2
+            max: 8
+
+- type: entity
+  parent: FloraTeaPlantBase
+  id: FloraTeaPlantEmpty
+  name: Empty Tea Plant
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-5
+
+- type: entity
+  parent: FloraTeaPlantBase
+  id: FloraTeaPlantDead
+  name: Dead Tea Plant
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraTobaccoBase
+  name: Tobacco
+  description: Tobacco.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/tobacco.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraTobaccoBase
+  id: FloraTobaccoRandom
+  name: Random Tobacco
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+
+- type: entity
+  parent: FloraTobaccoBase
+  id: FloraTobacco
+  name: Tobacco
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          LeavesTobacco:
+            min: 2
+            max: 8
+
+- type: entity
+  parent: FloraTobaccoBase
+  id: FloraTobaccoEmpty
+  name: Empty Tobacco
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-3
+
+- type: entity
+  parent: FloraTobaccoBase
+  id: FloraTobaccoDead
+  name: Dead Tobacco
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraTomatoBase
+  name: Tomato
+  description: Tomato.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/tomato.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraTomatoBase
+  id: FloraTomatoRandom
+  name: Random Tomato
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-6
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+        stage-5: ""
+        stage-6: ""
+
+- type: entity
+  parent: FloraTomatoBase
+  id: FloraTomato
+  name: Tomato
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodTomato:
+            min: 2
+            max: 12
+
+- type: entity
+  parent: FloraTomatoBase
+  id: FloraTomatoEmpty
+  name: Empty Tomato
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-6
+
+- type: entity
+  parent: FloraTomatoBase
+  id: FloraTomatoDead
+  name: Dead Tomato
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraTomatoKillerBase
+  name: Tomato Killer
+  description: Tomato killer.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/tomatokiller.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraTomatoKillerBase
+  id: FloraTomatoKillerRandom
+  name: Random Tomato Killer
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+
+- type: entity
+  parent: FloraTomatoKillerBase
+  id: FloraTomatoKiller
+  name: Tomato Killer
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MobTomatoKiller:
+            min: 2
+            max: 4
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 0.25
+    sprintSpeedModifier: 0.25
+  - type: DamageContacts
+    damage:
+      types:
+        Slash: 4
+        Piercing: 4
+
+- type: entity
+  parent: FloraTomatoKillerBase
+  id: FloraTomatoKillerDead
+  name: Dead Tomato Killer
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraTowercapBase
+  name: Towercap
+  description: Towercap.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/towercap.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraTowercapBase
+  id: FloraTowercapRandom
+  name: Random Towercap
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+
+- type: entity
+  parent: FloraTowercapBase
+  id: FloraTowercap
+  name: Towercap
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          Log:
+            min: 2
+            max: 4
+
+- type: entity
+  parent: FloraTowercapBase
+  id: FloraTowercapDead
+  name: Dead Towercap
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraWatermelonBase
+  name: Watermelon
+  description: Watermelon.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/watermelon.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraWatermelonBase
+  id: FloraWatermelonRandom
+  name: Random Watermelon
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-5
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+        stage-5: ""
+        stage-6: ""
+
+- type: entity
+  parent: FloraWatermelonBase
+  id: FloraWatermelon
+  name: Watermelon
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodWatermelon:
+            min: 1
+            max: 1
+
+- type: entity
+  parent: FloraWatermelonBase
+  id: FloraWatermelonEmpty
+  name: Empty Watermelon
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-6
+
+- type: entity
+  parent: FloraWatermelonBase
+  id: FloraWatermelonDead
+  name: Dead Watermelon
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraWheatBase
+  name: Wheat
+  description: Wheat.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/wheat.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.1
+        density: 190
+        mask:
+        - HighImpassable
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraWheatBase
+  id: FloraWheatRandom
+  name: Random Wheat
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-5
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+        stage-4: ""
+        stage-5: ""
+        stage-6: ""
+
+- type: entity
+  parent: FloraWheatBase
+  id: FloraWheat
+  name: Wheat
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          WheatBushel:
+            min: 2
+            max: 16
+
+- type: entity
+  parent: FloraWheatBase
+  id: FloraWheatEmpty
+  name: Empty Wheat
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-6
+
+- type: entity
+  parent: FloraWheatBase
+  id: FloraWheatDead
+  name: Dead Wheat
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
+
+- type: entity
+  id: FloraWorldPeaBase
+  name: World Pea
+  description: World pea.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    sprite: /Textures/Objects/Specific/Hydroponics/world_pea.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.1,0.1"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/plant_rustle.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FloraWorldPeaBase
+  id: FloraWorldPeaRandom
+  name: Random World Pea
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-2
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        stage-1: ""
+        stage-2: ""
+        stage-3: ""
+
+- type: entity
+  parent: FloraWorldPeaBase
+  id: FloraWorldPea
+  name: World Pea
+  components:
+  - type: Sprite
+    layers:
+    - state: harvest
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodWorldPeas:
+            min: 2
+            max: 5
+
+- type: entity
+  parent: FloraWorldPeaBase
+  id: FloraWorldPeaEmpty
+  name: Empty World Pea
+  components:
+  - type: Sprite
+    layers:
+    - state: stage-3
+
+- type: entity
+  parent: FloraWorldPeaBase
+  id: FloraWorldPeaDead
+  name: Dead World Pea
+  components:
+  - type: Sprite
+    layers:
+    - state: dead
