@@ -2039,6 +2039,7 @@
       behaviors:
       - !type:GibBehavior
         recursive: false
+  - type: ScotopicVision #SS220-NightVision
 
 - type: entity
   parent: MobMouse
@@ -2771,6 +2772,10 @@
 #        settings: short
 # SS220-partial-revert-reffle-End
     - type: GhostTakeoverAvailable
+    #SS220-NightVision-BGN
+    - type: ScotopicVision
+      energy: 0.36
+    #SS220-NightVision-END
 
 - type: entity
   name: tarantula
