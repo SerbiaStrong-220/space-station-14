@@ -213,7 +213,7 @@
       types:
         Piercing: 25 #Damage
         Poison: 5
-        Structural: 25
+        Structural: 50
   - type: Lifesteal
     lifesteal: 10
   - type: Gun
@@ -313,7 +313,7 @@
     damage:
       types:
         Piercing: 5 #Damage
-        Structural: 20
+        Structural: 30
   - type: StaminaResistance
     damageCoefficient: 0.7
     worn: false
