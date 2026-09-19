@@ -11,19 +11,12 @@
       "name": "icon"
     },
     {
-      "name": "icon_tie"
-    },
-    {
-      "name": "equipped-INNERCLOTHING",
+      "name": "equipped-OUTERCLOTHING",
       "directions": 4
     },
-    {
-      "name": "tie-equipped-INNERCLOTHING",
-      "directions": 4
-    },
-    {
-      "name": "equipped-INNERCLOTHING-monkey",
-      "directions": 4
+	{
+      "name": "equipped-OUTERCLOTHING-vox",
+	  "directions": 4
     },
     {
       "name": "inhand-left",
