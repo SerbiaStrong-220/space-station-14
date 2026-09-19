@@ -89,6 +89,7 @@
       - NanoTaskCartridge
       - NewsReaderCartridge
       - MessengerCartridgeClient # SS220 Messenger
+      - TimerCartridge # SS220 Timer
     cartridgeSlot:
       priority: -1
       name: device-pda-slot-component-slot-name-cartridge
