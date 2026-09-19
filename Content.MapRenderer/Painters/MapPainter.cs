@@ -24,6 +24,7 @@ using Robust.UnitTesting.Pool;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
+using Robust.Shared.Log;
 
 namespace Content.MapRenderer.Painters
 {
@@ -55,6 +56,8 @@ namespace Content.MapRenderer.Painters
                 Map = _map is RenderMapPrototype prototype ? prototype.Prototype : PoolManager.TestMap,
             };
             _pair = await PoolManager.GetServerClient(poolSettings, _testContextLike);
+            _pair.ServerLogHandler.FailureLevel = LogLevel.Fatal; // SS220
+            _pair.ClientLogHandler.FailureLevel = LogLevel.Fatal; // SS220
 
             Console.WriteLine($"Loaded client and server in {(int)stopwatch.Elapsed.TotalMilliseconds} ms");
 
