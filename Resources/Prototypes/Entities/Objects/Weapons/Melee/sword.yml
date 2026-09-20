@@ -231,12 +231,29 @@
     severity: HighlyIllegal
   - type: Sprite
     sprite: SS220/Objects/Weapons/Melee/Sword/energykatana.rsi # SS220 Ninja Resprite
+  # SS220 Throwable Changes begin
+    layers:
+    - state: icon
+    - state: icon-unshaded
+      shader: unshaded
+  # SS220 Throwable Changes end
   - type: MeleeWeapon
     wideAnimationRotation: -60
     damage:
       types:
         Slash: 30
   - type: Item
+  # SS220 Throwable Changes begin
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      - state: inhand-left-unshaded
+        shader: unshaded
+      right:
+      - state: inhand-right
+      - state: inhand-right-unshaded
+        shader: unshaded
+  # SS220 Throwable Changes end
     storedSprite:
       state: storage
       sprite: Objects/Weapons/Melee/energykatana_storage_64x.rsi #Done in 64x64 because it looks way too puny in 32x32
