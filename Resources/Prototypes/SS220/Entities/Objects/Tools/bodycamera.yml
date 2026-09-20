@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: BaseItem
+  parent: [BaseItem, PowerCellSlotSmallItem]
   id: BaseBodyCamera
   name: body camera
   description: You will always be watched.
@@ -42,6 +42,12 @@
     range: 5
 
   - type: StationAiVision
+    enabled: true
+    needsPower: false
+  - type: PowerCellDraw
+    enabled: false
+    drawRate: 1
+  - type: BodyCameraPower
   - type: Eye
   - type: DetectiveCamera
   - type: WearableCamera
@@ -83,6 +89,7 @@
   - type: ContainerContainer
     containers:
       cassette_tape: !type:ContainerSlot
+      cell_slot: !type:ContainerSlot { }
   - type: ItemSlots
     slots:
       cassette_tape:
@@ -93,6 +100,10 @@
         blacklist:
           tags:
           - CassetteTapeLargeCapacity
+        startingItem: CassetteTape
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellSmall
   - type: UserInterface
     interfaces:
       enum.SurveillanceCameraSetupUiKey.Camera:
