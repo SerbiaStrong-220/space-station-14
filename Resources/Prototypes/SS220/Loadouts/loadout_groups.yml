@@ -785,6 +785,7 @@
   - SalvageSpecialistJumpsuitTurtleneck
   - UniformJumpsuitFlannelSalvage
   - ClothingUniformJumpsuitExpeditor
+  - ClothingUniformJumpsuitJRSalvage
 
 - type: loadoutGroup
   id: SalvageSpecialistHead
@@ -794,7 +795,23 @@
   - ClothingHeadHatSalvage
   - ClothingHeadBandSalvage
   - ClothingHeadHatHardhatViolet
+  - ClothingHeadHatHardhatJRSalvage
   - ClothingHeadBeretSalvageSpecialist
+  - ClothingHeadBeretJRSalvage
+
+- type: loadoutGroup
+  id: SalvageSpecialistBelt
+  name: loadout-group-salvage-specialist-belt
+  minLimit: 0
+  loadouts:
+  - OreBagJRSalvage
+
+- type: loadoutGroup
+  id: SalvageSpecialistID
+  name: loadout-group-salvage-specialist-id
+  loadouts:
+  - SalvageSpecialistPDA
+  - SalvageSpecialistPDAJR
   # Утилизатор (Конец)
 #! Отдел снабжения (Конец)
 

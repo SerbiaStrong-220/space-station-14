@@ -244,13 +244,12 @@
       </Box>
     </ColorBox>
     <ColorBox Color="#698f43">
-      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
-        Мелкая кража
+      <Box>
       </Box>
     </ColorBox>
     <ColorBox Color="#a69b38">
       <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
-        Ограбление
+        Мелкая кража
       </Box>
     </ColorBox>
     <ColorBox Color="#b0653a">
