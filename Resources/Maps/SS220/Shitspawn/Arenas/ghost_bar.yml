@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 09/12/2026 19:51:58
-  entityCount: 724
+  time: 09/21/2026 12:10:24
+  entityCount: 730
 maps: []
 grids:
 - 1
@@ -683,7 +683,8 @@ entities:
           0,3:
             0: 1911
           -1,3:
-            0: 3822
+            0: 1774
+            1: 2048
           1,0:
             0: 65525
           1,1:
@@ -704,15 +705,15 @@ entities:
             0: 1
           2,-1:
             0: 4369
-            1: 64
+            2: 64
           0,-2:
             0: 56784
           -1,-2:
             0: 52416
-            2: 4368
+            3: 4368
           -1,-1:
             0: 65532
-            2: 1
+            3: 1
           1,-2:
             0: 65520
           2,-2:
@@ -728,13 +729,18 @@ entities:
           -2,2:
             0: 12
           -2,-2:
-            2: 52416
+            3: 52416
         uniqueMixes:
         - volume: 2500
           temperature: 293.15
           moles:
             Oxygen: 21.824879
             Nitrogen: 82.10312
+        - volume: 2500
+          temperature: 293.15
+          moles:
+            Oxygen: 23.57087
+            Nitrogen: 88.67137
         - volume: 2500
           immutable: True
           moles: {}
@@ -765,14 +771,20 @@ entities:
       access: []
     - type: Fixtures
       fixtures: {}
-- proto: AirAlarmAssembly
-  entities:
   - uid: 3
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 8.5,4.5
       parent: 1
+    - type: AccessReader
+      accessListsOriginal:
+      - - Atmospherics
+      access: []
+    - type: DeviceList
+      devices:
+      - 344
+      - 11
     - type: Fixtures
       fixtures: {}
 - proto: Airlock
@@ -832,6 +844,9 @@ entities:
     - type: Transform
       pos: 6.5,5.5
       parent: 1
+    - type: DeviceNetwork
+      deviceLists:
+      - 3
   - uid: 12
     components:
     - type: Transform
@@ -1077,6 +1092,15 @@ entities:
     - type: Transform
       pos: -5.5,6.5
       parent: 1
+    - type: AccessReader
+      accessListsOriginal:
+      - - Cargo
+      - - Engineering
+      - - Medical
+      - - Research
+      - - Security
+      - - Service
+      access: []
 - proto: BarSignSpacebucks
   entities:
   - uid: 54
@@ -2032,45 +2056,6 @@ entities:
     - type: Transform
       pos: -4.5,-2.5
       parent: 1
-- proto: ClosetWallBlack
-  entities:
-  - uid: 230
-    components:
-    - type: Transform
-      pos: -0.5,15.5
-      parent: 1
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.14673
-        moles:
-          Oxygen: 1.7459903
-          Nitrogen: 6.568249
-    - type: ContainerContainer
-      containers:
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 238
-          - 237
-          - 236
-          - 235
-          - 234
-          - 233
-          - 232
-          - 231
-          - 239
-          - 240
-          - 241
-          - 242
-          - 243
-          - 244
-          - 245
-          - 246
-    - type: Fixtures
-      fixtures: {}
 - proto: ClothingBackpackChameleonFill
   entities:
   - uid: 247
@@ -2669,6 +2654,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -4.5,-4.5
       parent: 1
+    - type: AccessReader
+      access: []
 - proto: FoodCondimentBottleBBQ
   entities:
   - uid: 304
@@ -2811,11 +2798,10 @@ entities:
       parent: 1
 - proto: GasPipeBend
   entities:
-  - uid: 331
+  - uid: 730
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 9.5,2.5
+      pos: 9.5,5.5
       parent: 1
 - proto: GasPipeStraight
   entities:
@@ -2857,8 +2843,42 @@ entities:
     - type: Transform
       pos: 9.5,-1.5
       parent: 1
+  - uid: 707
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 6.5,5.5
+      parent: 1
+  - uid: 726
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 7.5,5.5
+      parent: 1
+  - uid: 727
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 8.5,5.5
+      parent: 1
+  - uid: 728
+    components:
+    - type: Transform
+      pos: 9.5,4.5
+      parent: 1
+  - uid: 729
+    components:
+    - type: Transform
+      pos: 9.5,3.5
+      parent: 1
 - proto: GasPipeTJunction
   entities:
+  - uid: 331
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 9.5,2.5
+      parent: 1
   - uid: 339
     components:
     - type: Transform
@@ -2903,6 +2923,9 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 5.5,5.5
       parent: 1
+    - type: DeviceNetwork
+      deviceLists:
+      - 3
   - uid: 345
     components:
     - type: Transform
@@ -2941,64 +2964,48 @@ entities:
       parent: 230
     - type: Physics
       canCollide: False
-    - type: InsideEntityStorage
-      storage: 230
   - uid: 232
     components:
     - type: Transform
       parent: 230
     - type: Physics
       canCollide: False
-    - type: InsideEntityStorage
-      storage: 230
   - uid: 233
     components:
     - type: Transform
       parent: 230
     - type: Physics
       canCollide: False
-    - type: InsideEntityStorage
-      storage: 230
   - uid: 234
     components:
     - type: Transform
       parent: 230
     - type: Physics
       canCollide: False
-    - type: InsideEntityStorage
-      storage: 230
   - uid: 235
     components:
     - type: Transform
       parent: 230
     - type: Physics
       canCollide: False
-    - type: InsideEntityStorage
-      storage: 230
   - uid: 236
     components:
     - type: Transform
       parent: 230
     - type: Physics
       canCollide: False
-    - type: InsideEntityStorage
-      storage: 230
   - uid: 237
     components:
     - type: Transform
       parent: 230
     - type: Physics
       canCollide: False
-    - type: InsideEntityStorage
-      storage: 230
   - uid: 238
     components:
     - type: Transform
       parent: 230
     - type: Physics
       canCollide: False
-    - type: InsideEntityStorage
-      storage: 230
 - proto: HookahBase
   entities:
   - uid: 349
@@ -3014,64 +3021,48 @@ entities:
       parent: 230
     - type: Physics
       canCollide: False
-    - type: InsideEntityStorage
-      storage: 230
   - uid: 240
     components:
     - type: Transform
       parent: 230
     - type: Physics
       canCollide: False
-    - type: InsideEntityStorage
-      storage: 230
   - uid: 241
     components:
     - type: Transform
       parent: 230
     - type: Physics
       canCollide: False
-    - type: InsideEntityStorage
-      storage: 230
   - uid: 242
     components:
     - type: Transform
       parent: 230
     - type: Physics
       canCollide: False
-    - type: InsideEntityStorage
-      storage: 230
   - uid: 243
     components:
     - type: Transform
       parent: 230
     - type: Physics
       canCollide: False
-    - type: InsideEntityStorage
-      storage: 230
   - uid: 244
     components:
     - type: Transform
       parent: 230
     - type: Physics
       canCollide: False
-    - type: InsideEntityStorage
-      storage: 230
   - uid: 245
     components:
     - type: Transform
       parent: 230
     - type: Physics
       canCollide: False
-    - type: InsideEntityStorage
-      storage: 230
   - uid: 246
     components:
     - type: Transform
       parent: 230
     - type: Physics
       canCollide: False
-    - type: InsideEntityStorage
-      storage: 230
 - proto: hydroponicsSoil
   entities:
   - uid: 350
@@ -3638,6 +3629,87 @@ entities:
     - type: Transform
       pos: 4.5,9.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
+- proto: ShelfWood
+  entities:
+  - uid: 230
+    components:
+    - type: Transform
+      pos: -0.5,15.5
+      parent: 1
+    - type: Storage
+      storedItems:
+        238:
+          position: 0,0
+          _rotation: South
+        237:
+          position: 1,0
+          _rotation: South
+        236:
+          position: 2,0
+          _rotation: South
+        235:
+          position: 3,0
+          _rotation: South
+        234:
+          position: 0,1
+          _rotation: South
+        233:
+          position: 1,1
+          _rotation: South
+        232:
+          position: 2,1
+          _rotation: South
+        231:
+          position: 3,1
+          _rotation: South
+        246:
+          position: 0,3
+          _rotation: South
+        245:
+          position: 1,3
+          _rotation: South
+        244:
+          position: 2,3
+          _rotation: South
+        243:
+          position: 3,3
+          _rotation: South
+        242:
+          position: 0,4
+          _rotation: South
+        241:
+          position: 1,4
+          _rotation: South
+        240:
+          position: 2,4
+          _rotation: South
+        239:
+          position: 3,4
+          _rotation: South
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 238
+          - 237
+          - 236
+          - 235
+          - 234
+          - 233
+          - 232
+          - 231
+          - 246
+          - 245
+          - 244
+          - 243
+          - 242
+          - 241
+          - 240
+          - 239
     - type: Fixtures
       fixtures: {}
 - proto: Shlepovend
