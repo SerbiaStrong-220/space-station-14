@@ -29,7 +29,8 @@
       waste: '#990000'
       distro: '#0055cc'
       waste (alt): '#ff1212' # SS220 pipe color
-      distro (alt): '#0335fc' # SS220 pipe color
+      distro (bright): '#0335fc' # SS220 pipe color
+      distro (dull): '#0055CCFF' # SS220 pipe color
       air: '#03fcd3'
       mix: '#947507'
   - type: StaticPrice
