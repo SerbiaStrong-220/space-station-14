@@ -49,15 +49,15 @@
   equipment:
     neck: ClothingNeckSilverCross
 
-# jumpsuit 
+# outer clothing
 
 - type: loadout
-  id: ChaplainJumpsuitFollower
+  id: ChaplainOuterHoodieFollower
   effects:
   - !type:GroupLoadoutEffect
     proto: ChaplainFollower
   equipment:
-    jumpsuit: ClothingUniformJumpsuitFollower
+    outerClothing: ClothingOuterHoodieFollower
 
 # Head
 
