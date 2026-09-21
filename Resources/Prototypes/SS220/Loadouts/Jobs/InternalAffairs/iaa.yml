@@ -1,19 +1,4 @@
-# NTR time
-- type: loadoutEffectGroup
-  id: NanoTrasenRepresentativeTime
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: JobIAA
-      time: 720000 # 200 hrs Ахуеть, да?
-  sponsorTierLoadoutEffects:
-  - !type:GroupLoadoutEffect
-    proto: SeniorDevTeamTier
-  - !type:GroupLoadoutEffect
-    proto: AdministratorSponsorTier
-
-# TrustedLawyer time
+# IAA time
 - type: loadoutEffectGroup
   id: TrustedLawyerTime
   effects:
@@ -35,7 +20,6 @@
   - !type:GroupLoadoutEffect
     proto: AdministratorSponsorTier
 
-# IAA beret time
 - type: loadoutEffectGroup
   id: BeretIAATime
   effects:
@@ -75,11 +59,6 @@
     head: ClothingHeadHatDevilHornsAlt
 
 # Jumpsuit
-- type: loadout
-  id: JumpsuitNTR
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitNTR
-
 - type: loadout
   id: JumpsuitTrustedLawyer
   effects:
