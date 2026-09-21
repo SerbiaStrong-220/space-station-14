@@ -180,6 +180,12 @@
   equipment:
     gloves: ClothingHandsGlovesSecTactical
 
+# Belts
+- type: loadout
+  id: SecurityCorporateJudo
+  equipment:
+    belt: ClothingBeltCorporateJudoFilled
+
 # Storage
 - type: loadout
   id: SecurityBadge

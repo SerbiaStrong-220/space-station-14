@@ -408,3 +408,6 @@
 
 - type: Tag
   id: CassetteTapeLargeCapacity
+
+- type: Tag
+  id: WeaponShotgunDoubleBarreled
