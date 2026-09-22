@@ -6,7 +6,7 @@ using Content.Shared.SS220.Teleport;
 
 namespace Content.Server.SS220.Teleport.Systems;
 
-public sealed partial class PolymorphTeleportTargetSystem : EntitySystem
+public sealed partial class PolymorphAfterTeleportSystem : EntitySystem
 {
     [Dependency] private PolymorphSystem _polymorphSystem = default!;
 
@@ -14,11 +14,11 @@ public sealed partial class PolymorphTeleportTargetSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<PolymorphTeleportTargetComponent, TargetTeleportedEvent>(OnTargetTeleported);
+        SubscribeLocalEvent<PolymorphAfterTeleportComponent, TargetTeleportedEvent>(OnTargetTeleported);
     }
 
-    private void OnTargetTeleported(Entity<PolymorphTeleportTargetComponent> ent, ref TargetTeleportedEvent args)
+    private void OnTargetTeleported(Entity<PolymorphAfterTeleportComponent> ent, ref TargetTeleportedEvent args)
     {
-        _polymorphSystem.PolymorphEntity(args.Target, ent.Comp.PolymorphEnt);
+        _polymorphSystem.PolymorphEntity(args.Target, ent.Comp.PolymorphPrototype);
     }
 }
