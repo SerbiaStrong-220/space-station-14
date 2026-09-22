@@ -9,7 +9,7 @@
   randomRotation: false
   stations:
     StarGate:
-      stationProto: StandardNanotrasenStation
+      stationProto: StargateNanotrasenStation
       components:
         - type: StationEmergencyShuttle
           emergencyShuttlePath: /Maps/SS220/Shuttles/emergency/emergency_stargate.yml
@@ -110,3 +110,14 @@
           - Starchef
           - Theatr
           - Coldreagentroom 
+
+- type: entity
+  id: StargateNanotrasenStation
+  parent: StandardNanotrasenStation
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: GridSpawn
+      groups:
+        mining: !type:GridSpawnGroup
+          paths:
+            - /Maps/SS220/Shuttles/ss220-ramses.yml
