@@ -331460,88 +331460,48 @@ entities:
     - type: Transform
       pos: -60.5,136.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 29960
   - uid: 4122
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -68.5,127.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 29960
   - uid: 4497
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -65.5,128.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 29960
   - uid: 5987
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -52.5,129.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 29960
   - uid: 6164
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -74.5,133.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 29960
   - uid: 6516
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -65.5,132.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 29960
   - uid: 6642
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -57.5,132.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 29960
   - uid: 6644
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -57.5,128.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 29960
   - uid: 7384
     components:
     - type: Transform
@@ -331572,11 +331532,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -58.5,124.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 29960
   - uid: 13540
     components:
     - type: Transform
@@ -331591,33 +331546,18 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -74.5,127.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 29960
   - uid: 20175
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -68.5,133.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 29960
   - uid: 20326
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -52.5,131.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 29960
 - proto: WeaponEnergyTurretAIControlPanel
   entities:
   - uid: 15436
