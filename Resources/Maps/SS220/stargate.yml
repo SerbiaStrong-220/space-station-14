@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 09/22/2026 21:13:57
-  entityCount: 46159
+  time: 09/22/2026 21:35:10
+  entityCount: 46163
 maps:
 - 1
 grids:
@@ -26727,7 +26727,7 @@ entities:
       pos: -102.5,24.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -178939.94
+      secondsUntilStateChange: -179778.19
       state: Opening
   - uid: 1760
     components:
@@ -28469,7 +28469,7 @@ entities:
       pos: 1.5,161.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1561002.2
+      secondsUntilStateChange: -1561840.5
       changeAirtight: False
       state: Opening
     - type: DeviceLinkSource
@@ -101990,6 +101990,12 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -16.658798,193.9828
       parent: 2
+  - uid: 44946
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -110.57053,19.563004
+      parent: 2
 - proto: ChairPilotSeat
   entities:
   - uid: 1571
@@ -110364,6 +110370,12 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -102.5,33.5
       parent: 2
+  - uid: 44944
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -111.5,19.5
+      parent: 2
 - proto: ComputerAnalysisConsole
   entities:
   - uid: 6627
@@ -110404,6 +110416,12 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -102.5,34.5
+      parent: 2
+  - uid: 44945
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -109.5,19.5
       parent: 2
 - proto: computerBodyScanner
   entities:
@@ -121522,7 +121540,7 @@ entities:
       pos: 45.5,58.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -454689.56
+      secondsUntilStateChange: -455527.8
       state: Closing
     - type: DeviceLinkSource
       lastSignals:
@@ -138566,7 +138584,7 @@ entities:
     - type: Openable
       opened: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.92650706
+      sprayFizzinessThresholdRoll: 0.31624314
     - type: MeleeWeapon
       nextAttack: -13.2999857
     - type: EmitSoundOnCollide
@@ -138878,7 +138896,7 @@ entities:
     - type: EmitSoundOnCollide
       nextSound: -20188.979811
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.6391823
+      sprayFizzinessThresholdRoll: 0.09494774
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -138941,7 +138959,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.42856023
+      sprayFizzinessThresholdRoll: 0.5251186
     - type: NameModifier
       baseName: бутылка Гильдлагер
     - type: ContainerContainer
@@ -139970,7 +139988,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.38767925
+      sprayFizzinessThresholdRoll: 0.056089766
     - type: NameModifier
       baseName: Особый Запас Дядюшки Гита
     - type: ContainerContainer
@@ -140024,7 +140042,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.3058886
+      sprayFizzinessThresholdRoll: 0.7739006
     - type: NameModifier
       baseName: вино Особое Двухбородое Бородатое
     - type: ContainerContainer
@@ -140063,7 +140081,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.7185352
+      sprayFizzinessThresholdRoll: 0.050514415
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -140095,7 +140113,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.6097389
+      sprayFizzinessThresholdRoll: 0.11669242
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -143210,7 +143228,7 @@ entities:
       - 40096
       - 40106
     - type: Door
-      secondsUntilStateChange: -1470266.4
+      secondsUntilStateChange: -1471104.6
       state: Closing
   - uid: 9985
     components:
@@ -143296,7 +143314,7 @@ entities:
       deviceLists:
       - 46086
     - type: Door
-      secondsUntilStateChange: -1388941.4
+      secondsUntilStateChange: -1389779.6
       state: Closing
   - uid: 11562
     components:
@@ -145186,7 +145204,7 @@ entities:
     - type: Firelock
       emergencyCloseCooldown: 8075.4252599
     - type: Door
-      secondsUntilStateChange: -493387.56
+      secondsUntilStateChange: -494225.8
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -220076,6 +220094,22 @@ entities:
     - type: Transform
       pos: -126.29296,88.226265
       parent: 2
+  - uid: 34696
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 68.66305,23.501862
+      parent: 2
+    - type: Paper
+      content: В случае отсутствия света включите генераторы на уране, в них можно вставить, но нельзя забрать.
+  - uid: 35417
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.360363,213.81104
+      parent: 2
+    - type: Paper
+      content: В случае отсутствия света включите генераторы на уране, в них можно вставить, но нельзя забрать.
   - uid: 40292
     components:
     - type: Transform
@@ -220131,6 +220165,21 @@ entities:
       parent: 2
     - type: Paper
       content: Здоров, шаттл что нам предоставили... Буквально корыто, почему? Потому что он на плазменном генераторе, на первых парах СМЭСа хватит, но ненадолго, также на том шаттле есть кнопка для включения генератора удаленно
+  - uid: 44681
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -67.247314,-7.634262
+      parent: 2
+    - type: Paper
+      content: В случае отсутствия света включите генераторы на уране, в них можно вставить, но нельзя забрать.
+  - uid: 44943
+    components:
+    - type: Transform
+      pos: -107.34664,149.45242
+      parent: 2
+    - type: Paper
+      content: В случае отсутствия света включите генераторы на уране, в них можно вставить, но нельзя забрать.
   - uid: 45779
     components:
     - type: Transform
@@ -247543,34 +247592,11 @@ entities:
       parent: 2
 - proto: PlasmaReinforcedWindowDirectional
   entities:
-  - uid: 1278
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -64.5,-7.5
-      parent: 2
-  - uid: 1292
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -65.5,-8.5
-      parent: 2
   - uid: 1382
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -56.5,12.5
-      parent: 2
-  - uid: 2491
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -66.5,-6.5
-      parent: 2
-  - uid: 2496
-    components:
-    - type: Transform
-      pos: -65.5,-5.5
       parent: 2
   - uid: 12423
     components:
@@ -247589,18 +247615,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 12.5,178.5
-      parent: 2
-  - uid: 14202
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -66.5,-7.5
-      parent: 2
-  - uid: 24478
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -64.5,-6.5
       parent: 2
   - uid: 31791
     components:
@@ -247624,24 +247638,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 11.5,178.5
-      parent: 2
-  - uid: 34696
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 1.5,215.5
-      parent: 2
-  - uid: 34697
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 1.5,216.5
-      parent: 2
-  - uid: 35417
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 2.5,214.5
       parent: 2
 - proto: PlasmaTankFilled
   entities:
@@ -248304,6 +248300,9 @@ entities:
     - type: MaterialStorage
       storage:
         Uranium: 3000
+      canEjectStoredMaterials: False
+      dropOnTerminating: False
+      dropOnDeconstruct: False
     - type: Physics
       bodyType: Static
     - type: DeviceLinkSink
@@ -248318,6 +248317,9 @@ entities:
     - type: MaterialStorage
       storage:
         Uranium: 3000
+      canEjectStoredMaterials: False
+      dropOnTerminating: False
+      dropOnDeconstruct: False
     - type: PowerSupplier
       voltage: Medium
     - type: PowerSwitchable
@@ -248336,6 +248338,9 @@ entities:
     - type: MaterialStorage
       storage:
         Uranium: 3000
+      canEjectStoredMaterials: False
+      dropOnTerminating: False
+      dropOnDeconstruct: False
     - type: PowerSupplier
       voltage: Medium
     - type: PowerSwitchable
@@ -248354,6 +248359,9 @@ entities:
     - type: MaterialStorage
       storage:
         Uranium: 3000
+      canEjectStoredMaterials: False
+      dropOnTerminating: False
+      dropOnDeconstruct: False
     - type: Physics
       bodyType: Static
     - type: DeviceLinkSink
@@ -248368,6 +248376,9 @@ entities:
     - type: MaterialStorage
       storage:
         Uranium: 1700
+      canEjectStoredMaterials: False
+      dropOnTerminating: False
+      dropOnDeconstruct: False
     - type: Physics
       bodyType: Static
     - type: DeviceLinkSink
@@ -248382,6 +248393,9 @@ entities:
     - type: MaterialStorage
       storage:
         Uranium: 3000
+      canEjectStoredMaterials: False
+      dropOnTerminating: False
+      dropOnDeconstruct: False
     - type: PowerSupplier
       voltage: Medium
     - type: PowerSwitchable
@@ -248400,6 +248414,9 @@ entities:
     - type: MaterialStorage
       storage:
         Uranium: 3000
+      canEjectStoredMaterials: False
+      dropOnTerminating: False
+      dropOnDeconstruct: False
     - type: PowerSupplier
       voltage: Medium
     - type: PowerSwitchable
@@ -251947,6 +251964,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -64.5,177.5
       parent: 2
+    - type: PoweredLight
+      on: False
     - type: DeviceLinkSink
       invokeCounter: 1
   - uid: 28706
@@ -256199,21 +256218,6 @@ entities:
       invokeCounter: 1
 - proto: PowerSensor
   entities:
-  - uid: 24715
-    components:
-    - type: Transform
-      anchored: True
-      rot: 3.141592653589793 rad
-      pos: -0.5,214.5
-      parent: 2
-    - type: DeviceLinkSource
-      linkedPorts:
-        44672:
-        - - PowerDischarging
-          - Toggle
-    - type: Physics
-      canCollide: False
-      bodyType: Static
   - uid: 40051
     components:
     - type: Transform
@@ -256225,60 +256229,6 @@ entities:
         19344:
         - - PowerDischarging
           - On
-    - type: Physics
-      canCollide: False
-      bodyType: Static
-  - uid: 43977
-    components:
-    - type: Transform
-      anchored: True
-      rot: 3.141592653589793 rad
-      pos: -104.5,147.5
-      parent: 2
-    - type: DeviceLinkSource
-      linkedPorts:
-        12473:
-        - - PowerDischarging
-          - Toggle
-        40211:
-        - - PowerDischarging
-          - Toggle
-    - type: Physics
-      canCollide: False
-      bodyType: Static
-  - uid: 44680
-    components:
-    - type: Transform
-      anchored: True
-      rot: 3.141592653589793 rad
-      pos: 70.5,23.5
-      parent: 2
-    - type: DeviceLinkSource
-      linkedPorts:
-        44677:
-        - - PowerDischarging
-          - Toggle
-        44676:
-        - - PowerDischarging
-          - Toggle
-    - type: Physics
-      canCollide: False
-      bodyType: Static
-  - uid: 44681
-    components:
-    - type: Transform
-      anchored: True
-      rot: 3.141592653589793 rad
-      pos: -63.5,-6.5
-      parent: 2
-    - type: DeviceLinkSource
-      linkedPorts:
-        35415:
-        - - PowerDischarging
-          - Toggle
-        35416:
-        - - PowerDischarging
-          - Toggle
     - type: Physics
       canCollide: False
       bodyType: Static
@@ -273443,7 +273393,7 @@ entities:
       parent: 2
     - type: Door
       canCrush: True
-      secondsUntilStateChange: -97183.28
+      secondsUntilStateChange: -98021.53
       clickOpen: False
       state: Opening
     - type: DoorSignalControl
@@ -273478,7 +273428,7 @@ entities:
       pos: -52.5,187.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -540931.7
+      secondsUntilStateChange: -541769.94
       state: Opening
   - uid: 23105
     components:
@@ -273554,7 +273504,7 @@ entities:
       parent: 2
     - type: Door
       canCrush: True
-      secondsUntilStateChange: -97152.414
+      secondsUntilStateChange: -97990.664
       clickOpen: False
       state: Opening
     - type: DoorSignalControl
@@ -273589,7 +273539,7 @@ entities:
       pos: -53.5,188.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -505214.44
+      secondsUntilStateChange: -506052.7
       state: Opening
   - uid: 38967
     components:
@@ -332588,6 +332538,23 @@ entities:
       parent: 2
 - proto: WindoorSecureEngineeringLocked
   entities:
+  - uid: 2496
+    components:
+    - type: Transform
+      pos: -65.5,-7.5
+      parent: 2
+  - uid: 11169
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -65.5,-6.5
+      parent: 2
+  - uid: 14202
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,216.5
+      parent: 2
   - uid: 22293
     components:
     - type: Transform
@@ -332604,6 +332571,12 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 2.5,209.5
+      parent: 2
+  - uid: 24478
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,215.5
       parent: 2
   - uid: 27786
     components:
@@ -332622,6 +332595,28 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -96.5,40.5
+      parent: 2
+  - uid: 34697
+    components:
+    - type: Transform
+      pos: -104.5,149.5
+      parent: 2
+  - uid: 44678
+    components:
+    - type: Transform
+      pos: -103.5,149.5
+      parent: 2
+  - uid: 44679
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 72.5,24.5
+      parent: 2
+  - uid: 44680
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 72.5,23.5
       parent: 2
 - proto: WindoorSecureHeadOfPersonnelLocked
   entities:
@@ -333150,6 +333145,24 @@ entities:
     - type: Transform
       pos: -37.5,-2.5
       parent: 2
+  - uid: 1278
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -66.5,-6.5
+      parent: 2
+  - uid: 1292
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -66.5,-7.5
+      parent: 2
+  - uid: 2491
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -64.5,-6.5
+      parent: 2
   - uid: 4427
     components:
     - type: Transform
@@ -333335,7 +333348,8 @@ entities:
   - uid: 11708
     components:
     - type: Transform
-      pos: -103.5,149.5
+      rot: -1.5707963267948966 rad
+      pos: -64.5,-7.5
       parent: 2
   - uid: 11745
     components:
@@ -333502,6 +333516,12 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 4.5,209.5
+      parent: 2
+  - uid: 24715
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,214.5
       parent: 2
   - uid: 25058
     components:
@@ -333887,17 +333907,11 @@ entities:
     - type: Transform
       pos: 25.5,96.5
       parent: 2
-  - uid: 44678
+  - uid: 43977
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 72.5,24.5
-      parent: 2
-  - uid: 44679
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 72.5,23.5
+      rot: 1.5707963267948966 rad
+      pos: -105.5,149.5
       parent: 2
   - uid: 46740
     components:
@@ -333969,12 +333983,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -56.5,159.5
-      parent: 2
-  - uid: 11169
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -104.5,149.5
       parent: 2
   - uid: 11621
     components:
