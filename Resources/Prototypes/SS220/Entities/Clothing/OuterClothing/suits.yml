@@ -39,3 +39,17 @@
     sprite: SS220/Clothing/OuterClothing/Misc/chaplain_hoodiewhite.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodChaplainHoodWhite
+
+- type: entity
+  parent: ClothingOuterBaseToggleable
+  id: ClothingOuterSchema
+  name: schema
+  description: On a station where silence is a rarity, the schemonk silence becomes the loudest voice.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Robes/schema.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Robes/schema.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatHoodSchema
+

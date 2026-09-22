@@ -2,7 +2,7 @@
 
 - type: entity
   id: VoidTeleportEnter
-  parent: BaseSelfLinkedPortalCult
+  parent: BaseAutoLinkingPortalCult
   components:
   - type: Sprite
     noRot: true
@@ -20,8 +20,8 @@
     energy: 1
     netsync: true
     enabled: false
-  - type: SelfLinkedTeleport
-    whitelistLinked:
+  - type: AutoLinkingTeleport
+    linkWhitelist:
       tags:
       - CultYoggTeleportExit
   - type: Tag
@@ -43,14 +43,14 @@
         acts: ["Destruction"]
   - type: GenericVisualizer
     visuals:
-      enum.SelfLinkedVisuals.State:
+      enum.AutoLinkingTeleportVisuals.Linked:
         portalLayer:
           True: {visible: true}
           False: {visible: false}
 
 - type: entity
   id: VoidTeleportExit
-  parent: BaseSelfLinkedPortalCult
+  parent: BaseAutoLinkingPortalCult
   components:
   - type: Sprite
     noRot: true
@@ -68,8 +68,8 @@
     energy: 1
     netsync: true
     enabled: false
-  - type: SelfLinkedTeleport
-    whitelistLinked:
+  - type: AutoLinkingTeleport
+    linkWhitelist:
       tags:
       - CultYoggTeleportEnter
   - type: Tag
@@ -77,7 +77,7 @@
     - CultYoggTeleportExit
   - type: GenericVisualizer
     visuals:
-      enum.SelfLinkedVisuals.State:
+      enum.AutoLinkingTeleportVisuals.Linked:
         portalLayer:
           True: {visible: true}
           False: {visible: false}
