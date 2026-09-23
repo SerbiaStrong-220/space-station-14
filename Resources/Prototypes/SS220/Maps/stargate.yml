@@ -111,7 +111,7 @@
           - Theatr
           - Coldreagentroom 
 
-- type: entity
+- type: entity #test
   id: StargateNanotrasenStation
   parent: StandardNanotrasenStation
   categories: [ HideSpawnMenu ]
