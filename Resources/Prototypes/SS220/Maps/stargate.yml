@@ -9,7 +9,7 @@
   randomRotation: false
   stations:
     StarGate:
-      stationProto: StandartNanotrasenStation
+      stationProto: StargateNanotrasenStation
       components:
         - type: StationEmergencyShuttle
           emergencyShuttlePath: /Maps/SS220/Shuttles/emergency/emergency_stargate.yml
