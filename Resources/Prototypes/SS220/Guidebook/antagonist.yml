@@ -5,6 +5,11 @@
   text: "/ServerInfo/SS220/Guidebook/Antagonist/CultYogg.xml"
 
 - type: guideEntry
+  id: BloodBrothers
+  name: guide-entry-blood-brothers
+  text: "/ServerInfo/SS220/Guidebook/Antagonist/BloodBrothers.xml"
+
+- type: guideEntry
   id: PirateExpansion
   name: guide-entry-pirates
   text: "/ServerInfo/SS220/Guidebook/Antagonist/Pirates.xml"

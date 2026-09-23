@@ -1,0 +1,25 @@
+- type: entity
+  abstract: true
+  parent: BaseObjective
+  id: BaseBloodBrothersObjective
+  components:
+  - type: BloodBrothersObjective
+  - type: Objective
+    issuer: objective-issuer-blood-brothers
+  - type: RoleRequirement
+    roles:
+    - BloodBrothersRole
+
+- type: entity
+  parent: BaseBloodBrothersObjective
+  id: BloodBrothersEscapeShuttleObjective
+  name: Return home in full force.
+  description: Freedom is only sweet when there is someone to share it with. Do not let corporate lapdogs tear you apart - whether dead or alive, you must leave this sector together.
+  components:
+  - type: Objective
+    issuer: objective-issuer-blood-brothers
+    difficulty: 1
+    icon:
+      sprite: Structures/Furniture/chairs.rsi
+      state: shuttle
+  - type: BloodBrothersEscapeShuttleCondition

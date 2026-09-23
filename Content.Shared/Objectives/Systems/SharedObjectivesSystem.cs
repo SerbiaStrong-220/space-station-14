@@ -4,6 +4,7 @@ using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Prototypes;
 using Content.Shared.SS220.Objectives;
+using Content.Shared.SS220.BloodBrothers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -184,11 +185,19 @@ public abstract class SharedObjectivesSystem : EntitySystem
 
         var ev = new ObjectiveGetProgressEvent(mind, mind.Comp);
         RaiseLocalEvent(uid, ref ev);
-        if (ev.Progress != null)
-            return ev.Progress;
 
-        Log.Error($"Objective {ToPrettyString(uid):objective} of {_mind.MindOwnerLoggingString(mind)} didn't set a progress value!");
-        return null;
+        // ss220-blood-brothers-begin
+        if (ev.Progress == null)
+        {
+            Log.Error($"Objective {ToPrettyString(uid):objective} of {_mind.MindOwnerLoggingString(mind)} didn't set a progress value!");
+            return null;
+        }
+
+        // sync objectives with another mind
+        var modifyEv = new ObjectiveProgressModifyEvent(mind, ev.Progress.Value);
+        RaiseLocalEvent(uid, ref modifyEv);
+        return modifyEv.Progress;
+        // ss220-blood-brothers-end
     }
 
     /// <summary>

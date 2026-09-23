@@ -37,3 +37,14 @@
     exclusiveAntag: true
     roleType: TeamAntagonist
   - type: CultYoggRole
+
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleBloodBrothers
+  name: Blood Brothers Role
+  components:
+  - type: MindRole
+    antagPrototype: BloodBrothers
+    subtype: role-subtype-blood-brothers
+    roleType: TeamAntagonist
+  - type: BloodBrothersRole
