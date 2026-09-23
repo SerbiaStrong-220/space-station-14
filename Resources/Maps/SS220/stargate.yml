@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 09/22/2026 22:08:21
-  entityCount: 46161
+  time: 09/23/2026 11:07:29
+  entityCount: 46177
 maps:
 - 1
 grids:
@@ -26772,7 +26772,7 @@ entities:
       pos: -102.5,24.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -180663.05
+      secondsUntilStateChange: -180778.97
       state: Opening
   - uid: 1760
     components:
@@ -28550,7 +28550,7 @@ entities:
       pos: 1.5,161.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1562725.4
+      secondsUntilStateChange: -1562841.2
       changeAirtight: False
       state: Opening
     - type: DeviceLinkSource
@@ -74063,6 +74063,11 @@ entities:
     - type: Transform
       pos: -101.5,147.5
       parent: 2
+  - uid: 44517
+    components:
+    - type: Transform
+      pos: -80.5,85.5
+      parent: 2
   - uid: 44518
     components:
     - type: Transform
@@ -74853,6 +74858,11 @@ entities:
     - type: Transform
       pos: -53.5,-2.5
       parent: 2
+  - uid: 44711
+    components:
+    - type: Transform
+      pos: -80.5,91.5
+      parent: 2
   - uid: 44712
     components:
     - type: Transform
@@ -75017,6 +75027,76 @@ entities:
     components:
     - type: Transform
       pos: -95.5,50.5
+      parent: 2
+  - uid: 44947
+    components:
+    - type: Transform
+      pos: -81.5,95.5
+      parent: 2
+  - uid: 44948
+    components:
+    - type: Transform
+      pos: -93.5,95.5
+      parent: 2
+  - uid: 44949
+    components:
+    - type: Transform
+      pos: -96.5,98.5
+      parent: 2
+  - uid: 44950
+    components:
+    - type: Transform
+      pos: -103.5,99.5
+      parent: 2
+  - uid: 44951
+    components:
+    - type: Transform
+      pos: -108.5,99.5
+      parent: 2
+  - uid: 44952
+    components:
+    - type: Transform
+      pos: -117.5,99.5
+      parent: 2
+  - uid: 44953
+    components:
+    - type: Transform
+      pos: -121.5,102.5
+      parent: 2
+  - uid: 44954
+    components:
+    - type: Transform
+      pos: -121.5,105.5
+      parent: 2
+  - uid: 44955
+    components:
+    - type: Transform
+      pos: -121.5,107.5
+      parent: 2
+  - uid: 44956
+    components:
+    - type: Transform
+      pos: -121.5,114.5
+      parent: 2
+  - uid: 44957
+    components:
+    - type: Transform
+      pos: -115.5,115.5
+      parent: 2
+  - uid: 44958
+    components:
+    - type: Transform
+      pos: -115.5,122.5
+      parent: 2
+  - uid: 44959
+    components:
+    - type: Transform
+      pos: -111.5,139.5
+      parent: 2
+  - uid: 44960
+    components:
+    - type: Transform
+      pos: -111.5,145.5
       parent: 2
   - uid: 45438
     components:
@@ -121557,7 +121637,7 @@ entities:
       pos: 45.5,58.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -456412.66
+      secondsUntilStateChange: -456528.6
       state: Closing
     - type: DeviceLinkSource
       lastSignals:
@@ -138601,7 +138681,7 @@ entities:
     - type: Openable
       opened: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.88114184
+      sprayFizzinessThresholdRoll: 0.8637515
     - type: MeleeWeapon
       nextAttack: -13.2999857
     - type: EmitSoundOnCollide
@@ -138913,7 +138993,7 @@ entities:
     - type: EmitSoundOnCollide
       nextSound: -20188.979811
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.6858832
+      sprayFizzinessThresholdRoll: 0.33561713
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -138976,7 +139056,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.026130132
+      sprayFizzinessThresholdRoll: 0.9225119
     - type: NameModifier
       baseName: бутылка Гильдлагер
     - type: ContainerContainer
@@ -140005,7 +140085,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.72274363
+      sprayFizzinessThresholdRoll: 0.31481043
     - type: NameModifier
       baseName: Особый Запас Дядюшки Гита
     - type: ContainerContainer
@@ -140059,7 +140139,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.2980047
+      sprayFizzinessThresholdRoll: 0.9977304
     - type: NameModifier
       baseName: вино Особое Двухбородое Бородатое
     - type: ContainerContainer
@@ -140098,7 +140178,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.7182038
+      sprayFizzinessThresholdRoll: 0.28988382
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -140130,7 +140210,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.25460365
+      sprayFizzinessThresholdRoll: 0.109185465
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -143245,7 +143325,7 @@ entities:
       - 40096
       - 40106
     - type: Door
-      secondsUntilStateChange: -1471989.5
+      secondsUntilStateChange: -1472105.4
       state: Closing
   - uid: 9985
     components:
@@ -143331,7 +143411,7 @@ entities:
       deviceLists:
       - 46086
     - type: Door
-      secondsUntilStateChange: -1390664.5
+      secondsUntilStateChange: -1390780.4
       state: Closing
   - uid: 11562
     components:
@@ -145221,7 +145301,7 @@ entities:
     - type: Firelock
       emergencyCloseCooldown: 8075.4252599
     - type: Door
-      secondsUntilStateChange: -495110.66
+      secondsUntilStateChange: -495226.6
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -273394,7 +273474,7 @@ entities:
       parent: 2
     - type: Door
       canCrush: True
-      secondsUntilStateChange: -98906.38
+      secondsUntilStateChange: -99022.305
       clickOpen: False
       state: Opening
     - type: DoorSignalControl
@@ -273429,7 +273509,7 @@ entities:
       pos: -52.5,187.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -542654.8
+      secondsUntilStateChange: -542770.75
       state: Opening
   - uid: 23105
     components:
@@ -273505,7 +273585,7 @@ entities:
       parent: 2
     - type: Door
       canCrush: True
-      secondsUntilStateChange: -98875.516
+      secondsUntilStateChange: -98991.44
       clickOpen: False
       state: Opening
     - type: DoorSignalControl
@@ -273540,7 +273620,7 @@ entities:
       pos: -53.5,188.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -506937.53
+      secondsUntilStateChange: -507053.47
       state: Opening
   - uid: 38967
     components:
