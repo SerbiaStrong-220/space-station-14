@@ -10,6 +10,15 @@
   - type: Sprite
     sprite: SS220/Clothing/Back/Backpacks/captain_white.rsi
 
+- type: entity
+  parent: ClothingBackpack
+  id: ClothingBackpackJanitorJR
+  name: JR backpack
+  description: A convenient, water resistant backpack designed for cleaners JR.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Back/Backpacks/janitor_jr.rsi
+
 # Офицер "Синий Щит"
 - type: entity
   parent: ClothingBackpackSatchel

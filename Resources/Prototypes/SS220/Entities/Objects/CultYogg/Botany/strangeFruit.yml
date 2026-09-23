@@ -1,0 +1,149 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: strange fruit
+  parent: [BaseItem, CultYoggRestrictedItem]
+  suffix: CultYogg
+  id: ProductStrangeFruitCultYogg
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/CultYogg/Botany/strangefruit.rsi
+    state: icon
+  - type: Produce
+    seedId: StrangeFruit
+  - type: Tag
+    tags:
+    - CultYoggStealthProvidable
+  - type: TriggerOnUse
+  - type: TimerTrigger
+    delay: 5
+  - type: TileSpawnInRangeOnTrigger
+    keysIn:
+    - timer
+    spawn: StrangeKudzu
+  - type: DeleteOnTrigger
+    keysIn:
+    - timer
+
+
+- type: entity
+  id: StrangeKudzu
+  suffix: CultYogg
+  name: strange kudzu
+  parent: BaseKudzu
+  placement:
+    mode: SnapgridCenter
+    snap:
+      - Wall
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/CultYogg/Botany/strange_kudzu.rsi
+      state: kudzu_11
+      drawdepth: HighFloorObjects
+    - type: Clickable
+    - type: Kudzu
+      growthTickChance: 0.2
+      spreadChance: 0.1
+      damageRecovery:
+        types:
+          Slash: -0.5
+          Heat: -1.0
+          Cold: -1.0
+          Blunt: -0.5
+    - type: KudzuVisuals
+    - type: Fixtures
+      fixtures:
+        fix1:
+          hard: false
+          density: 7
+          shape:
+            !type:PhysShapeAabb
+            bounds: "-0.5,-0.5,0.5,0.5"
+          layer:
+          - MidImpassable
+    - type: SpeedModifierContacts
+      walkSpeedModifier: 0.2
+      sprintSpeedModifier: 0.2
+      ignoreWhitelist:
+        components:
+        - IgnoreKudzu
+        - CultYogg
+        - MiGo
+    - type: Damageable
+    - type: Destructible
+      thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 24
+        behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - type: Flammable
+      fireSpread: true #If you walk into incredibly dense, flaming vines, you can expect to burn.
+      damage:
+        types:
+          Heat: 3
+    - type: Reactive
+      groups:
+        Flammable: [Touch]
+        Extinguish: [Touch]
+      reactions:
+      - reagents: [WeedKiller, PlantBGone]
+        methods: [Touch]
+        effects:
+        - !type:HealthChange
+          scaling: true
+          damage:
+            types:
+              Heat: 0.5
+    - type: TemperatureDamage
+      heatDamage:
+        types:
+          Heat: 10
+      coldDamage:
+        types:
+          Cold: 5
+    - type: Temperature
+    - type: AtmosExposed
+    - type: Barotrauma
+      damage:
+        types:
+          Blunt: 0.5
+
+- type: entity
+  parent: SeedBase
+  suffix: CultYogg
+  name: packet of strange fruit seed
+  description: "The iconic, extremely deadly mushroom to be used for purely ornamental purposes."
+  id: CultStrangeFruitSeed
+  components:
+    - type: Seed
+      seedId: StrangeFruit
+    - type: Sprite
+      sprite: SS220/Objects/CultYogg/Botany/strangefruit.rsi
+
+- type: seed
+  id: StrangeFruit
+  name: seeds-strange-fruit-name
+  noun: seeds-noun-seeds
+  displayName: seeds-strange-fruit-display-name
+  plantRsi: SS220/Objects/CultYogg/Botany/strangefruit.rsi
+  packetPrototype: CultStrangeFruitSeed
+  productPrototypes:
+    - ProductStrangeFruitCultYogg
+  harvestRepeat: Repeat
+  lifespan: 25
+  maturation: 12
+  production: 10
+  yield: 1
+  potency: 10
+  growthStages: 7
+  chemicals:
+    Amatoxin:
+      Min: 1
+      Max: 25
+      PotencyDivisor: 4
+    Nutriment: ## yumby :)
+      Min: 1
+      Max: 5
+      PotencyDivisor: 20

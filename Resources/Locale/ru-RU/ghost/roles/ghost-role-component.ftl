@@ -63,9 +63,7 @@ ghost-role-information-xeno-name = Ксено
 ghost-role-information-xeno-description = Вы ксено. Скооперируйтесь со своим ульем, чтобы истребить всех членов экипажа!
 ghost-role-information-xeno-rules = Вы [color=red][bold]Командный антагонист[/bold][/color], в команде с другими ксено.
 ghost-role-information-revenant-name = Ревенант
-# ss220 revenant-description-tweak begin
 ghost-role-information-revenant-description = Вы Ревенант. Используйте свои силы, чтобы собирать души и сеять хаос среди экипажа. Открывайте новые способности с помощью собранной эссенции.
-# ss220 revenant-description-tweak end
 ghost-role-information-revenant-rules = Вы – антагонист. Собирайте души, оскверняйте и сводите с ума экипаж.
 ghost-role-information-kangaroo-name = Кенгуру
 ghost-role-information-kangaroo-description = Вы кенгуру! Делайте всё, что делают кенгуру.
@@ -149,7 +147,6 @@ ghost-role-information-ert-security-name = ОБР Офицер безопасн�
 ghost-role-information-ert-security-description = Оказывайте содействие в обеспечении безопасности для решения проблем станции.
 ghost-role-information-ert-medical-name = ОБР Медик
 ghost-role-information-ert-medical-description = Оказывайте содействие в медицинской помощи для решения проблем станции.
-# SS220 CBURN questions
 ghost-role-information-cburn-agent-name = РХБЗ Оперативник
 ghost-role-information-cburn-agent-description = Высококвалифицированный агент Центком, способный справиться с любыми угрозами.
 ghost-role-information-centcom-official-name = Представитель Центком
@@ -270,11 +267,9 @@ ghost-role-information-pirate-name = Космический пират
 ghost-role-information-pirate-description = Агх, дружище! Собирайте крутые трофеи, но старайтесь избегать службы безопасности и утилизаторов!
 ghost-role-information-pirate-captain-name = Капитан космических пиратов
 ghost-role-information-pirate-captain-description = Агх, дружище! Ты здесь главный, и тебе нужно разработать план, как заполучить эту сочную добычу с помощью крючка или мошенничества. Только постарайтесь избегать службы безопасности и утилизаторов!
-# SS220 lost souls roles begin
 # ghost-role-information-disaster-victim-name = Жертва катастрофы
 # ghost-role-information-disaster-victim-description = Вы спаслись на спасательной капсуле с другой станции, которую постигла ужасная участь. Возможно, вас найдут и спасут.
 # ghost-role-information-disaster-victim-rules = Действуют обычные правила для экипажа станции.
-# SS220 lost souls roles end
 ghost-role-information-syndie-disaster-victim-name = Жертва катастрофы из Синдиката
 ghost-role-information-syndie-disaster-victim-description = Вы - обычный пассажир со станции Синдиката. К несчастью, спасательная капсула закинула вас во вражеский сектор...
 ghost-role-information-syndie-disaster-victim-rules = Действуют обычные правила для экипажа станции. Вы НЕ антагонист!

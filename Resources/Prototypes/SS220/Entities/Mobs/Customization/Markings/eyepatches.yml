@@ -1,0 +1,83 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Eyes category
+
+- type: marking
+  id: CustomizationLeftEyePatch
+  bodyPart: Eyes
+  groupWhitelist: [Human, Reptilian]
+  sprites:
+  - sprite: SS220/Clothing/Eyes/Specific/eyepatch.rsi
+    state: equipped-EYES-left
+
+- type: marking
+  id: CustomizationRightEyePatch
+  bodyPart: Eyes
+  groupWhitelist: [Human, Reptilian]
+  sprites:
+  - sprite: SS220/Clothing/Eyes/Specific/eyepatch.rsi
+    state: equipped-EYES
+
+- type: marking
+  id: CustomizationLeftEyePatchMoth
+  bodyPart: Eyes
+  groupWhitelist: [Moth]
+  sprites:
+  - sprite: SS220/Clothing/Eyes/Specific/eyepatch.rsi
+    state: equipped-EYES-moth-left
+
+- type: marking
+  id: CustomizationRightEyePatchMoth
+  bodyPart: Eyes
+  groupWhitelist: [Moth]
+  sprites:
+  - sprite: SS220/Clothing/Eyes/Specific/eyepatch.rsi
+    state: equipped-EYES-moth
+
+- type: marking
+  id: CustomizationLeftEyePatchVox
+  bodyPart: Eyes
+  groupWhitelist: [Vox]
+  sprites:
+  - sprite: SS220/Clothing/Eyes/Specific/eyepatch.rsi
+    state: equipped-EYES-vox-left
+
+- type: marking
+  id: CustomizationRightEyePatchVox
+  bodyPart: Eyes
+  groupWhitelist: [Vox]
+  sprites:
+  - sprite: SS220/Clothing/Eyes/Specific/eyepatch.rsi
+    state: equipped-EYES-vox
+
+- type: marking
+  id: CustomizationLeftEyePatchArachnid
+  bodyPart: Eyes
+  groupWhitelist: [Arachnid]
+  sprites:
+  - sprite: SS220/Clothing/Eyes/Specific/eyepatch.rsi
+    state: equipped-EYES-arachnid-left
+
+- type: marking
+  id: CustomizationRightEyePatchArachnid
+  bodyPart: Eyes
+  groupWhitelist: [Arachnid]
+  sprites:
+  - sprite: SS220/Clothing/Eyes/Specific/eyepatch.rsi
+    state: equipped-EYES-arachnid
+
+- type: marking
+  id: CustomizationLeftEyePatchTajaran
+  bodyPart: Eyes
+  groupWhitelist: [Tajaran]
+  sprites:
+  - sprite: SS220/Clothing/Eyes/Specific/eyepatch.rsi
+    state: equipped-EYES-tajaran-left
+
+- type: marking
+  id: CustomizationRightEyePatchTajaran
+  bodyPart: Eyes
+  groupWhitelist: [Tajaran]
+  sprites:
+  - sprite: SS220/Clothing/Eyes/Specific/eyepatch.rsi
+    state: equipped-EYES-tajaran

@@ -97,9 +97,9 @@
   description: Captain's formal jacket, inlaid with gold.
   components:
   - type: Sprite
-    sprite: Corvax/Clothing/OuterClothing/Coats/captain.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/captain_coat.rsi #SS220 cap coat little fix
   - type: Clothing
-    sprite: Corvax/Clothing/OuterClothing/Coats/captain.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/captain_coat.rsi #SS220 cap coat little fix
   - type: Armor
     modifiers:
       coefficients:

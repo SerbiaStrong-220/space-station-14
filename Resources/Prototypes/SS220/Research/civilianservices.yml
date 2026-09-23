@@ -47,3 +47,48 @@
   cost: 5000
   recipeUnlocks:
   - ClothingEyesHudMediChem
+
+- type: technology
+  id: AdvancedKitchenMachineryTech
+  name: research-technology-advanced-kitchen-machinery
+  icon:
+    sprite: SS220/Structures/Machines/grill_advanced.rsi
+    state: icon
+  discipline: CivilianServices
+  tier: 2
+  cost: 7500
+  recipeUnlocks:
+  - KitchenElectricGrillAdvancedCircuitboard
+
+- type: technology
+  id: DecryptionKeys
+  name: research-decryption-keys
+  icon:
+    sprite: SS220/Objects/Devices/encryption_keys.rsi
+    state: decrypt_human
+  discipline: CivilianServices
+  tier: 2
+  cost: 7500
+  recipeUnlocks:
+  - DecryptionKeyTernary
+  - DecryptionKeySintaunathi
+  - DecryptionKeySiiktajr
+  - DecryptionKeyVoxPidgin
+  - DecryptionKeyRootspeak
+  - DecryptionKeyBubblish
+  - DecryptionKeyTkachi
+  - DecryptionKeyArati
+  - DecryptionKeySolCommon
+
+- type: technology
+  id: DecryptionKeyAdvanced
+  name: research-decryption-key-advanced
+  icon:
+    sprite: SS220/Objects/Devices/encryption_keys.rsi
+    state: decrypt_advanced
+  discipline: CivilianServices
+  tier: 3
+  cost: 12000
+  recipeUnlocks:
+  - DecryptionKeyAdvanced
+

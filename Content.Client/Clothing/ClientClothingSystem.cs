@@ -15,6 +15,7 @@ using Robust.Client.ResourceManagement;
 using Robust.Shared.Serialization.TypeSerializers.Implementations;
 using Robust.Shared.Utility;
 using static Robust.Client.GameObjects.SpriteComponent;
+using Content.Shared.SS220.Clothing; // SS220-IPC
 
 namespace Content.Client.Clothing;
 
@@ -254,6 +255,14 @@ public sealed class ClientClothingSystem : ClothingSystem
             revealedLayers = new();
             inventorySlots.VisualLayerKeys[slot] = revealedLayers;
         }
+
+        // SS220-IPC begin
+        var beforeEv = new BeforeRenderEquipmentEvent(equipee, equipment, slot);
+        RaiseLocalEvent(equipee, beforeEv);
+        RaiseLocalEvent(equipment, beforeEv);
+        if (beforeEv.Cancelled)
+            return;
+        // SS220-IPC end
 
         var ev = new GetEquipmentVisualsEvent(equipee, slot);
         RaiseLocalEvent(equipment, ev);

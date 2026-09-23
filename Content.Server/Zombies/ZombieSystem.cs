@@ -275,11 +275,6 @@ namespace Content.Server.Zombies
                 }
                 else
                 {
-                    //SS220 no_heal_from_zombies start
-                    if (HasComp<ZombieComponent>(entity))
-                        continue;
-                    //SS220 no_heal_from_zombies end
-
                     if (HasComp<ZombieImmuneComponent>(uid) || cannotSpread)
                         continue;
 

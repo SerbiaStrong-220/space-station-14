@@ -99,9 +99,11 @@
   - type: ShowHealthBars
     damageContainers:
       - Biological
+      - Ipc #SS220-MicroFixesIPC
   - type: ShowHealthIcons
     damageContainers:
       - Biological
+      - Ipc #SS220-MicroFixesIPC
   # SS220 ADD GHOST HUD'S END
   - type: ShowEventRoleIcons # SS220 Add event role icons
   - type: ShowElectrocutionHUD

@@ -126,6 +126,11 @@
           32:
             sprite: Mobs/Species/Vox/displacement.rsi
             state: belt
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: outer
       # SS220 VoxDisplacementMap end
   - type: Hands
     leftHandDisplacement:

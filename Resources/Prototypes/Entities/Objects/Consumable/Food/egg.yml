@@ -120,7 +120,7 @@
     area: 0.012
   - type: Grillable
     timeToCook: 10
-    cookingResult: FoodMealFriedegg
+    cookingResult: FoodSunnySideUpEgg #SS220-grillables-update
   # SS220-fri-eggs-end
 
 - type: entity

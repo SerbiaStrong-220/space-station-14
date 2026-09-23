@@ -127,8 +127,8 @@
 ##Made by MIXnikita for SS220
 
 - type: entity
-  id: BaseBulletTriggerArta
   parent: BaseBulletTrigger
+  id: BaseBulletArtilleryShell
   categories: [ HideSpawnMenu ]
   components:
   - type: TimedDespawn
@@ -144,9 +144,8 @@
     - AirDefenseTarget
 
 - type: entity
-  id: BulletGrenadeSuperArta
-  name: пробивной снаряд
-  parent: BaseBulletTriggerArta
+  parent: BaseBulletArtilleryShell
+  id: BulletArtilleryShell
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -161,9 +160,8 @@
     maxIntensity: 20
 
 - type: entity
-  id: BulletGrenadeEMPArta
-  name: снаряд ЭМИ
-  parent: BaseBulletTriggerArta
+  parent: BaseBulletArtilleryShell
+  id: BulletArtilleryShellEMP
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite

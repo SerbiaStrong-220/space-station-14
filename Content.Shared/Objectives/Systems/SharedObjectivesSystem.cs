@@ -3,6 +3,7 @@ using System.Linq;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Prototypes;
+using Content.Shared.SS220.Objectives;
 using Content.Shared.SS220.BloodBrothers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -168,7 +169,7 @@ public abstract class SharedObjectivesSystem : EntitySystem
             return null;
         }
 
-        return new ObjectiveInfo(title, description, comp.Icon, progress);
+        return new ObjectiveInfo(title, description, comp.Icon, progress, HasComp<CustomObjectiveComponent>(uid) /* SS220 antag window tweaks */);
     }
 
     /// <summary>

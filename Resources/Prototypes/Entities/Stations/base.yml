@@ -153,7 +153,7 @@
           - ChunkDebrisSmall
           - ChunkDebris
         vgroid: !type:DungeonSpawnGroup
-          hide: true #SS2200 IFF and Name Hide Reveal
+          hide: false #SS2200 Vgroid name visible again.
           minimumDistance: 900 # SS220 VGroid distance
           maximumDistance: 1350 # SS220 VGroid distance
           nameDataset: NamesBorer
