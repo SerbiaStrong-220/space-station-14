@@ -1,35 +1,39 @@
+light_mode unshaded;
+
 uniform sampler2D SCREEN_TEXTURE;
-
-uniform highp float MinLight;
-uniform highp float BrightThreshold;
-uniform highp float BrightBoost;
-uniform highp float Gamma;
-uniform highp float NoiseAmount;
-
-uniform highp vec3 VisionColor;
-
-highp float rand(highp vec2 p)
-{
-    return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
-}
+uniform sampler2D LIGHT_TEXTURE;
+uniform highp vec3 Tint;
+uniform bool Overexposure;
+uniform highp float OverexposureStart;
+uniform highp float OverexposureEnd;
+uniform highp float OverexposureStrength;
+uniform highp float Noise;
 
 void fragment()
 {
-    highp vec4 tex = zTextureSpec(SCREEN_TEXTURE, UV);
-    highp float grayScale = zGrayscale(tex.rgb);
+    // Framebuffer coordinates keep the image and lightmap aligned with zoom, rotation and render scale.
+    highp vec2 uv = FRAGCOORD.xy * SCREEN_PIXEL_SIZE;
+    highp vec4 scene = zTextureSpec(SCREEN_TEXTURE, uv);
+    highp float brightness = clamp(zGrayscale(scene.rgb), 0.0, 1.0);
 
-    highp float base = max(grayScale, MinLight);
-    highp float bright = max(0.0, grayScale - BrightThreshold);
-    highp float boosted = base + bright * BrightBoost;
+    if (Overexposure && OverexposureStrength > 0.0)
+    {
+        highp vec3 light = zTextureSpec(LIGHT_TEXTURE, uv).rgb;
+        highp float illumination = max(light.r, max(light.g, light.b));
+        // Explicitly support equal thresholds as a step
+        highp float exposure = step(OverexposureStart, illumination);
+        if (OverexposureEnd > OverexposureStart)
+            exposure = smoothstep(OverexposureStart, OverexposureEnd, illumination);
+        // Wash out even dark objects in a lit area, rather than mistaking white sprites for lamps.
+        brightness = mix(brightness, 1.0, exposure * OverexposureStrength);
+    }
 
-    boosted = boosted / (1.0 + boosted * 0.7);
-    boosted = pow(boosted, Gamma);
-    boosted = clamp(boosted, 0.0, 1.0);
+    if (Noise > 0.0)
+    {
+        // zRandom returns -1..1; keep grain centered on zero.
+        highp float grain = zRandom(FRAGCOORD.xy + vec2(fract(TIME))).x * 0.5;
+        brightness = clamp(brightness + grain * Noise, 0.0, 1.0);
+    }
 
-    highp vec3 col = VisionColor * boosted;
-    highp float noise = (rand(UV + fract(TIME)) - 0.5) * NoiseAmount;
-    col += noise;
-    col = clamp(col, 0.0, 1.0);
-
-    COLOR = vec4(col, tex.a);
+    COLOR = vec4(Tint * brightness, scene.a);
 }

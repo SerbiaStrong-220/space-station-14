@@ -5,49 +5,61 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.NightVision;
 
-public sealed class NightVisionColorOverlay : Overlay
+public sealed partial class NightVisionColorOverlay : Overlay
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
-    private static readonly ProtoId<ShaderPrototype> Shader = "NightVisionColor";
+    private static readonly ProtoId<ShaderPrototype> NightVisionShader = "NightVisionColor";
 
-    public override OverlaySpace Space => OverlaySpace.ScreenSpace;
+    public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
     public override bool RequestScreenTexture => true;
 
-    private readonly ShaderInstance _nightVisionShader;
+    private readonly NightVisionSystem _system;
+    private readonly NightVisionLightOverlay _lighting;
+    private readonly ShaderInstance _shader;
 
-    public float MinLight;
-    public float BrightThreshold;
-    public float BrightBoost;
-    public float Gamma;
-    public float NoiseAmount;
-
-    public Color VisionColor;
-
-    public NightVisionColorOverlay()
+    public NightVisionColorOverlay(NightVisionSystem system, NightVisionLightOverlay lighting)
     {
         IoCManager.InjectDependencies(this);
-        _nightVisionShader = _prototypeManager.Index(Shader).InstanceUnique();
-        ZIndex = -9999; // lowest priority, so other overlays (text and other) render normally
+        _system = system;
+        _lighting = lighting;
+        _shader = _prototypes.Index(NightVisionShader).InstanceUnique();
+        ZIndex = -1; // Before status icons and below hard FOV and blindness.
+    }
+
+    protected override bool BeforeDraw(in OverlayDrawArgs args)
+    {
+        return _system.GetProfile(args.Viewport) != null &&
+               _lighting.GetOriginalLight(args.Viewport) != null;
     }
 
     protected override void Draw(in OverlayDrawArgs args)
     {
-        if (ScreenTexture == null)
+        if (ScreenTexture == null || _system.GetProfile(args.Viewport) is not { } profile ||
+            _lighting.GetOriginalLight(args.Viewport) is not { } light)
+        {
             return;
+        }
 
-        var handle = args.ScreenHandle;
+        var tint = Color.FromSrgb(profile.Tint);
+        _shader.SetParameter("SCREEN_TEXTURE", ScreenTexture);
+        _shader.SetParameter("LIGHT_TEXTURE", light);
+        _shader.SetParameter("Tint", new Vector3(tint.R, tint.G, tint.B));
+        _shader.SetParameter("Overexposure", profile.Overexposure);
+        _shader.SetParameter("OverexposureStart", Math.Clamp(profile.OverexposureStart, 0f, 1f));
+        _shader.SetParameter("OverexposureEnd", Math.Clamp(profile.OverexposureEnd, 0f, 1f));
+        _shader.SetParameter("OverexposureStrength", Math.Clamp(profile.OverexposureStrength, 0f, 1f));
+        _shader.SetParameter("Noise", Math.Clamp(profile.Noise, 0f, 1f));
 
-        _nightVisionShader.SetParameter("SCREEN_TEXTURE", ScreenTexture);
-        _nightVisionShader.SetParameter(nameof(MinLight), MinLight);
-        _nightVisionShader.SetParameter(nameof(BrightThreshold), BrightThreshold);
-        _nightVisionShader.SetParameter(nameof(BrightBoost), BrightBoost);
-        _nightVisionShader.SetParameter(nameof(Gamma), Gamma);
-        _nightVisionShader.SetParameter(nameof(NoiseAmount), NoiseAmount);
-        _nightVisionShader.SetParameter(nameof(VisionColor), new Vector3(VisionColor.R, VisionColor.G, VisionColor.B));
-
-        handle.UseShader(_nightVisionShader);
-        handle.DrawRect(args.ViewportBounds, Color.White);
+        var handle = args.WorldHandle;
+        handle.UseShader(_shader);
+        handle.DrawRect(args.WorldBounds, Color.White);
         handle.UseShader(null);
+    }
+
+    protected override void DisposeBehavior()
+    {
+        _shader.Dispose();
+        base.DisposeBehavior();
     }
 }

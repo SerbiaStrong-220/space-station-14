@@ -8,6 +8,10 @@
   name: Spider queen
   description: spider dance
   components:
+  - type: NightVision
+    profile: NightVisionLightGreen
+    enabled: true
+    action: null
   - type: Language
     availableLanguages:
     - id: SpiderTongue

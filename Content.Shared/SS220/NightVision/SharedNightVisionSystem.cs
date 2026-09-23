@@ -1,110 +1,108 @@
 using Content.Shared.Actions;
-using Content.Shared.Actions.Components;
-using Content.Shared.Clothing;
-using Content.Shared.Toggleable;
-using Robust.Shared.Timing;
+using Content.Shared.Clothing.Components;
+using Content.Shared.Implants;
+using Content.Shared.Implants.Components;
+using Content.Shared.Inventory.Events;
 
 namespace Content.Shared.SS220.NightVision;
 
-public abstract class SharedNightVisionSystem : EntitySystem
+public abstract partial class SharedNightVisionSystem : EntitySystem
 {
-    [Dependency] protected readonly IGameTiming GameTiming = default!;
-
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        SubscribeLocalEvent<NightVisionComponent, ComponentInit>(OnCompInit);
+        SubscribeLocalEvent<NightVisionComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<NightVisionComponent, ComponentShutdown>(OnShutdown);
 
-        SubscribeLocalEvent<NightVisionComponent, ClothingGotEquippedEvent>(OnGotEquipped);
-        SubscribeLocalEvent<NightVisionComponent, ClothingGotUnequippedEvent>(OnGotUnequipped);
+        SubscribeLocalEvent<NightVisionComponent, GotEquippedEvent>(OnEquipped);
+        SubscribeLocalEvent<NightVisionComponent, GotUnequippedEvent>(OnUnequipped);
 
-        SubscribeLocalEvent<NightVisionComponent, ToggleActionEvent>(OnToggled);
+        SubscribeLocalEvent<NightVisionComponent, ImplantImplantedEvent>(OnImplanted);
+        SubscribeLocalEvent<NightVisionComponent, ImplantRemovedEvent>(OnRemoved);
+
+        SubscribeLocalEvent<NightVisionComponent, ToggleNightVisionEvent>(OnToggle);
     }
 
-    private void OnCompInit(Entity<NightVisionComponent> ent, ref ComponentInit _)
+    private void OnStartup(Entity<NightVisionComponent> ent, ref ComponentStartup args)
     {
-        if (!HasComp<ActionsContainerComponent>(ent))
+        // they could turn nightvision itself
+        if (HasComp<ClothingComponent>(ent) || HasComp<SubdermalImplantComponent>(ent))
             return;
 
-        if (!_actions.AddAction(ent, ref ent.Comp.ActionEntity, ent.Comp.Action, ent.Owner))
-            return;
-
-        if (!ent.Comp.Enabled)
-            return;
-
-        EnableOverlay(ent);
+        GrantVision(ent, ent.Owner);
     }
 
-    private void OnShutdown(Entity<NightVisionComponent> ent, ref ComponentShutdown _)
+    private void OnShutdown(Entity<NightVisionComponent> ent, ref ComponentShutdown args)
     {
-        if (!HasComp<ActionsContainerComponent>(ent))
-            return;
-
-        DisableOverlay();
-        _actions.RemoveAction(ent.Owner, ent.Comp.ActionEntity);
+        RevokeVision(ent);
     }
 
-    private void OnGotEquipped(Entity<NightVisionComponent> ent, ref ClothingGotEquippedEvent args)
+    private void OnEquipped(Entity<NightVisionComponent> ent, ref GotEquippedEvent args)
     {
-        if (!GameTiming.IsFirstTimePredicted)
-            return;
+        if ((ent.Comp.Slots & args.SlotFlags) != 0)
+            GrantVision(ent, args.EquipTarget);
+    }
 
-        ent.Comp.Enabled = false;
+    private void OnUnequipped(Entity<NightVisionComponent> ent, ref GotUnequippedEvent args)
+    {
+        if ((ent.Comp.Slots & args.SlotFlags) != 0)
+            RevokeVision(ent);
+    }
 
-        if (!_actions.AddAction(args.Wearer, ref ent.Comp.ActionEntity, ent.Comp.Action, ent.Owner))
-            return;
+    private void OnImplanted(Entity<NightVisionComponent> ent, ref ImplantImplantedEvent args)
+    {
+        GrantVision(ent, args.Implanted);
+    }
+
+    private void OnRemoved(Entity<NightVisionComponent> ent, ref ImplantRemovedEvent args)
+    {
+        RevokeVision(ent);
+    }
+
+    private void GrantVision(Entity<NightVisionComponent> ent, EntityUid wearer)
+    {
+        ent.Comp.Wearer = wearer;
+        if (ent.Comp.Action != null)
+        {
+            _actions.AddAction(wearer, ref ent.Comp.ActionEntity, ent.Comp.Action, ent.Owner);
+            _actions.SetToggled(ent.Comp.ActionEntity, ent.Comp.Enabled);
+        }
 
         Dirty(ent);
     }
 
-    private void OnGotUnequipped(Entity<NightVisionComponent> ent, ref ClothingGotUnequippedEvent args)
+    private void RevokeVision(Entity<NightVisionComponent> ent)
     {
-        if (!GameTiming.IsFirstTimePredicted)
-            return;
+        _actions.RemoveAction(ent.Comp.ActionEntity);
 
-        DisableOverlay();
-        _actions.RemoveProvidedActions(args.Wearer, ent.Owner);
+        ent.Comp.Wearer = null;
         ent.Comp.Enabled = false;
+
+        _actions.SetToggled(ent.Comp.ActionEntity, false);
         Dirty(ent);
     }
 
-    private void OnToggled(Entity<NightVisionComponent> ent, ref ToggleActionEvent args)
+    private void OnToggle(Entity<NightVisionComponent> ent, ref ToggleNightVisionEvent args)
     {
-        if (args.Handled)
+        if (args.Handled || ent.Comp.Wearer != args.Performer)
             return;
 
-        if (!GameTiming.IsFirstTimePredicted)
-            return;
-
-        if (ent.Comp.Enabled)
-        {
-            DisableOverlay();
-            SetActivated(ent, false);
-        }
-        else
-        {
-            EnableOverlay(ent);
-            SetActivated(ent, true);
-        }
-
+        SetEnabled(ent, !ent.Comp.Enabled);
         args.Handled = true;
-        Dirty(ent);
     }
 
-    private void SetActivated(Entity<NightVisionComponent> ent, bool activated)
+    public void SetEnabled(Entity<NightVisionComponent> ent, bool enabled)
     {
-        if (ent.Comp.Enabled == activated)
+        if (ent.Comp.Enabled == enabled)
             return;
 
-        ent.Comp.Enabled = activated;
+        ent.Comp.Enabled = enabled;
+
+        _actions.SetToggled(ent.Comp.ActionEntity, enabled);
         Dirty(ent);
     }
-
-    protected virtual void EnableOverlay(Entity<NightVisionComponent> ent) { }
-
-    protected virtual void DisableOverlay() { }
 }
+
+public sealed partial class ToggleNightVisionEvent : InstantActionEvent;

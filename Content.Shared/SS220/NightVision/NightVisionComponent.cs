@@ -1,75 +1,35 @@
+using Content.Shared.Inventory;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.NightVision;
 
-[RegisterComponent]
-[NetworkedComponent]
-[AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class NightVisionComponent : Component
 {
-    [DataField]
-    [AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public bool Enabled;
 
-    /// <summary>
-    /// Min brightness level in complete darkness.
-    /// Controls how much user can see without any light.
-    /// </summary>
-    [DataField]
-    [AutoNetworkedField]
-    public float MinLight = 0.0f;
+    /// <summary> Reusable visual settings, rather than shader parameters copied between entities. </summary>
+    [DataField, AutoNetworkedField]
+    public ProtoId<NightVisionProfilePrototype> Profile = "NightVisionGreen";
 
-    /// <summary>
-    /// Brightness threshold after which light sources start to become overexposed.
-    /// Everything below this value is normal light.
-    /// </summary>
-    [DataField]
-    [AutoNetworkedField]
-    public float BrightThreshold = 0.0f;
+    /// <summary> Higher priority enabled sources take precedence without disabling other sources. </summary>
+    [DataField, AutoNetworkedField]
+    public int Priority;
 
-    /// <summary>
-    /// Intensity multiplier for very bright areas.
-    /// Controls how strongly light sources "blind" the night vision.
-    /// </summary>
+    /// <summary>Clothing grants vision only in these slots</summary>
     [DataField]
-    [AutoNetworkedField]
-    public float BrightBoost = 60f;
+    public SlotFlags Slots = SlotFlags.EYES;
 
-    /// <summary>
-    /// Gamma correction applied to the final image.
-    /// Lower values = brighter mid-tones, higher values = darker mid-tones.
-    /// </summary>
+    /// <summary> Null for passive animal vision. </summary>
     [DataField]
-    [AutoNetworkedField]
-    public float Gamma = 1.2f;
-
-    /// <summary>
-    /// Amount of visual noise (grain) applied over the image.
-    /// </summary>
-    [DataField]
-    [AutoNetworkedField]
-    public float NoiseAmount = 0.025f;
-
-    /// <summary>
-    /// Minimum light intensity applied after the light render target.
-    /// Prevents the scene from becoming completely black when night vision is enabled.
-    /// </summary>
-    [DataField]
-    [AutoNetworkedField]
-    public float MinLightAfterTargetOverlay = 0.013f;
-
-    /// <summary>
-    /// Final tint color of the night vision image.
-    /// </summary>
-    [DataField]
-    [AutoNetworkedField]
-    public Color VisionColor = Color.FromHex("#26FF26");
-
-    [DataField]
-    [AutoNetworkedField]
-    public EntProtoId Action = "ActionToggleNightVision";
+    public EntProtoId? Action = "ActionToggleNightVision";
 
     [AutoNetworkedField]
     public EntityUid? ActionEntity;
+
+    /// <summary> Wearer or implantee, or the source itself for innate vision. </summary>
+    [ViewVariables, AutoNetworkedField]
+    public EntityUid? Wearer;
 }

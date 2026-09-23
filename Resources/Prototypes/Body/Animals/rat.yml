@@ -10,6 +10,12 @@
   id: BaseMobRat
   abstract: true
   components:
+  # SS220 ADD NIGHT VISION START
+  - type: NightVision
+    profile: NightVisionPaleRed
+    enabled: true
+    action: null
+  # SS220 ADD NIGHT VISION END
   - type: Body
   - type: EntityTableContainerFill
     containers:

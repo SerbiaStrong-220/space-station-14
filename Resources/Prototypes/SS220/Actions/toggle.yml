@@ -16,12 +16,18 @@
 - type: entity
   id: ActionToggleNightVision
   name: Toggle Night Vision
-  description: Toggle Night Vision
+  description: toggle night vision
   components:
   - type: Action
-    useDelay: 1
-    itemIconStyle: NoItem
-    icon: { sprite: SS220/Interface/Actions/action_inner_toggle.rsi, state: in } # TODO: SPRITES
-    iconOn: { sprite: SS220/Interface/Actions/action_inner_toggle.rsi, state: out } # TODO: SPRITES
+    useDelay: 2
   - type: InstantAction
-    event: !type:ToggleActionEvent
+    event: !type:ToggleNightVisionEvent
+
+- type: entity
+  parent: ActionToggleNightVision
+  id: ActionToggleNightVisionImplant
+  components:
+  - type: Action
+    useDelay: 2
+    itemIconStyle: NoItem
+    icon: { sprite: SS220/Clothing/Eyes/Glasses/nightvision.rsi, state: night }

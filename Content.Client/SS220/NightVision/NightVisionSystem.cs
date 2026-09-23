@@ -1,39 +1,65 @@
-using Content.Client.Light;
 using Content.Shared.SS220.NightVision;
 using Robust.Client.Graphics;
+using Robust.Client.Player;
+using Robust.Shared.Map.Components;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.NightVision;
 
-public sealed class NightVisionSystem : SharedNightVisionSystem
+public sealed partial class NightVisionSystem : SharedNightVisionSystem
 {
-    [Dependency] private readonly IOverlayManager _overlay = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private ILightManager _light = default!;
+    [Dependency] private SharedMapSystem _maps = default!;
 
-    protected override void EnableOverlay(Entity<NightVisionComponent> ent)
+    public override void Initialize()
     {
-        if (!GameTiming.IsFirstTimePredicted)
-            return;
-
-        var afterLightOverlay = _overlay.GetOverlay<AfterLightTargetOverlay>();
-        afterLightOverlay.NightVisionEnabled = true;
-        afterLightOverlay.MinLightAfterTargetOverlay = ent.Comp.MinLightAfterTargetOverlay;
-
-        _overlay.AddOverlay(new NightVisionColorOverlay
-        {
-            MinLight = ent.Comp.MinLight,
-            BrightThreshold = ent.Comp.BrightThreshold,
-            BrightBoost = ent.Comp.BrightBoost,
-            Gamma = ent.Comp.Gamma,
-            NoiseAmount = ent.Comp.NoiseAmount,
-            VisionColor = ent.Comp.VisionColor,
-        });
+        base.Initialize();
+        var lighting = new NightVisionLightOverlay(this);
+        _overlay.AddOverlay(lighting);
+        _overlay.AddOverlay(new NightVisionColorOverlay(this, lighting));
     }
 
-    protected override void DisableOverlay()
+    public override void Shutdown()
     {
-        if (!GameTiming.IsFirstTimePredicted)
-            return;
-
-        _overlay.GetOverlay<AfterLightTargetOverlay>().NightVisionEnabled = false;
         _overlay.RemoveOverlay<NightVisionColorOverlay>();
+        _overlay.RemoveOverlay<NightVisionLightOverlay>();
+        base.Shutdown();
+    }
+
+    /// <summary>
+    /// Only the local player own eye may use their vision
+    /// </summary>
+    public NightVisionProfilePrototype? GetProfile(IClydeViewport viewport)
+    {
+        if (_player.LocalEntity is not { } player ||
+            !TryComp<EyeComponent>(player, out var eye) || viewport.Eye != eye.Eye ||
+            !eye.Eye.DrawLight || !_light.Enabled || !_light.DrawLighting ||
+            !TryComp<MapComponent>(_maps.GetMapOrInvalid(eye.Eye.Position.MapId), out var map) ||
+            !map.LightingEnabled)
+        {
+            return null;
+        }
+
+        NightVisionComponent? selected = null;
+        var selectedId = int.MaxValue;
+        var query = EntityQueryEnumerator<NightVisionComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            // im really dont want to add this, but if we wear implanter + glasses this muts be
+            if (!comp.Enabled || comp.Wearer != player ||
+                selected != null && (comp.Priority < selected.Priority ||
+                    comp.Priority == selected.Priority && uid.Id >= selectedId))
+            {
+                continue;
+            }
+
+            selected = comp;
+            selectedId = uid.Id;
+        }
+
+        return selected == null ? null : _prototypes.Index(selected.Profile);
     }
 }

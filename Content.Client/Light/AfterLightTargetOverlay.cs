@@ -1,7 +1,6 @@
 using System.Numerics;
 using Robust.Client.Graphics;
 using Robust.Shared.Enums;
-using Robust.Shared.Prototypes;
 
 namespace Content.Client.Light;
 
@@ -13,26 +12,13 @@ public sealed class AfterLightTargetOverlay : Overlay
     public override OverlaySpace Space => OverlaySpace.BeforeLighting;
 
     [Dependency] private readonly IOverlayManager _overlay = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!; // ss220 add night vision
 
     public const int ContentZIndex = LightBlurOverlay.ContentZIndex + 1;
-
-    // ss220 add night vision start
-    private static readonly ProtoId<ShaderPrototype> NightVisionShader = "NightVision";
-    private readonly ShaderInstance _nightVisionShader;
-
-    public bool NightVisionEnabled { get; set; }
-    public float MinLightAfterTargetOverlay;
-    // ss220 add night vision end
 
     public AfterLightTargetOverlay()
     {
         IoCManager.InjectDependencies(this);
         ZIndex = ContentZIndex;
-
-        // ss220 add night vision start
-        _nightVisionShader = _proto.Index(NightVisionShader).InstanceUnique();
-        // ss220 add night vision end
     }
 
     protected override void Draw(in OverlayDrawArgs args)
@@ -69,22 +55,7 @@ public sealed class AfterLightTargetOverlay : Overlay
 
                 worldHandle.SetTransform(localMatrix);
 
-                // ss220 add night vision start
-                // we need to do this, cause entity needs to see other entities in darkness
-                if (NightVisionEnabled)
-                {
-                    _nightVisionShader.SetParameter("LIGHT_TEXTURE", lightRes.EnlargedLightTarget.Texture);
-                    _nightVisionShader.SetParameter("MinLight", MinLightAfterTargetOverlay);
-
-                    worldHandle.UseShader(_nightVisionShader);
-                    worldHandle.DrawTextureRectRegion(lightRes.EnlargedLightTarget.Texture, bounds, subRegion: subRegion);
-                    worldHandle.UseShader(null);
-                }
-                else
-                {
-                    worldHandle.DrawTextureRectRegion(lightRes.EnlargedLightTarget.Texture, bounds, subRegion: subRegion);
-                }
-                // ss220 add night vision end
+                worldHandle.DrawTextureRectRegion(lightRes.EnlargedLightTarget.Texture, bounds, subRegion: subRegion);
             }, Color.Transparent);
     }
 }

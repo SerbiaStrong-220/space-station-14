@@ -13,6 +13,10 @@
   id: MobMiGo
   suffix: CultYogg
   components:
+  - type: NightVision
+    profile: NightVisionLightGreen
+    enabled: true
+    action: null
   #cultists comps
   - type: MiGo
     eraseWhitelist:

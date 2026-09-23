@@ -366,6 +366,12 @@
   id: MobPurpleSnake
   description: A menacing purple snake from Kepler-283c.
   components:
+  # SS220 ADD NIGHT VISION START
+  - type: NightVision
+    profile: NightVisionLightBlue
+    enabled: true
+    action: null
+  # SS220 ADD NIGHT VISION END
   - type: Sprite
     drawdepth: SmallMobs #SS220-fauna-update
     sprite: Mobs/Aliens/Xenos/purple_snake.rsi

@@ -1,0 +1,16 @@
+ent-ActionToggleNightVision = Переключить ночное зрение
+    .desc = Позволяет видеть в темноте.
+ent-ClothingEyesNightVision = прибор ночного видения
+    .desc = Позволяет видеть в темноте. При ярком освещении изображение засвечивается - выключите прибор, чтобы видеть нормально.
+ent-ClothingEyesNightVisionMedical = медицинский прибор ночного видения
+    .desc = { ent-ClothingEyesNightVision.desc }
+ent-ClothingEyesNightVisionSecurity = прибор ночного видения СБ
+    .desc = { ent-ClothingEyesNightVision.desc }
+ent-ClothingEyesNightVisionSyndicate = прибор ночного видения Синдиката
+    .desc = { ent-ClothingEyesNightVision.desc }
+ent-ClothingEyesNightVisionChameleon = прибор ночного видения «Хамелеон»
+    .desc = Замаскированный прибор ночного видения. При ярком освещении изображение засвечивается.
+ent-NightVisionImplant = имплант ночного видения
+    .desc = Позволяет включать ночное зрение. Яркое освещение засвечивает изображение.
+ent-NightVisionImplanter = имплантер ночного видения
+    .desc = { ent-BaseImplantOnlyImplanter.desc }

@@ -36,13 +36,19 @@
     speedModifierThresholds:
       60: 0.7
       80: 0.5
-      
+
 - type: entity
   name: shadow cat
   parent: BaseShadowMob
   id: MobCatShadow
   description: A lovely piece of darkness. Hope he doesn't bring you a curse.
   components:
+  # SS220 ADD NIGHT VISION START
+  - type: NightVision
+    profile: NightVisionLightGray
+    enabled: true
+    action: null
+  # SS220 ADD NIGHT VISION END
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Pets/cat.rsi
