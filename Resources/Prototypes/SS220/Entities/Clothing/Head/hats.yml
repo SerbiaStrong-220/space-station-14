@@ -483,10 +483,22 @@
     - HamsterWearable
     - WhitelistChameleon
 
+  # Священник
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatFollower
+  name: follower's hat
+  description: It's heaven's time.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/chaplain_hat_follower.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/chaplain_hat_follower.rsi
+
 # Служба безопасности
 
   # ГСБ
-
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadBigCapHoS
@@ -498,6 +510,18 @@
     - type: Clothing
       sprite: SS220/Clothing/Head/Hats/hos_bigcap.rsi
 
+  # Смотритель
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadBigCapCommissar
+  name: the commissioner's cap
+  description: Reflections give rise to heresy. Heresy gives rise to retribution.
+  suffix: For playtime
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Head/Hats/commissar.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Head/Hats/commissar.rsi
 
   # Пилот
 - type: entity
@@ -569,6 +593,18 @@
       sprite: SS220/Clothing/Head/Hats/beret_salvage_specialist.rsi
     - type: Clothing
       sprite: SS220/Clothing/Head/Hats/beret_salvage_specialist.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadBeretJRSalvage
+  name: jr salvage beret
+  description: The ranking system for recyclers in Junk Recyclers is extremely extensive. This beret proves that you are at its top.
+  suffix: For playtime
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Head/Hats/jr_beret_salvage.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Head/Hats/jr_beret_salvage.rsi
 
 - type: entity
   parent: ClothingHeadBase
@@ -863,3 +899,26 @@
     sprite: SS220/Clothing/Head/Hats/PayDay/hoxton.rsi
   - type: IngestionBlocker
   - type: IdentityBlocker
+
+# ПНТ
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadNTRCap
+  name: NTR's cap
+  description: A NanoTrasen representative's peaked cap. A handsome one.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/ntr_cap.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/ntr_cap.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadNTRTophat
+  name: NTR's tophat
+  description: Few people would dare tell you to your face, but you look funny in it.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/ntr_tophat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/ntr_tophat.rsi

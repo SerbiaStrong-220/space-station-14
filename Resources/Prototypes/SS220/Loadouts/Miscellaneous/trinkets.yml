@@ -28,3 +28,202 @@
   storage:
     back:
     - ExpensiveCane
+
+# New pins
+
+- type: loadout
+  id: ClothingNeck1984Pin
+  storage:
+    back:
+    - ClothingNeck1984Pin
+  groupBy: "pin"
+
+- type: loadout
+  id: ClothingNeckBeerPin
+  storage:
+    back:
+    - ClothingNeckBeerPin
+  groupBy: "pin"
+
+- type: loadout
+  id: ClothingNeckCatDespairPin
+  storage:
+    back:
+    - ClothingNeckCatDespairPin
+  groupBy: "pin"
+
+- type: loadout
+  id: ClothingNeckJRGreenPin
+  storage:
+    back:
+    - ClothingNeckJRGreenPin
+  groupBy: "pin"
+
+- type: loadout
+  id: ClothingNeckJRWhitePin
+  storage:
+    back:
+    - ClothingNeckJRWhitePin
+  groupBy: "pin"
+
+- type: loadout
+  id: ClothingNeckMothPin
+  storage:
+    back:
+    - ClothingNeckMothPin
+  groupBy: "pin"
+
+- type: loadout
+  id: ClothingNeckDwarfPin
+  storage:
+    back:
+    - ClothingNeckDwarfPin
+  groupBy: "pin"
+
+- type: loadout
+  id: ClothingNeckSheriffStarPin
+  storage:
+    back:
+    - ClothingNeckSheriffStarPin
+  groupBy: "pin"
+
+- type: loadout
+  id: ClothingNeckLovePin
+  storage:
+    back:
+    - ClothingNeckLovePin
+  groupBy: "pin"
+
+- type: loadout
+  id: ClothingNeckSmokeWormPin
+  storage:
+    back:
+    - ClothingNeckSmokeWormPin
+  groupBy: "pin"
+
+- type: loadout
+  id: ClothingNeckStarPin
+  storage:
+    back:
+    - ClothingNeckStarPin
+  groupBy: "pin"
+
+- type: loadout
+  id: ClothingNeckIPCPin
+  storage:
+    back:
+    - ClothingNeckIPCPin
+  groupBy: "pin"
+
+- type: loadout
+  id: ClothingNeckSlimegreenPin
+  storage:
+    back:
+    - ClothingNeckSlimegreenPin
+  groupBy: "pin"
+
+- type: loadout
+  id: ClothingNeckBigFloppaPin
+  storage:
+    back:
+    - ClothingNeckBigFloppaPin
+  groupBy: "pin"
+
+- type: loadout
+  id: ClothingNeckSilverBloodDonorPin
+  storage:
+    back:
+    - ClothingNeckSilverBloodDonorPin
+  groupBy: "pin"
+
+- type: loadout
+  id: ClothingNeckGoldBloodDonorPin
+  storage:
+    back:
+    - ClothingNeckGoldBloodDonorPin
+  groupBy: "pin"
+
+- type: loadout
+  id: ClothingNeckGrapePin
+  storage:
+    back:
+    - ClothingNeckGrapePin
+  groupBy: "pin"
+
+- type: loadout
+  id: ClothingNeckBrushwoodPin
+  storage:
+    back:
+    - ClothingNeckBrushwoodPin
+  groupBy: "pin"
+
+- type: loadout
+  id: ClothingNeckTSFPin
+  storage:
+    back:
+    - ClothingNeckTSFPin
+  groupBy: "pin"
+
+- type: loadout
+  id: ClothingNeckCloverPin
+  storage:
+    back:
+    - ClothingNeckCloverPin
+  groupBy: "pin"
+
+- type: loadout
+  id: ClothingNeckHumanPin
+  storage:
+    back:
+    - ClothingNeckHumanPin
+  groupBy: "pin"
+
+- type: loadout
+  id: ClothingNeckLizardPin
+  storage:
+    back:
+    - ClothingNeckLizardPin
+  groupBy: "pin"
+
+- type: loadout
+  id: ClothingNeckArachnidPin
+  storage:
+    back:
+    - ClothingNeckArachnidPin
+  groupBy: "pin"
+
+- type: loadout
+  id: ClothingNeckTajaraPin
+  storage:
+    back:
+    - ClothingNeckTajaraPin
+  groupBy: "pin"
+
+- type: loadout
+  id: ClothingNeckVoxPin
+  storage:
+    back:
+    - ClothingNeckVoxPin
+  groupBy: "pin"
+
+- type: loadout
+  id: ClothingNeckDionaPin
+  storage:
+    back:
+    - ClothingNeckDionaPin
+  groupBy: "pin"
+
+- type: loadout
+  id: ClothingNeckSlimePin
+  storage:
+    back:
+    - ClothingNeckSlimePin
+  groupBy: "pin"
+
+- type: loadout
+  id: ClothingNeckVulpearPin
+  storage:
+    back:
+    - ClothingNeckVulpearPin
+  groupBy: "pin"
+

@@ -326,7 +326,7 @@ public sealed class PullingSystem : EntitySystem
         if (TryComp<HeldSpeedModifierComponent>(component.Pulling, out var heldMoveSpeed) && component.Pulling.HasValue)
         {
             var (walkMod, sprintMod) =
-                _clothingMoveSpeed.GetHeldMovementSpeedModifiers(component.Pulling.Value, heldMoveSpeed);
+                _clothingMoveSpeed.GetHeldMovementSpeedModifiers(component.Pulling.Value, heldMoveSpeed, /* SS220-add-skill-dependency-for-pulling-speed */ uid);
             args.ModifySpeed(walkMod, sprintMod);
             return;
         }

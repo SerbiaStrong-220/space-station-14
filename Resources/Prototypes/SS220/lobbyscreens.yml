@@ -26,10 +26,10 @@
   artist: lobby-state-background-spacefather-artist
 
 - type: lobbyBackground
-  id: Destruction
-  background: /Textures/SS220/LobbyScreens/Destruction.webp
-  title: lobby-state-background-destruction-title
-  artist: lobby-state-background-destruction-artist
+  id: Dysphornats
+  background: /Textures/SS220/LobbyScreens/dysphornats.webp
+  title: lobby-state-background-dysphornats-title
+  artist: lobby-state-background-dysphornats-artist
 
 - type: lobbyBackground
   id: RatKing

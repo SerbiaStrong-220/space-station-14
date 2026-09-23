@@ -36,6 +36,12 @@ public sealed partial class CultYoggHealComponent : Component
     public float ModifyStamina;
 
     /// <summary>
+    /// Amount of pathologies from surgery that will be removed per healing tick.
+    /// </summary>
+    [DataField]
+    public int PathologiesChangeAmount = -1;
+
+    /// <summary>
     /// Time between each healing incident
     /// </summary>
     [DataField, AutoNetworkedField]

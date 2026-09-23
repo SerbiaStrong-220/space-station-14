@@ -45,6 +45,7 @@
   name: felinid appearance
   parent: BaseSpeciesAppearance
   id: AppearanceFelinid
+  categories: [ HideSpawnMenu ]
   components:
   - type: Inventory
     speciesId: Felinid

@@ -11,6 +11,7 @@
       path: /Audio/Items/jumpsuit_equip.ogg
   - type: Butcherable
     butcheringType: Knife
+    butcheringSound: /Audio/SS220/Effects/butcher_cloth.ogg # SS220-butchering-sounds-tweak
     spawned:
     - id: MaterialCloth1
       amount: 3

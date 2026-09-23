@@ -13,7 +13,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.Maps;
 
-public sealed class GameMapManager : IGameMapManager
+public sealed partial class GameMapManager : IGameMapManager // SS220 add partial
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
@@ -22,6 +22,7 @@ public sealed class GameMapManager : IGameMapManager
     [Dependency] private readonly IResourceManager _resMan = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
 
+    // SS220: This is a queue of rotation maps, not previous round maps.
     [ViewVariables(VVAccess.ReadOnly)]
     private readonly Queue<string> _previousMaps = new();
     [ViewVariables(VVAccess.ReadOnly)]
@@ -92,6 +93,8 @@ public sealed class GameMapManager : IGameMapManager
                 break;
             _previousMaps.Enqueue(map.ID);
         }
+
+        InitilizeSS220(); // SS220 map vote fixes
     }
 
     public IEnumerable<GameMapPrototype> CurrentlyEligibleMaps()
@@ -195,7 +198,8 @@ public sealed class GameMapManager : IGameMapManager
                map.MinPlayers <= _playerManager.PlayerCount &&
                map.Conditions.All(x => x.Check(map)) &&
                _entityManager.System<GameTicker>().IsMapEligible(map) &&
-               (!_previousMaps.Contains(map.ID) || !_mapRotationEnabled);
+               (!_previousMaps.Contains(map.ID) || !_mapRotationEnabled) &&
+               (!_playedMapQueue.Contains(map.ID) || !_playedMapMemoryEnabled); // SS220 map vote fix
     }
 
     private bool TryLookupMap(string gameMap, [NotNullWhen(true)] out GameMapPrototype? map)

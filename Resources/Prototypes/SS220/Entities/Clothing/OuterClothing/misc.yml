@@ -94,3 +94,15 @@
     damageCoefficient: 0.3
     ignoredEffects:
     - Paralyze
+
+- type: entity
+  parent: ClothingOuterHoodieChaplain
+  id: ClothingOuterHoodieFollower
+  name: follower's hoodie
+  description: Even closer to paradise.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/chaplain_follower.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/chaplain_follower.rsi

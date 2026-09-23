@@ -362,7 +362,7 @@
   id: CultYoggTeleportExit
 
 - type: Tag
-  id: VoidTeleporationTarget
+  id: VoidTeleportDestination
 
 - type: Tag
   id: EnvelopeWhitelist
@@ -372,6 +372,9 @@
 
 - type: Tag
   id: AirDefenseTarget
+
+- type: Tag
+  id: Ipc
 
 - type: Tag
   id: CrystalPurple
@@ -393,3 +396,15 @@
 
 - type: Tag
   id: HookahCoal
+
+- type: Tag
+  id: HookahTobacco
+
+- type: Tag
+  id: AstralBlocker
+
+- type: Tag
+  id: MiGoBuildingBlocker
+
+- type: Tag
+  id: WeaponShotgunDoubleBarreled

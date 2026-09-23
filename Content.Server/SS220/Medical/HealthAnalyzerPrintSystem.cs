@@ -17,6 +17,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Paper;
 using Content.Shared.Popups;
+using Content.Shared.SS220.LimitationRevive;
 using Content.Shared.SS220.MedicalScanner;
 using Content.Shared.SS220.Paper;
 using Robust.Shared.Audio.Systems;
@@ -90,7 +91,11 @@ public sealed partial class HealthAnalyzerPrintSystem : EntitySystem
         bool? unrevivable,
         int? counterDeath)
     {
+        string status;
         var builder = new StringBuilder();
+        TryComp<LimitationReviveComponent>(target, out var revive);
+        TryComp<MobStateComponent>(target, out var mobState);
+        var clinicalDeathTimeRemaining = SharedLimitationReviveSystem.GetClinicalDeathTimeRemaining(revive, mobState);
 
         builder.AppendLine(Loc.GetString("health-analyzer-report-section-patient"));
         builder.AppendLine(Loc.GetString("health-analyzer-report-name", ("name", scannedName)));
@@ -103,10 +108,31 @@ public sealed partial class HealthAnalyzerPrintSystem : EntitySystem
             : Loc.GetString("health-analyzer-window-entity-unknown-species-text");
         builder.AppendLine(Loc.GetString("health-analyzer-report-species", ("species", species)));
 
-        var status = TryComp<MobStateComponent>(target, out var mobState)
-            ? GetStatus(mobState.CurrentState)
-            : Loc.GetString("health-analyzer-window-entity-unknown-text");
+        if (mobState != null)
+        {
+            status = mobState.CurrentState == MobState.Dead && clinicalDeathTimeRemaining > TimeSpan.Zero
+                ? Loc.GetString("health-analyzer-window-entity-clinical-dead-text")
+                : GetStatus(mobState.CurrentState);
+        }
+        else
+        {
+            status = Loc.GetString("health-analyzer-window-entity-unknown-text");
+        }
+
         builder.AppendLine(Loc.GetString("health-analyzer-report-status", ("value", status)));
+
+        if (clinicalDeathTimeRemaining is { } timeLeft)
+        {
+            var brainStatus = timeLeft > TimeSpan.Zero
+                ? Loc.GetString("health-analyzer-window-clinical-death-decay", ("timeLeft", timeLeft.ToString(@"mm\:ss")))
+                : Loc.GetString(revive != null && revive.DeathCounter >= revive.ReviveLimit
+                    ? "health-analyzer-window-clinical-death-expired"
+                    : "health-analyzer-window-clinical-death-revivable");
+
+            builder.AppendLine($"{Loc.GetString("health-analyzer-window-clinical-death-text")} {brainStatus}");
+        }
+
+        builder.AppendLine();
 
         var temperature = !float.IsNaN(bodyTemperature)
             ? $"{bodyTemperature - Atmospherics.T0C:F1} °C ({bodyTemperature:F1} K)"
@@ -118,7 +144,10 @@ public sealed partial class HealthAnalyzerPrintSystem : EntitySystem
             : Loc.GetString("health-analyzer-window-entity-unknown-value-text");
         builder.AppendLine(Loc.GetString("health-analyzer-report-blood-level", ("value", blood)));
 
-        var deathCount = counterDeath?.ToString() ?? Loc.GetString("health-analyzer-window-entity-unknown-value-text");
+        var deathCount = revive != null
+            ? revive.DeathCounter.ToString()
+            : Loc.GetString("health-analyzer-window-entity-unknown-value-text");
+
         var allDamage = _damageable.GetAllDamage(target);
 
         builder.AppendLine(Loc.GetString("health-analyzer-report-death-counter", ("value", deathCount)));
