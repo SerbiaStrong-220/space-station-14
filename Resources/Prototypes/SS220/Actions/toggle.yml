@@ -25,6 +25,15 @@
 
 - type: entity
   parent: ActionToggleNightVision
+  id: ActionToggleNightVisionInnate
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon: Interface/Actions/eyeopen.png
+    checkCanInteract: false
+
+- type: entity
+  parent: ActionToggleNightVision
   id: ActionToggleNightVisionImplant
   components:
   - type: Action

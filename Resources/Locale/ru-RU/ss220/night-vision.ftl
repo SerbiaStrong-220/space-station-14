@@ -1,5 +1,7 @@
 ent-ActionToggleNightVision = Переключить ночное зрение
     .desc = Позволяет видеть в темноте.
+ent-ActionToggleNightVisionInnate = Переключить ночное зрение
+    .desc = Включает или выключает врождённое ночное зрение.
 ent-ClothingEyesNightVision = прибор ночного видения
     .desc = Позволяет видеть в темноте. При ярком освещении изображение засвечивается - выключите прибор, чтобы видеть нормально.
 ent-ClothingEyesNightVisionMedical = медицинский прибор ночного видения

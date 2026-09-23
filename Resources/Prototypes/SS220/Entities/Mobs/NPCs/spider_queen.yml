@@ -10,8 +10,8 @@
   components:
   - type: NightVision
     profile: NightVisionLightGreen
-    enabled: true
-    action: null
+    enabled: false
+    action: ActionToggleNightVisionInnate
   - type: Language
     availableLanguages:
     - id: SpiderTongue

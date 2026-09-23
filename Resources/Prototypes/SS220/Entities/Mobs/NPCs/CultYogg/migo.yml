@@ -15,8 +15,8 @@
   components:
   - type: NightVision
     profile: NightVisionLightGreen
-    enabled: true
-    action: null
+    enabled: false
+    action: ActionToggleNightVisionInnate
   #cultists comps
   - type: MiGo
     eraseWhitelist:

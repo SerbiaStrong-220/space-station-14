@@ -13,8 +13,8 @@
   # SS220 ADD NIGHT VISION START
   - type: NightVision
     profile: NightVisionPaleRed
-    enabled: true
-    action: null
+    enabled: false
+    action: ActionToggleNightVisionInnate
   # SS220 ADD NIGHT VISION END
   - type: Body
   - type: EntityTableContainerFill

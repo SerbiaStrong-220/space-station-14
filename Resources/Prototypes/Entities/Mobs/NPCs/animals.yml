@@ -7,8 +7,8 @@
   # SS220 ADD NIGHT VISION START
   - type: NightVision
     profile: NightVisionLightBlue
-    enabled: true
-    action: null
+    enabled: false
+    action: ActionToggleNightVisionInnate
   # SS220 ADD NIGHT VISION END
   - type: MovementSpeedModifier
     baseWalkSpeed : 3
@@ -1853,8 +1853,8 @@
   # SS220 ADD NIGHT VISION START
   - type: NightVision
     profile: NightVisionGray
-    enabled: true
-    action: null
+    enabled: false
+    action: ActionToggleNightVisionInnate
   # SS220 ADD NIGHT VISION END
 #SS220 Animalistic Languages begin
   - type: Language
@@ -2201,8 +2201,8 @@
   # SS220 ADD NIGHT VISION START
   - type: NightVision
     profile: NightVisionLightBlue
-    enabled: true
-    action: null
+    enabled: false
+    action: ActionToggleNightVisionInnate
   # SS220 ADD NIGHT VISION END
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
@@ -2616,8 +2616,8 @@
   # SS220 ADD NIGHT VISION START
   - type: NightVision
     profile: NightVisionLightBlue
-    enabled: true
-    action: null
+    enabled: false
+    action: ActionToggleNightVisionInnate
   # SS220 ADD NIGHT VISION END
   - type: Sprite
     drawdepth: Mobs
@@ -2673,8 +2673,8 @@
   # SS220 ADD NIGHT VISION START
   - type: NightVision
     profile: NightVisionLightGreen
-    enabled: true
-    action: null
+    enabled: false
+    action: ActionToggleNightVisionInnate
   # SS220 ADD NIGHT VISION END
   - type: Physics
   - type: Fixtures
@@ -3323,8 +3323,8 @@
   # SS220 ADD NIGHT VISION START
   - type: NightVision
     profile: NightVisionLightGray
-    enabled: true
-    action: null
+    enabled: false
+    action: ActionToggleNightVisionInnate
   # SS220 ADD NIGHT VISION END
   - type: Sprite
     drawdepth: Mobs

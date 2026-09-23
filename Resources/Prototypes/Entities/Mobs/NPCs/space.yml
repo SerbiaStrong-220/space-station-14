@@ -200,8 +200,8 @@
   # SS220 ADD NIGHT VISION START
   - type: NightVision
     profile: NightVisionLightGreen
-    enabled: true
-    action: null
+    enabled: false
+    action: ActionToggleNightVisionInnate
   # SS220 ADD NIGHT VISION END
   #ss220 spider queen begin
   - type: NpcFactionMember
@@ -311,8 +311,8 @@
     # SS220 ADD NIGHT VISION START
     - type: NightVision
       profile: NightVisionLightBlue
-      enabled: true
-      action: null
+      enabled: false
+      action: ActionToggleNightVisionInnate
     # SS220 ADD NIGHT VISION END
     - type: Sprite
       drawdepth: SmallMobs #SS220-fauna-update (Mobs layer originally)

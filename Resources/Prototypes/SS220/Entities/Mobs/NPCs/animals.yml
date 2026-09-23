@@ -463,8 +463,8 @@
   components:
   - type: NightVision
     profile: NightVisionGray
-    enabled: true
-    action: null
+    enabled: false
+    action: ActionToggleNightVisionInnate
   - type: NameIdentifier
   - type: Stripping
   - type: Strippable
