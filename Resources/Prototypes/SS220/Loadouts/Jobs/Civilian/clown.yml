@@ -160,3 +160,13 @@
     proto: ClownPennywise
   equipment:
     shoes: ClothingShoesClownPennywise
+
+﻿# Job specific trinkets
+- type: loadout
+  id: BikeHornPennywise
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ClownPennywise
+  storage:
+    back:
+    - SprayFlowerPin

@@ -778,6 +778,7 @@
   minLimit: 0
   loadouts:
   - FlowerWaterClown
+  - BikeHornPennywise #SS220-Pennywise-update
 
 - type: loadoutGroup
   id: MimeHead

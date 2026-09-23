@@ -1,0 +1,31 @@
+- type: entity
+  parent: BikeHorn
+  id: BikeHornPennywise
+  name: dance clown golden honker
+  description: A creepy horn.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: Objects/Fun/Instruments/bike_horn.rsi
+    state: icon
+  - type: Item
+    sprite: Objects/Fun/Instruments/bike_horn.rsi
+    size: Tiny
+  - type: Clothing
+    sprite: Objects/Fun/Instruments/bike_horn.rsi
+    slots: [Belt]
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Items/bikehorn.ogg
+      params:
+        volume: 0
+        pitch: 0.3
+        maxDistance: 15
+        rolloffFactor: 1
+        referenceDistance: 1
+        loop: false
+        playOffsetSeconds: 0
+        pitchVariation: 0
+  - type: Prayable
+  - type: StaticPrice
+    price: 100
