@@ -3,6 +3,7 @@ using Content.Shared.Clothing.Components;
 using Content.Shared.Implants;
 using Content.Shared.Implants.Components;
 using Content.Shared.Inventory.Events;
+using Content.Shared.Mobs.Components;
 
 namespace Content.Shared.SS220.NightVision;
 
@@ -27,8 +28,9 @@ public abstract partial class SharedNightVisionSystem : EntitySystem
 
     private void OnStartup(Entity<NightVisionComponent> ent, ref ComponentStartup args)
     {
-        // they could turn nightvision itself
-        if (HasComp<ClothingComponent>(ent) || HasComp<SubdermalImplantComponent>(ent))
+        // Wearable mobs (e.g. mice) use their own vision, not their wearer's.
+        if (HasComp<SubdermalImplantComponent>(ent) ||
+            HasComp<ClothingComponent>(ent) && !HasComp<MobStateComponent>(ent))
             return;
 
         GrantVision(ent, ent.Owner);
@@ -41,12 +43,18 @@ public abstract partial class SharedNightVisionSystem : EntitySystem
 
     private void OnEquipped(Entity<NightVisionComponent> ent, ref GotEquippedEvent args)
     {
+        if (HasComp<MobStateComponent>(ent))
+            return;
+
         if ((ent.Comp.Slots & args.SlotFlags) != 0)
             GrantVision(ent, args.EquipTarget);
     }
 
     private void OnUnequipped(Entity<NightVisionComponent> ent, ref GotUnequippedEvent args)
     {
+        if (HasComp<MobStateComponent>(ent))
+            return;
+
         if ((ent.Comp.Slots & args.SlotFlags) != 0)
             RevokeVision(ent);
     }
