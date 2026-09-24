@@ -94,3 +94,17 @@
       useDelay: 1 # emote spam
     - type: InstantAction
       event: !type:ToggleActionEvent
+
+- type: entity
+  parent: BaseAction
+  id: ActionMouseLayPups
+  name: Lay tiny pups
+  description: Uses hunger to lay tiny, strange pups.
+  components:
+  - type: Action
+    icon:
+      sprite: SS220/Objects/Consumable/Food/mousepups.rsi
+      state: icon 
+    useDelay: 60
+  - type: InstantAction
+    event: !type:EggLayInstantActionEvent

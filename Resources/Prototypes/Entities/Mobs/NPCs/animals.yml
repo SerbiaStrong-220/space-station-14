@@ -2051,6 +2051,24 @@
       behaviors:
       - !type:GibBehavior
         recursive: false
+  #SS220 mousereproduction begin
+  - type: EggLayer
+    hungerUsage: 10
+    eggLayAction: ActionMouseLayPups
+    eggSpawn:
+    - id: MobMouse2
+      amount: 1
+      maxAmount: 1
+      prob: 0,5
+    - id: MobMouse1
+      amount: 1
+      maxAmount: 1
+      prob: 0,5
+    - id: MobMouse
+      amount: 1
+      maxAmount: 1
+      prob: 0,5
+  #SS220 mousereproduction end
 
 - type: entity
   parent: MobMouse
@@ -2112,6 +2130,16 @@
   - type: Item
     size: Tiny
     heldPrefix: 1
+#SS220 mousereproduction begin
+  - type: EggLayer
+    hungerUsage: 10
+    eggLayAction: ActionMouseLayPups
+    eggSpawn:
+    - id: MobMouse1
+      amount: 1
+      maxAmount: 2
+      prob: 0,5
+#SS220 mousereproduction end
 
 - type: entity
   parent: MobMouse
@@ -2141,6 +2169,16 @@
   - type: Item
     size: Tiny
     heldPrefix: 2
+  #SS220 mousereproduction begin
+  - type: EggLayer
+    hungerUsage: 10
+    eggLayAction: ActionMouseLayPups
+    eggSpawn:
+    - id: MobMouse2
+      amount: 1
+      maxAmount: 2
+      prob: 0,5
+  #SS220 mousereproduction end
 
 - type: entity
   name: cancer mouse
@@ -2191,6 +2229,16 @@
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: Zombie
+  #SS220 mousereproduction begin
+  - type: EggLayer
+    hungerUsage: 10
+    eggLayAction: ActionMouseLayPups
+    eggSpawn:
+    - id: MobMouseCancer
+      amount: 1
+      maxAmount: 6
+      prob: 0,5
+  #SS220 mousereproduction end
 
 - type: entity
   name: lizard #Weh
