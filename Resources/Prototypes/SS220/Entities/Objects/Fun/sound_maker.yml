@@ -25,7 +25,6 @@
         referenceDistance: 1
         loop: false
         playOffsetSeconds: 0
-        pitchVariation: 0
   - type: Prayable
   - type: StaticPrice
     price: 100
