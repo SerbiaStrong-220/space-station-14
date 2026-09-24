@@ -6,12 +6,14 @@ using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Mobs;
-using Content.Shared.SS220.IgnoreLightVision;
+using Content.Shared.SS220.IgnoreLightVision.Components;
 using Content.Shared.SS220.MindSlave;
+using Content.Shared.SS220.Surgery.Components;
 using Content.Shared.Tag;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.Implants;
@@ -22,11 +24,9 @@ public abstract partial class SharedSubdermalImplantSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!; //SS220-insert-currency-doafter
-    [Dependency] private readonly SharedEnsnareableSystem _ensnareable = default!; //ss220 add freedom from bola
     [Dependency] private readonly TagSystem _tag = default!; // SS220-some-tag...
 
-    private readonly ProtoId<TagPrototype> ThermalImplantTag = "ThermalImplant";
+    private static readonly ProtoId<TagPrototype> ThermalImplantTag = "ThermalImplant";
 
     public override void Initialize()
     {
@@ -36,10 +36,6 @@ public abstract partial class SharedSubdermalImplantSystem : EntitySystem
         SubscribeLocalEvent<SubdermalImplantComponent, EntGotInsertedIntoContainerMessage>(OnInsert);
         SubscribeLocalEvent<SubdermalImplantComponent, ContainerGettingRemovedAttemptEvent>(OnRemoveAttempt);
         SubscribeLocalEvent<SubdermalImplantComponent, EntGotRemovedFromContainerMessage>(OnRemove);
-
-        SubscribeLocalEvent<SubdermalImplantComponent, UseChemicalImplantEvent>(OnChemicalImplant); // SS220 - chemical-implants start
-        SubscribeLocalEvent<SubdermalImplantComponent, UseAdrenalImplantEvent>(OnAdrenalImplant); //ss220 add adrenal implant
-        SubscribeLocalEvent<SubdermalImplantComponent, UseDnaCopyImplantEvent>(OnDnaCopyImplant); //ss220 dna copy implant add
     }
 
     private void OnInsert(Entity<SubdermalImplantComponent> ent, ref EntGotInsertedIntoContainerMessage args)
@@ -50,6 +46,20 @@ public abstract partial class SharedSubdermalImplantSystem : EntitySystem
 
         if (args.Container.ID != ImplanterComponent.ImplantSlotId)
             return;
+
+        // SS220-add-hidden-implants-begin
+        if (_net.IsServer)
+        {
+            var parent = args.Container.Owner;
+            var installEvent = new GetSubdermalInstallLevel();
+            RaiseLocalEvent(parent, ref installEvent);
+
+            var hiddenInstallComp = EnsureComp<HiddenInstalledImplantComponent>(ent);
+            hiddenInstallComp.InstallLevel = installEvent.InstallLevel;
+            hiddenInstallComp.Hidden = installEvent.Hidden;
+            Dirty(ent, hiddenInstallComp);
+        }
+        // SS220-add-hidden-implants-end
 
         ent.Comp.ImplantedEntity = args.Container.Owner;
         Dirty(ent);
@@ -79,6 +89,8 @@ public abstract partial class SharedSubdermalImplantSystem : EntitySystem
 
         if (ent.Comp.ImplantedEntity == null || Terminating(ent.Comp.ImplantedEntity.Value))
             return;
+
+        RemCompDeferred<HiddenInstalledImplantComponent>(ent); // SS220-add-hidden-implants-begin
 
         //SS220-mindslave start
         if (HasComp<MindSlaveImplantComponent>(ent))
@@ -204,7 +216,14 @@ public abstract partial class SharedSubdermalImplantSystem : EntitySystem
 [ByRefEvent]
 public readonly record struct ImplantImplantedEvent
 {
+    /// <summary>
+    /// The implant itself
+    /// </summary>
     public readonly EntityUid Implant;
+
+    /// <summary>
+    /// The entity getting implanted
+    /// </summary>
     public readonly EntityUid Implanted;
 
     public ImplantImplantedEvent(EntityUid implant, EntityUid implanted)

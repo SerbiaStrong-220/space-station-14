@@ -2,7 +2,7 @@
   # Человек
 
   <Box>
-    <GuideEntityEmbed Entity="MobHumanDummy" Caption=""/>
+    <GuideEntityEmbed Entity="AppearanceHuman" Caption=""/>
   </Box>
 
   [italic]«Одни считают их ничем не примечательными, другие — универсальным эталоном, по которому меряют всё остальное.»[/italic]

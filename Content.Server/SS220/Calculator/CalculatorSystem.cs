@@ -6,10 +6,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.Calculator;
 
-public sealed class CalculatorSystem : SharedCalculatorSystem
+public sealed partial class CalculatorSystem : SharedCalculatorSystem
 {
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
 
     public override void Initialize()
     {

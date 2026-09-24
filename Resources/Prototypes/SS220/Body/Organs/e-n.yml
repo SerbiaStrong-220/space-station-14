@@ -13,3 +13,10 @@
   - type: Tag
     tags:
     - E-N
+  - type: GenericVisualizer
+    visuals:
+      enum.BatteryVisuals.State:
+        enum.PowerCellVisualLayers.Unshaded:
+          Full: { visible: true }
+          Neither: { visible: true }
+          Empty: { visible: true }

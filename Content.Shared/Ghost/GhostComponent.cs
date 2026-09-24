@@ -1,6 +1,7 @@
 using Content.Shared.Actions;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Ghost;
 
@@ -9,7 +10,7 @@ namespace Content.Shared.Ghost;
 /// Handles limiting interactions, using ghost abilities, ghost visibility, and ghost warping.
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedGhostSystem))]
-[AutoGenerateComponentState(true), AutoGenerateComponentPause]
+[AutoGenerateComponentState(true)]
 public sealed partial class GhostComponent : Component
 {
     // Actions
@@ -37,14 +38,6 @@ public sealed partial class GhostComponent : Component
     [DataField]
     public EntityUid? ToggleGhostHearingActionEntity;
 
-    // SS220 ADD GHOST HUD'S START
-    [DataField]
-    public EntProtoId ToggleHudOnOtherAction = "ActionToggleHudOnOther";
-
-    [DataField]
-    public EntityUid? ToggleHudOnOtherActionEntity;
-    // SS220 ADD GHOST HUD'S END
-
     //ss220 add filter tts for ghost start
     [DataField]
     public EntProtoId ToggleRadioChannelsUI = "ActionToggleRadioChannelsUI";
@@ -58,14 +51,6 @@ public sealed partial class GhostComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntityUid? BooActionEntity;
-
-    //SS-220 noDeath
-    [DataField]
-    public EntProtoId RespawnAction = "ActionRespawn";
-
-    [DataField, AutoNetworkedField]
-    public EntityUid? RespawnActionEntity;
-    //SS-220 end noDeath
 
     //SS220-ghost-hats begin
     [DataField]
@@ -84,7 +69,7 @@ public sealed partial class GhostComponent : Component
     /// May not reflect actual time of death if this entity has been paused,
     /// but will give an accurate length of time <i>since</i> death.
     /// </remarks>
-    [DataField, AutoPausedField]
+    [DataField, AutoNetworkedField]
     public TimeSpan TimeOfDeath = TimeSpan.Zero;
 
     /// <summary>
@@ -134,6 +119,16 @@ public sealed partial class GhostComponent : Component
     public Color Color = Color.White;
 }
 
+/// <summary>
+/// Ghost sprites dependent on damage by the player body
+/// </summary>
+/// <remarks>Used to change a ghost sprite to better visually represent their cause of death</remarks>
+[Serializable, NetSerializable]
+public enum GhostVisuals : byte
+{
+    Damage
+}
+
 public sealed partial class ToggleFoVActionEvent : InstantActionEvent { }
 
 public sealed partial class ToggleGhostsActionEvent : InstantActionEvent { }
@@ -149,5 +144,3 @@ public sealed partial class BooActionEvent : InstantActionEvent { }
 public sealed partial class RespawnActionEvent : InstantActionEvent { } //SS-220 noDeath
 
 public sealed partial class ToggleAGhostBodyVisualsActionEvent : InstantActionEvent { } //SS220-ghost-hats
-
-public sealed partial class ToggleHudOnOtherActionEvent : InstantActionEvent { } //SS220 ADD GHOST HUD'S

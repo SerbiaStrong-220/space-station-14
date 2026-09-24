@@ -22,7 +22,6 @@ namespace Content.Client.Ghost
         [Dependency] private readonly SharedActionsSystem _actions = default!;
         [Dependency] private readonly PointLightSystem _pointLightSystem = default!;
         [Dependency] private readonly ContentEyeSystem _contentEye = default!;
-        [Dependency] private readonly IEntityManager _entityManager = default!;
         [Dependency] private readonly SpriteSystem _sprite = default!;
 
         public int AvailableGhostRoleCount { get; private set; }
@@ -199,8 +198,6 @@ namespace Content.Client.Ghost
             _actions.RemoveAction(uid, component.ToggleFoVActionEntity);
             _actions.RemoveAction(uid, component.ToggleGhostsActionEntity);
             _actions.RemoveAction(uid, component.ToggleGhostHearingActionEntity);
-            // SS220 ADD GHOST HUD'S
-            _actions.RemoveAction(uid, component.ToggleHudOnOtherActionEntity);
             //ss220 add filter tts for ghost
             _actions.RemoveAction(uid, component.ToggleRadioChannelsUIEntity);
             //SS220-ghost-hats

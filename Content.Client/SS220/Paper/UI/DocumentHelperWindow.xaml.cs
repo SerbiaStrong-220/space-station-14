@@ -17,10 +17,10 @@ namespace Content.Client.SS220.Paper.UI;
 [GenerateTypedNameReferences]
 public sealed partial class DocumentHelperWindow : Control
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
-    [Dependency] private readonly IStylesheetManager _stylesheetManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
+    [Dependency] private IStylesheetManager _stylesheetManager = default!;
 
     private const string DocumentHelperOptionLocPrefix = "document-helper-option-";
 

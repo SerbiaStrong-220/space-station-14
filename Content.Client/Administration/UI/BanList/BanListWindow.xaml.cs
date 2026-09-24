@@ -15,6 +15,7 @@ public sealed partial class BanListWindow : DefaultWindow
         TabContainer.SetTabTitle(0, Loc.GetString("ban-list-bans"));
         TabContainer.SetTabTitle(1, Loc.GetString("ban-list-role-bans"));
         TabContainer.SetTabTitle(2, Loc.GetString("ban-list-species-bans")); // SS220 Species bans
+        TabContainer.SetTabTitle(3, Loc.GetString("ban-list-chat-bans")); // SS220 chat bans
     }
 
     public void SetTitlePlayer(string playerName)

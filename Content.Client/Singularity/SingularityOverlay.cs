@@ -1,9 +1,11 @@
+using System.Numerics;
+using Content.Shared.CCVar;
 using Content.Shared.Singularity.Components;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface.CustomControls;
+using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
-using System.Numerics;
 
 namespace Content.Client.Singularity
 {
@@ -13,6 +15,7 @@ namespace Content.Client.Singularity
 
         [Dependency] private readonly IEntityManager _entMan = default!;
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+        [Dependency] private readonly IConfigurationManager _configManager = default!;
         private SharedTransformSystem? _xformSystem = null;
 
         /// <summary>
@@ -20,6 +23,7 @@ namespace Content.Client.Singularity
         ///     If this value is changed, the shader itself also needs to be updated.
         /// </summary>
         public const int MaxCount = 5;
+        private readonly Vector2 _safeDeltaValue = new(.1f, .1f); // SS220 fixsingularitydrop
 
         private const float MaxDistance = 20f;
 
@@ -28,6 +32,8 @@ namespace Content.Client.Singularity
 
         private readonly ShaderInstance _shader;
 
+        private bool _reducedMotion;
+
         public SingularityOverlay()
         {
             IoCManager.InjectDependencies(this);
@@ -35,6 +41,8 @@ namespace Content.Client.Singularity
             _shader.SetParameter("maxDistance", MaxDistance * EyeManager.PixelsPerMeter);
             _entMan.EventBus.SubscribeEvent<PixelToMapEvent>(EventSource.Local, this, OnProjectFromScreenToMap);
             ZIndex = 101; // Should be drawn after the placement overlay so admins placing items near the singularity can tell where they're going.
+
+            _configManager.OnValueChanged(CCVars.ReducedMotion, (b) => { _reducedMotion = b; }, invokeImmediately: true);
         }
 
         private readonly Vector2[] _positions = new Vector2[MaxCount];
@@ -44,6 +52,8 @@ namespace Content.Client.Singularity
 
         protected override bool BeforeDraw(in OverlayDrawArgs args)
         {
+            if (_reducedMotion)
+                return false;
             if (args.Viewport.Eye == null)
                 return false;
             if (_xformSystem is null && !_entMan.TrySystem(out _xformSystem))
@@ -102,6 +112,8 @@ namespace Content.Client.Singularity
         /// </summary>
         private void OnProjectFromScreenToMap(ref PixelToMapEvent args)
         {   // Mostly copypasta from the singularity shader.
+            if (_reducedMotion)
+                return;
             if (args.Viewport.Eye == null)
                 return;
             var maxDistance = MaxDistance * EyeManager.PixelsPerMeter;
@@ -119,7 +131,7 @@ namespace Content.Client.Singularity
 
                 var localPosition = _positions[i];
                 localPosition.Y = args.Viewport.Size.Y - localPosition.Y;
-                var delta = args.VisiblePosition - localPosition;
+                var delta = Vector2.Max(args.VisiblePosition - localPosition, _safeDeltaValue); // SS220 fixsingularitydrop
                 var distance = (delta / (args.Viewport.RenderScale * args.Viewport.Eye.Scale)).Length();
 
                 var deformation = _intensities[i] / MathF.Pow(distance, _falloffPowers[i]);

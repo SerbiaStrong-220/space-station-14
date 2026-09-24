@@ -23,7 +23,7 @@ public sealed class SpeciesWearRestrictionSystem : EntitySystem
         if ((args.SlotFlags & ClothingSlots) == 0)
             return;
 
-        if (!TryComp<HumanoidAppearanceComponent>(args.EquipTarget, out var huAp))
+        if (!TryComp<HumanoidProfileComponent>(args.EquipTarget, out var huAp))
         {
             TrySetReason(ent, ref args);
             return;

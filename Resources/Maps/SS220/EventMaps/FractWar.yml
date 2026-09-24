@@ -95613,7 +95613,6 @@ entities:
   - uid: 14813
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -39.5,1.5
       parent: 2
   - uid: 14814

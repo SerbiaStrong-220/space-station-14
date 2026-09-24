@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "taken at https://github.com/cmss13-devs/cmss13/blob/HEAD/icons/obj/structures/props/industrial/drill.dmi",
+  "size": {
+    "x": 32,
+    "y": 96
+  },
+  "states": [
+    {
+      "name": "base"
+    },
+    {
+      "name": "turned_on",
+      "delays":
+      [
+        [
+          5,
+          0.2,
+          0.15,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          7,
+          0.2,
+          0.15,
+          1,
+          1,
+          1,
+          1
+        ]
+      ]
+    }
+  ]
+}

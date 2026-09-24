@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace Content.Client.SS220.Shuttles.UI;
 
-public sealed class ShuttleNavInfoSystem : SharedShuttleNavInfoSystem
+public sealed partial class ShuttleNavInfoSystem : SharedShuttleNavInfoSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private readonly Dictionary<Type, List<IDrawInfo>> _toDraw = [];
 

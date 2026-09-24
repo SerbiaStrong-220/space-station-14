@@ -1,0 +1,112 @@
+- type: entity
+  parent: MarkerBase
+  name: Roxie spawner
+  id: SpawnMobSecDogRoxi
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobSecDogRoxi
+
+- type: entity
+  parent: MarkerBase
+  name: the spawner Steven
+  id: SpawnMobStevenCrocodile
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: croc
+      sprite: SS220/Mobs/Pets/albino_crocodile.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobStevenCrocodileGhostRole
+
+- type: entity
+  parent: MarkerBase
+  name: the spawner Albino
+  id: SpawnMobAlbinoCrocodile
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: croc
+      sprite: SS220/Mobs/Pets/albino_crocodile.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobAlbinoCrocodile
+
+- type: entity
+  parent: MarkerBase
+  name: the spawner Crocodile
+  id: SpawnMobCrocodile
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: croc
+      sprite: SS220/Mobs/Animals/crocodile.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobCrocodile
+
+- type: entity
+  parent: MarkerBase
+  name: the spawner Crocodile
+  id: SpawnMobCrocodileAngry
+  suffix: Hostile
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: croc
+      sprite: SS220/Mobs/Animals/crocodile.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobCrocodileAngry
+
+- type: entity
+  parent: MarkerBase
+  name: the spawner Crocodile Space
+  id: SpawnMobCrocodileSpace
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: croc
+      sprite: SS220/Mobs/Animals/cosmocrocodile.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobCrocodileSpace
+
+- type: entity
+  parent: MarkerBase
+  name: the spawner Crocodile Space
+  id: SpawnMobCrocodileSpaceSalvage
+  suffix: Salvage
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: croc
+      sprite: SS220/Mobs/Animals/cosmocrocodile.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobCrocodileSpaceSalvage
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobPossumPoppy
+  name: the spawner Possum Poppy
+  suffix: AI
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobPossumPoppy

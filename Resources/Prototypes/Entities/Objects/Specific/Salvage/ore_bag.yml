@@ -39,3 +39,8 @@
     - type: Storage
       grid:
       - 0,0,9,5
+    #SS220-OreBagBorgMagnet begin
+    - type: MagnetPickup
+      worksOutsideSlot: true
+    #SS220-OreBagBorgMagnet end
+

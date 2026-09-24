@@ -1,0 +1,40 @@
+<local:GhostBodyMenuWindow xmlns="https://spacestation14.io"
+                           xmlns:local="clr-namespace:Content.Client.SS220.MindExtension.UI"
+                           xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                           Title="{Loc 'mind-ext-body-menu'}"
+                           SetSize="600 450"
+                           MinSize="500 450">
+    <BoxContainer Orientation="Vertical"
+                  VerticalExpand="True"
+                  HorizontalExpand="True">
+        <PanelContainer HorizontalExpand="True"
+                        VerticalExpand="True">
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat BackgroundColor="#1B1B1E"/>
+            </PanelContainer.PanelOverride>
+            <ScrollContainer Name="GhostScroll"
+                             VerticalExpand="True"
+                             HorizontalExpand="True"
+                             HScrollEnabled="False">
+                <BoxContainer Name="BodyList"
+                              Orientation="Vertical"
+                              HorizontalExpand="True"
+                              VerticalExpand="True">
+
+                </BoxContainer>
+            </ScrollContainer>
+        </PanelContainer>
+
+        <!--Footer-->
+        <BoxContainer Orientation="Vertical">
+            <PanelContainer StyleClasses="LowDivider"/>
+            <BoxContainer Orientation="Vertical"
+                          Margin="10 2 5 0"
+                          VerticalAlignment="Bottom">
+                <Label Text="{Loc 'mind-ext-body-menu-note-trail'}" StyleClasses="WindowFooterText"/>
+                <Label Text="{Loc 'mind-ext-body-menu-note-respawn'}" StyleClasses="WindowFooterText"/>
+            </BoxContainer>
+        </BoxContainer>
+    </BoxContainer>
+    
+</local:GhostBodyMenuWindow>

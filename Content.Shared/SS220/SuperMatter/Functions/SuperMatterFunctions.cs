@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.Linq;
 using Content.Shared.Atmos;
 
 namespace Content.Shared.SS220.SuperMatter.Functions;
@@ -111,11 +112,22 @@ public static class SuperMatterFunctions
 
     private const float SafeInternalEnergyToMatterCoeff = 800f;
     private const float SafeInternalEnergyToMatterSlowerOffset = 50f;
+    private static readonly float[] SafeModes = [1f, 4f, 8f];
 
-    public static float SafeInternalEnergyToMatterFunction(float normalizedMatter)
+    public record struct ModeSafeEnergy(int Mode, float ModeNumber, float Energy);
+
+    public static ModeSafeEnergy[] SafeInternalEnergyToMatterFunction(float normalizedMatter)
     {
-        return SafeInternalEnergyToMatterCoeff * MathF.Pow(normalizedMatter, 1.5f)
-                            / (normalizedMatter + SafeInternalEnergyToMatterSlowerOffset);
+        var result = new ModeSafeEnergy[SafeModes.Length];
+        for (var i = 0; i < SafeModes.Length; i++)
+        {
+            var safeEnergy = SafeInternalEnergyToMatterCoeff * SafeModes[i] * MathF.Pow(normalizedMatter, 1.5f)
+                            / (normalizedMatter + SafeInternalEnergyToMatterSlowerOffset / MathF.Sqrt(SafeModes[i]));
+
+            result[i] = new ModeSafeEnergy(i + 1, SafeModes[i], safeEnergy);
+        }
+
+        return result;
     }
 
     private const float MinimalWideCoeff = 0.2f;
@@ -126,6 +138,31 @@ public static class SuperMatterFunctions
         if (normalizedMatter > MaxMassToAchieveMaxWide)
             return 1f;
         return MinimalWideCoeff + (1f - MinimalWideCoeff) * normalizedMatter / MaxMassToAchieveMaxWide;
+    }
+
+    // UI methods
+
+    public static float GetIntegrityDamageMap(float matter, float internalEnergy)
+    {
+        var nonDimensionMatter = matter / MatterNondimensionalization;
+
+        var safeInternalEnergyForModes = SafeInternalEnergyToMatterFunction(nonDimensionMatter);
+
+        var delta = 0f;
+        var minDistanceSq = float.MaxValue;
+        foreach (var item in safeInternalEnergyForModes)
+        {
+            var currentDelta = item.Energy - internalEnergy;
+            var deltaSquared = currentDelta * currentDelta;
+            if (deltaSquared < minDistanceSq)
+            {
+                minDistanceSq = deltaSquared;
+                delta = currentDelta;
+            }
+        }
+
+        var damageFromDelta = EnergyToMatterDamageFactorFunction(delta, nonDimensionMatter);
+        return damageFromDelta;
     }
 }
 

@@ -5,10 +5,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.WristWatch;
 
-public abstract class SharedWristWatchSystem<TComp> : EntitySystem where TComp : SharedWristWatchComponent
+public abstract partial class SharedWristWatchSystem<TComp> : EntitySystem where TComp : SharedWristWatchComponent
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly SharedGameTicker _gameTicker = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private SharedGameTicker _gameTicker = default!;
 
     public override void Initialize()
     {

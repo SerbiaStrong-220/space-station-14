@@ -6,9 +6,9 @@ using Content.Shared.SS220.CultYogg.SedativeSting;
 
 namespace Content.Client.SS220.CultYogg.SedativeSting.Systems;
 
-public sealed class ClientSedativeStingSystem : EntitySystem
+public sealed partial class ClientSedativeStingSystem : EntitySystem
 {
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainers = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainers = default!;
 
     public override void Initialize()
     {

@@ -12,6 +12,7 @@
       species:
       - Felinid
   startingGear: SecurityPilotGear
+  experienceDefinition: SecurityPilotRoleExperience
   icon: "JobIconSecurityPilot"
   supervisors: job-supervisors-hos
   canBeAntag: false
@@ -30,14 +31,13 @@
   equipment:
     ears: ClothingHeadsetSecurity
     id: SecurityPilotPDA #SS220 SD-pda-some-fixes
-    belt: ClothingBeltSecurityFilled
     gloves: ClothingHandsGlovesCombat
-    pocket1: WeaponPistolMk58Nonlethal
+    pocket1: WeaponPistolMk58
   storage:
     back:
     - Flash
-    - MagazinePistolRubber
-    - MagazinePistolRubber
+    - MagazinePistol
+    - MagazinePistol
     - FlashlightSeclite
     - DrinkRelaxingPeachCan
 

@@ -5,9 +5,9 @@ using Robust.Shared.Network;
 
 namespace Content.Client.SS220.TTS;
 
-public sealed class TTSManager
+public sealed partial class TTSManager
 {
-    [Dependency] private readonly IClientNetManager _netManager = default!;
+    [Dependency] private IClientNetManager _netManager = default!;
 
     public event Action<MsgPlayTts>? PlayTtsReceived;
     public event Action<MsgPlayAnnounceTts>? PlayAnnounceTtsReceived;

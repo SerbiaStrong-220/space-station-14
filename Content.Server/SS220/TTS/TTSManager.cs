@@ -24,6 +24,9 @@ namespace Content.Server.SS220.TTS;
 // ReSharper disable once InconsistentNaming
 public sealed partial class TTSManager
 {
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IServerNetManager _netManager = default!;
+
     private static readonly Histogram RequestTimings = Metrics.CreateHistogram(
         "tts_req_timings",
         "Timings of TTS API requests",
@@ -50,9 +53,6 @@ public sealed partial class TTSManager
         "Amount of reused TTS audio from cache.");
 
     private const string AudioFileExtension = "ogg";
-
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IServerNetManager _netManager = default!;
 
     private readonly HttpClient _httpClient = new();
 

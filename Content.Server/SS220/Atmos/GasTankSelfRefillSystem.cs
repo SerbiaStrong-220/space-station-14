@@ -6,9 +6,9 @@ using Content.Server.Atmos.EntitySystems;
 
 namespace Content.Server.SS220.Atmos;
 
-public sealed class GasTankSelfRefillSystem : EntitySystem
+public sealed partial class GasTankSelfRefillSystem : EntitySystem
 {
-    [Dependency] private readonly AtmosphereSystem _atmosSys = default!;
+    [Dependency] private AtmosphereSystem _atmosSys = default!;
 
     //todo make refiilment from the atmosphere
     public override void Update(float frameTime)

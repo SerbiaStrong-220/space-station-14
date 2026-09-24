@@ -1,4 +1,4 @@
-ent-FoodMeatBase = { ent-FoodInjectableBase }
+﻿ent-FoodMeatBase = { ent-FoodInjectableBase }
     .desc = { ent-FoodInjectableBase.desc }
 ent-FoodMeatRawBase = { ent-FoodMeatBase }
     .desc = { ent-FoodMeatBase.desc }
@@ -52,7 +52,7 @@ ent-FoodMeatSalami = салями
     .desc = Большая трубка салями. Лучше не спрашивать, что в неё входит.
 ent-FoodMeatClown = мясо клоуна
     .desc = Вкусный, круглый кусок мяса клоуна. Какой ужас.
-ent-FoodMeatMeatball = фрикаделька
+ent-FoodMeatMeatball = сырая фрикаделька
     .desc = Шарик сырого мяса. Ноу хомо.
 ent-FoodMeatPatty = мясная котлета
     .desc = Плоский кусок измельчённого мяса. Готовый к прожарке на гриле.

@@ -10,11 +10,13 @@
     maxItemSize: Huge
     grid:
     - 0,0,6,3
-  - type: StorageFill
-    contents:
-      - id: WeaponSniperHristovToy
-      - id: MagazineBoxAntiMaterielToyStun
-        amount: 2
-      - id: MagazineBoxAntiMaterielToyHappiness
-      - id: ClothingUniformJumpsuitTacticool
-      - id: ClothingHeadHatSyndie
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WeaponSniperHristovToy
+        - id: MagazineBoxAntiMaterielToyStun
+          amount: 2
+        - id: MagazineBoxAntiMaterielToyHappiness
+        - id: ClothingUniformJumpsuitTacticool
+        - id: ClothingHeadHatSyndie

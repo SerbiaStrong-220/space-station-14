@@ -717,7 +717,7 @@
     Kalimotxo: 2
 
 - type: reaction
-  id: KiraSpecial
+  id: KiraSpecial #ss220 kira special return
   requiredMixerCategories:
   - Stir
   reactants:
@@ -728,7 +728,7 @@
     SodaWater:
       amount: 1
   products:
-    KiraSpecial: 3
+    KiraSpecial: 3 #ss220 kira special return
 
 - type: reaction
   id: Lemonade
@@ -984,6 +984,8 @@
 
 - type: reaction
   id: RedMead
+  requiredMixerCategories:
+  - Stir
   reactants:
     Mead:
       amount: 1

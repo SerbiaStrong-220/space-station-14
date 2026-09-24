@@ -73,6 +73,25 @@
     defaultChannel: ChannelXonk
 
 - type: entity
+  parent: EncryptionKeyMafia
+  id: EncryptionKeyInterdyne
+  suffix: RedWings
+  name: encryption key Interdyne Pharmaceutics
+  description: Its smell reminds you of a pharmacy
+  components:
+  - type: EncryptionKey
+    channels:
+    - Interdyne
+    defaultChannel: Interdyne
+  - type: Item
+    sprite: SS220/Objects/Devices/encryption_keys.rsi
+  - type: Sprite
+    sprite: SS220/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: crypt_pharm
+    - state: interdyne_label
+
+- type: entity
   parent: ClothingHeadset
   id: ClothingHeadsetMafia
   suffix: AdminV

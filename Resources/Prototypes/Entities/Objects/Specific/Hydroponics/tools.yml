@@ -19,6 +19,9 @@
         Slash: 6
   - type: Item
     sprite: Objects/Tools/Hydroponics/hoe.rsi
+    storedSprite:
+      state: storage
+      sprite: Objects/Tools/Hydroponics/hoe.rsi
   - type: PhysicalComposition
     materialComposition:
       Steel: 100
@@ -104,6 +107,9 @@
         Piercing: 2
   - type: Item
     sprite: Objects/Tools/Hydroponics/hatchet.rsi
+    storedSprite:
+      state: storage
+      sprite: Objects/Tools/Hydroponics/hatchet.rsi
 # SS220 Throwable Changes begin
   - type: LandAtCursor
   - type: ThrowingAngle
@@ -143,6 +149,9 @@
       collection: MetalThud
   - type: Item
     sprite: Objects/Tools/Hydroponics/spade.rsi
+    storedSprite:
+      state: storage
+      sprite: Objects/Tools/Hydroponics/spade.rsi
   - type: Shovel
     speedModifier: 0.75 # slower at digging than a full-sized shovel
 # SS220 Throwable Changes begin

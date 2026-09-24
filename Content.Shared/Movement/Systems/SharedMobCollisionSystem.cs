@@ -20,8 +20,8 @@ public abstract class SharedMobCollisionSystem : EntitySystem
     [Dependency] protected readonly SharedPhysicsSystem Physics = default!;
     [Dependency] private   readonly SharedTransformSystem _xformSystem = default!;
 
-    protected EntityQuery<MobCollisionComponent> MobQuery;
-    protected EntityQuery<PhysicsComponent> PhysicsQuery;
+    [Dependency] protected readonly EntityQuery<MobCollisionComponent> MobQuery = default!;
+    [Dependency] protected readonly EntityQuery<PhysicsComponent> PhysicsQuery = default!;
 
     /// <summary>
     /// <see cref="CCVars.MovementPushingCap"/>
@@ -64,8 +64,6 @@ public abstract class SharedMobCollisionSystem : EntitySystem
             }, true);
         Subs.CVar(CfgManager, CCVars.MovementPushMassCap, val => _massDiffCap = val, true);
 
-        MobQuery = GetEntityQuery<MobCollisionComponent>();
-        PhysicsQuery = GetEntityQuery<PhysicsComponent>();
         SubscribeAllEvent<MobCollisionMessage>(OnCollision);
         SubscribeLocalEvent<MobCollisionComponent, RefreshMovementSpeedModifiersEvent>(OnMoveModifier);
 
@@ -249,7 +247,7 @@ public abstract class SharedMobCollisionSystem : EntitySystem
                 continue;
             }
 
-            var targetEv = new AttemptMobTargetCollideEvent();
+            var targetEv = new AttemptMobTargetCollideEvent { User = entity.Owner }; // SS220-ExtendCollideLogic
             RaiseLocalEvent(other, ref targetEv);
 
             if (targetEv.Cancelled)
@@ -335,5 +333,6 @@ public record struct AttemptMobCollideEvent
 [ByRefEvent]
 public record struct AttemptMobTargetCollideEvent
 {
+    public EntityUid User; // SS220-ExtendCollideLogic
     public bool Cancelled;
 }

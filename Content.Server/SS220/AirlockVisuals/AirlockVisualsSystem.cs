@@ -3,9 +3,9 @@ using Robust.Server.GameObjects;
 
 namespace Content.Server.SS220.AirlockVisuals;
 
-public sealed class AirlockVisualsSystem : EntitySystem
+public sealed partial class AirlockVisualsSystem : EntitySystem
 {
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {

@@ -1,5 +1,6 @@
 using Content.Shared.CharacterInfo;
 using Content.Shared.Objectives;
+using Content.Shared.SS220.Objectives;
 using Robust.Client.UserInterface;
 
 namespace Content.Client.CharacterInfo;
@@ -13,6 +14,10 @@ public sealed class AntagonistInfoSystem : EntitySystem
         base.Initialize();
 
         SubscribeNetworkEvent<AntagonistInfoEvent>(OnAntagonistInfoEvent);
+
+        // ss220 add custom goals x2 start
+        SubscribeNetworkEvent<UpdateAntagonistInfoEvent>(OnUpdateAntagonistInfo);
+        // ss220 add custom goals x2 end
     }
 
     public void RequestAntagonistInfo(EntityUid? entity)
@@ -32,6 +37,14 @@ public sealed class AntagonistInfoSystem : EntitySystem
 
         OnAntagonistUpdate?.Invoke(data);
     }
+
+    // ss220 add custom goals x2 start
+    private void OnUpdateAntagonistInfo(UpdateAntagonistInfoEvent ev)
+    {
+        var target = GetEntity(ev.Target);
+        RequestAntagonistInfo(target);
+    }
+    // ss220 add custom goals x2 end
 
     public List<Control> GetAntagonistInfoControls(EntityUid uid)
     {

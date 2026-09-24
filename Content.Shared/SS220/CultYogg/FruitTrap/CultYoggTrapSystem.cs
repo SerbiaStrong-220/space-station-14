@@ -5,16 +5,18 @@ using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.Trap;
 using Content.Shared.Stealth;
 using Content.Shared.Stealth.Components;
+using Content.Shared.Trigger;
+using Content.Shared.Trigger.Systems;
 
 namespace Content.Shared.SS220.CultYogg.FruitTrap;
 
 /// <summary>
 /// Modified <see cref="TrapSystem"/> for cult traps. All modifications add additional conditions.
 /// </summary>
-public sealed class CultYoggTrapSystem : EntitySystem
+public sealed partial class CultYoggTrapSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedStealthSystem _stealth = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedStealthSystem _stealth = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -24,6 +26,7 @@ public sealed class CultYoggTrapSystem : EntitySystem
         SubscribeLocalEvent<ChangeCultYoggStageEvent>(OnStageChanged);
         SubscribeLocalEvent<CultYoggTrapComponent, TrapArmedEvent>(OnTrapArmed);
         SubscribeLocalEvent<CultYoggTrapComponent, TrapDefusedEvent>(OnTrapDefused);
+        SubscribeLocalEvent<CultYoggTrapComponent, AttemptTriggerEvent>(OnAttemptTrigger, before:[ typeof(TriggerSystem) ]);
     }
 
     private void OnMapInit(Entity<CultYoggTrapComponent> ent, ref MapInitEvent args)
@@ -38,14 +41,14 @@ public sealed class CultYoggTrapSystem : EntitySystem
 
         if (!TryComp<CultYoggComponent>(args.User, out var cultYoggComp))
         {
-            args.Cancel();
+            args.Cancelled = true;
             return;
         }
 
         if (cultYoggComp.CurrentStage == CultYoggStage.Alarm)
         {
             _popup.PopupClient(Loc.GetString("cult-yogg-trap-component-alarm-stage"), args.User.Value, args.User.Value);
-            args.Cancel();
+            args.Cancelled = true;
             return;
         }
 
@@ -60,7 +63,7 @@ public sealed class CultYoggTrapSystem : EntitySystem
         if (trapYoggList.Count >= ent.Comp.TrapsLimit && ent.Comp.TrapsLimit > 0)
         {
             _popup.PopupClient(Loc.GetString("cult-yogg-trap-component-max-value"), args.User.Value, args.User.Value);
-            args.Cancel();
+            args.Cancelled = true;
         }
     }
 
@@ -85,6 +88,11 @@ public sealed class CultYoggTrapSystem : EntitySystem
     private void OnTrapDefused(Entity<CultYoggTrapComponent> ent, ref TrapDefusedEvent args)
     {
         SetStealthTrap(ent, false);
+    }
+
+    private void OnAttemptTrigger(Entity<CultYoggTrapComponent> ent, ref AttemptTriggerEvent args)
+    {
+        args.Cancelled = TryComp<TrapComponent>(ent.Owner, out var trap) && trap.State == TrapArmedState.Unarmed;
     }
 
     public void SetStealthTrap(Entity<CultYoggTrapComponent> ent, bool isArmed)

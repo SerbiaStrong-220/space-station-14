@@ -12,9 +12,9 @@
     sprite: SS220/Structures/Storage/rack_shelf.rsi
     snapCardinals: true
     layers:
-      - state: icon
-      - state: box-0
-      - map: ["enum.StorageFillLayers.Fill"]
+    - state: icon
+    - state: box-0
+    - map: [ "enum.StorageFillLayers.Fill" ]
   - type: Appearance
   - type: StorageFillVisualizer
     maxFillLevels: 7
@@ -39,7 +39,7 @@
             min: 2
             max: 3
       - !type:DoActsBehavior
-        acts: ["Destruction"]
+        acts: [ "Destruction" ]
   - type: Physics
     bodyType: Static
   - type: Anchorable
@@ -65,8 +65,10 @@
   parent: RackShelf
   suffix: Заполненный, Случайный
   components:
-    - type: StorageFill
-      contents:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
         - id: Lantern
           prob: 0.33
         - id: FlashlightLantern
@@ -115,80 +117,66 @@
           prob: 0.2
         - id: ClothingWristWatch
           prob: 0.05
-        # hardhat loot
-        - id: null
-          prob: 0.3
-          orGroup: hardhat
-        - id: ClothingHeadHatHardhatWhite
-          prob: 0.1
-          orGroup: hardhat
-        - id: ClothingHeadHatHardhatYellow
-          prob: 0.1
-          orGroup: hardhat
-        - id: ClothingHeadHatHardhatRed
-          prob: 0.1
-          orGroup: hardhat
-        - id: ClothingHeadHatHardhatOrange
-          prob: 0.1
-          orGroup: hardhat
-        - id: ClothingHeadHatHardhatBlue
-          prob: 0.1
-          orGroup: hardhat
-        # battery loot
-        - id: PowerCellSmall
-          prob: 0.33
-          orGroup: battery
-        - id: PowerCellMedium
-          prob: 0.2
-          orGroup: battery
-        - id: PowerCellHigh
-          prob: 0.05
-          orGroup: battery
-        # plushie loot
-        - id: null
-          prob: 0.80
-          orGroup: shark
-        - id: PlushieSharkPink
-          prob: 0.05
-          orGroup: shark
-        - id: PlushieSharkGrey
-          prob: 0.05
-          orGroup: shark
-        - id: PlushieSharkBlue
-          prob: 0.05
-          orGroup: shark
-        # part loot
-        - id: null
-          prob: 0.60
-          orGroup: part
-        - id: MicroManipulatorStockPart
-          prob: 0.2
-          orGroup: part
-        - id: MicroManipulatorStockPart
-          prob: 0.2
-          orGroup: part
-        - id: MicroManipulatorStockPart
-          prob: 0.2
-          orGroup: part
-        # Syndicate loot
-        - id: null
-          prob: 0.95
-          orGroup: syndiemaintloot
-        - id: ClothingUniformJumpskirtOperative
-          prob: 0.005
-          orGroup: syndiemaintloot
-        - id: ClothingUniformJumpsuitOperative
-          prob: 0.005
-          orGroup: syndiemaintloot
-        - id: CyberPen
-          prob: 0.005
-          orGroup: syndiemaintloot
-        - id: CigPackSyndicate
-          prob: 0.005
-          orGroup: syndiemaintloot
-        - id: ClothingShoesBootsCombatFilled
-          prob: 0.005
-          orGroup: syndiemaintloot
-        - id: BalloonSyn
-          prob: 0.005
-          orGroup: syndiemaintloot
+        # hardhat loot (orGroup: hardhat)
+        - !type:GroupSelector
+          children:
+          - !type:NoneSelector
+            prob: 0.3
+          - id: ClothingHeadHatHardhatWhite
+            prob: 0.1
+          - id: ClothingHeadHatHardhatYellow
+            prob: 0.1
+          - id: ClothingHeadHatHardhatRed
+            prob: 0.1
+          - id: ClothingHeadHatHardhatOrange
+            prob: 0.1
+          - id: ClothingHeadHatHardhatBlue
+            prob: 0.1
+        # battery loot (orGroup: battery)
+        - !type:GroupSelector
+          children:
+          - id: PowerCellSmall
+            prob: 0.33
+          - id: PowerCellMedium
+            prob: 0.2
+          - id: PowerCellHigh
+            prob: 0.05
+        # plushie loot (orGroup: shark)
+        - !type:GroupSelector
+          children:
+          - !type:NoneSelector
+            prob: 0.80
+          - id: PlushieSharkPink
+            prob: 0.05
+          - id: PlushieSharkGrey
+            prob: 0.05
+          - id: PlushieSharkBlue
+            prob: 0.05
+        # part loot (orGroup: part)
+        - !type:GroupSelector
+          children:
+          - !type:NoneSelector
+            prob: 0.60
+          - id: MicroManipulatorStockPart
+            prob: 0.2
+          - id: MicroManipulatorStockPart
+            prob: 0.2
+          - id: MicroManipulatorStockPart
+            prob: 0.2
+        # Syndicate loot (orGroup: syndiemaintloot)
+        - !type:GroupSelector
+          children:
+          - !type:NoneSelector
+            prob: 0.95
+          - id: ClothingUniformJumpskirtOperative
+            prob: 0.005
+          - id: ClothingUniformJumpsuitOperative
+            prob: 0.005
+          - id: CyberPen
+            prob: 0.005
+          - id: CigPackSyndicate
+            prob: 0.005
+          - id: ClothingShoesBootsCombatFilled
+            prob: 0.005
+          - id: BalloonSyn
+            prob: 0.005

@@ -1,0 +1,50 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: construction
+  id: RackShelf
+  graph: Rackshelf
+  startNode: start
+  targetNode: Rackshelf
+  category: construction-category-storage
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+
+- type: construction
+  id: TrashBin
+  graph: TrashBin
+  startNode: start
+  targetNode: TrashBin
+  category: construction-category-storage
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+
+- type: construction
+  id: TrashCan
+  graph: TrashCan
+  startNode: start
+  targetNode: TrashCan
+  category: construction-category-storage
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+
+- type: construction
+  id: WeaponStand
+  graph: WeaponStand
+  startNode: start
+  targetNode: WeaponStandNode
+  category: construction-category-storage
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: true
+  canBuildInImpassable: true
+  conditions:
+  - !type:WallmountCondition

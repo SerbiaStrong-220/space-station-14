@@ -1,0 +1,15 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              Orientation="Vertical"
+              HorizontalAlignment="Stretch"
+              HorizontalExpand="True"
+              Margin="0 0 0 5">
+    <BoxContainer Orientation="Horizontal">
+        <RichTextLabel Name="SkillName"/>
+    </BoxContainer>
+    <BoxContainer Orientation="Horizontal" Margin="10 0 0 0">
+        <RichTextLabel Name="SkillLevelText"/>
+        <PanelContainer StyleClasses="HighDivider" Margin="10 3" />
+        <RichTextLabel Name="SkillSublevelText"/>
+    </BoxContainer>
+        <RichTextLabel Name="SkillDescription" Margin="20 0 0 0"/>
+</BoxContainer>

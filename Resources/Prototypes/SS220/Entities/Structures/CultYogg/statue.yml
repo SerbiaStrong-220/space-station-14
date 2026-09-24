@@ -1,0 +1,24 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: StatueSleepingGuard
+  parent: BaseStructure
+  suffix: CultYogg
+  name: Sleeping guardian
+  description: A statue of unknown material and unknown antiquity.
+  components:
+  - type: Clickable
+  - type: SpriteFade
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/CultYogg/sleeping_guard.rsi
+    drawdepth: Mobs
+    layers:
+    - state: base
+    - state: light
+      shader: unshaded
+    offset: "0.0,0.5"
+  - type: PointLight
+    radius: 2
+    color: "#FFFF1BFF"
+    energy: 5

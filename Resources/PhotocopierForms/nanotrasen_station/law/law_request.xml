@@ -3,9 +3,9 @@
   <FormId>law_request</FormId>
   <PrototypeId>PaperNtFormLaw</PrototypeId>
   <EntityName>форма НТ-КОМ-ЗАП</EntityName>
-  <PhotocopierTitle>Запрос на предоставления документов</PhotocopierTitle>
+  <PhotocopierTitle>Запрос о предоставлении документов</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-КОМ-ЗАП[/bold]
-[head=2]Запрос на предоставления документов[/head]
+[head=2]Запрос о предоставлении документов[/head]
 
 [italic]Дата: ДЕНЬ/МЕСЯЦ/ГОД[/italic]
 

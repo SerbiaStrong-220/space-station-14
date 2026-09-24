@@ -1,0 +1,9 @@
+- type: guideEntry
+  id: Surgery
+  name: guide-name-surgery
+  text: "/ServerInfo/SS220/Guidebook/Medical/surgery.xml"
+
+- type: guideEntry
+  id: Pathology
+  name: guide-name-pathology
+  text: "/ServerInfo/SS220/Guidebook/Medical/pathology.xml"

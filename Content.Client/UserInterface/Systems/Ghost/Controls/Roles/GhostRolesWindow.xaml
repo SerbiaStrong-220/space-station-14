@@ -6,7 +6,8 @@
            Text="{Loc 'ghost-roles-window-no-roles-available-label'}"
            VerticalAlignment="Top" />
     <ScrollContainer VerticalExpand="True"
-                     HScrollEnabled="False">
+                     HScrollEnabled="False"
+                     Name="EntryScrollContainer"> <!-- SS220 FIX GHOST ROLE MENU -->
         <BoxContainer Orientation="Vertical"
                       Name="EntryContainer"
                       VerticalExpand="True">

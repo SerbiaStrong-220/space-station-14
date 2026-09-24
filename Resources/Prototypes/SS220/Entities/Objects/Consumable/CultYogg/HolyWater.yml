@@ -1,5 +1,5 @@
 - type: entity
-  parent: DrinkGlass
+  parent: [DrinkBottleGlassBaseFull, DrinkVisualsAllFilled]
   id: HolyWaterJug
   name: water jug
   description: Stay hydrated.
@@ -13,9 +13,7 @@
           Quantity: 30
   - type: Sprite
     sprite: SS220/Objects/Consumable/Drinks/holy_water_jug.rsi
-    layers:
-    - state: icon
-      map: [ "enum.SolutionContainerLayers.Base" ]
   - type: SolutionContainerVisuals
     maxFillLevels: 5
+    fillBaseName: fill-
     inHandsMaxFillLevels: 0

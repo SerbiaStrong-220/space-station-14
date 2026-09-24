@@ -13,16 +13,6 @@
   materials:
     Steel: 500
 
-# SS220 CARGO HUD ADD START
-- type: latheRecipe
-  id: ClothingEyesHudSupply
-  result: ClothingEyesHudSupply
-  completetime: 4
-  materials:
-    Steel: 300
-    Glass: 200
-# SS220 CARGO HUD ADD END
-
 - type: latheRecipe
   id: UtilityKnife
   result: UtilityKnife

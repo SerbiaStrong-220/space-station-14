@@ -1,0 +1,1 @@
+borg-slot-spray-painter-ammo-empty = Spray painter ammo

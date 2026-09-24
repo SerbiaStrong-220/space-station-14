@@ -3,7 +3,8 @@ using System.Threading.Tasks;
 using Content.Shared.NPC.Components;
 using Content.Server.NPC.Pathfinding;
 using Content.Shared.Chemistry.Components.SolutionManager;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Silicons.Bots;
@@ -11,17 +12,23 @@ using Content.Shared.Emag.Components;
 using Content.Shared.Stealth.Components;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes; //ss220 fix medibot
+using Content.Shared.FixedPoint;
 
 namespace Content.Server.NPC.HTN.PrimitiveTasks.Operators.Specific;
 
 public sealed partial class PickNearbyInjectableOperator : HTNOperator
 {
     [Dependency] private readonly IEntityManager _entManager = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!; //ss220 fix medibot
 
-    private EntityLookupSystem _lookup = default!;
     private MedibotSystem _medibot = default!;
     private PathfindingSystem _pathfinding = default!;
+    private DamageableSystem _damageable = default!;
+
+    private EntityQuery<DamageableComponent> _damageQuery = default!;
+    private EntityQuery<InjectableSolutionComponent> _injectQuery = default!;
+    private EntityQuery<NPCRecentlyInjectedComponent> _recentlyInjected = default!;
+    private EntityQuery<MobStateComponent> _mobState = default!;
+    private EntityQuery<EmaggedComponent> _emaggedQuery = default!;
     private SharedContainerSystem _container = default!; //ss220 stealth inject fix
 
     [DataField("rangeKey")] public string RangeKey = NPCBlackboard.MedibotInjectRange;
@@ -41,9 +48,15 @@ public sealed partial class PickNearbyInjectableOperator : HTNOperator
     public override void Initialize(IEntitySystemManager sysManager)
     {
         base.Initialize(sysManager);
-        _lookup = sysManager.GetEntitySystem<EntityLookupSystem>();
         _medibot = sysManager.GetEntitySystem<MedibotSystem>();
         _pathfinding = sysManager.GetEntitySystem<PathfindingSystem>();
+        _damageable = sysManager.GetEntitySystem<DamageableSystem>();
+
+        _damageQuery = _entManager.GetEntityQuery<DamageableComponent>();
+        _injectQuery = _entManager.GetEntityQuery<InjectableSolutionComponent>();
+        _recentlyInjected = _entManager.GetEntityQuery<NPCRecentlyInjectedComponent>();
+        _mobState = _entManager.GetEntityQuery<MobStateComponent>();
+        _emaggedQuery = _entManager.GetEntityQuery<EmaggedComponent>();
         _container = sysManager.GetEntitySystem<SharedContainerSystem>(); //ss220 npc stealth inject fix
     }
 
@@ -58,19 +71,17 @@ public sealed partial class PickNearbyInjectableOperator : HTNOperator
         if (!_entManager.TryGetComponent<MedibotComponent>(owner, out var medibot))
             return (false, null);
 
-        var damageQuery = _entManager.GetEntityQuery<DamageableComponent>();
-        var injectQuery = _entManager.GetEntityQuery<InjectableSolutionComponent>();
-        var recentlyInjected = _entManager.GetEntityQuery<NPCRecentlyInjectedComponent>();
-        var mobState = _entManager.GetEntityQuery<MobStateComponent>();
-        //var emaggedQuery = _entManager.GetEntityQuery<EmaggedComponent>(); //ss220 fix medibot
         var stealthQuery = _entManager.GetEntityQuery<StealthComponent>(); //ss220 medibot inject in stealth entity fix
 
-        foreach (var entity in _lookup.GetEntitiesInRange(owner, range))
+        if (!blackboard.TryGetValue<IEnumerable<KeyValuePair<EntityUid, float>>>("TargetList", out var patients, _entManager))
+            return (false, null);
+
+        foreach (var (entity, _) in patients)
         {
-            if (mobState.TryGetComponent(entity, out var state) &&
-                injectQuery.HasComponent(entity) &&
-                damageQuery.TryGetComponent(entity, out var damage) &&
-                !recentlyInjected.HasComponent(entity))
+            if (_mobState.TryGetComponent(entity, out var state) &&
+                _injectQuery.HasComponent(entity) &&
+                _damageQuery.TryGetComponent(entity, out var damage) &&
+                !_recentlyInjected.HasComponent(entity))
             {
                 //ss220 medibot inject in stealth entity fix start
                 if (_container.IsEntityInContainer(entity))
@@ -87,10 +98,10 @@ public sealed partial class PickNearbyInjectableOperator : HTNOperator
                 if (!_medibot.TryGetTreatment(medibot, state.CurrentState, out var treatment))
                     continue;
 
-                //ss220 fix medibot start
-                var emagged = _entManager.HasComponent<EmaggedComponent>(owner);
-
-                if (!treatment.IsValid(damage.Damage, emagged, _proto))
+                // Only go towards a target if the bot can actually help them or if the medibot is emagged
+                // note: this and the actual injecting don't check for specific damage types so for example,
+                // radiation damage will trigger injection but the tricordrazine won't heal it.
+                if (!_emaggedQuery.HasComponent(entity) && _damageable.GetTotalDamage((entity, damage)) == FixedPoint2.Zero)
                     continue;
                 //ss220 fix medibot end
 

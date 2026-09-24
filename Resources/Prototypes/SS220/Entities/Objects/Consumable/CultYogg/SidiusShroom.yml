@@ -12,15 +12,16 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 30.0
+        maxVol: 100.0
         reagents:
         - ReagentId: Nutriment
-          Quantity: 15
+          Quantity: 50
         - ReagentId: Water
-          Quantity: 15
+          Quantity: 50
   - type: Sprite
-    sprite: SS220/Objects/CultYogg/sidious_shroom.rsi
+    sprite: SS220/Objects/CultYogg/Botany/sidious_shroom.rsi
     state: produce
+    scale: 0.7, 0.7
   - type: Produce
     seedId: SidiousShroomSpores
   - type: Extractable
@@ -39,22 +40,23 @@
     - type: Seed
       seedId: SidiousShroomSpores
     - type: Sprite
-      sprite: SS220/Objects/CultYogg/sidious_shroom.rsi
+      sprite: SS220/Objects/CultYogg/Botany/sidious_shroom.rsi
 
 - type: seed
   id: SidiousShroomSpores
   name: seeds-sidious-shroom-name
   noun: seeds-noun-spores
   displayName: seeds-sidious-shroom-display-name
-  plantRsi: SS220/Objects/CultYogg/sidious_shroom.rsi
+  plantRsi: SS220/Objects/CultYogg/Botany/sidious_shroom.rsi
   packetPrototype: SidiousShroomSeeds
   productPrototypes:
     - FoodSidiousShroomCult
+  harvestRepeat: Repeat
   lifespan: 55
   maturation: 12
-  production: 2
-  yield: 1
-  potency: 30
+  production: 10
+  yield: 3
+  potency: 2
   growthStages: 7
   chemicals:
     Nutriment:

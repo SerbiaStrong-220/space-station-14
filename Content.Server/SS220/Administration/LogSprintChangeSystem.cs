@@ -5,9 +5,9 @@ using Content.Shared.SS220.Movement.Events;
 
 namespace Content.Server.SS220.Administration;
 
-public sealed class LogSprintChangeSystem : EntitySystem
+public sealed partial class LogSprintChangeSystem : EntitySystem
 {
-    [Dependency] private readonly IAdminLogManager _adminLog = default!;
+    [Dependency] private IAdminLogManager _adminLog = default!;
 
     public override void Initialize()
     {

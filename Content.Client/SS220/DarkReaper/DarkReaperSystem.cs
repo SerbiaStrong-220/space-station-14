@@ -10,13 +10,13 @@ using Robust.Shared.Player;
 
 namespace Content.Client.SS220.DarkReaper;
 
-public sealed class DarkReaperSystem : SharedDarkReaperSystem
+public sealed partial class DarkReaperSystem : SharedDarkReaperSystem
 {
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
-    [Dependency] private readonly PointLightSystem _pointLight = default!;
-    [Dependency] private readonly LightBehaviorSystem _lightBehavior = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private PointLightSystem _pointLight = default!;
+    [Dependency] private LightBehaviorSystem _lightBehavior = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private static readonly Color ReaperGhostColor = Color.FromHex("#bbbbff88");
 

@@ -57,9 +57,11 @@ public sealed record Ban
         string reason,
         NoteSeverity severity,
         int statedRound,
+        BanType banType, // SS220-make-ban-type-correct
         ProtoId<JobPrototype>[]? bannedJobs,
         ProtoId<AntagPrototype>[]? bannedAntags,
         ProtoId<SpeciesPrototype>[]? bannedSpecies, // SS220-species-ban
+        BannableChats[]? bannedChats,
         bool erase,
         bool postBanInfo) // SS220 Post ban info option
     {
@@ -73,9 +75,11 @@ public sealed record Ban
         Reason = reason;
         Severity = severity;
         StatedRound = statedRound;
+        BanType = banType; // SS220-add-ban-type
         BannedJobs = bannedJobs;
         BannedAntags = bannedAntags;
         BannedSpecies = bannedSpecies; // SS220-species-ban
+        BannedChats = bannedChats; // SS220-chats-ban
         Erase = erase;
         PostBanInfo = postBanInfo; // SS220 Post ban info option
     }
@@ -90,9 +94,11 @@ public sealed record Ban
     public readonly string Reason;
     public readonly NoteSeverity Severity;
     public readonly int StatedRound;
+    public readonly BanType BanType; // SS220-make-ban-type-correct
     public readonly ProtoId<JobPrototype>[]? BannedJobs;
     public readonly ProtoId<AntagPrototype>[]? BannedAntags;
-    public readonly ProtoId<SpeciesPrototype>[]? BannedSpecies;
+    public readonly ProtoId<SpeciesPrototype>[]? BannedSpecies; // SS220-species-ban
+    public readonly BannableChats[]? BannedChats; // SS220-chats-ban
     public readonly bool Erase;
     public readonly bool PostBanInfo;
 }

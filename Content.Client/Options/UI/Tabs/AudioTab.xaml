@@ -26,6 +26,7 @@
                        StyleClasses="LabelKeyText"/>
                 <CheckBox Name="ReceiveTTSCheckbox" Text="{Loc 'ui-options-receive-tts'}" />
                 <CheckBox Name="PlayDifferentRadioTogetherCheckbox" Text="{Loc 'ui-options-play-together-message-from-different-channels'}" />
+                <CheckBox Name="PlayDifferentRadioSourcesTogetherCheckbox" Text="{Loc 'ui-options-play-together-message-from-different-channels-from-different-sources'}" />
                 <CheckBox Name="PlayDifferentTalkingTogetherCheckbox" Text="{Loc 'ui-options-play-together-message-from-different-speak-source'}" />
                 <ui:OptionSlider Name="SliderVolumeTts" Title="{Loc 'ui-options-tts-volume'}" />
                 <ui:OptionSlider Name="SliderVolumeTtsRadio" Title="{Loc 'ui-options-tts-radio-volume'}" />

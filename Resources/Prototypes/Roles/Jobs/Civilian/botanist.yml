@@ -8,6 +8,7 @@
       department: Civilian
       time: 18000 # SS220-RoleTime
   startingGear: BotanistGear
+  experienceDefinition: BotanistRoleExperience # SS220-experience
   icon: "JobIconBotanist"
   supervisors: job-supervisors-hop
   access:

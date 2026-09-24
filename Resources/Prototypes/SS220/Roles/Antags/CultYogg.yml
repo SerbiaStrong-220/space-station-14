@@ -9,4 +9,7 @@
   requirements:
   - !type:OverallPlaytimeRequirement
     time: 40h
+  - !type:DepartmentTimeRequirement
+    department: Security
+    time: 10h
   playTimeTracker: CultistOfYogg

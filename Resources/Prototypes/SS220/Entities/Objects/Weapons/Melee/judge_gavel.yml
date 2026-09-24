@@ -21,7 +21,7 @@
     tags:
     - JudgeGavel
   - type: UseDelay
-    delay: 2
+    delay: 0.5
 
 
 - type: entity

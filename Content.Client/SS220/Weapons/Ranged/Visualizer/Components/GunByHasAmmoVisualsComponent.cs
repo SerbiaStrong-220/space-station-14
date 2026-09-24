@@ -16,6 +16,6 @@ public sealed partial class GunByHasAmmoVisualsComponent : Component
     [DataField]
     public Dictionary<HandLocation, List<PrototypeLayerData>> InhandVisuals = new();
 
-    [DataField("state")] public string? PreviousState;
-    [ViewVariables] public  int? LayerNumber;
+    [ViewVariables]
+    public int? LayerNumber;
 }

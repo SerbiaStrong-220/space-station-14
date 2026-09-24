@@ -2,7 +2,8 @@
               HorizontalExpand="True"
               xmlns:controls="https://spacestation14.io"
               xmlns:ui="clr-namespace:Content.Client.Shuttles.UI"
-              xmlns:controls1="clr-namespace:Content.Client.UserInterface.Controls">
+              xmlns:controls1="clr-namespace:Content.Client.UserInterface.Controls"
+              xmlns:shuttleGunControl="clr-namespace:Content.Client.SS220.ShuttleGunControl">
                 <ui:ShuttleNavControl Name="NavRadar"
                                  MouseFilter="Stop"
                                  VerticalAlignment="Stretch"
@@ -15,9 +16,10 @@
                       HorizontalAlignment="Right"
                       VerticalExpand="True"
                       MinWidth="256"
-                      MaxWidth="256"
+                      MaxWidth="378"
                       Margin="5 0 5 5"
-                      Orientation="Vertical">
+                      Orientation="Vertical"
+                      HorizontalExpand="True">
                     <controls1:StripeBack
                         MinSize="48 48">
                         <controls:Label Name="NavDisplayLabel" Text="{controls:Loc 'shuttle-console-display-label'}"
@@ -65,5 +67,33 @@
                             Text="{controls:Loc 'shuttle-console-dock-toggle'}"
                             TextAlign="Center"
                             ToggleMode="True"/>
+                    <!-- SS220 add additional control for shuttle start -->
+                    <controls:BoxContainer Orientation="Vertical" Name="AdditionalSettingsContainer" Visible="False">
+                        <controls1:StripeBack Name="SettingsHeader" MinSize="48 48">
+                            <controls:Label Name="AdditionalShuttleControlLabel" Text="{controls:Loc 'shuttle-console-additional-settings'}"
+                                            VerticalExpand="True"
+                                            HorizontalAlignment="Center"/>
+                        </controls1:StripeBack>
+                        <controls:BoxContainer Name="AdditionalShuttleControlContainer" Orientation="Vertical">
+                            <controls:BoxContainer Orientation="Vertical" Name="RotateToPointToggleContainer">
+                                <controls:Button Name="RotateToPointToggle"
+                                                 Text="{controls:Loc 'shuttle-console-additional-settings-rotate-to-point'}"
+                                                 TextAlign="Center"
+                                                 ToggleMode="True"
+                                                 Access="Public"
+                                                 SetWidth="346"/>
+                                <controls:Button Name="RotateToPointResetButton"
+                                                 Text="{controls:Loc 'shuttle-console-additional-settings-rotate-to-point-reset'}"
+                                                 TextAlign="Center"
+                                                 Access="Public"
+                                                 SetWidth="346"/>
+                                <shuttleGunControl:ShuttleGunControlRotateToPoint
+                                    Name="RotateToPointFireButton"
+                                    HorizontalAlignment="Center"
+                                    Visible="False"/>
+                            </controls:BoxContainer>
+                        </controls:BoxContainer>
+                    </controls:BoxContainer>
+                    <!-- SS220 add additional control for shuttle end -->
                 </controls:BoxContainer>
             </controls:BoxContainer>

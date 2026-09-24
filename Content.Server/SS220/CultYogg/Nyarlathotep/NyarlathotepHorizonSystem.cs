@@ -5,6 +5,7 @@ using Content.Server.Body.Systems;
 using Content.Server.SS220.CultYogg.Nyarlathotep.Events;
 using Content.Shared.Database;
 using Content.Shared.Ghost;
+using Content.Shared.Gibbing;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Singularity.Components;
@@ -14,6 +15,7 @@ using Content.Shared.Station.Components;
 using Content.Shared.Tag;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Events;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.CultYogg.Nyarlathotep;
 
@@ -21,14 +23,16 @@ namespace Content.Server.SS220.CultYogg.Nyarlathotep;
 /// The entity system primarily responsible for managing <see cref="NyarlathotepHorizonComponent"/>s.
 /// Handles their consumption of entities.
 /// </summary>
-public sealed class NyarlathotepHorizonSystem : SharedNyarlathotepHorizonSystem
+public sealed partial class NyarlathotepHorizonSystem : SharedNyarlathotepHorizonSystem
 {
     #region Dependencies
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly BodySystem _bodySystem = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
     #endregion Dependencies
+
+    private readonly ProtoId<TagPrototype> _highRiskItemTag = "HighRiskItem";
 
     public override void Initialize()
     {
@@ -75,7 +79,7 @@ public sealed class NyarlathotepHorizonSystem : SharedNyarlathotepHorizonSystem
     {
         PreventConsume(comp.Owner, comp.Comp, ref args);
         if (_mob.IsAlive(args.Entity) && !HasComp<MiGoComponent>(args.Entity))
-            _bodySystem.GibBody(comp.Owner);
+            _gibbing.Gib(comp.Owner);
     }
 
     /// <summary>
@@ -106,12 +110,12 @@ public sealed class NyarlathotepHorizonSystem : SharedNyarlathotepHorizonSystem
     {
         if (!EntityManager.IsQueuedForDeletion(entityToConsume)
             && (HasComp<MindContainerComponent>(entityToConsume)
-            || _tagSystem.HasTag(entityToConsume, "HighRiskItem")))
+            || _tagSystem.HasTag(entityToConsume, _highRiskItemTag)))
         {
             _adminLogger.Add(LogType.EntityDelete, LogImpact.Extreme, $"{ToPrettyString(entityToConsume)} entered the event horizon of {ToPrettyString(nyarlathotep)} and was deleted");
         }
 
-        EntityManager.QueueDeleteEntity(entityToConsume);
+        QueueDel(entityToConsume);
         var evEaten = new NyarlathotepHorizonConsumedEntityEvent(
                             entityToConsume,
                             nyarlathotep,

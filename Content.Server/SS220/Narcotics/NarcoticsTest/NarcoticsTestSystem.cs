@@ -1,5 +1,6 @@
 using Content.Server.SS220.RecentlyUsedNarcotics;
 using Content.Shared.DoAfter;
+using Content.Shared.Forensics.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
@@ -7,10 +8,11 @@ using Content.Shared.SS220.Narcotics.NarcoticsTest;
 
 namespace Content.Server.SS220.Narcotics.NarcoticsTest;
 
-public sealed class NarcoticsTestSystem : EntitySystem
+public sealed partial class NarcoticsTestSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedForensicsSystem _forensics = default!;
 
     public override void Initialize()
     {
@@ -21,7 +23,7 @@ public sealed class NarcoticsTestSystem : EntitySystem
 
     private void OnAfterInteract(Entity<NarcoticsTestComponent> ent, ref AfterInteractEvent args)
     {
-        if (args.Target == null || !args.CanReach || !HasComp<HumanoidAppearanceComponent>(args.Target) || ent.Comp.IsUsed)
+        if (args.Target == null || !args.CanReach || !HasComp<HumanoidProfileComponent>(args.Target) || ent.Comp.IsUsed)
             return;
 
         var doAfterArgs = new DoAfterArgs(EntityManager,
@@ -51,6 +53,8 @@ public sealed class NarcoticsTestSystem : EntitySystem
             return;
 
         var usedNarcotics = HasComp<RecentlyUsedNarcoticsComponent>(args.Target.Value);
+
+        _forensics.TransferDna(ent.Owner, args.Target.Value);
 
         _appearance.SetData(ent.Owner, NarcoticsData.Key, usedNarcotics);
 

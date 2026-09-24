@@ -1,6 +1,6 @@
 ﻿namespace Content.Shared.Speech;
 
-public sealed class AccentGetEvent : EntityEventArgs
+public sealed class AccentGetEvent : CancellableEntityEventArgs //SS220 Made cancellable for accent check
 {
     /// <summary>
     ///     The entity to apply the accent to.

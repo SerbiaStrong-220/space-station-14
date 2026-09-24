@@ -33,8 +33,9 @@
         0: Alive
         120: Dead
     - type: Stamina
-      critThreshold: 100
+      baseCritThreshold: 100
     - type: Butcherable
+      willRenameEnt: false
       spawned:
         - id: FoodMiGomyceteCult
           amount: 2
@@ -259,7 +260,7 @@
       0: Alive
       250: Dead
   - type: Stamina
-    critThreshold: 150
+    baseCritThreshold: 150
   - type: MeleeWeapon
     soundHit:
         path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
@@ -708,6 +709,8 @@
   parent: [BaseMobCorrupted, MobMouse]
   id: CultRatCorrupted
   components:
+  - type: NightVision
+    profile: NightVisionPaleRed
   - type: Sprite
     drawdepth: SmallMobs
     sprite: SS220/Mobs/CultYogg/rat_corrupted.rsi

@@ -23,7 +23,6 @@ public sealed class StoreDiscountSystem : EntitySystem
 
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly StoreSystem _store = default!; // ss220 nukeops discount
 
     /// <inheritdoc />
     public override void Initialize()
@@ -393,12 +392,12 @@ public sealed class StoreDiscountSystem : EntitySystem
         }
     }
     // ss220 nukeops discount start
-    public void TryAddDiscounts(EntityUid uid, StoreComponent comp)
+    public void TryAddDiscounts(Entity<StoreComponent> store)
     {
-        if (!comp.UseDiscounts) return;
+        if (!store.Comp.UseDiscounts) return;
 
-        var discountComponent = EnsureComp<StoreDiscountComponent>(uid);
-        var listings = comp.FullListingsCatalog.ToArray();
+        var discountComponent = EnsureComp<StoreDiscountComponent>(store.Owner);
+        var listings = store.Comp.FullListingsCatalog.ToArray();
         var discounts = InitializeDiscounts(listings);
         ApplyDiscounts(listings, discounts);
         discountComponent.Discounts = discounts;

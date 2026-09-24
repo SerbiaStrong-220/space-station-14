@@ -1,8 +1,6 @@
 - type: entity
-  name: pen
   suffix: Exploding
-  parent: PenEmbeddable
-  description: A dark ink pen.
+  parent: Pen
   id: PenExploding
   components:
   - type: TimerTrigger
@@ -23,22 +21,30 @@
   - type: DeviceLinkSink # This should be changed into separate behavior where triggering via signal makes beep, while triggering manually is quiet.
     ports:
       - Trigger
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-PenExploding-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: corvax-hidden-desc-PenExploding-research
-      jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
-# Corvax-HiddenDesc-End
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-PenExploding-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-PenExploding-research ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ScienceKnowledge, null]
+    hiddenName: ent-PenEmbeddable
+# SS220-hidden-desc-end
   - type: EmitSoundOnUse
     handle: false # don't want the sound to stop the explosion from triggering
+  - type: AddComponentsOnTrigger # make them embed into the target, but only when activated so that they can't be metagamed
+    components: # copied from PenEmbeddable
+    - type: EmbeddableProjectile
+      offset: 0.3,0.0
+      removalTime: 0.0
+    - type: ThrowingAngle
+      angle: 315
+    - type: LandAtCursor
+    - type: DamageOtherOnHit
+      damage:
+        types:
+          Piercing: 3
 
 - type: entity
   parent: [BaseItem]

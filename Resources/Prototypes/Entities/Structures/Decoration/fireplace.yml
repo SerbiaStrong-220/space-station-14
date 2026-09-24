@@ -46,6 +46,9 @@
           - !type:DoActsBehavior
             acts: [ "Destruction" ]
   - type: AlwaysHot
+  - type: IgnitionSource
+    temperature: 700
+    ignited: true
   #SS220-fireplaceCrafting-Start
   - type: Construction
     graph: FirePlace

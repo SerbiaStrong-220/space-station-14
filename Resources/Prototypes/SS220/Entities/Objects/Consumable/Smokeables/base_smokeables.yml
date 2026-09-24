@@ -1,0 +1,40 @@
+- type: entity
+  parent: BaseSmokable
+  id: BaseCigarette # SS220 Cigarettes questions
+  abstract: true
+  components:
+  - type: Smokable
+    exposeTemperature: 1173.15
+    # SS220 Cigarettes rework begin
+    inhaleAmount: 0.35
+  - type: Cigar
+  - type: Tag
+    tags:
+    - Trash
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 100
+        reagents:
+        - ReagentId: NeoNicotinoid
+          Quantity: 50
+
+- type: entity
+  parent: BaseSmokable
+  id: BaseHealCigarette
+  abstract: true
+  components:
+  - type: Smokable
+    exposeTemperature: 1173.15
+    inhaleAmount: 0.1
+  - type: Cigar
+  - type: Tag
+    tags:
+    - Trash
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 20
+        reagents:
+        - ReagentId: Nicotine
+          Quantity: 20

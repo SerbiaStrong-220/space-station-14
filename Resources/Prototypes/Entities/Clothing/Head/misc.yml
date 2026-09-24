@@ -122,6 +122,8 @@
     sprite: Clothing/Head/Misc/richard.rsi
   - type: Clothing
     sprite: Clothing/Head/Misc/richard.rsi
+  - type: Item
+    storedRotation: 0
   - type: IngestionBlocker
   - type: IdentityBlocker
   - type: HideLayerClothing
@@ -156,9 +158,9 @@
   description: The tag reads "All proceeds go to the Hakurei Shrine."
   components:
   - type: Sprite
-    sprite: Clothing/Head/Misc/shrine-maidens-wig.rsi
+    sprite: SS220/Clothing/Head/Misc/shrine-maidens-wig.rsi #SS220 resprited
   - type: Clothing
-    sprite: Clothing/Head/Misc/shrine-maidens-wig.rsi
+    sprite: SS220/Clothing/Head/Misc/shrine-maidens-wig.rsi #SS220 resprited
   - type: Tag
     tags:
     - HamsterWearable

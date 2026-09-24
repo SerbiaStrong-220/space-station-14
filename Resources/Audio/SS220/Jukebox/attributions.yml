@@ -65,8 +65,9 @@
 
 - files: ["mechanismeight.ogg"]
   license: "CC-BY-3.0"
-  copyright: "Mechanism 8 for Unreal Tournament '99, written by Andrew 'Necros' Sega, Remixed by Rivgane for SS220"
-  source: "https://github.com/SerbiaStrong-220"
+  copyright: "Mechanism 8 for Unreal Tournament '99, by Andrew 'Necros' Sega, remixed and contributed to SS220 by Rivgane"
+  source: "https://github.com/SerbiaStrong-220/space-station-14/"
+
 
 - files: [Vivaldi_Autumn.ogg, Vivaldi_Spring.ogg, Vivaldi_Summer.ogg, Vivaldi_Winter.ogg]
   license: "Custom"
@@ -77,3 +78,18 @@
   license: "CC-BY-4.0"
   copyright: "PGN Music by Tyler"
   source: "https://pgnmusic.bandcamp.com/album/sea-shanties"
+
+- files: ["broken.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Created by Wall GG"
+  source: "https://www.youtube.com/watch?v=ACKdVL1Z6Ho"
+
+- files: ["ourclasstrial.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Created for Danganronpa V3"
+  source: "https://www.youtube.com/watch?v=Yb2oKpPJ_qk"
+
+- files: ["Rest_In_Peace.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Created by Quantum_ (Feat Z.W.E.I.) for SS220"
+  source: "https://github.com/SerbiaStrong-220"

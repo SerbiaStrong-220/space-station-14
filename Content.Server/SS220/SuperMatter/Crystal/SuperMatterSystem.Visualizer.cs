@@ -7,6 +7,6 @@ namespace Content.Server.SS220.SuperMatter.Crystal;
 // TODO: Add PointLight variety depends on SM state or anything else
 public sealed partial class SuperMatterSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
-    [Dependency] private readonly SharedAmbientSoundSystem _ambientSound = default!;
+    [Dependency] private SharedAudioSystem _audioSystem = default!;
+    [Dependency] private SharedAmbientSoundSystem _ambientSound = default!;
 }

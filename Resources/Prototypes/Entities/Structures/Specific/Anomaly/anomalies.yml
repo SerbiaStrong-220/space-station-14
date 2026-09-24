@@ -1160,7 +1160,7 @@
         maxAmount: 5
         maxRange: 5
       spawns:
-      - PresentRandomUnsafe
+      # - PresentRandomUnsafe # ss220 no insane anomaly gifts
       - PresentRandom
       - PresentRandomCoal
       - PresentRandomCash

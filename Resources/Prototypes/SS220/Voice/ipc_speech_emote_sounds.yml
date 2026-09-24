@@ -1,0 +1,152 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: emoteSounds
+  id: MaleIpc
+  params:
+    variation: 0.125
+  sounds:
+    Gasp:
+      path: /Audio/Machines/buzz-two.ogg
+      params:
+        volume: -16
+    Whistle:
+      path: /Audio/Effects/sparks3.ogg
+      params:
+        volume: 31
+    DefaultDeathgasp:
+      path: /Audio/Effects/refill.ogg
+    Cough:
+      path: /Audio/Machines/beep.ogg
+      params:
+        volume: 11
+    Sigh:
+      path: /Audio/Machines/robotscream_5.ogg
+      params:
+        volume: -9
+    Yawn:
+      path: /Audio/Machines/airlock_electrify_off.ogg
+      params:
+        volume: 11
+    Fart:
+      path: /Audio/Machines/buzz-sigh.ogg
+      params:
+        volume: -16
+    Giggle:
+      path: /Audio/SS220/Effects/Ipc/laugh.ogg
+      params:
+        volume: -2
+    Scream:
+      path: /Audio/SS220/Effects/Ipc/scream.ogg
+      params:
+        volume: -3
+    Laugh:
+      path: /Audio/SS220/Effects/Ipc/laugh.ogg
+      params:
+        volume: -14
+    Snore:
+      path: /Audio/Machines/buzz-two.ogg
+      params:
+        volume: -8
+    Crying:
+      path: /Audio/SS220/Effects/Ipc/cry.ogg
+      params:
+        volume: 1
+    BuzzIpc:
+      path: /Audio/Machines/buzz-sigh.ogg
+      params:
+        volume: -6
+    Sneeze:
+      path: /Audio/Weapons/Guns/Hits/energy_metal2.ogg
+      params:
+        volume: 4
+    Weh:
+      collection: Weh
+
+- type: emoteSounds
+  id: FemaleIpc
+  params:
+    variation: 0.125
+  sounds:
+    Gasp:
+      path: /Audio/Machines/buzz-two.ogg
+      params:
+        volume: -16
+    Whistle:
+      path: /Audio/Effects/sparks3.ogg
+      params:
+        volume: 31
+    DefaultDeathgasp:
+      path: /Audio/Effects/refill.ogg
+    Cough:
+      path: /Audio/Machines/beep.ogg
+      params:
+        volume: 11
+    Sigh:
+      path: /Audio/Machines/robotscream_5.ogg
+      params:
+        volume: -9
+    Yawn:
+      path: /Audio/Machines/airlock_electrify_off.ogg
+      params:
+        volume: 11
+    Fart:
+      path: /Audio/Machines/buzz-sigh.ogg
+      params:
+        volume: -16
+    Giggle:
+      path: /Audio/SS220/Effects/Ipc/laugh.ogg
+      params:
+        volume: -2
+    Scream:
+      path: /Audio/SS220/Effects/Ipc/scream.ogg
+      params:
+        volume: -3
+    Laugh:
+      path: /Audio/SS220/Effects/Ipc/laugh.ogg
+      params:
+        volume: -14
+    Snore:
+      path: /Audio/Machines/buzz-two.ogg
+      params:
+        volume: -8
+    Crying:
+      path: /Audio/SS220/Effects/Ipc/cry.ogg
+      params:
+        volume: 1
+    BuzzIpc:
+      path: /Audio/Machines/buzz-sigh.ogg
+      params:
+        volume: -6
+    Sneeze:
+      path: /Audio/Weapons/Guns/Hits/energy_metal2.ogg
+      params:
+        volume: 4
+    Weh:
+      collection: Weh
+
+- type: emoteSounds
+  id: IpcEmotes
+  sounds:
+    BeepIpc:
+      path: /Audio/Machines/twobeep.ogg
+    ChimeIpc:
+      path: /Audio/Machines/chime.ogg
+    BuzzIpc:
+      path: /Audio/Machines/buzz-sigh.ogg
+    Buzz-TwoIpc:
+      path: /Audio/Machines/buzz-two.ogg
+    HonkIpc:
+      path: /Audio/Items/bikehorn.ogg
+    PingIpc:
+      path: /Audio/Effects/Cargo/ping.ogg
+    Clap:
+      collection: Claps
+    ClapSingle:
+      collection: ClapSingle
+    Snap:
+      collection: Snaps
+      params:
+        volume: -6
+    Salute:
+      collection: Salutes
+

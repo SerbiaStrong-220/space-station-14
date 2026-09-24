@@ -14,11 +14,11 @@ using Content.Client.Stealth;
 
 namespace Content.Client.SS220.Overlays;
 
-public abstract class IgnoreLightVisionOverlay : Overlay
+public abstract partial class IgnoreLightVisionOverlay : Overlay
 {
-    [Dependency] protected readonly IEntityManager Entity = default!;
-    [Dependency] protected readonly IPlayerManager PlayerManager = default!;
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
+    [Dependency] protected IEntityManager Entity = default!;
+    [Dependency] protected IPlayerManager PlayerManager = default!;
+    [Dependency] private IComponentFactory _componentFactory = default!;
 
     /// <summary> Defines radius in which you can see entities in containers </summary>
     protected float ShowCloseRadius;

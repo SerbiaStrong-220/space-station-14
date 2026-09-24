@@ -3,19 +3,20 @@ using System.Numerics;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
-using Content.Server.Ghost.Components;
 using Content.Server.Mind;
 using Content.Server.Roles.Jobs;
 using Content.Shared.Actions;
 using Content.Shared.CCVar;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
-using Content.Shared.Examine;
 using Content.Shared.Eye;
 using Content.Shared.FixedPoint;
 using Content.Shared.Follower;
 using Content.Shared.Ghost;
+using Content.Shared.GhostTypes;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
@@ -23,8 +24,6 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
-using Content.Shared.Overlays;
-using Content.Shared.SS220.Ghost;
 using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Storage.Components;
@@ -38,7 +37,6 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Timing;
 using Robust.Shared.Network;
 using Robust.Server.Player;
 
@@ -50,7 +48,6 @@ namespace Content.Server.Ghost
         [Dependency] private readonly IAdminLogManager _adminLog = default!;
         [Dependency] private readonly SharedEyeSystem _eye = default!;
         [Dependency] private readonly FollowerSystem _followerSystem = default!;
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
         [Dependency] private readonly JobSystem _jobs = default!;
         [Dependency] private readonly EntityLookupSystem _lookup = default!;
         [Dependency] private readonly MindSystem _minds = default!;
@@ -71,6 +68,7 @@ namespace Content.Server.Ghost
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly TagSystem _tag = default!;
         [Dependency] private readonly NameModifierSystem _nameMod = default!;
+        [Dependency] private readonly GhostSpriteStateSystem _ghostState = default!;
 
         private EntityQuery<GhostComponent> _ghostQuery;
         private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -89,8 +87,6 @@ namespace Content.Server.Ghost
             SubscribeLocalEvent<GhostComponent, MapInitEvent>(OnMapInit);
             SubscribeLocalEvent<GhostComponent, ComponentShutdown>(OnGhostShutdown);
 
-            SubscribeLocalEvent<GhostComponent, ExaminedEvent>(OnGhostExamine);
-
             SubscribeLocalEvent<GhostComponent, MindRemovedMessage>(OnMindRemovedMessage);
             SubscribeLocalEvent<GhostComponent, MindUnvisitedMessage>(OnMindUnvisitedMessage);
             SubscribeLocalEvent<GhostComponent, PlayerDetachedEvent>(OnPlayerDetached);
@@ -107,7 +103,6 @@ namespace Content.Server.Ghost
             SubscribeLocalEvent<GhostComponent, InsertIntoEntityStorageAttemptEvent>(OnEntityStorageInsertAttempt);
             SubscribeLocalEvent<GhostComponent, RespawnActionEvent>(OnActionRespawn);
             SubscribeLocalEvent<GhostComponent, ToggleAGhostBodyVisualsActionEvent>(OnToggleBodyVisualsAction);
-            SubscribeLocalEvent<GhostComponent, ToggleHudOnOtherActionEvent>(OnToggleHudOnOther);
 
             SubscribeLocalEvent<RoundEndTextAppendEvent>(_ => MakeVisible(true));
             SubscribeLocalEvent<ToggleGhostVisibilityToAllEvent>(OnToggleGhostVisibilityToAll);
@@ -123,37 +118,6 @@ namespace Content.Server.Ghost
                 args.VisibilityMask |= (int)VisibilityFlags.Ghost;
             }
         }
-
-        // SS220 ADD GHOST HUD'S START
-        private void OnToggleHudOnOther(EntityUid uid, GhostComponent component, ToggleHudOnOtherActionEvent args)
-        {
-            args.Handled = true;
-
-            if (HasComp<GhostHudOnOtherComponent>(uid))
-            {
-                RemComp<GhostHudOnOtherComponent>(uid);
-                RemComp<ShowJobIconsComponent>(uid);
-                RemComp<ShowMindShieldIconsComponent>(uid);
-                RemComp<ShowCriminalRecordIconsComponent>(uid);
-
-                _actions.SetToggled(component.ToggleHudOnOtherActionEntity, true);
-            }
-            else
-            {
-                AddComp<GhostHudOnOtherComponent>(uid);
-                AddComp<ShowJobIconsComponent>(uid);
-                AddComp<ShowMindShieldIconsComponent>(uid);
-                AddComp<ShowCriminalRecordIconsComponent>(uid);
-
-                _actions.SetToggled(component.ToggleHudOnOtherActionEntity, false);
-            }
-            var str = HasComp<GhostHudOnOtherComponent>(uid)
-                ? Loc.GetString("ghost-gui-toggle-hud-on")
-                : Loc.GetString("ghost-gui-toggle-hud-off");
-
-            Popup.PopupEntity(str, uid, uid);
-        }
-        // SS220 ADD GHOST HUD'S END
 
         private void OnGhostHearingAction(EntityUid uid, GhostComponent component, ToggleGhostHearingActionEvent args)
         {
@@ -274,12 +238,13 @@ namespace Content.Server.Ghost
             }
 
             _eye.RefreshVisibilityMask(uid);
-            var time = _gameTiming.CurTime;
+            var time = _gameTiming.RealTime;
             component.TimeOfDeath = time;
 
             //ss220 add filter tts for ghost start
             EnsureComp<GhostHearingComponent>(uid);
             //ss220 add filter tts for ghost end
+            Dirty(uid, component);
         }
 
         private void OnGhostShutdown(EntityUid uid, GhostComponent component, ComponentShutdown args)
@@ -312,29 +277,8 @@ namespace Content.Server.Ghost
             _actions.AddAction(uid, ref component.ToggleLightingActionEntity, component.ToggleLightingAction);
             _actions.AddAction(uid, ref component.ToggleFoVActionEntity, component.ToggleFoVAction);
             _actions.AddAction(uid, ref component.ToggleGhostsActionEntity, component.ToggleGhostsAction);
-            // SS220 ADD GHOST HUD'S
-            _actions.AddAction(uid, ref component.ToggleHudOnOtherActionEntity, component.ToggleHudOnOtherAction);
             //ss220 add filter tts for ghost
             _actions.AddAction(uid, ref component.ToggleRadioChannelsUIEntity, component.ToggleRadioChannelsUI);
-            //SS-220 noDeath
-            if (_actions.AddAction(uid, ref component.RespawnActionEntity, out var actResp, component.RespawnAction)
-                && actResp.UseDelay != null)
-            {
-                var start = _gameTiming.CurTime;
-                var end = start + actResp.UseDelay.Value;
-                _actions.SetCooldown(component.RespawnActionEntity.Value, start, end);
-            }
-            //SS-220 end noDeath
-        }
-
-        private void OnGhostExamine(EntityUid uid, GhostComponent component, ExaminedEvent args)
-        {
-            var timeSinceDeath = _gameTiming.RealTime.Subtract(component.TimeOfDeath);
-            var deathTimeInfo = timeSinceDeath.Minutes > 0
-                ? Loc.GetString("comp-ghost-examine-time-minutes", ("minutes", timeSinceDeath.Minutes))
-                : Loc.GetString("comp-ghost-examine-time-seconds", ("seconds", timeSinceDeath.Seconds));
-
-            args.PushMarkup(deathTimeInfo);
         }
 
         #region Ghost Deletion
@@ -425,7 +369,8 @@ namespace Content.Server.Ghost
             if (_followerSystem.GetMostGhostFollowed() is not {} target)
                 return;
 
-            WarpTo(uid, target);
+            // If there is a ghostnado happening you almost definitely wanna join it, so we automatically follow instead of just warping.
+            _followerSystem.StartFollowingEntity(uid, target);
         }
 
         private void WarpTo(EntityUid uid, EntityUid target)
@@ -572,6 +517,11 @@ namespace Content.Server.Ghost
             var ghost = SpawnAtPosition(GameTicker.ObserverPrototypeName, spawnPosition.Value);
             var ghostComponent = Comp<GhostComponent>(ghost);
 
+            if (TryComp<GhostSpriteStateComponent>(ghost, out var state))  // If more TryComps are added this should be turned into an event
+            {
+                _ghostState.SetGhostSprite((ghost, state), mind);
+            }
+
             // Try setting the ghost entity name to either the character name or the player name.
             // If all else fails, it'll default to the default entity prototype name, "observer".
             // However, that should rarely happen.
@@ -674,12 +624,13 @@ namespace Content.Server.Ghost
                         && TryComp<MobThresholdsComponent>(playerEntity, out var thresholds))
                     {
                         var playerDeadThreshold = _mobThresholdSystem.GetThresholdForState(playerEntity.Value, MobState.Dead, thresholds);
-                        dealtDamage = playerDeadThreshold - damageable.TotalDamage;
+                        dealtDamage = playerDeadThreshold -
+                                      _damageable.GetTotalDamage((playerEntity.Value, damageable));
                     }
 
                     DamageSpecifier damage = new(_prototypeManager.Index(AsphyxiationDamageType), dealtDamage);
 
-                    _damageable.TryChangeDamage(playerEntity, damage, true);
+                    _damageable.ChangeDamage(playerEntity.Value, damage, true);
                 }
             }
 

@@ -87,7 +87,6 @@
       - NonEnergy
       - Energy #SS220-FixReflects
     spread: 80
-    reflectProbProjectile: 0.40 #ss220 ttkTweaks
     spreadProjectile: 180
 
 # ERT
@@ -134,5 +133,4 @@
       - NonEnergy
       - Energy #SS220-FixReflects
     spread: 80
-    reflectProbProjectile: 0.40 #ss220 ttkTweaks
     spreadProjectile: 180

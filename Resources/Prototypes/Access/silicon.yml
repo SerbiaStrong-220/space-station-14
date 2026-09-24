@@ -2,17 +2,20 @@
   id: Borg
   name: id-card-access-level-borg
   canAddToIdCard: false
+  showInPda: false # ss220 add additional info for pda
 
 - type: accessLevel
   id: BasicSilicon
   name: id-card-access-level-basic-silicon
   canAddToIdCard: false
+  showInPda: false # ss220 add additional info for pda
 
 - type: accessLevel
   id: StationAi
   name: id-card-access-level-station-ai
   canAddToIdCard: false
-  
+  showInPda: false # ss220 add additional info for pda
+
 - type: accessGroup
   id: Silicon
   tags:

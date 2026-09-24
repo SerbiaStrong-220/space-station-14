@@ -12,10 +12,10 @@ using System.Diagnostics.CodeAnalysis;
 namespace Content.Client.SS220.CultYogg.MiGo.UI;
 
 [UsedImplicitly]
-public sealed class MiGoErectBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed partial class MiGoErectBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    [Dependency] private readonly IPlacementManager _placementManager = default!;
-    [Dependency] private readonly EntityManager _entityManager = default!;
+    [Dependency] private IPlacementManager _placementManager = default!;
+    [Dependency] private EntityManager _entityManager = default!;
 
     [ViewVariables]
     private MiGoErectMenu? _menu;

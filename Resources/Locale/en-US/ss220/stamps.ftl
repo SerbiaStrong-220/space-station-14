@@ -6,3 +6,4 @@ stamp-component-stamped-name-fake-hos = Head of Suckurity
 stamp-component-stamped-name-fake-approved = TRUSTED
 stamp-component-stamped-name-fake-cmo = Fuck Medicine
 stamp-component-stamped-name-blue-shield = Blue Shield
+stamp-component-stamped-name-redwings = Red Wings

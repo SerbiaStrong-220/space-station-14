@@ -30,7 +30,7 @@ public sealed partial class CryostorageEntryControl : BoxContainer
         ItemsContainer.Children.Clear();
         foreach (var (name, itemName) in data.ItemSlots)
         {
-            var control = new CryostorageSlotControl(name, itemName);
+            var control = new CryostorageSlotControl(Loc.GetString($"slot-definition-{name}"), itemName); // ss220 add loc for slots
             control.Button.OnPressed += _ => SlotRemoveButtonPressed?.Invoke(name);
             ItemsContainer.AddChild(control);
         }

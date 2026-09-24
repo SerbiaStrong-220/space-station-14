@@ -1,58 +1,44 @@
-// Original code by Corvax dev team, no specific for SS220 license
+// Original code by Corvax dev team. all edits done by SS220 dev team.
 
-using Content.Shared.Roles;
-using Content.Shared.Whitelist;
+using Content.Shared.SS220.Experience;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server.SS220.HiddenDescription;
+namespace Content.Shared.SS220.HiddenDescription;
 
 /// <summary>
-/// A component that shows players with specific roles or jobs additional information about entities
+/// A component that changes entity names and adds description according to their Knowledge
 /// </summary>
 
-[RegisterComponent, Access(typeof(HiddenDescriptionSystem))]
+[RegisterComponent]
+[NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class HiddenDescriptionComponent : Component
 {
+    [AutoNetworkedField]
     [DataField(required: true)]
-    public List<HiddenDescriptionEntry> Entries = new();
+    public Dictionary<ProtoId<KnowledgePrototype>, List<LocId>> Entries = new();
+
+    /// <summary>
+    /// If this field is null, that mean we skip any renaming because entity do itself
+    /// </summary>
+    [AutoNetworkedField]
+    [DataField]
+    public LocId? HiddenName = null;
+
+    /// <summary>
+    /// Uses to define name overrides and their order. Null goes for original name <br/>
+    /// yml goes: <br/>
+    /// my_list: <br/>
+    ///   - [protoId1, LocId1] <br/>
+    ///   - [protoId2, LocId2] <br/>
+    /// </summary>
+    [AutoNetworkedField]
+    [DataField]
+    public List<(ProtoId<KnowledgePrototype>, LocId?)> NameEntries = new();
 
     /// <summary>
     /// Prioritizing the location of classified information in an inspection
     /// </summary>
     [DataField]
     public int PushPriority = 1;
-}
-
-[DataDefinition, Serializable]
-public readonly partial record struct HiddenDescriptionEntry()
-{
-    /// <summary>
-    /// Locale string with hidden description
-    /// </summary>
-    [DataField(required: true)]
-    public LocId Label { get; init; } = default!;
-
-    /// <summary>
-    /// A player's mind must pass a whitelist check to receive hidden information
-    /// </summary>
-    [DataField]
-    public HashSet<string> WhitelistMindRoles { get; init; } = new();
-
-    /// <summary>
-    /// A player's body must pass a whitelist check to receive hidden information
-    /// </summary>
-    [DataField]
-    public EntityWhitelist WhitelistBody { get; init; } = new();
-
-    /// <summary>
-    /// The player's mind has to have some job role to access the hidden information
-    /// </summary>
-    [DataField]
-    public List<ProtoId<JobPrototype>> JobRequired { get; init; } = new();
-
-    /// <summary>
-    /// If true, the player needs to go through and whitelist, and have some job. By default, at least one successful checks is sufficient.
-    /// </summary>
-    [DataField]
-    public bool NeedAllCheck { get; init; } = false;
 }

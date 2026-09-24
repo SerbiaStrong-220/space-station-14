@@ -10,17 +10,8 @@
   - MagazinePistolHighCapacityEmpty
   - MagazinePistolHighCapacity
 
-# Rubber ammo/mags
 - type: latheRecipePack
-  id: SecurityAmmoRubberStatic
+  id: SecurityBoardsTurrets
   recipes:
-  - MagazineBoxLightRifleRubber
-  - MagazineBoxMagnumRubber
-  - MagazineBoxPistolRubber
-  - MagazineBoxRifleRubber
-  - MagazineLightRifleRubber
-  - MagazinePistolRubber
-  - MagazinePistolSubMachineGunRubber
-  - MagazineRifleRubber
-  - SpeedLoaderMagnumRubber
-  - MagazineMagnumRubber
+  - WeaponEnergyTurretSecurityControlPanelElectronics #Who the fuck makes IDs like those
+  - WeaponEnergyTurretSecurityMachineCircuitboard

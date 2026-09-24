@@ -22,20 +22,20 @@ namespace Content.Shared.SS220.CultYogg.Corruption;
 /// <summary>
 /// Handles all corruption logic.
 /// </summary>
-public sealed class SharedCultYoggCorruptedSystem : EntitySystem
+public sealed partial class SharedCultYoggCorruptedSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedStackSystem _stackSystem = default!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedSoftDeleteSystem _softDeleteSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private SharedStackSystem _stackSystem = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedSoftDeleteSystem _softDeleteSystem = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     private readonly TimeSpan _corruptionDuration = TimeSpan.FromSeconds(1.8);
     private readonly Dictionary<ProtoId<EntityPrototype>, CultYoggCorruptedPrototype> _recipesBySourcePrototypeId = [];
@@ -193,7 +193,10 @@ public sealed class SharedCultYoggCorruptedSystem : EntitySystem
         if (args.Proto == null)
             return;
 
-        var corrupted = Corrupt(ent, args.Target.Value, args.Proto, args.InHand);
+        if (!_prototypeManager.Resolve(args.Proto, out var corruptProto))
+            return;
+
+        var corrupted = Corrupt(ent, args.Target.Value, corruptProto, args.InHand);
         args.Callback?.Invoke(corrupted);
 
         args.Handled = true;
@@ -421,11 +424,11 @@ public sealed class SharedCultYoggCorruptedSystem : EntitySystem
 public sealed partial class CultYoggCorruptDoAfterEvent : SimpleDoAfterEvent
 {
     public readonly bool InHand;
-    public readonly CultYoggCorruptedPrototype? Proto;
+    public readonly ProtoId<CultYoggCorruptedPrototype>? Proto;
     [NonSerialized]
     public readonly Action<EntityUid?>? Callback;
 
-    public CultYoggCorruptDoAfterEvent(CultYoggCorruptedPrototype? proto, bool inHand, Action<EntityUid?>? callback)
+    public CultYoggCorruptDoAfterEvent(ProtoId<CultYoggCorruptedPrototype>? proto, bool inHand, Action<EntityUid?>? callback)
     {
         InHand = inHand;
         Proto = proto;

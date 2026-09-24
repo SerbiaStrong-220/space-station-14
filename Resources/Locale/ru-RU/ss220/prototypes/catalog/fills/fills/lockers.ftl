@@ -1,0 +1,15 @@
+ent-LockerCIAgentFilled = шкаф агента Контрразведки
+    .desc = { ent-LockerSRTOperative.desc }
+    .suffix = Filled
+ent-LockerCIOfficerFilled = шкаф офицера Контрразведки
+    .desc = { ent-LockerSRTOperative.desc }
+    .suffix = Filled
+ent-LockerCentcommPilotFilled = шкаф пилота ЦК
+    .desc = { ent-LockerSRTOperative.desc }
+    .suffix = Filled
+ent-LockerSRTOperativeFilled = шкаф оперативника ГСН
+    .desc = { ent-LockerSRTOperative.desc }
+    .suffix = Filled
+ent-LockerCburnCommanderFilled = шкаф командира отряда РХБЗ
+    .desc = { ent-LockerSRTOperative.desc }
+    .suffix = Filled

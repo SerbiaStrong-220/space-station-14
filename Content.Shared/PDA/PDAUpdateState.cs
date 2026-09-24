@@ -1,4 +1,5 @@
 using Content.Shared.CartridgeLoader;
+using Content.Shared.StationRecords;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.PDA
@@ -12,6 +13,7 @@ namespace Content.Shared.PDA
         public bool HasPen;
         public bool HasPai;
         public PdaIdInfoText PdaOwnerInfo;
+        public PdaIdExtendedInfo PdaOwnerInfoExtended; // ss220 add additional info for pda
         public string? StationName;
         public bool HasUplink;
         public bool CanPlayMusic;
@@ -24,6 +26,7 @@ namespace Content.Shared.PDA
             bool hasPen,
             bool hasPai,
             PdaIdInfoText pdaOwnerInfo,
+            PdaIdExtendedInfo pdaOwnerInfoExtended, // ss220 add additional info for pda
             string? stationName,
             bool hasUplink = false,
             bool canPlayMusic = false,
@@ -34,6 +37,7 @@ namespace Content.Shared.PDA
             HasPen = hasPen;
             HasPai = hasPai;
             PdaOwnerInfo = pdaOwnerInfo;
+            PdaOwnerInfoExtended = pdaOwnerInfoExtended; // ss220 add additional info for pda
             HasUplink = hasUplink;
             CanPlayMusic = canPlayMusic;
             StationName = stationName;
@@ -53,4 +57,13 @@ namespace Content.Shared.PDA
         public string? StationAlertLevel;
         public Color StationAlertColor;
     }
+
+    // ss220 add additional info for pda start
+    [Serializable, NetSerializable]
+    public struct PdaIdExtendedInfo
+    {
+        public GeneralStationRecord? Record;
+        public NetEntity? IdCard;
+    }
+    // ss220 add additional info for pda end
 }
