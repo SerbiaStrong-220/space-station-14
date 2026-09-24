@@ -171,10 +171,10 @@
 
 # Job specific trinkets
 - type: loadout
-  id: BikeHornPennywise
+  id: ClownBikeHornPennywise
   effects:
   - !type:GroupLoadoutEffect
     proto: ClownPennywise
   storage:
     back:
-    - SprayFlowerPin
+    - BikeHornPennywise
