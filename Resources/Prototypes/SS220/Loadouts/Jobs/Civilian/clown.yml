@@ -167,6 +167,3 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ClownPennywise
-  storage:
-    backpack:
-    - BikeHornPennywise
