@@ -57,7 +57,7 @@
   parent: FloraAloeBase
   id: FloraAloeRandom
   name: Random Aloe
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -76,6 +76,7 @@
   parent: FloraAloeBase
   id: FloraAloe
   name: Aloe
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -174,7 +175,7 @@
   parent: FloraAmbrosiaDeusBase
   id: FloraAmbrosiaDeusRandom
   name: Random Ambrosia Deus
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -193,6 +194,7 @@
   parent: FloraAmbrosiaDeusBase
   id: FloraAmbrosiaDeus
   name: Ambrosia Deus
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -291,7 +293,7 @@
   parent: FloraAmbrosiaVulgarisBase
   id: FloraAmbrosiaVulgarisRandom
   name: Random Ambrosia Vulgaris
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -310,6 +312,7 @@
   parent: FloraAmbrosiaVulgarisBase
   id: FloraAmbrosiaVulgaris
   name: Ambrosia Vulgaris
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -409,7 +412,7 @@
   parent: FloraAnomalyBerryBase
   id: FloraAnomalyBerryRandom
   name: Random Anomaly Berry
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -425,6 +428,7 @@
   parent: FloraAnomalyBerryBase
   id: FloraAnomalyBerry
   name: Anomaly Berry
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -523,7 +527,7 @@
   parent: FloraAppleBase
   id: FloraAppleRandom
   name: Random Apple Tree
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -542,6 +546,7 @@
   parent: FloraAppleBase
   id: FloraApple
   name: Apple Tree
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -652,7 +657,7 @@
   parent: FloraBananaBase
   id: FloraBananaRandom
   name: Random Banana Tree
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -671,6 +676,7 @@
   parent: FloraBananaBase
   id: FloraBanana
   name: Banana Tree
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -781,7 +787,7 @@
   parent: FloraBerriesBase
   id: FloraBerriesRandom
   name: Random Berries Bush
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -800,6 +806,7 @@
   parent: FloraBerriesBase
   id: FloraBerries
   name: Berries Bush
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -907,7 +914,7 @@
   parent: FloraBloodTomatoBase
   id: FloraBloodTomatoRandom
   name: Random Blood Tomato
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -927,6 +934,7 @@
   parent: FloraBloodTomatoBase
   id: FloraBloodTomato
   name: Blood Tomato
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -1034,7 +1042,7 @@
   parent: FloraBloonionBase
   id: FloraBloonionRandom
   name: Random Bloonion
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -1052,6 +1060,7 @@
   parent: FloraBloonionBase
   id: FloraBloonion
   name: Bloonion
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -1141,7 +1150,7 @@
   parent: FloraBluePumpkinBase
   id: FloraBluePumpkinRandom
   name: Random Blue Pumpkin
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -1157,6 +1166,7 @@
   parent: FloraBluePumpkinBase
   id: FloraBluePumpkin
   name: Blue Pumpkin
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -1264,7 +1274,7 @@
   parent: FloraBlueTomatoBase
   id: FloraBlueTomatoRandom
   name: Random Blue Tomato
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -1283,6 +1293,7 @@
   parent: FloraBlueTomatoBase
   id: FloraBlueTomato
   name: Blue Tomato
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -1390,7 +1401,7 @@
   parent: FloraBungoBase
   id: FloraBungoRandom
   name: Random Bungo Tree
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -1407,6 +1418,7 @@
   parent: FloraBungoBase
   id: FloraBungo
   name: Bungo Tree
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -1517,6 +1529,7 @@
   parent: FloraCabbageBase
   id: FloraCabbage
   name: Cabbage
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -1623,7 +1636,7 @@
 - type: entity
   parent: FloraCannabisBase
   id: FloraCannabisRandom
-  suffix: Random
+  suffix: Random, Empty
   name: Random Cannabis
   components:
   - type: Sprite
@@ -1641,6 +1654,7 @@
   parent: FloraCannabisBase
   id: FloraCannabis
   name: Cannabis
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -1739,7 +1753,7 @@
   parent: FloraCapfruitBase
   id: FloraCapfruitRandom
   name: Random Capfruit
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -1755,6 +1769,7 @@
   parent: FloraCapfruitBase
   id: FloraCapfruit
   name: Capfruit
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -1863,7 +1878,7 @@
   parent: FloraCarrotBase
   id: FloraCarrotRandom
   name: Random Carrot
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -1880,6 +1895,7 @@
   parent: FloraCarrotBase
   id: FloraCarrot
   name: Carrot
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -1978,7 +1994,7 @@
 - type: entity
   parent: FloraChanterelleBase
   id: FloraChanterelleRandom
-  suffix: Random
+  suffix: Random, Empty
   name: Random Chanterelle
   components:
   - type: Sprite
@@ -1996,6 +2012,7 @@
   parent: FloraChanterelleBase
   id: FloraChanterelle
   name: Chanterelle
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -2094,7 +2111,7 @@
   parent: FloraCherryBase
   id: FloraCherryRandom
   name: Random Cherry Tree
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -2113,6 +2130,7 @@
   parent: FloraCherryBase
   id: FloraCherry
   name: Cherry Tree
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -2223,7 +2241,7 @@
   parent: FloraChiliBase
   id: FloraChiliRandom
   name: Random Chili
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -2242,6 +2260,7 @@
   parent: FloraChiliBase
   id: FloraChili
   name: Chili
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -2349,7 +2368,7 @@
   parent: FloraChillyBase
   id: FloraChillyRandom
   name: Random Chilly
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -2368,6 +2387,7 @@
   parent: FloraChillyBase
   id: FloraChilly
   name: Chilly
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -2475,7 +2495,7 @@
   parent: FloraCocoaBase
   id: FloraCocoaRandom
   name: Random Cocoa Tree
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -2494,6 +2514,7 @@
   parent: FloraCocoaBase
   id: FloraCocoa
   name: Cocoa Tree
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -2604,7 +2625,7 @@
   parent: FloraCornBase
   id: FloraCornRandom
   name: Random Corn
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -2620,6 +2641,7 @@
   parent: FloraCornBase
   id: FloraCorn
   name: Corn
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -2728,7 +2750,7 @@
   parent: FloraCottonBase
   id: FloraCottonRandom
   name: Random Cotton
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -2745,6 +2767,7 @@
   parent: FloraCottonBase
   id: FloraCotton
   name: Cotton
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -2852,7 +2875,7 @@
   parent: FloraDeathNettleBase
   id: FloraDeathNettleRandom
   name: Random Death Nettle
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -2870,6 +2893,7 @@
   parent: FloraDeathNettleBase
   id: FloraDeathNettle
   name: Death Nettle
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -2985,7 +3009,7 @@
   parent: FloraEggplantBase
   id: FloraEggplantRandom
   name: Random Eggplant
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -3002,6 +3026,7 @@
   parent: FloraEggplantBase
   id: FloraEggplant
   name: Eggplant
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -3109,7 +3134,7 @@
   parent: FloraEggyBase
   id: FloraEggyRandom
   name: Random Eggy
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -3128,6 +3153,7 @@
   parent: FloraEggyBase
   id: FloraEggy
   name: Eggy
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -3235,7 +3261,7 @@
   parent: FloraExtradimensionalOrangeBase
   id: FloraExtradimensionalOrangeRandom
   name: Random Extradimensional Orange Tree
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -3255,6 +3281,7 @@
   parent: FloraExtradimensionalOrangeBase
   id: FloraExtradimensionalOrange
   name: Extradimensional Orange Tree
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -3366,7 +3393,7 @@
   parent: FloraFlyAmanitaBase
   id: FloraFlyAmanitaRandom
   name: Random Fly Amanita
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -3382,6 +3409,7 @@
   parent: FloraFlyAmanitaBase
   id: FloraFlyAmanita
   name: Fly Amanita
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -3480,7 +3508,7 @@
   parent: FloraGalaxyThistleBase
   id: FloraGalaxyThistleRandom
   name: Random Galaxy Thistle
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -3497,6 +3525,7 @@
   parent: FloraGalaxyThistleBase
   id: FloraGalaxyThistle
   name: Galaxy Thistle
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -3596,7 +3625,7 @@
   parent: FloraGarlicBase
   id: FloraGarlicRandom
   name: Random Garlic
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -3613,6 +3642,7 @@
   parent: FloraGarlicBase
   id: FloraGarlic
   name: Garlic
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -3711,7 +3741,7 @@
   parent: FloraGatfruitBase
   id: FloraGatfruitRandom
   name: Random Gatfruit Tree
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -3727,6 +3757,7 @@
   parent: FloraGatfruitBase
   id: FloraGatfruit
   name: Gatfruit Tree
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -3837,7 +3868,7 @@
   parent: FloraGlasstleBase
   id: FloraGlasstleRandom
   name: Random Glasstle
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -3854,6 +3885,7 @@
   parent: FloraGlasstleBase
   id: FloraGlasstle
   name: Glasstle
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -3959,7 +3991,7 @@
   parent: FloraGoldenAppleTreeBase
   id: FloraGoldenAppleTreeRandom
   name: Random Golden Apple Tree
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -3979,6 +4011,7 @@
   parent: FloraGoldenAppleTreeBase
   id: FloraGoldenAppleTree
   name: Golden Apple Tree
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -4089,7 +4122,7 @@
   parent: FloraGrapeBase
   id: FloraGrapeRandom
   name: Random Grape
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -4105,6 +4138,7 @@
   parent: FloraGrapeBase
   id: FloraGrape
   name: Grape
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -4212,7 +4246,7 @@
   parent: FloraHolymelonBase
   id: FloraHolymelonRandom
   name: Random Holymelon
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -4231,6 +4265,7 @@
   parent: FloraHolymelonBase
   id: FloraHolymelon
   name: Holymelon
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -4338,7 +4373,7 @@
   parent: FloraKoibeanBase
   id: FloraKoibeanRandom
   name: Random Koibean
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -4356,6 +4391,7 @@
   parent: FloraKoibeanBase
   id: FloraKoibean
   name: Koibean
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -4463,7 +4499,7 @@
   parent: FloraLaughinPeaBase
   id: FloraLaughinPeaRandom
   name: Random Laughin Pea
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -4479,6 +4515,7 @@
   parent: FloraLaughinPeaBase
   id: FloraLaughinPea
   name: Laughin Pea
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -4586,7 +4623,7 @@
   parent: FloraLemonBase
   id: FloraLemonRandom
   name: Random Lemon Tree
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -4605,6 +4642,7 @@
   parent: FloraLemonBase
   id: FloraLemon
   name: Lemon Tree
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -4715,7 +4753,7 @@
   parent: FloraLemoonBase
   id: FloraLemoonRandom
   name: Random Lemoon Tree
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -4734,6 +4772,7 @@
   parent: FloraLemoonBase
   id: FloraLemoon
   name: Lemoon Tree
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -4841,7 +4880,7 @@
   parent: FloraLilyBase
   id: FloraLilyRandom
   name: Random Lily
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -4858,6 +4897,7 @@
   parent: FloraLilyBase
   id: FloraLily
   name: Lily
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -4965,7 +5005,7 @@
   parent: FloraLimeBase
   id: FloraLimeRandom
   name: Random Lime Tree
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -4984,6 +5024,7 @@
   parent: FloraLimeBase
   id: FloraLime
   name: Lime Tree
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -5095,7 +5136,7 @@
   parent: FloraLingzhiBase
   id: FloraLingzhiRandom
   name: Random Lingzhi
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -5112,6 +5153,7 @@
   parent: FloraLingzhiBase
   id: FloraLingzhi
   name: Lingzhi
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -5219,7 +5261,7 @@
   parent: FloraMeatwheatBase
   id: FloraMeatwheatRandom
   name: Random Meatwheat
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -5239,6 +5281,7 @@
   parent: FloraMeatwheatBase
   id: FloraMeatwheat
   name: Meatwheat
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -5346,7 +5389,7 @@
   parent: FloraMimanaBase
   id: FloraMimanaRandom
   name: Random Mimana
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -5366,6 +5409,7 @@
   parent: FloraMimanaBase
   id: FloraMimana
   name: Mimana
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -5473,7 +5517,7 @@
   parent: FloraNettleBase
   id: FloraNettleRandom
   name: Random Nettle
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -5492,6 +5536,7 @@
   parent: FloraNettleBase
   id: FloraNettle
   name: Nettle
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -5606,7 +5651,7 @@
   parent: FloraOatBase
   id: FloraOatRandom
   name: Random Oat
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -5626,6 +5671,7 @@
   parent: FloraOatBase
   id: FloraOat
   name: Oat
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -5734,7 +5780,7 @@
   parent: FloraOnionBase
   id: FloraOnionRandom
   name: Random Onion
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -5751,6 +5797,7 @@
   parent: FloraOnionBase
   id: FloraOnion
   name: Onion
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -5850,7 +5897,7 @@
   parent: FloraOnionRedBase
   id: FloraOnionRedRandom
   name: Random Red Onion
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -5867,6 +5914,7 @@
   parent: FloraOnionRedBase
   id: FloraOnionRed
   name: Red Onion
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -5965,7 +6013,7 @@
   parent: FloraOrangeBase
   id: FloraOrangeRandom
   name: Random Orange Tree
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -5985,6 +6033,7 @@
   parent: FloraOrangeBase
   id: FloraOrange
   name: Orange Tree
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -6095,7 +6144,7 @@
   parent: FloraSugarcaneBase
   id: FloraSugarcaneRandom
   name: Random Sugarcane
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -6112,6 +6161,7 @@
   parent: FloraSugarcaneBase
   id: FloraSugarcane
   name: Sugarcane
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -6219,7 +6269,7 @@
   parent: FloraPapercaneBase
   id: FloraPapercaneRandom
   name: Random Papercane
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -6236,6 +6286,7 @@
   parent: FloraPapercaneBase
   id: FloraPapercane
   name: Papercane
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -6343,7 +6394,7 @@
   parent: FloraPeaBase
   id: FloraPeaRandom
   name: Random Pea
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -6360,6 +6411,7 @@
   parent: FloraPeaBase
   id: FloraPea
   name: Pea
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -6467,7 +6519,7 @@
   parent: FloraPineappleBase
   id: FloraPineappleRandom
   name: Random Pineapple
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -6484,6 +6536,7 @@
   parent: FloraPineappleBase
   id: FloraPineapple
   name: Pineapple
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -6582,7 +6635,7 @@
   parent: FloraPoppyBase
   id: FloraPoppyRandom
   name: Random Poppy
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -6599,6 +6652,7 @@
   parent: FloraPoppyBase
   id: FloraPoppy
   name: Poppy
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -6707,7 +6761,7 @@
   parent: FloraPotatoBase
   id: FloraPotatoRandom
   name: Random Potato
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -6725,6 +6779,7 @@
   parent: FloraPotatoBase
   id: FloraPotato
   name: Potato
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -6832,7 +6887,7 @@
   parent: FloraPumpkinBase
   id: FloraPumpkinRandom
   name: Random Pumpkin
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -6849,6 +6904,7 @@
   parent: FloraPumpkinBase
   id: FloraPumpkin
   name: Pumpkin
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -6957,7 +7013,7 @@
   parent: FloraPyrottonBase
   id: FloraPyrottonRandom
   name: Random Pyrotton
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -6974,6 +7030,7 @@
   parent: FloraPyrottonBase
   id: FloraPyrotton
   name: Pyrotton
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -7081,7 +7138,7 @@
   parent: FloraRainbowCannabisBase
   id: FloraRainbowCannabisRandom
   name: Random Rainbow Cannabis
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -7098,6 +7155,7 @@
   parent: FloraRainbowCannabisBase
   id: FloraRainbowCannabis
   name: Rainbow Cannabis
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -7205,7 +7263,7 @@
   parent: FloraRiceBase
   id: FloraRiceRandom
   name: Random Rice
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -7223,6 +7281,7 @@
   parent: FloraRiceBase
   id: FloraRice
   name: Rice
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -7330,7 +7389,7 @@
   parent: FloraSoybeansBase
   id: FloraSoybeansRandom
   name: Random Soybeans
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -7348,6 +7407,7 @@
   parent: FloraSoybeansBase
   id: FloraSoybeans
   name: Soybeans
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -7455,7 +7515,7 @@
   parent: FloraSpacemansTrumpetBase
   id: FloraSpacemansTrumpetRandom
   name: Random Spaceman's Trumpet
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -7473,6 +7533,7 @@
   parent: FloraSpacemansTrumpetBase
   id: FloraSpacemansTrumpet
   name: Spaceman's Trumpet
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -7580,7 +7641,7 @@
   parent: FloraSteelcapBase
   id: FloraSteelcapRandom
   name: Random Steelcap
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -7596,6 +7657,7 @@
   parent: FloraSteelcapBase
   id: FloraSteelcap
   name: Steelcap
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -7694,7 +7756,7 @@
   parent: FloraTeaPlantBase
   id: FloraTeaPlantRandom
   name: Random Tea Plant
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -7713,6 +7775,7 @@
   parent: FloraTeaPlantBase
   id: FloraTeaPlant
   name: Tea Plant
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -7820,7 +7883,7 @@
   parent: FloraTobaccoBase
   id: FloraTobaccoRandom
   name: Random Tobacco
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -7837,6 +7900,7 @@
   parent: FloraTobaccoBase
   id: FloraTobacco
   name: Tobacco
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -7944,7 +8008,7 @@
   parent: FloraTomatoBase
   id: FloraTomatoRandom
   name: Random Tomato
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -7964,6 +8028,7 @@
   parent: FloraTomatoBase
   id: FloraTomato
   name: Tomato
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -8071,7 +8136,7 @@
   parent: FloraTomatoKillerBase
   id: FloraTomatoKillerRandom
   name: Random Tomato Killer
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -8087,6 +8152,7 @@
   parent: FloraTomatoKillerBase
   id: FloraTomatoKiller
   name: Tomato Killer
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -8193,7 +8259,7 @@
   parent: FloraTowercapBase
   id: FloraTowercapRandom
   name: Random Towercap
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -8209,6 +8275,7 @@
   parent: FloraTowercapBase
   id: FloraTowercap
   name: Towercap
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -8307,7 +8374,7 @@
   parent: FloraWatermelonBase
   id: FloraWatermelonRandom
   name: Random Watermelon
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -8327,6 +8394,7 @@
   parent: FloraWatermelonBase
   id: FloraWatermelon
   name: Watermelon
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -8434,7 +8502,7 @@
   parent: FloraWheatBase
   id: FloraWheatRandom
   name: Random Wheat
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -8454,6 +8522,7 @@
   parent: FloraWheatBase
   id: FloraWheat
   name: Wheat
+  suffix: Food
   components:
   - type: Sprite
     layers:
@@ -8561,7 +8630,7 @@
   parent: FloraWorldPeaBase
   id: FloraWorldPeaRandom
   name: Random World Pea
-  suffix: Random
+  suffix: Random, Empty
   components:
   - type: Sprite
     layers:
@@ -8578,6 +8647,7 @@
   parent: FloraWorldPeaBase
   id: FloraWorldPea
   name: World Pea
+  suffix: Food
   components:
   - type: Sprite
     layers:
