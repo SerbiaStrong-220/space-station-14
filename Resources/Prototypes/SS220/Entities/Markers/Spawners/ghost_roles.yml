@@ -10,7 +10,9 @@
     name: spider-royQueen-name
     description: spider-royQueen-desc
     rules: spider-royQueen-desc
-    job: SpiderQueen
+    job: SpiderQueenPlayer
+    mindRoles:
+    - MindRoleSpiderQueen
     raffle:
       settings: default
   - type: Sprite
