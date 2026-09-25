@@ -5,7 +5,7 @@ using Content.Shared.Inventory;
 
 namespace Content.Client.Chat.TypingIndicator;
 
-public sealed class TypingIndicatorVisualizerSystem : VisualizerSystem<TypingIndicatorComponent>
+public sealed partial class TypingIndicatorVisualizerSystem : VisualizerSystem<TypingIndicatorComponent> //SS220 telepathy
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
@@ -42,6 +42,7 @@ public sealed class TypingIndicatorVisualizerSystem : VisualizerSystem<TypingInd
         SpriteSystem.LayerSetOffset((uid, args.Sprite), layer, proto.Offset);
 
         AppearanceSystem.TryGetData<TypingIndicatorState>(uid, TypingIndicatorVisuals.State, out var state);
+        state = GetTelepathyTypingState(uid, state); //SS220 telepathy
         SpriteSystem.LayerSetVisible((uid, args.Sprite), layer, state != TypingIndicatorState.None);
         switch (state)
         {
