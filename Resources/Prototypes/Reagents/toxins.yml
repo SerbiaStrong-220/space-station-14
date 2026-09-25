@@ -500,7 +500,7 @@
       - !type:PopupMessage
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Animal, Vox, Tajaran ] #SS220 Tajaran fix
+          type: [ Animal, Vox, Tajaran, Arachnid ] #SS220 Tajaran fix
           inverted: true
         type: Local
         visualType: MediumCaution
@@ -510,12 +510,12 @@
         probability: 0.1
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Animal, Vox, Plant, Tajaran ] #SS220 Tajaran fix
+          type: [ Animal, Vox, Plant, Tajaran, Arachnid ] #SS220 Tajaran fix
           inverted: true
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Animal, Vox, Plant, Tajaran ] #SS220 Tajaran fix
+          type: [ Animal, Vox, Plant, Tajaran, Arachnid ] #SS220 Tajaran fix
           inverted: true
         damage:
           types:
@@ -530,7 +530,7 @@
       - !type:AdjustReagent
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Animal, Tajaran ] #SS220 Tajaran fix
+          type: [ Animal, Tajaran, Arachnid ] #SS220 Tajaran fix
         reagent: Protein
         amount: 0.5
       - !type:AdjustReagent
