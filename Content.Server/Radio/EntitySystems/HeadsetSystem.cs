@@ -65,7 +65,10 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
     {
         if (args.Frequency is null)
         {
-            args.Cancelled = !entity.Comp.Channels.Contains(args.Channel.ID);
+            // SS220-listen-only-radio begin
+            args.Cancelled = !(entity.Comp.Channels.Contains(args.Channel.ID)
+                || entity.Comp.ListenOnlyChannels.Contains(args.Channel.ID));
+            // SS220-listen-only-radio end
             return;
         }
 
@@ -113,14 +116,17 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
         if (!Resolve(uid, ref keyHolder))
             return;
 
-        if (keyHolder.Channels.Count == 0 && keyHolder.KeyContainer.Count == 0) // SS220-add-frequency-radio
+        // SS220-listen-only-radio begin
+        if (keyHolder.Channels.Count == 0 && keyHolder.ListenOnlyChannels.Count == 0 && keyHolder.KeyContainer.Count == 0) // SS220-add-frequency-radio
             RemComp<ActiveRadioComponent>(uid);
+        // SS220-listen-only-radio end
         else
         //  SS220-add-frequency-radio-begin
         // EnsureComp<ActiveRadioComponent>(uid).Channels = new(keyHolder.Channels); // [wizden-code] SS220-add-frequency-radio
         {
             var activeRadio = EnsureComp<ActiveRadioComponent>(uid);
             activeRadio.Channels = new(keyHolder.Channels);
+            activeRadio.ListenOnlyChannels = new(keyHolder.ListenOnlyChannels); // SS220-listen-only-radio
             activeRadio.FrequencyChannels = [];
             foreach (var key in keyHolder.KeyContainer.ContainedEntities)
             {

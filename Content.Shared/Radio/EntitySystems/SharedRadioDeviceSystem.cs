@@ -1,5 +1,6 @@
 using Content.Shared.Popups;
 using Content.Shared.Radio.Components;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Radio.EntitySystems;
 
@@ -43,11 +44,26 @@ public abstract class SharedRadioDeviceSystem : EntitySystem
         }
 
         _appearance.SetData(uid, RadioDeviceVisuals.Speaker, component.Enabled);
+
         if (component.Enabled)
-            EnsureComp<ActiveRadioComponent>(uid).Channels.UnionWith(component.Channels);
+        {
+            var activeRadio = EnsureComp<ActiveRadioComponent>(uid);
+            activeRadio.Channels.UnionWith(component.Channels);
+
+            // SS220-listen-only-radio begin
+            // Listen-only channels are already aggregated on the key holder itself
+            // (see EncryptionKeySystem.UpdateChannels) — just pull them in, no need
+            // to walk the key container here.
+            if (TryComp<EncryptionKeyHolderComponent>(uid, out var keyHolder))
+                activeRadio.ListenOnlyChannels.UnionWith(keyHolder.ListenOnlyChannels);
+            // SS220-listen-only-radio end
+
+            Dirty(uid, activeRadio);
+        }
         else
+        {
             RemCompDeferred<ActiveRadioComponent>(uid);
+        }
     }
     #endregion
 }
-
