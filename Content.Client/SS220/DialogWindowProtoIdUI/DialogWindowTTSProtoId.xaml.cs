@@ -67,7 +67,7 @@ public sealed partial class DialogWindowTTSProtoId : FancyWindow
             if (!prototypeSelector(prototype))
                 continue;
 
-            PrototypeIds.AddItem($"{prototype.Name} ({prototype.ID})");
+            PrototypeIds.AddItem($"{Loc.GetString(prototype.Name)} ({prototype.ID})");
             _ids.Add(prototype.ID);
         }
 

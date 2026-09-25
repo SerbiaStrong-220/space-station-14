@@ -42,3 +42,11 @@ job-name-space-dragon = { roles-antag-dragon-name }
 job-name-syndicate-borg = киборг Синдиката
 
 job-name-syndicate-reinforcement = подкрепление Синдиката
+
+job-name-senior-service = сервисный администратор
+
+job-name-security-pilot = пилот СБ
+
+job-name-ghost-role = Ghost role
+
+job-name-derelict-borg = заброшенный киборг
