@@ -17,25 +17,25 @@ using Content.Shared.SS220.Economy;
 using Content.Shared.Stacks;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
-using Robust.Server.Containers;
+using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Server.SS220.Economy;
 
-public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
+public sealed partial class EconomyBankCardSystem : SharedEconomyBankCardSystem
 {
-    [Dependency] private readonly InventorySystem _inventorySystem = default!;
-    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-    [Dependency] private readonly SharedStorageSystem _storageSystem = default!;
-    [Dependency] private readonly ContainerSystem _containerSystem = default!;
-    [Dependency] private readonly SharedStackSystem _stackSystem = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedIdCardSystem _idCardSystem = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
+    [Dependency] private InventorySystem _inventorySystem = default!;
+    [Dependency] private SharedHandsSystem _handsSystem = default!;
+    [Dependency] private SharedStorageSystem _storageSystem = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private SharedStackSystem _stackSystem = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedIdCardSystem _idCardSystem = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private IChatManager _chatManager = default!;
 
     private static readonly EntProtoId SpaceCashProto = "SpaceCash";
     private const string BackSlot = "back";
@@ -58,8 +58,11 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
         if (!TryComp<MicrowaveComponent>(args.Microwave, out var micro) || micro.Broken)
             return;
 
-        if (_random.Prob(ent.Comp.MicrowaveResetChance))
-            ent.Comp.AccountId = default;
+        if (!_random.Prob(ent.Comp.MicrowaveResetChance))
+            return;
+
+        ent.Comp.AccountId = default;
+        Dirty(ent);
     }
 
     public override void PonderForData(Entity<EconomySalaryReceiverComponent> user)
@@ -91,7 +94,9 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
         if (_prototypeManager.Resolve(jobPrototype.EconomySalaryPrototype, out var economySalaryPrototype))
             startingBalance = economySalaryPrototype.Amount;
 
-        var account = CreateAccount(default, startingBalance);
+        if (!TryCreateAccount(out var account, startingBalance: startingBalance))
+            return;
+
         bankCardComponent.AccountId = account.AccountId;
 
         account.AccountOwnerName = Name(ev.Mob);
@@ -192,7 +197,7 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
     {
         withdrawnAmount = 0;
 
-        if (!TryGetAccount(accountId, out var account))
+        if (amountToWithdraw < 0 || !TryGetAccount(accountId, out var account))
             return false;
 
         var balance = account.Balance;
@@ -210,48 +215,82 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
     }
 
     /// <summary>
+    /// Withdraws cash and the ATM fee without overflowing or charging for an empty payout.
+    /// </summary>
+    public bool TryWithdrawCash(int accountId, int amount, bool emagged, out int cash)
+    {
+        cash = 0;
+        if (amount <= 0 || !TryGetAccount(accountId, out var account) || amount > account.Balance)
+            return false;
+
+        var fee = emagged ? GetEmaggedTax(amount) : 0;
+        var debit = (int)Math.Min((long)amount + fee, account.Balance);
+        if (debit <= fee || !CashWithdrawal(accountId, out _, debit))
+            return false;
+
+        cash = debit - fee;
+        return true;
+    }
+
+    public bool TryDeposit(int accountId, int amount)
+    {
+        if (amount <= 0 || !TryGetAccount(accountId, out var account)
+            || account.Balance < 0 || amount > int.MaxValue - account.Balance)
+        {
+            return false;
+        }
+
+        return TryChangeBalance(accountId, account.Balance + amount);
+    }
+
+    /// <summary>
+    /// Validates both accounts before changing either balance.
+    /// </summary>
+    public bool TryTransfer(int payerId, int ownerId, int amount)
+    {
+        if (amount <= 0 || payerId == ownerId
+            || !TryGetAccount(payerId, out var payer)
+            || !TryGetAccount(ownerId, out var owner)
+            || payer.Balance < amount || owner.Balance < 0
+            || amount > int.MaxValue - owner.Balance)
+        {
+            return false;
+        }
+
+        payer.Balance -= amount;
+        owner.Balance += amount;
+        NotifyBalanceChanged(payerId);
+        NotifyBalanceChanged(ownerId);
+        return true;
+    }
+
+    /// <summary>
     /// Creates BankAccount with specified unique accountId and startingBalance.
     /// If accountId already taken — returns BankAccount with this accountId.
     /// If accountId = default — creates new random accountId.
     /// </summary>
-    public BankAccount CreateAccount(int accountId = default, int startingBalance = 0)
+    public bool TryCreateAccount([NotNullWhen(true)] out BankAccount? account, int accountId = default, int startingBalance = 0)
     {
-        if (TryGetAccount(accountId, out var acc))
-            return acc;
-
-        BankAccount account;
-
-        var accountPin = _random.Next((int)Math.Pow(10, PinCodeLength - 1), (int)Math.Pow(10, PinCodeLength));
-
-        if (accountId == default)
-        {
-            int accountNumber;
-
-            do
-            {
-                accountNumber = _random.Next(100000, 1000000); // Строка с генерацией ПИН-кода выглядит сложнее, чем эта - не так ли? Зато без волшебных чисел
-            } while (AccountExist(accountNumber));
-
-            account = new BankAccount(accountNumber, accountPin, startingBalance);
-        }
-        else
-        {
-            account = new BankAccount(accountId, accountPin, startingBalance);
-        }
-
+        account = null;
         var bankAccounts = GetBankAccounts();
-        bankAccounts?.Add(account);
-
-        return account;
-    }
-
-    public bool AccountExist(int accountId)
-    {
-        if (accountId == default)
+        if (bankAccounts == null || startingBalance < 0)
             return false;
 
-        var bankAccounts = GetBankAccounts();
-        return bankAccounts is not null && bankAccounts.Any(x => x.AccountId == accountId);
+        if (TryGetAccount(accountId, out account))
+            return true;
+
+        if (accountId == default)
+        {
+            do
+            {
+                accountId = _random.Next(100000, 1000000);
+            } while (bankAccounts.Any(x => x.AccountId == accountId));
+        }
+
+        var accountPin = _random.Next((int)Math.Pow(10, PinCodeLength - 1), (int)Math.Pow(10, PinCodeLength));
+        account = new BankAccount(accountId, accountPin, startingBalance);
+        bankAccounts.Add(account);
+        return true;
     }
 
     public bool TryGetAccount(int accountId, [NotNullWhen(true)] out BankAccount? account)
@@ -270,17 +309,24 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
 
     public bool TryChangeBalance(int accountId, int amount)
     {
-        if (!TryGetAccount(accountId, out var account))
+        if (amount < 0 || !TryGetAccount(accountId, out var account))
             return false;
 
         account.Balance = amount;
+        NotifyBalanceChanged(accountId);
 
         return true;
     }
 
+    private void NotifyBalanceChanged(int accountId)
+    {
+        var ev = new EconomyBalanceChangedEvent(accountId);
+        RaiseLocalEvent(ref ev);
+    }
+
     public static int GetEmaggedTax(int input)
     {
-        return (int)Math.Floor(FlatEmaggedTax + (input / 100f * PercentEmaggedTax));
+        return FlatEmaggedTax + (int)((long)input * PercentEmaggedTax / 100);
     }
 
     public List<BankAccount>? GetBankAccounts()
@@ -295,3 +341,6 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
         return null;
     }
 }
+
+[ByRefEvent]
+public readonly record struct EconomyBalanceChangedEvent(int AccountId);

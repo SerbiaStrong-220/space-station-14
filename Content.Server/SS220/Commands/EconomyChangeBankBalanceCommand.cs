@@ -11,10 +11,10 @@ using Robust.Shared.Console;
 namespace Content.Server.SS220.Commands;
 
 [AdminCommand(AdminFlags.Admin)]
-public sealed class EconomyChangeBankBalanceCommand : IConsoleCommand
+public sealed partial class EconomyChangeBankBalanceCommand : IConsoleCommand
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
 
     public string Command => "economy_changebalance";
 
@@ -36,9 +36,9 @@ public sealed class EconomyChangeBankBalanceCommand : IConsoleCommand
             return;
         }
 
-        if (!int.TryParse(args[1], out var amount))
+        if (!int.TryParse(args[1], out var amount) || amount < 0)
         {
-            shell.WriteLine("Amount should be a number.");
+            shell.WriteLine("Amount should be a non-negative integer.");
             return;
         }
 
@@ -60,7 +60,7 @@ public sealed class EconomyChangeBankBalanceCommand : IConsoleCommand
 
         _adminLogger.Add(LogType.AdminCommands,
             LogImpact.Medium,
-            $"{shell.Player!.Name} ({shell.Player!.UserId}) changed bank balance of {accountId} from {oldBalance} to {amount}");
+            $"{shell.Player?.Name ?? "Server console"} ({shell.Player?.UserId}) changed bank balance of {accountId} from {oldBalance} to {amount}");
     }
 
     public CompletionResult GetCompletion(IConsoleShell shell, string[] args)

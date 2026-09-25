@@ -120,7 +120,7 @@ public sealed partial class EconomyEFTPOSWindow : FancyWindow
             ? "economy-eftpos-ui-payment-await-card-text"
             : "economy-eftpos-ui-payment-await-pin-text");
 
-        PayerPinInputText.Text = VisualizePinCode(eftposState.PayerPinInput.Length);
+        PayerPinInputText.Text = VisualizePinCode(eftposState.PayerPinInputLength);
 
         PrintReceiptButton.Text = Loc.GetString(eftposState.PrintReceipt
             ? "economy-eftpos-ui-receipt-print-yes"

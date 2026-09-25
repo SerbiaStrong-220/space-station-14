@@ -21,6 +21,9 @@ public sealed partial class EconomyEFTPOSComponent : Component
     public int PayerBankAccountId = default;
 
     [ViewVariables]
+    public EntityUid? Payer;
+
+    [ViewVariables]
     public string PayerPinInput = string.Empty;
 
     [ViewVariables]

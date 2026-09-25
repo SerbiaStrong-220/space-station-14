@@ -15,9 +15,9 @@ public sealed class EconomyDeCentralBankSystem : EntitySystem
         if (ent.Comp.IsCentralNode)
         {
             var enumerator = EntityQueryEnumerator<EconomyDeCentralBankComponent>();
-            while (enumerator.MoveNext(out var _, out var comp))
+            while (enumerator.MoveNext(out _, out var comp))
             {
-                if (comp is null || comp.IsCentralNode)
+                if (comp.IsCentralNode)
                     continue;
 
                 comp.IsCentralNode = true;
@@ -30,7 +30,6 @@ public sealed class EconomyDeCentralBankSystem : EntitySystem
     private void OnMapInit(Entity<EconomyDeCentralBankComponent> ent, ref MapInitEvent args)
     {
         var enumerator = EntityQueryEnumerator<EconomyDeCentralBankComponent>();
-
         var isCentralNodePresent = false;
 
         while (enumerator.MoveNext(out var uid, out var comp))

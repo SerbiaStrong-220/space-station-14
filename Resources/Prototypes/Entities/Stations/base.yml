@@ -172,7 +172,6 @@
   components:
     - type: StationCentcomm
     - type: EconomyDeCentralBank # Economy
-      isCentralNode: true
 
 - type: entity
   id: BaseStationEvacuation

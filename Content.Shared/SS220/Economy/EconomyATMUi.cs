@@ -9,9 +9,10 @@ public sealed class EconomyATMUiState : BoundUserInterfaceState
 {
     public CardStateEnum CardState = CardStateEnum.Default;
     public string InfoMessage = string.Empty;
-    public string ErrorMessage = string.Empty;
-    public BankAccount BankAccount = new();
-    public string PinInput = string.Empty;
+    public int AccountId;
+    public string AccountOwnerName = string.Empty;
+    public int Balance;
+    public int PinInputLength;
     public bool Emagged = false;
     public bool UnemployedAlert = false;
 }
@@ -23,9 +24,7 @@ public sealed class EconomyATMKeypadMessage(int value) : BoundUserInterfaceMessa
 }
 
 [Serializable, NetSerializable]
-public sealed class EconomyATMKeypadClearMessage : BoundUserInterfaceMessage
-{
-}
+public sealed class EconomyATMKeypadClearMessage : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
 public sealed class EconomyATMKeypadEnterMessage(int amount) : BoundUserInterfaceMessage
@@ -34,11 +33,7 @@ public sealed class EconomyATMKeypadEnterMessage(int amount) : BoundUserInterfac
 }
 
 [Serializable, NetSerializable]
-public sealed class EconomyATMBankAccountLinkMessage : BoundUserInterfaceMessage
-{
-}
+public sealed class EconomyATMBankAccountLinkMessage : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
-public sealed class EconomyATMBankAccountCreateMessage : BoundUserInterfaceMessage
-{
-}
+public sealed class EconomyATMBankAccountCreateMessage : BoundUserInterfaceMessage;

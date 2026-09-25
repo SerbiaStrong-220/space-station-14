@@ -71,6 +71,7 @@ economy-atm-insert-verb = Вставить карту
 economy-atm-eject-verb = Достать карту
 economy-atm-insert-cash-error-popup = Купюроприемник закрыт
 economy-atm-wrong-pin = Неверный ПИН-код
+economy-atm-withdraw-failed = Недостаточно средств для снятия указанной суммы с учётом комиссии.
 economy-atm-ui-title = БАНКОМАТ
 economy-atm-ui-select-withdraw-amount = Выберите сумму вывода
 economy-atm-ui-no-account = К карте не привязан аккаунт

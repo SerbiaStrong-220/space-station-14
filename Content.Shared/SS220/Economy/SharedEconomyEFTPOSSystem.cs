@@ -8,15 +8,17 @@ using Content.Shared.Popups;
 using Content.Shared.Tools.Components;
 using Content.Shared.Tools.Systems;
 using Robust.Shared.Serialization;
+using Robust.Shared.Network;
 
 namespace Content.Shared.SS220.Economy;
 
 public abstract partial class SharedEconomyEFTPOSSystem : EntitySystem
 {
-    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-    [Dependency] private readonly SharedToolSystem _tool = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedHandsSystem _handsSystem = default!;
+    [Dependency] private SharedToolSystem _tool = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {
@@ -29,6 +31,7 @@ public abstract partial class SharedEconomyEFTPOSSystem : EntitySystem
 
         SubscribeLocalEvent<EconomyEFTPOSComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<EconomyEFTPOSComponent, EconomyEFTPOSResetEvent>(OnEFTPOSReset);
+        SubscribeLocalEvent<EconomyEFTPOSComponent, BoundUIClosedEvent>(OnUiClosed);
     }
 
     private void OnPaymentButtonPressed(Entity<EconomyEFTPOSComponent> ent, ref EconomyEFTPOSPaymentMessage args)
@@ -40,9 +43,13 @@ public abstract partial class SharedEconomyEFTPOSSystem : EntitySystem
         if (ent.Comp.OwnerBankAccountId == default
             || bankCard.AccountId == default
             || ent.Comp.OwnerBankAccountId == bankCard.AccountId
-            )
+            || ent.Comp.Amount <= 0)
+        {
             return;
+        }
 
+        ResetPayment(ent);
+        ent.Comp.Payer = args.Actor;
         ent.Comp.PayerBankAccountId = bankCard.AccountId;
 
         UpdateUiState(ent);
@@ -56,23 +63,43 @@ public abstract partial class SharedEconomyEFTPOSSystem : EntitySystem
 
     private void OnKeypadButtonPressed(Entity<EconomyEFTPOSComponent> ent, ref EconomyEFTPOSKeypadMessage args)
     {
-        if (ent.Comp.PayerPinInput.Length >= SharedEconomyBankCardSystem.PinCodeLength)
+        if (args.Value is < 0 or > 9
+            || ent.Comp.Payer != args.Actor
+            || ent.Comp.PayerPinInput.Length >= SharedEconomyBankCardSystem.PinCodeLength)
+        {
             return;
+        }
 
         if (ent.Comp.PayerBankAccountId == default)
             return;
 
         ent.Comp.PayerPinInput += args.Value.ToString();
-
         UpdateUiState(ent);
     }
 
     private void OnClearButtonPressed(Entity<EconomyEFTPOSComponent> ent, ref EconomyEFTPOSKeypadClearMessage args)
     {
+        if (ent.Comp.Payer != args.Actor)
+            return;
+
+        ResetPayment(ent);
+        UpdateUiState(ent);
+    }
+
+    private void OnUiClosed(Entity<EconomyEFTPOSComponent> ent, ref BoundUIClosedEvent args)
+    {
+        if (ent.Comp.Payer != args.Actor)
+            return;
+
+        ResetPayment(ent);
+        UpdateUiState(ent);
+    }
+
+    protected void ResetPayment(Entity<EconomyEFTPOSComponent> ent)
+    {
+        ent.Comp.Payer = null;
         ent.Comp.PayerBankAccountId = default;
         ent.Comp.PayerPinInput = string.Empty;
-
-        UpdateUiState(ent);
     }
 
     protected abstract void OnEnterButtonPressed(Entity<EconomyEFTPOSComponent> ent, ref EconomyEFTPOSKeypadEnterMessage args);
@@ -82,7 +109,8 @@ public abstract partial class SharedEconomyEFTPOSSystem : EntitySystem
         var itemInHands = _handsSystem.GetActiveItem(args.Actor);
         if (!itemInHands.HasValue
             || !TryComp<EconomyBankCardComponent>(itemInHands, out var bankCard)
-            || bankCard.AccountId == default)
+            || bankCard.AccountId == default
+            || args.Amount < 0)
         {
             return;
         }
@@ -97,7 +125,10 @@ public abstract partial class SharedEconomyEFTPOSSystem : EntitySystem
             ent.Comp.OwnerBankAccountId = default;
             ent.Comp.Amount = 0;
         }
+        else
+            return;
 
+        ResetPayment(ent);
         UpdateUiState(ent);
     }
 
@@ -120,8 +151,8 @@ public abstract partial class SharedEconomyEFTPOSSystem : EntitySystem
 
         ent.Comp.OwnerBankAccountId = default;
         ent.Comp.Amount = default;
-        ent.Comp.PayerBankAccountId = default;
-        ent.Comp.PayerPinInput = string.Empty;
+
+        ResetPayment(ent);
         ent.Comp.PrintReceipt = false;
 
         UpdateUiState(ent);
@@ -134,6 +165,9 @@ public abstract partial class SharedEconomyEFTPOSSystem : EntitySystem
 
     protected void UpdateUiState(Entity<EconomyEFTPOSComponent> ent)
     {
+        if (_net.IsClient)
+            return;
+
         var state = new EconomyEFTPOSUiState
         {
             Locked = ent.Comp.OwnerBankAccountId != default,
@@ -141,7 +175,7 @@ public abstract partial class SharedEconomyEFTPOSSystem : EntitySystem
             OwnerBankAccountId = ent.Comp.OwnerBankAccountId,
             OwnerName = GetOwner(ent.Comp.OwnerBankAccountId),
             PayerBankAccountId = ent.Comp.PayerBankAccountId,
-            PayerPinInput = ent.Comp.PayerPinInput,
+            PayerPinInputLength = ent.Comp.PayerPinInput.Length,
             PrintReceipt = ent.Comp.PrintReceipt
         };
 

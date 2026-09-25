@@ -8,15 +8,17 @@ using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Content.Shared.Tools.Systems;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Economy;
 
 public abstract partial class SharedEconomyATMSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedToolSystem Tool = default!;
-    [Dependency] protected readonly SharedPopupSystem PopupSystem = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] protected SharedToolSystem Tool = default!;
+    [Dependency] protected SharedPopupSystem PopupSystem = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private INetManager _net = default!;
 
     protected readonly ProtoId<StackPrototype> CashProto = "Credit";
     protected readonly string IdCardSlotName = "idCardSlot";
@@ -31,11 +33,18 @@ public abstract partial class SharedEconomyATMSystem : EntitySystem
         SubscribeLocalEvent<EconomyATMComponent, EconomyATMResetEvent>(OnATMReset);
 
         SubscribeLocalEvent<EconomyATMComponent, GotEmaggedEvent>(OnEmag);
+        SubscribeLocalEvent<EconomyATMComponent, BoundUIClosedEvent>(OnUiClosed);
+    }
+
+    private void OnUiClosed(Entity<EconomyATMComponent> ent, ref BoundUIClosedEvent args)
+    {
+        ent.Comp.PinInput = string.Empty;
+        UpdateUiState(ent);
     }
 
     private void OnKeypadButtonPressed(Entity<EconomyATMComponent> ent, ref EconomyATMKeypadMessage args)
     {
-        if (ent.Comp.PinInput.Length >= SharedEconomyBankCardSystem.PinCodeLength)
+        if (args.Value is < 0 or > 9 || ent.Comp.PinInput.Length >= SharedEconomyBankCardSystem.PinCodeLength)
             return;
 
         if (ent.Comp.CardState != CardStateEnum.Valid)
@@ -62,30 +71,24 @@ public abstract partial class SharedEconomyATMSystem : EntitySystem
     private void OnEmag(Entity<EconomyATMComponent> ent, ref GotEmaggedEvent args)
     {
         args.Handled = true;
+        UpdateUiState(ent, emagged: true);
+    }
+
+    protected void UpdateUiState(Entity<EconomyATMComponent> ent, bool? emagged = null)
+    {
+        if (_net.IsClient)
+            return;
 
         var state = new EconomyATMUiState
         {
             CardState = ent.Comp.CardState,
             InfoMessage = ent.Comp.InfoMessage,
-            BankAccount = ent.Comp.BankAccount,
-            PinInput = ent.Comp.PinInput,
+            AccountId = ent.Comp.BankAccount.AccountId,
+            AccountOwnerName = ent.Comp.BankAccount.AccountOwnerName,
+            Balance = ent.Comp.BankAccount.Balance,
+            PinInputLength = ent.Comp.PinInput.Length,
             UnemployedAlert = ent.Comp.UnemployedAlert,
-            Emagged = true
-        };
-
-        UpdateUiState(ent, state);
-    }
-
-    protected void UpdateUiState(Entity<EconomyATMComponent> ent, EconomyATMUiState? state = null)
-    {
-        state ??= new EconomyATMUiState
-        {
-            CardState = ent.Comp.CardState,
-            InfoMessage = ent.Comp.InfoMessage,
-            BankAccount = ent.Comp.BankAccount,
-            PinInput = ent.Comp.PinInput,
-            UnemployedAlert = ent.Comp.UnemployedAlert,
-            Emagged = HasComp<EmaggedComponent>(ent)
+            Emagged = emagged ?? HasComp<EmaggedComponent>(ent)
         };
 
         _ui.SetUiState(ent.Owner, EconomyATMUiKey.Key, state);

@@ -1,7 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Verbs;
-using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.Economy;
@@ -36,17 +35,12 @@ public abstract class SharedEconomyBankCardSystem : EntitySystem
     }
 
     public abstract void PonderForData(Entity<EconomySalaryReceiverComponent> user);
-
 }
 
-[Serializable, NetSerializable]
 public sealed class BankAccount(int accountId = default, int accountPin = default, int balance = default)
 {
     public readonly int AccountId = accountId;
-
     public readonly int AccountPin = accountPin;
-
     public int Balance = balance;
-
     public string AccountOwnerName = string.Empty;
 }

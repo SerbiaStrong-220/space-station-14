@@ -107,6 +107,7 @@
     state: icon
   product: EconomyATM
   cost: 500
+  category: cargoproduct-category-name-service
 
 # Hookah cargo products - SS220
 

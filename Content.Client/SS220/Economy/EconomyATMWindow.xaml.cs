@@ -115,21 +115,21 @@ public sealed partial class EconomyATMWindow : FancyWindow
                 break;
             case CardStateEnum.Valid:
 
-                PinInputText.Text = VisualizePinCode(atmState.PinInput.Length);
-                AccountIdLabel.Text = Loc.GetString("economy-atm-ui-account-id-text", ("accountId", atmState.BankAccount.AccountId));
-                AccountOwnerNameLabel.Text = atmState.BankAccount.AccountOwnerName == string.Empty
+                PinInputText.Text = VisualizePinCode(atmState.PinInputLength);
+                AccountIdLabel.Text = Loc.GetString("economy-atm-ui-account-id-text", ("accountId", atmState.AccountId));
+                AccountOwnerNameLabel.Text = atmState.AccountOwnerName == string.Empty
                     ? string.Empty
-                    : Loc.GetString("economy-atm-ui-account-name-text", ("name", atmState.BankAccount.AccountOwnerName));
-                BalanceLabel.Text = Loc.GetString("economy-atm-ui-account-balance", ("balance", atmState.BankAccount.Balance));
+                    : Loc.GetString("economy-atm-ui-account-name-text", ("name", atmState.AccountOwnerName));
+                BalanceLabel.Text = Loc.GetString("economy-atm-ui-account-balance", ("balance", atmState.Balance));
                 AccountDataBox.Visible = true;
 
-                if (atmState.BankAccount.Balance > 0)
+                if (atmState.Balance > 0)
                 {
                     Divider.Visible = true;
                     WithdrawSlider.Visible = true;
                     PinInputBox.Visible = true;
-                    WithdrawSlider.MaxValue = atmState.BankAccount.Balance;
-                    WithdrawSlider.Value = Math.Min(WithdrawSlider.Value, atmState.BankAccount.Balance);
+                    WithdrawSlider.MaxValue = atmState.Balance;
+                    WithdrawSlider.Value = Math.Min(WithdrawSlider.Value, atmState.Balance);
                 }
                 else
                 {

@@ -12,19 +12,15 @@ public sealed class EconomyEFTPOSUiState : BoundUserInterfaceState
     public int OwnerBankAccountId;
     public string OwnerName = string.Empty;
     public int PayerBankAccountId;
-    public string PayerPinInput = string.Empty;
+    public int PayerPinInputLength;
     public bool PrintReceipt;
 }
 
 [Serializable, NetSerializable]
-public sealed class EconomyEFTPOSPaymentMessage : BoundUserInterfaceMessage
-{
-}
+public sealed class EconomyEFTPOSPaymentMessage : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
-public sealed class EconomyEFTPOSPrintReceiptMessage : BoundUserInterfaceMessage
-{
-}
+public sealed class EconomyEFTPOSPrintReceiptMessage : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
 public sealed class EconomyEFTPOSKeypadMessage(int value) : BoundUserInterfaceMessage
@@ -33,14 +29,10 @@ public sealed class EconomyEFTPOSKeypadMessage(int value) : BoundUserInterfaceMe
 }
 
 [Serializable, NetSerializable]
-public sealed class EconomyEFTPOSKeypadClearMessage : BoundUserInterfaceMessage
-{
-}
+public sealed class EconomyEFTPOSKeypadClearMessage : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
-public sealed class EconomyEFTPOSKeypadEnterMessage : BoundUserInterfaceMessage
-{
-}
+public sealed class EconomyEFTPOSKeypadEnterMessage : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
 public sealed class EconomyEFTPOSLockMessage(int amount) : BoundUserInterfaceMessage
