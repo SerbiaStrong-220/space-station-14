@@ -15,12 +15,15 @@ using Content.Shared.Verbs;
 using Content.Shared.Wall;
 using Content.Shared.Whitelist;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Ghost;
 using Content.Shared.Mobs.Components;
+using Content.Shared.SS220.DarkReaper;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -363,6 +366,16 @@ public abstract class SharedEntityStorageSystem : EntitySystem
         if (HasComp<EntityStorageComponent>(toInsert))
             return false;
         // SS220 fix #1121 end
+
+        // SS220 fix #3495 begin
+        if (TryComp<DarkReaperComponent>(toInsert, out var reaper) && !reaper.PhysicalForm)
+            return false;
+
+        if (HasComp<SpectralComponent>(toInsert) &&
+            (!TryComp<PhysicsComponent>(toInsert, out var physics) ||
+             (physics.CollisionMask & (int) Content.Shared.Physics.CollisionGroup.MobMask) == 0))
+            return false;
+        // SS220 fix #3495 end
 
         var aabb = _lookup.GetAABBNoContainer(toInsert, Vector2.Zero, 0);
         if (component.MaxSize < aabb.Size.X || component.MaxSize < aabb.Size.Y)
