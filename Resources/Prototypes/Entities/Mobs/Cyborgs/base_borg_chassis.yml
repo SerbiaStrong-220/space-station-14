@@ -83,6 +83,9 @@
     stunTime: 5
   - type: SiliconLawProvider
     laws: Crewsimov
+    # SS220 random lawset begin
+    useRandomLawset: true
+    # SS220 random lawset end
   - type: Inventory
     templateId: borg
   - type: Hands
@@ -396,6 +399,9 @@
   - type: AccessReader
     access: [["SyndicateAgent"], ["NuclearOperative"]]
   - type: SiliconLawProvider
+    # SS220 random lawset begin
+    useRandomLawset: false
+    # SS220 random lawset end
     laws: SyndicateStatic
     subverted: true
   - type: IntrinsicRadioTransmitter
@@ -485,6 +491,9 @@
   components:
   - type: SiliconLawProvider
     laws: SyndicateStatic #Non-subverted version so they can still be changed
+    # SS220 random lawset begin
+    useRandomLawset: false
+    # SS220 random lawset end
   - type: StartIonStormed
     ionStormAmount: 3
   - type: IonStormTarget
@@ -543,6 +552,9 @@
     stunTime: 5
   - type: SiliconLawProvider
     laws: XenoborgLawset # custom laws here
+    # SS220 random lawset begin
+    useRandomLawset: false
+    # SS220 random lawset end
   - type: IntrinsicRadioTransmitter # can only use binary and xenoborg channel
     channels:
     - Xenoborg
