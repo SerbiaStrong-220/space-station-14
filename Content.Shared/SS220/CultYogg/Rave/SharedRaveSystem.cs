@@ -20,7 +20,7 @@ public abstract partial class SharedRaveSystem : EntitySystem
         SubscribeLocalEvent<RaveComponent, ExaminedEvent>(OnExamined);
     }
 
-    private void OnStartup(Entity<RaveComponent> ent, ref ComponentStartup args)
+    protected virtual void OnStartup(Entity<RaveComponent> ent, ref ComponentStartup args)
     {
         SetNextPhraseTimer(ent);
         SetNextSoundTimer(ent);

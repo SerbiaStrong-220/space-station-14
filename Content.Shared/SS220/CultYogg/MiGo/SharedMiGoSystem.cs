@@ -64,7 +64,7 @@ public abstract partial class SharedMiGoSystem : EntitySystem
 
         SubscribeLocalEvent<MiGoComponent, BoundUIOpenedEvent>(OnBoundUIOpened);
 
-        SubscribeLocalEvent<MiGoComponent, AfterTeleportedEvent>(OnAfterTeleported);
+        SubscribeLocalEvent<MiGoComponent, TeleportedEvent>(OnTeleported);
 
         SubscribeLocalEvent<GetVerbsEvent<Verb>>(OnGetVerb);
 
@@ -192,14 +192,14 @@ public abstract partial class SharedMiGoSystem : EntitySystem
 
         if (ent.Comp.ConstructionGridsBlacklist != null && _whitelist.IsValid(ent.Comp.ConstructionGridsBlacklist, currentGrid))
         {
-            _popup.PopupClient(Loc.GetString("cult-yogg-cant-buid-on-grid"), ent, ent);
+            _popup.PopupClient(Loc.GetString("cult-yogg-cant-build-on-grid"), ent, ent);
             return;
         }
 
         _miGoErectSystem.OpenUI(ent, actor);
     }
 
-    private void OnAfterTeleported(Entity<MiGoComponent> ent, ref AfterTeleportedEvent args)
+    private void OnTeleported(Entity<MiGoComponent> ent, ref TeleportedEvent args)
     {
         _userInterfaceSystem.CloseUis(ent.Owner);
     }
@@ -336,7 +336,7 @@ public abstract partial class SharedMiGoSystem : EntitySystem
 
         if (HasComp<RevolutionaryComponent>(target) || HasComp<ZombieComponent>(target))
         {
-            reason = Loc.GetString("cult-yogg-enslave-another-fraction");
+            reason = Loc.GetString("cult-yogg-enslave-another-faction");
             return false;
         }
 

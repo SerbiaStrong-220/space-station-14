@@ -198,8 +198,6 @@ namespace Content.Client.Ghost
             _actions.RemoveAction(uid, component.ToggleFoVActionEntity);
             _actions.RemoveAction(uid, component.ToggleGhostsActionEntity);
             _actions.RemoveAction(uid, component.ToggleGhostHearingActionEntity);
-            // SS220 ADD GHOST HUD'S
-            _actions.RemoveAction(uid, component.ToggleHudOnOtherActionEntity);
             //ss220 add filter tts for ghost
             _actions.RemoveAction(uid, component.ToggleRadioChannelsUIEntity);
             //SS220-ghost-hats
