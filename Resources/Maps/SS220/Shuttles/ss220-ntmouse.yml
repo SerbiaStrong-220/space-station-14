@@ -4,7 +4,7 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 08/31/2026 12:11:29
+  time: 09/22/2026 16:38:28
   entityCount: 145
 maps: []
 grids:
@@ -227,6 +227,10 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -1.5,-2.5
       parent: 1
+    - type: AccessReader
+      accessListsOriginal: []
+      access:
+      - - Security
 - proto: AirlockSecurity
   entities:
   - uid: 90
@@ -249,6 +253,13 @@ entities:
       canDischarge: False
     - type: Fixtures
       fixtures: {}
+- proto: AtmosDeviceFanTiny
+  entities:
+  - uid: 75
+    components:
+    - type: Transform
+      pos: -1.5,-2.5
+      parent: 1
 - proto: BarricadePlasteelDirectional
   entities:
   - uid: 95
@@ -26227,12 +26238,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 3.5,-2.5
-      parent: 1
-  - uid: 75
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -0.5,-2.5
       parent: 1
 - proto: WindowReinforcedDirectional
   entities:

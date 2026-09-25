@@ -9,7 +9,7 @@
   randomRotation: false
   stations:
     StarGate:
-      stationProto: StandardNanotrasenStation
+      stationProto: StargateNanotrasenStation
       components:
         - type: StationEmergencyShuttle
           emergencyShuttlePath: /Maps/SS220/Shuttles/emergency/emergency_stargate.yml
@@ -54,7 +54,7 @@
             Chemist: [ 2, 2 ]
             Psychologist: [ 1, 1 ]
             MedicalIntern: [ 6, 6 ]
-            Paramedic: [ 1, 1 ]
+            Paramedic: [ 2, 2 ]
             #Science
             ResearchDirector: [ 1, 1 ]
             SeniorResearcher: [ 1, 1 ]
@@ -110,3 +110,14 @@
           - Starchef
           - Theatr
           - Coldreagentroom 
+
+- type: entity #test
+  id: StargateNanotrasenStation
+  parent: StandardNanotrasenStation
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: GridSpawn
+      groups:
+        mining: !type:GridSpawnGroup
+          paths:
+            - /Maps/SS220/Shuttles/ss220-ramses.yml

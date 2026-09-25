@@ -112,7 +112,7 @@
 
 - type: jukebox
   id: rivgane_crimsonstorm
-  name: Rivgane - Crimson storm
+  name: Rivgane - Crimson Storm
   path:
     path: /Audio/SS220/Lobby/crimsonstorm.ogg
 

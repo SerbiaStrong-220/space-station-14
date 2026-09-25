@@ -31,7 +31,6 @@
   equipment:
     ears: ClothingHeadsetSecurity
     id: SecurityPilotPDA #SS220 SD-pda-some-fixes
-    belt: ClothingBeltSecurityFilled
     gloves: ClothingHandsGlovesCombat
     pocket1: WeaponPistolMk58
   storage:

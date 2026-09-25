@@ -1,0 +1,376 @@
+<Document>
+  # Таблица преобразований
+
+  Используйте [textlink="способности преобразования" link="CultYoggAbilities"] на выбранном предмете или на предмете в активной руке. В левом столбце перечислены исходные предметы и показаны их примеры.
+
+  Для живого оружия показаны кокон и раскрытая форма. Сначала активируйте полученный кокон в руке. Для снятия приросшего снаряжения подготовьте [textlink="нулевой гриб" link="CultYoggBase"].
+
+  <Table Columns="3" MinColumnWidth="150">
+    <ColorBox Color="#34313F" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        [bold]Предмет[/bold]
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#34313F" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        [bold]Результат[/bold]
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#34313F" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        [bold]Назначение[/bold]
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="SheetSteel1" Caption="" Scale="1.5" Margin="2"/>
+        Сталь
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="SheetTokl1" Caption="" Scale="1.5" Margin="2"/>
+        [color=#a4885c]Токл[/color]
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        Материал для сооружений культа.
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="CableApcStack" Caption="" Scale="1.5" Margin="2"/>
+        Кабели низкого, среднего и высокого напряжения
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="LivingRootsStack1" Caption="" Scale="1.5" Margin="2"/>
+        [color=#a4885c]Живые корни[/color]
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        Материал для сооружений культа.
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="Pen" Caption="" Scale="1.5" Margin="2"/>
+        Ручки, шприцы, обычная отвёртка, вилка
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="CocoonSedativeSting" Caption="" Scale="1.5" Margin="2"/>
+        <GuideEntityEmbed Entity="SedativeStingCultYogg" Caption="" Scale="1.5" Margin="2"/>
+        [color=#a4885c]Кокон усыпляющего жала[/color]
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        Раскройте кокон и заправьте жало [color=#a4885c]эссенцией Бездны[/color] из пруда. Используется для усыпления кандидатов.
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="Handcuffs" Caption="" Scale="1.5" Margin="2"/>
+        Наручники, стяжки и кабельные стяжки
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="CultHandcuffs" Caption="" Scale="1.5" Margin="2"/>
+        [color=#a4885c]Живые путы[/color]
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        Связывают руки пленника.
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="HandheldGPSBasic" Caption="" Scale="1.5" Margin="2"/>
+        Портативный GPS, пинпоинтер, локатор аномалий без питания
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="CultPinpointer" Caption="" Scale="1.5" Margin="2"/>
+        [color=#a4885c]Колеоптевер[/color]
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        Помогает найти назначенную жертву.
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="Wirecutter" Caption="" Scale="1.5" Margin="2"/>
+        Обычные кусачки или гаечный ключ
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="CocoonClaw" Caption="" Scale="1.5" Margin="2"/>
+        <GuideEntityEmbed Entity="ClawCultYogg" Caption="" Scale="1.5" Margin="2"/>
+        [color=#a4885c]Кокон клешни[/color]
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        После раскрытия служит оружием, кусачками и инструментом вскрытия шлюзов.
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="Crowbar" Caption="" Scale="1.5" Margin="2"/>
+        Лом, бейсбольная бита, дубинка, телескопическая дубинка, станбатон, самодельный оглушатель или скалка
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="CocoonBeach" Caption="" Scale="1.5" Margin="2"/>
+        <GuideEntityEmbed Entity="BeachCultYogg" Caption="" Scale="1.5" Margin="2"/>
+        [color=#a4885c]Кокон бича[/color]
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        После раскрытия поражает в ближнем бою, отравляет и может выбить предметы из рук.
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="WeaponPistolMk58" Caption="" Scale="1.5" Margin="2"/>
+        Пистолеты, пистолеты-пулемёты и винтовки
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="CocoonSpikegun" Caption="" Scale="1.5" Margin="2"/>
+        <GuideEntityEmbed Entity="SpikegunCultYogg" Caption="" Scale="1.5" Margin="2"/>
+        [color=#a4885c]Кокон шипомёта[/color]
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        После раскрытия стреляет костяными шипами. Боезапас постепенно восполняется.
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="WeaponShotgunKammerer" Caption="" Scale="1.5" Margin="2"/>
+        Дробовики, включая «Бульдог».
+
+        <GuideEntityEmbed Entity="WeaponSprayNozzle" Caption="" Scale="1.5" Margin="2"/>
+        Форсунка-распылитель для ранцевого резервуара с водой.
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="CocoonVenomancer" Caption="" Scale="1.5" Margin="2"/>
+        <GuideEntityEmbed Entity="Venomancer" Caption="" Scale="1.5" Margin="2"/>
+        [color=#a4885c]Кокон веномансера[/color]
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        После раскрытия стреляет кислотными шипами, застревающими в цели. Боезапас восполняется.
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="WeaponLaserCarbine" Caption="" Scale="1.5" Margin="2"/>
+        Любое энергетическое оружие и пневматическая пушка
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="CocoonSpitballer" Caption="" Scale="1.5" Margin="2"/>
+        <GuideEntityEmbed Entity="Spitballer" Caption="" Scale="1.5" Margin="2"/>
+        [color=#a4885c]Кокон плевателя[/color]
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        После раскрытия стреляет взрывающимися снарядами. Учитывайте близость союзников.
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="ClothingBackpack" Caption="" Scale="1.5" Margin="2"/>
+        Рюкзак
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="ClothingBackpackCultYogg" Caption="" Scale="1.5" Margin="2"/>
+        [color=#a4885c]Живой рюкзак[/color]
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        Прирастает к владельцу. При преобразовании содержимое исходного рюкзака выпадает.
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="ClothingBackpackSatchel" Caption="" Scale="1.5" Margin="2"/>
+        Сумка
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="ClothingBackpackSatchelCultYogg" Caption="" Scale="1.5" Margin="2"/>
+        [color=#a4885c]Живая сумка[/color]
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        Прирастающее хранилище. Соберите выпавшие при преобразовании вещи.
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="ClothingBackpackDuffel" Caption="" Scale="1.5" Margin="2"/>
+        Вещмешок
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="ClothingBackpackDuffelCultYogg" Caption="" Scale="1.5" Margin="2"/>
+        [color=#a4885c]Живой вещмешок[/color]
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        Прирастающее хранилище. Соберите выпавшие при преобразовании вещи.
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="Multitool" Caption="" Scale="1.5" Margin="2"/>
+        Мультитул, сетевой конфигуратор или сигналлер
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="BurglarBug" Caption="" Scale="1.5" Margin="2"/>
+        [color=#a4885c]Жук-взломщик[/color]
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        Активируйте и прикрепите к закрытой двери. Расходуется при взломе.
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="Lantern" Caption="" Scale="1.5" Margin="2"/>
+        Фонари и настольные лампы
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="CultYoggLantern" Caption="" Scale="1.5" Margin="2"/>
+        [color=#a4885c]Астральная лампа[/color]
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        Делает живое снаряжение и сооружения культа поблизости менее заметными.
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="KnifePlastic" Caption="" Scale="1.5" Margin="2"/>
+        Любой нож, в том числе пластиковый
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="VoidKey" Caption="" Scale="1.5" Margin="2"/>
+        [color=#a4885c]Ключ бездны[/color]
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        Открывает временный портал. Способы перемещения: [textlink="Бездна" link="CultYoggAbyss"].
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="LightTube" Caption="" Scale="1.5" Margin="2"/>
+        Сменная световая трубка
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="CultYoggLightTube" Caption="" Scale="1.5" Margin="2"/>
+        [color=#a4885c]Проклятая световая трубка[/color]
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        Готовый переносной светильник. Включается прямо в руке; устанавливать его в другой светильник не нужно.
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="LightBulb" Caption="" Scale="1.5" Margin="2"/>
+        Любые сменные лампочки, в том числе кристаллические
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="CultYoggLightBulb" Caption="" Scale="1.5" Margin="2"/>
+        [color=#a4885c]Проклятая лампочка[/color]
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        Готовый переносной светильник. Включается прямо в руке; устанавливать его в другой светильник не нужно.
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="PlushieLizard" Caption="" Scale="1.5" Margin="2"/>
+        Плюшевая игрушка
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="PlushieMigo" Caption="" Scale="1.5" Margin="2"/>
+        [color=#a4885c]Плюшевый Ми-Го[/color]
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        Игрушка; нового последователя не создаёт.
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="ClothingOuterHardsuitEngineering" Caption="" Scale="1.5" Margin="2"/>
+        Любой скафандр со встроенным шлемом
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="ClothingOuterHardsuitCultYogg" Caption="" Scale="1.5" Margin="2"/>
+        [color=#a4885c]Живая броня[/color]
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        [color=#EC9365]Доступно со стадии [color=#EC9365]«Тревога»[/color].[/color] Защитное снаряжение культиста.
+      </Box>
+    </ColorBox>
+  </Table>
+
+  [textlink="Как пользоваться снаряжением" link="CultYoggEquipment"] · [textlink="Сооружения и материалы" link="CultYoggBase"] · [textlink="Обзор культа" link="CultYogg"]
+</Document>

@@ -3,9 +3,9 @@ reagent-effect-guidebook-ss220-corrupt-mind = вызывает помутнен�
 reagent-effect-guidebook-ss220-remove-hallucinations = может помочь купировать симптомы визаульных галлюцинаций, но не является средством лечения
 
 
-reagent-effect-guidebook-ss220-free-from-burden = помогает избавиться от нежелательных конечностей, а также очищает излишнее грибковое заражение
+reagent-effect-guidebook-ss220-free-from-burden = помогает избавиться от нежелательных конечностей, а также уменьшает грибковое заражение
 
-reagent-effect-guidebook-ss220-cult-cleanse = пара глотков может очистить от влияния космической ереси, а даже малейшая капля может помочь при малейшем проявлении грибкового заражения
+reagent-effect-guidebook-ss220-cult-cleanse = пара глотков может очистить от влияния космической ереси, а даже небольшая капля может помочь при первых признаках грибкового заражения
 
 reagent-effect-guidebook-ss220-brain-damage-slow = продлевает жизнь мозга на {$time} секунд
 
