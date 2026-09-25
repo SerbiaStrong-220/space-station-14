@@ -1,6 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-namespace Content.Server.CartridgeLoader.Cartridges;
+namespace Content.Server.SS220.CartridgeLoader.Cartridges;
 
 [RegisterComponent]
 public sealed partial class MessengerClientCartridgeComponent : Component
@@ -19,6 +19,9 @@ public sealed partial class MessengerClientCartridgeComponent : Component
 
     // When true, component try to send full state of messenger
     public bool SendState;
+
+    public TimeSpan NextServerScanTime;
+    public TimeSpan ServerScanInterval = TimeSpan.FromSeconds(5);
 }
 
 public sealed class ServerInfo
