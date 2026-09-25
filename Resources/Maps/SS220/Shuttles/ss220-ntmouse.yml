@@ -4,7 +4,7 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 09/22/2026 16:38:28
+  time: 09/25/2026 07:00:24
   entityCount: 145
 maps: []
 grids:
@@ -253,6 +253,8 @@ entities:
       canDischarge: False
     - type: Fixtures
       fixtures: {}
+    missingComponents:
+    - AccessReader
 - proto: AtmosDeviceFanTiny
   entities:
   - uid: 75
@@ -273,7 +275,7 @@ entities:
   - uid: 33
     components:
     - type: Transform
-      pos: 2.4627905,2.617089
+      pos: 1.5,3.5
       parent: 1
 - proto: CableApcExtension
   entities:
@@ -422,16 +424,16 @@ entities:
     - type: Transform
       pos: 2.5,-0.5
       parent: 1
+  - uid: 60
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 1.5,2.5
+      parent: 1
   - uid: 93
     components:
     - type: Transform
       pos: 0.5,-0.5
-      parent: 1
-  - uid: 113
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 2.5,1.5
       parent: 1
 - proto: ClockOnWall
   entities:
@@ -448,9 +450,10 @@ entities:
       parent: 1
 - proto: ComputerShuttle
   entities:
-  - uid: 35
+  - uid: 110
     components:
     - type: Transform
+      rot: -1.5707963267948966 rad
       pos: 2.5,2.5
       parent: 1
 - proto: CurbDarkSteel
@@ -700,6 +703,22 @@ entities:
         143:
         - - Status
           - Toggle
+    - type: Fixtures
+      fixtures: {}
+- proto: LockableButtonSecurity
+  entities:
+  - uid: 35
+    components:
+    - type: Transform
+      pos: 1.5,3.5
+      parent: 1
+    - type: DeviceLinkSource
+      linkedPorts:
+        112:
+        - - Pressed
+          - Toggle
+        - - Pressed
+          - Trigger
     - type: Fixtures
       fixtures: {}
 - proto: Mattress
@@ -25914,22 +25933,6 @@ entities:
     - type: Transform
       pos: 0.5,4.5
       parent: 1
-- proto: SignalButton
-  entities:
-  - uid: 60
-    components:
-    - type: Transform
-      pos: 2.4627905,2.617089
-      parent: 1
-    - type: DeviceLinkSource
-      linkedPorts:
-        112:
-        - - Pressed
-          - Toggle
-        - - Pressed
-          - Trigger
-    - type: Fixtures
-      fixtures: {}
 - proto: SubstationWallBasic
   entities:
   - uid: 103
@@ -26004,12 +26007,16 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -0.5,1.5
       parent: 1
+    - type: Thruster
+      thrust: 66
   - uid: 136
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 3.5,1.5
       parent: 1
+    - type: Thruster
+      thrust: 66
 - proto: WallShuttle
   entities:
   - uid: 5
