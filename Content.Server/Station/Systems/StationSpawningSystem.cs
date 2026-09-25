@@ -16,6 +16,7 @@ using Content.Shared.PDA;
 using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
+using Content.Shared.SS220.Badge;
 using Content.Shared.SS220.Experience;
 using Content.Shared.Station;
 using JetBrains.Annotations;
@@ -37,6 +38,7 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
     [Dependency] private readonly SharedAccessSystem _accessSystem = default!;
     [Dependency] private readonly ActorSystem _actors = default!;
     [Dependency] private readonly IdCardSystem _cardSystem = default!;
+    [Dependency] private readonly BadgeSystem _badgeSystem = default!; // SS220 TapeRecorder & BodyCamera update
     [Dependency] private readonly IConfigurationManager _configurationManager = default!;
     [Dependency] private readonly HumanoidProfileSystem _humanoidProfile = default!;
     [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
@@ -164,6 +166,7 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
         if (prototype != null && TryComp(entity.Value, out MetaDataComponent? metaData))
         {
             SetPdaAndIdCardData(entity.Value, metaData.EntityName, prototype, station);
+            _badgeSystem.SetBadgeData(entity.Value, metaData.EntityName, prototype); // SS220 TapeRecorder & BodyCamera update
         }
 
         DoJobSpecials(job, entity.Value);
