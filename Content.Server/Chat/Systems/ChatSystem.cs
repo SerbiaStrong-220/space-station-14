@@ -532,6 +532,9 @@ public sealed partial class ChatSystem : SharedChatSystem
             return;
 
         var defaultLanguageId = _languageSystem.GetSelectedLanguage(source)?.ID ?? "none"; // SS220 languages
+
+        RecordInvestigationChat(source, "Say", originalMessage, name, languageMessage); // SS220 investigation recorder
+
         if (originalMessage == message)
         {
             if (name != Name(source))
@@ -642,6 +645,10 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         var defaultLanguageId = _languageSystem.GetSelectedLanguage(source)?.ID ?? "none";
         // SS220 languages end
+
+        if (!hideLog)
+            RecordInvestigationChat(source, "Whisper", originalMessage, name, languageMessage); // SS220 investigation recorder
+
         if (!hideLog)
             if (originalMessage == message)
             {
@@ -690,6 +697,10 @@ public sealed partial class ChatSystem : SharedChatSystem
             return;
 
         SendInVoiceRange(ChatChannel.Emotes, action, wrappedMessage, source, range, author);
+
+        if (!hideLog)
+            RecordInvestigationChat(source, "Emote", action, name); // SS220 investigation recorder
+
         if (!hideLog)
             if (name != Name(source))
                 _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Emote from {ToPrettyString(source):user} as {name}: {action}");
@@ -717,6 +728,9 @@ public sealed partial class ChatSystem : SharedChatSystem
             ("message", FormattedMessage.EscapeText(message)));
 
         SendInVoiceRange(ChatChannel.LOOC, message, wrappedMessage, source, hideChat ? ChatTransmitRange.HideChat : ChatTransmitRange.Normal, player.UserId);
+
+        RecordInvestigationChat(source, "LOOC", message, player.Name); // SS220 investigation recorder
+
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"LOOC from {player:Player}: {message}");
     }
 
@@ -747,6 +761,8 @@ public sealed partial class ChatSystem : SharedChatSystem
                 ("message", FormattedMessage.EscapeText(message)));
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Dead chat from {player:Player}: {message}");
         }
+
+        RecordInvestigationChat(source, "Dead", message, player.Name);        // SS220 investigation recorder
 
         _chatManager.ChatMessageToMany(ChatChannel.Dead, message, wrappedMessage, source, hideChat, true, clients.ToList(), author: player.UserId);
     }
