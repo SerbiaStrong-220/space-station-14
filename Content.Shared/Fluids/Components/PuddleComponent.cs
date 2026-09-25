@@ -27,5 +27,14 @@ namespace Content.Shared.Fluids.Components
 
         [ViewVariables]
         public Entity<SolutionComponent>? Solution;
+
+        //ss220 add additional info for round start
+        /// <summary>
+        /// Stores the last user entity who interacted with this entity
+        /// </summary>
+        [ViewVariables]
+        [Access(Other = AccessPermissions.ReadWriteExecute)]
+        public EntityUid? LastInteractionUser;
+        //ss220 add additional info for round end
     }
 }
