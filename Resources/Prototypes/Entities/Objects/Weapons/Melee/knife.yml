@@ -82,6 +82,14 @@
       types:
         Slash: 8
 # SS220 Throwable Changes end
+  # SS220-place-and-pickup-sounds-2 begin
+  - type: EmitSoundOnPickup
+    sound:
+      collection: KnifePickup
+  - type: EmitSoundOnDrop
+    sound:
+      collection: KnifeDrop
+  # SS220-place-and-pickup-sounds-2 end
 
 - type: entity
   name: butcher's cleaver
@@ -141,6 +149,14 @@
       types:
         Slash: 11
   # SS220 Throwable Changes end
+  # SS220-place-and-pickup-sounds-2 begin
+  - type: EmitSoundOnPickup
+    sound:
+      collection: KnifePickup
+  - type: EmitSoundOnDrop
+    sound:
+      collection: KnifeDrop
+  # SS220-place-and-pickup-sounds-2 end
 
 - type: entity
   name: combat knife
@@ -192,6 +208,14 @@
         - ItemMask
         restitution: 0.3
         friction: 0.2
+  # SS220-place-and-pickup-sounds-2 begin
+  - type: EmitSoundOnPickup
+    sound:
+      collection: KnifePickup
+  - type: EmitSoundOnDrop
+    sound:
+      collection: KnifeDrop
+  # SS220-place-and-pickup-sounds-2 end
 
 - type: entity
   name: survival knife

@@ -29,6 +29,14 @@
     - Antagonists
   - type: UseDelay
     delay: 3
+  # SS220-place-and-pickup-sounds-2 begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/handcuffs_pick_up.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/handcuffs_drop.ogg
+  # SS220-place-and-pickup-sounds-2 end
 
 - type: entity
   name: makeshift handcuffs
@@ -68,6 +76,14 @@
     sprite: Objects/Misc/cablecuffs.rsi
     state: cuff
     color: forestgreen
+  # SS220-place-and-pickup-sounds-2 begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/place.ogg
+  # SS220-place-and-pickup-sounds-2 end
 
 - type: entity
   name: zipties
@@ -97,6 +113,14 @@
   - type: Sprite
     sprite: Objects/Misc/zipties.rsi
     state: cuff
+  # SS220-place-and-pickup-sounds-2 begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/place.ogg
+  # SS220-place-and-pickup-sounds-2 end
 
 - type: entity
   id: BaseHandcuffsBroken
@@ -158,3 +182,11 @@
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Misc/straight_jacket.rsi # SS220 straitjacket resprite
     state: icon
+  # SS220-place-and-pickup-sounds-2 begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/place.ogg
+  # SS220-place-and-pickup-sounds-2 end
