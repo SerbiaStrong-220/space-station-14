@@ -14,8 +14,10 @@
     name: Тёмный Жнец
     description: "Вы Тёмный Жнец - Демон, слуга Бога Тиндала. Пожирайте существ этой реальности, сводите их с ума и растите, пока не поглотите их всех!"
     rules: "Вы Тёмный Жнец - Демон, слуга Бога Тиндала. Пожирайте существ этой реальности, сводите их с ума и растите, пока не поглотите их всех!"
-    job: DarkReaper
+    job: DarkReaperPlayer
     makeSentient: false
+    mindRoles:
+    - MindRoleDarkReaper
     allowSpeech: false
     raffle:
       settings: default
@@ -49,7 +51,9 @@
     name: Тёмный Жнец
     description: "Вы Тёмный Жнец - Демон, слуга Бога Тиндала. Пожирайте существ этой реальности, сводите их с ума и растите, пока не поглотите их всех!"
     rules: "Вы Тёмный Жнец - Демон, слуга Бога Тиндала. Пожирайте существ этой реальности, сводите их с ума и растите, пока не поглотите их всех!"
-    job: DarkReaper
+    job: DarkReaperPlayer
+    mindRoles:
+    - MindRoleDarkReaper
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:

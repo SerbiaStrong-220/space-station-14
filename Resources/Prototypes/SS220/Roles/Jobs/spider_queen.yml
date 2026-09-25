@@ -1,5 +1,5 @@
 - type: job
-  id: SpiderQueen
+  id: SpiderQueenPlayer
   name: job-name-spider-queen
   description: job-description-spider-queen
   experienceDefinition: NoExperience

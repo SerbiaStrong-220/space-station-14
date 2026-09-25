@@ -1,5 +1,5 @@
 - type: job
-  id: DarkReaper # yes even it HAS WORK BUT NOT YOU
+  id: DarkReaperPlayer # yes even it HAS WORK BUT NOT YOU
   name: job-name-dark-reaper
   description: job-description-dark-reaper
   experienceDefinition: NoExperience
