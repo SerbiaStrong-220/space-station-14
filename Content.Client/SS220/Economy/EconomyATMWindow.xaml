@@ -1,0 +1,74 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                      Title="{Loc 'economy-atm-ui-title'}"
+                      SetSize="400 420"
+                      Resizable="False" >
+    <BoxContainer Orientation="Vertical"
+                  VerticalExpand="True"
+                  HorizontalExpand="True"
+                  VerticalAlignment="Stretch" >
+        <BoxContainer Orientation="Vertical"
+                      VerticalAlignment="Stretch"
+                      VerticalExpand="True"
+                      Margin="10 10 10 10" >
+            <BoxContainer Orientation="Vertical" >
+                <BoxContainer Name="AccountDataBox" Orientation="Vertical" >
+                    <Label Name="AccountIdLabel" />
+                    <Label Name="AccountOwnerNameLabel" />
+                    <Label Name="BalanceLabel" />
+                </BoxContainer>
+                <controls:HighDivider Name="Divider" Visible="False" Margin="0 10 0 10" />
+                <Label Name="StatusLabel" HorizontalAlignment="Center"/>
+                <SliderIntInput Name="WithdrawSlider" Margin="0 6 0 6" />
+            </BoxContainer>
+            <BoxContainer Name="InvalidCardOptionsBox"
+                          Orientation="Vertical"
+                          Visible="False"
+                          Margin="0 6" >
+                <Button Name="LinkButton"
+                        Access="Public"
+                        HorizontalAlignment="Center"
+                        Margin="0 0 0 0"
+                        Text="{Loc 'economy-bank-ui-link-account'}"
+                        Visible="True" />
+                <Button Name="CreateButton"
+                        Access="Public"
+                        HorizontalAlignment="Center"
+                        Margin="0 0 0 0"
+                        Text="{Loc 'economy-bank-ui-create-account'}"
+                        Visible="False" />
+            </BoxContainer>
+            <BoxContainer Name="PinInputBox"
+                          Orientation="Vertical"
+                          VerticalExpand="True"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Center" >
+                <BoxContainer Orientation="Horizontal"
+                              Margin="0 0 0 6"
+                              HorizontalAlignment="Left" >
+                    <Label Name="PayerPinInputLabel"
+                           Text="{Loc 'economy-atm-ui-pin-code-label'}"
+                           Margin="0 0 4 0" />
+                    <Label Name="PinInputText"
+                           Text="____" />
+                </BoxContainer>
+                <GridContainer Columns="3"
+                               Name="KeypadGrid"
+                               HorizontalAlignment="Center" >
+                <!-- Keypad is filled by code -->
+                </GridContainer>
+            </BoxContainer>
+        </BoxContainer>
+        <BoxContainer Orientation="Vertical" >
+            <PanelContainer StyleClasses="LowDivider" />
+            <BoxContainer Orientation="Horizontal" Margin="10 2 5 0" VerticalAlignment="Bottom" >
+                <Label Text="{Loc 'economy-atm-ui-window-flavor-left'}" StyleClasses="WindowFooterText" Name="FlavorLeft" />
+                <Label Text="{Loc 'economy-atm-ui-window-flavor-right'}" StyleClasses="WindowFooterText"
+                       HorizontalAlignment="Right" HorizontalExpand="True"  Margin="0 0 5 0" />
+                <TextureRect StyleClasses="NTLogoDark" Stretch="KeepAspectCentered"
+                       VerticalAlignment="Center" HorizontalAlignment="Right" SetSize="19 19" Name="NTLogo" />
+            </BoxContainer>
+        </BoxContainer>
+    </BoxContainer>
+</controls:FancyWindow>

@@ -25,6 +25,7 @@
       #preventWriting: true #ss220 remove prevent writing for mime
     - type: FrenchAccent
     - type: RenameStart #SS220-RenameStart
+  economySalaryPrototype: Worker # SS220 Economy
 
 - type: startingGear
   id: MimeGear

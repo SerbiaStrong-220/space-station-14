@@ -20,6 +20,7 @@
   - GroupSpeciesBreathTool
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - EconomyLoadout #SS220 Economy
 
   # Магистрат
 - type: roleLoadout
@@ -36,7 +37,7 @@
   - GroupSpeciesBreathTool
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - SeniorStaffCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
   # Агент внутренних дел
 - type: roleLoadout
@@ -55,7 +56,7 @@
   - GroupSpeciesBreathTool
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - SeniorStaffCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
   # Офицер "Синий Щит"
 - type: roleLoadout
@@ -76,7 +77,7 @@
   - Trinkets
   - CommandInnerEncryptionKeys #SS220-ipc-builtin-radio
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - SeniorStaffCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 #! Служба безопасности (Начало)
 
@@ -100,7 +101,7 @@
   - Trinkets
   - SecurityInnerEncryptionKeys #SS220-ipc-builtin-radio
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - SeniorStaffCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
   # Пилот
 - type: roleLoadout
@@ -120,8 +121,7 @@
   - GroupSpeciesBreathToolSecurity
   - Trinkets
   - SecurityInnerEncryptionKeys #SS220-ipc-builtin-radio
-  - WorkerCash #SS220-Cash-personal
-
+  - EconomyLoadout #SS220 Economy
 #! Служба безопасности (Конец)
 
 #! Медицинский отдел (Начало)
@@ -145,7 +145,7 @@
   - Trinkets
   - MedicalInnerEncryptionKeys #SS220-ipc-builtin-radio
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - SeniorStaffCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
   # Бригемдик
 - type: roleLoadout
@@ -165,8 +165,7 @@
   - Trinkets
   - BrigmedicInnerEncryptionKeys #SS220-ipc-builtin-radio
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - WorkerCash #SS220-Cash-personal
-
+  - EconomyLoadout #SS220 Economy
 #! Медицинский отдел (Конец)
 
 #! Инженерный отдел (Начало)
@@ -187,8 +186,7 @@
   - Trinkets
   - EngineeringInnerEncryptionKeys #SS220-ipc-builtin-radio
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - SeniorStaffCash #SS220-Cash-personal
-
+  - EconomyLoadout #SS220 Economy
 #! Инженерный отдел (Конец)
 
 #! Исследовательский отдел (Начало)
@@ -211,8 +209,7 @@
   - Trinkets
   - ScienceInnerEncryptionKeys #SS220-ipc-builtin-radio
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - SeniorStaffCash #SS220-Cash-personal
-
+  - EconomyLoadout #SS220 Economy
 #! Исследовательский отдел (Конец)
 
 #! Сервис (Начало)
@@ -232,8 +229,7 @@
   - Trinkets
   - ServiceInnerEncryptionKeys #SS220-ipc-builtin-radio
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - SeniorStaffCash #SS220-Cash-personal
-
+  - EconomyLoadout #SS220 Economy
 #! Сервис (Конец)
 
 #! Эксклюзивы карт (Начало)
@@ -251,7 +247,7 @@
   - GroupSpeciesBreathTool
   - Trinkets
   - ServiceInnerEncryptionKeys #SS220-ipc-builtin-radio
-  - WorkerCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
   #Боксер
 - type: roleLoadout
@@ -268,6 +264,5 @@
   - GroupSpeciesBreathTool
   - Trinkets
   - ServiceInnerEncryptionKeys #SS220-ipc-builtin-radio
-  - WorkerCash #SS220-Cash-personal
-
+  - EconomyLoadout #SS220 Economy
 #! Эксклюзивы карт (Конец)

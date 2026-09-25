@@ -20,6 +20,7 @@
   access:
   - Research
   - Maintenance
+  economySalaryPrototype: Civilian # SS220 Economy
 
 - type: startingGear
   id: ResearchAssistantGear

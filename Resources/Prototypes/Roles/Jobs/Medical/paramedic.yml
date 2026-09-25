@@ -17,6 +17,7 @@
   - Paramedic
   extendedAccess:
   - Chemistry
+  economySalaryPrototype: Worker # SS220 Economy
 
 - type: startingGear
   id: ParamedicGear

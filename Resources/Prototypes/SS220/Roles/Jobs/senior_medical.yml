@@ -21,6 +21,7 @@
   - Medical
   - Maintenance
   - Chemistry
+  economySalaryPrototype: SeniorStaff
   special:
   - !type:AddComponentSpecial
     components:

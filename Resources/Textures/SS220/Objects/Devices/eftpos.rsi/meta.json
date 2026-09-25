@@ -1,0 +1,17 @@
+{
+    "version": 1,
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from ParadiseSS13 at commit https://github.com/ParadiseSS13/Paradise/commit/0c6802fdb26fe49477447daae2b343e59ee90e5a",
+    "states": [
+        {
+            "name": "eftpos"
+        },
+        {
+            "name": "eftpos-screen"
+        }
+    ]
+}

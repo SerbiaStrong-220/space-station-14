@@ -15,6 +15,7 @@
   #- !type:GiveItemOnHolidaySpecial
   #  holiday: GarbageDay
   #  prototype: WeaponRevolverInspector #SS220-removeInspectorHoliday end
+  economySalaryPrototype: Worker # SS220 Economy
 
 - type: startingGear
   id: JanitorGear

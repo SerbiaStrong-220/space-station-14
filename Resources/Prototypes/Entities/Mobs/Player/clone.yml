@@ -71,6 +71,7 @@
   - SouthernAccent
   - SpanishAccent
   - StutteringAccent
+  - EconomySalaryReceiver # SS220 Economy
   eventComponents:
   - Puller
   - Vocal # voice sounds

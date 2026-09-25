@@ -15,6 +15,7 @@
   - Medical
   - Chemistry
   - Maintenance
+  economySalaryPrototype: Worker # SS220 Economy
 
 - type: startingGear
   id: ChemistGear

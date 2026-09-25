@@ -17,7 +17,7 @@
   - GroupSpeciesBreathTool
   - CAPSiutstorage #SS220-Cutlass-Update
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - SeniorStaffCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 - type: roleLoadout
   id: JobHeadOfPersonnel
@@ -37,7 +37,7 @@
   #- HoPJobTrinkets
   - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - SeniorStaffCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 # Silicons
 - type: roleLoadout
@@ -72,7 +72,7 @@
   - Trinkets
   #- PassengerJobTrinkets
   - GroupSpeciesBreathTool
-  - WorkerCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 - type: roleLoadout
   id: JobBartender
@@ -89,7 +89,7 @@
   - ServiceInnerEncryptionKeys #SS220-ipc-builtin-radio
   - BartenderJobTrinkets
   - GroupSpeciesBreathTool
-  - WorkerCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 - type: roleLoadout
   id: JobServiceWorker
@@ -104,7 +104,7 @@
   - ServiceInnerEncryptionKeys #SS220-ipc-builtin-radio
   #- ServiceWorkerJobTrinkets
   - GroupSpeciesBreathTool
-  - WorkerCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 - type: roleLoadout
   id: JobChef
@@ -123,7 +123,7 @@
   - ServiceInnerEncryptionKeys #SS220-ipc-builtin-radio
   #- ChefJobTrinkets
   - GroupSpeciesBreathTool
-  - WorkerCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 - type: roleLoadout
   id: JobLibrarian
@@ -139,7 +139,7 @@
   #- LibrarianJobTrinkets
   - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - WorkerCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 - type: roleLoadout
   id: JobLawyer
@@ -159,8 +159,8 @@
   - Trinkets
   #- LawyerJobTrinkets
   - GroupSpeciesBreathTool
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - WorkerCash #SS220-Cash-personal
+  - SponsorNeck #SS220-Two Floppa Iteration
+  - EconomyLoadout #SS220 Economy
 
 - type: roleLoadout
   id: JobChaplain
@@ -181,7 +181,7 @@
   - ServiceInnerEncryptionKeys #SS220-ipc-builtin-radio
   #- ChaplainJobTrinkets
   - GroupSpeciesBreathTool
-  - WorkerCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 - type: roleLoadout
   id: JobJanitor
@@ -204,7 +204,7 @@
   - ServiceInnerEncryptionKeys #SS220-ipc-builtin-radio
   - JanitorJobTrinkets
   - GroupSpeciesBreathTool
-  - WorkerCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
   - JanitorEquipment #SS220-JREquipmentUpdate
   - JanitorPDA #SS220-JRNewThings
 
@@ -226,7 +226,7 @@
   - BotanistBelt #SS220 druid loadout
   - BotanistNeck #SS220 druid loadout
   - BotanistShoes #SS220 druid loadout
-  - WorkerCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 - type: roleLoadout
   id: JobClown
@@ -248,7 +248,7 @@
   - ServiceInnerEncryptionKeys #SS220-ipc-builtin-radio
   - ClownJobTrinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - WorkerCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 - type: roleLoadout
   id: JobMime
@@ -269,7 +269,7 @@
   - ServiceInnerEncryptionKeys #SS220-ipc-builtin-radio
   #- MimeJobTrinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - WorkerCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 - type: roleLoadout
   id: JobMusician
@@ -290,7 +290,7 @@
   - Instruments
   - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - WorkerCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 # Cargo
 - type: roleLoadout
@@ -312,7 +312,7 @@
   #- QuartermasterJobTrinkets
   - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - SeniorStaffCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 - type: roleLoadout
   id: JobCargoTechnician
@@ -331,7 +331,7 @@
   - CargoInnerEncryptionKeys #SS220-ipc-builtin-radio
   #- CargoTechnicianJobTrinkets
   - GroupSpeciesBreathTool
-  - WorkerCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 - type: roleLoadout
   id: JobSalvageSpecialist
@@ -352,7 +352,7 @@
   #- SalvageSpecialistJobTrinkets
   - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - WorkerCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 # Engineering
 - type: roleLoadout
@@ -375,7 +375,7 @@
   #- ChiefEngineerJobTrinkets
   - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - SeniorStaffCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 - type: roleLoadout
   id: JobTechnicalAssistant
@@ -389,7 +389,7 @@
   - EngineeringInnerEncryptionKeys #SS220-ipc-builtin-radio
   #- TechnicalAssistantJobTrinkets
   - GroupSpeciesBreathTool
-  - CivilianCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 - type: roleLoadout
   id: JobStationEngineer
@@ -409,7 +409,7 @@
   #- StationEngineerJobTrinkets
   - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - WorkerCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 - type: roleLoadout
   id: JobAtmosphericTechnician
@@ -427,7 +427,7 @@
   #- AtmosphericTechnicianJobTrinkets
   - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - WorkerCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 # Science
 - type: roleLoadout
@@ -452,7 +452,7 @@
   #- ResearchDirectorJobTrinkets
   - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - SeniorStaffCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 - type: roleLoadout
   id: JobScientist
@@ -475,7 +475,7 @@
   #- ScientistJobTrinkets
   - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - WorkerCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 - type: roleLoadout
   id: JobResearchAssistant
@@ -490,7 +490,7 @@
   - ScienceInnerEncryptionKeys #SS220-ipc-builtin-radio
   #- ResearchAssistantJobTrinkets
   - GroupSpeciesBreathTool
-  - CivilianCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 # Security
 - type: roleLoadout
@@ -513,7 +513,7 @@
   - GroupSpeciesBreathToolSecurity
   - SecurityHoSSiutstorage #SS220-OfficerCutlass
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - SeniorStaffCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 - type: roleLoadout
   id: JobWarden
@@ -534,7 +534,7 @@
   - WardenJobTrinkets
   - GroupSpeciesBreathToolSecurity
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - SeniorStaffCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 - type: roleLoadout
   id: JobSecurityOfficer
@@ -557,7 +557,7 @@
   - SecurityJobTrinkets
   - GroupSpeciesBreathToolSecurity
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - WorkerCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 - type: roleLoadout
   id: JobDetective
@@ -576,7 +576,7 @@
   - DetectiveJobTrinkets
   - GroupSpeciesBreathToolSecurity
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - WorkerCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 - type: roleLoadout
   id: JobSecurityCadet
@@ -589,7 +589,7 @@
   - SecurityInnerEncryptionKeys #SS220-ipc-builtin-radio
   #- SecurityCadetJobTrinkets
   - GroupSpeciesBreathToolSecurity
-  - CivilianCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 # Wildcards
 - type: roleLoadout
@@ -607,7 +607,7 @@
   - ServiceInnerEncryptionKeys #SS220-ipc-builtin-radio
   #- ReporterJobTrinkets
   - GroupSpeciesBreathTool
-  - WorkerCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 - type: roleLoadout
   id: JobPsychologist
@@ -624,7 +624,7 @@
   - MedicalInnerEncryptionKeys #SS220-ipc-builtin-radio
   #- PsychologistJobTrinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - WorkerCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 # These loadouts are used for non-crew spawns, like off-station antags and event mobs
 # They will be used without player configuration, thus they will only ever apply what is forced by MinLimit

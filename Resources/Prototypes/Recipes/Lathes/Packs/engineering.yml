@@ -27,6 +27,7 @@
   - DeviceCalculator #SS220 Calculator
   - CassetteTape # SS220 Tape Recorder #32234 early merge
   - TapeRecorder # SS220 Tape Recorder #32234 early merge
+  - EconomyEFTPOS # SS220 Economy
 
 - type: latheRecipePack
   id: AtmosStatic

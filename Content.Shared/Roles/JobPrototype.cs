@@ -3,6 +3,7 @@ using Content.Shared.Guidebook;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.SS220.Experience;
 using Content.Shared.StatusIcon;
+using Content.Shared.SS220.Economy;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
@@ -176,6 +177,11 @@ namespace Content.Shared.Roles
         [DataField]
         public bool DontUseNameForTitles;
         // SS220 Round End Titles end
+
+        // SS220 Economy start
+        [DataField]
+        public ProtoId<EconomySalaryPrototype> EconomySalaryPrototype = "Unpaid";
+        // SS220 Economy end
     }
 
     /// <summary>
