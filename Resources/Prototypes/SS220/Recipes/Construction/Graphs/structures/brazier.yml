@@ -1,0 +1,99 @@
+#© SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: constructionGraph
+  id: BrazierWoodGraph
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: BrazierWoodNode
+          completed:
+          - !type:SnapToGrid
+            southRotation: true
+          steps:
+          - material: WoodPlank
+            amount: 5
+            doAfter: 3
+          - material: Coal
+            amount: 2
+            doAfter: 3
+
+    - node: BrazierWoodNode
+      entity: BrazierWood
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: MaterialWoodPlank
+              amount: 3
+            - !type:DeleteEntity {}
+          steps:
+            - tool: Prying
+              doAfter: 3
+
+- type: constructionGraph
+  id: BrazierStoneGraph
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: BrazierStoneNode
+          completed:
+          - !type:SnapToGrid
+            southRotation: true
+          steps:
+          - material: Steel
+            amount: 3
+            doAfter: 3
+          - material: Coal
+            amount: 2
+            doAfter: 3
+
+    - node: BrazierStoneNode
+      entity: BrazierStone
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetSteel1
+              amount: 2
+            - !type:DeleteEntity {}
+          steps:
+            - tool: Screwing
+              doAfter: 3
+            - tool: Prying
+              doAfter: 3
+
+- type: constructionGraph
+  id: BrazierSteelGraph
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: BrazierSteelNode
+          completed:
+          - !type:SnapToGrid
+            southRotation: true
+          steps:
+          - material: Steel
+            amount: 5
+            doAfter: 3
+          - material: Coal
+            amount: 2
+            doAfter: 3
+
+    - node: BrazierSteelNode
+      entity: BrazierSteel
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetSteel1
+              amount: 3
+            - !type:DeleteEntity {}
+          steps:
+            - tool: Screwing
+              doAfter: 3
+            - tool: Prying
+              doAfter: 3
+

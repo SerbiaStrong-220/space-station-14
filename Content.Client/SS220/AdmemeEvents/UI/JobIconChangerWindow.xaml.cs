@@ -23,8 +23,8 @@ public sealed partial class JobIconChangerWindow : DefaultWindow
     private static readonly Vector2 BtnMaxSize = new Vector2(42, 28);
     private static readonly Vector2 TexScale = new Vector2(2.5f, 2.5f);
 
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IEntitySystemManager _entitySystem = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntitySystemManager _entitySystem = default!;
 
     private readonly SpriteSystem _spriteSystem;
     private readonly JobIconChangerBoundUserInterface _bui;

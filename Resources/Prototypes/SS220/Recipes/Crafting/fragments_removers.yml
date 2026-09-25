@@ -1,0 +1,8 @@
+
+- type: construction
+  id: ImprovisedFragmentExtractor
+  graph: ImprovisedFragmentExtractorCraft
+  startNode: start
+  targetNode: ImprovisedFragmentExtractor
+  category: construction-category-tools
+  objectType: Item

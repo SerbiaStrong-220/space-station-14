@@ -12,12 +12,12 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.SuperMatter.Emitter;
 
-public sealed class SuperMatterEmitterExtensionSystem : SharedSuperMatterEmitterExtensionSystem
+public sealed partial class SuperMatterEmitterExtensionSystem : SharedSuperMatterEmitterExtensionSystem
 {
-    [Dependency] EmitterSystem _emitter = default!;
-    [Dependency] IPrototypeManager _prototypeManager = default!;
-    [Dependency] UserInterfaceSystem _userInterface = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private EmitterSystem _emitter = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private UserInterfaceSystem _userInterface = default!;
+    [Dependency] private PopupSystem _popup = default!;
 
     public override void Initialize()
     {

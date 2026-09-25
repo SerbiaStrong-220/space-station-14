@@ -7,9 +7,9 @@ using Content.Shared.SurveillanceCamera.Components;
 
 namespace Content.Server.SS220.Detective.Camera;
 
-public sealed class WearableCameraSystem : EntitySystem
+public sealed partial class WearableCameraSystem : EntitySystem
 {
-    [Dependency] private readonly SurveillanceCameraSystem _cameraSystem = default!;
+    [Dependency] private SurveillanceCameraSystem _cameraSystem = default!;
 
     public override void Initialize()
     {

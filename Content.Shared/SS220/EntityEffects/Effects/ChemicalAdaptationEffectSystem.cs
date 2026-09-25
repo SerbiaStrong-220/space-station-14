@@ -7,7 +7,7 @@ namespace Content.Shared.SS220.EntityEffects.Effects;
 
 public sealed partial class MakeSentientEntityEffectSystem : EntityEffectSystem<MetaDataComponent, ChemicalAdaptationEffect>
 {
-    [Dependency] private readonly ChemicalAdaptationSystem _adaptation = default!;
+    [Dependency] private ChemicalAdaptationSystem _adaptation = default!;
 
     protected override void Effect(Entity<MetaDataComponent> entity, ref EntityEffectEvent<ChemicalAdaptationEffect> args)
     {

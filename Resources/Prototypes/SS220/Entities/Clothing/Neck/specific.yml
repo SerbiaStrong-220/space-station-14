@@ -50,3 +50,26 @@
       sprite: SS220/Clothing/Neck/Misc/whiteruff.rsi
     - type: Clothing
       sprite: SS220/Clothing/Neck/Misc/whiteruff.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckGoldenCross
+  name: golden cross
+  description: Beautiful golden cross.
+  components: 
+    - type: Sprite
+      sprite: SS220/Clothing/Neck/Misc/golden_cross.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Neck/Misc/golden_cross.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckSilverCross
+  name: silver cross
+  description: Beautiful silver cross.
+  components: 
+    - type: Sprite
+      sprite: SS220/Clothing/Neck/Misc/silver_cross.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Neck/Misc/silver_cross.rsi
+

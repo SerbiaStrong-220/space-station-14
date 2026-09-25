@@ -8,11 +8,11 @@ using Robust.Shared.Player;
 
 namespace Content.Client.SS220.HiddenDescription;
 
-public sealed class HiddenDescriptionSystem : SharedHiddenDescriptionSystem
+public sealed partial class HiddenDescriptionSystem : SharedHiddenDescriptionSystem
 {
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly ExperienceSystem _experience = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private ExperienceSystem _experience = default!;
 
     public override void Initialize()
     {

@@ -149,6 +149,10 @@
     damageModifierSet: RatKing
     # ss220 lowTTKUpdate
   - type: Sharp
+  #SS220-AddTTSRatKing begin
+  - type: TTS
+    voice: hagraven
+  #SS220-AddTTSRatKing end
 
 - type: entity
   id: MobRatKingBuff

@@ -12,7 +12,7 @@ namespace Content.Server.SS220.Speech.EntitySystems;
 
 public sealed partial class ClothingSpecialEmotesSystem : EntitySystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     private readonly Dictionary<EntityUid, List<ProtoId<EmotePrototype>>> _temporaryEmotes = new();
 

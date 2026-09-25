@@ -25,6 +25,11 @@
     damage:
       types:
         Piercing: 45
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.25
+    weightedRandomProviderEntity: PelletFragment
+  # SS220-add-projectile-wounds-end
   - type: TimedDespawn
     lifetime: 0.25
 
@@ -52,6 +57,11 @@
   categories: [ HideSpawnMenu ]
   name: pellet (ball, less lethal)
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.1
+    weightedRandomProviderEntity: PelletFragment
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     deleteOnCollide: false
     damage:

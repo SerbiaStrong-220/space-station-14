@@ -5,7 +5,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.Whitelist;
 
-public sealed class EntityWhitelistSystem : EntitySystem
+public sealed partial class EntityWhitelistSystem : EntitySystem //SS220-IPC
 {
     [Dependency] private readonly TagSystem _tag = default!;
 

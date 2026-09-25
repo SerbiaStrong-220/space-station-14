@@ -17,8 +17,8 @@ namespace Content.Server.SS220.Language;
 
 public sealed partial class LanguageSystem : SharedLanguageSystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IConfigurationManager _config = default!;
 
     public override void Initialize()
     {

@@ -10,13 +10,13 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.Shitspawn.AshDrake;
 
-public sealed class AshDrakeRoarSystem : EntitySystem
+public sealed partial class AshDrakeRoarSystem : EntitySystem
 {
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly NpcFactionSystem _faction = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private NpcFactionSystem _faction = default!;
 
     private static readonly AudioParams RoarAudio = AudioParams.Default.WithVolume(8f).WithMaxDistance(20f);
     private static readonly EntProtoId ActionAshDrakeRoar = "ActionAshDrakeRoar";

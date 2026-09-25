@@ -8,11 +8,11 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.CultYogg.FungusMachine;
 
-public abstract class SharedFungusMachineSystem : EntitySystem
+public abstract partial class SharedFungusMachineSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
 
     public override void Initialize()
     {

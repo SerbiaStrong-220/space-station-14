@@ -36,3 +36,25 @@ ent-ClothingOuterCoatRDFormalDress = торжественное платье н�
     .desc = Специально для самых величайших открытий! Устройте в свою честь марш киборгов и салют из взрывающихся артефактов.
 ent-ClothingOuterCoatDanger = опасная куртка
     .desc = Опасный лук опасного человека.
+
+ent-ClothingOuterCoatDeadAnarchist = плащ мёртвого анархиста
+    .desc = Легендарный кожаный плащ мёртвого анархиста. На спине изображён череп с кружкой пива и ниже надпись «Все пропьём, но панк не опозорим!»
+    .suffix = За время в игре
+
+ent-ClothingOuterCoatHosFormal = торжественное пальто главы службы безопасности
+    .desc = Пальто для особых случаев.
+ent-ClothingOuterCoatWardenCommissar = шинель комиссара
+    .desc = Неприступной крепость делают мужество и отвага, а не камни и стены.
+    .suffix = За время в игре
+ent-ClothingOuterCoatNTRFormalCoat = торжественное пальто представителя НаноТрейзен
+    .desc = Покажите им истинный стиль корпорации с этим парадным пальто!
+ent-ClothingOuterCoatNTRFormalDress = торжественное платье представителя НаноТрейзен
+    .desc = Платье для особых случаев... Черт, ты в этом просто отлично выглядишь!
+ent-ClothingOuterCoatNTRTrench = тренчкот представителя НаноТрейзен
+    .desc = Отличный повседневный тренчкот для верного слуги корпорации.
+
+ent-ClothingOuterCoatJanitorJRBomber = бомбер уборщика JR
+    .desc = Влагостойкая куртка-бомбер, разработанная для специалистов Junk Recyclers.
+ent-ClothingOuterCoatJRSalvageTrench = плащ утилизатора JR
+    .desc = Износостойкий и стильный тренч, защищающий в том числе от мелкодисперсной пыли.
+    .suffix = { ent-ClothingOuterCoatDeadAnarchist.suffix }

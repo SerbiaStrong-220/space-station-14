@@ -65,6 +65,33 @@
     Cloth: 25
 
 - type: latheRecipe
+  id: TileLinoGray
+  result: FloorItemLinoGray
+  categories: [ Carpet ]
+  completetime: 1
+  materials:
+    Plastic: 25
+    Cloth: 25
+
+- type: latheRecipe
+  id: TileLinoLightBrown
+  result: FloorItemLinoLightBrown
+  categories: [ Carpet ]
+  completetime: 1
+  materials:
+    Plastic: 25
+    Cloth: 25
+
+- type: latheRecipe
+  id: TileLinoRedBrown
+  result: FloorItemLinoRedBrown
+  categories: [ Carpet ]
+  completetime: 1
+  materials:
+    Plastic: 25
+    Cloth: 25
+
+- type: latheRecipe
   id: TileElevatorShaft
   result: FloorTileItemElevatorShaft
   categories: [ TileTech ]

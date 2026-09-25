@@ -5,10 +5,10 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client.SS220.Forcefield.Systems;
 
-public sealed class ForcefieldGeneratorVisualsSystem : EntitySystem
+public sealed partial class ForcefieldGeneratorVisualsSystem : EntitySystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {

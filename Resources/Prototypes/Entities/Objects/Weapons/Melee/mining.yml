@@ -21,6 +21,29 @@
       types:
         Piercing: 5
   - type: Wieldable
+  #SS220 melee weapon block added begin
+  - type: AltBlocking
+    rangeBlockProb: 0
+    meleeBlockProb: 0
+    activeRangeBlockProb: 0
+    activeMeleeBlockProb: 0.3
+  - type: Damageable
+    damageContainer: Invulnerable
+  - type: ArmorBlock
+  - type: AltArmor
+    tresholdDict:
+      Piercing: 10
+      Blunt: 25
+      Heat: 15
+      Slash: 30
+      Radiation: 1000
+      Poison: 1000
+      Caustic: 1000
+      Asphyxiation: 1000
+      Bloodloss: 1000
+      Shock: 30
+      Cold: 20
+  #SS220 melee weapon block added end
   - type: IncreaseDamageOnWield
     damage:
       types:
@@ -147,6 +170,29 @@
     slots:
     - Back
     - suitStorage
+  #SS220 melee weapon block added begin
+  - type: AltBlocking
+    rangeBlockProb: 0
+    meleeBlockProb: 0
+    activeRangeBlockProb: 0
+    activeMeleeBlockProb: 0.4
+  - type: Damageable
+    damageContainer: Invulnerable
+  - type: ArmorBlock
+  - type: AltArmor
+    tresholdDict:
+      Piercing: 10
+      Blunt: 25
+      Heat: 15
+      Slash: 30
+      Radiation: 1000
+      Poison: 1000
+      Caustic: 1000
+      Asphyxiation: 1000
+      Bloodloss: 1000
+      Shock: 30
+      Cold: 20
+  #SS220 melee weapon block added end
   - type: AmmoCounter
   - type: UseDelayOnShoot
   - type: UseDelay
@@ -264,6 +310,29 @@
     proto: BulletChargeGlaive
     capacity: 1
     count: 1
+  #SS220 melee weapon block added begin
+  - type: AltBlocking
+    rangeBlockProb: 0
+    meleeBlockProb: 0
+    activeRangeBlockProb: 0
+    activeMeleeBlockProb: 0.6
+  - type: Damageable
+    damageContainer: Invulnerable
+  - type: ArmorBlock
+  - type: AltArmor
+    tresholdDict:
+      Piercing: 10
+      Blunt: 25
+      Heat: 15
+      Slash: 30
+      Radiation: 1000
+      Poison: 1000
+      Caustic: 1000
+      Asphyxiation: 1000
+      Bloodloss: 1000
+      Shock: 30
+      Cold: 20
+  #SS220 melee weapon block added end
   - type: LeechOnMarker
     leech:
       types:

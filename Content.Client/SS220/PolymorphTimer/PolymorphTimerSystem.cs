@@ -6,9 +6,9 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client.SS220.PolymorphTimer;
 
-public sealed class PolymorphTimerSystem : SharedPolymorphTimerSystem
+public sealed partial class PolymorphTimerSystem : SharedPolymorphTimerSystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

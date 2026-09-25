@@ -36,6 +36,9 @@
   - Drill
   - Saw
   - Hemostat
+  - SurgeryDrapes # SS220-surgery-update
+  - BoneGel # SS220-surgery-update
+  - SawElectric # SS220-surgery-update
 
 - type: latheRecipePack
   id: MedicalStatic
@@ -47,6 +50,7 @@
   - DiseaseSwabNarcotic #ss220 add narcotic test
   - BodyBag
   - WhiteCane
+  - ClothingEyesHudMedical # SS220-add-hud-instead-of-loadout-one
   - ClothingEyesGlasses #SS220 add glasses to medfab
   - OffsetCane
   - OffsetCaneWood

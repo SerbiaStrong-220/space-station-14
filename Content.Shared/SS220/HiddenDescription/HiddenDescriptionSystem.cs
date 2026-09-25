@@ -6,9 +6,9 @@ using Content.Shared.SS220.Experience.Systems;
 
 namespace Content.Shared.SS220.HiddenDescription;
 
-public abstract class SharedHiddenDescriptionSystem : EntitySystem
+public abstract partial class SharedHiddenDescriptionSystem : EntitySystem
 {
-    [Dependency] private readonly ExperienceSystem _experience = default!;
+    [Dependency] private ExperienceSystem _experience = default!;
 
     public override void Initialize()
     {

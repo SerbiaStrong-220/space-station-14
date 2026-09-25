@@ -7,15 +7,29 @@ namespace Content.Server.Ghost.Roles.UI
     public sealed class GhostRolesEui : BaseEui
     {
         private readonly GhostRoleSystem _ghostRoleSystem;
+        // ss220 add verb for ghost role start
+        public uint? Identifier;
+        public string? Rules;
+        // ss220 add verb for ghost role end
 
         public GhostRolesEui()
         {
             _ghostRoleSystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<GhostRoleSystem>();
         }
 
-        public override GhostRolesEuiState GetNewState()
+        public override EuiStateBase GetNewState() // ss220 add verb for ghost role
         {
-            return new(_ghostRoleSystem.GetGhostRolesInfo(Player));
+            // ss220 add verb for ghost role start
+            if (Identifier != null && Rules != null)
+            {
+                var state = new GhostRoleRuleEuiState(Identifier.Value, Rules);
+                Identifier = null;
+                Rules = null;
+                return state;
+            }
+
+            return new GhostRolesEuiState(_ghostRoleSystem.GetGhostRolesInfo(Player));
+            // ss220 add verb for ghost role end
         }
 
         public override void HandleMessage(EuiMessageBase msg)

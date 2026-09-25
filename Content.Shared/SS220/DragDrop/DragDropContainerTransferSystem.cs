@@ -7,8 +7,8 @@ namespace Content.Shared.SS220.DragDrop;
 
 public sealed partial class DragDropContainerTransferSystem : EntitySystem
 {
-    [Dependency] private readonly SharedStorageSystem _storage = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedStorageSystem _storage = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {

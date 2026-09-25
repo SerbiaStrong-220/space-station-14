@@ -17,14 +17,14 @@ using Robust.Shared.Random;
 
 namespace Content.Server.SS220.Objectives.Systems;
 
-public sealed class FramePersonConditionSystem : EntitySystem
+public sealed partial class FramePersonConditionSystem : EntitySystem
 {
-    [Dependency] private readonly IdCardSystem _idCard = default!;
-    [Dependency] private readonly TargetSystem _target = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
-    [Dependency] private readonly TargetObjectiveSystem _targetObjective = default!;
+    [Dependency] private IdCardSystem _idCard = default!;
+    [Dependency] private TargetSystem _target = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedRoleSystem _roleSystem = default!;
+    [Dependency] private TargetObjectiveSystem _targetObjective = default!;
 
     /// <summary>
     /// We use this to determine which jobs have legalImmunity... Wait for MRP PR for a special flag.

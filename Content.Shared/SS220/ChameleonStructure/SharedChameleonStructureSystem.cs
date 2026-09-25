@@ -9,13 +9,13 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.ChameleonStructure;
 
-public abstract class SharedChameleonStructureSystem : EntitySystem
+public abstract partial class SharedChameleonStructureSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedUserInterfaceSystem UI = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] protected SharedUserInterfaceSystem UI = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
 
     public override void Initialize()
     {

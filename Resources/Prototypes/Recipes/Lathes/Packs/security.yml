@@ -79,7 +79,10 @@
   - PowerCageSmall
   - TelescopicShield
   - ClothingEyesThermalGlassesSecurity #SS220 Thermals
+  - ClothingEyesNightVisionSecurity #SS220 Night vision
   - ClothingBackpackHarmpack
+  - RiotBulletShield #SS220 Shield rework
+  - RiotLaserShield #SS220 Shield rework
   - FieldShieldGenerator #SS220 Energy shield
 
 - type: latheRecipePack

@@ -20,8 +20,8 @@
   - type: Sprite
     layers:
       - state: red
-      - sprite: Structures/Decoration/banner.rsi
-        state: banner
+      - sprite: SS220/Markers/jobs.rsi
+        state: redwingssec
   - type: RandomSpawner
     prototypes:
     - RandomHumanoidRedWingsOfficer
@@ -34,8 +34,8 @@
   - type: Sprite
     layers:
       - state: red
-      - sprite: Structures/Decoration/banner.rsi
-        state: banner
+      - sprite: SS220/Markers/jobs.rsi
+        state: redwingsmed
   - type: RandomSpawner
     prototypes:
     - RandomHumanoidRedWingsMedic
@@ -48,8 +48,8 @@
   - type: Sprite
     layers:
       - state: red
-      - sprite: Structures/Decoration/banner.rsi
-        state: banner
+      - sprite: SS220/Markers/jobs.rsi
+        state: redwingspilot
   - type: RandomSpawner
     prototypes:
     - RandomHumanoidRedWingsPilot

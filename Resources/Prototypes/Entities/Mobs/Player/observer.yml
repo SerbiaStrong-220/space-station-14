@@ -95,14 +95,16 @@
   - type: GhostHearing
   - type: HallucinationImmune # SS220 - hallucinationSystem
   - type: SuperMatterImmune # SS220 - SuperMatterCrystal
-  # SS220 ADD GHOST HUD'S START
-  - type: ShowHealthBars
-    damageContainers:
-      - Biological
-  - type: ShowHealthIcons
-    damageContainers:
-      - Biological
-  # SS220 ADD GHOST HUD'S END
+  # SS220 ghost-hud-settings begin
+  - type: GhostHudSettings
+    huds:
+    - id: Medical
+      enabled: true
+    - id: CriminalRecords
+      enabled: false
+    - id: JobIcons
+      enabled: false
+  # SS220 ghost-hud-settings end
   - type: ShowEventRoleIcons # SS220 Add event role icons
   - type: ShowElectrocutionHUD
   - type: IntrinsicRadioReceiver
@@ -128,6 +130,11 @@
       enum.GhostHearingKey.Key:
         type: GhostHearingBoundUserInterface
   #ss220 add filter tts for ghost end
+      # SS220 ghost-hud-settings begin
+      enum.GhostHudUiKey.Key:
+        type: GhostHudBoundUserInterface
+        requireInputValidation: false
+      # SS220 ghost-hud-settings end
   # ss220 add ghost's radar start
       enum.RadarConsoleUiKey.Key:
         type: RadarConsoleBoundUserInterface
@@ -139,6 +146,11 @@
       enum.RadarConsoleUiKey.Key:
         toggleAction: ActionGhostShowRadar
   # ss220 add ghost's radar end
+      # SS220 ghost-hud-settings begin
+      enum.GhostHudUiKey.Key:
+        toggleAction: ActionGhostHudSettings
+      # SS220 ghost-hud-settings end
+  - type: ArenaLobbyGhostAction # SS220 Arena
 
 # proto for player ghosts specifically
 - type: entity

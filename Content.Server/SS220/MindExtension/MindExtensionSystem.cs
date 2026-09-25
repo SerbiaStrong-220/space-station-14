@@ -22,11 +22,11 @@ namespace Content.Server.SS220.MindExtension;
 /// </summary>
 public sealed partial class MindExtensionSystem : EntitySystem
 {
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly IAdminManager _admin = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private IAdminManager _admin = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private ContainerSystem _container = default!;
 
     private readonly Dictionary<NetUserId, MindExtensionData> _mindExtensions = new();
 

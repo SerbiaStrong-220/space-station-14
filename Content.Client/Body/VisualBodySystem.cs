@@ -183,6 +183,11 @@ public sealed class VisualBodySystem : SharedVisualBodySystem
             if (!_sprite.LayerMapTryGet(target, proto.BodyPart, out var index, true))
                 continue;
 
+            // SS220-fix-tail-showing-in-suit-after-wagging-begin
+            if (!_sprite.TryGetLayer(target, proto.BodyPart, out var originalLayer, true))
+                continue;
+            // SS220-fix-tail-showing-in-suit-after-wagging-end
+
             ent.Comp.MarkingsDisplacement.TryGetValue(proto.BodyPart, out var displacement);
 
             for (var i = 0; i < proto.Sprites.Count; i++)
@@ -200,6 +205,7 @@ public sealed class VisualBodySystem : SharedVisualBodySystem
                     var spriteLayer = _sprite.AddLayer(target, sprite, index + i + 1);
                     _sprite.LayerMapSet(target, layerId, spriteLayer);
                     _sprite.LayerSetSprite(target, layerId, rsi);
+                    _sprite.LayerSetVisible(target, layerId, originalLayer.Visible); // SS220-fix-tail-showing-in-suit-after-wagging
                 }
 
                 if (marking.MarkingColors is not null && i < marking.MarkingColors.Count)

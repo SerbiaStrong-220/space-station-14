@@ -15,13 +15,13 @@ using Content.Shared.Abilities.Mime;
 
 namespace Content.Server.SS220.MimeRelic;
 
-public sealed class MimeRelicSystem : EntitySystem
+public sealed partial class MimeRelicSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookupSystem = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private EntityLookupSystem _lookupSystem = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private TurfSystem _turf = default!;
 
     public override void Initialize()
     {

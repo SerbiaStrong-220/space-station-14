@@ -10,9 +10,9 @@ namespace Content.Server.SS220.Autoinjector;
 
 public sealed partial class AutoinjectorSystem : EntitySystem
 {
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
 
     private static readonly ProtoId<TagPrototype> TrashTag = "Trash";
 

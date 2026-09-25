@@ -26,6 +26,11 @@
   - BoxFolderBaseThreePapers
   - BoxFolderPlasticClipboardThreePapers
   - BoxFolderClipboardThreePapers
+  #SS220 Add Cross in Trinkets begin
+  - ChaplainNeckGoldenCross
+  - ChaplainNeckSilverCross
+  #SS220 Add Cross in Trinkets end
+  - ClothingNeckTSFPin #SS220-NewPins
   - ClothingNeckLGBTPin
   - ClothingNeckAllyPin
   - ClothingNeckAromanticPin
@@ -45,13 +50,41 @@
   - ClothingNeckUSSPPin # ss220 add neck ussp pin to loadout
   - ClothingNeckAutismPin
   - ClothingNeckGoldAutismPin
+  #SS220-NewPins begin
+  - ClothingNeck1984Pin
+  - ClothingNeckBeerPin
+  - ClothingNeckCatDespairPin
+  - ClothingNeckJRGreenPin
+  - ClothingNeckJRWhitePin
+  - ClothingNeckMothPin
+  - ClothingNeckDwarfPin
+  - ClothingNeckSheriffStarPin
+  - ClothingNeckLovePin
+  - ClothingNeckSmokeWormPin
+  - ClothingNeckStarPin
+  - ClothingNeckIPCPin
+  - ClothingNeckSlimegreenPin
+  - ClothingNeckBigFloppaPin
+  - ClothingNeckSilverBloodDonorPin
+  - ClothingNeckGoldBloodDonorPin
+  - ClothingNeckGrapePin
+  - ClothingNeckBrushwoodPin
+  - ClothingNeckCloverPin
+  - ClothingNeckHumanPin
+  - ClothingNeckLizardPin
+  - ClothingNeckArachnidPin
+  - ClothingNeckTajaraPin
+  - ClothingNeckVoxPin
+  - ClothingNeckDionaPin
+  - ClothingNeckSlimePin
+  - ClothingNeckVulpearPin
+  #SS220-NewPins end
   - OffsetCane
   - OffsetCaneWood
   - OffsetCaneClown
   - OffsetCaneMime
   - OffsetCaneNT
   - Cane
-  #- ExpensiveCane #SS220 TODO NanoTraisen Representative
   - TowelColorWhite
   # SS220 Hand/FootWraps begin
   - ClothingHandWraps
@@ -91,18 +124,21 @@
 - type: loadoutGroup
   id: Survival
   name: loadout-group-survival-basic
-  minLimit: 3
-  hidden: true
+  minLimit: 1 #SS220-Survival-Loadout
+  hidden: false #SS220-Survival-Loadout
   loadouts:
   - EmergencyNitrogen
+  - EmergencyNitrogenSponsor #SS220-Survival-Loadout
   - EmergencyOxygen
-  - LoadoutSpeciesVoxNitrogen
+  - EmergencyOxygenSponsor #SS220-Survival-Loadout
+  - LoadoutSpeciesIpc #SS220-IPC
+ # - LoadoutSpeciesVoxNitrogen #SS220-Survival-Loadout
 
 # nitrogen or oxygen tank, depending on what your species needs
 - type: loadoutGroup
   id: GroupEVATank
   name: loadout-group-EVA-tank
-  hidden: true
+  hidden: false #SS220-Survival-Loadout
   loadouts:
   - LoadoutSpeciesEVANitrogen
   - LoadoutSpeciesEVAOxygen
@@ -118,7 +154,7 @@
 - type: loadoutGroup
   id: GroupPocketTankDouble
   name: loadout-group-pocket-tank-double
-  hidden: true
+  hidden: false #SS220-Survival-Loadout
   loadouts:
   - LoadoutSpeciesPocketDoubleNitrogen
   - LoadoutSpeciesPocketDoubleOxygen
@@ -168,6 +204,8 @@
   - CaptainMantle
   - CaptainFormalWhiteCloak #ss220-loadout-captain
   - CaptainWhiteMantle #ss220-loadout-fullwhitecap
+  - CaptainShoulderMantle # SS220 Add Shoulder Mantles
+  - CaptainWhiteShoulderMantle # SS220 Add Shoulder Mantles
 
 - type: loadoutGroup
   id: CaptainBackpack
@@ -187,6 +225,7 @@
   name: loadout-group-captain-outerclothing
   loadouts:
   - CaptainOuterClothing
+  - CaptainCoat #SS220 Coat for cap
   - CaptainWintercoat
 #ss220-loadout-captain-begin
   - CaptainWhiteOuterClothing
@@ -453,6 +492,7 @@
   - LawyerJumpskirtRed
   - LawyerJumpsuitGood
   - LawyerJumpskirtGood
+  - JumpsuitTrustedLawyer #SS220 ntr add - transfer iaa cloths
   - JumpsuitJujutsuShlepa #SS220-Two Floppa Iteration
 
 - type: loadoutGroup
@@ -485,6 +525,7 @@
   - ChaplainPlagueHat
   - ChaplainWitchHat
   - ChaplainWitchHatAlt
+  - ChaplainHatFollower #SS220 new chaplain clothing
 
 - type: loadoutGroup
   id: ChaplainMask
@@ -512,6 +553,8 @@
   - ChaplainBlackHoodie
   - ChaplainHoodie
   - HoodieChaplainWhite #SS220-Clothes
+  - ChaplainOuterHoodieFollower #SS220 Follower clothing redux
+  - ChaplainOuterSchema #SS220-Schema
 
 - type: loadoutGroup
   id: ChaplainNeck
@@ -520,6 +563,10 @@
   loadouts:
   - ChaplainNeck
   - ChaplainNeckCloak #ss220-dress-cloak-tweak
+  #SS220-AddCenser begin
+  - ChaplainNeckGoldenCross
+  - ChaplainNeckSilverCross
+  #SS220-AddCenser end
 
 #- type: loadoutGroup
 #  id: ChaplainJobTrinkets
@@ -576,6 +623,10 @@
   minLimit: 0
   loadouts:
   - JanitorWintercoat
+  #SS220-JRNewThings begin
+  - ClothingOuterWinterJanitorJR
+  - ClothingOuterCoatJanitorJRBomber
+  #SS220-JRNewThings end
 
 - type: loadoutGroup
   id: JanitorJobTrinkets
@@ -711,12 +762,15 @@
 - type: loadoutGroup
   id: SurvivalClown
   name: loadout-group-survival-clown
-  minLimit: 2
-  hidden: true
+  minLimit: 1 #SS220-Survival-Loadout
+  hidden: false #SS220-Survival-Loadout
   loadouts:
   - EmergencyNitrogenClown
+  - EmergencyNitrogenClownSponsor #SS220-Survival-Loadout
   - EmergencyOxygenClown
-  - LoadoutSpeciesVoxNitrogen
+  - EmergencyOxygenClownSponsor #SS220-Survival-Loadout
+  - LoadoutSpeciesClownIpc #SS220-IPC
+ # - LoadoutSpeciesVoxNitrogen #SS220-Survival-Loadout
 
 - type: loadoutGroup
   id: ClownJobTrinkets
@@ -777,13 +831,16 @@
 - type: loadoutGroup
   id: SurvivalMime
   name: loadout-group-survival-mime
-  minLimit: 2
-  hidden: true
+  minLimit: 1 #SS220-Survival-Loadout
+  hidden: false #SS220-Survival-Loadout
   loadouts:
   - EmergencyNitrogenMime
+  - EmergencyNitrogenMimeSponsor #SS220-Survival-Loadout
   - EmergencyOxygenMime
-  - EmergencySpeciesMothMime
-  - LoadoutSpeciesVoxNitrogen
+  - EmergencyOxygenMimeSponsor #SS220-Survival-Loadout
+  - LoadoutSpeciesMimeIpc #SS220-IPC
+ # - EmergencySpeciesMothMime #SS220-Survival-Loadout
+ # - LoadoutSpeciesVoxNitrogen #SS220-Survival-Loadout
 
 #- type: loadoutGroup
 #  id: MimeJobTrinkets
@@ -808,6 +865,7 @@
   - MusicianWintercoat
   - BardApron #SS220 bard loadout
   - DangerCoat #SS220 danger coat
+  - DeadAnarchistCoat #SS220 dead anarchist's coat
 
 - type: loadoutGroup
   id: Instruments
@@ -888,6 +946,7 @@
   minLimit: 0
   loadouts:
   - QuartermasterWintercoat
+  - QuartermasterOuterCoatQMExpensive #SS220 QM exp coat
   - QuartermasterOuterCoatQMWarehouseman #SS220-QM-Trip
 
 - type: loadoutGroup
@@ -963,6 +1022,11 @@
   - SalvageSpecialistBackpack
   - SalvageSpecialistSatchel
   - SalvageSpecialistDuffel
+  #SS220-JRNewThings begin
+  - ClothingBackpackJRSalvage
+  - ClothingBackpackJRSalvageSatchel
+  - ClothingBackpackJRSalvageDuffel
+  #SS220-JRNewThings end
 
 - type: loadoutGroup
   id: SalvageSpecialistOuterClothing
@@ -970,6 +1034,10 @@
   minLimit: 0
   loadouts:
   - SalvageSpecialistWintercoat
+  #SS220-JRNewThings begin
+  - ClothingOuterCoatJRSalvageTrench
+  - ClothingOuterWinterJRSalvage
+  #SS220-JRNewThings end
 
 - type: loadoutGroup
   id: SalvageSpecialistShoes
@@ -977,6 +1045,7 @@
   loadouts:
   - SalvageBoots
   - CargoWinterBoots
+  - ClothingShoesBootsJRSalvage #SS220-JRNewThings
 
 #- type: loadoutGroup
 #  id: SalvageSpecialistJobTrinkets
@@ -1174,12 +1243,15 @@
 - type: loadoutGroup
   id: SurvivalExtended
   name: loadout-group-survival-extended
-  minLimit: 2
-  hidden: true
+  minLimit: 1 #SS220-Survival-Loadout
+  hidden: false #SS220-Survival-Loadout
   loadouts:
   - EmergencyNitrogenExtended
+  - EmergencyNitrogenExtendedSponsor #SS220-Survival-Loadout
   - EmergencyOxygenExtended
-  - LoadoutSpeciesVoxNitrogen
+  - EmergencyOxygenExtendedSponsor #SS220-Survival-Loadout
+  - LoadoutSpeciesEngineerIpc #SS220-IPC
+ # - LoadoutSpeciesVoxNitrogen #SS220-Survival-Loadout
 
 # Science
 - type: loadoutGroup
@@ -1363,7 +1435,7 @@
   - HeadofSecurityJumpskirt
   - HeadofSecurityTurtleneck
   - HeadofSecurityTurtleneckSkirt
-  - HeadofSecurityFormalSuit
+#  - HeadofSecurityFormalSuit #SS220 Formal coat for HoS
   - JumpsuitHoSGrey #ss220 sec loadout update
   - JumpsuitHoSBlue #ss220 sec loadout update
   - JumpskirtHoSParadeMale #ss220 sec loadout update
@@ -1379,6 +1451,7 @@
   - HeadofSecurityMantle
   - SecurityHolster #SS220-HoS-Holster
   - MantleHOSShoulder #ss220 sec loadout update
+  - HOSShoulderMantle # SS220 Add Shoulder Mantles
 
 - type: loadoutGroup
   id: HeadofSecurityOuterClothing
@@ -1405,6 +1478,7 @@
   loadouts:
   - WardenHead
   - WardenBeret
+  - WardenHeadCommissar #SS220 Commissar
 
 - type: loadoutGroup
   id: WardenJumpsuit
@@ -1413,6 +1487,7 @@
   - WardenJumpsuit
   - WardenJumpskirt
   - WardenJumpsuitTurtleneck #SS220-MoreTurtleneck
+  - WardenJumpsuitCommissar #SS220 Commissar
 
 - type: loadoutGroup
   id: WardenOuterClothing
@@ -1420,6 +1495,7 @@
   loadouts:
   - WardenCoat
   - WardenArmoredWinterCoat
+  - WardenOuterCoatCommissar #SS220 Commissar
   - CyberVestSecurity #SS220-Two Floppa Iteration
 
 - type: loadoutGroup
@@ -1486,6 +1562,7 @@
   loadouts:
   - SecurityBelt
   - SecurityWebbing
+  - SecurityCorporateJudo #SS220 add corp judo in loadout
 
 - type: loadoutGroup
   id: SecurityOuterClothing
@@ -1585,12 +1662,15 @@
 - type: loadoutGroup
   id: SurvivalSecurity
   name: loadout-group-survival-security
-  minLimit: 2
-  hidden: true
+  minLimit: 1 #SS220-Survival-Loadout
+  hidden: false #SS220-Survival-Loadout
   loadouts:
   - EmergencyNitrogenSecurity
+  - EmergencyNitrogenSecuritySponsor #SS220-Survival-Loadout
   - EmergencyOxygenSecurity
-  - LoadoutSpeciesVoxNitrogen
+  - EmergencyOxygenSecuritySponsor #SS220-Survival-Loadout
+  - LoadoutSpeciesSecurityIpc #SS220-IPC
+ # - LoadoutSpeciesVoxNitrogen #SS220-Survival-Loadout
 
 # Wildcards
 - type: loadoutGroup
@@ -1607,7 +1687,6 @@
   minLimit: 0
   loadouts:
   - ReporterPressFedora
-  - CapCMO #SS220-CMOParade
 
 - type: loadoutGroup
   id: ReporterOuterClothing

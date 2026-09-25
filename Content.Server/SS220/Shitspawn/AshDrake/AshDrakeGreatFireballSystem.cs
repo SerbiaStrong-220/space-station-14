@@ -8,12 +8,12 @@ using System.Numerics;
 
 namespace Content.Server.SS220.Shitspawn.AshDrake;
 
-public sealed class AshDrakeGreatFireballSystem : EntitySystem
+public sealed partial class AshDrakeGreatFireballSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
 
     public override void Initialize()
     {

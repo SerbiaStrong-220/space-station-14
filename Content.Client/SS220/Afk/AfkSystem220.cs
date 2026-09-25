@@ -9,12 +9,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.SS220.Afk;
 
-public sealed class AfkSystem220 : EntitySystem
+public sealed partial class AfkSystem220 : EntitySystem
 {
-    [Dependency] private readonly IInputManager _inputManager = default!;
-    [Dependency] private readonly IUserInterfaceManager _userInterfaceManager = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
+    [Dependency] private IInputManager _inputManager = default!;
+    [Dependency] private IUserInterfaceManager _userInterfaceManager = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IConfigurationManager _configurationManager = default!;
 
     private bool _isAnyInput = false;
     private TimeSpan? _lastActivityMessageTimestamp;

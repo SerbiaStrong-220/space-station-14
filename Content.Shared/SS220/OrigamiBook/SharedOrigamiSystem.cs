@@ -11,14 +11,14 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.OrigamiBook;
 
-public abstract class SharedOrigamiSystem : EntitySystem
+public abstract partial class SharedOrigamiSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
 
     public override void Initialize()
     {

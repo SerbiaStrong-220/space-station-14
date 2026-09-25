@@ -13,12 +13,12 @@ namespace Content.Server.SS220.Objectives.Systems;
 /// <summary>
 /// Handle amount of sacrifices
 /// </summary>
-public sealed class CultYoggSummonConditionSystem : EntitySystem
+public sealed partial class CultYoggSummonConditionSystem : EntitySystem
 {
-    [Dependency] private readonly CultYoggRuleSystem _cultRule = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly SharedJobSystem _job = default!;
-    [Dependency] private readonly SharedMindSystem _minds = default!;
+    [Dependency] private CultYoggRuleSystem _cultRule = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private SharedJobSystem _job = default!;
+    [Dependency] private SharedMindSystem _minds = default!;
 
     public override void Initialize()
     {

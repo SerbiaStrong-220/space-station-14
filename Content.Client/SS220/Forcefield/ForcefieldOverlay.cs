@@ -10,11 +10,11 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.Forcefield;
 
-public sealed class ForcefieldOverlay : Overlay
+public sealed partial class ForcefieldOverlay : Overlay
 {
-    [Dependency] private readonly IEntityManager _entity = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IEntityManager _entity = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     private readonly TransformSystem _transform;
 

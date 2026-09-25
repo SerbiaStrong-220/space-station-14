@@ -90,6 +90,11 @@ public abstract class SharedHandheldLightSystem : EntitySystem
         if (component.ToggleActionEntity != null)
             _actionSystem.SetToggled(component.ToggleActionEntity, component.Activated);
 
+        //SS220-IPC begin
+        if (component.SelfToggleActionEntity != null)
+            _actionSystem.SetToggled(component.SelfToggleActionEntity, component.Activated);
+        //SS220-IPC end
+
         _appearance.SetData(uid, ToggleableVisuals.Enabled, component.Activated, appearance);
     }
 

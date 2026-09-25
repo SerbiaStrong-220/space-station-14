@@ -9,6 +9,7 @@ using Content.Shared.Medical;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.SS220.Experience;
 using Robust.Shared.Prototypes;
 
 namespace Content.IntegrationTests.Tests.Medical;
@@ -67,6 +68,7 @@ public sealed class DefibrillatorTest : InteractionTest
             Assert.That(damageableSystem.GetTotalDamage(STarget!.Value), Is.EqualTo(deathThreshold), "Target mob had the wrong total damage amount after being killed.");
         });
 
+        await Server.WaitPost(() => Server.EntMan.EnsureComponent<BypassSkillCheckComponent>(SPlayer)); // SS220-fix-test-failure
         // Spawn a defib and activate it.
         var defib = await PlaceInHands(DefibrillatorProtoId, enableToggleable: true);
         var cooldown = Comp<DefibrillatorComponent>(defib).ZapDelay;

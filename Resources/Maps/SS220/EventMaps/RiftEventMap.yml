@@ -110826,16 +110826,34 @@ entities:
     - type: Transform
       pos: 22.63591,60.62483
       parent: 2
-    - type: Blocking
-      activeBlockModifier:
-        flatReductions:
-          Blunt: 0.3
-        coefficients:
-          Blunt: 0.15
-      passiveBlockModifier:
-        flatReductions: {}
-        coefficients:
-          Blunt: 0.15
+    - type: AltBlocking
+      rangeBlockProb: 0.10
+      meleeBlockProb: 0.15
+      activeRangeBlockProb: 0.15
+      activeMeleeBlockProb: 0.20
+    - type: AltArmor
+      tresholdDict:
+          Piercing: 4
+          Blunt: 6
+          Heat: 6
+          Slash: 6
+          Radiation: 1000
+          Poison: 1000
+          Asphyxiation: 1000
+          Bloodloss: 1000
+          Caustic: 1000
+          Shock: 3
+      durabilityTresholdDict:
+          Piercing: 3
+          Blunt: 5
+          Heat: 5
+          Slash: 5
+          Radiation: 1000
+          Poison: 1000
+          Asphyxiation: 1000
+          Bloodloss: 1000
+          Caustic: 1000
+          Shock: 10
 - proto: CloningPod
   entities:
   - uid: 15262

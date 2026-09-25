@@ -11,12 +11,12 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.Damage.Systems;
 
-public sealed class StunsContactsSystem : EntitySystem
+public sealed partial class StunsContactsSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {

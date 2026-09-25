@@ -5,9 +5,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.PdaIdPainter;
 
-public sealed class PdaIdPainterSystem : SharedPdaIdPainterSystem
+public sealed partial class PdaIdPainterSystem : SharedPdaIdPainterSystem
 {
-    [Dependency] private readonly IComponentFactory _factory = default!;
+    [Dependency] private IComponentFactory _factory = default!;
 
     public override void Initialize()
     {

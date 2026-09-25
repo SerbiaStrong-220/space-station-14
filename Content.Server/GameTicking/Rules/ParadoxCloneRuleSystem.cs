@@ -3,12 +3,14 @@ using Content.Server.Cloning;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Medical.SuitSensors;
 using Content.Server.Objectives.Components;
+using Content.Shared.Damage.Components;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Gibbing.Components;
 using Content.Shared.Medical.SuitSensor;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Systems;
 using Content.Shared.Random.Helpers;
+using Content.Shared.SS220.Antag;
 using Robust.Shared.Random;
 
 namespace Content.Server.GameTicking.Rules;
@@ -64,15 +66,22 @@ public sealed class ParadoxCloneRuleSystem : GameRuleSystem<ParadoxCloneRuleComp
             // get possible targets
             var allAliveHumanoids = _target.GetAliveHumans();
 
-            // we already checked when starting the gamerule, but someone might have died since then.
-            if (allAliveHumanoids.Count == 0)
+            //SS220 add paradox clone blacklist begin
+            var validHumanoids = new List<Entity<MindComponent>>();
+            foreach (var humanoid in allAliveHumanoids)
+            {
+                if (!HasComp<ParadoxCloneBlacklistComponent>(humanoid.Comp.OwnedEntity))
+                    validHumanoids.Add(humanoid);
+            }
+
+            if (validHumanoids.Count == 0)
             {
                 Log.Warning("Could not find any alive players to create a paradox clone from!");
                 return;
             }
 
-            // pick a random player
-            var randomHumanoidMind = _random.Pick(allAliveHumanoids);
+            var randomHumanoidMind = _random.Pick(validHumanoids);
+            //SS220 add paradox clone blacklist end
             ent.Comp.OriginalMind = randomHumanoidMind;
             ent.Comp.OriginalBody = randomHumanoidMind.Comp.OwnedEntity;
 

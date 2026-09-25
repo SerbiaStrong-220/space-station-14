@@ -13,10 +13,10 @@ namespace Content.Server.SS220.SuperMatter.Crystal;
 
 public sealed partial class SuperMatterSystem
 {
-    [Dependency] private readonly ExplosionSystem _explosion = default!;
-    [Dependency] private readonly AlertLevelSystem _alertLevel = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly TeslaEnergyBallSystem _teslaEnergyBall = default!;
+    [Dependency] private ExplosionSystem _explosion = default!;
+    [Dependency] private AlertLevelSystem _alertLevel = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private TeslaEnergyBallSystem _teslaEnergyBall = default!;
 
     private const float SECONDS_BEFORE_EXPLOSION = 13f;
     private const float IntegrityRegenerationStep = 5f;

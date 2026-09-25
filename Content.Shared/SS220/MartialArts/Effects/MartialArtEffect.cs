@@ -7,7 +7,7 @@ namespace Content.Shared.SS220.MartialArts.Effects;
 
 public abstract partial class BaseMartialArtEffectSystem<TEffect> : EntitySystem where TEffect : MartialArtEffect
 {
-    [Dependency] protected readonly MartialArtsSystem MartialArts = default!;
+    [Dependency] protected MartialArtsSystem MartialArts = default!;
 
     public override void Initialize()
     {

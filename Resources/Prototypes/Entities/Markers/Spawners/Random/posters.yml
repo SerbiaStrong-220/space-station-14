@@ -66,6 +66,10 @@
     - id: PosterContrabandExoAcid
     - id: PosterContrabandExoRun
     - id: PosterContrabandExoChomp
+    #SS220-JRPosters begin
+    - id: PosterJRDestroyersOfTheWorld
+    - id: PosterJRTragicAccident
+    #SS220-JRPosters end
 
 - type: entityTable
   id: LegitPosterTable
@@ -123,6 +127,12 @@
     - id: PosterLegitTyrone
     - id: PosterLegitHelio
     - id: PosterLegitBotanyFear
+    #SS220-JRPosters begin
+    - id: PosterJRSaviorsOfTheWorld
+    - id: PosterJRAnnualReport
+    - id: PosterJRSpaceJunk
+    - id: PosterJRCarpLivesImportant
+    #SS220-JRPosters end
 
 - type: entity
   parent: MarkerBase

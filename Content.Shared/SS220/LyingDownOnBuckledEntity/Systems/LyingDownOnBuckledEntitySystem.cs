@@ -22,16 +22,16 @@ namespace Content.Shared.SS220.LyingDownOnBuckledEntity.Systems;
 
 public sealed partial class LyingDownOnBuckledEntitySystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     private const string StandUpAction = "ActionStandUp";
 

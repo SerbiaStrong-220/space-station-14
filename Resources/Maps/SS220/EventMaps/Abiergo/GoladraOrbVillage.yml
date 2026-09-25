@@ -213279,7 +213279,8 @@ entities:
       parent: 2
     missingComponents:
     - Item
-    - Blocking
+    - AltBlocking
+    - AltArmor
     - Construction
     - Destructible
     - StaticPrice

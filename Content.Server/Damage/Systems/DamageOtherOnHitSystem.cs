@@ -12,6 +12,8 @@ using Content.Shared.SS220.Damage;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
 using Content.Shared.CombatMode.Pacification;
+using System.Numerics;
+using Content.Shared.SS220.Weapons.Ranged.Events;
 
 namespace Content.Server.Damage.Systems;
 
@@ -42,6 +44,17 @@ public sealed class DamageOtherOnHitSystem : SharedDamageOtherOnHitSystem
         if (hitEv.Handled)
             return;
         // SS220-add-miss-chance-?-end
+
+        //SS220 shield rework begin
+        var blockEv = new ThrowableProjectileBlockAttemptEvent(component.Damage, uid);
+
+        RaiseLocalEvent(args.Target, ref blockEv);
+        if (blockEv.Cancelled)
+        {
+            _color.RaiseEffect(Color.Red, [args.Target], Filter.Pvs(args.Target, entityManager: EntityManager));
+            return;
+        }
+        //SS220 shield rework end
 
         var dmg = _damageable.ChangeDamage(args.Target, component.Damage * _damageable.UniversalThrownDamageModifier, component.IgnoreResistances, origin: args.Component.Thrower);
 

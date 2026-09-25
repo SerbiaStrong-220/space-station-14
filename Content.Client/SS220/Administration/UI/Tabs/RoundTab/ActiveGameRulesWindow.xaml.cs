@@ -12,7 +12,8 @@ namespace Content.Client.SS220.Administration.UI.Tabs.RoundTab;
 [GenerateTypedNameReferences]
 public sealed partial class ActiveGameRulesWindow : DefaultWindow
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+
     private GameRuleInfo? _selectedGamerule;
 
     public ActiveGameRulesWindow()

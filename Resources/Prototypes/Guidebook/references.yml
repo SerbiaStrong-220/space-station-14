@@ -23,6 +23,7 @@
   text: "/ServerInfo/Guidebook/Service/FoodRecipes.xml"
   filterEnabled: True
   children:
+  - FoodProcessorRecipes # SS220-cooking-guidebook-update
   - PizzaRecipes
   - SavoryRecipes
   - BreadRecipes

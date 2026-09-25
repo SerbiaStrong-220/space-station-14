@@ -9,6 +9,8 @@
     revertOnDeath: true
     revertOnCrit: true
     allowRepeatedMorphs: false
+    polymorphPopup: null
+    exitPolymorphPopup: null
     polymorphSound:
       path: /Audio/SS220/CultYogg/migo_astral_in.ogg
       params:

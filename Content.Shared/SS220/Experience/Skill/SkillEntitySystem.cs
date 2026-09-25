@@ -8,12 +8,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.Experience.Skill;
 
-public abstract partial class SkillEntitySystem : EntitySystem
+public abstract partial class SkillEntitySystem
 {
-    [Dependency] protected readonly ExperienceSystem Experience = default!;
-    [Dependency] protected readonly IGameTiming GameTiming = default!;
+    [Dependency] protected ExperienceSystem Experience = default!;
+    [Dependency] protected IGameTiming GameTiming = default!;
 
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
 
 }

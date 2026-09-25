@@ -7,10 +7,10 @@ using Content.Shared.Verbs;
 
 namespace Content.Shared.SS220.Pen;
 
-public sealed class PenSystem : EntitySystem
+public sealed partial class PenSystem : EntitySystem
 {
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     public readonly Dictionary<int, LocId> PenBrushWriteNames = new()
     {

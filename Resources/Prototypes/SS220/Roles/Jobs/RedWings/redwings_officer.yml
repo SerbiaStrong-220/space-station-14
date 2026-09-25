@@ -3,7 +3,7 @@
   name: ghost-role-information-redwings-officer-name
   description: ghost-role-information-redwings-officer-description
   playTimeTracker: JobRedWingsOfficer
-  experienceDefinition: SecurityOfficerRoleExperience
+  experienceDefinition: RedWingsOfficerRoleExperience
   requirements:
     - !type:DepartmentTimeRequirement
       department: Security

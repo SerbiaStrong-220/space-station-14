@@ -21,6 +21,7 @@
       time: 180000 # SS220-RoleTime
     - !type:AgeRequirement
       requiredAge: 20
+      ignoreSpecies: [ Ipc ] #SS220-JobsAgeIPC
     - !type:SpeciesRequirement #SS220-jobbans begin
       inverted: true
       species:
@@ -51,7 +52,7 @@
   equipment:
 #    id: CEPDA SS220-dark-chief-engineer-pda
 #    eyes: ClothingEyesGlassesMeson #SS220-TwoOne-Floppa-Iteration
-    ears: ClothingHeadsetCE
+#    ears: ClothingHeadsetCE #ss220 HeadsetLoadout
     belt: ClothingBeltUtilityEngineering
   storage:
     back:

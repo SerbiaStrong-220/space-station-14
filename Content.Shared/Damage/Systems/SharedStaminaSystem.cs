@@ -14,6 +14,7 @@ using Content.Shared.Projectiles;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Rounding;
 using Content.Shared.SS220.StaminaConvertArmor;
+using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
@@ -205,11 +206,27 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         if (!TryComp<StaminaComponent>(args.Embedded, out var stamina))
             return;
 
+        //SS220 shield rework begin
+        var blockEv = new ThrowableProjectileBlockAttemptEvent(new DamageSpecifier(), uid);
+
+        RaiseLocalEvent(args.Embedded, ref blockEv);
+        if (blockEv.Cancelled)
+            return;
+        //SS220 shield rework end
+
         TakeStaminaDamage(args.Embedded, component.Damage, stamina, source: uid, ignoreResist: component.IgnoreResistance /* SS220 Add ingnore resistance */);
     }
 
     private void OnThrowHit(EntityUid uid, StaminaDamageOnCollideComponent component, ThrowDoHitEvent args)
     {
+        //SS220 shield rework begin
+        var blockEv = new ThrowableProjectileBlockAttemptEvent(new DamageSpecifier(), uid);
+
+        RaiseLocalEvent(args.Target, ref blockEv);
+        if (blockEv.Cancelled)
+            return;
+        //SS220 shield rework end
+
         OnCollide(uid, component, args.Target, component.IgnoreResistance /* SS220 Add ingnore resistance */);
     }
 

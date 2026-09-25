@@ -28,18 +28,18 @@ namespace Content.Server.SS220.Photocopier;
 
 public sealed partial class PhotocopierSystem : EntitySystem
 {
-    [Dependency] private readonly IEntitySystemManager _sysMan = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly EntityManager _entityManager = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
+    [Dependency] private IEntitySystemManager _sysMan = default!;
+    [Dependency] private ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private UserInterfaceSystem _userInterface = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private EntityManager _entityManager = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
 
     private FormManager? _specificFormManager;
     private readonly ISawmill _sawmill = Logger.GetSawmill("photocopier");

@@ -486,7 +486,7 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: Soap #Make a soap group and pick between when i'm not lazy
+        - id: SoapJR #Make a soap group and pick between when i'm not lazy
         - id: SprayBottleSpaceCleaner
         - id: CleanerGrenade
           amount: 2
@@ -515,12 +515,29 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: Brutepack
-        - id: Ointment
         - id: Bloodpack
+          amount: 2
         - id: Gauze
-        - id: EmergencyMedipen
-          amount: 3
+        # Reagents focused on emergency response rather than outright healing
+        - id: ChemistryBottleInaprovaline
+          amount: 2
+        - id: ChemistryBottleHaloperidol
+        - id: ChemistryBottleEthylredoxrazine
+        - id: ChemistryBottleIpecac
+        - id: ChemistryBottleCharcoal
+
+#Утилизатор JR
+- type: entity
+  parent: OreBag
+  id: OreBagJRSalvage
+  name: salvager JR ore bag
+  description: A considerable portion of space debris consists of asteroid fragments, for the collection of which special bags have been developed. It attracts nearby ore if attached to the belt.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/jr_ore_bag.rsi
+  - type: Clothing
+    sprite: SS220/Objects/Specific/jr_ore_bag.rsi
 
 - type: entity
   parent: ClothingBeltSecurityMedical
@@ -543,3 +560,19 @@
           amount: 2
         - id: SyringeSaline
           amount: 2
+
+- type: entity
+  parent: ClothingBeltCorporateJudo
+  id: ClothingBeltCorporateJudoFilled
+  name: Corporate Judo Belt
+  description: Teaches the wearer NT Corporate Judo.
+  suffix: Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: Handcuffs
+          amount: 2
+        - id: HoloprojectorSecurity
+        - id: RadioHandheldSecurity

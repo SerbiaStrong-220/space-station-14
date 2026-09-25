@@ -26,6 +26,7 @@
       time: 50h # SS220-RoleTime
     - !type:AgeRequirement
       requiredAge: 20
+      ignoreSpecies: [ Ipc ] #SS220-JobsAgeIPC
     - !type:SpeciesRequirement #SS220-jobbans begin
       inverted: true
       species:
@@ -55,7 +56,7 @@
   id: QuartermasterGear
   equipment:
     id: QuartermasterPDA
-    ears: ClothingHeadsetQM
+ #ears: ClothingHeadsetQM #SS220 HeadsetLoadout
     belt: BoxFolderClipboardThreePapers
     pocket1: AppraisalTool
   storage:

@@ -9,8 +9,8 @@ namespace Content.Client.SS220.ChatBans;
 
 public sealed partial class ChatRequirementsManager
 {
-    [Dependency] private readonly IBaseClient _client = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private IBaseClient _client = default!;
+    [Dependency] private INetManager _net = default!;
 
     private ISawmill _sawmill = default!;
 

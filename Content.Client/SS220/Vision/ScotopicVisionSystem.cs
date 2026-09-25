@@ -8,10 +8,10 @@ using Robust.Shared.Player;
 
 namespace Content.Client.SS220.Vision;
 
-public sealed class ScotopicVisionSystem : EntitySystem
+public sealed partial class ScotopicVisionSystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly PointLightSystem _pointLight = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private PointLightSystem _pointLight = default!;
 
     public override void Initialize()
     {

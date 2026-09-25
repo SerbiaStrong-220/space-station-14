@@ -2,6 +2,7 @@
   id: Sneeze
   name: chat-emote-name-sneeze
   category: Vocal
+  icon: SS220/Interface/Emotes/sneeze.png #SS220 icons for emote
   whitelist:
     components:
     - Vocal

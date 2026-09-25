@@ -10,7 +10,8 @@ namespace Content.Server.SS220.TraitorDynamics;
 [AdminCommand(AdminFlags.Round)]
 public sealed partial class GetDynamicCommand : IConsoleCommand
 {
-    [Dependency] private readonly EntityManager _entityManager = default!;
+    [Dependency] private EntityManager _entityManager = default!;
+
     public string Command => "getcurrentdynamic";
     public string Description => "get traitor dynamic for current traitor rule";
     public string Help => "getcurrentdynamic";

@@ -10,13 +10,13 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared.SS220.GavelStand;
 
-public sealed class GavelStandSystem : EntitySystem
+public sealed partial class GavelStandSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
-    [Dependency] private readonly UseDelaySystem _delaySystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private UseDelaySystem _delaySystem = default!;
+    [Dependency] private SharedAudioSystem _audioSystem = default!;
 
     public override void Initialize()
     {

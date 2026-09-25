@@ -141,8 +141,8 @@
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: nt
-    stateDoorOpen: medsteel_open
-    stateDoorClosed: magistrate_door
+    stateDoorOpen: secdarksteel_open
+    stateDoorClosed: nt_door
   - type: AccessReader
     access: [ [ "NanoTrasenRepresentative" ] ]
   - type: TargetLockPick

@@ -18,8 +18,8 @@ public sealed partial class SuperMatterSystem
 
     */
 
-    [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
-    [Dependency] private readonly IRobustRandom _robustRandom = default!;
+    [Dependency] private AtmosphereSystem _atmosphere = default!;
+    [Dependency] private IRobustRandom _robustRandom = default!;
 
     private float GetDecayMatterMultiplier(float temperature, float pressure) => SuperMatterInternalProcess.GetDecayMatterMultiplier(temperature, pressure);
     private float GetMolesReactionEfficiency(float temperature, float pressure) => SuperMatterInternalProcess.GetMolesReactionEfficiency(temperature, pressure);

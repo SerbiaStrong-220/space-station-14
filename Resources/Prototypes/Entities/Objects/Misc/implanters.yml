@@ -35,6 +35,7 @@
     - TrackingImplant
     - StorageImplant
     - AdrenalImplant # SS220 implant-removing fix
+    - NanoSurgeryMachinesImplant # SS220 implant-removing fix
     - ThermalVisionImplant # SS220 implant-removing fix
     - FreedomImplant
     - UplinkImplant
@@ -47,6 +48,7 @@
     - MindSlaveImplant # SS220 implant-removing fix
     - DeathRattleImplant
     - DeathRattleImplantInterdyne # SS220 Interdyne-death-rattle-removing fix
+    - DeathRattleImplantStation # SS220 station-death-rattle
     - MindShieldImplant
     - FakeMindShieldImplant
     - RadioImplant

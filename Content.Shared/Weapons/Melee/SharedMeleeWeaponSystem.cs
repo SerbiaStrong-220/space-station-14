@@ -42,6 +42,8 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using ItemToggleMeleeWeaponComponent = Content.Shared.Item.ItemToggle.Components.ItemToggleMeleeWeaponComponent;
+using Content.Shared.SS220.AltBlocking;
+using Content.Shared.SS220.Weapons.Melee.Events;
 
 namespace Content.Shared.Weapons.Melee;
 
@@ -215,6 +217,14 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         if (args.SenderSession.AttachedEntity is not {} user)
             return;
 
+        //SS220 shield rework begin
+        if (TryComp<AltBlockingUserComponent>(user, out var comp) && comp.Blocking)
+        {
+            PopupSystem.PopupPredictedCursor(Loc.GetString("actively-blocking-attack"), user);
+            return;
+        }
+        //SS220 shield rework end
+
         if (!TryGetWeapon(user, out var weaponUid, out var weapon) ||
             weaponUid != GetEntity(msg.Weapon))
         {
@@ -228,6 +238,14 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     {
         if (args.SenderSession.AttachedEntity is not {} user)
             return;
+
+        //SS220 shield rework begin
+        if (TryComp<AltBlockingUserComponent>(user, out var comp) && comp.Blocking)
+        {
+            PopupSystem.PopupPredictedCursor(Loc.GetString("actively-blocking-attack"), user);
+            return;
+        }
+        //SS220 shield rework end
 
         // ss220 add block heavy attack and shooting while user is down start
         if (_standing.IsDown(user))
@@ -355,39 +373,39 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         return false;
     }
 
-    public void AttemptLightAttackMiss(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, EntityCoordinates coordinates)
+    public void AttemptLightAttackMiss(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, EntityCoordinates coordinates, bool checkCombatMode = true) // SS220-attack-without-combat-mode
     {
-        AttemptAttack(user, weaponUid, weapon, new LightAttackEvent(null, GetNetEntity(weaponUid), GetNetCoordinates(coordinates)), null);
+        AttemptAttack(user, weaponUid, weapon, new LightAttackEvent(null, GetNetEntity(weaponUid), GetNetCoordinates(coordinates)), null, checkCombatMode: checkCombatMode); // SS220-attack-without-combat-mode
     }
 
-    public bool AttemptLightAttack(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, EntityUid target)
+    public bool AttemptLightAttack(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, EntityUid target, bool checkCombatMode = true) // SS220-attack-without-combat-mode
     {
         if (!TryComp(target, out TransformComponent? targetXform))
             return false;
 
-        return AttemptAttack(user, weaponUid, weapon, new LightAttackEvent(GetNetEntity(target), GetNetEntity(weaponUid), GetNetCoordinates(targetXform.Coordinates)), null);
+        return AttemptAttack(user, weaponUid, weapon, new LightAttackEvent(GetNetEntity(target), GetNetEntity(weaponUid), GetNetCoordinates(targetXform.Coordinates)), null, checkCombatMode: checkCombatMode); // SS220-attack-without-combat-mode
     }
 
-    public bool AttemptDisarmAttack(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, EntityUid target)
+    public bool AttemptDisarmAttack(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, EntityUid target, bool checkCombatMode = true) // SS220-attack-without-combat-mode
     {
         if (!TryComp(target, out TransformComponent? targetXform))
             return false;
 
-        return AttemptAttack(user, weaponUid, weapon, new DisarmAttackEvent(GetNetEntity(target), GetNetCoordinates(targetXform.Coordinates)), null);
+        return AttemptAttack(user, weaponUid, weapon, new DisarmAttackEvent(GetNetEntity(target), GetNetCoordinates(targetXform.Coordinates)), null, checkCombatMode: checkCombatMode); // SS220-attack-without-combat-mode
     }
 
     /// <summary>
     /// Called when a windup is finished and an attack is tried.
     /// </summary>
     /// <returns>True if attack successful</returns>
-    private bool AttemptAttack(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, AttackEvent attack, ICommonSession? session)
+    private bool AttemptAttack(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, AttackEvent attack, ICommonSession? session, bool checkCombatMode = true) // SS220-attack-without-combat-mode
     {
         var curTime = Timing.CurTime;
 
         if (weapon.NextAttack > curTime)
             return false;
 
-        if (!CombatMode.IsInCombatMode(user))
+        if (checkCombatMode && !CombatMode.IsInCombatMode(user)) // SS220-attack-without-combat-mode
             return false;
 
         EntityUid? target = null;
@@ -551,6 +569,22 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             return;
         }
 
+        //SS220 shield rework begin
+        EntityUid targetEntity = target.Value;
+
+        if (TryComp<AltBlockingUserComponent>(target, out var blockcomp))
+        {
+            var meleeBlockEvent = new MeleeHitBlockAttemptEvent(user);
+
+            RaiseLocalEvent(targetEntity, ref meleeBlockEvent);
+
+            if (meleeBlockEvent.Cancelled && meleeBlockEvent.Blocker is { Valid: true } blockerUid)
+                targetEntity = blockerUid;
+        }
+
+        target = targetEntity;
+        //SS220 shield rework end
+
         // Sawmill.Debug($"Melee damage is {damage.Total} out of {component.Damage.Total}");
 
         // Raise event before doing damage so we can cancel damage if the event is handled
@@ -576,7 +610,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         // For stuff that cares about it being attacked.
         var attackedEvent = new AttackedEvent(meleeUid, user, targetXform.Coordinates);
-        RaiseLocalEvent(target.Value, attackedEvent);
+        RaiseLocalEvent(target.Value, attackedEvent);//SS220 shield rework
 
         //ss220 extended weapon logic start
         var weaponAttackEvent = new WeaponAttackEvent(user, target.Value, AttackType.LIGHT);
@@ -695,11 +729,35 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         }
 
         var targets = new List<EntityUid>();
+        var damageQuery = GetEntityQuery<DamageableComponent>();
+        var targetseffectonly = new List<EntityUid>();//SS220 shield rework
+
         foreach (var entity in entities)
         {
             if (entity == user ||
                 !_damageQuery.HasComponent(entity))
                 continue;
+
+            //SS220 shield rework begin
+            if (TryComp<AltBlockingUserComponent>(entity, out var blockcomp))
+            {
+                var meleeBlockEvent = new MeleeHitBlockAttemptEvent(user);
+
+                RaiseLocalEvent(entity, ref meleeBlockEvent);
+
+                if (meleeBlockEvent.Cancelled && meleeBlockEvent.Blocker is { Valid: true } blockerUid)
+                {
+                    var shield1 = blockerUid;
+                    targets.Add(shield1);
+                    AdminLogger.Add(LogType.MeleeHit, LogImpact.High,
+                    $"{ToPrettyString(user):actor} melee attacked (heavy) {ToPrettyString(entity):actor}");
+                    targetseffectonly.Add(entity);
+                    continue;
+                }
+                targets.Add(entity);
+                continue;
+            }
+            //SS220 shield rework end
 
             targets.Add(entity);
         }
@@ -794,6 +852,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         if (appliedDamage.GetTotal() > FixedPoint2.Zero && targets.Count > 0)
         {
             DoDamageEffect(targets, user, Transform(targets[0]));
+            DoDamageEffect(targetseffectonly, user, Transform(targets[0]));//SS220 shield rework
         }
 
         return true;
@@ -959,6 +1018,20 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         if (attemptEvent.Cancelled)
             return false;
+
+        //SS220 shield rework begin
+        EntityUid targetEntity = target.Value;
+        if (TryComp<AltBlockingUserComponent>(target, out var blockcomp))
+        {
+            var meleeBlockEvent = new MeleeHitBlockAttemptEvent(user);
+
+            RaiseLocalEvent(targetEntity, ref meleeBlockEvent);
+            if (meleeBlockEvent.Cancelled && meleeBlockEvent.Blocker is { Valid: true } blockerUid)
+                targetEntity = blockerUid;
+        }
+
+        target = targetEntity;
+        //SS220 shield rework end
 
         // SS220-MartialArts-Begin
         // i'm struggling where to put this block, i hope it will fit here

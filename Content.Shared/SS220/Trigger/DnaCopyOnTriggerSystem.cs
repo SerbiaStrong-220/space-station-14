@@ -8,12 +8,12 @@ using Content.Shared.Trigger;
 
 namespace Content.Shared.SS220.Trigger;
 
-public sealed class DnaCopyOnTriggerSystem : EntitySystem
+public sealed partial class DnaCopyOnTriggerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly IdentitySystem _identity = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedVisualBodySystem _visualBody = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private IdentitySystem _identity = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

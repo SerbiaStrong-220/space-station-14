@@ -19,6 +19,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Content.Shared.SS220.Speech;// SS220 Chat-Special-Emote
+using Content.Shared.SS220.Clothing.Components;// SS220 add integrated clothing
 
 namespace Content.Shared.Inventory;
 
@@ -231,6 +232,9 @@ public abstract partial class InventorySystem
         // in that case, we check accesibility for the owner-entity instead.
         if (TryComp(itemUid, out AttachedClothingComponent? attachedComp))
             itemUid = attachedComp.AttachedUid;
+
+        if (TryComp(itemUid, out IntegratedToClothingComponent? integratedComp)) //SS220 add integrated clothing
+            itemUid = integratedComp.AttachedUid; //SS220 add integrated clothing
 
         // Can the actor reach the target?
         if (actor != target && !(_interactionSystem.InRangeUnobstructed(actor, target) && _containerSystem.IsInSameOrParentContainer(actor, target)))

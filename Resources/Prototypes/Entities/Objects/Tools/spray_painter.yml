@@ -28,13 +28,17 @@
       # standard atmos pipes
       waste: '#990000'
       distro: '#0055cc'
+      waste (bright): '#ff1212' # SS220 pipe color
+      waste (dull): '#990000FF' # SS220 pipe color
+      distro (bright): '#0335fc' # SS220 pipe color
+      distro (dull): '#0055CCFF' # SS220 pipe color
       air: '#03fcd3'
       mix: '#947507'
   - type: StaticPrice
     price: 40
   - type: LimitedCharges
-    maxCharges: 15
-    lastCharges: 15
+    maxCharges: 30 #SS220 Increasing the spray gun capacity
+    lastCharges: 30 #SS220 Increasing the spray gun capacity
   - type: PhysicalComposition
     materialComposition:
       Steel: 100
@@ -72,6 +76,7 @@
   description: A cartridge of highly compressed paint, commonly used in spray painters.
   components:
   - type: SprayPainterAmmo
+    charges: 30 #SS220 Increasing the spray gun capacity
   - type: Sprite
     sprite: Objects/Tools/spray_painter.rsi
     state: ammo

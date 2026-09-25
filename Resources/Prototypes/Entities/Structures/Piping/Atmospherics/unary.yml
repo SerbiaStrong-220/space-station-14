@@ -266,6 +266,19 @@
     - type: GuideHelp
       guides:
       - Thermomachines
+    #SS220-TweakHitbox begin
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape:
+            !type:PhysShapeCircle
+            radius: 0.43
+          density: 190
+          mask:
+          - MachineMask
+          layer:
+          - MachineLayer
+    #SS220-TweakHitbox end
 
 - type: entity
   parent: BaseGasThermoMachine

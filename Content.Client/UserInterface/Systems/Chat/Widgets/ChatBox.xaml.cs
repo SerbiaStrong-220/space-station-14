@@ -48,16 +48,7 @@ public partial class ChatBox : UIWidget
         _controller.MessageAdded += OnMessageAdded;
         _controller.HighlightsUpdated += OnHighlightsUpdated;
         _controller.RegisterChat(this);
-
-        _chatRequirements.Updated += UpdateChatBan; // SS220 Chat bans
     }
-
-    // SS220 Chat bans begin
-    private void UpdateChatBan()
-    {
-        ChatInput.Input.Editable = !_chatRequirements.IsBanned(SelectedChannel);
-    }
-    // SS220 Chat bans end
 
     private void OnTextEntered(LineEditEventArgs args)
     {
@@ -95,6 +86,7 @@ public partial class ChatBox : UIWidget
     private void OnChannelSelect(ChatSelectChannel channel)
     {
         _controller.UpdateSelectedChannel(this);
+        ChatInput.Input.Editable = !_chatRequirements.IsBanned(SelectedChannel); // SS220-chat-bans
     }
 
     public void Repopulate()

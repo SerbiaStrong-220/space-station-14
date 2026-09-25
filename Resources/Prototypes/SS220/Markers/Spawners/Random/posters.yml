@@ -62,6 +62,10 @@
       - PosterLegitSafetyMothSSD
       - PosterLegitOppenhopper
       - PosterLegitTyrone
+      - PosterJRSaviorsOfTheWorld
+      - PosterJRAnnualReport
+      - PosterJRSpaceJunk
+      - PosterJRCarpLivesImportant
     chance: 1
 
 - type: entity
@@ -144,4 +148,6 @@
       - PosterContrabandExoAcid
       - PosterContrabandExoRun
       - PosterContrabandExoChomp
+      - PosterJRDestroyersOfTheWorld
+      - PosterJRTragicAccident
     chance: 1

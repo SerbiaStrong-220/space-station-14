@@ -5,9 +5,9 @@
   description: department-law-description
   color: "#323ba9"
   roles:
-  #- NanoTrasenRepresentative #SS220 TODO NanoTraisen Representative
-  - Magistrate
-  - IAA
+  - NanoTrasenRepresentative
+  # - Magistrate
+  # - IAA
   - Lawyer
   primary: false
   weight: 80

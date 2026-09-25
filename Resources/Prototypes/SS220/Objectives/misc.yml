@@ -4,3 +4,4 @@
   components:
   - type: Objective
     issuer: free-objectives-name
+  - type: CustomObjective

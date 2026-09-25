@@ -10,11 +10,11 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.SecHudRecords;
 
-public sealed class SecHudRecordsSystem : SharedSecHudRecordsSystem
+public sealed partial class SecHudRecordsSystem : SharedSecHudRecordsSystem
 {
-    [Dependency] private readonly StationRecordsSystem _stationRecords = default!;
-    [Dependency] private readonly CriminalRecordSystem _record = default!;
-    [Dependency] private readonly EuiManager _eui = default!;
+    [Dependency] private StationRecordsSystem _stationRecords = default!;
+    [Dependency] private CriminalRecordSystem _record = default!;
+    [Dependency] private EuiManager _eui = default!;
 
     protected override void VerbAct(NetEntity netTarget, ICommonSession session, StationRecordKey key)
     {

@@ -6,10 +6,10 @@ using Content.Shared.StatusEffectNew;
 
 namespace Content.Shared.SS220.Chemistry.MobThresholdsModifierStatusEffect;
 
-public sealed class MobThresholdsModifierStatusEffectSystem : EntitySystem
+public sealed partial class MobThresholdsModifierStatusEffectSystem : EntitySystem
 {
-    [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
-    [Dependency] private readonly ChemicalAdaptationSystem _chemicalAdaptation = default!;
+    [Dependency] private MobThresholdSystem _mobThreshold = default!;
+    [Dependency] private ChemicalAdaptationSystem _chemicalAdaptation = default!;
 
     public override void Initialize()
     {

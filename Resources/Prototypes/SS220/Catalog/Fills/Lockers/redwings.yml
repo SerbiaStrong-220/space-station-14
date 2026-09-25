@@ -1,0 +1,26 @@
+- type: entity
+  id: LockerInterdyneFilled
+  parent: LockerInterdyne
+  suffix: Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: LockerFillMedicine
+
+- type: entity
+  id: LockerInterdyneArmoredFilled
+  parent: LockerInterdyneArmored
+  suffix: Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: MedkitCombatFilled
+        - id: MedkitRadiationFilled
+        - id: MedkitOxygenFilled
+        - id: MedkitBruteFilled
+        - id: MedkitToxinFilled
+        - id: MedkitBurnFilled
+        - id: MedkitAdvancedFilled

@@ -5,6 +5,8 @@
   groups:
   - GroupTankHarness
   - ChiefMedicalOfficerHead
+  - ChiefMedicalOfficerHeadset #SS220 Headsetloadout
+  - ChiefMedicalOfficerInnerEncryptionKeys #SS220-ipc-builtin-radio
   - ChiefMedicalOfficerGlasses #SS220-TwoOne-Floppa-Iteration / ss220 cmo new
   - MedicalMask
   - ChiefMedicalOfficerJumpsuit
@@ -15,6 +17,7 @@
   - ChiefMedicalOfficerShoes
   - Glasses
   - SurvivalMedical
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
 #  - ChiefMedicalOfficerJobTrinkets
   - GroupSpeciesBreathToolMedical
@@ -37,7 +40,9 @@
   - MedicalDoctorPDA
   - Glasses
   - SurvivalMedical
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
+  - MedicalInnerEncryptionKeys #SS220-ipc-builtin-radio
 #  - MedicalDoctorJobTrinkets
   - GroupSpeciesBreathToolMedical
   - MedicalNeck #SS220-WhiteScarf
@@ -56,7 +61,9 @@
   - MedicalBackpack
   - Glasses
   - SurvivalMedical
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
+  - MedicalInnerEncryptionKeys #SS220-ipc-builtin-radio
 #  - MedicalInternJobTrinkets
   - GroupSpeciesBreathToolMedical
   - EconomyLoadout #SS220 Economy
@@ -75,7 +82,9 @@
   - MedicalShoes
   - Glasses
   - SurvivalMedical
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
+  - MedicalInnerEncryptionKeys #SS220-ipc-builtin-radio
 #  - ChemistJobTrinkets
   - GroupSpeciesBreathToolMedical
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
@@ -96,7 +105,9 @@
   - ParamedicShoes
   - Glasses
   - SurvivalMedical
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
+  - MedicalInnerEncryptionKeys #SS220-ipc-builtin-radio
   - ParamedicBelt #ss220 ParamedInterdyne
 #  - ParamedicJobTrinkets
   - GroupSpeciesBreathToolMedical

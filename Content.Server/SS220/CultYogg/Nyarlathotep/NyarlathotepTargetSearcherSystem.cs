@@ -12,13 +12,13 @@ namespace Content.Server.SS220.CultYogg.Nyarlathotep;
 /// <summary>
 /// Searches for entities within a given radius to further pursue them
 /// </summary>
-public sealed class NyarlathotepTargetSearcherSystem : EntitySystem
+public sealed partial class NyarlathotepTargetSearcherSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookupSystem = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private EntityLookupSystem _entityLookupSystem = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private MobStateSystem _mobStateSystem = default!;
 
     public override void Initialize()
     {

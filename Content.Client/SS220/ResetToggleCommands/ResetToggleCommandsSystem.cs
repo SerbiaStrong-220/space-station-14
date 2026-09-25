@@ -3,10 +3,10 @@ using Robust.Client.Player;
 
 namespace Content.Client.SS220.ResetToggleCommands;
 
-public sealed class ResetToggleCommandsSystem : EntitySystem
+public sealed partial class ResetToggleCommandsSystem : EntitySystem
 {
-    [Dependency] private readonly ILightManager _light = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private ILightManager _light = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     public override void Initialize()
     {
