@@ -1,0 +1,14 @@
+- type: cultMiniMapProfile
+  id: CultYogg
+  rules:
+  - CultYoggMiniMapMiGo
+  - CultYoggMiniMapCultist
+  - CultYoggMiniMapWall
+  - CultYoggMiniMapSecretDoor
+  - CultYoggMiniMapAirlock
+  - CultYoggMiniMapPod
+  - CultYoggMiniMapFungus
+  - CultYoggMiniMapAltar
+  - CultYoggMiniMapPond
+  - CultYoggMiniMapTeleporter
+  - CultYoggMiniMapBuilding
