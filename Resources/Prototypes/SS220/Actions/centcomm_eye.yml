@@ -1,0 +1,17 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: BaseAction
+  id: ActionCentCommEyeReturn
+  name: return to body
+  description: return back to the console
+  components:
+  - type: Action
+    priority: -9
+    checkCanInteract: false
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/actions_ai.rsi
+      state: ai_core
+  - type: InstantAction
+    event: !type:CentCommEyeReturnActionEvent
