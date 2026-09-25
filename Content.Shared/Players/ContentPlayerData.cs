@@ -39,6 +39,10 @@ public sealed class ContentPlayerData
 
     [ViewVariables(VVAccess.ReadOnly)]
     public DiscordSponsorInfo? SponsorInfo = null;
+
+    /// <summary>Set when the fetch failed, as opposed to succeeding with no tiers.</summary>
+    [ViewVariables(VVAccess.ReadOnly)]
+    public bool SponsorInfoFetchFailed = false;
     //SS220 Shlepovend end
 
     /// <summary>
