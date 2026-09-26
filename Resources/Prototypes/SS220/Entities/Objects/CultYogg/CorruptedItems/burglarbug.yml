@@ -50,8 +50,8 @@
             False: { visible: false }
     - type: BurglarBug
       timeToOpen: 10
-      notActivatedStickPopupCancellation: cult-yogg-burglar-bug-notactivated-cancellation
-      openedDoorStickPopupCancellation: cult-yogg-burglar-bug-openeddoor-cancellation
+      notActivatedStickPopupCancellation: cult-yogg-burglar-bug-not-activated-cancellation
+      openDoorStickPopupCancellation: cult-yogg-burglar-bug-open-door-cancellation
       ignoreResistances: true
       damage:
         types:

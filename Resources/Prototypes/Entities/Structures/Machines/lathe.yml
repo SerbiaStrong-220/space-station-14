@@ -234,6 +234,10 @@
     - Janitor
     - Instruments
     - Equipment
+    #SS220-DecryptionKeys begin
+    - DecryptionKeys
+    - DecryptionKeyAdvanced
+    #SS220-DecryptionKeys end
   - type: EmagLatheRecipes
     emagDynamicPacks:
     - SecurityAmmo
@@ -652,6 +656,7 @@
     staticPacks:
     - BioGenIngredientsStatic
     - BioGenMaterialsStatic
+    - BioGenCubesCat # SS220 CatCube
   - type: EmagLatheRecipes
     emagStaticPacks:
     - BioGenEmagStatic

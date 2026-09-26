@@ -63,6 +63,14 @@
     prototype: CarpetCard
     doAfter: 0.5
     removeOnInteract: true
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Materials/cardboard_pick_up.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Materials/cardboard_drop.ogg
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   parent: MaterialCardboard
@@ -265,6 +273,14 @@
         reagents:
         - ReagentId: Cellulose
           Quantity: 10
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Materials/wood_pick_up.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Materials/wood_drop.ogg
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   parent: MaterialWoodPlank

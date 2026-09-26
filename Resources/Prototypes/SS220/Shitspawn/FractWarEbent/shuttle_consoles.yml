@@ -27,8 +27,10 @@
     containers:
     - board
     deconstructionTarget: null
+  - type: RequireProjectileTarget
+    active: false
   - type: ShuttleConsolePoints
-    fraction: flag-fraction-Synd
+    fraction: flag-fraction-NT
     pointsOnDestroy: 500
   - type: Explosive
     explosionType: HardBomb
@@ -68,8 +70,10 @@
     containers:
     - board
     deconstructionTarget: null
+  - type: RequireProjectileTarget
+    active: false
   - type: ShuttleConsolePoints
-    fraction: flag-fraction-NT
+    fraction: flag-fraction-Synd
     pointsOnDestroy: 500
   - type: Explosive
     explosionType: HardBomb

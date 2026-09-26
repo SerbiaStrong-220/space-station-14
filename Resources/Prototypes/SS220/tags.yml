@@ -392,7 +392,7 @@
   id: CultYoggTeleportExit
 
 - type: Tag
-  id: VoidTeleporationTarget
+  id: VoidTeleportDestination
 
 - type: Tag
   id: EnvelopeWhitelist
@@ -428,7 +428,13 @@
   id: HookahCoal
 
 - type: Tag
+  id: HookahTobacco
+
+- type: Tag
   id: AstralBlocker
 
 - type: Tag
   id: MiGoBuildingBlocker
+
+- type: Tag
+  id: WeaponShotgunDoubleBarreled

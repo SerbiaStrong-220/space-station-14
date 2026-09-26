@@ -1288,7 +1288,7 @@
   name: food-sequence-cotton-burger-content-plushie-revenant
   scale: 0.75, 0.75
   sprites:
-  - sprite: Mobs/Ghosts/revenant.rsi
+  - sprite: SS220/Mobs/Ghosts/revenant.rsi #SS220 Resprite
     state: icon
     noRot: true
 

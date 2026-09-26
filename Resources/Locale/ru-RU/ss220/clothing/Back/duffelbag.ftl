@@ -7,3 +7,6 @@ ent-ClothingBackpackDuffelCBURNFilled = { ent-ClothingBackpackDuffelCBURN }
 
 ent-ClothingBackpackWhiteDuffelCaptain = белый вещмешок капитана
     .desc = Дорогая белая сумка, выданная за выслугу лет капитану.
+
+ent-ClothingBackpackJanitorJRDuffel = вещмешок JR
+    .desc = Большой вещмешок, при необходимости способный заменить мусорный контейнер.

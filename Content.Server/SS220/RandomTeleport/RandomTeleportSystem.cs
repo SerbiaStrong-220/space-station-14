@@ -2,9 +2,8 @@
 
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
-using Content.Shared.Movement.Pulling.Components;
-using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.SS220.Teleport;
+using Content.Shared.SS220.Teleport.Systems;
 using Content.Shared.Whitelist;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
@@ -13,64 +12,98 @@ namespace Content.Server.SS220.RandomTeleport;
 
 public sealed partial class RandomTeleportSystem : EntitySystem
 {
-    [Dependency] private SharedTransformSystem _transformSystem = default!;
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private IComponentFactory _componentFactory = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private PullingSystem _pulling = default!;
+    [Dependency] private SharedTeleportSystem _teleport = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RandomTeleportComponent, TeleportTargetEvent>(OnTeleportTarget);
+        SubscribeLocalEvent<RandomTeleportComponent, TeleportRequestEvent>(OnTeleportRequest);
+        SubscribeLocalEvent<RandomTeleportComponent, GhostTeleportRequestEvent>(OnGhostTeleportRequest);
     }
 
-    private void OnTeleportTarget(Entity<RandomTeleportComponent> ent, ref TeleportTargetEvent args)
+    private void OnTeleportRequest(Entity<RandomTeleportComponent> ent, ref TeleportRequestEvent args)
     {
-        var beforeEv = new BeforeTeleportTargetEvent(args.User, args.Target);
-        RaiseLocalEvent(ent, ref beforeEv);
+        if (args.Handled)
+            return;
 
-        Warp(ent, args.Target, args.User);
+        if (!TryTeleport(ent, args.Target, args.User))
+            return;
 
-        var ev = new TargetTeleportedEvent(args.Target);
-        RaiseLocalEvent(ent, ref ev);
-
-        var targetEv = new AfterTeleportedEvent(ent);
-        RaiseLocalEvent(args.Target, ref targetEv);
+        args.Handled = true;
     }
 
-    private void Warp(Entity<RandomTeleportComponent> ent, EntityUid teleported, EntityUid user)
+    private void OnGhostTeleportRequest(Entity<RandomTeleportComponent> ent, ref GhostTeleportRequestEvent args)
     {
-        if (ent.Comp.TargetsComponent is null)
+        if (args.Handled)
             return;
 
-        if (!_componentFactory.TryGetRegistration(ent.Comp.TargetsComponent, out var registration))
+        if (!TryGetDestination(ent, out var destinationCoordinates))
             return;
 
-        var validLocations = new List<EntityCoordinates>();
+        if (!_teleport.TryTeleportGhost(args.Target, destinationCoordinates))
+            return;
 
-        var query1 = EntityManager.AllEntityQueryEnumerator(registration.Type);
-        while (query1.MoveNext(out var target, out _))
+        args.Handled = true;
+    }
+
+    private bool TryTeleport(Entity<RandomTeleportComponent> ent, EntityUid target, EntityUid user)
+    {
+        if (!TryGetDestination(ent, out var destinationCoordinates))
+            return false;
+
+        if (!_teleport.TryTeleport(ent, target, destinationCoordinates))
+            return false;
+
+        _adminLogger.Add(LogType.Teleport, $"{ToPrettyString(user):user} used teleporter {ToPrettyString(ent):teleport} and teleported {ToPrettyString(target):target} to random location");
+        return true;
+    }
+
+    private bool TryGetDestination(Entity<RandomTeleportComponent> ent, out EntityCoordinates destinationCoordinates)
+    {
+        destinationCoordinates = EntityCoordinates.Invalid;
+
+        if (ent.Comp.DestinationComponentName is null)
         {
-            if (_whitelist.IsWhitelistFail(ent.Comp.TeleportTargetWhitelist, target))
-                continue;
-
-            validLocations.Add(Transform(target).Coordinates);
+            Log.Error($"RandomTeleport on {ToPrettyString(ent)} has no destination component configured");
+            return false;
         }
 
-        if (validLocations.Count == 0)
-            return;
+        if (!_componentFactory.TryGetRegistration(ent.Comp.DestinationComponentName, out var registration))
+        {
+            Log.Error($"RandomTeleport on {ToPrettyString(ent)} has unknown destination component {ent.Comp.DestinationComponentName}");
+            return false;
+        }
 
-        var teleportLocation = _random.Pick(validLocations);
+        var validDestinations = new List<EntityCoordinates>();
 
-        if (TryComp(user, out PullerComponent? puller) && TryComp(puller.Pulling, out PullableComponent? pullable))
-            _pulling.TryStopPull(puller.Pulling.Value, pullable);
+        var query = EntityManager.AllEntityQueryEnumerator(registration.Type);
+        while (query.MoveNext(out var destination, out _))
+        {
+            if (TerminatingOrDeleted(destination))
+                continue;
 
-        var xform = Transform(teleported);
-        _transformSystem.SetCoordinates(teleported, xform, teleportLocation);
+            if (_whitelist.IsWhitelistFail(ent.Comp.DestinationWhitelist, destination))
+                continue;
 
-        _adminLogger.Add(LogType.Teleport, $"{ToPrettyString(user):user} used linked telepoter {ToPrettyString(ent):teleport} and tried teleport {ToPrettyString(teleported):target} to random location");
+            var coordinates = Transform(destination).Coordinates;
+            if (!coordinates.IsValid(EntityManager))
+                continue;
+
+            validDestinations.Add(coordinates);
+        }
+
+        if (validDestinations.Count == 0)
+        {
+            Log.Warning($"RandomTeleport on {ToPrettyString(ent)} found no valid destinations with component {ent.Comp.DestinationComponentName}");
+            return false;
+        }
+
+        destinationCoordinates = _random.Pick(validDestinations);
+        return true;
     }
 }
