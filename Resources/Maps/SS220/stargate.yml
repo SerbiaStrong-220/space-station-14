@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 09/26/2026 14:36:29
-  entityCount: 46445
+  time: 09/26/2026 16:44:44
+  entityCount: 46442
 maps:
 - 1
 grids:
@@ -27259,7 +27259,7 @@ entities:
       pos: -102.5,24.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -219353.67
+      secondsUntilStateChange: -222845.66
       state: Opening
   - uid: 1760
     components:
@@ -29069,7 +29069,7 @@ entities:
       pos: 1.5,161.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1601416
+      secondsUntilStateChange: -1604908
       changeAirtight: False
       state: Opening
     - type: DeviceLinkSource
@@ -30987,11 +30987,6 @@ entities:
 - proto: AirlockShuttleAssembly
   entities:
   - uid: 2089
-    components:
-    - type: Transform
-      pos: -57.5,-17.5
-      parent: 2
-  - uid: 31798
     components:
     - type: Transform
       pos: -57.5,-17.5
@@ -124166,7 +124161,7 @@ entities:
       pos: 45.5,58.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -495103.25
+      secondsUntilStateChange: -498595.25
       state: Closing
     - type: DeviceLinkSource
       lastSignals:
@@ -132140,15 +132135,6 @@ entities:
       text: Мусоросброс Инженерного отдела
     - type: WarpPoint
       location: Мусоросброс Инженерного отдела
-  - uid: 42111
-    components:
-    - type: Transform
-      pos: -107.5,94.5
-      parent: 2
-    - type: NavMapBeacon
-      text: Мусоросброс Центра
-    - type: WarpPoint
-      location: Мусоросброс Центра
   - uid: 42112
     components:
     - type: Transform
@@ -133458,6 +133444,12 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -21.5,71.5
       parent: 2
+  - uid: 4679
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -112.5,95.5
+      parent: 2
   - uid: 6454
     components:
     - type: Transform
@@ -133473,19 +133465,8 @@ entities:
   - uid: 8317
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -102.5,94.5
-      parent: 2
-  - uid: 8370
-    components:
-    - type: Transform
       rot: 3.141592653589793 rad
-      pos: -106.5,95.5
-      parent: 2
-  - uid: 8431
-    components:
-    - type: Transform
-      pos: -102.5,95.5
+      pos: -106.5,96.5
       parent: 2
   - uid: 8511
     components:
@@ -133738,17 +133719,16 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -29.5,66.5
       parent: 2
-  - uid: 16689
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -112.5,94.5
-      parent: 2
   - uid: 16694
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -106.5,99.5
+      parent: 2
+  - uid: 16715
+    components:
+    - type: Transform
+      pos: -103.5,96.5
       parent: 2
   - uid: 16731
     components:
@@ -134785,6 +134765,12 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -72.5,74.5
       parent: 2
+  - uid: 4800
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -107.5,95.5
+      parent: 2
   - uid: 4839
     components:
     - type: Transform
@@ -134850,6 +134836,18 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -76.5,74.5
       parent: 2
+  - uid: 8370
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -108.5,95.5
+      parent: 2
+  - uid: 8431
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -110.5,95.5
+      parent: 2
   - uid: 8629
     components:
     - type: Transform
@@ -134866,6 +134864,12 @@ entities:
     components:
     - type: Transform
       pos: -64.5,102.5
+      parent: 2
+  - uid: 12584
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -111.5,95.5
       parent: 2
   - uid: 13314
     components:
@@ -136445,6 +136449,12 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -105.5,99.5
       parent: 2
+  - uid: 16689
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -105.5,95.5
+      parent: 2
   - uid: 16697
     components:
     - type: Transform
@@ -136460,62 +136470,20 @@ entities:
   - uid: 16699
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -106.5,96.5
-      parent: 2
-  - uid: 16700
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -105.5,95.5
-      parent: 2
-  - uid: 16701
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -104.5,95.5
-      parent: 2
-  - uid: 16705
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -103.5,95.5
-      parent: 2
-  - uid: 16710
-    components:
-    - type: Transform
       rot: -1.5707963267948966 rad
-      pos: -104.5,94.5
+      pos: -104.5,95.5
       parent: 2
   - uid: 16714
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -105.5,94.5
-      parent: 2
-  - uid: 16715
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -107.5,94.5
-      parent: 2
-  - uid: 16716
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -108.5,94.5
+      rot: 1.5707963267948966 rad
+      pos: -105.5,96.5
       parent: 2
   - uid: 16717
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -110.5,94.5
-      parent: 2
-  - uid: 16718
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -111.5,94.5
+      rot: 1.5707963267948966 rad
+      pos: -104.5,96.5
       parent: 2
   - uid: 16757
     components:
@@ -139637,25 +139605,26 @@ entities:
       rot: 3.141592653589793 rad
       pos: -43.5,54.5
       parent: 2
+- proto: DisposalRouter
+  entities:
+  - uid: 16700
+    components:
+    - type: Transform
+      pos: -103.5,95.5
+      parent: 2
 - proto: DisposalRouterFlipped
   entities:
-  - uid: 4679
+  - uid: 16705
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
-      pos: -109.5,94.5
+      pos: -106.5,95.5
       parent: 2
-  - uid: 4800
+  - uid: 16718
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
-      pos: -103.5,94.5
-      parent: 2
-  - uid: 4826
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -106.5,94.5
+      pos: -109.5,95.5
       parent: 2
 - proto: DisposalTrunk
   entities:
@@ -139664,6 +139633,12 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -22.5,71.5
+      parent: 2
+  - uid: 4826
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -103.5,94.5
       parent: 2
   - uid: 5109
     components:
@@ -139811,29 +139786,23 @@ entities:
       rot: 3.141592653589793 rad
       pos: -14.5,62.5
       parent: 2
-  - uid: 16722
+  - uid: 16701
     components:
     - type: Transform
       rot: 3.141592653589793 rad
-      pos: -112.5,93.5
+      pos: -109.5,94.5
       parent: 2
-  - uid: 16723
+  - uid: 16710
     components:
     - type: Transform
       rot: 3.141592653589793 rad
-      pos: -106.5,93.5
+      pos: -106.5,94.5
       parent: 2
-  - uid: 16726
+  - uid: 16716
     components:
     - type: Transform
       rot: 3.141592653589793 rad
-      pos: -109.5,93.5
-      parent: 2
-  - uid: 16730
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -103.5,93.5
+      pos: -112.5,94.5
       parent: 2
   - uid: 16738
     components:
@@ -141231,7 +141200,7 @@ entities:
     - type: Openable
       opened: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.33769846
+      sprayFizzinessThresholdRoll: 0.19564044
     - type: MeleeWeapon
       nextAttack: -13.2999857
     - type: EmitSoundOnCollide
@@ -141553,7 +141522,7 @@ entities:
     - type: EmitSoundOnCollide
       nextSound: -20188.979811
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.1816926
+      sprayFizzinessThresholdRoll: 0.39320955
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -141616,7 +141585,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.76915884
+      sprayFizzinessThresholdRoll: 0.25158957
     - type: NameModifier
       baseName: бутылка Гильдлагер
     - type: ContainerContainer
@@ -142662,7 +142631,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.42183387
+      sprayFizzinessThresholdRoll: 0.017202541
     - type: NameModifier
       baseName: Особый Запас Дядюшки Гита
     - type: ContainerContainer
@@ -142716,7 +142685,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.334599
+      sprayFizzinessThresholdRoll: 0.8913965
     - type: NameModifier
       baseName: вино Особое Двухбородое Бородатое
     - type: ContainerContainer
@@ -142755,7 +142724,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.45511982
+      sprayFizzinessThresholdRoll: 0.5043998
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -142787,7 +142756,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.5278119
+      sprayFizzinessThresholdRoll: 0.9900974
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -145987,7 +145956,7 @@ entities:
       - 40096
       - 40106
     - type: Door
-      secondsUntilStateChange: -1510680.1
+      secondsUntilStateChange: -1514172.1
       state: Closing
   - uid: 9985
     components:
@@ -146073,7 +146042,7 @@ entities:
       deviceLists:
       - 46086
     - type: Door
-      secondsUntilStateChange: -1429355.1
+      secondsUntilStateChange: -1432847.1
       state: Closing
   - uid: 11562
     components:
@@ -147982,7 +147951,7 @@ entities:
     - type: Firelock
       emergencyCloseCooldown: 8075.4252599
     - type: Door
-      secondsUntilStateChange: -533801.3
+      secondsUntilStateChange: -537293.3
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -166049,18 +166018,6 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -85.5,26.5
-      parent: 2
-  - uid: 21574
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -115.5,15.5
-      parent: 2
-  - uid: 22001
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -115.5,17.5
       parent: 2
   - uid: 22119
     components:
@@ -195186,6 +195143,18 @@ entities:
       pipeLayer: Secondary
 - proto: GasPressurePump
   entities:
+  - uid: 16722
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -115.5,17.5
+      parent: 2
+  - uid: 16723
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -115.5,15.5
+      parent: 2
   - uid: 19111
     components:
     - type: Transform
@@ -212488,17 +212457,18 @@ entities:
       parent: 2
     - type: Fixtures
       fixtures: {}
+  - uid: 28605
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 85.5,37.5
+      parent: 2
+    - type: Fixtures
+      fixtures: {}
   - uid: 29169
     components:
     - type: Transform
       pos: 101.5,50.5
-      parent: 2
-    - type: Fixtures
-      fixtures: {}
-  - uid: 29170
-    components:
-    - type: Transform
-      pos: 84.5,41.5
       parent: 2
     - type: Fixtures
       fixtures: {}
@@ -212575,6 +212545,13 @@ entities:
       parent: 2
     - type: Fixtures
       fixtures: {}
+  - uid: 27747
+    components:
+    - type: Transform
+      pos: -7.5,172.5
+      parent: 2
+    - type: Fixtures
+      fixtures: {}
   - uid: 28604
     components:
     - type: Transform
@@ -212583,16 +212560,15 @@ entities:
       parent: 2
     - type: Fixtures
       fixtures: {}
-  - uid: 28605
+- proto: IntercomScience
+  entities:
+  - uid: 21574
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -10.5,172.5
+      pos: -69.5,166.5
       parent: 2
     - type: Fixtures
       fixtures: {}
-- proto: IntercomScience
-  entities:
   - uid: 31599
     components:
     - type: Transform
@@ -212602,6 +212578,13 @@ entities:
       fixtures: {}
 - proto: IntercomSecurity
   entities:
+  - uid: 16730
+    components:
+    - type: Transform
+      pos: 70.5,42.5
+      parent: 2
+    - type: Fixtures
+      fixtures: {}
   - uid: 23553
     components:
     - type: Transform
@@ -257108,6 +257091,12 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -17.5,167.5
       parent: 2
+  - uid: 26528
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -93.5,39.5
+      parent: 2
   - uid: 26622
     components:
     - type: Transform
@@ -257139,12 +257128,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -82.5,41.5
-      parent: 2
-  - uid: 27747
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -94.5,43.5
       parent: 2
   - uid: 28227
     components:
@@ -278526,7 +278509,7 @@ entities:
       parent: 2
     - type: Door
       canCrush: True
-      secondsUntilStateChange: -137596.98
+      secondsUntilStateChange: -141088.97
       clickOpen: False
       state: Opening
     - type: DoorSignalControl
@@ -278561,7 +278544,7 @@ entities:
       pos: -52.5,187.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -581345.6
+      secondsUntilStateChange: -584837.6
       state: Opening
   - uid: 23105
     components:
@@ -278643,7 +278626,7 @@ entities:
       parent: 2
     - type: Door
       canCrush: True
-      secondsUntilStateChange: -137566.12
+      secondsUntilStateChange: -141058.11
       clickOpen: False
       state: Opening
     - type: DoorSignalControl
@@ -278678,7 +278661,7 @@ entities:
       pos: -53.5,188.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -545628.2
+      secondsUntilStateChange: -549120.2
       state: Opening
   - uid: 38967
     components:
@@ -278793,11 +278776,6 @@ entities:
     - type: InsideEntityStorage
 - proto: SpaceHeater
   entities:
-  - uid: 12584
-    components:
-    - type: Transform
-      pos: -5.5,196.5
-      parent: 2
   - uid: 21027
     components:
     - type: Transform
@@ -278835,6 +278813,11 @@ entities:
       parent: 2
 - proto: SpaceHeaterAnchored
   entities:
+  - uid: 22001
+    components:
+    - type: Transform
+      pos: -5.5,196.5
+      parent: 2
   - uid: 45032
     components:
     - type: Transform
@@ -290813,10 +290796,10 @@ entities:
       parent: 2
 - proto: TrashCan
   entities:
-  - uid: 26528
+  - uid: 16726
     components:
     - type: Transform
-      pos: -14.4975815,2.440178
+      pos: -16.5,2.5
       parent: 2
   - uid: 26529
     components:
