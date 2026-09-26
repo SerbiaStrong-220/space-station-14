@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Created by DSC@300074782328750080 for Space Station 14, modaifed by Estkemran(crypt_silver, lawyer_label), NekoFM(crypt_pharm, interdyne_label) (Github) for SS220",
+  "copyright": "Created by DSC@300074782328750080 for Space Station 14, modaifed by Estkemran(crypt_silver, lawyer_label), NekoFM(crypt_pharm, interdyne_label) (Github) for SS220, ozzi.daydream(decrypt_arahnid, decrypt_cat, decrypt_diona, decrypt_dvorf, decrypt_human, decrypt_nian, decrypt_slime, decrypt_ipc, decrypt_vox, decrypt_unath, decrypt_centcom, decrypt_advanced) (Discord: ozzi.daydream, Github: ForOzzi) for SS220", 
   "size": {
     "x": 32,
     "y": 32
@@ -10,6 +10,18 @@
     {"name": "crypt_silver"},
     {"name": "lawyer_label"},
     {"name": "crypt_pharm"},
-    {"name": "interdyne_label"}
+    {"name": "interdyne_label"},
+    {"name": "decrypt_arahnid"},
+    {"name": "decrypt_cat"},
+    {"name": "decrypt_diona"},
+    {"name": "decrypt_dvorf"},
+    {"name": "decrypt_human"},
+    {"name": "decrypt_nian"},
+    {"name": "decrypt_slime"},
+    {"name": "decrypt_ipc"},
+    {"name": "decrypt_vox"},
+    {"name": "decrypt_unath"},
+    {"name": "decrypt_centcom"},
+    {"name": "decrypt_advanced"}
   ]
 }

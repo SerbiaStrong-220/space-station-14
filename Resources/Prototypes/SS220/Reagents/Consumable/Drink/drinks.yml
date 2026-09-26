@@ -122,8 +122,6 @@
       - !type:AdjustReagent
         reagent: Nutriment
         amount: 2.0
-    Bloodstream:
-      effects:
       - !type:HealthChange
         damage:
           types:
@@ -142,6 +140,39 @@
         visualType: MediumCaution
         type: Local
         messages: [ "capsaicin-effect-heavy-burn" ]
+        probability: 0.4
+
+#YotunBreath
+- type: reagent
+  id: YotunBreath
+  name: reagent-name-YotunBreath
+  parent: BaseDrink
+  desc: reagent-desc-YotunBreath
+  physicalDesc: reagent-physical-desc-frosty
+  flavor: cold
+  color: "#5ac6e7"
+  recognizable: true
+  metabolisms:
+    Digestion:
+      effects:
+      - !type:SatiateThirst
+        factor: 0.5
+      - !type:AdjustReagent
+        reagent: Nutriment
+        amount: 2.0
+      - !type:HealthChange
+        damage:
+          types:
+            Cold: -1
+      - !type:AdjustTemperature
+        conditions:
+        - !type:TemperatureCondition
+          min: 220.0
+        amount: -100000
+      - !type:PopupMessage
+        visualType: MediumCaution
+        type: Local
+        messages: [ "yotun-breath-effect-freeze" ]
         probability: 0.4
 
 #RrrantaFeature

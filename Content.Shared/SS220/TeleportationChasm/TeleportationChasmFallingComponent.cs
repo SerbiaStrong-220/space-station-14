@@ -13,25 +13,25 @@ namespace Content.Shared.SS220.TeleportationChasm;
 public sealed partial class TeleportationChasmFallingComponent : Component
 {
     /// <summary>
-    ///     Entity that send us falling and will teleport us.
+    ///     Teleporter that caused the target to start falling.
     /// </summary>
-    public EntityUid? ChasmEnt;
+    public EntityUid? SourceTeleporter;
 
     /// <summary>
     ///     Time it should take for the falling animation (scaling down) to complete.
     /// </summary>
     [DataField]
-    public TimeSpan AnimationTime = TimeSpan.FromSeconds(1.5f);
+    public TimeSpan FallAnimationDuration = TimeSpan.FromSeconds(1.5f);
 
     /// <summary>
-    ///     Time it should take in seconds for the entity to actually delete.
+    ///     Time between starting and completing the fall.
     /// </summary>
     [DataField]
-    public TimeSpan TeleportationTime = TimeSpan.FromSeconds(1.8f);
+    public TimeSpan FallDuration = TimeSpan.FromSeconds(1.8f);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     [AutoPausedField]
-    public TimeSpan NextTeleportationTime = TimeSpan.Zero;
+    public TimeSpan FallEndTime = TimeSpan.Zero;
 
     /// <summary>
     ///     Original scale of the object so it can be restored if the component is removed in the middle of the animation.
@@ -44,7 +44,7 @@ public sealed partial class TeleportationChasmFallingComponent : Component
     public Vector2 AnimationScale = new(0.01f, 0.01f);
 
     /// <summary>
-    ///     Deletes the entity instead of teleporting it.
+    ///     Whether to delete the entity instead of teleporting it.
     /// </summary>
-    public bool ShouldBeDeleted = false;
+    public bool DeleteInsteadOfTeleport;
 }

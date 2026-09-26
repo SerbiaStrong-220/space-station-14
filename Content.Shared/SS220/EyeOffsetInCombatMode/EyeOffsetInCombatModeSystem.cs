@@ -6,7 +6,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared.SS220.EyeOffsetInCombatMode;
 
-public sealed class EyeOffsetInCombatModeSystem : EntitySystem
+public sealed partial class EyeOffsetInCombatModeSystem : EntitySystem
 {
     public override void Initialize()
     {

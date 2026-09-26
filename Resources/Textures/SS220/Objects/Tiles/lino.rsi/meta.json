@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Sprited by Vojner (Discord) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "linogray"
+    },
+    {
+      "name": "linogray-icon"
+    },
+    {
+      "name": "linogray-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "linogray-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "linolightbrown"
+    },
+    {
+      "name": "linolightbrown-icon"
+    },
+    {
+      "name": "linolightbrown-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "linolightbrown-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "linoredbrown"
+    },
+    {
+      "name": "linoredbrown-icon"
+    },
+    {
+      "name": "linoredbrown-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "linoredbrown-inhand-right",
+      "directions": 4
+    }
+  ]
+}
+

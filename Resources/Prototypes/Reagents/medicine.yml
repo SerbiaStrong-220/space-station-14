@@ -111,7 +111,7 @@
       effects:
       - !type:ModifyStatusEffect
         effectProto: StatusEffectDrunk
-        time: 6.0
+        time: 18.0 #SS220 ethylredoxrazine buff
         type: Remove
       - !type:HealthChange
         damage:

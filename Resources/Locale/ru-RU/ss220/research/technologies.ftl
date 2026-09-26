@@ -1,5 +1,7 @@
 research-technology-renewable-power = Термоэлектрический генератор
 research-technology-advanced-thermal-sensors = Термальные сенсоры
+research-technology-security-night-vision = Тактическое ночное видение
+research-technology-medical-night-vision = Медицинское ночное видение
 research-technology-med-tech = Продвинутые медицинские технологии
 research-technology-portable-reloading-equipment = Портативное заряжающее оборудование
 research-technology-plasma-converter-acceleration = Ускорение преобразователя плазмы
@@ -11,3 +13,10 @@ research-technology-hollow-point-ammunition = Экспансивные боеп�
 research-technology-automated-defence-systems = Автоматические системы защиты
 research-technology-explosive-ammunition = Использование гексогена в боеприпасах
 research-technology-uranium-munitions = Использование урана в боеприпасах
+
+research-technology-cloning-technology = Технология клонирования
+research-technology-handheld-electrical-propulsion = Ручные электродвигатели
+research-technology-advanced-kitchen-machinery = Продвинутая кухонная техника
+
+research-decryption-keys = Ксенолингвистический адаптер
+research-decryption-key-advanced = Дешифровка жаргонов и диалектов

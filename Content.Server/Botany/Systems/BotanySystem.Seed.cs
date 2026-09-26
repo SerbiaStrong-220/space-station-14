@@ -158,6 +158,7 @@ public sealed partial class BotanySystem : EntitySystem
                 totalYield = proto.Yield * yieldMod;
 
             totalYield = Math.Max(1, totalYield);
+            totalYield = Math.Min(totalYield, proto.MaxYield); //SS220 MaxYield
         }
 
         var products = new List<EntityUid>();

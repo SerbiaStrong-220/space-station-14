@@ -40,6 +40,7 @@
     - id: RubberStampWarden
     - id: DoorRemoteArmory
     - id: HoloprojectorSecurity
+    - id: MastercardIPC #SS220-ipc-builtin-radio
     # - id: BookSpaceLaw # SS220-replace-space-law
     - id: BookSpaceLaws # SS220-space-law
     - id: ClothingBackpackElectropack
@@ -96,13 +97,13 @@
       prob: 0.1
     - id: HoloprojectorSecurity
       # prob: 0.6 #ss220-guarantee projector
-    - id: BookSpaceLaw
-      prob: 1.0 #SS220 space-law
+    - id: BookSpaceLaws #SS220 our laws forewer
+      #prob: 0.5 #SS220 space-law
     - id: PlushieLizardJobSecuritycadet
       prob: 0.02
     - id: PlushieLizardJobSecurityofficer
       prob: 0.02
-    - id: ClothingBeltCorporateJudo # SS220-CorporateJudo
+    - id: ClothingBeltCorporateJudoFilled # SS220-CorporateJudo
 
 - type: entity
   id: LockerBrigmedicFilled
@@ -157,6 +158,7 @@
         weight: 1.8
     - id: ClothingNeckCloakMoth #bzzz Moth-pocalypse
       prob: 0.15
+    - id: ClothingBackpackDuffelSurgeryFilled #SS220 add Surgery Duffel for brigmed
 
 - type: entity
   id: LockerDetectiveFilled
@@ -334,6 +336,10 @@
       amount: 2
     - id: BoxLethalshot
       amount: 4
+    # SS220 Sec fixes and little more BGN
+    - id: ClothingBeltBandolier
+      amount: 2
+    # SS220 Sec fixes and little more END
 
 - type: entity
   id: GunSafeSubMachineGunWt550

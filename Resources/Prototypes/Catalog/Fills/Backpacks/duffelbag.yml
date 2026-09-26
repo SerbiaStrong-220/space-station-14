@@ -17,6 +17,10 @@
         - id: Cautery
         - id: Retractor
         - id: Scalpel
+        #SS220 NitrousOxide in surgical duffel bag START
+        - id: NitrousOxideTankFilled
+        - id: ClothingMaskBreathMedical
+        #SS220 NitrousOxide in surgical duffel bag END
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateMedicalBundle

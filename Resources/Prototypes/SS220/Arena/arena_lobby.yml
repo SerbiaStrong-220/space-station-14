@@ -18,7 +18,7 @@
     description: Аплинк 40 ТК.
     maxPlayers: 4
     maps:
-    - path: /Maps/SS220/Arenas/uplink_arena_2v2.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/uplink_arena_2v2.yml
       loadout: ArenaLoadoutOperative
       countdownDuration: 60
 
@@ -31,7 +31,7 @@
     description: АК, Кобра, лесной бой.
     maxPlayers: 2
     maps:
-    - path: /Maps/SS220/Arenas/forest_arena.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/forest_arena.yml
       loadout: ArenaLoadoutMercenary
 
 - type: entity
@@ -43,7 +43,7 @@
     description: Револьвер и дух Дикого Запада.
     maxPlayers: 2
     maps:
-    - path: /Maps/SS220/Arenas/dust_arena.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/dust_arena.yml
       loadout: ArenaLoadoutDust
 
 - type: entity
@@ -55,7 +55,7 @@
     description: Клеймор и щит. Честная дуэль.
     maxPlayers: 2
     maps:
-    - path: /Maps/SS220/Arenas/knights_arena.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/knights_arena.yml
       loadout: ArenaLoadoutKnight
 
 - type: entity
@@ -67,7 +67,7 @@
     description: Рыцарь и два лучника.
     maxPlayers: 6
     maps:
-    - path: /Maps/SS220/Arenas/knights_arena_3v3.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/knights_arena_3v3.yml
       loadouts:
       - ArenaLoadoutKnight
       - ArenaLoadoutArcher
@@ -82,7 +82,7 @@
     description: Мушкетон и пиратская пушка.
     maxPlayers: 4
     maps:
-    - path: /Maps/SS220/Arenas/pirates_arena.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/pirates_arena.yml
       loadout: ArenaLoadoutPirate
 
 - type: entity
@@ -94,7 +94,7 @@
     description: Хардсьют и тяжёлый лазер.
     maxPlayers: 4
     maps:
-    - path: /Maps/SS220/Arenas/lava_arena_2v2.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/lava_arena_2v2.yml
       loadout: ArenaLoadoutLavaSec
 
 - type: entity
@@ -106,7 +106,7 @@
     description: Дуэль на 40 ТК.
     maxPlayers: 2
     maps:
-    - path: /Maps/SS220/Arenas/two_player_arena.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/two_player_arena.yml
       loadout: ArenaLoadoutOperative
       countdownDuration: 60
 
@@ -119,7 +119,7 @@
     description: Обрез и самопальный лазер.
     maxPlayers: 2
     maps:
-    - path: /Maps/SS220/Arenas/mine_arena.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/mine_arena.yml
       loadout: ArenaLoadoutSalvage
 
 - type: entity
@@ -131,7 +131,7 @@
     description: Лектер и холодный расчёт.
     maxPlayers: 2
     maps:
-    - path: /Maps/SS220/Arenas/frozen_arena.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/frozen_arena.yml
       loadout: ArenaLoadoutBlueShield
 
 - type: entity
@@ -143,7 +143,7 @@
     description: Лёд, скорость и кнокбэк.
     maxPlayers: 2
     maps:
-    - path: /Maps/SS220/Arenas/ice_arena.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/ice_arena.yml
       loadout: ArenaLoadoutWinter
 
 - type: entity
@@ -155,7 +155,7 @@
     description: Один выстрел - один труп.
     maxPlayers: 2
     maps:
-    - path: /Maps/SS220/Arenas/tunnel_arena.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/tunnel_arena.yml
       loadout: ArenaLoadoutLawyerSniper
 
 - type: entity
@@ -167,7 +167,7 @@
     description: Эсток и два магазина.
     maxPlayers: 2
     maps:
-    - path: /Maps/SS220/Arenas/byblik_arena.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/byblik_arena.yml
       loadout: ArenaLoadoutByblik
 
 - type: entity
@@ -179,7 +179,7 @@
     description: Голиаф и два магнума.
     maxPlayers: 2
     maps:
-    - path: /Maps/SS220/Arenas/lava_arena.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/lava_arena.yml
       loadout: ArenaLoadoutLava
 
 - type: entity
@@ -191,7 +191,7 @@
     description: Лазерная дуэль.
     maxPlayers: 2
     maps:
-    - path: /Maps/SS220/Arenas/laser_arena.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/laser_arena.yml
       loadout: ArenaLoadoutLaser
 
 - type: entity
@@ -203,7 +203,7 @@
     description: Христов и мачете в бездне.
     maxPlayers: 4
     maps:
-    - path: /Maps/SS220/Arenas/abyss_arena.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/abyss_arena.yml
       loadout: ArenaLoadoutAbyss
 
 - type: entity
@@ -217,5 +217,5 @@
     mode: Creative
     maxPlayers: 1
     maps:
-    - path: /Maps/SS220/Arenas/canvas_arena.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/canvas_arena.yml
       loadout: ArenaLoadoutCanvas

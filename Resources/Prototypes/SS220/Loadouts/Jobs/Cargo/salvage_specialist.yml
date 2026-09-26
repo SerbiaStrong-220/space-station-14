@@ -41,6 +41,20 @@
   - !type:GroupLoadoutEffect
     proto: AdministratorSponsorTier
 
+- type: loadoutEffectGroup
+  id: SalvageJR
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobSalvageSpecialist
+      time: 75h
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
 # Jumpsuit
 - type: loadout
   id: UniformJumpsuitSalvageSpecialist
@@ -71,6 +85,88 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitExpeditor
 
+- type: loadout
+  id: ClothingUniformJumpsuitJRSalvage
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SalvageJR
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitJRSalvage
+
+# OuterClothing
+- type: loadout
+  id: ClothingOuterCoatJRSalvageTrench
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SalvageJR
+  equipment:
+    outerClothing: ClothingOuterCoatJRSalvageTrench
+
+- type: loadout
+  id: ClothingOuterWinterJRSalvage
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SalvageJR
+  equipment:
+    outerClothing: ClothingOuterWinterJanitorJR
+
+# Belt
+- type: loadout
+  id: OreBagJRSalvage
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SalvageJR
+  equipment:
+    belt: OreBagJRSalvage
+
+# Back
+- type: loadout
+  id: ClothingBackpackJRSalvage
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SalvageJR
+  equipment:
+    back: ClothingBackpackJanitorJR
+
+- type: loadout
+  id: ClothingBackpackJRSalvageSatchel
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SalvageJR
+  equipment:
+    back: ClothingBackpackJanitorJRSatchel
+
+- type: loadout
+  id: ClothingBackpackJRSalvageDuffel
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SalvageJR
+  equipment:
+    back: ClothingBackpackJanitorJRDuffel
+
+# ID
+- type: loadout
+  id: SalvageSpecialistPDA
+  equipment:
+    id: SalvagePDA
+
+- type: loadout
+  id: SalvageSpecialistPDAJR
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SalvageJR
+  equipment:
+    id: SalvagePDAJR
+
+# Shoes
+- type: loadout
+  id: ClothingShoesBootsJRSalvage
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SalvageJR
+  equipment:
+    shoes: ClothingShoesBootsJRSalvage
+
 # Head
 - type: loadout
   id: ClothingHeadHatSalvage
@@ -88,9 +184,26 @@
     head: ClothingHeadHatHardhatViolet
 
 - type: loadout
+  id: ClothingHeadHatHardhatJRSalvage
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SalvageJR
+  equipment:
+    head: ClothingHeadHatHardhatJanitorJR
+
+- type: loadout
   id: ClothingHeadBeretSalvageSpecialist
   effects:
   - !type:GroupLoadoutEffect
     proto: UniformExpeditor
   equipment:
     head: ClothingHeadBeretSalvageSpecialist
+
+- type: loadout
+  id: ClothingHeadBeretJRSalvage
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SalvageJR
+  equipment:
+    head: ClothingHeadBeretJRSalvage
+

@@ -65,6 +65,18 @@
   - WeaponEnergyTurretSecurityMachineCircuitboard
 
 - type: technology
+  id: SecurityNightVision
+  name: research-technology-security-night-vision
+  icon:
+    sprite: SS220/Clothing/Eyes/Glasses/nightvision.rsi
+    state: securityhudnight
+  discipline: Arsenal
+  tier: 2
+  cost: 5000
+  recipeUnlocks:
+  - ClothingEyesNightVisionSecurity
+
+- type: technology
   id: PlasmaConverterAcceleration
   name: research-technology-plasma-converter-acceleration
   icon:

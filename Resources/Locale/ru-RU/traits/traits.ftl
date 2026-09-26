@@ -23,10 +23,6 @@ trait-accentless-name = Отсутствие акцента
 trait-accentless-desc = У вас нет того акцента, который характерен для представителей вашего вида.
 trait-frontal-lisp-name = Сигматизм
 trait-frontal-lisp-desc = У ваф имеютшя проблемы ш произношением.
-# SS220-slavic-accent-start
-trait-slavic-accent-name = Старославянский акцент
-trait-slavic-accent-desc = Доколе можно новые словечки выдумывать?
-# SS220-slavic-accent-end
 trait-socialanxiety-name = Заикание
 trait-socialanxiety-desc = Вы заикаетесь.
 trait-southern-name = Диалект юга США
