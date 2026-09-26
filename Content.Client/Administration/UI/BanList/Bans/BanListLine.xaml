@@ -15,11 +15,13 @@
                 MouseFilter="Pass"/>
     </BoxContainer>
     <cc:VSeparator/>
-    <Label Name="Reason"
-           Access="Public"
-           SizeFlagsStretchRatio="6"
-           HorizontalExpand="True"
-           VerticalExpand="True"/>
+    <!-- SS220-BanListChange begin -->
+    <RichTextLabel Name="Reason"
+                   Access="Public"
+                   SizeFlagsStretchRatio="6"
+                   HorizontalExpand="True"
+                   MaxWidth="540"/>
+    <!-- SS220-BanListChange end -->
     <cc:VSeparator/>
     <Label Name="BanTime"
            Access="Public"
