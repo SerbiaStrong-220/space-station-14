@@ -58,8 +58,7 @@
   - type: Sprite
     noRot: false
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    layers:
-    - state: buckshot #SS220 weapon overhaul
+    state: buckshot #SS220 weapon overhaul
   - type: Physics
     bodyType: Dynamic
   - type: TileFrictionModifier
