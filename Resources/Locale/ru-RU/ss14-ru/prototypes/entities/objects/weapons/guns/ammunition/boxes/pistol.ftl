@@ -1,10 +1,14 @@
-ent-BaseMagazineBoxPistol = коробка патронов (.35 авто)
+#SS220-weapon-overhaul-begin
+ent-BaseMagazineBoxPistol = коробка патронов (9x20 авто)
     .desc = { ent-BaseItem.desc }
-ent-MagazineBoxPistol = коробка патронов (.35 авто)
-    .desc = Картонная коробка с патронами 35-го калибра. Предназначена для хранения кинетических боеприпасов общего назначения.
-ent-MagazineBoxPistolPractice = коробка патронов (.35 авто учебные)
-    .desc = Картонная коробка с патронами калибра .35. Предназначена для хранения безопасных учебных боеприпасов.
-ent-MagazineBoxPistolIncendiary = коробка патронов (.35 авто зажигательные)
-    .desc = Картонная коробка с патронами 35-го калибра. Предназначена для самовоспламеняющихся зажигательных боеприпасов.
-ent-MagazineBoxPistolUranium = коробка патронов (.35 авто урановые)
-    .desc = Картонная коробка с патронами калибра .35. Предназначена для экзотических боеприпасов с урановым сердечником.
+ent-MagazineBoxPistol = коробка патронов (9x20 авто)
+    .desc = { ent-BaseMagazineBoxPistol.desc }
+ent-MagazineBoxPistolHighVelocity = коробка патронов (9x20 авто высокоскоростные)
+    .desc = { ent-BaseMagazineBoxPistol.desc }
+ent-MagazineBoxPistolPractice = коробка патронов (9x20 авто учебные)
+    .desc = { ent-BaseMagazineBoxPistol.desc }
+ent-MagazineBoxPistolIncendiary = коробка патронов (9x20 авто трассирующие)
+    .desc = { ent-BaseMagazineBoxPistol.desc }
+ent-MagazineBoxPistolUranium = коробка патронов (9x20 авто урановые)
+    .desc = { ent-BaseMagazineBoxPistol.desc }
+#SS220-weapon-overhaul-end

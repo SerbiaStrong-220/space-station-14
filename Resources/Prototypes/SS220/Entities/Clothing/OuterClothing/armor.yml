@@ -120,15 +120,14 @@
         Heat: 0.7
         Caustic: 0.5
         Radiation: 0.85
-  - type: StaminaResistance
-    damageCoefficient: 0.45
+        Shock: 0.7
   - type: StaticPrice
     price: 1500
   - type: IntegratedClothing
     clothingPrototype: ClothingHeadHelmetAssault
   - type: ClothingSpeedModifier
     walkModifier: 1
-    sprintModifier: 0.75
+    sprintModifier: 0.9
   - type: NeedleProtection
   - type: ContainerContainer
     containers:

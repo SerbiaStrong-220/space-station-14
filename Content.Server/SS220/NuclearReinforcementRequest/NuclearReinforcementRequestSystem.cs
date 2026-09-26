@@ -19,7 +19,6 @@ public sealed partial class NuclearReinforcementRequestSystem : EntitySystem
     [Dependency] private TargetSystem _target = default!;
     [Dependency] private SharedPopupSystem _popupSystem = default!;
     [Dependency] private StoreSystem _store = default!;
-    [Dependency] private AntagSelectionSystem _antag = default!;
 
     private static readonly ProtoId<CurrencyPrototype> TelecrystalCurrencyPrototype = "Telecrystal";
 

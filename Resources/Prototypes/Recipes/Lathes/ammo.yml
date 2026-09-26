@@ -57,7 +57,7 @@
 - type: latheRecipe
   parent: BaseAmmoRecipe
   id: MagazineRifleUranium
-  result: MagazineRifleUranium
+  result: MagazineRifleAP #SS220 weapon overhaul
   materials:
     Steel: 25
     Plastic: 300
@@ -87,7 +87,7 @@
 - type: latheRecipe
   parent: BaseAmmoBoxRecipe
   id: MagazineBoxRifleUranium
-  result: MagazineBoxRifleUranium
+  result: MagazineBoxRifleAP #SS220 weapon overhaul
   materials:
     Plastic: 500
     Uranium: 500
@@ -133,7 +133,7 @@
 - type: latheRecipe
   parent: BaseAmmoRecipe
   id: MagazineLightRifleUranium
-  result: MagazineLightRifleUranium
+  result: MagazineLightRifleAP #SS220 weapon overhaul
   materials:
     Steel: 25
     Plastic: 360
@@ -163,7 +163,7 @@
 - type: latheRecipe
   parent: BaseAmmoBoxRecipe
   id: MagazineBoxLightRifleUranium
-  result: MagazineBoxLightRifleUranium
+  result: MagazineBoxLightRifleAP #SS220 weapon overhaul
   materials:
     Plastic: 600
     Uranium: 600
@@ -201,7 +201,7 @@
 - type: latheRecipe
   parent: BaseAmmoRecipe
   id: MagazinePistolUranium
-  result: MagazinePistolUranium
+  result: MagazinePistolAP #SS220 weapon overhaul
   materials:
     Steel: 25
     Plastic: 65
@@ -239,7 +239,7 @@
 - type: latheRecipe
   parent: BaseAmmoRecipe
   id: MagazinePistolSubMachineGunUranium
-  result: MagazinePistolSubMachineGunUranium
+  result: MagazinePistolSubMachineGunAP #SS220 weapon overhaul
   materials:
     Steel: 25
     Plastic: 250
@@ -283,7 +283,7 @@
 - type: latheRecipe
   parent: BaseAmmoBoxRecipe
   id: MagazineBoxPistolUranium
-  result: MagazineBoxPistolUranium
+  result: MagazineBoxPistolAP #SS220 weapon overhaul
   materials:
     Plastic: 300
     Uranium: 600
@@ -321,7 +321,7 @@
 - type: latheRecipe
   parent: BaseAmmoRecipe
   id: SpeedLoaderMagnumUranium
-  result: SpeedLoaderMagnumUranium
+  result: SpeedLoaderMagnumAP #SS220 weapon overhaul
   materials:
     Steel: 50
     Plastic: 150
@@ -351,7 +351,7 @@
 - type: latheRecipe
   parent: BaseAmmoBoxRecipe
   id: MagazineBoxMagnumUranium
-  result: MagazineBoxMagnumUranium
+  result: MagazineBoxMagnumAP #SS220 weapon overhaul
   materials:
     Plastic: 240
     Uranium: 180
@@ -416,14 +416,6 @@
   result: BoxShotgunPractice
   materials:
     Steel: 80
-
-- type: latheRecipe
-  parent: BaseAmmoBoxRecipe
-  id: BoxShotgunUranium
-  result: BoxShotgunUranium
-  materials:
-    Plastic: 320
-    Uranium: 240
 
 - type: latheRecipe
   parent: BaseAmmoBoxRecipe

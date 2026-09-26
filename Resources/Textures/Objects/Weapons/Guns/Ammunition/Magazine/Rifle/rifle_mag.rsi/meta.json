@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "All sprites by https://github.com/august-sun, inhands by TiniestShark (GitHub), stripes by SeamLesss (GitHub)",
+    "copyright": "All sprites by https://github.com/august-sun, inhands by TiniestShark (GitHub), stripes by SeamLesss (GitHub), modified by JustSmartgun for SS220",
     "size": {
         "x": 32,
         "y": 32
@@ -15,6 +15,15 @@
         },
         {
             "name": "mag-1"
+        },
+        {
+            "name": "red-icon"
+        },
+        {
+            "name": "green-icon"
+        },
+        {
+            "name": "icon"
         },
         {
             "name": "inhand-left-mag",

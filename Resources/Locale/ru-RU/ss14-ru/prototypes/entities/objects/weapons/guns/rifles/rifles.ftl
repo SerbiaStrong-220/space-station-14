@@ -1,11 +1,10 @@
 ent-BaseWeaponRifle = BaseWeaponRifle
     .desc = Дерзай — налетай, целься и стреляй.
-ent-WeaponRifleAk = АКМС
-    .desc = Культовое оружие всех войн. Использует патроны калибра .30 винтовочный.
-    .suffix = Автомат
+#SS220-weapon-overhaul-begin
 ent-WeaponRifleM90GrenadeLauncher = М-90gl
-    .desc = Карабин старой модели, выполненный по схеме булл-пап, с подствольным гранатомётом. Использует патроны калибра .20 винтовочный.
+    .desc = Карабин старой модели, выполненный по схеме булл-пап, с подствольным гранатомётом. Использует патроны калибра 6,3x47.
     .suffix = Автомат
-ent-WeaponRifleLecter = Лектер
-    .desc = Первоклассная армейская штурмовая винтовка. Использует патроны калибра .20 винтовочный.
-    .suffix = Автомат
+#SS220-weapon-overhaul-end
+ent-WeaponRifleLecterRubber = { ent-WeaponRifleLecter }
+    .suffix = Травматический
+    .desc = { ent-WeaponRifleLecter.desc }

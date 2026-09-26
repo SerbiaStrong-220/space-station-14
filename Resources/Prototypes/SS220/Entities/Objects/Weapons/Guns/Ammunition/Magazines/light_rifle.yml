@@ -1,0 +1,53 @@
+- type: entity
+  parent: BaseMagazineLightRifle
+  id: MagazineLightRifleHP
+  name: "magazine (7,62x41 intermediate HPIB)"
+  description: Curved 30-round double stack magazine for combat rifles. Intended to hold harmless practice ammunition.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeLightRifleHP
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#cf0404"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#cf0404"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#cf0404"
+
+- type: entity
+  parent: BaseMagazineLightRifle
+  id: MagazineLightRifleAP
+  name: "magazine (7,62x41 intermediate AP)"
+  description: Curved 30-round double stack magazine for combat rifles. Intended to hold exotic uranium-core ammunition.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeLightRifleAP
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#00cd42"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#00cd42"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#00cd42"

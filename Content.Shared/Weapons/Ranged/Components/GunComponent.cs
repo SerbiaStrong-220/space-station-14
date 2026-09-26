@@ -269,6 +269,11 @@ public sealed partial class GunComponent : Component
     public bool CanSuicide = false;
     ///SS220-new-feature kus end
 
+    //SS220 weapon overhaul begin
+    [DataField, AutoNetworkedField]
+    public bool MuzzleFlashSupressed = false;
+    //SS220 weapon overhaul end
+
 
 }
 

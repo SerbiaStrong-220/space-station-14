@@ -1,0 +1,17 @@
+- type: entity
+  parent: BaseItem
+  id: CommandoModkit
+  name: M-53E3ST modification kit
+  description: A belt with replacement parts compatible with "Lecter"
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Modkits/commando.rsi
+    layers:
+    - state: icon
+  - type: Tag
+    tags:
+    - CommandoModkit
+  - type: Item
+    size: Normal
+  - type: StaticPrice
+    price: 5000

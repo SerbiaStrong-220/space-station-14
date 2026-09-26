@@ -157,3 +157,6 @@ names-death-commando-dataset-155 = Арбузер
 names-death-commando-dataset-156 = Спанч Поп
 names-death-commando-dataset-157 = Уолтер Белый
 names-death-commando-dataset-158 = Джесси Розовый
+#SS220-weapon-overhaul-begin
+names-death-commando-dataset-159 = Сука Вноеж
+#SS220-weapon-overhaul-end

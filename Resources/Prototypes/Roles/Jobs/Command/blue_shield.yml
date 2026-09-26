@@ -56,6 +56,16 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
+  #SS220 weapon overhaul begin
+  - !type:AddMartialArtSpecial
+    martialArt: CloseQuartersCombat
+  - !type:AddComponentSpecial
+    components:
+    - type: ScotopicVision
+      radius: 12
+      energy: 0.17
+      softness: 1
+  #SS220 weapon overhaul end
 
 - type: startingGear
   id: BlueShieldGear

@@ -26,7 +26,7 @@
       types:
         # axes are kinda like sharp hammers, you know?
         Blunt: 5
-        Slash: 10
+        Slash: 15 #SS220 weapon overhaul
         Structural: 35 #ss220
     soundHit:
       collection: MetalThud

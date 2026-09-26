@@ -93,6 +93,14 @@ public sealed partial class DamageableComponent : Component
 
     [DataField]
     public FixedPoint2? HealthBarThreshold;
+
+    //SS220 weapon overhaul begin
+    /// <summary>
+    ///    If a projectile or a hitscan has more damage of a single type than sum of this and corresponding user threshold of ArmourBlock(if present) it will pierce through
+    /// </summary>
+    [DataField]
+    public FixedPoint2 PiercingThreshold = 0;
+    //SS220 weapon overhaul end
 }
 
 [Serializable, NetSerializable]

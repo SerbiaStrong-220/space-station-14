@@ -1,6 +1,10 @@
-ent-BaseCartridgeCaselessRifle = патрон (.25 винтовочный)
+#SS220-weapon-overhaul-begin
+ent-BaseCartridgeCaselessRifle = патрон (8x18 безгильзовый)
     .desc = { ent-BaseCartridge.desc }
-ent-CartridgeCaselessRifle = патрон (.25 безгильзовый)
-    .desc = Патрон малого калибра, в котором используется безгильзовая технология: вместо обычной латунной гильзы используется пропеллент. Стандартные кинетические боеприпасы широко распространены и полезны в большинстве ситуаций.
-ent-CartridgeCaselessRiflePractice = патрон (.25 безгильзовый учебный)
-    .desc = Патрон малого калибра, в котором используется безгильзовая технология: вместо обычной латунной гильзы используется пропеллент. Учебные боеприпасы стреляют меловыми снарядами, которые слегка жалят, но не наносят серьезных повреждений.
+ent-CartridgeCaselessRifle = патрон (8x18 безгильзовый)
+    .desc = { ent-BaseCartridgeCaselessRifle.desc }
+ent-CartridgeCaselessRifleHighVelocity = патрон (8x18 безгильзовый высокоскоростной)
+    .desc = { ent-BaseCartridgeCaselessRifle.desc }
+ent-CartridgeCaselessRiflePractice = патрон (8x18 безгильзовый учебный)
+    .desc = { ent-BaseCartridgeCaselessRifle.desc }
+#SS220-weapon-overhaul-end

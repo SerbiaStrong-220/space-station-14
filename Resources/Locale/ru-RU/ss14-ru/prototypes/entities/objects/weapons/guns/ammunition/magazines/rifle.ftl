@@ -1,13 +1,15 @@
-ent-BaseMagazineRifle = магазин (.20 винтовочные)
+#SS220-weapon-overhaul-begin
+ent-BaseMagazineRifle = магазин (6,3х47 промежуточные)
     .desc = { ent-BaseItem.desc }
-ent-MagazineRifle = магазин (.20 винтовочные)
-    .desc = 25-зарядный двухрядный магазин для боевых винтовок. Предназначен для хранения кинетических боеприпасов общего назначения.
-ent-MagazineRifleEmpty = магазин (.20 винтовочные любые)
-    .desc = 25-зарядный двухрядный магазин для боевых винтовок.
+ent-MagazineRifle = магазин (6,3х47 промежуточные)
+    .desc = { ent-BaseMagazineRifle.desc }
+ent-MagazineRifleEmpty = магазин (6,3х47 промежуточные любые)
     .suffix = Пустой
-ent-MagazineRifleIncendiary = магазин (.20 винтовочные зажигательные)
-    .desc = 25-зарядный двухрядный магазин для боевых винтовок. Предназначен для хранения самовоспламеняющихся зажигательных боеприпасов.
-ent-MagazineRiflePractice = магазин (.20 винтовочные учебные)
-    .desc = 25-зарядный двухрядный магазин для боевых винтовок. Предназначен для хранения безопасных учебных боеприпасов.
-ent-MagazineRifleUranium = магазин (.20 винтовочные урановые)
-    .desc = 25-зарядный двухрядный магазин для боевых винтовок. Предназначен для хранения боеприпасов с экзотическим урановым сердечником.
+    .desc = { ent-MagazineRifle.desc }
+ent-MagazineRifleIncendiary = магазин (6,3х47 промежуточные трассирующие)
+    .desc = { ent-MagazineRifle.desc }
+ent-MagazineRiflePractice = магазин (6,3х47 промежуточные учебные)
+    .desc = { ent-BaseMagazineRifle.desc }
+ent-MagazineRifleUranium = магазин (6,3х47 промежуточные урановые)
+    .desc = { ent-BaseMagazineRifle.desc }
+#SS220-weapon-overhaul-end

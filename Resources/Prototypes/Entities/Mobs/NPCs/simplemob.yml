@@ -16,6 +16,7 @@
   - type: MovementSpeedModifier
     baseWalkSpeed : 2 #ss220 walk slower than sprint (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1812)
     baseSprintSpeed : 4
+  - type: StaminaDamageConversion #SS220 stun rework
   - type: StatusEffects
     allowed:
     - Electrocution

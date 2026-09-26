@@ -11,7 +11,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 24 #ss220lowTTKUpdate
+        Piercing: 18 #SS220 weapon overhaul
 
 - type: entity
   parent: BaseBulletPractice

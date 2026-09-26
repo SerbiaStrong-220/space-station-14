@@ -1,0 +1,1 @@
+ui-options-function-activate-gun-in-hand = Взаимодействие с затвором оружия

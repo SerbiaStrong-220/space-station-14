@@ -16,7 +16,7 @@
     wideAnimationRotation: -135
     damage:
       types:
-        Blunt: 10
+        Blunt: 14 #SS220 weapon overhaul
         Structural: 5
     soundHit:
       collection: MetalThud

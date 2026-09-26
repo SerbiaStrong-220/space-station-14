@@ -1,0 +1,32 @@
+- type: entity
+  id: MagazineBoxRifleHP
+  parent: BaseMagazineBoxRifle
+  name: ammunition box (6,3x47 intermediate HPIB)
+  description: A cardboard box of 6,3x47 intermediate rounds.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeRifleHP
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: incendiary
+
+- type: entity
+  id: MagazineBoxRifleAP
+  parent: BaseMagazineBoxRifle
+  name: ammunition box (6,3x47 intermediate AP)
+  description: A cardboard box of 6,3x47 intermediate rounds.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeRifleAP
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: uranium
+

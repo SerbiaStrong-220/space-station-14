@@ -1,0 +1,45 @@
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BulletAntiMateriel
+  id: BulletAntiMaterielAP
+  name: bullet (15,24x140 AP)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 55
+        Structural: 50
+      armourPiercing: 120
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BulletAntiMateriel
+  id: BulletAntiMaterielHP
+  name: bullet (15,24x140 AP)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 105
+        Structural: 20
+      armourPiercing: 10
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseBulletExplosive
+  id: BulletAntiMaterielExplosive
+  name: bullet (15,24x140 HE)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 50
+        Structural: 20
+      armourPiercing: 45
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 3
+    intensitySlope: 3
+    totalIntensity: 6
+    maxTileBreak: 0

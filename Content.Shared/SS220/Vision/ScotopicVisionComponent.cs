@@ -4,7 +4,7 @@ using Robust.Shared.GameStates;
 
 namespace Content.Shared.SS220.Vision;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true, fieldDeltas: true)]
 public sealed partial class ScotopicVisionComponent : Component
 {
     [DataField, AutoNetworkedField]

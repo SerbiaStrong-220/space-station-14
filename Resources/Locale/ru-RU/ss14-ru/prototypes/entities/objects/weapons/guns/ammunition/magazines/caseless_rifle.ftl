@@ -1,12 +1,31 @@
-ent-BaseMagazinePistolCaselessRifle = пистолетный магазин (.25 безгильзовые)
+
+#SS220-weapon-overhaul-begin
+ent-BaseMagazineCaselessRifle = магазин (8x18 безгильзовые)
     .desc = { ent-BaseItem.desc }
-ent-MagazinePistolCaselessRifle = пистолетный магазин (.25 безгильзовые)
-    .desc = Магазин на 10 патронов для пистолета Кобра. Предназначен для кинетических боеприпасов общего назначения.
-ent-MagazinePistolCaselessRiflePractice = пистолетный магазин (.25 безгильзовые учебные)
-    .desc = Магазин на 10 патронов для пистолета Кобра. Предназначен для безопасных учебных боеприпасов.
-ent-BaseMagazineCaselessRifle = магазин (.25 безгильзовые)
-    .desc = { ent-BaseItem.desc }
-ent-MagazineCaselessRifle = магазин (.25 безгильзовые)
+ent-BaseMagazineCaselessRifleShort = короткий магазин безгильзовой винтовки (8x18 безгильзовые)
     .desc = { ent-BaseMagazineCaselessRifle.desc }
-ent-MagazineCaselessRiflePractice = магазин (.25 безгильзовые учебные)
+ent-BaseMagazinePistolCaselessRifle = пистолетный магазин (8x18 безгильзовые)
     .desc = { ent-BaseMagazineCaselessRifle.desc }
+ent-MagazineCaselessRifle10x24 = коробчатый магазин (8x18 безгильзовые)
+    .desc = { ent-BaseMagazineCaselessRifle.desc }
+ent-MagazinePistolCaselessRifle = пистолетный магазин (8x18 безгильзовые)
+    .desc = { ent-BaseMagazinePistolCaselessRifle.desc }
+ent-MagazinePistolCaselessRifleHighVelocity = пистолетный магазин (8x18 безгильзовые высокоскоростные)
+    .desc = { ent-BaseMagazinePistolCaselessRifle.desc }
+ent-MagazinePistolCaselessRiflePractice = пистолетный магазин (8x18 безгильзовые учебные)
+    .desc = { ent-BaseMagazinePistolCaselessRifle.desc }
+ent-MagazineCaselessRifle = магазин (8x18 безгильзовые)
+    .desc = { ent-BaseMagazineCaselessRifle.desc }
+ent-MagazineCaselessRifleHighVelocity = магазин (8x18 безгильзовые высокоскоростные)
+    .desc = { ent-BaseMagazineCaselessRifle.desc }
+ent-MagazineCaselessRiflePractice = магазин (8x18 безгильзовые учебные)
+    .desc = { ent-BaseMagazineCaselessRifle.desc }
+ent-MagazineCaselessRifleRubber = магазин (8x18 безгильзовые резиновые)
+    .desc = { ent-BaseMagazineCaselessRifle.desc }
+ent-MagazineCaselessRifleShort = короткий магазин (8x18 безгильзовые)
+    .desc = { ent-BaseMagazineCaselessRifleShort.desc }
+ent-MagazineCaselessRifleShortHighVelocity = короткий магазин (8x18 безгильзовые высокоскоростные)
+    .desc = { ent-BaseMagazineCaselessRifleShort.desc }
+ent-MagazineCaselessRifleShortPractice = короткий магазин (8x18 безгильзовые учебные)
+    .desc = { ent-BaseMagazineCaselessRifleShort.desc }
+#SS220-weapon-overhaul-end

@@ -1,10 +1,14 @@
-ent-BaseCartridgeRifle = патрон (.20 винтовочный)
+#SS220-weapon-overhaul-begin
+ent-BaseCartridgeRifle = патрон (6,3х47 промежуточный)
     .desc = { ent-BaseCartridge.desc }
-ent-CartridgeRifle = патрон (.20 винтовочный)
-    .desc = Современный промежуточный патрон для боевых винтовок. Стандартные кинетические боеприпасы распространены и полезны в большинстве ситуаций.
-ent-CartridgeRiflePractice = патрон (.20 винтовочный учебный)
-    .desc = Современный промежуточный патрон для боевых винтовок. Практические боеприпасы стреляют меловым снарядом, который немного жалит, но в остальном не причиняет длительного ущерба.
-ent-CartridgeRifleIncendiary = патрон (.20 винтовочный зажигательный)
-    .desc = Современный промежуточный патрон для боевых винтовок. Зажигательные боеприпасы содержат самовоспламеняющееся соединение, которое поджигает цели.
-ent-CartridgeRifleUranium = патрон (.20 винтовочный урановый)
-    .desc = Современный промежуточный патрон для боевых винтовок. В урановых боеприпасах свинцовый сердечник пули заменен делящимся материалом, облучающим цель изнутри.
+ent-CartridgeRifle = патрон (6,3х47 промежуточный)
+    .desc = { ent-BaseCartridgeRifle.desc }
+ent-CartridgeRifleHighVelocity = патрон (6,3х47 промежуточный высокоскоростной)
+    .desc = { ent-BaseCartridgeRifle.desc }
+ent-CartridgeRiflePractice = патрон (6,3х47 промежуточный учебный)
+    .desc = { ent-BaseCartridgeRifle.desc }
+ent-CartridgeRifleIncendiary = патрон (6,3х47 промежуточный трассирующий)
+    .desc = { ent-BaseCartridgeRifle.desc }
+ent-CartridgeRifleUranium = патрон (6,3х47 промежуточный урановый)
+    .desc = { ent-BaseCartridgeRifle.desc }
+#SS220-weapon-overhaul-end

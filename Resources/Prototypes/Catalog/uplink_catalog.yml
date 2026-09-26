@@ -252,11 +252,11 @@
   #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 10
+      Telecrystal: 6
     MediumDynamic:
-      Telecrystal: 8
+      Telecrystal: 5
     HardDynamic:
-      Telecrystal: 7
+      Telecrystal: 4
   #ss220 dynamic-price end
 
 - type: listing
@@ -283,29 +283,6 @@
   #ss220 dynamic-price end
 
 - type: listing
-  id: UplinkSniperBundle
-  name: uplink-sniper-bundle-name
-  description: uplink-sniper-bundle-desc
-  icon: { sprite: /Textures/Objects/Weapons/Guns/Snipers/heavy_sniper.rsi, state: base }
-  productEntity: BriefcaseSyndieSniperBundleFilled
-  discountCategory: usualDiscounts
-  discountDownTo:
-    Telecrystal: 6
-  cost:
-    Telecrystal: 14 #ss220TTKUpdate
-  categories:
-  - UplinkWeaponry
-  #ss220 dynamic-price bgn
-  dynamicsPrices:
-    LightDynamic:
-      Telecrystal: 16
-    MediumDynamic:
-      Telecrystal: 12
-    HardDynamic:
-      Telecrystal: 8
-  #ss220 dynamic-price end
-
-- type: listing
   id: UplinkHushpup
   name: uplink-hushpup-name
   description: uplink-hushpup-desc
@@ -313,19 +290,19 @@
   productEntity: BriefcaseWeaponHushpupFilled
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 10
+    Telecrystal: 5 #SS220 weapon overhaul
   cost:
-    Telecrystal: 15
+    Telecrystal: 5 #SS220 weapon overhaul
   categories:
   - UplinkWeaponry
   # ss220 - post upstream - uplink tweaks - bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 17
+      Telecrystal: 5 #SS220 weapon overhaul #This weapon is COMICALLY useless, especially if we remember that c-20r has similar cost
     MediumDynamic:
-      Telecrystal: 13
+      Telecrystal: 7 #SS220 weapon overhaul
     HardDynamic:
-      Telecrystal: 13
+      Telecrystal: 9 #SS220 weapon overhaul
   # ss220 - post upstream - uplink tweaks - end
 
 - type: listing
@@ -349,11 +326,11 @@
   #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 19
+      Telecrystal: 15 #SS220 weapon overhaul
     MediumDynamic:
-      Telecrystal: 15
+      Telecrystal: 13 #SS220 weapon overhaul
     HardDynamic:
-      Telecrystal: 8
+      Telecrystal: 7 #SS220 weapon overhaul
   #ss220 dynamic-price end
 
 - type: listing
@@ -396,11 +373,11 @@
   #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 22
+      Telecrystal: 18 #SS220 weapon overhaul
     MediumDynamic:
-      Telecrystal: 16
+      Telecrystal: 12 #SS220 weapon overhaul
     HardDynamic:
-      Telecrystal: 10
+      Telecrystal: 8 #SS220 weapon overhaul
   #ss220 dynamic-price end
 
 - type: listing
@@ -414,25 +391,6 @@
     Telecrystal: 10 # ss220 - post upstream - uplink tweaks
   cost:
     Telecrystal: 14 # ss220 - post upstream - uplink tweaks
-  categories:
-  - UplinkWeaponry
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-
-- type: listing
-  id: UplinkEstocBundle
-  name: uplink-estoc-bundle-name
-  description: uplink-estoc-bundle-desc
-  icon: { sprite: /Textures/Objects/Weapons/Guns/Rifles/estoc.rsi, state: icon }
-  productEntity: ClothingBackpackDuffelSyndicateFilledRifle
-  discountCategory: veryRareDiscounts
-  discountDownTo:
-    Telecrystal: 11
-  cost:
-    Telecrystal: 18
   categories:
   - UplinkWeaponry
   conditions:
@@ -486,9 +444,9 @@
   productEntity: ClothingBackpackDuffelSyndicateFilledLMG
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 30 #ss220TTKUpdate
+    Telecrystal: 25 #SS220 weapon overhaul
   cost:
-    Telecrystal: 40 #ss220TTKUpdate
+    Telecrystal: 35 #SS220 weapon overhaul
   categories:
   - UplinkWeaponry
   conditions:
@@ -813,15 +771,15 @@
   categories:
   - UplinkAmmo
 
-# For the C20R
+# For anything a nukie can loot
 - type: listing
   id: UplinkMagazinePistolSubMachineGun
   name: uplink-pistol-magazine-c20r-name
   description: uplink-pistol-magazine-c20r-desc
-  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: red-icon }
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: icon } #SS220 weapon overhaul
   productEntity: MagazinePistolSubMachineGun
   cost:
-    Telecrystal: 2
+    Telecrystal: 1 #SS220 weapon overhaul
   categories:
   - UplinkAmmo
 
@@ -833,7 +791,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/m12.rsi, state: pellets }
   productEntity: MagazineShotgun
   cost:
-    Telecrystal: 2
+    Telecrystal: 1 #SS220 weapon overhaul
   categories:
   - UplinkAmmo
 
@@ -844,7 +802,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/m12.rsi, state: slug }
   productEntity: MagazineShotgunSlug
   cost:
-    Telecrystal: 2
+    Telecrystal: 1 #SS220 weapon overhaul
   categories:
   - UplinkAmmo
 
@@ -865,7 +823,7 @@
   id: UplinkMosinAmmo
   name: uplink-mosin-ammo-name
   description: uplink-mosin-ammo-desc
-  productEntity: MagazineBoxLightRifle
+  productEntity: MagazineBoxFullRifleFMJ #SS220 weapon overhaul
   cost:
     Telecrystal: 1
   categories:
@@ -874,11 +832,14 @@
 # For the Estoc
 - type: listing
   id: UplinkEstocAmmo
+  #SS220 weapon overhaul begin
   name: uplink-estoc-ammo-name
-  description: uplink-estoc-ammo-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Rifle/rifle_mag.rsi, state: icon }
+  description: uplink-full-metal-jacket-ammo-desc
+  #SS220 weapon overhaul end
   productEntity: MagazineRifle
   cost:
-    Telecrystal: 2
+    Telecrystal: 1 #SS220 weapon overhaul
   categories:
   - UplinkAmmo
 
@@ -889,7 +850,7 @@
   description: uplink-sniper-ammo-desc
   productEntity: MagazineBoxAntiMateriel
   cost:
-    Telecrystal: 4 #ss220TTKUpdate
+    Telecrystal: 1 #SS220 weapon overhaul
   categories:
   - UplinkAmmo
 

@@ -10,6 +10,7 @@ using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.SS220.AltArmor.Components;
 using Content.Shared.SS220.Projectiles.Components;
 using Content.Shared.SS220.Weapons.Ranged.Events;
 using Robust.Shared.Physics.Events;
@@ -85,6 +86,11 @@ public sealed class ProjectileSystem : SharedProjectileSystem
 
         if (_damageableSystem.TryChangeDamage((target, damageableComponent), ev.Damage, out var damage, component.IgnoreResistances, origin: component.Shooter) && Exists(component.Shooter))
         {
+            //SS220 weapon overhaul begin
+            if (damage != null)
+                component.Damage = damage;
+            //SS220 weapon overhaul end
+
             if (!deleted)
             {
                 _color.RaiseEffect(Color.Red, new List<EntityUid> { target }, Filter.Pvs(target, entityManager: EntityManager));
@@ -94,7 +100,7 @@ public sealed class ProjectileSystem : SharedProjectileSystem
                 LogImpact.Medium,
                 $"Projectile {ToPrettyString(uid):projectile} shot by {ToPrettyString(component.Shooter!.Value):user} hit {otherName:target} and dealt {damage:damage} damage");
 
-            component.ProjectileSpent = !TryPenetrate((uid, component), damage, damageRequired);
+            component.ProjectileSpent = !TryPenetrate((uid, component), damage, (target, damageableComponent)); //SS220 structure penetration overhaul
         }
         else
         {
@@ -118,40 +124,48 @@ public sealed class ProjectileSystem : SharedProjectileSystem
         }
     }
 
-    private bool TryPenetrate(Entity<ProjectileComponent> projectile, DamageSpecifier damage, FixedPoint2 damageRequired)
+    //SS220 structure penetration overhaul begin
+    private bool TryPenetrate(Entity<ProjectileComponent> projectile, DamageSpecifier? damage, Entity<DamageableComponent?> target)
     {
-        // If penetration is to be considered, we need to do some checks to see if the projectile should stop.
-        if (projectile.Comp.PenetrationThreshold == 0)
+        if (damage == null)
             return false;
 
-        // If a damage type is required, stop the bullet if the hit entity doesn't have that type.
-        if (projectile.Comp.PenetrationDamageTypeRequirement != null)
-        {
-            foreach (var requiredDamageType in projectile.Comp.PenetrationDamageTypeRequirement)
-            {
-                if (damage.DamageDict.Keys.Contains(requiredDamageType))
-                    continue;
-
-                return false;
-            }
-        }
-
-        // If the object won't be destroyed, it "tanks" the penetration hit.
-        if (damage.GetTotal() < damageRequired)
-        {
+        if (projectile.Comp.PenetrationDamageTypeRequirement == null || target.Comp == null)
             return false;
-        }
 
-        if (!projectile.Comp.ProjectileSpent)
+        var stopPenetration = false;
+        foreach (var requiredDamageType in projectile.Comp.PenetrationDamageTypeRequirement)
         {
-            projectile.Comp.PenetrationAmount += damageRequired;
-            // The projectile has dealt enough damage to be spent.
-            if (projectile.Comp.PenetrationAmount >= projectile.Comp.PenetrationThreshold)
+            if (!damage.DamageDict.Keys.Contains(requiredDamageType))
             {
+                stopPenetration = true;
+                break;
+            }
+            FixedPoint2 targetThreshold = 0f;
+
+            targetThreshold = target.Comp.PiercingThreshold.Float();
+
+            if (TryComp<AltArmorComponent>(target, out var armorComp) && armorComp.TresholdDict.TryGetValue(requiredDamageType, out var value))
+                targetThreshold += value;
+
+            if (projectile.Comp.Damage[requiredDamageType] + projectile.Comp.Damage.ArmourPiercing < targetThreshold)
+            {
+                stopPenetration = true;
                 return false;
             }
+
+            var resultThreshold = FixedPoint2.Clamp(targetThreshold - projectile.Comp.Damage.ArmourPiercing, FixedPoint2.Zero, FixedPoint2.Abs(targetThreshold + projectile.Comp.Damage.ArmourPiercing));
+
+            var leftToRemove = FixedPoint2.Max(FixedPoint2.Zero, targetThreshold - projectile.Comp.Damage.ArmourPiercing);
+
+            projectile.Comp.Damage.ArmourPiercing = FixedPoint2.Max(FixedPoint2.Zero, projectile.Comp.Damage.ArmourPiercing - targetThreshold);
+
+            projectile.Comp.Damage.DamageDict[requiredDamageType] = FixedPoint2.Max(projectile.Comp.Damage.DamageDict[requiredDamageType] - leftToRemove, FixedPoint2.Zero);
         }
+        if (stopPenetration)
+            return false;
 
         return true;
     }
+    //SS220 structure penetration overhaul end
 }

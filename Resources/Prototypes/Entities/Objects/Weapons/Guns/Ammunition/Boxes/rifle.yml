@@ -9,7 +9,7 @@
       tags:
         - CartridgeRifle
     proto: CartridgeRifle
-    capacity: 50
+    capacity: 60 #SS220 weapon overhaul
   - type: Item
     size: Small
   - type: ContainerContainer
