@@ -2,7 +2,7 @@
 
 - type: entity
   name: spitballer cult yogg
-  parent: [BaseItem, CultYoggRestrictedItem]
+  parent: [BaseItem, CultYoggRestrictedItem, BaseCultYoggCuttableEquipment]
   id: Spitballer
   suffix: CultYogg
   components:
@@ -44,6 +44,7 @@
       inHandItem: true
     - type: Tag
       tags:
+      - CultYoggEquipment
       - CultYoggStealthProvidable
 
 - type: entity

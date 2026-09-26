@@ -16,7 +16,6 @@ using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.EntityEffects.Events;
-using Content.Shared.SS220.StuckOnEquip;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -32,7 +31,7 @@ public sealed partial class CultYoggSystem : SharedCultYoggSystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private HungerSystem _hungerSystem = default!;
-    [Dependency] private SharedStuckOnEquipSystem _stuckOnEquip = default!;
+    [Dependency] private CultYoggEquipmentSystem _cultEquipment = default!;
     [Dependency] private ThirstSystem _thirstSystem = default!;
     [Dependency] private CultYoggRuleSystem _cultRuleSystem = default!;
     [Dependency] private IChatManager _chatManager = default!;
@@ -225,8 +224,8 @@ public sealed partial class CultYoggSystem : SharedCultYoggSystem
 
         ent.Comp.ConsumedAscensionReagent = 0;
 
-        if (_stuckOnEquip.TryRemoveStuckItems(ent))//Idk how to deal with popup spamming
-            _popup.PopupEntity(Loc.GetString("cult-yogg-dropped-items"), ent, ent);//and now i dont see any :(
+        if (_cultEquipment.DropCultEquipment(ent))
+            _popup.PopupEntity(Loc.GetString("cult-yogg-dropped-items"), ent, ent);
 
         Dirty(ent, ent.Comp);
     }

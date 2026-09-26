@@ -33,6 +33,7 @@
     state: handcuff
   - type: Tag
     tags:
+    - CultYoggEquipment
     - Handcuffs
     - CultYoggStealthProvidable
   - type: Appearance

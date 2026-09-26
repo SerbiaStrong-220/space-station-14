@@ -2,7 +2,7 @@
 
 - type: entity
   name: spikegun cult yogg
-  parent: [BaseItem, CultYoggRestrictedItem]
+  parent: [BaseItem, CultYoggRestrictedItem, BaseCultYoggCuttableEquipment]
   id: SpikegunCultYogg
   suffix: CultYogg
   components:
@@ -52,6 +52,7 @@
       inHandItem: true
     - type: Tag
       tags:
+      - CultYoggEquipment
       - CultYoggStealthProvidable
 
 

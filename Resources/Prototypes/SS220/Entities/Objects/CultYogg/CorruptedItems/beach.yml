@@ -2,7 +2,7 @@
 
 - type: entity
   name: beach
-  parent: [BaseItem, CultYoggRestrictedItem]
+  parent: [BaseItem, CultYoggRestrictedItem, BaseCultYoggCuttableEquipment]
   id: BeachCultYogg
   suffix: CultYogg
   description: description
@@ -40,5 +40,6 @@
     heavyAttackChance: 0.2
   - type: Tag
     tags:
+    - CultYoggEquipment
     - CultYoggStealthProvidable
     - CultYoggInnerHandToggleable

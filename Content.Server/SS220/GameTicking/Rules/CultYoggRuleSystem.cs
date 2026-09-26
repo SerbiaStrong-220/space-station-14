@@ -14,6 +14,7 @@ using Content.Server.Pinpointer;
 using Content.Server.Roles;
 using Content.Server.RoundEnd;
 using Content.Server.SS220.CultYogg.DeCultReminder;
+using Content.Server.SS220.CultYogg.Cultists;
 using Content.Server.SS220.CultYogg.Sacrificials;
 using Content.Server.SS220.GameTicking.Rules.Components;
 using Content.Server.Station.Systems;
@@ -36,9 +37,7 @@ using Content.Shared.SS220.CultYogg.MiGo;
 using Content.Shared.SS220.CultYogg.MiGoTeleport;
 using Content.Shared.SS220.CultYogg.Sacrificials;
 using Content.Shared.SS220.InnerHandToggleable;
-using Content.Shared.SS220.RestrictedItem;
 using Content.Shared.SS220.Roles;
-using Content.Shared.SS220.StuckOnEquip;
 using Content.Shared.SS220.Telepathy;
 using Content.Shared.Station.Components;
 using Content.Shared.Zombies;
@@ -75,8 +74,7 @@ public sealed partial class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComp
     [Dependency] private AlertLevelSystem _alertLevel = default!;
     [Dependency] private EuiManager _euiManager = default!;
     [Dependency] private IPlayerManager _playerManager = default!;
-    [Dependency] private SharedRestrictedItemSystem _sharedRestrictedItemSystem = default!;
-    [Dependency] private SharedStuckOnEquipSystem _stuckOnEquip = default!;
+    [Dependency] private CultYoggEquipmentSystem _cultEquipment = default!;
     [Dependency] private MiGoTeleportSystem _migoTeleport = default!;
     [Dependency] private Shared.StatusEffect.StatusEffectsSystem _statusEffectsOld = default!;
     [Dependency] private Shared.StatusEffectNew.StatusEffectsSystem _statusEffectsNew = default!;
@@ -390,10 +388,7 @@ public sealed partial class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComp
 
     public void DeMakeCultist(EntityUid uid, CultYoggRuleComponent component)
     {
-        //Remove all corrupted items
-        _stuckOnEquip.RemoveAllStuckItems(uid);
-
-        _sharedRestrictedItemSystem.DropAllRestrictedItems(uid);//ToDo_SS220 make it by component or tag
+        _cultEquipment.DropCultEquipment(uid);
 
         // Change the faction
         _npcFaction.RemoveFaction(uid, component.CultYoggFaction, false);

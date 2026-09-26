@@ -206,11 +206,21 @@ public sealed partial class SharedInnerHandToggleableSystem : EntitySystem
         if (innerToggle.InnerItemUid != null || activeHandHeldItem == null)
             return;
 
-        if (TryComp<StuckOnEquipComponent>(activeHandHeldItem, out var stuckOnEquip))
-            _stuckOnEquip.UnstuckItem((activeHandHeldItem.Value, stuckOnEquip));
-
+        // Unequip handlers need to know that the item is being stored, not lost.
         innerToggle.InnerItemUid = activeHandHeldItem;
-        _containerSystem.Insert((activeHandHeldItem.Value, null, null), innerToggle.Container);
+        var item = activeHandHeldItem.Value;
+        bool inserted;
+        if (TryComp<StuckOnEquipComponent>(item, out var stuckOnEquip))
+            inserted = _stuckOnEquip.TryInsertUnstuckItem((item, stuckOnEquip), innerToggle.Container);
+        else
+            inserted = _containerSystem.Insert((item, null, null), innerToggle.Container);
+
+        if (!inserted)
+        {
+            innerToggle.InnerItemUid = null;
+            return;
+        }
+
         _actionsSystem.SetToggled(ent.Comp.ActionEntity, true); // we don't update the whole action because the hand and the action do not change
         _metaData.SetEntityName(ent.Comp.ActionEntity.Value, Loc.GetString("action-inner-hand-toggle-name-out"));
     }

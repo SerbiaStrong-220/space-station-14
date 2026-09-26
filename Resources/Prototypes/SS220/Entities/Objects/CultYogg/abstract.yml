@@ -6,6 +6,9 @@
   suffix: CultYogg
   name: abstract cult restricted
   components:
+    - type: Tag
+      tags:
+      - CultYoggEquipment
     - type: RestrictedItem
       localizedPopup: "cult-yogg-role-item-popup"
       whitelist:
@@ -18,12 +21,25 @@
   suffix: CultYogg
   name: abstract cult restricted
   components:
+    - type: Tag
+      tags:
+      - CultYoggEquipment
     - type: RestrictedItem
       localizedPopup: "cult-yogg-role-item-popup"
       whitelist:
         components:
         - CultYogg
         - MiGo
+
+- type: entity
+  abstract: true
+  id: BaseCultYoggCuttableEquipment
+  components:
+  - type: CuttableStuck
+    damage:
+      types:
+        Slash: 25
+        Blunt: 10
 
 - type: entity
   id: BaseAutoLinkingPortalCult

@@ -2,7 +2,7 @@
 
 - type: entity
   name: Claw
-  parent: [BaseItem, CultYoggRestrictedItem]
+  parent: [BaseItem, CultYoggRestrictedItem, BaseCultYoggCuttableEquipment]
   id: ClawCultYogg
   suffix: CultYogg
   description: description
@@ -45,6 +45,7 @@
   - type: Insulated # заглушка на будущее, защищает только от перерезания решеток под напряжением
   - type: Tag
     tags:
+    - CultYoggEquipment
     - PlantSampleTaker
     - Wirecutter
     - CultYoggStealthProvidable

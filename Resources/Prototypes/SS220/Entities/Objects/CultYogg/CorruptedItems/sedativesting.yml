@@ -2,7 +2,7 @@
 
 - type: entity
   name: sedative sting
-  parent: [BaseItem, CultYoggRestrictedItem]
+  parent: [BaseItem, CultYoggRestrictedItem, BaseCultYoggCuttableEquipment]
   id: SedativeStingCultYogg
   suffix: CultYogg
   components:
@@ -21,9 +21,15 @@
     delay: 2
   - type: SedativeSting
     transferAmount: 10
+  - type: CuttableStuck
+    damage:
+      types:
+        Slash: 10
+        Blunt: 5
   - type: StuckOnEquip
     inHandItem: true
   - type: Tag
     tags:
+    - CultYoggEquipment
     - CultYoggStealthProvidable
     - CultYoggInnerHandToggleable

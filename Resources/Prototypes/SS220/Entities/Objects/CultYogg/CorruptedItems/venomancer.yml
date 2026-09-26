@@ -2,7 +2,7 @@
 
 - type: entity
   name: venomancer
-  parent: [BaseItem, CultYoggRestrictedItem]
+  parent: [BaseItem, CultYoggRestrictedItem, BaseCultYoggCuttableEquipment]
   suffix: CultYogg
   id: Venomancer
   components:
@@ -47,6 +47,7 @@
     inHandItem: true
   - type: Tag
     tags:
+    - CultYoggEquipment
     - CultYoggStealthProvidable
 
 
