@@ -6,7 +6,7 @@ namespace Content.Client.Administration.UI.BanList;
 public interface IBanListLine<T> where T : SharedBan
 {
     T Ban { get; }
-    Label Reason { get; }
+    RichTextLabel Reason { get; } //SS220-BanListChange
     Label BanTime { get; }
     Label Expires { get; }
     Label BanningAdmin { get; }
