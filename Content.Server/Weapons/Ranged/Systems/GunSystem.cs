@@ -1,24 +1,26 @@
-using System.Numerics;
 using Content.Server.Cargo.Systems;
 using Content.Server.Weapons.Ranged.Components;
 using Content.Shared.Cargo;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Projectiles;
+using Content.Shared.SS220.Weapons.Components;
+using Content.Shared.Standing;
+using Content.Shared.Weapons.Hitscan.Components;
+using Content.Shared.Weapons.Hitscan.Events;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
-using Content.Shared.Weapons.Hitscan.Components;
-using Content.Shared.Weapons.Hitscan.Events;
 using Robust.Shared.Audio;
+using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
-using Robust.Shared.Containers;
 using Robust.Shared.Random;
+using Robust.Shared.Utility;
+using System.Numerics;
 
 namespace Content.Server.Weapons.Ranged.Systems;
 
@@ -26,6 +28,7 @@ public sealed partial class GunSystem : SharedGunSystem
 {
     [Dependency] private readonly PricingSystem _pricing = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private StandingStateSystem _standing = default!; // SS220 Weapon overhaul
 
     private const float DamagePitchVariation = 0.05f;
 
@@ -96,6 +99,15 @@ public sealed partial class GunSystem : SharedGunSystem
                 continue;
             }
 
+            // SS220 Weapon overhaul begin
+            bool isAimed = false;
+
+            if (TryComp<GunAimableComponent>(gun.Owner, out var aimableComp) &&
+                aimableComp.IsAimed ||
+                user is { Valid: true } userValid && _standing.IsDown(userValid))
+                isAimed = true;
+            // SS220 Weapon overhaul end
+
             // TODO: Clean this up in a gun refactor at some point - too much copy pasting
             switch (shootable)
             {
@@ -104,7 +116,7 @@ public sealed partial class GunSystem : SharedGunSystem
                     if (!cartridge.Spent)
                     {
                         var uid = Spawn(cartridge.Prototype, fromEnt);
-                        CreateAndFireProjectiles(uid, cartridge);
+                        CreateAndFireProjectiles(uid, cartridge, isAimed); // SS220 Weapon overhaul
 
                         RaiseLocalEvent(ent!.Value, new AmmoShotEvent()
                         {
@@ -132,7 +144,13 @@ public sealed partial class GunSystem : SharedGunSystem
                 case AmmoComponent newAmmo:
                     if (ent == null)
                         break;
-                    CreateAndFireProjectiles(ent.Value, newAmmo);
+
+                    // SS220 Weapon overhaul begin
+                    if (isAimed)
+                        EnsureComp<AimedProjectileComponent>(ent.Value);
+
+                    CreateAndFireProjectiles(ent.Value, newAmmo, isAimed);
+                    // SS220 Weapon overhaul end
 
                     break;
                 case HitscanAmmoComponent:
@@ -163,7 +181,7 @@ public sealed partial class GunSystem : SharedGunSystem
             FiredProjectiles = shotProjectiles,
         });
 
-        void CreateAndFireProjectiles(EntityUid ammoEnt, AmmoComponent ammoComp)
+        void CreateAndFireProjectiles(EntityUid ammoEnt, AmmoComponent ammoComp, bool isAimed = false) // SS220 Weapon overhaul
         {
             if (TryComp<ProjectileSpreadComponent>(ammoEnt, out var ammoSpreadComp))
             {
@@ -179,6 +197,10 @@ public sealed partial class GunSystem : SharedGunSystem
                 for (var i = 1; i < ammoSpreadComp.Count; i++)
                 {
                     var newuid = Spawn(ammoSpreadComp.Proto, fromEnt);
+                    // SS220 Weapon overhaul begin
+                    if (isAimed)
+                        EnsureComp<AimedProjectileComponent>(newuid);
+                    // SS220 Weapon overhaul end
                     ShootOrThrow(newuid, angles[i].ToVec(), gunVelocity, gun, user);
                     shotProjectiles.Add(newuid);
                 }
