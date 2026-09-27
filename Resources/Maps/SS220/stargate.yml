@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 09/27/2026 21:48:00
-  entityCount: 46401
+  time: 09/27/2026 21:50:58
+  entityCount: 46399
 maps:
 - 1
 grids:
@@ -27329,7 +27329,7 @@ entities:
       pos: -102.5,24.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -235989.77
+      secondsUntilStateChange: -236160.55
       state: Opening
   - uid: 1760
     components:
@@ -29133,7 +29133,7 @@ entities:
       pos: 1.5,161.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1618052.1
+      secondsUntilStateChange: -1618223
       changeAirtight: False
       state: Opening
     - type: DeviceLinkSource
@@ -38023,7 +38023,7 @@ entities:
       canCollide: False
       bodyType: Static
     - type: Anchorable
-  - uid: 9310
+  - uid: 9302
     components:
     - type: Transform
       pos: -5.5,190.5
@@ -39521,6 +39521,14 @@ entities:
       parent: 2
     - type: Fixtures
       fixtures: {}
+  - uid: 1917
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -38.5,83.5
+      parent: 2
+    - type: Fixtures
+      fixtures: {}
   - uid: 3622
     components:
     - type: Transform
@@ -39541,14 +39549,6 @@ entities:
     components:
     - type: Transform
       pos: -69.5,184.5
-      parent: 2
-    - type: Fixtures
-      fixtures: {}
-  - uid: 6874
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -38.5,83.5
       parent: 2
     - type: Fixtures
       fixtures: {}
@@ -39606,14 +39606,14 @@ entities:
       parent: 2
     - type: Fixtures
       fixtures: {}
-  - uid: 11569
+  - uid: 11583
     components:
     - type: Transform
       pos: -40.5,84.5
       parent: 2
     - type: Fixtures
       fixtures: {}
-  - uid: 11583
+  - uid: 11588
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
@@ -39621,7 +39621,7 @@ entities:
       parent: 2
     - type: Fixtures
       fixtures: {}
-  - uid: 11588
+  - uid: 11628
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
@@ -39629,14 +39629,14 @@ entities:
       parent: 2
     - type: Fixtures
       fixtures: {}
-  - uid: 11628
+  - uid: 12214
     components:
     - type: Transform
       pos: -39.5,88.5
       parent: 2
     - type: Fixtures
       fixtures: {}
-  - uid: 12214
+  - uid: 12231
     components:
     - type: Transform
       pos: -41.5,88.5
@@ -124174,7 +124174,7 @@ entities:
       pos: 45.5,58.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -511739.34
+      secondsUntilStateChange: -511910.12
       state: Closing
     - type: DeviceLinkSource
       lastSignals:
@@ -124216,7 +124216,7 @@ entities:
     - type: Transform
       pos: -16.5,190.5
       parent: 2
-  - uid: 12231
+  - uid: 14766
     components:
     - type: Transform
       pos: -40.5,88.5
@@ -145988,7 +145988,7 @@ entities:
       - 40096
       - 40106
     - type: Door
-      secondsUntilStateChange: -1527316.2
+      secondsUntilStateChange: -1527487.1
       state: Closing
   - uid: 9985
     components:
@@ -146074,7 +146074,7 @@ entities:
       deviceLists:
       - 46086
     - type: Door
-      secondsUntilStateChange: -1445991.2
+      secondsUntilStateChange: -1446162.1
       state: Closing
   - uid: 11562
     components:
@@ -147976,7 +147976,7 @@ entities:
     - type: Firelock
       emergencyCloseCooldown: 8075.4252599
     - type: Door
-      secondsUntilStateChange: -550437.3
+      secondsUntilStateChange: -550608.1
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -220048,6 +220048,11 @@ entities:
       parent: 2
 - proto: MedicalBed
   entities:
+  - uid: 1918
+    components:
+    - type: Transform
+      pos: -5.5,190.5
+      parent: 2
   - uid: 3460
     components:
     - type: Transform
@@ -220067,11 +220072,6 @@ entities:
     components:
     - type: Transform
       pos: 79.5,46.5
-      parent: 2
-  - uid: 9302
-    components:
-    - type: Transform
-      pos: -5.5,190.5
       parent: 2
   - uid: 9305
     components:
@@ -276245,7 +276245,7 @@ entities:
       - - Service
 - proto: SmartFridgeMedical
   entities:
-  - uid: 9311
+  - uid: 9307
     components:
     - type: Transform
       pos: -5.5,188.5
@@ -278519,7 +278519,7 @@ entities:
       parent: 2
     - type: Door
       canCrush: True
-      secondsUntilStateChange: -154233.08
+      secondsUntilStateChange: -154403.86
       clickOpen: False
       state: Opening
     - type: DoorSignalControl
@@ -278554,7 +278554,7 @@ entities:
       pos: -52.5,187.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -597981.6
+      secondsUntilStateChange: -598152.44
       state: Opening
   - uid: 23105
     components:
@@ -278636,7 +278636,7 @@ entities:
       parent: 2
     - type: Door
       canCrush: True
-      secondsUntilStateChange: -154202.22
+      secondsUntilStateChange: -154373
       clickOpen: False
       state: Opening
     - type: DoorSignalControl
@@ -278671,7 +278671,7 @@ entities:
       pos: -53.5,188.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -562264.2
+      secondsUntilStateChange: -562435
       state: Opening
   - uid: 38967
     components:
@@ -279069,22 +279069,17 @@ entities:
       parent: 2
 - proto: SpawnMobCatFloppa
   entities:
-  - uid: 31006
+  - uid: 11569
     components:
     - type: Transform
-      pos: -16.5,192.5
+      pos: -16.5,205.5
       parent: 2
 - proto: SpawnMobCatRuntime
   entities:
-  - uid: 1917
+  - uid: 9311
     components:
     - type: Transform
-      pos: 0.5,199.5
-      parent: 2
-  - uid: 1918
-    components:
-    - type: Transform
-      pos: -6.5,192.5
+      pos: 2.5,204.5
       parent: 2
 - proto: SpawnMobCleanBot
   entities:
@@ -279193,10 +279188,10 @@ entities:
       parent: 2
 - proto: SpawnMobMedibot
   entities:
-  - uid: 14766
+  - uid: 9310
     components:
     - type: Transform
-      pos: -8.5,192.5
+      pos: -6.5,185.5
       parent: 2
   - uid: 40307
     components:
@@ -279459,13 +279454,6 @@ entities:
     components:
     - type: Transform
       pos: -123.5,97.5
-      parent: 2
-- proto: SpawnMobWalter
-  entities:
-  - uid: 31001
-    components:
-    - type: Transform
-      pos: -23.5,193.5
       parent: 2
 - proto: SpawnPointActualFuckingLawyer
   entities:
@@ -280848,6 +280836,11 @@ entities:
     - type: Transform
       pos: -23.5,200.5
       parent: 2
+  - uid: 6874
+    components:
+    - type: Transform
+      pos: -5.5,189.5
+      parent: 2
   - uid: 6883
     components:
     - type: Transform
@@ -280857,11 +280850,6 @@ entities:
     components:
     - type: Transform
       pos: 82.5,47.5
-      parent: 2
-  - uid: 9307
-    components:
-    - type: Transform
-      pos: -5.5,189.5
       parent: 2
   - uid: 9536
     components:
