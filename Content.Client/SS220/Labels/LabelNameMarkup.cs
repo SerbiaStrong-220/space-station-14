@@ -11,18 +11,19 @@ public static class LabelNameMarkup
     {
         var escapedName = FormattedMessage.EscapeText(name);
         if (label is not { CurrentLabel: not null } || label.LabelColor == Color.White)
-            return $"[bold]{escapedName}[/bold]";
+            return escapedName;
 
         var escapedLabel = FormattedMessage.EscapeText(label.CurrentLabel);
         var plainSuffix = Loc.GetString("comp-label-format", ("baseName", string.Empty), ("label", escapedLabel));
         if (!escapedName.EndsWith(plainSuffix, StringComparison.Ordinal))
-            return $"[bold]{escapedName}[/bold]";
+            return escapedName;
 
         var baseName = escapedName[..^plainSuffix.Length];
-        var coloredSuffix = Loc.GetString("comp-label-format",
+        var styledLabel = $"[bold][color={label.LabelColor.ToHex()}]{escapedLabel}[/color][/bold]";
+        var styledSuffix = Loc.GetString("comp-label-format",
             ("baseName", string.Empty),
-            ("label", $"[color={label.LabelColor.ToHex()}]{escapedLabel}[/color]"));
+            ("label", styledLabel));
 
-        return $"[bold]{baseName}{coloredSuffix}[/bold]";
+        return $"{baseName}{styledSuffix}";
     }
 }
