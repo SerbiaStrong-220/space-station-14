@@ -1,0 +1,1 @@
+borg-type-security = [color= #CC0605]киборга СБ[/color]

@@ -37,6 +37,7 @@
             SecurityCadet: [ 1, 2 ]
             Brigmedic: [ 1, 1 ]
             SeniorOfficer: [ 1, 1 ]
+            #SecurityBorg: [ 1, 1 ] #SS220 ToDo SecurityBorg
             #Engineering
             ChiefEngineer: [ 1, 1 ]
             StationEngineer: [ 8, 8 ]

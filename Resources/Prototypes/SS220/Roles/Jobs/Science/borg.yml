@@ -1,0 +1,22 @@
+- type: job
+  id: SecurityBorg
+  name: job-name-security-borg
+  description: job-description-security-borg
+  experienceDefinition: StationBorgsRoleExperience
+  playTimeTracker: JobSecurityBorg
+  requirements:
+  - !type:RoleTimeRequirement
+    role: JobBorg
+    time: 20h 
+  - !type:DepartmentTimeRequirement
+    department: Security
+    time: 72000
+  canBeAntag: false
+  icon: JobIconSecurityBorg
+  supervisors: job-supervisors-hos
+  jobEntity: PlayerBorgChassisSecurityBattery
+  applyTraits: false
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: RenameStart
