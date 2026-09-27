@@ -1,6 +1,5 @@
 using Content.Client.Hands.Systems;
 using Content.Client.Movement.Components;
-using Content.Client.NPC.HTN;
 using Content.Client.Weapons.Ranged.Systems;
 using Content.Shared.Camera;
 using Content.Shared.CCVar;
