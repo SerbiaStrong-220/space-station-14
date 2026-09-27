@@ -113,6 +113,30 @@
     HardDynamic:
       Telecrystal: 4
 #ss220 dynamic-price end
+
+- type: listing
+  id: UplinkSyndicateNvgImplant
+  name: uplink-night-vision-implanter-name
+  description: uplink-night-vision-implanter-desc
+  icon: { sprite: SS220/Clothing/Eyes/Glasses/nightvision.rsi, state: night }
+  productEntity: NightVisionImplanter
+  discountCategory: rareDiscounts
+  discountDownTo:
+    Telecrystal: 1
+  cost:
+    Telecrystal: 3
+  categories:
+  - UplinkImplants
+  #ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 3
+    MediumDynamic:
+      Telecrystal: 3
+    HardDynamic:
+      Telecrystal: 4
+#ss220 dynamic-price end
+
 # JobItems
 
 - type: listing

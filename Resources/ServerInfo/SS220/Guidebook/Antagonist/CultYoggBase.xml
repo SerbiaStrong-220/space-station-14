@@ -1,0 +1,207 @@
+<Document>
+  # База и растения
+
+  ## Материалы и строительство
+
+  Обычные культисты преобразуют сталь в [textlink="токл" link="CultYoggRecipes"], а кабели любого напряжения — в [textlink="живые корни" link="CultYoggRecipes"]. Подготовьте запас обоих материалов до вознесения первого Ми-Го.
+
+  Ми-Го использует способность «Воздвигнуть», выбирает сооружение и свободное место поблизости. Для части сооружений сначала появляется заготовка. Вложите в неё нужные материалы: это могут делать и обычные культисты. Осмотр заготовки показывает, сколько ещё требуется. Когда все материалы внесены, постройка завершается автоматически.
+
+  Стена, скрытая дверь и шлюз создаются сразу, без заготовки и затрат материалов. Между постройками есть задержка. В [textlink="Бездне" link="CultYoggAbyss"] Ми-Го не может пользоваться способностью «Воздвигнуть».
+
+  Действие «Захватить сооружение» позволяет преобразовать станционные стены, окна и двери, для которых доступен облик культа. Захваченная постройка может сохранять внешний вид исходной до стадии [color=#EC9365]«Тревога»[/color]. «Разобрать сооружение» работает с постройками культа. Ненужную заготовку можно убрать действием «Отменить постройку», вернув уже вложенные материалы.
+
+  Маскировку стены или двери можно выбрать и вручную: откройте контекстное меню сооружения, нажмите «Хамелеон» и выберите доступный облик. Это могут делать культисты и Ми-Го. Меняется внешний вид, а не принадлежность постройки; на стадии [color=#EC9365]«Тревога»[/color] эта маскировка раскрывается и повторно включить её нельзя.
+
+  ## Сооружения и стоимость
+
+  Количество материалов указано за одну постройку; прочерк означает, что материал не требуется.
+
+  <Table Columns="3">
+    <ColorBox Color="#34313F" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        [bold]Постройка[/bold]
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#34313F" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="SheetTokl1" Caption="" Scale="1.5" Margin="2"/>
+        [bold]Токл[/bold]
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#34313F" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="LivingRootsStack1" Caption="" Scale="1.5" Margin="2"/>
+        [bold]Живые корни[/bold]
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="WallCultYogg" Caption="" Scale="1.5" Margin="2"/>
+        Стена
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        —
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        —
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="CultYoggDoor" Caption="" Scale="1.5" Margin="2"/>
+        Скрытая дверь
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        —
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        —
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="CultYoggAirlock" Caption="" Scale="1.5" Margin="2"/>
+        Шлюз
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        —
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        —
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="CultYoggFungusHydroponic" Caption="" Scale="1.5" Margin="2"/>
+        Грибница
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        10
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        10
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="CultYoggPond" Caption="" Scale="1.5" Margin="2"/>
+        Пруд
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        8
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        5
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="CultYoggPod" Caption="" Scale="1.5" Margin="2"/>
+        Хранилище
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        15
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        5
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="CultYoggAltar" Caption="" Scale="1.5" Margin="2"/>
+        Алтарь
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        10
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        10
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        <GuideEntityEmbed Entity="VoidTeleportEnter" Caption="" Scale="1.5" Margin="2"/>
+        Врата бездны
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        3
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#292833" OutlineColor="#514957">
+      <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
+        7
+      </Box>
+    </ColorBox>
+  </Table>
+
+  ## Назначение сооружений
+
+  [color=#a4885c]Грибница[/color] выращивает растения без полива, удобрений и обычного ухода. Выбирать культуру через её меню могут как Ми-Го, так и обычные культисты. Дождитесь созревания и соберите урожай взаимодействием с грибницей. Повторно плодоносящие растения дают новые урожаи; выбор другой культуры заменяет текущую посадку.
+
+  [color=#a4885c]Пруд[/color] содержит [color=#a4885c]эссенцию Бездны[/color] и постепенно восполняет её запас. Взаимодействуйте с ним усыпляющим жалом, чтобы набрать снотворное. Пруд не создаёт ми-гомицелий и не заменяет грибницу.
+
+  [color=#a4885c]Хранилище[/color] — лечебная капсула для культистов и Ми-Го. Перетащите пациента на капсулу или воспользуйтесь действием «Поместить в капсулу», чтобы войти самому. Размещение занимает время. Внутри непрерывно лечатся повреждения и восстанавливается кровь; сохранившееся тело можно воскресить. Для выхода используется «Достать из капсулы». Уничтоженное тело капсула не восстановит.
+
+  [color=#a4885c]Алтарь[/color] нужен для закрепления назначенной жертвы и проведения призыва. Сам по себе построенный алтарь не продвигает стадию культа. Возводится только на станции.
+
+  [color=#a4885c]Врата бездны[/color] связываются с выходом в Бездне. Держите маршрут доступным для союзников; варианты перехода и возвращения описаны на странице [textlink="Бездна" link="CultYoggAbyss"].
+
+  ## Растения
+
+  <Box>
+    <GuideEntityEmbed Entity="FoodMiGomyceteCult" Caption="Ми-гомицелий"/>
+    <GuideEntityEmbed Entity="FoodNullificationShroomCult" Caption="Нулевой гриб"/>
+    <GuideEntityEmbed Entity="FoodSidiousShroomCult" Caption="Сидиус-гриб"/>
+  </Box>
+
+  [color=#a4885c]Ми-гомицелий[/color] подготавливает гуманоидов к обращению, а у культистов накапливает эффект вознесения. У посторонних вызывает галлюцинации. Мышей, обезьян, коров, пауков и некоторых других животных он превращает в существ культа. Однако не каждое животное поддаётся превращению. Для обращения гуманоидов всё равно нужен Ми-Го.
+
+  [color=#a4885c]Нулевой гриб[/color] сбрасывает накопленный эффект вознесения, отменяет незавершённое превращение и позволяет освободиться от приросшего снаряжения. Он не выводит персонажа из культа. Держите запас рядом с местом выдачи оружия, чтобы можно было сменить экипировку.
+
+  [color=#a4885c]Сидиус-гриб[/color] содержит питательные вещества и воду. Используйте его для поддержания сытости и запаса воды, в том числе перед «Микозом».
+
+  <Box>
+    <GuideEntityEmbed Entity="ProductStrangeFruitCultYogg" Caption="Странный фрукт"/>
+    <GuideEntityEmbed Entity="FoodLubroShroomCult" Caption="Луброгус"/>
+    <GuideEntityEmbed Entity="FoodMikoTrapShroomCult" Caption="Миколовушка"/>
+  </Box>
+
+  [color=#a4885c]Странный фрукт[/color] активируется в руке и через пять секунд выпускает странную кудзу. Она сильно замедляет посторонних, но пропускает культистов и Ми-Го без этого замедления. Размещайте её на подходах к базе; огонь и средства против растений опасны для зарослей.
+
+  [color=#a4885c]Луброгус[/color] надевается на ноги и защищает от скольжения, немного снижая скорость. После снятия луброгус умирает, и надеть его снова уже нельзя.
+
+  [color=#a4885c]Миколовушка[/color] после взведения становится малозаметной, оглушает попавшуюся цель и вводит токсин. На обычных культистов ловушка не срабатывает. Одновременно можно взвести не больше шести таких ловушек на весь культ. На стадии [color=#EC9365]«Тревога»[/color] новые ловушки взводить нельзя, а уже взведённые становятся видимыми.
+
+  [textlink="Снаряжение" link="CultYoggEquipment"] · [textlink="Обзор культа" link="CultYogg"]
+</Document>

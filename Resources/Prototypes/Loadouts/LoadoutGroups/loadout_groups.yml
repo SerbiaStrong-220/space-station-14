@@ -554,6 +554,7 @@
   - ChaplainHoodie
   - HoodieChaplainWhite #SS220-Clothes
   - ChaplainOuterHoodieFollower #SS220 Follower clothing redux
+  - ChaplainOuterSchema #SS220-Schema
 
 - type: loadoutGroup
   id: ChaplainNeck
