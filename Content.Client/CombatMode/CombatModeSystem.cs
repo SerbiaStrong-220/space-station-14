@@ -2,8 +2,6 @@ using Content.Client.Hands.Systems;
 using Content.Client.Weapons.Ranged.Systems;
 using Content.Shared.CCVar;
 using Content.Shared.CombatMode;
-using Content.Shared.SS220.CombatMode;
-using Content.Shared.Movement.Systems;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Player;
