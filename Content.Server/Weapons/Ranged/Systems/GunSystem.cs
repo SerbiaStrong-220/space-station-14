@@ -207,6 +207,10 @@ public sealed partial class GunSystem : SharedGunSystem
             }
             else
             {
+                // SS220 Weapon overhaul begin
+                if (isAimed)
+                    EnsureComp<AimedProjectileComponent>(ammoEnt);
+                // SS220 Weapon overhaul end
                 ShootOrThrow(ammoEnt, mapDirection, gunVelocity, gun, user);
                 shotProjectiles.Add(ammoEnt);
             }
