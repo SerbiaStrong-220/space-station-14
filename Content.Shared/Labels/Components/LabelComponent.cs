@@ -23,12 +23,19 @@ public sealed partial class LabelComponent : Component, IPhotocopyableComponent 
     [DataField, AutoNetworkedField]
     public bool Examinable = true;
 
+    //SS220-LabelColors begin
+    [DataField, AutoNetworkedField]
+    public Color LabelColor = Color.White;
+    //SS220-LabelColors end
+
     // SS220 Photocopy begin
     public IPhotocopiedComponentData GetPhotocopiedData()
     {
         return new LabelComponentPhotocopiedData()
-        {
-            CurrentLabel = CurrentLabel
+        {   //SS220-LabelColors begin
+            CurrentLabel = CurrentLabel,
+            LabelColor = LabelColor
+            //SS220-LabelColors end
         };
     }
     // SS220 Photocopy end
@@ -39,6 +46,8 @@ public sealed partial class LabelComponent : Component, IPhotocopyableComponent 
 public sealed class LabelComponentPhotocopiedData : IPhotocopiedComponentData
 {
     public string? CurrentLabel;
+    public Color LabelColor = Color.White; //SS220-LabelColors
+
     public void RestoreFromData(EntityUid uid, Component someComponent)
     {
         if (someComponent is not LabelComponent labelComponent)
@@ -52,7 +61,7 @@ public sealed class LabelComponentPhotocopiedData : IPhotocopiedComponentData
 
             var entSys = IoCManager.Resolve<IEntityManager>();
             var labelSys = entSys.System<LabelSystem>();
-            labelSys.Label(uid, CurrentLabel, label: labelComponent);
+            labelSys.Label(uid, CurrentLabel, label: labelComponent, color: LabelColor);
         }
     }
 }
