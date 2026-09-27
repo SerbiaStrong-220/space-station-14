@@ -28,12 +28,12 @@ public sealed partial class GunAimingSystem : SharedGunAimingSystem
         if (!_timing.IsFirstTimePredicted)
             return;
 
-        var entityNull = _player.LocalEntity;
-
-        if (entityNull == null || !TryComp<CombatModeComponent>(entityNull, out var combatComp) || !combatComp.IsInCombatMode)
-            return;
-
-        var entity = entityNull.Value;
+if (_player.LocalEntity is not EntityUid entity ||
+    !TryComp(entity, out CombatModeComponent? combatComp) ||
+    !combatComp.IsInCombatMode)
+{
+    return;
+}
 
         if (!_gun.TryGetGun(entity, out var gun) || !gun.Comp.UseKey)
             return;
