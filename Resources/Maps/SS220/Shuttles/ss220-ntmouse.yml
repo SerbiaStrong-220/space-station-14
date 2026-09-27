@@ -4,7 +4,7 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 09/26/2026 09:29:29
+  time: 09/27/2026 19:36:00
   entityCount: 146
 maps: []
 grids:
@@ -25961,8 +25961,6 @@ entities:
     - type: Transform
       pos: -1.5,0.5
       parent: 1
-    - type: Thruster
-      enabled: False
   - uid: 31
     components:
     - type: Transform
