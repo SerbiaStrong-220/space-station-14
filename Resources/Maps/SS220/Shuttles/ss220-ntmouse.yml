@@ -4,7 +4,7 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 09/27/2026 19:36:00
+  time: 09/27/2026 21:10:52
   entityCount: 146
 maps: []
 grids:
@@ -25751,7 +25751,7 @@ entities:
         - 0
         height: 100
         width: 250
-- proto: PortableGeneratorPacman
+- proto: PortableGeneratorSuperPacman
   entities:
   - uid: 102
     components:
@@ -25759,12 +25759,13 @@ entities:
       anchored: True
       pos: 1.5,-4.5
       parent: 1
-    - type: Physics
-      bodyType: Static
     - type: MaterialStorage
       storage:
-        Plasma: 3000
+        Uranium: 3000
+    - type: Physics
+      bodyType: Static
     - type: InsertingMaterialStorage
+      endTime: 0
 - proto: PowerCageRecharger
   entities:
   - uid: 106
@@ -25961,11 +25962,15 @@ entities:
     - type: Transform
       pos: -1.5,0.5
       parent: 1
+    - type: Thruster
+      thrust: 150
   - uid: 31
     components:
     - type: Transform
       pos: 4.5,0.5
       parent: 1
+    - type: Thruster
+      thrust: 150
 - proto: ThrusterBigCenter
   entities:
   - uid: 45
@@ -26011,7 +26016,7 @@ entities:
       pos: -0.5,1.5
       parent: 1
     - type: Thruster
-      thrust: 66
+      thrust: 88
   - uid: 136
     components:
     - type: Transform
@@ -26019,7 +26024,7 @@ entities:
       pos: 3.5,1.5
       parent: 1
     - type: Thruster
-      thrust: 66
+      thrust: 88
 - proto: WallShuttle
   entities:
   - uid: 5
