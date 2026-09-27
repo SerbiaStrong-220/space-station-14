@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Sprited by MACMAN2003, equipped-EYES-vox Sprited by Dinazewwr (Discord) for SS220. Equipped-EYES-arachnid and equipped-EYES-moth modified from equipped-EYES by HTMLSystem",
+  "copyright": "Sprited by MACMAN2003, equipped-EYES-vox Sprited by Dinazewwr (Discord) for SS220. Equipped-EYES-arachnid and equipped-EYES-moth modified from equipped-EYES by HTMLSystem; Forehead states: Sprited by MACMAN2003, equipped-EYES-vox && equipped-HELMET && equipped-HELMET-arachnid && equipped-HELMET-hamster && equipped-HELMET-moth && equipped-HELMET-vox sprited by Dinazewwr (discord) for SS220, equipped-EYES-arachnid and equipped-EYES-moth modified from equipped-EYES by HTMLSystem",
   "size": {
     "x": 32,
     "y": 32
@@ -32,6 +32,22 @@
     },
     {
       "name": "equipped-EYES-vox",
+      "directions": 4
+    },
+    {
+      "name": "equipped-HELMET",
+      "directions": 4
+    },
+    {
+      "name": "equipped-HELMET-arachnid",
+      "directions": 4
+    },
+    {
+      "name": "equipped-HELMET-moth",
+      "directions": 4
+    },
+    {
+      "name": "equipped-HELMET-vox",
       "directions": 4
     }
   ]

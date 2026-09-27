@@ -1,3 +1,6 @@
+// SS220-glasses-on-forehead-begin
+using Content.Shared.SS220.Clothing.Components;
+// SS220-glasses-on-forehead-end
 using Content.Shared.StatusEffect;
 using Content.Shared.Inventory;
 using Content.Shared.Eye.Blinding.Components;
@@ -9,6 +12,8 @@ namespace Content.Shared.Eye.Blinding.Systems
 {
     public sealed class EyeProtectionSystem : EntitySystem
     {
+        [Dependency] private readonly InventorySystem _foreheadInventory = default!; // SS220-glasses-on-forehead
+
         [Dependency] private readonly StatusEffectsSystem _statusEffectsSystem = default!;
         [Dependency] private readonly BlindableSystem _blindingSystem = default!;
 
@@ -30,6 +35,12 @@ namespace Content.Shared.Eye.Blinding.Systems
 
         private void OnGetProtection(EntityUid uid, EyeProtectionComponent component, GetEyeProtectionEvent args)
         {
+            // SS220-glasses-on-forehead-begin
+            if (HasComp<GlassesOnForeheadComponent>(uid) &&
+                _foreheadInventory.InSlotWithFlags(uid, SlotFlags.HEAD))
+                return;
+            // SS220-glasses-on-forehead-end
+
             if (TryComp<MaskComponent>(uid, out var mask) && mask.IsToggled)
                 return;
 

@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ClothingEyesBase, BaseChameleon]
+  parent: [ClothingEyesBase, BaseChameleon, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingEyesChameleon
   name: sun glasses
   description: Useful both for security and cargonia.
@@ -11,6 +11,7 @@
     - type: Sprite
       sprite: Clothing/Eyes/Glasses/sunglasses.rsi
     - type: Clothing
+      slots: [EYES, HEAD] # SS220-glasses-on-forehead
       sprite: Clothing/Eyes/Glasses/sunglasses.rsi
     - type: ChameleonClothing
       slot: [eyes]

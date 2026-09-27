@@ -1,3 +1,4 @@
+using Content.Shared.SS220.Clothing.Components; // SS220-glasses-on-forehead
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Client.DisplacementMap;
@@ -112,7 +113,17 @@ public sealed class ClientClothingSystem : ClothingSystem
         {
             // No generic data either. Attempt to generate defaults from the item's RSI & item-prefixes
             if (!TryGetDefaultVisuals(uid, item, args.Slot, inventory.SpeciesId, out layers))
-                return;
+            {
+                // SS220-glasses-on-forehead-begin
+                // A disguise without a forehead sprite keeps the item's original forehead appearance.
+                if (args.Slot != "head" || !HasComp<GlassesOnForeheadComponent>(uid) ||
+                    !HasComp<ChameleonClothingComponent>(uid) ||
+                    MetaData(uid).EntityPrototype is not { } original ||
+                    !original.TryGetComponent<ClothingComponent>(out var originalClothing, EntityManager.ComponentFactory) ||
+                    !TryGetDefaultVisuals(uid, originalClothing, args.Slot, inventory.SpeciesId, out layers))
+                    return;
+                // SS220-glasses-on-forehead-end
+            }
         }
 
         // add each layer to the visuals

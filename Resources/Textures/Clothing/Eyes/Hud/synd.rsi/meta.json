@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Made by IntegerTempest. Equipped-EYES-arachnid modified from equipped-EYES by HTMLSystem.",
+    "copyright": "Made by IntegerTempest. Equipped-EYES-arachnid modified from equipped-EYES by HTMLSystem.; Forehead states: Made by IntegerTempest. Equipped-EYES-arachnid modified from equipped-EYES by HTMLSystem, equipped-HELMET && equipped-HELMET-arachnid by Dinazewwr (discord) for SS220.",
     "size": {
         "x": 32,
         "y": 32
@@ -25,6 +25,14 @@
         {
             "name": "inhand-right",
             "directions": 4
-        }
-    ]
+        },
+    {
+      "name": "equipped-HELMET",
+      "directions": 4
+    },
+    {
+      "name": "equipped-HELMET-arachnid",
+      "directions": 4
+    }
+  ]
 }

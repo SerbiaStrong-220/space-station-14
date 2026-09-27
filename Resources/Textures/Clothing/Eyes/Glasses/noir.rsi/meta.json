@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-NC-SA-3.0",
-  "copyright": "taken from goonstation at commit https://github.com/goonstation/goonstation/commit/9affe47cd1b192f6d1900a64a5b5a07a54251e37",
+  "copyright": "taken from goonstation at commit https://github.com/goonstation/goonstation/commit/9affe47cd1b192f6d1900a64a5b5a07a54251e37; Forehead states: taken from goonstation at commit https://github.com/goonstation/goonstation/commit/9affe47cd1b192f6d1900a64a5b5a07a54251e37, equipped-HELMET sprited by Dinazewwr (discord) for SS220.",
   "size": {
     "x": 32,
     "y": 32
@@ -13,6 +13,10 @@
     },
     {
       "name": "icon"
+    },
+    {
+      "name": "equipped-HELMET",
+      "directions": 4
     }
   ]
 }
