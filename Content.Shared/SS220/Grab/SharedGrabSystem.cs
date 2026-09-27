@@ -19,9 +19,11 @@ using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Random.Helpers;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
+using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Physics.Components;
@@ -59,6 +61,12 @@ public abstract partial class SharedGrabSystem : EntitySystem
     private EntityQuery<GrabberComponent> _grabberQuery;
     private EntityQuery<PhysicsComponent> _physicsQuery;
 
+    // NOTE(Alvyr):
+    // for now const if it will be good -> make skill dependent
+    private const float PassiveGrabAttackMissChance = 0.5f;
+
+    private static readonly LocId PassiveGrabMissPopup = "entity-missed-in-passive-grab";
+
     public override void Initialize()
     {
         base.Initialize();
@@ -77,6 +85,7 @@ public abstract partial class SharedGrabSystem : EntitySystem
         SubscribeLocalEvent<GrabbableComponent, InteractionAttemptEvent>(OnInteractionAttempt);
         SubscribeLocalEvent<GrabbableComponent, DownAttemptEvent>(OnDownAttempt);
         SubscribeLocalEvent<GrabbableComponent, AttackAttemptEvent>(OnCanAttack);
+        SubscribeLocalEvent<GrabbableComponent, AttemptMeleeUserEvent>(OnAttemptMeleeUserEvent);
 
         SubscribeLocalEvent<GrabberComponent, AttemptMobTargetCollideEvent>(OnAttemptMobTargetCollide);
         SubscribeLocalEvent<GrabbableComponent, AttemptMobTargetCollideEvent>(OnAttemptMobTargetCollide);
@@ -179,8 +188,20 @@ public abstract partial class SharedGrabSystem : EntitySystem
 
     private void OnCanAttack(Entity<GrabbableComponent> grabbable, ref AttackAttemptEvent ev)
     {
-        if (IsGrabbed((grabbable, grabbable.Comp)))
+        if (grabbable.Comp.GrabStage > GrabStage.Passive)
             ev.Cancel();
+    }
+
+    private void OnAttemptMeleeUserEvent(Entity<GrabbableComponent> grabbable, ref AttemptMeleeUserEvent ev)
+    {
+        if (ev.Cancelled || grabbable.Comp.GrabStage != GrabStage.Passive)
+            return;
+
+        if (!SharedRandomExtensions.PredictedProb(_timing, PassiveGrabAttackMissChance, GetNetEntity(grabbable), GetNetEntity(ev.Weapon)))
+            return;
+
+        ev.Message = Loc.GetString(PassiveGrabMissPopup);
+        ev.Cancelled = true;
     }
 
     // cuz of mob collisions
@@ -318,7 +339,8 @@ public abstract partial class SharedGrabSystem : EntitySystem
             BlockDuplicate = true,
             BreakOnDamage = true,
             BreakOnMove = true,
-            DistanceThreshold = 2f
+            DistanceThreshold = 2f,
+            ArgFlags = DoAfterArgFlags.IgnoreTraitsModification | DoAfterArgFlags.IgnoreExperienceModification,
         };
 
         return _doAfter.TryStartDoAfter(args);

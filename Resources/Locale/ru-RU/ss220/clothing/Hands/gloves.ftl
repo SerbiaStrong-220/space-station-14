@@ -6,9 +6,9 @@ ent-ClothingHandsGlovesNanotrasenDiplomat = белые перчатки Цент
 ent-ClothingHandsGlovesSecTactical = тактические перчатки охраны
     .desc = Пара чёрных перчаток с красными элементами, что дополнят ваш тактический образ. Не путать с боевыми.
 
-ent-ClothingHandsGlovesJanitorJR = черные резиновые перчатки
+ent-ClothingHandsGlovesJanitorJR = резиновые перчатки JR
     .suffix = JR, За время в игре
-    .desc = Уборочные перчатки с дополнительным защитным покрытием. Они видели столь много...
+    .desc = Уборочные перчатки с дополнительным защитным покрытием. Повидали больше, чем кажется.
 
 ent-ClothingHandsGlovesDQ = боевые перчатки Эскадрона Смерти
     .suffix = Эскадрон Смерти, dq

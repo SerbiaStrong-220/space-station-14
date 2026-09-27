@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 07/02/2026 12:17:30
-  entityCount: 33271
+  time: 08/15/2026 07:25:01
+  entityCount: 33278
 maps:
 - 1
 grids:
@@ -28405,7 +28405,7 @@ entities:
   - uid: 1425
     components:
     - type: Transform
-      pos: -7.477147,-22.60499
+      pos: -7.0220313,-23.204262
       parent: 2
   - uid: 1426
     components:
@@ -30676,6 +30676,34 @@ entities:
           - AutoClose
         - - Timer
           - Open
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21239
+    components:
+    - type: Transform
+      pos: -44.5,-2.5
+      parent: 2
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21240
+    components:
+    - type: Transform
+      pos: -45.5,-2.5
+      parent: 2
+    - type: Fixtures
+      fixtures: {}
+  - uid: 33276
+    components:
+    - type: Transform
+      pos: -43.5,-2.5
+      parent: 2
+    - type: Fixtures
+      fixtures: {}
+  - uid: 33277
+    components:
+    - type: Transform
+      pos: -46.5,-2.5
+      parent: 2
     - type: Fixtures
       fixtures: {}
 - proto: BrokenBorgEngineer
@@ -83440,7 +83468,7 @@ entities:
       pos: 61.5,-1.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -105538.36
+      secondsUntilStateChange: -105667.42
       state: Opening
   - uid: 11577
     components:
@@ -104861,19 +104889,19 @@ entities:
       parent: 2
 - proto: FoodCondimentPacketPepper
   entities:
-  - uid: 14784
+  - uid: 33278
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -7.164647,-22.448576
+      rot: -1.5707963267948966 rad
+      pos: -7.4493265,-23.464859
       parent: 2
 - proto: FoodCondimentPacketSalt
   entities:
   - uid: 14785
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -7.180272,-22.558065
+      rot: -1.5707963267948966 rad
+      pos: -7.532701,-23.798424
       parent: 2
 - proto: FoodCondimentPacketSoy
   entities:
@@ -151164,6 +151192,13 @@ entities:
     - type: Transform
       pos: 32.5,27.5
       parent: 2
+- proto: KitchenFoodProcessor
+  entities:
+  - uid: 14784
+    components:
+    - type: Transform
+      pos: -7.5,-22.5
+      parent: 2
 - proto: KitchenKnife
   entities:
   - uid: 21094
@@ -151499,7 +151534,7 @@ entities:
   - uid: 21147
     components:
     - type: Transform
-      pos: -7.633397,-22.307804
+      pos: -7.0637183,-23.621218
       parent: 2
   - uid: 21148
     components:
@@ -152340,16 +152375,6 @@ entities:
     components:
     - type: Transform
       pos: -29.5,-25.5
-      parent: 2
-  - uid: 21239
-    components:
-    - type: Transform
-      pos: -47.5,-0.5
-      parent: 2
-  - uid: 21240
-    components:
-    - type: Transform
-      pos: -46.5,-0.5
       parent: 2
   - uid: 21241
     components:
@@ -217562,6 +217587,28 @@ entities:
     components:
     - type: Transform
       pos: -38.5,-26.5
+      parent: 2
+- proto: WardrobePrisonSecureFilled
+  entities:
+  - uid: 23682
+    components:
+    - type: Transform
+      pos: -47.5,-0.5
+      parent: 2
+  - uid: 23683
+    components:
+    - type: Transform
+      pos: -46.5,-0.5
+      parent: 2
+  - uid: 23684
+    components:
+    - type: Transform
+      pos: -40.5,-0.5
+      parent: 2
+  - uid: 23685
+    components:
+    - type: Transform
+      pos: -41.5,-0.5
       parent: 2
 - proto: WardrobeSecurityFilled
   entities:

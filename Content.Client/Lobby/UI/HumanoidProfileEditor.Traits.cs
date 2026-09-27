@@ -37,6 +37,10 @@ public sealed partial class HumanoidProfileEditor
 
         foreach (var trait in traits)
         {
+            // SS220-IPC begin
+            if (!TraitAllowedSpecies(trait))
+                continue;
+            // SS220-IPC end
             if (trait.Category == null)
             {
                 defaultTraits.Add(trait.ID);
