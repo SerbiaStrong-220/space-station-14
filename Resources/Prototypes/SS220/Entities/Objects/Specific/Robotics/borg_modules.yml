@@ -116,3 +116,19 @@
   - type: Sprite
     sprite: SS220/Placeholders/seeds.rsi
     state: seed
+
+- type: entity
+  id: BorgModuleArtifactsPlaceholder
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: SS220/Placeholders/artifacts.rsi
+    state: artifacts
+
+- type: entity
+  id: BorgModuleMusiqueInstrumentsPlaceholder
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: SS220/Placeholders/instruments.rsi
+    state: instruments

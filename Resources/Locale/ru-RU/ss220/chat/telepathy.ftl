@@ -1,4 +1,4 @@
-chat-telepathy-yogg-sothoth-cult = Культ Йог-Сотот
+chat-telepathy-yogg-sothoth-cult = Культ Йог-Сотота
 chat-telepathy-space-dragon = Космический дракон
 chat-telepathy-hive = Улей
 

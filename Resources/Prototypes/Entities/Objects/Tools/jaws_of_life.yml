@@ -56,6 +56,14 @@
         Blunt: 10
     soundHit:
       collection: MetalThud
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Tools/crowbar_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Tools/crowbar_drop.ogg
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   name: syndicate jaws of death

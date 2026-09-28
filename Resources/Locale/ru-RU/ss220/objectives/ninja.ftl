@@ -4,17 +4,17 @@ ent-NinjaFrameTargetObjective = Подставить цель
 
 objective-condition-intimidate-target-brute-title = Заказ на запугивание { $targetName }, в должности { CAPITALIZE($job) }.
 objective-condition-intimidate-target-brute-desc = Вам заказали преподать урок члену экипажа станции. Избейте вашу цель несколько раз, пока она в ясном сознании.
-objective-condition-intimidate-target-brute-desc-ssd= Цель впала в ССД, такой исход тоже возможен.
+objective-condition-intimidate-target-brute-desc-catatonic= Цель впала в кататонический ступор, такой исход тоже возможен.
 objective-condition-intimidate-target-brute-desc-success = Вы успешно преподали урок.
 
 objective-condition-intimidate-target-burn-title = Заказ на запугивание { $targetName }, в должности { CAPITALIZE($job) }.
 objective-condition-intimidate-target-burn-desc = Вам заказали преподать урок члену экипажа станции. Нанесите вашей цели достаточно ожогов, пока она в ясном сознании.
-objective-condition-intimidate-target-burn-desc-ssd= Цель впала в ССД, такой исход тоже возможен.
+objective-condition-intimidate-target-burn-desc-catatonic= Цель впала в кататонический ступор, такой исход тоже возможен.
 objective-condition-intimidate-target-burn-desc-success = Вы успешно преподали урок.
 
 objective-condition-intimidate-target-toxin-title = Заказ на запугивание { $targetName }, в должности { CAPITALIZE($job) }.
 objective-condition-intimidate-target-toxin-desc = Вам заказали преподать урок члену экипажа станции. Отравите вашу цель несколько раз, пока она в ясном сознании.
-objective-condition-intimidate-target-toxin-desc-ssd= Цель впала в ССД, такой исход тоже возможен.
+objective-condition-intimidate-target-toxin-desc-catatonic= Цель впала в кататонический ступор, такой исход тоже возможен.
 objective-condition-intimidate-target-toxin-desc-success = Вы успешно преподали урок.
 
 ent-LeaveNoTraceObjective = Не раскрывайте себя

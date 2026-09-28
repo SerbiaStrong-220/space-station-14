@@ -144,6 +144,11 @@ public sealed class MagicMirrorSystem : EntitySystem
 
     private void OnMagicMirrorInteract(Entity<MagicMirrorComponent> mirror, ref AfterInteractEvent args)
     {
+        //SS220-IPC begin
+        if (!mirror.Comp.Interactable)
+            return;
+        //SS220-IPC end
+
         if (!args.CanReach || args.Target == null)
             return;
 
@@ -156,6 +161,11 @@ public sealed class MagicMirrorSystem : EntitySystem
 
     private void OnMirrorRangeCheck(EntityUid uid, MagicMirrorComponent component, ref BoundUserInterfaceCheckRangeEvent args)
     {
+        //SS220-IPC begin
+        if (args.UiKey is not MagicMirrorUiKey.Key)
+            return;
+        //SS220-IPC end
+
         if (args.Result == BoundUserInterfaceRangeResult.Fail)
             return;
 
@@ -172,6 +182,13 @@ public sealed class MagicMirrorSystem : EntitySystem
 
     private void OnAttemptOpenUI(EntityUid uid, MagicMirrorComponent component, ref ActivatableUIOpenAttemptEvent args)
     {
+        //SS220-IPC begin
+        if (!component.Interactable)
+        {
+            args.Cancel();
+            return;
+        }
+        //SS220-IPC end
         var user = component.Target ?? args.User;
 
         if (!HasComp<VisualBodyComponent>(user))
@@ -225,12 +242,12 @@ public sealed class MagicMirrorSystem : EntitySystem
     /// Helper function that checks if the wearer has anything on their head
     /// Or if they have any clothes that hides their hair
     /// </summary>
-    //SS220-new-feature begin
+    //SS220-IPC begin
     private bool CheckHeadSlotOrClothes(EntityUid target, MagicMirrorComponent component)
     {
         if (!component.CheckHeadSlot)
             return false;
-    //SS220-new-feature end
+    //SS220-IPC end
 
         if (!TryComp<InventoryComponent>(target, out var inventoryComp))
             return false;

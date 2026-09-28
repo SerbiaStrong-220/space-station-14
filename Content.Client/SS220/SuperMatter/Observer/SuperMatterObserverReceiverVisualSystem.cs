@@ -10,6 +10,7 @@ public sealed partial class SuperMatterObserverVisualReceiverSystem : EntitySyst
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
@@ -24,10 +25,10 @@ public sealed partial class SuperMatterObserverVisualReceiverSystem : EntitySyst
         if (!_appearance.TryGetData<SuperMatterVisualState>(entity.Owner, SuperMatterVisuals.VisualState, out var state, args.Component))
             return;
 
-        if (!args.Sprite.LayerMapTryGet(SuperMatterVisualLayers.Shaded, out var layer))
+        if (!_sprite.LayerMapTryGet(entity.Owner, SuperMatterVisualLayers.Shaded, out var layer, false))
             return;
 
-        if (!args.Sprite.LayerMapTryGet(SuperMatterVisualLayers.Unshaded, out var unshadedLayer))
+        if (!_sprite.LayerMapTryGet(entity.Owner, SuperMatterVisualLayers.Unshaded, out var unshadedLayer, false))
             return;
 
         Dictionary<SuperMatterVisualLayers, int> layers = new()
@@ -43,37 +44,37 @@ public sealed partial class SuperMatterObserverVisualReceiverSystem : EntitySyst
             case SuperMatterVisualState.Disable:
                 if (entity.Comp.DisabledState == null)
                     break;
-                SetVisualLayers(entity.Comp.DisabledState, layers, args.Sprite);
+                SetVisualLayers(entity.Owner, entity.Comp.DisabledState, layers);
                 break;
             case SuperMatterVisualState.UnActiveState:
                 if (entity.Comp.UnActiveState == null)
                     break;
-                SetVisualLayers(entity.Comp.UnActiveState, layers, args.Sprite);
+                SetVisualLayers(entity.Owner, entity.Comp.UnActiveState, layers);
                 break;
             case SuperMatterVisualState.Okay:
                 if (entity.Comp.OnState == null)
                     break;
-                SetVisualLayers(entity.Comp.OnState, layers, args.Sprite);
+                SetVisualLayers(entity.Owner, entity.Comp.OnState, layers);
                 break;
             case SuperMatterVisualState.Warning:
                 if (entity.Comp.WarningState == null)
                     break;
-                SetVisualLayers(entity.Comp.WarningState, layers, args.Sprite);
+                SetVisualLayers(entity.Owner, entity.Comp.WarningState, layers);
                 break;
             case SuperMatterVisualState.Danger:
                 if (entity.Comp.DangerState == null)
                     break;
-                SetVisualLayers(entity.Comp.DangerState, layers, args.Sprite);
+                SetVisualLayers(entity.Owner, entity.Comp.DangerState, layers);
                 break;
             case SuperMatterVisualState.Delaminate:
                 if (entity.Comp.DelaminateState == null)
                     break;
-                SetVisualLayers(entity.Comp.DelaminateState, layers, args.Sprite);
+                SetVisualLayers(entity.Owner, entity.Comp.DelaminateState, layers);
                 break;
             case SuperMatterVisualState.RandomEvent:
                 if (entity.Comp.RandomEvent == null)
                     break;
-                SetVisualLayers(entity.Comp.RandomEvent, layers, args.Sprite);
+                SetVisualLayers(entity.Owner, entity.Comp.RandomEvent, layers);
                 entity.Comp.RandomEventTime = _gameTiming.CurTime + TimeSpan.FromSeconds(entity.Comp.RandomEventDuration);
                 break;
             default:
@@ -81,7 +82,7 @@ public sealed partial class SuperMatterObserverVisualReceiverSystem : EntitySyst
         }
     }
 
-    private void SetVisualLayers(Dictionary<SuperMatterVisualLayers, string> state, Dictionary<SuperMatterVisualLayers, int> layers, SpriteComponent sprite)
+    private void SetVisualLayers(EntityUid uid, Dictionary<SuperMatterVisualLayers, string> state, Dictionary<SuperMatterVisualLayers, int> layers)
     {
         foreach (SuperMatterVisualLayers visualLayerKey in Enum.GetValues(typeof(SuperMatterVisualLayers)))
         {
@@ -89,11 +90,11 @@ public sealed partial class SuperMatterObserverVisualReceiverSystem : EntitySyst
                 continue;
             if (!state.TryGetValue(visualLayerKey, out var rsiState))
             {
-                sprite.LayerSetVisible(layers[visualLayerKey], false);
+                _sprite.LayerSetVisible(uid, layers[visualLayerKey], false);
                 continue;
             }
-            sprite.LayerSetState(layer, rsiState);
-            sprite.LayerSetVisible(layer, true);
+            _sprite.LayerSetRsiState(uid, layer, rsiState);
+            _sprite.LayerSetVisible(uid, layer, true);
         }
     }
 }

@@ -436,9 +436,3 @@ ent-AirlockHatchSyndicateLocked = { ent-AirlockHatchSyndicate }
 ent-AirlockHatchMaintenanceLocked = { ent-AirlockHatchMaintenance }
     .desc = { ent-AirlockHatchMaintenance.desc }
     .suffix = Закрыт
-
-# SS220 Science External Airlock begin
-ent-AirlockExternalGlassScienceLocked = { ent-AirlockExternalGlass }
-    .suffix = Внешний, Стеклянный, Научный, Закрыт
-    .desc = { ent-AirlockExternalGlass.desc }
-# SS220 Science External Airlock end
