@@ -119,7 +119,14 @@ public sealed class ClientClothingSystem : ClothingSystem
                 if (args.Slot != "head" || !HasComp<GlassesOnForeheadComponent>(uid) ||
                     !HasComp<ChameleonClothingComponent>(uid) ||
                     MetaData(uid).EntityPrototype is not { } original ||
-                    !original.TryGetComponent<ClothingComponent>(out var originalClothing, EntityManager.ComponentFactory) ||
+                    !original.TryGetComponent<ClothingComponent>(out var originalClothing, EntityManager.ComponentFactory))
+                    return;
+
+                if (inventory.SpeciesId == null ||
+                    !originalClothing.ClothingVisuals.TryGetValue($"head-{inventory.SpeciesId}", out layers))
+                    originalClothing.ClothingVisuals.TryGetValue("head", out layers);
+
+                if (layers == null &&
                     !TryGetDefaultVisuals(uid, originalClothing, args.Slot, inventory.SpeciesId, out layers))
                     return;
                 // SS220-glasses-on-forehead-end

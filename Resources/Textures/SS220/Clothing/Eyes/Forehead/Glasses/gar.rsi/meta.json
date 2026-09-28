@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/5a73e8f825ff279e82949b9329783a9e3070e2da, alt-equipped-EYES-vox && super-equipped-EYES-vox && equipped-EYES-vox && equipped-HELMET && equipped-HELMET-arachnid && equipped-HELMET-vox && alt-equipped-HELMET && alt-equipped-HELMET-arachnid && alt-equipped-HELMET-vox && super-equipped-HELMET && super-equipped-HELMET-arachnid && super-equipped-HELMET-vox sprited by Dinazewwr (Discord) for SS220. equipped-EYES-arachnid modified from equipped-EYES by HTMLSystem",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "equipped-HELMET",
+      "directions": 4
+    },
+    {
+      "name": "alt-equipped-HELMET",
+      "directions": 4
+    },
+    {
+      "name": "super-equipped-HELMET",
+      "directions": 4
+    },
+    {
+      "name": "equipped-HELMET-arachnid",
+      "directions": 4
+    },
+    {
+      "name": "alt-equipped-HELMET-arachnid",
+      "directions": 4
+    },
+    {
+      "name": "super-equipped-HELMET-arachnid",
+      "directions": 4
+    },
+    {
+      "name": "equipped-HELMET-vox",
+      "directions": 4
+    },
+    {
+      "name": "alt-equipped-HELMET-vox",
+      "directions": 4
+    },
+    {
+      "name": "super-equipped-HELMET-vox",
+      "directions": 4
+    }
+  ]
+}

@@ -12,6 +12,10 @@ using Content.Shared.Prototypes;
 using Content.Shared.SS220.IgnoreLightVision.Components;
 using Content.Shared.SS220.Clothing.Components;
 using Content.Shared.SS220.NightVision;
+using Robust.Client.GameObjects;
+using Robust.Client.ResourceManagement;
+using Robust.Shared.Serialization.TypeSerializers.Implementations;
+using Robust.Shared.Utility;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
@@ -151,15 +155,22 @@ public sealed class ForeheadGlassesTest : GameTest
         });
     }
 
-    [Test]
-    public async Task EverySupportedPrototypeSupportsBothSlotsWithoutFolding()
+    [TestCase("MobHuman")]
+    [TestCase("MobArachnid")]
+    [TestCase("MobMoth")]
+    [TestCase("MobVox")]
+    [TestCase("MobReptilian")]
+    [TestCase("MobDwarf")]
+    [TestCase("MobHamster")]
+    public async Task EverySupportedPrototypeSupportsBothSlotsWithoutFolding(string wearerPrototype)
     {
         await Client.WaitAssertion(() =>
         {
             var entities = Client.ResolveDependency<IEntityManager>();
             var prototypes = Client.ResolveDependency<IPrototypeManager>();
-            var wearer = entities.SpawnEntity("MobHuman", MapCoordinates.Nullspace);
+            var wearer = entities.SpawnEntity(wearerPrototype, MapCoordinates.Nullspace);
             var missingVisuals = new List<string>();
+            var cache = Client.ResolveDependency<IResourceCache>();
             foreach (var prototype in prototypes.EnumeratePrototypes<EntityPrototype>())
             {
                 if (prototype.Abstract || !prototype.HasComponent<GlassesOnForeheadComponent>(entities.ComponentFactory))
@@ -176,6 +187,19 @@ public sealed class ForeheadGlassesTest : GameTest
                     Assert.That(visuals.Layers.Count, Is.EqualTo(2), prototype.ID);
                     Assert.That(visuals.Layers[1].Item2.State, Is.EqualTo("equipped-HELMET-unshaded"), prototype.ID);
                     Assert.That(visuals.Layers[1].Item2.Shader, Is.EqualTo("unshaded"), prototype.ID);
+                }
+                if (prototype.ID is "ClothingSponsorGlassesJujutsuShlepa" or "ClothingSponsorGlassesJujutsuShlepaSunglasses")
+                    Assert.That(visuals.Layers[0].Item2.RsiPath,
+                        Is.EqualTo("SS220/Clothing/Sponsor/Eyes/Glasses/nanamigoggles.rsi"), prototype.ID);
+
+                foreach (var (_, layer) in visuals.Layers)
+                {
+                    var rsi = layer.RsiPath != null
+                        ? cache.GetResource<RSIResource>(SpriteSpecifierSerializer.TextureRoot / new ResPath(layer.RsiPath)).RSI
+                        : entities.GetComponent<SpriteComponent>(glasses).BaseRSI;
+                    Assert.That(rsi, Is.Not.Null, prototype.ID);
+                    Assert.That(rsi!.TryGetState(layer.State!, out _), Is.True,
+                        $"{prototype.ID} on {wearerPrototype}: missing {layer.State}");
                 }
                 if (visuals.Layers.Count == 0)
                     missingVisuals.Add(prototype.ID);

@@ -94,24 +94,6 @@
     - PetWearable
     - WhitelistChameleon
 
-- type: entity
-  parent: [ClothingEyesHudBase]
-  id: SS220ClothingEyesHudBeerBase
-  abstract: true # SS220-glasses-on-forehead
-  name: beer goggles
-  description: A pair of sunHud outfitted with apparatus to scan reagents, as well as providing an innate understanding of liquid viscosity while in motion.
-  components:
-  - type: Sprite
-    sprite: Clothing/Eyes/Hud/beergoggles.rsi
-  - type: Clothing
-    sprite: Clothing/Eyes/Hud/beergoggles.rsi
-  - type: ShowThirstIcons
-  - type: SolutionScanner
-  - type: Tag
-    tags:
-    - PetWearable
-    - WhitelistChameleon
-
 # SS220-glasses-on-forehead: keep variants without forehead sprites on the base.
 - type: entity
   parent: [SS220ClothingEyesHudBeerBase, SS220GlassesOnForeheadBase]
@@ -241,6 +223,16 @@
   - type: Clothing
     slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: Clothing/Eyes/Hud/synd.rsi
+    # SS220-glasses-on-forehead-begin
+    clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Eyes/Forehead/Hud/synd.rsi
+        state: equipped-HELMET
+      head-arachnid:
+      - sprite: SS220/Clothing/Eyes/Forehead/Hud/synd.rsi
+        state: equipped-HELMET-arachnid
+    # SS220-glasses-on-forehead-end
+
   - type: ShowSyndicateIcons
   #SS220 Syndie visor buff start
   - type: EyeProtection
@@ -264,6 +256,16 @@
   - type: Clothing
     slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: Clothing/Eyes/Hud/syndagent.rsi
+    # SS220-glasses-on-forehead-begin
+    clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Eyes/Forehead/Hud/syndagent.rsi
+        state: equipped-HELMET
+      head-arachnid:
+      - sprite: SS220/Clothing/Eyes/Forehead/Hud/syndagent.rsi
+        state: equipped-HELMET-arachnid
+    # SS220-glasses-on-forehead-end
+
   - type: ShowSyndicateIcons
   - type: ShowHealthBars
     damageContainers:

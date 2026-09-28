@@ -9,6 +9,12 @@
     - type: Clothing
       slots: [EYES, HEAD] # SS220-glasses-on-forehead
       sprite: Corvax/Clothing/Eyes/Glasses/salesman.rsi
+      # SS220-glasses-on-forehead-begin
+      clothingVisuals:
+        head:
+        - sprite: SS220/Clothing/Eyes/Forehead/Corvax/Glasses/salesman.rsi
+          state: equipped-HELMET
+      # SS220-glasses-on-forehead-end
 
 - type: entity
   parent: [ClothingEyesBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
@@ -21,3 +27,9 @@
     - type: Clothing
       slots: [EYES, HEAD] # SS220-glasses-on-forehead
       sprite: Corvax/Clothing/Eyes/Glasses/kim.rsi
+      # SS220-glasses-on-forehead-begin
+      clothingVisuals:
+        head:
+        - sprite: SS220/Clothing/Eyes/Forehead/Corvax/Glasses/kim.rsi
+          state: equipped-HELMET
+      # SS220-glasses-on-forehead-end

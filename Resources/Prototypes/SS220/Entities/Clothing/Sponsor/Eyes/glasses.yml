@@ -39,6 +39,10 @@
   - type: Clothing
     slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: SS220/Clothing/Sponsor/Eyes/Glasses/nanamigoggles.rsi
+    clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Sponsor/Eyes/Glasses/nanamigoggles.rsi
+        state: equipped-HELMET
 
 - type: entity
   parent: [ ClothingSponsorGlassesJujutsuShlepa, SS220ClothingEyesGlassesSunglassesBase ]

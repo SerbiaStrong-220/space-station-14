@@ -141,6 +141,17 @@
       sprite: Clothing/Eyes/Glasses/thermal.rsi
     - type: Clothing
       sprite: Clothing/Eyes/Glasses/thermal.rsi
+      clothingVisuals:
+        head:
+        - sprite: SS220/Clothing/Eyes/Forehead/Glasses/thermal.rsi
+          state: equipped-HELMET
+        head-arachnid:
+        - sprite: SS220/Clothing/Eyes/Forehead/Glasses/thermal.rsi
+          state: equipped-HELMET-arachnid
+        head-moth:
+        - sprite: SS220/Clothing/Eyes/Forehead/Glasses/thermal.rsi
+          state: equipped-HELMET-moth
+
     - type: ChameleonClothing
       slot: [eyes]
       default: ClothingEyesGlassesThermal
@@ -169,6 +180,16 @@
     - type: Clothing
       slots: [EYES, HEAD] # SS220-glasses-on-forehead
       sprite: Clothing/Eyes/Glasses/thermal.rsi
+      clothingVisuals:
+        head:
+        - sprite: SS220/Clothing/Eyes/Forehead/Glasses/thermal.rsi
+          state: equipped-HELMET
+        head-arachnid:
+        - sprite: SS220/Clothing/Eyes/Forehead/Glasses/thermal.rsi
+          state: equipped-HELMET-arachnid
+        head-moth:
+        - sprite: SS220/Clothing/Eyes/Forehead/Glasses/thermal.rsi
+          state: equipped-HELMET-moth
 
 - type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons, SS220GlassesOnForeheadBase]
