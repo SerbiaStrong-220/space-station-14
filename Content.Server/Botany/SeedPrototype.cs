@@ -172,6 +172,7 @@ public partial class SeedData
 
     [DataField] public int Yield;
     [DataField] public float Lifespan;
+    [DataField] public int MaxYield = int.MaxValue; //SS220 MaxYield
     [DataField] public float Maturation;
     [DataField] public float Production;
     [DataField] public int GrowthStages = 6;
@@ -292,6 +293,7 @@ public partial class SeedData
 
             Endurance = Endurance,
             Yield = Yield,
+            MaxYield = MaxYield, //SS220 MaxYield
             Lifespan = Lifespan,
             Maturation = Maturation,
             Production = Production,
@@ -355,6 +357,7 @@ public partial class SeedData
 
             Endurance = Endurance,
             Yield = Yield,
+            MaxYield = other.MaxYield, //SS220 MaxYield
             Lifespan = Lifespan,
             Maturation = Maturation,
             Production = Production,

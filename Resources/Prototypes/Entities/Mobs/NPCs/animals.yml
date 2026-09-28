@@ -4,6 +4,12 @@
   id: MobBat
   description: Some cultures find them terrifying, others crunchy on the teeth.
   components:
+  # SS220 ADD NIGHT VISION START
+  - type: NightVision
+    profile: NightVisionLightBlue
+    enabled: false
+    action: ActionToggleNightVisionInnate
+  # SS220 ADD NIGHT VISION END
   - type: MovementSpeedModifier
     baseWalkSpeed : 3
     baseSprintSpeed : 6
@@ -1844,6 +1850,12 @@
   id: MobMouse
   description: Squeak!
   components:
+  # SS220 ADD NIGHT VISION START
+  - type: NightVision
+    profile: NightVisionGray
+    enabled: false
+    action: ActionToggleNightVisionInnate
+  # SS220 ADD NIGHT VISION END
 #SS220 Animalistic Languages begin
   - type: Language
     availableLanguages:
@@ -2186,6 +2198,12 @@
   id: MobLizard
   description: A harmless dragon.
   components:
+  # SS220 ADD NIGHT VISION START
+  - type: NightVision
+    profile: NightVisionLightBlue
+    enabled: false
+    action: ActionToggleNightVisionInnate
+  # SS220 ADD NIGHT VISION END
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3
@@ -2595,6 +2613,12 @@
   id: MobSnake
   description: Hissss! Bites aren't poisonous.
   components:
+  # SS220 ADD NIGHT VISION START
+  - type: NightVision
+    profile: NightVisionLightBlue
+    enabled: false
+    action: ActionToggleNightVisionInnate
+  # SS220 ADD NIGHT VISION END
   - type: Sprite
     drawdepth: Mobs
     layers:
@@ -2646,6 +2670,12 @@
   id: MobSpiderBase
   abstract: true
   components:
+  # SS220 ADD NIGHT VISION START
+  - type: NightVision
+    profile: NightVisionLightGreen
+    enabled: false
+    action: ActionToggleNightVisionInnate
+  # SS220 ADD NIGHT VISION END
   - type: Physics
   - type: Fixtures
     fixtures:
@@ -3290,6 +3320,12 @@
   id: MobCat
   description: Feline pet, very funny.
   components:
+  # SS220 ADD NIGHT VISION START
+  - type: NightVision
+    profile: NightVisionLightGray
+    enabled: false
+    action: ActionToggleNightVisionInnate
+  # SS220 ADD NIGHT VISION END
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Pets/cat.rsi

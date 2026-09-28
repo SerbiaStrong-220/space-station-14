@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 07/15/2026 16:59:48
-  entityCount: 1354
+  time: 08/29/2026 08:33:30
+  entityCount: 1351
 maps:
 - 4449
 grids:
@@ -1333,11 +1333,6 @@ entities:
     - type: Transform
       pos: 25.869886,18.129725
       parent: 1
-  - uid: 1206
-    components:
-    - type: Transform
-      pos: 21.90789,32.990456
-      parent: 1
   - uid: 1220
     components:
     - type: Transform
@@ -1357,11 +1352,6 @@ entities:
     components:
     - type: Transform
       pos: 28.6748,21.952425
-      parent: 1
-  - uid: 1224
-    components:
-    - type: Transform
-      pos: 21.046778,33.025185
       parent: 1
 - proto: CandleRedSmallInfinite
   entities:
@@ -7663,6 +7653,13 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 22.5,29.5
       parent: 1
+- proto: VoidPortalGate
+  entities:
+  - uid: 708
+    components:
+    - type: Transform
+      pos: 21.5,33.5
+      parent: 1
 - proto: VoidSeedling
   entities:
   - uid: 16
@@ -7820,59 +7817,7 @@ entities:
     - type: Transform
       pos: 33.12219,43.000336
       parent: 1
-- proto: VoidTeleportExit
-  entities:
-  - uid: 434
-    components:
-    - type: Transform
-      pos: 19.5,18.5
-      parent: 1
-  - uid: 436
-    components:
-    - type: Transform
-      pos: 25.5,18.5
-      parent: 1
-  - uid: 437
-    components:
-    - type: Transform
-      pos: 28.5,22.5
-      parent: 1
-  - uid: 463
-    components:
-    - type: Transform
-      pos: 14.5,20.5
-      parent: 1
-  - uid: 682
-    components:
-    - type: Transform
-      pos: 12.5,25.5
-      parent: 1
-  - uid: 685
-    components:
-    - type: Transform
-      pos: 13.5,29.5
-      parent: 1
-  - uid: 708
-    components:
-    - type: Transform
-      pos: 21.5,33.5
-      parent: 1
-  - uid: 709
-    components:
-    - type: Transform
-      pos: 16.5,32.5
-      parent: 1
-  - uid: 710
-    components:
-    - type: Transform
-      pos: 26.5,32.5
-      parent: 1
-  - uid: 1183
-    components:
-    - type: Transform
-      pos: 29.5,27.5
-      parent: 1
-- proto: VoidTeleportTarget
+- proto: VoidTeleportDestination
   entities:
   - uid: 1313
     components:
@@ -7888,11 +7833,6 @@ entities:
     components:
     - type: Transform
       pos: 19.5,31.5
-      parent: 1
-  - uid: 1316
-    components:
-    - type: Transform
-      pos: 24.5,22.5
       parent: 1
   - uid: 1317
     components:
@@ -7963,6 +7903,53 @@ entities:
     components:
     - type: Transform
       pos: 24.5,28.5
+      parent: 1
+- proto: VoidTeleportExit
+  entities:
+  - uid: 434
+    components:
+    - type: Transform
+      pos: 19.5,18.5
+      parent: 1
+  - uid: 436
+    components:
+    - type: Transform
+      pos: 25.5,18.5
+      parent: 1
+  - uid: 437
+    components:
+    - type: Transform
+      pos: 28.5,22.5
+      parent: 1
+  - uid: 463
+    components:
+    - type: Transform
+      pos: 14.5,20.5
+      parent: 1
+  - uid: 682
+    components:
+    - type: Transform
+      pos: 12.5,25.5
+      parent: 1
+  - uid: 685
+    components:
+    - type: Transform
+      pos: 13.5,29.5
+      parent: 1
+  - uid: 709
+    components:
+    - type: Transform
+      pos: 16.5,32.5
+      parent: 1
+  - uid: 710
+    components:
+    - type: Transform
+      pos: 26.5,32.5
+      parent: 1
+  - uid: 1183
+    components:
+    - type: Transform
+      pos: 29.5,27.5
       parent: 1
 - proto: VoidTree
   entities:
