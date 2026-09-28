@@ -109283,18 +109283,6 @@ entities:
       inSlotFlag: HEAD
     - type: Physics
       canCollide: False
-- proto: ClothingHeadHatChef
-  entities:
-  - uid: 40877
-    components:
-    - type: Transform
-      pos: -17.319519,61.937584
-      parent: 2
-    - type: Storage
-      storedItems:
-        invalid:
-          position: 0,0
-          _rotation: South
     - type: ContainerContainer
       containers:
         storagebase: !type:Container
