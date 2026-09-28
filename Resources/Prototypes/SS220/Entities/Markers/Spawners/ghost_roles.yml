@@ -10,7 +10,7 @@
     name: spider-royQueen-name
     description: spider-royQueen-desc
     rules: spider-royQueen-desc
-    job: SpiderQueenPlayer
+    job: SpiderQueenJob
     mindRoles:
     - MindRoleSpiderQueen
     raffle:
