@@ -20,10 +20,6 @@
         - MobMask
         layer:
         - MobLayer
-  #SS220 movement parameters begin
-  - type: MovementSpeedModifier
-    baseAcceleration: 4
-  #SS220 movement parameters end
   - type: Clickable
   - type: InteractionOutline
   - type: Input
