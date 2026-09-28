@@ -280,10 +280,13 @@ namespace Content.Server.Ghost
             // Keep colors explicitly configured in prototypes or saved entities.
             if (component.Color == Color.White)
             {
-                component.Color = new Color(
-                    (float) _random.Next(1, 255) / byte.MaxValue,
-                    (float) _random.Next(1, 255) / byte.MaxValue,
-                    (float) _random.Next(1, 255) / byte.MaxValue);
+                // Full value and limited saturation keep even blue/purple ghosts light.
+                // Every RGB channel stays at least 0.45; sprite transparency is applied separately.
+                component.Color = Color.FromHsv(new Vector4(
+                    _random.NextFloat(),
+                    _random.NextFloat(0.35f, 0.55f),
+                    1f,
+                    1f));
             }
             //SS220 colourful ghost end
 
