@@ -79,6 +79,25 @@
     - Hair
 
 - type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatHoodSchema
+  categories: [ HideSpawnMenu ]
+  name: schema hood
+  description: On a station where silence is a rarity, the schemonk silence becomes the loudest voice.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hoods/schema.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hoods/schema.rsi
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Hair
+
+- type: entity
   parent: ClothingHeadHatHoodWinterBase
   id: ClothingHeadHatHoodHeartFinaly
   name: heart hood

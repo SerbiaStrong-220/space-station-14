@@ -38,14 +38,6 @@ public sealed partial class GhostComponent : Component
     [DataField]
     public EntityUid? ToggleGhostHearingActionEntity;
 
-    // SS220 ADD GHOST HUD'S START
-    [DataField]
-    public EntProtoId ToggleHudOnOtherAction = "ActionToggleHudOnOther";
-
-    [DataField]
-    public EntityUid? ToggleHudOnOtherActionEntity;
-    // SS220 ADD GHOST HUD'S END
-
     //ss220 add filter tts for ghost start
     [DataField]
     public EntProtoId ToggleRadioChannelsUI = "ActionToggleRadioChannelsUI";
@@ -119,12 +111,14 @@ public sealed partial class GhostComponent : Component
     [DataField, AutoNetworkedField]
     public bool CanReturnToBody;
 
+    //SS220 colourful ghost begin
     /// <summary>
-    /// Ghost color
+    /// Networked tint of the ghost's body layer. Randomized on the server when left white.
     /// </summary>
-    /// <remarks>Used to allow admins to change ghost colors. Should be removed if the capability to edit existing sprite colors is ever added back.</remarks>
+    /// <remarks>Also allows admins to change the color. Sprite transparency is applied separately.</remarks>
     [DataField, AutoNetworkedField]
     public Color Color = Color.White;
+    //SS220 colourful ghost end
 }
 
 /// <summary>
@@ -152,5 +146,3 @@ public sealed partial class BooActionEvent : InstantActionEvent { }
 public sealed partial class RespawnActionEvent : InstantActionEvent { } //SS-220 noDeath
 
 public sealed partial class ToggleAGhostBodyVisualsActionEvent : InstantActionEvent { } //SS220-ghost-hats
-
-public sealed partial class ToggleHudOnOtherActionEvent : InstantActionEvent { } //SS220 ADD GHOST HUD'S

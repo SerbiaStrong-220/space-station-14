@@ -1,0 +1,49 @@
+- type: nightVisionProfile
+  id: NightVisionGreen
+  tint: "#26FF26"
+  darknessBrightness: 0.6
+  overexposure: true
+  overexposureStart: 0.25
+  overexposureEnd: 0.8
+  overexposureStrength: 0.9
+  noise: 0.015
+
+- type: nightVisionProfile
+  id: NightVisionDeviceGrayscale
+  tint: "#FFFFFF"
+  darknessBrightness: 0.6
+  overexposure: true
+  overexposureStart: 0.25
+  overexposureEnd: 0.8
+  overexposureStrength: 0.9
+  noise: 0.015
+
+- type: nightVisionProfile
+  id: NightVisionLightGreen
+  tint: "#B3FFB3"
+  darknessBrightness: 0.8
+  overexposure: false
+
+- type: nightVisionProfile
+  id: NightVisionPaleRed
+  tint: "#FFADAD"
+  darknessBrightness: 0.7
+  overexposure: false
+
+- type: nightVisionProfile
+  id: NightVisionGray
+  tint: "#CCCCCC"
+  darknessBrightness: 0.7
+  overexposure: false
+
+- type: nightVisionProfile
+  id: NightVisionLightGray
+  tint: "#EEEEEE"
+  darknessBrightness: 0.85
+  overexposure: false
+
+- type: nightVisionProfile
+  id: NightVisionLightBlue
+  tint: "#B3DDFF"
+  darknessBrightness: 0.8
+  overexposure: false

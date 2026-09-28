@@ -65,7 +65,7 @@
     soundHit:
       path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
   #- type: SpawnOnTrigger
-  #  prototype: SpitballerExplotionPart
+  #  prototype: SpitballerExplosionPart
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: Default
@@ -79,8 +79,8 @@
 
 - type: entity
   parent: CollideRune
-  id: SpitballerExplotionPart
-  name: SpitballerExplotionPart
+  id: SpitballerExplosionPart
+  name: SpitballerExplosionPart
   categories: [ HideSpawnMenu ]
   components:
     - type: Explosive

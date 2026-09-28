@@ -12,12 +12,12 @@ public sealed partial class SpawnBeforeTeleportSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<SpawnBeforeTeleportComponent, BeforeTeleportTargetEvent>(OnBeforeTeleport);
+        SubscribeLocalEvent<SpawnBeforeTeleportComponent, BeforeTeleportEvent>(OnBeforeTeleport);
     }
 
-    private void OnBeforeTeleport(Entity<SpawnBeforeTeleportComponent> ent, ref BeforeTeleportTargetEvent args)
+    private void OnBeforeTeleport(Entity<SpawnBeforeTeleportComponent> ent, ref BeforeTeleportEvent args)
     {
-        var position = _transform.GetMapCoordinates(ent);
-        EntityManager.PredictedSpawn(ent.Comp.SpawnedEnt, position);
+        var departureCoordinates = _transform.GetMapCoordinates(args.Target);
+        EntityManager.PredictedSpawn(ent.Comp.SpawnPrototype, departureCoordinates);
     }
 }
