@@ -9,17 +9,16 @@ public static class LabelNameMarkup
 {
     public static string BuildName(LabelComponent? label, string name)
     {
-        var escapedName = FormattedMessage.EscapeText(name);
         if (label is not { CurrentLabel: not null } || label.LabelColor == Color.White)
-            return escapedName;
+            return name;
 
-        var escapedLabel = FormattedMessage.EscapeText(label.CurrentLabel);
-        var plainSuffix = Loc.GetString("comp-label-format", ("baseName", string.Empty), ("label", escapedLabel));
-        if (!escapedName.EndsWith(plainSuffix, StringComparison.Ordinal))
-            return escapedName;
+        var labelText = label.CurrentLabel;
+        var plainSuffix = Loc.GetString("comp-label-format", ("baseName", string.Empty), ("label", labelText));
+        if (!name.EndsWith(plainSuffix, StringComparison.Ordinal))
+            return name;
 
-        var baseName = escapedName[..^plainSuffix.Length];
-        var styledLabel = $"[bold][color={label.LabelColor.ToHex()}]{escapedLabel}[/color][/bold]";
+        var baseName = FormattedMessage.EscapeText(name[..^plainSuffix.Length]);
+        var styledLabel = $"[bold][color={label.LabelColor.ToHex()}]{labelText}[/color][/bold]";
         var styledSuffix = Loc.GetString("comp-label-format",
             ("baseName", string.Empty),
             ("label", styledLabel));
