@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 09/28/2026 09:58:47
-  entityCount: 46459
+  time: 09/28/2026 11:36:43
+  entityCount: 46455
 maps:
 - 1
 grids:
@@ -27391,7 +27391,7 @@ entities:
       pos: -102.5,24.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -244127.27
+      secondsUntilStateChange: -244253.33
       state: Opening
   - uid: 1760
     components:
@@ -29203,7 +29203,7 @@ entities:
       pos: 1.5,161.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1626189.8
+      secondsUntilStateChange: -1626315.8
       changeAirtight: False
       state: Opening
     - type: DeviceLinkSource
@@ -111110,17 +111110,6 @@ entities:
       canCollide: False
     - type: InsideEntityStorage
       storage: 24652
-- proto: ClothingShoesColorBlack
-  entities:
-  - uid: 31213
-    components:
-    - type: Transform
-      parent: 31208
-    - type: Clothing
-      inSlot: shoes
-      inSlotFlag: FEET
-    - type: Physics
-      canCollide: False
 - proto: ClothingShoesColorBrown
   entities:
   - uid: 19089
@@ -112044,14 +112033,8 @@ entities:
   - uid: 31209
     components:
     - type: Transform
-      parent: 31208
-    - type: Clothing
-      inSlot: jumpsuit
-      inSlotFlag: INNERCLOTHING
-    - type: SuitSensor
-      user: 31208
-    - type: Physics
-      canCollide: False
+      pos: -26.559475,87.51222
+      parent: 2
   - uid: 45095
     components:
     - type: Transform
@@ -124415,7 +124398,7 @@ entities:
       pos: 45.5,58.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -519876.84
+      secondsUntilStateChange: -520002.9
       state: Closing
     - type: DeviceLinkSource
       lastSignals:
@@ -141484,7 +141467,7 @@ entities:
     - type: Openable
       opened: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.4586361
+      sprayFizzinessThresholdRoll: 0.8701873
     - type: MeleeWeapon
       nextAttack: -13.2999857
     - type: EmitSoundOnCollide
@@ -141806,7 +141789,7 @@ entities:
     - type: EmitSoundOnCollide
       nextSound: -20188.979811
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.14186306
+      sprayFizzinessThresholdRoll: 0.4517
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -141869,7 +141852,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.8394901
+      sprayFizzinessThresholdRoll: 0.47254056
     - type: NameModifier
       baseName: бутылка Гильдлагер
     - type: ContainerContainer
@@ -142986,7 +142969,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.7607034
+      sprayFizzinessThresholdRoll: 0.3772954
     - type: NameModifier
       baseName: Особый Запас Дядюшки Гита
     - type: ContainerContainer
@@ -143040,7 +143023,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.79130906
+      sprayFizzinessThresholdRoll: 0.11636633
     - type: NameModifier
       baseName: вино Особое Двухбородое Бородатое
     - type: ContainerContainer
@@ -143079,7 +143062,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.42823908
+      sprayFizzinessThresholdRoll: 0.40022352
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -143111,7 +143094,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.2347173
+      sprayFizzinessThresholdRoll: 0.46231115
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -146368,7 +146351,7 @@ entities:
       - 40096
       - 40106
     - type: Door
-      secondsUntilStateChange: -1535453.9
+      secondsUntilStateChange: -1535579.9
       state: Closing
   - uid: 9985
     components:
@@ -146454,7 +146437,7 @@ entities:
       deviceLists:
       - 46086
     - type: Door
-      secondsUntilStateChange: -1454128.9
+      secondsUntilStateChange: -1454254.9
       state: Closing
   - uid: 11562
     components:
@@ -148338,7 +148321,7 @@ entities:
     - type: Firelock
       emergencyCloseCooldown: 8075.4252599
     - type: Door
-      secondsUntilStateChange: -558574.8
+      secondsUntilStateChange: -558700.9
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -155873,15 +155856,13 @@ entities:
   - uid: 31211
     components:
     - type: Transform
-      parent: 31208
-    - type: Physics
-      canCollide: False
+      pos: -26.403225,87.21535
+      parent: 2
   - uid: 31212
     components:
     - type: Transform
-      parent: 31208
-    - type: Physics
-      canCollide: False
+      pos: -26.746975,87.29347
+      parent: 2
 - proto: FoodFrozenCornuto
   entities:
   - uid: 14544
@@ -219608,93 +219589,6 @@ entities:
           showEnts: False
           occludes: True
           ents: []
-  - uid: 31208
-    components:
-    - type: Transform
-      pos: -26.5,87.5
-      parent: 2
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        shoes: !type:ContainerSlot
-          showEnts: False
-          occludes: False
-          ent: 31213
-        jumpsuit: !type:ContainerSlot
-          showEnts: False
-          occludes: False
-          ent: 31209
-        outerClothing: !type:ContainerSlot
-          showEnts: False
-          occludes: False
-          ent: null
-        gloves: !type:ContainerSlot
-          showEnts: False
-          occludes: False
-          ent: null
-        neck: !type:ContainerSlot
-          showEnts: False
-          occludes: False
-          ent: null
-        mask: !type:ContainerSlot
-          showEnts: False
-          occludes: False
-          ent: null
-        eyes: !type:ContainerSlot
-          showEnts: False
-          occludes: False
-          ent: null
-        ears: !type:ContainerSlot
-          showEnts: False
-          occludes: False
-          ent: null
-        head: !type:ContainerSlot
-          showEnts: False
-          occludes: False
-          ent: 31210
-        pocket1: !type:ContainerSlot
-          showEnts: False
-          occludes: False
-          ent: null
-        pocket2: !type:ContainerSlot
-          showEnts: False
-          occludes: False
-          ent: null
-        suitstorage: !type:ContainerSlot
-          showEnts: False
-          occludes: False
-          ent: null
-        id: !type:ContainerSlot
-          showEnts: False
-          occludes: False
-          ent: null
-        belt: !type:ContainerSlot
-          showEnts: False
-          occludes: False
-          ent: null
-        back: !type:ContainerSlot
-          showEnts: False
-          occludes: False
-          ent: null
-        body_root_part: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        hands_right: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: 31212
-        hands_left: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: 31211
-        body_organs: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
   - uid: 41112
     components:
     - type: Transform
@@ -278872,7 +278766,7 @@ entities:
       parent: 2
     - type: Door
       canCrush: True
-      secondsUntilStateChange: -162370.58
+      secondsUntilStateChange: -162496.64
       clickOpen: False
       state: Opening
     - type: DoorSignalControl
@@ -278907,7 +278801,7 @@ entities:
       pos: -52.5,187.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -606119.1
+      secondsUntilStateChange: -606245.2
       state: Opening
   - uid: 23105
     components:
@@ -278989,7 +278883,7 @@ entities:
       parent: 2
     - type: Door
       canCrush: True
-      secondsUntilStateChange: -162339.72
+      secondsUntilStateChange: -162465.78
       clickOpen: False
       state: Opening
     - type: DoorSignalControl
@@ -279024,7 +278918,7 @@ entities:
       pos: -53.5,188.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -570401.7
+      secondsUntilStateChange: -570527.75
       state: Opening
   - uid: 38967
     components:
@@ -279073,11 +278967,6 @@ entities:
     components:
     - type: Transform
       pos: -29.472404,206.17734
-      parent: 2
-  - uid: 35880
-    components:
-    - type: Transform
-      pos: -29.284904,205.14609
       parent: 2
 - proto: SpaceCash10
   entities:
