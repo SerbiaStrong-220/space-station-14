@@ -109272,26 +109272,6 @@ entities:
     - type: CollisionWake
       enabled: False
     - type: Conveyed
-- proto: ClothingHeadHatCargosoft
-  entities:
-  - uid: 31210
-    components:
-    - type: Transform
-      parent: 31208
-    - type: Clothing
-      inSlot: head
-      inSlotFlag: HEAD
-    - type: Physics
-      canCollide: False
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - invalid
-    - type: PilotedClothing
-      pilot: invalid
 - proto: ClothingHeadHatCone
   entities:
   - uid: 45129
