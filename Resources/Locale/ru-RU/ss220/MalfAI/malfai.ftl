@@ -154,3 +154,4 @@ cmd-malfai_make-already = '{$player}' уже является Неисправн
 cmd-malfai_make-disabled = Неисправный ИИ отключён настройками сервера.
 cmd-malfai_make-failed = Не удалось выдать роль Неисправного ИИ '{$player}'.
 cmd-malfai_make-done = Роль Неисправного ИИ выдана '{$player}'.
+command-description-MalfAiMakeCommand = Выдать привязанному станционному ИИ роль неисправного ИИ.

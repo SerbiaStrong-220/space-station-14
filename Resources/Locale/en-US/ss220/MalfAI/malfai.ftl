@@ -154,3 +154,4 @@ cmd-malfai_make-already = '{$player}' is already a Malfunctioning AI.
 cmd-malfai_make-disabled = Malfunctioning AI is disabled by server configuration.
 cmd-malfai_make-failed = Could not assign Malfunctioning AI to '{$player}'.
 cmd-malfai_make-done = Assigned Malfunctioning AI to '{$player}'.
+command-description-MalfAiMakeCommand = Assign the Malfunctioning AI role to the attached station AI.
