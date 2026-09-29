@@ -1,7 +1,7 @@
 - type: entity
   id: SpiritCloset
   parent: ClosetSteelBase
-  name: 
+  name: TestTestTest
   description: 
   components:
   - type: Appearance
@@ -11,4 +11,4 @@
     stateDoorClosed: 
   - type: Foldable
     folded: true
-  - type: 
+  - type: SpiritContainer
