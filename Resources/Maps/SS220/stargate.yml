@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 09/29/2026 17:14:10
-  entityCount: 46503
+  time: 09/29/2026 18:02:14
+  entityCount: 46499
 maps:
 - 1
 grids:
@@ -27436,7 +27436,7 @@ entities:
       pos: -102.5,24.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -260257.7
+      secondsUntilStateChange: -260544.5
       state: Opening
   - uid: 1760
     components:
@@ -29253,7 +29253,7 @@ entities:
       pos: 1.5,161.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1642320.2
+      secondsUntilStateChange: -1642607
       changeAirtight: False
       state: Opening
     - type: DeviceLinkSource
@@ -38163,11 +38163,6 @@ entities:
     - type: Transform
       pos: 55.5,22.5
       parent: 2
-  - uid: 8710
-    components:
-    - type: Transform
-      pos: 51.5,22.5
-      parent: 2
   - uid: 8922
     components:
     - type: Transform
@@ -45283,6 +45278,16 @@ entities:
     components:
     - type: Transform
       pos: -32.5,58.5
+      parent: 2
+  - uid: 5267
+    components:
+    - type: Transform
+      pos: 48.5,25.5
+      parent: 2
+  - uid: 5268
+    components:
+    - type: Transform
+      pos: 47.5,25.5
       parent: 2
   - uid: 5467
     components:
@@ -124699,7 +124704,7 @@ entities:
       pos: 45.5,58.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -536007.25
+      secondsUntilStateChange: -536294.06
       state: Closing
     - type: DeviceLinkSource
       lastSignals:
@@ -131864,6 +131869,12 @@ entities:
     components:
     - type: Transform
       pos: -64.5,83.5
+      parent: 2
+  - uid: 8428
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 76.5,53.5
       parent: 2
   - uid: 36467
     components:
@@ -141761,7 +141772,7 @@ entities:
     - type: Openable
       opened: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.6003717
+      sprayFizzinessThresholdRoll: 0.5219703
     - type: MeleeWeapon
       nextAttack: -13.2999857
     - type: EmitSoundOnCollide
@@ -142083,7 +142094,7 @@ entities:
     - type: EmitSoundOnCollide
       nextSound: -20188.979811
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.304891
+      sprayFizzinessThresholdRoll: 0.14633915
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -142146,7 +142157,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.77873147
+      sprayFizzinessThresholdRoll: 0.737912
     - type: NameModifier
       baseName: бутылка Гильдлагер
     - type: ContainerContainer
@@ -143040,7 +143051,7 @@ entities:
     - type: EmitSoundOnCollide
       nextSound: -878.4324549
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.7013576
+      sprayFizzinessThresholdRoll: 0.1237286
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -143334,7 +143345,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.83614355
+      sprayFizzinessThresholdRoll: 0.045684017
     - type: NameModifier
       baseName: Особый Запас Дядюшки Гита
     - type: ContainerContainer
@@ -143388,7 +143399,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.5780127
+      sprayFizzinessThresholdRoll: 0.5253203
     - type: NameModifier
       baseName: вино Особое Двухбородое Бородатое
     - type: ContainerContainer
@@ -143427,7 +143438,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.1546686
+      sprayFizzinessThresholdRoll: 0.8502444
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -143459,7 +143470,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.7309014
+      sprayFizzinessThresholdRoll: 0.6853436
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -146758,7 +146769,7 @@ entities:
       - 40096
       - 40106
     - type: Door
-      secondsUntilStateChange: -1551584.4
+      secondsUntilStateChange: -1551871.1
       state: Closing
   - uid: 9985
     components:
@@ -146844,7 +146855,7 @@ entities:
       deviceLists:
       - 46086
     - type: Door
-      secondsUntilStateChange: -1470259.4
+      secondsUntilStateChange: -1470546.1
       state: Closing
   - uid: 11562
     components:
@@ -148724,7 +148735,7 @@ entities:
     - type: Firelock
       emergencyCloseCooldown: 8075.4252599
     - type: Door
-      secondsUntilStateChange: -574705.2
+      secondsUntilStateChange: -574992
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -266359,17 +266370,10 @@ entities:
       parent: 2
 - proto: RandomArcade
   entities:
-  - uid: 8427
+  - uid: 8710
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 48.5,22.5
-      parent: 2
-  - uid: 8428
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 48.5,21.5
+      pos: 49.5,24.5
       parent: 2
   - uid: 11489
     components:
@@ -266405,12 +266409,6 @@ entities:
       parent: 2
 - proto: RandomDrinkBottle
   entities:
-  - uid: 5267
-    components:
-    - type: Transform
-      anchored: False
-      pos: 50.5,33.5
-      parent: 2
   - uid: 15586
     components:
     - type: Transform
@@ -266422,12 +266420,6 @@ entities:
     components:
     - type: Transform
       pos: -61.5,-5.5
-      parent: 2
-  - uid: 5268
-    components:
-    - type: Transform
-      anchored: False
-      pos: 50.5,32.5
       parent: 2
   - uid: 5705
     components:
@@ -274932,30 +274924,6 @@ entities:
       parent: 2
     - type: Fixtures
       fixtures: {}
-  - uid: 45050
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -46.497257,88.91244
-      parent: 2
-    - type: Fixtures
-      fixtures: {}
-  - uid: 45051
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -59.533306,92.21671
-      parent: 2
-    - type: Fixtures
-      fixtures: {}
-  - uid: 45052
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -66.37671,100.19674
-      parent: 2
-    - type: Fixtures
-      fixtures: {}
 - proto: SignDirectionalDorms
   entities:
   - uid: 31468
@@ -275077,6 +275045,14 @@ entities:
       fixtures: {}
 - proto: SignDirectionalHop
   entities:
+  - uid: 8427
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -34.5,88.5
+      parent: 2
+    - type: Fixtures
+      fixtures: {}
   - uid: 12313
     components:
     - type: Transform
@@ -275487,13 +275463,6 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -38.5,-10.5
-      parent: 2
-    - type: Fixtures
-      fixtures: {}
-  - uid: 36563
-    components:
-    - type: Transform
-      pos: -34.50126,88.71904
       parent: 2
     - type: Fixtures
       fixtures: {}
@@ -279293,7 +279262,7 @@ entities:
       parent: 2
     - type: Door
       canCrush: True
-      secondsUntilStateChange: -178501.02
+      secondsUntilStateChange: -178787.81
       clickOpen: False
       state: Opening
     - type: DoorSignalControl
@@ -279328,7 +279297,7 @@ entities:
       pos: -52.5,187.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -622249.5
+      secondsUntilStateChange: -622536.3
       state: Opening
   - uid: 23105
     components:
@@ -279410,7 +279379,7 @@ entities:
       parent: 2
     - type: Door
       canCrush: True
-      secondsUntilStateChange: -178470.16
+      secondsUntilStateChange: -178756.95
       clickOpen: False
       state: Opening
     - type: DoorSignalControl
@@ -279445,7 +279414,7 @@ entities:
       pos: -53.5,188.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -586532.06
+      secondsUntilStateChange: -586818.9
       state: Opening
   - uid: 38967
     components:
