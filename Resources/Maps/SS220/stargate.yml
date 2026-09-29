@@ -4,7 +4,7 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 09/29/2026 18:02:14
+  time: 09/29/2026 21:16:16
   entityCount: 46499
 maps:
 - 1
@@ -27436,7 +27436,7 @@ entities:
       pos: -102.5,24.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -260544.5
+      secondsUntilStateChange: -260682.61
       state: Opening
   - uid: 1760
     components:
@@ -29253,7 +29253,7 @@ entities:
       pos: 1.5,161.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1642607
+      secondsUntilStateChange: -1642745.1
       changeAirtight: False
       state: Opening
     - type: DeviceLinkSource
@@ -124704,7 +124704,7 @@ entities:
       pos: 45.5,58.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -536294.06
+      secondsUntilStateChange: -536432.2
       state: Closing
     - type: DeviceLinkSource
       lastSignals:
@@ -141772,7 +141772,7 @@ entities:
     - type: Openable
       opened: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.5219703
+      sprayFizzinessThresholdRoll: 0.4789622
     - type: MeleeWeapon
       nextAttack: -13.2999857
     - type: EmitSoundOnCollide
@@ -142094,7 +142094,7 @@ entities:
     - type: EmitSoundOnCollide
       nextSound: -20188.979811
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.14633915
+      sprayFizzinessThresholdRoll: 0.6433465
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -142157,7 +142157,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.737912
+      sprayFizzinessThresholdRoll: 0.04862091
     - type: NameModifier
       baseName: бутылка Гильдлагер
     - type: ContainerContainer
@@ -143051,7 +143051,7 @@ entities:
     - type: EmitSoundOnCollide
       nextSound: -878.4324549
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.1237286
+      sprayFizzinessThresholdRoll: 0.87933534
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -143345,7 +143345,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.045684017
+      sprayFizzinessThresholdRoll: 0.40073985
     - type: NameModifier
       baseName: Особый Запас Дядюшки Гита
     - type: ContainerContainer
@@ -143399,7 +143399,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.5253203
+      sprayFizzinessThresholdRoll: 0.916574
     - type: NameModifier
       baseName: вино Особое Двухбородое Бородатое
     - type: ContainerContainer
@@ -143438,7 +143438,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.8502444
+      sprayFizzinessThresholdRoll: 0.9336082
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -143470,7 +143470,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.6853436
+      sprayFizzinessThresholdRoll: 0.22952996
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -146769,7 +146769,7 @@ entities:
       - 40096
       - 40106
     - type: Door
-      secondsUntilStateChange: -1551871.1
+      secondsUntilStateChange: -1552009.2
       state: Closing
   - uid: 9985
     components:
@@ -146855,7 +146855,7 @@ entities:
       deviceLists:
       - 46086
     - type: Door
-      secondsUntilStateChange: -1470546.1
+      secondsUntilStateChange: -1470684.2
       state: Closing
   - uid: 11562
     components:
@@ -148735,7 +148735,7 @@ entities:
     - type: Firelock
       emergencyCloseCooldown: 8075.4252599
     - type: Door
-      secondsUntilStateChange: -574992
+      secondsUntilStateChange: -575130.1
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -196028,6 +196028,8 @@ entities:
     - type: AtmosPipeColor
       color: '#F6F439FF'
     - type: GasThermoMachine
+      maxTemperature: 243.15
+      minTemperature: 243.15
       targetTemperature: 243.15
   - uid: 29107
     components:
@@ -279262,7 +279264,7 @@ entities:
       parent: 2
     - type: Door
       canCrush: True
-      secondsUntilStateChange: -178787.81
+      secondsUntilStateChange: -178925.92
       clickOpen: False
       state: Opening
     - type: DoorSignalControl
@@ -279297,7 +279299,7 @@ entities:
       pos: -52.5,187.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -622536.3
+      secondsUntilStateChange: -622674.44
       state: Opening
   - uid: 23105
     components:
@@ -279379,7 +279381,7 @@ entities:
       parent: 2
     - type: Door
       canCrush: True
-      secondsUntilStateChange: -178756.95
+      secondsUntilStateChange: -178895.06
       clickOpen: False
       state: Opening
     - type: DoorSignalControl
@@ -279414,7 +279416,7 @@ entities:
       pos: -53.5,188.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -586818.9
+      secondsUntilStateChange: -586957
       state: Opening
   - uid: 38967
     components:
