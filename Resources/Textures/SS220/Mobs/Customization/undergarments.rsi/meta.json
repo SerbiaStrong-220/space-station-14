@@ -166,6 +166,23 @@
     {
       "name": "sock_striped_secondary",
       "directions": 4
+    },
+    {
+      "name": "tanktop_JR_primary",
+      "directions": 4
+    },
+    {
+      "name": "tanktop_JR_primary_vox",
+      "directions": 4
+    },
+    {
+      "name": "tanktop_JR_secondary",
+      "directions": 4
+    },
+    {
+      "name": "tanktop_JR_secondary_vox",
+      "directions": 4
+
     }
   ]
 }
