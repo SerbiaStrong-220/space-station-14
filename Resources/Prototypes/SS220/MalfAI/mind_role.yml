@@ -1,0 +1,13 @@
+﻿# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleMalfAi
+  name: ent-MindRoleMalfAi-name
+  description: ent-MindRoleMalfAi-desc
+  components:
+  - type: MindRole
+    antagPrototype: MalfunctioningAI
+    roleType: SiliconAntagonist
+    subtype: role-subtype-malfai
+    exclusiveAntag: true
+  - type: MalfAiRole

@@ -28,10 +28,10 @@ public sealed class HijackShuttleConditionSystem : EntitySystem
 
     private void OnGetProgress(EntityUid uid, HijackShuttleConditionComponent comp, ref ObjectiveGetProgressEvent args)
     {
-        args.Progress = GetProgress(args.MindId, args.Mind);
+        args.Progress = GetProgress(args.MindId, args.Mind, comp);
     }
 
-    private float GetProgress(EntityUid mindId, MindComponent mind)
+    private float GetProgress(EntityUid mindId, MindComponent mind, HijackShuttleConditionComponent comp)
     {
         // Not escaping alive if you're deleted/dead
         if (mind.OwnedEntity == null || _mind.IsCharacterDeadIc(mind))
@@ -45,20 +45,26 @@ public sealed class HijackShuttleConditionSystem : EntitySystem
         if (!_emergencyShuttle.EmergencyShuttleArrived)
             return 0f;
 
+        // The AI does not board. Its objective is settled only after the shuttle leaves.
+        if (!comp.RequireOwnerOnShuttle && !_emergencyShuttle.ShuttlesLeft)
+            return 0f;
+
         // Check hijack for each emergency shuttle
-        foreach (var stationData in EntityQuery<StationEmergencyShuttleComponent>())
+        var shuttles = EntityQueryEnumerator<StationEmergencyShuttleComponent>();
+        while (shuttles.MoveNext(out _, out var stationData))
         {
             if (stationData.EmergencyShuttle == null)
                 continue;
 
-            if (IsShuttleHijacked(stationData.EmergencyShuttle.Value, mindId))
+            // SS220 MalfAI: RequireOwnerOnShuttle is false for the AI, which never boards.
+            if (IsShuttleHijacked(stationData.EmergencyShuttle.Value, mindId, comp.RequireOwnerOnShuttle))
                 return 1f;
         }
 
         return 0f;
     }
 
-    private bool IsShuttleHijacked(EntityUid shuttleGridId, EntityUid mindId)
+    private bool IsShuttleHijacked(EntityUid shuttleGridId, EntityUid mindId, bool requireOwnerOnShuttle)
     {
         var gridPlayers = Filter.BroadcastGrid(shuttleGridId).Recipients;
         var humanoids = GetEntityQuery<HumanoidProfileComponent>();
@@ -99,6 +105,6 @@ public sealed class HijackShuttleConditionSystem : EntitySystem
             return false;
         }
 
-        return agentOnShuttle;
+        return !requireOwnerOnShuttle || agentOnShuttle;
     }
 }

@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Sprited by TTTomaTTT for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "hack_apc"
+    },
+    {
+      "name": "open_store"
+    },
+    {
+      "name": "deploy_turret"
+    },
+    {
+      "name": "blackout"
+    },
+    {
+      "name": "air_flood"
+    },
+    {
+      "name": "machine_override"
+    },
+    {
+      "name": "machine_overload"
+    },
+    {
+      "name": "robot_factory"
+    },
+    {
+      "name": "power_siphon"
+    },
+    {
+      "name": "chaos_pulse"
+    },
+    {
+      "name": "thermal_override"
+    },
+    {
+      "name": "lockdown"
+    },
+    {
+      "name": "turret_upgrade"
+    },
+    {
+      "name": "doomsday"
+    },
+    {
+      "name": "silent_records"
+    },
+    {
+      "name": "camera_upgrade"
+    }
+  ]
+}

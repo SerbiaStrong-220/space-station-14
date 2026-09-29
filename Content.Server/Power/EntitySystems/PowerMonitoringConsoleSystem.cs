@@ -226,6 +226,10 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
 
     public void OnNodeGroupRebuilt(EntityUid uid, PowerMonitoringDeviceComponent component, NodeGroupsRebuilt args)
     {
+        // SS220 MalfAI: chaos events can delete a device during a power grid rebuild.
+        if (TerminatingOrDeleted(uid))
+            return;
+
         if (component.IsCollectionMasterOrChild)
             AssignEntityAsCollectionMaster(uid, component);
 
@@ -753,17 +757,30 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
         if (!nodeContainer.Nodes.TryGetValue(nodeName, out var node) ||
             node.ReachableNodes.Count == 0)
         {
-            // Make a child the new master of the collection if necessary
-            if (device.ChildDevices.TryFirstOrNull(out var kvp))
+            // SS220 MalfAI: first child can already be gone after event teardown.
+            KeyValuePair<EntityUid, PowerMonitoringDeviceComponent>? liveChild = null;
+            foreach (var entry in device.ChildDevices)
             {
-                var newMaster = kvp.Value.Key;
-                var newMasterDevice = kvp.Value.Value;
+                if (!TerminatingOrDeleted(entry.Key))
+                {
+                    liveChild = entry;
+                    break;
+                }
+            }
+
+            if (liveChild is { } kvp)
+            {
+                var newMaster = kvp.Key;
+                var newMasterDevice = kvp.Value;
 
                 newMasterDevice.CollectionMaster = newMaster;
                 newMasterDevice.ChildDevices.Clear();
 
                 foreach ((var child, var childDevice) in device.ChildDevices)
                 {
+                    if (TerminatingOrDeleted(child))
+                        continue;
+
                     newMasterDevice.ChildDevices.Add(child, childDevice);
 
                     childDevice.CollectionMaster = newMaster;
@@ -807,6 +824,9 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
             if (!DevicesHaveMatchingNodes(nodeContainer, entNodeContainer))
                 continue;
 
+            if (TerminatingOrDeleted(ent)) // SS220 MalfAI
+                continue;
+
             device.ChildDevices.Add(ent, entDevice);
 
             entDevice.CollectionMaster = uid;
@@ -832,8 +852,14 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
 
     private void UpdateCollectionChildMetaData(EntityUid child, EntityUid master)
     {
+        // SS220 MalfAI: power events can delete a child or master before this callback.
+        if (TerminatingOrDeleted(child) || TerminatingOrDeleted(master))
+            return;
+
+        if (!TryComp(child, out TransformComponent? xform))
+            return;
+
         var netEntity = GetNetEntity(child);
-        var xform = Transform(child);
 
         var query = AllEntityQuery<PowerMonitoringConsoleComponent, TransformComponent>();
         while (query.MoveNext(out var ent, out var entConsole, out var entXform))
@@ -853,8 +879,14 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
 
     private void UpdateCollectionMasterMetaData(EntityUid master, int childCount)
     {
+        // SS220 MalfAI: same teardown race as UpdateCollectionChildMetaData.
+        if (TerminatingOrDeleted(master))
+            return;
+
+        if (!TryComp(master, out TransformComponent? xform))
+            return;
+
         var netEntity = GetNetEntity(master);
-        var xform = Transform(master);
 
         var query = AllEntityQuery<PowerMonitoringConsoleComponent, TransformComponent>();
         while (query.MoveNext(out var ent, out var entConsole, out var entXform))

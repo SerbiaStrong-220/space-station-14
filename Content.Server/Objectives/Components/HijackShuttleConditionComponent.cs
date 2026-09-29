@@ -8,4 +8,6 @@ namespace Content.Server.Objectives.Components;
 [RegisterComponent, Access(typeof(HijackShuttleConditionSystem))]
 public sealed partial class HijackShuttleConditionComponent : Component
 {
+    [DataField]
+    public bool RequireOwnerOnShuttle = true;
 }

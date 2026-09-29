@@ -45,23 +45,15 @@ public sealed partial class AirAlarmWindow : FancyWindow
 
     private CheckBox _autoMode => AutoModeCheckBox;
 
+    // SS220 MalfAI begin
+    private bool _floodVisible;
+    // SS220 MalfAI end
+
     public AirAlarmWindow()
     {
         RobustXamlLoader.Load(this);
 
-        foreach (var mode in Enum.GetValues<AirAlarmMode>())
-        {
-            var text = mode switch
-            {
-                AirAlarmMode.Filtering => "air-alarm-ui-mode-filtering",
-                AirAlarmMode.WideFiltering => "air-alarm-ui-mode-wide-filtering",
-                AirAlarmMode.Fill => "air-alarm-ui-mode-fill",
-                AirAlarmMode.Panic => "air-alarm-ui-mode-panic",
-                AirAlarmMode.None => "air-alarm-ui-mode-none",
-                _ => "error",
-            };
-            _modes.AddItem(Loc.GetString(text));
-        }
+        RebuildModes(false); // SS220 MalfAI
 
         _modes.OnItemSelected += args =>
         {
@@ -90,6 +82,31 @@ public sealed partial class AirAlarmWindow : FancyWindow
         };
     }
 
+    // SS220 MalfAI begin
+    private void RebuildModes(bool floodUnlocked)
+    {
+        _floodVisible = floodUnlocked;
+        _modes.Clear();
+        foreach (var mode in Enum.GetValues<AirAlarmMode>())
+        {
+            if (mode == AirAlarmMode.Flood && !floodUnlocked)
+                continue;
+
+            var text = mode switch
+            {
+                AirAlarmMode.Filtering => "air-alarm-ui-mode-filtering",
+                AirAlarmMode.WideFiltering => "air-alarm-ui-mode-wide-filtering",
+                AirAlarmMode.Fill => "air-alarm-ui-mode-fill",
+                AirAlarmMode.Panic => "air-alarm-ui-mode-panic",
+                AirAlarmMode.None => "air-alarm-ui-mode-none",
+                AirAlarmMode.Flood => "air-alarm-ui-mode-flood",
+                _ => "error",
+            };
+            _modes.AddItem(Loc.GetString(text), (int)mode);
+        }
+    }
+    // SS220 MalfAI end
+
     public void SetEntity(EntityUid uid)
     {
         EntityView.SetEntity(uid);
@@ -97,6 +114,11 @@ public sealed partial class AirAlarmWindow : FancyWindow
 
     public void UpdateState(AirAlarmUIState state)
     {
+        // SS220 MalfAI begin
+        if (state.FloodUnlocked != _floodVisible)
+            RebuildModes(state.FloodUnlocked);
+        // SS220 MalfAI end
+
         _address.SetMarkup(state.Address);
         _deviceTotal.SetMarkup($"{state.DeviceCount}");
         _pressure.SetMarkup(Loc.GetString("air-alarm-ui-window-pressure", ("pressure", $"{state.PressureAverage:0.##}")));
@@ -116,6 +138,9 @@ public sealed partial class AirAlarmWindow : FancyWindow
 
     public void UpdateModeSelector(AirAlarmMode mode)
     {
+        if (mode == AirAlarmMode.Flood && !_floodVisible)
+            return;
+
         _modes.SelectId((int) mode);
     }
 
