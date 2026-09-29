@@ -208,8 +208,9 @@ public sealed class MalfAiStationModulesTest : GameTest
             Assert.That(Blackout(body, apcOff), Is.False,
                 "Blackout fired on a powered-off APC.");
 
-            entMan.DeleteEntity(apcForeign);
-            Assert.That(Blackout(body, apcForeign), Is.False,
+            var apcDeleted = entMan.SpawnEntity("APCBasic", map.GridCoords);
+            entMan.DeleteEntity(apcDeleted);
+            Assert.That(Blackout(body, apcDeleted), Is.False,
                 "Blackout fired on a deleted APC.");
         });
     }
