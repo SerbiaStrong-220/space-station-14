@@ -217,7 +217,7 @@
       types:
         Piercing: 25 #Damage
         Poison: 5
-        Structural: 25
+        Structural: 50
   - type: Lifesteal
     lifesteal: 10
   - type: Gun
@@ -239,6 +239,12 @@
         reagents:
         - ReagentId: ChloralHydrate #Iad
           Quantity: 60
+  - type: SolutionRegeneration
+    solution: melee
+    generated:
+      reagents:
+      - ReagentId: ChloralHydrate
+        Quantity: 1
   - type: MovementSpeedModifier
     baseWalkSpeed : 3.5
     baseSprintSpeed : 4
@@ -311,7 +317,7 @@
     damage:
       types:
         Piercing: 5 #Damage
-        Structural: 20
+        Structural: 30
   - type: StaminaResistance
     damageCoefficient: 0.7
     worn: false
@@ -401,6 +407,9 @@
   - type: ActionGrant
     actions:
     - ActionSpawnSingleSpiderWebLongDelay
+  - type: JumpAbility
+    jumpDistance: 6
+    jumpSound: /Audio/Voice/Arachnid/arachnid_scream.ogg
   - type: RechargeBasicEntityAmmo
     rechargeCooldown: 1
   - type: BasicEntityAmmoProvider
@@ -480,6 +489,16 @@
         reagents:
         - ReagentId: ChloralHydrate
           Quantity: 20
+        - ReagentId: MuteToxin
+          Quantity: 5
+  - type: SolutionRegeneration
+    solution: melee
+    generated:
+      reagents:
+      - ReagentId: ChloralHydrate
+        Quantity: 0.4
+      - ReagentId: MuteToxin
+        Quantity: 0.1
   - type: Stealth
   - type: StealthOnMove
     passiveVisibilityRate: -0.37
@@ -572,6 +591,12 @@
         reagents:
         - ReagentId: ChloralHydrate
           Quantity: 35
+  - type: SolutionRegeneration
+    solution: melee
+    generated:
+      reagents:
+      - ReagentId: ChloralHydrate
+        Quantity: 0.5
   - type: RechargeBasicEntityAmmo
     rechargeCooldown: 1.5
   - type: BasicEntityAmmoProvider

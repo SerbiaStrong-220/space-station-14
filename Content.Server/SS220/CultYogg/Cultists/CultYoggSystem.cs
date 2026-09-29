@@ -90,7 +90,7 @@ public sealed partial class CultYoggSystem : SharedCultYoggSystem
                 if (mobstate.CurrentState == MobState.Dead) //if cultists is dead we skip this one
                     return;
 
-                AcsendCultist(ent);
+                AscendCultist(ent);
                 break;
 
             default:
@@ -157,7 +157,7 @@ public sealed partial class CultYoggSystem : SharedCultYoggSystem
         var currentHunger = _hungerSystem.GetHunger(hungerComp);
         if (currentHunger <= ent.Comp.HungerCost || hungerComp.CurrentThreshold == ent.Comp.MinHungerThreshold)
         {
-            _popup.PopupClient(Loc.GetString("cult-yogg-digest-no-nutritions"), ent, ent);
+            _popup.PopupClient(Loc.GetString("cult-yogg-digest-no-nutrition"), ent, ent);
             return;
         }
 
@@ -183,7 +183,7 @@ public sealed partial class CultYoggSystem : SharedCultYoggSystem
     #endregion
 
     #region Ascending
-    public void AcsendCultist(Entity<CultYoggComponent> ent)
+    public void AscendCultist(Entity<CultYoggComponent> ent)
     {
         if (TerminatingOrDeleted(ent))
             return;
@@ -211,17 +211,17 @@ public sealed partial class CultYoggSystem : SharedCultYoggSystem
     public void StartAscension(EntityUid ent)
     {
         //idk if it is canser or no, will be like that for a time
-        if (HasComp<AcsendingComponent>(ent))
+        if (HasComp<AscendingComponent>(ent))
             return;
 
-        _popup.PopupEntity(Loc.GetString("cult-yogg-acsending-started"), ent, ent);
-        EnsureComp<AcsendingComponent>(ent);
+        _popup.PopupEntity(Loc.GetString("cult-yogg-ascending-started"), ent, ent);
+        EnsureComp<AscendingComponent>(ent);
     }
 
     public void ResetCultist(Entity<CultYoggComponent> ent)//idk if it is canser or no, will be like that for a time
     {
-        if (RemComp<AcsendingComponent>(ent))
-            _popup.PopupEntity(Loc.GetString("cult-yogg-acsending-stopped"), ent, ent);
+        if (RemComp<AscendingComponent>(ent))
+            _popup.PopupEntity(Loc.GetString("cult-yogg-ascending-stopped"), ent, ent);
 
         ent.Comp.ConsumedAscensionReagent = 0;
 

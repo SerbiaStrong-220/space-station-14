@@ -8,7 +8,7 @@
     },
     "states": [
         {
-            "name": "acsendingEffect",
+            "name": "ascendingEffect",
             "delays": [
                 [
                     0.15,

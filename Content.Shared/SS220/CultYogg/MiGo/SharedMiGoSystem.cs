@@ -192,7 +192,7 @@ public abstract partial class SharedMiGoSystem : EntitySystem
 
         if (ent.Comp.ConstructionGridsBlacklist != null && _whitelist.IsValid(ent.Comp.ConstructionGridsBlacklist, currentGrid))
         {
-            _popup.PopupClient(Loc.GetString("cult-yogg-cant-buid-on-grid"), ent, ent);
+            _popup.PopupClient(Loc.GetString("cult-yogg-cant-build-on-grid"), ent, ent);
             return;
         }
 
@@ -336,7 +336,7 @@ public abstract partial class SharedMiGoSystem : EntitySystem
 
         if (HasComp<RevolutionaryComponent>(target) || HasComp<ZombieComponent>(target))
         {
-            reason = Loc.GetString("cult-yogg-enslave-another-fraction");
+            reason = Loc.GetString("cult-yogg-enslave-another-faction");
             return false;
         }
 
