@@ -4,7 +4,7 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 09/28/2026 10:38:51
+  time: 09/29/2026 10:54:27
   entityCount: 143
 maps: []
 grids:
@@ -231,30 +231,28 @@ entities:
       accessListsOriginal: []
       access:
       - - Security
-- proto: AirlockSecurity
+- proto: AirlockSecurityLocked
   entities:
-  - uid: 90
+  - uid: 51
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 1.5,0.5
       parent: 1
 - proto: APCBasic
   entities:
-  - uid: 51
+  - uid: 90
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 2.5,-4.5
       parent: 1
-    - type: Apc
-      enabled: False
-    - type: PowerNetworkBattery
-      canDischarge: False
+    - type: AccessReader
+      accessListsOriginal:
+      - - Engineering
+      access:
+      - - Security
     - type: Fixtures
       fixtures: {}
-    missingComponents:
-    - AccessReader
 - proto: AtmosDeviceFanTiny
   entities:
   - uid: 75
