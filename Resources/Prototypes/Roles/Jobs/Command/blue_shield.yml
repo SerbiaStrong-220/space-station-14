@@ -61,10 +61,7 @@
     martialArt: CloseQuartersCombat
   - !type:AddComponentSpecial
     components:
-    - type: ScotopicVision
-      radius: 12
-      energy: 0.17
-      softness: 1
+    - type: NightVision
   #SS220 weapon overhaul end
 
 - type: startingGear
