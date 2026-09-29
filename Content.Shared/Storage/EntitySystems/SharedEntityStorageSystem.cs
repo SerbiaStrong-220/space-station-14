@@ -66,8 +66,8 @@ public abstract class SharedEntityStorageSystem : EntitySystem
         SubscribeLocalEvent<EntityStorageComponent, BeforeExplodeEvent>(OnExploded);
 
         SubscribeLocalEvent<InsideEntityStorageComponent, EntGotRemovedFromContainerMessage>(OnRemoved);
-        SubscribeLocalEvent<DarkReaperComponent, InsertIntoEntityStorageAttemptEvent>(OnDarkReaperInsertAttempt);
-        SubscribeLocalEvent<SpectralComponent, InsertIntoEntityStorageAttemptEvent>(OnSpectralInsertAttempt);
+        SubscribeLocalEvent<DarkReaperComponent, InsertIntoEntityStorageAttemptEvent>(OnDarkReaperInsertAttempt); // SS220 Fix #4554
+        SubscribeLocalEvent<SpectralComponent, InsertIntoEntityStorageAttemptEvent>(OnSpectralInsertAttempt); // SS220 Fix #4554 
     }
 
     protected virtual void OnComponentInit(EntityUid uid, EntityStorageComponent component, ComponentInit args)
