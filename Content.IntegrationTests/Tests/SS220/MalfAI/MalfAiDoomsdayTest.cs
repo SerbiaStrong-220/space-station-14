@@ -435,8 +435,8 @@ public sealed class MalfAiDoomsdayTest : GameTest
                 var mob = entMan.System<MobStateSystem>();
                 Assert.That(mob.IsDead(human!.Value), Is.True, "Organic was not killed by Doomsday.");
                 Assert.That(mob.IsDead(borg!.Value), Is.False, "Silicon was killed by Doomsday.");
-                Assert.That(mob.IsDead(foreignHuman!.Value), Is.False,
-                    "A mob on a non-member grid on the same map was killed by Doomsday.");
+                Assert.That(mob.IsDead(foreignHuman!.Value), Is.True,
+                    "A mob on a non-member grid in wave radius survived Doomsday.");
             }
             finally
             {
