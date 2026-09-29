@@ -61,9 +61,9 @@
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 1
+      Telecrystal: 2
     MediumDynamic:
-      Telecrystal: 1
+      Telecrystal: 2
     HardDynamic:
       Telecrystal: 2
 #ss220 dynamic-price end
@@ -84,9 +84,9 @@
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 7
+      Telecrystal: 6
     MediumDynamic:
-      Telecrystal: 5
+      Telecrystal: 4
     HardDynamic:
       Telecrystal: 4
 #ss220 dynamic-price end
@@ -205,11 +205,11 @@
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 22
+      Telecrystal: 18
     MediumDynamic:
-      Telecrystal: 16
-    HardDynamic:
       Telecrystal: 14
+    HardDynamic:
+      Telecrystal: 12
 #ss220 dynamic-price end
 # SS220-double-e-sword-end
 
@@ -300,9 +300,9 @@
     LightDynamic:
       Telecrystal: 5 #SS220 weapon overhaul #This weapon is COMICALLY useless, especially if we remember that c-20r has similar cost
     MediumDynamic:
-      Telecrystal: 7 #SS220 weapon overhaul
+      Telecrystal: 5 #SS220 weapon overhaul
     HardDynamic:
-      Telecrystal: 9 #SS220 weapon overhaul
+      Telecrystal: 5 #SS220 weapon overhaul
   # ss220 - post upstream - uplink tweaks - end
 
 - type: listing
@@ -326,9 +326,9 @@
   #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 15 #SS220 weapon overhaul
+      Telecrystal: 10 #SS220 weapon overhaul
     MediumDynamic:
-      Telecrystal: 13 #SS220 weapon overhaul
+      Telecrystal: 9 #SS220 weapon overhaul
     HardDynamic:
       Telecrystal: 7 #SS220 weapon overhaul
   #ss220 dynamic-price end
@@ -373,11 +373,11 @@
   #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 18 #SS220 weapon overhaul
+      Telecrystal: 10 #SS220 weapon overhaul
     MediumDynamic:
-      Telecrystal: 12 #SS220 weapon overhaul
+      Telecrystal: 9 #SS220 weapon overhaul
     HardDynamic:
-      Telecrystal: 8 #SS220 weapon overhaul
+      Telecrystal: 7 #SS220 weapon overhaul
   #ss220 dynamic-price end
 
 - type: listing
@@ -640,11 +640,11 @@
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 10
+      Telecrystal: 7
     MediumDynamic:
-      Telecrystal: 10
+      Telecrystal: 7
     HardDynamic:
-      Telecrystal: 8
+      Telecrystal: 7
 #ss220 dynamic-price end
 
 - type: listing
@@ -687,7 +687,7 @@
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 1
+      Telecrystal: 2
     MediumDynamic:
       Telecrystal: 2
     HardDynamic:
@@ -729,11 +729,11 @@
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 4
+      Telecrystal: 3
     MediumDynamic:
-      Telecrystal: 4
+      Telecrystal: 3
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
 #ss220 dynamic-price end
 
 - type: listing
@@ -751,11 +751,11 @@
   #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 4
+      Telecrystal: 3
     MediumDynamic:
-      Telecrystal: 4
+      Telecrystal: 3
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
   #ss220 dynamic-price end
 
 # Ammo
@@ -860,7 +860,7 @@
   description: uplink-ammo-bundle-desc
   productEntity: ClothingBackpackDuffelSyndicateAmmoFilled
   cost:
-    Telecrystal: 15
+    Telecrystal: 9 #SS220 weapon overhaul
   categories:
   - UplinkAmmo
   conditions:
@@ -1006,9 +1006,9 @@
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 6
+      Telecrystal: 4
     MediumDynamic:
-      Telecrystal: 5
+      Telecrystal: 4
     HardDynamic:
       Telecrystal: 2
 #ss220 dynamic-price end
@@ -1028,11 +1028,11 @@
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 6
-    MediumDynamic:
       Telecrystal: 4
+    MediumDynamic:
+      Telecrystal: 3
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
 #ss220 dynamic-price end
 
 - type: listing
@@ -1805,11 +1805,11 @@
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 18
+      Telecrystal: 15
     MediumDynamic:
-      Telecrystal: 14
+      Telecrystal: 12
     HardDynamic:
-      Telecrystal: 10
+      Telecrystal: 7
 #ss220 dynamic-price end
 
 - type: listing
@@ -1932,9 +1932,9 @@
   productEntity: ReinforcementRadioSyndicateSyndiCat
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 3
+    Telecrystal: 5 #ss220 weapon overhaul
   cost:
-    Telecrystal: 6
+    Telecrystal: 10 #ss220 weapon overhaul # As we increase amount of nukies these cats become too easy to spam, nukesquad can buy ~80 cats which is unreasonable
   categories:
     - UplinkAllies
 #ss220 dynamic-price bgn
@@ -2350,11 +2350,11 @@
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 4
+      Telecrystal: 2
     MediumDynamic:
-      Telecrystal: 4
+      Telecrystal: 2
     HardDynamic:
-      Telecrystal: 3
+      Telecrystal: 2
 #ss220 dynamic-price end
 
 - type: listing
@@ -2372,11 +2372,11 @@
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 9
-    MediumDynamic:
       Telecrystal: 7
+    MediumDynamic:
+      Telecrystal: 5
     HardDynamic:
-      Telecrystal: 6
+      Telecrystal: 4
 #ss220 dynamic-price end
 
 - type: listing
@@ -2472,11 +2472,11 @@
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 18
+      Telecrystal: 15
     MediumDynamic:
-      Telecrystal: 14
+      Telecrystal: 12
     HardDynamic:
-      Telecrystal: 10
+      Telecrystal: 8
 #ss220 dynamic-price end
 
 - type: listing

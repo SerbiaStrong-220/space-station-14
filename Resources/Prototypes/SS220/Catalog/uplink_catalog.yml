@@ -22,11 +22,11 @@
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 12
+      Telecrystal: 7
     MediumDynamic:
-      Telecrystal: 11
+      Telecrystal: 6
     HardDynamic:
-      Telecrystal: 11
+      Telecrystal: 5
 #ss220 dynamic-price end
 
 - type: listing
@@ -86,9 +86,9 @@
     LightDynamic:
       Telecrystal: 8
     MediumDynamic:
-      Telecrystal: 7
-    HardDynamic:
       Telecrystal: 6
+    HardDynamic:
+      Telecrystal: 5
 
 - type: listing
   id: UplinkOrigami
@@ -123,16 +123,16 @@
   icon: { sprite: SS220/Objects/Weapons/Guns/Modkits/commando.rsi, state: icon }
   productEntity: CommandoModkit
   cost:
-    Telecrystal: 4
+    Telecrystal: 3
   categories:
   - UplinkWeaponry
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 5
-    MediumDynamic:
-      Telecrystal: 4
-    HardDynamic:
       Telecrystal: 3
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 2
 
 # Implants
 
@@ -394,11 +394,11 @@
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 8
+      Telecrystal: 6
     MediumDynamic:
-      Telecrystal: 10
+      Telecrystal: 8
     HardDynamic:
-      Telecrystal: 14
+      Telecrystal: 12
 #ss220 dynamic-price end
 
 - type: listing
@@ -572,11 +572,11 @@
     Telecrystal: 8
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 15
+      Telecrystal: 13
     MediumDynamic:
-      Telecrystal: 9
+      Telecrystal: 8
     HardDynamic:
-      Telecrystal: 7
+      Telecrystal: 6
   categories:
   - UplinkWearables
 
@@ -590,11 +590,11 @@
     Telecrystal: 5
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 4
+      Telecrystal: 3
     MediumDynamic:
-      Telecrystal: 5
+      Telecrystal: 3
     HardDynamic:
-      Telecrystal: 6
+      Telecrystal: 3
   categories:
   - UplinkWearables
 
@@ -634,9 +634,9 @@
     LightDynamic:
       Telecrystal: 8
     MediumDynamic:
-      Telecrystal: 10
+      Telecrystal: 8
     HardDynamic:
-      Telecrystal: 12
+      Telecrystal: 10
   categories:
   - UplinkWeaponry
 
@@ -830,7 +830,7 @@
   - UplinkWeaponry
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 6
+      Telecrystal: 3
     MediumDynamic:
       Telecrystal: 3
     HardDynamic:

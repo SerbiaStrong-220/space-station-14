@@ -446,7 +446,6 @@
     removalTime: 1.5
   - type: LandAtCursor
   - type: DamageOtherOnHit
-    ignoreResistances: true
     damage:
       types:
         Slash: 5 # SS220 BetterKnifes Update
