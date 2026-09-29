@@ -10,7 +10,11 @@ using Robust.Server.Player;
 using Robust.Shared.Audio;
 using Robust.Shared.Enums;
 using Robust.Shared.Player;
+// ss220 add debug session start
+#if DEBUG
 using Robust.Shared.SS220.Player;
+#endif
+// ss220 add debug session end
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 

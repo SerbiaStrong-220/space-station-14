@@ -20,7 +20,11 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Reflection;
+// ss220 add debug session start
+#if DEBUG
 using Robust.Shared.SS220.Player;
+#endif
+// ss220 add debug session end
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
