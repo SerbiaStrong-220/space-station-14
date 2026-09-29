@@ -61,6 +61,17 @@ public sealed partial class LabelSystem : EntitySystem
         Dirty(uid, label);
     }
 
+    //SS220-LabelColors begin
+    public void ApplyPreEscapedLabel(Entity<LabelComponent> ent, string? text, Color color)
+    {
+        ent.Comp.CurrentLabel = text;
+        ent.Comp.LabelColor = color;
+        _nameModifier.RefreshNameModifiers(ent.Owner);
+
+        Dirty(ent);
+    }
+    //SS220-LabelColors end
+
     private void OnExamine(Entity<LabelComponent> ent, ref ExaminedEvent args)
     {
         if (!ent.Comp.Examinable)

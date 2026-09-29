@@ -48,6 +48,8 @@ public sealed class LabelComponentPhotocopiedData : IPhotocopiedComponentData
     public string? CurrentLabel;
     public Color LabelColor = Color.White; //SS220-LabelColors
 
+    public bool NeedToEnsure => true; //SS220-LabelColors
+
     public void RestoreFromData(EntityUid uid, Component someComponent)
     {
         if (someComponent is not LabelComponent labelComponent)
@@ -61,7 +63,7 @@ public sealed class LabelComponentPhotocopiedData : IPhotocopiedComponentData
 
             var entSys = IoCManager.Resolve<IEntityManager>();
             var labelSys = entSys.System<LabelSystem>();
-            labelSys.Label(uid, CurrentLabel, label: labelComponent, color: LabelColor);
+            labelSys.ApplyPreEscapedLabel(new Entity<LabelComponent>(uid, labelComponent), CurrentLabel, LabelColor); //SS220-LabelColors
         }
     }
 }
