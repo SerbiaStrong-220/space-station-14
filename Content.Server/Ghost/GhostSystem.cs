@@ -241,6 +241,21 @@ namespace Content.Server.Ghost
             var time = _gameTiming.RealTime;
             component.TimeOfDeath = time;
 
+            //SS220 colourful ghost begin
+            // Choose the color once on the server so every client sees the same tint.
+            // Keep colors explicitly configured in prototypes or saved entities.
+            if (component.Color == Color.White)
+            {
+                // Full value and limited saturation keep even blue/purple ghosts light.
+                // Every RGB channel stays at least 0.45; sprite transparency is applied separately.
+                component.Color = Color.FromHsv(new Vector4(
+                    _random.NextFloat(),
+                    _random.NextFloat(0.35f, 0.55f),
+                    1f,
+                    1f));
+            }
+            //SS220 colourful ghost end
+
             //ss220 add filter tts for ghost start
             EnsureComp<GhostHearingComponent>(uid);
             //ss220 add filter tts for ghost end
