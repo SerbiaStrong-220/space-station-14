@@ -85,6 +85,10 @@
         - LowImpassable
         hard: False
   - type: Projectile
+    # SS220 structure penetration refactor begin
+    penetrationDamageTypeRequirement:
+        - Piercing
+    # SS220 structure penetration refactor end
     impactEffect: BulletImpactEffect
     damage:
       types:
