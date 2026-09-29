@@ -55,6 +55,9 @@
       - type: CommandStaff
       #SS220 weapon overhaul begin
       - type: NightVision
+        profile: NightVisionGreen
+        enabled: false
+        action: ActionToggleNightVisionImplant
       #SS220 weapon overhaul end
 
 - type: startingGear

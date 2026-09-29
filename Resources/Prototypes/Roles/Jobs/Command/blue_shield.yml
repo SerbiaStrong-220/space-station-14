@@ -62,6 +62,9 @@
   - !type:AddComponentSpecial
     components:
     - type: NightVision
+      profile: NightVisionGreen
+      enabled: false
+      action: ActionToggleNightVisionImplant
   #SS220 weapon overhaul end
 
 - type: startingGear
