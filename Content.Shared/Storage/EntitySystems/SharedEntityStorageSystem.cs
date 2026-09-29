@@ -66,6 +66,8 @@ public abstract class SharedEntityStorageSystem : EntitySystem
         SubscribeLocalEvent<EntityStorageComponent, BeforeExplodeEvent>(OnExploded);
 
         SubscribeLocalEvent<InsideEntityStorageComponent, EntGotRemovedFromContainerMessage>(OnRemoved);
+        SubscribeLocalEvent<DarkReaperComponent, InsertIntoEntityStorageAttemptEvent>(OnDarkReaperInsertAttempt);
+        SubscribeLocalEvent<SpectralComponent, InsertIntoEntityStorageAttemptEvent>(OnSpectralInsertAttempt);
     }
 
     protected virtual void OnComponentInit(EntityUid uid, EntityStorageComponent component, ComponentInit args)
@@ -367,16 +369,6 @@ public abstract class SharedEntityStorageSystem : EntitySystem
             return false;
         // SS220 fix #1121 end
 
-        // SS220 fix #3495 begin
-        if (TryComp<DarkReaperComponent>(toInsert, out var reaper) && !reaper.PhysicalForm)
-            return false;
-
-        if (HasComp<SpectralComponent>(toInsert) &&
-            (!TryComp<PhysicsComponent>(toInsert, out var physics) ||
-             (physics.CollisionMask & (int) Content.Shared.Physics.CollisionGroup.MobMask) == 0))
-            return false;
-        // SS220 fix #3495 end
-
         var aabb = _lookup.GetAABBNoContainer(toInsert, Vector2.Zero, 0);
         if (component.MaxSize < aabb.Size.X || component.MaxSize < aabb.Size.Y)
             return false;
@@ -397,6 +389,21 @@ public abstract class SharedEntityStorageSystem : EntitySystem
 
         // Check the whitelist/blacklist.
         return _whitelistSystem.CheckBoth(toInsert, component.Blacklist, component.Whitelist);
+    }
+
+    private void OnDarkReaperInsertAttempt(EntityUid uid, DarkReaperComponent component,
+        ref InsertIntoEntityStorageAttemptEvent args)
+    {
+        if (!component.PhysicalForm)
+            args.Cancelled = true;
+    }
+
+    private void OnSpectralInsertAttempt(EntityUid uid, SpectralComponent component,
+        ref InsertIntoEntityStorageAttemptEvent args)
+    {
+        if (!TryComp<PhysicsComponent>(uid, out var physics) ||
+            (physics.CollisionMask & (int) Content.Shared.Physics.CollisionGroup.MobMask) == 0)
+            args.Cancelled = true;
     }
 
     public bool TryOpenStorage(EntityUid user, EntityUid target, bool silent = false)
