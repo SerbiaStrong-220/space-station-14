@@ -1,14 +1,13 @@
-using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using Content.Client.Inventory;
 using Content.Shared.Clothing;
 using Content.Shared.Inventory.Events;
+using Content.Shared.SS220.LiquidSplatters;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
-using Robust.Shared.GameStates;
-using Robust.Shared.Maths;
+using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
-using Content.Shared.SS220.LiquidSplatters;
 
 namespace Content.Client.SS220.LiquidSplatters;
 
@@ -18,6 +17,7 @@ public sealed class LiquidSplattersSystem : EntitySystem
 
     [Dependency] private readonly IPrototypeManager _protoMan = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
 
     private readonly Dictionary<EntityUid, ShaderInstance> _shaders = new();
     private readonly Dictionary<EntityUid, EquippedLayers> _equippedLayers = new();
@@ -40,12 +40,14 @@ public sealed class LiquidSplattersSystem : EntitySystem
 
     private void OnStartup(Entity<LiquidSplattersComponent> ent, ref ComponentStartup args)
     {
+        TryRestoreEquippedLayers(ent);
         SetShader(ent, ent.Comp.Enabled);
     }
 
     private void OnShutdown(Entity<LiquidSplattersComponent> ent, ref ComponentShutdown args)
     {
         SetShader(ent, false);
+        _equippedLayers.Remove(ent);
     }
 
     private void OnEquipmentVisualsUpdated(Entity<LiquidSplattersComponent> ent, ref EquipmentVisualsUpdatedEvent args)
@@ -56,7 +58,27 @@ public sealed class LiquidSplattersSystem : EntitySystem
 
     private void OnGotUnequipped(Entity<LiquidSplattersComponent> ent, ref GotUnequippedEvent args)
     {
-        _equippedLayers.Remove(ent);
+        if (!_equippedLayers.Remove(ent, out var equipped))
+            return;
+
+        ClearEquipmentLayerShaders(equipped);
+    }
+
+    // This is needed if component is created while the item is already equipped
+    // I don't know how it works, but it does
+    private void TryRestoreEquippedLayers(EntityUid item)
+    {
+        if (!_container.TryGetContainingContainer(item, out var container))
+            return;
+
+        var wearer = container.Owner;
+        if (!TryComp<InventorySlotsComponent>(wearer, out var slots))
+            return;
+
+        if (!slots.VisualLayerKeys.TryGetValue(container.ID, out var layerKeys))
+            return;
+
+        _equippedLayers[item] = new EquippedLayers(wearer, new HashSet<string>(layerKeys));
     }
 
     private void SetShader(Entity<LiquidSplattersComponent> ent, bool enabled)
