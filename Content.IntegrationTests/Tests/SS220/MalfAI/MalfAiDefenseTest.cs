@@ -1,37 +1,41 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using System.Linq;
-using Content.IntegrationTests.Fixtures;
+using System.Numerics;
 using Content.IntegrationTests.Fixtures.Attributes;
+using Content.IntegrationTests.Fixtures;
 using Content.IntegrationTests.Pair;
 using Content.Server.GameTicking;
-using Content.Server.SS220.MalfAI;
-using Content.Server.Store.Systems;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
-using Content.Shared.Doors.Systems;
-using Content.Shared.Actions;
+using Content.Server.SS220.MalfAI;
+using Content.Server.Station.Systems;
+using Content.Server.Store.Systems;
 using Content.Shared.Actions.Components;
-using Content.Shared.Doors;
+using Content.Shared.Actions;
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Doors.Components;
+using Content.Shared.Doors.Systems;
+using Content.Shared.Doors;
 using Content.Shared.Electrocution;
 using Content.Shared.FixedPoint;
-using Content.Shared.SS220.CCVars;
-using Content.Shared.SS220.MalfAI;
 using Content.Shared.Maps;
 using Content.Shared.Mind;
-using Content.Shared.Roles;
 using Content.Shared.Roles.Components;
+using Content.Shared.Roles;
+using Content.Shared.SS220.CCVars;
+using Content.Shared.SS220.MalfAI;
 using Content.Shared.Silicons.StationAi;
 using Content.Shared.Station.Components;
-using Content.Shared.Store;
+using Content.Shared.Station;
 using Content.Shared.Store.Components;
+using Content.Shared.Store;
+using Content.Shared.Turrets;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Configuration;
 using Robust.Shared.EntitySerialization;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
-using System.Numerics;
 
 namespace Content.IntegrationTests.Tests.SS220.MalfAI;
 
@@ -44,7 +48,7 @@ public sealed class MalfAiDefenseTest : GameTest
     {
         var entMan = pair.Server.EntMan;
         entMan.EnsureComponent<StationDataComponent>(map.MapUid);
-        entMan.System<Content.Server.Station.Systems.StationSystem>()
+        entMan.System<StationSystem>()
             .AddGridToStation(map.MapUid, map.GridCoords.EntityId);
     }
 
@@ -56,8 +60,8 @@ public sealed class MalfAiDefenseTest : GameTest
 
         var core = entMan.SpawnEntity("PlayerStationAiEmpty", map.GridCoords);
         var brain = entMan.SpawnEntity("StationAiBrain", map.GridCoords);
-        var slotSys = entMan.System<Content.Shared.Containers.ItemSlots.ItemSlotsSystem>();
-        var slots = entMan.GetComponent<Content.Shared.Containers.ItemSlots.ItemSlotsComponent>(core);
+        var slotSys = entMan.System<ItemSlotsSystem>();
+        var slots = entMan.GetComponent<ItemSlotsComponent>(core);
         slotSys.TryInsert(core, "station_ai_mind_slot", brain, null, slots);
 
         var mind = mindSys.CreateMind(null);
@@ -124,7 +128,7 @@ public sealed class MalfAiDefenseTest : GameTest
             var grids = server.EntMan.System<GameTicker>().LoadGameMap(mapProto,
                 out _,
                 DeserializationOptions.Default with { InitializeMaps = true });
-            var stationSys = server.EntMan.System<Content.Shared.Station.SharedStationSystem>();
+            var stationSys = server.EntMan.System<SharedStationSystem>();
             station = grids.Select(grid => stationSys.GetOwningStation(grid)).FirstOrDefault(uid => uid != null);
             Assert.That(station, Is.Not.Null);
         });
@@ -133,7 +137,7 @@ public sealed class MalfAiDefenseTest : GameTest
         await server.WaitAssertion(() =>
         {
             var entMan = server.EntMan;
-            var stationSys = entMan.System<Content.Shared.Station.SharedStationSystem>();
+            var stationSys = entMan.System<SharedStationSystem>();
 
             EntityUid? door = null;
             var doorQuery = entMan.EntityQueryEnumerator<AirlockComponent, DoorBoltComponent>();
@@ -164,8 +168,8 @@ public sealed class MalfAiDefenseTest : GameTest
                 entMan.GetComponent<TransformComponent>(door.Value).Coordinates);
             var body = entMan.SpawnEntity("StationAiBrain",
                 entMan.GetComponent<TransformComponent>(door.Value).Coordinates);
-            var slotSys = entMan.System<Content.Shared.Containers.ItemSlots.ItemSlotsSystem>();
-            var slots = entMan.GetComponent<Content.Shared.Containers.ItemSlots.ItemSlotsComponent>(core);
+            var slotSys = entMan.System<ItemSlotsSystem>();
+            var slots = entMan.GetComponent<ItemSlotsComponent>(core);
             slotSys.TryInsert(core, "station_ai_mind_slot", body, null, slots);
 
             var mind = mindSys.CreateMind(null);
@@ -195,7 +199,7 @@ public sealed class MalfAiDefenseTest : GameTest
             }
             if (otherDoor is {} other)
             {
-                entMan.System<Content.Shared.Electrocution.SharedElectrocutionSystem>()
+                entMan.System<SharedElectrocutionSystem>()
                     .SetElectrified((other, entMan.GetComponent<ElectrifiedComponent>(other)), true);
             }
 
@@ -471,7 +475,7 @@ public sealed class MalfAiDefenseTest : GameTest
 
             Buy(pair, store, body, MalfAiConstants.TurretUpgradeListing);
 
-            var station = entMan.System<Content.Shared.Station.SharedStationSystem>().GetOwningStation(turret);
+            var station = entMan.System<SharedStationSystem>().GetOwningStation(turret);
             Assert.That(station, Is.Not.Null);
             Assert.That(entMan.HasComponent<MalfAiTurretUpgradeComponent>(station.Value), Is.True);
             Assert.That(entMan.HasComponent<MalfAiTurretBuffedComponent>(turret), Is.True);
@@ -519,7 +523,7 @@ public sealed class MalfAiDefenseTest : GameTest
             Assert.That(deployAction, Is.Not.Null, "Deploy action was not granted.");
 
             var before = 0;
-            var turretQuery = entMan.AllEntityQueryEnumerator<Content.Shared.Turrets.DeployableTurretComponent>();
+            var turretQuery = entMan.AllEntityQueryEnumerator<DeployableTurretComponent>();
             while (turretQuery.MoveNext(out _, out _))
             {
                 before++;
@@ -537,7 +541,7 @@ public sealed class MalfAiDefenseTest : GameTest
             Assert.That(ev.Handled, Is.True);
 
             var after = 0;
-            var turretQuery2 = entMan.AllEntityQueryEnumerator<Content.Shared.Turrets.DeployableTurretComponent>();
+            var turretQuery2 = entMan.AllEntityQueryEnumerator<DeployableTurretComponent>();
             EntityUid? spawnedTurret = null;
             while (turretQuery2.MoveNext(out var turretUid, out var turretComp))
             {
@@ -617,7 +621,7 @@ public sealed class MalfAiDefenseTest : GameTest
         {
             var entMan = server.EntMan;
             var count = 0;
-            var query = entMan.AllEntityQueryEnumerator<Content.Shared.Turrets.DeployableTurretComponent>();
+            var query = entMan.AllEntityQueryEnumerator<DeployableTurretComponent>();
             while (query.MoveNext(out _, out _))
                 count++;
             Assert.That(count, Is.EqualTo(1),
@@ -658,7 +662,7 @@ public sealed class MalfAiDefenseTest : GameTest
                 "Turret deployed while MalfAI was disabled by CVar.");
 
             var count = 0;
-            var query = entMan.AllEntityQueryEnumerator<Content.Shared.Turrets.DeployableTurretComponent>();
+            var query = entMan.AllEntityQueryEnumerator<DeployableTurretComponent>();
             while (query.MoveNext(out _, out _))
                 count++;
             Assert.That(count, Is.EqualTo(0),

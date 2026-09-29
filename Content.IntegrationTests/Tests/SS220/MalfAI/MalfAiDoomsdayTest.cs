@@ -1,29 +1,32 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using System.Reflection;
-using Content.IntegrationTests.Fixtures;
 using Content.IntegrationTests.Fixtures.Attributes;
+using Content.IntegrationTests.Fixtures;
 using Content.IntegrationTests.Pair;
 using Content.Server.AlertLevel;
 using Content.Server.Communications;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.RoundEnd;
+using Content.Server.SS220.MalfAI;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Shuttles.Systems;
-using Content.Server.SS220.MalfAI;
 using Content.Server.Station.Systems;
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.FixedPoint;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.Humanoid;
 using Content.Shared.Mind;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Roles;
 using Content.Shared.SS220.CCVars;
 using Content.Shared.SS220.MalfAI;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Station.Components;
-using Content.Shared.Store;
 using Content.Shared.Store.Components;
+using Content.Shared.Store;
 using Robust.Shared.Configuration;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
@@ -71,8 +74,8 @@ public sealed class MalfAiDoomsdayTest : GameTest
         }
 
         var brain = entMan.SpawnEntity("StationAiBrain", map.GridCoords);
-        var slotSys = entMan.System<Content.Shared.Containers.ItemSlots.ItemSlotsSystem>();
-        var slots = entMan.GetComponent<Content.Shared.Containers.ItemSlots.ItemSlotsComponent>(core);
+        var slotSys = entMan.System<ItemSlotsSystem>();
+        var slots = entMan.GetComponent<ItemSlotsComponent>(core);
         slotSys.TryInsert(core, "station_ai_mind_slot", brain, null, slots);
 
         var mind = mindSys.CreateMind(null);
@@ -404,8 +407,8 @@ public sealed class MalfAiDoomsdayTest : GameTest
             Assert.That(entMan.GetComponent<TransformComponent>(foreignHuman.Value).GridUid,
                 Is.EqualTo(foreignGrid.Owner));
 
-            Assert.That(entMan.HasComponent<Content.Shared.Humanoid.HumanoidProfileComponent>(human.Value));
-            Assert.That(entMan.HasComponent<Content.Shared.Mobs.Components.MobStateComponent>(human.Value));
+            Assert.That(entMan.HasComponent<HumanoidProfileComponent>(human.Value));
+            Assert.That(entMan.HasComponent<MobStateComponent>(human.Value));
             Assert.That(entMan.System<MobStateSystem>().IsAlive(human.Value), Is.True,
                 "Doomsday test victim must start alive.");
             Assert.That(entMan.GetComponent<TransformComponent>(human.Value).GridUid, Is.EqualTo(map.Grid.Owner));

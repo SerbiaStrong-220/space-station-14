@@ -1,17 +1,19 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.IntegrationTests.Fixtures;
 using Content.IntegrationTests.Fixtures.Attributes;
+using Content.IntegrationTests.Fixtures;
 using Content.IntegrationTests.Pair;
 using Content.Server.SS220.MalfAI;
+using Content.Server.Station.Systems;
 using Content.Shared.Actions.Components;
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mind;
 using Content.Shared.Roles;
+using Content.Shared.SS220.MalfAI;
 using Content.Shared.Silicons.StationAi;
 using Content.Shared.Station.Components;
-using Content.Shared.Store;
 using Content.Shared.Store.Components;
-using Content.Shared.SS220.MalfAI;
+using Content.Shared.Store;
 using Robust.Shared.EntitySerialization;
 using Robust.Shared.GameObjects;
 
@@ -24,7 +26,7 @@ public sealed class MalfAiLifecycleTest : GameTest
     {
         var entMan = pair.Server.EntMan;
         entMan.EnsureComponent<StationDataComponent>(map.MapUid);
-        entMan.System<Content.Server.Station.Systems.StationSystem>()
+        entMan.System<StationSystem>()
             .AddGridToStation(map.MapUid, map.GridCoords.EntityId);
     }
 
@@ -36,8 +38,8 @@ public sealed class MalfAiLifecycleTest : GameTest
 
         var core = entMan.SpawnEntity("PlayerStationAiEmpty", map.GridCoords);
         var brain = entMan.SpawnEntity("StationAiBrain", map.GridCoords);
-        var slotSys = entMan.System<Content.Shared.Containers.ItemSlots.ItemSlotsSystem>();
-        var slots = entMan.GetComponent<Content.Shared.Containers.ItemSlots.ItemSlotsComponent>(core);
+        var slotSys = entMan.System<ItemSlotsSystem>();
+        var slots = entMan.GetComponent<ItemSlotsComponent>(core);
         slotSys.TryInsert(core, "station_ai_mind_slot", brain, null, slots);
 
         var mind = mindSys.CreateMind(null);

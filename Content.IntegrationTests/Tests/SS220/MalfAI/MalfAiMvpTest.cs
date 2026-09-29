@@ -1,28 +1,30 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using System.Collections.Generic;
 using System.Linq;
-using Content.IntegrationTests.Fixtures;
 using Content.IntegrationTests.Fixtures.Attributes;
-using Content.Server.SS220.MalfAI;
+using Content.IntegrationTests.Fixtures;
 using Content.Server.Objectives.Components;
 using Content.Server.Power.Components;
+using Content.Server.SS220.MalfAI;
 using Content.Server.Silicons.Laws;
 using Content.Server.Station.Systems;
-using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
+using Content.Shared.Actions;
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.FixedPoint;
-using Content.Shared.SS220.CCVars;
-using Content.Shared.SS220.MalfAI;
 using Content.Shared.Mind;
-using Content.Shared.Roles;
 using Content.Shared.Roles.Components;
-using Content.Shared.Silicons.Laws;
+using Content.Shared.Roles;
+using Content.Shared.SS220.CCVars;
+using Content.Shared.SS220.IgnoreLightVision.Components;
+using Content.Shared.SS220.MalfAI;
 using Content.Shared.Silicons.Laws.Components;
+using Content.Shared.Silicons.Laws;
 using Content.Shared.Silicons.StationAi;
-using Content.Shared.Station;
 using Content.Shared.Station.Components;
-using Content.Shared.Store;
+using Content.Shared.Station;
 using Content.Shared.Store.Components;
+using Content.Shared.Store;
 using Robust.Shared.Configuration;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
@@ -264,8 +266,8 @@ public sealed class MalfAiMvpTest : GameTest
             {
                 var core = entMan.SpawnEntity("PlayerStationAiEmpty", map.GridCoords);
                 var brain = entMan.SpawnEntity("StationAiBrain", map.GridCoords);
-                var slotSys = entMan.System<Content.Shared.Containers.ItemSlots.ItemSlotsSystem>();
-                var slots = entMan.GetComponent<Content.Shared.Containers.ItemSlots.ItemSlotsComponent>(core);
+                var slotSys = entMan.System<ItemSlotsSystem>();
+                var slots = entMan.GetComponent<ItemSlotsComponent>(core);
                 slotSys.TryInsert(core, "station_ai_mind_slot", brain, null, slots);
 
                 var mind = mindSys.CreateMind(null);
@@ -376,8 +378,8 @@ public sealed class MalfAiMvpTest : GameTest
 
             var core = entMan.SpawnEntity("PlayerStationAiEmpty", map.GridCoords);
             var body = entMan.SpawnEntity("StationAiBrain", map.GridCoords);
-            var slotSys = entMan.System<Content.Shared.Containers.ItemSlots.ItemSlotsSystem>();
-            var slots = entMan.GetComponent<Content.Shared.Containers.ItemSlots.ItemSlotsComponent>(core);
+            var slotSys = entMan.System<ItemSlotsSystem>();
+            var slots = entMan.GetComponent<ItemSlotsComponent>(core);
             slotSys.TryInsert(core, "station_ai_mind_slot", body, null, slots);
 
             var mind = mindSys.CreateMind(null);
@@ -459,8 +461,8 @@ public sealed class MalfAiMvpTest : GameTest
             {
                 var core = entMan.SpawnEntity("PlayerStationAiEmpty", map.GridCoords);
                 var brain = entMan.SpawnEntity("StationAiBrain", map.GridCoords);
-                var slots = entMan.GetComponent<Content.Shared.Containers.ItemSlots.ItemSlotsComponent>(core);
-                entMan.System<Content.Shared.Containers.ItemSlots.ItemSlotsSystem>()
+                var slots = entMan.GetComponent<ItemSlotsComponent>(core);
+                entMan.System<ItemSlotsSystem>()
                     .TryInsert(core, "station_ai_mind_slot", brain, null, slots);
                 return brain;
             }
@@ -502,15 +504,15 @@ public sealed class MalfAiMvpTest : GameTest
 
             entMan.EventBus.RaiseLocalEvent(storeUid,
                 new StoreBuyListingMessage(MalfAiConstants.CameraUpgradeListing, null) { Actor = oldBody });
-            Assert.That(entMan.HasComponent<Content.Shared.SS220.IgnoreLightVision.Components.ThermalVisionComponent>(oldBody), Is.True);
+            Assert.That(entMan.HasComponent<ThermalVisionComponent>(oldBody), Is.True);
 
             mindSystem.TransferTo(mindId, newBody, mind: mindId);
             Assert.That(entMan.HasComponent<MalfAiActorComponent>(oldBody), Is.False);
             Assert.That(entMan.HasComponent<RemoteStoreComponent>(oldBody), Is.False);
-            Assert.That(entMan.HasComponent<Content.Shared.SS220.IgnoreLightVision.Components.ThermalVisionComponent>(oldBody), Is.False);
+            Assert.That(entMan.HasComponent<ThermalVisionComponent>(oldBody), Is.False);
             Assert.That(entMan.HasComponent<MalfAiActorComponent>(newBody), Is.True);
             newInnateAction = entMan.GetComponent<MalfAiActorComponent>(newBody).GrantedActions[0];
-            Assert.That(entMan.HasComponent<Content.Shared.SS220.IgnoreLightVision.Components.ThermalVisionComponent>(newBody), Is.True);
+            Assert.That(entMan.HasComponent<ThermalVisionComponent>(newBody), Is.True);
             Assert.That(entMan.GetComponent<ActionsComponent>(newBody).Actions, Does.Contain(purchasedAction));
             Assert.That(action.Cooldown?.End, Is.EqualTo(cooldownEnd));
             Assert.That(entMan.GetComponent<RemoteStoreComponent>(newBody).Store, Is.EqualTo(storeUid));
@@ -520,7 +522,7 @@ public sealed class MalfAiMvpTest : GameTest
 
             roles.MindRemoveRole<MalfAiRoleComponent>(mindId);
             Assert.That(entMan.HasComponent<MalfAiActorComponent>(newBody), Is.False);
-            Assert.That(entMan.HasComponent<Content.Shared.SS220.IgnoreLightVision.Components.ThermalVisionComponent>(newBody), Is.False);
+            Assert.That(entMan.HasComponent<ThermalVisionComponent>(newBody), Is.False);
             Assert.That(entMan.GetComponent<ActionsComponent>(newBody).Actions, Does.Not.Contain(purchasedAction));
         });
 
@@ -550,8 +552,8 @@ public sealed class MalfAiMvpTest : GameTest
 
             var core = entMan.SpawnEntity("PlayerStationAiEmpty", map.GridCoords);
             var brain = entMan.SpawnEntity("StationAiBrain", map.GridCoords);
-            var slotSys = entMan.System<Content.Shared.Containers.ItemSlots.ItemSlotsSystem>();
-            var slots = entMan.GetComponent<Content.Shared.Containers.ItemSlots.ItemSlotsComponent>(core);
+            var slotSys = entMan.System<ItemSlotsSystem>();
+            var slots = entMan.GetComponent<ItemSlotsComponent>(core);
             slotSys.TryInsert(core, "station_ai_mind_slot", brain, null, slots);
 
             var mindId = mindSys.CreateMind(null);

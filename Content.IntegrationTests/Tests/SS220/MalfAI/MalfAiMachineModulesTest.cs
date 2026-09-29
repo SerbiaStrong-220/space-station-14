@@ -1,29 +1,47 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using System.Collections.Generic;
-using Content.IntegrationTests.Fixtures;
 using Content.IntegrationTests.Fixtures.Attributes;
+using Content.IntegrationTests.Fixtures;
 using Content.IntegrationTests.Pair;
 using Content.Server.Ghost.Roles.Components;
+using Content.Server.Mind;
+using Content.Server.NPC.HTN;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Power.Nodes;
-using Content.Server.Spawners.Components;
 using Content.Server.SS220.MalfAI;
-using Content.Shared.SS220.MalfAI;
+using Content.Server.Spawners.Components;
+using Content.Server.Station.Systems;
 using Content.Shared.Actions.Components;
+using Content.Shared.Actions;
+using Content.Shared.Containers.ItemSlots;
+using Content.Shared.DoAfter;
+using Content.Shared.DragDrop;
 using Content.Shared.Emag.Components;
+using Content.Shared.Explosion.Components;
 using Content.Shared.FixedPoint;
+using Content.Shared.Hands.Components;
 using Content.Shared.Mind;
-using Content.Shared.NodeContainer;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Components;
+using Content.Shared.NPC.Components;
+using Content.Shared.NPC.Prototypes;
 using Content.Shared.NodeContainer.NodeGroups;
-using Content.Shared.Roles;
+using Content.Shared.NodeContainer;
+using Content.Shared.Power;
 using Content.Shared.Roles.Components;
+using Content.Shared.Roles;
+using Content.Shared.SS220.CCVars;
+using Content.Shared.SS220.MalfAI;
+using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Silicons.Laws.Components;
 using Content.Shared.Station.Components;
-using Content.Shared.Store;
 using Content.Shared.Store.Components;
-using Content.Shared.Trigger.Components;
+using Content.Shared.Store;
 using Content.Shared.Trigger.Components.Effects;
+using Content.Shared.Trigger.Components;
+using Content.Shared.Weapons.Melee;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
@@ -47,7 +65,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
     {
         var entMan = pair.Server.EntMan;
         entMan.EnsureComponent<StationDataComponent>(map.MapUid);
-        entMan.System<Content.Server.Station.Systems.StationSystem>()
+        entMan.System<StationSystem>()
             .AddGridToStation(map.MapUid, map.GridCoords.EntityId);
     }
 
@@ -59,8 +77,8 @@ public sealed class MalfAiMachineModulesTest : GameTest
 
         var core = entMan.SpawnEntity("PlayerStationAiEmpty", map.GridCoords);
         var brain = entMan.SpawnEntity("StationAiBrain", map.GridCoords);
-        var slotSys = entMan.System<Content.Shared.Containers.ItemSlots.ItemSlotsSystem>();
-        var slots = entMan.GetComponent<Content.Shared.Containers.ItemSlots.ItemSlotsComponent>(core);
+        var slotSys = entMan.System<ItemSlotsSystem>();
+        var slots = entMan.GetComponent<ItemSlotsComponent>(core);
         slotSys.TryInsert(core, "station_ai_mind_slot", brain, null, slots);
 
         var mind = mindSys.CreateMind(null);
@@ -162,11 +180,11 @@ public sealed class MalfAiMachineModulesTest : GameTest
             var pen = entMan.SpawnEntity("Pen", map.GridCoords);
             Assert.That(Override(body, pen), Is.False,
                 "Machine Override fired on an item.");
-            Assert.That(entMan.HasComponent<Content.Shared.NPC.Components.NpcFactionMemberComponent>(pen), Is.False,
+            Assert.That(entMan.HasComponent<NpcFactionMemberComponent>(pen), Is.False,
                 "Machine Override animated an item.");
 
-            var actionsSys = entMan.System<Content.Shared.Actions.SharedActionsSystem>();
-            var validateTarget = entMan.GetComponent<Content.Shared.Actions.Components.EntityTargetActionComponent>(action);
+            var actionsSys = entMan.System<SharedActionsSystem>();
+            var validateTarget = entMan.GetComponent<EntityTargetActionComponent>(action);
             Assert.That(actionsSys.ValidateEntityTarget(body, machine, (action, validateTarget)), Is.True,
                 "Machine Override fails engine validation in live game.");
             Assert.That(actionsSys.ValidateEntityTarget(body, pen, (action, validateTarget)), Is.False,
@@ -181,12 +199,12 @@ public sealed class MalfAiMachineModulesTest : GameTest
             actionsSys.PerformAction((body, actionsComp), (action, actionComp),
                 new MalfAiMachineOverrideEvent { Performer = body, Target = machine }, predicted: false);
 
-            Assert.That(entMan.HasComponent<Content.Server.NPC.HTN.HTNComponent>(machine), Is.True,
+            Assert.That(entMan.HasComponent<HTNComponent>(machine), Is.True,
                 "Machine Override did not animate the machine.");
-            var faction = entMan.GetComponent<Content.Shared.NPC.Components.NpcFactionMemberComponent>(machine);
+            var faction = entMan.GetComponent<NpcFactionMemberComponent>(machine);
             Assert.That(faction.Factions, Does.Contain("MalfAi"),
                 "Overridden machine is not MalfAi.");
-            Assert.That(entMan.HasComponent<Content.Shared.Weapons.Melee.MeleeWeaponComponent>(machine), Is.True,
+            Assert.That(entMan.HasComponent<MeleeWeaponComponent>(machine), Is.True,
                 "Overridden machine has no melee weapon.");
 
             var machineXform = entMan.GetComponent<TransformComponent>(machine);
@@ -195,7 +213,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
             if (entMan.TryGetComponent<Robust.Shared.Physics.Components.PhysicsComponent>(machine, out var machineBody))
                 Assert.That(machineBody.BodyType, Is.Not.EqualTo(Robust.Shared.Physics.BodyType.Static),
                     "Overridden machine stayed a static body and cannot move.");
-            Assert.That(entMan.HasComponent<Content.Shared.Movement.Components.InputMoverComponent>(machine), Is.True,
+            Assert.That(entMan.HasComponent<InputMoverComponent>(machine), Is.True,
                 "Overridden machine got no InputMover: MobMover never receives intents.");
 
             var cooldown = entMan.GetComponent<ActionComponent>(action).Cooldown;
@@ -265,7 +283,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
             Assert.That(dormantTimer.KeyOut, Is.EqualTo("custom-timer"));
             Assert.That(dormantTimer.KeysIn, Is.EqualTo(new[] { "custom-trigger" }));
             Assert.That(entMan.HasComponent<ActiveTimerTriggerComponent>(dormantTimerMachine), Is.False);
-            Assert.That(entMan.HasComponent<Content.Shared.Explosion.Components.ExplosiveComponent>(dormantTimerMachine), Is.False);
+            Assert.That(entMan.HasComponent<ExplosiveComponent>(dormantTimerMachine), Is.False);
 
             var explodeTriggerMachine = entMan.SpawnEntity("Autolathe", map.GridCoords);
             var explodeTrigger = entMan.AddComponent<ExplodeOnTriggerComponent>(explodeTriggerMachine);
@@ -278,7 +296,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
             Assert.That(explodeTrigger.KeysIn, Is.EquivalentTo(new[] { "custom-explosion" }));
             Assert.That(explodeTrigger.TargetUser, Is.True);
             Assert.That(entMan.HasComponent<TimerTriggerComponent>(explodeTriggerMachine), Is.False);
-            Assert.That(entMan.HasComponent<Content.Shared.Explosion.Components.ExplosiveComponent>(explodeTriggerMachine), Is.False);
+            Assert.That(entMan.HasComponent<ExplosiveComponent>(explodeTriggerMachine), Is.False);
 
             var machine = entMan.SpawnEntity("Autolathe", map.GridCoords);
             _overloadMachine = machine;
@@ -286,8 +304,8 @@ public sealed class MalfAiMachineModulesTest : GameTest
             Buy(pair, store, body, MalfAiConstants.MachineOverloadListing);
             var action = GrantedAction(pair, body, "ActionMalfAiMachineOverload");
 
-            var actionsSys = entMan.System<Content.Shared.Actions.SharedActionsSystem>();
-            var validateTarget = entMan.GetComponent<Content.Shared.Actions.Components.EntityTargetActionComponent>(action);
+            var actionsSys = entMan.System<SharedActionsSystem>();
+            var validateTarget = entMan.GetComponent<EntityTargetActionComponent>(action);
             Assert.That(actionsSys.ValidateEntityTarget(body, machine, (action, validateTarget)), Is.True,
                 "Machine Overload fails engine validation in live game.");
             var locker = entMan.SpawnEntity("LockerSteel", map.GridCoords);
@@ -324,7 +342,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
             entMan.EventBus.RaiseLocalEvent(body, overrideEv);
             Assert.That(overrideEv.Handled, Is.False,
                 "Override stacked onto an overloaded machine.");
-            Assert.That(entMan.HasComponent<Content.Shared.NPC.Components.NpcFactionMemberComponent>(machine), Is.False,
+            Assert.That(entMan.HasComponent<NpcFactionMemberComponent>(machine), Is.False,
                 "Override animated an overloaded machine.");
         });
 
@@ -372,12 +390,12 @@ public sealed class MalfAiMachineModulesTest : GameTest
 
             void Deploy(EntityUid performer, EntityCoordinates target)
             {
-                var actComp = entMan.GetComponent<Content.Shared.Actions.Components.ActionComponent>(action);
+                var actComp = entMan.GetComponent<ActionComponent>(action);
                 var ev = new MalfAiRobotFactoryEvent
                 {
                     Performer = performer,
                     Target = target,
-                    Action = new Entity<Content.Shared.Actions.Components.ActionComponent>(action, actComp)
+                    Action = new Entity<ActionComponent>(action, actComp)
                 };
                 entMan.EventBus.RaiseLocalEvent(performer, ev);
             }
@@ -431,35 +449,35 @@ public sealed class MalfAiMachineModulesTest : GameTest
             Assert.That(spentActions, Does.Not.Contain(action),
                 "Factory deploy action was not spent on placement.");
 
-            var mindSys = entMan.System<Content.Server.Mind.MindSystem>();
+            var mindSys = entMan.System<MindSystem>();
             corpse = entMan.SpawnEntity("MobHuman", map.GridCoords.Offset(new System.Numerics.Vector2(1.2f, 0f)));
             var corpseMind = mindSys.CreateMind(null);
             mindSys.TransferTo(corpseMind, corpse, mind: corpseMind);
-            entMan.System<Content.Shared.Mobs.Systems.MobStateSystem>()
-                .ChangeMobState(corpse, Content.Shared.Mobs.MobState.Dead);
+            entMan.System<MobStateSystem>()
+                .ChangeMobState(corpse, MobState.Dead);
 
             feeder = entMan.SpawnEntity("MobHuman", map.GridCoords.Offset(new System.Numerics.Vector2(1.1f, 0f)));
 
             var living = entMan.SpawnEntity("MobHuman", map.GridCoords);
-            var liveEv = new Content.Shared.DragDrop.DragDropTargetEvent(feeder, living);
+            var liveEv = new DragDropTargetEvent(feeder, living);
             entMan.EventBus.RaiseLocalEvent(factory, ref liveEv);
             Assert.That(entMan.HasComponent<ActiveMalfAiFactoryComponent>(factory), Is.False,
                 "Factory accepted a living body.");
             Assert.That(entMan.Deleted(living), Is.False, "Factory ground up a living body.");
 
             var mouse = entMan.SpawnEntity("MobMouse", map.GridCoords);
-            entMan.System<Content.Shared.Mobs.Systems.MobStateSystem>()
-                .ChangeMobState(mouse, Content.Shared.Mobs.MobState.Dead);
-            var mouseEv = new Content.Shared.DragDrop.DragDropTargetEvent(feeder, mouse);
+            entMan.System<MobStateSystem>()
+                .ChangeMobState(mouse, MobState.Dead);
+            var mouseEv = new DragDropTargetEvent(feeder, mouse);
             entMan.EventBus.RaiseLocalEvent(factory, ref mouseEv);
             Assert.That(entMan.HasComponent<ActiveMalfAiFactoryComponent>(factory), Is.False,
                 "Factory accepted a non-humanoid body.");
             Assert.That(entMan.Deleted(mouse), Is.False, "Factory ground up a non-humanoid body.");
 
             fodder = entMan.SpawnEntity("MobHuman", map.GridCoords.Offset(new System.Numerics.Vector2(1.2f, 0f)));
-            entMan.System<Content.Shared.Mobs.Systems.MobStateSystem>()
-                .ChangeMobState(fodder, Content.Shared.Mobs.MobState.Dead);
-            var aiEv = new Content.Shared.DragDrop.DragDropTargetEvent(body, fodder);
+            entMan.System<MobStateSystem>()
+                .ChangeMobState(fodder, MobState.Dead);
+            var aiEv = new DragDropTargetEvent(body, fodder);
             entMan.EventBus.RaiseLocalEvent(factory, ref aiEv);
             Assert.That(entMan.HasComponent<ActiveMalfAiFactoryComponent>(factory), Is.False,
                 "Handless AI fed the factory.");
@@ -477,11 +495,11 @@ public sealed class MalfAiMachineModulesTest : GameTest
         {
             var entMan = server.EntMan;
             var factory = _factoryEnt;
-            var crewPreview = new Content.Shared.DragDrop.CanDropTargetEvent(crewBorg, fodder);
+            var crewPreview = new CanDropTargetEvent(crewBorg, fodder);
             entMan.EventBus.RaiseLocalEvent(factory, ref crewPreview);
             Assert.That(crewPreview.CanDrop, Is.True, "A crew borg could not feed the factory.");
 
-            var dropEv = new Content.Shared.DragDrop.DragDropTargetEvent(feeder, corpse);
+            var dropEv = new DragDropTargetEvent(feeder, corpse);
             entMan.EventBus.RaiseLocalEvent(factory, ref dropEv);
             Assert.That(entMan.HasComponent<ActiveMalfAiFactoryComponent>(factory), Is.True,
                 "Factory did not start grinding an inserted corpse.");
@@ -489,9 +507,9 @@ public sealed class MalfAiMachineModulesTest : GameTest
                 "Inserted corpse was not removed from the floor.");
 
             var secondCorpse = entMan.SpawnEntity("MobHuman", map.GridCoords);
-            entMan.System<Content.Shared.Mobs.Systems.MobStateSystem>()
-                .ChangeMobState(secondCorpse, Content.Shared.Mobs.MobState.Dead);
-            var busyEv = new Content.Shared.DragDrop.DragDropTargetEvent(feeder, secondCorpse);
+            entMan.System<MobStateSystem>()
+                .ChangeMobState(secondCorpse, MobState.Dead);
+            var busyEv = new DragDropTargetEvent(feeder, secondCorpse);
             entMan.EventBus.RaiseLocalEvent(factory, ref busyEv);
             Assert.That(entMan.Deleted(secondCorpse), Is.False,
                 "Factory accepted a second corpse while busy.");
@@ -505,7 +523,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
             var entMan = server.EntMan;
 
             var borgs = new List<EntityUid>();
-            var chassisQuery = entMan.AllEntityQueryEnumerator<Content.Shared.Silicons.Borgs.Components.BorgChassisComponent>();
+            var chassisQuery = entMan.AllEntityQueryEnumerator<BorgChassisComponent>();
             while (chassisQuery.MoveNext(out var chassis, out _))
             {
                 if (entMan.GetComponent<TransformComponent>(chassis).GridUid == map.GridCoords.EntityId
@@ -537,14 +555,14 @@ public sealed class MalfAiMachineModulesTest : GameTest
             Assert.That(moduleContainer.ContainedEntities.Count, Is.EqualTo(3),
                 "The cyborg was assembled without its tool modules.");
 
-            var borgFaction = entMan.GetComponent<Content.Shared.NPC.Components.NpcFactionMemberComponent>(borg);
+            var borgFaction = entMan.GetComponent<NpcFactionMemberComponent>(borg);
             Assert.That(borgFaction.Factions,
-                Is.EquivalentTo(new[] { new ProtoId<Content.Shared.NPC.Prototypes.NpcFactionPrototype>("MalfAi") }),
+                Is.EquivalentTo(new[] { new ProtoId<NpcFactionPrototype>("MalfAi") }),
                 "The converted cyborg must belong only to MalfAi.");
 
-            Assert.That(entMan.HasComponent<Content.Shared.Silicons.Borgs.Components.BorgTransponderComponent>(borg), Is.False);
-            Assert.That(entMan.HasComponent<Content.Shared.Trigger.Components.TimerTriggerComponent>(borg), Is.False);
-            Assert.That(entMan.HasComponent<Content.Shared.Explosion.Components.ExplosiveComponent>(borg), Is.False);
+            Assert.That(entMan.HasComponent<BorgTransponderComponent>(borg), Is.False);
+            Assert.That(entMan.HasComponent<TimerTriggerComponent>(borg), Is.False);
+            Assert.That(entMan.HasComponent<ExplosiveComponent>(borg), Is.False);
 
             var borgPos = entMan.GetComponent<TransformComponent>(borg).Coordinates;
             var factoryPos = entMan.GetComponent<TransformComponent>(_factoryEnt).Coordinates;
@@ -621,12 +639,12 @@ public sealed class MalfAiMachineModulesTest : GameTest
 
             EntityUid Deploy(EntityUid deployAction)
             {
-                var actComp = entMan.GetComponent<Content.Shared.Actions.Components.ActionComponent>(deployAction);
+                var actComp = entMan.GetComponent<ActionComponent>(deployAction);
                 var deployEv = new MalfAiRobotFactoryEvent
                 {
                     Performer = body,
                     Target = target,
-                    Action = new Entity<Content.Shared.Actions.Components.ActionComponent>(deployAction, actComp)
+                    Action = new Entity<ActionComponent>(deployAction, actComp)
                 };
                 entMan.EventBus.RaiseLocalEvent(body, deployEv);
                 return deployEv.Handled ? deployAction : EntityUid.Invalid;
@@ -640,7 +658,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
             // The standing factory is anchored but collides off the Impassable layer,
             // so the second deploy must be denied by the TileFree check itself.
             server.ResolveDependency<Robust.Shared.Configuration.IConfigurationManager>()
-                .SetCVar(Content.Shared.SS220.CCVars.CCVars220.MalfAiMaxFactories, 2);
+                .SetCVar(CCVars220.MalfAiMaxFactories, 2);
             Buy(pair, store, body, MalfAiConstants.RobotFactoryListing);
             var action2 = GrantedAction(pair, body, "ActionMalfAiRobotFactory");
 
@@ -686,31 +704,31 @@ public sealed class MalfAiMachineModulesTest : GameTest
             entMan.System<PowerReceiverSystem>().SetNeedsPower(factory, false);
             feeder = entMan.SpawnEntity("MobHuman", factoryCoords.Offset(new System.Numerics.Vector2(1.1f, 0f)));
             corpse = entMan.SpawnEntity("MobHuman", factoryCoords.Offset(new System.Numerics.Vector2(1.2f, 0f)));
-            entMan.System<Content.Shared.Mobs.Systems.MobStateSystem>()
-                .ChangeMobState(corpse, Content.Shared.Mobs.MobState.Dead);
+            entMan.System<MobStateSystem>()
+                .ChangeMobState(corpse, MobState.Dead);
             var comp = entMan.GetComponent<MalfAiFactoryComponent>(factory);
             Assert.That(comp.InsertionDelayPerMass, Is.GreaterThan(0f));
             Assert.That(entMan.GetComponent<Robust.Shared.Physics.Components.PhysicsComponent>(corpse).FixturesMass,
                 Is.GreaterThan(0f));
-            Assert.That(entMan.HasComponent<Content.Shared.Hands.Components.HandsComponent>(body), Is.False);
+            Assert.That(entMan.HasComponent<HandsComponent>(body), Is.False);
         });
         await server.WaitRunTicks(5);
         await server.WaitAssertion(() =>
         {
             var entMan = server.EntMan;
-            Assert.That(entMan.GetComponent<Content.Shared.Hands.Components.HandsComponent>(feeder).Count,
+            Assert.That(entMan.GetComponent<HandsComponent>(feeder).Count,
                 Is.GreaterThan(0), "The feeder spawned without usable hands.");
 
-            var aiDrop = new Content.Shared.DragDrop.DragDropTargetEvent(body, corpse);
+            var aiDrop = new DragDropTargetEvent(body, corpse);
             entMan.EventBus.RaiseLocalEvent(factory, ref aiDrop);
-            Assert.That(entMan.HasComponent<Content.Shared.DoAfter.ActiveDoAfterComponent>(body), Is.False,
+            Assert.That(entMan.HasComponent<ActiveDoAfterComponent>(body), Is.False,
                 "The handless AI started a factory insertion.");
             Assert.That(entMan.HasComponent<ActiveMalfAiFactoryComponent>(factory), Is.False,
                 "The handless AI fed the factory.");
 
-            var drop = new Content.Shared.DragDrop.DragDropTargetEvent(feeder, corpse);
+            var drop = new DragDropTargetEvent(feeder, corpse);
             entMan.EventBus.RaiseLocalEvent(factory, ref drop);
-            Assert.That(entMan.HasComponent<Content.Shared.DoAfter.ActiveDoAfterComponent>(feeder), Is.True,
+            Assert.That(entMan.HasComponent<ActiveDoAfterComponent>(feeder), Is.True,
                 "A feeder with hands did not start a nonzero insertion DoAfter.");
             Assert.That(entMan.HasComponent<ActiveMalfAiFactoryComponent>(factory), Is.False,
                 "The insertion delay was bypassed.");
@@ -800,9 +818,9 @@ public sealed class MalfAiMachineModulesTest : GameTest
 
             var feeder = entMan.SpawnEntity("MobHuman", map.GridCoords.Offset(new System.Numerics.Vector2(1.1f, 0f)));
             var corpse = entMan.SpawnEntity("MobHuman", map.GridCoords.Offset(new System.Numerics.Vector2(1.2f, 0f)));
-            entMan.System<Content.Shared.Mobs.Systems.MobStateSystem>()
-                .ChangeMobState(corpse, Content.Shared.Mobs.MobState.Dead);
-            var dropEv = new Content.Shared.DragDrop.DragDropTargetEvent(feeder, corpse);
+            entMan.System<MobStateSystem>()
+                .ChangeMobState(corpse, MobState.Dead);
+            var dropEv = new DragDropTargetEvent(feeder, corpse);
             entMan.EventBus.RaiseLocalEvent(factory, ref dropEv);
             Assert.That(entMan.HasComponent<ActiveMalfAiFactoryComponent>(factory), Is.True,
                 "Factory did not start grinding.");
@@ -817,7 +835,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
         {
             var entMan = server.EntMan;
             var borgs = 0;
-            var chassisQuery = entMan.AllEntityQueryEnumerator<Content.Shared.Silicons.Borgs.Components.BorgChassisComponent>();
+            var chassisQuery = entMan.AllEntityQueryEnumerator<BorgChassisComponent>();
             while (chassisQuery.MoveNext(out var chassis, out _))
             {
                 if (entMan.GetComponent<TransformComponent>(chassis).GridUid == map.GridCoords.EntityId)
@@ -890,13 +908,13 @@ public sealed class MalfAiMachineModulesTest : GameTest
 
             var session = pair.Player;
             Assert.That(session, Is.Not.Null, "Connected pair has no player session.");
-            var mindSys = entMan.System<Content.Server.Mind.MindSystem>();
+            var mindSys = entMan.System<MindSystem>();
             corpse = entMan.SpawnEntity("MobHuman", map.GridCoords.Offset(new System.Numerics.Vector2(1.2f, 0f)));
             var corpseMind = mindSys.CreateMind(null);
             mindSys.TransferTo(corpseMind, corpse, mind: corpseMind);
             mindSys.SetUserId(corpseMind, session!.UserId);
-            entMan.System<Content.Shared.Mobs.Systems.MobStateSystem>()
-                .ChangeMobState(corpse, Content.Shared.Mobs.MobState.Dead);
+            entMan.System<MobStateSystem>()
+                .ChangeMobState(corpse, MobState.Dead);
             _transferMindId = corpseMind;
             _factoryEnt = factory;
 
@@ -908,7 +926,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
         {
             var entMan = server.EntMan;
             var factory = _factoryEnt;
-            var dropEv = new Content.Shared.DragDrop.DragDropTargetEvent(feeder, corpse);
+            var dropEv = new DragDropTargetEvent(feeder, corpse);
             entMan.EventBus.RaiseLocalEvent(factory, ref dropEv);
             Assert.That(entMan.HasComponent<ActiveMalfAiFactoryComponent>(factory), Is.True,
                 "Factory did not start grinding the corpse.");
@@ -922,7 +940,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
             var entMan = server.EntMan;
 
             EntityUid? borg = null;
-            var chassisQuery = entMan.AllEntityQueryEnumerator<Content.Shared.Silicons.Borgs.Components.BorgChassisComponent>();
+            var chassisQuery = entMan.AllEntityQueryEnumerator<BorgChassisComponent>();
             while (chassisQuery.MoveNext(out var chassis, out _))
             {
                 if (entMan.GetComponent<TransformComponent>(chassis).GridUid == map.GridCoords.EntityId)
@@ -940,8 +958,8 @@ public sealed class MalfAiMachineModulesTest : GameTest
 
             producedBorg = borg.Value;
             previewCorpse = entMan.SpawnEntity("MobHuman", map.GridCoords);
-            entMan.System<Content.Shared.Mobs.Systems.MobStateSystem>()
-                .ChangeMobState(previewCorpse, Content.Shared.Mobs.MobState.Dead);
+            entMan.System<MobStateSystem>()
+                .ChangeMobState(previewCorpse, MobState.Dead);
             previewCrewBorg = entMan.SpawnEntity("BorgChassisGeneric", map.GridCoords);
 
             entMan.System<SharedRoleSystem>()
@@ -956,10 +974,10 @@ public sealed class MalfAiMachineModulesTest : GameTest
             var borg = pair.ToClientUid(producedBorg);
             var corpse = pair.ToClientUid(previewCorpse);
             var factory = pair.ToClientUid(_factoryEnt);
-            var convertedPreview = new Content.Shared.DragDrop.CanDropTargetEvent(borg, corpse);
+            var convertedPreview = new CanDropTargetEvent(borg, corpse);
             entMan.EventBus.RaiseLocalEvent(factory, ref convertedPreview);
             Assert.That(convertedPreview.CanDrop, Is.True, "Client rejected the converted borg's factory preview.");
-            var crewPreview = new Content.Shared.DragDrop.CanDropTargetEvent(pair.ToClientUid(previewCrewBorg), corpse);
+            var crewPreview = new CanDropTargetEvent(pair.ToClientUid(previewCrewBorg), corpse);
             entMan.EventBus.RaiseLocalEvent(factory, ref crewPreview);
             Assert.That(crewPreview.CanDrop, Is.True, "Client rejected a crew borg's factory preview.");
         });
@@ -1006,7 +1024,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
             Buy(pair, store, body, MalfAiConstants.PowerSiphonListing);
             var action = GrantedAction(pair, body, "ActionMalfAiPowerSiphon");
 
-            var actionsSys = entMan.System<Content.Shared.Actions.SharedActionsSystem>();
+            var actionsSys = entMan.System<SharedActionsSystem>();
             var actionsComp = entMan.GetComponent<ActionsComponent>(body);
             var actionComp = entMan.GetComponent<ActionComponent>(action);
             actionsSys.PerformAction((body, actionsComp), (action, actionComp),
@@ -1024,7 +1042,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
             Assert.That(consumer!.NodeId, Is.EqualTo(addedNodeId));
             var startDraw = consumer.DrawRate;
             Assert.That(startDraw, Is.GreaterThan(0f));
-            Assert.That(consumer.Voltage, Is.EqualTo(Content.Shared.Power.Voltage.High));
+            Assert.That(consumer.Voltage, Is.EqualTo(Voltage.High));
 
             Assert.That(entMan.TryGetComponent<TimedSpawnerComponent>(machine, out var sparks));
             Assert.That(sparks!.Prototypes, Does.Contain("EffectSparks"));
@@ -1109,7 +1127,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
             Buy(pair, store, body, MalfAiConstants.PowerSiphonListing);
             var action = GrantedAction(pair, body, "ActionMalfAiPowerSiphon");
 
-            var actionsSys = entMan.System<Content.Shared.Actions.SharedActionsSystem>();
+            var actionsSys = entMan.System<SharedActionsSystem>();
             var actionsComp = entMan.GetComponent<ActionsComponent>(body);
             var actionComp = entMan.GetComponent<ActionComponent>(action);
             actionsSys.PerformAction((body, actionsComp), (action, actionComp),

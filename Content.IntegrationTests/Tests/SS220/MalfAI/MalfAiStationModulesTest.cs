@@ -1,32 +1,46 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using System.Collections.Generic;
 using System.Linq;
-using Content.IntegrationTests.Fixtures;
 using Content.IntegrationTests.Fixtures.Attributes;
+using Content.IntegrationTests.Fixtures;
 using Content.IntegrationTests.Pair;
+using Content.Server.Atmos.EntitySystems;
 using Content.Server.Atmos.Monitor.Components;
 using Content.Server.Atmos.Monitor.Systems;
 using Content.Server.Atmos.Piping.Unary.Components;
+using Content.Server.DeviceNetwork.Systems;
+using Content.Server.Emp;
+using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.SS220.MalfAI;
 using Content.Server.Station.Systems;
-using Content.Shared.GameTicking.Components;
-using Content.Shared.Atmos;
-using Content.Shared.Atmos.Monitor;
+using Content.Shared.Actions.Components;
+using Content.Shared.Actions;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Atmos.Monitor.Components;
+using Content.Shared.Atmos.Monitor;
 using Content.Shared.Atmos.Piping.Unary.Components;
-using Content.Shared.DeviceNetwork;
+using Content.Shared.Atmos;
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DeviceNetwork.Events;
+using Content.Shared.DeviceNetwork;
+using Content.Shared.Emp;
 using Content.Shared.FixedPoint;
-using Content.Shared.SS220.MalfAI;
+using Content.Shared.GameTicking.Components;
+using Content.Shared.Light.Components;
+using Content.Shared.Light.EntitySystems;
 using Content.Shared.Mind;
-using Content.Shared.Roles;
 using Content.Shared.Roles.Components;
+using Content.Shared.Roles;
+using Content.Shared.SS220.IgnoreLightVision.Components;
+using Content.Shared.SS220.MalfAI;
 using Content.Shared.Silicons.StationAi;
 using Content.Shared.Station.Components;
-using Content.Shared.SurveillanceCamera.Components;
-using Content.Shared.Store;
+using Content.Shared.Station;
+using Content.Shared.StationAi;
 using Content.Shared.Store.Components;
+using Content.Shared.Store;
+using Content.Shared.SurveillanceCamera.Components;
 using Content.Shared.Tag;
 using Robust.Shared.Configuration;
 using Robust.Shared.GameObjects;
@@ -57,8 +71,8 @@ public sealed class MalfAiStationModulesTest : GameTest
 
         var core = entMan.SpawnEntity("PlayerStationAiEmpty", map.GridCoords);
         var brain = entMan.SpawnEntity("StationAiBrain", map.GridCoords);
-        var slotSys = entMan.System<Content.Shared.Containers.ItemSlots.ItemSlotsSystem>();
-        var slots = entMan.GetComponent<Content.Shared.Containers.ItemSlots.ItemSlotsComponent>(core);
+        var slotSys = entMan.System<ItemSlotsSystem>();
+        var slots = entMan.GetComponent<ItemSlotsComponent>(core);
         slotSys.TryInsert(core, "station_ai_mind_slot", brain, null, slots);
 
         var mind = mindSys.CreateMind(null);
@@ -117,7 +131,7 @@ public sealed class MalfAiStationModulesTest : GameTest
     {
         var entMan = pair.Server.EntMan;
         Assert.That(
-            entMan.HasComponent<Content.Shared.Atmos.Components.GridAtmosphereComponent>(map.GridCoords.EntityId),
+            entMan.HasComponent<GridAtmosphereComponent>(map.GridCoords.EntityId),
             Is.True, "Test grid did not register simulated atmosphere (mass gate).");
     }
 
@@ -151,16 +165,16 @@ public sealed class MalfAiStationModulesTest : GameTest
             var apc = entMan.SpawnEntity("APCBasic", map.GridCoords);
 
             var light = entMan.SpawnEntity("Poweredlight", map.GridCoords);
-            var lightSys = entMan.System<Content.Shared.Light.EntitySystems.SharedPoweredLightSystem>();
+            var lightSys = entMan.System<SharedPoweredLightSystem>();
             var bulb = lightSys.GetBulb(light);
             Assert.That(bulb, Is.Not.Null, "Poweredlight spawned without a bulb.");
-            Assert.That(entMan.GetComponent<Content.Shared.Light.Components.LightBulbComponent>(bulb.Value).State,
-                Is.EqualTo(Content.Shared.Light.Components.LightBulbState.Normal));
+            Assert.That(entMan.GetComponent<LightBulbComponent>(bulb.Value).State,
+                Is.EqualTo(LightBulbState.Normal));
 
             Buy(pair, store, body, MalfAiConstants.BlackoutListing);
 
             EntityUid? granted = null;
-            if (entMan.TryGetComponent<Content.Shared.Actions.Components.ActionsComponent>(body, out var actions))
+            if (entMan.TryGetComponent<ActionsComponent>(body, out var actions))
             {
                 foreach (var actionId in actions.Actions)
                 {
@@ -170,7 +184,7 @@ public sealed class MalfAiStationModulesTest : GameTest
             }
 
             Assert.That(granted, Is.Not.Null, "Blackout action was not granted on purchase.");
-            Assert.That(entMan.GetComponent<Content.Shared.Actions.Components.ActionComponent>(granted.Value).UseDelay,
+            Assert.That(entMan.GetComponent<ActionComponent>(granted.Value).UseDelay,
                 Is.EqualTo(TimeSpan.FromSeconds(40)));
 
             bool Blackout(EntityUid performer, EntityUid target)
@@ -180,31 +194,31 @@ public sealed class MalfAiStationModulesTest : GameTest
                 return ev.Handled;
             }
 
-            var atmosSys = entMan.System<Content.Server.Atmos.EntitySystems.AtmosphereSystem>();
+            var atmosSys = entMan.System<AtmosphereSystem>();
             var mix = atmosSys.GetTileMixture(apc, true);
             Assert.That(mix, Is.Not.Null, "APC tile has no atmosphere even with a simulated grid.");
-            mix.AdjustMoles(Content.Shared.Atmos.Gas.Plasma, 50f);
-            mix.AdjustMoles(Content.Shared.Atmos.Gas.Oxygen, 100f);
+            mix.AdjustMoles(Gas.Plasma, 50f);
+            mix.AdjustMoles(Gas.Oxygen, 100f);
 
-            var actionsSys = entMan.System<Content.Shared.Actions.SharedActionsSystem>();
-            var actionComp = entMan.GetComponent<Content.Shared.Actions.Components.ActionComponent>(granted.Value);
+            var actionsSys = entMan.System<SharedActionsSystem>();
+            var actionComp = entMan.GetComponent<ActionComponent>(granted.Value);
             actionsSys.PerformAction((body, actions), (granted.Value, actionComp),
                 new MalfAiBlackoutEvent { Performer = body, Target = apc }, predicted: false);
 
-            if (entMan.TryGetComponent<Content.Shared.Atmos.Components.GridAtmosphereComponent>(map.GridCoords.EntityId, out var gridAtmos))
+            if (entMan.TryGetComponent<GridAtmosphereComponent>(map.GridCoords.EntityId, out var gridAtmos))
                 Assert.That(gridAtmos.HotspotTilesCount, Is.GreaterThan(0),
                     "Directed blackout did not ignite the plasma on the APC tile.");
 
-            Assert.That(entMan.GetComponent<Content.Shared.Light.Components.LightBulbComponent>(bulb.Value).State,
-                Is.EqualTo(Content.Shared.Light.Components.LightBulbState.Broken),
+            Assert.That(entMan.GetComponent<LightBulbComponent>(bulb.Value).State,
+                Is.EqualTo(LightBulbState.Broken),
                 "Directed blackout did not pop the nearby bulb.");
 
-            var cooldown = entMan.GetComponent<Content.Shared.Actions.Components.ActionComponent>(granted.Value).Cooldown;
+            var cooldown = entMan.GetComponent<ActionComponent>(granted.Value).Cooldown;
             Assert.That(cooldown, Is.Not.Null, "Directed blackout did not start its cooldown.");
             Assert.That(cooldown.Value.End - cooldown.Value.Start, Is.EqualTo(TimeSpan.FromSeconds(40)));
 
             var apcOff = entMan.SpawnEntity("APCBasic", map.GridCoords);
-            entMan.GetComponent<Content.Server.Power.Components.ApcComponent>(apcOff).MainBreakerEnabled = false;
+            entMan.GetComponent<ApcComponent>(apcOff).MainBreakerEnabled = false;
             Assert.That(Blackout(body, apcOff), Is.False,
                 "Blackout fired on a powered-off APC.");
 
@@ -263,7 +277,7 @@ public sealed class MalfAiStationModulesTest : GameTest
 
             Buy(pair, store, body, MalfAiConstants.ThermalListing);
 
-            var station = entMan.System<Content.Shared.Station.SharedStationSystem>().GetOwningStation(alarm);
+            var station = entMan.System<SharedStationSystem>().GetOwningStation(alarm);
             Assert.That(station, Is.Not.Null);
             Assert.That(entMan.HasComponent<MalfAiThermalOverrideComponent>(station.Value), Is.True);
 
@@ -322,9 +336,9 @@ public sealed class MalfAiStationModulesTest : GameTest
             var entMan = server.EntMan;
             RequireSimulatedAtmos(pair, map);
 
-            var atmosSys = entMan.System<Content.Server.Atmos.EntitySystems.AtmosphereSystem>();
+            var atmosSys = entMan.System<AtmosphereSystem>();
             var gridUid = map.GridCoords.EntityId;
-            var gridAtmos = entMan.GetComponent<Content.Shared.Atmos.Components.GridAtmosphereComponent>(gridUid);
+            var gridAtmos = entMan.GetComponent<GridAtmosphereComponent>(gridUid);
 
             var body = SpawnRoleBody(pair, map);
             server.EntMan.System<SharedMindSystem>().TryGetMind(body, out var mindId, out _);
@@ -334,8 +348,8 @@ public sealed class MalfAiStationModulesTest : GameTest
             var apc = entMan.SpawnEntity("APCBasic", map.GridCoords);
             var mix = atmosSys.GetTileMixture(apc, true);
             Assert.That(mix, Is.Not.Null, "APC tile has no atmosphere even with a simulated grid.");
-            mix.AdjustMoles(Content.Shared.Atmos.Gas.Plasma, 50f);
-            mix.AdjustMoles(Content.Shared.Atmos.Gas.Oxygen, 100f);
+            mix.AdjustMoles(Gas.Plasma, 50f);
+            mix.AdjustMoles(Gas.Oxygen, 100f);
 
             void Blackout(EntityUid performer, EntityUid target)
             {
@@ -381,7 +395,7 @@ public sealed class MalfAiStationModulesTest : GameTest
             var powerSys = entMan.System<PowerReceiverSystem>();
             powerSys.SetNeedsPower(alarm, false);
             powerSys.SetNeedsPower(vent, false);
-            entMan.System<Content.Server.DeviceNetwork.Systems.DeviceListSystem>()
+            entMan.System<DeviceListSystem>()
                 .UpdateDeviceList(alarm, new[] { vent });
         });
 
@@ -400,7 +414,7 @@ public sealed class MalfAiStationModulesTest : GameTest
             TopUp(pair, store, 100);
             Buy(pair, store, body, MalfAiConstants.FloodListing);
 
-            var actionsComp = entMan.GetComponent<Content.Shared.Actions.Components.ActionsComponent>(body);
+            var actionsComp = entMan.GetComponent<ActionsComponent>(body);
             foreach (var actionId in actionsComp.Actions)
             {
                 if (entMan.GetComponent<MetaDataComponent>(actionId).EntityPrototype?.ID == "ActionMalfAiAirFlood")
@@ -408,11 +422,11 @@ public sealed class MalfAiStationModulesTest : GameTest
             }
 
             Assert.That(floodAction, Is.Not.Null, "Flood action was not granted on purchase.");
-            Assert.That(entMan.GetComponent<Content.Shared.Actions.Components.ActionComponent>(floodAction.Value).UseDelay,
+            Assert.That(entMan.GetComponent<ActionComponent>(floodAction.Value).UseDelay,
                 Is.EqualTo(TimeSpan.FromMinutes(10)));
 
-            var actionsSys = entMan.System<Content.Shared.Actions.SharedActionsSystem>();
-            var actionComp = entMan.GetComponent<Content.Shared.Actions.Components.ActionComponent>(floodAction.Value);
+            var actionsSys = entMan.System<SharedActionsSystem>();
+            var actionComp = entMan.GetComponent<ActionComponent>(floodAction.Value);
             actionsSys.PerformAction((body, actionsComp), (floodAction.Value, actionComp),
                 new MalfAiAirFloodEvent { Performer = body }, predicted: false);
 
@@ -432,7 +446,7 @@ public sealed class MalfAiStationModulesTest : GameTest
             Assert.That(floodedVent.ExternalPressureBound, Is.EqualTo(500f),
                 "Flood did not set vents to 500 kPa.");
 
-            var cooldown = entMan.GetComponent<Content.Shared.Actions.Components.ActionComponent>(floodAction.Value).Cooldown;
+            var cooldown = entMan.GetComponent<ActionComponent>(floodAction.Value).Cooldown;
             Assert.That(cooldown, Is.Not.Null, "Flood action did not start its cooldown.");
             Assert.That(cooldown.Value.End - cooldown.Value.Start, Is.EqualTo(TimeSpan.FromMinutes(10)));
 
@@ -505,28 +519,28 @@ public sealed class MalfAiStationModulesTest : GameTest
 
             Buy(pair, store, body, MalfAiConstants.CameraUpgradeListing);
 
-            var station = entMan.System<Content.Shared.Station.SharedStationSystem>().GetOwningStation(body);
+            var station = entMan.System<SharedStationSystem>().GetOwningStation(body);
             Assert.That(station, Is.Not.Null);
             Assert.That(entMan.HasComponent<MalfAiCameraUpgradeComponent>(station.Value), Is.True);
 
             Assert.That(
-                entMan.TryGetComponent<Content.Shared.StationAi.StationAiVisionComponent>(cam, out var vision));
+                entMan.TryGetComponent<StationAiVisionComponent>(cam, out var vision));
             Assert.That(vision!.NeedsPower, Is.False, "Camera still needs power.");
             Assert.That(vision!.Occluded, Is.False, "Camera is still occluded by walls.");
             Assert.That(vision!.Range, Is.GreaterThan(7.5f), "Camera range was not extended.");
 
             Assert.That(
-                entMan.TryGetComponent<Content.Shared.SS220.IgnoreLightVision.Components.ThermalVisionComponent>(body, out var thermal));
+                entMan.TryGetComponent<ThermalVisionComponent>(body, out var thermal));
             Assert.That(thermal!.State,
-                Is.EqualTo(Content.Shared.SS220.IgnoreLightVision.Components.IgnoreLightVisionOverlayState.Half));
+                Is.EqualTo(IgnoreLightVisionOverlayState.Half));
 
             var cam2 = entMan.SpawnEntity("SurveillanceCameraSecurity", map.GridCoords);
             Assert.That(
-                entMan.TryGetComponent<Content.Shared.StationAi.StationAiVisionComponent>(cam2, out var vision2));
+                entMan.TryGetComponent<StationAiVisionComponent>(cam2, out var vision2));
             Assert.That(vision2!.Occluded, Is.False,
                 "Late-built camera was not overclocked.");
 
-            Assert.That(entMan.TryGetComponent<Content.Server.Power.Components.ApcPowerReceiverComponent>(
+            Assert.That(entMan.TryGetComponent<ApcPowerReceiverComponent>(
                 cam2, out var camRecv));
             Assert.That(camRecv!.NeedsPower, Is.False,
                 "Overclocked camera still depends on APC power.");
@@ -537,7 +551,7 @@ public sealed class MalfAiStationModulesTest : GameTest
             if (entMan.System<SharedStationAiSystem>().TryGetCore(body, out var core))
                 coreUid = core.Owner;
 
-            if (entMan.TryGetComponent<Content.Server.Power.Components.ApcPowerReceiverComponent>(
+            if (entMan.TryGetComponent<ApcPowerReceiverComponent>(
                     coreUid, out var coreRecv))
             {
                 Assert.That(coreRecv.NeedsPower, Is.True,
@@ -546,7 +560,7 @@ public sealed class MalfAiStationModulesTest : GameTest
 
             var pad = entMan.SpawnEntity("Holopad", map.GridCoords);
             Assert.That(
-                entMan.TryGetComponent<Content.Shared.StationAi.StationAiVisionComponent>(pad, out var padVision));
+                entMan.TryGetComponent<StationAiVisionComponent>(pad, out var padVision));
             Assert.That(padVision!.Occluded, Is.False,
                 "Holopad vision was not overclocked.");
             Assert.That(padVision!.Range, Is.EqualTo(12f),
@@ -554,7 +568,7 @@ public sealed class MalfAiStationModulesTest : GameTest
 
             var holo = entMan.SpawnEntity("StationAiHoloLocal", map.GridCoords);
             Assert.That(
-                entMan.TryGetComponent<Content.Shared.StationAi.StationAiVisionComponent>(holo, out var holoVision));
+                entMan.TryGetComponent<StationAiVisionComponent>(holo, out var holoVision));
             Assert.That(holoVision!.Occluded, Is.False,
                 "AI hologram vision was not overclocked.");
             Assert.That(holoVision!.Range, Is.EqualTo(20f),
@@ -577,7 +591,7 @@ public sealed class MalfAiStationModulesTest : GameTest
             Assert.That(entMan.HasComponent<MalfAiActorComponent>(bodyUid),
                 Is.False, "Actor comp survived Malf role removal.");
             Assert.That(
-                entMan.HasComponent<Content.Shared.SS220.IgnoreLightVision.Components.ThermalVisionComponent>(bodyUid),
+                entMan.HasComponent<ThermalVisionComponent>(bodyUid),
                 Is.False, "Thermal vision lingered on the body after Malf role removal.");
             Assert.That(mindUid, Is.Not.EqualTo(EntityUid.Invalid));
         });
@@ -610,9 +624,9 @@ public sealed class MalfAiStationModulesTest : GameTest
             Buy(pair, store, body, MalfAiConstants.CameraUpgradeListing);
 
             Assert.That(entMan.System<SharedStationAiSystem>().TryGetCore(body, out var core), Is.True);
-            entMan.RemoveComponent<Content.Shared.StationAi.StationAiVisionComponent>(core.Owner);
+            entMan.RemoveComponent<StationAiVisionComponent>(core.Owner);
 
-            Assert.That(entMan.GetComponent<Content.Shared.StationAi.StationAiVisionComponent>(cam).Occluded,
+            Assert.That(entMan.GetComponent<StationAiVisionComponent>(cam).Occluded,
                 Is.False, "Camera was not overclocked; the vision assertion would prove nothing.");
 
             var mapSys = entMan.System<SharedMapSystem>();
@@ -633,9 +647,9 @@ public sealed class MalfAiStationModulesTest : GameTest
                 "Overclocked camera did not reveal its own tile on a grid offset from the world origin "
                 + "(x-ray branch is resolving the seed in the wrong coordinate space).");
 
-            Assert.That(entMan.System<Content.Server.Emp.EmpSystem>()
+            Assert.That(entMan.System<EmpSystem>()
                 .DoEmpEffects(cam, 1000f, TimeSpan.FromSeconds(10)), Is.True);
-            Assert.That(entMan.HasComponent<Content.Shared.Emp.EmpDisabledComponent>(cam), Is.True);
+            Assert.That(entMan.HasComponent<EmpDisabledComponent>(cam), Is.True);
 
             visible.Clear();
             visionSystem.GetView(
@@ -672,7 +686,7 @@ public sealed class MalfAiStationModulesTest : GameTest
             Buy(pair, store, body, MalfAiConstants.ChaosPulseListing);
 
             EntityUid? chaosAction = null;
-            var actionsComp = entMan.GetComponent<Content.Shared.Actions.Components.ActionsComponent>(body);
+            var actionsComp = entMan.GetComponent<ActionsComponent>(body);
             foreach (var actionId in actionsComp.Actions)
             {
                 if (entMan.GetComponent<MetaDataComponent>(actionId).EntityPrototype?.ID == "ActionMalfAiChaosPulse")
@@ -680,7 +694,7 @@ public sealed class MalfAiStationModulesTest : GameTest
             }
 
             Assert.That(chaosAction, Is.Not.Null, "Chaos Pulse action was not granted on purchase.");
-            Assert.That(entMan.GetComponent<Content.Shared.Actions.Components.ActionComponent>(chaosAction.Value).UseDelay,
+            Assert.That(entMan.GetComponent<ActionComponent>(chaosAction.Value).UseDelay,
                 Is.EqualTo(TimeSpan.FromMinutes(3)));
 
             var pool = entMan.GetComponent<MalfAiChaosPulseComponent>(chaosAction.Value);
@@ -697,8 +711,8 @@ public sealed class MalfAiStationModulesTest : GameTest
             while (existing.MoveNext(out _, out _))
                 before++;
 
-            var actionsSys = entMan.System<Content.Shared.Actions.SharedActionsSystem>();
-            var actionComp = entMan.GetComponent<Content.Shared.Actions.Components.ActionComponent>(chaosAction.Value);
+            var actionsSys = entMan.System<SharedActionsSystem>();
+            var actionComp = entMan.GetComponent<ActionComponent>(chaosAction.Value);
             actionsSys.PerformAction((body, actionsComp), (chaosAction.Value, actionComp),
                 new MalfAiChaosPulseEvent { Performer = body }, predicted: false);
 
@@ -709,7 +723,7 @@ public sealed class MalfAiStationModulesTest : GameTest
 
             Assert.That(after, Is.GreaterThan(before), "Chaos Pulse did not start a game rule.");
 
-            var cooldown = entMan.GetComponent<Content.Shared.Actions.Components.ActionComponent>(chaosAction.Value).Cooldown;
+            var cooldown = entMan.GetComponent<ActionComponent>(chaosAction.Value).Cooldown;
             Assert.That(cooldown, Is.Not.Null, "Chaos Pulse did not start its cooldown.");
             Assert.That(cooldown.Value.End - cooldown.Value.Start, Is.EqualTo(TimeSpan.FromMinutes(3)));
         });
