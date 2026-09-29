@@ -577,10 +577,8 @@ public sealed partial class MalfAiSystem : EntitySystem
     public bool TryGetOwnedStore(EntityUid mindId, [NotNullWhen(true)] out Entity<StoreComponent>? store)
     {
         store = null;
-        if (TerminatingOrDeleted(mindId) || !HasComp<MindComponent>(mindId))
-            return false;
-
-        if (_roles.MindHasRole<MalfAiRoleComponent>(mindId, out var role))
+        if (EntityManager.EntityExists(mindId)
+            && _roles.MindHasRole<MalfAiRoleComponent>(mindId, out var role))
         {
             if (role.Value.Comp2.Store is { } pinned
                 && !_deadStores.Contains(pinned)
