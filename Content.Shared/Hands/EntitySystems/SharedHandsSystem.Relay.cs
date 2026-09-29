@@ -1,5 +1,6 @@
 using Content.Shared.Atmos;
 using Content.Shared.Camera;
+using Content.Shared.CombatMode;
 using Content.Shared.Cuffs;
 using Content.Shared.Hands.Components;
 using Content.Shared.Movement.Systems;
@@ -24,6 +25,10 @@ public abstract partial class SharedHandsSystem
         SubscribeLocalEvent<HandsComponent, WieldAttemptEvent>(RefRelayEvent);
         SubscribeLocalEvent<HandsComponent, UnwieldAttemptEvent>(RefRelayEvent);
         SubscribeLocalEvent<HandsComponent, TargetHandcuffedEvent>(RefRelayEvent);
+        // SS220 combat mode logic extension begin
+        SubscribeLocalEvent<HandsComponent, CombatModeOnEvent>(RefRelayEvent);
+        SubscribeLocalEvent<HandsComponent, CombatModeOffEvent>(RefRelayEvent);
+        // SS220 combat mode logic extension end
     }
 
     private void RelayEvent<T>(Entity<HandsComponent> entity, ref T args) where T : EntityEventArgs
@@ -39,7 +44,7 @@ public abstract partial class SharedHandsSystem
 
     private HeldRelayedEvent<T> CoreRelayEvent<T>(Entity<HandsComponent> entity, ref T args)
     {
-        var ev = new HeldRelayedEvent<T>(args);
+        var ev = new HeldRelayedEvent<T>(args, entity.Owner);  // SS220 tweak held relay
 
         foreach (var held in EnumerateHeld(entity.AsNullable()))
         {
