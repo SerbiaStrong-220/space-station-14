@@ -30,6 +30,7 @@
         Slash: 0.7
         Piercing: 0.4
         Heat: 0.85
+        Shock: 0.6
   - type: ExplosionResistance
     damageCoefficient: 0.70
 

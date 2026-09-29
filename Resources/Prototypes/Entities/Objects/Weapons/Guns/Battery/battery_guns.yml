@@ -511,7 +511,7 @@
     cameraRecoilScalar: 0 #Laser weapons have effectively no recoil
     maxAngle: 15
     minAngle: 9 #Very low values for the same reason
-    angleIncrease: 0.09 #Basically the force of a finger pulling the trigger
+    angleIncrease: 0.03 #Basically the force of a finger pulling the trigger
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   #SS220 weapon overhaul end
@@ -572,7 +572,7 @@
     cameraRecoilScalar: 0 #Laser weapons have effectively no recoil
     maxAngle: 15
     minAngle: 9 #Very low values for the same reason
-    angleIncrease: 0.09 #Basically the force of a finger pulling the trigger
+    angleIncrease: 0.03 #Basically the force of a finger pulling the trigger
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   #SS220 weapon overhaul end
@@ -618,7 +618,7 @@
     cameraRecoilScalar: 0 #Laser weapons have effectively no recoil
     maxAngle: 15
     minAngle: 9 #Very low values for the same reason
-    angleIncrease: 0.09 #Basically the force of a finger pulling the trigger
+    angleIncrease: 0.03 #Basically the force of a finger pulling the trigger
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   #SS220 weapon overhaul end
@@ -684,7 +684,7 @@
     cameraRecoilScalar: 0 #Laser weapons have effectively no recoil
     maxAngle: 15
     minAngle: 9 #Very low values for the same reason
-    angleIncrease: 0.09 #Basically the force of a finger pulling the trigger
+    angleIncrease: 0.03 #Basically the force of a finger pulling the trigger
     canSuicide: false # SS220-new-feature kus
     projectileSpeed: 10
     fireRate: 1.5
@@ -748,7 +748,7 @@
     cameraRecoilScalar: 0 #Laser weapons have effectively no recoil
     maxAngle: 15
     minAngle: 9 #Very low values for the same reason
-    angleIncrease: 0.09 #Basically the force of a finger pulling the trigger
+    angleIncrease: 0.03 #Basically the force of a finger pulling the trigger
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_clown.ogg
   #SS220 weapon overhaul end

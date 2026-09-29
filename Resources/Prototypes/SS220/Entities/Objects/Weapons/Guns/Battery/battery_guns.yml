@@ -142,7 +142,7 @@
   components:
   - type: GasWeapon
     tankSlot: cell_slot
-    gasUsage: 0.09
+    gasUsage: 0.03
   - type: Gun
     fireRate: 1.9
     selectedMode: SemiAuto
@@ -175,7 +175,7 @@
   components:
   - type: GasWeapon
     tankSlot: cell_slot
-    gasUsage: 0.09
+    gasUsage: 0.03
   - type: Wieldable
   - type: GunWieldBonus
     minAngle: -15
@@ -358,6 +358,7 @@
     canSuicide: true
     minAngle: 9
     maxAngle: 19
+    angleIncrease: 0.03
     fireRate: 1.5
     projectileSpeed: 30
   - type: GasWeapon
@@ -404,7 +405,7 @@
     cameraRecoilScalar: 0 #Laser weapons have effectively no recoil
     maxAngle: 15
     minAngle: 9 #Very low values for the same reason
-    angleIncrease: 0.09 #Basically the force of a finger pulling the trigger
+    angleIncrease: 0.03 #Basically the force of a finger pulling the trigger
   - type: Item
     shape:
     - 0,0,1,0
@@ -461,7 +462,7 @@
     cameraRecoilScalar: 0 #Laser weapons have effectively no recoil
     maxAngle: 20
     minAngle: 15 #Very low values for the same reason
-    angleIncrease: 0.09
+    angleIncrease: 0.03
   - type: GunWieldBonus
     minAngle: -5
     maxAngle: -13

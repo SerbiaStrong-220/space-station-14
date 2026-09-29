@@ -125,7 +125,9 @@
   id: MagazineBoxAntiMaterielAP
   result: MagazineBoxAntiMaterielAP
   materials:
-    Steel: 200
+    Steel: 400
+    Uranium: 300
+    Plastic: 200
 
 - type: latheRecipe
   parent: BaseAmmoBoxRecipe
@@ -192,7 +194,7 @@
   id: SpeedLoaderMagnumHP
   result: SpeedLoaderMagnumHP
   materials:
-    Steel: 50
+    Steel: 250
     Plastic: 150
 
 - type: latheRecipe
@@ -200,7 +202,8 @@
   id: MagazineBoxMagnumHP
   result: MagazineBoxMagnumHP
   materials:
-    Plastic: 240
+    Plastic: 140
+    Steel: 150
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
