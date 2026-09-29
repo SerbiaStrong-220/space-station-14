@@ -391,21 +391,22 @@ public abstract class SharedEntityStorageSystem : EntitySystem
         return _whitelistSystem.CheckBoth(toInsert, component.Blacklist, component.Whitelist);
     }
 
-    private void OnDarkReaperInsertAttempt(EntityUid uid, DarkReaperComponent component,
+// SS220 Fix #4554 begin
+    private void OnDarkReaperInsertAttempt(Entity<DarkReaperComponent> ent,
         ref InsertIntoEntityStorageAttemptEvent args)
     {
-        if (!component.PhysicalForm)
+        if (!ent.Comp.PhysicalForm)
             args.Cancelled = true;
     }
 
-    private void OnSpectralInsertAttempt(EntityUid uid, SpectralComponent component,
+    private void OnSpectralInsertAttempt(Entity<SpectralComponent> ent,
         ref InsertIntoEntityStorageAttemptEvent args)
     {
-        if (!TryComp<PhysicsComponent>(uid, out var physics) ||
-            (physics.CollisionMask & (int) Content.Shared.Physics.CollisionGroup.MobMask) == 0)
+        if (!TryComp<PhysicsComponent>(ent, out var physics) ||
+            (physics.CollisionMask & (int)Physics.CollisionGroup.MobMask) == 0)
             args.Cancelled = true;
     }
-
+// SS220 Fix #4554 end
     public bool TryOpenStorage(EntityUid user, EntityUid target, bool silent = false)
     {
         if (!CanOpen(user, target, silent))
