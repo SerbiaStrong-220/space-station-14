@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Numerics;
 using Content.IntegrationTests.Fixtures.Attributes;
+using Content.IntegrationTests;
 using Content.IntegrationTests.Fixtures;
 using Content.IntegrationTests.Pair;
 using Content.Server.GameTicking;
@@ -42,6 +43,8 @@ namespace Content.IntegrationTests.Tests.SS220.MalfAI;
 [TestFixture]
 public sealed class MalfAiDefenseTest : GameTest
 {
+    private static PoolSettings PsMalfAi => new() { Connected = false, Dirty = true };
+
     private const string BoxMap = "Box";
 
     private static void MakeStation(TestPair pair, Robust.UnitTesting.Pool.TestMapData map)
@@ -115,7 +118,7 @@ public sealed class MalfAiDefenseTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfLockdownAppliesAndReverts()
     {
         var pair = Pair;
@@ -229,7 +232,7 @@ public sealed class MalfAiDefenseTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfLockdownRepurchasable()
     {
         var pair = Pair;
@@ -316,7 +319,7 @@ public sealed class MalfAiDefenseTest : GameTest
     [TestCase(true, false)]
     [TestCase(false, true)]
     [TestCase(true, true)]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfLockdownClosesOpenDoorAndRestoresAfterPowerReturns(bool deleteRule, bool intervene)
     {
         var pair = Pair;
@@ -451,7 +454,7 @@ public sealed class MalfAiDefenseTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfTurretUpgradeApplies()
     {
         var pair = Pair;
@@ -494,7 +497,7 @@ public sealed class MalfAiDefenseTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfDeployTurretPlacesAndSpends()
     {
         var pair = Pair;
@@ -567,7 +570,7 @@ public sealed class MalfAiDefenseTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfDeployTurretDeniedOnOccupiedTile()
     {
         var pair = Pair;
@@ -630,7 +633,7 @@ public sealed class MalfAiDefenseTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfDeployTurretDeniedWhenDisabled()
     {
         var pair = Pair;

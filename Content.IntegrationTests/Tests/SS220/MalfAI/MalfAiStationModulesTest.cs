@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Content.IntegrationTests.Fixtures.Attributes;
+using Content.IntegrationTests;
 using Content.IntegrationTests.Fixtures;
 using Content.IntegrationTests.Pair;
 using Content.Server.Atmos.EntitySystems;
@@ -55,6 +56,8 @@ namespace Content.IntegrationTests.Tests.SS220.MalfAI;
 [TestFixture]
 public sealed class MalfAiStationModulesTest : GameTest
 {
+    private static PoolSettings PsMalfAi => new() { Connected = false, Dirty = true };
+
     private static void MakeStation(TestPair pair, TestMapData map)
     {
         var server = pair.Server;
@@ -136,7 +139,7 @@ public sealed class MalfAiStationModulesTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfBlackoutDirected()
     {
         var pair = Pair;
@@ -230,7 +233,7 @@ public sealed class MalfAiStationModulesTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfThermalJamsAutoButNotManual()
     {
         var pair = Pair;
@@ -315,7 +318,7 @@ public sealed class MalfAiStationModulesTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfBlackoutIgnitesPlasma()
     {
         var pair = Pair;
@@ -365,7 +368,7 @@ public sealed class MalfAiStationModulesTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfFloodGate()
     {
         var pair = Pair;
@@ -458,7 +461,7 @@ public sealed class MalfAiStationModulesTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfSilentRecordsMutesRadio()
     {
         var pair = Pair;
@@ -493,7 +496,7 @@ public sealed class MalfAiStationModulesTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfCameraUpgradeOverclocksAndSees()
     {
         var pair = Pair;
@@ -598,7 +601,7 @@ public sealed class MalfAiStationModulesTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfCameraUpgradeSeesOnGridOffsetFromOrigin()
     {
         var pair = Pair;
@@ -666,7 +669,7 @@ public sealed class MalfAiStationModulesTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfChaosPulseStartsEvent()
     {
         var pair = Pair;

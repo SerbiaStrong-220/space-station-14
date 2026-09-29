@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using System.Reflection;
 using Content.IntegrationTests.Fixtures.Attributes;
+using Content.IntegrationTests;
 using Content.IntegrationTests.Fixtures;
 using Content.IntegrationTests.Pair;
 using Content.Server.AlertLevel;
@@ -38,6 +39,8 @@ namespace Content.IntegrationTests.Tests.SS220.MalfAI;
 [TestFixture]
 public sealed class MalfAiDoomsdayTest : GameTest
 {
+    private static PoolSettings PsMalfAi => new() { Connected = false, Dirty = true };
+
     private const string StationAlerts = "stationAlerts";
 
     private static PoolSettings PsDisconnectedLiveRound => new() { Connected = false, DummyTicker = false, Dirty = true };
@@ -124,7 +127,7 @@ public sealed class MalfAiDoomsdayTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfDoomsdayArmsAndBlocksShuttle()
     {
         var pair = Pair;
@@ -210,7 +213,7 @@ public sealed class MalfAiDoomsdayTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfDoomsdayVetoRollsBackAuthorizationAndAllowsRetry()
     {
         var pair = Pair;
@@ -260,7 +263,7 @@ public sealed class MalfAiDoomsdayTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfDoomsdayCancelOnCoreDestroyRestoresAlert()
     {
         var pair = Pair;
@@ -312,7 +315,7 @@ public sealed class MalfAiDoomsdayTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfDoomsdayCancelsWhenRoleRemoved()
     {
         var pair = Pair;
@@ -356,7 +359,7 @@ public sealed class MalfAiDoomsdayTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfDoomsdayKillsOrganicsNotSilicons()
     {
         var pair = Pair;
@@ -451,7 +454,7 @@ public sealed class MalfAiDoomsdayTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfDoomsdayHiddenWhenDisabled()
     {
         var pair = Pair;

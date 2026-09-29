@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using System.Collections.Generic;
 using Content.IntegrationTests.Fixtures.Attributes;
+using Content.IntegrationTests;
 using Content.IntegrationTests.Fixtures;
 using Content.IntegrationTests.Pair;
 using Content.Server.Ghost.Roles.Components;
@@ -55,6 +56,8 @@ namespace Content.IntegrationTests.Tests.SS220.MalfAI;
 [TestFixture]
 public sealed class MalfAiMachineModulesTest : GameTest
 {
+    private static PoolSettings PsMalfAi => new() { Connected = false, Dirty = true };
+
     private EntityUid _overloadMachine;
     private EntityUid _factoryBody;
     private EntityUid _factoryStore;
@@ -147,7 +150,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfMachineOverrideAnimates()
     {
         var pair = Pair;
@@ -252,7 +255,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfMachineOverloadExplodes()
     {
         var pair = Pair;
@@ -363,7 +366,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfRobotFactoryDeploysAndGates()
     {
         var pair = Pair;
@@ -598,7 +601,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfFactoryDeniedOnOccupiedTile()
     {
         var pair = Pair;
@@ -671,7 +674,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
 
     [TestCase(false)]
     [TestCase(true)]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfRobotFactoryInsertionRequiresHands(bool interrupt)
     {
         var pair = Pair;
@@ -762,7 +765,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfRobotFactoryDestroyAborts()
     {
         var pair = Pair;
@@ -984,7 +987,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfPowerSiphonDrainsApc()
     {
         var pair = Pair;
@@ -1100,7 +1103,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfPowerSiphonStarvesWithoutPower()
     {
         var pair = Pair;
@@ -1156,7 +1159,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfEmagRemotesEmag()
     {
         var pair = Pair;

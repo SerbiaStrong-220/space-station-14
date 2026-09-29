@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.IntegrationTests;
 using Content.IntegrationTests.Fixtures.Attributes;
 using Content.IntegrationTests.Fixtures;
 using Content.IntegrationTests.Pair;
@@ -22,6 +23,8 @@ namespace Content.IntegrationTests.Tests.SS220.MalfAI;
 [TestFixture]
 public sealed class MalfAiLifecycleTest : GameTest
 {
+    private static PoolSettings PsMalfAi => new() { Connected = false, Dirty = true };
+
     private static void MakeStation(TestPair pair, Robust.UnitTesting.Pool.TestMapData map)
     {
         var entMan = pair.Server.EntMan;
@@ -90,7 +93,7 @@ public sealed class MalfAiLifecycleTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfStorePinnedToRoleAndRecoveredAfterDestroy()
     {
         var pair = Pair;
@@ -146,7 +149,7 @@ public sealed class MalfAiLifecycleTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfRoleRemovalDeletesStoreAndActions()
     {
         var pair = Pair;
@@ -189,7 +192,7 @@ public sealed class MalfAiLifecycleTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfRoleReaddedAfterRemovalGetsFreshStore()
     {
         var pair = Pair;
@@ -235,7 +238,7 @@ public sealed class MalfAiLifecycleTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfMindDeleteLeavesNoRoleOrphans()
     {
         var pair = Pair;
@@ -292,7 +295,7 @@ public sealed class MalfAiLifecycleTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfRoleShutdownSurvivesDeletedObjective()
     {
         var pair = Pair;
@@ -337,7 +340,7 @@ public sealed class MalfAiLifecycleTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfDirectRoleDeleteCleansBody()
     {
         var pair = Pair;
@@ -382,7 +385,7 @@ public sealed class MalfAiLifecycleTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfSameTickReaddGetsFreshStore()
     {
         var pair = Pair;

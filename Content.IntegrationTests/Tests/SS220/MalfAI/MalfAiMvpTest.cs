@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Content.IntegrationTests.Fixtures.Attributes;
+using Content.IntegrationTests;
 using Content.IntegrationTests.Fixtures;
 using Content.Server.Objectives.Components;
 using Content.Server.Power.Components;
@@ -35,6 +36,8 @@ namespace Content.IntegrationTests.Tests.SS220.MalfAI;
 [TestFixture]
 public sealed class MalfAiMvpTest : GameTest
 {
+    private static PoolSettings PsMalfAi => new() { Connected = false, Dirty = true };
+
     private const string Currency = "MalfCPU";
 
     [TestPrototypes]
@@ -50,7 +53,7 @@ public sealed class MalfAiMvpTest : GameTest
 ";
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfLawGuard()
     {
         var server = Pair.Server;
@@ -104,7 +107,7 @@ public sealed class MalfAiMvpTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfLawChangesDoNotMutateCommonInput()
     {
         var server = Pair.Server;
@@ -179,7 +182,7 @@ public sealed class MalfAiMvpTest : GameTest
 
     [TestCase(true)]
     [TestCase(false)]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfLawChangesDetachSharedLawset(bool install)
     {
         var server = Pair.Server;
@@ -231,7 +234,7 @@ public sealed class MalfAiMvpTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfApcHackAndStore()
     {
         var pair = Pair;
@@ -361,7 +364,7 @@ public sealed class MalfAiMvpTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfStoreOpensThroughAction()
     {
         var server = Pair.Server;
@@ -438,7 +441,7 @@ public sealed class MalfAiMvpTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfPurchaseFollowsMindAndCleansUp()
     {
         var server = Pair.Server;
@@ -537,7 +540,7 @@ public sealed class MalfAiMvpTest : GameTest
     }
 
     [Test]
-    [PairConfig(nameof(PsDisconnected))]
+    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfAssignsHijackObjective()
     {
         var server = Pair.Server;
