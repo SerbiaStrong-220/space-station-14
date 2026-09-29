@@ -90,6 +90,18 @@ public sealed class LiquidSplattersSystem : EntitySystem
         _solution.AddSolution(sol.Value, sample);
     }
 
+    public void ClearSplatters(EntityUid target)
+    {
+        if (!TryComp<LiquidSplattersComponent>(target, out var comp))
+            return;
+
+        Entity<SolutionComponent>? sol = null;
+        if (!_solution.ResolveSolution(target, comp.ContainerName, ref sol))
+            return;
+
+        _solution.RemoveAllSolution(sol.Value);
+    }
+
     private void UpdateVisuals(Entity<LiquidSplattersComponent> ent, Solution solution)
     {
         var fill = ent.Comp.MaxVolume > 0
