@@ -577,7 +577,7 @@ public sealed partial class MalfAiSystem : EntitySystem
     public bool TryGetOwnedStore(EntityUid mindId, [NotNullWhen(true)] out Entity<StoreComponent>? store)
     {
         store = null;
-        if (EntityManager.EntityExists(mindId)
+        if (Exists(mindId)
             && _roles.MindHasRole<MalfAiRoleComponent>(mindId, out var role))
         {
             if (role.Value.Comp2.Store is { } pinned
