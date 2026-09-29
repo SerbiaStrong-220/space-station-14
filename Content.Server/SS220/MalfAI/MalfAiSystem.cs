@@ -183,7 +183,7 @@ public sealed partial class MalfAiSystem : EntitySystem
         for (var i = mind.Objectives.Count - 1; i >= 0; i--)
         {
             var objective = mind.Objectives[i];
-            if (!TryComp<MetaDataComponent>(objective, out var meta)
+            if (!TryComp(objective, out MetaDataComponent? meta)
                 || meta.EntityPrototype?.ID != HijackObjectiveProto.Id)
                 continue;
 
