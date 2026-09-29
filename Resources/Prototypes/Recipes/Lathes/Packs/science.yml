@@ -25,6 +25,7 @@
   - DeviceDesynchronizer
   - ThermalVisorRND # SS220 Thermals
   - ClothingBackpackHarmpack
+  - SpiritCloset # SS220 Spirits can contain
 
 - type: latheRecipePack
   id: ScienceClothing
