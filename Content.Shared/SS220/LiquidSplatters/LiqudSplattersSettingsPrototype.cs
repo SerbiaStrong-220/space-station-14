@@ -3,13 +3,10 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.LiquidSplatters;
 
-/// <summary>
-/// This is a prototype for...
-/// </summary>
 [Prototype()]
 public sealed partial class LiquidSplattersSettingsPrototype : IPrototype
 {
-    /// <inheritdoc/>
+
     [IdDataField]
     public string ID { get; private set; } = default!;
 

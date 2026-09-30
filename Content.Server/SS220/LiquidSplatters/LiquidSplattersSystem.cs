@@ -14,12 +14,12 @@ namespace Content.Server.SS220.LiquidSplatters;
 
 public sealed class LiquidSplattersSystem : EntitySystem
 {
-    [Dependency] private readonly InventorySystem _inventorySystem = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private InventorySystem _inventorySystem = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
-    private static readonly ProtoId<LiquidSplattersSettingsPrototype> DefaultSettings = "liquidSplattersSettingsDefualt";
+    private static readonly ProtoId<LiquidSplattersSettingsPrototype> DefaultSettings = "liquidSplattersSettingsDefault";
 
     private static readonly string[] PhysicalDamageTypes = { "Blunt", "Slash", "Piercing" };
 

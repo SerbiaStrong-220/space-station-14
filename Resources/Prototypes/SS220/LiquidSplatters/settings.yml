@@ -1,5 +1,5 @@
 ﻿- type: liquidSplattersSettings
-  id: liquidSplattersSettingsDefualt
+  id: liquidSplattersSettingsDefault
   weaponContainerIncrement: 1
   clothingContainerIncrement: 1
   clothingSlotChances:
