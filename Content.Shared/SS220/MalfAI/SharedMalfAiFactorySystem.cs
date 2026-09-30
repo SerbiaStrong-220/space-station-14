@@ -161,7 +161,7 @@ public sealed partial class SharedMalfAiFactorySystem : EntitySystem
             new MalfAiFactoryFeedDoAfterEvent(), ent, target: ent.Owner, used: body)
         {
             NeedHand = true,
-            DistanceThreshold = 1.5f,
+            DistanceThreshold = SharedInteractionSystem.InteractionRange,
             BreakOnMove = true,
             AttemptFrequency = AttemptFrequency.EveryTick,
         });

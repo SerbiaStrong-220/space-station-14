@@ -91,6 +91,9 @@ public sealed partial class MalfAiDoomsdaySystem : StationEventSystem<MalfAiDoom
 
     private const float MinRadius = 30f;
     private const float RadiusMargin = 15f;
+    private const float MinEventDuration = 0.1f;
+    private const float MinWaveSpeed = 0.1f;
+    private const float FxPhaseTwist = 0.37f;
 
     private static readonly SoundSpecifier AnnounceSound =
         new SoundPathSpecifier("/Audio/Announcements/attention.ogg")
@@ -179,7 +182,7 @@ public sealed partial class MalfAiDoomsdaySystem : StationEventSystem<MalfAiDoom
         doom.Phase = MalfAiDoomsdayPhase.Armed;
 
         if (TryComp<StationEventComponent>(rule, out var stationEvent))
-            stationEvent.Duration = TimeSpan.FromSeconds(Math.Max(0.1f, _cfg.GetCVar(CCVars220.MalfAiDoomsdayDuration)));
+            stationEvent.Duration = TimeSpan.FromSeconds(Math.Max(MinEventDuration, _cfg.GetCVar(CCVars220.MalfAiDoomsdayDuration)));
 
         if (!_ticker.StartGameRule(rule))
         {
@@ -487,7 +490,7 @@ public sealed partial class MalfAiDoomsdaySystem : StationEventSystem<MalfAiDoom
         var visual = Spawn(DoomsdayWaveProto, Transform(doom.Core).Coordinates);
         doom.WaveEntity = visual;
         doom.WaveStartTime = Timing.CurTime;
-        doom.WaveSpeed = Math.Max(0.1f, _cfg.GetCVar(CCVars220.MalfAiDoomsdayWaveSpeed));
+        doom.WaveSpeed = Math.Max(MinWaveSpeed, _cfg.GetCVar(CCVars220.MalfAiDoomsdayWaveSpeed));
         doom.WaveMaxRadius = maxRadius;
         doom.WaveMapId = Transform(doom.Core).MapID;
         doom.WaveOrigin = origin;
@@ -587,7 +590,7 @@ public sealed partial class MalfAiDoomsdaySystem : StationEventSystem<MalfAiDoom
 
         doom.LastFxRadius = radius;
         var count = Math.Max(1, wave.FxCount);
-        var phase = radius * 0.37f;
+        var phase = radius * FxPhaseTwist;
         for (var i = 0; i < count; i++)
         {
             var ang = phase + i * (MathF.Tau / count);
