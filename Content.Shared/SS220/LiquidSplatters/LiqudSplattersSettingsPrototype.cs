@@ -1,4 +1,5 @@
-﻿using Content.Shared.FixedPoint;
+﻿using Content.Shared.Chemistry.Reagent;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.LiquidSplatters;
@@ -17,5 +18,8 @@ public sealed partial class LiquidSplattersSettingsPrototype : IPrototype
     public FixedPoint2 DamageSolutionScale = 0.3f;
 
     [DataField]
-    public Dictionary<string, float> clothingSlotChances = new();
+    public Dictionary<string, float> ClothingSlotChances = new();
+
+    [DataField]
+    public Dictionary<ProtoId<ReagentPrototype>, FixedPoint2> CleaningReagentsEffectiveness = new();
 }

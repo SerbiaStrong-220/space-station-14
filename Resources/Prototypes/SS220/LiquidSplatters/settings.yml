@@ -8,3 +8,7 @@
     gloves: 0.9
     head: 0.5
     mask: 0.9
+  cleaningReagentsEffectiveness:
+    SpaceCleaner: 1
+    SoapReagent: 0.5
+    Water: 0.25
