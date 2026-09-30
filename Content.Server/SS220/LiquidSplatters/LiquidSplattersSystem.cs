@@ -50,7 +50,10 @@ public sealed class LiquidSplattersSystem : EntitySystem
             if (GetBloodSample((hit, bloodstreamComp)) is not { } sample)
                 continue;
 
-            AddSplatter(attackingWeapon, ScaledCopy(sample, settings.WeaponContainerIncrement));
+            var totalDamage = args.BaseDamage.GetTotal();
+            var solutionAmountOnWeapon = totalDamage * settings.DamageSolutionScale;
+            Log.Debug("Adding splatter to {0}, amount: {1}", attackingWeapon, solutionAmountOnWeapon);
+            AddSplatter(attackingWeapon, ScaledCopy(sample, solutionAmountOnWeapon));
 
             foreach (var (slot, chance) in settings.clothingSlotChances)
             {
@@ -63,7 +66,9 @@ public sealed class LiquidSplattersSystem : EntitySystem
                 if (!_random.Prob(chance))
                     continue;
 
-                AddSplatter(item.Value, ScaledCopy(sample, settings.ClothingContainerIncrement));
+                var solutionAmountOnClothing = totalDamage * settings.ClothingSolutionScale;
+                Log.Debug("Adding splatter to {0} on {1}, amount: {2}", item.Value, slot, solutionAmountOnClothing);
+                AddSplatter(item.Value, ScaledCopy(sample, solutionAmountOnClothing));
             }
         }
     }
@@ -87,6 +92,8 @@ public sealed class LiquidSplattersSystem : EntitySystem
         if (!_solution.ResolveSolution(target, comp.ContainerName, ref sol))
             return;
 
+        Log.Debug("Addding {0} units to solution with volume {1}, new volume {2}",
+            sample.Volume, sol.Value.Comp.Solution.Volume, sol.Value.Comp.Solution.Volume + sample.Volume);
         _solution.AddSolution(sol.Value, sample);
     }
 

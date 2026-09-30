@@ -1,7 +1,7 @@
 ﻿- type: liquidSplattersSettings
   id: liquidSplattersSettingsDefault
-  weaponContainerIncrement: 1
-  clothingContainerIncrement: 1
+  clothingSolutionScale: 0.15
+  damageSolutionScale: 0.3
   clothingSlotChances:
     outerClothing: 0.5
     jumpsuit: 0.7

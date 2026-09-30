@@ -11,10 +11,10 @@ public sealed partial class LiquidSplattersSettingsPrototype : IPrototype
     public string ID { get; private set; } = default!;
 
     [DataField]
-    public FixedPoint2 WeaponContainerIncrement = 1;
+    public FixedPoint2 ClothingSolutionScale = 0.15f;
 
     [DataField]
-    public FixedPoint2 ClothingContainerIncrement = 0.5;
+    public FixedPoint2 DamageSolutionScale = 0.3f;
 
     [DataField]
     public Dictionary<string, float> clothingSlotChances = new();
