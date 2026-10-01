@@ -253,3 +253,17 @@
   - type: ConditionalSpawner
     prototypes:
     - MobMouseCancer
+
+- type: entity
+  name: Bnuuy Spawner
+  id: SpawnMobRabbitBnuuyPetGhostRole
+  parent: MarkerBase
+  suffix: Role
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRabbitBnuuyGhostRole

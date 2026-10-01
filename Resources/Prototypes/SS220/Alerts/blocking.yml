@@ -1,0 +1,7 @@
+- type: alert
+  id: ActiveBlocking
+  icons:
+  - sprite: /Textures/Objects/Weapons/Melee/shields.rsi
+    state: teleriot-on
+  name: alerts-active-blocking
+  description: alerts-active-blocking-desc

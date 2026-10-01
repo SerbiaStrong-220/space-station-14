@@ -143,7 +143,7 @@
     slots: [neck]  #SS220 holster to neck
     sprite: Clothing/Belt/holster.rsi
   - type: Storage
-    maxItemSize: Huge #SS220 holster maximum item size
+    maxItemSize: Normal #SS220 holster maximum item size
     grid:
     - 0,0,3,1
     whitelist: #SS220 holster whitelist
@@ -151,9 +151,12 @@
         - Gun
         - BallisticAmmoProvider
         - CartridgeAmmo
-      tags:             # SS220 blueshield-whitelist-storage-fix
-        - KRSPowerCell  # SS220 blueshield-whitelist-storage-fix
+    # SS220 blueshield-whitelist-storage-fix
+      tags:
+        - PowerCellBlaster
         - LaserSMGPowerCell # SS220 IK-40 PowerCell-Storage-Fix
+        - LaserCarabinePowerCell # SS220 IK-60 PowerCell-Storage-Fix
+    # SS220 blueshield-whitelist-storage-fix
 
 - type: entity
   parent: [ClothingBeltStorageBase]
@@ -265,3 +268,14 @@
     microFiberMaterial: micro-fibers-reinforced-textile
     microFiberColor: micro-fibers-grey
   #SS220 Micro_fibers end
+
+- type: entity
+  parent: [ BaseCentcommContraband, ClothingBeltMilitaryWebbing ]
+  id: ClothingBeltMilitaryWebbingERT
+  name: ERT chest rig
+  description: A set of tactical webbing worn by Emergency Response Team operatives.
+  components:
+  - type: Sprite
+    sprite: Clothing/Belt/militarywebbingert.rsi
+  - type: Clothing
+    sprite: Clothing/Belt/militarywebbingert.rsi

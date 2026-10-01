@@ -1,0 +1,16 @@
+ent-PuddleSpaceUp = { ent-PuddleTemporary }
+    .desc = { ent-PuddleTemporary.desc }
+ent-PuddlePowerGame = { ent-PuddleTemporary }
+    .desc = { ent-PuddleTemporary.desc }
+ent-PuddleFourteenLoko = { ent-PuddleTemporary }
+    .desc = { ent-PuddleTemporary.desc }
+ent-PuddleLemonLime = { ent-PuddleTemporary }
+    .desc = { ent-PuddleTemporary.desc }
+ent-PuddleSolDry = { ent-PuddleTemporary }
+    .desc = { ent-PuddleTemporary.desc }
+ent-PuddleIcedTea = { ent-PuddleTemporary }
+    .desc = { ent-PuddleTemporary.desc }
+ent-PuddleRootBeer = { ent-PuddleTemporary }
+    .desc = { ent-PuddleTemporary.desc }
+ent-PuddleCola = { ent-PuddleTemporary }
+    .desc = { ent-PuddleTemporary.desc }

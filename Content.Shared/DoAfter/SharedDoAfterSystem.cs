@@ -2,10 +2,13 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Hands.Components;
-using Content.Shared.SS220.ChangeSpeedDoAfters;
+using Content.Shared.SS220.CCVars;
 using Content.Shared.SS220.ChangeSpeedDoAfters.Events;
+using Content.Shared.Interaction;
 using Content.Shared.Tag;
+using Robust.Shared.Configuration;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -20,6 +23,14 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private readonly IConfigurationManager _cfg = default!; // SS220-alldoafter-change-speed
+
+    //SS220-change-doafter-bar-color-begin
+    public readonly Color FasterDoAfterBarColor = Color.FromHex("#ffe054ff");
+    public readonly Color SlowerDoAfterBarColor = Color.FromHex("#5d4dc8ff");
+    //SS220-change-doafter-bar-color-end
+
+    private float _doAfterDelayModifier = 1f; // SS220-all-doafter-change-speed
 
     /// <summary>
     ///     We'll use an excess time so stuff like finishing effects can show.
@@ -36,6 +47,9 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         SubscribeLocalEvent<DoAfterComponent, EntityUnpausedEvent>(OnUnpaused);
         SubscribeLocalEvent<DoAfterComponent, ComponentGetState>(OnDoAfterGetState);
         SubscribeLocalEvent<DoAfterComponent, ComponentHandleState>(OnDoAfterHandleState);
+        SubscribeLocalEvent<GetInteractingEntitiesEvent>(OnGetInteractingEntities);
+
+        _cfg.OnValueChanged(CCVars220.DoafterDelayModifier, x => _doAfterDelayModifier = x, true); // SS220-all-doafter-change-speed
     }
 
     private void OnUnpaused(EntityUid uid, DoAfterComponent component, ref EntityUnpausedEvent args)
@@ -132,6 +146,25 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
             EnsureComp<ActiveDoAfterComponent>(uid);
     }
 
+    /// <summary>
+    /// Adds entities which have an active DoAfter matching the target.
+    /// </summary>
+    private void OnGetInteractingEntities(ref GetInteractingEntitiesEvent args)
+    {
+        var enumerator = EntityQueryEnumerator<ActiveDoAfterComponent, DoAfterComponent>();
+        while (enumerator.MoveNext(out _, out var comp))
+        {
+            foreach (var doAfter in comp.DoAfters.Values)
+            {
+                if (doAfter.Cancelled || doAfter.Completed)
+                    continue;
+
+                if (doAfter.Args.Target == args.Target)
+                    args.InteractingEntities.Add(doAfter.Args.User);
+            }
+        }
+    }
+
     #region Creation
     /// <summary>
     ///     Tasks that are delayed until the specified time has passed
@@ -190,6 +223,8 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
             return false;
         }
 
+        args.DelayModifier *= _doAfterDelayModifier; // SS220-all-doafter-change-speed
+
         // Duplicate blocking & cancellation.
         if (!ProcessDuplicates(args, comp))
         {
@@ -201,9 +236,19 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
 
         //ss220 add traits start
         RaiseLocalEvent(args.User, new BeforeDoAfterStartEvent(args, id.Value.Index), true);
+        args.Delay *= args.DelayModifier;
         //ss220 add traits end
 
         var doAfter = new DoAfter(id.Value.Index, args, GameTiming.CurTime);
+
+        //SS220-change-doafter-bar-color-begin
+        doAfter.BarColorOverride = args.DelayModifier.CompareTo(_doAfterDelayModifier) switch
+        {
+            < 0 => FasterDoAfterBarColor,
+            > 0 => SlowerDoAfterBarColor,
+            _ => null
+        };
+        //SS220-change-doafter-bar-color-end
 
         // Networking yay
         args.NetTarget = GetNetEntity(args.Target);
@@ -236,7 +281,7 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         doAfter.NetInitialItem = GetNetEntity(doAfter.InitialItem);
 
         // Initial checks
-        if (ShouldCancel(doAfter, GetEntityQuery<TransformComponent>(), GetEntityQuery<HandsComponent>()))
+        if (ShouldCancel(doAfter))
             return false;
 
         if (args.AttemptFrequency == AttemptFrequency.StartAndEnd && !TryAttemptEvent(doAfter))

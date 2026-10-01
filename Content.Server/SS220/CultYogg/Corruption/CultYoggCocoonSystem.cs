@@ -9,12 +9,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.CultYogg.Corruption;
 
-public sealed class CultYoggCocoonSystem : EntitySystem
+public sealed partial class CultYoggCocoonSystem : EntitySystem
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
 
     public override void Initialize()
     {
@@ -41,7 +41,7 @@ public sealed class CultYoggCocoonSystem : EntitySystem
             comp.Recipe = corruptComp.Recipe;
         }
 
-        EntityManager.DeleteEntity(ent);
+        Del(ent);
         _hands.PickupOrDrop(args.User, newEnt);
         if (ent.Comp.Sound != null)
         {
@@ -86,7 +86,7 @@ public sealed class CultYoggCocoonSystem : EntitySystem
             corrComp.SoftDeletedOriginalEntity = corruptComp.SoftDeletedOriginalEntity;
             corrComp.Recipe = corruptComp.Recipe;
 
-            EntityManager.DeleteEntity(ent);
+            Del(ent);
         }
     }
 }

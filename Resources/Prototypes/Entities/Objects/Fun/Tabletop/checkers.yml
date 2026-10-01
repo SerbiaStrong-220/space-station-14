@@ -36,33 +36,33 @@
   name: white checker piece
   parent: BaseTabletopPiece
   components:
-    - type: Sprite
-      sprite: SS220/Objects/Fun/Tabletop/checker_pieces.rsi #SS220-Tabletop-Resprite
-      state: w_checker_piece
+  - type: Sprite
+    sprite: SS220/Objects/Fun/Tabletop/checker_pieces.rsi #SS220-Tabletop-Resprite
+    state: w_checker_piece
 
 - type: entity
   id: *crownWhite
   name: white checker crown
   parent: BaseTabletopPiece
   components:
-    - type: Sprite
-      sprite: SS220/Objects/Fun/Tabletop/checker_pieces.rsi #SS220-Tabletop-Resprite
-      state: w_checker_crown
+  - type: Sprite
+    sprite: SS220/Objects/Fun/Tabletop/checker_pieces.rsi #SS220-Tabletop-Resprite
+    state: w_checker_crown
 
 - type: entity
   id: *pieceBlack
   name: black checker piece
   parent: BaseTabletopPiece
   components:
-    - type: Sprite
-      sprite: SS220/Objects/Fun/Tabletop/checker_pieces.rsi #SS220-Tabletop-Resprite
-      state: b_checker_piece
+  - type: Sprite
+    sprite: SS220/Objects/Fun/Tabletop/checker_pieces.rsi #SS220-Tabletop-Resprite
+    state: b_checker_piece
 
 - type: entity
   id: *crownBlack
   name: black checker crown
   parent: BaseTabletopPiece
   components:
-    - type: Sprite
-      sprite: SS220/Objects/Fun/Tabletop/checker_pieces.rsi #SS220-Tabletop-Resprite
-      state: b_checker_crown
+  - type: Sprite
+    sprite: SS220/Objects/Fun/Tabletop/checker_pieces.rsi #SS220-Tabletop-Resprite
+    state: b_checker_crown

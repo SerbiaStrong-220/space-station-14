@@ -77,12 +77,6 @@
   id: JobHeadOfSecurity
 
 - type: playTimeTracker
-  id: JobSecurityPilot
-
-- type: playTimeTracker
-  id: JobBrigmedic
-
-- type: playTimeTracker
   id: JobJanitor
 
 - type: playTimeTracker
@@ -153,12 +147,3 @@
 
 - type: playTimeTracker
   id: JobWarden
-
-- type: playTimeTracker
-  id: JobBoxer
-
-- type: playTimeTracker
-  id: JobZookeeper
-
-- type: playTimeTracker
-  id: JobBlueShield

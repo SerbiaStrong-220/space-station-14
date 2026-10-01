@@ -125,6 +125,7 @@ public sealed partial class SimpleRadialMenu : RadialMenu
             ? ConvertToButtonWithSector(model, settings)
             : new RadialMenuButton();
         button.SetSize = new Vector2(64f, 64f);
+        button.TooltipSupplier = CreateRichTooltip; // SS220-rich-text-tooltip
         button.ToolTip = model.ToolTip;
         var imageControl = model.IconSpecifier switch
         {

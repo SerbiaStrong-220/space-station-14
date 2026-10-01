@@ -68,6 +68,7 @@
     tags:
     - CannotSuicide
     - VimPilot
+    - Ian
   - type: StealTarget
     stealGroup: AnimalIan
 
@@ -1303,6 +1304,7 @@
         Bloodloss:
           -0.8
   - type: Temperature
+  - type: TemperatureDamage
     heatDamageThreshold: 800
     coldDamageThreshold: 0
   - type: MeleeWeapon
@@ -1427,53 +1429,6 @@
 #  - type: AlwaysRevolutionaryConvertible
   - type: StealTarget
     stealGroup: AnimalTropico
-
-# SS220 AVD pet begin
-- type: entity
-  name: Rocket
-  parent: MobCatSpace
-  id: MobSpaceCatPet
-  description: Feline pet, prepared for the worst.
-  components:
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
-          radius: 0.35
-        density: 40
-        mask:
-        - MobMask
-        layer:
-        - MobLayer
-  #SS220 languages revive begin
-  - type: Language
-    availableLanguages:
-  #SS220 Animalistic languages fix begin
-    - id: Feline
-      canSpeak: true
-    - id: Monkey
-      canSpeak: false
-    - id: Mousey
-      canSpeak: false
-    - id: Doggish
-      canSpeak: false
-    - id: Reptilian
-      canSpeak: false
-    - id: Piggish
-      canSpeak: false
-  #SS220 Animalistic languages fix end
-    - id: Galactic
-      canSpeak: false
-  #SS220 languages revive end
-  - type: Grammar
-    attributes:
-      gender: male
-  - type: Tag
-    tags:
-    - CannotSuicide
-    - VimPilot
-# SS220 AVD pet end
 
 - type: entity
   name: Polly the parrot

@@ -15,15 +15,17 @@
     state: icon
   - type: Item
     size: Normal
-  - type: Edible
-    requiresSpecialDigestion: true
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 10
-        reagents:
-        - ReagentId: Fiber
-          Quantity: 10
+# SS220: Removed edibility components begin
+#  - type: Edible
+#    requiresSpecialDigestion: true
+#  - type: SolutionContainerManager
+#    solutions:
+#      food:
+#        maxVol: 10
+#        reagents:
+#        - ReagentId: Fiber
+#          Quantity: 10
+# SS220: Removed edibility components end
   - type: Tag
     tags:
     - ClothMade

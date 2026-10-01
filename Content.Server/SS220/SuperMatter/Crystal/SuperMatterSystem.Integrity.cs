@@ -21,13 +21,27 @@ public sealed partial class SuperMatterSystem
 
     public float GetInternalEnergyToMatterDamageFactor(float internalEnergy, float matter)
     {
-        var safeInternalEnergy = GetSafeInternalEnergyToMatterValue(matter);
-        var delta = internalEnergy - safeInternalEnergy;
+        var safeInternalEnergyForModes = GetSafeInternalEnergyToMatterValue(matter);
+
+        float delta = 0;
+        var minMagnitude = float.MaxValue;
+        foreach (var item in safeInternalEnergyForModes)
+        {
+            var currentDelta = item.Energy - internalEnergy;
+            var magnitude = currentDelta * currentDelta;
+
+            if (magnitude > minMagnitude)
+                continue;
+
+            minMagnitude = magnitude;
+            delta = currentDelta;
+        }
+
         var damageFromDelta = SuperMatterFunctions.EnergyToMatterDamageFactorFunction(delta, matter / MatterNondimensionalization);
         return damageFromDelta;
     }
 
-    public float GetSafeInternalEnergyToMatterValue(float matter)
+    public SuperMatterFunctions.ModeSafeEnergy[] GetSafeInternalEnergyToMatterValue(float matter)
     {
         var normalizedMatter = matter / MatterNondimensionalization;
         return SuperMatterFunctions.SafeInternalEnergyToMatterFunction(normalizedMatter);
@@ -70,16 +84,20 @@ public sealed partial class SuperMatterSystem
     }
 
     private const float TemperatureDamageFactorCoeff = 3f;
-    private const float TemperatureDamageFactorSlowerOffset = 20f;
+    private const float TemperatureDamageFactorSlowerOffset = 1f;
+    private const float MinDamageFactor = 1e-2f;
 
-    private float TemperatureDamageFactorFunction(float normalizedTemperature)
+    public static float TemperatureDamageFactorFunction(float normalizedTemperature)
     {
-        var normalizedMaxTemperature = Atmospherics.Tmax / SuperMatterFunctions.SuperMatterTriplePointTemperature;
-        var maxFuncValue = MathF.Pow(normalizedMaxTemperature, 1.5f) /
-                (normalizedMaxTemperature - TemperatureDamageFactorSlowerOffset);
+        const float normalizedMaxTemperature = Atmospherics.Tmax / SuperMatterFunctions.SuperMatterTriplePointTemperature;
 
-        return TemperatureDamageFactorCoeff * (MathF.Pow(normalizedTemperature, 1.5f) /
-                (normalizedTemperature - TemperatureDamageFactorSlowerOffset)) / maxFuncValue;
+        var maxFuncValue = MathF.Pow(normalizedMaxTemperature, 1.5f) /
+                (normalizedMaxTemperature + TemperatureDamageFactorSlowerOffset);
+
+        var funcValue = TemperatureDamageFactorCoeff * (MathF.Pow(normalizedTemperature, 1.5f) /
+                (normalizedTemperature + TemperatureDamageFactorSlowerOffset));
+
+        return MinDamageFactor + funcValue / maxFuncValue;
     }
     /// <summary>
     /// Just slowes down destroying the crystal to make effect of "last seconds"

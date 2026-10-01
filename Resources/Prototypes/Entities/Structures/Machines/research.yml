@@ -18,8 +18,8 @@
   - type: PointLight
     enabled: false
     castShadows: false
-    radius: 1.5
-    energy: 1.6
+    radius: 1.2
+    energy: 3.0
     color: "#b211b2"
   - type: LitOnPowered
   - type: ResearchServer
@@ -75,6 +75,19 @@
   - type: GuideHelp
     guides:
     - Science
+  #SS220-TweakHitbox begin
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  #SS220-TweakHitbox end
 
 - type: entity
   id: BaseResearchAndDevelopmentPointSource
@@ -95,7 +108,7 @@
     active: true
   - type: PointLight
     radius: 1.5
-    energy: 1.6
+    energy: 3.0
     color: "#3db83b"
   - type: ActivatableUI
     key: enum.ResearchClientUiKey.Key

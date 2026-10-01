@@ -1,0 +1,30 @@
+- type: entity
+  id: CannonBallEMP
+  parent: BaseCannonBall
+  name: EMP cannonball
+  suffix: Pirate
+  components:
+  - type: CartridgeAmmo
+    proto: BulletCannonBallEMP
+    deleteOnSpawn: true
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Explosives/pirate_emp_cannonball.rsi
+    state: ball
+
+- type: entity
+  id: BulletCannonBallEMP
+  parent: BaseBulletTrigger
+  name: EMP cannonball
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Projectiles/pirate_emp_cannonball.rsi
+    state: ball
+  - type: EmpOnTrigger
+    range: 11
+    energyConsumption: 50000
+  - type: DeleteOnTrigger
+  - type: PointLight
+    radius: 1
+    color: "#55cfff"
+    energy: 0.75

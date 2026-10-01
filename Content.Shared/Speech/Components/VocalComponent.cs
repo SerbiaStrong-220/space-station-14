@@ -3,6 +3,7 @@ using Content.Shared.Humanoid;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;// SS220-scream-cooldown
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.Speech.Components;
@@ -42,6 +43,11 @@ public sealed partial class VocalComponent : Component
     [AutoNetworkedField]
     public EntityUid? ScreamActionEntity;
 
+    // SS220-scream-cooldown-begin
+    [DataField]
+    public ScreamCooldownData ScreamCooldown = new();
+    // SS220-scream-cooldown-end
+
     /// <summary>
     ///     Currently loaded emote sounds prototype, based on entity sex.
     ///     Null if no valid prototype for entity sex was found.
@@ -57,3 +63,27 @@ public sealed partial class VocalComponent : Component
     public Dictionary<EntityUid, EmoteSoundsPrototype>? SpecialEmoteSounds = null;
     // SS220 Chat-Special-Emote end
 }
+
+// SS220-scream-cooldown-begin
+[DataDefinition, Serializable]
+public sealed partial class ScreamCooldownData
+{
+    [DataField]
+    public TimeSpan BaseCooldown = TimeSpan.FromSeconds(10);
+
+    [DataField]
+    public TimeSpan CooldownStep = TimeSpan.FromSeconds(15);
+
+    [DataField]
+    public TimeSpan ResetDelay = TimeSpan.FromMinutes(10);
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public int Count;
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan LastTime;
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan CooldownEnd;
+}
+// SS220-scream-cooldown-end

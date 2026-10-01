@@ -62,3 +62,53 @@
       coefficients:
         Blunt: 1.0
 
+- type: entity
+  name: SAR-60
+  parent: [BaseItem, BaseGunWieldable]
+  id: WeaponSniperCompact
+  description: "A compact, single-shot rifle that fires powerful antimateriel rounds. This one has a reflex sight and a recoil compensator on it. \n It has a marking on it's frame saying 'NT-SAD-SAR-60'"
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Snipers/heavy_sniper.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,4,1
+    sprite: SS220/Objects/Weapons/Guns/Snipers/heavy_sniper.rsi
+  - type: ItemSlots
+    slots:
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeAntiMateriel
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeAntiMateriel
+  - type: ContainerContainer
+    containers:
+      gun_chamber: !type:ContainerSlot
+  - type: ChamberMagazineAmmoProvider
+    autoCycle: false
+    boltClosed: false
+    canRack: false
+    soundBoltClosed: /Audio/Weapons/Guns/Cock/lmg_cock.ogg
+    soundBoltOpened: /Audio/Weapons/Guns/Cock/lmg_cock.ogg
+    soundRack: /Audio/Weapons/Guns/Cock/lmg_cock.ogg
+  - type: Clothing
+    sprite: SS220/Objects/Weapons/Guns/Snipers/heavy_sniper.rsi
+    quickEquip: false
+    slots:
+    - suitStorage
+  - type: GunRequiresWield
+  - type: Appearance
+  - type: Gun
+    fireRate: 5 # it could as well be 1000, this is a single-shot anyway
+    selectedMode: SemiAuto
+    availableModes:
+      - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
+

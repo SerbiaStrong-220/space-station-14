@@ -8,9 +8,9 @@ using System.Numerics;
 
 namespace Content.Client.SS220.UserInterface.PlotFigure;
 
-public abstract class Plot : Control
+public abstract partial class Plot : Control
 {
-    [Dependency] internal readonly IResourceCache ResourceCache = default!;
+    [Dependency] internal IResourceCache ResourceCache = default!;
 
     public Color AxisColor = Color.WhiteSmoke;
     public List<float> AxisSteps = new() { 0.2f, 0.4f, 0.6f, 0.8f, 1f};

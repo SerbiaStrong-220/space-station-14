@@ -26,6 +26,7 @@
       time: 50h # SS220-RoleTime
     - !type:AgeRequirement
       requiredAge: 20
+      ignoreSpecies: [ Ipc ] #SS220-JobsAgeIPC
     - !type:SpeciesRequirement #SS220-jobbans begin
       inverted: true
       species:
@@ -33,6 +34,7 @@
     #SS220 requirements end
   weight: 10
   startingGear: QuartermasterGear
+  experienceDefinition: QuartermasterRoleExperience # SS220-experience
   icon: "JobIconQuarterMaster"
   supervisors: job-supervisors-captain
   access:
@@ -48,13 +50,13 @@
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
-      - type: DefibrillatorSkill #SS220 LimitationRevive
+
 
 - type: startingGear
   id: QuartermasterGear
   equipment:
     id: QuartermasterPDA
-    ears: ClothingHeadsetQM
+ #ears: ClothingHeadsetQM #SS220 HeadsetLoadout
     belt: BoxFolderClipboardThreePapers
     pocket1: AppraisalTool
   storage:

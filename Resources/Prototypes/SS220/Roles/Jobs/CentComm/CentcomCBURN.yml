@@ -7,6 +7,7 @@
   playTimeTracker: JobCBURNLeader
   setPreference: false
   startingGear: CBURNLeaderGear
+  experienceDefinition: CBURNRoleExperience
   icon: "JobIconNanotrasen"
   supervisors: job-supervisors-centcom
   canBeAntag: false
@@ -20,9 +21,6 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
-  - !type:AddComponentSpecial
-    components:
-    - type: DefibrillatorSkill
   requirements:
     - !type:DepartmentTimeRequirement
       department: Security

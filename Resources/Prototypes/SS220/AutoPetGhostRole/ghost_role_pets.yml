@@ -230,3 +230,19 @@
     description: ghost-role-information-pet-steven-description
     job: SecurityPet
   - type: GhostTakeoverAvailable
+
+- type: entity
+  parent: MobRabbitBnuuy
+  id: MobRabbitBnuuyGhostRole
+  name: bnuuy
+  description: A frisky kid who can't sit still, always rushes into battle, loves carrots, and also likes to arrange a brig race with Roxy.
+  suffix: Role
+  components:
+  - type: GhostRole
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: true
+    name: ghost-role-information-pet-bnuuy-name
+    description: ghost-role-information-pet-bnuuy-description
+    job: SecurityPet
+  - type: GhostTakeoverAvailable

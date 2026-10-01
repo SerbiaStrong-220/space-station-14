@@ -17,10 +17,11 @@ cmd-panicbunker_show_reason-help = Usage: panicbunker_show_reason
 panicbunker-command-show-reason-enabled = The panic bunker will now show a reason to users it blocks from connecting.
 panicbunker-command-show-reason-disabled = The panic bunker will no longer show a reason to users it blocks from connecting.
 cmd-panicbunker_min_account_age-desc = Gets or sets the minimum account age in minutes that an account must have to be allowed to connect with the panic bunker enabled.
-cmd-panicbunker_min_account_age-help = Usage: panicbunker_min_account_age <minutes>
-panicbunker-command-min-account-age-is = The minimum account age for the panic bunker is {$minutes} minutes.
-panicbunker-command-min-account-age-set = Set the minimum account age for the panic bunker to {$minutes} minutes.
+cmd-panicbunker_min_overall_minutes-help = Использование: panicbunker_min_overall_minutes <минуты>
+panicbunker-command-min-overall-minutes-is = Минимальное общее время игры для паник-бункера составляет {$minutes} минут.
+panicbunker-command-min-overall-minutes-set = Минимальное общее время игры для паник-бункера установлено на {$minutes} минут.
 cmd-panicbunker_min_overall_minutes-desc = Gets or sets the minimum overall playtime in minutes that an account must have to be allowed to connect with the panic bunker enabled.
-cmd-panicbunker_min_overall_minutes-help = Usage: panicbunker_min_overall_minutes <minutes>
-panicbunker-command-min-overall-minutes-is = The minimum overall playtime for the panic bunker is {$minutes} minutes.
-panicbunker-command-min-overall-minutes-set = Set the minimum overall playtime for the panic bunker to {$minutes} minutes.
+
+cmd-panicbunker-desc = Переключает паник-бункер, который включает более строгие ограничения на то, кому разрешено подключаться к серверу.
+
+cmd-panicbunker-help = Использование: panicbunker

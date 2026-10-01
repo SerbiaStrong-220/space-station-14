@@ -36,6 +36,7 @@
   - type: StuckOnEquip
   - type: Tag
     tags:
+    - WhitelistChameleon
     - CultYoggStealthProvidable
 
 - type: entity
@@ -43,7 +44,6 @@
   id: ClothingHeadHelmetHardsuitCultYogg
   name: Hardsuit helmet corrupted by a Cult
   description: Corrupted pile of incomprehensible substane, somehowe prowiding great defence.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: SS220/Clothing/Head/Hardsuits/cult_yogg.rsi
@@ -56,6 +56,7 @@
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
+  - type: FlashImmunity
   - type: Armor
     modifiers:
       coefficients:
@@ -66,3 +67,6 @@
         Radiation: 0.5
   - type: FireProtection
     reduction: 0.2
+  - type: Tag
+    tags:
+    - WhitelistChameleon

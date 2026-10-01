@@ -4,7 +4,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared.SS220.Shlepovend;
 
 [Prototype("ShlepaRewardGroup")]
-public sealed class ShlepaRewardGroupPrototype : IPrototype
+public sealed partial class ShlepaRewardGroupPrototype : IPrototype
 {
     [ViewVariables]
     [IdDataField]
