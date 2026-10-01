@@ -29,7 +29,7 @@
 - type: entity
   parent: PaperNtFormSec
   id: PilotBriefing
-  name: брифинг пилота
+  name: pilot's briefing
   components:
     - type: Paper
       content: pilot-briefing-text

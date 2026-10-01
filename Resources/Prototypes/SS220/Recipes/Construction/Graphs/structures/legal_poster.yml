@@ -1,0 +1,18 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: constructionGraph
+  id: RandomPosterLegal
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: legalposter
+          steps:
+            - tag: Legalposter
+              name: construction-graph-tag-Legalposter
+              icon:
+                sprite: SS220/Objects/Misc/Legalposter.rsi
+                state: legalposter
+              doAfter: 1
+    - node: legalposter
+      entity: PostersLegitSpawner

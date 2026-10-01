@@ -1,10 +1,10 @@
 using Content.Server.Chat.Systems;
-using Content.Shared.Speech.Components;
+using Content.Shared.Actions.Events;
+using Content.Shared.Chat;
 using Content.Shared.Speech;
+using Content.Shared.Speech.Components;
 using Content.Shared.Speech.EntitySystems;
 using Content.Shared.Speech.Muting;
-using Content.Shared.Actions.Events;
-
 
 namespace Content.Server.Speech.EntitySystems;
 
@@ -34,6 +34,6 @@ public sealed class SpeakOnActionSystem : SharedSpeakOnActionSystem
         if (string.IsNullOrWhiteSpace(ent.Comp.Sentence))
             return;
 
-        _chat.TrySendInGameICMessage(user, Loc.GetString(ent.Comp.Sentence), InGameICChatType.Speak, false);
+        _chat.TrySendInGameICMessage(user, Loc.GetString(ent.Comp.Sentence), InGameICChatType.Speak, false, bypassEnglishFilter: true); // SS220 FIX wizard spell speak
     }
 }

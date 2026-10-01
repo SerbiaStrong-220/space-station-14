@@ -227,7 +227,6 @@
     sprite: Clothing/OuterClothing/Misc/violetwizard.rsi
   - type: Tag
     tags:
-    - CorgiWearable
     - WhitelistChameleon
 
 - type: entity
@@ -257,7 +256,6 @@
     sprite: Clothing/OuterClothing/Misc/redwizard.rsi
   - type: Tag
     tags:
-    - CorgiWearable
     - WhitelistChameleon
 
 - type: entity

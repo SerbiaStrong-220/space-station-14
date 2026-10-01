@@ -23,7 +23,6 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using Content.Shared.Administration.Logs;
 using Content.Shared.Chemistry.Reaction;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Database;
@@ -54,6 +53,7 @@ public sealed class PlantHolderSystem : EntitySystem
 
     public const float HydroponicsSpeedMultiplier = 1f;
     public const float HydroponicsConsumptionMultiplier = 2f;
+    public readonly FixedPoint2 PlantMetabolismRate = FixedPoint2.New(1);
 
     private static readonly ProtoId<TagPrototype> HoeTag = "Hoe";
     private static readonly ProtoId<TagPrototype> PlantSampleTakerTag = "PlantSampleTaker";
@@ -303,6 +303,7 @@ public sealed class PlantHolderSystem : EntitySystem
             {
                 healthOverride = component.Health;
             }
+            component.Seed.Unique = false;
             var packetSeed = component.Seed;
             var seed = _botany.SpawnSeedPacket(packetSeed, Transform(args.User).Coordinates, args.User, healthOverride);
             _randomHelper.RandomOffset(seed, 0.25f);
@@ -428,16 +429,19 @@ public sealed class PlantHolderSystem : EntitySystem
             && component.WeedLevel >= component.Seed.WeedHighLevelThreshold)
         {
             Spawn(component.Seed.KudzuPrototype, Transform(uid).Coordinates.SnapToGrid(EntityManager));
+            EnsureUniqueSeed(uid, component);
             component.Seed.TurnIntoKudzu = false;
             component.Health = 0;
         }
 
+        //SS220 Tomato-Killer start
         if (component.Seed != null && component.Seed.TurnIntoTomatoKiller)
         {
             Spawn(component.Seed.TomatoKillerPrototype, Transform(uid).Coordinates.SnapToGrid(EntityManager));
             component.Seed.TurnIntoTomatoKiller = false;
             component.Health = 0;
         }
+        //SS220 Tomato-Killer end
 
         // There's a chance for a weed explosion to happen if weeds take over.
         // Plants that are themselves weeds (WeedTolerance > 8) are unaffected.
@@ -682,6 +686,14 @@ public sealed class PlantHolderSystem : EntitySystem
 
         if (component.UpdateSpriteAfterUpdate)
             UpdateSprite(uid, component);
+
+        //SS220-Mob-Spawn-Nerf start
+        if (component.Harvest && component.Seed.AutoSpawnMob)
+        {
+            component.Seed.HarvestRepeat = HarvestType.NoRepeat;
+            AutoHarvest(uid, component);
+        }
+        //SS220-Mob-Spawn-Nerf end
     }
 
     //TODO: kill this bullshit
@@ -893,12 +905,18 @@ public sealed class PlantHolderSystem : EntitySystem
 
         if (solution.Volume > 0 && component.MutationLevel < 25)
         {
-            var amt = FixedPoint2.New(1);
-            foreach (var entry in _solutionContainerSystem.RemoveEachReagent(component.SoilSolution.Value, amt))
+            // Don't apply any effects to a non-unique seed ever! Remove this when botany code is sane...
+            EnsureUniqueSeed(uid, component);
+            foreach (var entry in solution.Contents)
             {
+                if (entry.Quantity < PlantMetabolismRate)
+                    continue;
+
                 var reagentProto = _prototype.Index<ReagentPrototype>(entry.Reagent.Prototype);
-                _entityEffects.ApplyEffects(uid, reagentProto.PlantMetabolisms.ToArray());
+                _entityEffects.ApplyEffects(uid, reagentProto.PlantMetabolisms.ToArray(), entry.Quantity);
             }
+
+            _solutionContainerSystem.RemoveEachReagent(component.SoilSolution.Value, PlantMetabolismRate);
         }
 
         CheckLevelSanity(uid, component);

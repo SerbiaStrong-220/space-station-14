@@ -21,14 +21,14 @@ namespace Content.Server.SS220.MechClothing;
 /// <summary>
 /// This handles placing containers in claw when the player uses an action, copies part of the logic MechGrabberSystem
 /// </summary>
-public sealed class MechClothingSystem : EntitySystem
+public sealed partial class MechClothingSystem : EntitySystem
 {
-    [Dependency] private readonly InteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly MechSystem _mech = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private InteractionSystem _interaction = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private MechSystem _mech = default!;
+    [Dependency] private PopupSystem _popup = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

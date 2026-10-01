@@ -1,0 +1,19 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: localizedDataset
+  id: NamesIpcFirstMale
+  values:
+    prefix: names-ipc-first-male-dataset-
+    count: 50
+
+- type: localizedDataset
+  id: NamesIpcFirstFemale
+  values:
+    prefix: names-ipc-first-female-dataset-
+    count: 37
+
+- type: localizedDataset
+  id: NamesIpcLast
+  values:
+    prefix: names-ipc-last-dataset-
+    count: 50

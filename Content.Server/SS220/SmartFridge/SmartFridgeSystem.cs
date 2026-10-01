@@ -8,75 +8,74 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Content.Shared.Power;
 
-namespace Content.Server.SS220.SmartFridge
+namespace Content.Server.SS220.SmartFridge;
+
+public sealed partial class SmartFridgeSystem : SharedSmartFridgeSystem
 {
-    public sealed class SmartFridgeSystem : SharedSmartFridgeSystem
+    [Dependency] private AppearanceSystem _appearanceSystem = default!;
+
+    private ISawmill _sawmill = default!;
+
+    public override void Initialize()
     {
-        [Dependency] private readonly AppearanceSystem _appearanceSystem = default!;
+        base.Initialize();
 
-        private ISawmill _sawmill = default!;
+        _sawmill = Logger.GetSawmill("smartfridge");
+        SubscribeLocalEvent<SmartFridge220Component, PowerChangedEvent>(OnPowerChanged);
+        SubscribeLocalEvent<SmartFridge220Component, ActivatableUIOpenAttemptEvent>(OnActivatableUIOpenAttempt);
+        SubscribeLocalEvent<SmartFridge220Component, BreakageEventArgs>(OnBreak);
 
-        public override void Initialize()
+    }
+    private void OnActivatableUIOpenAttempt(EntityUid uid, SmartFridge220Component component, ActivatableUIOpenAttemptEvent args)
+    {
+        if (component.Broken)
+            args.Cancel();
+    }
+    private void OnPowerChanged(EntityUid uid, SmartFridge220Component component, ref PowerChangedEvent args)
+    {
+        TryUpdateVisualState(uid, component);
+    }
+
+    private void OnBreak(EntityUid uid, SmartFridge220Component component, BreakageEventArgs eventArgs)
+    {
+        component.Broken = true;
+        TryUpdateVisualState(uid, component);
+    }
+    public void Deny(EntityUid uid, SmartFridge220Component? component = null)
+    {
+        if (!Resolve(uid, ref component))
+            return;
+
+        if (component.Denying)
+            return;
+
+        component.Denying = true;
+        Audio.PlayPvs(component.SoundDeny, uid, AudioParams.Default.WithVolume(-2f));
+        TryUpdateVisualState(uid, component);
+    }
+
+    /// <summary>
+    /// Tries to update the visuals of the component based on its current state.
+    /// </summary>
+    public void TryUpdateVisualState(EntityUid uid, SmartFridge220Component? vendComponent = null)
+    {
+        if (!Resolve(uid, ref vendComponent))
+            return;
+
+        var finalState = SmartFridgeVisualState.Normal;
+        if (vendComponent.Broken)
         {
-            base.Initialize();
-
-            _sawmill = Logger.GetSawmill("smartfridge");
-            SubscribeLocalEvent<SmartFridge220Component, PowerChangedEvent>(OnPowerChanged);
-            SubscribeLocalEvent<SmartFridge220Component, ActivatableUIOpenAttemptEvent>(OnActivatableUIOpenAttempt);
-            SubscribeLocalEvent<SmartFridge220Component, BreakageEventArgs>(OnBreak);
-
+            finalState = SmartFridgeVisualState.Broken;
         }
-        private void OnActivatableUIOpenAttempt(EntityUid uid, SmartFridge220Component component, ActivatableUIOpenAttemptEvent args)
+        else if (vendComponent.Denying)
         {
-            if (component.Broken)
-                args.Cancel();
+            finalState = SmartFridgeVisualState.Deny;
         }
-        private void OnPowerChanged(EntityUid uid, SmartFridge220Component component, ref PowerChangedEvent args)
+        else if (!this.IsPowered(uid, EntityManager))
         {
-            TryUpdateVisualState(uid, component);
+            finalState = SmartFridgeVisualState.Off;
         }
 
-        private void OnBreak(EntityUid uid, SmartFridge220Component component, BreakageEventArgs eventArgs)
-        {
-            component.Broken = true;
-            TryUpdateVisualState(uid, component);
-        }
-        public void Deny(EntityUid uid, SmartFridge220Component? component = null)
-        {
-            if (!Resolve(uid, ref component))
-                return;
-
-            if (component.Denying)
-                return;
-
-            component.Denying = true;
-            Audio.PlayPvs(component.SoundDeny, uid, AudioParams.Default.WithVolume(-2f));
-            TryUpdateVisualState(uid, component);
-        }
-
-        /// <summary>
-        /// Tries to update the visuals of the component based on its current state.
-        /// </summary>
-        public void TryUpdateVisualState(EntityUid uid, SmartFridge220Component? vendComponent = null)
-        {
-            if (!Resolve(uid, ref vendComponent))
-                return;
-
-            var finalState = SmartFridgeVisualState.Normal;
-            if (vendComponent.Broken)
-            {
-                finalState = SmartFridgeVisualState.Broken;
-            }
-            else if (vendComponent.Denying)
-            {
-                finalState = SmartFridgeVisualState.Deny;
-            }
-            else if (!this.IsPowered(uid, EntityManager))
-            {
-                finalState = SmartFridgeVisualState.Off;
-            }
-
-            _appearanceSystem.SetData(uid, SmartFridgeVisuals.VisualState, finalState);
-        }
+        _appearanceSystem.SetData(uid, SmartFridgeVisuals.VisualState, finalState);
     }
 }

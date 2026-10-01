@@ -27,7 +27,7 @@
 
 - type: entity
   name: Blood Cult Brother
-  parent: BaseMobHuman
+  parent: MobHuman
   id: MobBloodCultBrother
   components:
     - type: NpcFactionMember

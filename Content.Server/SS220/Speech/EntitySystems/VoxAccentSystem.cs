@@ -7,9 +7,9 @@ using Content.Shared.Speech;
 
 namespace Content.Server.SS220.Speech.EntitySystems;
 
-public sealed class VoxAccentSystem : EntitySystem
+public sealed partial class VoxAccentSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     private static readonly Regex RegexLowerK = new("k+");
     private static readonly Regex RegexUpperK = new("K+");

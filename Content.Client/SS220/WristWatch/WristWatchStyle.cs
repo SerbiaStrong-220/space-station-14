@@ -4,7 +4,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.WristWatch;
 
-[Prototype("wristWatchStyle")]
+[Prototype]
 public sealed partial class WristWatchStylePrototype : IPrototype
 {
     [ViewVariables]

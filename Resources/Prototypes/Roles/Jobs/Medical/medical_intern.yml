@@ -4,21 +4,22 @@
   description: job-description-intern
   playTimeTracker: JobMedicalIntern
   requirements:
+    # SS220-RoleTime begin
     - !type:OverallPlaytimeRequirement
-      time: 1h # SS220-RoleTime 2
+      time: 1h
+    # - !type:DepartmentTimeRequirement
+    #   department: Medical
+    #   time: 10h
+    #   inverted: true # stop playing intern if you're good at med!
+    # SS220-RoleTime end
   startingGear: MedicalInternGear
+  experienceDefinition: MedicalInternRoleExperience # SS220-experience
   icon: "JobIconMedicalIntern"
   supervisors: job-supervisors-medicine
   canBeAntag: true
   access:
   - Medical
   - Maintenance
-  #SS220 LimitationRevive - start
-  special:
-  - !type:AddComponentSpecial
-    components:
-    - type: DefibrillatorSkill
-  #SS220 LimitationRevive - end
 
 - type: startingGear
   id: MedicalInternGear
@@ -26,11 +27,12 @@
     shoes: ClothingShoesColorWhite
     id: MedicalInternPDA
     ears: ClothingHeadsetMedical
-    belt: ClothingBeltMedicalFilled
     pocket2: BookMedicalReferenceBook
-  #storage:
-    #back:
-    #- Stuff
+  # ss220-surgery-update-begin
+  storage:
+    back:
+    - FilledSurgeryMedkit
+  # ss220-surgery-update-end
 
 - type: chameleonOutfit
   id: MedicalInternChameleonOutfit

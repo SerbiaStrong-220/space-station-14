@@ -6,3 +6,12 @@
     path: /Audio/SS220/Voice/Roxi/dog_bark3.ogg
   exclaimSound:
     path: /Audio/SS220/Voice/Roxi/dog_bark3.ogg
+
+- type: speechSounds
+  id: SqueakBnuuy
+  saySound:
+    path: /Audio/SS220/Animals/bnuuy_squeak.ogg
+  askSound:
+    path: /Audio/SS220/Animals/bnuuy_squeak.ogg
+  exclaimSound:
+    path: /Audio/SS220/Animals/bnuuy_squeak.ogg

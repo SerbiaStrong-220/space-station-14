@@ -34,7 +34,7 @@ public sealed partial class BurglarBugComponent : Component
     ///     By default this logic is off.
     /// </summary>
     [DataField]
-    public string? OpenedDoorStickPopupCancellation;
+    public string? OpenDoorStickPopupCancellation;
 
     [DataField]
     public bool Activated;

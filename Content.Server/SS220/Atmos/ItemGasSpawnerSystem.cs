@@ -9,8 +9,8 @@ namespace Content.Server.SS220.Atmos;
 
 public sealed partial class ItemGasSpawnerSystem : EntitySystem
 {
-    [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private AtmosphereSystem _atmosphere = default!;
+    [Dependency] private TransformSystem _transform = default!;
 
     public override void Update(float frameTime)
     {

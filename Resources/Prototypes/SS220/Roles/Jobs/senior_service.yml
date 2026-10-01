@@ -20,6 +20,7 @@
       department: Civilian
       time: 216000 # 60 ч
   startingGear: SeniorAssistantGear
+  experienceDefinition: SeniorServiceRoleExperience
   icon: "JobIconSeniorService"
   supervisors: job-supervisors-hop
   access:
@@ -35,7 +36,6 @@
 - type: startingGear
   id: SeniorAssistantGear
   equipment:
-    shoes: ClothingShoesColorBrown
     id: SeniorServicePDA
     belt: BoxFolderClipboard
     ears: ClothingHeadsetService

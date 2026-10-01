@@ -47,3 +47,21 @@
     maxOccurrences: 1
     weight: 1
   - type: MindShieldCombustionRule
+
+- type: entity
+  id: GravityGeneratorAnomaly
+  parent: BaseGameRule
+  components:
+  - type: StationEvent
+    weight: 4
+    startAnnouncement: station-event-gravity-generator-anomaly-start-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+      params:
+        volume: -4
+    duration: 2
+  - type: GameRule
+    delay:
+      min: 1
+      max: 3
+  - type: GravityGeneratorAnomalyRule

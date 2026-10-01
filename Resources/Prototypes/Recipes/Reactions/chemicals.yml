@@ -111,7 +111,7 @@
     Potassium:
       amount: 1
   effects:
-    - !type:ExplosionEffect
+    - !type:Explosion
       explosionType: Default
       intensityPerUnit: 0.25
       maxTotalIntensity: 100
@@ -358,8 +358,6 @@
   impact: Medium
   minTemp: 370
   reactants:
-    Uranium:
-      amount: 1
     Vestine:
       amount: 2
     SpaceGlue:

@@ -152,10 +152,8 @@ ent-ClothingUniformJumpsuitLawyerBlue = синий адвокатский кос
     .desc = Яркий синий костюм, который носят адвокаты и хвастуны.
 ent-ClothingUniformJumpsuitLawyerBlack = чёрный адвокатский костюм
     .desc = Изысканный чёрный костюм, который носят адвокаты и гангстеры.
-# SS220-lobbying-bundle-fake-money begin
 ent-ClothingUniformJumpsuitLawyerBlackSyndieLobbyingBundle = чёрный деловой костюм
     .desc = Красивая обертка и нужные слова – основа сделки.
-# SS220-lobbying-bundle-fake-money end
 ent-ClothingUniformJumpsuitLawyerPurple = фиолетовый адвокатский костюм
     .desc = Стильный фиолетовый костюм, который носят адвокаты и шоумены.
 ent-ClothingUniformJumpsuitLawyerGood = хороший адвокатский костюм
@@ -235,8 +233,6 @@ ent-ClothingUniformJumpsuitSyndieFormal = торжественный костю�
     .desc = Форма Синдиката выполнена в элегантном стиле, в ней даже жалко проделывать грязные трюки.
 ent-ClothingUniformJumpsuitFlannel = фланелевый комбинезон
     .desc = Пахнет так, будто кто-то жарил на гриле.
-ent-ClothingUniformJumpsuitBlueShield = униформа синего щита
-    .desc = Черная футболка с короткими рукавами, в паре с серыми брюками-карго из прочного материала. Стандартный комплект Синего щита.
 ent-ClothingUniformJumpsuitSeniorEngineer = комбинезон ведущего инженера
     .desc = Признак мастерства и престижа инженерного отдела.
 ent-ClothingUniformJumpsuitSeniorResearcher = комбинезон ведущего учёного

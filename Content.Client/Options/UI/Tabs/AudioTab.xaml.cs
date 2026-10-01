@@ -91,6 +91,7 @@ public sealed partial class AudioTab : Control
         Control.AddOptionCheckBox(CCVars220.RecieveTTS, ReceiveTTSCheckbox);
         Control.AddOptionCheckBox(CCVars220.PlayDifferentRadioTogether, PlayDifferentRadioTogetherCheckbox);
         Control.AddOptionCheckBox(CCVars220.PlayDifferentTalkingTogether, PlayDifferentTalkingTogetherCheckbox);
+        Control.AddOptionCheckBox(CCVars220.PlayDifferentRadioSourcesTogether, PlayDifferentRadioSourcesTogetherCheckbox);
         // SS220-TTS-end
 
         Control.Initialize();
