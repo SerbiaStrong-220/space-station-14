@@ -85,17 +85,17 @@
   suffix: Contractor Target, Contractor, Target
   components:
   - type: Sprite
-    sprite: SS220/Objects/Devices/pinpointer.rsi
+    sprite: SS220/Objects/Devices/contractor_pinpointer.rsi
     layers:
-    - state: pinpointer-nuclear #need sprite or use anyone
+    - state: pinpointer-contractor
       map: ["enum.PinpointerLayers.Base"]
     - state: pinonnull
       map: ["enum.PinpointerLayers.Screen"]
       shader: unshaded
       visible: false
   - type: Icon
-    sprite: SS220/Objects/Devices/pinpointer.rsi
-    state: pinpointer-nuclear #need sprite or use anyone
+    sprite: SS220/Objects/Devices/contractor_pinpointer.rsi
+    state: pinpointer-contractor
   - type: Pinpointer
     isContractorPinpointer: true
     reachedDistance: 10

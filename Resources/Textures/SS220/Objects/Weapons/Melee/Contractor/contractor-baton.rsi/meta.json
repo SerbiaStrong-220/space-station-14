@@ -1,25 +1,66 @@
 {
     "version": 1,
-    "license": "CC-BY-SA-3.0",
-    "copyright": "",
+    "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+    "copyright": "Sprited by vojner (Discord) for SS220",
     "size": {
       "x": 32,
       "y": 32
     },
     "states": [
       {
-        "name": "contractor_baton_on"
+        "name": "antidrop-inhand-left",
+        "directions": 4
       },
       {
-        "name": "contractor_baton_off"
+        "name": "antidrop-inhand-right",
+        "directions": 4
       },
-	  {
-		"name": "on-inhand-left",
-		"directions": 4
-	  },
-	  {
-		"name": "on-inhand-right",
-		"directions": 4
-	  }
+      {
+        "name": "cuff-inhand-left",
+        "directions": 4
+      },
+      {
+        "name": "cuff-inhand-right",
+        "directions": 4
+      },
+      {
+        "name": "icon_antidrop"
+      },
+      {
+        "name": "icon_cuff"
+      },
+      {
+        "name": "icon_mute"
+      },
+      {
+        "name": "icon_off"
+      },
+      {
+        "name": "icon_on"
+      },
+      {
+        "name": "mute-inhand-left",
+        "directions": 4
+      },
+      {
+        "name": "mute-inhand-right",
+        "directions": 4
+      },
+      {
+        "name": "off-inhand-left",
+        "directions": 4
+      },
+      {
+        "name": "off-inhand-right",
+        "directions": 4
+      },
+      {
+        "name": "on-inhand-left",
+        "directions": 4
+      },
+      {
+        "name": "on-inhand-right",
+        "directions": 4
+      }
     ]
 }
