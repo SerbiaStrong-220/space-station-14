@@ -2056,7 +2056,7 @@
     partnerWhitelist:
       tags:
       - Mouse
-    nextBreedAttempt: 10s
+    nextBreedAttempt: 10
     makeOffspringInfant: true
     hungerPerBirth: 5
     offspring:
@@ -2070,6 +2070,9 @@
       amount: 0
       maxAmount: 3
     - id: MobMouseCancer
+      amount: 0
+      maxAmount: 1
+    - id: CultRatCorrupted
       amount: 0
       maxAmount: 1
     breedRange: 2
@@ -2215,6 +2218,21 @@
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: Zombie
+  #SS220 mousereproduction begin
+  - type: Reproductive
+    partnerWhitelist:
+      tags:
+      - Mouse
+    nextBreedAttempt: 10
+    makeOffspringInfant: true
+    hungerPerBirth: 5
+    offspring:
+    - id: MobMouseCancer
+      amount: 2
+      maxAmount: 6
+    breedRange: 2
+  - type: ReproductivePartner
+  #SS220 mousereproduction end
 
 - type: entity
   name: lizard #Weh
