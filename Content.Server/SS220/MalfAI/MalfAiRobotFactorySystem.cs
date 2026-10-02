@@ -228,8 +228,8 @@ public sealed partial class MalfAiRobotFactorySystem : EntitySystem
     private void OnFactoryTerminating(Entity<MalfAiFactoryComponent> ent, ref EntityTerminatingEvent args)
     {
         ent.Comp.PendingBody = null;
-        EjectVictim(ent);
-        GhostVictim(ent.Comp);
+        var corpse = EjectVictim(ent);
+        GhostVictim(ent.Comp, corpse);
 
         if (!HasComp<ActiveMalfAiFactoryComponent>(ent) && !HasComp<FinishingMalfAiFactoryComponent>(ent))
             return;
@@ -264,7 +264,9 @@ public sealed partial class MalfAiRobotFactorySystem : EntitySystem
         if (ent.Comp.VictimMind is { } mid
             && TryComp<MindComponent>(mid, out var victimMind)
             && victimMind.UserId is { } userId
-            && _player.TryGetSessionById(userId, out _))
+            && _player.TryGetSessionById(userId, out _)
+            && (victimMind.OwnedEntity == corpse
+                || victimMind.OwnedEntity is { } ghostOwned && HasComp<GhostComponent>(ghostOwned)))
             seatedMind = mid;
         ent.Comp.VictimMind = null;
 
@@ -294,7 +296,7 @@ public sealed partial class MalfAiRobotFactorySystem : EntitySystem
             $"Malf AI robot factory {ToPrettyString(ent):reclaimer} finished grinding and produced {ToPrettyString(borg):target}.");
     }
 
-    private void GhostVictim(MalfAiFactoryComponent factory)
+    private void GhostVictim(MalfAiFactoryComponent factory, EntityUid? corpse)
     {
         if (factory.VictimMind is not { } mindId)
             return;
@@ -303,8 +305,11 @@ public sealed partial class MalfAiRobotFactorySystem : EntitySystem
         if (!TryComp<MindComponent>(mindId, out var mind) || mind.UserId == null)
             return;
 
-        if (mind.OwnedEntity is { } owned && !TerminatingOrDeleted(owned))
-            _mind.TransferTo(mindId, null, createGhost: false, mind: mind);
+        if (mind.OwnedEntity is { } owned && owned != corpse)
+            return;
+
+        if (corpse is { } body)
+            return;
 
         if (!_player.TryGetSessionById(mind.UserId.Value, out _))
             return;

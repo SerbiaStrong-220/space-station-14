@@ -524,8 +524,14 @@ public sealed partial class MalfAiMachineModulesSystem : EntitySystem
 
     private void OnSiphonHostShutdown(Entity<MalfAiPowerSiphonComponent> ent, ref ComponentShutdown args)
     {
+        var terminating = TerminatingOrDeleted(ent);
         if (ent.Comp.AddedPowerConsumer && HasComp<PowerConsumerComponent>(ent))
-            RemCompDeferred<PowerConsumerComponent>(ent);
+        {
+            if (terminating)
+                RemCompDeferred<PowerConsumerComponent>(ent);
+            else
+                RemComp<PowerConsumerComponent>(ent);
+        }
 
         if (ent.Comp.AddedHvNodeId is { } nodeId
             && TryComp<NodeContainerComponent>(ent, out var nodes)
@@ -536,9 +542,19 @@ public sealed partial class MalfAiMachineModulesSystem : EntitySystem
         }
 
         if (ent.Comp.AddedNodeContainer)
-            RemCompDeferred<NodeContainerComponent>(ent);
+        {
+            if (terminating)
+                RemCompDeferred<NodeContainerComponent>(ent);
+            else
+                RemComp<NodeContainerComponent>(ent);
+        }
 
         if (ent.Comp.AddedTimedSpawner && HasComp<TimedSpawnerComponent>(ent))
-            RemCompDeferred<TimedSpawnerComponent>(ent);
+        {
+            if (terminating)
+                RemCompDeferred<TimedSpawnerComponent>(ent);
+            else
+                RemComp<TimedSpawnerComponent>(ent);
+        }
     }
 }

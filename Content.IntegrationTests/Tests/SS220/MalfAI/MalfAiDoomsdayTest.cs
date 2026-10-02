@@ -305,7 +305,11 @@ public sealed class MalfAiDoomsdayTest : GameTest
                 "Doomsday stayed armed after core destruction.");
             Assert.That(entMan.HasComponent<EndedGameRuleComponent>(role.Value), Is.True,
                 "Cancelled Doomsday rule was not ended.");
-            Assert.That(entMan.HasComponent<MalfAiDoomsdayWaveComponent>(role.Value), Is.False,
+            var waves = 0;
+            var waveQuery = entMan.AllEntityQueryEnumerator<MalfAiDoomsdayWaveComponent>();
+            while (waveQuery.MoveNext(out _, out _))
+                waves++;
+            Assert.That(waves, Is.EqualTo(0),
                 "Cancelled Doomsday still spawned a kill-wave.");
             Assert.That(entMan.System<AlertLevelSystem>().GetLevel(station.Value), Is.EqualTo("green"),
                 "Doomsday cancel restored Green blindly or left Delta.");

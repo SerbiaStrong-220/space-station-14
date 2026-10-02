@@ -226,12 +226,11 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
 
     public void OnNodeGroupRebuilt(EntityUid uid, PowerMonitoringDeviceComponent component, NodeGroupsRebuilt args)
     {
-        // SS220 MalfAI: chaos events can delete a device during a power grid rebuild.
-        if (TerminatingOrDeleted(uid))
-            return;
-
         if (component.IsCollectionMasterOrChild)
             AssignEntityAsCollectionMaster(uid, component);
+
+        if (TerminatingOrDeleted(uid))
+            return;
 
         var query = AllEntityQuery<PowerMonitoringConsoleComponent, PowerMonitoringCableNetworksComponent>();
         while (query.MoveNext(out var _, out var entConsole, out var entCableNetworks))
