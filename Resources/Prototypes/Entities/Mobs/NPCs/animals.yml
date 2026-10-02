@@ -2051,6 +2051,30 @@
       behaviors:
       - !type:GibBehavior
         recursive: false
+  #SS220 mousereproduction begin
+  - type: Reproductive
+    partnerWhitelist:
+      tags:
+      - Mouse
+    nextBreedAttempt: 10s
+    makeOffspringInfant: true
+    hungerPerBirth: 5
+    offspring:
+    - id: MobMouse
+      amount: 0
+      maxAmount: 3
+    - id: MobMouse1
+      amount: 0
+      maxAmount: 3
+    - id: MobMouse2
+      amount: 0
+      maxAmount: 3
+    - id: MobMouseCancer
+      amount: 0
+      maxAmount: 1
+    breedRange: 2
+  - type: ReproductivePartner
+  #SS220 mousereproduction end
 
 - type: entity
   parent: MobMouse
