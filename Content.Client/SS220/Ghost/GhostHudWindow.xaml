@@ -1,0 +1,8 @@
+<ui:FancyWindow xmlns="https://spacestation14.io"
+                xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls"
+                MinSize="280 120"
+                Title="{Loc ghost-hud-window-title}">
+    <ScrollContainer MaxHeight="400" HScrollEnabled="false" ReturnMeasure="true" Margin="8">
+        <BoxContainer Name="HudList" Orientation="Vertical" SeparationOverride="8" />
+    </ScrollContainer>
+</ui:FancyWindow>

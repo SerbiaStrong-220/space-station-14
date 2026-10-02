@@ -4,7 +4,7 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 09/15/2026 16:47:30
+  time: 09/22/2026 08:37:10
   entityCount: 280
 maps: []
 grids:
@@ -1034,15 +1034,10 @@ entities:
       parent: 31423
 - proto: CableMV
   entities:
-  - uid: 31713
+  - uid: 2
     components:
     - type: Transform
-      pos: 0.5,-7.5
-      parent: 31423
-  - uid: 31716
-    components:
-    - type: Transform
-      pos: 0.5,-6.5
+      pos: -0.5,-5.5
       parent: 31423
   - uid: 31717
     components:
@@ -1158,6 +1153,14 @@ entities:
     components:
     - type: Transform
       pos: 4.5,7.5
+      parent: 31423
+- proto: CableTerminal
+  entities:
+  - uid: 3
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 0.5,-6.5
       parent: 31423
 - proto: CatwalkBlackSteel
   entities:
@@ -26596,28 +26599,11 @@ entities:
         width: 250
 - proto: PortableGeneratorPacman
   entities:
-  - uid: 31603
+  - uid: 5
     components:
     - type: Transform
-      anchored: True
-      pos: -0.5,-5.5
+      pos: 0.5,-7.5
       parent: 31423
-    - type: MaterialStorage
-      storage:
-        Plasma: 3000
-    - type: Physics
-      bodyType: Static
-    - type: InsertingMaterialStorage
-- proto: PortableGeneratorSuperPacman
-  entities:
-  - uid: 31604
-    components:
-    - type: Transform
-      anchored: True
-      pos: -0.5,-6.5
-      parent: 31423
-    - type: Physics
-      bodyType: Static
 - proto: PowerCellRecharger
   entities:
   - uid: 31760
@@ -26905,12 +26891,19 @@ entities:
           - Toggle
     - type: Fixtures
       fixtures: {}
-- proto: SubstationBasic
+- proto: SMESBasic
   entities:
-  - uid: 2
+  - uid: 4
     components:
     - type: Transform
-      pos: 0.5,-7.5
+      pos: -0.5,-6.5
+      parent: 31423
+- proto: SubstationBasic
+  entities:
+  - uid: 13
+    components:
+    - type: Transform
+      pos: -0.5,-5.5
       parent: 31423
 - proto: Table
   entities:
@@ -26980,8 +26973,52 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -0.5,4.5
       parent: 31423
+- proto: WallReinforced
+  entities:
+  - uid: 8
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -1.5,-5.5
+      parent: 31423
+  - uid: 10
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -0.5,-7.5
+      parent: 31423
+  - uid: 11
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -1.5,-7.5
+      parent: 31423
+  - uid: 12
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -0.5,-4.5
+      parent: 31423
 - proto: WallReinforcedRust
   entities:
+  - uid: 6
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -1.5,-4.5
+      parent: 31423
+  - uid: 7
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -0.5,-8.5
+      parent: 31423
+  - uid: 9
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 0.5,-8.5
+      parent: 31423
   - uid: 31424
     components:
     - type: Transform
@@ -27017,11 +27054,6 @@ entities:
     components:
     - type: Transform
       pos: -1.5,-6.5
-      parent: 31423
-  - uid: 31462
-    components:
-    - type: Transform
-      pos: -1.5,-4.5
       parent: 31423
   - uid: 31470
     components:
@@ -27151,11 +27183,6 @@ entities:
     - type: Transform
       pos: 6.5,0.5
       parent: 31423
-  - uid: 32887
-    components:
-    - type: Transform
-      pos: -0.5,-8.5
-      parent: 31423
   - uid: 32888
     components:
     - type: Transform
@@ -27170,11 +27197,6 @@ entities:
     components:
     - type: Transform
       pos: 5.5,-8.5
-      parent: 31423
-  - uid: 32891
-    components:
-    - type: Transform
-      pos: -1.5,-5.5
       parent: 31423
   - uid: 32892
     components:
@@ -27230,12 +27252,6 @@ entities:
       parent: 31423
 - proto: WallSolidRust
   entities:
-  - uid: 31426
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 0.5,-8.5
-      parent: 31423
   - uid: 31428
     components:
     - type: Transform
@@ -27259,24 +27275,6 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 7.5,-7.5
-      parent: 31423
-  - uid: 31452
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -0.5,-7.5
-      parent: 31423
-  - uid: 31455
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -1.5,-7.5
-      parent: 31423
-  - uid: 31464
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -0.5,-4.5
       parent: 31423
   - uid: 31474
     components:

@@ -91,14 +91,14 @@ public sealed partial class BurglarBugServerSystem : EntitySystem
 
     private void OnStick(Entity<BurglarBugComponent> entity, ref AttemptEntityStickEvent args)
     {
-        if (entity.Comp.OpenedDoorStickPopupCancellation != null)
+        if (entity.Comp.OpenDoorStickPopupCancellation != null)
         {
             if (TryComp<DoorComponent>(args.Target,
                     out var doorComponent) &&  doorComponent.State != DoorState.Closed)
             {
                 args.Cancelled = true;
                 RaiseLocalEvent(entity.Owner, new DroppedEvent(args.User), true);
-                var msg = Loc.GetString(entity.Comp.OpenedDoorStickPopupCancellation);
+                var msg = Loc.GetString(entity.Comp.OpenDoorStickPopupCancellation);
                 _popupSystem.PopupEntity(msg, args.User, PopupType.MediumCaution);
                 _handsSystem.TryDrop(args.User);
                 _adminLogger.Add(LogType.Stripping, LogImpact.Medium, $"{ToPrettyString(args.User):actor} has droped the item {ToPrettyString(entity.Owner):item}");
