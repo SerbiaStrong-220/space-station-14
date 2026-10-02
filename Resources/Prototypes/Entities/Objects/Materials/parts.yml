@@ -74,6 +74,14 @@
   - type: GuideHelp
     guides:
     - ExpandingRepairingStation
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Materials/iron_rod_pick_up.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Materials/metal_drop.ogg
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   parent: PartRodMetal

@@ -60,9 +60,6 @@ ent-ClothingHeadHelmetHardsuitERTSecurity = шлем скафандра офиц
     .desc = Специальный защитный шлем, используемый офицерами отряда быстрого реагирования.
 ent-ClothingHeadHelmetHardsuitERTJanitor = шлем скафандра уборщика ОБР
     .desc = Специальный защитный шлем, используемый уборщиками отряда быстрого реагирования.
-# SS220-naming-fix
-ent-ClothingHeadHelmetCBURN = шлем отряда РХБЗ
-    .desc = Огнеупорный, защищающий от давления шлем, который используют специальные подразделения зачистки.
 ent-ClothingHeadHelmetHardsuitDeathsquad = шлем скафандра эскадрона смерти
     .desc = Робастный шлем скафандра для специальных операций.
 ent-ClothingHeadHelmetHardsuitClown = шлем скафандра клоуна

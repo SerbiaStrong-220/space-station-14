@@ -19,6 +19,14 @@ public sealed partial class EncryptionKeyHolderComponent : Component
     [DataField]
     public bool KeysUnlocked = true;
 
+    // SS220-ipc-builtin-radio begin
+    /// <summary>
+    ///     Whether channels are hidden from the examine menu (e.g. built-in radios).
+    /// </summary>
+    [DataField]
+    public bool ExamineHidden = false;
+    // SS220-ipc-builtin-radio end
+
     /// <summary>
     ///     The tool required to extract the encryption keys from the headset.
     /// </summary>

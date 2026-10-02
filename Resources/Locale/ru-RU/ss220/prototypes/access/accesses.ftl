@@ -1,4 +1,9 @@
-# SS220 CBURN questions
+ent-AirlockExternalGlassScienceLocked = { ent-AirlockExternalGlass }
+    .suffix = Внешний, Стеклянный, Научный, Закрыт
+    .desc = { ent-AirlockExternalGlass.desc }
+
+id-card-access-level-psychologist = Психолог
+
 id-card-access-level-central-command-cburn = РХБЗ
 id-card-access-level-central-command-ert = ОБР
 id-card-access-level-central-command-srt-operative = Оперативник ГСН

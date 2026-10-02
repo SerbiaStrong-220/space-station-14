@@ -11,6 +11,15 @@
     sprite: SS220/Clothing/Back/Duffels/captain_white.rsi
 
 - type: entity
+  parent: ClothingBackpackDuffel
+  id: ClothingBackpackJanitorJRDuffel
+  name: JR duffel bag
+  description: A convenient, water resistant backpack designed for cleaners JR.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Back/Duffels/janitor_jr.rsi
+
+- type: entity
   id: ClothingBackpackDuffelCBURNFilled
   parent: ClothingBackpackDuffelCBURN
   suffix: Filled

@@ -19,15 +19,15 @@ public sealed partial class RaveSystem : SharedRaveSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RaveComponent, ComponentAdd>(OnAdded);
         SubscribeLocalEvent<RaveComponent, ComponentRemove>(OnRemoved);
         SubscribeLocalEvent<RaveComponent, LocalPlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<RaveComponent, LocalPlayerDetachedEvent>(OnPlayerDetached);
         SubscribeLocalEvent<RaveComponent, OnChemRemoveHallucinationsEvent>(OnVisionCleansed);
     }
 
-    private void OnAdded(Entity<RaveComponent> entity, ref ComponentAdd args)
+    protected override void OnStartup(Entity<RaveComponent> entity, ref ComponentStartup args)
     {
+        base.OnStartup(entity, ref args);
         EnsureEffect(entity);
     }
 
@@ -56,6 +56,9 @@ public sealed partial class RaveSystem : SharedRaveSystem
         if (entity.Owner != _playerManager.LocalEntity)
             return;
 
+        if (entity.Comp.EffectEntity is not null)
+            return;
+
         var effectEntity = Spawn(_effectPrototype);
         entity.Comp.EffectEntity = effectEntity;
 
@@ -67,8 +70,12 @@ public sealed partial class RaveSystem : SharedRaveSystem
 
     private void RemoveEffect(Entity<RaveComponent> entity)
     {
-        if (entity.Comp.EffectEntity is not { } effectEntity
-            || !TryComp<TextureFadeOverlayComponent>(effectEntity, out var overlay))
+        if (entity.Comp.EffectEntity is not { } effectEntity)
+            return;
+
+        entity.Comp.EffectEntity = null;
+
+        if (!TryComp<TextureFadeOverlayComponent>(effectEntity, out var overlay))
             return;
 
         overlay.SetUniformProgressionSpeed(0.01f);

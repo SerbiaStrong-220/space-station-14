@@ -303,7 +303,9 @@ public sealed partial class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComp
         if (initial && !rule.Comp.InitialCultistMinds.Contains(mindId))
             rule.Comp.InitialCultistMinds.Add(mindId);
 
-        _role.MindAddRole(mindId, rule.Comp.MindCultYoggAntagId, mindComp, true);
+        // AntagSelection already assigns this role to the initial cultists.
+        if (!_role.MindHasRole<CultYoggRoleComponent>((mindId, mindComp), out _))
+            _role.MindAddRole(mindId, rule.Comp.MindCultYoggAntagId, mindComp, true);
 
         GiveAllActiveObjectives(rule, mindId, mindComp);
 

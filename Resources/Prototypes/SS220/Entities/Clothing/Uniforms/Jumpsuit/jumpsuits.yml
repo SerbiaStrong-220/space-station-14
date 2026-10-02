@@ -424,6 +424,7 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/musician_bard.rsi
 
+
 # Medical
 
   # Интерн
@@ -541,6 +542,18 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/salvage_specialist_experditor.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/salvage_specialist_experditor.rsi
+
+- type: entity
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220]
+  id: ClothingUniformJumpsuitJRSalvage
+  name: jr salvage uniform
+  description: Provides enhanced comfort during cleanup.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/jr_uniform_salvage.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/jr_uniform_salvage.rsi
 
 # Инженерия
 
@@ -661,6 +674,19 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/rd_alt.rsi
 
 # Служба Безопасности
+
+  # Смотритель
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitCommissar
+  name: commissar's tunic
+  description: A commissar does not demand respect. He embodies it.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/commissar.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/commissar.rsi
 
   # Офицер СБ
 - type: entity

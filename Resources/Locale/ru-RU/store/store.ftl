@@ -15,3 +15,5 @@ store-preset-name-spellbook = Книга заклинаний
 store-preset-name-changeling = Магазин ДНК
 
 store-preset-name-nukie-delivery = Блюспейс-доставка Ядерных Оперативников
+# SS220 pirate market
+store-ui-stock-remaining = Осталось: { $remaining }
