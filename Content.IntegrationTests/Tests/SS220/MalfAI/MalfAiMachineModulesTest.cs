@@ -318,8 +318,8 @@ public sealed class MalfAiMachineModulesTest : GameTest
             var actionsComp = entMan.GetComponent<ActionsComponent>(body);
             var actionComp = entMan.GetComponent<ActionComponent>(action);
             var tuning = entMan.GetComponent<MalfAiMachineOverloadTuningComponent>(action);
-            Assert.That(tuning.DelaySeconds, Is.EqualTo(300f),
-                "Machine Overload default fuse is not 5 minutes.");
+            Assert.That(tuning.DelaySeconds, Is.EqualTo(3f),
+                "Machine Overload default fuse is not 3 seconds.");
             tuning.DelaySeconds = 2f;
             actionsSys.PerformAction((body, actionsComp), (action, actionComp),
                 new MalfAiMachineOverloadEvent { Performer = body, Target = machine }, predicted: false);
@@ -506,8 +506,8 @@ public sealed class MalfAiMachineModulesTest : GameTest
             entMan.EventBus.RaiseLocalEvent(factory, ref dropEv);
             Assert.That(entMan.HasComponent<ActiveMalfAiFactoryComponent>(factory), Is.True,
                 "Factory did not start grinding an inserted corpse.");
-            Assert.That(entMan.GetComponent<TransformComponent>(corpse).GridUid, Is.Null,
-                "Inserted corpse was not removed from the floor.");
+            Assert.That(entMan.GetComponent<TransformComponent>(corpse).ParentUid, Is.EqualTo(factory),
+                "Inserted corpse was not loaded into the factory.");
 
             var secondCorpse = entMan.SpawnEntity("MobHuman", map.GridCoords);
             entMan.System<MobStateSystem>()

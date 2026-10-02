@@ -94,6 +94,7 @@ public sealed partial class MalfAiDoomsdaySystem : StationEventSystem<MalfAiDoom
     private const float MinEventDuration = 0.1f;
     private const float MinWaveSpeed = 0.1f;
     private const float FxPhaseTwist = 0.37f;
+    private static readonly TimeSpan DamageInterval = TimeSpan.FromSeconds(0.25);
 
     private static readonly SoundSpecifier AnnounceSound =
         new SoundPathSpecifier("/Audio/Announcements/attention.ogg")
@@ -103,6 +104,7 @@ public sealed partial class MalfAiDoomsdaySystem : StationEventSystem<MalfAiDoom
 
     private readonly List<(EntityUid Uid, MalfAiDoomsdayWaveComponent Wave, MalfAiDoomsdayComponent Doom)> _pulseActive = new();
     private readonly List<EntityUid> _pulseHit = new();
+    private readonly HashSet<Entity<MobStateComponent>> _pulseVictims = new();
     private readonly Dictionary<EntityUid, HashSet<ICommonSession>> _wavePvsSessions = new();
     private readonly HashSet<ICommonSession> _wavePvsTarget = new();
 
@@ -529,29 +531,32 @@ public sealed partial class MalfAiDoomsdaySystem : StationEventSystem<MalfAiDoom
         SpawnRimFx(doom, wave, lead);
 
         _pulseHit.Clear();
-        var query = EntityQueryEnumerator<MobStateComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out var mob, out var xform))
+        if (lead > 0f && Timing.CurTime >= doom.NextDamageAt)
         {
-            if (doom.Hit.Contains(uid))
-                continue;
+            doom.NextDamageAt = Timing.CurTime + DamageInterval;
 
-            if (xform.MapID != doom.WaveMapId)
-                continue;
+            _pulseVictims.Clear();
+            _lookup.GetEntitiesInRange(doom.WaveMapId, doom.WaveOrigin, lead, _pulseVictims);
+            foreach (var (uid, mob) in _pulseVictims)
+            {
+                if (doom.Hit.Contains(uid))
+                    continue;
 
-            if (!_mobState.IsAlive(uid, mob) && !_mobState.IsCritical(uid, mob))
-                continue;
+                if (!_mobState.IsAlive(uid, mob) && !_mobState.IsCritical(uid, mob))
+                    continue;
 
-            var distanceSquared = (_xform.GetWorldPosition(uid) - doom.WaveOrigin).LengthSquared();
-            if (lead * lead < distanceSquared)
-                continue;
+                var distanceSquared = (_xform.GetWorldPosition(uid) - doom.WaveOrigin).LengthSquared();
+                if (lead * lead < distanceSquared)
+                    continue;
 
-            if (_siliconQuery.HasComp(uid)
-                || _borgQuery.HasComp(uid)
-                || _aiHeldQuery.HasComp(uid)
-                || _aiCoreQuery.HasComp(uid))
-                continue;
+                if (_siliconQuery.HasComp(uid)
+                    || _borgQuery.HasComp(uid)
+                    || _aiHeldQuery.HasComp(uid)
+                    || _aiCoreQuery.HasComp(uid))
+                    continue;
 
-            _pulseHit.Add(uid);
+                _pulseHit.Add(uid);
+            }
         }
 
         var source = TerminatingOrDeleted(doom.Core) ? (EntityUid?) null : doom.Core;

@@ -13,8 +13,6 @@
 - type: entity
   parent: [BaseMalfAiObjective, BaseLivingObjective]
   id: MalfAiHijackShuttleObjective
-  name: Hijack the emergency shuttle
-  description: Prevent loyal Nanotrasen crew from leaving on the shuttle. You do not need to board it.
   components:
   - type: Objective
     difficulty: 5

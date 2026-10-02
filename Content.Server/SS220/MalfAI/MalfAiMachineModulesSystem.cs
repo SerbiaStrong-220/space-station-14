@@ -429,6 +429,7 @@ public sealed partial class MalfAiMachineModulesSystem : EntitySystem
         }
 
         siphon.AddedTimedSpawner = addedSpawner;
+        siphon.NextSoundAt = _timing.CurTime + SiphonSparkInterval;
 
         _audio.PlayPvs(SiphonSound, target);
         _popup.PopupEntity(Loc.GetString(PowerSiphonDone), performer, performer);
@@ -482,11 +483,18 @@ public sealed partial class MalfAiMachineModulesSystem : EntitySystem
             return;
 
         _starved.Clear();
+        var now = _timing.CurTime;
         var query = EntityQueryEnumerator<MalfAiPowerSiphonComponent, PowerConsumerComponent>();
         while (query.MoveNext(out var uid, out var siphon, out var consumer))
         {
             if (consumer.DrawRate < siphon.MaxDraw)
                 consumer.DrawRate = Math.Min(siphon.MaxDraw, consumer.DrawRate + siphon.RampPerSecond * frameTime);
+
+            if (now >= siphon.NextSoundAt)
+            {
+                siphon.NextSoundAt = now + SiphonSparkInterval;
+                _audio.PlayPvs(SiphonSound, uid);
+            }
 
             if (siphon.StallTimeoutSeconds > 0f
                 && consumer.DrawRate >= siphon.StallMinDraw

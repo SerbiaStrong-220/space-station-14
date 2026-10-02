@@ -59,4 +59,7 @@ public sealed partial class MalfAiPowerSiphonComponent : Component
 
     [ViewVariables]
     public bool AddedPowerConsumer;
+
+    [ViewVariables]
+    public TimeSpan NextSoundAt;
 }

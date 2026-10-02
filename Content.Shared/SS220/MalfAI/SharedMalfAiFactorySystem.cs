@@ -19,6 +19,7 @@ using Content.Shared.Power;
 using Content.Shared.Power.EntitySystems;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
@@ -44,6 +45,9 @@ public sealed partial class SharedMalfAiFactorySystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+
+    public const string VictimSlotId = "victim_slot";
 
     private static readonly SoundSpecifier ConvertStartSound =
         new SoundPathSpecifier("/Audio/Machines/reclaimer_startup.ogg");
@@ -59,6 +63,8 @@ public sealed partial class SharedMalfAiFactorySystem : EntitySystem
     private static readonly LocId NotHumanoid = "malfai-factory-not-humanoid";
     private static readonly LocId NotDead = "malfai-factory-not-dead";
     private static readonly LocId TooFar = "malfai-factory-too-far";
+
+    private readonly List<EntityUid> _feedItems = new();
 
     public override void Initialize()
     {
@@ -201,9 +207,12 @@ public sealed partial class SharedMalfAiFactorySystem : EntitySystem
 
     private void StartGrind(Entity<MalfAiFactoryComponent> ent, EntityUid body, EntityUid user)
     {
-        var carried = new List<EntityUid>(_inventory.GetHandOrInventoryEntities(body));
+        var carried = _feedItems;
+        carried.Clear();
+        carried.AddRange(_inventory.GetHandOrInventoryEntities(body));
         foreach (var item in carried)
             _xform.DropNextTo(item, ent.Owner);
+        carried.Clear();
 
         EntityUid? victimMind = null;
         if (_mind.TryGetMind(body, out var mindId, out var mind)
@@ -216,6 +225,8 @@ public sealed partial class SharedMalfAiFactorySystem : EntitySystem
             $"{ToPrettyString(user):player} fed {ToPrettyString(body):target} into {ToPrettyString(ent):reclaimer} (Malf AI robot factory).");
 
         _xform.DetachEntity(body);
+        var victimSlot = _container.EnsureContainer<ContainerSlot>(ent.Owner, VictimSlotId);
+        _container.Insert(body, victimSlot);
         ent.Comp.PendingBody = body;
         ent.Comp.VictimMind = victimMind;
         ent.Comp.PausedAt = null;

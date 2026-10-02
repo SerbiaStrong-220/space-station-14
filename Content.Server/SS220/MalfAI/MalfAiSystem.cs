@@ -73,13 +73,14 @@ public sealed partial class MalfAiSystem : EntitySystem
         "ActionMalfAiOpenStore",
     };
 
-    private readonly List<EntityUid> _orphanedApcs = new();
     private readonly HashSet<EntityUid> _deadStores = new();
     private readonly Dictionary<EntityUid, (TimeSpan At, float Size)> _visionExpansionCache = new();
+    private TimeSpan _nextApcPayout;
+    private readonly Dictionary<EntityUid, int> _apcPayoutCounts = new();
+    private readonly Dictionary<string, FixedPoint2> _apcPayoutCurrency = new();
 
     private static readonly TimeSpan VisionExpansionTtl = TimeSpan.FromSeconds(1);
     private static readonly TimeSpan VisionExpansionMaxAge = TimeSpan.FromSeconds(5);
-    private const int MaxRewardBacklog = 10;
 
     private static readonly EntProtoId HijackObjectiveProto = "MalfAiHijackShuttleObjective";
 
@@ -114,9 +115,9 @@ public sealed partial class MalfAiSystem : EntitySystem
 
     private void OnRoundRestart(RoundRestartCleanupEvent args)
     {
-        _orphanedApcs.Clear();
         _deadStores.Clear();
         _visionExpansionCache.Clear();
+        _nextApcPayout = TimeSpan.Zero;
     }
 
     private void OnRoleAdded(RoleAddedEvent args)
@@ -322,7 +323,8 @@ public sealed partial class MalfAiSystem : EntitySystem
         var rewardInterval = GetApcRewardInterval();
         var hackedApc = EnsureComp<MalfAiHackedApcComponent>(target);
         hackedApc.OwnerMind = mindId;
-        hackedApc.NextRewardAt = _timing.CurTime + rewardInterval;
+        var hackedAt = _timing.CurTime;
+        hackedApc.NextRewardAt = _nextApcPayout > hackedAt ? _nextApcPayout : hackedAt + rewardInterval;
         _appearance.SetData(target, ApcVisuals.Hacked, true);
 
         args.Handled = true;
@@ -344,44 +346,39 @@ public sealed partial class MalfAiSystem : EntitySystem
 
         var now = _timing.CurTime;
         var interval = GetApcRewardInterval();
-        var rewardPerPayout = FixedPoint2.New(_cfg.GetCVar(CCVars220.MalfAiApcReward));
-        _orphanedApcs.Clear();
-        var query = EntityQueryEnumerator<MalfAiHackedApcComponent>();
-        while (query.MoveNext(out var apc, out var hackedApc))
+        if (now < _nextApcPayout)
+            return;
+
+        _nextApcPayout = now + interval;
+
+        var rewardPerApc = FixedPoint2.New(_cfg.GetCVar(CCVars220.MalfAiApcReward));
+        _apcPayoutCounts.Clear();
+        var payoutQuery = EntityQueryEnumerator<MalfAiHackedApcComponent>();
+        while (payoutQuery.MoveNext(out _, out var hacked))
         {
-            if (hackedApc.NextRewardAt > now)
+            if (hacked.NextRewardAt > now)
                 continue;
 
-            if (TerminatingOrDeleted(hackedApc.OwnerMind) || !HasLiveMalfRole(hackedApc.OwnerMind))
-            {
-                _orphanedApcs.Add(apc);
+            hacked.NextRewardAt = now + interval;
+
+            if (TerminatingOrDeleted(hacked.OwnerMind)
+                || !HasLiveMalfRole(hacked.OwnerMind)
+                || !TryGetOwnedStore(hacked.OwnerMind, out _))
                 continue;
-            }
 
-            if (!TryGetOwnedStore(hackedApc.OwnerMind, out var store))
-            {
-                hackedApc.NextRewardAt = now + interval;
-                continue;
-            }
-
-            var payoutsDue = 0;
-            while (hackedApc.NextRewardAt <= now && payoutsDue < MaxRewardBacklog)
-            {
-                hackedApc.NextRewardAt += interval;
-                payoutsDue++;
-            }
-
-            if (hackedApc.NextRewardAt <= now)
-                hackedApc.NextRewardAt = now + interval;
-
-            var reward = rewardPerPayout * payoutsDue;
-            _store.TryAddCurrency(
-                new Dictionary<string, FixedPoint2> { { MalfAiConstants.CpuCurrency, reward } },
-                store.Value.Owner, store.Value.Comp);
+            _apcPayoutCounts.TryGetValue(hacked.OwnerMind, out var count);
+            _apcPayoutCounts[hacked.OwnerMind] = count + 1;
         }
 
-        foreach (var apc in _orphanedApcs)
-            RemoveHackedApc(apc);
+        _apcPayoutCurrency.Clear();
+        foreach (var (mindId, count) in _apcPayoutCounts)
+        {
+            if (!TryGetOwnedStore(mindId, out var store))
+                continue;
+
+            _apcPayoutCurrency[MalfAiConstants.CpuCurrency] = rewardPerApc * count;
+            _store.TryAddCurrency(_apcPayoutCurrency, store.Value.Owner, store.Value.Comp);
+        }
     }
 
     private void ClearHackedApcs(EntityUid mindId)
@@ -830,23 +827,13 @@ public sealed partial class MalfAiSystem : EntitySystem
         if (!TryComp<MalfAiActorComponent>(body, out var actor))
             return;
 
-        if (TryComp<ThermalVisionComponent>(body, out var existing))
-        {
-            if (!actor.GrantedThermalVision)
-                return;
-
-            existing.VisionRadius = upgrade.VisionRadius;
-            existing.HighSensitiveVisionRadius = upgrade.CloseRadius;
-            existing.State = IgnoreLightVisionOverlayState.Half;
-            Dirty(body, existing);
+        if (HasComp<ThermalVisionComponent>(body) && !actor.GrantedThermalVision)
             return;
-        }
 
-        var thermal = new ThermalVisionComponent(upgrade.VisionRadius, upgrade.CloseRadius)
-        {
-            State = IgnoreLightVisionOverlayState.Half
-        };
-        AddComp(body, thermal);
+        var thermal = EnsureComp<ThermalVisionComponent>(body);
+        thermal.VisionRadius = upgrade.VisionRadius;
+        thermal.HighSensitiveVisionRadius = upgrade.CloseRadius;
+        thermal.State = IgnoreLightVisionOverlayState.Half;
         Dirty(body, thermal);
         actor.GrantedThermalVision = true;
     }

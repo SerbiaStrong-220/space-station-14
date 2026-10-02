@@ -25,6 +25,7 @@ using Content.Shared.Trigger.Components.Effects;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
+using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
@@ -53,6 +54,7 @@ public sealed partial class MalfAiRobotFactorySystem : EntitySystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
 
     private static readonly EntProtoId FactoryProto = "MalfAiRobotFactory";
     private static readonly EntProtoId ShellProto = "MalfAiCyborgShell";
@@ -195,13 +197,7 @@ public sealed partial class MalfAiRobotFactorySystem : EntitySystem
             if (!TryComp<MalfAiFactoryComponent>(uid, out var factory))
                 continue;
 
-            if (factory.PendingBody is not { } body)
-                continue;
-
             factory.PendingBody = null;
-            ReleaseVictimMind(factory);
-            if (!TerminatingOrDeleted(body))
-                QueueDel(body);
         }
 
         foreach (var uid in _due)
@@ -231,17 +227,9 @@ public sealed partial class MalfAiRobotFactorySystem : EntitySystem
 
     private void OnFactoryTerminating(Entity<MalfAiFactoryComponent> ent, ref EntityTerminatingEvent args)
     {
-        if (ent.Comp.PendingBody is { } body)
-        {
-            ent.Comp.PendingBody = null;
-            GhostVictim(ent.Comp);
-            if (!TerminatingOrDeleted(body))
-                QueueDel(body);
-        }
-        else if (HasComp<ActiveMalfAiFactoryComponent>(ent) || HasComp<FinishingMalfAiFactoryComponent>(ent))
-        {
-            GhostVictim(ent.Comp);
-        }
+        ent.Comp.PendingBody = null;
+        EjectVictim(ent);
+        GhostVictim(ent.Comp);
 
         if (!HasComp<ActiveMalfAiFactoryComponent>(ent) && !HasComp<FinishingMalfAiFactoryComponent>(ent))
             return;
@@ -252,18 +240,36 @@ public sealed partial class MalfAiRobotFactorySystem : EntitySystem
             $"Malf AI robot factory {ToPrettyString(ent):reclaimer} was destroyed mid-grind; conversion aborted.");
     }
 
+    private EntityUid? EjectVictim(Entity<MalfAiFactoryComponent> ent)
+    {
+        if (!_container.TryGetContainer(ent, SharedMalfAiFactorySystem.VictimSlotId, out var container))
+            return null;
+
+        foreach (var contained in container.ContainedEntities)
+        {
+            _container.Remove(contained, container);
+            return contained;
+        }
+
+        return null;
+    }
+
     private void FinishConversion(Entity<MalfAiFactoryComponent> ent)
     {
         _appearance.SetData(ent, MalfAiFactoryVisuals.Status, MalfAiFactoryStatus.Idle);
 
+        var corpse = EjectVictim(ent);
+
         EntityUid? seatedMind = null;
         if (ent.Comp.VictimMind is { } mid
             && TryComp<MindComponent>(mid, out var victimMind)
-            && victimMind.UserId != null
-            && _player.TryGetSessionById(victimMind.UserId.Value, out _)
-            && (victimMind.OwnedEntity == null || HasComp<GhostComponent>(victimMind.OwnedEntity.Value)))
+            && victimMind.UserId is { } userId
+            && _player.TryGetSessionById(userId, out _))
             seatedMind = mid;
         ent.Comp.VictimMind = null;
+
+        if (corpse is { } body && !TerminatingOrDeleted(body))
+            QueueDel(body);
 
         var borg = Spawn(ShellProto, Transform(ent).Coordinates);
         MoveOffFactoryTile(borg);
@@ -286,18 +292,6 @@ public sealed partial class MalfAiRobotFactorySystem : EntitySystem
         _popup.PopupEntity(Loc.GetString(FactoryConvertDone), ent);
         _admin.Add(LogType.Action, LogImpact.High,
             $"Malf AI robot factory {ToPrettyString(ent):reclaimer} finished grinding and produced {ToPrettyString(borg):target}.");
-    }
-
-    private void ReleaseVictimMind(MalfAiFactoryComponent factory)
-    {
-        if (factory.VictimMind is not { } mindId
-            || !TryComp<MindComponent>(mindId, out var mind)
-            || mind.OwnedEntity is not { } owned
-            || TerminatingOrDeleted(owned)
-            || HasComp<GhostComponent>(owned))
-            return;
-
-        _mind.TransferTo(mindId, null, createGhost: false, mind: mind);
     }
 
     private void GhostVictim(MalfAiFactoryComponent factory)

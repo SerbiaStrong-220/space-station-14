@@ -163,7 +163,7 @@
     totalIntensity: 30
     intensitySlope: 20
     maxIntensity: 20
-    delaySeconds: 300
+    delaySeconds: 3
     beepIntervalSeconds: 1
     beepSound: /Audio/Effects/Cargo/buzz_two.ogg
 

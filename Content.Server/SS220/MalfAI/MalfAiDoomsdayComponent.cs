@@ -64,6 +64,9 @@ public sealed partial class MalfAiDoomsdayComponent : Component
 
     [ViewVariables]
     public Vector2 WaveOrigin;
+
+    [ViewVariables]
+    public TimeSpan NextDamageAt;
 }
 
 [RegisterComponent]
