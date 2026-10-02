@@ -2061,13 +2061,13 @@
     hungerPerBirth: 5
     offspring:
     - id: MobMouse
-      amount: 0
+      amount: 1
       maxAmount: 3
     - id: MobMouse1
-      amount: 0
+      amount: 1
       maxAmount: 3
     - id: MobMouse2
-      amount: 0
+      amount: 1
       maxAmount: 3
     - id: MobMouseCancer
       amount: 0
