@@ -42,13 +42,15 @@
     pocket1: HandheldRadio #SS220 Radio
     pocket2: WeaponLaserSvalinn
     belt: ClothingBeltBandolier
-  storage:
-    back:
-    - WeaponShotgunDoubleBarreled
-    - BoxShotgunIncendiary
-    - GrenadeFlashBang
-    - PillAmbuzolPlus
-    - PillAmbuzol
+  # ERTfilledchange-begin
+#  storage:
+#    back:
+#    - WeaponShotgunDoubleBarreled
+#    - BoxShotgunIncendiary
+#    - GrenadeFlashBang
+#    - PillAmbuzolPlus
+#    - PillAmbuzol
+  # ERTfilledchange-end
 
 - type: chameleonOutfit
   id: CBURNChameleonOutfit
