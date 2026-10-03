@@ -1,0 +1,716 @@
+- type: ttsVoice
+  id: Evelynn
+  name: Evelynn
+  speaker: evelynn
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Yuumi
+  name: Yuumi
+  speaker: yuumi
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Pantheon
+  name: pantheon
+  speaker: pantheon
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Darius
+  name: Darius
+  speaker: darius
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Trundle
+  name: Trundle
+  speaker: trundle
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Garen
+  name: Garen
+  speaker: garen
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Kled
+  name: Kled
+  speaker: kled
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Ekko
+  name: Ekko
+  speaker: ekko
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Volibear
+  name: Volibear
+  speaker: volibear
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Samira
+  name: Samira
+  speaker: samira
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Swain
+  name: Swain
+  speaker: swain
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Udyr
+  name: Udyr
+  speaker: udyr
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: DrMundo
+  name: Dr_mundo
+  speaker: dr_mundo
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Graves
+  name: Graves
+  speaker: graves
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Rakan
+  name: Rakan
+  speaker: rakan
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: RenataGlasc
+  name: Renata_glasc
+  speaker: renata_glasc
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Gangplank
+  name: Gangplank
+  speaker: gangplank
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Riven
+  name: Riven
+  speaker: riven
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Katarina
+  name: Katarina
+  speaker: katarina
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Ahri
+  name: Ahri
+  speaker: ahri
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Ornn
+  name: Ornn
+  speaker: ornn
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Braum
+  name: Braum
+  speaker: braum
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Fizz
+  name: Fizz
+  speaker: fizz
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Draven
+  name: Draven
+  speaker: draven
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Qiyana
+  name: Qiyana
+  speaker: qiyana
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Ksante
+  name: Ksante
+  speaker: ksante
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Talon
+  name: Talon
+  speaker: talon
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Shyvana
+  name: Shyvana
+  speaker: shyvana
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+
+- type: ttsVoice
+  id: Janna
+  name: Janna
+  speaker: janna
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Cassiopeia
+  name: Cassiopeia
+  speaker: cassiopeia
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Taliyah
+  name: Taliyah
+  speaker: taliyah
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Neeko
+  name: Neeko
+  speaker: neeko
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Taric
+  name: Taric
+  speaker: taric
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Akshan
+  name: Akshan
+  speaker: akshan
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Tristana
+  name: Tristana
+  speaker: tristana
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Sylas
+  name: Sylas
+  speaker: sylas
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Sejuani
+  name: Sejuani
+  speaker: sejuani
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Anivia
+  name: Anivia
+  speaker: anivia
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Vayne
+  name: Vayne
+  speaker: vayne
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Karma
+  name: Karma
+  speaker: karma
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Nilah
+  name: Nilah
+  speaker: nilah
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: OlafLol
+  name: Olaf_lol
+  speaker: olaf_lol
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Quinn
+  name: Quinn
+  speaker: quinn
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Lissandra
+  name: Lissandra
+  speaker: lissandra
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Hecarim
+  name: Hecarim
+  speaker: hecarim
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Vi
+  name: Vi
+  speaker: vi
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Zyra
+  name: Zyra
+  speaker: zyra
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Zac
+  name: Zac
+  speaker: zac
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+
+- type: ttsVoice
+  id: Senna
+  name: Senna
+  speaker: senna
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Nunu
+  name: Nunu
+  speaker: nunu
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Ryze
+  name: Ryze
+  speaker: ryze
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Yone
+  name: Yone
+  speaker: yone
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Sett
+  name: Sett
+  speaker: sett
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Camille
+  name: Camille
+  speaker: camille
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: LeeSin
+  name: Lee_sin
+  speaker: lee_sin
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Kayle
+  name: Kayle
+  speaker: kayle
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Azir
+  name: Azir
+  speaker: azir
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Tryndamere
+  name: Tryndamere
+  speaker: tryndamere
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Nami
+  name: Nami
+  speaker: nami
+  provider: Silero
+  categories: [ LOL ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: HugeShlopa

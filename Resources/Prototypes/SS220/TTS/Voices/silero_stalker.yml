@@ -1,0 +1,129 @@
+- type: ttsVoice
+  id: Bandit
+  name: Bandit
+  speaker: bandit
+  provider: Silero
+  categories: [ Stalker ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Sidorovich
+  name: Sidorovich
+  speaker: sidorovich
+  provider: Silero
+  categories: [ STALKER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Barman
+  name: Barman
+  speaker: barman
+  provider: Silero
+  categories: [ STALKER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Dolg1
+  name: Dolg1
+  speaker: dolg1
+  provider: Silero
+  categories: [ STALKER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Monolith2
+  name: Monolith2
+  speaker: monolith2
+  provider: Silero
+  categories: [ STALKER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Legends
+  name: Legends
+  speaker: legends
+  provider: Silero
+  categories: [ STALKER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Monolith1
+  name: Monolith1
+  speaker: monolith1
+  provider: Silero
+  categories: [ STALKER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Dolg2
+  name: Dolg2
+  speaker: dolg2
+  provider: Silero
+  categories: [ STALKER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Stories
+  name: Stories
+  speaker: stories
+  provider: Silero
+  categories: [ STALKER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Freedom
+  name: Freedom
+  speaker: freedom
+  provider: Silero
+  categories: [ STALKER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa

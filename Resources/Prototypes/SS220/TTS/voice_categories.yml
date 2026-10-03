@@ -8,3 +8,187 @@
   name: tts-voice-category-sponsor-name
   description: tts-voice-category-sponsor-desc
   color: "#FFD70060"
+
+- type: ttsVoiceCategory
+  id: Warcraft3
+  name: tts-voice-category-warcraft3-name
+
+- type: ttsVoiceCategory
+  id: HalfLife2
+  name: tts-voice-category-halflife2-name
+
+- type: ttsVoiceCategory
+  id: Portal2
+  name: tts-voice-category-portal2-name
+
+- type: ttsVoiceCategory
+  id: Dota2
+  name: tts-voice-category-dota2-name
+
+- type: ttsVoiceCategory
+  id: StartCraft
+  name: tts-voice-category-starcraft-name
+
+- type: ttsVoiceCategory
+  id: LOL
+  name: tts-voice-category-lol-name
+
+- type: ttsVoiceCategory
+  id: Stalker
+  name: tts-voice-category-stalker-name
+
+- type: ttsVoiceCategory
+  id: Fallout
+  name: tts-voice-category-fallout-name
+
+- type: ttsVoiceCategory
+  id: Fallout2
+  name: tts-voice-category-fallout2-name
+
+- type: ttsVoiceCategory
+  id: Postal2
+  name: tts-voice-category-postal2-name
+
+- type: ttsVoiceCategory
+  id: TeamFortress2
+  name: tts-voice-category-teamfortress2-name
+
+- type: ttsVoiceCategory
+  id: AtomicHeart
+  name: tts-voice-category-atomic-heart-name
+
+- type: ttsVoiceCategory
+  id: SKYRIM
+  name: tts-voice-category-skyrim-name
+
+- type: ttsVoiceCategory
+  id: HEROESOFTHESTORM
+  name: tts-voice-category-heroesofthestorm-name
+
+- type: ttsVoiceCategory
+  id: HEARTHSTONE
+  name: tts-voice-category-hearthstone-name
+
+- type: ttsVoiceCategory
+  id: VALORANT
+  name: tts-voice-category-valorant-name
+
+- type: ttsVoiceCategory
+  id: RITA
+  name: tts-voice-category-rita-name
+
+- type: ttsVoiceCategory
+  id: METRO
+  name: tts-voice-category-metro-name
+
+- type: ttsVoiceCategory
+  id: EVILISLANDS
+  name: tts-voice-category-evil-islands-name
+
+- type: ttsVoiceCategory
+  id: TINYBUNNY
+  name: tts-voice-category-tiny-bunny-name
+
+- type: ttsVoiceCategory
+  id: WITCHER
+  name: tts-voice-category-witcher-name
+
+- type: ttsVoiceCategory
+  id: LEFT4DEAD
+  name: tts-voice-category-left4dead-name
+
+- type: ttsVoiceCategory
+  id: SPONGEBOB
+  name: tts-voice-category-spongebob-name
+
+- type: ttsVoiceCategory
+  id: BALDURS_GATE_3
+  name: tts-voice-category-baldurs-gate-3-name
+
+- type: ttsVoiceCategory
+  id: PORTAL
+  name: tts-voice-category-portal-name
+
+- type: ttsVoiceCategory
+  id: TMNT
+  name: tts-voice-category-tmnt-name
+
+- type: ttsVoiceCategory
+  id: STAR_WARS
+  name: tts-voice-category-star-wars-name
+
+- type: ttsVoiceCategory
+  id: TRANSFORMERS
+  name: tts-voice-category-transformers-name
+
+- type: ttsVoiceCategory
+  id: LOTR
+  name: tts-voice-category-lotr-name
+
+- type: ttsVoiceCategory
+  id: SHREK
+  name: tts-voice-category-shrek-name
+
+- type: ttsVoiceCategory
+  id: POTC
+  name: tts-voice-category-potc-name
+
+- type: ttsVoiceCategory
+  id: HARRY_POTTER
+  name: tts-voice-category-harry-potter-name
+
+- type: ttsVoiceCategory
+  id: X3
+  name: tts-voice-category-x3-name
+
+- type: ttsVoiceCategory
+  id: OVERLORD2
+  name: tts-voice-category-overlord2-name
+
+- type: ttsVoiceCategory
+  id: MARVEL
+  name: tts-voice-category-marvel-name
+
+- type: ttsVoiceCategory
+  id: WOW
+  name: tts-voice-category-wow-name
+
+- type: ttsVoiceCategory
+  id: TREASURE_ISLAND
+  name: tts-voice-category-treasure-island-name
+
+- type: ttsVoiceCategory
+  id: BOYS_WORD
+  name: tts-voice-category-boys-word-name
+
+- type: ttsVoiceCategory
+  id: HOGWARTS
+  name: tts-voice-category-hogwarts-name
+
+- type: ttsVoiceCategory
+  id: HALFLIFE_ALYX
+  name: tts-voice-category-halflife-alyx-name
+
+- type: ttsVoiceCategory
+  id: STRONGHOLD
+  name: tts-voice-category-stronghold-name
+
+- type: ttsVoiceCategory
+  id: CYBERPUNK
+  name: tts-voice-category-cyberpunk-name
+
+- type: ttsVoiceCategory
+  id: TLOU
+  name: tts-voice-category-tlou-name
+
+- type: ttsVoiceCategory
+  id: DEEP_ROCK_GALACTIC
+  name: tts-voice-category-deep-rock-galactic-name
+
+- type: ttsVoiceCategory
+  id: SUNBOY
+  name: tts-voice-category-sunboy-name
+
+- type: ttsVoiceCategory
+  id: WH40k
+  name: tts-voice-category-wh40k-name
