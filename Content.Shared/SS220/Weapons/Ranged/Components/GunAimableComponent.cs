@@ -5,7 +5,6 @@ namespace Content.Shared.SS220.Weapons.Components;
 
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]
-
 public sealed partial class GunAimableComponent : Component//This component signalises that the gun can be used for aimed shooting
 {
     [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
