@@ -37,3 +37,6 @@
         - id: PillAmbuzolPlus
         - id: PillAmbuzol
           amount: 4
+        - id: WeaponLaserSMG
+        - id: LaserSMGPowerCell
+          amount: 3

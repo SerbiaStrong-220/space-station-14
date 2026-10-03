@@ -16,6 +16,7 @@
         - id: ClothingHeadsetAltCentComm
         - id: ClothingBackpackDeathSquadOperativeFilled
         - id: ClothingOuterHardsuitDeathsquad
+        - id: ClothingEyesNightVisionSecurity
 
 - type: entity
   id: LockerDeathsquadCommanderFilled
@@ -39,6 +40,7 @@
         - id: MagazineMagnumSubMachineGunSP-91-RC
           amount: 2
         - id: EpsilonTerminatorDirectivesCircuitBoard
+        - id: ClothingEyesNightVisionSecurity
 
 - type: entity
   id: LockerDeathsquadSpecialistFilled
@@ -58,6 +60,7 @@
         - id: WeaponPulseShotgun
         - id: ClothingOuterHardsuitDeathsquadAlpha
         - id: ClothingBackpackDeathSquadSpecialistFilled
+        - id: ClothingEyesNightVisionSecurity
 
 #ERT
 - type: entity
@@ -83,6 +86,7 @@
         - id: FlashlightSeclite
         - id: ErtDirectivesCircuitBoard
         - id: ClothingShoesBootsMagERT
+        - id: ClothingEyesNightVisionSecurity
 
 - type: entity
   id: LockerErtSecurityFilled
@@ -107,6 +111,7 @@
         - id: FlashlightSeclite
         - id: ClothingShoesBootsMagERT
         - id: WeaponRifleLecterXL8
+        - id: ClothingEyesNightVisionSecurity
 
 - type: entity
   id: LockerErtMedicFilled
@@ -134,6 +139,7 @@
         - id: LauncherSyringe
         - id: AdvancedMiniSyringe
           amount: 10
+        - id: ClothingEyesNightVisionMedical
 
 - type: entity
   id: LockerErtEngineerFilled
@@ -156,6 +162,7 @@
         - id: MedkitAdvancedFilled
         - id: FlashlightSeclite
         - id: ClothingShoesBootsMagERT
+        - id: ClothingEyesNightVision
 
 - type: entity
   id: LockerErtJanitorFilled
@@ -180,6 +187,7 @@
         - id: ClothingBackpackERTJanitorFilledGrenadeCleanade
         - id: FlashlightSeclite
         - id: ClothingShoesBootsMagERT
+        - id: ClothingEyesNightVision
 
 - type: entity
   id: LockerErtChaplainFilled
@@ -206,6 +214,7 @@
         - id: Claymore
         - id: FlashlightSeclite
         - id: ClothingShoesBootsMagERT
+        - id: ClothingEyesNightVision
 
 #Pilots
 - type: entity
@@ -235,6 +244,7 @@
         - id: MagazinePistol
         - id: FlashlightSeclite
         - id: ClothingShoesBootsMagERT
+        - id: ClothingEyesNightVisionSecurity
 
 #CBURN
 - type: entity
@@ -262,6 +272,10 @@
           amount: 9
         - id: ChemistryBottleAmbuzolPlus
           amount: 3
+        - id: ClothingEyesNightVision
+        - id: WeaponLaserSMG
+        - id: LaserSMGPowerCell
+          amount: 3
 
 - type: entity
   id: LockerCburnCommanderFilled
@@ -287,6 +301,10 @@
         - id: ChemistryBottleAmbuzolPlus
         - id: FlashlightSeclite
         - id: QuarantineDirectivesCircuitBoard
+        - id: ClothingEyesNightVisionSecurity
+        - id: WeaponLaserSMG
+        - id: LaserSMGPowerCell
+          amount: 3
 
 # SRT Operative
 - type: entity
@@ -312,6 +330,7 @@
         - id: BoxHandcuff
         - id: EmergencyRollerBedSpawnFolded
         - id: ClothingNeckCloakCapeBlue
+        - id: ClothingEyesNightVisionSecurity
 
 #CI
 - type: entity
