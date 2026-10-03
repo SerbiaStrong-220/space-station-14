@@ -1,0 +1,23 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  abstract: true
+  parent: BaseObjective
+  id: BaseMalfAiObjective
+  components:
+  - type: Objective
+    issuer: objective-issuer-malfai
+  - type: RoleRequirement
+    roles:
+    - MalfAiRole
+
+- type: entity
+  parent: [BaseMalfAiObjective, BaseLivingObjective]
+  id: MalfAiHijackShuttleObjective
+  components:
+  - type: Objective
+    difficulty: 5
+    icon:
+      sprite: Objects/Tools/emag.rsi
+      state: icon
+  - type: HijackShuttleCondition
+    requireOwnerOnShuttle: false

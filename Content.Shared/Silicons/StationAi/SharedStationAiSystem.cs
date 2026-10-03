@@ -194,7 +194,7 @@ public abstract partial class SharedStationAiSystem : EntitySystem
 
         lock (_vision)
         {
-            if (_vision.IsAccessible((targetXform.GridUid.Value, broadphase, grid), targetTile, fastPath: true))
+            if (_vision.IsAccessible((targetXform.GridUid.Value, broadphase, grid), targetTile, expansionSize: _vision.GetExpansionSize(targetXform.GridUid.Value), fastPath: true))
             {
                 args.Result = BoundUserInterfaceRangeResult.Pass;
             }
@@ -221,7 +221,10 @@ public abstract partial class SharedStationAiSystem : EntitySystem
 
         var targetTile = Maps.LocalToTile(targetXform.GridUid.Value, grid, targetXform.Coordinates);
 
-        args.InRange = _vision.IsAccessible((targetXform.GridUid.Value, broadphase, grid), targetTile);
+        lock (_vision)
+        {
+            args.InRange = _vision.IsAccessible((targetXform.GridUid.Value, broadphase, grid), targetTile, expansionSize: _vision.GetExpansionSize(targetXform.GridUid.Value));
+        }
     }
 
 
@@ -659,6 +662,20 @@ public abstract partial class SharedStationAiSystem : EntitySystem
             aliveAis.Add((mind, mindComp));
         }
     }
+
+    // SS220 MalfAI begin
+    public void SetVisionOverclock(EntityUid uid, StationAiVisionComponent comp, float range)
+    {
+        if (!comp.NeedsPower && !comp.Occluded && range <= comp.Range)
+            return;
+
+        comp.NeedsPower = false;
+        comp.Occluded = false;
+        if (range > comp.Range)
+            comp.Range = range;
+        Dirty(uid, comp);
+    }
+    // SS220 MalfAI end
 }
 
 public sealed partial class JumpToCoreEvent : InstantActionEvent

@@ -94,6 +94,16 @@
   - SpiderQueen
   - AllHostile
 
+# SS220 MalfAI: faction for deployable turrets and converted borgs.
+- type: npcFaction
+  id: MalfAi
+  hostile:
+  - NanoTrasen
+  - DeathSquad
+  - Syndicate
+  - Revolutionary
+  - Zombie
+
 - type: npcFaction
   id: PlantsFract
   hostile:

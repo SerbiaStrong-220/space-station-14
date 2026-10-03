@@ -1,0 +1,326 @@
+﻿# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  parent: BaseAction
+  id: ActionMalfAiHackApc
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/actions_malfai.rsi
+      state: hack_apc
+    useDelay: 5
+    checkCanInteract: false
+  - type: TargetAction
+    checkCanAccess: false
+    range: 0
+  - type: EntityTargetAction
+    whitelist:
+      components:
+      - MalfAiHackable
+    event: !type:MalfAiHackApcEvent
+
+- type: entity
+  parent: BaseAction
+  id: ActionMalfAiOpenStore
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/actions_malfai.rsi
+      state: open_store
+    checkCanInteract: false
+  - type: InstantAction
+    event: !type:MalfAiOpenStoreEvent
+
+- type: entity
+  parent: BaseAction
+  id: ActionMalfAiDeployTurret
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/actions_malfai.rsi
+      state: deploy_turret
+    useDelay: 5
+    checkCanInteract: false
+  - type: TargetAction
+    checkCanAccess: false
+    range: 0
+  - type: WorldTargetAction
+    event: !type:MalfAiDeployTurretEvent
+
+- type: entity
+  parent: BaseAction
+  id: ActionMalfAiBlackout
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/actions_malfai.rsi
+      state: blackout
+    useDelay: 40
+    checkCanInteract: false
+  - type: TargetAction
+    checkCanAccess: false
+    range: 0
+  - type: EntityTargetAction
+    whitelist:
+      components:
+      - MalfAiHackable
+    event: !type:MalfAiBlackoutEvent
+  - type: MalfAiBlackoutTuning
+    igniteTemp: 700
+    igniteVolume: 50
+    empRange: 6
+    empEnergy: 25000
+    empDuration: 15
+
+- type: entity
+  parent: BaseAction
+  id: ActionMalfAiAirFlood
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/actions_malfai.rsi
+      state: air_flood
+    useDelay: 600
+    checkCanInteract: false
+  - type: InstantAction
+    event: !type:MalfAiAirFloodEvent
+
+- type: entity
+  parent: BaseAction
+  id: ActionMalfAiMachineOverride
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/actions_malfai.rsi
+      state: machine_override
+    useDelay: 60
+    checkCanInteract: false
+  - type: TargetAction
+    checkCanAccess: false
+    range: 0
+  - type: EntityTargetAction
+    whitelist:
+      components:
+      - MalfAiTargetable
+    blacklist:
+      components:
+      - Item
+      - MindContainer
+      - NukeDisk
+      - GravityGenerator
+      - AnomalyGenerator
+      - TegGenerator
+      - TegCirculator
+      - XenoArtifact
+      - ActiveTimerTrigger
+      - Explosive
+      - NpcFactionMember
+    event: !type:MalfAiMachineOverrideEvent
+  - type: MalfAiMachineOverrideTuning
+    damageType: Blunt
+    damage: 10
+    range: 1.2
+
+- type: entity
+  parent: BaseAction
+  id: ActionMalfAiMachineOverload
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/actions_malfai.rsi
+      state: machine_overload
+    useDelay: 60
+    checkCanInteract: false
+  - type: TargetAction
+    checkCanAccess: false
+    range: 0
+  - type: EntityTargetAction
+    whitelist:
+      components:
+      - MalfAiTargetable
+    blacklist:
+      components:
+      - Item
+      - MindContainer
+      - NukeDisk
+      - GravityGenerator
+      - AnomalyGenerator
+      - TegGenerator
+      - TegCirculator
+      - XenoArtifact
+      - ActiveTimerTrigger
+      - Explosive
+      - NpcFactionMember
+    event: !type:MalfAiMachineOverloadEvent
+  - type: MalfAiMachineOverloadTuning
+    explosionType: Minibomb
+    totalIntensity: 30
+    intensitySlope: 20
+    maxIntensity: 20
+    delaySeconds: 3
+    beepIntervalSeconds: 1
+    beepSound: /Audio/Effects/Cargo/buzz_two.ogg
+
+- type: entity
+  parent: BaseAction
+  id: ActionMalfAiPowerSiphon
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/actions_malfai.rsi
+      state: power_siphon
+    useDelay: 300
+    checkCanInteract: false
+  - type: TargetAction
+    checkCanAccess: false
+    range: 0
+  - type: EntityTargetAction
+    whitelist:
+      components:
+      - MalfAiTargetable
+    blacklist:
+      components:
+      - Item
+      - MindContainer
+      - NukeDisk
+      - GravityGenerator
+      - AnomalyGenerator
+      - TegGenerator
+      - TegCirculator
+      - XenoArtifact
+      - ActiveTimerTrigger
+      - Explosive
+      - NpcFactionMember
+    event: !type:MalfAiPowerSiphonEvent
+  - type: MalfAiPowerSiphonTuning
+    initialDraw: 50000
+    rampPerSecond: 25000
+    maxDraw: 10000000
+    stallMinDraw: 200000
+    stallRatio: 0.25
+    stallTimeoutSeconds: 10
+
+- type: entity
+  parent: BaseAction
+  id: ActionMalfAiEmag
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    icon:
+      sprite: Objects/Tools/emag.rsi
+      state: icon
+    useDelay: 60
+    checkCanInteract: false
+  - type: TargetAction
+    checkCanAccess: false
+    range: 0
+  - type: EntityTargetAction
+    event: !type:MalfAiEmagEvent
+
+- type: entity
+  parent: BaseAction
+  id: ActionMalfAiRobotFactory
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/actions_malfai.rsi
+      state: robot_factory
+    useDelay: 5
+    checkCanInteract: false
+  - type: TargetAction
+    checkCanAccess: false
+    range: 0
+  - type: WorldTargetAction
+    event: !type:MalfAiRobotFactoryEvent
+
+- type: entity
+  parent: BaseAction
+  id: ActionMalfAiChaosPulse
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/actions_malfai.rsi
+      state: chaos_pulse
+    useDelay: 180
+    checkCanInteract: false
+  - type: InstantAction
+    event: !type:MalfAiChaosPulseEvent
+  - type: MalfAiChaosPulse
+    events:
+    - event: BreakerFlip
+      weight: 2
+    - event: PowerGridCheck
+      weight: 1
+    - event: SolarFlare
+      weight: 1
+    - event: IonStorm
+      weight: 1
+    - event: GasLeak
+      weight: 1
+    - event: VentClog
+      weight: 1
+    - event: KudzuGrowth
+      weight: 0.5
+    - event: GreytideVirus
+      weight: 1
+    - event: MassHallucinations
+      weight: 2
+    - event: MimicVendorRule
+      weight: 1
+    - event: BureaucraticError
+      weight: 2
+    - event: ClericalError
+      weight: 2
+    - event: RandomSentience
+      weight: 1
+    - event: GravityGeneratorAnomaly
+      weight: 0.5
+    - event: BananaRain
+      weight: 2
+    - event: MouseMigration
+      weight: 2
+    - event: CockroachMigration
+      weight: 2
+    - event: SnailMigrationLowPop
+      weight: 2
+    - event: SnailMigration
+      weight: 2
+    - event: RandomCritterHorde
+      weight: 0.5
+    - event: SlimesSpawnHorde
+      weight: 0.5
+    - event: SnakeSpawnHorde
+      weight: 0.5
+    - event: SpiderSpawnHorde
+      weight: 0.5
+    - event: SpiderClownSpawnHorde
+      weight: 0.5
+    - event: SpaceDustMinor
+      weight: 1
+    - event: SpaceDustMajor
+      weight: 0.5
+    - event: AnomalySpawn
+      weight: 0.5
+    - event: BluespaceArtifact
+      weight: 0.5
+    - event: BluespaceLocker
+      weight: 1
+    - event: UristSwarm
+      weight: 1
+    - event: CowSwarm
+      weight: 2
+    - event: ClownSwarm
+      weight: 1
+    - event: PotatoSwarm
+      weight: 2
+    - event: FunSwarm
+      weight: 2
