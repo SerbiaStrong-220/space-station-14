@@ -1,51 +1,19 @@
 {
   "version": 1,
-  "license": "CC-BY-SA-3.0",
-  "copyright": "by spo9k\u0026lina",
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Sprited by matriotic (Discord) for SS220",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
-    {
-      "name": "ears_food_inner",
-      "directions": 4
-    },
-    {
-      "name": "ears_food_outer",
-      "directions": 4
-    },
-    {
-      "name": "ears_nyshka_inner",
-      "directions": 4
-    },
-    {
-      "name": "ears_nyshka_outer",
-      "directions": 4
-    },
-    {
-      "name": "ears_pirsing_inner",
-      "directions": 4
-    },
-    {
-      "name": "ears_pirsing_outer",
-      "directions": 4
-    },
-    {
-      "name": "ears_vini_inner",
-      "directions": 4
-    },
-    {
-      "name": "ears_vini_outer",
-      "directions": 4
-    },
-    {
-      "name": "ears_big_inner",
-      "directions": 4
-    },
-    {
-      "name": "ears_big_outer",
-      "directions": 4
-    }
+    { "name": "ears_1", "directions": 4 },
+    { "name": "ears_2", "directions": 4 },
+    { "name": "ears_3_inner", "directions": 4 },
+    { "name": "ears_3_outer", "directions": 4 },
+    { "name": "ears_4_inner", "directions": 4 },
+    { "name": "ears_4_outer", "directions": 4 },
+    { "name": "ears_5", "directions": 4 },
+    { "name": "ears_6", "directions": 4 }
   ]
 }
