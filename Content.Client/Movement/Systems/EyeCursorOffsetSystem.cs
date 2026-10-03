@@ -73,8 +73,6 @@ public sealed partial class EyeCursorOffsetSystem : EntitySystem
         if (component == null)
             component = EnsureComp<EyeCursorOffsetComponent>(uid);
 
-        var maxOffset = component.MaxOffset;//SS220 weapon overhaul
-
         // Doesn't move the offset if the mouse has left the game window!
         if (_inputManager.MouseScreenPosition.Window != WindowId.Invalid)
         {
@@ -83,10 +81,10 @@ public sealed partial class EyeCursorOffsetSystem : EntitySystem
             var mouseActualRelativePos = Vector2.Transform(mouseNormalizedPos, System.Numerics.Quaternion.CreateFromAxisAngle(-System.Numerics.Vector3.UnitZ, (float)(eyeRotation.Opposite().Theta))); // I don't know, it just works.
 
             // Caps the offset into a circle around the player.
-            mouseActualRelativePos *= maxOffset;//SS220 weapon overhaul
-            if (mouseActualRelativePos.Length() > maxOffset)//SS220 weapon overhaul
+            mouseActualRelativePos *= component.MaxOffset;
+            if (mouseActualRelativePos.Length() > component.MaxOffset)
             {
-                mouseActualRelativePos = mouseActualRelativePos.Normalized() * maxOffset; //SS220 weapon overhaul
+                mouseActualRelativePos = mouseActualRelativePos.Normalized() * component.MaxOffset;
             }
 
             component.TargetPosition = mouseActualRelativePos;
