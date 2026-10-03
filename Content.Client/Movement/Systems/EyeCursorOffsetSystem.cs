@@ -75,8 +75,6 @@ public sealed partial class EyeCursorOffsetSystem : EntitySystem
 
         var maxOffset = component.MaxOffset;//SS220 weapon overhaul
 
-        var pvsIncrease = component.PvsIncrease;//SS220 weapon overhaul
-
         // Doesn't move the offset if the mouse has left the game window!
         if (_inputManager.MouseScreenPosition.Window != WindowId.Invalid)
         {
