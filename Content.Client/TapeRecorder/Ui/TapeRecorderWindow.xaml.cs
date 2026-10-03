@@ -96,8 +96,8 @@ public sealed partial class TapeRecorderWindow : FancyWindow
         // Server will change to paused once a tape is inactive
         var tapeLeft = state.CurrentTime < state.MaxTime;
         SetEnabled(TapeRecorderMode.Recording, tapeLeft);
-        SetEnabled(TapeRecorderMode.Playing, tapeLeft);
-        SetEnabled(TapeRecorderMode.Rewinding, state.CurrentTime > float.Epsilon);
+        SetEnabled(TapeRecorderMode.Playing, !comp.RecordingOnly && tapeLeft); // SS220 TapeRecorder & Bodycam update
+        SetEnabled(TapeRecorderMode.Rewinding, !comp.RecordingOnly && state.CurrentTime > float.Epsilon); // SS220 TapeRecorder & Bodycam update
 
         if (state.HasCasette)
             SetSlider(state.MaxTime, state.CurrentTime);

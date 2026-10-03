@@ -3,6 +3,7 @@
 using Content.Server.Popups;
 using Content.Server.SurveillanceCamera;
 using Content.Shared.Interaction.Events;
+using Content.Shared.PowerCell;
 using Content.Shared.SurveillanceCamera.Components;
 using Robust.Shared.Audio.Systems;
 
@@ -20,6 +21,17 @@ public sealed partial class DetectiveCameraSystem : EntitySystem
 
         SubscribeLocalEvent<DetectiveCameraComponent, ComponentStartup>(OnComponentStartup);
         SubscribeLocalEvent<DetectiveCameraComponent, UseInHandEvent>(OnUseInHand);
+        SubscribeLocalEvent<DetectiveCameraComponent, PowerCellChangedEvent>(OnPowerCellChanged);
+    }
+
+    private void OnPowerCellChanged(Entity<DetectiveCameraComponent> ent, ref PowerCellChangedEvent args)
+    {
+        if (!args.Ejected || !ent.Comp.Enabled)
+            return;
+
+        ent.Comp.Enabled = false;
+        _camera.SetActive(ent, false);
+        RaiseLocalEvent(ent.Owner, new DetectiveCameraToggledEvent(false));
     }
 
     private void OnComponentStartup(Entity<DetectiveCameraComponent> ent, ref ComponentStartup args)

@@ -33,7 +33,6 @@
         - id: ClothingBeltSecurityFilled
         - id: Flash
         - id: ClothingEyesGlassesSecurity
-        - id: BodySecurityCamera
         - id: ClothingShoesBootsJack
         - id: ClothingEyesHudSecurity
         - id: ClothingOuterHardsuitSecurityPilot

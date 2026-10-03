@@ -161,6 +161,18 @@ public sealed class StationAiVisionSystem : EntitySystem
         var enlargedLocalAabb = invMatrix.TransformBox(worldBounds.Enlarged(expansionSize));
         _seedJob.ExpandedBounds = enlargedLocalAabb;
         _parallel.ProcessNow(_seedJob);
+
+        // SS220 TapeRecorder & BodycamUpdate BGN
+        var gridMap = Transform(grid.Owner).MapID;
+        var expandedWorldBounds = worldBounds.Enlarged(expansionSize);
+        var visionQuery = AllEntityQuery<StationAiVisionComponent, TransformComponent>();
+        while (visionQuery.MoveNext(out var uid, out var vision, out var transform))
+        {
+            if (transform.MapID == gridMap && expandedWorldBounds.Contains(_xforms.GetWorldPosition(transform)))
+                _seeds.Add((uid, vision));
+        }
+        // SS220 TapeRecorder & BodycamUpdate END
+
         _job.Data.Clear();
         FastPath = false;
 

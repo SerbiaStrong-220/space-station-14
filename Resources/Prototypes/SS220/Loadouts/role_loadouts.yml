@@ -101,6 +101,7 @@
   - SecurityInnerEncryptionKeys #SS220-ipc-builtin-radio
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
+  - SecurityBadge #SS220 TapeRecorder & BodyCamera update
 
   # Пилот
 - type: roleLoadout
@@ -121,6 +122,7 @@
   - Trinkets
   - SecurityInnerEncryptionKeys #SS220-ipc-builtin-radio
   - WorkerCash #SS220-Cash-personal
+  - SecurityBadge #SS220 TapeRecorder & BodyCamera update
 
 #! Служба безопасности (Конец)
 

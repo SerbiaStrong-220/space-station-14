@@ -31,7 +31,6 @@
     # - id: WeaponTase #SS220 No tasers
     - id: ClothingBeltSecurityFilled
     - id: Flash
-    - id: BodySecurityCamera #SS220-Bodycam
     - id: ClothingEyesGlassesSecurity
     - id: ClothingHandsGlovesCombat
     - id: ClothingShoesBootsJack
@@ -52,6 +51,11 @@
     - id: WeaponEnergyShotgun #SS220-fix
     - id: PlushieLizardJobWarden
       prob: 0.02
+    # SS220 TapeRecorder & BodyCam update BGN
+    - id: TapeRecorderStationary
+    - id: CassetteTapeLargeCapacity
+      amount: 3
+    # SS220 TapeRecorder & BodyCam update END
 
 - type: entityTable
   id: FillLockerWardenHarduit
@@ -77,7 +81,6 @@
     children:
     - id: FlashlightSeclite
       # prob: 0.8 #SS220-old-bug-save
-    - id: BodySecurityCamera #SS220-Bodycam
     - id: WeaponDisabler
     # - id: WeaponTase #SS220 No tasers
     - id: ClothingUniformJumpsuitSecGrey
@@ -182,7 +185,6 @@
     - id: BoxTapeRecorder # SS220 Tape Recorder #32234 early merge
     - id: Telescopichka # SS220 Ya-lybly-translit
     - id: ClothingEyesHudSecurity # Dec is sec
-    - id: BodySecurityCamera #SS220-Bodycam
     - id: HandHeldImplantMedicalScanner # SS220-surgery-scanner
     # SS220-our-stuff-end
     - id: ClothingEyesGlassesNoir
@@ -203,6 +205,11 @@
     - id: HandLabeler
     - id: PlushieLizardJobDetective
       prob: 0.02
+    # SS220 TapeRecorder & BodyCam update BGN
+    - id: TapeRecorderStationary
+    - id: CassetteTapeLargeCapacity
+      amount: 3
+    # SS220 TapeRecorder & BodyCam update END
 
 - type: entity
   id: ClosetBombFilled
