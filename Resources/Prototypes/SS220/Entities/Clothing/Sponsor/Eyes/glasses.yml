@@ -2,7 +2,7 @@
 
 # Биполярочка
 - type: entity
-  parent: ClothingSponsorEyesBase
+  parent: [ClothingSponsorEyesBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingSponsorTylerRedGlasses
   name: Tyler.Co glasses
   description: Silver aviator glasses with a built-in light filter.
@@ -10,11 +10,12 @@
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Eyes/Glasses/redglasses.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: SS220/Clothing/Sponsor/Eyes/Glasses/redglasses.rsi
 
 # На 96% прозрачные линзы
 - type: entity
-  parent: ClothingSponsorEyesBase
+  parent: [ClothingSponsorEyesBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingSponsorWaltuhGlasses
   name: transparent aviators
   description: Simple, cheap glasses with corrective lenses.
@@ -22,12 +23,13 @@
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Eyes/Glasses/waltuh.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: SS220/Clothing/Sponsor/Eyes/Glasses/waltuh.rsi
   - type: VisionCorrection
 
 # Джужутсу
 - type: entity
-  parent: ClothingSponsorEyesBase
+  parent: [ClothingSponsorEyesBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingSponsorGlassesJujutsuShlepa
   name: office worker glasses
   description: Seven-to-three — the perfect ratio.
@@ -35,9 +37,14 @@
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Eyes/Glasses/nanamigoggles.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: SS220/Clothing/Sponsor/Eyes/Glasses/nanamigoggles.rsi
+    clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Sponsor/Eyes/Glasses/nanamigoggles.rsi
+        state: equipped-HELMET
 
 - type: entity
-  parent: [ ClothingSponsorGlassesJujutsuShlepa, ClothingEyesGlassesSunglasses ]
+  parent: [ ClothingSponsorGlassesJujutsuShlepa, SS220ClothingEyesGlassesSunglassesBase ]
   id: ClothingSponsorGlassesJujutsuShlepaSunglasses
   suffix: Floppa, Sunglasses

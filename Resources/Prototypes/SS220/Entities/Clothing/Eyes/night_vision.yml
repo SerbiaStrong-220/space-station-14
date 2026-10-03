@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingEyesBase
+  parent: [ClothingEyesBase, SS220GlassesOnForeheadBase]
   id: ClothingEyesNightVision
   name: night vision goggles
   description: Helps you see in the dark. Switch it off in brightly lit areas to avoid overexposure.
@@ -8,7 +8,11 @@
     sprite: SS220/Clothing/Eyes/Glasses/nightvision.rsi
     state: night
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Eyes/Glasses/nightvision_equipped.rsi
+        state: night_off-HELMET
       eyes:
       - sprite: SS220/Clothing/Eyes/Glasses/nightvision_equipped.rsi
         state: night_eyes
@@ -25,6 +29,9 @@
     state: healthhudnight
   - type: Clothing
     clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Eyes/Glasses/nightvision_equipped.rsi
+        state: night_off-HELMET
       eyes:
       - sprite: SS220/Clothing/Eyes/Glasses/nightvision_equipped.rsi
         state: healthhudnight_eyes
@@ -38,6 +45,9 @@
     state: securityhudnight
   - type: Clothing
     clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Eyes/Glasses/nightvision_equipped.rsi
+        state: night_off-HELMET
       eyes:
       - sprite: SS220/Clothing/Eyes/Glasses/nightvision_equipped.rsi
         state: sechudnight_eyes

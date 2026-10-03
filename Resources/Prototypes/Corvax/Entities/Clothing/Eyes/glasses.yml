@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: ClothingEyesBase
+  parent: [ClothingEyesBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingEyesSalesman
   name: colored glasses
   description: A pair of glasses with uniquely colored lenses. The frame is inscribed with 'Best Salesman 1997'.
@@ -7,10 +7,17 @@
     - type: Sprite
       sprite: Corvax/Clothing/Eyes/Glasses/salesman.rsi
     - type: Clothing
+      slots: [EYES, HEAD] # SS220-glasses-on-forehead
       sprite: Corvax/Clothing/Eyes/Glasses/salesman.rsi
+      # SS220-glasses-on-forehead-begin
+      clothingVisuals:
+        head:
+        - sprite: SS220/Clothing/Eyes/Forehead/Corvax/Glasses/salesman.rsi
+          state: equipped-HELMET
+      # SS220-glasses-on-forehead-end
 
 - type: entity
-  parent: ClothingEyesBase
+  parent: [ClothingEyesBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingEyesBinoclardLenses
   name: binoclard lenses
   description: Shows you know how to sew a lapel and center a back vent.
@@ -18,4 +25,11 @@
     - type: Sprite
       sprite: Corvax/Clothing/Eyes/Glasses/kim.rsi
     - type: Clothing
+      slots: [EYES, HEAD] # SS220-glasses-on-forehead
       sprite: Corvax/Clothing/Eyes/Glasses/kim.rsi
+      # SS220-glasses-on-forehead-begin
+      clothingVisuals:
+        head:
+        - sprite: SS220/Clothing/Eyes/Forehead/Corvax/Glasses/kim.rsi
+          state: equipped-HELMET
+      # SS220-glasses-on-forehead-end

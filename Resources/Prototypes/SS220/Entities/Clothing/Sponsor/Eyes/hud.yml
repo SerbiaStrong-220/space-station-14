@@ -2,7 +2,7 @@
 
 # CyberPunk
 - type: entity
-  parent: [ ClothingSponsorEyesBaseUnshaded, ClothingEyesGlassesSecurity ]
+  parent: [ClothingSponsorEyesBaseUnshaded, SS220ClothingEyesGlassesSecurityBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingSponsorCyberSecVisor
   name: security cybervisor
   description: Despite its menacing appearance, it provides no protection against flashes or paparazzi.
@@ -10,10 +10,20 @@
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/secvisor.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/secvisor.rsi
+    clothingVisuals:
+      eyes:
+      - state: equipped-EYES
+      - state: equipped-EYES-unshaded
+        shader: unshaded
+      head:
+      - state: equipped-HELMET
+      - state: equipped-HELMET-unshaded
+        shader: unshaded
 
 - type: entity
-  parent: [ ClothingSponsorEyesBaseUnshaded, ClothingEyesGlassesMeson ]
+  parent: [ClothingSponsorEyesBaseUnshaded, SS220ClothingEyesGlassesMesonBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingSponsorCyberEngVisor
   name: cyber-welding goggles
   description: Their comically large size has somehow managed to increase efficiency by a whopping 0.42%!
@@ -21,10 +31,20 @@
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/engivisor.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/engivisor.rsi
+    clothingVisuals:
+      eyes:
+      - state: equipped-EYES
+      - state: equipped-EYES-unshaded
+        shader: unshaded
+      head:
+      - state: equipped-HELMET
+      - state: equipped-HELMET-unshaded
+        shader: unshaded
 
 - type: entity
-  parent: [ ClothingSponsorEyesBaseUnshaded, ClothingEyesHudMedical ]
+  parent: [ClothingSponsorEyesBaseUnshaded, ClothingEyesHudMedical, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingSponsorCyberMedVisor
   name: medical cybervisor
   description: For this price, it should show way more than just the patient's condition, but that's just a dream...
@@ -32,10 +52,20 @@
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/medvisor.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/medvisor.rsi
+    clothingVisuals:
+      eyes:
+      - state: equipped-EYES
+      - state: equipped-EYES-unshaded
+        shader: unshaded
+      head:
+      - state: equipped-HELMET
+      - state: equipped-HELMET-unshaded
+        shader: unshaded
 
 - type: entity
-  parent: [ ClothingSponsorEyesBaseUnshaded, ClothingEyesGlassesChemical ]
+  parent: [ClothingSponsorEyesBaseUnshaded, SS220ClothingEyesGlassesChemicalBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingSponsorCyberChemVisor
   name: chemical analysis cybervisor
   description: To guarantee analytical precision, additional sensors were installed, increasing its overall size. Now, no one can tell by your eyes whether you're awake or asleep.
@@ -43,10 +73,20 @@
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/chemvisor.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/chemvisor.rsi
+    clothingVisuals:
+      eyes:
+      - state: equipped-EYES
+      - state: equipped-EYES-unshaded
+        shader: unshaded
+      head:
+      - state: equipped-HELMET
+      - state: equipped-HELMET-unshaded
+        shader: unshaded
 
 - type: entity
-  parent: ClothingSponsorEyesBaseUnshaded
+  parent: [ClothingSponsorEyesBaseUnshaded, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingSponsorCyberCevVisor
   name: white visor
   description: A civilian-grade visor. By using advanced materials, it manages to glow in the dark without the need for electricity.
@@ -54,4 +94,14 @@
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/civvisor.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/civvisor.rsi
+    clothingVisuals:
+      eyes:
+      - state: equipped-EYES
+      - state: equipped-EYES-unshaded
+        shader: unshaded
+      head:
+      - state: equipped-HELMET
+      - state: equipped-HELMET-unshaded
+        shader: unshaded

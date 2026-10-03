@@ -1,3 +1,6 @@
+// SS220-glasses-on-forehead-begin
+using Content.Shared.SS220.Clothing.Components;
+// SS220-glasses-on-forehead-end
 using Content.Shared.Access.Systems;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Clothing;
@@ -22,6 +25,8 @@ namespace Content.Shared.IdentityManagement;
 /// </summary>
 public sealed class IdentitySystem : EntitySystem
 {
+    [Dependency] private readonly InventorySystem _foreheadInventory = default!; // SS220-glasses-on-forehead
+
     [Dependency] private readonly GrammarSystem _grammarSystem = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
@@ -102,6 +107,12 @@ public sealed class IdentitySystem : EntitySystem
     // Adds an identity blocker's coverage, and cancels the event if coverage is complete.
     private void OnSeeIdentity(Entity<IdentityBlockerComponent> ent, ref SeeIdentityAttemptEvent args)
     {
+        // SS220-glasses-on-forehead-begin
+        if (HasComp<GlassesOnForeheadComponent>(ent) &&
+            _foreheadInventory.InSlotWithFlags(ent.Owner, SlotFlags.HEAD))
+            return;
+        // SS220-glasses-on-forehead-end
+
         if (ent.Comp.Enabled)
         {
             args.TotalCoverage |= ent.Comp.Coverage;

@@ -30,6 +30,9 @@ public sealed class ThermalVisionClothingSystem : EntitySystem
 
     private void OnCompUnequip(Entity<ThermalVisionClothingComponent> ent, ref GotUnequippedEvent args)
     {
+        if (args.Slot != "eyes")
+            return;
+
         if (HasComp<ThermalVisionComponent>(args.EquipTarget))
             RemComp<ThermalVisionComponent>(args.EquipTarget);
     }
