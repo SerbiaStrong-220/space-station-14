@@ -8,6 +8,7 @@ using Content.Shared.Input;
 using Content.Shared.Roles;
 using Content.Shared.SS220.CCVars;
 using Content.Shared.SS220.Discord;
+using Content.Shared.SS220.RoundEndInfo;
 using Content.Shared.SS220.Utility;
 using JetBrains.Annotations;
 using Robust.Client.Input;
@@ -57,6 +58,21 @@ public sealed partial class RoundEndSummaryUIController : UIController,
             OpenTitlesWindow();
         }
     }
+
+    //ss220 add additional info for round start
+    public void PopulateAdditionalInfo(IRoundEndInfoData message)
+    {
+        switch (message)
+        {
+            case RoundEndInfoDisplayBlock block:
+                _window?.PopulateAdditionalInfo(block);
+                break;
+            case RoundEndAntagPurchaseData antagBlock:
+                _window?.PopulateAntagInfo(antagBlock);
+                break;
+        }
+    }
+    //ss220 add additional info for round end
 
     private void ToggleScoreboardWindow(ICommonSession? session = null)
     {
