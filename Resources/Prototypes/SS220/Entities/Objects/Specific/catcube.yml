@@ -1,0 +1,15 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: RehydratableAnimalCube
+  id: CatCube
+  name: cat cube
+  description: Just add water!
+  components:
+  - type: Rehydratable
+    possibleSpawns:
+    - MobCatKitten
+  - type: Tag
+    tags:
+    - Meat
+

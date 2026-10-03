@@ -19,4 +19,39 @@
 - [color=#ff0000]\[color=#ff0000\]\[\/color\][/color]
 - [color=red]\[color=red\]\[\/color\][/color]
 
+## Использование языков в письме
+
+Вы можете использовать различные языки во время написания сообщения на бумаге.
+- [color=tan]\[language=%ключ\]Сообщение\[\/language\][/color] — формула для того чтобы написать сообщение на каком-либо языке.
+
+Ваш персонаж должен знать язык на котором вы собираетесь писать сообщение.
+
+## Общие языки
+
+- Общегалактический — [color=tan]%gl[/color]
+- Общесолнечный — [color=tan]%sl[/color]
+- Торговый — [color=tan]%trd[/color]
+- Гаттер — [color=tan]%gt[/color]
+- Клоунский — [color=tan]%clw[/color]
+- Нео-Русский — [color=tan]%ru[/color]
+
+## Расовые языки
+
+- Синта'Унати — [color=tan]%sin[/color]
+- Сик'таир — [color=tan]%sii[/color]
+- ВоксПиджин — [color=tan]%vox[/color]
+- Песнь корней — [color=tan]%rt[/color]
+- Пузырчатый — [color=tan]%bbl[/color]
+- Ткачий — [color=tan]%tch[/color]
+- Язык дворфов — [color=tan]%el[/color]
+- Язык арати — [color=tan]%ara[/color]
+- Канилунцт — [color=tan]%cani[/color]
+- Тернарный — [color=tan]%ter[/color]
+
+## Технические и специальные языки
+
+- Бинарный - [color=tan]%bin[/color]
+- Кодспик - [color=tan]%cod[/color]
+- Канцелярит - [color=tan]%br[/color]
+
 </Document>

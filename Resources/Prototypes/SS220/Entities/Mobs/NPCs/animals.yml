@@ -461,6 +461,10 @@
   parent: [ SimpleMobBase, BaseMobRuminant ]
   description: Peep?...
   components:
+  - type: NightVision
+    profile: NightVisionGray
+    enabled: false
+    action: ActionToggleNightVisionInnate
   - type: NameIdentifier
   - type: Stripping
   - type: Strippable

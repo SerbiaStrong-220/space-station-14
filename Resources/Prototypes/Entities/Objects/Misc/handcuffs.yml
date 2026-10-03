@@ -113,6 +113,10 @@
   - type: Sprite
     sprite: Objects/Misc/zipties.rsi
     state: cuff
+# ss220 balance zipties & handcuffs start
+  - type: UseDelay
+    delay: 4
+# ss220 balance zipties & handcuffs end
   # SS220-place-and-pickup-sounds-2 begin
   - type: EmitSoundOnPickup
     sound:
