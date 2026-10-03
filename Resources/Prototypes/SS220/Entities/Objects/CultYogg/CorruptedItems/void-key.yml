@@ -6,6 +6,9 @@
   name: void key
   description: Opens portals to the VOID
   components:
+  - type: Tag
+    tags:
+    - CultYoggEquipment
   - type: Sprite
     sprite: SS220/Objects/CultYogg/CorruptedItems/voidkey.rsi
     state: icon

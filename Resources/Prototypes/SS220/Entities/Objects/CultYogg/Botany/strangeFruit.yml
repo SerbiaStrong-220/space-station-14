@@ -13,6 +13,7 @@
     seedId: StrangeFruit
   - type: Tag
     tags:
+    - CultYoggEquipment
     - CultYoggStealthProvidable
   - type: TriggerOnUse
   - type: TimerTrigger

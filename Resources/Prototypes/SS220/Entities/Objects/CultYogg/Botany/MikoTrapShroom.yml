@@ -43,6 +43,7 @@
       seedId: MikoTrapShroomSpores
     - type: Tag
       tags:
+      - CultYoggEquipment
       - Omnivorous
       - Unstackable
 

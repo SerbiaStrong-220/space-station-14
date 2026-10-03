@@ -76,7 +76,7 @@ public sealed partial class ExorcismPerformerSystem : SharedExorcismPerformerSys
         RaiseLocalEvent(ref args);
         foreach (var other in entitiesInRange)
         {
-            if (_container.TryGetOuterContainer(other, Transform(other), out var container))
+            if (_container.TryGetOuterContainer(other, Transform(other), out _))
                 continue;
 
             RaiseLocalEvent(other, ref args);
@@ -112,7 +112,7 @@ public sealed partial class ExorcismPerformerSystem : SharedExorcismPerformerSys
     private void PlayPerformanceEffects(Entity<ExorcismPerformerComponent> entity)
     {
         _appearanceSystem.SetData(entity, ExorcismPerformerVisualState.State, ExorcismPerformerVisualState.Performing);
-        _timerManager.AddTimer(new Timer((int) (entity.Comp.LightEffectDurationSeconds * 1000), false, () =>
+        _timerManager.AddTimer(new Timer((int)(entity.Comp.LightEffectDurationSeconds * 1000), false, () =>
         {
             _appearanceSystem.SetData(entity, ExorcismPerformerVisualState.State, ExorcismPerformerVisualState.None);
         }));

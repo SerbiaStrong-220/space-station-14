@@ -2,13 +2,15 @@
 
 - type: entity
   name: Claw
-  parent: [BaseItem, CultYoggRestrictedItem]
+  parent: [BaseItem, CultYoggRestrictedItem, BaseCultYoggCuttableEquipment]
   id: ClawCultYogg
   suffix: CultYogg
   description: description
   components:
-  - type: CultYoggWeapon
-    item: CocoonClaw
+  - type: ShellableItem
+  - type: ContainerContainer
+    containers:
+      item-shell: !type:ContainerSlot
   - type: Sprite
     sprite: SS220/Objects/Weapons/Melee/CultYogg/claw.rsi
     state: icon
@@ -40,11 +42,13 @@
     speedModifier: 3
     pryPowered: true
     useSound: /Audio/Items/jaws_pry.ogg # звук открытия шлюза, оставить так или заменить
+  - type: DropOnDeath
   - type: StuckOnEquip
     inHandItem: true
   - type: Insulated # заглушка на будущее, защищает только от перерезания решеток под напряжением
   - type: Tag
     tags:
+    - CultYoggEquipment
     - PlantSampleTaker
     - Wirecutter
     - CultYoggStealthProvidable

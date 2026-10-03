@@ -2,13 +2,15 @@
 
 - type: entity
   name: beach
-  parent: [BaseItem, CultYoggRestrictedItem]
+  parent: [BaseItem, CultYoggRestrictedItem, BaseCultYoggCuttableEquipment]
   id: BeachCultYogg
   suffix: CultYogg
   description: description
   components:
-  - type: CultYoggWeapon
-    item: CocoonBeach
+  - type: ShellableItem
+  - type: ContainerContainer
+    containers:
+      item-shell: !type:ContainerSlot
   - type: Sprite
     sprite: SS220/Objects/Weapons/Melee/CultYogg/beach.rsi
     state: icon
@@ -21,6 +23,7 @@
       right:
       - state: inhand-right
 #      - state: inhand-right-vox
+  - type: DropOnDeath
   - type: StuckOnEquip
     inHandItem: true
   - type: MeleeWeapon
@@ -40,5 +43,6 @@
     heavyAttackChance: 0.2
   - type: Tag
     tags:
+    - CultYoggEquipment
     - CultYoggStealthProvidable
     - CultYoggInnerHandToggleable

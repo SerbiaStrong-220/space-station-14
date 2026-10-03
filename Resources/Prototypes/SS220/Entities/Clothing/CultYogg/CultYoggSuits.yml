@@ -33,9 +33,11 @@
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitCultYogg
+  - type: DropOnDeath
   - type: StuckOnEquip
   - type: Tag
     tags:
+    - CultYoggEquipment
     - WhitelistChameleon
     - CultYoggStealthProvidable
 
