@@ -1,4 +1,5 @@
 using Content.Shared.Actions;
+using Content.Shared.Inventory;
 using Content.Shared.Mind;
 using Content.Shared.MouseRotator;
 using Content.Shared.Movement.Components;
@@ -39,7 +40,7 @@ public abstract class SharedCombatModeSystem : EntitySystem
         _mouseRotator.SetEnabled(uid, false); // SS220-Grabs
     }
 
-    private void OnActionPerform(EntityUid uid, CombatModeComponent component, ToggleCombatActionEvent args)
+    protected virtual void OnActionPerform(EntityUid uid, CombatModeComponent component, ToggleCombatActionEvent args)//SS220 weapon overhaul
     {
         if (args.Handled)
             return;
@@ -78,6 +79,19 @@ public abstract class SharedCombatModeSystem : EntitySystem
         if (component.CombatToggleActionEntity != null)
             _actionsSystem.SetToggled(component.CombatToggleActionEntity, component.IsInCombatMode);
 
+        // SS220 combat mode logic extension begin
+        if (component.IsInCombatMode)
+        {
+            var onEv = new CombatModeOnEvent();
+            RaiseLocalEvent(entity, ref onEv);
+
+            return;
+        }
+
+        var offEv = new CombatModeOffEvent();
+        RaiseLocalEvent(entity, ref offEv);
+        // SS220 combat mode logic extension end
+
         // Change mouse rotator comps if flag is set
         if (!component.ToggleMouseRotator || _npc.IsNpc(entity) && !_mind.TryGetMind(entity, out _, out _))
             return;
@@ -106,3 +120,17 @@ public sealed partial class ToggleCombatActionEvent : InstantActionEvent
 {
 
 }
+
+// SS220 combat mode logic extension begin
+[ByRefEvent]
+public record struct CombatModeOnEvent : IInventoryRelayEvent
+{
+    public SlotFlags TargetSlots { get; set; }
+}
+
+[ByRefEvent]
+public record struct CombatModeOffEvent : IInventoryRelayEvent
+{
+    public SlotFlags TargetSlots { get; set; }
+}
+// SS220 combat mode logic extension end
