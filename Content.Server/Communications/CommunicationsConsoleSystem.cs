@@ -304,6 +304,12 @@ namespace Content.Server.Communications
 
         private void OnCallShuttleMessage(EntityUid uid, CommunicationsConsoleComponent comp, CommunicationsConsoleCallEmergencyShuttleMessage message)
         {
+            if (comp.CanShuttle && comp.OnlyRecallShuttle)
+            {
+                _popupSystem.PopupEntity(Loc.GetString("comms-console-can-only-recall"), uid, message.Actor);
+                return;
+            }
+
             if (!CanCallOrRecall(comp))
                 return;
 
