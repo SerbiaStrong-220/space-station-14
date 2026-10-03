@@ -569,7 +569,7 @@
       state: cburn
     - type: RandomHumanoidSpawner
       settings: CBURNAgent
-    - type: ZombieImmune # ERTCircuitBoard
+    - type: ZombieImmune #SS220 ERTCircuitBoard
 
 - type: randomHumanoidSettings
   id: CBURNAgent
