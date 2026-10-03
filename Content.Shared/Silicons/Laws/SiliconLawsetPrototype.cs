@@ -66,6 +66,16 @@ public sealed partial class SiliconLawsetPrototype : IPrototype
     [IdDataField]
     public string ID { get; private set; } = default!;
 
+    // SS220 random lawset begin
+    /// <summary>
+    /// Relative selection weight. Null excludes this lawset from station randomization.
+    /// </summary>
+    [DataField]
+    public float? Weight { get; private set; }
+
+    public bool Randomizable => Weight is not null;
+    // SS220 random lawset end
+
     /// <summary>
     /// The locstring of the lawset for the guidebook entry, if no name is provided, defaults to the ID
     /// </summary>    
