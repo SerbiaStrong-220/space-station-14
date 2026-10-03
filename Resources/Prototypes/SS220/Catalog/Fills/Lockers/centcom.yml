@@ -86,6 +86,7 @@
         - id: FlashlightSeclite
         - id: ErtDirectivesCircuitBoard
         - id: ClothingShoesBootsMagERT
+        - id: WeaponRifleLecterXL8
         - id: ClothingEyesNightVisionSecurity
 
 - type: entity
@@ -110,7 +111,6 @@
         - id: MagazinePistol
         - id: FlashlightSeclite
         - id: ClothingShoesBootsMagERT
-        - id: WeaponRifleLecterXL8
         - id: ClothingEyesNightVisionSecurity
 
 - type: entity

@@ -32,11 +32,9 @@
         - id: WeaponShotgunSawn
         - id: BoxShotgunIncendiary
           amount: 2
-        - id: GrenadeFlashBang
-          amount: 2
         - id: PillAmbuzolPlus
-        - id: PillAmbuzol
-          amount: 4
+          amount: 3
+        - id: CrowbarRed
         - id: WeaponLaserSMG
         - id: LaserSMGPowerCell
           amount: 3
