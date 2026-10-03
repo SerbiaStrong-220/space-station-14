@@ -29,7 +29,7 @@
       storagebase: !type:AllSelector
         children:
         - id: BoxSurvivalCentcom
-        - id: WeaponShotgunDoubleBarreled
+        - id: WeaponShotgunSawn
         - id: BoxShotgunIncendiary
           amount: 2
         - id: GrenadeFlashBang
@@ -37,3 +37,6 @@
         - id: PillAmbuzolPlus
         - id: PillAmbuzol
           amount: 4
+        - id: WeaponLaserSMG
+        - id: LaserSMGPowerCell
+          amount: 3

@@ -569,6 +569,7 @@
       state: cburn
     - type: RandomHumanoidSpawner
       settings: CBURNAgent
+    - type: ZombieImmune #SS220 ERTCircuitBoard
 
 - type: randomHumanoidSettings
   id: CBURNAgent
@@ -590,6 +591,7 @@
       - NamesMilitaryFirst
       - NamesMilitaryLast
       nameFormat: name-format-ert
+    - type: ZombieImmune #SS220 ERTCircuitBoard
 
 ## Central Command
 

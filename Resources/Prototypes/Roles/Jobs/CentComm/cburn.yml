@@ -31,7 +31,7 @@
   experienceDefinition: CBURNRoleExperience # SS220-experience
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorBrown
-    back: ClothingBackpackDuffelCBURN
+    back: ClothingBackpackDuffelCBURNFilled #SS220 ERTCircuitBoard
     mask: ClothingMaskGasERT
     eyes: ClothingEyesGlassesSecurity
     ears: ClothingHeadsetAltCentCom
@@ -40,15 +40,17 @@
     shoes: ClothingShoesBootsCombatFilled
     id: CBURNPDA
     pocket1: HandheldRadio #SS220 Radio
-    pocket2: WeaponLaserGun
+    pocket2: WeaponLaserSvalinn #SS220 ERTCircuitBoard
     belt: ClothingBeltBandolier
-  storage:
-    back:
-    - WeaponShotgunDoubleBarreled
-    - BoxShotgunIncendiary
-    - GrenadeFlashBang
-    - PillAmbuzolPlus
-    - PillAmbuzol
+  # SS220-ERTCircuitBoard-begin
+#  storage:
+#    back:
+#    - WeaponShotgunDoubleBarreled
+#    - BoxShotgunIncendiary
+#    - GrenadeFlashBang
+#    - PillAmbuzolPlus
+#    - PillAmbuzol
+  # SS220-ERTCircuitBoard-end
 
 - type: chameleonOutfit
   id: CBURNChameleonOutfit

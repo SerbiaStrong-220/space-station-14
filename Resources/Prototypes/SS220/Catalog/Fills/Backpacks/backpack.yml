@@ -218,6 +218,9 @@
           amount: 2
         - id: PillAmbuzolPlus
         - id: WeaponShotgunSawn
+        - id: WeaponLaserSMG
+        - id: LaserSMGPowerCell
+          amount: 3
 
 # CounterIntelligence
 - type: entity
