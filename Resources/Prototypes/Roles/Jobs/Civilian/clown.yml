@@ -41,6 +41,7 @@
     languages:
     - Clownish
   # SS220-Add-Languages end
+  economySalaryPrototype: Worker # SS220 Economy
 
 - type: startingGear
   id: ClownGear

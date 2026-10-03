@@ -31,6 +31,7 @@
     # - id: WeaponTase #SS220 No tasers
     - id: ClothingBeltSecurityFilled
     - id: Flash
+    - id: EconomyEFTPOS # SS220 Economy
     - id: BodySecurityCamera #SS220-Bodycam
     - id: ClothingEyesGlassesSecurity
     - id: ClothingHandsGlovesCombat

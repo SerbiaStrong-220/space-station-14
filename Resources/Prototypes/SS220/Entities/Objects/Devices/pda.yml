@@ -111,6 +111,7 @@
     - NewsReaderCartridge
     - WantedListCartridge
     - MessengerCartridgeClient
+    - EconomyBankingCartridge
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -166,6 +167,7 @@
     - NewsReaderCartridge
     - WantedListCartridge
     - MessengerCartridgeClient
+    - EconomyBankingCartridge
   - type: Tag
     tags:
     - WhitelistPdaIdPainter
@@ -272,6 +274,7 @@
       - NewsReaderCartridge
       - MedTekCartridge
       - MessengerCartridgeClient # SS220 Messenger
+      - EconomyBankingCartridge
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -320,6 +323,7 @@
     - WantedListCartridge
     - AstroNavCartridge
     - MessengerCartridgeClient
+    - EconomyBankingCartridge
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -401,6 +405,7 @@
       - NewsReaderCartridge
       - MedTekCartridge
       - MessengerCartridgeClient # SS220 Messenger
+      - EconomyBankingCartridge
       - AstroNavCartridge
       - WantedListCartridge
       - LogProbeCartridge

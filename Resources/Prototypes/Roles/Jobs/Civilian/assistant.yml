@@ -9,6 +9,7 @@
   supervisors: job-supervisors-everyone
 #  access: # Corvax
 #  - Maintenance
+  economySalaryPrototype: Civilian # SS220 Economy
 
 - type: startingGear
   id: PassengerGear

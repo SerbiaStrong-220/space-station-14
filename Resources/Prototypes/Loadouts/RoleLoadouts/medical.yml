@@ -24,7 +24,7 @@
   #SS220-TwoOne-Floppa-Iteration begin
   - SponsorNeck
   #SS220-TwoOne-Floppa-Iteration end
-  - SeniorStaffCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 - type: roleLoadout
   id: JobMedicalDoctor
@@ -49,7 +49,7 @@
   #SS220-Two Floppa Iteration begin
   - SponsorNeck
   #SS220-TwoOne-Floppa-Iteration end
-  - WorkerCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 - type: roleLoadout
   id: JobMedicalIntern
@@ -66,7 +66,7 @@
   - MedicalInnerEncryptionKeys #SS220-ipc-builtin-radio
 #  - MedicalInternJobTrinkets
   - GroupSpeciesBreathToolMedical
-  - CivilianCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 - type: roleLoadout
   id: JobChemist
@@ -88,7 +88,7 @@
 #  - ChemistJobTrinkets
   - GroupSpeciesBreathToolMedical
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - WorkerCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 - type: roleLoadout
   id: JobParamedic
@@ -112,4 +112,4 @@
 #  - ParamedicJobTrinkets
   - GroupSpeciesBreathToolMedical
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - WorkerCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy

@@ -40,6 +40,7 @@
           maxBuffSkillLevel: 3
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
+  economySalaryPrototype: SeniorStaff
 
 - type: startingGear
   id: SeniorOfficerGear
