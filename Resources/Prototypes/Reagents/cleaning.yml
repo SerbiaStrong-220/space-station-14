@@ -43,6 +43,7 @@
   boilingPoint: 147.0 # Made this up, loosely based on bleach
   meltingPoint: -11.0
   tileReactions:
+    - !type:CleanSplattersTileReaction {} # SS220 paint-all-red
     - !type:CleanTileReaction {}
     - !type:CleanDecalsReaction {}
 
@@ -74,6 +75,8 @@
           reagent: SoapReagent
           min: 6
         probability: 0.20
+  tileReactions:
+  - !type:CleanSplattersTileReaction { } # SS220 paint-all-red
 
 - type: reagent
   id: SpaceLube
