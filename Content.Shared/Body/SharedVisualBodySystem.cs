@@ -171,6 +171,20 @@ public abstract partial class SharedVisualBodySystem : EntitySystem
 
         SetOrganMarkings(ent, resolved);
     }
+
+    // SS220 - father from the past - start
+    public void SetVisualSex(Entity<VisualBodyComponent?> ent, Sex sex)
+    {
+        if (!TryGatherMarkingsData(ent, null, out var profiles, out _, out _))
+            return;
+
+        var updated = profiles.ToDictionary(
+            kvp => kvp.Key,
+            kvp => kvp.Value with { Sex = sex });
+
+        ApplyProfiles(ent, updated);
+    }
+    // SS220 - father from the past - end
 }
 
 /// <summary>
