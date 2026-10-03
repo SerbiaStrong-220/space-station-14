@@ -31,7 +31,7 @@
   experienceDefinition: CBURNRoleExperience # SS220-experience
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorBrown
-    back: ClothingBackpackDuffelCBURN
+    back: ClothingBackpackDuffelCBURNFilled
     mask: ClothingMaskGasERT
     eyes: ClothingEyesGlassesSecurity
     ears: ClothingHeadsetAltCentCom
@@ -40,7 +40,7 @@
     shoes: ClothingShoesBootsCombatFilled
     id: CBURNPDA
     pocket1: HandheldRadio #SS220 Radio
-    pocket2: WeaponLaserGun
+    pocket2: WeaponLaserSvalinn
     belt: ClothingBeltBandolier
   storage:
     back:

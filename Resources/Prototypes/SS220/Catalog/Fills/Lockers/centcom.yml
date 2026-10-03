@@ -38,6 +38,7 @@
         - id: ClothingBackpackDeathSquadOperativeFilled
         - id: MagazineMagnumSubMachineGunSP-91-RC
           amount: 2
+        - id: EpsilonTerminatorDirectivesCircuitBoard
 
 - type: entity
   id: LockerDeathsquadSpecialistFilled
@@ -80,6 +81,8 @@
         - id: WeaponPistolN1984
         - id: MagazineMagnum
         - id: FlashlightSeclite
+        - id: ErtDirectivesCircuitBoard
+        - id: ClothingShoesBootsMagERT
 
 - type: entity
   id: LockerErtSecurityFilled
@@ -102,6 +105,8 @@
         - id: WeaponPistolMk58
         - id: MagazinePistol
         - id: FlashlightSeclite
+        - id: ClothingShoesBootsMagERT
+        - id: WeaponRifleLecterXL8
 
 - type: entity
   id: LockerErtMedicFilled
@@ -125,6 +130,10 @@
           amount: 2
         - id: DefibrillatorCompact
         - id: FlashlightSeclite
+        - id: ClothingShoesBootsMagERT
+        - id: LauncherSyringe
+        - id: AdvancedMiniSyringe
+          amount: 10
 
 - type: entity
   id: LockerErtEngineerFilled
@@ -146,6 +155,7 @@
         - id: ClothingOuterArmorBasicSlim
         - id: MedkitAdvancedFilled
         - id: FlashlightSeclite
+        - id: ClothingShoesBootsMagERT
 
 - type: entity
   id: LockerErtJanitorFilled
@@ -169,6 +179,7 @@
         - id: WeaponLauncherHydra
         - id: ClothingBackpackERTJanitorFilledGrenadeCleanade
         - id: FlashlightSeclite
+        - id: ClothingShoesBootsMagERT
 
 - type: entity
   id: LockerErtChaplainFilled
@@ -194,6 +205,7 @@
           amount: 4
         - id: Claymore
         - id: FlashlightSeclite
+        - id: ClothingShoesBootsMagERT
 
 #Pilots
 - type: entity
@@ -222,6 +234,7 @@
         - id: WeaponPistolMk58
         - id: MagazinePistol
         - id: FlashlightSeclite
+        - id: ClothingShoesBootsMagERT
 
 #CBURN
 - type: entity
@@ -244,6 +257,11 @@
         - id: SpeedLoaderMagnumIncendiary
           amount: 3
         - id: FlashlightSeclite
+        - id: LauncherSyringe
+        - id: AdvancedMiniSyringe
+          amount: 9
+        - id: ChemistryBottleAmbuzolPlus
+          amount: 3
 
 - type: entity
   id: LockerCburnCommanderFilled
@@ -268,6 +286,8 @@
         - id: MedkitCombatFilled
         - id: ChemistryBottleAmbuzolPlus
         - id: FlashlightSeclite
+        - id: QuarantineDirectivesCircuitBoard
+        - id: WeaponSynergisticEnergyGun
 
 # SRT Operative
 - type: entity
