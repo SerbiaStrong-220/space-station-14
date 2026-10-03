@@ -287,7 +287,6 @@
         - id: ChemistryBottleAmbuzolPlus
         - id: FlashlightSeclite
         - id: QuarantineDirectivesCircuitBoard
-        - id: WeaponSynergisticEnergyGun
 
 # SRT Operative
 - type: entity
