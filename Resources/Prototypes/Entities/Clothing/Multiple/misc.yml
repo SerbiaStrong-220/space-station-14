@@ -41,3 +41,4 @@
   - type: Tag #SS220-pr: FIX CLOTHING TAGS
     tags: #SS220-pr: FIX CLOTHING TAGS
     - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS
+  - type: NoiseProtection

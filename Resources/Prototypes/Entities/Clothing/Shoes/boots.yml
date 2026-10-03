@@ -95,6 +95,8 @@
     sprite: Clothing/Shoes/Boots/mercboots.rsi
   - type: Clothing
     sprite: Clothing/Shoes/Boots/mercboots.rsi
+  - type: ClothingSlowOnDamageModifier
+    modifier: 0.5
 
 - type: entity
   parent: ClothingShoesBaseButcherable
@@ -179,7 +181,7 @@
     sprite: SS220/Clothing/Shoes/Boots/winterbootssyndicate.rsi #SS220-wboots-resprite
 
 - type: entity
-  parent: ClothingShoesBaseWinterBoots
+  parent: [ClothingShoesBaseWinterBoots, BaseSlicingRefinable]
   id: ClothingShoesBootsWinterWeb
   name: web winter boots
   description: Boots made out of dense webbing to help survive even the coldest of winters.
@@ -193,15 +195,13 @@
       - cobwebs
     ignoreReagents:
       - Fiber
-  - type: SolutionContainerManager
-    solutions: # 6 (3 (fiber count of web) * 2 (to craft)) + 4 (magical crafting bonus)
-      food:
-        maxVol: 10
-        reagents:
-        - ReagentId: Fiber
-          Quantity: 10
-  - type: Butcherable
-    spawned:
+  - type: Solution
+    solution: # 20 (10 (fiber count of web) * 2 (to craft))
+      reagents:
+      - ReagentId: Fiber
+        Quantity: 20
+  - type: ToolRefinable
+    refineResult:
     - id: MaterialWebSilk1
       amount: 2
   - type: Construction

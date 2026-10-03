@@ -104,3 +104,6 @@
   Commands:
     - ent
 # SS220 fix ent-command perms end
+- Flags: ADMIN
+  Commands:
+    - admin_overlay

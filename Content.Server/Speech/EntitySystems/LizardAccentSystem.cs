@@ -1,11 +1,11 @@
 ﻿using System.Text.RegularExpressions;
 using Content.Server.Speech.Components;
 using Robust.Shared.Random;
-using Content.Shared.Speech;
+using Content.Shared.Speech.EntitySystems;
 
 namespace Content.Server.Speech.EntitySystems;
 
-public sealed partial class LizardAccentSystem : EntitySystem
+public sealed partial class LizardAccentSystem : RelayAccentSystem<LizardAccentComponent>
 {
     [Dependency] private readonly IRobustRandom _random = default!; // Corvax-Localization
 
@@ -31,16 +31,8 @@ public sealed partial class LizardAccentSystem : EntitySystem
     private static readonly string[] SchReplies = { "щщ", "щщщ" };
     private static readonly string[] SchUpperReplies = { "ЩЩ", "ЩЩЩ" };
 
-    public override void Initialize()
+    public override string Accentuate(string message, Entity<LizardAccentComponent>? ent = null)
     {
-        base.Initialize();
-        SubscribeLocalEvent<LizardAccentComponent, AccentGetEvent>(OnAccent);
-    }
-
-    private void OnAccent(EntityUid uid, LizardAccentComponent component, AccentGetEvent args)
-    {
-        var message = args.Message;
-
         // hissss
         message = RegexLowerS().Replace(message, "sss");
         // hiSSS
@@ -65,6 +57,7 @@ public sealed partial class LizardAccentSystem : EntitySystem
         message = RegexRuCh().Replace(message, _ => _random.Pick(SchReplies));
         message = RegexRuChUpper().Replace(message, _ => _random.Pick(SchUpperReplies));
         // Corvax-Localization-End
-        args.Message = message;
+
+        return message;
     }
 }

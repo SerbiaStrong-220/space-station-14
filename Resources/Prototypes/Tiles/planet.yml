@@ -15,11 +15,6 @@
   name: tiles-dirt-planet-floor
   sprite: /Textures/Tiles/Planet/dirt.rsi/dirt.png
   variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
 
 # Desert
 - type: tile
@@ -29,13 +24,6 @@
   tags: [ tile-tag-nature ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/Planet/Desert/desert.png
   variants: 6
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
 
 - type: tile
   id: FloorLowDesert
@@ -43,13 +31,6 @@
   tags: [ tile-tag-nature ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/Planet/Desert/low_desert.png
   variants: 6
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
 
 # Grass
 - type: tile
@@ -59,11 +40,6 @@
   tags: [ tile-tag-nature ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/Planet/Grass/grass.png
   variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   edgeSpritePriority: 1
   edgeSprites:
     SouthEast: /Textures/Tiles/Planet/Grass/single_edge.png

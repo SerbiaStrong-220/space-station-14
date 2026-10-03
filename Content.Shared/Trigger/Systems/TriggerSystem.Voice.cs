@@ -153,7 +153,7 @@ public sealed partial class TriggerSystem
         else
             _adminLogger.Add(LogType.Trigger, LogImpact.Low, $"A voice-trigger on {ToPrettyString(ent):entity} has started recording. User: {ToPrettyString(user.Value):user}");
 
-        _popup.PopupPredicted(Loc.GetString("trigger-on-voice-start-recording"), ent, user);
+        _popup.PopupEntity(Loc.GetString("trigger-on-voice-start-recording"), ent);
     }
 
     /// <summary>
@@ -166,7 +166,7 @@ public sealed partial class TriggerSystem
         if (string.IsNullOrWhiteSpace(ent.Comp.KeyPhrase))
             RemComp<ActiveListenerComponent>(ent);
 
-        _popup.PopupPredicted(Loc.GetString("trigger-on-voice-stop-recording"), ent, user);
+        _popup.PopupEntity(Loc.GetString("trigger-on-voice-stop-recording"), ent);
     }
 
 
@@ -215,6 +215,6 @@ public sealed partial class TriggerSystem
         _adminLogger.Add(LogType.Trigger, LogImpact.Low,
             $"A voice-trigger on {ToPrettyString(ent):entity} has been reset to default keyphrase: '{ent.Comp.KeyPhrase}'. User: {ToPrettyString(user):speaker}");
 
-        _popup.PopupPredicted(Loc.GetString("trigger-on-voice-set-default", ("keyphrase", ent.Comp.KeyPhrase)), ent, user);
+        _popup.PopupEntity(Loc.GetString("trigger-on-voice-set-default", ("keyphrase", ent.Comp.KeyPhrase)), ent);
     }
 }

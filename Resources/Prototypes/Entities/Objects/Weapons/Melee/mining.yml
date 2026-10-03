@@ -136,6 +136,9 @@
       params:
         volume: 2
   - type: Sharp
+  - type: Tool
+    qualities:
+    - Slicing
   - type: Execution
     doAfterDuration: 4.0
   - type: UnpoweredFlashlight

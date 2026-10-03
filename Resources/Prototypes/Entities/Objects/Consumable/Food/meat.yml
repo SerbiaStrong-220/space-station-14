@@ -12,17 +12,15 @@
     sprite: Objects/Consumable/Food/meat.rsi
   - type: Extractable
     grindableSolutionName: food
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 5
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 1
-        - ReagentId: Fat
-          Quantity: 5
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 5
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 20
+      - ReagentId: Fat
+        Quantity: 5
   - type: Item
     shape:
     - 0,0,1,0
@@ -80,24 +78,24 @@
 # Raw
 
 - type: entity
-  parent: FoodMeatRawBase
+  parent: [FoodMeatRawBase, BaseSlicingRefinableFood]
   id: FoodMeat
   name: raw meat
   description: A slab of raw meat.
   components:
   - type: Sprite
     state: plain
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 9
-        - ReagentId: Fat
-          Quantity: 9
-  - type: SliceableFood
-    count: 3
-    slice: FoodMeatCutlet
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 9
+      - ReagentId: Fat
+        Quantity: 9
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodMeatCutlet
+      amount: 5
     #SS220-grill-update-2 begin
 #  - type: InternalTemperature
 #    conductivity: 0.43
@@ -128,22 +126,17 @@
   #ss220 fix meatwheat construction end
 
 - type: entity
-  parent: FoodMeatRawBase
+  parent: [FoodMeatRawBase, BaseSlicingRefinableFood]
   id: FoodMeatHuman
   name: raw human meat
   description: Gross.
   components:
   - type: Sprite
     state: plain
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 9
-  - type: SliceableFood
-    count: 3
-    slice: FoodMeatCutlet
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodMeatCutlet
+      amount: 5
   - type: Item
     storedOffset: -2,1
     inhandVisuals:
@@ -168,12 +161,15 @@
     - Meat
   - type: Sprite
     state: fish
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: CarpoToxin
-          Quantity: 5
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: CarpoToxin
+        Quantity: 5
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 20
+      - ReagentId: Fat
+        Quantity: 5
   - type: Extractable
     juiceSolution:
       reagents:
@@ -194,7 +190,7 @@
 
 - type: entity
   # bacon is cured so not raw = cant rot
-  parent: FoodMeatBase
+  parent: [SolutionTiny, FoodMeatBase]
   id: FoodMeatBacon
   name: raw bacon
   description: A raw piece of bacon.
@@ -205,14 +201,13 @@
     - Meat
   - type: Sprite
     state: bacon
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 2
-        - ReagentId: Fat
-          Quantity: 9
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 6
+      - ReagentId: Fat
+        Quantity: 9
   - type: InternalTemperature
     conductivity: 0.44
     thickness: 0.004 # bacon is thin so faster to cook than a steak
@@ -235,24 +230,24 @@
       - state: generic-pink-inhand-right
 
 - type: entity
-  parent: FoodMeatRawBase
+  parent: [FoodMeatRawBase, BaseSlicingRefinableFood]
   id: FoodMeatBear
   name: raw bear meat
   description: A very manly slab of raw bear meat.
   components:
   - type: Sprite
     state: bear
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 9
-        - ReagentId: Fat
-          Quantity: 9
-  - type: SliceableFood
-    count: 3
-    slice: FoodMeatBearCutlet
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 9
+      - ReagentId: Fat
+        Quantity: 9
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodMeatBearCutlet
+      amount: 5
     #SS220-grillables-update begin
 #  - type: Construction
 #    graph: BearSteak
@@ -274,24 +269,24 @@
         color: "#934C64"
 
 - type: entity
-  parent: FoodMeatRawBase
+  parent: [FoodMeatRawBase, BaseSlicingRefinableFood]
   id: FoodMeatPenguin
   name: raw penguin meat
   description: A slab of raw penguin meat. Can be used as a substitute for fish in recipes.
   components:
   - type: Sprite
     state: bird
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 9
-        - ReagentId: Fat
-          Quantity: 9
-  - type: SliceableFood
-    count: 3
-    slice: FoodMeatPenguinCutlet
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 9
+      - ReagentId: Fat
+        Quantity: 9
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodMeatPenguinCutlet
+      amount: 5
     #SS220-grillables-update begin
 #  - type: Construction
 #    graph: PenguinSteak
@@ -310,24 +305,17 @@
       - state: generic-pink-inhand-right
 
 - type: entity
-  parent: FoodMeatRawBase
+  parent: [FoodMeatRawBase, BaseSlicingRefinableFood]
   id: FoodMeatChicken
   name: raw chicken meat
   description: A slab of raw chicken. Remember to wash your hands!
   components:
   - type: Sprite
     state: bird
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 9
-        - ReagentId: Fat
-          Quantity: 9
-  - type: SliceableFood
-    count: 3
-    slice: FoodMeatChickenCutlet
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodMeatChickenCutlet
+      amount: 5
   - type: InternalTemperature
     conductivity: 0.41
     #SS220-grillables-update begin
@@ -348,24 +336,24 @@
       - state: generic-pink-inhand-right
 
 - type: entity
-  parent: FoodMeatRawBase
+  parent: [FoodMeatRawBase, BaseSlicingRefinableFood]
   id: FoodMeatDuck
   name: raw duck meat
   description: A slab of raw duck. Remember to wash your hands!
   components:
   - type: Sprite
     state: bird
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 9
-        - ReagentId: Fat
-          Quantity: 9
-  - type: SliceableFood
-    count: 3
-    slice: FoodMeatDuckCutlet
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 9
+      - ReagentId: Fat
+        Quantity: 9
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodMeatDuckCutlet
+      amount: 5
     #SS220-grillables-update begin
 #  - type: Construction
 #    graph: DuckSteak
@@ -397,12 +385,13 @@
     - Meat
   - type: Sprite
     state: corgi
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Bicaridine
-          Quantity: 20
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 10
+      - ReagentId: Bicaridine
+        Quantity: 20
   - type: StaticPrice
     price: 750
   - type: StealTarget
@@ -427,14 +416,13 @@
       - crabby
   - type: Sprite
     state: crab
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 1
-        - ReagentId: Fat
-          Quantity: 2
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 1
+      - ReagentId: Fat
+        Quantity: 2
     #SS220-grillables-update begin
 #  - type: Construction
 #    graph: CrabSteak
@@ -459,14 +447,6 @@
   - type: Sprite
     sprite: SS220/Objects/Consumable/Food/meat.rsi #SS220-goliathresprite
     state: goliath
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 5
-        - ReagentId: Fat
-          Quantity: 3
   - type: InternalTemperature
     thickness: 0.27 # very big, do cook it in lava. SS220-grill-update-2
     conductivity: 0.4 #SS220-grill-update-2
@@ -489,7 +469,7 @@
       - state: goliath-inhand-right # ss220 fix-goliath-meat-sprite
 
 - type: entity
-  parent: FoodMeatBase
+  parent: [FoodMeatBase, BaseSlicingRefinableFood]
   id: FoodMeatDragon
   name: dragon flesh
   description: The dense meat of the space-era apex predator is oozing with its mythical ichor. Ironically, best eaten raw.
@@ -503,20 +483,22 @@
     - state: dragon
     - state: dragon_veins
       shader: unshaded
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Ichor
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Protein
+        Quantity: 20
+      - ReagentId: Ichor
+        Quantity: 10
   - type: Extractable
     juiceSolution:
       reagents:
       - ReagentId: Ichor
         Quantity: 10
-  - type: SliceableFood
-    count: 3
-    slice: FoodMeatDragonCutlet
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodMeatDragonCutlet
+      amount: 5
     #SS220-grillables-update begin
 #  - type: Construction
 #    graph: DragonSteak
@@ -539,24 +521,25 @@
   #SS220-grill-update-2 end
 
 - type: entity
-  parent: FoodMeatRawBase
+  parent: [SolutionVeryTiny, FoodMeatRawBase, BaseSlicingRefinableFood]
   id: FoodMeatRat
   name: raw rat meat
   description: Prime meat from maintenance!
   components:
   - type: Sprite
     state: plain
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 3
-        - ReagentId: Fat
-          Quantity: 3
-  - type: SliceableFood
-    count: 3
-    slice: FoodMeatCutlet
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 1
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 4
+      - ReagentId: Fat
+        Quantity: 1
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodMeatCutlet
   - type: Item
     storedOffset: -2,1
     inhandVisuals:
@@ -571,24 +554,24 @@
 # SS220-Grill-Hotfix end
 
 - type: entity
-  parent: FoodMeatRawBase
+  parent: [FoodMeatRawBase, BaseSlicingRefinableFood]
   id: FoodMeatLizard
   name: raw lizard meat
   description: Delicious dino damage.
   components:
   - type: Sprite
     state: lizard
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 9
-        - ReagentId: Fat
-          Quantity: 9
-  - type: SliceableFood
-    count: 3
-    slice: FoodMeatLizardCutlet
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 9
+      - ReagentId: Fat
+        Quantity: 9
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodMeatLizardCutlet
+      amount: 5
     #SS220-grilling-cutlets-tweaks begin
 #  - type: Construction
 #    graph: LizardSteak
@@ -631,16 +614,15 @@
     - Recyclable
   - type: Sprite
     state: rotten
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 5
-        - ReagentId: GastroToxin
-          Quantity: 4
-        - ReagentId: Fat
-          Quantity: 4
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 10
+      - ReagentId: GastroToxin
+        Quantity: 16
+      - ReagentId: Fat
+        Quantity: 4
   - type: Item
     storedOffset: -2,1
     inhandVisuals:
@@ -650,24 +632,17 @@
       - state: rotten-inhand-right
 
 - type: entity
-  parent: FoodMeatRawBase
+  parent: [FoodMeatRawBase, BaseSlicingRefinableFood]
   id: FoodMeatSpider
   name: raw spider meat
   description: A slab of spider meat. That's so Kafkaesque.
   components:
   - type: Sprite
     state: spider
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 9
-        - ReagentId: Fat
-          Quantity: 9
-  - type: SliceableFood
-    count: 3
-    slice: FoodMeatSpiderCutlet
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodMeatSpiderCutlet
+      amount: 5
   - type: Item
     storedOffset: 0,2
     heldPrefix: spider
@@ -687,14 +662,6 @@
   components:
   - type: Sprite
     state: spiderleg
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 10
-        - ReagentId: Fat
-          Quantity: 3
   - type: Item
     size: Normal
     shape:
@@ -708,7 +675,7 @@
         color: "#333333"
 
 - type: entity
-  parent: FoodMeatBase
+  parent: [SolutionTiny, FoodMeatBase]
   id: FoodMeatWheat
   name: meatwheat clump
   description: This doesn't look like meat, but your standards aren't that high to begin with.
@@ -718,12 +685,11 @@
       - falsemeat
   - type: Sprite
     state: clump
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 1
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 15
   #SS220-Keep-our-meatwheat begin
   - type: Construction
     graph: ClumpToMeat
@@ -733,7 +699,6 @@
   - type: Item
     size: Tiny
     shape:
-    - 0,0,0,0
     inhandVisuals:
       left:
       - state: generic-pink-inhand-left
@@ -743,7 +708,7 @@
         color: "#934C64"
 
 - type: entity
-  parent: FoodMeatBase
+  parent: [SolutionTiny, FoodMeatBase]
   id: FoodMeatSnake
   name: raw snake meat
   description: A long piece of snake meat, hopefully not poisonous.
@@ -754,14 +719,15 @@
     - Meat
   - type: Sprite
     state: snake
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 10
-        - ReagentId: Toxin
-          Quantity: 2
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 10
+      - ReagentId: Fat
+        Quantity: 3
+      - ReagentId: Toxin
+        Quantity: 2
   - type: Item
     storedOffset: -1,3
     inhandVisuals:
@@ -779,7 +745,7 @@
 
 - type: entity
   # not raw since acid kills bacteria or something, same as xeno
-  parent: FoodMeatBase
+  parent: [FoodMeatBase, BaseSlicingRefinableFood]
   id: FoodMeatXeno
   name: raw xeno meat
   description: A slab of xeno meat, dripping with acid.
@@ -794,15 +760,15 @@
     - Meat
   - type: Sprite
     state: xeno
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: SulfuricAcid
-          Quantity: 20
-  - type: SliceableFood
-    count: 3
-    slice: FoodMeatXenoCutlet
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: SulfuricAcid
+        Quantity: 30
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodMeatXenoCutlet
+      amount: 5
   - type: Item
     storedOffset: -2,1
     inhandVisuals:
@@ -836,12 +802,11 @@
     - Meat
   - type: Sprite
     state: rouny
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: SulfuricAcid
-          Quantity: 20
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: SulfuricAcid
+        Quantity: 30
   #SS220-grillables-update begin
 #  - type: Construction
 #    graph: RounySteak
@@ -859,16 +824,17 @@
       - state: plain-inhand-right
 
 - type: entity
-  parent: FoodMeatBase
+  parent: [FoodMeatBase, BaseSlicingRefinableFood]
   id: FoodMeatTomato
   name: killer tomato meat
   description: A slice from a huge tomato.
   components:
   - type: Sprite
     state: tomato
-  - type: SliceableFood
-    count: 3
-    slice: FoodMeatTomatoCutlet
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodMeatTomatoCutlet
+      amount: 3
   - type: StaticPrice
     price: 100
   - type: Item
@@ -880,7 +846,7 @@
       - state: tomato-inhand-right
 
 - type: entity
-  parent: FoodMeatBase
+  parent: [FoodMeatBase, BaseSlicingRefinableFood]
   id: FoodMeatSalami
   name: salami
   description: A large tube of salami. Best not to ask what went into it.
@@ -895,21 +861,21 @@
     sprite: Objects/Consumable/Food/salami.rsi
     state: salami
   #ss220 salami normal update start
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 50
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 24
-        - ReagentId: TableSalt
-          Quantity: 4
-        - ReagentId: Protein
-          Quantity: 16
+  - type: Solution
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 24
+      - ReagentId: TableSalt
+        Quantity: 4
+      - ReagentId: Protein
+        Quantity: 16
   #ss220 salami normal update end
-  - type: SliceableFood
-    count: 25 #ss220 salami normal update
-    slice: FoodMeatSalamiSlice
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodMeatSalamiSlice
+      amount: 25 #ss220 salami normal update
   - type: MeleeWeapon
     wideAnimationRotation: 100
     damage:
@@ -922,7 +888,7 @@
         Blunt: 2
 
 - type: entity
-  parent: FoodMeatBase
+  parent: [FoodMeatBase, BaseSlicingRefinableFood]
   id: FoodMeatClown
   name: meat clown
   description: A delicious, round piece of meat clown. How horrifying.
@@ -939,11 +905,12 @@
     - Meat
   - type: Sprite
     state: clown
-  - type: SliceableFood
-    slice: FoodMeatSalamiSlice
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodMeatSalamiSlice
 
 - type: entity
-  parent: FoodMeatBase
+  parent: [SolutionTiny, FoodMeatBase]
   id: FoodMeatMeatball
   name: meatball
   description: A raw ball of meat. Meat ball.
@@ -951,8 +918,16 @@
   - type: Item
     size: Tiny
     shape:
-    - 0,0,0,0
     storedOffset: -1,2
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 7
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 5
+      - ReagentId: Fat
+        Quantity: 3
   - type: Tag
     tags:
     - Raw
@@ -971,7 +946,7 @@
 # meat patty - grillin' time
 
 - type: entity
-  parent: FoodMeatBase
+  parent: [SolutionTiny, FoodMeatBase]
   id: FoodMeatPatty
   name: meat patty
   description: A flat slab of ground meat. Ready for grillin'.
@@ -996,8 +971,16 @@
   - type: Item
     size: Tiny
     shape:
-    - 0,0,0,0
     heldPrefix: generic-pink
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 2.5
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 10
+      - ReagentId: Fat
+        Quantity: 2.5
 
 - type: entity
   parent: FoodMeatBase
@@ -1029,54 +1012,27 @@
       - state: slime-inhand-right
 
 - type: entity
-  parent: FoodMeatRawBase
-  id: FoodMeatSnail
-  name: raw snail meat
-  description: Improved with salt.
-  components:
-  - type: Sprite
-    state: snail
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 15
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 3
-        - ReagentId: Fat
-          Quantity: 3
-        - ReagentId: Water
-          Quantity: 4 #It makes saline if you add salt!
-  - type: Item
-    storedOffset: -1,-3
-    inhandVisuals:
-      left:
-      - state: generic-pink-inhand-left
-        color: "#E2AE7C"
-      right:
-      - state: generic-pink-inhand-right
-        color: "#E2AE7C"
-
-- type: entity
-  parent: FoodMeatRawBase
+  parent: [SolutionHuge, FoodMeatRawBase, BaseSlicingRefinableFood]
   id: FoodMeatAnomaly
   name: anomalous meat mass
   description: An impossibly dense slab of meat. Just looking at it makes you uncomfortable.
   components:
   - type: Sprite
     state: anomalymeat
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 90
-        - ReagentId: Fat
-          Quantity: 90
-  - type: SliceableFood
-    count: 10
-    sliceTime: 5
-    slice: FoodMeat #That's... So much meat
+  - type: Solution # Literally no space for anything but meat.
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 80
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 320
+      - ReagentId: Fat
+        Quantity: 80
+  - type: ToolRefinable
+    refineTime: 5
+    refineResult:
+    - id: FoodMeatCutlet
+      amount: 16
   - type: InternalTemperature
     conductivity: 0.4 #SS220-grill-update-2
     thickness: 0.25 #SS220-grill-update-2
@@ -1105,13 +1061,11 @@
 # Cooked
 
 - type: entity
-  parent: FoodBase
+  parent: FoodBaseTrash
   id: MaterialSmileExtract
   name: smile extract
   description: It's a real panacea. But at what cost?
   components:
-  - type: Item
-    size: Tiny
   - type: Extractable
     grindableSolutionName: food
   - type: FlavorProfile
@@ -1122,16 +1076,15 @@
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: rainbow_slime_extract
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Omnizine
-          Quantity: 30
-        - ReagentId: Nutriment
-          Quantity: 10
-        - ReagentId: Iron
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Omnizine
+        Quantity: 30
+      - ReagentId: Nutriment
+        Quantity: 10
+      - ReagentId: Iron
+        Quantity: 10
   - type: StaticPrice
     price: 3000 #It has so much Omnizin in it
   - type: Tag
@@ -1139,7 +1092,24 @@
     - Meat
 
 - type: entity
+  abstract: true
   parent: FoodMeatBase
+  id: FoodMeatCookedBase
+  components:
+  - type: Tag
+    tags:
+    - Cooked
+    - Meat
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 20
+      - ReagentId: Protein
+        Quantity: 10
+
+- type: entity
+  parent: [FoodMeatCookedBase, BaseSlicingRefinableFood]
   id: FoodMeatCooked
   name: steak
   description: A cooked slab of meat. Smells primal.
@@ -1152,17 +1122,10 @@
   - type: Sprite
     layers:
     - state: plain-cooked
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 10
-        - ReagentId: Protein
-          Quantity: 5
-  - type: SliceableFood
-    count: 3
-    slice: FoodMeatCutletCooked
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodMeatCutletCooked
+      amount: 5
   - type: Construction
     graph: MeatSteak
     node: meat steak
@@ -1179,15 +1142,11 @@
       - state: plain-cooked-inhand-right
 
 - type: entity
-  parent: FoodMeatBase
+  parent: [SolutionVeryTiny, FoodMeatCookedBase] # Bacon shrinks when its cooked so we shrink solution size as well.
   id: FoodMeatBaconCooked
   name: bacon
   description: A delicious piece of cooked bacon.
   components:
-  - type: Tag
-    tags:
-    - Cooked
-    - Meat
   - type: Sprite
     layers:
     - state: bacon-cooked
@@ -1197,14 +1156,13 @@
       - enum.DamageStateVisualLayers.Base:
           bacon-cooked: ""
           bacon2-cooked: ""
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 5
-        - ReagentId: Protein
-          Quantity: 5
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 5
+      - ReagentId: Protein
+        Quantity: 5
   - type: Construction
     graph: Bacon
     node: bacon
@@ -1223,7 +1181,7 @@
         color: "#5B3E2A"
 
 - type: entity
-  parent: FoodMeatBase
+  parent: [FoodMeatCookedBase, BaseSlicingRefinableFood]
   id: FoodMeatBearCooked
   name: cooked bear
   description: A well-cooked slab of bear meat. Tough, but tasty with the right sides.
@@ -1236,17 +1194,10 @@
   - type: Sprite
     layers:
     - state: product-cooked
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 5
-        - ReagentId: Protein
-          Quantity: 5
-  - type: SliceableFood
-    count: 3
-    slice: FoodMeatBearCutletCooked
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodMeatBearCutletCooked
+      amount: 5
   - type: Construction
     graph: BearSteak
     node: filet migrawr
@@ -1259,29 +1210,18 @@
     heldPrefix: meatball
 
 - type: entity
-  parent: FoodMeatBase
+  parent: [FoodMeatCookedBase, BaseSlicingRefinableFood]
   id: FoodMeatPenguinCooked
   name: penguin filet
   description: A cooked filet of penguin. Can be used as a substitute for fish in recipes.
   components:
-  - type: Tag
-    tags:
-    - Cooked
-    - Meat
   - type: Sprite
     layers:
     - state: bird-cooked
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 5
-        - ReagentId: Protein
-          Quantity: 5
-  - type: SliceableFood
-    count: 3
-    slice: FoodMeatPenguinCutletCooked
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodMeatPenguinCutletCooked
+      amount: 5
   - type: Construction
     graph: PenguinSteak
     node: cooked penguin
@@ -1300,29 +1240,18 @@
         color: "#F7E3A3"
 
 - type: entity
-  parent: FoodMeatBase
+  parent: [FoodMeatCookedBase, BaseSlicingRefinableFood]
   id: FoodMeatChickenCooked
   name: cooked chicken
   description: A cooked piece of chicken. Best used in other recipes.
   components:
-  - type: Tag
-    tags:
-    - Cooked
-    - Meat
   - type: Sprite
     layers:
     - state: bird-cooked
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 5
-        - ReagentId: Protein
-          Quantity: 5
-  - type: SliceableFood
-    count: 3
-    slice: FoodMeatChickenCutletCooked
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodMeatChickenCutletCooked
+      amount: 5
   - type: Construction
     graph: ChickenSteak
     node: cooked chicken
@@ -1342,14 +1271,10 @@
 
 - type: entity
   name: fried chicken
-  parent: FoodMeatBase
+  parent: FoodMeatCookedBase
   id: FoodMeatChickenFried
   description: A juicy hunk of chicken meat, fried to perfection.
   components:
-  - type: Tag
-    tags:
-    - Cooked
-    - Meat
   - type: Sprite
     layers:
     - state: chicken-fried
@@ -1359,14 +1284,6 @@
       - enum.DamageStateVisualLayers.Base:
           chicken-fried: ""
           chicken2-fried: ""
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 5
-        - ReagentId: Protein
-          Quantity: 5
   - type: FoodSequenceElement
     entries:
       Burger: MeatChicken
@@ -1386,41 +1303,29 @@
   name: mystery fried chicken
   description: “Eleven secret herbs and… oh no. That’s not chicken."
   components:
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 2
-        - ReagentId: Protein
-          Quantity: 5
-        - ReagentId: Ammonia
-          Quantity: 3
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 15
+      - ReagentId: Protein
+        Quantity: 10
+      - ReagentId: Ammonia
+        Quantity: 5
 
 - type: entity
-  parent: FoodMeatBase
+  parent: [FoodMeatCookedBase, BaseSlicingRefinableFood]
   id: FoodMeatDuckCooked
   name: cooked duck
   description: A cooked piece of duck. Best used in other recipes.
   components:
-  - type: Tag
-    tags:
-    - Cooked
-    - Meat
   - type: Sprite
     layers:
     - state: bird-cooked
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 5
-        - ReagentId: Protein
-          Quantity: 5
-  - type: SliceableFood
-    count: 3
-    slice: FoodMeatDuckCutletCooked
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodMeatDuckCutletCooked
+      amount: 5
   - type: Construction
     graph: DuckSteak
     node: cooked duck
@@ -1439,7 +1344,7 @@
         color: "#F7E3A3"
 
 - type: entity
-  parent: FoodMeatBase
+  parent: FoodMeatCookedBase
   id: FoodMeatCrabCooked
   name: cooked crab
   description: Some deliciously cooked crab meat.
@@ -1447,21 +1352,9 @@
   - type: FlavorProfile
     flavors:
       - crabby
-  - type: Tag
-    tags:
-    - Cooked
-    - Meat
   - type: Sprite
     layers:
     - state: crab-cooked
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 5
-        - ReagentId: Protein
-          Quantity: 5
   - type: Construction
     graph: CrabSteak
     node: cooked crab
@@ -1478,7 +1371,7 @@
       - state: plain-cooked-inhand-right
 
 - type: entity
-  parent: FoodMeatBase
+  parent: FoodMeatCookedBase
   id: FoodMeatGoliathCooked
   name: goliath steak
   description: A delicious, lava cooked steak.
@@ -1495,14 +1388,13 @@
     #layers:
     #- state: goliath-cooked
     #SS220-goliathresprite-end
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 5
-        - ReagentId: Protein
-          Quantity: 5
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 5
+      - ReagentId: Protein
+        Quantity: 5
   - type: Construction
     graph: GoliathSteak
     node: goliath steak
@@ -1520,7 +1412,7 @@
 
 - type: entity
   name: rouny steak
-  parent: FoodMeatBase
+  parent: FoodMeatCookedBase
   id: FoodMeatRounyCooked
   description: Some kill to survive. You on the other hand, kill for fun.
   components:
@@ -1536,14 +1428,6 @@
   - type: Sprite
     layers:
     - state: rouny-cooked
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 10
-        - ReagentId: Protein
-          Quantity: 10
   - type: Construction
     graph: RounySteak
     node: rouny steak
@@ -1559,7 +1443,7 @@
       - state: plain-cooked-inhand-right
 
 - type: entity
-  parent: FoodMeatBase
+  parent: [FoodMeatCookedBase, BaseSlicingRefinableFood]
   id: FoodMeatLizardCooked
   name: lizard steak
   description: Cooked, tough lizard meat.
@@ -1572,17 +1456,10 @@
   - type: Sprite
     layers:
     - state: lizard-cooked
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 5
-        - ReagentId: Protein
-          Quantity: 5
-  - type: SliceableFood
-    count: 3
-    slice: FoodMeatLizardCutletCooked
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodMeatLizardCutletCooked
+      amount: 5
   - type: Construction
     graph: LizardSteak
     node: lizard steak
@@ -1599,26 +1476,14 @@
       - state: plain-cooked-inhand-right
 
 - type: entity
-  parent: FoodMeatBase
+  parent: FoodMeatCookedBase
   id: FoodMeatSpiderlegCooked
   name: boiled spider leg
   description: A giant spider's leg that's still twitching after being cooked. Gross!
   components:
-  - type: Tag
-    tags:
-    - Cooked
-    - Meat
   - type: Sprite
     layers:
     - state: spiderleg-cooked
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 5
-        - ReagentId: Protein
-          Quantity: 5
   - type: FoodSequenceElement
     entries:
       Burger: MeatSpiderLegBurger #SS220-grillables-update
@@ -1634,25 +1499,20 @@
         color: "#44201A"
 
 - type: entity
-  parent: FoodMeatBase
+  parent: [SolutionTiny, FoodMeatCookedBase]
   id: FoodMeatMeatballCooked
   name: meatball
   description: A cooked meatball. Perfect to add to other dishes... except fruity ones.
   components:
-  - type: Tag
-    tags:
-    - Cooked
-    - Meat
   - type: Sprite
     state: meatball-cooked
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 5
-        - ReagentId: Protein
-          Quantity: 5
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 10
+      - ReagentId: Protein
+        Quantity: 5
   - type: FoodSequenceElement
     entries:
       Burger: MeatBall
@@ -1663,12 +1523,11 @@
   - type: Item
     size: Tiny
     shape:
-    - 0,0,0,0
     storedOffset: -1,2
     heldPrefix: meatball
 
 - type: entity
-  parent: FoodMeatBase
+  parent: [SolutionTiny, FoodMeatCookedBase]
   id: FoodMeatPattyCooked
   name: cooked meat patty
   description: A cooked meat patty.
@@ -1680,14 +1539,13 @@
     - Steak
   - type: Sprite
     state: patty
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 7.5
-        - ReagentId: Protein
-          Quantity: 7.5
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 10
+      - ReagentId: Protein
+        Quantity: 5
   - type: Construction
     graph: CookedPatty
     node: cooked meat patty
@@ -1698,33 +1556,26 @@
   - type: Item
     size: Tiny
     shape:
-    - 0,0,0,0
     heldPrefix: meatball
 
 - type: entity
-  parent: FoodMeatBase
+  parent: [SolutionTiny, FoodMeatCookedBase]
   id: FoodMeatSnailCooked
   name: boiled snail
   description: Improved with salt.
   components:
-  - type: Tag
-    tags:
-    - Cooked
-    - Meat
   - type: Sprite
     layers:
     - state: snail-cooked
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 15
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 3
-        - ReagentId: Protein
-          Quantity: 3
-        - ReagentId: Water
-          Quantity: 4 # makes saline if you add salt!
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 10
+      - ReagentId: Protein
+        Quantity: 5
+      - ReagentId: Water
+        Quantity: 4 # makes saline if you add salt!
   - type: FoodSequenceElement
     entries:
       Burger: MeatSnail
@@ -1740,37 +1591,32 @@
         color: "#5B3E2A"
 
 - type: entity
-  parent: FoodMeatBase
+  parent: [SolutionLarge, FoodMeatCookedBase, BaseSlicingRefinableFood] # Intentionlly gets smaller when cooked
   id: FoodMeatAnomalyCooked
   name: anomalous steak
   description: A gigantic mass of cooked meat. A meal for a dinner party, or someone REALLY hungry.
   components:
-  - type: Tag
-    tags:
-    - Cooked
-    - Meat
   - type: Sprite
     layers:
     - state: anomalymeat-cooked #Kinda hard to cook this... thing evenly
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 100
-        - ReagentId: Protein
-          Quantity: 50
-  - type: SliceableFood
-    count: 10
-    sliceTime: 5
-    slice: FoodMeatCooked
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 160
+      - ReagentId: Protein
+        Quantity: 80
+  - type: ToolRefinable
+    refineTime: 5
+    refineResult:
+    - id: FoodMeatCooked
+      amount: 8
   - type: Construction
     graph: AnomalyMeatSteak
     node: anomaly steak
   - type: Item
     size: Normal
     shape:
-    - 0,0,1,1
     inhandVisuals:
       left:
       - state: plain-cooked-inhand-left
@@ -1778,7 +1624,7 @@
       - state: plain-cooked-inhand-right
 
 - type: entity
-  parent: FoodMeatBase
+  parent: [FoodMeatCookedBase, BaseSlicingRefinableFood]
   id: FoodMeatDragonCooked
   name: dragon steak
   description: Pouring ketchup on this is considered a capital crime on most stations.
@@ -1791,19 +1637,19 @@
   - type: Sprite
     layers:
     - state: dragon-cooked
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Ichor
-          Quantity: 6
-        - ReagentId: Nutriment
-          Quantity: 6
-        - ReagentId: Protein
-          Quantity: 6
-  - type: SliceableFood
-    count: 3
-    slice: FoodMeatDragonCutletCooked
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Ichor
+        Quantity: 5
+      - ReagentId: Nutriment
+        Quantity: 15
+      - ReagentId: Protein
+        Quantity: 15
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodMeatDragonCutletCooked
+      amount: 5
   - type: Construction
     graph: DragonSteak
     node: dragon steak
@@ -1836,14 +1682,13 @@
     - Meat
   - type: Sprite
     state: cutlet
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 3
-        - ReagentId: Fat
-          Quantity: 2
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 3
+      - ReagentId: Fat
+        Quantity: 2
   #SS220-grilling-cutlets-tweaks begin
 #  - type: Construction
 #    graph: Cutlet
@@ -1869,24 +1714,18 @@
   name: raw bear cutlet
   description: A very manly cutlet of raw bear meat.
   components:
-  - type: Tag
-    tags:
-    - Raw
-    - Cutlet
-    - Meat
   - type: Sprite
     layers:
     - state: cutlet
     - state: cutlet-alpha
       color: brown
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 3
-        - ReagentId: Fat
-          Quantity: 2
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 3
+      - ReagentId: Fat
+        Quantity: 2
   #SS220-grilling-cutlets-tweaks begin
 #  - type: Construction
 #    graph: BearCutlet
@@ -1897,9 +1736,6 @@
     cookingResult: FoodMeatBearCutletCooked
   #SS220-grilling-cutlets-tweaks end
   - type: Item
-    size: Tiny
-    shape:
-    - 0,0,0,0
     inhandVisuals:
       left:
       - state: generic-pink-inhand-left
@@ -1914,22 +1750,16 @@
   name: raw penguin cutlet
   description: A cutlet of raw penguin meat. Can be used as a substitute for fish in recipes.
   components:
-  - type: Tag
-    tags:
-    - Raw
-    - Cutlet
-    - Meat
   - type: Sprite
     state: cutlet
     color: white
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 3
-        - ReagentId: Fat
-          Quantity: 2
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 3
+      - ReagentId: Fat
+        Quantity: 2
   #SS220-grilling-cutlets-tweaks begin
 #  - type: Construction
 #    graph: PenguinCutlet
@@ -1940,9 +1770,6 @@
     cookingResult: FoodMeatPenguinCutletCooked
   #SS220-grilling-cutlets-tweaks end
   - type: Item
-    size: Tiny
-    shape:
-    - 0,0,0,0
     inhandVisuals:
       left:
       - state: generic-pink-inhand-left
@@ -1957,22 +1784,16 @@
   name: raw chicken cutlet
   description: A cutlet of raw chicken. Remember to wash your hands!
   components:
-  - type: Tag
-    tags:
-    - Raw
-    - Cutlet
-    - Meat
   - type: Sprite
     state: cutlet
     color: white
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 3
-        - ReagentId: Fat
-          Quantity: 2
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 3
+      - ReagentId: Fat
+        Quantity: 2
   #SS220-grilling-cutlets-tweaks begin
 #  - type: Construction
 #    graph: ChickenCutlet
@@ -1998,22 +1819,16 @@
   name: raw duck cutlet
   description: A cutlet of raw duck. Remember to wash your hands!
   components:
-  - type: Tag
-    tags:
-    - Raw
-    - Cutlet
-    - Meat
   - type: Sprite
     state: cutlet
     color: white
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 3
-        - ReagentId: Fat
-          Quantity: 2
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 3
+      - ReagentId: Fat
+        Quantity: 2
   #SS220-grilling-cutlets-tweaks begin
 #  - type: Construction
 #    graph: DuckCutlet
@@ -2039,25 +1854,19 @@
   name: raw lizard cutlet
   description: Delicious dino cutlet.
   components:
-  - type: Tag
-    tags:
-    - Raw
-    - Cutlet
-    - Meat
   - type: Sprite
     layers:
     - state: cutlet
       color: green
     - state: cutlet-alpha
       color: pink
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 3
-        - ReagentId: Fat
-          Quantity: 2
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 3
+      - ReagentId: Fat
+        Quantity: 2
   #SS220-grilling-cutlets-tweaks begin
 #  - type: Construction
 #    graph: LizardCutlet
@@ -2068,9 +1877,6 @@
     cookingResult: FoodMeatLizardCutletCooked
   #SS220-grilling-cutlets-tweaks end
   - type: Item
-    size: Tiny
-    shape:
-    - 0,0,0,0
     inhandVisuals:
       left:
       - state: generic-pink-inhand-left
@@ -2085,21 +1891,15 @@
   name: raw spider cutlet
   description: A cutlet of raw spider meat. So Kafkaesque.
   components:
-  - type: Tag
-    tags:
-    - Raw
-    - Cutlet
-    - Meat
   - type: Sprite
     state: spidercutlet
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 3
-        - ReagentId: Fat
-          Quantity: 2
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 3
+      - ReagentId: Fat
+        Quantity: 2
   #SS220-grilling-cutlets-tweaks begin
 #  - type: Construction
 #    graph: SpiderCutlet
@@ -2110,9 +1910,6 @@
     cookingResult: FoodMeatSpiderCutletCooked
   #SS220-grilling-cutlets-tweaks end
   - type: Item
-    size: Tiny
-    shape:
-    - 0,0,0,0
     inhandVisuals:
       left:
       - state: generic-pink-inhand-left
@@ -2131,19 +1928,13 @@
     flavors:
       - meaty
       - acid
-  - type: Tag
-    tags:
-    - Raw
-    - Cutlet
-    - Meat
   - type: Sprite
     state: xenocutlet
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: SulfuricAcid
-          Quantity: 20
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: SulfuricAcid
+        Quantity: 20
   #SS220-grilling-cutlets-tweaks begin
 #  - type: Construction
 #    graph: XenoCutlet
@@ -2154,9 +1945,6 @@
     cookingResult: FoodMeatXenoCutletCooked
   #SS220-grilling-cutlets-tweaks end
   - type: Item
-    size: Tiny
-    shape:
-    - 0,0,0,0
     inhandVisuals:
       left:
       - state: generic-pink-inhand-left
@@ -2172,9 +1960,6 @@
   description: A cutlet from a slab of tomato.
   components:
   - type: Item
-    size: Tiny
-    shape:
-    - 0,0,0,0
     storedOffset: -1,0
   - type: Tag
     tags:
@@ -2193,25 +1978,9 @@
   description: A slice of cured salami.
   components:
   - type: Item
-    size: Tiny
-    shape:
-    - 0,0,0,0
     storedOffset: -1,0
-  - type: Tag
-    tags:
-    - Raw
-    - Cutlet
-    - Meat
   - type: Sprite
     state: salami-slice
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 1
-        - ReagentId: Protein
-          Quantity: 1
 
 - type: entity
   parent: FoodCutletBase #SS220-grill-update-2
@@ -2219,22 +1988,18 @@
   name: raw dragon cutlet
   description: A raw dragon meat cutlet.
   components:
-  - type: Tag
-    tags:
-    - Raw
-    - Cutlet
-    - Meat
   - type: Sprite
     layers:
     - state: dragoncutlet
     - state: dragoncutlet_veins
       shader: unshaded
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Ichor
-          Quantity: 3
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Protein
+        Quantity: 4
+      - ReagentId: Ichor
+        Quantity: 2
   #SS220-grilling-cutlets-tweaks begin
 #  - type: Construction
 #    graph: DragonCutlet
@@ -2245,9 +2010,6 @@
     cookingResult: FoodMeatDragonCutletCooked
   #SS220-grilling-cutlets-tweaks end
   - type: Item
-    size: Tiny
-    shape:
-    - 0,0,0,0
     inhandVisuals:
       left:
       - state: generic-pink-inhand-left
@@ -2259,26 +2021,31 @@
 # Cooked
 
 - type: entity
-  parent: FoodMeatBase
-  id: FoodMeatCutletCooked
-  name: cutlet
-  description: A cooked meat cutlet. Needs some seasoning.
+  abstract: true
+  parent: FoodMeatCutletBase
+  id: FoodMeatCutletCookedBase
   components:
   - type: Tag
     tags:
     - Cooked
     - Cutlet
     - Meat
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 4
+      - ReagentId: Protein
+        Quantity: 2
+
+- type: entity
+  parent: FoodMeatCutletCookedBase
+  id: FoodMeatCutletCooked
+  name: cutlet
+  description: A cooked meat cutlet. Needs some seasoning.
+  components:
   - type: Sprite
     state: cutlet-cooked
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 2
-        - ReagentId: Protein
-          Quantity: 2
   - type: Construction
     graph: Cutlet
     node: cutlet
@@ -2287,9 +2054,6 @@
       Burger: MeatCutlet
       Taco: MeatCutlet
   - type: Item
-    size: Tiny
-    shape:
-    - 0,0,0,0
     storedOffset: -1,1
     inhandVisuals:
       left:
@@ -2300,29 +2064,16 @@
         color: "#5B3614"
 
 - type: entity
-  parent: FoodMeatBase
+  parent: FoodMeatCutletCookedBase
   id: FoodMeatBearCutletCooked
   name: bear cutlet
   description: A very manly cutlet of cooked bear meat.
   components:
-  - type: Tag
-    tags:
-    - Cooked
-    - Cutlet
-    - Meat
   - type: Sprite
     layers:
     - state: cutlet-cooked
     - state: cutlet-alpha
       color: brown
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 2
-        - ReagentId: Protein
-          Quantity: 2
   - type: Construction
     graph: BearCutlet
     node: bear cutlet
@@ -2331,9 +2082,6 @@
       Burger: BearCutletBurger
       Taco: BearCutlet
   - type: Item
-    size: Tiny
-    shape:
-    - 0,0,0,0
     storedOffset: -1,1
     inhandVisuals:
       left:
@@ -2344,27 +2092,14 @@
         color: "#5B3614"
 
 - type: entity
-  parent: FoodMeatBase
+  parent: FoodMeatCutletCookedBase
   id: FoodMeatPenguinCutletCooked
   name: penguin cutlet
   description: A cutlet of cooked penguin meat.
   components:
-  - type: Tag
-    tags:
-    - Cooked
-    - Cutlet
-    - Meat
   - type: Sprite
     state: cutlet-cooked
     color: white
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 2
-        - ReagentId: Protein
-          Quantity: 2
   - type: Construction
     graph: PenguinCutlet
     node: penguin cutlet
@@ -2373,9 +2108,6 @@
       Burger: PenguinCutletBurger
       Taco: PenguinCutlet
   - type: Item
-    size: Tiny
-    shape:
-    - 0,0,0,0
     storedOffset: -1,1
     inhandVisuals:
       left:
@@ -2386,27 +2118,14 @@
         color: "#5B3614"
 
 - type: entity
-  parent: FoodMeatBase
+  parent: FoodMeatCutletCookedBase
   id: FoodMeatChickenCutletCooked
   name: chicken cutlet
   description: A cutlet of cooked chicken. Remember to wash your hands!
   components:
-  - type: Tag
-    tags:
-    - Cooked
-    - Cutlet
-    - Meat
   - type: Sprite
     state: cutlet-cooked
     color: white
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 2
-        - ReagentId: Protein
-          Quantity: 2
   - type: Construction
     graph: ChickenCutlet
     node: chicken cutlet
@@ -2415,9 +2134,6 @@
       Burger: ChickenCutlet
       Taco: ChickenCutlet
   - type: Item
-    size: Tiny
-    shape:
-    - 0,0,0,0
     storedOffset: -1,1
     inhandVisuals:
       left:
@@ -2428,27 +2144,14 @@
         color: "#5B3614"
 
 - type: entity
-  parent: FoodMeatBase
+  parent: FoodMeatCutletCookedBase
   id: FoodMeatDuckCutletCooked
   name: duck cutlet
   description: A cutlet of cooked duck. Remember to wash your hands!
   components:
-  - type: Tag
-    tags:
-    - Cooked
-    - Cutlet
-    - Meat
   - type: Sprite
     state: cutlet-cooked
     color: white
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 2
-        - ReagentId: Protein
-          Quantity: 2
   - type: Construction
     graph: DuckCutlet
     node: duck cutlet
@@ -2457,9 +2160,6 @@
       Burger: DuckCutlet
       Taco: DuckCutlet
   - type: Item
-    size: Tiny
-    shape:
-    - 0,0,0,0
     storedOffset: -1,1
     inhandVisuals:
       left:
@@ -2470,28 +2170,15 @@
         color: "#5B3614"
 
 - type: entity
-  parent: FoodMeatBase
+  parent: FoodMeatCutletCookedBase
   id: FoodMeatLizardCutletCooked
   name: lizard cutlet
   description: Delicious cooked dino cutlet.
   components:
-  - type: Tag
-    tags:
-    - Cooked
-    - Cutlet
-    - Meat
   - type: Sprite
     layers:
     - state: cutlet-cooked
       color: green
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 2
-        - ReagentId: Protein
-          Quantity: 2
   - type: Construction
     graph: LizardCutlet
     node: lizard cutlet
@@ -2500,9 +2187,6 @@
       Burger: LizardCutletBurger
       Taco: LizardCutlet
   - type: Item
-    size: Tiny
-    shape:
-    - 0,0,0,0
     storedOffset: -1,1
     inhandVisuals:
       left:
@@ -2513,26 +2197,13 @@
         color: "#153F06"
 
 - type: entity
-  parent: FoodMeatBase
+  parent: FoodMeatCutletCookedBase
   id: FoodMeatSpiderCutletCooked
   name: spider cutlet
   description: A cutlet of cooked spider meat. Finally edible.
   components:
-  - type: Tag
-    tags:
-    - Cooked
-    - Cutlet
-    - Meat
   - type: Sprite
     state: spidercutlet-cooked
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 1
-        - ReagentId: Protein
-          Quantity: 1
   - type: Construction
     graph: SpiderCutlet
     node: spider cutlet
@@ -2541,9 +2212,6 @@
       Burger: SpiderCutletBurger
       Taco: SpiderCutlet
   - type: Item
-    size: Tiny
-    shape:
-    - 0,0,0,0
     storedOffset: -1,0
     inhandVisuals:
       left:
@@ -2554,26 +2222,13 @@
         color: "#153F06"
 
 - type: entity
-  parent: FoodMeatBase
+  parent: FoodMeatCutletCookedBase
   id: FoodMeatXenoCutletCooked
   name: xeno cutlet
   description: A cutlet of cooked xeno, dripping with... tastiness?
   components:
-  - type: Tag
-    tags:
-    - Cooked
-    - Cutlet
-    - Meat
   - type: Sprite
     state: xenocutlet-cooked
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 1
-        - ReagentId: Protein
-          Quantity: 1
   - type: Construction
     graph: XenoCutlet
     node: xeno cutlet
@@ -2582,9 +2237,6 @@
       Burger: XenoCutlet
       Taco: XenoCutlet
   - type: Item
-    size: Tiny
-    shape:
-    - 0,0,0,0
     storedOffset: -1,1
     inhandVisuals:
       left:
@@ -2595,28 +2247,22 @@
         color: "#153F06"
 
 - type: entity
-  parent: FoodMeatBase
+  parent: FoodMeatCutletCookedBase
   id: FoodMeatDragonCutletCooked
   name: dragon cutlet
   description: It's a meal for kings!
   components:
-  - type: Tag
-    tags:
-    - Cooked
-    - Cutlet
-    - Meat
   - type: Sprite
     state: dragoncutlet-cooked
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Ichor
-          Quantity: 2
-        - ReagentId: Nutriment
-          Quantity: 2
-        - ReagentId: Protein
-          Quantity: 2
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Ichor
+        Quantity: 1
+      - ReagentId: Nutriment
+        Quantity: 3
+      - ReagentId: Protein
+        Quantity: 3
   - type: Construction
     graph: DragonCutlet
     node: dragon cutlet
@@ -2625,9 +2271,6 @@
       Burger: DragonCutlet
       Taco: DragonCutlet
   - type: Item
-    size: Tiny
-    shape:
-    - 0,0,0,0
     storedOffset: -1,1
     inhandVisuals:
       left:

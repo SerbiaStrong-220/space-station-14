@@ -175,7 +175,7 @@
     bloodReferenceSolution:
       reagents:
       - ReagentId: InsectBlood
-        Quantity: 300
+        Quantity: 600
   - type: DamageVisuals
     damageOverlayGroups:
       Brute:
@@ -185,10 +185,7 @@
         sprite: Mobs/Effects/burn_damage.rsi
   - type: MothAccent
   - type: Vocal
-    sounds:
-      Male: MaleMoth #ss220-fix
-      Female: FemaleMoth #ss220-fix
-      Unsexed: UnisexMoth
+    emoteSounds: UnisexMoth
   - type: BodyEmotes
     soundsId: MothBodyEmotes
   - type: MovementSpeedModifier
@@ -233,7 +230,7 @@
   #SS220-TweakDamageSpecies-End
 
 - type: entity
-  parent: OrganBase
+  parent: OrganBaseOrganic
   id: OrganMoth
   abstract: true
   suffix: Moth

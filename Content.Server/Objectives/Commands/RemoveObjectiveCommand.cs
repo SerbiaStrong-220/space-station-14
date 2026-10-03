@@ -10,11 +10,11 @@ using Robust.Shared.Console;
 namespace Content.Server.Objectives.Commands
 {
     [AdminCommand(AdminFlags.Admin)]
-    public sealed class RemoveObjectiveCommand : LocalizedEntityCommands
+    public sealed partial class RemoveObjectiveCommand : LocalizedEntityCommands
     {
-        [Dependency] private readonly IPlayerManager _players = default!;
-        [Dependency] private readonly SharedMindSystem _mind = default!;
-        [Dependency] private readonly SharedObjectivesSystem _objectives = default!;
+        [Dependency] private IPlayerManager _players = default!;
+        [Dependency] private SharedMindSystem _mind = default!;
+        [Dependency] private SharedObjectivesSystem _objectives = default!;
 
         // ss220 add custom antag goals start
         [Dependency] private readonly IChatManager _chatManager = default!;

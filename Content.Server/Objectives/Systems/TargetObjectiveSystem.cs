@@ -12,10 +12,10 @@ namespace Content.Server.Objectives.Systems;
 /// <summary>
 /// Provides API for other components and handles setting the title.
 /// </summary>
-public sealed class TargetObjectiveSystem : EntitySystem
+public sealed partial class TargetObjectiveSystem : EntitySystem
 {
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly SharedJobSystem _job = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private SharedJobSystem _job = default!;
 
     // ss220 add custom antag goals start
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;

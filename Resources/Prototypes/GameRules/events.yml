@@ -14,7 +14,6 @@
     - id: IonStorm # its calm like 90% of the time smh
     - id: KudzuGrowth
     - id: MassHallucinations
-    - id: MimicVendorRule
     - id: MouseMigration
     - id: PowerGridCheck
     - id: GravityGeneratorAnomaly # SS220-add-gravity-anomaly
@@ -69,6 +68,14 @@
       weight: 15
       children:
         - id: DerelictSyndicateAssaultCyborgSpawn
+
+- type: entity
+  abstract: true
+  parent: BaseGameRule
+  id: BaseAntagGhostRoleRule
+  components:
+  - type: AntagSelection
+    selectionTime: Never
 
 - type: entity
   id: BaseStationEvent
@@ -217,7 +224,7 @@
 #     prototype: MobSkeletonCloset
 
 - type: entity
-  parent: BaseGameRule
+  parent: BaseAntagGhostRoleRule
   id: DragonSpawn
   components:
   - type: StationEvent
@@ -226,6 +233,7 @@
     reoccurrenceDelay: 20
     minimumPlayers: 20
     duration: null
+    occursDuringRoundEnd: false
   - type: SpaceSpawnRule
     spawnDistance: 0
   - type: AntagSpawner
@@ -237,23 +245,20 @@
     - DragonSurviveObjective
   - type: AntagSelection
     agentName: dragon-round-end-agent-name
-    definitions:
-    - spawnerPrototype: SpawnPointGhostDragon
-      min: 1
-      max: 1
-      pickPlayer: false
-      mindRoles:
-      - MindRoleDragon
+    antags:
+    - !type:FixedAntagCount
+      proto: Dragon
   - type: DynamicRuleCost
     cost: 75
 
 - type: entity
-  parent: BaseGameRule
+  parent: BaseAntagGhostRoleRule
   id: NinjaSpawn
   components:
   - type: StationEvent
     weight: 9 # ss220 upraise midround events
     duration: null
+    occursDuringRoundEnd: false
     earliestStart: 30
     reoccurrenceDelay: 20
     minimumPlayers: 30
@@ -321,12 +326,13 @@
     cost: 75
 
 - type: entity
-  parent: BaseGameRule
+  parent: BaseAntagGhostRoleRule
   id: ParadoxCloneSpawn
   components:
   - type: StationEvent
     weight: 8 # ss220 upraise midround events
     duration: null
+    occursDuringRoundEnd: false
     earliestStart: 20
     reoccurrenceDelay: 20
     minimumPlayers: 15
@@ -341,20 +347,9 @@
   - type: AntagRandomSpawn # TODO: improve spawning so they only start in maints
   - type: AntagSelection
     agentName: paradox-clone-round-end-agent-name
-    definitions:
-    - spawnerPrototype: SpawnPointGhostParadoxClone
-      min: 1
-      max: 1
-      pickPlayer: false
-      startingGear: ParadoxCloneGear
-      roleLoadout:
-      - RoleSurvivalVoxTank # give vox something to breath in case they don't get a copy
-      briefing:
-        text: paradox-clone-role-greeting
-        color: lightblue
-        sound: /Audio/Misc/paradox_clone_greeting.ogg
-      mindRoles:
-      - MindRoleParadoxClone
+    antags:
+    - !type:FixedAntagCount
+      proto: ParadoxClone
   - type: DynamicRuleCost
     cost: 50
 
@@ -365,49 +360,23 @@
   - type: StationEvent
     weight: 10.5 # ss220 upraise midround events
     duration: 1
+    occursDuringRoundEnd: false
     earliestStart: 45
     minimumPlayers: 20
   - type: RandomSpawnRule
     prototype: MobRevenant
 
 - type: entity
-  parent: BaseWizardRule
+  parent: [ BaseAntagGhostRoleRule, BaseWizardRule ]
   id: WizardSpawn
   components:
   - type: StationEvent
     weight: 0.2 # ss220 upraise midround events
     duration: 1
+    occursDuringRoundEnd: false
     earliestStart: 30
     reoccurrenceDelay: 60
     minimumPlayers: 30
-  - type: AntagSelection
-    agentName: wizard-round-end-name
-    definitions:
-    - spawnerPrototype: SpawnPointGhostWizard
-      min: 1
-      max: 1
-      playerRatio: 1
-      pickPlayer: false
-      startingGear: WizardBlueGear
-      roleLoadout:
-      - RoleSurvivalExtended
-      briefing:
-        text: wizard-role-greeting
-        color: Turquoise
-        # TODO: Need Wizard Start sound
-        #sound: "/Audio/Ambience/Antag/wizard_start.ogg"
-      # TODO: WizardComp as needed
-      components:
-      - type: NpcFactionMember
-        factions:
-        - Wizard
-      - type: RandomMetadata
-        nameSegments:
-        - NamesWizardFirst
-        - NamesWizardLast
-        nameFormat: name-format-wizard
-      mindRoles:
-      - MindRoleWizard
 
 # disabled until event is rewritten to be more interesting
 #- type: entity
@@ -669,7 +638,7 @@
     cost: 200
 
 - type: entity
-  parent: BaseNukeopsRule
+  parent: [ BaseAntagGhostRoleRule, BaseNukeopsRule ]
   id: LoneOpsSpawn
   components:
   - type: StationEvent
@@ -678,6 +647,7 @@
     weight: 5.5
     minimumPlayers: 20
     duration: null # LoneOpsSpawn needs an infinite duration so that it inherits the NukeOpsRule things of an actually appropriate end screen (not always "Neutral outcome!") and... ending the game if the station is nuked.
+    occursDuringRoundEnd: false
   - type: RuleGrids
   - type: LoadMapRule
     gridPath: /Maps/Shuttles/ShuttleEvent/striker.yml
@@ -797,17 +767,6 @@
   #ss220 mindshield destructiuon #3500 end
 
 - type: entity
-  id: MimicVendorRule
-  parent: BaseGameRule
-  components:
-  - type: StationEvent
-    earliestStart: 0
-    minimumPlayers: 20
-    maxOccurrences: 1 # this event has diminishing returns on interesting-ness, so we cap it
-    weight: 5
-  - type: MobReplacementRule
-
-- type: entity
   id: GreytideVirus
   parent: BaseStationEventShortDelay
   components:
@@ -853,8 +812,9 @@
     prototype: RandomSatchelSpawner
 
 - type: entity
-  parent: BaseGameRule
-  id: DerelictEngineerCyborgSpawn
+  abstract: true
+  parent: BaseAntagGhostRoleRule
+  id: BaseDerelictCyborgSpawn
   components:
   - type: StationEvent
     weight: 2.5
@@ -862,118 +822,75 @@
     reoccurrenceDelay: 20
     minimumPlayers: 4
     duration: null
+    occursDuringRoundEnd: false
   - type: SpaceSpawnRule
     spawnDistance: 0
+
+- type: entity
+  parent: BaseDerelictCyborgSpawn
+  id: DerelictEngineerCyborgSpawn
+  components:
   - type: AntagSpawner
     prototype: PlayerEngineeringBorgDerelictGhostRole
   - type: AntagSelection
-    definitions:
-    - spawnerPrototype: SpawnPointGhostDerelictEngineeringCyborg
-      min: 1
-      max: 1
-      pickPlayer: false
+    antags:
+    - !type:FixedAntagCount
+      proto: DerelictEngineeringCyborg
 
 - type: entity
-  parent: BaseGameRule
+  parent: BaseDerelictCyborgSpawn
   id: DerelictGenericCyborgSpawn
   components:
-  - type: StationEvent
-    weight: 2.5
-    earliestStart: 15
-    reoccurrenceDelay: 20
-    minimumPlayers: 4
-    duration: null
-  - type: SpaceSpawnRule
-    spawnDistance: 0
   - type: AntagSpawner
     prototype: PlayerBorgDerelictGhostRole
   - type: AntagSelection
-    definitions:
-    - spawnerPrototype: SpawnPointGhostDerelictCyborg
-      min: 1
-      max: 1
-      pickPlayer: false
+    antags:
+    - !type:FixedAntagCount
+      proto: DerelictGenericCyborg
 
 - type: entity
-  parent: BaseGameRule
+  parent: BaseDerelictCyborgSpawn
   id: DerelictJanitorCyborgSpawn
   components:
-  - type: StationEvent
-    weight: 2.5
-    earliestStart: 15
-    reoccurrenceDelay: 20
-    minimumPlayers: 4
-    duration: null
-  - type: SpaceSpawnRule
-    spawnDistance: 0
   - type: AntagSpawner
     prototype: PlayerJanitorBorgDerelictGhostRole
   - type: AntagSelection
-    definitions:
-    - spawnerPrototype: SpawnPointGhostDerelictJanitorCyborg
-      min: 1
-      max: 1
-      pickPlayer: false
+    antags:
+    - !type:FixedAntagCount
+      proto: DerelictJanitorCyborg
 
 - type: entity
-  parent: BaseGameRule
+  parent: BaseDerelictCyborgSpawn
   id: DerelictMedicalCyborgSpawn
   components:
-  - type: StationEvent
-    weight: 2.5
-    earliestStart: 15
-    reoccurrenceDelay: 20
-    minimumPlayers: 4
-    duration: null
-  - type: SpaceSpawnRule
-    spawnDistance: 0
   - type: AntagSpawner
     prototype: PlayerMedicalBorgDerelictGhostRole
   - type: AntagSelection
-    definitions:
-    - spawnerPrototype: SpawnPointGhostDerelictMedicalCyborg
-      min: 1
-      max: 1
-      pickPlayer: false
+    antags:
+    - !type:FixedAntagCount
+      proto: DerelictMedicalCyborg
 
 - type: entity
-  parent: BaseGameRule
+  parent: BaseDerelictCyborgSpawn
   id: DerelictMiningCyborgSpawn
   components:
-  - type: StationEvent
-    weight: 2.5
-    earliestStart: 15
-    reoccurrenceDelay: 20
-    minimumPlayers: 4
-    duration: null
-  - type: SpaceSpawnRule
-    spawnDistance: 0
   - type: AntagSpawner
     prototype: PlayerMiningBorgDerelictGhostRole
   - type: AntagSelection
-    definitions:
-    - spawnerPrototype: SpawnPointGhostDerelictMiningCyborg
-      min: 1
-      max: 1
-      pickPlayer: false
+    antags:
+    - !type:FixedAntagCount
+      proto: DerelictMiningCyborg
 
 - type: entity
-  parent: BaseGameRule
+  parent: BaseDerelictCyborgSpawn
   id: DerelictSyndicateAssaultCyborgSpawn
   components:
   - type: StationEvent
-    weight: 2.5
     earliestStart: 25
-    reoccurrenceDelay: 20
     minimumPlayers: 15
-    duration: null
-  - type: SpaceSpawnRule
-    spawnDistance: 0
   - type: AntagSpawner
     prototype: PlayerBorgSyndicateDerelictGhostRole
   - type: AntagSelection
-    definitions:
-    - spawnerPrototype: SpawnPointGhostDerelictSyndicateAssaultCyborg
-      min: 1
-      max: 1
-      pickPlayer: false
+    antags:
+    - !type:FixedAntagCount
+      proto: DerelictSyndicateAssaultCyborg

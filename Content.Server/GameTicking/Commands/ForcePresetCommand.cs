@@ -10,11 +10,11 @@ using Robust.Shared.Prototypes;
 namespace Content.Server.GameTicking.Commands
 {
     [AdminCommand(AdminFlags.Round)]
-    public sealed class ForcePresetCommand : LocalizedEntityCommands
+    public sealed partial class ForcePresetCommand : LocalizedEntityCommands
     {
         [Dependency] private readonly IAdminLogManager _adminLogger = default!; // SS220-add-logs
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-        [Dependency] private readonly GameTicker _ticker = default!;
+        [Dependency] private IPrototypeManager _prototypeManager = default!;
+        [Dependency] private GameTicker _ticker = default!;
 
         public override string Command => "forcepreset";
 

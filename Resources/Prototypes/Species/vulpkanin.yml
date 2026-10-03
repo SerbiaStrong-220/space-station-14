@@ -14,3 +14,10 @@
   # lastNames: names_vulpkanin_last # wizden one
   # SS220-fix-last-names-end
   buttScanTexture: /Textures/SS220/Interface/Butts/vulp.png #SS220-port-vulpkanins
+  defaultSoundsBySex:
+  - MaleVulpkanin
+  - FemaleVulpkanin
+  - MaleVulpkanin
+  voices:
+  - MaleVulpkanin
+  - FemaleVulpkanin

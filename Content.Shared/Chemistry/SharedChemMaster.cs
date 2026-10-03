@@ -114,13 +114,15 @@ namespace Content.Shared.Chemistry
         U10 = 10,
         U15 = 15,
         U20 = 20,
-        U25 = 25,
         U30 = 30,
+        U40 = 40,
         U50 = 50,
+        U60 = 60,
         //ss220 add 75u for chemmaster start
         U75 = 75,
         //ss220 add 75u for chemmaster end
         U100 = 100,
+        U120 = 120,
         All,
     }
 

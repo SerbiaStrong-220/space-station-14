@@ -2004,7 +2004,7 @@
   id: UplinkStorageImplanter
   name: uplink-storage-implanter-name
   description: uplink-storage-implanter-desc
-  icon: { sprite: /Textures/Clothing/Back/Backpacks/backpack.rsi, state: icon }
+  icon: { sprite: /Textures/SS220/Clothing/Back/Backpacks/backpack.rsi, state: icon }
   productEntity: StorageImplanter
   discountCategory: rareDiscounts
   discountDownTo:

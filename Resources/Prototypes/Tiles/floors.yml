@@ -193,11 +193,6 @@
   name: tiles-steel-floor-slats-continuous
   sprite: /Textures/Tiles/steel_slats_continuous.png
   variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   itemDrop: FloorTileItemSteelSlatsContinuous
   allowRotationMirror: true
 
@@ -207,11 +202,6 @@
   name: tiles-steel-floor-horizontal-slats-bordered
   sprite: /Textures/Tiles/steel_horizontal_slats_bordered.png
   variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   itemDrop: FloorTileItemSteelHorizontalSlatsBordered
 
 - type: tile
@@ -266,11 +256,6 @@
   name: tiles-wood
   sprite: /Textures/Tiles/wood.png
   variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   footstepSounds:
     collection: FootstepWood
   barestepSounds:
@@ -317,11 +302,6 @@
   name: tiles-white-floor-slats-continuous
   sprite: /Textures/Tiles/white_slats_continuous.png
   variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   itemDrop: FloorTileItemWhiteSlatsContinuous
   allowRotationMirror: true
 
@@ -331,11 +311,6 @@
   name: tiles-white-floor-vertical-slats-bordered
   sprite: /Textures/Tiles/white_vertical_slats_bordered.png
   variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   itemDrop: FloorTileItemWhiteVerticalSlatsBordered
 
 - type: tile
@@ -344,11 +319,6 @@
   name: tiles-white-floor-horizontal-slats-bordered
   sprite: /Textures/Tiles/white_horizontal_slats_bordered.png
   variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   itemDrop: FloorTileItemWhiteHorizontalSlatsBordered
 
 - type: tile
@@ -518,11 +488,6 @@
   name: tiles-dark-floor-slats-continuous
   sprite: /Textures/Tiles/dark_slats_continuous.png
   variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   itemDrop: FloorTileItemDarkSlatsContinuous
   allowRotationMirror: true
 
@@ -532,11 +497,6 @@
   name: tiles-dark-floor-vertical-slats-bordered
   sprite: /Textures/Tiles/dark_vertical_slats_bordered.png
   variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   itemDrop: FloorTileItemDarkVerticalSlatsBordered
 
 - type: tile
@@ -545,11 +505,6 @@
   name: tiles-dark-floor-horizontal-slats-bordered
   sprite: /Textures/Tiles/dark_horizontal_slats_bordered.png
   variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   itemDrop: FloorTileItemDarkHorizontalSlatsBordered
 
 - type: tile
@@ -929,12 +884,6 @@
   name: tiles-steel-floor
   sprite: /Textures/Tiles/steel_damaged.png
   variants: 5
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   itemDrop: FloorTileItemSteel #This should probably be made null when it becomes possible to make it such, in SS13 prying destroyed tiles wouldn't give you anything.
 
 # Concrete
@@ -944,11 +893,6 @@
   name: tiles-concrete-tile
   sprite: /Textures/SS220/Tiles/concrete.png # SS220 Tiles Retexture
   variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemConcrete
@@ -959,11 +903,6 @@
   name: tiles-concrete-slab
   sprite: /Textures/SS220/Tiles/concrete_mono.png # SS220 Tiles Retexture
   variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemConcreteMono
@@ -974,11 +913,6 @@
   name: tiles-concrete-smooth
   sprite: /Textures/SS220/Tiles/concrete_smooth.png # SS220 Tiles Retexture
   variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemConcreteSmooth
@@ -989,11 +923,6 @@
   name: tiles-gray-concrete-tile
   sprite: /Textures/SS220/Tiles/grayconcrete.png # SS220 Tiles Retexture
   variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemGrayConcrete
@@ -1004,11 +933,6 @@
   name: tiles-gray-concrete-slab
   sprite: /Textures/SS220/Tiles/grayconcrete_mono.png # SS220 Tiles Retexture
   variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemGrayConcreteMono
@@ -1019,11 +943,6 @@
   name: tiles-gray-concrete-smooth
   sprite: /Textures/SS220/Tiles/grayconcrete_smooth.png # SS220 Tiles Retexture
   variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemGrayConcreteSmooth
@@ -1034,11 +953,6 @@
   name: tiles-old-concrete-tile
   sprite: /Textures/SS220/Tiles/oldconcrete.png # SS220 Tiles Retexture
   variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemOldConcrete
@@ -1049,11 +963,6 @@
   name: tiles-old-concrete-slab
   sprite: /Textures/SS220/Tiles/oldconcrete_mono.png # SS220 Tiles Retexture
   variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemOldConcreteMono
@@ -1064,11 +973,6 @@
   name: tiles-old-concrete-smooth
   sprite: /Textures/SS220/Tiles/oldconcrete_smooth.png # SS220 Tiles Retexture
   variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemOldConcreteSmooth
@@ -1156,11 +1060,6 @@
   tags: [ tile-tag-other ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/boxing.png
   variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   friction: 1.25
   itemDrop: FloorTileItemBoxing
 
@@ -1171,11 +1070,6 @@
   tags: [ tile-tag-other ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/gym.png
   variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   friction: 1.25
   itemDrop: FloorTileItemGym
 
@@ -1350,462 +1244,6 @@
   - 1.0
   footstepSounds:
     collection: FootstepHull
-  itemDrop: SheetSteel1
-
-# Circuits
-- type: tile
-  id: FloorGreenCircuit
-  parent: BaseStationTile
-  name: tiles-green-circuit-floor
-  sprite: /Textures/SS220/Tiles/green_circuit.png # SS220 Tiles Retexture
-  variants: 4 # SS220 Tile Resprite start
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0 # SS220 Tile Resprite end
-  footstepSounds:
-    collection: FootstepHull
-  itemDrop: FloorTileItemGCircuit
-
-- type: tile
-  id: FloorBlueCircuit
-  parent: BaseStationTile
-  name: tiles-blue-circuit-floor
-  sprite: /Textures/SS220/Tiles/blue_circuit.png # SS220 Tiles Retexture
-  variants: 4 # SS220 Tile Resprite start
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0 # SS220 Tile Resprite end
-  footstepSounds:
-    collection: FootstepHull
-  itemDrop: FloorTileItemBCircuit
-
-# SS220-own-tiles-begin
-# - type: tile
-#   id: FloorRedCircuit
-#   parent: BaseStationTile
-#   name: tiles-red-circuit-floor
-#   sprite: /Textures/Tiles/red_circuit.png
-#   footstepSounds:
-#     collection: FootstepHull
-#   itemDrop: FloorTileItemRCircuit
-# SS220-own-tiles-end
-
-# Terrain
-- type: tile
-  id: FloorAsphalt
-  name: tiles-asphalt
-  tags: [ tile-tag-nature ] # SS220 Tiles Resprite
-  sprite: /Textures/Tiles/Planet/Concrete/asphalt.png
-  variants: 10
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  baseTurf: FloorDirt
-  isSubfloor: true
-  footstepSounds:
-    collection: FootstepTile
-  heatCapacity: 10000
-  weather: true
-
-- type: tile
-  id: FloorGrass
-  name: tiles-planet-grass-floor
-  tags: [ tile-tag-nature ] # SS220 Tiles Resprite
-  sprite: /Textures/Tiles/grass.png
-  baseTurf: FloorDirt
-  isSubfloor: true
-  footstepSounds:
-    collection: FootstepGrass
-  itemDrop: FloorTileItemGrass
-  heatCapacity: 10000
-  weather: true
-
-- type: tile
-  id: FloorGrassJungle
-  name: tiles-jungle-grass-floor
-  tags: [ tile-tag-nature ] # SS220 Tiles Resprite
-  sprite: /Textures/Tiles/grassjungle.png
-  baseTurf: FloorDirt
-  isSubfloor: true
-  footstepSounds:
-    collection: FootstepGrass
-  itemDrop: FloorTileItemGrassJungle
-  heatCapacity: 10000
-  weather: true
-
-- type: tile
-  id: FloorGrassDark
-  name: tiles-dark-grass-floor
-  tags: [ tile-tag-nature ] # SS220 Tiles Resprite
-  sprite: /Textures/Tiles/grassdark.png
-  variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  baseTurf: FloorDirt
-  isSubfloor: true
-  footstepSounds:
-    collection: FootstepGrass
-  heatCapacity: 10000
-  weather: true
-
-- type: tile
-  id: FloorGrassLight
-  name: tiles-light-grass-floor
-  tags: [ tile-tag-nature ] # SS220 Tiles Resprite
-  sprite: /Textures/Tiles/grasslight.png
-  variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  baseTurf: FloorDirt
-  isSubfloor: true
-  footstepSounds:
-    collection: FootstepGrass
-  heatCapacity: 10000
-  weather: true
-
-- type: tile
-  id: FloorDirt
-  name: tiles-dirt-floor
-  tags: [ tile-tag-nature ] # SS220 Tiles Resprite
-  sprite: /Textures/Tiles/dirt.png
-  variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  baseTurf: Plating
-  isSubfloor: true
-  footstepSounds:
-    collection: FootstepAsteroid
-  heatCapacity: 10000
-  weather: true
-
-# Asteroid
-
-- type: tile
-  id: FloorAsteroidSandBorderless
-  name: tiles-asteroid-sand-borderless
-  tags: [ tile-tag-nature ] # SS220 Tiles Resprite
-  sprite: /Textures/Tiles/Asteroid/asteroid.png
-  variants: 13
-  placementVariants:
-    - 0.8
-    - 0.0166 #Should be roughly 20%.... I think??? I don't know dude, I'm just a YAML monkey.
-    - 0.0166
-    - 0.0166
-    - 0.0166
-    - 0.0166
-    - 0.0166
-    - 0.0166
-    - 0.0166
-    - 0.0166
-    - 0.0166
-    - 0.0116
-    - 0.0116
-  baseTurf: Space
-  isSubfloor: true
-  footstepSounds:
-    collection: FootstepAsteroid
-  heatCapacity: 10000
-  weather: true
-
-- type: tile
-  id: FloorAsteroidSand
-  parent: FloorAsteroidSandBorderless
-  name: tiles-asteroid-sand
-  tags: [ tile-tag-nature ] # SS220 Tiles Resprite
-  edgeSpritePriority: 1
-  edgeSprites:
-    SouthEast: /Textures/Tiles/Asteroid/asteroid_single_edge.png
-    NorthEast: /Textures/Tiles/Asteroid/asteroid_single_edge.png
-    NorthWest: /Textures/Tiles/Asteroid/asteroid_single_edge.png
-    SouthWest: /Textures/Tiles/Asteroid/asteroid_single_edge.png
-    South: /Textures/Tiles/Asteroid/asteroid_double_edge.png
-    East: /Textures/Tiles/Asteroid/asteroid_double_edge.png
-    North: /Textures/Tiles/Asteroid/asteroid_double_edge.png
-    West: /Textures/Tiles/Asteroid/asteroid_double_edge.png
-
-- type: tile
-  id: FloorAsteroidSandDugBorderless
-  name: tiles-asteroid-sand-borderless
-  sprite: /Textures/Tiles/Asteroid/asteroid_dug.png
-  baseTurf: Space
-  isSubfloor: true
-  footstepSounds:
-    collection: FootstepAsteroid
-  heatCapacity: 10000
-  weather: true
-
-- type: tile
-  id: FloorAsteroidSandDug
-  parent: FloorAsteroidSandDugBorderless
-  name: tiles-asteroid-sand
-  tags: [ tile-tag-nature ] # SS220 Tiles Resprite
-  edgeSpritePriority: 1
-  edgeSprites:
-    SouthEast: /Textures/Tiles/Asteroid/asteroid_single_edge.png
-    NorthEast: /Textures/Tiles/Asteroid/asteroid_single_edge.png
-    NorthWest: /Textures/Tiles/Asteroid/asteroid_single_edge.png
-    SouthWest: /Textures/Tiles/Asteroid/asteroid_single_edge.png
-    South: /Textures/Tiles/Asteroid/asteroid_double_edge.png
-    East: /Textures/Tiles/Asteroid/asteroid_double_edge.png
-    North: /Textures/Tiles/Asteroid/asteroid_double_edge.png
-    West: /Textures/Tiles/Asteroid/asteroid_double_edge.png
-
-- type: tile
-  id: FloorAsteroidSandRedBorderless
-  name: tiles-asteroid-sand-borderless
-  sprite: /Textures/Tiles/Asteroid/asteroid_red.png
-  variants: 13
-  placementVariants:
-  - 0.8
-  - 0.0166
-  - 0.0166
-  - 0.0166
-  - 0.0166
-  - 0.0166
-  - 0.0166
-  - 0.0166
-  - 0.0166
-  - 0.0166
-  - 0.0166
-  - 0.0116
-  - 0.0116
-  baseTurf: Space
-  isSubfloor: true
-  footstepSounds:
-    collection: FootstepAsteroid
-  heatCapacity: 10000
-  weather: true
-
-- type: tile
-  id: FloorAsteroidSandRed
-  parent: FloorAsteroidSandRedBorderless
-  name: tiles-asteroid-sand
-  edgeSpritePriority: 1
-  edgeSprites:
-    SouthEast: /Textures/Tiles/Asteroid/asteroid_single_edge.png
-    NorthEast: /Textures/Tiles/Asteroid/asteroid_single_edge.png
-    NorthWest: /Textures/Tiles/Asteroid/asteroid_single_edge.png
-    SouthWest: /Textures/Tiles/Asteroid/asteroid_single_edge.png
-    South: /Textures/Tiles/Asteroid/asteroid_double_edge.png
-    East: /Textures/Tiles/Asteroid/asteroid_double_edge.png
-    North: /Textures/Tiles/Asteroid/asteroid_double_edge.png
-    West: /Textures/Tiles/Asteroid/asteroid_double_edge.png
-
-- type: tile
-  id: FloorAsteroidTile
-  name: tiles-asteroid-tile
-  tags: [ tile-tag-nature ] # SS220 Tiles Resprite
-  sprite: /Textures/Tiles/Asteroid/asteroid_tile.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepAsteroid
-  heatCapacity: 10000
-  weather: true
-
-- type: tile
-  id: FloorAsteroidIronsandBorderless
-  name: tiles-asteroid-ironsand-borderless
-  tags: [ tile-tag-nature ] # SS220 Tiles Resprite
-  sprite: /Textures/Tiles/Asteroid/ironsand.png
-  variants: 15
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  baseTurf: Space
-  isSubfloor: true
-  footstepSounds:
-    collection: FootstepAsteroid
-  heatCapacity: 10000
-  weather: true
-
-- type: tile
-  id: FloorAsteroidIronsand
-  parent: FloorAsteroidIronsandBorderless
-  name: tiles-asteroid-ironsand
-  tags: [ tile-tag-nature ] # SS220 Tiles Resprite
-  edgeSpritePriority: 1
-  edgeSprites:
-    SouthEast: /Textures/Tiles/Asteroid/iron_single_edge.png
-    NorthEast: /Textures/Tiles/Asteroid/iron_single_edge.png
-    NorthWest: /Textures/Tiles/Asteroid/iron_single_edge.png
-    SouthWest: /Textures/Tiles/Asteroid/iron_single_edge.png
-    South: /Textures/Tiles/Asteroid/iron_double_edge.png
-    East: /Textures/Tiles/Asteroid/iron_double_edge.png
-    North: /Textures/Tiles/Asteroid/iron_double_edge.png
-    West: /Textures/Tiles/Asteroid/iron_double_edge.png
-
-- type: tile
-  id: FloorAsteroidSandUnvariantizedBorderless
-  name: tiles-asteroid-sand-borderless
-  sprite: /Textures/Tiles/Asteroid/asteroid0.png
-  baseTurf: Space
-  isSubfloor: true
-  footstepSounds:
-    collection: FootstepAsteroid
-  heatCapacity: 10000
-  weather: true
-
-- type: tile
-  id: FloorAsteroidSandUnvariantized
-  parent: FloorAsteroidSandUnvariantizedBorderless
-  name: tiles-asteroid-sand
-  tags: [ tile-tag-nature ] # SS220 Tiles Resprite
-  edgeSpritePriority: 1
-  edgeSprites:
-    SouthEast: /Textures/Tiles/Asteroid/asteroid_single_edge.png
-    NorthEast: /Textures/Tiles/Asteroid/asteroid_single_edge.png
-    NorthWest: /Textures/Tiles/Asteroid/asteroid_single_edge.png
-    SouthWest: /Textures/Tiles/Asteroid/asteroid_single_edge.png
-    South: /Textures/Tiles/Asteroid/asteroid_double_edge.png
-    East: /Textures/Tiles/Asteroid/asteroid_double_edge.png
-    North: /Textures/Tiles/Asteroid/asteroid_double_edge.png
-    West: /Textures/Tiles/Asteroid/asteroid_double_edge.png
-
-- type: tile
-  id: FloorAsteroidIronsandUnvariantizedBorderless
-  name: tiles-asteroid-ironsand-borderless
-  sprite: /Textures/Tiles/Asteroid/ironsand0.png
-  baseTurf: Space
-  isSubfloor: true
-  footstepSounds:
-    collection: FootstepAsteroid
-  heatCapacity: 10000
-  weather: true
-
-- type: tile
-  id: FloorAsteroidIronsandUnvariantized
-  parent: FloorAsteroidIronsandUnvariantizedBorderless
-  name: tiles-asteroid-ironsand
-  edgeSpritePriority: 1
-  edgeSprites:
-    SouthEast: /Textures/Tiles/Asteroid/iron_single_edge.png
-    NorthEast: /Textures/Tiles/Asteroid/iron_single_edge.png
-    NorthWest: /Textures/Tiles/Asteroid/iron_single_edge.png
-    SouthWest: /Textures/Tiles/Asteroid/iron_single_edge.png
-    South: /Textures/Tiles/Asteroid/iron_double_edge.png
-    East: /Textures/Tiles/Asteroid/iron_double_edge.png
-    North: /Textures/Tiles/Asteroid/iron_double_edge.png
-    West: /Textures/Tiles/Asteroid/iron_double_edge.png
-
-# Caves
-- type: tile
-  id: FloorCave
-  name: tiles-cave
-  tags: [ tile-tag-nature ] # SS220 Tiles Resprite
-  sprite: /Textures/Tiles/cave.png
-  variants: 7
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  baseTurf: Space
-  isSubfloor: true
-  footstepSounds:
-    collection: FootstepAsteroid
-  heatCapacity: 10000
-
-- type: tile
-  id: FloorCaveDrought
-  name: tiles-cave-drought
-  tags: [ tile-tag-nature ] # SS220 Tiles Resprite
-  sprite: /Textures/Tiles/cavedrought.png
-  variants: 8
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  baseTurf: Space
-  isSubfloor: true
-  footstepSounds:
-    collection: FootstepAsteroid
-  heatCapacity: 10000
-
-- type: tile
-  id: FloorFlesh
-  parent: BaseStationTile
-  name: tiles-flesh-floor
-  tags: [ tile-tag-other ] # SS220 Tiles Resprite
-  sprite: /Textures/Tiles/meat.png
-  variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  footstepSounds:
-    collection: FootstepBlood
-  itemDrop: FloorTileItemFlesh
-  friction: 0.25 #slippy
-
-- type: tile
-  id: FloorTechMaint2
-  parent: BaseStationTile
-  name: tiles-techmaint2-floor
-  sprite: /Textures/SS220/Tiles/steel_maint.png # SS220 Tiles Retexture
-  footstepSounds:
-    collection: FootstepHull
-  itemDrop: FloorTileItemSteelMaint
-
-- type: tile
-  id: FloorTechMaint3
-  parent: BaseStationTile
-  name: tiles-techmaint3-floor
-  # SS220 Tiles Retexture begin
-  sprite: /Textures/SS220/Tiles/grating_maint.png
-  variants: 1
-#  placementVariants:
-#  - 1.0
-#  - 1.0
-#  - 1.0
-#  - 1.0
-  # SS220 Tiles Retexture end
-  footstepSounds:
-    collection: FootstepHull
   itemDrop: FloorTileItemGratingMaint
 
 - type: tile
@@ -1814,11 +1252,6 @@
   name: tiles-wood2
   sprite: /Textures/SS220/Tiles/wood_tile.png # SS220 Tiles Retexture
   variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   footstepSounds:
     collection: FootstepWood
   barestepSounds:
@@ -1831,14 +1264,6 @@
   name: tiles-wood3
   sprite: /Textures/SS220/Tiles/wood_broken.png # SS220 Tiles Retexture
   variants: 7
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   footstepSounds:
     collection: FootstepWood
   barestepSounds:
@@ -1863,14 +1288,6 @@
   tags: [ tile-tag-nature ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/chromite.png
   variants: 7
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   baseTurf: Space
   isSubfloor: true
   footstepSounds:
@@ -1908,11 +1325,6 @@
   tags: [ tile-tag-nature-astro ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/Planet/Grass/grass.png
   variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   edgeSpritePriority: 1
   edgeSprites:
     SouthEast: /Textures/Tiles/Planet/Grass/single_edge.png
@@ -2040,11 +1452,6 @@
   name: tiles-wood-large
   sprite: /Textures/SS220/Tiles/wood_large.png # SS220 Tiles Retexture
   variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   footstepSounds:
     collection: FootstepWood
   barestepSounds:
@@ -2098,11 +1505,6 @@
   name: tiles-dark-squiggly
   sprite: /Textures/Tiles/dark_squiggly.png
   variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   itemDrop: FloorTileItemDarkSquiggly
   allowRotationMirror: true
 
@@ -2121,15 +1523,6 @@
   name: tiles-white-marble
   sprite: /Textures/Tiles/white_marble.png
   variants: 8
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   footstepSounds:
     collection: FootstepTile
   friction: 0.8
@@ -2141,15 +1534,6 @@
   name: tiles-dark-marble
   sprite: /Textures/Tiles/dark_marble.png
   variants: 8
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   footstepSounds:
     collection: FootstepTile
   friction: 0.8
@@ -2161,15 +1545,6 @@
   name: tiles-plasma-marble
   sprite: /Textures/Tiles/plasmarble.png
   variants: 8
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   footstepSounds:
     collection: FootstepTile
   friction: 0.8
@@ -2181,15 +1556,6 @@
   name: tiles-uranium-marble
   sprite: /Textures/Tiles/uranium_marble.png
   variants: 8
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   footstepSounds:
     collection: FootstepTile
   friction: 0.8

@@ -6,7 +6,7 @@
   components:
   - type: InteractionOutline
   - type: Sprite
-    sprite: Structures/Doors/Windoors/windoor.rsi
+    sprite: SS220/Structures/Doors/Windoors/windoor.rsi
     layers:
     - state: assembly
   - type: Physics
@@ -24,8 +24,9 @@
   - type: Pullable
   - type: Rotatable
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: RCDDeconstructable
     cost: 6
     delay: 8
@@ -56,7 +57,7 @@
   parent: WindoorAssembly
   components:
   - type: Sprite
-    sprite: Structures/Doors/Windoors/windoor.rsi
+    sprite: SS220/Structures/Doors/Windoors/windoor.rsi
     layers:
     - state: secure_underlay
     - state: assembly

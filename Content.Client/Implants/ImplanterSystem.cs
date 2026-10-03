@@ -7,10 +7,9 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.Implants;
 
-public sealed class ImplanterSystem : SharedImplanterSystem
+public sealed partial class ImplanterSystem : SharedImplanterSystem
 {
-    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private SharedUserInterfaceSystem _uiSystem = default!;
 
     public override void Initialize()
     {
@@ -20,7 +19,7 @@ public sealed class ImplanterSystem : SharedImplanterSystem
         Subs.ItemStatus<ImplanterComponent>(ent => new ImplanterStatusControl(ent));
     }
 
-    private void OnHandleImplanterState(EntityUid uid, ImplanterComponent component, ref AfterAutoHandleStateEvent args)
+    private void OnHandleImplanterState(Entity<ImplanterComponent> ent, ref AfterAutoHandleStateEvent args)
     {
         if (_uiSystem.TryGetOpenUi<DeimplantBoundUserInterface>(uid, DeimplantUiKey.Key, out var bui))
         {
@@ -39,10 +38,18 @@ public sealed class ImplanterSystem : SharedImplanterSystem
                 }
                 // SS220-implant-name-fix-end
             }
+            
+            UpdateUi(ent);
+        }
+    }
 
-            bui.UpdateState(implants, component.DeimplantChosen);
+    protected override void UpdateUi(Entity<ImplanterComponent> ent)
+    {
+        if (_uiSystem.TryGetOpenUi(ent.Owner, DeimplantUiKey.Key, out var bui))
+        {
+            bui.Update();
         }
 
-        component.UiUpdateNeeded = true;
+        ent.Comp.UiUpdateNeeded = true;
     }
 }

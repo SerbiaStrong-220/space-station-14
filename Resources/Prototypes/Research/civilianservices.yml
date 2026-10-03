@@ -38,7 +38,7 @@
   id: AudioVisualCommunication
   name: research-technology-audio-visual-communication
   icon:
-    sprite: Structures/Wallmounts/camera.rsi
+    sprite: SS220/Structures/Wallmounts/camera.rsi
     state: cameracase
   discipline: CivilianServices
   tier: 1
@@ -152,6 +152,7 @@
   - TrashBagAdvanced #SS220 Borg Modules
   - MegaSprayBottle
   - BorgModuleAdvancedCleaning
+  - TrashBagHolding
 
 - type: technology
   id: HONKMech

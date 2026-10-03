@@ -13,6 +13,22 @@
   antagColor: Crimson
   #SS220 Add antags playtime trackers end
 
+- type: antagSpecifier
+  abstract: true
+  parent: RestrictedAntag
+  id: BaseTraitor
+
+- type: antagSpecifier
+  parent: BaseTraitor
+  id: Traitor
+  prefRoles:
+  - Traitor
+  blacklist:
+    components:
+    - AntagImmune
+  mindRoles:
+  - MindRoleTraitor
+
 - type: antag
   id: TraitorSleeper
   name: roles-antag-syndicate-agent-sleeper-name
@@ -27,6 +43,23 @@
   playTimeTracker: AntagTraitor
   antagColor: Crimson
   #SS220 Add antags playtime trackers end
+
+- type: antagSpecifier
+  parent: BaseTraitor
+  id: TraitorSleeper
+  prefRoles:
+  - TraitorSleeper
+  mindRoles:
+  - MindRoleTraitorSleeper
+
+- type: antagSpecifier
+  parent: BaseTraitor
+  id: TraitorReinforcement
+  prefRoles:
+  - Traitor
+  - GenericTeamAntagonist # Matters for Antag bans.
+  mindRoles:
+  - MindRoleTraitorReinforcement
 
 # Syndicate Operative Outfit - Monkey
 - type: startingGear

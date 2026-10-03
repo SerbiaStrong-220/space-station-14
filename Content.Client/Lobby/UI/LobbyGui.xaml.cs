@@ -12,10 +12,10 @@ namespace Content.Client.Lobby.UI
     [GenerateTypedNameReferences]
     public sealed partial class LobbyGui : UIScreen
     {
-        [Dependency] private readonly IClientConsoleHost _consoleHost = default!;
+        [Dependency] private IClientConsoleHost _consoleHost = default!;
         // SS220 Species bans begin
-        [Dependency] private readonly IClientPreferencesManager _preferencesManager = default!;
-        [Dependency] private readonly SpeciesRequirementsManager _speciesRequirements = default!;
+        [Dependency] private IClientPreferencesManager _preferencesManager = default!;
+        [Dependency] private SpeciesRequirementsManager _speciesRequirements = default!;
         // SS220 Species bans end
 
         public LobbyGui()

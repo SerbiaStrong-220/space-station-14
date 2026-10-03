@@ -8,11 +8,11 @@ namespace Content.Server.Weapons.Melee.WeaponRandom;
 /// <summary>
 /// This adds a random damage bonus to melee attacks based on damage bonus amount and probability.
 /// </summary>
-public sealed class WeaponRandomSystem : EntitySystem
+public sealed partial class WeaponRandomSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly StaminaSystem _stamina = default!; // SS220 Add random stamina damage
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private StaminaSystem _stamina = default!; // SS220 Add random stamina damage
 
     public override void Initialize()
     {

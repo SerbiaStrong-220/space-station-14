@@ -54,11 +54,12 @@
     alwaysRandomize: true
     layoutId: SurveillanceCamera
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Sprite
     drawdepth: WallMountedItems
-    sprite: Structures/Wallmounts/camera.rsi
+    sprite: SS220/Structures/Wallmounts/camera.rsi
     layers:
       - map: [ "enum.SurveillanceCameraVisualsKey.Layer" ]
         state: camera
@@ -79,23 +80,17 @@
     price: 200
   - type: Destructible
     thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 200
-        behaviors:
-          - !type:DoActsBehavior
-            acts: [ "Destruction" ]
-      - trigger:
-          !type:DamageTrigger
-          damage: 100
-        behaviors:
-          - !type:DoActsBehavior
-            acts: [ "Destruction" ]
-          - !type:PlaySoundBehavior
-            sound:
-              collection: MetalBreak
-              params:
-                volume: -8
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -8
   placement:
     mode: SnapgridCenter
     snap:
@@ -239,11 +234,12 @@
     - type: Transform
       anchored: true
     - type: Damageable
-      damageContainer: StructuralInorganic
       damageModifierSet: Metallic
+    - type: Injurable
+      damageContainer: StructuralInorganic
     - type: Sprite
       drawdepth: WallMountedItems
-      sprite: Structures/Wallmounts/camera.rsi
+      sprite: SS220/Structures/Wallmounts/camera.rsi
       layers:
         - state: camera_off
   placement:

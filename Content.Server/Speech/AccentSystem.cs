@@ -25,7 +25,7 @@ public sealed class AccentSystem : EntitySystem
         // var accentEvent = new AccentGetEvent(args.Sender, args.Message);
         // SS220 Mindslave-stop-word end
 
-        RaiseLocalEvent(args.Sender, accentEvent, true);
+        RaiseLocalEvent(args.Sender, ref accentEvent);
         args.Message = accentEvent.Message;
     }
 }

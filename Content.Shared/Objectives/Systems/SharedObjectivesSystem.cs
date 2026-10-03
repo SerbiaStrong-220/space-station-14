@@ -11,11 +11,11 @@ namespace Content.Shared.Objectives.Systems;
 /// <summary>
 /// Provides API for creating and interacting with objectives.
 /// </summary>
-public abstract class SharedObjectivesSystem : EntitySystem
+public abstract partial class SharedObjectivesSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
-    [Dependency] private readonly MetaDataSystem _meta = default!; // ss220 add custom goals x2
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private IPrototypeManager _protoMan = default!;
+    [Dependency] private MetaDataSystem _meta = default!; // ss220 add custom goals x2
 
     private static readonly EntProtoId FreeObjectiveProto = "SS220FreeObjective"; // ss220 add custom goals x2
 
@@ -74,7 +74,7 @@ public abstract class SharedObjectivesSystem : EntitySystem
     /// </summary>
     public EntityUid? TryCreateObjective(EntityUid mindId, MindComponent mind, string proto, bool force = false) // ss220 add custom antag goals
     {
-        if (!_protoMan.HasIndex<EntityPrototype>(proto))
+        if (!ProtoMan.HasIndex<EntityPrototype>(proto))
             return null;
 
         var uid = Spawn(proto);

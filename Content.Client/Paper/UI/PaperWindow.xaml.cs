@@ -40,6 +40,8 @@ namespace Content.Client.Paper.UI
 
         private readonly ProtoId<SkillPrototype> _allMarkupShowingSkill = "BureaucracyTrained"; // ss220-experience-update
 
+        private Color _writtenTextColor = DefaultTextColor;
+
         // <summary>
         // Size of resize handles around the paper
         private const int DRAG_MARGIN_SIZE = 16;
@@ -196,8 +198,7 @@ namespace Content.Client.Paper.UI
                     visuals.FooterMargin.Right, visuals.FooterMargin.Bottom);
 
             PaperContent.ModulateSelfOverride = visuals.ContentImageModulate;
-            WrittenTextLabel.ModulateSelfOverride = visuals.FontAccentColor;
-            FillStatus.ModulateSelfOverride = visuals.FontAccentColor;
+            _writtenTextColor = visuals.DefaultTextColor ?? DefaultTextColor;
 
             var contentImage = visuals.ContentImagePath != null ? _resCache.GetResource<TextureResource>(visuals.ContentImagePath) : null;
             if (contentImage != null)
@@ -344,9 +345,9 @@ namespace Content.Client.Paper.UI
             // WrittenTextLabel.SetMessage(msg, UserFormattableTags.BaseAllowedTags, DefaultTextColor); // [wizden] SS220-experience-update
             // SS220-bureaucracy-skill-begin
             if (_player.LocalEntity is not null && !_experience.HaveSkill(_player.LocalEntity.Value, _allMarkupShowingSkill))
-                WrittenTextLabel.SetMessage(msg, _baseAllowedTags, DefaultTextColor);
+                WrittenTextLabel.SetMessage(msg, _baseAllowedTags, _writtenTextColor);
             else
-                WrittenTextLabel.SetMessage(msg, UserFormattableTags.BaseAllowedTags, DefaultTextColor);
+                WrittenTextLabel.SetMessage(msg, UserFormattableTags.BaseAllowedTags, _writtenTextColor);
             // SS220-bureaucracy-skill-end
 
             WrittenTextLabel.Visible = !isEditing && state.Text.Length > 0;

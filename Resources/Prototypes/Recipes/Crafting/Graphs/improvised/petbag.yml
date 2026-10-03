@@ -9,7 +9,7 @@
       - tag: Backpack
         name: construction-graph-tag-backpack
         icon:
-          sprite: Clothing/Back/Backpacks/backpack.rsi
+          sprite: SS220/Clothing/Back/Backpacks/backpack.rsi
           state: icon
         doAfter: 1
       - material: Cable

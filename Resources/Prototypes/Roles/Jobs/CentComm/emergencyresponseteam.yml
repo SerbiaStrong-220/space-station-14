@@ -9,7 +9,6 @@
   icon: "JobIconERTLeader"
   experienceDefinition: ERTLeaderRoleExperience # SS220-experience
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   accessGroups:
   - AllAccess
   access:
@@ -124,7 +123,6 @@
   experienceDefinition: ERTChaplainRoleExperience # SS220-experience
   icon: "JobIconERTChaplain"
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   accessGroups:
   - AllAccess
   access:
@@ -213,7 +211,6 @@
   icon: "JobIconERTEngineer"
   experienceDefinition: ERTEngineerRoleExperience # SS220-experience
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   accessGroups:
   - AllAccess
   access:
@@ -322,7 +319,6 @@
   icon: "JobIconERTSecurity"
   experienceDefinition: ERTSecurityRoleExperience # SS220-experience
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   accessGroups:
   - AllAccess
   access:
@@ -522,7 +518,6 @@
   icon: "JobIconERTMedic"
   experienceDefinition: ERTMedicalRoleExperience # SS220-experience
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   accessGroups:
   - AllAccess
   access:
@@ -637,7 +632,6 @@
   icon: "JobIconERTJanitor"
   experienceDefinition: ERTJanitorRoleExperience # SS220-experience
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   accessGroups:
   - AllAccess
   access:
@@ -683,13 +677,12 @@
     suitstorage: WeaponLauncherHydra
   storage:
     back:
-    - TrashBag
     - SoapNT
     - Plunger
     - Screwdriver
-    - AdvMopItem # End of first line
+    - AdvMopItem
     - GrenadeCleanade
-    - GrenadeCleanade
+    - GrenadeCleanade # End of first line
     - GrenadeCleanade
     - GrenadeCleanade
     - GrenadeCleanade
@@ -703,6 +696,8 @@
     - WeaponPistolMk58
     - MagazinePistol
     - EmergencyMedipen
+  inhand:
+    - TrashBag
 
 - type: chameleonOutfit
   id: ERTJanitorChameleonOutfit

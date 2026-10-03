@@ -17,3 +17,10 @@
     back:
     - DrinkBeerCan
   #ss220 add species loadout end
+  defaultSoundsBySex:
+  - UnisexDwarf
+  - FemaleDwarf
+  - UnisexDwarf
+  voices:
+  - UnisexDwarf
+  - FemaleDwarf

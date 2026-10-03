@@ -10,11 +10,11 @@ using Robust.Shared.Input.Binding;
 
 namespace Content.Client.UserInterface.Systems.Info;
 
-public sealed class CloseAllWindowsUIController : UIController
+public sealed partial class CloseAllWindowsUIController : UIController
 {
-    [Dependency] private readonly IInputManager _inputManager = default!;
-    [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!; //ss220 add pin for ui
+    [Dependency] private IInputManager _inputManager = default!;
+    [Dependency] private IUserInterfaceManager _uiManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!; //ss220 add pin for ui
 
     public override void Initialize()
     {

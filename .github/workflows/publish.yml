@@ -40,13 +40,13 @@ jobs:
    #   run: sudo apt-get install -y python3-paramiko python3-lxml
   # SS220 custom install end
 
-    - uses: actions/checkout@v4.2.2
+    - uses: actions/checkout@v7
       with:
         submodules: 'recursive'
         fetch-depth: 10 # SS220-add-some-commits-for-engine-tag
 
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v4.1.0
+      uses: actions/setup-dotnet@v5
       with:
         dotnet-version: 10.0.x
 

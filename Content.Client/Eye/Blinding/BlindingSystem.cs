@@ -6,12 +6,11 @@ using Robust.Shared.Player;
 
 namespace Content.Client.Eye.Blinding;
 
-public sealed class BlindingSystem : EntitySystem
+public sealed partial class BlindingSystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IOverlayManager _overlayMan = default!;
-    [Dependency] private readonly ILightManager _lightManager = default!;
-
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IOverlayManager _overlayMan = default!;
+    [Dependency] ILightManager _lightManager = default!;
 
     private BlindOverlay _overlay = default!;
 

@@ -1522,11 +1522,10 @@
       metabolites:
         Ethanol: 0.3
       effects:
-        - !type:GenericStatusEffect
-          key: RatvarianLanguage
-          component: RatvarianLanguage
-        - !type:SatiateThirst
-          factor: 2
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectRatvarianLanguage
+      - !type:SatiateThirst
+        factor: 2
 
 - type: reagent
   id: Silencer

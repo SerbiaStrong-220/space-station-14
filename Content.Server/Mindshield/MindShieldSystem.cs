@@ -7,6 +7,7 @@ using Content.Server.SS220.MindSlave;
 using Content.Shared.Database;
 using Content.Shared.Implants;
 using Content.Shared.Mindshield.Components;
+using Content.Shared.Revolutionary;
 using Content.Shared.Revolutionary.Components;
 using Content.Shared.Roles.Components;
 using Content.Shared.SS220.CultYogg.Cultists;
@@ -19,12 +20,12 @@ namespace Content.Server.Mindshield;
 /// System used for adding or removing components with a mindshield implant
 /// as well as checking if the implanted is a Rev or Head Rev.
 /// </summary>
-public sealed class MindShieldSystem : EntitySystem
+public sealed partial class MindShieldSystem : EntitySystem
 {
-    [Dependency] private readonly IAdminLogManager _adminLogManager = default!;
-    [Dependency] private readonly RoleSystem _roleSystem = default!;
-    [Dependency] private readonly MindSystem _mindSystem = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
+    [Dependency] private IAdminLogManager _adminLogManager = default!;
+    [Dependency] private RoleSystem _roleSystem = default!;
+    [Dependency] private MindSystem _mindSystem = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
 
     public override void Initialize()
     {
@@ -35,6 +36,7 @@ public sealed class MindShieldSystem : EntitySystem
         SubscribeLocalEvent<MindShieldComponent, ComponentStartup>(OnStartup);//SS220-cult-update-3-1
         SubscribeLocalEvent<MindShieldComponent, ComponentRemove>(OnRemove);//SS220 CombustedMindShieldEvent #3500
         SubscribeLocalEvent<MindShieldComponent, GotCultifiedEvent>(OnGotCultified);//Cult hotfix 16 #3599
+        SubscribeLocalEvent<MindShieldComponent, AttemptConvertRevolutionaryEvent>(OnAttemptConvert);
     }
 
     private void OnImplantImplanted(Entity<MindShieldImplantComponent> ent, ref ImplantImplantedEvent ev)
@@ -93,5 +95,10 @@ public sealed class MindShieldSystem : EntitySystem
         EnsureComp<CombustingMindShieldComponent>(ent);
     }
     //Cult hotfix 16 #3599 end
+
+    private void OnAttemptConvert(Entity<MindShieldComponent> ent, ref AttemptConvertRevolutionaryEvent args)
+    {
+        args.Cancelled = true;
+    }
 }
 

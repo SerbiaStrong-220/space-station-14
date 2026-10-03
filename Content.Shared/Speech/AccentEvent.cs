@@ -1,23 +1,22 @@
-﻿namespace Content.Shared.Speech;
+using Content.Shared.Inventory;
 
-public sealed class AccentGetEvent : CancellableEntityEventArgs //SS220 Made cancellable for accent check
+namespace Content.Shared.Speech;
+
+/// <summary>
+///     Raised on an entity to apply speech accents to its message.
+///     Handlers should modify <see cref="Message"/> in place.
+///     Relayed through inventory (e.g. voice masks) and status effects.
+/// </summary>
+[ByRefEvent]
+public record struct AccentGetEvent(EntityUid Entity, string Message) : IInventoryRelayEvent
 {
-    /// <summary>
-    ///     The entity to apply the accent to.
-    /// </summary>
-    public EntityUid Entity { get; }
+    public SlotFlags TargetSlots => SlotFlags.WITHOUT_POCKET;
 
-    /// <summary>
-    ///     The message to apply the accent transformation to.
-    ///     Modify this to apply the accent.
-    /// </summary>
-    public string Message { get; set; }
+    // SS220 Made cancellable for accent check begin
+    public bool Cancelled { get; private set; }
 
-    public AccentGetEvent(EntityUid entity, string message)
-    {
-        Entity = entity;
-        Message = message;
-    }
+    public void Cancel() => Cancelled = true;
+    // SS220 Made cancellable for accent check end
 }
 
 // SS220 Mindslave-stop-word begin

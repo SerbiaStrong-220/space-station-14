@@ -349,7 +349,7 @@
     fiberColor: fibers-black
 
 - type: entity
-  parent: [ ClothingHandsGlovesCombat ] # SS220 Remove BaseSecurityCargoContraband
+  parent: [ ClothingHandsGlovesCombat, BaseSlicingRefinable ] # SS220 Remove BaseSecurityCargoContraband
   id: ClothingHandsMercGlovesCombat
   name: mercenary combat gloves
   description: High-quality combat gloves to protect hands from mechanical damage during combat.
@@ -358,9 +358,8 @@
     sprite: Clothing/Hands/Gloves/mercbattle.rsi
   - type: Clothing
     sprite: Clothing/Hands/Gloves/mercbattle.rsi
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: ClothingHandsGlovesMercFingerless
   - type: Fiber
     fiberMaterial: fibers-insulative

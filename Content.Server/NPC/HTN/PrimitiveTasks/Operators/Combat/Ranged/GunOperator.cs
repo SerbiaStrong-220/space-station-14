@@ -15,7 +15,7 @@ namespace Content.Server.NPC.HTN.PrimitiveTasks.Operators.Combat.Ranged;
 
 public sealed partial class GunOperator : HTNOperator, IHtnConditionalShutdown
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!; //SS220 Change laser turrets AI
 
     [DataField("shutdownState")]

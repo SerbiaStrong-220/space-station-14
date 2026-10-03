@@ -32,8 +32,8 @@
   experienceDefinition: HeadOfSecurityRoleExperience # SS220-experience
   icon: "JobIconHeadOfSecurity"
   supervisors: job-supervisors-captain
-  canBeAntag: false
-  radioBold: true
+  canBeAntag: false # SS220
+  radioBold: true # SS220
   access:
   - HeadOfSecurity
   - Command
@@ -76,5 +76,6 @@
   job: HeadOfSecurity
   hasMindShield: true
   equipment:
+    head: ClothingHeadHatBeretHoS
     mask: ClothingMaskGasSecurity
     neck: ClothingNeckCloakHos

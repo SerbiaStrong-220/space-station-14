@@ -44,7 +44,7 @@
   id: LowOxygen
   category: Breathing
   icons:
-  - sprite: /Textures/Interface/Alerts/breathing.rsi
+  - sprite: /Textures/SS220/Interface/Alerts/breathing.rsi
     state: not_enough_oxy
   name: alerts-low-oxygen-name
   description: alerts-low-oxygen-desc
@@ -53,7 +53,7 @@
   id: LowNitrogen
   category: Breathing
   icons:
-    - sprite: /Textures/Interface/Alerts/breathing.rsi
+    - sprite: /Textures/SS220/Interface/Alerts/breathing.rsi
       state: not_enough_nitro
   name: alerts-low-nitrogen-name
   description: alerts-low-nitrogen-desc
@@ -62,7 +62,7 @@
   id: Toxins
   category: Toxins
   icons:
-  - sprite: /Textures/Interface/Alerts/breathing.rsi
+  - sprite: /Textures/SS220/Interface/Alerts/breathing.rsi
     state: too_much_tox
   name: alerts-high-toxin-name
   description: alerts-high-toxin-desc

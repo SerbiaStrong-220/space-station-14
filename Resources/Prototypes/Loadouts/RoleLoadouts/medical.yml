@@ -15,6 +15,7 @@
   - ChiefMedicalOfficerNeck
   - ChiefMedicalOfficerShoes
   - Glasses
+  - AssistiveItems
   - SurvivalMedical
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -38,6 +39,7 @@
   - MedicalShoes
   - MedicalDoctorPDA
   - Glasses
+  - AssistiveItems
   - SurvivalMedical
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -58,6 +60,7 @@
   - MedicalsGloves #SS220 gloves-for-med
   - MedicalBackpack
   - Glasses
+  - AssistiveItems
   - SurvivalMedical
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -78,6 +81,7 @@
   - ChemistOuterClothing
   - MedicalShoes
   - Glasses
+  - AssistiveItems
   - SurvivalMedical
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -100,6 +104,7 @@
   - ParamedicOuterClothing
   - ParamedicShoes
   - Glasses
+  - AssistiveItems
   - SurvivalMedical
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets

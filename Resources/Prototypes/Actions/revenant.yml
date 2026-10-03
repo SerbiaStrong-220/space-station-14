@@ -33,6 +33,7 @@
       state: overloadlight
     #SS220 revenant-sprite-port end
     useDelay: 20
+    itemIconStyle: BigAction
   - type: InstantAction
     event: !type:RevenantOverloadLightsActionEvent
 
@@ -62,5 +63,6 @@
       state: malfunction
     #SS220 revenant-sprite-port end
     useDelay: 20
+    itemIconStyle: BigAction
   - type: InstantAction
     event: !type:RevenantMalfunctionActionEvent

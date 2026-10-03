@@ -64,18 +64,12 @@
     drawdepth: AboveFovOverlay #SS220 Perpective-wall-fov
     sprite: Structures/Machines/computers.rsi
     layers:
-      - map: ["computerLayerBody"]
-        state: telescreen_frame
-      - map: ["computerLayerScreen"]
-        state: telescreen
+    - map: ["computerLayerBody"]
+      state: telescreen_frame
+    - map: ["computerLayerScreen"]
+      state: telescreen
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 200
-      behaviors: #excess damage, don't spawn entities.
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
         damage: 50

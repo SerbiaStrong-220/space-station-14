@@ -8,7 +8,6 @@
   experienceDefinition: CBURNRoleExperience # SS220-experience
   icon: "JobIconCBURN"
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   accessGroups:
   - AllAccess
   access:

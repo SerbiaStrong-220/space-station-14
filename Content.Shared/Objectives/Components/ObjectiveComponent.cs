@@ -1,5 +1,6 @@
 using Content.Shared.Mind;
 using Content.Shared.Objectives;
+using Content.Shared.Objectives.Prototypes;
 using Content.Shared.Objectives.Systems;
 using Robust.Shared.Utility;
 using Robust.Shared.Prototypes;

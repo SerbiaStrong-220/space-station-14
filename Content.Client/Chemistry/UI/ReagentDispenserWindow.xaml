@@ -16,7 +16,7 @@
                 Columns="2"
                 HorizontalAlignment="Center"
                 Margin="5"
-                ButtonList="1,5,10,15,20,25,30,50,75,100"
+                ButtonList="1,5,10,15,20,25,30,50,60,75,100,120"
                 RadioGroup="True">
             </ui:ButtonGrid>
             <!-- SS220 ADD 75U FOR DISPENSER END -->
@@ -46,7 +46,8 @@
         </BoxContainer>
         <SplitContainer Orientation="Vertical"
                         HorizontalExpand="True"
-                        VerticalExpand="True">
+                        VerticalExpand="True"
+                        MouseFilter="Ignore">
             <ScrollContainer HScrollEnabled="False"
                              HorizontalExpand="True"
                              VerticalExpand="True"

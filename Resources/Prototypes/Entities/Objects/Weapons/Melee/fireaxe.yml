@@ -12,11 +12,10 @@
   - type: Tag
     tags:
     - FireAxe
-  - type: Sharp
   - type: Execution
     doAfterDuration: 4.0
   - type: Sprite
-    sprite: Objects/Weapons/Melee/fireaxe.rsi
+    sprite: SS220/Objects/Weapons/Melee/fireaxe.rsi
     state: icon
   - type: MeleeWeapon
     wideAnimationRotation: 135
@@ -39,14 +38,17 @@
   - type: Item
     size: Ginormous
   - type: Clothing
-    sprite: Objects/Weapons/Melee/fireaxe.rsi
+    sprite: SS220/Objects/Weapons/Melee/fireaxe.rsi
     quickEquip: false
     slots:
     - back
+    - suitStorage
   - type: Tool
     qualities:
       - Prying
       - PlatingCutting #SS220-tools-tile-prying-fix
+      - Slicing
+      - Sawing
   - type: ToolTileCompatible
   - type: Prying
   - type: UseDelay
@@ -93,17 +95,19 @@
   description: Why fight fire with an axe when you can fight with fire and axe? Now featuring rugged rubberized handle!
   components:
   - type: MeleeWeapon
-    wideAnimationRotation: 90
+    wideAnimationRotation: 135
+    swingLeft: true
   - type: IgniteOnMeleeHit
     fireStacks: 1
   - type: Sprite
-    sprite: Objects/Weapons/Melee/fireaxeflaming.rsi
+    sprite: SS220/Objects/Weapons/Melee/fireaxeflaming.rsi
     state: icon
   - type: Clothing
-    sprite: Objects/Weapons/Melee/fireaxeflaming.rsi
+    sprite: SS220/Objects/Weapons/Melee/fireaxeflaming.rsi
     quickEquip: false
     slots:
     - back
+    - suitStorage
 # SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:

@@ -5,9 +5,9 @@
   description: The bind leading the blind.
   components:
   - type: Sprite
-    sprite: Clothing/Eyes/Misc/blindfold.rsi
+    sprite: SS220/Clothing/Eyes/Misc/blindfold.rsi
   - type: Clothing
-    sprite: Clothing/Eyes/Misc/blindfold.rsi
+    sprite: SS220/Clothing/Eyes/Misc/blindfold.rsi
     equipDelay: 3
     unequipDelay: 3
   - type: Blindfold

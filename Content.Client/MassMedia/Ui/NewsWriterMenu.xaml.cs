@@ -13,7 +13,7 @@ namespace Content.Client.MassMedia.Ui;
 [GenerateTypedNameReferences]
 public sealed partial class NewsWriterMenu : FancyWindow, IPinnableWindow // ss220 add pin for ui
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
 
     private TimeSpan? _nextPublish;
 

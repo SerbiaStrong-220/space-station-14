@@ -14,9 +14,9 @@ namespace Content.Shared.EntityEffects.Effects.StatusEffects;
 /// <inheritdoc cref="EntityEffectSystem{T,TEffect}"/>
 public sealed partial class MovementSpeedModifierEntityEffectSystem : EntityEffectSystem<MovementSpeedModifierComponent, MovementSpeedModifier>
 {
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly MovementModStatusSystem _movementModStatus = default!;
-    [Dependency] private readonly ChemicalAdaptationSystem _chemicalAdaptation = default!;// SS220 add movement speed modification depending on the adaptation
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private MovementModStatusSystem _movementModStatus = default!;
+    [Dependency] private ChemicalAdaptationSystem _chemicalAdaptation = default!;// SS220 add movement speed modification depending on the adaptation
 
     protected override void Effect(Entity<MovementSpeedModifierComponent> entity, ref EntityEffectEvent<MovementSpeedModifier> args)
     {

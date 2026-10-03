@@ -18,8 +18,8 @@ namespace Content.Client.Decals.UI;
 [GenerateTypedNameReferences]
 public sealed partial class DecalPlacerWindow : DefaultWindow, IPinnableWindow // ss220 add pin button
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IEntityManager _e = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IEntityManager _e = default!;
 
     private readonly DecalPlacementSystem _decalPlacementSystem;
     private readonly SpriteSystem _sprite;

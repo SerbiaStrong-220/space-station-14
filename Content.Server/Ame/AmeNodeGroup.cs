@@ -4,7 +4,6 @@ using Content.Server.Ame.EntitySystems;
 using Content.Server.Chat.Managers;
 using Content.Server.Explosion.EntitySystems;
 using Content.Server.NodeContainer.NodeGroups;
-using Content.Server.NodeContainer.Nodes;
 using Content.Shared.NodeContainer;
 using Content.Shared.NodeContainer.NodeGroups;
 using Robust.Server.GameObjects;
@@ -17,11 +16,11 @@ namespace Content.Server.Ame;
 /// Node group class for handling the Antimatter Engine's console and parts.
 /// </summary>
 [NodeGroup(NodeGroupID.AMEngine)]
-public sealed class AmeNodeGroup : BaseNodeGroup
+public sealed partial class AmeNodeGroup : BaseNodeGroup
 {
-    [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     /// <summary>
     /// The AME controller which is currently in control of this node group.
@@ -188,10 +187,12 @@ public sealed class AmeNodeGroup : BaseNodeGroup
         // Balanced around a single core AME with injection level 2 producing 120KW.
         // Two core with four injection is 150kW. Two core with two injection is 90kW.
 
-        // The adjustment for cores make it so that a 1 core AME at 2 injections is better than a 2 core AME at 2 injections.
-        // However, for the relative amounts for each (1 core at 2 and 2 core at 4), more cores has more output.
+        // Increasing core count creates diminishing returns, increasing injection amount increases
+        // Unlike the previous solution, increasing fuel and cores always leads to an increase in power, even if by very small amounts.
+        // Increasing core count without increasing fuel always leads to reduced power as well.
+        // At 18+ cores and 2 inject, the power produced is less than 0, the Max ensures the AME can never produce "negative" power.
         var ss220AMEmod = 1.4f; // SS220 special modifier for AME to powerup AME
-        return 200000f * MathF.Log10(fuel * fuel) * ss220AMEmod * MathF.Pow(0.8f, cores - 1); // SS220 AME powerup
+        return MathF.Max(200000f * MathF.Log10(fuel * fuel * ss220AMEmod * MathF.Pow(cores, (float)-0.5)), 0);
     }
 
     public int GetTotalStability()

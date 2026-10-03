@@ -1,0 +1,87 @@
+# Canes
+# The white cane is intentionally not included here. That's for the blind.
+- type: loadout
+  id: OffsetCane
+  storage:
+    back:
+    - OffsetCane
+  groupBy: "canes"
+
+- type: loadout
+  id: OffsetCaneWood
+  storage:
+    back:
+    - OffsetCaneWood
+  groupBy: "canes"
+
+- type: loadout
+  id: OffsetCaneClown
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobClown
+      time: 1h
+  sponsorTierLoadoutEffects: #SS220 BugFixs Begin
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier #SS220 BugFixs End
+  storage:
+    back:
+    - OffsetCaneClown
+  groupBy: "canes"
+
+- type: loadout
+  id: OffsetCaneMime
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobMime
+      time: 1h
+  sponsorTierLoadoutEffects: #SS220 BugFixs Begin
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier #SS220 BugFixs End
+  storage:
+    back:
+    - OffsetCaneMime
+  groupBy: "canes"
+
+- type: loadout
+  id: OffsetCaneNT
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:DepartmentTimeRequirement
+      department: Command
+      time: 5h
+  sponsorTierLoadoutEffects: #SS220 BugFixs Begin
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier #SS220 BugFixs End
+  storage:
+    back:
+    - OffsetCaneNT
+  groupBy: "canes"
+
+- type: loadout
+  id: Cane
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobLibrarian
+      time: 1h # same as Jamjar.
+  sponsorTierLoadoutEffects: #SS220 BugFixs Begin
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier #SS220 BugFixs End
+  storage:
+    back:
+    - Cane
+  groupBy: "canes"

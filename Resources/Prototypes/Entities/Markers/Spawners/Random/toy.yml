@@ -39,6 +39,8 @@
     - id: PlushieArachind
     - id: PlushiePenguin
     - id: PlushieVulp
+    - id: PlushieSheep
+    - id: PlushieSpaceSheep
     #SS220-PlushieMiGo-begin
     - id: PlushieMigo #SS220
       weight: 0.15

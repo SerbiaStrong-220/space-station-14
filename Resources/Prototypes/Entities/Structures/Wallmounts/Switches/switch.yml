@@ -9,7 +9,7 @@
   - type: StationAiWhitelist
   - type: Sprite
     drawdepth: SmallObjects
-    sprite: Structures/Wallmounts/switch.rsi
+    sprite: SS220/Structures/Wallmounts/switch.rsi
     layers:
     - state: off
       map: [ "indicator" ]
@@ -44,12 +44,6 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 80
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
         damage: 40
       behaviors:
       - !type:DoActsBehavior
@@ -71,7 +65,7 @@
   - type: StationAiWhitelist
   - type: Sprite
     drawdepth: SmallObjects
-    sprite: Structures/Wallmounts/switch.rsi
+    sprite: SS220/Structures/Wallmounts/switch.rsi
     state: dead
   - type: UseDelay
     delay: 0.5 # prevent light-toggling auto-clickers.
@@ -96,12 +90,6 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 80
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
         damage: 40
       behaviors:
       - !type:DoActsBehavior
@@ -122,7 +110,7 @@
     arc: 360
   - type: Sprite
     drawdepth: SmallObjects
-    sprite: Structures/Wallmounts/switch.rsi
+    sprite: SS220/Structures/Wallmounts/switch.rsi
     state: on
   - type: Rotatable
   - type: ExtensionCableReceiver

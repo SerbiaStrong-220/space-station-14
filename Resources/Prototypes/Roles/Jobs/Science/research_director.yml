@@ -18,7 +18,7 @@
   experienceDefinition: ResearchDirectorRoleExperience # SS220-experience
   icon: "JobIconResearchDirector"
   supervisors: job-supervisors-captain
-  radioBold: true
+  radioBold: true # SS220
   access:
   - Research
   - Command

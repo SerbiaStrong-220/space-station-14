@@ -16,14 +16,14 @@ using Content.Server.SS220.Events;
 
 namespace Content.Server.PAI;
 
-public sealed class PAISystem : EntitySystem
+public sealed partial class PAISystem : EntitySystem
 {
-    [Dependency] private readonly InstrumentSystem _instrumentSystem = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly ToggleableGhostRoleSystem _toggleableGhostRole = default!;
-    [Dependency] private readonly LanguageSystem _language = default!; // SS220 Languages
+    [Dependency] private InstrumentSystem _instrumentSystem = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private ToggleableGhostRoleSystem _toggleableGhostRole = default!;
+    [Dependency] private LanguageSystem _language = default!; // SS220 Languages
 
     /// <summary>
     /// Possible symbols that can be part of a scrambled pai's name.

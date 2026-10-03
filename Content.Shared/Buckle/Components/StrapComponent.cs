@@ -114,6 +114,12 @@ public sealed partial class StrapComponent : Component
     [DataField]
     public float UncuffTimeModifier = 1f;
     // SS220 Add uncuff time modifier when buckled end
+
+    /// <summary>
+    /// Whether being buckled to this entity should change the buckled ent's drawdepth.
+    /// </summary>
+    [DataField]
+    public bool ModifyBuckleDrawDepth = true;
 }
 
 public enum StrapPosition

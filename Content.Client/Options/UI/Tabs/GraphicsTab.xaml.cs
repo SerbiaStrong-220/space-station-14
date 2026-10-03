@@ -13,7 +13,7 @@ namespace Content.Client.Options.UI.Tabs;
 [GenerateTypedNameReferences]
 public sealed partial class GraphicsTab : Control
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     public GraphicsTab()
     {
@@ -25,6 +25,13 @@ public sealed partial class GraphicsTab : Control
         Control.AddOptionCheckBox(CCVars.AmbientOcclusion, AmbientOcclusionCheckBox);
         Control.AddOption(new OptionFullscreen(Control, _cfg, FullscreenCheckBox));
         Control.AddOption(new OptionLightingQuality(Control, _cfg, DropDownLightingQuality));
+
+        Control.AddOptionSlider(
+            CCVars.ViewportSharpnessStrength,
+            SharpnessSlider,
+            0,
+            20,
+            (_, value) => Loc.GetString("ui-options-value-percent", ("value", value / 10f)));
 
         Control.AddOptionDropDown(
             CVars.DisplayUIScale,

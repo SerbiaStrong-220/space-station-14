@@ -106,7 +106,7 @@
   description: A large duffel bag for holding extra security related goods.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Duffels/security.rsi
+    sprite: SS220/Clothing/Back/Duffels/security.rsi
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-reinforced-textile
@@ -120,7 +120,7 @@
   description: A large duffel bag for holding extra medical related goods.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Duffels/brigmedic.rsi
+    sprite: SS220/Clothing/Back/Duffels/brigmedic.rsi
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-synthetic

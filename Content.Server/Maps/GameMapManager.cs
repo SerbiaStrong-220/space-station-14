@@ -15,12 +15,12 @@ namespace Content.Server.Maps;
 
 public sealed partial class GameMapManager : IGameMapManager // SS220 add partial
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IResourceManager _resMan = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IConfigurationManager _configurationManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IResourceManager _resMan = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     // SS220: This is a queue of rotation maps, not previous round maps.
     [ViewVariables(VVAccess.ReadOnly)]

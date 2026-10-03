@@ -14,7 +14,9 @@
       path: /Audio/Weapons/ebladehum.ogg
   - type: ComponentToggler
     components:
-    - type: Sharp
+    - type: Tool
+      qualities:
+      - Slicing
     - type: DisarmMalus
       malus: 0.6
     - type: Execution
@@ -139,7 +141,9 @@
     temperature: 700
   - type: ComponentToggler
     components:
-    - type: Sharp
+    - type: Tool
+      qualities:
+      - Slicing
     - type: DisarmMalus
       malus: 0.4
     - type: Execution
@@ -178,6 +182,42 @@
   suffix: E-Dagger
   description: 'A dark ink pen.'
   components:
+  - type: ItemToggle
+    soundActivate:
+      path: /Audio/Weapons/ebladeon.ogg
+      params:
+        volume: -6
+    soundDeactivate:
+      path: /Audio/Weapons/ebladeoff.ogg
+      params:
+        volume: -6
+  - type: ItemToggleActiveSound
+    activeSound:
+      path: /Audio/Weapons/ebladehum.ogg
+      params:
+        volume: -6
+  - type: ItemToggleMeleeWeapon
+    activatedSoundOnSwing:
+      path: /Audio/Weapons/eblademiss.ogg
+      params:
+        volume: -3
+        variation: 0.250
+    activatedDamage:
+      types:
+        Slash: 10
+        Heat: 10
+    deactivatedSecret: true
+  - type: ComponentToggler
+    components:
+    - type: Tool
+      qualities:
+      - Slicing
+    - type: DisarmMalus
+      malus: 0.4
+    - type: Execution
+      doAfterDuration: 4.0
+    - type: Contraband
+      severity: Syndicate
   - type: Sprite
     sprite: Objects/Weapons/Melee/e_dagger.rsi
     layers:
@@ -362,11 +402,13 @@
         volume: 3
   - type: ComponentToggler
     components:
-    - type: Sharp
     - type: DisarmMalus
       malus: 0.7
     - type: Execution
       doAfterDuration: 4.0
+    - type: Tool
+      qualities:
+      - Slicing
   - type: Wieldable
     wieldSound: null # esword light sound instead
   - type: MeleeWeapon
@@ -419,6 +461,7 @@
   - type: HeldSpeedModifier #slowdown is what balances this compared to a dsword
     walkModifier: 0.6
     sprintModifier: 0.6
+    weightlessAcceleration: 0.6
   - type: UseDelay
     delay: 1.5
   - type: Sprite

@@ -13,3 +13,9 @@
   femaleLastNames: NamesMothLast
   # lastNames: NamesMothLast
   #SS220-new-species-naming end
+  defaultSoundsBySex:
+  - UnisexMoth
+  - UnisexMoth
+  - UnisexMoth
+  voices:
+  - UnisexMoth

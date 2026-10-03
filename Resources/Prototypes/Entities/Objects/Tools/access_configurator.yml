@@ -62,7 +62,6 @@
         name: id-card-console-privileged-id
         ejectSound: /Audio/Machines/id_swipe.ogg
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
-        ejectOnBreak: true
         swap: false
         whitelist:
           components:
@@ -152,7 +151,6 @@
       startingItem: UniversalIDCard
       ejectSound: /Audio/Machines/id_swipe.ogg
       insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
-      ejectOnBreak: true
       swap: false
       whitelist:
         components:
@@ -180,7 +178,6 @@
       startingItem: XenoborgIDCard
       ejectSound: /Audio/Machines/id_swipe.ogg
       insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
-      ejectOnBreak: true
       disableEject: true
       swap: false
       whitelist:

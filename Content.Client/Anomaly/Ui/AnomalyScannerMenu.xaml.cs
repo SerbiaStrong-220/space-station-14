@@ -12,7 +12,7 @@ namespace Content.Client.Anomaly.Ui;
 [GenerateTypedNameReferences]
 public sealed partial class AnomalyScannerMenu : FancyWindow, IPinnableWindow // ss220 add pin for ui
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public FormattedMessage LastMessage = new();
     public TimeSpan? NextPulseTime;

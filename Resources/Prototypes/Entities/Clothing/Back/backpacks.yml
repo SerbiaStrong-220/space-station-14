@@ -10,7 +10,7 @@
       params:
         volume: 2
   - type: Sprite
-    sprite: Clothing/Back/Backpacks/backpack.rsi
+    sprite: SS220/Clothing/Back/Backpacks/backpack.rsi
     state: icon
   - type: Item
     size: Huge
@@ -22,6 +22,10 @@
     grid:
     - 0,0,6,3
     maxItemSize: Huge
+    blacklist:
+      tags:
+        - TrashBag
+        - TrashBagHolding
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
@@ -94,7 +98,7 @@
   description: It's a very robust backpack.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Backpacks/security.rsi
+    sprite: SS220/Clothing/Back/Backpacks/security.rsi
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-reinforced-textile
@@ -108,7 +112,7 @@
   description: It's a very sterile backpack.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Backpacks/brigmedic.rsi
+    sprite: SS220/Clothing/Back/Backpacks/brigmedic.rsi
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-synthetic
@@ -122,7 +126,7 @@
   description: It's a tough backpack for the daily grind of station life.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Backpacks/engineering.rsi
+    sprite: SS220/Clothing/Back/Backpacks/engineering.rsi
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-rubber
@@ -150,7 +154,7 @@
   description: It's a backpack especially designed for use in a sterile environment.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Backpacks/medical.rsi
+    sprite: SS220/Clothing/Back/Backpacks/medical.rsi
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-synthetic
@@ -164,7 +168,7 @@
   description: It's a special backpack made exclusively for Nanotrasen officers.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Backpacks/captain.rsi
+    sprite: SS220/Clothing/Back/Backpacks/captain.rsi
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-reinforced-textile
@@ -177,7 +181,7 @@
   description: A silent backpack made for those silent workers. Silence Co.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Backpacks/mime.rsi
+    sprite: SS220/Clothing/Back/Backpacks/mime.rsi
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-textile
@@ -194,7 +198,7 @@
   description: A backpack specially designed to repel stains and hazardous liquids.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Backpacks/chemistry.rsi
+    sprite: SS220/Clothing/Back/Backpacks/chemistry.rsi
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-synthetic
@@ -208,7 +212,7 @@
   description: It's a backpack made of all-natural fibers.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Backpacks/hydroponics.rsi
+    sprite: SS220/Clothing/Back/Backpacks/hydroponics.rsi
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-floral
@@ -222,7 +226,7 @@
   description: A backpack specially designed to repel stains and hazardous liquids.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Backpacks/science.rsi
+    sprite: SS220/Clothing/Back/Backpacks/science.rsi
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-synthetic
@@ -236,7 +240,7 @@
   description: A backpack made of hypo-allergenic fibers. It's designed to help prevent the spread of disease. Smells like monkey.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Backpacks/virology.rsi
+    sprite: SS220/Clothing/Back/Backpacks/virology.rsi
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-synthetic

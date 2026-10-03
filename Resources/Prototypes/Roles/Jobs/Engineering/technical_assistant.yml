@@ -16,7 +16,7 @@
   experienceDefinition: TechnicalAssistantRoleExperience # SS220-experience
   icon: "JobIconTechnicalAssistant"
   supervisors: job-supervisors-engineering
-  canBeAntag: true
+  canBeAntag: true # SS220
   access:
   - Maintenance
   - Engineering

@@ -11,7 +11,10 @@
     prototypes: [SyndicateOperativeGearExtremelyBasic]
     roleLoadout: [ RoleSurvivalSyndicate ]
   - type: RandomMetadata
-    nameSegments: [NamesDeathCommando] # Corvax-Localization
+    nameSegments:
+    - NamesDeathCommandoFirst
+    - NamesDeathCommandoLast
+    nameFormat: name-format-standard
   - type: NpcFactionMember
     factions:
     - Syndicate

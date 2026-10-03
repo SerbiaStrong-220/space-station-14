@@ -9,6 +9,7 @@
   - CaptainBackpack
   - CaptainGloves #SS220-whiteCaptainGloves
   - CaptainOuterClothing
+  - AssistiveItems
   - Survival
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -29,6 +30,7 @@
   - HoPBackpack
   - HoPOuterClothing
   - Glasses
+  - AssistiveItems
   - Survival
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -65,6 +67,7 @@
   - PassengerOuterClothing
   - PassengerShoes
   - Glasses
+  - AssistiveItems
   - Survival
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -81,6 +84,7 @@
   - CommonBackpack
   - BartenderOuterClothing
   - Glasses
+  - AssistiveItems
   - Survival
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -95,6 +99,7 @@
   - ServiceWorkerJumpsuit #SS220-Service Worker Loadout Fix
   - CommonBackpack
   - Glasses
+  - AssistiveItems
   - Survival
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -113,6 +118,7 @@
   - ChefOuterClothing
   - ChefBeltApron #SS220 Chef Resprite
   - Glasses
+  - AssistiveItems
   - Survival
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -127,6 +133,7 @@
   - LibrarianJumpsuit
   - CommonBackpack
   - LibrarianEyes #SS220 ADD Monocle
+  - AssistiveItems
   - Survival
   - Trinkets
   - SurvivalVox #SS220-Survival-Loadout
@@ -146,6 +153,7 @@
   - LawyerOuterclothing #SS220-Two Floppa Iteration
   - LawyerBackpack #SS220- Leather backback loadout
   - IAAGlasses #SS220-IAA-Loadouts
+  - AssistiveItems
   - Survival
   - SurvivalVox #SS220-Survival-Loadout
   - Gloves #SS220-IAA-Loadouts
@@ -168,6 +176,7 @@
   - ChaplainOuterClothing
   - ChaplainBible
   - Glasses
+  - AssistiveItems
   - Survival
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -190,6 +199,7 @@
   - JanitorShoes #SS220-OrangeJanitor
   - JanitorBelt #SS220-JunkRecyclesJanitor
   - Glasses
+  - AssistiveItems
   - Survival
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -208,6 +218,7 @@
   - BotanistBackpack
   - BotanistOuterClothing
   - Glasses
+  - AssistiveItems
   - Survival
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -232,6 +243,7 @@
   - ClownOuterClothing
   - ClownShoes
   - Glasses
+  - AssistiveItems
   - SurvivalClown
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -252,6 +264,7 @@
   - MimeBelt
   - MimeShoes #SS220-Two Floppa Iterarion
   - Glasses
+  - AssistiveItems
   - SurvivalMime
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -269,12 +282,13 @@
   - CommonBackpack
   - MusicianOuterClothing
   - MusicianShoes #SS220 bard loadout
+  - Instruments
   - Glasses
+  - AssistiveItems
   - Survival
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- MusicianJobTrinkets
-  - Instruments
   - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - WorkerCash #SS220-Cash-personal
@@ -292,6 +306,7 @@
   - QuartermasterOuterClothing
   - QuartermasterShoes
   - Glasses
+  - AssistiveItems
   - Survival
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -311,6 +326,7 @@
   - CargoTechnicianShoes
   - CargoTechnicianID
   - Glasses
+  - AssistiveItems
   - Survival
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -328,6 +344,7 @@
   - SalvageSpecialistOuterClothing
   - SalvageSpecialistShoes
   - Glasses
+  - AssistiveItems
   - Survival
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -350,6 +367,7 @@
   - ChiefEngineerOuterClothing
   - ChiefEngineerShoes
   - ChiefEngineerPDA #SS220-dark-chief-engineer-pda
+  - AssistiveItems
   - SurvivalExtended
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -364,6 +382,7 @@
   - GroupTankHarness
   - TechnicalAssistantJumpsuit
   - StationEngineerBackpack
+  - AssistiveItems
   - SurvivalExtended
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -382,6 +401,7 @@
   - StationEngineerOuterClothing
   - StationEngineerShoes
   - StationEngineerID
+  - AssistiveItems
   - SurvivalExtended
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -399,6 +419,7 @@
   - AtmosphericTechnicianBackpack
   - AtmosphericTechnicianOuterClothing
   - AtmosphericTechnicianShoes
+  - AssistiveItems
   - SurvivalExtended
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -423,6 +444,7 @@
   - ResearchDirectorShoes
   - ResearchDirectorPDA #SS220-RD-New-Loadout
 #  - Glasses #SS220-TwoOne-Floppa-Iteration
+  - AssistiveItems
   - Survival
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -445,6 +467,7 @@
   - ScientistShoes
   - ScientistPDA
 #  - Glasses #SS220-Two Floppa Iteration
+  - AssistiveItems
   - Survival
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -460,6 +483,7 @@
   - ResearchAssistantJumpsuit
   - ScientistBackpack
   - Glasses
+  - AssistiveItems
   - Survival
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -480,6 +504,7 @@
   - SecurityBelt
   - HeadofSecurityOuterClothing
   - SecurityShoes
+  - AssistiveItems
   - SurvivalSecurity
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -501,6 +526,7 @@
   - SecurityBelt
   - WardenOuterClothing
   - SecurityShoes
+  - AssistiveItems
   - SurvivalSecurity
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -523,6 +549,7 @@
   - SecurityShoes
   - SecurityPDA
   - SecurityBelt
+  - AssistiveItems
   - SurvivalSecurity
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -541,6 +568,7 @@
   - DetectiveSecBackpack #ss220 backpack noir
   - DetectiveOuterClothing
   - DetectiveShoes #SS220 dec-lux-shoes
+  - AssistiveItems
   - SurvivalSecurity
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -554,6 +582,7 @@
   groups:
   - SecurityCadetJumpsuit
   - SecurityBackpack
+  - AssistiveItems
   - SurvivalSecurity
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -571,6 +600,7 @@
   - ReporterOuterClothing
   - CommonBackpack
   - Glasses
+  - AssistiveItems
   - Survival
   - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
@@ -586,6 +616,7 @@
   - MedicalNeck #SS220-WhiteScarf
   - MedicalBackpack
   - Glasses
+  - AssistiveItems
   - Survival
   - SurvivalVox #SS220-Survival-Loadout
   - GroupSpeciesBreathToolMedical #SS220-Survival-Loadout
@@ -633,6 +664,13 @@
   - GroupTankHarness
 
 - type: roleLoadout
+  id: RoleSurvivalExtendedAntag # Used by antagonists that spawn off-station (e.g wizards)
+  groups:
+  - SurvivalExtendedAntag
+  - GroupSpeciesBreathTool
+  - GroupTankHarness
+
+- type: roleLoadout
   id: RoleSurvivalMedical
   groups:
   - SurvivalMedical
@@ -670,6 +708,12 @@
   groups:
   - GroupEVATank
   - SurvivalExtended
+
+- type: roleLoadout
+  id: RoleSurvivalEVAAntag # Used by antagonists that spawn off-station AND in space (e.g ninjas)
+  groups:
+  - GroupEVATank
+  - SurvivalExtendedAntag
 
 - type: roleLoadout
   id: RoleSurvivalSpaceNinja

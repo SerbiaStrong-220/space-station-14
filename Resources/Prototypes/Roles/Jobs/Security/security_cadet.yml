@@ -22,7 +22,6 @@
   experienceDefinition: SecurityCadetRoleExperience # SS220-experience
   icon: "JobIconSecurityCadet"
   supervisors: job-supervisors-security
-  canBeAntag: false
   access:
   - Security
   - Brig

@@ -35,8 +35,8 @@
   icon: "JobIconCaptain"
   joinNotifyCrew: true
   supervisors: job-supervisors-centcom
-  canBeAntag: false
-  radioBold: true
+  canBeAntag: false # SS220
+  radioBold: true # SS220
   accessGroups:
   - AllAccess
   special:

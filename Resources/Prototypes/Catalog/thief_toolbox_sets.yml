@@ -64,7 +64,7 @@
   name: thief-backpack-category-sleeper-name
   description: thief-backpack-category-sleeper-description
   sprite:
-    sprite: Objects/Tanks/anesthetic.rsi
+    sprite: SS220/Objects/Tanks/anesthetic.rsi
     state: icon
   content:
   - ChemistryBottleNocturine

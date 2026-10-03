@@ -21,14 +21,14 @@ using Content.Shared.Body;
 
 namespace Content.Server.Mind;
 
-public sealed class MindSystem : SharedMindSystem
+public sealed partial class MindSystem : SharedMindSystem
 {
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IPlayerManager _players = default!;
-    [Dependency] private readonly GhostSystem _ghosts = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private IPlayerManager _players = default!;
+    [Dependency] private GhostSystem _ghosts = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private PvsOverrideSystem _pvsOverride = default!;
     [Dependency] private readonly SharedContainerSystemExtensions _containerSystemExtensions = default!; //SS220-Cryo-mobs-fix
     [Dependency] private readonly MindExtensionSystem _mindExtension = default!; //SS220-mind-extension
 
@@ -205,7 +205,7 @@ public sealed class MindSystem : SharedMindSystem
         {
             component = EnsureComp<MindContainerComponent>(entity.Value);
 
-            if (TryGetMind(entity.Value, out var entityMindId, out _))
+            if (TryGetMind(entity.Value, out var entityMindId, out _) && entityMindId != mindId)
                 _ghosts.OnGhostAttempt(entityMindId, false);
 
             if (TryComp<ActorComponent>(entity.Value, out var actor))
@@ -251,7 +251,7 @@ public sealed class MindSystem : SharedMindSystem
 
             oldContainer.Mind = null;
             oldContainer.HasMind = false;
-            mind.OwnedEntity = null;
+            mind.OwnedEntity = entity;
 
             RaiseLocalEvent(oldEntity.Value, new MindRemovedMessage(mindEnt, containerEnt, entity));
             RaiseLocalEvent(mindId, new MindGotRemovedEvent(mindEnt, containerEnt, entity));
@@ -265,6 +265,11 @@ public sealed class MindSystem : SharedMindSystem
             // Yes this control flow sucks.
             mind.VisitingEntity = null;
             RemComp<VisitingMindComponent>(entity!.Value);
+            // If you are transferring to your own ghost then you can no longer return to body
+            if (TryComp(entity.Value, out GhostComponent? ghostComponent))
+            {
+                _ghosts.SetCanReturnToBody((entity.Value, ghostComponent), false);
+            }
         }
         else if (mind.VisitingEntity != null
               && (ghostCheckOverride // to force mind transfer, for example from ControlMobVerb
@@ -285,7 +290,12 @@ public sealed class MindSystem : SharedMindSystem
 
         if (entity != null)
         {
+            if (component!.Mind.HasValue && TryComp(component!.Mind.Value, out MindComponent? newMind))
+            {
+                TransferTo(component!.Mind.Value, newMind?.VisitingEntity);
+            }
             component!.Mind = mindId;
+            component.LastMind = mindId;
             component.HasMind = true;
             mind.OwnedEntity = entity;
             mind.OriginalOwnedEntity ??= GetNetEntity(mind.OwnedEntity);

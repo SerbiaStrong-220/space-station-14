@@ -18,14 +18,14 @@ using Content.Shared.Construction.Components;
 namespace Content.Shared.Foldable;
 
 // TODO: This system could arguably be refactored into a general state system, as it is being utilized for a lot of different objects with various needs.
-public sealed class FoldableSystem : EntitySystem
+public sealed partial class FoldableSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedBuckleSystem _buckle = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly AnchorableSystem _anchorable = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!; //SS220-fold-doafter
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedBuckleSystem _buckle = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private AnchorableSystem _anchorable = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!; //SS220-fold-doafter
 
     public override void Initialize()
     {
@@ -113,9 +113,9 @@ public sealed class FoldableSystem : EntitySystem
         if (!result && folder != null)
         {
             if (comp.IsFolded)
-                _popup.PopupPredicted(Loc.GetString("foldable-unfold-fail", ("object", uid)), uid, folder.Value);
+                _popup.PopupEntity(Loc.GetString("foldable-unfold-fail", ("object", uid)), uid, folder.Value);
             else
-                _popup.PopupPredicted(Loc.GetString("foldable-fold-fail", ("object", uid)), uid, folder.Value);
+                _popup.PopupEntity(Loc.GetString("foldable-fold-fail", ("object", uid)), uid, folder.Value);
         }
         return result;
     }

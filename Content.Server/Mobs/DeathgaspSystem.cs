@@ -13,9 +13,9 @@ namespace Content.Server.Mobs;
 
 
 /// <see cref="DeathgaspComponent"/>
-public sealed class DeathgaspSystem: EntitySystem
+public sealed partial class DeathgaspSystem: EntitySystem
 {
-    [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private ChatSystem _chat = default!;
     [Dependency] private readonly EuiManager _euiManager = null!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
 

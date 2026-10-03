@@ -16,6 +16,12 @@
   # ss220 - post upstream tweaks - xenoborgs req hours tweak & play tracker - end
   guides: [ Xenoborgs ]
 
+- type: antagSpecifier
+  parent: RestrictedAntag
+  id: MothershipCore
+  prefRoles: [ MothershipCore ]
+  spawnerPrototype: SpawnPointGhostRoleMothershipCore
+
 - type: antag
   id: Xenoborg
   name: roles-antag-xenoborg-name
@@ -33,3 +39,14 @@
   antagColor: Blue
   # ss220 - post upstream tweaks - xenoborgs req hours tweak & play tracker - end
   guides: [ Xenoborgs ]
+
+- type: antagSpecifier
+  abstract: true
+  parent: RestrictedAntag
+  id: BaseXenoborg
+  prefRoles: [ Xenoborg ]
+  spawnerPrototype: SpawnPointGhostRoleXenoborg
+
+- type: antagSpecifier
+  parent: BaseXenoborg
+  id: Xenoborg

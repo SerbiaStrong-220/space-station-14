@@ -15,7 +15,6 @@
     time: 30h # SS220-AITime-30H
   # SS220-AITime-end
   weight: 10
-  canBeAntag: false
   icon: JobIconStationAi
   experienceDefinition: StationAiRoleExperience # SS220-experience
   supervisors: job-supervisors-rd
@@ -36,7 +35,7 @@
   requirements:
     - !type:OverallPlaytimeRequirement
       time: 20h # SS220-RoleTime
-  canBeAntag: false
+  canBeAntag: false # SS220
   icon: JobIconBorg
   supervisors: job-supervisors-rd
   jobEntity: PlayerBorgBattery

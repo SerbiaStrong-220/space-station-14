@@ -37,8 +37,9 @@ public sealed class AdminLogLabel : RichTextLabel
                 MarkedForCopying = true;
         };
         //SS220-make-copy-for-logs-end
+        var localTime = log.Date.ToLocalTime();
 
-        SetMessage($"{log.Date:HH:mm:ss}: {log.Message}", defaultColor: _textColor); //SS220-make-copy-for-logs
+        SetMessage($"{localTime:HH:mm:ss}: {log.Message}", defaultColor: _textColor); //SS220-make-copy-for-logs
         OnVisibilityChanged += VisibilityChanged;
     }
 

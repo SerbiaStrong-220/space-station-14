@@ -15,14 +15,13 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.RatKing;
 
-public abstract class SharedRatKingSystem : EntitySystem
+public abstract partial class SharedRatKingSystem : EntitySystem
 {
-    [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
-    [Dependency] protected readonly IRobustRandom Random = default!;
-    [Dependency] private readonly SharedActionsSystem _action = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!; //SS220 RatKing tweaks and changes
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!; // SS220 Ratking tweaks
-    [Dependency] private readonly TagSystem _tagSystem = default!; // SS220 make ratking rats Trash after death
+    [Dependency] protected IRobustRandom Random = default!;
+    [Dependency] private SharedActionsSystem _action = default!;
+    [Dependency] private SharedPopupSystem _popup = default!; //SS220 RatKing tweaks and changes
+    [Dependency] private SharedDoAfterSystem _doAfter = default!; // SS220 Ratking tweaks
+    [Dependency] private TagSystem _tagSystem = default!; // SS220 make ratking rats Trash after death
 
     private static readonly ProtoId<TagPrototype> TrashTag = "Trash"; // SS220 RatKing Tweaks and Changes
 

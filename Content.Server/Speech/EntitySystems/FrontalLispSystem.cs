@@ -1,11 +1,11 @@
 using System.Text.RegularExpressions;
 using Content.Server.Speech.Components;
 using Robust.Shared.Random; // Corvax-Localization
-using Content.Shared.Speech;
+using Content.Shared.Speech.EntitySystems;
 
 namespace Content.Server.Speech.EntitySystems;
 
-public sealed partial class FrontalLispSystem : EntitySystem // ss220 add static regex
+public sealed partial class FrontalLispSystem : RelayAccentSystem<FrontalLispComponent> // ss220 add static regex
 {
     [Dependency] private readonly IRobustRandom _random = default!; // Corvax-Localization
 
@@ -36,16 +36,8 @@ public sealed partial class FrontalLispSystem : EntitySystem // ss220 add static
     [GeneratedRegex(@"З")] private static partial Regex RegexRuZUpper();
     // ss220 add static regex end
 
-    public override void Initialize()
+    public override string Accentuate(string message, Entity<FrontalLispComponent>? ent = null)
     {
-        base.Initialize();
-        SubscribeLocalEvent<FrontalLispComponent, AccentGetEvent>(OnAccent);
-    }
-
-    private void OnAccent(EntityUid uid, FrontalLispComponent component, AccentGetEvent args)
-    {
-        var message = args.Message;
-
         // ss220 add static regex start
         // handles ts, sc(i|e|y), c(i|e|y), ps, st(io(u|n)), ch(i|e), z, s
         message = RegexUpperTh().Replace(message, "TH");
@@ -67,6 +59,6 @@ public sealed partial class FrontalLispSystem : EntitySystem // ss220 add static
         // Corvax-Localization End
         // ss220 add static regex end
 
-        args.Message = message;
+        return message;
     }
 }

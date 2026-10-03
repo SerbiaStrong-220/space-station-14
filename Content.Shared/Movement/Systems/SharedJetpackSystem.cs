@@ -18,18 +18,18 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.Movement.Systems;
 
-public abstract class SharedJetpackSystem : EntitySystem
+public abstract partial class SharedJetpackSystem : EntitySystem
 {
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
-    [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
-    [Dependency] protected readonly SharedContainerSystem Container = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!; //SS220 Magboots with jet fix
-    [Dependency] private readonly SharedBuckleSystem _buckle = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeedModifier = default!;
+    [Dependency] protected SharedAppearanceSystem Appearance = default!;
+    [Dependency] protected SharedContainerSystem Container = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private ActionContainerSystem _actionContainer = default!;
+    [Dependency] private InventorySystem _inventory = default!; //SS220 Magboots with jet fix
+    [Dependency] private SharedBuckleSystem _buckle = default!;
 
-    [Dependency] private readonly EntityQuery<JetpackComponent> _jetpackQuery = default!;
+    [Dependency] private EntityQuery<JetpackComponent> _jetpackQuery = default!;
 
     public override void Initialize()
     {
@@ -73,7 +73,7 @@ public abstract class SharedJetpackSystem : EntitySystem
             if (transform.GridUid == gridUid && ev.HasGravity &&
                 _jetpackQuery.TryGetComponent(user.Jetpack, out var jetpack))
             {
-                _popup.PopupClient(Loc.GetString("jetpack-to-grid"), uid, uid);
+                _popup.PopupEntity(Loc.GetString("jetpack-to-grid"), uid, uid);
 
                 SetEnabled(user.Jetpack, jetpack, false, uid);
             }
@@ -104,7 +104,7 @@ public abstract class SharedJetpackSystem : EntitySystem
         {
             SetEnabled(component.Jetpack, jetpack, false, uid);
 
-            _popup.PopupClient(Loc.GetString("jetpack-to-grid"), uid, uid);
+            _popup.PopupEntity(Loc.GetString("jetpack-to-grid"), uid, uid);
         }
     }
 
@@ -194,7 +194,7 @@ public abstract class SharedJetpackSystem : EntitySystem
         //ss220 magboots with jet on gravity fix start
         if (!CanEnableOnGrid(xform.GridUid))
         {
-            _popup.PopupClient(Loc.GetString("jetpack-no-station"), uid, args.Performer);
+            _popup.PopupEntity(Loc.GetString("jetpack-no-station"), uid, args.Performer);
 
             return;
         }

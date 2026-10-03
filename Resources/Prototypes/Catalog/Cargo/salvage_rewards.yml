@@ -2,7 +2,7 @@
 - type: cargoProduct
   id: CargoDoubleEmergencyTank
   icon:
-    sprite: Objects/Tanks/emergency_double.rsi
+    sprite: SS220/Objects/Tanks/emergency_double.rsi
     state: icon
   product: CrateDoubleEmergencyTank
   cost: 2400

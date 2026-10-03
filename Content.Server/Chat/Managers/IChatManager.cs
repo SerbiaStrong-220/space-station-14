@@ -55,5 +55,7 @@ namespace Content.Server.Chat.Managers
 
         public string DeleteProhibitedCharacters(string message, ICommonSession? player = null);
         // SS220 delete prohibited characters end
+
+        string PrependFollowButtonIfAppropriate(string wrappedMessage, EntityUid source, INetChannel recipient);
     }
 }

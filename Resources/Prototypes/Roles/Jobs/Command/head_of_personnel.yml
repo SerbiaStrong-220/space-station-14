@@ -39,7 +39,7 @@
   experienceDefinition: HeadOfPersonnelRoleExperience
   icon: "JobIconHeadOfPersonnel"
   supervisors: job-supervisors-captain
-  radioBold: true
+  radioBold: true # SS220
   access:
   - Command
   - HeadOfPersonnel

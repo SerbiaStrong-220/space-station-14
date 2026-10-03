@@ -16,7 +16,6 @@
   experienceDefinition: WardenRoleExperience # SS220-experience
   icon: "JobIconWarden"
   supervisors: job-supervisors-hos
-  canBeAntag: false
   access:
   - Security
   - Brig

@@ -1,81 +1,68 @@
+using System.Text.RegularExpressions;
 using System.Text;
 using Content.Server.Speech.Components;
-using Content.Shared.Speech;
+using Content.Shared.Speech.EntitySystems;
 
-namespace Content.Server.Speech.EntitySystems
+namespace Content.Server.Speech.EntitySystems;
+
+public sealed class SpanishAccentSystem : RelayAccentSystem<SpanishAccentComponent>
 {
-    public sealed class SpanishAccentSystem : EntitySystem
-    {
-    [Dependency] private readonly ReplacementAccentSystem _replacement = default!; // SS220 fix spanish accent
+    [Dependency] private ReplacementAccentSystem _replacement = default!; // SS220 fix spanish accent
 
     public const string SpanishAccentId = "spanish"; // SS220 fix spanish accent
 
-    public override void Initialize()
+    // for words in all lowercase (multiple "s" are allowed)
+    private static readonly Regex RegexLower = new(@"(?<!\w)(s+h*[bcdfgjklmnpqrtvwxz])");
+    // For Capitalized Words (Station -> Estation; Capital "S" Is Replaced Directly, Multiple "S" Are Allowed)
+    private static readonly Regex RegexCaps = new(@"(?<!\w)S(s*h*[bcdfgjklmnpqrtvwxz])");
+    // FOR WORDS IN ALL UPPERCASE (ONLY ONE "S" IS ALLOWED, ASSUMING IT'S NOT AN ACRONYM)
+    private static readonly Regex RegexUpper = new(@"(?<!\w)(SH*[BCDFGJKLMNPQRTVWXZ])");
+
+    public override string Accentuate(string message, Entity<SpanishAccentComponent>? ent = null)
     {
-        SubscribeLocalEvent<SpanishAccentComponent, AccentGetEvent>(OnAccent);
+        // Insert E before every S that is followed by a consonant that makes a distinct sound
+        // (H is excluded because [sh] is a single sound)
+        message = InsertS(message);
+
+        message = _replacement.ApplyReplacements(message, SpanishAccentId); // SS220 fix spanish accent
+
+        // If a sentence ends with ?, insert a reverse ? at the beginning of the sentence
+        message = ReplacePunctuation(message);
+        return message;
     }
 
-    public string Accentuate(string message)
+    private string InsertS(string message)
+    {
+        // Replace every new Word that starts with s/S and a consonant
+        message = RegexLower.Replace(message, "e$1");
+        message = RegexCaps.Replace(message, "Es$1");
+        message = RegexUpper.Replace(message, "E$1");
+        return message;
+    }
+
+    private string ReplacePunctuation(string message)
+    {
+        var sentences = AccentSystem.SentenceRegex.Split(message);
+        var msg = new StringBuilder();
+        foreach (var s in sentences)
         {
-            // Insert E before every S
-            message = InsertS(message);
-
-            message = _replacement.ApplyReplacements(message, SpanishAccentId); // SS220 fix spanish accent
-       
-            // If a sentence ends with ?, insert a reverse ? at the beginning of the sentence
-            message = ReplacePunctuation(message);
-            return message;
-        }
-
-        private string InsertS(string message)
-        {
-            // Replace every new Word that starts with s/S
-            var msg = message.Replace(" s", " es").Replace(" S", " Es");
-
-            // Still need to check if the beginning of the message starts
-            if (msg.StartsWith("s", StringComparison.Ordinal))
+            var toInsert = new StringBuilder();
+            for (var i = s.Length - 1; i >= 0 && "?!‽".Contains(s[i]); i--)
             {
-                return msg.Remove(0, 1).Insert(0, "es");
+                toInsert.Append(s[i] switch
+                {
+                    '?' => '¿',
+                    '!' => '¡',
+                    '‽' => '⸘',
+                    _ => ' '
+                });
             }
-            else if (msg.StartsWith("S", StringComparison.Ordinal))
-            {
-                return msg.Remove(0, 1).Insert(0, "Es");
-            }
-
-            return msg;
+            if (toInsert.Length == 0)
+                msg.Append(s);
+            else
+                msg.Append(s.Insert(s.Length - s.TrimStart().Length, toInsert.ToString()));
         }
 
-        private string ReplacePunctuation(string message)
-        {
-            var sentences = AccentSystem.SentenceRegex.Split(message);
-            var msg = new StringBuilder();
-            foreach (var s in sentences)
-            {
-                var toInsert = new StringBuilder();
-                for (var i = s.Length - 1; i >= 0 && "?!‽".Contains(s[i]); i--)
-                {
-                    toInsert.Append(s[i] switch
-                    {
-                        '?' => '¿',
-                        '!' => '¡',
-                        '‽' => '⸘',
-                        _ => ' '
-                    });
-                }
-                if (toInsert.Length == 0)
-                {
-                    msg.Append(s);
-                } else
-                {
-                    msg.Append(s.Insert(s.Length - s.TrimStart().Length, toInsert.ToString()));
-                }
-            }
-            return msg.ToString();
-        }
-
-        private void OnAccent(EntityUid uid, SpanishAccentComponent component, AccentGetEvent args)
-        {
-            args.Message = Accentuate(args.Message);
-        }
+        return msg.ToString();
     }
 }

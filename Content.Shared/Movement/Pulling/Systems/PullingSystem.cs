@@ -45,28 +45,28 @@ namespace Content.Shared.Movement.Pulling.Systems;
 /// <summary>
 /// Allows one entity to pull another behind them via a physics distance joint.
 /// </summary>
-public sealed class PullingSystem : EntitySystem
+public sealed partial class PullingSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!; // SS220-MIT-pull-visualization
-    [Dependency] private readonly RotateToFaceSystem _rotateTo = default!; // SS220-MIT-pull-visualization
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private readonly AlertsSystem _alertsSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!; // SS220-MIT-pull-visualization
-    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!; // SS220-MIT-pull-visualization
-    [Dependency] private readonly MovementSpeedModifierSystem _modifierSystem = default!;
-    [Dependency] private readonly SharedJointSystem _joints = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!; // SS220-MIT-pull-visualization
-    [Dependency] private readonly SharedCombatModeSystem _combatMode = default!; // SS220-MIT-pull-visualization
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly HeldSpeedModifierSystem _clothingMoveSpeed = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedVirtualItemSystem _virtual = default!;
-    [Dependency] private readonly SharedGrabSystem _grab = default!; // SS220-Grabs
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!; // SS220-MIT-pull-visualization
+    [Dependency] private RotateToFaceSystem _rotateTo = default!; // SS220-MIT-pull-visualization
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private AlertsSystem _alertsSystem = default!;
+    [Dependency] private SharedAudioSystem _audio = default!; // SS220-MIT-pull-visualization
+    [Dependency] private SharedMeleeWeaponSystem _melee = default!; // SS220-MIT-pull-visualization
+    [Dependency] private MovementSpeedModifierSystem _modifierSystem = default!;
+    [Dependency] private SharedJointSystem _joints = default!;
+    [Dependency] private SharedColorFlashEffectSystem _colorFlash = default!; // SS220-MIT-pull-visualization
+    [Dependency] private SharedCombatModeSystem _combatMode = default!; // SS220-MIT-pull-visualization
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private SharedHandsSystem _handsSystem = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private HeldSpeedModifierSystem _clothingMoveSpeed = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedVirtualItemSystem _virtual = default!;
+    [Dependency] private SharedGrabSystem _grab = default!; // SS220-Grabs
 
     static readonly Color СolorCaptureEffect = Color.Yellow; // SS220-MIT-pull-visualization
 

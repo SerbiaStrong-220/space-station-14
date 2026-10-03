@@ -51,6 +51,7 @@
   - MegaSprayBottle
   - TrashBagAdvanced #SS220 Borg Modules
   - PdaIdPainterMachineCircuitboard #ss220 add pdaidpainter
+  - TrashBagHolding
 
 - type: latheRecipePack
   id: Instruments

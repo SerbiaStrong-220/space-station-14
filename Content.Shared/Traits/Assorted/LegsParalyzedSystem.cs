@@ -7,11 +7,11 @@ using Content.Shared.Throwing;
 
 namespace Content.Shared.Traits.Assorted;
 
-public sealed class LegsParalyzedSystem : EntitySystem
+public sealed partial class LegsParalyzedSystem : EntitySystem
 {
-    [Dependency] private readonly SharedBuckleSystem _buckle = default!; // SS220-Mindslave-disfunction
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifierSystem = default!;
-    [Dependency] private readonly StandingStateSystem _standingSystem = default!;
+    [Dependency] private SharedBuckleSystem _buckle = default!; // SS220-Mindslave-disfunction
+    [Dependency] private MovementSpeedModifierSystem _movementSpeedModifierSystem = default!;
+    [Dependency] private StandingStateSystem _standingSystem = default!;
 
     public override void Initialize()
     {

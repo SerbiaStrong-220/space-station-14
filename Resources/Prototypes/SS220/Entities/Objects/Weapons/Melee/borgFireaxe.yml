@@ -11,7 +11,7 @@
   - type: Execution
     doAfterDuration: 4.0
   - type: Sprite
-    sprite: Objects/Weapons/Melee/fireaxe.rsi
+    sprite: SS220/Objects/Weapons/Melee/fireaxe.rsi
     state: icon
   - type: MeleeWeapon
     wideAnimationRotation: 135
@@ -53,7 +53,7 @@
   - type: IgniteOnMeleeHit
     fireStacks: 1
   - type: Sprite
-    sprite: Objects/Weapons/Melee/fireaxeflaming.rsi
+    sprite: SS220/Objects/Weapons/Melee/fireaxeflaming.rsi
     state: icon
   # SS220-hidden-desc-begin
   - type: HiddenDescription

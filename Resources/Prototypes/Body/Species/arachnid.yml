@@ -130,7 +130,7 @@
     bloodReferenceSolution:
       reagents:
       - ReagentId: CopperBlood
-        Quantity: 300
+        Quantity: 600
   - type: MeleeWeapon
     animation: WeaponArcBite
     soundHit:
@@ -151,10 +151,7 @@
     speechSounds: Arachnid
     allowedEmotes: ['Click', 'Chitter', 'Hiss'] #ss-220-emote-fix
   - type: Vocal
-    sounds:
-      Male: UnisexArachnid
-      Female: UnisexArachnid
-      Unsexed: UnisexArachnid
+    emoteSounds: UnisexArachnid
   - type: TypingIndicator
     proto: spider
   # SS220-Add-Languages begin
@@ -172,7 +169,7 @@
       state: creampie_arachnid
 
 - type: entity
-  parent: OrganBase
+  parent: OrganBaseOrganic
   id: OrganArachnid
   abstract: true
   suffix: Arachnid

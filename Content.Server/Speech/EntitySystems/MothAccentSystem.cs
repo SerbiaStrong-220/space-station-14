@@ -1,11 +1,11 @@
 ﻿using System.Text.RegularExpressions;
 using Content.Server.Speech.Components;
 using Robust.Shared.Random;
-using Content.Shared.Speech;
+using Content.Shared.Speech.EntitySystems;
 
 namespace Content.Server.Speech.EntitySystems;
 
-public sealed partial class MothAccentSystem : EntitySystem // ss220 add static regex
+public sealed partial class MothAccentSystem : RelayAccentSystem<MothAccentComponent> // ss220 add static regex
 {
     [Dependency] private readonly IRobustRandom _random = default!; // Corvax-Localization
 
@@ -34,16 +34,8 @@ public sealed partial class MothAccentSystem : EntitySystem // ss220 add static 
     private static readonly string[] ZBigReplies = ["ЗЗ", "ЗЗЗ"];
     // ss220 add static regex end
 
-    public override void Initialize()
+    public override string Accentuate(string message, Entity<MothAccentComponent>? ent = null)
     {
-        base.Initialize();
-        SubscribeLocalEvent<MothAccentComponent, AccentGetEvent>(OnAccent);
-    }
-
-    private void OnAccent(EntityUid uid, MothAccentComponent component, AccentGetEvent args)
-    {
-        var message = args.Message;
-
         // buzzz
         message = RegexLowerBuzz().Replace(message, "zzz");
         // buZZZ
@@ -58,6 +50,6 @@ public sealed partial class MothAccentSystem : EntitySystem // ss220 add static 
         // Corvax-Localization-End
         // ss220 add static regex end
 
-        args.Message = message;
+        return message;
     }
 }

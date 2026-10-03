@@ -8,13 +8,13 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Clothing.EntitySystems;
 
-public sealed class MaskSystem : EntitySystem
+public sealed partial class MaskSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actionSystem = default!;
-    [Dependency] private readonly InventorySystem _inventorySystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ClothingSystem _clothing = default!;
+    [Dependency] private SharedActionsSystem _actionSystem = default!;
+    [Dependency] private InventorySystem _inventorySystem = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ClothingSystem _clothing = default!;
 
     public override void Initialize()
     {
@@ -71,7 +71,7 @@ public sealed class MaskSystem : EntitySystem
 
         var dir = mask.IsToggled ? "down" : "up";
         var msg = $"action-mask-pull-{dir}-popup-message";
-        _popupSystem.PopupClient(Loc.GetString(msg, ("mask", maskUid)), actorUid, actorUid);
+        _popupSystem.PopupEntity(Loc.GetString(msg, ("mask", maskUid)), actorUid, actorUid);
     }
     // SS220 internals mask toggle end
 

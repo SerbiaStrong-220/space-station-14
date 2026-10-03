@@ -9,7 +9,7 @@
     arc: 360
   - type: Sprite
     drawdepth: SmallObjects
-    sprite: Structures/Wallmounts/switch.rsi
+    sprite: SS220/Structures/Wallmounts/switch.rsi
     state: on
   - type: Appearance
   - type: Destructible

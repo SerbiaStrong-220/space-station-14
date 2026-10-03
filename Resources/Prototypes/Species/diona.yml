@@ -14,3 +14,9 @@
   buttScanTexture: /Textures/SS220/Interface/Butts/diona.png # SS220 Photocopier
   sexes:
   - Unsexed
+  defaultSoundsBySex:
+  - UnisexDiona
+  - UnisexDiona
+  - UnisexDiona
+  voices:
+  - UnisexDiona

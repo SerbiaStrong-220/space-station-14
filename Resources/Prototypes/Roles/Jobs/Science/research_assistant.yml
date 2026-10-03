@@ -16,7 +16,7 @@
   experienceDefinition: ResearchAssistantRoleExperience # SS220-experience
   icon: "JobIconResearchAssistant"
   supervisors: job-supervisors-science
-  canBeAntag: true
+  canBeAntag: true # SS220
   access:
   - Research
   - Maintenance

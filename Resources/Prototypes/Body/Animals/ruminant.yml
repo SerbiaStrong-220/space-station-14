@@ -10,10 +10,19 @@
       - Wheat
       - BananaPeel
       - Omnivorous #SS220 CultYoggs
-  - type: SolutionContainerManager
+    isSpecialDigestibleExclusive: false
+  - type: SolutionManager
     solutions:
-      stomach:
-        maxVol: 80
+    - SolutionStomachRuminant
+
+- type: entity
+  parent: SolutionStomach
+  id: SolutionStomachRuminant
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      maxVol: 240
 
 - type: entity
   id: BaseMobRuminant

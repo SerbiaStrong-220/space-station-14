@@ -11,12 +11,12 @@ namespace Content.Server.Tesla.EntitySystems;
 /// <summary>
 /// Generates electricity from lightning bolts
 /// </summary>
-public sealed class TeslaCoilSystem : EntitySystem
+public sealed partial class TeslaCoilSystem : EntitySystem
 {
-    [Dependency] private readonly BatterySystem _battery = default!;
+    [Dependency] private BatterySystem _battery = default!;
     //SS220-fix-SM-begin
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
     //SS220-fix-SM-end
 
     public override void Initialize()

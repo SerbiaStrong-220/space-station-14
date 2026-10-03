@@ -36,6 +36,7 @@
     weight: 10 # 10 default
     reoccurrenceDelay: 60 #SS220 ReWork Soul Shuttle
     duration: 1
+    occursDuringRoundEnd: false
     maxOccurrences: 1
   - type: RuleGrids
   - type: LoadMapRule

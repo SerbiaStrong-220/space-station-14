@@ -1,7 +1,7 @@
 - type: entity
   name: rat king
   id: MobRatKing
-  parent: [ BaseMobRat, SimpleMobBase, MobCombat, MobPassiveCollision ] # SS220 Add Mob Passive Collision
+  parent: [ BaseMobRat, SimpleMobBase, MobCombat, BaseSlicingRefinable, MobNightVision, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   description: He's da rat. He make da roolz.
   components:
   - type: CombatMode
@@ -126,8 +126,8 @@
   - type: MobsterAccent
   - type: Speech
     speechVerb: SmallMob
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: ClothingHeadHatFancyCrown #how did that get there?
       amount: 1
   - type: MobPrice
@@ -149,6 +149,8 @@
     damageModifierSet: RatKing
     # ss220 lowTTKUpdate
   - type: Sharp
+  - type: Tool
+    qualities: Slicing
   #SS220-AddTTSRatKing begin
   - type: TTS
     voice: hagraven
@@ -194,7 +196,7 @@
 - type: entity
   name: rat servant
   id: MobRatServant
-  parent: [ BaseMobRat, SimpleMobBase, MobCombat, MobPassiveCollision ] # SS220 Add Mob Passive Collision
+  parent: [ BaseMobRat, SimpleMobBase, MobCombat, BaseSlicingRefinable, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   description: He's da mini rat. He don't make da roolz.
   categories: [ HideSpawnMenu ] #Must be configured to a King or the AI breaks.
   components:
@@ -306,15 +308,12 @@
         Base: dead
       Dead:
         Base: splat
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatRat
       amount: 1
   - type: Vocal
-    sounds:
-      Male: Mouse
-      Female: Mouse
-      Unsexed: Mouse
+    emoteSounds: Mouse
     wilhelmProbability: 0.001
   - type: Tag
     tags:

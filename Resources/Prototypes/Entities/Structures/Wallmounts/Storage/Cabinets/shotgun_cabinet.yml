@@ -5,7 +5,7 @@
   description: There is a small label that reads "For Emergency use only" along with details for safe use of the shotgun. As if.
   components:
   - type: Sprite
-    sprite: Structures/Wallmounts/shotgun_cabinet.rsi
+    sprite: SS220/Structures/Wallmounts/shotgun_cabinet.rsi
     layers:
     - state: cabinet
     - state: shotgun
@@ -13,6 +13,9 @@
       visible: true
     - state: glass
       map: ["enum.OpenableVisuals.Layer"]
+    - state: locked
+      shader: unshaded
+      map: ["enum.LockVisualLayers.Lock"]
   - type: ItemSlots
     slots:
       ItemCabinet:

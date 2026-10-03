@@ -57,7 +57,8 @@
       PDA-pen: !type:ContainerSlot {}
       PDA-pai: !type:ContainerSlot {}
       Cartridge-Slot: !type:ContainerSlot {}
-      program-container: !type:Container
+      preinstalled-program-container: !type:Container
+      removable-program-container: !type:Container
   - type: ItemSlots
   - type: Clothing
     sprite: SS220/Objects/Devices/pda.rsi #SS220 PDA-Resprite
@@ -83,12 +84,6 @@
     range: 500
   - type: CartridgeLoader
     uiKey: enum.PdaUiKey.Key
-    preinstalled:
-      - CrewManifestCartridge
-      - NotekeeperCartridge
-      - NanoTaskCartridge
-      - NewsReaderCartridge
-      - MessengerCartridgeClient # SS220 Messenger
     cartridgeSlot:
       priority: -1
       name: device-pda-slot-component-slot-name-cartridge
@@ -97,6 +92,14 @@
       whitelist:
         components:
           - Cartridge
+  - type: EntityTableContainerFill
+    containers:
+      preinstalled-program-container: !type:AllSelector
+        children:
+        - id: CrewManifestCartridge
+        - id: NotekeeperCartridge
+        - id: NanoTaskCartridge
+        - id: NewsReaderCartridge
   - type: ActivatableUI
     key: enum.PdaUiKey.Key
     singleUser: true
@@ -154,29 +157,32 @@
   id: BaseSecurityPDA
   abstract: true
   components:
-  - type: CartridgeLoader
-    preinstalled:
-    - CrewManifestCartridge
-    - NotekeeperCartridge
-    - NanoTaskCartridge
-    - NewsReaderCartridge
-    - WantedListCartridge
-    - MessengerCartridgeClient # SS220 Messenger
+  - type: EntityTableContainerFill
+    containers:
+      preinstalled-program-container: !type:AllSelector
+        children:
+        - id: CrewManifestCartridge
+        - id: NotekeeperCartridge
+        - id: NanoTaskCartridge
+        - id: NewsReaderCartridge
+        - id: WantedListCartridge
+        - id: MessengerCartridgeClient # SS220 Messenger
 
 - type: entity
   parent: BasePDA
   id: BaseMedicalPDA
   abstract: true
   components:
-  - type: CartridgeLoader
-    uiKey: enum.PdaUiKey.Key
-    preinstalled:
-      - CrewManifestCartridge
-      - NotekeeperCartridge
-      - NanoTaskCartridge
-      - NewsReaderCartridge
-      - MedTekCartridge
-      - MessengerCartridgeClient # SS220 Messenger
+  - type: EntityTableContainerFill
+    containers:
+      preinstalled-program-container: !type:AllSelector
+        children:
+        - id: CrewManifestCartridge
+        - id: NotekeeperCartridge
+        - id: NanoTaskCartridge
+        - id: NewsReaderCartridge
+        - id: MedTekCartridge
+        - id: MessengerCartridgeClient # SS220 Messenger
 
 - type: entity
   parent: BasePDA
@@ -603,9 +609,6 @@
       whitelist:
         components:
         - Cartridge
-    preinstalled:
-    - CrewManifestCartridge
-    - NewsReaderCartridge
   - type: Appearance
     appearanceDataInit:
      enum.PdaVisuals.PdaType:
@@ -630,6 +633,12 @@
   - type: Icon
     state: pda-mime
   - type: Muted # for random sentience event
+  - type: EntityTableContainerFill
+    containers:
+      preinstalled-program-container: !type:AllSelector
+        children:
+        - id: CrewManifestCartridge
+        - id: NewsReaderCartridge
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -720,6 +729,16 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-qm
+  - type: EntityTableContainerFill
+    containers:
+      preinstalled-program-container: !type:AllSelector
+        children:
+        - id: CrewManifestCartridge
+        - id: NotekeeperCartridge
+        - id: NanoTaskCartridge
+        - id: NewsReaderCartridge
+        - id: AstroNavCartridge
+        - id: MessengerCartridgeClient # SS220 Messenger
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -728,14 +747,6 @@
     - WhitelistChameleon
     - WhitelistChameleonPDA
   #ss220 add pdaidpainter end
-  - type: CartridgeLoader
-    preinstalled:
-    - CrewManifestCartridge
-    - NotekeeperCartridge
-    - NanoTaskCartridge
-    - NewsReaderCartridge
-    - AstroNavCartridge
-    - MessengerCartridgeClient #SS220 Messenger
 
 - type: entity
   parent: BasePDA
@@ -807,15 +818,16 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-miner
-  - type: CartridgeLoader
-    uiKey: enum.PdaUiKey.Key
-    preinstalled:
-      - CrewManifestCartridge
-      - NotekeeperCartridge
-      - NanoTaskCartridge
-      - NewsReaderCartridge
-      - AstroNavCartridge
-      - MessengerCartridgeClient # SS220 Messenger
+  - type: EntityTableContainerFill
+    containers:
+      preinstalled-program-container: !type:AllSelector
+        children:
+        - id: CrewManifestCartridge
+        - id: NotekeeperCartridge
+        - id: NanoTaskCartridge
+        - id: NewsReaderCartridge
+        - id: AstroNavCartridge
+        - id: MessengerCartridgeClient # SS220 Messenger
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -1479,15 +1491,17 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-hos
-  - type: CartridgeLoader
-    preinstalled:
-    - CrewManifestCartridge
-    - NotekeeperCartridge
-    - NanoTaskCartridge
-    - NewsReaderCartridge
-    - WantedListCartridge
-    - LogProbeCartridge
-    - MessengerCartridgeClient #SS220 SD-pda-some-fixes
+  - type: EntityTableContainerFill
+    containers:
+      preinstalled-program-container: !type:AllSelector
+        children:
+        - id: CrewManifestCartridge
+        - id: NotekeeperCartridge
+        - id: NanoTaskCartridge
+        - id: NewsReaderCartridge
+        - id: WantedListCartridge
+        - id: LogProbeCartridge
+        - id: MessengerCartridgeClient # SS220 Messenger
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -1613,17 +1627,18 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-centcom
-  - type: CartridgeLoader
-    uiKey: enum.PdaUiKey.Key
-    preinstalled:
-      - CrewManifestCartridge
-      - NotekeeperCartridge
-      - NanoTaskCartridge
-      - NewsReaderCartridge
-      - MedTekCartridge
-      - WantedListCartridge
-      - LogProbeCartridge
-      - AstroNavCartridge
+  - type: EntityTableContainerFill
+    containers:
+      preinstalled-program-container: !type:AllSelector
+        children:
+        - id: CrewManifestCartridge
+        - id: NotekeeperCartridge
+        - id: NanoTaskCartridge
+        - id: NewsReaderCartridge
+        - id: MedTekCartridge
+        - id: WantedListCartridge
+        - id: LogProbeCartridge
+        - id: AstroNavCartridge
 
 - type: entity
   parent: BasePDA #SS220 PDA-Resprite
@@ -1666,18 +1681,20 @@
   - type: Icon
     state: pda-clear #SS220 PDA-Resprite-End
   - type: CartridgeLoader
-    uiKey: enum.PdaUiKey.Key
     notificationsEnabled: false
-    preinstalled:
-      - CrewManifestCartridge
-      - NotekeeperCartridge
-      - NanoTaskCartridge
-      - NewsReaderCartridge
-      - LogProbeCartridge
-      - WantedListCartridge
-      - MessengerCartridgeClient # SS220 Messenger
-      - MedTekCartridge
-      - AstroNavCartridge
+  - type: EntityTableContainerFill
+    containers:
+      preinstalled-program-container: !type:AllSelector
+        children:
+        - id: CrewManifestCartridge
+        - id: NotekeeperCartridge
+        - id: NanoTaskCartridge
+        - id: NewsReaderCartridge
+        - id: LogProbeCartridge
+        - id: WantedListCartridge
+        - id: MedTekCartridge
+        - id: AstroNavCartridge
+        - id: MessengerCartridgeClient # SS220 Messenger
   - type: Tag #  Ignore Chameleon tags
     tags:
     - DoorBumpOpener
@@ -1879,12 +1896,13 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-syndi
-  - type: CartridgeLoader
-    uiKey: enum.PdaUiKey.Key
-    preinstalled:
-      - NotekeeperCartridge
-      - MessengerCartridgeClient # SS220 Messenger
-      - NanoTaskCartridge
+  - type: EntityTableContainerFill
+    containers:
+      preinstalled-program-container: !type:AllSelector
+        children:
+        - id: NotekeeperCartridge
+        - id: NanoTaskCartridge
+        - id: MessengerCartridgeClient # SS220 Messenger
 
 - type: entity
   parent: [ SyndiPDA, BaseSyndicateContraband ]
@@ -1919,12 +1937,13 @@
   - type: Icon
     sprite: SS220/Objects/Devices/pda.rsi #SS220 PDA-Resprite-TODO
     state: pda-syndi-agent #SS220 PDA-Resprite-TODO
-  - type: CartridgeLoader
-    uiKey: enum.PdaUiKey.Key
-    preinstalled:
-      - NotekeeperCartridge
-      - NanoTaskCartridge
-      - MedTekCartridge
+  - type: EntityTableContainerFill
+    containers:
+      preinstalled-program-container: !type:AllSelector
+        children:
+        - id: NotekeeperCartridge
+        - id: NanoTaskCartridge
+        - id: MedTekCartridge
 
 - type: entity
   parent: [ SyndiOperativePDA, BaseSyndicateContraband ]
@@ -1976,18 +1995,19 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-ert
-  - type: CartridgeLoader
-    uiKey: enum.PdaUiKey.Key
-    preinstalled:
-      - CrewManifestCartridge
-      - NotekeeperCartridge
-      - NanoTaskCartridge
-      - NewsReaderCartridge
-      - MedTekCartridge
-      - WantedListCartridge
-      - LogProbeCartridge
-      - AstroNavCartridge
-      - MessengerCartridgeClient # SS220 Messenger
+  - type: EntityTableContainerFill
+    containers:
+      preinstalled-program-container: !type:AllSelector
+        children:
+        - id: CrewManifestCartridge
+        - id: NotekeeperCartridge
+        - id: NanoTaskCartridge
+        - id: NewsReaderCartridge
+        - id: MedTekCartridge
+        - id: WantedListCartridge
+        - id: LogProbeCartridge
+        - id: AstroNavCartridge
+        - id: MessengerCartridgeClient # SS220 Messenger
 
 - type: entity
   parent: ERTLeaderPDA
@@ -2302,15 +2322,17 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-detective
-  - type: CartridgeLoader
-    preinstalled:
-    - CrewManifestCartridge
-    - NotekeeperCartridge
-    - NanoTaskCartridge
-    - NewsReaderCartridge
-    - WantedListCartridge
-    - LogProbeCartridge
-    - MessengerCartridgeClient #SS220 SD-pda-some-fixes
+  - type: EntityTableContainerFill
+    containers:
+      preinstalled-program-container: !type:AllSelector
+        children:
+        - id: CrewManifestCartridge
+        - id: NotekeeperCartridge
+        - id: NanoTaskCartridge
+        - id: NewsReaderCartridge
+        - id: WantedListCartridge
+        - id: LogProbeCartridge
+        - id: MessengerCartridgeClient # SS220 Messenger
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -2352,15 +2374,17 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-brigmedic
-  - type: CartridgeLoader
-    preinstalled:
-    - CrewManifestCartridge
-    - NotekeeperCartridge
-    - NanoTaskCartridge
-    - NewsReaderCartridge
-    - WantedListCartridge
-    - MedTekCartridge
-    - MessengerCartridgeClient #SS220 SD-pda-some-fixes
+  - type: EntityTableContainerFill
+    containers:
+      preinstalled-program-container: !type:AllSelector
+        children:
+        - id: CrewManifestCartridge
+        - id: NotekeeperCartridge
+        - id: NanoTaskCartridge
+        - id: NewsReaderCartridge
+        - id: WantedListCartridge
+        - id: MedTekCartridge
+        - id: MessengerCartridgeClient # SS220 Messenger
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -2586,7 +2610,7 @@
   description: Smells like postage stamps and shuttle fuel.
   components:
   - type: Pda
-    id: CargoIDCard
+    id: SeniorCourierIDCard
   - type: Appearance
     appearanceDataInit:
      enum.PdaVisuals.PdaType:

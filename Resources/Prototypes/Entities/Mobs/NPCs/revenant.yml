@@ -28,8 +28,9 @@
     allowed:
     - Corporeal
   - type: Damageable
-    damageContainer: ManifestedSpirit
     damageModifierSet: ManifestedSpirit
+  - type: Injurable
+    damageContainer: ManifestedSpirit
   - type: NoSlip
   - type: TTS # Corvax-TTS
     randomVoicesList: Demons
@@ -138,6 +139,7 @@
     tags:
     - SlowImmune
     - KnockdownImmune
+    - AllowPortalTraversal
   #SS220 Cult hotfix 17 #3641 start
   - type: DamageCorruptInteraction
     damageSound: /Audio/Items/welder.ogg #for now, cause no sound

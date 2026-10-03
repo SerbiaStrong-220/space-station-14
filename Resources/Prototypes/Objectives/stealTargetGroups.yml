@@ -241,7 +241,7 @@
   id: FireAxe
   name: steal-target-groups-fire-axe
   sprite:
-    sprite: Objects/Weapons/Melee/fireaxe.rsi
+    sprite: SS220/Objects/Weapons/Melee/fireaxe.rsi
     state: icon
 
 - type: stealTargetGroup
@@ -320,7 +320,7 @@
   id: FaxMachineCaptain
   name: steal-target-groups-fax-machine-captain
   sprite:
-    sprite: Structures/Machines/fax_machine.rsi
+    sprite: SS220/Structures/Machines/fax_machine.rsi
     state: icon
 
 - type: stealTargetGroup

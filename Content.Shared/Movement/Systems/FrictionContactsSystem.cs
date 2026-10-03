@@ -8,11 +8,11 @@ using Content.Shared.SS220.Movement;
 
 namespace Content.Shared.Movement.Systems;
 
-public sealed class FrictionContactsSystem : EntitySystem
+public sealed partial class FrictionContactsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedGravitySystem _gravity = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _speedModifierSystem = default!;
+    [Dependency] private SharedGravitySystem _gravity = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private MovementSpeedModifierSystem _speedModifierSystem = default!;
 
     // Comment copied from "original" SlowContactsSystem.cs (now SpeedModifierContactsSystem.cs)
     // TODO full-game-save

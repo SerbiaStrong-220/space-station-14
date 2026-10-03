@@ -120,6 +120,8 @@ public sealed partial class AdminLogsControl : Control
 
     public HashSet<LogImpact> SelectedImpacts { get; } = new();
 
+    private bool firstTimeOpened = true;
+
     public void SetCurrentRound(int round)
     {
         CurrentRound = round;
@@ -236,6 +238,22 @@ public sealed partial class AdminLogsControl : Control
             }
 
             player.Pressed = false;
+        }
+
+        UpdateLogs();
+    }
+
+    public void SelectPlayers(List<Guid> players)
+    {
+        SelectedPlayers.Clear();
+        SelectedPlayers.UnionWith(players);
+
+        foreach (var control in PlayersContainer.Children)
+        {
+            if (control is not AdminLogPlayerButton player)
+                continue;
+
+            player.Pressed = SelectedPlayers.Contains(player.Id);
         }
 
         UpdateLogs();
@@ -485,15 +503,13 @@ public sealed partial class AdminLogsControl : Control
     public void SetPlayers(Dictionary<Guid, string> players)
     {
         var buttons = new SortedSet<AdminLogPlayerButton>(_adminLogPlayerButtonComparer);
-        var allSelected = true;
+        // we retrieve everything if we open this window for the first time and the selected player list is empty
+        var allSelected = firstTimeOpened && SelectedPlayers.Count == 0;
 
         foreach (var control in PlayersContainer.Children.ToArray())
         {
             if (control is not AdminLogPlayerButton player)
                 continue;
-
-            if (!SelectedPlayers.Contains(player.Id))
-                allSelected = false;
 
             if (!players.Remove(player.Id))
                 continue;
@@ -522,6 +538,8 @@ public sealed partial class AdminLogsControl : Control
         foreach (var player in buttons)
         {
             PlayersContainer.AddChild(player);
+
+            player.Pressed = SelectedPlayers.Contains(player.Id);
         }
 
         UpdateLogs();

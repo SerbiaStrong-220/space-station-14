@@ -72,10 +72,8 @@
   - type: StatusEffects
     allowed:
     - Electrocution
-    - RatvarianLanguage
     - PressureImmunity
     - Muted
-    - TemporaryBlindness
     - Pacified
     - Flashed
     - Adrenaline
@@ -145,10 +143,7 @@
     speechSounds: Alto
   - type: DamageForceSay
   - type: Vocal
-    sounds:
-      Male: MaleHuman
-      Female: FemaleHuman
-      Unsexed: MaleHuman
+    emoteSounds: MaleHuman
   - type: Emoting
     chatEmoteCooldown: 5.0 #ss220 emote 5 sec
   - type: BodyEmotes
@@ -234,7 +229,6 @@
     thermalRegulationTemperatureThreshold: 2
   - type: Perishable
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeat
       amount: 5

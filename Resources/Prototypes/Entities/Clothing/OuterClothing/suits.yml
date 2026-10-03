@@ -123,7 +123,7 @@
   description: "A suit that protects against radiation. The label reads, 'Made with lead. Please do not consume insulation.'"
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Suits/rad.rsi
+    sprite: SS220/Clothing/OuterClothing/Suits/rad.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -133,11 +133,13 @@
         Piercing: 0.9 #ss-220 armReb
         Radiation: 0.15 #ss-220 armReb
   - type: Clothing
-    sprite: Clothing/OuterClothing/Suits/rad.rsi
+    sprite: SS220/Clothing/OuterClothing/Suits/rad.rsi
   - type: GroupExamine
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodRad
     slot: head
+    verbText: toggle-clothing-verb-hood
+    action: ActionToggleSuitPiece
   - type: ContainerContainer
     containers:
       toggleable-clothing: !type:ContainerSlot {}
@@ -194,6 +196,7 @@
       maxVisibility: 1
       lastVisibility: 1
       shimmerScale: 0.25
+      shimmerFrequency: 0.05
     - type: StealthOnMove
       passiveVisibilityRate: -0.475
       movementVisibilityRate: 0
@@ -316,6 +319,8 @@
     sprite: Clothing/OuterClothing/Suits/iansuit.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodIan
+    verbText: toggle-clothing-verb-hood
+    action: ActionToggleSuitPiece
   - type: ContainerContainer
     containers:
       toggleable-clothing: !type:ContainerSlot {}
@@ -337,8 +342,8 @@
   - type: Tag
     tags:
     - WhitelistChameleon
-  - type: AddAccentClothing
-    accent: BarkAccent
+  - type: BarkAccent
+    relayAccent: true
 
 - type: entity
   parent: ClothingOuterBase
@@ -355,6 +360,8 @@
     sprite: Clothing/OuterClothing/Suits/carpsuit.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodCarp
+    verbText: toggle-clothing-verb-hood
+    action: ActionToggleSuitPiece
   - type: ContainerContainer
     containers:
       toggleable-clothing: !type:ContainerSlot {}

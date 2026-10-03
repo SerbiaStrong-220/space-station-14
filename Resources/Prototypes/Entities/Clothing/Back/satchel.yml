@@ -5,7 +5,7 @@
   description: A trendy looking satchel.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Satchels/satchel.rsi
+    sprite: SS220/Clothing/Back/Satchels/satchel.rsi
   - type: Storage
     grid:
     - 0,0,1,3
@@ -24,7 +24,7 @@
   description: A trend-setting satchel from a bygone era.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Satchels/leather.rsi
+    sprite: SS220/Clothing/Back/Satchels/leather.rsi
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-leather
@@ -38,7 +38,7 @@
   description: A tough satchel with extra pockets.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Satchels/engineering.rsi
+    sprite: SS220/Clothing/Back/Satchels/engineering.rsi
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-rubber
@@ -106,7 +106,7 @@
   description: A sterile satchel used in medical departments.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Satchels/medical.rsi
+    sprite: SS220/Clothing/Back/Satchels/medical.rsi
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-synthetic
@@ -120,7 +120,7 @@
   description: A sterile satchel with chemist colours.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Satchels/chemistry.rsi
+    sprite: SS220/Clothing/Back/Satchels/chemistry.rsi
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-synthetic
@@ -162,7 +162,7 @@
   description: Useful for holding research materials.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Satchels/science.rsi
+    sprite: SS220/Clothing/Back/Satchels/science.rsi
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-synthetic
@@ -176,7 +176,7 @@
   description: A robust satchel for security related needs.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Satchels/security.rsi
+    sprite: SS220/Clothing/Back/Satchels/security.rsi
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-reinforced-textile
@@ -190,7 +190,7 @@
   description: A sterile satchel for medical related needs.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Satchels/brigmedic.rsi
+    sprite: SS220/Clothing/Back/Satchels/brigmedic.rsi
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-synthetic
@@ -204,7 +204,7 @@
   description: An exclusive satchel for Nanotrasen officers.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Satchels/captain.rsi
+    sprite: SS220/Clothing/Back/Satchels/captain.rsi
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-reinforced-textile
@@ -218,7 +218,7 @@
   description: A satchel made of all natural fibers.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Satchels/hydroponics.rsi
+    sprite: SS220/Clothing/Back/Satchels/hydroponics.rsi
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-floral

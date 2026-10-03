@@ -1,7 +1,7 @@
 - type: entity
   abstract: true
-  parent: BaseItem
-  id: BaseHypospray
+  parent: [SolutionHypospraySmall, BaseItem]
+  id: BaseHypoInjector
   components:
   - type: Injector
     solutionName: hypospray
@@ -10,15 +10,42 @@
     allowedModes:
     - HyposprayDynamicMode
     - HyposprayInjectMode
-  - type: Spillable
-    solution: hypospray
   - type: ExaminableSolution
     solution: hypospray
     exactVolume: true
+  - type: UseDelay
+    delay: 0.5
   - type: Appearance
 
 - type: entity
-  parent: [BaseHypospray, BaseGrandTheftContraband]
+  abstract: true
+  parent: BaseHypoInjector
+  id: BaseHypospray
+  components:
+  - type: Spillable
+    solution: hypospray
+    spillWhenThrown: false
+
+- type: entity
+  abstract: true
+  parent: [SolutionHypospray, SolutionToolSmall]
+  id: SolutionHypospraySmall
+  components:
+  - type: Solution
+    solution:
+      maxVol: 20
+
+- type: entity
+  abstract: true
+  parent: [SolutionHypospray, SolutionToolTiny]
+  id: SolutionHyposprayTiny
+  components:
+  - type: Solution
+    solution:
+      maxVol: 10
+
+- type: entity
+  parent: [SolutionToolSmall, BaseHypospray, BaseGrandTheftContraband]
   id: Hypospray
   name: hypospray
   description: A sterile injector for rapid administration of drugs to patients.
@@ -33,14 +60,8 @@
       visible: false
   - type: Item
     sprite: Objects/Specific/Medical/hypospray.rsi
-  - type: SolutionContainerManager
-    solutions:
-      hypospray:
-        maxVol: 30
   - type: RefillableSolution
     solution: hypospray
-  - type: UseDelay
-    delay: 0.5
   - type: StaticPrice
     price: 750
   - type: Tag
@@ -67,10 +88,9 @@
     state: hypo
   - type: Item
     sprite: SS220/Objects/Specific/Medical/syndihypo.rsi #SS220-resprite-syndihypo
-  - type: SolutionContainerManager
-    solutions:
-      hypospray:
-        maxVol: 20
+  - type: Solution
+    solution:
+      maxVol: 20
   #SS220-resprite-syndihypo begin
   # - type: SolutionContainerVisuals
   #   maxFillLevels: 4
@@ -79,7 +99,7 @@
   #SS220-resprite-syndihypo end
 
 - type: entity
-  parent: BaseHypospray
+  parent: [SolutionHyposprayTiny, BaseHypospray]
   id: BorgHypo
   name: borghypo
   description: A sterile injector for rapid administration of drugs to patients. This integrated model is specialized for use by medical borgs.
@@ -94,18 +114,12 @@
       visible: false
   - type: Item
     sprite: Objects/Specific/Medical/hypospray.rsi
-  - type: SolutionContainerManager
-    solutions:
-      hypospray:
-        maxVol: 10
   - type: RefillableSolution
     solution: hypospray
   - type: SolutionContainerVisuals
     maxFillLevels: 2
     fillBaseName: borghypo_fill
     solutionName: hypospray
-  - type: UseDelay
-    delay: 0.5
 
 - type: entity
   parent: BaseHypospray
@@ -125,10 +139,9 @@
     sprite: Objects/Specific/Medical/jetinjector.rsi
   - type: UseDelay
     delay: 1.5
-  - type: SolutionContainerManager
-    solutions:
-      hypospray:
-        maxVol: 15
+  - type: Solution
+    solution:
+      maxVol: 15 # Same as a syringe
   # SS220-injector-skill-begin
   - type: LearningOnDoAfterEndWith
     progress:
@@ -148,7 +161,7 @@
     - JetInjectorInjectMode
 
 - type: entity
-  parent: JetInjector
+  parent: [SolutionHypospraySmall, JetInjector]
   id: AdvancedJetInjector
   name: advanced jet injector
   description: A pristine, fashionable, high quality injector. Allows for a faster injection, with a slightly larger capacity.
@@ -163,10 +176,6 @@
       visible: false
   - type: Item
     sprite: Objects/Specific/Medical/advanced_jetinjector.rsi
-  - type: SolutionContainerManager
-    solutions:
-      hypospray:
-        maxVol: 20
   - type: SolutionContainerVisuals
     maxFillLevels: 4
   - type: Injector
@@ -182,15 +191,14 @@
   suffix: Admeme
   description: The ultimate application of bluespace technology and rapid chemical administration.
   components:
-    - type: SolutionContainerManager
-      solutions:
-        hypospray:
-          maxVol: 3000
-    - type: UseDelay
-      delay: 0.0
+  - type: Solution
+    solution:
+      maxVol: 3000 # Badmin abuse
+  - type: UseDelay
+    delay: 0.0
 
 - type: entity
-  parent: BaseHypospray
+  parent: BaseHypoInjector # I plan to resize medipens to 1x2 eventually:tm:
   id: ChemicalMedipen
   name: chemical medipen
   description: A single-dose, non-refillable medipen.
@@ -214,14 +222,7 @@
         color: "#439822"
       - state: base-colorB-inhand-right
     size: Tiny
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 15
-  - type: ExaminableSolution
-    solution: pen
   - type: Injector
-    solutionName: pen
     currentTransferAmount: null
     activeModeProtoId: HyposprayInjectMode
     allowedModes:
@@ -230,6 +231,7 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: firstaid_empty
+    solutionName: hypospray
   - type: PhysicalComposition
     materialComposition:
       Plastic: 50
@@ -237,7 +239,7 @@
   - type: StaticPrice
     price: 75 # These are limited supply items.
   - type: TrashOnSolutionEmpty
-    solution: pen
+    solution: hypospray
 
 - type: entity
   parent: ChemicalMedipen
@@ -254,15 +256,13 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: medipen_empty
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 15
-        reagents:
-        - ReagentId: Epinephrine
-          Quantity: 12
-        - ReagentId: TranexamicAcid
-          Quantity: 3
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Epinephrine
+        Quantity: 15
+      - ReagentId: TranexamicAcid
+        Quantity: 5
 
 - type: entity
   parent: ChemicalMedipen
@@ -291,15 +291,13 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: penacid_empty
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 15
-        reagents:
-        - ReagentId: Ultravasculine
-          Quantity: 10
-        - ReagentId: Epinephrine
-          Quantity: 5
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Ultravasculine
+        Quantity: 15
+      - ReagentId: Epinephrine
+        Quantity: 5
 
 - type: entity
   parent: ChemicalMedipen
@@ -328,15 +326,13 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: bicpen_empty
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 20
-        reagents:
-        - ReagentId: Bicaridine
-          Quantity: 15
-        - ReagentId: TranexamicAcid
-          Quantity: 5
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Bicaridine
+        Quantity: 15
+      - ReagentId: TranexamicAcid
+        Quantity: 5
 
 - type: entity
   parent: ChemicalMedipen
@@ -365,15 +361,13 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: dermpen_empty
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 20
-        reagents:
-        - ReagentId: Dermaline
-          Quantity: 10
-        - ReagentId: Leporazine
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Dermaline
+        Quantity: 10
+      - ReagentId: Leporazine
+        Quantity: 10
 
 - type: entity
   parent: ChemicalMedipen
@@ -402,15 +396,13 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: arithpen_empty
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 20
-        reagents:
-        - ReagentId: Arithrazine
-          Quantity: 15
-        - ReagentId: Bicaridine
-          Quantity: 5
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Arithrazine
+        Quantity: 10
+      - ReagentId: Bicaridine
+        Quantity: 10
 
 - type: entity
   parent: ChemicalMedipen
@@ -439,15 +431,15 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: punctpen_empty
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 15
-        reagents:
-        - ReagentId: Puncturase
-          Quantity: 10
-        - ReagentId: TranexamicAcid
-          Quantity: 5
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Puncturase
+        Quantity: 12
+      - ReagentId: TranexamicAcid
+        Quantity: 5
+      - ReagentId: Nothing # Needed for visuals to work, idk what else to put here :P
+        Quantity: 3
 
 - type: entity
   parent: ChemicalMedipen
@@ -476,15 +468,13 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: pyrapen_empty
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 20
-        reagents:
-        - ReagentId: Pyrazine
-          Quantity: 10
-        - ReagentId: Dermaline
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Pyrazine
+        Quantity: 10
+      - ReagentId: Dermaline
+        Quantity: 10
 
 - type: entity
   parent: ChemicalMedipen
@@ -513,15 +503,13 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: dexpen_empty
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 40
-        reagents:
-        - ReagentId: Saline
-          Quantity: 20
-        - ReagentId: DexalinPlus
-          Quantity: 20
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Saline
+        Quantity: 10
+      - ReagentId: DexalinPlus
+        Quantity: 10
 
 - type: entity
   parent: ChemicalMedipen
@@ -550,18 +538,22 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: hypovolemic_empty
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 20 #SS220-CosmoMedipen-Tweak
-        reagents:
-          - ReagentId: Leporazine
-            Quantity: 10
-          - ReagentId: Barozine
-            Quantity: 10 #SS220-CosmoMedipen-Tweak
+  - type: Solution
+    solution:
+      maxVol: 20 #SS220-CosmoMedipen-Tweak
+      reagents:
+      - ReagentId: Leporazine
+        Quantity: 10
+      - ReagentId: Barozine
+        Quantity: 10
 
 - type: entity
-  parent: [ChemicalMedipen, BaseSyndicateContraband]
+  abstract: true
+  parent: [SolutionToolSmall, ChemicalMedipen, BaseSyndicateContraband]
+  id: SyndicateMedipen # Interdyne gets more capacity
+
+- type: entity
+  parent: SyndicateMedipen
   id: Stimpack
   name: hyperzine injector
   description: A chemical injector containing a large shot of pure hyperzine. For when it's time to throw down. Effects last for about 60 seconds.
@@ -585,13 +577,11 @@
     layers:
     - state: stimpen
       map: ["enum.SolutionContainerLayers.Fill"]
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 30
-        reagents:
-        - ReagentId: Stimulants
-          Quantity: 30
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Stimulants
+        Quantity: 30
   - type: SolutionContainerVisuals
     maxFillLevels: 1
     changeColor: false
@@ -600,7 +590,7 @@
     price: 1500
 
 - type: entity
-  parent: [ChemicalMedipen, BaseSyndicateContraband]
+  parent: [ SolutionToolTiny, SyndicateMedipen ]
   id: StimpackMini
   name: hyperzine microinjector
   description: A chemical microinjector containing a small shot of pure hyperzine. Effects last for about 30 seconds.
@@ -624,13 +614,11 @@
     layers:
     - state: microstimpen
       map: ["enum.SolutionContainerLayers.Fill"]
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 15
-        reagents:
-        - ReagentId: Stimulants
-          Quantity: 15
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Stimulants
+        Quantity: 15
   - type: SolutionContainerVisuals
     maxFillLevels: 1
     changeColor: false
@@ -639,7 +627,7 @@
     price: 583 # 3500 for 6 as a freaky fraction
 
 - type: entity
-  parent: [ChemicalMedipen, BaseSyndicateContraband]
+  parent: SyndicateMedipen
   id: CombatMedipen
   name: combat medipen
   description: A single-dose, non-refillable medipen containing a chemical cocktail that treats most forms of damage.
@@ -665,27 +653,21 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: morphen_empty
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 30
-        reagents:
-        - ReagentId: Omnizine
-          Quantity: 25
-        - ReagentId: TranexamicAcid
-          Quantity: 5
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Omnizine
+        Quantity: 25
+      - ReagentId: TranexamicAcid
+        Quantity: 5
   - type: StaticPrice
     price: 1500
 
 - type: entity
-  parent: Pen # It is just like normal pen, isn't it?
+  parent: [Pen, SolutionHyposprayTiny] # It is just like normal pen, isn't it?
   id: Hypopen
   suffix: Hypopen
   components:
-  - type: SolutionContainerManager
-    solutions:
-      hypospray:
-        maxVol: 10
   - type: RefillableSolution
     solution: hypospray
     refillTime: 0.75
@@ -739,10 +721,10 @@
       path: /Audio/Effects/unwrap.ogg
 
 - type: entity
-  parent: ChemicalMedipen
-  id: WehMedipen
+  parent: [ SolutionHyposprayTiny, ChemicalMedipen ]
+  id: WehMedipenTiny
   name: weh auto-injector
-  description: A non-refillable medipen containing multiple doses of weh.
+  description: A non-refillable medipen containing a dose of weh.
   components:
   - type: Sprite
     sprite: SS220/Objects/Specific/Medical/medipen.rsi #SS220 Repsrite Medipen
@@ -753,10 +735,23 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: medipen_empty
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 60
-        reagents:
-        - ReagentId: JuiceThatMakesYouWeh
-          Quantity: 60
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: JuiceThatMakesYouWeh
+        Quantity: 10
+
+- type: entity
+  parent: WehMedipenTiny
+  id: WehMedipen
+  categories: [ DoNotMap ]
+  name: weh auto-injector
+  suffix: DO NOT MAP
+  description: A non-refillable medipen containing multiple doses of weh.
+  components:
+  - type: Solution
+    solution:
+      maxVol: 60 # Admeme so it has extra capacity
+      reagents:
+      - ReagentId: JuiceThatMakesYouWeh
+        Quantity: 60 # Need at least 50 to transform

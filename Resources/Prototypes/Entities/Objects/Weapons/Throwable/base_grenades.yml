@@ -22,6 +22,7 @@
     slots:
     - Belt
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Appearance
   - type: AnimationPlayer
@@ -89,11 +90,6 @@
   components:
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 10
-      behaviors:
-      - !type:TimerStartBehavior
     - trigger: # immediately explode
         !type:DamageTrigger
         damage: 45
@@ -102,6 +98,11 @@
         keyOut: timer
       - !type:DoActsBehavior
         acts: ["Destruction"]
+    - trigger:
+        !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:TimerStartBehavior
 
 - type: entity # Starts fuse after taking 10 damage, is destroyed without activating/detonating after taking 45 damage.
   abstract: true
@@ -109,14 +110,14 @@
   components:
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 10
-      behaviors:
-      - !type:TimerStartBehavior
     - trigger: # Disappear
         !type:DamageTrigger
         damage: 45
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+    - trigger:
+        !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:TimerStartBehavior

@@ -12,7 +12,6 @@ using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Administration;
 using Content.Shared.Administration.Components;
-using Content.Shared.Administration.Systems;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Construction.Components;
@@ -41,18 +40,18 @@ namespace Content.Server.Administration.Systems;
 
 public sealed partial class AdminVerbSystem
 {
-    [Dependency] private readonly DoorSystem _door = default!;
-    [Dependency] private readonly AirlockSystem _airlockSystem = default!;
-    [Dependency] private readonly StackSystem _stackSystem = default!;
-    [Dependency] private readonly SharedAccessSystem _accessSystem = default!;
-    [Dependency] private readonly HandsSystem _handsSystem = default!;
-    [Dependency] private readonly QuickDialogSystem _quickDialog = default!;
-    [Dependency] private readonly AdminTestArenaSystem _adminTestArenaSystem = default!;
-    [Dependency] private readonly StationJobsSystem _stationJobsSystem = default!;
-    [Dependency] private readonly JointSystem _jointSystem = default!;
-    [Dependency] private readonly SharedBatterySystem _batterySystem = default!;
-    [Dependency] private readonly MetaDataSystem _metaSystem = default!;
-    [Dependency] private readonly GunSystem _gun = default!;
+    [Dependency] private DoorSystem _door = default!;
+    [Dependency] private AirlockSystem _airlockSystem = default!;
+    [Dependency] private StackSystem _stackSystem = default!;
+    [Dependency] private SharedAccessSystem _accessSystem = default!;
+    [Dependency] private HandsSystem _handsSystem = default!;
+    [Dependency] private QuickDialogSystem _quickDialog = default!;
+    [Dependency] private AdminTestArenaSystem _adminTestArenaSystem = default!;
+    [Dependency] private StationJobsSystem _stationJobsSystem = default!;
+    [Dependency] private JointSystem _jointSystem = default!;
+    [Dependency] private SharedBatterySystem _batterySystem = default!;
+    [Dependency] private MetaDataSystem _metaSystem = default!;
+    [Dependency] private GunSystem _gun = default!;
 
     private void AddTricksVerbs(GetVerbsEvent<Verb> args)
     {
@@ -235,7 +234,7 @@ public sealed partial class AdminVerbSystem
             {
                 Text = Loc.GetString("admin-verbs-refill-internals-oxygen"),
                 Category = VerbCategory.Tricks,
-                Icon = new SpriteSpecifier.Rsi(new("/Textures/Objects/Tanks/oxygen.rsi"), "icon"),
+                Icon = new SpriteSpecifier.Rsi(new("/Textures/SS220/Objects/Tanks/oxygen.rsi"), "icon"),
                 Act = () =>
                 {
                     RefillGasTank(args.Target, Gas.Oxygen, tank);
@@ -250,7 +249,7 @@ public sealed partial class AdminVerbSystem
             {
                 Text = Loc.GetString("admin-verbs-refill-internals-nitrogen"),
                 Category = VerbCategory.Tricks,
-                Icon = new SpriteSpecifier.Rsi(new("/Textures/Objects/Tanks/red.rsi"), "icon"),
+                Icon = new SpriteSpecifier.Rsi(new("/Textures/SS220/Objects/Tanks/red.rsi"), "icon"),
                 Act = () =>
                 {
                     RefillGasTank(args.Target, Gas.Nitrogen, tank);
@@ -265,7 +264,7 @@ public sealed partial class AdminVerbSystem
             {
                 Text = Loc.GetString("admin-verbs-refill-internals-plasma"),
                 Category = VerbCategory.Tricks,
-                Icon = new SpriteSpecifier.Rsi(new("/Textures/Objects/Tanks/plasma.rsi"), "icon"),
+                Icon = new SpriteSpecifier.Rsi(new("/Textures/SS220/Objects/Tanks/plasma.rsi"), "icon"),
                 Act = () =>
                 {
                     RefillGasTank(args.Target, Gas.Plasma, tank);
@@ -283,7 +282,7 @@ public sealed partial class AdminVerbSystem
             {
                 Text = Loc.GetString("admin-verbs-refill-internals-oxygen"),
                 Category = VerbCategory.Tricks,
-                Icon = new SpriteSpecifier.Rsi(new("/Textures/Objects/Tanks/oxygen.rsi"), "icon"),
+                Icon = new SpriteSpecifier.Rsi(new("/Textures/SS220/Objects/Tanks/oxygen.rsi"), "icon"),
                 Act = () => RefillEquippedTanks(args.User, Gas.Oxygen),
                 Impact = LogImpact.Extreme,
                 Message = Loc.GetString("admin-trick-internals-refill-oxygen-description"),
@@ -295,7 +294,7 @@ public sealed partial class AdminVerbSystem
             {
                 Text = Loc.GetString("admin-verbs-refill-internals-nitrogen"),
                 Category = VerbCategory.Tricks,
-                Icon = new SpriteSpecifier.Rsi(new("/Textures/Objects/Tanks/red.rsi"), "icon"),
+                Icon = new SpriteSpecifier.Rsi(new("/Textures/SS220/Objects/Tanks/red.rsi"), "icon"),
                 Act = () => RefillEquippedTanks(args.User, Gas.Nitrogen),
                 Impact = LogImpact.Extreme,
                 Message = Loc.GetString("admin-trick-internals-refill-nitrogen-description"),
@@ -307,7 +306,7 @@ public sealed partial class AdminVerbSystem
             {
                 Text = Loc.GetString("admin-verbs-refill-internals-plasma"),
                 Category = VerbCategory.Tricks,
-                Icon = new SpriteSpecifier.Rsi(new("/Textures/Objects/Tanks/plasma.rsi"), "icon"),
+                Icon = new SpriteSpecifier.Rsi(new("/Textures/SS220/Objects/Tanks/plasma.rsi"), "icon"),
                 Act = () => RefillEquippedTanks(args.User, Gas.Plasma),
                 Impact = LogImpact.Extreme,
                 Message = Loc.GetString("admin-trick-internals-refill-plasma-description"),
@@ -832,7 +831,7 @@ public sealed partial class AdminVerbSystem
 
     private void GiveAllAccess(EntityUid entity)
     {
-        var allAccess = _prototypeManager
+        var allAccess = ProtoMan
             .EnumeratePrototypes<AccessLevelPrototype>()
             .Select(p => new ProtoId<AccessLevelPrototype>(p.ID)).ToArray();
 

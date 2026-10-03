@@ -15,16 +15,16 @@ using Robust.Shared.Prototypes;
 namespace Content.Server.Objectives.Commands;
 
 [AdminCommand(AdminFlags.Admin)]
-public sealed class AddObjectiveCommand : LocalizedEntityCommands
+public sealed partial class AddObjectiveCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly IPlayerManager _players = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly ObjectivesSystem _objectives = default!;
+    [Dependency] private IPlayerManager _players = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private ObjectivesSystem _objectives = default!;
     // ss220 add custom antag goals start
-    [Dependency] private readonly TargetObjectiveSystem _targetObjective = default!;
-    [Dependency] private readonly StealConditionSystem _steal = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
+    [Dependency] private TargetObjectiveSystem _targetObjective = default!;
+    [Dependency] private StealConditionSystem _steal = default!;
+    [Dependency] private IChatManager _chatManager = default!;
     // ss220 add custom antag goals end
 
     public override string Command => "addobjective";

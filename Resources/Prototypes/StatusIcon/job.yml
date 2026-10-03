@@ -559,7 +559,6 @@
   icon:
     sprite: *icon-rsi
     state: Admin
-  allowSelection: false
 
 - type: jobIcon
   parent: JobIcon

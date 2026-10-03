@@ -1,0 +1,63 @@
+{
+  "version": 1,
+ "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "by MIXnikita for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+        "name": "glass",
+        "directions": 4
+    },
+    {
+        "name": "glass-1",
+        "directions": 4
+    },
+    {
+        "name": "glass-2",
+        "directions": 4
+    },
+    {
+        "name": "glass-3",
+        "directions": 4
+    },
+    {
+        "name": "glass-4",
+        "directions": 4
+    },
+    {
+        "name": "glass-up",
+        "directions": 4
+    },
+    {
+        "name": "locked",
+        "directions": 4
+    },
+    {
+        "name": "shotgun",
+        "directions": 4
+    },
+    {
+        "name": "unlocked",
+        "directions": 4
+    },
+    {
+        "name": "cabinet",
+        "directions": 4
+    },
+    {
+        "name": "cabinet-empty-open",
+        "directions": 4
+    },
+    {
+        "name": "cabinet-filled-closed",
+        "directions": 4
+    },
+    {
+        "name": "cabinet-filled-open",
+        "directions": 4
+    }
+  ]
+}

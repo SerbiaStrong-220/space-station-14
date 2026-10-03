@@ -20,10 +20,10 @@ using Robust.Shared.Player;
 namespace Content.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.Admin)]
-public sealed class AGhostCommand : LocalizedCommands
+public sealed partial class AGhostCommand : LocalizedCommands
 {
-    [Dependency] private readonly IEntityManager _entities = default!;
-    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
+    [Dependency] private IEntityManager _entities = default!;
+    [Dependency] private ISharedPlayerManager _playerManager = default!;
 
     // SS220 additional command log
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
@@ -115,11 +115,14 @@ public sealed class AGhostCommand : LocalizedCommands
 
         var canReturn = mind.CurrentEntity != null
                         && !_entities.HasComponent<GhostComponent>(mind.CurrentEntity);
-        var coordinates = player!.AttachedEntity != null
-            ? _entities.GetComponent<TransformComponent>(player.AttachedEntity.Value).Coordinates
-            : gameTicker.GetObserverSpawnPoint();
-        var ghost = SpawnGhost(coordinates, player, canReturn); // SS220 aghost-after-ghost
-        transformSystem.AttachToGridOrMap(ghost, _entities.GetComponent<TransformComponent>(ghost));
+
+        if (player!.AttachedEntity == null
+            || !transformSystem.TryGetMapOrGridCoordinates(player.AttachedEntity.Value, out var coordinates))
+        {
+            coordinates = gameTicker.GetObserverSpawnPoint();
+        }
+
+        var ghost = _entities.SpawnEntity(GameTicker.AdminObserverPrototypeName, coordinates.Value);
 
         if (canReturn)
         {

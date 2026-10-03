@@ -490,6 +490,11 @@ public enum LogType
     /// </summary>
     Connection = 108,
 
+    /// <summary>
+    /// Silicon law changes.
+    /// </summary>
+    SiliconLaw = 109,
+
     //SS220 log types start
 
     /// <summary>

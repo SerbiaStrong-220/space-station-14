@@ -110,7 +110,7 @@
     walkModifier: 0.9
     sprintModifier: 0.9
   - type: GasTank
-    outputPressure: 42.6
+    releasePressure: 42.6
     air:
       # SS220 fix
       volume: 5

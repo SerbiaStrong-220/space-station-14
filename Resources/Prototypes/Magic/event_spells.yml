@@ -56,8 +56,6 @@
         orGroup: Guns
       - id: WeaponRifleAk
         orGroup: Guns
-      - id: WeaponRifleM90GrenadeLauncher
-        orGroup: Guns
       - id: WeaponRifleLecter
         orGroup: Guns
       - id: WeaponShotgunBulldog
@@ -201,8 +199,6 @@
       - id: WeaponWandPolymorphMonkey
         orGroup: Magics
       - id: WeaponWandFireball
-        orGroup: Magics
-      - id: WeaponWandPolymorphDoor
         orGroup: Magics
       - id: WeaponWandCluwne
         orGroup: Magics

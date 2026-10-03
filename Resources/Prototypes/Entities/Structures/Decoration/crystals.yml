@@ -46,8 +46,9 @@
 #      energy: 3
 #      color: "#39ff14" #SS220-Crystal-fix-End
     - type: Damageable
-      damageContainer: StructuralInorganic
       damageModifierSet: Glass
+    - type: Injurable
+      damageContainer: StructuralInorganic
 #    - type: Destructible #SS220-Crystal-fix-Start
 #      thresholds:
 #        - trigger:
@@ -191,20 +192,20 @@
       color: "#363636"
     - type: Destructible
       thresholds:
-        - trigger:
-            !type:DamageTrigger
-            damage: 20
-          behaviors:
-            - !type:DoActsBehavior
-              acts: [ "Destruction" ]
-            - !type:PlaySoundBehavior
-              sound:
-                collection: GlassBreak
-            - !type:SpawnEntitiesBehavior
-              spawn:
-                ShardCrystalBlack:
-                  min: 1
-                  max: 2
+      - trigger:
+          !type:DamageTrigger
+          damage: 20
+        behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+        - !type:PlaySoundBehavior
+          sound:
+            collection: GlassBreak
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            ShardCrystalBlack:
+              min: 1
+              max: 2
 
 - type: entity
   id: CrystalBlue

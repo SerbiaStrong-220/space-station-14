@@ -8,7 +8,6 @@
   experienceDefinition: DeathSquadRoleExperience # SS220-experience
   icon: "JobIconDeathsquadOperative" #SS220-DeathSquad Update
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   accessGroups:
   - AllAccess
 #  access: #SS220-DeathSquad Update

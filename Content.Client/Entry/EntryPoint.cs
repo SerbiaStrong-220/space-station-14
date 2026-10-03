@@ -17,6 +17,7 @@ using Content.Client.IoC;
 using Content.Client.Launcher;
 using Content.Client.Lobby;
 using Content.Client.MainMenu;
+using Content.Client.Overlays;
 using Content.Client.Parallax.Managers;
 using Content.Client.Players.PlayTimeTracking;
 using Content.Client.Playtime;
@@ -51,7 +52,7 @@ using Content.Client.SS220.Species;
 
 namespace Content.Client.Entry
 {
-    public sealed class EntryPoint : GameClient
+    public sealed partial class EntryPoint : GameClient
     {
         [Dependency] private readonly IBaseClient _baseClient = default!;
         [Dependency] private readonly IGameController _gameController = default!;
@@ -62,38 +63,38 @@ namespace Content.Client.Entry
         [Dependency] private readonly IParallaxManager _parallaxManager = default!;
         [Dependency] private readonly IConfigurationManager _configManager = default!;
         [Dependency] private readonly IStylesheetManager _stylesheetManager = default!;
-        [Dependency] private readonly IScreenshotHook _screenshotHook = default!;
-        [Dependency] private readonly FullscreenHook _fullscreenHook = default!;
-        [Dependency] private readonly ChangelogManager _changelogManager = default!;
-        [Dependency] private readonly ViewportManager _viewportManager = default!;
-        [Dependency] private readonly IUserInterfaceManager _userInterfaceManager = default!;
-        [Dependency] private readonly IInputManager _inputManager = default!;
-        [Dependency] private readonly IOverlayManager _overlayManager = default!;
-        [Dependency] private readonly IChatManager _chatManager = default!;
-        [Dependency] private readonly IClientPreferencesManager _clientPreferencesManager = default!;
-        [Dependency] private readonly EuiManager _euiManager = default!;
-        [Dependency] private readonly IVoteManager _voteManager = default!;
-        [Dependency] private readonly DocumentParsingManager _documentParsingManager = default!;
-        [Dependency] private readonly GhostKickManager _ghostKick = default!;
-        [Dependency] private readonly ExtendedDisconnectInformationManager _extendedDisconnectInformation = default!;
-        [Dependency] private readonly JobRequirementsManager _jobRequirements = default!;
-        [Dependency] private readonly ContentLocalizationManager _contentLoc = default!;
-        [Dependency] private readonly SponsorsManager _sponsorsManager = default!; // Corvax-Sponsors
-        [Dependency] private readonly JoinQueueManager _queueManager = default!; // Corvax-Queue
-        [Dependency] private readonly DiscordAuthManager _discordAuthManager = default!; // Corvax-DiscordAuth
-        [Dependency] private readonly ContentReplayPlaybackManager _playbackMan = default!;
-        [Dependency] private readonly IResourceManager _resourceManager = default!;
-        [Dependency] private readonly IReplayLoadManager _replayLoad = default!;
-        [Dependency] private readonly ILogManager _logManager = default!;
-        [Dependency] private readonly DiscordPlayerInfoManager _discordPlayerInfoManager = default!; // SS220 discord info manager
-        [Dependency] private readonly DebugMonitorManager _debugMonitorManager = default!;
-        [Dependency] private readonly TitleWindowManager _titleWindowManager = default!;
-        [Dependency] private readonly TTSManager _ttsManager = default!; // SS220 TTS
-        [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
-        [Dependency] private readonly ClientsidePlaytimeTrackingManager _clientsidePlaytimeManager = default!;
-        [Dependency] private readonly SpeciesRequirementsManager _speciesRequirements = default!; // SS220 Species bans
-        [Dependency] private readonly ChatRequirementsManager _chatRequirements = default!; // SS220 Chat bans
-        [Dependency] private readonly ClientFeedbackManager _feedbackManager = null!;
+        [Dependency] private IScreenshotHook _screenshotHook = default!;
+        [Dependency] private FullscreenHook _fullscreenHook = default!;
+        [Dependency] private ChangelogManager _changelogManager = default!;
+        [Dependency] private ViewportManager _viewportManager = default!;
+        [Dependency] private IUserInterfaceManager _userInterfaceManager = default!;
+        [Dependency] private IInputManager _inputManager = default!;
+        [Dependency] private IOverlayManager _overlayManager = default!;
+        [Dependency] private IChatManager _chatManager = default!;
+        [Dependency] private IClientPreferencesManager _clientPreferencesManager = default!;
+        [Dependency] private EuiManager _euiManager = default!;
+        [Dependency] private IVoteManager _voteManager = default!;
+        [Dependency] private DocumentParsingManager _documentParsingManager = default!;
+        [Dependency] private GhostKickManager _ghostKick = default!;
+        [Dependency] private ExtendedDisconnectInformationManager _extendedDisconnectInformation = default!;
+        [Dependency] private JobRequirementsManager _jobRequirements = default!;
+        [Dependency] private ContentLocalizationManager _contentLoc = default!;
+        [Dependency] private SponsorsManager _sponsorsManager = default!; // Corvax-Sponsors
+        [Dependency] private JoinQueueManager _queueManager = default!; // Corvax-Queue
+        [Dependency] private DiscordAuthManager _discordAuthManager = default!; // Corvax-DiscordAuth
+        [Dependency] private ContentReplayPlaybackManager _playbackMan = default!;
+        [Dependency] private IResourceManager _resourceManager = default!;
+        [Dependency] private IReplayLoadManager _replayLoad = default!;
+        [Dependency] private ILogManager _logManager = default!;
+        [Dependency] private DiscordPlayerInfoManager _discordPlayerInfoManager = default!; // SS220 discord info manager
+        [Dependency] private DebugMonitorManager _debugMonitorManager = default!;
+        [Dependency] private TitleWindowManager _titleWindowManager = default!;
+        [Dependency] private TTSManager _ttsManager = default!; // SS220 TTS
+        [Dependency] private IEntitySystemManager _entitySystemManager = default!;
+        [Dependency] private ClientsidePlaytimeTrackingManager _clientsidePlaytimeManager = default!;
+        [Dependency] private SpeciesRequirementsManager _speciesRequirements = default!; // SS220 Species bans
+        [Dependency] private ChatRequirementsManager _chatRequirements = default!; // SS220 Chat bans
+        [Dependency] private ClientFeedbackManager _feedbackManager = null!;
 
         public override void PreInit()
         {
@@ -182,6 +183,7 @@ namespace Content.Client.Entry
 
             _overlayManager.AddOverlay(new SingularityOverlay());
             _overlayManager.AddOverlay(new RadiationPulseOverlay());
+            _overlayManager.AddOverlay(new ScreechShockWaveOverlay());
             _chatManager.Initialize();
             _clientPreferencesManager.Initialize();
             _euiManager.Initialize();

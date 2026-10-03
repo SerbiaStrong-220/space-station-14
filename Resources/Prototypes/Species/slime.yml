@@ -13,3 +13,10 @@
   maleLastNames: NamesSlimeLast
   femaleLastNames: NamesSlimeLast
 #SS220-new-species-naming end
+  defaultSoundsBySex:
+  - MaleSlime
+  - FemaleSlime
+  - MaleSlime
+  voices:
+  - MaleSlime
+  - FemaleSlime

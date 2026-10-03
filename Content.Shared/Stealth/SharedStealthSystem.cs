@@ -7,9 +7,9 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Stealth;
 
-public abstract class SharedStealthSystem : EntitySystem
+public abstract partial class SharedStealthSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -98,7 +98,7 @@ public abstract class SharedStealthSystem : EntitySystem
 
     private void OnStealthGetState(EntityUid uid, StealthComponent component, ref ComponentGetState args)
     {
-        args.State = new StealthComponentState(component.LastVisibility, component.LastUpdated, component.Enabled, component.MinVisibility, component.MaxVisibility, component.ShimmerScale); // SS220 invis buff
+        args.State = new StealthComponentState(component.LastVisibility, component.LastUpdated, component.Enabled, component.MinVisibility, component.MaxVisibility, component.ShimmerFrequency, component.ShimmerScale); // SS220 invis buff
     }
 
     private void OnStealthHandleState(EntityUid uid, StealthComponent component, ref ComponentHandleState args)
@@ -111,6 +111,7 @@ public abstract class SharedStealthSystem : EntitySystem
         component.LastUpdated = cast.LastUpdated;
         component.MinVisibility = cast.MinVisibility; // SS220 invis buff
         component.MaxVisibility = cast.MaxVisibility; // SS220 invis buff
+        component.ShimmerFrequency = cast.ShimmerFrequency;
         component.ShimmerScale = cast.ShimmerScale; // SS220 invis buff
     }
 

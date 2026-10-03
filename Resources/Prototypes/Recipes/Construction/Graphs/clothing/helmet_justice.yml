@@ -9,7 +9,7 @@
       - tag: SecurityHelmet
         name: construction-graph-tag-security-helmet
         icon:
-          sprite: Clothing/Head/Helmets/security.rsi
+          sprite: SS220/Clothing/Head/Helmets/security.rsi
           state: icon
       - material: Cable
         amount: 2
