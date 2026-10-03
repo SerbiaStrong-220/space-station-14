@@ -534,8 +534,8 @@ public sealed class MalfAiMachineModulesTest : GameTest
                     borgs.Add(chassis);
             }
 
-            Assert.That(borgs.Count, Is.EqualTo(1),
-                "The factory did not produce exactly one cyborg.");
+            Assert.That(borgs.Count, Is.EqualTo(3),
+                "The factory did not produce the converted cyborg plus two extra shells.");
             var borg = borgs[0];
 
             var mindSys = entMan.System<SharedMindSystem>();
@@ -942,16 +942,21 @@ public sealed class MalfAiMachineModulesTest : GameTest
         {
             var entMan = server.EntMan;
 
+            var mindSys = entMan.System<SharedMindSystem>();
             EntityUid? borg = null;
             var chassisQuery = entMan.AllEntityQueryEnumerator<BorgChassisComponent>();
             while (chassisQuery.MoveNext(out var chassis, out _))
             {
-                if (entMan.GetComponent<TransformComponent>(chassis).GridUid == map.GridCoords.EntityId)
-                    borg = chassis;
+                if (entMan.GetComponent<TransformComponent>(chassis).GridUid != map.GridCoords.EntityId)
+                    continue;
+
+                if (!mindSys.TryGetMind(chassis, out _, out _))
+                    continue;
+
+                borg = chassis;
             }
 
             Assert.That(borg, Is.Not.Null, "The factory did not produce a cyborg.");
-            var mindSys = entMan.System<SharedMindSystem>();
             Assert.That(mindSys.TryGetMind(borg!.Value, out var borgMindId, out _), Is.True,
                 "The converted cyborg has no mind.");
             Assert.That(borgMindId, Is.EqualTo(_transferMindId),

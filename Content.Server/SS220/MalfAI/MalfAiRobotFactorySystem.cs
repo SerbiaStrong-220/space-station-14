@@ -58,6 +58,7 @@ public sealed partial class MalfAiRobotFactorySystem : EntitySystem
 
     private static readonly EntProtoId FactoryProto = "MalfAiRobotFactory";
     private static readonly EntProtoId ShellProto = "MalfAiCyborgShell";
+    private const int ExtraShellCount = 2;
 
     private static readonly ProtoId<NpcFactionPrototype> MalfFaction = "MalfAi";
 
@@ -290,6 +291,8 @@ public sealed partial class MalfAiRobotFactorySystem : EntitySystem
 
         _laws.InstallMalfLaw(borg);
 
+        SpawnExtraShells(ent);
+
         _audio.PlayPvs(ConvertDoneSound, ent);
         _popup.PopupEntity(Loc.GetString(FactoryConvertDone), ent);
         _admin.Add(LogType.Action, LogImpact.High,
@@ -315,6 +318,20 @@ public sealed partial class MalfAiRobotFactorySystem : EntitySystem
             return;
 
         _ghost.SpawnGhost((mindId, mind), (EntityCoordinates?) null, canReturn: false);
+    }
+
+    private void SpawnExtraShells(Entity<MalfAiFactoryComponent> ent)
+    {
+        for (var i = 0; i < ExtraShellCount; i++)
+        {
+            var extra = Spawn(ShellProto, Transform(ent).Coordinates);
+            MoveOffFactoryTile(extra);
+            StripTransponderSuite(extra);
+
+            var borgFaction = EnsureComp<NpcFactionMemberComponent>(extra);
+            _npcFaction.AddFaction((extra, borgFaction), MalfFaction);
+            _laws.InstallMalfLaw(extra);
+        }
     }
 
     private void StripTransponderSuite(EntityUid shell)

@@ -90,7 +90,6 @@
       cell_slot:
       - PowerCellHigh
   - type: BorgSwitchableType
-    isNeedToSwitch: false
     inherentRadioChannels:
     - Common
     - Binary
