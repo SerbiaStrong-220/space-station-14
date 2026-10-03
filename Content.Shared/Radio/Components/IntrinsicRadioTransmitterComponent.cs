@@ -21,4 +21,12 @@ public sealed partial class IntrinsicRadioTransmitterComponent : Component
     [ViewVariables]
     public HashSet<ProtoId<RadioChannelPrototype>> EncryptionKeyChannels = new();
     //SS220 PAI with encryption keys end
+
+    // SS220-listen-only-radio-begin
+    /// <summary>
+    /// Channels that this transmitter can listen to but cannot transmit to.
+    /// </summary>
+    [DataField]
+    public HashSet<ProtoId<RadioChannelPrototype>> ListenOnlyChannels = new();
+    // SS220-listen-only-radio-end
 }
