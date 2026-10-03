@@ -40,7 +40,7 @@
     shoes: ClothingShoesBootsCombatFilled
     id: CBURNPDA
     pocket1: HandheldRadio #SS220 Radio
-    pocket2: WeaponLaserSvalinn #SS220 ERTchangingthings
+    pocket2: WeaponLaserGun
     belt: ClothingBeltBandolier
   # SS220-ERTchangingthings-begin
 #  storage:

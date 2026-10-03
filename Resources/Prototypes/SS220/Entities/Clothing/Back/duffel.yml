@@ -29,7 +29,7 @@
       storagebase: !type:AllSelector
         children:
         - id: BoxSurvivalCentcom
-        - id: WeaponShotgunSawn
+        - id: WeaponShotgunDoubleBarreled
         - id: BoxShotgunIncendiary
           amount: 2
         - id: PillAmbuzolPlus
