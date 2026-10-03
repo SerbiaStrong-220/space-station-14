@@ -1,6 +1,7 @@
 using Content.Shared.GameTicking;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
+using Content.Shared.SS220.SiliconComponents;
 using Robust.Client.Player;
 using Robust.Shared.Player;
 
@@ -31,8 +32,14 @@ public abstract class EquipmentHudSystem<T> : EntitySystem where T : IComponent
         SubscribeLocalEvent<T, GotEquippedEvent>(OnCompEquip);
         SubscribeLocalEvent<T, GotUnequippedEvent>(OnCompUnequip);
 
+        //SS220 add synth begin
+        SubscribeLocalEvent<T, ComponentGotInsertedIntoUser>(OnCompInserted);
+        SubscribeLocalEvent<T, ComponentGotRemovedFromUser>(OnCompRemoved);
+        //SS220 add synth end
+
         SubscribeLocalEvent<T, RefreshEquipmentHudEvent<T>>(OnRefreshComponentHud);
         SubscribeLocalEvent<T, InventoryRelayedEvent<RefreshEquipmentHudEvent<T>>>(OnRefreshEquipmentHud);
+        SubscribeLocalEvent<T, PartRelayedEvent<RefreshEquipmentHudEvent<T>>>(OnRefreshPartHud); //SS220 add synth
 
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
     }
@@ -87,6 +94,18 @@ public abstract class EquipmentHudSystem<T> : EntitySystem where T : IComponent
         RefreshOverlay();
     }
 
+    //SS220 add synth begin
+    private void OnCompInserted(Entity<T> ent, ref ComponentGotInsertedIntoUser args)
+    {
+        RefreshOverlay();
+    }
+
+    private void OnCompRemoved(Entity<T> ent, ref ComponentGotRemovedFromUser args)
+    {
+        RefreshOverlay();
+    }
+    //SS220 add synth end
+
     private void OnRoundRestart(RoundRestartCleanupEvent args)
     {
         Deactivate();
@@ -96,6 +115,13 @@ public abstract class EquipmentHudSystem<T> : EntitySystem where T : IComponent
     {
         OnRefreshComponentHud(ent, ref args.Args);
     }
+
+    //SS220 add synth begin
+    protected virtual void OnRefreshPartHud(Entity<T> ent, ref PartRelayedEvent<RefreshEquipmentHudEvent<T>> args)
+    {
+        OnRefreshComponentHud(ent, ref args.Args);
+    }
+    //SS220 add synth end
 
     protected virtual void OnRefreshComponentHud(Entity<T> ent, ref RefreshEquipmentHudEvent<T> args)
     {

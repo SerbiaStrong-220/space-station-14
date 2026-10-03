@@ -1,0 +1,43 @@
+- type: inventoryTemplate
+  id: synth
+  slots:
+  - name: neck
+    slotTexture: neck
+    slotFlags: NECK
+    uiWindowPos: 0,2
+    strippingWindowPos: 0,1
+    displayName: Neck
+  - name: suitstorage
+    slotTexture: suit_storage
+    slotFlags:   SUITSTORAGE
+    slotGroup: MainHotbar
+    stripTime: 5
+    uiWindowPos: 2,0
+    strippingWindowPos: 2,5
+    displayName: Suit Storage
+  - name: id
+    slotTexture: id
+    slotFlags: IDCARD
+    slotGroup: SecondHotbar
+    stripTime: 5
+    uiWindowPos: 2,1
+    strippingWindowPos: 2,4
+    displayName: ID
+  - name: belt
+    slotTexture: belt
+    fullTextureName: template_small
+    slotFlags: BELT
+    slotGroup: SecondHotbar
+    stripTime: 8
+    uiWindowPos: 3,1
+    strippingWindowPos: 1,5
+    displayName: Belt
+  - name: back
+    slotTexture: back
+    fullTextureName: template_small
+    slotFlags: BACK
+    slotGroup: SecondHotbar
+    stripTime: 10
+    uiWindowPos: 3,0
+    strippingWindowPos: 0,5
+    displayName: Back
