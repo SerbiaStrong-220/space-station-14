@@ -45,3 +45,7 @@ ent-ClothingOuterArmorPodWars = броня Броненосец II
     .desc = Переделанный бронескафандр Броненосец II, реликвия войн подов.
 ent-CardArmour = картонная броня
     .desc = Средневековый нагрудник, сделанный из картона.
+ent-ClothingOuterArmorLasertagRed = красный жилет для лазертага.
+    .desc = Похоже, что его красили балончиком...
+ent-ClothingOuterArmorLasertagBlue = синий жилет для лазертага.
+    .desc = Похоже, что его красили балончиком...
