@@ -33,6 +33,7 @@
   - type: PlacementReplacement
     key: walls
   - type: Damageable
+    penetrationThreshold: 20 #SS220 armour piercing
     damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallic
   - type: Physics
