@@ -292,6 +292,14 @@
       guides:
       - Security
       - Antagonists
+  # SS220-place-and-pickup-sounds-2 begin
+    - type: EmitSoundOnPickup
+      sound:
+        path: /Audio/SS220/Items/component_pickup.ogg
+    - type: EmitSoundOnDrop
+      sound:
+        path: /Audio/SS220/Items/component_drop.ogg
+  # SS220-place-and-pickup-sounds-2 end
 
 - type: entity
   name: flash
