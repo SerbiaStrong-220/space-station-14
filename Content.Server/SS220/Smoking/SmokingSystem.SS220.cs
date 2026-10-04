@@ -44,6 +44,7 @@ public sealed partial class SmokingSystem
             CancelDuplicate = false,
         }))
         {
+            _audio.PlayPvs(entity.Comp.PuffInhaleSound, entity.Owner);
             _actions.SetUseDelay((args.Action, args.Action), entity.Comp.PuffDelay + entity.Comp.PuffCooldown);
         }
 
@@ -81,7 +82,6 @@ public sealed partial class SmokingSystem
         }
 
         ReleaseVapor(entity.Comp, environment);
-        _audio.PlayPvs(entity.Comp.PuffSound, entity.Owner);
 
         if (solution.Volume <= 0)
             RaiseLocalEvent(entity.Owner, new SmokableSolutionEmptyEvent(), true);

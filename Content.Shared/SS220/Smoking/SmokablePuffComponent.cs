@@ -25,7 +25,7 @@ public sealed partial class SmokablePuffComponent : Component
     public TimeSpan PuffDelay = TimeSpan.FromSeconds(1.2);
 
     [DataField]
-    public SoundSpecifier? PuffSound = new SoundPathSpecifier("/Audio/Effects/smoke.ogg");
+    public SoundSpecifier? PuffInhaleSound = new SoundPathSpecifier("/Audio/SS220/Effects/puff.ogg");
 
     [DataField]
     public TimeSpan PuffCooldown = TimeSpan.FromSeconds(5);
