@@ -7,7 +7,6 @@
   components:
   - type: Action
     itemIconStyle: BigItem
-    useDelay: 1
     keywords:
     - затяжка
     - затянуть

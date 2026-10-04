@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Actions;
 using Content.Shared.Atmos;
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry;
@@ -7,11 +8,15 @@ using Content.Shared.DoAfter;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.SS220.Smoking;
 using Content.Shared.Smoking;
+using Robust.Shared.Timing;
 
 namespace Content.Server.Nutrition.EntitySystems
 {
     public sealed partial class SmokingSystem
     {
+        [Dependency] private IGameTiming _timing = default!;
+        [Dependency] private SharedActionsSystem _actions = default!;
+
         private void InitializeSmokablePuff()
         {
             SubscribeLocalEvent<SmokablePuffComponent, SmokablePuffActionEvent>(OnSmokablePuffAction);
@@ -25,7 +30,7 @@ namespace Content.Server.Nutrition.EntitySystems
             if (!CanPuff(entity, user))
                 return;
 
-            _doAfterSystem.TryStartDoAfter(new DoAfterArgs(
+            if (_doAfterSystem.TryStartDoAfter(new DoAfterArgs(
                 EntityManager,
                 user,
                 entity.Comp.PuffDelay,
@@ -37,7 +42,10 @@ namespace Content.Server.Nutrition.EntitySystems
                 BreakOnMove = true,
                 BreakOnDamage = true,
                 CancelDuplicate = false,
-            });
+            }))
+            {
+                _actions.SetUseDelay((args.Action, args.Action), entity.Comp.PuffDelay + entity.Comp.PuffCooldown);
+            }
 
             args.Handled = true;
         }
@@ -64,6 +72,8 @@ namespace Content.Server.Nutrition.EntitySystems
 
             var inhaled = _solutionContainerSystem.SplitSolution(soln.Value, entity.Comp.PuffCost);
 
+            entity.Comp.NextPuffTime = _timing.CurTime + entity.Comp.PuffCooldown;
+
             if (inhaled.Volume > 0 && TryComp(user, out BloodstreamComponent? bloodstream))
             {
                 _reactiveSystem.DoEntityReaction(user, inhaled, ReactionMethod.Ingestion);
@@ -84,6 +94,9 @@ namespace Content.Server.Nutrition.EntitySystems
                 _popupSystem.PopupEntity(Loc.GetString("smokable-puff-not-lit"), entity.Owner, user);
                 return false;
             }
+
+            if (_timing.CurTime < entity.Comp.NextPuffTime)
+                return false;
 
             if (!_inventorySystem.TryGetSlotEntity(user, "mask", out var inMouth) || inMouth != entity.Owner)
             {
