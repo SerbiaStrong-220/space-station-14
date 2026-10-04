@@ -9,7 +9,9 @@
     itemIconStyle: BigItem
     keywords:
     - затяжка
-    - затянуть
-    - курить
+    - курит
+    - затягивается
+    - затянулся
+    - пыхтит
   - type: InstantAction
     event: !type:SmokablePuffActionEvent
