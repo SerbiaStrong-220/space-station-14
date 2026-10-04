@@ -7,34 +7,85 @@ using Content.Shared.SS220.Weapons.Components;
 using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
+using Robust.Shared.Input;
+using Robust.Shared.Input.Binding;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
+using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.Weapons.Ranged.Systems;
 
-public abstract partial class SharedGunAimingSystem : EntitySystem
+public sealed partial class SharedGunAimingSystem : EntitySystem
 {
     [Dependency] private SharedGunSystem _gun = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private MovementSpeedModifierSystem _movementSpeedModifier = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeAllEvent<AimStatusChangeAttemptEvent>(OnAimStatusChanged);
+        SubscribeLocalEvent<GunAimableComponent, AimStatusChangeAttemptEvent>(OnAimStatusChanged);
         SubscribeLocalEvent<GunAimableComponent, GunRefreshModifiersEvent>(OnGunRefreshModifiers);
         SubscribeLocalEvent<CombatModeComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovementSpeed);
         SubscribeLocalEvent<GunAimableComponent, GotUnequippedHandEvent>(OnUnequip);
         SubscribeLocalEvent<GunAimableComponent, DroppedEvent>(OnDrop);
         SubscribeLocalEvent<GunAimableComponent, HandDeselectedEvent>(OnDeselect);
-        SubscribeLocalEvent<GunAimableComponent, HeldRelayedEvent<CombatModeOffEvent>>(OnCombatOff);
+        SubscribeLocalEvent<GunAimableComponent, HeldRelayedEvent<CombatModeDisabledEvent>>(OnCombatOff);
+
+        CommandBinds.Builder
+            .Bind(EngineKeyFunctions.UseSecondary, InputCmdHandler.FromDelegate(OnAimEnabled, OnAimDisabled, handle: false, outsidePrediction: false))
+            .Register<SharedGunAimingSystem>();
     }
 
-    private void OnAimStatusChanged(AimStatusChangeAttemptEvent message, EntitySessionEventArgs args)
+    private void OnAimEnabled(ICommonSession? session)
     {
-        EntityUid user = GetEntity(message.User);
+        OnAimToggleAttempt(session, true);
+    }
 
-        if (args.SenderSession.AttachedEntity != user)
+    private void OnAimDisabled(ICommonSession? session)
+    {
+        OnAimToggleAttempt(session, false);
+    }
+
+    private void OnAimToggleAttempt(ICommonSession? session, bool enabled)
+    {
+        if (session is not { } playerSession)
+            return;
+
+        if (playerSession.AttachedEntity is not { Valid: true } user)
+            return;
+
+        if (!TryComp(user, out CombatModeComponent? combatComp) ||
+            !combatComp.IsInCombatMode)
+            return;
+
+        if (!_gun.TryGetGun(user, out var gun) || !gun.Comp.UseKey)
+            return;
+
+        if (!TryComp<GunAimableComponent>(gun.Owner, out var aimableComp))
+            return;
+
+        var useKey = EngineKeyFunctions.UseSecondary;
+
+        if (enabled && !aimableComp.IsAimed)
+        {
+            var ev = new AimStatusChangeAttemptEvent { Aim = true, User = user };
+            RaiseLocalEvent(gun.Owner, ref ev);
+            return;
+        }
+
+        if (!enabled && aimableComp.IsAimed)
+        {
+            var ev = new AimStatusChangeAttemptEvent { Aim = false, User = user };
+            RaiseLocalEvent(gun.Owner, ref ev);
+        }
+    }
+
+    private void OnAimStatusChanged(Entity<GunAimableComponent> ent, ref AimStatusChangeAttemptEvent args)
+    {
+        if (args.User is not { Valid: true } user)
             return;
 
         if (!TryComp<CombatModeComponent>(user, out var combatComp) || !combatComp.IsInCombatMode)
@@ -43,16 +94,15 @@ public abstract partial class SharedGunAimingSystem : EntitySystem
         if (!_gun.TryGetGun(user, out var gun) || !gun.Comp.UseKey)
             return;
 
-        if (gun.Owner != GetEntity(message.Gun))
+        if (gun.Owner != ent.Owner)
             return;
 
         if (!TryComp<GunAimableComponent>(gun.Owner, out var aimableComp))
             return;
 
-        aimableComp.IsAimed = message.Aim;
+        aimableComp.IsAimed = args.Aim;
 
-        if (_net.IsServer)
-            Dirty(gun.Owner, aimableComp);
+        Dirty(gun.Owner, aimableComp);
 
         _gun.RefreshModifiers((gun.Owner, gun));
 
@@ -108,7 +158,7 @@ public abstract partial class SharedGunAimingSystem : EntitySystem
         StopAiming(ent, args.User);
     }
 
-    private void OnCombatOff(Entity<GunAimableComponent> ent, ref HeldRelayedEvent<CombatModeOffEvent> args)
+    private void OnCombatOff(Entity<GunAimableComponent> ent, ref HeldRelayedEvent<CombatModeDisabledEvent> args)
     {
         if (args.Owner is { Valid: true } userValid)
             StopAiming(ent, userValid);

@@ -26,8 +26,8 @@ public abstract partial class SharedHandsSystem
         SubscribeLocalEvent<HandsComponent, UnwieldAttemptEvent>(RefRelayEvent);
         SubscribeLocalEvent<HandsComponent, TargetHandcuffedEvent>(RefRelayEvent);
         // SS220 combat mode logic extension begin
-        SubscribeLocalEvent<HandsComponent, CombatModeOnEvent>(RefRelayEvent);
-        SubscribeLocalEvent<HandsComponent, CombatModeOffEvent>(RefRelayEvent);
+        SubscribeLocalEvent<HandsComponent, CombatModeEnabledEvent>(RefRelayEvent);
+        SubscribeLocalEvent<HandsComponent, CombatModeDisabledEvent>(RefRelayEvent);
         // SS220 combat mode logic extension end
     }
 

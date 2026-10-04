@@ -82,13 +82,13 @@ public abstract class SharedCombatModeSystem : EntitySystem
         // SS220 combat mode logic extension begin
         if (component.IsInCombatMode)
         {
-            var onEv = new CombatModeOnEvent();
+            var onEv = new CombatModeEnabledEvent();
             RaiseLocalEvent(entity, ref onEv);
 
             return;
         }
 
-        var offEv = new CombatModeOffEvent();
+        var offEv = new CombatModeDisabledEvent();
         RaiseLocalEvent(entity, ref offEv);
         // SS220 combat mode logic extension end
 
@@ -123,13 +123,13 @@ public sealed partial class ToggleCombatActionEvent : InstantActionEvent
 
 // SS220 combat mode logic extension begin
 [ByRefEvent]
-public record struct CombatModeOnEvent : IInventoryRelayEvent
+public record struct CombatModeEnabledEvent : IInventoryRelayEvent
 {
     public SlotFlags TargetSlots { get; set; }
 }
 
 [ByRefEvent]
-public record struct CombatModeOffEvent : IInventoryRelayEvent
+public record struct CombatModeDisabledEvent : IInventoryRelayEvent
 {
     public SlotFlags TargetSlots { get; set; }
 }

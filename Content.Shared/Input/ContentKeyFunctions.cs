@@ -8,9 +8,6 @@ namespace Content.Shared.Input
         public static readonly BoundKeyFunction ToggleKnockdown = "ToggleKnockdown";
         public static readonly BoundKeyFunction UseItemInHand = "ActivateItemInHand";
         public static readonly BoundKeyFunction AltUseItemInHand = "AltActivateItemInHand";
-        public static readonly BoundKeyFunction UseGunInHand = "ActivateGunInHand"; //SS220 weapon overhaul
-        public static readonly BoundKeyFunction ToggleOffset = "ToggleOffset"; //SS220 weapon overhaul
-        public static readonly BoundKeyFunction ToggleActiveBlocking = "ToggleActiveBlocking"; //SS220 add active blocking //idk why there was no comment
         public static readonly BoundKeyFunction ActivateItemInWorld = "ActivateItemInWorld";
         public static readonly BoundKeyFunction AltActivateItemInWorld = "AltActivateItemInWorld";
         public static readonly BoundKeyFunction Drop = "Drop";

@@ -1,6 +1,7 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
+
 using Content.Shared.Hands.Components;
-using Content.Shared.Input;
+using Content.Shared.SS220.Input;
 using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Input.Binding;
@@ -19,7 +20,7 @@ public sealed partial class SharedAltBlockingSystem
         SubscribeLocalEvent<AltBlockingUserComponent, ThrowAttemptEvent>(OnThrowAttempt);
 
         CommandBinds.Builder
-            .Bind(ContentKeyFunctions.ToggleActiveBlocking, InputCmdHandler.FromDelegate(OnBlockToggleAttempt, handle: false, outsidePrediction: false))
+            .Bind(KeyFunctions220.ToggleActiveBlocking, InputCmdHandler.FromDelegate(OnBlockToggleAttempt, handle: false, outsidePrediction: false))
             .Register<SharedAltBlockingSystem>();
     }
 

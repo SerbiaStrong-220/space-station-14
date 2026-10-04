@@ -1,6 +1,6 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 
-using Content.Shared.Input;
+using Content.Shared.SS220.Input;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Player;
 
@@ -13,7 +13,7 @@ public sealed partial class EyeOffsetInCombatModeSystem : EntitySystem
         base.Initialize();
 
         CommandBinds.Builder
-            .Bind(ContentKeyFunctions.ToggleOffset, InputCmdHandler.FromDelegate(OnOffsetToggle, handle: false, outsidePrediction: false))
+            .Bind(KeyFunctions220.ToggleOffset, InputCmdHandler.FromDelegate(OnOffsetToggle, handle: false, outsidePrediction: false))
             .Register<EyeOffsetInCombatModeSystem>();
     }
 

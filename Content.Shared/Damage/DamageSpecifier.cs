@@ -167,7 +167,9 @@ namespace Content.Shared.Damage
                 if (newValue != 0)
                     newDamage.DamageDict[key] = FixedPoint2.New(newValue);
             }
-            newDamage.ArmourPiercing = FixedPoint2.Max(FixedPoint2.Min(FixedPoint2.Zero, damageSpec.ArmourPiercing), damageSpec.ArmourPiercing - (1f - minCoefficient) * 100f); //SS220 armor piercing added
+            newDamage.ArmourPiercing = FixedPoint2.Max(
+                FixedPoint2.Min(FixedPoint2.Zero, damageSpec.ArmourPiercing),
+                damageSpec.ArmourPiercing - (1f - minCoefficient) * 100f); //SS220 armor piercing added
 
             return newDamage;
         }
