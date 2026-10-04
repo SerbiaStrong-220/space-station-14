@@ -25,7 +25,8 @@ namespace Content.Client.Hands
         [Dependency] private IEntityManager _entMan = default!;
         [Dependency] private IPlayerManager _player = default!; // SS220-MartialArts
         [Dependency] private IResourceCache _resourceCache = default!; // SS220-MartialArts
-        [Dependency] private MartialArtsSystem _martial = default!; // SS220-MartialArts
+
+        private readonly MartialArtsSystem _martial = default!; // SS220-MartialArts
 
         // SS220-MartialArts-Start
         private readonly Color _martialArtsIconsModulate = Color.White.WithAlpha(0.75f);
@@ -57,6 +58,8 @@ namespace Content.Client.Hands
                 {
                     Filter = true
                 }, nameof(ShowHandItemOverlay));
+
+            _martial = _entMan.System<MartialArtsSystem>(); // SS220-MartialArts
         }
 
         protected override void DisposeBehavior()
