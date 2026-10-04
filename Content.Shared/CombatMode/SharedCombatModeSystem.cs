@@ -84,12 +84,12 @@ public abstract class SharedCombatModeSystem : EntitySystem
         {
             var onEv = new CombatModeEnabledEvent();
             RaiseLocalEvent(entity, ref onEv);
-
-            return;
         }
-
-        var offEv = new CombatModeDisabledEvent();
-        RaiseLocalEvent(entity, ref offEv);
+        else
+        {
+            var offEv = new CombatModeDisabledEvent();
+            RaiseLocalEvent(entity, ref offEv);
+        }
         // SS220 combat mode logic extension end
 
         // Change mouse rotator comps if flag is set
