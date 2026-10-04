@@ -34,7 +34,7 @@ namespace Content.Server.Nutrition.EntitySystems
                 target: user,
                 used: entity.Owner)
             {
-                BreakOnMove = false,
+                BreakOnMove = true,
                 BreakOnDamage = true,
                 CancelDuplicate = false,
             });
@@ -54,7 +54,10 @@ namespace Content.Server.Nutrition.EntitySystems
                 return;
 
             if (!TryComp(entity, out SmokableComponent? smokable)
-                || !_solutionContainerSystem.TryGetSolution(entity.Owner, smokable.Solution, out var soln, out var solution))
+                || !_solutionContainerSystem.TryGetSolution(entity.Owner,
+                    smokable.Solution,
+                    out var soln,
+                    out var solution))
             {
                 return;
             }
