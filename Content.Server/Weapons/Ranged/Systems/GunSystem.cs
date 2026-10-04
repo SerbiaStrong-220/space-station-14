@@ -100,12 +100,9 @@ public sealed partial class GunSystem : SharedGunSystem
             }
 
             // SS220 Weapon overhaul begin
-            bool isAimed = false;
-
-            if (TryComp<GunAimableComponent>(gun.Owner, out var aimableComp) &&
+            var isAimed = TryComp<GunAimableComponent>(gun.Owner, out var aimableComp) &&
                 aimableComp.IsAimed ||
-                user is { Valid: true } userValid && _standing.IsDown(userValid))
-                isAimed = true;
+                user is { Valid: true } userValid && _standing.IsDown(userValid);
             // SS220 Weapon overhaul end
 
             // TODO: Clean this up in a gun refactor at some point - too much copy pasting
