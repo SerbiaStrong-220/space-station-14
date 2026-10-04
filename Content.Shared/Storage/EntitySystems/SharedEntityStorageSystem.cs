@@ -4,11 +4,14 @@ using Content.Shared.Destructible;
 using Content.Shared.Foldable;
 using Content.Shared.Hands.Components;
 using Content.Shared.Explosion;
+using Content.Shared.Ghost; // SS220 Spirits can contain
 using Content.Shared.Interaction;
 using Content.Shared.Item;
 using Content.Shared.Lock;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
+using Content.Shared.SS220.Containers.Components; // SS220 Spirits can contain
+using Content.Shared.SS220.DarkReaper; // SS220 Spirits can contain
 using Content.Shared.Storage.Components;
 using Content.Shared.Tools.Systems;
 using Content.Shared.Verbs;
@@ -382,6 +385,15 @@ public abstract class SharedEntityStorageSystem : EntitySystem
         if (containerAttemptEvent.Cancelled)
             return false;
 
+        // SS220 Spirits can contain begin
+        if (HasComp<SpiritContainerComponent>(container) &&
+            (HasComp<GhostComponent>(toInsert) ||
+             HasComp<SpectralComponent>(toInsert) ||
+             HasComp<DarkReaperComponent>(toInsert)) &&
+            (component.Blacklist == null || !_whitelistSystem.IsValid(component.Blacklist, toInsert)))
+            return true;
+        // SS220 Spirits can contain end
+
         // Check the whitelist/blacklist.
         return _whitelistSystem.CheckBoth(toInsert, component.Blacklist, component.Whitelist);
     }
@@ -418,6 +430,13 @@ public abstract class SharedEntityStorageSystem : EntitySystem
     {
         if (!Resolve(target, ref component))
             return false;
+
+        // SS220 Spirits can contain begin
+        // Spirits must escape through the do-after or ghost teleportation, even with hands.
+        if (HasComp<SpiritContainerComponent>(target) && component.Contents.Contains(user) &&
+            (HasComp<GhostComponent>(user) || HasComp<SpectralComponent>(user) || HasComp<DarkReaperComponent>(user)))
+            return false;
+        // SS220 Spirits can contain end
 
         if (!HasComp<HandsComponent>(user))
             return false;

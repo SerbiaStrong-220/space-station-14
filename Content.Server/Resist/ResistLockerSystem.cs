@@ -1,10 +1,14 @@
 using Content.Server.Popups;
 using Content.Server.Storage.EntitySystems;
 using Content.Shared.DoAfter;
+using Content.Shared.Ghost; // SS220 Spirits can contain
 using Content.Shared.Lock;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
 using Content.Shared.Resist;
+using Content.Shared.Revenant.Components; // SS220 Spirits can contain
+using Content.Shared.SS220.Containers.Components; // SS220 Spirits can contain
+using Content.Shared.SS220.DarkReaper; // SS220 Spirits can contain
 using Content.Shared.Storage.Components;
 using Content.Shared.Tools.Components;
 using Content.Shared.Tools.Systems;
@@ -35,6 +39,14 @@ public sealed class ResistLockerSystem : EntitySystem
 
         if (!TryComp(uid, out EntityStorageComponent? storageComponent))
             return;
+
+        // SS220 Spirits can contain begin
+        if (HasComp<SpiritContainerComponent>(uid) &&
+            (HasComp<GhostComponent>(args.Entity) ||
+             HasComp<RevenantComponent>(args.Entity) ||
+             HasComp<DarkReaperComponent>(args.Entity)))
+            return;
+        // SS220 Spirits can contain end
 
         if (!_actionBlocker.CanMove(args.Entity))
             return;

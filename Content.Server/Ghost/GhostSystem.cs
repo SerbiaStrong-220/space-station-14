@@ -25,6 +25,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Overlays;
+using Content.Shared.SS220.Containers.Components; // SS220 Spirits can contain
 using Content.Shared.SS220.Ghost;
 using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Popups;
@@ -459,6 +460,11 @@ namespace Content.Server.Ghost
 
         private void OnEntityStorageInsertAttempt(EntityUid uid, GhostComponent comp, ref InsertIntoEntityStorageAttemptEvent args)
         {
+            // SS220 Spirits can contain begin
+            if (HasComp<SpiritContainerComponent>(args.Container.Owner))
+                return;
+            // SS220 Spirits can contain end
+
             args.Cancelled = true;
         }
 
