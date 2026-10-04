@@ -226,11 +226,7 @@ public sealed class NukeSystem : EntitySystem
             var worldPos = _transform.GetWorldPosition(xform);
 
             // SS220 edit start
-            if (HasComp<BecomesStationComponent>(xform.GridUid) || HasComp<EmergencyShuttleComponent>(xform.GridUid))
-            {
-                // nothing :)
-            }
-            else
+            if (!HasComp<BecomesStationComponent>(xform.GridUid) || !HasComp<EmergencyShuttleComponent>(xform.GridUid))
             {
                 _popups.PopupEntity(Loc.GetString("nuke-component-cant-anchor-shuttle"), uid, args.Actor, PopupType.MediumCaution);
                 return;
