@@ -120,14 +120,8 @@ public sealed partial class SharedGunAimingSystem : EntitySystem
             aimableComp.AimedWalkingSpeedModifier == null)
             return;
 
-        float sprintMod = 1f;
-        float walkMod = 1f;
-
-        if (aimableComp.AimedSprintSpeedModifier != null)
-            sprintMod = (float)aimableComp.AimedSprintSpeedModifier;
-
-        if (aimableComp.AimedWalkingSpeedModifier != null)
-            walkMod = (float)aimableComp.AimedWalkingSpeedModifier;
+        var sprintMod = aimableComp.AimedSprintSpeedModifier ?? 1f;
+        var walkMod = aimableComp.AimedWalkingSpeedModifier ?? 1f;
 
         args.ModifySpeed(walkMod, sprintMod);
     }
