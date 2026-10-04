@@ -7,11 +7,5 @@
   components:
   - type: Action
     itemIconStyle: BigItem
-    keywords:
-    - затяжка
-    - курит
-    - затягивается
-    - затянулся
-    - пыхтит
   - type: InstantAction
     event: !type:SmokablePuffActionEvent
