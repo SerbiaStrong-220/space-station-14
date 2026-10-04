@@ -18,7 +18,7 @@ using System.Numerics;
 
 namespace Content.Shared.Weapons.Hitscan.Systems;
 
-public sealed class HitscanBasicRaycastSystem : EntitySystem
+public sealed partial class HitscanBasicRaycastSystem : EntitySystem // SS220 separate HitscanBasicRaycastSystem.220.cs
 {
     [Dependency] private readonly SharedShuttleNavInfoSystem _sharedShuttleNavInfo = default!; // SS220-add-hitscan-to-map
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
@@ -164,24 +164,4 @@ public sealed class HitscanBasicRaycastSystem : EntitySystem
             }, Filter.Pvs(fromCoordinates, entityMan: EntityManager));
         }
     }
-
-    //SS220 weapon overhaul begin
-    private bool ShouldIgnoreRequireTarget(EntityUid target, EntityUid gun, EntityUid user)
-    {
-        if (!TryComp<RequireProjectileTargetComponent>(target, out var requireTargetComp))
-            return false;
-
-        if (!TryComp<MobStateComponent>(target, out var statesComp) || (statesComp.CurrentState != Mobs.MobState.Alive))
-            return false;
-
-        if (TryComp<StandingStateComponent>(user, out var standingState) && _standing.IsDown((user, standingState)))
-            if (TryComp<StandingStateComponent>(target, out var standingStateTarget) && _standing.IsDown((target, standingStateTarget)))
-                return true;
-
-        if (!TryComp<GunAimableComponent>(gun, out var aimableComp) || !aimableComp.IsAimed)
-            return false;
-
-        return true;
-    }
-    //SS220 weapon overhaul end
 }

@@ -1,10 +1,7 @@
 using Content.Client.Movement.Components;
 using Content.Client.Viewport;
 using Content.Shared.Camera;
-using Content.Shared.CombatMode;
-using Content.Shared.Mobs;
-using Content.Shared.Mobs.Components;
-using Content.Shared.SS220.EyeOffsetInCombatMode;
+using Content.Shared.SS220.Movement.Events;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Shared.Map;
@@ -31,17 +28,13 @@ public sealed partial class EyeCursorOffsetSystem : EntitySystem
     private void OnGetEyeOffsetEvent(EntityUid uid, EyeCursorOffsetComponent component, ref GetEyeOffsetEvent args)
     {
         //SS220 weapon overhaul begin
-        if (TryComp<EyeOffsetInCombatModeComponent>(uid, out var combatOffsetComp))
-        {
-            if (!combatOffsetComp.Online)
-                return;
+        var ev = new CanApplyEyeCursorOffsetEvent();
+        ev.Cancelled = false;
 
-            if (!TryComp<CombatModeComponent>(uid, out var combatModeComp) || !combatModeComp.IsInCombatMode)
-                return;
+        RaiseLocalEvent(uid, ref ev);
 
-            if (TryComp<MobStateComponent>(uid, out var mobStateComp) && mobStateComp.CurrentState != MobState.Alive)
-                return;
-        }
+        if (ev.Cancelled)
+            return;
         //SS220 weapon overhaul end
         var offset = OffsetAfterMouse(uid, component);
         if (offset == null)
