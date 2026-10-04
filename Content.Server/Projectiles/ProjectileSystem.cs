@@ -136,7 +136,7 @@ public sealed class ProjectileSystem : SharedProjectileSystem
             if (!damage.DamageDict.Keys.Contains(requiredDamageType))
                 return false;
 
-            FixedPoint2 targetThreshold = target.Comp.PenetrationThreshold;
+            var targetThreshold = target.Comp.PenetrationThreshold;
 
             if (projectile.Comp.Damage[requiredDamageType] + projectile.Comp.Damage.ArmourPiercing < targetThreshold)
                 return false;
