@@ -1,0 +1,12 @@
+seeds-strange-fruit-name = strange fruit
+seeds-strange-fruit-display-name = strange fruit
+seeds-migo-name = mi-gomycelium
+seeds-migo-display-name = mi-gomycelium
+seeds-null-shroom-name = null mushroom
+seeds-null-shroom-display-name = null mushroom
+seeds-sidious-shroom-name = sidious mushroom
+seeds-sidious-shroom-display-name = sidious mushroom
+seeds-lurbo-shroom-name = lubrogus
+seeds-lurbo-shroom-display-name = lubrogus
+seeds-miko-trap-shroom-name = miko trap
+seeds-miko-trap-shroom-display-name = miko trap
