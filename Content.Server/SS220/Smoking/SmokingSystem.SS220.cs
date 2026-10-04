@@ -62,7 +62,7 @@ public sealed partial class SmokingSystem
         if (environment == null || !CanPuff(entity, user))
             return;
 
-        if (!TryComp(entity, out SmokableComponent? smokable)
+        if (!TryComp<SmokableComponent>(entity, out var smokable)
             || !_solutionContainerSystem.TryGetSolution(entity.Owner,
                 smokable.Solution,
                 out var soln,
@@ -75,7 +75,7 @@ public sealed partial class SmokingSystem
 
         entity.Comp.NextPuffTime = _timing.CurTime + entity.Comp.PuffCooldown;
 
-        if (inhaled.Volume > 0 && TryComp(user, out BloodstreamComponent? bloodstream))
+        if (inhaled.Volume > 0 && TryComp<BloodstreamComponent>(user, out var bloodstream))
         {
             _reactiveSystem.DoEntityReaction(user, inhaled, ReactionMethod.Ingestion);
             _bloodstreamSystem.TryAddToBloodstream((user, bloodstream), inhaled);
@@ -89,7 +89,7 @@ public sealed partial class SmokingSystem
 
     private bool CanPuff(Entity<SmokablePuffComponent> entity, EntityUid user)
     {
-        if (!TryComp(entity, out SmokableComponent? smokable))
+        if (!TryComp<SmokableComponent>(entity, out var smokable))
             return false;
 
         if (smokable.State != SmokableState.Lit)
