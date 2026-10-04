@@ -135,6 +135,7 @@
   recipeUnlocks:
   - WeaponParticleDecelerator
   - HoloprojectorField
+  - SpiritCloset # SS220 Spirits can contain 
 
 - type: technology
   id: GravityManipulation

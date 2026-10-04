@@ -1,0 +1,14 @@
+- type: entity
+  id: SpiritCloset
+  parent: ClosetSteelBase
+  name: TestTestTest
+  description: 
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: wardrobe #SS220-Closet-Resprite-start
+    stateDoorOpen: steellocker_storage_open #SS220-Closet-Resprite-end
+    stateDoorClosed: 
+  - type: Foldable
+    folded: true
+  - type: SpiritContainer
