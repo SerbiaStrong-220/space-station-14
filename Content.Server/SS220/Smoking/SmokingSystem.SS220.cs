@@ -89,9 +89,14 @@ public sealed partial class SmokingSystem
 
     private bool CanPuff(Entity<SmokablePuffComponent> entity, EntityUid user)
     {
-        if (!TryComp(entity, out SmokableComponent? smokable) || smokable.State != SmokableState.Lit)
+        if (!TryComp(entity, out SmokableComponent? smokable))
+            return false;
+
+        if (smokable.State != SmokableState.Lit)
         {
-            _popupSystem.PopupEntity(Loc.GetString("smokable-puff-not-lit"), entity.Owner, user);
+            if (smokable.State == SmokableState.Unlit)
+                _popupSystem.PopupEntity(Loc.GetString("smokable-puff-not-lit"), entity.Owner, user);
+
             return false;
         }
 
@@ -99,20 +104,14 @@ public sealed partial class SmokingSystem
             return false;
 
         if (!_inventorySystem.TryGetSlotEntity(user, "mask", out var inMouth) || inMouth != entity.Owner)
-        {
-            _popupSystem.PopupEntity(Loc.GetString("smokable-puff-need-mouth"), entity.Owner, user);
             return false;
-        }
 
         if (!HasComp<BloodstreamComponent>(user) || !_ingestion.HasMouthAvailable(user, user))
             return false;
 
         if (!_solutionContainerSystem.TryGetSolution(entity.Owner, smokable.Solution, out _, out var solution)
             || solution.Volume <= 0)
-        {
-            _popupSystem.PopupEntity(Loc.GetString("smokable-puff-dry"), entity.Owner, user);
             return false;
-        }
 
         return true;
     }
