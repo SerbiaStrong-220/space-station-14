@@ -15,7 +15,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.Weapons.Ranged.Systems;
 
-public sealed partial class SharedGunAimingSystem : EntitySystem
+public sealed partial class GunAimingSystem : EntitySystem
 {
     [Dependency] private SharedGunSystem _gun = default!;
     [Dependency] private INetManager _net = default!;
