@@ -1,131 +1,18 @@
 - type: ttsVoice
-  id: Arthas
-  name: Arthas
-  speaker: arthas
+  id: Announcer
+  name: Announcer
+  speaker: announcer
   provider: Silero
-  categories: [ Warcraft3 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Kelthuzad
-  name: Kelthuzad
-  speaker: kelthuzad
-  provider: Silero
-  categories: [ Warcraft3 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Anubarak
-  name: Anubarak
-  speaker: anubarak
-  provider: Silero
-  categories: [ Warcraft3 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Thrall
-  name: Thrall
-  speaker: thrall
-  provider: Silero
-  categories: [ Warcraft3 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Grunt
-  name: Grunt
-  speaker: grunt
-  provider: Silero
-  categories: [ Warcraft3 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Cairne
-  name: Cairne
-  speaker: cairne
-  provider: Silero
-  categories: [ Warcraft3 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Rexxar
-  name: Rexxar
-  speaker: rexxar
-  provider: Silero
-  categories: [ Warcraft3 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Uther
-  name: Uther
-  speaker: uther
-  provider: Silero
-  categories: [ Warcraft3 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Jaina
-  name: Jaina
-  speaker: jaina
-  provider: Silero
-  categories: [ Warcraft3 ]
+  categories: [ Dota2 ]
   requirement: !type:TtsSexRequirement
     sexes: [ Female ]
 
 - type: ttsVoice
-  id: Kael
-  name: Kael
-  speaker: kael
+  id: Tusk
+  name: Tusk
+  speaker: tusk
   provider: Silero
-  categories: [ Warcraft3 ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
-
-- type: ttsVoice
-  id: Garithos
-  name: Garithos
-  speaker: garithos
-  provider: Silero
-  categories: [ Warcraft3 ]
+  categories: [ Dota2 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -134,47 +21,11 @@
       sponsorTier: Shlopa
 
 - type: ttsVoice
-  id: Maiev
-  name: Maiev
-  speaker: maiev
+  id: Earth
+  name: Earth
+  speaker: earth
   provider: Silero
-  categories: [ Warcraft3 ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Female ]
-
-- type: ttsVoice
-  id: Naisha
-  name: Naisha
-  speaker: naisha
-  provider: Silero
-  categories: [ Warcraft3 ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Female ]
-
-- type: ttsVoice
-  id: Tyrande
-  name: Tyrande
-  speaker: tyrande
-  provider: Silero
-  categories: [ Warcraft3 ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Female ]
-
-- type: ttsVoice
-  id: Furion
-  name: Furion
-  speaker: furion
-  provider: Silero
-  categories: [ Warcraft3 ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
-
-- type: ttsVoice
-  id: Illidan
-  name: Illidan
-  speaker: illidan
-  provider: Silero
-  categories: [ Warcraft3 ]
+  categories: [ Dota2 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -183,38 +34,11 @@
       sponsorTier: Shlopa
 
 - type: ttsVoice
-  id: Ladyvashj
-  name: Ladyvashj
-  speaker: ladyvashj
+  id: Wraith
+  name: Wraith
+  speaker: wraith
   provider: Silero
-  categories: [ Warcraft3 ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Female ]
-
-- type: ttsVoice
-  id: Narrator
-  name: Narrator
-  speaker: narrator
-  provider: Silero
-  categories: [ Warcraft3 ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
-
-- type: ttsVoice
-  id: Medivh
-  name: Medivh
-  speaker: medivh
-  provider: Silero
-  categories: [ Warcraft3 ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
-
-- type: ttsVoice
-  id: Villagerm
-  name: Villagerm
-  speaker: villagerm
-  provider: Silero
-  categories: [ Warcraft3 ]
+  categories: [ Dota2 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -223,304 +47,29 @@
       sponsorTier: Shlopa
 
 - type: ttsVoice
-  id: Xenia
-  name: Xenia
-  speaker: xenia
+  id: Meepo
+  name: Meepo
+  speaker: meepo
   provider: Silero
-  categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Female ]
-
-- type: ttsVoice
-  id: IllidanF
-  name: Illidan_f
-  speaker: illidan_f
-  provider: Silero
-  categories: [ Warcraft3 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Peon
-  name: Peon
-  speaker: peon
-  provider: Silero
-  categories: [ Warcraft3 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Chen
-  name: Chen
-  speaker: chen
-  provider: Silero
-  categories: [ Warcraft3 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: DreadBm
-  name: Dread_bm
-  speaker: dread_bm
-  provider: Silero
-  categories: [ Warcraft3 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Sylvanas
-  name: Sylvanas
-  speaker: sylvanas
-  provider: Silero
-  categories: [ Warcraft3 ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Female ]
-
-- type: ttsVoice
-  id: Priest
-  name: Priest
-  speaker: priest
-  provider: Silero
-  categories: [ Warcraft3 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Acolyte
-  name: Acolyte
-  speaker: acolyte
-  provider: Silero
-  categories: [ Warcraft3 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Muradin
-  name: Muradin
-  speaker: muradin
-  provider: Silero
-  categories: [ Warcraft3 ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
-
-- type: ttsVoice
-  id: DreadT
-  name: Dread_t
-  speaker: dread_t
-  provider: Silero
-  categories: [ Warcraft3 ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
-
-- type: ttsVoice
-  id: Mannoroth
-  name: Mannoroth
-  speaker: mannoroth
-  provider: Silero
-  categories: [ Warcraft3 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Sorceress
-  name: Sorceress
-  speaker: sorceress
-  provider: Silero
-  categories: [ Warcraft3 ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Female ]
-
-- type: ttsVoice
-  id: Peasant
-  name: Peasant
-  speaker: peasant
-  provider: Silero
-  categories: [ Warcraft3 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Archmage
-  name: Archmage
-  speaker: archmage
-  provider: Silero
-  categories: [ WARCRAFT3 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Admiral
-  name: Admiral
-  speaker: admiral
-  provider: Silero
-  categories: [ WARCRAFT3 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Alchemist
-  name: Alchemist
-  speaker: alchemist
-  provider: Silero
-  categories: [ WARCRAFT3 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Archimonde
-  name: Archimonde
-  speaker: archimonde
-  provider: Silero
-  categories: [ WARCRAFT3 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Breaker
-  name: Breaker
-  speaker: breaker
-  provider: Silero
-  categories: [ WARCRAFT3 ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
-
-- type: ttsVoice
-  id: Captain
-  name: Captain
-  speaker: captain
-  provider: Silero
-  categories: [ WARCRAFT3 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Dryad
-  name: Dryad
-  speaker: dryad
-  provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Dota2 ]
   requirement: !type:TtsSponsorRequirement
     sponsorTier: BigShlopa
 
 - type: ttsVoice
-  id: ElfEng
-  name: Elf_eng
-  speaker: elf_eng
+  id: Lina
+  name: Lina
+  speaker: lina
   provider: Silero
-  categories: [ WARCRAFT3 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Footman
-  name: Footman
-  speaker: footman
-  provider: Silero
-  categories: [ WARCRAFT3 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Grom
-  name: Grom
-  speaker: grom
-  provider: Silero
-  categories: [ WARCRAFT3 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Hh
-  name: Hh
-  speaker: hh
-  provider: Silero
-  categories: [ WARCRAFT3 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Huntress
-  name: Huntress
-  speaker: huntress
-  provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Dota2 ]
   requirement: !type:TtsSexRequirement
     sexes: [ Female ]
 
 - type: ttsVoice
-  id: Keeper
-  name: Keeper
-  speaker: keeper
+  id: Bristle
+  name: Bristle
+  speaker: bristle
   provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Dota2 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -529,46 +78,11 @@
       sponsorTier: Shlopa
 
 - type: ttsVoice
-  id: NagaM
-  name: Naga_m
-  speaker: naga_m
+  id: Gyro
+  name: Gyro
+  speaker: gyro
   provider: Silero
-  categories: [ WARCRAFT3 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: NagaRg
-  name: Naga_rg
-  speaker: naga_rg
-  provider: Silero
-  categories: [ WARCRAFT3 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: PeasantW
-  name: Peasant_w
-  speaker: peasant_w
-  provider: Silero
-  categories: [ WARCRAFT3 ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Female ]
-
-- type: ttsVoice
-  id: Rifleman
-  name: Rifleman
-  speaker: rifleman
-  provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Dota2 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -577,11 +91,11 @@
       sponsorTier: BigShlopa
 
 - type: ttsVoice
-  id: Satyr
-  name: Satyr
-  speaker: satyr
+  id: Treant
+  name: Treant
+  speaker: treant
   provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Dota2 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -590,20 +104,108 @@
       sponsorTier: Shlopa
 
 - type: ttsVoice
-  id: SylvanasW
-  name: Sylvanas_w
-  speaker: sylvanas_w
+  id: Lancer
+  name: Lancer
+  speaker: lancer
   provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Dota2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Clockwerk
+  name: Clockwerk
+  speaker: clockwerk
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Batrider
+  name: Batrider
+  speaker: batrider
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Kotl
+  name: Kotl
+  speaker: kotl
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Kunkka
+  name: Kunkka
+  speaker: kunkka
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Pudge
+  name: Pudge
+  speaker: pudge
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Juggernaut
+  name: Juggernaut
+  speaker: juggernaut
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+
+- type: ttsVoice
+  id: Luna
+  name: Luna
+  speaker: luna
+  provider: Silero
+  categories: [ Dota2 ]
   requirement: !type:TtsSexRequirement
     sexes: [ Female ]
 
 - type: ttsVoice
-  id: Voljin
-  name: Voljin
-  speaker: voljin
+  id: Omni
+  name: Omni
+  speaker: omni
   provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Dota2 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -612,14 +214,378 @@
       sponsorTier: Shlopa
 
 - type: ttsVoice
-  id: Gryphon
-  name: Gryphon
-  speaker: gryphon
+  id: Sniper
+  name: Sniper
+  speaker: sniper
   provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Dota2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Skywrath
+  name: Skywrath
+  speaker: skywrath
+  provider: Silero
+  categories: [ Dota2 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
       sexes: [ Male ]
     - !type:TtsSponsorRequirement
       sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Bounty
+  name: Bounty
+  speaker: bounty
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Huskar
+  name: Huskar
+  speaker: huskar
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Windranger
+  name: Windranger
+  speaker: windranger
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Bloodseeker
+  name: Bloodseeker
+  speaker: bloodseeker
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Templar
+  name: Templar
+  speaker: templar
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Ranger
+  name: Ranger
+  speaker: ranger
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Shaker
+  name: Shaker
+  speaker: shaker
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Mortred
+  name: Mortred
+  speaker: mortred
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Queen
+  name: Queen
+  speaker: queen
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Storm
+  name: Storm
+  speaker: storm
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Tide
+  name: Tide
+  speaker: tide
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+
+- type: ttsVoice
+  id: Riki
+  name: Riki
+  speaker: riki
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Antimage
+  name: Antimage
+  speaker: antimage
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Witchdoctor
+  name: Witchdoctor
+  speaker: witchdoctor
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Doom
+  name: Doom
+  speaker: doom
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Wywern
+  name: Wywern
+  speaker: wywern
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Invoker
+  name: Invoker
+  speaker: invoker
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Silencer
+  name: Silencer
+  speaker: silencer
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Lycan
+  name: Lycan
+  speaker: lycan
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Mirana
+  name: Mirana
+  speaker: mirana
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Dazzle
+  name: Dazzle
+  speaker: dazzle
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+
+- type: ttsVoice
+  id: Cm
+  name: Cm
+  speaker: cm
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Baratrum
+  name: Baratrum
+  speaker: baratrum
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Abaddon
+  name: Abaddon
+  speaker: abaddon
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: DSven
+  name: D_sven
+  speaker: d_sven
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Monkey
+  name: Monkey
+  speaker: monkey
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Ember
+  name: Ember
+  speaker: ember
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Zeus
+  name: Zeus
+  speaker: zeus
+  provider: Silero
+  categories: [ Dota2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Dragonknight
+  name: Dragonknight
+  speaker: dragonknight
+  provider: Silero
+  categories: [ DOTA2 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]

@@ -127,3 +127,85 @@
       sexes: [ Male ]
     - !type:TtsSponsorRequirement
       sponsorTier: Shlopa
+
+
+- type: ttsVoice
+  id: StalkerMetroBandit02
+  name: stalker_metro_bandit02
+  speaker: stalker_metro_bandit02
+  provider: Silero
+  categories: [ STALKER ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: StalkerMetroDegtyarev
+  name: stalker_metro_degtyarev
+  speaker: stalker_metro_degtyarev
+  provider: Silero
+  categories: [ STALKER ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: StalkerMetroNovice02
+  name: stalker_metro_novice02
+  speaker: stalker_metro_novice02
+  provider: Silero
+  categories: [ STALKER ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: StalkerMetroPavel
+  name: stalker_metro_pavel
+  speaker: stalker_metro_pavel
+  provider: Silero
+  categories: [ STALKER ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: StalkerMetroSaharov
+  name: stalker_metro_saharov
+  speaker: stalker_metro_saharov
+  provider: Silero
+  categories: [ STALKER ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: StalkerMetroSoldier
+  name: stalker_metro_soldier
+  speaker: stalker_metro_soldier
+  provider: Silero
+  categories: [ STALKER ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: StalkerMetroStalker01
+  name: stalker_metro_stalker01
+  speaker: stalker_metro_stalker01
+  provider: Silero
+  categories: [ STALKER ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: StalkerMetroNewbie01
+  name: stalker_metro_newbie01
+  speaker: stalker_metro_newbie01
+  provider: Silero
+  categories: [ STALKER ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Bandit1
+  name: Bandit1
+  speaker: bandit1
+  provider: Silero
+  categories: [ STALKER ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]

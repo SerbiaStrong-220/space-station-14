@@ -26,3 +26,12 @@
   categories: [ Portal2 ]
   requirement: !type:TtsSexRequirement
     sexes: [ Male ]
+
+- type: ttsVoice
+  id: CaveJohnson
+  name: Cave_Johnson
+  speaker: portal_cave_johnson
+  provider: Silero
+  categories: [ PORTAL ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]

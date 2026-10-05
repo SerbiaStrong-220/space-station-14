@@ -1,0 +1,358 @@
+- type: ttsVoice
+  id: Huber
+  name: Huber
+  speaker: huber
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Guru
+  name: Guru
+  speaker: guru
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: AllElder
+  name: All_elder
+  speaker: all_elder
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Nsheriff
+  name: Nsheriff
+  speaker: nsheriff
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Orcc
+  name: Orcc
+  speaker: orcc
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Clerk
+  name: Clerk
+  speaker: clerk
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Witch
+  name: Witch
+  speaker: witch
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Deva
+  name: Deva
+  speaker: deva
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Goblin
+  name: Goblin
+  speaker: goblin
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+- type: ttsVoice
+  id: Kapitan
+  name: Kapitan
+  speaker: kapitan
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Karh
+  name: Karh
+  speaker: karh
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Sheriff
+  name: Sheriff
+  speaker: sheriff
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Trapper
+  name: Trapper
+  speaker: trapper
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Glav
+  name: Glav
+  speaker: glav
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Mthief
+  name: Mthief
+  speaker: mthief
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Vor
+  name: Vor
+  speaker: vor
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Junboy
+  name: Junboy
+  speaker: junboy
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Shopper
+  name: Shopper
+  speaker: shopper
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Iz
+  name: Iz
+  speaker: iz
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Nekro
+  name: Nekro
+  speaker: nekro
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Hwleader
+  name: Hwleader
+  speaker: hwleader
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Hero
+  name: Hero
+  speaker: hero
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Smith
+  name: Smith
+  speaker: smith
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Magess
+  name: Magess
+  speaker: magess
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Nalo
+  name: Nalo
+  speaker: nalo
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Ycf
+  name: Ycf
+  speaker: ycf
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Oldnekro
+  name: Oldnekro
+  speaker: oldnekro
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Zak
+  name: Zak
+  speaker: zak
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa

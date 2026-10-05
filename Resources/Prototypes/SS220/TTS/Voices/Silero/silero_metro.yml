@@ -1,0 +1,269 @@
+- type: ttsVoice
+  id: Merc2
+  name: Merc2
+  speaker: merc2
+  provider: Silero
+  categories: [ METRO ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Forest1
+  name: Forest1
+  speaker: forest1
+  provider: Silero
+  categories: [ METRO ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Bandit3
+  name: Bandit3
+  speaker: bandit3
+  provider: Silero
+  categories: [ METRO ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Forest2
+  name: Forest2
+  speaker: forest2
+  provider: Silero
+  categories: [ METRO ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Merc1
+  name: Merc1
+  speaker: merc1
+  provider: Silero
+  categories: [ METRO ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Bandit2
+  name: Bandit2
+  speaker: bandit2
+  provider: Silero
+  categories: [ METRO ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Forest3
+  name: Forest3
+  speaker: forest3
+  provider: Silero
+  categories: [ METRO ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Tribal3
+  name: Tribal3
+  speaker: tribal3
+  provider: Silero
+  categories: [ METRO ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Slave2
+  name: Slave2
+  speaker: slave2
+  provider: Silero
+  categories: [ METRO ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Miller
+  name: Miller
+  speaker: miller
+  provider: Silero
+  categories: [ METRO ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Krest
+  name: Krest
+  speaker: krest
+  provider: Silero
+  categories: [ METRO ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Tribal1
+  name: Tribal1
+  speaker: tribal1
+  provider: Silero
+  categories: [ METRO ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Bridger2
+  name: Bridger2
+  speaker: bridger2
+  provider: Silero
+  categories: [ METRO ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Bridger3
+  name: Bridger3
+  speaker: bridger3
+  provider: Silero
+  categories: [ METRO ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Cannibal3
+  name: Cannibal3
+  speaker: cannibal3
+  provider: Silero
+  categories: [ METRO ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Bridger1
+  name: Bridger1
+  speaker: bridger1
+  provider: Silero
+  categories: [ METRO ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Cannibal2
+  name: Cannibal2
+  speaker: cannibal2
+  provider: Silero
+  categories: [ METRO ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Slave1
+  name: Slave1
+  speaker: slave1
+  provider: Silero
+  categories: [ METRO ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Slave3
+  name: Slave3
+  speaker: slave3
+  provider: Silero
+  categories: [ METRO ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Merc3
+  name: Merc3
+  speaker: merc3
+  provider: Silero
+  categories: [ METRO ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Tribal2
+  name: Tribal2
+  speaker: tribal2
+  provider: Silero
+  categories: [ METRO ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Cannibal1
+  name: Cannibal1
+  speaker: cannibal1
+  provider: Silero
+  categories: [ METRO ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]

@@ -1,0 +1,88 @@
+- type: ttsVoice
+  id: Demoman
+  name: Demoman
+  speaker: demoman
+  provider: Silero
+  categories: [ TEAMFORTRESS2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Engineer
+  name: Engineer
+  speaker: engineer
+  provider: Silero
+  categories: [ TEAMFORTRESS2 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Heavy
+  name: Heavy
+  speaker: heavy
+  provider: Silero
+  categories: [ TEAMFORTRESS2 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Medic
+  name: Medic
+  speaker: medic
+  provider: Silero
+  categories: [ TEAMFORTRESS2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Scout
+  name: Scout
+  speaker: scout
+  provider: Silero
+  categories: [ TEAMFORTRESS2 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: SniperTf
+  name: Sniper_tf
+  speaker: sniper_tf
+  provider: Silero
+  categories: [ TEAMFORTRESS2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Soldier
+  name: Soldier
+  speaker: soldier
+  provider: Silero
+  categories: [ TEAMFORTRESS2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Spy
+  name: Spy
+  speaker: spy
+  provider: Silero
+  categories: [ TEAMFORTRESS2 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+

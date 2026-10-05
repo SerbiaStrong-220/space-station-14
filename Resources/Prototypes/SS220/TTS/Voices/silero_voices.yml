@@ -19,108 +19,6 @@
     - !type:TtsSponsorRequirement
       sponsorTier: HugeShlopa
 
-
-
-
-
-
-
-
-
-
-
-
-- type: ttsVoice
-  id: Tychus
-  name: Tychus
-
-- type: ttsVoice
-  id: Tychus
-  name: Tychus
-  speaker: tychus
-  provider: Silero
-  categories: [ STARCRAFT ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-
-
-
-- type: ttsVoice
-  id: Tosh
-  name: Tosh
-  speaker: tosh
-  provider: Silero
-  categories: [ STARCRAFT ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Stetmann
-  name: Stetmann
-  speaker: stetmann
-  provider: Silero
-  categories: [ STARCRAFT ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
-
-- type: ttsVoice
-  id: Hanson
-  name: Hanson
-  speaker: hanson
-  provider: Silero
-  categories: [ STARCRAFT ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Female ]
-
-- type: ttsVoice
-  id: Swann
-  name: Swann
-  speaker: swann
-  provider: Silero
-  categories: [ STARCRAFT ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Hill
-  name: Hill
-  speaker: hill
-  provider: Silero
-  categories: [ STARCRAFT ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-
-
-- type: ttsVoice
-  id: Valerian
-  name: Valerian
-  speaker: valerian
-  provider: Silero
-  categories: [ STARCRAFT ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
-
-
-
-
 - type: ttsVoice
   id: Dude
   name: Dude
@@ -133,97 +31,6 @@
       sexes: [ Male ]
     - !type:TtsSponsorRequirement
       sponsorTier: Shlopa
-
-
-- type: ttsVoice
-  id: Demoman
-  name: Demoman
-  speaker: demoman
-  provider: Silero
-  categories: [ TEAMFORTRESS2 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Engineer
-  name: Engineer
-  speaker: engineer
-  provider: Silero
-  categories: [ TEAMFORTRESS2 ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
-
-- type: ttsVoice
-  id: Heavy
-  name: Heavy
-  speaker: heavy
-  provider: Silero
-  categories: [ TEAMFORTRESS2 ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
-
-- type: ttsVoice
-  id: Medic
-  name: Medic
-  speaker: medic
-  provider: Silero
-  categories: [ TEAMFORTRESS2 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Scout
-  name: Scout
-  speaker: scout
-  provider: Silero
-  categories: [ TEAMFORTRESS2 ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
-
-- type: ttsVoice
-  id: SniperTf
-  name: Sniper_tf
-  speaker: sniper_tf
-  provider: Silero
-  categories: [ TEAMFORTRESS2 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Soldier
-  name: Soldier
-  speaker: soldier
-  provider: Silero
-  categories: [ TEAMFORTRESS2 ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Spy
-  name: Spy
-  speaker: spy
-  provider: Silero
-  categories: [ TEAMFORTRESS2 ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
-
-
 
 - type: ttsVoice
   id: P3
@@ -277,469 +84,6 @@
     - !type:TtsSponsorRequirement
       sponsorTier: BigShlopa
 
-
-
-- type: ttsVoice
-  id: Zenyatta
-  name: Zenyatta
-  speaker: zenyatta
-  provider: Silero
-  categories: [ OVERWATCH ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Kiriko
-  name: Kiriko
-  speaker: kiriko
-  provider: Silero
-  categories: [ OVERWATCH ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Hanzo
-  name: Hanzo
-  speaker: hanzo
-  provider: Silero
-  categories: [ OVERWATCH ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Roadhog
-  name: Roadhog
-  speaker: roadhog
-  provider: Silero
-  categories: [ OVERWATCH ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Sigma
-  name: Sigma
-  speaker: sigma
-  provider: Silero
-  categories: [ OVERWATCH ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Soldier76
-  name: Soldier_76
-  speaker: soldier_76
-  provider: Silero
-  categories: [ OVERWATCH ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Junkrat
-  name: Junkrat
-  speaker: junkrat
-  provider: Silero
-  categories: [ OVERWATCH ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Tracer
-  name: Tracer
-  speaker: tracer
-  provider: Silero
-  categories: [ OVERWATCH ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Genji
-  name: Genji
-  speaker: genji
-  provider: Silero
-  categories: [ OVERWATCH ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Echo
-  name: Echo
-  speaker: echo
-  provider: Silero
-  categories: [ OVERWATCH ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Sojourn
-  name: Sojourn
-  speaker: sojourn
-  provider: Silero
-  categories: [ OVERWATCH ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Winston
-  name: Winston
-  speaker: winston
-  provider: Silero
-  categories: [ OVERWATCH ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Reaper
-  name: Reaper
-  speaker: reaper
-  provider: Silero
-  categories: [ OVERWATCH ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: TrainingRobot
-  name: Training_robot
-  speaker: training_robot
-  provider: Silero
-  categories: [ OVERWATCH ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: HugeShlopa
-
-
-- type: ttsVoice
-  id: MDarkelf
-  name: M_darkelf
-  speaker: m_darkelf
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Esbern
-  name: Esbern
-  speaker: esbern
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: MArgo
-  name: M_argo
-  speaker: m_argo
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: MKhajiit
-  name: M_khajiit
-  speaker: m_khajiit
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: MCoward
-  name: M_coward
-  speaker: m_coward
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Farkas
-  name: Farkas
-  speaker: farkas
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: MDrunk
-  name: M_drunk
-  speaker: m_drunk
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: FKhajiit
-  name: F_khajiit
-  speaker: f_khajiit
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: MCitizen
-  name: M_citizen
-  speaker: m_citizen
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: MOrc
-  name: M_orc
-  speaker: m_orc
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Odahviing
-  name: Odahviing
-  speaker: odahviing
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Kodlak
-  name: Kodlak
-  speaker: kodlak
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: MChild
-  name: M_child
-  speaker: m_child
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Emperor
-  name: Emperor
-  speaker: emperor
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: CriticalMassShlopa
-
-- type: ttsVoice
-  id: Hagraven
-  name: Hagraven
-  speaker: hagraven
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Nazir
-  name: Nazir
-  speaker: nazir
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Dremora
-  name: Dremora
-  speaker: dremora
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Alduin
-  name: Alduin
-  speaker: alduin
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Malkoran
-  name: Malkoran
-  speaker: malkoran
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Barbas
-  name: Barbas
-  speaker: barbas
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Hermaeus
-  name: Hermaeus
-  speaker: hermaeus
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Hakon
-  name: Hakon
-  speaker: hakon
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
 - type: ttsVoice
   id: Rita
   name: Rita
@@ -752,1513 +96,6 @@
       sexes: [ Female ]
     - !type:TtsSponsorRequirement
       sponsorTier: Shlopa
-
-
-- type: ttsVoice
-  id: Bridger2
-  name: Bridger2
-  speaker: bridger2
-  provider: Silero
-  categories: [ METRO ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Bridger3
-  name: Bridger3
-  speaker: bridger3
-  provider: Silero
-  categories: [ METRO ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Cannibal3
-  name: Cannibal3
-  speaker: cannibal3
-  provider: Silero
-  categories: [ METRO ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Bridger1
-  name: Bridger1
-  speaker: bridger1
-  provider: Silero
-  categories: [ METRO ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Cannibal2
-  name: Cannibal2
-  speaker: cannibal2
-  provider: Silero
-  categories: [ METRO ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Slave1
-  name: Slave1
-  speaker: slave1
-  provider: Silero
-  categories: [ METRO ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Slave3
-  name: Slave3
-  speaker: slave3
-  provider: Silero
-  categories: [ METRO ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Mira
-  name: Mira
-  speaker: mira
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Valeera
-  name: Valeera
-  speaker: valeera
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Rehgar
-  name: Rehgar
-  speaker: rehgar
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Yrel
-  name: Yrel
-  speaker: yrel
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Volskaya
-  name: Volskaya
-  speaker: volskaya
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Necromancer
-  name: Necromancer
-  speaker: necromancer
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Zuljin
-  name: Zuljin
-  speaker: zuljin
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Samuro
-  name: Samuro
-  speaker: samuro
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Tyrael
-  name: Tyrael
-  speaker: tyrael
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Athena
-  name: Athena
-  speaker: athena
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Default
-  name: Default
-  speaker: default
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Chromie
-  name: Chromie
-  speaker: chromie
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Orphea
-  name: Orphea
-  speaker: orphea
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Adjutant
-  name: Adjutant
-  speaker: adjutant
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Vanndara
-  name: Vanndara
-  speaker: vanndara
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Mechatassadar
-  name: Mechatassadar
-  speaker: mechatassadar
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Blackheart
-  name: Blackheart
-  speaker: blackheart
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Olaf
-  name: Olaf
-  speaker: olaf
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Alarak
-  name: Alarak
-  speaker: alarak
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Dva
-  name: Dva
-  speaker: dva
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Toy18
-  name: Toy18
-  speaker: toy18
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: WitchdoctorH
-  name: Witchdoctor_h
-  speaker: witchdoctor_h
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Lucio
-  name: Lucio
-  speaker: lucio
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Angel
-  name: Angel
-  speaker: angel
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Thunderking
-  name: Thunderking
-  speaker: thunderking
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: DrBoom
-  name: Dr_boom
-  speaker: dr_boom
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Hooktusk
-  name: Hooktusk
-  speaker: hooktusk
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Sinclari
-  name: Sinclari
-  speaker: sinclari
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Kazakus
-  name: Kazakus
-  speaker: kazakus
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: OlToomba
-  name: Ol_toomba
-  speaker: ol_toomba
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Moroes
-  name: Moroes
-  speaker: moroes
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: MaievHs
-  name: Maiev_hs
-  speaker: maiev_hs
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Zentimo
-  name: Zentimo
-  speaker: zentimo
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Rastakhan
-  name: Rastakhan
-  speaker: rastakhan
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Innkeeper
-  name: Innkeeper
-  speaker: innkeeper
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Togwaggle
-  name: Togwaggle
-  speaker: toggwaggle
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Biggs
-  name: Biggs
-  speaker: biggs
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Brann
-  name: Brann
-  speaker: brann
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: TekahnBoss
-  name: Tekahn_boss
-  speaker: tekahn_boss
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Siamat
-  name: Siamat
-  speaker: siamat
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Omnotron
-  name: Omnotron
-  speaker: omnotron
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Putricide
-  name: Putricide
-  speaker: putricide
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Khadgar
-  name: Khadgar
-  speaker: khadgar
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Zoie
-  name: Zoie
-  speaker: zoie
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Azalina
-  name: Azalina
-  speaker: azalina
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Chu
-  name: Chu
-  speaker: chu
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Tekahn
-  name: Tekahn
-  speaker: tekahn
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Sthara
-  name: Sthara
-  speaker: sthara
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Dovo
-  name: Dovo
-  speaker: dovo
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Shaw
-  name: Shaw
-  speaker: shaw
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Greymane
-  name: Greymane
-  speaker: greymane
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Willow
-  name: Willow
-  speaker: willow
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Haro
-  name: Haro
-  speaker: haro
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Hagatha
-  name: Hagatha
-  speaker: hagatha
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Reno
-  name: Reno
-  speaker: reno
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Ozara
-  name: Ozara
-  speaker: ozara
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Loti
-  name: Loti
-  speaker: loti
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Tarkus
-  name: Tarkus
-  speaker: tarkus
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Voone
-  name: Voone
-  speaker: voone
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Tala
-  name: Tala
-  speaker: tala
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Edra
-  name: Edra
-  speaker: edra
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Myra
-  name: Myra
-  speaker: myra
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Smiggs
-  name: Smiggs
-  speaker: smiggs
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Timothy
-  name: Timothy
-  speaker: timothy
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Wendy
-  name: Wendy
-  speaker: wendy
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Hannigan
-  name: Hannigan
-  speaker: hannigan
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Vargoth
-  name: Vargoth
-  speaker: vargoth
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Jolene
-  name: Jolene
-  speaker: jolene
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Kyriss
-  name: Kyriss
-  speaker: kyriss
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Saurfang
-  name: Saurfang
-  speaker: saurfang
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Kizi
-  name: Kizi
-  speaker: kizi
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Slate
-  name: Slate
-  speaker: slate
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Hesutu
-  name: Hesutu
-  speaker: hesutu
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Hancho
-  name: Hancho
-  speaker: hancho
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Gnomenapper
-  name: Gnomenapper
-  speaker: gnomenapper
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Valdera
-  name: Valdera
-  speaker: valdera
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Disidra
-  name: Disidra
-  speaker: disidra
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Omu
-  name: Omu
-  speaker: omu
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Floop
-  name: Floop
-  speaker: floop
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Belloc
-  name: Belloc
-  speaker: belloc
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Xurios
-  name: Xurios
-  speaker: xurios
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Wagtoggle
-  name: Wagtoggle
-  speaker: wagtoggle
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Belnaara
-  name: Belnaara
-  speaker: belnaara
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Lilayell
-  name: Lilayell
-  speaker: lilayell
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Candlebeard
-  name: Candlebeard
-  speaker: candlebeard
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Awilo
-  name: Awilo
-  speaker: awilo
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Marei
-  name: Marei
-  speaker: marei
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Applebough
-  name: Applebough
-  speaker: applebough
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Lazul
-  name: Lazul
-  speaker: lazul
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Arwyn
-  name: Arwyn
-  speaker: arwyn
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Glowtron
-  name: Glowtron
-  speaker: glowtron
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Cardish
-  name: Cardish
-  speaker: cardish
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Robold
-  name: Robold
-  speaker: robold
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Malfurion
-  name: Malfurion
-  speaker: malfurion
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Deathwhisper
-  name: Deathwhisper
-  speaker: deathwhisper
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Moira
-  name: Moira
-  speaker: moira
-  provider: Silero
-  categories: [ OVERWATCH ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Ashe
-  name: Ashe
-  speaker: ashe
-  provider: Silero
-  categories: [ OVERWATCH ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Brigitte
-  name: Brigitte
-  speaker: brigitte
-  provider: Silero
-  categories: [ OVERWATCH ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Mercy
-  name: Mercy
-  speaker: mercy
-  provider: Silero
-  categories: [ OVERWATCH ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: LucioOv
-  name: Lucio_ov
-  speaker: lucio_ov
-  provider: Silero
-  categories: [ OVERWATCH ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: DvaOv
-  name: Dva_ov
-  speaker: dva_ov
-  provider: Silero
-  categories: [ OVERWATCH ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Symmetra
-  name: Symmetra
-  speaker: symmetra
-  provider: Silero
-  categories: [ OVERWATCH ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Zarya
-  name: Zarya
-  speaker: zarya
-  provider: Silero
-  categories: [ OVERWATCH ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Cassidy
-  name: Cassidy
-  speaker: cassidy
-  provider: Silero
-  categories: [ OVERWATCH ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Baptiste
-  name: Baptiste
-  speaker: baptiste
-  provider: Silero
-  categories: [ OVERWATCH ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: JunkerQueen
-  name: Junker_queen
-  speaker: junker_queen
-  provider: Silero
-  categories: [ OVERWATCH ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Doomfist
-  name: Doomfist
-  speaker: doomfist
-  provider: Silero
-  categories: [ OVERWATCH ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Pharah
-  name: Pharah
-  speaker: pharah
-  provider: Silero
-  categories: [ OVERWATCH ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Sombra
-  name: Sombra
-  speaker: sombra
-  provider: Silero
-  categories: [ OVERWATCH ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Ana
-  name: Ana
-  speaker: ana
-  provider: Silero
-  categories: [ OVERWATCH ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Widowmaker
-  name: Widowmaker
-  speaker: widowmaker
-  provider: Silero
-  categories: [ OVERWATCH ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
 
 - type: ttsVoice
   id: Harbor
@@ -2312,1944 +149,6 @@
     - !type:TtsSponsorRequirement
       sponsorTier: BigShlopa
 
-
-- type: ttsVoice
-  id: FShrill
-  name: F_shrill
-  speaker: f_shrill
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: MHaughty
-  name: M_haughty
-  speaker: m_haughty
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: MSoldier
-  name: M_soldier
-  speaker: m_soldier
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Sven
-  name: Sven
-  speaker: sven
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: FSultry
-  name: F_sultry
-  speaker: f_sultry
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Eorlund
-  name: Eorlund
-  speaker: eorlund
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: MCommander
-  name: M_commander
-  speaker: m_commander
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: FNord
-  name: F_nord
-  speaker: f_nord
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Lydia
-  name: Lydia
-  speaker: lydia
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Motierre
-  name: Motierre
-  speaker: motierre
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: FHaughty
-  name: F_haughty
-  speaker: f_haughty
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Tullius
-  name: Tullius
-  speaker: tullius
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Festus
-  name: Festus
-  speaker: festus
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: MNord
-  name: M_nord
-  speaker: m_nord
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Olava
-  name: Olava
-  speaker: olava
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: FCommander
-  name: F_commander
-  speaker: f_commander
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Hadvar
-  name: Hadvar
-  speaker: hadvar
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: FArgo
-  name: F_argo
-  speaker: f_argo
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Arngeir
-  name: Arngeir
-  speaker: arngeir
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Nazeem
-  name: Nazeem
-  speaker: nazeem
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Falion
-  name: Falion
-  speaker: falion
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: FCoward
-  name: F_coward
-  speaker: f_coward
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: MGuard
-  name: M_guard
-  speaker: m_guard
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: MCommoner
-  name: M_commoner
-  speaker: m_commoner
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Elisif
-  name: Elisif
-  speaker: elisif
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Paarthurnax
-  name: Paarthurnax
-  speaker: paarthurnax
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Grelka
-  name: Grelka
-  speaker: grelka
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: FCommoner
-  name: F_commoner
-  speaker: f_commoner
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Ebony
-  name: Ebony
-  speaker: ebony
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Ulfric
-  name: Ulfric
-  speaker: ulfric
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: CriticalMassShlopa
-
-- type: ttsVoice
-  id: Farengar
-  name: Farengar
-  speaker: farengar
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Astrid
-  name: Astrid
-  speaker: astrid
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Brynjolf
-  name: Brynjolf
-  speaker: brynjolf
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Maven
-  name: Maven
-  speaker: maven
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: FChild
-  name: F_child
-  speaker: f_child
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: FOrc
-  name: F_orc
-  speaker: f_orc
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Delphine
-  name: Delphine
-  speaker: delphine
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: FDarkelf
-  name: F_darkelf
-  speaker: f_darkelf
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Grelod
-  name: Grelod
-  speaker: grelod
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Tolfdir
-  name: Tolfdir
-  speaker: tolfdir
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: MBandit
-  name: M_bandit
-  speaker: m_bandit
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: MForsworn
-  name: M_forsworn
-  speaker: m_forsworn
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Karliah
-  name: Karliah
-  speaker: karliah
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Felldir
-  name: Felldir
-  speaker: felldir
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Ancano
-  name: Ancano
-  speaker: ancano
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Mercer
-  name: Mercer
-  speaker: mercer
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Vex
-  name: Vex
-  speaker: vex
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Mirabelle
-  name: Mirabelle
-  speaker: mirabelle
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Aventus
-  name: Aventus
-  speaker: aventus
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Tsun
-  name: Tsun
-  speaker: tsun
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Elenwen
-  name: Elenwen
-  speaker: elenwen
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Gormlaith
-  name: Gormlaith
-  speaker: gormlaith
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Dragon
-  name: Dragon
-  speaker: dragon
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-
-
-- type: ttsVoice
-  id: Zak
-  name: Zak
-  speaker: zak
-  provider: Silero
-  categories: [ EVILISLANDS ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Merc2
-  name: Merc2
-  speaker: merc2
-  provider: Silero
-  categories: [ METRO ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Forest1
-  name: Forest1
-  speaker: forest1
-  provider: Silero
-  categories: [ METRO ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Bandit3
-  name: Bandit3
-  speaker: bandit3
-  provider: Silero
-  categories: [ METRO ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Forest2
-  name: Forest2
-  speaker: forest2
-  provider: Silero
-  categories: [ METRO ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Merc1
-  name: Merc1
-  speaker: merc1
-  provider: Silero
-  categories: [ METRO ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Bandit2
-  name: Bandit2
-  speaker: bandit2
-  provider: Silero
-  categories: [ METRO ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Forest3
-  name: Forest3
-  speaker: forest3
-  provider: Silero
-  categories: [ METRO ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Tribal3
-  name: Tribal3
-  speaker: tribal3
-  provider: Silero
-  categories: [ METRO ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Slave2
-  name: Slave2
-  speaker: slave2
-  provider: Silero
-  categories: [ METRO ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Miller
-  name: Miller
-  speaker: miller
-  provider: Silero
-  categories: [ METRO ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Krest
-  name: Krest
-  speaker: krest
-  provider: Silero
-  categories: [ METRO ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Tribal1
-  name: Tribal1
-  speaker: tribal1
-  provider: Silero
-  categories: [ METRO ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Abathur
-  name: Abathur
-  speaker: abathur
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Erik
-  name: Erik
-  speaker: erik
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Varian
-  name: Varian
-  speaker: varian
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Anduin
-  name: Anduin
-  speaker: anduin
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Deckard
-  name: Deckard
-  speaker: deckard
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: MalfurionH
-  name: Malfurion_h
-  speaker: malfurion_h
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Demonhunter
-  name: Demonhunter
-  speaker: demonhunter
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Demon
-  name: Demon
-  speaker: demon
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: KerriganH
-  name: Kerrigan_h
-  speaker: kerrigan_h
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: CriticalMassShlopa
-
-- type: ttsVoice
-  id: Ladyofthorns
-  name: Ladyofthorns
-  speaker: ladyofthorns
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Barbarian
-  name: Barbarian
-  speaker: barbarian
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Crusader
-  name: Crusader
-  speaker: crusader
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Whitemane
-  name: Whitemane
-  speaker: whitemane
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Nexushunter
-  name: Nexushunter
-  speaker: nexushunter
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: GreymaneH
-  name: Greymane_h
-  speaker: greymane_h
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Gardensdayannouncer
-  name: Gardensdayannouncer
-  speaker: gardensdayannouncer
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Drekthar
-  name: Drekthar
-  speaker: drekthar
-  provider: Silero
-  categories: [ HEROESOFTHESTORM ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Squeamlish
-  name: Squeamlish
-  speaker: squeamlish
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Dagg
-  name: Dagg
-  speaker: dagg
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Brukan
-  name: Brukan
-  speaker: brukan
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Bolan
-  name: Bolan
-  speaker: bolan
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Goya
-  name: Goya
-  speaker: goya
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Stargazer
-  name: Stargazer
-  speaker: stargazer
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Eudora
-  name: Eudora
-  speaker: eudora
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Mozaki
-  name: Mozaki
-  speaker: mozaki
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Katrana
-  name: Katrana
-  speaker: katrana
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: ValeeraHs
-  name: Valeera_hs
-  speaker: valeera_hs
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Malacrass
-  name: Malacrass
-  speaker: malacrass
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Elise
-  name: Elise
-  speaker: elise
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Flark
-  name: Flark
-  speaker: flark
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Rhogi
-  name: Rhogi
-  speaker: rhogi
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Gallywix
-  name: Gallywix
-  speaker: gallywix
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Talanji
-  name: Talanji
-  speaker: talanji
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: DrSezavo
-  name: Dr_sezavo
-  speaker: dr_sezavo
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Tierra
-  name: Tierra
-  speaker: tierra
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Zenda
-  name: Zenda
-  speaker: zenda
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Baechao
-  name: Baechao
-  speaker: baechao
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Lilian
-  name: Lilian
-  speaker: lilian
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Aranna
-  name: Aranna
-  speaker: aranna
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Oshi
-  name: Oshi
-  speaker: oshi
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Norroa
-  name: Norroa
-  speaker: norroa
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Turalyon
-  name: Turalyon
-  speaker: turalyon
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Aki
-  name: Aki
-  speaker: aki
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Lunara
-  name: Lunara
-  speaker: lunara
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Bob
-  name: Bob
-  speaker: bob
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Illucia
-  name: Illucia
-  speaker: illucia
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: YrelHs
-  name: Yrel_hs
-  speaker: yrel_hs
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Fireheart
-  name: Fireheart
-  speaker: fireheart
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Lanathel
-  name: Lanathel
-  speaker: lanathel
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: TyrandeHs
-  name: Tyrande_hs
-  speaker: tyrande_hs
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Draemus
-  name: Draemus
-  speaker: draemus
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Rasil
-  name: Rasil
-  speaker: rasil
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Kalec
-  name: Kalec
-  speaker: kalec
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Karastamper
-  name: Karastamper
-  speaker: karastamper
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: George
-  name: George
-  speaker: george
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Pollark
-  name: Pollark
-  speaker: pollark
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Stelina
-  name: Stelina
-  speaker: stelina
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Kasa
-  name: Kasa
-  speaker: kasa
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Whirt
-  name: Whirt
-  speaker: whirt
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Anarii
-  name: Anarii
-  speaker: anarii
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Ilza
-  name: Ilza
-  speaker: ilza
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Avozu
-  name: Avozu
-  speaker: avozu
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Jeklik
-  name: Jeklik
-  speaker: jeklik
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Zibb
-  name: Zibb
-  speaker: zibb
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Thrud
-  name: Thrud
-  speaker: thrud
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Isiset
-  name: Isiset
-  speaker: isiset
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Akazamzarak
-  name: Akazamzarak
-  speaker: akazamzarak
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Arha
-  name: Arha
-  speaker: arha
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Aidar
-  name: Aidar
-  speaker: aidar
-  provider: Silero
-  categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
-
-- type: ttsVoice
-  id: Baya
-  name: Baya
-  speaker: baya
-  provider: Silero
-  categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Female ]
-
-- type: ttsVoice
-  id: Kseniya
-  name: Kseniya
-  speaker: kseniya
-  provider: Silero
-  categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Female ]
-
-- type: ttsVoice
-  id: Eugene
-  name: Eugene
-  speaker: eugene
-  provider: Silero
-  categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
-
-- type: ttsVoice
-  id: Delvin
-  name: Delvin
-  speaker: delvin
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Cicero
-  name: Cicero
-  speaker: cicero
-  provider: Silero
-  categories: [ SKYRIM ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Linzi
-  name: Linzi
-  speaker: linzi
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Cache
-  name: Cache
-  speaker: cache
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Cravitz
-  name: Cravitz
-  speaker: cravitz
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: LadyVashj
-  name: Lady_vashj
-  speaker: lady_vashj
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Dendrologist
-  name: Dendrologist
-  speaker: dendrologist
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Jythiros
-  name: Jythiros
-  speaker: jythiros
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Draan
-  name: Draan
-  speaker: draan
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Rikkar
-  name: Rikkar
-  speaker: rikkar
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Splintergraft
-  name: Splintergraft
-  speaker: splintergraft
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Malchezaar
-  name: Malchezaar
-  speaker: malchezaar
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Taskmaster
-  name: Taskmaster
-  speaker: taskmaster
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Oxana
-  name: Oxana
-  speaker: oxana
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Inara
-  name: Inara
-  speaker: inara
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Ivan
-  name: Ivan
-  speaker: ivan
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Kazamon
-  name: Kazamon
-  speaker: kazamon
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Albin
-  name: Albin
-  speaker: albin
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Ammunae
-  name: Ammunae
-  speaker: ammunae
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Illidara
-  name: Illidara
-  speaker: illidara
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Nici
-  name: Nici
-  speaker: nici
-  provider: Silero
-  categories: [ HEARTHSTONE ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: HugeShlopa
-
 - type: ttsVoice
   id: Byasha
   name: Byasha
@@ -4262,71 +161,6 @@
       sexes: [ Male ]
     - !type:TtsSponsorRequirement
       sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Cerys
-  name: Cerys
-  speaker: cerys
-  provider: Silero
-  categories: [ WITCHER ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Philippa
-  name: Philippa
-  speaker: philippa
-  provider: Silero
-  categories: [ WITCHER ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Oldnekro
-  name: Oldnekro
-  speaker: oldnekro
-  provider: Silero
-  categories: [ EVILISLANDS ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Lambert
-  name: Lambert
-  speaker: lambert
-  provider: Silero
-  categories: [ WITCHER ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Shani
-  name: Shani
-  speaker: shani
-  provider: Silero
-  categories: [ WITCHER ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: Anton
@@ -4343,32 +177,6 @@
 
 
 - type: ttsVoice
-  id: Guru
-  name: Guru
-  speaker: guru
-  provider: Silero
-  categories: [ EVILISLANDS ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Lugos
-  name: Lugos
-  speaker: lugos
-  provider: Silero
-  categories: [ WITCHER ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
   id: Karina
   name: Karina
   speaker: karina
@@ -4380,73 +188,6 @@
       sexes: [ Female ]
     - !type:TtsSponsorRequirement
       sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Ewald
-  name: Ewald
-  speaker: ewald
-  provider: Silero
-  categories: [ WITCHER ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Mirror
-  name: Mirror
-  speaker: mirror
-  provider: Silero
-  categories: [ WITCHER ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Noble
-  name: Noble
-  speaker: noble
-  provider: Silero
-  categories: [ WITCHER ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Huber
-  name: Huber
-  speaker: huber
-  provider: Silero
-  categories: [ EVILISLANDS ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-
-
-- type: ttsVoice
-  id: Avallach
-  name: Avallach
-  speaker: avallach
-  provider: Silero
-  categories: [ WITCHER ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
 
 - type: ttsVoice
   id: Semen
@@ -4462,84 +203,6 @@
       sponsorTier: HugeShlopa
 
 - type: ttsVoice
-  id: AllElder
-  name: All_elder
-  speaker: all_elder
-  provider: Silero
-  categories: [ EVILISLANDS ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Nsheriff
-  name: Nsheriff
-  speaker: nsheriff
-  provider: Silero
-  categories: [ EVILISLANDS ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Orcc
-  name: Orcc
-  speaker: orcc
-  provider: Silero
-  categories: [ EVILISLANDS ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Clerk
-  name: Clerk
-  speaker: clerk
-  provider: Silero
-  categories: [ EVILISLANDS ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Witch
-  name: Witch
-  speaker: witch
-  provider: Silero
-  categories: [ EVILISLANDS ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Deva
-  name: Deva
-  speaker: deva
-  provider: Silero
-  categories: [ EVILISLANDS ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
   id: Coach
   name: Coach
   speaker: coach
@@ -4549,35 +212,6 @@
     requirements:
     - !type:TtsSexRequirement
       sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-
-
-
-- type: ttsVoice
-  id: Goblin
-  name: Goblin
-  speaker: goblin
-  provider: Silero
-  categories: [ EVILISLANDS ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Annah
-  name: Annah
-  speaker: annah
-  provider: Silero
-  categories: [ WITCHER ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
     - !type:TtsSponsorRequirement
       sponsorTier: Shlopa
 
@@ -4608,161 +242,11 @@
       sponsorTier: Shlopa
 
 - type: ttsVoice
-  id: Kapitan
-  name: Kapitan
-  speaker: kapitan
-  provider: Silero
-  categories: [ EVILISLANDS ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Karh
-  name: Karh
-  speaker: karh
-  provider: Silero
-  categories: [ EVILISLANDS ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
   id: LydiaTb
   name: Lydia_tb
   speaker: lydia_tb
   provider: Silero
   categories: [ TINYBUNNY ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-
-- type: ttsVoice
-  id: Sheriff
-  name: Sheriff
-  speaker: sheriff
-  provider: Silero
-  categories: [ EVILISLANDS ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-
-
-- type: ttsVoice
-  id: Cirilla
-  name: Cirilla
-  speaker: cirilla
-  provider: Silero
-  categories: [ WITCHER ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-
-- type: ttsVoice
-  id: Trapper
-  name: Trapper
-  speaker: trapper
-  provider: Silero
-  categories: [ EVILISLANDS ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-
-
-- type: ttsVoice
-  id: Glav
-  name: Glav
-  speaker: glav
-  provider: Silero
-  categories: [ EVILISLANDS ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Syanna
-  name: Syanna
-  speaker: syanna
-  provider: Silero
-  categories: [ WITCHER ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Regis
-  name: Regis
-  speaker: regis
-  provider: Silero
-  categories: [ WITCHER ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-
-- type: ttsVoice
-  id: Mthief
-  name: Mthief
-  speaker: mthief
-  provider: Silero
-  categories: [ EVILISLANDS ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Guillaume
-  name: Guillaume
-  speaker: guillaume
-  provider: Silero
-  categories: [ WITCHER ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Vivienne
-  name: Vivienne
-  speaker: vivienne
-  provider: Silero
-  categories: [ WITCHER ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -4797,19 +281,6 @@
       sponsorTier: Shlopa
 
 - type: ttsVoice
-  id: Vor
-  name: Vor
-  speaker: vor
-  provider: Silero
-  categories: [ EVILISLANDS ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
   id: Grandmother
   name: Grandmother
   speaker: grandmother
@@ -4819,59 +290,6 @@
     requirements:
     - !type:TtsSexRequirement
       sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Junboy
-  name: Junboy
-  speaker: junboy
-  provider: Silero
-  categories: [ EVILISLANDS ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Shopper
-  name: Shopper
-  speaker: shopper
-  provider: Silero
-  categories: [ EVILISLANDS ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Papillon
-  name: Papillon
-  speaker: papillon
-  provider: Silero
-  categories: [ WITCHER ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-
-- type: ttsVoice
-  id: Vesemir
-  name: Vesemir
-  speaker: vesemir
-  provider: Silero
-  categories: [ WITCHER ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
     - !type:TtsSponsorRequirement
       sponsorTier: BigShlopa
 
@@ -4902,118 +320,11 @@
       sponsorTier: Shlopa
 
 - type: ttsVoice
-  id: Crach
-  name: Crach
-  speaker: crach
-  provider: Silero
-  categories: [ WITCHER ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-
-- type: ttsVoice
-  id: Iz
-  name: Iz
-  speaker: iz
-  provider: Silero
-  categories: [ EVILISLANDS ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Geralt
-  name: Geralt
-  speaker: geralt
-  provider: Silero
-  categories: [ WITCHER ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-
-- type: ttsVoice
-  id: Nekro
-  name: Nekro
-  speaker: nekro
-  provider: Silero
-  categories: [ EVILISLANDS ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Hwleader
-  name: Hwleader
-  speaker: hwleader
-  provider: Silero
-  categories: [ EVILISLANDS ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Yennefer
-  name: Yennefer
-  speaker: yennefer
-  provider: Silero
-  categories: [ WITCHER ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Hero
-  name: Hero
-  speaker: hero
-  provider: Silero
-  categories: [ EVILISLANDS ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-
-- type: ttsVoice
   id: Ellis
   name: Ellis
   speaker: ellis
   provider: Silero
   categories: [ LEFT4DEAD ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Udalryk
-  name: Udalryk
-  speaker: udalryk
-  provider: Silero
-  categories: [ WITCHER ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -5035,19 +346,6 @@
       sponsorTier: Shlopa
 
 - type: ttsVoice
-  id: Smith
-  name: Smith
-  speaker: smith
-  provider: Silero
-  categories: [ EVILISLANDS ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
   id: Romka
   name: Romka
   speaker: romka
@@ -5060,116 +358,12 @@
     - !type:TtsSponsorRequirement
       sponsorTier: Shlopa
 
-
-- type: ttsVoice
-  id: Eskel
-  name: Eskel
-  speaker: eskel
-  provider: Silero
-  categories: [ WITCHER ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Magess
-  name: Magess
-  speaker: magess
-  provider: Silero
-  categories: [ EVILISLANDS ]
-  requirement: !type:TtsSponsorRequirement
-    sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Nalo
-  name: Nalo
-  speaker: nalo
-  provider: Silero
-  categories: [ EVILISLANDS ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-- type: ttsVoice
-  id: Dandelion
-  name: Dandelion
-  speaker: dandelion
-  provider: Silero
-  categories: [ WITCHER ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: HugeShlopa
-
-- type: ttsVoice
-  id: Palmerin
-  name: Palmerin
-  speaker: palmerin
-  provider: Silero
-  categories: [ WITCHER ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-- type: ttsVoice
-  id: Olgierd
-  name: Olgierd
-  speaker: olgierd
-  provider: Silero
-  categories: [ WITCHER ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-
-- type: ttsVoice
-  id: Triss
-  name: Triss
-  speaker: triss
-  provider: Silero
-  categories: [ WITCHER ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Female ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: Shlopa
-
-
 - type: ttsVoice
   id: Squidward
   name: Squidward
   speaker: squidward
   provider: Silero
   categories: [ SPONGEBOB ]
-  requirement: !type:TtsAllRequirement
-    requirements:
-    - !type:TtsSexRequirement
-      sexes: [ Male ]
-    - !type:TtsSponsorRequirement
-      sponsorTier: BigShlopa
-
-
-- type: ttsVoice
-  id: Ycf
-  name: Ycf
-  speaker: ycf
-  provider: Silero
-  categories: [ EVILISLANDS ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -5191,14 +385,1166 @@
       sponsorTier: Shlopa
 
 - type: ttsVoice
-  id: Hjalmar
-  name: Hjalmar
-  speaker: hjalmar
+  id: Gale
+  name: Gale
+  speaker: en_Gale
   provider: Silero
-  categories: [ WITCHER ]
+  categories: [ BALDURS_GATE_3 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Jaheira
+  name: Jaheira
+  speaker: en_Jaheira
+  provider: Silero
+  categories: [ BALDURS_GATE_3 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Laezel
+  name: Laezel
+  speaker: en_Laezel
+  provider: Silero
+  categories: [ BALDURS_GATE_3 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Karlach
+  name: Karlach
+  speaker: en_Karlach
+  provider: Silero
+  categories: [ BALDURS_GATE_3 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Shadowheart
+  name: Shadowheart
+  speaker: en_Shadowheart
+  provider: Silero
+  categories: [ BALDURS_GATE_3 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Wyll
+  name: Wyll
+  speaker: en_Wyll
+  provider: Silero
+  categories: [ BALDURS_GATE_3 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Minthara
+  name: Minthara
+  speaker: en_Minthara
+  provider: Silero
+  categories: [ BALDURS_GATE_3 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Minsc
+  name: Minsc
+  speaker: en_Minsc
+  provider: Silero
+  categories: [ BALDURS_GATE_3 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Astarion
+  name: Astarion
+  speaker: en_Astarion
+  provider: Silero
+  categories: [ BALDURS_GATE_3 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Halsin
+  name: Halsin
+  speaker: en_Halsin
+  provider: Silero
+  categories: [ BALDURS_GATE_3 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: EmperorBg3
+  name: Mind_Flayer_Emperor
+  speaker: en_Emperor
+  provider: Silero
+  categories: [ BALDURS_GATE_3 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Ketheric
+  name: Ketheric
+  speaker: en_Ketheric
+  provider: Silero
+  categories: [ BALDURS_GATE_3 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Gortash
+  name: Gortash
+  speaker: en_Gortash
+  provider: Silero
+  categories: [ BALDURS_GATE_3 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Shredder
+  name: Shredder
+  speaker: Ninja_Turtles_shredder
+  provider: Silero
+  categories: [ TMNT ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: HanSolo
+  name: Han_Solo
+  speaker: Star_Wars_Han_Solo
+  provider: Silero
+  categories: [ STAR_WARS ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: DarthSidious
+  name: Darth_Sidious
+  speaker: Star_Wars_Darth_Sidious
+  provider: Silero
+  categories: [ STAR_WARS ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: LukeSkywalker
+  name: Luke_Skywalker
+  speaker: Star_Wars_Luke_Skywalker
+  provider: Silero
+  categories: [ STAR_WARS ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Yoda
+  name: Yoda
+  speaker: Star_Wars_Yoda
+  provider: Silero
+  categories: [ STAR_WARS ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: DarthVader
+  name: Darth_Vader
+  speaker: Star_Wars_Darth_Vader
+  provider: Silero
+  categories: [ STAR_WARS ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: ObiwanKenobi
+  name: Obi-wan_Kenobi
+  speaker: Star_Wars_Obi-Wan_Kenobi
+  provider: Silero
+  categories: [ STAR_WARS ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: AnakinSkywalker
+  name: Anakin_Skywalker
+  speaker: Star_Wars_Anakin_Skywalker
+  provider: Silero
+  categories: [ STAR_WARS ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: OptimusPrime
+  name: Optimus_Prime
+  speaker: Transformers_War_of_Cybertron_optimusprime
+  provider: Silero
+  categories: [ TRANSFORMERS ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Megatron
+  name: Megatron
+  speaker: Transformers_War_of_Cybertron_megatron
+  provider: Silero
+  categories: [ TRANSFORMERS ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Soundwave
+  name: Soundwave
+  speaker: Transformers_War_of_Cybertron_soundwave
+  provider: Silero
+  categories: [ TRANSFORMERS ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Aragorn
+  name: Aragorn
+  speaker: The_Lord_of_the_Rings_Aragorn
+  provider: Silero
+  categories: [ LOTR ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Elrond
+  name: Elrond
+  speaker: The_Lord_of_the_Rings_Elrond
+  provider: Silero
+  categories: [ LOTR ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Gandalf
+  name: Gandalf
+  speaker: The_Lord_of_the_Rings_Gandalf
+  provider: Silero
+  categories: [ LOTR ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Gimli
+  name: Gimli
+  speaker: The_Lord_of_the_Rings_Gimli
+  provider: Silero
+  categories: [ LOTR ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Gollum
+  name: Gollum
+  speaker: The_Lord_of_the_Rings_Gollum
+  provider: Silero
+  categories: [ LOTR ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Legolas
+  name: Legolas
+  speaker: The_Lord_of_the_Rings_Legolas
+  provider: Silero
+  categories: [ LOTR ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: GingerbreadMan
+  name: Gingerbread_Man
+  speaker: Srek_Gingerbread_Man
+  provider: Silero
+  categories: [ SHREK ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Fiona
+  name: Fiona
+  speaker: Srek_Fiona
+  provider: Silero
+  categories: [ SHREK ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Donkey
+  name: Donkey
+  speaker: Srek_Donkey
+  provider: Silero
+  categories: [ SHREK ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
       sexes: [ Male ]
     - !type:TtsSponsorRequirement
       sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: FairyGodmother
+  name: Fairy_Godmother
+  speaker: Srek_Fairy_Godmother
+  provider: Silero
+  categories: [ SHREK ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: SrekKing
+  name: King
+  speaker: Srek_King
+  provider: Silero
+  categories: [ SHREK ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: SrekNarrator
+  name: Shrek_Narrator
+  speaker: Srek_Narrator
+  provider: Silero
+  categories: [ SHREK ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: PussInBoots
+  name: Puss_in_Boots
+  speaker: Srek_Puss_in_Boots
+  provider: Silero
+  categories: [ SHREK ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Shrek
+  name: Shrek
+  speaker: Srek_Shrek
+  provider: Silero
+  categories: [ SHREK ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: JackSparrow
+  name: Jack_Sparrow
+  speaker: Pirats_of_the_caribbean_Jack_Sparrow
+  provider: Silero
+  categories: [ POTC ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Barbossa
+  name: Barbossa
+  speaker: Pirats_of_the_caribbean_Barbossa
+  provider: Silero
+  categories: [ POTC ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Tiadalma
+  name: Tiadalma
+  speaker: Pirats_of_the_caribbean_Tiadalma
+  provider: Silero
+  categories: [ POTC ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: DavyJones
+  name: Davy_Jones
+  speaker: Pirats_of_the_caribbean_Davy_Jones
+  provider: Silero
+  categories: [ POTC ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: X3Betty
+  name: Betty
+  speaker: X3_reunion_Betty
+  provider: Silero
+  categories: [ X3 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: OverlordGnarl
+  name: Gnarl
+  speaker: Overlord_2_Gnarl
+  provider: Silero
+  categories: [ OVERLORD2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: TonyStark
+  name: Tony_Stark
+  speaker: Marvel_Tony_Stark
+  provider: Silero
+  categories: [ MARVEL ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Livsy
+  name: Livsy
+  speaker: Treasure_Island_Livsy
+  provider: Silero
+  categories: [ TREASURE_ISLAND ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: SpBrother
+  name: sp_brother
+  speaker: slovo_patsana_brother
+  provider: Silero
+  categories: [ BOYS_WORD ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: SpKoschei
+  name: sp_koschei
+  speaker: slovo_patsana_koschei
+  provider: Silero
+  categories: [ BOYS_WORD ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: SpMarat
+  name: sp_marat
+  speaker: slovo_patsana_marat
+  provider: Silero
+  categories: [ BOYS_WORD ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: SpAngryCop
+  name: sp_angry_cop
+  speaker: slovo_patsana_angry_cop
+  provider: Silero
+  categories: [ BOYS_WORD ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: SpCop
+  name: sp_cop
+  speaker: slovo_patsana_cop
+  provider: Silero
+  categories: [ BOYS_WORD ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: SpMain
+  name: sp_main
+  speaker: slovo_patsana_main
+  provider: Silero
+  categories: [ BOYS_WORD ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: HgPoppy
+  name: hg_poppy
+  speaker: hogwarts_poppy_sweeting
+  provider: Silero
+  categories: [ HOGWARTS ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: HgSebastian
+  name: hg_sebastian
+  speaker: hogwarts_sebastian_sallow
+  provider: Silero
+  categories: [ HOGWARTS ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: HgPlayerFemale
+  name: hg_player_female
+  speaker: hogwarts_player_female
+  provider: Silero
+  categories: [ HOGWARTS ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: HgGoblinGenericA
+  name: hg_goblin_generic_a
+  speaker: hogwarts_goblin_generic_a
+  provider: Silero
+  categories: [ HOGWARTS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: HgPlayerMale
+  name: hg_player_male
+  speaker: hogwarts_player_male
+  provider: Silero
+  categories: [ HOGWARTS ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: HgNatsai
+  name: hg_natsai
+  speaker: hogwarts_natsai_onai
+  provider: Silero
+  categories: [ HOGWARTS ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: HgEleazarFig
+  name: hg_eleazar_fig
+  speaker: hogwarts_eleazar_fig
+  provider: Silero
+  categories: [ HOGWARTS ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: HgAesopSharp
+  name: hg_aesop_sharp
+  speaker: hogwarts_aesop_sharp
+  provider: Silero
+  categories: [ HOGWARTS ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: HgOminisGaunt
+  name: hg_ominis_gaunt
+  speaker: hogwarts_ominis_gaunt
+  provider: Silero
+  categories: [ HOGWARTS ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: HgSophroniaFranklin
+  name: hg_sophronia_franklin
+  speaker: hogwarts_sophronia_franklin
+  provider: Silero
+  categories: [ HOGWARTS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: HgAbrahamRonen
+  name: hg_abraham_ronen
+  speaker: hogwarts_abraham_ronen
+  provider: Silero
+  categories: [ HOGWARTS ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: HgCuthbertBinns
+  name: hg_cuthbert_binns
+  speaker: hogwarts_cuthbert_binns
+  provider: Silero
+  categories: [ HOGWARTS ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: HgLodgok
+  name: hg_lodgok
+  speaker: hogwarts_lodgok
+  provider: Silero
+  categories: [ HOGWARTS ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: HgMatildaWeasley
+  name: hg_matilda_weasley
+  speaker: hogwarts_matilda_weasley
+  provider: Silero
+  categories: [ HOGWARTS ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: HgMirabelGarlick
+  name: hg_mirabel_garlick
+  speaker: hogwarts_mirabel_garlick
+  provider: Silero
+  categories: [ HOGWARTS ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: HgDinahHecat
+  name: hg_dinah_hecat
+  speaker: hogwarts_dinah_hecat
+  provider: Silero
+  categories: [ HOGWARTS ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: HalflifeGman
+  name: halflife_gman
+  speaker: halflife_gman
+  provider: Silero
+  categories: [ HALFLIFE_ALYX ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: HalflifeVortigaunt
+  name: halflife_vortigaunt
+  speaker: halflife_vortigaunt
+  provider: Silero
+  categories: [ HALFLIFE_ALYX ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: HalflifeLarry
+  name: halflife_larry
+  speaker: halflife_larry
+  provider: Silero
+  categories: [ HALFLIFE_ALYX ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: HalflifeOlga
+  name: halflife_olga
+  speaker: halflife_olga
+  provider: Silero
+  categories: [ HALFLIFE_ALYX ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: HalflifeAlyx
+  name: halflife_alyx
+  speaker: halflife_alyx
+  provider: Silero
+  categories: [ HALFLIFE_ALYX ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: StrongholdRichard
+  name: stronghold_richard
+  speaker: stronghold_richard
+  provider: Silero
+  categories: [ STRONGHOLD ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: StrongholdSultan
+  name: stronghold_sultan
+  speaker: stronghold_sultan
+  provider: Silero
+  categories: [ STRONGHOLD ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: StrongholdEmir
+  name: stronghold_emir
+  speaker: stronghold_emir
+  provider: Silero
+  categories: [ STRONGHOLD ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: StrongholdSaladin
+  name: stronghold_saladin
+  speaker: stronghold_saladin
+  provider: Silero
+  categories: [ STRONGHOLD ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: StrongholdAbbot
+  name: stronghold_abbot
+  speaker: stronghold_abbot
+  provider: Silero
+  categories: [ STRONGHOLD ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: StrongholdRat
+  name: stronghold_rat
+  speaker: stronghold_rat
+  provider: Silero
+  categories: [ STRONGHOLD ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: StrongholdHalif
+  name: stronghold_halif
+  speaker: stronghold_halif
+  provider: Silero
+  categories: [ STRONGHOLD ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: StrongholdSnake
+  name: stronghold_snake
+  speaker: stronghold_snake
+  provider: Silero
+  categories: [ STRONGHOLD ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: StrongholdFriedrich
+  name: stronghold_friedrich
+  speaker: stronghold_friedrich
+  provider: Silero
+  categories: [ STRONGHOLD ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: StrongholdBoar
+  name: stronghold_boar
+  speaker: stronghold_boar
+  provider: Silero
+  categories: [ STRONGHOLD ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: CyberpunkMaleV
+  name: Cyberpunk_male_v
+  speaker: Cyberpunk_male_v
+  provider: Silero
+  categories: [ CYBERPUNK ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: CyberpunkJohny
+  name: Cyberpunk_johny
+  speaker: Cyberpunk_johny
+  provider: Silero
+  categories: [ CYBERPUNK ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: CyberpunkTakemura
+  name: Cyberpunk_takemura
+  speaker: Cyberpunk_takemura
+  provider: Silero
+  categories: [ CYBERPUNK ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: CyberpunkSobchak
+  name: Cyberpunk_sobchak
+  speaker: Cyberpunk_sobchak
+  provider: Silero
+  categories: [ CYBERPUNK ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: CyberpunkJackie
+  name: Cyberpunk_jackie
+  speaker: Cyberpunk_jackie
+  provider: Silero
+  categories: [ CYBERPUNK ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: CyberpunkKerry
+  name: Cyberpunk_kerry
+  speaker: Cyberpunk_kerry
+  provider: Silero
+  categories: [ CYBERPUNK ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: CyberpunkMitch
+  name: Cyberpunk_mitch
+  speaker: Cyberpunk_mitch
+  provider: Silero
+  categories: [ CYBERPUNK ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: CyberpunkSaul
+  name: Cyberpunk_saul
+  speaker: Cyberpunk_saul
+  provider: Silero
+  categories: [ CYBERPUNK ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: CyberpunkHaru
+  name: Cyberpunk_haru
+  speaker: Cyberpunk_haru
+  provider: Silero
+  categories: [ CYBERPUNK ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: CyberpunkVictor
+  name: Cyberpunk_victor
+  speaker: Cyberpunk_victor
+  provider: Silero
+  categories: [ CYBERPUNK ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: CyberpunkPlacide
+  name: Cyberpunk_placide
+  speaker: Cyberpunk_placide
+  provider: Silero
+  categories: [ CYBERPUNK ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: CyberpunkDexter
+  name: Cyberpunk_dexter
+  speaker: Cyberpunk_dexter
+  provider: Silero
+  categories: [ CYBERPUNK ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: CyberpunkSebastian
+  name: Cyberpunk_sebastian
+  speaker: Cyberpunk_sebastian
+  provider: Silero
+  categories: [ CYBERPUNK ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: CyberpunkJefferson
+  name: Cyberpunk_jefferson
+  speaker: Cyberpunk_jefferson
+  provider: Silero
+  categories: [ CYBERPUNK ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: CyberpunkJoshua
+  name: Cyberpunk_joshua
+  speaker: Cyberpunk_joshua
+  provider: Silero
+  categories: [ CYBERPUNK ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: TlouEllie
+  name: tlou_ellie
+  speaker: tlou_ellie
+  provider: Silero
+  categories: [ TLOU ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: TlouJoel
+  name: tlou_joel
+  speaker: tlou_joel
+  provider: Silero
+  categories: [ TLOU ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: TlouTess
+  name: tlou_tess
+  speaker: tlou_tess
+  provider: Silero
+  categories: [ TLOU ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: DrgMissionControl
+  name: Deep_rock_galactic_mission_control
+  speaker: Deep_rock_galactic_mission_control
+  provider: Silero
+  categories: [ DEEP_ROCK_GALACTIC ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: DrgDwarves
+  name: Deep_rock_galactic_dwarves
+  speaker: Deep_rock_galactic_dwarves
+  provider: Silero
+  categories: [ DEEP_ROCK_GALACTIC ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: AagInner
+  name: an_alt_girl_inner
+  speaker: an_alt_girl_inner
+  provider: Silero
+  categories: [ SUNBOY ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: AagSunboyS
+  name: an_alt_girl_sunboy_s
+  speaker: an_alt_girl_sunboy_s
+  provider: Silero
+  categories: [ SUNBOY ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: AagSunboyN
+  name: an_alt_girl_dlc_sunboy_n
+  speaker: an_alt_girl_dlc_sunboy_n
+  provider: Silero
+  categories: [ SUNBOY ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: AagSunboyK
+  name: an_alt_girl_dlc_sunboy_k
+  speaker: an_alt_girl_dlc_sunboy_k
+  provider: Silero
+  categories: [ SUNBOY ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: LastYearsSnowNarrator
+  name: last_years_snow_narrator
+  speaker: last_years_snow_narrator
+  provider: Silero
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: LastYearsSnowMan
+  name: last_years_snow_man
+  speaker: last_years_snow_man
+  provider: Silero
+  categories: [ Misc ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Marine2Titus
+  name: marine2_titus
+  speaker: marine2_titus
+  provider: Silero
+  categories: [ WH40k ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Marine2Berserk
+  name: marine2_berserk
+  speaker: marine2_berserk
+  provider: Silero
+  categories: [ WH40k ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Marine2Gadriel
+  name: marine2_gadriel
+  speaker: marine2_gadriel
+  provider: Silero
+  categories: [ WH40k ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Marine2Chairon
+  name: marine2_chairon
+  speaker: marine2_chairon
+  provider: Silero
+  categories: [ WH40k ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Marine2Acheran
+  name: marine2_acheran
+  speaker: marine2_acheran
+  provider: Silero
+  categories: [ WH40k ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Marine2MachineSpirit4
+  name: marine2_machine_spirit_4
+  speaker: marine2_machine_spirit_4
+  provider: Silero
+  categories: [ WH40k ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Marine2MagosGaleo
+  name: marine2_magos_galeo
+  speaker: marine2_magos_galeo
+  provider: Silero
+  categories: [ WH40k ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Marine2ServoSkull
+  name: marine2_servo-skull
+  speaker: marine2_servo-skull
+  provider: Silero
+  categories: [ WH40k ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Marine2Balthazar
+  name: marine2_balthazar
+  speaker: marine2_balthazar
+  provider: Silero
+  categories: [ WH40k ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Anastasia
+  name: Anastasia
+  speaker: anastasia
+  provider: Silero
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Eleanora
+  name: Eleanora
+  speaker: eleanora
+  provider: Silero
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Olya
+  name: Olya
+  speaker: olya
+  provider: Silero
+  categories: [ Misc ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Petr
+  name: Petr
+  speaker: petr
+  provider: Silero
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Vaas
+  name: Vaas
+  speaker: vaas
+  provider: Silero
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Valeria
+  name: Valeria
+  speaker: valeria
+  provider: Silero
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Winslow
+  name: Winslow
+  speaker: winslow
+  provider: Silero
+  categories: [ Misc ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
