@@ -87,9 +87,7 @@ namespace Content.Server.Atmos.EntitySystems
                     comp.CheckUser = false;
                     if (Transform(uid).ParentUid != comp.User)
                     {
-                        //SS220-gas-tank-internals-fix begin
-                        DisconnectFromInternals(gasTank, forced: true);
-                        //SS220-gas-tank-internals-fix end
+                        DisconnectFromInternals(gasTank, forced: true); //SS220-gas-tank-internals-fix
                         continue;
                     }
                 }
