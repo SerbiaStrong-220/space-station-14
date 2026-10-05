@@ -1266,7 +1266,16 @@ public abstract class SharedStorageSystem : EntitySystem
             return false;
         }
 
-        if (!_sharedHandsSystem.CanDrop(player, toInsert.Value))
+        // SS220-felinid-pipecrawl-begin
+        var insertAttemptEv = new StorageInsertHeldItemAttemptEvent(ent.Owner, toInsert.Value);
+        RaiseLocalEvent(player.Owner, ref insertAttemptEv);
+
+        var canDrop = _sharedHandsSystem.CanDrop(
+            player,
+            toInsert.Value,
+            checkActionBlocker: !insertAttemptEv.BypassDropActionBlocker);
+        // SS220-felinid-pipecrawl-end
+        if (!canDrop)
         {
             _popupSystem.PopupClient(Loc.GetString("comp-storage-cant-drop", ("entity", toInsert.Value)), ent, player);
             return false;

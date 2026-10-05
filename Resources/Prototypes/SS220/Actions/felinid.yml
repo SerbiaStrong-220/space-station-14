@@ -1,0 +1,30 @@
+- type: entity
+  parent: BaseAction
+  id: ActionDashSpeedModifier
+  name: Dash
+  description: Briefly accelerate at the cost of hunger and thirst.
+  components:
+  - type: Action
+    useDelay: 480
+    itemIconStyle: NoItem
+    icon:
+      sprite: Interface/Actions/jump.rsi
+      state: icon
+  - type: InstantAction
+    event: !type:DashSpeedModifierActionEvent
+
+- type: entity
+  parent: BaseAction
+  id: ActionDisposalPipeCrawler
+  name: Crawl Through Pipes
+  description: Slip into disposal pipes while you are already inside a disposal unit.
+  components:
+  - type: DisposalPipeCrawlerAction
+  - type: Action
+    checkCanInteract: false
+    itemIconStyle: NoItem
+    icon:
+      sprite: Structures/Piping/disposal.rsi
+      state: pipe-c
+  - type: InstantAction
+    event: !type:DisposalPipeCrawlerActionEvent
