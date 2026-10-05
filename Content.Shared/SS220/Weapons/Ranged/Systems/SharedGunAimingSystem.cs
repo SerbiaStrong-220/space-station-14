@@ -36,7 +36,7 @@ public sealed partial class GunAimingSystem : EntitySystem
 
         CommandBinds.Builder
             .Bind(EngineKeyFunctions.UseSecondary, InputCmdHandler.FromDelegate(OnAimEnabled, OnAimDisabled, handle: false, outsidePrediction: false))
-            .Register<SharedGunAimingSystem>();
+            .Register<GunAimingSystem>();
     }
 
     private void OnAimEnabled(ICommonSession? session)
