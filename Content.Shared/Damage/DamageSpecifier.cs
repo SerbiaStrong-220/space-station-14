@@ -151,6 +151,16 @@ namespace Content.Shared.Damage
                 if (modifierSet.FlatReduction.TryGetValue(key, out var reduction))
                     newValue = Math.Max(0f, newValue - reduction); // flat reductions can't heal you
 
+                //SS220 armor piercing added begin
+                if (modifierSet.Coefficients.TryGetValue(key, out var coefficient))
+                {
+                    var lowerCap = Math.Min(0f, coefficient);
+                    var upperCap = Math.Max(1f, coefficient);
+
+                    newValue *= Math.Clamp(coefficient + damageSpec.ArmourPiercing.Float() / 100f, lowerCap, upperCap);
+                }
+                //SS220 armor piercing added end
+
                 if (newValue != 0)
                     newDamage.DamageDict[key] = FixedPoint2.New(newValue);
             }
