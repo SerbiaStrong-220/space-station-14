@@ -42,7 +42,7 @@
     pocket1: HandheldRadio #SS220 Radio
     pocket2: WeaponLaserGun
     belt: ClothingBeltBandolier
-   SS220-ERTchangingthings-begin
+  # SS220-ERTchangingthings-begin
   storage:
     back:
     - WeaponShotgunDoubleBarreled
@@ -57,7 +57,7 @@
     - WeaponLaserSMG
     - LaserSMGPowerCell
       amount: 3
-   SS220-ERTchangingthings-end
+  # SS220-ERTchangingthings-end
 
 - type: chameleonOutfit
   id: CBURNChameleonOutfit
