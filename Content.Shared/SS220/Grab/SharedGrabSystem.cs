@@ -362,7 +362,7 @@ public abstract partial class SharedGrabSystem : EntitySystem
         RaiseLocalEvent(grabber, ev);
         RaiseLocalEvent(grabbable, ev);
 
-        _movementSpeed.RefreshMovementSpeedModifiers(grabber);
+        _movementSpeed.RefreshMovementSpeedModifiers(grabber.Owner);
         _blocker.UpdateCanMove(grabbable);
         UpdateAlerts(grabber, grabbable, newStage);
     }

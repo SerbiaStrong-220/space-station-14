@@ -47,8 +47,8 @@ public sealed partial class AntagPrototype : IPrototype
     public bool SetPreference { get; private set; }
 
     //SS220 Add antags playtime trackers begin
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<PlayTimeTrackerPrototype>))]
-    public string? PlayTimeTracker { get; private set; }
+    [DataField]
+    public ProtoId<PlayTimeTrackerPrototype>? PlayTimeTracker { get; private set; }
 
     /// <summary>
     /// A color representing this antag to use for text.

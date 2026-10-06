@@ -117,10 +117,10 @@ public enum SusFormsWireKey : byte
 [DataDefinition]
 public sealed partial class PhotocopyableFaxPrintout : FaxPrintout
 {
-    [DataField("dataToCopy")]
+    [DataField]
     public Dictionary<Type, IPhotocopiedComponentData>? DataToCopy { get; private set; }
 
-    [DataField("metaData")]
+    [DataField]
     public PhotocopyableMetaData? MetaData { get; private set; }
 
     public PhotocopyableFaxPrintout(Dictionary<Type, IPhotocopiedComponentData>? dataToCopy, PhotocopyableMetaData? metaData) : base(string.Empty, string.Empty)

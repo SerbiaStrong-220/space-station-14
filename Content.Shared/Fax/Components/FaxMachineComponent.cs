@@ -174,10 +174,10 @@ public partial class FaxPrintout
     public string? Label { get; private set; }
 
     [DataField(required: true)]
-    public string Content { get; private set; } = default!;
+    public string ContentTMP { get; private set; } = default!; // SS220-add-TMP-to-prevent-autogen-from-erroring-in-compilation
 
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>), required: true)]
-    public string PrototypeId { get; private set; } = default!;
+    [DataField(required: true)]
+    public EntProtoId PrototypeId { get; private set; } = default!;
 
     [DataField("stampState")]
     public string? StampState { get; private set; }
@@ -197,7 +197,7 @@ public partial class FaxPrintout
 
     public FaxPrintout(string content, string name, string? label = null, string? prototypeId = null, string? stampState = null, List<StampDisplayInfo>? stampedBy = null, bool locked = false, string? senderFaxName = null)
     {
-        Content = content;
+        ContentTMP = content; // SS220-add-TMP-to-prevent-autogen-from-erroring-in-compilation
         Name = name;
         Label = label;
         PrototypeId = prototypeId ?? "";

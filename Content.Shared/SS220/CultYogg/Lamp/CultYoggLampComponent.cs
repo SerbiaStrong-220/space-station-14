@@ -32,8 +32,8 @@ public sealed partial class CultYoggLampComponent : Component
     [DataField]
     public EntityUid? ToggleActionEntity;
 
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string ToggleAction = "ActionToggleLight";
+    [DataField]
+    public EntProtoId ToggleAction = "ActionToggleLight";
 
     [DataField]
     public EntityUid? SelfToggleActionEntity;

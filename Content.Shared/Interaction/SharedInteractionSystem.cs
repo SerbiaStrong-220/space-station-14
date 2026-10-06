@@ -1605,7 +1605,7 @@ namespace Content.Shared.Interaction
     }
 
     // SS220 Ghost-UI-Activation-On-Use begin
-    public sealed class GhostInterationUiBypassEvent : HandledEntityEventArgs, ITargetedInteractEventArgs
+    public sealed class GhostInterationUiBypassEvent : HandledEntityEventArgs
     {
         public EntityUid User { get; }
         public EntityUid Target { get; }

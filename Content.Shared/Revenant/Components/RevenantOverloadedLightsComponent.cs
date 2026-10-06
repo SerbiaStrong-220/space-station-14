@@ -23,8 +23,8 @@ public sealed partial class RevenantOverloadedLightsComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     public float ZapRange = 4f;
 
-    [DataField("zapBeamEntityId",customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string ZapBeamEntityId = "LightningRevenant";
+    [DataField("zapBeamEntityId")]
+    public EntProtoId ZapBeamEntityId = "LightningRevenant";
 
     public float? OriginalEnergy;
     public bool OriginalEnabled = false;

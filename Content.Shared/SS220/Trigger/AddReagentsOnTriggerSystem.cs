@@ -26,10 +26,10 @@ public sealed partial class AddReagentsOnTriggerSystem : EntitySystem
         if (target == null)
             return;
 
-        if (!TryComp<SolutionContainerManagerComponent>(ent.Owner, out var solutionTriggerComp))
+        if (!TryComp<SolutionManagerComponent>(ent.Owner, out var solutionTriggerComp))
             return;
 
-        if (!TryComp<SolutionContainerManagerComponent>(target, out var solutionUserComp))
+        if (!TryComp<SolutionManagerComponent>(target, out var solutionUserComp))
             return;
 
         if (!_solution.TryGetSolution((ent.Owner, solutionTriggerComp), ent.Comp.ContainerName, out var solutionTrigger))

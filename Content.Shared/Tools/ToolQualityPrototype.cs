@@ -33,7 +33,7 @@ namespace Content.Shared.Tools
         /// <summary>
         ///     The default entity prototype for this tool type.
         /// </summary>
-        [DataField("spawn", required:true, customTypeSerializer:typeof(PrototypeIdSerializer<EntityPrototype>))]
-        public string Spawn { get; private set; } = string.Empty;
+        [DataField("spawn", required:true)]
+        public EntProtoId Spawn { get; private set; } = string.Empty;
     }
 }

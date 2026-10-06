@@ -6,7 +6,7 @@ namespace Content.Shared.SS220.SuperMatter.Observer;
 
 /// <summary> We use this component to mark entities which can receiver </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
-public sealed partial class SuperMatterObserverVisualReceiverComponent() : Component
+public sealed partial class SuperMatterObserverVisualReceiverComponent : Component
 {
     [DataField, AutoNetworkedField]
     public Dictionary<SuperMatterVisualLayers, string>? UnActiveState;
