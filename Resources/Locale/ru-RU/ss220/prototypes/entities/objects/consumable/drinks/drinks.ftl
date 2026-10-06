@@ -1,21 +1,3 @@
-ent-DrinkHotArachneGlass = { ent-DrinkGlass }
-    .suffix = горячая арахна
-    .desc = { ent-DrinkGlass.desc }
-ent-DrinkFrench75Glass = { ent-DrinkGlass }
-    .suffix = френч-75
-    .desc = { ent-DrinkGlass.desc }
-ent-DrinkEggnogGlass = { ent-DrinkGlass }
-    .suffix = гоголь-моголь
-    .desc = { ent-DrinkGlass.desc }
-ent-DrinkBacchusGlass = { ent-DrinkGlass }
-    .suffix = благославение бахуса
-    .desc = { ent-DrinkGlass.desc }
-ent-DrinkXlebnuldieselGlass = { ent-DrinkGlass }
-    .suffix = стакан коктейля "Хлебнулдизель"
-    .desc = { ent-DrinkGlass.desc }
-ent-DrinkSkoomalGlass = Скума
-    .desc = { ent-DrinkShakeBase.desc }
-
 ent-DrinkBottle = Пластиковая бутылка
     .desc = Пластиковая бутылка, в которую можно налить что угодно.
     
