@@ -816,3 +816,23 @@
     - Botanist
   - !type:ListingLimitedStockCondition
       stock: 1
+
+- type: listing
+  id: UplinkChameleonStamp
+  name: uplink-chameleon-stamp-name
+  description: uplink-chameleon-stamp-desc
+  productEntity: RubberStampChameleon
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 1
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkDeception
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 4
