@@ -64,15 +64,15 @@
   parent: BookBase
   id: BookSystemPrice
   name: Цена системы в издании Летний переплет
-  description: Книга датируется 2534 годом выпуска. На обложке выцарапано "Эрнест Старк" и ниже "dvache21".
+  description: Книга датируется 2534 годом выпуска.
   components:
-    - type: Sprite
-      sprite: Objects/Misc/books.rsi
-      layers:
-      - state: paper
-      - state: cover_old
-        color: "#363433"
-      - state: icon_question
-        color: "#cf792d"
-    - type: Paper
-      content: book-text-systemprice
+  - type: Sprite
+    sprite: Objects/Misc/books.rsi
+    layers:
+    - state: paper
+    - state: cover_old
+      color: "#363433"
+    - state: icon_question
+      color: "#cf792d"
+  - type: Paper
+    content: book-text-systemprice
