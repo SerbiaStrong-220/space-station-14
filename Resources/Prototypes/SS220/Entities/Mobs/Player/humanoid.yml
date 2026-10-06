@@ -427,7 +427,6 @@
   components:
     - type: Loadout
       prototypes: [CBURNLeaderGear]
-      roleLoadout: [ RoleSurvivalEVA ]
     - type: GhostRole
       name: ghost-role-information-cburn-agent-name
       description: ghost-role-information-cburn-agent-description
