@@ -1718,6 +1718,7 @@
         whitelist:
           components:
           - IdCard
+          - Pda # SS220 random lawset
       circuit_holder:
         name: circuit-holder
         whitelist:

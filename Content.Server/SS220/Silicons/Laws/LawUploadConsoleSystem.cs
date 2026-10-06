@@ -3,7 +3,6 @@
 using System.Linq;
 using Content.Server.Silicons.Laws;
 using Content.Server.Station.Systems;
-using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Containers.ItemSlots;
@@ -27,7 +26,10 @@ public sealed class LawUploadConsoleSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
     [Dependency] private readonly AccessReaderSystem _access = default!;
+    // SS220 random lawset begin
+    [Dependency] private readonly SharedIdCardSystem _idCard = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    // SS220 random lawset end
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
 
     public override void Initialize()
@@ -82,19 +84,17 @@ public sealed class LawUploadConsoleSystem : EntitySystem
 
     private bool HasAuthorizedCard(EntityUid uid)
     {
+        // SS220 random lawset begin
         return GetSlotItem(uid, LawUploadConsoleComponent.CardSlot) is { } card &&
-               HasComp<IdCardComponent>(card) && _access.IsAllowed(card, uid);
+               _idCard.TryGetIdCard(card, out var idCard) &&
+               _access.IsAllowed(idCard.Owner, uid);
+        // SS220 random lawset end
     }
 
     private void OnApply(Entity<LawUploadConsoleComponent> ent, ref ApplyStationLawsMessage args)
     {
-        // Never trust the buttons' enabled state, or a preview from before the board/card was replaced.
-        if (!Enum.IsDefined(args.Target) || args.Revision != ent.Comp.Revision ||
-            !_ui.IsUiOpen(ent.Owner, LawUploadUiKey.Key, args.Actor) ||
-            !_power.IsPowered(ent.Owner) || !HasAuthorizedCard(ent) ||
-            _station.GetOwningStation(ent.Owner) is not { } station ||
-            GetSlotItem(ent, LawUploadConsoleComponent.BoardSlot) is not { } board ||
-            !TryComp<SiliconLawProviderComponent>(board, out var provider))
+        // SS220 random lawset begin
+        if (!TryGetApplyData(ent, args, out var station, out var board, out var provider))
         {
             UpdateUi(ent);
             return;
@@ -105,9 +105,39 @@ public sealed class LawUploadConsoleSystem : EntitySystem
         _adminLog.Add(LogType.Action, LogImpact.High,
             $"{ToPrettyString(args.Actor):player} uploaded lawset {provider.Laws} from {ToPrettyString(board)} " +
             $"using {ToPrettyString(ent.Owner)} to {args.Target} on {ToPrettyString(station)} ({count} recipients). Laws: {lawset.LoggingString()}");
-
-        // The station event refreshes every console and invalidates duplicate confirmations.
+        // SS220 random lawset end
     }
+
+    // SS220 random lawset begin
+    private bool TryGetApplyData(Entity<LawUploadConsoleComponent> ent, ApplyStationLawsMessage args,
+        out EntityUid station, out EntityUid board, out SiliconLawProviderComponent provider)
+    {
+        station = default;
+        board = default;
+        provider = default!;
+
+        if (!Enum.IsDefined(args.Target) || args.Revision != ent.Comp.Revision)
+            return false;
+
+        if (!_ui.IsUiOpen(ent.Owner, LawUploadUiKey.Key, args.Actor))
+            return false;
+
+        if (!_power.IsPowered(ent.Owner) || !HasAuthorizedCard(ent))
+            return false;
+
+        if (_station.GetOwningStation(ent.Owner) is not { } stationUid)
+            return false;
+
+        if (GetSlotItem(ent, LawUploadConsoleComponent.BoardSlot) is not { } boardUid ||
+            !TryComp(boardUid, out SiliconLawProviderComponent? providerComp))
+            return false;
+
+        station = stationUid;
+        board = boardUid;
+        provider = providerComp;
+        return true;
+    }
+    // SS220 random lawset end
 
     private void OnStationChanged(StationLawsetsChangedEvent args)
     {
@@ -125,17 +155,9 @@ public sealed class LawUploadConsoleSystem : EntitySystem
         UpdateUi(ent);
     }
 
-    private string LawsetName(ProtoId<SiliconLawsetPrototype> id)
-    {
-        var prototype = _prototypes.Index(id);
-        return prototype.Name is { } name ? Loc.GetString(name) : id.Id;
-    }
-
-    private string[] LawLines(SiliconLawset lawset) => lawset.Laws.Select(law =>
-        $"{law.LawIdentifierOverride ?? law.Order.ToString()}. {Loc.GetString(law.LawString)}").ToArray();
-
     public void UpdateUi(Entity<LawUploadConsoleComponent> ent)
     {
+        // SS220 random lawset begin
         var card = GetSlotItem(ent, LawUploadConsoleComponent.CardSlot);
         var board = GetSlotItem(ent, LawUploadConsoleComponent.BoardSlot);
         var station = _station.GetOwningStation(ent.Owner);
@@ -149,25 +171,36 @@ public sealed class LawUploadConsoleSystem : EntitySystem
             !authorized ? "law-upload-access-denied" :
             !validBoard ? "law-upload-insert-board" : "law-upload-ready";
 
-        var aiName = string.Empty;
-        var borgName = string.Empty;
-        string[] aiLaws = [];
-        string[] borgLaws = [];
+        ProtoId<SiliconLawsetPrototype> aiLawset = default;
+        ProtoId<SiliconLawsetPrototype> borgLawset = default;
+        ProtoId<SiliconLawPrototype>[] aiLaws = [];
+        ProtoId<SiliconLawPrototype>[] borgLaws = [];
         if (station is { } stationUid)
         {
             var ai = _laws.GetStationLawset(stationUid, LawUploadTarget.Ai);
             var borg = _laws.GetStationLawset(stationUid, LawUploadTarget.Borgs);
-            aiName = LawsetName(ai.Id);
-            aiLaws = LawLines(ai.Laws);
-            borgName = LawsetName(borg.Id);
-            borgLaws = LawLines(borg.Laws);
+            aiLawset = ai.Id;
+            aiLaws = LawIds(ai.Id);
+            borgLawset = borg.Id;
+            borgLaws = LawIds(borg.Id);
         }
 
+        var boardLawset = validBoard ? provider!.Laws : default;
         _ui.SetUiState(ent.Owner, LawUploadUiKey.Key, new LawUploadState(
             ent.Comp.Revision, status, card != null, board != null,
             powered && station != null && authorized && validBoard,
-            aiName, aiLaws, borgName, borgLaws,
-            validBoard ? LawsetName(provider!.Laws) : string.Empty,
-            validBoard ? LawLines(provider!.Lawset ?? _laws.GetLawset(provider.Laws)) : []));
+            aiLawset, aiLaws, borgLawset, borgLaws, boardLawset, LawIds(boardLawset)));
+        // SS220 random lawset end
     }
+
+    // SS220 random lawset begin
+    private ProtoId<SiliconLawPrototype>[] LawIds(ProtoId<SiliconLawsetPrototype> lawset)
+    {
+        if (string.IsNullOrEmpty(lawset.Id) ||
+            !_prototypes.TryIndex(lawset, out var prototype))
+            return [];
+
+        return prototype.Laws.ToArray();
+    }
+    // SS220 random lawset end
 }

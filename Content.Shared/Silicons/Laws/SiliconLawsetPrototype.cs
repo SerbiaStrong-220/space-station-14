@@ -1,4 +1,5 @@
-﻿using Robust.Shared.Prototypes;
+using System.Diagnostics.CodeAnalysis;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Silicons.Laws;
@@ -73,6 +74,7 @@ public sealed partial class SiliconLawsetPrototype : IPrototype
     [DataField]
     public float? Weight { get; private set; }
 
+    [MemberNotNullWhen(true, nameof(Weight))]
     public bool Randomizable => Weight is not null;
     // SS220 random lawset end
 

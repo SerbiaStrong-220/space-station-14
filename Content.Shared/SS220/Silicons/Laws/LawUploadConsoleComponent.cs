@@ -1,7 +1,9 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Content.Shared.Silicons.Laws;
 
 namespace Content.Shared.SS220.Silicons.Laws;
 
@@ -11,7 +13,12 @@ public sealed partial class LawUploadConsoleComponent : Component
     public const string CardSlot = "law_upload_id";
     public const string BoardSlot = "circuit_holder";
 
+    // SS220 random lawset begin
+    /// <summary>
+    /// Monotonically increasing token used to reject stale UI messages.
+    /// </summary>
     public int Revision;
+    // SS220 random lawset end
 }
 
 [Serializable, NetSerializable]
@@ -35,24 +42,26 @@ public sealed class LawUploadState(
     bool hasCard,
     bool hasBoard,
     bool canApply,
-    string aiName,
-    string[] aiLaws,
-    string borgName,
-    string[] borgLaws,
-    string boardName,
-    string[] boardLaws) : BoundUserInterfaceState
+    // SS220 random lawset begin
+    ProtoId<SiliconLawsetPrototype> aiLawset,
+    ProtoId<SiliconLawPrototype>[] aiLaws,
+    ProtoId<SiliconLawsetPrototype> borgLawset,
+    ProtoId<SiliconLawPrototype>[] borgLaws,
+    ProtoId<SiliconLawsetPrototype> boardLawset,
+    ProtoId<SiliconLawPrototype>[] boardLaws) : BoundUserInterfaceState
 {
     public readonly int Revision = revision;
     public readonly string Status = status;
     public readonly bool HasCard = hasCard;
     public readonly bool HasBoard = hasBoard;
     public readonly bool CanApply = canApply;
-    public readonly string AiName = aiName;
-    public readonly string[] AiLaws = aiLaws;
-    public readonly string BorgName = borgName;
-    public readonly string[] BorgLaws = borgLaws;
-    public readonly string BoardName = boardName;
-    public readonly string[] BoardLaws = boardLaws;
+    public readonly ProtoId<SiliconLawsetPrototype> AiLawset = aiLawset;
+    public readonly ProtoId<SiliconLawPrototype>[] AiLaws = aiLaws;
+    public readonly ProtoId<SiliconLawsetPrototype> BorgLawset = borgLawset;
+    public readonly ProtoId<SiliconLawPrototype>[] BorgLaws = borgLaws;
+    public readonly ProtoId<SiliconLawsetPrototype> BoardLawset = boardLawset;
+    public readonly ProtoId<SiliconLawPrototype>[] BoardLaws = boardLaws;
+    // SS220 random lawset end
 }
 
 [Serializable, NetSerializable]

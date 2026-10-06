@@ -14,7 +14,27 @@ law-upload-insert-board = Вставьте плату законов.
 law-upload-no-station = Консоль не подключена к станции.
 law-upload-no-power = Нет питания.
 law-upload-ready = Выберите, кому применить законы с платы.
-law-upload-scope-hint = Выбор действует для всех киборгов и ИИ станции. 
+#ss220 random lawset begin
+law-upload-scope-hint = Заменяет законы выбранной группы на этой станции, включая будущие единицы. Особые и подчинённые единицы сохраняют свои законы.
+#ss220 random lawset end
 law-upload-apply-ai = Только ИИ
 law-upload-apply-borgs = Только киборгам
 law-upload-apply-all = Всем
+
+#ss220 random lawset begin
+law-upload-system-header = NT / КОНТРОЛЬ ДИРЕКТИВ
+law-upload-auth-header = АВТОРИЗАЦИЯ
+law-upload-card-present = ID-карта / КПК в считывателе
+law-upload-card-missing = Считыватель пуст
+law-upload-source-header = ПЛАТА ЗАКОНОВ
+law-upload-target-header = Загрузить законы с платы
+law-upload-tab-ai = Станционный ИИ
+law-upload-tab-borgs = Киборги
+law-upload-status-ready = ГОТОВО К ЗАГРУЗКЕ
+law-upload-status-blocked = ЗАГРУЗКА НЕДОСТУПНА
+law-upload-law-count = Директив: { $count }
+law-upload-no-laws = Нет данных о законах станции.
+law-upload-board-empty = Плата не вставлена
+law-upload-board-help = Вставьте плату законов, чтобы просмотреть её директивы. Установка платы сама по себе не меняет законы.
+law-upload-all-warning = Заменить законы и станционного ИИ, и киборгов. Особые и подчинённые единицы не затрагиваются.
+#ss220 random lawset end

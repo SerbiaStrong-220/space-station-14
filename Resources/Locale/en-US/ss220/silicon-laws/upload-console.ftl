@@ -22,3 +22,21 @@ law-upload-scope-hint = Applies to existing and future units on this station. Sp
 law-upload-apply-ai = AI only
 law-upload-apply-borgs = Cyborgs only
 law-upload-apply-all = Everyone
+
+#ss220 random lawset begin
+law-upload-system-header = NT / SILICON LAW CONTROL
+law-upload-auth-header = AUTHORIZATION
+law-upload-card-present = ID card / PDA in reader
+law-upload-card-missing = Reader empty
+law-upload-source-header = LAW BOARD
+law-upload-target-header = Upload laws from board
+law-upload-tab-ai = Station AI
+law-upload-tab-borgs = Cyborgs
+law-upload-status-ready = READY TO UPLOAD
+law-upload-status-blocked = UPLOAD UNAVAILABLE
+law-upload-law-count = Directives: { $count }
+law-upload-no-laws = No station law data available.
+law-upload-board-empty = No board inserted
+law-upload-board-help = Insert a law board to inspect its directives. Inserting a board does not change laws automatically.
+law-upload-all-warning = Replace laws for both the station AI and cyborgs. Special and subverted units are unaffected.
+#ss220 random lawset end
