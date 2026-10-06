@@ -45,18 +45,17 @@
   # SS220-ERTchangingthings-begin
   storage:
     back:
-    - WeaponShotgunDoubleBarreled
-    - MedicatedSuture
-    - RegenerativeMesh
     - CrowbarRed
     - BoxShotgunIncendiary
-      amount: 2
+    - BoxShotgunIncendiary
     - PillAmbuzolPlus
-      amount: 3
+    - PillAmbuzolPlus
+    - PillAmbuzolPlus
     - WeaponShotgunDoubleBarreled
     - WeaponLaserSMG
     - LaserSMGPowerCell
-      amount: 3
+    - LaserSMGPowerCell
+    - LaserSMGPowerCell
   # SS220-ERTchangingthings-end
 
 - type: chameleonOutfit
