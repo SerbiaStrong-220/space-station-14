@@ -575,6 +575,7 @@
   id: CBURNAgent
   speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran, Ipc] #SS220-centcom-human-ERT-update
   parent: EventHumanoidCentcomm
+        #roleLoadout: [ RoleSurvivalEVA ] #SS220 ERTchangingthings
   components:
     - type: Loadout
       prototypes: [CBURNGear]
