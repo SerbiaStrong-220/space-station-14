@@ -427,6 +427,7 @@
   components:
     - type: Loadout
       prototypes: [CBURNLeaderGear]
+      roleLoadout: [ RoleSurvivalCentcom ]
     - type: GhostRole
       name: ghost-role-information-cburn-agent-name
       description: ghost-role-information-cburn-agent-description

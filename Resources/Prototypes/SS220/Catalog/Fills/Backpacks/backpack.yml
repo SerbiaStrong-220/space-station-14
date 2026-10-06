@@ -208,7 +208,6 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: BoxSurvivalCentcom
         - id: MedicatedSuture
         - id: RegenerativeMesh
         - id: CrowbarRed
