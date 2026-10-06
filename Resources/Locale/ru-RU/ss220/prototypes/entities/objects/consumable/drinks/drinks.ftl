@@ -15,3 +15,6 @@ ent-DrinkXlebnuldieselGlass = { ent-DrinkGlass }
     .desc = { ent-DrinkGlass.desc }
 ent-DrinkSkoomalGlass = Скума
     .desc = { ent-DrinkShakeBase.desc }
+
+ent-DrinkBottle = Пластиковая бутылка
+    .desc = Пластиковая бутылка, в которую можно налить что угодно.
