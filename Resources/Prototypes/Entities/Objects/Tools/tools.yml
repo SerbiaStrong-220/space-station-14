@@ -7,12 +7,6 @@
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/wirecutter_drop.ogg
-  # SS220-construction-skill-begin
-  - type: LearningOnDoAfterEndWith
-    progress:
-      Construction:
-        baseLearning: 0.02
-  # SS220-construction-skill-end
   - type: Tag
     tags:
     - PlantSampleTaker
@@ -67,12 +61,6 @@
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/screwdriver_drop.ogg
-  # SS220-construction-skill-begin
-  - type: LearningOnDoAfterEndWith
-    progress:
-      Construction:
-        baseLearning: 0.02
-  # SS220-construction-skill-end
   - type: Tag
     tags:
     - Screwdriver
@@ -139,12 +127,6 @@
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/wrench_drop.ogg
-  # SS220-construction-skill-begin
-  - type: LearningOnDoAfterEndWith
-    progress:
-      Construction:
-        baseLearning: 0.02
-  # SS220-construction-skill-end
   - type: Tag
     tags:
     - Wrench
@@ -195,12 +177,6 @@
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/multitool_drop.ogg
-  # SS220-construction-skill-begin
-  - type: LearningOnDoAfterEndWith
-    progress:
-      Construction:
-        baseLearning: 0.02
-  # SS220-construction-skill-end
   - type: Sprite
     sprite: Objects/Tools/multitool.rsi
     layers:
@@ -321,12 +297,6 @@
   id: PowerDrill
   description: A simple powered hand drill.
   components:
-  # SS220-construction-skill-begin
-  - type: LearningOnDoAfterEndWith
-    progress:
-      Construction:
-        baseLearning: 0.02
-  # SS220-construction-skill-end
   - type: Tag
     tags:
     - Powerdrill
@@ -389,12 +359,6 @@
   name: RCD
   description: The rapid construction device can be used to quickly place and remove various station structures and fixtures. Requires compressed matter to function.
   components:
-  # SS220-construction-skill-begin
-  - type: LearningOnDoAfterEndWith
-    progress:
-      Construction:
-        baseLearning: 0.01
-  # SS220-construction-skill-end
   - type: RCD
     availablePrototypes:
     - WallSolid
@@ -528,12 +492,6 @@
   - type: Item
     sprite: Objects/Tools/omnitool.rsi
     size: Normal
-  # SS220-construction-skill-begin
-  - type: LearningOnDoAfterEndWith
-    progress:
-      Construction:
-        baseLearning: 0.01
-  # SS220-construction-skill-end
   - type: Tag
     tags:
     - Multitool

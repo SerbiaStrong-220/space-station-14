@@ -46,24 +46,6 @@ public partial class SkillEntitySystem : EntitySystem
         return true;
     }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public bool TryChangeStudyingProgress(EntityUid skillUid, ProtoId<SkillTreePrototype> skillTree, LearningInformation info)
-    {
-        if (!ResolveExperienceEntityFromSkillEntity(skillUid, out var experienceEntity))
-            return false;
-
-        return Experience.TryChangeStudyingProgress(experienceEntity.Value!, skillTree, info);
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public bool TryChangeStudyingProgress(EntityUid skillUid, ProtoId<SkillTreePrototype> skillTree, FixedPoint4 delta)
-    {
-        if (!ResolveExperienceEntityFromSkillEntity(skillUid, out var experienceEntity))
-            return false;
-
-        return Experience.TryChangeStudyingProgress(experienceEntity.Value!, skillTree, delta);
-    }
-
     /// <summary>
     /// Resolves owner entity of skill and writes log with adding parent entity
     /// </summary>

@@ -10,11 +10,7 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.Experience.Skill.Components;
-using Content.Shared.SS220.Experience.Systems;
-using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.Experience.Skill.Systems;
 
@@ -23,9 +19,6 @@ public sealed partial class DisarmOnDamageSkillSystem : SkillEntitySystem
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedPopupSystem _popupSystem = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
-
-    private readonly ProtoId<SkillTreePrototype> _affectedSkillTree = "PhysicalTraining";
-    private readonly FixedPoint4 _damageToExperience = 150;
 
     public override void Initialize()
     {
@@ -48,8 +41,6 @@ public sealed partial class DisarmOnDamageSkillSystem : SkillEntitySystem
 
         if (!_mobState.IsAlive(experienceEntity.Value.Owner))
             return;
-
-        TryChangeStudyingProgress(entity, _affectedSkillTree, DamageSpecifier.GetPositive(args.DamageDelta).GetTotal() / _damageToExperience);
 
         // And after that we check if we lost our precious items
         if (!GetPredictedRandomOnCurTick(GetNetEntity(entity), GetNetEntity(args.Origin)).Prob(entity.Comp.DisarmChance))
