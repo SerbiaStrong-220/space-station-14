@@ -98,6 +98,23 @@ public sealed partial class ExperienceSystem : EntitySystem
         return true;
     }
 
+    /// <summary>
+    /// Public getter of skills dictionary in case if it needed
+    /// </summary>
+    public Dictionary<ProtoId<SkillTreePrototype>, SkillTreeInfo> GetResultSkills(Entity<ExperienceComponent> entity)
+    {
+        var skills = entity.Comp.Skills;
+        var overrideSkills = entity.Comp.OverrideSkills;
+
+        var result = new Dictionary<ProtoId<SkillTreePrototype>, SkillTreeInfo>(skills);
+        foreach (var (key, value) in overrideSkills)
+        {
+            result[key] = value;
+        }
+
+        return result;
+    }
+
     #endregion
 
     #region Set override skill
@@ -109,8 +126,7 @@ public sealed partial class ExperienceSystem : EntitySystem
 
         entity.Comp.OverrideSkills[skillTree] = overrideInfo;
 
-        EnsureSkillEntityComponents(entity!, ExperienceComponent.OverrideContainerId);
-
+        EnsureSkillEntityComponents(entity!);
         return true;
     }
 
@@ -121,8 +137,7 @@ public sealed partial class ExperienceSystem : EntitySystem
 
         entity.Comp.OverrideSkills.Remove(skillTree);
 
-        EnsureSkillEntityComponents(entity!, ExperienceComponent.OverrideContainerId);
-
+        EnsureSkillEntityComponents(entity!);
         return true;
     }
     #endregion
@@ -184,12 +199,15 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     public bool TryGetSkillTreeLevels(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, [NotNullWhen(true)] out int? level, [NotNullWhen(true)] out int? sublevel)
     {
-        if (!Resolve(entity.Owner, ref entity.Comp) || !entity.Comp.Skills.TryGetValue(skillTree, out var info))
-        {
-            level = null;
-            sublevel = null;
+        level = null;
+        sublevel = null;
+
+        if (!Resolve(entity.Owner, ref entity.Comp))
             return false;
-        }
+
+        if (!entity.Comp.OverrideSkills.TryGetValue(skillTree, out var info) &&
+            !entity.Comp.Skills.TryGetValue(skillTree, out info))
+            return false;
 
         sublevel = info.Sublevel;
         level = info.Level;

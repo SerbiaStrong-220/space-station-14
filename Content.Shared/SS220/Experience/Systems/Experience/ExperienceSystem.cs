@@ -22,11 +22,6 @@ public sealed partial class ExperienceSystem
     public static readonly FixedPoint4 StartLearningProgress = 0f;
     public static readonly FixedPoint4 EndLearningProgress = FixedPoint4.New(1f);
 
-    private static readonly HashSet<string> ContainerIds = [
-        ExperienceComponent.ContainerId,
-        ExperienceComponent.OverrideContainerId
-    ];
-
     public override void Initialize()
     {
         base.Initialize();

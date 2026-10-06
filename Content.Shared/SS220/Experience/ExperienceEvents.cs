@@ -46,11 +46,3 @@ public record struct KnowledgeGainedEvent(ProtoId<KnowledgePrototype> Knowledge)
 /// </summary>
 [ByRefEvent]
 public record struct KnowledgeLostEvent(ProtoId<KnowledgePrototype> Knowledge);
-
-/// <summary>
-/// Raised on override skill entity to check if it subscribed to event
-/// </summary>
-/// <typeparam name="T"> event type </typeparam>
-/// <param name="Subscribed"> flag that returned if entity subscribed </param>
-[ByRefEvent]
-public record struct SkillEntityOverrideCheckEvent<T>(bool Subscribed = false) where T : notnull;
