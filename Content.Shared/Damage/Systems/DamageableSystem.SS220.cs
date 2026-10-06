@@ -10,7 +10,7 @@ public sealed partial class DamageableSystem
         if (container is null)
             return true;
 
-        if (!_prototypeManager.TryIndex(groupId, out var group))
+        if (!ProtoMan.TryIndex(groupId, out var group))
             return false;
 
         foreach (var damageType in group.DamageTypes)

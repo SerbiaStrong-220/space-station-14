@@ -23,8 +23,8 @@ public sealed partial class Form
     [DataField("photocopierTitle")]
     public string PhotocopierTitle = "Untitled";
 
-    [DataField("prototypeId", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>), required: true)]
-    public string PrototypeId = "Paper";
+    [DataField("prototypeId", required: true)]
+    public EntProtoId PrototypeId = "Paper";
 
     [DataField("stampState")]
     public string? StampState;

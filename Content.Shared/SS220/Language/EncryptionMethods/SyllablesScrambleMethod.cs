@@ -76,7 +76,9 @@ public sealed partial class SyllablesScrambleMethod : ScrambleMethod
 
     private string ScrambleWord(string word, int seed)
     {
-        var random = new System.Random(seed);
+        var random = new RobustRandom();
+        random.SetSeed(seed);
+
         var scrambledMessage = new StringBuilder();
         var scrambledLength = word.Length * ScrambledLengthCoefficient;
         while (scrambledMessage.Length < scrambledLength)
@@ -124,7 +126,7 @@ public sealed partial class SyllablesScrambleMethod : ScrambleMethod
         return punctuationBuilder.ToString();
     }
 
-    private SyllablesSpecialCharacter? GetSpecialCharacter(System.Random random)
+    private SyllablesSpecialCharacter? GetSpecialCharacter(IRobustRandom random)
     {
         var weights = SpecialCharacters.ToDictionary(s => s, s => s.Weight);
         if (weights == null || weights.Count <= 0)

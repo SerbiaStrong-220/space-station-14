@@ -37,8 +37,8 @@ public sealed partial class HandheldLightComponent : Component
     [DataField("addPrefix")]
     public bool AddPrefix = false;
 
-    [DataField("toggleAction", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string ToggleAction = "ActionToggleLight";
+    [DataField("toggleAction")]
+    public EntProtoId ToggleAction = "ActionToggleLight";
 
     /// <summary>
     /// Whether or not the light can be toggled via standard interactions

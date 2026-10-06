@@ -13,8 +13,8 @@ public sealed partial class AutoEmotePrototype : IPrototype
     /// <summary>
     /// The ID of the emote prototype.
     /// </summary>
-    [DataField("emote", required: true, customTypeSerializer: typeof(PrototypeIdSerializer<EmotePrototype>))]
-    public string EmoteId = string.Empty;
+    [DataField("emote")]
+    public ProtoId<EmotePrototype> EmoteId = string.Empty;
 
     // ss220 add chronic cough start
     /// <summary>

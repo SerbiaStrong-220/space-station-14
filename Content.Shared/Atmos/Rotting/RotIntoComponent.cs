@@ -14,8 +14,8 @@ public sealed partial class RotIntoComponent : Component
     /// <summary>
     /// Entity to rot into.
     /// </summary>
-    [DataField("entity", required: true, customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>)), ViewVariables(VVAccess.ReadWrite)]
-    public string Entity = string.Empty;
+    [DataField(required: true)]
+    public EntProtoId Entity;
 
     /// <summary>
     /// Rotting stage to turn at, this is a multiplier of the total rot time.

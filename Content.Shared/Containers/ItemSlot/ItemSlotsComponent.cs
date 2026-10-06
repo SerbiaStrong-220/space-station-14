@@ -99,10 +99,10 @@ namespace Content.Shared.Containers.ItemSlots
         ///     property of that component (e.g., cell slot size category), and this can lead to unnecessary changes
         ///     when mapping.
         /// </remarks>
-        [DataField(readOnly: true, customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+        [DataField(readOnly: true)]
         [Access(typeof(ItemSlotsSystem), Other = AccessPermissions.ReadWriteExecute)] // FIXME Friends
         [NonSerialized]
-        public string? StartingItem;
+        public EntProtoId? StartingItem;
 
         /// <summary>
         ///     Whether or not an item can currently be ejected or inserted from this slot.

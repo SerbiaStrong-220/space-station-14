@@ -12,7 +12,9 @@ using DrawDepthTag = Robust.Shared.GameObjects.DrawDepth;
 namespace Content.Shared.Buckle.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedBuckleSystem), typeof(SharedVehicleSystem))] //SS220 Readd-Vehicles
+// SS220 TODO:
+// Migrate to wizden vehicle system
+[Access(typeof(SharedBuckleSystem) /* , typeof(SharedVehicleSystem) */)] //SS220 Readd-Vehicles
 public sealed partial class StrapComponent : Component
 {
     /// <summary>

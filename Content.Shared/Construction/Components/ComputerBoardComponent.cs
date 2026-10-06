@@ -9,7 +9,7 @@ namespace Content.Shared.Construction.Components
     [RegisterComponent]
     public sealed partial class ComputerBoardComponent : Component
     {
-        [DataField("prototype", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-        public string? Prototype { get; private set; }
+        [DataField("prototype")]
+        public EntProtoId? Prototype { get; private set; }
     }
 }

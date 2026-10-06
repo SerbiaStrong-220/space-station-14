@@ -70,14 +70,16 @@ public sealed partial class DamageContactsSystem : EntitySystem
         RemComp<DamagedByContactComponent>(otherUid);
 
         // ss220-flesh-kudzu-damage-fix-start
-        if (TryComp<VehicleComponent>(otherUid, out var comp))
-        {
-            if (comp.Rider != null)
-            {
-                var riderId = comp.Rider.Value;
-                RemComp<DamagedByContactComponent>(riderId);
-            }
-        }
+        // SS220 TODO:
+        // Migrate to wizden one
+        // if (TryComp<VehicleComponent>(otherUid, out var comp))
+        // {
+        //     if (comp.Rider != null)
+        //     {
+        //         var riderId = comp.Rider.Value;
+        //         RemComp<DamagedByContactComponent>(riderId);
+        //     }
+        // }
         // ss220-flesh-kudzu-damage-fix-end
     }
 
@@ -86,15 +88,17 @@ public sealed partial class DamageContactsSystem : EntitySystem
         var otherUid = args.OtherEntity;
 
         // ss220-flesh-kudzu-damage-fix-start
-        if (TryComp<VehicleComponent>(otherUid, out var comp))
-        {
-            if (comp.Rider != null)
-            {
-                var riderId = comp.Rider.Value;
-                var damagedByContactRider = EnsureComp<DamagedByContactComponent>(riderId);
-                damagedByContactRider.Damage = component.Damage;
-            }
-        }
+        // SS220 TODO:
+        // Migrate to wizden one
+        // if (TryComp<VehicleComponent>(otherUid, out var comp))
+        // {
+        //     if (comp.Rider != null)
+        //     {
+        //         var riderId = comp.Rider.Value;
+        //         var damagedByContactRider = EnsureComp<DamagedByContactComponent>(riderId);
+        //         damagedByContactRider.Damage = component.Damage;
+        //     }
+        // }
         // ss220-flesh-kudzu-damage-fix-end
 
         if (HasComp<DamagedByContactComponent>(otherUid))

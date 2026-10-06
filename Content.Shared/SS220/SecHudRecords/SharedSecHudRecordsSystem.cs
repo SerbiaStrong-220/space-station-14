@@ -1,6 +1,7 @@
 using Content.Shared.Access.Systems;
 using Content.Shared.Inventory;
 using Content.Shared.StationRecords;
+using Content.Shared.StationRecords.Components;
 using Content.Shared.StatusIcon.Components;
 using Content.Shared.Verbs;
 using Robust.Shared.Player;

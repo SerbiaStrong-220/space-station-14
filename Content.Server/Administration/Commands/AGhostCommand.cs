@@ -25,8 +25,7 @@ public sealed partial class AGhostCommand : LocalizedCommands
     [Dependency] private IEntityManager _entities = default!;
     [Dependency] private ISharedPlayerManager _playerManager = default!;
 
-    // SS220 additional command log
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!; // SS220 additional command log
 
     public override string Command => "aghost";
     public override string Help => "aghost";

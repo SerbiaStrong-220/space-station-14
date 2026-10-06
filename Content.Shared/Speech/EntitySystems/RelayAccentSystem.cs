@@ -54,6 +54,11 @@ public abstract class RelayAccentSystem<T> : EntitySystem where T : BaseAccentCo
 
     protected virtual void OnAccent(Entity<T> ent, ref AccentGetEvent args)
     {
+        //SS220 Language tweak begin
+        if (args.Cancelled)
+            return;
+        //SS220 Language tweak end
+
         args.Message = Accentuate(args.Message, ent);
     }
 
