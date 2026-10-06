@@ -36,7 +36,7 @@ public sealed partial class StomachSystem : EntitySystem
         EntityUid uid,
         ReagentQuantity reagent,
         StomachComponent? stomach = null,
-        SolutionContainerManagerComponent? solutions = null)
+        SolutionManagerComponent? solutions = null)
     {
         if (!Resolve(uid, ref stomach, ref solutions)
             || !_solutionContainerSystem.ResolveSolution((uid, solutions), DefaultSolutionName, ref stomach.Solution, out var solution))

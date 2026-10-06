@@ -14,8 +14,8 @@ public sealed partial class TechnologyDatabaseComponent : Component
     /// A main discipline that locks out other discipline technology past a certain tier.
     /// </summary>
     [AutoNetworkedField]
-    [DataField("mainDiscipline", customTypeSerializer: typeof(PrototypeIdSerializer<TechDisciplinePrototype>))]
-    public string? MainDiscipline;
+    [DataField("mainDiscipline")]
+    public ProtoId<TechDisciplinePrototype>? MainDiscipline;
 
     [AutoNetworkedField]
     [DataField("currentTechnologyCards")]

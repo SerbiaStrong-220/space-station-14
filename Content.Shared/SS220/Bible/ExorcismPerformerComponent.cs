@@ -20,8 +20,8 @@ public sealed partial class ExorcismPerformerComponent : Component
     /// <summary>
     /// Prototype id of an exorcism action.
     /// </summary>
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string ExorcismAction = "ActionExorcism";
+    [DataField]
+    public EntProtoId ExorcismAction = "ActionExorcism";
 
     /// <summary>
     /// Resolved exorcism action entity.

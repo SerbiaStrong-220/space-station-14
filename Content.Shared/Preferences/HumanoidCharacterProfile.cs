@@ -34,7 +34,8 @@ namespace Content.Shared.Preferences
     public sealed partial class HumanoidCharacterProfile
     {
         public static readonly ProtoId<SpeciesPrototype> DefaultSpecies = "Human";
-        public static readonly ProtoId<EmoteSoundsPrototype> DefaultVoice = "MaleHuman"; // SS220-add-tts: shared default for both the emote voice pack and the TTS voice fallback
+        public static readonly ProtoId<EmoteSoundsPrototype> DefaultVoice = "MaleHuman";
+        public static readonly ProtoId<TTSVoicePrototype> DefaultTTSVoice = "father_grigori"; // SS220-TTS
         private static readonly Regex RestrictedNameRegex = new(@"[^А-Яа-яёЁ0-9' -]"); // Corvax: Only cyrillic names
         private static readonly Regex ICNameCaseRegex = new(@"^(?<word>\w)|\b(?<word>\w)(?=\w*$)");
 
@@ -78,10 +79,10 @@ namespace Content.Shared.Preferences
         [DataField]
         public string FlavorText { get; set; } = string.Empty;
 
-        // Corvax-TTS begin
+        // TTS begin
         [DataField]
-        public string Voice { get; private set; } = DefaultVoice;
-        // Corvax-TTS end
+        public string VoiceTTS { get; private set; } = DefaultTTSVoice;
+        // TTS end
 
         /// <summary>
         /// Associated <see cref="SpeciesPrototype"/> for this profile.
@@ -94,6 +95,9 @@ namespace Content.Shared.Preferences
 
         [DataField]
         public Sex Sex { get; private set; } = Sex.Male;
+
+        [DataField]
+        public ProtoId<EmoteSoundsPrototype> Voice { get; set; } = DefaultVoice;
 
         [DataField]
         public Gender Gender { get; private set; } = Gender.Male;
@@ -147,9 +151,10 @@ namespace Content.Shared.Preferences
             string name,
             string flavortext,
             string species,
-            string voice, // Corvax-TTS
+            string voiceTTS, // Corvax-TTS
             int age,
             Sex sex,
+            ProtoId<EmoteSoundsPrototype> voice,
             Gender gender,
             HumanoidCharacterAppearance appearance,
             SpawnPriorityPreference spawnPriority,
@@ -164,7 +169,8 @@ namespace Content.Shared.Preferences
             Name = name;
             FlavorText = flavortext;
             Species = species;
-            Voice = voice; // Corvax-TTS
+            VoiceTTS = voiceTTS; // SS220-TTS
+            Voice = voice;
             Age = age;
             Sex = sex;
             Gender = gender;
@@ -198,9 +204,10 @@ namespace Content.Shared.Preferences
             : this(other.Name,
                 other.FlavorText,
                 other.Species,
-                other.Voice, // Corvax-TTS
+                other.VoiceTTS, // Corvax-TTS
                 other.Age,
                 other.Sex,
+                other.Voice,
                 other.Gender,
                 other.Appearance.Clone(),
                 other.SpawnPriority,
@@ -344,7 +351,7 @@ namespace Content.Shared.Preferences
         /// <summary>
         /// Picks a random TTS voice fitting the given sex.
         /// </summary>
-        public static string RandomVoice(Sex sex)
+        public static string RandomVoiceTTS(Sex sex)
         {
             var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
             var random = IoCManager.Resolve<IRobustRandom>();
@@ -399,7 +406,8 @@ namespace Content.Shared.Preferences
             var speciesProto = prototypeManager.Index(profile.Species);
 
             profile.Sex = (randomizeCfg & RandomizeCfg.Sex) != 0 ? RandomSex(speciesProto) : baseProfile.Sex;
-            profile.Voice = RandomVoice(profile.Sex); // ss220 edit: pick a random TTS voice instead of the species default sound pack
+            profile.Voice = speciesProto.DefaultSoundsBySex[(int)profile.Sex];
+            profile.VoiceTTS = RandomVoiceTTS(profile.Sex); // ss220 edit: pick a random TTS voice instead of the species default sound pack
             profile.Gender = (randomizeCfg & RandomizeCfg.Gender) != 0 ? RandomGender(profile.Sex) : baseProfile.Gender;
             profile.Name = (randomizeCfg & RandomizeCfg.Name) != 0 ? RandomName(speciesProto, profile.Gender) : baseProfile.Name;
             profile.Age = (randomizeCfg & RandomizeCfg.Age) != 0 ? RandomAge(speciesProto) : baseProfile.Age;
@@ -460,7 +468,7 @@ namespace Content.Shared.Preferences
         }
 
         // Corvax-TTS-Start
-        public HumanoidCharacterProfile WithVoice(string voice)
+        public HumanoidCharacterProfile WithVoiceTTS(string voice)
         {
             return new(this) { Voice = voice };
         }
@@ -668,6 +676,7 @@ namespace Content.Shared.Preferences
             if (Age != other.Age) return false;
             if (Sex != other.Sex) return false;
             if (Voice != other.Voice) return false;
+            if (VoiceTTS != other.VoiceTTS) return false; // SS220-TTS
             if (Gender != other.Gender) return false;
             if (Species != other.Species) return false;
             if (PreferenceUnavailable != other.PreferenceUnavailable) return false;
@@ -861,11 +870,11 @@ namespace Content.Shared.Preferences
                 _loadouts.Remove(value);
             }
 
-            // Corvax-TTS-Start
-            prototypeManager.TryIndex<TTSVoicePrototype>(Voice, out var ttsVoice);
+            // SS220-TTS-Start
+            prototypeManager.TryIndex<TTSVoicePrototype>(VoiceTTS, out var ttsVoice);
             if (ttsVoice is null || !CanHaveVoice(ttsVoice, Sex))
-                Voice = DefaultVoice;
-            // Corvax-TTS-End
+                VoiceTTS = DefaultTTSVoice;
+            // SS220-TTS-End
         }
 
         // Corvax-TTS-Start
@@ -978,6 +987,7 @@ namespace Content.Shared.Preferences
             hashCode.Add(Age);
             hashCode.Add((int)Sex);
             hashCode.Add(Voice);
+            hashCode.Add(VoiceTTS); // SS220 TTS
             hashCode.Add((int)Gender);
             hashCode.Add(Appearance);
             hashCode.Add((int)SpawnPriority);

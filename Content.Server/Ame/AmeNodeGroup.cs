@@ -192,7 +192,7 @@ public sealed partial class AmeNodeGroup : BaseNodeGroup
         // Increasing core count without increasing fuel always leads to reduced power as well.
         // At 18+ cores and 2 inject, the power produced is less than 0, the Max ensures the AME can never produce "negative" power.
         var ss220AMEmod = 1.4f; // SS220 special modifier for AME to powerup AME
-        return MathF.Max(200000f * MathF.Log10(fuel * fuel * ss220AMEmod * MathF.Pow(cores, (float)-0.5)), 0);
+        return MathF.Max(200000f * MathF.Log10(fuel * fuel * ss220AMEmod * MathF.Pow(cores, (float)-0.5)), 0); // SS220 AME powerup
     }
 
     public int GetTotalStability()

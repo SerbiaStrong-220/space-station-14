@@ -1,8 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Robust.Shared.GameStates;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 using Content.Shared.Radio;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Radio.Components;
 
@@ -21,8 +21,8 @@ public sealed partial class HandheldRadioComponent : Component
     /// <summary>
     /// The list of radio channel prototypes this radio can choose between.
     /// </summary>
-    [DataField(customTypeSerializer: typeof(PrototypeIdListSerializer<RadioChannelPrototype>))]
-    public List<string> SupportedChannels = new();
+    [DataField]
+    public List<ProtoId<RadioChannelPrototype>> SupportedChannels = new();
 
     /// <summary>
     /// Bordering radio channel

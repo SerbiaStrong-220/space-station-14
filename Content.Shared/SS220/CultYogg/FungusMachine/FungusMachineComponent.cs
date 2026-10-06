@@ -3,6 +3,7 @@
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
@@ -16,8 +17,8 @@ public sealed partial class FungusMachineComponent : Component
     /// <summary>
     /// PrototypeID for the Fungus machine's inventory, see <see cref="FungusMachineInventoryPrototype"/>
     /// </summary>
-    [DataField("pack", customTypeSerializer: typeof(PrototypeIdSerializer<FungusMachineInventoryPrototype>), required: true)]
-    public string PackPrototypeId = string.Empty;
+    [DataField("pack", required: true)]
+    public ProtoId<FungusMachineInventoryPrototype> PackPrototypeId = string.Empty;
 
     [ViewVariables]
     public Dictionary<string, FungusMachineInventoryEntry> Inventory = new();

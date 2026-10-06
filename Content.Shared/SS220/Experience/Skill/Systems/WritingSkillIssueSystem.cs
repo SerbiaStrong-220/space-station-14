@@ -3,6 +3,7 @@
 using System.Text.RegularExpressions;
 using Content.Shared.Paper;
 using Content.Shared.SS220.Experience.Skill.Components;
+using Robust.Shared.Random;
 
 namespace Content.Shared.SS220.Experience.Skill.Systems;
 
@@ -29,7 +30,7 @@ public sealed class WritingSkillIssueSystem : SkillEntitySystem
         }
     }
 
-    private string ShuffleTags(string oldText, string newInput, System.Random random)
+    private string ShuffleTags(string oldText, string newInput, IRobustRandom random)
     {
         if (string.IsNullOrEmpty(newInput))
             return newInput;

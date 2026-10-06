@@ -9,7 +9,8 @@ namespace Content.Shared.SS220.CriminalRecords;
 ///     General station record. Indicates the crewmember's name and job.
 /// </summary>
 [Serializable, NetSerializable]
-public sealed class CriminalRecordCatalog
+[DataDefinition]
+public sealed partial class CriminalRecordCatalog
 {
     [DataField]
     public Dictionary<int, CriminalRecord> Records = new();
@@ -27,7 +28,8 @@ public sealed class CriminalRecordCatalog
 }
 
 [Serializable, NetSerializable]
-public sealed class CriminalRecord
+[DataDefinition]
+public sealed partial class CriminalRecord
 {
     [DataField]
     public string Message = "";

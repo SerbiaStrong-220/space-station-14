@@ -520,7 +520,7 @@ public sealed partial class FaxSystem : EntitySystem
             LogImpact.Low,
             $"{ToPrettyString(args.Actor):actor} " +
             $"added copy job to \"{component.FaxName}\" {ToPrettyString(uid):tool} " +
-            $"of {ToPrettyString(sendEntity):subject}: {printout.Content}");
+            $"of {ToPrettyString(sendEntity):subject}: {printout.ContentTMP}");
     }
 
     /// <summary>
@@ -690,7 +690,7 @@ public sealed partial class FaxSystem : EntitySystem
 
             if (TryComp<PaperComponent>(printed, out var paper))
             {
-                _paperSystem.SetContent((printed, paper), printout.Content);
+                _paperSystem.SetContent((printed, paper), printout.ContentTMP); // SS220-add-TMP-to-prevent-autogen-from-erroring-in-compilation
 
                 // Apply stamps
                 if (printout.StampState != null)

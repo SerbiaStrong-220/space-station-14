@@ -24,8 +24,8 @@ public sealed partial class EyeClosingComponent : Component
     /// <summary>
     /// The prototype to grant to enable eye-toggling action.
     /// </summary>
-    [DataField("eyeToggleAction", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string EyeToggleAction = "ActionToggleEyes";
+    [DataField]
+    public EntProtoId EyeToggleAction = "ActionToggleEyes";
 
     /// <summary>
     /// The actual eye toggling action entity itself.

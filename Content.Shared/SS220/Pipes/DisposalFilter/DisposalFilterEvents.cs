@@ -6,7 +6,8 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Pipes.DisposalFilter;
 
-public interface IDisposalFilterCondition
+[ImplicitDataDefinitionForInheritors]
+public partial interface IDisposalFilterCondition
 {
     bool Matches(EntityUid ent, IEntityManager entMan);
 
@@ -14,7 +15,7 @@ public interface IDisposalFilterCondition
 }
 
 [Serializable, NetSerializable]
-public sealed class NameContainsDisposalFilter : IDisposalFilterCondition
+public sealed partial class NameContainsDisposalFilter : IDisposalFilterCondition
 {
     [DataField] public List<string> ContainNames = new();
 
@@ -56,7 +57,7 @@ public sealed class NameContainsDisposalFilter : IDisposalFilterCondition
 }
 
 [Serializable, NetSerializable]
-public sealed class WhitelistDisposalFilter : IDisposalFilterCondition
+public sealed partial class WhitelistDisposalFilter : IDisposalFilterCondition
 {
     [DataField] public EntityWhitelist Whitelist = new();
 
@@ -132,7 +133,8 @@ public sealed class WhitelistDisposalFilter : IDisposalFilterCondition
 }
 
 [Serializable, NetSerializable]
-public sealed class DisposalFilterRule
+[DataDefinition]
+public sealed partial class DisposalFilterRule
 {
     [DataField] public List<IDisposalFilterCondition> Conditions = new();
     [DataField] public bool RequiredAll;

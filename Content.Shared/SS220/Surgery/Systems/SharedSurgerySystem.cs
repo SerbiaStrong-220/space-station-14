@@ -217,7 +217,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
         if (args.Target == args.User)
         {
-            _popup.PopupPredictedCursor(Loc.GetString(SurgeryCantPerformOnYourself), args.User);
+            _popup.PopupCursor(Loc.GetString(SurgeryCantPerformOnYourself), args.User);
             return;
         }
 
@@ -268,12 +268,12 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         {
             if (OperationCanBeEnded(target, args.SurgeryGraphId))
             {
-                _popup.PopupPredicted(Loc.GetString(SurgeryCancelledOnStart, ("target", args.Target), ("user", args.User)), target, user);
+                _popup.PopupEntity(Loc.GetString(SurgeryCancelledOnStart, ("target", args.Target), ("user", args.User)), target, user);
                 EndOperation(target, args.SurgeryGraphId, user);
             }
             else
             {
-                _popup.PopupCursor(Loc.GetString(SurgeryCantCancelOnStart));
+                _popup.PopupCursor(Loc.GetString(SurgeryCantCancelOnStart), user);
             }
 
             return;
