@@ -1,0 +1,17 @@
+- type: guideEntry
+  id: ExperienceBase
+  name: guide-entry-experience-base
+  text: "/ServerInfo/SS220/Guidebook/Experience/Base.xml"
+  children:
+  - ExperienceSkills
+  - ExperienceKnowledge
+
+- type: guideEntry
+  id: ExperienceSkills
+  name: guide-entry-experience-skills
+  text: "/ServerInfo/SS220/Guidebook/Experience/Skills.xml"
+
+- type: guideEntry
+  id: ExperienceKnowledge
+  name: guide-entry-experience-knowledge
+  text: "/ServerInfo/SS220/Guidebook/Experience/Knowledge.xml"

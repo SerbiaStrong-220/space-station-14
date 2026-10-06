@@ -16,12 +16,23 @@
     - SilentStorageUser
     - PreventAccessLogging
     - AllowBiomeLoading
+    - NotGhostnadoWarpable
   - type: Input
     context: "aghost"
   - type: Ghost
     canInteract: true
   - type: GhostRoleCast
   - type: GhostHearing
+  # SS220 ghost-hud-settings begin
+  - type: GhostHudSettings
+    huds:
+    - id: Medical
+      enabled: true
+    - id: CriminalRecords
+      enabled: false
+    - id: JobIcons
+      enabled: false
+  # SS220 ghost-hud-settings end
   - type: Hands
     hands:
       hand_right:
@@ -36,8 +47,8 @@
     needsHands: false
   - type: CombatMode
   - type: Physics
+    bodyType: Kinematic # Admin ghosts should ignore the laws of physics.
     ignorePaused: true
-    bodyType: Kinematic
   - type: Access
     groups:
     - AllAccess
@@ -79,6 +90,10 @@
         toggleAction: ActionAGhostShowCrewMonitoring
       enum.GeneralStationRecordConsoleKey.Key:
         toggleAction: ActionAGhostShowStationRecords
+      # SS220 ghost-hud-settings begin
+      enum.GhostHudUiKey.Key:
+        toggleAction: ActionGhostHudSettings
+      # SS220 ghost-hud-settings end
   - type: SolarControlConsole # look ma i AM the computer!
   - type: CommunicationsConsole
     title: comms-console-announcement-title-centcom
@@ -88,6 +103,7 @@
     global: true
   - type: RadarConsole
     followEntity: true
+    maxRange: 4096 # ss220-radar-aghost-buff
   - type: CargoOrderConsole
   - type: CrewMonitoringConsole
   - type: GeneralStationRecordConsole
@@ -107,6 +123,10 @@
   - type: IgnoreUIRange
   - type: ShowAntagIcons
   # - type: ShowContrabandDetails # SS220-useless-info
+  # SS220-experience-update-begin
+  - type: BypassKnowledgeCheck
+  - type: BypassSkillCheck
+  # SS220-experience-update-end
   - type: Inventory
     templateId: aghost
   - type: Loadout

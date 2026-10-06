@@ -15,15 +15,15 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.CultYogg.Cultists;
 
-public abstract class SharedCultYoggSystem : EntitySystem
+public abstract partial class SharedCultYoggSystem : EntitySystem
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedCultYoggCorruptedSystem _cultYoggCorruptedSystem = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedCultYoggCorruptedSystem _cultYoggCorruptedSystem = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     public override void Initialize()
     {
@@ -43,12 +43,16 @@ public abstract class SharedCultYoggSystem : EntitySystem
     {
         _actions.AddAction(uid, ref uid.Comp.CorruptItemActionEntity, uid.Comp.CorruptItemAction);
         _actions.AddAction(uid, ref uid.Comp.CorruptItemInHandActionEntity, uid.Comp.CorruptItemInHandAction);
+
         if (_actions.AddAction(uid, ref uid.Comp.PukeShroomActionEntity, out var act, uid.Comp.PukeShroomAction) && act.UseDelay != null) //useDelay when added
         {
             var start = _timing.CurTime;
             var end = start + act.UseDelay.Value;
             _actions.SetCooldown(uid.Comp.PukeShroomActionEntity.Value, start, end);
         }
+
+        var ev = new ProgressCultEvent();
+        RaiseLocalEvent(uid, ref ev, true);
     }
 
     #region Stage
@@ -163,9 +167,5 @@ public abstract class SharedCultYoggSystem : EntitySystem
         _actions.RemoveAction(uid.Comp.PukeShroomActionEntity);
 
         DeleteVisuals(uid);
-
-        //sending to a gamerule so it would be deleted and added in one place
-        var ev = new CultYoggDeCultingEvent(uid);
-        RaiseLocalEvent(uid, ref ev, true);
     }
 }

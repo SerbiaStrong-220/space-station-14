@@ -5,10 +5,10 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.CluwneComms;
 
-[Prototype("memelertLevel")]
+[Prototype]
 public sealed partial class MemelertLevelPrototype : IPrototype
 {
-    [IdDataField] public string ID { get; } = default!;
+    [IdDataField] public string ID { get; private set; } = default!;
 
     [DataField] public MemelertLevelDetail LevelDetails = new();
 }

@@ -10,27 +10,26 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.Forcefield;
 
-public sealed class ForcefieldOverlay : Overlay
+public sealed partial class ForcefieldOverlay : Overlay
 {
-    [Dependency] private readonly IEntityManager _entity = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IEntityManager _entity = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     private readonly TransformSystem _transform;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceEntities;
     public override bool RequestScreenTexture => true;
 
+    private static readonly ProtoId<ShaderPrototype> ShaderProtoId = "Stealth";
     private readonly ShaderInstance _shader;
-    private readonly ShaderInstance _shader_unshaded;
 
     public ForcefieldOverlay()
     {
         IoCManager.InjectDependencies(this);
 
         _transform = _entity.System<TransformSystem>();
-        _shader_unshaded = _prototype.Index<ShaderPrototype>("unshaded").InstanceUnique();
-        _shader = _prototype.Index<ShaderPrototype>("Stealth").InstanceUnique();
+        _shader = _prototype.Index(ShaderProtoId).InstanceUnique();
 
         ZIndex = (int) Shared.DrawDepth.DrawDepth.Overdoors;
     }

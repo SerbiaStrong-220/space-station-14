@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseItem
+  parent: [ BaseItem, BasePaperLabelable ] #TODO: Add sprites for different types of paper, replace BasePaperLabelable with BasePaperLabelableVisualized
   id: SeedBase
   abstract: true
   components:
@@ -23,20 +23,6 @@
       size: Tiny
     - type: StaticPrice
       price: 20
-    - type: ItemSlots
-    - type: ContainerContainer
-      containers:
-        paper_label: !type:ContainerSlot
-    - type: PaperLabel
-      labelSlot:
-        insertVerbText: comp-paper-label-insert
-        ejectVerbText: comp-paper-label-eject
-        whitelist:
-          components:
-          - Paper
-        blacklist:
-          tags:
-          - Book
     - type: PhysicalComposition
 
 - type: entity
@@ -540,18 +526,16 @@
       seedId: gatfruit
     - type: Sprite
       sprite: Objects/Specific/Hydroponics/gatfruit.rsi
-# Corvax-HiddenDesc-Start
+    # SS220-hidden-desc-begin
     - type: HiddenDescription
       entries:
-      - label: corvax-hidden-desc-Gatfruit-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
-      - label: corvax-hidden-desc-Gatfruit-botanist
-        jobRequired:
-          - Botanist
-          - Borg
-# Corvax-HiddenDesc-End
+        SyndicateAgentKnowledge: [ corvax-hidden-desc-Gatfruit-syndicate ]
+        BotanyKnowledge: [ corvax-hidden-desc-Gatfruit-botanist ]
+      nameEntries:
+      - [SyndicateAgentKnowledge, null]
+      - [BotanyKnowledge, null]
+      hiddenName: ent-SeedBase
+    # SS220-hidden-desc-end
 
 - type: entity
   parent: SeedBase

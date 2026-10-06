@@ -39,6 +39,14 @@ ent-ActionSpawnSpiderWallWebDurableBloodPoints = { ent-ActionSpawnSpiderWallWebD
             Стоимость [color=#800000]10 крови[/color].
 
 
+ent-ActionSpawnSpiderWebPassage = Создать проход
+    .desc = Наматывает проход из паутины.
+
+ent-ActionSpawnSpiderWebPassageBloodPoints = { ent-ActionSpawnSpiderWebPassage }
+    .desc = Создаёт проход из... Паутины?!?!?
+            Стоимость [color=#800000]6 крови[/color].
+
+
 ent-ActionSpawnWebTile = Создать паутинный пол
     .desc = Создаёт пол из паутины блокирующий утечку воздуха.
 
@@ -56,7 +64,7 @@ ent-ActionSpawnSingleSpiderWebLongDelay = { ent-ActionSpawnSingleSpiderWebShortD
 ent-ActionSpawnSingleSpiderWebDurable = Пустить прочную паутину
     .desc = { ent-ActionSpawnSingleSpiderWebShortDelay.desc }
 
-ent-ActionSpawnSingleSpiderWebDurableBloodPoints  = { ent-ActionSpawnSingleSpiderWebDurable } 
+ent-ActionSpawnSingleSpiderWebDurableBloodPoints = { ent-ActionSpawnSingleSpiderWebDurable }
     .desc = Создаёт паутину, которая замедляет вашу добычу.
             Стоимость [color=#800000]2 крови[/color].
 

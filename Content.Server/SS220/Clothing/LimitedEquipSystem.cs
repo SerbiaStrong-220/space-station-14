@@ -8,11 +8,11 @@ using Content.Shared.Clothing.Components;
 
 namespace Content.Server.SS220.Clothing;
 
-public sealed class LimitedEquipSystem : EntitySystem
+public sealed partial class LimitedEquipSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     public override void Initialize()
     {
@@ -33,7 +33,7 @@ public sealed class LimitedEquipSystem : EntitySystem
         if (uid.Comp.Uses <= 0)
             return;
 
-        var coords = Transform(args.Equipee).Coordinates;
+        var coords = Transform(args.EquipTarget).Coordinates;
         var spawnEntities = GetSpawns(uid.Comp.Items, _random);
         EntityUid? entityToPlaceInHands = null;
 
@@ -42,16 +42,16 @@ public sealed class LimitedEquipSystem : EntitySystem
             entityToPlaceInHands = Spawn(proto, coords);
             _adminLogger.Add(LogType.EntitySpawn,
                 LogImpact.Low,
-                $"{ToPrettyString(args.Equipee)} unequipped {ToPrettyString(uid)} which spawned {ToPrettyString(entityToPlaceInHands.Value)}");
+                $"{ToPrettyString(args.EquipTarget)} unequipped {ToPrettyString(uid)} which spawned {ToPrettyString(entityToPlaceInHands.Value)}");
         }
 
         uid.Comp.Uses--;
 
         // Delete entity only if component was successfully used
         if (uid.Comp.Uses <= 0)
-            EntityManager.QueueDeleteEntity(uid);
+            QueueDel(uid);
 
         if (entityToPlaceInHands != null)
-            _hands.PickupOrDrop(args.Equipee, entityToPlaceInHands.Value);
+            _hands.PickupOrDrop(args.EquipTarget, entityToPlaceInHands.Value);
     }
 }

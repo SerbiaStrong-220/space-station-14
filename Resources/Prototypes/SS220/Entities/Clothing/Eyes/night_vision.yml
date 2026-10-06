@@ -1,0 +1,63 @@
+- type: entity
+  parent: ClothingEyesBase
+  id: ClothingEyesNightVision
+  name: night vision goggles
+  description: Helps you see in the dark. Switch it off in brightly lit areas to avoid overexposure.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/Glasses/nightvision.rsi
+    state: night
+  - type: Clothing
+    clothingVisuals:
+      eyes:
+      - sprite: SS220/Clothing/Eyes/Glasses/nightvision_equipped.rsi
+        state: night_eyes
+  - type: NightVision
+    profile: NightVisionGreen
+    priority: 10
+
+- type: entity
+  parent: [ClothingEyesNightVision, ShowMedicalIcons]
+  id: ClothingEyesNightVisionMedical
+  name: medical night vision goggles
+  components:
+  - type: Sprite
+    state: healthhudnight
+  - type: Clothing
+    clothingVisuals:
+      eyes:
+      - sprite: SS220/Clothing/Eyes/Glasses/nightvision_equipped.rsi
+        state: healthhudnight_eyes
+
+- type: entity
+  parent: [ClothingEyesNightVision, ShowSecurityIcons]
+  id: ClothingEyesNightVisionSecurity
+  name: security night vision goggles
+  components:
+  - type: Sprite
+    state: securityhudnight
+  - type: Clothing
+    clothingVisuals:
+      eyes:
+      - sprite: SS220/Clothing/Eyes/Glasses/nightvision_equipped.rsi
+        state: sechudnight_eyes
+
+- type: entity
+  parent: ClothingEyesNightVision
+  id: ClothingEyesNightVisionSyndicate
+  name: syndicate night vision goggles
+  components:
+  - type: ShowSyndicateIcons
+
+- type: entity
+  parent: ClothingEyesChameleon
+  id: ClothingEyesNightVisionChameleon
+  name: chameleon night vision goggles
+  description: A disguised night vision device. Bright light washes out its image.
+  components:
+  - type: NightVision
+    profile: NightVisionGreen
+    priority: 10
+  - type: ChameleonClothing
+    slot: [eyes]
+    default: ClothingEyesNightVision

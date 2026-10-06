@@ -1,4 +1,4 @@
-marking-UndergarmentTopTanktop = Майка
+﻿marking-UndergarmentTopTanktop = Майка
 marking-UndergarmentTopTanktop-tanktop = Tanktop
 marking-UndergarmentTopBinder = Бандаж
 marking-UndergarmentTopBinder-binder = Бандаж

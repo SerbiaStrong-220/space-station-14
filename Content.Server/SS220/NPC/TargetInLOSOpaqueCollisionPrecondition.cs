@@ -8,7 +8,8 @@ namespace Content.Server.SS220.NPC;
 
 public sealed partial class TargetInLOSOpaqueCollisionPrecondition : HTNPrecondition
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
+
     private InteractionSystem _interaction = default!;
 
     [DataField("targetKey")]

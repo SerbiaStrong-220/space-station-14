@@ -20,23 +20,6 @@
     proto: AdministratorSponsorTier
   # SS220-sponsor-tier-end
 
-#Security Star
-- type: loadoutEffectGroup
-  id: SecurityStarWorthy
-  effects:
-    - !type:JobRequirementLoadoutEffect
-      requirement:
-        !type:DepartmentTimeRequirement
-        department: Security
-        time: 100h
-  # SS220-sponsor-tier-begin
-  sponsorTierLoadoutEffects:
-  - !type:GroupLoadoutEffect
-    proto: SeniorDevTeamTier
-  - !type:GroupLoadoutEffect
-    proto: AdministratorSponsorTier
-  # SS220-sponsor-tier-end
-
 # Head
 - type: loadout
   id: SecurityHelmet
@@ -180,13 +163,3 @@
     proto: SeniorOfficer
   equipment:
     id: SeniorOfficerPDA
-
-# Misc
-- type: loadout
-  id: SecStar
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: SecurityStarWorthy
-  storage:
-    back:
-    - Dinkystar

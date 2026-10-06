@@ -1,0 +1,35 @@
+<!-- © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT -->
+
+<controls:FancyWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+    Title="{Loc 'resource-miner-window-title'}"
+    HorizontalExpand="True"
+    VerticalExpand="True"
+    MinSize="320 380"
+    SetSize="320 380">
+    <BoxContainer VerticalExpand="True" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10 5 10 10">
+        <BoxContainer Orientation="Vertical" VerticalExpand="True">
+            <BoxContainer Orientation="Vertical" HorizontalAlignment="Left" VerticalExpand="True">
+                <BoxContainer Orientation="Vertical" HorizontalAlignment="Center">
+                    <Label Text="{Loc 'resource-miner-window-silo-text'}" HorizontalAlignment="Center" StyleClasses="LabelSubText" Margin="5 0"/>
+                    <customControls:HSeparator Margin="0 5"/>
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal">
+                    <OptionButton Name="NetSiloOptions" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
+                    <Button Name="UpdateButton" Text="{Loc 'resource-miner-window-update-button-text'}" Margin="5"/>
+                </BoxContainer>
+            </BoxContainer>
+            <BoxContainer Orientation="Vertical" Margin="5 0 0 0" VerticalExpand="True">
+                <Label Name="MaterialInfoTitle" Text="place holder" HorizontalAlignment="Center" StyleClasses="LabelSubText" Margin="5 0"/>
+                <customControls:HSeparator Margin="0 5"/>
+                <BoxContainer Name="MaterialInfoContainer" VerticalExpand="True" Orientation="Vertical" HorizontalAlignment="Left">
+                    <!-- Added by code -->
+                </BoxContainer>
+            </BoxContainer>
+        </BoxContainer>
+    </BoxContainer>
+</controls:FancyWindow>
+
+

@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Server.SS220.GameTicking.Rules;
 using Content.Shared.Popups;
 using Content.Shared.SS220.CultYogg.Cultists;
 using Robust.Shared.Audio.Systems;
@@ -8,12 +7,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.CultYogg.Cultists;
 
-public sealed class CultYoggPurifiedSystem : EntitySystem
+public sealed partial class CultYoggPurifiedSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly CultYoggRuleSystem _cultRuleSystem = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -41,9 +39,8 @@ public sealed class CultYoggPurifiedSystem : EntitySystem
                 //After purifying effect
                 _audio.PlayPvs(purifyedComp.PurifiedSound, ent);
 
-                RemComp<CultYoggComponent>(ent);
-                //ToDo_SS220 make it better
-                _cultRuleSystem.CheckSimplifiedEslavement();//Add token if it was last cultist
+                var ev = new CultYoggDeCultingEvent(ent);
+                RaiseLocalEvent(ent, ref ev, true);
             }
         }
     }

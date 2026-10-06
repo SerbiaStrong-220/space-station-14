@@ -29,4 +29,29 @@
   mapPath: /Maps/SS220/Salvage/SmallJRBarge_SS220.yml
   sizeString: salvage-map-wreck-size-medium
 
+- type: salvageMap
+  id: Chapel_SS220
+  mapPath: /Maps/SS220/Salvage/Chapel_SS220.yml
+  sizeString: salvage-map-wreck-size-medium
+
+- type: salvageMap
+  id: BarAndDormRuin_SS220
+  mapPath: /Maps/SS220/Salvage/BarAndDormRuin_SS220.yml
+  sizeString: salvage-map-wreck-size-medium
+
+- type: salvageMap
+  id: SMRuin_SS220
+  mapPath: /Maps/SS220/Salvage/SMRuin_SS220.yml
+  sizeString: salvage-map-wreck-size-medium
+
+- type: salvageMap
+  id: EmergencyFrank_SS220
+  mapPath: /Maps/SS220/Salvage/EmergencyFrank_SS220.yml
+  sizeString: salvage-map-wreck-size-medium
+
+- type: salvageMap
+  id: GreenHouseRuin_SS220
+  mapPath: /Maps/SS220/Salvage/GreenHouseRuin_SS220.yml
+  sizeString: salvage-map-wreck-size-medium
+
   # """Large""" maps

@@ -110,3 +110,18 @@
     proto: BigShlopaSponsorTier
   equipment:
     outerClothing: ClothingSponsorCyberJacketMed
+
+- type: loadout
+  id: NitrileGloves
+  equipment:
+    gloves: ClothingHandsGlovesNitrile
+
+- type: loadout
+  id: MedicalHud
+  equipment:
+    eyes: ClothingEyesHudMedical
+
+- type: loadout
+  id: MedicalEyePatchHud
+  equipment:
+    eyes: ClothingEyesEyepatchHudMedical

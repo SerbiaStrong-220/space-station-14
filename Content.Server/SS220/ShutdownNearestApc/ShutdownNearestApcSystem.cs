@@ -10,11 +10,11 @@ namespace Content.Server.SS220.ShutdownNearestApc;
 /// System that handles the ShutdownNearestApcEvent triggered by store purchases.
 /// Finds APCs within a given radius and disables their main breakers.
 /// </summary>
-public sealed class ShutdownNearestApcSystem : EntitySystem
+public sealed partial class ShutdownNearestApcSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly ApcSystem _apc = default!;
-    [Dependency] private readonly IAdminLogManager _adminLog = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private ApcSystem _apc = default!;
+    [Dependency] private IAdminLogManager _adminLog = default!;
 
     public override void Initialize()
     {

@@ -4,8 +4,8 @@
 - type: entity
   parent: ClothingSponsorEyesBase
   id: ClothingSponsorTylerRedGlasses
-  name: очки Tyler.Co
-  description: Серебряные очки авиаторы с встроенным светофильтром.
+  name: Tyler.Co glasses
+  description: Silver aviator glasses with a built-in light filter.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Eyes/Glasses/redglasses.rsi
@@ -16,8 +16,8 @@
 - type: entity
   parent: ClothingSponsorEyesBase
   id: ClothingSponsorWaltuhGlasses
-  name: прозрачные авиаторы
-  description: Простые дешёвые очки с корректирующими линзами.
+  name: transparent aviators
+  description: Simple, cheap glasses with corrective lenses.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Eyes/Glasses/waltuh.rsi
@@ -29,8 +29,8 @@
 - type: entity
   parent: ClothingSponsorEyesBase
   id: ClothingSponsorGlassesJujutsuShlepa
-  name: очки офисного работника
-  description: Семь к трём - идеальное соотношение.
+  name: office worker glasses
+  description: Seven-to-three — the perfect ratio.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Eyes/Glasses/nanamigoggles.rsi

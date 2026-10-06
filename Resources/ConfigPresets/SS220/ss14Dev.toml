@@ -1,0 +1,13 @@
+[game]
+hostname = "[RU][TTS] SS220 Dev 🧑‍💻🛠️♻️"
+desc = "🛠️ Сервер для разработчиков проекта SS220 🛠️"
+role_timers = false
+admin_job_tracking = true
+role_loadout_timers = false
+
+[replay]
+auto_record = false
+
+[ghost]
+role_time = 0.5
+quick_lottery = true

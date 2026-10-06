@@ -1,6 +1,9 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.IO;
+using System.IO.Compression;
 using Content.Shared.SS220.Signature;
+using Serilog;
 
 namespace Content.Server.SS220.Signature;
 
@@ -10,29 +13,40 @@ public static class SignatureSerializer
 
     private const int MaxDimension = 1024;
 
+    private const CompressionLevel Level = CompressionLevel.Optimal;
+
     public static string Serialize(SignatureData data)
     {
         if (data.Width <= 0 || data.Height <= 0 || data.Width > MaxDimension || data.Height > MaxDimension)
             return string.Empty;
 
-        var totalBytes = 8 + data.Pixels.Length * BytePerEntry;
-        var buffer = new byte[totalBytes];
+        Span<byte> header = stackalloc byte[8];
+        BitConverter.TryWriteBytes(header[..4], data.Width);
+        BitConverter.TryWriteBytes(header.Slice(4, 4), data.Height);
 
-        BitConverter.TryWriteBytes(buffer.AsSpan(0, 4), data.Width);
-        BitConverter.TryWriteBytes(buffer.AsSpan(4, 4), data.Height);
+        using var memoryStream = new MemoryStream();
+        using (var brotliStream = new BrotliStream(memoryStream, Level))
+        {
+            brotliStream.Write(data.Pixels, 0, data.Pixels.Length);
+        }
+        var compressedPixels = memoryStream.ToArray();
 
-        Buffer.BlockCopy(data.Pixels, 0, buffer, 8, data.Pixels.Length * BytePerEntry);
-
-        return Convert.ToBase64String(buffer);
+        var resultBuffer = new byte[8 + compressedPixels.Length];
+        header.CopyTo(resultBuffer);
+        Buffer.BlockCopy(compressedPixels, 0, resultBuffer, 8, compressedPixels.Length);
+        return Convert.ToBase64String(resultBuffer);
     }
 
     public static SignatureData? Deserialize(string? data)
     {
-        if (string.IsNullOrEmpty(data)) return null;
+        if (string.IsNullOrEmpty(data))
+            return null;
+
         try
         {
             var buffer = Convert.FromBase64String(data);
-            if (buffer.Length < 8) return null;
+            if (buffer.Length < 8)
+                return null;
 
             var width = BitConverter.ToInt32(buffer, 0);
             var height = BitConverter.ToInt32(buffer, 4);
@@ -40,15 +54,27 @@ public static class SignatureSerializer
             if (width <= 0 || height <= 0 || width > MaxDimension || height > MaxDimension)
                 return null;
 
-            var expectedSize = width * height * BytePerEntry;
-
-            if (buffer.Length - 8 != expectedSize) return null;
-
+            var expectedRawSize = width * height * BytePerEntry;
             var instance = new SignatureData(width, height);
-            Buffer.BlockCopy(buffer, 8, instance.Pixels, 0, expectedSize);
+
+            if (buffer.Length - 8 == expectedRawSize)
+            {
+                Buffer.BlockCopy(buffer, 8, instance.Pixels, 0, expectedRawSize);
+            }
+            else
+            {
+                using var inputStream = new MemoryStream(buffer, 8, buffer.Length - 8);
+                using var decompressStream = new BrotliStream(inputStream, CompressionMode.Decompress);
+
+                decompressStream.ReadExactly(instance.Pixels);
+            }
 
             return instance;
         }
-        catch { return null; }
+        catch (Exception ex)
+        {
+            Log.Error($"Signature deserialization failed: {ex}");
+            return null;
+        }
     }
 }

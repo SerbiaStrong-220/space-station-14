@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.Linq;
 using Content.Server.GameTicking;
 using Content.Server.Popups;
 using Content.Server.Radio.EntitySystems;
@@ -15,21 +16,23 @@ using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 using Content.Server.StationRecords.Components;
+using Content.Shared.Containers.ItemSlots;
+using Content.Shared.CrewManifest;
 
 namespace Content.Server.SS220.CriminalRecords;
 
-public sealed class GeneralStationRecordConsoleSystem : EntitySystem
+public sealed partial class GeneralStationRecordConsoleSystem : EntitySystem
 {
-    [Dependency] private readonly StationRecordsSystem _stationRecords = default!;
-    [Dependency] private readonly CriminalRecordSystem _criminalRecord = default!;
-    [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
-    [Dependency] private readonly AccessReaderSystem _accessReader = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly StationSystem _stationSystem = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly RadioSystem _radio = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private StationRecordsSystem _stationRecords = default!;
+    [Dependency] private CriminalRecordSystem _criminalRecord = default!;
+    [Dependency] private UserInterfaceSystem _userInterface = default!;
+    [Dependency] private AccessReaderSystem _accessReader = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private StationSystem _stationSystem = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private RadioSystem _radio = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private PopupSystem _popup = default!;
 
     private static readonly TimeSpan CooldownLagTolerance = TimeSpan.FromSeconds(0.5);
 
@@ -39,6 +42,7 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
         SubscribeLocalEvent<CriminalRecordsConsole220Component, SelectStationRecord>(OnKeySelected);
         SubscribeLocalEvent<CriminalRecordsConsole220Component, UpdateCriminalRecordStatus>(OnCriminalStatusUpdate);
         SubscribeLocalEvent<CriminalRecordsConsole220Component, DeleteCriminalRecordStatus>(OnCriminalStatusDelete);
+        SubscribeLocalEvent<CriminalRecordsConsole220Component, RequestLinkIdToRecord>(OnRequestLinkIdToRecord);
         SubscribeLocalEvent<RecordModifiedEvent>(OnRecordModified);
         SubscribeLocalEvent<AfterGeneralRecordCreatedEvent>(OnRecordCreated);
         SubscribeLocalEvent<GeneralStationRecordConsoleComponent, ActivatableUIOpenAttemptEvent>(OnAttemptOpenUI);
@@ -179,6 +183,34 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
             return;
 
         _audio.PlayPvs(entity.Comp.DatabaseActionSound, entity);
+    }
+
+    private void OnRequestLinkIdToRecord(Entity<CriminalRecordsConsole220Component> ent, ref RequestLinkIdToRecord args)
+    {
+        if (!_accessReader.IsAllowed(args.Actor, ent.Owner))
+        {
+            _popup.PopupEntity(Loc.GetString("criminal-records-ui-no-access"), ent.Owner, recipient: args.Actor);
+            return;
+        }
+
+        if (!TryComp<ItemSlotsComponent>(ent, out var itemSlots) || itemSlots.Slots.Count == 0)
+            return;
+
+        if (itemSlots.Slots.First().Value.Item is not { } idCard)
+            return;
+
+        if (_stationSystem.GetOwningStation(idCard) is not { } station)
+            return;
+
+        (NetEntity, uint)? rec = (GetNetEntity(station), args.Key);
+        var recordKey = _stationRecords.Convert(rec);
+        if (recordKey == null)
+            return;
+
+        EnsureComp<StationRecordKeyStorageComponent>(idCard, out var storage);
+        storage.Key = recordKey.Value;
+
+        Dirty(idCard, storage);
     }
 
     private void UpdateUserInterface(EntityUid uid, CriminalRecordsConsole220Component? console = null)

@@ -50,15 +50,27 @@ public sealed partial class LabelSystem : EntitySystem
     /// <param name="text">intended label text (null to remove)</param>
     /// <param name="label">label component for resolve</param>
     /// <param name="metadata">metadata component for resolve</param>
-    public void Label(EntityUid uid, string? text, MetaDataComponent? metadata = null, LabelComponent? label = null)
+    public void Label(EntityUid uid, string? text, MetaDataComponent? metadata = null, LabelComponent? label = null, Color? color = null) //SS220-LabelColors
     {
         label ??= EnsureComp<LabelComponent>(uid);
 
         label.CurrentLabel = text == null ? null : FormattedMessage.EscapeText(text);
+        label.LabelColor = color ?? Color.White; //SS220-LabelColors
         _nameModifier.RefreshNameModifiers(uid);
 
         Dirty(uid, label);
     }
+
+    //SS220-LabelColors begin
+    public void ApplyPreEscapedLabel(Entity<LabelComponent> ent, string? text, Color color)
+    {
+        ent.Comp.CurrentLabel = text;
+        ent.Comp.LabelColor = color;
+        _nameModifier.RefreshNameModifiers(ent.Owner);
+
+        Dirty(ent);
+    }
+    //SS220-LabelColors end
 
     private void OnExamine(Entity<LabelComponent> ent, ref ExaminedEvent args)
     {
@@ -68,9 +80,10 @@ public sealed partial class LabelSystem : EntitySystem
         if (ent.Comp.CurrentLabel == null)
             return;
 
-        var message = new FormattedMessage();
-        message.AddText(Loc.GetString("hand-labeler-has-label", ("label", ent.Comp.CurrentLabel)));
-        args.PushMessage(message);
+        //SS220-LabelColors begin
+        var colorized = $"[color={ent.Comp.LabelColor.ToHex()}]{ent.Comp.CurrentLabel}[/color]";
+        args.PushMarkup(Loc.GetString("hand-labeler-has-label", ("label", colorized)));
+        //SS220-LabelColors end
     }
 
     private void OnRefreshNameModifiers(Entity<LabelComponent> entity, ref RefreshNameModifiersEvent args)

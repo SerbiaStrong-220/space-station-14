@@ -1,0 +1,15 @@
+slot-definition-jumpsuit = Комбинезон
+slot-definition-shoes = Обувь
+slot-definition-head = Голова
+slot-definition-neck = Шея
+slot-definition-eyes = Глаза
+slot-definition-back = Рюкзак
+slot-definition-outerClothing = Верхняя одежда
+slot-definition-mask = Маска
+slot-definition-belt = Пояс
+slot-definition-id = ID
+slot-definition-ears = Уши
+slot-definition-gloves = Перчатки
+slot-definition-pocket1 = Карман 1
+slot-definition-pocket2 = Карман 2
+slot-definition-suitstorage = Спина

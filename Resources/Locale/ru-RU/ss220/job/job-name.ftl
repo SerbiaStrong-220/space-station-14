@@ -1,5 +1,9 @@
 job-name-magistrate = магистрат
+job-name-nanotrasen-representative = представитель НаноТрейзен
 job-name-tourist = турист
+
+job-name-blueshield = офицер "Синий щит"
+JobBlueShield = офицер "Синий щит"
 
 job-name-cc-default = ЦК
 job-name-cc-agent = агент ЦК
@@ -10,7 +14,7 @@ job-name-cc-ci-officer = офицер Контрразведки
 
 job-name-cburn-agent = агент РХБЗ
 job-name-cburn-leader = лидер отряда РХБЗ
-job-name-cc-bs-operative = оперативник "Синий Щит"
+job-name-cc-srt-operative = оперативник ГСН
 job-name-ert-commander = лидер отряда ОБР
 job-name-ert-chaplain = священник ОБР
 
@@ -22,4 +26,19 @@ job-name-dq-operative = оперативник Эскадрона Смерти
 job-name-dq-commander = командир Эскадрона Смерти
 job-name-dq-specialist = специалист Эскадрона Смерти
 
+job-name-death-squad-operative = оперативник Эскадрона Смерти
+job-name-death-squad-leader = лидер Эскадрона Смерти
+job-name-death-squad-healer = медик Эскадрона Смерти
+
 job-name-migo = Ми-Го
+
+job-name-security-pet = питомец службы безопасности
+job-name-peaceful-pet = безобидный питомец
+
+job-name-aggressive-animals = агрессивная фауна
+
+job-name-space-dragon = { roles-antag-dragon-name }
+
+job-name-syndicate-borg = киборг Синдиката
+
+job-name-syndicate-reinforcement = подкрепление Синдиката
