@@ -3,11 +3,9 @@
 injector-draw-text = Забор
 injector-inject-text = Введение
 injector-invalid-injector-toggle-mode = Неверный режим
-#SS220-injector-localization-fix begin
 injector-volume-label =
     Объём: [color=white]{ $currentVolume }/{ $totalVolume } ед.[/color]
     Режим: [color=white]{ $modeString }[/color]
-#SS220-injector-localization-fix end
 
 ## Entity
 
@@ -39,10 +37,7 @@ injector-component-injecting-user = Вы начинаете вводить со�
 injector-component-drawing-target = { CAPITALIZE($user) } начинает набирать шприц из вас!
 injector-component-injecting-target = { CAPITALIZE($user) } начинает вводить содержимое шприца в вас!
 
-#SS220-injector-localization-fix begin
 injector-volume-transfer-label = Объем: [color=white]{ $currentVolume }/{ $totalVolume } ед.[/color]
-    Режим: [color=white]{ $modeString }[/color] ([color=white]{ $transferVolume } ед.[/color])
-#SS220-injector-localization-fix end
 
 injector-toggle-verb-text = Переключить режим инъектора
 
@@ -70,14 +65,11 @@ injector-component-needle-injecting-target = { CAPITALIZE(THE($user)) } пыта
 
 injector-component-needle-drawing-user = Вы начинаете набирать жидкость иглой.
 
-#SS220-injector-localization-fix begin
-injector-component-needle-drawing-target = { CAPITALIZE(THE($user)) } пытается набрать вашу кровь с помощью иглы!
-#SS220-injector-localization-fix end
+injector-component-needle-drawing-target = { CAPITALIZE(THE($user)) } пытается набрать вашей крови с помощью иглы!
 
 injector-component-spray-injecting-user = Вы начинаете подготавливать распылитель.
 
-#SS220-injector-localization-fix begin
-injector-component-spray-injecting-target = { CAPITALIZE(THE($user)) } пытается поднести к вам сопло распылителя!
-#SS220-injector-localization-fix end
+injector-component-spray-injecting-target = { CAPITALIZE(THE($user)) } пытается направить на вас распылитель!
 
 injector-component-feel-prick-message = Вы чувствуете легкий укол!
+
