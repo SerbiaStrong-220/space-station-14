@@ -542,7 +542,6 @@
   - ChaplainJumpskirt
   - ChaplainRobesLight
   - ChaplainRobesDark
-  - ChaplainJumpsuitFollower #SS220 new chaplain clothing
 
 - type: loadoutGroup
   id: ChaplainOuterClothing
@@ -554,6 +553,8 @@
   - ChaplainBlackHoodie
   - ChaplainHoodie
   - HoodieChaplainWhite #SS220-Clothes
+  - ChaplainOuterHoodieFollower #SS220 Follower clothing redux
+  - ChaplainOuterSchema #SS220-Schema
 
 - type: loadoutGroup
   id: ChaplainNeck
@@ -777,6 +778,7 @@
   minLimit: 0
   loadouts:
   - FlowerWaterClown
+  - ClownBikeHornPennywise #SS220-Pennywise-update
 
 - type: loadoutGroup
   id: MimeHead
@@ -1477,6 +1479,7 @@
   loadouts:
   - WardenHead
   - WardenBeret
+  - WardenHeadCommissar #SS220 Commissar
 
 - type: loadoutGroup
   id: WardenJumpsuit
@@ -1485,6 +1488,7 @@
   - WardenJumpsuit
   - WardenJumpskirt
   - WardenJumpsuitTurtleneck #SS220-MoreTurtleneck
+  - WardenJumpsuitCommissar #SS220 Commissar
 
 - type: loadoutGroup
   id: WardenOuterClothing
@@ -1492,6 +1496,7 @@
   loadouts:
   - WardenCoat
   - WardenArmoredWinterCoat
+  - WardenOuterCoatCommissar #SS220 Commissar
   - CyberVestSecurity #SS220-Two Floppa Iteration
 
 - type: loadoutGroup
@@ -1558,6 +1563,7 @@
   loadouts:
   - SecurityBelt
   - SecurityWebbing
+  - SecurityCorporateJudo #SS220 add corp judo in loadout
 
 - type: loadoutGroup
   id: SecurityOuterClothing

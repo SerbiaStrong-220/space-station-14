@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using Content.Client.UserInterface.Controls;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
@@ -22,6 +23,21 @@ public sealed class Table : TableContainer, IDocumentTag
 
         Columns = columnsCount;
 
+        // SS220-Cult_cleaning start
+        // Reserve space for short columns beside long descriptions.
+        if (args.TryGetValue("MinColumnWidth", out var minWidth))
+        {
+            if (!float.TryParse(minWidth, NumberStyles.Float, CultureInfo.InvariantCulture, out var width) ||
+                !float.IsFinite(width) || width <= 0)
+            {
+                Logger.Error("Guidebook Table has an invalid MinColumnWidth.");
+                control = null;
+                return false;
+            }
+
+            MinForcedColumnWidth = width;
+        }
+        // SS220-Cult_cleaning end
         return true;
     }
 }
