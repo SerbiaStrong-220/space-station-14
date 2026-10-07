@@ -3,7 +3,7 @@
 
   Используйте [textlink="способности преобразования" link="CultYoggAbilities"] на выбранном предмете или на предмете в активной руке. В левом столбце перечислены исходные предметы и показаны их примеры.
 
-  Для живого оружия показаны кокон и раскрытая форма. Сначала активируйте полученный кокон в руке. Для снятия приросшего снаряжения подготовьте [textlink="нулевой гриб" link="CultYoggBase"].
+  Для живого оружия показаны оболочка и раскрытая форма. Сначала активируйте полученную оболочку в руке. Для снятия приросшего снаряжения подготовьте [textlink="нулевой гриб" link="CultYoggBase"] или [textlink="срежьте отдельный предмет инструментом для разделки" link="CultYoggEquipment"], причинив владельцу порезы и ушибы. Живую броню срезать нельзя.
 
   <Table Columns="3" MinColumnWidth="150">
     <ColorBox Color="#34313F" OutlineColor="#514957">
@@ -63,14 +63,14 @@
     </ColorBox>
     <ColorBox Color="#292833" OutlineColor="#514957">
       <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
-        <GuideEntityEmbed Entity="CocoonSedativeSting" Caption="" Scale="1.5" Margin="2"/>
-        <GuideEntityEmbed Entity="SedativeStingCultYogg" Caption="" Scale="1.5" Margin="2"/>
-        [color=#a4885c]Кокон усыпляющего жала[/color]
+        <GuideEntityEmbed Entity="ShellSedativeSting" Caption="" Scale="1.5" Margin="2"/>
+        <GuideEntityEmbed Entity="SedativeSting" Caption="" Scale="1.5" Margin="2"/>
+        [color=#a4885c]Оболочка усыпляющего жала[/color]
       </Box>
     </ColorBox>
     <ColorBox Color="#292833" OutlineColor="#514957">
       <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
-        Раскройте кокон и заправьте жало [color=#a4885c]эссенцией Бездны[/color] из пруда. Используется для усыпления кандидатов.
+        Раскройте оболочку и заправьте жало [color=#a4885c]эссенцией Бездны[/color] из пруда. Используется для усыпления кандидатов.
       </Box>
     </ColorBox>
     <ColorBox Color="#292833" OutlineColor="#514957">
@@ -81,7 +81,7 @@
     </ColorBox>
     <ColorBox Color="#292833" OutlineColor="#514957">
       <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
-        <GuideEntityEmbed Entity="CultHandcuffs" Caption="" Scale="1.5" Margin="2"/>
+        <GuideEntityEmbed Entity="HandcuffsLiving" Caption="" Scale="1.5" Margin="2"/>
         [color=#a4885c]Живые путы[/color]
       </Box>
     </ColorBox>
@@ -115,9 +115,9 @@
     </ColorBox>
     <ColorBox Color="#292833" OutlineColor="#514957">
       <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
-        <GuideEntityEmbed Entity="CocoonClaw" Caption="" Scale="1.5" Margin="2"/>
-        <GuideEntityEmbed Entity="ClawCultYogg" Caption="" Scale="1.5" Margin="2"/>
-        [color=#a4885c]Кокон клешни[/color]
+        <GuideEntityEmbed Entity="ShellPincer" Caption="" Scale="1.5" Margin="2"/>
+        <GuideEntityEmbed Entity="Pincer" Caption="" Scale="1.5" Margin="2"/>
+        [color=#a4885c]Оболочка клешни[/color]
       </Box>
     </ColorBox>
     <ColorBox Color="#292833" OutlineColor="#514957">
@@ -133,9 +133,9 @@
     </ColorBox>
     <ColorBox Color="#292833" OutlineColor="#514957">
       <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
-        <GuideEntityEmbed Entity="CocoonBeach" Caption="" Scale="1.5" Margin="2"/>
-        <GuideEntityEmbed Entity="BeachCultYogg" Caption="" Scale="1.5" Margin="2"/>
-        [color=#a4885c]Кокон бича[/color]
+        <GuideEntityEmbed Entity="ShellScourge" Caption="" Scale="1.5" Margin="2"/>
+        <GuideEntityEmbed Entity="Scourge" Caption="" Scale="1.5" Margin="2"/>
+        [color=#a4885c]Оболочка бича[/color]
       </Box>
     </ColorBox>
     <ColorBox Color="#292833" OutlineColor="#514957">
@@ -151,9 +151,9 @@
     </ColorBox>
     <ColorBox Color="#292833" OutlineColor="#514957">
       <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
-        <GuideEntityEmbed Entity="CocoonSpikegun" Caption="" Scale="1.5" Margin="2"/>
-        <GuideEntityEmbed Entity="SpikegunCultYogg" Caption="" Scale="1.5" Margin="2"/>
-        [color=#a4885c]Кокон шипомёта[/color]
+        <GuideEntityEmbed Entity="ShellSpikegun" Caption="" Scale="1.5" Margin="2"/>
+        <GuideEntityEmbed Entity="Spikegun" Caption="" Scale="1.5" Margin="2"/>
+        [color=#a4885c]Оболочка шипомёта[/color]
       </Box>
     </ColorBox>
     <ColorBox Color="#292833" OutlineColor="#514957">
@@ -172,9 +172,9 @@
     </ColorBox>
     <ColorBox Color="#292833" OutlineColor="#514957">
       <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
-        <GuideEntityEmbed Entity="CocoonVenomancer" Caption="" Scale="1.5" Margin="2"/>
+        <GuideEntityEmbed Entity="ShellVenomancer" Caption="" Scale="1.5" Margin="2"/>
         <GuideEntityEmbed Entity="Venomancer" Caption="" Scale="1.5" Margin="2"/>
-        [color=#a4885c]Кокон веномансера[/color]
+        [color=#a4885c]Оболочка веномансера[/color]
       </Box>
     </ColorBox>
     <ColorBox Color="#292833" OutlineColor="#514957">
@@ -190,9 +190,9 @@
     </ColorBox>
     <ColorBox Color="#292833" OutlineColor="#514957">
       <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
-        <GuideEntityEmbed Entity="CocoonSpitballer" Caption="" Scale="1.5" Margin="2"/>
+        <GuideEntityEmbed Entity="ShellSpitballer" Caption="" Scale="1.5" Margin="2"/>
         <GuideEntityEmbed Entity="Spitballer" Caption="" Scale="1.5" Margin="2"/>
-        [color=#a4885c]Кокон плевателя[/color]
+        [color=#a4885c]Оболочка плевателя[/color]
       </Box>
     </ColorBox>
     <ColorBox Color="#292833" OutlineColor="#514957">
@@ -208,7 +208,7 @@
     </ColorBox>
     <ColorBox Color="#292833" OutlineColor="#514957">
       <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
-        <GuideEntityEmbed Entity="ClothingBackpackCultYogg" Caption="" Scale="1.5" Margin="2"/>
+        <GuideEntityEmbed Entity="ClothingBackpackLiving" Caption="" Scale="1.5" Margin="2"/>
         [color=#a4885c]Живой рюкзак[/color]
       </Box>
     </ColorBox>
@@ -225,7 +225,7 @@
     </ColorBox>
     <ColorBox Color="#292833" OutlineColor="#514957">
       <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
-        <GuideEntityEmbed Entity="ClothingBackpackSatchelCultYogg" Caption="" Scale="1.5" Margin="2"/>
+        <GuideEntityEmbed Entity="ClothingBackpackSatchelLiving" Caption="" Scale="1.5" Margin="2"/>
         [color=#a4885c]Живая сумка[/color]
       </Box>
     </ColorBox>
@@ -242,7 +242,7 @@
     </ColorBox>
     <ColorBox Color="#292833" OutlineColor="#514957">
       <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
-        <GuideEntityEmbed Entity="ClothingBackpackDuffelCultYogg" Caption="" Scale="1.5" Margin="2"/>
+        <GuideEntityEmbed Entity="ClothingBackpackDuffelLiving" Caption="" Scale="1.5" Margin="2"/>
         [color=#a4885c]Живой вещмешок[/color]
       </Box>
     </ColorBox>
@@ -361,7 +361,7 @@
     </ColorBox>
     <ColorBox Color="#292833" OutlineColor="#514957">
       <Box Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6">
-        <GuideEntityEmbed Entity="ClothingOuterHardsuitCultYogg" Caption="" Scale="1.5" Margin="2"/>
+        <GuideEntityEmbed Entity="ClothingOuterHardsuitLiving" Caption="" Scale="1.5" Margin="2"/>
         [color=#a4885c]Живая броня[/color]
       </Box>
     </ColorBox>
