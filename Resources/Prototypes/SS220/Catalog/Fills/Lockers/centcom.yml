@@ -273,9 +273,6 @@
         - id: ChemistryBottleAmbuzolPlus
           amount: 3
         - id: ClothingEyesNightVision
-        - id: WeaponLaserSMG
-        - id: LaserSMGPowerCell
-          amount: 3
 
 - type: entity
   id: LockerCburnCommanderFilled
@@ -302,9 +299,6 @@
         - id: FlashlightSeclite
         - id: QuarantineDirectivesCircuitBoard
         - id: ClothingEyesNightVisionSecurity
-        - id: WeaponLaserSMG
-        - id: LaserSMGPowerCell
-          amount: 3
 
 # SRT Operative
 - type: entity

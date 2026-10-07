@@ -440,3 +440,4 @@
       - NamesMilitaryFirst
       - NamesMilitaryLast
       nameFormat: name-format-ert
+    - type: ZombieImmune #SS220 ERTchangingthings
