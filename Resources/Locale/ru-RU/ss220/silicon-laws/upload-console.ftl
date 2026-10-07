@@ -18,7 +18,10 @@ law-upload-scope-hint = Заменяет законы выбранной гру�
 law-upload-apply-ai = Только ИИ
 law-upload-apply-borgs = Только киборгам
 law-upload-apply-all = Всем
-
+law-upload-board-changed = Плата законов была заменена. Проверьте новые законы и повторите загрузку.
+law-upload-invalid-board = Вставленный предмет не содержит законов.
+law-upload-invalid-target = Неизвестная группа получателей законов.
+law-upload-ui-closed = Откройте интерфейс консоли, чтобы загрузить законы.
 law-upload-system-header = NT / КОНТРОЛЬ ДИРЕКТИВ
 law-upload-auth-header = АВТОРИЗАЦИЯ
 law-upload-card-present = ID-карта / КПК в считывателе

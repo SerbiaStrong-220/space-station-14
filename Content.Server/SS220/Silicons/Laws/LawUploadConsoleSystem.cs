@@ -7,6 +7,7 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Database;
 using Content.Shared.Interaction;
+using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.Silicons.Laws;
@@ -28,6 +29,7 @@ public sealed class LawUploadConsoleSystem : EntitySystem
     [Dependency] private readonly SharedIdCardSystem _idCard = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -46,19 +48,19 @@ public sealed class LawUploadConsoleSystem : EntitySystem
     private void OnInserted(Entity<LawUploadConsoleComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
         if (IsUploadSlot(args.Container.ID))
-            Invalidate(ent);
+            UpdateUi(ent);
     }
 
     private void OnRemoved(Entity<LawUploadConsoleComponent> ent, ref EntRemovedFromContainerMessage args)
     {
         if (IsUploadSlot(args.Container.ID))
-            Invalidate(ent);
+            UpdateUi(ent);
     }
 
     private static bool IsUploadSlot(string id) =>
         id is LawUploadConsoleComponent.CardSlot or LawUploadConsoleComponent.BoardSlot;
 
-    private void OnPower(Entity<LawUploadConsoleComponent> ent, ref PowerChangedEvent args) => Invalidate(ent);
+    private void OnPower(Entity<LawUploadConsoleComponent> ent, ref PowerChangedEvent args) => UpdateUi(ent); //ss220 random lawset
 
     private void OnInteract(Entity<LawUploadConsoleComponent> ent, ref InteractUsingEvent args)
     {
@@ -88,8 +90,9 @@ public sealed class LawUploadConsoleSystem : EntitySystem
 
     private void OnApply(Entity<LawUploadConsoleComponent> ent, ref ApplyStationLawsMessage args)
     {
-        if (!TryGetApplyData(ent, args, out var station, out var board, out var provider))
+        if (!TryGetApplyData(ent, args, out var station, out var board, out var provider, out var reason))
         {
+            _popup.PopupEntity(Loc.GetString(reason), ent.Owner, args.Actor);
             UpdateUi(ent);
             return;
         }
@@ -102,26 +105,47 @@ public sealed class LawUploadConsoleSystem : EntitySystem
     }
 
     private bool TryGetApplyData(Entity<LawUploadConsoleComponent> ent, ApplyStationLawsMessage args,
-        out EntityUid station, out EntityUid board, out SiliconLawProviderComponent provider)
+        out EntityUid station, out EntityUid board, out SiliconLawProviderComponent provider, out string reason)
     {
         station = default;
         board = default;
         provider = default!;
 
-        if (!Enum.IsDefined(args.Target) || args.Revision != ent.Comp.Revision)
+        reason = "law-upload-invalid-target";
+        if (!Enum.IsDefined(args.Target))
             return false;
 
+        reason = "law-upload-ui-closed";
         if (!_ui.IsUiOpen(ent.Owner, LawUploadUiKey.Key, args.Actor))
             return false;
 
-        if (!_power.IsPowered(ent.Owner) || !HasAuthorizedCard(ent))
+        reason = "law-upload-no-power";
+        if (!_power.IsPowered(ent.Owner))
             return false;
 
+        reason = "law-upload-insert-card";
+        if (GetSlotItem(ent, LawUploadConsoleComponent.CardSlot) == null)
+            return false;
+
+        reason = "law-upload-access-denied";
+        if (!HasAuthorizedCard(ent))
+            return false;
+
+        reason = "law-upload-no-station";
         if (_station.GetOwningStation(ent.Owner) is not { } stationUid)
             return false;
 
-        if (GetSlotItem(ent, LawUploadConsoleComponent.BoardSlot) is not { } boardUid ||
-            !TryComp(boardUid, out SiliconLawProviderComponent? providerComp))
+        reason = "law-upload-insert-board";
+        if (GetSlotItem(ent, LawUploadConsoleComponent.BoardSlot) is not { } boardUid)
+            return false;
+
+        // Compare against the actual slot; never resolve or trust the supplied entity.
+        reason = "law-upload-board-changed";
+        if (GetNetEntity(boardUid) != args.Board)
+            return false;
+
+        reason = "law-upload-invalid-board";
+        if (!TryComp(boardUid, out SiliconLawProviderComponent? providerComp))
             return false;
 
         station = stationUid;
@@ -136,15 +160,10 @@ public sealed class LawUploadConsoleSystem : EntitySystem
         while (query.MoveNext(out var uid, out var comp))
         {
             if (_station.GetOwningStation(uid) == args.Station)
-                Invalidate((uid, comp));
+                UpdateUi((uid, comp));
         }
     }
 
-    private void Invalidate(Entity<LawUploadConsoleComponent> ent)
-    {
-        ent.Comp.Revision++;
-        UpdateUi(ent);
-    }
 
     public void UpdateUi(Entity<LawUploadConsoleComponent> ent)
     {
@@ -177,7 +196,7 @@ public sealed class LawUploadConsoleSystem : EntitySystem
 
         var boardLawset = validBoard ? provider!.Laws : default;
         _ui.SetUiState(ent.Owner, LawUploadUiKey.Key, new LawUploadState(
-            ent.Comp.Revision, status, card != null, board != null,
+            GetNetEntity(board), status, card != null, board != null,
             powered && station != null && authorized && validBoard,
             aiLawset, aiLaws, borgLawset, borgLaws, boardLawset, LawIds(boardLawset)));
     }

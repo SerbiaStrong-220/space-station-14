@@ -18,9 +18,9 @@ public sealed partial class LawUploadWindow : FancyWindow
 {
     [Dependency] private IPrototypeManager _prototypes = default!;
 
-    public event Action<LawUploadTarget, int>? OnApply;
+    public event Action<LawUploadTarget, NetEntity>? OnApply;
     public event Action<string>? OnEject;
-    private int _revision;
+    private NetEntity? _board;
 
     private static readonly Color Cyan = Color.FromHex("#79CEDC");
     private static readonly Color Amber = Color.FromHex("#E6B86A");
@@ -49,13 +49,16 @@ public sealed partial class LawUploadWindow : FancyWindow
 
     private void Apply(LawUploadTarget target)
     {
+        if (_board is not { } board)
+            return;
+
         ApplyAi.Disabled = ApplyBorgs.Disabled = ApplyAll.Disabled = true;
-        OnApply?.Invoke(target, _revision);
+        OnApply?.Invoke(target, board);
     }
 
     public void UpdateState(LawUploadState state)
     {
-        _revision = state.Revision;
+        _board = state.Board;
 
         var statusColor = state.CanApply ? Color.FromHex("#8BD4A4") :
             state.Status is "law-upload-no-power" or "law-upload-no-station" or "law-upload-access-denied"

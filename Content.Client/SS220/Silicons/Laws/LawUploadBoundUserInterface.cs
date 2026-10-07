@@ -14,7 +14,7 @@ public sealed class LawUploadBoundUserInterface(EntityUid owner, Enum uiKey) : B
     {
         base.Open();
         _window = this.CreateWindow<LawUploadWindow>();
-        _window.OnApply += (target, revision) => SendMessage(new ApplyStationLawsMessage(target, revision));
+        _window.OnApply += (target, board) => SendMessage(new ApplyStationLawsMessage(target, board));
         _window.OnEject += slot => SendMessage(new ItemSlotButtonPressedEvent(slot, tryInsert: false));
     }
 

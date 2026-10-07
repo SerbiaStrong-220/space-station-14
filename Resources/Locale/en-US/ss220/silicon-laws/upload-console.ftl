@@ -22,7 +22,10 @@ law-upload-scope-hint = Applies to existing and future units on this station. Sp
 law-upload-apply-ai = AI only
 law-upload-apply-borgs = Cyborgs only
 law-upload-apply-all = Everyone
-
+law-upload-board-changed = The law board was replaced. Review the new laws and try uploading again.
+law-upload-invalid-board = The inserted item does not contain laws.
+law-upload-invalid-target = Unknown law upload target.
+law-upload-ui-closed = Open the console interface to upload laws.
 law-upload-system-header = NT / SILICON LAW CONTROL
 law-upload-auth-header = AUTHORIZATION
 law-upload-card-present = ID card / PDA in reader

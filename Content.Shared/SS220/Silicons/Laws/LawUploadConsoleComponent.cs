@@ -13,10 +13,6 @@ public sealed partial class LawUploadConsoleComponent : Component
     public const string CardSlot = "law_upload_id";
     public const string BoardSlot = "circuit_holder";
 
-    /// <summary>
-    /// Monotonically increasing token used to reject stale UI messages.
-    /// </summary>
-    public int Revision;
 }
 
 [Serializable, NetSerializable]
@@ -35,7 +31,7 @@ public enum LawUploadTarget : byte
 
 [Serializable, NetSerializable]
 public sealed class LawUploadState(
-    int revision,
+    NetEntity? board,
     string status,
     bool hasCard,
     bool hasBoard,
@@ -47,7 +43,7 @@ public sealed class LawUploadState(
     ProtoId<SiliconLawsetPrototype> boardLawset,
     ProtoId<SiliconLawPrototype>[] boardLaws) : BoundUserInterfaceState
 {
-    public readonly int Revision = revision;
+    public readonly NetEntity? Board = board;
     public readonly string Status = status;
     public readonly bool HasCard = hasCard;
     public readonly bool HasBoard = hasBoard;
@@ -61,10 +57,10 @@ public sealed class LawUploadState(
 }
 
 [Serializable, NetSerializable]
-public sealed class ApplyStationLawsMessage(LawUploadTarget target, int revision) : BoundUserInterfaceMessage
+public sealed class ApplyStationLawsMessage(LawUploadTarget target, NetEntity board) : BoundUserInterfaceMessage
 {
     public readonly LawUploadTarget Target = target;
-    public readonly int Revision = revision;
+    public readonly NetEntity Board = board;
 }
 
 /// <summary>
