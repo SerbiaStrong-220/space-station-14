@@ -3,9 +3,9 @@
 - type: entity
   name: cult handcuffs
   description: Used to detain criminals and other assholes.
-  id: CultHandcuffs
+  id: HandcuffsLiving
   suffix: CultYogg
-  parent: [BaseItem, CultYoggRestrictedItem]
+  parent: [BaseItem, BaseRestrictedLivingItem]
   components:
   - type: Item
     size: Small
@@ -33,6 +33,7 @@
     state: handcuff
   - type: Tag
     tags:
+    - YoggEquipment
     - Handcuffs
     - CultYoggStealthProvidable
   - type: Appearance
