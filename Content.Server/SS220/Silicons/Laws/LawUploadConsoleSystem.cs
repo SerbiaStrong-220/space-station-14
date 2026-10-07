@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Linq;
 using Content.Server.Silicons.Laws;
 using Content.Server.Station.Systems;
 using Content.Shared.Access.Systems;
@@ -26,10 +25,8 @@ public sealed class LawUploadConsoleSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
     [Dependency] private readonly AccessReaderSystem _access = default!;
-    // SS220 random lawset begin
     [Dependency] private readonly SharedIdCardSystem _idCard = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    // SS220 random lawset end
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
 
     public override void Initialize()
@@ -84,16 +81,13 @@ public sealed class LawUploadConsoleSystem : EntitySystem
 
     private bool HasAuthorizedCard(EntityUid uid)
     {
-        // SS220 random lawset begin
         return GetSlotItem(uid, LawUploadConsoleComponent.CardSlot) is { } card &&
                _idCard.TryGetIdCard(card, out var idCard) &&
                _access.IsAllowed(idCard.Owner, uid);
-        // SS220 random lawset end
     }
 
     private void OnApply(Entity<LawUploadConsoleComponent> ent, ref ApplyStationLawsMessage args)
     {
-        // SS220 random lawset begin
         if (!TryGetApplyData(ent, args, out var station, out var board, out var provider))
         {
             UpdateUi(ent);
@@ -105,10 +99,8 @@ public sealed class LawUploadConsoleSystem : EntitySystem
         _adminLog.Add(LogType.Action, LogImpact.High,
             $"{ToPrettyString(args.Actor):player} uploaded lawset {provider.Laws} from {ToPrettyString(board)} " +
             $"using {ToPrettyString(ent.Owner)} to {args.Target} on {ToPrettyString(station)} ({count} recipients). Laws: {lawset.LoggingString()}");
-        // SS220 random lawset end
     }
 
-    // SS220 random lawset begin
     private bool TryGetApplyData(Entity<LawUploadConsoleComponent> ent, ApplyStationLawsMessage args,
         out EntityUid station, out EntityUid board, out SiliconLawProviderComponent provider)
     {
@@ -137,7 +129,6 @@ public sealed class LawUploadConsoleSystem : EntitySystem
         provider = providerComp;
         return true;
     }
-    // SS220 random lawset end
 
     private void OnStationChanged(StationLawsetsChangedEvent args)
     {
@@ -157,7 +148,6 @@ public sealed class LawUploadConsoleSystem : EntitySystem
 
     public void UpdateUi(Entity<LawUploadConsoleComponent> ent)
     {
-        // SS220 random lawset begin
         var card = GetSlotItem(ent, LawUploadConsoleComponent.CardSlot);
         var board = GetSlotItem(ent, LawUploadConsoleComponent.BoardSlot);
         var station = _station.GetOwningStation(ent.Owner);
@@ -190,10 +180,8 @@ public sealed class LawUploadConsoleSystem : EntitySystem
             ent.Comp.Revision, status, card != null, board != null,
             powered && station != null && authorized && validBoard,
             aiLawset, aiLaws, borgLawset, borgLaws, boardLawset, LawIds(boardLawset)));
-        // SS220 random lawset end
     }
 
-    // SS220 random lawset begin
     private ProtoId<SiliconLawPrototype>[] LawIds(ProtoId<SiliconLawsetPrototype> lawset)
     {
         if (string.IsNullOrEmpty(lawset.Id) ||
@@ -202,5 +190,4 @@ public sealed class LawUploadConsoleSystem : EntitySystem
 
         return prototype.Laws.ToArray();
     }
-    // SS220 random lawset end
 }

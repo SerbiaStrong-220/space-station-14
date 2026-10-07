@@ -24,7 +24,6 @@ namespace Content.Server.Silicons.Laws;
 
 public sealed partial class SiliconLawSystem
 {
-    // SS220 random lawset begin
     [Dependency] private IRobustRandom _random = default!;
 
     private readonly Dictionary<EntityUid, (ProtoId<SiliconLawsetPrototype> Id, SiliconLawset Laws)> _stationLawsetCache = new();
@@ -222,5 +221,4 @@ public sealed partial class SiliconLawSystem
                 ApplyUploadedLawset((update, targetProvider), provider.Laws, lawset, provider.LawUploadSound);
         }
     }
-    // SS220 random lawset end
 }

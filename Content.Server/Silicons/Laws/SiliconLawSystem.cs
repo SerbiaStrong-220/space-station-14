@@ -39,6 +39,7 @@ public sealed partial class SiliconLawSystem : SharedSiliconLawSystem // SS220 r
     [Dependency] private readonly EmagSystem _emag = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!; // SS220 Antag ban fix
 
+    // private static readonly ProtoId<SiliconLawsetPrototype> DefaultCrewLawset = "Crewsimov"; SS220 random lawset
     /// <inheritdoc/>
     public override void Initialize()
     {
@@ -57,7 +58,7 @@ public sealed partial class SiliconLawSystem : SharedSiliconLawSystem // SS220 r
         SubscribeLocalEvent<SiliconLawProviderComponent, SiliconEmaggedEvent>(OnEmagLawsAdded);
         // SS220 random lawset begin
         SubscribeLocalEvent<SiliconLawProviderComponent, MapInitEvent>(OnLawProviderMapInit);
-        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);  // SS220 random lawset
+        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
         CacheRandomLawsetWeights();
         // SS220 random lawset end
@@ -107,7 +108,16 @@ public sealed partial class SiliconLawSystem : SharedSiliconLawSystem // SS220 r
         RemoveSubvertedSiliconRole(args.Mind);
 
     }
-
+    // SS220 random lawset begin
+    //private void OnBoundUIOpened(EntityUid uid, SiliconLawBoundComponent component, BoundUIOpenedEvent args)
+    //{
+    //    TryComp(uid, out IntrinsicRadioTransmitterComponent? intrinsicRadio);
+    //    var radioChannels = intrinsicRadio?.Channels;
+    //
+    //    var state = new SiliconLawBuiState(GetLaws(uid).Laws, radioChannels);
+    //    _userInterface.SetUiState(args.Entity, SiliconLawsUiKey.Key, state);
+    //}
+    // SS220 random lawset end
 
     private void OnToggleLawsScreen(EntityUid uid, SiliconLawBoundComponent component, ToggleLawsScreenEvent args)
     {
@@ -270,6 +280,23 @@ public sealed partial class SiliconLawSystem : SharedSiliconLawSystem // SS220 r
         return ev.Laws;
     }
 
+    // SS220 random lawset begin
+    /*     public override void NotifyLawsChanged(EntityUid uid, SoundSpecifier? cue = null)
+        {
+            base.NotifyLawsChanged(uid, cue);
+
+            if (!TryComp<ActorComponent>(uid, out var actor))
+                return;
+
+            var msg = Loc.GetString("laws-update-notify");
+            var wrappedMessage = Loc.GetString("chat-manager-server-wrap-message", ("message", msg));
+            _chatManager.ChatMessageToOne(ChatChannel.Server, msg, wrappedMessage, default, false, actor.PlayerSession.Channel, colorOverride: Color.Red);
+
+            if (cue != null && _mind.TryGetMind(uid, out var mindId, out _))
+                _roles.MindPlaySound(mindId, cue);
+        } */
+    // SS220 random lawset end
+
     /// <summary>
     /// Extract all the laws from a lawset's prototype ids.
     /// </summary>
@@ -306,6 +333,29 @@ public sealed partial class SiliconLawSystem : SharedSiliconLawSystem // SS220 r
         // SS220 random lawset end
         NotifyLawsChanged(target, cue);
     }
+
+    // SS220 random lawset begin
+    /*     protected override void OnUpdaterInsert(Entity<SiliconLawUpdaterComponent> ent, ref EntInsertedIntoContainerMessage args)
+        {
+            // TODO: Prediction dump this
+            if (!TryComp<SiliconLawProviderComponent>(args.Entity, out var provider))
+                return;
+
+            var lawset = provider.Lawset ?? GetLawset(provider.Laws);
+
+            var query = EntityManager.CompRegistryQueryEnumerator(ent.Comp.Components);
+
+            while (query.MoveNext(out var update))
+            {
+                if (TryComp<ShowCrewIconsComponent>(update, out var crewIconComp))
+                {
+                    crewIconComp.UncertainCrewBorder = DefaultCrewLawset != provider.Laws;
+                    Dirty(update, crewIconComp);
+                }
+                SetLaws(lawset.Laws, update, provider.LawUploadSound);
+            }
+        } */
+    // SS220 random lawset end
 
 }
 

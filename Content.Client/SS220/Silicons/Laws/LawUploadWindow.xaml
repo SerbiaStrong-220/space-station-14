@@ -1,5 +1,4 @@
 <!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
-<!-- ss220 random lawset begin -->
 <ui:FancyWindow xmlns="https://spacestation14.io"
                 xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls"
                 Title="{Loc 'law-upload-title'}"
@@ -69,4 +68,3 @@
         </PanelContainer>
     </BoxContainer>
 </ui:FancyWindow>
-<!-- ss220 random lawset end -->

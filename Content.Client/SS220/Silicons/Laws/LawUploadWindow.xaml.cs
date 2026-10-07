@@ -16,29 +16,23 @@ namespace Content.Client.SS220.Silicons.Laws;
 [GenerateTypedNameReferences]
 public sealed partial class LawUploadWindow : FancyWindow
 {
-    // SS220 random lawset begin
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    // SS220 random lawset end
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
     public event Action<LawUploadTarget, int>? OnApply;
     public event Action<string>? OnEject;
     private int _revision;
 
-    //ss220 random lawset begin
     private static readonly Color Cyan = Color.FromHex("#79CEDC");
     private static readonly Color Amber = Color.FromHex("#E6B86A");
     private static readonly Color Muted = Color.FromHex("#ACBAC6");
     private ProtoId<SiliconLawPrototype>[]? _aiLaws;
     private ProtoId<SiliconLawPrototype>[]? _borgLaws;
     private ProtoId<SiliconLawPrototype>[]? _boardLaws;
-    //ss220 random lawset end
 
     public LawUploadWindow()
     {
         RobustXamlLoader.Load(this);
-        // SS220 random lawset
         IoCManager.InjectDependencies(this);
-        //ss220 random lawset begin
         HeaderPanel.PanelOverride = PanelStyle("#1C2C38", Cyan);
         AccessPanel.PanelOverride = PanelStyle("#222C36", Color.FromHex("#415363"));
         CurrentPanel.PanelOverride = PanelStyle("#202A34", Cyan);
@@ -46,7 +40,6 @@ public sealed partial class LawUploadWindow : FancyWindow
         UploadPanel.PanelOverride = PanelStyle("#222C36", Color.FromHex("#415363"));
         CurrentTabs.SetTabTitle(0, Loc.GetString("law-upload-tab-ai"));
         CurrentTabs.SetTabTitle(1, Loc.GetString("law-upload-tab-borgs"));
-        //ss220 random lawset end
         EjectCard.OnPressed += _ => OnEject?.Invoke(LawUploadConsoleComponent.CardSlot);
         EjectBoard.OnPressed += _ => OnEject?.Invoke(LawUploadConsoleComponent.BoardSlot);
         ApplyAi.OnPressed += _ => Apply(LawUploadTarget.Ai);
@@ -62,10 +55,8 @@ public sealed partial class LawUploadWindow : FancyWindow
 
     public void UpdateState(LawUploadState state)
     {
-        // SS220 random lawset begin
         _revision = state.Revision;
 
-        //ss220 random lawset begin
         var statusColor = state.CanApply ? Color.FromHex("#8BD4A4") :
             state.Status is "law-upload-no-power" or "law-upload-no-station" or "law-upload-access-denied"
                 ? Color.FromHex("#F08B85")
@@ -85,18 +76,14 @@ public sealed partial class LawUploadWindow : FancyWindow
         AiCount.Text = Loc.GetString("law-upload-law-count", ("count", state.AiLaws.Length));
         BorgCount.Text = Loc.GetString("law-upload-law-count", ("count", state.BorgLaws.Length));
         BoardCount.Text = Loc.GetString("law-upload-law-count", ("count", state.BoardLaws.Length));
-        //ss220 random lawset end
 
         EjectCard.Disabled = !state.HasCard;
         EjectBoard.Disabled = !state.HasBoard;
         ApplyAi.Disabled = ApplyBorgs.Disabled = ApplyAll.Disabled = !state.CanApply;
-        // SS220 random lawset end
     }
 
-    // SS220 random lawset begin
     private string LawsetName(ProtoId<SiliconLawsetPrototype> id)
     {
-        // SS220 random lawset
         if (string.IsNullOrEmpty(id.Id))
             return string.Empty;
 
@@ -106,7 +93,6 @@ public sealed partial class LawUploadWindow : FancyWindow
         return prototype.Name is { } name ? Loc.GetString(name) : id.Id;
     }
 
-    //ss220 random lawset begin
     private void UpdateLawRows(BoxContainer container, ProtoId<SiliconLawPrototype>[] laws,
         ref ProtoId<SiliconLawPrototype>[]? previous, Color accent, string emptyMessage)
     {
@@ -159,6 +145,5 @@ public sealed partial class LawUploadWindow : FancyWindow
         BorderColor = accent,
         BorderThickness = new Thickness(0, 2, 0, 0),
     };
-    //ss220 random lawset end
-    // SS220 random lawset end
+
 }

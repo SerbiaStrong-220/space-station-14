@@ -13,12 +13,10 @@ public sealed partial class LawUploadConsoleComponent : Component
     public const string CardSlot = "law_upload_id";
     public const string BoardSlot = "circuit_holder";
 
-    // SS220 random lawset begin
     /// <summary>
     /// Monotonically increasing token used to reject stale UI messages.
     /// </summary>
     public int Revision;
-    // SS220 random lawset end
 }
 
 [Serializable, NetSerializable]
@@ -42,7 +40,6 @@ public sealed class LawUploadState(
     bool hasCard,
     bool hasBoard,
     bool canApply,
-    // SS220 random lawset begin
     ProtoId<SiliconLawsetPrototype> aiLawset,
     ProtoId<SiliconLawPrototype>[] aiLaws,
     ProtoId<SiliconLawsetPrototype> borgLawset,
@@ -61,7 +58,6 @@ public sealed class LawUploadState(
     public readonly ProtoId<SiliconLawPrototype>[] BorgLaws = borgLaws;
     public readonly ProtoId<SiliconLawsetPrototype> BoardLawset = boardLawset;
     public readonly ProtoId<SiliconLawPrototype>[] BoardLaws = boardLaws;
-    // SS220 random lawset end
 }
 
 [Serializable, NetSerializable]
