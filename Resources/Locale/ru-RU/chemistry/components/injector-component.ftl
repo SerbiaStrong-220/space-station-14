@@ -72,4 +72,3 @@ injector-component-spray-injecting-user = Вы начинаете подгота
 injector-component-spray-injecting-target = { CAPITALIZE(THE($user)) } пытается направить на вас распылитель!
 
 injector-component-feel-prick-message = Вы чувствуете легкий укол!
-
