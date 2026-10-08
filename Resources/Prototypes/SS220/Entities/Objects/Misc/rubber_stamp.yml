@@ -195,3 +195,4 @@
     interfaces:
       enum.ChameleonStampUiKey.Key:
         type: ChameleonStampBoundUserInterface
+

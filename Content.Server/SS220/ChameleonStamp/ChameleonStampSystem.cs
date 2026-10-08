@@ -1,5 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Interaction;
+using Content.Shared.Paper;
 using Content.Shared.SS220.ChameleonStamp;
 
 namespace Content.Server.SS220.ChameleonStamp;
@@ -12,6 +14,16 @@ public sealed partial class ChameleonStampSystem : SharedChameleonStampSystem
 
         SubscribeLocalEvent<ChameleonStampComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<ChameleonStampComponent, ChameleonStampSelectedMessage>(OnSelected);
+
+        SubscribeLocalEvent<PaperComponent, AfterInteractUsingEvent>(OnPaperInteractUsing);
+    }
+
+    private void OnPaperInteractUsing(Entity<PaperComponent> paper, ref AfterInteractUsingEvent args)
+    {
+        if (!TryComp<ChameleonStampComponent>(args.Used, out _))
+            return;
+
+        EnsureComp<ChameleonForgedStampComponent>(paper.Owner);
     }
 
     private void OnMapInit(Entity<ChameleonStampComponent> ent, ref MapInitEvent args)
