@@ -82,7 +82,8 @@ public sealed partial class ExperienceAdditionSystem : EntitySystem
         EnqueueRecalculation(entity);
         args.Changed = additionComp.DefinitionId == args.DefinitionId;
 
-        DirtyField(entity, additionComp, nameof(ExperienceAdditionComponent.DefinitionId));
+        if (args.Changed)
+            DirtyField(entity, additionComp, nameof(ExperienceAdditionComponent.DefinitionId));
     }
 }
 

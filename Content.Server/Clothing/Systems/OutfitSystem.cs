@@ -115,7 +115,7 @@ public sealed class OutfitSystem : EntitySystem
         {
             RemComp<JobBackgroundSublevelAddComponent>(target);
 
-            var changeDefEv = new TryChangeExperienceDefinition(definitionId, false);
+            var changeDefEv = new TryChangeExperienceDefinition(definitionId, true);
             RaiseLocalEvent(target, ref changeDefEv);
         }
         // SS220-experience-update-end

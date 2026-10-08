@@ -65,7 +65,10 @@ public sealed partial class ExperienceSystem : EntitySystem
             }
         }
 
-        if (entity.Comp.DefinitionId is null || !_prototype.TryIndex(entity.Comp.DefinitionId, out var skillAddProto))
+        if (entity.Comp.Forced)
+            return;
+
+        if (entity.Comp.DefinitionId is null || !_prototype.Resolve(entity.Comp.DefinitionId, out var skillAddProto))
             return;
 
         if (skillAddProto.Skills.TryGetValue(args.SkillTree, out var infoProto))
@@ -79,8 +82,11 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (args.DenyChanges)
             return;
 
-        foreach (var (_, specifier) in entity.Comp.Sources)
+        foreach (var (source, specifier) in entity.Comp.Sources)
         {
+            if (entity.Comp.Forced && !ExperienceAdditionComponent.AdminForceWhitelistSources.Contains(source))
+                continue;
+
             args.FreeSublevelPoints += specifier.FreeSublevelPoints;
         }
     }
@@ -118,9 +124,6 @@ public sealed partial class ExperienceSystem : EntitySystem
         }
     }
 
-    #region Skill
-
-
     private void SublevelAddOnSkillTreeAdded<T>(Entity<T> entity, ref SkillTreeAdded args) where T : BaseSublevelAddComponent
     {
         if (args.DenyChanges)
@@ -132,20 +135,11 @@ public sealed partial class ExperienceSystem : EntitySystem
         args.Info.Sublevel += sublevels;
     }
 
-    #endregion
-
-    #region FreeSublevelPoints
-
     private void SublevelAddOnSublevelAdditionPointInitialResolve<T>(Entity<T> entity, ref SublevelAdditionPointInitialResolve args) where T : BaseSublevelAddComponent
     {
         // we dont care about args.DenyChanges because it marks spent points which applied to entity
         args.FreeSublevelPoints -= entity.Comp.SpentSublevelPoints;
     }
-
-    #endregion
-
-    #region Knowledge
-
 
     private void ExperienceAdditionOnKnowledgeInitialResolve(Entity<ExperienceAdditionComponent> entity, ref KnowledgeInitialResolve args)
     {
@@ -153,13 +147,22 @@ public sealed partial class ExperienceSystem : EntitySystem
             return;
 
         var tmp = new HashSet<ProtoId<KnowledgePrototype>>(4);
-        foreach (var (_, specifier) in entity.Comp.Sources)
+        foreach (var (source, specifier) in entity.Comp.Sources)
         {
+            if (entity.Comp.Forced && !ExperienceAdditionComponent.AdminForceWhitelistSources.Contains(source))
+                continue;
+
             tmp.UnionWith(specifier.Knowledges);
         }
 
         args.Knowledges.UnionWith(tmp);
-    }
 
-    #endregion
+        if (entity.Comp.Forced)
+            return;
+
+        if (entity.Comp.DefinitionId is null || !_prototype.Resolve(entity.Comp.DefinitionId, out var knowledgeAddProto))
+            return;
+
+        args.Knowledges.UnionWith(knowledgeAddProto.Knowledges);
+    }
 }

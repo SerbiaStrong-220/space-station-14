@@ -45,6 +45,7 @@ public sealed partial class ExperienceEditorSystem : EntitySystem
 
         // TODO: make it definable by admin
         experienceAddition.Forced = true;
+        DirtyField(targetEntity, experienceAddition, nameof(ExperienceAdditionComponent.Forced));
 
         var correctSkillDict = ev.Data.SkillDictionary.Values
             .SelectMany(list => list)
