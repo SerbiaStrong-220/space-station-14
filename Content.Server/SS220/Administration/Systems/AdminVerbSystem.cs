@@ -6,6 +6,7 @@ using Content.Server.Administration.Managers;
 using Content.Server.EUI;
 using Content.Server.Administration.UI;
 using Content.Shared.Administration;
+using Content.Shared.Delivery;
 using Content.Shared.Sprite;
 using Content.Shared.SS220.LimitationRevive;
 using Content.Shared.Verbs;
@@ -95,6 +96,21 @@ public sealed class AdminVerbSystem : EntitySystem
             }
         };
         args.Verbs.Add(statusesVerb);
+
+        if (TryComp<DeliveryComponent>(args.Target, out _))
+        {
+            Verb deliveryVerb = new()
+            {
+                Text = Loc.GetString("admin-verbs-delivery-title"),
+                Category = VerbCategory.Debug,
+                Act = () =>
+                {
+                    var deliveryEui = new ManageDeliveryEui(args.Target, Name(args.Target));
+                    _euiManager.OpenEui(deliveryEui, player);
+                }
+            };
+            args.Verbs.Add(deliveryVerb);
+        }
 
         Verb scaleVerb = new()
         {

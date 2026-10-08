@@ -20,6 +20,19 @@ admin-verbs-statuses-active = Активные статусы:
 admin-verbs-statuses-add-tooltip = Добавить выбранный статус
 admin-verbs-statuses-remove-tooltip = Удалить выбранный статус
 
+# Commands (Delivery)
+admin-verbs-delivery-title = Изменить посылку
+admin-verbs-delivery-target = Посылка: { $name }
+admin-verbs-delivery-reward-label = Награда для карго (до модификаторов)
+admin-verbs-delivery-reward-apply = Применить награду
+admin-verbs-delivery-timer-label = Оставшееся время доставки
+admin-verbs-delivery-timer-current = Осталось: { $time }
+admin-verbs-delivery-timer-none = У этой посылки нет таймера
+admin-verbs-delivery-timer-apply = Применить время
+admin-verbs-delivery-recipient-label = Адресат
+admin-verbs-delivery-recipient-current = Сейчас: { $name }, { $job }
+admin-verbs-delivery-recipient-apply = Применить адресата
+
 # Commands (Scale)
 admin-verbs-scale-title = Изменить масштаб
 admin-verbs-scale-x-prompt = Ширина X (Текущая { $current })
