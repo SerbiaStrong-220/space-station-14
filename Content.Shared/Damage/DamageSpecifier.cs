@@ -136,7 +136,8 @@ namespace Content.Shared.Damage
             DamageSpecifier newDamage = new();
             newDamage.DamageDict.EnsureCapacity(damageSpec.DamageDict.Count);
 
-            var minCoefficient = 1f; // SS220 penetration refactor
+            FixedPoint2 coefficientSum = 0; // SS220 penetration refactor
+            FixedPoint2 totalWeight = 0; // SS220 penetration refactor
 
             foreach (var (key, value) in damageSpec.DamageDict)
             {
@@ -162,7 +163,8 @@ namespace Content.Shared.Damage
 
                     newValue *= Math.Clamp(coefficient + damageSpec.ArmourPiercing.Float() / 100f, lowerCap, upperCap);
 
-                    minCoefficient = Math.Min(minCoefficient, coefficient);
+                    coefficientSum += coefficient * value;
+                    totalWeight += value;
                 }
                 //SS220 armor piercing added end
 
@@ -171,9 +173,12 @@ namespace Content.Shared.Damage
             }
 
             //SS220 armor piercing added begin
+            if (totalWeight == 0)
+                totalWeight = 1;
+
             newDamage.ArmourPiercing = FixedPoint2.Max(
                 FixedPoint2.Min(FixedPoint2.Zero, damageSpec.ArmourPiercing),
-                damageSpec.ArmourPiercing - (1f - minCoefficient) * 100f);
+                damageSpec.ArmourPiercing - (1f - (coefficientSum / totalWeight)) * 100f);
             //SS220 armor piercing added end
 
             return newDamage;
