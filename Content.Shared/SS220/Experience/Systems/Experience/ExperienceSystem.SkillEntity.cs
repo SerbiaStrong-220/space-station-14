@@ -185,7 +185,7 @@ public sealed partial class ExperienceSystem
         if (!_prototype.TryIndex(proto, out var addSkill))
             return;
 
-        var dictRef = GetResultSkills(entity);
+        var dictRef = entity.Comp.Skills;
 
         foreach (var (key, ensureInfo) in addSkill.Skills)
         {

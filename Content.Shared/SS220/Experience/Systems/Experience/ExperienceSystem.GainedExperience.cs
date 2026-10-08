@@ -52,7 +52,14 @@ public sealed partial class ExperienceSystem : EntitySystem
             return;
 
         if (entity.Comp.Forced)
+        {
             args.DenyChanges = true;
+            args.Info = new SkillTreeInfo()
+            {
+                Level = ExperienceSystem.StartSkillLevel,
+                Sublevel = ExperienceSystem.StartSublevel,
+            };
+        }
 
         foreach (var (source, specifier) in entity.Comp.Sources)
         {
@@ -82,6 +89,12 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (args.DenyChanges)
             return;
 
+        if (entity.Comp.Forced)
+        {
+            args.DenyChanges = true;
+            args.FreeSublevelPoints = 0;
+        }
+
         foreach (var (source, specifier) in entity.Comp.Sources)
         {
             if (entity.Comp.Forced && !ExperienceAdditionComponent.AdminForceWhitelistSources.Contains(source))
@@ -89,6 +102,14 @@ public sealed partial class ExperienceSystem : EntitySystem
 
             args.FreeSublevelPoints += specifier.FreeSublevelPoints;
         }
+
+        if (entity.Comp.Forced)
+            return;
+
+        if (entity.Comp.DefinitionId is null || !_prototype.Resolve(entity.Comp.DefinitionId, out var experienceDefinition))
+            return;
+
+        args.FreeSublevelPoints += experienceDefinition.AddSublevelPoints;
     }
 
     private void InitializeExperienceComp(Entity<ExperienceComponent> entity)
@@ -145,6 +166,9 @@ public sealed partial class ExperienceSystem : EntitySystem
     {
         if (args.DenyChanges)
             return;
+
+        if (entity.Comp.Forced)
+            args.DenyChanges = true;
 
         var tmp = new HashSet<ProtoId<KnowledgePrototype>>(4);
         foreach (var (source, specifier) in entity.Comp.Sources)

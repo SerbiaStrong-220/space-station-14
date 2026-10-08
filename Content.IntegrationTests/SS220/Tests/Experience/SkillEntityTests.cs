@@ -92,7 +92,7 @@ public sealed class SkillEntityTests
         {
             Assert.That(nullableSkillEntity, Is.Not.Null);
 
-            Assert.That(skillEntities, Has.Length.EqualTo(2));
+            Assert.That(skillEntities, Has.Length.EqualTo(1));
 
             Assert.That(nullableSkillEntity, Is.AnyOf(skillEntities));
         });

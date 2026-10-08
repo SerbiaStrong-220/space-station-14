@@ -21,17 +21,6 @@
   - Medical
   - Maintenance
   - Chemistry
-  special:
-  - !type:AddComponentSpecial
-    components:
-    - type: MentorRole
-      teachInfo:
-        Medicine:
-          multiplier: 1.5
-          maxBuffSkillLevel: 3
-        Anatomy:
-          multiplier: 1.5
-          maxBuffSkillLevel: 3
 
 - type: startingGear
   id: SeniorPhysicianGear

@@ -2,6 +2,7 @@
 
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Experience;
 
@@ -37,4 +38,29 @@ public sealed partial class ExperienceAdditionComponent : Component
 }
 
 [DataDefinition]
-public readonly partial record struct ExperienceAddSpecifier(int FreeSublevelPoints, HashSet<ProtoId<KnowledgePrototype>> Knowledges, Dictionary<ProtoId<SkillTreePrototype>, SkillTreeInfo> Skills);
+[Serializable, NetSerializable]
+public partial struct ExperienceAddSpecifier
+{
+    [ViewVariables(VVAccess.ReadOnly)]
+    public int FreeSublevelPoints;
+
+    [ViewVariables(VVAccess.ReadOnly)]
+    public HashSet<ProtoId<KnowledgePrototype>> Knowledges;
+
+    [ViewVariables(VVAccess.ReadOnly)]
+    public Dictionary<ProtoId<SkillTreePrototype>, SkillTreeInfo> Skills;
+
+    public ExperienceAddSpecifier(int freeSublevelPoints, HashSet<ProtoId<KnowledgePrototype>> knowledges, Dictionary<ProtoId<SkillTreePrototype>, SkillTreeInfo> skills)
+    {
+        FreeSublevelPoints = freeSublevelPoints;
+        Knowledges = knowledges;
+        Skills = skills;
+    }
+
+    public ExperienceAddSpecifier()
+    {
+        FreeSublevelPoints = 0;
+        Knowledges = [];
+        Skills = [];
+    }
+}

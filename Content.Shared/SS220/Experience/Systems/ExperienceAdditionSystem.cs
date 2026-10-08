@@ -30,7 +30,6 @@ public sealed partial class ExperienceAdditionSystem : EntitySystem
         _recalculateQueue.Clear();
     }
 
-
     public void UpsertSpecifier(EntityUid uid, ExperienceAddSource source, ExperienceAddSpecifier? specifier)
     {
         var additionComp = EnsureComp<ExperienceAdditionComponent>(uid);
@@ -46,6 +45,20 @@ public sealed partial class ExperienceAdditionSystem : EntitySystem
         }
 
         DirtyField(uid, additionComp, nameof(ExperienceAdditionComponent.Sources));
+
+        EnqueueRecalculation(uid);
+    }
+
+    public void RemoveAdminAdded(EntityUid uid)
+    {
+        if (!TryComp<ExperienceAdditionComponent>(uid, out var comp))
+            return;
+
+        comp.Sources.Remove(ExperienceAddSource.Admin);
+        comp.Forced = false;
+
+        DirtyField(uid, comp, nameof(ExperienceAdditionComponent.Sources));
+        DirtyField(uid, comp, nameof(ExperienceAdditionComponent.Forced));
 
         EnqueueRecalculation(uid);
     }
