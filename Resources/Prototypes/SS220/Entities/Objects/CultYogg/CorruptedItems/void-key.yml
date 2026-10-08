@@ -1,11 +1,14 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-  parent: [BaseItem, CultYoggRestrictedItem]
+  parent: [BaseItem, BaseRestrictedLivingItem]
   id: VoidKey
   name: void key
   description: Opens portals to the VOID
   components:
+  - type: Tag
+    tags:
+    - YoggEquipment
   - type: Sprite
     sprite: SS220/Objects/CultYogg/CorruptedItems/voidkey.rsi
     state: icon
