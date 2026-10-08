@@ -28,11 +28,12 @@
       mindRoles:
         - MindRoleCultYogg
       components:
-      - type: AntagFreeSublevelPointsAdd
-        addFreeSublevelPoints: 5
-      - type: AntagAddKnowledge
-        knowledgesToAdd:
-        - CultYoggKnowledge
+      - type: ExperienceAddition
+        sources:
+          Antag:
+            freeSublevelPoints: 5
+            knowledges:
+            - CultYoggKnowledge
 
 - type: entity
   id: CultYoggRuleMidPop
@@ -140,9 +141,10 @@
       - MindRoleTraitor
       # SS220-experience-update-begin
       components:
-      - type: AntagFreeSublevelPointsAdd
-        addFreeSublevelPoints: 10
-      - type: AntagAddKnowledge
-        knowledgesToAdd:
-        - SyndicateAgentKnowledge
+      - type: ExperienceAddition
+        sources:
+          Antag:
+            freeSublevelPoints: 10
+            knowledges:
+            - SyndicateAgentKnowledge
       # SS220-experience-update-end

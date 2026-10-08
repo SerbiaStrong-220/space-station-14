@@ -22,12 +22,8 @@
   - TemperatureSpeed
   # SS220-experience-start-begin
   - Experience
-  - AntagFreeSublevelPointsAdd
-  - RoleExperienceAdd
+  - ExperienceAddition
   - AdminForcedExperienceAdd
-  - JobBackgroundSublevelAdd
-  - MentorRole
-  - AntagAddKnowledge
   # SS220-experience-start-end
   # traits
   - BlackAndWhiteOverlay

@@ -1,45 +1,58 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.Experience;
-using Content.Shared.SS220.Experience.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.Experience;
 
 public sealed partial class ExperienceAdditionSystem : EntitySystem
 {
-    [Dependency] private ExperienceSystem _experience = default!;
-
-    private static readonly ProtoId<KnowledgePrototype> CultYoggKnowledge = "CultYoggKnowledge";
-
     public override void Initialize()
     {
-        SubscribeLocalEvent<ExperienceComponent, GotCultifiedEvent>(OnCultified);
-        SubscribeLocalEvent<ExperienceComponent, LiberationFromCultEvent>(OnLiberationFromCult);
+        SubscribeLocalEvent<ExperienceComponent, AddExperience>(OnAddExperience);
+        SubscribeLocalEvent<ExperienceComponent, RemoveExperience>(OnRemoveExperience);
+
+        InitializeOtherSubscription();
     }
 
-    // !! DO NOT DO THE SAME !!
-    // It requires own system with dict like <obj, int> to resolve different sources of points
-    // just don't have time to implement & test it =(
-    // so you can actually make `god-add-experience` comp with own system to kill 10+ components and also do somewhat with role add knowledges or points
-    // zero idea should it be added with mindrole feels kinda other thing for this system
-    private void OnCultified(Entity<ExperienceComponent> entity, ref GotCultifiedEvent args)
+    private void OnAddExperience(Entity<ExperienceComponent> entity, ref AddExperience args)
     {
-        _experience.TryAddKnowledge(entity!, CultYoggKnowledge);
-        var addPointsComp = EnsureComp<AntagFreeSublevelPointsAddComponent>(entity);
-
-        if (addPointsComp.AddFreeSublevelPoints < 5)
-            addPointsComp.AddFreeSublevelPoints = 5;
+        UpsertSpecifier(entity, args.Source, args.Specifier);
     }
 
-    private void OnLiberationFromCult(Entity<ExperienceComponent> entity, ref LiberationFromCultEvent args)
+    private void OnRemoveExperience(Entity<ExperienceComponent> entity, ref RemoveExperience args)
     {
-        _experience.TryRemoveKnowledge(entity!, CultYoggKnowledge);
-        var addPointsComp = EnsureComp<AntagFreeSublevelPointsAddComponent>(entity);
+        UpsertSpecifier(entity, args.Source, null);
+    }
 
-        if (addPointsComp.AddFreeSublevelPoints == 5)
-            RemComp<AntagFreeSublevelPointsAddComponent>(entity);
+
+    private void UpsertSpecifier(EntityUid uid, ExperienceAddSource source, ExperienceAddSpecifier? specifier)
+    {
+        var additionComp = EnsureComp<ExperienceAdditionComponent>(uid);
+
+        if (specifier is { } resolvedSpecifier)
+        {
+            // Yes we drop old one, can be discussed
+            additionComp.Sources[source] = resolvedSpecifier;
+        }
+        else
+        {
+            additionComp.Sources.Remove(source);
+        }
+
+        Dirty(uid, additionComp);
+
+        CallRecalculation(uid);
+    }
+
+    private void CallRecalculation(EntityUid uid)
+    {
+        var recalculateEv = new RecalculateEntityExperience();
+        RaiseLocalEvent(uid, ref recalculateEv);
     }
 }
 
+[ByRefEvent]
+public record struct AddExperience(ExperienceAddSource Source, ExperienceAddSpecifier Specifier);
+
+[ByRefEvent]
+public record struct RemoveExperience(ExperienceAddSource Source);

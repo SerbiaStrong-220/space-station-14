@@ -263,11 +263,12 @@
       - MindRoleTraitor
       # SS220-experience-update-begin
       components:
-      - type: AntagFreeSublevelPointsAdd
-        addFreeSublevelPoints: 10
-      - type: AntagAddKnowledge
-        knowledgesToAdd:
-        - SyndicateAgentKnowledge
+      - type: ExperienceAddition
+        sources:
+          Antag:
+            freeSublevelPoints: 10
+            knowledges:
+            - SyndicateAgentKnowledge
       # SS220-experience-update-end
 
 #- type: entity
@@ -292,11 +293,12 @@
       - MindRoleTraitorReinforcement
       # SS220-experience-update-begin
       components:
-      - type: AntagFreeSublevelPointsAdd
-        addFreeSublevelPoints: 10
-      - type: AntagAddKnowledge
-        knowledgesToAdd:
-        - SyndicateAgentKnowledge
+      - type: ExperienceAddition
+        sources:
+          Antag:
+            freeSublevelPoints: 10
+            knowledges:
+            - SyndicateAgentKnowledge
       # SS220-experience-update-end
   #ss220 reinforcement objective fix begin
   - type: AntagRandomObjectives
@@ -322,8 +324,11 @@
         sound: /Audio/Ambience/Antag/changeling_start.ogg
       components:
       # SS220-experience-update-begin
-      - type: AntagFreeSublevelPointsAdd
-        addFreeSublevelPoints: 10
+      - type: ExperienceAddition
+        sources:
+          Antag:
+            freeSublevelPoints: 10
+            knowledges: []
       # SS220-experience-update-end
       - type: ChangelingDevour
       - type: ChangelingIdentity
@@ -366,8 +371,11 @@
       startingGear: HeadRevGear
       components:
       # SS220-experience-update-begin
-      - type: AntagFreeSublevelPointsAdd
-        addFreeSublevelPoints: 10
+      - type: ExperienceAddition
+        sources:
+          Antag:
+            freeSublevelPoints: 10
+            knowledges: []
       # SS220-experience-update-end
       - type: Revolutionary
       - type: HeadRevolutionary

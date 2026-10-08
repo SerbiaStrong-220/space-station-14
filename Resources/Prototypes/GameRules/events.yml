@@ -742,11 +742,12 @@
       - MindRoleTraitorSleeper
       # SS220-experience-update-begin
       components:
-      - type: AntagFreeSublevelPointsAdd
-        addFreeSublevelPoints: 10
-      - type: AntagAddKnowledge
-        knowledgesToAdd:
-        - SyndicateAgentKnowledge
+      - type: ExperienceAddition
+        sources:
+          Antag:
+            freeSublevelPoints: 10
+            knowledges:
+            - SyndicateAgentKnowledge
       # SS220-experience-update-end
 
 - type: entity

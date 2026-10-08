@@ -1,5 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Robust.Shared.Prototypes;
+
 namespace Content.Shared.SS220.Experience.Systems;
 
 public sealed partial class ExperienceSystem : EntitySystem
@@ -8,9 +10,12 @@ public sealed partial class ExperienceSystem : EntitySystem
     {
         SubscribeLocalEvent<ExperienceComponent, RecalculateEntityExperience>(OnRecalculateEntityExperience);
 
-        SubscribeLocalEvent<AntagFreeSublevelPointsAddComponent, SublevelAdditionPointInitialResolve>(AddFreeSublevelPointOnSublevelAdditionPointInitialResolve);
-        SubscribeLocalEvent<AntagFreeSublevelPointsAddComponent, MapInitEvent>(AddFreeSublevelPointOnMapInit);
+        SubscribeLocalEvent<ExperienceAdditionComponent, MapInitEvent>(ExperienceAdditionOnMapInit);
 
+        SubscribeLocalEvent<ExperienceAdditionComponent, SublevelAdditionPointInitialResolve>(ExperienceAdditionOnSublevelAdditionPointInitialResolve);
+        SubscribeLocalEvent<ExperienceAdditionComponent, KnowledgeInitialResolve>(ExperienceAdditionOnKnowledgeInitialResolve);
+
+        // TODO: also this one merge
         SubscribeAddComponentToInit<AdminForcedExperienceAddComponent>(SkillForceSetOnSkillTreeAdded, KnowledgeForceSetOnKnowledgeInitialResolve, ForceSetAdditionOnSublevelAdditionPointInitialResolve);
         SubscribeAddComponentToInit<RoleExperienceAddComponent>(SkillAddOnSkillTreeAdded, KnowledgeAddOnKnowledgeInitialResolve, AdditionOnSublevelAdditionPointInitialResolve);
 
@@ -46,15 +51,21 @@ public sealed partial class ExperienceSystem : EntitySystem
         InitializeExperienceComp(entity);
     }
 
-    private void AddFreeSublevelPointOnMapInit<T>(Entity<T> entity, ref MapInitEvent _) where T : BaseFreeSublevelPointsAddComponent
+    private void ExperienceAdditionOnMapInit(Entity<ExperienceAdditionComponent> entity, ref MapInitEvent _)
     {
         var recalculateEv = new RecalculateEntityExperience();
         RaiseLocalEvent(entity, ref recalculateEv);
     }
 
-    private void AddFreeSublevelPointOnSublevelAdditionPointInitialResolve<T>(Entity<T> entity, ref SublevelAdditionPointInitialResolve args) where T : BaseFreeSublevelPointsAddComponent
+    private void ExperienceAdditionOnSublevelAdditionPointInitialResolve(Entity<ExperienceAdditionComponent> entity, ref SublevelAdditionPointInitialResolve args)
     {
-        args.FreeSublevelPoints += entity.Comp.AddFreeSublevelPoints;
+        if (args.DenyChanges)
+            return;
+
+        foreach (var (_, specifier) in entity.Comp.Sources)
+        {
+            args.FreeSublevelPoints += specifier.FreeSublevelPoints;
+        }
     }
 
     private void InitializeExperienceComp(Entity<ExperienceComponent> entity)
@@ -204,6 +215,20 @@ public sealed partial class ExperienceSystem : EntitySystem
             args.Knowledges.UnionWith(skillAddProto.Knowledges);
 
         args.Knowledges.UnionWith(entity.Comp.Knowledges);
+    }
+
+    private void ExperienceAdditionOnKnowledgeInitialResolve(Entity<ExperienceAdditionComponent> entity, ref KnowledgeInitialResolve args)
+    {
+        if (args.DenyChanges)
+            return;
+
+        var tmp = new HashSet<ProtoId<KnowledgePrototype>>(4);
+        foreach (var (_, specifier) in entity.Comp.Sources)
+        {
+            tmp.UnionWith(specifier.Knowledges);
+        }
+
+        args.Knowledges.UnionWith(tmp);
     }
 
     #endregion
