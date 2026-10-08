@@ -31,16 +31,13 @@ public sealed partial class ChameleonForgedStampSystem : EntitySystem
             return;
         }
 
-        if (TryComp<AntagAddKnowledgeComponent>(examiner, out var antagAdd)
-            && antagAdd.KnowledgesToAdd.Contains(SyndicateAgentKnowledge))
+        if (_experience.HaveKnowledge(examiner, SyndicateAgentKnowledge))
         {
             PushHint(ref args);
             return;
         }
 
-        TryComp<ExperienceComponent>(examiner, out var experience);
-
-        if (_experience.HaveSkill((examiner, experience), BureaucratSkill))
+        if (_experience.HaveSkill(examiner, BureaucratSkill))
             PushHint(ref args);
     }
 
