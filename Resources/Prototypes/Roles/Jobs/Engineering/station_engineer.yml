@@ -17,6 +17,7 @@
   - External
   extendedAccess:
   - Atmospherics
+  economySalaryPrototype: Worker # SS220 Economy
 
 - type: startingGear
   id: StationEngineerGear

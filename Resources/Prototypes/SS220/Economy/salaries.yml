@@ -1,0 +1,17 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: economySalary
+  id: Unpaid
+  amount: 0
+
+- type: economySalary
+  id: Civilian
+  amount: 250
+
+- type: economySalary
+  id: Worker
+  amount: 500
+
+- type: economySalary
+  id: SeniorStaff
+  amount: 700

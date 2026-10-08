@@ -32,6 +32,7 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
+  economySalaryPrototype: Civilian # SS220 Economy
 
 - type: startingGear
   id: SecurityCadetGear

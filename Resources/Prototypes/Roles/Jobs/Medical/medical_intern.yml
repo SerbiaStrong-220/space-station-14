@@ -20,6 +20,7 @@
   access:
   - Medical
   - Maintenance
+  economySalaryPrototype: Civilian # SS220 Economy
 
 - type: startingGear
   id: MedicalInternGear

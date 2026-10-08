@@ -57,6 +57,7 @@
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
+  economySalaryPrototype: SeniorStaff
 
 - type: startingGear
   id: MagistrateGear

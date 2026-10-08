@@ -25,6 +25,7 @@
     - WhitelistChameleonIdCard
   - type: StealTarget
     stealGroup: IDCard
+  - type: EconomyBankCard # SS220 Economy
 
 #IDs with layers
 

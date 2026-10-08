@@ -21,6 +21,7 @@
   - Maintenance
   - Engineering
   - External
+  economySalaryPrototype: Civilian # SS220 Economy
 
 - type: startingGear
   id: TechnicalAssistantGear

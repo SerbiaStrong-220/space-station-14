@@ -15,6 +15,7 @@
   - !type:AddComponentSpecial
     components:
     - type: BibleUser #Lets them heal with bibles
+  economySalaryPrototype: Worker # SS220 Economy
 
 - type: startingGear
   id: ChaplainGear

@@ -1,0 +1,28 @@
+{
+    "version": 1,
+    "license": "CC0-1.0",
+    "copyright": "Created by EmoGarbage, resprite by BIG_Zi_348 for SS220",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "icon"
+        },
+        {
+            "name": "off"
+        },
+        {
+            "name": "on",
+            "delays": [
+                [
+                    2,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        }
+    ]
+}
