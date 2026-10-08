@@ -25,11 +25,6 @@ public sealed partial class ChameleonForgedStampSystem : EntitySystem
     {
         var examiner = args.Examiner;
 
-        if (HasComp<BypassKnowledgeCheckComponent>(examiner))
-        {
-            PushHint(ref args);
-            return;
-        }
 
         if (_experience.HaveKnowledge(examiner, SyndicateAgentKnowledge))
         {
