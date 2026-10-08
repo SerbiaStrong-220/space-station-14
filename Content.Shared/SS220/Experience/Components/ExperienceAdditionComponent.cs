@@ -9,6 +9,7 @@ namespace Content.Shared.SS220.Experience;
 // This can be ProtoId, but for now it is pointless
 public enum ExperienceAddSource : int
 {
+    Admin = 0,
     RoundStart,
     Job,
     Role,
@@ -16,13 +17,24 @@ public enum ExperienceAddSource : int
 }
 
 [RegisterComponent, NetworkedComponent]
-[AutoGenerateComponentState]
+[AutoGenerateComponentState(fieldDeltas: true)]
 public sealed partial class ExperienceAdditionComponent : Component
 {
-    [AutoNetworkedField]
-    [ViewVariables, AlwaysPushInheritance]
+    [AlwaysPushInheritance]
+    [DataField, AutoNetworkedField]
     public Dictionary<ExperienceAddSource, ExperienceAddSpecifier> Sources = new();
+
+    [AlwaysPushInheritance]
+    [DataField, AutoNetworkedField]
+    public ProtoId<ExperienceDefinitionPrototype>? DefinitionId;
+
+    [DataField, AutoNetworkedField]
+    public bool Forced;
+
+    // NOTE: If you need to more 'flags' like Forced
+    // Its better to actually make this changeable field
+    public static readonly HashSet<ExperienceAddSource> AdminForceWhitelistSources = [ExperienceAddSource.Admin, ExperienceAddSource.Antag];
 }
 
 [DataDefinition]
-public readonly partial record struct ExperienceAddSpecifier(int FreeSublevelPoints, HashSet<ProtoId<KnowledgePrototype>> Knowledges);
+public readonly partial record struct ExperienceAddSpecifier(int FreeSublevelPoints, HashSet<ProtoId<KnowledgePrototype>> Knowledges, Dictionary<ProtoId<SkillTreePrototype>, SkillTreeInfo> Skills);

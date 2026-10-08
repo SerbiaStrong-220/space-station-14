@@ -120,7 +120,7 @@
     layer: 1
   #other
   - type: Experience
-  - type: RoleExperienceAdd
+  - type: ExperienceAddition
     definitionId: MiGoRoleExperience
   - type: MovementSpeedModifier
     baseWalkSpeed : 6

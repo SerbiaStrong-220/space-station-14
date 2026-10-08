@@ -15,6 +15,7 @@ public sealed partial class ExperienceEditorSystem : EntitySystem
 {
     [Dependency] private IAdminLogManager _adminLog = default!;
     [Dependency] private IConGroupController _groupController = default!;
+    [Dependency] private ExperienceAdditionSystem _experienceAddition = default!;
 
     private const string EditorCommand = "expeditor";
 
@@ -40,15 +41,16 @@ public sealed partial class ExperienceEditorSystem : EntitySystem
             return;
         }
 
-        var forceAddComponent = EnsureComp<AdminForcedExperienceAddComponent>(targetEntity);
+        var experienceAddition = EnsureComp<ExperienceAdditionComponent>(targetEntity);
 
-        forceAddComponent.Knowledges = ev.Data.Knowledges;
-        forceAddComponent.Skills = ev.Data.SkillDictionary.Values
+        // TODO: make it definable by admin
+        experienceAddition.Forced = true;
+
+        var correctSkillDict = ev.Data.SkillDictionary.Values
             .SelectMany(list => list)
             .ToDictionary(view => view.SkillTreeId, item => item.Info);
 
-        var afterGainedEv = new RecalculateEntityExperience();
-        RaiseLocalEvent(targetEntity, ref afterGainedEv);
+        _experienceAddition.UpsertSpecifier(targetEntity, ExperienceAddSource.Admin, new ExperienceAddSpecifier(0, ev.Data.Knowledges, correctSkillDict));
     }
 
     private void OnChangePlayerRequest(ChangeEntityExperiencePlayerRequest ev, EntitySessionEventArgs args)
@@ -86,21 +88,18 @@ public sealed partial class ExperienceEditorSystem : EntitySystem
         playerChangedComp.SpentSublevelPoints += totalPointsSpend;
         Dirty(playerEntity, playerChangedComp);
 
-        var afterInitEv = new RecalculateEntityExperience();
-        RaiseLocalEvent(playerEntity, ref afterInitEv);
-
-        DirtyField(playerEntity, experienceComponent, nameof(ExperienceComponent.FreeSublevelPoints));
+        _experienceAddition.EnqueueRecalculation(playerEntity);
     }
 
     private void OnRoundEnd(RoundEndedEvent _)
     {
-        var backgroundEntityQuery = EntityQueryEnumerator<JobBackgroundSublevelAddComponent, RoleExperienceAddComponent>();
+        var backgroundEntityQuery = EntityQueryEnumerator<JobBackgroundSublevelAddComponent, ExperienceAdditionComponent>();
 
-        while (backgroundEntityQuery.MoveNext(out var uid, out var sublevelAddComponent, out var roleExperience))
+        while (backgroundEntityQuery.MoveNext(out var uid, out var sublevelAddComponent, out var additionComponent))
         {
             var stringSublevelView = GetSublevelStringView(sublevelAddComponent.Skills);
 
-            _adminLog.Add(LogType.Experience, LogImpact.Low, $"At round end entity with experience definition {roleExperience.DefinitionId}, used {sublevelAddComponent.SpentSublevelPoints} point to their leveling. Used to skills {stringSublevelView}");
+            _adminLog.Add(LogType.Experience, LogImpact.Low, $"At round end entity with experience definition {additionComponent.DefinitionId}, used {sublevelAddComponent.SpentSublevelPoints} point to their leveling. Used to skills {stringSublevelView}");
         }
     }
 

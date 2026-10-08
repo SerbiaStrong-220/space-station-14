@@ -116,8 +116,8 @@ public abstract class SharedStationSpawningSystem : EntitySystem
         // SS220-experience-update-begin
         if (startingGear is StartingGearPrototype startingGearProto)
         {
-            var skillRoleAddComp = EnsureComp<RoleExperienceAddComponent>(entity);
-            skillRoleAddComp.DefinitionId = startingGearProto.ExperienceDefinition ?? skillRoleAddComp.DefinitionId;
+            var changeDefEv = new TryChangeExperienceDefinition(startingGearProto.ExperienceDefinition, true);
+            RaiseLocalEvent(entity, ref changeDefEv);
         }
         // SS220-experience-update-end
 

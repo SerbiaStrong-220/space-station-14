@@ -15,21 +15,9 @@ public sealed partial class ExperienceSystem : EntitySystem
         SubscribeLocalEvent<ExperienceAdditionComponent, SublevelAdditionPointInitialResolve>(ExperienceAdditionOnSublevelAdditionPointInitialResolve);
         SubscribeLocalEvent<ExperienceAdditionComponent, KnowledgeInitialResolve>(ExperienceAdditionOnKnowledgeInitialResolve);
 
-        // TODO: also this one merge
-        SubscribeAddComponentToInit<AdminForcedExperienceAddComponent>(SkillForceSetOnSkillTreeAdded, KnowledgeForceSetOnKnowledgeInitialResolve, ForceSetAdditionOnSublevelAdditionPointInitialResolve);
-        SubscribeAddComponentToInit<RoleExperienceAddComponent>(SkillAddOnSkillTreeAdded, KnowledgeAddOnKnowledgeInitialResolve, AdditionOnSublevelAdditionPointInitialResolve);
+        SubscribeLocalEvent<ExperienceAdditionComponent, SkillTreeAdded>(ExperienceAdditionOnSkillTreeAdded);
 
         SubscribeSublevelAddComponentToInit<JobBackgroundSublevelAddComponent>(SublevelAddOnSkillTreeAdded, SublevelAddOnSublevelAdditionPointInitialResolve);
-    }
-
-    private void SubscribeAddComponentToInit<T>(EntityEventRefHandler<T, SkillTreeAdded> handlerSkill,
-                                            EntityEventRefHandler<T, KnowledgeInitialResolve> handlerKnowledge,
-                                            EntityEventRefHandler<T, SublevelAdditionPointInitialResolve> handlerAdditionPoint)
-                                            where T : BaseExperienceAddComponent
-    {
-        SubscribeLocalEvent<T, SkillTreeAdded>(handlerSkill);
-        SubscribeLocalEvent<T, KnowledgeInitialResolve>(handlerKnowledge);
-        SubscribeLocalEvent<T, SublevelAdditionPointInitialResolve>(handlerAdditionPoint);
     }
 
     private void SubscribeSublevelAddComponentToInit<T>(EntityEventRefHandler<T, SkillTreeAdded> handlerSkill,
@@ -49,12 +37,41 @@ public sealed partial class ExperienceSystem : EntitySystem
         }
 
         InitializeExperienceComp(entity);
+        Dirty(entity);
     }
 
     private void ExperienceAdditionOnMapInit(Entity<ExperienceAdditionComponent> entity, ref MapInitEvent _)
     {
         var recalculateEv = new RecalculateEntityExperience();
         RaiseLocalEvent(entity, ref recalculateEv);
+    }
+
+    private void ExperienceAdditionOnSkillTreeAdded(Entity<ExperienceAdditionComponent> entity, ref SkillTreeAdded args)
+    {
+        if (args.DenyChanges)
+            return;
+
+        if (entity.Comp.Forced)
+            args.DenyChanges = true;
+
+        foreach (var (source, specifier) in entity.Comp.Sources)
+        {
+            if (entity.Comp.Forced && !ExperienceAdditionComponent.AdminForceWhitelistSources.Contains(source))
+                continue;
+
+            if (specifier.Skills.TryGetValue(args.SkillTree, out var info))
+            {
+                args.Info.Add(info);
+            }
+        }
+
+        if (entity.Comp.DefinitionId is null || !_prototype.TryIndex(entity.Comp.DefinitionId, out var skillAddProto))
+            return;
+
+        if (skillAddProto.Skills.TryGetValue(args.SkillTree, out var infoProto))
+        {
+            args.Info.Add(infoProto);
+        }
     }
 
     private void ExperienceAdditionOnSublevelAdditionPointInitialResolve(Entity<ExperienceAdditionComponent> entity, ref SublevelAdditionPointInitialResolve args)
@@ -103,46 +120,6 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     #region Skill
 
-    private void SkillForceSetOnSkillTreeAdded<T>(Entity<T> entity, ref SkillTreeAdded args) where T : BaseExperienceAddComponent
-    {
-        if (args.DenyChanges)
-            return;
-
-        args.DenyChanges = true;
-
-        if (entity.Comp.Skills.TryGetValue(args.SkillTree, out var info))
-        {
-            args.Info.Level = info.Level;
-            args.Info.Sublevel = info.Sublevel;
-        }
-
-        if (entity.Comp.DefinitionId is null || !_prototype.TryIndex(entity.Comp.DefinitionId, out var skillAddProto))
-            return;
-
-        if (skillAddProto.Skills.TryGetValue(args.SkillTree, out var infoProto))
-        {
-            args.Info.Add(infoProto);
-        }
-    }
-
-    private void SkillAddOnSkillTreeAdded<T>(Entity<T> entity, ref SkillTreeAdded args) where T : BaseExperienceAddComponent
-    {
-        if (args.DenyChanges)
-            return;
-
-        if (entity.Comp.Skills.TryGetValue(args.SkillTree, out var info))
-        {
-            args.Info.Add(info);
-        }
-
-        if (entity.Comp.DefinitionId is null || !_prototype.TryIndex(entity.Comp.DefinitionId, out var skillAddProto))
-            return;
-
-        if (skillAddProto.Skills.TryGetValue(args.SkillTree, out var infoProto))
-        {
-            args.Info.Add(infoProto);
-        }
-    }
 
     private void SublevelAddOnSkillTreeAdded<T>(Entity<T> entity, ref SkillTreeAdded args) where T : BaseSublevelAddComponent
     {
@@ -159,33 +136,6 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     #region FreeSublevelPoints
 
-    private void AdditionOnSublevelAdditionPointInitialResolve<T>(Entity<T> entity, ref SublevelAdditionPointInitialResolve args) where T : BaseExperienceAddComponent
-    {
-        if (args.DenyChanges)
-            return;
-
-        args.FreeSublevelPoints += entity.Comp.AddSublevelPoints;
-
-        if (entity.Comp.DefinitionId is null || !_prototype.TryIndex(entity.Comp.DefinitionId, out var skillAddProto))
-            return;
-
-        args.FreeSublevelPoints += skillAddProto.AddSublevelPoints;
-    }
-
-    private void ForceSetAdditionOnSublevelAdditionPointInitialResolve<T>(Entity<T> entity, ref SublevelAdditionPointInitialResolve args) where T : BaseExperienceAddComponent
-    {
-        if (args.DenyChanges)
-            return;
-
-        args.DenyChanges = true;
-        args.FreeSublevelPoints = entity.Comp.AddSublevelPoints;
-
-        if (entity.Comp.DefinitionId is null || !_prototype.TryIndex(entity.Comp.DefinitionId, out var skillAddProto))
-            return;
-
-        args.FreeSublevelPoints += skillAddProto.AddSublevelPoints;
-    }
-
     private void SublevelAddOnSublevelAdditionPointInitialResolve<T>(Entity<T> entity, ref SublevelAdditionPointInitialResolve args) where T : BaseSublevelAddComponent
     {
         // we dont care about args.DenyChanges because it marks spent points which applied to entity
@@ -196,26 +146,6 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     #region Knowledge
 
-    private void KnowledgeForceSetOnKnowledgeInitialResolve<T>(Entity<T> entity, ref KnowledgeInitialResolve args) where T : BaseExperienceAddComponent
-    {
-        if (args.DenyChanges)
-            return;
-
-        args.DenyChanges = true;
-
-        args.Knowledges = entity.Comp.Knowledges;
-    }
-
-    private void KnowledgeAddOnKnowledgeInitialResolve<T>(Entity<T> entity, ref KnowledgeInitialResolve args) where T : BaseExperienceAddComponent
-    {
-        if (args.DenyChanges)
-            return;
-
-        if (entity.Comp.DefinitionId is not null && _prototype.TryIndex(entity.Comp.DefinitionId, out var skillAddProto))
-            args.Knowledges.UnionWith(skillAddProto.Knowledges);
-
-        args.Knowledges.UnionWith(entity.Comp.Knowledges);
-    }
 
     private void ExperienceAdditionOnKnowledgeInitialResolve(Entity<ExperienceAdditionComponent> entity, ref KnowledgeInitialResolve args)
     {

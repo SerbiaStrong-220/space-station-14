@@ -115,8 +115,8 @@ public sealed class OutfitSystem : EntitySystem
         {
             RemComp<JobBackgroundSublevelAddComponent>(target);
 
-            var skillRoleAddComp = EnsureComp<RoleExperienceAddComponent>(target);
-            skillRoleAddComp.DefinitionId = definitionId;
+            var changeDefEv = new TryChangeExperienceDefinition(definitionId, false);
+            RaiseLocalEvent(target, ref changeDefEv);
         }
         // SS220-experience-update-end
 
@@ -128,8 +128,8 @@ public sealed class OutfitSystem : EntitySystem
                 continue;
 
             // SS220-experience-update-begin
-            var skillRoleAddComp = EnsureComp<RoleExperienceAddComponent>(target);
-            skillRoleAddComp.DefinitionId = job.ExperienceDefinition;
+            var changeDefEv = new TryChangeExperienceDefinition(job.ExperienceDefinition, false);
+            RaiseLocalEvent(target, ref changeDefEv);
 
             // This used to give admins better experience with clearing player choice, it can be removed or moved if needed
             RemComp<JobBackgroundSublevelAddComponent>(target);

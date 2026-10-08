@@ -157,7 +157,7 @@
       - RoleSurvivalNukie
       components:
       # SS220-experience-update-begin
-      - type: RoleExperienceAdd
+      - type: ExperienceAddition
         definitionId: SyndicateCommanderRoleExperience
       # SS220-experience-update-end
       - type: NukeOperative
@@ -182,7 +182,7 @@
       - RoleSurvivalNukie
       components:
       # SS220-experience-update-begin
-      - type: RoleExperienceAdd
+      - type: ExperienceAddition
         definitionId: SyndicateMedicRoleExperience
       # SS220-experience-update-end
       - type: NukeOperative
@@ -206,7 +206,7 @@
       - RoleSurvivalNukie
       components:
       # SS220-experience-update-begin
-      - type: RoleExperienceAdd
+      - type: ExperienceAddition
         definitionId: SyndicateOperativeRoleExperience
       # SS220-experience-update-end
       - type: NukeOperative

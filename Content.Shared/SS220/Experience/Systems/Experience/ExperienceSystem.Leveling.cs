@@ -121,7 +121,7 @@ public sealed partial class ExperienceSystem : EntitySystem
             return;
 
         // not logging cause all false in method logged
-        if (!TryAddSkillToSkillEntity(entity, ExperienceComponent.ContainerId, skillPrototype))
+        if (!TryAddSkillToSkillEntity(entity, skillPrototype))
             return;
 
         InternalProgressLevel(entity, info, skillPrototype, skillTree.ID);
@@ -172,8 +172,8 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (!CanProgressLevel(info, skillTreePrototype))
             _popup.PopupPredicted(Loc.GetString(skillPrototype.LevelInfo.SublevelUpPopup), entity, entity);
 
-        TryComp<RoleExperienceAddComponent>(entity, out var roleExperienceAdd);
-        var definitionId = roleExperienceAdd?.DefinitionId?.Id ?? "no-definition";
+        TryComp<ExperienceAdditionComponent>(entity, out var experienceAddition);
+        var definitionId = experienceAddition?.DefinitionId?.Id ?? "no-definition";
 
         _adminLogManager.Add(LogType.Experience, LogImpact.Low, $"{ToPrettyString(entity):user} with experience definition {definitionId} advanced sublevel in skill tree {skillTree}");
 

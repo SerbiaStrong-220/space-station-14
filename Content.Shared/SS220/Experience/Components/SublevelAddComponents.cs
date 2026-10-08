@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared.SS220.Experience;
 
 /// <summary>
-/// Base component for adding sublevels which handles only add without any reset
+/// Base component for user defined adding sublevels
 /// </summary>
 public abstract partial class BaseSublevelAddComponent : Component
 {
