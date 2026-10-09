@@ -42,7 +42,7 @@ public sealed partial class MalfAiLockdownSystem : StationEventSystem<MalfAiLock
     private static readonly LocId LockdownDone = "malfai-lockdown-done";
 
     private static readonly LocId StartAnnouncement = "malfai-lockdown-start-announcement";
-    private const string EndAnnouncement = "malfai-lockdown-end-announcement";
+    private static readonly LocId EndAnnouncement = "malfai-lockdown-end-announcement";
 
     private static readonly SoundSpecifier LockdownAnnounceSound =
         new SoundPathSpecifier("/Audio/Announcements/attention.ogg")

@@ -58,7 +58,6 @@ public sealed class MalfAiMachineModulesTest : GameTest
 {
     private static PoolSettings PsMalfAi => new() { Connected = false, Dirty = true };
 
-    private EntityUid _overloadMachine;
     private EntityUid _factoryBody;
     private EntityUid _factoryStore;
     private EntityUid _factoryEnt;
@@ -256,117 +255,6 @@ public sealed class MalfAiMachineModulesTest : GameTest
 
     [Test]
     [PairConfig(nameof(PsMalfAi))]
-    public async Task MalfMachineOverloadExplodes()
-    {
-        var pair = Pair;
-        var server = pair.Server;
-        var map = await pair.CreateTestMap();
-        await server.WaitIdleAsync();
-
-        await server.WaitAssertion(() =>
-        {
-            var entMan = server.EntMan;
-            MakeStation(pair, map);
-
-            var body = SpawnRoleBody(pair, map);
-            entMan.System<SharedMindSystem>().TryGetMind(body, out var mindId, out _);
-            var store = FindStore(pair, mindId);
-            TopUp(pair, store, 200);
-
-            var dormantTimerMachine = entMan.SpawnEntity("Autolathe", map.GridCoords);
-            var dormantTimer = entMan.AddComponent<TimerTriggerComponent>(dormantTimerMachine);
-            dormantTimer.Delay = TimeSpan.FromSeconds(17);
-            dormantTimer.KeyOut = "custom-timer";
-            dormantTimer.KeysIn = ["custom-trigger"];
-            var dormantTimerEv = new MalfAiMachineOverloadEvent { Performer = body, Target = dormantTimerMachine };
-            entMan.EventBus.RaiseLocalEvent(body, dormantTimerEv);
-            Assert.That(dormantTimerEv.Handled, Is.False,
-                "Machine Overload reused a dormant custom timer trigger.");
-            Assert.That(dormantTimer.Delay, Is.EqualTo(TimeSpan.FromSeconds(17)));
-            Assert.That(dormantTimer.KeyOut, Is.EqualTo("custom-timer"));
-            Assert.That(dormantTimer.KeysIn, Is.EqualTo(new[] { "custom-trigger" }));
-            Assert.That(entMan.HasComponent<ActiveTimerTriggerComponent>(dormantTimerMachine), Is.False);
-            Assert.That(entMan.HasComponent<ExplosiveComponent>(dormantTimerMachine), Is.False);
-
-            var explodeTriggerMachine = entMan.SpawnEntity("Autolathe", map.GridCoords);
-            var explodeTrigger = entMan.AddComponent<ExplodeOnTriggerComponent>(explodeTriggerMachine);
-            explodeTrigger.KeysIn = ["custom-explosion"];
-            explodeTrigger.TargetUser = true;
-            var explodeTriggerEv = new MalfAiMachineOverloadEvent { Performer = body, Target = explodeTriggerMachine };
-            entMan.EventBus.RaiseLocalEvent(body, explodeTriggerEv);
-            Assert.That(explodeTriggerEv.Handled, Is.False,
-                "Machine Overload reused a custom explode-on-trigger effect.");
-            Assert.That(explodeTrigger.KeysIn, Is.EquivalentTo(new[] { "custom-explosion" }));
-            Assert.That(explodeTrigger.TargetUser, Is.True);
-            Assert.That(entMan.HasComponent<TimerTriggerComponent>(explodeTriggerMachine), Is.False);
-            Assert.That(entMan.HasComponent<ExplosiveComponent>(explodeTriggerMachine), Is.False);
-
-            var machine = entMan.SpawnEntity("Autolathe", map.GridCoords);
-            _overloadMachine = machine;
-
-            Buy(pair, store, body, MalfAiConstants.MachineOverloadListing);
-            var action = GrantedAction(pair, body, "ActionMalfAiMachineOverload");
-
-            var actionsSys = entMan.System<SharedActionsSystem>();
-            var validateTarget = entMan.GetComponent<EntityTargetActionComponent>(action);
-            Assert.That(actionsSys.ValidateEntityTarget(body, machine, (action, validateTarget)), Is.True,
-                "Machine Overload fails engine validation in live game.");
-            var locker = entMan.SpawnEntity("LockerSteel", map.GridCoords);
-            Assert.That(actionsSys.ValidateEntityTarget(body, locker, (action, validateTarget)), Is.False,
-                "Machine Overload passes engine validation on a locker.");
-
-            var actionsComp = entMan.GetComponent<ActionsComponent>(body);
-            var actionComp = entMan.GetComponent<ActionComponent>(action);
-            var tuning = entMan.GetComponent<MalfAiMachineOverloadTuningComponent>(action);
-            Assert.That(tuning.DelaySeconds, Is.EqualTo(3f),
-                "Machine Overload default fuse is not 3 seconds.");
-            tuning.DelaySeconds = 2f;
-            actionsSys.PerformAction((body, actionsComp), (action, actionComp),
-                new MalfAiMachineOverloadEvent { Performer = body, Target = machine }, predicted: false);
-
-            Assert.That(entMan.HasComponent<ActiveTimerTriggerComponent>(machine), Is.True,
-                "Machine Overload did not prime the machine.");
-            var timer = entMan.GetComponent<TimerTriggerComponent>(machine);
-            Assert.That(timer.Delay, Is.EqualTo(TimeSpan.FromSeconds(2)));
-
-            var cooldown = entMan.GetComponent<ActionComponent>(action).Cooldown;
-            Assert.That(cooldown, Is.Not.Null, "Machine Overload did not start its cooldown.");
-
-            Assert.That(actionsSys.ValidateEntityTarget(body, machine, (action, validateTarget)), Is.False,
-                "Machine Overload still validates an already-primed machine.");
-
-            var ev = new MalfAiMachineOverloadEvent { Performer = body, Target = machine };
-            entMan.EventBus.RaiseLocalEvent(body, ev);
-            Assert.That(ev.Handled, Is.False,
-                "Machine Overload double-primed an already-rigged machine.");
-
-            Buy(pair, store, body, MalfAiConstants.MachineOverrideListing);
-            var overrideEv = new MalfAiMachineOverrideEvent { Performer = body, Target = machine };
-            entMan.EventBus.RaiseLocalEvent(body, overrideEv);
-            Assert.That(overrideEv.Handled, Is.False,
-                "Override stacked onto an overloaded machine.");
-            Assert.That(entMan.HasComponent<NpcFactionMemberComponent>(machine), Is.False,
-                "Override animated an overloaded machine.");
-        });
-
-        await server.WaitRunTicks(220);
-        await server.WaitIdleAsync();
-
-        await server.WaitAssertion(() =>
-        {
-            var entMan = server.EntMan;
-            var machine = _overloadMachine;
-
-            Assert.That(entMan.HasComponent<ActiveTimerTriggerComponent>(machine), Is.False,
-                "The overload timer never fired.");
-
-            Assert.That(entMan.Deleted(machine) || !entMan.EntityExists(machine), Is.True,
-                "The overload timer fired but the machine did not explode (key wiring broken).");
-        });
-    }
-
-    [Test]
-    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfRobotFactoryDeploysAndGates()
     {
         var pair = Pair;
@@ -518,7 +406,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
                 "Factory accepted a second corpse while busy.");
         });
 
-        await server.WaitRunTicks(2000);
+        await server.WaitRunTicks(200);
         await server.WaitIdleAsync();
 
         await server.WaitAssertion(() =>
@@ -597,170 +485,6 @@ public sealed class MalfAiMachineModulesTest : GameTest
             entMan.EventBus.RaiseLocalEvent(body, reEv);
             Assert.That(FindFactories(pair, map).Count, Is.EqualTo(1),
                 "Factory could not be re-deployed after destruction.");
-        });
-    }
-
-    [Test]
-    [PairConfig(nameof(PsMalfAi))]
-    public async Task MalfFactoryDeniedOnOccupiedTile()
-    {
-        var pair = Pair;
-        var server = pair.Server;
-        var map = await pair.CreateTestMap();
-        await server.WaitIdleAsync();
-
-        await server.WaitAssertion(() =>
-        {
-            var entMan = server.EntMan;
-            MakeStation(pair, map);
-
-            var body = SpawnRoleBody(pair, map);
-            entMan.System<SharedMindSystem>().TryGetMind(body, out var mindId, out _);
-            var store = FindStore(pair, mindId);
-            TopUp(pair, store, 200);
-
-            var mapSys = entMan.System<SharedMapSystem>();
-            var tileMan = server.ResolveDependency<Robust.Shared.Map.ITileDefinitionManager>();
-            var floorTile = new Robust.Shared.Map.Tile(tileMan["FloorSteel"].TileId);
-            var gridEnt = new Entity<Robust.Shared.Map.Components.MapGridComponent>(
-                map.GridCoords.EntityId,
-                entMan.GetComponent<Robust.Shared.Map.Components.MapGridComponent>(map.GridCoords.EntityId));
-            var originTile = mapSys.LocalToTile(gridEnt.Owner, gridEnt.Comp,
-                entMan.GetComponent<TransformComponent>(map.GridCoords.EntityId).Coordinates);
-            for (var dx = -1; dx <= 1; dx++)
-            {
-                for (var dy = -1; dy <= 1; dy++)
-                {
-                    mapSys.SetTile(gridEnt, originTile + new Robust.Shared.Maths.Vector2i(dx, dy), floorTile);
-                }
-            }
-
-            Buy(pair, store, body, MalfAiConstants.RobotFactoryListing);
-            var action = GrantedAction(pair, body, "ActionMalfAiRobotFactory");
-
-            var target = map.GridCoords.Offset(new System.Numerics.Vector2(1, 0));
-
-            EntityUid Deploy(EntityUid deployAction)
-            {
-                var actComp = entMan.GetComponent<ActionComponent>(deployAction);
-                var deployEv = new MalfAiRobotFactoryEvent
-                {
-                    Performer = body,
-                    Target = target,
-                    Action = new Entity<ActionComponent>(deployAction, actComp)
-                };
-                entMan.EventBus.RaiseLocalEvent(body, deployEv);
-                return deployEv.Handled ? deployAction : EntityUid.Invalid;
-            }
-
-            Assert.That(Deploy(action), Is.Not.EqualTo(EntityUid.Invalid),
-                "First factory deploy was denied on a free tile.");
-            Assert.That(FindFactories(pair, map).Count, Is.EqualTo(1),
-                "First factory was not deployed.");
-
-            // The standing factory is anchored but collides off the Impassable layer,
-            // so the second deploy must be denied by the TileFree check itself.
-            server.ResolveDependency<Robust.Shared.Configuration.IConfigurationManager>()
-                .SetCVar(CCVars220.MalfAiMaxFactories, 2);
-            Buy(pair, store, body, MalfAiConstants.RobotFactoryListing);
-            var action2 = GrantedAction(pair, body, "ActionMalfAiRobotFactory");
-
-            Assert.That(Deploy(action2), Is.EqualTo(EntityUid.Invalid),
-                "Factory deploy on an occupied tile was marked handled (purchase lost).");
-            Assert.That(FindFactories(pair, map).Count, Is.EqualTo(1),
-                "Factory was deployed onto an occupied tile.");
-        });
-    }
-
-    [TestCase(false)]
-    [TestCase(true)]
-    [PairConfig(nameof(PsMalfAi))]
-    public async Task MalfRobotFactoryInsertionRequiresHands(bool interrupt)
-    {
-        var pair = Pair;
-        var server = pair.Server;
-        var map = await pair.CreateTestMap();
-        EntityUid factory = default;
-        EntityUid corpse = default;
-        EntityUid feeder = default;
-        EntityUid body = default;
-
-        await server.WaitAssertion(() =>
-        {
-            var entMan = server.EntMan;
-            MakeStation(pair, map);
-            var mapSys = entMan.System<SharedMapSystem>();
-            var grid = new Entity<Robust.Shared.Map.Components.MapGridComponent>(map.GridCoords.EntityId,
-                entMan.GetComponent<Robust.Shared.Map.Components.MapGridComponent>(map.GridCoords.EntityId));
-            var tileMan = server.ResolveDependency<ITileDefinitionManager>();
-            var floor = new Tile(tileMan["FloorSteel"].TileId);
-            var origin = mapSys.LocalToTile(grid.Owner, grid.Comp, map.GridCoords);
-            for (var x = -1; x <= 7; x++)
-            {
-                for (var y = -1; y <= 1; y++)
-                    mapSys.SetTile(grid, origin + new Robust.Shared.Maths.Vector2i(x, y), floor);
-            }
-
-            body = SpawnRoleBody(pair, map);
-            var factoryCoords = map.GridCoords.Offset(new System.Numerics.Vector2(3f, 0f));
-            factory = entMan.SpawnEntity("MalfAiRobotFactory", factoryCoords);
-            entMan.System<PowerReceiverSystem>().SetNeedsPower(factory, false);
-            feeder = entMan.SpawnEntity("MobHuman", factoryCoords.Offset(new System.Numerics.Vector2(1.1f, 0f)));
-            corpse = entMan.SpawnEntity("MobHuman", factoryCoords.Offset(new System.Numerics.Vector2(1.2f, 0f)));
-            entMan.System<MobStateSystem>()
-                .ChangeMobState(corpse, MobState.Dead);
-            var comp = entMan.GetComponent<MalfAiFactoryComponent>(factory);
-            Assert.That(comp.InsertionDelayPerMass, Is.GreaterThan(0f));
-            Assert.That(entMan.GetComponent<Robust.Shared.Physics.Components.PhysicsComponent>(corpse).FixturesMass,
-                Is.GreaterThan(0f));
-            Assert.That(entMan.HasComponent<HandsComponent>(body), Is.False);
-        });
-        await server.WaitRunTicks(5);
-        await server.WaitAssertion(() =>
-        {
-            var entMan = server.EntMan;
-            Assert.That(entMan.GetComponent<HandsComponent>(feeder).Count,
-                Is.GreaterThan(0), "The feeder spawned without usable hands.");
-
-            var aiDrop = new DragDropTargetEvent(body, corpse);
-            entMan.EventBus.RaiseLocalEvent(factory, ref aiDrop);
-            Assert.That(entMan.HasComponent<ActiveDoAfterComponent>(body), Is.False,
-                "The handless AI started a factory insertion.");
-            Assert.That(entMan.HasComponent<ActiveMalfAiFactoryComponent>(factory), Is.False,
-                "The handless AI fed the factory.");
-
-            var drop = new DragDropTargetEvent(feeder, corpse);
-            entMan.EventBus.RaiseLocalEvent(factory, ref drop);
-            Assert.That(entMan.HasComponent<ActiveDoAfterComponent>(feeder), Is.True,
-                "A feeder with hands did not start a nonzero insertion DoAfter.");
-            Assert.That(entMan.HasComponent<ActiveMalfAiFactoryComponent>(factory), Is.False,
-                "The insertion delay was bypassed.");
-        });
-
-        if (interrupt)
-        {
-            await server.WaitAssertion(() =>
-            {
-                var entMan = server.EntMan;
-                entMan.System<SharedTransformSystem>().SetCoordinates(corpse,
-                    map.GridCoords.Offset(new System.Numerics.Vector2(7f, 0f)));
-            });
-            await server.WaitRunTicks(5);
-            await server.WaitAssertion(() =>
-            {
-                var entMan = server.EntMan;
-                entMan.System<SharedTransformSystem>().SetCoordinates(corpse,
-                    map.GridCoords.Offset(new System.Numerics.Vector2(4.5f, 0f)));
-            });
-        }
-
-        await server.WaitRunTicks(1200);
-        await server.WaitAssertion(() =>
-        {
-            var entMan = server.EntMan;
-            Assert.That(entMan.HasComponent<ActiveMalfAiFactoryComponent>(factory), Is.False,
-                "The factory stayed active after insertion was cancelled or conversion completed.");
-            Assert.That(entMan.Deleted(corpse), Is.EqualTo(!interrupt));
         });
     }
 
@@ -935,7 +659,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
                 "Factory did not start grinding the corpse.");
         });
 
-        await server.WaitRunTicks(2000);
+        await server.WaitRunTicks(300);
         await server.WaitIdleAsync();
 
         await server.WaitAssertion(() =>

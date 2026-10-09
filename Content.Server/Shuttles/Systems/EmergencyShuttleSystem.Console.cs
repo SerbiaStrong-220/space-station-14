@@ -394,7 +394,7 @@ public sealed partial class EmergencyShuttleSystem
     {
         if (EarlyLaunchAuthorized || !EmergencyShuttleArrived || _consoleAccumulator <= _authorizeTime) return false;
 
-        // SS220 MalfAI: doomsday can veto the early launch the same way war blocks a shuttle call.
+        // SS220 MalfAI
         var attempt = new EmergencyShuttleEarlyLaunchAttemptEvent(false);
         RaiseLocalEvent(ref attempt);
         if (attempt.Cancelled)

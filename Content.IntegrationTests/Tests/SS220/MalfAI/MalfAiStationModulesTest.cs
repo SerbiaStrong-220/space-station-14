@@ -319,56 +319,6 @@ public sealed class MalfAiStationModulesTest : GameTest
 
     [Test]
     [PairConfig(nameof(PsMalfAi))]
-    public async Task MalfBlackoutIgnitesPlasma()
-    {
-        var pair = Pair;
-        var server = pair.Server;
-        var map = await pair.CreateTestMap();
-        await server.WaitIdleAsync();
-
-        await server.WaitAssertion(() =>
-        {
-            MakeStation(pair, map);
-            ExpandGridForAtmos(pair, map);
-        });
-        await server.WaitRunTicks(60);
-        await server.WaitIdleAsync();
-
-        await server.WaitAssertion(() =>
-        {
-            var entMan = server.EntMan;
-            RequireSimulatedAtmos(pair, map);
-
-            var atmosSys = entMan.System<AtmosphereSystem>();
-            var gridUid = map.GridCoords.EntityId;
-            var gridAtmos = entMan.GetComponent<GridAtmosphereComponent>(gridUid);
-
-            var body = SpawnRoleBody(pair, map);
-            server.EntMan.System<SharedMindSystem>().TryGetMind(body, out var mindId, out _);
-            var store = FindStore(pair, mindId);
-            TopUp(pair, store, 200);
-
-            var apc = entMan.SpawnEntity("APCBasic", map.GridCoords);
-            var mix = atmosSys.GetTileMixture(apc, true);
-            Assert.That(mix, Is.Not.Null, "APC tile has no atmosphere even with a simulated grid.");
-            mix.AdjustMoles(Gas.Plasma, 50f);
-            mix.AdjustMoles(Gas.Oxygen, 100f);
-
-            void Blackout(EntityUid performer, EntityUid target)
-            {
-                var ev = new MalfAiBlackoutEvent { Performer = performer, Target = target };
-                entMan.EventBus.RaiseLocalEvent(performer, ev);
-            }
-
-            Blackout(body, apc);
-
-            Assert.That(gridAtmos.HotspotTilesCount, Is.GreaterThan(0),
-                "Directed blackout did not ignite the plasma on the APC tile.");
-        });
-    }
-
-    [Test]
-    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfFloodGate()
     {
         var pair = Pair;

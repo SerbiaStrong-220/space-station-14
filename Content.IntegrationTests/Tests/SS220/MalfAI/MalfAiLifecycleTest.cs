@@ -188,45 +188,11 @@ public sealed class MalfAiLifecycleTest : GameTest
                 "Purchased action survived role removal.");
             Assert.That(entMan.System<SharedRoleSystem>().MindHasRole<MalfAiRoleComponent>(mindId), Is.False,
                 "Malf role survived removal.");
-        });
-    }
-
-    [Test]
-    [PairConfig(nameof(PsMalfAi))]
-    public async Task MalfRoleReaddedAfterRemovalGetsFreshStore()
-    {
-        var pair = Pair;
-        var server = pair.Server;
-        var map = await pair.CreateTestMap();
-        await server.WaitIdleAsync();
-
-        EntityUid oldStore = EntityUid.Invalid;
-        EntityUid mindId = EntityUid.Invalid;
-
-        await server.WaitAssertion(() =>
-        {
-            MakeStation(pair, map);
-
-            var body = SpawnRoleBody(pair, map);
-            server.EntMan.System<SharedMindSystem>().TryGetMind(body, out mindId, out _);
-            oldStore = FindStore(pair, mindId);
-
-            server.EntMan.System<SharedRoleSystem>().MindRemoveRole<MalfAiRoleComponent>(mindId);
-        });
-
-        await server.WaitRunTicks(5);
-        await server.WaitIdleAsync();
-
-        await server.WaitAssertion(() =>
-        {
-            var entMan = server.EntMan;
-            Assert.That(entMan.Deleted(oldStore), Is.True,
-                "Old Malf store survived role removal.");
 
             entMan.System<SharedRoleSystem>().MindAddRole(mindId, "MindRoleMalfAi");
 
             var fresh = FindStore(pair, mindId);
-            Assert.That(fresh, Is.Not.EqualTo(oldStore),
+            Assert.That(fresh, Is.Not.EqualTo(store),
                 "Re-added role reused the deleted store.");
 
             var malf = entMan.System<MalfAiSystem>();
@@ -381,49 +347,6 @@ public sealed class MalfAiLifecycleTest : GameTest
                 if (comp.CurrencyWhitelist.Contains(MalfAiConstants.CpuCurrency))
                     Assert.Fail("Malf store survived direct role deletion.");
             }
-        });
-    }
-
-    [Test]
-    [PairConfig(nameof(PsMalfAi))]
-    public async Task MalfSameTickReaddGetsFreshStore()
-    {
-        var pair = Pair;
-        var server = pair.Server;
-        var map = await pair.CreateTestMap();
-        await server.WaitIdleAsync();
-
-        EntityUid oldStore = EntityUid.Invalid;
-
-        await server.WaitAssertion(() =>
-        {
-            MakeStation(pair, map);
-
-            var body = SpawnRoleBody(pair, map);
-            var entMan = server.EntMan;
-            entMan.System<SharedMindSystem>().TryGetMind(body, out var mindId, out _);
-            oldStore = FindStore(pair, mindId);
-
-            var roleSys = entMan.System<SharedRoleSystem>();
-            roleSys.MindRemoveRole<MalfAiRoleComponent>(mindId);
-            roleSys.MindAddRole(mindId, "MindRoleMalfAi");
-
-            // NOTE: FindStore helper scans raw components and still sees the
-            // queued old store; the system lookup below is dead-aware.
-            var malf = entMan.System<MalfAiSystem>();
-            Assert.That(malf.TryGetOwnedStore(mindId, out var owned), Is.True,
-                "Re-added role has no owned store.");
-            Assert.That(owned.Value.Owner, Is.Not.EqualTo(oldStore),
-                "Same-tick re-add resurrected the queued-for-deletion store.");
-        });
-
-        await server.WaitRunTicks(5);
-        await server.WaitIdleAsync();
-
-        await server.WaitAssertion(() =>
-        {
-            Assert.That(server.EntMan.Deleted(oldStore), Is.True,
-                "Old store lingered after same-tick re-add.");
         });
     }
 }

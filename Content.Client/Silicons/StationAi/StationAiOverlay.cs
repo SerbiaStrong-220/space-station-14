@@ -73,7 +73,7 @@ public sealed class StationAiOverlay : Overlay
             {
                 _accumulator = MathF.Max(0f, _accumulator + _updateRate);
                 _visibleTiles.Clear();
-                _entManager.System<StationAiVisionSystem>().GetView((gridUid, broadphase, grid), worldBounds, _visibleTiles, expansionSize: _entManager.System<StationAiVisionSystem>().GetExpansionSize(gridUid));
+                _entManager.System<StationAiVisionSystem>().GetView((gridUid, broadphase, grid), worldBounds, _visibleTiles, expansionSize: _entManager.System<StationAiVisionSystem>().GetExpansionSize(gridUid)); // SS220 MalfAI
             }
 
             var gridMatrix = xforms.GetWorldMatrix(gridUid);

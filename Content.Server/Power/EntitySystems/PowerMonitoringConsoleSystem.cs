@@ -226,11 +226,13 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
 
     public void OnNodeGroupRebuilt(EntityUid uid, PowerMonitoringDeviceComponent component, NodeGroupsRebuilt args)
     {
+        // SS220 MalfAI begin
         if (component.IsCollectionMasterOrChild)
             AssignEntityAsCollectionMaster(uid, component);
 
         if (TerminatingOrDeleted(uid))
             return;
+        // SS220 MalfAI end
 
         var query = AllEntityQuery<PowerMonitoringConsoleComponent, PowerMonitoringCableNetworksComponent>();
         while (query.MoveNext(out var _, out var entConsole, out var entCableNetworks))
@@ -855,8 +857,7 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
         if (TerminatingOrDeleted(child) || TerminatingOrDeleted(master))
             return;
 
-        if (!TryComp(child, out TransformComponent? xform))
-            return;
+        var xform = Transform(child);
 
         var netEntity = GetNetEntity(child);
 
@@ -882,8 +883,7 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
         if (TerminatingOrDeleted(master))
             return;
 
-        if (!TryComp(master, out TransformComponent? xform))
-            return;
+        var xform = Transform(master);
 
         var netEntity = GetNetEntity(master);
 

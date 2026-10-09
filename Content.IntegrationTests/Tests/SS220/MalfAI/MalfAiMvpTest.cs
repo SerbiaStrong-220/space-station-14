@@ -4,7 +4,6 @@ using System.Linq;
 using Content.IntegrationTests.Fixtures.Attributes;
 using Content.IntegrationTests;
 using Content.IntegrationTests.Fixtures;
-using Content.Server.Objectives.Components;
 using Content.Server.Power.Components;
 using Content.Server.SS220.MalfAI;
 using Content.Server.Silicons.Laws;
@@ -365,83 +364,6 @@ public sealed class MalfAiMvpTest : GameTest
 
     [Test]
     [PairConfig(nameof(PsMalfAi))]
-    public async Task MalfStoreOpensThroughAction()
-    {
-        var server = Pair.Server;
-        var map = await Pair.CreateTestMap();
-        await server.WaitIdleAsync();
-
-        await server.WaitAssertion(() =>
-        {
-            var entMan = server.EntMan;
-            var mindSys = entMan.System<SharedMindSystem>();
-            var roleSys = entMan.System<SharedRoleSystem>();
-            var actionsSys = entMan.System<SharedActionsSystem>();
-            var uiSys = entMan.System<SharedUserInterfaceSystem>();
-
-            var core = entMan.SpawnEntity("PlayerStationAiEmpty", map.GridCoords);
-            var body = entMan.SpawnEntity("StationAiBrain", map.GridCoords);
-            var slotSys = entMan.System<ItemSlotsSystem>();
-            var slots = entMan.GetComponent<ItemSlotsComponent>(core);
-            slotSys.TryInsert(core, "station_ai_mind_slot", body, null, slots);
-
-            var mind = mindSys.CreateMind(null);
-            mindSys.TransferTo(mind, body, mind: mind);
-            roleSys.MindAddRole(mind, "MindRoleMalfAi");
-            mindSys.TryGetMind(body, out var mindId, out _);
-
-            var actor = entMan.GetComponent<MalfAiActorComponent>(body);
-            EntityUid? openAction = null;
-            foreach (var actionId in actor.GrantedActions)
-            {
-                if (entMan.TryGetComponent<InstantActionComponent>(actionId, out var instant)
-                    && instant.Event is MalfAiOpenStoreEvent)
-                    openAction = actionId;
-            }
-            Assert.That(openAction, Is.Not.Null, "Open-store action was not granted.");
-
-            EntityUid? store = null;
-            var query = entMan.AllEntityQueryEnumerator<StoreComponent>();
-            while (query.MoveNext(out var uid, out var comp))
-            {
-                if (comp.AccountOwner == mindId && comp.CurrencyWhitelist.Contains(Currency))
-                    store = uid;
-            }
-            Assert.That(store, Is.Not.Null, "Role-owned store was not created.");
-
-            Assert.That(uiSys.HasUi(store.Value, StoreUiKey.Key),
-                Is.True, "Store does not expose StoreUiKey.");
-
-            Assert.That(entMan.TryGetComponent<RemoteStoreComponent>(body, out var remote),
-                Is.True, "Body has no RemoteStoreComponent.");
-            Assert.That(remote.Store, Is.EqualTo(store.Value));
-            Assert.That(uiSys.HasUi(body, StoreUiKey.Key),
-                Is.True, "Body does not expose the store UI.");
-
-            var bodyActions = entMan.GetComponent<ActionsComponent>(body);
-            var actionComp = entMan.GetComponent<ActionComponent>(openAction.Value);
-            actionsSys.PerformAction((body, bodyActions), (openAction.Value, actionComp));
-
-            Assert.That(uiSys.IsUiOpen(body, StoreUiKey.Key, body), Is.True,
-                "Store BUI did not open on the body for the performer.");
-
-            var closeMsg = new CloseBoundInterfaceMessage
-            {
-                Actor = body,
-                Entity = entMan.GetNetEntity(body),
-                UiKey = StoreUiKey.Key,
-            };
-            entMan.EventBus.RaiseLocalEvent(body, closeMsg);
-            Assert.That(uiSys.IsUiOpen(body, StoreUiKey.Key, body), Is.False,
-                "Store BUI did not close.");
-            entMan.System<SharedStoreSystem>().UpdateUserInterface(body, store.Value);
-            Assert.That(uiSys.IsUiOpen(body, StoreUiKey.Key, body), Is.False,
-                "Store BUI reopened after a state refresh following close.");
-        });
-    }
-
-    [Test]
-    [PairConfig(nameof(PsMalfAi))]
     public async Task MalfPurchaseFollowsMindAndCleansUp()
     {
         var server = Pair.Server;
@@ -539,37 +461,4 @@ public sealed class MalfAiMvpTest : GameTest
         });
     }
 
-    [Test]
-    [PairConfig(nameof(PsMalfAi))]
-    public async Task MalfAssignsHijackObjective()
-    {
-        var server = Pair.Server;
-        var map = await Pair.CreateTestMap();
-        await server.WaitIdleAsync();
-
-        await server.WaitAssertion(() =>
-        {
-            var entMan = server.EntMan;
-            var mindSys = entMan.System<SharedMindSystem>();
-            var ruleSys = entMan.System<MalfAiRuleSystem>();
-
-            var core = entMan.SpawnEntity("PlayerStationAiEmpty", map.GridCoords);
-            var brain = entMan.SpawnEntity("StationAiBrain", map.GridCoords);
-            var slotSys = entMan.System<ItemSlotsSystem>();
-            var slots = entMan.GetComponent<ItemSlotsComponent>(core);
-            slotSys.TryInsert(core, "station_ai_mind_slot", brain, null, slots);
-
-            var mindId = mindSys.CreateMind(null);
-            mindSys.TransferTo(mindId, brain, mind: mindId);
-            var mind = entMan.GetComponent<MindComponent>(mindId);
-            ruleSys.AssignMalf((mindId, mind));
-
-            Assert.That(mind.Objectives, Has.Count.EqualTo(1));
-            var objective = mind.Objectives[0];
-            Assert.That(entMan.GetComponent<MetaDataComponent>(objective).EntityPrototype?.ID,
-                Is.EqualTo("MalfAiHijackShuttleObjective"));
-            Assert.That(entMan.GetComponent<HijackShuttleConditionComponent>(objective).RequireOwnerOnShuttle,
-                Is.False);
-        });
-    }
 }

@@ -295,8 +295,9 @@ public sealed partial class MalfAiRobotFactorySystem : EntitySystem
 
         _audio.PlayPvs(ConvertDoneSound, ent);
         _popup.PopupEntity(Loc.GetString(FactoryConvertDone), ent);
+        var pilot = seatedMind is { } seated ? ToPrettyString(seated) : "open ghost role";
         _admin.Add(LogType.Action, LogImpact.High,
-            $"Malf AI robot factory {ToPrettyString(ent):reclaimer} finished grinding and produced {ToPrettyString(borg):target}.");
+            $"Malf AI robot factory {ToPrettyString(ent):reclaimer} finished grinding and produced {ToPrettyString(borg):target} piloted by {pilot}.");
     }
 
     private void GhostVictim(MalfAiFactoryComponent factory, EntityUid? corpse)

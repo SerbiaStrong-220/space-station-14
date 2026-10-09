@@ -138,8 +138,10 @@ public sealed partial class AirAlarmWindow : FancyWindow
 
     public void UpdateModeSelector(AirAlarmMode mode)
     {
+        // SS220 MalfAI begin
         if (mode == AirAlarmMode.Flood && !_floodVisible)
             return;
+        // SS220 MalfAI end
 
         _modes.SelectId((int) mode);
     }

@@ -264,25 +264,30 @@ public sealed class MalfAiDoomsdayTest : GameTest
 
     [Test]
     [PairConfig(nameof(PsMalfAi))]
-    public async Task MalfDoomsdayCancelOnCoreDestroyRestoresAlert()
+    public async Task MalfDoomsdayCancelPaths()
     {
         var pair = Pair;
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         await server.WaitIdleAsync();
 
+        EntityUid body = default;
+        EntityUid mindId = default;
+        EntityUid store = default;
+        EntityUid? station = default;
+
         await server.WaitAssertion(() =>
         {
             var entMan = server.EntMan;
             MakeStation(pair, map);
 
-            var body = SpawnRoleBody(pair, map);
-            entMan.System<SharedMindSystem>().TryGetMind(body, out var mindId, out _);
-            var store = FindStore(pair, mindId);
+            body = SpawnRoleBody(pair, map);
+            entMan.System<SharedMindSystem>().TryGetMind(body, out mindId, out _);
+            store = FindStore(pair, mindId);
             TopUp(pair, store, 200);
 
-            var station = entMan.System<MalfAiSystem>().ResolvePerformerStation(body);
-            Assert.That(station, Is.Not.Null);
+            station = entMan.System<MalfAiSystem>().ResolvePerformerStation(body);
+            Assert.That(station, Is.Not.EqualTo(EntityUid.Invalid));
             var alerts = entMan.EnsureComponent<AlertLevelComponent>(station.Value);
             if (alerts.AlertLevels == null)
             {
@@ -293,17 +298,40 @@ public sealed class MalfAiDoomsdayTest : GameTest
 
             Buy(pair, store, body, MalfAiConstants.DoomsdayListing);
 
-            var role = FindArmed(entMan, map.MapUid);
-            Assert.That(role, Is.Not.Null);
-            var doom = entMan.GetComponent<MalfAiDoomsdayComponent>(role.Value);
+            var rule = FindArmed(entMan, map.MapUid);
+            Assert.That(rule, Is.Not.Null);
+
+            entMan.System<SharedRoleSystem>().MindRemoveRole<MalfAiRoleComponent>(mindId);
+
+            Assert.That(entMan.GetComponent<MalfAiDoomsdayComponent>(rule.Value).Phase, Is.EqualTo(MalfAiDoomsdayPhase.Cancelled));
+            Assert.That(entMan.HasComponent<EndedGameRuleComponent>(rule.Value), Is.True);
+            Assert.That(entMan.System<AlertLevelSystem>().GetLevel(station.Value), Is.EqualTo("green"));
+        });
+
+        await server.WaitRunTicks(5);
+        await server.WaitIdleAsync();
+
+        await server.WaitAssertion(() =>
+        {
+            var entMan = server.EntMan;
+            entMan.System<SharedRoleSystem>().MindAddRole(mindId, "MindRoleMalfAi");
+
+            store = FindStore(pair, mindId);
+            TopUp(pair, store, 200);
+            Buy(pair, store, body, MalfAiConstants.DoomsdayListing);
+
+            var rule = FindArmed(entMan, map.MapUid);
+            Assert.That(rule, Is.Not.Null, "Doomsday did not re-arm after cancel.");
+            var doom = entMan.GetComponent<MalfAiDoomsdayComponent>(rule.Value);
             var core = doom.Core;
             var before = entMan.GetComponent<StoreComponent>(store).Balance[MalfAiConstants.CpuCurrency];
+            Assert.That(entMan.System<AlertLevelSystem>().GetLevel(station.Value), Is.EqualTo("delta"));
 
             entMan.DeleteEntity(core);
 
-            Assert.That(entMan.GetComponent<MalfAiDoomsdayComponent>(role.Value).Phase, Is.EqualTo(MalfAiDoomsdayPhase.Cancelled),
+            Assert.That(entMan.GetComponent<MalfAiDoomsdayComponent>(rule.Value).Phase, Is.EqualTo(MalfAiDoomsdayPhase.Cancelled),
                 "Doomsday stayed armed after core destruction.");
-            Assert.That(entMan.HasComponent<EndedGameRuleComponent>(role.Value), Is.True,
+            Assert.That(entMan.HasComponent<EndedGameRuleComponent>(rule.Value), Is.True,
                 "Cancelled Doomsday rule was not ended.");
             var waves = 0;
             var waveQuery = entMan.AllEntityQueryEnumerator<MalfAiDoomsdayWaveComponent>();
@@ -320,51 +348,7 @@ public sealed class MalfAiDoomsdayTest : GameTest
 
     [Test]
     [PairConfig(nameof(PsMalfAi))]
-    public async Task MalfDoomsdayCancelsWhenRoleRemoved()
-    {
-        var pair = Pair;
-        var server = pair.Server;
-        var map = await pair.CreateTestMap();
-        await server.WaitIdleAsync();
-
-        await server.WaitAssertion(() =>
-        {
-            var entMan = server.EntMan;
-            MakeStation(pair, map);
-
-            var body = SpawnRoleBody(pair, map);
-            Assert.That(entMan.System<SharedMindSystem>().TryGetMind(body, out var mindId, out _));
-            var store = FindStore(pair, mindId);
-            TopUp(pair, store, 200);
-
-            var station = entMan.System<MalfAiSystem>().ResolvePerformerStation(body);
-            Assert.That(station, Is.Not.Null);
-            var alerts = entMan.EnsureComponent<AlertLevelComponent>(station.Value);
-            if (alerts.AlertLevels == null)
-            {
-                alerts.AlertLevelPrototype = "stationAlerts";
-                alerts.AlertLevels = pair.Server.ProtoMan.Index<AlertLevelPrototype>(StationAlerts);
-                alerts.CurrentLevel = "green";
-            }
-
-            Buy(pair, store, body, MalfAiConstants.DoomsdayListing);
-            var rule = FindArmed(entMan, map.MapUid);
-            Assert.That(rule, Is.Not.Null);
-            Assert.That(entMan.System<AlertLevelSystem>().GetLevel(station.Value), Is.EqualTo("delta"));
-
-            entMan.System<SharedRoleSystem>().MindRemoveRole<MalfAiRoleComponent>(mindId);
-
-            Assert.That(entMan.GetComponent<MalfAiDoomsdayComponent>(rule.Value).Phase, Is.EqualTo(MalfAiDoomsdayPhase.Cancelled));
-
-            Assert.That(entMan.HasComponent<EndedGameRuleComponent>(rule.Value), Is.True);
-            Assert.That(entMan.HasComponent<MalfAiDoomsdayWaveComponent>(rule.Value), Is.False);
-            Assert.That(entMan.System<AlertLevelSystem>().GetLevel(station.Value), Is.EqualTo("green"));
-        });
-    }
-
-    [Test]
-    [PairConfig(nameof(PsMalfAi))]
-    public async Task MalfDoomsdayKillsOrganicsNotSilicons()
+    public async Task MalfDoomsdayHiddenAndWaveKills()
     {
         var pair = Pair;
         var server = pair.Server;
@@ -380,11 +364,37 @@ public sealed class MalfAiDoomsdayTest : GameTest
         {
             var entMan = server.EntMan;
             var cfg = server.ResolveDependency<IConfigurationManager>();
+            cfg.SetCVar(CCVars220.MalfAiDoomsdayEnabled, false);
+            try
+            {
+                MakeStation(pair, map);
+                var body = SpawnRoleBody(pair, map);
+                entMan.System<SharedMindSystem>().TryGetMind(body, out var mindId, out _);
+                var store = FindStore(pair, mindId);
+
+                var present = false;
+                foreach (var listing in entMan.GetComponent<StoreComponent>(store).FullListingsCatalog)
+                {
+                    if (listing.ID == MalfAiConstants.DoomsdayListing.Id)
+                        present = true;
+                }
+
+                Assert.That(present, Is.False, "Doomsday listing stayed in the catalog with the CVar off.");
+            }
+            finally
+            {
+                cfg.SetCVar(CCVars220.MalfAiDoomsdayEnabled, true);
+            }
+        });
+
+        await server.WaitAssertion(() =>
+        {
+            var entMan = server.EntMan;
+            var cfg = server.ResolveDependency<IConfigurationManager>();
             cfg.SetCVar(CCVars220.MalfAiDoomsdayDuration, 0.2f);
             cfg.SetCVar(CCVars220.MalfAiDoomsdayWaveSpeed, 100f);
             cfg.SetCVar(CCVars220.MalfAiDoomsdayWaveRadius, 4f);
 
-            MakeStation(pair, map);
             var mapSystem = entMan.System<SharedMapSystem>();
             var tileType = map.Tile.Tile.TypeId;
             for (var x = -2; x <= 2; x++)
@@ -453,43 +463,6 @@ public sealed class MalfAiDoomsdayTest : GameTest
                 cfg.SetCVar(CCVars220.MalfAiDoomsdayDuration, 10f);
                 cfg.SetCVar(CCVars220.MalfAiDoomsdayWaveSpeed, 5f);
                 cfg.SetCVar(CCVars220.MalfAiDoomsdayWaveRadius, 250f);
-            }
-        });
-    }
-
-    [Test]
-    [PairConfig(nameof(PsMalfAi))]
-    public async Task MalfDoomsdayHiddenWhenDisabled()
-    {
-        var pair = Pair;
-        var server = pair.Server;
-        var map = await pair.CreateTestMap();
-        await server.WaitIdleAsync();
-
-        await server.WaitAssertion(() =>
-        {
-            var entMan = server.EntMan;
-            var cfg = server.ResolveDependency<IConfigurationManager>();
-            cfg.SetCVar(CCVars220.MalfAiDoomsdayEnabled, false);
-            try
-            {
-                MakeStation(pair, map);
-                var body = SpawnRoleBody(pair, map);
-                entMan.System<SharedMindSystem>().TryGetMind(body, out var mindId, out _);
-                var store = FindStore(pair, mindId);
-
-                var present = false;
-                foreach (var listing in entMan.GetComponent<StoreComponent>(store).FullListingsCatalog)
-                {
-                    if (listing.ID == MalfAiConstants.DoomsdayListing.Id)
-                        present = true;
-                }
-
-                Assert.That(present, Is.False, "Doomsday listing stayed in the catalog with the CVar off.");
-            }
-            finally
-            {
-                cfg.SetCVar(CCVars220.MalfAiDoomsdayEnabled, true);
             }
         });
     }
