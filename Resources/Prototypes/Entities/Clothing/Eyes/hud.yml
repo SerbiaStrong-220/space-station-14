@@ -94,13 +94,36 @@
     - PetWearable
     - WhitelistChameleon
 
-# SS220-glasses-on-forehead: keep variants without forehead sprites on the base.
 - type: entity
-  parent: [SS220ClothingEyesHudBeerBase, SS220GlassesOnForeheadBase]
+  parent: [ClothingEyesHudBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingEyesHudBeer
+  name: beer goggles
+  description: A pair of sunHud outfitted with apparatus to scan reagents, as well as providing an innate understanding of liquid viscosity while in motion.
   components:
+  - type: Sprite
+    sprite: Clothing/Eyes/Hud/beergoggles.rsi
   - type: Clothing
     slots: [EYES, HEAD] # SS220-glasses-on-forehead
+    sprite: Clothing/Eyes/Hud/beergoggles.rsi
+    # SS220-glasses-on-forehead-begin
+    clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Eyes/Forehead/Hud/beergoggles.rsi
+        state: equipped-HELMET
+      head-arachnid:
+      - sprite: SS220/Clothing/Eyes/Forehead/Hud/beergoggles.rsi
+        state: equipped-HELMET-arachnid
+      head-moth:
+      - sprite: SS220/Clothing/Eyes/Forehead/Hud/beergoggles.rsi
+        state: equipped-HELMET-moth
+    # SS220-glasses-on-forehead-end
+
+  - type: ShowThirstIcons
+  - type: SolutionScanner
+  - type: Tag
+    tags:
+    - PetWearable
+    - WhitelistChameleon
 
 - type: entity
   parent: ClothingEyesHudBase
@@ -341,7 +364,7 @@
   name: security hud eyepatch
 
 - type: entity
-  parent: [SS220ClothingEyesHudBeerBase, ClothingHeadEyeBaseFlippable] # SS220-glasses-on-forehead
+  parent: [ClothingEyesHudBeer, ClothingHeadEyeBaseFlippable]
   id: ClothingEyesEyepatchHudBeer
   name: beer hud eyepatch
   description: A pair of sunHud outfitted with apparatus to scan reagents, as well as providing an innate understanding of liquid viscosity while in motion. For true patriots.
@@ -349,6 +372,7 @@
   - type: Sprite
     sprite: Clothing/Eyes/Hud/beerpatch.rsi
   - type: Clothing
+    slots: EYES # SS220-glasses-on-forehead: keep the eyepatch in its original slot.
     sprite: Clothing/Eyes/Hud/beerpatch.rsi
 
 - type: entity

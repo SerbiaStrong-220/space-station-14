@@ -94,13 +94,38 @@
       types:
         Blunt: 10
 
-# SS220-glasses-on-forehead: keep variants without forehead sprites on the base.
 - type: entity
-  parent: [SS220ClothingEyesGlassesMesonBase, SS220GlassesOnForeheadBase]
+  parent: [ClothingEyesBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingEyesGlassesMeson
+  name: engineering goggles #less confusion
+  description: Green-tinted goggles using a proprietary polymer that provides protection from eye damage of all types.
   components:
+  - type: Sprite
+    sprite: Clothing/Eyes/Glasses/meson.rsi
   - type: Clothing
     slots: [EYES, HEAD] # SS220-glasses-on-forehead
+    sprite: Clothing/Eyes/Glasses/meson.rsi
+    # SS220-glasses-on-forehead-begin
+    clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/meson.rsi
+        state: equipped-HELMET
+      head-arachnid:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/meson.rsi
+        state: equipped-HELMET-arachnid
+      head-moth:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/meson.rsi
+        state: equipped-HELMET-moth
+    # SS220-glasses-on-forehead-end
+
+  - type: EyeProtection
+  - type: IdentityBlocker
+    coverage: EYES
+  - type: Tag
+    tags:
+    - PetWearable
+    - WhitelistChameleon
+    - SecDogWearable # Roxi
 
 - type: entity
   parent: [ClothingEyesBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
@@ -236,29 +261,87 @@
   - type: StaticPrice
     price: 500
 
-# SS220-glasses-on-forehead: keep variants without forehead sprites on the base.
 - type: entity
-  parent: [SS220ClothingEyesGlassesCheapSunglassesBase, SS220GlassesOnForeheadBase]
+  parent: [ClothingEyesBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingEyesGlassesCheapSunglasses
+  name: cheap sunglasses
+  description: A pair of black sunglasses. Doesn't block light well, more of an accessory than something useful.
   components:
+  - type: Sprite
+    sprite: Clothing/Eyes/Glasses/sunglasses.rsi
   - type: Clothing
     slots: [EYES, HEAD] # SS220-glasses-on-forehead
+    sprite: Clothing/Eyes/Glasses/sunglasses.rsi
+    # SS220-glasses-on-forehead-begin
+    clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/sunglasses.rsi
+        state: equipped-HELMET
+      head-arachnid:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/sunglasses.rsi
+        state: equipped-HELMET-arachnid
+      head-moth:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/sunglasses.rsi
+        state: equipped-HELMET-moth
+      head-hamster:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/sunglasses.rsi
+        state: equipped-HELMET-hamster
+    # SS220-glasses-on-forehead-end
 
-# SS220-glasses-on-forehead: keep variants without forehead sprites on the base.
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - PetWearable
+    - WhitelistChameleon
+    - SecDogWearable # Roxi
+  - type: IdentityBlocker
+    coverage: EYES
+
 - type: entity
-  parent: [SS220ClothingEyesGlassesSunglassesBase, SS220GlassesOnForeheadBase]
+  parent: ClothingEyesGlassesCheapSunglasses
   id: ClothingEyesGlassesSunglasses
+  name: sun glasses
+  description: A pair of black sunglasses.
   components:
-  - type: Clothing
-    slots: [EYES, HEAD] # SS220-glasses-on-forehead
+  - type: FlashImmunity
+  - type: EyeProtection
+    protectionTime: 5
+  - type: Tag
+    tags:
+    - Sunglasses
+    - PetWearable
+    - HamsterWearable
+    - WhitelistChameleon
 
-# SS220-glasses-on-forehead: keep variants without forehead sprites on the base.
 - type: entity
-  parent: [SS220ClothingEyesGlassesSecurityBase, SS220GlassesOnForeheadBase]
+  parent: [ClothingEyesBase, ShowSecurityIcons, BaseSecurityContraband, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingEyesGlassesSecurity
+  name: security glasses
+  description: Upgraded sunglasses that provide flash immunity and a security HUD.
   components:
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/Glasses/security.rsi #SS220-updated
   - type: Clothing
     slots: [EYES, HEAD] # SS220-glasses-on-forehead
+    sprite: SS220/Clothing/Eyes/Glasses/security.rsi #SS220-updated
+  - type: FlashImmunity
+  - type: EyeProtection
+    protectionTime: 5
+  - type: Construction
+    graph: GlassesSecHUD
+    node: glassesSec
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - PetWearable
+    - WhitelistChameleon
+    - SecDogWearable # Roxi
+  - type: GuideHelp
+    guides:
+    - Security
+    - Antagonists
+  - type: IdentityBlocker
+    coverage: EYES
 
 - type: entity
   parent: [ClothingEyesBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
@@ -363,13 +446,37 @@
     coverage: EYES
   - type: ThermalSight
 
-# SS220-glasses-on-forehead: keep variants without forehead sprites on the base.
 - type: entity
-  parent: [SS220ClothingEyesGlassesChemicalBase, SS220GlassesOnForeheadBase]
+  parent: [ClothingEyesBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingEyesGlassesChemical
+  name: chemical analysis goggles
+  description: Goggles that can scan the chemical composition of a solution.
   components:
+  - type: Sprite
+    sprite: Clothing/Eyes/Glasses/science.rsi
   - type: Clothing
     slots: [EYES, HEAD] # SS220-glasses-on-forehead
+    sprite: Clothing/Eyes/Glasses/science.rsi
+    # SS220-glasses-on-forehead-begin
+    clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/science.rsi
+        state: equipped-HELMET
+      head-arachnid:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/science.rsi
+        state: equipped-HELMET-arachnid
+      head-moth:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/science.rsi
+        state: equipped-HELMET-moth
+    # SS220-glasses-on-forehead-end
+
+  - type: SolutionScanner
+  - type: IdentityBlocker
+    coverage: EYES
+  - type: Tag
+    tags:
+    - PetWearable
+    - WhitelistChameleon
 
 - type: entity
   parent: [ClothingEyesBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead

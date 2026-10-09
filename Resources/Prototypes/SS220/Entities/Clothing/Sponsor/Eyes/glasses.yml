@@ -45,6 +45,6 @@
         state: equipped-HELMET
 
 - type: entity
-  parent: [ ClothingSponsorGlassesJujutsuShlepa, SS220ClothingEyesGlassesSunglassesBase ]
+  parent: [ ClothingSponsorGlassesJujutsuShlepa, ClothingEyesGlassesSunglasses ]
   id: ClothingSponsorGlassesJujutsuShlepaSunglasses
   suffix: Floppa, Sunglasses

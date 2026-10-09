@@ -2,7 +2,7 @@
 
 # CyberPunk
 - type: entity
-  parent: [ClothingSponsorEyesBaseUnshaded, SS220ClothingEyesGlassesSecurityBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
+  parent: [ClothingSponsorEyesBaseUnshaded, ClothingEyesGlassesSecurity] # SS220-glasses-on-forehead
   id: ClothingSponsorCyberSecVisor
   name: security cybervisor
   description: Despite its menacing appearance, it provides no protection against flashes or paparazzi.
@@ -23,7 +23,7 @@
         shader: unshaded
 
 - type: entity
-  parent: [ClothingSponsorEyesBaseUnshaded, SS220ClothingEyesGlassesMesonBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
+  parent: [ClothingSponsorEyesBaseUnshaded, ClothingEyesGlassesMeson] # SS220-glasses-on-forehead
   id: ClothingSponsorCyberEngVisor
   name: cyber-welding goggles
   description: Their comically large size has somehow managed to increase efficiency by a whopping 0.42%!
@@ -65,7 +65,7 @@
         shader: unshaded
 
 - type: entity
-  parent: [ClothingSponsorEyesBaseUnshaded, SS220ClothingEyesGlassesChemicalBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
+  parent: [ClothingSponsorEyesBaseUnshaded, ClothingEyesGlassesChemical] # SS220-glasses-on-forehead
   id: ClothingSponsorCyberChemVisor
   name: chemical analysis cybervisor
   description: To guarantee analytical precision, additional sensors were installed, increasing its overall size. Now, no one can tell by your eyes whether you're awake or asleep.
