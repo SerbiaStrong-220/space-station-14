@@ -11,6 +11,8 @@
       level: 1
     Medicine:
       level: 1
+    Anatomy:
+      level: 1
     PhysicalTraining:
       level: 1
   addSublevelPoints: 20
@@ -29,6 +31,8 @@
     Construction:
       level: 1
     Medicine:
+      level: 1
+    Anatomy:
       level: 1
     PhysicalTraining:
       level: 1

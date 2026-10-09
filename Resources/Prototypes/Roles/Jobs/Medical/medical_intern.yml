@@ -28,6 +28,11 @@
     id: MedicalInternPDA
     ears: ClothingHeadsetMedical
     pocket2: BookMedicalReferenceBook
+  # ss220-surgery-update-begin
+  storage:
+    back:
+    - FilledSurgeryMedkit
+  # ss220-surgery-update-end
 
 - type: chameleonOutfit
   id: MedicalInternChameleonOutfit

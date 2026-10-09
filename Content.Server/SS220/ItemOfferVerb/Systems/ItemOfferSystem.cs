@@ -15,13 +15,13 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.ItemOfferVerb.Systems;
 
-public sealed class ItemOfferSystem : SharedItemOfferSystem
+public sealed partial class ItemOfferSystem : SharedItemOfferSystem
 {
-    [Dependency] private readonly EntityManager _entMan = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private EntityManager _entMan = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private HandsSystem _hands = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
 
     private readonly ProtoId<AlertPrototype> _itemOfferAlert = "ItemOffer";
 

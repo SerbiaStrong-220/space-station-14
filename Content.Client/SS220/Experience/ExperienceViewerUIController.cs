@@ -15,9 +15,9 @@ using Content.Shared.SS220.Experience;
 
 namespace Content.Client.SS220.Experience;
 
-public sealed class ExperienceViewerUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>, IOnSystemChanged<ExperienceInfoSystem>
+public sealed partial class ExperienceViewerUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>, IOnSystemChanged<ExperienceInfoSystem>
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     [UISystemDependency] private readonly ExperienceInfoSystem _experienceInfo = default!;
 

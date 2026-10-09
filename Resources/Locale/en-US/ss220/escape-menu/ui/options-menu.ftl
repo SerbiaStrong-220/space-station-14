@@ -1,4 +1,5 @@
 ui-options-function-smart-equip-neck = Smart-equip to neck
+ui-options-function-open-experience-viewer-menu = Open character experience menu
 ui-options-smart-equip-pickup-suitstorge = Pick up item in suitstorge before trying to take from it
 ui-options-audio-tts-part-title = TTS setting
 ui-options-receive-tts = Receive TTS audio

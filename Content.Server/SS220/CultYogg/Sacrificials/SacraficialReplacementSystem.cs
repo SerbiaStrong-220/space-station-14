@@ -13,8 +13,8 @@ namespace Content.Server.SS220.CultYogg.Sacrificials;
 
 public sealed partial class SacrificialReplacementSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly CultYoggRuleSystem _cultRule = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private CultYoggRuleSystem _cultRule = default!;
 
     //dictionary of sacrificials uids and time when they left body by gibbing/ghosting/leaving anything
     private readonly Dictionary<EntityUid, TimeSpan> _replaceSacrSchedule = [];

@@ -11,6 +11,8 @@
       level: 3
     Medicine:
       level: 3
+    Anatomy:
+      level: 3
     PhysicalTraining:
       level: 3
   knowledges:

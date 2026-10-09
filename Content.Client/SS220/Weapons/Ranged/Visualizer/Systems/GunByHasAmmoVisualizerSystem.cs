@@ -14,9 +14,9 @@ namespace Content.Client.SS220.Weapons.Ranged.Visualizer.Systems;
 /// <summary>
 /// This handles the display of inhand sprite on guns.
 /// </summary>
-public sealed class GunByHasAmmoVisualizerSystem : VisualizerSystem<GunByHasAmmoVisualsComponent>
+public sealed partial class GunByHasAmmoVisualizerSystem : VisualizerSystem<GunByHasAmmoVisualsComponent>
 {
-    [Dependency] private readonly SharedItemSystem _itemSys = default!;
+    [Dependency] private SharedItemSystem _itemSys = default!;
 
     public override void Initialize()
     {

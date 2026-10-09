@@ -17,7 +17,7 @@
         - ReagentId: ElixirOfLiberation
           Quantity: 2.0
   - type: Sprite
-    sprite: SS220/Objects/CultYogg/nullification_shroom.rsi
+    sprite: SS220/Objects/CultYogg/Botany/nullification_shroom.rsi
     state: produce
   - type: Produce
     seedId: NullificationShroomSpores
@@ -37,14 +37,14 @@
     - type: Seed
       seedId: NullificationShroomSpores
     - type: Sprite
-      sprite: SS220/Objects/CultYogg/nullification_shroom.rsi
+      sprite: SS220/Objects/CultYogg/Botany/nullification_shroom.rsi
 
 - type: seed
   id: NullificationShroomSpores
   name: seeds-null-shroom-name
   noun: seeds-noun-spores
   displayName: seeds-null-shroom-display-name
-  plantRsi: SS220/Objects/CultYogg/nullification_shroom.rsi
+  plantRsi: SS220/Objects/CultYogg/Botany/nullification_shroom.rsi
   packetPrototype: NullificationShroomSeeds
   productPrototypes:
     - FoodNullificationShroomCult

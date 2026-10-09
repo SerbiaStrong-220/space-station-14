@@ -174,3 +174,18 @@
         - id: PinpointerNuclear
         - id: MicroBombImplanter
         - id: NukeLoneOpsDeclarationOfWar
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateFilledAssaultSuit
+  name: assault suit bundle
+  description: "I hope you're not afraid of getting shot."
+  suffix: Armor
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingOuterVestWebHeavy
+        - !type:NestedSelector
+          tableId: SyndicateHardsuitExtrasEntityTable

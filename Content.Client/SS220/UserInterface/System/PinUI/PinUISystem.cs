@@ -12,10 +12,10 @@ using Robust.Shared.Input.Binding;
 
 namespace Content.Client.SS220.UserInterface.System.PinUI;
 
-public sealed class PinUISystem : EntitySystem
+public sealed partial class PinUISystem : EntitySystem
 {
-    [Dependency] private readonly IInputManager _input = default!;
-    [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
+    [Dependency] private IInputManager _input = default!;
+    [Dependency] private IUserInterfaceManager _uiManager = default!;
 
     public Action<PinStateChangedArgs>? OnPinStateChanged;
 

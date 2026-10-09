@@ -11,12 +11,12 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.Shlepovend;
 
-public sealed class ShlepovendSystem : SharedShlepovendSystem
+public sealed partial class ShlepovendSystem : SharedShlepovendSystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private AudioSystem _audio = default!;
 
     public override void Initialize()
     {

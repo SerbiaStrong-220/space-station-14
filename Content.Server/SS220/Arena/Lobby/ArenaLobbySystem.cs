@@ -12,6 +12,7 @@ using Content.Shared.SS220.CCVars;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
+using Robust.Shared.Localization;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -22,18 +23,18 @@ using System.Numerics;
 
 namespace Content.Server.SS220.Arena.Lobby;
 
-public sealed class ArenaLobbySystem : EntitySystem
+public sealed partial class ArenaLobbySystem : EntitySystem
 {
-    [Dependency] private readonly EuiManager _euiManager = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly SharedMindSystem _mindSystem = default!;
-    [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IComponentFactory _factory = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private EuiManager _euiManager = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private SharedMindSystem _mindSystem = default!;
+    [Dependency] private StationSpawningSystem _stationSpawning = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IComponentFactory _factory = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private const float RefreshIntervalSeconds = 3f;
 
@@ -159,7 +160,7 @@ public sealed class ArenaLobbySystem : EntitySystem
             arenas.Add(new ArenaLobbyEntry
             {
                 ArenaId = id,
-                Name = rule.DisplayName,
+                Name = Loc.GetString(rule.DisplayName),
                 Players = CountOccupied(rule),
                 MaxPlayers = rule.MaxPlayers,
                 Phase = rule.Phase,
@@ -179,8 +180,8 @@ public sealed class ArenaLobbySystem : EntitySystem
             templates.Add(new ArenaLobbyTemplate
             {
                 Id = proto.ID,
-                Name = rule.DisplayName,
-                Description = rule.Description,
+                Name = Loc.GetString(rule.DisplayName),
+                Description = Loc.GetString(rule.Description),
                 Category = rule.DisplayCategory,
                 MaxPlayers = rule.MaxPlayers,
             });

@@ -12,6 +12,7 @@ namespace Content.Shared.Localizations
         // If you want to change your codebase's language, do it here.
         private const string Culture = "ru-RU"; // Corvax-Localization
         private const string FallbackCulture = "en-US"; // Corvax-Localization
+        private const string ForkCulture = "ru-RU-220"; // SS220-loc
 
         /// <summary>
         /// Custom format strings used for parsing and displaying minutes:seconds timespans.
@@ -27,13 +28,18 @@ namespace Content.Shared.Localizations
         public void Initialize()
         {
             var culture = new CultureInfo(Culture);
+            var cultureFork = new CultureInfo(ForkCulture); // SS220
             var fallbackCulture = new CultureInfo(FallbackCulture); // Corvax-Localization
 
             _loc.LoadCulture(culture);
+            _loc.LoadCulture(cultureFork); // SS220
             _loc.LoadCulture(fallbackCulture); // Corvax-Localization
-            _loc.SetFallbackCluture(fallbackCulture); // Corvax-Localization
+
+            _loc.SetFallbackCluture(culture, fallbackCulture); // SS220-loc-edit
+            _loc.SetCulture(cultureFork); // SS220-loc
+
             // SS220-fix-loc-funcs-begin
-            var cultures = new List<CultureInfo>([culture, fallbackCulture]);
+            var cultures = new List<CultureInfo>([culture, fallbackCulture, cultureFork]);
             foreach (var tempCulture in cultures)
             {
                 _loc.AddFunction(tempCulture, "PRESSURE", FormatPressure);
@@ -60,12 +66,13 @@ namespace Content.Shared.Localizations
             _loc.AddFunction(cultureEn, "MAKEPLURAL", FormatMakePlural);
             _loc.AddFunction(cultureEn, "MANY", FormatMany);
 
+            // SS220-loc-begin
+            _loc.AddFunction(culture, "MAKEPLURAL", FormatMakePluralRu);
+            _loc.AddFunction(culture, "MANY", FormatManyRu);
 
-            // TODO canvas123: Fix this, made only to make it work and not fail tests.
-            var cultureRu = new CultureInfo("ru-RU");
-
-            _loc.AddFunction(cultureRu, "MAKEPLURAL", FormatMakePluralRu);
-            _loc.AddFunction(cultureRu, "MANY", FormatManyRu);
+            _loc.AddFunction(cultureFork, "MAKEPLURAL", FormatMakePluralRu);
+            _loc.AddFunction(cultureFork, "MANY", FormatManyRu);
+            // SS220-loc-end
         }
 
         private ILocValue FormatMany(LocArgs args)

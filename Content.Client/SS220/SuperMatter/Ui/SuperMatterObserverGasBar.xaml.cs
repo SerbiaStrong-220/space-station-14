@@ -15,8 +15,8 @@ namespace Content.Client.SS220.SuperMatter.Ui;
 [GenerateTypedNameReferences]
 public sealed partial class SuperMatterObserverGasBar : Control
 {
-    [Dependency] private readonly ILocalizationManager _localization = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private ILocalizationManager _localization = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     public Gas GasId = Gas.Oxygen;
     public Color GasColor;

@@ -4,9 +4,9 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Shared.SS220.Language;
 
-public sealed class LanguageManager
+public sealed partial class LanguageManager
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     public List<LanguagePrototype> Languages { get; private set; } = new();
 

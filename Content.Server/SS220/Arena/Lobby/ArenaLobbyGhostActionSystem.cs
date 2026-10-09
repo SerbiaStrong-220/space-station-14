@@ -6,10 +6,10 @@ using Robust.Shared.Player;
 
 namespace Content.Server.SS220.Arena.Lobby;
 
-public sealed class ArenaLobbyGhostActionSystem : EntitySystem
+public sealed partial class ArenaLobbyGhostActionSystem : EntitySystem
 {
-    [Dependency] private readonly ArenaLobbySystem _lobby = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private ArenaLobbySystem _lobby = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     public override void Initialize()
     {

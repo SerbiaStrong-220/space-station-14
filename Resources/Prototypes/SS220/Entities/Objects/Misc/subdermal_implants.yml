@@ -70,6 +70,20 @@
 
 - type: entity
   parent: BaseSubdermalImplant
+  id: NanoSurgeryMachinesImplant
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SubdermalImplant
+    implantAction: ActionActivateNanoSurgeryMachinesImplant
+  - type: RemovePathologyOnTrigger
+    targetUser: true
+    curePathologyStacksSelectors:
+    - TorsoProjectileFragment: -1
+    - HeadProjectileFragment: -1
+  - type: TriggerOnActivateImplant
+
+- type: entity
+  parent: BaseSubdermalImplant
   id: AdrenalImplant
   categories: [ HideSpawnMenu ]
   components:
@@ -201,6 +215,31 @@
         reagents:
         - ReagentId: Amatoxin
           Quantity: 10
+
+- type: entity
+  parent: DeathRattleImplant
+  id: DeathRattleImplantStation
+  name: station death rattle implant
+  description: This implant reports the wearer's location over the radio should they fall into critical condition or die. The channel it reports on is set before the implant is injected.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SubdermalImplant
+    permanent: false # legal implant, unlike the syndicate one it can be extracted again
+  - type: RattleOnTrigger
+    radioChannel: Medical
+  - type: RattleChannelSelector
+    channels:
+    - Medical
+    - Security
+    - Command
+    - Common
+  - type: HiddenDescription
+    entries:
+      MedicalKnowledge: [ hidden-desc-DeathRattleImplantStation-medical ]
+      SecurityKnowledge: [ hidden-desc-DeathRattleImplantStation-security ]
+      ScienceKnowledge: [ hidden-desc-DeathRattleImplantStation-research ]
+      SyndicateAgentKnowledge: [ hidden-desc-DeathRattleImplantStation-syndicate ]
+    hiddenName: null
 
 - type: entity
   parent: DeathRattleImplant

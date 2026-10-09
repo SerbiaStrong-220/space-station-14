@@ -15,11 +15,11 @@ namespace Content.Shared.SS220.StaminaConvertArmor;
 /// - Blocks specified status effects from applying while the armor is equipped.
 /// - Relays events via inventory slots to ensure effects apply correctly when worn.
 /// </summary>
-public sealed class StaminaConvertArmorSystem : EntitySystem
+public sealed partial class StaminaConvertArmorSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

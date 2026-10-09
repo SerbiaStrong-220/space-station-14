@@ -108,6 +108,13 @@
         Piercing: 0.6
         Heat: 0.7
         Caustic: 0.75 # not the full 90% from ss13 because of the head
+  # ss220 add radio slot start
+  - type: ContainerContainer
+    containers:
+      item_radio: !type:ContainerSlot { }
+      storagebase: !type:Container
+        ents: [ ]
+  # ss220 add radio slot end
 
 - type: entity
   abstract: true

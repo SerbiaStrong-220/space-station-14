@@ -11,7 +11,7 @@ namespace Content.Shared.SS220.LimitationRevive;
 /// This is used for limiting the number of defibrillator resurrections
 /// </summary>
 [RegisterComponent]
-[NetworkedComponent, AutoGenerateComponentState]
+[NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true)]
 public sealed partial class LimitationReviveComponent : Component
 {
     /// <summary>
@@ -29,19 +29,6 @@ public sealed partial class LimitationReviveComponent : Component
     public int DeathCounter = 0;
 
     /// <summary>
-    /// Delay before target takes brain damage
-    /// </summary>
-    [DataField]
-    [AutoNetworkedField]
-    public TimeSpan BeforeDamageDelay = TimeSpan.FromSeconds(180);
-
-    /// <summary>
-    /// The exact time when the target will take damage
-    /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
-    public TimeSpan? DamageCountingTime;
-
-    /// <summary>
     /// How much and what type of damage will be dealt
     /// </summary>
     [DataField]
@@ -54,18 +41,17 @@ public sealed partial class LimitationReviveComponent : Component
     };
 
     [DataField]
-    public ProtoId<WeightedRandomPrototype> WeightListProto = "TraitAfterDeathList";
+    public ProtoId<WeightedRandomPrototype> WeightListProto = "PathologyAfterDeathList";
 
     [ViewVariables]
     [AutoNetworkedField]
     public List<string> RecievedDebuffs = [];
 
     /// <summary>
-    /// The probability from 0 to 1 that a negative feature will be added in case of unsuccessful use of the defibrillator.
     /// </summary>
     [DataField]
     [AutoNetworkedField]
-    public float ChanceToAddTrait = 0.6f;
+    public float ChanceToAddPathology = 0.6f;
 
     /// <summary>
     /// Multiplier applied to <see cref="UpdateInterval"/> for adjusting based on metabolic rate multiplier.
@@ -73,4 +59,17 @@ public sealed partial class LimitationReviveComponent : Component
     [ViewVariables(VVAccess.ReadOnly)]
     public float UpdateIntervalMultiplier = 1f;
 
+    /// <summary>
+    /// Delay before target takes brain damage
+    /// </summary>
+    [DataField]
+    [AutoNetworkedField]
+    public TimeSpan BeforeDamageDelay = TimeSpan.FromSeconds(180);
+
+    /// <summary>
+    /// The exact time when the target will take damage
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    [AutoNetworkedField]
+    public TimeSpan? DamageCountingTime;
 }

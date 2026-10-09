@@ -4,12 +4,14 @@
   groups:
   - CaptainHead
   - CAPHeadset #SS220-Law Department
+  - CaptainInnerEncryptionKeys #SS220-ipc-builtin-radio
   - CaptainNeck
   - CaptainJumpsuit
   - CaptainBackpack
   - CaptainGloves #SS220-whiteCaptainGloves
   - CaptainOuterClothing
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- CaptainJobTrinkets
   - GroupSpeciesBreathTool
@@ -23,12 +25,14 @@
   - GroupTankHarness
   - HoPHead
   - HoPHeadset #SS220 Headsetloadout
+  - CommandInnerEncryptionKeys #SS220-ipc-builtin-radio
   - HoPNeck
   - HoPJumpsuit
   - HoPBackpack
   - HoPOuterClothing
   - Glasses
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- HoPJobTrinkets
   - GroupSpeciesBreathTool
@@ -64,6 +68,7 @@
   - PassengerShoes
   - Glasses
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- PassengerJobTrinkets
   - GroupSpeciesBreathTool
@@ -79,7 +84,9 @@
   - BartenderOuterClothing
   - Glasses
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
+  - ServiceInnerEncryptionKeys #SS220-ipc-builtin-radio
   - BartenderJobTrinkets
   - GroupSpeciesBreathTool
   - WorkerCash #SS220-Cash-personal
@@ -92,7 +99,9 @@
   - CommonBackpack
   - Glasses
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
+  - ServiceInnerEncryptionKeys #SS220-ipc-builtin-radio
   #- ServiceWorkerJobTrinkets
   - GroupSpeciesBreathTool
   - WorkerCash #SS220-Cash-personal
@@ -109,7 +118,9 @@
   - ChefBeltApron #SS220 Chef Resprite
   - Glasses
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
+  - ServiceInnerEncryptionKeys #SS220-ipc-builtin-radio
   #- ChefJobTrinkets
   - GroupSpeciesBreathTool
   - WorkerCash #SS220-Cash-personal
@@ -123,6 +134,8 @@
   - LibrarianEyes #SS220 ADD Monocle
   - Survival
   - Trinkets
+  - ServiceInnerEncryptionKeys #SS220-ipc-builtin-radio
+  - SurvivalVox #SS220-Survival-Loadout
   #- LibrarianJobTrinkets
   - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
@@ -133,17 +146,20 @@
   groups:
   - LawyerHead # ss220 - ntr add - transfer iaa cloths
   - LawyerHeadset #SS220-Law Department & SS220 add-iaa-command-key
+  - LawyerInnerEncryptionKeys #SS220-ipc-builtin-radio
   - GroupTankHarness
   - LawyerNeck
   - LawyerJumpsuit
   - LawyerOuterclothing #SS220-Two Floppa Iteration
-  - CommonBackpack
+  - LawyerBackpack #SS220- Leather backback loadout
   - IAAGlasses #SS220-IAA-Loadouts
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Gloves #SS220-IAA-Loadouts
   - Trinkets
   #- LawyerJobTrinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
@@ -160,7 +176,9 @@
   - ChaplainBible
   - Glasses
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
+  - ServiceInnerEncryptionKeys #SS220-ipc-builtin-radio
   #- ChaplainJobTrinkets
   - GroupSpeciesBreathTool
   - WorkerCash #SS220-Cash-personal
@@ -172,16 +190,23 @@
   - JanitorHead
   - JanitorJumpsuit
   - JanitorGloves
-  - CommonBackpack
+  #SS220-BackpackJR begin
+  #- CommonBackpack
+  - JanitorBackpack
+  #SS220-BackpackJR end
   - JanitorOuterClothing
   - JanitorShoes #SS220-OrangeJanitor
   - JanitorBelt #SS220-JunkRecyclesJanitor
   - Glasses
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
+  - ServiceInnerEncryptionKeys #SS220-ipc-builtin-radio
   - JanitorJobTrinkets
   - GroupSpeciesBreathTool
   - WorkerCash #SS220-Cash-personal
+  - JanitorEquipment #SS220-JREquipmentUpdate
+  - JanitorPDA #SS220-JRNewThings
 
 - type: roleLoadout
   id: JobBotanist
@@ -193,7 +218,9 @@
   - BotanistOuterClothing
   - Glasses
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
+  - ServiceInnerEncryptionKeys #SS220-ipc-builtin-radio
   #- BotanistJobTrinkets
   - GroupSpeciesBreathTool
   - BotanistBelt #SS220 druid loadout
@@ -216,7 +243,9 @@
   - ClownShoes
   - Glasses
   - SurvivalClown
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
+  - ServiceInnerEncryptionKeys #SS220-ipc-builtin-radio
   - ClownJobTrinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - WorkerCash #SS220-Cash-personal
@@ -235,7 +264,9 @@
   - MimeShoes #SS220-Two Floppa Iterarion
   - Glasses
   - SurvivalMime
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
+  - ServiceInnerEncryptionKeys #SS220-ipc-builtin-radio
   #- MimeJobTrinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - WorkerCash #SS220-Cash-personal
@@ -252,7 +283,9 @@
   - MusicianShoes #SS220 bard loadout
   - Glasses
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
+  - ServiceInnerEncryptionKeys #SS220-ipc-builtin-radio
   #- MusicianJobTrinkets
   - Instruments
   - GroupSpeciesBreathTool
@@ -266,6 +299,7 @@
   - GroupTankHarness
   - QuartermasterHead
   - QuartermasterHeadset #SS220 HeadsetLoadout
+  - QuartermasterInnerEncryptionKeys #SS220-ipc-builtin-radio
   - QuartermasterNeck
   - QuartermasterJumpsuit
   - CargoTechnicianBackpack
@@ -273,6 +307,7 @@
   - QuartermasterShoes
   - Glasses
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- QuartermasterJobTrinkets
   - GroupSpeciesBreathTool
@@ -291,7 +326,9 @@
   - CargoTechnicianID
   - Glasses
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
+  - CargoInnerEncryptionKeys #SS220-ipc-builtin-radio
   #- CargoTechnicianJobTrinkets
   - GroupSpeciesBreathTool
   - WorkerCash #SS220-Cash-personal
@@ -304,10 +341,14 @@
   - SalvageSpecialistBackpack
   - SalvageSpecialistJumpsuit #SS220-MoreTurtleneck
   - SalvageSpecialistOuterClothing
+  - SalvageSpecialistBelt #SS220-JRNewThings
+  - SalvageSpecialistID #SS220-JRNewThings
   - SalvageSpecialistShoes
   - Glasses
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
+  - CargoInnerEncryptionKeys #SS220-ipc-builtin-radio
   #- SalvageSpecialistJobTrinkets
   - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
@@ -320,6 +361,7 @@
   - GroupTankHarness
   - ChiefEngineerHead
   - ChiefEngineerHeadset #SS220 HeadsetLoadout
+  - ChiefEngineerInnerEncryptionKeys #SS220-ipc-builtin-radio
   - EngineerGlasses #SS220-TwoOne-Floppa-Iteration
   - ChiefEngineerJumpsuit
   - ChiefEngineerBack #ss220-ce-fix
@@ -328,6 +370,7 @@
   - ChiefEngineerShoes
   - ChiefEngineerPDA #SS220-dark-chief-engineer-pda
   - SurvivalExtended
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- ChiefEngineerJobTrinkets
   - GroupSpeciesBreathTool
@@ -341,7 +384,9 @@
   - TechnicalAssistantJumpsuit
   - StationEngineerBackpack
   - SurvivalExtended
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
+  - EngineeringInnerEncryptionKeys #SS220-ipc-builtin-radio
   #- TechnicalAssistantJobTrinkets
   - GroupSpeciesBreathTool
   - CivilianCash #SS220-Cash-personal
@@ -358,7 +403,9 @@
   - StationEngineerShoes
   - StationEngineerID
   - SurvivalExtended
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
+  - EngineeringInnerEncryptionKeys #SS220-ipc-builtin-radio
   #- StationEngineerJobTrinkets
   - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
@@ -374,7 +421,9 @@
   - AtmosphericTechnicianOuterClothing
   - AtmosphericTechnicianShoes
   - SurvivalExtended
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
+  - EngineeringInnerEncryptionKeys #SS220-ipc-builtin-radio
   #- AtmosphericTechnicianJobTrinkets
   - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
@@ -387,6 +436,7 @@
   - GroupTankHarness
   - ResearchDirectorHead
   - ResearchDirectorHeadset #SS220 HeadsetLoadout
+  - ResearchDirectorInnerEncryptionKeys #SS220-ipc-builtin-radio
   - ScientistGlasses #SS220-TwoOne-Floppa-Iteration
   - ResearchDirectorNeck
   - ResearchDirectorJumpsuit
@@ -397,6 +447,7 @@
   - ResearchDirectorPDA #SS220-RD-New-Loadout
 #  - Glasses #SS220-TwoOne-Floppa-Iteration
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
   #- ResearchDirectorJobTrinkets
   - GroupSpeciesBreathTool
@@ -418,7 +469,9 @@
   - ScientistPDA
 #  - Glasses #SS220-Two Floppa Iteration
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
+  - ScienceInnerEncryptionKeys #SS220-ipc-builtin-radio
   #- ScientistJobTrinkets
   - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
@@ -432,7 +485,9 @@
   - ScientistBackpack
   - Glasses
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
+  - ScienceInnerEncryptionKeys #SS220-ipc-builtin-radio
   #- ResearchAssistantJobTrinkets
   - GroupSpeciesBreathTool
   - CivilianCash #SS220-Cash-personal
@@ -451,7 +506,9 @@
   - HeadofSecurityOuterClothing
   - SecurityShoes
   - SurvivalSecurity
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
+  - HeadOfSecurityInnerEncryptionKeys #SS220-ipc-builtin-radio
   - HeadofSecurityJobTrinkets
   - GroupSpeciesBreathToolSecurity
   - SecurityHoSSiutstorage #SS220-OfficerCutlass
@@ -471,7 +528,9 @@
   - WardenOuterClothing
   - SecurityShoes
   - SurvivalSecurity
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
+  - SecurityInnerEncryptionKeys #SS220-ipc-builtin-radio
   - WardenJobTrinkets
   - GroupSpeciesBreathToolSecurity
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
@@ -492,7 +551,9 @@
   - SecurityPDA
   - SecurityBelt
   - SurvivalSecurity
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
+  - SecurityInnerEncryptionKeys #SS220-ipc-builtin-radio
   - SecurityJobTrinkets
   - GroupSpeciesBreathToolSecurity
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
@@ -509,7 +570,9 @@
   - DetectiveOuterClothing
   - DetectiveShoes #SS220 dec-lux-shoes
   - SurvivalSecurity
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
+  - SecurityInnerEncryptionKeys #SS220-ipc-builtin-radio
   - DetectiveJobTrinkets
   - GroupSpeciesBreathToolSecurity
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
@@ -521,7 +584,9 @@
   - SecurityCadetJumpsuit
   - SecurityBackpack
   - SurvivalSecurity
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
+  - SecurityInnerEncryptionKeys #SS220-ipc-builtin-radio
   #- SecurityCadetJobTrinkets
   - GroupSpeciesBreathToolSecurity
   - CivilianCash #SS220-Cash-personal
@@ -537,7 +602,9 @@
   - CommonBackpack
   - Glasses
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
   - Trinkets
+  - ServiceInnerEncryptionKeys #SS220-ipc-builtin-radio
   #- ReporterJobTrinkets
   - GroupSpeciesBreathTool
   - WorkerCash #SS220-Cash-personal
@@ -551,7 +618,10 @@
   - MedicalBackpack
   - Glasses
   - Survival
+  - SurvivalVox #SS220-Survival-Loadout
+  - GroupSpeciesBreathToolMedical #SS220-Survival-Loadout
   - Trinkets
+  - MedicalInnerEncryptionKeys #SS220-ipc-builtin-radio
   #- PsychologistJobTrinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - WorkerCash #SS220-Cash-personal

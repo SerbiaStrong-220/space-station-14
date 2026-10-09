@@ -15,7 +15,7 @@ namespace Content.Shared.SS220.Experience.DoAfterEffect;
 public abstract partial class BaseDoAfterSkillSystem<TComp, TEvent> : SkillEntitySystem where TComp : BaseDoAfterSkillComponent
                                                                                     where TEvent : DoAfterEvent
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -70,6 +70,9 @@ public abstract partial class BaseDoAfterSkillSystem<TComp, TEvent> : SkillEntit
 
     protected virtual void OnDoAfterStart(Entity<TComp> entity, ref BeforeDoAfterStartEvent args)
     {
+        if (args.Args.ArgFlags.HasFlag(DoAfterArgFlags.IgnoreExperienceModification))
+            return;
+
         if (!entity.Comp.FullBlock)
         {
             args.Args.DelayModifier *= entity.Comp.DurationScale;
@@ -96,6 +99,9 @@ public abstract partial class BaseDoAfterSkillSystem<TComp, TEvent> : SkillEntit
 
     protected virtual void OnDoAfterEnd(Entity<TComp> entity, ref BeforeDoAfterCompleteEvent args)
     {
+        if (args.Args.ArgFlags.HasFlag(DoAfterArgFlags.IgnoreExperienceModification))
+            return;
+
         if (!GetPredictedRandomOnCurTick(GetNetEntity(entity), GetNetEntity(args.Args.User)).Prob(entity.Comp.FailureChance))
             return;
 

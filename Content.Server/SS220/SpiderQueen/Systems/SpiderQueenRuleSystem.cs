@@ -14,14 +14,14 @@ using Robust.Shared.Map;
 
 namespace Content.Server.SS220.SpiderQueen.Systems;
 
-public sealed class SpiderQueenRuleSystem : GameRuleSystem<SpiderQueenRuleComponent>
+public sealed partial class SpiderQueenRuleSystem : GameRuleSystem<SpiderQueenRuleComponent>
 {
-    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly SpecialRespawnSystem _specialRespawn = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
+    [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private SpecialRespawnSystem _specialRespawn = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
 
     public override void Initialize()
     {

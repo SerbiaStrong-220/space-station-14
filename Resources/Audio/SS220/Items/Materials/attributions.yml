@@ -1,0 +1,20 @@
+- files:
+  - cardboard_drop.ogg
+  - cardboard_pick_up.ogg
+  - glass_drop.ogg
+  - glass_pick_up.ogg
+  - iron_rod_pick_up.ogg
+  - metal_drop.ogg
+  - metal_pick_up.ogg
+  - wood_drop.ogg
+  - wood_pick_up.ogg
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from BandaStation"
+  source: "https://github.com/ss220club/BandaStation/commit/58501dce77aba5811fa92a6d7de7d0cc0a1e56ac"
+  
+- files:
+  - plastic_drop.ogg
+  - plastic_pick_up.ogg
+  license: "Custom"
+  copyright: "Made by TonyBigShoes for SS220"
+  source: "https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt"

@@ -12,11 +12,11 @@ using Robust.Shared.Random;
 
 namespace Content.Shared.SS220.Experience.Skill.Systems;
 
-public sealed class JetPackUseSkillSystem : SkillEntitySystem
+public sealed partial class JetPackUseSkillSystem : SkillEntitySystem
 {
-    [Dependency] private readonly SharedJetpackSystem _jetpack = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedJetpackSystem _jetpack = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     private EntityQuery<JetpackComponent> _jetpackQuery;
     private EntityQuery<JetpackUserComponent> _jetpackUserQuery;

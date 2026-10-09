@@ -7,8 +7,10 @@ using Content.Shared.Projectiles;
 
 namespace Content.Client.SS220.SuperMatter.Emitter;
 
-public sealed class SuperMatterEmitterSystem : EntitySystem
+public sealed partial class SuperMatterEmitterSystem : EntitySystem
 {
+    [Dependency] private SpriteSystem _sprite = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -26,7 +28,7 @@ public sealed class SuperMatterEmitterSystem : EntitySystem
         if (!TryComp<SuperMatterEmitterExtensionComponent>(shootAuthorUid, out var superMatterEmitter))
             return;
 
-        spriteComponent.Color = Colormaps.SMEmitter.GetCorrespondingColor(superMatterEmitter.EnergyToMatterRatio / 100f);
-        spriteComponent.Scale = new Vector2(MathF.Sqrt(superMatterEmitter.PowerConsumption / (float)SuperMatterEmitterExtensionConsts.BaseEnergyConsumption));
+        _sprite.SetColor(entity.Owner, Colormaps.SMEmitter.GetCorrespondingColor(superMatterEmitter.EnergyToMatterRatio / 100f));
+        _sprite.SetScale(entity.Owner, new Vector2(MathF.Sqrt(superMatterEmitter.PowerConsumption / (float)SuperMatterEmitterExtensionConsts.BaseEnergyConsumption)));
     }
 }

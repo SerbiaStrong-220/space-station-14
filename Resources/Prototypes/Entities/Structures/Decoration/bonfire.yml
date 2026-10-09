@@ -41,11 +41,6 @@
     sound:
       path: /Audio/Ambience/Objects/fireplace.ogg
   - type: AlwaysHot
-  #SS220-beachCrafting-Start
-  - type: Construction
-    graph: BonFire
-    node: BonfireNode
-  #SS220-beachCrafting-End
   - type: IgnitionSource
     temperature: 700
     ignited: true

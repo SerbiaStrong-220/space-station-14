@@ -14,7 +14,7 @@
   id: ReactionCleanable
 
 - type: Tag
-  id: GrenadeDusterArta
+  id: CartridgeArtilleryShell
 
 - type: Tag
   id: MagazineGrenadeArta
@@ -327,7 +327,8 @@
 
 # ss220 Cult_update2 start
 - type: Tag
-  id: CultYoggInnerHandToggleable
+  id: YoggInnerHandEquipment
+
 # ss220 Cult_update2 end
 
 # ss220 ChameleonStructure start
@@ -362,7 +363,7 @@
   id: CultYoggTeleportExit
 
 - type: Tag
-  id: VoidTeleporationTarget
+  id: VoidTeleportDestination
 
 - type: Tag
   id: EnvelopeWhitelist
@@ -372,6 +373,9 @@
 
 - type: Tag
   id: AirDefenseTarget
+
+- type: Tag
+  id: Ipc
 
 - type: Tag
   id: CrystalPurple
@@ -393,3 +397,18 @@
 
 - type: Tag
   id: HookahCoal
+
+- type: Tag
+  id: HookahTobacco
+
+- type: Tag
+  id: AstralBlocker
+
+- type: Tag
+  id: MiGoBuildingBlocker
+
+- type: Tag
+  id: WeaponShotgunDoubleBarreled
+
+- type: Tag
+  id: YoggEquipment

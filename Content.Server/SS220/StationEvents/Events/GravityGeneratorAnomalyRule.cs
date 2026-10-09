@@ -10,9 +10,9 @@ using Content.Shared.Station.Components;
 
 namespace Content.Server.SS220.StationEvents.Events;
 
-public sealed class GravityGeneratorAnomalyRule : StationEventSystem<GravityGeneratorAnomalyRuleComponent>
+public sealed partial class GravityGeneratorAnomalyRule : StationEventSystem<GravityGeneratorAnomalyRuleComponent>
 {
-    [Dependency] private readonly PowerChargeSystem _powerCharge = default!;
+    [Dependency] private PowerChargeSystem _powerCharge = default!;
 
     protected override void Started(EntityUid uid, GravityGeneratorAnomalyRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {

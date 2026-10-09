@@ -12,13 +12,13 @@ using Content.Shared.Roles;
 
 namespace Content.Server.SS220.RedWings;
 
-public sealed class RedWingsClientPaperSystem : EntitySystem
+public sealed partial class RedWingsClientPaperSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly PaperSystem _paper = default!;
-    [Dependency] private readonly StationRecordsSystem _stationRecords = default!;
-    [Dependency] private readonly SharedStationSystem _station = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private PaperSystem _paper = default!;
+    [Dependency] private StationRecordsSystem _stationRecords = default!;
+    [Dependency] private SharedStationSystem _station = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     public override void Initialize()
     {
@@ -84,13 +84,13 @@ public sealed class RedWingsClientPaperSystem : EntitySystem
         {
             var name = record.Item2.Name;
             var dna = record.Item2.DNA;
-            
+
             clientMessage.PushNewline();
             clientMessage.AddMarkupPermissive(Loc.GetString("book-text-redwings-client-middle", ("dna", dna ?? ""), ("name", name)));
             clientMessage.PushNewline();
         }
         clientMessage.PushNewline();
-            
+
         redWingsClientList = Loc.GetString("book-text-redwings-client-start") + clientMessage + Loc.GetString("book-text-redwings-client-end");
 
         return true;

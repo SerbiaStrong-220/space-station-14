@@ -27,6 +27,13 @@
       implant: DnaCopyImplant
 
 - type: entity
+  id: NanoSurgeryMachinesImplanter
+  parent: BaseImplantOnlyImplanterSyndi
+  components:
+  - type: Implanter
+    implant: NanoSurgeryMachinesImplant
+
+- type: entity
   id: AdrenalImplanter
   parent: BaseImplantOnlyImplanterSyndi
   components:
@@ -105,3 +112,12 @@
   components:
   - type: Implanter
     implant: DeathRattleImplantInterdyne
+
+- type: entity
+  id: DeathRattleImplanterStation
+  name: station death rattle implanter
+  description: A disposable syringe holding a death rattle implant. The radio channel it reports on can be picked from the context menu before injecting.
+  parent: BaseImplantOnlyImplanter
+  components:
+  - type: Implanter
+    implant: DeathRattleImplantStation

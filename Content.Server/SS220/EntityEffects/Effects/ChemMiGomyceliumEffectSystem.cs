@@ -13,8 +13,8 @@ namespace Content.Server.SS220.EntityEffects.Effects;
 /// </summary>
 public sealed partial class ChemMiGomyceliumEffectSystem : EntityEffectSystem<MetaDataComponent, ChemMiGomyceliumEffect>
 {
-    [Dependency] private readonly CultYoggSystem _cultYogg = default!;
-    [Dependency] private readonly CultYoggAnimalCorruptionSystem _cultYoggAnimalCorruption = default!;
+    [Dependency] private CultYoggSystem _cultYogg = default!;
+    [Dependency] private CultYoggAnimalCorruptionSystem _cultYoggAnimalCorruption = default!;
 
     protected override void Effect(Entity<MetaDataComponent> entity, ref EntityEffectEvent<ChemMiGomyceliumEffect> args)
     {

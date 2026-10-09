@@ -9,12 +9,12 @@ using Robust.Shared.Player;
 
 namespace Content.Client.SS220.GhostRoleCast;
 
-public sealed class GhostRoleCastSystem : EntitySystem
+public sealed partial class GhostRoleCastSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IConsoleHost _consoleHost = default!;
-    [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
+    [Dependency] private ISharedPlayerManager _playerManager = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IConsoleHost _consoleHost = default!;
+    [Dependency] private IUserInterfaceManager _uiManager = default!;
 
     public override void Initialize()
     {

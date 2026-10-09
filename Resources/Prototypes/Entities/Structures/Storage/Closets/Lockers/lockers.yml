@@ -661,7 +661,7 @@
   components:
   - type: Appearance
   - type: AccessReader
-    access: [["Theatre"]]
+    access: [["Clown"]] #SS220-ClownAndMimeAccess
   - type: EntityStorageVisuals
     stateBaseClosed: clown
     stateDoorOpen: steellocker_open #SS220-Closet-Resprite
@@ -675,7 +675,7 @@
   components:
   - type: Appearance
   - type: AccessReader
-    access: [["Theatre"]]
+    access: [["Mime"]] #SS220-ClownAndMimeAccess
   - type: EntityStorageVisuals
     stateBaseClosed: mime
     stateDoorOpen: steellocker_open #SS220-Closet-Resprite

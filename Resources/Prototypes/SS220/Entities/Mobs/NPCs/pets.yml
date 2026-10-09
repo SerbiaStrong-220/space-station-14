@@ -231,3 +231,7 @@
     interactSuccessSpawn: EffectHearts
     interactSuccessSound:
       path: /Audio/SS220/Animals/bnuuy_squeak_2.ogg
+  - type: Tag
+    tags:
+    - StunImmune
+

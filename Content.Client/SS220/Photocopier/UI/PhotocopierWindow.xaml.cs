@@ -36,8 +36,8 @@ public sealed partial class PhotocopierWindow : FancyWindow
     private static readonly ProtoId<SkillPrototype> SkillToUnderstandFormNames = "BureaucracyTrained";
 
     // Dependencies
-    [Dependency] private readonly IEntitySystemManager _sysMan = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private IEntitySystemManager _sysMan = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
 
     private readonly ExperienceSystem _experienceSystem = default!;
 

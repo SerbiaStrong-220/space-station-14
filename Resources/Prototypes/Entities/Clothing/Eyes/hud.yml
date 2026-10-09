@@ -43,6 +43,7 @@
     damageContainers:
     - Inorganic
     - Silicon
+    - Ipc #SS220-IPC
   - type: ShowAccessReaderSettings
 
 - type: entity
@@ -259,6 +260,7 @@
   #SS220 Syndie visor buff start
     - Silicon #to destroy borgs or heal syndie assault borg
     - Inorganic
+    - Ipc #SS220-MicroFixesIPC
   - type: ShowHealthIcons
     damageContainers:
     - Biological

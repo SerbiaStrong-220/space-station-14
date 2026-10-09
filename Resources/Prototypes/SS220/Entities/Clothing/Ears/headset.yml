@@ -164,3 +164,15 @@
     sprite: SS220/Clothing/Ears/Headsets/redwings.rsi
   - type: Clothing
     sprite: SS220/Clothing/Ears/Headsets/redwings.rsi
+
+- type: entity
+  parent: ClothingHeadset
+  id: ClothingHeadsetPrisoner
+  name: prisoner headset
+  description: Scratched headset of the brig prisoner.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Ears/Headsets/prisoner.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Ears/Headsets/prisoner.rsi
+

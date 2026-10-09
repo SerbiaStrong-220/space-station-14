@@ -12,15 +12,15 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.CultYogg.MiGoTeleport;
 
-public sealed class MiGoTeleportSystem : EntitySystem
+public sealed partial class MiGoTeleportSystem : EntitySystem
 {
-    [Dependency] private readonly SharedUserInterfaceSystem _userInterfaceSystem = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private SharedUserInterfaceSystem _userInterfaceSystem = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
 
     public override void Initialize()
     {

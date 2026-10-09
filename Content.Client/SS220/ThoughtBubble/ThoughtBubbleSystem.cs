@@ -10,9 +10,9 @@ namespace Content.Client.SS220.ThoughtBubble;
 /// <summary>
 /// Handles thought bubble visuals - spawns, updates position/rotation
 /// </summary>
-public sealed class ThoughtBubbleSystem : EntitySystem
+public sealed partial class ThoughtBubbleSystem : EntitySystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private const float ItemSpriteScale = 0.8f;
 

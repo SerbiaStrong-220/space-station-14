@@ -20,6 +20,15 @@
     sprite: SS220/Clothing/Back/Satchels/leather-noir.rsi
 
 - type: entity
+  parent: ClothingBackpackSatchel
+  id: ClothingBackpackJanitorJRSatchel
+  name: JR satchel
+  description: A convenient, water resistant backpack designed for cleaners JR.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Back/Satchels/janitor_jr.rsi
+
+- type: entity
   parent: ClothingBackpackSatchelLeather
   id: ClothingBackpackCentCommFilled
   name: leather satchel

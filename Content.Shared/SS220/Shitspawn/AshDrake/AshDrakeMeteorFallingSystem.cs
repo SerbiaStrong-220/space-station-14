@@ -5,10 +5,10 @@ using System.Numerics;
 
 namespace Content.Shared.SS220.Shitspawn.AshDrake;
 
-public sealed class AshDrakeMeteorFallingSystem : EntitySystem
+public sealed partial class AshDrakeMeteorFallingSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Update(float frameTime)
     {

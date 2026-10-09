@@ -108,7 +108,12 @@ public abstract partial class SharedVisualBodySystem
 
             if (TryComp<VisualOrganMarkingsComponent>(organ, out var visualOrganMarkings))
             {
-                markings.TryAdd(category, visualOrganMarkings.MarkingData);
+                //SS220-IPC begin
+                var markingData = visualOrganMarkings.MarkingData;
+                markingData.Layers = new HashSet<HumanoidVisualLayers>(markingData.Layers);
+                markings.TryAdd(category, markingData);
+                //SS220-IPC end
+
                 if (filter is not null)
                     applied.TryAdd(category, visualOrganMarkings.Markings.Where(kvp => filter.Contains(kvp.Key)).ToDictionary());
                 else

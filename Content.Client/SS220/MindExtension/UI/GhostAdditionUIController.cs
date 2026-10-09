@@ -13,8 +13,8 @@ namespace Content.Client.SS220.MindExtension.UI;
 [UsedImplicitly]
 public sealed partial class GhostAdditionUIController : UIController, IOnSystemChanged<MindExtensionSystem>
 {
-    [Dependency] private readonly IEntityNetworkManager _net = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private IEntityNetworkManager _net = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
 
     [UISystemDependency] private readonly MindExtensionSystem _extensionSystem = default!;
 

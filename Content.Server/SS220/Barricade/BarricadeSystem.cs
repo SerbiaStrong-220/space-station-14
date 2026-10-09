@@ -10,8 +10,8 @@ namespace Content.Server.SS220.Barricade;
 
 public sealed partial class BarricadeSystem : SharedBarricadeSystem
 {
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     protected override bool HitscanTryPassBarricade(Entity<BarricadeComponent> entity, EntityUid source, TransformComponent? sourceXform = null)
     {

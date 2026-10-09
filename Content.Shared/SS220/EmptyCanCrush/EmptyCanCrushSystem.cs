@@ -9,12 +9,12 @@ using Content.Shared.Hands.EntitySystems;
 
 namespace Content.Shared.SS220.EmptyCanCrush;
 
-public sealed class EmptyCanCrushSystem : EntitySystem
+public sealed partial class EmptyCanCrushSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedHandsSystem _handsSystem = default!;
 
     private static readonly ProtoId<TagPrototype> TrashTag = "Trash";
     private static readonly ProtoId<TagPrototype> CanTag = "DrinkCan";

@@ -21,6 +21,14 @@
     # SS220-add-christmas-baton-end
   - type: Stunbaton
     energyPerUse: 50
+  # SS220-stunbaton-as-defib-begin
+  - type: DirectCompactDefibrillator
+    showIncorrectUsagePopup: false
+  - type: Defibrillator
+    zapHeal:
+      types:
+        Asphyxiation: -20
+  # SS220-stunbaton-as-defib-end
   - type: ItemToggle
     predictable: false
     soundActivate:

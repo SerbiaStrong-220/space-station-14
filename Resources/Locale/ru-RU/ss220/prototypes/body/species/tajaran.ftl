@@ -1,6 +1,6 @@
 ent-AppearanceTajaran = внешность таярана
     .desc = { ent-BaseSpeciesAppearance.desc }
-ent-MobTajaran = Урист МакТажаран
+ent-MobTajaran = Урист МакТаяран
     .desc = { ent-AppearanceTajaran.desc }
 ent-OrganTajaran = { ent-OrganBase }
     .desc = { ent-OrganBase.desc }

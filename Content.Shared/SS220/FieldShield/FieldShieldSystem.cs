@@ -13,11 +13,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.FieldShield;
 
-public sealed class FieldShieldProviderSystem : EntitySystem
+public sealed partial class FieldShieldProviderSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     private const int FieldShieldPushPriority = 2;
 

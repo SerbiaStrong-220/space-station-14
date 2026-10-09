@@ -18,16 +18,16 @@ namespace Content.Shared.SS220.PlacerItem;
 
 public sealed partial class PlacerItemSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IComponentFactory _factory = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IComponentFactory _factory = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
 
     private static readonly ProtoId<TagPrototype> CatWalkTag = "CatWalk";
 

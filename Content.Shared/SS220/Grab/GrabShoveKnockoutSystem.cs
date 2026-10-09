@@ -7,7 +7,7 @@ namespace Content.Shared.SS220.Grab;
 
 public sealed partial class GrabShoveKnockoutSystem : EntitySystem
 {
-    [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
 
     public override void Initialize()
     {

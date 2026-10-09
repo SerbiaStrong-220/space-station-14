@@ -87,6 +87,14 @@ public sealed partial record PolymorphConfiguration
     [DataField(serverOnly: true)]
     public bool TransferHumanoidAppearance;
 
+    // SS220 Geras reagents fix begin
+    /// <summary>
+    /// Whether or not the entity transfers its inventory and equipment between forms.
+    /// </summary>
+    [DataField(serverOnly: true)]
+    public bool TransferReagents;
+    // SS220 Geras reagents fix end
+
     /// <summary>
     /// Whether or not the entity transfers its inventory and equipment between forms.
     /// </summary>

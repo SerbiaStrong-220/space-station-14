@@ -26,10 +26,11 @@ using Content.Shared.Database;
 namespace Content.Server.SS220.Commands;
 
 [AdminCommand(AdminFlags.VarEdit)] // Only for admins
-public sealed class MakeAntagCommand : IConsoleCommand
+public sealed partial class MakeAntagCommand : IConsoleCommand
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IServerPreferencesManager _pref = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IServerPreferencesManager _pref = default!;
+
     public string Command => "makerandomantag";
     public string Description => Loc.GetString("command-makerandomantag-description");
     public string Help => $"Usage: {Command}";

@@ -14,7 +14,7 @@ namespace Content.Client.SS220.Administration.UI.Tabs.AdminTab;
 [UsedImplicitly]
 public sealed partial class AddObjectiveWindow : DefaultWindow
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _entMan = default!;
 
     private ICommonSession? _selectedAntagonist;
     private bool _customObjective;

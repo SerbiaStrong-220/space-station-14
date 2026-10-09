@@ -9,10 +9,10 @@ using JetBrains.Annotations;
 
 namespace Content.Shared.SS220.Lifesteal;
 
-public sealed class LifestealSystem : EntitySystem
+public sealed partial class LifestealSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
 
     public override void Initialize()
     {

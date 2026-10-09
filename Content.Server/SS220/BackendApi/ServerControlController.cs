@@ -22,13 +22,13 @@ namespace Content.Server.SS220.BackEndApi;
 
 public sealed partial class ServerControlController : IPostInjectInit
 {
-    [Dependency] private readonly IStatusHost _statusHost = default!;
-    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
-    [Dependency] private readonly ITaskManager _taskManager = default!;
-    [Dependency] private readonly IServerConsoleHost _serverConsoleHost = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IAdminManager _adminManager = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private IStatusHost _statusHost = default!;
+    [Dependency] private IConfigurationManager _configurationManager = default!;
+    [Dependency] private ITaskManager _taskManager = default!;
+    [Dependency] private IServerConsoleHost _serverConsoleHost = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IAdminManager _adminManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
 
     private string? _watchdogToken;
     private string? _watchdogKey;

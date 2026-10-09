@@ -84,9 +84,9 @@
   description: An expensive firesuit that protects against even the most deadly of station fires. Designed to protect even if the wearer is set aflame.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Suits/atmos_firesuit.rsi
+    sprite: SS220/Clothing/OuterClothing/Suits/atmos_firesuit.rsi #SS220 atmos firesuit resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Suits/atmos_firesuit.rsi
+    sprite: SS220/Clothing/OuterClothing/Suits/atmos_firesuit.rsi #SS220 atmos firesuit resprite
   - type: PressureProtection
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
@@ -189,9 +189,15 @@
     parent: true
     components:
     - type: Stealth
-      minVisibility: -1 # SS220 Revert Ninja Stealth by #1075. Fix #1575 begin
-      maxVisibility: -1
-      lastVisibility: 0 # SS220 Revert Ninja Stealth by #1075. Fix #1575 end
+  # SS220 invis buff begin
+      minVisibility: 0.05
+      maxVisibility: 1
+      lastVisibility: 1
+      shimmerScale: 0.25
+    - type: StealthOnMove
+      passiveVisibilityRate: -0.475
+      movementVisibilityRate: 0
+  # SS220 invis buff end
   - type: PowerCellDraw
     drawRate: 1.8 # 200 seconds on the default cell
   - type: ToggleCellDraw

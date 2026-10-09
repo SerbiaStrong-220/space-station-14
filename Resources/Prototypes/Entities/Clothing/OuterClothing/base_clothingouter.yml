@@ -155,6 +155,7 @@
   - type: ClothingSpeedModifier
     walkModifier: 0.6
     sprintModifier: 0.6
+    requireActivated: false #ss220 shield fix
   - type: HeldSpeedModifier
   - type: Item
     size: Ginormous

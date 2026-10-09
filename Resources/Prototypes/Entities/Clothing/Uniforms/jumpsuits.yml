@@ -57,15 +57,15 @@
     sprite: Clothing/Uniforms/Jumpsuit/bartender_purple.rsi
 
 - type: entity
-  parent: [ClothingUniformBase]
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitCaptain
   name: captain's jumpsuit
   description: It's a blue jumpsuit with some gold markings denoting the rank of "Captain".
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/captain.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/captain.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/captain.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/captain.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
   parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V2
@@ -95,26 +95,26 @@
     sprite: Clothing/Uniforms/Jumpsuit/ce.rsi
 
 - type: entity
-  parent: [ClothingUniformBase]
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitChiefEngineerTurtle
   name: chief engineer's turtleneck
   description: A yellow turtleneck designed specifically for work in conditions of the engineering department.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/ce_turtle.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/ce_turtle.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/ce_turtle.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/ce_turtle.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitChaplain
   name: chaplain's jumpsuit
   description: It's a black jumpsuit, often worn by religious folk.
   components:
     - type: Sprite
-      sprite: Clothing/Uniforms/Jumpsuit/chaplain.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpsuit/chaplain.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
     - type: Clothing
-      sprite: Clothing/Uniforms/Jumpsuit/chaplain.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpsuit/chaplain.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
   parent: [ ClothingUniformBase]
@@ -153,15 +153,15 @@
     sprite: Clothing/Uniforms/Jumpsuit/centcom_officer.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitChef
   name: chef uniform
   description: Can't cook without this.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/chef.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/chef.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/chef.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/chef.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
   parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V2
@@ -173,37 +173,37 @@
     sprite: Clothing/Uniforms/Jumpsuit/chemistry.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitVirology
   name: virology jumpsuit
   description: It's made of a special fiber that gives special protection against biohazards. It has a virologist rank stripe on it.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/virology.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/virology.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/virology.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/virology.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitGenetics
   name: genetics jumpsuit
   description: It's made of a special fiber that gives special protection against biohazards. It has a geneticist rank stripe on it.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/genetics.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/genetics.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/genetics.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/genetics.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitClown
   name: clown suit
   description: HONK!
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/clown.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/clown_alt.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/clown.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/clown_alt.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Tag
     tags:
     - ClownSuit
@@ -211,9 +211,10 @@
     - ClothMade #SS220-pr: FIX CLOTHING TAGS
 
 - type: entity
-  parent: ClothingUniformJumpsuitClown
+  parent: ClothingUniformBase #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitClownBanana
   name: banana clown suit
+  description: HONK! #SS220 folded-equipped-INNERCLOTHING resprite V3
   components:
   - type: Sprite
     sprite: Clothing/Uniforms/Jumpsuit/clown_banana.rsi
@@ -257,15 +258,15 @@
     sprite: Clothing/Uniforms/Jumpsuit/cmo.rsi
 
 - type: entity
-  parent: [ClothingUniformBase]
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitCMOTurtle
   name: chief medical officer's turtleneck jumpsuit
   description: It's a turtleneck worn by those with the experience to be Chief Medical Officer. It provides minor biological protection.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/cmo_turtle.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/cmo_turtle.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/cmo_turtle.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/cmo_turtle.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
   parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V2
@@ -317,15 +318,15 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/hop.rsi #SS220 HoP jumpskirt repsrite
 
 - type: entity
-  parent: [ClothingUniformBase]
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitHoS
   name: head of security's jumpsuit
   description: It's bright red and rather crisp, much like security's victims tend to be.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/hos.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/hos.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/hos.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/hos.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   # ss220 error fix start
   #- type: Item
   #  inhandVisuals:
@@ -340,38 +341,39 @@
   #      sprite: Clothing/Uniforms/Jumpsuit/color.rsi
   #    - state: overlay-inhand-right
   # ss220 error fix end
+
 - type: entity
-  parent: [ClothingUniformBase]
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitHoSAlt
   name: head of security's turtleneck
   description: It's a turtleneck worn by those strong and disciplined enough to achieve the position of Head of Security.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/hos_alt.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/hos_alt.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/hos_alt.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/hos_alt.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
-  parent: [ClothingUniformBase]
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitHoSBlue
   name: head of security's blue jumpsuit
   description: A blue jumpsuit of Head of Security.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/hos_blue.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/hos_blue.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/hos_blue.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/hos_blue.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
-  parent: [ClothingUniformBase]
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitHoSGrey
   name: head of security's grey jumpsuit
   description: A grey jumpsuit of Head of Security, which make him look somewhat like a passenger.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/hos_grey.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/hos_grey.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/hos_grey.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/hos_grey.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
   parent: [ClothingUniformBase]
@@ -434,37 +436,37 @@
     sprite: Clothing/Uniforms/Jumpsuit/medical.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitMime
   name: mime suit
   description: ...
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/mime.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/mime.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/mime.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/mime.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitParamedic
   name: paramedic jumpsuit
   description: It's got a plus on it, that's a good thing right?
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/paramedic.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/paramedic.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/paramedic.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/paramedic.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitBrigmedic
   name: brigmedic jumpsuit
   description: This uniform is issued to qualified personnel who have been trained. No one cares that the training took half a day.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/brigmedic.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/brigmedic.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/brigmedic.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/brigmedic.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
   parent: ClothingUniformBase
@@ -507,26 +509,26 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingUniformBase]
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitQM
   name: quartermaster's jumpsuit
   description: 'What can brown do for you?'
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/qm.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/qm.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/qm.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/qm.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
-  parent: [ClothingUniformBase]
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitQMTurtleneck
   name: quartermasters's turtleneck
   description: A sharp turtleneck made for the hardy work environment of supply.
   components:
     - type: Sprite
-      sprite: Clothing/Uniforms/Jumpsuit/qmturtle.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpsuit/qmturtle.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
     - type: Clothing
-      sprite: Clothing/Uniforms/Jumpsuit/qmturtle.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpsuit/qmturtle.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
   parent: [ClothingUniformBase]
@@ -540,15 +542,15 @@
       sprite: Clothing/Uniforms/Jumpsuit/qmformal.rsi
 
 - type: entity
-  parent: [ClothingUniformBase]
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitResearchDirector
   name: research director's turtleneck
   description: It's a turtleneck worn by those with the know-how to achieve the position of Research Director. Its fabric provides minor protection from biological contaminants.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/rnd.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/rnd.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/rnd.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/rnd.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
   parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V2
@@ -560,15 +562,15 @@
     sprite: Clothing/Uniforms/Jumpsuit/scientist.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitScientistFormal
   name: scientist's formal jumpsuit
   description: A uniform for sophisticated scientists, best worn with its matching tie.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/scientist_formal.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/scientist_formal.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/scientist_formal.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/scientist_formal.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   #ss220 special_sounds start
   - type: SpecialSounds
   - type: Vocal
@@ -612,26 +614,26 @@
   # ss220 error fix end
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitSecBlue
   name: blue shirt and tie
   description: I'm a little busy right now, Calhoun.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/security_blue.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/security_blue.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/security_blue.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/security_blue.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
-  parent: [ClothingUniformBase, BaseSecurityContraband]
+  parent: [ClothingUniformBase, BaseSecurityContraband, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitSecGrey
   name: grey security jumpsuit
   description: A tactical relic of years past before Nanotrasen decided it was cheaper to dye the suits red instead of washing out the blood.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/security_grey.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/security_grey.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/security_grey.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/security_grey.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
   parent: [ClothingUniformBase, BaseSecurityContraband, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V2
@@ -645,15 +647,15 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/security_trooper.rsi #SS220-resprite-trooper-uniform
 
 - type: entity
-  parent: [ClothingUniformBase, BaseSecurityContraband]
+  parent: [ClothingUniformBase, BaseSecurityContraband, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitWarden
   name: warden's uniform
   description: A formal security suit for officers complete with Nanotrasen belt buckle.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/warden.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/warden.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/warden.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/warden.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   # ss220 error fix start
   #- type: Item
   #  inhandVisuals:
@@ -668,16 +670,17 @@
   #      sprite: Clothing/Uniforms/Jumpsuit/color.rsi
   #    - state: overlay-inhand-right
   # ss220 error fix end
+
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformOveralls
   name: overalls
   description: Great for working outdoors.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/overalls.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/overalls.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/overalls.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/overalls.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
   parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V2
@@ -706,37 +709,37 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/curator.rsi #SS220-librarian-resprite-v2
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitLawyerRed
   name: red lawyer suit
   description: A flashy red suit worn by lawyers and show-offs.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/lawyerred.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/lawyerred.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/lawyerred.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/lawyerred.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitLawyerBlue
   name: blue lawyer suit
   description: A flashy blue suit worn by lawyers and show-offs.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/lawyerblue.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/lawyerblue.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/lawyerblue.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/lawyerblue.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitLawyerBlack
   name: black lawyer suit
   description: A subtle black suit worn by lawyers and gangsters.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/lawyerblack.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/lawyerblack.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/lawyerblack.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/lawyerblack.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 # SS220-lobbying-bundle-fake-money begin
 - type: entity
@@ -756,15 +759,15 @@
     sprite: Clothing/Uniforms/Jumpsuit/lawyerpurple.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitLawyerGood
   name: good lawyer's suit
   description: A tacky suit perfect for a CRIMINAL lawyer!
   components:
     - type: Sprite
-      sprite: Clothing/Uniforms/Jumpsuit/lawyergood.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpsuit/lawyergood.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
     - type: Clothing
-      sprite: Clothing/Uniforms/Jumpsuit/lawyergood.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpsuit/lawyergood.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
   parent: [UnsensoredClothingUniformBase]
@@ -845,15 +848,15 @@
     sprite: Clothing/Uniforms/Jumpsuit/hosformal.rsi
 
 - type: entity
-  parent: [UnsensoredClothingUniformBase]
+  parent: [UnsensoredClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitOperative
   name: operative jumpsuit
   description: Uniform for elite syndicate operatives performing tactical operations in deep space.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/operative.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/operative.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/operative.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/operative.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: StaticPrice
     price: 500
 
@@ -926,15 +929,15 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/psychologist.rsi #SS220-Psychologist-Resprite
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitReporter
   name: reporter suit
   description: A good reporter remains a skeptic all their life.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/reporter.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/reporter.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/reporter.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/reporter.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
   parent: ClothingUniformBase
@@ -948,48 +951,48 @@
     sprite: Clothing/Uniforms/Jumpsuit/safari.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitJournalist
   name: journalist suit
   description: If journalism is good, it is controversial, by nature.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/journalist.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/journalist.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/journalist.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/journalist.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitMonasticRobeDark
   name: dark monastic robe
   description: It's a dark robe, often worn by religious folk.
   components:
     - type: Sprite
-      sprite: Clothing/Uniforms/Jumpsuit/monastic_robe_dark.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpsuit/monastic_robe_dark.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
     - type: Clothing
-      sprite: Clothing/Uniforms/Jumpsuit/monastic_robe_dark.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpsuit/monastic_robe_dark.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitMonasticRobeLight
   name: light monastic robe
   description: It's a light robe, often worn by religious folk.
   components:
     - type: Sprite
-      sprite: Clothing/Uniforms/Jumpsuit/monastic_robe_light.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpsuit/monastic_robe_light.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
     - type: Clothing
-      sprite: Clothing/Uniforms/Jumpsuit/monastic_robe_light.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpsuit/monastic_robe_light.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitMusician
   name: carpskin suit # Corvax-Resprite
   description: An luxurious suit made with only the finest scales, perfect for any lounge act! # Corvax-Resprite
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/musician.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/musician.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/musician.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/musician.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
   parent: [ ClothingUniformBase ]
@@ -1058,7 +1061,7 @@
     sprite: Clothing/Uniforms/Jumpsuit/ert_security.rsi
 
 - type: entity
-  parent: ClothingUniformJumpsuitClown
+  parent: ClothingUniformBase #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitCluwne
   name: cluwne suit
   suffix: Unremoveable
@@ -1162,60 +1165,60 @@
     sprite: Clothing/Uniforms/Jumpsuit/syndieformal.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitFlannel
   name: flannel jumpsuit
   description: Smells like someones been grillin'.
   components:
     - type: Sprite
-      sprite: Clothing/Uniforms/Jumpsuit/flannel.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpsuit/flannel.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
     - type: Clothing
-      sprite: Clothing/Uniforms/Jumpsuit/flannel.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpsuit/flannel.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitSeniorEngineer
   name: senior engineer jumpsuit
   description: A sign of skill and prestige within the engineering department.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/senior_engineer.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/senior_engineer.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/senior_engineer.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/senior_engineer.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitSeniorResearcher
   name: senior researcher jumpsuit
   description: A sign of skill and prestige within the science department.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/senior_researcher.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/senior_researcher.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/senior_researcher.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/senior_researcher.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitSeniorPhysician
   name: senior physician jumpsuit
   description: A sign of skill and prestige within the medical department.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/senior_physician.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/senior_physician.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/senior_physician.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/senior_physician.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
-  parent: [ClothingUniformBase, BaseSecurityContraband]
+  parent: [ClothingUniformBase, BaseSecurityContraband, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V3
   id: ClothingUniformJumpsuitSeniorOfficer
   name: senior officer jumpsuit
   description: A sign of skill and prestige within the security department.
   suffix: For playtime #SS220-add-time-loadout-suffix
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/senior_officer.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/senior_officer.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/senior_officer.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/senior_officer.rsi #SS220 folded-equipped-INNERCLOTHING resprite V3
 
 - type: entity
   parent: ClothingUniformBase

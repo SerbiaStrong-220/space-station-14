@@ -367,7 +367,7 @@ namespace Content.Server.GameTicking
 
             jobPrototype = _prototypeManager.Index<JobPrototype>(jobId);
 
-            var mobMaybe = _stationSpawning.SpawnPlayerCharacterOnStation(station, jobId, character);
+            var mobMaybe = _stationSpawning.SpawnPlayerCharacterOnStation(station, jobId, character, true); // SS220-edit
             DebugTools.AssertNotNull(mobMaybe);
             mob = mobMaybe!.Value;
 

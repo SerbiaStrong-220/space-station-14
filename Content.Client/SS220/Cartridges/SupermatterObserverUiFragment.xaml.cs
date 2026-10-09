@@ -16,7 +16,7 @@ namespace Content.Client.SS220.Cartridges;
 [GenerateTypedNameReferences]
 public sealed partial class SupermatterObserverUiFragment : BoxContainer
 {
-    [Dependency] private readonly ILocalizationManager _localization = default!;
+    [Dependency] private ILocalizationManager _localization = default!;
 
     public event Action<BaseButton.ButtonEventArgs, SuperMatterObserverComponent>? OnServerButtonPressed;
     public event Action<BaseButton.ButtonEventArgs, int>? OnCrystalButtonPressed;

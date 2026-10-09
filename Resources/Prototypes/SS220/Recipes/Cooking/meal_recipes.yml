@@ -486,6 +486,8 @@
   result: FoodBakedBunMeat
   time: 5
   group: Breads
+  reagents:
+    TableSalt: 1
   solids:
     FoodDoughSlice: 1
     FoodMeatCutlet: 1
@@ -528,4 +530,18 @@
     Cellulose: 10
   solids:
     FoodBowlBig: 1
+
+# Fried eggs
+- type: microwaveMealRecipe
+  id: RecipeFriedEggs
+  name: food fried eggs
+  result: FoodMealFriedegg
+  time: 5
+  group: Breakfast
+  reagents:
+    TableSalt: 1
+    Blackpepper: 1
+  solids:
+    FoodSunnySideUpEgg: 2
+    FoodPlateSmall: 1
 

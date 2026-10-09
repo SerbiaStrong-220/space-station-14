@@ -14,6 +14,7 @@ using Content.Server.Pinpointer;
 using Content.Server.Roles;
 using Content.Server.RoundEnd;
 using Content.Server.SS220.CultYogg.DeCultReminder;
+using Content.Server.SS220.CultYogg.Cultists;
 using Content.Server.SS220.CultYogg.Sacrificials;
 using Content.Server.SS220.GameTicking.Rules.Components;
 using Content.Server.Station.Systems;
@@ -36,9 +37,7 @@ using Content.Shared.SS220.CultYogg.MiGo;
 using Content.Shared.SS220.CultYogg.MiGoTeleport;
 using Content.Shared.SS220.CultYogg.Sacrificials;
 using Content.Shared.SS220.InnerHandToggleable;
-using Content.Shared.SS220.RestrictedItem;
 using Content.Shared.SS220.Roles;
-using Content.Shared.SS220.StuckOnEquip;
 using Content.Shared.SS220.Telepathy;
 using Content.Shared.Station.Components;
 using Content.Shared.Zombies;
@@ -53,33 +52,32 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Server.SS220.GameTicking.Rules;
 
-public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
+public sealed partial class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedJobSystem _job = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly RoundEndSystem _roundEnd = default!;
-    [Dependency] private readonly SharedRoleSystem _role = default!;
-    [Dependency] private readonly NavMapSystem _navMap = default!;
-    [Dependency] private readonly ServerGlobalSoundSystem _sound = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly AlertLevelSystem _alertLevel = default!;
-    [Dependency] private readonly EuiManager _euiManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly SharedRestrictedItemSystem _sharedRestrictedItemSystem = default!;
-    [Dependency] private readonly SharedStuckOnEquipSystem _stuckOnEquip = default!;
-    [Dependency] private readonly MiGoTeleportSystem _migoTeleport = default!;
-    [Dependency] private readonly Shared.StatusEffect.StatusEffectsSystem _statusEffectsOld = default!;
-    [Dependency] private readonly Shared.StatusEffectNew.StatusEffectsSystem _statusEffectsNew = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private NpcFactionSystem _npcFaction = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedJobSystem _job = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private RoundEndSystem _roundEnd = default!;
+    [Dependency] private SharedRoleSystem _role = default!;
+    [Dependency] private NavMapSystem _navMap = default!;
+    [Dependency] private ServerGlobalSoundSystem _sound = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private AlertLevelSystem _alertLevel = default!;
+    [Dependency] private EuiManager _euiManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private CultYoggEquipmentSystem _cultEquipment = default!;
+    [Dependency] private MiGoTeleportSystem _migoTeleport = default!;
+    [Dependency] private Shared.StatusEffect.StatusEffectsSystem _statusEffectsOld = default!;
+    [Dependency] private Shared.StatusEffectNew.StatusEffectsSystem _statusEffectsNew = default!;
 
     public TimeSpan DefaultShuttleArriving { get; set; } = TimeSpan.FromSeconds(85);
 
@@ -303,7 +301,9 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         if (initial && !rule.Comp.InitialCultistMinds.Contains(mindId))
             rule.Comp.InitialCultistMinds.Add(mindId);
 
-        _role.MindAddRole(mindId, rule.Comp.MindCultYoggAntagId, mindComp, true);
+        // AntagSelection already assigns this role to the initial cultists.
+        if (!_role.MindHasRole<CultYoggRoleComponent>((mindId, mindComp), out _))
+            _role.MindAddRole(mindId, rule.Comp.MindCultYoggAntagId, mindComp, true);
 
         GiveAllActiveObjectives(rule, mindId, mindComp);
 
@@ -390,10 +390,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
     public void DeMakeCultist(EntityUid uid, CultYoggRuleComponent component)
     {
-        //Remove all corrupted items
-        _stuckOnEquip.RemoveAllStuckItems(uid);
-
-        _sharedRestrictedItemSystem.DropAllRestrictedItems(uid);//ToDo_SS220 make it by component or tag
+        _cultEquipment.TryDropCultEquipment(uid);
 
         // Change the faction
         _npcFaction.RemoveFaction(uid, component.CultYoggFaction, false);

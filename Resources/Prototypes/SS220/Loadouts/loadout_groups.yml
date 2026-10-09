@@ -86,8 +86,9 @@
   name: loadout-group-ntr-head
   minLimit: 0
   loadouts:
-  - MagistratePwig
-  - MagistrateStreetJudge
+  - NanoTrasenRepresentativeCap
+  - NanoTrasenRepresentativeTophat
+  - NanoTrasenOfficerBeret
 
 - type: loadoutGroup
   id: NanoTrasenRepresentativeEyes
@@ -101,25 +102,11 @@
   - MagistrateMonocle
 
 - type: loadoutGroup
-  id: NanoTrasenRepresentativeNeck
-  name: loadout-group-ntr-neck
-  minLimit: 0
-  loadouts:
-  - LawyerNeck
-  - CloakJujutsuShlepa
-
-- type: loadoutGroup
   id: NanoTrasenRepresentativeJumpsuit
   name: loadout-group-ntr-jumpsuit
   minLimit: 1
   loadouts:
   - JumpsuitNTR
-  - LawyerJumpsuitRed
-  - LawyerJumpskirtRed
-  - LawyerJumpsuitGood
-  - LawyerJumpskirtGood
-  - JumpsuitTrustedLawyer
-  - JumpsuitJujutsuShlepa
 
 - type: loadoutGroup
   id: NanoTrasenRepresentativeBackpacks
@@ -140,8 +127,9 @@
   name: loadout-group-ntr-outerclothing
   minLimit: 0
   loadouts:
-  - MagistrateRobesJudge
-  - OuterClothingJujutsuShlepa
+  - NanoTrasenRepresentativeTrench
+  - NanoTrasenRepresentativeFormalCoat
+  - NanoTrasenRepresentativeFormalDress
 
 - type: loadoutGroup
   id: NanoTrasenRepresentativeHeadset
@@ -150,6 +138,14 @@
   loadouts:
   - NanoTrasenRepresentativeHeadset
   - NanoTrasenRepresentativeHeadsetAlt
+
+- type: loadoutGroup
+  id: NanoTrasenRepresentativeGloves
+  name: loadout-group-gloves
+  loadouts:
+  - GlovesWhite
+  - GlovesGray
+  - GlovesBlack
 
   # Магистрат
 - type: loadoutGroup
@@ -285,6 +281,16 @@
   loadouts:
   - LawHeadset
   - LawHeadsetAlt
+
+- type: loadoutGroup
+  id: LawyerBackpack
+  name: loadout-group-lawyer-backpack
+  minLimit: 1
+  loadouts:
+  - CommonBackpack
+  - CommonSatchel
+  - CommonDuffel
+  - IAABackpackLeather
   # Адвокат (Конец)
 
   # Офицер "Синий Щит" (Начало)
@@ -605,12 +611,14 @@
 - type: loadoutGroup
   id: SurvivalBrigMedic
   name: loadout-group-survival-brigmedic
-  minLimit: 2
-  hidden: true
+  minLimit: 1
+  hidden: false
   loadouts:
-  - EmergencyOxygenBrigmedic
   - EmergencyNitrogenBrigmedic
-  - LoadoutSpeciesVoxNitrogen
+  - EmergencyNitrogenBrigmedicSponsor
+  - EmergencyOxygenBrigmedic
+  - EmergencyOxygenBrigmedicSponsor
+  - LoadoutSpeciesBrigmedicIpc
   # Бригмедик (Конец)
 
   # Врач (Начало)
@@ -777,6 +785,7 @@
   - SalvageSpecialistJumpsuitTurtleneck
   - UniformJumpsuitFlannelSalvage
   - ClothingUniformJumpsuitExpeditor
+  - ClothingUniformJumpsuitJRSalvage
 
 - type: loadoutGroup
   id: SalvageSpecialistHead
@@ -786,7 +795,23 @@
   - ClothingHeadHatSalvage
   - ClothingHeadBandSalvage
   - ClothingHeadHatHardhatViolet
+  - ClothingHeadHatHardhatJRSalvage
   - ClothingHeadBeretSalvageSpecialist
+  - ClothingHeadBeretJRSalvage
+
+- type: loadoutGroup
+  id: SalvageSpecialistBelt
+  name: loadout-group-salvage-specialist-belt
+  minLimit: 0
+  loadouts:
+  - OreBagJRSalvage
+
+- type: loadoutGroup
+  id: SalvageSpecialistID
+  name: loadout-group-salvage-specialist-id
+  loadouts:
+  - SalvageSpecialistPDA
+  - SalvageSpecialistPDAJR
   # Утилизатор (Конец)
 #! Отдел снабжения (Конец)
 
@@ -901,6 +926,7 @@
   - JanitorGaloshes
   - JanitorOrangeShoes
   - JanitorJRShoes
+  - JanitorJRBoots
 
 - type: loadoutGroup
   id: JanitorBelt
@@ -908,6 +934,36 @@
   loadouts:
   - JanitorBaseBelt
   - JanitorJRBelt #SS220-JRBelt
+
+- type: loadoutGroup
+  id: JanitorEquipment
+  name: loadout-group-janitor-equipment
+  minLimit: 0
+  maxLimit: 2
+  loadouts:
+  - JRMopItem
+  - SoapJR
+
+- type: loadoutGroup
+  id: JanitorPDA
+  name: loadout-group-janitor-pda
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - JanitorPDA
+  - JanitorJRPDA
+
+- type: loadoutGroup
+  id: JanitorBackpack
+  name: loadout-group-janitor-backpack
+  loadouts:
+  - CommonBackpack
+  - CommonSatchel
+  - CommonDuffel
+  - ClothingBackpackJanitorJR
+  - ClothingBackpackJanitorJRSatchel
+  - ClothingBackpackJanitorJRDuffel
+
   # Уборщик (Конец)
 
  # Сервисный работник (Начало)
@@ -936,6 +992,15 @@
 
 #! Разное
 
+  # Центком
+- type: loadoutGroup
+  id: SurvivalCentcom
+  name: loadout-group-centcomm-extended
+  minLimit: 1
+  hidden: false
+  loadouts:
+  - EmergencyCentcom
+
   # Перчатки
 - type: loadoutGroup
   id: Gloves
@@ -946,6 +1011,14 @@
   - GlovesBlack
   - GlovesRed
   - GlovesBlue
+
+ # Баллон азота воксов
+- type: loadoutGroup
+  id: SurvivalVox
+  name: loadout-group-survival-basic
+  hidden: true
+  loadouts:
+  - LoadoutSpeciesVoxNitrogen
 
 #! Эксклюзивы карт (Начало)
 

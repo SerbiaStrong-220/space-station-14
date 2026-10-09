@@ -11,7 +11,8 @@ namespace Content.Client.SS220.Administration.UI.Tabs.RoundTab;
 [GenerateTypedNameReferences]
 public sealed partial class RoundTab : Control
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+
     public RoundTab()
     {
         RobustXamlLoader.Load(this);

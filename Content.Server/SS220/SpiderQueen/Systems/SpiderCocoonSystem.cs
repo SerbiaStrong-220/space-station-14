@@ -21,14 +21,14 @@ namespace Content.Server.SS220.SpiderQueen.Systems;
 
 public sealed partial class SpiderCocoonSystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly DoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SpiderQueenSystem _spiderQueen = default!;
-    [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly HungerSystem _hunger = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private DoAfterSystem _doAfter = default!;
+    [Dependency] private SpiderQueenSystem _spiderQueen = default!;
+    [Dependency] private BloodstreamSystem _bloodstream = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private HungerSystem _hunger = default!;
 
     public override void Initialize()
     {

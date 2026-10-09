@@ -11,9 +11,9 @@ namespace Content.Client.SS220.ChangeAppearanceOnActiveBlocking;
 
 public sealed partial class ChangeAppearanceOnActiveBlockingSystem : EntitySystem
 {
-    [Dependency] private readonly AppearanceSystem _appearanceSystem = default!;
-    [Dependency] private readonly SharedItemSystem _item = default!;
-    [Dependency] private readonly SpriteSystem _spriteSystem = default!;
+    [Dependency] private AppearanceSystem _appearanceSystem = default!;
+    [Dependency] private SharedItemSystem _item = default!;
+    [Dependency] private SpriteSystem _spriteSystem = default!;
 
     public override void Initialize()
     {

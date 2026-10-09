@@ -3,6 +3,7 @@
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Whitelist;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -54,6 +55,9 @@ public sealed partial class CultYoggComponent : Component
 
     [ViewVariables, AutoNetworkedField]
     public string PukedEntity = "FoodMiGomyceteCult"; //what will be puked out
+
+    [DataField]
+    public SoundSpecifier VomitSound = new SoundCollectionSpecifier("Vomit", AudioParams.Default.WithVariation(0.2f).WithVolume(-4f));
 
     /// <summary>
     /// The lowest hunger threshold that this mob can be in before it's allowed to digest another shroom.
