@@ -11,11 +11,10 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.LiquidSplatters;
 
-public sealed class LiquidSplattersSystem : EntitySystem
+public sealed class LiquidSplattersSystem : SharedLiquidSplattersSystem
 {
     private static readonly ProtoId<ShaderPrototype> Shader = "LiquidSplatters";
 
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
 
@@ -99,7 +98,7 @@ public sealed class LiquidSplattersSystem : EntitySystem
 
         if (!_shaders.TryGetValue(ent, out var shader))
         {
-            shader = _protoMan.Index(Shader).InstanceUnique();
+            shader = _proto.Index(Shader).InstanceUnique();
             _shaders[ent] = shader;
         }
 

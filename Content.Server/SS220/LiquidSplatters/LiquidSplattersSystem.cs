@@ -4,6 +4,7 @@ using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
+using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.SS220.LiquidSplatters;
@@ -15,12 +16,10 @@ using Robust.Shared.Random;
 
 namespace Content.Server.SS220.LiquidSplatters;
 
-public sealed class LiquidSplattersSystem : EntitySystem
+public sealed class LiquidSplattersSystem : SharedLiquidSplattersSystem
 {
     [Dependency] private InventorySystem _inventorySystem = default!;
     [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
 
     private static readonly ProtoId<LiquidSplattersSettingsPrototype> DefaultSettings = "liquidSplattersSettingsDefault";
@@ -62,16 +61,15 @@ public sealed class LiquidSplattersSystem : EntitySystem
         if (args.Handled || args.HitEntities.Count == 0)
             return;
 
-        if (!IsPhysicalDamage(args.BaseDamage))
-            return;
-
         var settings = _proto.Index(DefaultSettings);
         var meleeDamage = GetMeleeDamage(args.BaseDamage);
-
         if (meleeDamage < settings.MinSplatterDamage)
             return;
 
-        var attackingWeapon = GetAttackingWeapon(args.User, args.Weapon);
+        var attackingWeapon = args.Weapon;
+
+        var solutionAmountOnWeapon = meleeDamage * settings.DamageSolutionScale;
+        var solutionAmountOnClothing = meleeDamage * settings.ClothingSolutionScale;
 
         foreach (var hit in args.HitEntities)
         {
@@ -81,9 +79,11 @@ public sealed class LiquidSplattersSystem : EntitySystem
             if (GetBloodSample((hit, bloodstreamComp)) is not { } sample)
                 continue;
 
-            var solutionAmountOnWeapon = meleeDamage * settings.DamageSolutionScale;
-            Log.Debug("Adding splatter to {0}, amount: {1}", attackingWeapon, solutionAmountOnWeapon);
-            AddSplatter(attackingWeapon, ScaledCopy(sample, solutionAmountOnWeapon));
+            if (!(args.User == attackingWeapon))
+            {
+                Log.Debug("Adding splatter to {0}, amount: {1}", attackingWeapon, solutionAmountOnWeapon);
+                AddSplatter(attackingWeapon, ScaledCopy(sample, solutionAmountOnWeapon));
+            }
 
             foreach (var (slot, chance) in settings.ClothingSlotChances)
             {
@@ -96,7 +96,6 @@ public sealed class LiquidSplattersSystem : EntitySystem
                 if (!_random.Prob(chance))
                     continue;
 
-                var solutionAmountOnClothing = meleeDamage * settings.ClothingSolutionScale;
                 Log.Debug("Adding splatter to {0} on {1}, amount: {2}", item.Value, slot, solutionAmountOnClothing);
                 AddSplatter(item.Value, ScaledCopy(sample, solutionAmountOnClothing));
             }
@@ -140,28 +139,6 @@ public sealed class LiquidSplattersSystem : EntitySystem
             ent.Comp.Color = solution.GetColor(_proto);
 
         Dirty(ent);
-    }
-
-    private static bool IsPhysicalDamage(DamageSpecifier damage)
-    {
-        foreach (var damageType in PhysicalDamageTypes)
-        {
-            if (damage.DamageDict.TryGetValue(damageType, out var amount) && amount > 0)
-                return true;
-        }
-
-        return false;
-    }
-
-    private EntityUid GetAttackingWeapon(EntityUid user, EntityUid weapon)
-    {
-        if (weapon != user)
-            return weapon;
-
-        if (_inventorySystem.TryGetSlotEntity(user, "gloves", out var gloves))
-            return gloves.Value;
-
-        return user;
     }
 
     private Solution? GetBloodSample(Entity<BloodstreamComponent> victim)
