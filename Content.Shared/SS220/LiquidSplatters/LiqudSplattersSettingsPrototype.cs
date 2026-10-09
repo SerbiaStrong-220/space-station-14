@@ -22,4 +22,7 @@ public sealed partial class LiquidSplattersSettingsPrototype : IPrototype
 
     [DataField]
     public Dictionary<ProtoId<ReagentPrototype>, FixedPoint2> CleaningReagentsEffectiveness = new();
+
+    [DataField]
+    public FixedPoint2 MinSplatterDamage = 1.0f;
 }

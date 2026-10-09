@@ -66,6 +66,11 @@ public sealed class LiquidSplattersSystem : EntitySystem
             return;
 
         var settings = _proto.Index(DefaultSettings);
+        var meleeDamage = GetMeleeDamage(args.BaseDamage);
+
+        if (meleeDamage < settings.MinSplatterDamage)
+            return;
+
         var attackingWeapon = GetAttackingWeapon(args.User, args.Weapon);
 
         foreach (var hit in args.HitEntities)
@@ -76,8 +81,7 @@ public sealed class LiquidSplattersSystem : EntitySystem
             if (GetBloodSample((hit, bloodstreamComp)) is not { } sample)
                 continue;
 
-            var totalDamage = args.BaseDamage.GetTotal();
-            var solutionAmountOnWeapon = totalDamage * settings.DamageSolutionScale;
+            var solutionAmountOnWeapon = meleeDamage * settings.DamageSolutionScale;
             Log.Debug("Adding splatter to {0}, amount: {1}", attackingWeapon, solutionAmountOnWeapon);
             AddSplatter(attackingWeapon, ScaledCopy(sample, solutionAmountOnWeapon));
 
@@ -92,7 +96,7 @@ public sealed class LiquidSplattersSystem : EntitySystem
                 if (!_random.Prob(chance))
                     continue;
 
-                var solutionAmountOnClothing = totalDamage * settings.ClothingSolutionScale;
+                var solutionAmountOnClothing = meleeDamage * settings.ClothingSolutionScale;
                 Log.Debug("Adding splatter to {0} on {1}, amount: {2}", item.Value, slot, solutionAmountOnClothing);
                 AddSplatter(item.Value, ScaledCopy(sample, solutionAmountOnClothing));
             }
@@ -256,5 +260,17 @@ public sealed class LiquidSplattersSystem : EntitySystem
         }
 
         return removed / effectiveness;
+    }
+
+    private static FixedPoint2 GetMeleeDamage(DamageSpecifier damage)
+    {
+        var total = FixedPoint2.Zero;
+        foreach (var damageType in PhysicalDamageTypes)
+        {
+            if (damage.DamageDict.TryGetValue(damageType, out var amount))
+                total += amount;
+        }
+
+        return total;
     }
 }
