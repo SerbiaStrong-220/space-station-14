@@ -15,7 +15,7 @@ public sealed partial class RattleOnTriggerComponent : BaseXOnTriggerComponent
     /// <summary>
     /// The radio channel the message will be sent to.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField] // SS220 add-death-rattle-channel-select
     public ProtoId<RadioChannelPrototype> RadioChannel = "Syndicate";
 
     /// <summary>

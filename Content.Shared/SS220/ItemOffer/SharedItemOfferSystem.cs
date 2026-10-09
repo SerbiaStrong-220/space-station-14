@@ -9,7 +9,7 @@ namespace Content.Shared.SS220.ItemOffer;
 
 public abstract partial class SharedItemOfferSystem : EntitySystem
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     private static readonly SpriteSpecifier OfferIcon = new SpriteSpecifier.Texture(new("/Textures/SS220/Interface/VerbIcons/present.png"));
 
@@ -28,6 +28,9 @@ public abstract partial class SharedItemOfferSystem : EntitySystem
         var item = _hands.GetActiveItem(args.User);
 
         if (item == null)
+            return;
+
+        if (args.User == args.Target)
             return;
 
         var evItem = new CanOfferItemEvent(args.User, args.Target);

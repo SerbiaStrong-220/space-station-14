@@ -1,0 +1,53 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: polymorph
+  id: VoidChasmCameraPoly
+  configuration:
+    entity: VoidChasmCamera
+    forced: true
+    duration: 2
+    polymorphPopup: null
+    exitPolymorphPopup: null
+
+#attempt to create an appearance effect
+- type: entity
+  id: VoidChasmCamera
+  suffix: CultYogg
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Eye
+  - type: ContentEye
+  - type: CameraRecoil
+  - type: MindContainer
+  - type: Spectral
+  - type: FTLSmashImmune
+  - type: CargoSellBlacklist
+  - type: ConditionalSpawner
+    prototypes:
+    - VoidPortalChasmExit
+
+- type: polymorph
+  id: VoidKeyCameraPoly
+  configuration:
+    entity: VoidKeyCamera
+    forced: true
+    duration: 2
+    polymorphPopup: null
+    exitPolymorphPopup: null
+
+#attempt to create an appearance effect
+- type: entity
+  id: VoidKeyCamera
+  suffix: CultYogg
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Eye
+  - type: ContentEye
+  - type: CameraRecoil
+  - type: MindContainer
+  - type: Spectral
+  - type: FTLSmashImmune
+  - type: CargoSellBlacklist
+  - type: ConditionalSpawner
+    prototypes:
+    - VoidKeyPortalExit

@@ -25,3 +25,11 @@ public sealed class HandLabelerLabelChangedMessage(string label) : BoundUserInte
 {
     public string Label { get; } = label;
 }
+
+//SS220-LabelColors begin
+[Serializable, NetSerializable]
+public sealed class HandLabelerLabelColorChangedMessage(Color color) : BoundUserInterfaceMessage
+{
+    public Color Color { get; } = color;
+}
+//SS220-LabelColors end

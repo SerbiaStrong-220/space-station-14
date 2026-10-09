@@ -55,7 +55,7 @@
         visible: false
         shader: unshaded
         map: [ "blade" ]
-  - type: ToggleableLightVisuals
+  - type: ToggleableVisuals
     spriteLayer: blade
     inhandVisuals:
       left:
@@ -100,7 +100,7 @@
         visible: false
         shader: unshaded
         map: [ "blade" ]
-  - type: ToggleableLightVisuals
+  - type: ToggleableVisuals
     spriteLayer: blade
     inhandVisuals:
       left:

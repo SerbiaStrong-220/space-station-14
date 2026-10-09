@@ -16,12 +16,6 @@
   id: Paramedic
   name: id-card-access-level-paramedic
 
-#SS220 New_accesses_and_some_tweaks start
-- type: accessLevel
-  id: Psychologist
-  name: id-card-access-level-psychologist
-#SS220 New_accesses_and_some_tweaks end
-
 - type: accessGroup
   id: Medical
   tags:

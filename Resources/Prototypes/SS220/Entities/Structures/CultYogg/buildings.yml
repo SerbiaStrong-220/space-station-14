@@ -96,14 +96,16 @@
     interfaces:
       enum.ChameleonStructureUiKey.Key:
         type: ChameleonStructureBoundUserInterface
+  - type: CultYoggChamelenBlocker
   - type: HiddenDescription
     entries:
-    - label: hidden-desc-chameleon-structure-cultyogg
-      whitelistMindRoles: #WhitelistBody isnt working, so i using this one
-      - CultYoggRole
+      CultYoggKnowledge: [ hidden-desc-chameleon-structure-cultyogg ]
+    nameEntries:
+    - [CultYoggKnowledge, null]
+    hiddenName: ent-BaseWall
 
 - type: entity
-  parent: BaseMaterialDoor
+  parent: BaseSecretDoor
   id: CultYoggDoor
   suffix: CultYogg, secret door
   name: cursed secreddoor
@@ -156,9 +158,10 @@
         type: ChameleonStructureBoundUserInterface
   - type: HiddenDescription
     entries:
-    - label: hidden-desc-chameleon-structure-cultyogg
-      whitelistMindRoles: #WhitelistBody isnt working, so i using this one
-      - CultYoggRole
+      CultYoggKnowledge: [ hidden-desc-chameleon-structure-cultyogg ]
+    nameEntries:
+    - [CultYoggKnowledge, null]
+    hiddenName: ent-CultYoggDoor
   - type: Tag
     tags:
       - Structure
@@ -168,6 +171,7 @@
     fuel: 5
     time: 3
   - type: WeldCorruptInteraction
+  - type: CultYoggChamelenBlocker
 
 - type: entity
   parent: Bed
@@ -357,9 +361,11 @@
      - AirlockCargoGlass
   - type: CultYoggBuilding
     eraseTime: 3
+  - type: WeldCorruptInteraction
+  - type: CultYoggChamelenBlocker
   - type: HiddenDescription
     entries:
-    - label: hidden-desc-chameleon-structure-cultyogg
-      whitelistMindRoles: #WhitelistBody isnt working, so i using this one
-      - CultYoggRole
-  - type: WeldCorruptInteraction
+      CultYoggKnowledge: [ hidden-desc-chameleon-structure-cultyogg ]
+    nameEntries:
+    - [CultYoggKnowledge, null]
+    hiddenName: ent-CultYoggAirlock

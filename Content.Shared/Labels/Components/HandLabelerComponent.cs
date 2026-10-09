@@ -17,8 +17,22 @@ public sealed partial class HandLabelerComponent : Component
     [DataField]
     public int MaxLabelChars = 50;
 
+    /// <summary>
+    /// Blacklist for entities that can be labeled.
+    /// </summary>
     [DataField]
-    public EntityWhitelist Whitelist = new();
+    public EntityWhitelist? Whitelist;
+
+    /// <summary>
+    /// Blacklist for entities that cannot be labeled.
+    /// </summary>
+    [DataField]
+    public EntityWhitelist? Blacklist;
+
+    //SS220-LabelColors begin
+    [DataField]
+    public Color AssignedLabelColor = Color.White;
+    //SS220-LabelColors end
 }
 
 [Serializable, NetSerializable]
@@ -27,4 +41,6 @@ public sealed class HandLabelerComponentState(string assignedLabel) : IComponent
     public string AssignedLabel = assignedLabel;
 
     public int MaxLabelChars;
+
+    public Color AssignedLabelColor = Color.White; //SS220-LabelColors
 }

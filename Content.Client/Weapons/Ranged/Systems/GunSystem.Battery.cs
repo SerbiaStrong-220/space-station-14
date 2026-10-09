@@ -8,36 +8,27 @@ public sealed partial class GunSystem
     protected override void InitializeBattery()
     {
         base.InitializeBattery();
-        // Hitscan
-        SubscribeLocalEvent<HitscanBatteryAmmoProviderComponent, AmmoCounterControlEvent>(OnControl);
-        SubscribeLocalEvent<HitscanBatteryAmmoProviderComponent, UpdateAmmoCounterEvent>(OnAmmoCountUpdate);
-        SubscribeLocalEvent<HitscanBatteryAmmoProviderComponent, AppearanceChangeEvent>(OnHitscanAppearanceChange); //SS220 Add Multifaze gun
 
-        // Projectile
-        SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, AmmoCounterControlEvent>(OnControl);
-        SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, UpdateAmmoCounterEvent>(OnAmmoCountUpdate);
-        SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, AppearanceChangeEvent>(OnProjectileAppearanceChange); //SS220 Add Multifaze gun
+        SubscribeLocalEvent<BatteryAmmoProviderComponent, UpdateAmmoCounterEvent>(OnAmmoCountUpdate);
+        SubscribeLocalEvent<BatteryAmmoProviderComponent, AmmoCounterControlEvent>(OnControl);
+        SubscribeLocalEvent<BatteryAmmoProviderComponent, AppearanceChangeEvent>(OnAppearanceChange);
     }
 
-    private void OnAmmoCountUpdate(EntityUid uid, BatteryAmmoProviderComponent component, UpdateAmmoCounterEvent args)
+    private void OnAmmoCountUpdate(Entity<BatteryAmmoProviderComponent> ent, ref UpdateAmmoCounterEvent args)
     {
-        if (args.Control is not BoxesStatusControl boxes) return;
+        if (args.Control is not BoxesStatusControl boxes)
+            return;
 
-        boxes.Update(component.Shots, component.Capacity);
+        boxes.Update(ent.Comp.Shots, ent.Comp.Capacity);
     }
 
-    private void OnControl(EntityUid uid, BatteryAmmoProviderComponent component, AmmoCounterControlEvent args)
+    private void OnControl(Entity<BatteryAmmoProviderComponent> ent, ref AmmoCounterControlEvent args)
     {
         args.Control = new BoxesStatusControl();
     }
 
     //SS220 Add Multifaze gun begin
-    private void OnHitscanAppearanceChange(Entity<HitscanBatteryAmmoProviderComponent> ent, ref AppearanceChangeEvent args)
-    {
-        UpdateAmmoCount(ent);
-    }
-
-    private void OnProjectileAppearanceChange(Entity<ProjectileBatteryAmmoProviderComponent> ent, ref AppearanceChangeEvent args)
+    private void OnAppearanceChange(Entity<BatteryAmmoProviderComponent> ent, ref AppearanceChangeEvent args)
     {
         UpdateAmmoCount(ent);
     }

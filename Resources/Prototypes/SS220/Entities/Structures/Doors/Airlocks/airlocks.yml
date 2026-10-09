@@ -176,3 +176,41 @@
   - type: Wires
     layoutId: AirlockMedical
 #SS220 New_accesses_and_some_tweaks end
+
+# Redwings lost soul start
+- type: entity
+  parent: Airlock
+  id: AirlockInterdyneLocked
+  suffix: Interdyne, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsInterdyne ]
+
+- type: entity
+  parent: AirlockGlass
+  id: AirlockGlassInterdyneLocked
+  suffix: Interdyne, Locked, Glass
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsInterdyne ]
+
+- type: entity
+  parent: AirlockExternalShuttleSyndicateLocked
+  id: AirlockExternalShuttleInterdyneLocked
+  suffix: Interdyne, External, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsInterdyne ]
+  
+- type: entity
+  parent: AirlockExternalGlassShuttleSyndicateLocked
+  id: AirlockExternalGlassShuttleInterdyneLocked
+  suffix: Interdyne, External, Locked, Glass
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsInterdyne ]
+# Redwings lost soul end

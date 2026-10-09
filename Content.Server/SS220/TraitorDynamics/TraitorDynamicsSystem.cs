@@ -6,12 +6,12 @@ using Content.Server.Antag.Components;
 using Content.Server.Chat.Managers;
 using Content.Server.CrewManifest;
 using Content.Server.GameTicking;
-using Content.Server.RoundEnd;
 using Content.Server.Station.Systems;
 using Content.Server.Store.Systems;
 using Content.Server.StoreDiscount.Systems;
 using Content.Shared.Database;
 using Content.Shared.FixedPoint;
+using Content.Shared.GameTicking;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Content.Shared.SS220.TraitorDynamics;
@@ -34,18 +34,17 @@ namespace Content.Server.SS220.TraitorDynamics;
 /// - Dynamic-specific pricing and discounts in stores
 /// - Round-end reporting of active dynamic
 /// </remarks>
-public sealed class TraitorDynamicsSystem : EntitySystem
+public sealed partial class TraitorDynamicsSystem : EntitySystem
 {
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly IAdminLogManager _admin = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly CrewManifestSystem _crewManifest = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly StoreDiscountSystem _discount = default!;
-    [Dependency] private readonly StoreSystem _store = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private IAdminLogManager _admin = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private CrewManifestSystem _crewManifest = default!;
+    [Dependency] private StoreDiscountSystem _discount = default!;
+    [Dependency] private StoreSystem _store = default!;
 
     private static Counter _chosenDynamicsModes = default!;
 
@@ -68,8 +67,14 @@ public sealed class TraitorDynamicsSystem : EntitySystem
         SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEndAppend);
         SubscribeLocalEvent<DynamicSettedEvent>(OnDynamicAdded);
         SubscribeLocalEvent<StoreDiscountsInitializedEvent>(OnStoreFinish);
-        SubscribeLocalEvent<RoundEndSystemChangedEvent>(OnRoundEnded);
         SubscribeLocalEvent<DynamicRemoveEvent>(OnDynamicRemove);
+        SubscribeLocalEvent<RoundEndedEvent>(OnRoundEnd);
+    }
+
+    private void OnRoundEnd(RoundEndedEvent _)
+    {
+        if (_currentDynamic.HasValue)
+            RemoveDynamic();
     }
 
     private void OnStoreFinish(ref StoreDiscountsInitializedEvent ev)
@@ -144,14 +149,6 @@ public sealed class TraitorDynamicsSystem : EntitySystem
 
         var locName = Loc.GetString(dynamicProto.Name);
         ev.AddLine(Loc.GetString("dynamic-show-end-round", ("dynamic", locName)));
-    }
-
-    private void OnRoundEnded(RoundEndSystemChangedEvent ev)
-    {
-        if (!_currentDynamic.HasValue)
-            return;
-
-        RemoveDynamic();
     }
 
     private void OnDynamicRemove(DynamicRemoveEvent ev)

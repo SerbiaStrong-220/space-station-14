@@ -14,12 +14,12 @@ namespace Content.Server.SS220.RenameStart;
 /// <summary>
 /// This handles opens the ui to change your name at the beginning of the game. Renaming is necessary for such roles as a clown with a “custom” name
 /// </summary>
-public sealed class RenameStartSystem : EntitySystem
+public sealed partial class RenameStartSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfgManager = default!;
-    [Dependency] private readonly QuickDialogSystem _quickDialog = default!;
-    [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] private readonly AdminFrozenSystem _frozen = default!;
+    [Dependency] private IConfigurationManager _cfgManager = default!;
+    [Dependency] private QuickDialogSystem _quickDialog = default!;
+    [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private AdminFrozenSystem _frozen = default!;
 
     private static readonly Regex Expressions = new("[^А-Яа-яёЁ0-9' \\-?!,.]");
     private int _maxNameLength = 32;

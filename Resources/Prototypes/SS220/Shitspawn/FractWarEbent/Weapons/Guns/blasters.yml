@@ -13,7 +13,7 @@
     availableModes:
       - SemiAuto
       - FullAuto
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: BulletBlasterPulse
     fireCost: 48
   - type: BatteryWeaponFireModes

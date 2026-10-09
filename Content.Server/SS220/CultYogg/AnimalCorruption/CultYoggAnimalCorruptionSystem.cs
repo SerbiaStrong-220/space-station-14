@@ -8,17 +8,15 @@ using Content.Shared.SS220.Language.Components;
 using Content.Server.SS220.Language;
 
 namespace Content.Server.SS220.CultYogg.AnimalCorruption;
-public sealed class CultYoggAnimalCorruptionSystem : EntitySystem
+public sealed partial class CultYoggAnimalCorruptionSystem : EntitySystem
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly LanguageSystem _language = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private LanguageSystem _language = default!;
 
-    public void AnimalCorruption(EntityUid uid)//Corrupt animal
+    public void AnimalCorruption(EntityUid uid)
     {
-        //ToDo Add new animal as the gost role
-
         if (TerminatingOrDeleted(uid))
             return;
 

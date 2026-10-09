@@ -4,6 +4,7 @@ using Content.Shared.ActionBlocker;
 using Content.Shared.Movement.Events;
 using Content.Shared.StepTrigger.Systems;
 using Content.Shared.Weapons.Misc;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 
@@ -12,12 +13,13 @@ namespace Content.Shared.SS220.TeleportationChasm;
 /// <summary>
 ///     Handles making entities fall into chasms when stepped on.
 /// </summary>
-public abstract class SharedTeleportationChasmSystem : EntitySystem
+public abstract partial class SharedTeleportationChasmSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedGrapplingGunSystem _grapple = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedGrapplingGunSystem _grapple = default!;
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
 
     public override void Initialize()
     {
@@ -40,11 +42,16 @@ public abstract class SharedTeleportationChasmSystem : EntitySystem
     {
         var falling = AddComp<TeleportationChasmFallingComponent>(target);
 
-        falling.NextDeletionTime = _timing.CurTime + falling.DeletionTime;
+        falling.SourceTeleporter = ent.Owner;
+
+        falling.FallEndTime = _timing.CurTime + falling.FallDuration;
         _blocker.UpdateCanMove(target);
 
         if (playSound)
             _audio.PlayPredicted(ent.Comp.FallingSound, ent, target);
+
+        if (_whitelistSystem.IsWhitelistPass(ent.Comp.DeleteTargetWhitelist, target))
+            falling.DeleteInsteadOfTeleport = true;
     }
 
     private void OnStepTriggerAttempt(Entity<TeleportationChasmComponent> ent, ref StepTriggerAttemptEvent args)
@@ -60,6 +67,9 @@ public abstract class SharedTeleportationChasmSystem : EntitySystem
 
     private void OnUpdateCanMove(Entity<TeleportationChasmFallingComponent> ent, ref UpdateCanMoveEvent args)
     {
+        if (!ent.Comp.Running)
+            return;
+
         args.Cancel();
     }
 }

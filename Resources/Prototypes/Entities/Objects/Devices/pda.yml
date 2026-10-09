@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: [ BaseItem, StorePresetUplink ] #PDA's have uplinks so they have to inherit the data.
+  parent: [ BaseItem ]
   id: BasePDA
   name: PDA
   description: Personal Data Assistant.
@@ -112,6 +112,7 @@
         type: InstrumentBoundUserInterface
       enum.HealthAnalyzerUiKey.Key:
         type: HealthAnalyzerBoundUserInterface
+  - type: RemoteStore # PDAs can access uplinks so they need this component.
   - type: Tag
     tags:
     - DoorBumpOpener
@@ -430,8 +431,11 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-cook
-  - type: ReplacementAccent # for random sentience event
-    accent: italian
+  #SS220 Accents begin
+  #- type: ReplacementAccent # for random sentience event
+  #  accent: italian
+  - type: ItalianAccent
+  #SS220 Accents end
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -599,6 +603,11 @@
       whitelist:
         components:
         - Cartridge
+    # SS220 mime pda fix begin
+    # preinstalled:
+    # - CrewManifestCartridge
+    # - NewsReaderCartridge
+    # SS220 mime pda fix end
   - type: Appearance
     appearanceDataInit:
      enum.PdaVisuals.PdaType:
@@ -728,6 +737,7 @@
     - NanoTaskCartridge
     - NewsReaderCartridge
     - AstroNavCartridge
+    - MessengerCartridgeClient #SS220 Messenger
 
 - type: entity
   parent: BasePDA
@@ -1979,6 +1989,7 @@
       - WantedListCartridge
       - LogProbeCartridge
       - AstroNavCartridge
+      - MessengerCartridgeClient # SS220 Messenger
 
 - type: entity
   parent: ERTLeaderPDA
@@ -2591,13 +2602,54 @@
     state: pda-seniorcourier #SS220 Resprite Senior Courier PDA
 
 - type: entity
+  parent: [ BaseHighlyIllegalContraband, BasePDA ]
+  id: NinjaPDA
+  name: ninja PDA
+  description: You stealthy bastard, you!
+  components:
+  - type: Pda
+    id: NinjaIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-ninja
+  - type: Icon
+    state: pda-ninja
+  #SS220 PDA-Resprite BGN
+  - type: PdaBorderColor
+    borderColor: "#2d2c35"
+  - type: Sprite
+    layers:
+    - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda-ninja"
+    - state: "screen-ninja"
+      shader: "unshaded"
+    - state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      visible: false
+  #SS220 PDA-Resprite END
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
+
+- type: entity
   parent: [ BaseMajorContraband, SyndiPDA ]
   id: PiratePDA
   name: pirate PDA
   description: Yargh!
   components:
   - type: Pda
-    id: PirateIDCard
+    id: PirateSyndicateIDCard
   #SS220 PDA-Resprite-Start
   - type: PdaBorderColor
     borderColor: "#4b474f"
@@ -2693,6 +2745,14 @@
         type: HealthAnalyzerBoundUserInterface
       enum.ChameleonUiKey.Key:
         type: ChameleonBoundUserInterface
+
+- type: entity
+  parent: ChameleonPDA
+  id: ChameleonAgentPDA
+  suffix: Chameleon, Agent ID
+  components:
+  - type: Pda
+    id: AgentIDCard
 
 - type: entity
   parent: BaseWidePDA

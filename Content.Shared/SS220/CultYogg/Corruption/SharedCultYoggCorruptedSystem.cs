@@ -7,6 +7,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Content.Shared.SS220.CultYogg.Cultists;
+using Content.Shared.SS220.ItemShell;
 using Content.Shared.SS220.SoftDelete;
 using Content.Shared.Tag;
 using Robust.Shared.Containers;
@@ -15,27 +16,26 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using System.Diagnostics.CodeAnalysis;
-using Robust.Shared.GameObjects;
 
 namespace Content.Shared.SS220.CultYogg.Corruption;
 
 /// <summary>
 /// Handles all corruption logic.
 /// </summary>
-public sealed class SharedCultYoggCorruptedSystem : EntitySystem
+public sealed partial class SharedCultYoggCorruptedSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedStackSystem _stackSystem = default!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedSoftDeleteSystem _softDeleteSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private SharedStackSystem _stackSystem = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedSoftDeleteSystem _softDeleteSystem = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     private readonly TimeSpan _corruptionDuration = TimeSpan.FromSeconds(1.8);
     private readonly Dictionary<ProtoId<EntityPrototype>, CultYoggCorruptedPrototype> _recipesBySourcePrototypeId = [];
@@ -77,6 +77,9 @@ public sealed class SharedCultYoggCorruptedSystem : EntitySystem
     /// <returns><see langword="true"/> if entity is corrupted, otherwise <see langword="false"/></returns>
     public bool IsCorrupted(EntityUid entity)
     {
+        if (TryComp<ShellableItemComponent>(entity, out var item) && item.Shell != null)
+            return HasComp<CultYoggCorruptedComponent>(item.Shell.Value);
+
         return _entityManager.HasComponent<CultYoggCorruptedComponent>(entity);
     }
 
@@ -112,7 +115,12 @@ public sealed class SharedCultYoggCorruptedSystem : EntitySystem
             return null;
         }
 
-        TryDropAllContainedEntities(corruptedEntity);
+        // The retained item is part of the corrupted form, not loot to release during cleansing.
+        // Detaching the shell above also makes deleting an unfolded item safe.
+        if (TryComp<ItemShellComponent>(corruptedEntity, out var shell) && shell.LinkedItem != null)
+            QueueDel(shell.LinkedItem.Value);
+
+        TryDropContainedEntities(corruptedEntity);
         _entityManager.DeleteEntity(corruptedEntity);
 
         return normalEntity;
@@ -193,7 +201,10 @@ public sealed class SharedCultYoggCorruptedSystem : EntitySystem
         if (args.Proto == null)
             return;
 
-        var corrupted = Corrupt(ent, args.Target.Value, args.Proto, args.InHand);
+        if (!_prototypeManager.Resolve(args.Proto, out var corruptProto))
+            return;
+
+        var corrupted = Corrupt(ent, args.Target.Value, corruptProto, args.InHand);
         args.Callback?.Invoke(corrupted);
 
         args.Handled = true;
@@ -350,7 +361,7 @@ public sealed class SharedCultYoggCorruptedSystem : EntitySystem
             _hands.TryDrop(user, entity);
 
         if (recipe.EmptyStorage)
-            TryDropAllContainedEntities(entity);
+            TryDropContainedEntities(entity);
 
         EnsureComp<CultYoggCorruptedComponent>(corruptedEntity, out var corrupted);
 
@@ -387,9 +398,9 @@ public sealed class SharedCultYoggCorruptedSystem : EntitySystem
     }
 
     /// <summary>
-    /// Drops entities from all attached containers
+    /// Drops contained entities, preserving the contents of an item shell.
     /// </summary>
-    private bool TryDropAllContainedEntities(EntityUid entity)
+    private bool TryDropContainedEntities(EntityUid entity)
     {
         if (!TryComp<ContainerManagerComponent>(entity, out var containerManager))
             return false;
@@ -398,6 +409,10 @@ public sealed class SharedCultYoggCorruptedSystem : EntitySystem
         var coords = Transform(entity).Coordinates;
         foreach (var container in _containerSystem.GetAllContainers(entity, containerManager))
         {
+            //We do not drop the hidden shell or object, as it is essentially part of it.
+            if (container.ID == ItemShellComponent.ContentContainerId && HasComp<ItemShellComponent>(entity))
+                continue;
+
             foreach (var item in container.ContainedEntities)
             {
                 _dropEntitiesBuffer.Add(item);
@@ -421,11 +436,11 @@ public sealed class SharedCultYoggCorruptedSystem : EntitySystem
 public sealed partial class CultYoggCorruptDoAfterEvent : SimpleDoAfterEvent
 {
     public readonly bool InHand;
-    public readonly CultYoggCorruptedPrototype? Proto;
+    public readonly ProtoId<CultYoggCorruptedPrototype>? Proto;
     [NonSerialized]
     public readonly Action<EntityUid?>? Callback;
 
-    public CultYoggCorruptDoAfterEvent(CultYoggCorruptedPrototype? proto, bool inHand, Action<EntityUid?>? callback)
+    public CultYoggCorruptDoAfterEvent(ProtoId<CultYoggCorruptedPrototype>? proto, bool inHand, Action<EntityUid?>? callback)
     {
         InHand = inHand;
         Proto = proto;

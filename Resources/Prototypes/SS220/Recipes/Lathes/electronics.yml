@@ -94,6 +94,13 @@
     Gold: 300
     Uranium: 500
 
+# SS220-kitchen-processor begin
+- type: latheRecipe
+  parent: [ BaseCircuitboardRecipe, BaseServiceMachineRecipeCategory ]
+  id: FoodProcessorMachineCircuitboard
+  result: FoodProcessorMachineCircuitboard
+# SS220-kitchen-processor end
+
 - type: latheRecipe
   parent: BaseCircuitboardRecipe
   id: MedicalScannerMachineCircuitboard

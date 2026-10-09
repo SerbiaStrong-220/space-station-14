@@ -20,12 +20,12 @@ public sealed partial class BarricadeComponent : Component
     /// Chance to catch the projectile, if the distance between barricade and the shooter >= <see cref="MaxDistance"/>
     /// </summary>
     [DataField]
-    public float MaxHitChance = 0.7f;
+    public float MaxHitChance = 0.75f;
 
     [DataField]
     public float MinDistance = 1.5f;
     [DataField]
-    public float MaxDistance = 15f;
+    public float MaxDistance = 12f;
 
     /// <summary>
     /// A whitelist of entities that will always pass through the barricade

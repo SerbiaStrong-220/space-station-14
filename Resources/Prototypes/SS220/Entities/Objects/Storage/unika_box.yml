@@ -12,11 +12,13 @@
     maxItemSize: Small
   - type: Item
     size: Large
-  - type: StorageFill
-    contents:
-      - id: WeaponRevolverMatebaSouvenir
-      - id: SpeedLoaderMagnum
-        amount: 2
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WeaponRevolverMatebaSouvenir
+        - id: SpeedLoaderMagnum
+          amount: 2
   - type: AccessReader
     access: [["HeadOfSecurity"]]
   - type: Lock
@@ -32,7 +34,7 @@
       map: ["openIndicator"]
       visible: false
       shader: unshaded
-    - state: lock-open 
+    - state: lock-open
       map: ["unlockIndicator"]
       shader: unshaded
       visible: false
@@ -59,4 +61,4 @@
   - type: LockVisuals
     stateLocked: lock-closed
     stateUnlocked: lock-open
-    
+

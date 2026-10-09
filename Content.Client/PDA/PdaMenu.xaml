@@ -1,6 +1,7 @@
 <pda:PdaWindow  xmlns="https://spacestation14.io"
                 xmlns:pda="clr-namespace:Content.Client.PDA"
                 xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                xmlns:ui="clr-namespace:Content.Client.SS220.CriminalRecords.UI"
                 MinSize="576 450"
                 SetSize="576 450">
     <!-- This: (Margin="1 1 3 0") is necessary so the navigation bar doesn't sticks into the black content border. -->
@@ -23,30 +24,63 @@
         <pda:PdaNavigationButton Name="EjectPaiButton" Access="Public" SetWidth="32"/>
     </BoxContainer>
     <BoxContainer Name="ViewContainer" HorizontalExpand="True" VerticalExpand="True" Access="Public">
-        <BoxContainer Orientation="Vertical"
-                      VerticalExpand="True"
-                      HorizontalExpand="True"
-                      MinSize="50 50"
-                      Margin="8">
-            <ContainerButton Name="PdaOwnerButton">
-                <RichTextLabel Name="PdaOwnerLabel" Access="Public"/>
-            </ContainerButton>
-            <ContainerButton Name="IdInfoButton">
-                <RichTextLabel Name="IdInfoLabel" Access="Public"/>
-            </ContainerButton>
-            <ContainerButton Name="StationNameButton">
-                <RichTextLabel Name="StationNameLabel" Access="Public"/>
-            </ContainerButton>
-            <ContainerButton Name="StationAlertLevelButton">
-                <RichTextLabel Name="StationAlertLevelLabel" Access="Public"/>
-            </ContainerButton>
-            <ContainerButton Name="StationTimeButton">
-                <RichTextLabel Name="StationTimeLabel" Access="Public"/>
-            </ContainerButton>
-            <ContainerButton Name="StationAlertLevelInstructionsButton">
-                <RichTextLabel Name="StationAlertLevelInstructions" Access="Public"/>
-            </ContainerButton>
-        </BoxContainer>
+        <!-- SS220 ADD ADDITIONAL INFO FOR PDA START -->
+        <ScrollContainer VerticalExpand="True" HorizontalExpand="True" HScrollEnabled="False">
+            <BoxContainer Orientation="Vertical"
+                          VerticalExpand="True"
+                          HorizontalExpand="True"
+                          MinSize="50 50"
+                          Margin="8">
+                <ContainerButton Name="PdaOwnerButton">
+                    <RichTextLabel Name="PdaOwnerLabel" Access="Public"/>
+                </ContainerButton>
+                <ContainerButton Name="StationNameButton">
+                    <RichTextLabel Name="StationNameLabel" Access="Public"/>
+                </ContainerButton>
+                <ContainerButton Name="StationAlertLevelButton">
+                    <RichTextLabel Name="StationAlertLevelLabel" Access="Public"/>
+                </ContainerButton>
+                <ContainerButton Name="StationTimeButton">
+                    <RichTextLabel Name="StationTimeLabel" Access="Public"/>
+                </ContainerButton>
+                <ContainerButton Name="StationAlertLevelInstructionsButton">
+                    <RichTextLabel Name="StationAlertLevelInstructions" Access="Public"/>
+                </ContainerButton>
+                <PanelContainer StyleClasses="LowDivider" Margin="0 5 0 5"/>
+                <ContainerButton Name="IdInfoButton">
+                    <RichTextLabel Name="IdInfoLabel" Access="Public"/>
+                </ContainerButton>
+                <ContainerButton VerticalExpand="True">
+                    <BoxContainer Orientation="Horizontal">
+                        <BoxContainer Name="IdPhotoContainer" Orientation="Vertical">
+                            <RichTextLabel Name="IdPhotoLabel"
+                                           Access="Public" Text="{Loc 'records-pda-menu-id-photo-label-text'}"
+                                           VerticalAlignment="Top"/>
+                            <ui:CharacterVisualisation Access="Public"
+                                                       Name="IdPhoto"
+                                                       IsOnlyFace="True"
+                                                       MinSize="128 128"/>
+                        </BoxContainer>
+                        <BoxContainer Name="AccessContainer"
+                                      Access="Public"
+                                      VerticalExpand="True"
+                                      HorizontalExpand="True"
+                                      Orientation="Vertical">
+                            <RichTextLabel Text="{Loc 'records-pda-menu-access-text'}" Margin="0 0 5 0" HorizontalAlignment="Center"/>
+                            <ScrollContainer VerticalExpand="True" HorizontalAlignment="Center" HorizontalExpand="True" MinSize="200 100" HScrollEnabled="False">
+                                <GridContainer Access="Public"
+                                               VSeparationOverride="5"
+                                               HSeparationOverride="5" HorizontalAlignment="Center"
+                                               Name="AvailableAccessTags"
+                                               VerticalExpand="True"
+                                               HorizontalExpand="True"/>
+                            </ScrollContainer>
+                        </BoxContainer>
+                    </BoxContainer>
+                </ContainerButton>
+            </BoxContainer>
+        </ScrollContainer>
+        <!-- SS220 ADD ADDITIONAL INFO FOR PDA END -->
         <ScrollContainer HorizontalExpand="True" VerticalExpand="True" HScrollEnabled="True">
             <BoxContainer Orientation="Vertical"
                           VerticalExpand="True"

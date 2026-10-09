@@ -18,3 +18,6 @@ chat-emote-name-hiss = шипение
 chat-emote-msg-hiss = шипит!
 chat-emote-name-mrow = раздражённое мяуканье
 chat-emote-msg-mrow = раздражённо мяукает
+
+chat-emote-name-blood-cough = кровавый кашель
+chat-emote-msg-blood-cough = кашляет с кровью!

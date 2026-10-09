@@ -3,8 +3,8 @@
 - type: entity
   parent: ClothingHeadHelmetBasic
   id: ClothingHeadHelmetTactical
-  name: тактический шлем СБ
-  description: Тактический шлем для самых элитных офицеров службы безопасности НТ.
+  name: tactical security helmet
+  description: A tactical helmet for the most elite NT security officers.
   suffix: За время в игре
   components:
   - type: Sprite
@@ -34,3 +34,25 @@
         Caustic: 0.95
   - type: ExplosionResistance
     damageCoefficient: 0.75
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHelmetAssault
+  name: assault helmet
+  description: A heavy but really durable helmet made for assault squads. It is pretty outdated but half a centimeter of composite armor is still half a centimeter of composite armor.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Helmets/assault.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Helmets/assault.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.85
+        Slash: 0.85
+        Piercing: 0.85
+        Heat: 0.95
+        Radiation: 0.85
+        Caustic: 0.95
+  - type: ExplosionResistance
+    damageCoefficient: 0.9

@@ -6,10 +6,10 @@ using Robust.Client.UserInterface.Controls;
 
 namespace Content.Client.SS220.UserInterface.System.PinUI;
 
-public sealed class PinButton : TextureButton
+public sealed partial class PinButton : TextureButton
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
 
     private readonly PinUISystem _pinUISystem;
 

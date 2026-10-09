@@ -57,7 +57,7 @@
   id: MentorNeck
   effects:
   - !type:GroupLoadoutEffect
-    proto: MentorSponsorTier
+    proto: MentorOrAdministratorSponsorTier
   storage:
     back:
     - ClothingSponsorNeckMentor
@@ -88,3 +88,12 @@
   storage:
     back:
     - ClothingSponsorNeckWikiEditors
+
+- type: loadout
+  id: LorovedsNeck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: LoreEditSponsorTier
+  storage:
+    back:
+    - ClothingSponsorNeckLoroveds

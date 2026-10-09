@@ -17,9 +17,6 @@
     inHandsMaxFillLevels: 1
   - type: FitsInDispenser
     solution: drink
-  - type: Tag
-    tags:
-    - DrinkGlass
 
 - type: entity
   parent: [DrinkBaseMaterialMetal, DrinkBase]
@@ -34,7 +31,7 @@
         - ReagentId: Ice
           Quantity: 200
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/icebucket.rsi
+    sprite: SS220/Objects/Consumable/Drinks/icebucket.rsi #SS220 Resprite
     state: icon
   - type: PhysicalComposition
     materialComposition:
@@ -90,10 +87,11 @@
       tags:
       - Cola
     hideStackVisualsWhenClosed: false
-  - type: StorageFill
-    contents:
-    - id: DrinkColaCan
-      amount: 6
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: DrinkColaCan
+        amount: 6
   - type: ItemCounter
     count:
       tags: [Cola]
@@ -124,16 +122,16 @@
   - type: ExaminableSolution
     heldOnly: true # Opaque, can't see inside from a distance
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/shaker.rsi
+    sprite: SS220/Objects/Consumable/Drinks/shaker.rsi #SS220 Resprite
     state: icon
   - type: Item
-    sprite: Objects/Consumable/Drinks/shaker.rsi
+    sprite: SS220/Objects/Consumable/Drinks/shaker.rsi #SS220 Resprite
   - type: PhysicalComposition
     materialComposition:
       Steel: 50
   - type: Shakeable
   - type: ReactionMixer
-    mixOnInteract: false
+    mixerType: None
     reactionTypes:
     - Shake
 
@@ -144,9 +142,9 @@
   description: A gold-plated shaker given as a token of appreciation for years of service. It doesn't make the drinks taste any different.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/shaker_gold.rsi
+    sprite: SS220/Objects/Consumable/Drinks/shaker_gold.rsi #SS220 Resprite
   - type: Item
-    sprite: Objects/Consumable/Drinks/shaker_gold.rsi
+    sprite: SS220/Objects/Consumable/Drinks/shaker_gold.rsi #SS220 Resprite
   - type: PhysicalComposition
     materialComposition:
       Gold: 10 # Gold plated, not solid gold
@@ -172,7 +170,7 @@
     heldOnly: true
     exactVolume: true
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/jigger.rsi
+    sprite: SS220/Objects/Consumable/Drinks/jigger.rsi #SS220 Resprite
     state: icon
   - type: PhysicalComposition
     materialComposition:
@@ -208,9 +206,6 @@
     solution: drink
   - type: FitsInDispenser
     solution: drink
-  - type: Tag
-    tags:
-    - DrinkGlass
 
 - type: entity
   parent: DrinkShakeBase

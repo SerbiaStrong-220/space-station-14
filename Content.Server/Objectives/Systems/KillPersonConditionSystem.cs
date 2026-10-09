@@ -2,6 +2,7 @@ using Content.Server.Objectives.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Shared.CCVar;
 using Content.Shared.Mind;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Objectives.Components;
 using Robust.Shared.Configuration;
 
@@ -34,12 +35,20 @@ public sealed class KillPersonConditionSystem : EntitySystem
 
     private float GetProgress(EntityUid target, bool requireDead, bool requireMaroon)
     {
-        // deleted or gibbed or something, counts as dead
-        if (!TryComp<MindComponent>(target, out var mind) || mind.OwnedEntity == null)
-            return 1f;
+        // ss220 add custom antag goals start
+        EntityUid? mindCharacter = null;
 
-        var targetDead = _mind.IsCharacterDeadIc(mind);
-        var targetMarooned = !_emergencyShuttle.IsTargetEscaping(mind.OwnedEntity.Value) || _mind.IsCharacterUnrevivableIc(mind);
+        // deleted or gibbed or something, counts as dead
+        if (TryComp<MindComponent>(target, out var mindComp) && mindComp.OwnedEntity != null)
+            mindCharacter = mindComp.OwnedEntity.Value;
+
+        var targetEnt = mindCharacter ?? target;
+
+        var targetDead = _mind.IsCharacterDeadIc(targetEnt);
+        var targetMarooned =
+            !_emergencyShuttle.IsTargetEscaping(targetEnt) || _mind.IsCharacterUnrevivableIc(targetEnt);
+        // ss220 add custom antag goals end
+
         if (!_config.GetCVar(CCVars.EmergencyShuttleEnabled) && requireMaroon)
         {
             requireDead = true;

@@ -3,6 +3,7 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Popups;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.Doors.Components;
 using Content.Shared.Emag.Systems;
@@ -17,14 +18,14 @@ using Content.Shared.Trigger;
 
 namespace Content.Server.SS220.CultYogg.BurglarBug;
 
-public sealed class BurglarBugServerSystem : EntitySystem
+public sealed partial class BurglarBugServerSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookupSystem = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private SharedHandsSystem _handsSystem = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private EntityLookupSystem _entityLookupSystem = default!;
 
     public override void Initialize()
     {
@@ -90,14 +91,14 @@ public sealed class BurglarBugServerSystem : EntitySystem
 
     private void OnStick(Entity<BurglarBugComponent> entity, ref AttemptEntityStickEvent args)
     {
-        if (entity.Comp.OpenedDoorStickPopupCancellation != null)
+        if (entity.Comp.OpenDoorStickPopupCancellation != null)
         {
             if (TryComp<DoorComponent>(args.Target,
                     out var doorComponent) &&  doorComponent.State != DoorState.Closed)
             {
                 args.Cancelled = true;
                 RaiseLocalEvent(entity.Owner, new DroppedEvent(args.User), true);
-                var msg = Loc.GetString(entity.Comp.OpenedDoorStickPopupCancellation);
+                var msg = Loc.GetString(entity.Comp.OpenDoorStickPopupCancellation);
                 _popupSystem.PopupEntity(msg, args.User, PopupType.MediumCaution);
                 _handsSystem.TryDrop(args.User);
                 _adminLogger.Add(LogType.Stripping, LogImpact.Medium, $"{ToPrettyString(args.User):actor} has droped the item {ToPrettyString(entity.Owner):item}");

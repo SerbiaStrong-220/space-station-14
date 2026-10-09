@@ -16,7 +16,6 @@ using Robust.Shared.Utility;
 using Content.Shared.Access.Components;
 using Content.Shared.Inventory;
 using Content.Shared.PDA;
-using Content.Server.Popups;
 using Content.Server.SS220.Language;
 using Content.Shared.SS220.Language.Systems;  // SS220-Add-Languages
 using Content.Server.SS220.Events;
@@ -35,7 +34,7 @@ public sealed class RadioSystem : EntitySystem
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
+    //[Dependency] private readonly PopupSystem _popup = default!; // ss220 remove unused dep
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly LanguageSystem _languageSystem = default!; // SS220-Add-Languages
@@ -271,13 +270,13 @@ public sealed class RadioSystem : EntitySystem
         if (!_inventorySystem.TryGetSlotEntity(senderUid, "id", out var idUid))
             return null;
 
-        if (EntityManager.TryGetComponent(idUid, out PdaComponent? pda) && pda.ContainedId is not null)
+        if (TryComp<PdaComponent>(idUid, out var pda) && pda.ContainedId is not null)
         {
             // PDA
             if (TryComp<IdCardComponent>(pda.ContainedId, out var idComp))
                 return idComp;
         }
-        else if (EntityManager.TryGetComponent(idUid, out IdCardComponent? id))
+        else if (TryComp<IdCardComponent>(idUid, out var id))
         {
             // ID Card
             return id;

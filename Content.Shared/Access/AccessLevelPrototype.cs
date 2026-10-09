@@ -26,6 +26,11 @@ namespace Content.Shared.Access
         public bool CanBeSwitchableInReader { get; set; } = true;
         //SS220-door-electronic-configurator begin
 
+        // ss220 add additional info for pda start
+        [DataField]
+        public bool ShowInPda { get; set; } = true;
+        // ss220 add additional info for pda end
+
         /// <summary>
         ///     Denotes whether this access level is intended to be assignable to a crew ID card.
         /// </summary>

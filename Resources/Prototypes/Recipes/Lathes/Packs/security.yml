@@ -51,6 +51,7 @@
   - MagazineRifleEmpty
   - SpeedLoaderMagnum
   - SpeedLoaderMagnumEmpty
+  - MagazineBoxAntiMateriel #SS220 WeaponSniperCompact
   #ss220 more recipies begin
   - SpeedLoaderLightRifle
   - MagazineMagnumEmpty
@@ -78,7 +79,11 @@
   - PowerCageSmall
   - TelescopicShield
   - ClothingEyesThermalGlassesSecurity #SS220 Thermals
+  - ClothingEyesNightVisionSecurity #SS220 Night vision
   - ClothingBackpackHarmpack
+  - RiotBulletShield #SS220 Shield rework
+  - RiotLaserShield #SS220 Shield rework
+  - FieldShieldGenerator #SS220 Energy shield
 
 - type: latheRecipePack
   id: SecurityBoards
@@ -87,6 +92,7 @@
   - ShuttleGunFriendshipCircuitboard
   - ShuttleGunPerforatorCircuitboard
   - ShuttleGunSvalinnMachineGunCircuitboard
+  - ShuttleGunMLGSWCircuitboard #SS220-MLGSW-gun-research
 
 - type: latheRecipePack
   parent:
@@ -135,6 +141,9 @@
 - type: latheRecipePack
   id: SecurityWeapons
   recipes:
+  - WeaponSniperCompact #SS220 WeaponSniperCompact
+  - LaserSMGPowerCell #SS220 WeaponLaserSMG
+  - WeaponLaserSMG #SS220 WeaponLaserSMG
   - Truncheon
   - WeaponAdvancedLaser
   - WeaponLaserCannon

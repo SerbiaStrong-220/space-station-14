@@ -3,8 +3,9 @@
 injector-draw-text = Забор
 injector-inject-text = Введение
 injector-invalid-injector-toggle-mode = Неверный режим
-injector-volume-label = Объём: [color=white]{ $currentVolume }/{ $totalVolume }[/color]
-    Режим: [color=white]{ $modeString }[/color] ([color=white]{ $transferVolume } ед.[/color])
+injector-volume-label =
+    Объём: [color=white]{ $currentVolume }/{ $totalVolume } ед.[/color]
+    Режим: [color=white]{ $modeString }[/color]
 
 ## Entity
 
@@ -35,3 +36,39 @@ injector-component-drawing-user = Вы начинаете набирать шп�
 injector-component-injecting-user = Вы начинаете вводить содержимое шприца.
 injector-component-drawing-target = { CAPITALIZE($user) } начинает набирать шприц из вас!
 injector-component-injecting-target = { CAPITALIZE($user) } начинает вводить содержимое шприца в вас!
+
+injector-volume-transfer-label = Объем: [color=white]{ $currentVolume }/{ $totalVolume } ед.[/color]
+
+injector-toggle-verb-text = Переключить режим инъектора
+
+injector-component-inject-mode-name = инъекция
+
+injector-component-draw-mode-name = набор
+
+injector-component-dynamic-mode-name = динамический
+
+injector-component-mode-changed-text = Теперь { $mode }
+
+injector-component-cannot-toggle-dynamic-message = Невозможно переключить в динамический режим!
+
+injector-component-empty-message = { CAPITALIZE(THE($injector)) } пуст!
+
+injector-component-blocked-user = Защитная одежда заблокировала вашу инъекцию!
+
+injector-component-blocked-other = Броня { POSS-ADJ($target) } заблокировала инъекцию { THE($user) }!
+
+injector-component-ignore-mobs = Этот инъектор может взаимодействовать только с емкостями!
+
+injector-component-needle-injecting-user = Вы начинаете вводить иглу.
+
+injector-component-needle-injecting-target = { CAPITALIZE(THE($user)) } пытается ввести в вас иглу!
+
+injector-component-needle-drawing-user = Вы начинаете набирать жидкость иглой.
+
+injector-component-needle-drawing-target = { CAPITALIZE(THE($user)) } пытается набрать вашей крови с помощью иглы!
+
+injector-component-spray-injecting-user = Вы начинаете подготавливать распылитель.
+
+injector-component-spray-injecting-target = { CAPITALIZE(THE($user)) } пытается направить на вас распылитель!
+
+injector-component-feel-prick-message = Вы чувствуете легкий укол!

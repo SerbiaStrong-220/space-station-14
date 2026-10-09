@@ -139,6 +139,7 @@
     - id: FoodWatermelon
     - id: FoodCherry
     - id: MobTomatoKiller
+    - id: MobWatermelonDog #SS220-watermelondog
     - id: MobLuminousEntity
     - id: MobLuminousObject
     - id: FoodGatfruit # 0.007% spawn chance. 1 / 141

@@ -59,7 +59,7 @@ public sealed partial class SubdermalImplantComponent : Component
 
     //SS220-mindslave begin
     //I really need to pass user's uid...
-    public EntityUid? user;
+    public EntityUid? User;
     //SS220-mindslave end
 
     /// <summary>
@@ -69,21 +69,6 @@ public sealed partial class SubdermalImplantComponent : Component
     [DataField]
     public EntProtoId? DrawableProtoIdOverride;
 }
-
-// SS220 Chemical implants begin
-public sealed partial class UseChemicalImplantEvent : InstantActionEvent
-{
-}
-// SS220 Chemical implants end
-
-// SS220 lazy-of-making-new-file-begin
-public sealed partial class UseAdrenalImplantEvent : InstantActionEvent
-{
-}
-public sealed partial class UseDnaCopyImplantEvent : InstantActionEvent
-{
-}
-// SS220 lazy-of-making-new-file-end
 
 /// <summary>
 /// Used for opening the storage implant via action.

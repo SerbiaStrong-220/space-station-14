@@ -1,0 +1,9 @@
+guide-entry-ss220-spacelaw = Космический закон
+guide-entry-ss220-lethal-force = ROE, регламент применение силы
+guide-entry-ss220-modificator = Модификаторы наказаний
+guide-entry-ss220-articles = Справочник статей
+guide-entry-ss220-1xx = Статьи 1xx
+guide-entry-ss220-2xx = Статьи 2xx
+guide-entry-ss220-3xx = Статьи 3xx
+guide-entry-ss220-4xx = Статьи 4xx
+guide-entry-ss220-5xx = Статьи 5xx

@@ -4,6 +4,8 @@ using Content.Shared.Objectives.Components;
 using Content.Shared.Roles.Jobs;
 using Robust.Shared.GameObjects;
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Database;
 
 namespace Content.Server.Objectives.Systems;
 
@@ -14,6 +16,10 @@ public sealed class TargetObjectiveSystem : EntitySystem
 {
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly SharedJobSystem _job = default!;
+
+    // ss220 add custom antag goals start
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    // ss220 add custom antag goals end
 
     public override void Initialize()
     {
@@ -31,7 +37,7 @@ public sealed class TargetObjectiveSystem : EntitySystem
     }
 
     //SS220-mindslave begin
-    public void ResetEntityName(EntityUid uid, TargetObjectiveComponent? comp = null)
+    public void ResetEntityName(EntityUid uid, TargetObjectiveComponent? comp = null, bool log = false)
     {
         if (!Resolve(uid, ref comp))
             return;
@@ -40,6 +46,9 @@ public sealed class TargetObjectiveSystem : EntitySystem
             return;
 
         _metaData.SetEntityName(uid, GetTitle(target.Value, comp.Title), MetaData(uid));
+
+        if (log)
+            _adminLog.Add(LogType.AdminCommand, $"Changed objective {ToPrettyString(uid):objective}");
     }
     //SS220-mindslave end
 
@@ -68,13 +77,21 @@ public sealed class TargetObjectiveSystem : EntitySystem
 
     private string GetTitle(EntityUid target, string title)
     {
-        var targetName = "Unknown";
+        string targetName; // ss220 add custom antag goals
         if (TryComp<MindComponent>(target, out var mind) && mind.CharacterName != null)
         {
             targetName = mind.CharacterName;
         }
+        // ss220 add custom antag goals start
+        else
+        {
+            targetName = Name(target);
+        }
 
-        var jobName = _job.MindTryGetJobName(target);
+        if (!HasComp<MindComponent>(target) || !_job.MindTryGetJobName(target, out var jobName))
+            jobName = Loc.GetString("job-name-unknown");
+        // ss220 add custom antag goals end
+
         return Loc.GetString(title, ("targetName", targetName), ("job", jobName));
     }
 

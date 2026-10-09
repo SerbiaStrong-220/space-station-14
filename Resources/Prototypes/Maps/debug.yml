@@ -24,10 +24,10 @@
       components:
         - type: StationNameSetup
           mapNameTemplate: "Dev"
+        #ss220 add more jobs for dev map start
         - type: StationJobs
-          availableJobs:
-            Captain: [ -1, -1 ]
-
+          spawnAllJobs: true
+        #ss220 add more jobs for dev map end
 - type: gameMap
   id: TestTeg
   mapName: Test TEG

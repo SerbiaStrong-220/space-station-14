@@ -1,14 +1,3 @@
-- type: entity
-  parent: BaseComputerCircuitboard
-  id: CentcomCommsComputerCircuitboard
-  name: centcom communications computer board
-  description: A computer printed circuit board for a centcom communications console.
-  components:
-    - type: Sprite
-      state: cpu_command
-    - type: ComputerBoard
-      prototype: CentcomComputerComms
-
 #SALVAGE SHUTTLE RETURN
 - type: entity
   parent: BaseComputerCircuitboard
@@ -32,3 +21,15 @@
       state: cpu_clown
     - type: ComputerBoard
       prototype: ComputerCluwneComms
+
+- type: entity
+  parent: CluwneCommsComputerCircuitboard
+  id: CluwneCommsComputerCircuitboardUnconvertible
+  description: A computer printed circuit board for a joke communications console. The circuits are completely saturated with bananium, there is no turning back.
+  suffix: Unconvertible
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/module.rsi
+    state: cpu_clown_unconvertible
+  - type: ComputerBoard
+    prototype: ComputerCluwneCommsUnconvertible

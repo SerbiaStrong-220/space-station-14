@@ -75,6 +75,7 @@
   components:
   - type: BorgSwitchableType
     selectedBorgType: medical
+  - type: Stripping # SS220-mediborg-stripping-fix
 
 - type: entity
   id: BorgChassisService
