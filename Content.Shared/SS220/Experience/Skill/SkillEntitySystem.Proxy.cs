@@ -38,7 +38,8 @@ public partial class SkillEntitySystem : EntitySystem
 
         if (!TryComp<ExperienceComponent>(experienceUid, out var experienceComponent))
         {
-            Log.Error($"Got entity {ToPrettyString(experienceUid)} in container which entity owner don't have {nameof(ExperienceComponent)}");
+            Log.Error($"Got entity {ToPrettyString(skillUid)} in container which entity owner don't have {nameof(ExperienceComponent)}! Queued that entity to be deleted");
+            QueueDel(skillUid);
             return false;
         }
 
