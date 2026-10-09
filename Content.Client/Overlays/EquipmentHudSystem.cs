@@ -3,9 +3,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Robust.Client.Player;
 using Robust.Shared.Player;
-// SS220-glasses-on-forehead-begin
-using Content.Shared.SS220.Clothing.Components;
-// SS220-glasses-on-forehead-end
+using Content.Shared.SS220.Clothing.Events;
 
 namespace Content.Client.Overlays;
 
@@ -15,8 +13,6 @@ namespace Content.Client.Overlays;
 /// </summary>
 public abstract class EquipmentHudSystem<T> : EntitySystem where T : IComponent
 {
-    [Dependency] private readonly InventorySystem _foreheadInventory = default!; // SS220-glasses-on-forehead
-
     [Dependency] private readonly IPlayerManager _player = default!;
 
     [ViewVariables]
@@ -105,8 +101,9 @@ public abstract class EquipmentHudSystem<T> : EntitySystem where T : IComponent
     protected virtual void OnRefreshComponentHud(Entity<T> ent, ref RefreshEquipmentHudEvent<T> args)
     {
         // SS220-glasses-on-forehead-begin
-        if (HasComp<GlassesOnForeheadComponent>(ent) &&
-            _foreheadInventory.InSlotWithFlags(ent.Owner, SlotFlags.HEAD))
+        var effectAttempt = new GlassesEffectAttemptEvent();
+        RaiseLocalEvent(ent.Owner, ref effectAttempt);
+        if (effectAttempt.Cancelled)
             return;
         // SS220-glasses-on-forehead-end
 

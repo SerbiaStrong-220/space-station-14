@@ -1,6 +1,4 @@
-// SS220-glasses-on-forehead-begin
-using Content.Shared.SS220.Clothing.Components;
-// SS220-glasses-on-forehead-end
+using Content.Shared.SS220.Clothing.Events;
 using Content.Shared.Access.Systems;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Clothing;
@@ -25,8 +23,6 @@ namespace Content.Shared.IdentityManagement;
 /// </summary>
 public sealed class IdentitySystem : EntitySystem
 {
-    [Dependency] private readonly InventorySystem _foreheadInventory = default!; // SS220-glasses-on-forehead
-
     [Dependency] private readonly GrammarSystem _grammarSystem = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
@@ -108,8 +104,9 @@ public sealed class IdentitySystem : EntitySystem
     private void OnSeeIdentity(Entity<IdentityBlockerComponent> ent, ref SeeIdentityAttemptEvent args)
     {
         // SS220-glasses-on-forehead-begin
-        if (HasComp<GlassesOnForeheadComponent>(ent) &&
-            _foreheadInventory.InSlotWithFlags(ent.Owner, SlotFlags.HEAD))
+        var effectAttempt = new GlassesEffectAttemptEvent();
+        RaiseLocalEvent(ent.Owner, ref effectAttempt);
+        if (effectAttempt.Cancelled)
             return;
         // SS220-glasses-on-forehead-end
 

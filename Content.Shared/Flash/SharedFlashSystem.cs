@@ -1,6 +1,4 @@
-// SS220-glasses-on-forehead-begin
-using Content.Shared.SS220.Clothing.Components;
-// SS220-glasses-on-forehead-end
+using Content.Shared.SS220.Clothing.Events;
 using System.Linq;
 using Content.Shared.Charges.Components;
 using Content.Shared.Charges.Systems;
@@ -31,8 +29,6 @@ namespace Content.Shared.Flash;
 
 public abstract class SharedFlashSystem : EntitySystem
 {
-    [Dependency] private readonly InventorySystem _foreheadInventory = default!; // SS220-glasses-on-forehead
-
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedChargesSystem _sharedCharges = default!;
@@ -288,8 +284,9 @@ public abstract class SharedFlashSystem : EntitySystem
     private void OnFlashImmunityFlashAttempt(Entity<FlashImmunityComponent> ent, ref FlashAttemptEvent args)
     {
         // SS220-glasses-on-forehead-begin
-        if (HasComp<GlassesOnForeheadComponent>(ent) &&
-            _foreheadInventory.InSlotWithFlags(ent.Owner, SlotFlags.HEAD))
+        var effectAttempt = new GlassesEffectAttemptEvent();
+        RaiseLocalEvent(ent.Owner, ref effectAttempt);
+        if (effectAttempt.Cancelled)
             return;
         // SS220-glasses-on-forehead-end
 

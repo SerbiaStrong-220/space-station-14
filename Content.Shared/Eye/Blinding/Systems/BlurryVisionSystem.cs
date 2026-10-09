@@ -1,6 +1,4 @@
-// SS220-glasses-on-forehead-begin
-using Content.Shared.SS220.Clothing.Components;
-// SS220-glasses-on-forehead-end
+using Content.Shared.SS220.Clothing.Events;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Inventory;
@@ -9,8 +7,6 @@ namespace Content.Shared.Eye.Blinding.Systems;
 
 public sealed class BlurryVisionSystem : EntitySystem
 {
-    [Dependency] private readonly InventorySystem _foreheadInventory = default!; // SS220-glasses-on-forehead
-
     public override void Initialize()
     {
         base.Initialize();
@@ -23,8 +19,9 @@ public sealed class BlurryVisionSystem : EntitySystem
     private void OnGetBlur(Entity<VisionCorrectionComponent> glasses, ref InventoryRelayedEvent<GetBlurEvent> args)
     {
         // SS220-glasses-on-forehead-begin
-        if (HasComp<GlassesOnForeheadComponent>(glasses) &&
-            _foreheadInventory.InSlotWithFlags(glasses.Owner, SlotFlags.HEAD))
+        var effectAttempt = new GlassesEffectAttemptEvent();
+        RaiseLocalEvent(glasses.Owner, ref effectAttempt);
+        if (effectAttempt.Cancelled)
             return;
         // SS220-glasses-on-forehead-end
 
