@@ -7,10 +7,10 @@ using Robust.Shared.Player;
 
 namespace Content.Shared.SS220.SecHudRecords;
 
-public abstract class SharedSecHudRecordsSystem : EntitySystem
+public abstract partial class SharedSecHudRecordsSystem : EntitySystem
 {
-    [Dependency] private readonly InventorySystem _inv = default!;
-    [Dependency] private readonly SharedIdCardSystem _idCard = default!;
+    [Dependency] private InventorySystem _inv = default!;
+    [Dependency] private SharedIdCardSystem _idCard = default!;
 
     private const string EyesSlot = "eyes";
 
@@ -23,6 +23,9 @@ public abstract class SharedSecHudRecordsSystem : EntitySystem
 
     private void OnGetVerb(Entity<StatusIconComponent> ent, ref GetVerbsEvent<ExamineVerb> args)
     {
+        if (!args.CanInteract)
+            return;
+
         if (!_inv.TryGetSlotEntity(args.User, EyesSlot, out var glasses) ||
             !TryComp<SecHudRecordsComponent>(glasses.Value, out var secHudRecords))
             return;

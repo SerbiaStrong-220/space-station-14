@@ -10,9 +10,9 @@ using Content.Shared.Cargo.Components;
 namespace Content.Server.SS220.CargoMoneyCommand;
 
 [AdminCommand(AdminFlags.Admin)]
-public sealed class CargoMoneyCommand : IConsoleCommand
+public sealed partial class CargoMoneyCommand : IConsoleCommand
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
 
     public string Command => "cargomoney";
     public string Description => "Grant access to manipulate cargo's money.";
@@ -114,7 +114,7 @@ public sealed class CargoMoneyCommand : IConsoleCommand
         }
 
         var cargoSystem = _entityManager.System<CargoSystem>();
-        if (!cargoSystem.BankHasAccount((bank, bankComp), account))
+        if (!cargoSystem.TryGetAccount((bank, bankComp), account, out _))
         {
             shell.WriteLine($"Bank with id {bank} doesn't have a \"{account}\" account");
             return;

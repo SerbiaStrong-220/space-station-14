@@ -12,7 +12,7 @@
   name: cotton bun recipe
   result: FoodCottonBun
   time: 5
-  group: Breads
+  group: Moth
   solids:
     FoodDoughCottonSlice: 1
 
@@ -401,7 +401,7 @@
   name: banana bread recipe
   result: FoodBreadBanana
   time: 15
-  group: LoafCakes
+  group: Breads
   solids:
     FoodDough: 1
     FoodBanana: 1
@@ -741,12 +741,18 @@
   id: RecipeBoiledSpaghetti
   name: boiled spaghetti recipe
   result: FoodNoodlesBoiled
-  time: 15
+  time: 10 # SS220-kitchen-processor
   group: Pasta
   reagents:
-    Flour: 15
-    Egg: 6
+    # SS220-kitchen-processor begin
+    Water: 15
+    #Egg: 6
+    # SS220-kitchen-processor end
     OilOlive: 5
+  # SS220-kitchen-processor begin
+  solids:
+    FoodSpaghetti: 1
+  # SS220-kitchen-processor end
 
 - type: microwaveMealRecipe
   id: RecipePastaTomato
@@ -1709,8 +1715,8 @@
   time: 5
   group: Cake
   solids:
-    FoodCakePlain: 1
-    FoodBerries: 5
+    FoodCakeBlueberry: 1
+    FoodBerries: 2
   reagents:
     Milk: 10
 
@@ -2339,7 +2345,6 @@
   group: Dessert
   solids:
     FoodCroissantRaw: 1
-    FoodButterSlice: 1
 
 - type: microwaveMealRecipe
   id: RecipeCroissantCotton
@@ -2349,7 +2354,6 @@
   group: Moth
   solids:
     FoodCroissantRawCotton: 1
-    FoodButterSlice: 1
 
 - type: microwaveMealRecipe
   id: RecipeThrowingCroissant
@@ -2360,7 +2364,6 @@
   group: Secret
   solids:
     FoodCroissantRaw: 1
-    FoodButterSlice: 1
     ShardGlass: 1
 
 - type: microwaveMealRecipe
@@ -2395,6 +2398,7 @@
   name: grilled cheese sandwich recipe
   result: FoodBakedGrilledCheeseSandwich
   time: 10
+  group: Savory
   solids:
     FoodBreadPlainSlice: 2
     FoodCheeseSlice: 1
@@ -2405,6 +2409,7 @@
   name: cotton grilled cheese sandwich recipe
   result: FoodBakedGrilledCheeseSandwichCotton
   time: 10
+  group: Moth
   solids:
     FoodBreadCottonSlice: 2
     FoodCheeseSlice: 1
@@ -2455,9 +2460,8 @@
   name: cotton cake recipe
   result: FoodCakeCotton
   time: 5
-  group: Cake
+  group: Moth
   reagents:
     Fiber: 10
   solids:
     FoodCakePlain: 1
-    

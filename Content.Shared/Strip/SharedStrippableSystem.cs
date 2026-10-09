@@ -16,6 +16,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Popups;
 using Content.Shared.Strip.Components;
+using Content.Shared.SS220.StuckOnEquip;
 using Content.Shared.Verbs;
 using Robust.Shared.Utility;
 
@@ -35,6 +36,7 @@ public abstract class SharedStrippableSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
 
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedStuckOnEquipSystem _stuckOnEquip = default!; // SS220-StuckOnEquip
 
     public override void Initialize()
     {
@@ -128,10 +130,10 @@ public abstract class SharedStrippableSystem : EntitySystem
 
         // Is the target a handcuff?
         if (TryComp<VirtualItemComponent>(heldEntity, out var virtualItem) &&
-            TryComp<CuffableComponent>(target.Owner, out var cuffable) &&
-            _cuffableSystem.GetAllCuffs(cuffable).Contains(virtualItem.BlockingEntity))
+            _cuffableSystem.TryGetAllCuffs(target.Owner, out var cuffs) &&
+            cuffs.Contains(virtualItem.BlockingEntity))
         {
-            _cuffableSystem.TryUncuff(target.Owner, user, virtualItem.BlockingEntity, cuffable);
+            _cuffableSystem.TryUncuff(target.Owner, user, virtualItem.BlockingEntity);
             return;
         }
 
@@ -286,6 +288,11 @@ public abstract class SharedStrippableSystem : EntitySystem
         EntityUid item,
         string slot)
     {
+        // SS220-StuckOnEquip begin
+        // Aghost can remove stuck equipment through the regular stripping UI.
+        if (TryAdminGhostRemoveStuckItem(user, target, item, inHand: false))
+            return;
+        // SS220-StuckOnEquip end
         if (!CanStripRemoveInventory(user, target, item, slot))
             return;
 
@@ -379,7 +386,7 @@ public abstract class SharedStrippableSystem : EntitySystem
             return false;
         }
 
-        if (!_handsSystem.CanPickupToHand(target, activeItem.Value, handName, checkActionBlocker: false, target.Comp))
+        if (!_handsSystem.CanPickupToHand(target, activeItem.Value, handName, checkActionBlocker: false, handsComp: target.Comp))
         {
             _popupSystem.PopupCursor(Loc.GetString("strippable-component-cannot-put-message", ("owner", Identity.Entity(target, EntityManager))));
             return false;
@@ -513,6 +520,11 @@ public abstract class SharedStrippableSystem : EntitySystem
             !Resolve(target, ref targetStrippable))
             return;
 
+        // SS220-StuckOnEquip begin
+        // Aghost can remove stuck equipment through the regular stripping UI.
+        if (TryAdminGhostRemoveStuckItem(user, target, item, inHand: true))
+            return;
+        // SS220-StuckOnEquip end
         if (!CanStripRemoveHand(user, target, item, handName))
             return;
 
@@ -570,6 +582,21 @@ public abstract class SharedStrippableSystem : EntitySystem
         // Hand update will trigger strippable update.
     }
 
+    // SS220-StuckOnEquip begin
+    private bool TryAdminGhostRemoveStuckItem(EntityUid user, EntityUid target, EntityUid item, bool inHand)
+    {
+        if (!_stuckOnEquip.TryAdminGhostRemove(user, item))
+            return false;
+
+        if (!inHand)
+            RaiseLocalEvent(item, new DroppedEvent(user), true);
+        _handsSystem.PickupOrDrop(user, item);
+        _adminLogger.Add(LogType.Stripping, LogImpact.High,
+            $"{ToPrettyString(user):actor} has stripped the stuck item {ToPrettyString(item):item} " +
+            $"from {ToPrettyString(target):target}");
+        return true;
+    }
+    // SS220-StuckOnEquip end
     private void OnStrippableDoAfterRunning(Entity<HandsComponent> entity, ref DoAfterAttemptEvent<StrippableDoAfterEvent> ev)
     {
         var args = ev.DoAfter.Args;
@@ -697,6 +724,6 @@ public abstract class SharedStrippableSystem : EntitySystem
         if (viewer == null)
             return true;
 
-        return !HasComp<BypassInteractionChecksComponent>(viewer);
+        return !HasComp<BypassInteractionChecksComponent>(viewer) && definition.FullyHidden; // ss220 fix admin ghost pocket items
     }
 }

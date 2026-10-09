@@ -1,5 +1,4 @@
-
-using Content.Server.Administration.Managers;
+﻿using Content.Server.Administration.Managers;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
@@ -28,10 +27,11 @@ public sealed class RoleBanCommand : IConsoleCommand
     public async void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         string target;
-        string job;
+        string role;
         string reason;
         uint minutes;
         var postBanInfo = true;
+
         if (!Enum.TryParse(_cfg.GetCVar(CCVars.RoleBanDefaultSeverity), out NoteSeverity severity))
         {
             _sawmill ??= _log.GetSawmill("admin.role_ban");
@@ -43,30 +43,33 @@ public sealed class RoleBanCommand : IConsoleCommand
         {
             case 3:
                 target = args[0];
-                job = args[1];
+                role = args[1];
                 reason = args[2];
                 minutes = 0;
+
                 break;
             case 4:
                 target = args[0];
-                job = args[1];
+                role = args[1];
                 reason = args[2];
 
                 if (!uint.TryParse(args[3], out minutes))
                 {
                     shell.WriteError(Loc.GetString("cmd-roleban-minutes-parse", ("time", args[3]), ("help", Help)));
+
                     return;
                 }
 
                 break;
             case 5:
                 target = args[0];
-                job = args[1];
+                role = args[1];
                 reason = args[2];
 
                 if (!uint.TryParse(args[3], out minutes))
                 {
                     shell.WriteError(Loc.GetString("cmd-roleban-minutes-parse", ("time", args[3]), ("help", Help)));
+
                     return;
                 }
 
@@ -80,7 +83,7 @@ public sealed class RoleBanCommand : IConsoleCommand
             // SS220 post ban with post info start
             case 6:
                 target = args[0];
-                job = args[1];
+                role = args[1];
                 reason = args[2];
 
                 if (!uint.TryParse(args[3], out minutes))
@@ -107,27 +110,46 @@ public sealed class RoleBanCommand : IConsoleCommand
             default:
                 shell.WriteError(Loc.GetString("cmd-roleban-arg-count"));
                 shell.WriteLine(Help);
-                return;
-        }
 
-        if (!_proto.HasIndex<JobPrototype>(job) &&
-            !_proto.HasIndex<AntagPrototype>(job)) // SS220 antag bans
-        {
-            shell.WriteError(Loc.GetString("cmd-roleban-job-parse", ("job", job)));
-            return;
+                return;
         }
 
         var located = await _locator.LookupIdByNameOrIdAsync(target);
         if (located == null)
         {
             shell.WriteError(Loc.GetString("cmd-roleban-name-parse"));
+
             return;
         }
 
         var targetUid = located.UserId;
         var targetHWid = located.LastHWId;
 
-        _bans.CreateRoleBan(targetUid, located.Username, shell.Player?.UserId, null, targetHWid, job, minutes, severity, reason, DateTimeOffset.UtcNow, postBanInfo);
+        var banInfo = new CreateRoleBanInfo(reason);
+        if (minutes > 0)
+            banInfo.WithMinutes(minutes);
+        banInfo.AddUser(targetUid, located.Username);
+        banInfo.WithBanningAdmin(shell.Player?.UserId);
+        banInfo.WithBanningAdminName(shell.Player?.Name); // SS220-add-post-ban-info
+        banInfo.AddHWId(targetHWid);
+        banInfo.WithSeverity(severity);
+        banInfo.WithPostBanInfo(postBanInfo); // SS220-add-post-ban-info
+
+        if (_proto.HasIndex<JobPrototype>(role))
+        {
+            banInfo.AddJob(new ProtoId<JobPrototype>(role));
+        }
+        else if (_proto.HasIndex<AntagPrototype>(role))
+        {
+            banInfo.AddAntag(new ProtoId<AntagPrototype>(role));
+        }
+        else
+        {
+            shell.WriteError(Loc.GetString("cmd-roleban-job-parse", ("job", role)));
+            return;
+        }
+
+        _bans.CreateRoleBan(banInfo);
     }
 
     public CompletionResult GetCompletion(IConsoleShell shell, string[] args)
@@ -160,13 +182,8 @@ public sealed class RoleBanCommand : IConsoleCommand
         {
             1 => CompletionResult.FromHintOptions(CompletionHelper.SessionNames(),
                 Loc.GetString("cmd-roleban-hint-1")),
-            // SS220 antag bans begin
-            //2 => CompletionResult.FromHintOptions(CompletionHelper.PrototypeIDs<JobPrototype>(),
-            //    Loc.GetString("cmd-roleban-hint-2")),
-            2 => CompletionResult.FromHintOptions([.. CompletionHelper.PrototypeIDs<JobPrototype>(),
-                .. CompletionHelper.PrototypeIDs<AntagPrototype>()],
+            2 => CompletionResult.FromHintOptions(CompletionHelper.PrototypeIDs<JobPrototype>(),
                 Loc.GetString("cmd-roleban-hint-2")),
-            // SS220 antag bans end
             3 => CompletionResult.FromHint(Loc.GetString("cmd-roleban-hint-3")),
             4 => CompletionResult.FromHintOptions(durOpts, Loc.GetString("cmd-roleban-hint-4")),
             5 => CompletionResult.FromHintOptions(severities, Loc.GetString("cmd-roleban-hint-5")),

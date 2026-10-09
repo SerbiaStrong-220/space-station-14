@@ -1,0 +1,5 @@
+clear_filter.png
+license: https://icons8.com/icon/xPlOTFFaF9Rz/trash
+
+white_plus.png
+license: https://icons8.com/icon/37784/plus-math

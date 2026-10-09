@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Shared.FixedPoint;
+using Content.Shared.SS220.TraitorDynamics;
 using Content.Shared.SS220.Store.Listing; // ss220 tweak product event
 using Content.Shared.Store.Components;
 using Content.Shared.StoreDiscount.Components;
@@ -36,13 +37,15 @@ public partial class ListingData : IEquatable<ListingData>
         other.ProductEvent,
         other.RaiseProductEventOnUser,
         other.PurchaseAmount,
+        other.PurchaseLimit, // SS220 pirate market
         other.ID,
         other.Categories,
         other.OriginalCost,
         other.RestockTime,
         other.DiscountDownTo,
-        other.DisableRefund
-    )
+        other.DisableRefund,
+        other.ApplyToMob,
+        other.DynamicsPrices) // SS220 TraitorDynamics
     {
 
     }
@@ -61,13 +64,15 @@ public partial class ListingData : IEquatable<ListingData>
         ListingPurchasedEvent? productEvent, // ss220 tweak product event
         bool raiseProductEventOnUser,
         int purchaseAmount,
+        int? purchaseLimit, // SS220 pirate market
         string id,
         HashSet<ProtoId<StoreCategoryPrototype>> categories,
         IReadOnlyDictionary<ProtoId<CurrencyPrototype>, FixedPoint2> originalCost,
         TimeSpan restockTime,
         Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> dataDiscountDownTo,
-        bool disableRefund
-    )
+        bool disableRefund,
+        bool applyToMob,
+        Dictionary<ProtoId<DynamicPrototype>, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>> dynamicsPrices) // SS220 TraitorDynamics
     {
         Name = name;
         DiscountCategory = discountCategory;
@@ -82,12 +87,16 @@ public partial class ListingData : IEquatable<ListingData>
         ProductEvent = productEvent;
         RaiseProductEventOnUser = raiseProductEventOnUser;
         PurchaseAmount = purchaseAmount;
+        PurchaseLimit = purchaseLimit; // SS220 pirate market
         ID = id;
         Categories = categories.ToHashSet();
         OriginalCost = originalCost;
         RestockTime = restockTime;
         DiscountDownTo = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>(dataDiscountDownTo);
         DisableRefund = disableRefund;
+        ApplyToMob = applyToMob;
+        DynamicsPrices = new Dictionary<ProtoId<DynamicPrototype>,
+            Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>>(dynamicsPrices); // SS220 TraitorDynamics
     }
 
     [ViewVariables]
@@ -191,6 +200,14 @@ public partial class ListingData : IEquatable<ListingData>
     [DataField]
     public int PurchaseAmount;
 
+    // SS220 pirate market begin
+    /// <summary>
+    /// Maximum amount of this listing available to a store. Sent to clients for stock display.
+    /// </summary>
+    [DataField]
+    public int? PurchaseLimit;
+    // SS220 pirate market end
+
     /// <summary>
     /// Used to delay purchase of some items.
     /// </summary>
@@ -203,11 +220,23 @@ public partial class ListingData : IEquatable<ListingData>
     [DataField]
     public Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> DiscountDownTo = new();
 
+    // SS220 TraitorDynamics
+
+    [DataField]
+    public Dictionary<ProtoId<DynamicPrototype>, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>> DynamicsPrices = new();
+
+
     /// <summary>
     /// Whether or not to disable refunding for the store when the listing is purchased from it.
     /// </summary>
     [DataField]
     public bool DisableRefund = false;
+
+    /// <summary>
+    /// Whether or not to apply the store listing to the player mob rather than the player mind.
+    /// </summary>
+    [DataField]
+    public bool ApplyToMob = false;
 
     public bool Equals(ListingData? listing)
     {
@@ -221,7 +250,10 @@ public partial class ListingData : IEquatable<ListingData>
             ProductEntity != listing.ProductEntity ||
             ProductAction != listing.ProductAction ||
             ProductEvent?.GetType() != listing.ProductEvent?.GetType() ||
-            RestockTime != listing.RestockTime)
+            PurchaseLimit != listing.PurchaseLimit || // SS220 pirate market
+            RestockTime != listing.RestockTime ||
+            DisableRefund != listing.DisableRefund ||
+            ApplyToMob != listing.ApplyToMob)
             return false;
 
         if (Icon != null && !Icon.Equals(listing.Icon))
@@ -297,12 +329,15 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
             listingData.ProductEvent,
             listingData.RaiseProductEventOnUser,
             listingData.PurchaseAmount,
+            listingData.PurchaseLimit, // SS220 pirate market
             listingData.ID,
             listingData.Categories,
             listingData.OriginalCost,
             listingData.RestockTime,
             listingData.DiscountDownTo,
-            listingData.DisableRefund
+            listingData.DisableRefund,
+            listingData.ApplyToMob,
+            listingData.DynamicsPrices // SS220 TraitorDynamics
         )
     {
     }
@@ -358,11 +393,73 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
         return true;
     }
 
+    // SS220 DynamicTraitor begin
+    /// <summary>
+    /// Sets an exact price for the listing, with help modifiers.
+    /// </summary>
+    /// <param name="newPrice">The new exact price to set</param>
+    /// <param name="modifierSourceId">Values for cost modification.</param>
+    public void SetExactPrice(string modifierSourceId, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> newPrice)
+    {
+        var mewModifier = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>();
+        foreach (var (currency, amount) in newPrice)
+        {
+            if (OriginalCost.TryGetValue(currency, out var originalCost))
+                mewModifier[currency] = amount - originalCost;
+        }
+        AddCostModifier(modifierSourceId, mewModifier);
+    }
+    // SS220 DynamicTraitor end
+
     /// <summary>
     /// Gets percent of reduced/increased cost that modifiers give respective to <see cref="ListingData.OriginalCost"/>.
     /// Percent values are numbers between 0 and 1.
     /// </summary>
     public IReadOnlyDictionary<ProtoId<CurrencyPrototype>, float> GetModifiersSummaryRelative()
+    {
+        // SS220 Dynamics begin
+        var modifiersSummaryAbsoluteValues = GetModifiersAbsoluteValues(); // SS220 Dynamics
+        var relativeModifiedPercent = new Dictionary<ProtoId<CurrencyPrototype>, float>();
+        foreach (var (currency, discountAmount) in modifiersSummaryAbsoluteValues)
+        {
+            if (OriginalCost.TryGetValue(currency, out var originalAmount))
+            {
+                var discountPercent = (float)discountAmount.Value / originalAmount.Value;
+                relativeModifiedPercent.Add(currency, discountPercent);
+            }
+        }
+
+        return relativeModifiedPercent;
+    }
+   // SS220 Dynamics end
+    // SS220 Dynamics begin
+    public IReadOnlyDictionary<ProtoId<CurrencyPrototype>, float> GetDynamicRelative()
+    {
+        var modifiersSummaryAbsoluteValues = GetModifiersAbsoluteValues();
+        var relativeModifiedPercent = new Dictionary<ProtoId<CurrencyPrototype>, float>();
+
+
+        foreach (var (currency, discountAmount) in modifiersSummaryAbsoluteValues)
+        {
+            if (OriginalCost.TryGetValue(currency, out var originalAmount))
+            {
+                if (!CostModifiersBySourceId.TryGetValue(nameof(DynamicsPrices), out var dynamicsPrice))
+                    continue;
+
+                var dynamicValue = dynamicsPrice.FirstOrDefault(x => x.Key == currency).Value;
+                var finalPrice = originalAmount + discountAmount;
+                var baseDynamicPrice = originalAmount + dynamicValue;
+                if (baseDynamicPrice <= FixedPoint2.Zero)
+                    continue;
+
+                var discountPercent = (finalPrice - baseDynamicPrice) / baseDynamicPrice;
+                relativeModifiedPercent.Add(currency, (float)discountPercent);
+            }
+        }
+        return relativeModifiedPercent;
+    }
+
+    private Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> GetModifiersAbsoluteValues()
     {
         var modifiersSummaryAbsoluteValues = CostModifiersBySourceId.Aggregate(
             new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>(),
@@ -377,19 +474,9 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
                 return accumulator;
             }
         );
-        var relativeModifiedPercent = new Dictionary<ProtoId<CurrencyPrototype>, float>();
-        foreach (var (currency, discountAmount) in modifiersSummaryAbsoluteValues)
-        {
-            if (OriginalCost.TryGetValue(currency, out var originalAmount))
-            {
-                var discountPercent = (float)discountAmount.Value / originalAmount.Value;
-                relativeModifiedPercent.Add(currency, discountPercent);
-            }
-        }
-
-        return relativeModifiedPercent;
-
+        return modifiersSummaryAbsoluteValues;
     }
+    // SS220 Dynamics end
 
     private Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> ApplyAllModifiers()
     {
@@ -397,6 +484,14 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
         foreach (var (_, modifier) in CostModifiersBySourceId)
         {
             ApplyModifier(dictionary, modifier);
+        }
+
+        foreach (var currency in dictionary.Keys.ToList())
+        {
+            if (dictionary[currency] < FixedPoint2.Zero)
+            {
+                dictionary[currency] = FixedPoint2.Zero;
+            }
         }
 
         return dictionary;
@@ -412,11 +507,13 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
             if (applyTo.TryGetValue(currency, out var currentAmount))
             {
                 var modifiedAmount = currentAmount + modifyBy;
-                if (modifiedAmount < 0)
-                {
-                    modifiedAmount = 0;
+                //SS220 TraitorDynamics - start it shouldn't be checked here
+                // if (modifiedAmount < 0)
+                // {
+                //     modifiedAmount = 0;
                     // no negative cost allowed
-                }
+                // }
+                //SS220 TraitorDynamics - end
                 applyTo[currency] = modifiedAmount;
             }
         }

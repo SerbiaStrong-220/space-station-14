@@ -1,0 +1,195 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Made by TTTomaTTT",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "applebush"
+    },
+    {
+      "name": "plant-01"
+    },
+    {
+      "name": "plant-02"
+    },
+    {
+      "name": "plant-03"
+    },
+    {
+      "name": "plant-04"
+    },
+    {
+      "name": "plant-05"
+    },
+    {
+      "name": "plant-06"
+    },
+    {
+      "name": "plant-07"
+    },
+    {
+      "name": "plant-08"
+    },
+    {
+      "name": "plant-09"
+    },
+    {
+      "name": "plant-10"
+    },
+    {
+      "name": "plant-11"
+    },
+    {
+      "name": "plant-12"
+    },
+    {
+      "name": "plant-13"
+    },
+    {
+      "name": "plant-14"
+    },
+    {
+      "name": "plant-15"
+    },
+    {
+      "name": "plant-16"
+    },
+    {
+      "name": "plant-17"
+    },
+    {
+      "name": "plant-18"
+    },
+    {
+      "name": "plant-19"
+    },
+    {
+      "name": "plant-20"
+    },
+    {
+      "name": "plant-21"
+    },
+    {
+      "name": "plant-22"
+    },
+    {
+      "name": "plant-23"
+    },
+    {
+      "name": "plant-24"
+    },
+    {
+      "name": "plant-25"
+    },
+    {
+      "name": "plant-26",
+      "delays": [
+        [
+          5,
+          0.225,
+          0.225,
+          0.225
+        ]
+      ]
+    },
+    {
+      "name": "plant-27"
+    },
+    {
+      "name": "plant-28"
+    },
+    {
+      "name": "plant-29"
+    },
+    {
+      "name": "plant-30"
+    },
+    {
+      "name": "corvaxplant-0"
+    },
+    {
+      "name": "corvaxplant-1"
+    },
+    {
+      "name": "corvaxplant-2"
+    },
+    {
+      "name": "corvaxplant-3"
+    },
+    {
+      "name": "corvaxplant-4"
+    },
+    {
+      "name": "corvaxplant-5",
+      "delays": [
+        [
+          1,
+          0.25,
+          0.15,
+          0.15,
+          0.25,
+          0.15,
+          0.15,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "corvaxplant-6",
+      "delays": [
+        [
+          1,
+          0.25,
+          0.15,
+          0.15,
+          0.25,
+          0.15,
+          0.15,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "corvaxplant-7",
+      "delays": [
+        [
+          1,
+          0.25,
+          0.15,
+          0.15,
+          0.25,
+          0.15,
+          0.15,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "corvaxplant-8",
+      "delays": [
+        [
+          1,
+          0.25,
+          0.15,
+          0.15,
+          0.25,
+          0.15,
+          0.15,
+          0.1
+        ]
+      ]
+    }
+  ]
+}

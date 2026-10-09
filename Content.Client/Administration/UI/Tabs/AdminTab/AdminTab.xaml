@@ -8,10 +8,8 @@
     MinSize="50 50">
     <BoxContainer Orientation="Vertical">
         <GridContainer Columns="3">
-            <cc:UICommandButton Command="kick" Text="{Loc admin-player-actions-window-title}" WindowType="{x:Type at:PlayerActionsWindow}" />
             <cc:CommandButton Command="banpanel" Text="{Loc admin-player-actions-window-ban}" />
             <cc:CommandButton Command="aghost" Text="{Loc admin-player-actions-window-admin-ghost}" />
-            <cc:UICommandButton Command="tpto" Text="{Loc admin-player-actions-window-teleport}" WindowType="{x:Type at:TeleportWindow}" />
             <cc:CommandButton Command="permissions" Text="{Loc admin-player-actions-window-permissions}" />
             <cc:UICommandButton Command="timeto" Text="{Loc admin-player-actions-window-timeto}" WindowType="{x:Type at:TimePanelWindow}" />
             <cc:CommandButton Command="announceui" Text="{Loc admin-player-actions-window-announce}" />

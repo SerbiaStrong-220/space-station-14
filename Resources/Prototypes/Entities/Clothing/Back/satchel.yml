@@ -70,6 +70,12 @@
   - type: Storage
     storageOpenSound:
       collection: BikeHorn
+      params:
+        variation: 0.125
+    storageInsertSound:
+      collection: FootstepClown
+      params:
+        variation: 0.125
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-textile
@@ -89,6 +95,9 @@
     microFiberMaterial: micro-fibers-textile
     microFiberColor: micro-fibers-white
 #SS220 Micro_fibers end
+  - type: Storage
+    storageOpenSound: null
+    storageInsertSound: null
 
 - type: entity
   parent: ClothingBackpackSatchel
@@ -243,6 +252,18 @@
       microFiberMaterial: micro-fibers-leather
       microFiberColor: micro-fibers-brown
 #SS220 Micro_fibers end
+
+- type: entity
+  parent: [ClothingBackpackSatchel, BaseHighlyIllegalContraband]
+  id: ClothingBackpackSatchelNinja
+  name: spider clan satchel
+  description: A robust satchel for stashing your loot.
+  components:
+  - type: Sprite
+    sprite: Clothing/Back/Satchels/ninja.rsi
+  - type: Storage # Backpack sounds are null due to silent ninja tech
+    storageOpenSound: null
+    storageInsertSound: null
 
 - type: entity
   parent: ClothingBackpackSatchel

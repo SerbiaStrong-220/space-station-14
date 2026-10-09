@@ -11,8 +11,8 @@
 
 - type: entity
   parent: MobThresholdsModifierStatusEffect
-  id: MobThresholdsModifierMorphine
-  name: mob thresholds modifier by morphine
+  id: MobThresholdsModifierAglomorphine
+  name: mob thresholds modifier by aglomorphine
   components:
   - type: MobThresholdsModifierStatusEffect
     modifiers:
@@ -28,3 +28,6 @@
     modifiers:
       Critical:
         flat: 50
+        dependsOnAdaptation: true
+        decayFlat: -0.16
+        reagent: Frontier

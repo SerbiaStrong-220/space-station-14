@@ -14,8 +14,10 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Content.Shared.Projectiles;
 using System.Linq;
+using Content.Shared.Damage.Components;
 using Content.Shared.Database;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Weapons.Hitscan.Components;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -78,7 +80,7 @@ public abstract partial class SharedGunSystem
         if (component.SelectedMode == fire)
             return;
 
-        DebugTools.Assert((component.AvailableModes  & fire) != 0x0);
+        DebugTools.Assert((component.AvailableModes & fire) != 0x0);
         component.SelectedMode = fire;
 
         if (!Paused(uid))
@@ -176,13 +178,11 @@ public abstract partial class SharedGunSystem
                     NeedHand = true,
                     Broadcast = true
                 };
+                var locSelf = Loc.GetString("suicide-start-popup-self", ("weapon", MetaData(entity).EntityName));
+                var locOthers = Loc.GetString("suicide-start-popup-others", ("user", MetaData(user).EntityName), ("weapon", MetaData(entity).EntityName));
                 if (_doAfter.TryStartDoAfter(doAfter))
                 {
-                    PopupSystem.PopupPredicted(Loc.GetString("suicide-start-popup-self",
-                            ("weapon", MetaData(entity).EntityName)), user, user);
-                    PopupSystem.PopupEntity(Loc.GetString("suicide-start-popup-others",
-                            ("user", MetaData(user).EntityName),
-                            ("weapon", MetaData(entity).EntityName)), user, Filter.PvsExcept(user), true);
+                    PopupSystem.PopupPredicted(locSelf, locOthers, user, user);
                 }
             },
             Text = Loc.GetString("suicide-verb-name"),
@@ -196,20 +196,21 @@ public abstract partial class SharedGunSystem
         if (!_netManager.IsServer)
             return;
         var user = args.User;
+        var failMessage = Loc.GetString("suicide-failed-popup");
         if (args.Cancelled || args.Handled || args.Used == null)
         {
-            PopupSystem.PopupPredicted(Loc.GetString("suicide-failed-popup"), user, user);
+            PopupSystem.PopupPredicted(failMessage, user, null);
             return;
         }
         var weapon = args.Used.Value;
         if (!_hands.IsHolding(user, weapon, out _))
         {
-            PopupSystem.PopupPredicted(Loc.GetString("suicide-failed-popup"), user, user);
+            PopupSystem.PopupPredicted(failMessage, user, null);
             return;
         }
         if (!TryComp<GunComponent>(weapon, out var guncomp))
         {
-            PopupSystem.PopupPredicted(Loc.GetString("suicide-failed-popup"), user, user);
+            PopupSystem.PopupPredicted(failMessage, user, null);
             return;
         }
 
@@ -231,10 +232,13 @@ public abstract partial class SharedGunSystem
 
         switch (ammo.Shootable)
         {
-            case HitscanPrototype hitscan: // Для лазеров/хитсканов
-                if (hitscan.Damage?.DamageDict != null)
+            case HitscanAmmoComponent: // Для лазеров/хитсканов
+                if (TryComp<HitscanBasicDamageComponent>(ammo.Entity, out var hitscanBasicDamage))
                 {
-                    damageType = hitscan.Damage.DamageDict.Where(kv => kv.Value > 3).OrderByDescending(kv => kv.Value).FirstOrDefault().Key;
+                    damageType = hitscanBasicDamage.Damage.DamageDict.Where(kv => kv.Value > 3)
+                        .OrderByDescending(kv => kv.Value)
+                        .FirstOrDefault()
+                        .Key;
                 }
                 break;
             case CartridgeAmmoComponent cartridge: // Для патронов в магазине
@@ -252,7 +256,7 @@ public abstract partial class SharedGunSystem
                 break;
         }
 
-        Shoot(weapon, guncomp, ev.Ammo, coordsFrom, coordsTo, out _);
+        Shoot((weapon, guncomp), ev.Ammo, coordsFrom, coordsTo, out _);
         if (damageType != null)
         {
             // Проджектайлу пули нужно время, чтобы долететь до куклы, зарегать попадание и нанести урон.
@@ -261,7 +265,7 @@ public abstract partial class SharedGunSystem
             {
                 if (TryComp<MobThresholdsComponent>(user, out var thresholdsComp)
                     && TryComp<DamageableComponent>(user, out var damagebleComp))
-                    damageVolume = ((int)thresholdsComp.Thresholds.Last().Key - (int)damagebleComp.TotalDamage);
+                    damageVolume = ((int)thresholdsComp.Thresholds.Last().Key - (int)Damageable.GetTotalDamage((user, damagebleComp)));
                 damageSpec.DamageDict.Add(damageType, damageVolume);
 
                 var weaponName = ToPrettyString(weapon);

@@ -1,5 +1,6 @@
 using Content.Shared.Access.Systems;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Roles;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -25,9 +26,9 @@ public sealed partial class IdCardConsoleComponent : Component
         public readonly string FullName;
         public readonly string JobTitle;
         public readonly List<ProtoId<AccessLevelPrototype>> AccessList;
-        public readonly ProtoId<AccessLevelPrototype> JobPrototype;
+        public readonly ProtoId<JobPrototype>? JobPrototype;
 
-        public WriteToTargetIdMessage(string fullName, string jobTitle, List<ProtoId<AccessLevelPrototype>> accessList, ProtoId<AccessLevelPrototype> jobPrototype)
+        public WriteToTargetIdMessage(string fullName, string jobTitle, List<ProtoId<AccessLevelPrototype>> accessList, ProtoId<JobPrototype>? jobPrototype)
         {
             FullName = fullName;
             JobTitle = jobTitle;
@@ -59,6 +60,8 @@ public sealed partial class IdCardConsoleComponent : Component
         "Clown", //SS220 New_accesses_and_some_tweaks
         "Engineering",
         "External",
+        "GenpopEnter",
+        "GenpopLeave",
         "HeadOfPersonnel",
         "HeadOfSecurity",
         "Hydroponics",
@@ -66,6 +69,7 @@ public sealed partial class IdCardConsoleComponent : Component
         "Kitchen",
         "Lawyer",
         "Librarian", //SS220 New_accesses_and_some_tweaks
+        "NanoTrasenRepresentative", //SS220 ntr add
         "Maintenance",
         "Medical",
         "Psychologist", //SS220 New_accesses_and_some_tweaks
@@ -77,7 +81,6 @@ public sealed partial class IdCardConsoleComponent : Component
         "Security",
         "Service",
         "Theatre",
-        "Magistrate", //SS220-Magistrate Access Fix
         "Mime", //SS220 New_accesses_and_some_tweaks
         "Musician", //SS220 New_accesses_and_some_tweaks
     };
@@ -106,6 +109,14 @@ public sealed partial class IdCardConsoleComponent : Component
         "Salvage",
         "Service",
         "Theatre",
+        "Mime",
+        "Musician",
+        "Librarian",
+        "Psychologist",
+        "Clown",
+        "Reporter",
+        "GenpopEnter",
+        "GenpopLeave",
     };
     // SS220-ID console extended access button-End
 
@@ -121,7 +132,7 @@ public sealed partial class IdCardConsoleComponent : Component
         public readonly string? TargetIdJobTitle;
         public readonly List<ProtoId<AccessLevelPrototype>>? TargetIdAccessList;
         public readonly List<ProtoId<AccessLevelPrototype>>? AllowedModifyAccessList;
-        public readonly ProtoId<AccessLevelPrototype> TargetIdJobPrototype;
+        public readonly ProtoId<JobPrototype> TargetIdJobPrototype;
 
         public IdCardConsoleBoundUserInterfaceState(bool isPrivilegedIdPresent,
             bool isPrivilegedIdAuthorized,
@@ -130,7 +141,7 @@ public sealed partial class IdCardConsoleComponent : Component
             string? targetIdJobTitle,
             List<ProtoId<AccessLevelPrototype>>? targetIdAccessList,
             List<ProtoId<AccessLevelPrototype>>? allowedModifyAccessList,
-            ProtoId<AccessLevelPrototype> targetIdJobPrototype,
+            ProtoId<JobPrototype> targetIdJobPrototype,
             string privilegedIdName,
             string targetIdName)
         {

@@ -1,7 +1,9 @@
 ent-BaseImplanter = имплантер
     .desc = Шприц, специально предназначенный для введения и извлечения подкожных имплантов.
-ent-Implanter = { ent-BaseImplanter }
-    .desc = Одноразовый шприц, специально предназначенный для введения и извлечения подкожных имплантов.
+ent-Implanter = экстрактор имплантов
+    .desc =
+        Шприц двойного назначения, предназначенный для удаления определённых подкожных имплантатов. После извлечения имплант хранится внутри и может быть повторно введён.
+        ПРЕДУПРЕЖДЕНИЕ: Ошибка оператора, такая как выбор отсутствующего типа импланта, приведёт к серьёзной генетической травме оператора.
 ent-ImplanterAdmeme = { ent-Implanter }
     .suffix = Адмемы
     .desc = { ent-Implanter.desc }
@@ -63,3 +65,8 @@ ent-RadioImplanter = { ent-Implanter }
 ent-FakeMindShieldImplanter = { ent-Implanter }
     .suffix = Фальшивая защита разума
     .desc = { ent-Implanter.desc }
+
+ent-ChameleonControllerImplanter = имплантер "Контроллер хамелеона"
+    .desc = { ent-BaseImplantOnlyImplanterSyndi.desc }
+ent-VoiceMaskImplanter = имплантер "Голосовая маска"
+    .desc = { ent-BaseImplantOnlyImplanterSyndi.desc }

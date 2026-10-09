@@ -60,6 +60,7 @@ entities:
     - type: Transform
       pos: -0.96845007,151.26236
       parent: 1
+    - type: SkipAutoVariantize  
     - type: MapGrid
       chunks:
         0,0:
@@ -552,6 +553,7 @@ entities:
     - type: Transform
       pos: -150.19444,0.208457
       parent: 1
+    - type: SkipAutoVariantize        
     - type: MapGrid
       chunks:
         0,0:
@@ -1411,6 +1413,7 @@ entities:
     - type: Transform
       pos: 149.22743,-1.6382408
       parent: 1
+    - type: SkipAutoVariantize        
     - type: MapGrid
       chunks:
         0,0:

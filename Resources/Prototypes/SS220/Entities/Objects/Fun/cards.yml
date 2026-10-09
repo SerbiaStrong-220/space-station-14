@@ -15,7 +15,7 @@
   - type: Appearance
   - type: Tag
     tags:
-      - GameCard
+    - GameCard
 
 - type: entity
   parent: BaseItem
@@ -36,7 +36,7 @@
     maxItemSize: Small
     whitelist:
       tags:
-        - GameCard
+      - GameCard
   - type: UserInterface
     interfaces:
       enum.StorageUiKey.Key:
@@ -48,7 +48,7 @@
 - type: entity
   parent: BaseItem
   id: GameCardsColode
-  name: Упаковка карт
+  name: упаковка карт
   description: Сыграем в покер?
   components:
   - type: GameCardsColode
@@ -65,7 +65,7 @@
     maxItemSize: Small
     whitelist:
       tags:
-        - GameCard
+      - GameCard
   - type: UserInterface
     interfaces:
       enum.StorageUiKey.Key:
@@ -74,61 +74,62 @@
     containers:
       storagebase: !type:Container
   - type: Dumpable
-  - type: StorageFill
-    contents:
-      - id: CarDpt
-      - id: CarDp2
-      - id: CarDp3
-      - id: CarDp4
-      - id: CarDp5
-      - id: CarDp6
-      - id: CarDp7
-      - id: CarDp8
-      - id: CarDp9
-      - id: CarDp10
-      - id: CarDpd
-      - id: CarDpk
-      - id: CarDpv
-      - id: CarDkt
-      - id: CarDk2
-      - id: CarDk3
-      - id: CarDk4
-      - id: CarDk5
-      - id: CarDk6
-      - id: CarDk7
-      - id: CarDk8
-      - id: CarDk9
-      - id: CarDk10
-      - id: CarDkd
-      - id: CarDkk
-      - id: CarDkv
-      - id: CarDbt
-      - id: CarDb2
-      - id: CarDb3
-      - id: CarDb4
-      - id: CarDb5
-      - id: CarDb6
-      - id: CarDb7
-      - id: CarDb8
-      - id: CarDb9
-      - id: CarDb10
-      - id: CarDbd
-      - id: CarDbk
-      - id: CarDbv
-      - id: CarDht
-      - id: CarDh2
-      - id: CarDh3
-      - id: CarDh4
-      - id: CarDh5
-      - id: CarDh6
-      - id: CarDh7
-      - id: CarDh8
-      - id: CarDh9
-      - id: CarDh10
-      - id: CarDhd
-      - id: CarDhk
-      - id: CarDhv
-
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: CarDpt
+        - id: CarDp2
+        - id: CarDp3
+        - id: CarDp4
+        - id: CarDp5
+        - id: CarDp6
+        - id: CarDp7
+        - id: CarDp8
+        - id: CarDp9
+        - id: CarDp10
+        - id: CarDpd
+        - id: CarDpk
+        - id: CarDpv
+        - id: CarDkt
+        - id: CarDk2
+        - id: CarDk3
+        - id: CarDk4
+        - id: CarDk5
+        - id: CarDk6
+        - id: CarDk7
+        - id: CarDk8
+        - id: CarDk9
+        - id: CarDk10
+        - id: CarDkd
+        - id: CarDkk
+        - id: CarDkv
+        - id: CarDbt
+        - id: CarDb2
+        - id: CarDb3
+        - id: CarDb4
+        - id: CarDb5
+        - id: CarDb6
+        - id: CarDb7
+        - id: CarDb8
+        - id: CarDb9
+        - id: CarDb10
+        - id: CarDbd
+        - id: CarDbk
+        - id: CarDbv
+        - id: CarDht
+        - id: CarDh2
+        - id: CarDh3
+        - id: CarDh4
+        - id: CarDh5
+        - id: CarDh6
+        - id: CarDh7
+        - id: CarDh8
+        - id: CarDh9
+        - id: CarDh10
+        - id: CarDhd
+        - id: CarDhk
+        - id: CarDhv
 
 - type: entity
   parent: BaseCard

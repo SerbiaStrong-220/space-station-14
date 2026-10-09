@@ -10,7 +10,7 @@ namespace Content.Client.SS220.Language;
 
 public sealed partial class LanguageSystem : SharedLanguageSystem
 {
-    [Dependency] private readonly LanguageManager _language = default!;
+    [Dependency] private LanguageManager _language = default!;
 
     public Action<string>? OnNodeInfoUpdated;
 

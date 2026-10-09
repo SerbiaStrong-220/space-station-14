@@ -24,7 +24,6 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly MindSlaveSystem _mindslave = default!;
-    [Dependency] private readonly TagSystem _tag = default!; // SS220-mindslave
     [Dependency] private readonly IPrototypeManager _proto = default!; //ss220 fix implant draw popup
     [Dependency] private readonly IPlayerManager _players = default!; // SS220 mind-slave-without-mind-fix
 
@@ -45,6 +44,7 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
         SubscribeLocalEvent<ImplanterComponent, DrawEvent>(OnDraw);
     }
 
+    // TODO: This all needs to be moved to shared and predicted.
     private void OnImplanterAfterInteract(EntityUid uid, ImplanterComponent component, AfterInteractEvent args)
     {
         if (args.Target == null || !args.CanReach || args.Handled)
@@ -153,7 +153,7 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
         if (!_doAfter.TryStartDoAfter(args))
             return;
 
-        _popup.PopupEntity(Loc.GetString("injector-component-injecting-user"), target, user);
+        _popup.PopupEntity(Loc.GetString("injector-component-needle-injecting-user"), target, user);
 
         var userName = Identity.Entity(user, EntityManager);
         _popup.PopupEntity(Loc.GetString("implanter-component-implanting-target", ("user", userName)), user, target, PopupType.LargeCaution);
@@ -208,7 +208,7 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
         };
 
         if (_doAfter.TryStartDoAfter(args))
-            // _popup.PopupEntity(Loc.GetString("injector-component-injecting-user"), target, user); //SS220-Mindshield-remove-time
+            // _popup.PopupEntity(Loc.GetString("injector-component-needle-injecting-user"), target, user); //SS220-Mindshield-remove-time
             _popup.PopupEntity(Loc.GetString(popupPath), target, user);
 
 

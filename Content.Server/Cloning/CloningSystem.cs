@@ -1,6 +1,6 @@
 using Content.Server.Humanoid;
 using Content.Shared.Administration.Logs;
-using Content.Server.Roles;
+using Content.Shared.Body;
 using Content.Shared.Cloning;
 using Content.Shared.Cloning.Events;
 using Content.Shared.Database;
@@ -10,6 +10,7 @@ using Content.Shared.Implants;
 using Content.Shared.Implants.Components;
 using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.StatusEffect;
+using Content.Shared.StatusEffectNew.Components;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Whitelist;
@@ -18,6 +19,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Server.SS220.Traits.Components;
 
 namespace Content.Server.Cloning;
 
@@ -27,7 +29,6 @@ namespace Content.Server.Cloning;
 /// </summary>
 public sealed partial class CloningSystem : SharedCloningSystem
 {
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoidSystem = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
@@ -36,7 +37,11 @@ public sealed partial class CloningSystem : SharedCloningSystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
     [Dependency] private readonly SharedSubdermalImplantSystem _subdermalImplant = default!;
+    [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
     [Dependency] private readonly NameModifierSystem _nameMod = default!;
+    [Dependency] private readonly Shared.StatusEffectNew.StatusEffectsSystem _statusEffects = default!; //TODO: This system has to support both the old and new status effect systems, until the old is able to be fully removed.
+
+    [Dependency] private readonly EntityQuery<CloneableStatusEffectComponent> _cloneableEffectQuery = default!;
 
     /// <summary>
     ///     Spawns a clone of the given humanoid mob at the specified location or in nullspace.
@@ -44,14 +49,22 @@ public sealed partial class CloningSystem : SharedCloningSystem
     public bool TryCloning(EntityUid original, MapCoordinates? coords, ProtoId<CloningSettingsPrototype> settingsId, [NotNullWhen(true)] out EntityUid? clone)
     {
         clone = null;
-        if (!_prototype.TryIndex(settingsId, out var settings))
+        if (!_prototype.Resolve(settingsId, out var settings))
             return false; // invalid settings
 
-        if (!TryComp<HumanoidAppearanceComponent>(original, out var humanoid))
+        if (!TryComp<HumanoidProfileComponent>(original, out var humanoid))
             return false; // whatever body was to be cloned, was not a humanoid
 
-        if (!_prototype.TryIndex(humanoid.Species, out var speciesPrototype))
+        if (!_prototype.Resolve(humanoid.Species, out var speciesPrototype))
             return false; // invalid species
+
+        // SS220 uncloneable revert begin
+        if (HasComp<UncloneableComponent>(original))
+        {
+            Loc.GetString("cloning-console-uncloneable-trait-error");
+            return false;
+        }
+        // SS220 uncloneable revert end
 
         var attemptEv = new CloningAttemptEvent(settings);
         RaiseLocalEvent(original, ref attemptEv);
@@ -59,7 +72,7 @@ public sealed partial class CloningSystem : SharedCloningSystem
             return false; // cannot clone, for example due to the unrevivable trait
 
         clone = coords == null ? Spawn(speciesPrototype.Prototype) : Spawn(speciesPrototype.Prototype, coords.Value);
-        _humanoidSystem.CloneAppearance(original, clone.Value);
+        _visualBody.CopyAppearanceFrom(original, clone.Value);
 
         CloneComponents(original, clone.Value, settings);
 
@@ -76,6 +89,10 @@ public sealed partial class CloningSystem : SharedCloningSystem
         if (settings.CopyImplants)
             CopyImplants(original, clone.Value, settings.CopyInternalStorage, settings.Whitelist, settings.Blacklist);
 
+        // Copy permanent status effects
+        if (settings.CopyStatusEffects)
+            CopyStatusEffects(original, clone.Value);
+
         var originalName = _nameMod.GetBaseName(original);
 
         // Set the clone's name. The raised events will also adjust their PDA and ID card names.
@@ -83,6 +100,14 @@ public sealed partial class CloningSystem : SharedCloningSystem
 
         _adminLogger.Add(LogType.Chat, LogImpact.Medium, $"The body of {original:player} was cloned as {clone.Value:player}");
         return true;
+    }
+
+    public override void CloneComponents(EntityUid original, EntityUid clone, ProtoId<CloningSettingsPrototype> settings)
+    {
+        if (!_prototype.Resolve(settings, out var proto))
+            return;
+
+        CloneComponents(original, clone, proto);
     }
 
     public override void CloneComponents(EntityUid original, EntityUid clone, CloningSettingsPrototype settings)
@@ -259,5 +284,25 @@ public sealed partial class CloningSystem : SharedCloningSystem
                 CopyStorage(originalImplant, targetImplant.Value, whitelist, blacklist); // only needed for storage implants
         }
 
+    }
+
+    /// <summary>
+    ///    Scans all permanent status effects applied to the original entity and transfers them to the clone.
+    /// </summary>
+    public void CopyStatusEffects(Entity<StatusEffectContainerComponent?> original, Entity<StatusEffectContainerComponent?> target)
+    {
+        foreach (var effect in _statusEffects.EnumerateStatusEffects(original, _cloneableEffectQuery))
+        {
+            //We are not interested in temporary effects, only permanent ones.
+            if (effect.Comp1.EndEffectTime is not null)
+                continue;
+
+            var effectProto = Prototype(effect);
+
+            if (effectProto is null)
+                continue;
+
+            _statusEffects.TrySetStatusEffectDuration(target, effectProto);
+        }
     }
 }

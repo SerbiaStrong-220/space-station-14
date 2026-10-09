@@ -304,6 +304,14 @@ namespace Content.Server.Communications
 
         private void OnCallShuttleMessage(EntityUid uid, CommunicationsConsoleComponent comp, CommunicationsConsoleCallEmergencyShuttleMessage message)
         {
+            // SS220-add-recall-only-console-begin
+            if (comp.CanShuttle && comp.OnlyRecallShuttle)
+            {
+                _popupSystem.PopupEntity(Loc.GetString("comms-console-can-only-recall"), uid, message.Actor);
+                return;
+            }
+            // SS220-add-recall-only-console-end
+
             if (!CanCallOrRecall(comp))
                 return;
 
@@ -323,7 +331,7 @@ namespace Content.Server.Communications
                 return;
             }
 
-            _roundEndSystem.RequestRoundEnd(uid);
+            _roundEndSystem.RequestRoundEnd(mob, uid);
             _adminLogger.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(mob):player} has called the shuttle.");
         }
 
@@ -332,13 +340,15 @@ namespace Content.Server.Communications
             if (!CanCallOrRecall(comp))
                 return;
 
-            if (!CanUse(message.Actor, uid))
+            var mob = message.Actor;
+
+            if (!CanUse(mob, uid))
             {
                 _popupSystem.PopupEntity(Loc.GetString("comms-console-permission-denied"), uid, message.Actor);
                 return;
             }
 
-            _roundEndSystem.CancelRoundEndCountdown(uid);
+            _roundEndSystem.CancelRoundEndCountdown(mob, uid);
             _adminLogger.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(message.Actor):player} has recalled the shuttle.");
         }
     }

@@ -1,19 +1,23 @@
 - type: entity
-  id: BulletRifle
-  name: bullet (0.20 rifle)
   parent: BaseBullet
+  id: BulletRifle
   categories: [ HideSpawnMenu ]
+  name: bullet (.20 rifle)
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    weightedRandomProviderEntity: LightCaliberFragment
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
-        Piercing: 29 #ss220lowTTKUpdate
+        Piercing: 24 #ss220lowTTKUpdate
 
 - type: entity
-  id: BulletRiflePractice
-  name: bullet (0.20 rifle practice)
   parent: BaseBulletPractice
+  id: BulletRiflePractice
   categories: [ HideSpawnMenu ]
+  name: bullet (.20 rifle practice)
   components:
   - type: Projectile
     damage:
@@ -21,11 +25,16 @@
         Blunt: 2
 
 - type: entity
-  id: BulletRifleIncendiary
   parent: BaseBulletIncendiary
-  name: bullet (0.20 rifle incendiary)
+  id: BulletRifleIncendiary
   categories: [ HideSpawnMenu ]
+  name: bullet (.20 rifle incendiary)
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.1
+    weightedRandomProviderEntity: LightCaliberFragment
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
@@ -33,11 +42,16 @@
         Heat: 5 #weaponBalance #ss220lowTTKUpdate
 
 - type: entity
-  id: BulletRifleUranium
   parent: BaseBulletUranium
-  name: bullet (0.20 rifle uranium)
+  id: BulletRifleUranium
   categories: [ HideSpawnMenu ]
+  name: bullet (.20 rifle uranium)
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.1
+    weightedRandomProviderEntity: LightCaliberFragment
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:

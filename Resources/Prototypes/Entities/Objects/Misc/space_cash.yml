@@ -52,6 +52,11 @@
         mask:
         - ItemMask
   - type: Appearance
+  # SS220-spesos_in_envelope start
+  - type: Tag
+    tags:
+    - EnvelopeWhitelist
+  # SS220-spesos_in_envelope ended
 
 - type: material
   id: Credit
@@ -60,12 +65,6 @@
   stackEntity: SpaceCash
   icon: { sprite: /Textures/Objects/Economy/cash.rsi, state: cash }
   price: 1
-
-- type: stack
-  id: Credit
-  name: stack-credit
-  icon: { sprite: /Textures/Objects/Economy/cash.rsi, state: cash }
-  spawn: SpaceCash
 
 - type: entity
   parent: SpaceCash

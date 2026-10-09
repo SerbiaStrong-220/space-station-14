@@ -98,11 +98,17 @@
   - FauxTileAstroGrass
   - FauxTileMowedAstroGrass
   - FauxTileJungleAstroGrass
+  - FauxTileDarkAstroGrass
+  - FauxTileLightAstroGrass
   - FauxTileAstroIce
   - FauxTileAstroSnow
   - FauxTileAstroSand #SS220-beachCraftng
 
   - FauxTileAstroAsteroidSand
+  - FauxTileAstroAsteroidSandBorderless
+  - FauxTileDesertAstroSand
+  - FauxTileAstroIronsand
+  - FauxTileAstroIronsandBorderless
 
 - type: technology
   id: BiochemicalStasis
@@ -129,7 +135,8 @@
   tier: 2
   cost: 5000
   recipeUnlocks:
-  - BorgModuleAdvancedChemical
+  - BorgModuleAdvancedTopical
+  # - AdvancedJetInjector # ss220 - post upstream - jetInjector & MedAutoinjector tweaks
 
 - type: technology
   id: AdvancedCleaning
@@ -205,6 +212,21 @@
   - PushHorn
   - BorgModuleAdvancedClowning
 
+# SS220 Change LauncherSyringe tier begin
+- type: technology
+  id: LauncherSyringe
+  name: research-technology-launcher-syringe
+  icon:
+    sprite: Objects/Weapons/Guns/Cannons/syringe_gun.rsi
+    state: syringe_gun
+  discipline: CivilianServices
+  tier: 2
+  cost: 15000
+  recipeUnlocks:
+  - LauncherSyringe
+  - MiniSyringe
+# SS220 Change LauncherSyringe tier end
+
 # Tier 3
 
 - type: technology
@@ -230,17 +252,21 @@
   cost: 10000
   recipeUnlocks:
   - BluespaceBeaker
+  - AdvancedMiniSyringe # SS220 Add advanced mini syringe
   - SyringeBluespace
+  - AdvancedJetInjector # ss220 - post upstream - jetInjector & MedAutoinjector tweaks
 
-- type: technology
-  id: LauncherSyringe
-  name: research-technology-launcher-syringe
-  icon:
-    sprite: Objects/Weapons/Guns/Cannons/syringe_gun.rsi
-    state: syringe_gun
-  discipline: CivilianServices
-  tier: 3
-  cost: 15000
-  recipeUnlocks:
-  - LauncherSyringe
-  - MiniSyringe
+# SS220 Change LauncherSyringe tier begin
+#- type: technology
+#  id: LauncherSyringe
+#  name: research-technology-launcher-syringe
+#  icon:
+#    sprite: Objects/Weapons/Guns/Cannons/syringe_gun.rsi
+#    state: syringe_gun
+#  discipline: CivilianServices
+#  tier: 3
+#  cost: 15000
+#  recipeUnlocks:
+#  - LauncherSyringe
+#  - MiniSyringe
+# SS220 Change LauncherSyringe tier end

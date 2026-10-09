@@ -4,6 +4,7 @@ accent-spanish-words-1-3 = угу
 accent-spanish-words-replace-1 = sí
 
 accent-spanish-words-2 = нет
+accent-spanish-words-2-2 = неа
 accent-spanish-words-replace-2 = no
 
 accent-spanish-words-3 = мой
@@ -27,7 +28,7 @@ accent-spanish-words-7-2 = дама
 accent-spanish-words-replace-7 = mujer
 
 accent-spanish-words-8 = о боже
-accent-spanish-words-8-2 = боже мой
+accent-spanish-words-8-2 = боже
 accent-spanish-words-replace-8 = dios mío
 
 accent-spanish-words-9 = идиот
@@ -42,7 +43,6 @@ accent-spanish-words-11 = капитан
 accent-spanish-words-replace-11 = capitán
 
 accent-spanish-words-12 = что
-accent-spanish-words-12-2 = как
 accent-spanish-words-replace-12 = qué
 
 accent-spanish-words-13 = спасибо
@@ -53,7 +53,7 @@ accent-spanish-words-14 = привет
 accent-spanish-words-14-2 = здравствуй
 accent-spanish-words-replace-14 = hola
 
-accent-spanish-words-15 = пока
+accent-spanish-words-15 = увидимся
 accent-spanish-words-15-2 = прощай
 accent-spanish-words-replace-15 = adiós
 
@@ -125,7 +125,6 @@ accent-spanish-words-32-2 = огонь
 accent-spanish-words-replace-32 = fuego
 
 accent-spanish-words-33 = атмосфера
-accent-spanish-words-33-2 = воздух
 accent-spanish-words-replace-33 = atmósfera
 
 accent-spanish-words-34 = гравитация
@@ -181,7 +180,6 @@ accent-spanish-words-46-2 = воздухообмен
 accent-spanish-words-replace-46 = ventilación
 
 accent-spanish-words-47 = кислород
-accent-spanish-words-47-2 = воздух
 accent-spanish-words-replace-47 = oxígeno
 
 accent-spanish-words-48 = давление
@@ -189,7 +187,6 @@ accent-spanish-words-48-2 = напор
 accent-spanish-words-replace-48 = presión
 
 accent-spanish-words-49 = температура
-accent-spanish-words-49-2 = жар
 accent-spanish-words-replace-49 = temperatura
 
 accent-spanish-words-50 = стабилизатор
@@ -373,7 +370,7 @@ accent-spanish-words-94 = отстой
 accent-spanish-words-replace-94 = apesta
 
 accent-spanish-words-95 = жарко
-accent-spanish-words-95-2 = горячо
+accent-spanish-words-95-2 = жар
 accent-spanish-words-replace-95 = calor
 
 accent-spanish-words-96 = холодно
@@ -414,11 +411,11 @@ accent-spanish-words-replace-104 = seguro
 
 accent-spanish-words-105 = тихо
 accent-spanish-words-105-2 = безшумно
-accent-spanish-words-replace-105 = silencio
+accent-spanish-words-replace-105 = silenciosamente
 
 accent-spanish-words-106 = громко
 accent-spanish-words-106-2 = шумно
-accent-spanish-words-replace-106 = ruidoso
+accent-spanish-words-replace-106 = ruidosamente
 
 accent-spanish-words-107 = темно
 accent-spanish-words-107-2 = мрачно
@@ -449,8 +446,9 @@ accent-spanish-words-replace-113 = él
 accent-spanish-words-114 = она
 accent-spanish-words-replace-114 = ella
 
-accent-spanish-words-115 = оно
-accent-spanish-words-replace-115 = ello
+accent-spanish-words-115 = слабый
+accent-spanish-words-115-2 = слабак
+accent-spanish-words-replace-115 = débil
 
 accent-spanish-words-116 = мы
 accent-spanish-words-replace-116 = nosotros
@@ -689,7 +687,7 @@ accent-spanish-words-replace-174 = hijita
 
 accent-spanish-words-175 = чувак
 accent-spanish-words-175-2 = братан
-accent-spanish-words-replace-175 = chamba
+accent-spanish-words-replace-175 = tío
 
 accent-spanish-words-176 = деньги
 accent-spanish-words-176-2 = бабки
@@ -713,15 +711,15 @@ accent-spanish-words-replace-180 = chico
 
 accent-spanish-words-181 = ребята
 accent-spanish-words-181-2 = народ
-accent-spanish-words-replace-181 = güey
+accent-spanish-words-replace-181 = gente
 
 accent-spanish-words-182 = проблемка
-accent-spanish-words-182-2 = засада
-accent-spanish-words-replace-182 = bronca
+accent-spanish-words-182-2 = проблема
+accent-spanish-words-replace-182 = problemita
 
 accent-spanish-words-183 = скучно
 accent-spanish-words-183-2 = тоска
-accent-spanish-words-replace-183 = güeva
+accent-spanish-words-replace-183 = aburrido
 
 accent-spanish-words-184 = ленивый
 accent-spanish-words-184-2 = бездельник
@@ -733,11 +731,11 @@ accent-spanish-words-replace-185 = peda
 
 accent-spanish-words-186 = пьяный
 accent-spanish-words-186-2 = напившийся
-accent-spanish-words-replace-186 = pedo
+accent-spanish-words-replace-186 = borracho
 
 accent-spanish-words-187 = красивый
 accent-spanish-words-187-2 = симпатичный
-accent-spanish-words-replace-187 = chido
+accent-spanish-words-replace-187 = guapo
 
 accent-spanish-words-188 = урод
 accent-spanish-words-188-2 = страшный
@@ -749,7 +747,7 @@ accent-spanish-words-replace-189 = chingo
 
 accent-spanish-words-190 = мало
 accent-spanish-words-190-2 = немного
-accent-spanish-words-replace-190 = poquito
+accent-spanish-words-replace-190 = poco
 
 accent-spanish-words-191 = медленно
 accent-spanish-words-191-2 = неспешно
@@ -792,8 +790,8 @@ accent-spanish-words-replace-201 = directamente
 accent-spanish-words-202 = как бы
 accent-spanish-words-replace-202 = como si
 
-accent-spanish-words-203 = вот
-accent-spanish-words-replace-203 = aquí
+accent-spanish-words-203 = воздух
+accent-spanish-words-replace-203 = aire
 
 accent-spanish-words-204 = там
 accent-spanish-words-replace-204 = allí
@@ -811,7 +809,9 @@ accent-spanish-words-208 = зачем
 accent-spanish-words-replace-208 = para qué
 
 accent-spanish-words-209 = какой
-accent-spanish-words-replace-209 = qué
+accent-spanish-words-209-2 = какая
+accent-spanish-words-209-3 = какое
+accent-spanish-words-replace-209 = cuál
 
 accent-spanish-words-210 = сколько
 accent-spanish-words-replace-210 = cuánto
@@ -875,3 +875,22 @@ accent-spanish-words-replace-229 = bastante
 
 accent-spanish-words-230 = достаточно
 accent-spanish-words-replace-230 = suficiente
+
+accent-spanish-words-231 = куда 
+accent-spanish-words-replace-231 = a dónde
+
+accent-spanish-words-232 = откуда
+accent-spanish-words-replace-232 = de dónde
+
+accent-spanish-words-233 = как
+accent-spanish-words-replace-233 = cómo
+
+accent-spanish-words-234 = горячий
+accent-spanish-words-234-2 = горячо
+accent-spanish-words-replace-234 = caliente
+
+accent-spanish-words-235 = яйцо
+accent-spanish-words-replace-235 = huevo
+accent-spanish-words-236 = кости
+accent-spanish-words-replace-236 = huesos
+

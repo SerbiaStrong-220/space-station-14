@@ -134,7 +134,7 @@ public sealed partial class NoteEdit : FancyWindow
     private bool IsSecret { get; set; } = true; // SS220 Secret Default
     private NoteType NoteType { get; set; }
 
-    private NoteSeverity? NoteSeverity
+    public NoteSeverity? NoteSeverity
     {
         get => _noteSeverity;
         set

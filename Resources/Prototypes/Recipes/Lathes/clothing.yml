@@ -223,6 +223,11 @@
   id: ClothingUniformJumpsuitClown
   result: ClothingUniformJumpsuitClown
 
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpskirtClown
+  result: ClothingUniformJumpskirtClown
+
 ## CMO
 
 - type: latheRecipe
@@ -385,6 +390,11 @@
   parent: BaseJumpsuitRecipe
   id: ClothingUniformJumpsuitLawyerBlack
   result: ClothingUniformJumpsuitLawyerBlack
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpskirtLawyerBlack
+  result: ClothingUniformJumpskirtLawyerBlack
 
 ## Librarian
 
@@ -765,26 +775,6 @@
   result: ClothingOuterWinterSyndieCap
 
 # Hats
-#SS220 CapBeret begin
-- type: latheRecipe
-  id: ClothingHeadBeretCap
-  result: ClothingHeadBeretCap
-  completetime: 2
-  materials:
-    Cloth: 100
-    Durathread: 50
-#SS220 CapBeret end
-
-#SS220 Captain's Cap tweak begin
-- type: latheRecipe
-  id: ClothingHeadCaptainCap
-  result: ClothingHeadCaptainCap
-  completetime: 2
-  materials:
-    Cloth: 100
-    Durathread: 50
-#SS220 Captain's Cap tweak end
-
 - type: latheRecipe
   parent: BaseCommandHatRecipe
   id: ClothingHeadHatCaptain

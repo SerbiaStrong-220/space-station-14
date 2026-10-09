@@ -73,10 +73,10 @@ public abstract class SharedStorageSystem : EntitySystem
     [Dependency] private   readonly TagSystem _tag = default!;
     [Dependency] protected readonly UseDelaySystem UseDelay = default!;
 
-    private EntityQuery<ItemComponent> _itemQuery;
-    private EntityQuery<StackComponent> _stackQuery;
-    private EntityQuery<TransformComponent> _xformQuery;
-    private EntityQuery<UserInterfaceUserComponent> _userQuery;
+    [Dependency] private readonly EntityQuery<ItemComponent> _itemQuery = default!;
+    [Dependency] private readonly EntityQuery<StackComponent> _stackQuery = default!;
+    [Dependency] private readonly EntityQuery<TransformComponent> _xformQuery = default!;
+    [Dependency] private readonly EntityQuery<UserInterfaceUserComponent> _userQuery = default!;
 
     /// <summary>
     /// Whether we're allowed to go up-down storage via UI.
@@ -124,10 +124,6 @@ public abstract class SharedStorageSystem : EntitySystem
     {
         base.Initialize();
 
-        _itemQuery = GetEntityQuery<ItemComponent>();
-        _stackQuery = GetEntityQuery<StackComponent>();
-        _xformQuery = GetEntityQuery<TransformComponent>();
-        _userQuery = GetEntityQuery<UserInterfaceUserComponent>();
         _prototype.PrototypesReloaded += OnPrototypesReloaded;
 
         Subs.CVar(_cfg, CCVars.StorageLimit, OnStorageLimitChanged, true);
@@ -578,7 +574,7 @@ public abstract class SharedStorageSystem : EntitySystem
             {
                 if (entity == args.User
                     || !_itemQuery.TryGetComponent(entity, out var itemComp) // Need comp to get item size to get weight
-                    || !_prototype.TryIndex(itemComp.Size, out var itemSize)
+                    || !_prototype.Resolve(itemComp.Size, out var itemSize)
                     || !CanInsert(uid, entity, out _, storageComp, item: itemComp)
                     || !_interactionSystem.InRangeUnobstructed(args.User, entity))
                 {
@@ -586,7 +582,7 @@ public abstract class SharedStorageSystem : EntitySystem
                 }
 
                 _entList.Add(entity);
-                delay += itemSize.Weight * AreaInsertDelayPerItem;
+                delay += itemSize.Weight;
 
                 if (_entList.Count >= StorageComponent.AreaPickupLimit)
                     break;
@@ -595,7 +591,7 @@ public abstract class SharedStorageSystem : EntitySystem
             //If there's only one then let's be generous
             if (_entList.Count >= 1)
             {
-                var doAfterArgs = new DoAfterArgs(EntityManager, args.User, delay, new AreaPickupDoAfterEvent(GetNetEntityList(_entList)), uid, target: uid)
+                var doAfterArgs = new DoAfterArgs(EntityManager, args.User, delay * AreaInsertDelayPerItem, new AreaPickupDoAfterEvent(GetNetEntityList(_entList)), uid, target: uid)
                 {
                     BreakOnDamage = true,
                     BreakOnMove = true,
@@ -932,10 +928,18 @@ public abstract class SharedStorageSystem : EntitySystem
         if (args.Container.ID != StorageComponent.ContainerId)
             return;
 
-        if (entity.Comp.StoredItems.Remove(args.Entity, out var loc))
+        // SS220-storage-missing-item-comp-fix-begin
+        // Entities with obsolete/removed prototypes need to be deleted during load map
+        // without ItemComponent. Skip them.
+        if (!HasComp<ItemComponent>(args.Entity))
+        {
+            entity.Comp.StoredItems.Remove(args.Entity);
+        }
+        else if (entity.Comp.StoredItems.Remove(args.Entity, out var loc))
         {
             RemoveOccupiedEntity(entity, args.Entity, loc);
         }
+        // SS220-storage-missing-item-comp-fix-end
 
         Dirty(entity, entity.Comp);
 
@@ -1057,7 +1061,7 @@ public abstract class SharedStorageSystem : EntitySystem
         }
 
         if (_whitelistSystem.IsWhitelistFail(storageComp.Whitelist, insertEnt) ||
-            _whitelistSystem.IsBlacklistPass(storageComp.Blacklist, insertEnt))
+            _whitelistSystem.IsWhitelistPass(storageComp.Blacklist, insertEnt))
         {
             reason = "comp-storage-invalid-container";
             return false;
@@ -1218,7 +1222,7 @@ public abstract class SharedStorageSystem : EntitySystem
             if (!_stackQuery.TryGetComponent(ent, out var containedStack))
                 continue;
 
-            if (!_stack.TryAdd(insertEnt, ent, insertStack, containedStack))
+            if (!_stack.TryMergeStacks((insertEnt, insertStack), (ent, containedStack), out var _))
                 continue;
 
             stackedEntity = ent;
@@ -1772,7 +1776,7 @@ public abstract class SharedStorageSystem : EntitySystem
         return GetCumulativeItemAreas(uid) < uid.Comp.Grid.GetArea() || HasSpaceInStacks(uid);
     }
 
-    private bool HasSpaceInStacks(Entity<StorageComponent?> uid, string? stackType = null)
+    private bool HasSpaceInStacks(Entity<StorageComponent?> uid, ProtoId<StackPrototype>? stackType = null)
     {
         if (!Resolve(uid, ref uid.Comp))
             return false;
@@ -1782,7 +1786,7 @@ public abstract class SharedStorageSystem : EntitySystem
             if (!_stackQuery.TryGetComponent(contained, out var stack))
                 continue;
 
-            if (stackType != null && !stack.StackTypeId.Equals(stackType))
+            if (stackType != null && stack.StackTypeId != stackType)
                 continue;
 
             if (_stack.GetAvailableSpace(stack) == 0)
@@ -1821,7 +1825,7 @@ public abstract class SharedStorageSystem : EntitySystem
         // If we specify a max item size, use that
         if (uid.Comp.MaxItemSize != null)
         {
-            if (_prototype.TryIndex(uid.Comp.MaxItemSize.Value, out var proto))
+            if (_prototype.Resolve(uid.Comp.MaxItemSize.Value, out var proto))
                 return proto;
 
             Log.Error($"{ToPrettyString(uid.Owner)} tried to get invalid item size prototype: {uid.Comp.MaxItemSize.Value}. Stack trace:\\n{Environment.StackTrace}");

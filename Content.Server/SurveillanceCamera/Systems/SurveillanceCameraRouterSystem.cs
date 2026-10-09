@@ -79,7 +79,6 @@ public sealed class SurveillanceCameraRouterSystem : EntitySystem
                 SubnetPingResponse(uid, args.SenderAddress, router);
                 break;
             case SurveillanceCameraSystem.CameraDataMessage:
-                args.Data[SurveillanceCameraSystem.CameraSubnetData] = router.SubnetFrequencyId ?? "";
                 SendCameraInfo(uid, args.Data, router);
                 break;
         }
@@ -122,7 +121,7 @@ public sealed class SurveillanceCameraRouterSystem : EntitySystem
             return;
         }
 
-        if (!_prototypeManager.TryIndex<DeviceFrequencyPrototype>(component.AvailableNetworks[args.Network],
+        if (!_prototypeManager.Resolve<DeviceFrequencyPrototype>(component.AvailableNetworks[args.Network],
                 out var frequency))
         {
             return;

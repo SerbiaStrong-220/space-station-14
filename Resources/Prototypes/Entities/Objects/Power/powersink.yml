@@ -40,12 +40,17 @@
           acts: [ "Destruction" ]
     - type: PowerSink
     - type: Battery
-      maxCharge: 7500000
-      pricePerJoule: 0.0003
+      # Very important:
+      # Disable networking to prevent the battery getting continuously dirtied every tick as it interacts with the power network.
+      # This can not be done by changing the charge rate as the power supply ramps up over time.
+      # This disables prediction for this battery.
+      netsync: false
+      maxCharge: 250000000
+      pricePerJoule: 0.000009
     - type: ExaminableBattery
     - type: PowerConsumer
       voltage: High
-      drawRate: 1000000
+      drawRate: 10000000
     - type: Sprite
       sprite: Objects/Power/powersink.rsi
       state: powersink
@@ -57,25 +62,17 @@
       blacklist:
         tags:
         - GhostOnlyWarp
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
     - type: HiddenDescription
       entries:
-      - label: corvax-hidden-desc-PowerSink-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
-      - label: corvax-hidden-desc-PowerSink-engineering
-        jobRequired:
-          - ChiefEngineer
-          - AtmosphericTechnician
-          - StationEngineer
-          - TechnicalAssistant
-      - label: corvax-hidden-desc-PowerSink-research
-        jobRequired:
-          - ResearchAssistant
-          - ResearchDirector
-          - Scientist
-          - Borg
-# Corvax-HiddenDesc-End
+        SyndicateAgentKnowledge: [ corvax-hidden-desc-PowerSink-syndicate ]
+        EngineerKnowledge: [ corvax-hidden-desc-PowerSink-engineering ]
+        ScienceKnowledge: [ corvax-hidden-desc-PowerSink-research ]
+      nameEntries:
+      - [SyndicateAgentKnowledge, null]
+      - [EngineerKnowledge, null]
+      - [ScienceKnowledge, null]
+      hiddenName: ent-PowerSink
+# SS220-hidden-desc-end
     - type: StaticPrice
       price: 3000

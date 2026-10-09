@@ -12,7 +12,7 @@ namespace Content.Server.AlertLevel;
 
 public sealed class AlertLevelSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    //[Dependency] private readonly IConfigurationManager _cfg = default!; // ss220 remove unused dep
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly ChatSystem _chatSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -186,13 +186,17 @@ public sealed class AlertLevelSystem : EntitySystem
         // The full announcement to be spat out into chat.
         var announcementFull = Loc.GetString("alert-level-announcement", ("announcement", announcement)); // SS220 Alert Announcments changes
 
-        var playDefault = false;
-        if (playSound)
+        // SS220-fix-tts-alert-system-begin
+        // var playDefault = false;
+        // if (playSound)
+        var playDefault = true;
+        if (playSound && !announce)
         {
             if (detail.Sound != null)
             {
                 var filter = _stationSystem.GetInOwningStation(station);
                 _audio.PlayGlobal(detail.Sound, filter, true, detail.Sound.Params);
+                playDefault = false; // SS220-fix-tts-alert-system
             }
             else
             {
@@ -203,7 +207,7 @@ public sealed class AlertLevelSystem : EntitySystem
         if (announce)
         {
             _chatSystem.DispatchStationAnnouncement(station, announcementFull, playDefaultSound: playDefault,
-                colorOverride: detail.Color, sender: stationName);
+                colorOverride: detail.Color, sender: stationName, announcementSound: detail.Sound, playTTS: detail.PlayTTS); // SS220-fix-alert-level-tts
         }
 
         RaiseLocalEvent(new AlertLevelChangedEvent(station, level));

@@ -6,8 +6,9 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Science
-      time: 18000 # SS220-RoleTime
+      time: 5h # SS220-RoleTime
   startingGear: ScientistGear
+  experienceDefinition: ScientistRoleExperience # SS220-experience
   icon: "JobIconScientist"
   supervisors: job-supervisors-rd
   access:

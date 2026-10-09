@@ -11,7 +11,7 @@
   #SS220 Add antags playtime trackers end
   requirements:
   - !type:OverallPlaytimeRequirement
-    time: 3600 # 1h
+    time: 1h
 
 - type: antag
   id: Rev

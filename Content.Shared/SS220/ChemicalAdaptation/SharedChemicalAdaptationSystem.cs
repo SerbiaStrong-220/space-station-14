@@ -4,9 +4,9 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.ChemicalAdaptation;
 
-public abstract class SharedChemicalAdaptationSystem : EntitySystem
+public sealed partial class ChemicalAdaptationSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _time = default!;
+    [Dependency] private IGameTiming _time = default!;
 
     public override void Update(float frameTime)
     {
@@ -31,16 +31,17 @@ public abstract class SharedChemicalAdaptationSystem : EntitySystem
         }
     }
 
-    public void EnsureChemAdaptation(Entity<ChemicalAdaptationComponent> ent, string chemId, TimeSpan duration, float modifier, bool refresh)
+    public void EnsureChemAdaptation(Entity<ChemicalAdaptationComponent> ent, string chemId, TimeSpan duration, bool refresh)
     {
         if (!ent.Comp.ChemicalAdaptations.TryGetValue(chemId, out var adapt))
         {
-            ent.Comp.ChemicalAdaptations.Add(chemId, new AdaptationInfo(duration, modifier, refresh));
+            ent.Comp.ChemicalAdaptations.Add(chemId, new AdaptationInfo(duration, refresh));
             Dirty(ent, ent.Comp);
             return;
         }
 
-        adapt.Modifier *= modifier;
+        if (adapt.Metabolized != long.MaxValue) //Just in case somebody decides to go host a local servar and, idk, metabolize nicergoline as long as possible
+            ++adapt.Metabolized;
 
         if (refresh)
             adapt.Duration = _time.CurTime + duration;
@@ -60,7 +61,7 @@ public abstract class SharedChemicalAdaptationSystem : EntitySystem
         Dirty(ent, ent.Comp);
     }
 
-    public bool TryGetModifier(EntityUid ent, string reagent, out float value)
+    public bool TryGetMetabolized(EntityUid ent, string reagent, out float value)
     {
         if (!TryComp<ChemicalAdaptationComponent>(ent, out var adaptComp)
             || !adaptComp.ChemicalAdaptations.TryGetValue(reagent, out var adaptationInfo))
@@ -69,7 +70,7 @@ public abstract class SharedChemicalAdaptationSystem : EntitySystem
             return false;
         }
 
-        value = adaptationInfo.Modifier;
+        value = adaptationInfo.Metabolized;
         return true;
     }
 }

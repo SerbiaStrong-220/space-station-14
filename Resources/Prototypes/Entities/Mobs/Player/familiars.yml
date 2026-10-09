@@ -26,12 +26,18 @@
     tags:
     - Chapel
   - type: MindContainer
-    showExamineInfo: true
+  - type: MindExaminable
   - type: NpcFactionMember
     factions:
     - PetsNT
   - type: Alerts
   - type: Familiar
+  #SS220 Languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+  #SS220 Languages tweaks end
 
 - type: entity
   name: Cerberus
@@ -46,9 +52,7 @@
     name: ghost-role-information-cerberus-name
     description: ghost-role-information-cerberus-description
     rules: ghost-role-information-familiar-rules
-    requirements: #SS220 ghostrole-times (20h overall) start
-      - !type:OverallPlaytimeRequirement
-        time: 72000 #SS220 ghostrole-times (20h overall) end
+    job: PeacefulPet # SS220-add-time-requirements
     mindRoles:
     - MindRoleGhostRoleFamiliar
     raffle:
@@ -90,10 +94,16 @@
     tags:
     - Chapel
   - type: MindContainer
-    showExamineInfo: true
+  - type: MindExaminable
   - type: Familiar
   - type: Vocal
     sounds:
       Male: Cerberus
       Female: Cerberus
       Unsexed: Cerberus
+  #SS220 Languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+  #SS220 Languages tweaks end

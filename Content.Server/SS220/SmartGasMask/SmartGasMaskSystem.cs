@@ -2,6 +2,7 @@
 using Content.Server.Chat.Systems;
 using Content.Server.Pinpointer;
 using Content.Shared.Actions;
+using Content.Shared.Chat;
 using Content.Shared.Clothing;
 using Content.Shared.SS220.SmartGasMask;
 using Content.Shared.SS220.SmartGasMask.Events;
@@ -18,16 +19,16 @@ namespace Content.Server.SS220.SmartGasMask;
 /// <summary>
 /// This handles uses the radial menu to send canned messages.
 /// </summary>
-public sealed class SmartGasMaskSystem : EntitySystem
+public sealed partial class SmartGasMaskSystem : EntitySystem
 {
-    [Dependency] private readonly SharedUserInterfaceSystem _userInterface = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly NavMapSystem _navMap = default!;
-    [Dependency] private readonly ChatSystem _chatSystem = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private SharedUserInterfaceSystem _userInterface = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private NavMapSystem _navMap = default!;
+    [Dependency] private ChatSystem _chatSystem = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     public override void Initialize()
     {

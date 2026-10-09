@@ -1,0 +1,24 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: MopItem
+  name: jr mop
+  id: JRMopItem
+  description: The latest word in mop manufacturing. Incredible lightness, increased durability, and most importantly, eco-friendly production!
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/jr_mop.rsi
+    layers:
+      - state: icon
+      - map: ["enum.SolutionContainerLayers.Fill"]
+        state: fill-3
+        visible: false
+  - type: Item
+    size: Large
+    sprite: SS220/Objects/Specific/jr_mop.rsi
+  - type: Clothing
+    quickEquip: false
+    sprite: SS220/Objects/Specific/jr_mop.rsi
+    slots:
+    - suitStorage
+

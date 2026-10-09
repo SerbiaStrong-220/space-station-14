@@ -14,11 +14,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.SS220.Ninja.Objectives.LeaveNoTrace;
 
-public sealed class LeaveNoTraceSystem : SharedLeaveNoTraceSystem
+public sealed partial class LeaveNoTraceSystem : SharedLeaveNoTraceSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IOverlayManager _overlayManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IOverlayManager _overlayManager = default!;
 
     private RevealOverlay _overlay = default!;
 
@@ -67,6 +67,9 @@ public sealed class LeaveNoTraceSystem : SharedLeaveNoTraceSystem
     private void OnShutdown(Entity<LeaveNoTraceComponent> ent, ref ComponentShutdown args)
     {
         if (_playerManager.LocalEntity != ent.Owner)
+            return;
+
+        if (TerminatingOrDeleted(ent.Owner))
             return;
 
         _overlay.IsReveal = true;

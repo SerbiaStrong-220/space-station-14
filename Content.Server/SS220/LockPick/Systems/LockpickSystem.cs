@@ -8,12 +8,12 @@ using Robust.Shared.Random;
 
 namespace Content.Server.SS220.LockPick.Systems;
 
-public sealed class LockpickSystem : EntitySystem
+public sealed partial class LockpickSystem : EntitySystem
 {
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {

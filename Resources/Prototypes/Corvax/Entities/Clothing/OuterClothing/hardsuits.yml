@@ -17,26 +17,38 @@
   - type: TemperatureProtection
     heatingCoefficient: 0.001
     coolingCoefficient: 0.001
+# SS220 CBURN_stats_tweak start
   - type: Armor
     modifiers:
       coefficients:
         Blunt: 0.7
-        Slash: 0.3
-        Piercing: 0.9
-        Heat: 0.05
-        Cold: 0.1
-        Shock: 0.1
-        Radiation: 0.1
-        Caustic: 0.1 #ss220 cburn com-hardsuit fix
+        Slash: 0.25
+        Piercing: 0.75
+        Heat: 0.2
+        Cold: 0.2
+        Shock: 0.2
+        Radiation: 0.15
+        Caustic: 0.15
   #ss220 cburn com-hardsuit fix begin
   - type: StaminaResistance
     damageCoefficient: 0.5
   #ss220 cburn com-hardsuit fix end
-  # SS220 add zombify resistance begin
   - type: ZombificationResistance
-    zombificationResistanceCoefficient: 0.1
-  # SS220 add zombify resistance end
+    zombificationResistanceCoefficient: 0.0
   - type: ExplosionResistance
-    damageCoefficient: 0.7
+    damageCoefficient: 0.5
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetCBURNLeader
+  - type: FieldShieldProvider
+    rechargeShieldData:
+      rechargeTime: 15
+    shieldData:
+      shieldMaxCharge: 2
+      shieldSprite:
+        sprite: SS220/Effects/field_shield.rsi
+        state: blue
+    lightData:
+      color: "#0061d8"
+      radius: 1
+      energy: 4
+# SS220 CBURN_stats_tweak end

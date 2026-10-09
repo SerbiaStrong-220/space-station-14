@@ -5,3 +5,9 @@ trait-nervousness-name = Нервозность
 trait-nervousness-desc = Вы действуете быстрее, чем обычно, но иногда теряете концентрацию и прерываете начатое.
 
 trait-nervousness-popup = У вас затряслись руки
+
+trait-chronic-cough-name = Хронический кашель
+trait-chronic-cough-desc = Вы страдаете от постоянного раздражения дыхательных путей.
+
+trait-uncloneable-name = Неклонируемый
+trait-uncloneable-desc = Не может быть клонирован.

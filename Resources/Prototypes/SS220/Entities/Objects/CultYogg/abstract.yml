@@ -2,12 +2,80 @@
 
 - type: entity
   abstract: true
-  id: CultYoggRestrictedItem
+  id: BaseRestrictedLivingItem
+  suffix: CultYogg
   name: abstract cult restricted
   components:
-    - type: RestrictedItem
-      localizedPopup: "cult-yogg-role-item-popup"
-      whitelist:
-        components:
-        - CultYogg
+  - type: Tag
+    tags:
+    - YoggEquipment
+  - type: RestrictedItem
+    localizedPopup: "cult-yogg-role-item-popup"
+    whitelist:
+      components:
+      - CultYogg
 
+- type: entity
+  abstract: true
+  id: BaseRestrictedLivingItemMiGo
+  suffix: CultYogg
+  name: abstract cult restricted
+  components:
+  - type: Tag
+    tags:
+    - YoggEquipment
+  - type: RestrictedItem
+    localizedPopup: "cult-yogg-role-item-popup"
+    whitelist:
+      components:
+      - CultYogg
+      - MiGo
+
+- type: entity
+  abstract: true
+  id: BaseLivingCuttableEquipment
+  components:
+  - type: CuttableStuck
+    cuttingSound:
+      path: /Audio/SS220/Items/CultYogg/equipment_cutting.ogg
+    removalSound:
+      path: /Audio/SS220/Items/CultYogg/equipment_detach.ogg
+    damage:
+      types:
+        Slash: 25
+        Blunt: 10
+
+- type: entity
+  id: BaseAutoLinkingPortalCult
+  parent: BaseStructure
+  suffix: CultYogg
+  abstract: true
+  name: auto-linking portal
+  description: Transports you to a linked destination!
+  components:
+  - type: Transform
+    anchored: True
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      portalFixture:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.48,0.25,0.48"
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+        hard: false
+  - type: InteractionTeleportTrigger
+    teleportDoAfterTime: 2
+    damageThreshold: 7
+    targetWhitelist:
+      components:
+      - CultYogg
+      - MiGo
+    whitelistRejectedLoc: cult-yogg-teleport-target-whitelist-rejection
+  - type: AutoLinkingTeleport

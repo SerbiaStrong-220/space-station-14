@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
-  "copyright": "Textured by MIXnikita for SS220",
+  "copyright": "Textured by MIXnikita for SS220, resprited by Estkemran (Github)",
   "size": {
     "x": 32,
     "y": 32
@@ -28,7 +28,11 @@
         "directions": 4
     },
     {
-        "name": "emergency_open",
+        "name": "eng",
+        "directions": 4
+    },
+    {
+        "name": "eng_evac_door",
         "directions": 4
     },
     {
@@ -37,10 +41,6 @@
     },
     {
         "name": "fire_door",
-        "directions": 4
-    },
-    {
-        "name": "fire_open",
         "directions": 4
     },
     {
@@ -76,11 +76,15 @@
         "directions": 4
     },
     {
-        "name": "med_open",
+        "name": "mixed_door",
         "directions": 4
     },
     {
-        "name": "mixed_door",
+        "name": "n2",
+        "directions": 4
+    },
+    {
+        "name": "n2_door",
         "directions": 4
     },
     {

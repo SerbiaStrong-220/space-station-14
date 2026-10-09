@@ -1,0 +1,6 @@
+- type: weightedRandom
+  id: WeightedDynamicsList
+  weights:
+    MediumDynamic: 1
+    LightDynamic: 1
+    HardDynamic: 1

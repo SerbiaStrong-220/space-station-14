@@ -1,0 +1,40 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: GifCatwalk
+  suffix: CultYogg
+  name: GifCatwalk
+  description: Compacted layer of the root structure of Mi-Gomycelia.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Rotatable
+  - type: Clickable
+  - type: Sprite
+    sprite: SS220/Structures/CultYogg/catwalk.rsi
+    drawdepth: FloorTiles
+    noRot: false
+    layers:
+    - state: catwalk_0
+      map: ["random"]
+  - type: Icon
+    sprite: SS220/Structures/CultYogg/catwalk.rsi
+    state: catwalk_0
+  - type: Transform
+    anchored: true
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepSlime
+      params:
+        volume: 8
+  - type: Tag
+    tags:
+      - Catwalk
+  - type: RandomSprite
+    available:
+    - random:
+        catwalk_0: ""
+        catwalk_1: ""
+        catwalk_2: ""
+        catwalk_3: ""
+        catwalk_4: ""

@@ -1,5 +1,6 @@
 using Content.Shared.Eui;
 using Content.Shared.Roles;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Ghost.Roles
@@ -12,11 +13,10 @@ namespace Content.Shared.Ghost.Roles
         public string Description { get; set; }
         public string Rules { get; set; }
 
-        // TODO ROLE TIMERS
-        // Actually make use of / enforce this requirement?
-        // Why is this even here.
-        // Move to ghost role prototype & respect CCvars.GameRoleTimerOverride
-        public HashSet<JobRequirement>? Requirements { get; set; }
+        /// <summary>
+        /// A list of all antag and job prototype IDs of the ghost role and its mind role(s).
+        /// </summary>
+        public (List<ProtoId<JobPrototype>>?,List<ProtoId<AntagPrototype>>?)  RolePrototypes;
 
         /// <inheritdoc cref="GhostRoleKind"/>
         public GhostRoleKind Kind { get; set; }
@@ -44,6 +44,15 @@ namespace Content.Shared.Ghost.Roles
             GhostRoles = ghostRoles;
         }
     }
+
+    // ss220 add verb for ghost role start
+    [NetSerializable, Serializable]
+    public sealed class GhostRoleRuleEuiState(uint identifier, string rules) : EuiStateBase
+    {
+        public uint Identifier { get; } = identifier;
+        public string Rules { get; } = rules;
+    }
+    // ss220 add verb for ghost role end
 
     [NetSerializable, Serializable]
     public sealed class RequestGhostRoleMessage : EuiMessageBase

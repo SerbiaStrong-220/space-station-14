@@ -1,35 +1,30 @@
 using Content.Shared.Actions;
-﻿using Content.Shared.Actions.Components;
+using Content.Shared.Actions.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Item;
 using Content.Shared.Mobs;
-using Content.Shared.Random;
-using Content.Shared.Random.Helpers;
+using Content.Shared.Popups;
+using Content.Shared.RatKing.Components;
+using Content.Shared.RatKing.Systems;
+using Content.Shared.SS220.RatKing;
 using Content.Shared.Tag;
-using Content.Shared.Verbs;
-using Robust.Shared.Audio;
-using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
-//SS220 RatKing Tweaks and Changes start
-using Content.Shared.Popups;
-using Content.Shared.SS220.RatKing;
-//SS220 RatKing Tweaks and Changes end
+
 
 namespace Content.Shared.RatKing;
 
 public abstract class SharedRatKingSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
     [Dependency] protected readonly IRobustRandom Random = default!;
     [Dependency] private readonly SharedActionsSystem _action = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!; //SS220 RatKing tweaks and changes
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!; // SS220 Ratking tweaks
+    [Dependency] private readonly TagSystem _tagSystem = default!; // SS220 make ratking rats Trash after death
+
+    private static readonly ProtoId<TagPrototype> TrashTag = "Trash"; // SS220 RatKing Tweaks and Changes
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -37,12 +32,8 @@ public abstract class SharedRatKingSystem : EntitySystem
         SubscribeLocalEvent<RatKingComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<RatKingComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<RatKingComponent, RatKingOrderActionEvent>(OnOrderAction);
-
         SubscribeLocalEvent<RatKingServantComponent, ComponentShutdown>(OnServantShutdown);
-        SubscribeLocalEvent<RatKingServantComponent, MobStateChangedEvent>(OnServantDie);
-
-        SubscribeLocalEvent<RatKingRummageableComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerb);
-        SubscribeLocalEvent<RatKingRummageableComponent, RatKingRummageDoAfterEvent>(OnDoAfterComplete);
+        SubscribeLocalEvent<RatKingServantComponent, MobStateChangedEvent>(OnServantDie); //SS220 RatKing Tweaks and Changes
         SubscribeLocalEvent<RatKingComponent, RatKingRummageActionEvent>(OnRummageAction); //SS220 RatKing Tweaks and Changes
     }
 
@@ -103,17 +94,17 @@ public abstract class SharedRatKingSystem : EntitySystem
             ratKingComponent.Servants.Remove(uid);
     }
 
-    //ss220 rat servant fix begin
-    private void OnServantDie(EntityUid uid, RatKingServantComponent component, MobStateChangedEvent args)
+    //SS220 rat servant fix begin
+    private void OnServantDie(Entity<RatKingServantComponent> servant, ref MobStateChangedEvent args)
     {
         if (args.NewMobState != MobState.Dead)
             return;
 
-        EnsureComp<ItemComponent>(uid);
+        EnsureComp<ItemComponent>(servant.Owner);
 
-        _tagSystem.AddTag(uid, "Trash");
+        _tagSystem.AddTag(servant.Owner, TrashTag);
     }
-    //ss220 rat servant fix end
+    //SS220 rat servant fix end
 
     private void UpdateActions(EntityUid uid, RatKingComponent? component = null)
     {
@@ -129,34 +120,10 @@ public abstract class SharedRatKingSystem : EntitySystem
         _action.StartUseDelay(component.ActionOrderCheeseEmEntity);
         _action.StartUseDelay(component.ActionOrderLooseEntity);
     }
-
-    private void OnGetVerb(EntityUid uid, RatKingRummageableComponent component, GetVerbsEvent<AlternativeVerb> args)
-    {
-        if (!HasComp<RatKingComponent>(args.User) || component.Looted)
-            return;
-
-        args.Verbs.Add(new AlternativeVerb
-        {
-            Text = Loc.GetString("rat-king-rummage-text"),
-            Priority = 0,
-            Act = () =>
-            {
-                _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, args.User, component.RummageDuration,
-                    new RatKingRummageDoAfterEvent(), uid, uid)
-                {
-                    BlockDuplicate = true,
-                    BreakOnDamage = true,
-                    BreakOnMove = true,
-                    DistanceThreshold = 2f
-                });
-            }
-        });
-    }
-
     //SS220 RatKing Tweaks and Changes start
     private void OnRummageAction(Entity<RatKingComponent> entity, ref RatKingRummageActionEvent args)
     {
-        if (args.Handled || !TryComp<RatKingRummageableComponent>(args.Target, out var rumComp))
+        if (args.Handled || !TryComp<RummageableComponent>(args.Target, out var rumComp))
         {
             _popup.PopupPredicted(Loc.GetString("ratking-rummage-failure"), args.Target, entity, PopupType.Small);
             return;
@@ -169,7 +136,7 @@ public abstract class SharedRatKingSystem : EntitySystem
         }
 
         var doAfter = new DoAfterArgs(EntityManager, entity, rumComp.RummageDuration,
-            new RatKingRummageDoAfterEvent(), args.Target, args.Target)
+            new RummageDoAfterEvent(), args.Target, args.Target)
         {
             BlockDuplicate = true,
             BreakOnDamage = true,
@@ -181,20 +148,6 @@ public abstract class SharedRatKingSystem : EntitySystem
         args.Handled = true;
     }
     //SS220 RatKing Tweaks and Changes end
-
-    private void OnDoAfterComplete(EntityUid uid, RatKingRummageableComponent component, RatKingRummageDoAfterEvent args)
-    {
-        if (args.Cancelled || component.Looted)
-            return;
-
-        component.Looted = true;
-        Dirty(uid, component);
-        _audio.PlayPredicted(component.Sound, uid, args.User);
-
-        var spawn = PrototypeManager.Index<WeightedRandomEntityPrototype>(component.RummageLoot).Pick(Random);
-        if (_net.IsServer)
-            Spawn(spawn, Transform(uid).Coordinates);
-    }
 
     public void UpdateAllServants(EntityUid uid, RatKingComponent component)
     {

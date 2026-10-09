@@ -11,7 +11,9 @@
     proto: CartridgeRifle
     capacity: 50
   - type: Item
-    size: Small
+# SS220-sec-gear-size-fix-start
+    size: Normal
+# SS220-sec-gear-size-fix-end
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
@@ -33,11 +35,15 @@
   - type: BallisticAmmoProvider
     capacity: 200
     proto: CartridgeRifle
+# SS220-sec-gear-size-fix-start
+  - type: Item
+    size: Large
+# SS220-sec-gear-size-fix-end
   - type: Sprite
     layers:
     - state: base-big
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-big-3 #SS220-FixAmmoSprite
+    - state: mag-big-1
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: mag-big
@@ -49,6 +55,7 @@
   parent: BaseMagazineBoxRifle
   id: MagazineBoxRifle
   name: ammunition box (.20 rifle)
+  description: A cardboard box of .20 rifle rounds. Intended to hold general-purpose kinetic ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeRifle
@@ -56,13 +63,14 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-2 #SS220-FixAmmoSprite
+    - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
   parent: BaseMagazineBoxRifle
   id: MagazineBoxRiflePractice
   name: ammunition box (.20 rifle practice)
+  description: A cardboard box of .20 rifle rounds. Intended to hold harmless practice ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeRiflePractice
@@ -70,7 +78,7 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-2 #SS220-FixAmmoSprite
+    - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
     - state: practice
 
@@ -78,6 +86,7 @@
   id: MagazineBoxRifleIncendiary
   parent: BaseMagazineBoxRifle
   name: ammunition box (.20 rifle incendiary)
+  description: A cardboard box of .20 rifle rounds. Intended to hold self-igniting incendiary ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeRifleIncendiary
@@ -85,7 +94,7 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-2 #SS220-FixAmmoSprite
+    - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
     - state: incendiary
 
@@ -93,6 +102,7 @@
   id: MagazineBoxRifleUranium
   parent: BaseMagazineBoxRifle
   name: ammunition box (.20 rifle uranium)
+  description: A cardboard box of .20 rifle rounds. Intended to hold exotic uranium-core ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeRifleUranium
@@ -100,7 +110,7 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-2 #SS220-FixAmmoSprite
+    - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
     - state: uranium
 

@@ -19,15 +19,20 @@ public sealed class StoreUpdateState : BoundUserInterfaceState
 
     public readonly bool ShowFooter;
 
+    public readonly LocId? DynamicName; // SS220 DynamicTraitor
+
     public readonly bool AllowRefund;
 
-    public StoreUpdateState(HashSet<ListingDataWithCostModifiers> listings, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> balance, bool showFooter, bool allowRefund)
+    // SS220 DynamicTraitor begin
+    public StoreUpdateState(HashSet<ListingDataWithCostModifiers> listings, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> balance, bool showFooter, bool allowRefund, LocId? dynamicName = null)
     {
         Listings = listings;
         Balance = balance;
         ShowFooter = showFooter;
         AllowRefund = allowRefund;
+        DynamicName = dynamicName;
     }
+    // SS220 DynamicTraitor end
 }
 
 [Serializable, NetSerializable]
@@ -37,9 +42,10 @@ public sealed class StoreRequestUpdateInterfaceMessage : BoundUserInterfaceMessa
 }
 
 [Serializable, NetSerializable]
-public sealed class StoreBuyListingMessage(ProtoId<ListingPrototype> listing) : BoundUserInterfaceMessage
+public sealed class StoreBuyListingMessage(ProtoId<ListingPrototype> listing, NetEntity? soundSource) : BoundUserInterfaceMessage
 {
     public ProtoId<ListingPrototype> Listing = listing;
+    public NetEntity? SoundSource = soundSource;
 }
 
 [Serializable, NetSerializable]

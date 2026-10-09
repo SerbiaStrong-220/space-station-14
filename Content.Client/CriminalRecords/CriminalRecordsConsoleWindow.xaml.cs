@@ -15,14 +15,16 @@ using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using System.Linq;
 using System.Numerics;
+using Content.Client.SS220.UserInterface.Controls;
 using Content.Shared.StatusIcon;
 using Robust.Client.GameObjects;
+using Content.Client.SS220.UserInterface.System.PinUI;
 
 namespace Content.Client.CriminalRecords;
 
 // TODO: dedupe shitcode from general records theres a lot
 [GenerateTypedNameReferences]
-public sealed partial class CriminalRecordsConsoleWindow : FancyWindow
+public sealed partial class CriminalRecordsConsoleWindow : FancyWindow, IPinnableWindow // ss220 add pin for ui
 {
     private readonly IPlayerManager _player;
     private readonly IPrototypeManager _proto;
@@ -145,6 +147,10 @@ public sealed partial class CriminalRecordsConsoleWindow : FancyWindow
             if (_selectedRecord is { } record)
                 OnHistoryUpdated?.Invoke(record, _access, true);
         };
+
+        // SS220 add pin button begin
+        PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
+        // SS220 add pin button end
     }
 
     public void StatusFilterPressed(SecurityStatus statusSelected)
@@ -276,7 +282,7 @@ public sealed partial class CriminalRecordsConsoleWindow : FancyWindow
 
     private void SetStatus(SecurityStatus status)
     {
-        if (status == SecurityStatus.Wanted || status == SecurityStatus.Suspected)
+        if (status == SecurityStatus.Wanted || status == SecurityStatus.Suspected || status == SecurityStatus.Hostile)
         {
             GetReason(status);
             return;
@@ -322,6 +328,8 @@ public sealed partial class CriminalRecordsConsoleWindow : FancyWindow
             SecurityStatus.Detained => "hud_incarcerated",
             SecurityStatus.Discharged => "hud_discharged",
             SecurityStatus.Suspected => "hud_suspected",
+            SecurityStatus.Hostile => "hud_hostile",
+            SecurityStatus.Eliminated => "hud_eliminated",
             _ => "SecurityIconNone"
         };
     }

@@ -2,7 +2,7 @@
 
 - type: entity
   name: cannabis leaves
-  parent: ProduceBase
+  parent: ProduceBaseRuminant
   id: LeavesCannabis
   description: "Recently legalized in most galaxies."
   components:
@@ -10,7 +10,7 @@
     sprite: Objects/Specific/Hydroponics/cannabis.rsi
   - type: Produce
     seedId: cannabis
-  - type: Food
+  - type: Edible # Precursor to the one true edible
   - type: SolutionContainerManager
     solutions:
       food:
@@ -167,7 +167,7 @@
 
 - type: entity
   name: tea leaves
-  parent: ProduceBase
+  parent: ProduceBaseRuminant
   id: LeavesTea
   description: "Can be dried out to make tea."
   components:
@@ -184,7 +184,7 @@
 
 - type: entity
   name: dried tea leaves
-  parent: ProduceBase
+  parent: ProduceBaseRuminant
   id: LeavesTeaDried
   description: "Dried tea leaves, ready to be ground."
   components:
@@ -200,7 +200,7 @@
 
 - type: entity
   name: tobacco leaves
-  parent: ProduceBase
+  parent: ProduceBaseRuminant
   id: LeavesTobacco
   description: "Dry them out to make some smokes."
   components:
@@ -208,6 +208,12 @@
     sprite: Objects/Specific/Hydroponics/tobacco.rsi
   - type: Produce
     seedId: tobacco
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nicotine
+          Quantity: 2
 
 - type: entity
   name: dried tobacco leaves
@@ -218,6 +224,11 @@
   - type: Stack
     stackType: LeavesTobaccoDried
     count: 1
+  # SS220 hookah begin
+  - type: Tag
+    tags:
+    - HookahTobacco
+  # SS220 hookah end
   - type: SolutionContainerManager
     solutions:
       food:
@@ -252,6 +263,7 @@
     node: ground
   - type: Tag
     tags:
-      - Smokable
+    - Smokable
+    - HookahTobacco # SS220 hookah
   - type: Item
     size: Tiny

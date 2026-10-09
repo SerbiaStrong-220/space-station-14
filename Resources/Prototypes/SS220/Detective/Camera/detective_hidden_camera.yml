@@ -48,3 +48,4 @@
   - type: SurveillanceCamera
     networkSet: true
     id: "Detective camera"
+    active: false

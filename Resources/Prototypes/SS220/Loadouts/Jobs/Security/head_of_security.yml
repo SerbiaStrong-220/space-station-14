@@ -13,6 +13,21 @@
   - !type:GroupLoadoutEffect
     proto: AdministratorSponsorTier
 
+- type: loadoutEffectGroup
+  id: HoSCloakShoulder
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobHeadOfSecurity
+      time: 108000 # 30 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
+
 # Jumpsuit
 - type: loadout
   id: JumpsuitHoSParadeMale
@@ -51,6 +66,14 @@
   equipment:
     neck: ClothingNeckMantleHOSShoulder
 
+- type: loadout
+  id: HOSShoulderMantle
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HoSCloakShoulder
+  equipment:
+    neck: ClothingNeckMantleShoulderHOS
+
 # Outer
 - type: loadout
   id: WinterHoSUnarmored
@@ -58,12 +81,12 @@
     outerClothing: ClothingOuterWinterHoSUnarmored
 
 - type: loadout
-  id: Outer1984
+  id: Outer1984HoS
   effects:
   - !type:GroupLoadoutEffect
-    proto: CriticalMassShlopaSponsorTier
+    proto: HugeShlopaSponsorTier
   equipment:
-    outerClothing: ClothingSponsor1984
+    outerClothing: ClothingSponsor1984HoS
 
 # SUITSTORAGE
 - type: loadout
