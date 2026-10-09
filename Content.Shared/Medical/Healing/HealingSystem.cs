@@ -10,12 +10,15 @@ using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Mind; //ss220 add additional info for round
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.SS220.RoundEndInfo; //ss220 add additional info for round
 using Content.Shared.Stacks;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Network; //ss220 add additional info for round
 
 namespace Content.Shared.Medical.Healing;
 
@@ -31,6 +34,12 @@ public sealed class HealingSystem : EntitySystem
     [Dependency] private readonly MobThresholdSystem _mobThresholdSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
+
+    //ss220 add additional info for round start
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private IRoundEndInfoManager _infoManager = default!;
+    //ss220 add additional info for round end
 
     public override void Initialize()
     {
@@ -112,6 +121,11 @@ public sealed class HealingSystem : EntitySystem
         // Logic to determine the whether or not to repeat the healing action
         args.Repeat = HasDamage((args.Used.Value, healing), target) && !dontRepeat;
         args.Handled = true;
+
+        //ss220 add additional info for round start
+        if (_net.IsServer && _mind.TryGetMind(args.User, out var mind, out _))
+            _infoManager.EnsureInfo<HealingInfo>().RecordHealing(mind, -total.Int());
+        //ss220 add additional info for round end
 
         if (!args.Repeat)
         {
