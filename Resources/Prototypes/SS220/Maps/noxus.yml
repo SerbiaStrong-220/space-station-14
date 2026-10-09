@@ -2,7 +2,7 @@
   id: Noxus
   mapName: 'NSS Noxus'
   mapPath: /Maps/SS220/noxus.yml
-  minPlayers: 15 # decreased for 2 times by normal limit
+  minPlayers: 25 # decreased for 2 times by normal limit
   stations:
     Noxus:
       stationProto: NoxusNanotrasenStation
