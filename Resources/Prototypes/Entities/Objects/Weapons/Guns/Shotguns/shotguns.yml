@@ -224,6 +224,7 @@
   components: # intend for Enforcer to have wider choke for semi-auto function
   - type: Sprite
     sprite: Objects/Weapons/Guns/Shotguns/enforcer.rsi
+  - type: Appearance #SS220 weapon overhaul
   - type: Clothing
     sprite: Objects/Weapons/Guns/Shotguns/enforcer.rsi
   - type: Item
@@ -238,8 +239,6 @@
   id: WeaponShotgunEnforcerRubber
   suffix: Non-Lethal
   components:
-  - type: BallisticAmmoProvider
-    proto: ShellShotgunBeanbag
   - type: Gun # Corvax-Guns
     soundGunshot:
       path: /Audio/Corvax/Weapons/Guns/Gunshots/shotgun_metal.ogg
@@ -258,6 +257,15 @@
   - type: Clothing
     sprite: SS220/Objects/Weapons/Guns/Shotguns/pump.rsi #SS220 kammerer resprite
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
+  #SS220 weapon overhaul begin
+  - type: ChamberMagazineAmmoProvider
+    autoCycle: false
+    soundBoltOpened:
+      path: /Audio/Weapons/Guns/Cock/shotgun_open.ogg
+    soundBoltClosed:
+      path: /Audio/Weapons/Guns/Cock/shotgun_close.ogg
+  - type: Appearance
+  #SS220 weapon overhaul end
   - type: Gun
     fireRate: 1
     soundGunshot: # Corvax-Guns
