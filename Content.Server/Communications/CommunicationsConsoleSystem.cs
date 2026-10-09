@@ -304,11 +304,13 @@ namespace Content.Server.Communications
 
         private void OnCallShuttleMessage(EntityUid uid, CommunicationsConsoleComponent comp, CommunicationsConsoleCallEmergencyShuttleMessage message)
         {
+            // SS220-add-recall-only-console-begin
             if (comp.CanShuttle && comp.OnlyRecallShuttle)
             {
                 _popupSystem.PopupEntity(Loc.GetString("comms-console-can-only-recall"), uid, message.Actor);
                 return;
             }
+            // SS220-add-recall-only-console-end
 
             if (!CanCallOrRecall(comp))
                 return;
