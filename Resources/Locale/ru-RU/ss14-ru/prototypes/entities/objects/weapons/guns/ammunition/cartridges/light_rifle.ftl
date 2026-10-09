@@ -1,10 +1,14 @@
-ent-BaseCartridgeLightRifle = патрон (.30 винтовочный)
+#SS220-weapon-overhaul-begin
+ent-BaseCartridgeLightRifle = патрон (7,62x41 промежуточный)
     .desc = { ent-BaseCartridge.desc }
-ent-CartridgeLightRifle = патрон (.30 винтовочный)
-    .desc = Классический патрон, используемый во многих боевых винтовках и ручных пулемётах. Стандартные кинетические боеприпасы распространены и эффективны в большинстве ситуаций.
-ent-CartridgeLightRiflePractice = патрон (.30 винтовочный учебный)
-    .desc = Классический патрон, используемый во многих боевых винтовках и ручных пулемётах. При стрельбе холостыми патронами используется снаряд с мелом, который слегка жалит, но не причиняет серьёзных повреждений.
-ent-CartridgeLightRifleIncendiary = патрон (.30 винтовочный зажигательный)
-    .desc = Классический патрон, используемый во многих боевых винтовках и ручных пулеметах. Зажигательные боеприпасы содержат самовоспламеняющееся вещество, которое поджигает цели.
-ent-CartridgeLightRifleUranium = патрон (.30 винтовочный урановый)
-    .desc = Классический патрон, используемый во многих боевых винтовках и ручных пулемётах. Урановые боеприпасы заменяют свинцовую сердцевину пули расщепляющимся материалом, который облучает цель изнутри.
+ent-CartridgeLightRifle = патрон (7,62x41 промежуточный)
+    .desc = { ent-BaseCartridgeLightRifle.desc }
+ent-CartridgeLightRifleHighVelocity = патрон (7,62x41 промежуточный высокоскоростной)
+    .desc = { ent-BaseCartridgeLightRifle.desc }
+ent-CartridgeLightRiflePractice = патрон (7,62x41 промежуточный учебный)
+    .desc = { ent-BaseCartridgeLightRifle.desc }
+ent-CartridgeLightRifleIncendiary = патрон (7,62x41 промежуточный трассирующий)
+    .desc = { ent-BaseCartridgeLightRifle.desc }
+ent-CartridgeLightRifleUranium = патрон (7,62x41 промежуточный урановый)
+    .desc = { ent-BaseCartridgeLightRifle.desc }
+#SS220-weapon-overhaul-end

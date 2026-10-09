@@ -6,59 +6,60 @@
   id: Spikegun
   suffix: CultYogg
   components:
-  - type: ShellableItem
-  - type: ContainerContainer
-    containers:
-      item-shell: !type:ContainerSlot {}
-  - type: AmmoCounter
-  - type: Gun
-    soundGunshot: /Audio/SS220/Weapons/Guns/CultYogg/spikegun_shot.ogg
-    soundEmpty: null
-    fireRate: 5
-    minAngle: 2
-    maxAngle: 15
-    angleIncrease: 4
-    angleDecay: 14
-    selectedMode: FullAuto
-    availableModes:
-    - FullAuto
-  - type: BasicEntityAmmoProvider
-    proto: Spike
-    capacity: 20
-  - type: Sprite
-    sprite: SS220/Objects/Weapons/Guns/CultYogg/spikegun.rsi
-    layers:
-    - state: icon_noammo
-      map: ["sprite"]
-  - type: Item
-    size: Ginormous
-  - type: Appearance
-  - type: RechargeBasicEntityAmmo
-    rechargeCooldown: 1.5
-    rechargeSound: /Audio/Weapons/Guns/MagIn/shotgun_insert.ogg
-  - type: GenericVisualizer
-    visuals:
-      enum.AmmoVisuals.HasAmmo:
-        sprite:
-          False: {state: "icon_noammo"}
-          True: {state: "icon_fullammo"}
-  - type: GunByHasAmmoVisuals
-    inhandVisuals:
-      left:
-      - state: fullammo-inhand-left
-        shader: unshaded
-      right:
-      - state: fullammo-inhand-right
-        shader: unshaded
-  - type: DropOnDeath
-  - type: StuckOnEquip
-    inHandItem: true
-  - type: Tag
-    tags:
-    - YoggEquipment
-    - CultYoggStealthProvidable
-
-
+    - type: CultYoggWeapon
+      item: CocoonSpikegun
+    - type: AmmoCounter
+    - type: GunAimable
+      minAngle: -10
+      maxAngle: -7
+    - type: Gun
+      soundGunshot: /Audio/SS220/Weapons/Guns/CultYogg/spikegun_shot.ogg
+      soundEmpty: null
+      fireRate: 5
+      angleIncrease: 1.7 # Less than station's and syndicate rifles have when unwielded
+      angleDecay: 4 # As it is a one-handed weapon it has precision similar to one-handed weapons
+      minAngle: 15
+      maxAngle: 29
+      selectedMode: FullAuto
+      availableModes:
+      - FullAuto
+    - type: BasicEntityAmmoProvider
+      proto: Spike
+      capacity: 20
+    - type: Sprite
+      sprite: SS220/Objects/Weapons/Guns/CultYogg/spikegun.rsi
+      layers:
+        - state: icon_noammo
+          map: ["sprite"]
+    - type: Appearance
+    - type: RechargeBasicEntityAmmo
+      rechargeCooldown: 1.5
+      rechargeSound: /Audio/Weapons/Guns/MagIn/shotgun_insert.ogg
+    - type: GenericVisualizer
+      visuals:
+        enum.AmmoVisuals.HasAmmo:
+          sprite:
+            False: {state: "icon_noammo"}
+            True: {state: "icon_fullammo"}
+    - type: GunByHasAmmoVisuals
+      inhandVisuals:
+        left:
+        - state: fullammo-inhand-left
+          shader: unshaded
+        right:
+        - state: fullammo-inhand-right
+          shader: unshaded
+    - type: ShellableItem
+    - type: ContainerContainer
+      containers:
+        item-shell: !type:ContainerSlot {}
+    - type: DropOnDeath
+    - type: StuckOnEquip
+      inHandItem: true
+    - type: Tag
+      tags:
+      - YoggEquipment
+      - CultYoggStealthProvidable
 
 - type: entity
   id: Spike

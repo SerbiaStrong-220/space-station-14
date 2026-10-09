@@ -12,6 +12,7 @@
     damage:
       types:
         Piercing: 20 #ss220lowTTKUpdate
+      armourPiercing: 7 #SS220 armor piercing added
 
 - type: entity
   parent: BaseBulletPractice
@@ -40,6 +41,7 @@
       types:
         Piercing: 16 #ss220weaponBalance #Incendary rebalance
         Heat: 2 #ss220weaponBalance
+      armourPiercing: 11 #SS220 armor piercing added
 
 - type: entity
   parent: BaseBulletUranium
@@ -57,3 +59,4 @@
       types:
         Radiation: 6
         Piercing: 14 #ss220lowTTKUpdate
+      armourPiercing: 11 #SS220 armor piercing added

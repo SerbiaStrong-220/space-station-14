@@ -6,49 +6,57 @@
   id: Spitballer
   suffix: CultYogg
   components:
-  - type: ShellableItem
-  - type: ContainerContainer
-    containers:
-      item-shell: !type:ContainerSlot {}
-  - type: Gun
-    soundGunshot: /Audio/SS220/Weapons/Guns/CultYogg/spitballer_shot.ogg
-    soundEmpty: null
-    fireRate: 0.5
-    projectileSpeed: 9
-  - type: BasicEntityAmmoProvider
-    proto: SpitballerGunBullet
-    capacity: 2
-  - type: RechargeBasicEntityAmmo
-    rechargeCooldown: 12
-    rechargeSound: /Audio/SS220/Weapons/Guns/CultYogg/spitballer_reload.ogg
-  - type: Sprite
-    sprite: SS220/Objects/Weapons/Guns/CultYogg/spitballer.rsi
-    layers:
-    - state: icon
-  - type: Appearance
-  - type: Item
-    size: Ginormous
-  - type: GenericVisualizer
-    visuals:
-      enum.AmmoVisuals.HasAmmo:
-        sprite:
-          False: {state: "icon_empty"}
-          True: {state: "icon"}
-  - type: GunByHasAmmoVisuals
-    inhandVisuals:
-      left:
-      - state: fullammo-inhand-left
-        shader: unshaded
-      right:
-      - state: fullammo-inhand-right
-        shader: unshaded
-  - type: DropOnDeath
-  - type: StuckOnEquip
-    inHandItem: true
-  - type: Tag
-    tags:
-    - YoggEquipment
-    - CultYoggStealthProvidable
+    - type: CultYoggWeapon
+      item: CocoonSpitballer
+    - type: GunAimable
+      minAngle: -11
+      maxAngle: -7
+      aimedSprintSpeedModifier: 0.3
+      aimedWalkingSpeedModifier: 0.5
+    - type: Gun
+      soundGunshot: /Audio/SS220/Weapons/Guns/CultYogg/spitballer_shot.ogg
+      soundEmpty: null
+      fireRate: 0.5
+      angleIncrease: 6 # Less than station's and syndicate rifles have when unwielded
+      angleDecay: 4 # As it is a one-handed weapon it has precision similar to one-handed weapons
+      minAngle: 15
+      maxAngle: 29 # Basically doesn't matter because the fire rate is very low
+      projectileSpeed: 9
+    - type: BasicEntityAmmoProvider
+      proto: SpitballerGunBullet
+      capacity: 2
+    - type: RechargeBasicEntityAmmo
+      rechargeCooldown: 12
+      rechargeSound: /Audio/SS220/Weapons/Guns/CultYogg/spitballer_reload.ogg
+    - type: Sprite
+      sprite: SS220/Objects/Weapons/Guns/CultYogg/spitballer.rsi
+      layers:
+        - state: icon
+    - type: Appearance
+    - type: Item
+      size: Ginormous
+    - type: GenericVisualizer
+      visuals:
+        enum.AmmoVisuals.HasAmmo:
+          sprite:
+            False: {state: "icon_empty"}
+            True: {state: "icon"}
+    - type: GunByHasAmmoVisuals
+      inhandVisuals:
+        left:
+        - state: fullammo-inhand-left
+          shader: unshaded
+        right:
+        - state: fullammo-inhand-right
+          shader: unshaded
+    - type: StuckOnEquip
+      inHandItem: true
+    - type: ShellableItem
+    - type: DropOnDeath
+    - type: Tag
+      tags:
+      - YoggEquipment
+      - CultYoggStealthProvidable
 
 - type: entity
   name: explosive bubbles bullets

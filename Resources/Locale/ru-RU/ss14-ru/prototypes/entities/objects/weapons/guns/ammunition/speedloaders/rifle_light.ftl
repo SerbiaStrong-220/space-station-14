@@ -1,2 +1,4 @@
-ent-SpeedLoaderLightRifle = спидлоадер (.30 винтовочные)
-    .desc = 5-зарядная обойма для перезарядки винтовки Кардашева-Мосина. Предназначена для хранения кинетических боеприпасов общего назначения.
+#SS220-weapon-overhaul-begin
+ent-SpeedLoaderLightRifle = спидлоадер (7,62x55 винтовочные)
+    .desc = { ent-BaseItem.desc }
+#SS220-weapon-overhaul-end

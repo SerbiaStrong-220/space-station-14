@@ -99,18 +99,25 @@
     - [ServiceActorKnowledge, null]
 
 - type: entity
-  parent: [ BaseGunToy, WeaponLauncherChinaLake ]
+  parent: WeaponLauncherChinaLake
   id: WeaponLauncherChinaLakeToy
   description: PLOOP. HONK! Wait, what?
   components:
-  - type: BallisticAmmoProvider
-    whitelist:
-      tags:
-        - ToyGrenade
-    capacity: 3
-    proto: GrenadeFragToy
-    soundInsert:
-      path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: InternalMagazineChinaLakeToy
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+            - ToyGrenade
 
 - type: entity
   parent: [ BaseGunToy, WeaponSubMachineGunC20r ]
@@ -266,24 +273,62 @@
 
 - type: entity
   name: Kardashev-Mosin
-  parent: [ BaseGunToy, WeaponSniperMosin ]
+  parent: WeaponSniperMosin
   id: WeaponSniperMosinToy
   description: A weapon for hunting, or the clown's endless maints warfare against security.
   components:
-  - type: BallisticAmmoProvider
-    capacity: 10
-    proto: CartridgeCap
-    whitelist:
-      tags:
-        - CartridgeCap
-        - BulletFoam
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: InternalMagazineMosinToy
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeCap
+            - BulletFoam
 
 - type: entity
   name: Hristov
-  parent: [ BaseGunToy, WeaponSniperHristov ]
+  parent: WeaponSniperHristov
   id: WeaponSniperHristovToy
   description: A portable anti-materiel rifle. The scope is made from a glass bottle bottom. Go and do Boom! HEADSHOT!
   components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineAntiMaterialToy
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - AntiMaterialMagazineToy
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeAntiMaterielToy
+            - CartridgeCap
+            - BulletFoam
+
+- type: entity
+  id: MagazineAntiMaterialToy
+  name: "magazine (15,24x140 antimaterial)"
+  parent: BaseMagazineAntiMaterial
+  components:
+  - type: Tag
+    tags:
+    - AntiMaterialMagazineToy
   - type: BallisticAmmoProvider
     whitelist:
       tags:

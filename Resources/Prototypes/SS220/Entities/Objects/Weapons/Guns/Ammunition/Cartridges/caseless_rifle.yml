@@ -1,0 +1,15 @@
+- type: entity
+  id: CartridgeCaselessRifleHP
+  name: cartridge (8x18 caseless HPIB)
+  parent: BaseCartridgeCaselessRifle
+  description: A small caliber utilizing caseless technology, omitting conventional brass casing in favor of hardened propellant. HPIB ammo is very effective against unarmored targets.
+  components:
+  - type: CartridgeAmmo
+    proto: BulletCaselessRifleHP
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#cf0404"

@@ -1,13 +1,14 @@
-ent-BaseCartridgePistol = патрон (.35 авто)
+#SS220-weapon-overhaul-begin
+ent-BaseCartridgePistol = патрон (9x20 пистолетный)
     .desc = { ent-BaseCartridge.desc }
-ent-CartridgePistol = патрон (.35 авто)
-    .desc = Пожалуй, самый популярный калибр на рынке, используемый всеми видами пистолетов и пистолетов-пулеметов. Стандартные кинетические патроны распространены и полезны в большинстве ситуаций.
-ent-CartridgePistolPractice = патрон (.35 авто учебный)
-    .desc = Пожалуй, самый популярный калибр на рынке, используемый всеми видами пистолетов и пистолетов-пулеметов. Учебные патроны стреляют меловым снарядом, который немного пощипывает, но в остальном не причиняет длительного вреда.
-ent-CartridgePistolIncendiary = патрон (.35 авто зажигательный)
-    .desc = Пожалуй, самый популярный калибр на рынке, используемый всеми видами пистолетов и пистолетов-пулеметов. Зажигательные боеприпасы содержат самовоспламеняющееся соединение, которое поджигает цель.
-ent-CartridgePistolUranium = патрон (.35 авто урановый)
-    .desc = Пожалуй, самый популярный калибр на рынке, используемый во всех видах пистолетов и пистолетов-пулеметов. В урановых боеприпасах свинцовый сердечник пули заменен делящимся материалом, облучающим цель изнутри.
-ent-CartridgePistolSpent = патрон (.35 авто)
+ent-CartridgePistol = патрон (9x20 пистолетный)
     .desc = { ent-BaseCartridgePistol.desc }
-    .suffix = Использован
+ent-CartridgePistolHighVelocity = патрон (9x20 пистолетный высокоскоростной)
+    .desc = { ent-BaseCartridgePistol.desc }
+ent-CartridgePistolPractice = патрон (9x20 пистолетный учебный)
+    .desc = { ent-BaseCartridgePistol.desc }
+ent-CartridgePistolIncendiary = патрон (9x20 пистолетный трассирующий)
+    .desc = { ent-BaseCartridgePistol.desc }
+ent-CartridgePistolUranium = патрон (9x20 пистолетный урановый)
+    .desc = { ent-BaseCartridgePistol.desc }
+#SS220-weapon-overhaul-end

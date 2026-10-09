@@ -158,6 +158,8 @@ public sealed partial class DamageableSystem
 
         damageDone.DamageDict.EnsureCapacity(damage.DamageDict.Count);
 
+        damageDone.ArmourPiercing = damage.ArmourPiercing; // SS220 armor piercing added
+
         var dict = ent.Comp.Damage.DamageDict;
         foreach (var (type, value) in damage.DamageDict)
         {

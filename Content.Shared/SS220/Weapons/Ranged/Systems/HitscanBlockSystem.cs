@@ -19,7 +19,7 @@ public sealed class HitscanBlockSystem : EntitySystem
         if (args.Data.HitEntity == null || args.Data.Shooter == null)
             return;
 
-        var ev = new HitscanBlockAttemptEvent(ent.Comp.Damage, (EntityUid)args.Data.Shooter);
+        var ev = new HitscanBlockAttemptEvent(ent.Comp.Damage, (EntityUid)args.Data.Shooter, ent.Owner);
 
         RaiseLocalEvent((EntityUid)args.Data.HitEntity, ref ev);
 

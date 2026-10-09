@@ -27,3 +27,25 @@
         - id: WeaponRevolverBlackAngel
         - id: SpeedLoaderMagnum
           amount: 2
+
+- type: entity
+  id: ClothingBeltEnergyRevolverFilled
+  parent: ClothingBeltHolster
+  name: Energy Revolver Holster
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+        - id: WeaponEnergyGunRevolver
+
+- type: entity
+  id: ClothingBeltCorvusFilled
+  parent: ClothingBeltHolster
+  name: Corvus holster
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+        - id: WeaponPistolCorvus
+        - id: MagazinePistolHighCapacity
+          amount: 2

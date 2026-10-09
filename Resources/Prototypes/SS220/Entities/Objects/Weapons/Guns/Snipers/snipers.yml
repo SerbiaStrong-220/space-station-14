@@ -104,9 +104,20 @@
     - suitStorage
   - type: GunRequiresWield
   - type: Appearance
+  - type: GunWieldBonus
+    minAngle: -3
+    maxAngle: -13
+    angleIncrease: -0.4
+  - type: GunAimable
+    minAngle: -13
+    maxAngle: -3
   - type: Gun
     fireRate: 5 # it could as well be 1000, this is a single-shot anyway
     selectedMode: SemiAuto
+    minAngle: 17
+    maxAngle: 30
+    angleIncrease: 15
+    angleDecay: 6 #Shorter and easier to wield
     availableModes:
       - SemiAuto
     soundGunshot:

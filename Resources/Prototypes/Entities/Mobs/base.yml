@@ -71,6 +71,7 @@
   components:
   - type: Damageable
     damageContainer: Biological
+    piercingThreshold: 5 #SS220 damageable overhaul
   - type: Destructible
     thresholds:
     - trigger:

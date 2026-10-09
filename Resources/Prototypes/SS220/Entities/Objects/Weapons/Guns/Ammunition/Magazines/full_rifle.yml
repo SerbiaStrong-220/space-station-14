@@ -1,0 +1,103 @@
+- type: entity
+  id: BaseMagazineFullRifle
+  name: "magazine (7,62x55 rifle)"
+  parent: [ BaseItem, BaseSecurityContraband ]
+  components:
+  - type: Tag
+    tags:
+    - FullRifleMagazine
+  - type: Item
+    size: Small
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    capacity: 20
+    whitelist:
+      tags:
+        - FullRifleCartridge
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/full_rifle_mag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  id: MagazineFullRifleFMJ
+  name: "magazine (7,62x55 rifle FMJ)"
+  parent: BaseMagazineFullRifle
+  components:
+  - type: BallisticAmmoProvider
+    proto: FullRifleCartridge
+
+- type: entity
+  id: MagazineFullRifleAP
+  name: "magazine (7,62x55 rifle AP)"
+  parent: BaseMagazineFullRifle
+  components:
+  - type: BallisticAmmoProvider
+    proto: FullRifleCartridgeAP
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#65fe08"
+
+- type: entity
+  id: MagazineFullRifleHP
+  name: "magazine (7,62x55 rifle HPIB)"
+  parent: BaseMagazineFullRifle
+  components:
+  - type: BallisticAmmoProvider
+    proto: FullRifleCartridgeHP
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#cf0404"
+
+- type: entity
+  id: MagazineFullRifleIncendiary
+  name: "magazine (7,62x55 rifle tracer)"
+  parent: BaseMagazineFullRifle
+  components:
+  - type: BallisticAmmoProvider
+    proto: FullRifleCartridgeIncendiary
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#dbdbdb"
+
+- type: entity
+  id: MagazineFullRifleAPM2
+  name: "magazine (7,62x55 rifle APM2)"
+  parent: BaseMagazineFullRifle
+  components:
+  - type: BallisticAmmoProvider
+    proto: FullRifleCartridgeAPM2
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#9500ff"

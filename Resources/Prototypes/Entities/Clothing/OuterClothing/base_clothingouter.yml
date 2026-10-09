@@ -167,6 +167,7 @@
         Piercing: 0.95
         Heat: 0.90
         Radiation: 0.25
+        Shock: 0.3 #SS220 weapon overhaul
   - type: ToggleableClothing
     slot: head
   - type: ContainerContainer

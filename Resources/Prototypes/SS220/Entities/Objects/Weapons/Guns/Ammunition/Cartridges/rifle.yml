@@ -1,0 +1,32 @@
+- type: entity
+  id: CartridgeRifleAP
+  name: cartridge (6,3x47 rifle AP)
+  parent: BaseCartridgeRifle
+  description: A modern intermediate cartridge for combat rifles. This one has a uranium core that is especially good against armor.
+  components:
+  - type: CartridgeAmmo
+    proto: BulletRifleAP
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#65fe08"
+
+- type: entity
+  id: CartridgeRifleHP
+  name: cartridge (6,3x47 rifle HPIB)
+  parent: BaseCartridgeRifle
+  description: A modern intermediate cartridge for combat rifles. This one has a cavity full of hard polymer instead of it's core.
+  components:
+  - type: CartridgeAmmo
+    proto: BulletRifleHP
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#cf0404"
+

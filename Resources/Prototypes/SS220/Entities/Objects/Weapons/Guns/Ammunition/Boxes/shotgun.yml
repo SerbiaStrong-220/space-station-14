@@ -1,0 +1,59 @@
+- type: entity
+  parent: AmmoProviderShotgunShell
+  id: BoxShotgunHP
+  name: ammunition box (18,5x72 HPIB)
+  description: A cardboard box of 18,5x72 shotgun shells.
+  components:
+    - type: BallisticAmmoProvider
+      proto: ShellShotgunSlugHP
+    - type: MagazineVisuals
+      magState: mag-incend
+      steps: 5
+      zeroVisible: false
+    - type: Sprite
+      layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-incend-1
+        map: ["enum.GunVisualLayers.Mag"]
+      - state: slug
+
+- type: entity
+  parent: AmmoProviderShotgunShell
+  id: BoxShotgunHEI
+  name: ammunition box (18,5x72 HEI)
+  description: A cardboard box of 18,5x72 shotgun shells.
+  components:
+    - type: BallisticAmmoProvider
+      proto: ShellShotgunSlugMagnesium
+    - type: MagazineVisuals
+      magState: mag-uranium
+      steps: 5
+      zeroVisible: false
+    - type: Sprite
+      layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-uranium-1
+        map: ["enum.GunVisualLayers.Mag"]
+      - state: flare
+
+- type: entity
+  parent: AmmoProviderShotgunShell
+  id: BoxShotgunHE
+  name: ammunition box (18,5x72 HE)
+  description: A cardboard box of 18,5x72 shotgun shells.
+  components:
+    - type: BallisticAmmoProvider
+      proto: ShellShotgunSlugExplosive
+    - type: MagazineVisuals
+      magState: mag-uranium
+      steps: 5
+      zeroVisible: false
+    - type: Sprite
+      layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-uranium-1
+        map: ["enum.GunVisualLayers.Mag"]
+      - state: tranquilizer

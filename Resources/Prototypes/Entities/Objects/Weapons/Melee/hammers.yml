@@ -26,8 +26,8 @@
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Blunt: 10
-        Structural: 10
+        Blunt: 18 #SS220 weapon overhaul
+        Structural: 20 #SS220 weapon overhaul
   - type: Item
     size: Large
 
@@ -69,8 +69,8 @@
   - type: DamageOtherOnHit
     damage:
       types:
-        Blunt: 15
-        Structural: 15
+        Blunt: 20 #SS220 weapon overhaul
+        Structural: 35 #SS220 weapon overhaul
   - type: Item
     size: Ginormous
 
@@ -110,7 +110,7 @@
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Blunt: 15
-        Structural: 15
+        Blunt: 20 #SS220 weapon overhaul
+        Structural: 35 #SS220 weapon overhaul
   - type: Item
     size: Ginormous

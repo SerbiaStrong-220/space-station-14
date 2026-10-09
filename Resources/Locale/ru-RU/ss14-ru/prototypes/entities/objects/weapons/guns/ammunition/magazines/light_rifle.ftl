@@ -1,15 +1,21 @@
-ent-BaseMagazineLightRifle = магазин (.30 винтовочные)
+#SS220-weapon-overhaul-begin
+ent-BaseMagazineLightRifle = магазин (7,62x41 промежуточные)
     .desc = { ent-BaseItem.desc }
-ent-MagazineLightRifleBox = короб патронов L6 SAW (.30 винтовочные)
-    .desc = Короб с лентой на 100 патронов калибра .30, используемая в ручных пулеметах, таких как L6. Предназначены для хранения кинетических боеприпасов общего назначения.
-ent-MagazineLightRifle = магазин (.30 винтовочные)
-    .desc = Изогнутый двухрядный магазин на 30 патронов для боевых винтовок. Предназначен для хранения кинетических боеприпасов общего назначения.
-ent-MagazineLightRifleEmpty = магазин (.30 винтовочные любые)
-    .desc = Изогнутый двухрядный магазин на 30 патронов для боевых винтовок.
+ent-MagazineLightRifleBox = короб патронов L6 SAW (7,62x41 промежуточные
+    .desc = { ent-BaseMagazineLightRifle.desc }
+ent-MagazineLightRifle = магазин (7,62x41 промежуточные)
+    .desc = { ent-BaseMagazineLightRifle.desc }
+ent-MagazineLightRifleEmpty = магазин (7,62x41 промежуточные любые)
     .suffix = Пустой
-ent-MagazineLightRiflePractice = магазин (.30 винтовочные учебные)
-    .desc = Изогнутый двухрядный магазин на 30 патронов для боевых винтовок. Предназначен для хранения безопасных учебных боеприпасов.
-ent-MagazineLightRifleUranium = магазин (.30 винтовочные урановые)
-    .desc = Изогнутый двухрядный магазин на 30 патронов для боевых винтовок. Предназначен для хранения боеприпасов с экзотическим урановым сердечником.
-ent-MagazineLightRifleIncendiary = магазин (.30 винтовочные зажигательные)
-    .desc = Изогнутый двухрядный магазин на 30 патронов для боевых винтовок. Предназначен для хранения самовоспламеняющихся зажигательных боеприпасов.
+    .desc = { ent-MagazineLightRifle.desc }
+ent-MagazineLightRiflePractice = магазин (7,62x41 промежуточные учебные)
+    .desc = { ent-BaseMagazineLightRifle.desc }
+ent-MagazineLightRifleUranium = магазин (7,62x41 промежуточные урановые)
+    .desc = { ent-BaseMagazineLightRifle.desc }
+ent-MagazineLightRifleIncendiary = магазин (7,62x41 промежуточные трассирующие)
+    .desc = { ent-MagazineLightRifle.desc }
+ent-MagazineLightRifleMaxim = дисковый магазин (7,62x41 промежуточные)
+    .desc = { ent-BaseMagazineLightRifle.desc }
+ent-MagazineLightRiflePkBox = короб патронов ПК (7,62x41 промежуточные)
+    .desc = { ent-BaseMagazineLightRifle.desc }
+#SS220-weapon-overhaul-end

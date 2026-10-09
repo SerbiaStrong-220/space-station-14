@@ -1,0 +1,96 @@
+- type: entity
+  abstract: true
+  id: BaseInternalMagazine
+  name: "magazine (internal)"
+  parent: [ BaseItem, BaseSecurityContraband ]
+  components:
+  - type: Item
+    size: Small
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    capacity: 7
+    whitelist:
+      tags:
+        - CartridgeLightRifle
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+
+- type: entity
+  id: InternalMagazineMosin
+  parent: MagazineFullRifleFMJ
+  name: "magazine (internal)"
+  components:
+  - type: Item
+    size: Small
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    capacity: 4
+
+- type: entity
+  id: InternalMagazineMosinToy
+  parent: InternalMagazineMosin
+  name: "magazine (internal)"
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    capacity: 4
+    proto: CartridgeCap
+    whitelist:
+      tags:
+        - CartridgeCap
+        - BulletFoam
+
+- type: entity
+  id: InternalMagazineShotgun
+  parent: BaseMagazineFullRifle
+  name: "magazine (internal)"
+  components:
+  - type: Item
+    size: Small
+  - type: BallisticAmmoProvider
+    proto: ShellShotgun
+    mayTransfer: true
+    capacity: 7
+    whitelist:
+      tags:
+        - ShellShotgun
+
+- type: entity
+  id: InternalMagazineShotgunShort
+  parent: InternalMagazineShotgun
+  name: "magazine (internal)"
+  components:
+  - type: BallisticAmmoProvider
+    proto: ShellShotgun
+    mayTransfer: true
+    capacity: 4
+    whitelist:
+      tags:
+        - ShellShotgun
+
+- type: entity
+  id: InternalMagazineChinaLake
+  parent: InternalMagazineShotgun
+  name: "magazine (internal)"
+  components:
+  - type: BallisticAmmoProvider
+    proto: GrenadeFrag
+    mayTransfer: true
+    capacity: 3
+    whitelist:
+      tags:
+        - Grenade
+
+- type: entity
+  id: InternalMagazineChinaLakeToy
+  parent: InternalMagazineShotgun
+  name: "magazine (internal)"
+  components:
+  - type: BallisticAmmoProvider
+    proto: GrenadeFragToy
+    mayTransfer: true
+    capacity: 3
+    whitelist:
+      tags:
+        - ToyGrenade

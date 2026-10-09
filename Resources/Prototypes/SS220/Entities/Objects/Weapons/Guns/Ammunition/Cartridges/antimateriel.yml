@@ -1,0 +1,72 @@
+- type: entity
+  parent: [ BaseCartridge]
+  id: CartridgeAntiMaterielAP
+  name: cartridge (15,24x140 AP)
+  description: An antimaterial uranium-cored AP round designed to get through even the toughest armor of infantry, LAVs and mechs.
+  components:
+  - type: Tag
+    tags:
+    - CartridgeAntiMateriel
+  - type: CartridgeAmmo
+    proto: BulletAntiMaterielAP
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+    - state: tip
+      map: [ "enum.AmmoVisualLayers.Tip" ]
+      color: "#65fe08"
+  - type: Appearance
+  - type: SpentAmmoVisuals
+  - type: StaticPrice
+    price: 10
+
+- type: entity
+  parent: [ BaseCartridge]
+  id: CartridgeAntiMaterielHP
+  name: cartridge (15,24x140 HPIB)
+  description: This enormous HPIB round, designated to use against megafauna, is powerful enough to shred even light-armored targets to pieces.
+  components:
+  - type: Tag
+    tags:
+    - CartridgeAntiMateriel
+  - type: CartridgeAmmo
+    proto: BulletAntiMaterielHP
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+    - state: tip
+      map: [ "enum.AmmoVisualLayers.Tip" ]
+      color: "#cf0404"
+  - type: Appearance
+  - type: SpentAmmoVisuals
+  - type: StaticPrice
+    price: 10
+
+- type: entity
+  parent: [ BaseCartridge]
+  id: CartridgeAntiMaterielExplosive
+  name: cartridge (15,24x140 HE)
+  description: 15,24x140 is large enough to hold both an explosive charge and a steel penetrator. This round is designated to be used agains LAVs.
+  components:
+  - type: Tag
+    tags:
+    - CartridgeAntiMateriel
+  - type: CartridgeAmmo
+    proto: BulletAntiMaterielExplosive
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
+    layers:
+      - state: base
+        map: ["enum.AmmoVisualLayers.Base"]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#0a0a0a"
+  - type: Appearance
+  - type: SpentAmmoVisuals
+  - type: StaticPrice
+    price: 10
+
