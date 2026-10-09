@@ -46,7 +46,17 @@ public sealed partial class ManageDeliveryEui : BaseEui
     public override EuiStateBase GetNewState()
     {
         if (!_entityManager.TryGetComponent<DeliveryComponent>(_targetEntity, out var delivery))
-            return new ManageDeliveryEuiState(_targetName);
+        {
+            return new ManageDeliveryEuiState(
+                targetName: _targetName,
+                baseSpesoReward: 0,
+                hasTimer: false,
+                timeLeftSeconds: 0,
+                recipientName: null,
+                recipientJobTitle: null,
+                contentsProtoId: null,
+                crew: []);
+        }
 
         var hasTimer = _entityManager.TryGetComponent<DeliveryPriorityComponent>(_targetEntity, out _);
         var contentsProtoId = GetContents(delivery);
@@ -55,7 +65,7 @@ public sealed partial class ManageDeliveryEui : BaseEui
             targetName: _targetName,
             baseSpesoReward: delivery.BaseSpesoReward,
             hasTimer: hasTimer,
-            timeLeftSeconds: hasTimer ? (int)_modifier.GetTimeLeft(_targetEntity).TotalSeconds : 0,
+            timeLeftSeconds: (int)_modifier.GetTimeLeft(_targetEntity).TotalSeconds,
             recipientName: delivery.RecipientName,
             recipientJobTitle: delivery.RecipientJobTitle,
             contentsProtoId: contentsProtoId,

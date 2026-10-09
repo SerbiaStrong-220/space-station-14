@@ -139,8 +139,11 @@ public sealed partial class DeliveryContentsWindow : DefaultWindow
 
     private void OnItemPressed(BaseButton.ButtonEventArgs args, ListData data)
     {
-        _selected = data as DeliveryItemData;
-        ReplaceButton.Disabled = _selected == null;
+        if (data is not DeliveryItemData item)
+            return;
+
+        _selected = item;
+        ReplaceButton.Disabled = false;
     }
 
     private void ClearSelection()

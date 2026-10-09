@@ -7,48 +7,80 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.SS220.Administration;
 
 [Serializable, NetSerializable]
-public sealed class ManageDeliveryEuiState(
-    string targetName,
-    int baseSpesoReward = 0,
-    bool hasTimer = false,
-    int timeLeftSeconds = 0,
-    string? recipientName = null,
-    string? recipientJobTitle = null,
-    string? contentsProtoId = null,
-    List<(uint, CrewManifestEntry)>? crew = null) : EuiStateBase
+public sealed class ManageDeliveryEuiState : EuiStateBase
 {
-    public string TargetName { get; } = targetName;
-    public int BaseSpesoReward { get; } = baseSpesoReward;
-    public bool HasTimer { get; } = hasTimer;
-    public int TimeLeftSeconds { get; } = timeLeftSeconds;
-    public string? RecipientName { get; } = recipientName;
-    public string? RecipientJobTitle { get; } = recipientJobTitle;
-    public string? ContentsProtoId { get; } = contentsProtoId;
-    public List<(uint, CrewManifestEntry)> Crew { get; } = crew ?? [];
+    public string TargetName { get; }
+    public int BaseSpesoReward { get; }
+    public bool HasTimer { get; }
+    public int TimeLeftSeconds { get; }
+    public string? RecipientName { get; }
+    public string? RecipientJobTitle { get; }
+    public string? ContentsProtoId { get; }
+    public List<(uint, CrewManifestEntry)> Crew { get; }
+
+    public ManageDeliveryEuiState(
+        string targetName,
+        int baseSpesoReward,
+        bool hasTimer,
+        int timeLeftSeconds,
+        string? recipientName,
+        string? recipientJobTitle,
+        string? contentsProtoId,
+        List<(uint, CrewManifestEntry)> crew)
+    {
+        TargetName = targetName;
+        BaseSpesoReward = baseSpesoReward;
+        HasTimer = hasTimer;
+        TimeLeftSeconds = timeLeftSeconds;
+        RecipientName = recipientName;
+        RecipientJobTitle = recipientJobTitle;
+        ContentsProtoId = contentsProtoId;
+        Crew = crew;
+    }
 }
 
 [Serializable, NetSerializable]
-public sealed class SetDeliveryRewardMessage(int reward) : EuiMessageBase
+public sealed class SetDeliveryRewardMessage : EuiMessageBase
 {
-    public int Reward { get; } = reward;
+    public int Reward { get; }
+
+    public SetDeliveryRewardMessage(int reward)
+    {
+        Reward = reward;
+    }
 }
 
 [Serializable, NetSerializable]
-public sealed class SetDeliveryRecipientMessage(uint? recordId) : EuiMessageBase
+public sealed class SetDeliveryRecipientMessage : EuiMessageBase
 {
-    public uint? RecordId { get; } = recordId;
+    public uint? RecordId { get; }
+
+    public SetDeliveryRecipientMessage(uint? recordId)
+    {
+        RecordId = recordId;
+    }
 }
 
 [Serializable, NetSerializable]
-public sealed class SetDeliveryTimerMessage(int seconds) : EuiMessageBase
+public sealed class SetDeliveryTimerMessage : EuiMessageBase
 {
-    public int Seconds { get; } = seconds;
+    public int Seconds { get; }
+
+    public SetDeliveryTimerMessage(int seconds)
+    {
+        Seconds = seconds;
+    }
 }
 
 [Serializable, NetSerializable]
-public sealed class ReplaceDeliveryContentsMessage(string protoId) : EuiMessageBase
+public sealed class ReplaceDeliveryContentsMessage : EuiMessageBase
 {
-    public string ProtoId { get; } = protoId;
+    public string ProtoId { get; }
+
+    public ReplaceDeliveryContentsMessage(string protoId)
+    {
+        ProtoId = protoId;
+    }
 }
 
 [Serializable, NetSerializable]
