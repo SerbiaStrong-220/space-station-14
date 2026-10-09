@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 10/04/2026 16:05:19
-  entityCount: 40715
+  time: 08/27/2026 15:57:41
+  entityCount: 40713
 maps:
 - 1
 grids:
@@ -43806,7 +43806,7 @@ entities:
       pos: -0.5,53.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -36820.582
+      secondsUntilStateChange: -36726.05
       state: Opening
     - type: AccessReader
       accessListsOriginal: []
@@ -208132,7 +208132,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 42.5,-66.5
       parent: 2
-  - uid: 40713
+  - uid: 40711
     components:
     - type: Transform
       anchored: False
@@ -226769,13 +226769,13 @@ entities:
     - type: Transform
       pos: -83.5,-47.5
       parent: 2
-  - uid: 40714
+  - uid: 40712
     components:
     - type: Transform
       anchored: False
       pos: -89.984375,-43.984375
       parent: 1
-  - uid: 40715
+  - uid: 40713
     components:
     - type: Transform
       anchored: False
@@ -240466,23 +240466,6 @@ entities:
     - type: Transform
       pos: -50.5,-54.5
       parent: 2
-- proto: SpawnPointActualFuckingLawyer
-  entities:
-  - uid: 32416
-    components:
-    - type: Transform
-      pos: -60.5,-50.5
-      parent: 2
-  - uid: 32417
-    components:
-    - type: Transform
-      pos: -42.5,-12.5
-      parent: 2
-  - uid: 32418
-    components:
-    - type: Transform
-      pos: -42.5,-7.5
-      parent: 2
 - proto: SpawnPointAtmos
   entities:
   - uid: 32353
@@ -240617,13 +240600,6 @@ entities:
     components:
     - type: Transform
       pos: 17.5,26.5
-      parent: 2
-- proto: SpawnPointBoxer
-  entities:
-  - uid: 40711
-    components:
-    - type: Transform
-      pos: 41.5,8.5
       parent: 2
 - proto: SpawnPointBrigmedic
   entities:
@@ -240840,6 +240816,23 @@ entities:
     components:
     - type: Transform
       pos: 34.5,31.5
+      parent: 2
+- proto: SpawnPointLawyer
+  entities:
+  - uid: 32416
+    components:
+    - type: Transform
+      pos: -60.5,-50.5
+      parent: 2
+  - uid: 32417
+    components:
+    - type: Transform
+      pos: -42.5,-12.5
+      parent: 2
+  - uid: 32418
+    components:
+    - type: Transform
+      pos: -42.5,-7.5
       parent: 2
 - proto: SpawnPointLibrarian
   entities:
@@ -241638,13 +241631,6 @@ entities:
     components:
     - type: Transform
       pos: -70.5,-29.5
-      parent: 2
-- proto: SpawnPointZookeeper
-  entities:
-  - uid: 40712
-    components:
-    - type: Transform
-      pos: 41.5,10.5
       parent: 2
 - proto: SpawnVendingMachineRestockFoodDrink
   entities:
