@@ -1,0 +1,19 @@
+# Empty drinkable containers
+
+- type: entity
+  parent: [DrinkVisualsAllFilled, DrinkBaseMaterialPlastic, DrinkBase, DrinkBaseOpenable]
+  id: DrinkBottle
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Drinks/waterbottle.rsi
+  - type: SolutionContainerVisuals
+    maxFillLevels: 7
+    inHandsMaxFillLevels: 2
+    inHandsFillBaseName: -fill-
+  - type: Tag
+    tags:
+      - WaterBottle
