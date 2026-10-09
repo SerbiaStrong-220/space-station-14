@@ -833,8 +833,8 @@
   - type: AccessReader
     access: [[ "CentralCommand" ]]
   - type: CommunicationsConsole
-    title: comms-console-announcement-title-centcom
-    color: "#1d8bad"
+    title: comms-console-announcement-title-centcom # SS220-custom-centcomm-name
+    color: "#1d8bad"  # SS220-custom-centcomm-color
     canShuttle: false
     global: true
   - type: Computer

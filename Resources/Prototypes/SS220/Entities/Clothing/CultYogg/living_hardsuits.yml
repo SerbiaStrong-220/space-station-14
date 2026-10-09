@@ -1,8 +1,8 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-  parent: [ClothingOuterHardsuitBase, CultYoggRestrictedItem]
-  id: ClothingOuterHardsuitCultYogg
+  parent: [ClothingOuterHardsuitBase, BaseRestrictedLivingItem]
+  id: ClothingOuterHardsuitLiving
   suffix: CultYogg
   name: Hardsuit corrupted by a Cult
   description: Corrupted pile of incomprehensible substane, somehowe prowiding great defence.
@@ -32,16 +32,18 @@
     sprintModifier: 0.80
   - type: HeldSpeedModifier
   - type: ToggleableClothing
-    clothingPrototype: ClothingHeadHelmetHardsuitCultYogg
+    clothingPrototype: ClothingHeadHelmetHardsuitLiving
+  - type: DropOnDeath
   - type: StuckOnEquip
   - type: Tag
     tags:
+    - YoggEquipment
     - WhitelistChameleon
     - CultYoggStealthProvidable
 
 - type: entity
   parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
-  id: ClothingHeadHelmetHardsuitCultYogg
+  id: ClothingHeadHelmetHardsuitLiving
   name: Hardsuit helmet corrupted by a Cult
   description: Corrupted pile of incomprehensible substane, somehowe prowiding great defence.
   components:
