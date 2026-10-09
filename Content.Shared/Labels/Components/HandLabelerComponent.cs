@@ -28,6 +28,11 @@ public sealed partial class HandLabelerComponent : Component
     /// </summary>
     [DataField]
     public EntityWhitelist? Blacklist;
+
+    //SS220-LabelColors begin
+    [DataField]
+    public Color AssignedLabelColor = Color.White;
+    //SS220-LabelColors end
 }
 
 [Serializable, NetSerializable]
@@ -36,4 +41,6 @@ public sealed class HandLabelerComponentState(string assignedLabel) : IComponent
     public string AssignedLabel = assignedLabel;
 
     public int MaxLabelChars;
+
+    public Color AssignedLabelColor = Color.White; //SS220-LabelColors
 }

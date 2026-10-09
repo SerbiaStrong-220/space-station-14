@@ -2,8 +2,8 @@
 
 - type: entity
   name: spikegun cult yogg
-  parent: [BaseItem, CultYoggRestrictedItem]
-  id: SpikegunCultYogg
+  parent: [BaseItem, BaseRestrictedLivingItem, BaseLivingCuttableEquipment]
+  id: Spikegun
   suffix: CultYogg
   components:
     - type: CultYoggWeapon
@@ -31,8 +31,6 @@
       layers:
         - state: icon_noammo
           map: ["sprite"]
-    - type: Item
-      size: Ginormous
     - type: Appearance
     - type: RechargeBasicEntityAmmo
       rechargeCooldown: 1.5
@@ -51,13 +49,17 @@
         right:
         - state: fullammo-inhand-right
           shader: unshaded
+    - type: ShellableItem
+    - type: ContainerContainer
+      containers:
+        item-shell: !type:ContainerSlot {}
+    - type: DropOnDeath
     - type: StuckOnEquip
       inHandItem: true
     - type: Tag
       tags:
+      - YoggEquipment
       - CultYoggStealthProvidable
-
-
 
 - type: entity
   id: Spike
@@ -68,7 +70,7 @@
   components:
   - type: Reflective
     reflective:
-      - NonEnergy
+    - NonEnergy
   - type: Sprite
     noRot: false
     sprite: SS220/Objects/Weapons/Guns/CultYogg/spikegun.rsi

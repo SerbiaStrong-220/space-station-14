@@ -1036,12 +1036,42 @@ GrenadeEMPArta: CartridgeArtilleryShellEMP
 WeaponLaserCarabine:  WeaponLaserCarbineIK60
 
 # 2026-07-17 - SS220 Cult hotfix 25 #dek this after some time
-CultYoggCocoonBeach: CocoonBeach
-CultYoggCocoonClaw: CocoonClaw
-CultYoggCocoonSpikegun: CocoonSpikegun
-CultYoggCocoonVenomancer: CocoonVenomancer
-CultYoggCocoonSpitballer: CocoonSpitballer
-CultYoggCocoonSedativeSting: CocoonSedativeSting
+CultYoggCocoonBeach: ShellScourge
+CultYoggCocoonClaw: ShellPincer
+CultYoggCocoonSpikegun: ShellSpikegun
+CultYoggCocoonVenomancer: ShellVenomancer
+CultYoggCocoonSpitballer: ShellSpitballer
+CultYoggCocoonSedativeSting: ShellSedativeSting
 
 # 2026-07-17 - SS220 Sponsor objects update
 ClothingSponsorScarfTube: ClothingMaskNeckGaiter
+
+# 2026-10-03 - SS220 Remove corvax centcom console
+CentcomComputerComms: CentcommComputerComms
+CentcomCommsComputerCircuitboard: CentcommCommsComputerCircuitboard
+# 2026-10-04 - SS220 Cult Yogg cocoon to shell rename
+CocoonSpikegun: ShellSpikegun
+CocoonVenomancer: ShellVenomancer
+CocoonSpitballer: ShellSpitballer
+CocoonClaw: ShellPincer
+CocoonBeach: ShellScourge
+CocoonSedativeSting: ShellSedativeSting
+CocoonDagonsScale: ShellDagonsScale
+
+# 2026-10-04 - SS220 living equipment prototype renames
+SpikegunCultYogg: Spikegun
+ClawCultYogg: Pincer
+BeachCultYogg: Scourge
+SedativeStingCultYogg: SedativeSting
+ClothingBackpackCultYogg: ClothingBackpackLiving
+ClothingBackpackSatchelCultYogg: ClothingBackpackSatchelLiving
+ClothingBackpackDuffelCultYogg: ClothingBackpackDuffelLiving
+ClothingOuterHardsuitCultYogg: ClothingOuterHardsuitLiving
+ClothingHeadHelmetHardsuitCultYogg: ClothingHeadHelmetHardsuitLiving
+ProductStrangeFruitCultYogg: ProductStrangeFruit
+CultHandcuffs: HandcuffsLiving
+FoodLubroShroomCult: FoodLubroShroom
+FoodLubroShroomCultDead: FoodLubroShroomDead
+FoodMikoTrapShroomCult: FoodMikoTrapShroom
+ShellClaw: ShellPincer
+ShellBeach: ShellScourge

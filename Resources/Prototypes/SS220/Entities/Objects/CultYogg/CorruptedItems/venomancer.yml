@@ -2,12 +2,14 @@
 
 - type: entity
   name: venomancer
-  parent: [BaseItem, CultYoggRestrictedItem]
+  parent: [BaseItem, BaseRestrictedLivingItem, BaseLivingCuttableEquipment]
   suffix: CultYogg
   id: Venomancer
   components:
-  - type: CultYoggWeapon
-    item: CocoonVenomancer
+  - type: ShellableItem
+  - type: ContainerContainer
+    containers:
+      item-shell: !type:ContainerSlot {}
   - type: AmmoCounter
   - type: GunAimable
     minAngle: -13
@@ -52,10 +54,12 @@
       right:
       - state: fullammo-inhand-right
         shader: unshaded
+  - type: DropOnDeath
   - type: StuckOnEquip
     inHandItem: true
   - type: Tag
     tags:
+    - YoggEquipment
     - CultYoggStealthProvidable
 
 
@@ -63,7 +67,7 @@
   id: VenomancerThorn
   name: venomancer thorn
   categories: [ HideSpawnMenu ]
-  parent: [BaseItem, CultYoggRestrictedItem]
+  parent: [BaseItem, BaseRestrictedLivingItem]
   components:
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/Ammunition/CultYogg/venomancer_thorn.rsi
