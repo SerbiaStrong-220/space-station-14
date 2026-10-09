@@ -93,6 +93,15 @@ public sealed partial class DamageableComponent : Component
 
     [DataField]
     public FixedPoint2? HealthBarThreshold;
+
+    // SS220 penetration refactor begin
+    /// <summary>
+    /// The minimum effective damage required for a projectile to penetrate this entity.
+    /// Effective damage is the projectile's damage of a required type plus its armor penetration.
+    /// </summary>
+    [DataField]
+    public FixedPoint2 PenetrationThreshold = 0;
+    // SS220 penetration refactor end
 }
 
 [Serializable, NetSerializable]
