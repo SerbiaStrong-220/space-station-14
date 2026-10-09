@@ -239,6 +239,23 @@
   id: WeaponShotgunEnforcerRubber
   suffix: Non-Lethal
   components:
+  #SS220 weapon overhaul begin
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: InternalMagazineShotgunLessLethal
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+            - ShellShotgun
+  #SS220 weapon overhaul end
   - type: Gun # Corvax-Guns
     soundGunshot:
       path: /Audio/Corvax/Weapons/Guns/Gunshots/shotgun_metal.ogg
