@@ -57,6 +57,11 @@ public sealed partial class ExperienceEditorWindow : FancyWindow
             _experienceEditor.SendChange(new EntityUid(ExperienceEntityOption.SelectedId), GetChangedData());
         };
 
+        RemoveAdminChangesButton.OnPressed += (_) =>
+        {
+            _experienceEditor.SendChange(new EntityUid(ExperienceEntityOption.SelectedId), null);
+        };
+
         KnowledgeOption.OnItemSelected += OnKnowledgeOptionSelected;
 
         SelectEntity(ExperienceEntityOption.SelectedId);

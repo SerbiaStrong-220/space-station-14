@@ -43,15 +43,21 @@ public sealed partial class ExperienceEditorSystem : EntitySystem
 
         var experienceAddition = EnsureComp<ExperienceAdditionComponent>(targetEntity);
 
+        if (ev.Data is not { } additionData)
+        {
+            _experienceAddition.RemoveAdminAdded(targetEntity);
+            return;
+        }
+
         // TODO: make it definable by admin
         experienceAddition.Forced = true;
         DirtyField(targetEntity, experienceAddition, nameof(ExperienceAdditionComponent.Forced));
 
-        var correctSkillDict = ev.Data.SkillDictionary.Values
+        var correctSkillDict = additionData.SkillDictionary.Values
             .SelectMany(list => list)
             .ToDictionary(view => view.SkillTreeId, item => item.Info);
 
-        _experienceAddition.UpsertSpecifier(targetEntity, ExperienceAddSource.Admin, new ExperienceAddSpecifier(0, ev.Data.Knowledges, correctSkillDict));
+        _experienceAddition.UpsertSpecifier(targetEntity, ExperienceAddSource.Admin, new ExperienceAddSpecifier(0, additionData.Knowledges, correctSkillDict));
     }
 
     private void OnChangePlayerRequest(ChangeEntityExperiencePlayerRequest ev, EntitySessionEventArgs args)

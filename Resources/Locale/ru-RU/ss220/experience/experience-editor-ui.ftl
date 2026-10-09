@@ -3,6 +3,7 @@ experience-editor-verb-text = Редактор опыта
 experience-view-editor-title = Редактор опыта
 
 experience-view-editor-submit-button-text = Оправить изменения
+experience-view-editor-remove-admin-changes-button-text = Откатить изменения
 
 experience-editor-knowledge-name = Знания
 

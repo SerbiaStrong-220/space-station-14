@@ -47,7 +47,7 @@ public sealed partial class ExperienceEditorSystem : EntitySystem
         _window?.SelectEntity(GetEntity(args.Target.Value));
     }
 
-    public void SendChange(EntityUid target, ExperienceData data)
+    public void SendChange(EntityUid target, ExperienceData? data)
     {
         RaiseNetworkEvent(new ChangeEntityExperienceAdminRequest(GetNetEntity(target), data));
     }
