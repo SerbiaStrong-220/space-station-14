@@ -21,6 +21,7 @@ public sealed partial class RepairableSystem : EntitySystem
     {
         SubscribeLocalEvent<RepairableComponent, InteractUsingEvent>(Repair);
         SubscribeLocalEvent<RepairableComponent, RepairDoAfterEvent>(OnRepairDoAfter);
+        InitializeBorgRepair(); // SS220 borg self welding
     }
 
     private void OnRepairDoAfter(Entity<RepairableComponent> ent, ref RepairDoAfterEvent args)
@@ -99,6 +100,14 @@ public sealed partial class RepairableSystem : EntitySystem
     {
         if (args.Handled)
             return;
+
+        // SS220 borg self welding begin
+        if (UsesBorgRepair(ent))
+        {
+            OnBorgInteractUsing(ent, ref args);
+            return;
+        }
+        // SS220 borg self welding end
 
         // Only try repair the target if it is damaged
         if (_damageableSystem.GetTotalDamage(ent.Owner) == 0)
