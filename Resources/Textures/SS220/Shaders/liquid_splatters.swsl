@@ -1,5 +1,4 @@
 uniform highp float intensity;
-uniform highp float time_created;
 uniform highp vec3 color;
 uniform lowp float color_darkness;
 
@@ -23,16 +22,16 @@ highp float noise(highp vec2 p){
 void fragment() {
   highp vec4 base = zTexture(UV);
   highp float coverage = clamp(intensity, 0.0, 1.0);
-  highp vec2 uv = UV2;
-  highp vec2 pixelUv = floor(uv * 32.0) / 32.0;
+
+  highp vec2 texel = floor(UV / TEXTURE_PIXEL_SIZE);
+  highp vec2 pixelUv = texel / 32.0; // 32 = noise scale, not sprite size
 
   highp float largeNoise = noise(pixelUv * 5.0);
   highp float detailNoise = noise(pixelUv * 11.0 + vec2(13.7, 4.1));
   highp float maskNoise = largeNoise * 0.75 + detailNoise * 0.25;
 
   highp float threshold = mix(1.1, -0.1, coverage);
-  highp float edgeWidth = max(fwidth(maskNoise) * 2.0, 0.02);
-  highp float splatterMask = smoothstep(threshold - edgeWidth, threshold + edgeWidth, maskNoise);
+  highp float splatterMask = step(threshold, maskNoise);
 
   highp float alphaNoise = noise(pixelUv * 8.0 + vec2(21.3, 6.8));
   highp float overlayAlpha = splatterMask * mix(0.3, 0.9, alphaNoise);

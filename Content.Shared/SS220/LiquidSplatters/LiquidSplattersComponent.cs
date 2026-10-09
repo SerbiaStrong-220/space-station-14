@@ -15,7 +15,7 @@ public sealed partial class LiquidSplattersComponent : Component
     public Color Color = new(.65f, 0f, 0f);
 
     [DataField, AutoNetworkedField]
-    public float ColorDarkness = .2f;
+    public float ColorDarkness = .3f;
 
     [DataField, AutoNetworkedField]
     public String ContainerName = "splatters";
