@@ -71,7 +71,7 @@ public sealed partial class MalfAiDoomsdaySystem : StationEventSystem<MalfAiDoom
     private static readonly EntProtoId SparksProto = "EffectSparks";
     private static readonly ProtoId<DamageTypePrototype> DamageTypeShock = "Shock";
 
-    private static readonly ProtoId<AlertLevelPrototype> DeltaLevel = "delta";
+    private const string DeltaLevel = "delta";
     private static readonly LocId ArmAnnouncement = "malfai-doomsday-start-announcement";
     private static readonly LocId CancelAnnouncement = "malfai-doomsday-cancel-announcement";
     private static readonly LocId WaveAnnouncement = "malfai-doomsday-wave-announcement";
@@ -308,14 +308,14 @@ public sealed partial class MalfAiDoomsdaySystem : StationEventSystem<MalfAiDoom
         doom.PreviousAlertLevel = _alerts.GetLevel(station);
         doom.WeSetAlert = false;
 
-        if (doom.PreviousAlertLevel == DeltaLevel.Id)
+        if (doom.PreviousAlertLevel == DeltaLevel)
             return;
 
         if (!TryComp<AlertLevelComponent>(station, out var alert) || alert.IsLevelLocked)
             return;
 
-        _alerts.SetLevel(station, DeltaLevel.Id, true, true, force: true, locked: true);
-        if (_alerts.GetLevel(station) == DeltaLevel.Id)
+        _alerts.SetLevel(station, DeltaLevel, true, true, force: true, locked: true);
+        if (_alerts.GetLevel(station) == DeltaLevel)
             doom.WeSetAlert = true;
     }
 
@@ -451,14 +451,14 @@ public sealed partial class MalfAiDoomsdaySystem : StationEventSystem<MalfAiDoom
         if (TerminatingOrDeleted(doom.Station) || !doom.WeSetAlert)
             return;
 
-        if (_alerts.GetLevel(doom.Station) != DeltaLevel.Id)
+        if (_alerts.GetLevel(doom.Station) != DeltaLevel)
             return;
 
         var restore = doom.PreviousAlertLevel;
-        if (string.IsNullOrEmpty(restore) || restore == DeltaLevel.Id)
+        if (string.IsNullOrEmpty(restore) || restore == DeltaLevel)
             restore = _alerts.GetDefaultLevel(doom.Station);
 
-        if (string.IsNullOrEmpty(restore) || restore == DeltaLevel.Id)
+        if (string.IsNullOrEmpty(restore) || restore == DeltaLevel)
             return;
 
         _alerts.SetLevel(doom.Station, restore, true, true, force: true, locked: false);
