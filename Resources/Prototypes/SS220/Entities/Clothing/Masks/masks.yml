@@ -91,6 +91,11 @@
     sprite: SS220/Clothing/Mask/clown_pennywise.rsi
   - type: Clothing
     sprite: SS220/Clothing/Mask/clown_pennywise.rsi
+    clothingVisuals:
+      mask:
+      - state: equipped-MASK
+      - state: equipped-MASK-unshaded
+        shader: unshaded
   - type: BreathMask
   - type: IdentityBlocker
   - type: HideLayerClothing

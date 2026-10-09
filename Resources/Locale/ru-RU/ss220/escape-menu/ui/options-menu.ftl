@@ -9,4 +9,5 @@ ui-options-play-together-message-from-different-channels = Проигрыват�
 ui-options-play-together-message-from-different-channels-from-different-sources = Проигрывать одновременно сообщения от разных источников (говорящих)
 ui-options-play-together-message-from-different-speak-source = Проигрывать одновременно сообщения разговора от разных источников
 ui-options-function-toggle-active-blocking = Переключение активного блокирования
-ui-options-function-toggle-offset = Переключение оффсета камеры
+ui-options-function-toggle-offset = Переключение смещения камеры
+ui-options-function-open-experience-viewer-menu = Открыть меню опыта персонажа

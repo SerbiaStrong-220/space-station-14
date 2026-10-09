@@ -208,16 +208,17 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: BoxSurvivalCentcom
         - id: MedicatedSuture
         - id: RegenerativeMesh
         - id: CrowbarRed
         - id: BoxShotgunIncendiary
           amount: 2
-        - id: GrenadeFlashBang
-          amount: 2
         - id: PillAmbuzolPlus
-        - id: WeaponShotgunSawn
+          amount: 3
+        - id: WeaponShotgunDoubleBarreled
+        - id: WeaponLaserSMG
+        - id: LaserSMGPowerCell
+          amount: 3
 
 # CounterIntelligence
 - type: entity

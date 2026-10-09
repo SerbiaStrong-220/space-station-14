@@ -254,6 +254,8 @@
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepClown
+      params:
+        pitch: 0.2
 
 - type: entity
   parent: ClothingShoesChameleon

@@ -535,9 +535,9 @@
    # hidden-desc-begin, also yeah mapping slide in 1 space =|
    - type: HiddenDescription
      entries:
-      MedicalKnowledge: [ corvax-hidden-desc-IllegalImplants-medical ]
+      MedicalKnowledge: [ hidden-desc-MindShieldImplanter-medical ]
       SyndicateAgentKnowledge: [ corvax-hidden-desc-MindShieldImplanter-syndicate ]
-      SecurityKnowledge: [ corvax-hidden-desc-MindShieldImplanter-security ]
+      SecurityKnowledge: [ hidden-desc-MindShieldImplanter-security ]
       ScienceKnowledge: [ corvax-hidden-desc-MindShieldImplanter-research ]
      hiddenName: null
    # hidden-desc-end

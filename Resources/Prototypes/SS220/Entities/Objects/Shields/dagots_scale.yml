@@ -2,7 +2,7 @@
 
 - type: entity
   id: DagonsScale
-  parent: BaseShieldAlt
+  parent: [BaseShieldAlt, BaseLivingCuttableEquipment]
   name: Dagon's Scale
   description: Dagon scale used by cultists as protection
   suffix: CultYogg
@@ -10,11 +10,15 @@
   - type: Sprite
     sprite: SS220/Objects/Weapons/Melee/CultYogg/shield.rsi
     state: icon
-  - type: CultYoggWeapon
-    item: CocoonDagonsScale
+  - type: ShellableItem
+  - type: ContainerContainer
+    containers:
+      item-shell: !type:ContainerSlot {}
+  - type: DropOnDeath
   - type: StuckOnEquip
     inHandItem: true
   - type: Tag
     tags:
+    - YoggEquipment
     - CultYoggStealthProvidable
-    - CultYoggInnerHandToggleable
+    - YoggInnerHandEquipment

@@ -407,4 +407,4 @@
   - type: TargetAction
   - type: EntityTargetAction
     event: !type:SpiderCocooningActionEvent
-      cocooningTime: 15
+      cocooningTime: 10
