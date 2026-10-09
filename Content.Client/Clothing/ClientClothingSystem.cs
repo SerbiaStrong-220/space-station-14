@@ -1,4 +1,4 @@
-using Content.Shared.SS220.Clothing.Components; // SS220-glasses-on-forehead
+using Content.Shared.SS220.Clothing.Components;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Client.DisplacementMap;
