@@ -192,9 +192,9 @@
   [color=#a4885c]Сидиус-гриб[/color] содержит питательные вещества и воду. Используйте его для поддержания сытости и запаса воды, в том числе перед «Микозом».
 
   <Box>
-    <GuideEntityEmbed Entity="ProductStrangeFruitCultYogg" Caption="Странный фрукт"/>
-    <GuideEntityEmbed Entity="FoodLubroShroomCult" Caption="Луброгус"/>
-    <GuideEntityEmbed Entity="FoodMikoTrapShroomCult" Caption="Миколовушка"/>
+    <GuideEntityEmbed Entity="ProductStrangeFruit" Caption="Странный фрукт"/>
+    <GuideEntityEmbed Entity="FoodLubroShroom" Caption="Луброгус"/>
+    <GuideEntityEmbed Entity="FoodMikoTrapShroom" Caption="Миколовушка"/>
   </Box>
 
   [color=#a4885c]Странный фрукт[/color] активируется в руке и через пять секунд выпускает странную кудзу. Она сильно замедляет посторонних, но пропускает культистов и Ми-Го без этого замедления. Размещайте её на подходах к базе; огонь и средства против растений опасны для зарослей.

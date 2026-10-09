@@ -764,7 +764,10 @@
   - type: CommunicationsConsole
     title: comms-console-announcement-title-nukie
     color: "#ff0000"
-    canShuttle: false
+    # SS220-nukies-shuttle-recall-begin
+    canShuttle: true
+    onlyRecallShuttle: true
+    # SS220-nukies-shuttle-recall-end
     global: true #announce to everyone they're about to fuck shit up
     announceSentBy: false # The title already says who they are.
     sound: /Audio/Announcements/war.ogg
@@ -830,8 +833,8 @@
   - type: AccessReader
     access: [[ "CentralCommand" ]]
   - type: CommunicationsConsole
-    title: comms-console-announcement-title-centcom
-    color: "#1d8bad"
+    title: comms-console-announcement-title-centcom # SS220-custom-centcomm-name
+    color: "#1d8bad"  # SS220-custom-centcomm-color
     canShuttle: false
     global: true
   - type: Computer
