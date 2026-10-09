@@ -1,5 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
-using System.Numerics;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
@@ -8,11 +6,15 @@ using Content.Shared.CombatMode;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
+using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.SS220.AltBlocking;
+using Content.Shared.SS220.Weapons.Ranged;
+using Content.Shared.Standing;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
 using Content.Shared.Timing;
@@ -35,9 +37,8 @@ using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using Content.Shared.DoAfter;
-using Content.Shared.Standing;
-using Content.Shared.SS220.AltBlocking;
+using System.Diagnostics.CodeAnalysis;
+using System.Numerics;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -126,6 +127,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         SubscribeLocalEvent<GunComponent, GetVerbsEvent<Verb>>(OnGetVerbs);
         SubscribeLocalEvent<SuicideDoAfterEvent>(OnDoSuicideComplete);
         // SS220-new-feature kus end
+        SubscribeLocalEvent<GunComponent, GunCycleRequestEvent>(OnGunUsed);//SS220 weapon overhaul
     }
 
     private void OnMapInit(Entity<GunComponent> gun, ref MapInitEvent args)
@@ -139,6 +141,36 @@ public abstract partial class SharedGunSystem : EntitySystem
 
         RefreshModifiers((gun, gun));
     }
+
+    //SS220 weapon overhaul begin
+    private void OnGunUsed(Entity<GunComponent> gun, ref GunCycleRequestEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (args.User is not { Valid: true } user)
+            return;
+
+        if (TryComp<ChamberMagazineAmmoProviderComponent>(gun, out var chamberMagComp))
+        {
+            args.Handled = true;
+            if (chamberMagComp.CanRack)
+                UseChambered(gun, chamberMagComp, user);
+            else
+                ToggleBolt(gun, chamberMagComp, user);
+
+            return;
+        }
+
+        if (TryComp<BallisticAmmoProviderComponent>(gun, out var ballisticComp))
+        {
+            ManualCycle((gun, ballisticComp), TransformSystem.GetMapCoordinates(gun), user);
+            args.Handled = true;
+
+            return;
+        }
+    }
+    //SS220 weapon overhaul end
 
     private void OnGunMelee(Entity<GunComponent> ent, ref MeleeHitEvent args)
     {

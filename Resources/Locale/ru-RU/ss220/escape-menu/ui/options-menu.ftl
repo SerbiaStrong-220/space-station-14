@@ -9,3 +9,4 @@ ui-options-play-together-message-from-different-channels = Проигрыват�
 ui-options-play-together-message-from-different-channels-from-different-sources = Проигрывать одновременно сообщения от разных источников (говорящих)
 ui-options-play-together-message-from-different-speak-source = Проигрывать одновременно сообщения разговора от разных источников
 ui-options-function-toggle-active-blocking = Переключение активного блокирования
+ui-options-function-activate-gun-in-hand = Взаимодействие с затвором оружия
