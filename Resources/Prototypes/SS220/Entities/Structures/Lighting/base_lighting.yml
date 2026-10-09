@@ -13,6 +13,18 @@
     - map: ["enum.PoweredLightLayers.Glow"]
       state: yellow_on
       shader: unshaded
+  - type: ApcPowerReceiver
+  - type: ExtensionCableReceiver
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: SmartLight
+  - type: WirelessNetworkConnection
+    range: 200
+  - type: DeviceLinkSink
+    ports:
+      - On
+      - Off
+      - Toggle
   - type: PointLight
     radius: 3
     energy: 2.5
