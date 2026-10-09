@@ -23,3 +23,50 @@
   - type: Clothing
     sprite: SS220/Clothing/Neck/Cloaks/captain_white_mantle.rsi
 
+- type: entity
+  parent: [ ClothingNeckMantleCap, ClothingNeckOtherShoulderBaseNoneIcon ]
+  id: ClothingNeckMantleCapShoulder
+  name: captain's shoulder mantle
+  description: A long shoulder mantle with reinforced edges. It covers the upper body and emphasizes the wearer's status.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Cloaks/captain_mantle_shoulder.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Cloaks/captain_mantle_shoulder.rsi
+
+- type: entity
+  parent: [ ClothingNeckMantleCap, ClothingNeckOtherShoulderBaseNoneIcon ]
+  id: ClothingNeckWhiteMantleCapShoulder
+  name: captain's white shoulder mantle
+  description: A long shoulder mantle with reinforced edges. It covers the upper body and emphasizes the wearer's status.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Cloaks/captain_white_mantle_shoulder.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Cloaks/captain_white_mantle_shoulder.rsi
+
+- type: entity
+  parent: [ ClothingNeckMantleHOS, ClothingNeckOtherShoulderBaseNoneIcon ]
+  id: ClothingNeckMantleShoulderHOS
+  name: hos shoulder mantle
+  description: A long shoulder mantle with reinforced edges. It covers the upper body and emphasizes the wearer's status.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Cloaks/hos_mantle_shoulder.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Cloaks/hos_mantle_shoulder.rsi
+
+- type: entity
+  parent: [ ClothingNeckCloakFieldOfficerCentComm, ClothingNeckOtherShoulderBaseNoneIcon ]
+  id: ClothingNeckWhiteMantleCentcomShoulder
+  name: centcom shoulder mantle
+  description: A long shoulder mantle with reinforced edges. It covers the upper body and emphasizes the wearer's status.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Cloaks/centcom_mantle_shoulder.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Cloaks/centcom_mantle_shoulder.rsi
+

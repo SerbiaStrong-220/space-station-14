@@ -424,3 +424,16 @@
     syllables: [грр, ррр, врр, рр, ррг, гр, ррх, ррв, хрр, рх, рррг,
                 гр, вр, хр, рг, ррхг, ррвг, грр, вррг, хррг]
 
+- type: language
+  id: Ternary
+  key: ter
+  name: "language-ternary-name"
+  description: "language-ternary-desc"
+  color: "#00e0c0"
+  scrambleMethod: !type:SyllablesScrambleMethod
+    scrambledLengthCoefficient: 0.5
+    specialCharacterChance: 1
+    specialCharacters:
+      - character: " "
+    syllables: [0, 1, X]
+

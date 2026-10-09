@@ -14,11 +14,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.SS220.Ninja.Objectives.LeaveNoTrace;
 
-public sealed class LeaveNoTraceSystem : SharedLeaveNoTraceSystem
+public sealed partial class LeaveNoTraceSystem : SharedLeaveNoTraceSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IOverlayManager _overlayManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IOverlayManager _overlayManager = default!;
 
     private RevealOverlay _overlay = default!;
 

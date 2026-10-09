@@ -1,5 +1,5 @@
 - type: entity
-  parent: Clothing
+  parent: [ Clothing, BaseToggleClothing ]
   id: FieldShieldGenerator
   name: shield generator
   description: An energy field generator that creates an energy shield around the carrier.
@@ -28,3 +28,6 @@
       color: "#0061d8"
       radius: 1
       energy: 4
+  - type: ToggleClothing
+    action: ActionTogglePersonalShield
+    disableOnUnequip: true

@@ -3,6 +3,7 @@
 using System.Numerics;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Alert;
+using Content.Shared.Buckle.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
@@ -12,14 +13,19 @@ using Content.Shared.Interaction.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Item;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.MouseRotator;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Random.Helpers;
 using Content.Shared.Standing;
+using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
+using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
@@ -35,23 +41,31 @@ namespace Content.Shared.SS220.Grab;
 // - The control flow comes from PullingSystem 'cuz of input handling
 public abstract partial class SharedGrabSystem : EntitySystem
 {
-    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedJointSystem _joints = default!;
-    [Dependency] private readonly AlertsSystem _alerts = default!;
+    [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private PullingSystem _pulling = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedVirtualItemSystem _virtualItem = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedJointSystem _joints = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
 
     protected EntityQuery<GrabbableComponent> _grabbableQuery;
     private EntityQuery<GrabberComponent> _grabberQuery;
     private EntityQuery<PhysicsComponent> _physicsQuery;
+
+    // NOTE(Alvyr):
+    // for now const if it will be good -> make skill dependent
+    private const float PassiveGrabAttackMissChance = 0.5f;
+
+    private static readonly LocId PassiveGrabMissPopup = "entity-missed-in-passive-grab";
 
     public override void Initialize()
     {
@@ -71,6 +85,7 @@ public abstract partial class SharedGrabSystem : EntitySystem
         SubscribeLocalEvent<GrabbableComponent, InteractionAttemptEvent>(OnInteractionAttempt);
         SubscribeLocalEvent<GrabbableComponent, DownAttemptEvent>(OnDownAttempt);
         SubscribeLocalEvent<GrabbableComponent, AttackAttemptEvent>(OnCanAttack);
+        SubscribeLocalEvent<GrabbableComponent, AttemptMeleeUserEvent>(OnAttemptMeleeUserEvent);
 
         SubscribeLocalEvent<GrabberComponent, AttemptMobTargetCollideEvent>(OnAttemptMobTargetCollide);
         SubscribeLocalEvent<GrabbableComponent, AttemptMobTargetCollideEvent>(OnAttemptMobTargetCollide);
@@ -79,6 +94,12 @@ public abstract partial class SharedGrabSystem : EntitySystem
         SubscribeLocalEvent<GrabbableComponent, PickupAttemptEvent>(OnGrabbablePickupAttempt);
 
         SubscribeLocalEvent<GrabberComponent, VirtualItemDeletedEvent>(OnVirtualItemDeleted);
+
+        SubscribeLocalEvent<GrabberComponent, EntGotInsertedIntoContainerMessage>(OnGrabberContainerInsert);
+        SubscribeLocalEvent<GrabbableComponent, EntGotInsertedIntoContainerMessage>(OnGrabbableContainerInsert);
+
+        SubscribeLocalEvent<GrabberComponent, BuckledEvent>(OnGrabberBuckled);
+        SubscribeLocalEvent<GrabbableComponent, BuckledEvent>(OnGrabbableBuckled);
 
         InitializeResistance();
 
@@ -113,8 +134,10 @@ public abstract partial class SharedGrabSystem : EntitySystem
 
     private void OnMove(Entity<GrabbableComponent> grabbable, ref MoveInputEvent ev)
     {
-        if (grabbable.Comp.GrabStage == GrabStage.Passive)
-            TryBreakGrab((grabbable, grabbable.Comp));
+        if (!grabbable.Comp.Grabbed)
+            return;
+
+        TryBreakGrab((grabbable, grabbable.Comp));
     }
 
     private void OnThrown(Entity<GrabbableComponent> ent, ref ThrownEvent args)
@@ -165,8 +188,20 @@ public abstract partial class SharedGrabSystem : EntitySystem
 
     private void OnCanAttack(Entity<GrabbableComponent> grabbable, ref AttackAttemptEvent ev)
     {
-        if (IsGrabbed((grabbable, grabbable.Comp)))
+        if (grabbable.Comp.GrabStage > GrabStage.Passive)
             ev.Cancel();
+    }
+
+    private void OnAttemptMeleeUserEvent(Entity<GrabbableComponent> grabbable, ref AttemptMeleeUserEvent ev)
+    {
+        if (ev.Cancelled || grabbable.Comp.GrabStage != GrabStage.Passive)
+            return;
+
+        if (!SharedRandomExtensions.PredictedProb(_timing, PassiveGrabAttackMissChance, GetNetEntity(grabbable), GetNetEntity(ev.Weapon)))
+            return;
+
+        ev.Message = Loc.GetString(PassiveGrabMissPopup);
+        ev.Cancelled = true;
     }
 
     // cuz of mob collisions
@@ -236,6 +271,36 @@ public abstract partial class SharedGrabSystem : EntitySystem
         ClearJoints((grabber, grabber.Comp), (grabbable, grabbableComp));
     }
 
+    private void OnGrabberContainerInsert(Entity<GrabberComponent> grabber, ref EntGotInsertedIntoContainerMessage args)
+    {
+        if (grabber.Comp.Grabbing is not { } grabbable)
+            return;
+
+        if (!_grabbableQuery.TryComp(grabbable, out var grabbableComp))
+            return;
+
+        BreakGrab((grabbable, grabbableComp));
+    }
+
+    private void OnGrabbableContainerInsert(Entity<GrabbableComponent> grabbable, ref EntGotInsertedIntoContainerMessage args)
+    {
+        BreakGrab((grabbable, grabbable.Comp));
+    }
+
+    private void OnGrabberBuckled(Entity<GrabberComponent> grabber, ref BuckledEvent args)
+    {
+        if (grabber.Comp.Grabbing is not { } grabbable)
+            return;
+        if (!_grabbableQuery.TryComp(grabbable, out var grabbableComp))
+            return;
+        BreakGrab((grabbable, grabbableComp));
+    }
+
+    private void OnGrabbableBuckled(Entity<GrabbableComponent> grabbable, ref BuckledEvent args)
+    {
+        BreakGrab((grabbable, grabbable.Comp));
+    }
+
     #endregion
 
     #region Public API
@@ -274,7 +339,8 @@ public abstract partial class SharedGrabSystem : EntitySystem
             BlockDuplicate = true,
             BreakOnDamage = true,
             BreakOnMove = true,
-            DistanceThreshold = 2f
+            DistanceThreshold = 2f,
+            ArgFlags = DoAfterArgFlags.IgnoreTraitsModification | DoAfterArgFlags.IgnoreExperienceModification,
         };
 
         return _doAfter.TryStartDoAfter(args);
@@ -292,6 +358,9 @@ public abstract partial class SharedGrabSystem : EntitySystem
             return false;
 
         if (_grabbableQuery.TryComp(grabber, out var grabberGrabbable) && grabberGrabbable.GrabbedBy != null)
+            return false;
+
+        if (_grabberQuery.TryComp(grabbable, out var grabbableAsGrabber) && grabbableAsGrabber.Grabbing != null)
             return false;
 
         if (!_interaction.InRangeAndAccessible(grabber.Owner, grabbable.Owner, grabber.Comp.Range))
@@ -322,6 +391,9 @@ public abstract partial class SharedGrabSystem : EntitySystem
 
     public void BreakGrab(Entity<GrabbableComponent?> grabbable)
     {
+        if (_timing.ApplyingState)
+            return;
+
         if (!_grabbableQuery.Resolve(grabbable, ref grabbable.Comp))
             return;
 
@@ -338,6 +410,10 @@ public abstract partial class SharedGrabSystem : EntitySystem
 
         grabbable.Comp.GrabbedBy = null;
         Dirty(grabbable);
+
+        // TODO SS220 This shouldn't be handled here
+        if (_mobState.IsIncapacitated(grabbable))
+            _standing.Down(grabbable);
 
         ClearJoints((grabber, grabberComp), grabbable);
 
@@ -372,7 +448,8 @@ public abstract partial class SharedGrabSystem : EntitySystem
         }
 
         // grab confirmed
-
+        RemComp<KnockedDownComponent>(grabbable);
+        _standing.Stand(grabbable, force: true);
         for (var i = 0; i < grabber.Comp.NeededHands; i++)
         {
             _virtualItem.TrySpawnVirtualItemInHand(grabbable, grabber, out _);
@@ -380,12 +457,10 @@ public abstract partial class SharedGrabSystem : EntitySystem
             if (_virtualItem.TrySpawnVirtualItemInHand(grabber, grabbable, out var virtualItem))
                 EnsureComp<UnremoveableComponent>(virtualItem.Value);
         }
-
         grabber.Comp.Grabbing = grabbable;
         grabbable.Comp.GrabbedBy = grabber;
 
         PlaceGrabbable(grabber, grabbable);
-
         // Create the joint
         var jointId = $"grab_joint_{GetNetEntity(grabbable)}";
         grabber.Comp.GrabJointId = jointId;

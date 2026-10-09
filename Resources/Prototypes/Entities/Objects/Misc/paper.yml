@@ -9,9 +9,15 @@
     - Paper
     - Trash # SS220-TaRaKaCheCki
   - type: Appearance
+  - type: Reactive
+    groups:
+      Flammable: [ Touch ]
+      Extinguish: [ Touch ]
+  - type: ExtinguishableSetCollisionWake
   - type: Flammable
     fireSpread: true
     alwaysCombustible: true
+    canExtinguish: true
     damage:
       types:
         Heat: 1
@@ -39,8 +45,7 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: Food
-    solution: food
+  - type: Edible
     delay: 7
     forceFeedDelay: 7
   - type: FlavorProfile
@@ -57,6 +62,14 @@
   - type: Item
     size: Tiny
   - type: PhysicalComposition
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/paper_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/paper_drop.ogg
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   name: paper
@@ -85,6 +98,7 @@
         type: PaperBoundUserInterface
   - type: FaxableObject
   - type: PaperVisuals
+  - type: StationAiWhitelist
 
 - type: entity
   name: paper scrap
@@ -425,6 +439,8 @@
         insertSound: /Audio/Effects/packetrip.ogg
         ejectSound: /Audio/Effects/packetrip.ogg
         whitelist:
+          components:
+            - Cash
           tags:
             - Paper
             - EnvelopeWhitelist # SS220-spesos_in_envelope
@@ -464,6 +480,7 @@
       - !type:EmptyAllContainersBehaviour
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: StationAiWhitelist
   # SS220 EnvelopeCraft begin
   - type: Construction
     graph: envelope

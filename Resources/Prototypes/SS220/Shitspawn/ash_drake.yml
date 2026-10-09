@@ -16,7 +16,10 @@
   description: Огромный крылатый монстр, почитаемый страж Некрополиса. Этот дракон бродит по выжженным пустошам, изрыгая смертоносное пламя.
   components:
   - type: Bloodstream
-    bloodMaxVolume: 1500
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 1500
   - type: GhostRole
     allowMovement: true
     allowSpeech: true
@@ -96,8 +99,9 @@
     allowed:
     - TemporaryBlindness
     - Pacified
-  - type: Temperature
+  - type: TemperatureDamage
     heatDamageThreshold: 99999
+  - type: Temperature
   - type: ExplosionResistance
     damageCoefficient: 0.0
   - type: Butcherable

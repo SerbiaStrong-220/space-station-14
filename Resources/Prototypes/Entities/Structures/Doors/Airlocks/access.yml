@@ -1267,6 +1267,19 @@
   id: HighSecCommandLocked
   suffix: Command, Locked
   components:
+  # ss220 airlock insta open start
+  - type: Door
+    pryTime: 1.5
+    crushDamage:
+      types:
+        Blunt: 50
+    openSound:
+      path: /Audio/Machines/airlock_open.ogg
+    closeSound:
+      path: /Audio/Machines/airlock_close.ogg
+    denySound:
+      path: /Audio/Machines/airlock_deny.ogg
+  # ss220 airlock insta open end
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsCommand ]

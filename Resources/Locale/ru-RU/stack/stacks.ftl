@@ -405,3 +405,31 @@ stack-white-marble-floor = белый мраморный пол
 stack-dark-marble-floor = чёрный мраморный пол
 stack-plasma-marble-floor = плазменный мраморный пол
 stack-uranium-marble-floor = урановый мраморный пол
+
+stack-dark-steel-horizontal-slats-tile-bordered = горизонтальная решетчатая плитка из темной стали с каймой
+
+stack-dark-steel-vertical-slats-tile-bordered = вертикальная решетчатая плитка из темной стали с каймой
+
+stack-dark-steel-slats-tile-continuous = сплошная решетчатая плитка из темной стали
+
+stack-steel-horizontal-slats-tile-bordered = горизонтальная решетчатая плитка из стали с каймой
+
+stack-steel-vertical-slats-tile-bordered = вертикальная решетчатая плитка из стали с каймой
+
+stack-steel-slats-tile-continuous = сплошная решетчатая плитка из стали
+
+stack-white-steel-horizontal-slats-tile-bordered = горизонтальная решетчатая плитка из белой стали с каймой
+
+stack-white-steel-vertical-slats-tile-bordered = вертикальная решетчатая плитка из белой стали с каймой
+
+stack-white-steel-slats-tile-continuous = сплошная решетчатая плитка из белой стали
+
+stack-ironsand-concrete-tile = плитка из железистого бетона
+
+stack-ironsand-concrete-mono-tile = моно-плитка из железистого бетона
+
+stack-ironsand-concrete-smooth = гладкий железистый бетон
+
+stack-astro-ironsand-floor = астро-железистый пол
+
+stack-astro-ironsand-floor-borderless = астро-железистый пол без каймы

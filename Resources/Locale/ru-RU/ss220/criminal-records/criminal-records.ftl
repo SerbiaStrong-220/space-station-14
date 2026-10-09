@@ -40,3 +40,4 @@ criminal-status-cooldown-popup = Вы пытаетесь добавлять за
 
 criminal-show-record-type-null = [bold]Без статуса: [/bold]
 criminal-show-record-type-found = [color={ $color }][bold]{ $name }:[/bold][/color]
+criminal-show-record-time = [bold][color=green]Статус поставлен в:[/color] {$time}[/bold]

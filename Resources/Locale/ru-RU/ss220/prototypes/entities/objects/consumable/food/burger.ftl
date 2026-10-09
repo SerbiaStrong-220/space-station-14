@@ -1,2 +1,2 @@
 ent-FoodBurgerBnuuy = бнууйбургер
-    .desc = Ты чудувище.
+    .desc = Ты чудовище.

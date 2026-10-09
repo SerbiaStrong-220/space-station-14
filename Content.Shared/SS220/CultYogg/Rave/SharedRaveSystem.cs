@@ -7,10 +7,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.CultYogg.Rave;
 
-public abstract class SharedRaveSystem : EntitySystem
+public abstract partial class SharedRaveSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -19,7 +20,7 @@ public abstract class SharedRaveSystem : EntitySystem
         SubscribeLocalEvent<RaveComponent, ExaminedEvent>(OnExamined);
     }
 
-    private void OnStartup(Entity<RaveComponent> ent, ref ComponentStartup args)
+    protected virtual void OnStartup(Entity<RaveComponent> ent, ref ComponentStartup args)
     {
         SetNextPhraseTimer(ent);
         SetNextSoundTimer(ent);

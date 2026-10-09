@@ -38,16 +38,18 @@
   parent: ClothingBeltSecurityMedical
   suffix: Filled
   components:
-  - type: StorageFill
-    contents:
-      - id: Brutepack
-        amount: 2
-      - id: Ointment
-        amount: 1
-      - id: Bloodpack
-        amount: 1
-      - id: Gauze
-      - id: EmergencyMedipen
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: Brutepack
+          amount: 2
+        - id: Ointment
+          amount: 1
+        - id: Bloodpack
+          amount: 1
+        - id: Gauze
+        - id: EmergencyMedipen
 
 - type: entity
   id: ClothingBeltCutlassSheathFilled

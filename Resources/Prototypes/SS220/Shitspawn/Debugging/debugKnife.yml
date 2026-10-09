@@ -172,19 +172,21 @@
   name: debug knife 100
   description: Сумка, наполненная ножами на 100 урона каждого типа. Предназначена для отладки и тестирования урона.
   components:
-    - type: StorageFill
-      contents:
-      - id: KnifeStamina
-      - id: KnifeStructural
-      - id: KnifeSlash
-      - id: KnifeShock
-      - id: KnifeRadiation
-      - id: KnifePoison
-      - id: KnifePiercing
-      - id: KnifeCold
-      - id: KnifeCaustic
-      - id: KnifeCellular
-      - id: KnifeBlunt
-      - id: KnifeBloodloss
-      - id: KnifeAsphyxiation
-      - id: KnifeHeat
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: KnifeStamina
+        - id: KnifeStructural
+        - id: KnifeSlash
+        - id: KnifeShock
+        - id: KnifeRadiation
+        - id: KnifePoison
+        - id: KnifePiercing
+        - id: KnifeCold
+        - id: KnifeCaustic
+        - id: KnifeCellular
+        - id: KnifeBlunt
+        - id: KnifeBloodloss
+        - id: KnifeAsphyxiation
+        - id: KnifeHeat

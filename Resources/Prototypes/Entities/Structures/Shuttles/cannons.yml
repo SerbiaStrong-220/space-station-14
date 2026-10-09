@@ -99,7 +99,7 @@
           tags:
             - PowerCell
             - PowerCellSmall
-  - type: HitscanBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: RedShuttleLightLaser # SS220 Add hitscan on shuttle nav
     fireCost: 50
 
@@ -155,7 +155,7 @@
         whitelist:
           tags:
             - PowerCage
-  - type: HitscanBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: RedShuttleLaser
     fireCost: 150
 

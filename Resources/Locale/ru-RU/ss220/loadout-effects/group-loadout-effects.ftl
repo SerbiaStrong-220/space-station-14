@@ -1,1 +1,0 @@
-group-requirement-or = или

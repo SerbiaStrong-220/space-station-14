@@ -27,24 +27,19 @@
       entity_storage: !type:NestedSelector
         tableId: LockerFillMagistrate
 
-# Magistrate
+# NTR (ex Magistrate lockers)
 - type: entityTable
-  id: LockerFillNanoTrasenRepresentative #SS220 TODO NanoTraisen Representative
+  id: LockerFillNanoTrasenRepresentative
   table: !type:AllSelector
     children:
-    - id: ClothingHeadsetAltMagistrate
+    - id: ClothingHeadsetAltNanoTrasenRepresentative
     - id: DoorRemoteLaw
-    - id: RubberStampMagistrate
-    - id: ClothingOuterRobesJudge
-    - id: ClothingHeadHatPwig
+    - id: RubberStampNanoTrasenRepresentative
     - id: WeaponDisabler
     - id: ClothingWristWatchGold
     - id: ClothingEyesGlassesCommand
-    - id: Telescopichka
     - id: BoxEncryptionKeyLaw
     - id: BoxTapeRecorder
-    - id: JudgeGavel
-    - id: GavelStand
 
 - type: entity
   parent: LockerNanoTrasenRepresentative

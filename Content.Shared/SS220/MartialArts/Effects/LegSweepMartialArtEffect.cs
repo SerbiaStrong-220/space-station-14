@@ -13,7 +13,7 @@ namespace Content.Shared.SS220.MartialArts.Effects;
 
 public sealed partial class LegSweepMartialArtEffectSystem : BaseMartialArtEffectSystem<LegSweepMartialArtEffect, LegSweepMartialArtEffectComponent>
 {
-    [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
 
     public override void Initialize()
     {

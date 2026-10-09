@@ -62,8 +62,10 @@
       path: /Audio/Animals/lizard_happy.ogg
   - type: NoSlip
   - type: Bloodstream
-    bloodMaxVolume: 100
-    bloodReagent: Slime
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Slime
+        Quantity: 100
   - type: Tag
     tags:
     - DoorBumpOpener
@@ -85,8 +87,9 @@
       - !type:HealthChange
         scaling: true
         damage:
-          groups:
-            Toxin: 10
+          types:
+            Poison: 5
+            Radiation: 5
   - type: StaminaResistance
     damageCoefficient: 0.4
     worn: false

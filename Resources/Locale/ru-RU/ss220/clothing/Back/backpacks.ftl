@@ -8,6 +8,9 @@ ent-ClothingBackpackBlueShield = рюкзак синего щита
 ent-ClothingBackpackWhiteCaptain = белый рюкзак капитана
     .desc = Дорогая белая сумка, выданная за выслугу лет капитану.
 
+ent-ClothingBackpackJanitorJR = рюкзак JR
+    .desc = Удобный и водостойкий, вручается каждому новому сотруднику Junk Recyclers.
+
 ent-ClothingBackpackBlueShieldHight = { ent-ClothingBackpackBlueShield }
     .desc = { ent-ClothingBackpackBlueShield.desc }
     .suffix = Тяжелый скафандр
@@ -17,6 +20,10 @@ ent-ClothingBackpackBlueShieldHightFilled = { ent-ClothingBackpackBlueShield }
 
 ent-ClothingBackpackSpaceNinja = рюкзак космического ниндзя
     .desc = Рюкзак для снаряжения космического ниндзя.
+    
+ent-ClothingBackpackSpaceNinjaFake = { ent-ClothingBackpackSpaceNinja }
+    .desc = { ent-ClothingBackpackSpaceNinja.desc }
+    .suffix = Поддельный
 
 ent-ClothingBackpackERTLeaderGammaFilled = { ent-ClothingBackpackERTLeader }
     .suffix = Гамма ОБР, заполненный

@@ -16,9 +16,13 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: holypen_empty
-  - type: Hypospray
+  - type: Injector
     solutionName: pen
-    transferAmount: 95
+    currentTransferAmount: null
+    activeModeProtoId: HyposprayDynamicMode
+    allowedModes:
+    - HyposprayDynamicMode
+    - HyposprayInjectMode
   - type: Sprite
     sprite: SS220/Objects/Specific/Medical/medipen.rsi
     netsync: false
@@ -67,11 +71,12 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: stimpen_empty
-  - type: Hypospray
+  - type: Injector
     solutionName: pen
-    transferAmount: 24
-    onlyAffectsMobs: false
-    injectOnly: true
+    currentTransferAmount: null
+    activeModeProtoId: HyposprayInjectMode
+    allowedModes:
+    - HyposprayInjectMode
 
 - type: entity
   parent: ChemicalMedipen
@@ -110,55 +115,9 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: stimpen_empty
-  - type: Hypospray
+  - type: Injector
     solutionName: pen
-    transferAmount: 20
-    onlyAffectsMobs: false
-    injectOnly: true
-
-- type: entity
-  name: autoinjector
-  parent: BaseItem
-  id: BaseAutoinjectorSS220
-  abstract: true
-  components:
-  - type: Sprite
-    sprite: SS220/Objects/Misc/autoinjectors.rsi
-    state: autoinjector
-  - type: Item
-    sprite: SS220/Objects/Misc/autoinjectors.rsi
-    size: Small
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 15
-  - type: ExaminableSolution
-    solution: pen
-  - type: Hypospray
-    solutionName: pen
-    onlyAffectsMobs: false
-    injectOnly: true
-    transferAmount: 15
-    ignoreProtection: false
-  - type: RefillableSolution
-    solution: pen
-  - type: Autoinjector
-
-- type: entity
-  name: medical autoinjector
-  parent: BaseAutoinjectorSS220
-  description: A single-use medical autoinjector designed for rapid drug delivery. Warning! The injector cannot be refilled after its initial use. Use wisely.
-  id: MedAutoinjector
-  components:
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 10
-  - type: ExaminableSolution
-    solution: pen
-  - type: Hypospray
-    solutionName: pen
-    onlyAffectsMobs: false
-    injectOnly: true
-    transferAmount: 10
-  - type: Autoinjector
+    currentTransferAmount: null
+    activeModeProtoId: HyposprayInjectMode
+    allowedModes:
+    - HyposprayInjectMode

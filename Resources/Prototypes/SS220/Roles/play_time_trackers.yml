@@ -23,6 +23,15 @@
   id: JobSecurityPet
 
 - type: playTimeTracker
+  id: JobSecurityPilot
+
+- type: playTimeTracker
+  id: JobBrigmedic
+
+- type: playTimeTracker
+  id: JobBlueShield
+
+- type: playTimeTracker
   id: JobSeniorEngineer
 
 - type: playTimeTracker
@@ -36,6 +45,12 @@
 
 - type: playTimeTracker
   id: JobSeniorService
+
+- type: playTimeTracker
+  id: JobBoxer
+
+- type: playTimeTracker
+  id: JobZookeeper
 
 - type: playTimeTracker
   id: JobPeacefulPet
@@ -116,3 +131,18 @@
 
 - type: playTimeTracker
   id: JobCBURNLeader
+
+- type: playTimeTracker
+  id: JobRedWingsOfficer
+
+- type: playTimeTracker
+  id: JobRedWingsMedic
+
+- type: playTimeTracker
+  id: JobRedWingsPilot
+
+- type: playTimeTracker
+  id: AntagXenoborg
+
+- type: playTimeTracker
+  id: AntagXenoborgMothershipCore

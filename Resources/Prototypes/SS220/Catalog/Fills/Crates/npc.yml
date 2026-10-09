@@ -1,7 +1,7 @@
 - type: entity
   id: BaseCrateNPCLocked
   parent: CrateLivestock
-  abstract: True
+  categories: [ HideSpawnMenu ]
   components:
   - type: Lock
 # - type: LockVisuals - Если будете добавлять визуал для закрытых ящиков, вынести из коммента
@@ -164,10 +164,12 @@
   name: crocodile crate
   description: A crate containing a pet crocodile.
   components:
-  - type: StorageFill
-    contents:
-    - id: MobCrocodile
-      amount: 1
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: MobCrocodile
+          amount: 1
 
 - type: entity
   id: CrateNPCCrocodileLocked

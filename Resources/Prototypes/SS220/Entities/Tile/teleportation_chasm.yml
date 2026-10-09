@@ -10,10 +10,13 @@
     - Wall
   components:
   - type: TeleportationChasm
-    blacklistToDelete:
+    deleteTargetWhitelist:
       components:
       - Explosive
       - ProjectileGrenade
+  - type: TeleportToRandomPoweredLight
+  - type: PolymorphAfterTeleport
+    polymorphPrototype: VoidChasmCameraPoly
   - type: StepTrigger
     requiredTriggeredSpeed: 0
     intersectRatio: 0.4

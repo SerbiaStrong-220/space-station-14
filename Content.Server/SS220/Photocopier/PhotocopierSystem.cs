@@ -1,44 +1,45 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Diagnostics.CodeAnalysis;
 using Content.Server.Chat.Systems;
-using Content.Shared.SS220.Photocopier;
-using Content.Shared.Containers.ItemSlots;
-using Content.Shared.Examine;
-using Content.Shared.UserInterface;
-using Content.Server.Power.Components;
 using Content.Server.Popups;
+using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.SS220.Photocopier.Forms;
-using Content.Shared.Damage;
+using Content.Shared.Chat;
+using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
+using Content.Shared.Examine;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Popups;
-using Content.Shared.SS220.ButtScan;
-using Content.Shared.SS220.ShapeCollisionTracker;
-using Robust.Shared.Containers;
-using Robust.Server.GameObjects;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Audio.Systems;
 using Content.Shared.Power;
-using Content.Shared.Chat;
+using Content.Shared.SS220.ButtScan;
+using Content.Shared.SS220.Photocopier;
+using Content.Shared.SS220.ShapeCollisionTracker;
+using Content.Shared.UserInterface;
+using Robust.Server.GameObjects;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
+using Robust.Shared.Prototypes;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Server.SS220.Photocopier;
 
 public sealed partial class PhotocopierSystem : EntitySystem
 {
-    [Dependency] private readonly IEntitySystemManager _sysMan = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly EntityManager _entityManager = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
+    [Dependency] private IEntitySystemManager _sysMan = default!;
+    [Dependency] private ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private UserInterfaceSystem _userInterface = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private EntityManager _entityManager = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
 
     private FormManager? _specificFormManager;
     private readonly ISawmill _sawmill = Logger.GetSawmill("photocopier");
@@ -114,14 +115,14 @@ public sealed partial class PhotocopierSystem : EntitySystem
     private void OnShutdown(Entity<PhotocopierComponent> ent, ref ComponentShutdown args)
     {
         ent.Comp.EntityOnTop = null;
-        ent.Comp.HumanoidAppearanceOnTop = null;
+        ent.Comp.HumanoidProfileOnTop = null;
         ent.Comp.PrintAudioStream = null;
     }
 
     private void OnCollisionChanged(Entity<PhotocopierComponent> ent, ref ShapeCollisionTrackerUpdatedEvent args)
     {
         if (ent.Comp.EntityOnTop is { } currentEntity &&
-            ent.Comp.HumanoidAppearanceOnTop is not null &&
+            ent.Comp.HumanoidProfileOnTop is not null &&
             args.Colliding.Contains(currentEntity) &&
             !Deleted(currentEntity))
         {
@@ -129,14 +130,14 @@ public sealed partial class PhotocopierSystem : EntitySystem
         }
 
         ent.Comp.EntityOnTop = null;
-        ent.Comp.HumanoidAppearanceOnTop = null;
+        ent.Comp.HumanoidProfileOnTop = null;
 
         foreach (var otherEntity in args.Colliding)
         {
-            if (!TryComp<HumanoidAppearanceComponent>(otherEntity, out var humanoidAppearance))
+            if (!TryComp<HumanoidProfileComponent>(otherEntity, out var humanoidAppearance))
                 continue;
 
-            ent.Comp.HumanoidAppearanceOnTop = humanoidAppearance;
+            ent.Comp.HumanoidProfileOnTop = humanoidAppearance;
             ent.Comp.EntityOnTop = otherEntity;
             break;
         }
@@ -204,7 +205,7 @@ public sealed partial class PhotocopierSystem : EntitySystem
             return;
 
         if (ent.Comp.EntityOnTop is not { } entityOnTop ||
-            ent.Comp.HumanoidAppearanceOnTop is not { } humanoidAppearanceOnTop ||
+            ent.Comp.HumanoidProfileOnTop is not { } humanoidAppearanceOnTop ||
             Deleted(entityOnTop))
             return;
 
@@ -245,7 +246,7 @@ public sealed partial class PhotocopierSystem : EntitySystem
 
     private bool IsHumanoidOnTop(PhotocopierComponent component)
     {
-        return component.HumanoidAppearanceOnTop is not null &&
+        return component.HumanoidProfileOnTop is not null &&
                component.EntityOnTop is { } entityOnTop &&
                !Deleted(entityOnTop);
     }
@@ -310,13 +311,12 @@ public sealed partial class PhotocopierSystem : EntitySystem
             return;
 
         var dealtDamage = _damageableSystem.TryChangeDamage(
-            mobUid, component.ButtDamage, false, false, damageable, photocopierUid);
+            (mobUid, damageable), component.ButtDamage, false, false, photocopierUid);
 
         _audio.PlayPvs(component.ButtDamageSound, photocopierUid);
 
-        // AAAAAAAAAAAAAAAAAAAAAAAAAAA
-        if (dealtDamage is null || dealtDamage.Empty)
-            return; //...but only if it dealt damage
+        if (!dealtDamage)
+            return;
 
         _chat.TryEmoteWithChat(mobUid, "Scream", ChatTransmitRange.GhostRangeLimit);
         _popup.PopupEntity(Loc.GetString("photocopier-popup-butt-burn"), photocopierUid, PopupType.SmallCaution);
@@ -329,7 +329,7 @@ public sealed partial class PhotocopierSystem : EntitySystem
     private void TryQueueCopyPhysicalButt(
         EntityUid uid,
         PhotocopierComponent component,
-        HumanoidAppearanceComponent humanoidAppearance,
+        HumanoidProfileComponent humanoidAppearance,
         int amount)
     {
         if (!TryGetTonerCartridge(component, out var tonerCartridge) || tonerCartridge.Charges <= 0)
@@ -479,7 +479,7 @@ public sealed partial class PhotocopierSystem : EntitySystem
             if (component.IsCopyingPhysicalButt)
             {
                 // If there is no butt or someones else butt is in the way - stop copying.
-                if (component.HumanoidAppearanceOnTop is not { } humanoid
+                if (component.HumanoidProfileOnTop is not { } humanoid
                     || component.ButtSpecies is null
                     || component.ButtSpecies != humanoid.Species)
                 {

@@ -11,22 +11,22 @@ namespace Content.Shared.SS220.MartialArts.Effects;
 
 public sealed partial class DisarmChanceMartialArtEffectSystem : BaseMartialArtEffectSystem<DisarmChanceMartialArtEffect, DisarmChanceMartialArtEffectComponent>
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<DisarmChanceMartialArtEffectComponent, DisarmChanceModifierEvent>(OnDisarmChanceModifier);
+        SubscribeLocalEvent<DisarmChanceMartialArtEffectComponent, GetDisarmChanceDisarmerMultiplierEvent>(OnDisarmChanceModifier);
 
         // if we applied our effect we will mark DisarmedEvent as handled and hands system wont do anything
         // if we haven't did anything the other systems should take care about it
         SubscribeLocalEvent<MartialArtsTargetComponent, DisarmedEvent>(OnDisarm, before: [typeof(SharedHandsSystem), typeof(SharedStaminaSystem)]);
     }
 
-    private void OnDisarmChanceModifier(EntityUid user, DisarmChanceMartialArtEffectComponent comp, DisarmChanceModifierEvent ev)
+    private void OnDisarmChanceModifier(Entity<DisarmChanceMartialArtEffectComponent> entity, ref GetDisarmChanceDisarmerMultiplierEvent ev)
     {
-        if (!TryEffect(user, out var effect))
+        if (!TryEffect(entity.Owner, out var effect))
             return;
 
         ev.BaseChance = effect.Chance;
@@ -44,15 +44,16 @@ public sealed partial class DisarmChanceMartialArtEffectSystem : BaseMartialArtE
 
         if (effect.ToHand)
         {
-            var held = _hands.EnumerateHeld(target);
+            if (_hands.GetActiveItem(target) is not { Valid: true } activeHandHeldItem)
+                return;
 
-            if (held.TryFirstOrNull(out var item))
-            {
-                _hands.PickupOrDrop(user, item.Value);
+            if (!_hands.TryDrop(target, activeHandHeldItem, checkActionBlocker: false))
+                return;
 
-                ev.Handled = true;
-                ev.PopupPrefix = "martial-art-effects-disarm-success-";
-            }
+            _hands.PickupOrDrop(user, activeHandHeldItem);
+
+            ev.Handled = true;
+            ev.PopupPrefix = "martial-art-effects-disarm-success-";
         }
     }
 }

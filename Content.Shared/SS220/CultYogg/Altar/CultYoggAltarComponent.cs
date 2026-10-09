@@ -28,7 +28,7 @@ public sealed partial class CultYoggAltarComponent : Component
     /// The time during which the DoAfter sacrifice will take place
     /// </summary>
     [DataField]
-    public TimeSpan RitualTime = TimeSpan.FromSeconds(185);
+    public TimeSpan RitualTime = TimeSpan.FromSeconds(245);
 
     /// <summary>
     /// A mark that it has been used and cannot be used for another sacrifice.

@@ -15,13 +15,13 @@ namespace Content.Server.SS220.Shout;
 /// If there is no sound or phrase it won't do anything.
 /// </summary>
 
-public sealed class ShoutSystem : EntitySystem
+public sealed partial class ShoutSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {

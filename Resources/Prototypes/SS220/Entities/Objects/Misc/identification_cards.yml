@@ -254,6 +254,60 @@
       job: CIOffcier
 
 - type: entity
+  parent: IDCardStandard
+  id: RedWingsPilotIDCard
+  name: Red Wings Pilot ID Card
+  components:
+  - type: Sprite
+    layers:
+    - state: redwings
+    - state: idredwingspilot
+  - type: PresetIdCard
+    job: RedWingsPilot
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+
+- type: entity
+  parent: IDCardStandard
+  id: RedWingsOfficerIDCard
+  name: Red Wings Officer ID Card
+  components:
+  - type: Sprite
+    layers:
+    - state: redwings
+    - state: idredwingsofficer
+  - type: PresetIdCard
+    job: RedWingsOfficer
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+
+- type: entity
+  parent: IDCardStandard
+  id: RedWingsMedicIDCard
+  name: Red Wings Medic IDCard
+  components:
+  - type: Sprite
+    layers:
+    - state: redwings
+    - state: idredwingsmedic
+  - type: PresetIdCard
+    job: RedWingsMedic
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+
+- type: entity
   parent: [Clothing]
   id: FakeCaptainIDCard
   name: captain ID card
@@ -283,3 +337,21 @@
   - type: Tag
     tags:
     - DoorBumpOpener
+
+- type: entity
+  parent: IDCardStandard
+  id: MastercardIPC
+  name: mastercard IPC
+  description: Access card to the IPC service panel. Manufactured by Xion Industrial.
+  components:
+  - type: Sprite
+    layers:
+    - state: ipc_master
+  - type: Item
+    heldPrefix: ipc-master
+  - type: IdCard
+    jobTitle: ipc-master-card
+  - type: Access
+    enabled: true
+    tags:
+    - Ipc

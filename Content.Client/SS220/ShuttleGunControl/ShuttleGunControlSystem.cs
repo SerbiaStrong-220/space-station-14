@@ -4,9 +4,9 @@ using Robust.Client.Input;
 
 namespace Content.Client.SS220.ShuttleGunControl;
 
-public sealed class ShuttleGunControlSystem : SharedShuttleGunControlSystem
+public sealed partial class ShuttleGunControlSystem : SharedShuttleGunControlSystem
 {
-    [Dependency] private readonly IInputManager _input = default!;
+    [Dependency] private IInputManager _input = default!;
 
     private const string ShuttleGunControlContext = "additionalShuttle";
     private const string HumanContext = "human";

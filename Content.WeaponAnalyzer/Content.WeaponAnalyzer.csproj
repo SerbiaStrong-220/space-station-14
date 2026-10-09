@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
+    <StartupObject>Content.WeaponAnalyzer.Program</StartupObject>
     <ImplicitUsings>enable</ImplicitUsings>
     <OutputPath>..\bin\Content.WeaponAnalyzer\</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
@@ -10,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Content.IntegrationTests\Content.IntegrationTests.csproj" />
+    <PackageReference Include="CommandLineParser"/>
   </ItemGroup>
 
   <Import Project="..\RobustToolbox\MSBuild\Robust.Properties.targets" />

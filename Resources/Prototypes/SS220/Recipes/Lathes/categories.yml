@@ -5,13 +5,5 @@
   name: lathe-category-carpet
 
 - type: latheCategory
-  id: Shuttle
-  name: lathe-category-shuttle
-
-- type: latheCategory
-  id: Plastic
-  name: lathe-category-plastic
-
-- type: latheCategory
   id: TileTech
   name: lathe-category-tiletech

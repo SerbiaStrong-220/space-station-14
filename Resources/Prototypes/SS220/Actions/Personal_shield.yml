@@ -1,0 +1,10 @@
+- type: entity
+  parent: BaseAction
+  id: ActionTogglePersonalShield
+  name: Toggle personal shield
+  description: Toggles the personal shield on and off.
+  components:
+  - type: Action
+    itemIconStyle: BigItem
+  - type: InstantAction
+    event: !type:ToggleActionEvent

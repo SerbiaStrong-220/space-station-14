@@ -8,6 +8,7 @@
       department: Civilian
       time: 5h # SS220-RoleTime
   startingGear: ChefGear
+  experienceDefinition: ChefRoleExperience # SS220-experience
   icon: "JobIconChef"
   supervisors: job-supervisors-hop
   access:
@@ -21,7 +22,7 @@
 - type: startingGear
   id: ChefGear
   equipment:
-    shoes: ClothingShoesColorBlack
+    shoes: ClothingShoesChef
     id: ChefPDA
     ears: ClothingHeadsetService
 #    belt: ClothingBeltChefFilled #SS220 Chef Resprite

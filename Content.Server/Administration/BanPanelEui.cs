@@ -26,8 +26,8 @@ public sealed class BanPanelEui : BaseEui
     private string PlayerName { get; set; } = string.Empty;
     private IPAddress? LastAddress { get; set; }
     private ImmutableTypedHwid? LastHwid { get; set; }
-    private const int Ipv4_CIDR = 32;
-    private const int Ipv6_CIDR = 64;
+    private const int Ipv4_CIDR = CreateBanInfo.DefaultMaskIpv4;
+    private const int Ipv6_CIDR = CreateBanInfo.DefaultMaskIpv6;
 
     public BanPanelEui()
     {
@@ -73,6 +73,27 @@ public sealed class BanPanelEui : BaseEui
             return;
         }
 
+        var isRoleBan = ban.BannedJobs?.Length > 0 || ban.BannedAntags?.Length > 0;
+
+        // SS220-more-reasonable-ban-type-begin
+        // CreateBanInfo banInfo = isRoleBan ? new CreateRoleBanInfo(ban.Reason) : new CreateServerBanInfo(ban.Reason); [wizden]
+        CreateBanInfo banInfo = ban.BanType switch
+        {
+            BanType.Chat => new CreateChatsBanInfo(ban.Reason),
+            BanType.Species => new CreateSpeciesBanInfo(ban.Reason),
+            BanType.Role => new CreateRoleBanInfo(ban.Reason),
+            BanType.Server => new CreateServerBanInfo(ban.Reason),
+            _ => throw new NotImplementedException($"Ban type {ban.BanType} has no implementations!"),
+        };
+        // SS220-more-reasonable-ban-type-end
+
+        banInfo.WithBanningAdmin(Player.UserId);
+        banInfo.WithBanningAdminName(Player.Name); // SS220-add-admin-name-in-ban
+        banInfo.WithPostBanInfo(ban.PostBanInfo); // SSS220-add-post-ban-info
+        banInfo.WithSeverity(ban.Severity);
+        if (ban.BanDurationMinutes > 0)
+            banInfo.WithMinutes(ban.BanDurationMinutes);
+
         (IPAddress, int)? addressRange = null;
         if (ban.IpAddress is not null)
         {
@@ -113,100 +134,70 @@ public sealed class BanPanelEui : BaseEui
             targetHWid = ban.UseLastHwid ? located.LastHWId : ban.Hwid;
         }
 
-        if (ban.BannedJobs?.Length > 0 || ban.BannedAntags?.Length > 0)
+        if (addressRange != null)
+            banInfo.AddAddressRange(addressRange.Value);
+
+        if (targetUid != null)
+            banInfo.AddUser(targetUid.Value, ban.Target!);
+
+        banInfo.AddHWId(targetHWid);
+
+
+        switch (ban.BanType)
         {
-            var now = DateTimeOffset.UtcNow;
-            foreach (var role in ban.BannedJobs ?? [])
-            {
-                _banManager.CreateRoleBan(
-                    targetUid,
-                    ban.Target,
-                    Player.UserId,
-                    addressRange,
-                    targetHWid,
-                    role,
-                    ban.BanDurationMinutes,
-                    ban.Severity,
-                    ban.Reason,
-                    now,
-                    ban.PostBanInfo
-                );
-            }
+            case BanType.Chat:
+                var chatBanInfo = (CreateChatsBanInfo)banInfo;
+                foreach (var chat in ban.BannedChats ?? [])
+                {
+                    chatBanInfo.AddChat(chat);
+                }
+                _banManager.CreateChatsBan(chatBanInfo);
+                break;
 
-            foreach (var role in ban.BannedAntags ?? [])
-            {
-                _banManager.CreateRoleBan(
-                    targetUid,
-                    ban.Target,
-                    Player.UserId,
-                    addressRange,
-                    targetHWid,
-                    role,
-                    ban.BanDurationMinutes,
-                    ban.Severity,
-                    ban.Reason,
-                    now,
-                    ban.PostBanInfo
-                );
-            }
+            case BanType.Species:
+                var speciesBanInfo = (CreateSpeciesBanInfo)banInfo;
+                foreach (var specie in ban.BannedSpecies ?? [])
+                {
+                    speciesBanInfo.AddSpecie(specie);
+                }
+                _banManager.CreateSpeciesBan(speciesBanInfo);
+                break;
 
-            Close();
+            case BanType.Role:
+                var roleBanInfo = (CreateRoleBanInfo)banInfo;
+                foreach (var row in ban.BannedJobs ?? [])
+                {
+                    roleBanInfo.AddJob(row);
+                }
 
-            return;
+                foreach (var row in ban.BannedAntags ?? [])
+                {
+                    roleBanInfo.AddAntag(row);
+                }
+
+                _banManager.CreateRoleBan(roleBanInfo);
+                break;
+
+            case BanType.Server:
+                if (ban.Erase && targetUid is not null)
+                {
+                    try
+                    {
+                        if (_entities.TrySystem(out AdminSystem? adminSystem))
+                            adminSystem.Erase(targetUid.Value);
+                    }
+                    catch (Exception e)
+                    {
+                        _sawmill.Error($"Error while erasing banned player:\n{e}");
+                    }
+                }
+
+                _banManager.CreateServerBan((CreateServerBanInfo)banInfo);
+                break;
+
+            default:
+                throw new NotImplementedException($"Ban type {ban.BanType} has no implementations!");
         }
-
-        // SS220 species ban begin
-        if (ban.BannedSpecies?.Length > 0)
-        {
-            var now = DateTimeOffset.UtcNow;
-            foreach (var specie in ban.BannedSpecies ?? [])
-            {
-                _banManager.CreateSpeciesBan(
-                    targetUid,
-                    ban.Target,
-                    Player.UserId,
-                    addressRange,
-                    targetHWid,
-                    specie,
-                    ban.BanDurationMinutes,
-                    ban.Severity,
-                    ban.Reason,
-                    now,
-                    ban.PostBanInfo
-                );
-            }
-
-            Close();
-            return;
-        }
-        // SS220 species ban end
-
-        if (ban.Erase && targetUid is not null)
-        {
-            try
-            {
-                if (_entities.TrySystem(out AdminSystem? adminSystem))
-                    adminSystem.Erase(targetUid.Value);
-            }
-            catch (Exception e)
-            {
-                _sawmill.Error($"Error while erasing banned player:\n{e}");
-            }
-        }
-
-        _banManager.CreateServerBan(
-            targetUid,
-            ban.Target,
-            Player.UserId,
-            addressRange,
-            targetHWid,
-            ban.BanDurationMinutes,
-            ban.Severity,
-            Player.Name, //SS220-add-admin-name-to-perm-bans
-            ban.StatedRound, // SS220-add-round-id-to-ban
-            ban.Reason,
-            ban.PostBanInfo // SS220-add-post-ban-info
-        );
 
         Close();
     }

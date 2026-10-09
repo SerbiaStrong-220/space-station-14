@@ -35,7 +35,7 @@ public sealed partial class SuperMatterSystem
         _ambientSound.SetAmbience(entity.Owner, true);
 
         entity.Comp.Matter = entity.Comp.InitMatter * MatterNondimensionalization;
-        entity.Comp.InternalEnergy = GetSafeInternalEnergyToMatterValue(entity.Comp.Matter);
+        entity.Comp.InternalEnergy = GetSafeInternalEnergyToMatterValue(entity.Comp.Matter)[0].Energy;
         InitGasMolesAccumulator(entity.Comp);
     }
 
@@ -80,7 +80,7 @@ public sealed partial class SuperMatterSystem
             return;
         }
 
-        ConsumeObject(args.OtherEntity, entity, HasComp<HumanoidAppearanceComponent>(args.OtherEntity));
+        ConsumeObject(args.OtherEntity, entity, HasComp<HumanoidProfileComponent>(args.OtherEntity));
     }
 
     private void OnActivation(Entity<SuperMatterComponent> entity, ref SuperMatterActivationEvent args)
@@ -90,7 +90,7 @@ public sealed partial class SuperMatterSystem
 
         if (!entity.Comp.Activated)
         {
-            SendAdminChatAlert(entity, Loc.GetString("supermatter-admin-alert-activated"), $"{EntityManager.ToPrettyString(args.Target)}");
+            SendAdminChatAlert(entity, Loc.GetString("supermatter-admin-alert-activated"), $"{ToPrettyString(args.Target)}");
             _adminLog.Add(LogType.Action, LogImpact.High, $"Crystal {ToPrettyString(entity):user} was activated by {ToPrettyString(args.Target):target}");
             entity.Comp.Activated = true;
         }

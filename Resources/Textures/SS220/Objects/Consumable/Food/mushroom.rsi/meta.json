@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from space-station-14 at commit https://github.com/space-wizards/space-station-14/commit/8eff480c2960c80fb448ea876deee21aa43bad93, resprited for SS220 by TonyBigShoes (GitHub)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "mushroom-cooked"
+    }
+  ]
+}

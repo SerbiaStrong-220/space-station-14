@@ -15,14 +15,14 @@ using Content.Shared.SS220.CCVars;
 namespace Content.Client.SS220.SuperMatter.Observer;
 // It isn't a warCrime if you make shittyCode... kinda...
 
-public sealed class SuperMatterObserverSystem : EntitySystem
+public sealed partial class SuperMatterObserverSystem : EntitySystem
 {
-    [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
-    [Dependency] private readonly IRobustRandom _robustRandom = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private UserInterfaceSystem _userInterface = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private SharedAppearanceSystem _appearanceSystem = default!;
+    [Dependency] private IRobustRandom _robustRandom = default!;
+    [Dependency] private IConfigurationManager _config = default!;
 
     // 120 like 2 minutes with update rate 1 sec
     public const int MAX_CACHED_AMOUNT = 120;
@@ -89,7 +89,7 @@ public sealed class SuperMatterObserverSystem : EntitySystem
         if (args.SMGridId == null)
             return;
 
-        _entityLookup.GetChildEntities(EntityManager.GetEntity(args.SMGridId.Value), _observerEntities);
+        _entityLookup.GetChildEntities(GetEntity(args.SMGridId.Value), _observerEntities);
         foreach (var observerEnt in _observerEntities)
         {
             // To make possible many SMs on different grids
@@ -97,7 +97,7 @@ public sealed class SuperMatterObserverSystem : EntitySystem
             if (!HasComp<TransformComponent>(observerUid))
                 continue;
 
-            if (Transform(observerUid).GridUid != EntityManager.GetEntity(args.SMGridId))
+            if (Transform(observerUid).GridUid != GetEntity(args.SMGridId))
                 continue;
 
             // still it will store without power, cause, you know... caching =)
@@ -120,7 +120,7 @@ public sealed class SuperMatterObserverSystem : EntitySystem
             AddToCacheList(observerComp.InternalEnergy[args.Id], args.InternalEnergy);
 
             // here dispatches events to sprites of SM itself
-            _entityLookup.GetChildEntities(EntityManager.GetEntity(args.SMGridId.Value), _visualReceivers);
+            _entityLookup.GetChildEntities(GetEntity(args.SMGridId.Value), _visualReceivers);
             var state = GetVisualState(args);
 
             if (_robustRandom.Prob(RandomEventChance))
@@ -157,7 +157,7 @@ public sealed class SuperMatterObserverSystem : EntitySystem
 
     private void OnCrystalDelete(SuperMatterStateDeleted args)
     {
-        var enumerator = EntityManager.EntityQuery<SuperMatterObserverComponent>();
+        var enumerator = EntityQuery<SuperMatterObserverComponent>();
         foreach (var observerComp in enumerator)
         {
             TryDeleteData(args.ID, observerComp);

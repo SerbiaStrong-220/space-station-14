@@ -143,11 +143,11 @@
   components:
   - type: Stamp
     stampedName: stamp-component-stamped-name-nanotrasen-representative
-    stampedColor: "#eebe35" #SS220 TODO NanoTraisen Representative
-    stampState: "paper_stamp-centcom" #SS220 TODO NanoTraisen Representative
+    stampedColor: "#eebe35"
+    stampState: "paper_stamp-centcom"
   - type: Sprite
     sprite: SS220/Objects/Misc/stamps.rsi
-    state: stamp-centcom #SS220 TODO NanoTraisen Representative
+    state: stamp-centcom
 
 - type: entity
   name: Blue Shield rubber stamp
@@ -161,4 +161,38 @@
   - type: Sprite
     sprite: SS220/Objects/Misc/stamps.rsi
     state: stamp-blue-shield
+
+- type: entity
+  name: Red Wings rubber stamp
+  parent: RubberStampBase
+  id: RubberStampRedwings
+  description: Red Wings' rubber stamp.
+  components:
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-redwings
+    stampedColor: "#902922"
+    stampState: "paper_stamp-syndicate"
+  - type: Sprite
+    state: stamp-warden # TODO: make a unique sprite
+
+- type: entity
+  parent: RubberStampSyndicate
+  id: RubberStampChameleon
+  name: chameleon rubber stamp
+  description: A syndicate stamp that can be switched to imitate the stamp of any station head.
+  components:
+  - type: ChameleonStamp
+    prototype: RubberStampSyndicate
+    variants:
+    - RubberStampHos
+    - RubberStampHop
+    - RubberStampQm
+    - RubberStampRd
+    - RubberStampCMO
+    - RubberStampCE
+    - RubberStampSyndicate
+  - type: UserInterface
+    interfaces:
+      enum.ChameleonStampUiKey.Key:
+        type: ChameleonStampBoundUserInterface
 

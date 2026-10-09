@@ -9,6 +9,7 @@ using Content.Server.Prayer;
 using Content.Server.Silicons.Laws;
 using Content.Server.Station.Systems;
 using Content.Shared.Administration;
+using Content.Shared.Administration.Systems;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Configurable;
@@ -36,8 +37,9 @@ using Robust.Shared.Utility;
 using System.Linq;
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
-
+using Content.Shared.Construction;
 using static Content.Shared.Configurable.ConfigurationComponent;
+using Content.Shared.SS220.Experience;
 
 namespace Content.Server.Administration.Systems
 {
@@ -69,6 +71,7 @@ namespace Content.Server.Administration.Systems
         [Dependency] private readonly IPlayerManager _playerManager = default!;
         [Dependency] private readonly SiliconLawSystem _siliconLawSystem = default!;
         [Dependency] private readonly SharedBuckleSystem _buckle = default!;
+        [Dependency] private readonly SharedFlatpackSystem _flatpack = default!;
 
 
         private readonly Dictionary<ICommonSession, List<EditSolutionsEui>> _openSolutionUis = new();
@@ -502,7 +505,7 @@ namespace Content.Server.Administration.Systems
             }
 
             // Control mob verb
-            if (_toolshed.ActivePermissionController?.CheckInvokable(new CommandSpec(_toolshed.DefaultEnvironment.GetCommand("mind"), "control"), player, out _) ?? false &&
+            if ((_toolshed.ActivePermissionController?.CheckInvokable(new CommandSpec(_toolshed.DefaultEnvironment.GetCommand("mind"), "control"), player, out _) ?? false) &&
                 args.User != args.Target)
             {
                 Verb verb = new()
@@ -565,6 +568,24 @@ namespace Content.Server.Administration.Systems
                     args.Verbs.Add(verb);
                 }
             }
+
+            // SS220-add-experience-begin
+            if (HasComp<ExperienceComponent>(args.Target))
+            {
+                if (_groupController.CanCommand(player, "expeditor"))
+                {
+                    Verb verb = new()
+                    {
+                        Text = Loc.GetString("experience-editor-verb-text"),
+                        Category = VerbCategory.Debug,
+                        Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/students-cap.svg.192dpi.png")),
+                        Act = () => RaiseNetworkEvent(new OpenExperienceEditorRequest(GetNetEntity(args.Target)), player),
+                        Impact = LogImpact.Medium
+                    };
+                    args.Verbs.Add(verb);
+                }
+            }
+            // SS220-add-experience-end
 
             // In range unoccluded verb
             if (_groupController.CanCommand(player, "inrangeunoccluded"))
@@ -642,6 +663,25 @@ namespace Content.Server.Administration.Systems
                 };
                 args.Verbs.Add(verb);
             }
+
+            // SS220 add verb to instantly complete board construction start
+            if (_groupController.CanAdminMenu(player) && _flatpack.TryGetFlatpackResultPrototype(args.Target, out var proto))
+            {
+                Verb verb = new()
+                {
+                    Text = Loc.GetString("instant-complete-board-construction-verb-get-data-text"),
+                    Category = VerbCategory.Debug,
+                    Act = () =>
+                    {
+                        var targetTransform = Transform(args.Target);
+                        Spawn(proto.Value, targetTransform.Coordinates);
+                        QueueDel(args.Target);
+                    },
+                    Impact = LogImpact.Low,
+                };
+                args.Verbs.Add(verb);
+            }
+            // SS220 add verb to instantly complete board construction end
         }
 
         #region SolutionsEui

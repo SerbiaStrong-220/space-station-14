@@ -11,4 +11,16 @@
     priority: 1
   - type: InstantAction
     event: !type:ToggleIntrinsicUIEvent { key: enum.RadarConsoleUiKey.Key }
-    
+
+- type: entity
+  parent: BaseMentalAction
+  id: ActionGhostOpenArenaLobby
+  name: Arena Lobby
+  description: Open the arena lobby.
+  components:
+  - type: Action
+    icon: Interface/VerbIcons/antag-e_sword-temp.192dpi.png
+    priority: 2
+  - type: InstantAction
+    event: !type:OpenArenaLobbyActionEvent
+

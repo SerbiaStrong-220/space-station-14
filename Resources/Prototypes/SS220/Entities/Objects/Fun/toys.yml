@@ -65,7 +65,7 @@
     - type: Item
       sprite: Objects/Weapons/Melee/e_sword_double-inhands.rsi
     - type: Appearance
-    - type: ToggleableLightVisuals
+    - type: ToggleableVisuals
       spriteLayer: blade
       inhandVisuals:
         left:
@@ -92,14 +92,11 @@
     clumsyProof: true
   - type: HiddenDescription
     entries:
-    - label: hidden-desc-toy-weapons-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: hidden-desc-toy-weapons-clown
-      jobRequired:
-        - Clown
-        - Mime
+      SyndicateAgentKnowledge: [ hidden-desc-toy-weapons-syndicate ]
+      ServiceActorKnowledge: [ hidden-desc-toy-weapons-clown ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ServiceActorKnowledge, null]
 
 - type: entity
   parent: [ BaseGunToy, WeaponLauncherChinaLake ]
@@ -330,7 +327,7 @@
       heldPrefix: eshield
     - type: UseDelay
       delay: 0.5
-    - type: ToggleableLightVisuals
+    - type: ToggleableVisuals
       spriteLayer: shield
       inhandVisuals:
         left:
@@ -349,10 +346,10 @@
     - type: Appearance
     - type: HiddenDescription
       entries:
-      - label: hidden-desc-toy-weapons-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
+        SyndicateAgentKnowledge: [ hidden-desc-toy-weapons-syndicate ]
+      nameEntries:
+      - [SyndicateAgentKnowledge, null]
+      hiddenName: ent-EnergyShieldToy
 
 #katana for some reason
 - type: entity

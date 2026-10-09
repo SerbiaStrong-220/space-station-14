@@ -15,8 +15,8 @@ namespace Content.Client.SS220.SmartGasMask;
 [GenerateTypedNameReferences]
 public sealed partial class SmartGasMaskMenu : RadialMenu
 {
-    [Dependency] private readonly EntityManager _entityManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private EntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     public event Action<ProtoId<AlertSmartGasMaskPrototype>>? SendAlertSmartGasMaskRadioMessageAction;
 

@@ -43,7 +43,7 @@
         friction: 0.2
 
 - type: entity
-  parent: [ProjectileGrenadeBase, BaseSecurityContraband]
+  parent: [FragileGrenadeBase, ProjectileGrenadeBase, BaseSecurityContraband]
   id: GrenadeStinger
   name: stinger grenade
   description: Nothing to see here, please disperse.
@@ -81,7 +81,7 @@
   # SS-220 grenades timer ended
 
 - type: entity
-  parent: [ProjectileGrenadeBase] # SS220 Remove BaseSyndicateContraband
+  parent: [FragileGrenadeBase, ProjectileGrenadeBase, BaseSyndicateContraband]
   id: GrenadeIncendiary
   name: incendiary grenade
   description: Guaranteed to light up the mood.
@@ -117,7 +117,7 @@
   # SS-220 grenades timer ended
 
 - type: entity
-  parent: [ProjectileGrenadeBase] # SS220 Remove BaseSyndicateContraband
+  parent: [FragileGrenadeBase, ProjectileGrenadeBase, BaseSyndicateContraband]
   id: GrenadeShrapnel
   name: shrapnel grenade
   description: Releases a deadly spray of shrapnel that causes severe bleeding.

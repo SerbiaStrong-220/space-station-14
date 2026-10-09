@@ -11,17 +11,22 @@ public sealed partial class CCVars220
         CVarDef.Create("tts.receive_tts", true, CVar.CLIENT | CVar.REPLICATED | CVar.ARCHIVE);
 
     /// <summary>
-    /// Master switch for receiving tts
+    /// Boolean for queueing tts with different radio channels together or sequentially
     /// </summary>
     public static readonly CVarDef<bool> PlayDifferentRadioTogether =
         CVarDef.Create("tts.play_different_radio_together", true, CVar.CLIENTONLY | CVar.ARCHIVE);
 
     /// <summary>
-    /// Master switch for receiving tts
+    /// Boolean for queueing tts with different source in speech together or sequentially
     /// </summary>
     public static readonly CVarDef<bool> PlayDifferentTalkingTogether =
         CVarDef.Create("tts.play_different_talk_together", true, CVar.CLIENTONLY | CVar.ARCHIVE);
 
+    /// <summary>
+    /// Boolean for queueing tts with different radio channels and speakers together or sequentially
+    /// </summary>
+    public static readonly CVarDef<bool> PlayDifferentRadioSourcesTogether =
+        CVarDef.Create("tts.play_different_radio_sources_together", true, CVar.CLIENTONLY | CVar.ARCHIVE);
 
     public static readonly CVarDef<bool> UseFFMpegProcessing =
         CVarDef.Create("tts.use_ffmpeg_processing", true, CVar.SERVERONLY | CVar.ARCHIVE);

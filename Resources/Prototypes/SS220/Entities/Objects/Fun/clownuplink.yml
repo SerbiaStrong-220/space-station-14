@@ -154,6 +154,19 @@
     stock: 2
 
 - type: listing
+  id: NinjaSetFake
+  name: uplink-clown-ninja-set-fake-name
+  description: uplink-clown-ninja-set-fake-desc
+  productEntity: ClothingBackpackNinjaSetFake
+  cost:
+    TrashBananaPeel: 175
+  categories:
+  - AdditionalClown
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+- type: listing
   id: CluwneCommsComputerCircuitboardUnconvertible
   name: uplink-clown-cluwne-comms-circuitboard-name
   description: uplink-clown-cluwne-comms-circuitboard-desc
