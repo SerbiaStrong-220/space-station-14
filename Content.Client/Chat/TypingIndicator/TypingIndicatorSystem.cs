@@ -7,7 +7,7 @@ using Robust.Shared.Timing;
 namespace Content.Client.Chat.TypingIndicator;
 
 // Client-side typing system tracks user input in chat box
-public sealed class TypingIndicatorSystem : SharedTypingIndicatorSystem
+public sealed partial class TypingIndicatorSystem : SharedTypingIndicatorSystem //SS220 telepathy
 {
     [Dependency] private readonly IGameTiming _time = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
@@ -90,7 +90,7 @@ public sealed class TypingIndicatorSystem : SharedTypingIndicatorSystem
             state = _isClientTyping ? TypingIndicatorState.Typing : TypingIndicatorState.Idle;
 
         // send a networked event to server
-        RaisePredictiveEvent(new TypingChangedEvent(state));
+        SendTypingChangedEvent(state); //SS220 telepathy
     }
 
     private void OnShowTypingChanged(bool showTyping)

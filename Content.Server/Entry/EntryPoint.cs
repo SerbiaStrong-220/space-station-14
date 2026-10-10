@@ -131,6 +131,7 @@ namespace Content.Server.Entry
             _proto.RegisterIgnore("parallax");
             _proto.RegisterIgnore("wristWatchStyle"); // SS220 Wrist Watch
             _proto.RegisterIgnore("spriteFont"); // SS220 Calculator
+            _proto.RegisterIgnore("chatChannelPresentation"); // SS220 chat presentation
 
             _loc.Initialize();
 

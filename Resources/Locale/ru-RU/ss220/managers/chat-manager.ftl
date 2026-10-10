@@ -1,4 +1,7 @@
-chat-manager-send-telepathy-message = [bold][color = { $color }]{ $channel } Эхо разума { $senderName } вещает:[/bold] { $message } [/color]
+chat-manager-send-telepathy-message = [color = { $color }][bold]{ $channel } Эхо разума{ $hasSenderName ->
+    [true] { " " }[BubbleHeader]{ $senderName }[/BubbleHeader]
+    *[false] [BubbleHeader][/BubbleHeader]
+    } вещает:[/bold] [BubbleContent][color = { $color }]{ $message }[/color][/BubbleContent] [/color]
 chat-manager-send-telepathy-announce = [color = { $color }]{ $channel } [bold]Эхо разума вещает:[/color][/bold] { $announce }
 
 chat-speech-verb-name-vulpin = Вульпканин

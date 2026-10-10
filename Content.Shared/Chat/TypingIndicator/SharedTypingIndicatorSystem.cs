@@ -10,7 +10,7 @@ namespace Content.Shared.Chat.TypingIndicator;
 /// <summary>
 ///     Supports typing indicators on entities.
 /// </summary>
-public abstract class SharedTypingIndicatorSystem : EntitySystem
+public abstract partial class SharedTypingIndicatorSystem : EntitySystem //SS220 telepathy
 {
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
@@ -72,6 +72,7 @@ public abstract class SharedTypingIndicatorSystem : EntitySystem
             return;
         }
 
+        var state = GetPublicTypingState(uid.Value, ev); //SS220 telepathy
         // check if this entity can speak or emote
         if (!_actionBlocker.CanEmote(uid.Value) && !_actionBlocker.CanSpeak(uid.Value))
         {
@@ -80,7 +81,7 @@ public abstract class SharedTypingIndicatorSystem : EntitySystem
             return;
         }
 
-        SetTypingIndicatorState(uid.Value, ev.State);
+        SetTypingIndicatorState(uid.Value, state); //SS220 telepathy
     }
 
     private void SetTypingIndicatorState(EntityUid uid, TypingIndicatorState state, AppearanceComponent? appearance = null)
