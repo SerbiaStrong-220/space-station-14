@@ -65,7 +65,11 @@
       FootLeft: OrganIpcFootLeft
       FootRight: OrganIpcFootRight
       Brain: OrganIpcBrain
-      #Eyes: OrganIpcEyes
+      Eyes: OrganIpcEyes
+      Ears: OrganIpcEars
+      Tongue: OrganIpcTongue
+      Stomach: OrganIpcStomach
+      Muscle: OrganIpcMuscle 
   - type: HumanoidProfile
     species: Ipc
   - type: Inventory
@@ -401,23 +405,18 @@
     sprite: SS220/Mobs/Species/Ipc/organs.rsi
 
 - type: entity
-  id: OrganIpcVisual
+  parent: OrganIpc
+  id: OrganIpcExternal
   abstract: true
   components:
+  - type: Sprite
+    sprite: SS220/Mobs/Species/Ipc/parts.rsi
   - type: VisualOrgan
     data:
       sprite: SS220/Mobs/Species/Ipc/parts.rsi
   - type: VisualOrganMarkings
     markingData:
       group: Ipc
-
-- type: entity
-  parent: [ OrganIpc, OrganIpcVisual ]
-  id: OrganIpcExternal
-  abstract: true
-  components:
-  - type: Sprite
-    sprite: SS220/Mobs/Species/Ipc/parts.rsi
 
 - type: entity
   parent: [ OrganBaseTorso, OrganIpcExternal ]
@@ -474,6 +473,42 @@
     state: brain
   - type: BorgBrain
 
-#- type: entity
-#  parent: [ OrganIpcVisual, OrganBaseEyes, OrganIpcInternal ]
-#  id: OrganIpcEyes
+- type: entity
+  parent: [ OrganBaseEyes, OrganIpcInternal, OrganIpcExternal ]
+  id: OrganIpcEyes
+  components:
+  - type: VisualOrgan
+    data:
+      sprite: Mobs/Customization/eyes.rsi
+      state: no_eyes
+  - type: Item
+    heldPrefix: eyeballs
+
+- type: entity
+  parent: [ OrganBaseEars, OrganSpriteHumanInternal, OrganIpcInternal ]
+  id: OrganIpcEars
+  components:
+  - type: Sprite
+    sprite: SS220/Mobs/Species/Ipc/organs.rsi
+    state: ears
+  - type: Item
+    heldPrefix: ears
+
+- type: entity
+  parent: [ OrganBaseTongue, OrganIpcInternal ]
+  id: OrganIpcTongue
+
+- type: entity
+  parent: [ OrganBaseStomach, OrganIpcInternal ]
+  id: OrganIpcStomach
+
+- type: entity
+  parent: [ OrganBase, OrganIpcInternal ]
+  id: OrganIpcMuscle
+  components:
+    - type: GibbableOrgan
+    - type: Sprite
+      sprite: SS220/Mobs/Species/Ipc/organs.rsi
+      state: muscle
+    - type: Organ
+      category: Muscle
