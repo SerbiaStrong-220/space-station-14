@@ -68,7 +68,7 @@ namespace Content.Client.Input
             human.AddFunction(ContentKeyFunctions.AltUseItemInHand);
             human.AddFunction(KeyFunctions220.OpenExperienceViewerMenu); // SS220-experience-update
             human.AddFunction(ContentKeyFunctions.OpenCharacterMenu);
-            human.AddFunction(ContentKeyFunctions.ToggleActiveBlocking); //SS220 shield rework
+            human.AddFunction(KeyFunctions220.ToggleActiveBlocking); //SS220 shield rework
             human.AddFunction(ContentKeyFunctions.OpenEmotesMenu);
             human.AddFunction(ContentKeyFunctions.ActivateItemInWorld);
             human.AddFunction(ContentKeyFunctions.ThrowItemInHand);
