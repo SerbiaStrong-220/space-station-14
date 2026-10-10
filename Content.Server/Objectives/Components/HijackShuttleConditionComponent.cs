@@ -8,4 +8,7 @@ namespace Content.Server.Objectives.Components;
 [RegisterComponent, Access(typeof(HijackShuttleConditionSystem))]
 public sealed partial class HijackShuttleConditionComponent : Component
 {
+    // SS220 MalfAI
+    [DataField]
+    public bool RequireOwnerOnShuttle = true;
 }

@@ -75,6 +75,12 @@ public sealed partial class StoreSystem
     /// </summary>
     private void OnBuyRequest(EntityUid uid, StoreComponent component, StoreBuyListingMessage msg)
     {
+        // SS220 MalfAI begin: remote store messages must still respect account ownership.
+        if (component.OwnerOnly
+            && (component.AccountOwner is not { } accountOwner || GetBuyerMind(msg.Actor) != accountOwner))
+            return;
+        // SS220 MalfAI end
+
         var listing = component.FullListingsCatalog.FirstOrDefault(x => x.ID.Equals(msg.Listing.Id));
 
         if (listing == null) //make sure this listing actually exists

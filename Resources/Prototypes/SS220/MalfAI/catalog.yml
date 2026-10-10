@@ -1,0 +1,187 @@
+﻿# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: listing
+  id: MalfAiBlackout
+  name: malfai-module-blackout-name
+  description: malfai-module-blackout-desc
+  productAction: ActionMalfAiBlackout
+  cost:
+    MalfCPU: 15
+  categories:
+  - MalfAiModules
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+- type: listing
+  id: MalfAiThermalOverride
+  name: malfai-module-thermal-name
+  description: malfai-module-thermal-desc
+  icon: { sprite: SS220/Interface/Actions/actions_malfai.rsi, state: thermal_override }
+  cost:
+    MalfCPU: 25
+  categories:
+  - MalfAiModules
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+- type: listing
+  id: MalfAiAirFlood
+  name: malfai-module-flood-name
+  description: malfai-module-flood-desc
+  productAction: ActionMalfAiAirFlood
+  cost:
+    MalfCPU: 50
+  categories:
+  - MalfAiModules
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+- type: listing
+  id: MalfAiLockdown
+  name: malfai-module-lockdown-name
+  description: malfai-module-lockdown-desc
+  icon: { sprite: SS220/Interface/Actions/actions_malfai.rsi, state: lockdown }
+  cost:
+    MalfCPU: 30
+  categories:
+  - MalfAiModules
+
+- type: listing
+  id: MalfAiTurretUpgrade
+  name: malfai-module-turret-name
+  description: malfai-module-turret-desc
+  icon: { sprite: SS220/Interface/Actions/actions_malfai.rsi, state: turret_upgrade }
+  cost:
+    MalfCPU: 30
+  categories:
+  - MalfAiModules
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+- type: listing
+  id: MalfAiDeployTurret
+  name: malfai-module-deploy-name
+  description: malfai-module-deploy-desc
+  productAction: ActionMalfAiDeployTurret
+  cost:
+    MalfCPU: 30
+  categories:
+  - MalfAiModules
+
+- type: listing
+  id: MalfAiMachineOverride
+  name: malfai-module-machine-override-name
+  description: malfai-module-machine-override-desc
+  productAction: ActionMalfAiMachineOverride
+  cost:
+    MalfCPU: 50
+  categories:
+  - MalfAiModules
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+- type: listing
+  id: MalfAiMachineOverload
+  name: malfai-module-machine-overload-name
+  description: malfai-module-machine-overload-desc
+  productAction: ActionMalfAiMachineOverload
+  cost:
+    MalfCPU: 50
+  categories:
+  - MalfAiModules
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+- type: listing
+  id: MalfAiRobotFactory
+  name: malfai-module-robot-factory-name
+  description: malfai-module-robot-factory-desc
+  productAction: ActionMalfAiRobotFactory
+  cost:
+    MalfCPU: 100
+  categories:
+  - MalfAiModules
+
+- type: listing
+  id: MalfAiDoomsday
+  name: malfai-module-doomsday-name
+  description: malfai-module-doomsday-desc
+  icon: { sprite: SS220/Interface/Actions/actions_malfai.rsi, state: doomsday }
+  cost:
+    MalfCPU: 130
+  categories:
+  - MalfAiModules
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+- type: listing
+  id: MalfAiSilentRecords
+  name: malfai-module-silent-records-name
+  description: malfai-module-silent-records-desc
+  icon: { sprite: SS220/Interface/Actions/actions_malfai.rsi, state: silent_records }
+  cost:
+    MalfCPU: 30
+  categories:
+  - MalfAiModules
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+- type: listing
+  id: MalfAiPowerSiphon
+  name: malfai-module-power-siphon-name
+  description: malfai-module-power-siphon-desc
+  productAction: ActionMalfAiPowerSiphon
+  cost:
+    MalfCPU: 40
+  categories:
+  - MalfAiModules
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+- type: listing
+  id: MalfAiChaosPulse
+  name: malfai-module-chaos-name
+  description: malfai-module-chaos-desc
+  productAction: ActionMalfAiChaosPulse
+  cost:
+    MalfCPU: 40
+  categories:
+  - MalfAiModules
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+- type: listing
+  id: MalfAiEmag
+  name: malfai-module-emag-name
+  description: malfai-module-emag-desc
+  productAction: ActionMalfAiEmag
+  cost:
+    MalfCPU: 20
+  categories:
+  - MalfAiModules
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+- type: listing
+  id: MalfAiCameraUpgrade
+  name: malfai-module-camera-name
+  description: malfai-module-camera-desc
+  icon: { sprite: SS220/Interface/Actions/actions_malfai.rsi, state: camera_upgrade }
+  cost:
+    MalfCPU: 25
+  categories:
+  - MalfAiModules
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1

@@ -12,6 +12,12 @@ public sealed class ApcVisualizerSystem : VisualizerSystem<ApcVisualsComponent>
         if (args.Sprite == null)
             return;
 
+        // SS220 MalfAI begin
+        if (AppearanceSystem.TryGetData<bool>(uid, ApcVisuals.Hacked, out var hacked, args.Component)
+            && SpriteSystem.LayerMapTryGet((uid, args.Sprite), ApcVisualLayers.ChargeState, out _, false))
+            SpriteSystem.LayerSetColor((uid, args.Sprite), ApcVisualLayers.ChargeState, hacked ? Color.SkyBlue : Color.White);
+        // SS220 MalfAI end
+
         // get the mapped layer index of the first lock layer and the first channel layer
         var lockIndicatorOverlayStart = SpriteSystem.LayerMapGet((uid, args.Sprite), ApcVisualLayers.InterfaceLock);
         var channelIndicatorOverlayStart = SpriteSystem.LayerMapGet((uid, args.Sprite), ApcVisualLayers.Equipment);

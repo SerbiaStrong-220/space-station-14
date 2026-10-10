@@ -18,6 +18,9 @@ using Robust.Shared.Prototypes;
 using Content.Server.StationRecords.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.CrewManifest;
+using Content.Shared.Mind;
+using Content.Shared.Roles;
+using Content.Shared.SS220.MalfAI; // SS220 MalfAI
 
 namespace Content.Server.SS220.CriminalRecords;
 
@@ -33,6 +36,8 @@ public sealed partial class GeneralStationRecordConsoleSystem : EntitySystem
     [Dependency] private RadioSystem _radio = default!;
     [Dependency] private AudioSystem _audio = default!;
     [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private SharedMindSystem _mind = default!; // SS220 MalfAI
+    [Dependency] private SharedRoleSystem _roles = default!; // SS220 MalfAI
 
     private static readonly TimeSpan CooldownLagTolerance = TimeSpan.FromSeconds(0.5);
 
@@ -150,7 +155,8 @@ public sealed partial class GeneralStationRecordConsoleSystem : EntitySystem
             {
                 if (_prototype.TryIndex(args.StatusTypeId.Value, out var status))
                 {
-                    if (!string.IsNullOrWhiteSpace(status.RadioReportMessage))
+                    if (!string.IsNullOrWhiteSpace(status.RadioReportMessage)
+                        && !IsMalfSilentRecords(args.Actor)) // SS220 MalfAI
                     {
                         SendRadioMessage(
                             ent.Owner,
@@ -164,6 +170,15 @@ public sealed partial class GeneralStationRecordConsoleSystem : EntitySystem
         ent.Comp.LastEditTime = currentTime;
         _audio.PlayPvs(ent.Comp.DatabaseActionSound, ent.Owner);
     }
+
+    // SS220 MalfAI begin
+    private bool IsMalfSilentRecords(EntityUid actor)
+    {
+        return _mind.TryGetMind(actor, out var mindId, out _)
+            && _roles.MindHasRole<MalfAiRoleComponent>(mindId, out var role)
+            && role.Value.Comp2.SilentCriminalRecords;
+    }
+    // SS220 MalfAI end
 
     private void OnCriminalStatusDelete(Entity<CriminalRecordsConsole220Component> entity, ref DeleteCriminalRecordStatus args)
     {

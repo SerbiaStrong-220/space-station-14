@@ -1,0 +1,22 @@
+﻿# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  parent: WeaponEnergyTurretStationBase
+  id: MalfAiDeployableTurret
+  categories: [ HideSpawnMenu ]
+  name: malfunction turret
+  description: A hacked autonomous turret that fires on hostile targets.
+  components:
+  - type: MalfAiDeployedTurret
+  - type: BatteryAmmoProvider
+    proto: BulletEnergyTurretLaser
+    fireCost: 100
+  - type: BatteryWeaponFireModes
+    currentFireMode: 0
+    fireModes:
+    - proto: BulletEnergyTurretLaser
+      fireCost: 100
+    - proto: BulletEnergyTurretDisabler
+      fireCost: 100
+  - type: NpcFactionMember
+    factions:
+    - MalfAi
