@@ -154,9 +154,6 @@
         dependsOnAdaptation: true
         duration: 5
         refresh: false
-      - !type:StaminaChange
-        probability: 0.1
-        value: 10
       - !type:Hallucination
         setting:
           randomEntities: HallucinationReagentFrontier
