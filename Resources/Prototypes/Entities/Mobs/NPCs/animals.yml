@@ -2051,6 +2051,33 @@
       behaviors:
       - !type:GibBehavior
         recursive: false
+  #SS220 mousereproduction begin
+  - type: Reproductive
+    partnerWhitelist:
+      tags:
+      - Mouse
+    nextBreedAttempt: 10
+    makeOffspringInfant: true
+    hungerPerBirth: 5
+    offspring:
+    - id: MobMouse
+      amount: 1
+      maxAmount: 3
+    - id: MobMouse1
+      amount: 1
+      maxAmount: 3
+    - id: MobMouse2
+      amount: 1
+      maxAmount: 3
+    - id: MobMouseCancer
+      amount: 0
+      maxAmount: 1
+    - id: CultRatCorrupted
+      amount: 0
+      maxAmount: 1
+    breedRange: 2
+  - type: ReproductivePartner
+  #SS220 mousereproduction end
 
 - type: entity
   parent: MobMouse
@@ -2191,6 +2218,21 @@
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: Zombie
+  #SS220 mousereproduction begin
+  - type: Reproductive
+    partnerWhitelist:
+      tags:
+      - Mouse
+    nextBreedAttempt: 10
+    makeOffspringInfant: true
+    hungerPerBirth: 5
+    offspring:
+    - id: MobMouseCancer
+      amount: 2
+      maxAmount: 6
+    breedRange: 2
+  - type: ReproductivePartner
+  #SS220 mousereproduction end
 
 - type: entity
   name: lizard #Weh
