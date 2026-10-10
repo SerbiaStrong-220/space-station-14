@@ -1,4 +1,3 @@
-using Content.Shared.Database;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Verbs;
@@ -150,23 +149,21 @@ public abstract class SharedItemSystem : EntitySystem
     {
         var user = args.User;
 
-        if (TryComp<MouthContainerComponent>(user, out var mouthComp))
+        if (!args.CanAccess || !args.CanInteract || !TryComp<MouthContainerComponent>(user, out var mouthComp))
+            return;
+
+        var toInsert = ent.Owner;
+        if (!_mouthSystem.CanInsert((user, mouthComp), toInsert))
+            return;
+
+        var verb = new AlternativeVerb
         {
-            var toInsert = ent.Owner;
-            if (_mouthSystem.CanInsert((user, mouthComp), toInsert))
-            {
-                var v = new AlternativeVerb
-                {
-                    Priority = 1,
-                    Text = Loc.GetString(mouthComp.InsertVerbIn),
-                    Disabled = false,
-                    Impact = LogImpact.Medium,
-                    DoContactInteraction = true,
-                    Act = () => _mouthSystem.TryStartInsert((user, mouthComp), user, toInsert),
-                };
-                args.Verbs.Add(v);
-            }
-        }
+            Priority = 1,
+            Text = Loc.GetString(mouthComp.InsertVerbIn),
+            DoContactInteraction = true,
+            Act = () => _mouthSystem.TryStartInsert((user, mouthComp), user, toInsert),
+        };
+        args.Verbs.Add(verb);
     }
     // SS220 mouth container end
 
