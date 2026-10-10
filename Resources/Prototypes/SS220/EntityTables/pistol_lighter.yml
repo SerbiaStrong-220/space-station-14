@@ -1,0 +1,26 @@
+- type: entityTable
+  id: PistolMk58OrLighterTable
+  table: !type:GroupSelector
+    children:
+    - id: WeaponPistolMk58
+      weight: 299
+    - id: PistolLighter
+      weight: 1
+
+- type: entityTable
+  id: PistolLighterMaintLootTable
+  table: !type:GroupSelector
+    children:
+    - !type:NoneSelector
+      weight: 299
+    - id: PistolLighter
+      weight: 1
+
+- type: entityTable
+  id: PistolLighterContrabandTable
+  table: !type:GroupSelector
+    children:
+    - id: Lighter
+      weight: 39
+    - id: PistolLighter
+      weight: 1
