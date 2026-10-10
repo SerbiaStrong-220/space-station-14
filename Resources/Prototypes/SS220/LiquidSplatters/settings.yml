@@ -1,0 +1,17 @@
+﻿- type: liquidSplattersSettings
+  id: liquidSplattersSettingsDefault
+  clothingSolutionScale: 0.15
+  damageSolutionScale: 0.3
+  minSplatterDamage: 1
+  clothingSlotChances:
+    outerClothing: 0.5
+    jumpsuit: 0.7
+    gloves: 0.9
+    head: 0.5
+    mask: 0.9
+    shoes: 0.2
+    neck: 0.5
+  cleaningReagentsEffectiveness:
+    SpaceCleaner: 1
+    SoapReagent: 0.5
+    Water: 0.25

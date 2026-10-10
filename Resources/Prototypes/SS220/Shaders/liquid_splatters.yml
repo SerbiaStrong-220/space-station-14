@@ -1,0 +1,6 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+# SS220 paint-all-red
+- type: shader
+  id: LiquidSplatters
+  kind: source
+  path: "/Textures/SS220/Shaders/liquid_splatters.swsl"
