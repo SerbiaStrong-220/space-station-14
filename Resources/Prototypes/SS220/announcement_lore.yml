@@ -1,0 +1,12 @@
+- type: announcementLore
+  id: StartAnnounceLore
+  idleRound: 3
+  sendChance: 0.5
+  idleTime: 1m
+  loreDatasetId:
+    department-internal-affairs: AnnouncementLoreInternalAffairs
+    department-audit: AnnouncementLoreAudit
+    department-protection-asset: AnnouncementLoreProtectionAsset
+    department-external-relations: AnnouncementLoreExternalRelations
+    department-assets: AnnouncementLoreAssets
+    department-logistics: AnnouncementLoreLogistics
