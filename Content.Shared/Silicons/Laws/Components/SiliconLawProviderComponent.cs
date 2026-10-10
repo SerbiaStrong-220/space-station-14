@@ -35,4 +35,11 @@ public sealed partial class SiliconLawProviderComponent : Component
     [DataField]
     public bool Subverted = false;
 
+    // SS220 random lawset begin
+    /// <summary>
+    /// Whether this provider uses the station's randomly selected default lawset.
+    /// </summary>
+    [DataField]
+    public bool UseRandomLawset = false;
+    // SS220 random lawset end
 }
