@@ -1,0 +1,25 @@
+- type: entity
+  id: SynthBrainCapsule
+  parent: SynthBrainBase
+  name: biocapsule
+  description: This small-but-capable capsule contains a human brain and everything it needs to function along with neural interface.
+  components:
+  - type: Item
+    storedRotation: -90
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Robotics/Synthetic/parts.rsi
+    state: biocapsule
+
+- type: entity
+  id: SynthBrainPositronic
+  parent: SynthBrainBase
+  name: synthetic positronic brain
+  description: A positronic brain with synthetic-compatible interface.
+  components:
+  - type: Item
+    storedRotation: -90
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Robotics/Synthetic/posibrainsynth.rsi
+    state: posibrain-occupied
+  - type: TypingIndicator
+    proto: robot

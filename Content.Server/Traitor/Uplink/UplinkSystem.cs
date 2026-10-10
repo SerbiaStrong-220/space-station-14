@@ -1,4 +1,3 @@
-using System.Linq;
 using Content.Server.PDA.Ringer;
 using Content.Server.Store.Systems;
 using Content.Server.StoreDiscount.Systems;
@@ -10,8 +9,10 @@ using Content.Shared.Mind;
 using Content.Shared.PDA;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
+using Content.Shared.Tag;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
+using System.Linq;
 
 namespace Content.Server.Traitor.Uplink;
 
@@ -24,11 +25,13 @@ public sealed class UplinkSystem : EntitySystem
     [Dependency] private readonly SharedSubdermalImplantSystem _subdermalImplant = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly RingerSystem _ringer = default!;
+    [Dependency] private readonly TagSystem _tag = default!; // SS220 add unimplanteable fallback options
 
     public static readonly EntProtoId<StoreComponent> TraitorUplinkStore = "StorePresetRemoteUplink";
     public static readonly ProtoId<CurrencyPrototype> TelecrystalCurrencyPrototype = "Telecrystal";
     private static readonly EntProtoId FallbackUplinkImplant = "UplinkImplant";
     private static readonly ProtoId<ListingPrototype> FallbackUplinkCatalog = "UplinkUplinkImplanter";
+    private static readonly ProtoId<TagPrototype> UnimplantableTag = "Unimplantable"; // SS220 add unimplanteable fallback options
 
     public override void Initialize()
     {
@@ -86,10 +89,12 @@ public sealed class UplinkSystem : EntitySystem
             return AddUplinkResult.Pda;
         }
 
-        if (TryImplantUplink(user, storeEntity, balance, giveDiscounts, useDynamics)) // SS220 DynamicTraitor
-        {
-            return AddUplinkResult.Implant;
-        }
+        //SS220 add fallback implant options begin
+        var result = TryImplantUplink(user, storeEntity, balance, giveDiscounts, useDynamics);
+
+        if (result != AddUplinkResult.Failure)
+            return result;
+        //SS220 add fallback implant options end
 
         Del(storeEntity);
         return AddUplinkResult.Failure;
@@ -103,7 +108,8 @@ public sealed class UplinkSystem : EntitySystem
         EntityUid storeEntity,
         bool giveDiscounts = false,
         bool bindToPda = false,
-        bool useDynamics = false)
+        bool useDynamics = false,
+        bool mustHaveCode = true)
     {
         code = null;
         uplinkEntity ??= FindUplinkTarget(user);
@@ -114,7 +120,7 @@ public sealed class UplinkSystem : EntitySystem
         var ev = new GenerateUplinkCodeEvent();
         RaiseLocalEvent(storeEntity, ref ev);
 
-        if (ev.Code == null)
+        if (ev.Code == null && mustHaveCode)
         {
             QueueDel(storeEntity);
             return false;
@@ -136,7 +142,7 @@ public sealed class UplinkSystem : EntitySystem
     /// <summary>
     /// Configure TC for the uplink
     /// </summary>
-    private void SetUplink(EntityUid user, EntityUid store, FixedPoint2 balance, bool giveDiscounts, bool useDynamics) // SS220 DynamicTraitor
+    public void SetUplink(EntityUid user, EntityUid store, FixedPoint2 balance, bool giveDiscounts, bool useDynamics) // SS220 DynamicTraitor
     {
         if (!_mind.TryGetMind(user, out var mind, out _))
             return;
@@ -163,18 +169,31 @@ public sealed class UplinkSystem : EntitySystem
     /// <summary>
     /// Implant an uplink as a fallback measure if the traitor had no PDA
     /// </summary>
-    public bool TryImplantUplink(EntityUid user, EntityUid storeEntity, FixedPoint2 balance, bool giveDiscounts, bool useDynamics) // SS220 DynamicTraitor
+    public AddUplinkResult TryImplantUplink(EntityUid user, EntityUid storeEntity, FixedPoint2 balance, bool giveDiscounts, bool useDynamics) // SS220 DynamicTraitor
     {
         if (!_proto.Resolve(FallbackUplinkCatalog, out var catalog))
-            return false;
+            return AddUplinkResult.Failure; //SS220 add unimplanteable fallback options
 
         if (!catalog.Cost.TryGetValue(TelecrystalCurrencyPrototype, out var cost))
-            return false;
+            return AddUplinkResult.Failure;  //SS220 add unimplanteable fallback options
 
         if (balance < cost) // Can't use Math functions on FixedPoint2
             balance = 0;
         else
             balance = balance - cost;
+
+        //SS220 add unimplanteable fallback options begin
+        if (_tag.HasTag(user, UnimplantableTag))
+        {
+            var fallbackEv = new FallbackUplinkRequiredEvent(user, balance, giveDiscounts, useDynamics, TelecrystalCurrencyPrototype, FallbackUplinkCatalog);
+            RaiseLocalEvent(user, ref fallbackEv);
+
+            if (fallbackEv.Handled)
+                return AddUplinkResult.Hidden;
+
+            return AddUplinkResult.Failure;
+        }
+        //SS220 add unimplanteable fallback options end
 
         SetUplink(user, storeEntity, balance, giveDiscounts, useDynamics);
         var implant = _subdermalImplant.AddImplant(user, FallbackUplinkImplant);
@@ -182,10 +201,10 @@ public sealed class UplinkSystem : EntitySystem
         if (!HasComp<RemoteStoreComponent>(implant))
         {
             Log.Error($"Implant does not have the store component {implant}");
-            return false;
+            return AddUplinkResult.Failure; //SS220 add unimplanteable fallback options
         }
 
-        return true;
+        return AddUplinkResult.Implant; //SS220 add unimplanteable fallback options
     }
 
     /// <summary>
@@ -233,4 +252,11 @@ public enum AddUplinkResult
     Pda,
     Implant,
     Failure,
+    Hidden //SS220 add unimplanteable fallback options 
 }
+
+
+//SS220 add unimplanteable fallback options begin
+[ByRefEvent]
+public record struct FallbackUplinkRequiredEvent(EntityUid Owner, FixedPoint2 Balance, bool GiveDiscounts, bool UseDynamics, ProtoId<CurrencyPrototype> TelecrystalCurrencyPrototype, ProtoId<ListingPrototype> FallbackUplinkCatalog, bool Handled = false);
+//SS220 add unimplanteable fallback options end

@@ -1,0 +1,16 @@
+- type: entity
+  id: SynthDrive
+  parent: SynthDriveBase
+  name: steel synth frame
+  components:
+  - type: MovementSpeedModifyingPart
+    requiresActive: True
+    speedMod:
+      walkSpeedModifier: 1.25
+      sprintSpeedModifier: 1.25
+  - type: DamabeableSiliconPart
+    minDamageToMalfunction: 40
+    maxDamageToRemainFunctional: 60
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Robotics/Synthetic/parts.rsi
+    state: basic_drive

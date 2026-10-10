@@ -1,0 +1,23 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Made by JustSmartgun",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "malf0"
+        },
+        {
+            "name": "malf1"
+        },
+        {
+            "name": "malf2"
+        },
+        {
+            "name": "malf3"
+        }
+    ]
+}

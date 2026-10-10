@@ -408,6 +408,16 @@
   id: MiGoBuildingBlocker
 
 - type: Tag
+  id: ImageIntensifierModule
+
+- type: Tag
+  id: ArmInstallationRight
+
+- type: Tag
+  id: ArmInstallationLeft
+
+- type: Tag
+  id: Synthetic
   id: WeaponShotgunDoubleBarreled
 
 - type: Tag
