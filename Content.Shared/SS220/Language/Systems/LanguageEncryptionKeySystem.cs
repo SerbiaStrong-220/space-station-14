@@ -1,6 +1,11 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Inventory.Events;
+using Content.Shared.Power;
+using Content.Shared.Power.Components;
+using Content.Shared.Power.EntitySystems;
+using Content.Shared.PowerCell;
+using Content.Shared.PowerCell.Components;
 using Content.Shared.Radio.Components;
 using Content.Shared.SS220.Language.Components;
 using Robust.Shared.Containers;
@@ -12,6 +17,10 @@ public sealed partial class LanguageEncryptionKeySystem : EntitySystem
 {
     [Dependency] private SharedLanguageSystem _language = default!;
     [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedBatterySystem _battery = default!;
+    [Dependency] private PowerCellSystem _powerCell = default!;
+
+    private const float EmptyChargeLevel = 0f;
 
     public override void Initialize()
     {
@@ -19,9 +28,11 @@ public sealed partial class LanguageEncryptionKeySystem : EntitySystem
 
         SubscribeLocalEvent<LanguageEncryptionKeyComponent, EntGotInsertedIntoContainerMessage>(OnKeyInserted);
         SubscribeLocalEvent<LanguageEncryptionKeyComponent, EntGotRemovedFromContainerMessage>(OnKeyRemoved);
-
         SubscribeLocalEvent<GotEquippedEvent>(OnEquipped);
         SubscribeLocalEvent<GotUnequippedEvent>(OnUnequipped);
+        SubscribeLocalEvent<PowerCellSlotComponent, PowerCellChangedEvent>(OnHolderPowerCellChanged);
+        SubscribeLocalEvent<PowerCellSlotComponent, PowerCellSlotEmptyEvent>(OnHolderPowerEmpty);
+        SubscribeLocalEvent<EncryptionKeyHolderComponent, BatteryStateChangedEvent>(OnHolderBatteryStateChanged);
     }
 
     private void OnKeyInserted(Entity<LanguageEncryptionKeyComponent> ent, ref EntGotInsertedIntoContainerMessage args)
@@ -33,6 +44,10 @@ public sealed partial class LanguageEncryptionKeySystem : EntitySystem
             return;
 
         if (!TryComp<LanguageComponent>(wearer, out var langComp))
+            return;
+
+        if (TryComp<PowerCellSlotComponent>(args.Container.Owner, out var slotComp)
+            && !HasPower((args.Container.Owner, slotComp)))
             return;
 
         _language.AddLanguages((wearer.Value, langComp), ent.Comp.Languages, canSpeak: false);
@@ -67,6 +82,79 @@ public sealed partial class LanguageEncryptionKeySystem : EntitySystem
             return;
 
         RemoveLanguagesFromHeadset(args.Equipment, args.EquipTarget);
+    }
+
+    private void OnHolderPowerCellChanged(Entity<PowerCellSlotComponent> ent, ref PowerCellChangedEvent args)
+    {
+        if (args.Ejected)
+            return;
+
+        if (!TryComp<EncryptionKeyHolderComponent>(ent.Owner, out var holder))
+            return;
+
+        if (!HasPower(ent.AsNullable()))
+            return;
+
+        AddLanguagesFromHolder((ent.Owner, holder));
+    }
+
+    private void OnHolderPowerEmpty(Entity<PowerCellSlotComponent> ent, ref PowerCellSlotEmptyEvent args)
+    {
+        if (!TryComp<EncryptionKeyHolderComponent>(ent.Owner, out var holder))
+            return;
+
+        RemoveLanguagesFromHolder((ent.Owner, holder));
+    }
+
+    private void OnHolderBatteryStateChanged(Entity<EncryptionKeyHolderComponent> ent, ref BatteryStateChangedEvent args)
+    {
+        if (args.OldState != BatteryState.Empty || args.NewState == BatteryState.Empty)
+            return;
+
+        AddLanguagesFromHolder(ent);
+    }
+
+    private void AddLanguagesFromHolder(Entity<EncryptionKeyHolderComponent> ent)
+    {
+        if (!TryGetWearer(ent.Owner, out var wearer))
+            return;
+
+        if (!TryComp<LanguageComponent>(wearer, out var langComp))
+            return;
+
+        foreach (var key in ent.Comp.KeyContainer.ContainedEntities)
+        {
+            if (!TryComp<LanguageEncryptionKeyComponent>(key, out var langKey))
+                continue;
+
+            _language.AddLanguages((wearer.Value, langComp), langKey.Languages, canSpeak: false);
+        }
+    }
+
+    private void RemoveLanguagesFromHolder(Entity<EncryptionKeyHolderComponent> ent)
+    {
+        if (!TryGetWearer(ent.Owner, out var wearer))
+            return;
+
+        if (!TryComp<LanguageComponent>(wearer, out var langComp))
+            return;
+
+        foreach (var key in ent.Comp.KeyContainer.ContainedEntities)
+        {
+            if (!TryComp<LanguageEncryptionKeyComponent>(key, out var langKey))
+                continue;
+
+            foreach (var language in langKey.Languages)
+                RemoveKeyLanguage((wearer.Value, langComp), language);
+        }
+    }
+
+    private bool HasPower(Entity<PowerCellSlotComponent?> ent)
+    {
+        if (!_powerCell.TryGetBatteryFromSlot(ent, out var battery))
+            return false;
+
+        return _battery.GetChargeLevel(battery.Value.AsNullable()) > EmptyChargeLevel;
     }
 
     private void AddLanguagesFromHeadset(EntityUid headsetUid, EntityUid wearer)
@@ -113,15 +201,23 @@ public sealed partial class LanguageEncryptionKeySystem : EntitySystem
             _language.RemoveLanguage(ent, language);
     }
 
-    private bool TryGetWearer(EntityUid headsetUid, out EntityUid? wearer)
+    private bool TryGetWearer(EntityUid holderUid, out EntityUid? wearer)
     {
         wearer = null;
 
-        if (!TryComp<HeadsetComponent>(headsetUid, out var headset) || !headset.IsEquipped)
+        if (TryComp<HeadsetComponent>(holderUid, out var headset))
+        {
+            if (!headset.IsEquipped)
+                return false;
+
+            wearer = Transform(holderUid).ParentUid;
+            return wearer.Value.IsValid();
+        }
+
+        if (!HasComp<LanguageComponent>(holderUid))
             return false;
 
-        wearer = Transform(headsetUid).ParentUid;
-        return wearer.Value.IsValid();
+        wearer = holderUid;
+        return true;
     }
 }
-
