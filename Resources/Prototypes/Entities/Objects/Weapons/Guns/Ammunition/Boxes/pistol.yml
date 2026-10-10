@@ -23,6 +23,14 @@
     steps: 3
     zeroVisible: false
   - type: Appearance
+  # SS220-place-and-pickup-sounds-2 begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/ammobox_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/ammobox_drop.ogg
+  # SS220-place-and-pickup-sounds-2 end
 
 # Boxes
 - type: entity

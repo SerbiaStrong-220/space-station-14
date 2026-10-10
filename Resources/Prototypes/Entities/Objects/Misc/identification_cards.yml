@@ -25,6 +25,14 @@
     - WhitelistChameleonIdCard
   - type: StealTarget
     stealGroup: IDCard
+  # SS220-place-and-pickup-sounds-2 begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/id_card_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/id_card_drop.ogg
+  # SS220-place-and-pickup-sounds-2 end
 
 #IDs with layers
 

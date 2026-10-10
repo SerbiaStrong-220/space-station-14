@@ -1,0 +1,12 @@
+# Shared base for magazine pickup/drop sounds and other common behavior.
+- type: entity
+  id: BaseMagazine
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Weapons/magazine_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Weapons/magazine_drop.ogg

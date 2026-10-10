@@ -64,6 +64,14 @@
   - type: Item
     size: Small
   - type: Sprite
+  # SS220-place-and-pickup-sounds-2 begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Weapons/grenade_pick_up.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Weapons/grenade_drop.ogg
+# SS220-place-and-pickup-sounds-2 end
 
 - type: entity
   parent: BaseGrenade
