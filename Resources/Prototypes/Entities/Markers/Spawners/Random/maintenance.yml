@@ -198,9 +198,14 @@
       - sprite: Clothing/Eyes/Glasses/gar.rsi
         state: icon-super
   - type: EntityTableSpawner
-    table: !type:NestedSelector
-      tableId: MaintFluffTable
-      prob: 0.6
+    # SS220 pistol lighter
+    table: !type:AllSelector
+      children:
+      - !type:NestedSelector
+        tableId: MaintFluffTable
+        prob: 0.6
+      - !type:NestedSelector
+        tableId: PistolLighterMaintLootTable
 
 - type: entityTable
   id: MaintToolsTable
@@ -338,9 +343,14 @@
       - sprite: Objects/Power/power_cells.rsi
         state: high
   - type: EntityTableSpawner
-    table: !type:NestedSelector
-      tableId: MaintToolsTable
-      prob: 0.6
+    # SS220 pistol lighter
+    table: !type:AllSelector
+      children:
+      - !type:NestedSelector
+        tableId: MaintToolsTable
+        prob: 0.6
+      - !type:NestedSelector
+        tableId: PistolLighterMaintLootTable
 
 - type: entityTable
   id: MaintWeaponTable
@@ -399,9 +409,14 @@
       - sprite: Objects/Weapons/Melee/machete.rsi
         state: icon
   - type: EntityTableSpawner
-    table: !type:NestedSelector
-      tableId: MaintWeaponTable
-      prob: 0.6
+    # SS220 pistol lighter
+    table: !type:AllSelector
+      children:
+      - !type:NestedSelector
+        tableId: MaintWeaponTable
+        prob: 0.6
+      - !type:NestedSelector
+        tableId: PistolLighterMaintLootTable
 
 - type: entity
   name: Maint Loot Spawner

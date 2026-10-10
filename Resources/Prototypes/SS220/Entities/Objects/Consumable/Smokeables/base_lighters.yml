@@ -1,0 +1,61 @@
+- type: entity
+  name: Mk-58.01
+  parent: Lighter
+  id: PistolLighter
+  description: Pistol lighter can easily make someone be scared
+  components:
+  - type: Tag
+    tags:
+    - Sidearm
+    - Lighter
+  - type: Sprite
+    sprite: SS220/Objects/Tools/Lighters/mk58-lighter.rsi
+    layers:
+    - state: icon
+    - state: lighter-flame
+      visible: false
+      shader: unshaded
+      map: [ "flame" ]
+  - type: RandomSprite
+    available: []
+  - type: GenericVisualizer
+    visuals: {}
+  - type: ToggleableVisuals
+    spriteLayer: flame
+    inhandVisuals:
+      left:
+      - state: inhand-left-flame
+        shader: unshaded
+      right:
+      - state: inhand-right-flame
+        shader: unshaded
+  - type: Item
+    size: Small
+    sprite: SS220/Objects/Tools/Lighters/mk58-lighter.rsi
+    shape:
+    - 0,0,1,0
+    - 0,1,0,1
+    storedOffset: 0,-2
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
+  - type: Clothing
+    sprite: SS220/Objects/Tools/Lighters/mk58-lighter.rsi
+    quickEquip: false
+    slots:
+    - suitStorage
+    - Belt
+
+# Vending stock is static, so the 1/40 roll happens when this hidden product is dispensed.
+- type: entity
+  parent: Lighter
+  id: PistolLighterVendingSpawner
+  name: novelty lighter
+  description: A lighter from the vending machine's hidden stock. Its design is a surprise.
+  components:
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: PistolLighterContrabandTable
+    offset: 0
