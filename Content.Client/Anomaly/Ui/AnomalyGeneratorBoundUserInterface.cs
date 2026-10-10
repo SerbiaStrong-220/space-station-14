@@ -1,4 +1,5 @@
 using Content.Shared.Anomaly;
+using Content.Shared.SS220.Anomaly;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 
@@ -24,15 +25,34 @@ public sealed class AnomalyGeneratorBoundUserInterface : BoundUserInterface
         {
             SendMessage(new AnomalyGeneratorGenerateButtonPressedEvent());
         };
+
+        //ss220 add anomaly place start
+        _window.OnChooseAnomalyPlace += beacon =>
+        {
+            var msg = new AnomalyGeneratorChooseAnomalyPlaceMessage(beacon);
+            SendMessage(msg);
+        };
+        //ss220 add anomaly place end
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
     {
         base.UpdateState(state);
 
-        if (state is not AnomalyGeneratorUserInterfaceState msg)
-            return;
-        _window?.UpdateState(msg);
+        //ss220 add anomaly place start
+        if (state is AnomalyGeneratorUserInterfaceState msg)
+            _window?.UpdateState(msg);
+        //ss220 add anomaly place end
+    }
+
+    //ss220 add anomaly place start
+    protected override void ReceiveMessage(BoundUserInterfaceMessage message)
+    {
+        base.ReceiveMessage(message);
+
+        if (message is AnomalyGeneratorEmaggedEventMessage emagMessage)
+            _window?.UpdateEmagState(emagMessage);
+        //ss220 add anomaly place end
     }
 }
 
