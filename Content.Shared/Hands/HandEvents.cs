@@ -364,9 +364,12 @@ namespace Content.Shared.Hands
     {
         public TEvent Args;
 
-        public HeldRelayedEvent(TEvent args)
+        public EntityUid Owner; // SS220 tweak held relay
+
+        public HeldRelayedEvent(TEvent args, EntityUid owner) // SS220 tweak held relay
         {
             Args = args;
+            Owner = owner; // SS220 tweak held relay
         }
     }
 
