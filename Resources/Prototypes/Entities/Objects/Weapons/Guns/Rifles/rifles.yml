@@ -238,10 +238,6 @@
     sprite: Objects/Weapons/Guns/Rifles/XL8.rsi
   - type: Clothing
     sprite: Objects/Weapons/Guns/Rifles/XL8.rsi
-  - type: CursorOffsetRequiresWield
-  - type: EyeCursorOffset
-    maxOffset: 2
-    pvsIncrease: 0.2
   - type: StaticPrice
     price: 1500 #3x lecter
   - type: Gun
@@ -297,10 +293,6 @@
         whitelist:
           tags:
           - CartridgeRifle
-  - type: CursorOffsetRequiresWield
-  - type: EyeCursorOffset
-    maxOffset: 2
-    pvsIncrease: 0.2
   - type: SpeedModifiedOnWield
     walkModifier: 0.9
     sprintModifier: 0.9
