@@ -1,0 +1,20 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from vgstation at https://github.com/vgstation-coders/vgstation13/blob/e2923df112df8aa025846d0764697bad6506586a/icons/mob/AI.dmi - modified by chromiumboy, base modified by monotheonist. Lettering changed from AI to CC by psykana for SS220.",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "cc_camera",
+            "delays": [
+                [
+                    1.0,
+                    1.0
+                ]
+            ]
+        }
+    ]
+}
