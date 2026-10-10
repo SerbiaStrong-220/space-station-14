@@ -1,7 +1,7 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-  parent: ClothingEyesChameleon
+  parent: [ClothingEyesChameleon, SS220GlassesOnForeheadBase]
   id: ClothingEyesHudSyndChem
   name: syndie chem med hud
   description: A heads-up display that scans the humanoids in view and provides accurate data about their health status.
@@ -9,6 +9,7 @@
   - type: Sprite
     sprite: SS220/Clothing/Eyes/Hud/syndchem.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: SS220/Clothing/Eyes/Hud/syndchem.rsi
   - type: ShowHealthBars
     damageContainers:
@@ -29,7 +30,7 @@
     default: ClothingEyesHudSyndChem 
 
 - type: entity
-  parent: [ClothingEyesBase, ClothingEyesGlassesSecurity]
+  parent: [ClothingEyesBase, ClothingEyesGlassesSecurity, SS220GlassesOnForeheadBase]
   id: ClothingEyesHudOmniversal
   name: omniversal hud
   description: A secret development for very secretive individuals.
@@ -39,6 +40,7 @@
   - type: Sprite
     sprite: SS220/Clothing/Eyes/Hud/omni.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: SS220/Clothing/Eyes/Hud/omni.rsi
   - type: FlashImmunity
   - type: EyeProtection
@@ -65,7 +67,7 @@
     sprite: SS220/Clothing/Eyes/Hud/supply.rsi
 
 - type: entity
-  parent: ClothingEyesBase
+  parent: [ClothingEyesBase, SS220GlassesOnForeheadBase]
   id: ClothingEyesHudMediChem
   name: chemi-medical hud
   description: They have a striking resemblance to the glasses from the movie theater.
@@ -73,6 +75,7 @@
   - type: Sprite
     sprite: SS220/Clothing/Eyes/Hud/medichem.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: SS220/Clothing/Eyes/Hud/medichem.rsi
   - type: ShowHealthBars
     damageContainers:

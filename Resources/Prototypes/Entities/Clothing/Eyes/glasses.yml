@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingEyesBase
+  parent: [ClothingEyesBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingEyesGlassesGar
   name: gar glasses
   description: Go beyond impossible and kick reason to the curb!
@@ -7,7 +7,21 @@
   - type: Sprite
     sprite: Clothing/Eyes/Glasses/gar.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: Clothing/Eyes/Glasses/gar.rsi
+    # SS220-glasses-on-forehead-begin
+    clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/gar.rsi
+        state: equipped-HELMET
+      head-arachnid:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/gar.rsi
+        state: equipped-HELMET-arachnid
+      head-vox:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/gar.rsi
+        state: equipped-HELMET-vox
+    # SS220-glasses-on-forehead-end
+
   - type: MeleeWeapon
     attackRate: 1.5
     damage:
@@ -15,7 +29,7 @@
         Blunt: 7
 
 - type: entity
-  parent: ClothingEyesBase
+  parent: [ClothingEyesBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingEyesGlassesGarOrange
   name: orange gar glasses
   description: Just who the hell do you think I am?!
@@ -24,8 +38,22 @@
     sprite: Clothing/Eyes/Glasses/gar.rsi
     state: icon-alt
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: Clothing/Eyes/Glasses/gar.rsi
     equippedPrefix: alt
+    # SS220-glasses-on-forehead-begin
+    clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/gar.rsi
+        state: alt-equipped-HELMET
+      head-arachnid:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/gar.rsi
+        state: alt-equipped-HELMET-arachnid
+      head-vox:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/gar.rsi
+        state: alt-equipped-HELMET-vox
+    # SS220-glasses-on-forehead-end
+
   - type: Item
     heldPrefix: alt
   - type: MeleeWeapon
@@ -34,7 +62,7 @@
         Blunt: 10
 
 - type: entity
-  parent: ClothingEyesBase
+  parent: [ClothingEyesBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingEyesGlassesGarGiga
   name: giga gar glasses
   description: We evolve past the person we were a minute before. Little by little we advance with each turn. That's how a drill works!
@@ -43,8 +71,22 @@
     sprite: Clothing/Eyes/Glasses/gar.rsi
     state: icon-super
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: Clothing/Eyes/Glasses/gar.rsi
     equippedPrefix: super
+    # SS220-glasses-on-forehead-begin
+    clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/gar.rsi
+        state: super-equipped-HELMET
+      head-arachnid:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/gar.rsi
+        state: super-equipped-HELMET-arachnid
+      head-vox:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/gar.rsi
+        state: super-equipped-HELMET-vox
+    # SS220-glasses-on-forehead-end
+
   - type: Item
     heldPrefix: super
   - type: MeleeWeapon
@@ -53,7 +95,7 @@
         Blunt: 10
 
 - type: entity
-  parent: [ClothingEyesBase]
+  parent: [ClothingEyesBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingEyesGlassesMeson
   name: engineering goggles #less confusion
   description: Green-tinted goggles using a proprietary polymer that provides protection from eye damage of all types.
@@ -61,7 +103,21 @@
   - type: Sprite
     sprite: Clothing/Eyes/Glasses/meson.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: Clothing/Eyes/Glasses/meson.rsi
+    # SS220-glasses-on-forehead-begin
+    clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/meson.rsi
+        state: equipped-HELMET
+      head-arachnid:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/meson.rsi
+        state: equipped-HELMET-arachnid
+      head-moth:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/meson.rsi
+        state: equipped-HELMET-moth
+    # SS220-glasses-on-forehead-end
+
   - type: EyeProtection
   - type: IdentityBlocker
     coverage: EYES
@@ -72,7 +128,7 @@
     - SecDogWearable # Roxi
 
 - type: entity
-  parent: ClothingEyesBase
+  parent: [ClothingEyesBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingEyesGlasses
   name: glasses
   description: A pair of spectacular spectacles with prescription lenses.
@@ -80,7 +136,24 @@
   - type: Sprite
     sprite: Clothing/Eyes/Glasses/glasses.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: Clothing/Eyes/Glasses/glasses.rsi
+    # SS220-glasses-on-forehead-begin
+    clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/glasses.rsi
+        state: equipped-HELMET
+      head-arachnid:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/glasses.rsi
+        state: equipped-HELMET-arachnid
+      head-hamster:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/glasses.rsi
+        state: equipped-HELMET-hamster
+      head-moth:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/glasses.rsi
+        state: equipped-HELMET-moth
+    # SS220-glasses-on-forehead-end
+
   - type: VisionCorrection
   - type: Tag
     tags:
@@ -88,7 +161,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: ClothingEyesBase
+  parent: [ClothingEyesBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingEyesGlassesJensen
   name: jensen glasses
   description: A pair of yellow tinted folding glasses. You never asked for these.
@@ -97,13 +170,30 @@
   - type: Sprite
     sprite: Clothing/Eyes/Glasses/jensen.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: Clothing/Eyes/Glasses/jensen.rsi
+    # SS220-glasses-on-forehead-begin
+    clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/jensen.rsi
+        state: equipped-HELMET
+      head-arachnid:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/jensen.rsi
+        state: equipped-HELMET-arachnid
+      head-moth:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/jensen.rsi
+        state: equipped-HELMET-moth
+      head-vox:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/jensen.rsi
+        state: equipped-HELMET-vox
+    # SS220-glasses-on-forehead-end
+
   - type: Tag
     tags:
     - WhitelistChameleon
 
 - type: entity
-  parent: ClothingEyesBase
+  parent: [ClothingEyesBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingEyesGlassesJamjar
   name: jamjar glasses
   description: These retro glasses remind you of a simpler time.
@@ -112,7 +202,27 @@
   - type: Sprite
     sprite: Clothing/Eyes/Glasses/jamjar.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: Clothing/Eyes/Glasses/jamjar.rsi
+    # SS220-glasses-on-forehead-begin
+    clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/jamjar.rsi
+        state: equipped-HELMET
+      head-arachnid:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/jamjar.rsi
+        state: equipped-HELMET-arachnid
+      head-hamster:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/jamjar.rsi
+        state: equipped-HELMET-hamster
+      head-moth:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/jamjar.rsi
+        state: equipped-HELMET-moth
+      head-vox:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/jamjar.rsi
+        state: equipped-HELMET-vox
+    # SS220-glasses-on-forehead-end
+
   - type: VisionCorrection
   - type: Tag
     tags:
@@ -120,7 +230,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: ClothingEyesBase
+  parent: [ClothingEyesBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingEyesGlassesOutlawGlasses
   name: outlaw glasses
   description: A must for every self-respecting undercover agent.
@@ -128,14 +238,31 @@
   - type: Sprite
     sprite: Clothing/Eyes/Glasses/outlawglasses.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: Clothing/Eyes/Glasses/outlawglasses.rsi
+    # SS220-glasses-on-forehead-begin
+    clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/outlawglasses.rsi
+        state: equipped-HELMET
+      head-arachnid:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/outlawglasses.rsi
+        state: equipped-HELMET-arachnid
+      head-moth:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/outlawglasses.rsi
+        state: equipped-HELMET-moth
+      head-vox:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/outlawglasses.rsi
+        state: equipped-HELMET-vox
+    # SS220-glasses-on-forehead-end
+
   - type: VisionCorrection
   - type: IdentityBlocker
   - type: StaticPrice
     price: 500
 
 - type: entity
-  parent: ClothingEyesBase
+  parent: [ClothingEyesBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingEyesGlassesCheapSunglasses
   name: cheap sunglasses
   description: A pair of black sunglasses. Doesn't block light well, more of an accessory than something useful.
@@ -143,7 +270,24 @@
   - type: Sprite
     sprite: Clothing/Eyes/Glasses/sunglasses.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: Clothing/Eyes/Glasses/sunglasses.rsi
+    # SS220-glasses-on-forehead-begin
+    clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/sunglasses.rsi
+        state: equipped-HELMET
+      head-arachnid:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/sunglasses.rsi
+        state: equipped-HELMET-arachnid
+      head-moth:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/sunglasses.rsi
+        state: equipped-HELMET-moth
+      head-hamster:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/sunglasses.rsi
+        state: equipped-HELMET-hamster
+    # SS220-glasses-on-forehead-end
+
   - type: Tag
     tags:
     - HamsterWearable
@@ -170,7 +314,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingEyesBase, ShowSecurityIcons, BaseSecurityContraband]
+  parent: [ClothingEyesBase, ShowSecurityIcons, BaseSecurityContraband, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingEyesGlassesSecurity
   name: security glasses
   description: Upgraded sunglasses that provide flash immunity and a security HUD.
@@ -178,6 +322,7 @@
   - type: Sprite
     sprite: SS220/Clothing/Eyes/Glasses/security.rsi #SS220-updated
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: SS220/Clothing/Eyes/Glasses/security.rsi #SS220-updated
   - type: FlashImmunity
   - type: EyeProtection
@@ -199,7 +344,7 @@
     coverage: EYES
 
 - type: entity
-  parent: [ClothingEyesBase]
+  parent: [ClothingEyesBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingEyesGlassesCommand
   name: administration glasses
   description: Upgraded sunglasses that provide flash immunity and show ID card status.
@@ -207,7 +352,24 @@
   - type: Sprite
     sprite: Clothing/Eyes/Glasses/commandglasses.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: Clothing/Eyes/Glasses/commandglasses.rsi
+    # SS220-glasses-on-forehead-begin
+    clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/commandglasses.rsi
+        state: equipped-HELMET
+      head-arachnid:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/commandglasses.rsi
+        state: equipped-HELMET-arachnid
+      head-hamster:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/commandglasses.rsi
+        state: equipped-HELMET-hamster
+      head-moth:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/commandglasses.rsi
+        state: equipped-HELMET-moth
+    # SS220-glasses-on-forehead-end
+
   - type: FlashImmunity
   - type: EyeProtection
     protectionTime: 5
@@ -221,7 +383,7 @@
   - type: ShowJobIcons
 
 - type: entity
-  parent: ClothingEyesBase
+  parent: [ClothingEyesBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingEyesGlassesMercenary
   name: mercenary glasses
   description: Glasses made for combat, to protect the eyes from bright blinding flashes.
@@ -229,7 +391,21 @@
   - type: Sprite
     sprite: Clothing/Eyes/Glasses/mercglasses.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: Clothing/Eyes/Glasses/mercglasses.rsi
+    # SS220-glasses-on-forehead-begin
+    clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/mercglasses.rsi
+        state: equipped-HELMET
+      head-arachnid:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/mercglasses.rsi
+        state: equipped-HELMET-arachnid
+      head-moth:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/mercglasses.rsi
+        state: equipped-HELMET-moth
+    # SS220-glasses-on-forehead-end
+
   - type: FlashImmunity
   - type: EyeProtection
     protectionTime: 5
@@ -238,7 +414,7 @@
 
 #Make a scanner category when these actually function and we get the trayson
 - type: entity
-  parent: ClothingEyesBase
+  parent: [ClothingEyesBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingEyesGlassesThermal
   name: optical thermal scanner
   description: Thermals in the shape of glasses.
@@ -246,7 +422,21 @@
   - type: Sprite
     sprite: Clothing/Eyes/Glasses/thermal.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: Clothing/Eyes/Glasses/thermal.rsi
+    # SS220-glasses-on-forehead-begin
+    clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/thermal.rsi
+        state: equipped-HELMET
+      head-arachnid:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/thermal.rsi
+        state: equipped-HELMET-arachnid
+      head-moth:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/thermal.rsi
+        state: equipped-HELMET-moth
+    # SS220-glasses-on-forehead-end
+
   - type: Armor
     modifiers:
       coefficients:
@@ -257,25 +447,39 @@
   - type: ThermalSight
 
 - type: entity
-  parent: ClothingEyesBase
+  parent: [ClothingEyesBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingEyesGlassesChemical
   name: chemical analysis goggles
   description: Goggles that can scan the chemical composition of a solution.
   components:
-    - type: Sprite
-      sprite: Clothing/Eyes/Glasses/science.rsi
-    - type: Clothing
-      sprite: Clothing/Eyes/Glasses/science.rsi
-    - type: SolutionScanner
-    - type: IdentityBlocker
-      coverage: EYES
-    - type: Tag
-      tags:
-      - PetWearable
-      - WhitelistChameleon
+  - type: Sprite
+    sprite: Clothing/Eyes/Glasses/science.rsi
+  - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
+    sprite: Clothing/Eyes/Glasses/science.rsi
+    # SS220-glasses-on-forehead-begin
+    clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/science.rsi
+        state: equipped-HELMET
+      head-arachnid:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/science.rsi
+        state: equipped-HELMET-arachnid
+      head-moth:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/science.rsi
+        state: equipped-HELMET-moth
+    # SS220-glasses-on-forehead-end
+
+  - type: SolutionScanner
+  - type: IdentityBlocker
+    coverage: EYES
+  - type: Tag
+    tags:
+    - PetWearable
+    - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingEyesBase]
+  parent: [ClothingEyesBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingEyesVisorNinja
   name: ninja visor
   description: An advanced visor protecting a ninja's eyes from flashing lights.
@@ -283,11 +487,12 @@
   - type: Sprite
     sprite: SS220/Clothing/Eyes/Glasses/ninjavisor.rsi # SS220 Ninja Resprite
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: SS220/Clothing/Eyes/Glasses/ninjavisor.rsi # SS220 Ninja Resprite
   - type: FlashImmunity
 
 - type: entity
-  parent: [ClothingEyesBase, ShowSecurityIcons, BaseSecurityContraband]
+  parent: [ClothingEyesBase, ShowSecurityIcons, BaseSecurityContraband, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingEyesGlassesNoir
   name: noir-tech glasses
   description: A pair of glasses that simulate what the world looked like before the invention of color.
@@ -295,7 +500,15 @@
   - type: Sprite
     sprite: Clothing/Eyes/Glasses/noir.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: Clothing/Eyes/Glasses/sunglasses.rsi
+    # SS220-glasses-on-forehead-begin
+    clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Eyes/Forehead/Glasses/noir.rsi
+        state: equipped-HELMET
+    # SS220-glasses-on-forehead-end
+
   - type: IdentityBlocker
     coverage: EYES
   - type: FlashImmunity
