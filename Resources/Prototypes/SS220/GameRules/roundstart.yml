@@ -28,7 +28,7 @@
       mindRoles:
         - MindRoleCultYogg
       components:
-      - type: ExperienceAddition
+      - type: TryAddExperienceAddition
         sources:
           Antag:
             freeSublevelPoints: 5
@@ -141,7 +141,7 @@
       - MindRoleTraitor
       # SS220-experience-update-begin
       components:
-      - type: ExperienceAddition
+      - type: TryAddExperienceAddition
         sources:
           Antag:
             freeSublevelPoints: 10

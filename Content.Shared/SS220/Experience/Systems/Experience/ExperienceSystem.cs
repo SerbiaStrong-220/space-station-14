@@ -15,7 +15,6 @@ public sealed partial class ExperienceSystem
     [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private ISharedAdminLogManager _adminLogManager = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
-    [Dependency] private IGameTiming _gameTiming = default!;
 
     public const int StartSkillLevel = 1;
     public const int StartSublevel = 0;

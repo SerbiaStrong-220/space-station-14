@@ -263,7 +263,7 @@
       - MindRoleTraitor
       # SS220-experience-update-begin
       components:
-      - type: ExperienceAddition
+      - type: TryAddExperienceAddition
         sources:
           Antag:
             freeSublevelPoints: 10
@@ -293,7 +293,7 @@
       - MindRoleTraitorReinforcement
       # SS220-experience-update-begin
       components:
-      - type: ExperienceAddition
+      - type: TryAddExperienceAddition
         sources:
           Antag:
             freeSublevelPoints: 10
@@ -324,7 +324,7 @@
         sound: /Audio/Ambience/Antag/changeling_start.ogg
       components:
       # SS220-experience-update-begin
-      - type: ExperienceAddition
+      - type: TryAddExperienceAddition
         sources:
           Antag:
             freeSublevelPoints: 10
@@ -371,7 +371,7 @@
       startingGear: HeadRevGear
       components:
       # SS220-experience-update-begin
-      - type: ExperienceAddition
+      - type: TryAddExperienceAddition
         sources:
           Antag:
             freeSublevelPoints: 10

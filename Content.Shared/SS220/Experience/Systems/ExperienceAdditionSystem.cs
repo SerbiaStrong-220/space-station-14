@@ -13,6 +13,7 @@ public sealed partial class ExperienceAdditionSystem : EntitySystem
         SubscribeLocalEvent<ExperienceComponent, AddExperience>(OnAddExperience);
         SubscribeLocalEvent<ExperienceComponent, RemoveExperience>(OnRemoveExperience);
         SubscribeLocalEvent<ExperienceComponent, TryChangeExperienceDefinition>(OnTryChangeExperienceDefinition);
+        SubscribeLocalEvent<TryAddExperienceAdditionComponent, MapInitEvent>(OnTemporaryMapInit);
 
         InitializeOtherSubscription();
     }
@@ -107,6 +108,22 @@ public sealed partial class ExperienceAdditionSystem : EntitySystem
 
         if (args.Changed)
             DirtyField(entity, additionComp, nameof(ExperienceAdditionComponent.DefinitionId));
+    }
+
+    private void OnTemporaryMapInit(Entity<TryAddExperienceAdditionComponent> entity, ref MapInitEvent _)
+    {
+        if (TryComp<ExperienceComponent>(entity, out var experience))
+        {
+            var tmpEv = new TryChangeExperienceDefinition(entity.Comp.DefinitionId, false);
+            OnTryChangeExperienceDefinition((entity.Owner, experience), ref tmpEv);
+
+            foreach (var (source, specifier) in entity.Comp.Sources)
+            {
+                UpsertSpecifier(entity, source, specifier);
+            }
+        }
+
+        RemComp(entity, entity.Comp);
     }
 }
 

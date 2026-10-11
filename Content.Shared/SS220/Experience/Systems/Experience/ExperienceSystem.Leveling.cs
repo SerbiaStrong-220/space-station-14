@@ -133,7 +133,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         info.Sublevel = Math.Max(StartSublevel, info.Sublevel - skillPrototype.LevelInfo.MaximumSublevel + StartSublevel);
         info.Level++;
 
-        DirtyField(entity.AsNullable(), nameof(ExperienceComponent.Skills));
+        DirtyField(entity!, nameof(ExperienceComponent.Skills));
 
         _popup.PopupClient(Loc.GetString(skillPrototype.LevelInfo.LevelUpPopup), entity, entity, Popups.PopupType.Medium);
 

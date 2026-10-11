@@ -37,7 +37,6 @@ public sealed partial class ExperienceSystem : EntitySystem
         }
 
         InitializeExperienceComp(entity);
-        Dirty(entity);
     }
 
     private void ExperienceAdditionOnMapInit(Entity<ExperienceAdditionComponent> entity, ref MapInitEvent _)
@@ -131,6 +130,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         var addSublevelEvent = new SublevelAdditionPointInitialResolve(0);
         RaiseLocalEvent(entity, ref addSublevelEvent);
         entity.Comp.FreeSublevelPoints = Math.Max(addSublevelEvent.FreeSublevelPoints, 0);
+        DirtyField(entity!, nameof(ExperienceComponent.FreeSublevelPoints));
 
         var ev = new KnowledgeInitialResolve([]);
         RaiseLocalEvent(entity, ref ev);
@@ -143,6 +143,8 @@ public sealed partial class ExperienceSystem : EntitySystem
             if (!TryAddKnowledge(entity!, knowledge))
                 Log.Error($"Cant add knowledge {knowledge} to {ToPrettyString(entity)}");
         }
+
+        DirtyFields(entity!, null, [nameof(ExperienceComponent.ConstantKnowledge), nameof(ExperienceComponent.ResolvedKnowledge)]);
     }
 
     private void SublevelAddOnSkillTreeAdded<T>(Entity<T> entity, ref SkillTreeAdded args) where T : BaseSublevelAddComponent

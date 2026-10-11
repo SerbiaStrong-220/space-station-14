@@ -42,13 +42,13 @@ public sealed partial class ExperienceAdditionComponent : Component
 [Serializable, NetSerializable]
 public partial struct ExperienceAddSpecifier
 {
-    [ViewVariables(VVAccess.ReadOnly)]
+    [DataField]
     public int FreeSublevelPoints;
 
-    [ViewVariables(VVAccess.ReadOnly)]
+    [DataField]
     public HashSet<ProtoId<KnowledgePrototype>> Knowledges;
 
-    [ViewVariables(VVAccess.ReadOnly)]
+    [DataField]
     public Dictionary<ProtoId<SkillTreePrototype>, SkillTreeInfo> Skills;
 
     public ExperienceAddSpecifier(int freeSublevelPoints, HashSet<ProtoId<KnowledgePrototype>> knowledges, Dictionary<ProtoId<SkillTreePrototype>, SkillTreeInfo> skills)

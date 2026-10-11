@@ -27,7 +27,7 @@
       startingGear: ThiefGear
       components:
       # SS220-experience-update-begin
-      - type: ExperienceAddition
+      - type: TryAddExperienceAddition
         sources:
           Antag:
             freeSublevelPoints: 10
