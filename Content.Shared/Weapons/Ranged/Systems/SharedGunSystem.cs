@@ -439,7 +439,9 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (!userImpulse || !TryComp<PhysicsComponent>(user, out var userPhysics))
             return true;
 
-        var shooterEv = new ShooterImpulseEvent();
+        // SS220-felinid-recoil-begin
+        var shooterEv = new ShooterImpulseEvent { From = fromCoordinates, To = toCoordinates.Value };
+        // SS220-felinid-recoil-end
         RaiseLocalEvent(user, ref shooterEv);
 
         if (shooterEv.Push)
@@ -730,6 +732,10 @@ public record struct GunShotEvent(EntityUid User, List<(EntityUid? Uid, IShootab
 public record struct ShooterImpulseEvent()
 {
     public bool Push;
+    // SS220-felinid-recoil-begin
+    public EntityCoordinates From;
+    public EntityCoordinates To;
+    // SS220-felinid-recoil-end
 };
 
 public enum EffectLayers : byte

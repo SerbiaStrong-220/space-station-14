@@ -25,6 +25,11 @@
   - type: AmmoCounter
   - type: Gun
     fireRate: 0.75
+    #SS220 felinid-recoil start
+    felinidRecoil: 0.7
+    felinidRecoilKnockdownChance: 0.10
+    felinidRecoilKnockdownTime: 1.1
+    #SS220 felinid-recoil end
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto

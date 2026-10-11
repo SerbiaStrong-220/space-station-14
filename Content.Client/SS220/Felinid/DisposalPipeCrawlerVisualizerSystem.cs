@@ -32,36 +32,20 @@ public sealed partial class DisposalPipeCrawlerVisualizerSystem : EntitySystem
         Entity<DisposalPipeCrawlerComponent> ent,
         ref DisposalPipeCrawlerVisualsChangedEvent args)
     {
-        UpdateVisibility(ent, args.InsidePipe);
-    }
-
-    private void UpdateVisibility(Entity<DisposalPipeCrawlerComponent> ent, bool active)
-    {
         if (!TryComp<SpriteComponent>(ent.Owner, out var sprite))
             return;
 
-        if (!active)
+        if (args.InsidePipe)
         {
-            RestoreVisibility(ent, sprite);
+            if (!HasComp<DisposalPipeCrawlerVisualStateComponent>(ent.Owner))
+                AddComp<DisposalPipeCrawlerVisualStateComponent>(ent.Owner).OriginalVisibility = sprite.Visible;
+
+            _sprite.SetVisible((ent.Owner, sprite), false);
             return;
         }
 
         if (!TryComp<DisposalPipeCrawlerVisualStateComponent>(ent.Owner, out var state))
-        {
-            state = AddComp<DisposalPipeCrawlerVisualStateComponent>(ent.Owner);
-            state.OriginalVisibility = sprite.Visible;
-        }
-
-        _sprite.SetVisible((ent.Owner, sprite), false);
-    }
-
-    private void RestoreVisibility(Entity<DisposalPipeCrawlerComponent> ent, SpriteComponent? sprite = null)
-    {
-        if (!TryComp<DisposalPipeCrawlerVisualStateComponent>(ent.Owner, out var state) ||
-            !Resolve(ent.Owner, ref sprite, false))
-        {
             return;
-        }
 
         _sprite.SetVisible((ent.Owner, sprite), state.OriginalVisibility);
         RemCompDeferred<DisposalPipeCrawlerVisualStateComponent>(ent.Owner);

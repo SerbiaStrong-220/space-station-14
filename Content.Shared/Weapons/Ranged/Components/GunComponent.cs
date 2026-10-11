@@ -56,6 +56,26 @@ public sealed partial class GunComponent : Component
     [AutoNetworkedField, ViewVariables(VVAccess.ReadWrite)]
     public float CameraRecoilScalarModified = 1f;
 
+    // SS220-felinid-recoil-begin
+    /// <summary>
+    /// How long the shooter stays knocked down when <see cref="FelinidRecoilKnockdownChance"/> rolls successfully.
+    /// </summary>
+    [DataField]
+    public TimeSpan FelinidRecoilKnockdownTime = TimeSpan.FromSeconds(1);
+
+    /// <summary>
+    /// How many tiles a felinid firing this weapon on the ground is pushed back, away from the shot.
+    /// </summary>
+    [DataField]
+    public float FelinidRecoil = 0f;
+
+    /// <summary>
+    /// Chance for the recoil to knock a felinid down.
+    /// </summary>
+    [DataField]
+    public float FelinidRecoilKnockdownChance = 0f;
+    // SS220-felinid-recoil-end
+
     /// <summary>
     /// Last time the gun fired.
     /// Used for recoil purposes.

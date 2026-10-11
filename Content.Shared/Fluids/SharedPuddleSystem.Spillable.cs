@@ -62,7 +62,7 @@ public abstract partial class SharedPuddleSystem
             return;
 
         // SS220-felinid-pipecrawl-begin
-        var spillAttempt = new SpillAttemptEvent(args.User);
+        var spillAttempt = new SpillAttemptEvent();
         RaiseLocalEvent(args.User, ref spillAttempt);
         if (spillAttempt.Cancelled)
             return;

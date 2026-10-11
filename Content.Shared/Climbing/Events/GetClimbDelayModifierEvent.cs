@@ -1,11 +1,8 @@
 namespace Content.Shared.Climbing.Events;
 
 // SS220-felinid-climb
+/// <summary>
+/// Raised on the climbing user to modify the climb do-after delay.
+/// </summary>
 [ByRefEvent]
-public record struct GetClimbDelayModifierEvent(EntityUid User, EntityUid EntityToMove, EntityUid Climbable, float Delay)
-{
-    public void ModifyDelay(float multiplier)
-    {
-        Delay *= multiplier;
-    }
-}
+public record struct GetClimbDelayModifierEvent(float Delay);

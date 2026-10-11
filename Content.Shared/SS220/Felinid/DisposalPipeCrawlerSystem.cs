@@ -1,4 +1,3 @@
-using System.Numerics;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Actions.Events;
@@ -8,7 +7,6 @@ using Content.Shared.Emoting;
 using Content.Shared.Eye;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.Hands;
-using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
@@ -16,30 +14,22 @@ using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Movement.Events;
-using Content.Shared.Movement.Systems;
 using Content.Shared.SS220.Felinid.Components;
 using Content.Shared.Storage.Events;
-using Content.Shared.Tag;
-using Content.Shared.Weapons.Ranged;
-using Content.Shared.Weapons.Ranged.Components;
-using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Physics.Components;
-using Robust.Shared.Physics.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.Felinid;
 
-public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
+public abstract partial class SharedDisposalPipeCrawlerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -114,62 +104,37 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
 
     private void SyncPipecrawlAction(Entity<DisposalPipeCrawlerComponent> ent)
     {
-        if (ent.Comp.InsidePipe || IsInDisposableUnit(ent.Owner))
+        var available = ent.Comp.InsidePipe || TryGetContainingDisposalUnit(ent.Owner, out _);
+
+        if (TryComp<ActionComponent>(ent.Comp.ActionEntity, out var action) &&
+            action.AttachedEntity == ent.Owner)
         {
-            if (ent.Comp.ActionEntity is { } existingAction &&
-                TryComp<ActionComponent>(existingAction, out var existingActionComp) &&
-                existingActionComp.AttachedEntity == ent.Owner)
+            if (available)
             {
-                SyncPipecrawlCooldown(ent, (existingAction, existingActionComp));
+                SyncPipecrawlCooldown(ent, (ent.Comp.ActionEntity.Value, action));
                 return;
             }
 
-            _actions.AddAction(ent.Owner, ref ent.Comp.ActionEntity, ent.Comp.Action);
-
-            if (ent.Comp.ActionEntity is { } addedAction &&
-                TryComp<ActionComponent>(addedAction, out var addedActionComp))
-            {
-                SyncPipecrawlCooldown(ent, (addedAction, addedActionComp));
-            }
-
+            _actions.RemoveAction((ent.Comp.ActionEntity.Value, action));
+            ent.Comp.ActionEntity = null;
+            Dirty(ent);
             return;
         }
 
-        if (ent.Comp.ActionEntity is not { } action ||
-            !TryComp<ActionComponent>(action, out var actionComp) ||
-            actionComp.AttachedEntity != ent.Owner)
-        {
+        if (!available)
             return;
-        }
 
-        _actions.RemoveAction((action, actionComp));
-        ent.Comp.ActionEntity = null;
-        Dirty(ent);
+        _actions.AddAction(ent.Owner, ref ent.Comp.ActionEntity, ent.Comp.Action);
+        if (TryComp(ent.Comp.ActionEntity, out action))
+            SyncPipecrawlCooldown(ent, (ent.Comp.ActionEntity.Value, action));
     }
 
-    private void SyncPipecrawlCooldown(
-        Entity<DisposalPipeCrawlerComponent> ent,
-        Entity<ActionComponent?> action)
+    private void SyncPipecrawlCooldown(Entity<DisposalPipeCrawlerComponent> ent, Entity<ActionComponent> action)
     {
-        if (action.Comp == null)
-            return;
-
-        if (ent.Comp.InsidePipe)
-        {
-            if (action.Comp.Cooldown != null)
-                _actions.RemoveCooldown(action);
-
-            return;
-        }
-
-        if (ent.Comp.NextEntryAllowed > _timing.CurTime)
-        {
-            _actions.SetCooldown(action, ent.Comp.CooldownStartedAt, ent.Comp.NextEntryAllowed);
-            return;
-        }
-
-        if (action.Comp.Cooldown != null)
-            _actions.RemoveCooldown(action);
+        if (!ent.Comp.InsidePipe && ent.Comp.NextEntryAllowed > _timing.CurTime)
+            _actions.SetCooldown(action.AsNullable(), ent.Comp.CooldownStartedAt, ent.Comp.NextEntryAllowed);
+        else if (action.Comp.Cooldown != null)
+            _actions.RemoveCooldown(action.AsNullable());
     }
 
     public void RefreshPipecrawlState(Entity<DisposalPipeCrawlerComponent> ent)
@@ -258,7 +223,7 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
 
     private void OnPipecrawlDropAttempt(Entity<DisposalPipeCrawlerComponent> ent, ref DropAttemptEvent args)
     {
-        if (ent.Comp.InsidePipe || HasComp<DisposalPipeCrawlerContentsComponent>(ent.Owner))
+        if (ent.Comp.InsidePipe)
             args.Cancel();
     }
 
@@ -280,11 +245,18 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
             args.VisibilityMask |= (int) VisibilityFlags.Subfloor;
     }
 
-    private bool IsInDisposableUnit(EntityUid uid)
+    protected bool TryGetContainingDisposalUnit(EntityUid uid, out Entity<DisposalUnitComponent> unit)
     {
-        return _container.TryGetContainingContainer(uid, out var container) &&
-               container.ID == DisposalUnitComponent.ContainerId &&
-               HasComp<DisposalUnitComponent>(container.Owner);
+        unit = default;
+        if (!_container.TryGetContainingContainer(uid, out var container) ||
+            container.ID != DisposalUnitComponent.ContainerId ||
+            !TryComp<DisposalUnitComponent>(container.Owner, out var comp))
+        {
+            return false;
+        }
+
+        unit = (container.Owner, comp);
+        return true;
     }
 
     private void OnPipecrawlUnequipAttempt(
@@ -373,19 +345,8 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
 
     private bool IsOwnedByCrawler(EntityUid entity, EntityUid crawler)
     {
-        if (entity == crawler)
-            return true;
-
-        if (!Exists(entity))
-            return false;
-
-        foreach (var container in _container.GetContainingContainers(entity))
-        {
-            if (container.Owner == crawler)
-                return true;
-        }
-
-        return false;
+        return entity == crawler ||
+               TryComp(entity, out TransformComponent? xform) && _transform.ContainsEntity(crawler, (entity, xform));
     }
 
     private void ClearUnequippedItemMarkers(EntityUid owner)

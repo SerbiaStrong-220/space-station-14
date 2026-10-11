@@ -2,7 +2,6 @@ using Content.Shared.Actions.Components;
 using Content.Shared.Atmos;
 using Content.Shared.Tools;
 using Robust.Shared.GameStates;
-using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Felinid.Components;
@@ -11,7 +10,7 @@ namespace Content.Shared.SS220.Felinid.Components;
 /// Allows an entity to travel through the disposal network and stores its pipe-specific state.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(raiseAfterAutoHandleState: true)]
-public sealed partial class DisposalPipeCrawlerComponent : Component, IGasMixtureHolder
+public sealed partial class DisposalPipeCrawlerComponent : Component
 {
     [DataField]
     public EntProtoId<InstantActionComponent> Action = "ActionDisposalPipeCrawler";
@@ -36,9 +35,6 @@ public sealed partial class DisposalPipeCrawlerComponent : Component, IGasMixtur
 
     [DataField]
     public TimeSpan ExitCooldown = TimeSpan.FromMinutes(10);
-
-    [DataField]
-    public string OuterClothingSlot = "outerClothing";
 
     [DataField, AutoNetworkedField]
     public bool InsidePipe;

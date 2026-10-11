@@ -12,7 +12,6 @@ public sealed class ClimbSpeedModifierSystem : EntitySystem
 
     private void OnModifyClimbDelay(Entity<ClimbSpeedModifierComponent> ent, ref GetClimbDelayModifierEvent args)
     {
-        if (args.User == ent.Owner)
-            args.ModifyDelay(ent.Comp.DelayMultiplier);
+        args.Delay *= ent.Comp.DelayMultiplier;
     }
 }

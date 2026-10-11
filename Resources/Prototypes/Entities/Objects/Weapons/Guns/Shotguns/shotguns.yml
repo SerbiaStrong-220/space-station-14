@@ -27,6 +27,11 @@
   - type: AmmoCounter
   - type: Gun
     fireRate: 2
+    #SS220 felinid-recoil start
+    felinidRecoil: 0.55
+    felinidRecoilKnockdownChance: 0.08
+    felinidRecoilKnockdownTime: 1.0
+    #SS220 felinid-recoil end
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -80,6 +85,11 @@
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
   - type: Gun
     fireRate: 2
+    #SS220 felinid-recoil start
+    felinidRecoil: 0.55
+    felinidRecoilKnockdownChance: 0.08
+    felinidRecoilKnockdownTime: 1.0
+    #SS220 felinid-recoil end
     selectedMode: FullAuto
     availableModes:
     - FullAuto

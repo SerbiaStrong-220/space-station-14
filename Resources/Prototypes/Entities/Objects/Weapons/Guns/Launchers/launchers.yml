@@ -27,6 +27,11 @@
   - type: Gun
     fireRate: 1
     projectileSpeed: 25 # Slower than a bullet, same speed as our old projectile limit.
+    #SS220 felinid-recoil start
+    felinidRecoil: 1.0
+    felinidRecoilKnockdownChance: 0.15
+    felinidRecoilKnockdownTime: 1.3
+    #SS220 felinid-recoil end
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto

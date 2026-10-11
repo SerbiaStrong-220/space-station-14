@@ -7,6 +7,3 @@ namespace Content.Shared.Spillable;
 public sealed partial class SpillDoAfterEvent : SimpleDoAfterEvent
 {
 }
-
-[ByRefEvent]
-public record struct SpillAttemptEvent(EntityUid User, bool Cancelled = false);

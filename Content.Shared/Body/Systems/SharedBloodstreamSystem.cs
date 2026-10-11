@@ -17,6 +17,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Rejuvenate;
+using Content.Shared.Spillable; // SS220-felinid-pipecrawl
 using Content.Shared.StatusEffectNew;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -469,7 +470,7 @@ public abstract class SharedBloodstreamSystem : EntitySystem
         if (tempSolution.Volume > ent.Comp.BleedPuddleThreshold)
         {
             // SS220-felinid-pipecrawl-begin
-            var spillAttempt = new BloodstreamSpillAttemptEvent();
+            var spillAttempt = new SpillAttemptEvent();
             RaiseLocalEvent(ent.Owner, ref spillAttempt);
             if (!spillAttempt.Cancelled)
                 _puddle.TrySpillAt(ent.Owner, tempSolution, out _, sound: false);
@@ -533,7 +534,7 @@ public abstract class SharedBloodstreamSystem : EntitySystem
         }
 
         // SS220-felinid-pipecrawl-begin
-        var spillAttempt = new BloodstreamSpillAttemptEvent();
+        var spillAttempt = new SpillAttemptEvent();
         RaiseLocalEvent(ent.Owner, ref spillAttempt);
         if (!spillAttempt.Cancelled)
             _puddle.TrySpillAt(ent, tempSol, out _);
@@ -611,6 +612,3 @@ public abstract class SharedBloodstreamSystem : EntitySystem
         return bloodData;
     }
 }
-
-[ByRefEvent]
-public record struct BloodstreamSpillAttemptEvent(bool Cancelled = false);

@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Numerics;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Systems;
@@ -5,87 +6,71 @@ using Content.Server.Disposal.Tube;
 using Content.Server.Disposal.Unit;
 using Content.Server.Popups;
 using Content.Shared.Atmos;
-using Content.Shared.Body.Systems;
-using Content.Shared.Damage.Components;
-using Content.Shared.Damage.Systems;
 using Content.Shared.Disposal.Components;
 using Content.Shared.Disposal.Tube;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
-using Content.Shared.FixedPoint;
+using Content.Shared.Hands;
+using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs;
-using Content.Shared.Mobs.Components;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
-using Content.Shared.Nutrition.Components;
-using Content.Shared.Nutrition.EntitySystems;
-using Content.Shared.Projectiles;
 using Content.Shared.SS220.Felinid;
 using Content.Shared.SS220.Felinid.Components;
 using Content.Shared.SS220.Maths;
 using Content.Shared.Spillable;
-using Content.Shared.Stunnable;
-using Content.Shared.Slippery;
-using Content.Shared.Tag;
 using Content.Shared.Throwing;
-using Content.Shared.Weapons.Hitscan.Events;
+using Content.Shared.Tools.Systems;
 using Robust.Shared.Containers;
+using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
-using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using SharedDisposalPipeCrawlerSystem = Content.Shared.SS220.Felinid.DisposalPipeCrawlerSystem;
 
 namespace Content.Server.SS220.Felinid;
 
-public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
+public sealed partial class DisposalPipeCrawlerSystem : SharedDisposalPipeCrawlerSystem
 {
     private static readonly EntProtoId DisposalHolderPrototype = "DisposalHolder";
-    [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
-    [Dependency] private readonly SharedDisposalPipeCrawlerSystem _sharedPipecrawl = default!;
-    [Dependency] private readonly SharedContentEyeSystem _contentEye = default!;
-    [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly DisposableSystem _disposableSystem = default!;
-    [Dependency] private readonly DisposalUnitSystem _disposalUnitSystem = default!;
-    [Dependency] private readonly BlindableSystem _blindable = default!;
-    [Dependency] private readonly SharedMoverController _mover = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly DisposalTubeSystem _disposalTubeSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+
+    [Dependency] private AtmosphereSystem _atmosphere = default!;
+    [Dependency] private SharedContentEyeSystem _contentEye = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
+    [Dependency] private DisposableSystem _disposableSystem = default!;
+    [Dependency] private DisposalUnitSystem _disposalUnitSystem = default!;
+    [Dependency] private BlindableSystem _blindable = default!;
+    [Dependency] private SharedMoverController _mover = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private DisposalTubeSystem _disposalTubeSystem = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
+    [Dependency] private SharedToolSystem _tool = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {
+        base.Initialize();
         SubscribeLocalEvent<DisposalPipeCrawlerComponent, DisposalPipeCrawlerActionEvent>(OnPipecrawl);
         SubscribeLocalEvent<DisposalPipeCrawlerComponent, InhaleLocationEvent>(OnPipecrawlInhale);
         SubscribeLocalEvent<DisposalPipeCrawlerComponent, ExhaleLocationEvent>(OnPipecrawlExhale);
         SubscribeLocalEvent<DisposalPipeCrawlerComponent, AtmosExposedGetAirEvent>(OnPipecrawlGetAir);
         SubscribeLocalEvent<DisposalPipeCrawlerComponent, MoveInputEvent>(OnPipecrawlMoveInput);
         SubscribeLocalEvent<DisposalPipeCrawlerComponent, MobStateChangedEvent>(OnPipecrawlMobStateChanged);
-        SubscribeLocalEvent<DisposalPipeCrawlerComponent, BloodstreamSpillAttemptEvent>(OnCrawlerBloodstreamSpillAttempt);
-        SubscribeLocalEvent<DisposalPipeCrawlerContentsComponent, BloodstreamSpillAttemptEvent>(OnPipeContentsBloodstreamSpillAttempt);
         SubscribeLocalEvent<DisposalPipeCrawlerComponent, SpillAttemptEvent>(OnCrawlerSpillAttempt);
-        SubscribeLocalEvent<EntGotInsertedIntoContainerMessage>(OnEntityInsertedIntoContainer);
-        SubscribeLocalEvent<DisposalPipeCrawlerContentsComponent, EntGotRemovedFromContainerMessage>(OnPipeContentsRemoved);
+        SubscribeLocalEvent<BeingDisposedComponent, DropAttemptEvent>(OnDisposedCrawlerDropAttempt);
+        SubscribeLocalEvent<DisposalTubeComponent, InteractUsingEvent>(OnTubeInteractUsing);
+        SubscribeLocalEvent<DisposalTubeComponent, DisposalPipeExtractionDoAfterEvent>(OnTubeExtractionDoAfter);
     }
 
     public override void Update(float frameTime)
-    {
-        UpdatePipecrawlers();
-    }
-
-    private void UpdatePipecrawlers()
     {
         var query = EntityQueryEnumerator<DisposalPipeCrawlerComponent>();
         while (query.MoveNext(out var uid, out var pipecrawl))
@@ -95,7 +80,7 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
 
             if (pipecrawl.CurrentTube is not { } currentTube || !Exists(currentTube))
             {
-                TryForceExitPipecrawl((uid, pipecrawl), false);
+                ForceExitPipecrawl((uid, pipecrawl), false);
                 continue;
             }
 
@@ -107,10 +92,7 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
 
             if (!Exists(nextTube))
             {
-                pipecrawl.NextTube = null;
-                pipecrawl.TravelDirection = Direction.Invalid;
-                pipecrawl.TravelStartedAt = TimeSpan.Zero;
-                pipecrawl.TravelEndsAt = TimeSpan.Zero;
+                ResetTravel(pipecrawl);
                 continue;
             }
 
@@ -129,11 +111,8 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
                 continue;
 
             pipecrawl.CurrentTube = nextTube;
-            pipecrawl.NextTube = null;
             pipecrawl.PreviousDirection = pipecrawl.TravelDirection;
-            pipecrawl.TravelDirection = Direction.Invalid;
-            pipecrawl.TravelStartedAt = TimeSpan.Zero;
-            pipecrawl.TravelEndsAt = TimeSpan.Zero;
+            ResetTravel(pipecrawl);
             _transform.SetWorldPosition(uid, destination);
         }
     }
@@ -153,32 +132,20 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
         if (_timing.CurTime < ent.Comp.NextEntryAllowed)
             return;
 
-        if (_inventory.TryGetSlotEntity(ent.Owner, ent.Comp.OuterClothingSlot, out _))
+        if (_inventory.TryGetSlotEntity(ent.Owner, "outerClothing", out _))
         {
             _popup.PopupEntity(Loc.GetString("felinid-pipecrawl-blocked-outer-clothing"), ent.Owner, ent.Owner);
             return;
         }
 
-        if (!_container.TryGetContainingContainer(ent.Owner, out var container))
+        if (!TryGetContainingDisposalUnit(ent.Owner, out var disposal) ||
+            !Transform(disposal.Owner).Anchored ||
+            disposal.Comp.Container.ContainedEntities.Count != 1)
         {
             return;
         }
 
-        var owner = container.Owner;
-
-        if (
-            !TryComp<DisposalUnitComponent>(owner, out var disposal) ||
-            !Transform(owner).Anchored ||
-            container.ID != DisposalUnitComponent.ContainerId ||
-            disposal.Container.ContainedEntities.Count != 1)
-        {
-            return;
-        }
-
-        if (!TryEnterPipecrawl(ent, (owner, disposal)))
-            return;
-
-        args.Handled = true;
+        args.Handled = TryEnterPipecrawl(ent, disposal);
     }
 
     private void OnPipecrawlMoveInput(Entity<DisposalPipeCrawlerComponent> ent, ref MoveInputEvent args)
@@ -257,27 +224,6 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
         LaunchPipecrawlerThroughDisposals(ent);
     }
 
-    private void OnCrawlerBloodstreamSpillAttempt(
-        Entity<DisposalPipeCrawlerComponent> ent,
-        ref BloodstreamSpillAttemptEvent args)
-    {
-        if (ent.Comp.InsidePipe)
-            args.Cancelled = true;
-    }
-
-    private void OnPipeContentsBloodstreamSpillAttempt(
-        Entity<DisposalPipeCrawlerContentsComponent> ent,
-        ref BloodstreamSpillAttemptEvent args)
-    {
-        args.Cancelled = true;
-    }
-
-    private void OnCrawlerSpillAttempt(Entity<DisposalPipeCrawlerComponent> ent, ref SpillAttemptEvent args)
-    {
-        if (ent.Comp.InsidePipe)
-            args.Cancelled = true;
-    }
-
     private void LaunchPipecrawlerThroughDisposals(
         Entity<DisposalPipeCrawlerComponent> ent,
         Direction? preferredDirection = null)
@@ -292,14 +238,14 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
 
         if (tube is not { } tubeUid || !TryComp<DisposalTubeComponent>(tubeUid, out _))
         {
-            TryForceExitPipecrawl(ent.AsNullable(), true);
+            ForceExitPipecrawl(ent, true);
             return;
         }
 
         SetPipecrawlActive(ent, false);
         _transform.SetWorldPosition(ent.Owner, _transform.GetWorldPosition(tubeUid));
 
-        var holderUid = Spawn(DisposalHolderPrototype, Transform(tubeUid).Coordinates);
+        var holderUid = Spawn(DisposalHolderPrototype, new EntityCoordinates(tubeUid, Vector2.Zero));
         var holder = Comp<DisposalHolderComponent>(holderUid);
         holder.PreviousDirection = preferredDirection ?? previousDirection;
 
@@ -320,18 +266,52 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
         }
     }
 
-    private void OnEntityInsertedIntoContainer(EntGotInsertedIntoContainerMessage args)
+    private void OnCrawlerSpillAttempt(Entity<DisposalPipeCrawlerComponent> ent, ref SpillAttemptEvent args)
     {
-        if (HasComp<DisposalHolderComponent>(args.Container.Owner))
-            EnsureComp<DisposalPipeCrawlerContentsComponent>(args.Entity);
+        if (ent.Comp.InsidePipe || HasComp<BeingDisposedComponent>(ent.Owner))
+            args.Cancelled = true;
     }
 
-    private void OnPipeContentsRemoved(
-        Entity<DisposalPipeCrawlerContentsComponent> ent,
-        ref EntGotRemovedFromContainerMessage args)
+    private void OnDisposedCrawlerDropAttempt(Entity<BeingDisposedComponent> ent, ref DropAttemptEvent args)
     {
-        if (HasComp<DisposalHolderComponent>(args.Container.Owner))
-            RemCompDeferred<DisposalPipeCrawlerContentsComponent>(ent.Owner);
+        if (HasComp<DisposalPipeCrawlerComponent>(ent.Owner))
+            args.Cancel();
+    }
+
+    private void OnTubeInteractUsing(Entity<DisposalTubeComponent> ent, ref InteractUsingEvent args)
+    {
+        if (args.Handled || !TryFindPipecrawlerInTube(ent.Owner, out var crawler))
+            return;
+
+        args.Handled = _tool.UseTool(
+            args.Used,
+            args.User,
+            ent.Owner,
+            crawler.Comp.ExtractionDelay,
+            crawler.Comp.ExtractionQuality,
+            new DisposalPipeExtractionDoAfterEvent());
+    }
+
+    private void OnTubeExtractionDoAfter(Entity<DisposalTubeComponent> ent, ref DisposalPipeExtractionDoAfterEvent args)
+    {
+        if (!args.Cancelled && TryFindPipecrawlerInTube(ent.Owner, out var crawler))
+            ForceExitPipecrawl(crawler, false);
+    }
+
+    private bool TryFindPipecrawlerInTube(EntityUid tube, out Entity<DisposalPipeCrawlerComponent> crawler)
+    {
+        var query = EntityQueryEnumerator<DisposalPipeCrawlerComponent>();
+        while (query.MoveNext(out var uid, out var pipecrawl))
+        {
+            if (pipecrawl.InsidePipe && (pipecrawl.CurrentTube == tube || pipecrawl.NextTube == tube))
+            {
+                crawler = (uid, pipecrawl);
+                return true;
+            }
+        }
+
+        crawler = default;
+        return false;
     }
 
     private void OnPipecrawlInhale(Entity<DisposalPipeCrawlerComponent> ent, ref InhaleLocationEvent args)
@@ -364,17 +344,14 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
         if (!active)
         {
             ent.Comp.CurrentTube = null;
-            ent.Comp.NextTube = null;
             ent.Comp.PreviousDirection = Direction.Invalid;
-            ent.Comp.TravelDirection = Direction.Invalid;
-            ent.Comp.TravelStartedAt = TimeSpan.Zero;
-            ent.Comp.TravelEndsAt = TimeSpan.Zero;
+            ResetTravel(ent.Comp);
         }
 
         SetPipecrawlPhysics(ent.Owner, active);
 
         Dirty(ent);
-        _sharedPipecrawl.RefreshPipecrawlState(ent);
+        RefreshPipecrawlState(ent);
 
         if (TryComp<BlindableComponent>(ent.Owner, out var blindable))
             _blindable.UpdateIsBlind((ent.Owner, blindable));
@@ -385,27 +362,25 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
         _eye.RefreshVisibilityMask(ent.Owner);
     }
 
+    private static void ResetTravel(DisposalPipeCrawlerComponent pipecrawl)
+    {
+        pipecrawl.NextTube = null;
+        pipecrawl.TravelDirection = Direction.Invalid;
+        pipecrawl.TravelStartedAt = TimeSpan.Zero;
+        pipecrawl.TravelEndsAt = TimeSpan.Zero;
+    }
+
     private bool TryEnterPipecrawl(
         Entity<DisposalPipeCrawlerComponent> ent,
         Entity<DisposalUnitComponent> disposal)
     {
         var xform = Transform(disposal.Owner);
-        if (!TryComp<MapGridComponent>(xform.GridUid, out var grid))
+        if (!TryComp(xform.GridUid, out MapGridComponent? grid))
             return false;
 
-        EntityUid? entryUid = null;
-        foreach (var local in _map.GetLocal(xform.GridUid!.Value, grid, xform.Coordinates))
-        {
-            if (!HasComp<DisposalEntryComponent>(local) ||
-                !HasComp<DisposalTubeComponent>(local) ||
-                !Transform(local).Anchored)
-                continue;
-
-            entryUid = local;
-            break;
-        }
-
-        if (entryUid == null)
+        var entry = _map.GetLocal(xform.GridUid.Value, grid, xform.Coordinates)
+            .FirstOrDefault(uid => HasComp<DisposalEntryComponent>(uid) && HasComp<DisposalTubeComponent>(uid));
+        if (entry == default)
             return false;
 
         SetPipecrawlActive(ent, true);
@@ -416,14 +391,10 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
             return false;
         }
 
+        // Leaving the unit's container re-enables collision, so disable it again.
         SetPipecrawlPhysics(ent.Owner, true);
-        ent.Comp.CurrentTube = entryUid;
-        ent.Comp.NextTube = null;
-        ent.Comp.PreviousDirection = Direction.Invalid;
-        ent.Comp.TravelDirection = Direction.Invalid;
-        ent.Comp.TravelStartedAt = TimeSpan.Zero;
-        ent.Comp.TravelEndsAt = TimeSpan.Zero;
-        _transform.SetWorldPosition(ent.Owner, _transform.GetWorldPosition(entryUid.Value));
+        ent.Comp.CurrentTube = entry;
+        _transform.SetWorldPosition(ent.Owner, _transform.GetWorldPosition(entry));
         FillPipecrawlAir(disposal.Owner, ent);
         return true;
     }
@@ -433,13 +404,13 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
         var tube = ent.Comp.NextTube ?? ent.Comp.CurrentTube;
         if (tube is not { } tubeUid || !Exists(tubeUid))
         {
-            TryForceExitPipecrawl(ent.AsNullable(), false);
+            ForceExitPipecrawl(ent, false);
             return;
         }
 
         if (HasComp<DisposalEntryComponent>(tubeUid))
         {
-            if (!TryFindDisposalUnitAtEntry(tubeUid, out var disposalUnit))
+            if (!TryFindDisposalUnitAt(tubeUid, out var disposalUnit))
             {
                 _popup.PopupEntity(
                     Loc.GetString("felinid-pipecrawl-exit-no-disposal-unit"),
@@ -472,30 +443,16 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
             preferredDirection == Direction.Invalid ? null : preferredDirection);
     }
 
-    private bool TryFindDisposalUnitAtEntry(EntityUid? currentTube, out EntityUid disposalUnit)
+    private bool TryFindDisposalUnitAt(EntityUid entry, out EntityUid disposalUnit)
     {
         disposalUnit = default;
-        if (currentTube == null ||
-            !HasComp<DisposalEntryComponent>(currentTube.Value))
-        {
-            return false;
-        }
-
-        var xform = Transform(currentTube.Value);
-        if (!TryComp<MapGridComponent>(xform.GridUid, out var grid))
+        var xform = Transform(entry);
+        if (!TryComp(xform.GridUid, out MapGridComponent? grid))
             return false;
 
-        foreach (var local in _map.GetLocal(xform.GridUid!.Value, grid, xform.Coordinates))
-        {
-            if (!HasComp<DisposalUnitComponent>(local) ||
-                !Transform(local).Anchored)
-                continue;
-
-            disposalUnit = local;
-            return true;
-        }
-
-        return false;
+        disposalUnit = _map.GetLocal(xform.GridUid.Value, grid, xform.Coordinates)
+            .FirstOrDefault(HasComp<DisposalUnitComponent>);
+        return disposalUnit != default;
     }
 
     private Direction GetPreferredDisposalDirection(EntityUid uid, EntityUid tubeUid)
@@ -558,23 +515,21 @@ public sealed partial class DisposalPipeCrawlerSystem : EntitySystem
         _physics.SetCanCollide(uid, !active && !isContained, body: physics);
     }
 
-    public bool TryForceExitPipecrawl(Entity<DisposalPipeCrawlerComponent?> ent, bool launch)
+    private void ForceExitPipecrawl(Entity<DisposalPipeCrawlerComponent> ent, bool launch)
     {
-        if (!Resolve(ent, ref ent.Comp, false) || !ent.Comp.InsidePipe)
-            return false;
+        if (!ent.Comp.InsidePipe)
+            return;
 
         var currentTube = ent.Comp.CurrentTube;
-        SetPipecrawlActive((ent.Owner, ent.Comp), false);
+        SetPipecrawlActive(ent, false);
 
         if (currentTube != null && Exists(currentTube.Value))
             _transform.SetWorldPosition(ent.Owner, _transform.GetWorldPosition(currentTube.Value));
 
-        ReleasePipecrawlAir((ent.Owner, ent.Comp));
+        ReleasePipecrawlAir(ent);
 
         if (launch)
             LaunchPipecrawler(ent.Owner);
-
-        return true;
     }
 
     private void LaunchPipecrawler(EntityUid uid)

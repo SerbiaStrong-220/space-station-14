@@ -24,6 +24,11 @@
   - type: AmmoCounter
   - type: Gun
     fireRate: 5
+    #SS220 felinid-recoil start
+    felinidRecoil: 0.45
+    felinidRecoilKnockdownChance: 0.06
+    felinidRecoilKnockdownTime: 0.9
+    #SS220 felinid-recoil end
     selectedMode: FullAuto
     availableModes:
       - FullAuto
@@ -78,6 +83,10 @@
     maxAngle: -24
   #SS220 increase-automatic-rifles-spread end
   - type: Gun
+    #SS220 felinid-recoil start
+    felinidRecoil: 0.55
+    felinidRecoilKnockdownChance: 0.08
+    #SS220 felinid-recoil end
    #ss220 gunmodes start
     availableModes:
       - FullAuto

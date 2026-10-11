@@ -18,14 +18,14 @@ public sealed partial class DashSpeedModifierComponent : Component
     public float SpeedModifier = 1.3f;
 
     [DataField]
-    public float HungerCostRatio = 0.2f;
+    public float HungerCost = 40f;
 
     [DataField]
-    public float ThirstCostRatio = 0.2f;
+    public float ThirstCost = 40f;
 
     [DataField]
     public TimeSpan Duration = TimeSpan.FromSeconds(10);
 
-    [DataField, Access(Other = AccessPermissions.ReadWrite)]
+    [DataField]
     public TimeSpan? CostAt;
 }

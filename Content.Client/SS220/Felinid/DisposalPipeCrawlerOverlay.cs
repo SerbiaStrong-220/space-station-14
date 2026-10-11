@@ -5,6 +5,8 @@ using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
+using Content.Shared.Tag;
 
 namespace Content.Client.SS220.Felinid;
 
@@ -12,6 +14,7 @@ public sealed partial class DisposalPipeCrawlerOverlay : Overlay
 {
     private const string PipeLayer = "pipe";
     private const int OverlayZIndex = 100;
+    private static readonly ProtoId<TagPrototype> PipeOverlayTag = "ShowInDisposalPipeCrawlerOverlay";
 
     [Dependency] private IEntityManager _entity = default!;
     [Dependency] private IPlayerManager _player = default!;
@@ -19,9 +22,9 @@ public sealed partial class DisposalPipeCrawlerOverlay : Overlay
     private EntityLookupSystem _lookup;
     private SpriteSystem _sprite;
     private TransformSystem _transform;
-    private readonly HashSet<Entity<DisposalPipeCrawlerTubeComponent>> _nearbyTubes = new();
-    private readonly HashSet<Entity<DisposalPipeCrawlerContentsComponent>> _nearbyContents = new();
-    private readonly HashSet<Entity<DisposalPipeCrawlerComponent>> _nearbyCrawlers = new();
+    private TagSystem _tags;
+    private readonly HashSet<Entity<TagComponent>> _nearbyTubesBuffer = new();
+    private readonly HashSet<Entity<DisposalPipeCrawlerComponent>> _nearbyCrawlersBuffer = new();
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
@@ -31,6 +34,7 @@ public sealed partial class DisposalPipeCrawlerOverlay : Overlay
         _lookup = _entity.System<EntityLookupSystem>();
         _sprite = _entity.System<SpriteSystem>();
         _transform = _entity.System<TransformSystem>();
+        _tags = _entity.System<TagSystem>();
         ZIndex = OverlayZIndex;
     }
 
@@ -40,33 +44,34 @@ public sealed partial class DisposalPipeCrawlerOverlay : Overlay
             !_entity.TryGetComponent<DisposalPipeCrawlerComponent>(player, out var pipecrawl) ||
             !pipecrawl.InsidePipe ||
             !_entity.TryGetComponent<EyeComponent>(player, out var eye) ||
-            args.Viewport.Eye != eye.Eye ||
-            !_entity.TryGetComponent<TransformComponent>(player, out var playerXform))
+            args.Viewport.Eye != eye.Eye)
         {
             return;
         }
 
+        var playerXform = _entity.GetComponent<TransformComponent>(player);
         var revealRangeSquared = pipecrawl.VisionRange * pipecrawl.VisionRange;
         var playerPosition = _transform.GetWorldPosition(playerXform);
         var mapId = playerXform.MapID;
         var eyeRotation = args.Viewport.Eye?.Rotation ?? Angle.Zero;
         var handle = args.WorldHandle;
 
-        _nearbyTubes.Clear();
+        _nearbyTubesBuffer.Clear();
         _lookup.GetEntitiesInRange(
             playerXform.Coordinates,
             pipecrawl.VisionRange,
-            _nearbyTubes,
+            _nearbyTubesBuffer,
             LookupFlags.Static | LookupFlags.Sundries | LookupFlags.Approximate);
 
-        foreach (var (uid, _) in _nearbyTubes)
+        foreach (var (uid, _) in _nearbyTubesBuffer)
         {
-            if (!_entity.TryGetComponent<SpriteComponent>(uid, out var sprite) ||
-                !_entity.TryGetComponent<TransformComponent>(uid, out var xform))
+            if (!_tags.HasTag(uid, PipeOverlayTag) ||
+                !_entity.TryGetComponent<SpriteComponent>(uid, out var sprite))
             {
                 continue;
             }
 
+            var xform = _entity.GetComponent<TransformComponent>(uid);
             RenderIfNearby(
                 (uid, sprite, xform),
                 mapId,
@@ -77,38 +82,21 @@ public sealed partial class DisposalPipeCrawlerOverlay : Overlay
                 revealPipeLayer: true);
         }
 
-        _nearbyContents.Clear();
+        _nearbyCrawlersBuffer.Clear();
         _lookup.GetEntitiesInRange(
             playerXform.Coordinates,
             pipecrawl.VisionRange,
-            _nearbyContents);
-        foreach (var (uid, _) in _nearbyContents)
+            _nearbyCrawlersBuffer);
+        foreach (var (uid, otherPipecrawl) in _nearbyCrawlersBuffer)
         {
-            if (!_entity.TryGetComponent<SpriteComponent>(uid, out var sprite) ||
-                !_entity.TryGetComponent<TransformComponent>(uid, out var xform))
+            if (uid == player ||
+                !otherPipecrawl.InsidePipe ||
+                !_entity.TryGetComponent<SpriteComponent>(uid, out var sprite))
             {
                 continue;
             }
 
-            RenderIfNearby((uid, sprite, xform), mapId, playerPosition, revealRangeSquared, eyeRotation, handle);
-        }
-
-        _nearbyCrawlers.Clear();
-        _lookup.GetEntitiesInRange(
-            playerXform.Coordinates,
-            pipecrawl.VisionRange,
-            _nearbyCrawlers);
-        foreach (var (uid, otherPipecrawl) in _nearbyCrawlers)
-        {
-            if (uid == player || !otherPipecrawl.InsidePipe)
-                continue;
-
-            if (!_entity.TryGetComponent<SpriteComponent>(uid, out var sprite) ||
-                !_entity.TryGetComponent<TransformComponent>(uid, out var xform))
-            {
-                continue;
-            }
-
+            var xform = _entity.GetComponent<TransformComponent>(uid);
             RenderIfNearby((uid, sprite, xform), mapId, playerPosition, revealRangeSquared, eyeRotation, handle);
         }
 
@@ -136,15 +124,9 @@ public sealed partial class DisposalPipeCrawlerOverlay : Overlay
             _sprite.LayerMapTryGet((ent.Owner, ent.Comp1), PipeLayer, out var pipeLayer, false))
         {
             var wasVisible = ent.Comp1[pipeLayer].Visible;
-            try
-            {
-                ent.Comp1[pipeLayer].Visible = true;
-                _sprite.RenderSprite((ent.Owner, ent.Comp1), handle, eyeRotation, rotation, position);
-            }
-            finally
-            {
-                ent.Comp1[pipeLayer].Visible = wasVisible;
-            }
+            ent.Comp1[pipeLayer].Visible = true;
+            _sprite.RenderSprite((ent.Owner, ent.Comp1), handle, eyeRotation, rotation, position);
+            ent.Comp1[pipeLayer].Visible = wasVisible;
 
             return;
         }

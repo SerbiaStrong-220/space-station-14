@@ -1,14 +1,12 @@
 using Content.Server.Disposal.Unit;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
-using Content.Shared.Disposal.Components;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Projectiles;
 using Content.Shared.SS220.Felinid.Components;
 using Content.Shared.Weapons.Hitscan.Events;
-using Robust.Shared.Maths;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Random;
 
@@ -36,16 +34,13 @@ public sealed partial class DodgeChanceSystem : EntitySystem
             return;
         }
 
-        if (TryDodgeShot((ent.Owner, ent.Comp)))
+        if (TryDodgeShot(ent))
             args.Cancelled = true;
     }
 
     private void OnDodgeHitscanAttempt(Entity<DodgeChanceComponent> ent, ref AttemptHitscanRaycastHitEvent args)
     {
-        if (args.Cancelled)
-            return;
-
-        if (TryDodgeShot((ent.Owner, ent.Comp)))
+        if (!args.Cancelled && TryDodgeShot(ent))
             args.Cancelled = true;
     }
 
@@ -57,41 +52,42 @@ public sealed partial class DodgeChanceSystem : EntitySystem
             return false;
         }
 
-        var dodgeChance = GetDodgeChance(ent);
-        return dodgeChance > 0f && _random.Prob(dodgeChance);
-    }
-
-    private float GetDodgeChance(Entity<DodgeChanceComponent> ent)
-    {
         var chance = ent.Comp.BaseDodgeChance;
 
+        // Measured against the incapacitation threshold: an entity past it is already excluded above,
+        // so scaling by the death threshold would leave the lower bands unreachable.
         if (TryComp<DamageableComponent>(ent.Owner, out var damageable) &&
-            _mobThresholds.TryGetDeadPercentage(ent.Owner, _damageable.GetTotalDamage((ent.Owner, damageable)), out FixedPoint2? healthPercent))
+            _mobThresholds.TryGetIncapPercentage(ent.Owner, _damageable.GetTotalDamage((ent.Owner, damageable)), out FixedPoint2? healthPercent))
         {
-            var damageFraction = healthPercent.Value.Float();
-            chance *= MathHelper.Lerp(1f, ent.Comp.CriticalHealthMultiplier, damageFraction);
+            chance += healthPercent.Value.Float() switch
+            {
+                var p when p >= ent.Comp.AwfulHealthThreshold => -ent.Comp.AwfulHealthPenalty,
+                var p when p >= ent.Comp.BadHealthThreshold => -ent.Comp.BadHealthPenalty,
+                var p when p < ent.Comp.GoodHealthThreshold => ent.Comp.ExcellentHealthBonus,
+                _ => 0f,
+            };
         }
 
         if (TryComp<HungerComponent>(ent.Owner, out var hunger))
         {
-            chance *= hunger.CurrentThreshold switch
+            chance -= hunger.CurrentThreshold switch
             {
-                HungerThreshold.Peckish => ent.Comp.MinorNeedMultiplier,
-                HungerThreshold.Starving or HungerThreshold.Dead => ent.Comp.MajorNeedMultiplier,
-                _ => 1f,
+                HungerThreshold.Peckish => ent.Comp.MinorNeedPenalty,
+                HungerThreshold.Starving or HungerThreshold.Dead => ent.Comp.MajorNeedPenalty,
+                _ => 0f,
             };
         }
 
         if (TryComp<ThirstComponent>(ent.Owner, out var thirst))
         {
-            chance *= thirst.CurrentThirstThreshold switch
+            chance -= thirst.CurrentThirstThreshold switch
             {
-                ThirstThreshold.Thirsty => ent.Comp.MinorNeedMultiplier,
-                ThirstThreshold.Parched or ThirstThreshold.Dead => ent.Comp.MajorNeedMultiplier,
-                _ => 1f,
+                ThirstThreshold.Thirsty => ent.Comp.MinorNeedPenalty,
+                ThirstThreshold.Parched or ThirstThreshold.Dead => ent.Comp.MajorNeedPenalty,
+                _ => 0f,
             };
         }
 
-        return Math.Clamp(chance, 0f, 1f);
+        return _random.Prob(Math.Clamp(chance, 0f, 1f));
     }
 }
