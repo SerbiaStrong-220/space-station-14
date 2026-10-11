@@ -49,15 +49,12 @@ public sealed partial class ExperienceEditorSystem : EntitySystem
             return;
         }
 
-        // TODO: make it definable by admin
-        experienceAddition.Forced = true;
-        DirtyField(targetEntity, experienceAddition, nameof(ExperienceAdditionComponent.Forced));
-
         var correctSkillDict = additionData.SkillDictionary.Values
             .SelectMany(list => list)
             .ToDictionary(view => view.SkillTreeId, item => item.Info);
 
-        _experienceAddition.UpsertSpecifier(targetEntity, ExperienceAddSource.Admin, new ExperienceAddSpecifier(0, additionData.Knowledges, correctSkillDict));
+        // TODO: make forced definable by admin
+        _experienceAddition.UpsertAdminForcedSpecifier(targetEntity, ExperienceAddSource.Admin, new ExperienceAddSpecifier(0, additionData.Knowledges, correctSkillDict));
     }
 
     private void OnChangePlayerRequest(ChangeEntityExperiencePlayerRequest ev, EntitySessionEventArgs args)

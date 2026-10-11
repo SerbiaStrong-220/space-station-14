@@ -49,6 +49,16 @@ public sealed partial class ExperienceAdditionSystem : EntitySystem
         EnqueueRecalculation(uid);
     }
 
+    public void UpsertAdminForcedSpecifier(EntityUid uid, ExperienceAddSource source, ExperienceAddSpecifier? specifier)
+    {
+        var additionComp = EnsureComp<ExperienceAdditionComponent>(uid);
+
+        additionComp.Forced = true;
+        DirtyField(uid, additionComp, nameof(ExperienceAdditionComponent.Forced));
+
+        UpsertSpecifier(uid, source, specifier);
+    }
+
     public void RemoveAdminAdded(EntityUid uid)
     {
         if (!TryComp<ExperienceAdditionComponent>(uid, out var comp))

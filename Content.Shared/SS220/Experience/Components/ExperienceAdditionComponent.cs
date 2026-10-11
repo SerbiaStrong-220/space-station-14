@@ -19,6 +19,7 @@ public enum ExperienceAddSource : int
 
 [RegisterComponent, NetworkedComponent]
 [AutoGenerateComponentState(fieldDeltas: true)]
+[Access(friends: [typeof(ExperienceAdditionSystem)], Other = AccessPermissions.ReadExecute)]
 public sealed partial class ExperienceAdditionComponent : Component
 {
     [AlwaysPushInheritance]
