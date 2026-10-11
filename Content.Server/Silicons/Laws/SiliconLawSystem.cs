@@ -382,26 +382,28 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     }
     // SS220 MalfAI end
 
-    protected override void OnUpdaterInsert(Entity<SiliconLawUpdaterComponent> ent, ref EntInsertedIntoContainerMessage args)
-    {
-        // TODO: Prediction dump this
-        if (!TryComp<SiliconLawProviderComponent>(args.Entity, out var provider))
-            return;
-
-        var lawset = provider.Lawset ?? GetLawset(provider.Laws);
-
-        var query = EntityManager.CompRegistryQueryEnumerator(ent.Comp.Components);
-
-        while (query.MoveNext(out var update))
+    // SS220 random lawset begin
+    /*     protected override void OnUpdaterInsert(Entity<SiliconLawUpdaterComponent> ent, ref EntInsertedIntoContainerMessage args)
         {
-            if (TryComp<ShowCrewIconsComponent>(update, out var crewIconComp))
+            // TODO: Prediction dump this
+            if (!TryComp<SiliconLawProviderComponent>(args.Entity, out var provider))
+                return;
+
+            var lawset = provider.Lawset ?? GetLawset(provider.Laws);
+
+            var query = EntityManager.CompRegistryQueryEnumerator(ent.Comp.Components);
+
+            while (query.MoveNext(out var update))
             {
-                crewIconComp.UncertainCrewBorder = DefaultCrewLawset != provider.Laws;
-                Dirty(update, crewIconComp);
+                if (TryComp<ShowCrewIconsComponent>(update, out var crewIconComp))
+                {
+                    crewIconComp.UncertainCrewBorder = DefaultCrewLawset != provider.Laws;
+                    Dirty(update, crewIconComp);
+                }
+                SetLaws(lawset.Laws, update, provider.LawUploadSound);
             }
-            SetLaws(lawset.Laws, update, provider.LawUploadSound);
-        }
-    }
+        } */
+    // SS220 random lawset end
 }
 
 [ToolshedCommand, AdminCommand(AdminFlags.Admin)]
