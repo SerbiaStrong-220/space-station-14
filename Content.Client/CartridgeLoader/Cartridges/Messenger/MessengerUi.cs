@@ -162,7 +162,7 @@ public sealed partial class MessengerUi : UIFragment
                         chatUi.LastMessage = messengerChat.LastMessageId ?? chatUi.LastMessage;
                         chatUi.Messages.UnionWith(messengerChat.MessagesId);
                         chatUi.NewMessages = true;
-                        break;
+                        continue;
                     }
 
                     _messengerUiState.Chats.Add(messengerChat.Id,
@@ -175,7 +175,7 @@ public sealed partial class MessengerUi : UIFragment
             }
             case MessengerErrorUiState errorUiState:
             {
-                _errorText = errorUiState.Text;
+                _errorText = Loc.GetString(errorUiState.LocId);
                 break;
             }
         }

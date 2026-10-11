@@ -42,70 +42,39 @@ public sealed class MessengerChatUiState
 }
 
 [Serializable, NetSerializable]
-public sealed class MessengerClientContactUiState : BoundUserInterfaceState
+public sealed class MessengerClientContactUiState(MessengerContact clientContact) : BoundUserInterfaceState
 {
-    public MessengerContact ClientContact;
-
-    public MessengerClientContactUiState(MessengerContact clientContact)
-    {
-        ClientContact = clientContact;
-    }
+    public MessengerContact ClientContact = clientContact;
 }
 
 [Serializable, NetSerializable]
-public sealed class MessengerContactUiState : BoundUserInterfaceState
+public sealed class MessengerContactUiState(List<MessengerContact> contacts) : BoundUserInterfaceState
 {
-    public List<MessengerContact> Contacts;
-
-    public MessengerContactUiState(List<MessengerContact> contacts)
-    {
-        Contacts = contacts;
-    }
+    public List<MessengerContact> Contacts = contacts;
 }
 
 [Serializable, NetSerializable]
-public sealed class MessengerMessagesUiState : BoundUserInterfaceState
+public sealed class MessengerMessagesUiState(List<MessengerMessage> messages) : BoundUserInterfaceState
 {
     // uint - chatId
-    public List<MessengerMessage> Messages;
-
-    public MessengerMessagesUiState(List<MessengerMessage> messages)
-    {
-        Messages = messages;
-    }
+    public List<MessengerMessage> Messages = messages;
 }
 
 [Serializable, NetSerializable]
-public sealed class MessengerChatUpdateUiState : BoundUserInterfaceState
+public sealed class MessengerChatUpdateUiState(List<MessengerChat> chats) : BoundUserInterfaceState
 {
-    public List<MessengerChat> Chats;
-
-    public MessengerChatUpdateUiState(List<MessengerChat> chats)
-    {
-        Chats = chats;
-    }
+    public List<MessengerChat> Chats = chats;
 }
 
 [Serializable, NetSerializable]
-public sealed class MessengerErrorUiState : BoundUserInterfaceState
+public sealed class MessengerErrorUiState(LocId locId) : BoundUserInterfaceState
 {
-    public string Text;
-
-    public MessengerErrorUiState(string text)
-    {
-        Text = text;
-    }
+    public LocId LocId = locId;
 }
 
 [Serializable, NetSerializable]
-public sealed class MessengerNewChatMessageUiState : BoundUserInterfaceState
+public sealed class MessengerNewChatMessageUiState(uint chatId, MessengerMessage message) : BoundUserInterfaceState
 {
-    public uint ChatId;
-    public MessengerMessage Message;
-
-    public MessengerNewChatMessageUiState(uint chatId, MessengerMessage message)
-    {
-        ChatId = chatId;
-        Message = message;
-    }
+    public uint ChatId = chatId;
+    public MessengerMessage Message = message;
 }

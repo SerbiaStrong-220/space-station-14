@@ -5,24 +5,29 @@ namespace Content.Server.CartridgeLoader.Cartridges;
 [RegisterComponent]
 public sealed partial class MessengerClientCartridgeComponent : Component
 {
-    // to reduce the call to onInstall
-    public bool IsInstalled = false;
-
-    // EntityUid of loader device
+    /// <summary>
+    /// Loader device (PDA) the cartridge is installed in.
+    /// </summary>
     public EntityUid Loader;
 
-    // List of accessed servers, in future user could select a server to connect
-    public Dictionary<EntityUid, ServerInfo> Servers = new();
+    /// <summary>
+    /// Network addresses of the servers that answered this client.
+    /// </summary>
+    public Dictionary<EntityUid, string> ServerAddresses = new();
 
-    // Current active server
+    /// <summary>
+    /// Server the client talks to.
+    /// </summary>
     public EntityUid? ActiveServer;
 
-    // When true, component try to send full state of messenger
+    /// <summary>
+    /// When true, the system queues the full messenger state from the active server.
+    /// </summary>
     public bool SendState;
-}
 
-public sealed class ServerInfo
-{
-    public string Name = "";
-    public string Address = "";
+    /// <summary>
+    /// Ui states waiting to be sent. A loader keeps only the last state set during a tick,
+    /// so the system sends one state per update.
+    /// </summary>
+    public Queue<BoundUserInterfaceState> PendingStates = new();
 }

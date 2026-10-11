@@ -10,10 +10,14 @@ namespace Content.Client.CartridgeLoader.Cartridges.Messenger;
 public sealed partial class MessengerUiChatItem : BoxContainer
 {
     public MessengerUiChatItem(string chatName, string lastMessage,
-        Action<BaseButton.ButtonEventArgs>? onPressedOpenChatHistory, bool isNewMessage)
+        Action<BaseButton.ButtonEventArgs>? onPressedOpenChatHistory, bool isNewMessage, string? statusText = null)
     {
         RobustXamlLoader.Load(this);
         ChatName.Text = chatName;
+
+        StatusLabel.Visible = statusText != null;
+        StatusLabel.Text = statusText;
+        StatusLabel.FontColorOverride = Color.Gray;
 
         LastMessage.FontColorOverride = isNewMessage ? Color.DarkGoldenrod : Color.DarkGray;
         LastMessage.Text = Truncate(lastMessage, 40);

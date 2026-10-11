@@ -39,11 +39,20 @@ public enum MessengerChatKind
 }
 
 [Serializable, NetSerializable]
+public enum MessengerContactStatus : byte
+{
+    Online,
+    OutOfRange,
+    Cryo,
+}
+
+[Serializable, NetSerializable]
 public sealed class MessengerContact
 {
     public uint Id;
     public string? Name;
     public HashSet<string> ActiveAddresses = new();
+    public MessengerContactStatus Status;
 
     public MessengerContact(string name, string netAddress)
     {

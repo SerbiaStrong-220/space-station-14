@@ -1,14 +1,13 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.CartridgeLoader.Cartridges;
-using Content.Server.DeviceNetwork.Components;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Server.Power.Components;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
+using Content.Shared.Bed.Cryostorage;
 using Content.Shared.CartridgeLoader.Cartridges;
 using Content.Shared.Database;
 using Content.Shared.DeviceNetwork;
@@ -20,19 +19,21 @@ using Content.Shared.PDA;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Server.Messenger;
 
-public sealed class MessengerServerSystem : EntitySystem
+public sealed partial class MessengerServerSystem : EntitySystem
 {
-    [Dependency] private readonly DeviceNetworkSystem? _deviceNetworkSystem = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly AccessReaderSystem _accessSystem = default!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly SharedGameTicker _gameTicker = default!;
+    [Dependency] private DeviceNetworkSystem _deviceNetwork = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private AccessReaderSystem _accessSystem = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private SharedGameTicker _gameTicker = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
 
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
+    // Every new contact creates chats with all existing ones, so registration is spread over several updates
+    private const int MaxRegistrationsPerUpdate = 8;
 
     public enum NetworkCommand
     {
@@ -57,293 +58,616 @@ public sealed class MessengerServerSystem : EntitySystem
         ChatId,
     }
 
-    private TimeSpan _nexUpdate;
-
     public override void Initialize()
     {
         base.Initialize();
+
         SubscribeLocalEvent<MessengerServerComponent, DeviceNetworkPacketEvent>(OnNetworkPacket);
     }
 
     public override void Update(float frameTime)
     {
-        if (_nexUpdate >= _gameTiming.CurTime)
-            return;
+        var curTime = _gameTiming.CurTime;
+        var cardQuery = GetEntityQuery<IdCardComponent>();
+        var query = EntityQueryEnumerator<MessengerServerComponent>();
 
-        _nexUpdate = _gameTiming.CurTime.Add(TimeSpan.FromSeconds(30));
-
-        // update contact info if changed
-        foreach (var server in _entityManager.EntityQuery<MessengerServerComponent>())
+        while (query.MoveNext(out var uid, out var server))
         {
-            foreach (var (entityUid, contactKey) in server.GetClientToContact())
-            {
-                if (!TryComp<IdCardComponent>(entityUid, out var card))
-                    continue;
+            if (server.NextContactUpdate > curTime)
+                continue;
 
-                server.UpdateContactName(contactKey, card.FullName);
-            }
+            server.NextContactUpdate = curTime + server.ContactUpdateInterval;
+            UpdateContactNames(server, cardQuery);
+            RegisterCartridgeOwners((uid, server));
+            UpdateContactStatuses((uid, server));
         }
     }
 
-    private void OnNetworkPacket(EntityUid uid, MessengerServerComponent? component, DeviceNetworkPacketEvent args)
+    private static void UpdateContactNames(MessengerServerComponent server, EntityQuery<IdCardComponent> cardQuery)
     {
-        if (!Resolve(uid, ref component))
+        foreach (var (idCardUid, contactId) in server.ClientToContact)
+        {
+            if (!cardQuery.TryGetComponent(idCardUid, out var card) || card.FullName == null)
+                continue;
+
+            if (server.Contacts.TryGetValue(contactId, out var contact))
+                contact.Name = card.FullName;
+        }
+    }
+
+    /// <summary>
+    /// Registers owners of all messenger cartridges that have access to the server,
+    /// even if nobody has opened the cartridge. Contacts are never removed to keep the chat history.
+    /// </summary>
+    private void RegisterCartridgeOwners(Entity<MessengerServerComponent> ent)
+    {
+        if (!IsPowered(ent))
             return;
 
+        var registered = 0;
+        var query = EntityQueryEnumerator<MessengerClientCartridgeComponent, DeviceNetworkComponent>();
+
+        while (query.MoveNext(out _, out var cartridge, out var deviceNet))
+        {
+            if (string.IsNullOrEmpty(deviceNet.Address)
+                || !TryGetIdCard(cartridge.Loader, out var idCardUid, out var idCard))
+                continue;
+
+            if (ent.Comp.ClientToContact.ContainsKey(idCardUid.Value) || !HasServerAccess(ent, idCardUid.Value))
+                continue;
+
+            var contactId = RegisterNewClient(ent, idCardUid.Value, idCard.FullName ?? "", deviceNet.Address);
+            SendToContact(ent, contactId, CreateInfoPayload(ent.Comp));
+
+            if (++registered >= MaxRegistrationsPerUpdate)
+                return;
+        }
+    }
+
+    /// <summary>
+    /// Recalculates statuses of all contacts and sends the changed ones to every client.
+    /// A contact that returned to the server range also gets the server info, so its client resyncs missed messages.
+    /// </summary>
+    private void UpdateContactStatuses(Entity<MessengerServerComponent> ent)
+    {
+        var serverMap = Transform(ent.Owner).MapID;
+        var powered = IsPowered(ent);
+        List<MessengerContact>? changed = null;
+
+        foreach (var (idCardUid, contactId) in ent.Comp.ClientToContact)
+        {
+            if (!ent.Comp.Contacts.TryGetValue(contactId, out var contact))
+                continue;
+
+            var status = GetContactStatus(idCardUid, serverMap, powered);
+
+            if (contact.Status == status)
+                continue;
+
+            contact.Status = status;
+            changed ??= new List<MessengerContact>();
+            changed.Add(contact);
+
+            if (status == MessengerContactStatus.Online)
+                SendToContact(ent, contactId, CreateInfoPayload(ent.Comp));
+        }
+
+        if (changed == null)
+            return;
+
+        var payload = new NetworkPayload
+        {
+            [NetworkKey.Command.ToString()] = NetworkCommand.Contact,
+            [NetworkKey.ContactList.ToString()] = changed,
+        };
+
+        foreach (var contactId in ent.Comp.ClientToContact.Values)
+        {
+            SendToContact(ent, contactId, payload);
+        }
+    }
+
+    private MessengerContactStatus GetContactStatus(EntityUid idCardUid, MapId serverMap, bool serverPowered)
+    {
+        if (Deleted(idCardUid))
+            return MessengerContactStatus.OutOfRange;
+
+        if (IsInCryostorage(idCardUid))
+            return MessengerContactStatus.Cryo;
+
+        // assume contact is reachable only while its id card is inside a pda on the server map
+        if (!serverPowered
+            || !_containerSystem.TryGetContainingContainer(idCardUid, out var container)
+            || container.ID != PdaComponent.PdaIdSlotId)
+            return MessengerContactStatus.OutOfRange;
+
+        return Transform(container.Owner).MapID == serverMap
+            ? MessengerContactStatus.Online
+            : MessengerContactStatus.OutOfRange;
+    }
+
+    /// <summary>
+    /// A body that left for cryostorage keeps its items, so the outermost container owner is the body itself.
+    /// </summary>
+    private bool IsInCryostorage(EntityUid uid)
+    {
+        var current = uid;
+
+        while (_containerSystem.TryGetContainingContainer(current, out var container))
+        {
+            current = container.Owner;
+        }
+
+        return HasComp<CryostorageContainedComponent>(current);
+    }
+
+    private bool IsPowered(EntityUid uid)
+    {
+        return TryComp<ApcPowerReceiverComponent>(uid, out var power) && power.Powered;
+    }
+
+    private static NetworkPayload CreateInfoPayload(MessengerServerComponent server)
+    {
+        return new NetworkPayload
+        {
+            [NetworkKey.Command.ToString()] = NetworkCommand.Info,
+            [NetworkKey.ServerName.ToString()] = server.Name,
+        };
+    }
+
+    private void OnNetworkPacket(Entity<MessengerServerComponent> ent, ref DeviceNetworkPacketEvent args)
+    {
         if (!args.Data.TryGetValue(MessengerClientCartridgeSystem.NetworkKey.Command.ToString(),
-                out MessengerClientCartridgeSystem.NetworkCommand? msg))
+                out MessengerClientCartridgeSystem.NetworkCommand? command))
             return;
 
-        switch (msg)
+        switch (command)
         {
             case MessengerClientCartridgeSystem.NetworkCommand.CheckServer:
-            {
-                // check authorization to server before registration
-                if (!AccessCheck(uid, args.Data))
-                    break;
-                // register client by it id card, which must be inserted in device
-                if (!RegisterByIdCard(uid, args.SenderAddress, ref component, args.Data, out _))
-                    break;
-
-                SendResponse(uid, args, new NetworkPayload
-                {
-                    [NetworkKey.Command.ToString()] = NetworkCommand.Info,
-                    [NetworkKey.ServerName.ToString()] = component.Name,
-                });
+                OnCheckServer(ent, args);
                 break;
-            }
             case MessengerClientCartridgeSystem.NetworkCommand.StateUpdate:
-            {
-                if (!AuthByIdCard(ref component, args.Data, out var contactKey))
-                    break;
-
-                var accessedChats = component.GetPublicChats();
-                accessedChats.UnionWith(component.GetPrivateChats(contactKey));
-
-                var chatsList = accessedChats.Select(component.GetChat).ToList();
-
-                /*contacts*/
-                if (!ParseIdHashSet(MessengerClientCartridgeSystem.NetworkKey.ContactsIds.ToString(), args.Data,
-                        out var contacts))
-                    contacts = new HashSet<uint>();
-
-                var membersContactKeys = new HashSet<uint>();
-
-                foreach (var messengerChat in chatsList)
-                {
-                    membersContactKeys.UnionWith(messengerChat.MembersId);
-                }
-
-                membersContactKeys.ExceptWith(contacts);
-
-                var contactsInfo = membersContactKeys.Select(key => component.GetContact(new ContactKey(key))).ToList();
-
-                if (contactsInfo.Count > 0)
-                {
-                    SendResponse(uid, args, new NetworkPayload
-                    {
-                        [NetworkKey.Command.ToString()] = NetworkCommand.Contact,
-                        [NetworkKey.ContactList.ToString()] = contactsInfo,
-                    });
-                }
-                /*contacts*/
-
-                /*messages*/
-                if (!ParseIdHashSet(MessengerClientCartridgeSystem.NetworkKey.MessagesIds.ToString(), args.Data,
-                        out var messages))
-                    messages = new HashSet<uint>();
-
-                var messagesKeys = new HashSet<uint>();
-
-                foreach (var chat in chatsList)
-                {
-                    messagesKeys.UnionWith(chat.MessagesId);
-                }
-
-                messagesKeys.ExceptWith(messages);
-
-                var messagesList = messagesKeys.Select(messageId => component.GetMessage(new MessageKey(messageId)))
-                    .ToList();
-
-                if (messagesList.Count > 0)
-                {
-                    SendResponse(uid, args, new NetworkPayload
-                    {
-                        [NetworkKey.Command.ToString()] = NetworkCommand.Messages,
-                        [NetworkKey.MessageList.ToString()] = messagesList,
-                    });
-                }
-                /*messages*/
-
-                /*chats*/
-                if (!ParseIdHashSet(MessengerClientCartridgeSystem.NetworkKey.CurrentChatIds.ToString(), args.Data,
-                        out var chats))
-                    chats = new HashSet<uint>();
-
-                var updateChats = new HashSet<ChatKey>();
-
-                foreach (var accessedChat in accessedChats)
-                {
-                    if (!chats.Contains(accessedChat.Id))
-                    {
-                        updateChats.Add(accessedChat);
-                    }
-                }
-
-                var updateChatsList = updateChats.Select(component.GetChat).ToList();
-
-                if (updateChatsList.Count > 0)
-                {
-                    SendResponse(uid, args, new NetworkPayload
-                    {
-                        [NetworkKey.Command.ToString()] = NetworkCommand.Chat,
-                        [NetworkKey.ChatList.ToString()] = updateChatsList,
-                    });
-                }
-                /*chats*/
-
+                OnStateUpdate(ent, args);
                 break;
-            }
-
             case MessengerClientCartridgeSystem.NetworkCommand.MessageSend:
-            {
-                if (!AuthByIdCard(ref component, args.Data, out var contactKey))
-                    break; // can not authenticate
-
-                if (!ParseId(MessengerClientCartridgeSystem.NetworkKey.ChatId.ToString(), args.Data, out var chatId))
-                    break; // no chat id received
-
-                if (!ParseMessageText(MessengerClientCartridgeSystem.NetworkKey.MessageText.ToString(), args.Data,
-                        out var messageText))
-                    break; // no message received
-
-                var chatKey = new ChatKey(chatId.Value);
-
-                var accessedChats = component.GetPublicChats();
-                accessedChats.UnionWith(component.GetPrivateChats(contactKey));
-
-                var chat = component.GetChat(chatKey);
-
-                if (!accessedChats.Contains(chatKey))
-                {
-                    _adminLogger.Add(LogType.MessengerServer, LogImpact.Low,
-                        $"No access: sender entity: {args.Sender}, chat: {chat.Name}, chatID: {chat.Id}, msg: {messageText}");
-                    break; // no access
-                }
-
-                // create new message
-                // ss220 messenger time fix start
-                var message = new MessengerMessage(chatKey.Id, contactKey.Id,
-                    _gameTiming.CurTime.Subtract(_gameTicker.RoundStartTimeSpan), messageText);
-                // ss220 messenger time fix end
-                var messageKey =
-                    component.AddMessage(message);
-                message.Id = messageKey.Id;
-
-                // assign new message to chat index
-                chat.LastMessageId = messageKey.Id;
-                chat.MessagesId.Add(messageKey.Id);
-
-                foreach (var chatMember in chat.MembersId)
-                {
-                    foreach (var activeAddress in component.GetContact(new ContactKey(chatMember)).ActiveAddresses)
-                    {
-                        _deviceNetworkSystem?.QueuePacket(uid, activeAddress, new NetworkPayload
-                        {
-                            [NetworkKey.Command.ToString()] = NetworkCommand.NewMessage,
-                            [NetworkKey.ChatId.ToString()] = chatKey.Id,
-                            [NetworkKey.Message.ToString()] = message,
-                        });
-                    }
-                }
-
-                _adminLogger.Add(LogType.MessengerServer, LogImpact.Low,
-                    $"Send: sender entity: {args.Sender}, chat: {chat.Name}, chatID: {chat.Id}, msg: {messageText}");
+                OnMessageSend(ent, args);
                 break;
-            }
         }
     }
 
-    /// <summary>
-    /// Find loader entity id in payload data and trying to get id card in this device,
-    /// id card will be used as client authenticate entity
-    /// if id card registered, return contactKey
-    /// else return false
-    /// </summary>
-    /// <param name="component">MessengerServerComponent</param>
-    /// <param name="payload">NetworkPayload of network packet</param>
-    /// <param name="contactKey">out contactKey of client</param>
-    /// <returns>Returns true when the component was successfully received.</returns>
-    private bool AuthByIdCard(ref MessengerServerComponent component, NetworkPayload payload,
-        [NotNullWhen(true)] out ContactKey? contactKey)
+    private void OnCheckServer(Entity<MessengerServerComponent> ent, DeviceNetworkPacketEvent args)
     {
-        contactKey = null;
+        if (!HasServerAccess(ent, args.Data))
+            return;
 
-        if (!GetIdCardComponent(payload, out var idCardUid, out _))
-            return false;
+        if (!TryRegisterByIdCard(ent, args.SenderAddress, args.Data, out _))
+            return;
 
-        return component.GetContactKey(idCardUid.Value, out contactKey);
+        SendResponse(ent, args, CreateInfoPayload(ent.Comp));
+    }
+
+    private void OnStateUpdate(Entity<MessengerServerComponent> ent, DeviceNetworkPacketEvent args)
+    {
+        if (!TryAuthByIdCard(ent.Comp, args.Data, out var contactId))
+            return;
+
+        var chats = GetAccessedChats(ent.Comp, contactId);
+
+        SendMissingContacts(ent, args, chats);
+        SendMissingMessages(ent, args, chats);
+        SendMissingChats(ent, args, chats);
     }
 
     /// <summary>
-    /// Find loader entity id in payload data and trying to get id card in this device,
-    /// id card will be used as client authenticate entity
-    /// if id card registered, return contactKey without registration
-    /// if not, create new contact
+    /// Sends contacts of chat members that the client does not know yet.
     /// </summary>
-    /// <param name="serverUid">The EntityUid of the messenger server</param>
-    /// <param name="netAddress">The network address of the device with installed client</param>
-    /// <param name="component">MessengerServerComponent</param>
-    /// <param name="payload">NetworkPayload of network packet</param>
-    /// <param name="contactKey">out contactKey of client</param>
-    /// <returns>Returns true when the component was successfully received.</returns>
-    private bool RegisterByIdCard(EntityUid serverUid, string netAddress, ref MessengerServerComponent component,
-        NetworkPayload payload, [NotNullWhen(true)] out ContactKey? contactKey)
+    private void SendMissingContacts(Entity<MessengerServerComponent> ent,
+        DeviceNetworkPacketEvent args,
+        List<MessengerChat> chats)
     {
-        contactKey = null;
+        // known ids are also used to skip ids already queued for sending
+        var knownIds = GetKnownIds(args.Data, MessengerClientCartridgeSystem.NetworkKey.ContactsIds);
+        var contacts = new List<MessengerContact>();
 
-        if (!GetIdCardComponent(payload, out var idCardUid, out var idCardComponent))
-            return false;
+        foreach (var chat in chats)
+        {
+            foreach (var memberId in chat.MembersId)
+            {
+                if (knownIds.Add(memberId) && ent.Comp.Contacts.TryGetValue(memberId, out var contact))
+                    contacts.Add(contact);
+            }
+        }
 
-        if (component.GetContactKey(idCardUid.Value, out contactKey))
+        if (contacts.Count == 0)
+            return;
+
+        SendResponse(ent, args, new NetworkPayload
+        {
+            [NetworkKey.Command.ToString()] = NetworkCommand.Contact,
+            [NetworkKey.ContactList.ToString()] = contacts,
+        });
+    }
+
+    /// <summary>
+    /// Sends messages of accessed chats that the client does not know yet.
+    /// </summary>
+    private void SendMissingMessages(Entity<MessengerServerComponent> ent,
+        DeviceNetworkPacketEvent args,
+        List<MessengerChat> chats)
+    {
+        var knownIds = GetKnownIds(args.Data, MessengerClientCartridgeSystem.NetworkKey.MessagesIds);
+        var messages = new List<MessengerMessage>();
+
+        foreach (var chat in chats)
+        {
+            foreach (var messageId in chat.MessagesId)
+            {
+                if (knownIds.Add(messageId) && ent.Comp.Messages.TryGetValue(messageId, out var message))
+                    messages.Add(message);
+            }
+        }
+
+        if (messages.Count == 0)
+            return;
+
+        SendResponse(ent, args, new NetworkPayload
+        {
+            [NetworkKey.Command.ToString()] = NetworkCommand.Messages,
+            [NetworkKey.MessageList.ToString()] = messages,
+        });
+    }
+
+    /// <summary>
+    /// Sends accessed chats that the client does not know yet.
+    /// </summary>
+    private void SendMissingChats(Entity<MessengerServerComponent> ent,
+        DeviceNetworkPacketEvent args,
+        List<MessengerChat> chats)
+    {
+        var knownIds = GetKnownIds(args.Data, MessengerClientCartridgeSystem.NetworkKey.CurrentChatIds);
+        var missingChats = new List<MessengerChat>();
+
+        foreach (var chat in chats)
+        {
+            if (!knownIds.Contains(chat.Id))
+                missingChats.Add(chat);
+        }
+
+        if (missingChats.Count == 0)
+            return;
+
+        SendResponse(ent, args, new NetworkPayload
+        {
+            [NetworkKey.Command.ToString()] = NetworkCommand.Chat,
+            [NetworkKey.ChatList.ToString()] = missingChats,
+        });
+    }
+
+    private void OnMessageSend(Entity<MessengerServerComponent> ent, DeviceNetworkPacketEvent args)
+    {
+        var server = ent.Comp;
+
+        if (!TryAuthByIdCard(server, args.Data, out var senderId))
+            return;
+
+        if (!args.Data.TryGetValue(MessengerClientCartridgeSystem.NetworkKey.ChatId.ToString(), out uint? chatId))
+            return;
+
+        if (!args.Data.TryGetValue(MessengerClientCartridgeSystem.NetworkKey.MessageText.ToString(),
+                out string? messageText))
+            return;
+
+        if (!server.Chats.TryGetValue(chatId.Value, out var chat) || !CanAccessChat(server, senderId, chat.Id))
+        {
+            _adminLogger.Add(LogType.MessengerServer, LogImpact.Low,
+                $"No access: sender entity: {args.Sender}, chat: {chat?.Name}, chatID: {chatId}, msg: {messageText}");
+            return;
+        }
+
+        // ss220 messenger time fix start
+        var message = new MessengerMessage(chat.Id, senderId,
+            _gameTiming.CurTime - _gameTicker.RoundStartTimeSpan, messageText)
+        {
+            Id = server.NextId++,
+        };
+        // ss220 messenger time fix end
+        server.Messages[message.Id] = message;
+
+        chat.LastMessageId = message.Id;
+        chat.MessagesId.Add(message.Id);
+
+        var payload = new NetworkPayload
+        {
+            [NetworkKey.Command.ToString()] = NetworkCommand.NewMessage,
+            [NetworkKey.ChatId.ToString()] = chat.Id,
+            [NetworkKey.Message.ToString()] = message,
+        };
+
+        foreach (var memberId in chat.MembersId)
+        {
+            SendToContact(ent, memberId, payload);
+        }
+
+        _adminLogger.Add(LogType.MessengerServer, LogImpact.Low,
+            $"Send: sender entity: {args.Sender}, chat: {chat.Name}, chatID: {chat.Id}, msg: {messageText}");
+    }
+
+    private static bool CanAccessChat(MessengerServerComponent server, uint contactId, uint chatId)
+    {
+        if (server.PublicChats.Contains(chatId))
             return true;
 
-        RegisterAndInitNewClient(serverUid, idCardUid.Value, idCardComponent.FullName ?? "", netAddress, ref component,
-            out contactKey);
+        return server.PrivateChats.TryGetValue(contactId, out var privateChats) && privateChats.Contains(chatId);
+    }
+
+    /// <summary>
+    /// Returns public chats and chats where the contact was invited.
+    /// </summary>
+    private static List<MessengerChat> GetAccessedChats(MessengerServerComponent server, uint contactId)
+    {
+        var chatIds = new HashSet<uint>(server.PublicChats);
+
+        if (server.PrivateChats.TryGetValue(contactId, out var privateChats))
+            chatIds.UnionWith(privateChats);
+
+        var chats = new List<MessengerChat>(chatIds.Count);
+
+        foreach (var chatId in chatIds)
+        {
+            if (server.Chats.TryGetValue(chatId, out var chat))
+                chats.Add(chat);
+        }
+
+        return chats;
+    }
+
+    private static void AddPrivateChat(MessengerServerComponent server, uint contactId, uint chatId)
+    {
+        if (!server.PrivateChats.TryGetValue(contactId, out var privateChats))
+        {
+            privateChats = new HashSet<uint>();
+            server.PrivateChats[contactId] = privateChats;
+        }
+
+        privateChats.Add(chatId);
+    }
+
+    /// <summary>
+    /// Returns a modifiable copy of the id set sent by the client, or an empty set if there is none.
+    /// </summary>
+    private static HashSet<uint> GetKnownIds(NetworkPayload payload, MessengerClientCartridgeSystem.NetworkKey key)
+    {
+        return payload.TryGetValue(key.ToString(), out HashSet<uint>? ids)
+            ? new HashSet<uint>(ids)
+            : new HashSet<uint>();
+    }
+
+    /// <summary>
+    /// Finds the id card in the device from the payload. The id card is the client authentication entity.
+    /// </summary>
+    /// <returns>True if the id card is already registered on the server.</returns>
+    private bool TryAuthByIdCard(MessengerServerComponent server, NetworkPayload payload, out uint contactId)
+    {
+        contactId = 0;
+
+        return TryGetIdCard(payload, out var idCardUid, out _)
+               && server.ClientToContact.TryGetValue(idCardUid.Value, out contactId);
+    }
+
+    /// <summary>
+    /// Same as <see cref="TryAuthByIdCard"/>, but creates a new contact if the id card is not registered yet.
+    /// </summary>
+    /// <returns>True if the client is registered (now or before).</returns>
+    private bool TryRegisterByIdCard(Entity<MessengerServerComponent> ent,
+        string netAddress,
+        NetworkPayload payload,
+        out uint contactId)
+    {
+        contactId = 0;
+
+        if (!TryGetIdCard(payload, out var idCardUid, out var idCard))
+            return false;
+
+        if (ent.Comp.ClientToContact.TryGetValue(idCardUid.Value, out contactId))
+            return true;
+
+        contactId = RegisterNewClient(ent, idCardUid.Value, idCard.FullName ?? "", netAddress);
 
         return true;
     }
 
-    private bool GetIdCardComponent(NetworkPayload payload, [NotNullWhen(true)] out EntityUid? idCardUid,
-        [NotNullWhen(true)] out IdCardComponent? idCardComponent)
+    private bool TryGetIdCard(NetworkPayload payload,
+        [NotNullWhen(true)] out EntityUid? idCardUid,
+        [NotNullWhen(true)] out IdCardComponent? idCard)
     {
         idCardUid = null;
-        idCardComponent = null;
+        idCard = null;
 
-        //SS220-messenger-fix begin
         if (payload.TryGetValue(MessengerClientCartridgeSystem.NetworkKey.DeviceUid.ToString(), out NetEntity? netLoader))
-            return GetIdCardComponent(GetEntity(netLoader), out idCardUid, out idCardComponent);
+            return TryGetIdCard(GetEntity(netLoader), out idCardUid, out idCard);
 
         if (payload.TryGetValue(MessengerClientCartridgeSystem.NetworkKey.DeviceUid.ToString(), out EntityUid? loader))
-            return GetIdCardComponent(loader, out idCardUid, out idCardComponent);
+            return TryGetIdCard(loader, out idCardUid, out idCard);
 
         return false;
-        //SS220-messenger-fix end
     }
 
-    private void SendResponse(EntityUid uid, DeviceNetworkPacketEvent args, NetworkPayload payload)
+    private bool TryGetIdCard(EntityUid? loaderUid,
+        [NotNullWhen(true)] out EntityUid? idCardUid,
+        [NotNullWhen(true)] out IdCardComponent? idCard)
     {
-        _deviceNetworkSystem?.QueuePacket(uid, args.SenderAddress, payload);
+        idCardUid = null;
+        idCard = null;
+
+        if (loaderUid == null)
+            return false;
+
+        if (!_containerSystem.TryGetContainer(loaderUid.Value, PdaComponent.PdaIdSlotId, out var container))
+            return false;
+
+        foreach (var containedUid in container.ContainedEntities)
+        {
+            if (!TryComp(containedUid, out idCard))
+                continue;
+
+            idCardUid = containedUid;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool HasServerAccess(Entity<MessengerServerComponent> ent, NetworkPayload payload)
+    {
+        return TryGetIdCard(payload, out var idCardUid, out _) && HasServerAccess(ent, idCardUid.Value);
+    }
+
+    private bool HasServerAccess(Entity<MessengerServerComponent> ent, EntityUid idCardUid)
+    {
+        return TryComp<AccessReaderComponent>(ent, out var reader) && _accessSystem.IsAllowed(idCardUid, ent, reader);
+    }
+
+    private void SendResponse(Entity<MessengerServerComponent> ent, DeviceNetworkPacketEvent args, NetworkPayload payload)
+    {
+        _deviceNetwork.QueuePacket(ent, args.SenderAddress, payload);
+    }
+
+    /// <summary>
+    /// Sends the packet to every client address of the contact (a contact can have many connected clients).
+    /// </summary>
+    private void SendToContact(Entity<MessengerServerComponent> ent, uint contactId, NetworkPayload payload)
+    {
+        var hasContact = ent.Comp.Contacts.TryGetValue(contactId, out var contact);
+        DebugTools.Assert(hasContact, $"Messenger contact {contactId} is referenced but does not exist");
+
+        if (contact == null)
+            return;
+
+        foreach (var address in contact.ActiveAddresses)
+        {
+            _deviceNetwork.QueuePacket(ent, address, payload);
+        }
+    }
+
+    /// <summary>
+    /// Creates a contact for the id card and private chats between it and every contact of the server
+    /// (including a "favorites" chat with itself), then notifies connected clients.
+    /// </summary>
+    /// <returns>Id of the new contact.</returns>
+    private uint RegisterNewClient(Entity<MessengerServerComponent> ent,
+        EntityUid idCardUid,
+        string fullName,
+        string netAddress)
+    {
+        var server = ent.Comp;
+        var newContact = new MessengerContact(fullName, netAddress)
+        {
+            Id = server.NextId++,
+        };
+        server.Contacts[newContact.Id] = newContact;
+        server.ClientToContact[idCardUid] = newContact.Id;
+
+        // for now every contact can write to every other contact
+        foreach (var contactId in server.ClientToContact.Values)
+        {
+            if (!server.Contacts.TryGetValue(contactId, out var contact))
+                continue;
+
+            var chatName = contactId == newContact.Id
+                ? Loc.GetString("messenger-ui-favorites-chat")
+                : Loc.GetString("messenger-server-chat-pair", ("first", contact.Name ?? "unknown"), ("second", newContact.Name ?? "unknown"));
+
+            var chat = new MessengerChat(chatName,
+                MessengerChatKind.Contact,
+                new HashSet<uint> { contactId, newContact.Id })
+            {
+                Id = server.NextId++,
+            };
+            server.Chats[chat.Id] = chat;
+
+            AddPrivateChat(server, contactId, chat.Id);
+            AddPrivateChat(server, newContact.Id, chat.Id);
+
+            SendToContact(ent, contactId, new NetworkPayload
+            {
+                [NetworkKey.Command.ToString()] = NetworkCommand.Chat,
+                [NetworkKey.Chat.ToString()] = chat,
+            });
+
+            SendToContact(ent, contactId, new NetworkPayload
+            {
+                [NetworkKey.Command.ToString()] = NetworkCommand.Contact,
+                [NetworkKey.Contact.ToString()] = newContact,
+            });
+        }
+
+        return newContact.Id;
+    }
+
+    /// <summary>
+    /// Restores the whole ui state of an already registered client to minimize network load.
+    /// </summary>
+    /// <param name="ent">Messenger server</param>
+    /// <param name="loader">Device with loaded id card (for now only id card can be authenticator)</param>
+    /// <param name="uiState">Restored state</param>
+    /// <returns>True if the client is registered and the state was restored.</returns>
+    public bool TryRestoreContactUiState(Entity<MessengerServerComponent> ent,
+        EntityUid loader,
+        [NotNullWhen(true)] out MessengerUiState? uiState)
+    {
+        uiState = null;
+
+        if (!TryGetIdCard(loader, out var idCardUid, out _))
+            return false;
+
+        if (!ent.Comp.ClientToContact.TryGetValue(idCardUid.Value, out var contactId))
+            return false;
+
+        if (!ent.Comp.Contacts.TryGetValue(contactId, out var clientContact))
+            return false;
+
+        uiState = new MessengerUiState
+        {
+            ClientContact = clientContact,
+        };
+
+        var index = 0;
+
+        foreach (var chat in GetAccessedChats(ent.Comp, contactId))
+        {
+            uiState.Chats[chat.Id] = new MessengerChatUiState(chat.Id,
+                chat.Name,
+                chat.Kind,
+                chat.MembersId,
+                chat.MessagesId,
+                chat.LastMessageId,
+                index);
+
+            index++;
+
+            if (chat.LastMessageId != null && ent.Comp.Messages.TryGetValue(chat.LastMessageId.Value, out var lastMessage))
+                uiState.Messages[lastMessage.Id] = lastMessage;
+
+            foreach (var memberId in chat.MembersId)
+            {
+                if (ent.Comp.Contacts.TryGetValue(memberId, out var member))
+                    uiState.Contacts[member.Id] = member;
+            }
+        }
+
+        return true;
     }
 
     public List<uint> ActiveServersFrequency(MapId mapId)
     {
         var activeServersFrequency = new List<uint>();
+        var query = EntityQueryEnumerator<DeviceNetworkComponent,
+            MessengerServerComponent,
+            ApcPowerReceiverComponent,
+            TransformComponent>();
 
-        var servers =
-            EntityQuery<DeviceNetworkComponent, MessengerServerComponent, ApcPowerReceiverComponent,
-                TransformComponent>();
-        foreach (var (deviceNet, _, power, transform) in servers)
+        while (query.MoveNext(out _, out var deviceNet, out _, out var power, out var transform))
         {
             if (transform.MapID != mapId || !power.Powered)
                 continue;
@@ -353,223 +677,5 @@ public sealed class MessengerServerSystem : EntitySystem
         }
 
         return activeServersFrequency;
-    }
-
-    private bool AccessCheck(EntityUid serverUid, NetworkPayload payload)
-    {
-        if (!GetIdCardComponent(payload, out var idCardUid, out _))
-            return false;
-
-        if (!TryComp<AccessReaderComponent>(serverUid, out var reader))
-            return false;
-
-        if (!_accessSystem.IsAllowed(idCardUid.Value, serverUid, reader))
-            return false;
-
-
-        return true;
-    }
-
-    private bool GetIdCardComponent(EntityUid? loaderUid, [NotNullWhen(true)] out EntityUid? idCardUid,
-        [NotNullWhen(true)] out IdCardComponent? idCardComponent)
-    {
-        idCardComponent = null;
-        idCardUid = null;
-
-        if (loaderUid == null)
-            return false;
-
-        if (!_containerSystem.TryGetContainer(loaderUid.Value, PdaComponent.PdaIdSlotId, out var container))
-            return false;
-
-        foreach (var idCard in container.ContainedEntities)
-        {
-            if (!TryComp(idCard, out idCardComponent))
-                continue;
-
-            idCardUid = idCard;
-
-            return true;
-        }
-
-        return false;
-    }
-
-    private static bool ParseId(string key, NetworkPayload payload, [NotNullWhen(true)] out uint? v)
-    {
-        v = null;
-        if (!payload.TryGetValue(key, out uint? value))
-            return false;
-        v = value.Value;
-        return true;
-    }
-
-    private static bool ParseMessageText(string key, NetworkPayload payload, [NotNullWhen(true)] out string? v)
-    {
-        v = null;
-        if (!payload.TryGetValue(key, out string? value))
-            return false;
-        v = value;
-        return true;
-    }
-
-    private static bool ParseIdHashSet(string key, NetworkPayload payload, [NotNullWhen(true)] out HashSet<uint>? v)
-    {
-        v = null;
-        if (!payload.TryGetValue(key, out HashSet<uint>? value))
-            return false;
-        v = value;
-        return true;
-    }
-
-    /// <summary>
-    /// create new contact by clientEntityUid and init private chats for it
-    /// </summary>
-    /// <param name="serverUid">The EntityUid of the messenger server</param>
-    /// <param name="clientEntityUid">Client EntityUid</param>
-    /// <param name="fullName">Contact full name</param>
-    /// <param name="netAddress">Installed client network address</param>
-    /// <param name="component">MessengerServerComponent</param>
-    /// <param name="newContactKey">out newContactKey of client</param>
-    /// <returns>Returns true when the component was successfully received.</returns>
-    private void RegisterAndInitNewClient(EntityUid serverUid, EntityUid clientEntityUid, string fullName,
-        string netAddress,
-        ref MessengerServerComponent component, out ContactKey newContactKey)
-    {
-        newContactKey = component.AddEntityContact(clientEntityUid, fullName, netAddress);
-
-        // for now all entity can write others
-        // add chat with yourself to private chats
-        // and chats with every entity client
-        var chatsList = new List<ChatKey>();
-
-        foreach (var (_, contact) in component.GetClientToContact())
-        {
-            var chatName = component.GetContact(contact).Name + " and " + component.GetContact(newContactKey).Name;
-
-            // when we add chat for contact its self, change name to favorites chat where user can write notes
-            if (contact.Id == newContactKey.Id)
-            {
-                chatName = Loc.GetString("messenger-ui-favorites-chat");
-            }
-
-            // create new chat
-            var chatKey = component.AddChat(new MessengerChat(chatName, MessengerChatKind.Contact,
-                new HashSet<uint> { contact.Id, newContactKey.Id }));
-
-            // add to list for letter insert
-            chatsList.Add(chatKey);
-
-            // add new chat to existed contact
-            component.AddPrivateChats(contact, chatKey);
-
-            // sending net packet with new chat to every contact address
-            // contact can have many clients connected
-            foreach (var activeAddress in component.GetContact(contact).ActiveAddresses)
-            {
-                _deviceNetworkSystem?.QueuePacket(serverUid, activeAddress, new NetworkPayload
-                {
-                    [NetworkKey.Command.ToString()] = NetworkCommand.Chat,
-                    [NetworkKey.Chat.ToString()] = component.GetChat(chatKey),
-                });
-            }
-
-            // sending new contact info to contact client
-            foreach (var activeAddress in component.GetContact(contact).ActiveAddresses)
-            {
-                _deviceNetworkSystem?.QueuePacket(serverUid, activeAddress, new NetworkPayload
-                {
-                    [NetworkKey.Command.ToString()] = NetworkCommand.Contact,
-                    [NetworkKey.Contact.ToString()] = component.GetContact(newContactKey),
-                });
-            }
-        }
-
-        // add created chats to new contact private chats
-        component.AddPrivateChats(newContactKey, chatsList);
-    }
-
-    /// <summary>
-    /// If client already registered ui state can be fast restored to minimize network load
-    /// </summary>
-    /// <param name="loader">Device with loaded id card (for now only id card can be authenticator)</param>
-    /// <param name="component">MessengerServerComponent</param>
-    /// <param name="messengerUiState">out MessengerUiState</param>
-    /// <returns>Returns true when the state was successfully restored</returns>
-    public bool RestoreContactUIStateIdCard(EntityUid loader, ref MessengerServerComponent component,
-        [NotNullWhen(true)] out MessengerUiState? messengerUiState)
-    {
-        messengerUiState = null;
-
-        if (!GetIdCardComponent(loader, out var idCardUid, out _))
-            return false;
-
-        if (!component.GetContactKey(idCardUid.Value, out var contactKey))
-            return false;
-
-        messengerUiState = RestoreContactUIState(ref component, contactKey);
-
-        return true;
-    }
-
-    private static MessengerUiState RestoreContactUIState(ref MessengerServerComponent component, ContactKey contactKey)
-    {
-        // get client contact
-        var clientContact = component.GetContact(contactKey);
-
-        // get not active but accessed chats
-        var accessedChats = component.GetPublicChats();
-        accessedChats.UnionWith(component.GetPrivateChats(contactKey));
-
-        // select chats by accessedChats
-        var chatsList = accessedChats.Select(component.GetChat).ToList();
-
-        // select last messages and chat members contact keys
-        var lastMessages = new List<MessengerMessage>();
-        var membersContactKeys = new HashSet<uint>();
-
-        foreach (var messengerChat in chatsList)
-        {
-            if (messengerChat.LastMessageId != null)
-                lastMessages.Add(component.GetMessage(new MessageKey(messengerChat.LastMessageId.Value)));
-
-            membersContactKeys.UnionWith(messengerChat.MembersId);
-        }
-
-        // select contacts by contactKeys
-        var contacts = new List<MessengerContact>();
-        foreach (var memberKey in membersContactKeys)
-        {
-            contacts.Add(component.GetContact(new ContactKey(memberKey)));
-        }
-
-        // start to make messengerUiState
-        var messengerUi = new MessengerUiState
-        {
-            // add client contact
-            ClientContact = clientContact
-        };
-
-        // add available chats
-        for (var i = 0; i < chatsList.Count; i++)
-        {
-            messengerUi.Chats.Add(chatsList[i].Id,
-                new MessengerChatUiState(chatsList[i].Id, chatsList[i].Name, chatsList[i].Kind, chatsList[i].MembersId,
-                    chatsList[i].MessagesId, chatsList[i].LastMessageId, i));
-        }
-
-        // add last messages to messages state store
-        foreach (var msg in lastMessages)
-        {
-            messengerUi.Messages.Add(msg.Id, msg);
-        }
-
-        // add contacts
-        foreach (var contact in contacts)
-        {
-            messengerUi.Contacts.Add(contact.Id, contact);
-        }
-
-        return messengerUi;
     }
 }

@@ -1,8 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.Diagnostics.CodeAnalysis;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
-using Content.Server.DeviceNetwork;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Server.Messenger;
 using Content.Shared.CartridgeLoader;
@@ -15,41 +15,22 @@ using Content.Shared.PDA.Ringer;
 
 namespace Content.Server.CartridgeLoader.Cartridges;
 
-public sealed class MessengerClientCartridgeSystem : EntitySystem
+public sealed partial class MessengerClientCartridgeSystem : EntitySystem
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly CartridgeLoaderSystem? _cartridgeLoaderSystem = default!;
-    [Dependency] private readonly DeviceNetworkSystem? _deviceNetworkSystem = default!;
-    [Dependency] private readonly MessengerServerSystem _messengerServerSystem = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly ChatSystem? _chat = default;
+    [Dependency] private CartridgeLoaderSystem _cartridgeLoader = default!;
+    [Dependency] private DeviceNetworkSystem _deviceNetwork = default!;
+    [Dependency] private MessengerServerSystem _messengerServer = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private ChatSystem _chat = default!;
 
-    public enum NetworkCommand
-    {
-        CheckServer,
-        StateUpdate,
-        MessageSend,
-    }
+    [Dependency] private EntityQuery<MessengerServerComponent> _serverQuery = default!;
 
-    public enum NetworkKey
-    {
-        Command,
-        DeviceUid,
-        ChatId,
-        MessageText,
-        CurrentChatIds,
-        ContactsIds,
-        MessagesIds,
-    }
-
-
-    // queue for ui states, if sent too often, then some states are lost,
-    // send one state per update
-    private readonly Queue<QueueBoundUserInterfaceState> _statesQueue = new();
+    private readonly LocId _serverNotFound = "messenger-error-server-not-found";
 
     public override void Initialize()
     {
         base.Initialize();
+
         SubscribeLocalEvent<MessengerClientCartridgeComponent, CartridgeMessageEvent>(OnUiMessage);
         SubscribeLocalEvent<MessengerClientCartridgeComponent, CartridgeUiReadyEvent>(OnUiReady);
         SubscribeLocalEvent<MessengerClientCartridgeComponent, CartridgeAddedEvent>(OnInstall);
@@ -58,277 +39,270 @@ public sealed class MessengerClientCartridgeSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        // send one state per update
-        if (_statesQueue.TryDequeue(out var state))
+        var query = EntityQueryEnumerator<MessengerClientCartridgeComponent>();
+
+        while (query.MoveNext(out var uid, out var cartridge))
         {
-            if (state.State != null)
-                _cartridgeLoaderSystem?.UpdateCartridgeUiState(state.LoaderUid, state.State);
-        }
+            if (cartridge.SendState && TryQueueFullState((uid, cartridge)))
+                cartridge.SendState = false;
 
-        // is component request full state, try to get it from server
-        foreach (var clientCartridgeComponent in _entityManager.EntityQuery<MessengerClientCartridgeComponent>())
-        {
-            if (!clientCartridgeComponent.SendState)
+            if (!cartridge.Loader.IsValid())
                 continue;
 
-            if (clientCartridgeComponent.ActiveServer == null)
-                continue;
-
-            if (!_entityManager.TryGetComponent<MessengerServerComponent>(
-                    clientCartridgeComponent.ActiveServer.Value, out var server))
-                continue;
-
-            if (!_messengerServerSystem.RestoreContactUIStateIdCard(clientCartridgeComponent.Loader, ref server,
-                    out var messengerUiState))
-                continue;
-
-            UpdateMessengerUiState(clientCartridgeComponent.Loader, messengerUiState);
-            clientCartridgeComponent.SendState = false;
+            // states set to one loader within a tick overwrite each other, so send one per update
+            if (cartridge.PendingStates.TryDequeue(out var state))
+                _cartridgeLoader.UpdateCartridgeUiState(cartridge.Loader, state);
         }
     }
 
-    private void OnNetworkPacket(EntityUid uid, MessengerClientCartridgeComponent? component,
-        DeviceNetworkPacketEvent args)
+    private bool TryQueueFullState(Entity<MessengerClientCartridgeComponent> ent)
+    {
+        if (ent.Comp.ActiveServer is not { Valid: true } serverUid)
+            return false;
+
+        if (!_serverQuery.TryComp(serverUid, out var server))
+        {
+            Log.Error($"Got messenger cartridge {ToPrettyString(ent)} with entity {ToPrettyString(serverUid)} without {nameof(MessengerServerComponent)}");
+            return false;
+        }
+
+        if (!_messengerServer.TryRestoreContactUiState((serverUid, server), ent.Comp.Loader, out var state))
+            return false;
+
+        ent.Comp.PendingStates.Enqueue(state);
+
+        return true;
+    }
+
+    private void OnInstall(Entity<MessengerClientCartridgeComponent> ent, ref CartridgeAddedEvent args)
+    {
+        ent.Comp.Loader = args.Loader;
+    }
+
+    private void OnUiReady(Entity<MessengerClientCartridgeComponent> ent, ref CartridgeUiReadyEvent args)
+    {
+        if (ent.Comp.ActiveServer != null)
+            return;
+
+        BroadcastCommand(ent, args.Loader, NetworkCommand.CheckServer);
+        ent.Comp.PendingStates.Enqueue(new MessengerErrorUiState(_serverNotFound));
+    }
+
+    private void OnUiMessage(Entity<MessengerClientCartridgeComponent> ent, ref CartridgeMessageEvent args)
+    {
+        switch (args)
+        {
+            case MessengerUpdateStateUiEvent e:
+                OnUpdateStateRequest(ent, e);
+                break;
+            case MessengerSendMessageUiEvent e:
+                OnSendMessage(ent, e);
+                break;
+        }
+    }
+
+    /// <summary>
+    /// The ui sends the ids it already has, the server answers with the missing ones.
+    /// </summary>
+    private void OnUpdateStateRequest(Entity<MessengerClientCartridgeComponent> ent, MessengerUpdateStateUiEvent e)
+    {
+        if (e.IsFullState)
+        {
+            ent.Comp.SendState = true;
+
+            return;
+        }
+
+        if (!TryGetServerAddress(ent.Comp, out var serverAddress))
+            return;
+
+        var payload = new NetworkPayload
+        {
+            [NetworkKey.Command.ToString()] = NetworkCommand.StateUpdate,
+            [NetworkKey.DeviceUid.ToString()] = e.LoaderUid,
+        };
+
+        if (e.CurrentContacts is { Count: > 0 })
+            payload[NetworkKey.ContactsIds.ToString()] = e.CurrentContacts;
+
+        if (e.CurrentMessages is { Count: > 0 })
+            payload[NetworkKey.MessagesIds.ToString()] = e.CurrentMessages;
+
+        if (e.CurrentChats is { Count: > 0 })
+            payload[NetworkKey.CurrentChatIds.ToString()] = e.CurrentChats;
+
+        _deviceNetwork.QueuePacket(ent.Owner, serverAddress, payload);
+    }
+
+    private void OnSendMessage(Entity<MessengerClientCartridgeComponent> ent, MessengerSendMessageUiEvent e)
+    {
+        if (string.IsNullOrEmpty(e.MessageText) || !TryGetServerAddress(ent.Comp, out var serverAddress))
+            return;
+
+        var message = _chat.ReplaceWords(e.MessageText);
+
+        _deviceNetwork.QueuePacket(ent.Owner, serverAddress, new NetworkPayload
+        {
+            [NetworkKey.Command.ToString()] = NetworkCommand.MessageSend,
+            [NetworkKey.DeviceUid.ToString()] = e.LoaderUid,
+            [NetworkKey.ChatId.ToString()] = e.ChatId,
+            [NetworkKey.MessageText.ToString()] = message,
+        });
+
+        _adminLogger.Add(LogType.MessengerClientCartridge,
+            LogImpact.Low,
+            $"Send: sender entity: {ToPrettyString(ent.Owner):entity}, device entity: {ToPrettyString(e.LoaderUid):entity}, chatID: {e.ChatId}, msg: {e.MessageText}, filtered: {message}");
+    }
+
+    private void OnNetworkPacket(Entity<MessengerClientCartridgeComponent> ent, ref DeviceNetworkPacketEvent args)
     {
         if (!args.Data.TryGetValue(MessengerServerSystem.NetworkKey.Command.ToString(),
                 out MessengerServerSystem.NetworkCommand? command))
             return;
 
-        if (!Resolve(uid, ref component))
-            return;
-
         switch (command)
         {
-            // when receive msg about server info add this server to servers list, and if received add server name
             case MessengerServerSystem.NetworkCommand.Info:
-            {
-                var serverInfo = new ServerInfo();
-
-                if (args.Data.TryGetValue(MessengerServerSystem.NetworkKey.ServerName.ToString(),
-                        out string? serverName))
-                    serverInfo.Name = serverName;
-
-                serverInfo.Address = args.SenderAddress;
-
-                component.ActiveServer ??= args.Sender;
-
-                if (!component.Servers.TryAdd(args.Sender, serverInfo))
-                {
-                    component.Servers.Remove(args.Sender);
-                    component.Servers.Add(args.Sender, serverInfo);
-                }
-
-                component.SendState = true;
+                OnServerInfo(ent, args.Sender, args.SenderAddress);
                 break;
-            }
-            // receive client contact info
             case MessengerServerSystem.NetworkCommand.ClientContact:
-            {
-                if (!args.Data.TryGetValue(MessengerServerSystem.NetworkKey.Contact.ToString(),
-                        out MessengerContact? contact))
-                    break;
-
-                UpdateMessengerUiState(component.Loader, new MessengerClientContactUiState(contact));
+                OnClientContact(ent, args.Data);
                 break;
-            }
-            // receive contact info
             case MessengerServerSystem.NetworkCommand.Contact:
-            {
-                var contactsUpdate = new List<MessengerContact>();
-
-                if (args.Data.TryGetValue(MessengerServerSystem.NetworkKey.Contact.ToString(),
-                        out MessengerContact? contact))
-                {
-                    contactsUpdate.Add(contact);
-                }
-
-                if (args.Data.TryGetValue(MessengerServerSystem.NetworkKey.ContactList.ToString(),
-                        out List<MessengerContact>? contacts))
-                {
-                    contactsUpdate.AddRange(contacts);
-                }
-
-                if (contactsUpdate.Count > 0)
-                    UpdateMessengerUiState(component.Loader, new MessengerContactUiState(contactsUpdate));
+                OnContacts(ent, args.Data);
                 break;
-            }
-            // receive chat info
             case MessengerServerSystem.NetworkCommand.Chat:
-            {
-                var updateChats = new List<MessengerChat>();
-
-                if (args.Data.TryGetValue(MessengerServerSystem.NetworkKey.Chat.ToString(), out MessengerChat? chat))
-                {
-                    updateChats.Add(chat);
-                }
-
-                if (args.Data.TryGetValue(MessengerServerSystem.NetworkKey.ChatList.ToString(),
-                        out List<MessengerChat>? chats))
-                {
-                    updateChats.AddRange(chats);
-                }
-
-                if (updateChats.Count > 0)
-                    UpdateMessengerUiState(component.Loader, new MessengerChatUpdateUiState(updateChats));
+                OnChats(ent, args.Data);
                 break;
-            }
-            // receive message info
             case MessengerServerSystem.NetworkCommand.Messages:
-            {
-                var updateMessages = new List<MessengerMessage>();
-
-                if (args.Data.TryGetValue(MessengerServerSystem.NetworkKey.Message.ToString(),
-                        out MessengerMessage? message))
-                {
-                    updateMessages.Add(message);
-                }
-
-                if (args.Data.TryGetValue(MessengerServerSystem.NetworkKey.MessageList.ToString(),
-                        out List<MessengerMessage>? messages))
-                {
-                    updateMessages.AddRange(messages);
-                }
-
-                if (updateMessages.Count > 0)
-                    UpdateMessengerUiState(component.Loader, new MessengerMessagesUiState(updateMessages));
-
+                OnMessages(ent, args.Data);
                 break;
-            }
-            // receive new chat message
             case MessengerServerSystem.NetworkCommand.NewMessage:
-            {
-                if (!args.Data.TryGetValue(MessengerServerSystem.NetworkKey.Message.ToString(),
-                        out MessengerMessage? message))
-                    break;
-                if (!args.Data.TryGetValue(MessengerServerSystem.NetworkKey.ChatId.ToString(), out uint? chatId))
-                    break;
-
-                RaiseLocalEvent(component.Loader, new RingerPlayRingtoneMessage());
-
-                UpdateMessengerUiState(component.Loader, new MessengerNewChatMessageUiState(chatId.Value, message));
+                OnNewMessage(ent, args.Data);
                 break;
-            }
         }
     }
 
-    private void OnInstall(EntityUid uid, MessengerClientCartridgeComponent component, CartridgeAddedEvent args)
+    /// <summary>
+    /// The server announced itself: remember its address and request the full state.
+    /// </summary>
+    private void OnServerInfo(Entity<MessengerClientCartridgeComponent> ent, EntityUid server, string address)
     {
-        component.Loader = args.Loader;
+        ent.Comp.ActiveServer ??= server;
+        ent.Comp.ServerAddresses[server] = address;
+        ent.Comp.SendState = true;
+    }
 
-        if (component.IsInstalled)
+    private void OnClientContact(Entity<MessengerClientCartridgeComponent> ent, NetworkPayload data)
+    {
+        if (data.TryGetValue(MessengerServerSystem.NetworkKey.Contact.ToString(), out MessengerContact? contact))
+            ent.Comp.PendingStates.Enqueue(new MessengerClientContactUiState(contact));
+    }
+
+    private void OnContacts(Entity<MessengerClientCartridgeComponent> ent, NetworkPayload data)
+    {
+        if (TryGetItems(data,
+                MessengerServerSystem.NetworkKey.Contact,
+                MessengerServerSystem.NetworkKey.ContactList,
+                out List<MessengerContact> contacts))
+        {
+            ent.Comp.PendingStates.Enqueue(new MessengerContactUiState(contacts));
+        }
+    }
+
+    private void OnChats(Entity<MessengerClientCartridgeComponent> ent, NetworkPayload data)
+    {
+        if (TryGetItems(data,
+                MessengerServerSystem.NetworkKey.Chat,
+                MessengerServerSystem.NetworkKey.ChatList,
+                out List<MessengerChat> chats))
+        {
+            ent.Comp.PendingStates.Enqueue(new MessengerChatUpdateUiState(chats));
+        }
+    }
+
+    private void OnMessages(Entity<MessengerClientCartridgeComponent> ent, NetworkPayload data)
+    {
+        if (TryGetItems(data,
+                MessengerServerSystem.NetworkKey.Message,
+                MessengerServerSystem.NetworkKey.MessageList,
+                out List<MessengerMessage> messages))
+        {
+            ent.Comp.PendingStates.Enqueue(new MessengerMessagesUiState(messages));
+        }
+    }
+
+    private void OnNewMessage(Entity<MessengerClientCartridgeComponent> ent, NetworkPayload data)
+    {
+        if (!data.TryGetValue(MessengerServerSystem.NetworkKey.Message.ToString(), out MessengerMessage? message)
+            || !data.TryGetValue(MessengerServerSystem.NetworkKey.ChatId.ToString(), out uint? chatId))
             return;
 
-        component.IsInstalled = true;
-
-        BroadcastCommand(uid, args.Loader, NetworkCommand.CheckServer);
+        RaiseLocalEvent(ent.Comp.Loader, new RingerPlayRingtoneMessage());
+        ent.Comp.PendingStates.Enqueue(new MessengerNewChatMessageUiState(chatId.Value, message));
     }
 
     private void BroadcastCommand(EntityUid senderUid, EntityUid loaderUid, NetworkCommand command)
     {
-        var deviceMapId = Transform(loaderUid).MapID;
-        var activeServersFrequency = _messengerServerSystem.ActiveServersFrequency(deviceMapId);
+        var mapId = Transform(loaderUid).MapID;
 
-        foreach (var frequency in activeServersFrequency)
+        foreach (var frequency in _messengerServer.ActiveServersFrequency(mapId))
         {
-            _deviceNetworkSystem?.QueuePacket(senderUid, null, new NetworkPayload
-            {
-                [NetworkKey.Command.ToString()] = command,
-                [NetworkKey.DeviceUid.ToString()] = loaderUid
-            }, frequency: frequency);
+            _deviceNetwork.QueuePacket(senderUid,
+                null,
+                new NetworkPayload
+                {
+                    [NetworkKey.Command.ToString()] = command,
+                    [NetworkKey.DeviceUid.ToString()] = loaderUid,
+                },
+                frequency: frequency);
         }
     }
 
-    private void OnUiReady(EntityUid uid, MessengerClientCartridgeComponent component, CartridgeUiReadyEvent args)
+    /// <summary>
+    /// Packets carry either a single item or a list of them. Collects both into a new list.
+    /// </summary>
+    /// <returns>True if there is at least one item.</returns>
+    private static bool TryGetItems<T>(NetworkPayload data,
+        MessengerServerSystem.NetworkKey itemKey,
+        MessengerServerSystem.NetworkKey listKey,
+        out List<T> items)
+        where T : class
     {
-        if (component.ActiveServer != null)
-            return;
+        items = new List<T>();
 
-        BroadcastCommand(uid, args.Loader, NetworkCommand.CheckServer);
-        UpdateMessengerUiState(args.Loader,
-            new MessengerErrorUiState(Loc.GetString("messenger-error-server-not-found")));
+        if (data.TryGetValue(itemKey.ToString(), out T? item))
+            items.Add(item);
+
+        if (data.TryGetValue(listKey.ToString(), out List<T>? list))
+            items.AddRange(list);
+
+        return items.Count > 0;
     }
 
-    private void OnUiMessage(EntityUid uid, MessengerClientCartridgeComponent? component, CartridgeMessageEvent args)
+    private static bool TryGetServerAddress(MessengerClientCartridgeComponent cartridge,
+        [NotNullWhen(true)] out string? address)
     {
-        if (!Resolve(uid, ref component))
-            return;
+        address = null;
 
-        var serverAddress = ServerAddress(ref component);
-
-        switch (args)
-        {
-            // to sync state on UI and on server, client send current state,
-            // and if server decide it will send missing state
-            case MessengerUpdateStateUiEvent e:
-            {
-                // client could request full state sync
-                if (e.IsFullState)
-                {
-                    component.SendState = true;
-                    break;
-                }
-
-                var payload = new NetworkPayload
-                {
-                    [NetworkKey.Command.ToString()] = NetworkCommand.StateUpdate,
-                    [NetworkKey.DeviceUid.ToString()] = args.LoaderUid,
-                };
-
-                if (e.CurrentContacts is { Count: > 0 })
-                    payload[NetworkKey.ContactsIds.ToString()] = e.CurrentContacts;
-
-                if (e.CurrentMessages is { Count: > 0 })
-                    payload[NetworkKey.MessagesIds.ToString()] = e.CurrentMessages;
-
-                if (e.CurrentChats is { Count: > 0 })
-                    payload[NetworkKey.CurrentChatIds.ToString()] = e.CurrentChats;
-
-                _deviceNetworkSystem?.QueuePacket(uid, serverAddress, payload);
-
-                break;
-            }
-            case MessengerSendMessageUiEvent e:
-            {
-                if (e.MessageText == "")
-                    break;
-
-                var message = _chat?.ReplaceWords(e.MessageText);
-
-                _deviceNetworkSystem?.QueuePacket(uid, serverAddress, new NetworkPayload
-                {
-                    [NetworkKey.Command.ToString()] = NetworkCommand.MessageSend,
-                    [NetworkKey.DeviceUid.ToString()] = args.LoaderUid,
-                    [NetworkKey.ChatId.ToString()] = e.ChatId,
-                    [NetworkKey.MessageText.ToString()] = message ?? "",
-                });
-
-                _adminLogger.Add(LogType.MessengerClientCartridge, LogImpact.Low,
-                    $"Send: sender entity: {uid}, device entity: {args.LoaderUid}, chatID: {e.ChatId}, msg: {e.MessageText}, filtered: {message}");
-
-                break;
-            }
-        }
-    }
-
-    private void UpdateMessengerUiState(EntityUid loaderUid, BoundUserInterfaceState messengerUiState)
-    {
-        _statesQueue.Enqueue(new QueueBoundUserInterfaceState(loaderUid, messengerUiState));
-    }
-
-    private static string? ServerAddress(ref MessengerClientCartridgeComponent component)
-    {
-        return component.ActiveServer == null ? null : component.Servers[component.ActiveServer.Value].Address;
+        return cartridge.ActiveServer is { } server && cartridge.ServerAddresses.TryGetValue(server, out address);
     }
 }
 
-public sealed class QueueBoundUserInterfaceState
+public enum NetworkCommand
 {
-    public EntityUid LoaderUid;
-    public readonly BoundUserInterfaceState? State;
+    CheckServer,
+    StateUpdate,
+    MessageSend,
+}
 
-    public QueueBoundUserInterfaceState(EntityUid loaderUid, BoundUserInterfaceState? state)
-    {
-        LoaderUid = loaderUid;
-        State = state;
-    }
+public enum NetworkKey
+{
+    Command,
+    DeviceUid,
+    ChatId,
+    MessageText,
+    CurrentChatIds,
+    ContactsIds,
+    MessagesIds,
 }

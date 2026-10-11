@@ -67,7 +67,7 @@ public sealed partial class MessengerUiFragment : BoxContainer
             {
                 CurrentChat = chat.Id;
                 OnHistoryViewPressed?.Invoke(chat.Id);
-            }, chat.NewMessages));
+            }, chat.NewMessages, StatusText(messengerUiState, chat)));
         }
 
         ChatNameLabel.Visible = false;
@@ -95,6 +95,33 @@ public sealed partial class MessengerUiFragment : BoxContainer
         }
 
         return chat.Name;
+    }
+
+    /// <summary>
+    /// Status of the other member of a personal chat, or null if the contact is online.
+    /// </summary>
+    private static string? StatusText(MessengerUiState messengerUiState, MessengerChatUiState chat)
+    {
+        if (chat.Kind != MessengerChatKind.Contact)
+            return null;
+
+        foreach (var chatMember in chat.Members)
+        {
+            if (messengerUiState.ClientContact.Id == chatMember)
+                continue;
+
+            if (!messengerUiState.Contacts.TryGetValue(chatMember, out var contact))
+                continue;
+
+            return contact.Status switch
+            {
+                MessengerContactStatus.OutOfRange => Loc.GetString("messenger-contact-status-out-of-range"),
+                MessengerContactStatus.Cryo => Loc.GetString("messenger-contact-status-cryo"),
+                _ => null,
+            };
+        }
+
+        return null;
     }
 
     public void UpdateChatHistoryState(MessengerUiState messengerUiState)
@@ -128,7 +155,9 @@ public sealed partial class MessengerUiFragment : BoxContainer
                 }
             }
 
-            ChatNameLabel.Text = ChatName(messengerUiState, chat);
+            var chatName = ChatName(messengerUiState, chat);
+            var statusText = StatusText(messengerUiState, chat);
+            ChatNameLabel.Text = statusText == null ? chatName : $"{chatName} ({statusText})";
         }
 
         ChatNameLabel.Visible = true;

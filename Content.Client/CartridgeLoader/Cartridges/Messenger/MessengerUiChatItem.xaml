@@ -6,6 +6,7 @@
             <Button Name="OpenChatHistoryButton" Access="Public" HorizontalExpand="True" Mode="Press" SizeFlagsStretchRatio="1">
                 <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
                     <Label Name="ChatName" Access="Public" Text="" HorizontalAlignment="Left" HorizontalExpand="True" MinHeight="25"/>
+                    <Label Name="StatusLabel" Access="Public" Visible="False" Text="" HorizontalAlignment="Left"/>
                     <Label Name="LastMessage" Access="Public" Text="" HorizontalAlignment="Left" HorizontalExpand="False" MaxWidth="200" MinHeight="25"/>
                 </BoxContainer>
             </Button>
