@@ -1,6 +1,6 @@
 # SS220 Space Station 14
 
-Форк SS14 (Space Wizards → Corvax → SS220). C# / .NET 10, движок RobustToolbox (сабмодуль). Логика на ECS, контент в YAML-прототипах, строки в Fluent (`ru-RU`).
+Форк SS14 (Space Wizards → SS220). C# / .NET 10, движок RobustToolbox (сабмодуль). Логика на ECS, контент в YAML-прототипах, строки в Fluent (`ru-RU`).
 Отвечай разработчику на русском. Идентификаторы в коде пиши на английском.
 
 ## Структура
@@ -25,17 +25,18 @@ dotnet run --project Content.YAMLLinter    # не запускай сам: по�
 1. **Новое — в `SS220`.** Новые классы, прототипы, спрайты и строки локализации кладём в папки `SS220`, даже если это дополнение к ванили.
 2. **Правка апстрима — с меткой.** Любое изменение вне `SS220` помечаем `//SS220-feature-name` (YAML/ftl — `#`). Большие правки выносим в `Name.SS220.cs` (`partial`). Для строк локализации сначала используй переопределение (см. [ss220-conventions](docs/agents/ss220-conventions.md)).
 3. **ECS.** Компонент — только данные, логика — в системе. Системы без состояния. Зависимости через `[Dependency]`.
-4. **Горячие пути** (`Update`, `FrameUpdate`): без LINQ и аллокаций коллекций, только `EntityQuery<T>`.
-5. **Современный API:** `Entity<T>`, `ref`-события (`record struct`), `ProtoId<T>`, `TimeSpan` для времени.
-6. **Тексты для игрока** — только через `Loc.GetString`, имена сущностей — через `Identity.Name`.
-7. **Стиль:** Allman, file-scoped namespace, `sealed`, без пустых строк в начале/конце блоков. YAML-списки компактные (`-` без отступа).
-8. В новых файлах добавляй CLA-шапку (формат в [ss220-conventions](docs/agents/ss220-conventions.md)).
+4. **Минимум типов.** Новый класс, интерфейс, enum, обёртку над коллекцией или примитивом создавай, только если можешь назвать, кто его использует и что без него усложнится. «Аккуратнее» и «на будущее» — не обоснование. Признаки лишнего типа и допустимые случаи: [csharp-style](docs/agents/csharp-style.md).
+5. **Горячие пути** (`Update`, `FrameUpdate`): без LINQ и аллокаций коллекций, только `EntityQuery<T>`.
+6. **Современный API:** `Entity<T>`, `ref`-события (`record struct`), `ProtoId<T>`, `TimeSpan` для времени.
+7. **Тексты для игрока** — только через `Loc.GetString`, имена сущностей — через `Identity.Name`.
+8. **Стиль:** Allman, file-scoped namespace, `sealed`, без пустых строк в начале/конце блоков. YAML-списки компактные (`-` без отступа).
+9. В новых файлах добавляй CLA-шапку (формат в [ss220-conventions](docs/agents/ss220-conventions.md)).
 
 ## Куда смотреть по задаче
 | Задача | Файл |
 |---|---|
 | Новый файл, правка апстрима, метки, спрайты, чейнджлог | [docs/agents/ss220-conventions.md](docs/agents/ss220-conventions.md) |
-| Написание/правка C#: стиль, нейминг, API | [docs/agents/csharp-style.md](docs/agents/csharp-style.md) |
+| Написание/правка C#: стиль, нейминг, API, когда допустим новый тип | [docs/agents/csharp-style.md](docs/agents/csharp-style.md) |
 | Системы, компоненты, события, производительность | [docs/agents/ecs-performance.md](docs/agents/ecs-performance.md) |
 | YAML-прототипы, локализация | [docs/agents/prototypes-localization.md](docs/agents/prototypes-localization.md) |
 | Сборка, запуск, тесты, линтер | [docs/agents/build-test.md](docs/agents/build-test.md) |
