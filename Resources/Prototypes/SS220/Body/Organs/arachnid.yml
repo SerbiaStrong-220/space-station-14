@@ -9,7 +9,6 @@
 - type: entity
   parent: OrganArachnid
   id: OrganArachnidHandLeftSecondary
-  name: secondary left hand
   components:
   - type: Organ
     category: SecondHandLeft
@@ -17,11 +16,14 @@
     handID: left-secondary
     data:
       location: Left
+      offset: -0.1, 0.1
+  - type: Sprite
+    sprite: Mobs/Species/Arachnid/parts.rsi
+    state: l_hand
 
 - type: entity
   parent: OrganArachnid
   id: OrganArachnidHandRightSecondary
-  name: secondary right hand
   components:
   - type: Organ
     category: SecondHandRight
@@ -29,3 +31,8 @@
     handID: right-secondary
     data:
       location: Right
+      offset: 0.1, 0.1
+  - type: Sprite
+    sprite: Mobs/Species/Arachnid/parts.rsi
+    state: r_hand
+

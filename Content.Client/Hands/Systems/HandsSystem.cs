@@ -21,7 +21,7 @@ using Robust.Shared.Utility;
 namespace Content.Client.Hands.Systems
 {
     [UsedImplicitly]
-    public sealed class HandsSystem : SharedHandsSystem
+    public sealed partial class HandsSystem : SharedHandsSystem //SS220-arachnid-extra-hands
     {
         [Dependency] private readonly IPlayerManager _playerManager = default!;
         [Dependency] private readonly IUserInterfaceManager _ui = default!;
@@ -262,7 +262,7 @@ namespace Content.Client.Hands.Systems
 
             // Remove old layers. We could also just set them to invisible, but as items may add arbitrary layers, this
             // may eventually bloat the player with lots of layers.
-            if (handComp.RevealedLayers.TryGetValue(hand.Value.Location, out var revealedLayers))
+            if (handComp.RevealedLayers.TryGetValue(handId, out var revealedLayers)) //SS220-arachnid-extra-hands
             {
                 foreach (var key in revealedLayers)
                 {
@@ -274,7 +274,7 @@ namespace Content.Client.Hands.Systems
             else
             {
                 revealedLayers = new();
-                handComp.RevealedLayers[hand.Value.Location] = revealedLayers;
+                handComp.RevealedLayers[handId] = revealedLayers; //SS220-arachnid-extra-hands
             }
 
             if (HandIsEmpty((ent, handComp), handId))
@@ -286,6 +286,8 @@ namespace Content.Client.Hands.Systems
 
             var ev = new GetInhandVisualsEvent(ent, hand.Value.Location);
             RaiseLocalEvent(held, ev);
+
+            PrefixLayerKeys(ev.Layers, handId); //SS220-arachnid-extra-hands
 
             if (ev.Layers.Count == 0)
             {
@@ -316,6 +318,11 @@ namespace Content.Client.Hands.Systems
                 }
 
                 _sprite.LayerSetData((ent, sprite), index, layerData);
+
+                //SS220-arachnid-extra-hands-begin
+                if (hand.Value.Offset is { } handOffset && sprite[index] is SpriteComponent.Layer offsetLayer)
+                    _sprite.LayerSetOffset(offsetLayer, offsetLayer.Offset + handOffset);
+                //SS220-arachnid-extra-hands-end
 
                 // Add displacement maps
                 var displacement = hand.Value.Location switch

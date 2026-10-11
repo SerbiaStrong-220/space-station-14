@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Shared.DisplacementMap;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Whitelist;
@@ -64,7 +65,7 @@ public sealed partial class HandsComponent : Component
     ///     Data about the current sprite layers that the hand is contributing to the owner entity. Used for sprite in-hands.
     ///     Used by the client.
     /// </summary>
-    public readonly Dictionary<HandLocation, HashSet<string>> RevealedLayers = new();
+    public readonly Dictionary<string, HashSet<string>> RevealedLayers = new(); // SS220-arachnid-extra-hands
 
     /// <summary>
     ///     The time at which throws will be allowed again.
@@ -134,6 +135,11 @@ public partial record struct Hand
     /// </summary>
     [DataField]
     public EntityWhitelist? Blacklist;
+
+    // SS220-arachnid-extra-hands begin
+    [DataField]
+    public Vector2? Offset;
+    // SS220-arachnid-extra-hands end
 
     public Hand()
     {
