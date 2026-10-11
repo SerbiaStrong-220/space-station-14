@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 10/11/2026 05:42:28
-  entityCount: 25033
+  time: 10/11/2026 05:56:31
+  entityCount: 25023
 maps:
 - 1
 grids:
@@ -25502,7 +25502,7 @@ entities:
       pos: 31.5,22.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -69640.99
+      secondsUntilStateChange: -69807.21
       state: Opening
   - uid: 385
     components:
@@ -75310,66 +75310,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 16.5,-22.5
       parent: 2
-  - uid: 9452
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -23.5,-1.5
-      parent: 2
-  - uid: 9453
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -23.5,-0.5
-      parent: 2
-  - uid: 9454
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -23.5,0.5
-      parent: 2
-  - uid: 9455
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -19.5,0.5
-      parent: 2
-  - uid: 9456
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -19.5,-0.5
-      parent: 2
-  - uid: 9457
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -19.5,-1.5
-      parent: 2
-  - uid: 9458
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -23.5,-1.5
-      parent: 2
-  - uid: 9459
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -21.5,-1.5
-      parent: 2
-  - uid: 9460
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -21.5,-1.5
-      parent: 2
-  - uid: 9461
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -19.5,-1.5
-      parent: 2
   - uid: 9463
     components:
     - type: Transform
@@ -76882,6 +76822,66 @@ entities:
       parent: 2
 - proto: CurbDarkSteelDecoration
   entities:
+  - uid: 9452
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -21.5,-1.5
+      parent: 2
+  - uid: 9453
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -21.5,-1.5
+      parent: 2
+  - uid: 9454
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -23.5,-1.5
+      parent: 2
+  - uid: 9455
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -23.5,-1.5
+      parent: 2
+  - uid: 9456
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -19.5,-1.5
+      parent: 2
+  - uid: 9457
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -19.5,-0.5
+      parent: 2
+  - uid: 9458
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -23.5,0.5
+      parent: 2
+  - uid: 9459
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -19.5,-1.5
+      parent: 2
+  - uid: 9460
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -19.5,0.5
+      parent: 2
+  - uid: 9931
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -23.5,-0.5
+      parent: 2
   - uid: 24576
     components:
     - type: Transform
@@ -76914,21 +76914,6 @@ entities:
       parent: 2
 - proto: CurbDarkSteelRound
   entities:
-  - uid: 9734
-    components:
-    - type: Transform
-      pos: -19.5,-2.5
-      parent: 2
-  - uid: 9735
-    components:
-    - type: Transform
-      pos: -21.5,-2.5
-      parent: 2
-  - uid: 9736
-    components:
-    - type: Transform
-      pos: -23.5,-2.5
-      parent: 2
   - uid: 9737
     components:
     - type: Transform
@@ -76944,6 +76929,23 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 54.5,38.5
+      parent: 2
+- proto: CurbDarkSteelRoundDecoration
+  entities:
+  - uid: 9461
+    components:
+    - type: Transform
+      pos: -21.5,-2.5
+      parent: 2
+  - uid: 9735
+    components:
+    - type: Transform
+      pos: -19.5,-2.5
+      parent: 2
+  - uid: 9736
+    components:
+    - type: Transform
+      pos: -23.5,-2.5
       parent: 2
 - proto: CurbSteel
   entities:
@@ -77570,7 +77572,7 @@ entities:
       pos: 35.5,3.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -70272.74
+      secondsUntilStateChange: -70438.96
       state: Closing
 - proto: CurtainsCyanOpen
   entities:
@@ -77840,6 +77842,12 @@ entities:
       parent: 2
 - proto: DarkSteelStairsMiddle
   entities:
+  - uid: 9734
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -22.5,-1.5
+      parent: 2
   - uid: 9897
     components:
     - type: Transform
@@ -77928,6 +77936,12 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -58.5,13.5
+      parent: 2
+  - uid: 9934
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -20.5,-1.5
       parent: 2
 - proto: DarkSteelStairsRight
   entities:
@@ -78047,18 +78061,6 @@ entities:
       parent: 2
 - proto: DarkSteelStairsSolo
   entities:
-  - uid: 9931
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -22.5,-1.5
-      parent: 2
-  - uid: 9934
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -20.5,-1.5
-      parent: 2
   - uid: 9935
     components:
     - type: Transform
@@ -129467,18 +129469,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 5.5,-29.5
       parent: 2
-  - uid: 17585
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -19.5,-2.5
-      parent: 2
-  - uid: 17586
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -23.5,-2.5
-      parent: 2
   - uid: 17587
     components:
     - type: Transform
@@ -129510,18 +129500,6 @@ entities:
     components:
     - type: Transform
       pos: -27.5,10.5
-      parent: 2
-  - uid: 17593
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -21.5,-2.5
-      parent: 2
-  - uid: 17594
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -21.5,-2.5
       parent: 2
   - uid: 17597
     components:
@@ -130251,12 +130229,6 @@ entities:
     - type: Transform
       pos: 55.5,17.5
       parent: 2
-  - uid: 17722
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -23.5,-1.5
-      parent: 2
   - uid: 17723
     components:
     - type: Transform
@@ -130279,24 +130251,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 5.5,-28.5
-      parent: 2
-  - uid: 17729
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -21.5,-1.5
-      parent: 2
-  - uid: 17730
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -19.5,-1.5
-      parent: 2
-  - uid: 17731
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -21.5,-1.5
       parent: 2
   - uid: 17732
     components:
@@ -143401,7 +143355,7 @@ entities:
       pos: 55.5,-35.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -508045.1
+      secondsUntilStateChange: -508211.3
       state: Opening
 - proto: SpaceCarpCube
   entities:
@@ -171167,18 +171121,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 14.5,-0.5
-      parent: 2
-- proto: WindoorSecureCommandLocked
-  entities:
-  - uid: 24577
-    components:
-    - type: Transform
-      pos: -22.5,-1.5
-      parent: 2
-  - uid: 24578
-    components:
-    - type: Transform
-      pos: -20.5,-1.5
       parent: 2
 - proto: WindoorSecureEngineeringLocked
   entities:

@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 10/11/2026 05:41:09
-  entityCount: 43593
+  time: 10/11/2026 05:57:57
+  entityCount: 43595
 maps:
 - 1
 grids:
@@ -34365,7 +34365,7 @@ entities:
       pos: 21.5,-6.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -220661
+      secondsUntilStateChange: -220731.3
       state: Opening
 - proto: AirlockServiceLocked
   entities:
@@ -39192,6 +39192,11 @@ entities:
     - type: Transform
       pos: -5.5,-2.5
       parent: 2
+    - type: OreSiloClient
+      silo: 28202
+    - type: DeviceNetwork
+      deviceLists:
+      - 28202
     - type: TechnologyDatabase
       supportedDisciplines:
       - Industrial
@@ -131661,7 +131666,7 @@ entities:
       - DrinkBottle
       - Trash
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.6213063
+      sprayFizzinessThresholdRoll: 0.17014454
     - type: SolutionTransfer
       transferAmount: 50
     - type: ContainerContainer
@@ -131684,7 +131689,7 @@ entities:
       - DrinkBottle
       - Trash
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.92622524
+      sprayFizzinessThresholdRoll: 0.60825545
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -131731,7 +131736,7 @@ entities:
       - DrinkBottle
       - Trash
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.14840443
+      sprayFizzinessThresholdRoll: 0.6301237
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -131752,7 +131757,7 @@ entities:
       - DrinkBottle
       - Trash
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.7460666
+      sprayFizzinessThresholdRoll: 0.45440543
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -203750,6 +203755,7 @@ entities:
       - 18848
       - 28346
       - 36236
+      - 1592
     - type: OreSilo
       clients:
       - 32839
@@ -203763,6 +203769,7 @@ entities:
       - 18848
       - 28346
       - 36236
+      - 1592
 - proto: MachineParticleAcceleratorEmitterForeCircuitboard
   entities:
   - uid: 28203
@@ -216869,6 +216876,18 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -50.5,29.5
+      parent: 2
+  - uid: 43594
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -5.5,-4.5
+      parent: 2
+  - uid: 43595
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -5.5,-1.5
       parent: 2
 - proto: PoweredlightBlue
   entities:
