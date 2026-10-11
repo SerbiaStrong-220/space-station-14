@@ -13,12 +13,7 @@ public sealed class DroppedEvent : HandledEntityEventArgs
     /// </summary>
     public EntityUid User { get; }
 
-    // SS220-drop-and-pickup-sound-suppression begin
-    /// <summary>
-    /// Suppresses the drop sound while preserving other drop behavior.
-    /// </summary>
-    public bool SuppressDropSound { get; }
-    // SS220-drop-and-pickup-sound-suppression end
+    public bool SuppressDropSound { get; } // SS220-drop-and-pickup-sound-suppression
 
     public DroppedEvent(EntityUid user, bool suppressDropSound = false) // SS220-drop-and-pickup-sound-suppression
     {
