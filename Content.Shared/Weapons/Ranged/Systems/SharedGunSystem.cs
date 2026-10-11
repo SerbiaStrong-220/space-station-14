@@ -142,36 +142,6 @@ public abstract partial class SharedGunSystem : EntitySystem
         RefreshModifiers((gun, gun));
     }
 
-    //SS220 weapon overhaul begin
-    private void OnGunUsed(Entity<GunComponent> gun, ref GunCycleRequestEvent args)
-    {
-        if (args.Handled)
-            return;
-
-        if (args.User is not { Valid: true } user)
-            return;
-
-        if (TryComp<ChamberMagazineAmmoProviderComponent>(gun, out var chamberMagComp))
-        {
-            args.Handled = true;
-            if (chamberMagComp.CanRack)
-                UseChambered(gun, chamberMagComp, user);
-            else
-                ToggleBolt(gun, chamberMagComp, user);
-
-            return;
-        }
-
-        if (TryComp<BallisticAmmoProviderComponent>(gun, out var ballisticComp))
-        {
-            ManualCycle((gun, ballisticComp), TransformSystem.GetMapCoordinates(gun), user);
-            args.Handled = true;
-
-            return;
-        }
-    }
-    //SS220 weapon overhaul end
-
     private void OnGunMelee(Entity<GunComponent> ent, ref MeleeHitEvent args)
     {
         if (!TryComp<MeleeWeaponComponent>(ent, out var melee))

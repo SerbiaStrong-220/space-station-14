@@ -223,7 +223,7 @@
   description: A premium semi-automatic shotgun, and the pride of all security forces. Uses .50 shotgun shells.
   components: # intend for Enforcer to have wider choke for semi-auto function
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Shotguns/enforcer.rsi
+    sprite: SS220/Objects/Weapons/Guns/Shotguns/enforcer.rsi #SS220 weapon overhaul
   - type: Appearance #SS220 weapon overhaul
   - type: Clothing
     sprite: Objects/Weapons/Guns/Shotguns/enforcer.rsi
