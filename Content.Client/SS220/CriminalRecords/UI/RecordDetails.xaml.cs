@@ -77,17 +77,13 @@ public sealed partial class RecordDetails : Control
             Gender.Epicene or Gender.Neuter or _ => Loc.GetString("identity-gender-person")
         };
 
-        string species;
-        if (string.IsNullOrEmpty(record.Species))
-            species = Loc.GetString("criminal-records-ui-unknown");
-        else
-            species = Loc.GetString(record.Species);
-
+        var speciesId = record.Species;
         if (record.Profile != null)
-        {
-            var speciesProto = _prototype.Index<SpeciesPrototype>(record.Profile.Species);
+            speciesId = record.Profile.Species.Id;
+
+        var species = Loc.GetString("criminal-records-ui-unknown");
+        if (!string.IsNullOrEmpty(speciesId) && _prototype.TryIndex<SpeciesPrototype>(speciesId, out var speciesProto))
             species = Loc.GetString(speciesProto.Name);
-        }
 
         DetailsLabel.SetMarkup($"Возраст: {record.Age}   Раса: {species}   Пол: {genderString}");
 

@@ -12,6 +12,7 @@ using Content.Shared.SS220.CCVars;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
+using Robust.Shared.Localization;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -159,7 +160,7 @@ public sealed partial class ArenaLobbySystem : EntitySystem
             arenas.Add(new ArenaLobbyEntry
             {
                 ArenaId = id,
-                Name = rule.DisplayName,
+                Name = Loc.GetString(rule.DisplayName),
                 Players = CountOccupied(rule),
                 MaxPlayers = rule.MaxPlayers,
                 Phase = rule.Phase,
@@ -179,8 +180,8 @@ public sealed partial class ArenaLobbySystem : EntitySystem
             templates.Add(new ArenaLobbyTemplate
             {
                 Id = proto.ID,
-                Name = rule.DisplayName,
-                Description = rule.Description,
+                Name = Loc.GetString(rule.DisplayName),
+                Description = Loc.GetString(rule.Description),
                 Category = rule.DisplayCategory,
                 MaxPlayers = rule.MaxPlayers,
             });

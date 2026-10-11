@@ -226,7 +226,103 @@
       cell_slot: !type:ContainerSlot
 
 - type: entity
-  parent: BaseWeaponBallisticTurret
+  save: false
+  id: PlantsShooterTurretBase
+  abstract: true
+  components:
+  - type: NpcFactionMember
+    factions:
+    - PlantsFract
+  - type: HTN
+    rootTask:
+      task: TurretCompound
+    blackboard:
+      SoundTargetInLOS: !type:SoundPathSpecifier
+        path: /Audio/SS220/Effects/peashooter_target.ogg
+  - type: Damageable
+    damageContainer: Biological
+  - type: Reactive
+    groups:
+      Flammable: [ Touch ]
+      Extinguish: [ Touch ]
+    reactions:
+    - reagents: [ Water ]
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        scaling: true
+        damage:
+          types:
+            Blunt: -0.05
+            Slash: -0.05
+            Piercing: -0.05
+    - reagents: [ Blood ]
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        scaling: true
+        damage:
+          types:
+            Blunt: -0.083
+            Slash: -0.083
+            Piercing: -0.083
+            Heat: -0.0625
+            Shock: -0.0625
+            Cold: -0.0625
+            Caustic: -0.0625
+    - reagents: [ RobustHarvest ]
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        scaling: true
+        damage:
+          types:
+            Blunt: -0.33
+            Slash: -0.33
+            Piercing: -0.33
+            Heat: -0.25
+            Shock: -0.25
+            Cold: -0.25
+            Caustic: -0.25
+    - reagents: [ WeedKiller, PlantBGone ]
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        scaling: true
+        damage:
+          types:
+            Heat: 1
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.30
+        density: 80
+        mask:
+          - MobMask
+        layer:
+          - MobLayer
+  - type: RadiationReceiver
+  - type: HealthExaminable
+    examinableTypes:
+    - Blunt
+    - Slash
+    - Piercing
+    - Heat
+    - Shock
+    - Cold
+    - Caustic
+    - Asphyxiation
+    - Radiation
+    - Cerebral 
+  - type: Barotrauma
+    damage:
+      types:
+        Blunt: 0.15
+
+- type: entity
+  parent: [BaseWeaponBallisticTurret, PlantsShooterTurretBase]
   id: WeaponTurretPeashooter
   name: peashooter
   description: Peas ready for defense and shooting zombies.
@@ -257,13 +353,11 @@
     blackboard:
       SoundTargetInLOS: !type:SoundPathSpecifier
         path: /Audio/SS220/Effects/peashooter_target.ogg
-  - type: Damageable
-    damageContainer: Biological
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 75
+        damage: 100
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
@@ -273,8 +367,8 @@
       - !type:SpawnEntitiesBehavior
         spawn:
           FoodPeaPod:
-            min: 3
-            max: 5
+            min: 1
+            max: 2
   - type: InteractionPopup
     interactDelay: 1.0
     successChance: 0.8
@@ -284,7 +378,7 @@
       path: /Audio/SS220/Effects/peashooter_pet.ogg
 
 - type: entity
-  parent: BaseWeaponBallisticTurret
+  parent: [PlantsShooterTurretBase, WeaponTurretPeashooter]
   id: WeaponTurretPeashooterSyndi
   name: sergeant peashooter
   description: Peas, having seen a lot, will certainly knock the helmets off a couple of officers...
@@ -312,34 +406,3 @@
     burstFireRate: 20
     projectileSpeed: 20
     soundGunshot: /Audio/SS220/Weapons/Guns/Gunshots/peas_burst.ogg
-  - type: HTN
-    rootTask:
-      task: TurretCompound
-    blackboard:
-      SoundTargetInLOS: !type:SoundPathSpecifier
-        path: /Audio/SS220/Effects/peashooter_target.ogg
-  - type: Damageable
-    damageContainer: Biological
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-      - !type:PlaySoundBehavior
-        sound:
-          path: /Audio/Effects/gib1.ogg
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          FoodPeaPod:
-            min: 3
-            max: 5
-  - type: InteractionPopup
-    interactDelay: 1.0
-    successChance: 0.8
-    interactSuccessString: petting-success-peashootersyndi
-    interactFailureString: petting-failure-peashootersyndi
-    interactSuccessSound:
-      path: /Audio/SS220/Effects/peashooter_pet.ogg

@@ -657,6 +657,7 @@
     staticPacks:
     - BioGenIngredientsStatic
     - BioGenMaterialsStatic
+    - BioGenCubesCat # SS220 CatCube
   - type: EmagLatheRecipes
     emagStaticPacks:
     - BioGenEmagStatic

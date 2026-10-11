@@ -1,3 +1,7 @@
+# Implants
+uplink-night-vision-implanter-name = Night Vision Implant
+uplink-night-vision-implanter-desc = Grants toggleable night vision without occupying the eyes slot. Bright light washes out the image.
+
 #Misc
 
 uplink-clothing-eyes-hud-syndicate-agent-name = Syndicate agent Visor

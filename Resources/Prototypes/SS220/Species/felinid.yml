@@ -1,6 +1,6 @@
 - type: species
   id: Felinid
-  name: Фелинид
+  name: species-name-felinid
   roundStart: true
   prototype: MobFelinid
   dollPrototype: AppearanceFelinid

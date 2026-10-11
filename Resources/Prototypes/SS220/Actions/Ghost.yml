@@ -10,14 +10,12 @@
     event: !type:ToggleAGhostBodyVisualsActionEvent
 
 - type: entity
-  id: ActionToggleHudOnOther
-  name: Переключить видимость СБ визора.
-  description: Переключить между отображением СБ визором и обычным зрением.
+  parent: BaseMentalAction
+  id: ActionGhostHudSettings
+  name: Настройки визоров
+  description: Выбрать, какие визоры отображаются у призрака.
   components:
-    - type: Action
-      checkCanInteract: false
-      icon:
-        sprite: Clothing/Eyes/Hud/sec.rsi
-        state: icon
-    - type: InstantAction
-      event: !type:ToggleHudOnOtherActionEvent
+  - type: Action
+    icon: { sprite: Clothing/Eyes/Hud/sec.rsi, state: icon }
+  - type: InstantAction
+    event: !type:ToggleIntrinsicUIEvent { key: enum.GhostHudUiKey.Key }

@@ -97,6 +97,10 @@
   - type: Sprite
     sprite: Objects/Misc/zipties.rsi
     state: cuff
+# ss220 balance zipties & handcuffs start
+  - type: UseDelay
+    delay: 4
+# ss220 balance zipties & handcuffs end
 
 - type: entity
   id: BaseHandcuffsBroken

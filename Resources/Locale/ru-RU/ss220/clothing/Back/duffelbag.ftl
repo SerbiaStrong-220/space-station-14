@@ -9,4 +9,4 @@ ent-ClothingBackpackWhiteDuffelCaptain = белый вещмешок капит�
     .desc = Дорогая белая сумка, выданная за выслугу лет капитану.
 
 ent-ClothingBackpackJanitorJRDuffel = вещмешок JR
-    .desc = { ent-ClothingBackpackJanitorJR.desc }
+    .desc = Большой вещмешок, при необходимости способный заменить мусорный контейнер.

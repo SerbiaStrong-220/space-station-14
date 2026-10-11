@@ -215,3 +215,18 @@
     sprite: SS220/Clothing/Shoes/Boots/senior_service_laceups.rsi
   - type: Clothing
     sprite: SS220/Clothing/Shoes/Boots/senior_service_laceups.rsi
+
+# Утилизатор
+
+- type: entity
+  parent: ClothingShoesBase
+  id: ClothingShoesBootsJRSalvage
+  name: jr work boots
+  description: Perhaps this is the only footwear that makes it comfortable to move around on the space soil.
+  suffix: For playing time
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Boots/jr_salvage_boots.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Boots/jr_salvage_boots.rsi
+

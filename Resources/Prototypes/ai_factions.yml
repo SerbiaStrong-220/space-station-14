@@ -44,6 +44,7 @@
   friendly:
   - NanoTrasen
   hostile:
+  - SpiderHostile #SS220 Spiders
   - PlantsFract #SS220 PlatFraction
   - Mouse
   - SimpleHostile
@@ -76,6 +77,7 @@
 - type: npcFaction
   id: Syndicate
   hostile:
+  - SpiderHostile #SS220 Spiders
   - PlantsFract #SS220 PlatFraction
   - NanoTrasen
   - DeathSquad #SS220 dq update

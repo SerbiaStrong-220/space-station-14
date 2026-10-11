@@ -709,6 +709,8 @@
   parent: [BaseMobCorrupted, MobMouse]
   id: CultRatCorrupted
   components:
+  - type: NightVision
+    profile: NightVisionPaleRed
   - type: Sprite
     drawdepth: SmallMobs
     sprite: SS220/Mobs/CultYogg/rat_corrupted.rsi
