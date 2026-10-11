@@ -17,13 +17,13 @@ python3 RUN_THIS.py                        # первичная инициали
 dotnet build Content.Server -c Release     # сборка одного проекта
 dotnet build -c Release                    # полная сборка, ожидаем 0 ошибок
 dotnet test Content.Tests --filter "FullyQualifiedName~<Name>"
-dotnet run --project Content.YAMLLinter    # проверка прототипов после правок YAML
+dotnet run --project Content.YAMLLinter    # не запускай сам: после правок YAML предложи запустить
 ```
 Подробнее: [docs/agents/build-test.md](docs/agents/build-test.md)
 
 ## Главные правила
 1. **Новое — в `SS220`.** Новые классы, прототипы, спрайты и строки локализации кладём в папки `SS220`, даже если это дополнение к ванили.
-2. **Правка апстрима — с меткой.** Любое изменение вне `SS220` помечаем `//SS220-feature-name` (YAML/ftl — `#`). Большие правки выносим в `Name.SS220.cs` (`partial`).
+2. **Правка апстрима — с меткой.** Любое изменение вне `SS220` помечаем `//SS220-feature-name` (YAML/ftl — `#`). Большие правки выносим в `Name.SS220.cs` (`partial`). Для строк локализации сначала используй переопределение (см. [ss220-conventions](docs/agents/ss220-conventions.md)).
 3. **ECS.** Компонент — только данные, логика — в системе. Системы без состояния. Зависимости через `[Dependency]`.
 4. **Горячие пути** (`Update`, `FrameUpdate`): без LINQ и аллокаций коллекций, только `EntityQuery<T>`.
 5. **Современный API:** `Entity<T>`, `ref`-события (`record struct`), `ProtoId<T>`, `TimeSpan` для времени.
@@ -45,7 +45,7 @@ dotnet run --project Content.YAMLLinter    # проверка прототипо
 Читай только нужный файл. Остальное не загружай.
 
 ## Разрешения
-**Без запроса:** читать файлы, собирать один проект, запускать отдельные тесты и YAMLLinter.
+**Без запроса:** читать файлы, собирать один проект, запускать отдельные тесты. YAMLLinter только по просьбе (после правок YAML предложи его запустить).
 **Только с подтверждения:** `git commit/push`, удаление файлов, любые правки в `RobustToolbox/`, добавление NuGet-пакетов (`Directory.Packages.props`), правки карт в `Resources/Maps/`, полный прогон `Content.IntegrationTests`.
 
 ## Если не уверен

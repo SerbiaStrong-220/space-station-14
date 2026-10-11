@@ -20,7 +20,9 @@ python3 RUN_THIS.py     # Windows: py -3 .\RUN_THIS.py
 Скрипт инициализирует сабмодули и скачивает движок.
 
 Если скрипт не сработал:
+```
 git submodule update --init --recursive
+```
 
 ## Конфигурации сборки
 | Команда | Когда |
@@ -42,12 +44,14 @@ git submodule update --init --recursive
 # Узко (по умолчанию)
 dotnet test Content.Tests --filter "FullyQualifiedName~<ClassOrMethod>"
 dotnet test Content.IntegrationTests --filter "FullyQualifiedName~<ClassOrMethod>"
+
+# Линтер прототипов (только по просьбе)
 dotnet run --project Content.YAMLLinter
 
 # Полный прогон (только по просьбе, интеграционные ОЧЕНЬ долгие)
 dotnet test Content.Tests
 dotnet test Content.IntegrationTests
 ```
-- Менял YAML: запусти YAMLLinter, если пользователь захочет
+- Менял YAML: сам линтер не запускай, в конце работы предложи запустить `dotnet run --project Content.YAMLLinter`.
 - Менял логику системы: ищи тест рядом в `Content.Tests` / `Content.IntegrationTests` и запусти его.
 - Если сборка или тест падает дважды по непонятной причине, остановись и опиши проблему.
