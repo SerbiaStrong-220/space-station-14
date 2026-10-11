@@ -497,6 +497,15 @@ public sealed class FelinidPipecrawlTest : GameTest
 
             var cooldownAction = entMan.GetComponent<ActionComponent>(pipecrawl.ActionEntity!.Value);
             Assert.That(actions.IsCooldownActive(cooldownAction), Is.True);
+
+            // Once the cooldown is over, entering again must not restart the previous exit delay.
+            pipecrawl.NextEntryAllowed = timing.CurTime;
+            actions.PerformAction(mob, (pipecrawl.ActionEntity.Value, cooldownAction));
+            Assert.Multiple(() =>
+            {
+                Assert.That(pipecrawl.InsidePipe, Is.True);
+                Assert.That(actions.IsCooldownActive(cooldownAction), Is.False);
+            });
         });
     }
 

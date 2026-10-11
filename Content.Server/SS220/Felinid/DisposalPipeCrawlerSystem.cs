@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
 using Content.Server.Atmos.EntitySystems;
@@ -5,6 +6,8 @@ using Content.Server.Body.Systems;
 using Content.Server.Disposal.Tube;
 using Content.Server.Disposal.Unit;
 using Content.Server.Popups;
+using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Content.Shared.Atmos;
 using Content.Shared.Disposal.Components;
 using Content.Shared.Disposal.Tube;
@@ -36,7 +39,10 @@ namespace Content.Server.SS220.Felinid;
 public sealed partial class DisposalPipeCrawlerSystem : SharedDisposalPipeCrawlerSystem
 {
     private static readonly EntProtoId DisposalHolderPrototype = "DisposalHolder";
+    private const float LaunchDistance = 3f;
+    private const float LaunchSpeed = 10f;
 
+    [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private AtmosphereSystem _atmosphere = default!;
     [Dependency] private SharedContentEyeSystem _contentEye = default!;
     [Dependency] private SharedEyeSystem _eye = default!;
@@ -100,7 +106,7 @@ public sealed partial class DisposalPipeCrawlerSystem : SharedDisposalPipeCrawle
             var elapsed = _timing.CurTime - pipecrawl.TravelStartedAt;
             var progress = duration <= TimeSpan.Zero
                 ? 1f
-                : Math.Clamp((float) (elapsed.TotalSeconds / duration.TotalSeconds), 0f, 1f);
+                : Math.Clamp((float) (elapsed / duration), 0f, 1f);
             progress = EasingsExtensions.Ease(Easing.InOutCubic, progress);
 
             var origin = _transform.GetWorldPosition(currentTube);
@@ -113,7 +119,6 @@ public sealed partial class DisposalPipeCrawlerSystem : SharedDisposalPipeCrawle
             pipecrawl.CurrentTube = nextTube;
             pipecrawl.PreviousDirection = pipecrawl.TravelDirection;
             ResetTravel(pipecrawl);
-            _transform.SetWorldPosition(uid, destination);
         }
     }
 
@@ -126,6 +131,7 @@ public sealed partial class DisposalPipeCrawlerSystem : SharedDisposalPipeCrawle
         {
             ExitPipecrawlByAction(ent);
             args.Handled = true;
+            SetActionUseDelay(ent, args.Action);
             return;
         }
 
@@ -134,18 +140,30 @@ public sealed partial class DisposalPipeCrawlerSystem : SharedDisposalPipeCrawle
 
         if (_inventory.TryGetSlotEntity(ent.Owner, "outerClothing", out _))
         {
-            _popup.PopupEntity(Loc.GetString("felinid-pipecrawl-blocked-outer-clothing"), ent.Owner, ent.Owner);
+            _popup.PopupEntity(Loc.GetString("disposal-pipe-crawler-blocked-outer-clothing"), ent.Owner, ent.Owner);
             return;
         }
 
         if (!TryGetContainingDisposalUnit(ent.Owner, out var disposal) ||
-            !Transform(disposal.Owner).Anchored ||
-            disposal.Comp.Container.ContainedEntities.Count != 1)
+            !Transform(disposal.Value.Owner).Anchored ||
+            disposal.Value.Comp.Container.ContainedEntities.Count != 1)
         {
             return;
         }
 
-        args.Handled = TryEnterPipecrawl(ent, disposal);
+        args.Handled = TryEnterPipecrawl(ent, disposal.Value);
+        if (args.Handled)
+            SetActionUseDelay(ent, args.Action);
+    }
+
+    /// <summary>
+    /// The actions system restarts the action's own use delay right after this handler,
+    /// so hand it the pipe cooldown instead of setting a cooldown it would overwrite.
+    /// </summary>
+    private void SetActionUseDelay(Entity<DisposalPipeCrawlerComponent> ent, Entity<ActionComponent> action)
+    {
+        TimeSpan? delay = ent.Comp.InsidePipe ? null : ent.Comp.NextEntryAllowed - _timing.CurTime;
+        _actions.SetUseDelay(action.AsNullable(), delay);
     }
 
     private void OnPipecrawlMoveInput(Entity<DisposalPipeCrawlerComponent> ent, ref MoveInputEvent args)
@@ -287,18 +305,20 @@ public sealed partial class DisposalPipeCrawlerSystem : SharedDisposalPipeCrawle
             args.Used,
             args.User,
             ent.Owner,
-            crawler.Comp.ExtractionDelay,
-            crawler.Comp.ExtractionQuality,
+            crawler.Value.Comp.ExtractionDelay,
+            crawler.Value.Comp.ExtractionQuality,
             new DisposalPipeExtractionDoAfterEvent());
     }
 
     private void OnTubeExtractionDoAfter(Entity<DisposalTubeComponent> ent, ref DisposalPipeExtractionDoAfterEvent args)
     {
         if (!args.Cancelled && TryFindPipecrawlerInTube(ent.Owner, out var crawler))
-            ForceExitPipecrawl(crawler, false);
+            ForceExitPipecrawl(crawler.Value, false);
     }
 
-    private bool TryFindPipecrawlerInTube(EntityUid tube, out Entity<DisposalPipeCrawlerComponent> crawler)
+    private bool TryFindPipecrawlerInTube(
+        EntityUid tube,
+        [NotNullWhen(true)] out Entity<DisposalPipeCrawlerComponent>? crawler)
     {
         var query = EntityQueryEnumerator<DisposalPipeCrawlerComponent>();
         while (query.MoveNext(out var uid, out var pipecrawl))
@@ -310,7 +330,7 @@ public sealed partial class DisposalPipeCrawlerSystem : SharedDisposalPipeCrawle
             }
         }
 
-        crawler = default;
+        crawler = null;
         return false;
     }
 
@@ -413,18 +433,18 @@ public sealed partial class DisposalPipeCrawlerSystem : SharedDisposalPipeCrawle
             if (!TryFindDisposalUnitAt(tubeUid, out var disposalUnit))
             {
                 _popup.PopupEntity(
-                    Loc.GetString("felinid-pipecrawl-exit-no-disposal-unit"),
+                    Loc.GetString("disposal-pipe-crawler-exit-no-disposal-unit"),
                     ent.Owner,
                     ent.Owner);
                 return;
             }
 
             SetPipecrawlPhysics(ent.Owner, false);
-            if (!_disposalUnitSystem.TryInsert(disposalUnit, ent.Owner, null))
+            if (!_disposalUnitSystem.TryInsert(disposalUnit.Value, ent.Owner, null))
             {
                 SetPipecrawlPhysics(ent.Owner, true);
                 _popup.PopupEntity(
-                    Loc.GetString("felinid-pipecrawl-exit-blocked"),
+                    Loc.GetString("disposal-pipe-crawler-exit-blocked"),
                     ent.Owner,
                     ent.Owner);
                 return;
@@ -443,16 +463,23 @@ public sealed partial class DisposalPipeCrawlerSystem : SharedDisposalPipeCrawle
             preferredDirection == Direction.Invalid ? null : preferredDirection);
     }
 
-    private bool TryFindDisposalUnitAt(EntityUid entry, out EntityUid disposalUnit)
+    private bool TryFindDisposalUnitAt(EntityUid entry, [NotNullWhen(true)] out EntityUid? disposalUnit)
     {
-        disposalUnit = default;
+        disposalUnit = null;
         var xform = Transform(entry);
         if (!TryComp(xform.GridUid, out MapGridComponent? grid))
             return false;
 
-        disposalUnit = _map.GetLocal(xform.GridUid.Value, grid, xform.Coordinates)
-            .FirstOrDefault(HasComp<DisposalUnitComponent>);
-        return disposalUnit != default;
+        foreach (var uid in _map.GetLocal(xform.GridUid.Value, grid, xform.Coordinates))
+        {
+            if (!HasComp<DisposalUnitComponent>(uid))
+                continue;
+
+            disposalUnit = uid;
+            return true;
+        }
+
+        return false;
     }
 
     private Direction GetPreferredDisposalDirection(EntityUid uid, EntityUid tubeUid)
@@ -537,6 +564,6 @@ public sealed partial class DisposalPipeCrawlerSystem : SharedDisposalPipeCrawle
         if (TryComp<PhysicsComponent>(uid, out var physics))
             _physics.SetLinearVelocity(uid, Vector2.Zero, body: physics);
 
-        _throwing.TryThrow(uid, _transform.GetWorldRotation(uid).ToWorldVec() * 3f, 10f);
+        _throwing.TryThrow(uid, _transform.GetWorldRotation(uid).ToWorldVec() * LaunchDistance, LaunchSpeed);
     }
 }

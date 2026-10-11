@@ -1,6 +1,6 @@
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
-using Content.Shared.Actions.Events;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Disposal.Components;
 using Content.Shared.Emoting;
@@ -34,7 +34,6 @@ public abstract partial class SharedDisposalPipeCrawlerSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<DisposalPipeCrawlerComponent, MapInitEvent>(OnPipecrawlMapInit);
-        SubscribeLocalEvent<DisposalPipeCrawlerActionComponent, ActionPerformedEvent>(OnPipecrawlActionPerformed);
         SubscribeLocalEvent<DisposalPipeCrawlerComponent, AfterAutoHandleStateEvent>(OnPipecrawlHandleState);
         SubscribeLocalEvent<DisposalPipeCrawlerComponent, ComponentShutdown>(OnPipecrawlShutdown);
         SubscribeLocalEvent<DisposalPipeCrawlerComponent, EntGotInsertedIntoContainerMessage>(OnPipecrawlContainerModified);
@@ -52,7 +51,7 @@ public abstract partial class SharedDisposalPipeCrawlerSystem : EntitySystem
         SubscribeLocalEvent<DisposalPipeCrawlerComponent, IsUnequippingTargetAttemptEvent>(OnPipecrawlUnequipTargetAttempt);
         SubscribeLocalEvent<DisposalPipeCrawlerComponent, DidUnequipEvent>(OnPipecrawlUnequipped);
         SubscribeLocalEvent<DisposalPipeCrawlerComponent, StorageInsertHeldItemAttemptEvent>(OnPipecrawlStorageInsertAttempt);
-        SubscribeLocalEvent<DisposalPipeCrawlerUnequippedItemComponent, EntGotInsertedIntoContainerMessage>(OnUnequippedItemInserted);
+        SubscribeLocalEvent<DisposalPipeCrawlerComponent, DidEquipHandEvent>(OnPipecrawlEquippedHand);
         SubscribeLocalEvent<DisposalPipeCrawlerComponent, CanSeeAttemptEvent>(OnPipecrawlCanSeeAttempt);
         SubscribeLocalEvent<DisposalPipeCrawlerComponent, GetVisMaskEvent>(OnPipecrawlGetVisMask);
     }
@@ -60,14 +59,6 @@ public abstract partial class SharedDisposalPipeCrawlerSystem : EntitySystem
     private void OnPipecrawlMapInit(Entity<DisposalPipeCrawlerComponent> ent, ref MapInitEvent args)
     {
         RefreshPipecrawlState(ent);
-    }
-
-    private void OnPipecrawlActionPerformed(
-        Entity<DisposalPipeCrawlerActionComponent> ent,
-        ref ActionPerformedEvent args)
-    {
-        if (TryComp<DisposalPipeCrawlerComponent>(args.Performer, out var pipecrawl))
-            SyncPipecrawlAction((args.Performer, pipecrawl));
     }
 
     private void OnPipecrawlHandleState(Entity<DisposalPipeCrawlerComponent> ent, ref AfterAutoHandleStateEvent args)
@@ -87,7 +78,6 @@ public abstract partial class SharedDisposalPipeCrawlerSystem : EntitySystem
         }
 
         ent.Comp.ActionEntity = null;
-        ClearUnequippedItemMarkers(ent.Owner);
         RaisePipecrawlVisualsChanged(ent.Owner, false);
         _blocker.UpdateCanMove(ent.Owner);
     }
@@ -140,7 +130,7 @@ public abstract partial class SharedDisposalPipeCrawlerSystem : EntitySystem
     public void RefreshPipecrawlState(Entity<DisposalPipeCrawlerComponent> ent)
     {
         if (!ent.Comp.InsidePipe)
-            ClearUnequippedItemMarkers(ent.Owner);
+            ent.Comp.UnequippedItem = null;
 
         SyncPipecrawlAction(ent);
         _blocker.UpdateCanMove(ent.Owner);
@@ -206,8 +196,7 @@ public abstract partial class SharedDisposalPipeCrawlerSystem : EntitySystem
     {
         if (!ent.Comp.InsidePipe ||
             IsOwnedByCrawler(args.Item, ent.Owner) ||
-            TryComp<DisposalPipeCrawlerUnequippedItemComponent>(args.Item, out var marker) &&
-            marker.Pipecrawler == ent.Owner)
+            args.Item == ent.Comp.UnequippedItem)
         {
             return;
         }
@@ -245,9 +234,11 @@ public abstract partial class SharedDisposalPipeCrawlerSystem : EntitySystem
             args.VisibilityMask |= (int) VisibilityFlags.Subfloor;
     }
 
-    protected bool TryGetContainingDisposalUnit(EntityUid uid, out Entity<DisposalUnitComponent> unit)
+    protected bool TryGetContainingDisposalUnit(
+        EntityUid uid,
+        [NotNullWhen(true)] out Entity<DisposalUnitComponent>? unit)
     {
-        unit = default;
+        unit = null;
         if (!_container.TryGetContainingContainer(uid, out var container) ||
             container.ID != DisposalUnitComponent.ContainerId ||
             !TryComp<DisposalUnitComponent>(container.Owner, out var comp))
@@ -268,14 +259,14 @@ public abstract partial class SharedDisposalPipeCrawlerSystem : EntitySystem
 
         if (args.User != ent.Owner || args.UnEquipTarget != ent.Owner)
         {
-            args.Reason = "felinid-pipecrawl-unequip-external";
+            args.Reason = "disposal-pipe-crawler-unequip-external";
             args.Cancel();
             return;
         }
 
         if (!_hands.TryGetEmptyHand((ent.Owner, null), out _))
         {
-            args.Reason = "felinid-pipecrawl-unequip-hands-full";
+            args.Reason = "disposal-pipe-crawler-unequip-hands-full";
             args.Cancel();
             return;
         }
@@ -291,7 +282,7 @@ public abstract partial class SharedDisposalPipeCrawlerSystem : EntitySystem
                 continue;
             }
 
-            args.Reason = "felinid-pipecrawl-unequip-dependent";
+            args.Reason = "disposal-pipe-crawler-unequip-dependent";
             args.Cancel();
             return;
         }
@@ -304,7 +295,7 @@ public abstract partial class SharedDisposalPipeCrawlerSystem : EntitySystem
         if (!ent.Comp.InsidePipe || args.User == ent.Owner && args.UnEquipTarget == ent.Owner)
             return;
 
-        args.Reason = "felinid-pipecrawl-unequip-external";
+        args.Reason = "disposal-pipe-crawler-unequip-external";
         args.Cancel();
     }
 
@@ -318,15 +309,14 @@ public abstract partial class SharedDisposalPipeCrawlerSystem : EntitySystem
             return;
         }
 
-        var marker = EnsureComp<DisposalPipeCrawlerUnequippedItemComponent>(args.Equipment);
-        marker.Pipecrawler = ent.Owner;
+        // The unequipped item is no longer inside the crawler, so pickup would refuse it on its way to the hand.
+        ent.Comp.UnequippedItem = args.Equipment;
     }
 
-    private void OnUnequippedItemInserted(
-        Entity<DisposalPipeCrawlerUnequippedItemComponent> ent,
-        ref EntGotInsertedIntoContainerMessage args)
+    private void OnPipecrawlEquippedHand(Entity<DisposalPipeCrawlerComponent> ent, ref DidEquipHandEvent args)
     {
-        RemCompDeferred<DisposalPipeCrawlerUnequippedItemComponent>(ent.Owner);
+        if (args.Equipped == ent.Comp.UnequippedItem)
+            ent.Comp.UnequippedItem = null;
     }
 
     private void OnPipecrawlStorageInsertAttempt(
@@ -347,15 +337,5 @@ public abstract partial class SharedDisposalPipeCrawlerSystem : EntitySystem
     {
         return entity == crawler ||
                TryComp(entity, out TransformComponent? xform) && _transform.ContainsEntity(crawler, (entity, xform));
-    }
-
-    private void ClearUnequippedItemMarkers(EntityUid owner)
-    {
-        var query = EntityQueryEnumerator<DisposalPipeCrawlerUnequippedItemComponent>();
-        while (query.MoveNext(out var uid, out var marker))
-        {
-            if (marker.Pipecrawler == owner)
-                RemCompDeferred<DisposalPipeCrawlerUnequippedItemComponent>(uid);
-        }
     }
 }

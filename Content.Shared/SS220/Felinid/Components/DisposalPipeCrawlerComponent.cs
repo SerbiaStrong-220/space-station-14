@@ -58,4 +58,9 @@ public sealed partial class DisposalPipeCrawlerComponent : Component
     public Direction TravelDirection = Direction.Invalid;
     public TimeSpan TravelStartedAt;
     public TimeSpan TravelEndsAt;
+
+    /// <summary>
+    /// Item the crawler just took off inside a pipe, allowed to finish its way into the crawler's hand.
+    /// </summary>
+    public EntityUid? UnequippedItem;
 }

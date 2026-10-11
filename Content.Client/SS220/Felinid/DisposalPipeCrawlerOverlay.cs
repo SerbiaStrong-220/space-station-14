@@ -1,12 +1,13 @@
 using System.Numerics;
 using Content.Shared.SS220.Felinid.Components;
+using Content.Shared.Tag;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
+using Robust.Shared.Containers;
 using Robust.Shared.Enums;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
-using Content.Shared.Tag;
 
 namespace Content.Client.SS220.Felinid;
 
@@ -80,6 +81,24 @@ public sealed partial class DisposalPipeCrawlerOverlay : Overlay
                 eyeRotation,
                 handle,
                 revealPipeLayer: true);
+
+            // Disposal contents travel inside holders stored in the tube's container.
+            if (!_entity.TryGetComponent<ContainerManagerComponent>(uid, out var tubeContainers))
+                continue;
+
+            foreach (var tubeContainer in tubeContainers.Containers.Values)
+            {
+                for (var i = 0; i < tubeContainer.ContainedEntities.Count; i++)
+                {
+                    RenderHolderContents(
+                        tubeContainer.ContainedEntities[i],
+                        mapId,
+                        playerPosition,
+                        revealRangeSquared,
+                        eyeRotation,
+                        handle);
+                }
+            }
         }
 
         _nearbyCrawlersBuffer.Clear();
@@ -101,6 +120,31 @@ public sealed partial class DisposalPipeCrawlerOverlay : Overlay
         }
 
         handle.SetTransform(Matrix3x2.Identity);
+    }
+
+    private void RenderHolderContents(
+        EntityUid holder,
+        MapId mapId,
+        Vector2 playerPosition,
+        float revealRangeSquared,
+        Angle eyeRotation,
+        DrawingHandleWorld handle)
+    {
+        if (!_entity.TryGetComponent<ContainerManagerComponent>(holder, out var holderContainers))
+            return;
+
+        foreach (var container in holderContainers.Containers.Values)
+        {
+            for (var i = 0; i < container.ContainedEntities.Count; i++)
+            {
+                var item = container.ContainedEntities[i];
+                if (!_entity.TryGetComponent<SpriteComponent>(item, out var sprite))
+                    continue;
+
+                var xform = _entity.GetComponent<TransformComponent>(item);
+                RenderIfNearby((item, sprite, xform), mapId, playerPosition, revealRangeSquared, eyeRotation, handle);
+            }
+        }
     }
 
     private void RenderIfNearby(
