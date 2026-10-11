@@ -44,7 +44,7 @@ public sealed partial class ExperienceViewWindow : FancyWindow
             SkillSublevels = GetChangedSublevels()
         });
 
-        ClearSpentPointsButton.OnPressed += OnClearSpentPointsButton;
+        ClearSpentPointsButton.OnPressed += (_) => ClearSpentPoints();
     }
 
     public void SetKnowledge(HashSet<ProtoId<KnowledgePrototype>>? knowledges)
@@ -71,7 +71,7 @@ public sealed partial class ExperienceViewWindow : FancyWindow
 
     public void SetFreeSublevelPoints(int freeSublevelPoints)
     {
-        _spendPoints = 0;
+        ClearSpentPoints();
         _freeSublevelPoints = freeSublevelPoints;
         UpdateSublevel();
     }
@@ -196,23 +196,29 @@ public sealed partial class ExperienceViewWindow : FancyWindow
                     continue;
 
                 treeContainer.HaveFreePoints = canChange;
-                treeContainer.SubdataContainer.Visible = treeContainer.OpenedByUser || canChange;
 
                 // god forgive me...
-                if (treeContainer.OnAddSublevelPoint is null)
-                    treeContainer.OnAddSublevelPoint += OnAddSublevelPoint;
+                if (treeContainer.OnAddLevelButton is null)
+                    treeContainer.OnAddLevelButton += OnAddLevelButton;
             }
         }
     }
 
-    private void OnAddSublevelPoint()
+    private bool OnAddLevelButton(int addSublevels)
     {
-        _spendPoints++;
+        var newSpendPoints = _spendPoints + addSublevels;
+        if (_freeSublevelPoints < newSpendPoints)
+        {
+            UpdateSublevel();
+            return false;
+        }
 
+        _spendPoints = newSpendPoints;
         UpdateSublevel();
+        return true;
     }
 
-    private void OnClearSpentPointsButton(BaseButton.ButtonEventArgs args)
+    private void ClearSpentPoints()
     {
         foreach (var child in ExperienceTreeGroupsContainer.Children)
         {

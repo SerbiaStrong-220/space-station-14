@@ -69,7 +69,7 @@
 - type: skill
   id: MedicineProfessional
   levelInfo:
-    maximumSublevel: 1
+    maximumSublevel: 0
     levelUpPopup: medicine-professional-level-up-popup
     sublevelUpPopup: medicine-professional-sublevel-up-popup
   levelDescription:

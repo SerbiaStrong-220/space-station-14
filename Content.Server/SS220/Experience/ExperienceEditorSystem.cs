@@ -70,7 +70,7 @@ public sealed partial class ExperienceEditorSystem : EntitySystem
 
         if (experienceComponent.FreeSublevelPoints < totalPointsSpend)
         {
-            DirtyField(playerEntity, experienceComponent, nameof(ExperienceComponent.FreeSublevelPoints));
+            Dirty(playerEntity, experienceComponent);
             return;
         }
 
