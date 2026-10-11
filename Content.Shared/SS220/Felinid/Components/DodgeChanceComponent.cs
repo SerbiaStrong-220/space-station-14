@@ -22,13 +22,13 @@ public sealed partial class DodgeChanceComponent : Component
     public float MajorNeedPenalty = 0.10f;
 
     /// <summary>
-    /// Dead-percentage (0 = healthy, 1 = dead) below which health counts as "excellent".
+    /// Damage as a share of the crit threshold (0 = healthy, 1 = crit) below which health is "excellent".
     /// </summary>
     [DataField]
     public float GoodHealthThreshold = 0.25f;
 
     /// <summary>
-    /// Dead-percentage above which health counts as "bad", and above <see cref="AwfulHealthThreshold"/> as "awful".
+    /// Damage share above which health is "bad", and above <see cref="AwfulHealthThreshold"/> "awful".
     /// </summary>
     [DataField]
     public float BadHealthThreshold = 0.5f;

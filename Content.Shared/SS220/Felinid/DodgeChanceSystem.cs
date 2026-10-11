@@ -1,23 +1,30 @@
-using Content.Server.Disposal.Unit;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Projectiles;
+using Content.Shared.Random.Helpers;
 using Content.Shared.SS220.Felinid.Components;
 using Content.Shared.Weapons.Hitscan.Events;
+using Robust.Shared.Containers;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 
-namespace Content.Server.SS220.Felinid;
+namespace Content.Shared.SS220.Felinid;
 
+/// <summary>
+/// Lets shots miss an entity with <see cref="DodgeChanceComponent"/>.
+/// Seeded per shot and target: the client predicts it and an overlapping projectile is not re-rolled.
+/// </summary>
 public sealed partial class DodgeChanceSystem : EntitySystem
 {
+    [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private MobThresholdSystem _mobThresholds = default!;
-    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -34,30 +41,39 @@ public sealed partial class DodgeChanceSystem : EntitySystem
             return;
         }
 
-        if (TryDodgeShot(ent))
+        var seed = SharedRandomExtensions.HashCodeCombine(GetNetEntity(args.OtherEntity).Id, GetNetEntity(ent).Id);
+        if (TryDodgeShot(ent, seed))
             args.Cancelled = true;
     }
 
     private void OnDodgeHitscanAttempt(Entity<DodgeChanceComponent> ent, ref AttemptHitscanRaycastHitEvent args)
     {
-        if (!args.Cancelled && TryDodgeShot(ent))
+        if (args.Cancelled)
+            return;
+
+        var seed = SharedRandomExtensions.HashCodeCombine(
+            (int) _timing.CurTick.Value,
+            GetNetEntity(args.HitScanEntity).Id,
+            GetNetEntity(ent).Id);
+
+        if (TryDodgeShot(ent, seed))
             args.Cancelled = true;
     }
 
-    private bool TryDodgeShot(Entity<DodgeChanceComponent> ent)
+    private bool TryDodgeShot(Entity<DodgeChanceComponent> ent, int seed)
     {
-        if (_mobState.IsIncapacitated(ent.Owner) ||
-            HasComp<BeingDisposedComponent>(ent.Owner))
-        {
+        if (_mobState.IsIncapacitated(ent.Owner) || _container.IsEntityInContainer(ent.Owner))
             return false;
-        }
 
         var chance = ent.Comp.BaseDodgeChance;
 
         // Measured against the incapacitation threshold: an entity past it is already excluded above,
         // so scaling by the death threshold would leave the lower bands unreachable.
         if (TryComp<DamageableComponent>(ent.Owner, out var damageable) &&
-            _mobThresholds.TryGetIncapPercentage(ent.Owner, _damageable.GetTotalDamage((ent.Owner, damageable)), out FixedPoint2? healthPercent))
+            _mobThresholds.TryGetIncapPercentage(
+                ent.Owner,
+                _damageable.GetTotalDamage((ent.Owner, damageable)),
+                out FixedPoint2? healthPercent))
         {
             chance += healthPercent.Value.Float() switch
             {
@@ -88,6 +104,6 @@ public sealed partial class DodgeChanceSystem : EntitySystem
             };
         }
 
-        return _random.Prob(Math.Clamp(chance, 0f, 1f));
+        return new System.Random(seed).Prob(Math.Clamp(chance, 0f, 1f));
     }
 }
