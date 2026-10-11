@@ -1,0 +1,47 @@
+{
+  "version": 1,
+ "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "sprited by n0bodies for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+        "name": "open",
+        "directions": 4
+    },
+    {
+        "name": "closed",
+        "directions": 4
+    },
+    {
+        "name": "cabinet-filled-open",
+        "directions": 4
+    },
+    {
+        "name": "cabinet-filled-closed",
+        "directions": 4
+    },
+    {
+        "name": "weapon-stand",
+        "directions": 4
+    },
+    {
+        "name": "unlocked",
+        "directions": 4
+    },
+    {
+        "name": "weapon-stand-empty-open",
+        "directions": 4
+    },
+    {
+        "name": "locked",
+        "directions": 4
+    },
+    {
+        "name": "shotgun",
+        "directions": 4
+    }
+  ]
+}

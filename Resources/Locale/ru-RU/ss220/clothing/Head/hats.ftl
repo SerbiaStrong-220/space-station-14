@@ -141,6 +141,10 @@ ent-ClothingHeadNTRCap = фуражка представителя НаноТр�
 ent-ClothingHeadNTRTophat = цилиндр представителя НаноТрейзен
     .desc = Мало кто осмелится сказать вам это в лицо, но вы в этом выглядите забавно.
 
+ent-ClothingHeadBigCapCommissar = фуражка комиссара
+    .desc = Размышления порождают ересь. Ересь порождает возмездие.
+    .suffix = За время в игре
+
 ent-ClothingHeadHatFollower = шляпа последователя
     .desc = Настало время небес.
     .suffix = За время в игре

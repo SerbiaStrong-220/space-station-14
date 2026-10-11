@@ -39,3 +39,19 @@
   - type: AutoEmote
     emotes:
     - Cough
+
+- type: trait
+  id: Uncloneable
+  name: trait-uncloneable-name
+  description: trait-uncloneable-desc
+  category: Disabilities
+  components:
+    - type: Uncloneable
+
+- type: trait
+  id: TouretteSyndrome
+  name: trait-tourette-name
+  description: trait-tourette-desc
+  category: Disabilities
+  components:
+    - type: TouretteAccent

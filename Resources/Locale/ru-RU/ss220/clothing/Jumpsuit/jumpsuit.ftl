@@ -93,6 +93,3 @@ ent-ClothingUniformJumpsuitWitness = костюм свидетеля
 ent-ClothingUniformJumpsuitElectricity = чёрный комбинезон
     .desc = Обычный чёрный комбинезон без знаков различия
     .suffix = Костюм электрофикации
-ent-ClothingUniformJumpsuitFollower = комбинезон последователя
-    .desc = Еще ближе к раю.
-    .suffix = За время в игре
