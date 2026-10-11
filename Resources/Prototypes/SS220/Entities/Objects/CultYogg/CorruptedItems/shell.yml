@@ -1,0 +1,100 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: cult shell
+  parent: BaseRestrictedLivingItem
+  id: BaseLivingItemShell
+  suffix: CultYogg
+  abstract: true
+  components:
+  - type: ContainerContainer
+    containers:
+      item-shell-content: !type:ContainerSlot {}
+  - type: ItemShell
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+  - type: Sprite
+    sprite: SS220/Objects/CultYogg/CorruptedItems/shell.rsi
+    layers:
+    - state: icon
+  - type: Tag
+    tags:
+    - YoggEquipment
+    - CultYoggStealthProvidable
+
+- type: entity
+  id: ShellSpikegun
+  parent: [BaseLivingItemShell, BaseItem]
+  components:
+  - type: ItemShell
+    itemPrototype: Spikegun
+  - type: ContainerFill
+    containers:
+      item-shell-content:
+      - Spikegun
+
+- type: entity
+  id: ShellVenomancer
+  parent: [BaseLivingItemShell, BaseItem]
+  components:
+  - type: ItemShell
+    itemPrototype: Venomancer
+  - type: ContainerFill
+    containers:
+      item-shell-content:
+      - Venomancer
+
+- type: entity
+  id: ShellSpitballer
+  parent: [BaseLivingItemShell, BaseItem]
+  components:
+  - type: ItemShell
+    itemPrototype: Spitballer
+  - type: ContainerFill
+    containers:
+      item-shell-content:
+      - Spitballer
+
+- type: entity
+  id: ShellPincer
+  parent: [BaseLivingItemShell, BaseItem]
+  components:
+  - type: ItemShell
+    itemPrototype: Pincer
+  - type: ContainerFill
+    containers:
+      item-shell-content:
+      - Pincer
+
+- type: entity
+  id: ShellScourge
+  parent: [BaseLivingItemShell, BaseItem]
+  components:
+  - type: ItemShell
+    itemPrototype: Scourge
+  - type: ContainerFill
+    containers:
+      item-shell-content:
+      - Scourge
+
+- type: entity
+  id: ShellSedativeSting
+  parent: [BaseLivingItemShell, BaseItem]
+  components:
+  - type: ItemShell
+    itemPrototype: SedativeSting
+  - type: ContainerFill
+    containers:
+      item-shell-content:
+      - SedativeSting
+
+- type: entity
+  id: ShellDagonsScale
+  parent: [BaseLivingItemShell, BaseItem]
+  components:
+  - type: ItemShell
+    itemPrototype: DagonsScale
+  - type: ContainerFill
+    containers:
+      item-shell-content:
+      - DagonsScale

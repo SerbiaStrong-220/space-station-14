@@ -992,6 +992,15 @@
 
 #! Разное
 
+  # Центком
+- type: loadoutGroup
+  id: SurvivalCentcom
+  name: loadout-group-centcomm-extended
+  minLimit: 1
+  hidden: false
+  loadouts:
+  - EmergencyCentcom
+
   # Перчатки
 - type: loadoutGroup
   id: Gloves
