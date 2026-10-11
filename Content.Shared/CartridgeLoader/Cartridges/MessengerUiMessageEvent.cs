@@ -9,12 +9,23 @@ public sealed class MessengerSendMessageUiEvent : CartridgeMessageEvent
 {
     public readonly uint ChatId;
     public readonly string MessageText;
+    public readonly uint? ReplyToId;
 
-    public MessengerSendMessageUiEvent(uint chatId, string messageText)
+    public MessengerSendMessageUiEvent(uint chatId, string messageText, uint? replyToId = null)
     {
         ChatId = chatId;
         MessageText = messageText;
+        ReplyToId = replyToId;
     }
+}
+
+/// <summary>
+/// The user opened a chat, so everything in it is read.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class MessengerMarkReadUiEvent(uint chatId) : CartridgeMessageEvent
+{
+    public readonly uint ChatId = chatId;
 }
 
 [Serializable, NetSerializable]

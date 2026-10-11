@@ -20,6 +20,13 @@
         machine_board: !type:Container
         machine_parts: !type:Container
     - type: StationLimitedNetwork
+    #SS220-messenger-ai begin
+    - type: StationAiWhitelist
+    - type: UserInterface
+      interfaces:
+        enum.MessengerAiUiKey.Key:
+          type: MessengerAiBoundUserInterface
+    #SS220-messenger-ai end
     - type: ApcPowerReceiver
       powerLoad: 200
     - type: ExtensionCableReceiver

@@ -24,7 +24,7 @@ public sealed class MessengerChatUiState
     public HashSet<uint> Messages;
     public uint? LastMessage;
     public int SortNumber;
-    public bool NewMessages;
+    public int Unread;
     public bool ForceUpdate;
 
     public MessengerChatUiState(uint id, string? name, MessengerChatKind kind, HashSet<uint> members,
@@ -37,7 +37,6 @@ public sealed class MessengerChatUiState
         Messages = messages;
         LastMessage = lastMessage;
         SortNumber = sortNumber;
-        NewMessages = true;
     }
 }
 

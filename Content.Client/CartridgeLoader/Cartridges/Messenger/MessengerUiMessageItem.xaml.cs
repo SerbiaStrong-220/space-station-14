@@ -10,35 +10,57 @@ namespace Content.Client.CartridgeLoader.Cartridges.Messenger;
 [GenerateTypedNameReferences]
 public sealed partial class MessengerUiMessageItem : BoxContainer
 {
-    private readonly StyleBoxFlat _styleBoxRight = new()
-    {
-        BackgroundColor = Color.FromHex("#03adfc20"),
-    };
+    private const int QuoteMaxLength = 60;
 
-    private readonly StyleBoxFlat _styleBoxLeft = new()
-    {
-        BackgroundColor = Color.FromHex("#59595920"),
-    };
+    private static readonly Color OwnColor = Color.FromHex("#2b6f9c66");
+    private static readonly Color OtherColor = Color.FromHex("#5a5a6a66");
 
-    public MessengerUiMessageItem(string message, TimeSpan timeSpan, Label.AlignMode alignMode, HAlignment hAlignment)
+    /// <param name="message">Message text, may contain emoji shortcodes.</param>
+    /// <param name="senderName">Shown above the text if not null.</param>
+    /// <param name="isOwn">Own messages are aligned to the right.</param>
+    /// <param name="accent">Overrides the bubble color.</param>
+    /// <param name="quoteSender">Author of the message this one replies to, with <paramref name="quoteText"/>.</param>
+    /// <param name="onReply">Shows the reply button if not null.</param>
+    public MessengerUiMessageItem(string message,
+        TimeSpan time,
+        string? senderName,
+        bool isOwn,
+        Color? accent = null,
+        string? quoteSender = null,
+        string? quoteText = null,
+        Action? onReply = null)
     {
         RobustXamlLoader.Load(this);
-        switch (hAlignment)
+
+        MessageContainer.PanelOverride = new StyleBoxFlat
         {
-            case HAlignment.Right:
-                MessageContainer.PanelOverride = _styleBoxRight;
-                break;
-            case HAlignment.Left:
-                MessageContainer.PanelOverride = _styleBoxLeft;
-                break;
+            BackgroundColor = accent ?? (isOwn ? OwnColor : OtherColor),
+        };
+        MessageContainer.HorizontalAlignment = isOwn ? HAlignment.Right : HAlignment.Left;
+
+        SenderLabel.Visible = senderName != null;
+        SenderLabel.Text = senderName;
+        SenderLabel.FontColorOverride = Color.FromHex("#9fc9e8");
+
+        QuotePanel.Visible = quoteText != null;
+
+        if (quoteText != null)
+        {
+            QuotePanel.PanelOverride = new StyleBoxFlat { BackgroundColor = Color.FromHex("#00000044") };
+            QuoteSenderLabel.Text = quoteSender;
+            QuoteSenderLabel.FontColorOverride = Color.FromHex("#9fc9e8");
+            QuoteLabel.SetMessage(MessengerEmoji.Format(MessengerEmoji.Preview(quoteText, QuoteMaxLength)), null, Color.LightGray);
         }
 
-        MessageContainer.HorizontalAlignment = hAlignment;
+        ReplyButton.Visible = onReply != null;
 
-        MessageLabel.SetMessage(message);
+        if (onReply != null)
+            ReplyButton.OnPressed += _ => onReply();
 
-        TimeLabel.Text = $"{timeSpan:hh\\:mm\\:ss}";
-        TimeLabel.Align = alignMode;
+        MessageLabel.SetMessage(MessengerEmoji.Format(message), tagsAllowed: null);
+
+        TimeLabel.Text = $"{time:hh\\:mm\\:ss}";
+        TimeLabel.FontColorOverride = Color.Gray;
     }
 
     public MessengerUiMessageItem()

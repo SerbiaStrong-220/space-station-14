@@ -1,5 +1,6 @@
 using Content.Server.Antag;
 using Content.Server.Cloning;
+using Content.Server.Messenger; //SS220-messenger-paradox-clone
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Medical.SuitSensors;
 using Content.Server.Objectives.Components;
@@ -23,6 +24,7 @@ public sealed class ParadoxCloneRuleSystem : GameRuleSystem<ParadoxCloneRuleComp
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly SuitSensorSystem _sensor = default!;
     [Dependency] private readonly TargetSystem _target = default!;
+    [Dependency] private readonly MessengerServerSystem _messengerServer = default!; //SS220-messenger-paradox-clone
 
     public override void Initialize()
     {
@@ -92,6 +94,8 @@ public sealed class ParadoxCloneRuleSystem : GameRuleSystem<ParadoxCloneRuleComp
             Log.Error($"Unable to make a paradox clone of entity {ToPrettyString(ent.Comp.OriginalBody)}");
             return;
         }
+
+        _messengerServer.TryLinkClone(ent.Comp.OriginalBody.Value, clone.Value); //SS220-messenger-paradox-clone
 
         var targetComp = EnsureComp<TargetOverrideComponent>(clone.Value);
         targetComp.Target = ent.Comp.OriginalMind; // set the kill target

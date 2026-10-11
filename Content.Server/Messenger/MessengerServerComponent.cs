@@ -1,7 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Messenger;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Server.Messenger;
 
@@ -9,20 +8,17 @@ namespace Content.Server.Messenger;
 /// Data of a messenger server. All logic lives in <see cref="MessengerServerSystem"/>.
 /// All ids are unique within one server.
 /// </summary>
-[RegisterComponent, AutoGenerateComponentPause]
+[RegisterComponent]
 public sealed partial class MessengerServerComponent : Component
 {
     [DataField("serverName")]
     public string Name = "";
 
     /// <summary>
-    /// How often contact names are synchronized with id cards.
+    /// Station alert levels at which the station AI is allowed to read chats of this server.
     /// </summary>
     [DataField]
-    public TimeSpan ContactUpdateInterval = TimeSpan.FromSeconds(30);
-
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
-    public TimeSpan NextContactUpdate;
+    public HashSet<string> AiReadAlertLevels = new() { "red", "gamma", "delta", "epsilon" };
 
     /// <summary>
     /// Id that will be given to the next created contact, chat or message.
@@ -33,6 +29,12 @@ public sealed partial class MessengerServerComponent : Component
     /// Authentication entity (id card) to contact id.
     /// </summary>
     public readonly Dictionary<EntityUid, uint> ClientToContact = new();
+
+    /// <summary>
+    /// Id cards that use the contact of another card (e.g. the card of a paradox clone).
+    /// Such a card does not set the name of the contact, and the contact is online if any of its cards is.
+    /// </summary>
+    public readonly HashSet<EntityUid> LinkedCards = new();
 
     public readonly Dictionary<uint, MessengerContact> Contacts = new();
 
@@ -49,4 +51,9 @@ public sealed partial class MessengerServerComponent : Component
     /// Contact id to chats available only to this contact (invited).
     /// </summary>
     public readonly Dictionary<uint, HashSet<uint>> PrivateChats = new();
+
+    /// <summary>
+    /// Contact id to (chat id to the last message the contact has read in it).
+    /// </summary>
+    public readonly Dictionary<uint, Dictionary<uint, uint>> LastReadMessages = new();
 }

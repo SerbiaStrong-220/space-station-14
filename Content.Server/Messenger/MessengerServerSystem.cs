@@ -2,12 +2,14 @@
 
 using System.Diagnostics.CodeAnalysis;
 using Content.Server.Administration.Logs;
+using Content.Server.CartridgeLoader;
 using Content.Server.CartridgeLoader.Cartridges;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Server.Power.Components;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Bed.Cryostorage;
+using Content.Shared.CartridgeLoader;
 using Content.Shared.CartridgeLoader.Cartridges;
 using Content.Shared.Database;
 using Content.Shared.DeviceNetwork;
@@ -16,8 +18,10 @@ using Content.Shared.DeviceNetwork.Events;
 using Content.Shared.GameTicking;
 using Content.Shared.Messenger;
 using Content.Shared.PDA;
+using Content.Shared.Power;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -25,15 +29,14 @@ namespace Content.Server.Messenger;
 
 public sealed partial class MessengerServerSystem : EntitySystem
 {
+    [Dependency] private CartridgeLoaderSystem _cartridgeLoader = default!;
     [Dependency] private DeviceNetworkSystem _deviceNetwork = default!;
+    [Dependency] private SharedIdCardSystem _idCard = default!;
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private AccessReaderSystem _accessSystem = default!;
     [Dependency] private SharedContainerSystem _containerSystem = default!;
     [Dependency] private SharedGameTicker _gameTicker = default!;
     [Dependency] private IAdminLogManager _adminLogger = default!;
-
-    // Every new contact creates chats with all existing ones, so registration is spread over several updates
-    private const int MaxRegistrationsPerUpdate = 8;
 
     public enum NetworkCommand
     {
@@ -56,6 +59,7 @@ public sealed partial class MessengerServerSystem : EntitySystem
         Contact,
         ContactList,
         ChatId,
+        Silent,
     }
 
     public override void Initialize()
@@ -63,85 +67,302 @@ public sealed partial class MessengerServerSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<MessengerServerComponent, DeviceNetworkPacketEvent>(OnNetworkPacket);
+        SubscribeLocalEvent<MessengerServerComponent, MapInitEvent>(OnServerMapInit);
+        SubscribeLocalEvent<MessengerServerComponent, PowerChangedEvent>(OnServerPowerChanged);
+
+        // contacts are born and move only when an id card or a cartridge appears in a pda, so we listen to that.
+        // The pda and cartridge side is subscribed by other systems already, so we listen from the id card side
+        // and receive the cartridge installation from MessengerClientCartridgeSystem.
+        SubscribeLocalEvent<IdCardComponent, EntGotInsertedIntoContainerMessage>(OnIdCardInserted);
+        SubscribeLocalEvent<IdCardComponent, EntGotRemovedFromContainerMessage>(OnIdCardRemoved);
+        SubscribeLocalEvent<MessengerClientCartridgeComponent, CartridgeRemovedEvent>(OnCartridgeRemoved);
+
+        // events that change the status of a contact
+        SubscribeLocalEvent<IdCardComponent, EntityTerminatingEvent>(OnIdCardTerminating);
+        SubscribeLocalEvent<CryostorageContainedComponent, ComponentStartup>(OnCryostorageStartup);
+        SubscribeLocalEvent<CryostorageContainedComponent, ComponentRemove>(OnCryostorageRemove);
+        SubscribeLocalEvent<MapGridComponent, EntParentChangedMessage>(OnGridParentChanged);
+
+        InitializeAi();
     }
 
-    public override void Update(float frameTime)
+    private void OnServerMapInit(Entity<MessengerServerComponent> ent, ref MapInitEvent args)
     {
-        var curTime = _gameTiming.CurTime;
-        var cardQuery = GetEntityQuery<IdCardComponent>();
+        RegisterAllCartridges(ent);
+    }
+
+    private void OnServerPowerChanged(Entity<MessengerServerComponent> ent, ref PowerChangedEvent args)
+    {
+        // the server did not see the cartridges while it was off
+        if (args.Powered)
+            RegisterAllCartridges(ent);
+        else
+            UpdateContactStatuses(ent);
+    }
+
+    private void OnIdCardInserted(Entity<IdCardComponent> ent, ref EntGotInsertedIntoContainerMessage args)
+    {
+        if (args.Container.ID == PdaComponent.PdaIdSlotId)
+            RefreshLoader(args.Container.Owner);
+    }
+
+    private void OnIdCardRemoved(Entity<IdCardComponent> ent, ref EntGotRemovedFromContainerMessage args)
+    {
+        if (args.Container.ID == PdaComponent.PdaIdSlotId)
+            RefreshLoader(args.Container.Owner);
+    }
+
+    /// <summary>
+    /// Called by the cartridge system when the cartridge is installed to a loader.
+    /// </summary>
+    public void OnCartridgeInstalled(EntityUid cartridge, EntityUid loader)
+    {
         var query = EntityQueryEnumerator<MessengerServerComponent>();
 
-        while (query.MoveNext(out var uid, out var server))
+        while (query.MoveNext(out var serverUid, out var server))
         {
-            if (server.NextContactUpdate > curTime)
-                continue;
+            var serverEnt = new Entity<MessengerServerComponent>(serverUid, server);
 
-            server.NextContactUpdate = curTime + server.ContactUpdateInterval;
-            UpdateContactNames(server, cardQuery);
-            RegisterCartridgeOwners((uid, server));
-            UpdateContactStatuses((uid, server));
+            RefreshCartridge(serverEnt, cartridge, loader);
+            UpdateContactStatuses(serverEnt);
         }
     }
 
-    private static void UpdateContactNames(MessengerServerComponent server, EntityQuery<IdCardComponent> cardQuery)
+    private void OnCartridgeRemoved(Entity<MessengerClientCartridgeComponent> ent, ref CartridgeRemovedEvent args)
     {
-        foreach (var (idCardUid, contactId) in server.ClientToContact)
+        if (!TryComp<DeviceNetworkComponent>(ent, out var deviceNet) || string.IsNullOrEmpty(deviceNet.Address))
+            return;
+
+        var query = EntityQueryEnumerator<MessengerServerComponent>();
+
+        while (query.MoveNext(out _, out var server))
         {
-            if (!cardQuery.TryGetComponent(idCardUid, out var card) || card.FullName == null)
+            ReleaseAddress(server, deviceNet.Address);
+        }
+    }
+
+    private void OnIdCardTerminating(Entity<IdCardComponent> ent, ref EntityTerminatingEvent args)
+    {
+        UpdateAllContactStatuses();
+    }
+
+    private void OnCryostorageStartup(Entity<CryostorageContainedComponent> ent, ref ComponentStartup args)
+    {
+        UpdateAllContactStatuses();
+    }
+
+    private void OnCryostorageRemove(Entity<CryostorageContainedComponent> ent, ref ComponentRemove args)
+    {
+        UpdateAllContactStatuses(ent);
+    }
+
+    /// <summary>
+    /// A grid that jumped to another map takes everyone on it out of the server range.
+    /// </summary>
+    private void OnGridParentChanged(Entity<MapGridComponent> ent, ref EntParentChangedMessage args)
+    {
+        UpdateAllContactStatuses();
+    }
+
+    private void UpdateAllContactStatuses(EntityUid? cryoIgnored = null)
+    {
+        var query = EntityQueryEnumerator<MessengerServerComponent>();
+
+        while (query.MoveNext(out var serverUid, out var server))
+        {
+            UpdateContactStatuses(new Entity<MessengerServerComponent>(serverUid, server), cryoIgnored);
+        }
+    }
+
+    /// <summary>
+    /// Rebinds the messenger cartridges of the loader, e.g. after its id card was changed.
+    /// </summary>
+    private void RefreshLoader(EntityUid loader)
+    {
+        var query = EntityQueryEnumerator<MessengerServerComponent>();
+
+        while (query.MoveNext(out var serverUid, out var server))
+        {
+            var serverEnt = new Entity<MessengerServerComponent>(serverUid, server);
+
+            foreach (var program in _cartridgeLoader.GetInstalled(loader))
+            {
+                if (HasComp<MessengerClientCartridgeComponent>(program))
+                    RefreshCartridge(serverEnt, program, loader);
+            }
+
+            if (TryComp<CartridgeLoaderComponent>(loader, out var loaderComp)
+                && loaderComp.CartridgeSlot.Item is { } slotItem
+                && HasComp<MessengerClientCartridgeComponent>(slotItem))
+                RefreshCartridge(serverEnt, slotItem, loader);
+
+            UpdateContactStatuses(serverEnt);
+        }
+    }
+
+    /// <summary>
+    /// Lets the clone of a body write from the same messenger account as the original:
+    /// the id card of the clone starts to use the contact of the original id card.
+    /// Call it when the clone already has its id card.
+    /// </summary>
+    /// <returns>True if the original is registered on some server and the clone card was linked to it.</returns>
+    public bool TryLinkClone(EntityUid original, EntityUid clone)
+    {
+        if (!_idCard.TryFindIdCard(original, out var originalCard)
+            || !_idCard.TryFindIdCard(clone, out var cloneCard))
+            return false;
+
+        var linked = false;
+        var query = EntityQueryEnumerator<MessengerServerComponent>();
+
+        while (query.MoveNext(out var serverUid, out var server))
+        {
+            if (!server.ClientToContact.TryGetValue(originalCard.Owner, out var contactId)
+                || server.ClientToContact.ContainsKey(cloneCard.Owner))
                 continue;
 
-            if (server.Contacts.TryGetValue(contactId, out var contact))
-                contact.Name = card.FullName;
+            server.ClientToContact[cloneCard.Owner] = contactId;
+            server.LinkedCards.Add(cloneCard.Owner);
+            linked = true;
+
+            DebugTools.Assert(IsConsistent(server), "Messenger server data is inconsistent after linking a clone");
+
+            if (_containerSystem.TryGetContainingContainer(cloneCard.Owner, out var container)
+                && container.ID == PdaComponent.PdaIdSlotId)
+                RefreshLoader(container.Owner);
         }
+
+        return linked;
     }
 
     /// <summary>
     /// Registers owners of all messenger cartridges that have access to the server,
     /// even if nobody has opened the cartridge. Contacts are never removed to keep the chat history.
     /// </summary>
-    private void RegisterCartridgeOwners(Entity<MessengerServerComponent> ent)
+    private void RegisterAllCartridges(Entity<MessengerServerComponent> ent)
     {
-        if (!IsPowered(ent))
+        var query = EntityQueryEnumerator<MessengerClientCartridgeComponent>();
+
+        while (query.MoveNext(out var cartridgeUid, out var cartridge))
+        {
+            if (cartridge.Loader.IsValid())
+                RefreshCartridge(ent, cartridgeUid, cartridge.Loader);
+        }
+
+        UpdateContactStatuses(ent);
+    }
+
+    /// <summary>
+    /// A contact is reachable only on the cartridge that currently holds its id card. Registers the owner of the
+    /// cartridge if it has access, binds the cartridge address to it and drops the address from the previous owner,
+    /// otherwise the previous owner would keep receiving the messages on this pda.
+    /// </summary>
+    private void RefreshCartridge(Entity<MessengerServerComponent> ent, EntityUid cartridge, EntityUid loader)
+    {
+        if (!IsPowered(ent)
+            || !TryComp<DeviceNetworkComponent>(cartridge, out var deviceNet)
+            || string.IsNullOrEmpty(deviceNet.Address))
             return;
 
-        var registered = 0;
-        var query = EntityQueryEnumerator<MessengerClientCartridgeComponent, DeviceNetworkComponent>();
+        var address = deviceNet.Address;
 
-        while (query.MoveNext(out _, out var cartridge, out var deviceNet))
+        if (!TryGetIdCard(loader, out var idCardUid, out var idCard))
         {
-            if (string.IsNullOrEmpty(deviceNet.Address)
-                || !TryGetIdCard(cartridge.Loader, out var idCardUid, out var idCard))
-                continue;
-
-            if (ent.Comp.ClientToContact.ContainsKey(idCardUid.Value) || !HasServerAccess(ent, idCardUid.Value))
-                continue;
-
-            var contactId = RegisterNewClient(ent, idCardUid.Value, idCard.FullName ?? "", deviceNet.Address);
-            SendToContact(ent, contactId, CreateInfoPayload(ent.Comp));
-
-            if (++registered >= MaxRegistrationsPerUpdate)
-                return;
+            ReleaseAddress(ent.Comp, address);
+            return;
         }
+
+        if (ent.Comp.ClientToContact.TryGetValue(idCardUid.Value, out var contactId))
+        {
+            BindAddress(ent, contactId, address);
+            return;
+        }
+
+        ReleaseAddress(ent.Comp, address);
+
+        if (!HasServerAccess(ent, idCardUid.Value))
+            return;
+
+        contactId = RegisterNewClient(ent, idCardUid.Value, idCard.FullName ?? "", address);
+        SendToContact(ent, contactId, CreateInfoPayload(ent.Comp));
+    }
+
+    private void BindAddress(Entity<MessengerServerComponent> ent, uint contactId, string address)
+    {
+        if (!ent.Comp.Contacts.TryGetValue(contactId, out var contact))
+            return;
+
+        foreach (var other in ent.Comp.Contacts.Values)
+        {
+            if (other.Id != contactId)
+                other.ActiveAddresses.Remove(address);
+        }
+
+        // a client on a new address does not know the server yet
+        if (contact.ActiveAddresses.Add(address))
+            _deviceNetwork.QueuePacket(ent, address, CreateInfoPayload(ent.Comp));
+
+        DebugTools.Assert(IsAddressUnique(ent.Comp, address), $"Address {address} belongs to several messenger contacts");
+    }
+
+    private static void ReleaseAddress(MessengerServerComponent server, string address)
+    {
+        foreach (var contact in server.Contacts.Values)
+        {
+            contact.ActiveAddresses.Remove(address);
+        }
+    }
+
+    /// <summary>
+    /// Names follow the id cards, but a card does not tell when it is renamed, so they are checked
+    /// when a client asks for the state or sends a message. Changed contacts are sent to every client.
+    /// </summary>
+    private void UpdateContactNames(Entity<MessengerServerComponent> ent)
+    {
+        List<MessengerContact>? changed = null;
+
+        foreach (var (idCardUid, contactId) in ent.Comp.ClientToContact)
+        {
+            if (ent.Comp.LinkedCards.Contains(idCardUid)
+                || !TryComp<IdCardComponent>(idCardUid, out var card)
+                || card.FullName == null
+                || !ent.Comp.Contacts.TryGetValue(contactId, out var contact)
+                || contact.Name == card.FullName)
+                continue;
+
+            contact.Name = card.FullName;
+            changed ??= new List<MessengerContact>();
+            changed.Add(contact);
+        }
+
+        if (changed != null)
+            SendContactsToAll(ent, changed);
     }
 
     /// <summary>
     /// Recalculates statuses of all contacts and sends the changed ones to every client.
     /// A contact that returned to the server range also gets the server info, so its client resyncs missed messages.
     /// </summary>
-    private void UpdateContactStatuses(Entity<MessengerServerComponent> ent)
+    /// <param name="cryoIgnored">Entity whose cryostorage mark is being removed and must not be counted.</param>
+    private void UpdateContactStatuses(Entity<MessengerServerComponent> ent, EntityUid? cryoIgnored = null)
     {
         var serverMap = Transform(ent.Owner).MapID;
         var powered = IsPowered(ent);
+        var statuses = new Dictionary<uint, MessengerContactStatus>();
         List<MessengerContact>? changed = null;
 
+        // a contact with several cards gets the best status of them (Online is the smallest value)
         foreach (var (idCardUid, contactId) in ent.Comp.ClientToContact)
         {
-            if (!ent.Comp.Contacts.TryGetValue(contactId, out var contact))
-                continue;
+            var status = GetContactStatus(idCardUid, serverMap, powered, cryoIgnored);
 
-            var status = GetContactStatus(idCardUid, serverMap, powered);
+            if (!statuses.TryGetValue(contactId, out var best) || status < best)
+                statuses[contactId] = status;
+        }
 
-            if (contact.Status == status)
+        foreach (var (contactId, status) in statuses)
+        {
+            if (!ent.Comp.Contacts.TryGetValue(contactId, out var contact) || contact.Status == status)
                 continue;
 
             contact.Status = status;
@@ -152,13 +373,16 @@ public sealed partial class MessengerServerSystem : EntitySystem
                 SendToContact(ent, contactId, CreateInfoPayload(ent.Comp));
         }
 
-        if (changed == null)
-            return;
+        if (changed != null)
+            SendContactsToAll(ent, changed);
+    }
 
+    private void SendContactsToAll(Entity<MessengerServerComponent> ent, List<MessengerContact> contacts)
+    {
         var payload = new NetworkPayload
         {
             [NetworkKey.Command.ToString()] = NetworkCommand.Contact,
-            [NetworkKey.ContactList.ToString()] = changed,
+            [NetworkKey.ContactList.ToString()] = contacts,
         };
 
         foreach (var contactId in ent.Comp.ClientToContact.Values)
@@ -167,12 +391,15 @@ public sealed partial class MessengerServerSystem : EntitySystem
         }
     }
 
-    private MessengerContactStatus GetContactStatus(EntityUid idCardUid, MapId serverMap, bool serverPowered)
+    private MessengerContactStatus GetContactStatus(EntityUid idCardUid,
+        MapId serverMap,
+        bool serverPowered,
+        EntityUid? cryoIgnored)
     {
-        if (Deleted(idCardUid))
+        if (TerminatingOrDeleted(idCardUid))
             return MessengerContactStatus.OutOfRange;
 
-        if (IsInCryostorage(idCardUid))
+        if (IsInCryostorage(idCardUid, cryoIgnored))
             return MessengerContactStatus.Cryo;
 
         // assume contact is reachable only while its id card is inside a pda on the server map
@@ -189,7 +416,7 @@ public sealed partial class MessengerServerSystem : EntitySystem
     /// <summary>
     /// A body that left for cryostorage keeps its items, so the outermost container owner is the body itself.
     /// </summary>
-    private bool IsInCryostorage(EntityUid uid)
+    private bool IsInCryostorage(EntityUid uid, EntityUid? ignored)
     {
         var current = uid;
 
@@ -198,7 +425,7 @@ public sealed partial class MessengerServerSystem : EntitySystem
             current = container.Owner;
         }
 
-        return HasComp<CryostorageContainedComponent>(current);
+        return current != ignored && HasComp<CryostorageContainedComponent>(current);
     }
 
     private bool IsPowered(EntityUid uid)
@@ -232,7 +459,57 @@ public sealed partial class MessengerServerSystem : EntitySystem
             case MessengerClientCartridgeSystem.NetworkCommand.MessageSend:
                 OnMessageSend(ent, args);
                 break;
+            case MessengerClientCartridgeSystem.NetworkCommand.MarkRead:
+                OnMarkRead(ent, args);
+                break;
         }
+    }
+
+    private void OnMarkRead(Entity<MessengerServerComponent> ent, DeviceNetworkPacketEvent args)
+    {
+        var server = ent.Comp;
+
+        if (!TryAuthByIdCard(server, args.Data, out var contactId)
+            || !args.Data.TryGetValue(MessengerClientCartridgeSystem.NetworkKey.ChatId.ToString(), out uint? chatId))
+            return;
+
+        if (!server.Chats.TryGetValue(chatId.Value, out var chat)
+            || chat.LastMessageId == null
+            || !CanAccessChat(server, contactId, chat.Id))
+            return;
+
+        if (!server.LastReadMessages.TryGetValue(contactId, out var readMessages))
+        {
+            readMessages = new Dictionary<uint, uint>();
+            server.LastReadMessages[contactId] = readMessages;
+        }
+
+        readMessages[chat.Id] = chat.LastMessageId.Value;
+    }
+
+    /// <summary>
+    /// Counts messages of other members that the contact has not read yet.
+    /// </summary>
+    private static int CountUnread(MessengerServerComponent server, uint contactId, MessengerChat chat)
+    {
+        uint? lastRead = null;
+
+        if (server.LastReadMessages.TryGetValue(contactId, out var readMessages)
+            && readMessages.TryGetValue(chat.Id, out var readId))
+            lastRead = readId;
+
+        var unread = 0;
+
+        foreach (var messageId in chat.MessagesId)
+        {
+            if (lastRead != null && messageId <= lastRead)
+                continue;
+
+            if (server.Messages.TryGetValue(messageId, out var message) && message.FromContactId != contactId)
+                unread++;
+        }
+
+        return unread;
     }
 
     private void OnCheckServer(Entity<MessengerServerComponent> ent, DeviceNetworkPacketEvent args)
@@ -250,6 +527,8 @@ public sealed partial class MessengerServerSystem : EntitySystem
     {
         if (!TryAuthByIdCard(ent.Comp, args.Data, out var contactId))
             return;
+
+        UpdateContactNames(ent);
 
         var chats = GetAccessedChats(ent.Comp, contactId);
 
@@ -350,6 +629,8 @@ public sealed partial class MessengerServerSystem : EntitySystem
         if (!TryAuthByIdCard(server, args.Data, out var senderId))
             return;
 
+        UpdateContactNames(ent);
+
         if (!args.Data.TryGetValue(MessengerClientCartridgeSystem.NetworkKey.ChatId.ToString(), out uint? chatId))
             return;
 
@@ -364,17 +645,28 @@ public sealed partial class MessengerServerSystem : EntitySystem
             return;
         }
 
+        // a reply must point to a message of the same chat
+        uint? replyToId = null;
+
+        if (args.Data.TryGetValue(MessengerClientCartridgeSystem.NetworkKey.ReplyToId.ToString(), out uint? requestedReplyId)
+            && server.Messages.TryGetValue(requestedReplyId.Value, out var replyTarget)
+            && replyTarget.ChatId == chat.Id)
+            replyToId = replyTarget.Id;
+
         // ss220 messenger time fix start
         var message = new MessengerMessage(chat.Id, senderId,
             _gameTiming.CurTime - _gameTicker.RoundStartTimeSpan, messageText)
         {
             Id = server.NextId++,
+            ReplyToId = replyToId,
         };
         // ss220 messenger time fix end
         server.Messages[message.Id] = message;
 
         chat.LastMessageId = message.Id;
         chat.MessagesId.Add(message.Id);
+
+        DebugTools.Assert(IsConsistent(server), "Messenger server data is inconsistent after sending a message");
 
         var payload = new NetworkPayload
         {
@@ -383,9 +675,18 @@ public sealed partial class MessengerServerSystem : EntitySystem
             [NetworkKey.Message.ToString()] = message,
         };
 
+        // the sender gets the message back to sync its ui, but without the ringtone
+        var senderPayload = new NetworkPayload
+        {
+            [NetworkKey.Command.ToString()] = NetworkCommand.NewMessage,
+            [NetworkKey.ChatId.ToString()] = chat.Id,
+            [NetworkKey.Message.ToString()] = message,
+            [NetworkKey.Silent.ToString()] = true,
+        };
+
         foreach (var memberId in chat.MembersId)
         {
-            SendToContact(ent, memberId, payload);
+            SendToContact(ent, memberId, memberId == senderId ? senderPayload : payload);
         }
 
         _adminLogger.Add(LogType.MessengerServer, LogImpact.Low,
@@ -528,6 +829,66 @@ public sealed partial class MessengerServerSystem : EntitySystem
         return TryComp<AccessReaderComponent>(ent, out var reader) && _accessSystem.IsAllowed(idCardUid, ent, reader);
     }
 
+    /// <summary>
+    /// Invariants of the server data that the whole system relies on. Used only in asserts.
+    /// </summary>
+    private static bool IsConsistent(MessengerServerComponent server)
+    {
+        foreach (var contactId in server.ClientToContact.Values)
+        {
+            if (!server.Contacts.ContainsKey(contactId))
+                return false;
+        }
+
+        foreach (var cardUid in server.LinkedCards)
+        {
+            if (!server.ClientToContact.ContainsKey(cardUid))
+                return false;
+        }
+
+        foreach (var chat in server.Chats.Values)
+        {
+            foreach (var memberId in chat.MembersId)
+            {
+                if (!server.Contacts.ContainsKey(memberId))
+                    return false;
+            }
+
+            foreach (var messageId in chat.MessagesId)
+            {
+                if (!server.Messages.TryGetValue(messageId, out var message) || message.ChatId != chat.Id)
+                    return false;
+            }
+
+            if (chat.LastMessageId != null && !chat.MessagesId.Contains(chat.LastMessageId.Value))
+                return false;
+        }
+
+        foreach (var privateChats in server.PrivateChats.Values)
+        {
+            foreach (var chatId in privateChats)
+            {
+                if (!server.Chats.ContainsKey(chatId))
+                    return false;
+            }
+        }
+
+        return true;
+    }
+
+    private static bool IsAddressUnique(MessengerServerComponent server, string address)
+    {
+        var owners = 0;
+
+        foreach (var contact in server.Contacts.Values)
+        {
+            if (contact.ActiveAddresses.Contains(address))
+                owners++;
+        }
+
+        return owners <= 1;
+    }
+
     private void SendResponse(Entity<MessengerServerComponent> ent, DeviceNetworkPacketEvent args, NetworkPayload payload)
     {
         _deviceNetwork.QueuePacket(ent, args.SenderAddress, payload);
@@ -602,6 +963,8 @@ public sealed partial class MessengerServerSystem : EntitySystem
             });
         }
 
+        DebugTools.Assert(IsConsistent(server), "Messenger server data is inconsistent after registering a client");
+
         return newContact.Id;
     }
 
@@ -624,6 +987,8 @@ public sealed partial class MessengerServerSystem : EntitySystem
         if (!ent.Comp.ClientToContact.TryGetValue(idCardUid.Value, out var contactId))
             return false;
 
+        UpdateContactNames(ent);
+
         if (!ent.Comp.Contacts.TryGetValue(contactId, out var clientContact))
             return false;
 
@@ -642,7 +1007,10 @@ public sealed partial class MessengerServerSystem : EntitySystem
                 chat.MembersId,
                 chat.MessagesId,
                 chat.LastMessageId,
-                index);
+                index)
+            {
+                Unread = CountUnread(ent.Comp, contactId, chat),
+            };
 
             index++;
 

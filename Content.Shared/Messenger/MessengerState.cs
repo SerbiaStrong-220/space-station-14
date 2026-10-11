@@ -75,6 +75,11 @@ public sealed class MessengerMessage
     public TimeSpan Time;
     public string Text;
 
+    /// <summary>
+    /// Message of the same chat this one answers.
+    /// </summary>
+    public uint? ReplyToId;
+
     public MessengerMessage(uint chatId, uint fromContactId, TimeSpan time, string text)
     {
         ChatId = chatId;

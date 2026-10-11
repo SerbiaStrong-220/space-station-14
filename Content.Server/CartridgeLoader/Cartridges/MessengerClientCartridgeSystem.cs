@@ -12,6 +12,7 @@ using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Events;
 using Content.Shared.Messenger;
 using Content.Shared.PDA.Ringer;
+using Robust.Shared.Utility;
 
 namespace Content.Server.CartridgeLoader.Cartridges;
 
@@ -25,7 +26,29 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
 
     [Dependency] private EntityQuery<MessengerServerComponent> _serverQuery = default!;
 
+    private const int MaxMessageLength = 500;
+
     private readonly LocId _serverNotFound = "messenger-error-server-not-found";
+
+    public enum NetworkCommand
+    {
+        CheckServer,
+        StateUpdate,
+        MessageSend,
+        MarkRead,
+    }
+
+    public enum NetworkKey
+    {
+        Command,
+        DeviceUid,
+        ChatId,
+        MessageText,
+        ReplyToId,
+        CurrentChatIds,
+        ContactsIds,
+        MessagesIds,
+    }
 
     public override void Initialize()
     {
@@ -77,6 +100,7 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
     private void OnInstall(Entity<MessengerClientCartridgeComponent> ent, ref CartridgeAddedEvent args)
     {
         ent.Comp.Loader = args.Loader;
+        _messengerServer.OnCartridgeInstalled(ent, args.Loader);
     }
 
     private void OnUiReady(Entity<MessengerClientCartridgeComponent> ent, ref CartridgeUiReadyEvent args)
@@ -98,7 +122,23 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
             case MessengerSendMessageUiEvent e:
                 OnSendMessage(ent, e);
                 break;
+            case MessengerMarkReadUiEvent e:
+                OnMarkRead(ent, e);
+                break;
         }
+    }
+
+    private void OnMarkRead(Entity<MessengerClientCartridgeComponent> ent, MessengerMarkReadUiEvent e)
+    {
+        if (!TryGetServerAddress(ent.Comp, out var serverAddress))
+            return;
+
+        _deviceNetwork.QueuePacket(ent.Owner, serverAddress, new NetworkPayload
+        {
+            [NetworkKey.Command.ToString()] = NetworkCommand.MarkRead,
+            [NetworkKey.DeviceUid.ToString()] = e.LoaderUid,
+            [NetworkKey.ChatId.ToString()] = e.ChatId,
+        });
     }
 
     /// <summary>
@@ -139,15 +179,21 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
         if (string.IsNullOrEmpty(e.MessageText) || !TryGetServerAddress(ent.Comp, out var serverAddress))
             return;
 
-        var message = _chat.ReplaceWords(e.MessageText);
+        var text = e.MessageText.Length > MaxMessageLength ? e.MessageText[..MaxMessageLength] : e.MessageText;
+        var message = _chat.ReplaceWords(text);
 
-        _deviceNetwork.QueuePacket(ent.Owner, serverAddress, new NetworkPayload
+        var payload = new NetworkPayload
         {
             [NetworkKey.Command.ToString()] = NetworkCommand.MessageSend,
             [NetworkKey.DeviceUid.ToString()] = e.LoaderUid,
             [NetworkKey.ChatId.ToString()] = e.ChatId,
             [NetworkKey.MessageText.ToString()] = message,
-        });
+        };
+
+        if (e.ReplyToId != null)
+            payload[NetworkKey.ReplyToId.ToString()] = e.ReplyToId.Value;
+
+        _deviceNetwork.QueuePacket(ent.Owner, serverAddress, payload);
 
         _adminLogger.Add(LogType.MessengerClientCartridge,
             LogImpact.Low,
@@ -238,7 +284,9 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
             || !data.TryGetValue(MessengerServerSystem.NetworkKey.ChatId.ToString(), out uint? chatId))
             return;
 
-        RaiseLocalEvent(ent.Comp.Loader, new RingerPlayRingtoneMessage());
+        if (!data.ContainsKey(MessengerServerSystem.NetworkKey.Silent.ToString()))
+            RaiseLocalEvent(ent.Comp.Loader, new RingerPlayRingtoneMessage());
+
         ent.Comp.PendingStates.Enqueue(new MessengerNewChatMessageUiState(chatId.Value, message));
     }
 
@@ -287,22 +335,4 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
 
         return cartridge.ActiveServer is { } server && cartridge.ServerAddresses.TryGetValue(server, out address);
     }
-}
-
-public enum NetworkCommand
-{
-    CheckServer,
-    StateUpdate,
-    MessageSend,
-}
-
-public enum NetworkKey
-{
-    Command,
-    DeviceUid,
-    ChatId,
-    MessageText,
-    CurrentChatIds,
-    ContactsIds,
-    MessagesIds,
 }

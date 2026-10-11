@@ -21,6 +21,7 @@ public sealed partial class MessengerUi : UIFragment
     private int _currentView;
 
     private MessengerUiFragment? _fragment;
+    private BoundUserInterface? _userInterface;
 
     public override Control GetUIFragmentRoot()
     {
@@ -29,6 +30,7 @@ public sealed partial class MessengerUi : UIFragment
 
     public override void Setup(BoundUserInterface userInterface, EntityUid? fragmentOwner)
     {
+        _userInterface = userInterface;
         _currentView = ChatsList;
         _fragment = new MessengerUiFragment();
         _fragment.ChatsSearch.OnTextChanged += args =>
@@ -42,43 +44,35 @@ public sealed partial class MessengerUi : UIFragment
             _fragment.CurrentChat = chatId;
             _currentView = ChatHistory;
             _fragment.SearchString = null;
+            _fragment.ChatsSearch.Clear();
 
+            MarkChatRead(chatId);
             UpdateUiState();
             ValidateState(userInterface);
         };
 
-        _fragment.OnMessageSendButtonPressed += (chatId, text) =>
+        _fragment.OnMessageSendButtonPressed += (chatId, text, replyToId) =>
         {
-            var message = new MessengerSendMessageUiEvent(chatId, text);
-            var ms = new CartridgeUiMessage(message);
-            userInterface.SendMessage(ms);
+            userInterface.SendMessage(new CartridgeUiMessage(new MessengerSendMessageUiEvent(chatId, text, replyToId)));
         };
 
-        _fragment.OnBackButtonPressed += _ =>
+        _fragment.OnBackButtonPressed += () =>
         {
             _fragment.SearchString = null;
+            _fragment.ChatsSearch.Clear();
+            _currentView = ChatsList;
 
-            if (_currentView != ChatsList)
-            {
-                _currentView--;
-            }
+            UpdateUiState();
+        };
 
-            switch (_currentView)
-            {
-                case ChatsList:
-                {
-                    if (_messengerUiState != null)
-                        _fragment?.UpdateChatsState(_messengerUiState);
-                    break;
-                }
-            }
+        _fragment.OnRefreshPressed += () =>
+        {
+            userInterface.SendMessage(new CartridgeUiMessage(new MessengerUpdateStateUiEvent(true)));
         };
 
         if (_messengerUiState == null)
         {
-            var message = new MessengerUpdateStateUiEvent(true);
-            var ms = new CartridgeUiMessage(message);
-            userInterface.SendMessage(ms);
+            userInterface.SendMessage(new CartridgeUiMessage(new MessengerUpdateStateUiEvent(true)));
             return;
         }
 
@@ -136,16 +130,7 @@ public sealed partial class MessengerUi : UIFragment
             }
             case MessengerNewChatMessageUiState st:
             {
-                if (_messengerUiState == null)
-                    break;
-
-                _messengerUiState.Messages.TryAdd(st.Message.Id, st.Message);
-
-                var chat = GetOrCreateChat(st.ChatId);
-
-                chat.Messages.Add(st.Message.Id);
-                chat.LastMessage = st.Message.Id;
-
+                OnNewMessage(st);
                 break;
             }
             case MessengerChatUpdateUiState st:
@@ -161,7 +146,6 @@ public sealed partial class MessengerUi : UIFragment
                         chatUi.Members.UnionWith(messengerChat.MembersId);
                         chatUi.LastMessage = messengerChat.LastMessageId ?? chatUi.LastMessage;
                         chatUi.Messages.UnionWith(messengerChat.MessagesId);
-                        chatUi.NewMessages = true;
                         continue;
                     }
 
@@ -181,6 +165,37 @@ public sealed partial class MessengerUi : UIFragment
         }
 
         UpdateUiState();
+    }
+
+    private void OnNewMessage(MessengerNewChatMessageUiState state)
+    {
+        if (_messengerUiState == null)
+            return;
+
+        _messengerUiState.Messages.TryAdd(state.Message.Id, state.Message);
+
+        var chat = GetOrCreateChat(state.ChatId);
+        var isNew = chat.Messages.Add(state.Message.Id);
+
+        chat.LastMessage = state.Message.Id;
+
+        if (!isNew || state.Message.FromContactId == _messengerUiState.ClientContact.Id)
+            return;
+
+        // the chat is on the screen, so the message is read at once
+        if (_currentView == ChatHistory && _fragment?.CurrentChat == state.ChatId)
+            MarkChatRead(state.ChatId);
+        else
+            chat.Unread++;
+    }
+
+    private void MarkChatRead(uint chatId)
+    {
+        if (_messengerUiState == null || !_messengerUiState.Chats.TryGetValue(chatId, out var chat))
+            return;
+
+        chat.Unread = 0;
+        _userInterface?.SendMessage(new CartridgeUiMessage(new MessengerMarkReadUiEvent(chatId)));
     }
 
     private MessengerChatUiState GetOrCreateChat(uint chatId)
