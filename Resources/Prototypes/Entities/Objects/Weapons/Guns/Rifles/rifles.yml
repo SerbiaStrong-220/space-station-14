@@ -25,9 +25,9 @@
   - type: Gun
     fireRate: 5
     #SS220 felinid-recoil start
-    felinidRecoil: 0.45
-    felinidRecoilKnockdownChance: 0.06
-    felinidRecoilKnockdownTime: 0.9
+    groundRecoil: 0.45
+    groundRecoilKnockdownChance: 0.06
+    groundRecoilKnockdownTime: 0.9
     #SS220 felinid-recoil end
     selectedMode: FullAuto
     availableModes:
@@ -84,8 +84,8 @@
   #SS220 increase-automatic-rifles-spread end
   - type: Gun
     #SS220 felinid-recoil start
-    felinidRecoil: 0.55
-    felinidRecoilKnockdownChance: 0.08
+    groundRecoil: 0.55
+    groundRecoilKnockdownChance: 0.08
     #SS220 felinid-recoil end
    #ss220 gunmodes start
     availableModes:

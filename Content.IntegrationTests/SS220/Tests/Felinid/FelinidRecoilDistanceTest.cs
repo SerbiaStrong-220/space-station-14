@@ -8,9 +8,8 @@ using Robust.Shared.GameObjects;
 namespace Content.IntegrationTests.SS220.Tests.Felinid;
 
 /// <summary>
-/// Fires real weapons from a felinid standing on a gravity grid and measures how far recoil pushes them.
-/// The felinid shoots along the grid's +X axis, so recoil must push them along -X by the weapon's
-/// <c>felinidRecoil</c> tiles. Positions are grid-local because the test grid is not axis-aligned.
+/// Fires real weapons along +X on a gravity grid and measures the recoil push along -X in <c>groundRecoil</c> tiles.
+/// Positions are grid-local because the test grid is not axis-aligned.
 /// </summary>
 public sealed class FelinidRecoilDistanceTest : InteractionTest
 {

@@ -1,7 +1,14 @@
+using Content.Shared.Inventory;
+
 namespace Content.Shared.SS220.Felinid;
 
 /// <summary>
-/// Raised after an eligible felinid receives weapon recoil.
+/// Raised on a shooter thrown by ground recoil, and relayed to their clothing, to scale the knockdown chance.
 /// </summary>
 [ByRefEvent]
-public readonly record struct GunRecoilImpulseEvent(float KnockdownChance, TimeSpan KnockdownTime);
+public record struct GetGroundRecoilKnockdownModifierEvent() : IInventoryRelayEvent
+{
+    public float Multiplier = 1f;
+
+    SlotFlags IInventoryRelayEvent.TargetSlots => ~SlotFlags.POCKET;
+}

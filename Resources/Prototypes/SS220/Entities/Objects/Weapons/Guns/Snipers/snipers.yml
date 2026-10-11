@@ -22,9 +22,9 @@
     minAngle: 50
     maxAngle: 70
     #SS220 felinid-recoil start
-    felinidRecoil: 0.7
-    felinidRecoilKnockdownChance: 0.10
-    felinidRecoilKnockdownTime: 1.1
+    groundRecoil: 0.7
+    groundRecoilKnockdownChance: 0.10
+    groundRecoilKnockdownTime: 1.1
     #SS220 felinid-recoil end
     selectedMode: SemiAuto
     availableModes:
@@ -112,9 +112,9 @@
   - type: Gun
     fireRate: 5 # it could as well be 1000, this is a single-shot anyway
     #SS220 felinid-recoil start
-    felinidRecoil: 0.9
-    felinidRecoilKnockdownChance: 0.20
-    felinidRecoilKnockdownTime: 1.5
+    groundRecoil: 0.9
+    groundRecoilKnockdownChance: 0.20
+    groundRecoilKnockdownTime: 1.5
     #SS220 felinid-recoil end
     selectedMode: SemiAuto
     availableModes:

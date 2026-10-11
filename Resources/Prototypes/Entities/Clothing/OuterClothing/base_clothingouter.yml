@@ -183,6 +183,10 @@
           - Radio
   #ss220 handheld radio on outer clothing end
   - type: GroupExamine
+  #SS220 felinid-recoil start
+  - type: GroundRecoilKnockdownModifier
+    multiplier: 0.4
+  #SS220 felinid-recoil end
   - type: Tag
     tags:
     - Hardsuit

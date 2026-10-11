@@ -21,9 +21,9 @@
   - type: Gun
     fireRate: 20
     #SS220 felinid-recoil start
-    felinidRecoil: 0.9
-    felinidRecoilKnockdownChance: 0.12
-    felinidRecoilKnockdownTime: 1.25
+    groundRecoil: 0.9
+    groundRecoilKnockdownChance: 0.12
+    groundRecoilKnockdownTime: 1.25
     #SS220 felinid-recoil end
     selectedMode: FullAuto
     availableModes:
@@ -52,8 +52,8 @@
   - type: Gun
     fireRate: 15
     #SS220 felinid-recoil start
-    felinidRecoil: 1.1
-    felinidRecoilKnockdownChance: 0.15
+    groundRecoil: 1.1
+    groundRecoilKnockdownChance: 0.15
     #SS220 felinid-recoil end
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/minigun.ogg

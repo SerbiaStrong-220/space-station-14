@@ -33,9 +33,9 @@
     selectedMode: SemiAuto
     fireRate: 1.5
     #SS220 felinid-recoil start
-    felinidRecoil: 0.3
-    felinidRecoilKnockdownChance: 0.04
-    felinidRecoilKnockdownTime: 0.75
+    groundRecoil: 0.3
+    groundRecoilKnockdownChance: 0.04
+    groundRecoilKnockdownTime: 0.75
     #SS220 felinid-recoil end
     availableModes:
     - SemiAuto

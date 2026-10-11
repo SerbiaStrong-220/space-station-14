@@ -22,6 +22,10 @@
     mustEquip: false
   - type: ComponentToggler
     components:
+    #SS220 felinid-recoil start
+    - type: GroundRecoilKnockdownModifier
+      multiplier: 0.6
+    #SS220 felinid-recoil end
     - type: NoSlip
   - type: ItemTogglePrefix
     prefixOn: on

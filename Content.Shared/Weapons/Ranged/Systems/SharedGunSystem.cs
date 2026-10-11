@@ -440,7 +440,7 @@ public abstract partial class SharedGunSystem : EntitySystem
             return true;
 
         // SS220-felinid-recoil-begin
-        var shooterEv = new ShooterImpulseEvent { From = fromCoordinates, To = toCoordinates.Value };
+        var shooterEv = new ShooterImpulseEvent { From = fromCoordinates, To = toCoordinates.Value, Gun = gun };
         // SS220-felinid-recoil-end
         RaiseLocalEvent(user, ref shooterEv);
 
@@ -735,6 +735,7 @@ public record struct ShooterImpulseEvent()
     // SS220-felinid-recoil-begin
     public EntityCoordinates From;
     public EntityCoordinates To;
+    public Entity<GunComponent> Gun;
     // SS220-felinid-recoil-end
 };
 

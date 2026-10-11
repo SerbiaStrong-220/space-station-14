@@ -114,6 +114,10 @@
     sprite: Clothing/Shoes/Specific/galoshes.rsi
   - type: Clothing
     sprite: Clothing/Shoes/Specific/galoshes.rsi
+  #SS220 felinid-recoil start
+  - type: GroundRecoilKnockdownModifier
+    multiplier: 0.6
+  #SS220 felinid-recoil end
   - type: NoSlip
   - type: ClothingSpeedModifier # Corvax-MRP
     walkModifier: 0.8
@@ -134,6 +138,10 @@
     sprite: SS220/Clothing/Shoes/Specific/spaceninja.rsi # SS220 Ninja Resprite
   - type: Clothing
     sprite: SS220/Clothing/Shoes/Specific/spaceninja.rsi # SS220 Ninja Resprite
+  #SS220 felinid-recoil start
+  - type: GroundRecoilKnockdownModifier
+    multiplier: 0.6
+  #SS220 felinid-recoil end
   - type: NoSlip
   - type: Magboots # always have gravity because le suction cups
   - type: ClothingSpeedModifier
@@ -230,6 +238,10 @@
   suffix: No-slip, Chameleon
   description: Stylish black shoes.
   components:
+  #SS220 felinid-recoil start
+  - type: GroundRecoilKnockdownModifier
+    multiplier: 0.6
+  #SS220 felinid-recoil end
   - type: NoSlip
 # SS220-hidden-desc-begin
   - type: HiddenDescription

@@ -58,22 +58,23 @@ public sealed partial class GunComponent : Component
 
     // SS220-felinid-recoil-begin
     /// <summary>
-    /// How long the shooter stays knocked down when <see cref="FelinidRecoilKnockdownChance"/> rolls successfully.
+    /// How long the shooter stays knocked down when <see cref="GroundRecoilKnockdownChance"/> rolls successfully.
     /// </summary>
     [DataField]
-    public TimeSpan FelinidRecoilKnockdownTime = TimeSpan.FromSeconds(1);
+    public TimeSpan GroundRecoilKnockdownTime = TimeSpan.FromSeconds(1);
 
     /// <summary>
-    /// How many tiles a felinid firing this weapon on the ground is pushed back, away from the shot.
+    /// How many tiles a shooter with <c>GunRecoilModifierComponent</c> firing this weapon on the ground
+    /// is pushed back, away from the shot.
     /// </summary>
     [DataField]
-    public float FelinidRecoil = 0f;
+    public float GroundRecoil = 0f;
 
     /// <summary>
-    /// Chance for the recoil to knock a felinid down.
+    /// Chance for the ground recoil to knock the shooter down.
     /// </summary>
     [DataField]
-    public float FelinidRecoilKnockdownChance = 0f;
+    public float GroundRecoilKnockdownChance = 0f;
     // SS220-felinid-recoil-end
 
     /// <summary>

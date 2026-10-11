@@ -33,9 +33,9 @@
     angleDecay: 16
     fireRate: 8
     #SS220 felinid-recoil start
-    felinidRecoil: 0.75
-    felinidRecoilKnockdownChance: 0.10
-    felinidRecoilKnockdownTime: 1.1
+    groundRecoil: 0.75
+    groundRecoilKnockdownChance: 0.10
+    groundRecoilKnockdownTime: 1.1
     #SS220 felinid-recoil end
     selectedMode: FullAuto
     availableModes:

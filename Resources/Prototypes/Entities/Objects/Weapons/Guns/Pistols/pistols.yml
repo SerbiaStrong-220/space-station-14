@@ -35,9 +35,9 @@
     canSuicide: true ##SS220-new-feature kus
     fireRate: 6
     #SS220 felinid-recoil start
-    felinidRecoil: 0.25
-    felinidRecoilKnockdownChance: 0.03
-    felinidRecoilKnockdownTime: 0.7
+    groundRecoil: 0.25
+    groundRecoilKnockdownChance: 0.03
+    groundRecoilKnockdownTime: 0.7
     #SS220 felinid-recoil end
     selectedMode: SemiAuto
     availableModes:
