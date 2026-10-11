@@ -9,7 +9,6 @@ namespace Content.Shared.SS220.Wieldable;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class StrongMinerComponent : Component
 {
-
     [DataField]
     public HashSet<ProtoId<SpeciesPrototype>> Species = [];
 }

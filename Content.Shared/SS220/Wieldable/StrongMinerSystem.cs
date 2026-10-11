@@ -11,7 +11,6 @@ public sealed partial class StrongMinerSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-
         SubscribeLocalEvent<StrongMinerComponent, GetMeleeDamageEvent>(OnGetMeleeDamage);
     }
 
