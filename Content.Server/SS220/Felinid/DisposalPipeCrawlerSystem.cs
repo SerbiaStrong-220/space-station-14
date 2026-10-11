@@ -117,6 +117,7 @@ public sealed partial class DisposalPipeCrawlerSystem : SharedDisposalPipeCrawle
                 continue;
 
             pipecrawl.CurrentTube = nextTube;
+            Dirty(uid, pipecrawl);
             pipecrawl.PreviousDirection = pipecrawl.TravelDirection;
             ResetTravel(pipecrawl);
         }
@@ -414,6 +415,7 @@ public sealed partial class DisposalPipeCrawlerSystem : SharedDisposalPipeCrawle
         // Leaving the unit's container re-enables collision, so disable it again.
         SetPipecrawlPhysics(ent.Owner, true);
         ent.Comp.CurrentTube = entry;
+        Dirty(ent);
         _transform.SetWorldPosition(ent.Owner, _transform.GetWorldPosition(entry));
         FillPipecrawlAir(disposal.Owner, ent);
         return true;

@@ -51,8 +51,13 @@ public sealed partial class DisposalPipeCrawlerComponent : Component
     [DataField]
     public GasMixture Air { get; set; } = new(70f);
 
-    // Transit data is authoritative on the server; clients only need <see cref="InsidePipe"/> for visuals.
+    /// <summary>
+    /// Tube the crawler is in. Networked so the client's interaction and attack checks match the server.
+    /// </summary>
+    [DataField, AutoNetworkedField]
     public EntityUid? CurrentTube;
+
+    // Travel progress is server-only: pipe movement is not predicted.
     public EntityUid? NextTube;
     public Direction PreviousDirection = Direction.Invalid;
     public Direction TravelDirection = Direction.Invalid;
