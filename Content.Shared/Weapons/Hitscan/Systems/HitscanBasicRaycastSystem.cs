@@ -43,7 +43,6 @@ public sealed partial class HitscanBasicRaycastSystem : EntitySystem // SS220 se
         var gun = args.Gun; //SS220 weapon overhaul 
         var mapCords = _transform.ToMapCoordinates(args.FromCoordinates);
         var ray = new CollisionRay(mapCords.Position, args.ShotDirection, (int) ent.Comp.CollisionMask);
-        var gun = args.Gun;//SS220 weapon overhaul
         var rayCastResults = _physics.IntersectRay(mapCords.MapId, ray, ent.Comp.MaxDistance, shooter, false);
 
         var target = args.Target;

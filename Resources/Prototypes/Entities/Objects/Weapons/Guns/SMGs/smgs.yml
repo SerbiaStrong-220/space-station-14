@@ -91,7 +91,8 @@
   - type: Appearance
 
 - type: entity
-  name: C-20r assault rifle #SS220 weapon overhaul begin
+  #SS220 weapon overhaul begin
+  name: C-20r assault rifle
   parent: [BaseWeaponRifle]
   id: WeaponSubMachineGunC20r
   description: A classic and widespread bullpup-configured assault rifle, infamous for its use by the Gorlex Marauders. One of the first homegrown Waffle Corp. designs, it remains in service today. Feeds from .20 rifle magazines. #SS220 weapon overhaul begin
@@ -228,19 +229,20 @@
       unwieldOnUse: false
     - type: GunWieldBonus
       #SS220 weapon overhaul begin
-      minAngle: -4
-      maxAngle: -14
+      minAngle: -2
+      maxAngle: -6.3
+      angleIncrease: -0.30
+      angleDecay: 2.5
     - type: GunAimable
-      minAngle: -7
-      maxAngle: -8
-      #SS220 weapon overhaul end
+      minAngle: -6
+      maxAngle: -2.5
     - type: Gun
-      angleIncrease: 0.85
-      #220 SG Angle Updates begin
-      minAngle: 12
-      maxAngle: 29
+      angleDecay: 2
+      angleIncrease: 0.95
+      minAngle: 9
+      maxAngle: 14
       fireRate: 6.5
-      #220 SG Angle Updates end
+    #SS220 weapon overhaul end
       soundGunshot:
         path: /Audio/SS220/Weapons/Guns/Gunshots/drozd_shot.ogg #SS220 drozd update
       selectedMode: Burst
@@ -306,29 +308,24 @@
   - type: Wieldable
     unwieldOnUse: false
   - type: GunAimable
-    minAngle: -4
-    maxAngle: -4
+    minAngle: -6
+    maxAngle: -3.75
   - type: GunWieldBonus
     minAngle: -2
-    maxAngle: -19
-    angleIncrease: 0.65
-  #SS220 weapon overhaul end
+    maxAngle: -3.65
+    angleIncrease: -0.45
+    angleDecay: 2.5
   - type: Gun
-    #220 SG Angle Updates begin
+    minAngle: 9
+    maxAngle: 13
     fireRate: 6.5
-    minAngle: 12
-    maxAngle: 30
-    #220 SG Angle Updates end
-    angleIncrease: 1.3
-    angleDecay: 6
+    angleIncrease: 0.85
+    angleDecay: 2.5
     selectedMode: FullAuto
-    shotsPerBurst: 5
-    burstCooldown: 0.2
-    burstFireRate: 7
     availableModes:
-    - Burst
     - FullAuto
     - SemiAuto
+  #SS220 weapon overhaul end
   - type: ItemSlots
     slots:
       gun_magazine:

@@ -72,28 +72,26 @@
         map: ["enum.GunVisualLayers.Base"]
       - state: mag-0
         map: ["enum.GunVisualLayers.Mag"]
-  - type: GunWieldBonus
   #SS220 weapon overhaul begin
-    minAngle: -4
-    maxAngle: -18
-    angleIncrease: -0.9
+  - type: GunWieldBonus
+    minAngle: -7.2
+    maxAngle: -18.3
+    angleIncrease: -1.8
+    angleDecay: 2
   - type: GunAimable
-    minAngle: -10
-    maxAngle: -9
-  #SS220 weapon overhaul end
+    minAngle: -6
+    maxAngle: -1.4
   - type: Gun
-    minAngle: 15
-    maxAngle: 36
-   #ss220 gunmodes begin
+    minAngle: 13
+    maxAngle: 27
     availableModes:
       - FullAuto
       - SemiAuto
-   #ss220 gunmodes end
-    fireRate: 5
-    angleIncrease: 2.50 #SS220 weapon overhaul
-    angleDecay: 6 #SS220 increase-automatic-rifles-spread end
+    angleIncrease: 3.30
+    angleDecay: 0.6
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/rifle2.ogg
+  #SS220 weapon overhaul end
   - type: ChamberMagazineAmmoProvider
     soundRack:
       path: /Audio/Weapons/Guns/Cock/ltrifle_cock.ogg
@@ -140,19 +138,21 @@
         map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
     sprite: Objects/Weapons/Guns/Rifles/carbine.rsi
-  - type: GunWieldBonus
   #SS220 weapon overhaul start
-    minAngle: -4
-    maxAngle: -22
-    angleIncrease: -1.2
+  - type: GunWieldBonus
+    minAngle: -7.2
+    maxAngle: -20
+    angleIncrease: -1.8
+    angleDecay: 3
   - type: GunAimable
-    minAngle: -8
-    maxAngle: -7
-  #SS220 weapon overhaul end
+    minAngle: -6
+    maxAngle: -3
   - type: Gun
     minAngle: 13
-    maxAngle: 36
-  #ss220 gunmodes start
+    maxAngle: 27
+    angleIncrease: 2.30
+    angleDecay: 1
+  #SS220 weapon overhaul end
     availableModes:
       - FullAuto
       - SemiAuto
@@ -199,27 +199,26 @@
         map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
     sprite: SS220/Objects/Weapons/Guns/Rifles/lecter.rsi #ss220 lecter resprite
-  - type: GunWieldBonus
   #SS220 weapon overhaul start
-    minAngle: -4
-    maxAngle: -22
-    angleIncrease: -1.2
+  - type: GunWieldBonus
+    minAngle: -7.2
+    maxAngle: -20
+    angleIncrease: -1.8
+    angleDecay: 3
   - type: GunAimable
-    minAngle: -8
-    maxAngle: -7
-  #SS220 weapon overhaul end
+    minAngle: -6
+    maxAngle: -3
   - type: Gun
     minAngle: 13
-    maxAngle: 36
-  #ss220 gunmodes start
+    maxAngle: 27
     availableModes:
       - FullAuto
       - SemiAuto
-  #ss220 gunmodes end
     angleIncrease: 2.30
-    angleDecay: 6 #SS220 increase-automatic-rifles-spread end
+    angleDecay: 1
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/ltrifle.ogg
+  #SS220 weapon overhaul end
   - type: ItemSlots
     slots:
       gun_magazine:
