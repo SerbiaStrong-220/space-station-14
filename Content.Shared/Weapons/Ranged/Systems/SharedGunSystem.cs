@@ -1,5 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
-using System.Numerics;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
@@ -8,13 +6,14 @@ using Content.Shared.CombatMode;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
+using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.SS220.AltBlocking;
-using Content.Shared.Standing;
+using Content.Shared.SS220.Weapons.Ranged;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
 using Content.Shared.Timing;
@@ -37,8 +36,8 @@ using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using Content.Shared.DoAfter;
-using Content.Shared.SS220.Weapons.Ranged;
+using System.Diagnostics.CodeAnalysis;
+using System.Numerics;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -123,7 +122,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         SubscribeLocalEvent<GunComponent, GetVerbsEvent<Verb>>(OnGetVerbs);
         SubscribeLocalEvent<SuicideDoAfterEvent>(OnDoSuicideComplete);
         // SS220-new-feature kus end
-        SubscribeAllEvent<GunCycleRequestEvent>(OnGunUsed);//SS220 weapon overhaul
+        SubscribeLocalEvent<GunComponent, GunCycleRequestEvent>(OnGunUsed);//SS220 weapon overhaul
     }
 
     private void OnMapInit(Entity<GunComponent> gun, ref MapInitEvent args)
@@ -137,39 +136,6 @@ public abstract partial class SharedGunSystem : EntitySystem
 
         RefreshModifiers((gun, gun));
     }
-
-    //SS220 weapon overhaul begin
-    private void OnGunUsed(GunCycleRequestEvent args)
-    {
-        if (args.Handled)
-            return;
-
-        if (!TryGetEntity(args.User, out var localUser) || !TryGetEntity(args.Gun, out var localGun))
-            return;
-
-        if (localUser is not { Valid: true } user || localGun is not { Valid: true } gun)
-            return;
-
-        if (TryComp<ChamberMagazineAmmoProviderComponent>(localGun, out var chamberMagComp))
-        {
-            args.Handled = true;
-            if (chamberMagComp.CanRack)
-                UseChambered(gun, chamberMagComp, user);
-            else
-                ToggleBolt(gun, chamberMagComp, user);
-
-            return;
-        }
-
-        if (TryComp<BallisticAmmoProviderComponent>(gun, out var ballisticComp))
-        {
-            ManualCycle((gun, ballisticComp), TransformSystem.GetMapCoordinates(gun), user);
-            args.Handled = true;
-
-            return;
-        }
-    }
-    //SS220 weapon overhaul end
 
     private void OnGunMelee(Entity<GunComponent> ent, ref MeleeHitEvent args)
     {
@@ -491,7 +457,6 @@ public abstract partial class SharedGunSystem : EntitySystem
         out bool userImpulse,
         EntityUid? user = null,
         bool throwItems = false);
-
 
     public void ShootProjectile(EntityUid uid, Vector2 direction, Vector2 gunVelocity, EntityUid? gunUid, EntityUid? user = null, float speed = ProjectileSpeed)
     {

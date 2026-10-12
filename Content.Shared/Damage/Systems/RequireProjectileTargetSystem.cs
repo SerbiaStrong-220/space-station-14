@@ -1,7 +1,7 @@
-using Content.Shared.Mobs.Components;
+using Content.Shared.Damage.Components;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Projectiles;
 using Content.Shared.SS220.Weapons.Components;
-using Content.Shared.Damage.Components;
 using Content.Shared.Standing;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Containers;
@@ -12,7 +12,10 @@ namespace Content.Shared.Damage.Systems;
 public sealed class RequireProjectileTargetSystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!; //SS220 weapon overhaul
+    //SS220 weapon overhaul begin
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private MobStateSystem _state = default!;
+    //SS220 weapon overhaul end
 
     public override void Initialize()
     {
@@ -30,19 +33,20 @@ public sealed class RequireProjectileTargetSystem : EntitySystem
             return;
 
         var other = args.OtherEntity;
+
         //SS220 weapon overhaul begin
         if (TryComp(other, out ProjectileComponent? projectile) && (projectile.Shooter is { Valid: true } shooterValidated))
         {
-            if (TryComp<StandingStateComponent>(shooterValidated, out var standingState) && _standing.IsDown((shooterValidated, standingState)))
-                if (TryComp<StandingStateComponent>(ent, out var standingStateTarget) && _standing.IsDown((ent, standingStateTarget)))
-                    if (TryComp<MobStateComponent>(ent.Owner, out var statesComp) && (statesComp.CurrentState == Mobs.MobState.Alive))
-                        return;
+            bool isAimed = HasComp<AimedProjectileComponent>(other);
 
-            if (TryComp<GunAimableComponent>(projectile.Weapon, out var aimComp) && aimComp.IsAimed)
-            {
-                if (TryComp<MobStateComponent>(ent.Owner, out var statesComp) && (statesComp.CurrentState == Mobs.MobState.Alive))
-                    return;
-            }
+            if (_standing.IsDown(shooterValidated) && //The shooter and the target are both down and the target is alive => we'll hit, otherwise we won't
+                _standing.IsDown(ent.Owner) &&
+                _state.IsAlive(ent.Owner))
+                return;
+
+            if (isAimed &&
+                _state.IsAlive(ent.Owner))
+                return;
 
             if (CompOrNull<TargetedProjectileComponent>(other)?.Target != ent)
             {
@@ -61,19 +65,6 @@ public sealed class RequireProjectileTargetSystem : EntitySystem
             }
         }
         //SS220 weapon overhaul end
-    }
-
-    //SS220 weapon overhaul begin
-    public bool PreventHitscan(Entity<RequireProjectileTargetComponent> ent, EntityUid gunUid)
-    {
-        if (!ent.Comp.Active)
-            return false;
-
-        if (TryComp<GunAimableComponent>(gunUid, out var aimComp) && aimComp.IsAimed)
-            if (TryComp<MobStateComponent>(ent.Owner, out var statesComp) && (statesComp.CurrentState == Mobs.MobState.Alive))
-                return false;
-
-        return true;
     }
     //SS220 weapon overhaul end
 

@@ -72,7 +72,7 @@
     shape:
     - 0,0,4,0
   - type: Clothing
-    sprite: SS220/Objects/Weapons/Guns/Shotguns/db_shotgun.rsi #ss220 double-barreled shotgun resprite
+    sprite: SS220/Objects/Weapons/Guns/Shotguns/db_shotgun.rsi
     quickEquip: false
     slots:
     - Back
@@ -258,7 +258,7 @@
   description: A premium semi-automatic shotgun, and the pride of all security forces. Uses .50 shotgun shells.
   components: # intend for Enforcer to have wider choke for semi-auto function
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Shotguns/enforcer.rsi
+    sprite: SS220/Objects/Weapons/Guns/Shotguns/enforcer.rsi #SS220 weapon overhaul
   - type: Clothing
     sprite: Objects/Weapons/Guns/Shotguns/enforcer.rsi
   - type: Item
@@ -287,6 +287,23 @@
   id: WeaponShotgunEnforcerRubber
   suffix: Non-Lethal
   components:
+  #SS220 weapon overhaul begin
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: InternalMagazineShotgunLessLethal
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+            - ShellShotgun
+  #SS220 weapon overhaul end
   - type: Gun # Corvax-Guns
     soundGunshot:
       path: /Audio/Corvax/Weapons/Guns/Gunshots/shotgun_metal.ogg
@@ -299,7 +316,6 @@
   components: # intend for Kammerer to have tighter choke for slower fire rate and/or manual cycling
   - type: Item
     sprite: SS220/Objects/Weapons/Guns/Shotguns/pump_inhands_64x.rsi #SS220 kammerer resprite
-    # sprite: Objects/Weapons/Guns/Shotguns/pump_inhands_64x.rsi #SS220 kammerer resprite
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/Shotguns/pump.rsi #SS220 kammerer resprite
   - type: Clothing
@@ -536,6 +552,7 @@
   - type: GunAimable
     minAngle: -5
     maxAngle: -6
+  #SS220 weapon overhaul end
   - type: Gun
     muzzleFlashSupressed: true
     angleIncrease: 7

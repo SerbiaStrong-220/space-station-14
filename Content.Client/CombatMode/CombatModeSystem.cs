@@ -58,10 +58,6 @@ public sealed class CombatModeSystem : SharedCombatModeSystem
     {
         base.SetInCombatMode(entity, value, component);
         _gunSystem.SpreadOverlayIngame = value;//SS220 aiming overlay
-        //if(!TryComp<EyeCursorOffsetComponent>(entity, out var offsetComp))
-        //_eye.UpdatePvsScale(args.User);
-        //_eyeSystem.UpdateEyeOffset
-
         UpdateHud(entity);
     }
 

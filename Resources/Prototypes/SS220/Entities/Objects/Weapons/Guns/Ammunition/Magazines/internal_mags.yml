@@ -43,7 +43,7 @@
 
 - type: entity
   id: InternalMagazineShotgun
-  parent: BaseMagazineFullRifle
+  parent: BaseMagazineRifle
   name: "magazine (internal)"
   components:
   - type: Item
@@ -55,6 +55,21 @@
     whitelist:
       tags:
         - ShellShotgun
+
+- type: entity
+  id: InternalMagazineShotgunLessLethal
+  parent: BaseMagazineRifle
+  name: "magazine (internal)"
+  components:
+    - type: Item
+      size: Small
+    - type: BallisticAmmoProvider
+      proto: ShellShotgunBeanbag
+      mayTransfer: true
+      capacity: 7
+      whitelist:
+        tags:
+          - ShellShotgun
 
 - type: entity
   id: InternalMagazineShotgunShort

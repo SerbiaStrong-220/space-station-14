@@ -6,8 +6,9 @@
   id: Spitballer
   suffix: CultYogg
   components:
-    - type: CultYoggWeapon
-      item: CocoonSpitballer
+    - type: ContainerContainer
+      containers:
+        item-shell: !type:ContainerSlot {}
     - type: GunAimable
       minAngle: -11
       maxAngle: -7

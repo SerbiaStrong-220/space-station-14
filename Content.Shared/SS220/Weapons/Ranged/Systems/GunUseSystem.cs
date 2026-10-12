@@ -1,14 +1,13 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Input;
-using Content.Shared.SS220.Weapons.Ranged;
+using Content.Shared.SS220.Input;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
-namespace Content.Client.SS220.Weapons.Ranged.Systems;
+namespace Content.Shared.SS220.Weapons.Ranged.Systems;
 
 public sealed partial class GunUseSystem : EntitySystem
 {
@@ -20,7 +19,7 @@ public sealed partial class GunUseSystem : EntitySystem
         base.Initialize();
 
         CommandBinds.Builder
-            .Bind(ContentKeyFunctions.UseGunInHand, InputCmdHandler.FromDelegate(HandleUseGun, handle: false, outsidePrediction: false))
+            .Bind(KeyFunctions220.UseGunInHand, InputCmdHandler.FromDelegate(HandleUseGun, handle: false, outsidePrediction: false))
             .Register<GunUseSystem>();
     }
 
@@ -48,11 +47,8 @@ public sealed partial class GunUseSystem : EntitySystem
         if (!HasComp<GunComponent>(held.Value))
             return false;
 
-        if (!TryGetNetEntity(uid, out var netUser) || !TryGetNetEntity(held.Value, out var netGun))
-            return false;
-
-        var useMsg = new GunCycleRequestEvent((NetEntity)netUser, (NetEntity)netGun);
-        RaisePredictiveEvent(useMsg);
+        var ev = new GunCycleRequestEvent(uid, held.Value);
+        RaiseLocalEvent(held.Value, ref ev);
 
         return true;
     }

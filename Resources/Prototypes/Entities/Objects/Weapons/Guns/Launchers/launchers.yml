@@ -44,11 +44,13 @@
       path: /Audio/SS220/Effects/Drop/rifles.ogg ##new sound_drop effect, add MIXnikita
       params:
         volume: 2
+  # SS220 weapon overhaul begin
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Launchers/china_lake.rsi
+    sprite: SS220/Objects/Weapons/Guns/Launchers/china_lake.rsi
     layers:
-      - state: base # SS220 weapon overhaul
+      - state: base
         map: ["enum.GunVisualLayers.Base"]
+  # SS220 weapon overhaul end
   - type: Clothing
     sprite: Objects/Weapons/Guns/Launchers/china_lake.rsi
     slots:

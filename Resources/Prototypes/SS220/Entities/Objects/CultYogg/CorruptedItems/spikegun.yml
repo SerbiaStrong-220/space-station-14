@@ -6,8 +6,6 @@
   id: Spikegun
   suffix: CultYogg
   components:
-    - type: CultYoggWeapon
-      item: CocoonSpikegun
     - type: AmmoCounter
     - type: GunAimable
       minAngle: -10

@@ -190,7 +190,7 @@ binds:
   key: R
 - function: ToggleOffset
   type: State
-  key: MouseMiddle
+  key: Space
 #SS220 weapon overhaul end
 #SS220 shield rework begin
 - function: ToggleActiveBlocking
