@@ -185,9 +185,6 @@ binds:
   type: State
   key: Z
 #SS220 weapon overhaul begin
-- function: ActivateGunInHand
-  type: State
-  key: R
 - function: ToggleOffset
   type: State
   key: Space
