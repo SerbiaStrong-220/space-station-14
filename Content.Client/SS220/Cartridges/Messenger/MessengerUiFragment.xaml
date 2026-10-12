@@ -8,6 +8,7 @@
             <Button Name="BackButton" Visible="False" Text="{Loc 'messenger-ui-back-button'}"/>
             <Label Name="ChatNameLabel" Visible="False" Align="Center" ClipText="True" HorizontalExpand="True"/>
             <Control Name="HeaderSpacer" HorizontalExpand="True"/>
+            <Button Name="MuteButton" Visible="False" ToggleMode="True" Text="{Loc 'messenger-ui-mute-button'}" ToolTip="{Loc 'messenger-ui-mute-tooltip'}"/>
             <Button Name="RefreshButton" Text="{Loc 'messenger-ui-refresh-button'}" ToolTip="{Loc 'messenger-ui-refresh-tooltip'}"/>
         </BoxContainer>
         <LineEdit Name="ChatsSearch" Access="Public" HorizontalExpand="True" PlaceHolder="{Loc 'messenger-ui-search-line'}"/>

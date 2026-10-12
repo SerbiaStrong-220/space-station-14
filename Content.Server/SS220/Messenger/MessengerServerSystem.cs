@@ -38,6 +38,7 @@ public sealed partial class MessengerServerSystem : EntitySystem
         InitializeContacts();
         InitializeAi();
         InitializeAiContact();
+        InitializeAgent();
     }
 
     private bool IsPowered(EntityUid uid)

@@ -31,6 +31,7 @@ public sealed class MessengerChatUiState
     public MessageUid? LastMessage;
     public int SortNumber;
     public int Unread;
+    public bool Muted;
     public bool ForceUpdate;
 
     public MessengerChatUiState(ChatUid id, string? name, MessengerChatKind kind, HashSet<ContactUid> members,

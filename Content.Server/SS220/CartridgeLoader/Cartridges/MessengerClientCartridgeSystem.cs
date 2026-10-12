@@ -105,7 +105,24 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
             case MessengerSetNameLockUiEvent e:
                 OnSetNameLock(ent, e);
                 break;
+            case MessengerSetChatMuteUiEvent e:
+                OnSetChatMute(ent, e);
+                break;
         }
+    }
+
+    private void OnSetChatMute(Entity<MessengerClientCartridgeComponent> ent, MessengerSetChatMuteUiEvent e)
+    {
+        if (!TryGetServerAddress(ent.Comp, out var serverAddress))
+            return;
+
+        _deviceNetwork.QueuePacket(ent.Owner, serverAddress, new NetworkPayload
+        {
+            [MessengerNetworkKey.Command.ToString()] = MessengerNetworkCommand.SetChatMute,
+            [MessengerNetworkKey.DeviceUid.ToString()] = e.LoaderUid,
+            [MessengerNetworkKey.ChatId.ToString()] = e.ChatId,
+            [MessengerNetworkKey.ChatMuted.ToString()] = e.Muted,
+        });
     }
 
     private void OnSetNameLock(Entity<MessengerClientCartridgeComponent> ent, MessengerSetNameLockUiEvent e)

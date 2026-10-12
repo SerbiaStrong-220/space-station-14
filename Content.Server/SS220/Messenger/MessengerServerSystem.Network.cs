@@ -42,6 +42,9 @@ public sealed partial class MessengerServerSystem
             case MessengerNetworkCommand.SetNameLock:
                 OnSetNameLock(ent, args);
                 break;
+            case MessengerNetworkCommand.SetChatMute:
+                OnSetChatMute(ent, args);
+                break;
         }
     }
 
@@ -102,6 +105,16 @@ public sealed partial class MessengerServerSystem
             return;
 
         MarkRead(ent.Comp, contactId, chatId.Value);
+    }
+
+    private void OnSetChatMute(Entity<MessengerServerComponent> ent, DeviceNetworkPacketEvent args)
+    {
+        if (!TryAuthByIdCard(ent, args.Data, out var contactId)
+            || !args.Data.TryGetValue(MessengerNetworkKey.ChatId.ToString(), out ChatUid? chatId)
+            || !args.Data.TryGetValue(MessengerNetworkKey.ChatMuted.ToString(), out bool? muted))
+            return;
+
+        SetChatMute(ent.Comp, contactId, chatId.Value, muted.Value);
     }
 
     private void OnSetNameLock(Entity<MessengerServerComponent> ent, DeviceNetworkPacketEvent args)

@@ -53,6 +53,11 @@ public sealed partial class MessengerServerComponent : Component
     public readonly Dictionary<ContactUid, MessengerContact> Contacts = new();
 
     /// <summary>
+    /// Contact id to the chats the contact has muted. Messages of the chat are still delivered, but without a ringtone.
+    /// </summary>
+    public readonly Dictionary<ContactUid, HashSet<ChatUid>> MutedChats = new();
+
+    /// <summary>
     /// Contacts whose names do not follow the names of their id cards, e.g. agents who rename their cards.
     /// </summary>
     public readonly HashSet<ContactUid> NameLockedContacts = new();

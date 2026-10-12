@@ -23,6 +23,7 @@ public sealed partial class MessengerUiFragment : BoxContainer
     public event Action? OnBackButtonPressed;
     public event Action? OnRefreshPressed;
     public event Action<bool>? OnNameLockToggled;
+    public event Action<ChatUid, bool>? OnChatMuteToggled;
 
     public ChatUid CurrentChat;
 
@@ -45,6 +46,7 @@ public sealed partial class MessengerUiFragment : BoxContainer
         BackButton.OnPressed += _ => OnBackButtonPressed?.Invoke();
         RefreshButton.OnPressed += _ => OnRefreshPressed?.Invoke();
         NameLockBox.OnToggled += args => OnNameLockToggled?.Invoke(args.Pressed);
+        MuteButton.OnToggled += args => OnChatMuteToggled?.Invoke(CurrentChat, args.Pressed);
         CancelReplyButton.OnPressed += _ => ClearReply();
         EmojiButton.OnToggled += args => EmojiPanel.Visible = args.Pressed;
 
@@ -109,7 +111,7 @@ public sealed partial class MessengerUiFragment : BoxContainer
                 },
                 chat.Unread,
                 peer == null ? null : StatusColor(peer.Status),
-                StatusText(peer)));
+                ChatNote(StatusText(peer), chat)));
         }
 
         if (chats.Count == 0)
@@ -187,6 +189,19 @@ public sealed partial class MessengerUiFragment : BoxContainer
         return null;
     }
 
+    /// <summary>
+    /// Short note about the chat in the list: the status of the contact and that the chat is muted.
+    /// </summary>
+    private static string? ChatNote(string? statusText, MessengerChatUiState chat)
+    {
+        if (!chat.Muted)
+            return statusText;
+
+        var muted = Loc.GetString("messenger-ui-muted-note");
+
+        return statusText == null ? muted : $"{statusText}, {muted}";
+    }
+
     private static Color StatusColor(MessengerContactStatus status)
     {
         return status switch
@@ -253,6 +268,8 @@ public sealed partial class MessengerUiFragment : BoxContainer
             if (ChatsContainer.ChildCount == 0)
                 ChatsContainer.AddChild(new Label { Text = Loc.GetString("messenger-ui-no-messages"), Align = Label.AlignMode.Center });
 
+            MuteButton.Pressed = chat.Muted;
+
             var statusText = StatusText(peer);
             var chatName = ChatName(state, chat);
             ChatNameLabel.Text = statusText == null ? chatName : $"{chatName} ({statusText})";
@@ -311,6 +328,7 @@ public sealed partial class MessengerUiFragment : BoxContainer
         EmojiPanel.Visible = inChat && EmojiButton.Pressed;
         ChatsSearch.Visible = true;
         NameLockBox.Visible = !inChat;
+        MuteButton.Visible = inChat;
         ErrorLabel.Visible = false;
     }
 }

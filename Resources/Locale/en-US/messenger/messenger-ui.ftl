@@ -19,3 +19,7 @@ messenger-ui-you = You
 
 messenger-ui-name-lock = Keep my name
 messenger-ui-name-lock-tooltip = Your messenger name will stop following the name on the ID card
+
+messenger-ui-mute-button = Mute
+messenger-ui-mute-tooltip = New messages of this chat will not play a sound
+messenger-ui-muted-note = muted

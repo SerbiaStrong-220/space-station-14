@@ -11,6 +11,12 @@ public sealed partial class MessengerClientCartridgeComponent : Component
     public EntityUid Loader;
 
     /// <summary>
+    /// The last id card with its own account that was in the pda of this cartridge. It stays after the card
+    /// is taken out, so the agent id card can take its accounts over.
+    /// </summary>
+    public EntityUid? LastIdCard;
+
+    /// <summary>
     /// Network addresses of the servers that answered this client.
     /// </summary>
     public Dictionary<EntityUid, string> ServerAddresses = new();

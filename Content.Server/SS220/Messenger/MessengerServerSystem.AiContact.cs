@@ -76,6 +76,9 @@ public sealed partial class MessengerServerSystem
             case MessengerSetNameLockUiEvent e:
                 SetNameLock(server, contactId, e.Locked);
                 break;
+            case MessengerSetChatMuteUiEvent e:
+                SetChatMute(server.Comp, contactId, e.ChatId, e.Muted);
+                break;
         }
     }
 

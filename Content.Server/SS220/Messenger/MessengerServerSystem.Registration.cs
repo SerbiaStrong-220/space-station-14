@@ -162,10 +162,14 @@ public sealed partial class MessengerServerSystem
             return;
         }
 
-        if (TryGetContactId(ent, idCardUid.Value, out var contactId))
+        RebindAgentCard(cartridge, idCardUid.Value);
+
+        if (TryGetContactId(ent, idCardUid.Value, out var contactId)
+            || TryLinkAgentCard(ent, cartridge, idCardUid.Value, out contactId))
         {
             BindAddress(ent, contactId, address);
             SyncDepartmentAccess(ent, contactId, idCardUid.Value);
+            RememberIdCard(cartridge, idCardUid.Value);
             return;
         }
 
@@ -176,6 +180,7 @@ public sealed partial class MessengerServerSystem
 
         contactId = RegisterNewClient(ent, idCardUid.Value, idCard.FullName ?? "#unkn##n", address);
         SendToContact(ent, contactId, CreateInfoPayload(ent.Comp));
+        RememberIdCard(cartridge, idCardUid.Value);
     }
 
     private void BindAddress(Entity<MessengerServerComponent> ent, ContactUid contactId, string address)
@@ -277,24 +282,11 @@ public sealed partial class MessengerServerSystem
     public bool TryLinkClone(EntityUid original, EntityUid clone)
     {
         if (!_idCard.TryFindIdCard(original, out var originalCard)
-            || !_idCard.TryFindIdCard(clone, out var cloneCard)
-            || !TryComp<MessengerClientComponent>(originalCard, out var originalClient))
+            || !_idCard.TryFindIdCard(clone, out var cloneCard))
             return false;
 
-        var cloneClient = EnsureComp<MessengerClientComponent>(cloneCard);
-        var linked = false;
-
-        foreach (var (serverUid, contactId) in originalClient.Contacts)
-        {
-            // a server where the clone is registered by itself is left alone
-            if (cloneClient.Contacts.TryAdd(serverUid, contactId))
-                linked = true;
-        }
-
-        if (!linked)
+        if (!LinkClient(originalCard, cloneCard))
             return false;
-
-        cloneClient.IsLinked = true;
 
         var query = EntityQueryEnumerator<MessengerServerComponent>();
 
@@ -308,6 +300,36 @@ public sealed partial class MessengerServerSystem
             RefreshLoader(container.Owner);
 
         return true;
+    }
+
+    /// <summary>
+    /// Makes the client write from the accounts of another client, e.g. a clone from the accounts of the original.
+    /// A server where the client has its own account is left alone, unless the accounts are replaced.
+    /// </summary>
+    /// <param name="replace">Drop the accounts the client had before.</param>
+    /// <returns>True if the client got an account.</returns>
+    private bool LinkClient(EntityUid from, EntityUid to, bool replace = false)
+    {
+        if (from == to || !TryComp<MessengerClientComponent>(from, out var source))
+            return false;
+
+        var target = EnsureComp<MessengerClientComponent>(to);
+
+        if (replace)
+            target.Contacts.Clear();
+
+        var linked = false;
+
+        foreach (var (serverUid, contactId) in source.Contacts)
+        {
+            if (target.Contacts.TryAdd(serverUid, contactId))
+                linked = true;
+        }
+
+        if (linked)
+            target.IsLinked = true;
+
+        return linked;
     }
 
     /// <returns>True if the client (id card or AI) has a contact on the server.</returns>

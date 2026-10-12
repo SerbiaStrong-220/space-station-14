@@ -22,4 +22,9 @@ public sealed partial class MessengerClientComponent : Component
     /// from the chats of the departments, because it does not have to repeat the access of the original.
     /// </summary>
     public bool IsLinked;
+
+    /// <summary>
+    /// If true, a linked agent id card keeps its account when it is inserted to another pda.
+    /// </summary>
+    public bool RebindLocked;
 }

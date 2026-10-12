@@ -90,7 +90,9 @@ public sealed partial class MessengerServerSystem
 
         foreach (var memberId in chat.MembersId)
         {
-            SendToContact(ent, memberId, memberId == senderId ? senderPayload : payload);
+            var silent = memberId == senderId || IsChatMuted(server, memberId, chat.Id);
+
+            SendToContact(ent, memberId, silent ? senderPayload : payload);
         }
 
         _adminLogger.Add(LogType.MessengerServer, LogImpact.Low,
@@ -135,6 +137,28 @@ public sealed partial class MessengerServerSystem
         }
 
         privateChats.Add(chatId);
+    }
+
+    private static bool IsChatMuted(MessengerServerComponent server, ContactUid contactId, ChatUid chatId)
+    {
+        return server.MutedChats.TryGetValue(contactId, out var mutedChats) && mutedChats.Contains(chatId);
+    }
+
+    private static void SetChatMute(MessengerServerComponent server, ContactUid contactId, ChatUid chatId, bool muted)
+    {
+        if (!CanAccessChat(server, contactId, chatId))
+            return;
+
+        if (!server.MutedChats.TryGetValue(contactId, out var mutedChats))
+        {
+            mutedChats = new HashSet<ChatUid>();
+            server.MutedChats[contactId] = mutedChats;
+        }
+
+        if (muted)
+            mutedChats.Add(chatId);
+        else
+            mutedChats.Remove(chatId);
     }
 
     private static void MarkRead(MessengerServerComponent server, ContactUid contactId, ChatUid chatId)
@@ -287,6 +311,7 @@ public sealed partial class MessengerServerSystem
                 index)
             {
                 Unread = CountUnread(ent.Comp, contactId, chat),
+                Muted = IsChatMuted(ent.Comp, contactId, chat.Id),
             };
 
             index++;

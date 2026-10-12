@@ -31,6 +31,16 @@ public sealed class MessengerMarkReadUiEvent(ChatUid chatId) : CartridgeMessageE
 }
 
 /// <summary>
+/// Mutes a chat for the user: its new messages do not play the ringtone.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class MessengerSetChatMuteUiEvent(ChatUid chatId, bool muted) : CartridgeMessageEvent
+{
+    public readonly ChatUid ChatId = chatId;
+    public readonly bool Muted = muted;
+}
+
+/// <summary>
 /// Stops or resumes the name of the contact following the name of its id card.
 /// </summary>
 [Serializable, NetSerializable]
