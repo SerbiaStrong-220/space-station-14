@@ -183,8 +183,20 @@ public sealed class InteractionPopupSystem : EntitySystem
     /// <para>
     /// This field is not networked automatically, so this method must be called on both sides of the network.
     /// </para>
-    public void SetInteractFailureString(Entity<InteractionPopupComponent> ent, string str)
+    public void SetInteractFailureString(Entity<InteractionPopupComponent> ent, string? str) //SS220-NonTactile
     {
         ent.Comp.InteractFailureString = str;
     }
+
+    //SS220-NonTactile begin
+    public void SetSuccessChance(Entity<InteractionPopupComponent> ent, float successChance)
+    {
+        ent.Comp.SuccessChance = successChance;
+    }
+
+    public void SetMessagePerceivedByOthers(Entity<InteractionPopupComponent> ent, string? message)
+    {
+        ent.Comp.MessagePerceivedByOthers = message;
+    }
+    //SS220-NonTactile end
 }
