@@ -1,10 +1,10 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Access;
-using Content.Shared.Messenger;
+using Content.Shared.SS220.Messenger;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server.Messenger;
+namespace Content.Server.SS220.Messenger;
 
 /// <summary>
 /// Data of a messenger server. All ids are unique within one server.
@@ -34,6 +34,7 @@ public sealed partial class MessengerServerComponent : Component
 
     /// <summary>
     /// Chat id of a department chat to the access level of its members.
+    /// Chats added in runtime
     /// </summary>
     public readonly Dictionary<uint, ProtoId<AccessLevelPrototype>> DepartmentChatAccess = new();
 

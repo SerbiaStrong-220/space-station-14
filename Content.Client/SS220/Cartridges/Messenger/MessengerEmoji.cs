@@ -3,11 +3,10 @@
 using System.Text;
 using Robust.Shared.Utility;
 
-namespace Content.Client.CartridgeLoader.Cartridges.Messenger;
+namespace Content.Client.SS220.Cartridges.Messenger;
 
 /// <summary>
 /// Messages carry plain-text shortcodes (":fire:"), so the line edit and logs stay readable.
-/// The shortcodes are turned into symbols of the emoji font only when a message is displayed.
 /// </summary>
 public static class MessengerEmoji
 {
@@ -73,7 +72,6 @@ public static class MessengerEmoji
 
     /// <summary>
     /// Builds a message where shortcodes are replaced and all emoji symbols use the emoji font.
-    /// The text is added as is, so the user can't inject markup.
     /// </summary>
     public static FormattedMessage Format(string text)
     {

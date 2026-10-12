@@ -10,7 +10,7 @@ using Content.Shared.Station;
 using Content.Shared.Verbs;
 using Robust.Shared.Utility;
 
-namespace Content.Server.Messenger;
+namespace Content.Server.SS220.Messenger;
 
 /// <summary>
 /// Read-only access of the station AI to chats of the server. It is granted only on high station alert levels.

@@ -1,6 +1,5 @@
 using Content.Server.Antag;
 using Content.Server.Cloning;
-using Content.Server.Messenger; //SS220-messenger-paradox-clone
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Medical.SuitSensors;
 using Content.Server.Objectives.Components;
@@ -13,6 +12,7 @@ using Content.Shared.Objectives.Systems;
 using Content.Shared.Random.Helpers;
 using Content.Shared.SS220.Antag;
 using Robust.Shared.Random;
+using Content.Server.SS220.Messenger;
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -24,7 +24,7 @@ public sealed class ParadoxCloneRuleSystem : GameRuleSystem<ParadoxCloneRuleComp
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly SuitSensorSystem _sensor = default!;
     [Dependency] private readonly TargetSystem _target = default!;
-    [Dependency] private readonly MessengerServerSystem _messengerServer = default!; //SS220-messenger-paradox-clone
+    [Dependency] private MessengerServerSystem _messengerServer = default!; //SS220-messenger-paradox-clone
 
     public override void Initialize()
     {

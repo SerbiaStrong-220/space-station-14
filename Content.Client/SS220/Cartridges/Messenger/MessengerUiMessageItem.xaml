@@ -1,5 +1,7 @@
-<messenger:MessengerUiMessageItem xmlns:messenger="clr-namespace:Content.Client.CartridgeLoader.Cartridges.Messenger"
-                                  xmlns="https://spacestation14.io" Margin="1 0 2 0">
+<messenger:MessengerUiMessageItem
+    xmlns:messenger="clr-namespace:Content.Client.SS220.Cartridges.Messenger"
+    xmlns="https://spacestation14.io"
+    Margin="1 0 2 0">
     <PanelContainer Name="MessageContainer" Access="Public" Margin="4 3 4 3" HorizontalExpand="True">
         <BoxContainer Orientation="Vertical" Margin="8 4 8 3">
             <Label Name="SenderLabel" Access="Public" Visible="False" HorizontalAlignment="Left"/>

@@ -10,7 +10,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Timing;
 
-namespace Content.Client.CartridgeLoader.Cartridges.Messenger;
+namespace Content.Client.SS220.Cartridges.Messenger;
 
 [GenerateTypedNameReferences]
 public sealed partial class MessengerUiFragment : BoxContainer
@@ -30,7 +30,13 @@ public sealed partial class MessengerUiFragment : BoxContainer
     public event Action? OnRefreshPressed;
 
     public uint CurrentChat;
-    public string? SearchString;
+
+    public string? SearchString
+    {
+        get => _searchString;
+        set => _searchString = value?.ToLower();
+    }
+    private string? _searchString;
 
     private int _scrollToBottomFrames;
     private uint? _replyToId;
@@ -39,10 +45,6 @@ public sealed partial class MessengerUiFragment : BoxContainer
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
-
-        Orientation = LayoutOrientation.Vertical;
-        HorizontalExpand = true;
-        VerticalExpand = true;
 
         SendButton.OnPressed += _ => SendMessage();
         MessageInput.OnTextEntered += _ => SendMessage();
@@ -179,10 +181,11 @@ public sealed partial class MessengerUiFragment : BoxContainer
         if (message.FromContactId == state.ClientContact.Id)
             return Loc.GetString("messenger-ui-you-prefix", ("text", message.Text));
 
+        if (chat.Kind == MessengerChatKind.Contact)
+            return message.Text;
+
         // in a group chat it is not clear who wrote the message without a name
-        return chat.Kind == MessengerChatKind.Contact
-            ? message.Text
-            : $"{SenderName(state, message)}: {message.Text}";
+        return $"{SenderName(state, message)}: {message.Text}";
     }
 
     private static string ChatName(MessengerUiState state, MessengerChatUiState chat)

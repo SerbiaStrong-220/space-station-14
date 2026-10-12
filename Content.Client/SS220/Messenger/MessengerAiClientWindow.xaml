@@ -1,0 +1,6 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      Title="{Loc 'messenger-ai-client-window-title'}"
+                      MinSize="420 520">
+
+</controls:FancyWindow>

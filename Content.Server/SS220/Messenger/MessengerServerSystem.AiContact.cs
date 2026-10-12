@@ -1,7 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Server.CartridgeLoader.Cartridges;
 using Content.Server.Chat.Systems;
+using Content.Server.SS220.CartridgeLoader.Cartridges;
 using Content.Shared.CartridgeLoader;
 using Content.Shared.CartridgeLoader.Cartridges;
 using Content.Shared.DeviceNetwork;
@@ -9,7 +9,7 @@ using Content.Shared.Messenger;
 using Content.Shared.Popups;
 using Content.Shared.Silicons.StationAi;
 
-namespace Content.Server.Messenger;
+namespace Content.Server.SS220.Messenger;
 
 /// <summary>
 /// The station AI as a contact of the server. It has no id card and no pda, so it talks with the server directly:

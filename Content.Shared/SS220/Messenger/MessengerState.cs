@@ -2,7 +2,7 @@
 
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.Messenger;
+namespace Content.Shared.SS220.Messenger;
 
 [Serializable, NetSerializable]
 public sealed class MessengerChat

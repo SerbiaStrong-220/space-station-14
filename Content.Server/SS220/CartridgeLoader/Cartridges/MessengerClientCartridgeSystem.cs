@@ -2,8 +2,9 @@
 
 using System.Diagnostics.CodeAnalysis;
 using Content.Server.Administration.Logs;
+using Content.Server.CartridgeLoader;
 using Content.Server.DeviceNetwork.Systems;
-using Content.Server.Messenger;
+using Content.Server.SS220.Messenger;
 using Content.Shared.CartridgeLoader;
 using Content.Shared.CartridgeLoader.Cartridges;
 using Content.Shared.Database;
@@ -12,7 +13,7 @@ using Content.Shared.DeviceNetwork.Events;
 using Content.Shared.Messenger;
 using Content.Shared.PDA.Ringer;
 
-namespace Content.Server.CartridgeLoader.Cartridges;
+namespace Content.Server.SS220.CartridgeLoader.Cartridges;
 
 public sealed partial class MessengerClientCartridgeSystem : EntitySystem
 {
@@ -23,8 +24,7 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
 
     [Dependency] private EntityQuery<MessengerServerComponent> _serverQuery = default!;
 
-    private readonly LocId _serverNotFound = "messenger-error-server-not-found";
-
+    // TODO: move to shared for cross systems usage
     public enum NetworkCommand
     {
         CheckServer,
@@ -44,6 +44,8 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
         ContactsIds,
         MessagesIds,
     }
+
+    private readonly LocId _serverNotFound = "messenger-error-server-not-found";
 
     public override void Initialize()
     {

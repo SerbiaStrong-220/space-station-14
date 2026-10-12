@@ -1,5 +1,6 @@
-<messenger:MessengerUiChatItem xmlns:messenger="clr-namespace:Content.Client.CartridgeLoader.Cartridges.Messenger"
-                               xmlns="https://spacestation14.io" Margin="1 0 2 0">
+<messenger:MessengerUiChatItem
+    xmlns:messenger="clr-namespace:Content.Client.SS220.Cartridges.Messenger"
+    xmlns="https://spacestation14.io" Margin="1 0 2 0">
     <PanelContainer StyleClasses="BackgroundDark"></PanelContainer>
     <PanelContainer Margin="2 3 2 3" StyleClasses="Inset" HorizontalExpand="True">
         <Button Name="OpenChatHistoryButton" Access="Public" HorizontalExpand="True" Mode="Press">

@@ -3,7 +3,7 @@
 using Content.Shared.Actions;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.Messenger;
+namespace Content.Shared.SS220.Messenger;
 
 [Serializable, NetSerializable]
 public enum MessengerAiUiKey : byte

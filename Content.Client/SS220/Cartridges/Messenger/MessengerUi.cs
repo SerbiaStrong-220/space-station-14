@@ -7,14 +7,16 @@ using Content.Shared.CartridgeLoader.Cartridges;
 using Content.Shared.Messenger;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
+using Robust.Shared.Utility;
 
-namespace Content.Client.CartridgeLoader.Cartridges.Messenger;
+namespace Content.Client.SS220.Cartridges.Messenger;
 
 public sealed partial class MessengerUi : UIFragment
 {
     private MessengerUiState? _messengerUiState;
     private string? _errorText;
 
+    // TODO: why not enum?
     private const int ChatsList = 0;
     private const int ChatHistory = 1;
 
@@ -35,7 +37,7 @@ public sealed partial class MessengerUi : UIFragment
         _fragment = new MessengerUiFragment();
         _fragment.ChatsSearch.OnTextChanged += args =>
         {
-            _fragment.SearchString = args.Text == "" ? null : args.Text.ToLower();
+            _fragment.SearchString = args.Text == "" ? null : args.Text;
             UpdateUiState();
         };
 
@@ -87,20 +89,17 @@ public sealed partial class MessengerUi : UIFragment
         switch (state)
         {
             case MessengerUiState messengerUiState:
-            {
                 _messengerUiState = messengerUiState;
                 break;
-            }
+
             case MessengerClientContactUiState contactUiState:
-            {
                 if (_messengerUiState == null)
                     break;
 
                 _messengerUiState.ClientContact = contactUiState.ClientContact;
                 break;
-            }
+
             case MessengerContactUiState messengerContactUiState:
-            {
                 if (_messengerUiState == null)
                     break;
 
@@ -108,11 +107,9 @@ public sealed partial class MessengerUi : UIFragment
                 {
                     _messengerUiState.Contacts[messengerContact.Id] = messengerContact;
                 }
-
                 break;
-            }
+
             case MessengerMessagesUiState messengerMessagesUiState:
-            {
                 if (_messengerUiState == null)
                     break;
 
@@ -125,16 +122,13 @@ public sealed partial class MessengerUi : UIFragment
                     chat.Messages.Add(messengerMessage.Id);
                     chat.LastMessage = chat.Messages.Max();
                 }
-
                 break;
-            }
+
             case MessengerNewChatMessageUiState st:
-            {
                 OnNewMessage(st);
                 break;
-            }
+
             case MessengerChatUpdateUiState st:
-            {
                 if (_messengerUiState == null)
                     break;
 
@@ -156,12 +150,10 @@ public sealed partial class MessengerUi : UIFragment
                 }
 
                 break;
-            }
+
             case MessengerErrorUiState errorUiState:
-            {
                 _errorText = Loc.GetString(errorUiState.LocId);
                 break;
-            }
         }
 
         UpdateUiState();
@@ -172,7 +164,8 @@ public sealed partial class MessengerUi : UIFragment
         if (_messengerUiState == null)
             return;
 
-        _messengerUiState.Messages.TryAdd(state.Message.Id, state.Message);
+        var addMessage = _messengerUiState.Messages.TryAdd(state.Message.Id, state.Message);
+        DebugTools.Assert(addMessage);
 
         var chat = GetOrCreateChat(state.ChatId);
         var isNew = chat.Messages.Add(state.Message.Id);
@@ -182,7 +175,7 @@ public sealed partial class MessengerUi : UIFragment
         if (!isNew || state.Message.FromContactId == _messengerUiState.ClientContact.Id)
             return;
 
-        // the chat is on the screen, so the message is read at once
+        // when the chat is on the screen, the message is read at once
         if (_currentView == ChatHistory && _fragment?.CurrentChat == state.ChatId)
             MarkChatRead(state.ChatId);
         else
@@ -259,17 +252,14 @@ public sealed partial class MessengerUi : UIFragment
         switch (_currentView)
         {
             case ChatsList:
-            {
                 if (_messengerUiState != null)
                     _fragment?.UpdateChatsState(_messengerUiState);
                 break;
-            }
+
             case ChatHistory:
-            {
                 if (_messengerUiState != null)
                     _fragment?.UpdateChatHistoryState(_messengerUiState);
                 break;
-            }
         }
 
         if (_errorText != null)

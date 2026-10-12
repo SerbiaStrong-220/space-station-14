@@ -1,12 +1,12 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Client.CartridgeLoader.Cartridges.Messenger;
 using System.Numerics;
 using Content.Shared.Messenger;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.CustomControls;
+using Content.Client.SS220.Cartridges.Messenger;
 
-namespace Content.Client.Messenger;
+namespace Content.Client.SS220.Messenger;
 
 /// <summary>
 /// The messenger window of the station AI. It shows the same interface as the cartridge does,
@@ -20,12 +20,10 @@ public sealed class MessengerAiClientBoundUserInterface(EntityUid owner, Enum ui
     {
         base.Open();
 
-        var window = this.CreateWindow<DefaultWindow>();
-        window.Title = Loc.GetString("messenger-ai-client-window-title");
-        window.MinSize = new Vector2(420, 520);
+        var window = this.CreateWindow<MessengerAiClientWindow>();
 
         _messengerUi.Setup(this, Owner);
-        window.Contents.AddChild(_messengerUi.GetUIFragmentRoot());
+        window.AddChild(_messengerUi.GetUIFragmentRoot());
     }
 
     protected override void ReceiveMessage(BoundUserInterfaceMessage message)

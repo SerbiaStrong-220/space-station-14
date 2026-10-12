@@ -1,8 +1,9 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.CartridgeLoader;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.CartridgeLoader.Cartridges;
+namespace Content.Shared.SS220.CartridgeLoader.Cartridges;
 
 [Serializable, NetSerializable]
 public sealed class MessengerSendMessageUiEvent : CartridgeMessageEvent

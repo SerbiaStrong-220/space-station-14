@@ -3,7 +3,7 @@
 using Content.Shared.Messenger;
 using Robust.Client.UserInterface;
 
-namespace Content.Client.Messenger;
+namespace Content.Client.SS220.Messenger;
 
 public sealed class MessengerAiBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
