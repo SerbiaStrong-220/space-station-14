@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Server.AlertLevel;
 using Content.Shared.Database;
 using Content.Shared.Examine;
-using Content.Shared.Messenger;
+using Content.Shared.SS220.Messenger;
 using Content.Shared.Silicons.StationAi;
 using Content.Shared.Station;
 using Content.Shared.Verbs;
@@ -134,7 +134,7 @@ public sealed partial class MessengerServerSystem
     /// <summary>
     /// Sends chats that have messages (most recent first) and the history of the requested chat.
     /// </summary>
-    private void SendAiView(Entity<MessengerServerComponent> ent, EntityUid actor, uint? openedChatId)
+    private void SendAiView(Entity<MessengerServerComponent> ent, EntityUid actor, ChatUid? openedChatId)
     {
         DebugTools.Assert(IsAiReadAllowed(ent, out _), "Chats are sent to the AI while reading is not allowed");
 
@@ -169,7 +169,7 @@ public sealed partial class MessengerServerSystem
 
         foreach (var chat in chats)
         {
-            view.Chats.Add(new MessengerChat(chat.Name, chat.Kind, new HashSet<uint>(chat.MembersId))
+            view.Chats.Add(new MessengerChat(chat.Name, chat.Kind, new HashSet<ContactUid>(chat.MembersId))
             {
                 Id = chat.Id,
                 LastMessageId = chat.LastMessageId,
@@ -193,7 +193,7 @@ public sealed partial class MessengerServerSystem
 
     private static void AddAiHistory(MessengerServerComponent server, MessengerChat chat, MessengerAiViewMessage view)
     {
-        var messageIds = new List<uint>(chat.MessagesId);
+        var messageIds = new List<MessageUid>(chat.MessagesId);
         messageIds.Sort();
 
         for (var i = Math.Max(0, messageIds.Count - MaxAiHistoryMessages); i < messageIds.Count; i++)

@@ -10,7 +10,8 @@ using Content.Shared.CartridgeLoader.Cartridges;
 using Content.Shared.Database;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Events;
-using Content.Shared.Messenger;
+using Content.Shared.SS220.CartridgeLoader.Cartridges;
+using Content.Shared.SS220.Messenger;
 using Content.Shared.PDA.Ringer;
 
 namespace Content.Server.SS220.CartridgeLoader.Cartridges;
@@ -23,27 +24,6 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
     [Dependency] private IAdminLogManager _adminLogger = default!;
 
     [Dependency] private EntityQuery<MessengerServerComponent> _serverQuery = default!;
-
-    // TODO: move to shared for cross systems usage
-    public enum NetworkCommand
-    {
-        CheckServer,
-        StateUpdate,
-        MessageSend,
-        MarkRead,
-    }
-
-    public enum NetworkKey
-    {
-        Command,
-        DeviceUid,
-        ChatId,
-        MessageText,
-        ReplyToId,
-        CurrentChatIds,
-        ContactsIds,
-        MessagesIds,
-    }
 
     private readonly LocId _serverNotFound = "messenger-error-server-not-found";
 
@@ -105,7 +85,7 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
         if (ent.Comp.ActiveServer != null)
             return;
 
-        BroadcastCommand(ent, args.Loader, NetworkCommand.CheckServer);
+        BroadcastCommand(ent, args.Loader, MessengerNetworkCommand.CheckServer);
         ent.Comp.PendingStates.Enqueue(new MessengerErrorUiState(_serverNotFound));
     }
 
@@ -132,9 +112,9 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
 
         _deviceNetwork.QueuePacket(ent.Owner, serverAddress, new NetworkPayload
         {
-            [NetworkKey.Command.ToString()] = NetworkCommand.MarkRead,
-            [NetworkKey.DeviceUid.ToString()] = e.LoaderUid,
-            [NetworkKey.ChatId.ToString()] = e.ChatId,
+            [MessengerNetworkKey.Command.ToString()] = MessengerNetworkCommand.MarkRead,
+            [MessengerNetworkKey.DeviceUid.ToString()] = e.LoaderUid,
+            [MessengerNetworkKey.ChatId.ToString()] = e.ChatId,
         });
     }
 
@@ -155,18 +135,18 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
 
         var payload = new NetworkPayload
         {
-            [NetworkKey.Command.ToString()] = NetworkCommand.StateUpdate,
-            [NetworkKey.DeviceUid.ToString()] = e.LoaderUid,
+            [MessengerNetworkKey.Command.ToString()] = MessengerNetworkCommand.StateUpdate,
+            [MessengerNetworkKey.DeviceUid.ToString()] = e.LoaderUid,
         };
 
         if (e.CurrentContacts is { Count: > 0 })
-            payload[NetworkKey.ContactsIds.ToString()] = e.CurrentContacts;
+            payload[MessengerNetworkKey.ContactsIds.ToString()] = e.CurrentContacts;
 
         if (e.CurrentMessages is { Count: > 0 })
-            payload[NetworkKey.MessagesIds.ToString()] = e.CurrentMessages;
+            payload[MessengerNetworkKey.MessagesIds.ToString()] = e.CurrentMessages;
 
         if (e.CurrentChats is { Count: > 0 })
-            payload[NetworkKey.CurrentChatIds.ToString()] = e.CurrentChats;
+            payload[MessengerNetworkKey.CurrentChatIds.ToString()] = e.CurrentChats;
 
         _deviceNetwork.QueuePacket(ent.Owner, serverAddress, payload);
     }
@@ -180,14 +160,14 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
 
         var payload = new NetworkPayload
         {
-            [NetworkKey.Command.ToString()] = NetworkCommand.MessageSend,
-            [NetworkKey.DeviceUid.ToString()] = e.LoaderUid,
-            [NetworkKey.ChatId.ToString()] = e.ChatId,
-            [NetworkKey.MessageText.ToString()] = message,
+            [MessengerNetworkKey.Command.ToString()] = MessengerNetworkCommand.MessageSend,
+            [MessengerNetworkKey.DeviceUid.ToString()] = e.LoaderUid,
+            [MessengerNetworkKey.ChatId.ToString()] = e.ChatId,
+            [MessengerNetworkKey.MessageText.ToString()] = message,
         };
 
         if (e.ReplyToId != null)
-            payload[NetworkKey.ReplyToId.ToString()] = e.ReplyToId.Value;
+            payload[MessengerNetworkKey.ReplyToId.ToString()] = e.ReplyToId.Value;
 
         _deviceNetwork.QueuePacket(ent.Owner, serverAddress, payload);
 
@@ -198,28 +178,28 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
 
     private void OnNetworkPacket(Entity<MessengerClientCartridgeComponent> ent, ref DeviceNetworkPacketEvent args)
     {
-        if (!args.Data.TryGetValue(MessengerServerSystem.NetworkKey.Command.ToString(),
-                out MessengerServerSystem.NetworkCommand? command))
+        if (!args.Data.TryGetValue(MessengerNetworkKey.Command.ToString(),
+                out MessengerNetworkCommand? command))
             return;
 
         switch (command)
         {
-            case MessengerServerSystem.NetworkCommand.Info:
+            case MessengerNetworkCommand.Info:
                 OnServerInfo(ent, args.Sender, args.SenderAddress);
                 break;
-            case MessengerServerSystem.NetworkCommand.ClientContact:
+            case MessengerNetworkCommand.ClientContact:
                 OnClientContact(ent, args.Data);
                 break;
-            case MessengerServerSystem.NetworkCommand.Contact:
+            case MessengerNetworkCommand.Contact:
                 OnContacts(ent, args.Data);
                 break;
-            case MessengerServerSystem.NetworkCommand.Chat:
+            case MessengerNetworkCommand.Chat:
                 OnChats(ent, args.Data);
                 break;
-            case MessengerServerSystem.NetworkCommand.Messages:
+            case MessengerNetworkCommand.Messages:
                 OnMessages(ent, args.Data);
                 break;
-            case MessengerServerSystem.NetworkCommand.NewMessage:
+            case MessengerNetworkCommand.NewMessage:
                 OnNewMessage(ent, args.Data);
                 break;
         }
@@ -237,15 +217,15 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
 
     private void OnClientContact(Entity<MessengerClientCartridgeComponent> ent, NetworkPayload data)
     {
-        if (data.TryGetValue(MessengerServerSystem.NetworkKey.Contact.ToString(), out MessengerContact? contact))
+        if (data.TryGetValue(MessengerNetworkKey.Contact.ToString(), out MessengerContact? contact))
             ent.Comp.PendingStates.Enqueue(new MessengerClientContactUiState(contact));
     }
 
     private void OnContacts(Entity<MessengerClientCartridgeComponent> ent, NetworkPayload data)
     {
         if (TryGetItems(data,
-                MessengerServerSystem.NetworkKey.Contact,
-                MessengerServerSystem.NetworkKey.ContactList,
+                MessengerNetworkKey.Contact,
+                MessengerNetworkKey.ContactList,
                 out List<MessengerContact> contacts))
         {
             ent.Comp.PendingStates.Enqueue(new MessengerContactUiState(contacts));
@@ -255,8 +235,8 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
     private void OnChats(Entity<MessengerClientCartridgeComponent> ent, NetworkPayload data)
     {
         if (TryGetItems(data,
-                MessengerServerSystem.NetworkKey.Chat,
-                MessengerServerSystem.NetworkKey.ChatList,
+                MessengerNetworkKey.Chat,
+                MessengerNetworkKey.ChatList,
                 out List<MessengerChat> chats))
         {
             ent.Comp.PendingStates.Enqueue(new MessengerChatUpdateUiState(chats));
@@ -266,8 +246,8 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
     private void OnMessages(Entity<MessengerClientCartridgeComponent> ent, NetworkPayload data)
     {
         if (TryGetItems(data,
-                MessengerServerSystem.NetworkKey.Message,
-                MessengerServerSystem.NetworkKey.MessageList,
+                MessengerNetworkKey.Message,
+                MessengerNetworkKey.MessageList,
                 out List<MessengerMessage> messages))
         {
             ent.Comp.PendingStates.Enqueue(new MessengerMessagesUiState(messages));
@@ -276,17 +256,17 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
 
     private void OnNewMessage(Entity<MessengerClientCartridgeComponent> ent, NetworkPayload data)
     {
-        if (!data.TryGetValue(MessengerServerSystem.NetworkKey.Message.ToString(), out MessengerMessage? message)
-            || !data.TryGetValue(MessengerServerSystem.NetworkKey.ChatId.ToString(), out uint? chatId))
+        if (!data.TryGetValue(MessengerNetworkKey.Message.ToString(), out MessengerMessage? message)
+            || !data.TryGetValue(MessengerNetworkKey.ChatId.ToString(), out ChatUid? chatId))
             return;
 
-        if (!data.ContainsKey(MessengerServerSystem.NetworkKey.Silent.ToString()))
+        if (!data.ContainsKey(MessengerNetworkKey.Silent.ToString()))
             RaiseLocalEvent(ent.Comp.Loader, new RingerPlayRingtoneMessage());
 
         ent.Comp.PendingStates.Enqueue(new MessengerNewChatMessageUiState(chatId.Value, message));
     }
 
-    private void BroadcastCommand(EntityUid senderUid, EntityUid loaderUid, NetworkCommand command)
+    private void BroadcastCommand(EntityUid senderUid, EntityUid loaderUid, MessengerNetworkCommand command)
     {
         var mapId = Transform(loaderUid).MapID;
 
@@ -296,8 +276,8 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
                 null,
                 new NetworkPayload
                 {
-                    [NetworkKey.Command.ToString()] = command,
-                    [NetworkKey.DeviceUid.ToString()] = loaderUid,
+                    [MessengerNetworkKey.Command.ToString()] = command,
+                    [MessengerNetworkKey.DeviceUid.ToString()] = loaderUid,
                 },
                 frequency: frequency);
         }
@@ -308,8 +288,8 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
     /// </summary>
     /// <returns>True if there is at least one item.</returns>
     public static bool TryGetItems<T>(NetworkPayload data,
-        MessengerServerSystem.NetworkKey itemKey,
-        MessengerServerSystem.NetworkKey listKey,
+        MessengerNetworkKey itemKey,
+        MessengerNetworkKey listKey,
         out List<T> items)
         where T : class
     {

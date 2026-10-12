@@ -1,13 +1,12 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Server.Chat.Systems;
 using Content.Server.SS220.CartridgeLoader.Cartridges;
 using Content.Shared.CartridgeLoader;
-using Content.Shared.CartridgeLoader.Cartridges;
 using Content.Shared.DeviceNetwork;
-using Content.Shared.Messenger;
 using Content.Shared.Popups;
 using Content.Shared.Silicons.StationAi;
+using Content.Shared.SS220.CartridgeLoader.Cartridges;
+using Content.Shared.SS220.Messenger;
 
 namespace Content.Server.SS220.Messenger;
 
@@ -17,23 +16,25 @@ namespace Content.Server.SS220.Messenger;
 /// </summary>
 public sealed partial class MessengerServerSystem
 {
-    [Dependency] private ChatSystem _chat = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
-
-    private const int MaxMessageLength = 500;
 
     private void InitializeAiContact()
     {
         SubscribeLocalEvent<StationAiHeldComponent, MessengerAiOpenEvent>(OnAiOpenMessenger);
         SubscribeLocalEvent<StationAiHeldComponent, CartridgeUiMessage>(OnAiClientMessage);
+
+        SubscribeLocalEvent<StationAiHeldComponent, ComponentStartup>(OnAiHeldStartup);
+        SubscribeLocalEvent<StationAiHeldComponent, ComponentRemove>(OnAiHeldRemove);
     }
 
-    /// <summary>
-    /// Cuts the text of a message to the allowed length and applies the word filter.
-    /// </summary>
-    public string SanitizeMessage(string text)
+    private void OnAiHeldStartup(Entity<StationAiHeldComponent> ent, ref ComponentStartup args)
     {
-        return _chat.ReplaceWords(text.Length > MaxMessageLength ? text[..MaxMessageLength] : text);
+        RegisterAiOnServers(ent);
+    }
+
+    private void OnAiHeldRemove(Entity<StationAiHeldComponent> ent, ref ComponentRemove args)
+    {
+        UpdateAllContactStatuses(ent);
     }
 
     private void OnAiOpenMessenger(Entity<StationAiHeldComponent> ent, ref MessengerAiOpenEvent args)
@@ -56,7 +57,7 @@ public sealed partial class MessengerServerSystem
     {
         if (args.Actor != ent.Owner
             || !TryFindAiServer(ent, out var server)
-            || !server.Comp.ClientToContact.TryGetValue(ent.Owner, out var contactId))
+            || !TryGetContactId(server, ent.Owner, out var contactId))
             return;
 
         switch (args.MessageEvent)
@@ -80,7 +81,7 @@ public sealed partial class MessengerServerSystem
     /// </summary>
     private void OnAiStateRequest(Entity<MessengerServerComponent> server,
         EntityUid ai,
-        uint contactId,
+        ContactUid contactId,
         MessengerUpdateStateUiEvent e)
     {
         if (e.IsFullState)
@@ -108,9 +109,9 @@ public sealed partial class MessengerServerSystem
             SendAiState(ai, new MessengerChatUpdateUiState(missingChats));
     }
 
-    private static HashSet<uint> CopyIds(HashSet<uint>? ids)
+    private static HashSet<T> CopyIds<T>(HashSet<T>? ids)
     {
-        return ids == null ? new HashSet<uint>() : new HashSet<uint>(ids);
+        return ids == null ? new HashSet<T>() : new HashSet<T>(ids);
     }
 
     /// <summary>
@@ -120,30 +121,30 @@ public sealed partial class MessengerServerSystem
     private void SendToAi(EntityUid ai, NetworkPayload payload)
     {
         if (!_ui.IsUiOpen(ai, MessengerAiClientUiKey.Key, ai)
-            || !payload.TryGetValue(NetworkKey.Command.ToString(), out NetworkCommand? command))
+            || !payload.TryGetValue(MessengerNetworkKey.Command.ToString(), out MessengerNetworkCommand? command))
             return;
 
         switch (command)
         {
-            case NetworkCommand.Contact:
+            case MessengerNetworkCommand.Contact:
                 if (MessengerClientCartridgeSystem.TryGetItems(payload,
-                        NetworkKey.Contact,
-                        NetworkKey.ContactList,
+                        MessengerNetworkKey.Contact,
+                        MessengerNetworkKey.ContactList,
                         out List<MessengerContact> contacts))
                     SendAiState(ai, new MessengerContactUiState(contacts));
 
                 break;
-            case NetworkCommand.Chat:
+            case MessengerNetworkCommand.Chat:
                 if (MessengerClientCartridgeSystem.TryGetItems(payload,
-                        NetworkKey.Chat,
-                        NetworkKey.ChatList,
+                        MessengerNetworkKey.Chat,
+                        MessengerNetworkKey.ChatList,
                         out List<MessengerChat> chats))
                     SendAiState(ai, new MessengerChatUpdateUiState(chats));
 
                 break;
-            case NetworkCommand.NewMessage:
-                if (payload.TryGetValue(NetworkKey.Message.ToString(), out MessengerMessage? message)
-                    && payload.TryGetValue(NetworkKey.ChatId.ToString(), out uint? chatId))
+            case MessengerNetworkCommand.NewMessage:
+                if (payload.TryGetValue(MessengerNetworkKey.Message.ToString(), out MessengerMessage? message)
+                    && payload.TryGetValue(MessengerNetworkKey.ChatId.ToString(), out ChatUid? chatId))
                     SendAiState(ai, new MessengerNewChatMessageUiState(chatId.Value, message));
 
                 break;
@@ -181,7 +182,7 @@ public sealed partial class MessengerServerSystem
     /// </summary>
     private void RegisterAi(Entity<MessengerServerComponent> server, EntityUid ai)
     {
-        if (server.Comp.ClientToContact.ContainsKey(ai))
+        if (TryGetContactId(server, ai, out _))
             return;
 
         var contactId = RegisterNewClient(server, ai, MetaData(ai).EntityName, null);

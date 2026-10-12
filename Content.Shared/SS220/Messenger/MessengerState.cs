@@ -7,14 +7,14 @@ namespace Content.Shared.SS220.Messenger;
 [Serializable, NetSerializable]
 public sealed class MessengerChat
 {
-    public uint Id;
+    public ChatUid Id;
     public string? Name;
-    public HashSet<uint> MembersId = new();
-    public HashSet<uint> MessagesId = new();
+    public HashSet<ContactUid> MembersId = new();
+    public HashSet<MessageUid> MessagesId = new();
     public MessengerChatKind Kind;
-    public uint? LastMessageId;
+    public MessageUid? LastMessageId;
 
-    public MessengerChat(string? name, MessengerChatKind kind, HashSet<uint> membersId)
+    public MessengerChat(string? name, MessengerChatKind kind, HashSet<ContactUid> membersId)
     {
         Name = name ?? "unknown";
         MembersId = membersId;
@@ -49,7 +49,7 @@ public enum MessengerContactStatus : byte
 [Serializable, NetSerializable]
 public sealed class MessengerContact
 {
-    public uint Id;
+    public ContactUid Id;
     public string? Name;
     public HashSet<string> ActiveAddresses = new();
     public MessengerContactStatus Status;
@@ -69,18 +69,18 @@ public sealed class MessengerContact
 [Serializable, NetSerializable]
 public sealed class MessengerMessage
 {
-    public uint Id;
-    public uint ChatId;
-    public uint FromContactId;
+    public MessageUid Id;
+    public ChatUid ChatId;
+    public ContactUid FromContactId;
     public TimeSpan Time;
     public string Text;
 
     /// <summary>
     /// Message of the same chat this one answers.
     /// </summary>
-    public uint? ReplyToId;
+    public MessageUid? ReplyToId;
 
-    public MessengerMessage(uint chatId, uint fromContactId, TimeSpan time, string text)
+    public MessengerMessage(ChatUid chatId, ContactUid fromContactId, TimeSpan time, string text)
     {
         ChatId = chatId;
         FromContactId = fromContactId;
@@ -90,7 +90,7 @@ public sealed class MessengerMessage
 
     public MessengerMessage()
     {
-        FromContactId = 0;
+        FromContactId = default;
         Time = new TimeSpan();
         Text = "";
     }

@@ -9,26 +9,26 @@ namespace Content.Shared.SS220.CartridgeLoader.Cartridges;
 public sealed class MessengerUiState : BoundUserInterfaceState
 {
     public MessengerContact ClientContact = new();
-    public Dictionary<uint, MessengerChatUiState> Chats = new();
-    public Dictionary<uint, MessengerMessage> Messages = new();
-    public Dictionary<uint, MessengerContact> Contacts = new();
+    public Dictionary<ChatUid, MessengerChatUiState> Chats = new();
+    public Dictionary<MessageUid, MessengerMessage> Messages = new();
+    public Dictionary<ContactUid, MessengerContact> Contacts = new();
 }
 
 [Serializable, NetSerializable]
 public sealed class MessengerChatUiState
 {
-    public uint Id;
+    public ChatUid Id;
     public string Name;
     public MessengerChatKind Kind;
-    public HashSet<uint> Members;
-    public HashSet<uint> Messages;
-    public uint? LastMessage;
+    public HashSet<ContactUid> Members;
+    public HashSet<MessageUid> Messages;
+    public MessageUid? LastMessage;
     public int SortNumber;
     public int Unread;
     public bool ForceUpdate;
 
-    public MessengerChatUiState(uint id, string? name, MessengerChatKind kind, HashSet<uint> members,
-        HashSet<uint> messages, uint? lastMessage, int sortNumber)
+    public MessengerChatUiState(ChatUid id, string? name, MessengerChatKind kind, HashSet<ContactUid> members,
+        HashSet<MessageUid> messages, MessageUid? lastMessage, int sortNumber)
     {
         Id = id;
         Name = name ?? "unknown";
@@ -55,7 +55,6 @@ public sealed class MessengerContactUiState(List<MessengerContact> contacts) : B
 [Serializable, NetSerializable]
 public sealed class MessengerMessagesUiState(List<MessengerMessage> messages) : BoundUserInterfaceState
 {
-    // uint - chatId
     public List<MessengerMessage> Messages = messages;
 }
 
@@ -72,8 +71,8 @@ public sealed class MessengerErrorUiState(LocId locId) : BoundUserInterfaceState
 }
 
 [Serializable, NetSerializable]
-public sealed class MessengerNewChatMessageUiState(uint chatId, MessengerMessage message) : BoundUserInterfaceState
+public sealed class MessengerNewChatMessageUiState(ChatUid chatId, MessengerMessage message) : BoundUserInterfaceState
 {
-    public uint ChatId = chatId;
+    public ChatUid ChatId = chatId;
     public MessengerMessage Message = message;
 }

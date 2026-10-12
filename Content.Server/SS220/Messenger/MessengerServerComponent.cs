@@ -8,6 +8,7 @@ namespace Content.Server.SS220.Messenger;
 
 /// <summary>
 /// Data of a messenger server. All ids are unique within one server.
+/// Contacts of the clients are stored in <see cref="MessengerClientComponent"/>.
 /// </summary>
 [RegisterComponent]
 public sealed partial class MessengerServerComponent : Component
@@ -36,48 +37,37 @@ public sealed partial class MessengerServerComponent : Component
     /// Chat id of a department chat to the access level of its members.
     /// Chats added in runtime
     /// </summary>
-    public readonly Dictionary<uint, ProtoId<AccessLevelPrototype>> DepartmentChatAccess = new();
+    public readonly Dictionary<ChatUid, ProtoId<AccessLevelPrototype>> DepartmentChatAccess = new();
 
     /// <summary>
     /// Contact id of the station AI to the AI entity. These contacts have no net addresses,
     /// the AI gets the updates through its ui.
     /// </summary>
-    public readonly Dictionary<uint, EntityUid> AiContacts = new();
+    public readonly Dictionary<ContactUid, EntityUid> AiContacts = new();
 
     /// <summary>
     /// Id that will be given to the next created contact, chat or message.
     /// </summary>
     public uint NextId;
 
-    /// <summary>
-    /// Authentication entity (id card) to contact id.
-    /// </summary>
-    public readonly Dictionary<EntityUid, uint> ClientToContact = new();
+    public readonly Dictionary<ContactUid, MessengerContact> Contacts = new();
 
-    /// <summary>
-    /// Id cards that use the contact of another card (e.g. the card of a paradox clone).
-    /// Such a card does not set the name of the contact, and the contact is online if any of its cards is.
-    /// </summary>
-    public readonly HashSet<EntityUid> LinkedCards = new();
+    public readonly Dictionary<ChatUid, MessengerChat> Chats = new();
 
-    public readonly Dictionary<uint, MessengerContact> Contacts = new();
-
-    public readonly Dictionary<uint, MessengerChat> Chats = new();
-
-    public readonly Dictionary<uint, MessengerMessage> Messages = new();
+    public readonly Dictionary<MessageUid, MessengerMessage> Messages = new();
 
     /// <summary>
     /// Chats available to every contact of the server.
     /// </summary>
-    public readonly HashSet<uint> PublicChats = new();
+    public readonly HashSet<ChatUid> PublicChats = new();
 
     /// <summary>
     /// Contact id to chats available only to this contact (invited).
     /// </summary>
-    public readonly Dictionary<uint, HashSet<uint>> PrivateChats = new();
+    public readonly Dictionary<ContactUid, HashSet<ChatUid>> PrivateChats = new();
 
     /// <summary>
     /// Contact id to (chat id to the last message the contact has read in it).
     /// </summary>
-    public readonly Dictionary<uint, Dictionary<uint, uint>> LastReadMessages = new();
+    public readonly Dictionary<ContactUid, Dictionary<ChatUid, MessageUid>> LastReadMessages = new();
 }

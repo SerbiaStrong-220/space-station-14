@@ -3,8 +3,8 @@
 using System.Linq;
 using Content.Client.UserInterface.Fragments;
 using Content.Shared.CartridgeLoader;
-using Content.Shared.CartridgeLoader.Cartridges;
-using Content.Shared.Messenger;
+using Content.Shared.SS220.CartridgeLoader.Cartridges;
+using Content.Shared.SS220.Messenger;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
 using Robust.Shared.Utility;
@@ -16,11 +16,13 @@ public sealed partial class MessengerUi : UIFragment
     private MessengerUiState? _messengerUiState;
     private string? _errorText;
 
-    // TODO: why not enum?
-    private const int ChatsList = 0;
-    private const int ChatHistory = 1;
+    private enum View
+    {
+        ChatsList,
+        ChatHistory,
+    }
 
-    private int _currentView;
+    private View _currentView;
 
     private MessengerUiFragment? _fragment;
     private BoundUserInterface? _userInterface;
@@ -33,7 +35,7 @@ public sealed partial class MessengerUi : UIFragment
     public override void Setup(BoundUserInterface userInterface, EntityUid? fragmentOwner)
     {
         _userInterface = userInterface;
-        _currentView = ChatsList;
+        _currentView = View.ChatsList;
         _fragment = new MessengerUiFragment();
         _fragment.ChatsSearch.OnTextChanged += args =>
         {
@@ -44,7 +46,7 @@ public sealed partial class MessengerUi : UIFragment
         _fragment.OnHistoryViewPressed += chatId =>
         {
             _fragment.CurrentChat = chatId;
-            _currentView = ChatHistory;
+            _currentView = View.ChatHistory;
             _fragment.SearchString = null;
             _fragment.ChatsSearch.Clear();
 
@@ -62,7 +64,7 @@ public sealed partial class MessengerUi : UIFragment
         {
             _fragment.SearchString = null;
             _fragment.ChatsSearch.Clear();
-            _currentView = ChatsList;
+            _currentView = View.ChatsList;
 
             UpdateUiState();
         };
@@ -176,13 +178,13 @@ public sealed partial class MessengerUi : UIFragment
             return;
 
         // when the chat is on the screen, the message is read at once
-        if (_currentView == ChatHistory && _fragment?.CurrentChat == state.ChatId)
+        if (_currentView == View.ChatHistory && _fragment?.CurrentChat == state.ChatId)
             MarkChatRead(state.ChatId);
         else
             chat.Unread++;
     }
 
-    private void MarkChatRead(uint chatId)
+    private void MarkChatRead(ChatUid chatId)
     {
         if (_messengerUiState == null || !_messengerUiState.Chats.TryGetValue(chatId, out var chat))
             return;
@@ -191,18 +193,18 @@ public sealed partial class MessengerUi : UIFragment
         _userInterface?.SendMessage(new CartridgeUiMessage(new MessengerMarkReadUiEvent(chatId)));
     }
 
-    private MessengerChatUiState GetOrCreateChat(uint chatId)
+    private MessengerChatUiState GetOrCreateChat(ChatUid chatId)
     {
         if (_messengerUiState == null)
         {
-            return new MessengerChatUiState(chatId, null, MessengerChatKind.Contact, new HashSet<uint>(),
-                new HashSet<uint>(), null, 0);
+            return new MessengerChatUiState(chatId, null, MessengerChatKind.Contact, new HashSet<ContactUid>(),
+                new HashSet<MessageUid>(), null, 0);
         }
 
         if (!_messengerUiState.Chats.TryGetValue(chatId, out var chat))
         {
-            chat = new MessengerChatUiState(chatId, null, MessengerChatKind.Contact, new HashSet<uint>(),
-                new HashSet<uint>(), null, _messengerUiState.Chats.Count);
+            chat = new MessengerChatUiState(chatId, null, MessengerChatKind.Contact, new HashSet<ContactUid>(),
+                new HashSet<MessageUid>(), null, _messengerUiState.Chats.Count);
 
             chat.ForceUpdate = true;
 
@@ -216,9 +218,9 @@ public sealed partial class MessengerUi : UIFragment
 
     private void ValidateState(BoundUserInterface userInterface)
     {
-        var receivedContacts = new HashSet<uint>();
-        var receivedMessages = new HashSet<uint>();
-        var receivedChats = new HashSet<uint>();
+        var receivedContacts = new HashSet<ContactUid>();
+        var receivedMessages = new HashSet<MessageUid>();
+        var receivedChats = new HashSet<ChatUid>();
 
         if (_messengerUiState == null)
             return;
@@ -251,12 +253,12 @@ public sealed partial class MessengerUi : UIFragment
     {
         switch (_currentView)
         {
-            case ChatsList:
+            case View.ChatsList:
                 if (_messengerUiState != null)
                     _fragment?.UpdateChatsState(_messengerUiState);
                 break;
 
-            case ChatHistory:
+            case View.ChatHistory:
                 if (_messengerUiState != null)
                     _fragment?.UpdateChatHistoryState(_messengerUiState);
                 break;

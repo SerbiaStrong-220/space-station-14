@@ -15,9 +15,9 @@ public enum MessengerAiUiKey : byte
 /// Asks the server for the chats overview, or for the history of one chat if <see cref="ChatId"/> is set.
 /// </summary>
 [Serializable, NetSerializable]
-public sealed class MessengerAiRequestMessage(uint? chatId) : BoundUserInterfaceMessage
+public sealed class MessengerAiRequestMessage(ChatUid? chatId) : BoundUserInterfaceMessage
 {
-    public uint? ChatId = chatId;
+    public ChatUid? ChatId = chatId;
 }
 
 /// <summary>
@@ -32,7 +32,7 @@ public sealed class MessengerAiViewMessage : BoundUserInterfaceMessage
     /// <summary>
     /// Contact id to its name. Net addresses of the contacts are not sent.
     /// </summary>
-    public Dictionary<uint, string> ContactNames = new();
+    public Dictionary<ContactUid, string> ContactNames = new();
 
     /// <summary>
     /// Chats with at least one message, the most recent first.
@@ -42,9 +42,9 @@ public sealed class MessengerAiViewMessage : BoundUserInterfaceMessage
     /// <summary>
     /// Last message of every chat and the recent history of <see cref="OpenedChatId"/>.
     /// </summary>
-    public Dictionary<uint, MessengerMessage> Messages = new();
+    public Dictionary<MessageUid, MessengerMessage> Messages = new();
 
-    public uint? OpenedChatId;
+    public ChatUid? OpenedChatId;
 }
 
 /// <summary>

@@ -15,7 +15,7 @@
             <BoxContainer Orientation="Vertical" Name="ChatsContainer" HorizontalExpand="True" VerticalExpand="True"/>
         </ScrollContainer>
         <PanelContainer Name="EmojiPanel" Visible="False" StyleClasses="Inset" HorizontalExpand="True">
-            <GridContainer Name="EmojiGrid" Columns="7" Margin="2"/>
+            <messenger:MessengerEmojiPicker Name="EmojiGrid" Margin="2"/>
         </PanelContainer>
         <BoxContainer Name="ReplyBar" Orientation="Horizontal" HorizontalExpand="True" Visible="False">
             <RichTextLabel Name="ReplyLabel" HorizontalExpand="True" Margin="4 0 0 0"/>
