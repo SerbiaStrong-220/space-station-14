@@ -17,6 +17,7 @@ namespace Content.Shared.APC
         /// APC lights/HUD.
         /// </summary>
         ChargeState,
+        Hacked, // SS220 MalfAI
     }
 
     [Serializable, NetSerializable]

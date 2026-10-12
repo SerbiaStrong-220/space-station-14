@@ -6,6 +6,7 @@
     mode: SnapgridCenter
   components:
   - type: Animateable
+  - type: MalfAiTargetable # SS220 MalfAI
   - type: MeleeSound
     soundGroups:
       Brute:

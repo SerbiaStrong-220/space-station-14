@@ -109,6 +109,18 @@ namespace Content.Shared.Atmos.Piping.Unary.Components
             WideNet = true
         };
 
+        // SS220 MalfAI: Flood shuts scrubbers off while vents dump to 500 kPa.
+        public static GasVentScrubberData FloodModePreset = new GasVentScrubberData
+        {
+            Enabled = false,
+            Dirty = true,
+            FilterGases = new(GasVentScrubberData.DefaultFullFilterGases),
+            PumpDirection = ScrubberPumpDirection.Scrubbing,
+            VolumeRate = 200f,
+            WideNet = false
+        };
+        // SS220 MalfAI end
+
         public static GasVentScrubberData ReplaceModePreset = new GasVentScrubberData
         {
             Enabled = true,

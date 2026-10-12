@@ -8,6 +8,7 @@
     mode: SnapgridCenter
   components:
   - type: StationAiWhitelist
+  - type: MalfAiHackable # SS220 MalfAI
   - type: AmbientOnPowered
   - type: AmbientSound
     volume: -9

@@ -1,0 +1,30 @@
+﻿# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: currency
+  id: MalfCPU
+  displayName: store-currency-display-malf-cpu
+  canWithdraw: false
+
+- type: storeCategory
+  id: MalfAiModules
+  name: store-category-malfai-modules
+
+- type: entity
+  id: MalfAiStore
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: StationAiWhitelist
+  - type: UserInterface
+    interfaces:
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
+        interactionRange: 0
+  - type: Store
+    name: store-preset-name-malfai
+    categories:
+    - MalfAiModules
+    currencyWhitelist:
+    - MalfCPU
+    balance:
+      MalfCPU: 0
+    ownerOnly: true
+    refundAllowed: false
