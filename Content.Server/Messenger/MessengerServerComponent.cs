@@ -1,12 +1,13 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Access;
 using Content.Shared.Messenger;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Messenger;
 
 /// <summary>
-/// Data of a messenger server. All logic lives in <see cref="MessengerServerSystem"/>.
-/// All ids are unique within one server.
+/// Data of a messenger server. All ids are unique within one server.
 /// </summary>
 [RegisterComponent]
 public sealed partial class MessengerServerComponent : Component
@@ -14,11 +15,33 @@ public sealed partial class MessengerServerComponent : Component
     [DataField("serverName")]
     public string Name = "";
 
+    // NOTE: we don't have special prototype id for that
+    [DataField]
+    public HashSet<string> AiReadAlertLevels = ["red", "gamma", "delta", "epsilon"];
+
     /// <summary>
-    /// Station alert levels at which the station AI is allowed to read chats of this server.
+    /// If true, the station AI of the server map gets its own contact and can write to the crew.
     /// </summary>
     [DataField]
-    public HashSet<string> AiReadAlertLevels = new() { "red", "gamma", "delta", "epsilon" };
+    public bool AiContactEnabled;
+
+    /// <summary>
+    /// Group chats of departments: access level that gives the membership to the name of the chat.
+    /// The chats are created once, members are added and removed by the access of their id cards.
+    /// </summary>
+    [DataField]
+    public Dictionary<ProtoId<AccessLevelPrototype>, LocId> DepartmentChats = new();
+
+    /// <summary>
+    /// Chat id of a department chat to the access level of its members.
+    /// </summary>
+    public readonly Dictionary<uint, ProtoId<AccessLevelPrototype>> DepartmentChatAccess = new();
+
+    /// <summary>
+    /// Contact id of the station AI to the AI entity. These contacts have no net addresses,
+    /// the AI gets the updates through its ui.
+    /// </summary>
+    public readonly Dictionary<uint, EntityUid> AiContacts = new();
 
     /// <summary>
     /// Id that will be given to the next created contact, chat or message.

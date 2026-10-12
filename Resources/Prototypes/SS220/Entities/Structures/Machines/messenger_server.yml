@@ -20,13 +20,11 @@
         machine_board: !type:Container
         machine_parts: !type:Container
     - type: StationLimitedNetwork
-    #SS220-messenger-ai begin
     - type: StationAiWhitelist
     - type: UserInterface
       interfaces:
         enum.MessengerAiUiKey.Key:
           type: MessengerAiBoundUserInterface
-    #SS220-messenger-ai end
     - type: ApcPowerReceiver
       powerLoad: 200
     - type: ExtensionCableReceiver
@@ -76,6 +74,14 @@
       range: 500
     - type: MessengerServer
       serverName: "Nanotrasen Messenger Server"
+      aiContactEnabled: true
+      departmentChats:
+        Cargo: messenger-department-cargo
+        Medical: messenger-department-medical
+        Engineering: messenger-department-engineering
+        Service: messenger-department-service
+        Security: messenger-department-security
+        Research: messenger-department-research
     - type: AccessReader
       denyTags: [ "NuclearOperative" ]
 

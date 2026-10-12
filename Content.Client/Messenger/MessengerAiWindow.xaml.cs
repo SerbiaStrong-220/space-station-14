@@ -197,10 +197,13 @@ public sealed partial class MessengerAiWindow : FancyWindow
     }
 
     /// <summary>
-    /// Names of the chat members, e.g. "Ivan / Petr", or just one name for the favorites chat.
+    /// Names of the chat members or just one name for the favorites chat.
     /// </summary>
     private string ChatTitle(MessengerChat chat)
     {
+        if (chat.Kind != MessengerChatKind.Contact)
+            return chat.Name ?? "";
+
         var names = new List<string>(chat.MembersId.Count);
 
         foreach (var memberId in chat.MembersId)

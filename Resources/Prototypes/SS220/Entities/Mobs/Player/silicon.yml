@@ -192,3 +192,19 @@
     raffle:
       settings: default
   - type: GhostTakeoverAvailable
+
+- type: entity
+  parent: BaseMentalAction
+  id: ActionAIOpenMessenger
+  name: Open messenger
+  description: Opens the crew messenger. You can write to the crew and they can write to you.
+  components:
+  - type: Action
+    priority: -4
+    itemIconStyle: NoItem
+    icon:
+      sprite: SS220/Interface/Actions/actions_ai.rsi # TODO: add
+      state: comms_console
+    useDelay: 0.5
+  - type: InstantAction
+    event: !type:MessengerAiOpenEvent

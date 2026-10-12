@@ -176,9 +176,13 @@ public sealed partial class MessengerUiFragment : BoxContainer
         if (chat.LastMessage == null || !state.Messages.TryGetValue(chat.LastMessage.Value, out var message))
             return "";
 
-        return message.FromContactId == state.ClientContact.Id
-            ? Loc.GetString("messenger-ui-you-prefix", ("text", message.Text))
-            : message.Text;
+        if (message.FromContactId == state.ClientContact.Id)
+            return Loc.GetString("messenger-ui-you-prefix", ("text", message.Text));
+
+        // in a group chat it is not clear who wrote the message without a name
+        return chat.Kind == MessengerChatKind.Contact
+            ? message.Text
+            : $"{SenderName(state, message)}: {message.Text}";
     }
 
     private static string ChatName(MessengerUiState state, MessengerChatUiState chat)
@@ -250,18 +254,20 @@ public sealed partial class MessengerUiFragment : BoxContainer
 
                 if (message.ReplyToId != null && state.Messages.TryGetValue(message.ReplyToId.Value, out var quoted))
                 {
-                    quoteSender = SenderName(state, peer, quoted);
+                    quoteSender = SenderName(state, quoted);
                     quoteText = quoted.Text;
                 }
 
+                var isOwn = message.FromContactId == state.ClientContact.Id;
+
                 ChatsContainer.AddChild(new MessengerUiMessageItem(message.Text,
                     message.Time,
-                    null,
-                    message.FromContactId == state.ClientContact.Id,
+                    isOwn || chat.Kind == MessengerChatKind.Contact ? null : SenderName(state, message),
+                    isOwn,
                     null,
                     quoteSender,
                     quoteText,
-                    () => SetReply(SenderName(state, peer, message), message)));
+                    () => SetReply(SenderName(state, message), message)));
             }
 
             if (ChatsContainer.ChildCount == 0)
@@ -276,11 +282,12 @@ public sealed partial class MessengerUiFragment : BoxContainer
         _scrollToBottomFrames = ScrollToBottomFrames;
     }
 
-    private static string SenderName(MessengerUiState state, MessengerContact? peer, MessengerMessage message)
+    private static string SenderName(MessengerUiState state, MessengerMessage message)
     {
-        return message.FromContactId == state.ClientContact.Id
-            ? Loc.GetString("messenger-ui-you")
-            : peer?.Name ?? "";
+        if (message.FromContactId == state.ClientContact.Id)
+            return Loc.GetString("messenger-ui-you");
+
+        return state.Contacts.TryGetValue(message.FromContactId, out var contact) ? contact.Name ?? "" : "";
     }
 
     private void SetReply(string senderName, MessengerMessage message)

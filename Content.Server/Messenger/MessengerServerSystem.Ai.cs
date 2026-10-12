@@ -20,7 +20,7 @@ public sealed partial class MessengerServerSystem
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private SharedStationSystem _station = default!;
 
-    private const int MaxAiChats = 100;
+    private const int MaxAiChats = 220;
     private const int MaxAiHistoryMessages = 200;
 
     private static readonly SpriteSpecifier.Texture AiReadIcon =
@@ -31,6 +31,7 @@ public sealed partial class MessengerServerSystem
         SubscribeLocalEvent<MessengerServerComponent, GetVerbsEvent<Verb>>(OnAiGetVerbs);
         SubscribeLocalEvent<MessengerServerComponent, ExaminedEvent>(OnAiExamined);
         SubscribeLocalEvent<MessengerServerComponent, MessengerAiRequestMessage>(OnAiRequest);
+
         SubscribeLocalEvent<AlertLevelChangedEvent>(OnAlertLevelChanged);
     }
 

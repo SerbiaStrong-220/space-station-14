@@ -37,6 +37,7 @@
     actions:
     - ActionJumpToCore
     - ActionAIViewLaws
+    - ActionAIOpenMessenger #SS220-messenger-ai-contact
   - type: UserInterface
     interfaces:
       enum.RadarConsoleUiKey.Key:
@@ -52,6 +53,8 @@
       enum.CommunicationsConsoleUiKey.Key:
         type: CommunicationsConsoleBoundUserInterface
       #SS220 Station Ai Actions start
+      enum.MessengerAiClientUiKey.Key:
+        type: MessengerAiClientBoundUserInterface
       enum.SolarControlConsoleUiKey.Key:
         type: SolarControlConsoleBoundUserInterface
       enum.CargoConsoleUiKey.Orders:

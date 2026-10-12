@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Actions;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Messenger;
@@ -44,4 +45,28 @@ public sealed class MessengerAiViewMessage : BoundUserInterfaceMessage
     public Dictionary<uint, MessengerMessage> Messages = new();
 
     public uint? OpenedChatId;
+}
+
+/// <summary>
+/// Key of the messenger window of the station AI. The window is hosted by the AI entity itself.
+/// </summary>
+[Serializable, NetSerializable]
+public enum MessengerAiClientUiKey : byte
+{
+    Key,
+}
+
+/// <summary>
+/// Action of the station AI that opens its messenger.
+/// </summary>
+public sealed partial class MessengerAiOpenEvent : InstantActionEvent;
+
+/// <summary>
+/// Carries a regular messenger ui state to the AI window. States of a bound ui are shared by all its users,
+/// while the messages can be sent to one actor.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class MessengerAiStateMessage(BoundUserInterfaceState state) : BoundUserInterfaceMessage
+{
+    public BoundUserInterfaceState State = state;
 }

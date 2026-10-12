@@ -2,7 +2,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 using Content.Server.Administration.Logs;
-using Content.Server.Chat.Systems;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Server.Messenger;
 using Content.Shared.CartridgeLoader;
@@ -12,7 +11,6 @@ using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Events;
 using Content.Shared.Messenger;
 using Content.Shared.PDA.Ringer;
-using Robust.Shared.Utility;
 
 namespace Content.Server.CartridgeLoader.Cartridges;
 
@@ -22,11 +20,8 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
     [Dependency] private DeviceNetworkSystem _deviceNetwork = default!;
     [Dependency] private MessengerServerSystem _messengerServer = default!;
     [Dependency] private IAdminLogManager _adminLogger = default!;
-    [Dependency] private ChatSystem _chat = default!;
 
     [Dependency] private EntityQuery<MessengerServerComponent> _serverQuery = default!;
-
-    private const int MaxMessageLength = 500;
 
     private readonly LocId _serverNotFound = "messenger-error-server-not-found";
 
@@ -179,8 +174,7 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
         if (string.IsNullOrEmpty(e.MessageText) || !TryGetServerAddress(ent.Comp, out var serverAddress))
             return;
 
-        var text = e.MessageText.Length > MaxMessageLength ? e.MessageText[..MaxMessageLength] : e.MessageText;
-        var message = _chat.ReplaceWords(text);
+        var message = _messengerServer.SanitizeMessage(e.MessageText);
 
         var payload = new NetworkPayload
         {
@@ -311,7 +305,7 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
     /// Packets carry either a single item or a list of them. Collects both into a new list.
     /// </summary>
     /// <returns>True if there is at least one item.</returns>
-    private static bool TryGetItems<T>(NetworkPayload data,
+    public static bool TryGetItems<T>(NetworkPayload data,
         MessengerServerSystem.NetworkKey itemKey,
         MessengerServerSystem.NetworkKey listKey,
         out List<T> items)
