@@ -270,6 +270,7 @@ public sealed partial class MessengerServerSystem
         uiState = new MessengerUiState
         {
             ClientContact = clientContact,
+            NameLocked = ent.Comp.NameLockedContacts.Contains(contactId),
         };
 
         var index = 0;

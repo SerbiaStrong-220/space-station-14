@@ -30,6 +30,7 @@ public sealed partial class MessengerServerSystem
         SubscribeLocalEvent<IdCardComponent, EntGotInsertedIntoContainerMessage>(OnIdCardInserted);
         SubscribeLocalEvent<IdCardComponent, EntGotRemovedFromContainerMessage>(OnIdCardRemoved);
         SubscribeLocalEvent<MessengerClientCartridgeComponent, CartridgeRemovedEvent>(OnCartridgeRemoved);
+
     }
 
     private void OnServerMapInit(Entity<MessengerServerComponent> ent, ref MapInitEvent args)
@@ -106,16 +107,20 @@ public sealed partial class MessengerServerSystem
 
             foreach (var program in _cartridgeLoader.GetInstalled(loader))
             {
-                if (HasComp<MessengerClientCartridgeComponent>(program))
-                    RefreshCartridge(serverEnt, program, loader);
+                if (!HasComp<MessengerClientCartridgeComponent>(program))
+                    continue;
+
+                RefreshCartridge(serverEnt, program, loader);
+                UpdateContactStatuses(serverEnt);
             }
 
             if (TryComp<CartridgeLoaderComponent>(loader, out var loaderComp)
                 && loaderComp.CartridgeSlot.Item is { } slotItem
                 && HasComp<MessengerClientCartridgeComponent>(slotItem))
+            {
                 RefreshCartridge(serverEnt, slotItem, loader);
-
-            UpdateContactStatuses(serverEnt);
+                UpdateContactStatuses(serverEnt);
+            }
         }
     }
 

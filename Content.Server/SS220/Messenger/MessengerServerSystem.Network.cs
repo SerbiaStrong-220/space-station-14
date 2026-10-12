@@ -39,6 +39,9 @@ public sealed partial class MessengerServerSystem
             case MessengerNetworkCommand.MarkRead:
                 OnMarkRead(ent, args);
                 break;
+            case MessengerNetworkCommand.SetNameLock:
+                OnSetNameLock(ent, args);
+                break;
         }
     }
 
@@ -99,6 +102,15 @@ public sealed partial class MessengerServerSystem
             return;
 
         MarkRead(ent.Comp, contactId, chatId.Value);
+    }
+
+    private void OnSetNameLock(Entity<MessengerServerComponent> ent, DeviceNetworkPacketEvent args)
+    {
+        if (!TryAuthByIdCard(ent, args.Data, out var contactId)
+            || !args.Data.TryGetValue(MessengerNetworkKey.NameLocked.ToString(), out bool? locked))
+            return;
+
+        SetNameLock(ent, contactId, locked.Value);
     }
 
     /// <summary>

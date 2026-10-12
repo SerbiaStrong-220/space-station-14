@@ -722,3 +722,18 @@
   - type: Icon
     state: pda-salvage-JR
 
+
+- type: entity
+  parent: MedicalPDA
+  id: AdminMedicalPDA
+  suffix: Admin
+  description: A medical PDA for admins. It has no messenger.
+  components:
+  - type: CartridgeLoader
+    uiKey: enum.PdaUiKey.Key
+    preinstalled:
+      - CrewManifestCartridge
+      - NotekeeperCartridge
+      - NanoTaskCartridge
+      - NewsReaderCartridge
+      - MedTekCartridge

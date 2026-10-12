@@ -12,6 +12,7 @@ public enum MessengerNetworkCommand
     StateUpdate,
     MessageSend,
     MarkRead,
+    SetNameLock,
 
     // server to cartridge
     Info,
@@ -37,6 +38,7 @@ public enum MessengerNetworkKey
     CurrentChatIds,
     ContactsIds,
     MessagesIds,
+    NameLocked,
 
     // server to cartridge
     ServerName,

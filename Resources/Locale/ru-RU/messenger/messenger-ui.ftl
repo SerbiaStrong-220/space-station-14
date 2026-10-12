@@ -16,3 +16,6 @@ messenger-ui-you-prefix = Вы: { $text }
 messenger-ui-reply-button = Ответить
 messenger-ui-cancel-reply-button = Отмена
 messenger-ui-you = Вы
+
+messenger-ui-name-lock = Не менять имя
+messenger-ui-name-lock-tooltip = Ваше имя в мессенджере перестанет обновляться по имени на ID-карте

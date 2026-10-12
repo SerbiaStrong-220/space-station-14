@@ -9,6 +9,12 @@ namespace Content.Shared.SS220.CartridgeLoader.Cartridges;
 public sealed class MessengerUiState : BoundUserInterfaceState
 {
     public MessengerContact ClientContact = new();
+
+    /// <summary>
+    /// The name of the client contact does not follow its id card. It is known only to the client itself.
+    /// </summary>
+    public bool NameLocked;
+
     public Dictionary<ChatUid, MessengerChatUiState> Chats = new();
     public Dictionary<MessageUid, MessengerMessage> Messages = new();
     public Dictionary<ContactUid, MessengerContact> Contacts = new();

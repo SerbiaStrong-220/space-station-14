@@ -5,9 +5,8 @@ using Content.Shared.SS220.Messenger;
 namespace Content.Server.SS220.Messenger;
 
 /// <summary>
-/// Messenger account of a client: an id card or the station AI. The id card is what identifies a person for the
-/// messenger servers, the cartridge in the pda only delivers the packets.
-/// All logic lives in <see cref="MessengerServerSystem"/>.
+/// Messenger account of a client: an id card or the station AI.
+/// The id card is what identifies a person for the messenger servers
 /// </summary>
 [RegisterComponent]
 public sealed partial class MessengerClientComponent : Component

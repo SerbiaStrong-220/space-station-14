@@ -102,7 +102,23 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
             case MessengerMarkReadUiEvent e:
                 OnMarkRead(ent, e);
                 break;
+            case MessengerSetNameLockUiEvent e:
+                OnSetNameLock(ent, e);
+                break;
         }
+    }
+
+    private void OnSetNameLock(Entity<MessengerClientCartridgeComponent> ent, MessengerSetNameLockUiEvent e)
+    {
+        if (!TryGetServerAddress(ent.Comp, out var serverAddress))
+            return;
+
+        _deviceNetwork.QueuePacket(ent.Owner, serverAddress, new NetworkPayload
+        {
+            [MessengerNetworkKey.Command.ToString()] = MessengerNetworkCommand.SetNameLock,
+            [MessengerNetworkKey.DeviceUid.ToString()] = e.LoaderUid,
+            [MessengerNetworkKey.NameLocked.ToString()] = e.Locked,
+        });
     }
 
     private void OnMarkRead(Entity<MessengerClientCartridgeComponent> ent, MessengerMarkReadUiEvent e)

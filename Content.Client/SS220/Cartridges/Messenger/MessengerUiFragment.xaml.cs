@@ -22,6 +22,7 @@ public sealed partial class MessengerUiFragment : BoxContainer
     public event Action<ChatUid>? OnHistoryViewPressed;
     public event Action? OnBackButtonPressed;
     public event Action? OnRefreshPressed;
+    public event Action<bool>? OnNameLockToggled;
 
     public ChatUid CurrentChat;
 
@@ -43,6 +44,7 @@ public sealed partial class MessengerUiFragment : BoxContainer
         MessageInput.OnTextEntered += _ => SendMessage();
         BackButton.OnPressed += _ => OnBackButtonPressed?.Invoke();
         RefreshButton.OnPressed += _ => OnRefreshPressed?.Invoke();
+        NameLockBox.OnToggled += args => OnNameLockToggled?.Invoke(args.Pressed);
         CancelReplyButton.OnPressed += _ => ClearReply();
         EmojiButton.OnToggled += args => EmojiPanel.Visible = args.Pressed;
 
@@ -113,6 +115,7 @@ public sealed partial class MessengerUiFragment : BoxContainer
         if (chats.Count == 0)
             ChatsContainer.AddChild(new Label { Text = Loc.GetString("messenger-ui-no-chats"), Align = Label.AlignMode.Center });
 
+        NameLockBox.Pressed = messengerUiState.NameLocked;
         SetChatView(false);
     }
 
@@ -289,6 +292,7 @@ public sealed partial class MessengerUiFragment : BoxContainer
 
         SetChatView(false);
         ChatsSearch.Visible = false;
+        NameLockBox.Visible = false;
         RefreshButton.Visible = true;
         ErrorLabel.Visible = true;
         ErrorLabel.Text = err;
@@ -306,6 +310,7 @@ public sealed partial class MessengerUiFragment : BoxContainer
         ReplyBar.Visible = inChat && _replyToId != null;
         EmojiPanel.Visible = inChat && EmojiButton.Pressed;
         ChatsSearch.Visible = true;
+        NameLockBox.Visible = !inChat;
         ErrorLabel.Visible = false;
     }
 }

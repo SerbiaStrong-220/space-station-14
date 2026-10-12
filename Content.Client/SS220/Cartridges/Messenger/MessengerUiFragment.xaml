@@ -11,6 +11,7 @@
             <Button Name="RefreshButton" Text="{Loc 'messenger-ui-refresh-button'}" ToolTip="{Loc 'messenger-ui-refresh-tooltip'}"/>
         </BoxContainer>
         <LineEdit Name="ChatsSearch" Access="Public" HorizontalExpand="True" PlaceHolder="{Loc 'messenger-ui-search-line'}"/>
+        <CheckBox Name="NameLockBox" Text="{Loc 'messenger-ui-name-lock'}" ToolTip="{Loc 'messenger-ui-name-lock-tooltip'}"/>
         <ScrollContainer Name="ChatsScroll" HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
             <BoxContainer Orientation="Vertical" Name="ChatsContainer" HorizontalExpand="True" VerticalExpand="True"/>
         </ScrollContainer>

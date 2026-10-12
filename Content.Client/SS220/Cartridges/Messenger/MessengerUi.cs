@@ -69,6 +69,14 @@ public sealed partial class MessengerUi : UIFragment
             UpdateUiState();
         };
 
+        _fragment.OnNameLockToggled += locked =>
+        {
+            if (_messengerUiState != null)
+                _messengerUiState.NameLocked = locked;
+
+            userInterface.SendMessage(new CartridgeUiMessage(new MessengerSetNameLockUiEvent(locked)));
+        };
+
         _fragment.OnRefreshPressed += () =>
         {
             userInterface.SendMessage(new CartridgeUiMessage(new MessengerUpdateStateUiEvent(true)));

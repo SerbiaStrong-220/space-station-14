@@ -52,6 +52,11 @@ public sealed partial class MessengerServerComponent : Component
 
     public readonly Dictionary<ContactUid, MessengerContact> Contacts = new();
 
+    /// <summary>
+    /// Contacts whose names do not follow the names of their id cards, e.g. agents who rename their cards.
+    /// </summary>
+    public readonly HashSet<ContactUid> NameLockedContacts = new();
+
     public readonly Dictionary<ChatUid, MessengerChat> Chats = new();
 
     public readonly Dictionary<MessageUid, MessengerMessage> Messages = new();

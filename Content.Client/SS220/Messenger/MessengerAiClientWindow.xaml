@@ -2,5 +2,5 @@
                       xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
                       Title="{Loc 'messenger-ai-client-window-title'}"
                       MinSize="420 520">
-
+<BoxContainer Name="ContentContainer" Access="Public"/>
 </controls:FancyWindow>

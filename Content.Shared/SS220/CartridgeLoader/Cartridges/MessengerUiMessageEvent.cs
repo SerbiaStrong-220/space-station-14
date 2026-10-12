@@ -30,6 +30,15 @@ public sealed class MessengerMarkReadUiEvent(ChatUid chatId) : CartridgeMessageE
     public readonly ChatUid ChatId = chatId;
 }
 
+/// <summary>
+/// Stops or resumes the name of the contact following the name of its id card.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class MessengerSetNameLockUiEvent(bool locked) : CartridgeMessageEvent
+{
+    public readonly bool Locked = locked;
+}
+
 [Serializable, NetSerializable]
 public sealed class MessengerUpdateStateUiEvent : CartridgeMessageEvent
 {

@@ -10,10 +10,4 @@ namespace Content.Client.SS220.Messenger;
 /// Read-only terminal-like window of the station AI with chats of a messenger server.
 /// </summary>
 [GenerateTypedNameReferences]
-public sealed partial class MessengerAiClientWindow : FancyWindow, IPinnableWindow
-{
-    public void AddMessengerUI()
-    {
-
-    }
-}
+public sealed partial class MessengerAiClientWindow : FancyWindow, IPinnableWindow;

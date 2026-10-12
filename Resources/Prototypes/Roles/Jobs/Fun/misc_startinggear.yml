@@ -165,7 +165,7 @@
     - AccessConfiguratorUniversal
     # SS220-AdminComforts-Begin
     - GeigerCounter
-    - MedicalPDA
+    - AdminMedicalPDA
     - Multitool
     - Omnitool
     - JawsOfLife

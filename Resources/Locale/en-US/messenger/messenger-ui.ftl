@@ -16,3 +16,6 @@ messenger-ui-you-prefix = You: { $text }
 messenger-ui-reply-button = Reply
 messenger-ui-cancel-reply-button = Cancel
 messenger-ui-you = You
+
+messenger-ui-name-lock = Keep my name
+messenger-ui-name-lock-tooltip = Your messenger name will stop following the name on the ID card

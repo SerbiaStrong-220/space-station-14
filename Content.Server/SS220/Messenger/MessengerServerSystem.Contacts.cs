@@ -62,6 +62,7 @@ public sealed partial class MessengerServerSystem
         {
             if (client.IsLinked
                 || !client.Contacts.TryGetValue(ent, out var contactId)
+                || ent.Comp.NameLockedContacts.Contains(contactId)
                 || !TryGetOwnerName(clientUid, out var name))
                 continue;
 
@@ -75,6 +76,24 @@ public sealed partial class MessengerServerSystem
 
         if (changed != null)
             SendContactsToAll(ent, changed);
+    }
+
+    /// <summary>
+    /// A locked contact keeps its current name when the id card is renamed. Unlocking brings the name of the card back.
+    /// </summary>
+    private void SetNameLock(Entity<MessengerServerComponent> ent, ContactUid contactId, bool locked)
+    {
+        if (!ent.Comp.Contacts.ContainsKey(contactId))
+            return;
+
+        if (locked)
+        {
+            ent.Comp.NameLockedContacts.Add(contactId);
+            return;
+        }
+
+        if (ent.Comp.NameLockedContacts.Remove(contactId))
+            UpdateContactNames(ent);
     }
 
     private bool TryGetOwnerName(EntityUid clientUid, [NotNullWhen(true)] out string? name)

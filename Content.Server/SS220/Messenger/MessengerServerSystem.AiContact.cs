@@ -73,6 +73,9 @@ public sealed partial class MessengerServerSystem
             case MessengerMarkReadUiEvent e:
                 MarkRead(server.Comp, contactId, e.ChatId);
                 break;
+            case MessengerSetNameLockUiEvent e:
+                SetNameLock(server, contactId, e.Locked);
+                break;
         }
     }
 
