@@ -9,6 +9,11 @@ using System.Linq;
 
 namespace Content.Client.SS220.TTS.UI;
 
+// TODO:
+// 1. Sort by id or alphabet
+// 2. Make donation tier separation
+// 3. Add Filter for sponsor or category
+
 [GenerateTypedNameReferences]
 public sealed partial class TtsProviderVoiceSelectorWindow : DefaultWindow
 {

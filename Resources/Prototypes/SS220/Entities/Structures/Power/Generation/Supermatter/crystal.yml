@@ -123,13 +123,3 @@
     location: SuperMatterCrystal
   - type: GuideHelp
     guides: [ Supermatter, Power ]
-
-# Not in use cause of errors in map load/save test
-- type: randomVoicesList
-  id: SuperMatterVoices
-  voices:
-  - adjutant
-  - good_thalya
-  - turret_floor
-  - glados
-  - fact_core
