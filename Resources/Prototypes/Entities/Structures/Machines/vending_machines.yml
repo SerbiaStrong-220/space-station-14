@@ -386,6 +386,10 @@
   name: ShadyCigs Deluxe
   description: If you want to get cancer, might as well do it in style.
   components:
+  # SS220 pistol lighter
+  - type: RandomContrabandInventory
+    table: !type:NestedSelector
+      tableId: PistolLighterContrabandTable
   - type: VendingMachine
     pack: CigaretteMachineInventory
     dispenseOnHitChance: 0.25

@@ -20,7 +20,7 @@
   id: PistolLighterContrabandTable
   table: !type:GroupSelector
     children:
-    - id: Lighter
+    - !type:NoneSelector
       weight: 39
     - id: PistolLighter
       weight: 1

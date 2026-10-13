@@ -47,15 +47,3 @@
     slots:
     - suitStorage
     - Belt
-
-# Vending stock is static, so the 1/40 roll happens when this hidden product is dispensed.
-- type: entity
-  parent: Lighter
-  id: PistolLighterVendingSpawner
-  name: novelty lighter
-  description: A lighter from the vending machine's hidden stock. Its design is a surprise.
-  components:
-  - type: EntityTableSpawner
-    table: !type:NestedSelector
-      tableId: PistolLighterContrabandTable
-    offset: 0
