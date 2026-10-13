@@ -92,7 +92,9 @@ ent-RoboticsConsoleCircuitboard = консоль управления робот
     .desc = Консольная плата для консоли управления робототехникой.
 ent-ComputerXenoborgsControlCircuitboard = консоль управления ксеноборгами (консольная плата)
     .desc = Консольная плата для консоли управления ксеноборгами.
-ent-StationAiUploadCircuitboard = консоль загрузки ИИ (консольная плата)
-    .desc = Консольная плата для консоли загрузки ИИ.
+# SS220 random lawset begin
+ent-StationAiUploadCircuitboard = консоль изменения законов (консольная плата)
+    .desc = Консольная плата для консоли изменения законов.
+# SS220 random lawset end
 ent-StationAiFixerCircuitboard = консоль восстановления ИИ (консольная плата)
     .desc = Консольная плата для консоли восстановления ИИ.
