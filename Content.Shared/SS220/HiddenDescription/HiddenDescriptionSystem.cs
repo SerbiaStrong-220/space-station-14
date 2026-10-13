@@ -28,7 +28,7 @@ public abstract partial class SharedHiddenDescriptionSystem : EntitySystem
     {
         foreach (var (knowledge, locIds) in component.Entries)
         {
-            if (!_experience.HaveKnowledge((args.Examiner, experience), knowledge))
+            if (!_experience.HaveKnowledge(args.Examiner, knowledge))
                 continue;
 
             foreach (var locId in locIds)

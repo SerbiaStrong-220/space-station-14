@@ -13,7 +13,10 @@ public sealed partial class ExperienceAdditionSystem : EntitySystem
         SubscribeLocalEvent<ExperienceComponent, AddExperience>(OnAddExperience);
         SubscribeLocalEvent<ExperienceComponent, RemoveExperience>(OnRemoveExperience);
         SubscribeLocalEvent<ExperienceComponent, TryChangeExperienceDefinition>(OnTryChangeExperienceDefinition);
-        SubscribeLocalEvent<TryAddExperienceAdditionComponent, MapInitEvent>(OnTemporaryMapInit);
+
+        SubscribeLocalEvent<ExperienceAdditionComponent, MapInitEvent>(OnExperienceAdditionMapInit);
+
+        SubscribeLocalEvent<TryAddExperienceAdditionComponent, MapInitEvent>(OnTryAddExperienceAdditionMapInit);
 
         InitializeOtherSubscription();
     }
@@ -79,6 +82,11 @@ public sealed partial class ExperienceAdditionSystem : EntitySystem
         _recalculateQueue.Add(uid);
     }
 
+    private void OnExperienceAdditionMapInit(Entity<ExperienceAdditionComponent> entity, ref MapInitEvent _)
+    {
+        EnqueueRecalculation(entity);
+    }
+
     private void OnAddExperience(Entity<ExperienceComponent> entity, ref AddExperience args)
     {
         UpsertSpecifier(entity, args.Source, args.Specifier);
@@ -110,7 +118,7 @@ public sealed partial class ExperienceAdditionSystem : EntitySystem
             DirtyField(entity, additionComp, nameof(ExperienceAdditionComponent.DefinitionId));
     }
 
-    private void OnTemporaryMapInit(Entity<TryAddExperienceAdditionComponent> entity, ref MapInitEvent _)
+    private void OnTryAddExperienceAdditionMapInit(Entity<TryAddExperienceAdditionComponent> entity, ref MapInitEvent _)
     {
         if (TryComp<ExperienceComponent>(entity, out var experience))
         {

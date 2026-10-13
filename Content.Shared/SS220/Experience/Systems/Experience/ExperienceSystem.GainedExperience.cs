@@ -10,8 +10,6 @@ public sealed partial class ExperienceSystem : EntitySystem
     {
         SubscribeLocalEvent<ExperienceComponent, RecalculateEntityExperience>(OnRecalculateEntityExperience);
 
-        SubscribeLocalEvent<ExperienceAdditionComponent, MapInitEvent>(ExperienceAdditionOnMapInit);
-
         SubscribeLocalEvent<ExperienceAdditionComponent, SublevelAdditionPointInitialResolve>(ExperienceAdditionOnSublevelAdditionPointInitialResolve);
         SubscribeLocalEvent<ExperienceAdditionComponent, KnowledgeInitialResolve>(ExperienceAdditionOnKnowledgeInitialResolve);
 
@@ -37,12 +35,6 @@ public sealed partial class ExperienceSystem : EntitySystem
         }
 
         InitializeExperienceComp(entity);
-    }
-
-    private void ExperienceAdditionOnMapInit(Entity<ExperienceAdditionComponent> entity, ref MapInitEvent _)
-    {
-        var recalculateEv = new RecalculateEntityExperience();
-        RaiseLocalEvent(entity, ref recalculateEv);
     }
 
     private void ExperienceAdditionOnSkillTreeAdded(Entity<ExperienceAdditionComponent> entity, ref SkillTreeAdded args)
