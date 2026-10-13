@@ -24,3 +24,5 @@ messenger-department-engineering = Инженерный отдел
 messenger-department-service = Отдел сервиса
 messenger-department-security = Служба безопасности
 messenger-department-research = Научный отдел
+
+messenger-unknown-contact = неизвестный

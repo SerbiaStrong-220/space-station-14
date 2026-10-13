@@ -116,13 +116,11 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
         if (!TryGetServerAddress(ent.Comp, out var serverAddress))
             return;
 
-        _deviceNetwork.QueuePacket(ent.Owner, serverAddress, new NetworkPayload
-        {
-            [MessengerNetworkKey.Command.ToString()] = MessengerNetworkCommand.SetChatMute,
-            [MessengerNetworkKey.DeviceUid.ToString()] = e.LoaderUid,
-            [MessengerNetworkKey.ChatId.ToString()] = e.ChatId,
-            [MessengerNetworkKey.ChatMuted.ToString()] = e.Muted,
-        });
+        var payload = CreatePayload(MessengerNetworkCommand.SetChatMute, e.LoaderUid);
+        payload[MessengerNetworkKey.ChatId.ToString()] = e.ChatId;
+        payload[MessengerNetworkKey.ChatMuted.ToString()] = e.Muted;
+
+        _deviceNetwork.QueuePacket(ent.Owner, serverAddress, payload);
     }
 
     private void OnSetNameLock(Entity<MessengerClientCartridgeComponent> ent, MessengerSetNameLockUiEvent e)
@@ -130,12 +128,10 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
         if (!TryGetServerAddress(ent.Comp, out var serverAddress))
             return;
 
-        _deviceNetwork.QueuePacket(ent.Owner, serverAddress, new NetworkPayload
-        {
-            [MessengerNetworkKey.Command.ToString()] = MessengerNetworkCommand.SetNameLock,
-            [MessengerNetworkKey.DeviceUid.ToString()] = e.LoaderUid,
-            [MessengerNetworkKey.NameLocked.ToString()] = e.Locked,
-        });
+        var payload = CreatePayload(MessengerNetworkCommand.SetNameLock, e.LoaderUid);
+        payload[MessengerNetworkKey.NameLocked.ToString()] = e.Locked;
+
+        _deviceNetwork.QueuePacket(ent.Owner, serverAddress, payload);
     }
 
     private void OnMarkRead(Entity<MessengerClientCartridgeComponent> ent, MessengerMarkReadUiEvent e)
@@ -143,12 +139,10 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
         if (!TryGetServerAddress(ent.Comp, out var serverAddress))
             return;
 
-        _deviceNetwork.QueuePacket(ent.Owner, serverAddress, new NetworkPayload
-        {
-            [MessengerNetworkKey.Command.ToString()] = MessengerNetworkCommand.MarkRead,
-            [MessengerNetworkKey.DeviceUid.ToString()] = e.LoaderUid,
-            [MessengerNetworkKey.ChatId.ToString()] = e.ChatId,
-        });
+        var payload = CreatePayload(MessengerNetworkCommand.MarkRead, e.LoaderUid);
+        payload[MessengerNetworkKey.ChatId.ToString()] = e.ChatId;
+
+        _deviceNetwork.QueuePacket(ent.Owner, serverAddress, payload);
     }
 
     /// <summary>
@@ -166,11 +160,7 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
         if (!TryGetServerAddress(ent.Comp, out var serverAddress))
             return;
 
-        var payload = new NetworkPayload
-        {
-            [MessengerNetworkKey.Command.ToString()] = MessengerNetworkCommand.StateUpdate,
-            [MessengerNetworkKey.DeviceUid.ToString()] = e.LoaderUid,
-        };
+        var payload = CreatePayload(MessengerNetworkCommand.StateUpdate, e.LoaderUid);
 
         if (e.CurrentContacts is { Count: > 0 })
             payload[MessengerNetworkKey.ContactsIds.ToString()] = e.CurrentContacts;
@@ -191,13 +181,9 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
 
         var message = _messengerServer.SanitizeMessage(e.MessageText);
 
-        var payload = new NetworkPayload
-        {
-            [MessengerNetworkKey.Command.ToString()] = MessengerNetworkCommand.MessageSend,
-            [MessengerNetworkKey.DeviceUid.ToString()] = e.LoaderUid,
-            [MessengerNetworkKey.ChatId.ToString()] = e.ChatId,
-            [MessengerNetworkKey.MessageText.ToString()] = message,
-        };
+        var payload = CreatePayload(MessengerNetworkCommand.MessageSend, e.LoaderUid);
+        payload[MessengerNetworkKey.ChatId.ToString()] = e.ChatId;
+        payload[MessengerNetworkKey.MessageText.ToString()] = message;
 
         if (e.ReplyToId != null)
             payload[MessengerNetworkKey.ReplyToId.ToString()] = e.ReplyToId.Value;
@@ -305,15 +291,20 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
 
         foreach (var frequency in _messengerServer.ActiveServersFrequency(mapId))
         {
-            _deviceNetwork.QueuePacket(senderUid,
-                null,
-                new NetworkPayload
-                {
-                    [MessengerNetworkKey.Command.ToString()] = command,
-                    [MessengerNetworkKey.DeviceUid.ToString()] = loaderUid,
-                },
-                frequency: frequency);
+            _deviceNetwork.QueuePacket(senderUid, null, CreatePayload(command, GetNetEntity(loaderUid)), frequency: frequency);
         }
+    }
+
+    /// <summary>
+    /// Packet of the cartridge: the command and the device whose id card is the authentication of the client.
+    /// </summary>
+    private static NetworkPayload CreatePayload(MessengerNetworkCommand command, NetEntity netLoader)
+    {
+        return new NetworkPayload
+        {
+            [MessengerNetworkKey.Command.ToString()] = command,
+            [MessengerNetworkKey.DeviceUid.ToString()] = netLoader,
+        };
     }
 
     /// <summary>

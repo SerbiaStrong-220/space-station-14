@@ -30,7 +30,6 @@ public sealed partial class MessengerServerSystem
         SubscribeLocalEvent<IdCardComponent, EntGotInsertedIntoContainerMessage>(OnIdCardInserted);
         SubscribeLocalEvent<IdCardComponent, EntGotRemovedFromContainerMessage>(OnIdCardRemoved);
         SubscribeLocalEvent<MessengerClientCartridgeComponent, CartridgeRemovedEvent>(OnCartridgeRemoved);
-
     }
 
     private void OnServerMapInit(Entity<MessengerServerComponent> ent, ref MapInitEvent args)
@@ -107,21 +106,21 @@ public sealed partial class MessengerServerSystem
 
             foreach (var program in _cartridgeLoader.GetInstalled(loader))
             {
-                if (!HasComp<MessengerClientCartridgeComponent>(program))
-                    continue;
-
-                RefreshCartridge(serverEnt, program, loader);
-                UpdateContactStatuses(serverEnt);
+                RefreshProgram(serverEnt, program, loader);
             }
 
-            if (TryComp<CartridgeLoaderComponent>(loader, out var loaderComp)
-                && loaderComp.CartridgeSlot.Item is { } slotItem
-                && HasComp<MessengerClientCartridgeComponent>(slotItem))
-            {
-                RefreshCartridge(serverEnt, slotItem, loader);
-                UpdateContactStatuses(serverEnt);
-            }
+            if (TryComp<CartridgeLoaderComponent>(loader, out var loaderComp) && loaderComp.CartridgeSlot.Item is { } slotItem)
+                RefreshProgram(serverEnt, slotItem, loader);
         }
+    }
+
+    private void RefreshProgram(Entity<MessengerServerComponent> server, EntityUid program, EntityUid loader)
+    {
+        if (!HasComp<MessengerClientCartridgeComponent>(program))
+            return;
+
+        RefreshCartridge(server, program, loader);
+        UpdateContactStatuses(server);
     }
 
     /// <summary>
@@ -232,6 +231,8 @@ public sealed partial class MessengerServerSystem
         server.Contacts[newContact.Id] = newContact;
         EnsureComp<MessengerClientComponent>(clientUid).Contacts[ent] = newContact.Id;
 
+        var unknownName = Loc.GetString("messenger-unknown-contact");
+
         // for now every contact can write to every other contact
         foreach (var contactId in server.Contacts.Keys)
         {
@@ -240,7 +241,7 @@ public sealed partial class MessengerServerSystem
 
             var chatName = contactId == newContact.Id
                 ? Loc.GetString("messenger-ui-favorites-chat")
-                : Loc.GetString("messenger-server-chat-pair", ("first", contact.Name ?? "unknown"), ("second", newContact.Name ?? "unknown"));
+                : Loc.GetString("messenger-server-chat-pair", ("first", contact.Name ?? unknownName), ("second", newContact.Name ?? unknownName));
 
             var chat = new MessengerChat(chatName,
                 MessengerChatKind.Contact,

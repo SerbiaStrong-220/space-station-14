@@ -135,7 +135,7 @@ public sealed partial class MessengerServerSystem
     {
         var contacts = CollectMissingContacts(ent.Comp,
             chats,
-            GetKnownIds<ContactUid>(args.Data, MessengerNetworkKey.ContactsIds));
+            CopyKnownIds<ContactUid>(args.Data, MessengerNetworkKey.ContactsIds));
 
         if (contacts.Count == 0)
             return;
@@ -156,7 +156,7 @@ public sealed partial class MessengerServerSystem
     {
         var messages = CollectMissingMessages(ent.Comp,
             chats,
-            GetKnownIds<MessageUid>(args.Data, MessengerNetworkKey.MessagesIds));
+            CopyKnownIds<MessageUid>(args.Data, MessengerNetworkKey.MessagesIds));
 
         if (messages.Count == 0)
             return;
@@ -176,7 +176,7 @@ public sealed partial class MessengerServerSystem
         List<MessengerChat> chats)
     {
         var missingChats = CollectMissingChats(chats,
-            GetKnownIds<ChatUid>(args.Data, MessengerNetworkKey.CurrentChatIds));
+            CopyKnownIds<ChatUid>(args.Data, MessengerNetworkKey.CurrentChatIds));
 
         if (missingChats.Count == 0)
             return;
@@ -228,11 +228,9 @@ public sealed partial class MessengerServerSystem
     /// <summary>
     /// Returns a modifiable copy of the id set sent by the client, or an empty set if there is none.
     /// </summary>
-    private static HashSet<T> GetKnownIds<T>(NetworkPayload payload, MessengerNetworkKey key)
+    private static HashSet<T> CopyKnownIds<T>(NetworkPayload payload, MessengerNetworkKey key)
     {
-        return payload.TryGetValue(key.ToString(), out HashSet<T>? ids)
-            ? new HashSet<T>(ids)
-            : new HashSet<T>();
+        return CopyIds(payload.TryGetValue(key.ToString(), out HashSet<T>? ids) ? ids : null);
     }
 
     /// <summary>

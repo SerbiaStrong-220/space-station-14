@@ -115,11 +115,6 @@ public sealed partial class MessengerServerSystem
             SendAiState(ai, new MessengerChatUpdateUiState(missingChats));
     }
 
-    private static HashSet<T> CopyIds<T>(HashSet<T>? ids)
-    {
-        return ids == null ? new HashSet<T>() : new HashSet<T>(ids);
-    }
-
     /// <summary>
     /// Turns a packet meant for a pda into the ui state of the AI window, if the window is open.
     /// Updates missed while it is closed are restored by the full state on the next opening.

@@ -115,7 +115,7 @@ public sealed partial class MessengerUiFragment : BoxContainer
         }
 
         if (chats.Count == 0)
-            ChatsContainer.AddChild(new Label { Text = Loc.GetString("messenger-ui-no-chats"), Align = Label.AlignMode.Center });
+            AddInfoLabel(Loc.GetString("messenger-ui-no-chats"));
 
         NameLockBox.Pressed = messengerUiState.NameLocked;
         SetChatView(false);
@@ -266,7 +266,7 @@ public sealed partial class MessengerUiFragment : BoxContainer
             }
 
             if (ChatsContainer.ChildCount == 0)
-                ChatsContainer.AddChild(new Label { Text = Loc.GetString("messenger-ui-no-messages"), Align = Label.AlignMode.Center });
+                AddInfoLabel(Loc.GetString("messenger-ui-no-messages"));
 
             MuteButton.Pressed = chat.Muted;
 
@@ -277,6 +277,11 @@ public sealed partial class MessengerUiFragment : BoxContainer
 
         SetChatView(true);
         _scrollToBottomFrames = ScrollToBottomFrames;
+    }
+
+    private void AddInfoLabel(string text)
+    {
+        ChatsContainer.AddChild(new Label { Text = text, Align = Label.AlignMode.Center });
     }
 
     private static string SenderName(MessengerUiState state, MessengerMessage message)

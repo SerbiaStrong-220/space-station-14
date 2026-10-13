@@ -77,14 +77,6 @@ public sealed partial class MessengerUi : UIFragment
             userInterface.SendMessage(new CartridgeUiMessage(new MessengerSetNameLockUiEvent(locked)));
         };
 
-        _fragment.OnChatMuteToggled += (chatId, muted) =>
-        {
-            if (_messengerUiState != null && _messengerUiState.Chats.TryGetValue(chatId, out var chat))
-                chat.Muted = muted;
-
-            userInterface.SendMessage(new CartridgeUiMessage(new MessengerSetChatMuteUiEvent(chatId, muted)));
-        };
-
         _fragment.OnRefreshPressed += () =>
         {
             userInterface.SendMessage(new CartridgeUiMessage(new MessengerUpdateStateUiEvent(true)));

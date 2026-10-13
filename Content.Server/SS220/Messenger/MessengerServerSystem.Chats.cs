@@ -130,13 +130,7 @@ public sealed partial class MessengerServerSystem
 
     private static void AddPrivateChat(MessengerServerComponent server, ContactUid contactId, ChatUid chatId)
     {
-        if (!server.PrivateChats.TryGetValue(contactId, out var privateChats))
-        {
-            privateChats = new HashSet<ChatUid>();
-            server.PrivateChats[contactId] = privateChats;
-        }
-
-        privateChats.Add(chatId);
+        server.PrivateChats.GetOrNew(contactId).Add(chatId);
     }
 
     private static bool IsChatMuted(MessengerServerComponent server, ContactUid contactId, ChatUid chatId)
@@ -149,11 +143,7 @@ public sealed partial class MessengerServerSystem
         if (!CanAccessChat(server, contactId, chatId))
             return;
 
-        if (!server.MutedChats.TryGetValue(contactId, out var mutedChats))
-        {
-            mutedChats = new HashSet<ChatUid>();
-            server.MutedChats[contactId] = mutedChats;
-        }
+        var mutedChats = server.MutedChats.GetOrNew(contactId);
 
         if (muted)
             mutedChats.Add(chatId);
@@ -168,13 +158,7 @@ public sealed partial class MessengerServerSystem
             || !CanAccessChat(server, contactId, chat.Id))
             return;
 
-        if (!server.LastReadMessages.TryGetValue(contactId, out var readMessages))
-        {
-            readMessages = new Dictionary<ChatUid, MessageUid>();
-            server.LastReadMessages[contactId] = readMessages;
-        }
-
-        readMessages[chat.Id] = chat.LastMessageId.Value;
+        server.LastReadMessages.GetOrNew(contactId)[chat.Id] = chat.LastMessageId.Value;
     }
 
     /// <summary>
@@ -200,6 +184,14 @@ public sealed partial class MessengerServerSystem
         }
 
         return unread;
+    }
+
+    /// <summary>
+    /// Copy of the ids the client has, because the collecting adds the ids of the result to the set.
+    /// </summary>
+    private static HashSet<T> CopyIds<T>(HashSet<T>? ids)
+    {
+        return ids == null ? new HashSet<T>() : new HashSet<T>(ids);
     }
 
     /// <param name="knownIds">Ids the client has, filled with the ids of the result.</param>
