@@ -104,7 +104,7 @@
   - type: ZombieImmune
   - type: Repairable
     damageValue: -10 # 10 seconds to repair from crit
-    doAfterDelay: 1 # SS220 borg self welding
+    doAfterDelay: 1
     fuelCost: 0.5
     allowSelfRepair: true # SS220 borg self welding
   - type: BorgChassis
