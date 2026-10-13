@@ -203,8 +203,8 @@
     priority: -4
     itemIconStyle: NoItem
     icon:
-      sprite: SS220/Interface/Actions/actions_ai.rsi # TODO: add
-      state: comms_console
+      sprite: SS220/Interface/Actions/actions_ai_ccsa.rsi # TODO: add
+      state: pda_send
     useDelay: 0.5
   - type: InstantAction
     event: !type:MessengerAiOpenEvent

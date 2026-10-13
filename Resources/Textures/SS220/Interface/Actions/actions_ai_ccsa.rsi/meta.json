@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from tg station https://github.com/tgstation/tgstation/blob/HEAD/icons/hud/screen_ai.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "pda_send"
+    }
+  ]
+}
