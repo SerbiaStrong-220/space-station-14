@@ -174,8 +174,7 @@ public sealed partial class MessengerUi : UIFragment
         if (_messengerUiState == null)
             return;
 
-        var addMessage = _messengerUiState.Messages.TryAdd(state.Message.Id, state.Message);
-        DebugTools.Assert(addMessage);
+        _messengerUiState.Messages.TryAdd(state.Message.Id, state.Message);
 
         var chat = GetOrCreateChat(state.ChatId);
         var isNew = chat.Messages.Add(state.Message.Id);
