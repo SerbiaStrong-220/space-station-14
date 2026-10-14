@@ -4,7 +4,7 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 10/11/2026 05:56:31
+  time: 10/14/2026 08:34:46
   entityCount: 25023
 maps:
 - 1
@@ -25502,7 +25502,7 @@ entities:
       pos: 31.5,22.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -69807.21
+      secondsUntilStateChange: -69821.42
       state: Opening
   - uid: 385
     components:
@@ -67480,13 +67480,6 @@ entities:
       parent: 1310
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - фиолетовые синтетические волокна
-      fibers: []
-      fingerprints: []
 - proto: ChemistryHotplate
   entities:
   - uid: 8297
@@ -70961,13 +70954,6 @@ entities:
       parent: 8736
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 8813
     components:
     - type: Transform
@@ -70981,14 +70967,6 @@ entities:
       parent: 8731
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые плазматиеские волокна
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 8814
     components:
     - type: Transform
@@ -71779,13 +71757,6 @@ entities:
       parent: 1310
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - фиолетовые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 8936
     components:
     - type: Transform
@@ -72025,13 +71996,6 @@ entities:
       parent: 8736
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
 - proto: ClothingShoesBootsJackFilled
   entities:
   - uid: 8953
@@ -72090,13 +72054,6 @@ entities:
       parent: 8736
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
 - proto: ClothingShoesCult
   entities:
   - uid: 8957
@@ -75069,13 +75026,6 @@ entities:
       parent: 8736
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
 - proto: Crematorium
   entities:
   - uid: 9408
@@ -77572,7 +77522,7 @@ entities:
       pos: 35.5,3.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -70438.96
+      secondsUntilStateChange: -70453.17
       state: Closing
 - proto: CurtainsCyanOpen
   entities:
@@ -89327,13 +89277,6 @@ entities:
       parent: 1310
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - фиолетовые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 11842
     components:
     - type: Transform
@@ -109838,13 +109781,6 @@ entities:
           showEnts: False
           occludes: True
           ent: 4
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые плазматиеские волокна
-      fibers: []
-      fingerprints: []
     - type: NameModifier
       baseName: стеклянная ваза
 - proto: GoldOre1
@@ -118065,13 +118001,6 @@ entities:
       parent: 3
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые плазматиеские волокна
-      fibers: []
-      fingerprints: []
   - uid: 15916
     components:
     - type: Transform
@@ -121569,13 +121498,6 @@ entities:
     - type: Transform
       pos: -39.38667,-0.40038562
       parent: 2
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые плазматиеские волокна
-      fibers: []
-      fingerprints: []
   - uid: 16383
     components:
     - type: Transform
@@ -125900,14 +125822,6 @@ entities:
       parent: 8731
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые плазматиеские волокна
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 16960
     components:
     - type: Transform
@@ -137861,26 +137775,12 @@ entities:
       parent: 1648
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1650
     components:
     - type: Transform
       parent: 1648
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
 - proto: ShippingContainerGorlexRed
   entities:
   - uid: 19120
@@ -141426,13 +141326,6 @@ entities:
       parent: 1310
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - фиолетовые синтетические волокна
-      fibers: []
-      fingerprints: []
 - proto: Sink
   entities:
   - uid: 19517
@@ -143355,7 +143248,7 @@ entities:
       pos: 55.5,-35.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -508211.3
+      secondsUntilStateChange: -508225.53
       state: Opening
 - proto: SpaceCarpCube
   entities:
@@ -149451,13 +149344,6 @@ entities:
       parent: 8736
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 20866
     components:
     - type: Transform
@@ -150355,13 +150241,6 @@ entities:
       parent: 1310
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - фиолетовые синтетические волокна
-      fibers: []
-      fingerprints: []
 - proto: TritiumCanisterBroken
   entities:
   - uid: 20979
@@ -170364,13 +170243,6 @@ entities:
       parent: 8736
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
 - proto: WeaponCapacitorRecharger
   entities:
   - uid: 24460
@@ -170508,13 +170380,6 @@ entities:
       parent: 8789
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
 - proto: WeaponRevolverPythonToy
   entities:
   - uid: 9374
@@ -173691,13 +173556,6 @@ entities:
       parent: 8736
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
 - proto: WschamomileSeeds
   entities:
   - uid: 8744
@@ -173706,13 +173564,6 @@ entities:
       parent: 8736
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
 - proto: wtulip
   entities:
   - uid: 25016
@@ -173729,13 +173580,6 @@ entities:
       parent: 8736
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
 - proto: ZiptiesBroken
   entities:
   - uid: 25017

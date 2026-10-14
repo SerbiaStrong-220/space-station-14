@@ -4,7 +4,7 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 09/19/2026 00:07:02
+  time: 10/14/2026 08:33:24
   entityCount: 39138
 maps:
 - 1
@@ -118854,7 +118854,7 @@ entities:
       pos: 33.5,-93.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -983801.94
+      secondsUntilStateChange: -984054
       state: Closing
   - uid: 17525
     components:
@@ -123043,7 +123043,7 @@ entities:
       pos: 43.5,-95.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -801859.75
+      secondsUntilStateChange: -802111.8
       state: Closing
   - uid: 17932
     components:
@@ -123052,7 +123052,7 @@ entities:
       pos: 43.5,-94.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -801861.06
+      secondsUntilStateChange: -802113.1
       state: Closing
   - uid: 17933
     components:
@@ -123061,7 +123061,7 @@ entities:
       pos: 43.5,-93.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -801862.3
+      secondsUntilStateChange: -802114.4
       state: Closing
   - uid: 17934
     components:
@@ -123069,7 +123069,7 @@ entities:
       pos: 60.5,-82.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -801839.75
+      secondsUntilStateChange: -802091.8
       state: Closing
   - uid: 17935
     components:
@@ -123077,7 +123077,7 @@ entities:
       pos: 61.5,-82.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -801838.94
+      secondsUntilStateChange: -802091
       state: Closing
   - uid: 17936
     components:
@@ -205854,16 +205854,6 @@ entities:
     - type: Transform
       pos: 60.461666,-98.43451
       parent: 2
-    - type: Forensics
-      residues: []
-      dnas:
-      - ACCGATTCGTCAGAAT
-      - GATTCTTCACTTAGGC
-      microFibers: []
-      fibers: []
-      fingerprints:
-      - B90F88B430265C68F5946C7E0629F4A7
-      - 19786C26B81752B2A9D3627A69FC27AB
 - proto: RollerBed
   entities:
   - uid: 30284
