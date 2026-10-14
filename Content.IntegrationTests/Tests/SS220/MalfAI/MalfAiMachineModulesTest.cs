@@ -426,6 +426,13 @@ public sealed class MalfAiMachineModulesTest : GameTest
                 "The factory did not produce the converted cyborg plus two extra shells.");
             var borg = borgs[0];
 
+            foreach (var shell in borgs)
+            {
+                var shellLaws = entMan.GetComponent<SiliconLawProviderComponent>(shell).Lawset?.Laws;
+                Assert.That(shellLaws?.Exists(law => law.LawIdentifierOverride == MalfAiConstants.ZeroLawMarker), Is.True,
+                    "Produced shell is missing the Malf zero law.");
+            }
+
             var mindSys = entMan.System<SharedMindSystem>();
             Assert.That(mindSys.TryGetMind(borg, out _, out _), Is.False,
                 "Sessionless corpse mind transferred: the ghost role is now bricked.");

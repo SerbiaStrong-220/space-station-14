@@ -268,6 +268,19 @@ public sealed class StoreDiscountSystem : EntitySystem
                 continue;
             }
 
+            var canDiscount = false;
+            foreach (var (currency, downTo) in listing.DiscountDownTo)
+            {
+                if (listing.OriginalCost.TryGetValue(currency, out var price) && downTo < price)
+                {
+                    canDiscount = true;
+                    break;
+                }
+            }
+
+            if (!canDiscount)
+                continue;
+
             if (!listingsByDiscountCategory.TryGetValue(category.Value, out var list))
             {
                 list = new List<ListingDataWithCostModifiers>();

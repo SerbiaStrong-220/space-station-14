@@ -2381,7 +2381,7 @@
   productEntity: ClothingOuterVestWebMerc #SS220 syndie armor tweaks
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 3 #SS220 syndie armor tweaks
+    Telecrystal: 2 #SS220 syndie armor tweaks
   cost:
     Telecrystal: 3 #SS220 syndie armor tweaks
   categories:
@@ -2403,7 +2403,7 @@
   productEntity: ClothingOuterVestWebElite
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 6 # ss220 - post upstream - uplink tweaks
+    Telecrystal: 4 # ss220 - post upstream - uplink tweaks
   cost:
     Telecrystal: 6 # ss220 - post upstream - uplink tweaks
   categories:

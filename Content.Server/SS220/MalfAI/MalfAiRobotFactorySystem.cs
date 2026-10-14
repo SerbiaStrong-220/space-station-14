@@ -155,6 +155,8 @@ public sealed partial class MalfAiRobotFactorySystem : EntitySystem
         if (!Transform(factory).Anchored)
             _xform.AnchorEntity(factory);
 
+        SpawnExtraShells(factory);
+
         if (args.Action is { } actionId)
             _malfAi.ConsumePurchasedAction(mindId, actionId);
 
@@ -291,8 +293,6 @@ public sealed partial class MalfAiRobotFactorySystem : EntitySystem
 
         _laws.InstallMalfLaw(borg);
 
-        SpawnExtraShells(ent);
-
         _audio.PlayPvs(ConvertDoneSound, ent);
         _popup.PopupEntity(Loc.GetString(FactoryConvertDone), ent);
         var pilot = seatedMind is { } seated ? ToPrettyString(seated) : "open ghost role";
@@ -321,11 +321,11 @@ public sealed partial class MalfAiRobotFactorySystem : EntitySystem
         _ghost.SpawnGhost((mindId, mind), (EntityCoordinates?) null, canReturn: false);
     }
 
-    private void SpawnExtraShells(Entity<MalfAiFactoryComponent> ent)
+    private void SpawnExtraShells(EntityUid factory)
     {
         for (var i = 0; i < ExtraShellCount; i++)
         {
-            var extra = Spawn(ShellProto, Transform(ent).Coordinates);
+            var extra = Spawn(ShellProto, Transform(factory).Coordinates);
             MoveOffFactoryTile(extra);
             StripTransponderSuite(extra);
 
