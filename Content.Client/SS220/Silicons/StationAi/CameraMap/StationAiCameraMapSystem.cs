@@ -2,12 +2,19 @@
 
 using Content.Client.SS220.Silicons.StationAi.CameraMap.UI;
 using Content.Shared.SS220.Silicons.StationAi.CameraMap;
+using Robust.Client.Audio;
+using Robust.Client.Graphics;
+using Robust.Shared.Player;
 
 namespace Content.Client.SS220.Silicons.StationAi.CameraMap;
 
 public sealed class StationAiCameraMapSystem : SharedStationAiCameraMapSystem
 {
+    [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private readonly IOverlayManager _overlays = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+
+    private StationAiCameraSwitchOverlay _switchOverlay = default!;
 
     /// <summary>
     ///     Cameras the local player pinned. Kept here so they survive closing the window.
@@ -18,6 +25,25 @@ public sealed class StationAiCameraMapSystem : SharedStationAiCameraMapSystem
     {
         base.Initialize();
         SubscribeLocalEvent<StationAiCameraMapComponent, AfterAutoHandleStateEvent>(OnAfterState);
+
+        // Draws nothing until played, so it can stay registered.
+        _switchOverlay = new StationAiCameraSwitchOverlay();
+        _overlays.AddOverlay(_switchOverlay);
+    }
+
+    public override void Shutdown()
+    {
+        base.Shutdown();
+        _overlays.RemoveOverlay(_switchOverlay);
+    }
+
+    protected override void ViewMoved(Entity<StationAiCameraMapComponent> ent)
+    {
+        if (!Timing.IsFirstTimePredicted)
+            return;
+
+        _audio.PlayGlobal(ent.Comp.SwitchSound, Filter.Local(), false);
+        _switchOverlay.Play();
     }
 
     private void OnAfterState(Entity<StationAiCameraMapComponent> ent, ref AfterAutoHandleStateEvent args)

@@ -31,6 +31,7 @@ public abstract class SharedStationAiCameraMapSystem : EntitySystem
             return;
 
         StartCooldown(ent);
+        ViewMoved(ent);
     }
 
     private void OnCrewJump(Entity<StationAiCameraMapComponent> ent, ref StationAiCameraMapCrewJumpMessage args)
@@ -39,6 +40,7 @@ public abstract class SharedStationAiCameraMapSystem : EntitySystem
             return;
 
         StartCooldown(ent);
+        ViewMoved(ent);
     }
 
     /// <summary>
@@ -76,6 +78,13 @@ public abstract class SharedStationAiCameraMapSystem : EntitySystem
         ent.Comp.NextJump = Timing.CurTime + ent.Comp.Cooldown;
         Dirty(ent);
         CooldownChanged(ent);
+    }
+
+    /// <summary>
+    ///     Lets the client play the switch effect when a jump is pressed.
+    /// </summary>
+    protected virtual void ViewMoved(Entity<StationAiCameraMapComponent> ent)
+    {
     }
 
     /// <summary>

@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -23,6 +24,13 @@ public sealed partial class StationAiCameraMapComponent : Component
     /// </summary>
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NextJump;
+
+    /// <summary>
+    ///     Played locally to the AI when its view moves through the map.
+    /// </summary>
+    [DataField]
+    public SoundSpecifier SwitchSound = new SoundPathSpecifier("/Audio/SS220/Silicons/ai_camera_switch.ogg",
+        AudioParams.Default.WithVolume(-6f).WithVariation(0.05f));
 
     /// <summary>
     ///     How often an open map is refreshed for changes that raise no event.
