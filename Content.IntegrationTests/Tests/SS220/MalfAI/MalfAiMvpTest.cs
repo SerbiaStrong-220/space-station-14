@@ -10,6 +10,7 @@ using Content.Server.Silicons.Laws;
 using Content.Server.Station.Systems;
 using Content.Shared.Actions.Components;
 using Content.Shared.Actions;
+using Content.Shared.CCVar;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mind;
@@ -56,6 +57,7 @@ public sealed class MalfAiMvpTest : GameTest
     public async Task MalfLawGuard()
     {
         var server = Pair.Server;
+        server.CfgMan.SetCVar(CCVars.EventsEnabled, false);
         var map = await Pair.CreateTestMap();
         await server.WaitIdleAsync();
 
@@ -110,6 +112,7 @@ public sealed class MalfAiMvpTest : GameTest
     public async Task MalfLawChangesDoNotMutateCommonInput()
     {
         var server = Pair.Server;
+        server.CfgMan.SetCVar(CCVars.EventsEnabled, false);
         var map = await Pair.CreateTestMap();
         await server.WaitIdleAsync();
 
@@ -185,6 +188,7 @@ public sealed class MalfAiMvpTest : GameTest
     public async Task MalfLawChangesDetachSharedLawset(bool install)
     {
         var server = Pair.Server;
+        server.CfgMan.SetCVar(CCVars.EventsEnabled, false);
         var map = await Pair.CreateTestMap();
         await server.WaitIdleAsync();
 
@@ -238,6 +242,7 @@ public sealed class MalfAiMvpTest : GameTest
     {
         var pair = Pair;
         var server = pair.Server;
+        server.CfgMan.SetCVar(CCVars.EventsEnabled, false);
         var map = await pair.CreateTestMap();
         await server.WaitIdleAsync();
 
@@ -367,6 +372,7 @@ public sealed class MalfAiMvpTest : GameTest
     public async Task MalfPurchaseFollowsMindAndCleansUp()
     {
         var server = Pair.Server;
+        server.CfgMan.SetCVar(CCVars.EventsEnabled, false);
         var map = await Pair.CreateTestMap();
         await server.WaitIdleAsync();
 

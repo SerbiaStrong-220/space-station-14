@@ -6,6 +6,7 @@ using Content.IntegrationTests.Pair;
 using Content.Server.SS220.MalfAI;
 using Content.Server.Station.Systems;
 using Content.Shared.Actions.Components;
+using Content.Shared.CCVar;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mind;
@@ -98,6 +99,7 @@ public sealed class MalfAiLifecycleTest : GameTest
     {
         var pair = Pair;
         var server = pair.Server;
+        server.CfgMan.SetCVar(CCVars.EventsEnabled, false);
         var map = await pair.CreateTestMap();
         await server.WaitIdleAsync();
 
@@ -154,6 +156,7 @@ public sealed class MalfAiLifecycleTest : GameTest
     {
         var pair = Pair;
         var server = pair.Server;
+        server.CfgMan.SetCVar(CCVars.EventsEnabled, false);
         var map = await pair.CreateTestMap();
         await server.WaitIdleAsync();
 
@@ -209,6 +212,7 @@ public sealed class MalfAiLifecycleTest : GameTest
     {
         var pair = Pair;
         var server = pair.Server;
+        server.CfgMan.SetCVar(CCVars.EventsEnabled, false);
         var map = await pair.CreateTestMap();
         await server.WaitIdleAsync();
 
@@ -266,6 +270,7 @@ public sealed class MalfAiLifecycleTest : GameTest
     {
         var pair = Pair;
         var server = pair.Server;
+        server.CfgMan.SetCVar(CCVars.EventsEnabled, false);
         var map = await pair.CreateTestMap();
         await server.WaitIdleAsync();
 
@@ -311,6 +316,7 @@ public sealed class MalfAiLifecycleTest : GameTest
     {
         var pair = Pair;
         var server = pair.Server;
+        server.CfgMan.SetCVar(CCVars.EventsEnabled, false);
         var map = await pair.CreateTestMap();
         await server.WaitIdleAsync();
 

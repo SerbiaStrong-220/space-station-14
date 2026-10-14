@@ -13,6 +13,7 @@ using Content.Server.Station.Systems;
 using Content.Server.Store.Systems;
 using Content.Shared.Actions.Components;
 using Content.Shared.Actions;
+using Content.Shared.CCVar;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
@@ -123,6 +124,7 @@ public sealed class MalfAiDefenseTest : GameTest
     {
         var pair = Pair;
         var server = pair.Server;
+        server.CfgMan.SetCVar(CCVars.EventsEnabled, false);
 
         EntityUid? station = null;
         await server.WaitAssertion(() =>
@@ -237,6 +239,7 @@ public sealed class MalfAiDefenseTest : GameTest
     {
         var pair = Pair;
         var server = pair.Server;
+        server.CfgMan.SetCVar(CCVars.EventsEnabled, false);
         var map = await pair.CreateTestMap();
         await server.WaitIdleAsync();
 
@@ -324,6 +327,7 @@ public sealed class MalfAiDefenseTest : GameTest
     {
         var pair = Pair;
         var server = pair.Server;
+        server.CfgMan.SetCVar(CCVars.EventsEnabled, false);
         var map = await pair.CreateTestMap();
         EntityUid door = default;
         EntityUid rule = default;
@@ -459,6 +463,7 @@ public sealed class MalfAiDefenseTest : GameTest
     {
         var pair = Pair;
         var server = pair.Server;
+        server.CfgMan.SetCVar(CCVars.EventsEnabled, false);
         var map = await pair.CreateTestMap();
         await server.WaitIdleAsync();
 
@@ -502,6 +507,7 @@ public sealed class MalfAiDefenseTest : GameTest
     {
         var pair = Pair;
         var server = pair.Server;
+        server.CfgMan.SetCVar(CCVars.EventsEnabled, false);
         var map = await pair.CreateTestMap();
         await server.WaitIdleAsync();
 
@@ -575,6 +581,7 @@ public sealed class MalfAiDefenseTest : GameTest
     {
         var pair = Pair;
         var server = pair.Server;
+        server.CfgMan.SetCVar(CCVars.EventsEnabled, false);
         var map = await pair.CreateTestMap();
         await server.WaitIdleAsync();
 
@@ -638,6 +645,7 @@ public sealed class MalfAiDefenseTest : GameTest
     {
         var pair = Pair;
         var server = pair.Server;
+        server.CfgMan.SetCVar(CCVars.EventsEnabled, false);
         var map = await pair.CreateTestMap();
         await server.WaitIdleAsync();
 

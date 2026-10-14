@@ -14,6 +14,7 @@ using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Systems;
+using Content.Shared.CCVar;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.FixedPoint;
 using Content.Shared.GameTicking.Components;
@@ -132,6 +133,7 @@ public sealed class MalfAiDoomsdayTest : GameTest
     {
         var pair = Pair;
         var server = pair.Server;
+        server.CfgMan.SetCVar(CCVars.EventsEnabled, false);
         var map = await pair.CreateTestMap();
         await server.WaitIdleAsync();
 
@@ -185,6 +187,7 @@ public sealed class MalfAiDoomsdayTest : GameTest
     {
         var pair = Pair;
         var server = pair.Server;
+        server.CfgMan.SetCVar(CCVars.EventsEnabled, false);
         var map = await pair.CreateTestMap();
         await server.WaitIdleAsync();
 
@@ -218,6 +221,7 @@ public sealed class MalfAiDoomsdayTest : GameTest
     {
         var pair = Pair;
         var server = pair.Server;
+        server.CfgMan.SetCVar(CCVars.EventsEnabled, false);
         var map = await pair.CreateTestMap();
         await server.WaitIdleAsync();
 
@@ -268,6 +272,7 @@ public sealed class MalfAiDoomsdayTest : GameTest
     {
         var pair = Pair;
         var server = pair.Server;
+        server.CfgMan.SetCVar(CCVars.EventsEnabled, false);
         var map = await pair.CreateTestMap();
         await server.WaitIdleAsync();
 
@@ -352,6 +357,7 @@ public sealed class MalfAiDoomsdayTest : GameTest
     {
         var pair = Pair;
         var server = pair.Server;
+        server.CfgMan.SetCVar(CCVars.EventsEnabled, false);
         var map = await pair.CreateTestMap();
         await server.WaitIdleAsync();
 

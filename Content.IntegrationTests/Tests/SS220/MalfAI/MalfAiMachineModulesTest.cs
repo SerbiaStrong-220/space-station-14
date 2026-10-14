@@ -15,6 +15,7 @@ using Content.Server.Spawners.Components;
 using Content.Server.Station.Systems;
 using Content.Shared.Actions.Components;
 using Content.Shared.Actions;
+using Content.Shared.CCVar;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
@@ -154,6 +155,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
     {
         var pair = Pair;
         var server = pair.Server;
+        server.CfgMan.SetCVar(CCVars.EventsEnabled, false);
         var map = await pair.CreateTestMap();
         await server.WaitIdleAsync();
 
@@ -259,6 +261,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
     {
         var pair = Pair;
         var server = pair.Server;
+        server.CfgMan.SetCVar(CCVars.EventsEnabled, false);
         var map = await pair.CreateTestMap();
         await server.WaitIdleAsync();
         EntityUid corpse = default;
@@ -501,6 +504,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
     {
         var pair = Pair;
         var server = pair.Server;
+        server.CfgMan.SetCVar(CCVars.EventsEnabled, false);
         var map = await pair.CreateTestMap();
         await server.WaitIdleAsync();
 
@@ -586,6 +590,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
     {
         var pair = Pair;
         var server = pair.Server;
+        server.CfgMan.SetCVar(CCVars.EventsEnabled, false);
         EntityUid producedBorg = default;
         EntityUid previewCorpse = default;
         EntityUid previewCrewBorg = default;
@@ -728,6 +733,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
     {
         var pair = Pair;
         var server = pair.Server;
+        server.CfgMan.SetCVar(CCVars.EventsEnabled, false);
         var map = await pair.CreateTestMap();
         await server.WaitIdleAsync();
 
@@ -844,6 +850,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
     {
         var pair = Pair;
         var server = pair.Server;
+        server.CfgMan.SetCVar(CCVars.EventsEnabled, false);
         var map = await pair.CreateTestMap();
         await server.WaitIdleAsync();
 
@@ -900,6 +907,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
     {
         var pair = Pair;
         var server = pair.Server;
+        server.CfgMan.SetCVar(CCVars.EventsEnabled, false);
         var map = await pair.CreateTestMap();
         await server.WaitIdleAsync();
 
