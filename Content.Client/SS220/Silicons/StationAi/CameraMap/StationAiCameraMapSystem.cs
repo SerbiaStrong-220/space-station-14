@@ -22,8 +22,21 @@ public sealed class StationAiCameraMapSystem : SharedStationAiCameraMapSystem
 
     private void OnAfterState(Entity<StationAiCameraMapComponent> ent, ref AfterAutoHandleStateEvent args)
     {
+        CooldownChanged(ent);
+    }
+
+    protected override void CooldownChanged(Entity<StationAiCameraMapComponent> ent)
+    {
         if (_ui.TryGetOpenUi<StationAiCameraMapBoundUserInterface>(ent.Owner, StationAiCameraMapUiKey.Key, out var bui))
             bui.UpdateCooldown();
+    }
+
+    /// <summary>
+    ///     Camera power and wiring are server-side, so the client assumes the jump succeeds.
+    /// </summary>
+    protected override bool TryMoveEye(Entity<StationAiCameraMapComponent> ai, NetEntity target)
+    {
+        return true;
     }
 
     public void ToggleFavorite(NetEntity camera)

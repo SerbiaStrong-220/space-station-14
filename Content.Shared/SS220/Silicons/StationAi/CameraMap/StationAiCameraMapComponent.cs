@@ -25,10 +25,10 @@ public sealed partial class StationAiCameraMapComponent : Component
     public TimeSpan NextJump;
 
     /// <summary>
-    ///     How often an open map is refreshed.
+    ///     How often an open map is refreshed for changes that raise no event.
     /// </summary>
     [DataField]
-    public TimeSpan UpdateInterval = TimeSpan.FromSeconds(1);
+    public TimeSpan UpdateInterval = TimeSpan.FromSeconds(2);
 
     /// <summary>
     ///     When an open map is refreshed next.

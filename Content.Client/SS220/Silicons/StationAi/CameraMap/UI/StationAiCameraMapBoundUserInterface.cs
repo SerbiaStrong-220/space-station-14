@@ -21,7 +21,7 @@ public sealed class StationAiCameraMapBoundUserInterface : BoundUserInterface
         var system = EntMan.System<StationAiCameraMapSystem>();
         _window = this.CreateWindow<StationAiCameraMapWindow>();
         _window.SetFavorites(system.Favorites);
-        _window.OnJump += target => SendMessage(new StationAiCameraMapJumpMessage(target));
+        _window.OnJump += target => SendPredictedMessage(new StationAiCameraMapJumpMessage(target));
         _window.OnFavoriteToggled += camera =>
         {
             system.ToggleFavorite(camera);

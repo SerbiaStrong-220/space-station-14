@@ -25,23 +25,56 @@ public sealed class StationAiCameraMapSystem : SharedStationAiCameraMapSystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
 
+    /// <summary>
+    ///     Set by camera and beacon events; open maps are refreshed on the next tick.
+    /// </summary>
+    private bool _targetsChanged;
+
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<StationAiCameraMapComponent, BoundUIOpenedEvent>(OnOpened);
-        SubscribeLocalEvent<StationAiCameraMapComponent, StationAiCameraMapJumpMessage>(OnJump);
+
+        // Vanilla systems already own camera power/shutdown and beacon anchoring; those paths are
+        // covered by the deactivation broadcast or by the periodic refresh.
+        SubscribeLocalEvent<SurveillanceCameraDeactivateEvent>(OnCameraDeactivated);
+        SubscribeLocalEvent<SurveillanceCameraComponent, AnchorStateChangedEvent>(OnCameraAnchorChanged);
+        SubscribeLocalEvent<NavMapBeaconComponent, ComponentShutdown>(OnBeaconShutdown);
     }
 
+    /// <summary>
+    ///     Events cover camera deactivation (including power loss and removal), camera anchoring and beacon
+    ///     removal. Re-activation, the AI vision wire, monitor visibility and beacon toggles or anchoring raise
+    ///     no event this system can subscribe to, so a periodic refresh catches those.
+    /// </summary>
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
+        var changed = _targetsChanged;
+        _targetsChanged = false;
         var query = EntityQueryEnumerator<StationAiCameraMapComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
-            if (UpdateDue((uid, comp)) && _ui.IsUiOpen(uid, StationAiCameraMapUiKey.Key))
+            var due = UpdateDue((uid, comp));
+            if ((changed || due) && _ui.IsUiOpen(uid, StationAiCameraMapUiKey.Key))
                 UpdateUi(uid);
         }
+    }
+
+    private void OnCameraDeactivated(SurveillanceCameraDeactivateEvent args)
+    {
+        _targetsChanged = true;
+    }
+
+    private void OnCameraAnchorChanged(Entity<SurveillanceCameraComponent> ent, ref AnchorStateChangedEvent args)
+    {
+        _targetsChanged = true;
+    }
+
+    private void OnBeaconShutdown(Entity<NavMapBeaconComponent> ent, ref ComponentShutdown args)
+    {
+        _targetsChanged = true;
     }
 
     private void OnOpened(Entity<StationAiCameraMapComponent> ent, ref BoundUIOpenedEvent args)
@@ -58,21 +91,25 @@ public sealed class StationAiCameraMapSystem : SharedStationAiCameraMapSystem
         UpdateUi(ent);
     }
 
-    private void OnJump(Entity<StationAiCameraMapComponent> ent, ref StationAiCameraMapJumpMessage args)
+    protected override bool TryMoveEye(Entity<StationAiCameraMapComponent> ai, NetEntity target)
     {
-        if (args.Actor != ent.Owner || !TryGetEntity(args.Target, out var target))
-            return;
+        if (!TryGetEntity(target, out var uid))
+            return false;
 
-        if (TryJump(ent.AsNullable(), target.Value, out var failure) || failure == null)
-            return;
+        if (TryMoveEye(ai.Owner, uid.Value, out var failure))
+            return true;
 
-        var message = new StationAiCameraMapFailureMessage(failure.Value);
-        _ui.ServerSendUiMessage(ent.Owner, StationAiCameraMapUiKey.Key, message, ent.Owner);
+        if (failure != null)
+        {
+            var message = new StationAiCameraMapFailureMessage(failure.Value);
+            _ui.ServerSendUiMessage(ai.Owner, StationAiCameraMapUiKey.Key, message, ai.Owner);
+        }
+
+        return false;
     }
 
     /// <summary>
-    ///     Moves the AI eye to an active camera, or to a beacon that a working camera covers.
-    ///     The target is checked again here because the client map can be up to a second old.
+    ///     Same as pressing a camera in the window: checks the cooldown, moves the eye, starts the cooldown.
     /// </summary>
     public bool TryJump(Entity<StationAiCameraMapComponent?> ai, EntityUid target,
         out StationAiCameraMapFailure? failure)
@@ -81,6 +118,20 @@ public sealed class StationAiCameraMapSystem : SharedStationAiCameraMapSystem
         if (!Resolve(ai, ref ai.Comp, false) || !IsReady(ai))
             return false;
 
+        if (!TryMoveEye(ai.Owner, target, out failure))
+            return false;
+
+        StartCooldown((ai, ai.Comp));
+        return true;
+    }
+
+    /// <summary>
+    ///     Moves the AI eye to an active camera, or to a beacon that a working camera covers.
+    ///     The target is checked again here because the client map may be out of date.
+    /// </summary>
+    private bool TryMoveEye(EntityUid ai, EntityUid target, out StationAiCameraMapFailure? failure)
+    {
+        failure = null;
         if (!TryGetRemoteEye(ai, out var eye, out var grid) || !TryGetTarget(target, grid, out var entry))
             return false;
 
@@ -92,7 +143,6 @@ public sealed class StationAiCameraMapSystem : SharedStationAiCameraMapSystem
             return false;
         }
 
-        StartCooldown((ai, ai.Comp));
         _transform.SetCoordinates(eye, _transform.WithEntityId(Transform(target).Coordinates, grid));
         return true;
     }

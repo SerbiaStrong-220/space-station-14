@@ -4,10 +4,6 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.Silicons.StationAi.CameraMap;
 
-/// <summary>
-///     Cooldown shared by client and server. Whether a jump succeeds depends on camera power and
-///     wiring that only the server knows, so the jump itself happens in the server system.
-/// </summary>
 public abstract class SharedStationAiCameraMapSystem : EntitySystem
 {
     [Dependency] protected readonly IGameTiming Timing = default!;
@@ -16,12 +12,30 @@ public abstract class SharedStationAiCameraMapSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<StationAiCameraMapComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<StationAiCameraMapComponent, StationAiCameraMapJumpMessage>(OnJump);
     }
 
     private void OnMapInit(Entity<StationAiCameraMapComponent> ent, ref MapInitEvent args)
     {
         ent.Comp.NextUpdate = Timing.CurTime;
     }
+
+    /// <summary>
+    ///     Predicted: the client starts the cooldown at once. Only the server knows camera power and wiring,
+    ///     so it alone moves the eye; a refused jump rolls the client cooldown back with the next state.
+    /// </summary>
+    private void OnJump(Entity<StationAiCameraMapComponent> ent, ref StationAiCameraMapJumpMessage args)
+    {
+        if (args.Actor != ent.Owner || !IsReady(ent.AsNullable()) || !TryMoveEye(ent, args.Target))
+            return;
+
+        StartCooldown(ent);
+    }
+
+    /// <summary>
+    ///     Moves the AI eye to a camera or beacon. The client cannot check the target and assumes success.
+    /// </summary>
+    protected abstract bool TryMoveEye(Entity<StationAiCameraMapComponent> ai, NetEntity target);
 
     public bool IsReady(Entity<StationAiCameraMapComponent?> ent)
     {
@@ -47,5 +61,13 @@ public abstract class SharedStationAiCameraMapSystem : EntitySystem
     {
         ent.Comp.NextJump = Timing.CurTime + ent.Comp.Cooldown;
         Dirty(ent);
+        CooldownChanged(ent);
+    }
+
+    /// <summary>
+    ///     Lets the client refresh an open window after a predicted cooldown change.
+    /// </summary>
+    protected virtual void CooldownChanged(Entity<StationAiCameraMapComponent> ent)
+    {
     }
 }
