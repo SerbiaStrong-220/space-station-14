@@ -114,12 +114,14 @@
   - type: CargoOrderConsole
   - type: CriminalRecordsConsole220
   - type: PowerMonitoringConsole
+  - type: PowerMonitoringCableNetworks
   - type: AtmosAlertsComputer
-  - type: RoboticsConsole #SS220_TODO:Добавить множественный приём DeviceNetwork
+  - type: RoboticsConsole
+    commandFrequency: CyborgControl
   - type: ResearchConsole
   - type: ResearchClient
   - type: TechnologyDatabase
-  - type: SuperMatterObserver #SS220_TODO: Добавить отображение СМа Для ИИ
+  - type: SuperMatterObserver
   - type: SuperMatterObserverReceiver
   - type: ApcPowerReceiver
     needsPower: false
@@ -129,6 +131,10 @@
     deviceNetId: Wireless
     receiveFrequencyId: CrewMonitor
     transmitFrequencyId: ShuttleTimer
+    # SS220 Station Ai robotics console begin
+    additionalReceiveFrequencyIds:
+    - RoboticsConsole
+    # SS220 Station Ai robotics console end
   - type: StationMap #SS220 Station Ai Actions
   - type: RadarConsole
     followEntity: false

@@ -8,6 +8,7 @@ using Content.Shared.Robotics;
 using Content.Shared.Robotics.Components;
 using Content.Shared.Robotics.Systems;
 using Robust.Server.GameObjects;
+using Robust.Shared.Prototypes; // SS220 Station Ai robotics console
 using Robust.Shared.Timing;
 using Content.Shared.DeviceNetwork.Events;
 
@@ -25,6 +26,7 @@ public sealed class RoboticsConsoleSystem : SharedRoboticsConsoleSystem
     [Dependency] private readonly LockSystem _lock = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!; // SS220 Station Ai robotics console
 
     // almost never timing out more than 1 per tick so initialize with that capacity
     private List<string> _removing = new(1);
@@ -109,7 +111,7 @@ public sealed class RoboticsConsoleSystem : SharedRoboticsConsoleSystem
             [DeviceNetworkConstants.Command] = RoboticsConsoleConstants.NET_DISABLE_COMMAND
         };
 
-        _deviceNetwork.QueuePacket(ent, args.Address, payload);
+        _deviceNetwork.QueuePacket(ent, args.Address, payload, GetCommandFrequency(ent)); // SS220 Station Ai robotics console
         _adminLogger.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(args.Actor):user} disabled borg {data.Name} with address {args.Address}");
     }
 
@@ -133,7 +135,7 @@ public sealed class RoboticsConsoleSystem : SharedRoboticsConsoleSystem
             [DeviceNetworkConstants.Command] = RoboticsConsoleConstants.NET_DESTROY_COMMAND
         };
 
-        _deviceNetwork.QueuePacket(ent, args.Address, payload);
+        _deviceNetwork.QueuePacket(ent, args.Address, payload, GetCommandFrequency(ent)); // SS220 Station Ai robotics console
 
         var message = Loc.GetString(ent.Comp.DestroyMessage, ("name", data.Name));
         _radio.SendRadioMessage(ent, message, ent.Comp.RadioChannel, ent);
@@ -142,6 +144,16 @@ public sealed class RoboticsConsoleSystem : SharedRoboticsConsoleSystem
         ent.Comp.NextDestroy = now + ent.Comp.DestroyCooldown;
         Dirty(ent, ent.Comp);
     }
+
+    // SS220 Station Ai robotics console begin
+    private uint? GetCommandFrequency(Entity<RoboticsConsoleComponent> ent)
+    {
+        if (ent.Comp.CommandFrequency is not { } frequencyId)
+            return null;
+
+        return _prototype.Index(frequencyId).Frequency;
+    }
+    // SS220 Station Ai robotics console end
 
     private void UpdateUserInterface(Entity<RoboticsConsoleComponent> ent)
     {

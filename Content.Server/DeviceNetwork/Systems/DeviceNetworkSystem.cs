@@ -119,6 +119,14 @@ namespace Content.Server.DeviceNetwork.Systems
                 device.TransmitFrequency = xmit.Frequency;
             }
 
+            // SS220 Device network additional frequencies begin
+            foreach (var additionalId in device.AdditionalReceiveFrequencyIds)
+            {
+                if (_protoMan.TryIndex(additionalId, out var additional))
+                    device.AdditionalReceiveFrequencies.Add(additional.Frequency);
+            }
+            // SS220 Device network additional frequencies end
+
             if (device.AutoConnect)
                 ConnectDevice(uid, device);
         }
@@ -295,7 +303,8 @@ namespace Content.Server.DeviceNetwork.Systems
                 }
                 if (TryGetDevice(packet.NetId, packet.Address, out var device) &&
                     !device.ReceiveAll &&
-                    device.ReceiveFrequency == packet.Frequency)
+                    (device.ReceiveFrequency == packet.Frequency
+                        || device.AdditionalReceiveFrequencies.Contains(packet.Frequency))) // SS220 Device network additional frequencies
                 {
                     totalDevices += 1;
                     hasTargetedDevice = true;

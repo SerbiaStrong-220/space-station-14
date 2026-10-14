@@ -1,3 +1,4 @@
+using System.Numerics; // SS220 Station Ai silo preload
 using Content.Server.DeviceNetwork.Systems;
 using Content.Server.Pinpointer;
 using Content.Shared.DeviceNetwork.Components;
@@ -19,6 +20,7 @@ public sealed class OreSiloSystem : SharedOreSiloSystem
     [Dependency] private readonly SharedUserInterfaceSystem _userInterface = default!;
     [Dependency] private readonly DeviceListSystem _deviceList = default!; // SS220 Add silo linking in mapping
     [Dependency] private readonly MaterialStorageSystem _materialStorage = default!; // ss220 ore silo tweak
+    [Dependency] private readonly SharedTransformSystem _xform = default!; // SS220 Station Ai silo preload
 
     private const float OreSiloPreloadRangeSquared = 225f; // ~1 screen
 
@@ -124,10 +126,12 @@ public sealed class OreSiloSystem : SharedOreSiloSystem
         // Sloth okay-ed this in the interim until a better solution comes around.
 
         var actorQuery = EntityQueryEnumerator<ActorComponent, TransformComponent>();
-        while (actorQuery.MoveNext(out _, out var actorComp, out var actorXform))
+        while (actorQuery.MoveNext(out var actorUid, out var actorComp, out var actorXform)) // SS220 Station Ai silo preload
         {
             _silosToAdd.Clear();
             _silosToRemove.Clear();
+
+            var (viewerGrid, viewerPosition) = GetViewerGridPosition(actorUid, actorXform); // SS220 Station Ai silo preload
 
             var clientQuery = EntityQueryEnumerator<OreSiloClientComponent, TransformComponent>();
             while (clientQuery.MoveNext(out _, out var clientComp, out var clientXform))
@@ -136,10 +140,10 @@ public sealed class OreSiloSystem : SharedOreSiloSystem
                     continue;
 
                 // We limit it to same-grid checks only for peak perf
-                if (actorXform.GridUid != clientXform.GridUid)
+                if (viewerGrid != clientXform.GridUid) // SS220 Station Ai silo preload
                     continue;
 
-                if ((actorXform.LocalPosition - clientXform.LocalPosition).LengthSquared() <= OreSiloPreloadRangeSquared)
+                if ((viewerPosition - clientXform.LocalPosition).LengthSquared() <= OreSiloPreloadRangeSquared) // SS220 Station Ai silo preload
                 {
                     _silosToAdd.Add(clientComp.Silo.Value);
                 }
@@ -159,6 +163,26 @@ public sealed class OreSiloSystem : SharedOreSiloSystem
             }
         }
     }
+
+    // SS220 Station Ai silo preload begin
+    /// <summary>
+    /// Returns the grid and grid-local position the player is actually looking from.
+    /// Station AI is stored inside its core and views the station through a remote eye,
+    /// so neither its own local position nor its parent are relevant for preloading.
+    /// </summary>
+    public (EntityUid? Grid, Vector2 Position) GetViewerGridPosition(EntityUid actor, TransformComponent actorXform)
+    {
+        var xform = actorXform;
+        if (TryComp<EyeComponent>(actor, out var eye) && eye.Target is { } target && TryComp(target, out TransformComponent? targetXform))
+            xform = targetXform;
+
+        if (xform.GridUid is not { } grid || xform.ParentUid == grid)
+            return (xform.GridUid, xform.LocalPosition);
+
+        var gridPosition = Vector2.Transform(_xform.GetWorldPosition(xform), _xform.GetInvWorldMatrix(grid));
+        return (grid, gridPosition);
+    }
+    // SS220 Station Ai silo preload end
 
     // SS220 Add silo linking in mapping begin
     protected override void SynchronizeWithDeviceList(Entity<OreSiloComponent> entity, bool? deviceListPriority = null)

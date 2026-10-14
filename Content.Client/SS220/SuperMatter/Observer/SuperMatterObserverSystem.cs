@@ -11,6 +11,7 @@ using Content.Client.SS220.Cartridges;
 using Robust.Shared.Random;
 using Robust.Shared.Configuration;
 using Content.Shared.SS220.CCVars;
+using Content.Shared.Silicons.StationAi;
 
 namespace Content.Client.SS220.SuperMatter.Observer;
 // It isn't a warCrime if you make shittyCode... kinda...
@@ -66,7 +67,13 @@ public sealed partial class SuperMatterObserverSystem : EntitySystem
                 Transform(smReceiverOwner).GridUid == null)
                 continue;
 
-            _entityLookup.GetChildEntities(Transform(smReceiverOwner).GridUid!.Value, _observerEntities);
+            // Station AI has a built-in observer, so it does not depend on consoles staying in its PVS range
+            if (HasComp<StationAiHeldComponent>(smReceiverOwner)
+                && TryComp<SuperMatterObserverComponent>(smReceiverOwner, out var builtInObserver))
+                _observerEntities.Add((smReceiverOwner, builtInObserver));
+            else
+                GetGridObservers(Transform(smReceiverOwner).GridUid!.Value, _observerEntities);
+
             foreach (var (observerUid, _) in _observerEntities)
             {
                 if (TryComp<ApcPowerReceiverComponent>(observerUid, out var powerReceiver)
@@ -89,7 +96,7 @@ public sealed partial class SuperMatterObserverSystem : EntitySystem
         if (args.SMGridId == null)
             return;
 
-        _entityLookup.GetChildEntities(GetEntity(args.SMGridId.Value), _observerEntities);
+        GetGridObservers(GetEntity(args.SMGridId.Value), _observerEntities);
         foreach (var observerEnt in _observerEntities)
         {
             // To make possible many SMs on different grids
@@ -183,6 +190,20 @@ public sealed partial class SuperMatterObserverSystem : EntitySystem
             return;
         // Lest hope it wont duplicate
         _smReceiverUIOwnersToInit.Remove(entity.Owner);
+    }
+
+    /// <summary>
+    /// Collects observers on the grid, including ones stored in containers (e.g. Station AI inside its core),
+    /// which <see cref="EntityLookupSystem.GetChildEntities{T}"/> misses because their parent is not the grid.
+    /// </summary>
+    private void GetGridObservers(EntityUid gridUid, HashSet<Entity<SuperMatterObserverComponent>> observers)
+    {
+        var query = EntityQueryEnumerator<SuperMatterObserverComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var observer, out var xform))
+        {
+            if (xform.GridUid == gridUid)
+                observers.Add((uid, observer));
+        }
     }
 
     private void AddToCacheList<T>(List<T> listToAdd, T value)

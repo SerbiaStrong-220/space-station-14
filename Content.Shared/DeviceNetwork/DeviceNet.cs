@@ -58,6 +58,8 @@ public sealed class DeviceNet
             Devices[device.Address] = device;
         }
 
+        AddAdditionalFrequencies(device); // SS220 Device network additional frequencies
+
         if (device.ReceiveFrequency is not uint freq)
             return true;
 
@@ -83,6 +85,8 @@ public sealed class DeviceNet
     {
         if (device.Address == null || !Devices.Remove(device.Address))
             return false;
+
+        RemoveAdditionalFrequencies(device); // SS220 Device network additional frequencies
 
         if (device.ReceiveFrequency is not uint freq)
             return true;
@@ -149,7 +153,8 @@ public sealed class DeviceNet
 
         if (device.ReceiveFrequency is uint freq)
         {
-            if (ListeningDevices.TryGetValue(freq, out var listening))
+            if (!device.AdditionalReceiveFrequencies.Contains(freq) && // SS220 Device network additional frequencies
+                ListeningDevices.TryGetValue(freq, out var listening))
             {
                 listening.Remove(device);
                 if (listening.Count == 0)
@@ -218,6 +223,32 @@ public sealed class DeviceNet
 
         return true;
     }
+
+    // SS220 Device network additional frequencies begin
+    private void AddAdditionalFrequencies(DeviceNetworkComponent device)
+    {
+        foreach (var freq in device.AdditionalReceiveFrequencies)
+        {
+            if (!ListeningDevices.TryGetValue(freq, out var devices))
+                ListeningDevices[freq] = devices = new();
+
+            devices.Add(device);
+        }
+    }
+
+    private void RemoveAdditionalFrequencies(DeviceNetworkComponent device)
+    {
+        foreach (var freq in device.AdditionalReceiveFrequencies)
+        {
+            if (!ListeningDevices.TryGetValue(freq, out var listening))
+                continue;
+
+            listening.Remove(device);
+            if (listening.Count == 0)
+                ListeningDevices.Remove(freq);
+        }
+    }
+    // SS220 Device network additional frequencies end
 
     /// <summary>
     ///     Generates a valid address by randomly generating one and checking if it already exists on the network.

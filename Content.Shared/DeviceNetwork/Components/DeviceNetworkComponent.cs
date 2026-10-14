@@ -1,4 +1,5 @@
 using Content.Shared.DeviceNetwork.Systems;
+using Robust.Shared.Prototypes; // SS220 Device network additional frequencies
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.DeviceNetwork.Components
@@ -36,6 +37,21 @@ namespace Content.Shared.DeviceNetwork.Components
         /// </summary>
         [DataField("receiveFrequencyId", customTypeSerializer: typeof(PrototypeIdSerializer<DeviceFrequencyPrototype>))]
         public string? ReceiveFrequencyId;
+
+        // SS220 Device network additional frequencies begin
+        /// <summary>
+        ///     Extra frequency prototypes this device listens on in addition to <see cref="ReceiveFrequency"/>.
+        ///     Resolved into <see cref="AdditionalReceiveFrequencies"/> when the map is initialized.
+        /// </summary>
+        [DataField]
+        public List<ProtoId<DeviceFrequencyPrototype>> AdditionalReceiveFrequencyIds = new();
+
+        /// <summary>
+        ///     Extra frequencies this device listens on in addition to <see cref="ReceiveFrequency"/>.
+        /// </summary>
+        [ViewVariables]
+        public HashSet<uint> AdditionalReceiveFrequencies = new();
+        // SS220 Device network additional frequencies end
 
         /// <summary>
         ///     The frequency that this device going to try transmit on.

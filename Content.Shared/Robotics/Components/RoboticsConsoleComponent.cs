@@ -1,3 +1,4 @@
+using Content.Shared.DeviceNetwork; // SS220 Station Ai robotics console
 using Content.Shared.Radio;
 using Content.Shared.Robotics;
 using Content.Shared.Robotics.Systems;
@@ -56,4 +57,13 @@ public sealed partial class RoboticsConsoleComponent : Component
     /// </summary>
     [DataField]
     public bool AllowBorgControl = true;
+
+    // SS220 Station Ai robotics console begin
+    /// <summary>
+    /// Frequency used to send disable/destroy commands to borgs.
+    /// If null, the console's device network transmit frequency is used.
+    /// </summary>
+    [DataField]
+    public ProtoId<DeviceFrequencyPrototype>? CommandFrequency;
+    // SS220 Station Ai robotics console end
 }
