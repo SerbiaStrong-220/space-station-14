@@ -68,7 +68,7 @@
   description: malfai-module-deploy-desc
   productAction: ActionMalfAiDeployTurret
   cost:
-    MalfCPU: 30
+    MalfCPU: 80
   categories:
   - MalfAiModules
 

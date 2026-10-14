@@ -648,7 +648,7 @@ public sealed class MalfAiStationModulesTest : GameTest
 
             Assert.That(chaosAction, Is.Not.Null, "Chaos Pulse action was not granted on purchase.");
             Assert.That(entMan.GetComponent<ActionComponent>(chaosAction.Value).UseDelay,
-                Is.EqualTo(TimeSpan.FromMinutes(3)));
+                Is.EqualTo(TimeSpan.FromMinutes(6)));
 
             var pool = entMan.GetComponent<MalfAiChaosPulseComponent>(chaosAction.Value);
             Assert.That(pool.Events, Is.Not.Empty);
@@ -678,7 +678,7 @@ public sealed class MalfAiStationModulesTest : GameTest
 
             var cooldown = entMan.GetComponent<ActionComponent>(chaosAction.Value).Cooldown;
             Assert.That(cooldown, Is.Not.Null, "Chaos Pulse did not start its cooldown.");
-            Assert.That(cooldown.Value.End - cooldown.Value.Start, Is.EqualTo(TimeSpan.FromMinutes(3)));
+            Assert.That(cooldown.Value.End - cooldown.Value.Start, Is.EqualTo(TimeSpan.FromMinutes(6)));
         });
     }
 }

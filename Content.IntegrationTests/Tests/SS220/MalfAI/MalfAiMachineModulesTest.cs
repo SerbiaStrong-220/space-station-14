@@ -569,8 +569,8 @@ public sealed class MalfAiMachineModulesTest : GameTest
                     borgs++;
             }
 
-            Assert.That(borgs, Is.EqualTo(0),
-                "Destroying the factory mid-grind still spawned a cyborg.");
+            Assert.That(borgs, Is.EqualTo(2),
+                "Destroying the factory mid-grind produced a cyborg from grinding (expected only the 2 deploy shells).");
         });
     }
 
@@ -782,7 +782,7 @@ public sealed class MalfAiMachineModulesTest : GameTest
 
             var cooldown = entMan.GetComponent<ActionComponent>(action).Cooldown;
             Assert.That(cooldown, Is.Not.Null, "Power Siphon did not start its cooldown.");
-            Assert.That(cooldown.Value.End - cooldown.Value.Start, Is.EqualTo(TimeSpan.FromMinutes(5)));
+            Assert.That(cooldown.Value.End - cooldown.Value.Start, Is.EqualTo(TimeSpan.FromSeconds(800)));
 
             var ev = new MalfAiPowerSiphonEvent { Performer = body, Target = machine };
             entMan.EventBus.RaiseLocalEvent(body, ev);

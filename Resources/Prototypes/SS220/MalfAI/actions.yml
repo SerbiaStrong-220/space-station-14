@@ -98,7 +98,7 @@
     icon:
       sprite: SS220/Interface/Actions/actions_malfai.rsi
       state: machine_override
-    useDelay: 60
+    useDelay: 300
     checkCanInteract: false
   - type: TargetAction
     checkCanAccess: false
@@ -135,7 +135,7 @@
     icon:
       sprite: SS220/Interface/Actions/actions_malfai.rsi
       state: machine_overload
-    useDelay: 60
+    useDelay: 300
     checkCanInteract: false
   - type: TargetAction
     checkCanAccess: false
@@ -176,7 +176,7 @@
     icon:
       sprite: SS220/Interface/Actions/actions_malfai.rsi
       state: power_siphon
-    useDelay: 300
+    useDelay: 800
     checkCanInteract: false
   - type: TargetAction
     checkCanAccess: false
@@ -250,7 +250,7 @@
     icon:
       sprite: SS220/Interface/Actions/actions_malfai.rsi
       state: chaos_pulse
-    useDelay: 180
+    useDelay: 360
     checkCanInteract: false
   - type: InstantAction
     event: !type:MalfAiChaosPulseEvent
