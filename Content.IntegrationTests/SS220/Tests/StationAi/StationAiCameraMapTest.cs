@@ -23,7 +23,7 @@ namespace Content.IntegrationTests.SS220.Tests.StationAi;
 
 public sealed class StationAiCameraMapTest : GameTest
 {
-    private static readonly ProtoId<GameMapPrototype> TestStation = "Box";
+    private const string TestStation = "Box";
 
     private EntityUid _ai;
     private EntityUid _core;
@@ -141,7 +141,7 @@ public sealed class StationAiCameraMapTest : GameTest
             var entMan = Server.EntMan;
             var system = Server.System<StationAiCameraMapSystem>();
             var sensors = Server.System<SharedSuitSensorSystem>();
-            var config = Server.ProtoMan.Index(TestStation).Stations.Values.First();
+            var config = Server.ProtoMan.Index<GameMapPrototype>(TestStation).Stations.Values.First();
             var station = Server.System<StationSystem>().InitializeNewStation(config, new[] { map.Grid.Owner });
             SpawnAi(map.GridCoords);
             SpawnCamera(map.GridCoords);
