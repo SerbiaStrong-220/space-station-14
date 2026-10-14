@@ -6,9 +6,11 @@ using Content.Server.Silicons.StationAi;
 using Content.Server.SurveillanceCamera;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Pinpointer;
+using Content.Shared.Medical.SuitSensors;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.Silicons.StationAi;
 using Content.Shared.SS220.Silicons.StationAi.CameraMap;
+using Content.Shared.Station;
 using Content.Shared.StationAi;
 using Content.Shared.SurveillanceCamera.Components;
 using Robust.Server.GameObjects;
@@ -16,14 +18,18 @@ using Robust.Shared.Map.Components;
 
 namespace Content.Server.SS220.Silicons.StationAi.CameraMap;
 
-public sealed class StationAiCameraMapSystem : SharedStationAiCameraMapSystem
+public sealed partial class StationAiCameraMapSystem : SharedStationAiCameraMapSystem
 {
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
+    [Dependency] private readonly SharedSuitSensorSystem _sensors = default!;
+    [Dependency] private readonly SharedStationSystem _station = default!;
     [Dependency] private readonly StationAiSystem _stationAi = default!;
     [Dependency] private readonly SurveillanceCameraMapSystem _cameraMap = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private readonly StationAiVisionSystem _vision = default!;
 
     /// <summary>
     ///     Set by camera and beacon events; open maps are refreshed on the next tick.
@@ -249,7 +255,12 @@ public sealed class StationAiCameraMapSystem : SharedStationAiCameraMapSystem
                 targets.Add(target);
         }
 
-        _ui.SetUiState(ai, StationAiCameraMapUiKey.Key, new StationAiCameraMapState(GetNetEntity(grid), targets));
+        var crew = new List<StationAiCameraMapCrew>();
+        var positions = new Dictionary<NetEntity, Vector2>();
+        CollectCrew(ai, grid, crew, positions);
+
+        var state = new StationAiCameraMapState(GetNetEntity(grid), targets, crew, positions);
+        _ui.SetUiState(ai, StationAiCameraMapUiKey.Key, state);
     }
 
     private readonly record struct CameraCoverage(Vector2 Position, float Range);

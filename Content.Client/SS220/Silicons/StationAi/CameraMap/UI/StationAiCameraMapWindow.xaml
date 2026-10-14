@@ -6,36 +6,56 @@
                       MinSize="720 520" SetSize="1020 740">
     <BoxContainer Orientation="Horizontal" SeparationOverride="12" Margin="10 0 10 10">
         <ui:StationAiCameraNavMapControl Name="NavMap" HorizontalExpand="True" VerticalExpand="True"/>
-        <BoxContainer Orientation="Vertical" SeparationOverride="6" SetWidth="320">
+        <BoxContainer Orientation="Vertical" SeparationOverride="6" SetWidth="360">
             <Control MinHeight="24">
                 <ProgressBar Name="CooldownBar" MinValue="0" MaxValue="1" Value="1" HorizontalExpand="True"/>
                 <Label Name="CooldownLabel" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Control>
-            <BoxContainer Orientation="Horizontal" SeparationOverride="6">
-                <LineEdit Name="SearchLineEdit" HorizontalExpand="True"
-                          PlaceHolder="{Loc 'station-ai-camera-map-search'}"/>
-                <OptionButton Name="StatusFilter" MinWidth="110"/>
-            </BoxContainer>
-            <ScrollContainer Name="Scroll" VerticalExpand="True" HScrollEnabled="False">
-                <BoxContainer Orientation="Vertical">
-                    <BoxContainer Name="FavoritesHeader" Orientation="Horizontal" Margin="2 6 4 2">
-                        <Label Text="{Loc 'station-ai-camera-map-favorites'}" HorizontalExpand="True"/>
-                        <Label Name="FavoritesCount" StyleClasses="LabelSubText"/>
+            <TabContainer Name="Tabs" VerticalExpand="True">
+                <BoxContainer Orientation="Vertical" SeparationOverride="6" Margin="0 6 0 0">
+                    <BoxContainer Orientation="Horizontal" SeparationOverride="6">
+                        <LineEdit Name="SearchLineEdit" HorizontalExpand="True"
+                                  PlaceHolder="{Loc 'station-ai-camera-map-search'}"/>
+                        <OptionButton Name="StatusFilter" MinWidth="110"/>
                     </BoxContainer>
-                    <BoxContainer Name="FavoritesList" Orientation="Vertical">
-                        <!-- Rows are filled by code -->
-                    </BoxContainer>
-                    <BoxContainer Name="CamerasHeader" Orientation="Horizontal" Margin="2 6 4 2">
-                        <Label Name="CamerasTitle" HorizontalExpand="True"/>
-                        <Label Name="CamerasCount" StyleClasses="LabelSubText"/>
-                    </BoxContainer>
-                    <BoxContainer Name="CamerasList" Orientation="Vertical">
-                        <!-- Rows are filled by code -->
-                    </BoxContainer>
-                    <Label Name="EmptyLabel" Text="{Loc 'station-ai-camera-map-empty'}"
-                           StyleClasses="LabelSubText" HorizontalAlignment="Center" Margin="0 12"/>
+                    <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+                        <BoxContainer Orientation="Vertical">
+                            <BoxContainer Name="FavoritesHeader" Orientation="Horizontal" Margin="2 6 4 2">
+                                <Label Text="{Loc 'station-ai-camera-map-favorites'}" HorizontalExpand="True"/>
+                                <Label Name="FavoritesCount" StyleClasses="LabelSubText"/>
+                            </BoxContainer>
+                            <BoxContainer Name="FavoritesList" Orientation="Vertical">
+                                <!-- Rows are filled by code -->
+                            </BoxContainer>
+                            <BoxContainer Name="CamerasHeader" Orientation="Horizontal" Margin="2 6 4 2">
+                                <Label Name="CamerasTitle" HorizontalExpand="True"/>
+                                <Label Name="CamerasCount" StyleClasses="LabelSubText"/>
+                            </BoxContainer>
+                            <BoxContainer Name="CamerasList" Orientation="Vertical">
+                                <!-- Rows are filled by code -->
+                            </BoxContainer>
+                            <Label Name="EmptyLabel" Text="{Loc 'station-ai-camera-map-empty'}"
+                                   StyleClasses="LabelSubText" HorizontalAlignment="Center" Margin="0 12"/>
+                        </BoxContainer>
+                    </ScrollContainer>
                 </BoxContainer>
-            </ScrollContainer>
+                <BoxContainer Orientation="Vertical" SeparationOverride="6" Margin="0 6 0 0">
+                    <LineEdit Name="CrewSearchLineEdit" PlaceHolder="{Loc 'station-ai-camera-map-crew-search'}"/>
+                    <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+                        <BoxContainer Orientation="Vertical">
+                            <BoxContainer Orientation="Horizontal" Margin="2 6 4 2">
+                                <Label Text="{Loc 'station-ai-camera-map-crew-header'}" HorizontalExpand="True"/>
+                                <Label Name="CrewCount" StyleClasses="LabelSubText"/>
+                            </BoxContainer>
+                            <BoxContainer Name="CrewList" Orientation="Vertical">
+                                <!-- Rows are filled by code -->
+                            </BoxContainer>
+                            <Label Name="CrewEmptyLabel" Text="{Loc 'station-ai-camera-map-crew-empty'}"
+                                   StyleClasses="LabelSubText" HorizontalAlignment="Center" Margin="0 12"/>
+                        </BoxContainer>
+                    </ScrollContainer>
+                </BoxContainer>
+            </TabContainer>
         </BoxContainer>
     </BoxContainer>
 </controls:FancyWindow>

@@ -1,21 +1,30 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.Linq;
 using System.Numerics;
 using Content.IntegrationTests.Fixtures;
 using Content.Server.Power.Components;
 using Content.Server.Silicons.StationAi;
+using Content.Server.Station.Systems;
 using Content.Server.SS220.Silicons.StationAi.CameraMap;
 using Content.Server.SurveillanceCamera;
+using Content.Shared.Inventory;
+using Content.Shared.Maps;
+using Content.Shared.Medical.SuitSensor;
+using Content.Shared.Medical.SuitSensors;
 using Content.Shared.Silicons.StationAi;
 using Content.Shared.SS220.Silicons.StationAi.CameraMap;
 using Content.Shared.StationAi;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 
 namespace Content.IntegrationTests.SS220.Tests.StationAi;
 
 public sealed class StationAiCameraMapTest : GameTest
 {
+    private static readonly ProtoId<GameMapPrototype> TestStation = "Box";
+
     private EntityUid _ai;
     private EntityUid _core;
     private EntityUid _eye;
@@ -120,6 +129,45 @@ public sealed class StationAiCameraMapTest : GameTest
 
             Server.System<SurveillanceCameraSystem>().SetActive(camera, true);
             Assert.That(system.TryJump(_ai, beacon, out _), Is.True);
+        });
+    }
+
+    [Test]
+    public async Task CrewJumpNeedsCoordinatesAndView()
+    {
+        var map = await Pair.CreateTestMap();
+        await Server.WaitAssertion(() =>
+        {
+            var entMan = Server.EntMan;
+            var system = Server.System<StationAiCameraMapSystem>();
+            var sensors = Server.System<SharedSuitSensorSystem>();
+            var config = Server.ProtoMan.Index(TestStation).Stations.Values.First();
+            var station = Server.System<StationSystem>().InitializeNewStation(config, new[] { map.Grid.Owner });
+            SpawnAi(map.GridCoords);
+            SpawnCamera(map.GridCoords);
+            var mob = entMan.SpawnEntity("MobHuman", map.GridCoords);
+            var suit = entMan.SpawnEntity("ClothingUniformJumpsuitColorGrey", map.GridCoords);
+            Assert.That(Server.System<InventorySystem>().TryEquip(mob, suit, "jumpsuit", force: true));
+            var sensor = entMan.GetComponent<SuitSensorComponent>(suit);
+            Assert.That(sensors.CheckSensorAssignedStation((suit, sensor)));
+
+            sensors.SetSensor((suit, sensor), SuitSensorMode.SensorOff);
+            Assert.That(system.TryGetCrew(suit, map.Grid, station, out _, out _), Is.False, "Sensors off");
+
+            sensors.SetSensor((suit, sensor), SuitSensorMode.SensorVitals);
+            Assert.That(system.TryGetCrew(suit, map.Grid, station, out var vitals, out _), Is.True);
+            Assert.That(vitals.Located, Is.False);
+            Assert.That(system.TryJumpToCrew(_ai, suit, out var failure), Is.False);
+            Assert.That(failure, Is.EqualTo(StationAiCameraMapFailure.NoCoordinates));
+
+            sensors.SetSensor((suit, sensor), SuitSensorMode.SensorCords);
+            Assert.That(system.TryJumpToCrew(_ai, suit, out _), Is.True, "Next to the camera and the core");
+
+            var here = map.GridCoords.Position + new Vector2(0.5f, 0.5f);
+            Assert.That(system.IsInView(map.Grid, here), Is.True);
+            Assert.That(system.IsInView(map.Grid, here + new Vector2(40, 40)), Is.False, "Static zone");
+            Assert.That(system.TryGetCrew(suit, map.Grid, EntityUid.Invalid, out _, out _), Is.False,
+                "Sensors of another station are hidden");
         });
     }
 }

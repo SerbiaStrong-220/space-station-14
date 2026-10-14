@@ -17,11 +17,30 @@ public enum StationAiCameraMapUiKey : byte
 [Serializable, NetSerializable]
 public sealed record StationAiCameraMapTarget(NetEntity Entity, Vector2 Position, string Name, bool IsCamera, bool Active);
 
+/// <summary>
+///     A crew member whose suit sensors are on, as the crew monitor sees them.
+/// </summary>
+/// <param name="HealthLevel">Damage in quarters of the crit threshold (0-4, 5 is critical); null without vitals.</param>
+/// <param name="Located">Whether the sensors report coordinates on the AI's grid.</param>
 [Serializable, NetSerializable]
-public sealed class StationAiCameraMapState(NetEntity grid, List<StationAiCameraMapTarget> targets) : BoundUserInterfaceState
+public sealed record StationAiCameraMapCrew(NetEntity Sensor, string Name, string Job, string JobIcon, bool Alive,
+    int? HealthLevel, bool Located);
+
+[Serializable, NetSerializable]
+public sealed class StationAiCameraMapState(
+    NetEntity grid,
+    List<StationAiCameraMapTarget> targets,
+    List<StationAiCameraMapCrew> crew,
+    Dictionary<NetEntity, Vector2> crewPositions) : BoundUserInterfaceState
 {
     public readonly NetEntity Grid = grid;
     public readonly List<StationAiCameraMapTarget> Targets = targets;
+    public readonly List<StationAiCameraMapCrew> Crew = crew;
+
+    /// <summary>
+    ///     Kept apart from <see cref="Crew"/> so movement alone does not rebuild the crew list.
+    /// </summary>
+    public readonly Dictionary<NetEntity, Vector2> CrewPositions = crewPositions;
 }
 
 [Serializable, NetSerializable]
@@ -30,11 +49,22 @@ public sealed class StationAiCameraMapJumpMessage(NetEntity target) : BoundUserI
     public readonly NetEntity Target = target;
 }
 
+/// <summary>
+///     Moves the AI eye to a crew member by their suit sensor.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class StationAiCameraMapCrewJumpMessage(NetEntity sensor) : BoundUserInterfaceMessage
+{
+    public readonly NetEntity Sensor = sensor;
+}
+
 [Serializable, NetSerializable]
 public enum StationAiCameraMapFailure : byte
 {
     CameraInactive,
     NoCameraNearby,
+    NoCoordinates,
+    OutOfView,
 }
 
 /// <summary>

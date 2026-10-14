@@ -1,0 +1,25 @@
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+<!-- Same layout and icon sizes as a crew monitoring console row. -->
+<ContainerButton xmlns="https://spacestation14.io"
+                 StyleClasses="button"
+                 HorizontalExpand="True"
+                 Margin="0 1">
+    <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" SizeFlagsStretchRatio="1.25">
+            <TextureRect Name="LocatedDot"
+                         TexturePath="/Textures/Interface/NavMap/beveled_circle.png"
+                         TextureScale="0.25 0.25"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center"/>
+            <AnimatedTextureRect Name="HealthIcon"
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Center"
+                                 Margin="0 1 3 0"/>
+            <Label Name="CrewName" HorizontalExpand="True" ClipText="True"/>
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+            <TextureRect Name="JobIcon" TextureScale="2 2" VerticalAlignment="Center" Margin="5 0 5 0"/>
+            <Label Name="JobName" HorizontalExpand="True" ClipText="True"/>
+        </BoxContainer>
+    </BoxContainer>
+</ContainerButton>

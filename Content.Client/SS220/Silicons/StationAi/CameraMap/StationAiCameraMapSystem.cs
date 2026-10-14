@@ -39,6 +39,14 @@ public sealed class StationAiCameraMapSystem : SharedStationAiCameraMapSystem
         return true;
     }
 
+    /// <summary>
+    ///     Crew positions and AI vision are server-side, so the client assumes the jump succeeds.
+    /// </summary>
+    protected override bool TryMoveEyeToCrew(Entity<StationAiCameraMapComponent> ai, NetEntity sensor)
+    {
+        return true;
+    }
+
     public void ToggleFavorite(NetEntity camera)
     {
         if (!Favorites.Remove(camera))

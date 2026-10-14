@@ -22,6 +22,7 @@ public sealed class StationAiCameraMapBoundUserInterface : BoundUserInterface
         _window = this.CreateWindow<StationAiCameraMapWindow>();
         _window.SetFavorites(system.Favorites);
         _window.OnJump += target => SendPredictedMessage(new StationAiCameraMapJumpMessage(target));
+        _window.OnCrewJump += sensor => SendPredictedMessage(new StationAiCameraMapCrewJumpMessage(sensor));
         _window.OnFavoriteToggled += camera =>
         {
             system.ToggleFavorite(camera);
@@ -42,7 +43,7 @@ public sealed class StationAiCameraMapBoundUserInterface : BoundUserInterface
         base.UpdateState(state);
 
         if (state is StationAiCameraMapState cast && EntMan.TryGetEntity(cast.Grid, out var grid))
-            _window?.UpdateState(grid.Value, cast.Targets);
+            _window?.UpdateState(grid.Value, cast);
     }
 
     protected override void ReceiveMessage(BoundUserInterfaceMessage message)

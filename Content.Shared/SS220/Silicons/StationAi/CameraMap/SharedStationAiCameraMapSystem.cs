@@ -13,6 +13,7 @@ public abstract class SharedStationAiCameraMapSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<StationAiCameraMapComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<StationAiCameraMapComponent, StationAiCameraMapJumpMessage>(OnJump);
+        SubscribeLocalEvent<StationAiCameraMapComponent, StationAiCameraMapCrewJumpMessage>(OnCrewJump);
     }
 
     private void OnMapInit(Entity<StationAiCameraMapComponent> ent, ref MapInitEvent args)
@@ -32,10 +33,23 @@ public abstract class SharedStationAiCameraMapSystem : EntitySystem
         StartCooldown(ent);
     }
 
+    private void OnCrewJump(Entity<StationAiCameraMapComponent> ent, ref StationAiCameraMapCrewJumpMessage args)
+    {
+        if (args.Actor != ent.Owner || !IsReady(ent.AsNullable()) || !TryMoveEyeToCrew(ent, args.Sensor))
+            return;
+
+        StartCooldown(ent);
+    }
+
     /// <summary>
     ///     Moves the AI eye to a camera or beacon. The client cannot check the target and assumes success.
     /// </summary>
     protected abstract bool TryMoveEye(Entity<StationAiCameraMapComponent> ai, NetEntity target);
+
+    /// <summary>
+    ///     Moves the AI eye to a crew member by their suit sensor. The client assumes success.
+    /// </summary>
+    protected abstract bool TryMoveEyeToCrew(Entity<StationAiCameraMapComponent> ai, NetEntity sensor);
 
     public bool IsReady(Entity<StationAiCameraMapComponent?> ent)
     {

@@ -30,7 +30,9 @@ public sealed partial class StationAiCameraMapWindow : FancyWindow
 
     private readonly Texture _blip;
     private readonly StyleBoxFlat _barFill = new(ReadyColor);
-    private List<StationAiCameraMapTarget> _targets = new();
+    private EntityUid _grid;
+    private List<StationAiCameraMapTarget> _mapTargets = new();
+    private List<StationAiCameraMapTarget> _cameras = new();
     private IReadOnlySet<NetEntity> _favorites = new HashSet<NetEntity>();
     private TimeSpan _nextJump;
     private TimeSpan _cooldown;
@@ -61,13 +63,22 @@ public sealed partial class StationAiCameraMapWindow : FancyWindow
         SearchLineEdit.OnTextChanged += _ => ApplyFilter();
         NavMap.TrackedEntitySelectedAction += target =>
         {
-            if (target != null)
+            if (target == null)
+                return;
+
+            if (Tabs.CurrentTab == CrewTab)
+                OnCrewJump?.Invoke(target.Value);
+            else
                 OnJump?.Invoke(target.Value);
         };
+        Tabs.SetTabTitle(CamerasTab, Loc.GetString("station-ai-camera-map-tab-cameras"));
+        Tabs.SetTabTitle(CrewTab, Loc.GetString("station-ai-camera-map-tab-crew"));
+        Tabs.OnTabChanged += _ => UpdateBlips();
+        InitializeCrew();
         RebuildRows();
     }
 
-    public void UpdateState(EntityUid grid, List<StationAiCameraMapTarget> targets)
+    public void UpdateState(EntityUid grid, StationAiCameraMapState state)
     {
         if (NavMap.MapUid != grid)
         {
@@ -75,16 +86,19 @@ public sealed partial class StationAiCameraMapWindow : FancyWindow
             NavMap.ForceNavMapUpdate();
         }
 
-        UpdateBlips(grid, targets);
+        _grid = grid;
+        _mapTargets = state.Targets;
+        UpdateCrew(state);
+        UpdateBlips();
 
         // Sorted the same way every time, so an unchanged list does not rebuild the rows.
-        var cameras = targets.Where(t => t.IsCamera)
+        var cameras = state.Targets.Where(t => t.IsCamera)
             .OrderBy(t => t.Name, StringComparer.CurrentCultureIgnoreCase)
             .ToList();
-        if (_targets.SequenceEqual(cameras))
+        if (_cameras.SequenceEqual(cameras))
             return;
 
-        _targets = cameras;
+        _cameras = cameras;
         RebuildRows();
     }
 
@@ -105,6 +119,8 @@ public sealed partial class StationAiCameraMapWindow : FancyWindow
         _failure = Loc.GetString(failure switch
         {
             StationAiCameraMapFailure.CameraInactive => "station-ai-camera-map-camera-inactive",
+            StationAiCameraMapFailure.NoCoordinates => "station-ai-camera-map-no-coordinates",
+            StationAiCameraMapFailure.OutOfView => "station-ai-camera-map-out-of-view",
             _ => "station-ai-camera-map-no-camera-nearby",
         });
         _failureUntil = _timing.CurTime + FailureDuration;
@@ -139,11 +155,20 @@ public sealed partial class StationAiCameraMapWindow : FancyWindow
             CooldownLabel.Text = text;
     }
 
-    private void UpdateBlips(EntityUid grid, List<StationAiCameraMapTarget> targets)
+    /// <summary>
+    ///     The map shows only what the open tab can jump to.
+    /// </summary>
+    private void UpdateBlips()
     {
         NavMap.TrackedEntities.Clear();
         NavMap.Names.Clear();
-        foreach (var target in targets)
+        if (Tabs.CurrentTab == CrewTab)
+        {
+            AddCrewBlips();
+            return;
+        }
+
+        foreach (var target in _mapTargets)
         {
             var color = target.IsCamera ? Color.Cyan : Color.Orange;
             var name = target.Name;
@@ -154,7 +179,7 @@ public sealed partial class StationAiCameraMapWindow : FancyWindow
                     ("name", target.Name));
             }
 
-            NavMap.TrackedEntities[target.Entity] = new NavMapBlip(new EntityCoordinates(grid, target.Position), _blip, color, false);
+            NavMap.TrackedEntities[target.Entity] = new NavMapBlip(new EntityCoordinates(_grid, target.Position), _blip, color, false);
             NavMap.Names[target.Entity] = name;
         }
     }
@@ -163,7 +188,7 @@ public sealed partial class StationAiCameraMapWindow : FancyWindow
     {
         FavoritesList.DisposeAllChildren();
         CamerasList.DisposeAllChildren();
-        foreach (var camera in _targets)
+        foreach (var camera in _cameras)
         {
             var favorite = _favorites.Contains(camera.Entity);
             var row = new StationAiCameraMapRow(camera, favorite);
@@ -212,6 +237,9 @@ public sealed partial class StationAiCameraMapWindow : FancyWindow
 
         return shown;
     }
+
+    private const int CamerasTab = 0;
+    private const int CrewTab = 1;
 
     private enum StatusFilterMode
     {
