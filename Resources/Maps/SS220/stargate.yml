@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 10/14/2026 08:37:44
-  entityCount: 45402
+  time: 10/14/2026 10:59:31
+  entityCount: 46499
 maps:
 - 1
 grids:
@@ -27436,7 +27436,7 @@ entities:
       pos: -102.5,24.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -149819.38
+      secondsUntilStateChange: -260801.1
       state: Opening
   - uid: 1760
     components:
@@ -29253,7 +29253,7 @@ entities:
       pos: 1.5,161.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1531881.8
+      secondsUntilStateChange: -1642863.6
       changeAirtight: False
       state: Opening
     - type: DeviceLinkSource
@@ -113738,12 +113738,6 @@ entities:
         board: !type:Container
           ents:
           - 9954
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers: []
-      fibers: []
-      fingerprints: []
   - uid: 15590
     components:
     - type: Transform
@@ -124550,7 +124544,7 @@ entities:
       pos: 45.5,58.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -425569.03
+      secondsUntilStateChange: -536550.7
       state: Closing
     - type: DeviceLinkSource
       lastSignals:
@@ -141612,7 +141606,7 @@ entities:
     - type: Openable
       opened: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.3716708
+      sprayFizzinessThresholdRoll: 0.35663894
     - type: MeleeWeapon
       nextAttack: -13.2999857
     - type: EmitSoundOnCollide
@@ -141927,7 +141921,7 @@ entities:
     - type: EmitSoundOnCollide
       nextSound: -20188.979811
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.9130893
+      sprayFizzinessThresholdRoll: 0.32510874
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -141983,7 +141977,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.9736096
+      sprayFizzinessThresholdRoll: 0.15610756
     - type: NameModifier
       baseName: бутылка Гильдлагер
     - type: ContainerContainer
@@ -142871,17 +142865,11 @@ entities:
     - type: EmitSoundOnCollide
       nextSound: -878.4324549
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.87933534
+      sprayFizzinessThresholdRoll: 0.15110923
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
           ent: 45324
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers: []
-      fibers: []
-      fingerprints: []
 - proto: DrinkVermouthBottleFull
   entities:
   - uid: 11396
@@ -143165,7 +143153,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.5005817
+      sprayFizzinessThresholdRoll: 0.8166935
     - type: NameModifier
       baseName: Особый Запас Дядюшки Гита
     - type: ContainerContainer
@@ -143212,7 +143200,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.31509545
+      sprayFizzinessThresholdRoll: 0.03220616
     - type: NameModifier
       baseName: вино Особое Двухбородое Бородатое
     - type: ContainerContainer
@@ -143244,7 +143232,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.25863326
+      sprayFizzinessThresholdRoll: 0.6881333
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -143269,7 +143257,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.2902982
+      sprayFizzinessThresholdRoll: 0.2583493
     - type: ContainerContainer
       containers:
         solution@drink: !type:ContainerSlot
@@ -146561,7 +146549,7 @@ entities:
       - 40096
       - 40106
     - type: Door
-      secondsUntilStateChange: -1441145.9
+      secondsUntilStateChange: -1552127.8
       state: Closing
   - uid: 9985
     components:
@@ -146647,7 +146635,7 @@ entities:
       deviceLists:
       - 46086
     - type: Door
-      secondsUntilStateChange: -1359820.9
+      secondsUntilStateChange: -1470802.8
       state: Closing
   - uid: 11562
     components:
@@ -148527,7 +148515,7 @@ entities:
     - type: Firelock
       emergencyCloseCooldown: 8075.4252599
     - type: Door
-      secondsUntilStateChange: -464267.03
+      secondsUntilStateChange: -575248.6
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -156240,7 +156228,7 @@ entities:
     - type: Transform
       pos: -94.24568,141.52557
       parent: 2
-- proto: FoodLubroShroomCultDead
+- proto: FoodLubroShroomDead
   entities:
   - uid: 42938
     components:
@@ -156273,7 +156261,7 @@ entities:
   - uid: 9246
     components:
     - type: Transform
-      pos: -39.673397,110.31284
+      pos: -39.65506,110.30638
       parent: 2
 - proto: FoodMeatChicken
   entities:
@@ -156482,13 +156470,6 @@ entities:
           ent: 45107
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 45108
     components:
     - type: Transform
@@ -156501,13 +156482,6 @@ entities:
           ent: 45109
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 45110
     components:
     - type: Transform
@@ -156520,13 +156494,6 @@ entities:
           ent: 45111
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 45112
     components:
     - type: Transform
@@ -156539,13 +156506,6 @@ entities:
           ent: 45113
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 45114
     components:
     - type: Transform
@@ -156558,13 +156518,6 @@ entities:
           ent: 45115
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 45116
     components:
     - type: Transform
@@ -156577,13 +156530,6 @@ entities:
           ent: 45117
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 45118
     components:
     - type: Transform
@@ -156596,13 +156542,6 @@ entities:
           ent: 45119
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 45120
     components:
     - type: Transform
@@ -156615,13 +156554,6 @@ entities:
           ent: 45121
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 45122
     components:
     - type: Transform
@@ -156634,13 +156566,6 @@ entities:
           ent: 45123
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 45124
     components:
     - type: Transform
@@ -156653,13 +156578,6 @@ entities:
           ent: 45125
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 46583
     components:
     - type: Transform
@@ -223536,12 +223454,6 @@ entities:
       containers:
         solution@food: !type:ContainerSlot
           ent: 10802
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers: []
-      fibers: []
-      fingerprints: []
   - uid: 9831
     components:
     - type: Transform
@@ -223860,12 +223772,6 @@ entities:
       containers:
         solution@food: !type:ContainerSlot
           ent: 22041
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers: []
-      fibers: []
-      fingerprints: []
   - uid: 17333
     components:
     - type: Transform
@@ -224181,13 +224087,6 @@ entities:
       containers:
         solution@food: !type:ContainerSlot
           ent: 44128
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers: []
-      fibers: []
-      fingerprints:
-      - D461ADD300A16049E2E60E0298401258
   - uid: 44681
     components:
     - type: Transform
@@ -224309,12 +224208,6 @@ entities:
       containers:
         solution@food: !type:ContainerSlot
           ent: 45169
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers: []
-      fibers: []
-      fingerprints: []
   - uid: 45170
     mapInit: true
     paused: true
@@ -224427,13 +224320,6 @@ entities:
       containers:
         solution@food: !type:ContainerSlot
           ent: 45171
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers: []
-      fibers: []
-      fingerprints:
-      - D461ADD300A16049E2E60E0298401258
   - uid: 45172
     mapInit: true
     paused: true
@@ -224540,12 +224426,6 @@ entities:
       containers:
         solution@food: !type:ContainerSlot
           ent: 45173
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers: []
-      fibers: []
-      fingerprints: []
   - uid: 45175
     mapInit: true
     paused: true
@@ -224652,12 +224532,6 @@ entities:
       containers:
         solution@food: !type:ContainerSlot
           ent: 45176
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers: []
-      fibers: []
-      fingerprints: []
   - uid: 45177
     mapInit: true
     paused: true
@@ -224770,13 +224644,6 @@ entities:
       containers:
         solution@food: !type:ContainerSlot
           ent: 45178
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers: []
-      fibers: []
-      fingerprints:
-      - D461ADD300A16049E2E60E0298401258
   - uid: 45180
     mapInit: true
     paused: true
@@ -224889,12 +224756,6 @@ entities:
       containers:
         solution@food: !type:ContainerSlot
           ent: 45181
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers: []
-      fibers: []
-      fingerprints: []
   - uid: 45182
     mapInit: true
     paused: true
@@ -225001,12 +224862,6 @@ entities:
       containers:
         solution@food: !type:ContainerSlot
           ent: 45183
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers: []
-      fibers: []
-      fingerprints: []
   - uid: 45185
     mapInit: true
     paused: true
@@ -225119,13 +224974,6 @@ entities:
       containers:
         solution@food: !type:ContainerSlot
           ent: 45186
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers: []
-      fibers: []
-      fingerprints:
-      - D461ADD300A16049E2E60E0298401258
   - uid: 45187
     mapInit: true
     paused: true
@@ -225232,12 +225080,6 @@ entities:
       containers:
         solution@food: !type:ContainerSlot
           ent: 45188
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers: []
-      fibers: []
-      fingerprints: []
   - uid: 45204
     mapInit: true
     paused: true
@@ -225350,12 +225192,6 @@ entities:
       containers:
         solution@food: !type:ContainerSlot
           ent: 45205
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers: []
-      fibers: []
-      fingerprints: []
   - uid: 45206
     mapInit: true
     paused: true
@@ -225462,12 +225298,6 @@ entities:
       containers:
         solution@food: !type:ContainerSlot
           ent: 45207
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers: []
-      fibers: []
-      fingerprints: []
   - uid: 45209
     mapInit: true
     paused: true
@@ -225580,12 +225410,6 @@ entities:
       containers:
         solution@food: !type:ContainerSlot
           ent: 45210
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers: []
-      fibers: []
-      fingerprints: []
   - uid: 45211
     mapInit: true
     paused: true
@@ -225692,12 +225516,6 @@ entities:
       containers:
         solution@food: !type:ContainerSlot
           ent: 45212
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers: []
-      fibers: []
-      fingerprints: []
   - uid: 45779
     components:
     - type: Transform
@@ -278912,7 +278730,7 @@ entities:
       parent: 2
     - type: Door
       canCrush: True
-      secondsUntilStateChange: -68062.72
+      secondsUntilStateChange: -179044.4
       clickOpen: False
       state: Opening
     - type: DoorSignalControl
@@ -278947,7 +278765,7 @@ entities:
       pos: -52.5,187.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -511811.1
+      secondsUntilStateChange: -622792.94
       state: Opening
   - uid: 23105
     components:
@@ -279029,7 +278847,7 @@ entities:
       parent: 2
     - type: Door
       canCrush: True
-      secondsUntilStateChange: -68031.85
+      secondsUntilStateChange: -179013.55
       clickOpen: False
       state: Opening
     - type: DoorSignalControl
@@ -279064,7 +278882,7 @@ entities:
       pos: -53.5,188.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -476093.9
+      secondsUntilStateChange: -587075.5
       state: Opening
   - uid: 38967
     components:
@@ -336362,13 +336180,6 @@ entities:
           showEnts: False
           occludes: True
           ent: null
-- proto: WardrobeGreyFilled
-  entities:
-  - uid: 3943
-    components:
-    - type: Transform
-      pos: -68.5,105.5
-      parent: 2
 - proto: WardrobeMixedFilled
   entities:
   - uid: 46654
