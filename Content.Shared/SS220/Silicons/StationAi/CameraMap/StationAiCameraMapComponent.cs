@@ -30,7 +30,7 @@ public sealed partial class StationAiCameraMapComponent : Component
     /// </summary>
     [DataField]
     public SoundSpecifier SwitchSound = new SoundPathSpecifier("/Audio/SS220/Silicons/ai_camera_switch.ogg",
-        AudioParams.Default.WithVolume(-6f).WithVariation(0.05f));
+        AudioParams.Default.WithVariation(0.05f));
 
     /// <summary>
     ///     How often an open map is refreshed for changes that raise no event.

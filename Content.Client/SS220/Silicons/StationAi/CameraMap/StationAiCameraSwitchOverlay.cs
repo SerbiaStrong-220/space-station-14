@@ -21,7 +21,7 @@ public sealed class StationAiCameraSwitchOverlay : Overlay
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
     private readonly ShaderInstance _shader;
-    private TimeSpan _start = TimeSpan.MinValue;
+    private TimeSpan _end;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
@@ -33,18 +33,18 @@ public sealed class StationAiCameraSwitchOverlay : Overlay
 
     public void Play()
     {
-        _start = _timing.RealTime;
+        _end = _timing.RealTime + Duration;
     }
 
     protected override bool BeforeDraw(in OverlayDrawArgs args)
     {
-        return _timing.RealTime - _start < Duration;
+        return _timing.RealTime < _end;
     }
 
     protected override void Draw(in OverlayDrawArgs args)
     {
         // Full static first, then fade out as the new picture locks in.
-        var elapsed = _timing.RealTime - _start;
+        var elapsed = Duration - (_end - _timing.RealTime);
         var fade = elapsed < Hold ? 1f : 1f - (float) ((elapsed - Hold) / (Duration - Hold));
         _shader.SetParameter("alpha", Math.Clamp(MaxAlpha * fade, 0f, 1f));
 
