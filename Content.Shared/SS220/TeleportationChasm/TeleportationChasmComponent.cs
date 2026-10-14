@@ -6,7 +6,7 @@ using Robust.Shared.Audio;
 namespace Content.Shared.SS220.TeleportationChasm;
 
 /// <summary>
-///     Marks a component that will cause entities to fall into them on a step trigger activation
+///     Marks an entity as a chasm that causes targets to fall when its step trigger activates.
 /// </summary>
 
 [RegisterComponent]
@@ -19,8 +19,8 @@ public sealed partial class TeleportationChasmComponent : Component
     public SoundSpecifier FallingSound = new SoundPathSpecifier("/Audio/Effects/falling.ogg");
 
     /// <summary>
-    ///     Filter entities that we remove instead of teleporting
+    ///     Entities matching this filter are deleted instead of teleported.
     /// </summary>
     [DataField]
-    public EntityWhitelist? BlacklistToDelete;
+    public EntityWhitelist? DeleteTargetWhitelist;
 }
