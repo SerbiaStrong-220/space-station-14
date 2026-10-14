@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Screen frame from actions_ai.rsi (Sprited by TTTomaTTT for SS220); camera glyph drawn for SS220 with AI assistance",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "camera_map"
+    }
+  ]
+}

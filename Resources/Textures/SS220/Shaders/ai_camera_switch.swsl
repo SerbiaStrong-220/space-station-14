@@ -1,0 +1,15 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+// VHS-style static shown while the station AI view relinks to another camera.
+
+uniform highp float alpha;
+
+void fragment() {
+    highp vec2 uv = FRAGCOORD.xy * SCREEN_PIXEL_SIZE;
+    highp float noise = zRandom(uv + vec2(fract(TIME))).x;
+    // A bright tracking band rolling up the picture, like a misaligned tape.
+    highp float band = 1.0 - smoothstep(0.0, 0.06, abs(fract(uv.y * 0.8 - TIME * 1.6) - 0.5));
+    // Faint scanlines.
+    highp float scan = 0.8 + 0.2 * sin(FRAGCOORD.y * 3.14159);
+    highp vec3 color = vec3(noise * 0.5 + band * 0.3) * scan;
+    COLOR = vec4(color, alpha);
+}

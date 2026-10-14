@@ -1,0 +1,15 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  parent: BaseMentalAction
+  id: ActionAiCameraMap
+  name: Surveillance network
+  description: Link your view to a station camera or navigation beacon.
+  components:
+  - type: Action
+    icon:
+      sprite: SS220/Interface/Actions/ai_camera_map.rsi
+      state: camera_map
+    priority: -22
+    keywords: [ "AI", "camera", "map" ]
+  - type: InstantAction
+    event: !type:ToggleIntrinsicUIEvent { key: enum.StationAiCameraMapUiKey.Key }

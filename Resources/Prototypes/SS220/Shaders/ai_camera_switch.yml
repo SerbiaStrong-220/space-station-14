@@ -1,0 +1,5 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: shader
+  id: AiCameraSwitchStatic
+  kind: source
+  path: "/Textures/SS220/Shaders/ai_camera_switch.swsl"

@@ -70,12 +70,15 @@ public partial class MapGridControl : LayoutContainer
 
     public Vector2 MaxRadarRangeVector => new Vector2(MaxRadarRange, MaxRadarRange);
 
-    protected Vector2 MidPointVector => new Vector2(MidPoint, MidPoint);
+    // SS220-adaptive-navmap-begin
+    // Virtual so resizable maps can scale to their actual pixel size.
+    protected virtual Vector2 MidPointVector => new Vector2(MidPoint, MidPoint);
 
-    protected int MidPoint => SizeFull / 2;
+    protected virtual int MidPoint => SizeFull / 2;
     protected int SizeFull => (int) ((UIDisplayRadius + MinimapMargin) * 2 * UIScale);
     protected int ScaledMinimapRadius => (int) (UIDisplayRadius * UIScale);
-    protected float MinimapScale => WorldRange != 0 ? ScaledMinimapRadius / WorldRange : 0f;
+    protected virtual float MinimapScale => WorldRange != 0 ? ScaledMinimapRadius / WorldRange : 0f;
+    // SS220-adaptive-navmap-end
 
     public event Action<float>? WorldRangeChanged;
 

@@ -31,14 +31,20 @@
     - Law #SS220-Law Department
   - type: IgnoreUIRange
   - type: StationAiHeld
+  - type: StationAiCameraMap # SS220-AI-camera-map
   - type: StationAiOverlay
   - type: ShowElectrocutionHUD
   - type: ActionGrant
     actions:
-    - ActionJumpToCore
+    # SS220-AI-camera-map: "jump to core" lives in the surveillance network window now
+    # - ActionJumpToCore
     - ActionAIViewLaws
   - type: UserInterface
     interfaces:
+      # SS220-AI-camera-map begin
+      enum.StationAiCameraMapUiKey.Key:
+        type: StationAiCameraMapBoundUserInterface
+      # SS220-AI-camera-map end
       enum.RadarConsoleUiKey.Key:
         type: RadarConsoleBoundUserInterface
       enum.CrewMonitoringUIKey.Key:
@@ -75,6 +81,10 @@
       #SS220 Station Ai Actions end
   - type: IntrinsicUI
     uis:
+      # SS220-AI-camera-map begin
+      enum.StationAiCameraMapUiKey.Key:
+        toggleAction: ActionAiCameraMap
+      # SS220-AI-camera-map end
     #SS220 Station Ai Actions start
       enum.RadarConsoleUiKey.Key:
         toggleAction: ActionAiShowRadar
