@@ -1,0 +1,21 @@
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+<ContainerButton xmlns="https://spacestation14.io"
+                 StyleClasses="button"
+                 HorizontalExpand="True"
+                 Margin="0 1">
+    <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+        <TextureRect Name="StatusDot"
+                     TexturePath="/Textures/Interface/NavMap/beveled_circle.png"
+                     TextureScale="0.25 0.25"
+                     VerticalAlignment="Center"
+                     Margin="0 0 6 0"/>
+        <Label Name="CameraName"
+               HorizontalExpand="True"
+               VerticalAlignment="Center"
+               ClipText="True"/>
+        <Button Name="PinButton"
+                SetWidth="26"
+                StyleClasses="OpenLeft"
+                VerticalAlignment="Center"/>
+    </BoxContainer>
+</ContainerButton>

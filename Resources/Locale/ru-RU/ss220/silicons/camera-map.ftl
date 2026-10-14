@@ -1,0 +1,23 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+ent-ActionAiCameraMap = Сеть наблюдения
+    .desc = Подключить обзор к станционной камере или навигационному маяку.
+station-ai-camera-map-title = Сеть наблюдения
+station-ai-camera-map-search = Поиск камеры…
+station-ai-camera-map-status-all = Все
+station-ai-camera-map-status-active = Активные
+station-ai-camera-map-status-inactive = Неактивные
+station-ai-camera-map-favorites = Избранные камеры
+station-ai-camera-map-all = Все камеры
+station-ai-camera-map-other = Остальные камеры
+station-ai-camera-map-active-count = активно: { $count }
+station-ai-camera-map-empty = Камеры не найдены
+station-ai-camera-map-pin = Закрепить камеру
+station-ai-camera-map-unpin = Открепить камеру
+station-ai-camera-map-row-active = { $name } — активна
+station-ai-camera-map-row-inactive = { $name } — неактивна
+station-ai-camera-map-ready = Готов к подключению
+station-ai-camera-map-cooldown = Переподключение: { $seconds } с
+station-ai-camera-map-camera-inactive = Камера неактивна
+station-ai-camera-map-no-camera-nearby = Нет камеры рядом
+station-ai-camera-map-blip-inactive = { $name } (неактивна)
+station-ai-camera-map-blip-uncovered = { $name } (нет камеры рядом)
