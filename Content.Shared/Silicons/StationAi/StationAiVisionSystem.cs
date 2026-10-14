@@ -24,9 +24,11 @@ public sealed class StationAiVisionSystem : EntitySystem
 
     private SeedJob _seedJob;
     private ViewJob _job;
+    private EntityQuery<StationAiVisionComponent> _visionQuery; // SS220 TapeRecorder & BodycamUpdate
 
     private readonly HashSet<Entity<OccluderComponent>> _occluders = new();
     private readonly HashSet<Entity<StationAiVisionComponent>> _seeds = new();
+    private readonly HashSet<EntityUid> _visionCandidates = new(); // SS220 TapeRecorder & BodycamUpdate
     private readonly HashSet<Vector2i> _viewportTiles = new();
 
     // Dummy set
@@ -44,6 +46,8 @@ public sealed class StationAiVisionSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+
+        _visionQuery = GetEntityQuery<StationAiVisionComponent>(); // SS220 TapeRecorder & BodycamUpdate
 
         _seedJob = new()
         {
@@ -161,17 +165,6 @@ public sealed class StationAiVisionSystem : EntitySystem
         var enlargedLocalAabb = invMatrix.TransformBox(worldBounds.Enlarged(expansionSize));
         _seedJob.ExpandedBounds = enlargedLocalAabb;
         _parallel.ProcessNow(_seedJob);
-
-        // SS220 TapeRecorder & BodycamUpdate BGN
-        var gridMap = Transform(grid.Owner).MapID;
-        var expandedWorldBounds = worldBounds.Enlarged(expansionSize);
-        var visionQuery = AllEntityQuery<StationAiVisionComponent, TransformComponent>();
-        while (visionQuery.MoveNext(out var uid, out var vision, out var transform))
-        {
-            if (transform.MapID == gridMap && expandedWorldBounds.Contains(_xforms.GetWorldPosition(transform)))
-                _seeds.Add((uid, vision));
-        }
-        // SS220 TapeRecorder & BodycamUpdate END
 
         _job.Data.Clear();
         FastPath = false;
@@ -309,7 +302,17 @@ public sealed class StationAiVisionSystem : EntitySystem
 
         public void Execute()
         {
-            System._lookup.GetLocalEntitiesIntersecting(Grid.Owner, ExpandedBounds, System._seeds, flags: LookupFlags.All | LookupFlags.Approximate);
+            // SS220 TapeRecorder & BodycamUpdate BGN
+            // Find wearers before filtering by component so their equipped cameras are included.
+            System._visionCandidates.Clear();
+            System._lookup.GetLocalEntitiesIntersecting(Grid.Owner, ExpandedBounds, System._visionCandidates,
+                flags: LookupFlags.All | LookupFlags.Approximate);
+            foreach (var uid in System._visionCandidates)
+            {
+                if (System._visionQuery.TryComp(uid, out var vision))
+                    System._seeds.Add((uid, vision));
+            }
+            // SS220 TapeRecorder & BodycamUpdate END
         }
     }
 

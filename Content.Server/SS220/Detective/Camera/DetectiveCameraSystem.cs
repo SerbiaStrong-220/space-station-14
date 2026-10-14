@@ -4,6 +4,7 @@ using Content.Server.Popups;
 using Content.Server.SurveillanceCamera;
 using Content.Shared.Interaction.Events;
 using Content.Shared.PowerCell;
+using Content.Shared.SS220.BodyCamera;
 using Content.Shared.SurveillanceCamera.Components;
 using Robust.Shared.Audio.Systems;
 
@@ -14,6 +15,7 @@ public sealed partial class DetectiveCameraSystem : EntitySystem
     [Dependency] private SurveillanceCameraSystem _camera = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private PowerCellSystem _powerCell = default!;
 
     public override void Initialize()
     {
@@ -21,12 +23,12 @@ public sealed partial class DetectiveCameraSystem : EntitySystem
 
         SubscribeLocalEvent<DetectiveCameraComponent, ComponentStartup>(OnComponentStartup);
         SubscribeLocalEvent<DetectiveCameraComponent, UseInHandEvent>(OnUseInHand);
-        SubscribeLocalEvent<DetectiveCameraComponent, PowerCellChangedEvent>(OnPowerCellChanged);
+        SubscribeLocalEvent<DetectiveCameraComponent, PowerCellSlotEmptyEvent>(OnPowerCellEmpty);
     }
 
-    private void OnPowerCellChanged(Entity<DetectiveCameraComponent> ent, ref PowerCellChangedEvent args)
+    private void OnPowerCellEmpty(Entity<DetectiveCameraComponent> ent, ref PowerCellSlotEmptyEvent args)
     {
-        if (!args.Ejected || !ent.Comp.Enabled)
+        if (!ent.Comp.Enabled)
             return;
 
         ent.Comp.Enabled = false;
@@ -61,9 +63,14 @@ public sealed partial class DetectiveCameraSystem : EntitySystem
         if (!TryComp<SurveillanceCameraComponent>(uid, out var cameraComponent))
             return false;
 
+        if (!component.Enabled && HasComp<BodyCameraPowerComponent>(uid) && !_powerCell.HasDrawCharge(uid, user))
+            return false;
+
         if (component.ActivateCameraOnEnable)
         {
             _camera.SetActive(uid, !component.Enabled, cameraComponent);
+            if (!component.Enabled && !cameraComponent.Active)
+                return false;
         }
         component.Enabled = !component.Enabled;
         var evt = new DetectiveCameraToggledEvent(component.Enabled);

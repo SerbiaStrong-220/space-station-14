@@ -333,13 +333,14 @@ public sealed partial class SurveillanceCameraSystem : SharedSurveillanceCameraS
         UpdateVisuals(camera, component);
 
         // SS220 TapeRecorder & BodycamUpdate BGN
-        if (TryComp<PowerCellDrawComponent>(camera, out var powerDraw))
-            _powerCell.SetDrawEnabled((camera, powerDraw), setting);
-
         if (HasComp<BodyCameraPowerComponent>(camera))
         {
             var bodyCameraEvent = new BodyCameraActiveChangedEvent(setting);
             RaiseLocalEvent(camera, ref bodyCameraEvent);
+        }
+        else if (TryComp<PowerCellDrawComponent>(camera, out var powerDraw))
+        {
+            _powerCell.SetDrawEnabled((camera, powerDraw), setting);
         }
         // SS220 TapeRecorder & BodycamUpdate END
 

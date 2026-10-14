@@ -7,6 +7,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Labels.Components;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
+using Content.Shared.SS220.TapeRecorder;
 using Content.Shared.TapeRecorder.Components;
 using Content.Shared.TapeRecorder.Events;
 using Content.Shared.Toggleable;
@@ -278,6 +279,11 @@ public abstract class SharedTapeRecorderSystem : EntitySystem
     /// </summary>
     protected void OnCassetteRemoveAttempt(Entity<TapeRecorderComponent> ent, ref ItemSlotEjectAttemptEvent args)
     {
+        // SS220 TapeRecorder & BodycamUpdate BGN
+        if (args.Slot.ContainerSlot?.ID != SlotName)
+            return;
+        // SS220 TapeRecorder & BodycamUpdate END
+
         if (!HasComp<ActiveTapeRecorderComponent>(ent))
             return;
 
@@ -286,6 +292,11 @@ public abstract class SharedTapeRecorderSystem : EntitySystem
 
     protected void OnCassetteRemoved(Entity<TapeRecorderComponent> ent, ref EntRemovedFromContainerMessage args)
     {
+        // SS220 TapeRecorder & BodycamUpdate BGN
+        if (args.Container.ID != SlotName)
+            return;
+        // SS220 TapeRecorder & BodycamUpdate END
+
         SetMode(ent, TapeRecorderMode.Stopped);
         UpdateAppearance(ent);
         UpdateUI(ent);
@@ -339,7 +350,7 @@ public abstract class SharedTapeRecorderSystem : EntitySystem
     /// </summary>
     /// <param name="ent">The tape recorder to update</param>
     /// <param name="mode">The new mode</param>
-    private void SetMode(Entity<TapeRecorderComponent> ent, TapeRecorderMode mode)
+    public void SetMode(Entity<TapeRecorderComponent> ent, TapeRecorderMode mode) // SS220 TapeRecorder & BodycamUpdate
     {
 
         // SS220 TapeRecorder & Bodycam update BGN
@@ -356,6 +367,13 @@ public abstract class SharedTapeRecorderSystem : EntitySystem
         }
         else
         {
+            // SS220 TapeRecorder & Bodycam update BGN
+            var attempt = new TapeRecorderModeChangeAttemptEvent(mode);
+            RaiseLocalEvent(ent.Owner, ref attempt);
+            if (attempt.Cancelled)
+                return;
+            // SS220 TapeRecorder & Bodycam update END
+
             // can't play without a tape in it...
             if (!TryGetTapeCassette(ent, out _))
                 return;
@@ -373,6 +391,12 @@ public abstract class SharedTapeRecorderSystem : EntitySystem
 
         ent.Comp.Mode = mode;
         Dirty(ent);
+
+        // SS220 TapeRecorder & Bodycam update BGN
+        var changed = new TapeRecorderModeChangedEvent(mode);
+        RaiseLocalEvent(ent.Owner, ref changed);
+        UpdateAppearance(ent);
+        // SS220 BTapeRecorder & Bodycam update END
 
         UpdateUI(ent);
     }

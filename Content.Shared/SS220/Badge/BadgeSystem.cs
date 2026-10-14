@@ -4,6 +4,7 @@ using Content.Shared.Examine;
 using Content.Shared.Inventory;
 using Content.Shared.Roles;
 using Content.Shared.Storage;
+using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.Badge;
 
@@ -56,7 +57,7 @@ public sealed partial class BadgeSystem : EntitySystem
         args.PushMarkup(
             $"[color={ent.Comp.Color}]" +
             $"{Loc.GetString(ent.Comp.Department)}\n" +
-            $"{ent.Comp.FullName}\n" +
+            $"{FormattedMessage.EscapeText(ent.Comp.FullName)}\n" +
             $"{ent.Comp.JobName}\n" +
             $"№ NT-FNK-{ent.Comp.SerialNumber}" +
             "[/color]"

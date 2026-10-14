@@ -6,8 +6,6 @@
   components:
   - type: Sprite
     sprite: SS220/Objects/Devices/stationary_tape_recorder.rsi
-    # Так как на данный момент GenericVisualizer для TapeRecorder не работает,
-    # то в rsi стейт idle это копия стейта playing, чтобы была анимация экрана.
   - type: Item
     size: Normal
     shape:
@@ -35,7 +33,7 @@
   - type: Item
     size: Small
   - type: TapeCassette
-    maxCapacity: 1080
+    maxCapacity: 360
   - type: Tag
     tags:
     - CassetteTapeLargeCapacity

@@ -8,19 +8,7 @@
   },
   "states": [
     {
-      "name": "taperecorder_idle",
-      "delays": [
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1
-        ]
-      ]
+      "name": "taperecorder_idle"
     },
     {
       "name": "inhand-right",
