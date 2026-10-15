@@ -89,7 +89,7 @@ public sealed partial class DeliverySystem
                 continue;
 
             _container.Remove(uid, container, reparent: false, force: true);
-            QueueDel(uid);
+            Del(uid);
         }
 
         return true;
