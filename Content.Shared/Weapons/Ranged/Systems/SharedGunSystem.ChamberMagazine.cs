@@ -31,6 +31,7 @@ public abstract partial class SharedGunSystem
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, GetVerbsEvent<InteractionVerb>>(OnChamberInteractionVerb);
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, GetVerbsEvent<AlternativeVerb>>(OnMagazineVerb);
 
+        SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, ActivateInWorldEvent>(OnChamberActivate);
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, UseInHandEvent>(OnChamberUse);
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, InteractUsingEvent>(OnInteractUsing); //SS220 weapon overhaul
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, AmmoFillDoAfterEvent>(OnChamberMagAmmoFillDoAfter); //SS220 weapon overhaul
@@ -47,6 +48,18 @@ public abstract partial class SharedGunSystem
         {
             Appearance.SetData(uid, AmmoVisuals.BoltClosed, component.BoltClosed.Value);
         }
+    }
+
+    /// <summary>
+    /// Called when user "Activated In World" (E) with the gun as the target
+    /// </summary>
+    private void OnChamberActivate(EntityUid uid, ChamberMagazineAmmoProviderComponent component, ActivateInWorldEvent args)
+    {
+        if (args.Handled || !args.Complex)
+            return;
+
+        args.Handled = true;
+        ToggleBolt(uid, component, args.User);
     }
 
     //SS220 weapon overhaul begin
