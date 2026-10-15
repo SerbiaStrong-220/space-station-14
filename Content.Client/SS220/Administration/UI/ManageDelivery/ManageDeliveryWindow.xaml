@@ -15,24 +15,18 @@
             <Button Name="ApplyRewardButton" Text="{Loc admin-verbs-delivery-reward-apply}" Margin="5,0,0,0"/>
         </BoxContainer>
 
-        <Control MinHeight="10"/>
-
-        <Label Text="{Loc admin-verbs-delivery-timer-label}"/>
+        <Label Text="{Loc admin-verbs-delivery-timer-label}" Margin="0,10,0,0"/>
         <Label Name="TimerHintLabel" HorizontalAlignment="Center"/>
         <BoxContainer Orientation="Horizontal">
             <SpinBox Name="TimerSpinBox" HorizontalExpand="True"/>
             <Button Name="ApplyTimerButton" Text="{Loc admin-verbs-delivery-timer-apply}" Margin="5,0,0,0"/>
         </BoxContainer>
 
-        <Control MinHeight="10"/>
-
-        <Label Text="{Loc admin-verbs-delivery-contents-label}"/>
+        <Label Text="{Loc admin-verbs-delivery-contents-label}" Margin="0,10,0,0"/>
         <Label Name="ContentsLabel" HorizontalAlignment="Center"/>
         <Button Name="OpenContentsButton" Text="{Loc admin-verbs-delivery-contents-open}" Margin="0,5,0,0"/>
 
-        <Control MinHeight="10"/>
-
-        <Label Text="{Loc admin-verbs-delivery-recipient-label}"/>
+        <Label Text="{Loc admin-verbs-delivery-recipient-label}" Margin="0,10,0,0"/>
         <Label Name="CurrentRecipientLabel" HorizontalAlignment="Center"/>
         <LineEdit Name="SearchCrew" PlaceHolder="{Loc admin-verbs-traits-search-placeholder}"/>
         <ItemList Name="CrewList" MinHeight="140" VerticalExpand="True" SelectMode="Single"/>

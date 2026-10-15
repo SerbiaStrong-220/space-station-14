@@ -27,10 +27,9 @@
                 MinSize="200 0"/>
         </PanelContainer>
 
-        <Control MinHeight="6"/>
-
         <Button
             Name="ClearButton"
+            Margin="0,6,0,0"
             Text="{Loc admin-verbs-delivery-contents-clear}"/>
         <Button
             Name="ReplaceButton"
