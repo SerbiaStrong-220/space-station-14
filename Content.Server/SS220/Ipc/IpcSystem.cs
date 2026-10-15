@@ -55,6 +55,7 @@ public sealed partial class IpcSystem : SharedIpcSystem
     private static readonly LocId IpcDrainReady = "ipc-drain-enabled";
     private static readonly LocId IpcDrainDisabled = "ipc-drain-disabled";
     private static readonly LocId IpcNoBattery = "ipc-no-battery";
+    private static readonly LocId IpcNoPower = "ipc-no-power";
     private static readonly TimeSpan SoundMinInterval = TimeSpan.FromSeconds(15);
     private static readonly TimeSpan SoundMaXInterval = TimeSpan.FromSeconds(30);
 
@@ -65,12 +66,14 @@ public sealed partial class IpcSystem : SharedIpcSystem
         SubscribeLocalEvent<IpcComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<IpcComponent, ComponentShutdown>(OnComponentShutdown);
         SubscribeLocalEvent<IpcComponent, PowerCellChangedEvent>(OnPowerCellChanged);
+        SubscribeLocalEvent<IpcComponent, PowerCellSlotEmptyEvent>(OnPowerCellSlotEmpty);
         SubscribeLocalEvent<IpcComponent, ToggleDrainActionEvent>(OnToggleDrainAction);
         SubscribeLocalEvent<IpcComponent, EmpPulseEvent>(OnEmpPulse);
         SubscribeLocalEvent<IpcComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovementSpeedModifiers);
         SubscribeLocalEvent<IpcComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<IpcComponent, OpenIpcFaceActionEvent>(OnOpenIpcFaceAction);
         SubscribeLocalEvent<IpcComponent, DamageChangedEvent>(OnDamageChanged);
+        SubscribeLocalEvent<IpcComponent, BatteryStateChangedEvent>(OnBatteryStateChanged);
         SubscribeLocalEvent<IpcComponent, RefreshChargeRateEvent>(OnRefreshChargeRate);
         SubscribeLocalEvent<IpcComponent, OnTemperatureChangeEvent>(OnTemperatureChange);
         SubscribeLocalEvent<IpcComponent, SuicideEvent>(IpcSuicide, before: [typeof(SuicideSystem)]);
@@ -104,6 +107,18 @@ public sealed partial class IpcSystem : SharedIpcSystem
     }
 
     /// <summary>
+    /// Slotted battery became empty or fully charged.
+    /// So movement speed has to be reviewed.
+    /// </summary>
+    private void OnBatteryStateChanged(Entity<IpcComponent> ent, ref BatteryStateChangedEvent args)
+    {
+        if (Terminating(ent))
+            return;
+
+        _movementSpeedModifier.RefreshMovementSpeedModifiers(ent.Owner);
+    }
+
+    /// <summary>
     /// The presence of a battery affects the movement speed
     /// and the ability to use the drain ability.
     /// When removing the battery, forcibly disable the drain ability.
@@ -128,6 +143,17 @@ public sealed partial class IpcSystem : SharedIpcSystem
         }
 
         Dirty(ent);
+    }
+
+    /// <summary>
+    /// When battery is ejected from the slot or full discharged.
+    /// </summary>
+    private void OnPowerCellSlotEmpty(Entity<IpcComponent> ent, ref PowerCellSlotEmptyEvent args)
+    {
+        if (Terminating(ent))
+            return;
+
+        _movementSpeedModifier.RefreshMovementSpeedModifiers(ent.Owner);
     }
 
     /// <summary>
@@ -167,7 +193,7 @@ public sealed partial class IpcSystem : SharedIpcSystem
     /// </summary>
     private void OnRefreshMovementSpeedModifiers(Entity<IpcComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
-        if (HasCriticalCharge(ent))
+        if (HasNoPower(ent))
             args.ModifySpeed(ent.Comp.LowChargeSpeed);
     }
 
@@ -304,11 +330,11 @@ public sealed partial class IpcSystem : SharedIpcSystem
     /// </summary>
     private void OnRadioSendAttempt(Entity<IpcComponent> ent, ref RadioSendAttemptEvent args)
     {
-        if (!HasCriticalCharge(ent))
+        if (!HasNoPower(ent))
             return;
 
         args.Cancelled = true;
-        _popup.PopupEntity(Loc.GetString("ipc-no-power"), ent, ent);
+        _popup.PopupEntity(Loc.GetString(IpcNoPower), ent, ent);
     }
 
     /// <summary>
@@ -316,8 +342,18 @@ public sealed partial class IpcSystem : SharedIpcSystem
     /// </summary>
     private void OnRadioReceiveAttempt(Entity<IpcComponent> ent, ref RadioReceiveAttemptEvent args)
     {
-        if (HasCriticalCharge(ent))
+        if (HasNoPower(ent))
             args.Cancelled = true;
+    }
+
+    /// <summary>
+    /// Checks if the IPC is out of power,
+    /// or the battery charge is below critical threshold.
+    /// Used to gate functionality that should stop working when the IPC has no charge.
+    /// </summary>
+    private bool HasNoPower(Entity<IpcComponent> ent)
+    {
+        return !_powerCell.HasBattery(ent.Owner) || HasCriticalCharge(ent);
     }
 
     /// <summary>
