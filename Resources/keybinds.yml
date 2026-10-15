@@ -188,6 +188,9 @@ binds:
 - function: ToggleOffset
   type: State
   key: Space
+- function: UseGunInHand
+  type: State
+  key: R
 #SS220 weapon overhaul end
 #SS220 shield rework begin
 - function: ToggleActiveBlocking
