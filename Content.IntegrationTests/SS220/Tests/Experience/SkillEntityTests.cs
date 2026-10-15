@@ -16,6 +16,14 @@ namespace Content.IntegrationTests.SS220.Tests.Experience;
 [TestFixture]
 public sealed class SkillEntityTests
 {
+    [TestPrototypes]
+    private const string Prototypes = @"
+- type: entity
+  id: ExperienceDummyEntity
+  components:
+  - type: Experience
+";
+
     [Test]
     public async Task TestSkillEntityEventsRaisingAndOrdering()
     {

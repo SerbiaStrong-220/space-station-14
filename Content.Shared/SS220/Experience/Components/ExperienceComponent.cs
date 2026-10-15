@@ -28,7 +28,7 @@ public sealed partial class ExperienceComponent : Component
 {
     public const string ContainerId = "experience-entity-container";
 
-    [AutoNetworkedField]
+    // [AutoNetworkedField]
     [ViewVariables(VVAccess.ReadOnly)]
     public bool SkillEntityInitialized = false;
 

@@ -1,11 +1,17 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Experience.Systems;
 
 public sealed partial class ExperienceSystem : EntitySystem
 {
+    [Dependency] private TagSystem _tag = default!;
+
+    // NOTE: cant resolve cause guidebook lives in client namespace
+    private readonly ProtoId<TagPrototype> _guideEmbedTag = "GuideEmbeded";
+
     private void InitializeGainedExperience()
     {
         SubscribeLocalEvent<ExperienceComponent, RecalculateEntityExperience>(OnRecalculateEntityExperience);
@@ -28,6 +34,9 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     private void OnRecalculateEntityExperience(Entity<ExperienceComponent> entity, ref RecalculateEntityExperience args)
     {
+        if (_tag.HasTag(entity, _guideEmbedTag))
+            return;
+
         if (!entity.Comp.SkillEntityInitialized)
         {
             Log.Debug($"Called {nameof(RecalculateEntityExperience)} before {ToPrettyString(entity)} skill entities was initialized!");
