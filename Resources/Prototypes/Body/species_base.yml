@@ -92,6 +92,7 @@
     maxOffset: 6
     pvsIncrease: 0.6
   - type: EyeOffsetInCombatMode
+    online: false
   #SS220 eye offset end
   - type: Cuffable
   - type: Ensnareable
