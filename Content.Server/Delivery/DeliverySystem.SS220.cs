@@ -66,7 +66,7 @@ public sealed partial class DeliverySystem
         var spawn = Spawn(proto.ID, Transform(ent.Owner).Coordinates);
         if (!TryComp(spawn, out TransformComponent? xform) || !TryComp(spawn, out MetaDataComponent? meta))
         {
-            PredictedDel(spawn);
+            Del(spawn);
             Log.Error($"Can't put '{protoId}' into {ToPrettyString(ent.Owner)}: it has no transform or metadata.");
             return false;
         }
@@ -78,7 +78,7 @@ public sealed partial class DeliverySystem
                 Transform(ent.Owner),
                 force: true))
         {
-            PredictedDel(spawn);
+            Del(spawn);
             Log.Error($"Can't put '{protoId}' into {ToPrettyString(ent.Owner)}: the container refused it.");
             return false;
         }
@@ -89,7 +89,7 @@ public sealed partial class DeliverySystem
                 continue;
 
             _container.Remove(uid, container, reparent: false, force: true);
-            PredictedDel(uid);
+            QueueDel(uid);
         }
 
         return true;
