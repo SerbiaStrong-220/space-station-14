@@ -128,11 +128,21 @@ public abstract class SharedEmitSoundSystem : EntitySystem
 
     private void OnEmitSoundOnPickup(EntityUid uid, EmitSoundOnPickupComponent component, GotEquippedHandEvent args)
     {
+        // SS220-drop-and-pickup-sound-suppression begin
+        if (args.SuppressPickupSound)
+            return;
+        // SS220-drop-and-pickup-sound-suppression end
+
         TryEmitSound(uid, component, args.User);
     }
 
     private void OnEmitSoundOnDrop(EntityUid uid, EmitSoundOnDropComponent component, DroppedEvent args)
     {
+        // SS220-drop-and-pickup-sound-suppression begin
+        if (args.SuppressDropSound)
+            return;
+        // SS220-drop-and-pickup-sound-suppression end
+
         TryEmitSound(uid, component, args.User);
     }
 
