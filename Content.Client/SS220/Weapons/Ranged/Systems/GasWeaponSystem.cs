@@ -7,15 +7,4 @@ namespace Content.Client.SS220.Weapons.Ranged.Systems;
 
 public sealed partial class GasWeaponSystem : SharedGasWeaponSystem
 {
-
-    public override void Initialize()
-    {
-        base.Initialize();
-    }
-
-    protected override void OnShootAttempt(Entity<GasWeaponComponent> ent, ref ShotAttemptedEvent args)
-    {
-        base.OnShootAttempt(ent, ref args);
-    }
-
 }

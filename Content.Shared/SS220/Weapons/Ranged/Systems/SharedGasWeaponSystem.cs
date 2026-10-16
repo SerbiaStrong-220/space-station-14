@@ -21,7 +21,7 @@ public abstract class SharedGasWeaponSystem : EntitySystem
         SubscribeLocalEvent<GasWeaponComponent, ExaminedEvent>(OnBatteryExamine);
     }
 
-    protected virtual void OnBatteryExamine(Entity<GasWeaponComponent> ent, ref ExaminedEvent args)
+    protected void OnBatteryExamine(Entity<GasWeaponComponent> ent, ref ExaminedEvent args)
     {
         args.PushMarkup(Loc.GetString("gas-gun-examine",
                                 ("stateText", Loc.GetString(ent.Comp.CanShoot
@@ -29,7 +29,7 @@ public abstract class SharedGasWeaponSystem : EntitySystem
                                     : "gas-gun-examine-unready"))));
     }
 
-    protected virtual void OnShootAttempt(Entity<GasWeaponComponent> ent, ref ShotAttemptedEvent args)
+    protected void OnShootAttempt(Entity<GasWeaponComponent> ent, ref ShotAttemptedEvent args)
     {
         if (!ent.Comp.CanShoot)
         {
