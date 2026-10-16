@@ -2,3 +2,4 @@ gas-gun-examine = Индикатор готовности ионизатора �
 gas-gun-examine-ready = [color=darkgreen]зелёным[/color]
 gas-gun-examine-unready = [color=darkred]красным[/color]
 gas-gun-fired-empty = Недостаточно газа для образования плазмы!
+gas-gun-flush-tank = Опустошить бак плазменного оружия
