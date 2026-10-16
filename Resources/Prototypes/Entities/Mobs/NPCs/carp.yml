@@ -231,6 +231,12 @@
   id: MobShark
   description: A dangerous shark from the blackness of endless space, who loves to drink blood.
   components:
+    # SS220 ADD NIGHT VISION START
+    - type: NightVision
+      profile: NightVisionLightGray
+      enabled: false
+      action: ActionToggleNightVisionInnate
+    # SS220 ADD NIGHT VISION END
     - type: Sprite
       sprite: Mobs/Aliens/Carps/sharkminnow.rsi
       layers:

@@ -124,8 +124,8 @@
       tobacco_slot:
         name: hookah-tobacco-slot-name
         whitelist:
-          components:
-          - Stack
+          tags:
+          - HookahTobacco
         insertSound:
           path: /Audio/Weapons/Guns/Empty/empty.ogg
   - type: SolutionContainerManager
@@ -180,9 +180,17 @@
       path: /Audio/Effects/extinguish.ogg
   - type: ContainerContainer
     containers:
+      tobacco_slot: !type:ContainerSlot {}
       coal_slot: !type:ContainerSlot {}
   - type: ItemSlots
     slots:
+      tobacco_slot:
+        name: hookah-tobacco-slot-name
+        whitelist:
+          tags:
+          - HookahTobacco
+        insertSound:
+          path: /Audio/Weapons/Guns/Empty/empty.ogg
       coal_slot:
         name: hookah-coal-slot-name
         whitelist:

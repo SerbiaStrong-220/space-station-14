@@ -1,6 +1,8 @@
 using Content.Client.SS220.TTS.UI;
 using Content.Shared.SS220.TTS;
 using Content.Shared.SS220.TTS.Requirements;
+using Content.Shared.Traits;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client.Lobby.UI;
 
@@ -34,5 +36,22 @@ public partial class HumanoidProfileEditor
     {
         Profile = Profile?.WithVoicePreferences(preferences.Clone());
         SetDirty();
+    }
+
+    private bool TraitAllowedSpecies(TraitPrototype trait)
+    {
+        if (Profile == null)
+            return true;
+
+        if (trait.Whitelist == null && trait.Blacklist == null)
+            return true;
+
+        if (!_prototypeManager.TryIndex(Profile.Species, out var speciesProto))
+            return true;
+
+        if (!_prototypeManager.TryIndex<EntityPrototype>(speciesProto.Prototype, out var entityProto))
+            return true;
+
+        return _whitelistSystem.CheckBothPrototype(entityProto, trait.Blacklist, trait.Whitelist);
     }
 }

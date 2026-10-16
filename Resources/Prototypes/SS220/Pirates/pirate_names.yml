@@ -1,0 +1,11 @@
+- type: localizedDataset
+  id: PirateCrewNames
+  values:
+    prefix: pirate-crew-name-
+    count: 15
+
+- type: localizedDataset
+  id: PirateCaptainNames
+  values:
+    prefix: pirate-captain-name-
+    count: 8

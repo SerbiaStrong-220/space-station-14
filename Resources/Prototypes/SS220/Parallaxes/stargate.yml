@@ -1,0 +1,139 @@
+- type: parallax
+  id: GateStation
+  layers:
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Parallaxes/blackback.png"
+      slowness: 0.99
+      scale: "0.7, 0.7"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/sParallax_dust2.png"
+      slowness: 0.99
+      scale: "0.7, 0.7"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/Nebula1.png"
+      slowness: 0.968046875
+      worldHomePosition: "1, 1"
+      scale: "0.2, 0.2"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/Star.png"
+      slowness: 0.99
+      tiled: false
+      worldHomePosition: "1, 1"
+      scale: "0.07, 0.07"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/Exoplanet.png"
+      slowness: 0.988046875
+      tiled: false
+      worldHomePosition: "212, -246"
+      scale: "0.25, 0.25"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/littlemeteors.png"
+      slowness: 0.988046875
+      tiled: false
+      worldHomePosition: "1, 1"
+      scale: "0.09, 0.09"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/Meteors.png"
+      slowness: 0.968046875
+      tiled: false
+      worldHomePosition: "15, 242"
+      scale: "0.07, 0.07"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/Meteors.png"
+      slowness: 0.968046875
+      tiled: false
+      worldHomePosition: "15, 122"
+      scale: "0.04, 0.04"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/Meteors.png"
+      slowness: 0.948046875
+      tiled: false
+      worldHomePosition: "15, -103"
+      scale: "0.12, 0.12"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/Meteors.png"
+      slowness: 0.938046875
+      tiled: false
+      worldHomePosition: "-115, -103"
+      scale: "0.12, 0.12"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/Meteors.png"
+      slowness: 0.928046875
+      tiled: false
+      worldHomePosition: "255, 103"
+      scale: "0.12, 0.12"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/Meteors.png"
+      slowness: 0.918046875
+      tiled: false
+      worldHomePosition: "15, 203"
+      scale: "0.12, 0.12"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/Meteors.png"
+      slowness: 0.908046875
+      tiled: false
+      worldHomePosition: "15, 0"
+      scale: "0.14, 0.14"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/Meteors.png"
+      slowness: 0.889046875
+      tiled: false
+      worldHomePosition: "15, 103"
+      scale: "0.15, 0.15"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/Meteors.png"
+      slowness: 0.898046875
+      tiled: false
+      worldHomePosition: "155, 103"
+      scale: "0.16, 0.16"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/Meteors.png"
+      slowness: 0.898046875
+      tiled: false
+      worldHomePosition: "255, 203"
+      scale: "0.17, 0.17"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/Meteors.png"
+      slowness: 0.848046875
+      tiled: false
+      worldHomePosition: "-255, -103"
+      scale: "0.17, 0.17"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/Meteors.png"
+      slowness: 0.848046875
+      tiled: false
+      worldHomePosition: "155, -53"
+      scale: "0.17, 0.17"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/Meteors.png"
+      slowness: 0.858046875
+      tiled: false
+      worldHomePosition: "111,111"
+      scale: "0.04, 0.04"
+  layersLQ:
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: ""
+        configPath: "/Prototypes/Parallaxes/parallax_config.toml"
+      slowness: 0.875
+      scrolling: "0, -0.475"
+  layersLQUseHQ: false

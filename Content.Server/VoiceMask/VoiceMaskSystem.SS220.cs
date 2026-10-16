@@ -29,6 +29,9 @@ public partial class VoiceMaskSystem
 
     private void OnGetVoiceOverride(Entity<VoiceMaskComponent> entity, ref GetTtsVoiceOverrideEvent args)
     {
+        if (!entity.Comp.Active)
+            return;
+
         args.Overrides.HardMergeWith(entity.Comp.VoicePreferences, withIndexes: true);
     }
 

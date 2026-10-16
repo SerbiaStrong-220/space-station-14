@@ -258,7 +258,15 @@ namespace Content.Shared.Hands
     /// </summary>
     public sealed class GotEquippedHandEvent : EquippedHandEvent
     {
-        public GotEquippedHandEvent(EntityUid user, EntityUid unequipped, Hand hand, string handId) : base(user, unequipped, hand, handId) { }
+        // SS220-drop-and-pickup-sound-suppression begin
+        // public GotEquippedHandEvent(EntityUid user, EntityUid unequipped, Hand hand, string handId) : base(user, unequipped, hand, handId) { }
+        public bool SuppressPickupSound { get; }
+
+        public GotEquippedHandEvent(EntityUid user, EntityUid unequipped, Hand hand, string handId, bool suppressPickupSound = false) : base(user, unequipped, hand, handId)
+        {
+            SuppressPickupSound = suppressPickupSound;
+        }
+        // SS220-drop-and-pickup-sound-suppression end
     }
 
     /// <summary>
@@ -364,9 +372,12 @@ namespace Content.Shared.Hands
     {
         public TEvent Args;
 
-        public HeldRelayedEvent(TEvent args)
+        public EntityUid Owner; // SS220 tweak held relay
+
+        public HeldRelayedEvent(TEvent args, EntityUid owner) // SS220 tweak held relay
         {
             Args = args;
+            Owner = owner; // SS220 tweak held relay
         }
     }
 

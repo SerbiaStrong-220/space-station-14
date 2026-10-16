@@ -37,6 +37,7 @@ public partial class ListingData : IEquatable<ListingData>
         other.ProductEvent,
         other.RaiseProductEventOnUser,
         other.PurchaseAmount,
+        other.PurchaseLimit, // SS220 pirate market
         other.ID,
         other.Categories,
         other.OriginalCost,
@@ -63,6 +64,7 @@ public partial class ListingData : IEquatable<ListingData>
         ListingPurchasedEvent? productEvent, // ss220 tweak product event
         bool raiseProductEventOnUser,
         int purchaseAmount,
+        int? purchaseLimit, // SS220 pirate market
         string id,
         HashSet<ProtoId<StoreCategoryPrototype>> categories,
         IReadOnlyDictionary<ProtoId<CurrencyPrototype>, FixedPoint2> originalCost,
@@ -85,6 +87,7 @@ public partial class ListingData : IEquatable<ListingData>
         ProductEvent = productEvent;
         RaiseProductEventOnUser = raiseProductEventOnUser;
         PurchaseAmount = purchaseAmount;
+        PurchaseLimit = purchaseLimit; // SS220 pirate market
         ID = id;
         Categories = categories.ToHashSet();
         OriginalCost = originalCost;
@@ -197,6 +200,14 @@ public partial class ListingData : IEquatable<ListingData>
     [DataField]
     public int PurchaseAmount;
 
+    // SS220 pirate market begin
+    /// <summary>
+    /// Maximum amount of this listing available to a store. Sent to clients for stock display.
+    /// </summary>
+    [DataField]
+    public int? PurchaseLimit;
+    // SS220 pirate market end
+
     /// <summary>
     /// Used to delay purchase of some items.
     /// </summary>
@@ -239,6 +250,7 @@ public partial class ListingData : IEquatable<ListingData>
             ProductEntity != listing.ProductEntity ||
             ProductAction != listing.ProductAction ||
             ProductEvent?.GetType() != listing.ProductEvent?.GetType() ||
+            PurchaseLimit != listing.PurchaseLimit || // SS220 pirate market
             RestockTime != listing.RestockTime ||
             DisableRefund != listing.DisableRefund ||
             ApplyToMob != listing.ApplyToMob)
@@ -317,6 +329,7 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
             listingData.ProductEvent,
             listingData.RaiseProductEventOnUser,
             listingData.PurchaseAmount,
+            listingData.PurchaseLimit, // SS220 pirate market
             listingData.ID,
             listingData.Categories,
             listingData.OriginalCost,

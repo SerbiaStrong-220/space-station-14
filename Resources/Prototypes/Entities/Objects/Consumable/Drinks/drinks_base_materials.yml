@@ -50,6 +50,14 @@
     materialComposition:
       Glass: 25
   - type: ClinkGlasses #SS220-clink-glasses
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/drinkglass_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/drinkglass_drop.ogg
+  # SS220-place-and-pickup-sounds end
 
 # Porcelain (like glass but no shard)
 - type: entity

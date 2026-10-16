@@ -34,9 +34,17 @@
     enabled: false
   - type: ContainerContainer
     containers:
+      tobacco_slot: !type:ContainerSlot {}
       cell_slot: !type:ContainerSlot {}
   - type: ItemSlots
     slots:
+      tobacco_slot:
+        name: hookah-tobacco-slot-name
+        whitelist:
+          tags:
+          - HookahTobacco
+        insertSound:
+          path: /Audio/Weapons/Guns/Empty/empty.ogg
       cell_slot:
         name: power-cell-slot-component-slot-name-default
         disableEject: true

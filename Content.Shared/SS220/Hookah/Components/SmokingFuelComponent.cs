@@ -1,4 +1,4 @@
-using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Hookah.Components;
@@ -8,13 +8,11 @@ public sealed partial class SmokingFuelComponent : Component
 {
     public const string TobaccoSlotId = "tobacco_slot";
 
-    public ItemSlot TobaccoSlot = new();
-
     [DataField]
     public int TobaccoPuffs;
 
     [DataField]
-    public EntProtoId TobaccoId = "LeavesTobaccoDried";
+    public ProtoId<TagPrototype> TobaccoTag = "HookahTobacco";
 
     [DataField]
     public int PuffsPerPack = 20;

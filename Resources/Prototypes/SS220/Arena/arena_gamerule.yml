@@ -5,39 +5,39 @@
   - type: ArenaRule
     selectionMode: Random
     maps:
-    - path: /Maps/SS220/Arenas/two_player_arena.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/two_player_arena.yml
       loadout: ArenaLoadoutOperative
       countdownDuration: 60
-    - path: /Maps/SS220/Arenas/mine_arena.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/mine_arena.yml
       loadout: ArenaLoadoutSalvage
-    - path: /Maps/SS220/Arenas/forest_arena.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/forest_arena.yml
       loadout: ArenaLoadoutMercenary
-    - path: /Maps/SS220/Arenas/frozen_arena.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/frozen_arena.yml
       loadout: ArenaLoadoutBlueShield
-    - path: /Maps/SS220/Arenas/ice_arena.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/ice_arena.yml
       loadout: ArenaLoadoutWinter
-    - path: /Maps/SS220/Arenas/tunnel_arena.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/tunnel_arena.yml
       loadout: ArenaLoadoutLawyerSniper
-    - path: /Maps/SS220/Arenas/byblik_arena.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/byblik_arena.yml
       loadout: ArenaLoadoutByblik
-    - path: /Maps/SS220/Arenas/lava_arena.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/lava_arena.yml
       loadout: ArenaLoadoutLava
-    - path: /Maps/SS220/Arenas/dust_arena.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/dust_arena.yml
       loadout: ArenaLoadoutDust
-    - path: /Maps/SS220/Arenas/laser_arena.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/laser_arena.yml
       loadout: ArenaLoadoutLaser
-    - path: /Maps/SS220/Arenas/knights_arena.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/knights_arena.yml
       loadout: ArenaLoadoutKnight
-    - path: /Maps/SS220/Arenas/uplink_arena_2v2.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/uplink_arena_2v2.yml
       loadout: ArenaLoadoutOperative
-    - path: /Maps/SS220/Arenas/pirates_arena.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/pirates_arena.yml
       loadout: ArenaLoadoutPirate
-    - path: /Maps/SS220/Arenas/lava_arena_2v2.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/lava_arena_2v2.yml
       loadout: ArenaLoadoutLavaSec
-    - path: /Maps/SS220/Arenas/knights_arena_3v3.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/knights_arena_3v3.yml
       loadouts:
       - ArenaLoadoutKnight
       - ArenaLoadoutArcher
       - ArenaLoadoutArcher
-    - path: /Maps/SS220/Arenas/abyss_arena.yml
+    - path: /Maps/SS220/Shitspawn/Arenas/abyss_arena.yml
       loadout: ArenaLoadoutAbyss
