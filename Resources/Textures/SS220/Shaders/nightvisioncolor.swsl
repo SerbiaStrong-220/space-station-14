@@ -1,0 +1,39 @@
+light_mode unshaded;
+
+uniform sampler2D SCREEN_TEXTURE;
+uniform sampler2D LIGHT_TEXTURE;
+uniform highp vec3 Tint;
+uniform bool Overexposure;
+uniform highp float OverexposureStart;
+uniform highp float OverexposureEnd;
+uniform highp float OverexposureStrength;
+uniform highp float Noise;
+
+void fragment()
+{
+    // Framebuffer coordinates keep the image and lightmap aligned with zoom, rotation and render scale.
+    highp vec2 uv = FRAGCOORD.xy * SCREEN_PIXEL_SIZE;
+    highp vec4 scene = zTextureSpec(SCREEN_TEXTURE, uv);
+    highp float brightness = clamp(zGrayscale(scene.rgb), 0.0, 1.0);
+
+    if (Overexposure && OverexposureStrength > 0.0)
+    {
+        highp vec3 light = zTextureSpec(LIGHT_TEXTURE, uv).rgb;
+        highp float illumination = max(light.r, max(light.g, light.b));
+        // Explicitly support equal thresholds as a step
+        highp float exposure = step(OverexposureStart, illumination);
+        if (OverexposureEnd > OverexposureStart)
+            exposure = smoothstep(OverexposureStart, OverexposureEnd, illumination);
+        // Wash out even dark objects in a lit area, rather than mistaking white sprites for lamps.
+        brightness = mix(brightness, 1.0, exposure * OverexposureStrength);
+    }
+
+    if (Noise > 0.0)
+    {
+        // zRandom returns -1..1; keep grain centered on zero.
+        highp float grain = zRandom(FRAGCOORD.xy + vec2(fract(TIME))).x * 0.5;
+        brightness = clamp(brightness + grain * Noise, 0.0, 1.0);
+    }
+
+    COLOR = vec4(Tint * brightness, scene.a);
+}

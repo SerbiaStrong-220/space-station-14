@@ -97,6 +97,7 @@ public sealed class GhostRoleSystem : EntitySystem
         SubscribeLocalEvent<GhostRoleComponent, ComponentShutdown>(OnRoleShutdown);
         SubscribeLocalEvent<GhostRoleComponent, EntityPausedEvent>(OnPaused);
         SubscribeLocalEvent<GhostRoleComponent, EntityUnpausedEvent>(OnUnpaused);
+        SubscribeLocalEvent<GhostRoleComponent, GetVerbsEvent<Verb>>(OnGetVerb); // ss220 add verb for ghost role
 
         SubscribeLocalEvent<GhostRoleRaffleComponent, ComponentInit>(OnRaffleInit);
         SubscribeLocalEvent<GhostRoleRaffleComponent, ComponentShutdown>(OnRaffleShutdown);
@@ -831,6 +832,36 @@ public sealed class GhostRoleSystem : EntitySystem
 
         UpdateAllEui();
     }
+
+    // ss220 add verb for ghost role start
+    private void OnGetVerb(Entity<GhostRoleComponent> ent, ref GetVerbsEvent<Verb> args)
+    {
+        if (!_ghostRoles.TryGetValue(ent.Comp.Identifier, out var ghostRole) || ghostRole.Owner != ent.Owner)
+            return;
+
+        if (!HasComp<GhostComponent>(args.User))
+            return;
+
+        if (!TryComp<ActorComponent>(args.User, out var actor))
+            return;
+
+        args.Verbs.Add(new Verb
+        {
+            Text = Loc.GetString("ghost-role-verb-take-ghost-text"),
+            Act = () =>
+            {
+                var eui = new GhostRolesEui
+                {
+                    Identifier = ent.Comp.Identifier,
+                    Rules = ent.Comp.RoleRules,
+                };
+
+                _euiManager.OpenEui(eui, actor.PlayerSession);
+                eui.StateDirty();
+            },
+        });
+    }
+    // ss220 add verb for ghost role end
 
     private void OnMapInit(Entity<GhostRoleComponent> ent, ref MapInitEvent args)
     {

@@ -24,6 +24,11 @@
         - id: ClothingHandsGlovesLatex
         - id: ClothingUniformJumpsuitLawyerBlack
         - id: BarberScissors
+# SS220-sec-gear-size-fix-start
+  - type: Storage
+    grid:
+    - 0,0,7,3
+# SS220-sec-gear-size-fix-end
 
 - type: entity
   id: BriefcaseSyndieLobbyingBundleFilled

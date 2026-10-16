@@ -18,3 +18,5 @@ marking-UndergarmentSocksSock = Носки
 marking-UndergarmentSocksSockPolkadot = Пятнистые носки
 marking-UndergarmentSocksSockStriped = Полосатые носки
 marking-UndergarmentSocksNylonSock = Нейлоновые носки
+marking-UndergarmentTopTanktopJR = Майка JR
+marking-UndergarmentTopTanktopJRVox = Майка JR

@@ -9,3 +9,6 @@ ent-RedWingsMedicIDCard = ID карта медика "Красных Крыль�
     .desc = { ent-IDCardStandard.desc }
 ent-RedWingsPilotIDCard = ID карта пилота "Красных Крыльев"
     .desc = { ent-IDCardStandard.desc }
+
+ent-MastercardIPC = Мастер-карта КПБ
+    .desc = Карта доступа к сервисной панели КПБ. Произведена компанией Xion Industrial.

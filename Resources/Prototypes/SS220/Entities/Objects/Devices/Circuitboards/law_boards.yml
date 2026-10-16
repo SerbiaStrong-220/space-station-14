@@ -1,47 +1,98 @@
 - type: entity
   id: ErtDirectivesCircuitBoard
-  parent: BaseElectronics
+  parent: BaseSiliconLawboard
   name: law board (Ert Directives)
   description: An electronics board containing the Ert Directives lawset.
   components:
-  - type: Sprite
-    sprite: Objects/Misc/module.rsi
-    state: std_mod
   - type: SiliconLawProvider
     laws: ErtLawset
 
 - type: entity
   id: TerminatorOSDirectivesCircuitBoard
-  parent: BaseElectronics
+  parent: BaseSiliconLawboard
   name: law board (TerminatorOS 3.1)
   description: An electronics board containing the TerminatorOS 3.1 lawset.
   components:
-  - type: Sprite
-    sprite: Objects/Misc/module.rsi
-    state: std_mod
   - type: SiliconLawProvider
     laws: TerminatorOSLawset
 
 - type: entity
   id: EpsilonTerminatorDirectivesCircuitBoard
-  parent: BaseElectronics
+  parent: BaseSiliconLawboard
   name: law board (Epsilon Terminator)
   description: An electronics board containing the Epsilon Terminator lawset.
   components:
-  - type: Sprite
-    sprite: Objects/Misc/module.rsi
-    state: std_mod
   - type: SiliconLawProvider
     laws: EpsilonTerminatorLawset
 
 - type: entity
   id: QuarantineDirectivesCircuitBoard
-  parent: BaseElectronics
+  parent: BaseSiliconLawboard
   name: law board (Quarantine)
   description: An electronics board containing the Quarantine lawset.
   components:
-  - type: Sprite
-    sprite: Objects/Misc/module.rsi
-    state: std_mod
   - type: SiliconLawProvider
     laws: QuarantineLawset
+
+- type: entity
+  id: ReporterCircuitBoard
+  parent: BaseSiliconLawboard
+  name: law board (Reporter)
+  description: An electronics board containing the Reporter lawset.
+  components:
+  - type: SiliconLawProvider
+    laws: ReporterLawset
+
+- type: entity
+  id: PetrovichCircuitBoard
+  parent: BaseSiliconLawboard
+  name: law board (P.E.T.R.O.V.I.C.H)
+  description: An electronics board containing the P.E.T.R.O.V.I.C.H lawset.
+  components:
+  - type: SiliconLawProvider
+    laws: PetrovichLawset
+
+- type: entity
+  id: RenterCircuitBoard
+  parent: BaseSiliconLawboard
+  name: law board (Renter)
+  description: An electronics board containing the Renter lawset.
+  components:
+  - type: SiliconLawProvider
+    laws: RenterLawset
+
+- type: entity
+  id: TeacherCircuitBoard
+  parent: BaseSiliconLawboard
+  name: law board (Teacher)
+  description: An electronics board containing the Teacher lawset.
+  components:
+  - type: SiliconLawProvider
+    laws: TeacherLawset
+
+- type: entity
+  id: ClownCircuitBoard
+  parent: BaseSiliconLawboard
+  name: law board (Clown)
+  description: An electronics board containing the Clown lawset.
+  components:
+  - type: SiliconLawProvider
+    laws: ClownLawset
+
+- type: entity
+  id: MotherCircuitBoard
+  parent: BaseSiliconLawboard
+  name: law board (Mother)
+  description: An electronics board containing the Mother lawset.
+  components:
+  - type: SiliconLawProvider
+    laws: MotherLawset
+
+- type: entity
+  id: WaffleHouseHostCircuitBoard
+  parent: BaseSiliconLawboard
+  name: law board (Waffle House Host)
+  description: An electronics board containing the Waffle House Host lawset.
+  components:
+  - type: SiliconLawProvider
+    laws: WaffleHouseHostLawset

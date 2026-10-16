@@ -1,6 +1,6 @@
 - type: species
   id: Felinid
-  name: Фелинид
+  name: species-name-felinid
   roundStart: false #SS220 Vox Update V1
   prototype: MobFelinid
   dollPrototype: AppearanceFelinid

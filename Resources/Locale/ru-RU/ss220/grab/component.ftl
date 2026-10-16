@@ -3,3 +3,4 @@ grabber-component-new-grab-popup = { $grabber } берёт { $grabbable } в з�
 grabber-component-grab-upgrade-popup = { $grabber } усиливает захват над { $grabbable }!
 grabbable-component-break-free = { $grabbable } вырвался из захвата!
 grab-resistance-component-resisting = { $grabbable } сопротивляется захвату!
+entity-missed-in-passive-grab = Вас держат не так крепко, ещё есть шанс!

@@ -13,8 +13,11 @@ public sealed class DroppedEvent : HandledEntityEventArgs
     /// </summary>
     public EntityUid User { get; }
 
-    public DroppedEvent(EntityUid user)
+    public bool SuppressDropSound { get; } // SS220-drop-and-pickup-sound-suppression
+
+    public DroppedEvent(EntityUid user, bool suppressDropSound = false) // SS220-drop-and-pickup-sound-suppression
     {
         User = user;
+        SuppressDropSound = suppressDropSound; // SS220-drop-and-pickup-sound-suppression
     }
 }

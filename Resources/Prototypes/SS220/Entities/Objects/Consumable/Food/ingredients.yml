@@ -200,6 +200,28 @@
     - sweet
 
 - type: entity
+  id: FoodSpaghetti
+  parent: FoodBakingBase
+  name: spaghetti
+  description: Thin strands of freshly processed dough.
+  components:
+  - type: Item
+    size: Tiny
+  - type: FlavorProfile
+    flavors:
+    - pasta
+  - type: Sprite
+    sprite: Objects/Consumable/Food/noodles.rsi
+    state: packet
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 6
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+
+- type: entity
   name: yellow caramel rooster
   parent: GreenCaramelRoosterFood
   id: YellowCaramelRoosterFood

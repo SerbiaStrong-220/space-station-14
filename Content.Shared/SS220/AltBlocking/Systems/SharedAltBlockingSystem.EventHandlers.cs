@@ -4,6 +4,7 @@ using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Random.Helpers;
 using Content.Shared.SS220.ArmorBlock;
+using Content.Shared.SS220.Experience.Skill.Systems;
 using Content.Shared.SS220.ToggleBlocking;
 using Content.Shared.SS220.Weapons.Melee.Events;
 using Content.Shared.SS220.Weapons.Ranged.Events;
@@ -63,7 +64,11 @@ public sealed partial class SharedAltBlockingSystem
             if (netItem is not { Valid: true } netItemUid)
                 continue;
 
-            if (SharedRandomExtensions.PredictedProb(_gameTiming, ent.Comp.Blocking ? blockComp.ActiveMeleeBlockProb : blockComp.MeleeBlockProb, (NetEntity)netItem))
+            var ev = new ModifyPassiveBlock(blockComp.MeleeBlockProb, blockComp.RangeBlockProb);
+            if (!ent.Comp.Blocking)
+                RaiseLocalEvent(ent, ref ev);
+
+            if (SharedRandomExtensions.PredictedProb(_gameTiming, ent.Comp.Blocking ? blockComp.ActiveMeleeBlockProb : ev.MeleeBlockChance, (NetEntity)netItem))
             {
                 if (_playerManager.LocalEntity == ent.Owner && _gameTiming.IsFirstTimePredicted)
                     _audio.PlayLocal(blockComp.BlockSound, item, ent.Owner);
@@ -134,7 +139,11 @@ public sealed partial class SharedAltBlockingSystem
             if (!TryGetNetEntity(item, out var netItem))
                 continue;
 
-            if (SharedRandomExtensions.PredictedProb(_gameTiming, owner.Comp.Blocking ? blockComp.ActiveRangeBlockProb : blockComp.RangeBlockProb, (NetEntity)netItem))
+            var ev = new ModifyPassiveBlock(blockComp.MeleeBlockProb, blockComp.RangeBlockProb);
+            if (!owner.Comp.Blocking)
+                RaiseLocalEvent(user, ref ev);
+
+            if (SharedRandomExtensions.PredictedProb(_gameTiming, owner.Comp.Blocking ? blockComp.ActiveRangeBlockProb : ev.RangeBlockChance, (NetEntity)netItem))
             {
                 if (_playerManager.LocalEntity == owner && _gameTiming.IsFirstTimePredicted)
                     _audio.PlayLocal(blockComp.BlockSound, item, owner);

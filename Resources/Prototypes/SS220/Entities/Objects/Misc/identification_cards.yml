@@ -337,3 +337,21 @@
   - type: Tag
     tags:
     - DoorBumpOpener
+
+- type: entity
+  parent: IDCardStandard
+  id: MastercardIPC
+  name: mastercard IPC
+  description: Access card to the IPC service panel. Manufactured by Xion Industrial.
+  components:
+  - type: Sprite
+    layers:
+    - state: ipc_master
+  - type: Item
+    heldPrefix: ipc-master
+  - type: IdCard
+    jobTitle: ipc-master-card
+  - type: Access
+    enabled: true
+    tags:
+    - Ipc

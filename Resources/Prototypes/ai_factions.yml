@@ -17,6 +17,7 @@
 - type: npcFaction
   id: NanoTrasen
   hostile:
+  - PlantsFract #SS220 PlatFraction
   - SimpleHostile
   - Syndicate
   - Xeno
@@ -43,6 +44,8 @@
   friendly:
   - NanoTrasen
   hostile:
+  - SpiderHostile #SS220 Spiders
+  - PlantsFract #SS220 PlatFraction
   - Mouse
   - SimpleHostile
   - Zombie
@@ -74,6 +77,8 @@
 - type: npcFaction
   id: Syndicate
   hostile:
+  - SpiderHostile #SS220 Spiders
+  - PlantsFract #SS220 PlatFraction
   - NanoTrasen
   - DeathSquad #SS220 dq update
   - SimpleHostile
@@ -107,6 +112,7 @@
 - type: npcFaction
   id: Zombie
   hostile:
+  - PlantsFract #SS220 PlatFraction
   - NanoTrasen
   - DeathSquad #SS220 dq update
   - SimpleNeutral
@@ -125,6 +131,7 @@
 - type: npcFaction
   id: Revolutionary
   hostile:
+  - PlantsFract #SS220 PlatFraction
   - NanoTrasen
   - DeathSquad #SS220 dq update
   - Zombie
@@ -139,6 +146,7 @@
 - type: npcFaction
   id: AllHostile
   hostile:
+  - PlantsFract #SS220 PlatFraction
   - NanoTrasen
   - Dragon
   - Mouse
@@ -169,6 +177,7 @@
 - type: npcFaction
   id: Wizard
   hostile:
+  - PlantsFract #SS220 PlatFraction
   - NanoTrasen
   - Dragon
   - Mouse
@@ -192,6 +201,7 @@
   - Zombie
   - Revolutionary
   - Wizard
+  - PlantsFract #SS220 PlatFraction
 
   - Xeno # rivalry
 

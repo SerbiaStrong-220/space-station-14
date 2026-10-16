@@ -38,6 +38,10 @@ ent-BoxSurvivalMedicalIpc = {ent-BoxSurvivalIpc}
     .desc = {ent-BoxSurvival.desc}
     .suffix = Медицинский
 
+ent-BoxSurvivalBrigmedicIpc = {ent-BoxSurvivalIpc}
+    .desc = {ent-BoxSurvival.desc}
+    .suffix = Бригмедик
+
 ent-BoxSurvivalSponsor = элитный аварийный запас
     .desc = Коробка с элитным набором для выживания.
     .suffix = Стандартный, Шлёпа

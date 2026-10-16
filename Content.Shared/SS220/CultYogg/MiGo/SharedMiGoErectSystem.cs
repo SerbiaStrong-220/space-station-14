@@ -347,7 +347,7 @@ public sealed partial class SharedMiGoErectSystem : EntitySystem
 
         if (ent.Comp.CaptureCooldowns.TryGetValue(recipe.ReplacementProto.Id, out var cooldownTime) && cooldownTime > _gameTiming.CurTime)
         {
-            _popupSystem.PopupClient(Loc.GetString("cult-yogg-building-caprure-cooldown", ("time", Math.Round((cooldownTime - _gameTiming.CurTime).TotalSeconds))), ent);
+            _popupSystem.PopupClient(Loc.GetString("cult-yogg-building-capture-cooldown", ("time", Math.Round((cooldownTime - _gameTiming.CurTime).TotalSeconds))), ent);
             return;
         }
 

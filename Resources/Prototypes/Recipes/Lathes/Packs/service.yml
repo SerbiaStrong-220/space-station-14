@@ -26,6 +26,7 @@
   - Holoprojector
   - WetFloorSign
   - WireBrush
+  - DrinkBottle # SS220 Bottle craft
 
 - type: latheRecipePack
   id: ServiceBoardsStatic
@@ -35,6 +36,7 @@
   - MicrowaveMachineCircuitboard
   - ReagentGrinderMachineCircuitboard
   - ElectricGrillMachineCircuitboard
+  - FoodProcessorMachineCircuitboard # SS220 kitchen-processor
   - BoozeDispenserMachineCircuitboard
   - SodaDispenserMachineCircuitboard
   - SmartFridgeCircuitboard
@@ -68,3 +70,4 @@
   - ReagentGrinderIndustrialMachineCircuitboard
   - JukeboxCircuitBoard
   - DawInstrumentMachineCircuitboard
+  - KitchenElectricGrillAdvancedCircuitboard #SS220-grill-update-3

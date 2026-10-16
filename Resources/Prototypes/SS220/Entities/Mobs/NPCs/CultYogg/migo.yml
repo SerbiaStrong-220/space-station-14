@@ -13,6 +13,10 @@
   id: MobMiGo
   suffix: CultYogg
   components:
+  - type: NightVision
+    profile: NightVisionLightGreen
+    enabled: false
+    action: ActionToggleNightVisionInnate
   #cultists comps
   - type: MiGo
     eraseWhitelist:
@@ -71,6 +75,7 @@
     gridsBlacklist:
       tags:
       - AstralBlocker
+  - type: StatusIcon
   - type: ShowCultYoggIcons
   - type: NpcFactionMember
     factions:

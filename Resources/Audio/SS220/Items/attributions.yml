@@ -1,0 +1,24 @@
+- files:
+  - beaker_pickup.ogg
+  - beaker_place.ogg
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from BandaStation"
+  source: "https://github.com/ss220club/BandaStation/commit/02ca535d03d7cab937f927e366719aa84ee88823"
+  
+- files:
+  - drinkglass_drop.ogg
+  - drinkglass_pickup.ogg
+  - book_drop.ogg
+  - book_pickup.ogg
+  - paper_drop.ogg
+  - paper_pickup.ogg
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from BandaStation"
+  source: "https://github.com/ss220club/BandaStation/commit/81c3d921295d6b925ff063bef13f623687d7bdbd"
+  
+- files:
+  - place.ogg
+  - pickup.ogg
+  license: "Custom"
+  copyright: "Taken from 72 track of Garage Foley sounds"
+  source: "https://99sounds.org/garage-foley/"
