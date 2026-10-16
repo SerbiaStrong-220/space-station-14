@@ -99,18 +99,25 @@
     - [ServiceActorKnowledge, null]
 
 - type: entity
-  parent: [ BaseGunToy, WeaponLauncherChinaLake ]
+  parent: WeaponLauncherChinaLake
   id: WeaponLauncherChinaLakeToy
   description: PLOOP. HONK! Wait, what?
   components:
-  - type: BallisticAmmoProvider
-    whitelist:
-      tags:
-        - ToyGrenade
-    capacity: 3
-    proto: GrenadeFragToy
-    soundInsert:
-      path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: InternalMagazineChinaLakeToy
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+            - ToyGrenade
 
 - type: entity
   parent: [ BaseGunToy, WeaponSubMachineGunC20r ]

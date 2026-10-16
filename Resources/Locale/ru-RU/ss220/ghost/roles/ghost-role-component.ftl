@@ -1,6 +1,6 @@
-ghost-role-information-corrupted-mob-cultyogg-name = Искаженное культом животное
+ghost-role-information-corrupted-mob-cultyogg-name = Осквернённое культом животное
 ghost-role-information-corrupted-mob-cultyogg-description = Слушайтесь членов культа. Уничтожьте любую угрозу культу.
-ghost-role-information-corrupted-mob-cultyogg-rules = Вы животное, зараженное Ми-Гомицелием. Вы теперь всецело повинуетесь членам культа, сокрушите неверующих
+ghost-role-information-corrupted-mob-cultyogg-rules = Вы — животное, заражённое ми-гомицелием. Вы всецело повинуетесь членам культа. Сокрушите неверующих!
 
 # Lost souls roles begin
 ghost-role-information-lost-cargo-technical-name = Пропавший грузчик
