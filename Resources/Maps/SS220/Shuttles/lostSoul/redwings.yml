@@ -4,7 +4,7 @@ meta:
   engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 07/16/2026 09:05:32
+  time: 10/14/2026 08:39:34
   entityCount: 420
 maps: []
 grids:
@@ -992,13 +992,6 @@ entities:
       containers:
         solution@beaker: !type:ContainerSlot
           ent: 32
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые плазматиеские волокна
-      fibers: []
-      fingerprints: []
   - uid: 33
     mapInit: true
     paused: true
@@ -1019,13 +1012,6 @@ entities:
       containers:
         solution@beaker: !type:ContainerSlot
           ent: 34
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые плазматиеские волокна
-      fibers: []
-      fingerprints: []
 - proto: BedsheetMedical
   entities:
   - uid: 59
@@ -1292,12 +1278,6 @@ entities:
       containers:
         solution@lvcable: !type:ContainerSlot
           ent: 19
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers: []
-      fibers: []
-      fingerprints: []
 - proto: CableHV
   entities:
   - uid: 105
@@ -1345,12 +1325,6 @@ entities:
       containers:
         solution@hvcable: !type:ContainerSlot
           ent: 15
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers: []
-      fibers: []
-      fingerprints: []
 - proto: CableMV
   entities:
   - uid: 110
@@ -1533,12 +1507,6 @@ entities:
       containers:
         solution@mvcable: !type:ContainerSlot
           ent: 17
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers: []
-      fibers: []
-      fingerprints: []
 - proto: CableTerminal
   entities:
   - uid: 142
@@ -1650,12 +1618,6 @@ entities:
       nextSound: -838.9437311
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers: []
-      fibers: []
-      fingerprints: []
 - proto: ClothingMaskBreathMedical
   entities:
   - uid: 156
@@ -2647,13 +2609,6 @@ entities:
       nextSound: -2168.0316672
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые плазматиеские волокна
-      fibers: []
-      fingerprints: []
 - proto: LargeBeaker
   entities:
   - uid: 27
@@ -2676,13 +2631,6 @@ entities:
       containers:
         solution@beaker: !type:ContainerSlot
           ent: 28
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые плазматиеские волокна
-      fibers: []
-      fingerprints: []
   - uid: 29
     mapInit: true
     paused: true
@@ -2703,13 +2651,6 @@ entities:
       containers:
         solution@beaker: !type:ContainerSlot
           ent: 30
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые плазматиеские волокна
-      fibers: []
-      fingerprints: []
   - uid: 268
     components:
     - type: Transform
@@ -2992,12 +2933,6 @@ entities:
       containers:
         solution@food: !type:ContainerSlot
           ent: 4
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers: []
-      fibers: []
-      fingerprints: []
   - uid: 5
     mapInit: true
     paused: true
@@ -3110,12 +3045,6 @@ entities:
       containers:
         solution@food: !type:ContainerSlot
           ent: 6
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers: []
-      fibers: []
-      fingerprints: []
   - uid: 7
     mapInit: true
     paused: true
@@ -3228,13 +3157,6 @@ entities:
       containers:
         solution@food: !type:ContainerSlot
           ent: 8
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые плазматиеские волокна
-      fibers: []
-      fingerprints: []
   - uid: 9
     mapInit: true
     paused: true
@@ -3347,13 +3269,6 @@ entities:
       containers:
         solution@food: !type:ContainerSlot
           ent: 10
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые плазматиеские волокна
-      fibers: []
-      fingerprints: []
   - uid: 36
     mapInit: true
     paused: true
@@ -3449,13 +3364,6 @@ entities:
       containers:
         solution@food: !type:ContainerSlot
           ent: 37
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые плазматиеские волокна
-      fibers: []
-      fingerprints: []
 - proto: PenSignaller
   entities:
   - uid: 280
@@ -4008,12 +3916,6 @@ entities:
         quickInsert:
           length: 0.5
         storage: {}
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers: []
-      fibers: []
-      fingerprints: []
 - proto: UraniumReinforcedWindowDirectional
   entities:
   - uid: 343

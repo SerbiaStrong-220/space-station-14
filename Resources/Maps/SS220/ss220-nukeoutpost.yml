@@ -1,10 +1,10 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 275.2.0
+  engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 05/08/2026 13:16:25
+  time: 10/14/2026 08:49:44
   entityCount: 3604
 maps:
 - 1
@@ -8583,19 +8583,11 @@ entities:
     - type: Transform
       pos: 26.412903,7.969076
       parent: 2
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers: []
-      fibers: []
-      fingerprints:
-      - 96C2E0021CB2354F0408466B39F8CE4F
     missingComponents:
     - ItemToggle
     - ItemToggleMeleeWeapon
     - ItemToggleActiveSound
     - MeleeWeapon
-    - Reflect
     - EnergySword
     - ItemToggleSize
     - UseDelay
