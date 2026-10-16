@@ -197,7 +197,7 @@ public sealed partial class FieldShieldProviderSystem : EntitySystem
     private void OnShieldUserCollide(Entity<FieldShieldComponent> ent, ref ProjectileBlockAttemptEvent args)
     {
         if (!TryComp<ProjectileComponent>(args.ProjUid, out var projComp))
-            return;//if a projectile has no projectile component absence of logic handling it here is the least problematic part of the problem
+            return;//if a projectile has no projectile component absence of logic handling it here is the least problematic part of the trouble
 
         if (args.Damage == null)
             return;
