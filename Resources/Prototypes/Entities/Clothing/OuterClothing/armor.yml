@@ -21,6 +21,7 @@
         Slash: 0.70
         Piercing: 0.70 #Can save you, but bullets will still hurt. Will take about 10 shots from a Viper before critting, as opposed to 7 while unarmored and 16~ with a bulletproof vest.
         Heat: 0.80
+        Shock: 0.75 #SS220 stamina rework
   - type: ExplosionResistance
     damageCoefficient: 0.90
 
@@ -106,11 +107,6 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.4 # this technically means it protects against fires pretty well? -heat is just for lasers and stuff, not atmos temperature
-  - type: Reflect
-    reflectProb: 0.25 # SS220 zones reb
-    reflects:
-      - Energy
-    reflectingInHands: false
 
 #Detective's vest
 - type: entity
@@ -217,10 +213,7 @@
         Heat: 0.3
         Radiation: 0.5
         Caustic: 0.5
-  # SS220 add stamina resistance begin
-  - type: StaminaResistance
-    damageCoefficient: 0.55 #SS220 stamina resist for elite vest to 45%
-  # SS220 add stamina resistance end
+        Shock: 0.55 #SS220 weapon overhaul
   # ss220 add radio slot start
   - type: ContainerContainer
     containers:
@@ -293,10 +286,9 @@
         Heat: 0.35
         Caustic: 0.5
         Radiation: 0.85 #ss220 raid suit rework
+        Shock: 0.3 #SS220 weapon overhaul
   - type: ExplosionResistance
     damageCoefficient: 0.35
-  - type: StaminaResistance
-    damageCoefficient: 0.3 #SS220 stamina resist fix
   - type: ClothingSpeedModifier
     walkModifier: 1 #ss220 raid suit rework
     sprintModifier: 0.95 #ss220 raid suit rework

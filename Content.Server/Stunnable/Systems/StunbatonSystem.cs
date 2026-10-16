@@ -28,18 +28,18 @@ namespace Content.Server.Stunnable.Systems
 
             SubscribeLocalEvent<StunbatonComponent, ExaminedEvent>(OnExamined);
             SubscribeLocalEvent<StunbatonComponent, SolutionContainerChangedEvent>(OnSolutionChange);
-            SubscribeLocalEvent<StunbatonComponent, StaminaDamageOnHitAttemptEvent>(OnStaminaHitAttempt);
+            SubscribeLocalEvent<StunbatonComponent, MeleeHitEvent>(OnMeleeHit); //SS220 stun overhaul
             SubscribeLocalEvent<StunbatonComponent, ChargeChangedEvent>(OnChargeChanged);
         }
 
-        private void OnStaminaHitAttempt(Entity<StunbatonComponent> entity, ref StaminaDamageOnHitAttemptEvent args)
+        //SS220 stun overhaul begin
+        private void OnMeleeHit(Entity<StunbatonComponent> entity, ref MeleeHitEvent args)
         {
-            if (!_itemToggle.IsActivated(entity.Owner) ||
-            !TryComp<BatteryComponent>(entity.Owner, out var battery) || !_battery.TryUseCharge((entity.Owner, battery), entity.Comp.EnergyPerUse))
-            {
-                args.Cancelled = true;
-            }
+            if (_itemToggle.IsActivated(entity.Owner) && TryComp<BatteryComponent>(entity.Owner, out var battery))
+                if (!_battery.TryUseCharge((entity.Owner, battery), entity.Comp.EnergyPerUse))
+                    _itemToggle.TryDeactivate(entity.Owner, predicted: false);
         }
+        //SS220 stun overhaul end
 
         private void OnExamined(Entity<StunbatonComponent> entity, ref ExaminedEvent args)
         {
