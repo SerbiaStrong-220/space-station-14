@@ -87,7 +87,7 @@ public sealed class ForeheadGlassesTest : GameTest
         {
             foreach (var prototype in prototypes)
             {
-                TestContext.WriteLine($"Checking {prototype}");
+                TestContext.Out.WriteLine($"Checking {prototype}");
                 var wearer = SEntMan.SpawnEntity("MobHuman", map.GridCoords);
                 var glasses = SEntMan.SpawnEntity(prototype, map.GridCoords);
                 var inventory = Server.System<InventorySystem>();
@@ -124,7 +124,7 @@ public sealed class ForeheadGlassesTest : GameTest
         {
             foreach (var prototype in prototypes)
             {
-                TestContext.WriteLine($"Checking {prototype}");
+                TestContext.Out.WriteLine($"Checking {prototype}");
                 var wearer = SEntMan.SpawnEntity("MobHuman", map.GridCoords);
                 var glasses = SEntMan.SpawnEntity(prototype, map.GridCoords);
                 var inventory = Server.System<InventorySystem>();
@@ -157,7 +157,7 @@ public sealed class ForeheadGlassesTest : GameTest
         {
             foreach (var prototype in prototypes)
             {
-                TestContext.WriteLine($"Checking {prototype}");
+                TestContext.Out.WriteLine($"Checking {prototype}");
                 var entities = Client.ResolveDependency<IEntityManager>();
                 var prototypeManager = Client.ResolveDependency<IPrototypeManager>();
                 var wearer = entities.SpawnEntity("MobHuman", MapCoordinates.Nullspace);
