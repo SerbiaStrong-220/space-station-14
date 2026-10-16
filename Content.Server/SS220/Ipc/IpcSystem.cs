@@ -1,6 +1,7 @@
 ﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 // Original code taken from: Corvax https://github.com/space-syndicate/space-station-14
 
+using Content.Shared.Anomaly.Components;
 using Content.Shared.Actions;
 using Content.Shared.SS220.Ipc;
 using Content.Shared.Ninja.Components;
@@ -30,7 +31,9 @@ using Content.Shared.Chat;
 using Content.Shared.Interaction.Events;
 using Content.Shared.IdentityManagement;
 using Content.Server.Chat;
+using Robust.Server.GameObjects;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Content.Server.Radio;
 
 namespace Content.Server.SS220.Ipc;
@@ -51,6 +54,9 @@ public sealed partial class IpcSystem : SharedIpcSystem
     [Dependency] private ISharedPlayerManager _player = default!;
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private SharedSuicideSystem _suicide = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private SharedPointLightSystem _lights = default!;
+    [Dependency] private IPrototypeManager _protoManager = default!;
 
     private static readonly LocId IpcDrainReady = "ipc-drain-enabled";
     private static readonly LocId IpcDrainDisabled = "ipc-drain-disabled";
@@ -75,6 +81,8 @@ public sealed partial class IpcSystem : SharedIpcSystem
         SubscribeLocalEvent<IpcComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<IpcComponent, BatteryStateChangedEvent>(OnBatteryStateChanged);
         SubscribeLocalEvent<IpcComponent, RefreshChargeRateEvent>(OnRefreshChargeRate);
+        SubscribeLocalEvent<InnerBodyAnomalyComponent, ComponentInit>(OnAnomalyAdded);
+        SubscribeLocalEvent<InnerBodyAnomalyComponent, ComponentRemove>(OnAnomalyGone);
         SubscribeLocalEvent<IpcComponent, OnTemperatureChangeEvent>(OnTemperatureChange);
         SubscribeLocalEvent<IpcComponent, SuicideEvent>(IpcSuicide, before: [typeof(SuicideSystem)]);
         SubscribeLocalEvent<IpcComponent, RadioSendAttemptEvent>(OnRadioSendAttempt);
@@ -365,5 +373,41 @@ public sealed partial class IpcSystem : SharedIpcSystem
     {
         return _powerCell.TryGetBatteryFromSlot(ent.Owner, out var battery)
             && _battery.GetCharge(battery.Value.AsNullable()) / battery.Value.Comp.MaxCharge <= ent.Comp.CritCharge;
+    }
+    /// <summary>
+    /// When anomaly leaves the host.
+    /// Restores the flashlight color taken from the mob own prototype.
+    /// </summary>
+    private void OnAnomalyGone(Entity<InnerBodyAnomalyComponent> ent, ref ComponentRemove args)
+    {
+        if (!HasComp<IpcComponent>(ent)
+            || Terminating(ent)
+            || Comp<MetaDataComponent>(ent).EntityPrototype is not { } own
+            || !own.TryGetComponent<PointLightComponent>(out var ownLight, _compFactory))
+            return;
+
+        SetLightColor(ent.Owner, ownLight.Color);
+    }
+
+    /// <summary>
+    /// Tints the flashlight with color of injected anomaly of the host.
+    /// </summary>
+    private void OnAnomalyAdded(Entity<InnerBodyAnomalyComponent> ent, ref ComponentInit args)
+    {
+        if (!HasComp<IpcComponent>(ent)
+            || !_protoManager.Resolve(ent.Comp.InjectionProto, out var injected)
+            || !injected.TryGetComponent<PointLightComponent>(out var anomalyLight, _compFactory))
+            return;
+
+        SetLightColor(ent.Owner, anomalyLight.Color);
+    }
+
+    /// <summary>
+    /// Set color of the light on entity.
+    /// </summary>
+    private void SetLightColor(EntityUid uid, Color color)
+    {
+        if (_lights.TryGetLight(uid, out var light))
+            _lights.SetColor(uid, color, light);
     }
 }
