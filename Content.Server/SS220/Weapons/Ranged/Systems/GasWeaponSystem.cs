@@ -15,6 +15,7 @@ namespace Content.Server.SS220.Weapons.Ranged.Systems;
 public sealed partial class GasWeaponSystem : SharedGasWeaponSystem
 {
     [Dependency] private GasTankSystem _gasTank = default!;
+    [Dependency] private readonly AtmosphereSystem _atmosphereSystem = default!;
 
     public override void Initialize()
     {
@@ -142,5 +143,11 @@ public sealed partial class GasWeaponSystem : SharedGasWeaponSystem
         return TryComp<GasTankComponent>(contained, out var gasTank) ? (contained, gasTank) : null;
     }
 
-
+    protected override void ReleaseGas(Entity<GasWeaponComponent> ent, GasTankComponent tank)
+    {
+        var removed = _gasTank.RemoveAirVolume((ent, tank), tank.ValveOutputRate);
+        var environment = _atmosphereSystem.GetContainingMixture(ent.Owner, false, true);
+        if (environment != null)
+            _atmosphereSystem.Merge(environment, removed);
+    }
 }

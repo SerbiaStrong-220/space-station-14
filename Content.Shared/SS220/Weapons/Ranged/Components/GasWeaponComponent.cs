@@ -33,4 +33,7 @@ public sealed partial class GasWeaponComponent : Component
 
     [DataField("internalTank")]
     public bool InternalTank = false;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan FlushTime = TimeSpan.FromSeconds(0);
 }

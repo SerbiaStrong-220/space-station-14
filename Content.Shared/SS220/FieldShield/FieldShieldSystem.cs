@@ -199,6 +199,11 @@ public sealed partial class FieldShieldProviderSystem : EntitySystem
         if (!TryComp<ProjectileComponent>(args.ProjUid, out var projComp))
             return;//if a projectile has no projectile component absence of logic handling it here is the least problematic part of the problem
 
+        if (args.Damage == null)
+            return;
+
+        var damage = args.Damage;
+
         if (TryBlockDamage(ent, projComp.Shooter, ref args.Damage))
             args.Cancelled = true;
     }
