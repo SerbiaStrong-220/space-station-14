@@ -17,17 +17,12 @@ public sealed partial class SponsorTierRequirementLoadoutEffect : SharedSponsorT
     {
         reason = new FormattedMessage();
         var contentData = session?.ContentData();
-        if (contentData == null)
-        {
-            reason = FormattedMessage.Empty;
-            return false;
-        }
 
-        // Fail open: the fetch failed, so "not a sponsor" is indistinguishable from "could not ask".
-        if (contentData.SponsorInfoFetchFailed)
+        // Tiers are not known yet: don't strip what the player already has, it is re-checked once they arrive.
+        if (contentData is { SponsorInfo: null })
             return true;
 
-        if (contentData.SponsorInfo?.Tiers is not { } playerTiers)
+        if (contentData?.SponsorInfo?.Tiers is not { } playerTiers)
         {
             reason = FormattedMessage.Empty;
             return false;
