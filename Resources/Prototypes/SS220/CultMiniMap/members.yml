@@ -1,0 +1,12 @@
+- type: cultMiniMapTrackingRule
+  id: CultYoggMiniMapMiGo
+  component: MiGo
+  label: cult-mini-map-migo
+  icon: /Textures/SS220/Interface/NavMap/migo.png
+  color: Gold
+
+- type: cultMiniMapTrackingRule
+  id: CultYoggMiniMapCultist
+  component: CultYogg
+  label: cult-mini-map-cultist
+  color: Violet
