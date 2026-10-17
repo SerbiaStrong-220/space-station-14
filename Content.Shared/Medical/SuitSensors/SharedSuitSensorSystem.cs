@@ -97,6 +97,12 @@ public abstract class SharedSuitSensorSystem : EntitySystem
         }
 
         ent.Comp.NextUpdate = _timing.CurTime;
+
+        //SS220-IPC-sensors begin
+        if (ent.Comp.User == null && HasComp<MobStateComponent>(ent))
+            ent.Comp.User = ent.Owner;
+        //SS220-IPC-sensors end
+
         Dirty(ent);
     }
 
@@ -160,6 +166,16 @@ public abstract class SharedSuitSensorSystem : EntitySystem
     {
         if (!args.IsInDetailsRange)
             return;
+
+        //SS220-IPC-sensors begin
+        // A worn active sensor overrides the built-in one,
+        // so show the override message instead of the built-in mode.
+        if (ent.Comp.User == ent.Owner && IsSuppressedByWornSensor(ent.Owner))
+        {
+            args.PushMarkup(Loc.GetString("suit-sensor-examine-builtin-suppressed"));
+            return;
+        }
+        //SS220-IPC-sensors end
 
         string msg;
         switch (ent.Comp.Mode)
@@ -366,6 +382,13 @@ public abstract class SharedSuitSensorSystem : EntitySystem
         if (sensor.Mode == SuitSensorMode.SensorOff || sensor.User == null || !HasComp<MobStateComponent>(sensor.User) || transform.GridUid == null)
             return null;
 
+        //SS220-IPC-sensors begin
+        // sensor built into the body yields to active sensor in worn equipment, so a single
+        // wearer never reports twice
+        if (sensor.User == ent.Owner && IsSuppressedByWornSensor(sensor.User.Value))
+            return null;
+        //SS220-IPC-sensors end
+
         // try to get mobs id from ID slot
         var userName = Loc.GetString("suit-sensor-component-unknown-name");
         var userJob = Loc.GetString("suit-sensor-component-unknown-job");
@@ -437,6 +460,25 @@ public abstract class SharedSuitSensorSystem : EntitySystem
 
         return status;
     }
+
+    //SS220-IPC-sensors begin
+    //Checks whether the wearer has an active suit sensor.
+    private bool IsSuppressedByWornSensor(EntityUid wearer)
+    {
+        var slotEnumerator = _inventory.GetSlotEnumerator(wearer, SlotFlags.All);
+        while (slotEnumerator.NextItem(out var item, out _))
+        {
+            if (TryComp<SuitSensorComponent>(item, out var sensor)
+                && sensor.Mode != SuitSensorMode.SensorOff
+                && sensor.User == wearer)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    //SS220-IPC-sensors end
 
     /// <summary>
     /// Create a device network package from the suit sensors status.

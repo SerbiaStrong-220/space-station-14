@@ -1,6 +1,7 @@
 ﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 // Original code taken from: Corvax https://github.com/space-syndicate/space-station-14
 
+using Content.Shared.Anomaly.Components;
 using Content.Shared.Actions;
 using Content.Shared.SS220.Ipc;
 using Content.Shared.Ninja.Components;
@@ -30,7 +31,9 @@ using Content.Shared.Chat;
 using Content.Shared.Interaction.Events;
 using Content.Shared.IdentityManagement;
 using Content.Server.Chat;
+using Robust.Server.GameObjects;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Content.Server.Radio;
 
 namespace Content.Server.SS220.Ipc;
@@ -51,10 +54,14 @@ public sealed partial class IpcSystem : SharedIpcSystem
     [Dependency] private ISharedPlayerManager _player = default!;
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private SharedSuicideSystem _suicide = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private SharedPointLightSystem _lights = default!;
+    [Dependency] private IPrototypeManager _protoManager = default!;
 
     private static readonly LocId IpcDrainReady = "ipc-drain-enabled";
     private static readonly LocId IpcDrainDisabled = "ipc-drain-disabled";
     private static readonly LocId IpcNoBattery = "ipc-no-battery";
+    private static readonly LocId IpcNoPower = "ipc-no-power";
     private static readonly TimeSpan SoundMinInterval = TimeSpan.FromSeconds(15);
     private static readonly TimeSpan SoundMaXInterval = TimeSpan.FromSeconds(30);
 
@@ -65,13 +72,17 @@ public sealed partial class IpcSystem : SharedIpcSystem
         SubscribeLocalEvent<IpcComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<IpcComponent, ComponentShutdown>(OnComponentShutdown);
         SubscribeLocalEvent<IpcComponent, PowerCellChangedEvent>(OnPowerCellChanged);
+        SubscribeLocalEvent<IpcComponent, PowerCellSlotEmptyEvent>(OnPowerCellSlotEmpty);
         SubscribeLocalEvent<IpcComponent, ToggleDrainActionEvent>(OnToggleDrainAction);
         SubscribeLocalEvent<IpcComponent, EmpPulseEvent>(OnEmpPulse);
         SubscribeLocalEvent<IpcComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovementSpeedModifiers);
         SubscribeLocalEvent<IpcComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<IpcComponent, OpenIpcFaceActionEvent>(OnOpenIpcFaceAction);
         SubscribeLocalEvent<IpcComponent, DamageChangedEvent>(OnDamageChanged);
+        SubscribeLocalEvent<IpcComponent, BatteryStateChangedEvent>(OnBatteryStateChanged);
         SubscribeLocalEvent<IpcComponent, RefreshChargeRateEvent>(OnRefreshChargeRate);
+        SubscribeLocalEvent<InnerBodyAnomalyComponent, ComponentInit>(OnAnomalyAdded);
+        SubscribeLocalEvent<InnerBodyAnomalyComponent, ComponentRemove>(OnAnomalyGone);
         SubscribeLocalEvent<IpcComponent, OnTemperatureChangeEvent>(OnTemperatureChange);
         SubscribeLocalEvent<IpcComponent, SuicideEvent>(IpcSuicide, before: [typeof(SuicideSystem)]);
         SubscribeLocalEvent<IpcComponent, RadioSendAttemptEvent>(OnRadioSendAttempt);
@@ -104,6 +115,18 @@ public sealed partial class IpcSystem : SharedIpcSystem
     }
 
     /// <summary>
+    /// Slotted battery became empty or fully charged.
+    /// So movement speed has to be reviewed.
+    /// </summary>
+    private void OnBatteryStateChanged(Entity<IpcComponent> ent, ref BatteryStateChangedEvent args)
+    {
+        if (Terminating(ent))
+            return;
+
+        _movementSpeedModifier.RefreshMovementSpeedModifiers(ent.Owner);
+    }
+
+    /// <summary>
     /// The presence of a battery affects the movement speed
     /// and the ability to use the drain ability.
     /// When removing the battery, forcibly disable the drain ability.
@@ -128,6 +151,17 @@ public sealed partial class IpcSystem : SharedIpcSystem
         }
 
         Dirty(ent);
+    }
+
+    /// <summary>
+    /// When battery is ejected from the slot or full discharged.
+    /// </summary>
+    private void OnPowerCellSlotEmpty(Entity<IpcComponent> ent, ref PowerCellSlotEmptyEvent args)
+    {
+        if (Terminating(ent))
+            return;
+
+        _movementSpeedModifier.RefreshMovementSpeedModifiers(ent.Owner);
     }
 
     /// <summary>
@@ -167,7 +201,7 @@ public sealed partial class IpcSystem : SharedIpcSystem
     /// </summary>
     private void OnRefreshMovementSpeedModifiers(Entity<IpcComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
-        if (HasCriticalCharge(ent))
+        if (HasNoPower(ent))
             args.ModifySpeed(ent.Comp.LowChargeSpeed);
     }
 
@@ -304,11 +338,11 @@ public sealed partial class IpcSystem : SharedIpcSystem
     /// </summary>
     private void OnRadioSendAttempt(Entity<IpcComponent> ent, ref RadioSendAttemptEvent args)
     {
-        if (!HasCriticalCharge(ent))
+        if (!HasNoPower(ent))
             return;
 
         args.Cancelled = true;
-        _popup.PopupEntity(Loc.GetString("ipc-no-power"), ent, ent);
+        _popup.PopupEntity(Loc.GetString(IpcNoPower), ent, ent);
     }
 
     /// <summary>
@@ -316,8 +350,18 @@ public sealed partial class IpcSystem : SharedIpcSystem
     /// </summary>
     private void OnRadioReceiveAttempt(Entity<IpcComponent> ent, ref RadioReceiveAttemptEvent args)
     {
-        if (HasCriticalCharge(ent))
+        if (HasNoPower(ent))
             args.Cancelled = true;
+    }
+
+    /// <summary>
+    /// Checks if the IPC is out of power,
+    /// or the battery charge is below critical threshold.
+    /// Used to gate functionality that should stop working when the IPC has no charge.
+    /// </summary>
+    private bool HasNoPower(Entity<IpcComponent> ent)
+    {
+        return !_powerCell.HasBattery(ent.Owner) || HasCriticalCharge(ent);
     }
 
     /// <summary>
@@ -329,5 +373,41 @@ public sealed partial class IpcSystem : SharedIpcSystem
     {
         return _powerCell.TryGetBatteryFromSlot(ent.Owner, out var battery)
             && _battery.GetCharge(battery.Value.AsNullable()) / battery.Value.Comp.MaxCharge <= ent.Comp.CritCharge;
+    }
+    /// <summary>
+    /// When anomaly leaves the host.
+    /// Restores the flashlight color taken from the mob own prototype.
+    /// </summary>
+    private void OnAnomalyGone(Entity<InnerBodyAnomalyComponent> ent, ref ComponentRemove args)
+    {
+        if (!HasComp<IpcComponent>(ent)
+            || Terminating(ent)
+            || Comp<MetaDataComponent>(ent).EntityPrototype is not { } own
+            || !own.TryGetComponent<PointLightComponent>(out var ownLight, _compFactory))
+            return;
+
+        SetLightColor(ent.Owner, ownLight.Color);
+    }
+
+    /// <summary>
+    /// Tints the flashlight with color of injected anomaly of the host.
+    /// </summary>
+    private void OnAnomalyAdded(Entity<InnerBodyAnomalyComponent> ent, ref ComponentInit args)
+    {
+        if (!HasComp<IpcComponent>(ent)
+            || !_protoManager.Resolve(ent.Comp.InjectionProto, out var injected)
+            || !injected.TryGetComponent<PointLightComponent>(out var anomalyLight, _compFactory))
+            return;
+
+        SetLightColor(ent.Owner, anomalyLight.Color);
+    }
+
+    /// <summary>
+    /// Set color of the light on entity.
+    /// </summary>
+    private void SetLightColor(EntityUid uid, Color color)
+    {
+        if (_lights.TryGetLight(uid, out var light))
+            _lights.SetColor(uid, color, light);
     }
 }
