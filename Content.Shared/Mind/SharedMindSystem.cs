@@ -705,6 +705,30 @@ public abstract partial class SharedMindSystem : EntitySystem
 
         EnsureComp<ExaminerComponent>(uid);
     }
+
+    // # SS220 Cult Ratvar and Narsie port
+    /// <summary>
+    /// Returns a list of every living humanoid player's minds.
+    /// </summary>
+    public List<EntityUid> GetAliveHumans()
+    {
+        var allHumans = new List<EntityUid>();
+        // Humanoid profiles prevent mice, pAIs, etc from being chosen.
+        var query = EntityQueryEnumerator<MindContainerComponent, MobStateComponent, HumanoidProfileComponent>();
+        while (query.MoveNext(out var uid, out var mc, out var mobState, out _))
+        {
+            // the player needs to have a mind and not be the excluded one
+            if (mc.Mind == null)
+                continue;
+
+            // the player has to be alive
+            if (_mobState.IsAlive(uid, mobState))
+                allHumans.Add(mc.Mind.Value);
+        }
+
+        return allHumans;
+    }
+    // # SS220 Cult Ratvar and Narsie port end
 }
 
 /// <summary>

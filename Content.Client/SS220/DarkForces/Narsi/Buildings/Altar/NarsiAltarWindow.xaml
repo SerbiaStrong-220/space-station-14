@@ -1,0 +1,30 @@
+<ui:FancyWindow xmlns="https://spacestation14.io"
+                xmlns:x="http://schemas.microsoft.com/winfx/2007/xaml"
+                xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls;assembly=Content.Client"
+                xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                SetSize="512 350" Title="Алтарь Нар'Си">
+        <PanelContainer StyleClasses="Inset" VerticalExpand="True" HorizontalExpand="True">
+
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat BackgroundColor="#25252A" />
+            </PanelContainer.PanelOverride>
+
+            <BoxContainer Orientation="Vertical">
+
+                <BoxContainer Orientation="Horizontal">
+                    <Label Text="Очки крови:" StyleClasses="LabelKeyText" Margin="8 0 8 0" />
+                    <Label Name="BloodScore" />
+                </BoxContainer>
+
+                <PanelContainer StyleClasses="LowDivider" Margin="8 8 8 8" />
+
+                <BoxContainer Orientation="Horizontal" Margin="8 8 8 8" HorizontalAlignment="Center" HorizontalExpand="True">
+                    <Button Name="OpenAbilities" Text="Способности" />
+
+                    <PanelContainer StyleClasses="LowDivider" Margin="8 8 8 8" />
+
+                    <Button Name="OpenRituals" Text="Ритуалы" />
+                </BoxContainer>
+            </BoxContainer>
+        </PanelContainer>
+</ui:FancyWindow>

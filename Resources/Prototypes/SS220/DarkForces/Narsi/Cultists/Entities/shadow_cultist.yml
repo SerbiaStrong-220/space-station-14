@@ -1,0 +1,55 @@
+﻿- type: entity
+  name: Тень культиста
+  id: MobCultistShadow
+  components:
+    - type: InputMover
+    - type: MobMover
+    - type: Reactive
+      groups:
+        Flammable: [ Touch ]
+        Extinguish: [ Touch ]
+    - type: NpcFactionMember
+      factions:
+        - SimpleNeutral
+    - type: HTN
+      rootTask:
+        task: IdleCompound
+    - type: Clickable
+    - type: InteractionOutline
+    - type: Sprite
+    - type: Physics
+      bodyType: Dynamic
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PhysShapeCircle
+            radius: 0.35
+          density: 300 #weighs more than humans because wood
+          restitution: 0.0
+          mask:
+            - MobMask
+          layer:
+            - MobLayer
+    - type: MobState
+      allowedStates:
+        - Alive
+        - Dead
+    - type: MobThresholds
+      thresholds:
+        0: Alive
+        200: Dead
+    - type: Puller
+      needsHands: false
+    - type: Tag
+      tags:
+        - CannotSuicide
+        - DoorBumpOpener
+        - FootstepSound
+    - type: NoSlip
+    - type: SlowOnDamage
+      speedModifierThresholds:
+        80: 0.9
+        120: 0.8
+        160: 0.5
+    - type: Damageable
+      damageContainer: Biological
