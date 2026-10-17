@@ -6,15 +6,15 @@
   name: security protection bundle
   description: A protection bundle consisting of a pair of knee and elbow pads. Fits perfectly into your riot control workflow!
   components:
-    - type: Sprite
-      sprite: SS220/Clothing/Neck/Misc/tactical.rsi
-    - type: Clothing
-      sprite: SS220/Clothing/Neck/Misc/tactical.rsi
-    - type: Armor # perfect
-      modifiers:
-        coefficients:
-          Blunt: 0.90
-          Slash: 0.90
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Misc/tactical.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Misc/tactical.rsi
+  - type: Armor # perfect
+    modifiers:
+      coefficients:
+        Blunt: 0.90
+        Slash: 0.90
 
 - type: entity
   parent: ClothingNeckProtectBundle
@@ -22,10 +22,10 @@
   name: protection bundle
   description: A protection bundle consisting of a pair of knee and elbow pads. Fits perfectly into your riot control workflow!
   components:
-    - type: Sprite
-      sprite: SS220/Clothing/Neck/Misc/tactical_blue.rsi
-    - type: Clothing
-      sprite: SS220/Clothing/Neck/Misc/tactical_blue.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Misc/tactical_blue.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Misc/tactical_blue.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -34,10 +34,10 @@
   description: A beautiful amulet that emphasizes harmony with nature and most likely endows its wearer with the power of the earth.
   suffix: For playtime
   components:
-    - type: Sprite
-      sprite: SS220/Clothing/Neck/Misc/hydro_druid_amulet.rsi
-    - type: Clothing
-      sprite: SS220/Clothing/Neck/Misc/hydro_druid_amulet.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Misc/hydro_druid_amulet.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Misc/hydro_druid_amulet.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -46,30 +46,51 @@
   description: An item of clothing of the high society.
   suffix: For playtime
   components:
-    - type: Sprite
-      sprite: SS220/Clothing/Neck/Misc/whiteruff.rsi
-    - type: Clothing
-      sprite: SS220/Clothing/Neck/Misc/whiteruff.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Misc/whiteruff.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Misc/whiteruff.rsi
 
 - type: entity
   parent: ClothingNeckBase
   id: ClothingNeckGoldenCross
   name: golden cross
   description: Beautiful golden cross.
-  components: 
-    - type: Sprite
-      sprite: SS220/Clothing/Neck/Misc/golden_cross.rsi
-    - type: Clothing
-      sprite: SS220/Clothing/Neck/Misc/golden_cross.rsi
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Misc/golden_cross.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Misc/golden_cross.rsi
 
 - type: entity
   parent: ClothingNeckBase
   id: ClothingNeckSilverCross
   name: silver cross
   description: Beautiful silver cross.
-  components: 
-    - type: Sprite
-      sprite: SS220/Clothing/Neck/Misc/silver_cross.rsi
-    - type: Clothing
-      sprite: SS220/Clothing/Neck/Misc/silver_cross.rsi
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Misc/silver_cross.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Misc/silver_cross.rsi
 
+- type: entity
+  parent: BaseBodyCamera
+  id: ClothingNeckBadgeSecurity
+  name: security badge
+  description: This glowing red badge marks the holder as THE LAW. It is equipped with a built‑in camera that broadcasts a recording of what is happening.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Misc/sec_badge.rsi
+    state: icon
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Misc/sec_badge.rsi
+  - type: Item
+    size: Small
+  - type: SurveillanceCamera
+    networkSet: true
+    id: "surveillance-camera-bodycam"
+    active: false
+  - type: Badge
+    label: "badge-label-security"
+    department: "badge-department-security"
+    color: "gold"

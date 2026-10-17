@@ -17,6 +17,11 @@ public sealed partial class TapeRecorderComponent : Component
     [DataField, AutoNetworkedField]
     public TapeRecorderMode Mode = TapeRecorderMode.Stopped;
 
+    // SS220 TapeRecorder & Bodycam update BGN
+    [DataField, AutoNetworkedField]
+    public bool RecordingOnly = false;
+    // SS220 TapeRecorder & Bodycam update END
+
     /// <summary>
     /// Paper that will spawn when printing transcript
     /// </summary>

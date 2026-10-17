@@ -26,6 +26,11 @@
         whitelist:
           components:
           - FitsInTapeRecorder
+        # SS220 TapeRecoder & BodyCam update BGN
+        blacklist:
+          tags:
+          - CassetteTapeLargeCapacity
+        # SS220 TapeRecoder & BodyCam update END
   - type: ContainerContainer
     containers:
       cassette_tape: !type:ContainerSlot
