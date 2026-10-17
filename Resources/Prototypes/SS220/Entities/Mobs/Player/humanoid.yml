@@ -427,7 +427,7 @@
   components:
     - type: Loadout
       prototypes: [CBURNLeaderGear]
-      roleLoadout: [ RoleSurvivalEVA ]
+      roleLoadout: [ RoleSurvivalCentcom ]
     - type: GhostRole
       name: ghost-role-information-cburn-agent-name
       description: ghost-role-information-cburn-agent-description
@@ -440,3 +440,4 @@
       - NamesMilitaryFirst
       - NamesMilitaryLast
       nameFormat: name-format-ert
+    - type: ZombieImmune #SS220 ERTchangingthings

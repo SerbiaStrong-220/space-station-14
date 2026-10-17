@@ -24,3 +24,6 @@ ent-RubberStampWizard = печать волшебника
 
 ent-RubberStampRedwings = печать "Красного Крыла"
     .desc = { ent-RubberStampBase.desc }
+
+ent-RubberStampChameleon = печать-хамелеон
+    .desc = Синдикатная печать, способная принимать вид печатей глав станции.

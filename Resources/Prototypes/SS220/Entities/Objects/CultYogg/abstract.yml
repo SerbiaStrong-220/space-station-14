@@ -2,28 +2,48 @@
 
 - type: entity
   abstract: true
-  id: CultYoggRestrictedItem
+  id: BaseRestrictedLivingItem
   suffix: CultYogg
   name: abstract cult restricted
   components:
-    - type: RestrictedItem
-      localizedPopup: "cult-yogg-role-item-popup"
-      whitelist:
-        components:
-        - CultYogg
+  - type: Tag
+    tags:
+    - YoggEquipment
+  - type: RestrictedItem
+    localizedPopup: "cult-yogg-role-item-popup"
+    whitelist:
+      components:
+      - CultYogg
 
 - type: entity
   abstract: true
-  id: CultYoggWideRestrictedItem
+  id: BaseRestrictedLivingItemMiGo
   suffix: CultYogg
   name: abstract cult restricted
   components:
-    - type: RestrictedItem
-      localizedPopup: "cult-yogg-role-item-popup"
-      whitelist:
-        components:
-        - CultYogg
-        - MiGo
+  - type: Tag
+    tags:
+    - YoggEquipment
+  - type: RestrictedItem
+    localizedPopup: "cult-yogg-role-item-popup"
+    whitelist:
+      components:
+      - CultYogg
+      - MiGo
+
+- type: entity
+  abstract: true
+  id: BaseLivingCuttableEquipment
+  components:
+  - type: CuttableStuck
+    cuttingSound:
+      path: /Audio/SS220/Items/CultYogg/equipment_cutting.ogg
+    removalSound:
+      path: /Audio/SS220/Items/CultYogg/equipment_detach.ogg
+    damage:
+      types:
+        Slash: 25
+        Blunt: 10
 
 - type: entity
   id: BaseAutoLinkingPortalCult

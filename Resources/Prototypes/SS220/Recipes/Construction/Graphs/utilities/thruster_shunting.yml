@@ -27,12 +27,6 @@
       steps:
       - tool: Screwing
         doAfter: 2
-    - to: thrusterShunting
-      conditions:
-        - !type:EntityAnchored {}
-      steps:
-        - tool: Welding
-          doAfter: 5
 
   - node: thrusterShunting
     entity: ThrusterShunting

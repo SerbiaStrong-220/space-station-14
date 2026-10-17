@@ -2,6 +2,7 @@ using System.Numerics;
 using Content.Client.Animations;
 using Content.Client.Gameplay;
 using Content.Client.Items;
+using Content.Client.SS220.Weapons;
 using Content.Client.Weapons.Ranged.Components;
 using Content.Shared.Camera;
 using Content.Shared.CCVar;
@@ -77,6 +78,38 @@ public sealed partial class GunSystem : SharedGunSystem
     }
 
     private bool _spreadOverlay;
+
+    //SS220 aiming overlay begin
+    public bool SpreadOverlayIngame
+    {
+        get => _spreadOverlayIngame;
+        set
+        {
+            if (_spreadOverlayIngame == value)
+                return;
+
+            _spreadOverlayIngame = value;
+
+            if (_spreadOverlayIngame)
+            {
+                _overlayManager.AddOverlay(new GunTargetingOverlay(
+                    EntityManager,
+                    _eyeManager,
+                    Timing,
+                    _inputManager,
+                    _player,
+                    this,
+                    TransformSystem));
+            }
+            else
+            {
+                _overlayManager.RemoveOverlay<GunTargetingOverlay>();
+            }
+        }
+    }
+
+    private bool _spreadOverlayIngame;
+    //SS220 aiming overlay end
 
     public override void Initialize()
     {

@@ -56,6 +56,12 @@ namespace Content.Server.Communications
         [DataField]
         public bool CanShuttle = true;
 
+        // SS220-add-recall-only-console-begin
+        [ViewVariables]
+        [DataField]
+        public bool OnlyRecallShuttle = false;
+        // SS220-add-recall-only-console-end
+
         /// <summary>
         /// Announce on all grids (for nukies)
         /// </summary>

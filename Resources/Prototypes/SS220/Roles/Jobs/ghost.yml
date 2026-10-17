@@ -1,8 +1,8 @@
 - type: job
   id: GhostRole
   playTimeTracker: JobGhostRole
-  name: Ghost role
-  description: Utility job for correct work job ban.
+  name: job-name-ghost-role
+  description: job-description-ghost-role
   experienceDefinition: NoExperience
   setPreference: false
   canBeAntag: true

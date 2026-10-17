@@ -85,3 +85,12 @@
   storage:
     back:
     - BoxSurvivalBrigmedicIpc
+
+- type: loadout
+  id: EmergencyCentcom
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: OxygenBreather
+  storage:
+    back:
+    - BoxSurvivalCentcom

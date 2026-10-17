@@ -32,10 +32,18 @@
     - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
-
+  # SS220-place-and-pickup-sounds-2 begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Weapons/gun_pick_up.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Weapons/gun_drop.ogg
+  # SS220-place-and-pickup-sounds-2 end
+  
 - type: entity
   name: china lake
-  parent: [BaseWeaponLauncher, BaseSyndicateContraband]
+  parent: [BaseItem, BaseGunWieldable, BaseSyndicateContraband] # SS220 weapon overhaul
   id: WeaponLauncherChinaLake
   description: PLOOP.
   components:
@@ -44,11 +52,13 @@
       path: /Audio/SS220/Effects/Drop/rifles.ogg ##new sound_drop effect, add MIXnikita
       params:
         volume: 2
+  # SS220 weapon overhaul begin
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Launchers/china_lake.rsi
+    sprite: SS220/Objects/Weapons/Guns/Launchers/china_lake.rsi
     layers:
-      - state: icon
+      - state: base
         map: ["enum.GunVisualLayers.Base"]
+  # SS220 weapon overhaul end
   - type: Clothing
     sprite: Objects/Weapons/Guns/Launchers/china_lake.rsi
     slots:
@@ -61,17 +71,45 @@
   - type: AmmoCounter
   - type: Gun
     projectileSpeed: 25 # SS220 Bullet Speed
-  - type: BallisticAmmoProvider
-    whitelist:
-      tags:
-        - Grenade
-    capacity: 3
-    proto: GrenadeFrag
-    soundInsert:
-      path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+  # SS220 weapon overhaul begin
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
   - type: GunRequiresWield
+  - type: ChamberMagazineAmmoProvider
+    autoCycle: false
+    canBeLoadedManually: true
+    mustBeLoadedThroughChamber: false
+    soundBoltOpened:
+      path: /Audio/Weapons/Guns/Cock/shotgun_open.ogg
+    soundBoltClosed:
+      path: /Audio/Weapons/Guns/Cock/shotgun_close.ogg
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/m41_cock.ogg
+  - type: InternalMagazine
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: InternalMagazineChinaLake
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+            - Grenade
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: Appearance
+  # SS220 weapon overhaul end
   - type: StaticPrice
     price: 10000
+
 
 - type: entity
   parent: [ BaseWeaponLauncher, BaseMajorContraband ]

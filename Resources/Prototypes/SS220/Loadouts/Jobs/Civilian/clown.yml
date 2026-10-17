@@ -168,5 +168,5 @@
   - !type:GroupLoadoutEffect
     proto: ClownPennywise
   storage:
-    pocket1:
+    back:
     - BikeHornPennywise

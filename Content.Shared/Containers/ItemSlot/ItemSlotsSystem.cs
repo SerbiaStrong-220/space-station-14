@@ -259,7 +259,7 @@ namespace Content.Shared.Containers.ItemSlots
             }
 
             // Drop the held item onto the floor. Return if the user cannot drop.
-            if (!_handsSystem.TryDrop(args.User, args.Used))
+            if (!_handsSystem.TryDrop(args.User, args.Used, suppressDropSound: true)) // SS220-drop-and-pickup-sound-suppression
                 return;
 
             slots.Sort(SortEmpty);
@@ -267,7 +267,7 @@ namespace Content.Shared.Containers.ItemSlots
             foreach (var slot in slots)
             {
                 if (slot.Item != null)
-                    _handsSystem.TryPickupAnyHand(args.User, slot.Item.Value, handsComp: hands);
+                    _handsSystem.TryPickupAnyHand(args.User, slot.Item.Value, handsComp: hands, suppressPickupSound: true); // SS220-drop-and-pickup-sound-suppression
 
                 Insert(uid, slot, args.Used, args.User, excludeUserAudio: true);
 
@@ -406,7 +406,7 @@ namespace Content.Shared.Containers.ItemSlots
                 return false;
 
             // hands.Drop(item) checks CanDrop action blocker
-            if (!_handsSystem.TryDrop(user, hands.ActiveHandId!))
+            if (!_handsSystem.TryDrop(user, hands.ActiveHandId!, suppressDropSound: true)) // SS220-drop-and-pickup-sound-suppression
                 return false;
 
             Insert(uid, slot, held.Value, user, excludeUserAudio: excludeUserAudio);
@@ -439,7 +439,7 @@ namespace Content.Shared.Containers.ItemSlots
                     emptyOnly: true))
                 return false;
 
-            if (user != null && !_handsSystem.TryDrop(user.Value, item))
+            if (user != null && !_handsSystem.TryDrop(user.Value, item, suppressDropSound: true)) // SS220-drop-and-pickup-sound-suppression
                 return false;
 
             Insert(ent, itemSlot, item, user, excludeUserAudio: excludeUserAudio);
@@ -620,7 +620,7 @@ namespace Content.Shared.Containers.ItemSlots
                 return false;
 
             if (user != null)
-                _handsSystem.PickupOrDrop(user.Value, item.Value);
+                _handsSystem.PickupOrDrop(user.Value, item.Value, suppressPickupSound: true); // SS220-drop-and-pickup-sound-suppression
 
             return true;
         }

@@ -58,6 +58,14 @@
       gun_chamber: !type:ContainerSlot
   - type: StaticPrice
     price: 500
+  # SS220-place-and-pickup-sounds-2 begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Weapons/rifle_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Weapons/rifle_drop.ogg
+  # SS220-place-and-pickup-sounds-2 end
 
 - type: entity
   name: AKMS
@@ -238,10 +246,6 @@
     sprite: Objects/Weapons/Guns/Rifles/XL8.rsi
   - type: Clothing
     sprite: Objects/Weapons/Guns/Rifles/XL8.rsi
-  - type: CursorOffsetRequiresWield
-  - type: EyeCursorOffset
-    maxOffset: 2
-    pvsIncrease: 0.2
   - type: StaticPrice
     price: 1500 #3x lecter
   - type: Gun
@@ -297,10 +301,6 @@
         whitelist:
           tags:
           - CartridgeRifle
-  - type: CursorOffsetRequiresWield
-  - type: EyeCursorOffset
-    maxOffset: 2
-    pvsIncrease: 0.2
   - type: SpeedModifiedOnWield
     walkModifier: 0.9
     sprintModifier: 0.9

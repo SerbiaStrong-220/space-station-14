@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: [ BaseItem, BaseSecurityContraband ]
+  parent: [ BaseMagazine, BaseSecurityContraband ] # SS220-place-and-pickup-sounds-2
   id: BaseMagazineShotgun
   name: ammo drum (.50 shells)
   components:
