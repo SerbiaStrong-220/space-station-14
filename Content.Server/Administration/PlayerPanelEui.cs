@@ -9,6 +9,8 @@ using Content.Shared.Administration.Systems;
 using Content.Shared.Database;
 using Content.Shared.Eui;
 using Content.Shared.Follower;
+using Content.Shared.SS220.Administration.Connections; // # SS220 connections by ckeys
+using Content.Server.SS220.Administration.Connections; // # SS220 connections by ckeys
 using Robust.Server.Player;
 using Robust.Shared.Player;
 
@@ -122,6 +124,13 @@ public sealed class PlayerPanelEui : BaseEui
                 var ui = new AdminLogsEui();
                 _eui.OpenEui(ui, Player);
                 ui.SetLogFilter(search: _targetPlayer.Username);
+                break;
+            // # SS220 connections by ckeys
+            case PlayerPanelConnectionLogsMessage:
+                if (!_admins.HasAdminFlag(Player, AdminFlags.Logs))
+                    return;
+
+                _eui.OpenEui(new ConnectionLogsEui(_targetPlayer.Username), Player);
                 break;
             case PlayerPanelDeleteMessage:
             case PlayerPanelRejuvenationMessage:
