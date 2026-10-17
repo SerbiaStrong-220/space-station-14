@@ -1,0 +1,11 @@
+﻿- type: startingGear
+  id: GearFatherFromThePast
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitHawaiRed
+    shoes: ClothingShoesColorBlack
+    back: ClothingBackpackSatchel
+    id: PassengerPDA
+    pocket1: CigPackGreen
+    pocket2: Lighter
+  inhand:
+  - Cigarette
