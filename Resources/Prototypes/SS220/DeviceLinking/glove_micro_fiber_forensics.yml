@@ -1,0 +1,13 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: sourcePort
+  id: MicroFiberReport
+  name: micro-fiber-analyzer-port-source-name
+  description: micro-fiber-analyzer-port-source-description
+  defaultLinks:
+  - PrintDocument
+
+- type: sinkPort
+  id: PrintDocument
+  name: micro-fiber-analyzer-port-sink-name
+  description: micro-fiber-analyzer-port-sink-description

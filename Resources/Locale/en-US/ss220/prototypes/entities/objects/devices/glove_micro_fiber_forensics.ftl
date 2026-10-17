@@ -1,0 +1,12 @@
+ent-GloveMicroFiberScanner = microfiber scanner
+    .desc = A portable scanner that collects surface microfibers or an individual sample from gloves, clothing or equipment and dispenses a sample swab. Use it in hand to open its radial mode menu.
+ent-GloveMicroFiberSwab = microfiber sample swab
+    .desc = A physical carrier for a microfiber sample. Insert a collected sample into a microfiber analyzer.
+ent-MicroFiberAnalyzer = microfiber analyzer
+    .desc = A machine that identifies gloves, clothing and equipment in a microfiber sample. Shows item pictures and individual sample codes.
+ent-MicroFiberAnalyzerMachineCircuitboard = microfiber analyzer (machine board)
+    .desc = A security machine circuit board for a microfiber analyzer.
+ent-MicroFiberReportPaper = microfiber analysis report
+    .desc = An official NanoTrasen Security form containing a report generated automatically by a microfiber analyzer.
+ent-MicroFiberComparisonReportPaper = microfiber comparison report
+    .desc = A separate NanoTrasen Security form comparing two analyzed microfiber samples.

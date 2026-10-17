@@ -3,6 +3,7 @@
   parent: Clothing
   id: ClothingHandsBase
   components:
+  - type: GloveMicroFiber # SS220 microfibers
   - type: Sprite
     state: icon
   - type: Clothing

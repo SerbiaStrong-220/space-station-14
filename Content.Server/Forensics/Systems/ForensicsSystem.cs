@@ -3,6 +3,7 @@ using Content.Server.DoAfter;
 using Content.Server.Fluids.EntitySystems;
 using Content.Server.Forensics.Components;
 using Content.Server.Popups;
+using Content.Server.SS220.Forensics.Systems;
 using Content.Shared.Body.Events;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Popups;
@@ -23,8 +24,6 @@ using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Random;
 using Content.Shared.Verbs;
 using Robust.Shared.Utility;
-using Robust.Shared.Containers;
-using Content.Server.SS220.Forensics.Components;
 using Content.Shared.Cloning.Events;
 using Content.Shared.Hands.Components;
 
@@ -37,6 +36,7 @@ namespace Content.Server.Forensics
         [Dependency] private readonly DoAfterSystem _doAfterSystem = default!;
         [Dependency] private readonly PopupSystem _popupSystem = default!;
         [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
+        [Dependency] private readonly StorageMicroFiberSystem _storageMicroFiber = default!; // SS220 microfibers
 
         public override void Initialize()
         {
@@ -54,7 +54,6 @@ namespace Content.Server.Forensics
             SubscribeLocalEvent<DnaComponent, TransferDnaEvent>(OnTransferDnaEvent);
             SubscribeLocalEvent<DnaSubstanceTraceComponent, SolutionContainerChangedEvent>(OnSolutionChanged);
             SubscribeLocalEvent<CleansForensicsComponent, GetVerbsEvent<UtilityVerb>>(OnUtilityVerb);
-            SubscribeLocalEvent<MicroFiberComponent, EntInsertedIntoContainerMessage>(OnEntInserted);//SS220 Micro_fibers
         }
 
         private void OnSolutionChanged(Entity<DnaSubstanceTraceComponent> ent, ref SolutionContainerChangedEvent ev)
@@ -152,6 +151,7 @@ namespace Content.Server.Forensics
         public void CopyForensicsFrom(ForensicsComponent src, EntityUid target)
         {
             var dest = EnsureComp<ForensicsComponent>(target);
+            dest.GloveMicroFibers.UnionWith(src.GloveMicroFibers); // SS220 microfibers
             foreach (var dna in src.DNAs)
             {
                 dest.DNAs.Add(dna);
@@ -162,12 +162,12 @@ namespace Content.Server.Forensics
                 dest.Fibers.Add(fiber);
             }
 
-			//SS220 Micro_fibers start
-            foreach (var microFiber in src.MicroFibers)
+            // SS220 microfibers begin
+            foreach (var storageMicroFiber in src.StorageMicroFibers)
             {
-                dest.MicroFibers.Add(microFiber);
+                _storageMicroFiber.AddTrace((target, dest), storageMicroFiber);
             }
-			//SS220 Micro_fibers end
+            // SS220 microfibers end
             foreach (var print in src.Fingerprints)
             {
                 dest.Fingerprints.Add(print);
@@ -252,33 +252,31 @@ namespace Content.Server.Forensics
                 return false;
             }
 
-            var totalPrintsAndFibers = forensicsComp.Fingerprints.Count + forensicsComp.Fibers.Count + forensicsComp.MicroFibers.Count;//SS220 Micro_fibers
+            var totalPrintsAndFibers = forensicsComp.Fingerprints.Count + forensicsComp.Fibers.Count + forensicsComp.StorageMicroFibers.Count; // SS220 microfibers
             var hasRemovableDNA = forensicsComp.DNAs.Count > 0 && forensicsComp.CanDnaBeCleaned;
 
-            if (hasRemovableDNA || totalPrintsAndFibers > 0)
-            {
-                var cleanDelay = cleanForensicsEntity.Comp.CleanDelay;
-                var doAfterArgs = new DoAfterArgs(EntityManager, user, cleanDelay, new CleanForensicsDoAfterEvent(), cleanForensicsEntity, target: target, used: cleanForensicsEntity)
-                {
-                    NeedHand = true,
-                    BreakOnDamage = true,
-                    BreakOnMove = true,
-                    MovementThreshold = 0.01f,
-                    DistanceThreshold = forensicsComp.CleanDistance,
-                };
+            totalPrintsAndFibers += forensicsComp.GloveMicroFibers.Count; // SS220 microfibers
 
-                _doAfterSystem.TryStartDoAfter(doAfterArgs);
-
-                _popupSystem.PopupEntity(Loc.GetString("forensics-cleaning", ("target", Identity.Entity(target, EntityManager))), user, user);
-
-                return true;
-            }
-            else
+            if (!hasRemovableDNA && totalPrintsAndFibers <= 0)
             {
                 _popupSystem.PopupEntity(Loc.GetString("forensics-cleaning-cannot-clean", ("target", Identity.Entity(target, EntityManager))), user, user, PopupType.MediumCaution);
                 return false;
             }
 
+            var cleanDelay = cleanForensicsEntity.Comp.CleanDelay;
+            var doAfterArgs = new DoAfterArgs(EntityManager, user, cleanDelay, new CleanForensicsDoAfterEvent(), cleanForensicsEntity, target: target, used: cleanForensicsEntity)
+            {
+                NeedHand = true,
+                BreakOnDamage = true,
+                BreakOnMove = true,
+                MovementThreshold = 0.01f,
+                DistanceThreshold = forensicsComp.CleanDistance,
+            };
+
+            _doAfterSystem.TryStartDoAfter(doAfterArgs);
+
+            _popupSystem.PopupEntity(Loc.GetString("forensics-cleaning", ("target", Identity.Entity(target, EntityManager))), user, user);
+            return true;
         }
 
         private void OnCleanForensicsDoAfter(EntityUid uid, ForensicsComponent component, CleanForensicsDoAfterEvent args)
@@ -290,7 +288,10 @@ namespace Content.Server.Forensics
                 return;
 
             targetComp.Fibers = new();
-            targetComp.MicroFibers = new();//SS220 Micro_fibers
+            // SS220 microfibers begin
+            targetComp.GloveMicroFibers.Clear();
+            targetComp.StorageMicroFibers.Clear();
+            // SS220 microfibers end
             targetComp.Fingerprints = new();
 
             if (targetComp.CanDnaBeCleaned)
@@ -351,15 +352,6 @@ namespace Content.Server.Forensics
             recipientComp.DNAs.Add(component.DNA);
             recipientComp.CanDnaBeCleaned = args.CanDnaBeCleaned;
         }
-
-        //SS220 Micro_fibers start
-        private void OnEntInserted(Entity<MicroFiberComponent> ent, ref EntInsertedIntoContainerMessage args)
-        {
-            var targetComp = EnsureComp<ForensicsComponent>(args.Entity);
-
-            targetComp.MicroFibers.Add(string.IsNullOrEmpty(ent.Comp.MicroFiberColor) ? Loc.GetString("forensic-fibers", ("material", ent.Comp.MicroFiberMaterial)) : Loc.GetString("forensic-fibers-colored", ("color", ent.Comp.MicroFiberColor), ("material", ent.Comp.MicroFiberMaterial)));
-        }
-        //SS220 Micro_fibers end
 
         #region Public API
         public override void RandomizeDNA(Entity<DnaComponent?> ent)

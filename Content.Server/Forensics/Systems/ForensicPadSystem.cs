@@ -8,7 +8,6 @@ using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Labels.EntitySystems;
 using Content.Shared.Verbs;
-using Content.Server.SS220.Forensics.Components;
 
 namespace Content.Server.Forensics
 {
@@ -29,7 +28,7 @@ namespace Content.Server.Forensics
             SubscribeLocalEvent<ForensicPadComponent, ExaminedEvent>(OnExamined);
             SubscribeLocalEvent<ForensicPadComponent, AfterInteractEvent>(OnAfterInteract);
             SubscribeLocalEvent<ForensicPadComponent, ForensicPadDoAfterEvent>(OnDoAfter);
-            SubscribeLocalEvent<ForensicPadComponent, GetVerbsEvent<UtilityVerb>>(OnUtilityVerb);//SS220 Micro_fibers
+            SubscribeLocalEvent<ForensicPadComponent, GetVerbsEvent<UtilityVerb>>(OnUtilityVerb); // SS220 microfibers
         }
 
         private void OnExamined(EntityUid uid, ForensicPadComponent component, ExaminedEvent args)
@@ -62,8 +61,8 @@ namespace Content.Server.Forensics
                 return;
             }
 
-            //SS200 MicroFibers start
-			/*
+            // SS220 microfibers begin
+            /*
             if (!_forensics.CanAccessFingerprint(args.Target.Value, out var blocker))
             {
 
@@ -88,12 +87,15 @@ namespace Content.Server.Forensics
 
             if (TryComp<FiberComponent>(args.Target, out var fiber))
                 StartScan(uid, args.User, args.Target.Value, component, string.IsNullOrEmpty(fiber.FiberColor) ? Loc.GetString("forensic-fibers", ("material", fiber.FiberMaterial)) : Loc.GetString("forensic-fibers-colored", ("color", fiber.FiberColor), ("material", fiber.FiberMaterial)));
-			*/
-			if (!TryGetSample(args.Target.Value, args.User, out var sample) || sample is null)//SS220 Micro_fibers
+            */
+            if (!TryGetSample(args.Target.Value, args.User, out var sample))
                 return;
 
-            StartScan(uid, args.User, args.Target.Value, component, sample);//SS220 Micro_fibers
-			//SS200 MicroFibers end
+            if (sample == null)
+                return;
+
+            StartScan(uid, args.User, args.Target.Value, component, sample);
+            // SS220 microfibers end
         }
 
         private void StartScan(EntityUid used, EntityUid user, EntityUid target, ForensicPadComponent pad, string sample)
@@ -109,7 +111,7 @@ namespace Content.Server.Forensics
             _doAfterSystem.TryStartDoAfter(doAfterEventArgs);
         }
 
-        //SS220 Micro_fibers start
+        // SS220 microfibers begin
         private void OnUtilityVerb(Entity<ForensicPadComponent> ent, ref GetVerbsEvent<UtilityVerb> args)
         {
             if (!args.CanInteract || !args.CanAccess)
@@ -142,7 +144,10 @@ namespace Content.Server.Forensics
                 return;
             }
 
-            if (!TryGetSample(target, user, out var sample) || sample is null)
+            if (!TryGetSample(target, user, out var sample))
+                return;
+
+            if (sample == null)
                 return;
 
             StartScan(ent, user, target, ent.Comp, sample);
@@ -176,16 +181,10 @@ namespace Content.Server.Forensics
                 return true;
             }
 
-            if (TryComp<MicroFiberComponent>(ent, out var microFiber))
-            {
-                sample = string.IsNullOrEmpty(microFiber.MicroFiberColor) ? Loc.GetString("forensic-micro-fibers", ("material", microFiber.MicroFiberMaterial)) : Loc.GetString("forensic-micro-fibers-colored", ("color", microFiber.MicroFiberColor), ("material", microFiber.MicroFiberMaterial));
-                return true;
-            }
-
             _popupSystem.PopupEntity(Loc.GetString("forensic-pad-verb-no-sapmles"), ent, user);
             return false;
         }
-        //SS220 Micro_fibers end
+        // SS220 microfibers end
 
         private void OnDoAfter(EntityUid uid, ForensicPadComponent padComponent, ForensicPadDoAfterEvent args)
         {
