@@ -1,0 +1,16 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: constructionGraph
+  id: WebCuffsGraph
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: cuffsweb
+      steps:
+      - material: WebSilk
+        amount: 2
+        doAfter: 5
+  - node: cuffsweb
+    entity: WebCuffs
+

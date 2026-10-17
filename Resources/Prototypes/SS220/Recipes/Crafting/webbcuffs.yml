@@ -1,0 +1,13 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: construction
+  id: WebCuffsCraft
+  graph: WebCuffsGraph
+  startNode: start
+  targetNode: cuffsweb
+  category: construction-category-tools
+  entityWhitelist:
+    tags:
+    - SpiderCraft
+  objectType: Item
+
