@@ -1,0 +1,19 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      Title="{Loc 'messenger-ai-window-title'}"
+                      MinSize="440 520">
+    <PanelContainer Name="Background" VerticalExpand="True">
+        <BoxContainer Orientation="Vertical" Margin="8" VerticalExpand="True">
+            <Label Name="HeaderLabel"/>
+            <Label Name="ReadOnlyLabel" Text="{Loc 'messenger-ai-read-only'}" Margin="0 0 0 4"/>
+            <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                <Button Name="BackButton" Visible="False" Text="{Loc 'messenger-ai-back'}"/>
+                <LineEdit Name="SearchEdit" HorizontalExpand="True" PlaceHolder="{Loc 'messenger-ui-search-line'}"/>
+                <Button Name="RefreshButton" Text="{Loc 'messenger-ai-refresh'}"/>
+            </BoxContainer>
+            <ScrollContainer Name="ContentScroll" HScrollEnabled="False" VerticalExpand="True" HorizontalExpand="True" Margin="0 4 0 0">
+                <BoxContainer Name="Content" Orientation="Vertical" HorizontalExpand="True"/>
+            </ScrollContainer>
+        </BoxContainer>
+    </PanelContainer>
+</controls:FancyWindow>
