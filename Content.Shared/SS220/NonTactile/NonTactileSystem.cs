@@ -6,8 +6,8 @@ namespace Content.Shared.SS220.NonTactile;
 
 public sealed partial class NonTactileSystem : EntitySystem
 {
-    private const string FailureString = "hugging-failure-generic-non-tactile";
-    private const string OthersMessage = "hugging-failure-generic-non-tactile-others";
+    private readonly LocId _failureString = "hugging-failure-generic-non-tactile";
+    private readonly LocId _othersMessage = "hugging-failure-generic-non-tactile-others";
 
     public override void Initialize()
     {
@@ -19,16 +19,16 @@ public sealed partial class NonTactileSystem : EntitySystem
 
     private void OnInteractionSuccess(Entity<NonTactileComponent> ent, ref InteractionSuccessEvent args)
     {
-        args.Message = FailureString;
+        args.Message = _failureString;
         args.Sound = null;
-        args.MessagePerceivedByOthers = OthersMessage;
+        args.MessagePerceivedByOthers = _othersMessage;
     }
 
     private void OnInteractionFailure(Entity<NonTactileComponent> ent, ref InteractionFailureEvent args)
     {
-        args.Message = FailureString;
+        args.Message = _failureString;
         args.Sound = null;
-        args.MessagePerceivedByOthers = OthersMessage;
+        args.MessagePerceivedByOthers = _othersMessage;
     }
 }
 
