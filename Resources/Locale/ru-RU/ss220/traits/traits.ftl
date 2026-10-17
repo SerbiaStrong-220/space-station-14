@@ -11,3 +11,6 @@ trait-chronic-cough-desc = Вы страдаете от постоянного �
 
 trait-uncloneable-name = Неклонируемый
 trait-uncloneable-desc = Не может быть клонирован.
+
+trait-non-tactile-name = Нетактильный
+trait-non-tactile-desc = Вы не терпите прикосновений и уклоняетесь от объятий.
