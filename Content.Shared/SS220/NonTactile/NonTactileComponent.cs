@@ -5,14 +5,5 @@ using Robust.Shared.GameStates;
 namespace Content.Shared.SS220.NonTactile;
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class NonTactileComponent : Component
-{
-    public bool PopupOverridden;
-
-    public float OriginalSuccessChance = 1f;
-
-    public string? OriginalFailureString;
-
-    public string? OriginalMessagePerceivedByOthers;
-}
+public sealed partial class NonTactileComponent : Component;
 

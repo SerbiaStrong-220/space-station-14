@@ -89,6 +89,7 @@ public sealed class InteractionPopupSystem : EntitySystem
 
         var msg = ""; // Stores the text to be shown in the popup message
         SoundSpecifier? sfx = null; // Stores the filepath of the sound to be played
+        string? perceivedByOthers; //SS220-NonTactile
 
         var predict = component.SuccessChance is 0 or 1
                       && component.InteractSuccessSpawn == null
@@ -99,36 +100,50 @@ public sealed class InteractionPopupSystem : EntitySystem
 
         if (_random.Prob(component.SuccessChance))
         {
-            if (component.InteractSuccessString != null)
-                msg = Loc.GetString(component.InteractSuccessString, ("target", Identity.Entity(uid, EntityManager))); // Success message (localized).
+            //SS220-NonTactile begin
+            var ev = new InteractionSuccessEvent(user)
+            {
+                Message = component.InteractSuccessString,
+                Sound = component.InteractSuccessSound,
+                MessagePerceivedByOthers = component.MessagePerceivedByOthers,
+            };
+            RaiseLocalEvent(target, ref ev);
 
-            if (component.InteractSuccessSound != null)
-                sfx = component.InteractSuccessSound;
+            if (ev.Message != null)
+                msg = Loc.GetString(ev.Message, ("target", Identity.Entity(uid, EntityManager)));
+
+            sfx = ev.Sound;
+            perceivedByOthers = ev.MessagePerceivedByOthers;
+            //SS220-NonTactile end
 
             if (component.InteractSuccessSpawn != null)
                 Spawn(component.InteractSuccessSpawn, _transform.GetMapCoordinates(uid));
-
-            var ev = new InteractionSuccessEvent(user);
-            RaiseLocalEvent(target, ref ev);
         }
         else
         {
-            if (component.InteractFailureString != null)
-                msg = Loc.GetString(component.InteractFailureString, ("target", Identity.Entity(uid, EntityManager))); // Failure message (localized).
+            //SS220-NonTactile begin
+            var ev = new InteractionFailureEvent(user)
+            {
+                Message = component.InteractFailureString,
+                Sound = component.InteractFailureSound,
+                MessagePerceivedByOthers = component.MessagePerceivedByOthers,
+            };
+            RaiseLocalEvent(target, ref ev);
 
-            if (component.InteractFailureSound != null)
-                sfx = component.InteractFailureSound;
+            if (ev.Message != null)
+                msg = Loc.GetString(ev.Message, ("target", Identity.Entity(uid, EntityManager)));
+
+            sfx = ev.Sound;
+            perceivedByOthers = ev.MessagePerceivedByOthers;
+            //SS220-NonTactile end
 
             if (component.InteractFailureSpawn != null)
                 Spawn(component.InteractFailureSpawn, _transform.GetMapCoordinates(uid));
-
-            var ev = new InteractionFailureEvent(user);
-            RaiseLocalEvent(target, ref ev);
         }
 
-        if (!string.IsNullOrEmpty(component.MessagePerceivedByOthers))
+        if (!string.IsNullOrEmpty(perceivedByOthers)) //SS220-NonTactile
         {
-            var msgOthers = Loc.GetString(component.MessagePerceivedByOthers,
+            var msgOthers = Loc.GetString(perceivedByOthers, //SS220-NonTactile
                 ("user", Identity.Entity(user, EntityManager)), ("target", Identity.Entity(uid, EntityManager)));
             _popupSystem.PopupEntity(msgOthers, uid, Filter.PvsExcept(user, entityManager: EntityManager), true);
         }
@@ -183,20 +198,8 @@ public sealed class InteractionPopupSystem : EntitySystem
     /// <para>
     /// This field is not networked automatically, so this method must be called on both sides of the network.
     /// </para>
-    public void SetInteractFailureString(Entity<InteractionPopupComponent> ent, string? str) //SS220-NonTactile
+    public void SetInteractFailureString(Entity<InteractionPopupComponent> ent, string str)
     {
         ent.Comp.InteractFailureString = str;
     }
-
-    //SS220-NonTactile begin
-    public void SetSuccessChance(Entity<InteractionPopupComponent> ent, float successChance)
-    {
-        ent.Comp.SuccessChance = successChance;
-    }
-
-    public void SetMessagePerceivedByOthers(Entity<InteractionPopupComponent> ent, string? message)
-    {
-        ent.Comp.MessagePerceivedByOthers = message;
-    }
-    //SS220-NonTactile end
 }
