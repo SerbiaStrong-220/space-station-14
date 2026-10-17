@@ -10,7 +10,7 @@ namespace Content.Shared.Chat.TypingIndicator;
 ///     Send to server when client started/stopped typing in chat input field.
 /// </summary>
 [Serializable, NetSerializable]
-public sealed class TypingChangedEvent : EntityEventArgs
+public sealed partial class TypingChangedEvent : EntityEventArgs //SS220 telepathy
 {
     public readonly TypingIndicatorState State;
 

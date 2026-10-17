@@ -330,6 +330,7 @@ public sealed partial class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComp
         var telepathy = EnsureComp<TelepathyComponent>(uid);
         telepathy.CanSend = true;//we are allowing it cause testing
         telepathy.TelepathyChannelPrototype = rule.Comp.TelepathyChannel;
+        Dirty(uid, telepathy);
 
         //allows to hide the sedative sting
         var innerToggle = EnsureComp<InnerHandToggleableComponent>(uid);
