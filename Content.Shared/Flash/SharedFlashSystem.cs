@@ -1,3 +1,4 @@
+using Content.Shared.SS220.Clothing.Events;
 using System.Linq;
 using Content.Shared.Charges.Components;
 using Content.Shared.Charges.Systems;
@@ -282,6 +283,13 @@ public abstract class SharedFlashSystem : EntitySystem
 
     private void OnFlashImmunityFlashAttempt(Entity<FlashImmunityComponent> ent, ref FlashAttemptEvent args)
     {
+        // SS220-glasses-on-forehead-begin
+        var effectAttempt = new GlassesEffectAttemptEvent();
+        RaiseLocalEvent(ent.Owner, ref effectAttempt);
+        if (effectAttempt.Cancelled)
+            return;
+        // SS220-glasses-on-forehead-end
+
         if (TryComp<MaskComponent>(ent, out var mask) && mask.IsToggled)
             return;
 
