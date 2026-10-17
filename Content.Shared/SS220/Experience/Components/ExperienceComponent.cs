@@ -2,13 +2,14 @@
 
 using Content.Shared.FixedPoint;
 using Content.Shared.SS220.Experience.Systems;
+using Content.Shared.SS220.Experience.Systems.Experience;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
-namespace Content.Shared.SS220.Experience;
+namespace Content.Shared.SS220.Experience.Components;
 
 // # What happens and when
 // 1. We start studying skill -> we add starting info into Skills and sets StudyingProgress in 0

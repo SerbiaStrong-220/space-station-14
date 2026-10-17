@@ -1,10 +1,11 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Database;
+using Content.Shared.SS220.Experience.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
-namespace Content.Shared.SS220.Experience.Systems;
+namespace Content.Shared.SS220.Experience.Systems.Experience;
 
 public sealed partial class ExperienceSystem : EntitySystem
 {

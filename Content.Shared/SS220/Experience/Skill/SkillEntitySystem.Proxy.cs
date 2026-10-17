@@ -3,10 +3,9 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using Content.Shared.Database;
-using Content.Shared.FixedPoint;
 using Content.Shared.Random.Helpers;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
+using Content.Shared.SS220.Experience.Components;
+using Robust.Shared.Random;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.Experience.Skill;
@@ -64,10 +63,13 @@ public partial class SkillEntitySystem : EntitySystem
     /// Random that gives same result on client and on server
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public System.Random GetPredictedRandom(in List<int> valuesForSeed)
+    public IRobustRandom GetPredictedRandom(in List<int> valuesForSeed)
     {
         var seed = SharedRandomExtensions.HashCodeCombine(valuesForSeed);
-        return new System.Random(seed);
+        var random = new RobustRandom();
+        random.SetSeed(seed);
+
+        return random;
     }
 
     /// <summary>

@@ -4,11 +4,11 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Cloning.Events;
 using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
-using Content.Shared.SS220.Experience.SkillChecks;
+using Content.Shared.SS220.Experience.Components;
+using Content.Shared.SS220.Experience.Skill;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 
-namespace Content.Shared.SS220.Experience.Systems;
+namespace Content.Shared.SS220.Experience.Systems.Experience;
 
 public sealed partial class ExperienceSystem
 {

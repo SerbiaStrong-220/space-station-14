@@ -4,7 +4,9 @@ using Content.Server.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
 using Content.Shared.SS220.Experience;
+using Content.Shared.SS220.Experience.Components;
 using Content.Shared.SS220.Experience.Systems;
+using Content.Shared.SS220.Experience.Systems.Experience;
 using Robust.Server.Console;
 using Robust.Shared.Prototypes;
 using System.Linq;
@@ -41,7 +43,7 @@ public sealed partial class ExperienceEditorSystem : EntitySystem
             return;
         }
 
-        var experienceAddition = EnsureComp<ExperienceAdditionComponent>(targetEntity);
+        EnsureComp<ExperienceAdditionComponent>(targetEntity);
 
         if (ev.Data is not { } additionData)
         {

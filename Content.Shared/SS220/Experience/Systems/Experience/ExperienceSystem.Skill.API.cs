@@ -3,9 +3,10 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.FixedPoint;
+using Content.Shared.SS220.Experience.Components;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.SS220.Experience.Systems;
+namespace Content.Shared.SS220.Experience.Systems.Experience;
 
 public sealed partial class ExperienceSystem : EntitySystem
 {
@@ -171,30 +172,6 @@ public sealed partial class ExperienceSystem : EntitySystem
 
         sublevel = info.Sublevel;
         level = info.Level;
-        return true;
-    }
-
-    public bool TryGetEarnedSublevel(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, [NotNullWhen(true)] out int? earnedSublevels)
-    {
-        if (!Resolve(entity.Owner, ref entity.Comp) || !entity.Comp.EarnedSkillSublevel.TryGetValue(skillTree, out var earned))
-        {
-            earnedSublevels = null;
-            return false;
-        }
-
-        earnedSublevels = earned;
-        return true;
-    }
-
-    public bool TryGetLearningProgress(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, [NotNullWhen(true)] out FixedPoint4? progress)
-    {
-        if (!Resolve(entity.Owner, ref entity.Comp) || !entity.Comp.StudyingProgress.TryGetValue(skillTree, out var cachedProgress))
-        {
-            progress = null;
-            return false;
-        }
-
-        progress = cachedProgress;
         return true;
     }
     #endregion

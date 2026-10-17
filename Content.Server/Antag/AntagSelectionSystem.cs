@@ -36,7 +36,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Content.Server.SS220.MindSlave;
-using Content.Shared.SS220.Experience;
+using Content.Shared.SS220.Experience.Systems;
 
 namespace Content.Server.Antag;
 

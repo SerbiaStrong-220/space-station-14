@@ -1,8 +1,7 @@
 // Original code by Corvax dev team, no specific for SS220 license
 
 using Content.Shared.Examine;
-using Content.Shared.SS220.Experience;
-using Content.Shared.SS220.Experience.Systems;
+using Content.Shared.SS220.Experience.Systems.Experience;
 
 namespace Content.Shared.SS220.HiddenDescription;
 

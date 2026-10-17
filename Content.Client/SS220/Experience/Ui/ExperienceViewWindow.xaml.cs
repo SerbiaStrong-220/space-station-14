@@ -152,7 +152,7 @@ public sealed partial class ExperienceViewWindow : FancyWindow
 
     private void UpdateGroupPartially(ProtoId<SkillTreeGroupPrototype> key, List<SkillTreeView>? skillTreeViews)
     {
-        if (!_data.ContainsKey(key))
+        if (!_data.TryGetValue(key, out var dataView))
         {
             _sawmill.Error($"UI doesnt contain {key} in its data, but update was called");
             return;
@@ -168,7 +168,7 @@ public sealed partial class ExperienceViewWindow : FancyWindow
             _cachedControls.Add(key, cachedControl);
         }
 
-        skillTreeViews ??= _data[key];
+        skillTreeViews ??= dataView;
 
         cachedControl.SetGroupName(FormattedMessage.FromMarkupPermissive(Loc.GetString(keyProto.GroupName)));
         cachedControl.UpdateWithList(CollectionsMarshal.AsSpan(skillTreeViews), key);
@@ -198,8 +198,7 @@ public sealed partial class ExperienceViewWindow : FancyWindow
                 treeContainer.HaveFreePoints = canChange;
 
                 // god forgive me...
-                if (treeContainer.OnAddLevelButton is null)
-                    treeContainer.OnAddLevelButton += OnAddLevelButton;
+                treeContainer.OnAddLevelButton ??= OnAddLevelButton;
             }
         }
     }

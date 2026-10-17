@@ -17,6 +17,8 @@ using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Storage;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Content.Shared.SS220.Experience.Components;
+using Content.Shared.SS220.Experience.Systems;
 
 namespace Content.Server.Clothing.Systems;
 

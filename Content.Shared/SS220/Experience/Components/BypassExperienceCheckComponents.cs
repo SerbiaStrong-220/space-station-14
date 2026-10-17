@@ -2,7 +2,7 @@
 
 using Robust.Shared.GameStates;
 
-namespace Content.Shared.SS220.Experience;
+namespace Content.Shared.SS220.Experience.Components;
 
 /// <summary>
 /// This is used to mark entity which bypasses knowledge's checks

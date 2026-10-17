@@ -3,7 +3,7 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.SS220.Experience;
+namespace Content.Shared.SS220.Experience.Components;
 
 /// <summary>
 /// Base component for user defined adding sublevels

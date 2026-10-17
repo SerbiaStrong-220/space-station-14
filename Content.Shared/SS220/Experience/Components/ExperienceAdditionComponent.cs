@@ -1,14 +1,15 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.SS220.Experience.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.SS220.Experience;
+namespace Content.Shared.SS220.Experience.Components;
 
 /// NOTE:
 // This can be ProtoId, but for now it is pointless
-public enum ExperienceAddSource : int
+public enum ExperienceAddSource
 {
     Admin = 0,
     RoundStart,
