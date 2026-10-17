@@ -98,7 +98,7 @@
   id: CassetteTapeInterview
   components:
   - type: Label
-    currentLabel: Interview with Garry Smosh
+    currentLabel: label-cassette-interview-garry-smosh # SS220-localization-fix
   - type: TapeCassette
     recordedData:
       - timestamp: 2

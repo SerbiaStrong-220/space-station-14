@@ -1,6 +1,6 @@
 - type: microwaveMealRecipe
   id: RecipeBun
-  name: bun recipe
+  name: ent-FoodBreadBun # SS220-localization-fix
   result: FoodBreadBun
   time: 5
   group: Breads
@@ -9,7 +9,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCottonBun
-  name: cotton bun recipe
+  name: ent-FoodCottonBun # SS220-localization-fix
   result: FoodCottonBun
   time: 5
   group: Moth
@@ -19,7 +19,7 @@
 #Bagels
 - type: microwaveMealRecipe
   id: RecipeBagel
-  name: bagel recipe
+  name: ent-FoodBagel # SS220-localization-fix
   result: FoodBagel
   time: 5
   group: Breads
@@ -28,7 +28,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBagelPoppy
-  name: poppyseed bagel recipe
+  name: ent-FoodBagelPoppy # SS220-localization-fix
   result: FoodBagelPoppy
   time: 5
   group: Breads
@@ -38,7 +38,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBagelCotton
-  name: cotton bagel recipe
+  name: ent-FoodBagelCotton # SS220-localization-fix
   result: FoodBagelCotton
   time: 5
   group: Moth
@@ -49,7 +49,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeAppendixBurger
-  name: appendix burger recipe
+  name: ent-FoodBurgerAppendix # SS220-localization-fix
   result: FoodBurgerAppendix
   time: 10
   group: Savory
@@ -59,7 +59,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBaconBurger
-  name: bacon burger recipe
+  name: ent-FoodBurgerBacon # SS220-localization-fix
   result: FoodBurgerBacon
   time: 10
   group: Savory
@@ -70,7 +70,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBaseballBurger
-  name: baseball burger recipe
+  name: ent-FoodBurgerBaseball # SS220-localization-fix
   result: FoodBurgerBaseball
   time: 10
   group: Savory
@@ -80,7 +80,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBearger
-  name: bearger recipe
+  name: ent-FoodBurgerBear # SS220-localization-fix
   result: FoodBurgerBear
   time: 10
   group: Savory
@@ -90,7 +90,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBigBiteBurger
-  name: big bite burger recipe
+  name: ent-FoodBurgerBig # SS220-localization-fix
   result: FoodBurgerBig
   time: 15
   group: Savory
@@ -103,7 +103,7 @@
 
 - type: microwaveMealRecipe #Added to metamorph recipes
   id: RecipeBrainBurger
-  name: brain burger recipe
+  name: ent-FoodBurgerBrain # SS220-localization-fix
   result: FoodBurgerBrain
   time: 10
   group: Savory
@@ -113,7 +113,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCatBurger
-  name: cat burger recipe
+  name: ent-FoodBurgerCat # SS220-localization-fix
   result: FoodBurgerCat
   time: 10
   group: Savory
@@ -124,7 +124,7 @@
 
 - type: microwaveMealRecipe #Added to metamorph recipes
   id: RecipeCheeseburger
-  name: cheeseburger recipe
+  name: ent-FoodBurgerCheese # SS220-localization-fix
   result: FoodBurgerCheese
   time: 10
   group: Savory
@@ -135,7 +135,7 @@
 
 - type: microwaveMealRecipe #Added to metamorph recipes
   id: RecipeChickenSandwich
-  name: chicken sandwich recipe
+  name: ent-FoodBurgerChicken # SS220-localization-fix
   result: FoodBurgerChicken
   time: 10
   group: Savory
@@ -147,7 +147,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeClownBurger
-  name: clownburger recipe
+  name: ent-FoodBurgerClown # SS220-localization-fix
   result: FoodBurgerClown
   time: 10
   group: Savory
@@ -157,7 +157,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCorgiBurger
-  name: corgi burger recipe
+  name: ent-FoodBurgerCorgi # SS220-localization-fix
   result: FoodBurgerCorgi
   time: 10
   group: Savory
@@ -167,7 +167,7 @@
 
 - type: microwaveMealRecipe #Added to metamorph recipes
   id: RecipeCrabBurger
-  name: crab burger recipe
+  name: ent-FoodBurgerCrab # SS220-localization-fix
   result: FoodBurgerCrab
   time: 10
   group: Savory
@@ -177,7 +177,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCrazyHamburger
-  name: crazy hamburger recipe
+  name: ent-FoodBurgerCrazy # SS220-localization-fix
   result: FoodBurgerCrazy
   time: 15
   group: Savory
@@ -194,7 +194,7 @@
 
 - type: microwaveMealRecipe #Added to metamorph recipes
   id: RecipeDuckBurger
-  name: duck sandwich recipe
+  name: ent-FoodBurgerDuck # SS220-localization-fix
   result: FoodBurgerDuck
   time: 10
   group: Savory
@@ -205,7 +205,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeEmpoweredBurger
-  name: empowered burger recipe
+  name: ent-FoodBurgerEmpowered # SS220-localization-fix
   result: FoodBurgerEmpowered
   time: 10
   group: Savory
@@ -215,7 +215,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCarpBurger
-  name: fillet-o-carp burger recipe
+  name: ent-FoodBurgerCarp # SS220-localization-fix
   result: FoodBurgerCarp
   time: 10
   group: Savory
@@ -226,7 +226,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeFiveBurger
-  name: five alarm burger recipe
+  name: ent-FoodBurgerFive # SS220-localization-fix
   result: FoodBurgerFive
   time: 10
   group: Savory
@@ -237,7 +237,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeGhostBurger
-  name: ghost burger recipe
+  name: ent-FoodBurgerGhost # SS220-localization-fix
   result: FoodBurgerGhost
   time: 10
   group: Savory
@@ -247,7 +247,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeHumanBurger
-  name: human burger recipe
+  name: ent-FoodBurgerHuman # SS220-localization-fix
   result: FoodBurgerHuman
   time: 10
   group: Savory
@@ -257,7 +257,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeJellyBurger
-  name: jelly burger recipe
+  name: ent-FoodBurgerJelly # SS220-localization-fix
   result: FoodBurgerJelly
   time: 10
   group: Savory
@@ -267,7 +267,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBurgerMcguffin
-  name: McGuffin recipe
+  name: ent-FoodBurgerMcguffin # SS220-localization-fix
   result: FoodBurgerMcguffin
   time: 10
   group: Savory
@@ -279,7 +279,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBurgerMcrib
-  name: BBQ rib sandwich recipe
+  name: ent-FoodBurgerMcrib # SS220-localization-fix
   result: FoodBurgerMcrib
   time: 10
   group: Savory
@@ -290,7 +290,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeMimeBurger
-  name: mime burger recipe
+  name: ent-FoodBurgerMime # SS220-localization-fix
   result: FoodBurgerMime
   time: 10
   group: Savory
@@ -300,7 +300,7 @@
 
 - type: microwaveMealRecipe
   id: RecipePlainBurger
-  name: plain burger recipe
+  name: ent-FoodBurgerPlain # SS220-localization-fix
   result: FoodBurgerPlain
   time: 10
   group: Savory
@@ -310,7 +310,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeRatBurger
-  name: rat burger recipe
+  name: ent-FoodBurgerRat # SS220-localization-fix
   result: FoodBurgerRat
   time: 10
   group: Savory
@@ -320,7 +320,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeRobotBurger
-  name: roburger recipe
+  name: ent-FoodBurgerRobot # SS220-localization-fix
   result: FoodBurgerRobot
   time: 10
   group: Savory
@@ -331,7 +331,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeSoylentBurger
-  name: soylent burger recipe
+  name: ent-FoodBurgerSoy # SS220-localization-fix
   result: FoodBurgerSoy
   time: 10
   group: Savory
@@ -342,7 +342,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeSpellBurger
-  name: spell burger recipe
+  name: ent-FoodBurgerSpell # SS220-localization-fix
   result: FoodBurgerSpell
   time: 10
   group: Savory
@@ -352,7 +352,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeSuperBiteBurger
-  name: super bite burger recipe
+  name: ent-FoodBurgerSuper # SS220-localization-fix
   result: FoodBurgerSuper
   time: 25
   group: Savory
@@ -367,7 +367,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeTofuBurger
-  name: tofu burger recipe
+  name: ent-FoodBurgerTofu # SS220-localization-fix
   result: FoodBurgerTofu
   time: 10
   group: Savory
@@ -377,7 +377,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeXenoburger
-  name: xenoburger recipe
+  name: ent-FoodBurgerXeno # SS220-localization-fix
   result: FoodBurgerXeno
   time: 10
   group: Savory
@@ -387,7 +387,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeMothRoachburger
-  name: mothroachburger recipe
+  name: ent-FoodBurgerMothRoach # SS220-localization-fix
   result: FoodBurgerMothRoach
   group: Savory
   solids:
@@ -398,7 +398,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBananaBread
-  name: banana bread recipe
+  name: ent-FoodBreadBanana # SS220-localization-fix
   result: FoodBreadBanana
   time: 15
   group: Breads
@@ -408,7 +408,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCornbread
-  name: cornbread recipe
+  name: ent-FoodBreadCorn # SS220-localization-fix
   result: FoodBreadCorn
   time: 10
   group: Breads
@@ -417,7 +417,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCreamCheeseBread
-  name: cream cheese bread recipe
+  name: ent-FoodBreadCreamcheese # SS220-localization-fix
   result: FoodBreadCreamcheese
   time: 15
   group: Breads
@@ -429,7 +429,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeMeatBread
-  name: meat bread recipe
+  name: ent-FoodBreadMeat # SS220-localization-fix
   result: FoodBreadMeat
   time: 15
   group: Breads
@@ -440,7 +440,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeMimanaBread
-  name: mimana bread recipe
+  name: ent-FoodBreadMimana # SS220-localization-fix
   result: FoodBreadMimana
   time: 15
   group: Breads
@@ -452,7 +452,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBread
-  name: bread recipe
+  name: ent-FoodBreadPlain # SS220-localization-fix
   result: FoodBreadPlain
   time: 10
   group: Breads
@@ -461,7 +461,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBreadCotton
-  name: cotton bread recipe
+  name: ent-FoodBreadCotton # SS220-localization-fix
   result: FoodBreadCotton
   time: 10
   group: Moth
@@ -470,7 +470,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeSausageBread
-  name: sausage bread recipe
+  name: ent-FoodBreadSausage # SS220-localization-fix
   result: FoodBreadSausage
   time: 15
   group: Breads
@@ -480,7 +480,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeSpiderMeatBread
-  name: spider meat bread recipe
+  name: ent-FoodBreadMeatSpider # SS220-localization-fix
   result: FoodBreadMeatSpider
   time: 15
   group: Breads
@@ -491,7 +491,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeTofuBread
-  name: tofu bread recipe
+  name: ent-FoodBreadTofu # SS220-localization-fix
   result: FoodBreadTofu
   time: 15
   group: Breads
@@ -501,7 +501,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeXenoMeatBread
-  name: xeno meat bread recipe
+  name: ent-FoodBreadMeatXeno # SS220-localization-fix
   result: FoodBreadMeatXeno
   time: 15
   group: Breads
@@ -514,7 +514,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBaguette
-  name: baguette recipe
+  name: ent-FoodBreadBaguette # SS220-localization-fix
   result: FoodBreadBaguette
   time: 15
   group: Breads
@@ -526,7 +526,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBaguetteCotton
-  name: baguette recipe
+  name: ent-FoodBreadBaguetteCotton # SS220-localization-fix
   result: FoodBreadBaguetteCotton
   time: 15
   group: Moth
@@ -538,7 +538,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBaguetteSword
-  name: baguette sword recipe
+  name: ent-WeaponBaguette # SS220-localization-fix
   result: WeaponBaguette
   secretRecipe: true
   time: 15
@@ -552,7 +552,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeButteredToast
-  name: buttered toast recipe
+  name: ent-FoodBreadButteredToast # SS220-localization-fix
   result: FoodBreadButteredToast
   time: 5
   group: Breads
@@ -562,7 +562,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeFrenchToast
-  name: french toast recipe
+  name: ent-FoodBreadFrenchToast # SS220-localization-fix
   result: FoodBreadFrenchToast
   time: 5
   group: Breakfast
@@ -574,7 +574,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeGarlicBread
-  name: garlic bread slice recipe
+  name: ent-FoodBreadGarlicSlice # SS220-localization-fix
   result: FoodBreadGarlicSlice
   time: 5
   group: Breads
@@ -585,7 +585,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeJellyToast
-  name: jelly toast recipe
+  name: ent-FoodBreadJellySlice # SS220-localization-fix
   result: FoodBreadJellySlice
   time: 5
   group: Breads
@@ -595,7 +595,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeMoldyBreadSlice
-  name: moldy bread slice recipe
+  name: ent-FoodBreadMoldySlice # SS220-localization-fix
   result: FoodBreadMoldySlice
   time: 5
   group: Breads
@@ -605,7 +605,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeTwoBreadSlice
-  name: two slice recipe
+  name: ent-FoodBreadTwoSlice # SS220-localization-fix
   result: FoodBreadTwoSlice
   time: 5
   group: Breads
@@ -616,7 +616,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeOnionRings
-  name: onion rings recipe
+  name: ent-FoodOnionRings # SS220-localization-fix
   result: FoodOnionRings
   time: 15
   group: Savory
@@ -626,7 +626,7 @@
 #Pizzas TODO: contruction graph based pizza
 - type: microwaveMealRecipe
   id: RecipeMargheritaPizza
-  name: margherita pizza recipe
+  name: ent-FoodPizzaMargherita # SS220-localization-fix
   result: FoodPizzaMargherita
   time: 30
   group: Pizza
@@ -637,7 +637,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeMushroomPizza
-  name: mushroom pizza recipe
+  name: ent-FoodPizzaMushroom # SS220-localization-fix
   result: FoodPizzaMushroom
   time: 30
   group: Pizza
@@ -647,7 +647,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeMeatPizza
-  name: meat pizza recipe
+  name: ent-FoodPizzaMeat # SS220-localization-fix
   result: FoodPizzaMeat
   time: 30
   group: Pizza
@@ -659,7 +659,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeVegetablePizza
-  name: vegetable pizza recipe
+  name: ent-FoodPizzaVegetable # SS220-localization-fix
   result: FoodPizzaVegetable
   time: 30
   group: Pizza
@@ -672,7 +672,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeHawaiianPizza
-  name: Hawaiian pizza recipe
+  name: ent-FoodPizzaPineapple # SS220-localization-fix
   result: FoodPizzaPineapple
   time: 30
   group: Pizza
@@ -683,7 +683,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeDankPizza
-  name: dank pizza recipe
+  name: ent-FoodPizzaDank # SS220-localization-fix
   result: FoodPizzaDank
   time: 30
   group: Pizza
@@ -695,7 +695,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeDonkpocketPizza
-  name: donk-pocket pizza recipe
+  name: ent-FoodPizzaDonkpocket # SS220-localization-fix
   result: FoodPizzaDonkpocket
   time: 30
   group: Pizza
@@ -707,7 +707,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeUraniumPizza
-  name: spicy rock pizza recipe
+  name: ent-FoodPizzaUranium # SS220-localization-fix
   result: FoodPizzaUranium
   time: 30
   group: Pizza
@@ -719,7 +719,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCottonPizza
-  name: cotton pizza recipe
+  name: ent-FoodPizzaCotton # SS220-localization-fix
   result: FoodPizzaCotton
   time: 30
   group: Moth
@@ -729,7 +729,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeWorldpeasPizza
-  name: world peazza recipe
+  name: ent-FoodPizzaWorldpeas # SS220-localization-fix
   result: FoodPizzaWorldpeas
   time: 30
   solids:
@@ -739,7 +739,7 @@
 #Italian
 - type: microwaveMealRecipe
   id: RecipeBoiledSpaghetti
-  name: boiled spaghetti recipe
+  name: ent-FoodNoodlesBoiled # SS220-localization-fix
   result: FoodNoodlesBoiled
   time: 10 # SS220-kitchen-processor
   group: Pasta
@@ -756,7 +756,7 @@
 
 - type: microwaveMealRecipe
   id: RecipePastaTomato
-  name: pasta tomato recipe
+  name: ent-FoodNoodles # SS220-localization-fix
   result: FoodNoodles
   time: 10
   group: Pasta
@@ -766,7 +766,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeMeatballSpaghetti
-  name: spaghetti & meatballs recipe
+  name: ent-FoodNoodlesMeatball # SS220-localization-fix
   result: FoodNoodlesMeatball
   time: 10
   group: Pasta
@@ -776,7 +776,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeButterNoodles
-  name: butter noodles recipe
+  name: ent-FoodNoodlesButter # SS220-localization-fix
   result: FoodNoodlesButter
   time: 10
   group: Pasta
@@ -786,7 +786,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeChowMein
-  name: chow mein recipe
+  name: ent-FoodNoodlesChowmein # SS220-localization-fix
   result: FoodNoodlesChowmein
   time: 10
   group: Pasta
@@ -800,7 +800,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeOatmeal
-  name: oatmeal recipe
+  name: ent-FoodOatmeal # SS220-localization-fix
   result: FoodOatmeal
   time: 15
   group: Savory
@@ -812,7 +812,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBoiledRice
-  name: boiled rice recipe
+  name: ent-FoodRiceBoiled # SS220-localization-fix
   result: FoodRiceBoiled
   time: 15
   group: Savory
@@ -824,7 +824,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeRicePudding
-  name: rice pudding recipe
+  name: ent-FoodRicePudding # SS220-localization-fix
   result: FoodRicePudding
   time: 15
   group: Dessert
@@ -837,7 +837,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeRicePork
-  name: rice and pork recipe
+  name: ent-FoodRicePork # SS220-localization-fix
   result: FoodRicePork
   time: 15
   group: Savory
@@ -847,7 +847,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeRiceGumbo
-  name: black-eyed gumbo recipe
+  name: ent-FoodRiceGumbo # SS220-localization-fix
   result: FoodRiceGumbo
   time: 15
   group: Savory
@@ -858,7 +858,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeEggRice
-  name: egg-fried rice recipe
+  name: ent-FoodRiceEgg # SS220-localization-fix
   result: FoodRiceEgg
   time: 15
   group: Savory
@@ -870,7 +870,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCopypasta
-  name: copypasta recipe
+  name: ent-FoodNoodlesCopy # SS220-localization-fix
   result: FoodNoodlesCopy
   time: 10
   group: Pasta
@@ -881,7 +881,7 @@
 #Soups & Stew
 - type: microwaveMealRecipe
   id: RecipeBisque
-  name: bisque recipe
+  name: ent-FoodSoupBisque # SS220-localization-fix
   result: FoodSoupBisque
   time: 10
   group: Soup
@@ -895,7 +895,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeMeatballSoup
-  name: meatball soup recipe
+  name: ent-FoodSoupMeatball # SS220-localization-fix
   result: FoodSoupMeatball
   time: 10
   group: Soup
@@ -909,7 +909,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeNettleSoup
-  name: nettle soup recipe
+  name: ent-FoodSoupNettle # SS220-localization-fix
   result: FoodSoupNettle
   time: 10
   group: Soup
@@ -923,7 +923,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeEyeballSoup
-  name: eyeball soup recipe
+  name: ent-FoodSoupEyeball # SS220-localization-fix
   result: FoodSoupEyeball
   time: 10
   group: Soup
@@ -937,7 +937,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeAmanitaJelly
-  name: amanita jelly recipe
+  name: ent-FoodJellyAmanita # SS220-localization-fix
   result: FoodJellyAmanita
   time: 10
   group: Savory
@@ -949,7 +949,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeOnionSoup
-  name: onion soup recipe
+  name: ent-FoodSoupOnion # SS220-localization-fix
   result: FoodSoupOnion
   time: 10
   group: Soup
@@ -962,7 +962,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeMushroomSoup
-  name: mushroom soup recipe
+  name: ent-FoodSoupMushroom # SS220-localization-fix
   result: FoodSoupMushroom
   time: 10
   group: Soup
@@ -975,7 +975,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeStewSoup
-  name: stew recipe
+  name: ent-FoodSoupStew # SS220-localization-fix
   result: FoodSoupStew
   time: 10
   group: Soup
@@ -992,7 +992,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeTomatoSoup
-  name: tomato soup recipe
+  name: ent-FoodSoupTomato # SS220-localization-fix
   result: FoodSoupTomato
   time: 10
   group: Soup
@@ -1004,7 +1004,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeTomatoBloodSoup
-  name: tomato blood soup recipe
+  name: ent-FoodSoupTomatoBlood # SS220-localization-fix
   result: FoodSoupTomatoBlood
   time: 10
   group: Soup
@@ -1016,7 +1016,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeWingFangChuSoup
-  name: wing fang chu recipe
+  name: ent-FoodSoupWingFangChu # SS220-localization-fix
   result: FoodSoupWingFangChu
   time: 10
   group: Soup
@@ -1028,7 +1028,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeWingFangChuSoupSpider
-  name: wing fang chu recipe
+  name: ent-FoodSoupWingFangChu # SS220-localization-fix
   result: FoodSoupWingFangChu
   time: 10
   group: Soup
@@ -1040,7 +1040,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeVegetableSoup
-  name: vegetable soup recipe
+  name: ent-FoodSoupVegetable # SS220-localization-fix
   result: FoodSoupVegetable
   time: 10
   group: Soup
@@ -1055,7 +1055,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeClownTearsSoup
-  name: clown tears soup recipe
+  name: ent-FoodSoupClown # SS220-localization-fix
   result: FoodSoupClown
   time: 10
   group: Soup
@@ -1069,7 +1069,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeMonkeysDelightSoup
-  name: monkeys delight recipe
+  name: ent-FoodSoupMonkey # SS220-localization-fix
   result: FoodSoupMonkey
   time: 10
   group: Soup
@@ -1084,7 +1084,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBungoSoup
-  name: bungo soup recipe
+  name: ent-FoodSoupBungo # SS220-localization-fix
   result: FoodSoupBungo
   time: 10
   group: Soup
@@ -1097,7 +1097,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBoiledSnail
-  name: boiled snail recipe
+  name: ent-FoodMeatSnailCooked # SS220-localization-fix
   result: FoodMeatSnailCooked
   time: 5
   group: Savory
@@ -1108,7 +1108,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeEscargotSoup
-  name: escargot recipe
+  name: ent-FoodSoupEscargot # SS220-localization-fix
   result: FoodSoupEscargot
   time: 10
   group: Soup
@@ -1124,7 +1124,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeAmanitaPie
-  name: amanita pie recipe
+  name: ent-FoodPieAmanita # SS220-localization-fix
   result: FoodPieAmanita
   time: 15
   group: Pie
@@ -1135,7 +1135,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeApplePie
-  name: apple pie recipe
+  name: ent-FoodPieApple # SS220-localization-fix
   result: FoodPieApple
   time: 15
   group: Pie
@@ -1146,7 +1146,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBaklava
-  name: baklava recipe
+  name: ent-FoodPieBaklava # SS220-localization-fix
   result: FoodPieBaklava
   time: 15
   group: BarsAndCookies
@@ -1157,7 +1157,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBananaCreamPie
-  name: banana cream pie recipe
+  name: ent-FoodPieBananaCream # SS220-localization-fix
   result: FoodPieBananaCream
   time: 15
   group: Pie
@@ -1168,7 +1168,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBerryClafoutis
-  name: berry clafoutis recipe
+  name: ent-FoodPieClafoutis # SS220-localization-fix
   result: FoodPieClafoutis
   time: 15
   group: Pie
@@ -1179,7 +1179,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCherryPie
-  name: cherry pie recipe
+  name: ent-FoodPieCherry # SS220-localization-fix
   result: FoodPieCherry
   time: 15
   group: Pie
@@ -1190,7 +1190,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeFrostyPie
-  name: frosty pie recipe
+  name: ent-FoodPieFrosty # SS220-localization-fix
   result: FoodPieFrosty
   time: 15
   group: Pie
@@ -1201,7 +1201,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeMeatPie
-  name: meat pie recipe
+  name: ent-FoodPieMeat # SS220-localization-fix
   result: FoodPieMeat
   time: 15
   group: Pie
@@ -1212,7 +1212,7 @@
 
 - type: microwaveMealRecipe
   id: RecipePumpkinPie
-  name: pumpkin pie recipe
+  name: ent-FoodPiePumpkin # SS220-localization-fix
   result: FoodPiePumpkin
   time: 15
   group: Pie
@@ -1233,7 +1233,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeXenoPie
-  name: xeno pie recipe
+  name: ent-FoodPieXeno # SS220-localization-fix
   result: FoodPieXeno
   time: 15
   group: Pie
@@ -1246,7 +1246,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCocoTart
-  name: chocolate lava tart recipe
+  name: ent-FoodTartCoco # SS220-localization-fix
   result: FoodTartCoco
   time: 15
   group: Pie
@@ -1260,7 +1260,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeGappleTart
-  name: golden apple streusel tart recipe
+  name: ent-FoodTartGapple # SS220-localization-fix
   result: FoodTartGapple
   time: 15
   group: Pie
@@ -1275,7 +1275,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeGrapeTart
-  name: grape tart recipe
+  name: ent-FoodTartGrape # SS220-localization-fix
   result: FoodTartGrape
   time: 15
   group: Pie
@@ -1289,7 +1289,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeMimeTart
-  name: mime tart recipe
+  name: ent-FoodTartMime # SS220-localization-fix
   result: FoodTartMime
   time: 15
   group: Pie
@@ -1305,7 +1305,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCubanCarp
-  name: Cuban carp recipe
+  name: ent-FoodMealCubancarp # SS220-localization-fix
   result: FoodMealCubancarp
   time: 15
   group: Savory
@@ -1317,7 +1317,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeSashimi
-  name: sashimi recipe
+  name: ent-FoodMealSashimi # SS220-localization-fix
   result: FoodMealSashimi
   time: 15
   group: Savory
@@ -1328,7 +1328,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeMisoColaSoup
-  name: salty sweet misocola soup recipe
+  name: ent-DisgustingSweptSoup # SS220-localization-fix
   result: DisgustingSweptSoup
   time: 15
   group: Savory
@@ -1339,7 +1339,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeLoadedBakedPotato
-  name: loaded baked potato recipe
+  name: ent-FoodMealPotatoLoaded # SS220-localization-fix
   result: FoodMealPotatoLoaded
   time: 15
   group: Savory
@@ -1349,7 +1349,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeFries
-  name: space fries recipe
+  name: ent-FoodMealFries # SS220-localization-fix
   result: FoodMealFries
   time: 15
   group: Savory
@@ -1360,7 +1360,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCheesyFries
-  name: cheesy fries recipe
+  name: ent-FoodMealFriesCheesy # SS220-localization-fix
   result: FoodMealFriesCheesy
   time: 15
   group: Savory
@@ -1372,7 +1372,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCarrotFries
-  name: carrot fries recipe
+  name: ent-FoodMealFriesCarrot # SS220-localization-fix
   result: FoodMealFriesCarrot
   time: 15
   group: Savory
@@ -1423,7 +1423,7 @@
 
 - type: microwaveMealRecipe
   id: RecipePopcorn
-  name: popcorn recipe
+  name: ent-FoodSnackPopcorn # SS220-localization-fix
   result: FoodSnackPopcorn
   time: 20
   group: Savory
@@ -1432,7 +1432,7 @@
 
 - type: microwaveMealRecipe
   id: RecipePancake
-  name: pancake recipe
+  name: ent-FoodBakedPancake # SS220-localization-fix
   result: FoodBakedPancake
   time: 5
   group: Breakfast
@@ -1443,7 +1443,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBlueberryPancake
-  name: blueberry pancake recipe
+  name: ent-FoodBakedPancakeBb # SS220-localization-fix
   result: FoodBakedPancakeBb
   time: 5
   group: Breakfast
@@ -1456,7 +1456,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeWaffles
-  name: waffle recipe
+  name: ent-FoodBakedWaffle # SS220-localization-fix
   result: FoodBakedWaffle
   time: 10
   group: Breakfast
@@ -1468,7 +1468,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeWaffleSoy
-  name: soy waffle recipe
+  name: ent-FoodBakedWaffleSoy # SS220-localization-fix
   result: FoodBakedWaffleSoy
   time: 10
   group: Breakfast
@@ -1480,7 +1480,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCookie
-  name: cookie recipe
+  name: ent-FoodBakedCookie # SS220-localization-fix
   result: FoodBakedCookie
   time: 5
   group: BarsAndCookies
@@ -1493,7 +1493,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeSugarCookie
-  name: sugar cookie recipe
+  name: ent-FoodBakedCookieSugar # SS220-localization-fix
   result: FoodBakedCookieSugar
   time: 5
   group: BarsAndCookies
@@ -1505,7 +1505,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeRaisinCookie
-  name: raisin cookie recipe
+  name: ent-FoodBakedCookieRaisin # SS220-localization-fix
   result: FoodBakedCookieRaisin
   time: 5
   group: BarsAndCookies
@@ -1517,7 +1517,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCookieOatmeal
-  name: oatmeal cookie recipe
+  name: ent-FoodBakedCookieOatmeal # SS220-localization-fix
   result: FoodBakedCookieOatmeal
   time: 5
   group: BarsAndCookies
@@ -1529,7 +1529,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeChocolateChipPancake
-  name: chocolate chip pancake recipe
+  name: ent-FoodBakedPancakeCc # SS220-localization-fix
   result: FoodBakedPancakeCc
   time: 5
   group: BarsAndCookies
@@ -1542,7 +1542,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeAppleCake
-  name: apple cake recipe
+  name: ent-FoodCakeApple # SS220-localization-fix
   result: FoodCakeApple
   time: 5
   group: Cake
@@ -1552,7 +1552,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCarrotCake
-  name: carrot cake recipe
+  name: ent-FoodCakeCarrot # SS220-localization-fix
   result: FoodCakeCarrot
   time: 5
   group: Cake
@@ -1562,7 +1562,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeLemonCake
-  name: lemon cake recipe
+  name: ent-FoodCakeLemon # SS220-localization-fix
   result: FoodCakeLemon
   time: 5
   group: Cake
@@ -1572,7 +1572,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeLemoonCake
-  name: lemoon cake recipe
+  name: ent-FoodCakeLemoon # SS220-localization-fix
   result: FoodCakeLemoon
   time: 5
   group: Cake
@@ -1583,7 +1583,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeOrangeCake
-  name: orange cake recipe
+  name: ent-FoodCakeOrange # SS220-localization-fix
   result: FoodCakeOrange
   time: 5
   group: Cake
@@ -1593,7 +1593,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBlueberryCake
-  name: blueberry cake recipe
+  name: ent-FoodCakeBlueberry # SS220-localization-fix
   result: FoodCakeBlueberry
   time: 5
   group: Cake
@@ -1603,7 +1603,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeLimeCake
-  name: lime cake recipe
+  name: ent-FoodCakeLime # SS220-localization-fix
   result: FoodCakeLime
   time: 5
   group: Cake
@@ -1613,7 +1613,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCheeseCake
-  name: cheese cake recipe
+  name: ent-FoodCakeCheese # SS220-localization-fix
   result: FoodCakeCheese
   time: 5
   group: Cake
@@ -1625,7 +1625,7 @@
 
 - type: microwaveMealRecipe
   id: RecipePumpkinCake
-  name: pumpkin cake recipe
+  name: ent-FoodCakePumpkin # SS220-localization-fix
   result: FoodCakePumpkin
   time: 5
   group: Cake
@@ -1635,7 +1635,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeClownCake
-  name: clown cake recipe
+  name: ent-FoodCakeClown # SS220-localization-fix
   result: FoodCakeClown
   time: 5
   group: Cake
@@ -1645,7 +1645,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCake
-  name: cake recipe
+  name: ent-FoodCakePlain # SS220-localization-fix
   result: FoodCakePlain
   time: 15
   group: Cake
@@ -1654,7 +1654,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBirthdayCake
-  name: birthday cake recipe
+  name: ent-FoodCakeBirthday # SS220-localization-fix
   result: FoodCakeBirthday
   time: 5
   group: Cake
@@ -1665,7 +1665,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeChocolateCake
-  name: chocolate cake recipe
+  name: ent-FoodCakeChocolate # SS220-localization-fix
   result: FoodCakeChocolate
   time: 5
   group: Cake
@@ -1675,7 +1675,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBrainCake
-  name: brain cake recipe
+  name: ent-FoodCakeBrain # SS220-localization-fix
   result: FoodCakeBrain
   time: 15
   group: Cake
@@ -1685,7 +1685,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeSlimeCake
-  name: slime cake recipe
+  name: ent-FoodCakeSlime # SS220-localization-fix
   result: FoodCakeSlime
   time: 5
   group: Cake
@@ -1696,7 +1696,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCatCake
-  name: cat cake recipe
+  name: ent-MobCatCake # SS220-localization-fix
   result: MobCatCake
   time: 15
   group: Cake
@@ -1710,7 +1710,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBerryDelight
-  name: berry delight recipe
+  name: ent-FoodCakeBerryDelight # SS220-localization-fix
   result: FoodCakeBerryDelight
   time: 5
   group: Cake
@@ -1722,7 +1722,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBreadDog
-  name: bread dog recipe
+  name: ent-MobBreadDog # SS220-localization-fix
   result: MobBreadDog
   time: 15
   group: Breads
@@ -1735,7 +1735,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeDumplings
-  name: dumplings recipe
+  name: ent-FoodBakedDumplings # SS220-localization-fix
   result: FoodBakedDumplings
   time: 15
   group: Savory
@@ -1747,7 +1747,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBrownies
-  name: brownie recipe
+  name: ent-FoodBakedBrownieBatch # SS220-localization-fix
   result: FoodBakedBrownieBatch
   time: 25
   group: BarsAndCookies
@@ -1762,7 +1762,7 @@
 #Donks i guess
 - type: microwaveMealRecipe
   id: RecipeWarmDonkpocket
-  name: warm donk pocket recipe
+  name: ent-FoodDonkpocketWarm # SS220-localization-fix
   result: FoodDonkpocketWarm
   time: 5
   group: Savory
@@ -1771,7 +1771,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeWarmDankpocket
-  name: warm dank pocket recipe
+  name: ent-FoodDonkpocketDankWarm # SS220-localization-fix
   result: FoodDonkpocketDankWarm
   time: 5
   group: Savory
@@ -1780,7 +1780,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeWarmDonkpocketSpicy
-  name: warm spicy donk-pocket recipe
+  name: ent-FoodDonkpocketSpicyWarm # SS220-localization-fix
   result: FoodDonkpocketSpicyWarm
   time: 5
   group: Savory
@@ -1789,7 +1789,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeWarmDonkpocketTeriyaki
-  name: warm teriyaki-pocket recipe
+  name: ent-FoodDonkpocketTeriyakiWarm # SS220-localization-fix
   result: FoodDonkpocketTeriyakiWarm
   time: 5
   group: Savory
@@ -1798,7 +1798,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeWarmDonkpocketPizza
-  name: warm pizza-pocket recipe
+  name: ent-FoodDonkpocketPizzaWarm # SS220-localization-fix
   result: FoodDonkpocketPizzaWarm
   time: 5
   group: Savory
@@ -1807,7 +1807,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeDonkpocketHonk
-  name: warm honk-pocket recipe
+  name: ent-FoodDonkpocketHonkWarm # SS220-localization-fix
   result: FoodDonkpocketHonkWarm
   time: 5
   group: Savory
@@ -1816,7 +1816,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeDonkpocketBerry
-  name: warm berry-pocket recipe
+  name: ent-FoodDonkpocketBerryWarm # SS220-localization-fix
   result: FoodDonkpocketBerryWarm
   time: 5
   group: Savory
@@ -1825,7 +1825,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeDonkpocketStonk
-  name: warm stonk-pocket recipe
+  name: ent-FoodDonkpocketStonkWarm # SS220-localization-fix
   result: FoodDonkpocketStonkWarm
   time: 5
   group: Savory
@@ -1834,7 +1834,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeDonkpocketCarp
-  name: warm carp-pocket recipe
+  name: ent-FoodDonkpocketCarpWarm # SS220-localization-fix
   result: FoodDonkpocketCarpWarm
   time: 5
   group: Savory
@@ -1843,7 +1843,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeDonkpocketMoth
-  name: warm moth-pocket recipe
+  name: ent-FoodDonkpocketMothWarm # SS220-localization-fix
   result: FoodDonkpocketMothWarm
   time: 5
   solids:
@@ -1851,7 +1851,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeHotChili
-  name: hot chili recipe
+  name: ent-FoodSoupChiliHot # SS220-localization-fix
   result: FoodSoupChiliHot
   time: 20
   group: Soup
@@ -1864,7 +1864,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeColdChili
-  name: cold chili recipe
+  name: ent-FoodSoupChiliCold # SS220-localization-fix
   result: FoodSoupChiliCold
   time: 5
   group: Soup
@@ -1875,7 +1875,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeClownTears
-  name: clown's tears recipe
+  name: ent-FoodSoupClown # SS220-localization-fix
   result: FoodSoupClown
   time: 15
   group: Soup
@@ -1887,7 +1887,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeChiliClown
-  name: chili con carnival recipe
+  name: ent-FoodSoupChiliClown # SS220-localization-fix
   result: FoodSoupChiliClown
   time: 30
   group: Soup
@@ -1901,7 +1901,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeQueso
-  name: queso recipe
+  name: ent-FoodMealQueso # SS220-localization-fix
   result: FoodMealQueso
   time: 15
   group: Soup
@@ -1914,7 +1914,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeRibs
-  name: BBQ ribs recipe
+  name: ent-FoodMealRibs # SS220-localization-fix
   result: FoodMealRibs
   time: 15
   group: Savory
@@ -1926,7 +1926,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeEnchiladas
-  name: enchiladas recipe
+  name: ent-FoodMealEnchiladas # SS220-localization-fix
   result: FoodMealEnchiladas
   time: 20
   group: Savory
@@ -1938,7 +1938,7 @@
 # SALADS: These should be moved out of the microwave as soon as possible
 - type: microwaveMealRecipe
   id: RecipeHerbSalad
-  name: herb salad recipe
+  name: ent-FoodSaladHerb # SS220-localization-fix
   result: FoodSaladHerb
   time: 5
   group: Salad
@@ -1949,7 +1949,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeValidSalad
-  name: valid salad recipe
+  name: ent-FoodSaladValid # SS220-localization-fix
   result: FoodSaladValid
   time: 5
   group: Salad
@@ -1961,7 +1961,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeColeslaw
-  name: coleslaw recipe
+  name: ent-FoodSaladColeslaw # SS220-localization-fix
   result: FoodSaladColeslaw
   time: 5
   group: Salad
@@ -1974,7 +1974,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCaesarSalad
-  name: caesar salad recipe
+  name: ent-FoodSaladCaesar # SS220-localization-fix
   result: FoodSaladCaesar
   time: 5
   group: Salad
@@ -1989,7 +1989,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCitrusSalad
-  name: citrus salad recipe
+  name: ent-FoodSaladCitrus # SS220-localization-fix
   result: FoodSaladCitrus
   time: 5
   group: Salad
@@ -2001,7 +2001,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeKimchiSalad
-  name: kimchi salad recipe
+  name: ent-FoodSaladKimchi # SS220-localization-fix
   result: FoodSaladKimchi
   time: 5
   group: Salad
@@ -2015,7 +2015,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeFruitSalad
-  name: fruit salad recipe
+  name: ent-FoodSaladFruit # SS220-localization-fix
   result: FoodSaladFruit
   time: 5
   group: Salad
@@ -2028,7 +2028,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeJungleSalad
-  name: jungle salad recipe
+  name: ent-FoodSaladJungle # SS220-localization-fix
   result: FoodSaladJungle
   time: 5
   group: Salad
@@ -2041,7 +2041,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeWatermelonFruitBowlSalad
-  name: watermelon fruit bowl recipe
+  name: ent-FoodSaladWatermelonFruitBowl # SS220-localization-fix
   result: FoodSaladWatermelonFruitBowl
   time: 5
   group: Salad
@@ -2057,7 +2057,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeMuffin
-  name: muffin recipe
+  name: ent-FoodBakedMuffin # SS220-localization-fix
   result: FoodBakedMuffin
   time: 15
   group: Dessert
@@ -2069,7 +2069,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeMuffinChocolate
-  name: chocolate muffin recipe
+  name: ent-FoodBakedMuffinChocolate # SS220-localization-fix
   result: FoodBakedMuffinChocolate
   time: 15
   group: Dessert
@@ -2082,7 +2082,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeMuffinBerry
-  name: berry muffin recipe
+  name: ent-FoodBakedMuffinBerry # SS220-localization-fix
   result: FoodBakedMuffinBerry
   time: 15
   group: Dessert
@@ -2095,7 +2095,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeMuffinBanana
-  name: banana muffin recipe
+  name: ent-FoodBakedMuffinBanana # SS220-localization-fix
   result: FoodBakedMuffinBanana
   time: 15
   group: Dessert
@@ -2108,7 +2108,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeMuffinCherry
-  name: cherry muffin recipe
+  name: ent-FoodBakedMuffinCherry # SS220-localization-fix
   result: FoodBakedMuffinCherry
   time: 15
   group: Dessert
@@ -2123,7 +2123,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeDriedTeaLeaves
-  name: dried tea leaves recipe
+  name: ent-LeavesTeaDried # SS220-localization-fix
   result: LeavesTeaDried
   time: 10
   solids:
@@ -2131,7 +2131,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeDriedTobacco
-  name: dried tobacco leaves recipe
+  name: ent-LeavesTobaccoDried # SS220-localization-fix
   result: LeavesTobaccoDried
   time: 10
   group: Medicinal
@@ -2140,7 +2140,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeDriedCannabis
-  name: dried cannabis leaves recipe
+  name: ent-LeavesCannabisDried # SS220-localization-fix
   result: LeavesCannabisDried
   time: 10
   group: Medicinal
@@ -2149,7 +2149,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeDriedCannabisRainbow
-  name: dried rainbow cannabis leaves recipe
+  name: ent-LeavesCannabisRainbowDried # SS220-localization-fix
   result: LeavesCannabisRainbowDried
   time: 10
   group: Medicinal
@@ -2158,7 +2158,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeTrashBakedBananaPeel
-  name: baked banana peel recipe
+  name: ent-TrashBakedBananaPeel # SS220-localization-fix
   result: TrashBakedBananaPeel
   time: 5
   solids:
@@ -2167,7 +2167,7 @@
 # Suppermatter
 - type: microwaveMealRecipe
   id: RecipeSuppermatter
-  name: suppermatter recipe
+  name: ent-FoodCakeSuppermatter # SS220-localization-fix
   result: FoodCakeSuppermatter
   time: 30
   solids:
@@ -2179,7 +2179,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeFoodBakedChevreChaud
-  name: chevre chaud recipe
+  name: ent-FoodBakedChevreChaud # SS220-localization-fix
   result: FoodBakedChevreChaud
   time: 5
   group: Savory
@@ -2189,7 +2189,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeFoodBakedChevreChaudCotton
-  name: cotton chevre chaud recipe
+  name: ent-FoodBakedChevreChaudCotton # SS220-localization-fix
   result: FoodBakedChevreChaudCotton
   time: 5
   group: Moth
@@ -2199,7 +2199,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCannabisButter
-  name: cannabis butter recipe
+  name: ent-FoodCannabisButter # SS220-localization-fix
   result: FoodCannabisButter
   time: 15
   solids:
@@ -2208,7 +2208,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCannabisBrownies
-  name: cannabis brownie recipe
+  name: ent-FoodBakedCannabisBrownieBatch # SS220-localization-fix
   result: FoodBakedCannabisBrownieBatch
   time: 25
   group: BarsAndCookies
@@ -2222,7 +2222,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCornInButter
-  name: corn in butter recipe
+  name: ent-FoodMealCornInButter # SS220-localization-fix
   result: FoodMealCornInButter
   time: 10
   group: Savory
@@ -2233,7 +2233,7 @@
 
 - type: microwaveMealRecipe
   id: RecipePeaSoup
-  name: pea soup recipe
+  name: ent-FoodSoupPea # SS220-localization-fix
   result: FoodSoupPea
   time: 10
   group: Soup
@@ -2245,7 +2245,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeTacoShell
-  name: taco shell recipe
+  name: ent-FoodTacoShell # SS220-localization-fix
   result: FoodTacoShell
   time: 5
   group: Breads
@@ -2254,7 +2254,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeTacoBeef
-  name: beef taco recipe
+  name: ent-FoodTacoBeef # SS220-localization-fix
   result: FoodTacoBeef
   time: 10
   group: Savory
@@ -2265,7 +2265,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeTacoChicken
-  name: chicken taco recipe
+  name: ent-FoodTacoChicken # SS220-localization-fix
   result: FoodTacoChicken
   time: 10
   group: Savory
@@ -2276,7 +2276,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeTacoFish
-  name: fish taco recipe
+  name: ent-FoodTacoFish # SS220-localization-fix
   result: FoodTacoFish
   time: 10
   group: Savory
@@ -2289,7 +2289,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeTacoRat
-  name: rat taco recipe
+  name: ent-FoodTacoRat # SS220-localization-fix
   result: FoodTacoRat
   time: 10
   group: Savory
@@ -2300,7 +2300,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeTacoBeefSupreme
-  name: beef taco supreme recipe
+  name: ent-FoodTacoBeefSupreme # SS220-localization-fix
   result: FoodTacoBeefSupreme
   time: 10
   group: Savory
@@ -2314,7 +2314,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeTacoChickenSupreme
-  name: beef taco supreme recipe
+  name: ent-FoodTacoChickenSupreme # SS220-localization-fix
   result: FoodTacoChickenSupreme
   time: 10
   group: Savory
@@ -2328,7 +2328,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeTacoDragon
-  name: draco recipe
+  name: ent-FoodTacoDragon # SS220-localization-fix
   result: FoodTacoDragon
   time: 10
   group: Savory
@@ -2339,7 +2339,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCroissant
-  name: croissant recipe
+  name: ent-FoodBakedCroissant # SS220-localization-fix
   result: FoodBakedCroissant
   time: 5
   group: Dessert
@@ -2348,7 +2348,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCroissantCotton
-  name: cotton croissant recipe
+  name: ent-FoodBakedCroissantCotton # SS220-localization-fix
   result: FoodBakedCroissantCotton
   time: 5
   group: Moth
@@ -2357,7 +2357,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeThrowingCroissant
-  name: throwing croissant recipe
+  name: ent-WeaponCroissant # SS220-localization-fix
   result: WeaponCroissant
   secretRecipe: true
   time: 5
@@ -2368,7 +2368,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeInertAnomalyMeat
-  name: inert meat anomaly recipe
+  name: ent-FoodMeatAnomaly # SS220-localization-fix
   result: FoodMeatAnomaly
   time: 5
   group: Savory
@@ -2377,7 +2377,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeAnomalyMeat
-  name: meat anomaly recipe
+  name: ent-FoodMeatAnomaly # SS220-localization-fix
   result: FoodMeatAnomaly
   time: 5
   group: Savory
@@ -2386,7 +2386,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeAnomalyMeatCooked
-  name: cooked meat anomaly recipe
+  name: ent-FoodMeatAnomalyCooked # SS220-localization-fix
   result: FoodMeatAnomalyCooked
   time: 5
   group: Savory
@@ -2395,7 +2395,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeGrilledCheeseSandwich
-  name: grilled cheese sandwich recipe
+  name: ent-FoodBakedGrilledCheeseSandwich # SS220-localization-fix
   result: FoodBakedGrilledCheeseSandwich
   time: 10
   group: Savory
@@ -2406,7 +2406,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeGrilledCheeseSandwichCotton
-  name: cotton grilled cheese sandwich recipe
+  name: ent-FoodBakedGrilledCheeseSandwichCotton # SS220-localization-fix
   result: FoodBakedGrilledCheeseSandwichCotton
   time: 10
   group: Moth
@@ -2417,7 +2417,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBreakfastAmerican
-  name: full american breakfast recipe
+  name: ent-FoodBreakfastAmerican # SS220-localization-fix
   result: FoodBreakfastAmerican
   time: 30
   group: Savory
@@ -2430,7 +2430,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBreakfastEnglish
-  name: full english breakfast recipe
+  name: ent-FoodBreakfastEnglish # SS220-localization-fix
   result: FoodBreakfastEnglish
   time: 30
   group: Savory
@@ -2444,7 +2444,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeMoproach # TODO: Move this to be an actual surgery instead, once surgery gets implemented.
-  name: moproach recipe
+  name: ent-MobMoproach # SS220-localization-fix
   result: MobMoproach
   time: 30
   group: Other
@@ -2457,7 +2457,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCottonCake
-  name: cotton cake recipe
+  name: ent-FoodCakeCotton # SS220-localization-fix
   result: FoodCakeCotton
   time: 5
   group: Moth

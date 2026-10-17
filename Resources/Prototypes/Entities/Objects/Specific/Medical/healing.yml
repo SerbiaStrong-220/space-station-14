@@ -435,7 +435,7 @@
   suffix: Dexalin 10u, 7
   components:
   - type: Label
-    currentLabel: dexalin 10u
+    currentLabel: label-pill-dexalin-10u # SS220-localization-fix
   - type: EntityTableContainerFill
     containers:
       storagebase:
@@ -469,7 +469,7 @@
   suffix: Dylovene 10u, 5
   components:
   - type: Label
-    currentLabel: dylovene 10u
+    currentLabel: label-pill-dylovene-10u # SS220-localization-fix
   - type: EntityTableContainerFill
     containers:
       storagebase:
@@ -503,7 +503,7 @@
   suffix: Hyronalin 10u, 5
   components:
   - type: Label
-    currentLabel: hyronalin 10u
+    currentLabel: label-pill-hyronalin-10u # SS220-localization-fix
   - type: EntityTableContainerFill
     containers:
       storagebase:
@@ -537,7 +537,7 @@
   suffix: Potassium iodide 10u, 5
   components:
   - type: Label
-    currentLabel: potassium iodide 10u
+    currentLabel: label-pill-potassium-iodide-10u # SS220-localization-fix
   - type: EntityTableContainerFill
     containers:
       storagebase:
@@ -591,7 +591,7 @@
   suffix: Iron 10u, 5
   components:
   - type: Label
-    currentLabel: iron 10u
+    currentLabel: label-pill-iron-10u # SS220-localization-fix
   - type: EntityTableContainerFill
     containers:
       storagebase:
@@ -605,7 +605,7 @@
   suffix: Copper 10u, 5
   components:
   - type: Label
-    currentLabel: copper 10u
+    currentLabel: label-pill-copper-10u # SS220-localization-fix
   - type: EntityTableContainerFill
     containers:
       storagebase:
@@ -639,7 +639,7 @@
   suffix: Kelotane 10u, 5
   components:
   - type: Label
-    currentLabel: kelotane 10u
+    currentLabel: label-pill-kelotane-10u # SS220-localization-fix
   - type: EntityTableContainerFill
     containers:
       storagebase:
@@ -673,7 +673,7 @@
   suffix: Dermaline 10u, 5
   components:
   - type: Label
-    currentLabel: dermaline 10u
+    currentLabel: label-pill-dermaline-10u # SS220-localization-fix
   - type: EntityTableContainerFill
     containers:
       storagebase:
@@ -720,7 +720,7 @@
   suffix: Tricordrazine 10u, 5
   components:
   - type: Label
-    currentLabel: tricordrazine 10u
+    currentLabel: label-pill-tricordrazine-10u # SS220-localization-fix
   - type: EntityTableContainerFill
     containers:
       storagebase:
@@ -754,7 +754,7 @@
   suffix: Bicaridine 10u, 5
   components:
   - type: Label
-    currentLabel: bicaridine 10u
+    currentLabel: label-pill-bicaridine-10u # SS220-localization-fix
   - type: EntityTableContainerFill
     containers:
       storagebase:
@@ -788,7 +788,7 @@
   suffix: Charcoal 10u, 3
   components:
   - type: Label
-    currentLabel: charcoal 10u
+    currentLabel: label-pill-charcoal-10u # SS220-localization-fix
   - type: EntityTableContainerFill
     containers:
       storagebase:
