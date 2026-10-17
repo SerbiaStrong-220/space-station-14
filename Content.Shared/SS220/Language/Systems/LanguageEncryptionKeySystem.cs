@@ -113,15 +113,24 @@ public sealed partial class LanguageEncryptionKeySystem : EntitySystem
             _language.RemoveLanguage(ent, language);
     }
 
-    private bool TryGetWearer(EntityUid headsetUid, out EntityUid? wearer)
+    private bool TryGetWearer(EntityUid holderUid, out EntityUid? wearer)
     {
         wearer = null;
 
-        if (!TryComp<HeadsetComponent>(headsetUid, out var headset) || !headset.IsEquipped)
+        if (TryComp<HeadsetComponent>(holderUid, out var headset))
+        {
+            if (!headset.IsEquipped)
+                return false;
+
+            wearer = Transform(holderUid).ParentUid;
+            return wearer.Value.IsValid();
+        }
+
+        if (!HasComp<LanguageComponent>(holderUid))
             return false;
 
-        wearer = Transform(headsetUid).ParentUid;
-        return wearer.Value.IsValid();
+        wearer = holderUid;
+        return true;
     }
 }
 
