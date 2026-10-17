@@ -51,6 +51,7 @@ namespace Content.Server.Database
                 .Include(p => p.Profiles).ThenInclude(h => h.Jobs)
                 .Include(p => p.Profiles).ThenInclude(h => h.Antags)
                 .Include(p => p.Profiles).ThenInclude(h => h.Traits)
+                .Include(p => p.Profiles).ThenInclude(h => h.TtsVoicePreferences) // SS220 Tts
                 .Include(p => p.Profiles)
                     .ThenInclude(h => h.Loadouts)
                     .ThenInclude(l => l.Groups)
@@ -112,6 +113,7 @@ namespace Content.Server.Database
                 .Include(p => p.Loadouts)
                     .ThenInclude(l => l.Groups)
                     .ThenInclude(group => group.Loadouts)
+                .Include(p => p.TtsVoicePreferences) // SS220 Tts
                 .AsSplitQuery()
                 .SingleOrDefault(h => h.Slot == slot);
 
@@ -216,7 +218,6 @@ namespace Content.Server.Database
             profile.CharacterName = humanoid.Name;
             profile.FlavorText = humanoid.FlavorText;
             profile.Species = humanoid.Species;
-            profile.Voice = humanoid.Voice; // Corvax-TTS
             profile.Age = humanoid.Age;
             profile.Sex = humanoid.Sex.ToString();
             profile.Gender = humanoid.Gender.ToString();
@@ -251,6 +252,15 @@ namespace Content.Server.Database
                 profile.SignatureData = SignatureSerializer.Serialize(humanoid.SignatureData);
             }
             // ss220 add signature end
+
+            // SS220 tts begin
+            profile.TtsVoicePreferences.Clear();
+            for (var i = 0; i < humanoid.VoicePreferences.Count; i++)
+            {
+                var pair = humanoid.VoicePreferences[i];
+                profile.TtsVoicePreferences.Add(new TtsVoicePreference { PositionIndex = i, ProviderName = pair.Key.ToString(), VoiceId = pair.Value });
+            }
+            // SS220 tts end
 
             profile.Jobs.Clear();
             profile.Jobs.AddRange(

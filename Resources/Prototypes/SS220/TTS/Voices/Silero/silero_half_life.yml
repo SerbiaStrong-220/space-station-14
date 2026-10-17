@@ -1,0 +1,113 @@
+- type: ttsVoice
+  id: Alyx
+  name: Alyx
+  speaker: alyx
+  provider: Silero
+  categories: [ HalfLife2 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Barney
+  name: Barney
+  speaker: barney
+  provider: Silero
+  categories: [ HalfLife2 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: VortE2
+  name: Vort_e2
+  speaker: vort_e2
+  provider: Silero
+  categories: [ HalfLife2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Kleiner
+  name: Kleiner
+  speaker: kleiner
+  provider: Silero
+  categories: [ HALFLIFE2 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Father
+  name: Father
+  speaker: father
+  provider: Silero
+  categories: [ HALFLIFE2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: GmanE2
+  name: Gman_e2
+  speaker: gman_e2
+  provider: Silero
+  categories: [ HALFLIFE2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Gman
+  name: Gman
+  speaker: gman
+  provider: Silero
+  categories: [ HALFLIFE2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Vort
+  name: Vort
+  speaker: vort
+  provider: Silero
+  categories: [ HALFLIFE2 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Overwatch
+  name: Overwatch
+  speaker: overwatch
+  provider: Silero
+  categories: [ HALFLIFE2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Breen
+  name: Breen
+  speaker: breen
+  provider: Silero
+  categories: [ HALFLIFE2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa

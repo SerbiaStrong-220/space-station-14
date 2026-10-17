@@ -1,0 +1,443 @@
+- type: ttsVoice
+  id: Zenyatta
+  name: Zenyatta
+  speaker: zenyatta
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Kiriko
+  name: Kiriko
+  speaker: kiriko
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Hanzo
+  name: Hanzo
+  speaker: hanzo
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Roadhog
+  name: Roadhog
+  speaker: roadhog
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Sigma
+  name: Sigma
+  speaker: sigma
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Soldier76
+  name: Soldier_76
+  speaker: soldier_76
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Junkrat
+  name: Junkrat
+  speaker: junkrat
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Tracer
+  name: Tracer
+  speaker: tracer
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Genji
+  name: Genji
+  speaker: genji
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Echo
+  name: Echo
+  speaker: echo
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Sojourn
+  name: Sojourn
+  speaker: sojourn
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Winston
+  name: Winston
+  speaker: winston
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Reaper
+  name: Reaper
+  speaker: reaper
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: TrainingRobot
+  name: Training_robot
+  speaker: training_robot
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Moira
+  name: Moira
+  speaker: moira
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Ashe
+  name: Ashe
+  speaker: ashe
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Brigitte
+  name: Brigitte
+  speaker: brigitte
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Mercy
+  name: Mercy
+  speaker: mercy
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: LucioOv
+  name: Lucio_ov
+  speaker: lucio_ov
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: DvaOv
+  name: Dva_ov
+  speaker: dva_ov
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Symmetra
+  name: Symmetra
+  speaker: symmetra
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Zarya
+  name: Zarya
+  speaker: zarya
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Cassidy
+  name: Cassidy
+  speaker: cassidy
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Baptiste
+  name: Baptiste
+  speaker: baptiste
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: JunkerQueen
+  name: Junker_queen
+  speaker: junker_queen
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Doomfist
+  name: Doomfist
+  speaker: doomfist
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Pharah
+  name: Pharah
+  speaker: pharah
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Sombra
+  name: Sombra
+  speaker: sombra
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Ana
+  name: Ana
+  speaker: ana
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Widowmaker
+  name: Widowmaker
+  speaker: widowmaker
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: WreckingBall
+  name: Wrecking_Ball
+  speaker: wrecking_ball
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Tank
+  name: Tank
+  speaker: tank
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Torbjorn
+  name: Torbjorn
+  speaker: torbjorn
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Reinhardt
+  name: Reinhardt
+  speaker: reinhardt
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Orisa
+  name: Orisa
+  speaker: orisa
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Mei
+  name: Mei
+  speaker: mei
+  provider: Silero
+  categories: [ OVERWATCH ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa

@@ -139,7 +139,7 @@
   - type: ShowJobIcons
   - type: ShowCrewIcons
   # SS220 Holopad adapt begin
-  - type: TTS
+  - type: Tts
     randomVoicesList: Borg
   # SS220 Holopad adapt end
   - type: SetRadioReceiverToStationAiEye # SS220 Silicon TTS fix

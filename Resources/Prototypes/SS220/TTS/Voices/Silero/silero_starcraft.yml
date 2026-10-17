@@ -1,0 +1,101 @@
+- type: ttsVoice
+  id: Raynor
+  name: Raynor
+  speaker: raynor
+  provider: Silero
+  categories: [ StartCraft ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Kerrigan
+  name: Kerrigan
+  speaker: kerrigan
+  provider: Silero
+  categories: [ StartCraft ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Tychus
+  name: Tychus
+  speaker: tychus
+  provider: Silero
+  categories: [ STARCRAFT ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Tosh
+  name: Tosh
+  speaker: tosh
+  provider: Silero
+  categories: [ STARCRAFT ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Stetmann
+  name: Stetmann
+  speaker: stetmann
+  provider: Silero
+  categories: [ STARCRAFT ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Hanson
+  name: Hanson
+  speaker: hanson
+  provider: Silero
+  categories: [ STARCRAFT ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Swann
+  name: Swann
+  speaker: swann
+  provider: Silero
+  categories: [ STARCRAFT ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Hill
+  name: Hill
+  speaker: hill
+  provider: Silero
+  categories: [ STARCRAFT ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Valerian
+  name: Valerian
+  speaker: valerian
+  provider: Silero
+  categories: [ STARCRAFT ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+

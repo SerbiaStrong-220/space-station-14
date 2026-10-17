@@ -258,8 +258,11 @@
     guides:
     - Cyborgs
     - Robotics
-  - type: TTS
-    randomVoicesList: Borg
+  # SS220 Tts begin
+  - type: Tts
+    randomVoicesList:
+      NTTS: Borg
+  # SS220 Tts end
   - type: ProtectedFromStepTriggers
   - type: DamageOnInteractProtection
     damageProtection:

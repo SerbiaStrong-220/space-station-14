@@ -22,6 +22,9 @@ using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 using Robust.Shared;
 using YamlDotNet.RepresentationModel;
+using Content.Shared.SS220.TTS.Prototypes;
+using Content.Shared.SS220.TTS.Systems;
+using Content.Shared.SS220.TTS.Requirements;
 
 namespace Content.Shared.Preferences
 {
@@ -33,7 +36,6 @@ namespace Content.Shared.Preferences
     public sealed partial class HumanoidCharacterProfile
     {
         public static readonly ProtoId<SpeciesPrototype> DefaultSpecies = "Human";
-        public static readonly ProtoId<TTSVoicePrototype> DefaultVoice = "father_grigori"; // SS220-add-tts
         private static readonly Regex RestrictedNameRegex = new(@"[^А-Яа-яёЁ0-9' -]"); // Corvax: Only cyrillic names
         private static readonly Regex ICNameCaseRegex = new(@"^(?<word>\w)|\b(?<word>\w)(?=\w*$)");
 
@@ -77,10 +79,10 @@ namespace Content.Shared.Preferences
         [DataField]
         public string FlavorText { get; set; } = string.Empty;
 
-        // Corvax-TTS begin
+        // SS220 TTS begin
         [DataField]
-        public string Voice { get; private set; } = DefaultVoice;
-        // Corvax-TTS end
+        public TtsVoicePreferences VoicePreferences = SharedTtsSystem.DefaultVoicePreferences.Clone();
+        // SS220 TTS end
 
         /// <summary>
         /// Associated <see cref="SpeciesPrototype"/> for this profile.
@@ -146,7 +148,6 @@ namespace Content.Shared.Preferences
             string name,
             string flavortext,
             string species,
-            string voice, // Corvax-TTS
             int age,
             Sex sex,
             Gender gender,
@@ -157,13 +158,13 @@ namespace Content.Shared.Preferences
             HashSet<ProtoId<AntagPrototype>> antagPreferences,
             HashSet<ProtoId<TraitPrototype>> traitPreferences,
             Dictionary<string, RoleLoadout> loadouts,
+            TtsVoicePreferences? voicePreferences = null, // SS220 TTS
             SignatureData? signatureData = null, // ss220 add signature
             bool lateTeleportAfkToCryoStorage = true) //SS220 Cryo-Teleport
         {
             Name = name;
             FlavorText = flavortext;
             Species = species;
-            Voice = voice; // Corvax-TTS
             Age = age;
             Sex = sex;
             Gender = gender;
@@ -176,6 +177,11 @@ namespace Content.Shared.Preferences
             TeleportAfkToCryoStorage = lateTeleportAfkToCryoStorage; // SS220 Cryo-Teleport
             SignatureData = signatureData; // ss220 add signature
             _loadouts = loadouts;
+
+            // SS220 tts begin
+            if (voicePreferences != null)
+                VoicePreferences = voicePreferences;
+            // SS220 tts end
 
             var hasHighPrority = false;
             foreach (var (key, value) in _jobPriorities)
@@ -197,7 +203,6 @@ namespace Content.Shared.Preferences
             : this(other.Name,
                 other.FlavorText,
                 other.Species,
-                other.Voice, // Corvax-TTS
                 other.Age,
                 other.Sex,
                 other.Gender,
@@ -208,6 +213,7 @@ namespace Content.Shared.Preferences
                 new HashSet<ProtoId<AntagPrototype>>(other.AntagPreferences),
                 new HashSet<ProtoId<TraitPrototype>>(other.TraitPreferences),
                 new Dictionary<string, RoleLoadout>(other.Loadouts),
+                other.VoicePreferences.Clone(), // SS220 TTS
                 other.SignatureData?.Clone(), // ss220 add signature
                 other.TeleportAfkToCryoStorage)
         {
@@ -271,13 +277,6 @@ namespace Content.Shared.Preferences
                 age = random.Next(speciesPrototype.MinAge, speciesPrototype.OldAge); // people don't look and keep making 119 year old characters with zero rp, cap it at middle aged
             }
 
-            // Corvax-TTS-Start
-            var voiceId = random.Pick(prototypeManager
-                .EnumeratePrototypes<TTSVoicePrototype>()
-                .Where(o => CanHaveVoice(o, sex)).ToArray()
-            ).ID;
-            // Corvax-TTS-End
-
             var gender = Gender.Epicene;
 
             switch (sex)
@@ -292,16 +291,49 @@ namespace Content.Shared.Preferences
 
             var name = GetName(species, gender);
 
-            return new HumanoidCharacterProfile()
+            // SS220 tts begin
+            var profile = new HumanoidCharacterProfile()
             {
                 Name = name,
                 Sex = sex,
                 Age = age,
                 Gender = gender,
                 Species = species,
-                Appearance = HumanoidCharacterAppearance.Random(species, sex),
-                Voice = voiceId // ss220 edit
+                Appearance = HumanoidCharacterAppearance.Random(species, sex)
             };
+
+            var ttsSystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<SharedTtsSystem>();
+            var voicePreferences = new TtsVoicePreferences();
+
+            var checkData = new TtsVoiceRequirementCheckData()
+            {
+                Profile = profile,
+
+                // ToDo: Add support for server side sessions
+                Session = IoCManager.Resolve<ISharedPlayerManager>().LocalSession
+            };
+
+            var providers = Enum.GetValues<TtsProvider>();
+            providers.Shuffle(random);
+
+            foreach (var provider in providers)
+            {
+                var avaliableVoices = ttsSystem.EnumerateProviderVoices(provider)
+                    .Where(x => ttsSystem.IsPassVoiceRequirements(x, checkData, out _))
+                    .ToList();
+
+                if (avaliableVoices.Count == 0)
+                    continue;
+
+                var providerVoice = random.Pick(avaliableVoices);
+                voicePreferences.Add(provider, providerVoice);
+            }
+
+            voicePreferences.SoftMergeWith(SharedTtsSystem.DefaultVoicePreferences);
+            profile = profile.WithVoicePreferences(voicePreferences);
+
+            return profile;
+            // SS220 tts end
         }
 
         public HumanoidCharacterProfile WithName(string name)
@@ -334,12 +366,12 @@ namespace Content.Shared.Preferences
             return new(this) { Species = species };
         }
 
-        // Corvax-TTS-Start
-        public HumanoidCharacterProfile WithVoice(string voice)
+        // SS220 TTS begin
+        public HumanoidCharacterProfile WithVoicePreferences(TtsVoicePreferences preferences)
         {
-            return new(this) { Voice = voice };
+            return new(this) { VoicePreferences = preferences };
         }
-        // Corvax-TTS-End
+        // SS220 TTS end
 
         public HumanoidCharacterProfile WithCharacterAppearance(HumanoidCharacterAppearance appearance)
         {
@@ -527,6 +559,8 @@ namespace Content.Shared.Preferences
             if (other.SignatureData != null && !other.SignatureData.Equals(SignatureData)) return false;
             // ss220 add signature end
 
+            if (!VoicePreferences.SequenceEqual(other.VoicePreferences)) return false; // SS220 tts
+
             if (SpawnPriority != other.SpawnPriority) return false;
             if (!_jobPriorities.SequenceEqual(other._jobPriorities)) return false;
             if (!_antagPreferences.SequenceEqual(other._antagPreferences)) return false;
@@ -705,20 +739,37 @@ namespace Content.Shared.Preferences
                 _loadouts.Remove(value);
             }
 
-            // Corvax-TTS-Start
-            prototypeManager.TryIndex<TTSVoicePrototype>(Voice, out var voice);
-            if (voice is null || !CanHaveVoice(voice, Sex))
-                Voice = DefaultVoice;
-            // Corvax-TTS-End
-        }
 
-        // Corvax-TTS-Start
-        // MUST NOT BE PUBLIC, BUT....
-        public static bool CanHaveVoice(TTSVoicePrototype voice, Sex sex)
-        {
-            return voice.RoundStart && sex == Sex.Unsexed || (voice.Sex == sex || voice.Sex == Sex.Unsexed);
+            // SS220 tts begin
+            var ttsSys = collection.Resolve<IEntitySystemManager>().GetEntitySystem<SharedTtsSystem>();
+
+            var checkData = new TtsVoiceRequirementCheckData()
+            {
+                Profile = this,
+                Session = session
+            };
+
+            var notValidKeys = new List<TtsProvider>();
+            foreach (var (provider, voiceId) in VoicePreferences)
+            {
+                var valid = prototypeManager.TryIndex(voiceId, out var voice) &&
+                    ttsSys.IsPassVoiceRequirements(voice, checkData, out _);
+
+                if (valid)
+                    continue;
+
+                notValidKeys.Add(provider);
+            }
+
+            foreach (var provider in notValidKeys)
+            {
+                if (SharedTtsSystem.DefaultVoicePreferences.TryGetValue(provider, out var defaultVoice))
+                    VoicePreferences[provider] = defaultVoice;
+                else
+                    VoicePreferences.Remove(provider);
+            }
+            // SS220 tts end
         }
-        // Corvax-TTS-End
 
         /// <summary>
         /// Takes in an IEnumerable of traits and returns a List of the valid traits.

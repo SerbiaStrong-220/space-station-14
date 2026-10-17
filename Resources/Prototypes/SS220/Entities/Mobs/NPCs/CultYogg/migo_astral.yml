@@ -55,7 +55,7 @@
   - type: Telepathy
     canSend: true
     telepathyChannelPrototype: TelepathyChannelYoggSothothCult
-  - type: TTS
+  - type: Tts
     voice: forester
   - type: Language
     availableLanguages:
