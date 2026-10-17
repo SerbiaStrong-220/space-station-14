@@ -110,7 +110,7 @@ public sealed class InteractionPopupSystem : EntitySystem
             RaiseLocalEvent(target, ref ev);
 
             if (ev.Message != null)
-                msg = Loc.GetString(ev.Message, ("target", Identity.Entity(uid, EntityManager)));
+                msg = Loc.GetString(ev.Message, ("target", Identity.Entity(uid, EntityManager))); // Success message (localized).
 
             sfx = ev.Sound;
             perceivedByOthers = ev.MessagePerceivedByOthers;
@@ -131,7 +131,7 @@ public sealed class InteractionPopupSystem : EntitySystem
             RaiseLocalEvent(target, ref ev);
 
             if (ev.Message != null)
-                msg = Loc.GetString(ev.Message, ("target", Identity.Entity(uid, EntityManager)));
+                msg = Loc.GetString(ev.Message, ("target", Identity.Entity(uid, EntityManager))); // Failure message (localized).
 
             sfx = ev.Sound;
             perceivedByOthers = ev.MessagePerceivedByOthers;
