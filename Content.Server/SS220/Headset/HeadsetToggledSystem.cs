@@ -37,6 +37,18 @@ public sealed partial class HeadsetToggledSystem : SharedHeadsetToggledSystem
 
             ent.Comp.RadioChannels.Add(channelPrototype, true);
         }
+
+        // SS220-listen-only-radio begin
+        // Listen-only channels are filterable too — the player can't speak into them,
+        // but must still be able to mute them from the headset UI.
+        foreach (var channel in holderComponent.ListenOnlyChannels)
+        {
+            if (!_proto.TryIndex<RadioChannelPrototype>(channel, out var channelPrototype))
+                continue;
+
+            ent.Comp.RadioChannels.TryAdd(channelPrototype, true);
+        }
+        // SS220-listen-only-radio end
     }
 
     private void OnChangeKey(Entity<HeadsetToggledComponent> ent, ref EncryptionChannelsChangedEvent args)
@@ -51,6 +63,16 @@ public sealed partial class HeadsetToggledSystem : SharedHeadsetToggledSystem
 
             headsetToggled.RadioChannels.TryAdd(channelPrototype, true);
         }
+
+        // SS220-listen-only-radio begin
+        foreach (var channel in args.Component.ListenOnlyChannels)
+        {
+            if (!_proto.TryIndex<RadioChannelPrototype>(channel, out var channelPrototype))
+                continue;
+
+            headsetToggled.RadioChannels.TryAdd(channelPrototype, true);
+        }
+        // SS220-listen-only-radio end
     }
 
     private void OnSendRadio(Entity<HeadsetToggledComponent> ent, ref RadioReceiveAttemptEvent args)

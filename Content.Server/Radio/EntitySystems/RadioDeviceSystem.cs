@@ -61,6 +61,7 @@ public sealed class RadioDeviceSystem : SharedRadioDeviceSystem
         SubscribeLocalEvent<HandheldRadioComponent, ToggleHandheldRadioSpeakerMessage>(OnToggleHandheldRadioSpeaker);
         SubscribeLocalEvent<HandheldRadioComponent, SelectHandheldRadioChannelMessage>(OnSelectHandheldRadioChannel);
         // SS220 HandheldRadio end
+
     }
 
     public override void Update(float frameTime)
@@ -82,9 +83,19 @@ public sealed class RadioDeviceSystem : SharedRadioDeviceSystem
     private void OnSpeakerInit(EntityUid uid, RadioSpeakerComponent component, ComponentInit args)
     {
         if (component.Enabled)
-            EnsureComp<ActiveRadioComponent>(uid).Channels.UnionWith(component.Channels);
+        {
+            var activeRadio = EnsureComp<ActiveRadioComponent>(uid);
+            activeRadio.Channels.UnionWith(component.Channels);
+
+            // SS220-listen-only-radio begin
+            if (TryComp<EncryptionKeyHolderComponent>(uid, out var keyHolder))
+                activeRadio.ListenOnlyChannels.UnionWith(keyHolder.ListenOnlyChannels);
+            // SS220-listen-only-radio end
+        }
         else
+        {
             RemCompDeferred<ActiveRadioComponent>(uid);
+        }
     }
     #endregion
 
