@@ -7,6 +7,8 @@
     - id: SheetSteel10
     - id: SheetGlass10
     - id: CableApcStack10
+    - !type:NestedSelector
+      tableId: PackageDeliveryBasicTools
     - id: WelderIndustrial
       weight: 0.3
 
@@ -17,6 +19,8 @@
     - id: FireExtinguisherMini
     - id: GasAnalyzer
     - id: GeigerCounter
+    - !type:NestedSelector
+      tableId: PackageDeliveryBasicTools
     - id: HolofanProjector
       weight: 0.3
 
@@ -27,6 +31,8 @@
     - id: SheetPlastic10
     - id: MicroManipulatorStockPart
     - id: PowerCellMedium
+    - id: AnomalyLocator
+    - id: Multitool
     - id: AnomalyScanner
       weight: 0.3
 
@@ -34,15 +40,11 @@
   id: PackageDeliveryCargo
   table: !type:GroupSelector
     children:
-    - !type:AllSelector
-      children:
-      - id: PaperNtFormCargo
-        amount: !type:ConstantNumberSelector
-          value: 3
-      - id: Pen
-    - id: BoxFolderCargo
+    - id: MaterialCardboard10
+    - id: PowerCellMedium
     - id: SpaceCash100
     - id: HandLabeler
+    - id: HandHeldMassScanner
       weight: 0.3
 
 - type: entityTable
@@ -75,6 +77,9 @@
         value: 4
     - id: EmergencyMedipen
       weight: 0.3
+    - !type:NestedSelector
+      tableId: PackageDeliveryMedicalPills
+      weight: 0.15
 
 - type: entityTable
   id: PackageDeliveryParamedic
@@ -134,6 +139,10 @@
     - !type:NestedSelector
       tableId: PackageDeliverySecurityMedipen
       weight: 0.3
+    - id: MagazinePistol
+      weight: 0.15
+    - id: Flash
+      weight: 0.15
 
 - type: entityTable
   id: PackageDeliveryDetective
@@ -151,6 +160,10 @@
       children:
       - id: TapeRecorder
       - id: CassetteTape
+    - id: SpeedLoaderMagnum
+      weight: 0.15
+    - id: Flash
+      weight: 0.15
 
 - type: entityTable
   id: PackageDeliverySecurityPilot
@@ -165,13 +178,18 @@
       tableId: PackageDeliveryPilotSupplies
     - id: HandHeldMassScanner
       weight: 0.3
+    - id: MagazinePistol
+      weight: 0.15
+    - id: Flash
+      weight: 0.15
 
 - type: entityTable
   id: PackageDeliveryBartender
   table: !type:GroupSelector
     children:
-    - id: DrinkGrenadineBottleFull
-    - id: DrinkBlueCuracaoBottleFull
+    - !type:NestedSelector
+      tableId: PackageDeliveryBartenderBottles
+      weight: 2
     - id: BookBartendersManual
     - id: DrinkChampagneBottleFull
       weight: 0.3
@@ -186,6 +204,9 @@
     - id: FoodButter
     - id: FoodCheese
       weight: 0.3
+    - !type:NestedSelector
+      tableId: PackageDeliveryChefRareIngredients
+      weight: 0.5
 
 - type: entityTable
   id: PackageDeliveryBotany
@@ -333,3 +354,93 @@
     - id: BoxFolderBlackThreePapers
     - id: LuxuryPen
       weight: 0.3
+
+- type: entityTable
+  id: PackageDeliveryBasicTools
+  table: !type:GroupSelector
+    children:
+    - id: Crowbar
+    - id: Wrench
+    - id: Screwdriver
+    - id: Wirecutter
+    - id: Welder
+    - id: Multitool
+
+- type: entityTable
+  id: PackageDeliveryMedicalPills
+  table: !type:GroupSelector
+    children:
+    - id: PillCanisterBicaridine
+    - id: PillCanisterKelotane
+    - id: PillCanisterDylovene
+    - id: PillCanisterDexalin
+    - id: PillCanisterHyronalin
+    - id: PillCanisterTricordrazine
+
+# Champagne stays in the outer bartender table as a rare reward.
+- type: entityTable
+  id: PackageDeliveryBartenderBottles
+  table: !type:GroupSelector
+    children:
+    - id: DrinkCampariBottleFull
+    - id: DrinkAbsintheBottleFull
+    - id: DrinkAleBottleFull
+    - id: DrinkBeerBottleFull
+    - id: DrinkBlueCuracaoBottleFull
+    - id: DrinkCognacBottleFull
+    - id: DrinkColaBottleFull
+    - id: DrinkGinBottleFull
+    - id: DrinkGildlagerBottleFull
+    - id: DrinkGrenadineBottleFull
+    - id: DrinkCoffeeLiqueurBottleFull
+    - id: DrinkMelonLiquorBottleFull
+    - id: DrinkPatronBottleFull
+    - id: DrinkRumBottleFull
+    - id: DrinkSakeBottleFull
+    - id: DrinkSpaceMountainWindBottleFull
+    - id: DrinkSpaceUpBottleFull
+    - id: DrinkSodaWaterBottleFull
+    - id: DrinkTonicWaterBottleFull
+    - id: DrinkTequilaBottleFull
+    - id: DrinkVermouthBottleFull
+    - id: DrinkVodkaBottleFull
+    - id: DrinkWhiskeyBottleFull
+    - id: DrinkWineBottleFull
+
+- type: entityTable
+  id: PackageDeliveryChefRareIngredients
+  table: !type:GroupSelector
+    children:
+    - id: FoodMeatBear
+    - id: FoodMeatCrab
+      amount: !type:ConstantNumberSelector
+        value: 2
+    - id: FoodMeatDuck
+    - id: FoodMeatPenguin
+    - id: FoodMeatRabbit
+    - id: FoodMeatGoliath
+    - id: FoodMeatSpider
+      amount: !type:ConstantNumberSelector
+        value: 2
+    - id: FoodMeatSnail
+    - id: FoodMeatSnake
+    - id: FoodMeatXeno
+    - id: FoodChevre
+    - id: FoodGoldenApple
+    - id: FoodBloodTomato
+      amount: !type:ConstantNumberSelector
+        value: 2
+    - id: FoodChillyPepper
+      amount: !type:ConstantNumberSelector
+        value: 3
+    - id: FoodSpacemansTrumpet
+      amount: !type:ConstantNumberSelector
+        value: 4
+    - id: FoodHolymelon
+    - id: FoodBungo
+      amount: !type:ConstantNumberSelector
+        value: 2
+    - id: FoodMeatAnomaly
+      weight: 0.5
+    - id: FoodMeatDragon
+      weight: 0.25

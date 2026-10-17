@@ -58,6 +58,7 @@
   id: PackageDelivery
   name: package
   components:
+  - type: AntiRottingContainer # SS220: preserve ingredients until the package is opened.
   - type: Sprite
     sprite: SS220/Objects/Specific/Cargo/mail_large.rsi #SS220 package-resprite
     layers:
