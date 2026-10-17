@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.FixedPoint;
+using Content.Shared.SS220.Experience.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
@@ -19,10 +20,10 @@ public sealed class OpenExperienceEditorRequest(NetEntity? target = null) : Enti
 /// Network event, send from client to server. After checking that sender is admin the changes to experience will be applied
 /// </summary>
 [Serializable, NetSerializable]
-public sealed class ChangeEntityExperienceAdminRequest(NetEntity target, ExperienceData data) : EntityEventArgs
+public sealed class ChangeEntityExperienceAdminRequest(NetEntity target, ExperienceData? data) : EntityEventArgs
 {
     public NetEntity Target = target;
-    public ExperienceData Data = data;
+    public ExperienceData? Data = data;
 }
 
 /// <summary>

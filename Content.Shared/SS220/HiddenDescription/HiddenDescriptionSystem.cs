@@ -1,8 +1,7 @@
 // Original code by Corvax dev team, no specific for SS220 license
 
 using Content.Shared.Examine;
-using Content.Shared.SS220.Experience;
-using Content.Shared.SS220.Experience.Systems;
+using Content.Shared.SS220.Experience.Systems.Experience;
 
 namespace Content.Shared.SS220.HiddenDescription;
 
@@ -26,12 +25,9 @@ public abstract partial class SharedHiddenDescriptionSystem : EntitySystem
 
     public void PushExamineInformation(HiddenDescriptionComponent component, ref ExaminedEvent args)
     {
-        if (!TryComp<ExperienceComponent>(args.Examiner, out var experience))
-            return;
-
         foreach (var (knowledge, locIds) in component.Entries)
         {
-            if (!_experience.HaveKnowledge((args.Examiner, experience), knowledge))
+            if (!_experience.HaveKnowledge(args.Examiner, knowledge))
                 continue;
 
             foreach (var locId in locIds)

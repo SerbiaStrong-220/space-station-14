@@ -2,7 +2,7 @@
 
 using Content.Shared.Examine;
 using Content.Shared.SS220.Experience;
-using Content.Shared.SS220.Experience.Systems;
+using Content.Shared.SS220.Experience.Systems.Experience;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.ChameleonStamp;

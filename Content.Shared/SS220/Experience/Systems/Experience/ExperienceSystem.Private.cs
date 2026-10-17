@@ -2,11 +2,11 @@
 
 using System.Collections.Frozen;
 using System.Diagnostics.CodeAnalysis;
-using Content.Shared.FixedPoint;
+using Content.Shared.SS220.Experience.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
-namespace Content.Shared.SS220.Experience.Systems;
+namespace Content.Shared.SS220.Experience.Systems.Experience;
 
 public sealed partial class ExperienceSystem : EntitySystem
 {
@@ -41,17 +41,6 @@ public sealed partial class ExperienceSystem : EntitySystem
         }
 
         _skillSkillTrees = result.ToFrozenDictionary();
-    }
-
-    private bool ValidContainerId(string containerId, EntityUid? entity = null)
-    {
-        if (!ContainerIds.Contains(containerId))
-        {
-            Log.Error($"Tried to ensure skill of entity {ToPrettyString(entity)} but skill entity container was incorrect, provided value {containerId}");
-            return false;
-        }
-
-        return true;
     }
 
     private bool ResolveSkillTreeFromSkill(ProtoId<SkillPrototype> skillId, [NotNullWhen(true)] out SkillTreePrototype? skillTree)
@@ -97,23 +86,5 @@ public sealed partial class ExperienceSystem : EntitySystem
 
         info = skillInfo;
         return true;
-    }
-
-    private FixedPoint4 ApplyMentorEffect(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> treeId, FixedPoint4 oldValue)
-    {
-        if (!TryComp<AffectedByMentorComponent>(entity, out var affectedByMentorComponent))
-            return oldValue;
-
-        if (!affectedByMentorComponent.TeachInfo.TryGetValue(treeId, out var mentorEffectData))
-            return oldValue;
-
-        if (!TryGetSkillTreeLevel(entity, treeId, out var level))
-            return oldValue;
-
-        // care this check use that null gives false!
-        if (level >= mentorEffectData.MaxBuffSkillLevel)
-            return oldValue;
-
-        return mentorEffectData.Flat + oldValue * mentorEffectData.Multiplier;
     }
 }
