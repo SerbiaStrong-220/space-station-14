@@ -8,31 +8,47 @@ namespace Content.Shared.Weapons.Ranged.Systems;
 public abstract partial class SharedGunSystem : EntitySystem
 {
     //SS220 weapon overhaul begin
-    private void OnGunUsed(Entity<GunComponent> gun, ref GunCycleRequestEvent args)
+    private void OnGunUsed(GunCycleRequestEvent args)
     {
         if (args.Handled)
             return;
 
-        if (args.User is not { Valid: true } user)
-            return;
+        var localGun = GetEntity(args.Gun);
 
-        if (TryComp<ChamberMagazineAmmoProviderComponent>(gun, out var chamberMagComp))
+        var localUser = GetEntity(args.User);
+
+        if (TryComp<ChamberMagazineAmmoProviderComponent>(localGun, out var chamberMagComp))
         {
             args.Handled = true;
             if (chamberMagComp.CanRack)
-                UseChambered(gun, chamberMagComp, user);
+                UseChambered(localGun, chamberMagComp, localUser);
             else
-                ToggleBolt(gun, chamberMagComp, user);
+                ToggleBolt(localGun, chamberMagComp, localUser);
 
             return;
         }
 
-        if (TryComp<BallisticAmmoProviderComponent>(gun, out var ballisticComp))
+        if (TryComp<BallisticAmmoProviderComponent>(localGun, out var ballisticComp))
         {
-            ManualCycle((gun, ballisticComp), TransformSystem.GetMapCoordinates(gun), user);
+            ManualCycle((localGun, ballisticComp), TransformSystem.GetMapCoordinates(localGun), localUser);
             args.Handled = true;
 
             return;
+        }
+
+        if(TryComp<RevolverAmmoProviderComponent>(localGun, out var revolverComp))
+        {
+            if (args.Handled)
+                return;
+
+            if (!_useDelay.TryResetDelay(localGun))
+                return;
+
+            args.Handled = true;
+
+            Cycle(revolverComp);
+            UpdateAmmoCount(localGun, prediction: false);
+            Dirty(localGun, revolverComp);
         }
     }
     //SS220 weapon overhaul end

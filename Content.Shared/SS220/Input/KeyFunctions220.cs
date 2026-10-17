@@ -28,7 +28,7 @@ public static class KeyFunctions220
     public static readonly BoundKeyFunction OpenExperienceViewerMenu = "OpenExperienceViewerMenu";
     public static readonly BoundKeyFunction PinUI = "PinUI";
     public static readonly BoundKeyFunction FireShuttle = "FireShuttle";
-    public static readonly BoundKeyFunction UseGunInHand = "ActivateGunInHand";
+    public static readonly BoundKeyFunction UseGunInHand = "UseGunInHand";
     public static readonly BoundKeyFunction ToggleOffset = "ToggleOffset";
     public static readonly BoundKeyFunction ToggleActiveBlocking = "ToggleActiveBlocking";
 

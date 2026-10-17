@@ -1,4 +1,3 @@
-using System.Numerics;
 using Content.Client.Animations;
 using Content.Client.Gameplay;
 using Content.Client.Items;
@@ -8,6 +7,7 @@ using Content.Shared.Camera;
 using Content.Shared.CCVar;
 using Content.Shared.CombatMode;
 using Content.Shared.Damage;
+using Content.Shared.SS220.CCVars;
 using Content.Shared.Weapons.Hitscan.Components;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
@@ -27,6 +27,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using System.Numerics;
 using SharedGunSystem = Content.Shared.Weapons.Ranged.Systems.SharedGunSystem;
 using TimedDespawnComponent = Robust.Shared.Spawners.TimedDespawnComponent;
 
@@ -86,6 +87,9 @@ public sealed partial class GunSystem : SharedGunSystem
         set
         {
             if (_spreadOverlayIngame == value)
+                return;
+
+            if (_cfg.GetCVar(CCVars220.ControlVanillaAim))
                 return;
 
             _spreadOverlayIngame = value;

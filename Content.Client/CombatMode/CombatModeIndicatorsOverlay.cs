@@ -1,12 +1,14 @@
-using System.Numerics;
 using Content.Client.Hands.Systems;
+using Content.Shared.SS220.CCVars;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.UserInterface;
+using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
 using Robust.Shared.Utility;
+using System.Numerics;
 
 namespace Content.Client.CombatMode;
 
@@ -23,6 +25,7 @@ public sealed class CombatModeIndicatorsOverlay : Overlay
     private readonly IEyeManager _eye;
     private readonly CombatModeSystem _combat;
     private readonly HandsSystem _hands = default!;
+    private readonly IConfigurationManager _cfg = default!;
 
     private readonly Texture _gunSight;
     private readonly Texture _gunBoltSight;
@@ -35,15 +38,31 @@ public sealed class CombatModeIndicatorsOverlay : Overlay
     public float Scale = 0.6f;  // 1 is a little big
 
     public CombatModeIndicatorsOverlay(IInputManager input, IEntityManager entMan,
-            IEyeManager eye, CombatModeSystem combatSys, HandsSystem hands)
+            IEyeManager eye, CombatModeSystem combatSys, HandsSystem hands, IConfigurationManager cfg) //SS220 weapon overhaul
     {
         _inputManager = input;
         _entMan = entMan;
         _eye = eye;
         _combat = combatSys;
         _hands = hands;
+        _cfg = cfg;//SS220 weapon overhaul
 
         var spriteSys = _entMan.EntitySysManager.GetEntitySystem<SpriteSystem>();
+
+        //SS220 weapon overhaul begin
+        if (!_cfg.GetCVar(CCVars220.ControlVanillaAim))
+        {
+            _gunSight = spriteSys.Frame0(new SpriteSpecifier.Rsi(new ResPath("/Textures/SS220/Interface/Misc/crosshair_pointers.rsi"),
+            "gun_sight"));
+            _gunBoltSight = spriteSys.Frame0(new SpriteSpecifier.Rsi(new ResPath("/Textures/SS220/Interface/Misc/crosshair_pointers.rsi"),
+                "gun_bolt_sight"));
+            _meleeSight = spriteSys.Frame0(new SpriteSpecifier.Rsi(new ResPath("/Textures/SS220/Interface/Misc/crosshair_pointers.rsi"),
+                 "melee_sight"));
+
+            return;
+        }
+        //SS220 weapon overhaul end
+
         _gunSight = spriteSys.Frame0(new SpriteSpecifier.Rsi(new ResPath("/Textures/Interface/Misc/crosshair_pointers.rsi"),
             "gun_sight"));
         _gunBoltSight = spriteSys.Frame0(new SpriteSpecifier.Rsi(new ResPath("/Textures/Interface/Misc/crosshair_pointers.rsi"),
