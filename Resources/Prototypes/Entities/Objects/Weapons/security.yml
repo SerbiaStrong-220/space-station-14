@@ -54,23 +54,16 @@
           variation: 0.250
     activatedDamage:
       types:
-        Blunt: 0
+        Blunt: 10 #SS220 stun overhaul
+        Shock: 8 #SS220 stun overhaul
 #SS220-Stunbatom-rework end
   - type: MeleeWeapon
     wideAnimationRotation: -135
     damage:
       types:
-        Blunt: 7
-    bluntStaminaDamageFactor: 2.0
+        Blunt: 10 #SS220 stun overhaul
     angle: 60
     animation: WeaponArcThrust
-  - type: StaminaDamageOnHit
-    damage: 55 #SS220-Stunbatom-rework
-    sound: /Audio/Weapons/egloves.ogg
-  - type: StaminaDamageOnCollide
-    damage: 55 #SS220-Stunbatom-rework
-    sound: /Audio/Weapons/egloves.ogg
-    # SS220-Stunbaton-rework throwing angles
   - type: Ensnaring # SS220 stunbaton pacifism fix
   - type: ThrowingAngle
     angle: 225

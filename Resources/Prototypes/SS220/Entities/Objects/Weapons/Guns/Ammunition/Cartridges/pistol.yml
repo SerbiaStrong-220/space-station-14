@@ -16,3 +16,35 @@
   - type: Appearance
   - type: SpentAmmoVisuals
 
+- type: entity
+  id: CartridgePistolHP
+  name: cartridge (9x20 auto HPIB)
+  description: Arguably the most popular caliber on the market, used by all manner of pistols and submachine guns. HPIB ammo is very effective against unarmored targets.
+  parent: BaseCartridgePistol
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPistolHP
+  -  type: Sprite
+     layers:
+       - state: base
+         map: [ "enum.AmmoVisualLayers.Base" ]
+       - state: tip
+         map: [ "enum.AmmoVisualLayers.Tip" ]
+         color: "#cf0404"
+
+- type: entity
+  id: CartridgePistolAP
+  name: cartridge (9x20 auto AP)
+  description: Arguably the most popular caliber on the market, used by all manner of pistols and submachine guns. AP ammo is more effective against armor.
+  parent: BaseCartridgePistol
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPistolAP
+  -  type: Sprite
+     layers:
+       - state: base
+         map: [ "enum.AmmoVisualLayers.Base" ]
+       - state: tip
+         map: [ "enum.AmmoVisualLayers.Tip" ]
+         color: "#65fe08"
+

@@ -135,6 +135,8 @@ namespace Content.Shared.Damage
             DamageSpecifier newDamage = new();
             newDamage.DamageDict.EnsureCapacity(damageSpec.DamageDict.Count);
 
+            var minCoefficient = 1f;//SS220 armor piercing added
+
             foreach (var (key, value) in damageSpec.DamageDict)
             {
                 if (value == 0)
@@ -158,6 +160,7 @@ namespace Content.Shared.Damage
                     var upperCap = Math.Max(1f, coefficient);
 
                     newValue *= Math.Clamp(coefficient + damageSpec.ArmourPiercing.Float() / 100f, lowerCap, upperCap);
+                    minCoefficient = Math.Min(minCoefficient, coefficient);
                 }
                 //SS220 armor piercing added end
 

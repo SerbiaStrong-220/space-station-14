@@ -447,7 +447,6 @@
     - SecurityExplosives
     - SecurityAmmo
     - SecurityWeapons
-    - SecurityDisablers
     - SecurityBoardsTurrets #SS220 add turrets craft
   - type: EmagLatheRecipes
     emagStaticPacks:

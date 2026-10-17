@@ -115,8 +115,7 @@ public sealed partial class IntegratedClothingSystem : EntitySystem
 
         if (_inventorySystem.TryGetSlotEntity(user, ent.Comp.Slot, out var existing))
         {
-            _popupSystem.PopupClient(Loc.GetString(MustRemoveClothingFirst, ("entity", user)),
-                user, user);
+            _popupSystem.PopupClient(Loc.GetString(MustRemoveClothingFirst, ("entity", user)), user, user);
             return;
         }
 

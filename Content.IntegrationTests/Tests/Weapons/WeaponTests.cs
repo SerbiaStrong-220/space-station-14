@@ -1,4 +1,4 @@
-﻿using Content.IntegrationTests.Tests.Interaction;
+using Content.IntegrationTests.Tests.Interaction;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
@@ -13,7 +13,7 @@ public sealed class WeaponTests : InteractionTest
 {
     protected override string PlayerPrototype => "MobHuman"; // The default test mob only has one hand
     private static readonly EntProtoId MobHuman = "MobHuman";
-    private static readonly EntProtoId SniperMosin = "WeaponSniperMosin";
+    private static readonly EntProtoId SniperMosin = "WeaponSniperMosinTest"; // SS220 weapon overahul
 
     [Test]
     public async Task GunRequiresWieldTest()

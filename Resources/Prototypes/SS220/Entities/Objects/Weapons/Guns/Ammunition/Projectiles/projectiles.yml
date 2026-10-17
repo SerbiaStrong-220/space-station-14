@@ -1,0 +1,47 @@
+- type: entity
+  id: BaseBulletHP
+  name: base bullet hollow point
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+    - state: bullet
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 20
+
+- type: entity
+  id: BaseBulletExplosive
+  name: base bullet explosive
+  parent: BaseBulletTrigger
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+      - state: bullet
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 100
+    intensitySlope: 200
+    totalIntensity: 100
+    maxTileBreak: 1
+
+- type: entity
+  id: TaserDart
+  name: taser dart
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+    - state: bullet
+  - type: Projectile
+    damage:
+      types:
+        Shock: 10
