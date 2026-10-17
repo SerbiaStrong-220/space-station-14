@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Server.DeviceNetwork;
 using Content.Server.DeviceNetwork.Systems;
+using Content.Server.SS220.Medical;
 using Content.Shared.PowerCell;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Events;
@@ -15,6 +16,7 @@ public sealed class CrewMonitoringConsoleSystem : EntitySystem
 {
     [Dependency] private readonly PowerCellSystem _cell = default!;
     [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
+    [Dependency] private BlueShieldMonitorSystem _blueShieldMonitor = default!; //SS220-suit-sensor-job-filter
 
     public override void Initialize()
     {
@@ -42,6 +44,8 @@ public sealed class CrewMonitoringConsoleSystem : EntitySystem
 
         if (!payload.TryGetValue(SuitSensorConstants.NET_STATUS_COLLECTION, out Dictionary<string, SuitSensorStatus>? sensorStatus))
             return;
+
+        sensorStatus = _blueShieldMonitor.ProcessSensorStatus(uid, sensorStatus); //SS220-suit-sensor-job-filter
 
         component.ConnectedSensors = sensorStatus;
         UpdateUserInterface(uid, component);

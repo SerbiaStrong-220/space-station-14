@@ -21,6 +21,7 @@
         - id: JetpackMiniBlueFilled
         - id: PinpointerCrew
         - id: BoxStationDeathRattleImplanter
+        - id: HandheldBlueShieldMonitor
 
 - type: entity
   parent: GunSafe
