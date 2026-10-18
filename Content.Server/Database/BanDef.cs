@@ -12,6 +12,9 @@ namespace Content.Server.Database
 {
     public sealed class BanDef
     {
+        // SS220 pending bans
+        public Content.Shared.Database.SS220.PendingBans.PendingBanData? Pending { get; set; }
+
         public int? Id { get; }
         public BanType Type { get; }
         public ImmutableArray<NetUserId> UserIds { get; }

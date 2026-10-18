@@ -1,6 +1,7 @@
 <DefaultWindow
     xmlns="https://spacestation14.io"
     xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+    xmlns:pending="clr-namespace:Content.Client.SS220.Administration.PendingBans"
     Title="{Loc ban-panel-title}" MinSize="410 500">
     <BoxContainer Orientation="Vertical">
         <TabContainer Name="Tabs" VerticalExpand="True">
@@ -24,6 +25,8 @@
                 <CheckBox Name="LastConnCheckbox" Margin="2" Text="{Loc ban-panel-last-conn}" Pressed="True" />
                 <CheckBox Name="EraseCheckbox" Margin="2" Text="{Loc ban-panel-erase}" Pressed="False" />
                 <CheckBox Name="PostBanInfoCheckbox" Margin="2" Text="{Loc ban-panel-post-ban-info}" Pressed="True" />
+                <!-- SS220 pending bans -->
+                <pending:PendingBanControl Name="PendingBan" Margin="2" />
                 <BoxContainer Orientation="Horizontal" Margin="2">
                     <LineEdit Name="TimeLine" MaxWidth="150" MinWidth="70" PlaceHolder="0" />
                     <OptionButton Name="MultiplierOption" />
