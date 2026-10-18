@@ -13,7 +13,7 @@ namespace Content.Server.Database
     public sealed class BanDef
     {
         // SS220 pending bans
-        public Content.Shared.Database.SS220.PendingBans.PendingBanData? Pending { get; set; }
+        public Content.Shared.Database.SS220.PendingBans.PendingBanData? Pending { get; set; } // SS220 pending bans
 
         public int? Id { get; }
         public BanType Type { get; }
