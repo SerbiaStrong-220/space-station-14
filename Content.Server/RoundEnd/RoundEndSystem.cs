@@ -144,7 +144,7 @@ namespace Content.Server.RoundEnd
 
         public bool CanCallOrRecall()
         {
-            return _cooldownTokenSource == null && !CantRecall;
+            return _cooldownTokenSource == null && !CantRecall && !_blockedCallRecall; // SS220-MIT-evac-vote
         }
 
         public bool IsRoundEndRequested()
@@ -264,7 +264,7 @@ namespace Content.Server.RoundEnd
             if (_gameTicker.RunLevel != GameRunLevel.InRound)
                 return;
 
-            if (!forceRecall && (CantRecall || _cooldownTokenSource != null))
+            if (!forceRecall && (CantRecall || _cooldownTokenSource != null || _blockedCallRecall)) // SS220-MIT-evac-vote
                 return;
 
             if (_countdownTokenSource == null)
