@@ -22,6 +22,14 @@ public sealed partial class TapeRecorderComponent : Component
     public bool RecordingOnly = false;
     // SS220 TapeRecorder & Bodycam update END
 
+    // SS220 TapeRecored & BodycamUpdate BGN
+    /// <summary>
+    /// Records into storage on this entity instead of a removable cassette, without a duration limit.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool InternalStorage;
+    // SS220 TapeRecored & BodycamUpdate END
+
     /// <summary>
     /// Paper that will spawn when printing transcript
     /// </summary>

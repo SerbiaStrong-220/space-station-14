@@ -69,7 +69,7 @@
     - state: bodycam_empty
     - state: bodycam
       map: ["tape"]
-      visible: false
+      visible: true
   - type: SurveillanceCamera
     networkSet: true
     id: "surveillance-camera-bodycam"
@@ -78,30 +78,15 @@
     delay: 1
   - type: TapeRecorder
     recordingOnly: true
+    internalStorage: true
+  - type: TapeCassette
+    repairWhitelist: {}
   - type: GenericVisualizer
     visuals:
       enum.TapeRecorderVisuals.Mode:
         tape:
           Stopped: { state: "bodycam" }
           Recording: { state: "bodycam_recording" }
-      enum.TapeRecorderVisuals.TapeInserted:
-        tape:
-          True: { visible: true }
-          False: { visible: false }
-  - type: ContainerContainer
-    containers:
-      cassette_tape: !type:ContainerSlot
-  - type: ItemSlots
-    slots:
-      cassette_tape:
-        priority: 4
-        whitelist:
-          components:
-          - FitsInTapeRecorder
-        blacklist:
-          tags:
-          - CassetteTapeLargeCapacity
-        startingItem: CassetteTape
   - type: UserInterface
     interfaces:
       enum.SurveillanceCameraSetupUiKey.Camera:

@@ -89,18 +89,25 @@ public sealed partial class TapeRecorderWindow : FancyWindow
             ? Loc.GetString("tape-recorder-menu-cassette-label", ("cassetteName", state.CassetteName))
             : Loc.GetString("tape-recorder-menu-no-cassette-label");
 
+        // SS220 TapeRecored & BodycamUpdate BGN
+        if (comp.InternalStorage)
+            CassetteLabel.Text = Loc.GetString("body-camera-internal-storage");
+        // SS220 TapeRecored & BodycamUpdate END
+
         // Select the currently used mode
         _options.SelectByValue(_mode);
 
         // When tape is ejected or a button can't be used, disable it
         // Server will change to paused once a tape is inactive
         var tapeLeft = state.CurrentTime < state.MaxTime;
-        SetEnabled(TapeRecorderMode.Recording, tapeLeft);
-        SetEnabled(TapeRecorderMode.Playing, !comp.RecordingOnly && tapeLeft); // SS220 TapeRecorder & Bodycam update
-        SetEnabled(TapeRecorderMode.Rewinding, !comp.RecordingOnly && state.CurrentTime > float.Epsilon); // SS220 TapeRecorder & Bodycam update
+        SetEnabled(TapeRecorderMode.Recording, state.CanRecord); // SS220 TapeRecored & BodycamUpdate
+        SetEnabled(TapeRecorderMode.Playing, !comp.RecordingOnly && !comp.InternalStorage && tapeLeft); // SS220 TapeRecored & BodycamUpdate
+        SetEnabled(TapeRecorderMode.Rewinding, !comp.RecordingOnly && !comp.InternalStorage && state.CurrentTime > float.Epsilon); // SS220 TapeRecored & BodycamUpdate
 
         if (state.HasCasette)
             SetSlider(state.MaxTime, state.CurrentTime);
+
+        PlaybackSlider.Visible = !comp.InternalStorage; // SS220 TapeRecored & BodycamUpdate
 
         _updating = false;
     }
