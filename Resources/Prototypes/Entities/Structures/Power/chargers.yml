@@ -175,7 +175,6 @@
           - BatteryAmmoProvider
           - Stunbaton
           - PowerCell
-          - BodyCameraPower # SS220 TapeRecorder & BodyCam update
           # SS220 Added tags for charging support begin
           tags:
           - WeaponRechargerWhitelist

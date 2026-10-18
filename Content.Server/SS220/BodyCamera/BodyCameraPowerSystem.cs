@@ -2,8 +2,7 @@
 
 using Content.Shared.Power;
 using Content.Shared.Power.Components;
-using Content.Shared.PowerCell;
-using Content.Shared.PowerCell.Components;
+using Content.Shared.Power.EntitySystems;
 using Content.Shared.SS220.BodyCamera;
 using Content.Shared.SS220.TapeRecorder;
 using Content.Shared.TapeRecorder;
@@ -19,7 +18,7 @@ public sealed partial class BodyCameraPowerSystem : EntitySystem
 {
     [Dependency] private SharedStationAiSystem _stationAi = default!;
     [Dependency] private SharedSurveillanceCameraSystem _surveillanceCamera = default!;
-    [Dependency] private PowerCellSystem _powerCell = default!;
+    [Dependency] private SharedBatterySystem _battery = default!;
     [Dependency] private SharedTapeRecorderSystem _recorder = default!;
 
     public override void Initialize()
@@ -27,10 +26,9 @@ public sealed partial class BodyCameraPowerSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<BodyCameraPowerComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<BodyCameraPowerComponent, PowerCellChangedEvent>(OnPowerCellChanged);
+        SubscribeLocalEvent<BodyCameraPowerComponent, RefreshChargeRateEvent>(OnRefreshChargeRate);
         SubscribeLocalEvent<BodyCameraPowerComponent, BatteryStateChangedEvent>(OnBatteryStateChanged);
         SubscribeLocalEvent<BodyCameraPowerComponent, BodyCameraActiveChangedEvent>(OnActiveChanged);
-        SubscribeLocalEvent<BodyCameraPowerComponent, PowerCellSlotEmptyEvent>(OnPowerCellEmpty);
         SubscribeLocalEvent<BodyCameraPowerComponent, TapeRecorderModeChangeAttemptEvent>(OnModeChangeAttempt);
         SubscribeLocalEvent<BodyCameraPowerComponent, TapeRecorderModeChangedEvent>(OnModeChanged);
     }
@@ -40,18 +38,21 @@ public sealed partial class BodyCameraPowerSystem : EntitySystem
         UpdatePowerAndVision(ent);
     }
 
-    private void OnPowerCellChanged(Entity<BodyCameraPowerComponent> ent, ref PowerCellChangedEvent args)
+    private void OnRefreshChargeRate(Entity<BodyCameraPowerComponent> ent, ref RefreshChargeRateEvent args)
     {
-        if (args.Ejected)
-            _surveillanceCamera.SetActive(ent.Owner, false);
-
-        UpdatePowerAndVision(ent);
+        if (IsDrawingPower(ent))
+            args.NewChargeRate -= ent.Comp.DrawRate;
     }
 
     private void OnBatteryStateChanged(Entity<BodyCameraPowerComponent> ent, ref BatteryStateChangedEvent args)
     {
         if (args.NewState == BatteryState.Empty)
+        {
+            if (TryComp<TapeRecorderComponent>(ent, out var recorder))
+                _recorder.SetMode((ent.Owner, recorder), TapeRecorderMode.Stopped);
+
             _surveillanceCamera.SetActive(ent.Owner, false);
+        }
 
         UpdatePowerAndVision(ent);
     }
@@ -61,18 +62,9 @@ public sealed partial class BodyCameraPowerSystem : EntitySystem
         UpdatePowerAndVision(ent);
     }
 
-    private void OnPowerCellEmpty(Entity<BodyCameraPowerComponent> ent, ref PowerCellSlotEmptyEvent args)
-    {
-        if (TryComp<TapeRecorderComponent>(ent, out var recorder))
-            _recorder.SetMode((ent.Owner, recorder), TapeRecorderMode.Stopped);
-
-        _surveillanceCamera.SetActive(ent.Owner, false);
-        UpdatePowerAndVision(ent);
-    }
-
     private void OnModeChangeAttempt(Entity<BodyCameraPowerComponent> ent, ref TapeRecorderModeChangeAttemptEvent args)
     {
-        if (!_powerCell.HasDrawCharge(ent.Owner))
+        if (_battery.GetCharge(ent.Owner) <= 0f)
             args.Cancelled = true;
     }
 
@@ -81,20 +73,22 @@ public sealed partial class BodyCameraPowerSystem : EntitySystem
         UpdatePowerAndVision(ent);
     }
 
-    private void UpdatePowerAndVision(Entity<BodyCameraPowerComponent> ent)
+    private bool IsDrawingPower(Entity<BodyCameraPowerComponent> ent)
     {
         var cameraActive = TryComp<SurveillanceCameraComponent>(ent, out var camera) && camera.Active;
         var recording = TryComp<TapeRecorderComponent>(ent, out var recorder) && recorder.Mode == TapeRecorderMode.Recording;
-        var drawEnabled = cameraActive || recording;
-        if (TryComp<PowerCellDrawComponent>(ent, out var draw) && draw.Enabled != drawEnabled)
-            _powerCell.SetDrawEnabled((ent.Owner, draw), drawEnabled);
+        return cameraActive || recording;
+    }
+
+    private void UpdatePowerAndVision(Entity<BodyCameraPowerComponent> ent)
+    {
+        _battery.RefreshChargeRate(ent.Owner);
 
         if (!TryComp<StationAiVisionComponent>(ent, out var vision))
             return;
 
-        var charge = new GetChargeEvent();
-        RaiseLocalEvent(ent.Owner, ref charge);
-        var hasCharge = charge.CurrentCharge > 0f;
+        var hasCharge = _battery.GetCharge(ent.Owner) > 0f;
+        var cameraActive = TryComp<SurveillanceCameraComponent>(ent, out var camera) && camera.Active;
         _stationAi.SetVisionEnabled((ent.Owner, vision), hasCharge && cameraActive);
     }
 }
