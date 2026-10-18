@@ -27,7 +27,8 @@ public abstract partial class SharedHandsSystem
         RaiseLocalEvent(uid, didEquip);
 
         var gotEquipped = new GotEquippedHandEvent(uid, args.Entity, hand.Value,
-                                                        args.Container.ID); // ss220-add-cult-hand-hide-items
+            args.Container.ID, // ss220-add-cult-hand-hide-items
+            _pickupsWithoutSound.Contains(args.Entity)); // SS220-drop-and-pickup-sound-suppression
         RaiseLocalEvent(args.Entity, gotEquipped);
     }
 
@@ -50,7 +51,8 @@ public abstract partial class SharedHandsSystem
         bool animateUser = false,
         bool animate = true,
         HandsComponent? handsComp = null,
-        ItemComponent? item = null)
+        ItemComponent? item = null,
+        bool suppressPickupSound = false) // SS220-drop-and-pickup-sound-suppression
     {
         if (!Resolve(uid, ref handsComp, false))
             return false;
@@ -58,7 +60,7 @@ public abstract partial class SharedHandsSystem
         if (!TryGetEmptyHand((uid, handsComp), out var hand))
             return false;
 
-        return TryPickup(uid, entity, hand, checkActionBlocker, animateUser, animate, handsComp, item);
+        return TryPickup(uid, entity, hand, checkActionBlocker, animateUser, animate, handsComp, item, suppressPickupSound); // SS220-drop-and-pickup-sound-suppression
     }
 
     /// <summary>
@@ -72,7 +74,8 @@ public abstract partial class SharedHandsSystem
         bool animateUser = false,
         bool animate = true,
         HandsComponent? handsComp = null,
-        ItemComponent? item = null)
+        ItemComponent? item = null,
+        bool suppressPickupSound = false) // SS220-drop-and-pickup-sound-suppression
     {
         if (!Resolve(uid, ref handsComp, false))
             return false;
@@ -110,7 +113,7 @@ public abstract partial class SharedHandsSystem
                 _storage.PlayPickupAnimation(entity, initialPosition, xform.Coordinates, itemXform.LocalRotation, uid);
             }
         }
-        DoPickup(uid, handId, entity, handsComp);
+        DoPickup(uid, handId, entity, handsComp, suppressPickupSound: suppressPickupSound); // SS220-drop-and-pickup-sound-suppression
 
         return true;
     }
@@ -232,11 +235,12 @@ public abstract partial class SharedHandsSystem
         bool animate = true,
         bool dropNear = false,
         HandsComponent? handsComp = null,
-        ItemComponent? item = null)
+        ItemComponent? item = null,
+        bool suppressPickupSound = false) // SS220-drop-and-pickup-sound-suppression
     {
         if (uid == null
             || !Resolve(uid.Value, ref handsComp, false)
-            || !TryPickupAnyHand(uid.Value, entity, checkActionBlocker, animateUser, animate, handsComp, item))
+            || !TryPickupAnyHand(uid.Value, entity, checkActionBlocker, animateUser, animate, handsComp, item, suppressPickupSound)) // SS220-drop-and-pickup-sound-suppression
         {
             // TODO make this check upwards for any container, and parent to that.
             // Currently this just checks the direct parent, so items can still teleport through containers.
@@ -274,7 +278,7 @@ public abstract partial class SharedHandsSystem
     /// <summary>
     ///     Puts an entity into the player's hand, assumes that the insertion is allowed. In general, you should not be calling this function directly.
     /// </summary>
-    public virtual void DoPickup(EntityUid uid, string hand, EntityUid entity, HandsComponent? hands = null, bool log = true)
+    public virtual void DoPickup(EntityUid uid, string hand, EntityUid entity, HandsComponent? hands = null, bool log = true, bool suppressPickupSound = false) // SS220-drop-and-pickup-sound-suppression
     {
         if (!Resolve(uid, ref hands))
             return;
@@ -285,7 +289,8 @@ public abstract partial class SharedHandsSystem
         if (handContainer.ContainedEntities.FirstOrNull() != null)
             return;
 
-        if (!ContainerSystem.Insert(entity, handContainer))
+        // if (!ContainerSystem.Insert(entity, handContainer)) // SS220-drop-and-pickup-sound-suppression
+        if (!InsertIntoHandWithPickupSound(entity, handContainer, suppressPickupSound)) // SS220-drop-and-pickup-sound-suppression
         {
             Log.Error($"Failed to insert {ToPrettyString(entity)} into users hand container when picking up. User: {ToPrettyString(uid)}. Hand: {hand}.");
             return;
