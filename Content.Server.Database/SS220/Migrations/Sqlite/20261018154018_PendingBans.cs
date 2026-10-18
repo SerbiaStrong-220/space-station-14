@@ -1,8 +1,8 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
-// SS220 pending bans
 
 namespace Content.Server.Database.Migrations.Sqlite
 {

@@ -16,7 +16,7 @@ namespace Content.Server.Database.Migrations.Sqlite
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "10.0.6");
+            modelBuilder.HasAnnotation("ProductVersion", "10.0.0");
 
             modelBuilder.Entity("Content.Server.Database.Admin", b =>
                 {
@@ -532,7 +532,7 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Property<Guid?>("LastEditedById")
                         .HasColumnType("TEXT")
                         .HasColumnName("last_edited_by_id");
-
+                    // SS220 pending bans begin
                     b.Property<bool>("PendingErase")
                         .HasColumnType("INTEGER")
                         .HasColumnName("pending_erase");
@@ -552,7 +552,7 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Property<DateTime?>("PendingUntil")
                         .HasColumnType("TEXT")
                         .HasColumnName("pending_until");
-
+                    // SS220 pending bans end
                     b.Property<TimeSpan>("PlaytimeAtNote")
                         .HasColumnType("TEXT")
                         .HasColumnName("playtime_at_note");
@@ -581,7 +581,7 @@ namespace Content.Server.Database.Migrations.Sqlite
 
                     b.HasIndex("LastEditedById");
 
-                    b.HasIndex("PendingServer");
+                    b.HasIndex("PendingServer"); // SS220 pending bans
                     b.ToTable("ban", null, t =>
                         {
                             t.HasCheckConstraint("NoExemptOnRoleBan", "type = 0 OR exempt_flags = 0");

@@ -535,12 +535,13 @@ public sealed partial class BanPanel : DefaultWindow
 
     private void UpdateExpiresLabel()
     {
-        // SS220 pending bans: an absolute expiry is unknown until the ban is activated.
+        // SS220 pending bans begin
         if (PendingBan.IsPending)
         {
             ExpiresLabel.Text = Loc.GetString("pending-ban-duration-hint");
             return;
         }
+        // SS220 pending bans end
 
         var minutes = (uint) (TimeEntered * Multiplier);
         ExpiresLabel.Text = minutes == 0
@@ -825,12 +826,13 @@ public sealed partial class BanPanel : DefaultWindow
             return;
         }
 
-        // SS220 pending bans
+        // SS220 pending bans begin
         if (!PendingBan.TryGetSchedule(out var pendingTrigger, out var delayMinutes))
         {
             Tabs.CurrentTab = (int)TabNumbers.BasicInfo;
             return;
         }
+        // SS220 pending bans end
 
         if (ButtonResetOn is null)
         {
@@ -883,12 +885,13 @@ public sealed partial class BanPanel : DefaultWindow
             chats, // SS220-add-chats-ban
             erase,
             postBanInfo // SS220-add-post-ban-info
-        ) // SS220 pending bans
+        )
+        // SS220 pending bans begin
         {
             PendingTrigger = pendingTrigger,
             DelayMinutes = delayMinutes,
         };
-
+        // SS220 pending bans end
         BanSubmitted?.Invoke(ban);
     }
 
