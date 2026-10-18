@@ -125,13 +125,14 @@ public sealed class PlayerPanelEui : BaseEui
                 _eui.OpenEui(ui, Player);
                 ui.SetLogFilter(search: _targetPlayer.Username);
                 break;
-            // # SS220 connections by ckeys
+            // SS220 connection logs begin
             case PlayerPanelConnectionLogsMessage:
                 if (!_admins.HasAdminFlag(Player, AdminFlags.Logs))
                     return;
 
                 _eui.OpenEui(new ConnectionLogsEui(_targetPlayer.Username), Player);
                 break;
+            // SS220 connection logs end
             case PlayerPanelDeleteMessage:
             case PlayerPanelRejuvenationMessage:
                 if (!_admins.HasAdminFlag(Player, AdminFlags.Debug) ||

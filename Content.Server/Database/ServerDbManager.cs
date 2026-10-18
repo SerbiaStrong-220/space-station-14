@@ -5,7 +5,6 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
-using Content.Server.SS220.Administration.Connections; // # SS220 connections by ckeys
 using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
 using Content.Shared.Construction.Prototypes;
@@ -27,7 +26,7 @@ using MSLogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace Content.Server.Database
 {
-    public interface IServerDbManager
+    public partial interface IServerDbManager
     {
         void Init();
 
@@ -173,14 +172,6 @@ namespace Content.Server.Database
             float trust,
             ConnectionDenyReason? denied,
             int serverId);
-
-        // # SS220 connections by ckeys
-        Task<List<ConnectionLogRecord>> GetConnectionLogsAsync(
-            string ckeyRegex,
-            DateTime? before,
-            int? beforeId,
-            int limit,
-            CancellationToken cancel = default);
 
         Task AddServerBanHitsAsync(int connection, IEnumerable<BanDef> bans);
 
@@ -366,7 +357,7 @@ namespace Content.Server.Database
         public string? Payload { get; set; }
     }
 
-    public sealed class ServerDbManager : IServerDbManager
+    public sealed partial class ServerDbManager : IServerDbManager
     {
         public static readonly Counter DbReadOpsMetric = Metrics.CreateCounter(
             "db_read_ops",
@@ -607,18 +598,6 @@ namespace Content.Server.Database
         {
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.AddConnectionLogAsync(userId, userName, address, hwId, trust, denied, serverId));
-        }
-
-        // # SS220 connections by ckeys
-        public Task<List<ConnectionLogRecord>> GetConnectionLogsAsync(
-            string ckeyRegex,
-            DateTime? before,
-            int? beforeId,
-            int limit,
-            CancellationToken cancel = default)
-        {
-            DbReadOpsMetric.Inc();
-            return RunDbCommand(() => _db.GetConnectionLogsAsync(ckeyRegex, before, beforeId, limit, cancel));
         }
 
         public Task AddServerBanHitsAsync(int connection, IEnumerable<BanDef> bans)
