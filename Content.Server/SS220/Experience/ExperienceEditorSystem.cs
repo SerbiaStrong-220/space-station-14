@@ -25,13 +25,13 @@ public sealed partial class ExperienceEditorSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeNetworkEvent<ChangeEntityExperienceAdminRequest>(OnChangeAdminRequest);
+        SubscribeNetworkEvent<ChangeEntityExperienceAdminRequestEvent>(OnChangeAdminRequest);
         SubscribeNetworkEvent<ChangeEntityExperiencePlayerRequest>(OnChangePlayerRequest);
 
         SubscribeLocalEvent<RoundEndedEvent>(OnRoundEnd);
     }
 
-    private void OnChangeAdminRequest(ChangeEntityExperienceAdminRequest ev, EntitySessionEventArgs args)
+    private void OnChangeAdminRequest(ChangeEntityExperienceAdminRequestEvent ev, EntitySessionEventArgs args)
     {
         if (!_groupController.CanCommand(args.SenderSession, EditorCommand))
             return;

@@ -57,8 +57,8 @@ public sealed partial class ExperienceSystem : EntitySystem
             args.DenyChanges = true;
             args.Info = new SkillTreeInfo()
             {
-                Level = ExperienceSystem.StartSkillLevel,
-                Sublevel = ExperienceSystem.StartSublevel,
+                Level = StartSkillLevel,
+                Sublevel = StartSublevel,
             };
         }
 
@@ -174,16 +174,13 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (entity.Comp.Forced)
             args.DenyChanges = true;
 
-        var tmp = new HashSet<ProtoId<KnowledgePrototype>>(4);
         foreach (var (source, specifier) in entity.Comp.Sources)
         {
             if (entity.Comp.Forced && !ExperienceAdditionComponent.AdminForceWhitelistSources.Contains(source))
                 continue;
 
-            tmp.UnionWith(specifier.Knowledges);
+            args.Knowledges.UnionWith(specifier.Knowledges);
         }
-
-        args.Knowledges.UnionWith(tmp);
 
         if (entity.Comp.Forced)
             return;

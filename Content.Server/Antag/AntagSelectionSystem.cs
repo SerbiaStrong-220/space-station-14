@@ -483,7 +483,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         // SS220-experience-update-begin
         if (def.StartingGear is not null && _prototype.Resolve(def.StartingGear, out var gearPrototype))
         {
-            var changeDefEv = new TryChangeExperienceDefinition(gearPrototype.ExperienceDefinition, false);
+            var changeDefEv = new TryChangeExperienceDefinitionEvent(gearPrototype.ExperienceDefinition, false);
             RaiseLocalEvent(antagEnt.Value, ref changeDefEv);
         }
         _experienceAddition.EnqueueRecalculation(antagEnt.Value);

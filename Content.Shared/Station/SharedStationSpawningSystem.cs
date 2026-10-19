@@ -116,7 +116,7 @@ public abstract class SharedStationSpawningSystem : EntitySystem
         // SS220-experience-update-begin
         if (startingGear is StartingGearPrototype startingGearProto)
         {
-            var changeDefEv = new TryChangeExperienceDefinition(startingGearProto.ExperienceDefinition, false);
+            var changeDefEv = new TryChangeExperienceDefinitionEvent(startingGearProto.ExperienceDefinition, false);
             RaiseLocalEvent(entity, ref changeDefEv);
         }
         // SS220-experience-update-end

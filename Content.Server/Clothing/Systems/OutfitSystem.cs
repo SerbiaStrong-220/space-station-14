@@ -117,7 +117,7 @@ public sealed class OutfitSystem : EntitySystem
         {
             RemComp<JobBackgroundSublevelAddComponent>(target);
 
-            var changeDefEv = new TryChangeExperienceDefinition(definitionId, true);
+            var changeDefEv = new TryChangeExperienceDefinitionEvent(definitionId, true);
             RaiseLocalEvent(target, ref changeDefEv);
         }
         // SS220-experience-update-end
@@ -130,7 +130,7 @@ public sealed class OutfitSystem : EntitySystem
                 continue;
 
             // SS220-experience-update-begin
-            var changeDefEv = new TryChangeExperienceDefinition(job.ExperienceDefinition, true);
+            var changeDefEv = new TryChangeExperienceDefinitionEvent(job.ExperienceDefinition, true);
             RaiseLocalEvent(target, ref changeDefEv);
 
             // This used to give admins better experience with clearing player choice, it can be removed or moved if needed

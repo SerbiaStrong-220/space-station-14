@@ -49,7 +49,7 @@ public sealed partial class ExperienceEditorSystem : EntitySystem
 
     public void SendChange(EntityUid target, ExperienceData? data)
     {
-        RaiseNetworkEvent(new ChangeEntityExperienceAdminRequest(GetNetEntity(target), data));
+        RaiseNetworkEvent(new ChangeEntityExperienceAdminRequestEvent(GetNetEntity(target), data));
     }
 
     private void ReloadCachedIndexedKnowledge()

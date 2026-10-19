@@ -11,9 +11,9 @@ public sealed partial class ExperienceAdditionSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<ExperienceComponent, AddExperience>(OnAddExperience);
-        SubscribeLocalEvent<ExperienceComponent, RemoveExperience>(OnRemoveExperience);
-        SubscribeLocalEvent<ExperienceComponent, TryChangeExperienceDefinition>(OnTryChangeExperienceDefinition);
+        SubscribeLocalEvent<ExperienceComponent, AddExperienceEvent>(OnAddExperience);
+        SubscribeLocalEvent<ExperienceComponent, RemoveExperienceEvent>(OnRemoveExperience);
+        SubscribeLocalEvent<ExperienceComponent, TryChangeExperienceDefinitionEvent>(OnTryChangeExperienceDefinition);
 
         SubscribeLocalEvent<ExperienceAdditionComponent, MapInitEvent>(OnExperienceAdditionMapInit);
 
@@ -88,17 +88,17 @@ public sealed partial class ExperienceAdditionSystem : EntitySystem
         EnqueueRecalculation(entity);
     }
 
-    private void OnAddExperience(Entity<ExperienceComponent> entity, ref AddExperience args)
+    private void OnAddExperience(Entity<ExperienceComponent> entity, ref AddExperienceEvent args)
     {
         UpsertSpecifier(entity, args.Source, args.Specifier);
     }
 
-    private void OnRemoveExperience(Entity<ExperienceComponent> entity, ref RemoveExperience args)
+    private void OnRemoveExperience(Entity<ExperienceComponent> entity, ref RemoveExperienceEvent args)
     {
         UpsertSpecifier(entity, args.Source, null);
     }
 
-    private void OnTryChangeExperienceDefinition(Entity<ExperienceComponent> entity, ref TryChangeExperienceDefinition args)
+    private void OnTryChangeExperienceDefinition(Entity<ExperienceComponent> entity, ref TryChangeExperienceDefinitionEvent args)
     {
         // NOTE: for now null is just dev qol
         // NOTE2: it is also used to skip changing if force=true
@@ -123,7 +123,7 @@ public sealed partial class ExperienceAdditionSystem : EntitySystem
     {
         if (TryComp<ExperienceComponent>(entity, out var experience))
         {
-            var tmpEv = new TryChangeExperienceDefinition(entity.Comp.DefinitionId, false);
+            var tmpEv = new TryChangeExperienceDefinitionEvent(entity.Comp.DefinitionId, false);
             OnTryChangeExperienceDefinition((entity.Owner, experience), ref tmpEv);
 
             foreach (var (source, specifier) in entity.Comp.Sources)
@@ -137,10 +137,10 @@ public sealed partial class ExperienceAdditionSystem : EntitySystem
 }
 
 [ByRefEvent]
-public readonly record struct AddExperience(ExperienceAddSource Source, ExperienceAddSpecifier Specifier);
+public readonly record struct AddExperienceEvent(ExperienceAddSource Source, ExperienceAddSpecifier Specifier);
 
 [ByRefEvent]
-public readonly record struct RemoveExperience(ExperienceAddSource Source);
+public readonly record struct RemoveExperienceEvent(ExperienceAddSource Source);
 
 [ByRefEvent]
-public record struct TryChangeExperienceDefinition(ProtoId<ExperienceDefinitionPrototype>? DefinitionId, bool Forced, bool Changed = false);
+public record struct TryChangeExperienceDefinitionEvent(ProtoId<ExperienceDefinitionPrototype>? DefinitionId, bool Forced, bool Changed = false);
