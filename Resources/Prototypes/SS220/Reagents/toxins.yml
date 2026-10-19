@@ -7,7 +7,7 @@
   physicalDesc: reagent-physical-desc-bubbling
   metabolisms:
     Bloodstream:
-      metabolismRate: 0.75
+      metabolismRate: 0.5
       effects:
       - !type:HealthChange
         damage:
@@ -27,8 +27,21 @@
           min: 5
         value: 50
       - !type:MovementSpeedModifier
+        conditions:
+        - !type:ReagentCondition
+          reagent: Anaphyl
+          min: 3.5
         walkSpeedModifier: 1.7
         sprintSpeedModifier: 1.7
+      - !type:PopupMessage
+        conditions:
+        - !type:ReagentCondition
+          reagent: Anaphyl
+          min: 5
+        type: Local
+        visualType: LargeCaution
+        messages: [ "anaphyl-effect-asphyxiation" ]
+	probability: 0.5
       - !type:GenericStatusEffect
         key: Stutter
         component: StutteringAccent
