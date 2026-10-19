@@ -386,7 +386,7 @@ public sealed partial class IpcSystem : SharedIpcSystem
             || !own.TryGetComponent<PointLightComponent>(out var ownLight, _compFactory))
             return;
 
-        SetLightColor(ent.Owner, ownLight.Color);
+        _lights.SetColor(ent.Owner, ownLight.Color);
     }
 
     /// <summary>
@@ -399,15 +399,6 @@ public sealed partial class IpcSystem : SharedIpcSystem
             || !injected.TryGetComponent<PointLightComponent>(out var anomalyLight, _compFactory))
             return;
 
-        SetLightColor(ent.Owner, anomalyLight.Color);
-    }
-
-    /// <summary>
-    /// Set color of the light on entity.
-    /// </summary>
-    private void SetLightColor(EntityUid uid, Color color)
-    {
-        if (_lights.TryGetLight(uid, out var light))
-            _lights.SetColor(uid, color, light);
+        _lights.SetColor(ent.Owner, anomalyLight.Color);
     }
 }
