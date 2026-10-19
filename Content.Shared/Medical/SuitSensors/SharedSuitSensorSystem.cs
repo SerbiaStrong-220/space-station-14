@@ -26,7 +26,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Medical.SuitSensors;
 
-public abstract class SharedSuitSensorSystem : EntitySystem
+public abstract partial class SharedSuitSensorSystem : EntitySystem //SS220-IPC-sensors
 {
     [Dependency] private readonly SharedStationSystem _stationSystem = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
@@ -168,8 +168,6 @@ public abstract class SharedSuitSensorSystem : EntitySystem
             return;
 
         //SS220-IPC-sensors begin
-        // A worn active sensor overrides the built-in one,
-        // so show the override message instead of the built-in mode.
         if (ent.Comp.User == ent.Owner && IsSuppressedByWornSensor(ent.Owner))
         {
             args.PushMarkup(Loc.GetString("suit-sensor-examine-builtin-suppressed"));
@@ -383,8 +381,6 @@ public abstract class SharedSuitSensorSystem : EntitySystem
             return null;
 
         //SS220-IPC-sensors begin
-        // sensor built into the body yields to active sensor in worn equipment, so a single
-        // wearer never reports twice
         if (sensor.User == ent.Owner && IsSuppressedByWornSensor(sensor.User.Value))
             return null;
         //SS220-IPC-sensors end
@@ -460,25 +456,6 @@ public abstract class SharedSuitSensorSystem : EntitySystem
 
         return status;
     }
-
-    //SS220-IPC-sensors begin
-    //Checks whether the wearer has an active suit sensor.
-    private bool IsSuppressedByWornSensor(EntityUid wearer)
-    {
-        var slotEnumerator = _inventory.GetSlotEnumerator(wearer, SlotFlags.All);
-        while (slotEnumerator.NextItem(out var item, out _))
-        {
-            if (TryComp<SuitSensorComponent>(item, out var sensor)
-                && sensor.Mode != SuitSensorMode.SensorOff
-                && sensor.User == wearer)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-    //SS220-IPC-sensors end
 
     /// <summary>
     /// Create a device network package from the suit sensors status.
