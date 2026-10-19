@@ -1,21 +1,18 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Text;
+using System.Diagnostics.CodeAnalysis;
 using Robust.Shared.Utility;
 
 namespace Content.Client.SS220.Cartridges.Messenger;
 
 /// <summary>
 /// Messages carry plain-text shortcodes (":fire:"), so the line edit and logs stay readable.
+/// The shortcodes are turned into symbols of the emoji font only when a message is displayed.
 /// </summary>
 public static class MessengerEmoji
 {
     private const string EmojiFontId = "Emoji";
-
-    // symbols from this code point are not in the main font
-    private const int FirstEmojiRune = 0x2600;
-    private const int ZeroWidthJoiner = 0x200D;
-    private const int VariationSelector = 0xFE0F;
+    private const char ShortcodeMark = ':';
 
     public static readonly (string Code, string Symbol)[] All =
     {
@@ -50,80 +47,94 @@ public static class MessengerEmoji
     };
 
     /// <summary>
-    /// Replaces shortcodes and cuts the text to the given amount of symbols (not to break an emoji in half).
+    /// Cuts the text to the given amount of symbols. A shortcode counts as one symbol and is never cut in half.
+    /// The result still has shortcodes, pass it to <see cref="Format"/> to show.
     /// </summary>
     public static string Preview(string text, int maxLength)
     {
-        text = ReplaceShortcodes(text);
-
-        var cut = new StringBuilder();
         var length = 0;
+        var index = 0;
 
-        foreach (var rune in text.EnumerateRunes())
+        while (index < text.Length)
         {
             if (++length > maxLength)
-                return cut.Append('…').ToString();
+                return text[..index] + "…";
 
-            cut.Append(rune.ToString());
+            index += SymbolLength(text, index);
         }
 
         return text;
     }
 
     /// <summary>
-    /// Builds a message where shortcodes are replaced and all emoji symbols use the emoji font.
+    /// Builds a message where known shortcodes are shown with the emoji font. The rest of the text is added as is,
+    /// so the user can't inject markup.
     /// </summary>
     public static FormattedMessage Format(string text)
     {
-        text = ReplaceShortcodes(text);
-
         var message = new FormattedMessage();
-        var run = new StringBuilder();
-        var emojiRun = false;
+        var plainStart = 0;
+        var index = 0;
 
-        foreach (var rune in text.EnumerateRunes())
+        while (index < text.Length)
         {
-            var isEmoji = rune.Value >= FirstEmojiRune
-                          || rune.Value == ZeroWidthJoiner
-                          || rune.Value == VariationSelector;
-
-            if (isEmoji != emojiRun)
+            if (!TryMatchShortcode(text, index, out var code, out var symbol))
             {
-                AddRun(message, run, emojiRun);
-                emojiRun = isEmoji;
+                index++;
+                continue;
             }
 
-            run.Append(rune.ToString());
+            if (index > plainStart)
+                message.AddText(text[plainStart..index]);
+
+            AddEmoji(message, symbol);
+
+            index += code.Length;
+            plainStart = index;
         }
 
-        AddRun(message, run, emojiRun);
+        if (plainStart < text.Length)
+            message.AddText(text[plainStart..]);
 
         return message;
     }
 
-    private static string ReplaceShortcodes(string text)
+    private static void AddEmoji(FormattedMessage message, string symbols)
     {
-        foreach (var (code, symbol) in All)
-        {
-            text = text.Replace(code, symbol);
-        }
-
-        return text;
+        message.PushTag(new MarkupNode("font", new MarkupParameter(EmojiFontId), null));
+        message.AddText(symbols);
+        message.Pop();
     }
 
-    private static void AddRun(FormattedMessage message, StringBuilder run, bool emoji)
+    /// <summary>
+    /// Length of the symbol at the index in chars: a whole shortcode, a surrogate pair or one char.
+    /// </summary>
+    private static int SymbolLength(string text, int index)
     {
-        if (run.Length == 0)
-            return;
+        if (TryMatchShortcode(text, index, out var code, out _))
+            return code.Length;
 
-        if (emoji)
-            message.PushTag(new MarkupNode("font", new MarkupParameter(EmojiFontId), null));
+        return char.IsSurrogatePair(text, index) ? 2 : 1;
+    }
 
-        message.AddText(run.ToString());
+    private static bool TryMatchShortcode(string text, int index, [NotNullWhen(true)] out string? code, [NotNullWhen(true)] out string? symbol)
+    {
+        code = null;
+        symbol = null;
 
-        if (emoji)
-            message.Pop();
+        if (text[index] != ShortcodeMark)
+            return false;
 
-        run.Clear();
+        foreach (var (candidate, candidateSymbol) in All)
+        {
+            if (string.CompareOrdinal(text, index, candidate, 0, candidate.Length) != 0)
+                continue;
+
+            code = candidate;
+            symbol = candidateSymbol;
+            return true;
+        }
+
+        return false;
     }
 }

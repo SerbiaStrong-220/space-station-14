@@ -19,7 +19,7 @@ public sealed partial class MessengerServerSystem
 {
     [Dependency] private ChatSystem _chat = default!;
 
-    private const int MaxMessageLength = 500;
+    private const int MaxMessageLength = 160;
 
     /// <summary>
     /// Cuts the text of a message to the allowed length and applies the word filter.
