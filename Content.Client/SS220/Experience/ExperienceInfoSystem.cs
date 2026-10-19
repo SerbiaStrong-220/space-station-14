@@ -34,7 +34,7 @@ public sealed partial class ExperienceInfoSystem : EntitySystem
 
     public void SendChangeEntityExperiencePlayerRequest(PlayerChangeSkill changeSkill)
     {
-        var ev = new ChangeEntityExperiencePlayerRequest(changeSkill);
+        var ev = new ChangeEntityExperiencePlayerRequestEvent(changeSkill);
 
         RaiseNetworkEvent(ev);
     }

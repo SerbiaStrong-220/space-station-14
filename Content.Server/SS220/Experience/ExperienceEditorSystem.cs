@@ -26,7 +26,7 @@ public sealed partial class ExperienceEditorSystem : EntitySystem
         base.Initialize();
 
         SubscribeNetworkEvent<ChangeEntityExperienceAdminRequestEvent>(OnChangeAdminRequest);
-        SubscribeNetworkEvent<ChangeEntityExperiencePlayerRequest>(OnChangePlayerRequest);
+        SubscribeNetworkEvent<ChangeEntityExperiencePlayerRequestEvent>(OnChangePlayerRequest);
 
         SubscribeLocalEvent<RoundEndedEvent>(OnRoundEnd);
     }
@@ -59,7 +59,7 @@ public sealed partial class ExperienceEditorSystem : EntitySystem
         _experienceAddition.UpsertAdminForcedSpecifier(targetEntity, ExperienceAddSource.Admin, new ExperienceAddSpecifier(0, additionData.Knowledges, correctSkillDict));
     }
 
-    private void OnChangePlayerRequest(ChangeEntityExperiencePlayerRequest ev, EntitySessionEventArgs args)
+    private void OnChangePlayerRequest(ChangeEntityExperiencePlayerRequestEvent ev, EntitySessionEventArgs args)
     {
         if (args.SenderSession.AttachedEntity is not { } playerEntity)
             return;

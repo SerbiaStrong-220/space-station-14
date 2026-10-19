@@ -30,7 +30,7 @@ public sealed class ChangeEntityExperienceAdminRequestEvent(NetEntity target, Ex
 /// Network event, send from client to server. Represents how player spent free points. After validating free points and local entity. changes will be applied.
 /// </summary>
 [Serializable, NetSerializable]
-public sealed class ChangeEntityExperiencePlayerRequest(PlayerChangeSkill changeSkill) : EntityEventArgs
+public sealed class ChangeEntityExperiencePlayerRequestEvent(PlayerChangeSkill changeSkill) : EntityEventArgs
 {
     public PlayerChangeSkill ChangeSkill = changeSkill;
 }
