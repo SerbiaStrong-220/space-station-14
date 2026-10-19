@@ -39,9 +39,9 @@
           reagent: Anaphyl
           min: 5
         type: Local
+        probability: 0.5
         visualType: LargeCaution
         messages: [ "anaphyl-effect-asphyxiation" ]
-	probability: 0.5
       - !type:GenericStatusEffect
         key: Stutter
         component: StutteringAccent
