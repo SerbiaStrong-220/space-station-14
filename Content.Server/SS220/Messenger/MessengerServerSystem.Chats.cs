@@ -22,33 +22,37 @@ public sealed partial class MessengerServerSystem
     private const int MaxMessageLength = 160;
 
     /// <summary>
-    /// Cuts the text of a message to the allowed length and applies the word filter.
+    /// Trims the text of a message, cuts it to the allowed length and applies the word filter.
     /// </summary>
-    public string SanitizeMessage(string text)
+    private string SanitizeMessage(string text)
     {
+        text = text.Trim();
+
         return _chat.ReplaceWords(text.Length > MaxMessageLength ? text[..MaxMessageLength] : text);
     }
 
     /// <summary>
     /// Adds the message to the chat and delivers it to the members if the sender may write there.
+    /// All ways of sending come here, so the text is checked only here.
     /// </summary>
     /// <param name="requestedReplyId">Message to reply to, ignored if it is not in the same chat.</param>
     /// <param name="senderLog">Description of the sender for the admin log.</param>
     private void SendMessage(Entity<MessengerServerComponent> ent,
         ContactUid senderId,
         ChatUid chatId,
-        string messageText,
+        string? messageText,
         MessageUid? requestedReplyId,
         string senderLog)
     {
         var server = ent.Comp;
 
-        if (!server.Chats.TryGetValue(chatId, out var chat) || !CanAccessChat(server, senderId, chat.Id))
-        {
-            _adminLogger.Add(LogType.MessengerServer, LogImpact.Low,
-                $"No access: sender entity: {senderLog}, chat: {chat?.Name}, chatID: {chatId}, msg: {messageText}");
+        messageText = messageText == null ? string.Empty : SanitizeMessage(messageText);
+
+        if (string.IsNullOrWhiteSpace(messageText) || !TryPassCooldown(server.NextMessageTimes, senderId, server.MessageCooldown))
             return;
-        }
+
+        if (!server.Chats.TryGetValue(chatId, out var chat) || !CanAccessChat(server, senderId, chat.Id))
+            return;
 
         // a reply must point to a message of the same chat
         MessageUid? replyToId = null;
@@ -261,7 +265,9 @@ public sealed partial class MessengerServerSystem
         if (!TryGetIdCard(loader, out var idCardUid, out _))
             return false;
 
-        if (!TryGetContactId(ent, idCardUid.Value, out var contactId))
+        // the cartridge tries again on the next tick, so a too frequent request is delayed, not lost
+        if (!TryGetContactId(ent, idCardUid.Value, out var contactId)
+            || !TryPassCooldown(ent.Comp.NextFullStateTimes, contactId, ent.Comp.FullStateCooldown))
             return false;
 
         SyncDepartmentAccess(ent, contactId, idCardUid.Value);
@@ -293,12 +299,11 @@ public sealed partial class MessengerServerSystem
 
         foreach (var chat in GetAccessedChats(ent.Comp, contactId))
         {
-            // the sets are copied, the state must not share the server data
             uiState.Chats[chat.Id] = new MessengerChatUiState(chat.Id,
                 chat.Name,
                 chat.Kind,
-                new HashSet<ContactUid>(chat.MembersId),
-                new HashSet<MessageUid>(chat.MessagesId),
+                [.. chat.MembersId],
+                [.. chat.MessagesId],
                 chat.LastMessageId,
                 index)
             {

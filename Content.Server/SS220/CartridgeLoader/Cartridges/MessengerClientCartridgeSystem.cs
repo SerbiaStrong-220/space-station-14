@@ -153,7 +153,6 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
         if (e.IsFullState)
         {
             ent.Comp.SendState = true;
-
             return;
         }
 
@@ -176,14 +175,12 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
 
     private void OnSendMessage(Entity<MessengerClientCartridgeComponent> ent, MessengerSendMessageUiEvent e)
     {
-        if (string.IsNullOrEmpty(e.MessageText) || !TryGetServerAddress(ent.Comp, out var serverAddress))
+        if (!TryGetServerAddress(ent.Comp, out var serverAddress))
             return;
-
-        var message = _messengerServer.SanitizeMessage(e.MessageText);
 
         var payload = CreatePayload(MessengerNetworkCommand.MessageSend, e.LoaderUid);
         payload[MessengerNetworkKey.ChatId.ToString()] = e.ChatId;
-        payload[MessengerNetworkKey.MessageText.ToString()] = message;
+        payload[MessengerNetworkKey.MessageText.ToString()] = e.MessageText;
 
         if (e.ReplyToId != null)
             payload[MessengerNetworkKey.ReplyToId.ToString()] = e.ReplyToId.Value;
@@ -192,7 +189,7 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
 
         _adminLogger.Add(LogType.MessengerClientCartridge,
             LogImpact.Low,
-            $"Send: sender entity: {ToPrettyString(ent.Owner):entity}, device entity: {ToPrettyString(e.LoaderUid):entity}, chatID: {e.ChatId}, msg: {e.MessageText}, filtered: {message}");
+            $"Message send: sender entity: {ToPrettyString(ent.Owner):entity}, message: {e.MessageText}, chatID: {e.ChatId}");
     }
 
     private void OnNetworkPacket(Entity<MessengerClientCartridgeComponent> ent, ref DeviceNetworkPacketEvent args)
@@ -328,11 +325,9 @@ public sealed partial class MessengerClientCartridgeSystem : EntitySystem
         return items.Count > 0;
     }
 
-    private static bool TryGetServerAddress(MessengerClientCartridgeComponent cartridge,
-        [NotNullWhen(true)] out string? address)
+    private static bool TryGetServerAddress(MessengerClientCartridgeComponent cartridge, [NotNullWhen(true)] out string? address)
     {
         address = null;
-
         return cartridge.ActiveServer is { } server && cartridge.ServerAddresses.TryGetValue(server, out address);
     }
 }

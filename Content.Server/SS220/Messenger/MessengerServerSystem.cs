@@ -8,6 +8,7 @@ using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.GameTicking;
+using Content.Shared.SS220.Messenger;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Timing;
@@ -44,6 +45,22 @@ public sealed partial class MessengerServerSystem : EntitySystem
     private bool IsPowered(EntityUid uid)
     {
         return TryComp<ApcPowerReceiverComponent>(uid, out var power) && power.Powered;
+    }
+
+    /// <summary>
+    /// Rate limit of the requests of a contact: a client with cheats can send them every tick.
+    /// </summary>
+    /// <returns>True if the request may run now. The next one has to wait the cooldown.</returns>
+    private bool TryPassCooldown(Dictionary<ContactUid, TimeSpan> nextTimes, ContactUid contactId, TimeSpan cooldown)
+    {
+        var now = _gameTiming.CurTime;
+
+        if (nextTimes.TryGetValue(contactId, out var nextTime) && now < nextTime)
+            return false;
+
+        nextTimes[contactId] = now + cooldown;
+
+        return true;
     }
 
     private bool HasServerAccess(Entity<MessengerServerComponent> ent, EntityUid idCardUid)

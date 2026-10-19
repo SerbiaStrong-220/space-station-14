@@ -51,8 +51,13 @@ public sealed class MessengerContact
 {
     public ContactUid Id;
     public string? Name;
-    public HashSet<string> ActiveAddresses = new();
     public MessengerContactStatus Status;
+
+    /// <summary>
+    /// Net addresses of the pdas of the contact. Used only by the server, never sent to the clients.
+    /// </summary>
+    [NonSerialized]
+    public HashSet<string> ActiveAddresses = new();
 
     public MessengerContact(string name, string netAddress)
     {

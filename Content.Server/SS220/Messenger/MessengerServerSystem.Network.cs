@@ -61,7 +61,7 @@ public sealed partial class MessengerServerSystem
 
     private void OnStateUpdate(Entity<MessengerServerComponent> ent, DeviceNetworkPacketEvent args)
     {
-        if (!TryAuthByIdCard(ent, args.Data, out var contactId))
+        if (!TryAuthByIdCard(ent, args.Data, out var contactId) || !TryPassCooldown(ent.Comp.NextStateUpdateTimes, contactId, ent.Comp.StateUpdateCooldown))
             return;
 
         UpdateContactNames(ent);

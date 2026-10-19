@@ -66,9 +66,7 @@ public sealed partial class MessengerServerSystem
                 OnAiStateRequest(server, ent, contactId, e);
                 break;
             case MessengerSendMessageUiEvent e:
-                if (!string.IsNullOrEmpty(e.MessageText))
-                    SendMessage(server, contactId, e.ChatId, SanitizeMessage(e.MessageText), e.ReplyToId, $"{ToPrettyString(ent)}");
-
+                SendMessage(server, contactId, e.ChatId, e.MessageText, e.ReplyToId, $"{ToPrettyString(ent)}");
                 break;
             case MessengerMarkReadUiEvent e:
                 MarkRead(server.Comp, contactId, e.ChatId);
@@ -92,11 +90,15 @@ public sealed partial class MessengerServerSystem
     {
         if (e.IsFullState)
         {
-            if (TryBuildContactUiState(server, contactId, out var state))
+            if (TryPassCooldown(server.Comp.NextFullStateTimes, contactId, server.Comp.FullStateCooldown)
+                && TryBuildContactUiState(server, contactId, out var state))
                 SendAiState(ai, state);
 
             return;
         }
+
+        if (!TryPassCooldown(server.Comp.NextStateUpdateTimes, contactId, server.Comp.StateUpdateCooldown))
+            return;
 
         UpdateContactNames(server);
 

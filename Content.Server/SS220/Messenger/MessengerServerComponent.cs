@@ -46,6 +46,39 @@ public sealed partial class MessengerServerComponent : Component
     public readonly Dictionary<ContactUid, EntityUid> AiContacts = new();
 
     /// <summary>
+    /// Minimal time between two messages of one contact.
+    /// </summary>
+    [DataField]
+    public TimeSpan MessageCooldown = TimeSpan.FromSeconds(0.2);
+
+    /// <summary>
+    /// Minimal time between two full states built for one contact. Building it goes over all chats of the contact.
+    /// </summary>
+    [DataField]
+    public TimeSpan FullStateCooldown = TimeSpan.FromSeconds(1);
+
+    /// <summary>
+    /// Minimal time between two requests of the missing contacts, chats and messages of one contact.
+    /// </summary>
+    [DataField]
+    public TimeSpan StateUpdateCooldown = TimeSpan.FromSeconds(0.25);
+
+    /// <summary>
+    /// Contact id to the time when it may send the next message.
+    /// </summary>
+    public readonly Dictionary<ContactUid, TimeSpan> NextMessageTimes = new();
+
+    /// <summary>
+    /// Contact id to the time when the next full state may be built for it.
+    /// </summary>
+    public readonly Dictionary<ContactUid, TimeSpan> NextFullStateTimes = new();
+
+    /// <summary>
+    /// Contact id to the time when it may request the missing data again.
+    /// </summary>
+    public readonly Dictionary<ContactUid, TimeSpan> NextStateUpdateTimes = new();
+
+    /// <summary>
     /// Id that will be given to the next created contact, chat or message.
     /// </summary>
     public uint NextId;
