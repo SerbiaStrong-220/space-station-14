@@ -201,7 +201,7 @@ public sealed partial class IpcSystem : SharedIpcSystem
     /// </summary>
     private void OnRefreshMovementSpeedModifiers(Entity<IpcComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
-        if (HasNoPower(ent))
+        if (!HasEnoughPower(ent))
             args.ModifySpeed(ent.Comp.LowChargeSpeed);
     }
 
@@ -338,7 +338,7 @@ public sealed partial class IpcSystem : SharedIpcSystem
     /// </summary>
     private void OnRadioSendAttempt(Entity<IpcComponent> ent, ref RadioSendAttemptEvent args)
     {
-        if (!HasNoPower(ent))
+        if (HasEnoughPower(ent))
             return;
 
         args.Cancelled = true;
@@ -350,30 +350,20 @@ public sealed partial class IpcSystem : SharedIpcSystem
     /// </summary>
     private void OnRadioReceiveAttempt(Entity<IpcComponent> ent, ref RadioReceiveAttemptEvent args)
     {
-        if (HasNoPower(ent))
+        if (!HasEnoughPower(ent))
             args.Cancelled = true;
     }
 
     /// <summary>
-    /// Checks if the IPC is out of power,
-    /// or the battery charge is below critical threshold.
-    /// Used to gate functionality that should stop working when the IPC has no charge.
-    /// </summary>
-    private bool HasNoPower(Entity<IpcComponent> ent)
-    {
-        return !_powerCell.HasBattery(ent.Owner) || HasCriticalCharge(ent);
-    }
-
-    /// <summary>
-    /// Checks if the IPC battery has a charge below the critical threshold <see cref="IpcComponent.CritCharge"/>.
-    /// Used to gate functionality that should stop working when the battery is nearly empty
+    /// Whether the IPC has a battery with enough charge to keep its abilities working
     /// (movement speed, radio).
     /// </summary>
-    private bool HasCriticalCharge(Entity<IpcComponent> ent)
+    private bool HasEnoughPower(Entity<IpcComponent> ent)
     {
         return _powerCell.TryGetBatteryFromSlot(ent.Owner, out var battery)
-            && _battery.GetCharge(battery.Value.AsNullable()) / battery.Value.Comp.MaxCharge <= ent.Comp.CritCharge;
+            && _battery.GetCharge(battery.Value.AsNullable()) / battery.Value.Comp.MaxCharge > ent.Comp.CritCharge;
     }
+
     /// <summary>
     /// When anomaly leaves the host.
     /// Restores the flashlight color taken from the mob own prototype.
