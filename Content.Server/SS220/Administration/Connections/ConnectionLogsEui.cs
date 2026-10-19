@@ -7,6 +7,7 @@ using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Database;
 using Content.Server.EUI;
+using Content.Server.SS220.Database;
 using Content.Shared.Administration;
 using Content.Shared.Database;
 using Content.Shared.Eui;
