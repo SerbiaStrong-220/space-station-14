@@ -74,8 +74,11 @@
     followEntity: true
   - type: TypingIndicator
     proto: robot
-  - type: Tts # SS220 Tts
-    voice: adventure_core
+   # SS220 Tts begin
+  - type: Tts
+    voicePreferences:
+      NTTS: adventure_core
+  # SS220 Tts end
   - type: Speech
     speechVerb: Robotic
     speechSounds: Pai

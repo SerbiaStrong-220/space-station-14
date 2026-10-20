@@ -45,7 +45,8 @@
   - type: NameIdentifier
     group: GenericNumber
   - type: Tts
-    voice: glados
+    voicePreferences:
+      NTTS: glados
     # randomVoicesList: SuperMatterVoices uncomment when map load/save test fixed
   - type: AmbientSound
     range: 5

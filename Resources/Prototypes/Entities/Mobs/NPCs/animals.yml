@@ -2459,8 +2459,11 @@
       reagents:
       - ReagentId: Blood
         Quantity: 50
-  - type: Tts # SS220 Tts
-    voice: ziggs
+  # SS220 Tts begin
+  - type: Tts
+    voicePreferences:
+      NTTS: ziggs
+  # SS220 Tts begin
 
 - type: entity
   parent: MobParrotBase

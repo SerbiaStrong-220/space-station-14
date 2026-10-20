@@ -252,7 +252,8 @@
   - type: RadarConsole
   #SS220-AddMotherShip begin
   - type: Tts
-    voice: glados
+    randomVoicesList:
+      NTTS: Borg
   #SS220-AddMotherShip end
 
 - type: entity

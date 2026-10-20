@@ -14,12 +14,12 @@ public sealed partial class TtsVoicePrototype : IPrototype
     public string ID { get; private set; } = default!;
 
     [DataField(required: true)]
-    public LocId Name = string.Empty;
-    public string LocalizedName => Loc.GetString(Name);
+    public string Name = string.Empty;
+    public string LocalizedName => Name;
 
     [DataField]
-    public LocId Description = string.Empty;
-    public string LocalizedDescription => string.IsNullOrEmpty(Description) ? string.Empty : Loc.GetString(Description);
+    public string Description = string.Empty;
+    public string LocalizedDescription => Description;
 
     [DataField]
     public List<ProtoId<TtsVoiceCategoryPrototype>> Categories = [];

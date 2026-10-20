@@ -560,7 +560,8 @@
       Female: Mouse
       Unsexed: Mouse
   - type: Tts
-    voice: mana
+    voicePreferences:
+      NTTS: mana
   - type: GhostRole
     allowMovement: true
     allowSpeech: true
@@ -654,7 +655,8 @@
       Female: Mouse
       Unsexed: Mouse
   - type: Tts
-    voice: horner
+    voicePreferences:
+      NTTS: horner
   - type: Butcherable
     spawned:
     - id: FoodMeat

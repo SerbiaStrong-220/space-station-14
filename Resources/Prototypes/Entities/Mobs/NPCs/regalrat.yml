@@ -151,7 +151,8 @@
   - type: Sharp
   #SS220-AddTTSRatKing begin
   - type: Tts
-    voice: hagraven
+    voicePreferences:
+      NTTS: hagraven
   #SS220-AddTTSRatKing end
 
 - type: entity
