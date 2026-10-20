@@ -443,6 +443,8 @@
         damage:
           types:
             Heat: 3
+  tileReactions:
+  - !type:CleanSplattersTileReaction { } # SS220 paint-all-red
 
 - type: reagent
   id: Ice
