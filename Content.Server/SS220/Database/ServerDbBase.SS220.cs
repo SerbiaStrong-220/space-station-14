@@ -4,14 +4,15 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.SS220.Administration.Connections;
+using Content.Server.Database;
 using Microsoft.EntityFrameworkCore;
 
-namespace Content.Server.Database
+namespace Content.Server.SS220.Database
 {
-    public abstract partial class ServerDbBase
+    public static class ServerDbBaseExtensions
     {
-        #region Connection Logs
-        public async Task<List<ConnectionLogRecord>> GetConnectionLogsAsync(
+        public static async Task<List<ConnectionLogRecord>> GetConnectionLogsAsync(
+            this ServerDbBase db,
             string ckeyRegex,
             DateTime? before,
             int? beforeId,
@@ -24,72 +25,72 @@ namespace Content.Server.Database
                 RegexOptions.IgnoreCase | RegexOptions.CultureInvariant,
                 TimeSpan.FromMilliseconds(250));
 
-            await using var db = await GetDb(cancel);
-
-            var query = db.DbContext.ConnectionLog
-                .AsNoTracking()
-                .AsQueryable();
-
-            var result = new List<ConnectionLogRecord>(limit);
-            var cursorTime = before;
-            var cursorId = beforeId;
-            const int batchSize = 500;
-
-            while (result.Count < limit)
+            return await db.RunWithDbAsync(async context =>
             {
-                var batchQuery = query;
+                var query = context.ConnectionLog
+                    .AsNoTracking()
+                    .AsQueryable();
 
-                // A stable cursor avoids duplicate rows when the player reconnects between pages.
-                if (cursorTime is { } time && cursorId is { } id)
-                    batchQuery = batchQuery.Where(log => log.Time < time || log.Time == time && log.Id < id);
+                var result = new List<ConnectionLogRecord>(limit);
+                var cursorTime = before;
+                var cursorId = beforeId;
+                const int batchSize = 500;
 
-                var logs = await batchQuery
-                    .OrderByDescending(log => log.Time)
-                    .ThenByDescending(log => log.Id)
-                    .Take(batchSize)
-                    .Select(log => new
-                    {
-                        log.Id,
-                        log.UserName,
-                        log.Time,
-                        log.Address,
-                        log.Denied,
-                        ServerName = log.Server == null ? null : log.Server.Name,
-                        log.Trust,
-                    })
-                    .ToListAsync(cancel);
-
-                if (logs.Count == 0)
-                    break;
-
-                foreach (var log in logs)
+                while (result.Count < limit)
                 {
-                    if (!ckeyMatcher.IsMatch(log.UserName))
-                        continue;
+                    var batchQuery = query;
 
-                    result.Add(new ConnectionLogRecord(
-                        log.Id,
-                        log.UserName,
-                        NormalizeDatabaseTime(log.Time),
-                        log.Address.ToString(),
-                        log.Denied,
-                        log.ServerName,
-                        log.Trust));
+                    // A stable cursor avoids duplicate rows when the player reconnects between pages.
+                    if (cursorTime is { } time && cursorId is { } id)
+                        batchQuery = batchQuery.Where(log => log.Time < time || log.Time == time && log.Id < id);
 
-                    if (result.Count >= limit)
+                    var logs = await batchQuery
+                        .OrderByDescending(log => log.Time)
+                        .ThenByDescending(log => log.Id)
+                        .Take(batchSize)
+                        .Select(log => new
+                        {
+                            log.Id,
+                            log.UserName,
+                            log.Time,
+                            log.Address,
+                            log.Denied,
+                            ServerName = log.Server == null ? null : log.Server.Name,
+                            log.Trust,
+                        })
+                        .ToListAsync(cancel);
+
+                    if (logs.Count == 0)
+                        break;
+
+                    foreach (var log in logs)
+                    {
+                        if (!ckeyMatcher.IsMatch(log.UserName))
+                            continue;
+
+                        result.Add(new ConnectionLogRecord(
+                            log.Id,
+                            log.UserName,
+                            db.NormalizeDatabaseTimeForSs220(log.Time),
+                            log.Address.ToString(),
+                            log.Denied,
+                            log.ServerName,
+                            log.Trust));
+
+                        if (result.Count >= limit)
+                            break;
+                    }
+
+                    var last = logs[^1];
+                    cursorTime = last.Time;
+                    cursorId = last.Id;
+
+                    if (logs.Count < batchSize)
                         break;
                 }
 
-                var last = logs[^1];
-                cursorTime = last.Time;
-                cursorId = last.Id;
-
-                if (logs.Count < batchSize)
-                    break;
-            }
-
-            return result;
+                return result;
+            }, cancel);
         }
-        #endregion
     }
 }
