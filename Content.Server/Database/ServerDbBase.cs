@@ -8,7 +8,6 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
-using Content.Server.Administration.Managers;
 using Content.Server.SS220.Signature;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Construction.Prototypes;
@@ -16,8 +15,6 @@ using Content.Shared.Database;
 using Content.Shared.Humanoid;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
-using Content.Shared.SS220.Signature;
-using Content.Shared.Traits;
 using Microsoft.EntityFrameworkCore;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -26,7 +23,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.Database
 {
-    public abstract class ServerDbBase
+    public abstract partial class ServerDbBase // SS220 connection logs
     {
         private readonly ISawmill _opsLog;
         public event Action<DatabaseNotification>? OnNotificationReceived;
@@ -1677,6 +1674,19 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
         protected DateTime? NormalizeDatabaseTime(DateTime? time)
         {
             return time != null ? NormalizeDatabaseTime(time.Value) : time;
+        }
+
+        internal async Task<T> RunWithDbAsync<T>(
+            Func<ServerDbContext, Task<T>> operation,
+            CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            return await operation(db.DbContext);
+        }
+
+        internal DateTime NormalizeDatabaseTimeForSs220(DateTime time)
+        {
+            return NormalizeDatabaseTime(time);
         }
 
         public async Task<bool> HasPendingModelChanges()

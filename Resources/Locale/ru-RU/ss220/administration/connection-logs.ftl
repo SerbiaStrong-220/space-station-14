@@ -1,0 +1,24 @@
+﻿# SS220 connections by ckeys
+connection-logs-title = Логи подключений
+connection-logs-target = Логи подключений · regex: {$ckey}
+connection-logs-next = Более ранние подключения
+connection-logs-loading = Загрузка...
+connection-logs-empty = Попыток подключения не найдено.
+connection-logs-allowed = разрешено
+connection-logs-denied = отклонено ({$reason})
+connection-logs-unknown-server = неизвестный сервер
+connection-logs-regex-label = Regex ckey:
+connection-logs-regex-placeholder = Например: ^admin_.*$
+connection-logs-search = Найти / обновить
+connection-logs-column-time = Время (UTC+0)
+connection-logs-column-ckey = Ckey
+connection-logs-column-address = Адрес
+connection-logs-column-status = Результат
+connection-logs-column-server = Сервер
+connection-logs-column-trust = Доверие
+connection-logs-prompt = Введите regex ckey для просмотра истории подключений.
+connection-logs-invalid-ckey = Введите regex ckey (не более 128 символов).
+connection-logs-invalid-regex = Некорректное регулярное выражение.
+connection-logs-error = Не удалось загрузить логи подключений. Попробуйте ещё раз.
+cmd-connectionlogs-desc = Открывает поиск истории подключений по ckey.
+cmd-connectionlogs-help = Использование: connectionlogs
