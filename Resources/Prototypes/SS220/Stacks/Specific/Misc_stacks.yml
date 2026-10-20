@@ -1,0 +1,6 @@
+- type: stack
+  parent: BaseTinyStack
+  id: Cone
+  name: stack-cone
+  icon: { sprite: "/Textures/Clothing/Head/Misc/cone.rsi", state: icon }
+  spawn: ClothingHeadHatCone
