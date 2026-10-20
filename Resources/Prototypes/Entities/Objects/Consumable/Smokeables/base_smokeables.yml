@@ -32,6 +32,18 @@
   - type: Tag
     tags:
     - Trash
+  # SS220-SmokablePuff-begin
+  - type: SmokablePuff
+    puffCost: 4
+    moles: 12
+  - type: ActionGrant
+    actions:
+    - ActionSmokablePuff
+  - type: ItemActionGrant
+    actions:
+    - ActionSmokablePuff
+    activeIfWorn: true
+  # SS220-SmokablePuff-end
   - type: SolutionContainerManager
     solutions:
       smokable:
