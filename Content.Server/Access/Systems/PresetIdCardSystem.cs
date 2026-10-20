@@ -3,6 +3,7 @@ using Content.Server.Access.Components;
 using Content.Server.GameTicking;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
+using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Roles;
 using Content.Shared.StatusIcon;
@@ -86,6 +87,10 @@ public sealed class PresetIdCardSystem : EntitySystem
 
         if (_prototypeManager.Resolve(job.Icon, out var jobIcon))
             _cardSystem.TryChangeJobIcon(uid, jobIcon);
+        //SS220-new-feature begin
+        if (TryComp<IdCardComponent>(uid, out var presetIdCard))
+            presetIdCard.JobPrototype = job.ID;
+        //SS220-new-feature end
     }
 
     // SS220 Radio-Job-Color
