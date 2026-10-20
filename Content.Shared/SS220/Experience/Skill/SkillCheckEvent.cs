@@ -2,7 +2,7 @@
 
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.SS220.Experience.SkillChecks;
+namespace Content.Shared.SS220.Experience.Skill;
 
 /// <summary>
 /// Called on component when component effect being overridden by other

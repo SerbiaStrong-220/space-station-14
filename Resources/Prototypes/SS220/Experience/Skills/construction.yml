@@ -64,7 +64,7 @@
 - type: skill
   id: ConstructionProfessional
   levelInfo:
-    maximumSublevel: 1
+    maximumSublevel: 0
     levelUpPopup: construction-professional-level-up-popup
     sublevelUpPopup: construction-professional-sublevel-up-popup
   levelDescription:

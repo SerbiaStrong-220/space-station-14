@@ -465,12 +465,6 @@
     solutions:
       injector:
         maxVol: 15
-  # SS220-injector-skill-begin
-  - type: LearningOnDoAfterEndWith
-    progress:
-      Medicine:
-        baseLearning: 0.05
-  # SS220-injector-skill-end
   - type: Injector
     activeModeProtoId: SyringeDrawMode
     allowedModes:
@@ -594,12 +588,6 @@
     solutions:
       injector:
         maxVol: 100
-  # SS220-injector-skill-begin
-  - type: LearningOnDoAfterEndWith
-    progress:
-      Medicine:
-        baseLearning: 0.05
-  # SS220-injector-skill-end
   - type: Injector
     activeModeProtoId: BluespaceSyringeDrawMode
     allowedModes:
