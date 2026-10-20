@@ -26,7 +26,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Medical.SuitSensors;
 
-public abstract class SharedSuitSensorSystem : EntitySystem
+public abstract partial class SharedSuitSensorSystem : EntitySystem //SS220-IPC-sensors
 {
     [Dependency] private readonly SharedStationSystem _stationSystem = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
@@ -97,6 +97,12 @@ public abstract class SharedSuitSensorSystem : EntitySystem
         }
 
         ent.Comp.NextUpdate = _timing.CurTime;
+
+        //SS220-IPC-sensors begin
+        if (ent.Comp.User == null && HasComp<MobStateComponent>(ent))
+            ent.Comp.User = ent.Owner;
+        //SS220-IPC-sensors end
+
         Dirty(ent);
     }
 
@@ -160,6 +166,14 @@ public abstract class SharedSuitSensorSystem : EntitySystem
     {
         if (!args.IsInDetailsRange)
             return;
+
+        //SS220-IPC-sensors begin
+        if (ent.Comp.User == ent.Owner && IsSuppressedByWornSensor(ent.Owner))
+        {
+            args.PushMarkup(Loc.GetString("suit-sensor-examine-builtin-suppressed"));
+            return;
+        }
+        //SS220-IPC-sensors end
 
         string msg;
         switch (ent.Comp.Mode)
@@ -365,6 +379,11 @@ public abstract class SharedSuitSensorSystem : EntitySystem
         // check if sensor is enabled and worn by user
         if (sensor.Mode == SuitSensorMode.SensorOff || sensor.User == null || !HasComp<MobStateComponent>(sensor.User) || transform.GridUid == null)
             return null;
+
+        //SS220-IPC-sensors begin
+        if (sensor.User == ent.Owner && IsSuppressedByWornSensor(sensor.User.Value))
+            return null;
+        //SS220-IPC-sensors end
 
         // try to get mobs id from ID slot
         var userName = Loc.GetString("suit-sensor-component-unknown-name");
