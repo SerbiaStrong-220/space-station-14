@@ -1,0 +1,26 @@
+{
+    "version": 1,
+    "license": "Собственная лицензия. Полный запрет на копирование и использование вне проекта Dark Station или одобрения текущего владельца проекта",
+    "copyright": "DarkStation",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "shard"
+        },
+        {
+            "name": "shard_overlay_1"
+        },
+        {
+            "name": "shard_overlay_2"
+        },
+        {
+            "name": "shard_overlay_3"
+        },
+        {
+            "name": "shard_overlay_4"
+        }
+    ]
+}

@@ -1,0 +1,129 @@
+﻿- type: narsiAbilityPrototype
+  id: NarsiCultistEmp
+  name: "Перегрузка"
+  description: "Используйте темную магию, чтобы вызвать перегрузку ближайших электрических приборов"
+  level1Description: "Радиус 3 тайла\nУровень перегрузки 20к\nДлительность 10 секунд"
+  level2Description: "Радиус 6 тайлов\nУровень перегрузки 30к\nДлительность 20 секунд"
+  level3Description: "Радиус 9 тайлов\nУровень перегрузки 40к\nДлительность 30 секунд"
+  requiredBloodScore: 10
+  actionId: NarsiCultistEmpAction
+  icon:
+    sprite: SS220/DarkForces/Cult/Interface/actions.rsi
+    state: emp
+
+- type: narsiAbilityPrototype
+  id: NarsiCultistFireArms
+  name: "Огненные руки"
+  description: "Ваши руки наполняются пламенем"
+  level1Description: "Удары руками наносят дополнительно 5 урона огнем\nДействует 10 секунд"
+  level2Description: "Удары руками наносят дополнительно 10 урона огнем\nДействует 20 секунд"
+  level3Description: "Удары руками наносят дополнительно 13 урона огнем\nДействует 30 секунд\nДополнительно поджигает жертву"
+  requiredBloodScore: 15
+  actionId: NarsiCultistFireArmsAction
+  icon:
+    sprite: SS220/DarkForces/Cult/Interface/actions.rsi
+    state: fire
+
+- type: narsiAbilityPrototype
+  id: NarsiCultistStealth
+  name: "Покров тьмы"
+  description: "Станьте невидимым"
+  level1Description: "Стандартная невидимость, как от стелс-коробки\nДлительность 30 секунд"
+  level2Description: "Невидимость становится менее заметной\nНевидимость медленее пропадает при движении\nДлительность 1 минута"
+  level3Description: "Вас практически нельзя заметить\nДлительность 2 минуты"
+  requiredBloodScore: 20
+  actionId: NarsiCultistStealthAction
+  icon:
+    sprite: SS220/DarkForces/Cult/Interface/actions.rsi
+    state: stealth
+
+- type: narsiAbilityPrototype
+  id: NarsiCultistShadow
+  name: "Теневое клонирование"
+  description: "Создает ваших клонов. Фактически они ничего не делают, и просто бегают кругами, но это может запутать и задержать противника в определенные моменты, например - отступление"
+  level1Description: "Создает одного клона"
+  level2Description: "Создает двух клонов"
+  level3Description: "Создает трёх клонов"
+  requiredBloodScore: 10
+  actionId: NarsiCultistShadowAction
+  icon:
+    sprite: SS220/DarkForces/Cult/Interface/actions.rsi
+    state: shadow
+
+- type: narsiAbilityPrototype
+  id: NarsiCultistTeleport
+  name: "Телепорт"
+  description: "Телепорт на случайную руну телепорта"
+  level1Description: "Стандартный уровень способности"
+  level2Description: "Перезарядка способности сокращена на 10%"
+  level3Description: "Перезарядка способности сокращена на 20%"
+  requiredBloodScore: 15
+  actionId: NarsiCultistTeleportAction
+  icon:
+    sprite: SS220/DarkForces/Cult/Interface/actions.rsi
+    state: teleport
+
+- type: narsiAbilityPrototype
+  id: NarsiCultistSilence
+  name: "Безмолвие"
+  description: "Заставьте жертву замолчать"
+  level1Description: "Жертва не может говорить в течении 10 секунд"
+  level2Description: "Жертва не может говорить в течении 20 секунд"
+  level3Description: "Жертва не может говорить в течении 30 секунд"
+  requiredBloodScore: 5
+  actionId: NarsiCultistSilenceAction
+  icon:
+    sprite: SS220/DarkForces/Cult/Interface/actions.rsi
+    state: silence
+
+- type: narsiAbilityPrototype
+  id: NarsiCultistBlindness
+  name: "Слепота"
+  description: "Ослепите вашу жертву"
+  level1Description: "Жертва не может видеть в течении 10 секунд"
+  level2Description: "Жертва не может видеть в течении 20 секунд"
+  level3Description: "Жертва не может видеть в течении 30 секунд"
+  requiredBloodScore: 5
+  actionId: NarsiCultistBlindnessAction
+  icon:
+    sprite: SS220/DarkForces/Cult/Interface/actions.rsi
+    state: blindness
+
+- type: narsiAbilityPrototype
+  id: NarsiCultistStun
+  name: "Ошеломление"
+  description: "Сбейте вашу жертву с ног"
+  level1Description: "Жертва падает на пол на 5 секунд"
+  level2Description: "Жертва падает на пол на 10 секунд"
+  level3Description: "Жертва падает на пол на 15 секунд"
+  requiredBloodScore: 10
+  actionId: NarsiCultistStunAction
+  icon:
+    sprite: SS220/DarkForces/Cult/Interface/actions.rsi
+    state: stun
+
+- type: narsiAbilityPrototype
+  id: NarsiCultistCuff
+  name: "Теневые оковы"
+  description: "Свяжите жертве руки"
+  level1Description: "Стандартный уровень способности"
+  level2Description: "Перезарядка способности сокращена на 10%"
+  level3Description: "Перезарядка способности сокращена на 20%"
+  requiredBloodScore: 10
+  actionId: NarsiCultistCuffAction
+  icon:
+    sprite: SS220/DarkForces/Cult/Interface/actions.rsi
+    state: cuff
+
+- type: narsiAbilityPrototype
+  id: NarsiCultistGhostAxe
+  name: "Призрачный топор"
+  description: "Призовите призрачный топор, который может помочь вам в критической ситуации"
+  level1Description: "Топор наносит 20 урона\nТопор исчезнет через 15 секунд"
+  level2Description: "Топор наносит 20 урона\nТопор исчезнет через 30 секунд"
+  level3Description: "Топор наносит 20 урона\nТопор исчезнет через 60 секунд"
+  requiredBloodScore: 15
+  actionId: NarsiCultistGhostAxeAction
+  icon:
+    sprite: SS220/DarkForces/Cult/Interface/actions.rsi
+    state: ghostaxe

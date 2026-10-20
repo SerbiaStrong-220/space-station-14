@@ -1,3 +1,5 @@
+using Content.Server.SS220.DarkForces.Narsi.Cultist.Roles;
+using Content.Server.SS220.DarkForces.Ratvar.Righteous.Progress.Roles;
 using Content.Server.SS220.Roles;
 using Content.Server.Chat.Managers;
 using Content.Shared.Chat;
@@ -13,7 +15,7 @@ public sealed class RoleSystem : SharedRoleSystem
 {
     [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
-
+    // # SS220 Cult Ratvar and Narsie port: roles now use mind-role entities, not antag event subscriptions.
     public string? MindGetBriefing(EntityUid? mindId)
     {
         if (mindId == null)

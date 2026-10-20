@@ -1,0 +1,72 @@
+{
+    "version": 1,
+    "license": "Собственная лицензия. Полный запрет на копирование и использование вне проекта Dark Station или одобрения текущего владельца проекта",
+    "copyright": "DarkStation",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "tome"
+        },
+        {
+            "name": "hierophant"
+        },
+        {
+            "name": "carve"
+        },
+        {
+            "name": "hand"
+        },
+        {
+            "name": "emp"
+        },
+        {
+            "name": "stun"
+        },
+        {
+            "name": "handcuffs"
+        },
+        {
+            "name": "slab",
+            "delays": [
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1
+                ]
+            ]
+        },
+        {
+            "name": "beacon"
+        },
+        {
+            "name": "cog"
+        },
+        {
+            "name": "spear"
+        },
+        {
+            "name": "midas_touch"
+        },
+        {
+            "name": "clocked_hand"
+        },
+        {
+            "name": "ratvar"
+        }
+    ]
+}

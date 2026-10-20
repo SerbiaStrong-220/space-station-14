@@ -1,0 +1,106 @@
+﻿- type: construction
+  name: cult-construction-narsicultpilonconstruction-name
+  id: NarsiCultPilonConstruction
+  graph: NarsiCultPilonGraph
+  startNode: start
+  targetNode: pilon
+  category: "Культ Нар'Си"
+  objectType: Structure
+  entityWhitelist:
+    components:
+    - NarsiCultist
+  description: cult-construction-narsicultpilonconstruction-description
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  placementMode: SnapgridCenter
+  canRotate: false
+
+- type: construction
+  name: cult-construction-narsicultairlockconstruction-name
+  id: NarsiCultAirlockConstruction
+  graph: NarsiCultAirlockGraph
+  startNode: start
+  targetNode: airlock
+  category: "Культ Нар'Си"
+  objectType: Structure
+  entityWhitelist:
+    components:
+    - NarsiCultist
+  description: cult-construction-narsicultairlockconstruction-description
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  placementMode: SnapgridCenter
+  canRotate: false
+
+- type: construction
+  name: cult-construction-narsicultdarkforgeconstruction-name
+  id: NarsiCultDarkForgeConstruction
+  graph: NarsiCultDarkForgeGraph
+  startNode: start
+  targetNode: forge
+  category: "Культ Нар'Си"
+  objectType: Structure
+  entityWhitelist:
+    components:
+    - NarsiCultist
+  description: cult-construction-narsicultdarkforgeconstruction-description
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  placementMode: SnapgridCenter
+  canRotate: false
+
+- type: construction
+  name: cult-construction-narsicreatureeggconstriction-name
+  id: NarsiCreatureEggConstriction
+  graph: NarsiCreatureEggGraph
+  startNode: start
+  targetNode: egg
+  category: "Культ Нар'Си"
+  objectType: Structure
+  entityWhitelist:
+    components:
+    - NarsiCultist
+  description: cult-construction-narsicreatureeggconstriction-description
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  placementMode: SnapgridCenter
+  canRotate: false
+
+- type: construction
+  name: cult-construction-narsicultaltarconstruction-name
+  id: NarsiCultAltarConstruction
+  graph: NarsiCultAltarGraph
+  startNode: start
+  targetNode: altar
+  category: "Культ Нар'Си"
+  objectType: Structure
+  entityWhitelist:
+    components:
+    - NarsiCultist
+  description: cult-construction-narsicultaltarconstruction-description
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  placementMode: SnapgridCenter
+  canRotate: false
+
+- type: construction
+  name: cult-construction-narsicultwallconstruction-name
+  id: NarsiCultWallConstruction
+  graph: NarsiCultWallGraph
+  startNode: start
+  targetNode: wall
+  category: "Культ Нар'Си"
+  objectType: Structure
+  entityWhitelist:
+    components:
+    - NarsiCultist
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  placementMode: SnapgridCenter
+  canRotate: false
