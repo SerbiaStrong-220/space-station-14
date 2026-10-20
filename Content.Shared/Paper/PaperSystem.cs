@@ -4,6 +4,7 @@ using Content.Shared.UserInterface;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
+using Content.Shared.Ghost;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Random.Helpers;
@@ -93,6 +94,11 @@ public sealed class PaperSystem : EntitySystem
 
     private void BeforeUIOpen(Entity<PaperComponent> entity, ref BeforeActivatableUIOpenEvent args)
     {
+        // SS220 ghost-paper-read bgn
+        if (HasComp<GhostComponent>(args.User))
+            return;
+        // SS220 ghost-paper-read end
+
         entity.Comp.Mode = PaperAction.Read;
         UpdateUserInterface(entity);
     }
@@ -204,6 +210,11 @@ public sealed class PaperSystem : EntitySystem
 
     private void OnInputTextMessage(Entity<PaperComponent> entity, ref PaperInputTextMessage args)
     {
+        // SS220 ghost-paper-read bgn
+        if (HasComp<GhostComponent>(args.Actor))
+            return;
+        // SS220 ghost-paper-read end
+
         var ev = new PaperWriteAttemptEvent(entity.Owner);
         RaiseLocalEvent(args.Actor, ref ev);
         if (ev.Cancelled)
