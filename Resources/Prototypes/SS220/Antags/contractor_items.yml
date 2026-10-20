@@ -1,0 +1,72 @@
+# Items in store in contractor uplink
+- type: contractorItems
+  id: ContractorItems
+  items:
+    ContractorBaton:
+      price: 2.0
+      quantity: 2
+    Crowbar:
+      price: 4.0
+      quantity: 2
+    Table:
+      price: 8.0
+
+# Contractor warp point
+- type: entity
+  parent: MarkerBase
+  id: ContractorWarpPoint
+  name: warp point
+  suffix: contractor target point
+  components:
+    - type: ContractorWarpPoint
+      locationName: contractor warp point
+      amountTc: 1
+      difficulty: Easy
+    - type: Sprite
+      layers:
+        - state: pink
+        - sprite: Objects/Weapons/Bombs/spidercharge.rsi #TODO Sprite
+          state: icon
+
+- type: entity
+  parent: MarkerBase
+  id: ContractorTajpanWarpPoint
+  name: warp point
+  suffix: contractor tajpan target point
+  components:
+  - type: ContractorTajpanWarpPoint
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: Objects/Weapons/Bombs/spidercharge.rsi #TODO Sprite
+      state: icon
+
+# Contractor box
+- type: entity
+  name: cardboard box
+  parent: BoxBase
+  id: BoxContractor
+  description: A cardboard box for storing things.
+  components:
+    - type: Item
+      size: Large
+      shape:
+        - 0,0,2,2
+    - type: Storage
+      grid:
+        - 0,0,6,4
+    - type: Sprite
+      state: box
+    - type: StorageFill
+      contents:
+        - id: ContractorPDA
+        - id: AgentIDCard
+        - id: ClothingMaskGasVoiceChameleon
+        - id: CyberPen
+        - id: ContractorBaton
+        - id: EncryptionKeySyndie
+        - id: CigPackSyndicate
+        - id: FlippoLighter
+    - type: Tag
+      tags:
+        - BoxCardboard
