@@ -1,0 +1,12 @@
+﻿- type: entity
+  parent: BaseObjective
+  id: FatherFromThePastObjective
+  name: objective-father-from-the-past-name
+  description: objective-father-from-the-past-desc
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Structures/Furniture/chairs.rsi
+      state: shuttle
+  - type: FatherFromThePastCondition
