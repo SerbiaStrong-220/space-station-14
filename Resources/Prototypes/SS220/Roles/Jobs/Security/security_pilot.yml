@@ -25,6 +25,8 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
+  - !type:AddEncryptionKeysSpecial
+    keys: [ EncryptionKeySecurity ]
 
 - type: startingGear
   id: SecurityPilotGear

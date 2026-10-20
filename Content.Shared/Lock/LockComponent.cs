@@ -45,6 +45,11 @@ public sealed partial class LockComponent : Component
     [DataField, AutoNetworkedField]
     public bool UnlockOnClick = true;
 
+    //SS220 only owner can unlock begin
+    [DataField, AutoNetworkedField]
+    public bool OnlyOwnerCanUnlock = false;
+    //SS220 only owner can unlock end
+
     /// <summary>
     /// Whether or not the lock is locked when used it hand.
     /// </summary>
