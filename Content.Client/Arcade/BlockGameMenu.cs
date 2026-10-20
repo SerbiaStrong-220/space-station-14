@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -7,6 +8,7 @@ using Content.Client.Arcade.UI;
 using Content.Client.Resources;
 using Content.Shared.Arcade;
 using Content.Shared.Input;
+using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
@@ -62,7 +64,7 @@ namespace Content.Client.Arcade
         {
             Title = Loc.GetString("blockgame-menu-title");
 
-            MinSize = SetSize = new Vector2(410, 490);
+            MinSize = SetSize = new Vector2(415, 495); //SS220-block-game-visuals
 
             var resourceCache = IoCManager.Resolve<IResourceCache>();
             var backgroundTexture = resourceCache.GetTexture("/Textures/Interface/Nano/button.svg.96dpi.png");
@@ -623,13 +625,9 @@ namespace Content.Client.Arcade
             {
                 for (var x = 0; x < columnCount; x++)
                 {
-                    var c = GetColorForPosition(blocks, x, y);
-                    _nextBlockGrid.AddChild(new PanelContainer
-                    {
-                        PanelOverride = new StyleBoxFlat { BackgroundColor = c },
-                        MinSize = BlockSize,
-                        RectDrawClipMargin = 0
-                    });
+                    //SS220-block-game-visuals begin
+                    _nextBlockGrid.AddChild(GetBlockControl(blocks, x, y));
+                    //SS220-block-game-visuals end
                 }
             }
         }
@@ -646,13 +644,9 @@ namespace Content.Client.Arcade
             {
                 for (var x = 0; x < columnCount; x++)
                 {
-                    var c = GetColorForPosition(blocks, x, y);
-                    _holdBlockGrid.AddChild(new PanelContainer
-                    {
-                        PanelOverride = new StyleBoxFlat { BackgroundColor = c },
-                        MinSize = BlockSize,
-                        RectDrawClipMargin = 0
-                    });
+                    //SS220-block-game-visuals begin
+                    _holdBlockGrid.AddChild(GetBlockControl(blocks, x, y));
+                    //SS220-block-game-visuals end
                 }
             }
         }
@@ -664,27 +658,40 @@ namespace Content.Client.Arcade
             {
                 for (var x = 0; x < 10; x++)
                 {
-                    var c = GetColorForPosition(blocks, x, y);
-                    _gameGrid.AddChild(new PanelContainer
-                    {
-                        PanelOverride = new StyleBoxFlat { BackgroundColor = c },
-                        MinSize = BlockSize,
-                        RectDrawClipMargin = 0
-                    });
+                    //SS220-block-game-visuals begin
+                    _gameGrid.AddChild(GetBlockControl(blocks, x, y));
+                    //SS220-block-game-visuals end
                 }
             }
         }
 
-        private static Color GetColorForPosition(BlockGameBlock[] blocks, int x, int y)
+        //SS220-block-game-visuals begin
+        private const string BlockTexturePath = "/Textures/SS220/Interface/BlockGame/block.png";
+        private Control GetBlockControl(BlockGameBlock[] blocks, int x, int y)
         {
-            var c = Color.Transparent;
             var matchingBlock = blocks.FirstOrNull(b => b.Position.X == x && b.Position.Y == y);
             if (matchingBlock.HasValue)
             {
-                c = BlockGameBlock.ToColor(matchingBlock.Value.GameBlockColor);
+                var color = Color.Transparent;
+
+                color = BlockGameBlock.ToColor(matchingBlock.Value.GameBlockColor);
+
+                return new TextureRect()
+                {
+                    TexturePath = BlockTexturePath,
+                    MinSize = BlockSize,
+                    TextureScale = new(2,2),
+                    ModulateSelfOverride = color
+                };
             }
 
-            return c;
+
+            return new PanelContainer
+            {
+                MinSize = BlockSize,
+                RectDrawClipMargin = 0
+            };
         }
+        //SS220-block-game-visuals end
     }
 }
