@@ -80,3 +80,12 @@
   materials:
     Steel: 250
     Plastic: 250
+
+- type: latheRecipe
+  id: CassetteTapeLargeCapacity
+  result: CassetteTapeLargeCapacity
+  categories: [ Tools ]
+  completetime: 3
+  materials:
+    Steel: 100
+    Plastic: 300

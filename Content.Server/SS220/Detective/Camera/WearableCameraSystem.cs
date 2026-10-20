@@ -3,6 +3,7 @@
 using Content.Server.SurveillanceCamera;
 using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
+using Content.Shared.Power;
 using Content.Shared.SurveillanceCamera.Components;
 
 namespace Content.Server.SS220.Detective.Camera;
@@ -56,7 +57,9 @@ public sealed partial class WearableCameraSystem : EntitySystem
         if (isEquiped is not { } isEquipedReal)
             isEquipedReal = clothing.InSlot is not null;
 
-        var isActive = detectiveCamera.Enabled && isEquipedReal;
+        var charge = new GetChargeEvent();
+        RaiseLocalEvent(entity.Owner, ref charge);
+        var isActive = detectiveCamera.Enabled && isEquipedReal && charge.CurrentCharge > 0f;
         _cameraSystem.SetActive(entity, isActive, cameraComponent);
     }
 }

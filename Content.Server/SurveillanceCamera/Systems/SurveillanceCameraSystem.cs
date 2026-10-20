@@ -5,9 +5,15 @@ using Content.Shared.Database;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Events;
 using Content.Shared.Power;
+using Content.Shared.PowerCell;
 using Content.Shared.SurveillanceCamera;
 using Robust.Server.Containers;
 using Content.Shared.SurveillanceCamera.Components;
+using Content.Shared.SS220.BodyCamera;
+using Content.Shared.SS220.Detective.Camera;
+using Content.Shared.PowerCell.Components;
+using Content.Shared.Silicons.StationAi;
+using Content.Shared.StationAi;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -24,6 +30,8 @@ public sealed partial class SurveillanceCameraSystem : SharedSurveillanceCameraS
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly SurveillanceCameraMapSystem _cameraMapSystem = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly PowerCellSystem _powerCell = default!; // SS220 TapeRecored & BodycamUpdate
+    [Dependency] private SharedStationAiSystem _stationAi = default!; // SS220 TapeRecored & BodycamUpdate
 
     // Pings a surveillance camera subnet. All cameras will always respond
     // with a data message if they are on the same subnet.
@@ -93,11 +101,16 @@ public sealed partial class SurveillanceCameraSystem : SharedSurveillanceCameraS
             //     position = Transform(uid).Coordinates.Position;
             // //SS220 Camera-Map end
 
+            // SS220 TapeRecorder & BodycamUpdate BGN
+            var cameraName = Loc.TryGetString(component.CameraId, out var localizedCameraName)
+                ? localizedCameraName
+                : component.CameraId;
+            // SS220 TapeRecorder & BodycamUpdate END
             var payload = new NetworkPayload()
             {
                 { DeviceNetworkConstants.Command, string.Empty },
                 { CameraAddressData, deviceNet.Address },
-                { CameraNameData, component.UseEntityNameAsCameraId ? MetaData(uid).EntityName : component.CameraId },
+                { CameraNameData, component.UseEntityNameAsCameraId ? MetaData(uid).EntityName : cameraName }, // SS220 TapeRecorder & BodycamUpdate; component.CameraId -> cameraName
                 { CameraSubnetData, string.Empty },
                 //{ CameraPositionData, position }, //SS220 Camera-Map
             };
@@ -232,7 +245,13 @@ public sealed partial class SurveillanceCameraSystem : SharedSurveillanceCameraS
             }
         }
 
-        var name = camera.UseEntityNameAsCameraId ? MetaData(uid).EntityName : camera.CameraId;
+        // SS220 TapeRecorder & BodycamUpdate BGN
+        var name = camera.UseEntityNameAsCameraId
+            ? MetaData(uid).EntityName
+            : Loc.TryGetString(camera.CameraId, out var localizedCameraName)
+                ? localizedCameraName
+                : camera.CameraId;
+        // SS220 TapeRecorder & BodycamUpdate END
         var state = new SurveillanceCameraSetupBoundUiState(name, deviceNet.ReceiveFrequency ?? 0,
             camera.AvailableNetworks, camera.NameSet, camera.NetworkSet);
         _userInterface.SetUiState(uid, SurveillanceCameraSetupUiKey.Camera, state);
@@ -251,6 +270,7 @@ public sealed partial class SurveillanceCameraSystem : SharedSurveillanceCameraS
 
         RemoveActiveViewers(camera, new(component.ActivePvsViewers), null, component);
         component.Active = false;
+        UpdateDetectiveCameraVision((camera, component)); // SS220 TapeRecored & BodycamUpdate
 
         // Send a targetted event to all monitors.
         foreach (var monitor in component.ActiveMonitors)
@@ -294,11 +314,22 @@ public sealed partial class SurveillanceCameraSystem : SharedSurveillanceCameraS
 
         if (setting)
         {
+            // SS220 TapeRecorder & BodycamUpdate BGN
+            if (HasComp<BodyCameraPowerComponent>(camera))
+            {
+                var charge = new GetChargeEvent();
+                RaiseLocalEvent(camera, ref charge);
+                if (charge.CurrentCharge <= 0f)
+                    return;
+            }
+            // SS220 TapeRecorder & BodycamUpdate END
+
             var attemptEv = new SurveillanceCameraSetActiveAttemptEvent();
             RaiseLocalEvent(camera, ref attemptEv);
             if (attemptEv.Cancelled)
                 return;
             component.Active = setting;
+            UpdateDetectiveCameraVision((camera, component)); // SS220 TapeRecored & BodycamUpdate
         }
         else
         {
@@ -307,8 +338,31 @@ public sealed partial class SurveillanceCameraSystem : SharedSurveillanceCameraS
 
         UpdateVisuals(camera, component);
 
+        // SS220 TapeRecorder & BodycamUpdate BGN
+        if (HasComp<BodyCameraPowerComponent>(camera))
+        {
+            var bodyCameraEvent = new BodyCameraActiveChangedEvent(setting);
+            RaiseLocalEvent(camera, ref bodyCameraEvent);
+        }
+        else if (TryComp<PowerCellDrawComponent>(camera, out var powerDraw))
+        {
+            _powerCell.SetDrawEnabled((camera, powerDraw), setting);
+        }
+        // SS220 TapeRecorder & BodycamUpdate END
+
         _cameraMapSystem.UpdateCameraMarker((camera, component));
     }
+
+    // SS220 TapeRecored & BodycamUpdate BGN
+    private void UpdateDetectiveCameraVision(Entity<SurveillanceCameraComponent> ent)
+    {
+        if (!HasComp<DetectiveCameraAttachComponent>(ent) ||
+            !TryComp<StationAiVisionComponent>(ent, out var vision))
+            return;
+
+        _stationAi.SetVisionEnabled((ent.Owner, vision), ent.Comp.Active);
+    }
+    // SS220 TapeRecored & BodycamUpdate END
 
     public void AddActiveViewer(EntityUid camera, EntityUid player, EntityUid? monitor = null, SurveillanceCameraComponent? component = null, ActorComponent? actor = null)
     {
