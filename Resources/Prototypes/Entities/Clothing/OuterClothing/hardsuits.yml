@@ -1176,6 +1176,20 @@
     sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertchaplain.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitERTChaplain
+  # SS220-MIT-add-field-shields-begin
+  - type: FieldShieldProvider
+    rechargeShieldData:
+      rechargeTime: 15
+    shieldData:
+      shieldMaxCharge: 1
+      shieldSprite:
+        sprite: SS220/Effects/field_shield.rsi
+        state: yellow
+    lightData:
+      color: "#ddc700"
+      radius: 1
+      energy: 4
+  # SS220-MIT-add-field-shields-end
 
 #ERT Engineer Hardsuit
 - type: entity
