@@ -1,0 +1,12 @@
+ent-FloorTileItemSteelReinforced = steel hexagonal tile
+    .desc = { ent-FloorTileItemBase.desc }
+ent-FloorTileItemWhiteReinforced = white hexagonal tile
+    .desc = { ent-FloorTileItemBase.desc }
+ent-FloorTileItemDarkReinforced = dark hexagonal tile
+    .desc = { ent-FloorTileItemBase.desc }
+ent-FloorItemTechMainDrainMiddle = techmaint tile with central grating
+    .desc = { ent-FloorTileItemBase.desc }
+ent-FloorTileItemKitchenRed = red kitchen tile
+    .desc = { ent-FloorTileItemBase.desc }
+ent-FloorTileItemSand = astro-sand
+    .desc = Artificial sand, just as loose as the real thing, and easy to remove!

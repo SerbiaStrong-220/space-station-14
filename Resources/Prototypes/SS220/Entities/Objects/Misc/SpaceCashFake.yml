@@ -51,7 +51,7 @@
 # material for SpaceCashFake and fackeCash price
 - type: material
   id: FakeCredit
-  name: speso
+  name: materials-fake-credit
   unit: materials-unit-bill
   stackEntity: SpaceCash
   icon: { sprite: /Textures/Objects/Economy/cash.rsi, state: cash }
