@@ -1,0 +1,13 @@
+pending-ban-enable = Delay this ban
+pending-ban-delay = After a delay
+pending-ban-round-end = When the round ends
+pending-ban-round-start = When the round starts
+pending-ban-lobby = When entering the lobby
+pending-ban-minutes = minutes until activation
+pending-ban-delay-help = A whole number of minutes between 1 and 525600.
+pending-ban-duration-hint = Duration starts at activation
+pending-ban-shutdown-hint = Shutdown activates the ban early. After an abrupt crash, it activates on the next startup. Round conditions trigger on the next transition to the selected state.
+pending-ban-invalid = Invalid pending ban parameters.
+pending-ban-failed = Could not save the ban. Check the server log and try again.
+pending-ban-scheduled = Pending ban saved.
+pending-ban-activated = Pending ban #{ $id } activated.
