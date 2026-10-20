@@ -256,8 +256,10 @@
   id: FillGunSafePistolMk58
   table: !type:AllSelector
     children:
-    - id: WeaponPistolMk58
-      amount: 4
+    # SS220 pistol lighter
+    - !type:NestedSelector
+      tableId: PistolMk58OrLighterTable
+      rolls: 4
     - id: MagazinePistol
       amount: 8
 
