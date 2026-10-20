@@ -1,5 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Ghost;
+using Content.Shared.SS220.CultYogg.CultYoggIcons;
 using Content.Shared.SS220.CultYogg.Sacrificials;
 using Content.Shared.StatusIcon;
 using Content.Shared.StatusIcon.Components;
@@ -23,6 +25,9 @@ public sealed partial class CultYoggSacrificialSystem : EntitySystem
     {
         var viewer = _playerManager.LocalSession?.AttachedEntity;
         if (viewer == ent)
+            return;
+
+        if (HasComp<GhostComponent>(viewer) && !HasComp<ShowCultYoggIconsComponent>(viewer))
             return;
 
         var iconId = ent.Comp.StatusIcon;

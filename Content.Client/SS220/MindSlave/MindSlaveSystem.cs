@@ -1,6 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Ghost;
 using Content.Shared.SS220.MindSlave;
+using Content.Shared.SS220.Overlays;
 using Content.Shared.StatusIcon.Components;
 using Robust.Client.Player;
 using Robust.Shared.Prototypes;
@@ -23,8 +25,11 @@ public sealed partial class MindSlaveSystem : EntitySystem
     private void OnSlaveGetIcons(Entity<MindSlaveComponent> entity, ref GetStatusIconsEvent args)
     {
         var viewer = _player.LocalSession?.AttachedEntity;
+        var isGhost = HasComp<GhostComponent>(viewer);
+        if (isGhost && !HasComp<ShowMindSlaveIconsComponent>(viewer))
+            return;
 
-        if (viewer != entity &&
+        if (!isGhost && viewer != entity &&
             (!TryComp<MindSlaveMasterComponent>(viewer, out var masterComp) ||
             !masterComp.EnslavedEntities.Contains(entity)))
             return;
@@ -36,8 +41,11 @@ public sealed partial class MindSlaveSystem : EntitySystem
     private void OnMasterGetIcons(Entity<MindSlaveMasterComponent> entity, ref GetStatusIconsEvent args)
     {
         var viewer = _player.LocalSession?.AttachedEntity;
+        var isGhost = HasComp<GhostComponent>(viewer);
+        if (isGhost && !HasComp<ShowMindSlaveIconsComponent>(viewer))
+            return;
 
-        if (viewer != entity &&
+        if (!isGhost && viewer != entity &&
             (!HasComp<MindSlaveComponent>(viewer) ||
             !entity.Comp.EnslavedEntities.Contains(viewer.Value)))
             return;
