@@ -11,3 +11,6 @@ trait-chronic-cough-desc = Вы страдаете от постоянного �
 
 trait-uncloneable-name = Неклонируемый
 trait-uncloneable-desc = Не может быть клонирован.
+
+trait-one-armed-name = Однорукий
+trait-one-armed-desc = У вас отсутствует одна рука.

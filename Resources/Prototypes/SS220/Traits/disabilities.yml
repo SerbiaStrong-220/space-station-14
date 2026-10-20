@@ -55,3 +55,15 @@
   category: Disabilities
   components:
     - type: TouretteAccent
+
+- type: trait
+  id: OneArmed
+  name: trait-one-armed-name
+  description: trait-one-armed-desc
+  category: Disabilities
+  specials:
+  - !type:RemoveOrgansSpecial
+    categories:
+    - HandRight
+    - ArmRight
+
