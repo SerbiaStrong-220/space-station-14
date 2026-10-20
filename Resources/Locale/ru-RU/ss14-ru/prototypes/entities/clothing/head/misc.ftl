@@ -47,3 +47,4 @@ ent-ClothingHeadHatCone2 = { ent-ClothingHeadHatCone }
 
 ent-ClothingHeadHatCone3 = { ent-ClothingHeadHatCone }
     .desc = { ent-ClothingHeadHatCone.desc }
+    
