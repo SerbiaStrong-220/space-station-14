@@ -515,6 +515,7 @@
     - id: Binary
     - id: Ternary
 #SS220 languages revive end
+  - type: Experience # SS220-station-ai-experience
   - type: SiliconLawProvider
     laws: Crewsimov
     # SS220 random lawset begin
