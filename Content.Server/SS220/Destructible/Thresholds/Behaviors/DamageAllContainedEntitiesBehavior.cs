@@ -1,3 +1,4 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Server.Destructible;
 using Content.Server.Destructible.Thresholds.Behaviors;
 using Content.Shared.Damage;
@@ -7,7 +8,7 @@ using Robust.Shared.Containers;
 namespace Content.Server.SS220.Destructible.Thresholds.Behaviors;
 
 /// <summary>
-/// Dealing damage to all the entities in the container
+/// Deals damage to all the entities in the container
 /// </summary>
 [DataDefinition]
 public sealed partial class DamageAllContainedEntitiesBehavior : IThresholdBehavior
