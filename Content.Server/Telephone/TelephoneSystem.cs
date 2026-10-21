@@ -21,9 +21,10 @@ using Robust.Shared.Replays;
 using System.Linq;
 using Content.Shared.Silicons.StationAi;
 using Content.Shared.Silicons.Borgs.Components;
-using Content.Shared.SS220.TTS;
 using Content.Shared.SS220.CCVars;
 using Robust.Shared.Configuration;
+using Content.Server.SS220.TTS;
+using Content.Shared.SS220.TTS.Components;
 
 namespace Content.Server.Telephone;
 
@@ -39,6 +40,7 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly IReplayRecordingManager _replay = default!;
+    [Dependency] private TtsSystem _tts = default!; // SS220 tts
 
     // SS220 performance-test-begin
     [Dependency] private readonly IConfigurationManager _configManager = default!;
@@ -127,11 +129,13 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
         var speaker = entity.Comp.Speaker != null ? entity.Comp.Speaker.Value.Owner : entity.Owner;
 
         // SS220 Holopad adapt begin
-        if (TryComp<TTSComponent>(args.MessageSource, out var sourceTts))
+        if (_tts.TryGetVoicePreferences(args.MessageSource, out var voicePref))
         {
-            var ttsComponent = EnsureComp<TTSComponent>(speaker);
-            ttsComponent.VoicePrototypeId = sourceTts.VoicePrototypeId;
+            var ttsComponent = EnsureComp<TtsComponent>(speaker);
+            _tts.SetVoicePreferences(speaker, voicePref.Clone());
         }
+        else
+            RemComp<TtsComponent>(speaker);
         // SS220 Holopad adapt end
 
         var name = Loc.GetString("chat-telephone-name-relay",

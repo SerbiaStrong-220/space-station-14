@@ -78,7 +78,7 @@ public sealed class EntitySpokeEvent : EntityEventArgs
     {
         Source = source;
         Message = message;
-        OriginalMessage = originalMessage; // Corvax-TTS: Spec symbol sanitize
+        OriginalMessage = originalMessage; // SS220 tts: Spec symbol sanitize
         LanguageMessage = languageMessage; // SS220 languages
         Channel = channel;
         ObfuscatedMessage = obfuscatedMessage;

@@ -1,0 +1,37 @@
+- type: ttsVoice
+  id: Dictor
+  name: Dictor
+  speaker: dictor
+  provider: Silero
+  categories: [ Portal2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Glados
+  name: Glados
+  speaker: glados
+  provider: Silero
+  categories: [ Portal2 ]
+
+- type: ttsVoice
+  id: Wheatley
+  name: Wheatley
+  speaker: wheatley
+  provider: Silero
+  categories: [ Portal2 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: CaveJohnson
+  name: Cave_Johnson
+  speaker: portal_cave_johnson
+  provider: Silero
+  categories: [ PORTAL ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]

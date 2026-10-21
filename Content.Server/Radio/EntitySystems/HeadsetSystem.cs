@@ -11,7 +11,8 @@ using Content.Server.SS220.Language;
 using Content.Shared.SS220.Radio.Components;
 using Content.Shared.SS220.Headset;
 using System.Linq;
-using Robust.Shared.Prototypes; // SS220-Add-Languages
+using Robust.Shared.Prototypes;
+using Content.Shared.SS220.TTS.Components; // SS220-Add-Languages
 
 namespace Content.Server.Radio.EntitySystems;
 
@@ -215,7 +216,7 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
         {
             _netMan.ServerSendMessage(args.ChatMsg, actor.PlayerSession.Channel);
 
-            if (parent != args.MessageSource && TryComp(args.MessageSource, out TTSComponent? _))
+            if (parent != args.MessageSource && TryComp(args.MessageSource, out TtsComponent? _))
             {
                 args.Receivers.Add(new(parent));
             }
