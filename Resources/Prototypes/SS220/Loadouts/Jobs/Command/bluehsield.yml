@@ -163,6 +163,16 @@
   equipment:
     neck: ClothingNeckCloakCapeBlue
 
+- type: loadout
+  id: BlueShieldHolsterEnergyRevolver
+  equipment:
+    neck: ClothingBeltEnergyRevolverFilled
+
+- type: loadout
+  id: BlueShieldHolsterCorvus
+  equipment:
+    neck: ClothingBeltCorvusFilled
+
 # Outer clothing
 - type: loadout
   id: BlueShieldArmorBulletproof

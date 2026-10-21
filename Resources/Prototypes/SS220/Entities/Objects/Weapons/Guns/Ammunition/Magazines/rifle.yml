@@ -1,0 +1,53 @@
+- type: entity
+  parent: MagazineRifle
+  id: MagazineRifleHP
+  name: "magazine (6,3x47 intermediate HPIB)"
+  description: 30-round double stack magazine for combat rifles. Intended to hold self-igniting incendiary ammunition.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeRifleHP
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#cf0404"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#cf0404"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#cf0404"
+
+- type: entity
+  parent: BaseMagazineRifle
+  id: MagazineRifleAP
+  name: "magazine (6,3x47 intermediate AP)"
+  description: 30-round double stack magazine for combat rifles. Intended to hold harmless practice ammunition.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeRifleAP
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#65fe08"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#65fe08"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#65fe08"

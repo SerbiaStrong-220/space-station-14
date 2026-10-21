@@ -7,6 +7,7 @@ using Content.Shared.SS220.Weapons.Components;
 using Content.Shared.Standing;
 using Content.Shared.Weapons.Hitscan.Components;
 using Content.Shared.Weapons.Hitscan.Events;
+using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
@@ -39,9 +40,9 @@ public sealed partial class HitscanBasicRaycastSystem : EntitySystem // SS220 se
     private void OnHitscanFired(Entity<HitscanBasicRaycastComponent> ent, ref HitscanTraceEvent args)
     {
         var shooter = args.Shooter ?? args.Gun;
+        var gun = args.Gun; //SS220 weapon overhaul 
         var mapCords = _transform.ToMapCoordinates(args.FromCoordinates);
         var ray = new CollisionRay(mapCords.Position, args.ShotDirection, (int) ent.Comp.CollisionMask);
-        var gun = args.Gun;//SS220 weapon overhaul
         var rayCastResults = _physics.IntersectRay(mapCords.MapId, ray, ent.Comp.MaxDistance, shooter, false);
 
         var target = args.Target;

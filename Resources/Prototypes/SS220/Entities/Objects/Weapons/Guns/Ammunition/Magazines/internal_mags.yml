@@ -17,6 +17,31 @@
       ballistic-ammo: !type:Container
 
 - type: entity
+  id: InternalMagazineMosin
+  parent: MagazineFullRifleFMJ
+  name: "magazine (internal)"
+  components:
+  - type: Item
+    size: Small
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    capacity: 4
+
+- type: entity
+  id: InternalMagazineMosinToy
+  parent: InternalMagazineMosin
+  name: "magazine (internal)"
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    capacity: 4
+    proto: CartridgeCap
+    whitelist:
+      tags:
+        - CartridgeCap
+        - BulletFoam
+
+- type: entity
   id: InternalMagazineShotgun
   parent: BaseMagazineRifle
   name: "magazine (internal)"

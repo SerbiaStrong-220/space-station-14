@@ -78,7 +78,8 @@
   - type: HitscanBasicDamage
     damage:
       types:
-        Heat: 35 #ss220lowTTKUpdate
+        Heat: 45 #SS220 weapon overhaul
+      armourPiercing: 25 #SS220 weapon overhaul
   - type: HitscanBasicVisuals
     muzzleFlash:
       sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
@@ -133,6 +134,7 @@
     damage:
       types:
         Heat: 40 #ss220lowTTKUpdate
+      armourPiercing: 35 #SS220 weapon overhaul
   - type: HitscanBasicVisuals
     muzzleFlash:
       sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
@@ -143,6 +145,20 @@
     impactFlash:
       sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
       state: impact_blue
+
+#SS220 weapon overhaul begin
+- type: entity
+  parent: Pulse
+  id: PulseHeavy
+  name: blue high-energy laser ray
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Heat: 55
+      armourPiercing: 45
+#SS220 weapon overhaul end
 
 - type: entity
   parent: BasicHitscan

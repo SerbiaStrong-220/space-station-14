@@ -1,12 +1,16 @@
-ent-BaseCartridgeMagnum = патрон (.45 магнум)
+#SS220-weapon-overhaul-begin
+ent-BaseCartridgeMagnum = патрон (11,5х32 магнум пистолетный)
     .desc = { ent-BaseCartridge.desc }
-ent-CartridgeMagnum = патрон (.45 магнум)
-    .desc = Тяжелый патрон «магнум», который в основном используется в револьверах. Стандартные кинетические боеприпасы распространены и эффективны в большинстве ситуаций.
-ent-CartridgeMagnumPractice = патрон (.45 магнум учебный)
-    .desc = Патрон «магнум» большого калибра, в основном используется в револьверах. Учебные патроны стреляют меловыми снарядами, которые слегка жалят, но не наносят серьезных повреждений.
-ent-CartridgeMagnumIncendiary = патрон (.45 магнум зажигательный)
-    .desc = Тяжелый патрон «магнум», который в основном используется в револьверах. Зажигательные боеприпасы содержат самовоспламеняющийся состав, который поджигает цель.
-ent-CartridgeMagnumAP = патрон (.45 магнум бронебойный)
-    .desc = Патрон «магнум» большого калибра, в основном используемый в револьверах. Бронебойные патроны известны своей способностью пробивать бронежилеты.
-ent-CartridgeMagnumUranium = патрон (.45 магнум урановый)
-    .desc = Тяжелый патрон «магнум», который в основном используется в револьверах. Боеприпас заменён на уран, который облучает цель изнутри.
+ent-CartridgeMagnum = патрон (11,5х32 магнум пистолетный)
+    .desc = { ent-BaseCartridgeMagnum.desc }
+ent-CartridgeMagnumHighVelocity = патрон (11,5х32 магнум пистолетный высокоскоростной)
+    .desc = { ent-BaseCartridgeMagnum.desc }
+ent-CartridgeMagnumPractice = патрон (11,5х32 магнум пистолетный учебный)
+    .desc = { ent-BaseCartridgeMagnum.desc }
+ent-CartridgeMagnumIncendiary = патрон (11,5х32 магнум пистолетный трассирующий)
+    .desc = { ent-BaseCartridgeMagnum.desc }
+ent-CartridgeMagnumAP = патрон (11,5х32 магнум пистолетный бронебойный)
+    .desc = { ent-BaseCartridgeMagnum.desc }
+ent-CartridgeMagnumUranium = патрон (11,5х32 магнум пистолетный урановый)
+    .desc = { ent-BaseCartridgeMagnum.desc }
+#SS220-weapon-overhaul-end
