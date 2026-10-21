@@ -33,7 +33,7 @@
     - Belt
   - type: Gun
     canSuicide: true ##SS220-new-feature kus
-    minAngle: 9 #SS220 weapon overhaul
+    minAngle: 5 #SS220 weapon overhaul
     maxAngle: 19 #SS220 weapon overhaul
     fireRate: 6
     selectedMode: SemiAuto
@@ -79,12 +79,12 @@
 
 - type: entity
   name: viper
-  parent: [BaseWeaponPistol]
+  parent: [BaseWeaponPistol, BaseGunWieldable] #SS220 weapon overhaul
   id: WeaponPistolViper
   description: A common handgun illegally modified by the Syndicate. The Viper sports a selector switch between semi-auto and ‘rock and roll’. The standard sidearm for any soldier who fights under the three serpents. Feeds from .35 pistol magazines.
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Pistols/viper.rsi
+    sprite: SS220/Objects/Weapons/Guns/Pistols/viper.rsi #SS220 weapon overhaul
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -111,9 +111,25 @@
   - type: StaticPrice
     price: 1000
   #SS220 weapon overhaul start
+  - type: Gun
+    canSuicide: true
+    minAngle: 9
+    maxAngle: 15
+    fireRate: 6
+    angleDecay: 2
+    angleIncrease: 1.05
+    selectedMode: SemiAuto
+    availableModes:
+      - SemiAuto
+      - FullAuto
   - type: GunAimable
     minAngle: -5
-    maxAngle: -9
+    maxAngle: -3
+  - type: GunWieldBonus
+    minAngle: -3
+    maxAngle: -6
+    angleIncrease: -0.4
+    angleDecay: 2
   #SS220 weapon overhaul end
 
 - type: entity
@@ -159,17 +175,37 @@
 
 - type: entity
   name: cobra
-  parent: [ BaseWeaponPistol]
+  parent: [BaseWeaponPistol, BaseGunWieldable] #SS220 weapon overhaul
   id: WeaponPistolCobra
   description: Integrally suppressed semi-automatic pistol used by the Syndicate, firing caseless subsonic rounds. Favored by any agent who likes to keep things quiet and leave no evidence behind. Feeds from .25 pistol magazines.
   components:
   #SS220 weapon overhaul start
+  - type: Gun
+    canSuicide: true
+    minAngle: 9
+    maxAngle: 15
+    fireRate: 4
+    angleDecay: 2
+    angleIncrease: 1.05
+    selectedMode: SemiAuto
+    muzzleFlashSupressed: true
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/pistol.ogg
+      params:
+        volume: -4
+    availableModes:
+      - SemiAuto
   - type: GunAimable
     minAngle: -5
-    maxAngle: -9
+    maxAngle: -3
+  - type: GunWieldBonus
+    minAngle: -3
+    maxAngle: -8
+    angleIncrease: -0.4
+    angleDecay: 2
   #SS220 weapon overhaul end
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Pistols/cobra.rsi
+    sprite: SS220/Objects/Weapons/Guns/Pistols/cobra.rsi #SS220 weapon overhaul
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -178,16 +214,6 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/Pistols/cobra.rsi
   - type: ChamberMagazineAmmoProvider
-    boltClosed: null
-  - type: Gun
-    fireRate: 4
-    muzzleFlashSupressed: true #SS220 weapon overhaul
-    soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/pistol.ogg #SS220 weapon overhaul
-      params:
-        volume: -4 #SS220 weapon overhaul
-    availableModes:
-    - SemiAuto
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -215,12 +241,12 @@
 
 - type: entity
   name: mk 58
-  parent: [BaseWeaponPistol, BaseSecurityContraband]
+  parent: [BaseWeaponPistol, BaseGunWieldable, BaseSecurityContraband] #SS220 weapon overhaul
   id: WeaponPistolMk58
   description: Designed by Nanotrasen’s Small Arms Division, the Mk58 is a conventional semi-automatic pistol with a simple recoil-operated action and excellent reliability. The standard sidearm of Nanotrasen’s station security and emergency response teams. Feeds from .35 pistol magazines.
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Pistols/mk58.rsi
+    sprite: SS220/Objects/Weapons/Guns/Pistols/mk58.rsi #SS220 weapon overhaul
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -237,21 +263,30 @@
       path: /Audio/SS220/Weapons/Guns/Cock/mk_cock.ogg # SS220 MK Resound by Rivgane
   - type: Item
     storedOffset: 0,-2
+  #SS220 weapon overhaul start
   - type: Gun
-    minAngle: 9 #SS220 weapon overhaul
-    maxAngle: 18 #SS220 weapon overhaul
+    canSuicide: true
+    minAngle: 9
+    maxAngle: 15
     fireRate: 5
+    angleDecay: 2
+    angleIncrease: 1.05
+    selectedMode: SemiAuto
     availableModes:
-    - SemiAuto
+      - SemiAuto
     soundMode:
       path: /Audio/SS220/Weapons/Guns/Misc/mk_selector.ogg # SS220 MK Resound by Rivgane (though it is unused)
     soundGunshot:
       path: /Audio/SS220/Weapons/Guns/Gunshots/mk_shot.ogg # SS220 MK Resound by Rivgane
     soundEmpty: /Audio/SS220/Weapons/Guns/Empty/mk_dryfire.ogg # SS220 MK Resound by Rivgane
-  #SS220 weapon overhaul start
   - type: GunAimable
     minAngle: -5
-    maxAngle: -10
+    maxAngle: -3
+  - type: GunWieldBonus
+    minAngle: -3
+    maxAngle: -8
+    angleIncrease: -0.4
+    angleDecay: 2
   #SS220 weapon overhaul end
   - type: ItemSlots
     slots:
@@ -277,12 +312,12 @@
 
 - type: entity
   name: N1984
-  parent: [BaseWeaponPistol, BaseSecurityContraband]
+  parent: [BaseWeaponPistol, BaseGunWieldable, BaseSecurityContraband] #SS220 weapon overhaul
   id: WeaponPistolN1984
   description: An exceptionally powerful ‘hand cannon’ designed as part of Nanotrasen's BFG initiative. Chambered in .45, the lord’s caliber, it is generally considered too unwieldy for standard use but has become something of a status symbol among Nanotrasen officials. Feeds from .45 pistol magazines.
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Pistols/N1984.rsi
+    sprite: SS220/Objects/Weapons/Guns/Pistols/N1984.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -291,20 +326,26 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/Pistols/N1984.rsi
   #SS220 weapon overhaul start
+  - type: Gun
+    canSuicide: true
+    minAngle: 9
+    maxAngle: 24
+    fireRate: 4
+    angleDecay: 4
+    angleIncrease: 4
+    selectedMode: SemiAuto
+    availableModes:
+      - SemiAuto
+      - FullAuto
   - type: GunAimable
     minAngle: -4
-    maxAngle: -10
+    maxAngle: -5
+  - type: GunWieldBonus
+    minAngle: -4
+    maxAngle: -14
+    angleIncrease: -3.2
+    angleDecay: 2
   #SS220 weapon overhaul end
-  - type: Gun
-    minAngle: 10 #SS220 weapon overhaul
-    maxAngle: 24 #SS220 weapon overhaul
-    angleIncrease: 5 #SS220 weapon overhaul
-    angleDecay: 9
-    fireRate: 4
-    availableModes:
-    - SemiAuto
-    soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/mk58.ogg
   - type: ItemSlots
     slots:
       gun_magazine:
