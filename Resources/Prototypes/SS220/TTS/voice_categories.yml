@@ -10,6 +10,10 @@
   color: "#FFD70060"
 
 - type: ttsVoiceCategory
+  id: Overwatch
+  name: tts-voice-category-overwatch-name
+
+- type: ttsVoiceCategory
   id: Warcraft3
   name: tts-voice-category-warcraft3-name
 

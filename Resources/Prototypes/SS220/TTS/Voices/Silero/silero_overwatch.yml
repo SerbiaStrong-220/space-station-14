@@ -3,7 +3,7 @@
   name: Zenyatta
   speaker: zenyatta
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -16,7 +16,7 @@
   name: Kiriko
   speaker: kiriko
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -29,7 +29,7 @@
   name: Hanzo
   speaker: hanzo
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -42,7 +42,7 @@
   name: Roadhog
   speaker: roadhog
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -55,7 +55,7 @@
   name: Sigma
   speaker: sigma
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -68,7 +68,7 @@
   name: Soldier_76
   speaker: soldier_76
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -81,7 +81,7 @@
   name: Junkrat
   speaker: junkrat
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -94,7 +94,7 @@
   name: Tracer
   speaker: tracer
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -107,7 +107,7 @@
   name: Genji
   speaker: genji
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -120,7 +120,7 @@
   name: Echo
   speaker: echo
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -133,7 +133,7 @@
   name: Sojourn
   speaker: sojourn
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -146,7 +146,7 @@
   name: Winston
   speaker: winston
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -159,7 +159,7 @@
   name: Reaper
   speaker: reaper
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -172,7 +172,7 @@
   name: Training_robot
   speaker: training_robot
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsSponsorRequirement
     sponsorTier: HugeShlopa
 
@@ -181,7 +181,7 @@
   name: Moira
   speaker: moira
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -194,7 +194,7 @@
   name: Ashe
   speaker: ashe
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -207,7 +207,7 @@
   name: Brigitte
   speaker: brigitte
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -220,7 +220,7 @@
   name: Mercy
   speaker: mercy
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -233,7 +233,7 @@
   name: Lucio_ov
   speaker: lucio_ov
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -246,7 +246,7 @@
   name: Dva_ov
   speaker: dva_ov
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -259,7 +259,7 @@
   name: Symmetra
   speaker: symmetra
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -272,7 +272,7 @@
   name: Zarya
   speaker: zarya
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -285,7 +285,7 @@
   name: Cassidy
   speaker: cassidy
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -298,7 +298,7 @@
   name: Baptiste
   speaker: baptiste
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -311,7 +311,7 @@
   name: Junker_queen
   speaker: junker_queen
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -324,7 +324,7 @@
   name: Doomfist
   speaker: doomfist
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -337,7 +337,7 @@
   name: Pharah
   speaker: pharah
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -350,7 +350,7 @@
   name: Sombra
   speaker: sombra
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -363,7 +363,7 @@
   name: Ana
   speaker: ana
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -376,7 +376,7 @@
   name: Widowmaker
   speaker: widowmaker
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -389,7 +389,7 @@
   name: Wrecking_Ball
   speaker: wrecking_ball
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsSexRequirement
     sexes: [ Male ]
 
@@ -398,7 +398,7 @@
   name: Tank
   speaker: tank
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsSponsorRequirement
     sponsorTier: HugeShlopa
 
@@ -407,7 +407,7 @@
   name: Torbjorn
   speaker: torbjorn
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsSexRequirement
     sexes: [ Male ]
 
@@ -416,7 +416,7 @@
   name: Reinhardt
   speaker: reinhardt
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsSexRequirement
     sexes: [ Male ]
 
@@ -425,7 +425,7 @@
   name: Orisa
   speaker: orisa
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsSexRequirement
     sexes: [ Female ]
 
@@ -434,7 +434,7 @@
   name: Mei
   speaker: mei
   provider: Silero
-  categories: [ OVERWATCH ]
+  categories: [ Overwatch ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement

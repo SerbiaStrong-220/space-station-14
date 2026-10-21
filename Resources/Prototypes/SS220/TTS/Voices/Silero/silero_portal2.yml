@@ -3,7 +3,7 @@
   name: Dictor
   speaker: dictor
   provider: Silero
-  categories: [ PORTAL2 ]
+  categories: [ Portal2 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement

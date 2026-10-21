@@ -586,6 +586,6 @@
   name: Dragonknight
   speaker: dragonknight
   provider: Silero
-  categories: [ DOTA2 ]
+  categories: [ Dota2 ]
   requirement: !type:TtsSexRequirement
     sexes: [ Male ]

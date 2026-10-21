@@ -34,7 +34,7 @@
   name: Kleiner
   speaker: kleiner
   provider: Silero
-  categories: [ HALFLIFE2 ]
+  categories: [ HalfLife2 ]
   requirement: !type:TtsSexRequirement
     sexes: [ Male ]
 
@@ -43,7 +43,7 @@
   name: Father
   speaker: father
   provider: Silero
-  categories: [ HALFLIFE2 ]
+  categories: [ HalfLife2 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -56,7 +56,7 @@
   name: Gman_e2
   speaker: gman_e2
   provider: Silero
-  categories: [ HALFLIFE2 ]
+  categories: [ HalfLife2 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -69,7 +69,7 @@
   name: Gman
   speaker: gman
   provider: Silero
-  categories: [ HALFLIFE2 ]
+  categories: [ HalfLife2 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -82,7 +82,7 @@
   name: Vort
   speaker: vort
   provider: Silero
-  categories: [ HALFLIFE2 ]
+  categories: [ HalfLife2 ]
   requirement: !type:TtsSexRequirement
     sexes: [ Male ]
 
@@ -91,7 +91,7 @@
   name: Overwatch
   speaker: overwatch
   provider: Silero
-  categories: [ HALFLIFE2 ]
+  categories: [ HalfLife2 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -104,7 +104,7 @@
   name: Breen
   speaker: breen
   provider: Silero
-  categories: [ HALFLIFE2 ]
+  categories: [ HalfLife2 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement

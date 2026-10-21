@@ -260,8 +260,7 @@
     - Robotics
   # SS220 Tts begin
   - type: Tts
-    randomVoicesList:
-      NTTS: Borg
+    randomVoicePreferences: Borg
   # SS220 Tts end
   - type: ProtectedFromStepTriggers
   - type: DamageOnInteractProtection

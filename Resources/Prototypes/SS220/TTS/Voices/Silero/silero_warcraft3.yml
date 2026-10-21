@@ -376,7 +376,7 @@
   name: Archmage
   speaker: archmage
   provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Warcraft3 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -389,7 +389,7 @@
   name: Admiral
   speaker: admiral
   provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Warcraft3 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -402,7 +402,7 @@
   name: Alchemist
   speaker: alchemist
   provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Warcraft3 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -415,7 +415,7 @@
   name: Archimonde
   speaker: archimonde
   provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Warcraft3 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -428,7 +428,7 @@
   name: Breaker
   speaker: breaker
   provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Warcraft3 ]
   requirement: !type:TtsSexRequirement
     sexes: [ Male ]
 
@@ -437,7 +437,7 @@
   name: Captain
   speaker: captain
   provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Warcraft3 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -450,7 +450,7 @@
   name: Dryad
   speaker: dryad
   provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Warcraft3 ]
   requirement: !type:TtsSponsorRequirement
     sponsorTier: BigShlopa
 
@@ -459,7 +459,7 @@
   name: Elf_eng
   speaker: elf_eng
   provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Warcraft3 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -472,7 +472,7 @@
   name: Footman
   speaker: footman
   provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Warcraft3 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -485,7 +485,7 @@
   name: Grom
   speaker: grom
   provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Warcraft3 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -498,7 +498,7 @@
   name: Hh
   speaker: hh
   provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Warcraft3 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -511,7 +511,7 @@
   name: Huntress
   speaker: huntress
   provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Warcraft3 ]
   requirement: !type:TtsSexRequirement
     sexes: [ Female ]
 
@@ -520,7 +520,7 @@
   name: Keeper
   speaker: keeper
   provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Warcraft3 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -533,7 +533,7 @@
   name: Naga_m
   speaker: naga_m
   provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Warcraft3 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -546,7 +546,7 @@
   name: Naga_rg
   speaker: naga_rg
   provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Warcraft3 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -559,7 +559,7 @@
   name: Peasant_w
   speaker: peasant_w
   provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Warcraft3 ]
   requirement: !type:TtsSexRequirement
     sexes: [ Female ]
 
@@ -568,7 +568,7 @@
   name: Rifleman
   speaker: rifleman
   provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Warcraft3 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -581,7 +581,7 @@
   name: Satyr
   speaker: satyr
   provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Warcraft3 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -594,7 +594,7 @@
   name: Sylvanas_w
   speaker: sylvanas_w
   provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Warcraft3 ]
   requirement: !type:TtsSexRequirement
     sexes: [ Female ]
 
@@ -603,7 +603,7 @@
   name: Voljin
   speaker: voljin
   provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Warcraft3 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -616,7 +616,7 @@
   name: Gryphon
   speaker: gryphon
   provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Warcraft3 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -629,7 +629,7 @@
   name: warcraft_garrosh
   speaker: warcraft_garrosh
   provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Warcraft3 ]
   requirement: !type:TtsSexRequirement
     sexes: [ Male ]
 
@@ -638,7 +638,7 @@
   name: Kaelthas
   speaker: kaelthas
   provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Warcraft3 ]
   requirement: !type:TtsSexRequirement
     sexes: [ Male ]
 
@@ -647,6 +647,6 @@
   name: Malganis
   speaker: malganis
   provider: Silero
-  categories: [ WARCRAFT3 ]
+  categories: [ Warcraft3 ]
   requirement: !type:TtsSexRequirement
     sexes: [ Male ]

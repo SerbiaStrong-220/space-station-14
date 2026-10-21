@@ -3,7 +3,7 @@
   name: Aradesh
   speaker: aradesh
   provider: Silero
-  categories: [ FALLOUT ]
+  categories: [ Fallout ]
   requirement: !type:TtsSexRequirement
     sexes: [ Male ]
 
@@ -12,7 +12,7 @@
   name: Dornan
   speaker: dornan
   provider: Silero
-  categories: [ FALLOUT2 ]
+  categories: [ Fallout2 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -25,7 +25,7 @@
   name: Elder
   speaker: elder
   provider: Silero
-  categories: [ FALLOUT2 ]
+  categories: [ Fallout2 ]
   requirement: !type:TtsSexRequirement
     sexes: [ Female ]
 
@@ -34,7 +34,7 @@
   name: Harris
   speaker: harris
   provider: Silero
-  categories: [ FALLOUT ]
+  categories: [ Fallout ]
   requirement: !type:TtsSexRequirement
     sexes: [ Male ]
 
@@ -43,7 +43,7 @@
   name: Cabbot
   speaker: cabbot
   provider: Silero
-  categories: [ FALLOUT ]
+  categories: [ Fallout ]
   requirement: !type:TtsSexRequirement
     sexes: [ Male ]
 
@@ -52,7 +52,7 @@
   name: Decker
   speaker: decker
   provider: Silero
-  categories: [ FALLOUT ]
+  categories: [ Fallout ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -65,7 +65,7 @@
   name: Dick
   speaker: dick
   provider: Silero
-  categories: [ FALLOUT2 ]
+  categories: [ Fallout2 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -78,7 +78,7 @@
   name: Officer
   speaker: officer
   provider: Silero
-  categories: [ FALLOUT2 ]
+  categories: [ Fallout2 ]
   requirement: !type:TtsSexRequirement
     sexes: [ Male ]
 
@@ -87,7 +87,7 @@
   name: Frank
   speaker: frank
   provider: Silero
-  categories: [ FALLOUT2 ]
+  categories: [ Fallout2 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -100,7 +100,7 @@
   name: Gizmo
   speaker: gizmo
   provider: Silero
-  categories: [ FALLOUT ]
+  categories: [ Fallout ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -113,7 +113,7 @@
   name: Hakunin
   speaker: hakunin
   provider: Silero
-  categories: [ FALLOUT2 ]
+  categories: [ Fallout2 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -126,7 +126,7 @@
   name: Harold
   speaker: harold
   provider: Silero
-  categories: [ FALLOUT2 ]
+  categories: [ Fallout2 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -139,7 +139,7 @@
   name: Harry
   speaker: harry
   provider: Silero
-  categories: [ FALLOUT ]
+  categories: [ Fallout ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -152,7 +152,7 @@
   name: Jain
   speaker: jain
   provider: Silero
-  categories: [ FALLOUT ]
+  categories: [ Fallout ]
   requirement: !type:TtsSexRequirement
     sexes: [ Female ]
 
@@ -161,7 +161,7 @@
   name: Maxson
   speaker: maxson
   provider: Silero
-  categories: [ FALLOUT ]
+  categories: [ Fallout ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -174,7 +174,7 @@
   name: Killian
   speaker: killian
   provider: Silero
-  categories: [ FALLOUT ]
+  categories: [ Fallout ]
   requirement: !type:TtsSexRequirement
     sexes: [ Male ]
 
@@ -183,7 +183,7 @@
   name: Laura
   speaker: laura
   provider: Silero
-  categories: [ FALLOUT ]
+  categories: [ Fallout ]
   requirement: !type:TtsSexRequirement
     sexes: [ Female ]
 
@@ -192,7 +192,7 @@
   name: Lieutenant
   speaker: lieutenant
   provider: Silero
-  categories: [ FALLOUT ]
+  categories: [ Fallout ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -205,7 +205,7 @@
   name: Loxley
   speaker: loxley
   provider: Silero
-  categories: [ FALLOUT ]
+  categories: [ Fallout ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -218,7 +218,7 @@
   name: Lynette
   speaker: lynette
   provider: Silero
-  categories: [ FALLOUT2 ]
+  categories: [ Fallout2 ]
   requirement: !type:TtsSexRequirement
     sexes: [ Female ]
 
@@ -227,7 +227,7 @@
   name: Marcus
   speaker: marcus
   provider: Silero
-  categories: [ FALLOUT2 ]
+  categories: [ Fallout2 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -240,7 +240,7 @@
   name: Master
   speaker: master
   provider: Silero
-  categories: [ FALLOUT ]
+  categories: [ Fallout ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -253,7 +253,7 @@
   name: Morpheus
   speaker: morpheus
   provider: Silero
-  categories: [ FALLOUT ]
+  categories: [ Fallout ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -266,7 +266,7 @@
   name: Myron
   speaker: myron
   provider: Silero
-  categories: [ FALLOUT2 ]
+  categories: [ Fallout2 ]
   requirement: !type:TtsSponsorRequirement
     sponsorTier: Shlopa
 
@@ -275,7 +275,7 @@
   name: Nicole
   speaker: nicole
   provider: Silero
-  categories: [ FALLOUT ]
+  categories: [ Fallout ]
   requirement: !type:TtsSexRequirement
     sexes: [ Female ]
 
@@ -284,7 +284,7 @@
   name: Overseer
   speaker: overseer
   provider: Silero
-  categories: [ FALLOUT ]
+  categories: [ Fallout ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -297,7 +297,7 @@
   name: Rhombus
   speaker: rhombus
   provider: Silero
-  categories: [ FALLOUT ]
+  categories: [ Fallout ]
   requirement: !type:TtsSexRequirement
     sexes: [ Male ]
 
@@ -306,7 +306,7 @@
   name: Set
   speaker: set
   provider: Silero
-  categories: [ FALLOUT ]
+  categories: [ Fallout ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -319,7 +319,7 @@
   name: Sulik
   speaker: sulik
   provider: Silero
-  categories: [ FALLOUT2 ]
+  categories: [ Fallout2 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -332,7 +332,7 @@
   name: Tandi
   speaker: tandi
   provider: Silero
-  categories: [ FALLOUT ]
+  categories: [ Fallout ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -345,6 +345,6 @@
   name: Vree
   speaker: vree
   provider: Silero
-  categories: [ FALLOUT ]
+  categories: [ Fallout ]
   requirement: !type:TtsSexRequirement
     sexes: [ Female ]

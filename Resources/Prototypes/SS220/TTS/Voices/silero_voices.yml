@@ -24,7 +24,7 @@
   name: Dude
   speaker: dude
   provider: Silero
-  categories: [ POSTAL2 ]
+  categories: [ Postal2 ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -37,7 +37,7 @@
   name: P3
   speaker: p3
   provider: Silero
-  categories: [ ATOMIC_HEART ]
+  categories: [ AtomicHeart ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -50,7 +50,7 @@
   name: Hraz
   speaker: hraz
   provider: Silero
-  categories: [ ATOMIC_HEART ]
+  categories: [ AtomicHeart ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -63,7 +63,7 @@
   name: Tereshkova
   speaker: tereshkova
   provider: Silero
-  categories: [ ATOMIC_HEART ]
+  categories: [ AtomicHeart ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -76,7 +76,7 @@
   name: Babazina
   speaker: babazina
   provider: Silero
-  categories: [ ATOMIC_HEART ]
+  categories: [ AtomicHeart ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
