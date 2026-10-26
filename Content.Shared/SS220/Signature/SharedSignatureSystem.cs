@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.Ghost;
 using Content.Shared.Paper;
 
 namespace Content.Shared.SS220.Signature;
@@ -14,9 +13,6 @@ public abstract class SharedSignatureSystem : EntitySystem
 
     private void OnSubmitSignature(Entity<PaperComponent> ent, ref SignatureSubmitMessage args)
     {
-        if (HasComp<GhostComponent>(args.Actor))
-            return;
-
         var signature = EnsureComp<SignatureComponent>(ent);
 
         var changedSignature = signature.Data == null || !signature.Data.Equals(args.Data);

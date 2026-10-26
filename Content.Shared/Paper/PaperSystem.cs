@@ -210,11 +210,6 @@ public sealed class PaperSystem : EntitySystem
 
     private void OnInputTextMessage(Entity<PaperComponent> entity, ref PaperInputTextMessage args)
     {
-        // SS220 ghost-paper-read bgn
-        if (HasComp<GhostComponent>(args.Actor))
-            return;
-        // SS220 ghost-paper-read end
-
         var ev = new PaperWriteAttemptEvent(entity.Owner);
         RaiseLocalEvent(args.Actor, ref ev);
         if (ev.Cancelled)
