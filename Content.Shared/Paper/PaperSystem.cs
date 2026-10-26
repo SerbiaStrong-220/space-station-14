@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Administration.Managers;
 using Content.Shared.UserInterface;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
@@ -25,6 +26,7 @@ namespace Content.Shared.Paper;
 public sealed class PaperSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private ISharedAdminManager _adminManager = default!; // SS220 ghost-paper-read
     [Dependency] private readonly IPrototypeManager _protoMan = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
@@ -95,7 +97,7 @@ public sealed class PaperSystem : EntitySystem
     private void BeforeUIOpen(Entity<PaperComponent> entity, ref BeforeActivatableUIOpenEvent args)
     {
         // SS220 ghost-paper-read bgn
-        if (HasComp<GhostComponent>(args.User))
+        if (HasComp<GhostComponent>(args.User) && !_adminManager.IsAdmin(args.User))
             return;
         // SS220 ghost-paper-read end
 
