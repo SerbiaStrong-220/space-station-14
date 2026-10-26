@@ -1,5 +1,7 @@
+<!-- SS220 guidebook-translation bgn: Corvax Russian translation (MIT), commit a5e876a34b0aab47253a359e82137299f11ea17e. -->
 <Document>
-# Pyrotechnics
-These chemicals are flammable and causes hazardous effects when making them (Plasma gas and explosions). It is recommended to make these chemicals in a safe environment.
+# Пиротехника
+Эти химические вещества легковоспламеняемы и вызывают опасные последствия при их производстве (газообразная плазма и взрывы). Рекомендуется создавать эти химические вещества в безопасных условиях.
 <GuideReagentGroupEmbed Group="Pyrotechnic"/>
 </Document>
+<!-- SS220 guidebook-translation end -->

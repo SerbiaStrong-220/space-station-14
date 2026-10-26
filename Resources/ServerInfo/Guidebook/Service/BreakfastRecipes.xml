@@ -1,9 +1,11 @@
+<!-- SS220 guidebook-translation bgn: Corvax Russian translation (MIT), commit a5e876a34b0aab47253a359e82137299f11ea17e. -->
 <Document>
 
-# Breakfast Recipes
+# Завтраки
 
-A wonderful way to start a shift! Or perhaps, to treat the crew to brunch midway through.
+Прекрасный способ начать смену! Или угостить экипаж вкусняшками посреди смены.
 
 <GuideMicrowaveGroupEmbed Group="Breakfast"/>
 
 </Document>
+<!-- SS220 guidebook-translation end -->

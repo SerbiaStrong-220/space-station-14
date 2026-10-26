@@ -1,9 +1,11 @@
+<!-- SS220 guidebook-translation bgn: Corvax Russian translation (MIT), commit a5e876a34b0aab47253a359e82137299f11ea17e; adapted to SS220. -->
 <Document>
 
-# Pastas & Noodles
+# Паста и лапша
 
-There's nothing like a big bowl of noodles.
+Нет ничего лучше большой тарелки лапши.
 
 <GuideMicrowaveGroupEmbed Group="Pasta"/>
 
 </Document>
+<!-- SS220 guidebook-translation end -->

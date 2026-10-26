@@ -1,5 +1,7 @@
+<!-- SS220 guidebook-translation bgn: Corvax Russian translation (MIT), commit a5e876a34b0aab47253a359e82137299f11ea17e. -->
 <Document>
-# Toxins
-The chemicals in this list contain toxins that induce certain effects and can cause death. Use responsibly.
+# Токсины
+Химические вещества в этом списке содержат токсины, которые вызывают определённые эффекты и могут привести к смерти. Используйте ответственно.
 <GuideReagentGroupEmbed Group="Toxins"/>
 </Document>
+<!-- SS220 guidebook-translation end -->

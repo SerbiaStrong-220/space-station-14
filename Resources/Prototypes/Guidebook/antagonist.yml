@@ -14,6 +14,11 @@
   - MinorAntagonists
   - CultYogg #SS220 CultYogg
   - PirateExpansion # SS220 Pirate Expansion
+  # SS220 guidebook-expansion bgn
+  - SpaceDragon
+  - DarkReaper
+  - SpiderQueen
+  # SS220 guidebook-expansion end
 
 - type: guideEntry
   id: Traitors

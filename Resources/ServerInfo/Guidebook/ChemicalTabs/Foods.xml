@@ -1,8 +1,10 @@
+<!-- SS220 guidebook-translation bgn: Corvax Russian translation (MIT), commit a5e876a34b0aab47253a359e82137299f11ea17e. -->
 <Document>
-# Foods
+# Пищевые
 
-These reagents are mostly used in the kitchen. Very helpful for Chefs and/or Service Workers.
+Эти реагенты в основном используются на кухне. Очень полезны для поваров и/или сервисных работников.
 
 <GuideReagentGroupEmbed Group="Foods"/>
 
 </Document>
+<!-- SS220 guidebook-translation end -->

@@ -1,0 +1,74 @@
+<!-- SS220 guidebook-expansion bgn -->
+<Document>
+  # Тёмный жнец
+
+  <Box>
+    <Box Orientation="Vertical">
+      <GuideSpriteEmbed Sprite="SS220/DemonRofler/dark_reaper.rsi" State="jnec_s1"/>
+      [bold][color=#BD9FE8]Первая стадия[/color][/bold]
+    </Box>
+    <Box Orientation="Vertical">
+      <GuideSpriteEmbed Sprite="SS220/DemonRofler/dark_reaper.rsi" State="jnec_s2"/>
+      [bold][color=#EC9365]Вторая стадия[/color][/bold]
+    </Box>
+    <Box Orientation="Vertical">
+      <GuideSpriteEmbed Sprite="SS220/DemonRofler/dark_reaper.rsi" State="jnec_s3"/>
+      [bold][color=#E46868]Третья стадия[/color][/bold]
+    </Box>
+  </Box>
+
+  Жнец — охотник из иного мира, служащий Тиндалу. Он выслеживает экипаж в астрале, материализуется для нападения и поглощает погибших гуманоидов, чтобы развиваться.
+
+  <ColorBox Color="#351F2B" OutlineColor="#A85D78" Margin="4">
+    <Box Orientation="Vertical" Margin="10" HorizontalAlignment="Stretch">
+      [bold][color=#F0B6C9]Охота поддерживает вашу жизнь[/color][/bold]
+
+      После появления жнец постепенно получает урон от бездействия. Удары восстанавливают здоровье за счёт вампиризма, а успешная жатва дополнительно исцеляет. Не рассчитывайте бесконечно ждать в астрале.
+    </Box>
+  </ColorBox>
+
+  [bold][color=#E0BE70]Формы и нападение[/color][/bold]
+
+  «Явить себя» начинает ваше появление. После этого чередуйте астральную разведку и короткие выходы в материальный мир. В астрале нельзя применять жатву, крик и кровавый туман. Выбирайте цель и путь отступления до открытия врат.
+
+  <Box HorizontalAlignment="Left">
+    <GuideSpriteEmbed Sprite="SS220/DemonRofler/dark_reaper.rsi" State="jnecexit"/>
+    [bold][color=#BD9FE8]Врата[/color][/bold]
+  </Box>
+
+  Переход между формами. Время одного материального выхода растёт со стадией: [bold]15, 20 и 40 секунд[/bold]. Когда оно закончится, жнец вернётся в астрал. Не начинайте долгое поглощение в последние секунды выхода.
+
+  <Box HorizontalAlignment="Left">
+    <GuideSpriteEmbed Sprite="SS220/DemonRofler/dark_reaper.rsi" State="icon_jnecscream"/>
+    [bold][color=#E46868]Крик[/color][/bold]
+  </Box>
+
+  Парализует существ рядом, вызывает замешательство в более широком радиусе и разбивает ближайшие лампы. Используйте для начала нападения или отступления, но учитывайте перезарядку.
+
+  <Box HorizontalAlignment="Left">
+    <GuideSpriteEmbed Sprite="SS220/DemonRofler/dark_reaper.rsi" State="icon_jneceat"/>
+    [bold][color=#EC9365]Жатва[/color][/bold]
+  </Box>
+
+  Требует [bold]мёртвого гуманоида[/bold] и около девяти секунд на месте. Движение прерывает поглощение. Успех лечит жнеца и засчитывает жертву для следующей стадии; животные для развития не подходят.
+
+  <Box HorizontalAlignment="Left">
+    <GuideSpriteEmbed Sprite="SS220/DemonRofler/dark_reaper.rsi" State="icon_bloodmist"/>
+    [bold][color=#E46868]Кровавый туман[/color][/bold]
+  </Box>
+
+  Выпускает вокруг жнеца облако кровавого тумана. «Запугивание» воспроизводит пугающий звук; оно не заменяет оглушающий крик.
+
+  [bold][color=#E0BE70]Развитие[/color][/bold]
+
+  - [bold]Первая стадия:[/bold] поглотите трёх жертв для перехода на вторую.
+  - [bold]Вторая стадия:[/bold] счётчик обнуляется; для третьей нужно ещё восемь жертв.
+  - [bold]Третья стадия:[/bold] максимальное развитие. Станция получает предупреждение и уровень угрозы «Дельта».
+
+  Со стадиями растут урон в ближнем бою, вампиризм и длительность материальной формы. Оставшееся до перехода число жертв показывается в оповещении роли.
+
+  [bold][color=#E0BE70]Отыгрыш[/color][/bold]
+
+  Охотьтесь на живых существ. Разлив жидкостей из гостформы и технический саботаж станционных систем вместо охоты запрещены. Знания игрока о жнеце не равны знаниям персонажа: осведомлённость экипажа зависит от роли.
+</Document>
+<!-- SS220 guidebook-expansion end -->

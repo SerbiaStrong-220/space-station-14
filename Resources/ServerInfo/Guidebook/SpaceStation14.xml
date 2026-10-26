@@ -1,63 +1,71 @@
+<!-- SS220 guidebook-translation bgn -->
 <Document>
 # Космическая Станция 14
 
 Добро пожаловать в пре-альфа версию Космической Станции 14! Мы надеемся что игра вам понравится, и эта запись послужит вам руководством к тому, как научиться играть. Читать придётся довольно много, но КС14 сама по себе очень большая и глубокая игра, и мы надеемся что эти руководства помогут вам насладиться ею в полном объёме.
 
 ## Что это такое
+
 Космическая Станция 14 — бесплатный (навсегда) ремейк с открытым исходным кодом небезызвестной Космической Станции 13, призванный обеспечить улучшенный опыт как для новичков, так и для старых игроков. Космическая Станция 14 разрабатывается как полностью модифицируемый продукт, который вы можете изменять по своему вкусу с помощью пользовательских серверов, добавляя целые кучи нового контента.
 
 Если вы здесь для того чтобы просто поиграть — класс! Раздел [color=#a4885c]С чего начать[/color] этой записи вам поможет. Если вы хотите сделать что-то для игры — вы можете найти кнопки, ведущие на наши Discord и Github в лобби.
 
 ## С чего начать
+
 Рекомендуется начать с руководства [color=#a4885c]Управление[/color], а затем прочитать [color=#a4885c]Создание персонажа[/color], [color=#a4885c]Ролевой отыгрыш[/color] и [color=#a4885c]Должности[/color]. Не для всех должностей или концептов будут руководства, и если вы опытный игрок — очень просим помочь нам написать или перевести их!
 
-# Station and Shifts
+# Станция и смены
 
-Every round of SS14 is a [bold]self-contained shift[/bold] that takes place on one of many different stations.
+Каждый раунд SS14 — [bold]отдельная смена[/bold] на одной из космических станций.
 
-Rounds typically last from [color=cyan]45 to 90 minutes[/color], but players are free to leave and join at any point during a round.
+Продолжительность смены зависит от режима и событий. Можно присоединиться после её начала; для досрочного ухода используйте криосон и соблюдайте правила роли.
 
-## Shuttle Terminal
-If you join in the middle of a shift, you will likely spawn on the [color=lime]shuttle terminal[/color].
-Here you can grab drinks, converse with other players, and wait for the shuttle to take you to the station.
+## Терминал прибытия
 
-Screens on the walls will give you an ETA for the shuttle.
-When it arrives, simply walk on to be transported to the station.
+При позднем входе вы можете появиться на [color=lime]терминале прибытия[/color]. Точное место зависит от карты и должности.
+Здесь можно пообщаться с коллегами и дождаться шаттла до станции.
 
-Make sure to stay inside the terminal and to not stand in the shuttle landing zone. [color=#EB2D3A][bold]You can be crushed by shuttles flying in[/bold][/color]
+Настенные экраны показывают время до прибытия шаттла.
+Когда шаттл прибудет, зайдите внутрь и дождитесь перелёта.
 
-## Navigation
-Every station has a wide variety of locations to visit.
-These range from specific departments where work happens to common areas where you can relax and chat with others.
+Ожидайте внутри терминала, не на посадочной площадке: [color=#EB2D3A][bold]прибывающий шаттл может раздавить вас.[/bold][/color]
+
+## Ориентирование
+
+На станции есть рабочие отделы, общие помещения и технические тоннели.
+Изучите путь к своему рабочему месту, медотделу и эвакуационному шаттлу.
 
 <Box>
   <GuideEntityEmbed Entity="StationMap"/>
-  <GuideEntityEmbed Entity="SignDirectionalDorms" Caption="Directional Signs"/>
-  <GuideEntityEmbed Entity="SignBridge" Caption="Marker Signs"/>
+  <GuideEntityEmbed Entity="SignDirectionalDorms" Caption="Указатели направлений"/>
+  <GuideEntityEmbed Entity="SignBridge" Caption="Таблички помещений"/>
 </Box>
 
-[color=cyan]Station maps[/color] give you an overview of the entire station with colored markers denoting locations of different things.
-Regular [color=cyan]signs[/color] on walls can point you to different departments.
+[color=cyan]Карта станции[/color] показывает расположение помещений и важных объектов с помощью цветных отметок.
+Настенные [color=cyan]указатели[/color] помогут найти нужный отдел.
 
-## Leaving the Station
-At the end of the shift [color=gray](barring a [color=red][bold]nuclear disaster[/bold][/color])[/color], you will leave the station via the [color=lime]evac shuttle[/color].
-When it's called, an announcement will play on the station alerting the crew and signaling its [color=cyan]arrival in 10 minutes.[/color]
-Once it arrives, you'll need to make your way over to it, board it, and then survive the trip to [bold]Central Command[/bold].
+## Завершение смены
 
-The round doesn't officially end until you reach [bold]Central Command[/bold]
+Обычно в конце смены экипаж покидает станцию на [color=lime]эвакуационном шаттле[/color]. Катастрофы и отдельные режимы могут изменить этот порядок.
+После вызова прозвучит объявление с временем прибытия. Ориентируйтесь на него и таймеры: время зависит от условий вызова.
+Прибудьте к шаттлу, зайдите внутрь и дождитесь окончания перелёта на [bold]Центральное командование[/bold].
+
+До завершения раунда правила продолжают действовать, в том числе на борту шаттла.
 
 <Box>
   <GuideEntityEmbed Entity="CryogenicSleepUnit"/>
 </Box>
 
-If you need to leave a round early, you can do so through a [color=lime]cryogenic sleep unit[/color].
-Simply going inside and leaving the game will store your belongings and ensure that they are not stolen or misused.
+Для досрочного выхода из смены используйте [color=lime]капсулу криогенного сна[/color].
+Предупредите коллег об уходе и верните важное оборудование, затем воспользуйтесь криокапсулой. Соблюдайте ограничения своей роли.
 
-## More Info
-Learning the controls? [textlink="Click here to read about the different controls" link="Controls"]
+## Что почитать дальше
 
-Don't know how to perform a job? [textlink="Click here to jump to a list of departments" link="Jobs"]
+Осваиваете игру? Начните с [textlink="управления" link="Controls"].
 
-Keep dying? [textlink="Click here to see a survival guide" link="Survival"]
+Не знаете, чем заняться? Откройте [textlink="список отделов и должностей" link="Jobs"].
+
+Часто погибаете? Прочитайте [textlink="руководство по выживанию" link="Survival"].
 
 </Document>
+<!-- SS220 guidebook-translation end -->

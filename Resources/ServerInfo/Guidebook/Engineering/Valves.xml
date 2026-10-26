@@ -1,6 +1,7 @@
-﻿<Document>
-  # Valves
-  Valves are a quick way to halt or permit gas flow through a [textlink="pipenet" link="PipeNetworks"].
+<!-- SS220 guidebook-translation bgn: Corvax Russian translation (MIT), commit a5e876a34b0aab47253a359e82137299f11ea17e. -->
+<Document>
+  # Клапаны
+  Клапаны, это быстрый способ остановить или разрешить поток газа через [textlink="сеть труб" link="PipeNetworks"].
   <Box>
     <GuideEntityEmbed Entity="GasValve"/>
     <GuideEntityEmbed Entity="SignalControlledValve"/>
@@ -8,9 +9,10 @@
     <GuideEntityEmbed Entity="GasPassiveGate"/>
     <GuideEntityEmbed Entity="GasPressureRegulator"/>
   </Box>
-  All valves do not require [textlink="power" link="Power"] to operate.
+  Для работы всем клапанам не требуется [textlink="энергия" link="Power"] для работы.
 
-  Valves may look simple, but they can enable a wide variety of complex pipe systems, including:
-  - Signal valves responding to air alarm or logic gate outputs
-  - Pneumatic valves controlling variable venting of waste gasses from a burn chamber
+  Клапаны могут выглядеть простыми, но они позволяют создавать самые разнообразные сложные сети труб, в том числе:
+  - Сигнальные клапаны, реагирующие на сигналы воздушной сигнализации или выходы логических элементов
+  - Пневматические клапаны, контролирующие регулируемый отвод отходящих газов из камеры сгорания
 </Document>
+<!-- SS220 guidebook-translation end -->

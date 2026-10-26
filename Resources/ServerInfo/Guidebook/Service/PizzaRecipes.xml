@@ -1,9 +1,11 @@
+<!-- SS220 guidebook-translation bgn: Corvax Russian translation (MIT), commit a5e876a34b0aab47253a359e82137299f11ea17e. -->
 <Document>
 
-# Pizza Pies
+# Пицца
 
-Pizzas are a great way to prepare food for a large crew, as each pizza is 8 servings.
+Пицца, отличный способ приготовить еду для большой компании, так как каждая пицца рассчитана на 8 порций.
 
 <GuideMicrowaveGroupEmbed Group="Pizza"/>
 
 </Document>
+<!-- SS220 guidebook-translation end -->

@@ -1,3 +1,4 @@
+<!-- SS220 guidebook-translation bgn -->
 <Document>
   # Расы
 
@@ -18,7 +19,8 @@
   <GuideEntityEmbed Entity="AppearanceVox" Caption="Вокс"/>
   </Box>
   <Box>
-    <GuideEntityEmbed Entity="AppearanceVulpkanin" Caption="Vulpkanin"/>
+    <GuideEntityEmbed Entity="AppearanceVulpkanin" Caption="Вульпканин"/>
   </Box>
 
 </Document>
+<!-- SS220 guidebook-translation end -->
