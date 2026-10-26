@@ -31,8 +31,8 @@
         - !type:ReagentCondition
           reagent: Anaphyl
           min: 3.5
-        walkSpeedModifier: 1.7
-        sprintSpeedModifier: 1.7
+        walkSpeedModifier: 1.5
+        sprintSpeedModifier: 1.5
       - !type:PopupMessage
         conditions:
         - !type:ReagentCondition
