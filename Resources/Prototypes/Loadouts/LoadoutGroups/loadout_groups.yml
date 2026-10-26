@@ -789,6 +789,7 @@
   - MimeFrenchBeret
   - MimeCap
   - MoryakHead #SS220-Two Floppa Iterarion
+  - HarlequinHead #SS220-mime-harlequin
 
 - type: loadoutGroup
   id: MimeMask
@@ -798,6 +799,7 @@
   - MimeMaskSad
   - MimeMaskScared
   - MoryakMask #SS220-Two Floppa Iterarion
+  - HarlequinMask #SS220-mime-harlequin
 
 - type: loadoutGroup
   id: MimeJumpsuit
@@ -806,6 +808,7 @@
   - MimeJumpsuit
   - MimeJumpskirt
   - MoryakJumpsuit #SS220-Two Floppa Iterarion
+  - HarlequinUniform #SS220-mime-harlequin
 
 - type: loadoutGroup
   id: MimeBackpack
@@ -825,6 +828,7 @@
 - type: loadoutGroup
   id: MimeBelt
   name: loadout-group-mime-belt
+  minLimit: 0 #SS220-mime-harlequin
   loadouts:
   - MimeSuspendersRed
   - MimeSuspendersBlack
