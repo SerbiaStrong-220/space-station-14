@@ -13,4 +13,6 @@ trait-uncloneable-name = Неклонируемый
 trait-uncloneable-desc = Не может быть клонирован.
 
 trait-one-armed-name = Однорукий
-trait-one-armed-desc = У вас отсутствует одна рука.
+trait-one-armed-desc = У вас отсутствует одна рука. Выберите, какая — левая или правая.
+trait-one-armed-option-right = Правая
+trait-one-armed-option-left = Левая

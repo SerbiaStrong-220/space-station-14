@@ -61,9 +61,17 @@
   name: trait-one-armed-name
   description: trait-one-armed-desc
   category: Disabilities
+  options:
+    Right: trait-one-armed-option-right
+    Left: trait-one-armed-option-left
   specials:
   - !type:RemoveOrgansSpecial
-    categories:
-    - HandRight
-    - ArmRight
+    defaultVariant: Right
+    variantCategories:
+      Right:
+      - HandRight
+      - ArmRight
+      Left:
+      - HandLeft
+      - ArmLeft
 

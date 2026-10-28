@@ -6,15 +6,26 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.Traits.Specials;
 
-// Detaches and deletes organs with the given categories.
+// Deletes the organs of the selected variant.
 [UsedImplicitly]
-public sealed partial class RemoveOrgansSpecial : JobSpecial
+public sealed partial class RemoveOrgansSpecial : JobSpecial, ITraitOptionSpecial
 {
     [DataField(required: true)]
-    public HashSet<ProtoId<OrganCategoryPrototype>> Categories { get; private set; } = [];
+    public Dictionary<string, HashSet<ProtoId<OrganCategoryPrototype>>> VariantCategories { get; private set; } = [];
+
+    [DataField(required: true)]
+    public string DefaultVariant { get; private set; } = string.Empty;
 
     public override void AfterEquip(EntityUid uid)
     {
+        AfterEquip(uid, null);
+    }
+
+    public void AfterEquip(EntityUid uid, string? option)
+    {
+        var variant = option ?? DefaultVariant;
+        var categories = VariantCategories[variant];
+
         var entMan = IoCManager.Resolve<IEntityManager>();
 
         if (!entMan.TryGetComponent<BodyComponent>(uid, out var body) || body.Organs == null)
@@ -27,7 +38,7 @@ public sealed partial class RemoveOrgansSpecial : JobSpecial
         {
             if (!entMan.TryGetComponent<OrganComponent>(organ, out var organComp)
                 || organComp.Category is not { } category
-                || !Categories.Contains(category))
+                || !categories.Contains(category))
             {
                 continue;
             }
