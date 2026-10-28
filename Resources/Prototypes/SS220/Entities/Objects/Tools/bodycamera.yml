@@ -15,7 +15,6 @@
     - neck
   - type: Item
     size: Normal
-
   - type: UserInterface
     interfaces:
       enum.SurveillanceCameraSetupUiKey.Camera:
@@ -37,10 +36,8 @@
       - SurveillanceCamera
       - SurveillanceCameraMonitor
       - RadioSpeaker
-
   - type: ActiveListener
     range: 5
-
   - type: StationAiVision
     enabled: true
     needsPower: false
@@ -52,7 +49,6 @@
   - type: Eye
   - type: DetectiveCamera
   - type: WearableCamera
-
   - type: Tag
     tags:
     - DetectiveCamera

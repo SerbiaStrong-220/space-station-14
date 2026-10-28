@@ -13,6 +13,3 @@ public sealed partial class BodyCameraPowerComponent : Component
     [DataField]
     public float DrawRate = 1f;
 }
-
-[ByRefEvent]
-public readonly record struct BodyCameraActiveChangedEvent(bool Active);

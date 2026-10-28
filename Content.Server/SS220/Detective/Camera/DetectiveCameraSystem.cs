@@ -3,7 +3,9 @@
 using Content.Server.Popups;
 using Content.Server.SurveillanceCamera;
 using Content.Shared.Interaction.Events;
-using Content.Shared.PowerCell;
+using Content.Shared.Power;
+using Content.Shared.Power.Components;
+using Content.Shared.Power.EntitySystems;
 using Content.Shared.SS220.BodyCamera;
 using Content.Shared.SurveillanceCamera.Components;
 using Robust.Shared.Audio.Systems;
@@ -15,7 +17,7 @@ public sealed partial class DetectiveCameraSystem : EntitySystem
     [Dependency] private SurveillanceCameraSystem _camera = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private PopupSystem _popup = default!;
-    [Dependency] private PowerCellSystem _powerCell = default!;
+    [Dependency] private SharedBatterySystem _battery = default!;
 
     public override void Initialize()
     {
@@ -23,12 +25,12 @@ public sealed partial class DetectiveCameraSystem : EntitySystem
 
         SubscribeLocalEvent<DetectiveCameraComponent, ComponentStartup>(OnComponentStartup);
         SubscribeLocalEvent<DetectiveCameraComponent, UseInHandEvent>(OnUseInHand);
-        SubscribeLocalEvent<DetectiveCameraComponent, PowerCellSlotEmptyEvent>(OnPowerCellEmpty);
+        SubscribeLocalEvent<DetectiveCameraComponent, BatteryStateChangedEvent>(OnBatteryStateChanged);
     }
 
-    private void OnPowerCellEmpty(Entity<DetectiveCameraComponent> ent, ref PowerCellSlotEmptyEvent args)
+    private void OnBatteryStateChanged(Entity<DetectiveCameraComponent> ent, ref BatteryStateChangedEvent args)
     {
-        if (!ent.Comp.Enabled)
+        if (args.NewState != BatteryState.Empty || !ent.Comp.Enabled)
             return;
 
         ent.Comp.Enabled = false;
@@ -63,7 +65,7 @@ public sealed partial class DetectiveCameraSystem : EntitySystem
         if (!TryComp<SurveillanceCameraComponent>(uid, out var cameraComponent))
             return false;
 
-        if (!component.Enabled && HasComp<BodyCameraPowerComponent>(uid) && !_powerCell.HasDrawCharge(uid, user))
+        if (!component.Enabled && HasComp<BodyCameraPowerComponent>(uid) && _battery.GetCharge(uid) <= 0f)
             return false;
 
         if (component.ActivateCameraOnEnable)

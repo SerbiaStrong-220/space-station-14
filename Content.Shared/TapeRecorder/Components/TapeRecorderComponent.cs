@@ -17,18 +17,19 @@ public sealed partial class TapeRecorderComponent : Component
     [DataField, AutoNetworkedField]
     public TapeRecorderMode Mode = TapeRecorderMode.Stopped;
 
-    // SS220 TapeRecorder & Bodycam update BGN
+    // SS220-taperecorder-bodycam begin
+    /// <summary>
+    /// Only recording is allowed, playback and rewinding are unavailable.
+    /// </summary>
     [DataField, AutoNetworkedField]
-    public bool RecordingOnly = false;
-    // SS220 TapeRecorder & Bodycam update END
+    public bool RecordingOnly;
 
-    // SS220 TapeRecored & BodycamUpdate BGN
     /// <summary>
     /// Records into storage on this entity instead of a removable cassette, without a duration limit.
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool InternalStorage;
-    // SS220 TapeRecored & BodycamUpdate END
+    // SS220-taperecorder-bodycam end
 
     /// <summary>
     /// Paper that will spawn when printing transcript

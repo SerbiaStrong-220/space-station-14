@@ -1,15 +1,18 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Examine;
+using Content.Shared.GameTicking;
 using Content.Shared.Inventory;
 using Content.Shared.Roles;
 using Content.Shared.Storage;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.Badge;
 
 public sealed partial class BadgeSystem : EntitySystem
 {
+    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private MetaDataSystem _metaData = default!;
 
@@ -17,36 +20,48 @@ public sealed partial class BadgeSystem : EntitySystem
     {
         base.Initialize();
 
+        SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
         SubscribeLocalEvent<BadgeComponent, ExaminedEvent>(OnExamined);
     }
 
-    public void SetBadgeData(EntityUid ent, string characterName, JobPrototype jobPrototype)
+    private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent args)
     {
-        if (!_inventory.TryGetSlotEntity(ent, "back", out var backUid))
+        if (args.JobId is not { } jobId || !_prototype.TryIndex<JobPrototype>(jobId, out var job))
             return;
 
-        if (!TryComp<StorageComponent>(backUid, out var storage))
+        if (FindBadge(args.Mob) is not { } badge)
             return;
 
-        EntityUid? badgeUid = null;
-        foreach (var contained in storage.Container.ContainedEntities)
+        var name = Name(args.Mob);
+        badge.Comp.FullName = name;
+        badge.Comp.JobName = job.LocalizedName;
+        badge.Comp.SerialNumber = badge.Owner.Id.ToString("X6");
+        Dirty(badge);
+
+        _metaData.SetEntityName(badge, $"{Loc.GetString(badge.Comp.Label)}, {name}");
+    }
+
+    private Entity<BadgeComponent>? FindBadge(EntityUid mob)
+    {
+        if (!_inventory.TryGetContainerSlotEnumerator(mob, out var slots))
+            return null;
+
+        while (slots.NextItem(out var item))
         {
-            if (HasComp<BadgeComponent>(contained))
+            if (TryComp<BadgeComponent>(item, out var badge))
+                return (item, badge);
+
+            if (!TryComp<StorageComponent>(item, out var storage))
+                continue;
+
+            foreach (var contained in storage.Container.ContainedEntities)
             {
-                badgeUid = contained;
-                break;
+                if (TryComp(contained, out badge))
+                    return (contained, badge);
             }
         }
 
-        if (!TryComp<BadgeComponent>(badgeUid, out var badge))
-            return;
-
-        badge.FullName = characterName;
-        badge.JobName = jobPrototype.LocalizedName;
-        badge.SerialNumber = badgeUid.Value.Id.ToString("X6");
-        Dirty(badgeUid.Value, badge);
-
-        _metaData.SetEntityName(badgeUid.Value, $"{Loc.GetString(badge.Label)}, {characterName}");
+        return null;
     }
 
     private void OnExamined(Entity<BadgeComponent> ent, ref ExaminedEvent args)
@@ -58,7 +73,7 @@ public sealed partial class BadgeSystem : EntitySystem
             $"[color={ent.Comp.Color}]" +
             $"{Loc.GetString(ent.Comp.Department)}\n" +
             $"{FormattedMessage.EscapeText(ent.Comp.FullName)}\n" +
-            $"{ent.Comp.JobName}\n" +
+            $"{FormattedMessage.EscapeText(ent.Comp.JobName)}\n" +
             $"№ NT-FNK-{ent.Comp.SerialNumber}" +
             "[/color]"
         );

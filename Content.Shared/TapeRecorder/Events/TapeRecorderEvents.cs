@@ -31,7 +31,7 @@ public sealed class TapeRecorderState : BoundUserInterfaceState
     public float MaxTime;
     public string CassetteName;
     public TimeSpan PrintCooldown;
-    public bool CanRecord; // SS220 TapeRecored & BodycamUpdate
+    public bool CanRecord; // SS220-taperecorder-bodycam
 
     public TapeRecorderState(
         bool hasCasette,
@@ -40,7 +40,7 @@ public sealed class TapeRecorderState : BoundUserInterfaceState
         float maxTime,
         string cassetteName,
         TimeSpan printCooldown,
-        bool canRecord) // SS220 TapeRecored & BodycamUpdate
+        bool canRecord) // SS220-taperecorder-bodycam
     {
         HasCasette = hasCasette;
         HasData = hasData;
@@ -48,6 +48,6 @@ public sealed class TapeRecorderState : BoundUserInterfaceState
         MaxTime = maxTime;
         CassetteName = cassetteName;
         PrintCooldown = printCooldown;
-        CanRecord = canRecord; // SS220 TapeRecored & BodycamUpdate
+        CanRecord = canRecord; // SS220-taperecorder-bodycam
     }
 }

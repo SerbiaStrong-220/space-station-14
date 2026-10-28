@@ -8,10 +8,10 @@ namespace Content.Shared.SS220.Badge;
 public sealed partial class BadgeComponent : Component
 {
     [DataField]
-    public string Label = "badge-label-security";
+    public LocId Label = "badge-label-security";
 
     [DataField]
-    public string Department = "badge-department-security";
+    public LocId Department = "badge-department-security";
 
     [DataField]
     public string Color = "gold";

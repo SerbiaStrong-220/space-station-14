@@ -1,24 +1,23 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Server.SS220.SurveillanceCamera;
+using Content.Server.SurveillanceCamera;
 using Content.Shared.Power;
 using Content.Shared.Power.Components;
-using Content.Shared.Power.EntitySystems;
+using Content.Shared.Silicons.StationAi;
 using Content.Shared.SS220.BodyCamera;
 using Content.Shared.SS220.TapeRecorder;
+using Content.Shared.StationAi;
+using Content.Shared.SurveillanceCamera.Components;
 using Content.Shared.TapeRecorder;
 using Content.Shared.TapeRecorder.Components;
-using Content.Shared.Silicons.StationAi;
-using Content.Shared.StationAi;
-using Content.Shared.SurveillanceCamera;
-using Content.Shared.SurveillanceCamera.Components;
 
 namespace Content.Server.SS220.BodyCamera;
 
-public sealed partial class BodyCameraPowerSystem : EntitySystem
+public sealed partial class BodyCameraPowerSystem : SharedBodyCameraPowerSystem
 {
     [Dependency] private SharedStationAiSystem _stationAi = default!;
-    [Dependency] private SharedSurveillanceCameraSystem _surveillanceCamera = default!;
-    [Dependency] private SharedBatterySystem _battery = default!;
+    [Dependency] private SurveillanceCameraSystem _surveillanceCamera = default!;
     [Dependency] private SharedTapeRecorderSystem _recorder = default!;
 
     public override void Initialize()
@@ -28,8 +27,8 @@ public sealed partial class BodyCameraPowerSystem : EntitySystem
         SubscribeLocalEvent<BodyCameraPowerComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<BodyCameraPowerComponent, RefreshChargeRateEvent>(OnRefreshChargeRate);
         SubscribeLocalEvent<BodyCameraPowerComponent, BatteryStateChangedEvent>(OnBatteryStateChanged);
-        SubscribeLocalEvent<BodyCameraPowerComponent, BodyCameraActiveChangedEvent>(OnActiveChanged);
-        SubscribeLocalEvent<BodyCameraPowerComponent, TapeRecorderModeChangeAttemptEvent>(OnModeChangeAttempt);
+        SubscribeLocalEvent<BodyCameraPowerComponent, SurveillanceCameraSetActiveAttemptEvent>(OnCameraSetActiveAttempt);
+        SubscribeLocalEvent<BodyCameraPowerComponent, SurveillanceCameraActiveChangedEvent>(OnCameraActiveChanged);
         SubscribeLocalEvent<BodyCameraPowerComponent, TapeRecorderModeChangedEvent>(OnModeChanged);
     }
 
@@ -57,15 +56,15 @@ public sealed partial class BodyCameraPowerSystem : EntitySystem
         UpdatePowerAndVision(ent);
     }
 
-    private void OnActiveChanged(Entity<BodyCameraPowerComponent> ent, ref BodyCameraActiveChangedEvent args)
+    private void OnCameraSetActiveAttempt(Entity<BodyCameraPowerComponent> ent, ref SurveillanceCameraSetActiveAttemptEvent args)
     {
-        UpdatePowerAndVision(ent);
+        if (!HasCharge(ent))
+            args.Cancelled = true;
     }
 
-    private void OnModeChangeAttempt(Entity<BodyCameraPowerComponent> ent, ref TapeRecorderModeChangeAttemptEvent args)
+    private void OnCameraActiveChanged(Entity<BodyCameraPowerComponent> ent, ref SurveillanceCameraActiveChangedEvent args)
     {
-        if (_battery.GetCharge(ent.Owner) <= 0f)
-            args.Cancelled = true;
+        UpdatePowerAndVision(ent);
     }
 
     private void OnModeChanged(Entity<BodyCameraPowerComponent> ent, ref TapeRecorderModeChangedEvent args)
@@ -82,13 +81,12 @@ public sealed partial class BodyCameraPowerSystem : EntitySystem
 
     private void UpdatePowerAndVision(Entity<BodyCameraPowerComponent> ent)
     {
-        _battery.RefreshChargeRate(ent.Owner);
+        Battery.RefreshChargeRate(ent.Owner);
 
         if (!TryComp<StationAiVisionComponent>(ent, out var vision))
             return;
 
-        var hasCharge = _battery.GetCharge(ent.Owner) > 0f;
         var cameraActive = TryComp<SurveillanceCameraComponent>(ent, out var camera) && camera.Active;
-        _stationAi.SetVisionEnabled((ent.Owner, vision), hasCharge && cameraActive);
+        _stationAi.SetVisionEnabled((ent.Owner, vision), HasCharge(ent) && cameraActive);
     }
 }
