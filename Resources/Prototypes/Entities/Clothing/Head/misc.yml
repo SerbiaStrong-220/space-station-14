@@ -191,7 +191,7 @@
   - type: PhysicalComposition #you can't just pass up some free plastic!
     materialComposition:
       Plastic: 100
-  - type: StaticPrice
+  - type: StackPrice # Ss220 cone stack
     price: 25
   - type: Appearance
 # SS220 Stacking cones begin
