@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from TG Station https://github.com/tgstation/tgstation/blob/HEAD/icons/obj/clothing/glasses.dmi, modified and inhands and vox state sprited by Estkemran (Github) for SS220",
+  "copyright": "Taken from TG Station https://github.com/tgstation/tgstation/blob/HEAD/icons/obj/clothing/glasses.dmi, modified and inhands and vox state sprited by Estkemran (Github) for SS220; Forehead states: Taken from TG Station https://github.com/tgstation/tgstation/blob/HEAD/icons/obj/clothing/glasses.dmi, modified and inhands and vox state sprited by Estkemran (Github) for SS220, equipped-HELMET && equipped-HELMET-vox sprited by Dinazewwr (discord) for SS220.",
   "size": {
     "x": 32,
     "y": 32
@@ -24,6 +24,14 @@
     },
     {
       "name": "equipped-EYES-vox",
+      "directions": 4
+    },
+    {
+      "name": "equipped-HELMET",
+      "directions": 4
+    },
+    {
+      "name": "equipped-HELMET-vox",
       "directions": 4
     }
   ]

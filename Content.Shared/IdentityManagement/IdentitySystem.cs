@@ -1,3 +1,4 @@
+using Content.Shared.SS220.Clothing.Events;
 using Content.Shared.Access.Systems;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Clothing;
@@ -102,6 +103,13 @@ public sealed class IdentitySystem : EntitySystem
     // Adds an identity blocker's coverage, and cancels the event if coverage is complete.
     private void OnSeeIdentity(Entity<IdentityBlockerComponent> ent, ref SeeIdentityAttemptEvent args)
     {
+        // SS220-glasses-on-forehead-begin
+        var effectAttempt = new GlassesEffectAttemptEvent();
+        RaiseLocalEvent(ent.Owner, ref effectAttempt);
+        if (effectAttempt.Cancelled)
+            return;
+        // SS220-glasses-on-forehead-end
+
         if (ent.Comp.Enabled)
         {
             args.TotalCoverage |= ent.Comp.Coverage;
