@@ -401,8 +401,8 @@
       state: anom1
   - type: SupercriticalAnomaliesCondition
   - type: NumberObjective
-    min: 3
-    max: 4
+    min: 1 #SS220 was 3
+    max: 1 #SS220 was 4
     title: objective-condition-supercrit-anomalies-title
   - type: ObjectiveLimit
     limit: 1
