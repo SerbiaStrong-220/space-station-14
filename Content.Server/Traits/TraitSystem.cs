@@ -152,7 +152,7 @@ public sealed class TraitSystem : EntitySystem
     // SS220-TraitOptions begin
     private string? GetTraitOption(TraitPrototype traitPrototype, HumanoidCharacterProfile profile)
     {
-        if (traitPrototype.Options == null)
+        if (traitPrototype.Options is not { Count: > 0 })
             return null;
 
         if (profile.TraitOptions.TryGetValue(traitPrototype.ID, out var option) &&
