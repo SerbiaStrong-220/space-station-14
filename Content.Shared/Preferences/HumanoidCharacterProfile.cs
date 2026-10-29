@@ -167,7 +167,8 @@ namespace Content.Shared.Preferences
             HashSet<ProtoId<TraitPrototype>> traitPreferences,
             Dictionary<string, RoleLoadout> loadouts,
             SignatureData? signatureData = null, // ss220 add signature
-            bool lateTeleportAfkToCryoStorage = true) //SS220 Cryo-Teleport
+            bool lateTeleportAfkToCryoStorage = true, //SS220 Cryo-Teleport
+            Dictionary<ProtoId<TraitPrototype>, string>? traitOptions = null) //SS220-TraitOptions
         {
             Name = name;
             FlavorText = flavortext;
@@ -185,6 +186,8 @@ namespace Content.Shared.Preferences
             TeleportAfkToCryoStorage = lateTeleportAfkToCryoStorage; // SS220 Cryo-Teleport
             SignatureData = signatureData; // ss220 add signature
             _loadouts = loadouts;
+
+            _traitOptions = traitOptions ?? []; //SS220-TraitOptions
 
             var hasHighPrority = false;
             foreach (var (key, value) in _jobPriorities)
