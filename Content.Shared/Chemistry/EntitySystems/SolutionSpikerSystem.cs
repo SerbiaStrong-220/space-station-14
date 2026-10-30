@@ -62,7 +62,7 @@ public sealed class SolutionSpikerSystem : EntitySystem
         _popup.PopupClient(Loc.GetString(spikableSource.Popup, ("spiked-entity", target), ("spike-entity", source)), user, user);
         sourceSolution.RemoveAllSolution();
         if (spikableSource.Delete)
-            QueueDel(source);
+            PredictedQueueDel(source); // ss220 fix delete error on client
 
         return true;
     }

@@ -14,13 +14,13 @@ using Content.Shared.Station.Components;
 
 namespace Content.Server.SS220.DarkReaper;
 
-public sealed class DarkReaperMajorRuleSystem : GameRuleSystem<DarkReaperMajorRuleComponent>
+public sealed partial class DarkReaperMajorRuleSystem : GameRuleSystem<DarkReaperMajorRuleComponent>
 {
-    [Dependency] private readonly SpecialRespawnSystem _specialRespawn = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private SpecialRespawnSystem _specialRespawn = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
 
     public override void Initialize()
     {

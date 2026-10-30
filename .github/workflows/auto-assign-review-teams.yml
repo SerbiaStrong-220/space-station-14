@@ -1,0 +1,92 @@
+name: "Auto review Teams"
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+      - labeled
+
+jobs:
+  assign_review_teams:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+    steps:
+      - name: Wait for labels to be added
+        run: sleep 5 # затычка до нормального бобработчика
+
+      - name: Generate token
+        id: generate_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.REVIEWER_APP }}
+          private-key: ${{ secrets.REVIEWER_PRIVATE_KEY }}
+
+      - uses: actions/github-script@v8
+        with:
+          github-token: ${{ steps.generate_token.outputs.token }}
+          script: |
+            const prNumber = context.payload.pull_request.number;
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            // pr meta request
+            const [{ data: pullRequest }, { data: reviews }] = await Promise.all([
+              github.rest.pulls.get({ owner, repo, pull_number: prNumber }),
+              github.rest.pulls.listReviews({ owner, repo, pull_number: prNumber })
+            ]);
+
+            if (pullRequest.draft) return;
+
+            // check pr changes and teams
+            const labelTeamMap = {
+              'Changes: C#': 'review-code',
+              'Changes: Localization': 'review-code',
+              'Changes: Prototypes': 'review-code',
+              'Changes: Shaders': 'review-code',
+              'Changes: UI': 'review-code',
+              'Changes: Sprites': 'review-sprite',
+              'Changes: Map': 'review-map'
+            };
+
+            const potentialTeams = new Set();
+            for (const label of pullRequest.labels) {
+              if (labelTeamMap[label.name]) {
+                potentialTeams.add(labelTeamMap[label.name]);
+              }
+            }
+
+            if (potentialTeams.size === 0) return;
+
+            // create list of all available and active reviewers for pr
+            const requestedReviewers = pullRequest.requested_reviewers.map(u => u.login);
+            const pastReviewers = reviews.map(r => r.user.login);
+            const involvedReviewers = new Set([...requestedReviewers, ...pastReviewers]);
+
+            const teamsToActuallyAdd = [];
+
+            // check available to add request team review
+            for (const teamSlug of potentialTeams) {
+              const { data: members } = await github.rest.teams.listMembersInOrg({
+                org: owner,
+                team_slug: teamSlug
+              });
+
+              const alreadyHasReviewer = members.some(m => involvedReviewers.has(m.login));
+
+              if (!alreadyHasReviewer) {
+                teamsToActuallyAdd.push(teamSlug);
+              }
+            }
+
+            // request team review
+            if (teamsToActuallyAdd.length > 0) {
+              await github.rest.pulls.requestReviewers({
+                owner,
+                repo,
+                pull_number: prNumber,
+                team_reviewers: teamsToActuallyAdd
+              });
+            }

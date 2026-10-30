@@ -2,7 +2,7 @@
   # Унатх
 
   <Box>
-    <GuideEntityEmbed Entity="MobReptilian" Caption=""/>
+    <GuideEntityEmbed Entity="AppearanceReptilian" Caption=""/>
   </Box>
 
   Они могут питаться ТОЛЬКО фруктами и мясом, причём сырое мясо и кровь не причиняют им никакого вреда.

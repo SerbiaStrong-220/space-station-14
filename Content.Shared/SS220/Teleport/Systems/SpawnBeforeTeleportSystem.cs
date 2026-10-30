@@ -4,20 +4,20 @@ using Content.Shared.SS220.Teleport.Components;
 
 namespace Content.Shared.SS220.Teleport.Systems;
 
-public sealed class SpawnBeforeTeleportSystem : EntitySystem
+public sealed partial class SpawnBeforeTeleportSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<SpawnBeforeTeleportComponent, BeforeTeleportTargetEvent>(OnBeforeTeleport);
+        SubscribeLocalEvent<SpawnBeforeTeleportComponent, BeforeTeleportEvent>(OnBeforeTeleport);
     }
 
-    private void OnBeforeTeleport(Entity<SpawnBeforeTeleportComponent> ent, ref BeforeTeleportTargetEvent args)
+    private void OnBeforeTeleport(Entity<SpawnBeforeTeleportComponent> ent, ref BeforeTeleportEvent args)
     {
-        var position = _transform.GetMapCoordinates(ent);
-        EntityManager.PredictedSpawn(ent.Comp.SpawnedEnt, position);
+        var departureCoordinates = _transform.GetMapCoordinates(args.Target);
+        EntityManager.PredictedSpawn(ent.Comp.SpawnPrototype, departureCoordinates);
     }
 }

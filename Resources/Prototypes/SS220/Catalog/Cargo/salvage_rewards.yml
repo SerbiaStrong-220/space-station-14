@@ -1,0 +1,15 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: cargoProduct
+  id: CargoSalvageFloodlight
+  icon:
+    sprite: Objects/Misc/Lights/lights.rsi
+    state: floodlight
+  product: Floodlight
+  container:
+    entity: WrappedParcel
+    containerId: contents
+  cost: 750
+  category: cargoproduct-category-name-cargo
+  group: SalvageJobReward2
+

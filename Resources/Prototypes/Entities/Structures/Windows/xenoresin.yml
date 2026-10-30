@@ -6,9 +6,9 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: Structures/Windows/xeno_resin.rsi
+    sprite: SS220/Structures/Windows/xeno_resin.rsi # SS220 walls-sprite-update-v6
   - type: Icon
-    sprite: Structures/Windows/xeno_resin.rsi
+    sprite: SS220/Structures/Windows/xeno_resin.rsi # SS220 walls-sprite-update-v6
   - type: Destructible
     thresholds:
     - trigger:

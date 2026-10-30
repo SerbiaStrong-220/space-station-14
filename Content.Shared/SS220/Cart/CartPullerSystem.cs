@@ -8,8 +8,8 @@ namespace Content.Shared.SS220.Cart;
 
 public sealed partial class CartPullerSystem : EntitySystem
 {
-    [Dependency] private readonly CartSystem _cart = default!;
-    //[Dependency] private readonly SharedInteractionSystem _interaction = default!; Used for drag&drop
+    [Dependency] private CartSystem _cart = default!;
+    //[Dependency] private SharedInteractionSystem _interaction = default!; Used for drag&drop
 
     public override void Initialize()
     {

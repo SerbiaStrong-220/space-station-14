@@ -55,6 +55,11 @@
                 <BoxContainer Name="SpeciesContainer"  Orientation="Vertical" />
             </ScrollContainer>
             <!-- SS220 Species bans end -->
+            <!-- SS220 chats bans begin -->
+            <ScrollContainer>
+                <BoxContainer Name="ChatsContainer"  Orientation="Vertical" />
+            </ScrollContainer>
+            <!-- SS220 chats bans end -->
         </TabContainer>
         <Button Name="SubmitButton" Text="{Loc ban-panel-submit}" HorizontalExpand="True" />
     </BoxContainer>

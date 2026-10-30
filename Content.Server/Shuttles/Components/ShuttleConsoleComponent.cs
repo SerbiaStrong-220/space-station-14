@@ -25,5 +25,10 @@ namespace Content.Server.Shuttles.Components
         [DataField, ViewVariables]
         public EntityUid? CruiseControlTarget;
         // SS220 Cruise-Control end
+
+        // SS220 add additional control for shuttle start
+        [DataField]
+        public bool CanControlShuttle = true;
+        // SS220 add additional control for shuttle end
     }
 }

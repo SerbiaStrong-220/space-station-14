@@ -8,6 +8,7 @@ using Content.Shared.Tag;
 using Robust.Shared.Map;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using System.Linq;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Chemistry.TileReactions;
 
@@ -32,6 +33,8 @@ public sealed partial class CleanTileReaction : ITileReaction
     [DataField("reagent", customTypeSerializer: typeof(PrototypeIdSerializer<ReagentPrototype>))]
     public string ReplacementReagent = "Water";
 
+    private static readonly ProtoId<TagPrototype> ReactionCleanable = "ReactionCleanable"; // ss220 add reaction cleanable tag
+
     FixedPoint2 ITileReaction.TileReact(TileRef tile,
         ReagentPrototype reagent,
         FixedPoint2 reactVolume,
@@ -47,7 +50,7 @@ public sealed partial class CleanTileReaction : ITileReaction
 
         foreach (var entity in entities)
         {
-            if (tags.HasTag(entity, "ReactionCleanable"))
+            if (tags.HasTag(entity, ReactionCleanable)) // ss220 add reaction cleanable tag
             {
                 entityManager.QueueDeleteEntity(entity);
                 continue;

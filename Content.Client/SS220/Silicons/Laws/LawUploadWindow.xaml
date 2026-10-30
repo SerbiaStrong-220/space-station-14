@@ -1,0 +1,70 @@
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+<ui:FancyWindow xmlns="https://spacestation14.io"
+                xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls"
+                Title="{Loc 'law-upload-title'}"
+                MinSize="720 540" SetSize="860 660">
+    <BoxContainer Orientation="Vertical" SeparationOverride="10" Margin="8">
+        <PanelContainer Name="HeaderPanel">
+            <BoxContainer Orientation="Vertical" SeparationOverride="6" Margin="12">
+                <BoxContainer Orientation="Horizontal" SeparationOverride="10">
+                    <Label Text="{Loc 'law-upload-system-header'}" StyleClasses="LabelHeading" HorizontalExpand="True"/>
+                    <Label Name="StatusBadge" StyleClasses="LabelKeyText"/>
+                </BoxContainer>
+                <RichTextLabel Name="Status"/>
+            </BoxContainer>
+        </PanelContainer>
+        <PanelContainer Name="AccessPanel">
+            <BoxContainer Orientation="Horizontal" SeparationOverride="10" Margin="10 6">
+                <Label Text="{Loc 'law-upload-auth-header'}" StyleClasses="LabelKeyText"/>
+                <RichTextLabel Name="CardStatus" HorizontalExpand="True" VerticalAlignment="Center"/>
+                <Button Name="EjectCard" Text="{Loc 'law-upload-eject-card'}"/>
+            </BoxContainer>
+        </PanelContainer>
+        <BoxContainer Orientation="Horizontal" SeparationOverride="12" VerticalExpand="True">
+            <PanelContainer Name="CurrentPanel" HorizontalExpand="True" SizeFlagsStretchRatio="1">
+                <BoxContainer Orientation="Vertical" SeparationOverride="8" Margin="10">
+                    <Label Text="{Loc 'law-upload-current'}" StyleClasses="LabelHeading"/>
+                    <TabContainer Name="CurrentTabs" VerticalExpand="True">
+                        <BoxContainer Orientation="Vertical" SeparationOverride="8" Margin="8">
+                            <RichTextLabel Name="AiTitle" StyleClasses="LabelKeyText"/>
+                            <Label Name="AiCount" StyleClasses="LabelSubText"/>
+                            <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+                                <BoxContainer Name="AiLaws" Orientation="Vertical" SeparationOverride="5"/>
+                            </ScrollContainer>
+                        </BoxContainer>
+                        <BoxContainer Orientation="Vertical" SeparationOverride="8" Margin="8">
+                            <RichTextLabel Name="BorgTitle" StyleClasses="LabelKeyText"/>
+                            <Label Name="BorgCount" StyleClasses="LabelSubText"/>
+                            <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+                                <BoxContainer Name="BorgLaws" Orientation="Vertical" SeparationOverride="5"/>
+                            </ScrollContainer>
+                        </BoxContainer>
+                    </TabContainer>
+                </BoxContainer>
+            </PanelContainer>
+            <PanelContainer Name="BoardPanel" HorizontalExpand="True" SizeFlagsStretchRatio="1">
+                <BoxContainer Orientation="Vertical" SeparationOverride="8" Margin="10">
+                    <Label Text="{Loc 'law-upload-source-header'}" StyleClasses="LabelHeading"/>
+                    <RichTextLabel Name="BoardTitle" StyleClasses="LabelKeyText"/>
+                    <Label Name="BoardCount" StyleClasses="LabelSubText"/>
+                    <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+                        <BoxContainer Name="BoardLaws" Orientation="Vertical" SeparationOverride="5"/>
+                    </ScrollContainer>
+                    <Button Name="EjectBoard" Text="{Loc 'law-upload-eject-board'}"/>
+                </BoxContainer>
+            </PanelContainer>
+        </BoxContainer>
+        <PanelContainer Name="UploadPanel">
+            <BoxContainer Orientation="Vertical" SeparationOverride="8" Margin="10">
+                <Label Text="{Loc 'law-upload-target-header'}" StyleClasses="LabelKeyText"/>
+                <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                    <Button Name="ApplyAi" Text="{Loc 'law-upload-apply-ai'}" HorizontalExpand="True" MinHeight="36" Disabled="True"/>
+                    <Button Name="ApplyBorgs" Text="{Loc 'law-upload-apply-borgs'}" HorizontalExpand="True" MinHeight="36" Disabled="True"/>
+                    <Button Name="ApplyAll" Text="{Loc 'law-upload-apply-all'}" HorizontalExpand="True" MinHeight="36"
+                            ToolTip="{Loc 'law-upload-all-warning'}" Disabled="True"/>
+                </BoxContainer>
+                <RichTextLabel Text="{Loc 'law-upload-scope-hint'}" StyleClasses="LabelSubText"/>
+            </BoxContainer>
+        </PanelContainer>
+    </BoxContainer>
+</ui:FancyWindow>

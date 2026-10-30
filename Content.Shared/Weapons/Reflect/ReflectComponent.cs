@@ -44,10 +44,15 @@ public sealed partial class ReflectComponent : Component
     public float ReflectProb = 0.25f;
 
     // ss220 FixESword
-    [DataField("reflectProbProjectile"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public float ReflectProbProjectile = 0.25f;
 
-    [DataField("spreadProjectile"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    // ss220 ss220 add reflect in back start
+    [DataField, AutoNetworkedField]
+    public float? ReflectProbBehind = 0.1f;
+    // ss220 ss220 add reflect in back start
+
+    [DataField, AutoNetworkedField]
     public Angle SpreadProjectile = Angle.FromDegrees(45);
     // ss220 FixESword end
 
@@ -64,6 +69,10 @@ public sealed partial class ReflectComponent : Component
     public SoundSpecifier? SoundOnReflect = new SoundPathSpecifier("/Audio/Weapons/Guns/Hits/laser_sear_wall.ogg", AudioParams.Default.WithVariation(0.05f));
 }
 
+/// <summary>
+/// Used for both the projectiles being reflected and the entities reflecting. If there is ever overlap between the
+/// reflection types, the projectile will be reflected.
+/// </summary>
 [Flags, Serializable, NetSerializable]
 public enum ReflectType : byte
 {

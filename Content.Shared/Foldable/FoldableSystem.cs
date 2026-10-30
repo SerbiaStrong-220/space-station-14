@@ -10,6 +10,10 @@ using Robust.Shared.Containers;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
+//SS220-fold-noclimb-and-noanchor begin
+using Content.Shared.Climbing.Events;
+using Content.Shared.Construction.Components;
+//SS220-fold-noclimb-and-noanchor end
 
 namespace Content.Shared.Foldable;
 
@@ -37,6 +41,10 @@ public sealed class FoldableSystem : EntitySystem
         SubscribeLocalEvent<FoldableComponent, EntityStorageInsertedIntoAttemptEvent>(OnEntityStorageAttemptInsert);
 
         SubscribeLocalEvent<FoldableComponent, StrapAttemptEvent>(OnStrapAttempt);
+        //SS220-fold-noclimb-and-noanchor begin
+        SubscribeLocalEvent<FoldableComponent, AttemptClimbEvent>(OnAttemptClimb);
+        SubscribeLocalEvent<FoldableComponent, AnchorAttemptEvent>(OnAnchorAttempt);
+        //SS220-fold-noclimb-and-noanchor end
     }
 
     private void OnHandleState(EntityUid uid, FoldableComponent component, ref AfterAutoHandleStateEvent args)
@@ -82,14 +90,14 @@ public sealed class FoldableSystem : EntitySystem
     /// <summary>
     /// Set the folded state of the given <see cref="FoldableComponent"/>
     /// </summary>
-    public void SetFolded(EntityUid uid, FoldableComponent component, bool folded)
+    public void SetFolded(EntityUid uid, FoldableComponent component, bool folded, EntityUid? user = null)
     {
         component.IsFolded = folded;
         Dirty(uid, component);
         _appearance.SetData(uid, FoldedVisuals.State, folded);
         _buckle.StrapSetEnabled(uid, !component.IsFolded);
 
-        var ev = new FoldedEvent(folded);
+        var ev = new FoldedEvent(folded, user);
         RaiseLocalEvent(uid, ref ev);
     }
 
@@ -101,7 +109,7 @@ public sealed class FoldableSystem : EntitySystem
 
     public bool TryToggleFold(EntityUid uid, FoldableComponent comp, EntityUid? folder = null)
     {
-        var result = TrySetFolded(uid, comp, !comp.IsFolded);
+        var result = TrySetFolded(uid, comp, !comp.IsFolded, folder);
         if (!result && folder != null)
         {
             if (comp.IsFolded)
@@ -140,7 +148,7 @@ public sealed class FoldableSystem : EntitySystem
     /// <summary>
     /// Try to fold/unfold
     /// </summary>
-    public bool TrySetFolded(EntityUid uid, FoldableComponent comp, bool state, EntityUid? user = null) //SS220-fold-doafter
+    public bool TrySetFolded(EntityUid uid, FoldableComponent comp, bool state, EntityUid? user = null)
     {
         if (state == comp.IsFolded)
             return false;
@@ -163,10 +171,31 @@ public sealed class FoldableSystem : EntitySystem
         }
         //SS220-fold-doafter end
 
-        SetFolded(uid, comp, state);
+        SetFolded(uid, comp, state, user);
         return true;
     }
 
+    //SS220-fold-noclimb-and-noanchor begin
+    private void OnAttemptClimb(Entity<FoldableComponent> entity, ref AttemptClimbEvent args)
+    {
+        if (entity.Comp.IsFolded)
+        {
+            args.Cancelled = true;
+
+           _popup.PopupPredicted(Loc.GetString("foldable-noclimb-fail", ("object", entity.Owner)), entity.Owner, args.User);
+        }
+    }
+
+    private void OnAnchorAttempt(Entity<FoldableComponent> entity, ref AnchorAttemptEvent args)
+    {
+        if (entity.Comp.IsFolded)
+        {
+            args.Cancel();
+
+            _popup.PopupPredicted(Loc.GetString("foldable-anchor-fail", ("object", entity.Owner)), entity.Owner, args.User);
+        }
+    }
+    //SS220-fold-noclimb-and-noanchor end
     #region Verb
 
     private void AddFoldVerb(EntityUid uid, FoldableComponent component, GetVerbsEvent<AlternativeVerb> args)
@@ -206,6 +235,7 @@ public record struct FoldAttemptEvent(FoldableComponent Comp, bool Cancelled = f
 /// <summary>
 /// Event raised on an entity after it has been folded.
 /// </summary>
-/// <param name="IsFolded"></param>
+/// <param name="IsFolded">True is it has been folded, false if it has been unfolded.</param>
+/// <param name="User">The player who did the folding.</param>
 [ByRefEvent]
-public readonly record struct FoldedEvent(bool IsFolded);
+public readonly record struct FoldedEvent(bool IsFolded, EntityUid? User);

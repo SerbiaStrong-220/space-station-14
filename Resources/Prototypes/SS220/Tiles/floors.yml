@@ -2367,3 +2367,34 @@
     collection: BarestepCarpet
   itemDrop: FloorTileItemWeb
   heatCapacity: 10000
+
+- type: tile
+  id: FloorLinoGray
+  parent: BaseStationTile
+  name: tiles-linoleum-gray-floor
+  tags: [ tile-tag-other ]
+  sprite: /Textures/SS220/Tiles/linogray.png
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: FloorItemLinoGray
+
+- type: tile
+  id: FloorLinoLightBrown
+  parent: BaseStationTile
+  name: tiles-linoleum-lightbrown-floor
+  tags: [ tile-tag-other ]
+  sprite: /Textures/SS220/Tiles/linolightbrown.png
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: FloorItemLinoLightBrown
+
+- type: tile
+  id: FloorLinoRedBrown
+  parent: BaseStationTile
+  name: tiles-linoleum-redbrown-floor
+  tags: [ tile-tag-other ]
+  sprite: /Textures/SS220/Tiles/linoredbrown.png
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: FloorItemLinoRedBrown
+

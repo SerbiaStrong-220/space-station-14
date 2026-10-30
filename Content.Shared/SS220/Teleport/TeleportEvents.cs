@@ -1,44 +1,68 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.DoAfter;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Teleport;
 
-[Serializable, NetSerializable]
-public sealed partial class InteractionTeleportDoAfterEvent : SimpleDoAfterEvent { }
-
 /// <summary>
-///     Sends information to the teleporter to handle events that must occur before teleportation.
-///     Raised on teleporter entity.
+///     Notifies the teleporter immediately before moving the target.
+///     Raised on the teleporter entity.
 /// </summary>
-/// <param name="Target">The entity that is currently teleporting</param>
-/// <param name="User">An entity that interacts with a teleporter</param>
+/// <param name="Target">The entity being teleported.</param>
 [ByRefEvent, Serializable]
-public record struct BeforeTeleportTargetEvent(EntityUid Target, EntityUid User);
+public record struct BeforeTeleportEvent(EntityUid Target);
 
 /// <summary>
-///     Sends information about the completed interaction to other teleport components, which are supposed to perform the teleportation
-///     Raised on teleporter entity.
+///     Requests that a teleport implementation move the target.
+///     Raised on the teleporter entity.
 /// </summary>
-/// <param name="Target">The entity that is currently teleporting</param>
-/// <param name="User">An entity that interacts with a teleporter</param>
+/// <param name="Target">The entity being teleported.</param>
+/// <param name="User">The entity that activated the teleporter.</param>
 [ByRefEvent, Serializable]
-public record struct TeleportTargetEvent(EntityUid Target, EntityUid User);
+public record struct TeleportRequestEvent(EntityUid Target, EntityUid User)
+{
+    /// <summary>
+    ///     Whether a teleport implementation has successfully handled this request.
+    /// </summary>
+    public bool Handled;
+}
 
 /// <summary>
-///     Sends information to the teleporter itself that the target entity has been teleported for further postinteractions
+///     Requests teleportation of an observer without raising the regular teleport lifecycle events.
+///     Raised on the teleporter entity.
 /// </summary>
-/// <param name="Target">The entity that was teleported</param>
+/// <param name="Target">The observer being teleported.</param>
+[ByRefEvent, Serializable]
+public record struct GhostTeleportRequestEvent(EntityUid Target)
+{
+    /// <summary>
+    ///     Whether a teleport implementation has successfully handled this request.
+    /// </summary>
+    public bool Handled;
+}
+
+/// <summary>
+///     Notifies the teleporter that the target has been teleported.
+///     Raised on the teleporter entity.
+/// </summary>
+/// <param name="Target">The entity that was teleported.</param>
 [ByRefEvent, Serializable]
 public record struct TargetTeleportedEvent(EntityUid Target);
 
 /// <summary>
-///     Event raised when attempting to use teleporter to check if it can be used.
-///     Raised on teleporter entity.
+///     Notifies the target that it has been teleported.
+///     Raised on the teleported entity.
 /// </summary>
-/// <param name="Target">The entity that will be teleported</param>
-/// <param name="User">The entity that activates the teleporter</param>
-/// <param name="Cancelled">Whether the teleporter use has been prevented</param>
+/// <param name="Teleporter">The entity that performed the teleportation.</param>
+[ByRefEvent, Serializable]
+public record struct TeleportedEvent(EntityUid Teleporter);
+
+/// <summary>
+///     Checks whether the teleporter can be used.
+///     Raised on the teleporter entity.
+/// </summary>
+/// <param name="Target">The entity that will be teleported.</param>
+/// <param name="User">The entity that activates the teleporter.</param>
+/// <param name="Cancelled">Whether the teleporter use has been prevented.</param>
 [ByRefEvent, Serializable]
 public record struct TeleportUseAttemptEvent(EntityUid Target, EntityUid User, bool Cancelled = false);

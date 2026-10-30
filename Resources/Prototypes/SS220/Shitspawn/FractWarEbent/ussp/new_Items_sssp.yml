@@ -164,8 +164,13 @@
     solution: hypospray
   - type: ExaminableSolution
     solution: hypospray
-  - type: Hypospray
-    onlyAffectsMobs: false
+  - type: Injector
+    solutionName: hypospray
+    ignoreClosed: false
+    activeModeProtoId: HyposprayDynamicMode
+    allowedModes:
+    - HyposprayDynamicMode
+    - HyposprayInjectMode
   - type: UseDelay
     delay: 0.5
 
@@ -190,7 +195,7 @@
   - type: CartridgeLoader
     uiKey: enum.PdaUiKey.Key
     preinstalled:
-      - NotekeeperCartridge
+    - NotekeeperCartridge
     cartridgeSlot:
       priority: -1
       name: Cartridge
@@ -198,7 +203,7 @@
       insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
       whitelist:
         components:
-          - Cartridge
+        - Cartridge
 
 - type: entity
   parent: MedicalPDA
@@ -237,17 +242,19 @@
   id: ClothingBeltUsspWebbingFilled
   suffix: Shitspawn, Ebent, FractWar
   components:
-  - type: StorageFill
-    contents:
-    - id: MagazinePistolSubMachineGunUssp_PPSh
-      amount: 2
-    - id: CombatMedipen
-    - id: Stimpack
-    - id: DnaScramblerImplanter
-    - id: ExGrenade
-    - id: WeaponFlareGun
-    - id: ShellShotgunFlare
-      amount: 2
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: MagazinePistolSubMachineGunUssp_PPSh
+          amount: 2
+        - id: CombatMedipen
+        - id: Stimpack
+        - id: DnaScramblerImplanter
+        - id: ExGrenade
+        - id: WeaponFlareGun
+        - id: ShellShotgunFlare
+          amount: 2
 
 - type: entity
   name: рюкзак СССП
@@ -256,17 +263,19 @@
   id: ClothingBackpackUSSPFilled
   suffix: Shitspawn, Ebent, FractWar
   components:
-    - type: StorageFill
-      contents:
-      - id: Crowbar
-      - id: CigPackRed
-      - id: Lighter
-      - id: FlashlightSecliteUssp
-      - id: PowerCellHyper
-      - id: WeaponSubMachineGunUssp_PPSh
-      - id: EnergyHammer
-      - id: EnergySickle
-      - id: Tourniquet
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: Crowbar
+        - id: CigPackRed
+        - id: Lighter
+        - id: FlashlightSecliteUssp
+        - id: PowerCellHyper
+        - id: WeaponSubMachineGunUssp_PPSh
+        - id: EnergyHammer
+        - id: EnergySickle
+        - id: Tourniquet
 
 - type: entity
   id: BedsheetUSSP

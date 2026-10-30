@@ -1,0 +1,10 @@
+guide-entry-cult-yogg = Cult of Yog-Sothoth
+guide-entry-cult-yogg-abilities = Cultist Abilities
+guide-entry-cult-yogg-migo = Mi-Go
+guide-entry-cult-yogg-conversion = Conversion and Marks
+guide-entry-cult-yogg-base = Base and Plants
+guide-entry-cult-yogg-equipment = Equipment
+guide-entry-cult-yogg-recipes = Transformation Recipes
+guide-entry-cult-yogg-abyss = The Abyss
+guide-entry-cult-yogg-ritual = Sacrifice and Summoning
+guide-entry-cult-yogg-counterplay = Countering the Cult

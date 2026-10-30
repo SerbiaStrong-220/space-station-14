@@ -8,6 +8,7 @@
       department: Science
       time: 5h # SS220-RoleTime
   startingGear: ScientistGear
+  experienceDefinition: ScientistRoleExperience # SS220-experience
   icon: "JobIconScientist"
   supervisors: job-supervisors-rd
   access:

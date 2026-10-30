@@ -1,8 +1,8 @@
 - type: entity
-  name: спавнер случайный поддон
-  id: PalletSpawnerRandomSheet
   parent: MarkerBase
-  suffix: Сталь, пласталь, пластик, плазма, стекло
+  id: PalletSpawnerRandomSheet
+  name: random pallet spawner
+  suffix: Steel, plasteel, plastic, plasma, glass
   components:
     - type: Sprite
       layers:
@@ -23,10 +23,10 @@
       offset: 0
 
 - type: entity
-  name: спавнер случайный поддон
-  id: PalletSpawnerRandomGlass
   parent: MarkerBase
-  suffix: Стекло
+  id: PalletSpawnerRandomGlass
+  name: random pallet spawner
+  suffix: Glass
   components:
     - type: Sprite
       layers:
@@ -48,10 +48,10 @@
       offset: 0
 
 - type: entity
-  name: спавнер случайный поддон
-  id: PalletSpawnerRandomOrganic
   parent: MarkerBase
-  suffix: Органика
+  id: PalletSpawnerRandomOrganic
+  name: random pallet spawner
+  suffix: Organic
   components:
     - type: Sprite
       layers:
@@ -72,10 +72,10 @@
       offset: 0
 
 - type: entity
-  name: спавнер случайный поддон
-  id: PalletSpawnerRandom
   parent: MarkerBase
-  suffix: Любой
+  id: PalletSpawnerRandom
+  name: random pallet spawner
+  suffix: Any
   components:
     - type: Sprite
       layers:

@@ -1,0 +1,12 @@
+ent-ClothingSponsorMothBoots = твёрдые моле-ботинки
+    .desc = Сэр, чистка прошла успешно, сэр!
+ent-ClothingSponsorGoldClownShoes = золотые клоунские туфли
+    .desc = Шааааайни!
+ent-ClothingSponsorMafiaBoots = ботинки прекрасного человека
+    .desc = Цок-цок.
+ent-ClothingSponsorMafiaBlackBoots = тёмные ботинки прекрасного человека
+    .desc = Цок-цок.
+ent-ClothingSponsorBootsMuzhik = ботинки мужика
+    .desc = Проложит путь к ближайшим самогонным месторождениям.
+ent-ClothingShoesMoryak = башмаки морячка
+    .desc = Тесные матроские башмаки, но хотя бы водонепроницаемые.

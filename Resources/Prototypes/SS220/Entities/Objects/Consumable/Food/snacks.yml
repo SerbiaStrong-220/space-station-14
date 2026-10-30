@@ -1,0 +1,80 @@
+- type: entity
+  parent: FoodSnackChocolate
+  id: FoodSnackChocolateWhite
+  name: white chocolate bar
+  description: The superior taste of everyone’s favorite chocolate wizards. A random pin in each package!
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/snacks.rsi
+    state: chocolatebarwhite
+  - type: Item
+    heldPrefix: chocolatebarwhite
+    size: Tiny
+    storedOffset: 1,-1
+  - type: SpawnItemsOnUse
+    items:
+      - id: FoodPacketChocolateWhiteTrash
+      - id: FoodSnackChocolateWhiteBar
+      - id: WhiteChocolatePinSpawner
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 5
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodPacketChocolateWhiteTrash:
+            min: 1
+            max: 1
+          FoodSnackChocolateWhiteBar:
+            min: 1
+            max: 1
+          WhiteChocolatePinSpawner:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: FoodSnackChocolateBar
+  id: FoodSnackChocolateWhiteBar
+  name: white chocolate bar
+  description: Sweet, creamy vanilla with caramel notes.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - chocolatewhite
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/snacks.rsi
+    state: chocolatebarwhite-open
+  - type: Item
+    heldPrefix: chocolatebarwhite-open
+    storedOffset: 1,-2
+
+- type: entity
+  parent: FoodPacketChocolateTrash
+  id: FoodPacketChocolateWhiteTrash
+  name: white chocolate wrapper
+  description: Junk Recyclers technology creates environmentally friendly waste.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/snacks.rsi
+    state: chocolatebarwhite-trash
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: trash-inhand-left
+        color: "#e6c77e"
+      right:
+      - state: trash-inhand-right
+        color: "#e6c77e"
+

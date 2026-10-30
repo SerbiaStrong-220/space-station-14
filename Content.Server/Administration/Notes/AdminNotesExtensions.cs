@@ -1,5 +1,6 @@
+using System.Collections.Immutable;
+using System.Linq;
 using Content.Server.Database;
-using Content.Server.SS220.Database;
 using Content.Shared.Administration.Notes;
 using Content.Shared.Database;
 
@@ -12,8 +13,9 @@ public static class AdminNotesExtensions
         NoteSeverity? severity = null;
         var secret = false;
         NoteType type;
-        string[]? bannedRoles = null;
-        string[]? bannedSpecies = null; // SS220 Species bans
+        ImmutableArray<BanRoleDef>? bannedRoles = null;
+        ImmutableArray<BanSpecieDef>? bannedSpecies = null;
+        ImmutableArray<BanChatDef>? bannedChats = null;
         string? unbannedByName = null;
         DateTime? unbannedTime = null;
         bool? seen = null;
@@ -34,42 +36,49 @@ public static class AdminNotesExtensions
                 type = NoteType.Message;
                 seen = adminMessage.Seen;
                 break;
-            case ServerBanNoteRecord ban:
+            case BanNoteRecord { Type: BanType.Server } ban:
                 type = NoteType.ServerBan;
                 severity = ban.Severity;
                 unbannedTime = ban.UnbanTime;
                 unbannedByName = ban.UnbanningAdmin?.LastSeenUserName ?? Loc.GetString("system-user");
                 statedRound = ban.StatedRound;
                 break;
-            case ServerRoleBanNoteRecord roleBan:
+            case BanNoteRecord { Type: BanType.Role } roleBan:
                 type = NoteType.RoleBan;
                 severity = roleBan.Severity;
-                bannedRoles = roleBan.Roles;
+                bannedRoles = [.. roleBan.Roles.OfType<BanRoleDef>()]; // SS220-abstract-role-ban
                 unbannedTime = roleBan.UnbanTime;
                 unbannedByName = roleBan.UnbanningAdmin?.LastSeenUserName ?? Loc.GetString("system-user");
                 break;
-            // SS220 Species bans begin
-            case ServerSpeciesBanNoteRecord speciesBan:
+            // SS220 Species chat bans begin
+            case BanNoteRecord { Type: BanType.Species } speciesBan:
                 type = NoteType.SpeciesBan;
                 severity = speciesBan.Severity;
-                bannedSpecies = speciesBan.Species;
+                bannedSpecies = [.. speciesBan.Roles.OfType<BanSpecieDef>()];
                 unbannedTime = speciesBan.UnbanTime;
                 unbannedByName = speciesBan.UnbanningAdmin?.LastSeenUserName ?? Loc.GetString("system-user");
                 break;
-            // SS220 Species bans end
+            case BanNoteRecord { Type: BanType.Chat } chatBan:
+                type = NoteType.ChatBan;
+                severity = chatBan.Severity;
+                bannedChats = [.. chatBan.Roles.OfType<BanChatDef>()];
+                unbannedTime = chatBan.UnbanTime;
+                unbannedByName = chatBan.UnbanningAdmin?.LastSeenUserName ?? Loc.GetString("system-user");
+                break;
+            // SS220 Species chat bans end
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), note.GetType(), "Unknown note type");
         }
 
         // There may be bans without a user, but why would we ever be converting them to shared notes?
-        if (note.Player is null)
-            throw new ArgumentNullException(nameof(note), "Player user ID cannot be null for a note");
+        if (note.Players.Length == 0)
+            throw new ArgumentNullException(nameof(note), "Player user ID cannot be empty for a note");
 
         return new SharedAdminNote(
             note.Id,
-            note.Player!.UserId,
-            note.Round?.Id,
-            note.Round?.Server.Name,
+            [..note.Players.Select(p => p.UserId)],
+            [..note.Rounds.Select(r => r.Id)],
+            note.Rounds.SingleOrDefault()?.Server.Name, // TODO: Show all server names?
             note.PlaytimeAtNote,
             type,
             note.Message,
@@ -82,6 +91,7 @@ public static class AdminNotesExtensions
             note.ExpirationTime?.UtcDateTime,
             bannedRoles,
             bannedSpecies, // SS220 Species bans
+            bannedChats, // SS220 chats ban
             unbannedTime,
             unbannedByName,
             statedRound,

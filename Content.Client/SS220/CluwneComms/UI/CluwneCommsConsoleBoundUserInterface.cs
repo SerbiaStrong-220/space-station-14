@@ -9,9 +9,9 @@ using Content.Shared.MassMedia.Systems;
 
 namespace Content.Client.SS220.CluwneComms.UI;
 
-public sealed class CluwneCommsConsoleBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed partial class CluwneCommsConsoleBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     [ViewVariables]
     private CluwneCommsConsoleMenu? _menu;

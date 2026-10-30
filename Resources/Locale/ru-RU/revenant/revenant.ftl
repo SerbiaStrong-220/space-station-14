@@ -14,6 +14,3 @@ revenant-soul-finish-harvest = { CAPITALIZE($target) } падает на зем�
 revenant-user-interface-title = Магазин способностей
 revenant-user-interface-essence-amount = [color=plum]{ $amount }[/color] украденной эссенции
 revenant-user-interface-cost = { $price } эссенции
-
-#SS220
-revenant-attacked-by-popup = обжигающий холод пронизывает Вас!

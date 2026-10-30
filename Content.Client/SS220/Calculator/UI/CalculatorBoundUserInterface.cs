@@ -5,10 +5,10 @@ using JetBrains.Annotations;
 namespace Content.Client.SS220.Calculator.UI;
 
 [UsedImplicitly]
-public sealed class CalculatorBoundUserInterface : BoundUserInterface
+public sealed partial class CalculatorBoundUserInterface : BoundUserInterface
 {
-    [Dependency] private readonly EntityManager _entityManager = default!;
-    [Dependency] private readonly ILogManager _logManager = default!;
+    [Dependency] private EntityManager _entityManager = default!;
+    [Dependency] private ILogManager _logManager = default!;
 
     private readonly ISawmill _sawmill;
     private readonly CalculatorSystem _calculatorSystem;

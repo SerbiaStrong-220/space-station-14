@@ -5,9 +5,9 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client.SS220.ResourceMiner;
 
-public sealed class ResourceMinerSystem : EntitySystem
+public sealed partial class ResourceMinerSystem : EntitySystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private const string BaseStatId = "base";
 

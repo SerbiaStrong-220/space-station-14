@@ -6,10 +6,9 @@
     sprite: Objects/Devices/chameleon_projector.rsi
     state: icon
   content:
-  - ClothingBackpackChameleonFill
+  - ClothingBackpackChameleonFillAgent
   - ChameleonProjector
   - FakeMindShieldImplanter
-  - AgentIDCard
   - Lockpick #ss220 lockpick add
 
 - type: thiefBackpackSet
@@ -84,7 +83,7 @@
   - EncryptionKeyStationMaster
   - CyberPen
   - BriefcaseThiefBribingBundleFilled
-  - ClothingMaskGasVoiceChameleon
+  - VoiceMaskImplanter
   #- todo Chameleon Stamp
 
 - type: thiefBackpackSet

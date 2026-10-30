@@ -1,0 +1,60 @@
+- type: entity
+  parent: PosterBase
+  id: PosterJRSaviorsOfTheWorld
+  name: "JR SAVIORS OF THE WORLD"
+  description: "A poster encouraging people to join the JR Corporation and work together to keep space clean."
+  components:
+    - type: Sprite
+      sprite: SS220/Structures/Wallmounts/jr_posters.rsi
+      state: jrposter_legal1
+
+- type: entity
+  parent: PosterBase
+  id: PosterJRDestroyersOfTheWorld
+  name: "JR DESTROYERS OF THE WORLD"
+  description: "Someone is trying to draw public attention to the suspicious deaths of entire planets and link the corporation's activities to environmental disasters."
+  components:
+    - type: Sprite
+      sprite: SS220/Structures/Wallmounts/jr_posters.rsi
+      state: jrposter_contraband1
+
+- type: entity
+  parent: PosterBase
+  id: PosterJRAnnualReport
+  name: "JR ANNUAL REPORT"
+  description: "Over the past space year, we have processed and disposed of ten teratonnes of various types of waste. More to come!"
+  components:
+    - type: Sprite
+      sprite: SS220/Structures/Wallmounts/jr_posters.rsi
+      state: jrposter_legal2
+
+- type: entity
+  parent: PosterBase
+  id: PosterJRTragicAccident
+  name: "JR TRAGIC ACCIDENT"
+  description: "Stop ignoring the accidents! JR has more blood on his hands than the Syndicate!"
+  components:
+    - type: Sprite
+      sprite: SS220/Structures/Wallmounts/jr_posters.rsi
+      state: jrposter_contraband2
+
+- type: entity
+  parent: PosterBase
+  id: PosterJRSpaceJunk
+  name: "JR SPACE JUNK"
+  description: "When you throw trash into outer space, remember that space pollution has already reached a critical level. You don't want a discarded rod to penetrate a research station?"
+  components:
+    - type: Sprite
+      sprite: SS220/Structures/Wallmounts/jr_posters.rsi
+      state: jrposter_legal3
+
+- type: entity
+  parent: PosterBase
+  id: PosterJRCarpLivesImportant
+  name: "JR CARP LIVES IMPORTANT"
+  description: "Due to military clashes in outer space, the natural habitats of space carp have been destroyed. Now they are forced to live among the space debris that we dispose of, depriving them of their homes! Say no to war, say no to debris, and save the carp!"
+  components:
+    - type: Sprite
+      sprite: SS220/Structures/Wallmounts/jr_posters.rsi
+      state: jrposter_legal4
+

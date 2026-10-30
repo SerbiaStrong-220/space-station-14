@@ -1,4 +1,5 @@
 using Content.Shared.Damage;
+using Content.Shared.Whitelist; //SS220-MicroFixesIPC
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -36,5 +37,13 @@ namespace Content.Shared.Bed.Components
         /// </summary>
         [DataField, AutoNetworkedField]
         public EntityUid? SleepAction;
+
+        //SS220-MicroFixesIPC begin
+        /// <summary>
+        /// Blacklist for entities that should not receive treatment from the bed
+        /// </summary>
+        [DataField]
+        public EntityWhitelist? Blacklist;
+        //SS220-MicroFixesIPC end
     }
 }

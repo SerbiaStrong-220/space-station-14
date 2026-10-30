@@ -1,20 +1,20 @@
 ent-ClothingBeltPlantDruid = пояс друида
     .desc = Пояс, который помогает исследователям раскрывать тайны инопланетной флоры.
     .suffix = Заполненный, За время в игре
-ent-ClothingBeltJanitorJR = РПС уборщика
+ent-ClothingBeltJanitorJR = РПС уборщика JR
     .suffix = JR, За время в игре
     .desc = Ременно-плечевая система тактических ремней из переработанной кожи, которую носят уборщики Junk Recyclers.
 ent-ClothingBeltJanitorJRFilled = { ent-ClothingBeltJanitorJR }
     .desc = { ent-ClothingBeltJanitor.desc }
     .suffix = Заполненный
 
-ent-ClothingBeltBlueShield = пояс "Синий Щит"
+ent-ClothingBeltBlueShield = пояс синего щита
     .desc = Этот пояс позволяет хранить всё необходимое в удобном и быстродоступном месте, а материал из которого он выполнен, позволяет выглядеть ещё более стильно.
 ent-ClothingBeltBlueShieldFilled = { ent-ClothingBeltBlueShield }
     .desc = { ent-ClothingBeltBlueShield.desc }
     .suffix = Заполненный
 
-ent-ClothingBeltWebbingBlueShield = РПС "Синий Щит"
+ent-ClothingBeltWebbingBlueShield = РПС синего щита
     .desc = Универсальный разгрузочный жилет с ремнями и поясом. Может вмещать всё что угодно... всё что угодно небольшого размера.
 ent-ClothingBeltWebbingBlueShieldFilled = { ent-ClothingBeltWebbingBlueShield }
     .desc = { ent-ClothingBeltWebbingBlueShield.desc }

@@ -34,4 +34,7 @@ public sealed class CriminalRecord
 
     [DataField]
     public ProtoId<CriminalStatusPrototype>? RecordType;
+
+    [DataField]
+    public TimeSpan? RecordSetAt;
 }

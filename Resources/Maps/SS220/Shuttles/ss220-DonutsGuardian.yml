@@ -150,7 +150,7 @@ entities:
     - type: Transform
       pos: -0.62641764,-0.55334765
       parent: invalid
-    - type: SkipAutoVariantize        
+    - type: SkipAutoVariantize
     - type: MapGrid
       chunks:
         0,0:
@@ -181,7 +181,7 @@ entities:
     - type: OccluderTree
     - type: SpreaderGrid
     - type: Shuttle
-      fTLCooldown: 90
+      fTLCooldownOverride: 90
       dampingModifier: 0.25
     - type: GridPathfinding
     - type: Gravity

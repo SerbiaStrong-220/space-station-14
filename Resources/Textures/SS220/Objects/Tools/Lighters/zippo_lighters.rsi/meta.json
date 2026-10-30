@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Sprited by veniiaa (Discord) for SS220, template taken from https://github.com/goonstation/goonstation at commit ec617ba6fa96a3723834d74d81a5afda19b53aa0 by binarysudoku",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "lighter_flame",
+      "delays": [
+        [
+          0.2,
+          0.1,
+          0.2,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "zippo_top"
+    },
+    {
+      "name": "zippo_icon_base"
+    },
+    {
+      "name": "zippo_open"
+    },
+    {
+      "name": "zippo_engraved_icon_base"
+    },
+    {
+      "name": "zippo_engraved_open"
+    },
+    {
+      "name": "zippo_brass_icon_base"
+    },
+    {
+      "name": "zippo_brass_open"
+    },
+    {
+      "name": "zippo_copper_icon_base"
+    },
+    {
+      "name": "zippo_copper_open"
+    },
+    {
+      "name": "zippo_gold_icon_base"
+    },
+    {
+      "name": "zippo_gold_open"
+    },
+    {
+      "name": "zippo_detective_icon_base"
+    },
+    {
+      "name": "zippo_detective_open"
+    },
+    {
+      "name": "zippo_nt_icon_base"
+    },
+    {
+      "name": "zippo_nt_open"
+    },
+    {
+      "name": "zippo_shield_icon_base"
+    },
+    {
+      "name": "zippo_shield_open"
+    },
+    {
+      "name": "zippo_syndi_icon_base"
+    },
+    {
+      "name": "zippo_syndi_open"
+    },
+    {
+      "name": "zippo_ussp_icon_base"
+    },
+    {
+      "name": "zippo_ussp_open"
+    },
+    {
+      "name": "zippo-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "zippo-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "zippo-inhand-left-flame",
+      "directions": 4
+    },
+    {
+      "name": "zippo-inhand-right-flame",
+      "directions": 4
+    }
+  ]
+}

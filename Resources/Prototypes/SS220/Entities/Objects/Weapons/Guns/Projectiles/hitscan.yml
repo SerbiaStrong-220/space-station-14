@@ -1,17 +1,126 @@
-- type: hitscan
+- type: entity
+  parent: BasicHitscan
+  name: red shuttle light laser
+  categories: [ HideSpawnMenu ]
   id: RedShuttleLightLaser
-  damage:
-    types:
-      Heat: 13 #lowTTKUpdate
-  muzzleFlash:
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
-    state: muzzle_laser
-  travelFlash:
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
-    state: beam
-  impactFlash:
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
-    state: impact_laser
-  shuttleNavInfo:
-    enabled: true
-    width: 0.6
+  components:
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Heat: 13
+  - type: ShowNavInfo
+    navInfo: !type:ShuttleNavHitscanInfo
+      enabled: true
+      width: 0.6
+
+- type: entity
+  parent: BasicHitscan
+  name: pulse laser enhanced
+  id: PulseEnhanced
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Heat: 38
+  - type: HitscanBasicVisuals
+    muzzleFlash:
+      sprite: SS220/Objects/Weapons/Guns/Projectiles/projectiles_cev.rsi
+      state: muzzle_u_laser
+    travelFlash:
+      sprite: SS220/Objects/Weapons/Guns/Projectiles/projectiles_cev.rsi
+      state: u_laser
+    impactFlash:
+      sprite: SS220/Objects/Weapons/Guns/Projectiles/projectiles_cev.rsi
+      state: impact_u_laser
+
+- type: entity
+  parent: BasicHitscan
+  name: laser enhanced
+  id: LaserEnhanced
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Heat: 38
+  - type: HitscanBasicVisuals
+    muzzleFlash:
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+      state: muzzle_beam_heavy
+    travelFlash:
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+      state: beam_heavy
+    impactFlash:
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+      state: impact_beam_heavy
+
+# Death Squad
+- type: entity
+  parent: BasicHitscan
+  name: pulse laser kill
+  id: Pulsekill
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Heat: 30
+        Structural: 200
+  - type: HitscanBasicVisuals
+    muzzleFlash:
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+      state: muzzle_blue
+    travelFlash:
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+      state: beam_blue
+    impactFlash:
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+      state: impact_blue
+
+- type: entity
+  parent: BasicHitscan
+  name: pulse laser destroy
+  id: PulseDESTROY
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Heat: 100
+        Structural: 2000
+  - type: HitscanBasicVisuals
+    muzzleFlash:
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+      state: muzzle_u_laser
+    travelFlash:
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+      state: u_laser
+    impactFlash:
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+      state: impact_u_laser
+
+- type: entity
+  parent: BasicHitscan
+  name: air defense laser
+  id: AirDefenseLaser
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Heat: 100
+        Structural: 2000
+  - type: HitscanBasicVisuals
+    muzzleFlash:
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+      state: muzzle_laser
+    travelFlash:
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+      state: beam
+    impactFlash:
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+      state: impact_laser
+  - type: HitscanBasicRaycast
+    collisionMask: 256
+    maxDistance: 10

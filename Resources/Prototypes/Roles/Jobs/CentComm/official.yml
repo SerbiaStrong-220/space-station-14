@@ -1,10 +1,11 @@
 - type: job
   id: CentralCommandOfficial
-  name: job-name-centcomoff
-  description: job-description-centcomoff
+  name: job-name-centcommoff
+  description: job-description-centcommoff
   playTimeTracker: JobCentralCommandOfficial
   setPreference: false
-  startingGear: CentcomGear
+  startingGear: CentcommGear
+  experienceDefinition: CentralCommandOfficialExperience # SS220-experience
   icon: "JobIconNanotrasen"
   supervisors: job-supervisors-hos
   canBeAntag: false
@@ -15,7 +16,7 @@
   - CentralCommand
   # SS220 centcomm access fix begin
   - CentralCommandERT
-  - CentralCommandBSO
+  - CentralCommandSRT
   - CentralCommandCBURN
   # SS220 centcomm access fix end
   departmentsToIgnoreInTitles: # SS220 Round End Titles
@@ -23,14 +24,9 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
-  #SS220 LimitationRevive - start
-  - !type:AddComponentSpecial
-    components:
-    - type: DefibrillatorSkill
-  #SS220 LimitationRevive - end
 
 - type: startingGear
-  id: CentcomGear
+  id: CentcommGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitCentcomOfficial
     shoes: ClothingShoesBootsCombatFilled

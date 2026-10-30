@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "taken from CM build at https://github.com/cmss13-devs/cmss13/blob/HEAD/icons/obj/items/weapons/guns/handful.dmi and https://github.com/cmss13-devs/cmss13/blob/HEAD/icons/obj/items/casings.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "bullet-casing"
+    },
+    {
+      "name": "bullet"
+    },
+    {
+      "name": "slug"
+    },
+    {
+      "name": "metal-1"
+    },
+    {
+      "name": "metal-0"
+    }
+  ]
+}

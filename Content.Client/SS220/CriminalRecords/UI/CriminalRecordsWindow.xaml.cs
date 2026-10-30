@@ -100,8 +100,8 @@ public sealed partial class CriminalRecordsWindow : FancyWindow, IPinnableWindow
             StatusTypeSelector.Select(args.Id);
         };
 
-        CancelRecordCreationButton.StyleClasses.Add(StyleBase.ButtonOpenLeft);
-        CancelRecordCreationButton.StyleClasses.Add(StyleBase.ButtonCaution);
+        CancelRecordCreationButton.StyleClasses.Add(StyleClass.ButtonOpenLeft);
+        CancelRecordCreationButton.StyleClasses.Add(StyleClass.Negative);
 
         RecordSearch.OnTextChanged += OnSearchChanged;
         _indicatorOverride = new StyleBoxFlat

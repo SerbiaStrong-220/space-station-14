@@ -8,11 +8,11 @@ using Robust.Shared.Player;
 namespace Content.Server.SS220.Geras;
 
 /// <inheritdoc/>
-public sealed class GerasSystem : SharedGerasSystem
+public sealed partial class GerasSystem : SharedGerasSystem
 {
-    [Dependency] private readonly PolymorphSystem _polymorphSystem = default!;
-    [Dependency] private readonly ActionsSystem _actionsSystem = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
+    [Dependency] private PolymorphSystem _polymorphSystem = default!;
+    [Dependency] private ActionsSystem _actionsSystem = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

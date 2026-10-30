@@ -3,6 +3,8 @@
   parent: ClothingBackpack
   id: ClothingCultistBackpack
   components:
-  - type: StorageFill
-    contents:
-      - id: BoxSurvivalSecurity
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BoxSurvivalSecurity

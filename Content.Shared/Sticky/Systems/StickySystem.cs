@@ -70,7 +70,7 @@ public sealed class StickySystem : EntitySystem
 
         // check whitelist and blacklist
         if (_whitelist.IsWhitelistFail(comp.Whitelist, target) ||
-            _whitelist.IsBlacklistPass(comp.Blacklist, target))
+            _whitelist.IsWhitelistPass(comp.Blacklist, target))
             return false;
 
         var attemptEv = new AttemptEntityStickEvent(target, user);
@@ -104,7 +104,7 @@ public sealed class StickySystem : EntitySystem
 
     private void OnStickyDoAfter(Entity<StickyComponent> ent, ref StickyDoAfterEvent args)
     {
-        // target is the sticky item when unsticking and the surface when sticking, it will never be null
+        // target is the surface when sticking/unsticking, it will never be null
         if (args.Handled || args.Cancelled || args.Args.Target is not {} target)
             return;
 
@@ -143,7 +143,7 @@ public sealed class StickySystem : EntitySystem
         }
 
         // start unsticking object
-        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, comp.UnstickDelay, new StickyDoAfterEvent(), uid, target: uid)
+        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, comp.UnstickDelay, new StickyDoAfterEvent(), uid, target: stuckTo)
         {
             BreakOnMove = true,
             NeedHand = true,

@@ -1,7 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.SS220.Trackers.Components;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Robust.Shared.Prototypes;
@@ -9,10 +9,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.Trackers.Systems;
 
-public sealed class DamageReceivedTrackerSystem : EntitySystem
+public sealed partial class DamageReceivedTrackerSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private const float ResetDamageOwnerDelaySeconds = 2.5f;
 

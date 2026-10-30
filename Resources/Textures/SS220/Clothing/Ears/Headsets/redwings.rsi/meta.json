@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Made by Hqlle and SonicHDC (github), color edited by NekoFM (Github) for S220",
+    "size": {
+      "x": 32,
+      "y": 32
+    },
+    "states": [
+      {
+        "name": "icon"
+      },
+      {
+        "name": "equipped-EARS",
+        "directions": 4
+      },
+      {
+      "name": "equipped-EARS-secdog",
+      "directions": 4
+      }
+    ]
+  }

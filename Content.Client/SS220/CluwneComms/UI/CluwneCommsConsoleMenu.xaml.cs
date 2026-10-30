@@ -18,11 +18,11 @@ namespace Content.Client.SS220.CluwneComms.UI;
 [GenerateTypedNameReferences]
 public sealed partial class CluwneCommsConsoleMenu : BaseWindow
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly ILocalizationManager _loc = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IStylesheetManager _stylesheetManager = default!;
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IStylesheetManager _stylesheetManager = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
 
     private readonly CluwneCommsConsoleStyle _style = new();
 

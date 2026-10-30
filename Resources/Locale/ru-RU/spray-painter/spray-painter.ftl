@@ -174,3 +174,7 @@ spray-painter-style-canisters-plasma = Плазма
 spray-painter-style-canisters-storage = Хранение
 spray-painter-style-canisters-tritium = Тритий
 spray-painter-style-canisters-water-vapor = Водяной пар
+
+spray-painter-interact-no-color-pick = Не удается найти цвет для выбора!
+
+spray-painter-interact-color-picked = Выбран цвет с '{$id}'.

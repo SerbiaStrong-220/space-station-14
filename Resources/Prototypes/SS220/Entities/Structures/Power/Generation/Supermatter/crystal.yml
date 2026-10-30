@@ -40,7 +40,7 @@
     explosionType: Default
     maxIntensity: 60
     intensitySlope: 10
-    totalIntensity: 25000
+    totalIntensity: 45000
     maxTileBreak: 128
   - type: NameIdentifier
     group: GenericNumber

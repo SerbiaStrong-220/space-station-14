@@ -143,7 +143,9 @@ public sealed partial class DungeonJob
 
                 if (groupSize > 0)
                 {
+#if DEBUG // SS220-remove-log-in-prod
                     _sawmill.Warning($"Found remaining group size for ore veins of {gen.Replacement ?? "null"}!");
+#endif // SS220-remove-log-in-prod
                 }
             }
         }

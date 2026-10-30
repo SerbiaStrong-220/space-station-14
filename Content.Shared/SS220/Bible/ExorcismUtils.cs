@@ -6,6 +6,8 @@ namespace Content.Shared.SS220.Bible;
 
 public static class ExorcismUtils
 {
+    private static readonly Regex FormattingRegex = new Regex(@"\t|\n|\r", RegexOptions.Compiled);
+
     public static int GetSanitazedMessageLength(string message)
     {
         return message.AsSpan().Trim().Length;
@@ -13,6 +15,6 @@ public static class ExorcismUtils
 
     public static string SanitazeMessage(string message)
     {
-        return Regex.Replace(message, @"\t|\n|\r", string.Empty).Trim();
+        return FormattingRegex.Replace(message, string.Empty).Trim();
     }
 }

@@ -1,6 +1,7 @@
 using Content.Shared.Clothing;
 using Content.Shared.Hands;
 using Content.Shared.Movement.Systems;
+using Content.Shared.SS220.Experience.Skill.Systems;
 
 namespace Content.Shared.Item;
 
@@ -29,7 +30,7 @@ public sealed class HeldSpeedModifierSystem : EntitySystem
         _movementSpeedModifier.RefreshMovementSpeedModifiers(args.User);
     }
 
-    public (float,float) GetHeldMovementSpeedModifiers(EntityUid uid, HeldSpeedModifierComponent component)
+    public (float,float) GetHeldMovementSpeedModifiers(EntityUid uid, HeldSpeedModifierComponent component, /* SS220-add-skill-dependency-for-pulling-speed */ EntityUid user)
     {
         var walkMod = component.WalkModifier;
         var sprintMod = component.SprintModifier;
@@ -39,12 +40,19 @@ public sealed class HeldSpeedModifierSystem : EntitySystem
             sprintMod = clothingSpeedModifier.SprintModifier;
         }
 
+        // SS220-add-skill-dependency-for-pulling-speed-begin
+        var ev = new ModifyPullingSpeed(walkMod, sprintMod);
+        RaiseLocalEvent(user, ref ev);
+        walkMod = ev.WalkSpeedModifier;
+        sprintMod = ev.RunSpeedModifier;
+        // SS220-add-skill-dependency-for-pulling-speed-end
+
         return (walkMod, sprintMod);
     }
 
     private void OnRefreshMovementSpeedModifiers(EntityUid uid, HeldSpeedModifierComponent component, HeldRelayedEvent<RefreshMovementSpeedModifiersEvent> args)
     {
-        var (walkMod, sprintMod) = GetHeldMovementSpeedModifiers(uid, component);
+        var (walkMod, sprintMod) = GetHeldMovementSpeedModifiers(uid, component, /* SS220-add-skill-dependency-for-pulling-speed */ Transform(uid).ParentUid);
         args.Args.ModifySpeed(walkMod, sprintMod);
     }
 }

@@ -1,9 +1,11 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
+
 public sealed partial class MiGoEnslavementActionEvent : EntityTargetActionEvent
 {
 }
@@ -29,19 +31,12 @@ public sealed partial class MiGoHealActionEvent : EntityTargetActionEvent
     public SpriteSpecifier.Rsi EffectSprite = new(new("SS220/Effects/CultYogg/healing.rsi"), "healingEffect");
 }
 
-public sealed partial class MiGoAstralActionEvent : InstantActionEvent
-{
-}
 
 public sealed partial class MiGoErectActionEvent : InstantActionEvent
 {
 }
 
 public sealed partial class MiGoSacrificeActionEvent : InstantActionEvent
-{
-}
-
-public sealed partial class MiGoTeleportActionEvent : InstantActionEvent
 {
 }
 

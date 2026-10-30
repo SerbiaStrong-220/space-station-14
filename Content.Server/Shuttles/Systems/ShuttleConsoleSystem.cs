@@ -192,6 +192,7 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
     {
         if (!_tags.HasTag(user, CanPilotTag) ||
             !TryComp<ShuttleConsoleComponent>(uid, out var component) ||
+            !component.CanControlShuttle || // SS220 add additional control for shuttle
             !this.IsPowered(uid, EntityManager) ||
             !Transform(uid).Anchored ||
             !_blocker.CanInteract(user, uid))

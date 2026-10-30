@@ -23,6 +23,14 @@
     steps: 3
     zeroVisible: false
   - type: Appearance
+  # SS220-place-and-pickup-sounds-2 begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/ammobox_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/ammobox_drop.ogg
+  # SS220-place-and-pickup-sounds-2 end
 
 # Boxes
 - type: entity
@@ -37,14 +45,14 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-2 #SS220-FixAmmoSprite
+    - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
   parent: BaseMagazineBoxPistol
   id: MagazineBoxPistolPractice
   name: ammunition box (.35 auto practice)
-  description: A cardboard box of .35 auto rounds. Intended to hold non-harmful chalk ammunition.
+  description: A cardboard box of .35 auto rounds. Intended to hold harmless practice ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePistolPractice
@@ -52,7 +60,7 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-2 #SS220-FixAmmoSprite
+    - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
     - state: practice
 
@@ -68,13 +76,13 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-2 #SS220-FixAmmoSprite
+    - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
     - state: incendiary
 
 - type: entity
-  id: MagazineBoxPistolUranium
   parent: BaseMagazineBoxPistol
+  id: MagazineBoxPistolUranium
   name: ammunition box (.35 auto uranium)
   description: A cardboard box of .35 auto rounds. Intended to hold exotic uranium-core ammunition.
   components:
@@ -84,6 +92,6 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-2 #SS220-FixAmmoSprite
+    - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
     - state: uranium

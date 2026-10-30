@@ -18,6 +18,9 @@ public sealed class BloomLightOverlay : Overlay
     public override OverlaySpace Space => OverlaySpace.WorldSpaceEntities;
     public override bool RequestScreenTexture => true;
 
+    private static readonly ProtoId<ShaderPrototype> ShaderProtoId = "BlurryLighting";
+    private static readonly ProtoId<ShaderPrototype> ShaderUnshadedProtoId = "unshaded";
+
     private readonly ShaderInstance _shader;
     private readonly ShaderInstance _shader_unshaded;
 
@@ -27,8 +30,8 @@ public sealed class BloomLightOverlay : Overlay
         _transform = entMan.EntitySysManager.GetEntitySystem<SharedTransformSystem>();
         _sprite = entMan.EntitySysManager.GetEntitySystem<SpriteSystem>();
         _prototype = protoMan;
-        _shader = _prototype.Index<ShaderPrototype>("BlurryLighting").InstanceUnique();
-        _shader_unshaded = _prototype.Index<ShaderPrototype>("unshaded").InstanceUnique();
+        _shader = _prototype.Index(ShaderProtoId).InstanceUnique();
+        _shader_unshaded = _prototype.Index(ShaderUnshadedProtoId).InstanceUnique();
 
         ZIndex = (int) Shared.DrawDepth.DrawDepth.Overdoors;
     }

@@ -8,10 +8,12 @@
   suffix: Shitspawn, Ebent, FractWar
   description: Коробка, заполненая магазинами пистолета-пулемёта Шпагина
   components:
-  - type: StorageFill
-    contents:
-      - id: MagazinePistolSubMachineGunUssp_PPSh
-        amount: 4
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: MagazinePistolSubMachineGunUssp_PPSh
+          amount: 4
 
 #ERT
 - type: entity
@@ -21,10 +23,12 @@
   suffix: Shitspawn, Ebent, FractWar
   description: Коробка, заполнения бластерными энергоячейками
   components:
-  - type: StorageFill
-    contents:
-      - id: BlasterPowerCell
-        amount: 4
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BlasterPowerCell
+          amount: 4
 
 #Iron squad
 - type: entity
@@ -37,13 +41,13 @@
     mayTransfer: true
     whitelist:
       tags:
-        - CartridgeIron_MG34
+      - CartridgeIron_MG34
     capacity: 100
     proto: CartridgeIron_MG34
   - type: Sprite
     layers:
     - state: base
-      map: ["enum.GunVisualLayers.Base"]
+      map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
+      map: [ "enum.GunVisualLayers.Mag" ]
   - type: Appearance

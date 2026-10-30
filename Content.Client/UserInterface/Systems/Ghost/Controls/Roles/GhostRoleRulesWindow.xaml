@@ -1,7 +1,7 @@
 <DefaultWindow xmlns="https://spacestation14.io"
             Title="{Loc 'ghost-roles-window-title'}"
-            MinSize="500 300"
-            SetSize="500 300">
+            MinSize="500 300">
+            <!-- SetSize="500 300" --> <!-- SS220 ADD VERB FOR GHOST ROLE -->
     <BoxContainer Orientation="Vertical"
                   HorizontalExpand="True">
         <RichTextLabel Name="TopBanner" VerticalExpand="True"/>

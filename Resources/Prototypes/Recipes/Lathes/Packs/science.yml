@@ -42,8 +42,8 @@
   recipes:
   - PowerCellMicroreactor
   - PowerCellHigh
-  - BlasterPowerCellAlt #SS220 BlueShield MinorFix
   - PowerCellHyper
+  - PowerCellBlaster #SS220 BlueShield MinorFix
 
 - type: latheRecipePack
   id: ScienceWeapons

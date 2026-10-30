@@ -22,4 +22,10 @@ public sealed partial class IFFConsoleComponent : Component
 
     public TimeSpan StealthUntil = TimeSpan.Zero;
     // ss220 spacewar end
+
+    /// <summary>
+    /// If true, automatically applies all supported IFF flags to the console's grid on MapInitEvent.
+    /// </summary>
+    [DataField]
+    public bool HideOnInit = false;
 }

@@ -1,0 +1,16 @@
+- type: reaction
+  id: CreateChocolateWhite
+  impact: Low
+  quantized: true
+  conserveEnergy: false
+  reactants:
+    CocoaPowder:
+      amount: 4
+    Sugar:
+      amount: 5
+    Cream:
+      amount: 5
+  effects:
+    - !type:SpawnEntity
+      entity: FoodSnackChocolateWhiteBar
+

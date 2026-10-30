@@ -5,12 +5,12 @@ using Robust.Shared.Containers;
 using System.Linq;
 
 namespace Content.Shared.SS220.StealthProvider;
-public sealed class SharedStealthProviderSystem : EntitySystem
+public sealed partial class SharedStealthProviderSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedProvidedStealthSystem _provided = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedProvidedStealthSystem _provided = default!;
 
     public override void Initialize()
     {

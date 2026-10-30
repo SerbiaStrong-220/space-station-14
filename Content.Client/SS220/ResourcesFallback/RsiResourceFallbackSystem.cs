@@ -3,7 +3,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.SS220.ResourcesFallback;
 
-public sealed class RsiResourceFallbackSystem : EntitySystem
+public sealed partial class RsiResourceFallbackSystem : EntitySystem
 {
     [Dependency] private IResourceCache _resourceCache = default!;
 

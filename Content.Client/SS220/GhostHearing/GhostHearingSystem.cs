@@ -2,9 +2,9 @@ using Content.Shared.SS220.GhostHearing;
 
 namespace Content.Client.SS220.GhostHearing;
 
-public sealed class GhostHearingSystem : SharedGhostHearingSystem
+public sealed partial class GhostHearingSystem : SharedGhostHearingSystem
 {
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {

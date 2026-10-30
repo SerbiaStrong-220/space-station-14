@@ -20,3 +20,5 @@ darkreaper-preset-description = Тёмный Жнец явился за ваши
 dark-reaper-component-announcement = Внимание! На станции обнаружена сигнатура агрессивной аномальной сущности в третьей стадии. Ликвидируйте её любой ценой.
 
 dark-reaper-cant-use-ability-in-non-physical-form = Для этого действия требуется перейти в материальный мир
+
+dark-reaper-damage-per-interval = Вы чувствуете голод и скорую смерть. Питайтесь ради выживания, не медлите!

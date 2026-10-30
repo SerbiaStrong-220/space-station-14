@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.Linq;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Body.Systems;
@@ -13,16 +14,16 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared.SS220.InnerHandToggleable;
 
-public sealed class SharedInnerHandToggleableSystem : EntitySystem
+public sealed partial class SharedInnerHandToggleableSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
-    [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly SharedHandsSystem _hand = default!;
-    [Dependency] private readonly SharedStuckOnEquipSystem _stuckOnEquip = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private ActionContainerSystem _actionContainer = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private SharedHandsSystem _hand = default!;
+    [Dependency] private SharedStuckOnEquipSystem _stuckOnEquip = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
 
     public const string InnerHandPrefix = "inner_";
 
@@ -31,6 +32,7 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<InnerHandToggleableComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<InnerHandToggleableComponent, HandCountChangedEvent>(OnHandCountChanged);
         SubscribeLocalEvent<InnerHandToggleableComponent, DidEquipHandEvent>(OnDidEquipHand);
         SubscribeLocalEvent<InnerHandToggleableComponent, DidUnequipHandEvent>(OnDidUnequipHand);
         SubscribeLocalEvent<InnerHandToggleableComponent, DidSwitchHandEvent>(OnDidSwitchHand);
@@ -43,26 +45,55 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
         if (!TryComp<HandsComponent>(ent, out var handsComp))
             return;
 
-        var manager = EnsureComp<ContainerManagerComponent>(ent);
-        int unusedPrefix = SharedBodySystem.PartSlotContainerIdPrefix.Length;
-
-        //pre-creating everything required
-        foreach (var hand in handsComp.SortedHands)
-        {
-            var name = string.Concat(InnerHandPrefix, hand.AsSpan(unusedPrefix)); ;//add and delete shit
-            var handInfo = new InnerContainerInfo
-            {
-                Container = _containerSystem.EnsureContainer<ContainerSlot>(ent, name, manager),
-                ContainerId = name
-            };
-
-            ent.Comp.HandsContainers.Add(hand, handInfo);
-        }
+        UpdateHandContainers(ent, handsComp);
 
         if (!_actionContainer.EnsureAction(ent, ref ent.Comp.ActionEntity, out _, ent.Comp.Action))
             return;
 
         Dirty(ent, ent.Comp);
+    }
+
+    private void OnHandCountChanged(Entity<InnerHandToggleableComponent> ent, ref HandCountChangedEvent args)
+    {
+        if (!TryComp<HandsComponent>(ent, out var hands))
+            return;
+
+        UpdateHandContainers(ent, hands);
+        if (hands.ActiveHandId == null)
+            _actionsSystem.RemoveAction(ent.Comp.ActionEntity);
+    }
+
+    private void UpdateHandContainers(Entity<InnerHandToggleableComponent> ent, HandsComponent hands)
+    {
+        // Removing a hand does not remove its separate hidden container.
+        foreach (var (hand, info) in ent.Comp.HandsContainers.ToArray())
+        {
+            if (_hand.TryGetHand((ent.Owner, hands), hand, out _))
+                continue;
+
+            info.InnerItemUid = null;
+            if (info.Container != null)
+            {
+                _containerSystem.EmptyContainer(info.Container, force: true);
+                _containerSystem.ShutdownContainer(info.Container);
+            }
+
+            ent.Comp.HandsContainers.Remove(hand);
+        }
+
+        var manager = EnsureComp<ContainerManagerComponent>(ent);
+        foreach (var hand in hands.SortedHands)
+        {
+            if (ent.Comp.HandsContainers.ContainsKey(hand))
+                continue;
+
+            var name = string.Concat(InnerHandPrefix, hand);
+            ent.Comp.HandsContainers.Add(hand, new InnerContainerInfo
+            {
+                Container = _containerSystem.EnsureContainer<ContainerSlot>(ent, name, manager),
+                ContainerId = name
+            });
+        }
     }
 
     private void OnComponentShutdown(Entity<InnerHandToggleableComponent> ent, ref ComponentShutdown args)
@@ -206,11 +237,21 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
         if (innerToggle.InnerItemUid != null || activeHandHeldItem == null)
             return;
 
-        if (TryComp<StuckOnEquipComponent>(activeHandHeldItem, out var stuckOnEquip))
-            _stuckOnEquip.UnstuckItem((activeHandHeldItem.Value, stuckOnEquip));
-
+        // Unequip handlers need to know that the item is being stored, not lost.
         innerToggle.InnerItemUid = activeHandHeldItem;
-        _containerSystem.Insert((activeHandHeldItem.Value, null, null), innerToggle.Container);
+        var item = activeHandHeldItem.Value;
+        bool inserted;
+        if (TryComp<StuckOnEquipComponent>(item, out var stuckOnEquip))
+            inserted = _stuckOnEquip.TryUnstickAndInsertItem((item, stuckOnEquip), innerToggle.Container);
+        else
+            inserted = _containerSystem.Insert((item, null, null), innerToggle.Container);
+
+        if (!inserted)
+        {
+            innerToggle.InnerItemUid = null;
+            return;
+        }
+
         _actionsSystem.SetToggled(ent.Comp.ActionEntity, true); // we don't update the whole action because the hand and the action do not change
         _metaData.SetEntityName(ent.Comp.ActionEntity.Value, Loc.GetString("action-inner-hand-toggle-name-out"));
     }

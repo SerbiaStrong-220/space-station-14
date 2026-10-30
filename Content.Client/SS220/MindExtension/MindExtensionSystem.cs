@@ -5,9 +5,9 @@ using Robust.Client.Player;
 
 namespace Content.Client.SS220.MindExtension;
 
-public sealed class MindExtensionSystem : EntitySystem
+public sealed partial class MindExtensionSystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
 
     public event Action<GhostBodyListResponse>? GhostBodyListResponse;
     public event Action<DeleteTrailPointResponse>? DeleteTrailPointResponse;

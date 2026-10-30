@@ -1,7 +1,6 @@
 using System.Numerics;
 using Content.Client.Administration.Managers;
 using Content.Client.Gameplay;
-using Content.Client.Markers;
 using Content.Client.Sandbox;
 using Content.Client.SS220.MapEditor;
 using Content.Client.SubFloor;
@@ -10,8 +9,6 @@ using Content.Client.UserInterface.Systems.DecalPlacer;
 using Content.Client.UserInterface.Systems.Sandbox.Windows;
 using Content.Shared.Input;
 using JetBrains.Annotations;
-using Robust.Client.Debugging;
-using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Player;
 using Robust.Client.UserInterface;
@@ -31,14 +28,10 @@ namespace Content.Client.UserInterface.Systems.Sandbox;
 public sealed class SandboxUIController : UIController, IOnStateChanged<GameplayState>, IOnSystemChanged<SandboxSystem>
 {
     [Dependency] private readonly IConsoleHost _console = default!;
-    [Dependency] private readonly IEyeManager _eye = default!;
     [Dependency] private readonly IInputManager _input = default!;
-    [Dependency] private readonly ILightManager _light = default!;
     [Dependency] private readonly IClientAdminManager _admin = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
 
-    [UISystemDependency] private readonly DebugPhysicsSystem _debugPhysics = default!;
-    [UISystemDependency] private readonly MarkerSystem _marker = default!;
     [UISystemDependency] private readonly SandboxSystem _sandbox = default!;
 
     private SandboxWindow? _window;
@@ -118,13 +111,6 @@ public sealed class SandboxUIController : UIController, IOnStateChanged<Gameplay
         _window.OnOpen += () => { SandboxButton!.Pressed = true; };
         _window.OnClose += () => { SandboxButton!.Pressed = false; };
 
-        // TODO: These need moving to opened so at least if they're not synced properly on open they work.
-        _window.ToggleLightButton.Pressed = !_light.Enabled;
-        _window.ToggleFovButton.Pressed = !_eye.CurrentEye.DrawFov;
-        _window.ToggleShadowsButton.Pressed = !_light.DrawShadows;
-        _window.ShowMarkersButton.Pressed = _marker.MarkersVisible;
-        _window.ShowBbButton.Pressed = (_debugPhysics.Flags & PhysicsDebugFlags.Shapes) != 0x0;
-
         _window.AiOverlayButton.OnPressed += args =>
         {
             var player = _player.LocalEntity;
@@ -153,22 +139,7 @@ public sealed class SandboxUIController : UIController, IOnStateChanged<Gameplay
         _window.ToggleSubfloorButton.OnPressed += _ => _sandbox.ToggleSubFloor();
         _window.ShowMarkersButton.OnPressed += _ => _sandbox.ShowMarkers();
         _window.ShowBbButton.OnPressed += _ => _sandbox.ShowBb();
-    }
-
-    private void UpdateFovButtomState()
-    {
-        if (_window != null)
-        {
-            _window.ToggleFovButton.Pressed = !_eye.CurrentEye.DrawFov;
-        }
-    }
-
-    private void UpdateLightButtomState()
-    {
-        if (_window != null)
-        {
-            _window.ToggleLightButton.Pressed = !_light.Enabled;
-        }
+        _window.ToggleThermalVisionButton.OnToggled += _ => _sandbox.ToggleThermalVision();
     }
 
     private void CheckSandboxVisibility()
@@ -195,26 +166,6 @@ public sealed class SandboxUIController : UIController, IOnStateChanged<Gameplay
         system.SandboxDisabled += CloseAll;
         system.SandboxEnabled += CheckSandboxVisibility;
         system.SandboxDisabled += CheckSandboxVisibility;
-
-        system.PlayerAttached += System_PlayerAttached;
-        system.FovToggled += System_FovToggled;
-        system.LightingToggled += System_LightingToggled;
-    }
-
-    private void System_LightingToggled()
-    {
-        UpdateLightButtomState();
-    }
-
-    private void System_FovToggled()
-    {
-        UpdateFovButtomState();
-    }
-
-    private void System_PlayerAttached()
-    {
-        UpdateFovButtomState();
-        UpdateLightButtomState();
     }
 
     public void OnSystemUnloaded(SandboxSystem system)
@@ -222,10 +173,6 @@ public sealed class SandboxUIController : UIController, IOnStateChanged<Gameplay
         system.SandboxDisabled -= CloseAll;
         system.SandboxEnabled -= CheckSandboxVisibility;
         system.SandboxDisabled -= CheckSandboxVisibility;
-
-        system.PlayerAttached -= System_PlayerAttached;
-        system.FovToggled -= System_FovToggled;
-        system.LightingToggled -= System_LightingToggled;
     }
 
     private void SandboxButtonPressed(ButtonEventArgs args)

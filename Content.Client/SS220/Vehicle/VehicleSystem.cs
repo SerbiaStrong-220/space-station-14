@@ -5,9 +5,9 @@ using Robust.Shared.GameStates;
 
 namespace Content.Client.SS220.Vehicle;
 
-public sealed class VehicleSystem : SharedVehicleSystem
+public sealed partial class VehicleSystem : SharedVehicleSystem
 {
-    [Dependency] private readonly EyeSystem _eye = default!;
+    [Dependency] private EyeSystem _eye = default!;
 
     public override void Initialize()
     {

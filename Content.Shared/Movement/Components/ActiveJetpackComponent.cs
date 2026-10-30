@@ -16,4 +16,8 @@ public sealed partial class ActiveJetpackComponent : Component
     public EntityCoordinates LastCoordinates;
 
     public TimeSpan TargetTime = TimeSpan.Zero;
+
+    // SS220-add-gas-usage-modifier-begin
+    public float GasUsageModifier = 1f;
+    // SS220-add-gas-usage-modifier-end
 }

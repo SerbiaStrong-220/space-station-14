@@ -29,6 +29,12 @@
       "name": "clown_web_spawn"
     },
     {
+      "name": "web_spawn_durable"
+    },
+    {
+      "name": "passage_spawn"
+    },
+    {
       "name": "wall_spawn"
     },
     {

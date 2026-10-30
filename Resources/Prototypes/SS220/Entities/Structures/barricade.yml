@@ -52,12 +52,15 @@
   name: barricade
   abstract: true
   components:
+  - type: Anchorable
+  - type: Rotatable
   - type: InteractionOutline
   - type: Sprite
     sprite: SS220/Structures/barricades.rsi
     noRot: false
   - type: Appearance
   - type: AtmosExposed
+  - type: Barricade
   - type: Climbable
   - type: Fixtures
     fixtures:
@@ -66,9 +69,9 @@
           !type:PhysShapeAabb
           bounds: "-0.5,-0.5,0.39,-0.25"
         mask:
-        - TableMask
+        - MachineMask
         layer:
-        - TableLayer
+        - MachineLayer
 
 #Баррикады
 - type: entity
@@ -132,7 +135,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 240
+        damage: 480
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
@@ -162,7 +165,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 360
+        damage: 1280
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
@@ -237,7 +240,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 160
+        damage: 320
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
@@ -262,7 +265,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 280
+        damage: 760
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
@@ -307,7 +310,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 40
+        damage: 120
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
@@ -332,7 +335,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 80
+        damage: 280
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
@@ -357,7 +360,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 160
+        damage: 640
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]

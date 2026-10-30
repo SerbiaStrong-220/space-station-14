@@ -18,14 +18,14 @@ public sealed partial class SuperMatterSystem
 
     */
 
-    [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
-    [Dependency] private readonly IRobustRandom _robustRandom = default!;
+    [Dependency] private AtmosphereSystem _atmosphere = default!;
+    [Dependency] private IRobustRandom _robustRandom = default!;
 
     private float GetDecayMatterMultiplier(float temperature, float pressure) => SuperMatterInternalProcess.GetDecayMatterMultiplier(temperature, pressure);
     private float GetMolesReactionEfficiency(float temperature, float pressure) => SuperMatterInternalProcess.GetMolesReactionEfficiency(temperature, pressure);
     private float GetDeltaChemistryPotential(float temperature, float pressure) => SuperMatterInternalProcess.GetDeltaChemistryPotential(temperature, pressure);
     private float GetChemistryPotential(float temperature, float pressure) => CHEMISTRY_POTENTIAL_BASE + GetDeltaChemistryPotential(temperature, pressure);
-    private float GetHeatCapacity(float temperature, float matter) => SuperMatterInternalProcess.GetHeatCapacity(temperature, matter);
+    private float GetHeatCapacity(float temperature, float matter) => SuperMatterInternalProcess.GetHeatCapacity(temperature, matter / MatterNondimensionalization);
     private float GetReleaseEnergyConversionEfficiency(float temperature, float pressure) => SuperMatterInternalProcess.GetReleaseEnergyConversionEfficiency(temperature, pressure);
     private float GetZapToRadiationRatio(float temperature, float pressure, SuperMatterPhaseState smState) => SuperMatterInternalProcess.GetZapToRadiationRatio(temperature, pressure, smState);
     private float GetOxygenToPlasmaRatio(float temperature, float pressure, SuperMatterPhaseState smState) => SuperMatterInternalProcess.GetOxygenToPlasmaRatio(temperature, pressure, smState);
@@ -66,8 +66,9 @@ public sealed partial class SuperMatterSystem
         if (smComp.InternalEnergy == SuperMatterComponent.MinimumInternalEnergy
             && _robustRandom.Prob(RestructureProbability))
         {
-            smComp.Matter += _robustRandom.GetRandom().NextFloat(0.7f, 1.3f) * RestructureAdditionalMatterDimensionLess * MatterNondimensionalization;
-            smComp.InternalEnergy = GetSafeInternalEnergyToMatterValue(crystal.Comp.Matter) * _robustRandom.GetRandom().NextFloat(0.7f, 1.3f);
+            smComp.Matter += _robustRandom.NextFloat(0.7f, 1.3f) * RestructureAdditionalMatterDimensionLess * MatterNondimensionalization;
+            // explicitly take energy for first mode
+            smComp.InternalEnergy = GetSafeInternalEnergyToMatterValue(crystal.Comp.Matter)[0].Energy * _robustRandom.NextFloat(0.7f, 1.3f);
             _popupSystem.PopupEntity(Loc.GetString("supermatter-crystal-restructure"), crystalUid);
 
             smComp.Integrity = MathF.Max(smComp.Integrity * 0.8f, 0.1f);

@@ -5,6 +5,7 @@
   playTimeTracker: JobVisitor
   canBeAntag: false
   icon: JobIconVisitor
+  experienceDefinition: VisitorRoleExperience # SS220-experience
   setPreference: false
   overrideConsoleVisibility: true
   access:

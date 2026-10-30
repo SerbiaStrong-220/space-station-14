@@ -14,7 +14,7 @@
           Blunt: -0.2
       whitelist:
         components:
-          - HumanoidAppearance
+          - HumanoidProfile
   - type: GenericVisualizer
     visuals:
       enum.LyingVisuals.State:

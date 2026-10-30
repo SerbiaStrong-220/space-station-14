@@ -20,12 +20,6 @@ public sealed partial class ChemicalAdaptationEffect : EntityEffectBase<Chemical
     public TimeSpan Duration;
 
     /// <summary>
-    /// Chemical modifier: greater than 1 if increasing is needed, less than 1 if decreasing is needed
-    /// </summary>
-    [DataField(required: true)]
-    public float Modifier;
-
-    /// <summary>
     /// "False" if you need to add Duration with each use of the effect, "true" if you need to refresh Duration
     /// </summary>
     [DataField]
@@ -36,7 +30,7 @@ public sealed partial class ChemicalAdaptationEffect : EntityEffectBase<Chemical
 
     public override string EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return Loc.GetString("reagent-effect-guidebook-ss220-chemical-adaptation", ("modifier", Math.Round(Modifier, 3)), ("duration", Duration.TotalSeconds), ("refresh", Refresh));
+        return Loc.GetString("reagent-effect-guidebook-ss220-chemical-adaptation");
     }
 }
 

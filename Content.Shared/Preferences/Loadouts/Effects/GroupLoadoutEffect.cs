@@ -62,6 +62,6 @@ public sealed partial class GroupLoadoutEffect : LoadoutEffect
             return FormattedMessage.FromMarkupOrThrow(string.Join('\n', reasons));
         }
 
-        return FormattedMessage.FromMarkupOrThrow($"{string.Join('\n', reasons)}\n{Loc.GetString("group-requirement-or")}\n{string.Join($"\n{Loc.GetString("group-requirement-or")}\n", sponsorsReasons)}");
+        return FormattedMessage.FromMarkupOrThrow($"{string.Join('\n', reasons)}\n{Loc.GetString("generic-or")}\n{string.Join($"\n{Loc.GetString("group-requirement-or")}\n", sponsorsReasons)}");
     }
 }

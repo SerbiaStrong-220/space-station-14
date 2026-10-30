@@ -7,28 +7,28 @@ using Content.Shared.Hands;
 using Content.Shared.Item;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Client.GameObjects;
+using Robust.Shared.Utility;
 
 namespace Content.Client.SS220.Weapons.Ranged.Visualizer.Systems;
 
 /// <summary>
 /// This handles the display of inhand sprite on guns.
 /// </summary>
-public sealed class GunByHasAmmoVisualizerSystem : VisualizerSystem<GunByHasAmmoVisualsComponent>
+public sealed partial class GunByHasAmmoVisualizerSystem : VisualizerSystem<GunByHasAmmoVisualsComponent>
 {
-    [Dependency] private readonly SharedItemSystem _itemSys = default!;
+    [Dependency] private SharedItemSystem _itemSys = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        SubscribeLocalEvent<GunByHasAmmoVisualsComponent, GetInhandVisualsEvent>(OnGetHeldVisuals, after: new[] { typeof(ItemSystem) });
+        SubscribeLocalEvent<GunByHasAmmoVisualsComponent, GetInhandVisualsEvent>(OnGetHeldVisuals, after: [typeof(ItemSystem)]);
     }
 
     protected override void OnAppearanceChange(EntityUid uid, GunByHasAmmoVisualsComponent component, ref AppearanceChangeEvent args)
     {
         if (args.Sprite != null &&
             component.LayerNumber == null &&
-            args.Sprite.LayerMapTryGet(GunVisualLayers.Base, out var layer))
+            SpriteSystem.LayerMapTryGet(uid, GunVisualLayers.Base, out var layer, false))
         {
             component.LayerNumber = layer;
         }
@@ -38,27 +38,23 @@ public sealed class GunByHasAmmoVisualizerSystem : VisualizerSystem<GunByHasAmmo
 
     private void OnGetHeldVisuals(EntityUid uid, GunByHasAmmoVisualsComponent component, GetInhandVisualsEvent args)
     {
-        if ( !TryComp(uid, out AppearanceComponent? appearance)
+        if (!TryComp<AppearanceComponent>(uid, out var appearance)
             || !AppearanceSystem.TryGetData<int>(uid, AmmoVisuals.AmmoCount, out var count, appearance)
             || component.LayerNumber == null)
-            return;
-
-        if (count != 0)
         {
-            if(component.PreviousState == null)
-                return;
-            args.Layers[component.LayerNumber.Value].Item2.State = component.PreviousState;
-            component.PreviousState = null;
             return;
         }
+
+        if (count != 0)
+            return;
 
         if (!component.InhandVisuals.TryGetValue(args.Location, out var layers))
             return;
 
-        foreach (var layer in layers)
-        {
-            component.PreviousState = args.Layers[component.LayerNumber.Value].Item2.State;
-            args.Layers[component.LayerNumber.Value].Item2.State = layer.State;
-        }
+        if (!args.Layers.TryGetValue(component.LayerNumber.Value, out var layerTuple))
+            return;
+
+        if (layers.Count > 0)
+            layerTuple.Item2.State = layers[0].State;
     }
 }

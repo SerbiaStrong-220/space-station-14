@@ -1,0 +1,9 @@
+- files: ["drozd_magOut.ogg"]
+  license: "CC0-1.0"
+  copyright: "Is taken from https://freesound.org/people/ser%C3%B8t%C5%8Dnin/sounds/674742/"
+  source: "https://freesound.org/people/ser%C3%B8t%C5%8Dnin/sounds/674742/"
+
+- files: ["mk_magout.ogg"]
+  license: "CC-BY-SA-4.0"
+  copyright: "Created and contributed to SS220 by Rivgane"
+  source: "https://github.com/SerbiaStrong-220/space-station-14/"

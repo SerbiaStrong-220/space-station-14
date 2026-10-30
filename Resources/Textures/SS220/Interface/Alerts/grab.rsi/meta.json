@@ -1,0 +1,20 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from /tg/station at https://github.com/tgstation/tgstation/blob/17715e3f635e2bc1cabdc8d7e374a9b3dc128228/icons/hud/screen_gen.dmi",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "passive"
+        },
+        {
+            "name": "agressive"
+        },
+        {
+            "name": "neckgrab"
+        }
+    ]
+}

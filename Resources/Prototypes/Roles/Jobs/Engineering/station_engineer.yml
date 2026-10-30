@@ -8,6 +8,7 @@
       department: Engineering
       time: 5h # SS220-RoleTime
   startingGear: StationEngineerGear
+  experienceDefinition: StationEngineerRoleExperience # SS220-experience
   icon: "JobIconStationEngineer"
   supervisors: job-supervisors-ce
   access:

@@ -17,6 +17,8 @@ public abstract partial class SharedLanguageSystem
     private readonly Regex _tagStartRegex = new Regex(TagStartPattern);
     private readonly Regex _tagEndRegex = new Regex(TagEndPattern);
 
+    private static readonly Dictionary<string, Regex> TagRegexCache = new();
+
     private Regex? _languageMarkupRegex;
 
     private void OnPaperSetContentAttempt(ref PaperSetContentAttemptEvent args)
@@ -52,8 +54,15 @@ public abstract partial class SharedLanguageSystem
     protected bool TryParseTagArg(string input, string key, [NotNullWhen(true)] out string? value)
     {
         value = null;
-        string pattern = $@"(?<={key}="")[^""]+(?="")|(?<={key}=)[^""|\s|\]]+";
-        var m = Regex.Match(input, pattern);
+
+        if (!TagRegexCache.TryGetValue(key, out var regex))
+        {
+            string pattern = $@"(?<={key}="")[^""]+(?="")|(?<={key}=)[^""|\s|\]]+";
+            regex = new Regex(pattern, RegexOptions.Compiled);
+            TagRegexCache[key] = regex;
+        }
+
+        var m = regex.Match(input);
         if (m.Success)
         {
             value = m.Value;

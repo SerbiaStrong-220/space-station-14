@@ -1,0 +1,50 @@
+- type: entity
+  id: BaseCartridgeArtilleryShell
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/artillery_shell.ogg
+      params:
+        volume: 2
+  - type: Tag
+    tags:
+    - CartridgeArtilleryShell
+  - type: Item
+    size: Small
+  - type: Sprite
+
+- type: entity
+  parent: BaseCartridgeArtilleryShell
+  id: CartridgeArtilleryShell
+  name: artillery shell
+  components:
+  - type: CartridgeAmmo
+    proto: BulletArtilleryShell
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Explosives/nar.rsi
+    layers:
+    - state: pent
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+    state: frag
+    suffix: false
+
+- type: entity
+  parent: BaseCartridgeArtilleryShell
+  id: CartridgeArtilleryShellEMP
+  name: EMP artillery shell
+  components:
+  - type: CartridgeAmmo
+    proto: BulletArtilleryShellEMP
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Explosives/nar.rsi
+    layers:
+    - state: emp
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+    state: frag
+    suffix: false

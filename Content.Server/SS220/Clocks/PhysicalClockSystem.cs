@@ -9,9 +9,9 @@ namespace Content.Server.SS220.Clocks;
 /// <summary>
 /// This system makes clocks state time when examined.
 /// </summary>
-public sealed class PhysicalClockSystem : EntitySystem
+public sealed partial class PhysicalClockSystem : EntitySystem
 {
-    [Dependency] private readonly IEntitySystemManager _entitySystem = default!;
+    [Dependency] private IEntitySystemManager _entitySystem = default!;
 
     // <inheritdoc/>
     public override void Initialize()

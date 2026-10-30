@@ -6,10 +6,10 @@ using Robust.Shared.Network;
 
 namespace Content.Client.SS220.Discord;
 
-public sealed class DiscordPlayerInfoManager
+public sealed partial class DiscordPlayerInfoManager
 {
-    [Dependency] private readonly IClientNetManager _netMgr = default!;
-    [Dependency] private readonly IStateManager _stateManager = default!;
+    [Dependency] private IClientNetManager _netMgr = default!;
+    [Dependency] private IStateManager _stateManager = default!;
 
     private DiscordSponsorInfo? _info;
 

@@ -6,9 +6,9 @@ using JetBrains.Annotations;
 namespace Content.Client.SS220.ViewableStationMap;
 
 [UsedImplicitly]
-public sealed class StationViewableMapBoundUserInterface : BoundUserInterface
+public sealed partial class StationViewableMapBoundUserInterface : BoundUserInterface
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _entMan = default!;
 
     private ViewableStationMapWindow? _window;
 

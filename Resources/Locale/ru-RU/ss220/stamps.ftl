@@ -36,3 +36,5 @@ stamp-component-stamped-name-fake-cmo = Главсрач
 
 stamp-component-stamped-name-DoAP = Департамент защиты активов
 stamp-component-stamped-name-blue-shield = Синий Щит
+
+stamp-component-stamped-name-redwings = Красные Крылья

@@ -36,7 +36,7 @@ public sealed partial class BatteryWeaponFireMode
     /// The projectile prototype associated with this firing mode
     /// </summary>
     [DataField("proto", required: true)]
-    public string Prototype = default!; //SS220 Add Multifaze gun
+    public EntProtoId Prototype; //SS220 Add Multifaze gun
 
     //SS220 Add Multifaze gun begin
     /// <summary>
@@ -63,6 +63,12 @@ public sealed partial class BatteryWeaponFireMode
     /// </summary>
     [DataField]
     public float FireCost = 100;
+
+    /// <summary>
+    /// Wether or not this fire mode can be used by pacifists
+    /// </summary>
+    [DataField]
+    public bool PacifismAllowedMode = false;
 }
 
 [Serializable, NetSerializable]

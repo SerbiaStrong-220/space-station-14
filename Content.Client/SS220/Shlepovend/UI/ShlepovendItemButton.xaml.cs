@@ -12,7 +12,7 @@ namespace Content.Client.SS220.Shlepovend.UI;
 [GenerateTypedNameReferences]
 public sealed partial class ShlepovendItemButton : ContainerButton
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _entMan = default!;
 
     private static readonly Color ColorNormal = Color.FromHex("#7b7e9e");
     private static readonly Color ColorHovered = Color.FromHex("#9699bb");

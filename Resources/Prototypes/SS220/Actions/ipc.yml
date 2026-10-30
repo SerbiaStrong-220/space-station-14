@@ -1,0 +1,47 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: ActionDrainBattery
+  name: Drain Battery
+  description: Drains nearby batteries to recharge yourself
+  components:
+    - type: Action
+      icon:
+        sprite: SS220/Interface/Actions/ipc/drainbattery.rsi
+        state: off
+      iconOn:
+        sprite: SS220/Interface/Actions/ipc/drainbattery.rsi
+        state: on
+      itemIconStyle: NoItem
+    - type: InstantAction
+      event: !type:ToggleDrainActionEvent
+
+- type: entity
+  id: ActionIpcChangeFace
+  name: Change IPC Face
+  description: Opens the IPC face selection menu
+  components:
+    - type: Action
+      icon: { sprite: SS220/Interface/Actions/ipc/ipcscreen.rsi, state: screen }
+      itemIconStyle: NoItem
+    - type: InstantAction
+      event: !type:OpenIpcFaceActionEvent
+
+- type: entity
+  parent: ActionToggleLight
+  id: ActionIpcToggleLight
+  components:
+  - type: Action
+    useDelay: 1
+    icon: { sprite: SS220/Interface/Actions/ipc/light.rsi, state: off }
+    iconOn: { sprite: SS220/Interface/Actions/ipc/light.rsi, state: on }
+
+- type: entity
+  parent: ActionScream
+  id: ActionIpcScream
+  components:
+  - type: Action
+    useDelay: 10
+    icon: { sprite: SS220/Interface/Actions/ipc/scream.rsi, state: scream }
+    checkCanInteract: false
+

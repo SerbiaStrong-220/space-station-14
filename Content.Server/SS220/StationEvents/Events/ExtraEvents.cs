@@ -7,10 +7,10 @@ using Content.Shared.Database;
 
 namespace Content.Server.SS220.StationEvents.Events;
 
-public sealed class ExtraEventsSystem : EntitySystem
+public sealed partial class ExtraEventsSystem : EntitySystem
 {
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly EventManagerSystem _event = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private EventManagerSystem _event = default!;
 
     public override void Initialize()
     {

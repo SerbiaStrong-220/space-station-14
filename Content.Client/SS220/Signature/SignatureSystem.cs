@@ -9,11 +9,11 @@ using Content.Shared.SS220.Signature;
 
 namespace Content.Client.SS220.Signature;
 
-public sealed class SignatureSystem : SharedSignatureSystem
+public sealed partial class SignatureSystem : SharedSignatureSystem
 {
-    [Dependency] private readonly IClientPreferencesManager _preferences = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly IClientAdminManager _admin = default!;
+    [Dependency] private IClientPreferencesManager _preferences = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private IClientAdminManager _admin = default!;
 
     public override void Initialize()
     {

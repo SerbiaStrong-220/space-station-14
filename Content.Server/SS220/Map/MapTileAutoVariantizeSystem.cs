@@ -10,9 +10,9 @@ namespace Content.Server.SS220.Map;
 
 public sealed partial class MapTileAutoVariantizeSystem : EntitySystem
 {
-    [Dependency] private readonly MapSystem _map = default!;
-    [Dependency] private readonly TileSystem _tile = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private MapSystem _map = default!;
+    [Dependency] private TileSystem _tile = default!;
+    [Dependency] private TurfSystem _turf = default!;
 
     public override void Initialize()
     {

@@ -8,9 +8,9 @@ using Robust.Shared.Input;
 
 namespace Content.Client.SS220.Signature;
 
-public sealed class SignatureControl : Control
+public sealed partial class SignatureControl : Control
 {
-    [Dependency] private readonly IClyde _clyde = default!;
+    [Dependency] private IClyde _clyde = default!;
 
     public Vector2 CanvasSize { get; set; }
 

@@ -14,6 +14,9 @@ public partial class VoiceMaskSystem
 
     private void OnSpeakerVoiceTransform(Entity<VoiceMaskComponent> entity, ref TransformSpeakerVoiceEvent args)
     {
+        if (!entity.Comp.Active)
+            return;
+
         args.VoiceId = entity.Comp.VoiceId;
     }
 

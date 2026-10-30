@@ -8,9 +8,9 @@ namespace Content.Shared.SS220.SS220SharedTriggers.InjectionOnTrigger;
 /// <summary>
 /// This is used for injects reagents when a trigger is activated
 /// </summary>
-public sealed class InjectionOnTriggerSystem : EntitySystem
+public sealed partial class InjectionOnTriggerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainers = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainers = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

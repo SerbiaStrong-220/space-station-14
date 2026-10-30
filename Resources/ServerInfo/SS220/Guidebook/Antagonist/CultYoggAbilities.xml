@@ -1,0 +1,37 @@
+<Document>
+  # Способности культиста
+
+  Обычный культист создаёт ми-гомицелий и преобразует предметы для команды. Эти способности доступны до вознесения в Ми-Го.
+
+  <Box HorizontalAlignment="Left">
+    <GuideSpriteEmbed Sprite="SS220/Interface/Actions/cult_yogg.rsi" State="migopuke"/>
+    [bold][color=#a4885c]Извергнуть[/color][/bold]
+  </Box>
+
+  Создаёт один гриб ми-гомицелия. После использования действие заменяется на «Микоз». Гриб нужен для подготовки кандидатов к обращению и вознесения союзников в Ми-Го.
+
+  <Box HorizontalAlignment="Left">
+    <GuideSpriteEmbed Sprite="SS220/Interface/Actions/cult_yogg.rsi" State="IconMycosis"/>
+    [bold][color=#a4885c]Микоз[/color][/bold]
+  </Box>
+
+  Расходует запас пищи и воды, подготавливая следующий гриб. После него возвращается «Извергнуть» с задержкой в 30 секунд. При сильном голоде или жажде подготовка не сработает: следите за питанием.
+
+  <Box HorizontalAlignment="Left">
+    <GuideSpriteEmbed Sprite="SS220/Interface/Actions/cult_yogg.rsi" State="touch"/>
+    [bold][color=#a4885c]Преобразовать предмет прикосновением[/color][/bold]
+  </Box>
+
+  Преобразует выбранный предмет по [textlink="одному из рецептов" link="CultYoggRecipes"]. Так получают [textlink="токл" link="CultYoggRecipes"] из стали, [textlink="живые корни" link="CultYoggRecipes"] из кабелей, оружие и другие инструменты.
+
+  <Box HorizontalAlignment="Left">
+    <GuideSpriteEmbed Sprite="SS220/Interface/Actions/cult_yogg.rsi" State="corrupt"/>
+    [bold][color=#a4885c]Преобразовать предмет в руках[/color][/bold]
+  </Box>
+
+  Преобразует предмет в активной руке по [textlink="одному из рецептов" link="CultYoggRecipes"].
+
+  Рецепты с изображениями: [textlink="Таблица преобразований" link="CultYoggRecipes"]. Применение предметов: [textlink="Снаряжение" link="CultYoggEquipment"] и [textlink="База и растения" link="CultYoggBase"].
+
+  [textlink="Обращение и метки" link="CultYoggConversion"] · [textlink="Ми-Го" link="CultYoggMiGo"] · [textlink="Обзор культа" link="CultYogg"]
+</Document>

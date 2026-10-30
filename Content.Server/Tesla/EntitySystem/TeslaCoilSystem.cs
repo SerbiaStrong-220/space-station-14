@@ -3,6 +3,7 @@ using Content.Server.Tesla.Components;
 using Content.Server.Lightning;
 using Content.Server.SS220.SuperMatter.Crystal.Components;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Power.Components;
 
 namespace Content.Server.Tesla.EntitySystems;
@@ -34,7 +35,7 @@ public sealed class TeslaCoilSystem : EntitySystem
     {
         if (TryComp<BatteryComponent>(coil, out var batteryComponent))
         {
-            _battery.SetCharge(coil, batteryComponent.CurrentCharge + coil.Comp.ChargeFromLightning);
+            _battery.ChangeCharge((coil, batteryComponent), coil.Comp.ChargeFromLightning);
         }
     }
 
@@ -55,7 +56,7 @@ public sealed class TeslaCoilSystem : EntitySystem
         DamageSpecifier damage = new();
         damage.DamageDict.Add("Structural", -1 * structuralDamage * entity.Comp.StructureDamageRecoveredNearSM);
 
-        _damageable.TryChangeDamage(entity, damage, true);
+        _damageable.TryChangeDamage(entity.Owner, damage, true);
     }
 
     private void TryFindSMNear(Entity<TeslaCoilComponent> entity)

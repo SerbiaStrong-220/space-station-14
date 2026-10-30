@@ -43,7 +43,6 @@ ent-RandomHumanoidSpawnerERTMedical = ОБР медик
 ent-RandomHumanoidSpawnerERTMedicalEVA = ОБР медик
     .suffix = Роль ОБР, Броня EVA
     .desc = { ent-RandomHumanoidSpawnerERTMedical.desc }
-# SS220 CBURN questions
 ent-RandomHumanoidSpawnerCBURNUnit = Агент РХБЗ
     .suffix = Роль ОБР
     .desc = { "" }

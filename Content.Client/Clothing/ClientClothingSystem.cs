@@ -1,3 +1,4 @@
+using Content.Shared.SS220.Clothing.Components;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Client.DisplacementMap;
@@ -15,6 +16,7 @@ using Robust.Client.ResourceManagement;
 using Robust.Shared.Serialization.TypeSerializers.Implementations;
 using Robust.Shared.Utility;
 using static Robust.Client.GameObjects.SpriteComponent;
+using Content.Shared.SS220.Clothing; // SS220-IPC
 
 namespace Content.Client.Clothing;
 
@@ -111,7 +113,24 @@ public sealed class ClientClothingSystem : ClothingSystem
         {
             // No generic data either. Attempt to generate defaults from the item's RSI & item-prefixes
             if (!TryGetDefaultVisuals(uid, item, args.Slot, inventory.SpeciesId, out layers))
-                return;
+            {
+                // SS220-glasses-on-forehead-begin
+                // A disguise without a forehead sprite keeps the item's original forehead appearance.
+                if (args.Slot != "head" || !HasComp<GlassesOnForeheadComponent>(uid) ||
+                    !HasComp<ChameleonClothingComponent>(uid) ||
+                    MetaData(uid).EntityPrototype is not { } original ||
+                    !original.TryGetComponent<ClothingComponent>(out var originalClothing, EntityManager.ComponentFactory))
+                    return;
+
+                if (inventory.SpeciesId == null ||
+                    !originalClothing.ClothingVisuals.TryGetValue($"head-{inventory.SpeciesId}", out layers))
+                    originalClothing.ClothingVisuals.TryGetValue("head", out layers);
+
+                if (layers == null &&
+                    !TryGetDefaultVisuals(uid, originalClothing, args.Slot, inventory.SpeciesId, out layers))
+                    return;
+                // SS220-glasses-on-forehead-end
+            }
         }
 
         // add each layer to the visuals
@@ -223,7 +242,7 @@ public sealed class ClientClothingSystem : ClothingSystem
     {
         base.OnGotEquipped(uid, component, args);
 
-        RenderEquipment(args.Equipee, uid, args.Slot, clothingComponent: component);
+        RenderEquipment(args.EquipTarget, uid, args.Slot, clothingComponent: component);
     }
 
     private void RenderEquipment(EntityUid equipee, EntityUid equipment, string slot,
@@ -255,6 +274,14 @@ public sealed class ClientClothingSystem : ClothingSystem
             inventorySlots.VisualLayerKeys[slot] = revealedLayers;
         }
 
+        // SS220-IPC begin
+        var beforeEv = new BeforeRenderEquipmentEvent(equipee, equipment, slot);
+        RaiseLocalEvent(equipee, beforeEv);
+        RaiseLocalEvent(equipment, beforeEv);
+        if (beforeEv.Cancelled)
+            return;
+        // SS220-IPC end
+
         var ev = new GetEquipmentVisualsEvent(equipee, slot);
         RaiseLocalEvent(equipment, ev);
 
@@ -271,7 +298,7 @@ public sealed class ClientClothingSystem : ClothingSystem
         // Select displacement maps
         var displacementData = inventory.Displacements.GetValueOrDefault(slot); //Default unsexed map
 
-        var equipeeSex = CompOrNull<HumanoidAppearanceComponent>(equipee)?.Sex;
+        var equipeeSex = CompOrNull<HumanoidProfileComponent>(equipee)?.Sex;
         if (equipeeSex != null)
         {
             switch (equipeeSex)

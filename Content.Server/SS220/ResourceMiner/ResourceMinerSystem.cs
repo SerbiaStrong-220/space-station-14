@@ -11,15 +11,15 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.ResourceMiner;
 
-public sealed class ResourceMinerSystem : EntitySystem
+public sealed partial class ResourceMinerSystem : EntitySystem
 {
-    [Dependency] private readonly AmbientSoundSystem _ambientSound = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly MaterialStorageSystem _materialStorage = default!;
-    [Dependency] private readonly PointLightSystem _pointLight = default!;
-    [Dependency] private readonly TransformSystem _transformSystem = default!;
-    [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
+    [Dependency] private AmbientSoundSystem _ambientSound = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private MaterialStorageSystem _materialStorage = default!;
+    [Dependency] private PointLightSystem _pointLight = default!;
+    [Dependency] private TransformSystem _transformSystem = default!;
+    [Dependency] private UserInterfaceSystem _userInterface = default!;
 
     public override void Initialize()
     {
@@ -46,6 +46,15 @@ public sealed class ResourceMinerSystem : EntitySystem
 
             if (_gameTiming.CurTime < resourceMinerComponent.NextUpdate)
                 continue;
+
+            if (TerminatingOrDeleted(resourceMinerComponent.Silo))
+            {
+                resourceMinerComponent.Silo = null;
+
+                SetAppearanceSettings((uid, resourceMinerComponent));
+                Dirty(uid, resourceMinerComponent);
+                continue;
+            }
 
             resourceMinerComponent.NextUpdate = _gameTiming.CurTime + resourceMinerComponent.TimeBetweenUpdate;
             AddResourcesToStorage((uid, resourceMinerComponent));
@@ -83,10 +92,17 @@ public sealed class ResourceMinerSystem : EntitySystem
 
         entity.Comp.Silo = netSilo;
 
-        _pointLight.SetColor(entity, entity.Comp.WorkingColor);
         _ambientSound.SetSound(entity, entity.Comp.WorkSound);
-
+        SetAppearanceSettings(entity);
         Dirty(entity);
+    }
+
+    private void SetAppearanceSettings(Entity<ResourceMinerComponent> entity)
+    {
+        var isSiloLinked = entity.Comp.Silo != null;
+
+        _pointLight.SetColor(entity, isSiloLinked ? entity.Comp.WorkingColor : entity.Comp.ErrorColor);
+        _ambientSound.SetAmbience(entity, isSiloLinked);
     }
 
     private void SendAvailableSilos(Entity<ResourceMinerComponent> entity)
@@ -94,8 +110,12 @@ public sealed class ResourceMinerSystem : EntitySystem
         var silos = new HashSet<Entity<MaterialStorageComponent, OreSiloComponent>>();
         _entityLookup.GetEntitiesOnMap(_transformSystem.GetMapId(entity.Owner), silos);
 
-        _userInterface.SetUiState(entity.Owner, ResourceMinerSettings.Key, new AvailableSilosMiner([.. silos.Where(x => ValidateSilo(x.Owner, entity))
-                                                                                                            .Select(x => GetNetEntity(x.Owner))]));
+        _userInterface.SetUiState(entity.Owner,
+            ResourceMinerSettings.Key,
+            new AvailableSilosMiner([
+                .. silos.Where(x => ValidateSilo(x.Owner, entity))
+                        .Select(x => GetNetEntity(x.Owner)),
+            ]));
     }
 
     private bool ValidateSilo(EntityUid siloUid, Entity<ResourceMinerComponent> minerEntity)

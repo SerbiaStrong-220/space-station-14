@@ -95,4 +95,11 @@ public sealed partial class HumanoidProfileEditor
         _ttsSys.ResetQueuesAndEndStreams();
         _ttsSys.RequestGlobalTTS(_random.Pick(_sampleText), Profile.Voice);
     }
+
+
+    private void SetVoice(string newVoice)
+    {
+        Profile = Profile?.WithVoice(newVoice);
+        IsDirty = true;
+    }
 }

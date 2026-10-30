@@ -116,16 +116,21 @@ namespace Content.Shared.DrawDepth
         AboveFovOverlay = DrawDepthTag.Default + 10, //SS220 Perpective-wall-fov
 
         /// <summary>
+        ///     Visible atmos gas.
+        /// </summary>
+        Gasses = DrawDepthTag.Default + 11,
+
+        /// <summary>
         ///     Explosions, fire, melee swings. Whatever.
         /// </summary>
-        Effects = DrawDepthTag.Default + 11,
+        Effects = DrawDepthTag.Default + 12,
 
-        Ghosts = DrawDepthTag.Default + 12,
+        Ghosts = DrawDepthTag.Default + 13,
 
         /// <summary>
         ///    Use this selectively if it absolutely needs to be drawn above (almost) everything else. Examples include
         ///    the pointing arrow, the drag & drop ghost-entity, and some debug tools.
         /// </summary>
-        Overlays = DrawDepthTag.Default + 13,
+        Overlays = DrawDepthTag.Default + 14,
     }
 }

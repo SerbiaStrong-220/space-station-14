@@ -121,16 +121,4 @@ namespace Content.Server.Kitchen.Components
         public float IdCardExplosionChance = 1f;
         //SS220 Microwave explosion tweak end
     }
-
-    public sealed class BeingMicrowavedEvent : HandledEntityEventArgs
-    {
-        public EntityUid Microwave;
-        public EntityUid? User;
-
-        public BeingMicrowavedEvent(EntityUid microwave, EntityUid? user)
-        {
-            Microwave = microwave;
-            User = user;
-        }
-    }
 }

@@ -9,12 +9,12 @@ using Content.Shared.SS220.StealthProvider;
 
 namespace Content.Server.SS220.CultYogg.Lamp;
 
-public sealed class CultYoggLampSystem : SharedCultYoggLampSystem
+public sealed partial class CultYoggLampSystem : SharedCultYoggLampSystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPointLightSystem _lights = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private ActionContainerSystem _actionContainer = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPointLightSystem _lights = default!;
 
     public override void Initialize()
     {

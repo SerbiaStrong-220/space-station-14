@@ -11,13 +11,8 @@ namespace Content.Server.SS220.Paper;
 
 public sealed partial class DocumentHelperSystem : SharedDocumentHelperSystem
 {
-    [Dependency] private readonly StationSystem _stationSystem = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-    }
+    [Dependency] private StationSystem _stationSystem = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
 
     #region Ui
     public override List<string> GetValuesByOption(DocumentHelperOptions option, EntityUid? uid = null)

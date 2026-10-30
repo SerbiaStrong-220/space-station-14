@@ -1,10 +1,10 @@
-war-declarator-not-nukeops = Устройство пищит, но ничего не происходит...
+war-declarator-not-working = Устройство пищит, но ничего не происходит...
 war-declarator-ui-header = Объявление войны
+war-declarator-ui-try-war-button = Попробовать объявить войну
 war-declarator-ui-war-button = ОБЪЯВИТЬ ВОЙНУ!
 war-declarator-conditions-small-crew = Недостаточно ядерных оперативников, чтобы объявить войну!
 war-declarator-conditions-left-outpost = Шаттл покинул аванпост Синдиката
 war-declarator-conditions-time-out = Время на объявление войны прошло
-war-declarator-conditions-delay = Отправление шаттла временно недоступно
 war-declarator-conditions-ready = Шаттл может покинуть аванпост!
 war-declarator-conditions-unknown = Неизвестно
 war-declarator-boost-possible = Возможно объявить войну

@@ -152,8 +152,12 @@ namespace Content.Server.Mapping
             }
 
             // don't interrupt mapping with events or auto-shuttle
+// ss220 tweak mapping command start
+#if DEBUG
             shell.ExecuteCommand("changecvar events.enabled false");
             shell.ExecuteCommand("changecvar shuttle.auto_call_time 0");
+#endif
+// ss220 tweak mapping command end
 
             if (grid != null)
                 _mappingSystem.ToggleAutosave(grid.Value.Owner, toLoad ?? "NEWGRID");

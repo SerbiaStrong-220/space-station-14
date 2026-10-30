@@ -1,6 +1,6 @@
 - type: latheRecipe
-  id: BlasterPowerCellAlt
-  result: BlasterPowerCellAltPrinted
+  id: PowerCellBlaster
+  result: PowerCellBlasterPrinted
   categories: [ Parts ]
   completetime: 10
   materials:

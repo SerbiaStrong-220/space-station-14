@@ -2,17 +2,23 @@
 
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Examine;
+using Content.Shared.SS220.Cooking;
+using Content.Shared.Tag;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Cooking.Grilling;
 
 /// <summary>
 /// This handles the grilling process of grillable entity
 /// </summary>
-public sealed class GrillableSystem : EntitySystem
+public sealed partial class GrillableSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    private static readonly ProtoId<TagPrototype> CookedTag = "Cooked";
+
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -28,8 +34,8 @@ public sealed class GrillableSystem : EntitySystem
     {
         if (args.Handled)
             return;
-            
-        args.Handled = ent.Comp.IsCooking;
+
+        args.Handled = HasComp<BeingCookedComponent>(ent);
     }
 
     private void OnGrillableExamined(Entity<GrillableComponent> ent, ref ExaminedEvent args)
@@ -56,8 +62,9 @@ public sealed class GrillableSystem : EntitySystem
         // Cooking is done
         if (ent.Comp.CurrentCookTime >= ent.Comp.TimeToCook)
         {
-            var newEnt = EntityManager.Spawn(ent.Comp.CookingResult,
-                _transformSystem.GetMapCoordinates(ent));
+            var newEnt = Spawn(ent.Comp.CookingResult, _transformSystem.GetMapCoordinates(ent));
+            _transformSystem.SetLocalRotation(newEnt, Angle.Zero);
+            _tag.AddTag(newEnt, CookedTag);
 
             _audio.PlayPvs(ent.Comp.CookingDoneSound, newEnt);
 

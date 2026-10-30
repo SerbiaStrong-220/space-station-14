@@ -10,7 +10,7 @@ namespace Content.Server.SS220.TraitorDynamics;
 [AdminCommand(AdminFlags.Round)]
 public sealed partial class ForceDynamicCommand : IConsoleCommand
 {
-    [Dependency] private readonly EntityManager _entityManager = default!;
+    [Dependency] private EntityManager _entityManager = default!;
 
     public string Command => "setdynamic";
     public string Description => "force dynamic for current round";

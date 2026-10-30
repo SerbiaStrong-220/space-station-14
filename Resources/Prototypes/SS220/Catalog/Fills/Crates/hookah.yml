@@ -1,0 +1,26 @@
+
+- type: entity
+  id: CrateServiceHookah
+  parent: CrateGenericSteel
+  name: hookah crate
+  description: A full hookah assembly kit with a flask, shaft, saucer, tube, coals and tobacco.
+  components:
+  - type: StorageFill
+    contents:
+    - id: HookahFlask
+    - id: HookahShaft
+    - id: HookahSaucer
+    - id: HookahTubePart
+    - id: HookahCoalBox
+    - id: LeavesTobaccoDried
+      amount: 10
+
+- type: entity
+  id: CrateServiceHookahCoalBox
+  parent: CrateGenericSteel
+  name: hookah coal crate
+  description: Contains a box of hookah coals.
+  components:
+  - type: StorageFill
+    contents:
+    - id: HookahCoalBox

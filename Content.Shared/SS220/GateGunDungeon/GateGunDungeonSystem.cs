@@ -6,9 +6,9 @@ namespace Content.Shared.SS220.GateGunDungeon;
 /// <summary>
 /// This handles long-range weapons, prohibits shooting if the player is at the station.
 /// </summary>
-public sealed class GateGunDungeonSystem : EntitySystem
+public sealed partial class GateGunDungeonSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

@@ -210,7 +210,7 @@
     - type: StaticPrice
       price: 500
     - type: Sprite
-      sprite: Structures/Storage/tanks.rsi
+      sprite: SS220/Structures/Storage/tanks.rsi # Corvax-Resprite
       layers:
         - state: generictank-1
         - state: generictank-1-1 # Corvax-Resprite

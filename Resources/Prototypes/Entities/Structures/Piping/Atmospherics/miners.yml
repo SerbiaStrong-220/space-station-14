@@ -26,7 +26,7 @@
       - Anchorable
     - type: Pullable
     - type: Sprite
-      sprite: Structures/Piping/Atmospherics/miners.rsi
+      sprite: SS220/Structures/Piping/Atmospherics/miners.rsi # SS220 atmospherics-sprite-update
       state: miner
     - type: AtmosDevice
     - type: GasMiner

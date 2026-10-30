@@ -20,11 +20,11 @@ namespace Content.Client.SS220.Shlepovend.UI;
 [GenerateTypedNameReferences]
 public sealed partial class ShlepovendWindow : FancyWindow
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IConfigurationManager _conf = default!;
-    [Dependency] private readonly IUriOpener _uri = default!;
-    [Dependency] private readonly DiscordPlayerInfoManager _discordPlayerInfo = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IConfigurationManager _conf = default!;
+    [Dependency] private IUriOpener _uri = default!;
+    [Dependency] private DiscordPlayerInfoManager _discordPlayerInfo = default!;
 
     private readonly ShlepovendSystem _shlepovendSys;
 

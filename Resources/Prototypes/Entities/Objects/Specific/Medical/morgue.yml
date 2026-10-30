@@ -1,6 +1,6 @@
 - type: entity
   id: BodyBag
-  parent: BaseDeployFoldable
+  parent: [ BaseDeployFoldable, BasePaperLabelableVisualized ]
   name: body bag
   description: A plastic bag designed for the storage and transportation of cadavers to stop body decomposition.
   components:
@@ -54,16 +54,6 @@
     openSound:
       path: /Audio/Misc/zip.ogg
   - type: EntityStorageLayingDownOverride
-  - type: PaperLabel
-    labelSlot:
-      insertVerbText: comp-paper-label-insert
-      ejectVerbText: comp-paper-label-eject
-      whitelist:
-        components:
-        - Paper
-      blacklist:
-        tags:
-        - Book
   - type: Appearance
   - type: EntityStorageVisuals
     stateDoorOpen: open_overlay
@@ -88,13 +78,34 @@
           False: {visible: true}
   - type: Pullable
   - type: AntiRottingContainer
-  - type: ItemSlots
   - type: ContainerContainer
     containers:
       entity_storage: !type:Container
       paper_label: !type:ContainerSlot
   - type: StaticPrice
     price: 50
+  #SS220-BodyBagDamageable begin
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetPlastic1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+    #SS220-BodyBagDamageable end
 
 - type: entity
   id: BodyBagFolded
@@ -160,7 +171,7 @@
           reagents:
             - ReagentId: Ash
               Quantity: 25
-            - ReagentId: Necrosol
+            - ReagentId: Arcryox
               Quantity: 25
     - type: GuideHelp
       guides:

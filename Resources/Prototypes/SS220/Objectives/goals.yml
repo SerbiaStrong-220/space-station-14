@@ -29,3 +29,59 @@
 - type: stationGoal
   id: SportComplex
   text: station-goal-sports
+
+- type: stationGoal
+  id: Emergshelter
+  text: station-goal-emergshelter
+
+- type: stationGoal
+  id: Secshuttle
+  text: station-goal-secshuttle
+
+- type: stationGoal
+  id: Emergshuttleeng
+  text: station-goal-emergshuttleeng
+
+- type: stationGoal
+  id: Emergshuttleservice
+  text: station-goal-emergshuttleservice
+
+- type: stationGoal
+  id: Airsofttournament
+  text: station-goal-airsofttournament
+
+- type: stationGoal
+  id: Voxvip
+  text: station-goal-voxvip
+
+- type: stationGoal
+  id: JRoffice
+  text: station-goal-jRoffice
+
+- type: stationGoal
+  id: Cargomisery
+  text: station-goal-cargomisery
+
+- type: stationGoal
+  id: Bloodsample
+  text: station-goal-bloodsample
+
+- type: stationGoal
+  id: Botanicgarden
+  text: station-goal-botanicgarden
+
+- type: stationGoal
+  id: Secretcloning
+  text: station-goal-secretcloning
+
+- type: stationGoal
+  id: Starchef
+  text: station-goal-starchef
+
+- type: stationGoal
+  id: Theatr
+  text: station-goal-theatr
+
+- type: stationGoal
+  id: Coldreagentroom
+  text: station-goal-coldreagentroom

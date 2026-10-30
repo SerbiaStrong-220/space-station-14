@@ -81,7 +81,7 @@
     fireRate: 8
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
-  - type: HitscanBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: PulseErt_Lmg
     fireCost: 40
   - type: Battery

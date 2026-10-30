@@ -1,17 +1,16 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.GameTicking;
-using Robust.Shared.Map;
 
 namespace Content.Shared.SS220.SoftDelete;
 
 /// <summary>
 /// Allows to fully disable an entity without completely deleting it, and then restore it back.
 /// </summary>
-public sealed class SharedSoftDeleteSystem : EntitySystem
+public sealed partial class SharedSoftDeleteSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
 
     private EntityUid? PausedMap { get; set; }
 
@@ -71,7 +70,7 @@ public sealed class SharedSoftDeleteSystem : EntitySystem
         if (PausedMap == null || !Exists(PausedMap))
             return;
 
-        EntityManager.DeleteEntity(PausedMap.Value);
+        Del(PausedMap.Value);
         PausedMap = null;
     }
 
@@ -81,6 +80,6 @@ public sealed class SharedSoftDeleteSystem : EntitySystem
             return;
 
         PausedMap = _mapSystem.CreateMap(out var mapId);
-        _mapManager.SetMapPaused(mapId, true);
+        _mapSystem.SetPaused(mapId, true);
     }
 }

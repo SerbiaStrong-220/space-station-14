@@ -11,11 +11,11 @@ namespace Content.Shared.SS220.CultYogg.Nyarlathotep;
 /// <summary>
 /// The general part of the Nyarlathotep system is primarily responsible for consuming entities <see cref="NyarlathotepHorizonComponent"/>s.
 /// </summary>
-public abstract class SharedNyarlathotepHorizonSystem : EntitySystem
+public abstract partial class SharedNyarlathotepHorizonSystem : EntitySystem
 {
-    [Dependency] private readonly FixtureSystem _fixtures = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] protected readonly IViewVariablesManager Vvm = default!;
+    [Dependency] private FixtureSystem _fixtures = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] protected IViewVariablesManager Vvm = default!;
 
     public override void Initialize()
     {
@@ -81,7 +81,7 @@ public abstract class SharedNyarlathotepHorizonSystem : EntitySystem
             _physics.SetHard(uid, collider, false, fixtures);
         }
 
-        EntityManager.Dirty(uid, fixtures);
+        Dirty(uid, fixtures);
     }
 
     #endregion Getters/Setters

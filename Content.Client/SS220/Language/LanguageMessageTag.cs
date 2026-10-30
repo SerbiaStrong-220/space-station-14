@@ -10,10 +10,10 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Client.SS220.Language;
 
-public sealed class LanguageMessageTag : IMarkupTagHandler
+public sealed partial class LanguageMessageTag : IMarkupTagHandler
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     public string Name => SharedLanguageSystem.LanguageMsgMarkup;
 

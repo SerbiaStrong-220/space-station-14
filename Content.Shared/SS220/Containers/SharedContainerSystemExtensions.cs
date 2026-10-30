@@ -7,11 +7,11 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared.SS220.Containers;
 
-public sealed class SharedContainerSystemExtensions : EntitySystem
+public sealed partial class SharedContainerSystemExtensions : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     /// <summary>
     ///     Removes all entites with specified component from entity containers, including hands.

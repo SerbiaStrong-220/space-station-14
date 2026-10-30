@@ -36,19 +36,15 @@
             </BoxContainer>
             <Control HorizontalExpand="True"/>
             <BoxContainer>
-                <Button Name="SelectAllButton" Text="{Loc 'id-card-console-window-select-all-button'}" />
-                <Button Name="DeselectAllButton" Text="{Loc 'id-card-console-window-deselect-all-button'}" />
+                <!-- SS220-ID console extended access button-bgn -->
+                <!-- <Button Name="SelectAllButton" Text="{Loc 'id-card-console-window-select-all-button'}" /> -->
+                <Button Name="FullAccessButton" Text="{Loc 'id-card-console-window-full-access-button'}" StyleClasses="OpenRight" />
+                <Button Name="ExtendedAccessButton" Text="{Loc 'id-card-console-window-extended-access-button'}" StyleClasses="OpenBoth" />
+                <Button Name="DeselectAllButton" Text="{Loc 'id-card-console-window-deselect-all-button'}" StyleClasses="OpenLeft" />
+                <!-- SS220-ID console extended access button-end -->
             </BoxContainer>
         </BoxContainer>
         <!-- Individual access buttons -->
         <Control Name="AccessLevelControlContainer" />
-        <!-- SS220-ID console extended access button-Begin -->
-        <BoxContainer HorizontalExpand="True" HorizontalAlignment="Right">
-            <BoxContainer>
-                <Button Text="{Loc 'id-card-console-window-full-access-button'}" StyleClasses="OpenRight" Name="FullAccessButton" />
-                <Button Text="{Loc 'id-card-console-window-extended-access-button'}" StyleClasses="OpenLeft" Name="ExtendedAccessButton" />
-            </BoxContainer>
-        </BoxContainer>
-        <!-- SS220-ID console extended access button-End -->
     </BoxContainer>
 </DefaultWindow>

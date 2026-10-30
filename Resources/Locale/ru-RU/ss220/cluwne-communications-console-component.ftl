@@ -1,7 +1,11 @@
 ent-ComputerCluwneComms = консоль смешной связи
     .desc = Для создания шутеек прямо в оповещениях и кпк.
+ent-ComputerCluwneCommsUnconvertible = { ent-ComputerCluwneComms }
+    .desc = { ent-ComputerCluwneComms.desc }
 ent-CluwneCommsComputerCircuitboard = консоль смешной связи (машинная плата)
     .desc = Печатная плата для консоли смешной связи.
+ent-CluwneCommsComputerCircuitboardUnconvertible = { ent-CluwneCommsComputerCircuitboard }
+    .desc = Печатная плата для консоли смешной связи. Схемы полностью пропитаны бананиумом, пути назад нет.
 
 # User interface
 cluwne-comms-console-menu-title = Консоль смешной связи
@@ -19,7 +23,7 @@ cluwne-comms-console-menu-time-remaining = Оставшееся время: { $t
 cluwne-comms-console-permission-denied = В шутке отказано
 cluwne-comms-console-shuttle-unavailable = В настоящее время шаттл недоступен
 # Placeholder values
-cluwne-comms-console-announcement-sent-by = Отправитель шутки
+cluwne-comms-console-announcement-sent-by = Отправитель шутки { $author }
 cluwne-comms-console-announcement-unknown-sender = Неизвестный
 # Comms console variant titles
 cluwne-comms-console-announcement-title-station = Консоль смешной связи

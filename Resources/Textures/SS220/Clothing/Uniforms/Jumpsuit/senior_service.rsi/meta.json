@@ -8,15 +8,17 @@
   },
   "states": [
     {
-      "name": "inhand-left",
-      "directions": 4
+      "name": "icon"
     },
     {
-      "name": "inhand-right",
-      "directions": 4
+      "name": "icon_tie"
     },
     {
       "name": "equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "tie-equipped-INNERCLOTHING",
       "directions": 4
     },
     {
@@ -24,7 +26,12 @@
       "directions": 4
     },
     {
-      "name": "icon"
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
     }
   ]
 }

@@ -1,0 +1,6 @@
+- type: alert
+  id: MartialArtCooldown
+  name: martial-art-cooldown-alert-name
+  description: martial-art-cooldown-alert-desc
+  icons:
+  - /Textures/Interface/Actions/harm.png # TODO: replace with sprite specific for martial art

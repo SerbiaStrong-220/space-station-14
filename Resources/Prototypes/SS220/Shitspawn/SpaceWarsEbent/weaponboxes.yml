@@ -247,7 +247,7 @@
     items:
       - id: WeaponBoxTrash
       - id: WeaponBlasterKRS
-      - id: BlasterPowerCellAlt
+      - id: PowerCellBlaster
         amount: 3
     sound:
       path: /Audio/Effects/unwrap.ogg

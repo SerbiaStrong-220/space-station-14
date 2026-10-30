@@ -18,15 +18,14 @@ public sealed class MagnetPickupSystem : EntitySystem
     [Dependency] private readonly SharedStorageSystem _storage = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
 
+    [Dependency] private readonly EntityQuery<PhysicsComponent> _physicsQuery = default!;
 
     private static readonly TimeSpan ScanDelay = TimeSpan.FromSeconds(1);
 
-    private EntityQuery<PhysicsComponent> _physicsQuery;
 
     public override void Initialize()
     {
         base.Initialize();
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
         SubscribeLocalEvent<MagnetPickupComponent, MapInitEvent>(OnMagnetMapInit);
     }
 
@@ -49,11 +48,17 @@ public sealed class MagnetPickupSystem : EntitySystem
             comp.NextScan += ScanDelay;
             Dirty(uid, comp);
 
-            if (!_inventory.TryGetContainingSlot((uid, xform, meta), out var slotDef))
-                continue;
+            // SS220-OreBagBorgMagnet begin
+            if (!comp.WorksOutsideSlot)
+            {
 
-            if ((slotDef.SlotFlags & comp.SlotFlags) == 0x0)
+             if (!_inventory.TryGetContainingSlot((uid, xform, meta), out var slotDef))
                 continue;
+            
+             if ((slotDef.SlotFlags & comp.SlotFlags) == 0x0)
+                continue;
+            }
+            // SS220-OreBagBorgMagnet end
 
             // No space
             if (!_storage.HasSpace((uid, storage)))

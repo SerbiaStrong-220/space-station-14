@@ -16,8 +16,10 @@
     fixtures:
       fix1:
         shape:
-          !type:PhysShapeAabb
-          bounds: "-0.45,-0.45,0.45,0.45"
+        #SS220-TweakHitbox begin
+          !type:PhysShapeCircle
+          radius: 0.46
+        #SS220-TweakHitbox end
         density: 55
         mask: #mouse can pass under, but I think this is can understandable by logic
         - TableMask

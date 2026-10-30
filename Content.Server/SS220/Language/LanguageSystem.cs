@@ -11,13 +11,14 @@ using Content.Shared.SS220.CCVars;
 using Content.Shared.Speech;
 using Content.Server.Speech.EntitySystems;
 using System.Linq;
+using Content.Shared.Polymorph;
 
 namespace Content.Server.SS220.Language;
 
 public sealed partial class LanguageSystem : SharedLanguageSystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IConfigurationManager _config = default!;
 
     public override void Initialize()
     {
@@ -27,6 +28,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         SubscribeLocalEvent<LanguageComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<LanguageComponent, SendLanguageMessageAttemptEvent>(OnSendLanguageMessageAttemptEvent);
         SubscribeLocalEvent<LanguageComponent, AccentGetEvent>(OnAccentGet);
+        SubscribeLocalEvent<LanguageComponent, PolymorphedEvent>(OnPolymorphed);
 
         // Client
         SubscribeNetworkEvent<ClientSelectLanguageEvent>(OnClientSelectLanguage);
@@ -136,6 +138,14 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         Seed = seed;
         UpdateSeed();
     }
+
+    private void OnPolymorphed(Entity<LanguageComponent> ent, ref PolymorphedEvent ev)
+    {
+        if (ev.IsRevert)
+            return;
+
+        AddLanguagesFromSource(ent, ev.NewEntity);
+    }
 }
 
 [ByRefEvent]
@@ -143,4 +153,3 @@ public sealed class SendLanguageMessageAttemptEvent : CancellableEntityEventArgs
 {
     public EntityUid? Listener;
 }
-

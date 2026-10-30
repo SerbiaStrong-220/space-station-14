@@ -12,3 +12,13 @@
   license: "Custom"
   copyright: "Created by Flouzi for SS220"
   source: "https://github.com/SerbiaStrong-220/space-station-14/pull/2978"
+
+- files: ["equipment_detach.ogg"]
+  license: "CC0-1.0"
+  copyright: "Created by johan_sound, edited and converted to Mono by SkaldetSkaeg"
+  source: "https://freesound.org/people/johan_sound/sounds/858645/"
+
+- files: ["equipment_cutting.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Created by dersuperanton, edited and converted to Mono by SkaldetSkaeg"
+  source: "https://freesound.org/people/dersuperanton/sounds/433712/"

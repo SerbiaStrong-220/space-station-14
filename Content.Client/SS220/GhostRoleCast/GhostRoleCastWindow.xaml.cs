@@ -13,8 +13,8 @@ namespace Content.Client.SS220.GhostRoleCast;
 [GenerateTypedNameReferences]
 public sealed partial class GhostRoleCastWindow : DefaultWindow
 {
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly EntityManager _entityManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private EntityManager _entityManager = default!;
 
     public GhostRoleCastWindow()
     {

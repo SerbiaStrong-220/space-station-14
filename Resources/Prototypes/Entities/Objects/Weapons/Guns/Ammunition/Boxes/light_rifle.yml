@@ -12,7 +12,9 @@
     proto: CartridgeLightRifle
     capacity: 60
   - type: Item
-    size: Small
+# SS220-sec-gear-size-fix-start
+    size: Normal
+# SS220-sec-gear-size-fix-end
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
@@ -23,6 +25,14 @@
     steps: 4
     zeroVisible: false
   - type: Appearance
+  # SS220-place-and-pickup-sounds-2 begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/ammobox_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/ammobox_drop.ogg
+  # SS220-place-and-pickup-sounds-2 end
 
 # Boxes
 - type: entity
@@ -34,6 +44,10 @@
   - type: BallisticAmmoProvider
     capacity: 200
     proto: CartridgeLightRifle
+# SS220-sec-gear-size-fix-start
+  - type: Item
+    size: Large
+# SS220-sec-gear-size-fix-end
   - type: Sprite
     layers:
     - state: base
@@ -60,7 +74,7 @@
   parent: BaseMagazineBoxLightRifle
   id: MagazineBoxLightRiflePractice
   name: ammunition box (.30 rifle practice)
-  description: A cardboard box of .30 rifle rounds. Intended to hold non-harmful chalk ammunition.
+  description: A cardboard box of .30 rifle rounds. Intended to hold harmless practice ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeLightRiflePractice
@@ -73,8 +87,8 @@
     - state: practice
 
 - type: entity
-  id: MagazineBoxLightRifleIncendiary
   parent: BaseMagazineBoxLightRifle
+  id: MagazineBoxLightRifleIncendiary
   name: ammunition box (.30 rifle incendiary)
   description: A cardboard box of .30 rifle rounds. Intended to hold self-igniting incendiary ammunition.
   components:
