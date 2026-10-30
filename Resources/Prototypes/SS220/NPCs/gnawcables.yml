@@ -3,8 +3,7 @@
   branches:
   - tasks:
     - !type:HTNPrimitiveTask
-      operator: !type:UtilityOperator
-        proto: NearbyExposedCables
+      operator: !type:PickExposedCableOperator
 
     - !type:HTNPrimitiveTask
       operator: !type:MoveToOperator
