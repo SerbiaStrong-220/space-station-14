@@ -40,6 +40,14 @@
   - type: Toolbox
   - type: DragDropContainerTransfer
   #ss220 add drag drop toolbox end
+  # SS220-place-and-pickup-sounds-2 begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/toolbox_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/toolbox_drop.ogg
+  # SS220-place-and-pickup-sounds-2 end
 
 - type: entity
   name: emergency toolbox

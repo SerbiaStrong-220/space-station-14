@@ -1,4 +1,4 @@
-﻿using Content.Shared.CCVar;
+using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.PowerCell.Components;
 using Content.Shared.Silicons.Borgs.Components;
@@ -36,7 +36,7 @@ public abstract partial class SharedBorgSystem
     private void OnEjectBatteryBuiMessage(Entity<BorgChassisComponent> chassis, ref BorgEjectBatteryBuiMessage args)
     {
         if (_powerCell.TryEjectBatteryFromSlot(chassis.Owner, out var powerCell, args.Actor))
-            _hands.TryPickupAnyHand(args.Actor, powerCell.Value);
+            _hands.TryPickupAnyHand(args.Actor, powerCell.Value, suppressPickupSound: true); // SS220-drop-and-pickup-sound-suppression
     }
 
     private void OnSetNameBuiMessage(Entity<BorgChassisComponent> chassis, ref BorgSetNameBuiMessage args)

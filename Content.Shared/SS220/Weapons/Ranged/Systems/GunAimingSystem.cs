@@ -1,4 +1,5 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.
+
 using Content.Shared.CombatMode;
 using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
@@ -9,18 +10,14 @@ using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Input;
 using Robust.Shared.Input.Binding;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.Weapons.Ranged.Systems;
 
 public sealed partial class GunAimingSystem : EntitySystem
 {
     [Dependency] private SharedGunSystem _gun = default!;
-    [Dependency] private INetManager _net = default!;
     [Dependency] private MovementSpeedModifierSystem _movementSpeedModifier = default!;
-    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {
