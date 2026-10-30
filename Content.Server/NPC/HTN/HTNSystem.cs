@@ -436,6 +436,7 @@ public sealed class HTNSystem : EntitySystem
     public void ShutdownPlan(HTNComponent component)
     {
         // SS220-deferred-npc-death-nre-fix begin
+        //DebugTools.Assert(component.Plan != null);
         if (component.Plan == null)
             return;
         // SS220-deferred-npc-death-nre-fix end
