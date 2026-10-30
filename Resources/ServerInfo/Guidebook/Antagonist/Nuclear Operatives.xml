@@ -47,7 +47,7 @@
     <GuideEntityEmbed Entity="BaseUplinkRadio40TC" Caption="ваш аплинк"/>
   </Box>
 
-  Вы можете приобретать то же снаряжение, что и предатели, однако вам доступно снаряжение более высокого качества, а также больше телекристаллов для трат.
+  В вашем арсенале находится улучшенный аплинк предателя: помимо основного содержимого, у вас есть снаряжение более высокого качества, а также больше телекристаллов для его приобретения.
   <Box>
     <GuideEntityEmbed Entity="WeaponLightMachineGunL6" Caption="Вооружение"/>
     <GuideEntityEmbed Entity="MagazineLightRifleBox" State="icon" Caption="Боеприпасы"/>
