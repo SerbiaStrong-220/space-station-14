@@ -1,4 +1,3 @@
-<!-- SS220 guidebook-translation bgn: Corvax Russian translation (MIT), commit a5e876a34b0aab47253a359e82137299f11ea17e. -->
 <Document>
   # Солнечные панели
   Солнечные панели, это пассивный источник энергии, не требующий сложного обслуживания, который вырабатывает электроэнергию из поступающего солнечного света.
@@ -117,4 +116,3 @@
   Плазменные и урановые солнечные панели генерируют [color=orange][protodata="SolarPanelPlasma" comp="SolarPanel" member="MaxSupply" format="N0"] Вт[/color] и [color=orange][protodata="SolarPanelUranium" comp="SolarPanel" member="MaxSupply" format="N0"] Вт[/color] энергии соответственно.
   Они также гораздо прочнее обычных солнечных панелей.
 </Document>
-<!-- SS220 guidebook-translation end -->

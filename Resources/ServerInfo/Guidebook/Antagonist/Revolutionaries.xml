@@ -1,5 +1,3 @@
-<!-- SS220 guidebook-translation bgn: Corvax Russian translation (MIT), commit a5e876a34b0aab47253a359e82137299f11ea17e; adapted to SS220. -->
-<!-- SS220 antagonist-goals bgn -->
 <Document>
   # Революционеры
 
@@ -20,7 +18,7 @@
 
   Ваша цель - [bold]не уничтожить станцию[/bold], а [italic]захватить её[/italic], поэтому старайтесь минимизировать ущерб, где это возможно.
 
-  [bold]Революция потерпит поражение[/bold], если все [bold][color=#5e9cff]Главы революции[/color][/bold] погибнут, все [color=red]Революционеры[/color] будут де-конвертированы, если это произойдет.
+  [bold]Революция потерпит поражение[/bold], если все [bold][color=#5e9cff]Главы революции[/color][/bold] погибнут, а все [color=red]Революционеры[/color] при этом будут де-конвертированы.
 
   ## Главы революции и обращение
 
@@ -58,5 +56,3 @@
 
   [bold][color=red]Революционеры[/color] не могут сами обращать людей,[/bold] но они более чем способны выполнять грязную работу и выполнять приказы.
 </Document>
-<!-- SS220 antagonist-goals end -->
-<!-- SS220 guidebook-translation end -->

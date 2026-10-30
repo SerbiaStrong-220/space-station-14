@@ -1,4 +1,3 @@
-<!-- SS220 guidebook-translation bgn: Corvax Russian translation (MIT), commit a5e876a34b0aab47253a359e82137299f11ea17e; adapted to SS220. -->
 <Document>
   # Ботаника
   Ваша задача, как ботаника, - вырастить достаточно еды, чтобы повар не искал "альтернативных источников". Выращивайте много пшеницы, а когда она вам надоест, выращивайте траву. Делайте коктейли из травы и подмешивайте в напитки крапиву. Просто продолжайте выращивать растения, и у вас всё получится!
@@ -92,4 +91,3 @@
 <GuideReagentGroupEmbed Group="Botanical"/>
 
 </Document>
-<!-- SS220 guidebook-translation end -->

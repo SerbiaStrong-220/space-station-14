@@ -1,8 +1,6 @@
-<!-- SS220 guidebook-translation bgn: Corvax Russian translation (MIT), commit a5e876a34b0aab47253a359e82137299f11ea17e. -->
 <Document>
 # Напитки
 Умение приготовить заказанный напиток очень важно. Вот различные напитки в игре, включая их рецепты:
 
 <GuideReagentGroupEmbed Group="Drinks"/>
 </Document>
-<!-- SS220 guidebook-translation end -->

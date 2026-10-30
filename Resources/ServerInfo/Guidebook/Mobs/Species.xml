@@ -1,4 +1,3 @@
-<!-- SS220 guidebook-translation bgn -->
 <Document>
   # Расы
 
@@ -22,5 +21,6 @@
     <GuideEntityEmbed Entity="AppearanceVulpkanin" Caption="Вульпканин"/>
   </Box>
 
+  Вульпканинов сейчас нельзя выбрать при создании персонажа.
+
 </Document>
-<!-- SS220 guidebook-translation end -->

@@ -10,6 +10,21 @@
   text: "/ServerInfo/SS220/Guidebook/Antagonist/SpiderQueen.xml"
 
 - type: guideEntry
+  id: MindSlave
+  name: guide-entry-mind-slave
+  text: "/ServerInfo/SS220/Guidebook/Antagonist/MindSlave.xml"
+
+- type: guideEntry
+  id: SubvertedSilicon
+  name: guide-entry-subverted-silicon
+  text: "/ServerInfo/SS220/Guidebook/Antagonist/SubvertedSilicon.xml"
+
+- type: guideEntry
+  id: Survivor
+  name: guide-entry-survivor
+  text: "/ServerInfo/SS220/Guidebook/Antagonist/Survivor.xml"
+
+- type: guideEntry
   id: CultYogg
   name: guide-entry-cult-yogg
   text: "/ServerInfo/SS220/Guidebook/Antagonist/CultYogg.xml"

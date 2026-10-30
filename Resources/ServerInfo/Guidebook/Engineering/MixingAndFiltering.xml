@@ -1,4 +1,3 @@
-<!-- SS220 guidebook-translation bgn: Corvax Russian translation (MIT), commit a5e876a34b0aab47253a359e82137299f11ea17e. -->
 <Document>
   # Смешивание и фильтрация
   Газовые смесители и фильтры являются важными инструментами для регулирования состава газов в [textlink="сети труб" link="PipeNetworks"].
@@ -56,4 +55,3 @@
   - Фильтрация нежелательных газов из [textlink="сети труб" link="PipeNetworks"]
   - Разделение отдельных газов для хранения в рециркуляционной сети станции.
 </Document>
-<!-- SS220 guidebook-translation end -->
