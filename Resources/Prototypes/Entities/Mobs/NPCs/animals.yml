@@ -435,6 +435,7 @@
     - Trash
     - VimPilot
     - ReptilianFood #SS220-ReptilianFoodFix
+    - ArachnidFood #SS220-arachnid-diet
   - type: Destructible
     thresholds:
     - trigger:

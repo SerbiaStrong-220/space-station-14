@@ -302,6 +302,7 @@
       - Meat
       - Pill
       - Omnivorous
+      - ArachnidFood
   #SS220-arachnid-diet end
 
 - type: entity

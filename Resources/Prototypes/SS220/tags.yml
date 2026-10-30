@@ -412,3 +412,7 @@
 
 - type: Tag
   id: YoggEquipment
+
+- type: Tag
+  id: ArachnidFood
+
