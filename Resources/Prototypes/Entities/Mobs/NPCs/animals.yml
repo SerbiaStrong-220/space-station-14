@@ -4079,8 +4079,10 @@
   - type: IgnoreKudzu #ss220 kudzu nymph fix
   #SS220-NymphLanguageFix begin
   - type: Language
+    selectedLanguage: Galactic
     availableLanguages:
     - id: Galactic
+    - id: Rootspeak
   #SS220-NymphLanguageFix end
 
 - type: entity
