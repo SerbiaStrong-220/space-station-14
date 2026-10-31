@@ -79,7 +79,7 @@
               doAfter: 2
           completed:
             - !type:SpawnPrototype
-              prototype: SheetSteel1
+              prototype: SheetPlastic1
               amount: 5
             - !type:SpawnPrototype
               prototype: CableApcStack1
