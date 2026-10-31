@@ -16,6 +16,7 @@
   id: SpiderQueenServant
   name: job-name-spider-queen-servant
   description: job-description-spider-queen-servant
+  supervisors: job-supervisors-spider-queen
   experienceDefinition: NoExperience
   setPreference: false
   playTimeTracker: AntagSpiderQueenServant
