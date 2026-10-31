@@ -42,6 +42,7 @@ using Content.Server.SS220.MindExtension;
 using Content.Shared.Roles.Components;
 using Content.Server.SS220.Language;
 using Content.Shared.SS220.Language.Components;
+using Content.Shared.Zombies;
 
 namespace Content.Server.Ghost.Roles;
 
@@ -1052,7 +1053,7 @@ public sealed class GhostRoleSystem : EntitySystem
     {
         _mindSystem.MakeSentient(entity, allowMovement, allowSpeech);
 
-        if (allowSpeech)
+        if (allowSpeech && !HasComp<ZombieComponent>(entity))
         {
             var languageComp = EnsureComp<LanguageComponent>(entity);
             _language.AddLanguage((entity, languageComp), _language.GalacticLanguage, true);
