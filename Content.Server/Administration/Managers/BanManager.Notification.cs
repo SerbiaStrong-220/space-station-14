@@ -49,6 +49,11 @@ public sealed partial class BanManager
             return;
         }
 
+        // SS220 pending bans begin
+        //  inserting a scheduled ban must not kick anyone.
+        if (ban.Pending != null)
+            return;
+        // SS220 pending bans end
         KickMatchingConnectedPlayers(ban, "ban notification");
     }
 

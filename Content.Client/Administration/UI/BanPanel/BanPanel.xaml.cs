@@ -104,6 +104,7 @@ public sealed partial class BanPanel : DefaultWindow
             PlayerNameLine.ModulateSelfOverride = null;
         };
         TimeLine.OnTextChanged += OnMinutesChanged;
+        PendingBan.ScheduleChanged += UpdateExpiresLabel; // SS220 pending bans
         MultiplierOption.OnItemSelected += args =>
         {
             MultiplierOption.SelectId(args.Id);
@@ -534,6 +535,14 @@ public sealed partial class BanPanel : DefaultWindow
 
     private void UpdateExpiresLabel()
     {
+        // SS220 pending bans begin
+        if (PendingBan.IsPending)
+        {
+            ExpiresLabel.Text = Loc.GetString("pending-ban-duration-hint");
+            return;
+        }
+        // SS220 pending bans end
+
         var minutes = (uint) (TimeEntered * Multiplier);
         ExpiresLabel.Text = minutes == 0
             ? $"{Loc.GetString("admin-note-editor-expiry-label")} {Loc.GetString("server-ban-string-never")}"
@@ -817,6 +826,14 @@ public sealed partial class BanPanel : DefaultWindow
             return;
         }
 
+        // SS220 pending bans begin
+        if (!PendingBan.TryGetSchedule(out var pendingTrigger, out var delayMinutes))
+        {
+            Tabs.CurrentTab = (int)TabNumbers.BasicInfo;
+            return;
+        }
+        // SS220 pending bans end
+
         if (ButtonResetOn is null)
         {
             ButtonResetOn = _gameTiming.CurTime.Add(TimeSpan.FromSeconds(3));
@@ -868,8 +885,13 @@ public sealed partial class BanPanel : DefaultWindow
             chats, // SS220-add-chats-ban
             erase,
             postBanInfo // SS220-add-post-ban-info
-        );
-
+        )
+        // SS220 pending bans begin
+        {
+            PendingTrigger = pendingTrigger,
+            DelayMinutes = delayMinutes,
+        };
+        // SS220 pending bans end
         BanSubmitted?.Invoke(ban);
     }
 
