@@ -14,7 +14,7 @@
   #SS220 Recycler expansion begin
     - type: PhysicalComposition
       materialComposition:
-        Steel: 100
+        Steel: 25
   #SS220 Recycler expansion end
     - type: Tag
       tags:
