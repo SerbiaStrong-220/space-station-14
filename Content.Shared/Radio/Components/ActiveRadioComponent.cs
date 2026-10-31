@@ -35,4 +35,12 @@ public sealed partial class ActiveRadioComponent : Component
     /// </summary>
     [DataField]
     public bool GlobalReceive = false;
+
+    // SS220-listen-only-radio-begin
+    /// <summary>
+    /// Channels that can only be received, not transmitted to.
+    /// </summary>
+    [DataField]
+    public HashSet<ProtoId<RadioChannelPrototype>> ListenOnlyChannels = new();
+    // SS220-listen-only-radio-end
 }
