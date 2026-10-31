@@ -211,6 +211,18 @@ namespace Content.Server.Atmos.EntitySystems
             var enumerator = EntityQueryEnumerator<BarotraumaComponent, DamageableComponent>();
             while (enumerator.MoveNext(out var uid, out var barotrauma, out var damageable))
             {
+                // SS220 spider queen update BGN
+                var ev = new BarotraumaDamageAttemptEvent();
+                RaiseLocalEvent(uid, ref ev);
+
+                if (ev.Cancelled)
+                {
+                    barotrauma.TakingDamage = false;
+                    _alertsSystem.ClearAlertCategory(uid, barotrauma.PressureAlertCategory);
+                    continue;
+                }
+                // SS220 spider queen update END
+
                 var totalDamage = FixedPoint2.Zero;
                 var damageSpecifier = _damageableSystem.GetAllDamage((uid, damageable));
                 foreach (var (barotraumaDamageType, _) in barotrauma.Damage.DamageDict)
@@ -221,14 +233,6 @@ namespace Content.Server.Atmos.EntitySystems
                 }
                 if (totalDamage >= barotrauma.MaxDamage)
                     continue;
-
-                // SS220 spider queen update BGN
-                var ev = new BarotraumaDamageAttemptEvent();
-                RaiseLocalEvent(uid, ref ev);
-
-                if (ev.Cancelled)
-                    continue;
-                // SS220 spider queen update END
 
                 var pressure = 1f;
 
