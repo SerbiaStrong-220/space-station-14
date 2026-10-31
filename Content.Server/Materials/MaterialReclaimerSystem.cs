@@ -54,9 +54,9 @@ public sealed class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
     [Dependency] private readonly PuddleSystem _puddle = default!;
     [Dependency] private readonly StackSystem _stack = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly SharedBloodstreamSystem _bloodstreamSystem = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     // SS220 recycler expansion start
+    [Dependency] private readonly SharedBloodstreamSystem _bloodstreamSystem = default!;
     [Dependency] private readonly ExplosionSystem _explosion = default!;
     [Dependency] private readonly SharedBatterySystem _batterySystem = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
@@ -370,7 +370,7 @@ public sealed class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
             !_solutionContainer.TryTransferSolution(outputSolution.Value, totalChemicals, totalChemicals.Volume) ||
             totalChemicals.Volume > 0)
         {
-                _puddle.TrySpillAt(reclaimer, totalChemicals, out _, sound, transformComponent: xform);
+            _puddle.TrySpillAt(reclaimer, totalChemicals, out _, sound, transformComponent: xform);
         }
     }
 }
