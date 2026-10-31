@@ -7,6 +7,11 @@
   - type: Sprite
     sprite: SS220/Objects/Weapons/Melee/Misc/walkingstick.rsi
     state: icon
+  #SS220 Recycler expansion begin
+  - type: PhysicalComposition
+    materialComposition:
+      Wood: 100
+  #SS220 Recycler expansion end
   - type: Item
     size: Large
     sprite: SS220/Objects/Weapons/Melee/Misc/walkingstick.rsi

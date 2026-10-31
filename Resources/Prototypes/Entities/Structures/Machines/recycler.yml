@@ -68,10 +68,43 @@
     whitelist:
       components:
       - PhysicalComposition
-      - MobState
       - SpaceGarbage
       - Delivery #ss220 made letters and packages recyclable
+      #SS220 Recycler expansion start
+      - BallisticAmmoProvider
+      - NetworkConfigurator
+      - GasAnalyzer
+      - Clothing
+      - Battery
+      - Flashlight
+      - Soap
+      - LightReplacer
+      - Organ
+      - Instrument
+      - Pill
+      #SS220 Recycler expansion end
       tags:
+      #SS220 Recycler expansion start
+      - AirGrenade
+      - Balloon
+      - BoxMouthSwab
+      - Cane
+      - Lighter
+      - PlasticToy
+      - PillCanister
+      - Bedsheet
+      - Syringe
+      - SurgeryTool
+      - GlassTube
+      - SnuffBox
+      - BikeHorn
+      - GoldenBikeHorn
+      - MagazinePistol
+      - MagazinePistolHighCapacity
+      - MagazinePistolSubMachineGun
+      - MagazinePistolSubMachineGunTopMounted
+      - MagazinePistolCaselessRifle
+      #SS220 Recycler expansion end
       - Trash
       - Recyclable
     blacklist:
@@ -79,6 +112,7 @@
       - Material
       - Pda
       - IdCard
+      - Brain #SS220 Recycler expansion
       tags:
       - HighRiskItem
     sound:

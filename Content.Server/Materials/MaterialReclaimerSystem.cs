@@ -26,6 +26,14 @@ using Robust.Shared.Utility;
 using System.Linq;
 using Content.Shared.Gibbing;
 using Content.Shared.Humanoid;
+// SS220 recycler expansion start
+using Robust.Shared.Containers;
+using Content.Shared.PowerCell.Components;
+using Content.Shared.Power.Components;
+using Content.Shared.Power.EntitySystems;
+using Content.Server.Explosion.EntitySystems;
+using Content.Shared.Body;
+// SS220 recycler expansion end
 
 namespace Content.Server.Materials;
 
@@ -44,6 +52,11 @@ public sealed class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
     [Dependency] private readonly StackSystem _stack = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
+    // SS220 recycler expansion start
+    [Dependency] private readonly ExplosionSystem _explosion = default!;
+    [Dependency] private readonly SharedBatterySystem _batterySystem = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
+    // SS220 recycler expansion end
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -181,25 +194,52 @@ public sealed class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
             return;
 
         base.Reclaim(uid, item, completion, component);
-
         var xform = Transform(uid);
+
+        // SS220 recycler expansion start
+        if (component.ReclaimSolutions)
+            SpawnChemicalsFromComposition(uid, item, completion, !CanGib(uid, item, component), component, xform);
+
+        if (TryComp<ContainerManagerComponent>(item, out var containerManager))
+        {
+            foreach (var container in _container.GetAllContainers(item, containerManager))
+            {
+                var containerId = container.ToString();
+                if (containerId != null && containerId.StartsWith("solution@"))
+                    continue;
+
+                _container.EmptyContainer(container, true, xform.Coordinates);
+            }
+        }
+
+        if (TryComp<PowerCellComponent>(item, out var cell) && TryComp<BatteryComponent>(item, out var battery))
+        {
+            var charge = _batterySystem.GetCharge((item, battery));
+            if (charge > 0)
+            {
+                var intensity = Math.Min(charge / 1000f, 20f);
+                _explosion.QueueExplosion(uid, "Default", intensity, 1f, 2f, addLog: false);
+            }
+        }
 
         if (component.ReclaimMaterials)
             SpawnMaterialsFromComposition(uid, item, completion * component.Efficiency, xform: xform);
 
-        if (CanGib(uid, item, component))
+        if (CanGib(uid, item, component) || HasComp<OrganComponent>(item))
         {
-            var logImpact = HasComp<HumanoidProfileComponent>(item) ? LogImpact.Extreme : LogImpact.Medium;
+            var isOrgan = HasComp<OrganComponent>(item);
+            var logImpact = (HasComp<HumanoidProfileComponent>(item) || isOrgan) ? LogImpact.Extreme : LogImpact.Medium;
             _adminLogger.Add(LogType.Gib, logImpact, $"{ToPrettyString(item):victim} was gibbed by {ToPrettyString(uid):entity} ");
-            if (component.ReclaimSolutions)
-                SpawnChemicalsFromComposition(uid, item, completion, false, component, xform);
+
+            if (isOrgan)
+            {
+                var bloodSolution = new Solution();
+                bloodSolution.AddReagent("Blood", 20);
+                _puddle.TrySpillAt(uid, bloodSolution, out _, false, transformComponent: xform);
+            }
+            // SS220 recycler expansion end
             _gibbing.Gib(item);
             _appearance.SetData(uid, RecyclerVisuals.Bloody, true);
-        }
-        else
-        {
-            if (component.ReclaimSolutions)
-                SpawnChemicalsFromComposition(uid, item, completion, true, component, xform);
         }
 
         QueueDel(item);
@@ -275,6 +315,16 @@ public sealed class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
             {
                 totalChemicals.AddSolution(drainableSolution, _prototype);
             }
+            // SS220 recycler expansion start
+            // Fallback for items that might not have DrainableSolution component but still have reagents.
+            else
+            {
+                foreach (var solution in _solutionContainer.EnumerateSolutions(item))
+                {
+                    totalChemicals.AddSolution(solution.Solution.Comp.Solution, _prototype);
+                }
+            }
+            // SS220 recycler expansion end
         }
         else
         {
@@ -289,7 +339,10 @@ public sealed class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
             !_solutionContainer.TryTransferSolution(outputSolution.Value, totalChemicals, totalChemicals.Volume) ||
             totalChemicals.Volume > 0)
         {
-            _puddle.TrySpillAt(reclaimer, totalChemicals, out _, sound, transformComponent: xform);
+            if (totalChemicals.Volume > 0)
+            {
+                _puddle.TrySpillAt(reclaimer, totalChemicals, out _, sound, transformComponent: xform);
+            }
         }
     }
 }

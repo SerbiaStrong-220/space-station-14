@@ -12,6 +12,14 @@
   - type: Sprite
     sprite: Objects/Weapons/Melee/white_cane.rsi
     state: icon
+  #SS220 Recycler expansion start
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 100
+  - type: Tag
+    tags:
+    - Cane
+  #SS220 Recycler expansion end
   - type: Item
     size: Normal
     sprite: Objects/Weapons/Melee/white_cane.rsi
