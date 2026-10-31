@@ -37,7 +37,7 @@
               doAfter: 1
         - to: garlandRainbow
           steps:
-            - material: Steel
+            - material: Plastic
               amount: 5
               doAfter: 1
             - material: Cable
