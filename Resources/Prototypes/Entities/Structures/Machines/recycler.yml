@@ -68,6 +68,7 @@
     whitelist:
       components:
       - PhysicalComposition
+      - MobState
       - SpaceGarbage
       - Delivery #ss220 made letters and packages recyclable
       #SS220 Recycler expansion start

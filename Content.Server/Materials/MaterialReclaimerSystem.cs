@@ -194,6 +194,7 @@ public sealed class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
             return;
 
         base.Reclaim(uid, item, completion, component);
+
         var xform = Transform(uid);
 
         // SS220 recycler expansion start
@@ -339,10 +340,7 @@ public sealed class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
             !_solutionContainer.TryTransferSolution(outputSolution.Value, totalChemicals, totalChemicals.Volume) ||
             totalChemicals.Volume > 0)
         {
-            if (totalChemicals.Volume > 0)
-            {
                 _puddle.TrySpillAt(reclaimer, totalChemicals, out _, sound, transformComponent: xform);
-            }
         }
     }
 }

@@ -198,6 +198,9 @@
     heldPrefix: laser
 # SS220 Throwable Changes begin
   - type: MeleeWeapon
+    wideAnimationRotation: 90
+    swingLeft: true
+    attackRate: 1.5
     damage:
       types:
         Slash: 4
