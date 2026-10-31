@@ -679,7 +679,7 @@ public sealed class GhostRoleSystem : EntitySystem
         _mindSystem.SetUserId(newMind, player.UserId);
         _mindSystem.TransferTo(newMind, mob);
 
-        _roleSystem.MindAddRoles(newMind.Owner, role.MindRoles, newMind.Comp);
+        _roleSystem.MindAddRoles(newMind.Owner, role.MindRoles, newMind.Comp, silent: role.JobProto != null); // SS220-fix-job-greeting
     }
 
     /// <summary>
