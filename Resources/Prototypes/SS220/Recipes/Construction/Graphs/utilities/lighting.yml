@@ -26,7 +26,7 @@
       edges:
         - to: garlandYellow
           steps:
-            - material: Steel
+            - material: Plastic
               amount: 5
               doAfter: 1
             - material: Cable
