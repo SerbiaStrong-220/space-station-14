@@ -1,0 +1,8 @@
+- type: trait
+  id: NonTactile
+  name: trait-non-tactile-name
+  description: trait-non-tactile-desc
+  category: Quirks
+  components:
+  - type: NonTactile
+
