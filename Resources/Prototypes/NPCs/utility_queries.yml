@@ -266,6 +266,22 @@
 #    - !type:TargetAccessibleCon
 #      curve: !type:BoolCurve
 
+#SS220 Mouse cable gnaw begin
+- type: utilityQuery
+  id: NearbyExposedCables
+  query:
+  - !type:ComponentQuery
+    components:
+    - type: Cable
+  considerations:
+  - !type:TargetDistanceCon
+    curve: !type:PresetCurve
+      preset: TargetDistance
+  - !type:TargetAccessibleCon
+    curve: !type:BoolCurve
+  - !type:TargetInLOSCon
+    curve: !type:BoolCurve
+#SS220 Mouse cable gnaw end
 
 # Presets
 - type: utilityCurvePreset
