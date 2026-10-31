@@ -93,3 +93,7 @@ ent-ClothingUniformJumpsuitWitness = костюм свидетеля
 ent-ClothingUniformJumpsuitElectricity = чёрный комбинезон
     .desc = Обычный чёрный комбинезон без знаков различия
     .suffix = Костюм электрофикации
+
+ent-ClothingUniformJumpsuitMimeHarlequin = костюм готического арлекина
+    .desc = Цирк уехал, а арлекин остался. Даже карнавал забыл о нём.
+    .suffix = За время в игре
