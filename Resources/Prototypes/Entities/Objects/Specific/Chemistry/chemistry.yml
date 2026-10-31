@@ -483,6 +483,13 @@
     solution: injector
   - type: TrashOnSolutionEmpty
     solution: injector
+  #SS220 Recycler expansion start
+  - type: DrainableSolution
+    solution: injector
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 20
+  #SS220 Recycler expansion end
   - type: Appearance
   - type: SolutionContainerVisuals
     maxFillLevels: 2
@@ -688,6 +695,10 @@
     sourceSolution: food
   - type: Extractable
     grindableSolutionName: food
+  #SS220 Recycler expansion begin
+  - type: DrainableSolution
+    solution: food
+  #SS220 Recycler expansion end
   - type: StaticPrice
     price: 0
   - type: Tag

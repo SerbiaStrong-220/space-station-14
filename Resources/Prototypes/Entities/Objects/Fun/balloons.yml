@@ -5,6 +5,11 @@
   parent: BaseItem
   id: BaseBalloon
   components:
+  #SS220 Recycler expansion begin
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 20
+  #SS220 Recycler expansion end
   - type: Sprite
     noRot: true
   - type: Item

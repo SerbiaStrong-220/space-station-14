@@ -9,6 +9,11 @@
   - type: Tag
     tags:
     - Soap
+  #SS220 Recycler expansion start
+  - type: PhysicalComposition
+    chemicalComposition:
+      SoapReagent: 50
+  #SS220 Recycler expansion end
   - type: Sprite
     sprite: Objects/Specific/Janitorial/soap.rsi
   - type: SolutionContainerVisuals
@@ -103,6 +108,11 @@
           Quantity: 100
   - type: Residue
     residueColor: residue-grey
+  #SS220 Recycler expansion start
+  - type: PhysicalComposition
+    chemicalComposition:
+      SoapReagent: 100
+  #SS220 Recycler expansion end
 
 - type: entity
   parent: BaseSoap
@@ -163,6 +173,11 @@
         reagents:
         - ReagentId: SoapReagent
           Quantity: 1.5
+  #SS220 Recycler expansion start
+  - type: PhysicalComposition
+    chemicalComposition:
+      SoapReagent: 1.5
+  #SS220 Recycler expansion end
   - type: SolutionContainerVisuals
     maxFillLevels: 0
   - type: Sprite

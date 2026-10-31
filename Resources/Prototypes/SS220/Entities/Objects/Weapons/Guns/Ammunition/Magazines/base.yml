@@ -10,3 +10,8 @@
   - type: EmitSoundOnDrop
     sound:
       path: /Audio/SS220/Items/Weapons/magazine_drop.ogg
+  #SS220 Recycler expansion begin
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 50
+  #SS220 Recycler expansion end
