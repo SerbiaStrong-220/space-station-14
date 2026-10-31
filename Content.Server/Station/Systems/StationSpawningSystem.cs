@@ -218,6 +218,8 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
         if (_prototypeManager.Resolve(jobPrototype.Icon, out var jobIcon))
             _cardSystem.TryChangeJobIcon(cardId, jobIcon, card);
 
+        card.JobPrototype = jobPrototype.ID; //SS220-new-feature
+
         var extendedAccess = false;
         if (station != null)
         {
