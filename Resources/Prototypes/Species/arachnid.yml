@@ -3,6 +3,11 @@
   name: species-name-arachnid
   roundStart: true # SS220
   prototype: MobArachnid
+  # SS220 age-tweak bgn
+  youngAge: 30
+  oldAge: 60
+  maxAge: 90
+  # SS220 age-tweak end
   defaultSkinTone: "#385878"
   dollPrototype: AppearanceArachnid
   skinColoration: Hues
