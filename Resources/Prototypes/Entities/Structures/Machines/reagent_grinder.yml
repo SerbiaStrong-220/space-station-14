@@ -53,16 +53,32 @@
         whitelist:
           components:
           - FitsInDispenser
-# SS220 Исправление ломания измельчителя при помощи мышеловки begin
+# SS220 kitchen-machinery-destruction begin
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
         damage: 100
       behaviors:
+      - !type:DamageAllContainedEntitiesBehavior # Damage everything that is inside
+        damage:
+          types:
+            Blunt: 50 # Enough to destroy the glass sheet
+      - !type:EmptyAllContainersBehaviour # Drop everything that is inside
       - !type:DoActsBehavior
-        acts: ["Breakage"]
-# SS220 Исправление ломания измельчителя при помощи мышеловки end
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 2
+            max: 3
+          CableApcStack1:
+            min: 1
+            max: 1
+# SS220 kitchen-machinery-destruction end
   - type: Machine
     board: ReagentGrinderMachineCircuitboard
   - type: ContainerContainer
