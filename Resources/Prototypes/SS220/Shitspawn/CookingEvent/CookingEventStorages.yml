@@ -116,8 +116,8 @@
     stateDoorOpen: smartfridge_open
     stateDoorClosed: smartfridge_door
   - type: PointLight
-    radius: 1.5
-    energy: 1.6
+    radius: 1.2
+    energy: 3.0
     color: "#9dc5c9"
   - type: EntityStorage
     isCollidableWhenOpen: true
