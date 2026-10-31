@@ -24,6 +24,10 @@ public sealed class RCDMenuBoundUserInterface : BoundUserInterface
             ["Airlocks"] = ("rcd-component-airlocks", new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/Radial/RCD/airlocks.png"))),
             ["Electrical"] = ("rcd-component-electrical", new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/Radial/RCD/multicoil.png"))),
             ["Lighting"] = ("rcd-component-lighting", new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/Radial/RCD/lighting.png"))),
+            //SS220-rcd-upd begin
+            ["Pipes"] = ("rcd-component-pipes", new SpriteSpecifier.Texture(new ResPath("/Textures/SS220/Interface/Radial/RCD/pipes.png"))),
+            ["Disposals"] = ("rcd-component-disposals", new SpriteSpecifier.Texture(new ResPath("/Textures/SS220/Interface/Radial/RCD/conpipe-tagger.png"))),
+            //SS220-rcd-upd end
         };
 
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
