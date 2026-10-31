@@ -29,7 +29,7 @@ public sealed partial class QuickDialogSystem : EntitySystem
         _openDialogsByUser[session.UserId].Add(did);
     }
 
-    private void OpenDialogInternalForTTSPrototypeId(ICommonSession session, string title, string description, EntityUid target, List<QuickDialogEntry> entries,
+    private void OpenDialogInternalForTtsVoicePreferences(ICommonSession session, string title, string description, EntityUid target, List<QuickDialogEntry> entries,
         QuickDialogButtonFlag buttons, Action<QuickDialogResponseEvent> okAction, Action cancelAction)
     {
         if (!TryGetNetEntity(target, out var netEntity))
@@ -37,7 +37,7 @@ public sealed partial class QuickDialogSystem : EntitySystem
 
         var did = GetDialogId();
         RaiseNetworkEvent(
-            new QuickDialogTTSProtoIdOpenEvent(
+            new QuickDialogTtsVoicePreferencesOpenEvent(
                 title,
                 description,
                 netEntity.Value,
@@ -49,7 +49,7 @@ public sealed partial class QuickDialogSystem : EntitySystem
 
         _openDialogs.Add(did, (okAction, cancelAction));
         if (!_openDialogsByUser.ContainsKey(session.UserId))
-            _openDialogsByUser.Add(session.UserId, new List<int>());
+            _openDialogsByUser.Add(session.UserId, []);
 
         _openDialogsByUser[session.UserId].Add(did);
     }

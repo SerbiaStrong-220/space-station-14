@@ -1,0 +1,24 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+              xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+              Orientation="Horizontal"
+              HorizontalExpand="True"
+              MouseFilter="Stop">
+    <cc:VSeparator/>
+    <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+        <cc:HSeparator/>
+        <PanelContainer Name="ProviderHeaderBackground">
+            <BoxContainer Orientation="Horizontal">
+                <Label Name="ProviderHeaderLabel" Text="Провайдер" Margin="5 0"/>
+                <cc:VSeparator/>
+                <Label Name="VoicePrototypeHeaderLabel" Text="Голос" HorizontalExpand="True" Margin="5 0"/>
+        </BoxContainer>
+        </PanelContainer>
+        <cc:HSeparator/>
+        <BoxContainer Name="EntriesContainer" Orientation="Vertical" HorizontalExpand="True">
+            <!-- Added by code -->
+        </BoxContainer>
+        <cc:HSeparator/>
+    </BoxContainer>
+    <cc:VSeparator/>
+</BoxContainer>
