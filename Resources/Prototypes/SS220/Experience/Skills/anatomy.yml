@@ -71,7 +71,7 @@
 - type: skill
   id: AnatomyProfessional
   levelInfo:
-    maximumSublevel: 1
+    maximumSublevel: 0
     levelUpPopup: anatomy-professional-level-up-popup
     sublevelUpPopup: anatomy-professional-sublevel-up-popup
   levelDescription:

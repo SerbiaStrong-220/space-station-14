@@ -3,52 +3,13 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.FixedPoint;
+using Content.Shared.SS220.Experience.Components;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.SS220.Experience.Systems;
+namespace Content.Shared.SS220.Experience.Systems.Experience;
 
 public sealed partial class ExperienceSystem : EntitySystem
 {
-    #region Progress skill tree
-
-    public bool TryChangeStudyingProgress(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, LearningInformation info)
-    {
-        if (!Resolve(entity.Owner, ref entity.Comp, false))
-            return false;
-
-        TryGetSkillTreeLevel(entity, skillTree, out var level);
-
-        var levelDeltaModifier = info.LearningDecreaseFactorPerLevel * (level - info.PeakLearningLevel) ?? 0;
-        var delta = info.BaseLearning + levelDeltaModifier;
-
-        return TryChangeStudyingProgress(entity, skillTree, FixedPoint4.Clamp(delta, info.MinProgress, info.MaxProgress));
-    }
-
-    public bool TryChangeStudyingProgress(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, FixedPoint4 delta)
-    {
-        // for unpredicted events
-        if (!_gameTiming.IsFirstTimePredicted)
-            return false;
-
-        if (!Resolve(entity.Owner, ref entity.Comp, false))
-            return false;
-
-        if (!entity.Comp.StudyingProgress.ContainsKey(skillTree))
-            entity.Comp.StudyingProgress.Add(skillTree, StartLearningProgress);
-
-        delta = ApplyMentorEffect(entity, skillTree, delta);
-
-        entity.Comp.StudyingProgress[skillTree] += delta;
-
-        TryProgressSublevel(entity!, skillTree);
-        TryProgressLevel(entity!, skillTree);
-
-        DirtyField(entity, nameof(ExperienceComponent.StudyingProgress));
-        return true;
-    }
-
-    #endregion
-
     #region Skill getters
 
     public bool HaveSkill(Entity<ExperienceComponent?> entity, [ForbidLiteral] ProtoId<SkillPrototype> skill)
@@ -98,6 +59,23 @@ public sealed partial class ExperienceSystem : EntitySystem
         return true;
     }
 
+    /// <summary>
+    /// Public getter of skills dictionary in case if it needed
+    /// </summary>
+    public Dictionary<ProtoId<SkillTreePrototype>, SkillTreeInfo> GetResultSkills(Entity<ExperienceComponent> entity)
+    {
+        var skills = entity.Comp.Skills;
+        var overrideSkills = entity.Comp.OverrideSkills;
+
+        var result = new Dictionary<ProtoId<SkillTreePrototype>, SkillTreeInfo>(skills);
+        foreach (var (key, value) in overrideSkills)
+        {
+            result[key] = value;
+        }
+
+        return result;
+    }
+
     #endregion
 
     #region Set override skill
@@ -109,8 +87,7 @@ public sealed partial class ExperienceSystem : EntitySystem
 
         entity.Comp.OverrideSkills[skillTree] = overrideInfo;
 
-        EnsureSkillEntityComponents(entity!, ExperienceComponent.OverrideContainerId);
-
+        EnsureSkillEntityComponents(entity!);
         return true;
     }
 
@@ -121,8 +98,7 @@ public sealed partial class ExperienceSystem : EntitySystem
 
         entity.Comp.OverrideSkills.Remove(skillTree);
 
-        EnsureSkillEntityComponents(entity!, ExperienceComponent.OverrideContainerId);
-
+        EnsureSkillEntityComponents(entity!);
         return true;
     }
     #endregion
@@ -184,39 +160,18 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     public bool TryGetSkillTreeLevels(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, [NotNullWhen(true)] out int? level, [NotNullWhen(true)] out int? sublevel)
     {
-        if (!Resolve(entity.Owner, ref entity.Comp) || !entity.Comp.Skills.TryGetValue(skillTree, out var info))
-        {
-            level = null;
-            sublevel = null;
+        level = null;
+        sublevel = null;
+
+        if (!Resolve(entity.Owner, ref entity.Comp))
             return false;
-        }
+
+        if (!entity.Comp.OverrideSkills.TryGetValue(skillTree, out var info) &&
+            !entity.Comp.Skills.TryGetValue(skillTree, out info))
+            return false;
 
         sublevel = info.Sublevel;
         level = info.Level;
-        return true;
-    }
-
-    public bool TryGetEarnedSublevel(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, [NotNullWhen(true)] out int? earnedSublevels)
-    {
-        if (!Resolve(entity.Owner, ref entity.Comp) || !entity.Comp.EarnedSkillSublevel.TryGetValue(skillTree, out var earned))
-        {
-            earnedSublevels = null;
-            return false;
-        }
-
-        earnedSublevels = earned;
-        return true;
-    }
-
-    public bool TryGetLearningProgress(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, [NotNullWhen(true)] out FixedPoint4? progress)
-    {
-        if (!Resolve(entity.Owner, ref entity.Comp) || !entity.Comp.StudyingProgress.TryGetValue(skillTree, out var cachedProgress))
-        {
-            progress = null;
-            return false;
-        }
-
-        progress = cachedProgress;
         return true;
     }
     #endregion
