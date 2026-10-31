@@ -70,6 +70,7 @@
         type: StorageBoundUserInterface
   - type: StaticPrice
     price: 70
+  - type: StorageMicroFiber # SS220 microfibers
 
 - type: entity
   abstract: true

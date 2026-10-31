@@ -4,6 +4,7 @@
   parent: BaseStorageItem
   description: A refined bag to carry your own library.
   components:
+    - type: StorageMicroFiber # SS220 microfibers
     - type: Sprite
       sprite: Objects/Specific/Library/Equipment/books_bag.rsi
       state: icon

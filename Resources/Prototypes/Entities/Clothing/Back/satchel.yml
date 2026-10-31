@@ -11,11 +11,6 @@
     - 0,0,1,3
     - 3,0,6,3
     - 8,0,9,3
-#SS220 Micro_fibers start
-  - type: MicroFiber
-    microFiberMaterial: micro-fibers-textile
-    microFiberColor: micro-fibers-grey
-#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBackpackSatchel
@@ -25,11 +20,6 @@
   components:
   - type: Sprite
     sprite: Clothing/Back/Satchels/leather.rsi
-#SS220 Micro_fibers start
-  - type: MicroFiber
-    microFiberMaterial: micro-fibers-leather
-    microFiberColor: micro-fibers-brown
-#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBackpackSatchel
@@ -39,11 +29,6 @@
   components:
   - type: Sprite
     sprite: Clothing/Back/Satchels/engineering.rsi
-#SS220 Micro_fibers start
-  - type: MicroFiber
-    microFiberMaterial: micro-fibers-rubber
-    microFiberColor: micro-fibers-yellow
-#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBackpackSatchel
@@ -53,11 +38,6 @@
   components:
   - type: Sprite
     sprite: Clothing/Back/Satchels/atmospherics.rsi
-#SS220 Micro_fibers start
-  - type: MicroFiber
-    microFiberMaterial: micro-fibers-rubber
-    microFiberColor: micro-fibers-light-blue
-#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBackpackSatchel
@@ -76,11 +56,6 @@
       collection: FootstepClown
       params:
         variation: 0.125
-#SS220 Micro_fibers start
-  - type: MicroFiber
-    microFiberMaterial: micro-fibers-textile
-    microFiberColor: micro-fibers-green
-#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBackpackSatchel
@@ -90,11 +65,6 @@
   components:
   - type: Sprite
     sprite: Clothing/Back/Satchels/mime.rsi
-#SS220 Micro_fibers start
-  - type: MicroFiber
-    microFiberMaterial: micro-fibers-textile
-    microFiberColor: micro-fibers-white
-#SS220 Micro_fibers end
   - type: Storage
     storageOpenSound: null
     storageInsertSound: null
@@ -107,11 +77,6 @@
   components:
   - type: Sprite
     sprite: Clothing/Back/Satchels/medical.rsi
-#SS220 Micro_fibers start
-  - type: MicroFiber
-    microFiberMaterial: micro-fibers-synthetic
-    microFiberColor: micro-fibers-white
-#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBackpackSatchel
@@ -121,11 +86,6 @@
   components:
   - type: Sprite
     sprite: Clothing/Back/Satchels/chemistry.rsi
-#SS220 Micro_fibers start
-  - type: MicroFiber
-    microFiberMaterial: micro-fibers-synthetic
-    microFiberColor: micro-fibers-orange
-#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBackpackSatchel
@@ -135,11 +95,6 @@
   components:
   - type: Sprite
     sprite: Clothing/Back/Satchels/virology.rsi
-#SS220 Micro_fibers start
-  - type: MicroFiber
-    microFiberMaterial: micro-fibers-synthetic
-    microFiberColor: micro-fibers-green
-#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBackpackSatchel
@@ -149,11 +104,6 @@
   components:
   - type: Sprite
     sprite: Clothing/Back/Satchels/genetics.rsi
-#SS220 Micro_fibers start
-  - type: MicroFiber
-    microFiberMaterial: micro-fibers-synthetic
-    microFiberColor: micro-fibers-blue
-#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBackpackSatchel
@@ -163,11 +113,6 @@
   components:
   - type: Sprite
     sprite: Clothing/Back/Satchels/science.rsi
-#SS220 Micro_fibers start
-  - type: MicroFiber
-    microFiberMaterial: micro-fibers-synthetic
-    microFiberColor: micro-fibers-purple
-#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingBackpackSatchel, BaseSecurityContraband]
@@ -177,11 +122,6 @@
   components:
   - type: Sprite
     sprite: Clothing/Back/Satchels/security.rsi
-#SS220 Micro_fibers start
-  - type: MicroFiber
-    microFiberMaterial: micro-fibers-reinforced-textile
-    microFiberColor: micro-fibers-black
-#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingBackpackSatchel, BaseSecurityContraband]
@@ -191,11 +131,6 @@
   components:
   - type: Sprite
     sprite: Clothing/Back/Satchels/brigmedic.rsi
-#SS220 Micro_fibers start
-  - type: MicroFiber
-    microFiberMaterial: micro-fibers-synthetic
-    microFiberColor: micro-fibers-white
-#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingBackpackSatchel]
@@ -205,11 +140,6 @@
   components:
   - type: Sprite
     sprite: Clothing/Back/Satchels/captain.rsi
-#SS220 Micro_fibers start
-  - type: MicroFiber
-    microFiberMaterial: micro-fibers-reinforced-textile
-    microFiberColor: micro-fibers-blue
-#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBackpackSatchel
@@ -219,11 +149,6 @@
   components:
   - type: Sprite
     sprite: Clothing/Back/Satchels/hydroponics.rsi
-#SS220 Micro_fibers start
-  - type: MicroFiber
-    microFiberMaterial: micro-fibers-floral
-    microFiberColor: micro-fibers-green
-#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBackpackSatchel
@@ -233,11 +158,6 @@
   components:
     - type: Sprite
       sprite: Clothing/Back/Satchels/cargo.rsi
-#SS220 Micro_fibers start
-    - type: MicroFiber
-      microFiberMaterial: micro-fibers-leather
-      microFiberColor: micro-fibers-brown
-#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBackpackSatchel
@@ -247,11 +167,6 @@
   components:
     - type: Sprite
       sprite: Clothing/Back/Satchels/salvage.rsi
-#SS220 Micro_fibers start
-    - type: MicroFiber
-      microFiberMaterial: micro-fibers-leather
-      microFiberColor: micro-fibers-brown
-#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingBackpackSatchel, BaseHighlyIllegalContraband]
@@ -284,10 +199,6 @@
     maxItemSize: Huge
     grid:
     - 0,0,19,9
-#SS220 Micro_fibers start
-  - type: MicroFiber
-    microFiberMaterial: micro-fibers-plasma
-#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBackpackSatchelHolding
