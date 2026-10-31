@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Content.Server.SS220.Hop;
 using Content.Server.Station.Systems;
 using Content.Shared.Roles;
 using JetBrains.Annotations;
@@ -12,7 +13,7 @@ namespace Content.Server.Station.Components;
 /// <summary>
 /// Stores information about a station's job selection.
 /// </summary>
-[RegisterComponent, Access(typeof(StationJobsSystem)), PublicAPI]
+[RegisterComponent, Access(typeof(StationJobsSystem), typeof(HopConsoleSystem)), PublicAPI] // SS220 Hop improve
 public sealed partial class StationJobsComponent : Component
 {
     /// <summary>
@@ -73,6 +74,13 @@ public sealed partial class StationJobsComponent : Component
     [DataField]
     public Dictionary<NetUserId, List<ProtoId<JobPrototype>>> PlayerJobs = new();
 
+    /// <summary>
+    ///Job markers shown as priority roles in the late-join lobby.
+    /// </summary>
+    // SS220 Hop improve begin
+    [DataField]
+    public HashSet<ProtoId<JobPrototype>> PriorityJobs = new();
+    // SS220 Hop improve end
     // ss220 add more jobs for dev map start
     /// <summary>
     /// Mapping of jobs to an int[2] array that specifies jobs available at round start, and midround.
