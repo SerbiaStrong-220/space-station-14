@@ -4,3 +4,4 @@ chat-telepathy-hive = Улей
 
 unique-telepathy-proto-id = unique-telepathy-{$id}
 unique-telepathy-proto-name = телепатическая связь
+guardian-telepathy-channel-name = симбиотическая связь

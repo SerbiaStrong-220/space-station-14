@@ -17,6 +17,7 @@ using Content.Server.SS220.CultYogg.DeCultReminder;
 using Content.Server.SS220.CultYogg.Cultists;
 using Content.Server.SS220.CultYogg.Sacrificials;
 using Content.Server.SS220.GameTicking.Rules.Components;
+using Content.Server.SS220.Telepathy;
 using Content.Server.Station.Systems;
 using Content.Shared.Audio;
 using Content.Shared.CombatMode.Pacification;
@@ -78,6 +79,7 @@ public sealed partial class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComp
     [Dependency] private MiGoTeleportSystem _migoTeleport = default!;
     [Dependency] private Shared.StatusEffect.StatusEffectsSystem _statusEffectsOld = default!;
     [Dependency] private Shared.StatusEffectNew.StatusEffectsSystem _statusEffectsNew = default!;
+    [Dependency] private TelepathySystem _telepathy = default!;
 
     public TimeSpan DefaultShuttleArriving { get; set; } = TimeSpan.FromSeconds(85);
 
@@ -88,6 +90,7 @@ public sealed partial class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComp
         SubscribeLocalEvent<CultYoggRuleComponent, AfterAntagEntitySelectedEvent>(AfterEntitySelected);
         SubscribeLocalEvent<CultYoggEnslavedEvent>(MiGoEnslave);
         SubscribeLocalEvent<CultYoggDeCultingEvent>(DeCult);
+        SubscribeLocalEvent<CultYoggComponent, GetFallbackTelepathyChannelEvent>(OnGetFallbackTelepathyChannel);
 
         SubscribeLocalEvent<SacrificialReplacementEvent>(SacrificialReplacement);
 
@@ -327,9 +330,7 @@ public sealed partial class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComp
         RaiseLocalEvent(uid, ref ev);
 
         //Add telepathy
-        var telepathy = EnsureComp<TelepathyComponent>(uid);
-        telepathy.CanSend = true;//we are allowing it cause testing
-        telepathy.TelepathyChannelPrototype = rule.Comp.TelepathyChannel;
+        _telepathy.SetChannel(uid, rule.Comp.TelepathyChannel);//we are allowing to send cause testing
 
         //allows to hide the sedative sting
         var innerToggle = EnsureComp<InnerHandToggleableComponent>(uid);
@@ -400,7 +401,7 @@ public sealed partial class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComp
         RemComp<CultYoggComponent>(uid);
 
         //Remove telepathy
-        RemComp<TelepathyComponent>(uid);
+        _telepathy.RemoveTelepathy(uid);
 
         RemComp<InnerHandToggleableComponent>(uid);
 
@@ -408,6 +409,13 @@ public sealed partial class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComp
         RemComp<ZombieImmuneComponent>(uid);
 
         DirtyEntity(uid);
+    }
+
+    private void OnGetFallbackTelepathyChannel(Entity<CultYoggComponent> ent, ref GetFallbackTelepathyChannelEvent args)
+    {
+        // Another link, like mindslavery, can end while the entity is still a cultist.
+        if (TryGetCultGameRule(out var rule))
+            args.Channel = rule.Value.Comp.TelepathyChannel;
     }
     #endregion
 
