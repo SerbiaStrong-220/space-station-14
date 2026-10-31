@@ -3,6 +3,11 @@
   name: species-name-moth
   roundStart: true
   prototype: MobMoth
+  # SS220 age-tweak bgn
+  youngAge: 25
+  oldAge: 45
+  maxAge: 64
+  # SS220 age-tweak end
   defaultSkinTone: "#ffda93"
   dollPrototype: AppearanceMoth
   skinColoration: Hues
