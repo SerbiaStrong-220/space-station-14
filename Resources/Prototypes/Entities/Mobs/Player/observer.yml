@@ -104,8 +104,13 @@
       enabled: false
     - id: JobIcons
       enabled: false
+    - id: Zombies
+      enabled: true
+    - id: Cult
+      enabled: true
+    - id: EventRoles
+      enabled: true
   # SS220 ghost-hud-settings end
-  - type: ShowEventRoleIcons # SS220 Add event role icons
   - type: ShowElectrocutionHUD
   - type: IntrinsicRadioReceiver
   - type: ActiveRadio
