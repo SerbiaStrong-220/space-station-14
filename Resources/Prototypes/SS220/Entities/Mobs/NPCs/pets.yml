@@ -212,6 +212,7 @@
   - type: MobPrice
     price: 60
   - type: NonSpreaderZombie
+  - type: ProtectedFromStepTriggers
   - type: FireVisuals
     sprite: Mobs/Effects/onfire.rsi
     normalState: Mouse_burning
