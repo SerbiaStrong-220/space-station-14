@@ -1,0 +1,29 @@
+﻿ent-TarotColode = Зачарованная колода карт Таро
+
+ent-TarotFoolCard = 0 - Шут
+ent-TarotMagicianCard = I - Маг
+ent-TarotHighPriestessCard = II - Верховная Жрица
+ent-TarotEmpressCard = III - Императрица
+ent-TarotEmperorCard = IV - Император
+ent-TarotHierophantCard = V - Верховный Жрец
+ent-TarotLoversCard = VI - Влюблённые
+ent-TarotChariotCard = VII - Колесница
+ent-TarotStrengthCard = VIII - Сила
+ent-TarotHermitCard = IX - Отшельник
+ent-TarotWheelOfFortuneCard = X - Колесо Фортуны
+ent-TarotJusticeCard = XI - Справедливость
+ent-TarotHangedManCard = XII - Повешенный
+ent-TarotDeathCard = XIII - Смерть
+ent-TarotTemperanceCard = XIV - Умеренность
+ent-TarotDevilCard = XV - Дьявол
+ent-TarotTowerCard = XVI - Башня
+ent-TarotStarCard = XVII - Звезда
+ent-TarotMoonCard = XVIII - Луна
+ent-TarotSunCard = XIX - Солнце
+ent-TarotJudgementCard = XX - Суд
+ent-TarotWorldCard = XXI - Мир
+
+tarot-cards-failed-more-then-three = В мире уже 3 карты! Больше нельзя!
+tarot-cards-failed-already-used = Карта уже была использована!
+tarot-cards-roll-dice = Кубик выпал на {$value}
+tarot-cards-dice-death = Вас убило!
