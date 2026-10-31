@@ -1,0 +1,7 @@
+<messenger:MessengerAiChatItem xmlns:messenger="clr-namespace:Content.Client.SS220.Messenger"
+                           xmlns="https://spacestation14.io" HorizontalExpand="True">
+    <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+        <Label Name="TitleLabel" ClipText="True"/>
+        <RichTextLabel Name="PreviewLabel" HorizontalAlignment="Left" MaxWidth="340"/>
+    </BoxContainer>
+</messenger:MessengerAiChatItem>
