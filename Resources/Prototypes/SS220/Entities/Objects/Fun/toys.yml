@@ -90,6 +90,7 @@
   components:
   - type: Gun
     clumsyProof: true
+  - type: PacifismAllowedGun
   - type: HiddenDescription
     entries:
       SyndicateAgentKnowledge: [ hidden-desc-toy-weapons-syndicate ]
