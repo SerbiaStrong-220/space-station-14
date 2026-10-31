@@ -6,7 +6,7 @@
   # SS220 age-tweak bgn
   youngAge: 100
   oldAge: 200
-  maxAge: 300
+  maxAge: 9999
   # SS220 age-tweak end
   defaultSkinTone: "#cdb369"
   dollPrototype: AppearanceDiona
