@@ -1042,6 +1042,9 @@ CultYoggCocoonSedativeSting: ShellSedativeSting
 # 2026-07-17 - SS220 Sponsor objects update
 ClothingSponsorScarfTube: ClothingMaskNeckGaiter
 
+# 2026-09-15 - SS220 TapeRecorder & Bodycam update
+BodySecurityCamera: BodyCameraSecurity
+
 # 2026-10-03 - SS220 Remove corvax centcom console
 CentcomComputerComms: CentcommComputerComms
 CentcomCommsComputerCircuitboard: CentcommCommsComputerCircuitboard
