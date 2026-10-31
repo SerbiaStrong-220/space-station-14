@@ -84,25 +84,26 @@
       blacklist:
         tags:
         - PetOnly
-
-    - name: pocket4
-      slotTexture: web
-      fullTextureName: template_small
-      slotFlags: POCKET
-      slotGroup: MainHotbar
-      stripTime: 3
-      uiWindowPos: 2,4
-      strippingWindowPos: 2,3
-      displayName: Pocket 4
-    - name: pocket3
-      slotTexture: web
-      fullTextureName: template_small
-      slotFlags: POCKET
-      slotGroup: MainHotbar
-      stripTime: 3
-      uiWindowPos: 0,4
-      strippingWindowPos: 0,3
-      displayName: Pocket 3
+    #SS220-ArahnidHandReturn begin
+    #- name: pocket4
+    #  slotTexture: web
+    #  fullTextureName: template_small
+    #  slotFlags: POCKET
+    #  slotGroup: MainHotbar
+    #  stripTime: 3
+    # uiWindowPos: 2,4
+    #  strippingWindowPos: 2,3
+    #  displayName: Pocket 4
+    #- name: pocket3
+    # slotTexture: web
+    #  fullTextureName: template_small
+    # slotFlags: POCKET
+    #  slotGroup: MainHotbar
+    #  stripTime: 3
+    #  uiWindowPos: 0,4
+    #  strippingWindowPos: 0,3
+    #  displayName: Pocket 3
+    #SS220-ArahnidHandReturn end
     - name: outerClothing
       slotTexture: suit
       slotFlags: OUTERCLOTHING
@@ -138,14 +139,16 @@
       #ss220 add fully hidden pockets start
       fullyHidden: true
       #ss220 add fully hidden pockets end
-    - name: suitstorage
-      slotTexture: suit_storage
-      slotFlags:   SUITSTORAGE
-      slotGroup: MainHotbar
-      stripTime: 3
-      uiWindowPos: 2,0
-      strippingWindowPos: 2,5
-      dependsOn: outerClothing
-      dependsOnComponents:
-      - type: AllowSuitStorage
-      displayName: Suit Storage
+    #SS220-ArahnidHandReturn begin 
+    #- name: suitstorage
+    # slotTexture: suit_storage
+    # slotFlags:   SUITSTORAGE
+    # slotGroup: MainHotbar
+    # stripTime: 3
+    # uiWindowPos: 2,0
+    # strippingWindowPos: 2,5
+    # dependsOn: outerClothing
+    # dependsOnComponents:
+    # - type: AllowSuitStorage
+    # displayName: Suit Storage
+    #SS220-ArahnidHandReturn end
