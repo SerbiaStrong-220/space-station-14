@@ -176,6 +176,11 @@
   id: OrganArachnid
   abstract: true
   suffix: Arachnid
+  #SS220 Recycler expansion start
+  components:
+  - type: Organ
+    bloodReagent: CopperBlood
+  #SS220 Recycler expansion end
 
 - type: entity
   id: OrganArachnidMetabolizer

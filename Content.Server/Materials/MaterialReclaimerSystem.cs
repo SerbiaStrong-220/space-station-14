@@ -25,8 +25,11 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using System.Linq;
 using Content.Shared.Gibbing;
+using Content.Shared.Body.Components;
+using Content.Shared.Body.Systems;
+using Content.Shared.Chemistry.Reagent;
+using Content.Shared.FixedPoint;
 using Content.Shared.Humanoid;
-// SS220 recycler expansion start
 using Robust.Shared.Containers;
 using Content.Shared.PowerCell.Components;
 using Content.Shared.Power.Components;
@@ -51,11 +54,15 @@ public sealed class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
     [Dependency] private readonly PuddleSystem _puddle = default!;
     [Dependency] private readonly StackSystem _stack = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly SharedBloodstreamSystem _bloodstreamSystem = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     // SS220 recycler expansion start
     [Dependency] private readonly ExplosionSystem _explosion = default!;
     [Dependency] private readonly SharedBatterySystem _batterySystem = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+
+    private static readonly ProtoId<ReagentPrototype> BloodId = "Blood";
+    private static readonly FixedPoint2 OrganBloodVolume = 20;
     // SS220 recycler expansion end
 
     /// <inheritdoc/>
@@ -235,12 +242,35 @@ public sealed class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
             if (isOrgan)
             {
                 var bloodSolution = new Solution();
-                bloodSolution.AddReagent("Blood", 20);
+
+                if (TryComp<OrganComponent>(item, out var organ))
+                {
+                    if (TryComp<BloodstreamComponent>(organ.Body, out var bloodstream))
+                    {
+                        bloodSolution.AddSolution(bloodstream.BloodReferenceSolution.Clone(), _prototype);
+                    }
+                    else if (organ.BloodReagent != null)
+                    {
+                        bloodSolution.AddReagent(organ.BloodReagent, OrganBloodVolume);
+                    }
+                    else
+                    {
+                        bloodSolution.AddReagent(BloodId, OrganBloodVolume);
+                    }
+
+                    if (bloodSolution.Volume > 0)
+                        bloodSolution.ScaleTo(OrganBloodVolume);
+                }
+
                 _puddle.TrySpillAt(uid, bloodSolution, out _, false, transformComponent: xform);
+                _appearance.SetData(uid, RecyclerVisuals.Bloody, true);
             }
-            // SS220 recycler expansion end
-            _gibbing.Gib(item);
-            _appearance.SetData(uid, RecyclerVisuals.Bloody, true);
+            else
+            {
+                _gibbing.Gib(item);
+                _appearance.SetData(uid, RecyclerVisuals.Bloody, true);
+            }
+            //SS220 Recycler expansion end
         }
 
         QueueDel(item);

@@ -168,6 +168,11 @@
   id: OrganTajaran
   abstract: true
   suffix: Tajaran
+  #SS220 Recycler expansion start
+  components:
+  - type: Organ
+    bloodReagent: Blood
+  #SS220 Recycler expansion end
 
 - type: entity
   id: OrganTajaranMetabolizer
