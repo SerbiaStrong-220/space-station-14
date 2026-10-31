@@ -44,7 +44,7 @@
     wideAnimationRotation: -135
     damage:
       types:
-        Piercing: 12
+        Piercing: 16 #SS220 weapon overhaul
     angle: 0
     animation: WeaponArcThrust
     soundHit:
@@ -136,7 +136,7 @@
     wideAnimationRotation: -135
     damage:
       types:
-        Piercing: 15
+        Piercing: 18 #SS220 weapon overhaul
   - type: DamageOtherOnHit
     damage:
       types:
@@ -176,7 +176,7 @@
     wideAnimationRotation: -135
     damage:
       types:
-        Piercing: 10
+        Piercing: 14 #SS220 weapon overhaul
         Radiation: 8
   - type: DamageOtherOnHit
     damage:

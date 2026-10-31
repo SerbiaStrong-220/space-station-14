@@ -1,4 +1,6 @@
-ent-BulletHeavyRifle = пуля (.10 винтовочная)
+#SS220-weapon-overhaul-begin
+ent-BulletHeavyRifle = пуля (4,54x8 учебная)
     .desc = { ent-BaseBullet.desc }
-ent-BulletMinigun = пуля минигана (.10 винтовочная)
+ent-BulletMinigun = пуля минигана (4,54x8 учебная)
     .desc = { ent-BulletHeavyRifle.desc }
+#SS220-weapon-overhaul-end

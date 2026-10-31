@@ -23,6 +23,7 @@ using Content.Shared.Overlays;
 using Content.Shared.Projectiles;
 using Content.Shared.Radio;
 using Content.Shared.Slippery;
+using Content.Shared.SS220.Grab;
 using Content.Shared.SS220.StaminaConvertArmor;
 using Content.Shared.Standing;
 using Content.Shared.Strip.Components;
@@ -72,6 +73,7 @@ public partial class InventorySystem
         //ss220 add electricity armor end
         SubscribeLocalEvent<InventoryComponent, GetFrequencyRadioEvent>(RefRelayInventoryEvent); // SS220-add-frequency-radio
         SubscribeLocalEvent<InventoryComponent, GetExplosionResistanceEvent>(RefRelayInventoryEvent);
+        SubscribeLocalEvent<InventoryComponent, GrabArremptEvent>(RefRelayInventoryEvent); //SS220 add grab immunity
         SubscribeLocalEvent<InventoryComponent, IsWeightlessEvent>(RefRelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, GetSpeedModifierContactCapEvent>(RefRelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, GetSlowedOverSlipperyModifierEvent>(RefRelayInventoryEvent);

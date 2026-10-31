@@ -86,15 +86,15 @@ public partial struct FieldShieldData
     [AutoNetworkedField]
     public DamageModifierSet Modifiers = new()
     {
-        Coefficients = new()
+        FlatReduction = new()
         {
-            {"Blunt", 0.5f},
-            {"Piercing", 0.5f},
-            {"Slash", 0.5f},
-            {"Shock", 0.5f},
-            {"Heat", 0.5f},
-            {"Cold", 0.5f},
-            {"Stamina", 0.2f}
+            {"Blunt", 70f}, //i see no point in zeroing damage if it is below 70 total and reduce it by 50% if not. So just reduce it by 70 in any case
+            {"Piercing", 70f},
+            {"Slash", 70f},
+            {"Shock", 70f},
+            {"Heat", 70f},
+            {"Cold", 70f},
+            {"Stamina", 70f}
         }
     };
 

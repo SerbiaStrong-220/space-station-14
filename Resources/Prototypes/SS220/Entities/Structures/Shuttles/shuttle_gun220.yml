@@ -347,7 +347,7 @@
       types:
         Piercing: 20
         Structural: 30
-    ignoreResistances: true
+      armourPiercing: 40
     shuttleNavInfo:
       enabled: true
       radius: 0.4

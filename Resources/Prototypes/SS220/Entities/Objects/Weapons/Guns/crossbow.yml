@@ -6,7 +6,7 @@
   abstract: true
   description: Energy crossbow.
   components:
-  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita
     sound:
       path: /Audio/SS220/Effects/Drop/smg.ogg
       params:
@@ -35,6 +35,14 @@
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/Crossbow/minicrossbow.rsi
     state: icon
+  - type: GunAimable
+    minAngle: -6.5
+    maxAngle: -6
+  - type: Gun
+    cameraRecoilScalar: 0 #Laser weapons have effectively no recoil
+    maxAngle: 15
+    minAngle: 9 #Very low values for the same reason
+    angleIncrease: 0.09 #Basically the force of a finger pulling the trigger
   - type: BasicEntityAmmoProvider
     proto: BulletMiniEnergyCrossbow
     capacity: 1
@@ -60,6 +68,17 @@
     proto: BulletEnergyCrossbow
     capacity: 1
     count: 1
+  - type: GunAimable
+    minAngle: -7
+    maxAngle: -5
+  - type: Gun
+    cameraRecoilScalar: 0
+    maxAngle: 20
+    minAngle: 15 #Very low values for the same reason
+    angleIncrease: 0.09
+  - type: GunWieldBonus
+    minAngle: -5
+    maxAngle: -13
   - type: Wieldable
     wieldSound:
       path: /Audio/Items/bow_pull.ogg

@@ -1,0 +1,31 @@
+- type: entity
+  id: CartridgeLightRifleHP
+  name: cartridge (7,62x41 HPIB)
+  parent: BaseCartridgeLightRifle
+  description: A classic intermediate cartridge used by many combat rifles and LMGs. HPIB ammo is very effective against unarmored targets.
+  components:
+  - type: CartridgeAmmo
+    proto: BulletLightRifleHP
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#cf0404"
+
+- type: entity
+  id: CartridgeLightRifleAP
+  name: cartridge (7,62x41 AP)
+  parent: BaseCartridgeLightRifle
+  description: A classic intermediate cartridge used by many combat rifles and LMGs. AP ammo is very effective against armor.
+  components:
+  - type: CartridgeAmmo
+    proto: BulletLightRifleAP
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#65fe08"

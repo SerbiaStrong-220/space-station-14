@@ -1,0 +1,26 @@
+- type: entity
+  id: BaseShellRocketAuto
+  name: shell (20x100)
+  parent: [ BaseCartridge, BaseSecurityContraband]
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
+    layers:
+    - state: dual
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: CartridgeAmmo
+    proto: ShellRocketAutoHEDP
+  - type: Appearance
+  - type: SpentAmmoVisuals
+    state: dual
+    suffix: false
+  - type: Tag
+    tags:
+      - RocketAuto
+
+- type: entity
+  id: ShellRocketAuto
+  name: shell (20x100 HEDP)
+  parent: BaseShellRocketAuto
+

@@ -27,7 +27,7 @@ public sealed class RequireProjectileTargetSystem : EntitySystem
     private void PreventCollide(Entity<RequireProjectileTargetComponent> ent, ref PreventCollideEvent args)
     {
         if (args.Cancelled)
-          return;
+            return;
 
         if (!ent.Comp.Active)
             return;
@@ -66,6 +66,7 @@ public sealed class RequireProjectileTargetSystem : EntitySystem
         }
         //SS220 weapon overhaul end
     }
+    //SS220 weapon overhaul end
 
     private void SetActive(Entity<RequireProjectileTargetComponent> ent, bool value)
     {

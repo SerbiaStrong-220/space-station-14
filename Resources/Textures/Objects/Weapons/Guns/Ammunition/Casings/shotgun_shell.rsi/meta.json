@@ -66,6 +66,18 @@
         },
         {
             "name": "tranquilizer-spent"
+        },
+        {
+            "name": "slug-hp"
+        },
+        {
+            "name": "slug-hp-spent"
+        },
+        {
+            "name": "explosive"
+        },
+        {
+            "name": "explosive-spent"
         }
     ]
 }
