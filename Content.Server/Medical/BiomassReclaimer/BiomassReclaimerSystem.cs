@@ -215,7 +215,7 @@ namespace Content.Server.Medical.BiomassReclaimer
                 //SS220 Bloodless biomass fix begin
                 if (component.BloodReagents.Volume > 0)
                     component.BloodReagents.ScaleSolution(50 / component.BloodReagents.Volume);
-                ////SS220 Bloodless biomass end
+                //SS220 Bloodless biomass fix end
             }
             if (TryComp<ButcherableComponent>(toProcess, out var butcherableComponent))
             {
