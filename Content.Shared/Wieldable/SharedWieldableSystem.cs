@@ -27,6 +27,7 @@ using Content.Shared.Wieldable.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Collections;
 using Robust.Shared.Timing;
+using Content.Shared.SS220.IgnoreWield;
 
 namespace Content.Shared.Wieldable;
 
@@ -43,6 +44,7 @@ public abstract class SharedWieldableSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
     [Dependency] private readonly UseDelaySystem _delay = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!; // ss220-holocigar
 
     public override void Initialize()
     {
@@ -77,6 +79,10 @@ public abstract class SharedWieldableSystem : EntitySystem
 
     private void OnMeleeAttempt(EntityUid uid, MeleeRequiresWieldComponent component, ref AttemptMeleeEvent args)
     {
+        // ss220-holocigar
+        if (HasComp<IgnoreWieldComponent>(args.User))
+            return;
+        // ss220-holocigar
         if (TryComp<WieldableComponent>(uid, out var wieldable) &&
             !wieldable.Wielded)
         {
@@ -87,6 +93,10 @@ public abstract class SharedWieldableSystem : EntitySystem
 
     private void OnShootAttempt(EntityUid uid, GunRequiresWieldComponent component, ref ShotAttemptedEvent args)
     {
+        // ss220-holocigar
+        if (HasComp<IgnoreWieldComponent>(args.User))
+            return;
+        // ss220-holocigar
         if (TryComp<WieldableComponent>(uid, out var wieldable) &&
             !wieldable.Wielded)
         {
@@ -124,8 +134,10 @@ public abstract class SharedWieldableSystem : EntitySystem
 
     private void OnGunRefreshModifiers(Entity<GunWieldBonusComponent> bonus, ref GunRefreshModifiersEvent args)
     {
+        var user = _transform.GetParentUid(bonus); // ss220-holocigar
+
         if (TryComp(bonus, out WieldableComponent? wield) &&
-            wield.Wielded)
+            wield.Wielded || TryComp<IgnoreWieldComponent>(user, out var ignore) && ignore.IgnoreWeaponStats) // ss220-holocigar
         {
             args.MinAngle += bonus.Comp.MinAngle;
             args.MaxAngle += bonus.Comp.MaxAngle;
