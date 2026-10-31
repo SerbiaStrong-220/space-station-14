@@ -32,7 +32,8 @@ public sealed class RoleBanCommand : IConsoleCommand
         uint minutes;
         var postBanInfo = true;
 
-        if (!Enum.TryParse(_cfg.GetCVar(CCVars.RoleBanDefaultSeverity), out NoteSeverity severity))
+        // SS220-localization-fix
+        if (!Enum.TryParse(_cfg.GetCVar(CCVars.RoleBanDefaultSeverity), ignoreCase: true, out NoteSeverity severity))
         {
             _sawmill ??= _log.GetSawmill("admin.role_ban");
             _sawmill.Warning("Role ban severity could not be parsed from config! Defaulting to medium.");

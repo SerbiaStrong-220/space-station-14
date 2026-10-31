@@ -10,3 +10,14 @@ flavor-complex-Orion-Nebula = как ягодный джин-тоник
 flavor-complex-sawdustporridge = отчаяние
 flavor-complex-sawdustsoup = ужасно
 flavor-complex-chocolatewhite = как ванильная карамель
+
+flavor-complex-shawarma = мясо со свежими овощами в лаваше
+flavor-complex-borsch = мясной бульон с овощами
+flavor-complex-shchi = кислый бульон с овощами
+flavor-complex-okroshka = освежающие овощи и мясо
+flavor-complex-okroshka-kvass = освежающие овощи и мясо с кислинкой
+flavor-complex-vinaigrette = соленые вареные овощи
+flavor-complex-beets = сладко и как земля
+flavor-base-soothing = успокаивающе
+flavor-complex-french75 = терпко-сладко
+flavor-base-holy-moly = божественно

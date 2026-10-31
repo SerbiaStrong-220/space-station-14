@@ -1,8 +1,10 @@
 cmd-speciesbanlist-desc = Выводит информацию о всех банах рас пользователя
 cmd-speciesbanlist-help = Использование: speciesbanlist <имя или ID пользователя> [включая разбаненные (необязательно)]
 
-cmd-speciesbanlist-invalid-arguments-amount = Невернное количество аргументов!\n{ $help }
-cmd-speciesbanlist-invalid-argument-2 = Аргумент 2 не является boolean (true/false)!\n{ $help }
+cmd-speciesbanlist-invalid-arguments-amount = Невернное количество аргументов!
+    { $help }
+cmd-speciesbanlist-invalid-argument-2 = Аргумент 2 не является boolean (true/false)!
+    { $help }
 
 cmd-speciesbanlist-invalid-player = Не удалось найти пользователя с именем (или id): { $player }
 
