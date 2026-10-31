@@ -18,7 +18,7 @@
         effectProto: StatusEffectWoozy
         #SS220-cryptobiolin-woozy-fix bgn
         type: Add
-        time: 5.0
+        time: 5
         #SS220-cryptobiolin-woozy-fix end
 
 - type: reagent
