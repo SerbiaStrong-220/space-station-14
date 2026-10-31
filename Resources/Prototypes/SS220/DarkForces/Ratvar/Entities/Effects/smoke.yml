@@ -1,0 +1,23 @@
+﻿- type: entity
+  id: RatvarSmokeEffect
+  placement:
+    mode: SnapgridCenter
+  components:
+  # Animation is like 3 something seconds so we just need to despawn it before then.
+  - type: TimedDespawn
+    lifetime: 0.9
+  - type: EvaporationSparkle
+  - type: Transform
+    noRot: true
+    anchored: true
+  - type: Sprite
+    layers:
+    - sprite: SS220/DarkForces/Ratvar/Effects/smoke.rsi
+      state: chemsmoke
+    netsync: false
+    drawdepth: WallMountedItems
+  - type: EmitSoundOnSpawn
+    sound:
+      path: /Audio/Effects/smoke.ogg
+      params:
+        volume: -5

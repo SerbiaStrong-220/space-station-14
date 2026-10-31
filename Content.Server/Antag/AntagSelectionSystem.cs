@@ -334,6 +334,8 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
                 _adminLogger.Add(LogType.AntagSelection, $"Pre-selected {session.Name} as antagonist: {ToPrettyString(ent)}");
             }
         }
+
+        RaiseLocalEvent(new AntagSelectionEnd()); // SS220 Dark-Forces
     }
 
     /// <summary>
@@ -679,6 +681,12 @@ public record struct AntagSelectEntityEvent(ICommonSession? Session, Entity<Anta
 
     public EntityUid? Entity;
 }
+
+// SS220 Dark-Forces begin
+public sealed class AntagSelectionEnd : EventArgs
+{
+}
+// SS220 Dark-Forces end
 
 /// <summary>
 /// Event raised on a game rule entity to determine the location for the antagonist.

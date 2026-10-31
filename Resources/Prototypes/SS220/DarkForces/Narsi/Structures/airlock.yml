@@ -1,0 +1,22 @@
+- type: entity
+  parent: Airlock
+  id: AirlockNarsiCultLocked
+  suffix: Narsi, Locked
+  components:
+  - type: Sprite
+    sprite: SS220/DarkForces/Cult/Structures/door.rsi
+  - type: AccessReader
+    access: [ [ "NarsiCultAccess" ] ]
+  - type: NarsiCultStructure
+    building: Airlock
+  - type: FakeNarsiDoor
+    fakeSprite: Structures/Doors/Airlocks/Standard/maint.rsi
+    realSprite: SS220/DarkForces/Cult/Structures/door.rsi
+  - type: Construction
+    graph: NarsiCultAirlockGraph
+    node: airlock
+
+- type: accessLevel
+  id: NarsiCult
+  name: Культ Нар'Си
+
