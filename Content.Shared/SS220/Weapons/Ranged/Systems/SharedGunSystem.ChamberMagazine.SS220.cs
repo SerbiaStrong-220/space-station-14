@@ -28,7 +28,8 @@ public abstract partial class SharedGunSystem
         if (!TryComp<BallisticAmmoProviderComponent>(magEntValidated, out var magComp) || magComp.Entities.Count >= magComp.Capacity)
             return;
 
-        if (!_whitelistSystem.IsWhitelistFail(magComp.Whitelist, usedEntValidated))
+        if (!_whitelistSystem.IsWhitelistFail(magComp.Whitelist, usedEntValidated) &&
+            CanInsertBallistic((magEntValidated, magComp), usedEntValidated))
         {
             if (ent.Comp.MustBeLoadedThroughChamber)
             {
