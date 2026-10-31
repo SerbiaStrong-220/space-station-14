@@ -19,6 +19,7 @@ namespace Content.Server.NPC.HTN.PrimitiveTasks.Operators.Specific;
 public sealed partial class PickNearbyInjectableOperator : HTNOperator
 {
     [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IPrototypeManager _proto = default!; //ss220-FixMedibot
 
     private MedibotSystem _medibot = default!;
     private PathfindingSystem _pathfinding = default!;
@@ -101,9 +102,11 @@ public sealed partial class PickNearbyInjectableOperator : HTNOperator
                 // Only go towards a target if the bot can actually help them or if the medibot is emagged
                 // note: this and the actual injecting don't check for specific damage types so for example,
                 // radiation damage will trigger injection but the tricordrazine won't heal it.
-                if (!_emaggedQuery.HasComponent(entity) && _damageable.GetTotalDamage((entity, damage)) == FixedPoint2.Zero)
+                //ss220-FixMedibot begin
+                var isEmagged = _emaggedQuery.HasComponent(owner);
+                if (!treatment.IsValid(_damageable.GetPositiveDamage((entity, damage)), isEmagged, _proto))
                     continue;
-                //ss220 fix medibot end
+                //ss220-FixMedibot end
 
                 //Needed to make sure it doesn't sometimes stop right outside it's interaction range
                 var pathRange = SharedInteractionSystem.InteractionRange - 1f;
