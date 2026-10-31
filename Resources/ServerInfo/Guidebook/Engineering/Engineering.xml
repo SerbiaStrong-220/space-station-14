@@ -1,23 +1,38 @@
 <Document>
-# Инженерное дело
+  # Инженерное дело
+  [color=#f39f27]Инженерное дело[/color] это сочетание [textlink="строительных" link="Construction"] и [textlink="ремонтных" link="ExpandingRepairingStation"] работ, обслуживания машины смерти, которая, по стечению обстоятельств, производит [textlink="электроэнергию" link="Power"], и обеспечения наличия на станции [textlink="пригодного для дыхания воздуха" link="Atmospherics"].
 
-Инженерное дело - это комбинация работа по строительству, ремонту, обслуживанию машин смерти, которые ещё и энергию производят; а также забота о том, чтобы на станции был пригодный для дыхания воздух.
+  ## Персонал
 
-## Инструментарий
-<Box>
-<GuideEntityEmbed Entity="Wrench"/>
-<GuideEntityEmbed Entity="Crowbar"/>
-<GuideEntityEmbed Entity="Screwdriver"/>
-<GuideEntityEmbed Entity="Wirecutter"/>
-</Box>
-<Box>
-<GuideEntityEmbed Entity="Welder"/>
-<GuideEntityEmbed Entity="Multitool"/>
-<GuideEntityEmbed Entity="NetworkConfigurator"/>
-</Box>
-Ваш основной инструментарий пусть небольшой, но разнообразный. Если вы инженер, то вам следует носить его в специальном поясе для инструментов. Если у вас такового нет, вы можете поискать один в шкафчиках в техтуннелях или в хранилище инструментов на станции, среди торгоматов и ящиков для инструментов.
+  [color=#f39f27]Инженерный отдел[/color] состоит из Технических ассистентов, Инженеров и Атмосферных техников.
+  Инженерным отделом управляет Старший инженер
 
-Большинство задач имеют пояснения как их выполнять, которые видно при осмотре объекта. Например, если вы строите стену, её осмотр подскажет вам следующий шаг.
+  <Box>
+    <GuideEntityEmbed Entity="ToyFigurineEngineer" Caption="Инженер"/>
+    <GuideEntityEmbed Entity="ToyFigurineAtmosTech" Caption="АТМОС"/>
+    <GuideEntityEmbed Entity="ToyFigurineChiefEngineer" Caption="СИ"/>
+  </Box>
 
-  Most tasks will have explainers for how to perform them on examination; for example, if you're [textlink="constructing" link="Construction"] a wall, it'll tell you the next step if you look at it a bit closer.
+  ## Инструменты
+
+  <Box>
+    <GuideEntityEmbed Entity="Wrench"/>
+    <GuideEntityEmbed Entity="Crowbar"/>
+    <GuideEntityEmbed Entity="Screwdriver"/>
+    <GuideEntityEmbed Entity="Wirecutter"/>
+  </Box>
+  <Box>
+    <GuideEntityEmbed Entity="Welder"/>
+    <GuideEntityEmbed Entity="Multitool"/>
+    <GuideEntityEmbed Entity="NetworkConfigurator"/>
+  </Box>
+  Ваш основной набор инструментов, это небольшое количество разнообразных инструментов.
+  Если вы инженер, то у вас на поясе должен быть пояс с одним экземпляром каждого вида. Если нет, вы, скорее всего, найдете их в технических туннелях, в ящиках для инструментов и торговых автоматах.
+
+  К большинству задач прилагается инструкция по их выполнению, например, если вы [textlink="строите" link="Construction"] стену, то при ближайшем рассмотрении вам будет показан следующий шаг.
+
+  ## Источники энергии
+
+  [textlink="Кристалл суперматерии" link="Supermatter"] - один из источников энергии станции. Перед запуском изучите защиту, охлаждение, фильтрацию и консоль мониторинга. СМ опасна для неподготовленного персонала.
+
 </Document>

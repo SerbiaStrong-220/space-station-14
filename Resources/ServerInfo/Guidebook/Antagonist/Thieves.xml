@@ -1,72 +1,87 @@
 <Document>
-  # Thieves
+  # Воры
 
   <Box>
-    [color=#999999][italic]"Yoink! I'll be taking that! And that! Ooh, don't mind if I do!"[/italic][/color]
+    [color=#999999][italic]"Йоинк! Я возьму это! И это! О, и это прихвачу!"[/italic][/color]
   </Box>
   <Box>
     <GuideEntityEmbed Entity="ClothingNeckCloakVoid" Caption=""/>
   </Box>
 
-  Thieves are petty yet crafty [color=green]criminals[/color] who can't keep their hands to themselves. You were forcefully given a [bold]pacifism implant[/bold] after your last arrest, but you won't let that stop you from trying to add to your collection.
+  Воры - это мелкие, но хитрые [color=green]преступники[/color], которые не могут удержать свои руки при себе. После вашего последнего ареста вам вживили [bold]имплант пацифизма[/bold], но это не остановит вас от попыток пополнить свою коллекцию.
 
-  ## Art of the Steal
-  Unlike other antagonists, [bold]staying out of trouble is almost a requirement for you[/bold] because of your implant.
-  You can only run if [color=#cb0000]Security[/color] picks a fight with you, and because you work alone you don't have any friends to pull you out of danger.
+  ## Искусство кражи
 
-  But against all odds, you'll sucessfully swipe what you want using determination, sleight of hand, a few tools and your [color=cyan]pickpocketing skills.[/color]
+  В отличие от других антагонистов, вам важно [bold]избегать неприятностей[/bold] из-за установленного у вас импланта-пацифизма.
+  Хотя в крайнем случае можно использовать [color=yellow]оглушающее оружие[/color], вам стоит бежать, если [color=#cb0000]служба безопасности[/color] решит с вами схлестнуться.
+  Ты работаешь в одиночку и у тебя нет друзей, которые могли бы вытащить тебя из опасности.
 
-  The pickpocketing skills you have give you a major advantage: [bold]the ability to take things from people without them even noticing.[/bold] With a little practice you can steal their wallet and keep up a conversation at the same time.
+  Но вопреки всему, благодаря решимости, ловкости рук, кое-каким инструментам и своим [color=cyan]навыкам карманной кражи[/color] вам удастся успешно стащить то, что вы хотели.
 
-  It is advised to get a pair of gloves as your fingerprints could still be traced back to the stolen goods if they're found.
+  Ваши навыки карманной кражи дают вам огромное преимущество: [bold]способность незаметно для окружающих забирать у них вещи[/bold]. Немного попрактиковавшись, вы сможете вытащить кошелек, не прерывая при этом разговора.
 
+  Рекомендуется обзавестись перчатками, так как по отпечаткам пальцев всё равно можно будет выйти на вас, если украденные вещи будут найдены.
 
+  ## Рабочие инструменты
 
-  ## Tools of the Trade
-  You've got two more aces up your stolen sleeves: your [color=cyan]beacon[/color] and your [color=cyan]satchel.[/color]
+  В ваших украденных рукавах припрятано ещё два козыря: ваш [color=cyan]воровской маяк[/color] и ваша [color=cyan]воровская сумка[/color].
 
-  Your [color=cyan]beacon[/color] provides safe passage home for trinkets that may not be easy to carry with you on the evac shuttle. Simply find a secluded part of the station to unfold the beacon, then set its coordinates to your hideout.
-  Any shinies near it will be [bold]teleported to your vault when the shift ends,[/bold] fulfilling your objectives.
+  Ваш [color=cyan]воровской маяк[/color] позволяет засчитать добычу, которую неудобно брать на эвакуационный шаттл. Найдите укромное место, разверните маяк и привяжите его к себе через контекстное меню.
+  Подходящие предметы поблизости считаются украденными, пока остаются в зоне маяка и доступны ему без препятствий. Маяк отмечает зону хранения, а не переносит вещи физически.
 
-  However, this will instantly out you if found and make it extremely easy for people to reclaim their "missing" possessions. [bold]Make sure to hide it well![/bold]
+  Однако, если его обнаружат, это мгновенно вас выдаст и позволит владельцам без труда вернуть свои "пропавшие" вещи. [bold]Обязательно спрячьте его как следует![/bold]
 
   <Box>
     <GuideEntityEmbed Entity="ThiefBeacon"/>
   </Box>
 
-  Your [color=cyan]satchel[/color] contains... well, whatever you remembered to pack. [bold]You can select two pre-made kits[/bold] to help you complete grander heists.
+  В вашей [color=cyan]воровской сумке[/color] лежит... ну, то, что вы не забыли туда положить. [bold]Вы можете выбрать два готовых комплекта[/bold] которые помогут вам проворачивать более масштабные ограбления.
 
   <Box>
     <GuideEntityEmbed Entity="SatchelThief"/>
   </Box>
   <Box>
-    <GuideEntityEmbed Entity="Implanter" Caption="Anatomy"/>
-    <GuideEntityEmbed Entity="C4" Caption="Breacher"/>
-    <GuideEntityEmbed Entity="ChameleonProjector" Caption="Chameleon"/>
-    <GuideEntityEmbed Entity="BaseUplinkRadio" Caption="Communicator"/>
+    <GuideEntityEmbed Entity="Implanter" Caption="анатомия"/>
+    <GuideEntityEmbed Entity="C4" Caption="взломщик"/>
+    <GuideEntityEmbed Entity="ChameleonProjector" Caption="хамелеон"/>
+    <GuideEntityEmbed Entity="BaseUplinkRadio" Caption="коммуникатор"/>
   </Box>
   <Box>
-    <GuideEntityEmbed Entity="NitrousOxideTank" Caption="Sleeper"/>
-    <GuideEntityEmbed Entity="Fulton" Caption="Smuggler"/>
-    <GuideEntityEmbed Entity="Telecrystal" Caption="Syndie"/>
+    <GuideEntityEmbed Entity="NitrousOxideTank" Caption="снотворное"/>
+    <GuideEntityEmbed Entity="Fulton" Caption="контрабанда"/>
+    <GuideEntityEmbed Entity="Telecrystal" Caption="синдикат"/>
+  </Box>
+  <Box>
+    <GuideEntityEmbed Entity="ClothingBackpackSatchelSmugglerUnanchored"/>
   </Box>
 
-  ## Centerpiece of the Collection
-  Your kleptomania will take you places. One day, you'll feel like stealing a few figurines. Another day, you'll feel like stealing an industrial machine.
+  После подтверждения вашего выбора наборы раскроются, превратившись в [color=cyan]сумку контрабандиста[/color].
+  Более крупные наборы будут падать на пол вокруг вас.
+  [bold]Не позволяйте никому увидеть ваши наборы или сумку контрабандиста[/bold], иначе их распознают как контрабанду!
+  Сумку контрабандиста можно закрепить на обшивке корпуса под напольными плитами, если нужно спрятать предметы от посторонних глаз.
 
-  No matter. They'll all be a part of your collection within a matter of time.
+  ## Центральный элемент коллекции
 
-  You can steal items by [bold]having them on your person[/bold] when you get to CentComm. Failing this, you can steal larger items by [bold]leaving them by your beacon.[/bold]
+    Ваша клептомания приведёт вас в разные места. В один день вам понадобится коллекция печатей, в другой - промышленный аппарат.
 
-  Some of the more [italic]animate[/italic] objectives may not cooperate with you. Make sure they're alive and with you or your beacon when the shift ends.
+  Независимо от того. Через какое-то время все они станут частью вашей коллекции.
 
-  Things that you may desire include but are not limited to:
+  Вы можете украсть предметы, [bold]имея их при себе[/bold] по прибытии на ЦК. Кроме того, можно украсть более крупные предметы, [bold]оставив их рядом с воровским маяком.[/bold]
+
+  Вещи, которые вы можете пожелать, включают, но не ограничиваются:
 
   <Box>
-    <GuideEntityEmbed Entity="ToyFigurineGreytider" Caption="Figurines"/>
-    <GuideEntityEmbed Entity="PassengerIDCard" Caption="ID cards"/>
-    <GuideEntityEmbed Entity="ChemDispenser" Caption="Structures"/>
-    <GuideEntityEmbed Entity="MobCorgiIan" Caption="Animals/Pets"/>
+    <GuideEntityEmbed Entity="RubberStampCaptain" Caption="печати"/>
+    <GuideEntityEmbed Entity="PassengerIDCard" Caption="ID карты"/>
+    <GuideEntityEmbed Entity="ChemDispenser" Caption="структуры"/>
   </Box>
+
+  ## Условия выполнения целей
+
+  Штатный набор включает эвакуацию и случайные поручения на отдельные вещи, коллекции или крупные объекты. Кража животных в обычную выдачу сейчас не входит.
+
+  Для полного выполнения коллекции соберите указанное количество, а не один предмет. Добыча должна оставаться при вас, на буксире или в зоне вашего воровского маяка. Возвращённые владельцу и утраченные вещи перестают учитываться. Для кражи необязательно нести крупный объект на ЦК, если он находится в вашей зоне хранения.
+
+  [bold]Эвакуация проверяется отдельно:[/bold] доберитесь до ЦК живым и без наручников на эвакуационном шаттле или подходящей спасательной капсуле. Воровской маяк засчитывает добычу, но не эвакуирует самого вора. В наручниках за побег даётся только частичный прогресс.
 
 </Document>
