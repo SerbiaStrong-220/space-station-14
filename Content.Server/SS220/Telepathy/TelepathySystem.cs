@@ -26,12 +26,10 @@ public sealed partial class TelepathySystem : EntitySystem
     [Dependency] private IPrototypeManager _prototype = default!;
 
     /// <summary>
-    /// Key is a "fake" protoId. It wont indexed.
+    /// Key is a "fake" protoId. It wont indexed. Value is the prototype the channel was made from.
     /// </summary>
-    private readonly SortedDictionary<ProtoId<TelepathyChannelPrototype>, ChannelParameters> _dynamicChannels = new();
+    private readonly SortedDictionary<ProtoId<TelepathyChannelPrototype>, ProtoId<TelepathyChannelPrototype>> _dynamicChannels = new();
     private readonly HashSet<ProtoId<TelepathyChannelPrototype>> _privateChannels = new();
-    private readonly Dictionary<ProtoId<TelepathyChannelPrototype>, ProtoId<TelepathyChannelPrototype>> _channelTemplates = new();
-    private readonly Color _baseDynamicChannelColor = Color.Lime;
     private int _nextDynamicChannelId;
 
     /// <inheritdoc/>
@@ -87,27 +85,15 @@ public sealed partial class TelepathySystem : EntitySystem
     }
 
     /// <summary>
-    /// Tries to get free channel from already constructed and if no exists makes new one
+    /// Makes new channel with the parameters of <paramref name="template"/>, ghost hearing settings of the template apply to it.
     /// </summary>
     /// <param name="isPrivate">If true, <see cref="GetJoinableChannel"/> doesn't offer this channel to other systems.</param>
-    public ProtoId<TelepathyChannelPrototype> TakeUniqueTelepathyChannel(string? nameLocPath = null, Color? color = null, bool isPrivate = false)
+    public ProtoId<TelepathyChannelPrototype> TakeUniqueTelepathyChannel(ProtoId<TelepathyChannelPrototype> template, bool isPrivate = false)
     {
-        var channel = MakeNewDynamicChannel(nameLocPath, color);
+        var channel = MakeNewDynamicChannel(template);
 
         if (isPrivate)
             _privateChannels.Add(channel);
-
-        return channel;
-    }
-
-    /// <summary>
-    /// Makes new channel with the parameters of <paramref name="template"/>, ghost hearing settings of the template apply to it.
-    /// </summary>
-    public ProtoId<TelepathyChannelPrototype> TakeUniqueTelepathyChannel(ProtoId<TelepathyChannelPrototype> template)
-    {
-        var parameters = _prototype.Index(template).ChannelParameters;
-        var channel = MakeNewDynamicChannel(parameters.Name, parameters.Color);
-        _channelTemplates.Add(channel, template);
 
         return channel;
     }
@@ -117,7 +103,7 @@ public sealed partial class TelepathySystem : EntitySystem
     /// </summary>
     public ProtoId<TelepathyChannelPrototype> GetChannelTemplate(ProtoId<TelepathyChannelPrototype> channel)
     {
-        return _channelTemplates.GetValueOrDefault(channel, channel);
+        return _dynamicChannels.GetValueOrDefault(channel, channel);
     }
 
     /// <summary>
@@ -135,7 +121,6 @@ public sealed partial class TelepathySystem : EntitySystem
         Log.Debug($"Freed channel with id {protoId}");
         _dynamicChannels.Remove(protoId);
         _privateChannels.Remove(protoId);
-        _channelTemplates.Remove(protoId);
         var query = EntityQueryEnumerator<TelepathyComponent>();
         while (query.MoveNext(out var uid, out var telepathyComponent))
         {
@@ -227,20 +212,16 @@ public sealed partial class TelepathySystem : EntitySystem
 
         _dynamicChannels.Remove(channel);
         _privateChannels.Remove(channel);
-        _channelTemplates.Remove(channel);
 
         if (lastMember != null)
             RemoveTelepathy(lastMember.Value);
     }
 
-    private ProtoId<TelepathyChannelPrototype> MakeNewDynamicChannel(string? nameLocPath = null, Color? color = null)
+    private ProtoId<TelepathyChannelPrototype> MakeNewDynamicChannel(ProtoId<TelepathyChannelPrototype> template)
     {
         var id = Loc.GetString("unique-telepathy-proto-id", ("id", _nextDynamicChannelId++));
 
-        var channelColor = color ?? _baseDynamicChannelColor;
-        var channelName = nameLocPath ?? "unique-telepathy-proto-name";
-
-        _dynamicChannels.Add(id, new ChannelParameters(channelName, channelColor));
+        _dynamicChannels.Add(id, template);
 
         Log.Debug($"The channel with ID {id} was added to dynamics ones and used.");
         return id;
@@ -248,15 +229,7 @@ public sealed partial class TelepathySystem : EntitySystem
 
     private void SendMessageToEveryoneWithRightChannel(ProtoId<TelepathyChannelPrototype> rightTelepathyChannel, string message, EntityUid? senderUid)
     {
-        ChannelParameters? channelParameters = null;
-
-        if (_dynamicChannels.TryGetValue(rightTelepathyChannel, out var dynamicParameters))
-            channelParameters = dynamicParameters;
-
-        if (_prototype.TryIndex(rightTelepathyChannel, out var prototype))
-            channelParameters = prototype.ChannelParameters;
-
-        if (channelParameters == null)
+        if (!_prototype.TryIndex(GetChannelTemplate(rightTelepathyChannel), out var prototype))
         {
             Log.Error($"Tried to send message with incorrect {nameof(TelepathyChannelPrototype)} proto id. id was: {rightTelepathyChannel}");
             return;
@@ -269,7 +242,7 @@ public sealed partial class TelepathySystem : EntitySystem
         {
             if (rightTelepathyChannel == receiverTelepathy.TelepathyChannelPrototype || receiverTelepathy.ReceiveAllChannels)
             {
-                SendMessageToChat(receiverUid, message, senderUid, channelParameters);
+                SendMessageToChat(receiverUid, message, senderUid, prototype.ChannelParameters);
                 telephatyTtsRecievers.Add(receiverUid);
             }
         }

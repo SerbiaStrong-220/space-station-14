@@ -19,6 +19,7 @@ using Content.Shared.SS220.Telepathy;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Server.Guardian
@@ -38,6 +39,8 @@ namespace Content.Server.Guardian
         [Dependency] private readonly SharedContainerSystem _container = default!;
         [Dependency] private readonly SharedTransformSystem _transform = default!;
         [Dependency] private readonly TelepathySystem _telepathy = default!; // SS220-guardian-telepathy
+
+        private static readonly ProtoId<TelepathyChannelPrototype> TelepathyChannelId = "TelepathyChannelGuardian"; // SS220-guardian-telepathy
 
         public override void Initialize()
         {
@@ -415,7 +418,7 @@ namespace Content.Server.Guardian
             }
 
             // The guardian follows through OnHostTelepathyChanged.
-            var ownChannel = _telepathy.TakeUniqueTelepathyChannel("guardian-telepathy-channel-name", Color.DeepSkyBlue, isPrivate: true);
+            var ownChannel = _telepathy.TakeUniqueTelepathyChannel(TelepathyChannelId, isPrivate: true);
             _telepathy.SetChannel(host, ownChannel);
         }
         // SS220-guardian-telepathy-end
