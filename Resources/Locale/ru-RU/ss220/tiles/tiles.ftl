@@ -265,6 +265,7 @@ floor-tile-item-wood-large-light = крупный светлый деревян�
 floor-tile-item-wood-large-red = крупный красный деревянный пол
 
 ## ПАРКЕТНАЯ ПЛИТКА
+floor-tile-item-wood-parquet = паркетный деревянный пол
 floor-tile-item-wood-parquet-black = паркетный чёрный деревянный пол
 floor-tile-item-wood-parquet-dark = паркетный тёмный деревянный пол
 floor-tile-item-wood-parquet-light = паркетный светлый деревянный пол
