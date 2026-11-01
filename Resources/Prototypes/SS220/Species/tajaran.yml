@@ -7,12 +7,14 @@
   prototype: MobTajaran
   defaultSkinTone: "#222626"
   dollPrototype: AppearanceTajaran
-  skinColoration: Hues
+  skinColoration: TajaranFur
   maleFirstNames: NamesTajaranFirstMale
   femaleFirstNames: NamesTajaranFirstFemale
   maleLastNames: NamesTajaranSecondUnisex
   femaleLastNames: NamesTajaranSecondUnisex
   buttScanTexture: /Textures/SS220/Interface/Butts/tajaran.png
+  # SS220 age-tweak bgn
   youngAge: 25
-  oldAge: 55
-  maxAge: 70 #some lore moments
+  oldAge: 36
+  maxAge: 46
+  # SS220 age-tweak end

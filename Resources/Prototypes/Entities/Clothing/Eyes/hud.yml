@@ -95,7 +95,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: ClothingEyesHudBase
+  parent: [ClothingEyesHudBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingEyesHudBeer
   name: beer goggles
   description: A pair of sunHud outfitted with apparatus to scan reagents, as well as providing an innate understanding of liquid viscosity while in motion.
@@ -103,7 +103,21 @@
   - type: Sprite
     sprite: Clothing/Eyes/Hud/beergoggles.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: Clothing/Eyes/Hud/beergoggles.rsi
+    # SS220-glasses-on-forehead-begin
+    clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Eyes/Forehead/Hud/beergoggles.rsi
+        state: equipped-HELMET
+      head-arachnid:
+      - sprite: SS220/Clothing/Eyes/Forehead/Hud/beergoggles.rsi
+        state: equipped-HELMET-arachnid
+      head-moth:
+      - sprite: SS220/Clothing/Eyes/Forehead/Hud/beergoggles.rsi
+        state: equipped-HELMET-moth
+    # SS220-glasses-on-forehead-end
+
   - type: ShowThirstIcons
   - type: SolutionScanner
   - type: Tag
@@ -222,7 +236,7 @@
   - type: ShowSyndicateIcons
 
 - type: entity
-  parent: [ClothingEyesHudBase, ShowSecurityIcons, BaseSyndicateContraband]
+  parent: [ClothingEyesHudBase, ShowSecurityIcons, BaseSyndicateContraband, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingEyesHudSyndicate
   name: syndicate visor
   description: The syndicate's professional head-up display, designed for better detection of humanoids and their subsequent elimination.
@@ -230,7 +244,18 @@
   - type: Sprite
     sprite: Clothing/Eyes/Hud/synd.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: Clothing/Eyes/Hud/synd.rsi
+    # SS220-glasses-on-forehead-begin
+    clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Eyes/Forehead/Hud/synd.rsi
+        state: equipped-HELMET
+      head-arachnid:
+      - sprite: SS220/Clothing/Eyes/Forehead/Hud/synd.rsi
+        state: equipped-HELMET-arachnid
+    # SS220-glasses-on-forehead-end
+
   - type: ShowSyndicateIcons
   #SS220 Syndie visor buff start
   - type: EyeProtection
@@ -244,7 +269,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingEyesHudBase, ShowSecurityIcons, BaseSyndicateContraband]
+  parent: [ClothingEyesHudBase, ShowSecurityIcons, BaseSyndicateContraband, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingEyesHudSyndicateAgent
   name: syndicate medical visor
   description: The Syndicate Corpsman's professional heads-up display, designed for quick diagnosis of their team's status.
@@ -252,7 +277,18 @@
   - type: Sprite
     sprite: Clothing/Eyes/Hud/syndagent.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: Clothing/Eyes/Hud/syndagent.rsi
+    # SS220-glasses-on-forehead-begin
+    clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Eyes/Forehead/Hud/syndagent.rsi
+        state: equipped-HELMET
+      head-arachnid:
+      - sprite: SS220/Clothing/Eyes/Forehead/Hud/syndagent.rsi
+        state: equipped-HELMET-arachnid
+    # SS220-glasses-on-forehead-end
+
   - type: ShowSyndicateIcons
   - type: ShowHealthBars
     damageContainers:
@@ -336,6 +372,7 @@
   - type: Sprite
     sprite: Clothing/Eyes/Hud/beerpatch.rsi
   - type: Clothing
+    slots: EYES # SS220-glasses-on-forehead: keep the eyepatch in its original slot.
     sprite: Clothing/Eyes/Hud/beerpatch.rsi
 
 - type: entity

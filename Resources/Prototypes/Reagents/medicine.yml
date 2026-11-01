@@ -16,7 +16,10 @@
         type: Update
       - !type:ModifyStatusEffect
         effectProto: StatusEffectWoozy
-        time: 20.0
+        #SS220-cryptobiolin-woozy-fix bgn
+        type: Add
+        time: 5
+        #SS220-cryptobiolin-woozy-fix end
 
 - type: reagent
   id: Dylovene
