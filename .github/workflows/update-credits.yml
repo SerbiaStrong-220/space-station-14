@@ -6,6 +6,34 @@ on:
     - cron: 0 0 * * 0
 
 jobs:
+  # SS220 add contributors begin
+  get_ss220_credits:
+    runs-on: ubuntu-latest
+    if: github.repository == 'SerbiaStrong-220/space-station-14'
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4.2.2
+        with:
+          ref: master
+
+      - name: Get authors of merged SS220 pull requests
+        shell: pwsh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: Tools/dump_ss220_contributors.ps1
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: Update SS220 credits
+          title: Update SS220 credits
+          body: Update the credits with authors of pull requests merged into SS220 master.
+          branch: automated/ss220-credits
+          add-paths: Resources/Credits/SS220GitHub.txt
+          # SS220 add contributors end
+
   get_credits:
     runs-on: ubuntu-latest
     # Hey there fork dev! If you like to include your own contributors in this then you can probably just change this to your own repo
