@@ -19,3 +19,5 @@ ent-JanitorJRPDA = КПК уборщика JR
 ent-SalvagePDAJR = КПК утилизатора JR
     .desc = Специальный КПК для утилизаторов компании Junk Recyclers.
     .suffix = { ent-AltRnDDirPDA.suffix }
+ent-NinjaPDA = КПК ниндзя
+    .desc = Ах ты, скрытный ублюдок!

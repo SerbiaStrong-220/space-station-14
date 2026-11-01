@@ -28,3 +28,6 @@ ent-ClothingBackpackDuffelSyndicateFilledWeaponPistolViperToy = { ent-ClothingBa
 ent-ClothingBackpackDuffelSyndicateFilledWeaponSniperMosinToy = { ent-ClothingBackpackDuffelSyndicate }
     .suffix = набор "Кардашев-Мосин", Игрушечный
     .desc = { ent-ClothingBackpackDuffelSyndicate.desc }
+ent-ClothingBackpackDuffelSyndicateFilledAssaultSuit = набор "Штурмовик"
+    .desc = Надеюсь, вы не боитесь получить пулю.
+    .suffix = Броня
