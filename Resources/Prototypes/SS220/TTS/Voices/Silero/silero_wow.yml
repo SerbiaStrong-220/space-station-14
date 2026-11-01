@@ -1,0 +1,251 @@
+- type: ttsVoice
+  id: Sabellian
+  name: Sabellian
+  speaker: Dragons_Sabellian
+  provider: Silero
+  categories: [ WOW ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Ysera
+  name: Ysera
+  speaker: Dragons_Ysera
+  provider: Silero
+  categories: [ WOW ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: MalygosWotlk
+  name: Malygos_wotlk
+  speaker: Dragons_MalygosWrath_of_the_Lich_King
+  provider: Silero
+  categories: [ WOW ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Ebyssian
+  name: Ebyssian
+  speaker: Dragons_Ebyssian
+  provider: Silero
+  categories: [ WOW ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Deathwing
+  name: Deathwing
+  speaker: Dragons_Deathwing
+  provider: Silero
+  categories: [ WOW ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Nozdormu
+  name: Nozdormu
+  speaker: Dragons_Nozdormu
+  provider: Silero
+  categories: [ WOW ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Malygos
+  name: Malygos
+  speaker: Dragons_Malygos
+  provider: Silero
+  categories: [ WOW ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Calderax
+  name: Calderax
+  speaker: Draconids_Calderax
+  provider: Silero
+  categories: [ WOW ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Bazentus
+  name: Bazentus
+  speaker: Draconids_Bazentus
+  provider: Silero
+  categories: [ WOW ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Kazra
+  name: Kazra
+  speaker: Draconids_Kazra
+  provider: Silero
+  categories: [ WOW ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Seltherex
+  name: Seltherex
+  speaker: Draconids_Seltherex
+  provider: Silero
+  categories: [ WOW ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Sendrax
+  name: Sendrax
+  speaker: Draconids_Sendrax
+  provider: Silero
+  categories: [ WOW ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Evantkis
+  name: Evantkis
+  speaker: Draconids_Evantkis
+  provider: Silero
+  categories: [ WOW ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Drine
+  name: Drine
+  speaker: Draconids_Drine
+  provider: Silero
+  categories: [ WOW ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Lethanak
+  name: Lethanak
+  speaker: Draconids_Lethanak
+  provider: Silero
+  categories: [ WOW ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: WrathionEcho
+  name: Wrathion_echo
+  speaker: Dragons2_Wrathion_echo
+  provider: Silero
+  categories: [ WOW ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Alexstraza
+  name: Alexstraza
+  speaker: Dragons2_Alexstraza
+  provider: Silero
+  categories: [ WOW ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Kalecgos
+  name: Kalecgos
+  speaker: Dragons2_Kalecgos
+  provider: Silero
+  categories: [ WOW ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Wrathion
+  name: Wrathion
+  speaker: Dragons2_Wrathion
+  provider: Silero
+  categories: [ WOW ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: KalechosEcho
+  name: Kalecgos_echo
+  speaker: Dragons2_Kalecgos_echo
+  provider: Silero
+  categories: [ WOW ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: AlextrazaEcho
+  name: Alextraza_echo
+  speaker: Dragons2_Alextraza_echo
+  provider: Silero
+  categories: [ WOW ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: NeltharionEcho
+  name: Neltharion_echo
+  speaker: Dragons2_Neltharion_echo
+  provider: Silero
+  categories: [ WOW ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: WrathionDeathwing
+  name: Wration_Deathwing
+  speaker: Dragons2_Wrathion_Deathwing
+  provider: Silero
+  categories: [ WOW ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Neltharion
+  name: Neltharion
+  speaker: Dragons2_Neltharion
+  provider: Silero
+  categories: [ WOW ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Garrosh
+  name: Garrosh
+  speaker: garrosh
+  provider: Silero
+  categories: [ WOW ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Guldan
+  name: Guldan
+  speaker: guldan
+  provider: Silero
+  categories: [ WOW ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Hogger
+  name: Hogger
+  speaker: hogger
+  provider: Silero
+  categories: [ WOW ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: DeathwingAlt
+  name: Deathwing
+  speaker: deathwing
+  provider: Silero
+  categories: [ WOW ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]

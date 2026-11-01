@@ -150,8 +150,9 @@
     # ss220 lowTTKUpdate
   - type: Sharp
   #SS220-AddTTSRatKing begin
-  - type: TTS
-    voice: hagraven
+  - type: Tts
+    voicePreferences:
+      NTTS: hagraven
   #SS220-AddTTSRatKing end
 
 - type: entity

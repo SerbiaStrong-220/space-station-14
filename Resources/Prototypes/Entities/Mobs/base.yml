@@ -36,7 +36,7 @@
   - type: ContentEye
   - type: CameraRecoil
   - type: MindContainer
-  - type: TTS # Corvax-TTS
+  - type: Tts # SS220 Tts
   - type: RequireProjectileTarget
     active: False
 
