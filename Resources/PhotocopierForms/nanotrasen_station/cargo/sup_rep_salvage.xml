@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Form>
+  <FormId>sup_rep_salvage</FormId>
+  <PrototypeId>PaperNtFormCargo</PrototypeId>
+  <EntityName>форма НТ-СНБ-ОТЧ</EntityName>
+  <PhotocopierTitle>Отчет об утилизации</PhotocopierTitle>
+  <Content><![CDATA[[bold]Форма НТ-СНБ-ОТЧ[/bold]
+[head=2]Отчет об утилизации[/head]
+
+Ответственный за утилизацию: (ПОЛНОЕ ИМЯ), (ДОЛЖНОСТЬ)
+
+Отделом Снабжения была произведена утилизация объектов при (МЕТОД УТИЛИЗАЦИИ). В ходе утилизации были обнаружены ценные предметы и вещи, ценные предметы были переданы в соответствующие отделы для их использования.
+
+Перечень найденных вещей:
+
+[italic]Место для печатей[/italic]]]></Content>
+</Form>
