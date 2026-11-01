@@ -14,6 +14,9 @@ using Content.Shared.Shuttles.BUIStates;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Events;
 using Content.Shared.Shuttles.Systems;
+//SS220-emergency-shuttle-departure-control begin
+using Robust.Shared.Audio;
+//SS220-emergency-shuttle-departure-control end
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -76,6 +79,9 @@ public sealed partial class EmergencyShuttleSystem
     /// Have the emergency shuttles been authorised to launch at CentCom?
     /// </summary>
     private bool _launchedShuttles;
+    //SS220-emergency-shuttle-departure-control begin
+    private bool _emergencyDeparturePaused;
+    //SS220-emergency-shuttle-departure-control end
 
     /// <summary>
     /// Have the emergency shuttles left for CentCom?
@@ -144,6 +150,11 @@ public sealed partial class EmergencyShuttleSystem
 
     private void UpdateEmergencyConsole(float frameTime)
     {
+        //SS220-emergency-shuttle-departure-control begin
+        if (_emergencyDeparturePaused)
+            return;
+        //SS220-emergency-shuttle-departure-control end
+
         // Add some buffer time so eshuttle always first.
         var minTime = -(TransitTime - (_shuttle.DefaultStartupTime + _shuttle.DefaultTravelTime + 1f));
 
@@ -304,6 +315,14 @@ public sealed partial class EmergencyShuttleSystem
     private void OnEmergencyAuthorize(EntityUid uid, EmergencyShuttleConsoleComponent component, EmergencyShuttleAuthorizeMessage args)
     {
         var player = args.Actor;
+        //SS220-emergency-shuttle-departure-control begin
+        if (_emergencyDeparturePaused)
+        {
+            Popup.PopupCursor(Loc.GetString("emergency-shuttle-console-paused"), player, PopupType.Medium);
+            return;
+        }
+        //SS220-emergency-shuttle-departure-control end
+
 
         if (!_idSystem.TryFindIdCard(player, out var idCard) || !_reader.IsAllowed(idCard, uid))
         {
@@ -337,7 +356,10 @@ public sealed partial class EmergencyShuttleSystem
         // Realistically most of this shit needs moving to a station component so each station has their own emergency shuttle
         // and timer and all that jazz so I don't really care about debugging if it works on cleanup vs start.
         _announced = false;
+        //SS220-emergency-shuttle-departure-control begin
+        _emergencyDeparturePaused = false;
         ShuttlesLeft = false;
+        //SS220-emergency-shuttle-departure-control end
         _launchedShuttles = false;
         _consoleAccumulator = float.MinValue;
         EarlyLaunchAuthorized = false;
@@ -371,7 +393,11 @@ public sealed partial class EmergencyShuttleSystem
                 EmergencyConsoleUiKey.Key,
                 new EmergencyConsoleBoundUserInterfaceState()
                 {
-                    EarlyLaunchTime = EarlyLaunchAuthorized ? _timing.CurTime + TimeSpan.FromSeconds(_consoleAccumulator) : null,
+                    //SS220-emergency-shuttle-departure-control begin
+                    EarlyLaunchTime = EarlyLaunchAuthorized && !_emergencyDeparturePaused
+                        ? _timing.CurTime + TimeSpan.FromSeconds(_consoleAccumulator)
+                        : null,
+                    //SS220-emergency-shuttle-departure-control end
                     Authorizations = auths,
                     AuthorizationsRequired = component.AuthorizationsRequired,
                 }
@@ -380,19 +406,32 @@ public sealed partial class EmergencyShuttleSystem
 
     private bool CheckForLaunch(EmergencyShuttleConsoleComponent component)
     {
-        if (component.AuthorizedEntities.Count < component.AuthorizationsRequired || EarlyLaunchAuthorized)
+        //SS220-emergency-shuttle-departure-control begin
+        if (_emergencyDeparturePaused ||
+            component.AuthorizedEntities.Count < component.AuthorizationsRequired ||
+            EarlyLaunchAuthorized)
             return false;
 
-        EarlyLaunch();
-        return true;
+        return EarlyLaunch();
+        //SS220-emergency-shuttle-departure-control end
     }
 
     /// <summary>
     /// Attempts to early launch the emergency shuttle if not already done.
     /// </summary>
     public bool EarlyLaunch()
-    {
-        if (EarlyLaunchAuthorized || !EmergencyShuttleArrived || _consoleAccumulator <= _authorizeTime) return false;
+    {	//SS220-emergency-shuttle-departure-control begin
+        // Normal console authorizations remain blocked during a pause; forced early launches bypass it.
+        if (EarlyLaunchAuthorized || !EmergencyShuttleArrived ||
+            _consoleAccumulator <= _authorizeTime)
+            return false;
+        //SS220-emergency-shuttle-departure-control end
+
+        // Release the departure hold when a forced early launch succeeds.
+        //SS220-emergency-shuttle-departure-control begin
+        if (_emergencyDeparturePaused)
+            _emergencyDeparturePaused = false;
+        //SS220-emergency-shuttle-departure-control end
 
         _logger.Add(LogType.EmergencyShuttle, LogImpact.High, $"Emergency shuttle launch authorized");
         _consoleAccumulator = _authorizeTime;
@@ -421,6 +460,59 @@ public sealed partial class EmergencyShuttleSystem
         return true;
     }
 
+    //SS220-emergency-shuttle-departure-control begin
+    /// <summary>
+    /// Remaining emergency shuttle departure time, rounded up to whole seconds.
+    /// </summary>
+    public int EmergencyDepartureSecondsRemaining =>
+        Math.Max(0, (int) Math.Ceiling(_consoleAccumulator));
+
+    /// <summary>
+    /// Suspends emergency shuttle departure before its FTL startup.
+    /// </summary>
+    public bool PauseEmergencyDeparture()
+    {
+        if (_emergencyDeparturePaused || !EmergencyShuttleArrived ||
+            _launchedShuttles || ShuttlesLeft ||
+            _consoleAccumulator <= _shuttle.DefaultStartupTime)
+            return false;
+
+        _emergencyDeparturePaused = true;
+        _logger.Add(LogType.EmergencyShuttle, LogImpact.High, $"Emergency shuttle departure paused by administrator.");
+        AnnounceDepartureControl(true);
+        UpdateAllEmergencyConsoles();
+        return true;
+    }
+
+    /// <summary>
+    /// Restarts the emergency shuttle departure countdown from its saved value.
+    /// </summary>
+    public bool ResumeEmergencyDeparture()
+    {
+        if (!_emergencyDeparturePaused)
+            return false;
+
+        _emergencyDeparturePaused = false;
+        _logger.Add(LogType.EmergencyShuttle, LogImpact.High, $"Emergency shuttle departure resumed by administrator.");
+        AnnounceDepartureControl(false);
+        UpdateAllEmergencyConsoles();
+        return true;
+    }
+
+    private void AnnounceDepartureControl(bool paused)
+    {
+        _chatSystem.DispatchGlobalAnnouncement(
+            paused
+                ? Loc.GetString("emergency-shuttle-departure-paused")
+                : Loc.GetString("emergency-shuttle-departure-resumed",
+                    ("seconds", EmergencyDepartureSecondsRemaining)),
+            sender: Loc.GetString("emergency-shuttle-departure-sender"),
+            announcementSound: new SoundPathSpecifier("/Audio/Announcements/attention.ogg"),
+            colorOverride: Color.Yellow,
+            playTTS: false);
+    }
+
+    //SS220-emergency-shuttle-departure-control end
     private void AnnounceLaunch()
     {
         if (_announced) return;
