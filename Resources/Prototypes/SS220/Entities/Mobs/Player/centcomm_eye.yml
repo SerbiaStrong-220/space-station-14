@@ -1,0 +1,55 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# The remote viewer piloted from a CentComm observation console.
+# Similar to AI eye, but cannot interact and does not require cameras for vision.
+- type: entity
+  parent:
+  - Incorporeal
+  - BaseMob
+  id: CentCommObserverEye
+  name: CentComm observation eye
+  description: A Central Command viewer.
+  categories: [ HideSpawnMenu, DoNotMap ]
+  components:
+  - type: ContentEye
+    maxZoom: 1.44,1.44
+  - type: Eye
+    pvsScale: 1.5
+    drawFov: false
+    visMask:
+    - Normal
+    - Ghost
+  - type: Input
+    context: "ghost"
+  - type: Visibility
+    layer: 2
+  - type: IntrinsicRadioReceiver
+  - type: ActiveRadio
+    channels:
+    - CentCom
+    - Common
+    - Command
+    - Engineering
+    - Medical
+    - Science
+    - Security
+    - Service
+    - Supply
+  - type: ShowJobIcons
+  - type: ShowMindShieldIcons
+  - type: ShowCriminalRecordIcons
+  - type: GhostHearing
+  - type: UserInterface
+    interfaces:
+      enum.GhostHearingKey.Key:
+        type: GhostHearingBoundUserInterface
+  - type: Language
+    knowAllLanguages: true
+  - type: HallucinationImmune
+  - type: NoFTL
+  - type: Sprite
+    sprite: SS220/Mobs/Silicon/centcomm_eye.rsi
+    layers:
+    - state: cc_camera
+      shader: unshaded
+      map: ["base"]
