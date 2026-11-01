@@ -4,8 +4,11 @@ cmd-ban-help = Usage: ban <name or user ID> <reason> [duration in minutes, leave
 cmd-ban-player = Unable to find a player with that name.
 cmd-ban-invalid-minutes = {$minutes} is not a valid amount of minutes!
 cmd-ban-invalid-severity = {$severity} is not a valid severity!
-cmd-ban-invalid-stated-round = ${statedround} is not a valid round number!
-cmd-ban-invalid-arguments = Invalid amount of arguments
+# SS220-localization-fix begin
+cmd-ban-invalid-stated-round = { $statedround } is not a valid round number!
+# SS220-localization-fix end
+# SS220-localization-fix
+cmd-ban-invalid-arguments = Invalid amount of arguments.
 cmd-ban-hint = <name/user ID>
 cmd-ban-hint-reason = <reason>
 cmd-ban-hint-duration = [duration]
@@ -22,13 +25,16 @@ cmd-ban-hint-duration-6 = 1 month
 # ban panel
 cmd-banpanel-desc = Opens the ban panel
 cmd-banpanel-help = Usage: banpanel [name or user guid]
-cmd-banpanel-server = This can not be used from the server console
-cmd-banpanel-player-err = The specified player could not be found
+# SS220-localization-fix begin
+cmd-banpanel-server = This can not be used from the server console.
+cmd-banpanel-player-err = The specified player could not be found.
+# SS220-localization-fix end
 
 # listbans
 cmd-banlist-desc = Lists a user's active bans.
 cmd-banlist-help = Usage: banlist <name or user ID>
-cmd-banlist-empty = No active bans found for {$user}
+# SS220-localization-fix
+cmd-banlist-empty = No active bans found for {$user}.
 cmd-banlist-hint = <name/user ID>
 
 cmd-ban_exemption_update-desc = Set an exemption to a type of ban on a player.
@@ -36,7 +42,8 @@ cmd-ban_exemption_update-help = Usage: ban_exemption_update <player> <flag> [<fl
     Specify multiple flags to give a player multiple ban exemption flags.
     To remove all exemptions, run this command and give "None" as only flag.
 
-cmd-ban_exemption_update-nargs = Expected at least 2 arguments
+# SS220-localization-fix
+cmd-ban_exemption_update-nargs = Expected at least 2 arguments.
 cmd-ban_exemption_update-locate = Unable to locate player '{$player}'.
 cmd-ban_exemption_update-invalid-flag = Invalid flag '{$flag}'.
 cmd-ban_exemption_update-success = Updated ban exemption flags for '{$player}' ({$uid}).
@@ -46,7 +53,8 @@ cmd-ban_exemption_update-arg-flag = <flag>
 cmd-ban_exemption_get-desc = Show ban exemptions for a certain player.
 cmd-ban_exemption_get-help = Usage: ban_exemption_get <player>
 
-cmd-ban_exemption_get-nargs = Expected exactly 1 argument
+# SS220-localization-fix
+cmd-ban_exemption_get-nargs = Expected exactly 1 argument.
 cmd-ban_exemption_get-none = User is not exempt from any bans.
 cmd-ban_exemption_get-show = User is exempt from the following ban flags: {$flags}.
 cmd-ban_exemption_get-arg-player = <player>
