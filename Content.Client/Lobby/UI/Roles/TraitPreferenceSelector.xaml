@@ -3,5 +3,6 @@
         <BoxContainer Name="Container"
                       Orientation="Horizontal">
             <CheckBox Name="Checkbox" Access="Public"/>
+            <OptionButton Name="OptionButton" Access="Public" Visible="False" Margin="8 0 0 0" /> <!-- SS220-TraitOptions -->
         </BoxContainer>
 </Control>

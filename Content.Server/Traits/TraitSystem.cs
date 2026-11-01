@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared.GameTicking;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -6,6 +7,8 @@ using Content.Shared.Traits;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 using Content.Server.SS220.Language;
+using Content.Server.SS220.Traits.Specials;
+using Content.Shared.Preferences;
 using Content.Shared.SS220.Language.Components;
 
 namespace Content.Server.Traits;
@@ -60,9 +63,15 @@ public sealed class TraitSystem : EntitySystem
             // SS220-Add-Languages end
 
             // Add all JobSpecials required by the prototype
+            var traitOption = GetTraitOption(traitPrototype, args.Profile); // SS220-TraitOptions
             foreach (var special in traitPrototype.Specials)
             {
-                special.AfterEquip(args.Mob);
+                // SS220-TraitOptions begin
+                if (special is ITraitOptionSpecial optionSpecial)
+                    optionSpecial.AfterEquip(args.Mob, traitOption);
+                else
+                    special.AfterEquip(args.Mob);
+                // SS220-TraitOptions end
             }
 
             // Add item required by the trait
@@ -139,4 +148,20 @@ public sealed class TraitSystem : EntitySystem
         }
     }
     // SS220-traits-debug-end
+
+    // SS220-TraitOptions begin
+    private string? GetTraitOption(TraitPrototype traitPrototype, HumanoidCharacterProfile profile)
+    {
+        if (traitPrototype.Options is not { Count: > 0 })
+            return null;
+
+        if (profile.TraitOptions.TryGetValue(traitPrototype.ID, out var option) &&
+            traitPrototype.Options.ContainsKey(option))
+        {
+            return option;
+        }
+
+        return traitPrototype.Options.Keys.First();
+    }
+    // SS220-TraitOptions end
 }

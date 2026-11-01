@@ -14,12 +14,24 @@ public sealed partial class TraitPreferenceSelector : Control
     public bool Preference
     {
         get => Checkbox.Pressed;
-        set => Checkbox.Pressed = value;
+        //SS220-TraitOptions begin
+        set
+        {
+            Checkbox.Pressed = value;
+            OptionButton.Disabled = !value;
+        }
+        //SS220-TraitOptions end
     }
 
     public event Action<bool>? PreferenceChanged;
 
-    public TraitPreferenceSelector(TraitPrototype trait)
+    //SS220-TraitOptions begin
+    public event Action<string>? OptionChanged;
+
+    private readonly List<string> _optionIds = [];
+
+    public TraitPreferenceSelector(TraitPrototype trait, string? option)
+    //SS220-TraitOptions end
     {
         RobustXamlLoader.Load(this);
 
@@ -34,6 +46,34 @@ public sealed partial class TraitPreferenceSelector : Control
         {
             Checkbox.ToolTip = Loc.GetString(desc);
         }
+
+        //SS220-TraitOptions begin
+        if (trait.Options is { Count: > 0 } options)
+        {
+            OptionButton.Visible = true;
+            OptionButton.Disabled = true;
+            OptionButton.OnItemSelected += OnOptionSelected;
+
+            var selectedIndex = 0;
+            foreach (var (id, label) in options)
+            {
+                if (id == option)
+                    selectedIndex = _optionIds.Count;
+
+                _optionIds.Add(id);
+                OptionButton.AddItem(Loc.GetString(label), _optionIds.Count - 1);
+            }
+
+            OptionButton.SelectId(selectedIndex);
+        }
+
+    }
+
+    private void OnOptionSelected(OptionButton.ItemSelectedEventArgs args)
+    {
+        OptionButton.SelectId(args.Id);
+        OptionChanged?.Invoke(_optionIds[args.Id]);
+        //SS220-TraitOptions end
     }
 
     private void OnCheckBoxToggled(BaseButton.ButtonToggledEventArgs args)
