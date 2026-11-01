@@ -61,6 +61,8 @@ public sealed partial class MindSlaveSystem : EntitySystem
 
     private static readonly ProtoId<AlertPrototype> EnslavedAlert = "MindSlaved";
 
+    private static readonly ProtoId<TelepathyChannelPrototype> TelepathyChannelId = "TelepathyChannelMindSlave";
+
     private readonly SoundSpecifier GreetSoundNotification = new SoundPathSpecifier("/Audio/Ambience/Antag/traitor_start.ogg");
 
     /// <summary>
@@ -277,8 +279,7 @@ public sealed partial class MindSlaveSystem : EntitySystem
         _popup.PopupEntity(briefing, slave, slave, Shared.Popups.PopupType.LargeCaution);
 
         var master = mindSlave.Value.Comp2.masterEntity;
-        // goes here cause we want to have slave in masters slaved list
-        RemoveSlaveTelepathy(master, slave);
+        _telepathy.RemoveTelepathy(slave);
         if (master != null && TryComp<MindSlaveMasterComponent>(master.Value, out var masterComponent))
         {
             var briefingMaster = mindComp.CharacterName != null ? Loc.GetString("mindslave-removed-slave-master", ("name", mindComp.CharacterName), ("ent", slave)) :
@@ -357,38 +358,10 @@ public sealed partial class MindSlaveSystem : EntitySystem
 
     private void MakeTelepathic(EntityUid master, EntityUid slave)
     {
-        var telepathyChannel = TryComp<TelepathyComponent>(master, out var oldTelepathy) && oldTelepathy.TelepathyChannelPrototype != null
-            ? oldTelepathy.TelepathyChannelPrototype
-            : _telepathy.TakeUniqueTelepathyChannel("mindslave-telepathy-channel-name", Color.DarkViolet);
+        var telepathyChannel = _telepathy.GetJoinableChannel(master)
+            ?? _telepathy.TakeUniqueTelepathyChannel(TelepathyChannelId);
 
-        EnsureTelepathy(slave, telepathyChannel.Value);
-        EnsureTelepathy(master, telepathyChannel.Value);
-    }
-
-    private void EnsureTelepathy(EntityUid target, ProtoId<TelepathyChannelPrototype> channelId)
-    {
-        var slaveTelepathy = EnsureComp<TelepathyComponent>(target);
-        slaveTelepathy.CanSend = true;
-        slaveTelepathy.TelepathyChannelPrototype = channelId;
-    }
-
-    private void RemoveSlaveTelepathy(EntityUid? master, EntityUid slave)
-    {
-        if (!TryComp<MindSlaveMasterComponent>(master, out var mindSlaveMaster)
-            || mindSlaveMaster.EnslavedEntities.Count == 1)
-        {
-            if (TryComp<TelepathyComponent>(slave, out var telepathyComponent) &&
-                telepathyComponent.TelepathyChannelPrototype is { } telepathyChannel)
-            {
-                _telepathy.FreeUniqueTelepathyChannel(telepathyChannel);
-            }
-            else
-            {
-                Log.Warning($"{ToPrettyString(slave)} was freed from mindslave but dont have a {nameof(TelepathyComponent)}");
-            }
-            return;
-        }
-
-        RemComp<TelepathyComponent>(slave);
+        _telepathy.SetChannel(slave, telepathyChannel);
+        _telepathy.SetChannel(master, telepathyChannel);
     }
 }

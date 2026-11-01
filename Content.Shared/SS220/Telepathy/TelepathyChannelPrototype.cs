@@ -20,17 +20,11 @@ public sealed partial class TelepathyChannelPrototype : IHearableChannelPrototyp
 }
 
 [DataDefinition]
-public sealed partial class ChannelParameters()
+public sealed partial class ChannelParameters
 {
     [DataField]
     public string Name { get; private set; } = string.Empty;
 
     [DataField]
     public Color Color { get; private set; } = Color.Lime;
-
-    public ChannelParameters(string name, Color color) : this()
-    {
-        Name = name;
-        Color = color;
-    }
 }

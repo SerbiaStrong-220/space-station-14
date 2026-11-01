@@ -47,3 +47,15 @@ public sealed partial class TelepathyAnnouncementSendEvent : InstantActionEvent
 
 [ByRefEvent]
 public record struct TelepathySendAttemptEvent(EntityUid Sender, bool Cancelled);
+
+/// <summary>
+/// Raised on an entity after its telepathy channel changed or it lost telepathy.
+/// </summary>
+[ByRefEvent]
+public readonly record struct TelepathyChannelChangedEvent();
+
+/// <summary>
+/// Raised on an entity whose telepathy is being taken. A handler can name the channel to move it to instead.
+/// </summary>
+[ByRefEvent]
+public record struct GetFallbackTelepathyChannelEvent(ProtoId<TelepathyChannelPrototype>? Channel = null);

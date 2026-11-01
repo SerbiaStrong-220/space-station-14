@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Server.SS220.Telepathy;
 using Content.Shared.Ghost;
 using Content.Shared.Radio;
 using Content.Shared.SS220.GhostHearing;
@@ -13,6 +14,7 @@ public sealed partial class GhostHearingSystem : SharedGhostHearingSystem
 {
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private TelepathySystem _telepathy = default!;
 
     private const string Handheld = "Handheld";
 
@@ -143,10 +145,10 @@ public sealed partial class GhostHearingSystem : SharedGhostHearingSystem
         if (!TryComp<GhostHearingComponent>(ev.User, out var ghost))
             return;
 
-        if (ev.Channel is null)
+        if (ev.Channel is not { } channel)
             return;
 
-        if (!_prototypeManager.TryIndex(ev.Channel, out var channelProto))
+        if (!_prototypeManager.TryIndex(_telepathy.GetChannelTemplate(channel), out var channelProto))
             return;
 
         if (ghost.RadioChannels.TryGetValue(channelProto, out var canHear) && !canHear)

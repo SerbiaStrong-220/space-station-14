@@ -1,5 +1,6 @@
 using Content.Server.Popups;
 using Content.Server.SS220.Bed.Cryostorage;
+using Content.Server.SS220.Telepathy;
 using Content.Shared.Actions;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
@@ -14,9 +15,11 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Mech.EntitySystems;
 using Content.Shared.Mobs;
 using Content.Shared.Popups;
+using Content.Shared.SS220.Telepathy;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Server.Guardian
@@ -35,6 +38,9 @@ namespace Content.Server.Guardian
         [Dependency] private readonly GibbingSystem _gibbing = default!;
         [Dependency] private readonly SharedContainerSystem _container = default!;
         [Dependency] private readonly SharedTransformSystem _transform = default!;
+        [Dependency] private readonly TelepathySystem _telepathy = default!; // SS220-guardian-telepathy
+
+        private static readonly ProtoId<TelepathyChannelPrototype> TelepathyChannelId = "TelepathyChannelGuardian"; // SS220-guardian-telepathy
 
         public override void Initialize()
         {
@@ -55,6 +61,7 @@ namespace Content.Server.Guardian
             SubscribeLocalEvent<GuardianHostComponent, MobStateChangedEvent>(OnHostStateChange);
             SubscribeLocalEvent<GuardianHostComponent, ComponentShutdown>(OnHostShutdown);
             SubscribeLocalEvent<GuardianHostComponent, BeingCryoDeletedEvent>(OnCryoDeleted); // fix-Fatal-error-on-host-cryo
+            SubscribeLocalEvent<GuardianHostComponent, TelepathyChannelChangedEvent>(OnHostTelepathyChanged); // SS220-guardian-telepathy
 
             SubscribeLocalEvent<GuardianHostComponent, GuardianToggleActionEvent>(OnPerformAction);
 
@@ -247,6 +254,7 @@ namespace Content.Server.Guardian
             if (TryComp<GuardianComponent>(guardian, out var guardianComp))
             {
                 guardianComp.Host = args.Args.Target.Value;
+                LinkTelepathy(args.Args.Target.Value, guardian); // SS220-guardian-telepathy
                 _audio.PlayPvs(guardianComp.InjectSound, args.Args.Target.Value);
                 _popupSystem.PopupEntity(Loc.GetString("guardian-created"), args.Args.Target.Value, args.Args.Target.Value);
                 // Exhaust the activator
@@ -392,5 +400,27 @@ namespace Content.Server.Guardian
             _popupSystem.PopupEntity(Loc.GetString("guardian-entity-recall"), host);
             guardianComponent.GuardianLoose = false;
         }
+
+        // SS220-guardian-telepathy-begin
+        private void OnHostTelepathyChanged(Entity<GuardianHostComponent> host, ref TelepathyChannelChangedEvent args)
+        {
+            if (host.Comp.HostedGuardian is { } guardian)
+                LinkTelepathy(host, guardian);
+        }
+
+        private void LinkTelepathy(EntityUid host, EntityUid guardian)
+        {
+            // TelepathyComponent holds a single channel, so replacing it would cut the host off from its cult or mindslaves.
+            if (TryComp<TelepathyComponent>(host, out var telepathy) && telepathy.TelepathyChannelPrototype is { } channel)
+            {
+                _telepathy.SetChannel(guardian, channel, telepathy.CanSend);
+                return;
+            }
+
+            // The guardian follows through OnHostTelepathyChanged.
+            var ownChannel = _telepathy.TakeUniqueTelepathyChannel(TelepathyChannelId, isPrivate: true);
+            _telepathy.SetChannel(host, ownChannel);
+        }
+        // SS220-guardian-telepathy-end
     }
 }

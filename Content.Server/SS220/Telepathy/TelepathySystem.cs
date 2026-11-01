@@ -26,10 +26,11 @@ public sealed partial class TelepathySystem : EntitySystem
     [Dependency] private IPrototypeManager _prototype = default!;
 
     /// <summary>
-    /// Key is a "fake" protoId. It wont indexed.
+    /// Key is a "fake" protoId. It wont indexed. Value is the prototype the channel was made from.
     /// </summary>
-    private readonly SortedDictionary<ProtoId<TelepathyChannelPrototype>, ChannelParameters> _dynamicChannels = new();
-    private readonly Color _baseDynamicChannelColor = Color.Lime;
+    private readonly SortedDictionary<ProtoId<TelepathyChannelPrototype>, ProtoId<TelepathyChannelPrototype>> _dynamicChannels = new();
+    private readonly HashSet<ProtoId<TelepathyChannelPrototype>> _privateChannels = new();
+    private int _nextDynamicChannelId;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -62,6 +63,9 @@ public sealed partial class TelepathySystem : EntitySystem
     {
         if (TryComp<ActorComponent>(ent.Owner, out var actor))
             RaiseNetworkEvent(new UpdateChannelEvent(), actor.PlayerSession);
+
+        if (ent.Comp.TelepathyChannelPrototype is { } channel)
+            CloseIfAbandoned(channel, ent.Owner);
     }
 
     private void OnTelepathyAnnouncementSend(TelepathyAnnouncementSendEvent args)
@@ -81,11 +85,25 @@ public sealed partial class TelepathySystem : EntitySystem
     }
 
     /// <summary>
-    /// Tries to get free channel from already constructed and if no exists makes new one
+    /// Makes new channel with the parameters of <paramref name="template"/>, ghost hearing settings of the template apply to it.
     /// </summary>
-    public ProtoId<TelepathyChannelPrototype> TakeUniqueTelepathyChannel(string? nameLocPath = null, Color? color = null)
+    /// <param name="isPrivate">If true, <see cref="GetJoinableChannel"/> doesn't offer this channel to other systems.</param>
+    public ProtoId<TelepathyChannelPrototype> TakeUniqueTelepathyChannel(ProtoId<TelepathyChannelPrototype> template, bool isPrivate = false)
     {
-        return MakeNewDynamicChannel(nameLocPath, color);
+        var channel = MakeNewDynamicChannel(template);
+
+        if (isPrivate)
+            _privateChannels.Add(channel);
+
+        return channel;
+    }
+
+    /// <summary>
+    /// Returns the prototype <paramref name="channel"/> was made from, or the channel itself if there is none.
+    /// </summary>
+    public ProtoId<TelepathyChannelPrototype> GetChannelTemplate(ProtoId<TelepathyChannelPrototype> channel)
+    {
+        return _dynamicChannels.GetValueOrDefault(channel, channel);
     }
 
     /// <summary>
@@ -102,6 +120,7 @@ public sealed partial class TelepathySystem : EntitySystem
 
         Log.Debug($"Freed channel with id {protoId}");
         _dynamicChannels.Remove(protoId);
+        _privateChannels.Remove(protoId);
         var query = EntityQueryEnumerator<TelepathyComponent>();
         while (query.MoveNext(out var uid, out var telepathyComponent))
         {
@@ -116,14 +135,93 @@ public sealed partial class TelepathySystem : EntitySystem
         }
     }
 
-    private ProtoId<TelepathyChannelPrototype> MakeNewDynamicChannel(string? nameLocPath = null, Color? color = null)
+    /// <summary>
+    /// Returns the channel of <paramref name="uid"/> that others may join, null if it has none or the channel is private.
+    /// </summary>
+    public ProtoId<TelepathyChannelPrototype>? GetJoinableChannel(EntityUid uid)
     {
-        var id = Loc.GetString("unique-telepathy-proto-id", ("id", _dynamicChannels.Count));
+        var channel = CompOrNull<TelepathyComponent>(uid)?.TelepathyChannelPrototype;
+        return channel is { } id && _privateChannels.Contains(id) ? null : channel;
+    }
 
-        var channelColor = color ?? _baseDynamicChannelColor;
-        var channelName = nameLocPath ?? "unique-telepathy-proto-name";
+    /// <summary>
+    /// Moves <paramref name="uid"/> to <paramref name="channel"/>, giving it telepathy if needed.
+    /// </summary>
+    public void SetChannel(EntityUid uid, ProtoId<TelepathyChannelPrototype> channel, bool canSend = true)
+    {
+        var telepathy = EnsureComp<TelepathyComponent>(uid);
+        var oldChannel = telepathy.TelepathyChannelPrototype;
 
-        _dynamicChannels.Add(id, new ChannelParameters(channelName, channelColor));
+        if (oldChannel == channel && telepathy.CanSend == canSend)
+            return;
+
+        telepathy.CanSend = canSend;
+        telepathy.TelepathyChannelPrototype = channel;
+
+        var ev = new TelepathyChannelChangedEvent();
+        RaiseLocalEvent(uid, ref ev);
+
+        // After the event, so that entities following this one have already left the old channel too.
+        if (oldChannel is { } old && old != channel)
+            CloseIfAbandoned(old);
+    }
+
+    /// <summary>
+    /// Takes telepathy from <paramref name="uid"/>, unless <see cref="GetFallbackTelepathyChannelEvent"/> names a channel to move it to.
+    /// </summary>
+    public void RemoveTelepathy(EntityUid uid)
+    {
+        if (!TryComp<TelepathyComponent>(uid, out var telepathy))
+            return;
+
+        var fallback = new GetFallbackTelepathyChannelEvent();
+        RaiseLocalEvent(uid, ref fallback);
+
+        if (fallback.Channel is { } channel)
+        {
+            SetChannel(uid, channel);
+            return;
+        }
+
+        RemComp(uid, telepathy);
+
+        var ev = new TelepathyChannelChangedEvent();
+        RaiseLocalEvent(uid, ref ev);
+    }
+
+    /// <summary>
+    /// A dynamic channel exists to connect its members, so with one member left it closes and takes that member's telepathy.
+    /// </summary>
+    private void CloseIfAbandoned(ProtoId<TelepathyChannelPrototype> channel, EntityUid? leaving = null)
+    {
+        if (!_dynamicChannels.ContainsKey(channel))
+            return;
+
+        EntityUid? lastMember = null;
+        var query = EntityQueryEnumerator<TelepathyComponent>();
+        while (query.MoveNext(out var uid, out var telepathy))
+        {
+            if (uid == leaving || telepathy.TelepathyChannelPrototype != channel)
+                continue;
+
+            if (lastMember != null)
+                return;
+
+            lastMember = uid;
+        }
+
+        _dynamicChannels.Remove(channel);
+        _privateChannels.Remove(channel);
+
+        if (lastMember != null)
+            RemoveTelepathy(lastMember.Value);
+    }
+
+    private ProtoId<TelepathyChannelPrototype> MakeNewDynamicChannel(ProtoId<TelepathyChannelPrototype> template)
+    {
+        var id = Loc.GetString("unique-telepathy-proto-id", ("id", _nextDynamicChannelId++));
+
+        _dynamicChannels.Add(id, template);
 
         Log.Debug($"The channel with ID {id} was added to dynamics ones and used.");
         return id;
@@ -131,15 +229,7 @@ public sealed partial class TelepathySystem : EntitySystem
 
     private void SendMessageToEveryoneWithRightChannel(ProtoId<TelepathyChannelPrototype> rightTelepathyChannel, string message, EntityUid? senderUid)
     {
-        ChannelParameters? channelParameters = null;
-
-        if (_dynamicChannels.TryGetValue(rightTelepathyChannel, out var dynamicParameters))
-            channelParameters = dynamicParameters;
-
-        if (_prototype.TryIndex(rightTelepathyChannel, out var prototype))
-            channelParameters = prototype.ChannelParameters;
-
-        if (channelParameters == null)
+        if (!_prototype.TryIndex(GetChannelTemplate(rightTelepathyChannel), out var prototype))
         {
             Log.Error($"Tried to send message with incorrect {nameof(TelepathyChannelPrototype)} proto id. id was: {rightTelepathyChannel}");
             return;
@@ -152,7 +242,7 @@ public sealed partial class TelepathySystem : EntitySystem
         {
             if (rightTelepathyChannel == receiverTelepathy.TelepathyChannelPrototype || receiverTelepathy.ReceiveAllChannels)
             {
-                SendMessageToChat(receiverUid, message, senderUid, channelParameters);
+                SendMessageToChat(receiverUid, message, senderUid, prototype.ChannelParameters);
                 telephatyTtsRecievers.Add(receiverUid);
             }
         }
