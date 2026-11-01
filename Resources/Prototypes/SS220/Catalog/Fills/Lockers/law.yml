@@ -40,6 +40,9 @@
     - id: ClothingEyesGlassesCommand
     - id: BoxEncryptionKeyLaw
     - id: BoxTapeRecorder
+    - id: TapeRecorderStationary
+    - id: CassetteTapeLargeCapacity
+      amount: 3
 
 - type: entity
   parent: LockerNanoTrasenRepresentative
