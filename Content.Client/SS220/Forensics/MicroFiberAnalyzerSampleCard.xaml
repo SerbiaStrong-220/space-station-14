@@ -1,0 +1,32 @@
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+<PanelContainer xmlns="https://spacestation14.io"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                xmlns:forensics="clr-namespace:Content.Client.SS220.Forensics"
+                HorizontalExpand="True">
+    <PanelContainer.PanelOverride>
+        <gfx:StyleBoxFlat BackgroundColor="{x:Static forensics:MicroFiberAnalyzerColors.PanelBackground}"
+                          BorderColor="{x:Static forensics:MicroFiberAnalyzerColors.AccentBorder}"
+                          BorderThickness="3 1 1 1" />
+    </PanelContainer.PanelOverride>
+    <BoxContainer Orientation="Vertical" SeparationOverride="8" Margin="8" HorizontalExpand="True">
+        <BoxContainer Orientation="Horizontal" SeparationOverride="10" HorizontalExpand="True">
+            <EntityPrototypeView Name="SampleImage" Visible="False" MinSize="64 64" MaxSize="64 64"
+                                 Stretch="Fill" VerticalAlignment="Center" MouseFilter="Ignore" />
+            <BoxContainer Orientation="Vertical" SeparationOverride="3" HorizontalExpand="True"
+                          VerticalAlignment="Center">
+                <Label Name="SampleNumber" StyleClasses="LabelSubText"
+                       FontColorOverride="{x:Static forensics:MicroFiberAnalyzerColors.MutedText}" />
+                <RichTextLabel Name="SampleName" HorizontalExpand="True" />
+            </BoxContainer>
+        </BoxContainer>
+        <PanelContainer HorizontalExpand="True">
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat
+                    BackgroundColor="{x:Static forensics:MicroFiberAnalyzerColors.InsetBackground}" />
+            </PanelContainer.PanelOverride>
+            <RichTextLabel Name="SampleCode" HorizontalExpand="True" StyleClasses="monospace"
+                           Margin="8 6" MouseFilter="Stop" />
+        </PanelContainer>
+    </BoxContainer>
+</PanelContainer>

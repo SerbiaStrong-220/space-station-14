@@ -1,0 +1,189 @@
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+<DefaultWindow xmlns="https://spacestation14.io"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+               xmlns:forensics="clr-namespace:Content.Client.SS220.Forensics"
+               Title="{Loc 'micro-fiber-analyzer-interface-title'}"
+               MinSize="608 480"
+               SetSize="760 620">
+    <PanelContainer HorizontalExpand="True" VerticalExpand="True">
+        <PanelContainer.PanelOverride>
+            <gfx:StyleBoxFlat BackgroundColor="{x:Static forensics:MicroFiberAnalyzerColors.WindowBackground}" />
+        </PanelContainer.PanelOverride>
+        <BoxContainer Orientation="Vertical" SeparationOverride="8" Margin="8"
+                      HorizontalExpand="True" VerticalExpand="True">
+            <PanelContainer MinHeight="48" HorizontalExpand="True">
+                <PanelContainer.PanelOverride>
+                    <gfx:StyleBoxFlat BackgroundColor="{x:Static forensics:MicroFiberAnalyzerColors.HeaderBackground}"
+                                      BorderColor="{x:Static forensics:MicroFiberAnalyzerColors.Border}"
+                                      BorderThickness="1 1 1 2" />
+                </PanelContainer.PanelOverride>
+                <BoxContainer Orientation="Horizontal" SeparationOverride="6" Margin="6 4" HorizontalExpand="True">
+                    <PanelContainer SetWidth="36">
+                        <PanelContainer.PanelOverride>
+                            <gfx:StyleBoxFlat BackgroundColor="{x:Static forensics:MicroFiberAnalyzerColors.BrandBackground}"
+                                              BorderColor="{x:Static forensics:MicroFiberAnalyzerColors.BrandBorder}"
+                                              BorderThickness="1" />
+                        </PanelContainer.PanelOverride>
+                        <Label Text="{Loc 'micro-fiber-analyzer-interface-brand'}" StyleClasses="ConsoleHeading"
+                               FontColorOverride="{x:Static forensics:MicroFiberAnalyzerColors.DarkText}"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
+                    </PanelContainer>
+                    <PanelContainer MinWidth="156">
+                        <PanelContainer.PanelOverride>
+                            <gfx:StyleBoxFlat BackgroundColor="{x:Static forensics:MicroFiberAnalyzerColors.InsetBackground}"
+                                              BorderColor="{x:Static forensics:MicroFiberAnalyzerColors.Border}"
+                                              BorderThickness="1" />
+                        </PanelContainer.PanelOverride>
+                        <BoxContainer Orientation="Horizontal" SeparationOverride="8" Margin="8 2">
+                            <BoxContainer Orientation="Vertical" SeparationOverride="0" VerticalAlignment="Center">
+                                <Label Text="{Loc 'micro-fiber-analyzer-interface-number-caption'}"
+                                       StyleClasses="LabelSubText"
+                                       FontColorOverride="{x:Static forensics:MicroFiberAnalyzerColors.MutedText}" />
+                                <Label Text="{Loc 'micro-fiber-analyzer-interface-number-caption-second-line'}"
+                                       StyleClasses="LabelSubText"
+                                       FontColorOverride="{x:Static forensics:MicroFiberAnalyzerColors.MutedText}" />
+                            </BoxContainer>
+                            <Label Name="AnalyzerNumberLabel" ClipText="True" MouseFilter="Stop"
+                                   StyleClasses="ConsoleHeading" FontColorOverride="{x:Static forensics:MicroFiberAnalyzerColors.BrandText}"
+                                   HorizontalExpand="True" VerticalAlignment="Center" />
+                        </BoxContainer>
+                    </PanelContainer>
+                    <Control HorizontalExpand="True" />
+                    <Button Name="Eject" Access="Public" Disabled="True" Visible="False" StyleClasses="ButtonSquare"
+                            MinSize="40 40" MaxSize="40 40" VerticalAlignment="Center"
+                            ToolTip="{Loc 'micro-fiber-analyzer-interface-eject'}">
+                        <TextureRect Name="EjectIcon" MinSize="24 24" MaxSize="24 24" MouseFilter="Ignore"
+                                     TexturePath="/Textures/Interface/eject.png" Stretch="KeepAspectCentered"
+                                     HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Button>
+                    <Button Name="PrinterButton" Access="Public" Disabled="True" StyleClasses="ButtonSquare"
+                            MinSize="40 40" MaxSize="40 40" VerticalAlignment="Center">
+                        <forensics:MicroFiberAnalyzerPrinterIcon Name="PrinterStatusIcon" Access="Public"
+                                                               MinSize="24 24" MaxSize="24 24" MouseFilter="Ignore"
+                                                               HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Button>
+                </BoxContainer>
+            </PanelContainer>
+            <BoxContainer Orientation="Horizontal" SeparationOverride="8" HorizontalExpand="True" VerticalExpand="True">
+                <forensics:MicroFiberAnalyzerHistoryControl Name="History" Access="Public" />
+                <PanelContainer HorizontalExpand="True" VerticalExpand="True">
+                    <PanelContainer.PanelOverride>
+                        <gfx:StyleBoxFlat BackgroundColor="{x:Static forensics:MicroFiberAnalyzerColors.PanelBackground}" />
+                    </PanelContainer.PanelOverride>
+                    <BoxContainer Orientation="Vertical" SeparationOverride="8" Margin="8"
+                                  HorizontalExpand="True" VerticalExpand="True">
+                        <PanelContainer HorizontalExpand="True">
+                            <PanelContainer.PanelOverride>
+                                <gfx:StyleBoxFlat BackgroundColor="{x:Static forensics:MicroFiberAnalyzerColors.PanelBackground}"
+                                                  BorderColor="{x:Static forensics:MicroFiberAnalyzerColors.Border}"
+                                                  BorderThickness="0 0 0 1" />
+                            </PanelContainer.PanelOverride>
+                            <BoxContainer Orientation="Vertical" SeparationOverride="4" Margin="0 0 0 8"
+                                          HorizontalExpand="True">
+                                <Label Name="SampleSourceLabel" Visible="False" ClipText="True" MouseFilter="Stop"
+                                       StyleClasses="LabelHeading" FontColorOverride="{x:Static forensics:MicroFiberAnalyzerColors.Text}" />
+                                <BoxContainer Orientation="Horizontal" SeparationOverride="8" HorizontalExpand="True">
+                                    <Label Name="SelectedSampleLabel" ClipText="True" MouseFilter="Stop"
+                                           StyleClasses="LabelSubText"
+                                           FontColorOverride="{x:Static forensics:MicroFiberAnalyzerColors.MutedText}"
+                                           HorizontalExpand="True"
+                                           Text="{Loc 'micro-fiber-analyzer-interface-current-sample'}" />
+                                    <Label Name="AnalysisTimeLabel" Visible="False" ClipText="True" MouseFilter="Stop"
+                                           StyleClasses="LabelSubText"
+                                           FontColorOverride="{x:Static forensics:MicroFiberAnalyzerColors.MutedText}" />
+                                </BoxContainer>
+                            </BoxContainer>
+                        </PanelContainer>
+                        <Label Name="StatusLabel" />
+                        <Button Name="Analyze" Access="Public" Disabled="True" HorizontalExpand="True"
+                                Text="{Loc 'micro-fiber-analyzer-interface-analyze'}" />
+                        <ProgressBar Name="AnalysisProgress" Access="Public" Visible="False" MinValue="0" MaxValue="1"
+                                     MinHeight="20" HorizontalExpand="True" />
+                        <forensics:MicroFiberAnalyzerComparisonControl Name="ComparisonPanel" Access="Public" Visible="False" />
+                        <BoxContainer Name="ResultsDetails" Orientation="Vertical" SeparationOverride="8"
+                                      Visible="False" HorizontalExpand="True" VerticalExpand="True">
+                            <ScrollContainer Name="ResultsScroll" VerticalExpand="True" HorizontalExpand="True"
+                                             HScrollEnabled="False">
+                                <BoxContainer Orientation="Vertical" SeparationOverride="10"
+                                              VerticalAlignment="Top" HorizontalExpand="True">
+                                    <PanelContainer HorizontalExpand="True">
+                                        <PanelContainer.PanelOverride>
+                                            <gfx:StyleBoxFlat BackgroundColor="{x:Static forensics:MicroFiberAnalyzerColors.PanelBackground}"
+                                                              BorderColor="{x:Static forensics:MicroFiberAnalyzerColors.AccentBorder}"
+                                                              BorderThickness="0 0 0 1" />
+                                        </PanelContainer.PanelOverride>
+                                        <BoxContainer Orientation="Horizontal" SeparationOverride="8" Margin="0 0 0 6"
+                                                      HorizontalExpand="True">
+                                            <Label Name="TracesHeader" Text="{Loc 'micro-fiber-analyzer-interface-traces'}"
+                                                   StyleClasses="LabelKeyText"
+                                                   FontColorOverride="{x:Static forensics:MicroFiberAnalyzerColors.AccentText}"
+                                                   HorizontalExpand="True" />
+                                            <PanelContainer>
+                                                <PanelContainer.PanelOverride>
+                                                    <gfx:StyleBoxFlat BackgroundColor="{x:Static forensics:MicroFiberAnalyzerColors.CountBackground}" />
+                                                </PanelContainer.PanelOverride>
+                                                <Label Name="GloveSamplesCount" Text="0" StyleClasses="ConsoleText"
+                                                       FontColorOverride="{x:Static forensics:MicroFiberAnalyzerColors.CodeText}"
+                                                       Margin="8 2" />
+                                            </PanelContainer>
+                                        </BoxContainer>
+                                    </PanelContainer>
+                                    <RichTextLabel Name="NoTraces" HorizontalExpand="True" Visible="False"
+                                                   Text="{Loc 'micro-fiber-analyzer-interface-empty-category'}"
+                                                   Margin="0 0 0 4" />
+                                    <forensics:MicroFiberAnalyzerSampleList Name="TracesContainer" SeparationOverride="8" />
+                                    <PanelContainer HorizontalExpand="True">
+                                        <PanelContainer.PanelOverride>
+                                            <gfx:StyleBoxFlat BackgroundColor="{x:Static forensics:MicroFiberAnalyzerColors.PanelBackground}"
+                                                              BorderColor="{x:Static forensics:MicroFiberAnalyzerColors.AccentBorder}"
+                                                              BorderThickness="0 0 0 1" />
+                                        </PanelContainer.PanelOverride>
+                                        <BoxContainer Orientation="Horizontal" SeparationOverride="8" Margin="0 0 0 6"
+                                                      HorizontalExpand="True">
+                                            <Label Name="StorageMicroFibersHeader"
+                                                   Text="{Loc 'micro-fiber-analyzer-interface-storage-micro-fibers'}"
+                                                   StyleClasses="LabelKeyText"
+                                                   FontColorOverride="{x:Static forensics:MicroFiberAnalyzerColors.AccentText}"
+                                                   HorizontalExpand="True" />
+                                            <PanelContainer>
+                                                <PanelContainer.PanelOverride>
+                                                    <gfx:StyleBoxFlat BackgroundColor="{x:Static forensics:MicroFiberAnalyzerColors.CountBackground}" />
+                                                </PanelContainer.PanelOverride>
+                                                <Label Name="StorageMicroFiberSamplesCount" Text="0" StyleClasses="ConsoleText"
+                                                       FontColorOverride="{x:Static forensics:MicroFiberAnalyzerColors.CodeText}"
+                                                       Margin="8 2" />
+                                            </PanelContainer>
+                                        </BoxContainer>
+                                    </PanelContainer>
+                                    <forensics:MicroFiberAnalyzerSampleList Name="StorageMicroFibersContainer" SeparationOverride="8" />
+                                </BoxContainer>
+                            </ScrollContainer>
+                            <PanelContainer Name="DescriptionPanel" HorizontalExpand="True">
+                                <PanelContainer.PanelOverride>
+                                    <gfx:StyleBoxFlat BackgroundColor="{x:Static forensics:MicroFiberAnalyzerColors.PanelBackground}"
+                                                      BorderColor="{x:Static forensics:MicroFiberAnalyzerColors.Border}"
+                                                      BorderThickness="0 1 0 0" />
+                                </PanelContainer.PanelOverride>
+                                <BoxContainer Orientation="Vertical" SeparationOverride="4" Margin="0 8 0 0"
+                                              HorizontalExpand="True">
+                                    <Label Text="{Loc 'micro-fiber-analyzer-interface-description'}"
+                                           StyleClasses="LabelSubText"
+                                           FontColorOverride="{x:Static forensics:MicroFiberAnalyzerColors.MutedText}" />
+                                    <BoxContainer Orientation="Horizontal" SeparationOverride="6" HorizontalExpand="True">
+                                        <LineEdit Name="DescriptionEdit" Access="Public" Editable="False"
+                                                  HorizontalExpand="True"
+                                                  PlaceHolder="{Loc 'micro-fiber-analyzer-interface-description-placeholder'}" />
+                                        <Button Name="SaveDescription" Access="Public" Disabled="True" MinHeight="28"
+                                                Text="{Loc 'micro-fiber-analyzer-interface-save-description'}" />
+                                    </BoxContainer>
+                                </BoxContainer>
+                            </PanelContainer>
+                        </BoxContainer>
+                    </BoxContainer>
+                </PanelContainer>
+            </BoxContainer>
+        </BoxContainer>
+    </PanelContainer>
+</DefaultWindow>
