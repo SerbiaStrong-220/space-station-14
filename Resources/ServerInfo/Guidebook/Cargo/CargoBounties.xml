@@ -4,21 +4,6 @@
 
   <Box>
     <GuideEntityEmbed Entity="ComputerCargoBounty"/>
-    <GuideEntityEmbed Entity="PaperCargoBountyManifest"/>
-  </Box>
-
-  To start a bounty, open the bounty screen by interacting with the [color=cyan]Cargo Bounty Computer[/color]. The Cargo Bounty Computer maintains a list of all the current bounties and lets you either print out a label or skip it.
-
-  - Printing the label gives you a [color=cyan]Bounty Manifest[/color] listing the goods that need to be acquired. You can print out infinite Bounty Manifests, so ensure you are not repeating the same work as another Cargo Technician.
-
-  - Skipping a bounty replaces that bounty with a new one, as there can only be six active bounties at any time. Skipping has a 15-minute cooldown and voids that bounty, which may anger other Cargo Technicians working on it.
-
-  ## Fulfilling Bounties
-
-  <Box>
-    <GuideEntityEmbed Entity="PaperCargoBountyManifest"/>
-    <GuideEntityEmbed Entity="CrateGenericSteel"/>
-    <GuideEntityEmbed Entity="AppraisalTool"/>
   </Box>
   На каждой станции есть определённое количество доступных запросов. Их можно проверить на [color=#a4885c]консоли запросов[/color], которая показывает следующую информацию о них:
   - Какие предметы нужны для выполнения запроса
@@ -26,19 +11,13 @@
   - Сколько времени осталось до истечения срока запроса
 
   При условии, что вы сможете достать все предметы для этого, затратив минимум времени и средств, вы сможете завершить запрос и получить значительно большую сумму, чем если бы вы продавали предметы обычным способом.
-  With the [color=cyan]Bounty Manifest[/color], it is now up to you to collect the required goods, but most departments will give you what you need if you ask for it with a Bounty Manifest.
-
-  Once you have collected the goods, return to the cargo bay and put the goods inside an empty [color=cyan]Crate[/color]. After everything is in the crate, close it, and then apply the Bounty Manifest to it.
-
-  To verify the completion of a bounty, use the [color=cyan]Appraisal Tool[/color] on it. It should show a confirmation that the bounty has been completed.
-
-  ## Selling Bounties
 
   ## Выполнение запросов
+
   <Box>
     <GuideEntityEmbed Entity="PaperCargoBountyManifest"/>
     <GuideEntityEmbed Entity="CrateGenericSteel"/>
-    <GuideEntityEmbed Entity="CargoPalletSell"/>
+    <GuideEntityEmbed Entity="CargoPallet"/>
   </Box>
   Как только вы соберёте предметы, необходимые для запроса, завершить его будет проще простого.:
   - Поместите все предметы в ящик и [bold]закройте его![/bold].

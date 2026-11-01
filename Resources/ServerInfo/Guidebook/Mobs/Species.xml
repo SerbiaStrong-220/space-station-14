@@ -18,7 +18,9 @@
   <GuideEntityEmbed Entity="AppearanceVox" Caption="Вокс"/>
   </Box>
   <Box>
-    <GuideEntityEmbed Entity="AppearanceVulpkanin" Caption="Vulpkanin"/>
+    <GuideEntityEmbed Entity="AppearanceVulpkanin" Caption="Вульпканин"/>
   </Box>
+
+  Вульпканинов сейчас нельзя выбрать при создании персонажа.
 
 </Document>

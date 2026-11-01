@@ -3,7 +3,7 @@
   name: roles-antag-survivor-name
   antagonist: true
   objective: roles-antag-survivor-objective
-  # guides: [  ]
+  guides: [ Survivor ]
 
 - type: antag
   id: Wizard

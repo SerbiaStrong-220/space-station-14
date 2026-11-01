@@ -1,5 +1,30 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 - type: guideEntry
+  id: DarkReaper
+  name: guide-entry-dark-reaper
+  text: "/ServerInfo/SS220/Guidebook/Antagonist/DarkReaper.xml"
+
+- type: guideEntry
+  id: SpiderQueen
+  name: guide-entry-spider-queen
+  text: "/ServerInfo/SS220/Guidebook/Antagonist/SpiderQueen.xml"
+
+- type: guideEntry
+  id: MindSlave
+  name: guide-entry-mind-slave
+  text: "/ServerInfo/SS220/Guidebook/Antagonist/MindSlave.xml"
+
+- type: guideEntry
+  id: SubvertedSilicon
+  name: guide-entry-subverted-silicon
+  text: "/ServerInfo/SS220/Guidebook/Antagonist/SubvertedSilicon.xml"
+
+- type: guideEntry
+  id: Survivor
+  name: guide-entry-survivor
+  text: "/ServerInfo/SS220/Guidebook/Antagonist/Survivor.xml"
+
+- type: guideEntry
   id: CultYogg
   name: guide-entry-cult-yogg
   text: "/ServerInfo/SS220/Guidebook/Antagonist/CultYogg.xml"
@@ -71,3 +96,30 @@
   id: PirateExpansion
   name: guide-entry-pirates
   text: "/ServerInfo/SS220/Guidebook/Antagonist/Pirates.xml"
+  children:
+  - PirateLoot
+  - PirateEquipment
+  - PirateRules
+
+- type: guideEntry
+  id: PirateLoot
+  name: guide-entry-pirate-loot
+  priority: 0
+  text: "/ServerInfo/SS220/Guidebook/Antagonist/PirateLoot.xml"
+
+- type: guideEntry
+  id: PirateEquipment
+  name: guide-entry-pirate-equipment
+  priority: 1
+  text: "/ServerInfo/SS220/Guidebook/Antagonist/PirateEquipment.xml"
+
+- type: guideEntry
+  id: PirateRules
+  name: guide-entry-pirate-rules
+  priority: 2
+  text: "/ServerInfo/SS220/Guidebook/Antagonist/PirateRules.xml"
+
+- type: guideEntry
+  id: SpaceDragon
+  name: guide-entry-space-dragon
+  text: "/ServerInfo/SS220/Guidebook/Antagonist/SpaceDragon.xml"
