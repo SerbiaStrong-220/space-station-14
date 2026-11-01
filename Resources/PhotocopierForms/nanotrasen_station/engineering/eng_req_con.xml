@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Form>
+  <FormId>eng_req_con</FormId>
+  <PrototypeId>PaperNtFormEng</PrototypeId>
+  <EntityName>форма НТ-ИНЖ-ЗПСР</EntityName>
+  <PhotocopierTitle>Запрос на проведение строительных работ</PhotocopierTitle>
+  <Content><![CDATA[[bold]Форма НТ-ИНЖ-ЗПСР[/bold]
+[head=2]Запрос на проведение строительных работ[/head]
+
+[italic]Дата: ДЕНЬ/МЕСЯЦ/ГОД [/italic]
+
+Заявитель: (ПОЛНОЕ ИМЯ)
+Должность: (ДОЛЖНОСТЬ)
+Прошу провести восстановление/строительство/модернизацию следующего(их) объекта(ов):
+Причина:
+
+[italic]Место для печатей[/italic]]]></Content>
+</Form>

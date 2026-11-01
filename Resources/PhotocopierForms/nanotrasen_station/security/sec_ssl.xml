@@ -2,9 +2,9 @@
 <Form>
   <FormId>sec_ssl</FormId>
   <PrototypeId>PaperNtFormSec</PrototypeId>
-  <EntityName>Форма НТ-СБ-ЗНЗ</EntityName>
+  <EntityName>Форма НТ-СБ-ЗКЗ</EntityName>
   <PhotocopierTitle>Заявление о нарушении космического закона</PhotocopierTitle>
-  <Content><![CDATA[[bold]Форма НТ-СБ-ЗНЗ[/bold]
+  <Content><![CDATA[[bold]Форма НТ-СБ-ЗКЗ[/bold]
 [head=2]Заявление о нарушении Космического Закона[/head]
 
 [italic]Дата: ДЕНЬ/МЕСЯЦ/ГОД[/italic]
