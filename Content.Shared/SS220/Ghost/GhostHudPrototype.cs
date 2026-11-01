@@ -5,7 +5,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared.SS220.Ghost;
 
 /// <summary>
-/// Components and their configuration controlled by one ghost HUD checkbox.
+/// Components and status icon visibility controlled by one ghost HUD checkbox.
 /// </summary>
 [Prototype]
 public sealed partial class GhostHudPrototype : IPrototype
@@ -16,6 +16,6 @@ public sealed partial class GhostHudPrototype : IPrototype
     [DataField(required: true)]
     public LocId Name { get; private set; }
 
-    [DataField(required: true)]
-    public ComponentRegistry Components { get; private set; } = new();
+    [DataField]
+    public ComponentRegistry Components { get; private set; } = [];
 }
