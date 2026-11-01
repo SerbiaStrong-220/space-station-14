@@ -1,0 +1,13 @@
+- type: constructionGraph
+  id: Commando
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: commando
+          steps:
+            - tag: CommandoModkit
+              doAfter: 10.0
+              name: construction-graph-commando
+    - node: commando
+      entity: WeaponRifleCommando

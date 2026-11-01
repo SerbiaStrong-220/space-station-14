@@ -3,6 +3,7 @@ using Content.Server.Weapons.Ranged.Components;
 using Content.Shared.Cargo;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.SS220.Weapons.Components;
 using Content.Shared.Standing;
@@ -185,8 +186,8 @@ public sealed partial class GunSystem : SharedGunSystem
                 var spreadEvent = new GunGetAmmoSpreadEvent(ammoSpreadComp.Spread);
                 RaiseLocalEvent(gun, ref spreadEvent);
 
-                var angles = LinearSpread(mapAngle - spreadEvent.Spread / 2,
-                    mapAngle + spreadEvent.Spread / 2, ammoSpreadComp.Count);
+                var angles = LinearSpread(mapDirection.ToAngle() - spreadEvent.Spread / 2,//SS220 weapon overhaul
+                    mapDirection.ToAngle() + spreadEvent.Spread / 2, ammoSpreadComp.Count);//SS220 weapon overhaul
 
                 ShootOrThrow(ammoEnt, angles[0].ToVec(), gunVelocity, gun, user);
                 shotProjectiles.Add(ammoEnt);

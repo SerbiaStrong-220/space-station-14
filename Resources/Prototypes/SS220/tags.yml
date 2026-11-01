@@ -5,6 +5,27 @@
   id: DeusAmbrosia
 
 - type: Tag
+  id: CommandoModkit
+
+- type: Tag
+  id: FullRifleCartridge
+
+- type: Tag
+  id: FullRifleMagazine
+
+- type: Tag
+  id: RocketAuto
+
+- type: Tag
+  id: RocketAutoMagazine
+
+- type: Tag
+  id: AntiMaterialMagazine
+
+- type: Tag
+  id: AntiMaterialMagazineToy
+
+- type: Tag
   id: MeatSlime
 
 - type: Tag
@@ -27,6 +48,9 @@
 
 - type: Tag
   id: LaserSMGPowerCell
+
+- type: Tag
+  id: WeaponPowerCell
 
 - type: Tag
   id: WeaponRechargerWhitelist
@@ -146,6 +170,12 @@
 # Svarshik's toy guns
 - type: Tag
   id: ToyGrenade
+
+- type: Tag
+  id: TaserDart
+
+- type: Tag
+  id: TaserCartridge
 
 - type: Tag
   id: MagazineLightRifleBoxToy

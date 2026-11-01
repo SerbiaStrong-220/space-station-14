@@ -30,3 +30,140 @@
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
+
+- type: entity
+  id: MagazineTaser
+  name: taser cartridge
+  parent: [ BaseItem, BaseSecurityContraband ]
+  components:
+  - type: Tag
+    tags:
+    - TaserCartridge
+  - type: BallisticAmmoProvider
+    proto: TaserDartCartridge
+    cycleable: false
+    mayTransfer: false
+    whitelist:
+      tags:
+        - TaserDart
+    capacity: 2
+    soundRack:
+      path: /Audio/Corvax/Weapons/Guns/Cock/shotgun_cock.ogg
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/taser.rsi
+    layers:
+    - state: mag
+  - type: Appearance
+
+- type: entity
+  parent: MagazinePistol
+  id: MagazinePistolAP
+  name: pistol magazine (9x20 auto AP)
+  description: 10-round single-stack magazine for pistols. Intended to hold armor-piercing ammunition.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePistolAP
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#00cd42"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#00cd42"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#00cd42"
+
+- type: entity
+  parent: MagazinePistol
+  id: MagazinePistolHP
+  name: pistol magazine (9x20 auto HPIB)
+  description: 10-round single-stack magazine for pistols. Intended to hold hollow-point ammunition.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePistolHP
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#cf0404"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#cf0404"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#cf0404"
+
+- type: entity
+  parent: BaseMagazinePistolSubMachineGun
+  id: MagazinePistolSubMachineGunAP
+  name: SMG magazine (9x20 auto AP)
+  description: 30-round double-stack magazine for submachine guns.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePistolAP
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#00cd42"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#00cd42"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#00cd42"
+
+- type: entity
+  parent: BaseMagazinePistolSubMachineGun
+  id: MagazinePistolSubMachineGunHP
+  name: SMG magazine (9x20 auto HPIB)
+  description: 30-round double-stack magazine for submachine guns.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePistolHP
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#cf0404"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#cf0404"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#cf0404"

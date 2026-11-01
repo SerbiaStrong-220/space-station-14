@@ -1,4 +1,8 @@
-ent-BaseMagazineBoxAntiMateriel = коробка патронов (.60 крупнокалиберные)
+#SS220-weapon-overhaul-begin
+ent-BaseMagazineBoxAntiMateriel = коробка патронов (15,24x140 крупнокалиберные)
     .desc = { ent-BaseItem.desc }
-ent-MagazineBoxAntiMateriel = коробка патронов (.60 крупнокалиберные)
-    .desc = Картонная коробка с бронебойными патронами калибра .60.
+ent-MagazineBoxAntiMaterielBig = коробка патронов (15,24x140 крупнокалиберные)
+    .desc = { ent-BaseMagazineBoxAntiMateriel.desc }
+ent-MagazineBoxAntiMateriel = коробка патронов (15,24x140 крупнокалиберные)
+    .desc = { ent-BaseMagazineBoxAntiMateriel.desc }
+#SS220-weapon-overhaul-end

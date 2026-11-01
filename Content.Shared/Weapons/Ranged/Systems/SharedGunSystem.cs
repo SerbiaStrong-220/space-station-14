@@ -74,7 +74,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     /// <summary>
     /// Default projectile speed
     /// </summary>
-    public const float ProjectileSpeed = 40f;
+    public const float ProjectileSpeed = 75f; //SS220 weapon overhaul
 
     /// <summary>
     ///     Name of the container slot used as the gun's chamber
@@ -85,10 +85,6 @@ public abstract partial class SharedGunSystem : EntitySystem
     ///     Name of the container slot used as the gun's magazine
     /// </summary>
     public const string MagazineSlot = "gun_magazine";
-
-    // ss220 add block heavy attack and shooting while user is down start
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    // ss220 add block heavy attack and shooting while user is down end
 
     private static readonly ProtoId<TagPrototype> TrashTag = "Trash";
 
@@ -270,14 +266,6 @@ public abstract partial class SharedGunSystem : EntitySystem
         {
             return false;
         }
-
-        // ss220 add block heavy attack and shooting while user is down start
-        if (_standing.IsDown(user))
-        {
-            PopupSystem.PopupPredictedCursor(Loc.GetString("lying-down-block-shooting"), user);
-            return false;
-        }
-        // ss220 add block heavy attack and shooting while user is down end
 
         //SS220 shield rework begin
         if (TryComp<AltBlockingUserComponent>(user, out var blockComp) && blockComp.Blocking)
@@ -564,6 +552,11 @@ public abstract partial class SharedGunSystem : EntitySystem
 
     protected void MuzzleFlash(EntityUid gun, AmmoComponent component, Angle worldAngle, EntityUid? user = null)
     {
+        //SS220 weapon overhaul begin
+        if (TryComp<GunComponent>(gun, out var gunComponent) && gunComponent.MuzzleFlashSupressed)
+            return;
+        //SS220 weapon overhaul end
+
         var attemptEv = new GunMuzzleFlashAttemptEvent();
         RaiseLocalEvent(gun, ref attemptEv);
         if (attemptEv.Cancelled)
