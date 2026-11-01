@@ -706,4 +706,7 @@
 - type: roleLoadout
   id: RoleSurvivalSpaceNinja
   groups:
-  - GroupEVATank
+  #SS220-NinjaTankReturn begin
+  - GroupPocketTankDouble
+  - SurvivalExtended
+  #SS220-NinjaTankReturn end

@@ -111,17 +111,17 @@ public sealed class MedibotSystem : EntitySystem
             return false;
         }
 
-        var total = _damageable.GetTotalDamage((target, damageable));
+        var damage = _damageable.GetPositiveDamage((target, damageable)); //ss220-FixMedibot
         //ss220 fix medibot start
         var isEmagged = HasComp<EmaggedComponent>(medibot);
-        if (total == 0 && !isEmagged)
+        if (damage.Empty && !isEmagged)
         {
             _popup.PopupClient(Loc.GetString("medibot-target-healthy"), medibot, medibot);
             return false;
         }
 
         if (!TryGetTreatment(medibot.Comp, mobState.CurrentState, out var treatment) ||
-            !treatment.IsValid(_damageable.GetAllDamage(target), isEmagged, _proto) &&
+            !treatment.IsValid(damage, isEmagged, _proto) &&
             !manual)
         {
             return false;
