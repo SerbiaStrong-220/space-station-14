@@ -28,6 +28,7 @@ using Content.Shared.Objectives.Systems;
 using Content.Shared.Roles.Components;
 using Content.Shared.Speech;
 using Content.Shared.SS220.MindSlave;
+using Content.Shared.SS220.Telepathy;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
@@ -59,6 +60,8 @@ public sealed partial class MindSlaveSystem : EntitySystem
     private static readonly ProtoId<NpcFactionPrototype> SyndicateFactionId = "Syndicate";
 
     private static readonly ProtoId<AlertPrototype> EnslavedAlert = "MindSlaved";
+
+    private static readonly ProtoId<TelepathyChannelPrototype> TelepathyChannelId = "TelepathyChannelMindSlave";
 
     private readonly SoundSpecifier GreetSoundNotification = new SoundPathSpecifier("/Audio/Ambience/Antag/traitor_start.ogg");
 
@@ -356,7 +359,7 @@ public sealed partial class MindSlaveSystem : EntitySystem
     private void MakeTelepathic(EntityUid master, EntityUid slave)
     {
         var telepathyChannel = _telepathy.GetJoinableChannel(master)
-            ?? _telepathy.TakeUniqueTelepathyChannel("mindslave-telepathy-channel-name", Color.DarkViolet);
+            ?? _telepathy.TakeUniqueTelepathyChannel(TelepathyChannelId);
 
         _telepathy.SetChannel(slave, telepathyChannel);
         _telepathy.SetChannel(master, telepathyChannel);

@@ -30,6 +30,7 @@ public sealed partial class TelepathySystem : EntitySystem
     /// </summary>
     private readonly SortedDictionary<ProtoId<TelepathyChannelPrototype>, ChannelParameters> _dynamicChannels = new();
     private readonly HashSet<ProtoId<TelepathyChannelPrototype>> _privateChannels = new();
+    private readonly Dictionary<ProtoId<TelepathyChannelPrototype>, ProtoId<TelepathyChannelPrototype>> _channelTemplates = new();
     private readonly Color _baseDynamicChannelColor = Color.Lime;
     private int _nextDynamicChannelId;
 
@@ -100,6 +101,26 @@ public sealed partial class TelepathySystem : EntitySystem
     }
 
     /// <summary>
+    /// Makes new channel with the parameters of <paramref name="template"/>, ghost hearing settings of the template apply to it.
+    /// </summary>
+    public ProtoId<TelepathyChannelPrototype> TakeUniqueTelepathyChannel(ProtoId<TelepathyChannelPrototype> template)
+    {
+        var parameters = _prototype.Index(template).ChannelParameters;
+        var channel = MakeNewDynamicChannel(parameters.Name, parameters.Color);
+        _channelTemplates.Add(channel, template);
+
+        return channel;
+    }
+
+    /// <summary>
+    /// Returns the prototype <paramref name="channel"/> was made from, or the channel itself if there is none.
+    /// </summary>
+    public ProtoId<TelepathyChannelPrototype> GetChannelTemplate(ProtoId<TelepathyChannelPrototype> channel)
+    {
+        return _channelTemplates.GetValueOrDefault(channel, channel);
+    }
+
+    /// <summary>
     /// Returns channel with <paramref name="protoId"/> to free channels pool.
     /// if <paramref name="delete"/> than checks and delete any other TelepathyComponent left with that id.
     /// </summary>
@@ -114,6 +135,7 @@ public sealed partial class TelepathySystem : EntitySystem
         Log.Debug($"Freed channel with id {protoId}");
         _dynamicChannels.Remove(protoId);
         _privateChannels.Remove(protoId);
+        _channelTemplates.Remove(protoId);
         var query = EntityQueryEnumerator<TelepathyComponent>();
         while (query.MoveNext(out var uid, out var telepathyComponent))
         {
@@ -205,6 +227,7 @@ public sealed partial class TelepathySystem : EntitySystem
 
         _dynamicChannels.Remove(channel);
         _privateChannels.Remove(channel);
+        _channelTemplates.Remove(channel);
 
         if (lastMember != null)
             RemoveTelepathy(lastMember.Value);

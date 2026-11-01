@@ -57,7 +57,7 @@ ent-MindSlaveObeyObjective = Подчиняться воле другого.
     .desc = Ваш разум теперь находится под контролем другого, следуйте его воле и сохраните его жизнь.
 
 #telepathy
-mindslave-telepathy-channel-name = подчинённый разум
+mindslave-telepathy-channel-name = Подчинённый разум
 
 #disfunction
 mindslave-disfunction-progress-popup = Вы чувствуете как ваш позвоночник вскипает!

@@ -15,3 +15,9 @@
   channelParameters:
     name: chat-telepathy-hive
     color: "#cc80ff"
+
+- type: telepathyChannel
+  id: TelepathyChannelMindSlave
+  channelParameters:
+    name: mindslave-telepathy-channel-name
+    color: "#9400D3"
