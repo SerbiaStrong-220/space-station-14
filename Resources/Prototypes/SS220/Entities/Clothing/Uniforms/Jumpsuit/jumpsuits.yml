@@ -424,6 +424,18 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/musician_bard.rsi
 
+  #  Мим
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitMimeHarlequin
+  name: gothic harlequin costume
+  description: The circus left, but the harlequin stayed behind. Even the carnival forgot about him.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/mime_harlequin.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/mime_harlequin.rsi
+
 
 # Medical
 
