@@ -20,9 +20,15 @@
     - neck
   - type: StaticPrice
     price: 12
+  #SS220 Recycler expansion begin
+  - type: PhysicalComposition
+    materialComposition:
+      Cloth: 100
+  #SS220 Recycler expansion end
   - type: Tag
     tags:
     - Bedsheet
+    - ClothMade #SS220 Recycler expansion
 
 - type: entity
   id: BedsheetBlack
