@@ -15,6 +15,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.PowerCell;
 using Content.Shared.Random.Helpers;
+using Content.Shared.SS220.DefibReviveAlive;
 using Content.Shared.SS220.DirectCompactDefibrillator;
 using Content.Shared.SS220.Experience.Skill.Components;
 using Content.Shared.SS220.LimitationRevive;
@@ -280,7 +281,8 @@ public abstract class SharedDefibrillatorSystem : EntitySystem
                 _mobThreshold.TryGetThresholdForState(target, MobState.Dead, out var threshold, targetThresholds) &&
                 _damageable.GetTotalDamage(target) < threshold)
             {
-                _mobState.ChangeMobState(target, MobState.Critical, targetMobState, user);
+                var reviveState = HasComp<DefibReviveAliveComponent>(target) ? MobState.Alive : MobState.Critical; //SS220-xeno-defib
+                _mobState.ChangeMobState(target, reviveState, targetMobState, user); //SS220-xeno-defib
                 failedRevive = false;
             }
 
