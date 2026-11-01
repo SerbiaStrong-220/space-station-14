@@ -1,0 +1,44 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: Handcuffs
+  id: WebCuffs
+  name: web cuffs
+  description: The handcuffs aren’t the strongest, and besides, they’re fluffy.
+  components:
+  - type: Item
+    size: Tiny
+    storedRotation: 0
+  - type: Handcuff
+    breakoutTime: 6
+    cuffedRSI: Objects/Misc/zipties.rsi
+    bodyIconState: body-overlay
+    breakOnRemove: true
+    brokenPrototype: WebCuffsBroken
+    startCuffSound:
+      path: /Audio/Items/Handcuffs/ziptie_start.ogg
+    endCuffSound:
+      path: /Audio/Items/Handcuffs/ziptie_end.ogg
+    startUncuffSound:
+      path: /Audio/Items/Handcuffs/rope_start.ogg
+    endUncuffSound:
+      path: /Audio/Items/Handcuffs/rope_breakout.ogg
+    startBreakoutSound:
+      path: /Audio/Items/Handcuffs/rope_takeoff.ogg
+  - type: Construction
+    graph: WebCuffsGraph
+    node: cuffsweb
+  - type: Sprite
+    sprite: SS220/Objects/Misc/webbcuffs.rsi
+    state: handcuff_web
+
+- type: entity
+  id: WebCuffsBroken
+  parent: BaseHandcuffsBroken
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/webbcuffs.rsi
+    state: handcuff_web
+  - type: TimedDespawn
+    lifetime: 0.1
+
