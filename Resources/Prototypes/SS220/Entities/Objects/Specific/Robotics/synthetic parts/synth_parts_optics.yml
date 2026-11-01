@@ -1,0 +1,63 @@
+- type: entity
+  id: SynthOpticsDefault
+  parent: SynthOpticsBase
+  name: synthetic camera module
+  description: High-res 120 FPS camera module. Standard issue of the 26-th century
+  components:
+  - type: DamabeableSiliconPart
+    minDamageToMalfunction: 20
+    maxDamageToRemainFunctional: 35
+  - type: Item
+    storedRotation: -90
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Robotics/Synthetic/parts.rsi
+    state: camera_default
+
+- type: entity
+  id: SynthOpticsWeldproof
+  parent: SynthOpticsDefault
+  name: synthetic weldproof camera module
+  description: A good old camera module equipped with auto-shading lens.
+  components:
+  - type: EyeProtection
+  - type: FlashImmunity
+  - type: Item
+    storedRotation: -90
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Robotics/Synthetic/parts.rsi
+    state: camera_welding
+
+- type: entity
+  id: SynthOpticsSec
+  parent: SynthOpticsDefault
+  name: synthetic NT IFF HUD camera module
+  description: Reinforced camera module with a set of NT IFF subsystems attached to it.
+  components:
+  - type: DamabeableSiliconPart
+    minDamageToMalfunction: 25
+    maxDamageToRemainFunctional: 45
+  - type: ShowJobIcons
+  - type: ShowMindShieldIcons
+  - type: ShowCriminalRecordIcons
+  - type: ShowContrabandDetails
+  - type: EyeProtection
+  - type: FlashImmunity
+  - type: Item
+    storedRotation: -90
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Robotics/Synthetic/parts.rsi
+    state: camera_sec
+
+- type: entity
+  id: SynthOpticsMed
+  parent: SynthOpticsDefault
+  name: synthetic camera module
+  description: High-res 120 FPS camera module. Standard issue of the 26-th century
+  components:
+  - type: ShowHealthBars
+  - type: ShowHealthIcons
+  - type: Item
+    storedRotation: -90
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Robotics/Synthetic/parts.rsi
+    state: camera_med

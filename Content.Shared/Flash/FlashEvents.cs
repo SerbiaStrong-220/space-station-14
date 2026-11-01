@@ -1,4 +1,5 @@
 using Content.Shared.Inventory;
+using Content.Shared.SS220.SiliconComponents;
 
 namespace Content.Shared.Flash;
 
@@ -7,9 +8,11 @@ namespace Content.Shared.Flash;
 /// Raised on the target hit by the flash and their inventory items.
 /// </summary>
 [ByRefEvent]
-public record struct FlashAttemptEvent(EntityUid Target, EntityUid? User, EntityUid? Used, bool Cancelled = false) : IInventoryRelayEvent
+public record struct FlashAttemptEvent(EntityUid Target, EntityUid? User, EntityUid? Used, bool Cancelled = false) : IInventoryRelayEvent, ISiliconPartRelayEvent //SS220 add synthetic
 {
     SlotFlags IInventoryRelayEvent.TargetSlots => SlotFlags.HEAD | SlotFlags.EYES | SlotFlags.MASK;
+
+    PartType ISiliconPartRelayEvent.Parts => PartType.ALL; //SS220 add synthetic
 }
 
 /// <summary>

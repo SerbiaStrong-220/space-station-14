@@ -23,5 +23,9 @@ public sealed partial class PowerCellSlotComponent : Component
     [DataField, AutoNetworkedField]
     public bool FitsInCharger = true;
 
+    //SS220 add disableable powercellslot examine begin
+    [DataField, AutoNetworkedField]
+    public bool ShowOnExamine = true;
+    //SS220 add disableable powercellslot examine end
 }
 

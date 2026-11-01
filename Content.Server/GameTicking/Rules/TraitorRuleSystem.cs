@@ -207,6 +207,13 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
             Log.Debug($"MakeTraitor {ToPrettyString(traitor)} - Uplink is implant");
             briefing += "\n" + Loc.GetString("traitor-role-uplink-implant-short");
         }
+        //SS220 add fallback uplink options begin
+        else if (uplinked == AddUplinkResult.Hidden)
+        {
+            Log.Debug($"MakeTraitor {ToPrettyString(traitor)} - Uplink is hidden");
+            briefing += "\n" + Loc.GetString("traitor-role-uplink-hidden");
+        }
+        //SS220 add fallback uplink options end
         else
         {
             Log.Error($"MakeTraitor failed on {ToPrettyString(traitor)} - No uplink could be added");
