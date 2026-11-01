@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from ParadiseSS13 at https://github.com/ParadiseSS13/Paradise/pull/14516. Edited by SabreML.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "hierophant"
+    },
+    {
+      "name": "barrier"
+    },
+    {
+      "name": "blood_boil"
+    },
+    {
+      "name": "empower"
+    },
+    {
+      "name": "teleport"
+    },
+    {
+      "name": "offering"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from ParadiseSS13 at https://github.com/ParadiseSS13/Paradise/pull/14516. Edited by SabreML.",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "blindness"
+        },
+        {
+            "name": "emp"
+        },
+        {
+            "name": "shadow"
+        },
+        {
+            "name": "teleport"
+        },
+        {
+            "name": "stun"
+        },
+        {
+            "name": "fire"
+        },
+        {
+            "name": "stealth"
+        },
+        {
+            "name": "silence"
+        },
+        {
+            "name": "cuff"
+        },
+        {
+            "name": "allteleport"
+        },
+        {
+            "name": "ghostaxe"
+        },
+        {
+            "name": "blood_barrage"
+        }
+    ]
+}

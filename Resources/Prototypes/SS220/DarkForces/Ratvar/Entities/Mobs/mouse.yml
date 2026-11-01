@@ -1,0 +1,89 @@
+﻿- type: entity
+  id: MobMouseRatvar
+  parent: SimpleMobBase
+  name: "Латунная мышь"
+  description: Squeak!
+  suffix: Ratvar
+  components:
+  - type: ZombieImmune
+  - type: Speech
+    speechSounds: Squeak
+    speechVerb: SmallMob
+  - type: Sprite
+    drawdepth: SmallMobs
+    sprite: SS220/DarkForces/Ratvar/Mobs/mouse.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: icon
+  - type: NpcFactionMember
+    factions:
+    - Ratvar
+  - type: Item
+    size: Tiny
+  - type: Clothing
+    quickEquip: false
+    sprite: SS220/DarkForces/Ratvar/Mobs/mouse.rsi
+    slots:
+    - HEAD
+  - type: HTN
+    rootTask:
+      task: MouseCompound
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 100
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: MobState
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      50: Critical
+      100: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 5
+    baseSprintSpeed: 5
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: icon
+      Critical:
+        Base: dead
+      Dead:
+        Base: dead
+  - type: ReplacementAccent
+    accent: mouse
+  - type: Tag
+    tags:
+    - Trash
+    - VimPilot
+    - Mouse
+  - type: Respirator
+    damage:
+      types:
+        Asphyxiation: 0.25
+    damageRecovery:
+      types:
+        Asphyxiation: -0.25
+  - type: Barotrauma
+    damage:
+      types:
+        Blunt: 0.1
+  - type: Vocal
+    sounds:
+      Male: Mouse
+      Female: Mouse
+      Unsexed: Mouse
+    wilhelmProbability: 0.001
+  - type: CombatMode
+    combatToggleAction: ActionCombatModeToggleOff
+  - type: Puller
+    needsHands: true
+  - type: NameIdentifier
+    group: GenericNumber

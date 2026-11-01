@@ -1,0 +1,30 @@
+﻿- type: entity
+  id: ClothingHandsRatvar
+  parent: ClothingHandsBase
+  name: "медные рукавицы"
+  description: "Тяжёлые медные руковицы"
+  suffix: Ratvar
+  components:
+  - type: Sprite
+    sprite: SS220/DarkForces/Ratvar/Clothing/gloves.rsi
+  - type: Clothing
+    sprite: SS220/DarkForces/Ratvar/Clothing/gloves.rsi
+  - type: Appearance
+  - type: DamageOnInteractProtection
+    damageProtection:
+      flatReductions:
+        Heat: 10
+  - type: Fiber
+    fiberMaterial: fibers-brass
+  - type: FingerprintMask
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.8
+        Piercing: 0.6
+        Heat: 0.9
+      # TODO: redo it whenever separate body part protection is implemented
+      # securePartTypes:
+      #   Arm: 0.6
+  - type: RatvarItem

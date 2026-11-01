@@ -1,0 +1,71 @@
+- type: entity
+  id: NarsiBalfire
+  components:
+  - type: Sprite
+    sprite: SS220/DarkForces/Cult/Effects/blood.rsi
+    noRot: true
+    drawdepth: Effects
+    layers:
+    - state: "balfire"
+  - type: Physics
+    canCollide: false
+  - type: PointLight
+    enabled: true
+    color: "#950004"
+    radius: 5
+    softness: 2
+    autoRot: true
+    castShadows: false
+  - type: TimedDespawn
+    lifetime: 5
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  id: NarsiBloodBoom
+  components:
+  - type: Sprite
+    sprite: SS220/DarkForces/Cult/Effects/blood_boom.rsi
+    noRot: true
+    drawdepth: Effects
+    layers:
+    - state: "blood_boom"
+  - type: Physics
+    canCollide: false
+  - type: PointLight
+    enabled: true
+    color: "#950004"
+    radius: 5
+    softness: 2
+    autoRot: true
+    castShadows: false
+  - type: TimedDespawn
+    lifetime: 7
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  id: NarsiPentagrama
+  components:
+  - type: Sprite
+    sprite: SS220/DarkForces/Cult/Effects/pentagrama.rsi
+    noRot: true
+    drawdepth: Effects
+    layers:
+    - state: "pentagrama"
+  - type: Physics
+    canCollide: false
+  - type: PointLight
+    enabled: true
+    color: "#950004"
+    radius: 5
+    softness: 2
+    autoRot: true
+    castShadows: false
+  - type: TimedDespawn
+    lifetime: 7
+  - type: Tag
+    tags:
+    - HideContextMenu

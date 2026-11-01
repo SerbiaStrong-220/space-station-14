@@ -1,0 +1,12 @@
+- type: Tag
+  id: Dog
+- type: Tag
+  id: LArm
+- type: Tag
+  id: RArm
+- type: Tag
+  id: LLeg
+- type: Tag
+  id: RLeg
+- type: Tag
+  id: Heart
