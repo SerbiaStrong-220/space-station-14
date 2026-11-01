@@ -1,9 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
-namespace Content.Shared.SS220.Experience;
+namespace Content.Shared.SS220.Experience.Components;
 
 /// <summary>
 /// This is used to mark entity which bypasses knowledge's checks

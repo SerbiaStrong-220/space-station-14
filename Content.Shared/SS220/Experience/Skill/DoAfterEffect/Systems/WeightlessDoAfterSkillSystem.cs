@@ -11,9 +11,6 @@ namespace Content.Shared.SS220.Experience.DoAfterEffect.Systems;
 
 public sealed class WeightlessDoAfterSkillSystem : BaseDoAfterSkillSystem<WeightlessDoAfterSkillComponent, DoAfterEvent>
 {
-    private readonly ProtoId<SkillTreePrototype> _affectedSkillTree = "ExtravehicularActivity";
-    private readonly FixedPoint4 _learningRewardPreSecond = 0.015f;
-
     public override void Initialize()
     {
         base.Initialize();
@@ -24,13 +21,6 @@ public sealed class WeightlessDoAfterSkillSystem : BaseDoAfterSkillSystem<Weight
     protected override bool SkillEffect(Entity<WeightlessDoAfterSkillComponent> entity, in DoAfterArgs args)
     {
         return entity.Comp.Weightless;
-    }
-
-    protected override void AfterDoAfterComplete(Entity<WeightlessDoAfterSkillComponent> entity, in BeforeDoAfterCompleteEvent args)
-    {
-        base.AfterDoAfterComplete(entity, args);
-
-        TryChangeStudyingProgress(entity, _affectedSkillTree, _learningRewardPreSecond * args.Args.Delay.TotalSeconds * args.Args.DelayModifier);
     }
 
     private void OnWeightlessChange(Entity<WeightlessDoAfterSkillComponent> entity, ref WeightlessnessChangedEvent args)

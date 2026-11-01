@@ -17,6 +17,7 @@ using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
 using Content.Shared.SS220.Experience;
+using Content.Shared.SS220.Experience.Systems;
 using Content.Shared.Station;
 using JetBrains.Annotations;
 using Robust.Shared.Configuration;
@@ -181,8 +182,8 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
             return;
 
         // SS220-experience-update-begin
-        var skillRoleAddComp = EnsureComp<RoleExperienceAddComponent>(entity);
-        skillRoleAddComp.DefinitionId = prototype.ExperienceDefinition;
+        var changeDefEv = new TryChangeExperienceDefinitionEvent(prototype.ExperienceDefinition, true);
+        RaiseLocalEvent(entity, ref changeDefEv);
         // SS220-experience-update-end
         // As a mark - DoJobSpecials should be later to give ability to change this with adding SkillRoleAddComponent
         // SS220-experience-update-end**2
