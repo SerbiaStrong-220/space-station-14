@@ -231,12 +231,14 @@ namespace Content.Client.LateJoin
                     {
                         var value = stationAvailable[prototype.ID];
 
+                        var priority = _gameTicker.PriorityJobs.TryGetValue(id, out var priorityJobs)
+                            && priorityJobs.Contains(prototype.ID); // SS220 Hop improve
                         var jobLabel = new Label
                         {
                             Margin = new Thickness(5f, 0, 0, 0)
                         };
 
-                        var jobButton = new JobButton(jobLabel, prototype.ID, prototype.LocalizedName, value);
+                        var jobButton = new JobButton(jobLabel, prototype.ID, prototype.LocalizedName, value, priority); // SS220 Hop improve
 
                         var jobSelector = new BoxContainer
                         {
@@ -312,10 +314,17 @@ namespace Content.Client.LateJoin
                             var updatedJobValue = jobsAvailable[existingJobEntry.Key];
                             foreach (var matchingJobButton in existingJobEntry.Value)
                             {
+                                // SS220 Hop improve begin
+                                var priority = _gameTicker.PriorityJobs.TryGetValue(stationEntries.Key, out var priorityJobs)
+                                    && priorityJobs.Contains(existingJobEntry.Key);
+                                matchingJobButton.SetPriority(priority);
+                                // SS220 Hop improve end
                                 if (matchingJobButton.Amount != updatedJobValue)
                                 {
                                     matchingJobButton.RefreshLabel(updatedJobValue);
-                                    matchingJobButton.Disabled |= matchingJobButton.Amount == 0;
+                                    matchingJobButton.Disabled = matchingJobButton.Amount == 0 ||
+                                        !_jobRequirements.IsAllowed(_prototypeManager.Index<JobPrototype>(matchingJobButton.JobId),
+                                            (HumanoidCharacterProfile?) _preferencesManager.Preferences?.SelectedCharacter, out _); // SS220 Hop improve: reopening a filled job must re-enable it without bypassing requirements.
                                 }
                             }
                         }
@@ -346,11 +355,14 @@ namespace Content.Client.LateJoin
         public int? Amount { get; private set; }
         private bool _initialised = false;
 
-        public JobButton(Label jobLabel, ProtoId<JobPrototype> jobId, string jobLocalisedName, int? amount)
+        public bool Priority { get; private set; } // SS220 Hop improve
+
+        public JobButton(Label jobLabel, ProtoId<JobPrototype> jobId, string jobLocalisedName, int? amount, bool priority) // SS220 Hop improve
         {
             JobLabel = jobLabel;
             JobId = jobId;
             JobLocalisedName = jobLocalisedName;
+            Priority = priority; // SS220 Hop improve
             RefreshLabel(amount);
             AddStyleClass(StyleClassButton);
             _initialised = true;
@@ -364,9 +376,23 @@ namespace Content.Client.LateJoin
             }
             Amount = amount;
 
+            var jobName = Priority ? $"★ {JobLocalisedName}" : JobLocalisedName; // SS220 Hop improve
             JobLabel.Text = Amount != null ?
-                Loc.GetString("late-join-gui-job-slot-capped", ("jobName", JobLocalisedName), ("amount", Amount)) :
-                Loc.GetString("late-join-gui-job-slot-uncapped", ("jobName", JobLocalisedName));
+                Loc.GetString("late-join-gui-job-slot-capped", ("jobName", jobName), ("amount", Amount)) :
+                Loc.GetString("late-join-gui-job-slot-uncapped", ("jobName", jobName)); // SS220 Hop improve
         }
+        // SS220 Hop improve begin
+        public void SetPriority(bool priority)
+        {
+            if (Priority == priority)
+                return;
+
+            Priority = priority;
+            // SS220 Hop improve: priority-only changes must redraw even if the slot count is unchanged.
+            _initialised = false;
+            RefreshLabel(Amount);
+            _initialised = true;
+        }
+        // SS220 Hop improve end
     }
 }
