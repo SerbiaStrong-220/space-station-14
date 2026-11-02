@@ -26,5 +26,9 @@
       "name": "equipped-SUITSTORAGE",
       "directions": 4
     }
+    {
+      "name": "equipped-SUITSTORAGE-mothroach",
+      "directions": 4
+    }
   ]
 }
