@@ -125,10 +125,6 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
 
             DoJobSpecials(job, jobEntity);
             _identity.QueueIdentityUpdate(jobEntity);
-            // SS220-station-ai-experience bgn
-            var jobExperienceEv = new RecalculateEntityExperience();
-            RaiseLocalEvent(jobEntity, ref jobExperienceEv);
-            // SS220-station-ai-experience end
             return jobEntity;
         }
 
