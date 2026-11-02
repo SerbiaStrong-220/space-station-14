@@ -1341,12 +1341,12 @@ namespace Content.Shared.Interaction
         }
         #endregion
 
-        public void DroppedInteraction(EntityUid user, EntityUid item)
+        public void DroppedInteraction(EntityUid user, EntityUid item, bool suppressDropSound = false) // SS220-drop-and-pickup-sound-suppression
         {
             if (IsDeleted(user) || IsDeleted(item))
                 return;
 
-            var dropMsg = new DroppedEvent(user);
+            var dropMsg = new DroppedEvent(user, suppressDropSound); // SS220-drop-and-pickup-sound-suppression
             RaiseLocalEvent(item, dropMsg, true);
 
             // If the dropper is rotated then use their targetrelativerotation as the drop rotation
