@@ -651,7 +651,8 @@
         type: StrippableBoundUserInterface
   - type: InventorySlots
   - type: Inventory
-    speciesId: hamster
+    #speciesId: hamster #SS220 mothroach displacement
+    speciesId: mothroach
     templateId: hamster
     displacements:
       head:
