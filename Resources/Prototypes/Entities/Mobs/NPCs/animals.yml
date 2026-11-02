@@ -651,7 +651,8 @@
         type: StrippableBoundUserInterface
   - type: InventorySlots
   - type: Inventory
-    speciesId: hamster
+    #speciesId: hamster #SS220 mothroach displacement
+    speciesId: mothroach
     templateId: hamster
     displacements:
       head:
@@ -664,22 +665,25 @@
           32:
             sprite: Mobs/Animals/mothroach/displacement.rsi
             state: mask
-      suitstorage:
-        sizeMaps:
-          32:
-            sprite: Mobs/Animals/mothroach/displacement.rsi
-            state: suitstorage
+#SS220 mothroach displacement begin
+#      suitstorage:
+#        sizeMaps:
+#          32:
+#            sprite: Mobs/Animals/mothroach/displacement.rsi
+#            state: suitstorage
+#SS220 mothroach displacement end
       eyes:
         sizeMaps:
           32:
             sprite: Mobs/Animals/mothroach/displacement.rsi
             state: eyes
-      neck:
-        sizeMaps:
-          32:
-            sprite: Mobs/Animals/mothroach/displacement.rsi
-            state: neck
-
+#SS220 mothroach displacement begin
+#      neck:
+#        sizeMaps:
+#          32:
+#            sprite: Mobs/Animals/mothroach/displacement.rsi
+#            state: neck
+#SS220 mothroach displacement end
 
 # Note that the mallard duck is actually a male drake mallard, with the brown duck being the female variant of the same species, however ss14 lacks sex specific textures
 # The white duck is more akin to a pekin or call duck.
