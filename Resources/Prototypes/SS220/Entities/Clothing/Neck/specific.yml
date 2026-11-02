@@ -74,6 +74,17 @@
     sprite: SS220/Clothing/Neck/Misc/silver_cross.rsi
 
 - type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckMimeHarlequin
+  name: gothic harlequin's collar
+  description: A serrated collar, a symbol of hope and stubbornness.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Misc/mime_harlequin.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Misc/mime_harlequin.rsi
+
+- type: entity
   parent: BaseBodyCamera
   id: ClothingNeckBadgeSecurity
   name: security badge
