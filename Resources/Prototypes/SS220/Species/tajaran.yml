@@ -7,7 +7,7 @@
   prototype: MobTajaran
   defaultSkinTone: "#222626"
   dollPrototype: AppearanceTajaran
-  skinColoration: Hues
+  skinColoration: TajaranFur
   maleFirstNames: NamesTajaranFirstMale
   femaleFirstNames: NamesTajaranFirstFemale
   maleLastNames: NamesTajaranSecondUnisex
