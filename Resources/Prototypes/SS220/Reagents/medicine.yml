@@ -17,8 +17,8 @@
         key: Stutter
         time: 10.0
         type: Remove
-      - !type:GenericStatusEffect
-        key: SeeingRainbows
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectSeeingRainbow
         time: 10.0
         type: Remove
 
@@ -96,17 +96,18 @@
         key: Stutter
         time: 5.0
         type: Remove
-      - !type:GenericStatusEffect
-        key: SeeingRainbows
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectSeeingRainbow
         time: 5.0
         type: Remove
-      - !type:GenericStatusEffect
+      - !type:ModifyStatusEffect
         conditions:
         - !type:ReagentCondition
           reagent: Haloperidol
         probability: 0.3
-        key: ForcedSleep
-        component: ForcedSleeping
+        effectProto: StatusEffectForcedSleeping
+        time: 2
+        type: Update
 
 - type: reagent
   id: Harai
@@ -127,9 +128,8 @@
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Arachnid ]
-      - !type:GenericStatusEffect
-        key: SeeingRainbows
-        component: SeeingRainbows
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectSeeingRainbow
         type: Add
         time: 8
         conditions:
