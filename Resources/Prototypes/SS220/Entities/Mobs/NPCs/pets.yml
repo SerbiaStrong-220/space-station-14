@@ -209,6 +209,10 @@
         Quantity: 60
   - type: CanEscapeInventory
     baseResistTime: 3
+  - type: MultiHandedItem
+  - type: Item
+    sprite: SS220/Mobs/Pets/bnuuy.rsi
+    size: Huge
   - type: MobPrice
     price: 60
   - type: NonSpreaderZombie
