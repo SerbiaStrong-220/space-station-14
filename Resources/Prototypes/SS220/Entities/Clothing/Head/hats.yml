@@ -503,29 +503,22 @@
   name: gothic harlequin's cap
   description: A tall cap, symbolizing success and recognition.
   components:
-  - type: Icon
-    sprite: SS220/Clothing/Head/Hats/mime_harlequin.rsi
-    state: "icon"
   - type: Sprite
-    state: "icon"
     sprite: SS220/Clothing/Head/Hats/mime_harlequin.rsi
   - type: Clothing
     clothingVisuals:
       head:
       - state: equipped-HELMET
         offset: "0, 0.22"
-    sprite: SS220/Clothing/Head/Hats/mime_harlequin.rsi
   - type: Item
-    size: Small
-    sprite: SS220/Clothing/Head/Hats/mime_harlequin.rsi
     storedRotation: 0
   - type: Storage
     grid:
     - 0,0,0,0
   - type: UserInterface
     interfaces:
-        enum.StorageUiKey.Key:
-          type: StorageBoundUserInterface
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
