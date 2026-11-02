@@ -152,7 +152,7 @@
     sprite: SS220/Objects/Tiles/tile_tg.rsi
     state: wood_parquet
   - type: Item
-    sprite: Objects/Tiles/tile_tg.rsi
+    sprite: Objects/Tiles/tile.rsi
     heldPrefix: wood
   - type: FloorTile
     outputs:
