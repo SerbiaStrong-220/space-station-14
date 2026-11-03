@@ -1,3 +1,4 @@
+using Content.Shared.SS220.Clothing.Events;
 using Content.Shared.StatusEffect;
 using Content.Shared.Inventory;
 using Content.Shared.Eye.Blinding.Components;
@@ -30,6 +31,13 @@ namespace Content.Shared.Eye.Blinding.Systems
 
         private void OnGetProtection(EntityUid uid, EyeProtectionComponent component, GetEyeProtectionEvent args)
         {
+            // SS220-glasses-on-forehead-begin
+            var effectAttempt = new GlassesEffectAttemptEvent();
+            RaiseLocalEvent(uid, ref effectAttempt);
+            if (effectAttempt.Cancelled)
+                return;
+            // SS220-glasses-on-forehead-end
+
             if (TryComp<MaskComponent>(uid, out var mask) && mask.IsToggled)
                 return;
 

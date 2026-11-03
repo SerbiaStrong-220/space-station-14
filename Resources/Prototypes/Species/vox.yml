@@ -3,6 +3,11 @@
   name: species-name-vox
   roundStart: true #SS220 Vox Update V1
   prototype: MobVox
+  # SS220 age-tweak bgn
+  youngAge: 31
+  oldAge: 60
+  maxAge: 70
+  # SS220 age-tweak end
   dollPrototype: AppearanceVox
   skinColoration: VoxFeathers
   defaultSkinTone: "#6c741d"

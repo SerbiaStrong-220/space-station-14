@@ -24,6 +24,10 @@
     - id: SnakeSpawnHorde
     - id: SpiderClownSpawnHorde
     - id: SpiderSpawnHorde
+    #SS220-vespia-spawn-horde begin
+    - id: VespiaSpawnHorde
+    - id: VespiaSpiderSpawnHorde
+    #SS220-vespia-spawn-horde end
     - id: VentClog
     - id: RandomMindShieldCombustion #SS220 CombustedMindShieldEvent #3500
 
