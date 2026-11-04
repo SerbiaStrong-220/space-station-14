@@ -3,7 +3,11 @@
   name: species-name-dwarf
   roundStart: true
   prototype: MobDwarf
-  maxAge: 250 #ss220-maxage-tweak
+  # SS220 age-tweak bgn
+  youngAge: 30
+  oldAge: 100
+  maxAge: 200
+  # SS220 age-tweak end
   dollPrototype: AppearanceDwarf
   skinColoration: HumanToned
   #SS220-new-species-naming begin
