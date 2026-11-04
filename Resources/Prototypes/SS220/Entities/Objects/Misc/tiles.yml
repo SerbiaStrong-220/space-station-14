@@ -8,8 +8,8 @@
     sprite: SS220/Objects/Tiles/steel.rsi
     state: steel-reinforced
   - type: Item
-    sprite: SS220/Objects/Tiles/steel.rsi
-    heldPrefix: steel-reinforced
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -26,8 +26,8 @@
     sprite: SS220/Objects/Tiles/white.rsi
     state: white-reinforced
   - type: Item
-    sprite: SS220/Objects/Tiles/white.rsi
-    heldPrefix: white-reinforced
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: white
   - type: FloorTile
     outputs:
       - Plating
@@ -44,8 +44,8 @@
     sprite: SS220/Objects/Tiles/dark.rsi
     state: dark-reinforced
   - type: Item
-    sprite: SS220/Objects/Tiles/dark.rsi
-    heldPrefix: dark-reinforced
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: dark
   - type: FloorTile
     outputs:
       - Plating
@@ -62,8 +62,8 @@
     sprite: SS220/Objects/Tiles/other.rsi
     state: pcircuit
   - type: Item
-    sprite: SS220/Objects/Tiles/other.rsi
-    heldPrefix: pcircuit
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: generic
   - type: FloorTile
     outputs:
       - Plating
@@ -80,8 +80,8 @@
     sprite: SS220/Objects/Tiles/other.rsi
     state: ycircuit
   - type: Item
-    sprite: SS220/Objects/Tiles/other.rsi
-    heldPrefix: ycircuit
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: generic
   - type: FloorTile
     outputs:
       - Plating
@@ -98,8 +98,8 @@
     sprite: SS220/Objects/Tiles/other.rsi
     state: ocircuit
   - type: Item
-    sprite: SS220/Objects/Tiles/other.rsi
-    heldPrefix: ocircuit
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: generic
   - type: FloorTile
     outputs:
       - Plating
@@ -116,7 +116,7 @@
     sprite: SS220/Objects/Tiles/other.rsi
     state: rcircuit
   - type: Item
-    sprite: SS220/Objects/Tiles/other.rsi
+    sprite: Objects/Tiles/tile.rsi
     heldPrefix: rcircuit
   - type: FloorTile
     outputs:
@@ -159,7 +159,7 @@
       - Plating
       - FloorWoodParquet
   - type: Stack
-    stackType: FloorTileWood
+    stackType: FloorTileItemWoodParquet
 
 - type: entity
   name: wood black floor
@@ -923,8 +923,8 @@
     sprite: SS220/Objects/Tiles/dark.rsi
     state: dark-california
   - type: Item
-    sprite: SS220/Objects/Tiles/dark.rsi
-    heldPrefix: dark-california
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: dark
   - type: FloorTile
     outputs:
       - Plating
@@ -941,8 +941,8 @@
     sprite: SS220/Objects/Tiles/dark.rsi
     state: dark-eight-bricks
   - type: Item
-    sprite: SS220/Objects/Tiles/dark.rsi
-    heldPrefix: dark-eight-bricks
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: dark
   - type: FloorTile
     outputs:
       - Plating
@@ -959,8 +959,8 @@
     sprite: SS220/Objects/Tiles/dark.rsi
     state: dark-mixed-bricks
   - type: Item
-    sprite: SS220/Objects/Tiles/dark.rsi
-    heldPrefix: dark-mixed-bricks
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: dark
   - type: FloorTile
     outputs:
       - Plating
@@ -977,8 +977,8 @@
     sprite: SS220/Objects/Tiles/dark.rsi
     state: dark-mixed-bricks-mini
   - type: Item
-    sprite: SS220/Objects/Tiles/dark.rsi
-    heldPrefix: dark-mixed-bricks-mini
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: dark
   - type: FloorTile
     outputs:
       - Plating
@@ -995,8 +995,8 @@
     sprite: SS220/Objects/Tiles/dark.rsi
     state: dark-mixed-pavement-horizontal
   - type: Item
-    sprite: SS220/Objects/Tiles/dark.rsi
-    heldPrefix: dark-mixed-pavement-horizontal
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: dark
   - type: FloorTile
     outputs:
       - Plating
@@ -1013,8 +1013,8 @@
     sprite: SS220/Objects/Tiles/dark.rsi
     state: dark-mixed-pavement-vertical
   - type: Item
-    sprite: SS220/Objects/Tiles/dark.rsi
-    heldPrefix: dark-mixed-pavement-vertical
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: dark
   - type: FloorTile
     outputs:
       - Plating
@@ -1031,8 +1031,8 @@
     sprite: SS220/Objects/Tiles/dark.rsi
     state: dark-shifted-eight-bricks
   - type: Item
-    sprite: SS220/Objects/Tiles/dark.rsi
-    heldPrefix: dark-shifted-eight-bricks
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: dark
   - type: FloorTile
     outputs:
       - Plating
@@ -1049,8 +1049,8 @@
     sprite: SS220/Objects/Tiles/dark.rsi
     state: dark-shifted-mini-horizontal
   - type: Item
-    sprite: SS220/Objects/Tiles/dark.rsi
-    heldPrefix: dark-shifted-mini-horizontal
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: dark
   - type: FloorTile
     outputs:
       - Plating
@@ -1068,8 +1068,8 @@
     sprite: SS220/Objects/Tiles/dark.rsi
     state: dark-shifted-mini-vertical
   - type: Item
-    sprite: SS220/Objects/Tiles/dark.rsi
-    heldPrefix: dark-shifted-mini-vertical
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: dark
   - type: FloorTile
     outputs:
       - Plating
@@ -1086,8 +1086,8 @@
     sprite: SS220/Objects/Tiles/freezer.rsi
     state: freezer-horizontal
   - type: Item
-    sprite: SS220/Objects/Tiles/freezer.rsi
-    heldPrefix: freezer-horizontal
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: showroom
   - type: FloorTile
     outputs:
       - Plating
@@ -1104,8 +1104,8 @@
     sprite: SS220/Objects/Tiles/freezer.rsi
     state: freezer-mini
   - type: Item
-    sprite: SS220/Objects/Tiles/freezer.rsi
-    heldPrefix: freezer-mini
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: showroom
   - type: FloorTile
     outputs:
       - Plating
@@ -1122,8 +1122,8 @@
     sprite: SS220/Objects/Tiles/freezer.rsi
     state: freezer-mini-horizontal
   - type: Item
-    sprite: SS220/Objects/Tiles/freezer.rsi
-    heldPrefix: freezer-mini-horizontal
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: showroom
   - type: FloorTile
     outputs:
       - Plating
@@ -1140,8 +1140,8 @@
     sprite: SS220/Objects/Tiles/freezer.rsi
     state: freezer-mini-vertical
   - type: Item
-    sprite: SS220/Objects/Tiles/freezer.rsi
-    heldPrefix: freezer-mini-vertical
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: showroom
   - type: FloorTile
     outputs:
       - Plating
@@ -1158,8 +1158,8 @@
     sprite: SS220/Objects/Tiles/freezer.rsi
     state: freezer-mono
   - type: Item
-    sprite: SS220/Objects/Tiles/freezer.rsi
-    heldPrefix: freezer-mono
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: showroom
   - type: FloorTile
     outputs:
       - Plating
@@ -1176,8 +1176,8 @@
     sprite: SS220/Objects/Tiles/freezer.rsi
     state: freezer-vertical
   - type: Item
-    sprite: SS220/Objects/Tiles/freezer.rsi
-    heldPrefix: freezer-vertical
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: showroom
   - type: FloorTile
     outputs:
       - Plating
@@ -1194,8 +1194,8 @@
     sprite: SS220/Objects/Tiles/grating.rsi
     state: grating-maint-drain-horizontal
   - type: Item
-    sprite: SS220/Objects/Tiles/grating.rsi
-    heldPrefix: grating-maint-drain-horizontal
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -1212,8 +1212,8 @@
     sprite: SS220/Objects/Tiles/grating.rsi
     state: grating-maint-drain-middle
   - type: Item
-    sprite: SS220/Objects/Tiles/grating.rsi
-    heldPrefix: grating-maint-drain-middle
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -1230,8 +1230,8 @@
     sprite: SS220/Objects/Tiles/grating.rsi
     state: grating-maint-drain-vertical
   - type: Item
-    sprite: SS220/Objects/Tiles/grating.rsi
-    heldPrefix: grating-maint-drain-vertical
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -1248,8 +1248,8 @@
     sprite: SS220/Objects/Tiles/grating.rsi
     state: grating-maint-horizontal
   - type: Item
-    sprite: SS220/Objects/Tiles/grating.rsi
-    heldPrefix: grating-maint-horizontal
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -1266,8 +1266,8 @@
     sprite: SS220/Objects/Tiles/grating.rsi
     state: grating-maint-mini
   - type: Item
-    sprite: SS220/Objects/Tiles/grating.rsi
-    heldPrefix: grating-maint-mini
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -1284,8 +1284,8 @@
     sprite: SS220/Objects/Tiles/grating.rsi
     state: grating-maint-mono
   - type: Item
-    sprite: SS220/Objects/Tiles/grating.rsi
-    heldPrefix: grating-maint-mono
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -1302,8 +1302,8 @@
     sprite: SS220/Objects/Tiles/grating.rsi
     state: grating-maint-vertical
   - type: Item
-    sprite: SS220/Objects/Tiles/grating.rsi
-    heldPrefix: grating-maint-vertical
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -1320,8 +1320,8 @@
     sprite: SS220/Objects/Tiles/mining.rsi
     state: mining-dark-grating-directed-horizontal
   - type: Item
-    sprite: SS220/Objects/Tiles/mining.rsi
-    heldPrefix: mining-dark-grating-directed-horizontal
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: miningdark
   - type: FloorTile
     outputs:
       - Plating
@@ -1338,8 +1338,8 @@
     sprite: SS220/Objects/Tiles/mining.rsi
     state: mining-dark-grating-directed-vertical
   - type: Item
-    sprite: SS220/Objects/Tiles/mining.rsi
-    heldPrefix: mining-dark-grating-directed-vertical
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: miningdark
   - type: FloorTile
     outputs:
       - Plating
@@ -1356,8 +1356,8 @@
     sprite: SS220/Objects/Tiles/mining.rsi
     state: mining-dark-grating-horizontal
   - type: Item
-    sprite: SS220/Objects/Tiles/mining.rsi
-    heldPrefix: mining-dark-grating-horizontal
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: miningdark
   - type: FloorTile
     outputs:
       - Plating
@@ -1374,8 +1374,8 @@
     sprite: SS220/Objects/Tiles/mining.rsi
     state: mining-dark-grating-middle
   - type: Item
-    sprite: SS220/Objects/Tiles/mining.rsi
-    heldPrefix: mining-dark-grating-middle
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: miningdark
   - type: FloorTile
     outputs:
       - Plating
@@ -1392,8 +1392,8 @@
     sprite: SS220/Objects/Tiles/mining.rsi
     state: mining-dark-grating-vertical
   - type: Item
-    sprite: SS220/Objects/Tiles/mining.rsi
-    heldPrefix: mining-dark-grating-vertical
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: miningdark
   - type: FloorTile
     outputs:
       - Plating
@@ -1410,8 +1410,8 @@
     sprite: SS220/Objects/Tiles/mining.rsi
     state: mining-dark-mono
   - type: Item
-    sprite: SS220/Objects/Tiles/mining.rsi
-    heldPrefix: mining-dark-mono
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: miningdark
   - type: FloorTile
     outputs:
       - Plating
@@ -1428,8 +1428,8 @@
     sprite: SS220/Objects/Tiles/mining.rsi
     state: mining-dark-reinforced
   - type: Item
-    sprite: SS220/Objects/Tiles/mining.rsi
-    heldPrefix: mining-dark-reinforced
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: miningdark
   - type: FloorTile
     outputs:
       - Plating
@@ -1446,8 +1446,8 @@
     sprite: SS220/Objects/Tiles/mining.rsi
     state: mining-grating-directed-horizontal
   - type: Item
-    sprite: SS220/Objects/Tiles/mining.rsi
-    heldPrefix: mining-grating-directed-horizontal
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: mining
   - type: FloorTile
     outputs:
       - Plating
@@ -1464,8 +1464,8 @@
     sprite: SS220/Objects/Tiles/mining.rsi
     state: mining-grating-directed-horizontal
   - type: Item
-    sprite: SS220/Objects/Tiles/mining.rsi
-    heldPrefix: mining-grating-directed-horizontal
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: mining
   - type: FloorTile
     outputs:
       - Plating
@@ -1482,8 +1482,8 @@
     sprite: SS220/Objects/Tiles/mining.rsi
     state: mining-grating-horizontal
   - type: Item
-    sprite: SS220/Objects/Tiles/mining.rsi
-    heldPrefix: mining-grating-horizontal
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: mining
   - type: FloorTile
     outputs:
       - Plating
@@ -1500,8 +1500,8 @@
     sprite: SS220/Objects/Tiles/mining.rsi
     state: mining-grating-middle
   - type: Item
-    sprite: SS220/Objects/Tiles/mining.rsi
-    heldPrefix: mining-grating-middle
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: mining
   - type: FloorTile
     outputs:
       - Plating
@@ -1518,8 +1518,8 @@
     sprite: SS220/Objects/Tiles/mining.rsi
     state: mining-grating-vertical
   - type: Item
-    sprite: SS220/Objects/Tiles/mining.rsi
-    heldPrefix: mining-grating-vertical
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: mining
   - type: FloorTile
     outputs:
       - Plating
@@ -1536,8 +1536,8 @@
     sprite: SS220/Objects/Tiles/mining.rsi
     state: mining-light-grating-directed-horizontal
   - type: Item
-    sprite: SS220/Objects/Tiles/mining.rsi
-    heldPrefix: mining-light-grating-directed-horizontal
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: mininglight
   - type: FloorTile
     outputs:
       - Plating
@@ -1554,8 +1554,8 @@
     sprite: SS220/Objects/Tiles/mining.rsi
     state: mining-light-grating-directed-vertical
   - type: Item
-    sprite: SS220/Objects/Tiles/mining.rsi
-    heldPrefix: mining-light-grating-directed-vertical
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: mininglight
   - type: FloorTile
     outputs:
       - Plating
@@ -1572,8 +1572,8 @@
     sprite: SS220/Objects/Tiles/mining.rsi
     state: mining-light-grating-horizontal
   - type: Item
-    sprite: SS220/Objects/Tiles/mining.rsi
-    heldPrefix: mining-light-grating-horizontal
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: mininglight
   - type: FloorTile
     outputs:
       - Plating
@@ -1590,8 +1590,8 @@
     sprite: SS220/Objects/Tiles/mining.rsi
     state: mining-light-grating-middle
   - type: Item
-    sprite: SS220/Objects/Tiles/mining.rsi
-    heldPrefix: mining-light-grating-middle
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: mininglight
   - type: FloorTile
     outputs:
       - Plating
@@ -1608,8 +1608,8 @@
     sprite: SS220/Objects/Tiles/mining.rsi
     state: mining-light-grating-vertical
   - type: Item
-    sprite: SS220/Objects/Tiles/mining.rsi
-    heldPrefix: mining-light-grating-vertical
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: mininglight
   - type: FloorTile
     outputs:
       - Plating
@@ -1626,8 +1626,8 @@
     sprite: SS220/Objects/Tiles/mining.rsi
     state: mining-light-mono
   - type: Item
-    sprite: SS220/Objects/Tiles/mining.rsi
-    heldPrefix: mining-light-mono
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: mininglight
   - type: FloorTile
     outputs:
       - Plating
@@ -1644,8 +1644,8 @@
     sprite: SS220/Objects/Tiles/mining.rsi
     state: mining-light-reinforced
   - type: Item
-    sprite: SS220/Objects/Tiles/mining.rsi
-    heldPrefix: mining-light-reinforced
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: mininglight
   - type: FloorTile
     outputs:
       - Plating
@@ -1662,8 +1662,8 @@
     sprite: SS220/Objects/Tiles/mining.rsi
     state: mining-mono
   - type: Item
-    sprite: SS220/Objects/Tiles/mining.rsi
-    heldPrefix: mining-mono
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: mining
   - type: FloorTile
     outputs:
       - Plating
@@ -1680,8 +1680,8 @@
     sprite: SS220/Objects/Tiles/mining.rsi
     state: mining-reinforced
   - type: Item
-    sprite: SS220/Objects/Tiles/mining.rsi
-    heldPrefix: mining-reinforced
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: mining
   - type: FloorTile
     outputs:
       - Plating
@@ -1698,8 +1698,8 @@
     sprite: SS220/Objects/Tiles/rock-vault.rsi
     state: rock-vault-herringbone
   - type: Item
-    sprite: SS220/Objects/Tiles/rock-vault.rsi
-    heldPrefix: rock-vault-herringbone
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -1716,8 +1716,8 @@
     sprite: SS220/Objects/Tiles/rock-vault.rsi
     state: rock-vault-horizontal
   - type: Item
-    sprite: SS220/Objects/Tiles/rock-vault.rsi
-    heldPrefix: rock-vault-horizontal
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -1734,8 +1734,8 @@
     sprite: SS220/Objects/Tiles/rock-vault.rsi
     state: rock-vault-mini
   - type: Item
-    sprite: SS220/Objects/Tiles/rock-vault.rsi
-    heldPrefix: rock-vault-mini
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -1752,8 +1752,8 @@
     sprite: SS220/Objects/Tiles/rock-vault.rsi
     state: rock-vault-mono
   - type: Item
-    sprite: SS220/Objects/Tiles/rock-vault.rsi
-    heldPrefix: rock-vault-mono
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -1770,8 +1770,8 @@
     sprite: SS220/Objects/Tiles/rock-vault.rsi
     state: rock-vault-pavement
   - type: Item
-    sprite: SS220/Objects/Tiles/rock-vault.rsi
-    heldPrefix: rock-vault-pavement
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -1788,8 +1788,8 @@
     sprite: SS220/Objects/Tiles/rock-vault.rsi
     state: rock-vault-vertical
   - type: Item
-    sprite: SS220/Objects/Tiles/rock-vault.rsi
-    heldPrefix: rock-vault-vertical
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -1806,8 +1806,8 @@
     sprite: SS220/Objects/Tiles/sanitary.rsi
     state: sanitary
   - type: Item
-    sprite: SS220/Objects/Tiles/sanitary.rsi
-    heldPrefix: sanitary
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: white
   - type: FloorTile
     outputs:
       - Plating
@@ -1824,8 +1824,8 @@
     sprite: SS220/Objects/Tiles/sanitary.rsi
     state: sanitary-dark
   - type: Item
-    sprite: SS220/Objects/Tiles/sanitary.rsi
-    heldPrefix: sanitary-dark
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: dark
   - type: FloorTile
     outputs:
       - Plating
@@ -1842,8 +1842,8 @@
     sprite: SS220/Objects/Tiles/sanitary.rsi
     state: sanitary-dark-horizontal
   - type: Item
-    sprite: SS220/Objects/Tiles/sanitary.rsi
-    heldPrefix: sanitary-dark-horizontal
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: dark
   - type: FloorTile
     outputs:
       - Plating
@@ -1860,8 +1860,8 @@
     sprite: SS220/Objects/Tiles/sanitary.rsi
     state: sanitary-dark-mini
   - type: Item
-    sprite: SS220/Objects/Tiles/sanitary.rsi
-    heldPrefix: sanitary-dark-mini
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: dark
   - type: FloorTile
     outputs:
       - Plating
@@ -1878,8 +1878,8 @@
     sprite: SS220/Objects/Tiles/sanitary.rsi
     state: sanitary-dark-mini-horizontal
   - type: Item
-    sprite: SS220/Objects/Tiles/sanitary.rsi
-    heldPrefix: sanitary-dark-mini-horizontal
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: dark
   - type: FloorTile
     outputs:
       - Plating
@@ -1896,8 +1896,8 @@
     sprite: SS220/Objects/Tiles/sanitary.rsi
     state: sanitary-dark-mini-vertical
   - type: Item
-    sprite: SS220/Objects/Tiles/sanitary.rsi
-    heldPrefix: sanitary-dark-mini-vertical
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: dark
   - type: FloorTile
     outputs:
       - Plating
@@ -1914,8 +1914,8 @@
     sprite: SS220/Objects/Tiles/sanitary.rsi
     state: sanitary-dark-mono
   - type: Item
-    sprite: SS220/Objects/Tiles/sanitary.rsi
-    heldPrefix: sanitary-dark-mono
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: dark
   - type: FloorTile
     outputs:
       - Plating
@@ -1932,8 +1932,8 @@
     sprite: SS220/Objects/Tiles/sanitary.rsi
     state: sanitary-dark-vertical
   - type: Item
-    sprite: SS220/Objects/Tiles/sanitary.rsi
-    heldPrefix: sanitary-dark-vertical
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: dark
   - type: FloorTile
     outputs:
       - Plating
@@ -1950,8 +1950,8 @@
     sprite: SS220/Objects/Tiles/sanitary.rsi
     state: sanitary-horizontal
   - type: Item
-    sprite: SS220/Objects/Tiles/sanitary.rsi
-    heldPrefix: sanitary-horizontal
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: white
   - type: FloorTile
     outputs:
       - Plating
@@ -1968,8 +1968,8 @@
     sprite: SS220/Objects/Tiles/sanitary.rsi
     state: sanitary-mini
   - type: Item
-    sprite: SS220/Objects/Tiles/sanitary.rsi
-    heldPrefix: sanitary-mini
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: white
   - type: FloorTile
     outputs:
       - Plating
@@ -1986,8 +1986,8 @@
     sprite: SS220/Objects/Tiles/sanitary.rsi
     state: sanitary-mini-horizontal
   - type: Item
-    sprite: SS220/Objects/Tiles/sanitary.rsi
-    heldPrefix: sanitary-mini-horizontal
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: white
   - type: FloorTile
     outputs:
       - Plating
@@ -2004,8 +2004,8 @@
     sprite: SS220/Objects/Tiles/sanitary.rsi
     state: sanitary-mini-vertical
   - type: Item
-    sprite: SS220/Objects/Tiles/sanitary.rsi
-    heldPrefix: sanitary-mini-vertical
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: white
   - type: FloorTile
     outputs:
       - Plating
@@ -2022,8 +2022,8 @@
     sprite: SS220/Objects/Tiles/sanitary.rsi
     state: sanitary-mono
   - type: Item
-    sprite: SS220/Objects/Tiles/sanitary.rsi
-    heldPrefix: sanitary-mono
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: white
   - type: FloorTile
     outputs:
       - Plating
@@ -2040,8 +2040,8 @@
     sprite: SS220/Objects/Tiles/sanitary.rsi
     state: sanitary-vertical
   - type: Item
-    sprite: SS220/Objects/Tiles/sanitary.rsi
-    heldPrefix: sanitary-vertical
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: white
   - type: FloorTile
     outputs:
       - Plating
@@ -2058,8 +2058,8 @@
     sprite: SS220/Objects/Tiles/showroom.rsi
     state: showroom-horizontal
   - type: Item
-    sprite: SS220/Objects/Tiles/showroom.rsi
-    heldPrefix: showroom-horizontal
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: showroom
   - type: FloorTile
     outputs:
       - Plating
@@ -2076,8 +2076,8 @@
     sprite: SS220/Objects/Tiles/showroom.rsi
     state: showroom-mini
   - type: Item
-    sprite: SS220/Objects/Tiles/showroom.rsi
-    heldPrefix: showroom-mini
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: showroom
   - type: FloorTile
     outputs:
       - Plating
@@ -2094,8 +2094,8 @@
     sprite: SS220/Objects/Tiles/showroom.rsi
     state: showroom-mini-horizontal
   - type: Item
-    sprite: SS220/Objects/Tiles/showroom.rsi
-    heldPrefix: showroom-mini-horizontal
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: showroom
   - type: FloorTile
     outputs:
       - Plating
@@ -2112,8 +2112,8 @@
     sprite: SS220/Objects/Tiles/showroom.rsi
     state: showroom-mini-vertical
   - type: Item
-    sprite: SS220/Objects/Tiles/showroom.rsi
-    heldPrefix: showroom-mini-vertical
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: showroom
   - type: FloorTile
     outputs:
       - Plating
@@ -2130,8 +2130,8 @@
     sprite: SS220/Objects/Tiles/showroom.rsi
     state: showroom-mono
   - type: Item
-    sprite: SS220/Objects/Tiles/showroom.rsi
-    heldPrefix: showroom-mono
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: showroom
   - type: FloorTile
     outputs:
       - Plating
@@ -2148,8 +2148,8 @@
     sprite: SS220/Objects/Tiles/showroom.rsi
     state: showroom-vertical
   - type: Item
-    sprite: SS220/Objects/Tiles/showroom.rsi
-    heldPrefix: showroom-vertical
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: showroom
   - type: FloorTile
     outputs:
       - Plating
@@ -2166,8 +2166,8 @@
     sprite: SS220/Objects/Tiles/steel.rsi
     state: steel-california
   - type: Item
-    sprite: SS220/Objects/Tiles/steel.rsi
-    heldPrefix: steel-california
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -2184,8 +2184,8 @@
     sprite: SS220/Objects/Tiles/steel.rsi
     state: steel-eight-bricks
   - type: Item
-    sprite: SS220/Objects/Tiles/steel.rsi
-    heldPrefix: steel-eight-bricks
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -2202,8 +2202,8 @@
     sprite: SS220/Objects/Tiles/steel-maint.rsi
     state: steel-maint-drain-horizontal
   - type: Item
-    sprite: SS220/Objects/Tiles/steel-maint.rsi
-    heldPrefix: steel-maint-drain-horizontal
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -2220,8 +2220,8 @@
     sprite: SS220/Objects/Tiles/steel-maint.rsi
     state: steel-maint-drain-middle
   - type: Item
-    sprite: SS220/Objects/Tiles/steel-maint.rsi
-    heldPrefix: steel-maint-drain-middle
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -2238,8 +2238,8 @@
     sprite: SS220/Objects/Tiles/steel-maint.rsi
     state: steel-maint-drain-vertical
   - type: Item
-    sprite: SS220/Objects/Tiles/steel-maint.rsi
-    heldPrefix: steel-maint-drain-vertical
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -2256,8 +2256,8 @@
     sprite: SS220/Objects/Tiles/steel-maint.rsi
     state: steel-maint-horizontal
   - type: Item
-    sprite: SS220/Objects/Tiles/steel-maint.rsi
-    heldPrefix: steel-maint-horizontal
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -2274,8 +2274,8 @@
     sprite: SS220/Objects/Tiles/steel-maint.rsi
     state: steel-maint-mini
   - type: Item
-    sprite: SS220/Objects/Tiles/steel-maint.rsi
-    heldPrefix: steel-maint-mini
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -2292,8 +2292,8 @@
     sprite: SS220/Objects/Tiles/steel-maint.rsi
     state: steel-maint-mono
   - type: Item
-    sprite: SS220/Objects/Tiles/steel-maint.rsi
-    heldPrefix: steel-maint-mono
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -2310,8 +2310,8 @@
     sprite: SS220/Objects/Tiles/steel-maint.rsi
     state: steel-maint-vertical
   - type: Item
-    sprite: SS220/Objects/Tiles/steel-maint.rsi
-    heldPrefix: steel-maint-vertical
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -2328,8 +2328,8 @@
     sprite: SS220/Objects/Tiles/steel.rsi
     state: steel-mixed-bricks
   - type: Item
-    sprite: SS220/Objects/Tiles/steel.rsi
-    heldPrefix: steel-mixed-bricks
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -2346,8 +2346,8 @@
     sprite: SS220/Objects/Tiles/steel.rsi
     state: steel-mixed-bricks-mini
   - type: Item
-    sprite: SS220/Objects/Tiles/steel.rsi
-    heldPrefix: steel-mixed-bricks-mini
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -2364,8 +2364,8 @@
     sprite: SS220/Objects/Tiles/steel.rsi
     state: steel-mixed-pavement-horizontal
   - type: Item
-    sprite: SS220/Objects/Tiles/steel.rsi
-    heldPrefix: steel-mixed-pavement-horizontal
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -2382,8 +2382,8 @@
     sprite: SS220/Objects/Tiles/steel.rsi
     state: steel-mixed-pavement-vertical
   - type: Item
-    sprite: SS220/Objects/Tiles/steel.rsi
-    heldPrefix: steel-mixed-pavement-vertical
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -2400,8 +2400,8 @@
     sprite: SS220/Objects/Tiles/steel.rsi
     state: steel-shifted-eight-bricks
   - type: Item
-    sprite: SS220/Objects/Tiles/steel.rsi
-    heldPrefix: steel-shifted-eight-bricks
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -2418,8 +2418,8 @@
     sprite: SS220/Objects/Tiles/steel.rsi
     state: steel-shifted-mini-horizontal
   - type: Item
-    sprite: SS220/Objects/Tiles/steel.rsi
-    heldPrefix: steel-shifted-mini-horizontal
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -2436,8 +2436,8 @@
     sprite: SS220/Objects/Tiles/steel.rsi
     state: steel-shifted-mini-vertical
   - type: Item
-    sprite: SS220/Objects/Tiles/steel.rsi
-    heldPrefix: steel-shifted-mini-vertical
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -2454,8 +2454,8 @@
     sprite: SS220/Objects/Tiles/tech-maint.rsi
     state: tech-maint-horizontal
   - type: Item
-    sprite: SS220/Objects/Tiles/tech-maint.rsi
-    heldPrefix: tech-maint-horizontal
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: dark
   - type: FloorTile
     outputs:
       - Plating
@@ -2472,8 +2472,8 @@
     sprite: SS220/Objects/Tiles/tech-maint.rsi
     state: tech-maint-mini
   - type: Item
-    sprite: SS220/Objects/Tiles/tech-maint.rsi
-    heldPrefix: tech-maint-mini
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: dark
   - type: FloorTile
     outputs:
       - Plating
@@ -2490,8 +2490,8 @@
     sprite: SS220/Objects/Tiles/tech-maint.rsi
     state: tech-maint-mono
   - type: Item
-    sprite: SS220/Objects/Tiles/tech-maint.rsi
-    heldPrefix: tech-maint-mono
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: dark
   - type: FloorTile
     outputs:
       - Plating
@@ -2508,8 +2508,8 @@
     sprite: SS220/Objects/Tiles/tech-maint.rsi
     state: tech-maint-vertical
   - type: Item
-    sprite: SS220/Objects/Tiles/tech-maint.rsi
-    heldPrefix: tech-maint-vertical
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: dark
   - type: FloorTile
     outputs:
       - Plating
@@ -2526,8 +2526,8 @@
     sprite: SS220/Objects/Tiles/tech-maint.rsi
     state: tech-maint-drain-middle
   - type: Item
-    sprite: SS220/Objects/Tiles/tech-maint.rsi
-    heldPrefix: tech-maint-drain-middle
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: dark
   - type: FloorTile
     outputs:
       - Plating
@@ -2544,8 +2544,8 @@
     sprite: SS220/Objects/Tiles/white.rsi
     state: white-california
   - type: Item
-    sprite: SS220/Objects/Tiles/white.rsi
-    heldPrefix: white-california
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: white
   - type: FloorTile
     outputs:
       - Plating
@@ -2562,8 +2562,8 @@
     sprite: SS220/Objects/Tiles/white.rsi
     state: white-eight-bricks
   - type: Item
-    sprite: SS220/Objects/Tiles/white.rsi
-    heldPrefix: white-eight-bricks
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: white
   - type: FloorTile
     outputs:
       - Plating
@@ -2580,8 +2580,8 @@
     sprite: SS220/Objects/Tiles/white.rsi
     state: white-mixed-bricks
   - type: Item
-    sprite: SS220/Objects/Tiles/white.rsi
-    heldPrefix: white-mixed-bricks
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: white
   - type: FloorTile
     outputs:
       - Plating
@@ -2598,8 +2598,8 @@
     sprite: SS220/Objects/Tiles/white.rsi
     state: white-mixed-bricks-mini
   - type: Item
-    sprite: SS220/Objects/Tiles/white.rsi
-    heldPrefix: white-mixed-bricks-mini
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: white
   - type: FloorTile
     outputs:
       - Plating
@@ -2616,8 +2616,8 @@
     sprite: SS220/Objects/Tiles/white.rsi
     state: white-mixed-pavement-horizontal
   - type: Item
-    sprite: SS220/Objects/Tiles/white.rsi
-    heldPrefix: white-mixed-pavement-horizontal
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: white
   - type: FloorTile
     outputs:
       - Plating
@@ -2634,8 +2634,8 @@
     sprite: SS220/Objects/Tiles/white.rsi
     state: white-mixed-pavement-vertical
   - type: Item
-    sprite: SS220/Objects/Tiles/white.rsi
-    heldPrefix: white-mixed-pavement-vertical
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: white
   - type: FloorTile
     outputs:
       - Plating
@@ -2652,8 +2652,8 @@
     sprite: SS220/Objects/Tiles/white.rsi
     state: white-shifted-eight-bricks
   - type: Item
-    sprite: SS220/Objects/Tiles/white.rsi
-    heldPrefix: white-shifted-eight-bricks
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: white
   - type: FloorTile
     outputs:
       - Plating
@@ -2670,8 +2670,8 @@
     sprite: SS220/Objects/Tiles/white.rsi
     state: white-shifted-mini-horizontal
   - type: Item
-    sprite: SS220/Objects/Tiles/white.rsi
-    heldPrefix: white-shifted-mini-horizontal
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: white
   - type: FloorTile
     outputs:
       - Plating
@@ -2688,8 +2688,8 @@
     sprite: SS220/Objects/Tiles/white.rsi
     state: white-shifted-mini-vertical
   - type: Item
-    sprite: SS220/Objects/Tiles/white.rsi
-    heldPrefix: white-shifted-mini-vertical
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: white
   - type: FloorTile
     outputs:
       - Plating
@@ -2707,8 +2707,8 @@
     sprite: SS220/Objects/Tiles/concrete.rsi
     state: concrete-pavement-horizontal
   - type: Item
-    sprite: SS220/Objects/Tiles/concrete.rsi
-    heldPrefix: concrete-pavement-horizontal
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: generic
   - type: FloorTile
     outputs:
       - Plating
@@ -2725,8 +2725,8 @@
     sprite: SS220/Objects/Tiles/concrete.rsi
     state: concrete-pavement-vertical
   - type: Item
-    sprite: SS220/Objects/Tiles/concrete.rsi
-    heldPrefix: concrete-pavement-vertical
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: generic
   - type: FloorTile
     outputs:
       - Plating
@@ -2743,8 +2743,8 @@
     sprite: SS220/Objects/Tiles/concrete.rsi
     state: grayconcrete-pavement-horizontal
   - type: Item
-    sprite: SS220/Objects/Tiles/concrete.rsi
-    heldPrefix: grayconcrete-pavement-horizontal
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: generic
   - type: FloorTile
     outputs:
       - Plating
@@ -2761,8 +2761,8 @@
     sprite: SS220/Objects/Tiles/concrete.rsi
     state: grayconcrete-pavement-vertical
   - type: Item
-    sprite: SS220/Objects/Tiles/concrete.rsi
-    heldPrefix: grayconcrete-pavement-vertical
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: generic
   - type: FloorTile
     outputs:
       - Plating
@@ -2779,8 +2779,8 @@
     sprite: SS220/Objects/Tiles/concrete.rsi
     state: oldconcrete-pavement-horizontal
   - type: Item
-    sprite: SS220/Objects/Tiles/concrete.rsi
-    heldPrefix: oldconcrete-pavement-horizontal
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: generic
   - type: FloorTile
     outputs:
       - Plating
@@ -2797,8 +2797,8 @@
     sprite: SS220/Objects/Tiles/concrete.rsi
     state: oldconcrete-pavement-vertical
   - type: Item
-    sprite: SS220/Objects/Tiles/concrete.rsi
-    heldPrefix: oldconcrete-pavement-vertical
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: generic
   - type: FloorTile
     outputs:
       - Plating
