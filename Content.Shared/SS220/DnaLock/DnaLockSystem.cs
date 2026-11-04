@@ -25,6 +25,7 @@ using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Wieldable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
+using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.DnaLock;
 
@@ -121,6 +122,7 @@ public sealed partial class DnaLockSystem : EntitySystem
             args.Verbs.Add(new Verb
             {
                 Text = Loc.GetString("dna-lock-verb-register"),
+                Icon = new SpriteSpecifier.Texture(new("/Textures/SS220/Interface/VerbIcons/dna_lock.svg.192dpi.png")),
                 Act = () => RegisterDna(ent, user, dna),
             });
         }
@@ -130,6 +132,9 @@ public sealed partial class DnaLockSystem : EntitySystem
             args.Verbs.Add(new Verb
             {
                 Text = Loc.GetString(ent.Comp.LockActive ? "dna-lock-verb-deactivate" : "dna-lock-verb-activate"),
+                Icon = ent.Comp.LockActive
+                    ? new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/unlock.svg.192dpi.png"))
+                    : new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/lock.svg.192dpi.png")),
                 Act = () => ToggleLock(ent),
             });
         }
