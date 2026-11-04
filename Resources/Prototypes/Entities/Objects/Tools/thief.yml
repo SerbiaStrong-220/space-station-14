@@ -67,7 +67,7 @@
   #SS220-dna-lock begin
   - type: DnaLockable
     bindToFirstHolder: true
-    showExamine: false
+    examineOwnerOnly: true
     unauthorizedUsePopup: null
     unauthorizedUseSound: null
   #SS220-dna-lock end

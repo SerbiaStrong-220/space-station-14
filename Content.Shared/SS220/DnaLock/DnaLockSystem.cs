@@ -142,7 +142,7 @@ public sealed partial class DnaLockSystem : EntitySystem
 
     private void OnExamined(Entity<DnaLockableComponent> ent, ref ExaminedEvent args)
     {
-        if (!ent.Comp.ShowExamine)
+        if (ent.Comp.ExamineOwnerOnly && !(TryGetDna(args.Examiner, out var dna) && ent.Comp.AllowedDna.Contains(dna)))
             return;
 
         if (IsEmagged(ent))
