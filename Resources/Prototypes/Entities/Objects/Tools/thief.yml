@@ -64,6 +64,13 @@
     interfaces:
       enum.ThiefBackpackUIKey.Key:
         type: ThiefBackpackBoundUserInterface
+  #SS220-dna-lock begin
+  - type: DnaLockable
+    bindToFirstHolder: true
+    showExamine: false
+    unauthorizedUsePopup: null
+    unauthorizedUseSound: null
+  #SS220-dna-lock end
 
 - type: entity
   id: SatchelThief

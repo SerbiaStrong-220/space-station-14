@@ -24,6 +24,7 @@ using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Wieldable;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Utility;
 
@@ -35,6 +36,7 @@ public sealed partial class DnaLockSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedJobSystem _job = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private EmagSystem _emag = default!;
     [Dependency] private ISharedAdminManager _admin = default!;
     [Dependency] private INetManager _net = default!;
@@ -44,6 +46,7 @@ public sealed partial class DnaLockSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<DnaLockableComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<DnaLockableComponent, EntGotInsertedIntoContainerMessage>(OnInsertedIntoContainer);
         SubscribeLocalEvent<DnaLockableComponent, ItemToggleActivateAttemptEvent>(OnActivateAttempt);
         SubscribeLocalEvent<DnaLockableComponent, UseInHandEvent>(OnUseInHand, after: [typeof(SharedWieldableSystem)], before: [typeof(BatteryWeaponFireModesSystem)]);
         SubscribeLocalEvent<DnaLockableComponent, AttemptShootEvent>(OnAttemptShoot);
@@ -72,6 +75,26 @@ public sealed partial class DnaLockSystem : EntitySystem
         }
 
         Dirty(ent);
+    }
+
+    private void OnInsertedIntoContainer(Entity<DnaLockableComponent> ent, ref EntGotInsertedIntoContainerMessage args)
+    {
+        if (!_net.IsServer || !ent.Comp.BindToFirstHolder)
+            return;
+
+        ent.Comp.BindToFirstHolder = false;
+
+        var holder = args.Container.Owner;
+        string? dna;
+        while (!TryGetDna(holder, out dna))
+        {
+            if (!_container.TryGetContainingContainer(holder, out var container))
+                return;
+
+            holder = container.Owner;
+        }
+
+        RegisterDna(ent, holder, dna);
     }
 
     private void OnActivateAttempt(Entity<DnaLockableComponent> ent, ref ItemToggleActivateAttemptEvent args)
@@ -171,7 +194,7 @@ public sealed partial class DnaLockSystem : EntitySystem
 
     private void OnActivatableUIOpenAttempt(Entity<DnaLockableComponent> ent, ref ActivatableUIOpenAttemptEvent args)
     {
-        if (IsBlocked(ent, DnaLockBlockedActions.UserInterface) && !CheckAccess(ent, args.User, silentFail: true))
+        if (IsBlocked(ent, DnaLockBlockedActions.UserInterface) && !CheckAccess(ent, args.User, args.Silent))
             args.Cancel();
     }
 
@@ -190,6 +213,9 @@ public sealed partial class DnaLockSystem : EntitySystem
 
     private void OnExamined(Entity<DnaLockableComponent> ent, ref ExaminedEvent args)
     {
+        if (!ent.Comp.ShowExamine)
+            return;
+
         if (ent.Comp.Emagged)
         {
             args.PushMarkup(Loc.GetString("dna-lock-examine-emagged"));

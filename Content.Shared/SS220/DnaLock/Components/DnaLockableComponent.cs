@@ -24,6 +24,12 @@ public sealed partial class DnaLockableComponent : Component
     public bool LockActive;
 
     [DataField]
+    public bool BindToFirstHolder;
+
+    [DataField]
+    public bool ShowExamine = true;
+
+    [DataField]
     public EntityEffect[] UnauthorizedUseEffects = Array.Empty<EntityEffect>();
 
     [DataField]
