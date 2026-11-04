@@ -3,6 +3,11 @@
   name: species-name-slime
   roundStart: true
   prototype: MobSlimePerson
+  # SS220 age-tweak bgn
+  youngAge: 30
+  oldAge: 90
+  maxAge: 130
+  # SS220 age-tweak end
   defaultSkinTone: "#b8b8b8"
   dollPrototype: AppearanceSlimePerson
   skinColoration: Hues
