@@ -24,6 +24,8 @@ public sealed partial class DnaLockClothingSystem : EntitySystem
     {
         base.Initialize();
 
+        UpdatesAfter.Add(typeof(ExplosionSystem));
+
         SubscribeLocalEvent<DnaLockClothingComponent, ClothingGotEquippedEvent>(OnEquipped);
         SubscribeLocalEvent<DnaLockClothingComponent, ClothingGotUnequippedEvent>(OnUnequipped);
     }
@@ -52,7 +54,7 @@ public sealed partial class DnaLockClothingSystem : EntitySystem
                 continue;
 
             active.NextBeepAt += clothing.BeepInterval;
-            var secondsLeft = (int) (active.ExplodeAt - curTime).TotalSeconds;
+            var secondsLeft = (int) Math.Ceiling((active.ExplodeAt - curTime).TotalSeconds);
             Warn(uid, active.WearerUid, clothing, clothing.TimerPopupOthers, clothing.TimerPopupWearer, secondsLeft);
         }
     }
@@ -69,7 +71,7 @@ public sealed partial class DnaLockClothingSystem : EntitySystem
         active.ExplodeAt = curTime + ent.Comp.TimeToExplode;
         active.NextBeepAt = curTime + ent.Comp.BeepInterval;
 
-        var secondsLeft = (int) ent.Comp.TimeToExplode.TotalSeconds;
+        var secondsLeft = (int) Math.Ceiling(ent.Comp.TimeToExplode.TotalSeconds);
         Warn(ent, args.Wearer, ent.Comp, ent.Comp.WarningPopupOthers, ent.Comp.WarningPopupWearer, secondsLeft);
     }
 

@@ -47,7 +47,6 @@ public sealed partial class DnaLockSystem : EntitySystem
         SubscribeLocalEvent<DnaLockableComponent, ItemToggleActivateAttemptEvent>(OnActivateAttempt);
         SubscribeLocalEvent<DnaLockableComponent, UseInHandEvent>(OnUseInHand, after: [typeof(SharedWieldableSystem)], before: [typeof(BatteryWeaponFireModesSystem)]);
         SubscribeLocalEvent<DnaLockableComponent, AttemptShootEvent>(OnAttemptShoot);
-        SubscribeLocalEvent<DnaLockableComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbs);
         SubscribeLocalEvent<DnaLockableComponent, GetVerbsEvent<Verb>>(OnGetVerbs, after: [typeof(BatteryWeaponFireModesSystem)]);
         SubscribeLocalEvent<DnaLockableComponent, StorageOpenAttemptEvent>(OnStorageOpenAttempt);
         SubscribeLocalEvent<DnaLockableComponent, StorageInteractAttemptEvent>(OnStorageInteractAttempt);
@@ -102,18 +101,26 @@ public sealed partial class DnaLockSystem : EntitySystem
             args.Cancelled = true;
     }
 
-    private void OnGetVerbs(Entity<DnaLockableComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    private void OnGetVerbs(Entity<DnaLockableComponent> ent, ref GetVerbsEvent<Verb> args)
     {
-        if (ent.Comp.Mode != DnaLockMode.InRound || ent.Comp.Emagged || !args.CanInteract)
-            return;
-
         var user = args.User;
-        if (!TryGetDna(user, out var dna))
+
+        if (IsBlocked(ent, DnaLockBlockedActions.BatteryFireModeChange)
+            && HasComp<BatteryWeaponFireModesComponent>(ent)
+            && !IsAuthorized(ent, user))
+            args.Verbs.RemoveWhere(v => v.Category == VerbCategory.SelectType);
+
+        // The server does not check range when executing a verb, so CanAccess is required here.
+        if (ent.Comp.Mode != DnaLockMode.InRound
+            || ent.Comp.Emagged
+            || !args.CanAccess
+            || !args.CanInteract
+            || !TryGetDna(user, out var dna))
             return;
 
         if (!ent.Comp.LockActive || ent.Comp.AllowedDna.Count == 0)
         {
-            args.Verbs.Add(new AlternativeVerb
+            args.Verbs.Add(new Verb
             {
                 Text = Loc.GetString("dna-lock-verb-register"),
                 Act = () => RegisterDna(ent, user, dna),
@@ -122,22 +129,12 @@ public sealed partial class DnaLockSystem : EntitySystem
 
         if (ent.Comp.AllowedDna.Contains(dna))
         {
-            args.Verbs.Add(new AlternativeVerb
+            args.Verbs.Add(new Verb
             {
                 Text = Loc.GetString(ent.Comp.LockActive ? "dna-lock-verb-deactivate" : "dna-lock-verb-activate"),
                 Act = () => ToggleLock(ent),
             });
         }
-    }
-
-    private void OnGetVerbs(Entity<DnaLockableComponent> ent, ref GetVerbsEvent<Verb> args)
-    {
-        if (!IsBlocked(ent, DnaLockBlockedActions.BatteryFireModeChange)
-            || !HasComp<BatteryWeaponFireModesComponent>(ent)
-            || IsAuthorized(ent, args.User))
-            return;
-
-        args.Verbs.RemoveWhere(v => v.Category == VerbCategory.SelectType);
     }
 
     private void OnStorageOpenAttempt(Entity<DnaLockableComponent> ent, ref StorageOpenAttemptEvent args)
