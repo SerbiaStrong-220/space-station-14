@@ -519,6 +519,10 @@
   - type: Experience
   - type: RoleExperienceAdd
     definitionId: StationAiRoleExperience
+  - type: ContainerContainer
+    containers:
+      experience-entity-container: !type:ContainerSlot
+      override-experience-entity-container: !type:ContainerSlot
   # SS220-station-ai-experience end
   - type: SiliconLawProvider
     laws: Crewsimov
