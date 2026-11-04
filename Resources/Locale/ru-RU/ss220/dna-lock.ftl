@@ -2,7 +2,7 @@ dna-lock-verb-register = Привязать к своей ДНК
 dna-lock-verb-activate = Включить ДНК-замок
 dna-lock-verb-deactivate = Выключить ДНК-замок
 dna-lock-registered-popup = ДНК-замок установлен. Только вы можете использовать этот предмет.
-dna-lock-unauthorized-popup = Доступ запрещён! Предмет привязан к ДНК другого пользователя.
+dna-lock-unauthorized-popup = Доступ запрещён! Предмет не привязан к вашей ДНК.
 
 dna-lock-examine-emagged = ДНК-замок взломан.
 dna-lock-examine-roundstart-locked = Доступ только для уполномоченного персонала.

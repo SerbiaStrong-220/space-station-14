@@ -98,7 +98,7 @@ public sealed partial class DnaLockClothingSystem : EntitySystem
     {
         _popup.PopupEntity(Loc.GetString(clothing.DetonationPopup), wearer, PopupType.LargeCaution);
 
-        _explosion.QueueExplosion(wearer,
+        _explosion.QueueExplosion(item,
             clothing.ExplosionType,
             clothing.ExplosionTotalIntensity,
             clothing.ExplosionSlope,

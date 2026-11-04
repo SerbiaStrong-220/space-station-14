@@ -18,7 +18,6 @@ using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.SS220.DnaLock.Components;
 using Content.Shared.Storage;
-using Content.Shared.Storage.Components;
 using Content.Shared.UserInterface;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
@@ -48,7 +47,6 @@ public sealed partial class DnaLockSystem : EntitySystem
         SubscribeLocalEvent<DnaLockableComponent, UseInHandEvent>(OnUseInHand, after: [typeof(SharedWieldableSystem)], before: [typeof(BatteryWeaponFireModesSystem)]);
         SubscribeLocalEvent<DnaLockableComponent, AttemptShootEvent>(OnAttemptShoot);
         SubscribeLocalEvent<DnaLockableComponent, GetVerbsEvent<Verb>>(OnGetVerbs, after: [typeof(BatteryWeaponFireModesSystem)]);
-        SubscribeLocalEvent<DnaLockableComponent, StorageOpenAttemptEvent>(OnStorageOpenAttempt);
         SubscribeLocalEvent<DnaLockableComponent, StorageInteractAttemptEvent>(OnStorageInteractAttempt);
         SubscribeLocalEvent<AttachedClothingComponent, BeingEquippedAttemptEvent>(OnAttachedEquipAttempt);
         SubscribeLocalEvent<DnaLockableComponent, ItemSlotEjectAttemptEvent>(OnItemSlotEjectAttempt);
@@ -137,12 +135,6 @@ public sealed partial class DnaLockSystem : EntitySystem
         }
     }
 
-    private void OnStorageOpenAttempt(Entity<DnaLockableComponent> ent, ref StorageOpenAttemptEvent args)
-    {
-        if (IsBlocked(ent, DnaLockBlockedActions.StorageOpen) && !CheckAccess(ent, args.User, args.Silent))
-            args.Cancelled = true;
-    }
-
     private void OnStorageInteractAttempt(Entity<DnaLockableComponent> ent, ref StorageInteractAttemptEvent args)
     {
         if (IsBlocked(ent, DnaLockBlockedActions.StorageOpen) && !CheckAccess(ent, args.User, args.Silent))
@@ -174,7 +166,7 @@ public sealed partial class DnaLockSystem : EntitySystem
 
     private void OnActivatableUIOpenAttempt(Entity<DnaLockableComponent> ent, ref ActivatableUIOpenAttemptEvent args)
     {
-        if (!CheckAccess(ent, args.User, silentFail: true))
+        if (IsBlocked(ent, DnaLockBlockedActions.UserInterface) && !CheckAccess(ent, args.User, silentFail: true))
             args.Cancel();
     }
 
@@ -183,10 +175,11 @@ public sealed partial class DnaLockSystem : EntitySystem
         if (args.Target != ent.Owner)
             return;
 
-        if (args.UiKey is StorageComponent.StorageUiKey.Key && !IsBlocked(ent, DnaLockBlockedActions.StorageOpen))
-            return;
+        var action = args.UiKey is StorageComponent.StorageUiKey.Key
+            ? DnaLockBlockedActions.StorageOpen
+            : DnaLockBlockedActions.UserInterface;
 
-        if (!CheckAccess(ent, args.Actor, silentFail: args.Message is not OpenBoundInterfaceMessage))
+        if (IsBlocked(ent, action) && !CheckAccess(ent, args.Actor, silentFail: args.Message is not OpenBoundInterfaceMessage))
             args.Cancel();
     }
 

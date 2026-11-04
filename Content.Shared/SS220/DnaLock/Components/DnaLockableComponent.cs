@@ -53,6 +53,7 @@ public enum DnaLockBlockedActions : byte
     ToggleableClothing = 1 << 1,
     BatteryFireModeChange = 1 << 2,
     BatteryEject = 1 << 3,
-    All = StorageOpen | ToggleableClothing | BatteryFireModeChange | BatteryEject
+    UserInterface = 1 << 4,
+    All = StorageOpen | ToggleableClothing | BatteryFireModeChange | BatteryEject | UserInterface
 }
 
