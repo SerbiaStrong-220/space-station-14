@@ -5,6 +5,7 @@ using Content.Server.PDA;
 using Content.Server.Station.Components;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
+using Content.Shared.Body;
 using Content.Shared.CCVar;
 using Content.Shared.Clothing;
 using Content.Shared.DetailExaminable;
@@ -15,6 +16,7 @@ using Content.Shared.PDA;
 using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
+using Content.Shared.SS220.Experience;
 using Content.Shared.Station;
 using JetBrains.Annotations;
 using Robust.Shared.Configuration;
@@ -36,7 +38,8 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
     [Dependency] private readonly ActorSystem _actors = default!;
     [Dependency] private readonly IdCardSystem _cardSystem = default!;
     [Dependency] private readonly IConfigurationManager _configurationManager = default!;
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoidSystem = default!;
+    [Dependency] private readonly HumanoidProfileSystem _humanoidProfile = default!;
+    [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
     [Dependency] private readonly IdentitySystem _identity = default!;
     [Dependency] private readonly MetaDataSystem _metaSystem = default!;
     [Dependency] private readonly PdaSystem _pdaSystem = default!;
@@ -56,12 +59,12 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
     /// This only spawns the character, and does none of the mind-related setup you'd need for it to be playable.
     /// </remarks>
 
-    public EntityUid? SpawnPlayerCharacterOnStation(EntityUid? station, ProtoId<JobPrototype>? job, HumanoidCharacterProfile? profile, StationSpawningComponent? stationSpawning = null, bool lateJoin = false)
+    public EntityUid? SpawnPlayerCharacterOnStation(EntityUid? station, ProtoId<JobPrototype>? job, HumanoidCharacterProfile? profile, bool lateJoin, StationSpawningComponent? stationSpawning = null) // SS220-edit
     {
         if (station != null && !Resolve(station.Value, ref stationSpawning))
             throw new ArgumentException("Tried to use a non-station entity as a station!", nameof(station));
 
-        var ev = new PlayerSpawningEvent(job, profile, station, lateJoin);
+        var ev = new PlayerSpawningEvent(job, profile, station, lateJoin); // SS220-edit
 
         RaiseLocalEvent(ev);
         DebugTools.Assert(ev.SpawnResult is { Valid: true } or null);
@@ -125,7 +128,7 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
             return jobEntity;
         }
 
-        string speciesId = profile != null ? profile.Species : SharedHumanoidAppearanceSystem.DefaultSpecies;
+        string speciesId = profile != null ? profile.Species : HumanoidCharacterProfile.DefaultSpecies;
 
         if (!_prototypeManager.TryIndex<SpeciesPrototype>(speciesId, out var species))
             throw new ArgumentException($"Invalid species prototype was used: {speciesId}");
@@ -134,7 +137,8 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
 
         if (profile != null)
         {
-            _humanoidSystem.LoadProfile(entity.Value, profile);
+            _visualBody.ApplyProfileTo(entity.Value, profile);
+            _humanoidProfile.ApplyProfileTo(entity.Value, profile);
             _metaSystem.SetEntityName(entity.Value, profile.Name);
 
             if (profile.FlavorText != "" && _configurationManager.GetCVar(CCVars.FlavorText))
@@ -164,6 +168,10 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
 
         DoJobSpecials(job, entity.Value);
         _identity.QueueIdentityUpdate(entity.Value);
+        // SS220-add-experience-init-event-post-spawn
+        var recalculateEv = new RecalculateEntityExperience();
+        RaiseLocalEvent(entity.Value, ref recalculateEv);
+        // SS220-add-experience-init-event-post-spawn
         return entity.Value;
     }
 
@@ -171,6 +179,13 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
     {
         if (!_prototypeManager.Resolve(job, out JobPrototype? prototype))
             return;
+
+        // SS220-experience-update-begin
+        var skillRoleAddComp = EnsureComp<RoleExperienceAddComponent>(entity);
+        skillRoleAddComp.DefinitionId = prototype.ExperienceDefinition;
+        // SS220-experience-update-end
+        // As a mark - DoJobSpecials should be later to give ability to change this with adding SkillRoleAddComponent
+        // SS220-experience-update-end**2
 
         foreach (var jobSpecial in prototype.Special)
         {

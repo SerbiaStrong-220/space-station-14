@@ -105,7 +105,7 @@ public sealed partial class RecordList : ScrollContainer
             color = color.WithBlue(MathF.Min(color.B + ADDITIONAL_COLOR_CHANNEL_VALUE, 1));
 
             var group = new RecordListGroupBasic();
-            group.Setup(Loc.GetString("department-" + department.ID), color);
+            group.Setup(Loc.GetString(department.Name), color);
             OptionContainer.AddChild(group);
             group.Visible = false;
             RecordListGroups.Add(department.ID, group);

@@ -1,9 +1,8 @@
 using System.Linq;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Audio;
-using Content.Shared.Body.Components;
+using Content.Shared.Body;
 using Content.Shared.Database;
-using Content.Shared.Emag.Components;
 using Content.Shared.Emag.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Mobs.Components;
@@ -14,6 +13,8 @@ using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Timing;
+using Content.Shared.Emag.Components; //SS220-ReclaimerEmaggedTime
+using Content.Shared.SS220.Timing; //SS220-ReclaimerEmaggedTime
 
 namespace Content.Shared.Materials;
 
@@ -30,6 +31,7 @@ public abstract class SharedMaterialReclaimerSystem : EntitySystem
     [Dependency] protected readonly SharedContainerSystem Container = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly EmagSystem _emag = default!;
+    [Dependency] private ComponentTimedRemovalSystem _timedRemoval = default!; //SS220-ReclaimerEmaggedTime
 
     public const string ActiveReclaimerContainerId = "active-material-reclaimer-container";
 
@@ -42,6 +44,7 @@ public abstract class SharedMaterialReclaimerSystem : EntitySystem
         SubscribeLocalEvent<MaterialReclaimerComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<CollideMaterialReclaimerComponent, StartCollideEvent>(OnCollide);
         SubscribeLocalEvent<ActiveMaterialReclaimerComponent, ComponentStartup>(OnActiveStartup);
+        SubscribeLocalEvent<MaterialReclaimerComponent, ComponentTimedRemovalExpiredEvent>(OnEmagTimerExpired); //SS220-ReclaimerEmaggedTime
     }
 
     private void OnMapInit(EntityUid uid, MaterialReclaimerComponent component, MapInitEvent args)
@@ -57,6 +60,20 @@ public abstract class SharedMaterialReclaimerSystem : EntitySystem
     private void OnExamined(EntityUid uid, MaterialReclaimerComponent component, ExaminedEvent args)
     {
         args.PushMarkup(Loc.GetString("recycler-count-items", ("items", component.ItemsProcessed)));
+
+        //SS220-ReclaimerEmaggedTime begin
+        if (!TryComp<ComponentTimedRemovalComponent>(uid, out var timer))
+            return;
+
+        var remaining = timer.EndTime - Timing.CurTime;
+
+        if (remaining < TimeSpan.Zero)
+            remaining = TimeSpan.Zero;
+
+        args.PushMarkup(Loc.GetString("material-reclaimer-emag-time",
+            ("minutes", remaining.Minutes),
+            ("seconds", remaining.Seconds)));
+        //SS220-ReclaimerEmaggedTime end
     }
 
     private void OnEmagged(EntityUid uid, MaterialReclaimerComponent component, ref GotEmaggedEvent args)
@@ -68,7 +85,26 @@ public abstract class SharedMaterialReclaimerSystem : EntitySystem
             return;
 
         args.Handled = true;
+
+        //SS220-ReclaimerEmaggedTime begin
+        _timedRemoval.StartTimer(uid, component.EmagDuration);
+        //SS220-ReclaimerEmaggedTime end
     }
+
+    //SS220-ReclaimerEmaggedTime begin
+    private void OnEmagTimerExpired(Entity<MaterialReclaimerComponent> ent, ref ComponentTimedRemovalExpiredEvent args)
+    {
+        if (!TryComp<EmaggedComponent>(ent.Owner, out var emagged))
+            return;
+
+        emagged.EmagType &= ~EmagType.Interaction;
+
+        if (emagged.EmagType == EmagType.None)
+            RemComp<EmaggedComponent>(ent.Owner);
+        else
+            Dirty(ent.Owner, emagged);
+    }
+    //SS220-ReclaimerEmaggedTime end
 
     private void OnCollide(EntityUid uid, CollideMaterialReclaimerComponent component, ref StartCollideEvent args)
     {
@@ -99,7 +135,7 @@ public abstract class SharedMaterialReclaimerSystem : EntitySystem
             return false;
 
         if (_whitelistSystem.IsWhitelistFail(component.Whitelist, item) ||
-            _whitelistSystem.IsBlacklistPass(component.Blacklist, item))
+            _whitelistSystem.IsWhitelistPass(component.Blacklist, item))
             return false;
 
         if (Container.TryGetContainingContainer((item, null, null), out _) && !Container.TryRemoveFromContainer(item))

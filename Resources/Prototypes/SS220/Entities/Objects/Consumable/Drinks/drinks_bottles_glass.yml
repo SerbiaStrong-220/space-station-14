@@ -1,5 +1,5 @@
 - type: entity
-  parent: DrinkBottleGlassBaseFull
+  parent: [DrinkBottleGlassBaseFull, DrinkVisualsAllFilled]
   id: DrinkVodkaKazakiBottleFull
   name: '"Kazaki" vodka bottle'
   description: An incredibly cloudy bottle of an unknown brand. How long has it been lying here?

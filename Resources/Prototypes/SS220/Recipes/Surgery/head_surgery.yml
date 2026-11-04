@@ -1,0 +1,255 @@
+- type: surgeryGraph
+  id: HeadSurgery
+  name: surgery-head-complex-name
+  description: surgery-head-complex-description
+  targetPart: Head
+  requirements:
+  - !type:EmptyInventorySlotRequirement
+    subject: target
+    description: surgery-head-complex-inventory-requirement-description
+    failureMessage: surgery-head-complex-inventory-requirement-failure
+    slotNames:
+    - head
+  - !type:WhitelistRequirement
+    subject: strap
+    description: surgery-strap-bed-requirement-description
+    failureMessage: surgery-strap-bed-requirement-failure
+    whitelist:
+      tags:
+      - Bed
+      components:
+      - StasisBed
+      requireAll: false
+  start: surgery-head-start
+  end: seal-wound
+  graph:
+  - node: surgery-head-start
+    nodeText:
+      examineDescription: surgery-head-examine-start
+    edges:
+    - to: head-skin-incision
+      id: head-skin-incision
+      baseEdge: incision
+      edgeTooltip: to-head-skin-incision
+
+  - node: head-skin-incision
+    baseNode: incision
+    edges:
+    - to: head-skin-clamp-bleeders
+      id: head-skin-clamp-bleeders
+      baseEdge: clamp-bleeders
+      edgeTooltip: to-head-skin-clamp-bleeders
+
+  - node: head-skin-clamp-bleeders
+    baseNode: clamp-bleeders
+    edges:
+    - to: retract-head-skin
+      id: retract-head-skin
+      baseEdge: retract-skin
+      edgeTooltip: to-retract-head-skin
+
+  - node: retract-head-skin
+    baseNode: retract-skin
+    edges:
+    # implant check
+    - to: retract-head-skin
+      id: retract-head-skin-implant-check
+      delay: 15
+      edgeTooltip: to-head-check-implant
+      actions:
+      - !type:CheckImplantAction
+      requirements:
+      - !type:WhitelistRequirement
+        subject: used
+        description: surgery-requirement-scanner-required
+        failureMessage: surgery-requirement-scanner-required
+        whitelist:
+          components:
+          - ImplantCheckInSurgery
+    # change tts
+    - to: retract-head-skin
+      id: retract-head-skin-change-tts
+      baseEdge: retract-skin
+      delay: 15
+      edgeTooltip: to-head-change-tts
+      actions:
+      - !type:ChangeTTSAction
+    # deeper
+    - to: saw-skull-bone
+      id: saw-skull-bone
+      baseEdge: saw-bone
+      edgeTooltip: to-saw-skull-bone
+    # return
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-head-incision
+
+  - node: saw-skull-bone-gelled-fixed
+    baseNode: saw-bone-gelled-fixed
+    edges:
+    - to: retract-head-skin
+      id: bone-gel
+      baseEdge: bone-gel
+      edgeTooltip: to-retract-head-skin-after-gel
+
+  - node: saw-skull-bone-gelled
+    baseNode: saw-bone-gelled
+    edges:
+    - to: saw-skull-bone-gelled-fixed
+      id: set-bones
+      baseEdge: set-bones
+      edgeTooltip: to-saw-skull-bone-gelled-fixed
+
+  - node: saw-skull-bone
+    baseNode: saw-bone
+    edges:
+    # remove bullet fragments
+    - to: saw-skull-bone
+      id: saw-skull-bone-remove-fragments
+      delay: 4
+      edgeTooltip: remove-head-bullet-fragments
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+        state: hemostat
+      sound:
+        path: /Audio/SS220/Surgery/organ.ogg
+        params:
+          variation: 0.125
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-head-fragments
+        failureMessage: surgery-pathology-requirement-failure-head-fragments
+        curePathologies:
+        - HeadProjectileFragment
+    # deeper
+    - to: brain-exposed
+      id: brain-exposed
+      baseEdge: retract-skin
+      edgeTooltip: to-open-brain
+    # return
+    - to: saw-skull-bone-gelled
+      id: saw-skull-bone-gelled
+      baseEdge: bone-gel
+      edgeTooltip: to-saw-skull-bone-gelled
+
+  - node: brain-exposed
+    baseNode: retract-skin
+    edges:
+    # fix mind slave disfunction
+    - to: brain-exposed
+      id: brain-exposed-fix-mindslave-disfunction
+      delay: 6
+      edgeTooltip: to-fix-mindslave-disfunction
+      sound:
+        path: /Audio/SS220/Surgery/organ.ogg
+        params:
+          variation: 0.125
+      edgeIcon:
+        sprite: SS220/Interface/Actions/implants.rsi
+        state: mindslave_fixer
+      visibilityRequirements:
+      - !type:HaveKnowledgeRequirement
+        subject: performer
+        description: surgery-syndicate-agent-knowledge-requirement-description
+        failureMessage: surgery-syndicate-agent-knowledge-requirement-failure
+        knowledge: SyndicateAgentKnowledge
+      requirements:
+      # to give player popup about incorrect tool <- do I need it?
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: specific
+        description: surgery-requirement-tool-required-specific
+        failureMessage: surgery-requirement-tool-miss
+      - !type:WhitelistRequirement
+        subject: used
+        description: surgery-requirement-fixer-required
+        failureMessage: surgery-requirement-fixer-required
+        whitelist:
+          components:
+          - MindSlaveDisfunctionFixer
+      - !type:WhitelistRequirement
+        subject: target
+        description: surgery-requirement-slave-target
+        failureMessage: surgery-requirement-slave-target
+        whitelist:
+          components:
+          - MindSlave
+      actions:
+      - !type:FixMindSlaveDisfunctionAction
+    # remove brain damage
+    - to: brain-exposed
+      id: brain-exposed-heal-brain-damage
+      baseEdge: retract-skin
+      edgeTooltip: to-brain-exposed-heal-brain-damage
+      actions:
+      - !type:ApplyDamageAction
+        damage:
+          types:
+            Cerebral: -5
+        skillTree: Anatomy
+        damageBonuses:
+          AnatomyInitial: 0.7
+          AnatomyBase: 1
+          AnatomyTrained: 1.2
+          AnatomyProfessional: 1.5
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: retractor
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-retractor
+        failureMessage: surgery-requirement-tool-miss
+      - !type:TotalDamageRequirement
+        subject: target
+        damageType: Cerebral
+        damage: 0
+        description: surgery-requirement-total-damage-requirement-brain-damage-heal-description
+        failureMessage: surgery-requirement-total-damage-requirement-brain-damage-no-damage
+    # fix brain-related pathologies
+    - to: brain-exposed
+      id: brain-exposed-remove-brain-pathology
+      delay: 10
+      edgeTooltip: remove-brain-pathology
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+        state: retractor
+      sound:
+        path: /Audio/SS220/Surgery/organ.ogg
+        params:
+          variation: 0.125
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: retractor
+        description: surgery-requirement-tool-required-retractor
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-remove-brain-pathology
+        failureMessage: surgery-pathology-requirement-failure-remove-brain-pathology
+        curePathologies:
+        - Slowness
+        - PainNumbness
+        - PoorVision
+        - Muted
+        - Narcolepsy
+        - Blindness
+        - Paracusia
+        - LightweightDrunk
+        - FrontalLisp
+        - Nervousness
+    # return
+    - to: saw-skull-bone
+      id: saw-skull-bone
+      baseEdge: seal-wound
+      edgeTooltip: to-close-brain-exposure
+
+  - node: seal-wound
+    baseNode: seal-wound

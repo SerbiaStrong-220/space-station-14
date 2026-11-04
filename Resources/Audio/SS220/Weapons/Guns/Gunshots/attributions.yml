@@ -7,3 +7,8 @@
   license: "CC0-1.0"
   copyright: "Is taken from https://freesound.org/people/kennysvoice/sounds/351778/"
   source: "https://freesound.org/people/kennysvoice/sounds/351778/"
+
+- files: ["mk_shot.ogg"]
+  license: "CC0-1.0"
+  copyright: "Taken from morganpurkis on Freesound.org"
+  source: "https://freesound.org/people/morganpurkis/sounds/392229/"

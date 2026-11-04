@@ -1,0 +1,13 @@
+light_mode unshaded;
+
+// This pass samples the original finished lightmap, before night vision is applied.
+uniform highp float DarknessBrightness;
+
+void fragment()
+{
+    highp vec3 light = zTexture(UV).rgb;
+    // Peak channel treats red, green and blue lamps equally and removes colored illumination.
+    highp float illumination = max(light.r, max(light.g, light.b));
+    illumination = clamp(max(illumination, DarknessBrightness), 0.0, 1.0);
+    COLOR = vec4(vec3(illumination), 1.0);
+}

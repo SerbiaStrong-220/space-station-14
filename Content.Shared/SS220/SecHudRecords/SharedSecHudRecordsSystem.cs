@@ -7,10 +7,10 @@ using Robust.Shared.Player;
 
 namespace Content.Shared.SS220.SecHudRecords;
 
-public abstract class SharedSecHudRecordsSystem : EntitySystem
+public abstract partial class SharedSecHudRecordsSystem : EntitySystem
 {
-    [Dependency] private readonly InventorySystem _inv = default!;
-    [Dependency] private readonly SharedIdCardSystem _idCard = default!;
+    [Dependency] private InventorySystem _inv = default!;
+    [Dependency] private SharedIdCardSystem _idCard = default!;
 
     private const string EyesSlot = "eyes";
 

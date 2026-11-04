@@ -7,9 +7,9 @@ using Robust.Server.GameObjects;
 
 namespace Content.Server.SS220.Pipes.DisposalFilter;
 
-public sealed class DisposalFilterSystem : EntitySystem
+public sealed partial class DisposalFilterSystem : EntitySystem
 {
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {

@@ -25,7 +25,7 @@
       250: Critical
       350: Dead
   - type: Stamina
-    critThreshold: 200
+    baseCritThreshold: 200
   - type: DamageStateVisuals
     states:
       Alive:
@@ -45,8 +45,10 @@
         amount: 1
         prob: 0.3
   - type: Bloodstream
-    bloodMaxVolume: 300
-    bloodReagent: Cryoxadone
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Cryoxadone
+        Quantity: 300
   - type: Fixtures
     fixtures:
       fix1:

@@ -8,7 +8,7 @@
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     xmlns:phui="clr-namespace:Content.Client.SS220.Photocopier.UI"
 
-    Title="{Loc 'criminal-records-ui-window'}"
+    Title="{Loc 'criminal-records-console-window-title'}"
     Resizable="False"
     MinSize="850 600">
 

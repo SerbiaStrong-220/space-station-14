@@ -4,7 +4,6 @@
   id: Tox
   mapName: 'NSS Tox'
   mapPath: /Maps/SS220/tox.yml
-  maxPlayers: 90
   minPlayers: 0
   stations:
     Tox:
@@ -25,8 +24,9 @@
             BlueShield: [ 1, 1 ]
             HeadOfPersonnel: [ 1, 1 ]
             #Law
-            IAA: [ 2, 2 ]
-            Magistrate: [1, 1]
+            # IAA: [ 2, 2 ] #SS220 Replaced NTR
+            # Magistrate: [1, 1] #SS220 Replaced NTR
+            NanoTrasenRepresentative: [ 1, 1 ] #SS220-Map-Jobs NanoTrasen Representative
             Lawyer: [ 3, 3 ]
             #Security
             HeadOfSecurity: [ 1, 1 ]
@@ -76,7 +76,7 @@
             ServiceWorker: [ 2, 2 ]
             Zookeeper: [ 1, 1 ]
             SeniorService: [ 1, 1 ]
-            Boxer: [ 2, 2]
+            Boxer: [ 2, 2 ]
 
         - type: StationGoal
           goals:

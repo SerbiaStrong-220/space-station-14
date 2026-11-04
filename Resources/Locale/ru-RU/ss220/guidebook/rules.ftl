@@ -1,0 +1,11 @@
+guide-entry-rules-ss220-c0 = П0
+guide-entry-rules-ss220-c1 = П1
+guide-entry-rules-ss220-c2 = П2
+guide-entry-rules-ss220-c3 = П3
+guide-entry-rules-ss220-c4 = П4
+guide-entry-rules-ss220-c5 = П5
+guide-entry-rules-ss220-c6 = П6
+guide-entry-rules-ss220-c7 = П7
+guide-entry-rules-ss220-c8 = П8
+guide-entry-rules-ss220-c9 = П9
+guide-entry-rules-ss220-c10 = П10

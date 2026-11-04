@@ -15,3 +15,6 @@ ent-ClothingShoesBootsLaceupSeniorService = зелёные шнурованны�
     .suffix = За время в игре
 ent-ClothingShoesBootsWinterSecMed = зимние ботинки бригмедика
     .desc = Прочные утеплённые ботинки, созданные для медика, работающего в холодных коридорах бригa.
+ent-ClothingShoesBootsJRSalvage = рабочие ботинки утилизатора JR
+    .desc = Пожалуй, единственная обувь, в которой удобно перемещаться по космическому грунту.
+    .suffix = { ent-ClothingShoesBootsLaceupSeniorService.suffix }

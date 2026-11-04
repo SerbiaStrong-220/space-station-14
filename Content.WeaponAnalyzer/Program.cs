@@ -7,11 +7,12 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Power.Components;
 using Content.Shared.Projectiles;
-using Content.Shared.Weapons.Ranged;
+using Content.Shared.Weapons.Hitscan.Components;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
@@ -258,12 +259,13 @@ public static class Program
                 info.HitStaminaDamage = staminaDamageOnCollide.Damage;
             return info;
         }
-        if (_prototypeManager.TryIndex(ammoId, out HitscanPrototype? hitscan))
+        if (ammoProto?.TryGetComponent<HitscanBasicDamageComponent>(out var hitscanBasicDamage, _componentFactory) ?? false)
         {
+            // =(
             info.AmmoId = ammoId;
-            info.HitDamage = hitscan.Damage ?? info.HitDamage;
-            info.HitStaminaDamage = hitscan.StaminaDamage;
-            info.SpreadCount = hitscan.HitscanSpread?.Count ?? 1;
+            info.HitDamage = hitscanBasicDamage.Damage ?? info.HitDamage;
+            // info.HitStaminaDamage = hitscan.StaminaDamage;
+            // info.SpreadCount = hitscan.HitscanSpread?.Count ?? 1;
             return info;
         }
 
@@ -301,21 +303,12 @@ public static class Program
             info.Capacity = ballisticProvider.Capacity;
             return ammoId != null;
         }
-        if (proto.TryGetComponent<ProjectileBatteryAmmoProviderComponent>(out var projectileBatteryProvider, _componentFactory))
+        if (proto.TryGetComponent<BatteryAmmoProviderComponent>(out var projectileBatteryProvider, _componentFactory))
         {
             ammoId = projectileBatteryProvider.Prototype;
             if (proto.TryGetComponent<BatteryComponent>(out var battery, _componentFactory)
                 || (powerCellProto is not null && powerCellProto.TryGetComponent<BatteryComponent>(out battery, _componentFactory)))
                 info.Capacity = (int)(battery.MaxCharge / projectileBatteryProvider.FireCost);
-            else
-                info.Error = WeaponAnalyzeError.BatteryNotFound;
-            return ammoId != null;
-        }
-        if (proto.TryGetComponent<HitscanBatteryAmmoProviderComponent>(out var hitscanBatteryProvider, _componentFactory))
-        {
-            ammoId = hitscanBatteryProvider.Prototype;
-            if (proto.TryGetComponent<BatteryComponent>(out var battery, _componentFactory))
-                info.Capacity = (int)(battery.MaxCharge / hitscanBatteryProvider.FireCost);
             else
                 info.Error = WeaponAnalyzeError.BatteryNotFound;
             return ammoId != null;

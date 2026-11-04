@@ -14,6 +14,7 @@ using Content.Server.Discord;
 using Content.Server.Discord.DiscordLink;
 using Content.Server.Discord.WebhookMessages;
 using Content.Server.EUI;
+using Content.Server.FeedbackSystem;
 using Content.Server.GhostKick;
 using Content.Server.Info;
 using Content.Server.Mapping;
@@ -28,10 +29,10 @@ using Content.Server.ServerUpdates;
 using Content.Server.SS220.BackEndApi;
 using Content.Server.SS220.Discord;
 using Content.Server.Voting.Managers;
-using Content.Server.Worldgen.Tools;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Administration.Managers;
 using Content.Shared.Chat;
+using Content.Shared.FeedbackSystem;
 using Content.Shared.IoC;
 using Content.Shared.Kitchen;
 using Content.Shared.Players.PlayTimeTracking;
@@ -70,7 +71,6 @@ internal static class ServerContentIoC
         deps.Register<PlayTimeTrackingManager>();
         deps.Register<UserDbDataManager>();
         deps.Register<ServerInfoManager>();
-        deps.Register<PoissonDiskSampler>();
         deps.Register<DiscordWebhook>();
         deps.Register<VoteWebhooks>();
         deps.Register<ServerDbEntryManager>();
@@ -86,6 +86,8 @@ internal static class ServerContentIoC
         deps.Register<CVarControlManager>();
         deps.Register<DiscordLink>();
         deps.Register<DiscordChatLink>();
+        deps.Register<ServerFeedbackManager>();
+        deps.Register<ISharedFeedbackManager, ServerFeedbackManager>();
         deps.Register<SponsorsManager>(); // Corvax-Sponsors
         deps.Register<JoinQueueManager>(); // Corvax-Queue
         deps.Register<TTSManager>(); // Corvax-TTS

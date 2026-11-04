@@ -15,6 +15,10 @@ uplink-clothing-briefcase-with-double-bottom-desc = Чемодан с двойн
 
 uplink-pinpointer-syndie-name = Пинпоинтер Cиндиката
 uplink-pinpointer-syndie-desc = Пинпоинтер, способный отследить любой ценный предмет на станции, а так же любое существо по ДНК.
+
+uplink-cqc-manual-name = Старый мануал
+uplink-cqc-manual-desc = Небольшое черное руководство. Внутри есть нарисованные инструкции по тактическому рукопашному бою.
+
 # Disruption
 
 uplink-syndicate-pen-signaller = Ручка-передатчик
@@ -27,6 +31,9 @@ uplink-shutdown-nearest-apc = Подавитель ЛКП
 uplink-shutdown-nearest-apc-desc = Внимание! Активируется сразу после покупки! Активирует локализованный электромагнитный импульс, отключающий ближайшие ЛКП в радиусе 6 метров.
 
 # Implants
+uplink-night-vision-implanter-name = Имплант ночного видения
+uplink-night-vision-implanter-desc = Позволяет включать ночное зрение, не занимая слот очков. Яркий свет засвечивает изображение.
+
 uplink-mindslave-implanter-name = Имплантер Подчинитель разума
 uplink-mindslave-implanter-desc = Получите полный контроль над другим разумным существом! Внимание: продолжительное использование имплантера подчинения может быть вредно для здоровья подчинённого.
 
@@ -76,3 +83,21 @@ uplink-outer-electrification-desc = Броня, позволяющая конв�
 
 uplink-suit-electrification-name = Костюм электрификации
 uplink-suit-electrification-desc = Костюм, позволяющий конвертировать урон по выносливости в шоковый. Имеет встроенную функцию хамелеона.
+
+uplink-fake-captain-id-card-name = Фальшивая ID карта капитана
+uplink-fake-captain-id-card-desc = ID карта со сломанным модулем доступов, внешне неотличимая от ID карты капитана. Они не заметят подмены.
+
+uplink-clothing-outer-vest-web-elite-name = Огнеупорный тактический жилет
+uplink-clothing-outer-vest-web-elite-desc = Бронежилет класса IIIA с дополнительными огнеупорными элементами.
+
+uplink-assault-suit-name = Штурмовой бронекостюм
+uplink-assault-suit-desc = Костюм,состоящий из бронежилета IV класса, несъёмного встроенного шлема и комплектов защиты для предплечий, шеи и паха.
+
+uplink-chameleon-vest-name = Бронежилет-хамелеон
+uplink-chameleon-vest-desc = Бронежилет III класса, имеющий встроеную маскировку. Идентичен противопульному бронежилету.
+
+uplink-chameleon-stamp-name = Печать-хамелеон
+uplink-chameleon-stamp-desc = Синдикатная печать, способная принимать вид печатей глав станции. Позволяет подделывать документы от имени руководства.
+
+uplink-peashooter-sergeant-name = Пакет семян (cержант горохострел)
+uplink-peashooter-sergeant-desc = Пакет семян генно-модифицированного горохострела, выведенный лучшими умами ботаников Синдиката. Данный вид растения прошёл военную подготовку и побывал в горячих грядочных точках. Растение обучено распознавать агентов Синдиката и чрезвычайно плохо настроено к тем, кто ими не является.

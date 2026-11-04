@@ -18,6 +18,10 @@ public record struct DisarmedEvent(EntityUid Target, EntityUid Source, float Pus
     /// </summary>
     public readonly float PushProbability = PushProb;
 
+    // SS220-add-cap-for-stamina-damage-begin
+    public float MaxPercentStaminaDamage = 1f;
+    // SS220-add-cap-for-stamina-damage-end
+
     /// <summary>
     /// Prefix for the popup message that will be displayed on a successful push.
     /// Should be set before returning.

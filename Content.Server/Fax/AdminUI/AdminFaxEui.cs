@@ -19,7 +19,7 @@ namespace Content.Server.Fax.AdminUI;
 public sealed class AdminFaxEui : BaseEui
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogManager = default!; // SS220-add-eui-log
+
     private readonly FaxSystem _faxSystem;
     private readonly FollowerSystem _followerSystem;
 

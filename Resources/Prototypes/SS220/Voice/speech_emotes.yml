@@ -4,6 +4,7 @@
   name: chat-emote-name-bubbles
   category: Vocal
   available: false
+  icon: SS220/Interface/Emotes/seethe.png
   whitelist:
     components:
     - Vocal
@@ -26,6 +27,7 @@
   id: Meow
   name: chat-emote-name-meow
   available: false
+  icon: SS220/Interface/Emotes/meow.png
   whitelist:
     components:
     - Vocal
@@ -72,6 +74,7 @@
   id: Purr
   name: chat-emote-name-purr
   available: false
+  icon: SS220/Interface/Emotes/purring.png
   whitelist:
     components:
     - Vocal
@@ -91,6 +94,7 @@
   id: Mrow
   name: chat-emote-name-mrow
   available: false
+  icon: SS220/Interface/Emotes/angry_meow.png
   whitelist:
     components:
     - Vocal

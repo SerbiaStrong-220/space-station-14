@@ -1,10 +1,10 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Robust.Shared.Serialization;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
 
 public sealed class MiGoPlantBuiState : BoundUserInterfaceState
 {
-    public List<CultYoggSeedsPrototype> Seeds = [];
+    public List<ProtoId<CultYoggSeedsPrototype>> Seeds = [];
 }

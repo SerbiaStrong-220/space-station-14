@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA-3.0",
+  "copyright": "Taken from vgstation13 https://github.com/vgstation-coders/vgstation13",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "instruments",
+      "delays": [
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ]
+    }
+  ]
+}

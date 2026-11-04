@@ -12,6 +12,17 @@
   - type: Clothing
     sprite: SS220/Clothing/Head/Hoods/Coat/hoodcentcom.rsi
 
+- type: entity
+  parent: ClothingHeadHatHoodWinterBase
+  id: ClothingHeadHatHoodWinterJanitorJR
+  categories: [ HideSpawnMenu ]
+  name: JR winter coat hood
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hoods/janitor_JR.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hoods/janitor_JR.rsi
+
 #Экзокостюм утилизаторов - капюшон
 
 - type: entity
@@ -59,6 +70,25 @@
     sprite: SS220/Clothing/Head/Hoods/chaplain_white.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Hoods/chaplain_white.rsi
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Hair
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatHoodSchema
+  categories: [ HideSpawnMenu ]
+  name: schema hood
+  description: On a station where silence is a rarity, the schemonk silence becomes the loudest voice.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hoods/schema.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hoods/schema.rsi
   - type: Tag
     tags:
     - HamsterWearable

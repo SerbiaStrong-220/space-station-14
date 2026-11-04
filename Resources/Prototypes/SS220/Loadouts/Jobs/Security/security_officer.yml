@@ -179,3 +179,9 @@
     proto: TacSec
   equipment:
     gloves: ClothingHandsGlovesSecTactical
+
+# Belts
+- type: loadout
+  id: SecurityCorporateJudo
+  equipment:
+    belt: ClothingBeltCorporateJudoFilled

@@ -30,3 +30,5 @@ roles-antag-mothership-core-name = Ядро ксеноборгов
 roles-antag-mothership-core-objective = Используйте своих ксеноборгов, чтобы создать ещё больше ксеноборгов.
 roles-antag-xenoborg-name = Ксеноборг
 roles-antag-xenoborg-objective = Помогите материнскому кораблю создать больше ксеноборгов.
+
+roles-antag-pirate-name = Пират

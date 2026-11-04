@@ -3,3 +3,8 @@ ghost-role-information-ash-drake-description = Огромный крылатый
 
 chat-emote-name-roar = Рёв
 chat-emote-msg-roar = издаёт оглушительный рёв!
+
+ash-drake-skeleton-fragment-popup = ВЫ ТЕПЕРЬ ОДЕТЫ КАК ЧЕРТ
+
+ash-drake-chalk-too-far = Слишком далеко!
+ash-drake-chalk-placed = Вы начертали проклятую руну...

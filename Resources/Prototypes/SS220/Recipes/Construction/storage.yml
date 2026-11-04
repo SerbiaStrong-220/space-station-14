@@ -35,3 +35,16 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+
+- type: construction
+  id: WeaponStand
+  graph: WeaponStand
+  startNode: start
+  targetNode: WeaponStandNode
+  category: construction-category-storage
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: true
+  canBuildInImpassable: true
+  conditions:
+  - !type:WallmountCondition

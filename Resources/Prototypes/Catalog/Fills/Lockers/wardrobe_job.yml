@@ -30,6 +30,7 @@
       - id: ClothingUniformJumpskirtPrisoner
       - id: ClothingShoesColorOrange # SS220 black to orange prison shoes
       # - id: ClothingShoesColorBlack # SS220 orange-prisoners-shoes
+      - id: ClothingHeadsetPrisoner # SS220 PrisonerHeadset
     - id: ClothingMaskMuzzle
     - !type:GroupSelector
       prob: 0.15
@@ -269,6 +270,8 @@
     - id: ClothingUniformJumpsuitChaplain
     - id: ClothingShoesColorBlack
     - id: ClothingUniformJumpskirtChaplain
+    - id: PlushieLizardJobChaplain
+      prob: 0.02
 
 - type: entity
   id: WardrobeSecurityFilled
@@ -316,6 +319,8 @@
     - id: ClothingHandsGlovesFingerless
     - id: AppraisalTool
     - id: ClothingEyesHudSupply # SS220 ADD CARGO HUD
+    - id: PlushieLizardJobCargotechnician
+      prob: 0.02
 
 - type: entity
   id: WardrobeSalvageFilled

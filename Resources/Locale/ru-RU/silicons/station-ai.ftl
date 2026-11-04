@@ -40,3 +40,9 @@ station-ai-hologram-male = Мужской образ
 station-ai-hologram-face = Бестелесная голова
 station-ai-hologram-cat = Форма кота
 station-ai-hologram-dog = Форма корги
+
+station-ai-core-taking-damage = Ваше ядро ИИ получает физический урон.
+
+station-ai-ghost-role-name = ИИ станции
+
+station-ai-ghost-role-description = Служите экипажу станции в качестве его бдительного ИИ.

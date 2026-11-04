@@ -20,10 +20,10 @@ namespace Content.Client.SS220.TTS;
 // ReSharper disable once InconsistentNaming
 public sealed partial class TTSSystem
 {
-    [Dependency] private readonly IAudioManager _audioManager = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly TTSManager _ttsManager = default!;
+    [Dependency] private IAudioManager _audioManager = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private TTSManager _ttsManager = default!;
 
     private ISawmill _sawmill = default!;
 

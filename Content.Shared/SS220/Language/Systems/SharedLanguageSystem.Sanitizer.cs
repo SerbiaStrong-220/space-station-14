@@ -15,6 +15,8 @@ public abstract partial class SharedLanguageSystem
     private Regex? _textWithKeyRegex;
     private readonly TimeSpan _regexTimeout = TimeSpan.FromSeconds(1);
 
+    private static readonly Regex LangTagRegex = new Regex($@"{LanguageManager.KeyPrefix}(\w+)\s+", RegexOptions.Compiled);
+
     // Cache for 1 tick
     private readonly Dictionary<string, LanguageMessage> _cachedMessages = new();
 
@@ -170,18 +172,20 @@ public abstract partial class SharedLanguageSystem
     public bool TryGetLanguageFromString(string message,
         [NotNullWhen(true)] out string? messageWithoutTags,
         [NotNullWhen(true)] out LanguagePrototype? language)
-    {
+{
         messageWithoutTags = null;
         language = null;
 
-        var keyPatern = $@"{LanguageManager.KeyPrefix}\w+\s+";
-
-        var m = Regex.Match(message, keyPatern);
-        if (m == null || !_language.TryGetLanguageByKey(m.Value.Trim(), out language))
+        if (string.IsNullOrEmpty(message))
             return false;
 
-        messageWithoutTags = Regex.Replace(message, keyPatern, string.Empty).Trim();
-        return messageWithoutTags != null && language != null;
+        var match = LangTagRegex.Match(message);
+
+        if (!match.Success || !_language.TryGetLanguageByKey(match.Value.Trim(), out language))
+            return false;
+
+        messageWithoutTags = message.Remove(match.Index, match.Length).Trim();
+        return true;
     }
 
     /// <summary>
@@ -228,6 +232,8 @@ public sealed partial class LanguageMessage
     public string OriginalMessage;
 
     private readonly SharedLanguageSystem _languageSystem;
+
+    private static readonly Regex SanitizeRegex = new Regex(@"^(?:%[a-z0-9]+\s*)+", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
     public static LanguageMessage Empty => new([], "");
 
@@ -300,13 +306,12 @@ public sealed partial class LanguageMessage
             node.SetMessage(func.Invoke(node.Message));
     }
 
-    
     /// <summary>
     /// Removes language prefixes from the message (in case they are left)
     /// </summary>
     private string RemoveLanguagePrefix(string text)
     {
-        return Regex.Replace(text, @"^(?:%[a-zA-Z0-9]+\s*)+", "", RegexOptions.IgnoreCase).TrimStart();
+        return SanitizeRegex.Replace(text, "").TrimStart();
     }
 }
 
@@ -329,6 +334,7 @@ public sealed partial class LanguageNode
     }
     private ProtoId<LanguagePrototype> _languageId;
 
+    [NonSerialized]
     public LanguagePrototype Language;
 
     [DataField]

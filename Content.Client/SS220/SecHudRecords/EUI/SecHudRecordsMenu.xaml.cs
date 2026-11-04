@@ -17,9 +17,9 @@ namespace Content.Client.SS220.SecHudRecords.EUI;
 [GenerateTypedNameReferences]
 public sealed partial class SecHudRecordsMenu : FancyWindow
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     private static readonly Color CatalogPanelBackgroundColor = new Color(30, 30, 30, 200);
     private static readonly Color CatalogPanelBorderColor = new Color(80, 0, 0);

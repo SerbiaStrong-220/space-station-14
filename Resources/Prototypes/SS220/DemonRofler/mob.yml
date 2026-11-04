@@ -6,6 +6,12 @@
   name: Dark Reaper
   description: A terrifying creature that looks like it was stitched together from random pieces of human flesh.
   components:
+  # SS220 ADD NIGHT VISION START
+  - type: NightVision
+    profile: NightVisionPaleRed
+    enabled: false
+    action: ActionToggleNightVisionInnate
+  # SS220 ADD NIGHT VISION END
   - type: Lifesteal
   - type: DarkReaper
     healPerConsume:
@@ -16,9 +22,10 @@
         Heat: -140
         Cold: -140
         Holy: -80
-      groups:
-        Toxin: -140
-        Airloss: -140
+        Poison: -70
+        Radiation: -70
+        Asphyxiation: -70
+        Bloodloss: -70
   - type: NameIdentifier
     group: GenericNumber
   - type: Tag
@@ -42,7 +49,7 @@
     name: ghost-role-information-dark-reaper-name
     description: ghost-role-information-dark-reaper-description
     rules: ghost-role-information-dark-reaper-rules
-    job: DarkReaper
+    job: DarkReaperJob
 
   # Visuals and appearance
   - type: Sprite

@@ -57,3 +57,7 @@ signal-port-description-logic-input = Входной порт, который п
 signal-port-description-logic-memory-input = Сигнал для загрузки в ячейку памяти, когда она включена.
 signal-port-name-logic-enable = Включить
 signal-port-description-logic-enable = Загружает входной сигнал в ячейку памяти только при ВЫСОКОМ уровне.
+
+signal-port-name-logic-random-input = Входящий сигнал
+
+signal-port-description-logic-random-input = Принимает любой сигнал для вызова случайного вывода.

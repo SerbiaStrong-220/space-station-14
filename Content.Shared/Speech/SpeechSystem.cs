@@ -37,15 +37,12 @@ namespace Content.Shared.Speech
             }
 
             var currentTime = _gameTiming.CurTime;
-
-            // Ensure more than the cooldown time has passed since last speaking
+            // Ensure more than the cooldown time has passed since last spoke
             if (currentTime - speech.LastTimeSpoke < speech.SpeechCooldownTime)
             {
                 args.Cancel();
                 return;
             }
-
-            speech.LastTimeSpoke = currentTime;
         }
     }
 }

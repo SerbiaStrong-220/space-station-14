@@ -43,7 +43,7 @@ public sealed class ReagentWikiEntry
         PhysicalDescription = prototype.LocalizedPhysicalDescription;
         SubstanceColor = prototype.SubstanceColor.ToHex();
         TextColor = GetTextColor(prototype);
-        Metabolisms = prototype.Metabolisms?.AsReadOnly().ToDictionary(x => x.Key.Id, x => new ReagentEffectsWikiEntry(x.Value));
+        Metabolisms = prototype.Metabolisms?.Metabolisms.AsReadOnly().ToDictionary(x => x.Key.Id, x => new ReagentEffectsWikiEntry(x.Value));
     }
 
     private static string GetTextColor(ReagentPrototype reagentPrototype)

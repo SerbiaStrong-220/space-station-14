@@ -17,12 +17,12 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.Ninja.Objectives.LeaveNoTrace;
 
-public sealed class RevealOverlay : Overlay
+public sealed partial class RevealOverlay : Overlay
 {
-    [Dependency] private readonly IClyde _clyde = default!;
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
+    [Dependency] private IClyde _clyde = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IConfigurationManager _configurationManager = default!;
 
     public override OverlaySpace Space => OverlaySpace.ScreenSpace;
     public override bool RequestScreenTexture => false;

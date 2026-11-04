@@ -1,0 +1,7 @@
+- type: entity
+  id: ArenaGhostBarSlot
+  name: ghost bar player slot
+  parent: MarkerBase
+  components:
+  - type: ArenaParticipant
+    team: a

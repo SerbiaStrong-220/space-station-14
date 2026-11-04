@@ -152,3 +152,132 @@
     tags:
     - CorgiWearable
     - WhitelistChameleon
+
+- type: entity
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
+  id: ClothingHeadHelmetHardsuitRedWingsSec
+  name: red wings security hardsuit helmet
+  description: Helmet from a Red Wings security officer's hardsuit.
+  components:
+  - type: BreathMask
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/redwings_sec.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/redwings_sec.rsi
+    clothingVisuals:
+      head:
+      - state: off-equipped-HELMET
+      - state: off-equipped-HELMET-unshaded
+        shader: unshaded
+      - map: [ "light" ]
+        visible: false
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      head:
+      - state: on-equipped-HELMET
+      - state: on-equipped-HELMET-unshaded
+        shader: unshaded
+  - type: PointLight
+    color: cyan
+    radius: 4.5
+    energy: 3
+  - type: FlashImmunity
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.80
+        Slash: 0.80
+        Piercing: 0.80
+        Heat: 0.90
+        Radiation: 0.90
+        Caustic: 0.95
+
+- type: entity
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
+  id: ClothingHeadHelmetHardsuitRedWingsMedic
+  name: red wings medic hardsuit helmet
+  description: Helmet from a Red Wings medic hardsuit.
+  components:
+  - type: BreathMask
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/redwings_medic.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/redwings_medic.rsi
+    clothingVisuals:
+      head:
+      - state: off-equipped-HELMET
+      - state: off-equipped-HELMET-unshaded
+        shader: unshaded
+      - map: [ "light" ]
+        visible: false
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      head:
+      - state: on-equipped-HELMET
+      - state: on-equipped-HELMET-unshaded
+        shader: unshaded
+  - type: PointLight
+    color: cyan
+    radius: 4.5
+    energy: 3
+  - type: FlashImmunity
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.80
+        Slash: 0.80
+        Piercing: 0.90
+        Heat: 0.95
+        Radiation: 0.90
+        Caustic: 0.95
+
+- type: entity
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
+  id: ClothingHeadHelmetHardsuitRedWingsPilot
+  name: red wings pilot's hardsuit helmet
+  description: Helmet from a Red Wings pilot's hardsuit.
+  components:
+  - type: BreathMask
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/redwings_pilot.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/redwings_pilot.rsi
+    clothingVisuals:
+      head:
+      - state: off-equipped-HELMET
+      - state: off-equipped-HELMET-unshaded
+        shader: unshaded
+      - map: [ "light" ]
+        visible: false
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      head:
+      - state: on-equipped-HELMET
+      - state: on-equipped-HELMET-unshaded
+        shader: unshaded
+  - type: PointLight
+    color: cyan
+    radius: 4.5
+    energy: 3
+  - type: FlashImmunity
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.80
+        Slash: 0.80
+        Piercing: 0.85
+        Heat: 0.95
+        Radiation: 0.90
+        Caustic: 0.95

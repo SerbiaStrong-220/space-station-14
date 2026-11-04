@@ -37,12 +37,14 @@ public partial class ListingData : IEquatable<ListingData>
         other.ProductEvent,
         other.RaiseProductEventOnUser,
         other.PurchaseAmount,
+        other.PurchaseLimit, // SS220 pirate market
         other.ID,
         other.Categories,
         other.OriginalCost,
         other.RestockTime,
         other.DiscountDownTo,
         other.DisableRefund,
+        other.ApplyToMob,
         other.DynamicsPrices) // SS220 TraitorDynamics
     {
 
@@ -62,12 +64,14 @@ public partial class ListingData : IEquatable<ListingData>
         ListingPurchasedEvent? productEvent, // ss220 tweak product event
         bool raiseProductEventOnUser,
         int purchaseAmount,
+        int? purchaseLimit, // SS220 pirate market
         string id,
         HashSet<ProtoId<StoreCategoryPrototype>> categories,
         IReadOnlyDictionary<ProtoId<CurrencyPrototype>, FixedPoint2> originalCost,
         TimeSpan restockTime,
         Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> dataDiscountDownTo,
         bool disableRefund,
+        bool applyToMob,
         Dictionary<ProtoId<DynamicPrototype>, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>> dynamicsPrices) // SS220 TraitorDynamics
     {
         Name = name;
@@ -83,12 +87,14 @@ public partial class ListingData : IEquatable<ListingData>
         ProductEvent = productEvent;
         RaiseProductEventOnUser = raiseProductEventOnUser;
         PurchaseAmount = purchaseAmount;
+        PurchaseLimit = purchaseLimit; // SS220 pirate market
         ID = id;
         Categories = categories.ToHashSet();
         OriginalCost = originalCost;
         RestockTime = restockTime;
         DiscountDownTo = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>(dataDiscountDownTo);
         DisableRefund = disableRefund;
+        ApplyToMob = applyToMob;
         DynamicsPrices = new Dictionary<ProtoId<DynamicPrototype>,
             Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>>(dynamicsPrices); // SS220 TraitorDynamics
     }
@@ -194,6 +200,14 @@ public partial class ListingData : IEquatable<ListingData>
     [DataField]
     public int PurchaseAmount;
 
+    // SS220 pirate market begin
+    /// <summary>
+    /// Maximum amount of this listing available to a store. Sent to clients for stock display.
+    /// </summary>
+    [DataField]
+    public int? PurchaseLimit;
+    // SS220 pirate market end
+
     /// <summary>
     /// Used to delay purchase of some items.
     /// </summary>
@@ -218,6 +232,12 @@ public partial class ListingData : IEquatable<ListingData>
     [DataField]
     public bool DisableRefund = false;
 
+    /// <summary>
+    /// Whether or not to apply the store listing to the player mob rather than the player mind.
+    /// </summary>
+    [DataField]
+    public bool ApplyToMob = false;
+
     public bool Equals(ListingData? listing)
     {
         if (listing == null)
@@ -230,7 +250,10 @@ public partial class ListingData : IEquatable<ListingData>
             ProductEntity != listing.ProductEntity ||
             ProductAction != listing.ProductAction ||
             ProductEvent?.GetType() != listing.ProductEvent?.GetType() ||
-            RestockTime != listing.RestockTime)
+            PurchaseLimit != listing.PurchaseLimit || // SS220 pirate market
+            RestockTime != listing.RestockTime ||
+            DisableRefund != listing.DisableRefund ||
+            ApplyToMob != listing.ApplyToMob)
             return false;
 
         if (Icon != null && !Icon.Equals(listing.Icon))
@@ -306,13 +329,16 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
             listingData.ProductEvent,
             listingData.RaiseProductEventOnUser,
             listingData.PurchaseAmount,
+            listingData.PurchaseLimit, // SS220 pirate market
             listingData.ID,
             listingData.Categories,
             listingData.OriginalCost,
             listingData.RestockTime,
             listingData.DiscountDownTo,
             listingData.DisableRefund,
-            listingData.DynamicsPrices)
+            listingData.ApplyToMob,
+            listingData.DynamicsPrices // SS220 TraitorDynamics
+        )
     {
     }
 

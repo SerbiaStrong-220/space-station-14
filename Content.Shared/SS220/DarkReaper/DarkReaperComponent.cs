@@ -69,15 +69,15 @@ public sealed partial class DarkReaperComponent : Component
     [ViewVariables, DataField(serverOnly: true)]
     public HashSet<EntProtoId> SpawnOnDeathPool = new()
     {
-        "LeftLegHuman",
-        "RightLegHuman",
-        "LeftFootHuman",
-        "RightFootHuman",
-        "LeftArmHuman",
-        "RightArmHuman",
-        "LeftHandHuman",
-        "RightHandHuman",
-        "TorsoSkeleton",
+        "OrganHumanLegLeft",
+        "OrganHumanLegRight",
+        "OrganHumanFootLeft",
+        "OrganHumanFootRight",
+        "OrganHumanArmLeft",
+        "OrganHumanArmRight",
+        "OrganHumanHandLeft",
+        "OrganHumanHandRight",
+        "OrganSkeletonPersonTorso",
         "NormalHeadSkeleton",
     };
 
@@ -230,7 +230,7 @@ public sealed partial class DarkReaperComponent : Component
     /// DamageSpecifier for melee damage that Dark Reaper does at every stage.
     /// </summary>
     [ViewVariables, DataField, AutoNetworkedField]
-    public List<Dictionary<string, FixedPoint2>> StageMeleeDamage = new()
+    public List<Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2>> StageMeleeDamage = new()
     {
         // Stage 1
         new()

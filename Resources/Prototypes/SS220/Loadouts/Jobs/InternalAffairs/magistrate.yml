@@ -4,11 +4,18 @@
 - type: loadoutEffectGroup
   id: MagistrateMonocle
   effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: JobMagistrate
-      time: 72000 # 20 hrs
+  - !type:AnyLoadoutEffect
+    effects:
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:RoleTimeRequirement
+        role: JobNanoTrasenRepresentative
+        time: 18000 # 5 hrs
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:RoleTimeRequirement
+        role: JobMagistrate
+        time: 18000 # 5 hrs
   sponsorTierLoadoutEffects:
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier
@@ -18,11 +25,18 @@
 - type: loadoutEffectGroup
   id: StreetJudge
   effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: JobMagistrate
-      time: 360000 # 100 hrs
+  - !type:AnyLoadoutEffect
+    effects:
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:RoleTimeRequirement
+        role: JobNanoTrasenRepresentative
+        time: 72000 # 20 hrs
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:RoleTimeRequirement
+        role: JobMagistrate
+        time: 72000 # 20 hrs
   sponsorTierLoadoutEffects:
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier

@@ -320,7 +320,7 @@ function getChangelogData(text, default_author = `Unknown`){
      * @returns {string[] | null}
      */
     function extractAuthors(text){
-        const authors_line_regex = /(?<=:cl:).*|(?<=^\uD83C\uDD91)/g;
+        const authors_line_regex = /(?<=:cl:).*|(?<=^\uD83C\uDD91).*/g;
 
         let authorsLine = authors_line_regex.exec(text);
         if (authorsLine === null) return null;

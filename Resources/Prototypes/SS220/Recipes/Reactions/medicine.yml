@@ -76,3 +76,18 @@
       amount: 1
   products:
     Nicergoline: 3
+
+- type: reaction
+  id: Biomass
+  impact: Low
+  quantized: true
+  reactants:
+    Protein:
+      amount: 10
+    Cryoxadone:
+      amount: 10
+    Blood:
+      amount: 10
+  effects:
+  - !type:SpawnEntity
+    entity: MaterialBiomass10

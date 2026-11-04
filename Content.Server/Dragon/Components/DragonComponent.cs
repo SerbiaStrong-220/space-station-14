@@ -1,3 +1,4 @@
+using Content.Shared.Chemistry.Components;
 using Content.Shared.NPC.Prototypes;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
@@ -14,6 +15,17 @@ namespace Content.Server.Dragon
         /// </summary>
         [DataField("rifts")]
         public List<EntityUid> Rifts = new();
+
+        // SS220 Dragon rifts charged buff BGN
+        [ViewVariables(VVAccess.ReadWrite)]
+        public int RiftsCharged = 0;
+
+        [ViewVariables(VVAccess.ReadWrite)]
+        public bool RiftSpeedBoostPermanent = false;
+
+        [ViewVariables(VVAccess.ReadWrite)]
+        public TimeSpan RiftSpeedBoostEndTime = TimeSpan.Zero;
+        // SS220 Dragon rifts charged buff END
 
         public bool Weakened => WeakenedAccumulator > 0f;
 
@@ -65,5 +77,17 @@ namespace Content.Server.Dragon
         /// </summary>
         [DataField]
         public ProtoId<NpcFactionPrototype> Faction = "Dragon";
+
+        /// <summary>
+        /// The smoke to spawn upon rift timeout death.
+        /// </summary>
+        [DataField]
+        public EntProtoId SmokePrototype = "BloodSmoke";
+
+        /// <summary>
+        /// The solution to place into the smoke (mostly just needed for color)
+        /// </summary>
+        [DataField]
+        public Solution SmokeSolution = new ([new("Blood", 1)]);
     }
 }

@@ -1,0 +1,1 @@
+integrated-clothing-cannot-put-on = { $entity } мешает вам надеть это!

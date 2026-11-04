@@ -31,7 +31,4 @@ public sealed partial class GrillableComponent : Component
 
     [ViewVariables, AutoNetworkedField]
     public float CurrentCookTime;
-
-    [ViewVariables, AutoNetworkedField]
-    public bool IsCooking;
 }

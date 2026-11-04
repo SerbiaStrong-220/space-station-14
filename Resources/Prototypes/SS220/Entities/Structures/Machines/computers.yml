@@ -27,7 +27,7 @@
     board: SyndicateCommsComputerCircuitboard
   - type: PointLight
     radius: 1.5
-    energy: 1.6
+    energy: 4.0
     color: "#f71713"
 
 - type: entity
@@ -64,7 +64,7 @@
       maxRange: 256
     - type: PointLight
       radius: 1.5
-      energy: 1.6
+      energy: 4.0
       color: "#43ccb5"
     - type: Computer
       board: SalvageShuttleConsoleCircuitboard
@@ -172,7 +172,7 @@
     board: CluwneCommsComputerCircuitboard
   - type: PointLight
     radius: 1.5
-    energy: 1.6
+    energy: 4.0
     color: "#3c5eb5"
   - type: Damageable
     damageContainer: StructuralInorganic
@@ -204,3 +204,29 @@
   - type: ShuttleGunControl
   - type: ShuttleConsole
     canControlShuttle: false
+
+- type: entity
+  parent: ComputerCluwneComms
+  id: ComputerCluwneCommsUnconvertible
+  suffix: Unconvertible
+  components:
+  - type: Computer
+    board: CluwneCommsComputerCircuitboardUnconvertible
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: monitorBroken
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CluwneCommsComputerCircuitboardUnconvertible:
+            min: 1
+            max: 1

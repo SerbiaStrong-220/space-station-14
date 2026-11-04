@@ -34,3 +34,17 @@ chem-master-window-sort-type-none = Сначала старые
 chem-master-window-sort-type-alphabetical = По алфавиту
 chem-master-window-sort-type-quantity = По количеству
 chem-master-window-sort-type-latest = Сначала новые
+
+chem-master-output-buffer-draw = Буфер
+
+chem-master-output-beaker-draw = Мензурка
+
+chem-master-window-no-beaker-text = Мензурка не загружена
+
+chem-master-window-beaker-empty-text = Мензурка пуста
+
+chem-master-window-beaker-low-text = Недостаточно раствора в мензурке
+
+chem-master-output-source = Источник упаковки:
+
+chem-master-no-source = Нет источника

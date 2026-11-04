@@ -5,9 +5,9 @@ using Robust.Client.Graphics;
 
 namespace Content.Client.SS220.TextureFade;
 
-public sealed class TextureFadeOverlaySystem : EntitySystem
+public sealed partial class TextureFadeOverlaySystem : EntitySystem
 {
-    [Dependency] private readonly IOverlayManager _overlayManager = default!;
+    [Dependency] private IOverlayManager _overlayManager = default!;
 
     public override void Initialize()
     {

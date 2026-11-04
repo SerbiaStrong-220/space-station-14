@@ -6,9 +6,9 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Shared.SS220.SuperMatter.Emitter;
 
-public abstract class SharedSuperMatterEmitterExtensionSystem : EntitySystem
+public abstract partial class SharedSuperMatterEmitterExtensionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

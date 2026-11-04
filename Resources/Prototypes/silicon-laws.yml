@@ -16,6 +16,9 @@
 
 - type: siliconLawset
   id: Crewsimov
+  # SS220 random lawset begin
+  weight: 25
+  # SS220 random lawset end
   name: law-crewsimov-name
   laws:
   - Crewsimov1
@@ -46,6 +49,9 @@
 
 - type: siliconLawset
   id: Corporate
+  # SS220 random lawset begin
+  weight: 25
+  # SS220 random lawset end
   name: law-corporate-name
   laws:
   - Corporate1
@@ -77,6 +83,9 @@
 
 - type: siliconLawset
   id: NTDefault
+  # SS220 random lawset begin
+  weight: 25
+  # SS220 random lawset end
   name: law-ntdefault-name
   laws:
   - NTDefault1
@@ -103,6 +112,9 @@
 
 - type: siliconLawset
   id: Drone
+  # SS220 random lawset begin
+  weight: 1
+  # SS220 random lawset end
   name: law-drone-name
   laws:
   - Drone1
@@ -126,6 +138,13 @@
   order: 3
   lawString: law-syndicate-3
 
+# ss220 - post upstream tweaks - fixing non visiual 4th law - bgn
+- type: siliconLaw
+  id: Syndicate4
+  order: 4
+  lawString: law-syndicate-4
+# ss220 - post upstream tweaks - fixing non visiual 4th law - end
+
 # Syndicate cyborg laws
 # intentionally excluded from IonStormLawsets
 - type: siliconLawset
@@ -135,6 +154,7 @@
   - Syndicate1
   - Syndicate2
   - Syndicate3
+  - Syndicate4 # ss220 - post upstream tweaks - fixing non visiual 4th law
   obeysTo: laws-owner-syndicate
 
 # Ninja conversion laws
@@ -222,6 +242,9 @@
 
 - type: siliconLawset
   id: CommandmentsLawset
+  # SS220 random lawset begin
+  weight: 1
+  # SS220 random lawset end
   name: law-commandments-name
   laws:
   - Commandment1
@@ -265,6 +288,9 @@
 
 - type: siliconLawset
   id: PaladinLawset
+  # SS220 random lawset begin
+  weight: 1
+  # SS220 random lawset end
   name: law-paladin-name
   laws:
   - Paladin1
@@ -288,6 +314,9 @@
 
 - type: siliconLawset
   id: LiveLetLiveLaws
+  # SS220 random lawset begin
+  weight: 1
+  # SS220 random lawset end
   name: law-lall-name
   laws:
   - Lall1
@@ -313,6 +342,9 @@
 
 - type: siliconLawset
   id: EfficiencyLawset
+  # SS220 random lawset begin
+  weight: 1
+  # SS220 random lawset end
   name: law-efficiency-name
   laws:
   - Efficiency1
@@ -339,6 +371,9 @@
 
 - type: siliconLawset
   id: RobocopLawset
+  # SS220 random lawset begin
+  weight: 1
+  # SS220 random lawset end
   name: law-robocop-name
   laws:
   - Robocop1
@@ -410,6 +445,9 @@
 
 - type: siliconLawset
   id: GameMasterLawset
+  # SS220 random lawset begin
+  weight: 1
+  # SS220 random lawset end
   name: law-game-name
   laws:
   - Game1
@@ -443,6 +481,9 @@
 
 - type: siliconLawset
   id: PainterLawset
+  # SS220 random lawset begin
+  weight: 1
+  # SS220 random lawset end
   name: law-painter-name
   laws:
   - Painter1
@@ -506,6 +547,9 @@
 
 - type: siliconLawset
   id: NutimovLawset
+  # SS220 random lawset begin
+  weight: 1
+  # SS220 random lawset end
   name: law-nutimov-name
   laws:
   - Nutimov1
@@ -611,3 +655,5 @@
     AntimovLawset: 0.25
     NutimovLawset: 0.5
     Ninja: 0.25
+    MothershipCoreLawset: 0.25
+    XenoborgLawset: 0.25

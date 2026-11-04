@@ -3,7 +3,8 @@
   id: WeaponPulseCarbineFractWar
   suffix: Shitspawn, Ebent, FractWar
   components:
-  - type: HitscanBatteryAmmoProvider
+  - type: BatteryAmmoProvider
+    proto: Pulse
     fireCost: 40
   - type: Battery
     maxCharge: 1000

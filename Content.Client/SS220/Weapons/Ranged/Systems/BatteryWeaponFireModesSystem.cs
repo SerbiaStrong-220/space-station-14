@@ -7,7 +7,7 @@ namespace Content.Client.SS220.Weapons.Ranged.Systems;
 
 public sealed partial class BatteryWeaponFireModesSystem : EntitySystem
 {
-    [Dependency] private readonly GunSystem _gunSystem = default!;
+    [Dependency] private GunSystem _gunSystem = default!;
 
     public override void Initialize()
     {

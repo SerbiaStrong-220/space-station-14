@@ -1,29 +1,33 @@
+using Content.IntegrationTests.Fixtures;
+using Content.IntegrationTests.Utility;
 using Content.Shared.Alert;
 using Content.Shared.Mobs.Components;
 
 namespace Content.IntegrationTests.Tests.Damageable;
 
-public sealed class MobThresholdsTest
+public sealed class MobThresholdsTest : GameTest
 {
-    /// <summary>
-    /// Inspects every entity prototype with a <see cref="MobThresholdsComponent"/> and makes
-    /// sure that every possible mob state is mapped to an <see cref="AlertPrototype"/>.
-    /// </summary>
+    private static string[] _entitiesWithThresholds = GameDataScrounger.EntitiesWithComponent("MobThresholds");
+
     [Test]
-    public async Task ValidateMobThresholds()
+    [TestOf(typeof(MobThresholdsComponent))]
+    // [TestCaseSource(nameof(_entitiesWithThresholds))] SS220-move-to-test-loop
+    [Description("Ensures every entity with mob thresholds has valid mob state configuration corresponding to some AlertPrototype.")]
+    public async Task ValidateMobThresholds() // SS220
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
 
-        var entMan = server.EntMan;
         var protoMan = server.ProtoMan;
 
-        var protos = pair.GetPrototypesWithComponent<MobThresholdsComponent>();
-
-        Assert.Multiple(() =>
+        // SS220-move-to-test-loop-begin
+        foreach (var protoKey in _entitiesWithThresholds)
         {
-            foreach (var (proto, comp) in protos)
+            Assert.Multiple(() =>
             {
+                var proto = protoMan.Index(protoKey);
+                var comp = (MobThresholdsComponent)proto.Components["MobThresholds"].Component;
+
                 // See which mob states are mapped to alerts
                 var alertStates = comp.StateAlertDict.Keys;
                 // Check each mob state that this mob can be in
@@ -32,9 +36,8 @@ public sealed class MobThresholdsTest
                     // Make sure that an alert exists for each possible mob state
                     Assert.That(alertStates, Does.Contain(state), $"{proto.ID} does not have an alert state for mob state {state}");
                 }
-            }
-        });
-
-        await pair.CleanReturnAsync();
+            });
+        }
+        // SS220-move-to-test-loop-end
     }
 }

@@ -1,0 +1,29 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: VoidPortalChasmExit
+  suffix: CultYogg
+  components:
+  - type: Sprite
+    noRot: true
+    drawdepth: Ghosts
+    sprite: SS220/Objects/CultYogg/void_portal_exit.rsi
+    layers:
+    - state: chasm_portal
+      shader: unshaded
+  - type: TimedDespawn
+    lifetime: 3.3 #additional 0.1 sec to handle despawn
+
+- type: entity
+  id: VoidKeyPortalExit
+  suffix: CultYogg
+  components:
+  - type: Sprite
+    noRot: true
+    drawdepth: Ghosts
+    sprite: SS220/Objects/CultYogg/void_portal_exit.rsi
+    layers:
+    - state: key_portal
+      shader: unshaded
+  - type: TimedDespawn
+    lifetime: 3.8 #additional 0.1 sec to handle despawn

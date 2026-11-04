@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
-  "copyright": "Made by (discord) DaGo7393 for SS220",
+  "copyright": "Made by (discord) DaGo7393 for SS220, equipped-HELMET and equipped-HELMET-unshaded sprited by Dinazewwr (discord) for SS220.",
   "size": {
     "x": 32,
     "y": 32
@@ -27,6 +27,14 @@
     },
     {
       "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "equipped-HELMET-unshaded",
+      "directions": 4
+    },
+    {
+      "name": "equipped-HELMET",
       "directions": 4
     }
   ]

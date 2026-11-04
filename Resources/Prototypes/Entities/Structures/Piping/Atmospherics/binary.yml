@@ -518,10 +518,13 @@
   components:
   - type: Sprite
     sprite: Structures/Machines/gasrecycler.rsi
+    snapCardinals: true
+    granularLayersRendering: true
     layers:
     - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi # SS220 atmospherics-sprite-update
       state: pipeBinaryConnectors
       map: [ "enum.PipeVisualLayers.Pipe" ]
+      renderingStrategy: Default
     - state: running
     - state: unlit
       shader: unshaded
@@ -577,6 +580,12 @@
     board: GasRecyclerMachineCircuitboard
   - type: AtmosMonitoringConsoleDevice
     navMapBlip: GasValve
+  - type: Transform
+    noRot: false
+  - type: GuideHelp
+    guides:
+    - GasRecycling
+  - type: TegCirculator
 
 - type: entity
   parent: GasBinaryBase

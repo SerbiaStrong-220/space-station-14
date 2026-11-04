@@ -1,0 +1,10 @@
+pirate-objective-issuer = Пиратский экипаж
+ent-PirateLootValueObjective = { ent-BaseObjective }
+    .desc = { ent-BaseObjective.desc }
+ent-PirateCrewCaptureObjective = { ent-BaseObjective }
+    .desc = { ent-BaseObjective.desc }
+pirate-objective-loot-title = Накопите 500 000 кредитов
+pirate-objective-loot-description = Продайте добычу через пиратскую консоль. Выручено: {$current} / {$target} кредитов.
+pirate-objective-captives-title = Захватите членов экипажа
+pirate-objective-captives-description = Доставьте на пиратскую базу или шаттл: {$targets}. Прогресс: {$current} / {$target}.
+pirate-objective-captives-awaiting-description = Ожидание подходящего члена экипажа для захвата.

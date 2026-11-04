@@ -37,25 +37,25 @@ namespace Content.Server.SS220.SpiderQueen.Systems;
 
 public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly ITileDefinitionManager _tileDefinitionManager = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly NavMapSystem _navMap = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly HungerSystem _hunger = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly TileSystem _tile = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly InteractionSystem _interaction = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SpiderWebSystem _spiderWeb = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private ITileDefinitionManager _tileDefinitionManager = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private NavMapSystem _navMap = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private HungerSystem _hunger = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private TileSystem _tile = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private InteractionSystem _interaction = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SpiderWebSystem _spiderWeb = default!;
 
     public override void Initialize()
     {
@@ -139,7 +139,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
     {
         var performer = args.Performer;
         if (args.Handled ||
-            !TryComp<TransformComponent>(performer, out var transform) ||
+            !TryComp(performer, out TransformComponent? transform) ||
             !CheckEnoughBloodPoints(performer, args.Cost))
             return;
 
@@ -190,7 +190,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         if (args.Cancelled || args.Target is not { } target)
             return;
 
-        if (!TryComp<TransformComponent>(target, out var transform) || !_mobState.IsDead(target))
+        if (!TryComp(target, out TransformComponent? transform) || !_mobState.IsDead(target))
             return;
 
         var targetCords = _transform.GetMoverCoordinates(target, transform);
@@ -328,7 +328,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
     {
         if (!Resolve(uid, ref component) ||
             component.IsAnnouncedOnce ||
-            !TryComp<TransformComponent>(uid, out var xform))
+            !TryComp(uid, out TransformComponent? xform))
             return;
 
         var msg = Loc.GetString("spider-queen-warning",

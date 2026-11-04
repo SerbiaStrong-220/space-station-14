@@ -12,7 +12,12 @@
     # SS220 PortableRecharger end
   - type: Sprite
     sprite: Objects/Power/portable_recharger.rsi
-    state: charging
+    layers:
+    - map: ["enum.PowerChargerVisualLayers.Base"]
+      state: charging
+    - map: ["enum.PowerChargerVisualLayers.Light"]
+      state: charging-unlit
+      shader: unshaded
   - type: Clothing
     equippedPrefix: charging
     quickEquip: false
@@ -22,9 +27,6 @@
     slotId: charger_slot
     portable: true
   - type: PowerChargerVisuals
-  - type: ApcPowerReceiver
-    needsPower: false
-    powerLoad: 0
   - type: StaticPrice
     price: 500
   - type: Tag
@@ -38,8 +40,7 @@
         ejectOnInteract: false # SS220 Alternative interaction for eject
         whitelist:
           components:
-          - HitscanBatteryAmmoProvider
-          - ProjectileBatteryAmmoProvider
+          - BatteryAmmoProvider
           - Stunbaton # SS220 Added
           - PowerCell # SS220 Added
           # SS220 Added tags for charging support begin

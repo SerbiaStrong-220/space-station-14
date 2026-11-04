@@ -16,3 +16,4 @@ job-name-ert-chaplain = ERT Chaplain
 job-name-nt-admiral = NanoTrasen Admiral
 job-name-nt-politician = NanoTrasen Diplomat
 job-name-ussp = USSP
+job-name-migo = Mi-Go

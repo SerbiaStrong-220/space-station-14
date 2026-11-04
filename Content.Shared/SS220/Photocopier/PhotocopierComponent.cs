@@ -152,7 +152,7 @@ public sealed partial class PhotocopierComponent : Component
     [ViewVariables(VVAccess.ReadOnly)]
     public EntityUid? EntityOnTop;
 
-    public HumanoidAppearanceComponent? HumanoidAppearanceOnTop;
+    public HumanoidProfileComponent? HumanoidProfileOnTop;
 
     /// <summary>
     /// Remaining time of printing

@@ -14,9 +14,9 @@ namespace Content.Client.SS220.UserInterface.DiscordLink;
 [GenerateTypedNameReferences]
 public sealed partial class DiscordLinkRequiredGui : Control
 {
-    [Dependency] private readonly DiscordPlayerInfoManager _discordPlayerInfoManager = default!;
-    [Dependency] private readonly IClientConsoleHost _consoleHost = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private DiscordPlayerInfoManager _discordPlayerInfoManager = default!;
+    [Dependency] private IClientConsoleHost _consoleHost = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     public DiscordLinkRequiredGui()
     {

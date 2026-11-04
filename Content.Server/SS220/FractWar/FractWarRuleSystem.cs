@@ -10,7 +10,7 @@ namespace Content.Server.SS220.FractWar;
 
 public sealed partial class FractWarRuleSystem : GameRuleSystem<FractWarRuleComponent>
 {
-    [Dependency] private readonly EventCapturePointSystem _eventCapturePoint = default!;
+    [Dependency] private EventCapturePointSystem _eventCapturePoint = default!;
 
     protected override void AppendRoundEndText(EntityUid uid, FractWarRuleComponent component, GameRuleComponent gameRule, ref RoundEndTextAppendEvent args)
     {

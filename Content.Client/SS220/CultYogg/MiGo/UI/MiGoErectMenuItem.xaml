@@ -6,7 +6,7 @@
                  TooltipDelay="0"
                  ToggleMode="True">
     <PanelContainer Name="Panel"/>
-    <BoxContainer Name="Root" Orientation="Vertical" HorizontalExpand="True">
+    <BoxContainer Name="RootContainer" Orientation="Vertical" HorizontalExpand="True">
         <EntityPrototypeView Name="ItemView" Scale="2 2" VerticalAlignment="Center" VerticalExpand="True" />
         <BoxContainer Name="MaterialsContainer" Orientation="Horizontal" HorizontalAlignment="Right" HorizontalExpand="True" VerticalAlignment="Bottom" Margin="0 0 8 8">
         </BoxContainer>

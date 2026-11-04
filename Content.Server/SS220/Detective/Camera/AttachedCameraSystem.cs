@@ -6,10 +6,10 @@ using Content.Shared.Verbs;
 
 namespace Content.Server.SS220.Detective.Camera;
 
-public sealed class AttachedCameraSystem : EntitySystem
+public sealed partial class AttachedCameraSystem : EntitySystem
 {
-    [Dependency] private readonly DetectiveCameraAttachSystem _detectiveCameraAttach = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private DetectiveCameraAttachSystem _detectiveCameraAttach = default!;
+    [Dependency] private ItemSlotsSystem _itemSlots = default!;
 
     public override void Initialize()
     {

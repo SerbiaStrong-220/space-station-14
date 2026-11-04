@@ -201,3 +201,4 @@ guide-entry-rules-ban-types = Виды банов
 guide-entry-rules-ban-durations = Длительности банов
 guide-entry-writing = Разметка письма
 guide-entry-glossary = Словарь терминов
+guide-entry-food-processor-recipes = Кухонный комбайн

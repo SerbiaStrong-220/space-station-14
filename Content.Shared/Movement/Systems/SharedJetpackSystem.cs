@@ -29,6 +29,8 @@ public abstract class SharedJetpackSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!; //SS220 Magboots with jet fix
     [Dependency] private readonly SharedBuckleSystem _buckle = default!;
 
+    [Dependency] private readonly EntityQuery<JetpackComponent> _jetpackQuery = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -65,13 +67,11 @@ public abstract class SharedJetpackSystem : EntitySystem
     private void OnJetpackUserGravityChanged(ref GravityChangedEvent ev)
     {
         var gridUid = ev.ChangedGridIndex;
-        var jetpackQuery = GetEntityQuery<JetpackComponent>();
-
         var query = EntityQueryEnumerator<JetpackUserComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var user, out var transform))
         {
             if (transform.GridUid == gridUid && ev.HasGravity &&
-                jetpackQuery.TryGetComponent(user.Jetpack, out var jetpack))
+                _jetpackQuery.TryGetComponent(user.Jetpack, out var jetpack))
             {
                 _popup.PopupClient(Loc.GetString("jetpack-to-grid"), uid, uid);
 
@@ -99,7 +99,8 @@ public abstract class SharedJetpackSystem : EntitySystem
     private void OnJetpackUserEntParentChanged(EntityUid uid, JetpackUserComponent component, ref EntParentChangedMessage args)
     {
         if (TryComp<JetpackComponent>(component.Jetpack, out var jetpack) &&
-            (!CanEnableOnGrid(args.Transform.GridUid) || !CheckMagboots(uid))) // SS220 Magboots with jet fix
+            (!CanEnableOnGrid(args.Transform.GridUid) || HasActiveMagboots(uid)) && // SS220 Magboots with jet fix
+            !HasMoonBoots(uid)) // ss220-fix-jetpack-effect
         {
             SetEnabled(component.Jetpack, jetpack, false, uid);
 
@@ -164,7 +165,7 @@ public abstract class SharedJetpackSystem : EntitySystem
         //ss220 magboots with jet on gravity fix end
 
         //SS220 Magboots with jet fix begin
-        if (!CheckMagboots(args.Performer))
+        if (HasActiveMagboots(args.Performer))
         {
             _popup.PopupClient(Loc.GetString("jetpack-no-magboots-on-grid"), uid, args.Performer);
             return;
@@ -222,11 +223,11 @@ public abstract class SharedJetpackSystem : EntitySystem
     /// <returns>
     ///     true if entity can use jet with magboots
     /// </returns>
-    private bool CheckMagboots(EntityUid user)
+    private bool HasActiveMagboots(EntityUid user)
     {
         var xform = Transform(user);
         if (xform.GridUid is null)
-            return true;
+            return false;
 
         var slotEnumerator = _inventory.GetSlotEnumerator(user);
         while (slotEnumerator.NextItem(out var item))
@@ -234,12 +235,29 @@ public abstract class SharedJetpackSystem : EntitySystem
             if (HasComp<MagbootsComponent>(item) &&
                 TryComp<ItemToggleComponent>(item, out var itemToggle) &&
                 itemToggle.Activated)
-                return false;
+                return true;
         }
 
-        return true;
+        return false;
     }
     // SS220 Magboots with jet fix end
+
+    // ss220-fix-jetpack-effect-begin
+    private bool HasMoonBoots(EntityUid user)
+    {
+        var slotEnumerator = _inventory.GetSlotEnumerator(user);
+        while (slotEnumerator.NextItem(out var item, out var slot))
+        {
+            if (slot.SlotFlags != SlotFlags.FEET)
+                continue;
+
+            if (HasComp<AntiGravityClothingComponent>(item))
+                return true;
+        }
+
+        return false;
+    }
+    // ss220-fix-jetpack-effect-end
 
     private void OnJetpackGetAction(EntityUid uid, JetpackComponent component, GetItemActionsEvent args)
     {
@@ -266,6 +284,14 @@ public abstract class SharedJetpackSystem : EntitySystem
 
         if (enabled)
         {
+            // If the user is already using another jetpack, disable it first
+            if (TryComp<JetpackUserComponent>(user, out var userComp) &&
+                userComp.Jetpack != uid &&
+                TryComp<JetpackComponent>(userComp.Jetpack, out var oldJetpack))
+            {
+                SetEnabled(userComp.Jetpack, oldJetpack, false, user);
+            }
+
             SetupUser(user.Value, uid, component);
             EnsureComp<ActiveJetpackComponent>(uid);
         }
@@ -275,6 +301,12 @@ public abstract class SharedJetpackSystem : EntitySystem
             RemComp<ActiveJetpackComponent>(uid);
         }
 
+        // SS220-add-gas-usage-modifier-begin
+        TryComp<ActiveJetpackComponent>(uid, out var activeJetpack);
+
+        var ev = new JetPackActivatedEvent((uid, activeJetpack));
+        RaiseLocalEvent(user.Value, ref ev);
+        // SS220-add-gas-usage-modifier-end
 
         Appearance.SetData(uid, JetpackVisuals.Enabled, enabled);
         Dirty(uid, component);

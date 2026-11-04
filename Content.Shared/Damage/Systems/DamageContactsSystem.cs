@@ -17,6 +17,8 @@ public sealed class DamageContactsSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly SharedBloodstreamExtensionSystem _sharedBloodstream = default!; //SS220 Add BloodlossModifier
 
+    [Dependency] private readonly EntityQuery<DamageContactsComponent> _damageQuery = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -55,14 +57,13 @@ public sealed class DamageContactsSystem : EntitySystem
         if (!TryComp<PhysicsComponent>(otherUid, out var body))
             return;
 
-        var damageQuery = GetEntityQuery<DamageContactsComponent>();
         foreach (var ent in _physics.GetContactingEntities(otherUid, body))
 
         {
             if (ent == uid)
                 continue;
 
-            if (damageQuery.HasComponent(ent))
+            if (_damageQuery.HasComponent(ent))
                 return;
         }
 
@@ -100,7 +101,7 @@ public sealed class DamageContactsSystem : EntitySystem
             return;
 
         if (_whitelistSystem.IsWhitelistPass(component.IgnoreWhitelist, otherUid) ||
-            _whitelistSystem.IsBlacklistFail(component.IgnoreBlacklist, otherUid)) //SS220 Add ignore blacklist
+            _whitelistSystem.IsWhitelistFail(component.IgnoreBlacklist, otherUid)) //SS220 Add ignore blacklist
             return;
 
         var damagedByContact = EnsureComp<DamagedByContactComponent>(otherUid);

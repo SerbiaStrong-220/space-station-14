@@ -106,7 +106,7 @@ public sealed class MoverController : SharedMoverController
         }
 
         // Server-side should just be handled on its own so we'll just do this shizznit
-        HandleMobMovement((player, mover), frameTime);
+        HandleMobMovement((player, mover), frameTime, false, ref AroundColliderSet); // SS220-make-mover-parallel
     }
 
     protected override bool CanSound()

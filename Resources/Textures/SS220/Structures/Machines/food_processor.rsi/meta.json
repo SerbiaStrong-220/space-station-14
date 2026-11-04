@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from ss220club/BandaStation at https://github.com/ss220club/BandaStation/blob/b86774ad63c632d08e6f8fbda40539590ffaee6b/icons/obj/machines/kitchen.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "processor"
+    }
+  ]
+}

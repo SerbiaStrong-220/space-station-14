@@ -19,3 +19,5 @@ ent-ClothingHeadHatHoodExosuitSalvage = капюшон экзокостюма у
     .desc = Капюшон из крепкой ткани, обеспечивающий небольшую защиту.
 ent-ClothingHeadHatHoodHeartFinaly = сердечный капюшон
     .desc = Капюшон.
+ent-ClothingHeadHatHoodSchema = капюшон великой схимы
+    .desc = { ent-ClothingOuterSchema.desc }

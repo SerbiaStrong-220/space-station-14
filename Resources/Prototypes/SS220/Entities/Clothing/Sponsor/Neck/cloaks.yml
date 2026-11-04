@@ -160,3 +160,24 @@
     containers:
       toggleable-clothing: !type:ContainerSlot {}
 
+# Для лороведов
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorNeckLoroveds
+  name: the cloak of storytelling
+  description: A special cloak given to the guardians, whose purpose is to preserve the memory of the world.
+  suffix: Sponsor Neck, Loroved
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Neck/Cloak/loroved.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Neck/Cloak/loroved.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatLorovedCloak
+    requiredSlot:
+    - neck
+    slot: head
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:ContainerSlot {}
+

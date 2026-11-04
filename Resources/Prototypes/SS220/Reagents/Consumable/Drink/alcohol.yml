@@ -13,7 +13,7 @@
     sprite: SS220/Objects/Consumable/Drinks/glintveinglass.rsi
     state: icon
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 2
@@ -39,14 +39,14 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 2
       - !type:AdjustReagent
         reagent: Ethanol
         amount: 0.4
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         conditions:
@@ -74,7 +74,7 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 2
@@ -100,7 +100,7 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 1
@@ -165,7 +165,7 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 1
@@ -183,4 +183,22 @@
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Tajaran ]
+  fizziness: 0.2
+
+# OrionNebula
+
+- type: reagent
+  id: OrionNebula
+  name: reagent-name-Orion-Nebula
+  parent: BaseAlcohol
+  desc: reagent-desc-Orion-Nebula
+  physicalDesc: reagent-physical-desc-cosmic
+  flavor: OrionNebula
+  color: "#4F459B"
+  metamorphicSprite:
+    sprite: SS220/Objects/Consumable/Drinks/orionnebula.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 6
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
   fizziness: 0.2

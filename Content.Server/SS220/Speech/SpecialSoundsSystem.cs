@@ -7,10 +7,10 @@ using Content.Shared.Inventory;
 
 namespace Content.Server.SS220.Speech;
 
-public sealed class SpecialSoundsSystem : EntitySystem
+public sealed partial class SpecialSoundsSystem : EntitySystem
 {
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly InventorySystem _inventorySystem = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private InventorySystem _inventorySystem = default!;
 
     public override void Initialize()
     {
