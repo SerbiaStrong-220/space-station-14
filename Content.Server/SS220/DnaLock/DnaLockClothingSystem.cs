@@ -2,12 +2,10 @@
 
 using Content.Server.Explosion.EntitySystems;
 using Content.Shared.Clothing;
-using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
 using Content.Shared.SS220.DnaLock;
 using Content.Shared.SS220.DnaLock.Components;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.DnaLock;
@@ -55,7 +53,7 @@ public sealed partial class DnaLockClothingSystem : EntitySystem
 
             active.NextBeepAt += clothing.BeepInterval;
             var secondsLeft = (int) Math.Ceiling((active.ExplodeAt - curTime).TotalSeconds);
-            Warn(uid, active.WearerUid, clothing, clothing.TimerPopupOthers, clothing.TimerPopupWearer, secondsLeft);
+            Warn(uid, active.WearerUid, clothing, clothing.TimerPopup, secondsLeft);
         }
     }
 
@@ -72,7 +70,7 @@ public sealed partial class DnaLockClothingSystem : EntitySystem
         active.NextBeepAt = curTime + ent.Comp.BeepInterval;
 
         var secondsLeft = (int) Math.Ceiling(ent.Comp.TimeToExplode.TotalSeconds);
-        Warn(ent, args.Wearer, ent.Comp, ent.Comp.WarningPopupOthers, ent.Comp.WarningPopupWearer, secondsLeft);
+        Warn(ent, args.Wearer, ent.Comp, ent.Comp.WarningPopup, secondsLeft);
     }
 
     private void OnUnequipped(Entity<DnaLockClothingComponent> ent, ref ClothingGotUnequippedEvent args)
@@ -80,17 +78,9 @@ public sealed partial class DnaLockClothingSystem : EntitySystem
         RemComp<DnaLockClothingActiveComponent>(ent);
     }
 
-    private void Warn(EntityUid item, EntityUid wearer, DnaLockClothingComponent clothing, LocId othersMsg, LocId wearerMsg, int secondsLeft)
+    private void Warn(EntityUid item, EntityUid wearer, DnaLockClothingComponent clothing, LocId message, int secondsLeft)
     {
-        var wearerIdentity = Identity.Entity(wearer, EntityManager);
-
-        _popup.PopupEntity(Loc.GetString(othersMsg, ("wearer", wearerIdentity), ("seconds", secondsLeft)),
-            wearer,
-            Filter.PvsExcept(wearer),
-            recordReplay: true,
-            type: PopupType.LargeCaution);
-
-        _popup.PopupEntity(Loc.GetString(wearerMsg, ("seconds", secondsLeft)), wearer, wearer, PopupType.LargeCaution);
+        _popup.PopupEntity(Loc.GetString(message, ("seconds", secondsLeft)), wearer, PopupType.LargeCaution);
         _audio.PlayPvs(clothing.WarningSound, item);
     }
 

@@ -34,31 +34,19 @@ public sealed partial class DnaLockClothingComponent : Component
     public SoundSpecifier WarningSound = new SoundPathSpecifier("/Audio/Items/beep.ogg");
 
     /// <summary>
-    /// Popup shown to everyone in PVS.
+    /// Announced by the item to everyone nearby when an unauthorized user equips it.
     /// </summary>
     [DataField]
-    public LocId WarningPopupOthers = "dna-lock-clothing-unauthorized-warning";
+    public LocId WarningPopup = "dna-lock-clothing-unauthorized-warning";
 
     /// <summary>
-    /// Popup shown to the unauthorized wearer.
+    /// Countdown announced by the item to everyone nearby.
     /// </summary>
     [DataField]
-    public LocId WarningPopupWearer = "dna-lock-clothing-unauthorized-warning-self";
+    public LocId TimerPopup = "dna-lock-clothing-timer-warning";
 
     /// <summary>
-    /// Countdown popup shown to nearby players.
-    /// </summary>
-    [DataField]
-    public LocId TimerPopupOthers = "dna-lock-clothing-timer-warning";
-
-    /// <summary>
-    /// Countdown popup shown to the unauthorized wearer.
-    /// </summary>
-    [DataField]
-    public LocId TimerPopupWearer = "dna-lock-clothing-timer-warning-self";
-
-    /// <summary>
-    /// Popup shown to everyone nearby at the moment of detonation.
+    /// Announced by the item to everyone nearby at the moment of detonation.
     /// </summary>
     [DataField]
     public LocId DetonationPopup = "dna-lock-clothing-detonating";

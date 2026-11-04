@@ -11,8 +11,6 @@ dna-lock-examine-inround-unset = Может использовать любой.
 dna-lock-examine-inround-active = Привязан к ДНК владельца, ДНК-замок включён.
 dna-lock-examine-inround-inactive = Привязан к ДНК владельца, но ДНК-замок выключен.
 
-dna-lock-clothing-unauthorized-warning = { $wearer } носит одежду с ДНК-замком!
-dna-lock-clothing-unauthorized-warning-self = ВНИМАНИЕ: ДНК-замок активирован! Снимите одежду!
-dna-lock-clothing-timer-warning = { $wearer } взорвётся через { $seconds } сек.!
-dna-lock-clothing-timer-warning-self = ДЕТОНАЦИЯ через { $seconds } сек.!
+dna-lock-clothing-unauthorized-warning = ВНИМАНИЕ! ДНК пользователя не распознана. Детонация через { $seconds } сек.!
+dna-lock-clothing-timer-warning = Детонация через { $seconds } сек.!
 dna-lock-clothing-detonating = ДЕТОНАЦИЯ!
