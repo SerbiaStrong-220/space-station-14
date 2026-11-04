@@ -51,7 +51,7 @@ public sealed class MagnetPickupSystem : EntitySystem
 
     private void OnMagnetToggleVerb(Entity<MagnetPickupComponent> ent, ref GetVerbsEvent<ActivationVerb> args)
     {
-        if (!args.CanAccess || !args.CanInteract || !TryComp(ent, out ItemToggleComponent? toggle))
+        if (!args.CanAccess || !args.CanInteract || !TryComp<ItemToggleComponent>(ent, out var toggle))
             return;
 
         var user = args.User;
@@ -74,13 +74,13 @@ public sealed class MagnetPickupSystem : EntitySystem
             if (comp.NextScan > currentTime)
                 continue;
 
+            comp.NextScan += ScanDelay;
+            Dirty(uid, comp);
+
             // SS220-MagnetToggle begin
             if (!comp.Enabled)
                 continue;
             // SS220-MagnetToggle end
-
-            comp.NextScan += ScanDelay;
-            Dirty(uid, comp);
 
             // SS220-OreBagBorgMagnet begin
             if (!comp.WorksOutsideSlot)
