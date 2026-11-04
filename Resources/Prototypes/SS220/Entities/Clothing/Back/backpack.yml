@@ -27,7 +27,6 @@
   description: A backpack specially designed for the Blue Shield, with a unique pocket hardsuit technology.
   components:
   - type: DnaLockable
-    mode: Roundstart
     roundstartJob: BlueShield
     blockedActions: ToggleableClothing
   - type: Sprite
@@ -52,7 +51,7 @@
   description: A backpack specially designed for the Blue Shield, with a unique pocket hardsuit technology.
   components:
   - type: DnaLockable
-    mode: InRound
+    roundstartJob: null
   - type: ToggleableClothing
     clothingPrototype: ClothingOuterHardsuitHightBlueshield
 

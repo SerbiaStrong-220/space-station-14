@@ -12,9 +12,6 @@ namespace Content.Shared.SS220.DnaLock.Components;
 public sealed partial class DnaLockableComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public DnaLockMode Mode = DnaLockMode.InRound;
-
-    [DataField, AutoNetworkedField]
     public ProtoId<JobPrototype>? RoundstartJob;
 
     [DataField, AutoNetworkedField]
@@ -39,16 +36,7 @@ public sealed partial class DnaLockableComponent : Component
     public SoundSpecifier? UnauthorizedUseSound = new SoundPathSpecifier("/Audio/Machines/custom_deny.ogg");
 
     [DataField, AutoNetworkedField]
-    public bool Emagged;
-
-    [DataField, AutoNetworkedField]
     public DnaLockBlockedActions BlockedActions = DnaLockBlockedActions.All;
-}
-
-public enum DnaLockMode
-{
-    Roundstart,
-    InRound
 }
 
 [Flags]
@@ -57,9 +45,7 @@ public enum DnaLockBlockedActions : byte
     None = 0,
     StorageOpen = 1 << 0,
     ToggleableClothing = 1 << 1,
-    BatteryFireModeChange = 1 << 2,
-    BatteryEject = 1 << 3,
-    UserInterface = 1 << 4,
-    All = StorageOpen | ToggleableClothing | BatteryFireModeChange | BatteryEject | UserInterface
+    BatteryEject = 1 << 2,
+    UserInterface = 1 << 3,
+    All = StorageOpen | ToggleableClothing | BatteryEject | UserInterface
 }
-

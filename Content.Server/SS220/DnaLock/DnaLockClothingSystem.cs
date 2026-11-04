@@ -87,16 +87,6 @@ public sealed partial class DnaLockClothingSystem : EntitySystem
     private void Detonate(EntityUid item, EntityUid wearer, DnaLockClothingComponent clothing)
     {
         _popup.PopupEntity(Loc.GetString(clothing.DetonationPopup), wearer, PopupType.LargeCaution);
-
-        _explosion.QueueExplosion(item,
-            clothing.ExplosionType,
-            clothing.ExplosionTotalIntensity,
-            clothing.ExplosionSlope,
-            clothing.ExplosionMaxTileIntensity,
-            tileBreakScale: 0f,
-            maxTileBreak: 0,
-            canCreateVacuum: false);
-
-        QueueDel(item);
+        _explosion.TriggerExplosive(item, user: wearer);
     }
 }
