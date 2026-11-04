@@ -11,18 +11,13 @@ using Content.Shared.Forensics.Components;
 using Content.Shared.Ghost;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item.ItemToggle.Components;
-using Content.Shared.Mind;
 using Content.Shared.Popups;
-using Content.Shared.Roles;
-using Content.Shared.Roles.Jobs;
 using Content.Shared.SS220.DnaLock.Components;
 using Content.Shared.Storage;
 using Content.Shared.UserInterface;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Containers;
-using Robust.Shared.Network;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.DnaLock;
@@ -32,18 +27,13 @@ public sealed partial class DnaLockSystem : EntitySystem
     [Dependency] private SharedEntityEffectsSystem _entityEffects = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private SharedJobSystem _job = default!;
-    [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private EmagSystem _emag = default!;
     [Dependency] private ISharedAdminManager _admin = default!;
-    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<DnaLockableComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<DnaLockableComponent, EntGotInsertedIntoContainerMessage>(OnInsertedIntoContainer);
         SubscribeLocalEvent<DnaLockableComponent, ItemToggleActivateAttemptEvent>(OnActivateAttempt);
         SubscribeLocalEvent<DnaLockableComponent, AttemptShootEvent>(OnAttemptShoot);
         SubscribeLocalEvent<DnaLockableComponent, GetVerbsEvent<Verb>>(OnGetVerbs);
@@ -51,46 +41,9 @@ public sealed partial class DnaLockSystem : EntitySystem
         SubscribeLocalEvent<AttachedClothingComponent, BeingEquippedAttemptEvent>(OnAttachedEquipAttempt);
         SubscribeLocalEvent<DnaLockableComponent, ItemSlotEjectAttemptEvent>(OnItemSlotEjectAttempt);
         SubscribeLocalEvent<DnaLockableComponent, ExaminedEvent>(OnExamined);
-        SubscribeLocalEvent<RoleAddedEvent>(OnRoleAdded);
         SubscribeLocalEvent<DnaLockableComponent, GotEmaggedEvent>(OnEmagged);
         SubscribeLocalEvent<DnaLockableComponent, ActivatableUIOpenAttemptEvent>(OnActivatableUIOpenAttempt);
         SubscribeLocalEvent<DnaLockableComponent, BoundUserInterfaceMessageAttempt>(OnBoundUiMessageAttempt);
-    }
-
-    // Items spawned after the job was assigned would otherwise stay unusable for everyone.
-    private void OnMapInit(Entity<DnaLockableComponent> ent, ref MapInitEvent args)
-    {
-        if (!_net.IsServer || ent.Comp.RoundstartJob is not { } job)
-            return;
-
-        var query = EntityQueryEnumerator<MindComponent>();
-        while (query.MoveNext(out var mindId, out var mind))
-        {
-            if (_job.MindHasJobWithId(mindId, job) && TryGetDna(mind.OwnedEntity, out var dna))
-                ent.Comp.AllowedDna.Add(dna);
-        }
-
-        Dirty(ent);
-    }
-
-    private void OnInsertedIntoContainer(Entity<DnaLockableComponent> ent, ref EntGotInsertedIntoContainerMessage args)
-    {
-        if (!_net.IsServer || !ent.Comp.BindToFirstHolder)
-            return;
-
-        ent.Comp.BindToFirstHolder = false;
-
-        var holder = args.Container.Owner;
-        string? dna;
-        while (!TryGetDna(holder, out dna))
-        {
-            if (!_container.TryGetContainingContainer(holder, out var container))
-                return;
-
-            holder = container.Owner;
-        }
-
-        RegisterDna(ent, holder, dna);
     }
 
     private void OnActivateAttempt(Entity<DnaLockableComponent> ent, ref ItemToggleActivateAttemptEvent args)
@@ -217,24 +170,6 @@ public sealed partial class DnaLockSystem : EntitySystem
             : "dna-lock-examine-inround-inactive"));
     }
 
-    private void OnRoleAdded(RoleAddedEvent ev)
-    {
-        if (!_net.IsServer
-            || !_job.MindTryGetJobId(ev.MindId, out var jobId)
-            || !TryGetDna(ev.Mind.OwnedEntity, out var dna))
-            return;
-
-        var query = EntityQueryEnumerator<DnaLockableComponent>();
-        while (query.MoveNext(out var uid, out var comp))
-        {
-            if (comp.RoundstartJob != jobId)
-                continue;
-
-            if (comp.AllowedDna.Add(dna))
-                Dirty(uid, comp);
-        }
-    }
-
     private void OnEmagged(Entity<DnaLockableComponent> ent, ref GotEmaggedEvent args)
     {
         if (ent.Comp.RoundstartJob != null
@@ -261,6 +196,12 @@ public sealed partial class DnaLockSystem : EntitySystem
         Dirty(ent);
     }
 
+    public void AllowDna(Entity<DnaLockableComponent> ent, string dna)
+    {
+        if (ent.Comp.AllowedDna.Add(dna))
+            Dirty(ent);
+    }
+
     /// <summary>
     /// Checks whether <paramref name="user"/> may use the item, showing the denial feedback unless <paramref name="silentFail"/> is set.
     /// </summary>
@@ -273,6 +214,12 @@ public sealed partial class DnaLockSystem : EntitySystem
             DenyUse(ent, user);
 
         return false;
+    }
+
+    public bool TryGetDna(EntityUid? uid, [NotNullWhen(true)] out string? dna)
+    {
+        dna = TryComp<DnaComponent>(uid, out var comp) ? comp.DNA : null;
+        return !string.IsNullOrEmpty(dna);
     }
 
     private bool IsAuthorized(Entity<DnaLockableComponent> ent, EntityUid user)
@@ -303,15 +250,9 @@ public sealed partial class DnaLockSystem : EntitySystem
         }
     }
 
-    private bool TryGetDna(EntityUid? uid, [NotNullWhen(true)] out string? dna)
+    private bool IsEmagged(Entity<DnaLockableComponent> ent)
     {
-        dna = TryComp<DnaComponent>(uid, out var comp) ? comp.DNA : null;
-        return !string.IsNullOrEmpty(dna);
-    }
-
-    private bool IsEmagged(EntityUid uid)
-    {
-        return _emag.CheckFlag(uid, EmagType.Interaction);
+        return ent.Comp.RoundstartJob == null && _emag.CheckFlag(ent, EmagType.Interaction);
     }
 
     private static bool IsBlocked(Entity<DnaLockableComponent> ent, DnaLockBlockedActions action)

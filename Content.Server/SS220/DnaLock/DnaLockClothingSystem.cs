@@ -44,6 +44,7 @@ public sealed partial class DnaLockClothingSystem : EntitySystem
 
             if (curTime >= active.ExplodeAt)
             {
+                RemCompDeferred<DnaLockClothingActiveComponent>(uid);
                 Detonate(uid, active.WearerUid, clothing);
                 continue;
             }
