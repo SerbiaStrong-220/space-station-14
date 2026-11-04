@@ -149,7 +149,7 @@
     mode: Roundstart
     roundstartJob: BlueShield
     unauthorizedUseEffects:
-      - !type:Electrocute
+    - !type:Electrocute
   - type: Gun
     selectedMode: Burst
     availableModes:

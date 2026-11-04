@@ -12,13 +12,13 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.DnaLock;
 
-public sealed class DnaLockClothingSystem : EntitySystem
+public sealed partial class DnaLockClothingSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly ExplosionSystem _explosion = default!;
-    [Dependency] private readonly DnaLockSystem _dnaLock = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private ExplosionSystem _explosion = default!;
+    [Dependency] private DnaLockSystem _dnaLock = default!;
 
     public override void Initialize()
     {
@@ -34,58 +34,43 @@ public sealed class DnaLockClothingSystem : EntitySystem
 
         var curTime = _timing.CurTime;
         var query = EntityQueryEnumerator<DnaLockClothingActiveComponent, DnaLockClothingComponent>();
-
         while (query.MoveNext(out var uid, out var active, out var clothing))
         {
             if (TerminatingOrDeleted(active.WearerUid))
             {
-                RemComp<DnaLockClothingActiveComponent>(uid);
+                RemCompDeferred<DnaLockClothingActiveComponent>(uid);
                 continue;
             }
 
             if (curTime >= active.ExplodeAt)
             {
-                TriggerExplosion(uid, active, clothing);
+                Detonate(uid, active.WearerUid, clothing);
                 continue;
             }
 
-            // Beeper and popup countdown
-            if (curTime >= active.NextBeepAt)
-            {
-                var timeLeft = (int)(active.ExplodeAt - curTime).TotalSeconds;
-                PlayTimerWarning(uid, active.WearerUid, clothing, timeLeft);
+            if (curTime < active.NextBeepAt)
+                continue;
 
-                if (clothing.BeepInterval <= TimeSpan.Zero)
-                {
-                    active.NextBeepAt = curTime + TimeSpan.FromSeconds(1);
-                    continue;
-                }
-
-                active.NextBeepAt += clothing.BeepInterval;
-                while (active.NextBeepAt <= curTime)
-                {
-                    active.NextBeepAt += clothing.BeepInterval;
-                }
-            }
+            active.NextBeepAt += clothing.BeepInterval;
+            var secondsLeft = (int) (active.ExplodeAt - curTime).TotalSeconds;
+            Warn(uid, active.WearerUid, clothing, clothing.TimerPopupOthers, clothing.TimerPopupWearer, secondsLeft);
         }
     }
 
     private void OnEquipped(Entity<DnaLockClothingComponent> ent, ref ClothingGotEquippedEvent args)
     {
-        if (!TryComp<DnaLockableComponent>(ent, out var dnaLock))
+        if (!TryComp<DnaLockableComponent>(ent, out var dnaLock)
+            || _dnaLock.CheckAccess((ent, dnaLock), args.Wearer, silentFail: true))
             return;
 
-        if (_dnaLock.CheckAccess((ent.Owner, dnaLock), args.Wearer, silentFail: true))
-            return;
-
-        PlayInitialWarning(ent.Owner, args.Wearer, ent.Comp);
-
-        // Starting the timer
         var curTime = _timing.CurTime;
         var active = EnsureComp<DnaLockClothingActiveComponent>(ent);
         active.WearerUid = args.Wearer;
         active.ExplodeAt = curTime + ent.Comp.TimeToExplode;
         active.NextBeepAt = curTime + ent.Comp.BeepInterval;
+
+        var secondsLeft = (int) ent.Comp.TimeToExplode.TotalSeconds;
+        Warn(ent, args.Wearer, ent.Comp, ent.Comp.WarningPopupOthers, ent.Comp.WarningPopupWearer, secondsLeft);
     }
 
     private void OnUnequipped(Entity<DnaLockClothingComponent> ent, ref ClothingGotUnequippedEvent args)
@@ -93,65 +78,25 @@ public sealed class DnaLockClothingSystem : EntitySystem
         RemComp<DnaLockClothingActiveComponent>(ent);
     }
 
-    private void PlayInitialWarning(EntityUid itemUid, EntityUid wearer, DnaLockClothingComponent clothing)
+    private void Warn(EntityUid item, EntityUid wearer, DnaLockClothingComponent clothing, LocId othersMsg, LocId wearerMsg, int secondsLeft)
     {
-        var wearerName = Identity.Name(wearer, EntityManager, wearer);
+        var wearerIdentity = Identity.Entity(wearer, EntityManager);
 
-        var othersMsg = Loc.GetString(
-            clothing.WarningPopupOthers,
-            ("wearer", wearerName));
-
-        var selfMsg = Loc.GetString(clothing.WarningPopupWearer);
-
-        _popup.PopupEntity(
-            othersMsg,
+        _popup.PopupEntity(Loc.GetString(othersMsg, ("wearer", wearerIdentity), ("seconds", secondsLeft)),
             wearer,
             Filter.PvsExcept(wearer),
             recordReplay: true,
             type: PopupType.LargeCaution);
 
-        _popup.PopupEntity(selfMsg, wearer, wearer, PopupType.LargeCaution);
-        _audio.PlayPvs(clothing.WarningSound, itemUid);
+        _popup.PopupEntity(Loc.GetString(wearerMsg, ("seconds", secondsLeft)), wearer, wearer, PopupType.LargeCaution);
+        _audio.PlayPvs(clothing.WarningSound, item);
     }
 
-    private void PlayTimerWarning(EntityUid itemUid, EntityUid wearer, DnaLockClothingComponent clothing, int secondsLeft)
+    private void Detonate(EntityUid item, EntityUid wearer, DnaLockClothingComponent clothing)
     {
-        var wearerName = Identity.Name(wearer, EntityManager, wearer);
+        _popup.PopupEntity(Loc.GetString(clothing.DetonationPopup), wearer, PopupType.LargeCaution);
 
-        var othersMsg = Loc.GetString(
-            clothing.TimerPopupOthers,
-            ("wearer", wearerName),
-            ("seconds", secondsLeft));
-
-        var selfMsg = Loc.GetString(
-            clothing.TimerPopupWearer,
-            ("seconds", secondsLeft));
-
-        _popup.PopupEntity(
-            othersMsg,
-            wearer,
-            Filter.PvsExcept(wearer),
-            recordReplay: true,
-            type: PopupType.LargeCaution);
-
-        _popup.PopupEntity(selfMsg, wearer, wearer, PopupType.LargeCaution);
-        _audio.PlayPvs(clothing.WarningSound, itemUid);
-    }
-
-    private void TriggerExplosion(EntityUid itemUid, DnaLockClothingActiveComponent active, DnaLockClothingComponent clothing)
-    {
-        var wearer = active.WearerUid;
-
-        if (!TerminatingOrDeleted(active.WearerUid))
-        {
-            var detonMsg = Loc.GetString("dna-lock-clothing-detonating");
-            _popup.PopupEntity(detonMsg, wearer, Filter.Pvs(wearer), recordReplay: true, type: PopupType.LargeCaution);
-        }
-
-        var epicenterUid = !TerminatingOrDeleted(active.WearerUid) ? wearer : itemUid;
-
-        _explosion.QueueExplosion(
-            epicenterUid,
+        _explosion.QueueExplosion(wearer,
             clothing.ExplosionType,
             clothing.ExplosionTotalIntensity,
             clothing.ExplosionSlope,
@@ -160,6 +105,6 @@ public sealed class DnaLockClothingSystem : EntitySystem
             maxTileBreak: 0,
             canCreateVacuum: false);
 
-        QueueDel(itemUid);
+        QueueDel(item);
     }
 }

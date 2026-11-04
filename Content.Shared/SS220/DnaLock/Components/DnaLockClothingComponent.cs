@@ -37,25 +37,31 @@ public sealed partial class DnaLockClothingComponent : Component
     /// Popup shown to everyone in PVS.
     /// </summary>
     [DataField]
-    public string WarningPopupOthers = "dna-lock-clothing-unauthorized-warning";
+    public LocId WarningPopupOthers = "dna-lock-clothing-unauthorized-warning";
 
     /// <summary>
     /// Popup shown to the unauthorized wearer.
     /// </summary>
     [DataField]
-    public string WarningPopupWearer = "dna-lock-clothing-unauthorized-warning-self";
+    public LocId WarningPopupWearer = "dna-lock-clothing-unauthorized-warning-self";
 
     /// <summary>
     /// Countdown popup shown to nearby players.
     /// </summary>
     [DataField]
-    public string TimerPopupOthers = "dna-lock-clothing-timer-warning";
+    public LocId TimerPopupOthers = "dna-lock-clothing-timer-warning";
 
     /// <summary>
     /// Countdown popup shown to the unauthorized wearer.
     /// </summary>
     [DataField]
-    public string TimerPopupWearer = "dna-lock-clothing-timer-warning-self";
+    public LocId TimerPopupWearer = "dna-lock-clothing-timer-warning-self";
+
+    /// <summary>
+    /// Popup shown to everyone nearby at the moment of detonation.
+    /// </summary>
+    [DataField]
+    public LocId DetonationPopup = "dna-lock-clothing-detonating";
 
     [DataField]
     public ProtoId<ExplosionPrototype> ExplosionType = SharedExplosionSystem.DefaultExplosionPrototypeId;
