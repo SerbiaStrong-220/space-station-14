@@ -1,7 +1,7 @@
 - type: entity
   id: BaseMagazineMagnumSubMachineGun
   name: SMG magazine (.45 magnum)
-  parent: BaseItem
+  parent: BaseMagazine
   abstract: true
   components:
   - type: BallisticAmmoProvider
