@@ -14,3 +14,7 @@ ent-ClothingMaskGasCentcomm = противогаз Центком
 
 ent-ClothingMaskMimeSecurity = маска мима безопасности
     .desc = У вас есть право хранить молчание.
+
+ent-ClothingMaskMimeHarlequin = грим готического арлекина
+    .desc = Грим, позволяющий видеть в пустых залах толпу невидимых зрителей.
+    .suffix = За время в игре

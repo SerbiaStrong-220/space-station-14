@@ -120,3 +120,9 @@
   background: /Textures/SS220/LobbyScreens/WatermelonApocalypse.webp
   title: lobby-state-background-watermelonapocalypse-title
   artist: lobby-state-background-watermelonapocalypse-artist
+
+- type: lobbyBackground
+  id: HogBand
+  background: /Textures/SS220/LobbyScreens/HogBand.webp
+  title: lobby-state-background-hogband-title
+  artist: lobby-state-background-hogband-artist
