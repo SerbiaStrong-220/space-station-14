@@ -38,7 +38,7 @@ public sealed partial class AnomalyGeneratorWindow : FancyWindow
 
         GenerateButton.OnPressed += _ => OnGenerateButtonPressed?.Invoke();
 
-        ChooseAnomalyPlaceButton.OnPressed += OnChooseAnomalyPlacePressed;
+        ChooseAnomalyPlaceButton.OnPressed += OnChooseAnomalyPlacePressed; //ss220 add anomaly place
     }
 
     //ss220 add anomaly place start
