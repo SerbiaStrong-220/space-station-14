@@ -71,8 +71,8 @@
           tags:
           - ChemicalImplant
   - type: Item
-    sprite: SS220/Objects/ChemicalImplants/implanters.rsi
-    heldPrefix: 0
+    sprite: Objects/Specific/Medical/implanter.rsi
+    heldPrefix: implanter
   - type: Appearance
   - type: Tag
     tags:

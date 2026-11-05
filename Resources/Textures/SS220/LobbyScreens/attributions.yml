@@ -102,3 +102,8 @@
   license: "CC-BY-3.0"
   copyright: "Created by Gabka for SS220"
   source: "https://github.com/SerbiaStrong-220"
+
+- files: ["HogBand.webp"]
+  license: "CC-BY-3.0"
+  copyright: "Created by Ellichirr for SS220"
+  source: "https://github.com/SerbiaStrong-220"
