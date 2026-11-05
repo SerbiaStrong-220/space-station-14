@@ -8,8 +8,10 @@
     fixtures:
       fix1:
         shape:
-          !type:PhysShapeAabb
-          bounds: "-0.45,-0.45,0.45,0.1"
+          #SS220-TweakHitbox begin
+          !type:PhysShapeCircle
+          radius: 0.40
+          #SS220-TweakHitbox end
         density: 190
         hard: true
         mask:

@@ -1,0 +1,31 @@
+- type: entity
+  parent: MobShark
+  id: MobSharkDragon
+  name: space shark
+  suffix: DragonBrood
+  components:
+  - type: GhostRole
+    allowMovement: true
+    allowSpeech: true
+    makeSentient: true
+    name: ghost-role-information-sentient-shark-name
+    description: ghost-role-information-sentient-shark-description
+    rules: ghost-role-information-space-dragon-summoned-carp-rules
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonistFlock
+  - type: GhostTakeoverAvailable
+  - type: HTN
+    rootTask:
+      task: DragonCarpCompound
+  - type: Telepathy
+    canSend: true
+    telepathyChannelPrototype: TelepathyChannelSpaceDragon
+  - type: Insulated
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: SharkDragon
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 17 # SS220 DragonShark Buff, 10 -> 17
+        Bloodloss: 5

@@ -20,6 +20,7 @@
     FoodButter: 3
     FoodCheese: 1
     FoodMeat: 6
+    FoodCataria: 3 #SS220 add-cataria
   contrabandInventory:
     EggBoxBroken: 1
     FoodBoxDonkpocket: 1

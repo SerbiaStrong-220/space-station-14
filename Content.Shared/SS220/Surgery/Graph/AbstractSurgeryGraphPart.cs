@@ -4,7 +4,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Surgery.Graph;
 
-[Prototype("abstractSurgeryNode")]
+[Prototype]
 public sealed partial class AbstractSurgeryNodePrototype : IPrototype
 {
     [ViewVariables]
@@ -15,7 +15,7 @@ public sealed partial class AbstractSurgeryNodePrototype : IPrototype
     public SurgeryGraphNode Node = new();
 }
 
-[Prototype("abstractSurgeryEdge")]
+[Prototype]
 public sealed partial class AbstractSurgeryEdgePrototype : IPrototype
 {
     [ViewVariables]

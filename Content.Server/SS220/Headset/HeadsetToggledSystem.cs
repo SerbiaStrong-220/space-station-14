@@ -1,4 +1,5 @@
 using Content.Server.Radio;
+using Content.Server.Radio.EntitySystems;
 using Content.Shared.Mind;
 using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
@@ -8,18 +9,18 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.Headset;
 
-public sealed class HeadsetToggledSystem : SharedHeadsetToggledSystem
+public sealed partial class HeadsetToggledSystem : SharedHeadsetToggledSystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly SharedRoleSystem _role = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SharedRoleSystem _role = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<HeadsetToggledComponent, ComponentInit>(OnStartup);
         SubscribeLocalEvent<HeadsetToggledComponent, EncryptionChannelsChangedEvent>(OnChangeKey);
-        SubscribeLocalEvent<HeadsetToggledComponent, RadioReceiveAttemptEvent>(OnSendRadio);
+        SubscribeLocalEvent<HeadsetToggledComponent, RadioReceiveAttemptEvent>(OnSendRadio, after: [typeof(HeadsetSystem)]);
         SubscribeLocalEvent<HeadsetToggledComponent, BoundUIOpenedEvent>(OnBoundOpen);
         SubscribeLocalEvent<HeadsetToggledComponent, HeadsetChannelToggledMessage>(OnToggleChannel);
     }

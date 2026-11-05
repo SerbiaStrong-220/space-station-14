@@ -14,9 +14,10 @@ namespace Content.Server.SS220.Photocopier.Forms;
 /// Deserializes photocopier forms on initialization and caches them for future use.
 /// Used by server to determine what content to print on based client's request.
 /// </summary>
-public sealed class FormManager : EntitySystem
+public sealed partial class FormManager : EntitySystem
 {
-    [Dependency] private readonly IResourceManager _resourceManager = default!;
+    [Dependency] private IResourceManager _resourceManager = default!;
+
     private readonly ISawmill _sawmill = Logger.GetSawmill("form-manager");
 
     /// <summary>

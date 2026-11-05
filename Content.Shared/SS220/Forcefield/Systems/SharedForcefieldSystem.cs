@@ -1,23 +1,22 @@
 using Content.Shared.SS220.Forcefield.Components;
-using Content.Shared.SS220.Weapons.Ranged.Events;
-using Robust.Shared.Audio.Systems;
+using Content.Shared.Weapons.Hitscan.Events;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 
 namespace Content.Shared.SS220.Forcefield.Systems;
 
-public abstract class SharedForcefieldSystem : EntitySystem
+public abstract partial class SharedForcefieldSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<ForcefieldComponent, PreventCollideEvent>(OnPreventCollide);
-        SubscribeLocalEvent<ForcefieldComponent, HitscanAttempt>(OnHitscanAttempt);
+        SubscribeLocalEvent<ForcefieldComponent, AttemptHitscanRaycastHitEvent>(OnHitscanAttempt);
     }
 
     public override void Update(float frameTime)
@@ -76,9 +75,9 @@ public abstract class SharedForcefieldSystem : EntitySystem
         }
     }
 
-    private void OnHitscanAttempt(Entity<ForcefieldComponent> entity, ref HitscanAttempt args)
+    private void OnHitscanAttempt(Entity<ForcefieldComponent> entity, ref AttemptHitscanRaycastHitEvent args)
     {
-        if (!ShouldCollide(entity, args.User))
+        if (!ShouldCollide(entity, args.HitScanEntity))
             args.Cancelled = true;
     }
 

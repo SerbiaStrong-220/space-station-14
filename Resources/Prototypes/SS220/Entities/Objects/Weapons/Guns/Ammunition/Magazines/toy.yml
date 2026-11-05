@@ -10,14 +10,11 @@
           - BulletFoam
     - type: HiddenDescription
       entries:
-      - label: hidden-desc-toy-weapons-magazine-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
-      - label: hidden-desc-toy-weapons-magazine-clown
-        jobRequired:
-          - Clown
-          - Mime
+        SyndicateAgentKnowledge: [ hidden-desc-toy-weapons-magazine-syndicate ]
+        ServiceActorKnowledge: [ hidden-desc-toy-weapons-magazine-clown ]
+      nameEntries:
+      - [SyndicateAgentKnowledge, null]
+      - [ServiceActorKnowledge, null]
 
 #pistol
 - type: entity
@@ -25,36 +22,36 @@
   parent: [ BaseMagazineToy, BaseMagazinePistol ]
   abstract: true
   components:
-    - type: Tag
-      tags:
-      - MagazinePistolToy
+  - type: Tag
+    tags:
+    - MagazinePistolToy
 
 - type: entity
   id: BaseMagazinePistolHighCapacityToy
   parent: [ BaseMagazineToy, BaseMagazinePistolHighCapacity ]
   abstract: true
   components:
-    - type: Tag
-      tags:
-      - MagazinePistolToy
+  - type: Tag
+    tags:
+    - MagazinePistolToy
 
 - type: entity
   id: BaseMagazinePistolSubMachineGunToy
   parent: [ BaseMagazineToy, BaseMagazinePistolSubMachineGun ]
   abstract: true
   components:
-    - type: Tag
-      tags:
-      - MagazinePistolSubMachineGunToy
+  - type: Tag
+    tags:
+    - MagazinePistolSubMachineGunToy
 
 - type: entity
   id: BaseMagazinePistolCaselessRifleToy
   parent: [ BaseMagazineToy, BaseMagazinePistolCaselessRifle ]
   abstract: true
   components:
-    - type: Tag
-      tags:
-      - MagazinePistolCaselessRifleToy
+  - type: Tag
+    tags:
+    - MagazinePistolCaselessRifleToy
 
 #shotgun
 - type: entity
@@ -62,15 +59,15 @@
   parent: [ BaseMagazineToy, BaseMagazineShotgun ]
   abstract: true
   components:
-    - type: Tag
+  - type: Tag
+    tags:
+    - MagazineShotgunToy
+  - type: BallisticAmmoProvider
+    whitelist:
       tags:
-      - MagazineShotgunToy
-    - type: BallisticAmmoProvider
-      whitelist:
-        tags:
-          - CartridgeCap
-          - BulletFoam
-          - ShellShotgunToy
+      - CartridgeCap
+      - BulletFoam
+      - ShellShotgunToy
 
 #LMG
 - type: entity
@@ -80,7 +77,7 @@
   components:
   - type: Tag
     tags:
-      - MagazineLightRifleBoxToy
+    - MagazineLightRifleBoxToy
 
 
 #filled mags (with caps) =================
@@ -90,42 +87,42 @@
   abstract: true
   suffix: Caps
   components:
-    - type: BallisticAmmoProvider
-      proto: CartridgeCap
+  - type: BallisticAmmoProvider
+    proto: CartridgeCap
 
 #pistol
 - type: entity
   id: MagazinePistolCaps
   parent: [ BaseMagazineToyCaps, BaseMagazinePistolToy ]
   components:
-    - type: Sprite
-      layers:
-        - state: base
-          map: ["enum.GunVisualLayers.Base"]
-        - state: mag-1
-          map: ["enum.GunVisualLayers.Mag"]
+  - type: Sprite
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
 
 - type: entity
   id: MagazinePistolHighCapacityCaps
   parent: [ BaseMagazineToyCaps, BaseMagazinePistolHighCapacityToy ]
   components:
-    - type: Sprite
-      layers:
-        - state: base
-          map: ["enum.GunVisualLayers.Base"]
-        - state: mag-1
-          map: ["enum.GunVisualLayers.Mag"]
+  - type: Sprite
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
 
 - type: entity
   id: MagazinePistolSubMachineGunCaps
   parent: [ BaseMagazineToyCaps, BaseMagazinePistolSubMachineGunToy ]
   components:
-    - type: Sprite
-      layers:
-        - state: base
-          map: ["enum.GunVisualLayers.Base"]
-        - state: mag-1
-          map: ["enum.GunVisualLayers.Mag"]
+  - type: Sprite
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
 
 - type: entity
   id: MagazinePistolCaselessRifleCaps
@@ -134,9 +131,9 @@
   - type: Sprite
     layers:
     - state: base
-      map: ["enum.GunVisualLayers.Base"]
+      map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
+      map: [ "enum.GunVisualLayers.Mag" ]
 
 #LMG
 - type: entity
@@ -150,14 +147,14 @@
   parent: BaseMagazineShotgunToy #can't parent BaseMagazineToyCaps cuz shotgun uses unique ones
   suffix: Caps
   components:
-    - type: BallisticAmmoProvider
-      proto: ShellShotgunCaps
-    - type: Sprite
-      layers:
-        - state: pellets
-          map: ["enum.GunVisualLayers.Base"]
-        - state: mag-2 #SS220-FixAmmoSprite
-          map: ["enum.GunVisualLayers.Mag"]
+  - type: BallisticAmmoProvider
+    proto: ShellShotgunCaps
+  - type: Sprite
+    layers:
+    - state: pellets
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
 
 - type: entity
   id: MagazineShotgunSlugCaps
@@ -169,9 +166,9 @@
   - type: Sprite
     layers:
     - state: slug
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-2 #SS220-FixAmmoSprite
-      map: ["enum.GunVisualLayers.Mag"]
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
 
 
 #filled mags (with foam) =================
@@ -181,42 +178,42 @@
   abstract: true
   suffix: Foam
   components:
-    - type: BallisticAmmoProvider
-      proto: BulletFoam
+  - type: BallisticAmmoProvider
+    proto: BulletFoam
 
 #pistol
 - type: entity
   id: MagazinePistolFoam
   parent: [ BaseMagazineToyFoam, BaseMagazinePistol ]
   components:
-    - type: Sprite
-      layers:
-        - state: base
-          map: ["enum.GunVisualLayers.Base"]
-        - state: mag-1
-          map: ["enum.GunVisualLayers.Mag"]
+  - type: Sprite
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
 
 - type: entity
   id: MagazinePistolHighCapacityFoam
   parent: [ BaseMagazineToyFoam, BaseMagazinePistolHighCapacityToy ]
   components:
-    - type: Sprite
-      layers:
-        - state: base
-          map: ["enum.GunVisualLayers.Base"]
-        - state: mag-1
-          map: ["enum.GunVisualLayers.Mag"]
+  - type: Sprite
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
 
 - type: entity
   id: MagazinePistolSubMachineGunFoam
   parent: [ BaseMagazineToyFoam, BaseMagazinePistolSubMachineGunToy ]
   components:
-    - type: Sprite
-      layers:
-        - state: base
-          map: ["enum.GunVisualLayers.Base"]
-        - state: mag-1
-          map: ["enum.GunVisualLayers.Mag"]
+  - type: Sprite
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
 
 - type: entity
   id: MagazinePistolCaselessRifleFoam
@@ -225,9 +222,9 @@
   - type: Sprite
     layers:
     - state: base
-      map: ["enum.GunVisualLayers.Base"]
+      map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
+      map: [ "enum.GunVisualLayers.Mag" ]
 
 #shotgun
 - type: entity
@@ -235,14 +232,14 @@
   parent: BaseMagazineShotgunToy #can't parent BaseMagazineToyFoam cuz shotgun uses unique ones
   suffix: Foam
   components:
-    - type: BallisticAmmoProvider
-      proto: ShellShotgunFoam
-    - type: Sprite
-      layers:
-        - state: pellets
-          map: ["enum.GunVisualLayers.Base"]
-        - state: mag-2 #SS220-FixAmmoSprite
-          map: ["enum.GunVisualLayers.Mag"]
+  - type: BallisticAmmoProvider
+    proto: ShellShotgunFoam
+  - type: Sprite
+    layers:
+    - state: pellets
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
 
 - type: entity
   id: MagazineShotgunSlugFoam
@@ -254,9 +251,9 @@
   - type: Sprite
     layers:
     - state: slug
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-2 #SS220-FixAmmoSprite
-      map: ["enum.GunVisualLayers.Mag"]
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
 
 #revolver
 - type: entity

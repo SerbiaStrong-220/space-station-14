@@ -13,7 +13,7 @@
     sprite: SS220/Objects/Consumable/Drinks/glintveinglass.rsi
     state: icon
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 2
@@ -39,14 +39,14 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 2
       - !type:AdjustReagent
         reagent: Ethanol
         amount: 0.4
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         conditions:
@@ -74,7 +74,7 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 2
@@ -100,7 +100,7 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 1
@@ -147,3 +147,58 @@
   metamorphicMaxFillLevels: 6
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
+
+#Skooma
+
+- type: reagent
+  id: Skooma
+  name: reagent-name-skooma
+  parent: BaseAlcohol
+  desc: reagent-desc-skooma
+  physicalDesc: reagent-physical-desc-exotic-smelling
+  flavor: Skooma
+  color: "#dcdedc"
+  metamorphicSprite:
+    sprite: SS220/Objects/Consumable/Drinks/skooma.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 2
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+  metabolisms:
+    Digestion:
+      effects:
+      - !type:SatiateThirst
+        factor: 1
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.4
+      - !type:Jitter
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Tajaran ]
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectSeeingRainbow
+        type: Add
+        time: 10
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Tajaran ]
+  fizziness: 0.2
+
+# OrionNebula
+
+- type: reagent
+  id: OrionNebula
+  name: reagent-name-Orion-Nebula
+  parent: BaseAlcohol
+  desc: reagent-desc-Orion-Nebula
+  physicalDesc: reagent-physical-desc-cosmic
+  flavor: OrionNebula
+  color: "#4F459B"
+  metamorphicSprite:
+    sprite: SS220/Objects/Consumable/Drinks/orionnebula.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 6
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+  fizziness: 0.2

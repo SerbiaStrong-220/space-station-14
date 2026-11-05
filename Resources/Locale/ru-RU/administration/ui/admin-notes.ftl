@@ -52,7 +52,7 @@ admin-note-editor-type-watchlist = Наблюдение
 admin-note-editor-type-server-ban = Сервер бан
 admin-note-editor-type-role-ban = Роль бан
 admin-note-editor-severity-select = Выбрать
-admin-note-editor-severity-none = Наблюдение
+admin-note-editor-severity-none = Похвала
 admin-note-editor-severity-low = Наблюдение
 admin-note-editor-severity-medium = Предупреждение
 admin-note-editor-severity-high = Бан
@@ -82,3 +82,7 @@ admin-remarks-command-error = Админ замечания были отклю�
 admin-remarks-title = Админ замечания
 # Misc
 system-user = [Система]
+
+admin-notes-stated-round = Раунд нарушения:
+
+admin-notes-stated-round-not-specified = не указан

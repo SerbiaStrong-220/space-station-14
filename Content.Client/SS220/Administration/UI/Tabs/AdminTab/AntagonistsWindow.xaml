@@ -8,6 +8,7 @@
     xmlns:SS220at="clr-namespace:Content.Client.SS220.Administration.UI.Tabs.AdminTab"
     Title="{Loc admin-player-actions-window-antagonists}" MinSize="425 272">
     <BoxContainer Orientation="Vertical">
+        <CheckBox Name="CustomObjectivesFilter" Text="{Loc admin-antagonists-custom-objectives-filter}" />
         <SS220cc:AntagonistsListControl Name="AntagonistsList" VerticalExpand="True" />
         <BoxContainer Orientation="Horizontal">
             <Button Name="ListOfTargetsButton" Text="{Loc admin-antagonists-list-of-targets}" Disabled="True"/>

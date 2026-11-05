@@ -4,6 +4,7 @@
   description: job-description-reporter
   playTimeTracker: JobReporter
   startingGear: ReporterGear
+  experienceDefinition: NoSpecialRoleExperience # SS220-experience
   icon: "JobIconReporter"
   supervisors: job-supervisors-hop
   access:

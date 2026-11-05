@@ -1,7 +1,10 @@
+using System.Linq;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Chat.Managers;
 using Content.Shared.GameTicking.Components;
 using Robust.Server.GameObjects;
+using Robust.Server.Player;
+using Robust.Shared.Enums;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -13,6 +16,7 @@ public abstract partial class GameRuleSystem<T> : EntitySystem where T : ICompon
     [Dependency] protected readonly IChatManager ChatManager = default!;
     [Dependency] protected readonly GameTicker GameTicker = default!;
     [Dependency] protected readonly IGameTiming Timing = default!;
+    [Dependency] protected readonly IPlayerManager PlayerManager = default!; // SS220-make-roundstart-from-total-player
 
     // Not protected, just to be used in utility methods
     [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
@@ -34,11 +38,14 @@ public abstract partial class GameRuleSystem<T> : EntitySystem where T : ICompon
         if (args.Forced || args.Cancelled)
             return;
 
+        var allPlayerCount = PlayerManager.Sessions.Count(session => session.Status is not (SessionStatus.Disconnected or SessionStatus.Zombie)); // SS220-make-antag-selection-based-on-all-players
+
         var query = QueryAllRules();
         while (query.MoveNext(out var uid, out _, out var gameRule))
         {
             var minPlayers = gameRule.MinPlayers;
-            if (args.Players.Length >= minPlayers)
+            var name = ToPrettyString(uid);
+            if (allPlayerCount >= minPlayers) // SS220-make-antag-selection-based-on-all-players [wizden] args.Players.Length -> allPlayerCount
                 continue;
 
             if (gameRule.CancelPresetOnTooFewPlayers)
@@ -46,8 +53,10 @@ public abstract partial class GameRuleSystem<T> : EntitySystem where T : ICompon
                 ChatManager.SendAdminAnnouncement(Loc.GetString("preset-not-enough-ready-players",
                     ("readyPlayersCount", args.Players.Length),
                     ("minimumPlayers", minPlayers),
-                    ("presetName", ToPrettyString(uid))));
+                    ("presetName", name)));
                 args.Cancel();
+                //TODO remove this once announcements are logged
+                Log.Info($"Rule '{name}' requires {minPlayers} players, but only {args.Players.Length} are ready.");
             }
             else
             {

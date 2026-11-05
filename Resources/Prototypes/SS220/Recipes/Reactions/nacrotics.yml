@@ -11,7 +11,7 @@
     Opium: 1
 
 - type: reaction
-  id: Morphine
+  id: Aglomorphine
   reactants:
     Opium:
       amount: 1
@@ -22,14 +22,14 @@
     Desoxyephedrine:
       amount: 1
   products:
-    Morphine: 4
+    Aglomorphine: 4
 
 - type: reaction
   id: Frontier
   reactants:
     Vestine:
       amount: 1
-    Morphine:
+    Aglomorphine:
       amount: 1
     SodiumHydroxide:
       amount: 1

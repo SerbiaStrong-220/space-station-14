@@ -3,69 +3,81 @@
   storage:
     back:
     - ClothingHandWraps
+  groupBy: "HandWraps"
 
 - type: loadout
   id: ClothingFootWraps
   storage:
     back:
     - ClothingFootWraps
+  groupBy: "FootWraps"
 
 - type: loadout
   id: ClothingHandWrapsYellow
   storage:
     back:
     - ClothingHandWrapsYellow
+  groupBy: "HandWraps"
 
 - type: loadout
   id: ClothingFootWrapsYellow
   storage:
     back:
     - ClothingFootWrapsYellow
+  groupBy: "FootWraps"
 
 - type: loadout
   id: ClothingHandWrapsGreen
   storage:
     back:
     - ClothingHandWrapsGreen
+  groupBy: "HandWraps"
 
 - type: loadout
   id: ClothingFootWrapsGreen
   storage:
     back:
     - ClothingFootWrapsGreen
+  groupBy: "FootWraps"
 
 - type: loadout
   id: ClothingHandWrapsRed
   storage:
     back:
     - ClothingHandWrapsRed
+  groupBy: "HandWraps"
 
 - type: loadout
   id: ClothingFootWrapsRed
   storage:
     back:
     - ClothingFootWrapsRed
+  groupBy: "FootWraps"
 
 - type: loadout
   id: ClothingHandWrapsBlue
   storage:
     back:
     - ClothingHandWrapsBlue
+  groupBy: "HandWraps"
 
 - type: loadout
   id: ClothingFootWrapsBlue
   storage:
     back:
     - ClothingFootWrapsBlue
+  groupBy: "FootWraps"
 
 - type: loadout
   id: ClothingHandWrapsBlack
   storage:
     back:
     - ClothingHandWrapsBlack
+  groupBy: "HandWraps"
 
 - type: loadout
   id: ClothingFootWrapsBlack
   storage:
     back:
     - ClothingFootWrapsBlack
+  groupBy: "FootWraps"

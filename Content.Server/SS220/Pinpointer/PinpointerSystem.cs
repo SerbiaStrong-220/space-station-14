@@ -13,14 +13,14 @@ using Content.Shared.Access.Systems;
 
 namespace Content.Server.SS220.Pinpointer;
 
-public sealed class PinpointerSystem : EntitySystem
+public sealed partial class PinpointerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly SharedPinpointerSystem _pinpointer = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly SuitSensorSystem _suit = default!;
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
-    [Dependency] private readonly SharedIdCardSystem _idCard = default!;
+    [Dependency] private SharedUserInterfaceSystem _uiSystem = default!;
+    [Dependency] private SharedPinpointerSystem _pinpointer = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private SuitSensorSystem _suit = default!;
+    [Dependency] private IComponentFactory _componentFactory = default!;
+    [Dependency] private SharedIdCardSystem _idCard = default!;
 
     public override void Initialize()
     {

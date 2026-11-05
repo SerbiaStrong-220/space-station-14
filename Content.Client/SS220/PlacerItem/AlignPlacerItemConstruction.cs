@@ -14,13 +14,13 @@ using Content.Shared.SS220.PlacerItem;
 
 namespace Content.Client.SS220.PlacerItem;
 
-public sealed class AlignPlacerItemConstruction : PlacementMode
+public sealed partial class AlignPlacerItemConstruction : PlacementMode
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IStateManager _stateManager = default!;
-    [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IStateManager _stateManager = default!;
+    [Dependency] private HandsSystem _hands = default!;
+    [Dependency] private IMapManager _mapManager = default!;
 
     private readonly PlacerItemSystem _placerItemSystem;
     private readonly SharedTransformSystem _transformSystem;

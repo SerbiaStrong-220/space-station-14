@@ -9,7 +9,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server.Power.EntitySystems;
 
-public sealed class PowerChargeSystem : EntitySystem
+public sealed partial class PowerChargeSystem : EntitySystem // SS220-add-more-API
 {
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;

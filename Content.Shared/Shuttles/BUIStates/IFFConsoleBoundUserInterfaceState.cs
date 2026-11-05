@@ -8,6 +8,8 @@ public sealed class IFFConsoleBoundUserInterfaceState : BoundUserInterfaceState
 {
     public IFFFlags AllowedFlags;
     public IFFFlags Flags;
+    public TimeSpan Cooldown; // ss220 spacewar
+    public TimeSpan StealthDuration; // ss220 spacewar
 }
 
 [Serializable, NetSerializable]

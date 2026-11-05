@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Content.Server.Acz;
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
@@ -12,6 +13,7 @@ using Content.Server.SS220.TTS;
 using Content.Server.Database;
 using Content.Server.Discord.DiscordLink;
 using Content.Server.EUI;
+using Content.Server.FeedbackSystem;
 using Content.Server.GameTicking;
 using Content.Server.GhostKick;
 using Content.Server.GuideGenerator;
@@ -28,6 +30,7 @@ using Content.Server.ServerUpdates;
 using Content.Server.SS220.Discord;
 using Content.Server.Voting.Managers;
 using Content.Shared.CCVar;
+using Content.Shared.FeedbackSystem;
 using Content.Shared.Kitchen;
 using Content.Shared.Localizations;
 using Robust.Server;
@@ -35,9 +38,12 @@ using Robust.Server.ServerStatus;
 using Robust.Shared.Configuration;
 using Robust.Shared.ContentPack;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Server.SS220.BackEndApi;
+using Content.Shared.SS220.CCVars;
+using Content.Server.SS220.Wiki.Generators;
 
 namespace Content.Server.Entry
 {
@@ -82,6 +88,7 @@ namespace Content.Server.Entry
         [Dependency] private readonly ServerApi _serverApi = default!;
         [Dependency] private readonly ServerInfoManager _serverInfo = default!;
         [Dependency] private readonly ServerUpdateManager _updateManager = default!;
+        [Dependency] private readonly ServerFeedbackManager _feedbackManager = null!;
         // SS220-entry-point-edit-begin
         [Dependency] private readonly DiscordAuthManager _discordAuthManager = default!; // Corvax-DiscordAuth
         [Dependency] private readonly SponsorsManager _sponsorsManager = default!; // Corvax-Sponsors
@@ -100,6 +107,8 @@ namespace Content.Server.Entry
                 var cast = (ServerModuleTestingCallbacks)callback;
                 cast.ServerBeforeIoC?.Invoke();
             }
+
+            Dependencies.Resolve<IRobustSerializer>().FloatFlags = SerializerFloatFlags.RemoveReadNan;
         }
 
         /// <inheritdoc />
@@ -168,15 +177,31 @@ namespace Content.Server.Entry
             if (!string.IsNullOrEmpty(dest))
             {
                 var resPath = new ResPath(dest).ToRootedPath();
-                var file = _res.UserData.OpenWriteText(resPath.WithName("chemicals_prototypes" + dest)); // SS220 Wiki
+                var file = _res.UserData.OpenWriteText(resPath.WithName("chem_" + dest));
                 ChemistryJsonGenerator.PublishJson(file);
                 file.Flush();
-                file = _res.UserData.OpenWriteText(resPath.WithName("reactions_prototypes" + dest)); // SS220 Wiki
+                file = _res.UserData.OpenWriteText(resPath.WithName("react_" + dest));
                 ReactionJsonGenerator.PublishJson(file);
                 file.Flush();
                 Dependencies.Resolve<IBaseServer>().Shutdown("Data generation done");
                 return;
             }
+
+            // SS220 wiki begin
+            if (_cfg.GetCVar(CCVars220.GenerateWikiDataRun))
+            {
+                var resPath = new ResPath(_cfg.GetCVar(CCVars220.ChemicalsJsonSavePath) + ".json").ToRootedPath();
+                var file = _res.UserData.OpenWriteText(resPath);
+                SS220WikiChemicalsJsonGenerator.PublishJson(file);
+
+                resPath = new ResPath(_cfg.GetCVar(CCVars220.ReactionsJsonSavePath) + ".json").ToRootedPath();
+                file = _res.UserData.OpenWriteText(resPath);
+                SS220WikiReactionsJsonGenerator.PublishJson(file);
+
+                Dependencies.Resolve<IBaseServer>().Shutdown("Wiki data generation done");
+                return;
+            }
+            // SS220 wiki end
 
             _recipe.Initialize();
             _admin.Initialize();
@@ -191,6 +216,7 @@ namespace Content.Server.Entry
             _connection.PostInit();
             _multiServerKick.Initialize();
             _cvarCtrl.Initialize();
+            _feedbackManager.Initialize();
         }
 
         public override void Update(ModUpdateLevel level, FrameEventArgs frameEventArgs)
@@ -226,8 +252,8 @@ namespace Content.Server.Entry
 
             _serverApi.Shutdown();
 
-            // TODO Should this be awaited?
-            _discordLink.Shutdown();
+            // We don't care when or how this finishes, just spin the task off into the void.
+            _ = _discordLink.Shutdown();
             _discordChatLink.Shutdown();
         }
 

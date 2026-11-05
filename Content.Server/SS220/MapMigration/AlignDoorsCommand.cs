@@ -4,85 +4,84 @@ using Content.Shared.Doors.Components;
 using Robust.Shared.Console;
 using Robust.Shared.Map.Components;
 
-namespace Content.Server.SS220.MapMigration
+namespace Content.Server.SS220.MapMigration;
+
+[AdminCommand(AdminFlags.Mapping)]
+public sealed partial class AlignAirlocksCommand : IConsoleCommand
 {
-    [AdminCommand(AdminFlags.Mapping)]
-    public sealed class AlignAirlocksCommand : IConsoleCommand
+    [Dependency] private IEntityManager _entManager = default!;
+
+    // ReSharper disable once StringLiteralTypo
+    public string Command => "aligndoors";
+    public string Description => "Aligns all doors with walls or neighburing doors";
+    public string Help => $"Usage: {Command} <gridId> | {Command}";
+
+    public void Execute(IConsoleShell shell, string argsOther, string[] args)
     {
-        [Dependency] private readonly IEntityManager _entManager = default!;
+        var player = shell.Player;
+        EntityUid? gridId;
+        var xformQuery = _entManager.GetEntityQuery<TransformComponent>();
 
-        // ReSharper disable once StringLiteralTypo
-        public string Command => "aligndoors";
-        public string Description => "Aligns all doors with walls or neighburing doors";
-        public string Help => $"Usage: {Command} <gridId> | {Command}";
+        var mapMigration = _entManager.EntitySysManager.GetEntitySystem<MapMigrationSystem_SS220>();
 
-        public void Execute(IConsoleShell shell, string argsOther, string[] args)
+        switch (args.Length)
         {
-            var player = shell.Player;
-            EntityUid? gridId;
-            var xformQuery = _entManager.GetEntityQuery<TransformComponent>();
-
-            var mapMigration = _entManager.EntitySysManager.GetEntitySystem<MapMigrationSystem_SS220>();
-
-            switch (args.Length)
-            {
-                case 0:
-                    if (player?.AttachedEntity is not { Valid: true } playerEntity)
-                    {
-                        shell.WriteError("Only a player can run this command.");
-                        return;
-                    }
-
-                    gridId = xformQuery.GetComponent(playerEntity).GridUid;
-                    break;
-                case 1:
-                    if (!NetEntity.TryParse(args[0], out var idNet) || !_entManager.TryGetEntity(idNet, out var id))
-                    {
-                        shell.WriteError($"{args[0]} is not a valid entity.");
-                        return;
-                    }
-
-                    gridId = id;
-                    break;
-                default:
-                    shell.WriteLine(Help);
-                    return;
-            }
-
-            if (!_entManager.TryGetComponent(gridId, out MapGridComponent? grid))
-            {
-                shell.WriteError($"No grid exists with id {gridId}");
-                return;
-            }
-
-            if (!_entManager.EntityExists(gridId))
-            {
-                shell.WriteError($"Grid {gridId} doesn't have an associated grid entity.");
-                return;
-            }
-
-            var processed = 0;
-
-            var childEnumerator = xformQuery.GetComponent(gridId.Value).ChildEnumerator;
-            while (childEnumerator.MoveNext(out var child))
-            {
-                if (!_entManager.EntityExists(child))
+            case 0:
+                if (player?.AttachedEntity is not { Valid: true } playerEntity)
                 {
-                    continue;
+                    shell.WriteError("Only a player can run this command.");
+                    return;
                 }
 
-                var valid = _entManager.HasComponent<DoorComponent>(child);
+                gridId = xformQuery.GetComponent(playerEntity).GridUid;
+                break;
+            case 1:
+                if (!NetEntity.TryParse(args[0], out var idNet) || !_entManager.TryGetEntity(idNet, out var id))
+                {
+                    shell.WriteError($"{args[0]} is not a valid entity.");
+                    return;
+                }
 
-                if (!valid)
-                    continue;
+                gridId = id;
+                break;
+            default:
+                shell.WriteLine(Help);
+                return;
+        }
 
-                var childXform = xformQuery.GetComponent(child);
+        if (!_entManager.TryGetComponent(gridId, out MapGridComponent? grid))
+        {
+            shell.WriteError($"No grid exists with id {gridId}");
+            return;
+        }
 
-                mapMigration.RotateDoor(child, gridId);
-                processed++;
+        if (!_entManager.EntityExists(gridId))
+        {
+            shell.WriteError($"Grid {gridId} doesn't have an associated grid entity.");
+            return;
+        }
+
+        var processed = 0;
+
+        var childEnumerator = xformQuery.GetComponent(gridId.Value).ChildEnumerator;
+        while (childEnumerator.MoveNext(out var child))
+        {
+            if (!_entManager.EntityExists(child))
+            {
+                continue;
             }
 
-            shell.WriteLine($"Processed {processed} entities. If things seem wrong, reconnect.");
+            var valid = _entManager.HasComponent<DoorComponent>(child);
+
+            if (!valid)
+                continue;
+
+            var childXform = xformQuery.GetComponent(child);
+
+            mapMigration.RotateDoor(child, gridId);
+            processed++;
         }
+
+        shell.WriteLine($"Processed {processed} entities. If things seem wrong, reconnect.");
     }
 }

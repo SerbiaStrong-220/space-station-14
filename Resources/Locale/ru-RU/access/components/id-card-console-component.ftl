@@ -6,12 +6,9 @@ id-card-console-window-job-title-label = Должность:
 id-card-console-window-eject-button = Извлечь
 id-card-console-window-insert-button = Вставить
 id-card-console-window-job-selection-label = Предустановки должностей (задаёт иконку отдела и должности):
+id-card-console-window-select-all-button = Выдать все
+id-card-console-window-deselect-all-button = Очистить
 access-id-card-console-component-no-hands-error = У вас нет рук.
 id-card-console-privileged-id = Основная ID
 id-card-console-target-id = Целевая ID
-
-# SS220-ID console extended access button
-id-card-console-window-full-access-button = Полный
-id-card-console-window-full-access-job-title-postfix = +
-id-card-console-window-extended-access-button = Расширенный
-id-card-console-window-extended-access-job-title-postfix = +
+id-card-console-damaged = Нарушение структурной целостности, выброс содержимого.

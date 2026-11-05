@@ -19,3 +19,10 @@
   icon: { sprite: SS220/Objects/Tools/CultYogg/cablecoils.rsi, state: coilhv-30 }
   spawn: CableHVStack1Live
   maxCount: 30
+
+- type: stack
+  id: LivingRootsStack
+  name: stack-cable-hv-live
+  icon: { sprite: SS220/Objects/Tools/CultYogg/cablecoils.rsi, state: coilhv-30 }
+  spawn: LivingRootsStack1
+  maxCount: 30

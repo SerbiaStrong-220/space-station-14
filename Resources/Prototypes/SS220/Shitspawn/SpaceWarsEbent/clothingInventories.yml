@@ -8,6 +8,8 @@
     ClothingHeadHatBeretEngineering: 1
     ClothingHeadHatBeretMedic: 1
 
+    ClothingHeadsetFrequencySyndicateForces: 16
+
     ClothingEyesGlassesMeson: 1
     ClothingEyesGlassesHiddenSecurity: 2
     ClothingEyesGlassesMercenary: 4
@@ -24,7 +26,7 @@
 
     ClothingUniformJumpsuitParamedicSyndie: 1
 
-    ClothingBackpackSyndicate: 8
+    ClothingMilitaryBackpack: 8
     ClothingBackpack: 8
     ClothingBackpackEngineering: 1
     ClothingBackpackMedical: 1
@@ -36,7 +38,7 @@
     ClothingHandsMercGlovesCombat: 4
     ClothingHandsGlovesFingerless: 5
 
-    ClothingBeltSyndieHolster: 3
+    ClothingBeltHolster: 3
 
     ClothingShoesBootsCombat: 4
     ClothingShoesBootsMerc: 8
@@ -51,6 +53,8 @@
     ClothingHeadHatBeretEngineering: 1
     ClothingHeadHatBeretMedic: 1
 
+    ClothingHeadsetFrequencyNanotrasenForces: 16
+
     ClothingEyesGlassesMeson: 1
     ClothingEyesGlassesBallistic: 2
     ClothingEyesGlassesMercenary: 4
@@ -61,7 +65,7 @@
     ClothingOuterArmorBasicSlim: 4
     ClothingBeltMercWebbing: 4
     ClothingOuterVestHazard: 1
-    ClothingOuterVestWebMerc: 2
+    ClothingOuterVestWeb: 2
 
     ClothingNeckCloakNanotrasen: 3
 
@@ -89,12 +93,14 @@
     ClothingHeadHatPilotBeret: 3
     ClothingHeadPilotCapCap: 3
 
+    ClothingHeadsetSyndicateForces: 2
+
     ClothingEyesGlassesCommand: 3
-    ClothingEyesHudSyndChem: 3
+    ClothingEyesGlassesBallistic: 3
 
     ClothingBeltMilitaryWebbing: 4
 
-    ClothingOuterHardsuitSyndie: 4
+    ClothingOuterHardsuitSyndie: 2
 
     ClothingOuterAerostaticBomberJacket: 2
     ClothingOuterArmorBobmer: 2
@@ -102,7 +108,7 @@
 
     ClothingNeckCloakBi: 4
 
-    ClothingBackpackSyndicate: 4
+    ClothingMilitaryBackpack: 4
 
     EventCaptureFlagSynd: 8
     ClothingMaskGasSyndicate: 4
@@ -111,7 +117,7 @@
     ClothingHandsMercGlovesCombat: 3
     ClothingHandsGlovesFingerless: 3
 
-    ClothingBeltSyndieHolster: 3
+    ClothingBeltHolster: 3
 
     ClothingShoesBootsCombat: 4
     ClothingShoesBootsMerc: 4
@@ -125,12 +131,14 @@
     ClothingHeadPilotCapCap: 3
     ClothingHeadHatBeretNavyBlue: 2
 
+    ClothingHeadsetNanotrasenForces: 2
+
     ClothingEyesGlassesBallistic: 3
     ClothingEyesGlassesCommand: 3
 
     ClothingBeltMercWebbing: 4
 
-    ClothingOuterHardsuitERTSecurity: 4
+    ClothingOuterHardsuitERTSecurity: 2
 
     ClothingOuterArmorBobmer: 4
     ClothingOuterCoatBomber: 4
@@ -161,6 +169,8 @@
     ClothingHeadBeretCap: 2
     ClothingHeadNavyCap: 2
 
+    ClothingHeadsetSyndicateForces: 2
+
     ClothingOuterCoatSyndieCap: 2
     ClothingOuterCoatSyndieCapArmored: 2
     ClothingUniformJumpsuitNanotrasenAdmiral: 2
@@ -170,11 +180,11 @@
 
     ClothingNeckCloakPirateCap: 2
 
-    ClothingBackpackSyndicate: 2
+    ClothingMilitaryBackpack: 2
 
     EventCaptureFlagSynd: 2
 
-    ClothingBeltSyndieHolster: 2
+    ClothingBeltHolster: 2
 
     ClothingHandsGlovesRobohands: 2
     ClothingHandsGlovesColorRed: 2
@@ -192,6 +202,8 @@
     ClothingHeadHatCapcap: 2
     ClothingHeadBeretCap: 2
     ClothingHeadWhiteCapHardhat: 2
+
+    ClothingHeadsetNanotrasenForces: 2
 
     ClothingUniformJumpsuitNanotrasenAdmiral: 2
     ClothingUniformJumpsuitCapFormal: 2

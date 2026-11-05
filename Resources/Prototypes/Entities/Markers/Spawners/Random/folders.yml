@@ -12,15 +12,17 @@
     layers:
     - state: folder-base
     - state: folder-colormap
-  - type: RandomSpawner
+  - type: EntityTableSpawner
     offset: 0
-    prototypes:
-    - BoxFolderBase
-    - BoxFolderRed
-    - BoxFolderBlue
-    - BoxFolderGrey
-    - BoxFolderBlack
-    - BoxFolderGreen
-    - BoxFolderOrange #SS220-NewFolders-Begin
-    - BoxFolderPurple
-    - BoxFolderBrown #SS220-NewFolders-End
+    table: !type:GroupSelector
+      children:
+      - id: BoxFolderBase
+      - id: BoxFolderRed
+      - id: BoxFolderBlue
+      # - id: BoxFolderYellow # SS220-remove-cause-no-entity
+      - id: BoxFolderGrey
+      - id: BoxFolderBlack
+      - id: BoxFolderGreen
+      - id: BoxFolderOrange #SS220-NewFolders-Begin
+      - id: BoxFolderPurple
+      - id: BoxFolderBrown #SS220-NewFolders-End

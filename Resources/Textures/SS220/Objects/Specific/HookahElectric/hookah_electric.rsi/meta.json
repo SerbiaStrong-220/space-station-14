@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Made by Xenoksys (Github) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "icon-enabled",
+      "delays": [[0.15, 0.15, 0.15, 0.15, 0.15, 0.15]]
+    },
+    {
+      "name": "left-hose"
+    },
+    {
+      "name": "right-hose"
+    }
+  ]
+}

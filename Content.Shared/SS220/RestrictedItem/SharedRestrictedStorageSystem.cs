@@ -8,8 +8,8 @@ namespace Content.Shared.SS220.RestrictedItem;
 
 public sealed partial class SharedRestrictedStorageSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     public override void Initialize()
     {

@@ -101,6 +101,16 @@
     requirement: Administrator
     isExact: true
 
+- type: loadoutEffectGroup
+  id: MentorOrAdministratorSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: Mentor
+    isExact: true
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
 # Модерация
 - type: loadoutEffectGroup
   id: ModeratorSponsorTier

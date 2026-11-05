@@ -22,7 +22,7 @@
   - type: EmitSoundOnTrigger
     sound:
       path: /Audio/SS220/Effects/fumo/fumo2.ogg
-  - type: Food
+  - type: Edible
     requiresSpecialDigestion: true
     useSound:
       path: /Audio/SS220/Effects/fumo/fumocollide.ogg

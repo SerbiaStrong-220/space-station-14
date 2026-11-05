@@ -43,6 +43,19 @@
     powerLoad: 2500 # TODO change this to a HV power draw that really hits the grid hard WHEN active
   - type: Machine
     board: SalvageMagnetMachineCircuitboard
+  #SS220-TweakHitbox begin
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  #SS220-TweakHitbox end
 
 # For Knightship
 - type: entity
@@ -54,11 +67,3 @@
   - type: SalvageMagnet
   - type: ApcPowerReceiver
     powerLoad: 1000
-
-- type: weightedRandomEntity
-  id: RandomAsteroidPool
-  weights:
-    AsteroidSalvageSmall: 3
-    AsteroidSalvageMedium: 7
-    AsteroidSalvageLarge: 5
-    AsteroidSalvageHuge: 3

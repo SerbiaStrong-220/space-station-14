@@ -1,0 +1,86 @@
+- type: constructionGraph
+  id: CurbDarkSteel
+  start: start
+  graph:
+  - node: start
+    edges:
+      - to: curbDarkSteel
+        completed:
+          - !type:SnapToGrid { }
+        steps:
+          - material: Steel
+            amount: 1
+            doAfter: 2
+      - to: curbDarkSteelCorner
+        completed:
+          - !type:SnapToGrid { }
+        steps:
+          - material: Steel
+            amount: 2
+            doAfter: 2.5
+      - to: curbDarkSteelCornerSmall
+        completed:
+          - !type:SnapToGrid { }
+        steps:
+          - material: Steel
+            amount: 1
+            doAfter: 2
+      - to: curbDarkSteelRound
+        completed:
+          - !type:SnapToGrid { }
+        steps:
+          - material: Steel
+            amount: 2
+            doAfter: 2
+
+  - node: curbDarkSteel
+    entity: CurbDarkSteelDecoration
+    edges:
+      - to: start
+        completed:
+          - !type:SpawnPrototype
+            prototype: SheetSteel1
+            amount: 1
+          - !type:DeleteEntity
+        steps:
+          - tool: Screwing
+            doAfter: 0.25
+
+  - node: curbDarkSteelCorner
+    entity: CurbDarkSteelCornerDecoration
+    edges:
+      - to: start
+        completed:
+          - !type:SpawnPrototype
+            prototype: SheetSteel1
+            amount: 2
+          - !type:DeleteEntity
+        steps:
+          - tool: Screwing
+            doAfter: 0.5
+
+  - node: curbDarkSteelCornerSmall
+    entity: CurbDarkSteelCornerSmallDecoration
+    edges:
+      - to: start
+        completed:
+          - !type:SpawnPrototype
+            prototype: SheetSteel1
+            amount: 1
+          - !type:DeleteEntity
+        steps:
+          - tool: Screwing
+            doAfter: 0.25
+
+  - node: curbDarkSteelRound
+    entity: CurbDarkSteelRoundDecoration
+    edges:
+      - to: start
+        completed:
+          - !type:SpawnPrototype
+            prototype: SheetSteel1
+            amount: 2
+          - !type:DeleteEntity
+        steps:
+           - tool: Screwing
+             doAfter: 0.5

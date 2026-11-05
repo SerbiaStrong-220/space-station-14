@@ -1,0 +1,18 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: MarkerBase
+  id: VoidTeleportDestination
+  name: void teleport destination
+  suffix: CultYogg
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Sprite
+    state: pink
+  - type: RandomTeleportDestination
+  - type: Tag
+    tags:
+    - VoidTeleportDestination

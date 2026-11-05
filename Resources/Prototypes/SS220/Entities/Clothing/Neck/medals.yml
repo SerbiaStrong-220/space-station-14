@@ -10,8 +10,7 @@
     sprite: SS220/Clothing/Neck/Medals/Medalpack1/Chocolate.rsi
   - type: Clothing
     sprite: SS220/Clothing/Neck/Medals/Medalpack1/Chocolate.rsi
-  - type: Food
-    requiresSpecialDigestion: false
+  - type: Edible
   - type: Tag
     tags:
       - FoodSnack

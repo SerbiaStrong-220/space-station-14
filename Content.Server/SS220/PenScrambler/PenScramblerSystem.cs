@@ -1,3 +1,4 @@
+using Content.Server.Body;
 using Content.Shared.DoAfter;
 using Content.Shared.Forensics.Components;
 using Content.Shared.Humanoid;
@@ -10,13 +11,13 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.PenScrambler;
 
-public sealed class PenScramblerSystem : EntitySystem
+public sealed partial class PenScramblerSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly MetaDataSystem _metaSystem = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedHumanoidAppearanceSystem _humanoidSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private MetaDataSystem _metaSystem = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private VisualBodySystem _visualBody = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -29,7 +30,7 @@ public sealed class PenScramblerSystem : EntitySystem
         if (!args.CanReach || args.Target == null)
             return;
 
-        if (HasComp<HumanoidAppearanceComponent>(args.Target) && !ent.Comp.HaveDna)
+        if (HasComp<HumanoidProfileComponent>(args.Target) && !ent.Comp.HaveDna)
         {
             _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager,
                 args.User,
@@ -72,7 +73,8 @@ public sealed class PenScramblerSystem : EntitySystem
 
     private EntityUid? CloneToNullspace(EntityUid target)
     {
-        if (!TryComp<HumanoidAppearanceComponent>(target, out var humanoid)
+        // TODO UPSTREAM maybe this now possible with _visualBody.CopyAppearanceFrom(...) ?
+        if (!TryComp<HumanoidProfileComponent>(target, out var humanoid)
             || !_prototype.TryIndex(humanoid.Species, out var speciesPrototype)
             || !TryComp<DnaComponent>(target, out var targetDna)
             || !TryComp<FingerprintComponent>(target, out var targetFingerPrint))
@@ -80,7 +82,7 @@ public sealed class PenScramblerSystem : EntitySystem
 
         var mob = Spawn(speciesPrototype.Prototype, MapCoordinates.Nullspace);
 
-        _humanoidSystem.CloneAppearance(target, mob);
+        _visualBody.CopyAppearanceFrom(target, mob);
 
         if (!TryComp<FingerprintComponent>(mob, out var fingerPrint))
             return null;

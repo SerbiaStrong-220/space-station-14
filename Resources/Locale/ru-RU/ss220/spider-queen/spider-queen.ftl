@@ -1,6 +1,6 @@
 spider-queen-blood-points-amount = У вас [color=#800000]{ $current } крови[/color]. Ваш максимум — [color=#800000]{ $max } крови[/color].
 spider-queen-not-enough-blood-points = Недостаточно крови
-spider-queen-warning = Замечена аномальная биологическая активность в { $location }. Служба Безопасности должна ликвидировать угрозу до того как активу будет нанесен непоправимый ущерб! 
+spider-queen-warning = Замечена аномальная биологическая активность в { $location }. Служба Безопасности должна ликвидировать угрозу до того как активу будет нанесен непоправимый ущерб!
 
 spider-queen-role-greeting = Ваша задача — построить максимально большой улей, не позволяйте причинять вред вашему потомству. Экипаж - ваша пища, устройте большой пир!
 
@@ -17,3 +17,7 @@ spider-queen-round-end-agent-name = [color=#c8a2c8]королева пауков
 
 roles-antag-spider-queen-name = Королева пауков
 roles-antag-spider-queen-objective = Постройте максимально большой улей и не позволяйте причинять вред вашему потомству. Экипаж - ваша пища, устройте большой пир!
+job-name-spider-queen = { roles-antag-spider-queen-name }
+job-description-spider-queen = { roles-antag-spider-queen-objective }
+job-name-spider-queen-servant = Паук роя
+job-description-spider-queen-servant = Не позволяйте причинить вред потомству. Экипаж - ваша пища.

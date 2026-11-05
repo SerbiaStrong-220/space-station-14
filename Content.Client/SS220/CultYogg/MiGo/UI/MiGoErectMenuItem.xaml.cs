@@ -16,8 +16,8 @@ namespace Content.Client.SS220.CultYogg.MiGo.UI;
 [GenerateTypedNameReferences]
 public sealed partial class MiGoErectMenuItem : ContainerButton
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     public CultYoggBuildingPrototype? Building { get; private set; }
 

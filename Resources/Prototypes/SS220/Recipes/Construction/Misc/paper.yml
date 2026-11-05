@@ -1,7 +1,0 @@
-- type: construction
-  id: PaperAirplane
-  graph: PaperAirplane
-  startNode: start
-  targetNode: paperairplane
-  category: construction-category-weapons
-  objectType: Item

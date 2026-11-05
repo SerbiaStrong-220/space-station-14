@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "TGStation, ported to SS14",
+  "size": {
+    "x": 96,
+    "y": 96
+  },
+  "states": [
+    {
+      "name": "alive",
+      "directions": 4,
+      "delays": [
+        [
+          1.0
+        ],
+        [
+          1.0
+        ],
+        [
+          1.0
+        ],
+        [
+          1.0
+        ]
+      ]
+    },
+    {
+      "name": "dead",
+      "directions": 1,
+      "delays": [
+        [
+          1.0
+        ]
+      ]
+    }
+  ]
+}

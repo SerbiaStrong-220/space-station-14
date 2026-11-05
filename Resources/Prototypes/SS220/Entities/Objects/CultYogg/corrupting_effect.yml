@@ -12,7 +12,7 @@
     layers:
     - shader: unshaded
       map: ["enum.EffectLayers.Unshaded"]
-      sprite: SS220/Effects/cult_yogg_corrupting.rsi
+      sprite: SS220/Effects/CultYogg/corrupting.rsi
       state: corruptingEffect
       cycle: true
   - type: EffectVisuals

@@ -1,0 +1,18 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: VoidObelisk
+  parent: BaseStructure
+  suffix: CultYogg
+  name: Void obelisk
+  description: Structure of unknown purpose.
+  components:
+  - type: Clickable
+  - type: SpriteFade
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/CultYogg/obelisk.rsi
+    drawdepth: Mobs
+    layers:
+    - state: base
+    offset: "0.0,0.5"

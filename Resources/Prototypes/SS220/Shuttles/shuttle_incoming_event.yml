@@ -1,0 +1,9 @@
+- type: preloadedGrid
+  id: ShuttleMimesLost
+  path: /Maps/SS220/Shuttles/lostSoul/lost_mimes.yml
+  copies: 1 
+
+- type: preloadedGrid
+  id: Redwings
+  path: /Maps/SS220/Shuttles/lostSoul/redwings.yml
+  copies: 1 

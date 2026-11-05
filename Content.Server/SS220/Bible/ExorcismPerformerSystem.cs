@@ -19,19 +19,19 @@ using Content.Shared.Chat;
 
 namespace Content.Server.SS220.Bible;
 
-public sealed class ExorcismPerformerSystem : SharedExorcismPerformerSystem
+public sealed partial class ExorcismPerformerSystem : SharedExorcismPerformerSystem
 {
-    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookupSystem = default!;
-    [Dependency] private readonly ITimerManager _timerManager = default!;
-    [Dependency] private readonly ActionsSystem _actionsSystem = default!;
-    [Dependency] private readonly SharedCultYoggCorruptedSystem _cultYoggCorruptedSystem = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly AppearanceSystem _appearanceSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private UserInterfaceSystem _uiSystem = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private EntityLookupSystem _entityLookupSystem = default!;
+    [Dependency] private ITimerManager _timerManager = default!;
+    [Dependency] private ActionsSystem _actionsSystem = default!;
+    [Dependency] private SharedCultYoggCorruptedSystem _cultYoggCorruptedSystem = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private AppearanceSystem _appearanceSystem = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
 
     public override void Initialize()
     {
@@ -76,7 +76,7 @@ public sealed class ExorcismPerformerSystem : SharedExorcismPerformerSystem
         RaiseLocalEvent(ref args);
         foreach (var other in entitiesInRange)
         {
-            if (_container.TryGetOuterContainer(other, Transform(other), out var container))
+            if (_container.TryGetOuterContainer(other, Transform(other), out _))
                 continue;
 
             RaiseLocalEvent(other, ref args);
@@ -95,7 +95,8 @@ public sealed class ExorcismPerformerSystem : SharedExorcismPerformerSystem
         var effectPrototype = recipe?.CorruptionReverseEffect;
         _adminLogger.Add(LogType.EntitySpawn, LogImpact.Low, $"{ToPrettyString(args.Performer)} used exorcism on {previousEntityString} and made {ToPrettyString(uncorruptedEntity)}");
 
-        if (uncorruptedEntity == null) return;
+        if (uncorruptedEntity == null)
+            return;
 
         if (effectPrototype != null)
         {
@@ -112,7 +113,7 @@ public sealed class ExorcismPerformerSystem : SharedExorcismPerformerSystem
     private void PlayPerformanceEffects(Entity<ExorcismPerformerComponent> entity)
     {
         _appearanceSystem.SetData(entity, ExorcismPerformerVisualState.State, ExorcismPerformerVisualState.Performing);
-        _timerManager.AddTimer(new Timer((int) (entity.Comp.LightEffectDurationSeconds * 1000), false, () =>
+        _timerManager.AddTimer(new Timer((int)(entity.Comp.LightEffectDurationSeconds * 1000), false, () =>
         {
             _appearanceSystem.SetData(entity, ExorcismPerformerVisualState.State, ExorcismPerformerVisualState.None);
         }));

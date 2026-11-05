@@ -5,7 +5,7 @@
     state: barrel
   product: BarrelBeerFull
   cost: 4000
-  category: Food
+  category: cargoproduct-category-name-food
   group: market
 
 - type: cargoProduct

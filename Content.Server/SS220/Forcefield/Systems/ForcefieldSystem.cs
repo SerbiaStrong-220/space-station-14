@@ -13,17 +13,18 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using System.Linq;
 using System.Numerics;
+using Content.Shared.Damage.Systems;
 
 namespace Content.Server.SS220.Forcefield.Systems;
 
 public sealed partial class ForcefieldSystem : SharedForcefieldSystem
 {
-    [Dependency] private readonly FixtureSystem _fixture = default!;
-    [Dependency] private readonly PhysicsSystem _physics = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
+    [Dependency] private FixtureSystem _fixture = default!;
+    [Dependency] private PhysicsSystem _physics = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private PvsOverrideSystem _pvsOverride = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IConfigurationManager _configurationManager = default!;
 
     private readonly Dictionary<EntityUid, List<ICommonSession>> _curPvsOverrides = [];
 

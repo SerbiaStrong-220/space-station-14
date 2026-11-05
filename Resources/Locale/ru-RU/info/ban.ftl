@@ -81,3 +81,11 @@ server-ban-string-no-pii = { $admin } установил серверный ба
 cmd-ban_exemption_get-arg-player = <player>
 # Kick on ban
 ban-kick-reason = Вы были забанены
+
+cmd-ban-invalid-stated-round = ${statedround} не является допустимым номером раунда!
+
+cmd-ban-hint-stated-round = [раунд нарушения]
+
+ban-panel-stated-round = Раунд нарушения:
+
+ban-panel-expiry-error = ошибка

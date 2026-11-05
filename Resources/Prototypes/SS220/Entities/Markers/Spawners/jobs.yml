@@ -79,6 +79,19 @@
       - state: green
       - state: lawyer
 
+# Представитель НаноТрейзен
+- type: entity
+  id: SpawnPointNanoTrasenRepresentative
+  parent: SpawnPointJobBase
+  name: NanoTrasen Representative
+  components:
+  - type: SpawnPoint
+    job_id: NanoTrasenRepresentative
+  - type: Sprite
+    layers:
+      - state: green
+      - state: lawyer
+
 # Сервисный администратор
 - type: entity
   id: SpawnPointServiceOfficer
@@ -91,3 +104,27 @@
     layers:
       - state: green
       - state: serviceworker
+
+- type: entity
+  id: SpawnPointZookeeper
+  parent: SpawnPointJobBase
+  name: zookeeper
+  components:
+  - type: SpawnPoint
+    job_id: Zookeeper
+  - type: Sprite
+    layers:
+    - state: green
+    - state: zookeeper
+
+- type: entity
+  id: SpawnPointBoxer
+  parent: SpawnPointJobBase
+  name: boxer
+  components:
+  - type: SpawnPoint
+    job_id: Boxer
+  - type: Sprite
+    layers:
+    - state: green
+    - state: boxer

@@ -1,5 +1,9 @@
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Serialization;
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Emag.Components;
 using Content.Shared.Emag.Systems;
@@ -8,9 +12,6 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.NPC.Components;
 using Content.Shared.Popups;
-using Robust.Shared.Audio.Systems;
-using Robust.Shared.Serialization;
-using System.Diagnostics.CodeAnalysis;
 using Robust.Shared.Prototypes; //ss220 fix medibot
 
 namespace Content.Shared.Silicons.Bots;
@@ -27,6 +28,7 @@ public sealed class MedibotSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!; //ss220 fix medibot
+    [Dependency] private readonly DamageableSystem _damageable = default!;
 
     public override void Initialize()
     {
@@ -109,7 +111,7 @@ public sealed class MedibotSystem : EntitySystem
             return false;
         }
 
-        var total = damageable.TotalDamage;
+        var total = _damageable.GetTotalDamage((target, damageable));
         //ss220 fix medibot start
         var isEmagged = HasComp<EmaggedComponent>(medibot);
         if (total == 0 && !isEmagged)
@@ -118,7 +120,12 @@ public sealed class MedibotSystem : EntitySystem
             return false;
         }
 
-        if (!TryGetTreatment(medibot.Comp, mobState.CurrentState, out var treatment) || !treatment.IsValid(damageable.Damage, isEmagged, _proto) && !manual) return false;
+        if (!TryGetTreatment(medibot.Comp, mobState.CurrentState, out var treatment) ||
+            !treatment.IsValid(_damageable.GetAllDamage(target), isEmagged, _proto) &&
+            !manual)
+        {
+            return false;
+        }
         //ss220 fix medibot end
 
         return true;
@@ -137,10 +144,9 @@ public sealed class MedibotSystem : EntitySystem
         if (!TryGetTreatment(medibot.Comp, mobState.CurrentState, out var treatment)) return false;
         if (!_solutionContainer.TryGetInjectableSolution(target, out var injectable, out _)) return false;
 
-        EnsureComp<NPCRecentlyInjectedComponent>(target);
         _solutionContainer.TryAddReagent(injectable.Value, treatment.Reagent, treatment.Quantity, out _);
 
-        _popup.PopupEntity(Loc.GetString("hypospray-component-feel-prick-message"), target, target);
+        _popup.PopupEntity(Loc.GetString("injector-component-feel-prick-message"), target, target);
         _popup.PopupClient(Loc.GetString("medibot-target-injected"), medibot, medibot);
 
         _audio.PlayPredicted(medibot.Comp.InjectSound, medibot, medibot);

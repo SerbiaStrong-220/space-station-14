@@ -130,7 +130,7 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
             };
 
             deparmentLabel.SetMessage(department);
-            deparmentLabel.StyleClasses.Add(StyleNano.StyleClassTooltipActionDescription);
+            deparmentLabel.StyleClasses.Add("font-large");
 
             SensorsTable.AddChild(deparmentLabel);
 
@@ -156,7 +156,6 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
             };
 
             deparmentLabel.SetMessage(Loc.GetString("crew-monitoring-ui-no-department-label"));
-            deparmentLabel.StyleClasses.Add(StyleNano.StyleClassTooltipActionDescription);
 
             SensorsTable.AddChild(deparmentLabel);
 
@@ -196,15 +195,14 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
             }
             else if (sensor.DamagePercentage != null)
             {
-                var index = MathF.Round(4f * sensor.DamagePercentage.Value);
-
-                if (index >= 5)
+                if (sensor.DamagePercentage.Value >= 1f) // SS220 FIX Monitoring Health
                 {
                     specifier = new SpriteSpecifier.Rsi(new ResPath("Interface/Alerts/human_crew_monitoring.rsi"), "critical");
                     dotColor = Color.Red;
                 }
                 else
                 {
+                    var index = MathF.Round(4f * sensor.DamagePercentage.Value); // SS220 FIX Monitoring Health
                     specifier = new SpriteSpecifier.Rsi(new ResPath("Interface/Alerts/human_crew_monitoring.rsi"), "health" + index);
                     dotColor = index switch
                     {
@@ -227,7 +225,7 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
             };
 
             if (sensor.SuitSensorUid == _trackedEntity)
-                sensorButton.AddStyleClass(StyleNano.StyleClassButtonColorGreen);
+                sensorButton.AddStyleClass(StyleClass.Positive);
 
             SensorsTable.AddChild(sensorButton);
 
@@ -401,10 +399,10 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
             var castSensor = (CrewMonitoringButton)sensor;
 
             if (castSensor.SuitSensorUid == prevTrackedEntity)
-                castSensor.RemoveStyleClass(StyleNano.StyleClassButtonColorGreen);
+                castSensor.RemoveStyleClass(StyleClass.Positive);
 
             else if (castSensor.SuitSensorUid == currTrackedEntity)
-                castSensor.AddStyleClass(StyleNano.StyleClassButtonColorGreen);
+                castSensor.AddStyleClass(StyleClass.Positive);
 
             if (castSensor?.Coordinates == null)
                 continue;

@@ -45,7 +45,7 @@ public sealed partial class PhotocopierSystem
         EntityUid entity,
         [NotNullWhen(true)] out PhotocopyableMetaData? metaData)
     {
-        if (!TryComp<MetaDataComponent>(entity, out var metaDataComp))
+        if (!TryComp(entity, out MetaDataComponent? metaDataComp))
         {
             metaData = null;
             return false;
@@ -69,6 +69,13 @@ public sealed partial class PhotocopierSystem
     /// <param name="dataToCopy"></param>
     public void RestoreEntityFromData(EntityUid uid, Dictionary<Type, IPhotocopiedComponentData> dataToCopy)
     {
+        foreach (var data in dataToCopy)
+        {
+            var comp = EntityManager.ComponentFactory.GetComponent(data.Key);
+            if (data.Value.NeedToEnsure && !HasComp(uid, data.Key))
+                AddComp(uid, comp);
+        }
+
         var components = _entityManager.GetComponents(uid);
         foreach (var iComponent in components)
         {
@@ -129,7 +136,7 @@ public sealed partial class PhotocopierSystem
 
         try
         {
-            printed = EntityManager.SpawnEntity(entityToSpawn, at);
+            printed = Spawn(entityToSpawn, at);
         }
         catch (UnknownPrototypeException)
         {
@@ -138,7 +145,7 @@ public sealed partial class PhotocopierSystem
         }
 
 
-        if (metaDataToCopy is not null && TryComp<MetaDataComponent>(printed, out var metaData))
+        if (metaDataToCopy is not null && TryComp(printed, out MetaDataComponent? metaData))
         {
             if (!string.IsNullOrEmpty(metaDataToCopy.EntityName))
                 _metaData.SetEntityName(printed, metaDataToCopy.EntityName, metaData);

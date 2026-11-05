@@ -24,7 +24,7 @@ public sealed class TapeRecorderSystem : SharedTapeRecorderSystem
     [Dependency] private readonly HandsSystem _hands = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly PaperSystem _paper = default!;
-    [Dependency] private readonly TTSSystem _ttsSystem = default!; // SS220 Tape recorder TTS
+    [Dependency] private readonly TTSContextSystem _ttsContext = default!; // SS220 Tape recorder TTS
     [Dependency] private readonly LanguageSystem _languageSystem = default!; // SS220 languages
 
     public override void Initialize()
@@ -103,10 +103,10 @@ public sealed class TapeRecorderSystem : SharedTapeRecorderSystem
         //cassette.Comp.Buffer.Add(new TapeCassetteRecordedMessage(cassette.Comp.CurrentPosition, name, verb, args.Message));
         TryComp<TTSComponent>(args.Source, out var tts);
         var voiceId = tts?.VoicePrototypeId;
-        if (voiceId is { } && _ttsSystem.TryGetVoiceMaskUid(args.Source, out var maskUid))
+        if (voiceId is { } && _ttsContext.TryGetVoiceMaskUid(args.Source, out var maskUid))
         {
             var voiceEv = new TransformSpeakerVoiceEvent(maskUid.Value, voiceId);
-            RaiseLocalEvent(maskUid.Value, voiceEv);
+            RaiseLocalEvent(maskUid.Value, ref voiceEv);
             voiceId = voiceEv.VoiceId;
         }
         cassette.Comp.Buffer.Add(new TapeCassetteRecordedMessage(cassette.Comp.CurrentPosition, name, verb, args.Message, voiceId, args.LanguageMessage));

@@ -3,8 +3,10 @@
   parent: BriefcaseBrown
   suffix: IAA
   components:
-    - type: StorageFill
-      contents:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
         - id: Paper
           amount: 3
         - id: RubberStampIAA

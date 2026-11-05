@@ -7,10 +7,10 @@ using Robust.Shared.Configuration;
 
 namespace Content.Client.SS220.Calculator;
 
-public sealed class CalculatorSystem : SharedCalculatorSystem
+public sealed partial class CalculatorSystem : SharedCalculatorSystem
 {
-    [Dependency] private readonly AudioSystem _audioSystem = default!;
-    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
+    [Dependency] private AudioSystem _audioSystem = default!;
+    [Dependency] private IConfigurationManager _configurationManager = default!;
 
     private float _interfaceSoundsGain;
 
@@ -36,7 +36,7 @@ public sealed class CalculatorSystem : SharedCalculatorSystem
         if (calculator.Comp.ButtonSound is not { } sound)
             return;
         // The current state of the audio system in the engine is terrifying.
-        // I really hope all this volume stuff will be much easier someday. 
+        // I really hope all this volume stuff will be much easier someday.
         var audioParams = sound.Params;
         if (isUserInterface)
         {

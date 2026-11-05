@@ -1,5 +1,6 @@
 using Content.Server.Chat.Systems;
 using Content.Server.Movement.Systems;
+using Content.Shared.Chat;
 using Content.Shared.Effects;
 using Content.Shared.Speech.Components;
 using Content.Shared.Weapons.Melee;
@@ -46,6 +47,12 @@ public sealed class MeleeWeaponSystem : SharedMeleeWeaponSystem
         // Could also check the arc though future effort + if they're aimbotting it's not really going to make a difference.
 
         // (This runs lagcomp internally and is what clickattacks use)
+
+        // ss220 fix error spam start
+        if (TerminatingOrDeleted(targetUid))
+            return false;
+        // ss220 fix error spam end
+
         if (!Interaction.InRangeUnobstructed(ignore, targetUid, range + 0.1f, overlapCheck: false))
             return false;
 

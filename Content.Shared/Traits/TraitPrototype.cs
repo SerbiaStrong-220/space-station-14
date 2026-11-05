@@ -1,4 +1,5 @@
 using Content.Shared.SS220.Language.Components;
+using Content.Shared.Roles;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 
@@ -40,9 +41,17 @@ public sealed partial class TraitPrototype : IPrototype
 
     /// <summary>
     /// The components that get added to the player, when they pick this trait.
+    /// NOTE: When implementing a new trait, it's preferable to add it as a status effect instead if possible.
     /// </summary>
     [DataField]
+    [Obsolete("Use JobSpecial instead.")]
     public ComponentRegistry? Components { get; private set; } = default!; // SS220 Add nullable
+
+    /// <summary>
+    /// Special effects applied to the player who takes this Trait.
+    /// </summary>
+    [DataField(serverOnly: true)]
+    public List<JobSpecial> Specials { get; private set; } = new();
 
     /// <summary>
     /// Gear that is given to the player, when they pick this trait.

@@ -9,12 +9,12 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.CultYogg.Lamp;
 
-public abstract class SharedCultYoggLampSystem : EntitySystem
+public abstract partial class SharedCultYoggLampSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _action = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedItemSystem _itemSys = default!;
-    [Dependency] private readonly ClothingSystem _clothingSys = default!;
+    [Dependency] private SharedActionsSystem _action = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedItemSystem _itemSys = default!;
+    [Dependency] private ClothingSystem _clothingSys = default!;
 
     public override void Initialize()
     {

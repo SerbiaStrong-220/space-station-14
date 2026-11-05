@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Form>
+  <FormId>med_snpb</FormId>
+  <PrototypeId>PaperNtFormMed</PrototypeId>
+  <EntityName>форма НТ-МЕД-СНПБ</EntityName>
+  <PhotocopierTitle>Снятие побоев</PhotocopierTitle>
+  <Content><![CDATA[[bold]Форма НТ-МЕД-СНПБ[/bold]
+[head=2]Снятие побоев[/head]
+
+[italic]Дата: ДЕНЬ/МЕСЯЦ/ГОД[/italic]
+
+[bold]Ответственное лицо:[/bold] (ПОЛНОЕ ИМЯ), (ДОЛЖНОСТЬ)
+[bold]Полное имя и должность потерпевшего:[/bold]
+[bold]Медицинский анамнез:[/bold]
+(Фиксация телесных повреждений, механизм образования и степень вреда здоровью)
+
+[italic]Место для печатей[/italic]]]></Content>
+</Form>

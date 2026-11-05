@@ -1,5 +1,5 @@
 ## Описание
-Это self-hosted версия TTS сервера на основе моделей Silero. Совместима с билдом на момент 12.10.2023
+Это self-hosted версия TTS сервера на основе моделей Silero. Совместима с билдом на момент 21/01/2026
 
 Модели Silero предоставлены https://github.com/snakers4/silero-models/tree/master
 

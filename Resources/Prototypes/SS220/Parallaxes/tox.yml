@@ -1,0 +1,32 @@
+- type: parallax
+  id: ToxParallax
+  layers:
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/ToxBackground_space.png"
+      slowness: 0.998046875
+      scale: "1, 1"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/ToxDust.png"
+      slowness: 0.98
+      scale: "1, 1"
+      scrolling: "-0.02, 0.02"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/ToxNebulae.png"
+      slowness: 0.98
+      scale: "1, 1"
+      scrolling: "-0.02, 0.02"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/ToxStars.png"
+      slowness: 0.94
+      scale: "1, 1"
+  layersLQ:
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: ""
+        configPath: "/Prototypes/Parallaxes/parallax_config.toml"
+      slowness: 0.875
+  layersLQUseHQ: false

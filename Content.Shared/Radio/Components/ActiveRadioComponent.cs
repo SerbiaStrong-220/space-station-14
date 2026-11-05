@@ -15,6 +15,14 @@ public sealed partial class ActiveRadioComponent : Component
     [DataField]
     public HashSet<ProtoId<RadioChannelPrototype>> Channels = new();
 
+    // SS220-add-frequency-radio-begin
+    /// <summary>
+    ///     The channels that this radio is listening on.
+    /// </summary>
+    [DataField]
+    public HashSet<ProtoId<RadioChannelPrototype>> FrequencyChannels = new();
+    // SS220-add-frequency-radio-end
+
     /// <summary>
     /// A toggle for globally receiving all radio channels.
     /// Overrides <see cref="Channels"/>

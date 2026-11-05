@@ -13,6 +13,20 @@
   - !type:GroupLoadoutEffect
     proto: AdministratorSponsorTier
 
+- type: loadoutEffectGroup
+  id: WardenCommissar
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobWarden
+      time: 144h
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
 # Jumpsuit
 - type: loadout
   id: WardenJumpsuitTurtleneck
@@ -21,3 +35,29 @@
     proto: WardenTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpsuitWardenTurtleneck
+
+- type: loadout
+  id: WardenJumpsuitCommissar
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: WardenCommissar
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitCommissar
+
+# Head
+- type: loadout
+  id: WardenHeadCommissar
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: WardenCommissar
+  equipment:
+    head: ClothingHeadBigCapCommissar
+
+# Outer
+- type: loadout
+  id: WardenOuterCoatCommissar
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: WardenCommissar
+  equipment:
+    outerClothing: ClothingOuterCoatWardenCommissar

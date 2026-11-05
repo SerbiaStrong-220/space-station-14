@@ -35,7 +35,7 @@
       gunModifiers:
         soundGunshot: /Audio/Weapons/Guns/Gunshots/taser.ogg
       magState: emp-mag
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: BulletDisabler
     fireCost: 40
   - type: MagazineVisuals

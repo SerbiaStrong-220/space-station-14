@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from ParadiseSS13, https://github.com/ParadiseSS13/Paradise/blob/HEAD/icons/obj/clothing/modsuit/mod_modules.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "improvised"
+    },
+    {
+      "name": "syndicate"
+    }
+  ]
+}

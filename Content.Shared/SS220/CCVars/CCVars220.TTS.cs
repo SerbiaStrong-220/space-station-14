@@ -5,6 +5,33 @@ namespace Content.Shared.SS220.CCVars;
 public sealed partial class CCVars220
 {
     /// <summary>
+    /// Master switch for receiving tts
+    /// </summary>
+    public static readonly CVarDef<bool> RecieveTTS =
+        CVarDef.Create("tts.receive_tts", true, CVar.CLIENT | CVar.REPLICATED | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Boolean for queueing tts with different radio channels together or sequentially
+    /// </summary>
+    public static readonly CVarDef<bool> PlayDifferentRadioTogether =
+        CVarDef.Create("tts.play_different_radio_together", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Boolean for queueing tts with different source in speech together or sequentially
+    /// </summary>
+    public static readonly CVarDef<bool> PlayDifferentTalkingTogether =
+        CVarDef.Create("tts.play_different_talk_together", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Boolean for queueing tts with different radio channels and speakers together or sequentially
+    /// </summary>
+    public static readonly CVarDef<bool> PlayDifferentRadioSourcesTogether =
+        CVarDef.Create("tts.play_different_radio_sources_together", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> UseFFMpegProcessing =
+        CVarDef.Create("tts.use_ffmpeg_processing", true, CVar.SERVERONLY | CVar.ARCHIVE);
+
+    /// <summary>
     /// Maximum entity capacity for tts queue
     /// </summary>
     public static readonly CVarDef<int> MaxQueuedPerEntity =

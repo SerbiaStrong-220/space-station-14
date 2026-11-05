@@ -3,7 +3,7 @@
   parent: Clothing
   id: ClothingBeltBase
   components:
-  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita
     sound:
       path: /Audio/SS220/Effects/Drop/clothing_belt.ogg
       params:
@@ -48,6 +48,7 @@
     microFiberMaterial: micro-fibers-leather
     microFiberColor: micro-fibers-brown
 #SS220 Micro_fibers end
+  - type: DragDropContainerTransfer #ss220 add drag drop container
 
 - type: entity
   abstract: true

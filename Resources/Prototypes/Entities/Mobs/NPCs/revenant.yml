@@ -138,3 +138,10 @@
     tags:
     - SlowImmune
     - KnockdownImmune
+  #SS220 Cult hotfix 17 #3641 start
+  - type: DamageCorruptInteraction
+    damageSound: /Audio/Items/welder.ogg #for now, cause no sound
+    damage:
+      types:
+        Heat: 30
+  #SS220 Cult hotfix 17 #3641 end

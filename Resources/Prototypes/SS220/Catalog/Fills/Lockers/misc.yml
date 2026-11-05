@@ -3,70 +3,73 @@
   parent: ClosetFireDouble
   suffix: Filled
   components:
-  - type: StorageFill
-    contents:
-      - id: ClothingOuterSuitFire
-      - id: ClothingHeadHelmetFire
-      - id: ClothingMaskGas
-      - id: EmergencyOxygenTankFilled
-        prob: 0.5
-        orGroup: OxygenTank
-      - id: OxygenTankFilled
-        prob: 0.5
-        orGroup: OxygenTank
-      - id: NitrogenTankFilled #SS220 Emergency_Nitrogen_Tank_return
-      - id: CrowbarRed
-      - id: FireExtinguisher
-        prob: 0.98
-        orGroup: FireExtinguisher
-      - id: SprayBottleWater #It's just budget cut after budget cut man
-        prob: 0.02
-        orGroup: FireExtinguisher
-      - id: InflatableWallStack1
-      - id: InflatableWallStack1
-        prob: 0.30
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: ClothingOuterSuitFire
+        - id: ClothingHeadHelmetFire
+        - id: ClothingMaskGas
+        - !type:GroupSelector
+          prob: 0.5
+          children:
+          - id: EmergencyOxygenTankFilled
+          - id: OxygenTankFilled
+        - id: NitrogenTankFilled #SS220 Emergency_Nitrogen_Tank_return
+        - id: CrowbarRed
+        - !type:GroupSelector
+          children:
+          - id: FireExtinguisher
+            weight: 0.98
+          - id: SprayBottleWater #It's just budget cut after budget cut man
+            weight: 0.02
+        - id: InflatableWallStack1
+        - id: InflatableWallStack1
+          prob: 0.30
 
 - type: entity
   id: ClosetEmergencyDoubleFilledRandom
   parent: ClosetEmergencyDouble
   suffix: Filled, Random
   components:
-  - type: StorageFill
-    contents:
-      - id: ClothingMaskBreath
-      - id: ClothingOuterSuitEmergency
-      - id: EmergencyOxygenTankFilled
-        prob: 0.5
-        orGroup: OxygenTank
-      - id: OxygenTankFilled
-        prob: 0.5
-        orGroup: OxygenTank
-        #SS220 Emergency_Nitrogen_Tank_return start
-      - id: EmergencyNitrogenTankFilled
-        prob: 0.80
-        orGroup: EmergencyNitrogenTankOrRegularTank
-      - id: NitrogenTankFilled
-        prob: 0.20
-        orGroup: EmergencyNitrogenTankOrRegularTank
-        #SS220 Emergency_Nitrogen_Tank_return end
-      - id: ToolboxEmergencyFilled
-        prob: 0.5
-      - id: MedkitOxygenFilled
-        prob: 0.2
-      - id: WeaponFlareGun
-        prob: 0.05
-      - id: BoxMRE
-        prob: 0.1
-      - id: LotteryCash #SS220 Lottery
-        prob: 0.05
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: ClothingMaskBreath
+        - id: ClothingOuterSuitEmergency
+        - !type:GroupSelector
+          children:
+          - id: EmergencyOxygenTankFilled
+            weight: 1
+          - id: OxygenTankFilled
+            weight: 1
+          - !type:GroupSelector
+            children:
+            - id: EmergencyNitrogenTankFilled
+              weight: 0.8
+            - id: NitrogenTankFilled
+              weight: 0.2
+        - id: ToolboxEmergencyFilled
+          prob: 0.5
+        - id: MedkitOxygenFilled
+          prob: 0.2
+        - id: WeaponFlareGun
+          prob: 0.05
+        - id: BoxMRE
+          prob: 0.1
+        - id: LotteryCash
+          prob: 0.05
 
 - type: entity
   id: ClosetMaintenanceDoubleFilledRandom
   suffix: Filled, Random
   parent: ClosetMaintenanceDouble
   components:
-    - type: StorageFill
-      contents:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
         - id: Lantern
           prob: 0.50
         - id: Wirecutter
@@ -83,21 +86,19 @@
           prob: 0.10
         - id: Soap
           prob: 0.44
-        - id: null
-          prob: 0.67
-          orGroup: carp
-        - id: PlushieCarp
-          prob: 0.2
-          orGroup: carp
-        - id: PlushieHolocarp
-          prob: 0.05
-          orGroup: carp
-        - id: PlushieMagicarp
-          prob: 0.05
-          orGroup: carp
-        - id: PlushieRainbowCarp
-          prob: 0.03
-          orGroup: carp
+        # orGroup: carp
+        - !type:GroupSelector
+          children:
+          - !type:NoneSelector
+            prob: 0.67
+          - id: PlushieCarp
+            prob: 0.2
+          - id: PlushieHolocarp
+            prob: 0.05
+          - id: PlushieMagicarp
+            prob: 0.05
+          - id: PlushieRainbowCarp
+            prob: 0.03
         - id: PlushieSlime
           prob: 0.2
         - id: PlushieSnake
@@ -118,22 +119,17 @@
           prob: 0.25
         - id: StrangePill
           prob: 0.20
-        - id: DrinkMopwataBottleRandom
-          prob: 0.20
-          #SS220-VodkaKazaki-Begin
-          orGroup: MaintenanceDrink
-        - id: DrinkVodkaKazakiBottleFull
-          prob: 0.05
-          orGroup: MaintenanceDrink
-        - id: null
-          prob: 0.75
-          orGroup: MaintenanceDrink
-          #SS220VodkaKazaki-End
-          #SS220Bankate-begin
-        - id: DrinkBankateJarFull
-          prob: 0.20
-          orGroup: MaintenanceDrink
-          #SS220Bankate-end
+        # orGroup: MaintenanceDrink
+        - !type:GroupSelector
+          children:
+          - id: DrinkMopwataBottleRandom
+            prob: 0.20
+          - id: DrinkVodkaKazakiBottleFull
+            prob: 0.05
+          - !type:NoneSelector
+            prob: 0.75
+          - id: DrinkBankateJarFull
+            prob: 0.20
         - id: ModularReceiver
           prob: 0.1
         - id: DrinkSpaceGlue
@@ -144,55 +140,40 @@
           prob: 0.05
         - id: BookRandomStory
           prob: 0.1
-        # Syndicate loot
-        - id: null
-          prob: 0.95
-          orGroup: syndiemaintloot
-        - id: ClothingUniformJumpskirtOperative
-          prob: 0.005
-          orGroup: syndiemaintloot
-        - id: ClothingUniformJumpsuitOperative
-          prob: 0.005
-          orGroup: syndiemaintloot
-        - id: ClothingBackpackDuffelSyndicate
-          prob: 0.005
-          orGroup: syndiemaintloot
-        - id: CyberPen
-          prob: 0.005
-          orGroup: syndiemaintloot
-        - id: CigPackSyndicate
-          prob: 0.005
-          orGroup: syndiemaintloot
-        - id: ClothingBackpackDuffelSyndicatePyjamaBundle
-          prob: 0.005
-          orGroup: syndiemaintloot
-        - id: ClothingBeltMilitaryWebbing
-          prob: 0.005
-          orGroup: syndiemaintloot
-        - id: ClothingShoesBootsCombatFilled
-          prob: 0.005
-          orGroup: syndiemaintloot
-        - id: ToolboxSyndicateFilled
-          prob: 0.005
-          orGroup: syndiemaintloot
-        - id: BalloonSyn
-          prob: 0.005
-          orGroup: syndiemaintloot
-        - id: WeaponSniperMosin
-          prob: 0.0010
-          orGroup: syndiemaintloot
-        - id: ReinforcementRadioSyndicateFake
-          prob: 0.005
-          orGroup: syndiemaintloot
-        - id: BoxHoloparasiteFake
-          prob: 0.005
-          orGroup: syndiemaintloot
-        - id: RandomID
-          prob: 0.005
-          orGroup: syndiemaintloot
-        - id: LotteryCash #SS220 Lottery
+        # orGroup: syndiemaintloot
+        - !type:GroupSelector
+          children:
+          - !type:NoneSelector
+            prob: 0.95
+          - id: ClothingUniformJumpskirtOperative
+            prob: 0.005
+          - id: ClothingUniformJumpsuitOperative
+            prob: 0.005
+          - id: ClothingBackpackDuffelSyndicate
+            prob: 0.005
+          - id: CyberPen
+            prob: 0.005
+          - id: CigPackSyndicate
+            prob: 0.005
+          - id: ClothingBackpackDuffelSyndicatePyjamaBundle
+            prob: 0.005
+          - id: ClothingBeltMilitaryWebbing
+            prob: 0.005
+          - id: ClothingShoesBootsCombatFilled
+            prob: 0.005
+          - id: ToolboxSyndicateFilled
+            prob: 0.005
+          - id: BalloonSyn
+            prob: 0.005
+          - id: WeaponSniperMosin
+            prob: 0.0010
+          - id: ReinforcementRadioSyndicateFake
+            prob: 0.005
+          - id: BoxHoloparasiteFake
+            prob: 0.005
+          - id: RandomID
+            prob: 0.005
+        - id: LotteryCash
           prob: 0.05
-        # SS220 Wrist Watch begin
         - id: ClothingWristWatch
           prob: 0.05
-        # SS220 Wrist Watch end

@@ -21,15 +21,15 @@ namespace Content.Server.SS220.GateDungeon;
 /// the other must have the gateType: ToStation
 /// </summary>
 
-public sealed class GateDungeonSystem : EntitySystem
+public sealed partial class GateDungeonSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly MapLoaderSystem _loader = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly LinkedEntitySystem _linked = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly MetaDataSystem _meta = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private MapLoaderSystem _loader = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private LinkedEntitySystem _linked = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private MetaDataSystem _meta = default!;
 
     private Dictionary<GateType, List<EntityUid>> _gateList = new();
 

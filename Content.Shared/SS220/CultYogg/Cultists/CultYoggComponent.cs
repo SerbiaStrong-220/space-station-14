@@ -2,6 +2,8 @@
 
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Nutrition.Components;
+using Content.Shared.Whitelist;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -15,28 +17,28 @@ namespace Content.Shared.SS220.CultYogg.Cultists;
 public sealed partial class CultYoggComponent : Component
 {
     #region abilities
-    [DataField]
+    [ViewVariables]
     public EntProtoId PukeShroomAction = "ActionCultYoggPukeShroom";
 
-    [DataField]
+    [ViewVariables]
     public EntProtoId DigestAction = "ActionCultYoggDigest";
 
-    [DataField]
+    [ViewVariables]
     public EntProtoId CorruptItemAction = "ActionCultYoggCorruptItem";
 
-    [DataField]
+    [ViewVariables]
     public EntProtoId CorruptItemInHandAction = "ActionCultYoggCorruptItemInHand";
 
-    [DataField, AutoNetworkedField]
+    [ViewVariables, AutoNetworkedField]
     public EntityUid? PukeShroomActionEntity;
 
-    [DataField, AutoNetworkedField]
+    [ViewVariables, AutoNetworkedField]
     public EntityUid? DigestActionEntity;
 
-    [DataField, AutoNetworkedField]
+    [ViewVariables, AutoNetworkedField]
     public EntityUid? CorruptItemActionEntity;
 
-    [DataField, AutoNetworkedField]
+    [ViewVariables, AutoNetworkedField]
     public EntityUid? CorruptItemInHandActionEntity;
     #endregion
 
@@ -45,25 +47,28 @@ public sealed partial class CultYoggComponent : Component
     /// This will subtract (not add, don't get this mixed up) from the current hunger of the mob doing micoz
     /// </summary>
 
-    [ViewVariables, DataField, AutoNetworkedField]
-    public float HungerCost = 20f;
+    [ViewVariables, AutoNetworkedField]
+    public float HungerCost = 10f;
 
-    [ViewVariables, DataField, AutoNetworkedField]
-    public float ThirstCost = 20f;
+    [ViewVariables, AutoNetworkedField]
+    public float ThirstCost = 10f;
 
-    [ViewVariables, DataField, AutoNetworkedField]
+    [ViewVariables, AutoNetworkedField]
     public string PukedEntity = "FoodMiGomyceteCult"; //what will be puked out
+
+    [DataField]
+    public SoundSpecifier VomitSound = new SoundCollectionSpecifier("Vomit", AudioParams.Default.WithVariation(0.2f).WithVolume(-4f));
 
     /// <summary>
     /// The lowest hunger threshold that this mob can be in before it's allowed to digest another shroom.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [ViewVariables, AutoNetworkedField]
     public HungerThreshold MinHungerThreshold = HungerThreshold.Starving;
 
     /// <summary>
     /// The lowest thirst threshold that this mob can be in before it's allowed to digest another shroom.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [ViewVariables, AutoNetworkedField]
     public ThirstThreshold MinThirstThreshold = ThirstThreshold.Parched;
     #endregion
 
@@ -72,7 +77,7 @@ public sealed partial class CultYoggComponent : Component
     /// Entity the cultist will ascend into
     /// </summary>
     [ViewVariables]
-    public string AscendedEntity = "MiGo";
+    public EntProtoId AscendedEntity = "MobMiGo";
 
     [ViewVariables]
     public float AmountAscensionReagentAscend = 6f; // This is equal to 3 shrooms
@@ -82,19 +87,19 @@ public sealed partial class CultYoggComponent : Component
     #endregion
 
     #region stages
-    [DataField]
+    [ViewVariables]
     public Color? PreviousEyeColor;
 
-    [DataField]
-    public Marking? PreviousTail;
+    [ViewVariables]
+    public List<Marking>? PreviousTailMarkings;
 
-    [DataField, AutoNetworkedField]
+    [ViewVariables, AutoNetworkedField]
     public CultYoggStage CurrentStage = CultYoggStage.Initial;
     #endregion
 
     /// <summary>
     /// Visual effect to spawn when entity corrupted
     /// </summary>
-    [DataField]
+    [ViewVariables]
     public EntProtoId CorruptionEffect = "CorruptingEffect";
 }

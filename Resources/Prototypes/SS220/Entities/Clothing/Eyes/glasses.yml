@@ -1,7 +1,7 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-  parent: ClothingEyesGlassesSecurity
+  parent: [ClothingEyesGlassesSecurity, SS220GlassesOnForeheadBase]
   id: ClothingEyesGlassesCentcom
   name: centcom glasses
   description: Upgraded sunglasses that provide flash immunity and a security HUD.
@@ -9,17 +9,19 @@
   - type: Sprite
     sprite: SS220/Clothing/Eyes/Glasses/centcom.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: SS220/Clothing/Eyes/Glasses/centcom.rsi
 
 - type: entity
-  parent: ClothingEyesGlassesCheapSunglasses
+  parent: [ClothingEyesGlassesCheapSunglasses, SS220GlassesOnForeheadBase]
   id: ClothingEyesQuartermasterGlasses
-  name: очки квартирмейстера
-  description: Эксклюзивные очки квартирмейстера, совмещающие в себе защиту ваших, зрящих в корень, глаз от ярких лучей в совокупности со встроенным интерфейсом оценивания груза. Выдержанный стиль отдела снабжения для своего лучшего сотрудника.
+  name: quartermaster's glasses
+  description: Exclusive glasses that combine cargo-evaluation interface with protection for your keen eyes against bright rays. The Supply Department's signature style for its finest employee.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Eyes/Glasses/qm.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: SS220/Clothing/Eyes/Glasses/qm.rsi
   - type: ShowSupplyPrice
   - type: FlashImmunity
@@ -33,7 +35,7 @@
     - SecDogWearable
 
 - type: entity
-  parent: [ClothingEyesBase, ShowSecurityIcons]
+  parent: [ClothingEyesBase, ShowSecurityIcons, SS220GlassesOnForeheadBase]
   id: ClothingEyesGlassesBallistic
   name: ballistic glasses
   description: Tactical security element
@@ -41,6 +43,7 @@
   - type: Sprite
     sprite: SS220/Clothing/Eyes/Glasses/security_ballistic.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: SS220/Clothing/Eyes/Glasses/security_ballistic.rsi
   - type: FlashImmunity
   - type: EyeProtection
@@ -61,25 +64,35 @@
     coverage: EYES
 
 - type: entity
-  parent: ClothingEyesGlassesBlueShield
-  id: ClothingEyesBlueShieldGlasses
+  parent: [ClothingEyesBase, SS220GlassesOnForeheadBase]
+  id: ClothingEyesGlassesBlueShield
   name: blueshield glasses
   description: Upgraded sunglasses for blue shields.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Eyes/Glasses/blueshield.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: SS220/Clothing/Eyes/Glasses/blueshield.rsi
   - type: Tag
     tags:
     - HamsterWearable
     - WhitelistChameleon
+  - type: FlashImmunity
+  - type: EyeProtection
+    protectionTime: 5
   - type: IdentityBlocker
     coverage: EYES
   - type: ShowJobIcons
+  - type: ShowHealthBars
+    damageContainers:
+    - Biological
+  - type: ShowHealthIcons
+    damageContainers:
+    - Biological
 
 - type: entity
-  parent: ClothingEyesBlueShieldGlasses
+  parent: [ClothingEyesGlassesBlueShield, SS220GlassesOnForeheadBase]
   id: ClothingEyesBlueShieldTacticGlasses
   name: blueshield tactic glasses
   description: Tactical glasses for combat situations.
@@ -87,10 +100,23 @@
   - type: Sprite
     sprite: SS220/Clothing/Eyes/Glasses/blueshield_tactic.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: SS220/Clothing/Eyes/Glasses/blueshield_tactic.rsi
 
 - type: entity
-  parent: [ClothingEyesBase, ShowMedicalIcons]
+  parent: [ClothingEyesGlassesBlueShield, SS220GlassesOnForeheadBase]
+  id: ClothingEyesGlassesBallisticBlueShield
+  name: ballistic glasses
+  description: These glasses won't protect your eyes from splinters, but they will complement your tactical look. They have the functions of standard blue shield glasses.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/Glasses/blueshield_ballistic.rsi
+  - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
+    sprite: SS220/Clothing/Eyes/Glasses/blueshield_ballistic.rsi
+
+- type: entity
+  parent: [ClothingEyesBase, ShowMedicalIcons, SS220GlassesOnForeheadBase]
   id: ClothingEyesCMOCorporate
   name: corporate glasses of chief medical officer
   description: The dream of one head doctor with -3 in both eyes, later became a ubiquitous phenomenon. Comfortable and stylish.
@@ -99,6 +125,7 @@
   - type: Sprite
     sprite: SS220/Clothing/Eyes/cmocorporate_glasses.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: SS220/Clothing/Eyes/cmocorporate_glasses.rsi
 
 # Thermal
@@ -114,26 +141,32 @@
       sprite: Clothing/Eyes/Glasses/thermal.rsi
     - type: Clothing
       sprite: Clothing/Eyes/Glasses/thermal.rsi
+      clothingVisuals:
+        head:
+        - sprite: SS220/Clothing/Eyes/Forehead/Glasses/thermal.rsi
+          state: equipped-HELMET
+        head-arachnid:
+        - sprite: SS220/Clothing/Eyes/Forehead/Glasses/thermal.rsi
+          state: equipped-HELMET-arachnid
+        head-moth:
+        - sprite: SS220/Clothing/Eyes/Forehead/Glasses/thermal.rsi
+          state: equipped-HELMET-moth
+
     - type: ChameleonClothing
       slot: [eyes]
       default: ClothingEyesGlassesThermal
     - type: HiddenDescription
       entries:
-      - label: hidden-desc-ThermalGoogles-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
-      - label: hidden-desc-ThermalGoogles-research
-        jobRequired:
-          - ResearchAssistant
-          - ResearchDirector
-          - Scientist
-          - Borg
-
+        SyndicateAgentKnowledge: [ hidden-desc-ThermalGoogles-syndicate ]
+        ScienceKnowledge: [ hidden-desc-ThermalGoogles-research ]
+      nameEntries:
+      - [SyndicateAgentKnowledge, null]
+      - [ScienceKnowledge, null]
+      hiddenName: ent-BaseBigBox
 
 # Proto for future if we want to add this to RND
 - type: entity
-  parent: ClothingEyesBase
+  parent: [ClothingEyesBase, SS220GlassesOnForeheadBase]
   id: ThermalVisorRND
   name: Advanced Thermal Glasses
   description: This glasses alows you to see persons through the walls in finate radius
@@ -145,11 +178,21 @@
     - type: Sprite
       sprite: Clothing/Eyes/Glasses/thermal.rsi
     - type: Clothing
+      slots: [EYES, HEAD] # SS220-glasses-on-forehead
       sprite: Clothing/Eyes/Glasses/thermal.rsi
-
+      clothingVisuals:
+        head:
+        - sprite: SS220/Clothing/Eyes/Forehead/Glasses/thermal.rsi
+          state: equipped-HELMET
+        head-arachnid:
+        - sprite: SS220/Clothing/Eyes/Forehead/Glasses/thermal.rsi
+          state: equipped-HELMET-arachnid
+        head-moth:
+        - sprite: SS220/Clothing/Eyes/Forehead/Glasses/thermal.rsi
+          state: equipped-HELMET-moth
 
 - type: entity
-  parent: [ClothingEyesBase, ShowSecurityIcons]
+  parent: [ClothingEyesBase, ShowSecurityIcons, SS220GlassesOnForeheadBase]
   id: ClothingEyesThermalGlassesSecurity
   name: Advanced Security Glasses with SecHUD and Thermal Visor
   description: This glasses provided with SecHUD and Thermal Visor, which alows you to see persons through the walls in finate radius
@@ -161,6 +204,7 @@
   - type: Sprite
     sprite: SS220/Clothing/Eyes/Glasses/security_thermal.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: SS220/Clothing/Eyes/Glasses/security_thermal.rsi
   - type: FlashImmunity
   - type: EyeProtection
@@ -175,3 +219,23 @@
     - Security
   - type: IdentityBlocker
     coverage: EYES
+
+- type: entity
+  parent: [ClothingEyesBase, SS220GlassesOnForeheadBase]
+  id: ClothingEyesVisorNinjaFake
+  name: ninja visor
+  description: A plastic replica of the night vision goggles worn by a ninja from a popular anime.
+  suffix: Fake
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/Glasses/ninjavisor.rsi
+  - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
+    sprite: SS220/Clothing/Eyes/Glasses/ninjavisor.rsi
+  - type: HiddenDescription
+    entries:
+      SyndicateAgentKnowledge: [ hidden-desc-toy-armour-syndicate ]
+      ServiceActorKnowledge: [ hidden-desc-toy-armour-clown ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ServiceActorKnowledge, null]

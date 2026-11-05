@@ -1,4 +1,4 @@
-﻿using Content.Shared.Database;
+using Content.Shared.Database;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 
@@ -28,8 +28,11 @@ public sealed partial class AreaReactionEffect : EntityEffectBase<AreaReactionEf
     /// </summary>
     [DataField(required: true)] public SoundSpecifier Sound = default!;
 
+    public override bool Scaling => true;
+
     public override string EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
         => Loc.GetString("entity-effect-guidebook-area-reaction",
+            ("chance", Probability), // SS220 fix loc chance
             ("duration", Duration)
         );
 

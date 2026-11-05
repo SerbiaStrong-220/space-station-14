@@ -37,28 +37,28 @@
   id: ExpensiveLighterSyndicate
   name: steal-target-groups-expensive-lighter-syndicate
   sprite:
-    sprite: SS220/Objects/Tools/lighters.rsi
+    sprite: SS220/Objects/Tools/Lighters/zippo_lighters.rsi
     state: zippo_syndi_icon_base
 
 - type: stealTargetGroup
   id: ExpensiveLighterNanotrasen
   name: steal-target-groups-expensive-lighter-nanotrasen
   sprite:
-    sprite: SS220/Objects/Tools/lighters.rsi
+    sprite: SS220/Objects/Tools/Lighters/zippo_lighters.rsi
     state: zippo_nt_icon_base
 
 - type: stealTargetGroup
   id: ExpensiveLighterShield
   name: steal-target-groups-expensive-lighter-shield
   sprite:
-    sprite: SS220/Objects/Tools/lighters.rsi
+    sprite: SS220/Objects/Tools/Lighters/zippo_lighters.rsi
     state: zippo_shield_icon_base
 
 - type: stealTargetGroup
   id: ExpensiveLighterDetective
   name: steal-target-groups-expensive-lighter-detective
   sprite:
-    sprite: SS220/Objects/Tools/lighters.rsi
+    sprite: SS220/Objects/Tools/Lighters/zippo_lighters.rsi
     state: zippo_detective_icon_base
 
 #SALVAGE SHUTTLE RETURN

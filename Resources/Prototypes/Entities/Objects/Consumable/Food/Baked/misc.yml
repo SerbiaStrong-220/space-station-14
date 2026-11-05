@@ -458,6 +458,7 @@
   description: Mmm, waffles.
   components:
   - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/Baked/misc.rsi #SS220 From cabinet to 3/4, Part 2
     layers:
       - state: tray
       - state: waffles
@@ -811,10 +812,6 @@
           Quantity: 2
         - ReagentId: Vitamin
           Quantity: 1
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Blunt: 0 # so the damage stats icon doesn't immediately give away the syndie ones
 
 - type: entity
   parent: FoodBakedCroissant

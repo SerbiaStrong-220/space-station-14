@@ -14,11 +14,11 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.Detective.Camera;
 
-public sealed class DetectiveCameraAttachSystem : SharedDetectiveCameraAttachSystem
+public sealed partial class DetectiveCameraAttachSystem : SharedDetectiveCameraAttachSystem
 {
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly SurveillanceCameraSystem _camera = default!;
+    [Dependency] private ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private SurveillanceCameraSystem _camera = default!;
 
     private static readonly ProtoId<TagPrototype> DetectiveCameraKey = "DetectiveCamera";
 

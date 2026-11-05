@@ -219,7 +219,7 @@
 - type: entity
   id: KitchenElectricGrillBroken
   parent: BaseBrokenEntity
-  name: разрушенный электрогриль
+  name: broken electric grill
   components:
   - type: Sprite
     drawdepth: SmallObjects
@@ -237,6 +237,31 @@
         layer:
         - TabletopMachineLayer
   - type: PlaceableSurface
+
+- type: entity
+  id: KitchenElectricGrillAdvancedBroken
+  parent: BaseBrokenEntity
+  name: broken advanced electric grill
+  components:
+  - type: Sprite
+    drawdepth: SmallObjects
+    snapCardinals: true
+    state: grill-advanced
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.3,-0.16,0.3,0.16"
+        density: 190
+        mask:
+        - TabletopMachineMask
+        layer:
+        - TabletopMachineLayer
+  - type: PlaceableSurface
+  - type: Construction
+    graph: BrokenEntity
+    node: weld
 
 - type: entity
   id: PhotocopierBroken

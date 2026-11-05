@@ -5,22 +5,22 @@
   description: "A lighter that gets only the best in their field in the ranks of Nanotrasen. On the back side, on the metal, the inscription is engraved: For 10 shifts without incident."
   components:
   - type: Sprite
-    sprite: SS220/Objects/Tools/lighters.rsi
+    sprite: SS220/Objects/Tools/Lighters/zippo_lighters.rsi
     layers:
-    - state: zippo_top
-      map: ["top"]
     - state: zippo_nt_icon_base
       map: ["base"]
     - state: zippo_nt_open
       map: ["open"]
       visible: false
+    - state: zippo_top
+      map: ["top"]
     - state: lighter_flame
       map: ["flame"]
       visible: false
       shader: unshaded
   - type: Item
     size: Tiny
-    sprite: SS220/Objects/Tools/lighters.rsi
+    sprite: SS220/Objects/Tools/Lighters/zippo_lighters.rsi
     heldPrefix: zippo
   - type: StealTarget
     stealGroup: ExpensiveLighterNanotrasen
@@ -31,15 +31,15 @@
   description: "The lighter is a bright blue color - the same color as its owner is currently in the bar. The lighter depicts a white shield going into the sunset - just like the career of the owner of the lighter."
   components:
   - type: Sprite
-    sprite: SS220/Objects/Tools/lighters.rsi
+    sprite: SS220/Objects/Tools/Lighters/zippo_lighters.rsi
     layers:
-    - state: zippo_top
-      map: ["top"]
     - state: zippo_shield_icon_base
       map: ["base"]
     - state: zippo_shield_open
       map: ["open"]
       visible: false
+    - state: zippo_top
+      map: ["top"]
     - state: lighter_flame
       map: ["flame"]
       visible: false
@@ -50,18 +50,18 @@
 - type: entity
   parent: ExpensiveLighterNanotrasen
   id: ExpensiveLighterDetective
-  description: "The lighter reeks of whiskey. Oil fingerprints are clearly visible on the olive cover, and the wooden bottom and top of the lighter are badly worn."
+  description: "The lighter reeks of whiskey. Oil fingerprints are clearly visible on the leather cover, and the steel bottom and top of the lighter are badly worn."
   components:
   - type: Sprite
-    sprite: SS220/Objects/Tools/lighters.rsi
+    sprite: SS220/Objects/Tools/Lighters/zippo_lighters.rsi
     layers:
-    - state: zippo_top
-      map: ["top"]
     - state: zippo_detective_icon_base
       map: ["base"]
     - state: zippo_detective_open
       map: ["open"]
       visible: false
+    - state: zippo_top
+      map: ["top"]
     - state: lighter_flame
       map: ["flame"]
       visible: false
@@ -70,23 +70,103 @@
     stealGroup: ExpensiveLighterDetective
 
 - type: entity
-  parent: ExpensiveLighterNanotrasen
+  parent: [ExpensiveLighterNanotrasen, BaseSyndicateContraband]
   id: ExpensiveLighterSyndicate
   description: "Used by hardened syndicate agents. Show your style and hatred of NanoTrasen with this lighter!"
   components:
   - type: Sprite
-    sprite: SS220/Objects/Tools/lighters.rsi
+    sprite: SS220/Objects/Tools/Lighters/zippo_lighters.rsi
     layers:
-    - state: zippo_top
-      map: ["top"]
     - state: zippo_syndi_icon_base
       map: ["base"]
     - state: zippo_syndi_open
       map: ["open"]
       visible: false
+    - state: zippo_top
+      map: ["top"]
     - state: lighter_flame
       map: ["flame"]
       visible: false
       shader: unshaded
   - type: StealTarget
     stealGroup: ExpensiveLighterSyndicate
+
+- type: entity
+  parent: [ExpensiveLighterNanotrasen, BaseSyndicateContraband]
+  id: ExpensiveLighterUSSP
+  description: "The first step towards Socialism!"
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tools/Lighters/zippo_lighters.rsi
+    layers:
+    - state: zippo_ussp_icon_base
+      map: ["base"]
+    - state: zippo_ussp_open
+      map: ["open"]
+      visible: false
+    - state: zippo_top
+      map: ["top"]
+    - state: lighter_flame
+      map: ["flame"]
+      visible: false
+      shader: unshaded
+
+- type: entity
+  parent: ExpensiveLighterNanotrasen
+  id: ZippoLighterCopper
+  description: "A rugged copper lighter, lasts quite a while."
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tools/Lighters/zippo_lighters.rsi
+    layers:
+    - state: zippo_copper_icon_base
+      map: ["base"]
+    - state: zippo_copper_open
+      map: ["open"]
+      visible: false
+    - state: zippo_top
+      map: ["top"]
+    - state: lighter_flame
+      map: ["flame"]
+      visible: false
+      shader: unshaded
+
+- type: entity
+  parent: ExpensiveLighterNanotrasen
+  id: ZippoLighterBrass
+  description: "A rugged brass lighter, lasts quite a while."
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tools/Lighters/zippo_lighters.rsi
+    layers:
+    - state: zippo_brass_icon_base
+      map: ["base"]
+    - state: zippo_brass_open
+      map: ["open"]
+      visible: false
+    - state: zippo_top
+      map: ["top"]
+    - state: lighter_flame
+      map: ["flame"]
+      visible: false
+      shader: unshaded
+
+- type: entity
+  parent: ExpensiveLighterNanotrasen
+  id: ZippoLighterGold
+  description: "A rugged gold lighter, lasts quite a while."
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tools/Lighters/zippo_lighters.rsi
+    layers:
+    - state: zippo_gold_icon_base
+      map: ["base"]
+    - state: zippo_gold_open
+      map: ["open"]
+      visible: false
+    - state: zippo_top
+      map: ["top"]
+    - state: lighter_flame
+      map: ["flame"]
+      visible: false
+      shader: unshaded

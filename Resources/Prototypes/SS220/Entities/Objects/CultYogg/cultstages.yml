@@ -3,7 +3,6 @@
 - type: marking
   id: CultStage-Halo
   bodyPart: Special
-  markingCategory: Special
   hidden: true
   sprites:
   - sprite: SS220/Objects/CultYogg/cultstages.rsi
@@ -12,7 +11,6 @@
 - type: marking
   id: CultStage-Moth
   bodyPart: Special
-  markingCategory: Special
   hidden: true
   sprites:
   - sprite: SS220/Objects/CultYogg/cultstages.rsi
@@ -25,7 +23,6 @@
 - type: marking
   id: CultStage-Arachnid
   bodyPart: Special
-  markingCategory: Special
   hidden: true
   sprites:
   - sprite: SS220/Objects/CultYogg/cultstages.rsi
@@ -36,7 +33,6 @@
 - type: marking
   id: CultStage-Human
   bodyPart: Special
-  markingCategory: Special
   hidden: true
   sprites:
   - sprite: SS220/Objects/CultYogg/cultstages.rsi
@@ -47,7 +43,6 @@
 - type: marking
   id: CultStage-Dwarf
   bodyPart: Special
-  markingCategory: Special
   hidden: true
   sprites:
   - sprite: SS220/Objects/CultYogg/cultstages.rsi
@@ -58,7 +53,6 @@
 - type: marking
   id: CultStage-Diona
   bodyPart: Special
-  markingCategory: Special
   hidden: true
   sprites:
   - sprite: SS220/Objects/CultYogg/cultstages.rsi
@@ -67,7 +61,6 @@
 - type: marking
   id: CultStage-Vox
   bodyPart: Special
-  markingCategory: Special
   hidden: true
   sprites:
   - sprite: SS220/Objects/CultYogg/cultstages.rsi
@@ -76,7 +69,6 @@
 - type: marking
   id: CultStage-SlimePerson
   bodyPart: Special
-  markingCategory: Special
   hidden: true
   sprites:
   - sprite: SS220/Objects/CultYogg/cultstages.rsi
@@ -85,7 +77,6 @@
 - type: marking
   id: CultStage-Reptilian
   bodyPart: Special
-  markingCategory: Special
   hidden: true
   sprites:
   - sprite: SS220/Objects/CultYogg/cultstages.rsi
@@ -96,7 +87,6 @@
 - type: marking
   id: CultStage-Tajaran
   bodyPart: Special
-  markingCategory: Special
   hidden: true
   sprites:
   - sprite: SS220/Objects/CultYogg/cultstages.rsi

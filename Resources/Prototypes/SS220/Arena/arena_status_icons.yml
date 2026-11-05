@@ -1,0 +1,15 @@
+- type: factionIcon
+  id: ArenaTeamAIcon
+  priority: 11
+  locationPreference: Right
+  icon:
+    sprite: /Textures/SS220/Interface/Misc/event-job-icons.rsi
+    state: IOTCombatant
+
+- type: factionIcon
+  id: ArenaTeamBIcon
+  priority: 11
+  locationPreference: Right
+  icon:
+    sprite: /Textures/SS220/Interface/Misc/event-job-icons.rsi
+    state: NTCombatant

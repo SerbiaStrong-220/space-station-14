@@ -7,47 +7,32 @@ using Content.Shared.Trigger.Components.Effects;
 
 namespace Content.Shared.Trigger.Systems;
 
-public sealed class UncuffOnTriggerSystem : EntitySystem
+public sealed class UncuffOnTriggerSystem : XOnTriggerSystem<UncuffOnTriggerComponent>
 {
     [Dependency] private readonly SharedCuffableSystem _cuffable = default!;
-    [Dependency] private readonly SharedEnsnareableSystem _ensnareable = default!;
+    [Dependency] private readonly SharedEnsnareableSystem _ensnareable = default!; // SS220-make-freedom-remove-bola
 
-    public override void Initialize()
+    protected override void OnTrigger(Entity<UncuffOnTriggerComponent> ent, EntityUid target, ref TriggerEvent args)
     {
-        base.Initialize();
+        if (TryComp<CuffableComponent>(target, out var cuffs) && _cuffable.TryGetLastCuff(target, out var cuff)) // SS220-make-freedom-remove-bola
+        {
+            _cuffable.Uncuff(target, args.User, cuff.Value);
+            args.Handled = true;
+        }
 
-        SubscribeLocalEvent<UncuffOnTriggerComponent, TriggerEvent>(OnTrigger);
-    }
-
-    private void OnTrigger(Entity<UncuffOnTriggerComponent> ent, ref TriggerEvent args)
-    {
-        if (args.Key != null && !ent.Comp.KeysIn.Contains(args.Key))
-            return;
-
-        var target = ent.Comp.TargetUser ? args.User : ent.Owner;
-
-        if (target == null)
-            return;
-
-        if (!TryComp<CuffableComponent>(target.Value, out var cuffs) || cuffs.Container.ContainedEntities.Count < 1)
-            return;
-
-        //ss220 add freedom from bola start
-        if (TryComp<EnsnareableComponent>(args.User, out var ensnareableComponent))
+        // SS220-make-freedom-remove-bola-begin
+        if (TryComp<EnsnareableComponent>(target, out var ensnareableComponent))
         {
             var list = ensnareableComponent.Container.ContainedEntities.ToList();
-
             foreach (var containedEntity in list)
             {
                 if (!TryComp<EnsnaringComponent>(containedEntity, out var ensnaringComponent))
                     continue;
 
                 _ensnareable.ForceFree(containedEntity, ensnaringComponent);
+                args.Handled = true;
             }
         }
-        //ss220 add freedom from bola end
-
-        _cuffable.Uncuff(target.Value, args.User, cuffs.LastAddedCuffs);
-        args.Handled = true;
+        // SS220-make-freedom-remove-bola-end
     }
 }

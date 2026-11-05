@@ -4,9 +4,9 @@ using Robust.Shared.Console;
 
 namespace Content.Client.SS220.TTS.Commands;
 
-public sealed class TtsQueueResetCommand : IConsoleCommand
+public sealed partial class TtsQueueResetCommand : IConsoleCommand
 {
-    [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
+    [Dependency] private IEntitySystemManager _entitySystemManager = default!;
 
     public string Command => "ttsqueuereset";
     public string Description => "Reset local TTS queue";

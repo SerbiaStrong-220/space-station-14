@@ -8,7 +8,7 @@
   completetime: 2
   materials:
     Steel: 50
-    Glass: 50
+    Glass: 200
 
 # Recipes
 
@@ -120,7 +120,7 @@
   result: AirTank
   completetime: 4
   materials:
-    Steel: 300
+    Steel: 400
 
 - type: latheRecipe
   id: DoubleEmergencyOxygenTank
@@ -209,26 +209,6 @@
     Cloth: 100
     Steel: 50
 
-# SS220 Tape Recorder #32234 early merge begin
-- type: latheRecipe
-  id: CassetteTape
-  result: CassetteTape
-  categories: [ Tools ]
-  completetime: 2
-  materials:
-    Steel: 50
-    Plastic: 150
-
-- type: latheRecipe
-  id: TapeRecorder
-  result: TapeRecorder
-  categories: [ Tools ]
-  completetime: 3
-  materials:
-    Steel: 250
-    Plastic: 250
-# SS220 Tape Recorder #32234 early merge end
-
 - type: latheRecipe
   id: Ashtray
   result: Ashtray
@@ -242,7 +222,7 @@
   completetime: 2
   materials:
     Wood: 100
-    Steel: 25
+    Steel: 50
 
 - type: latheRecipe
   id: BoxFolderPlasticClipboardEmpty
@@ -250,7 +230,7 @@
   completetime: 2
   materials:
     Plastic: 100
-    Steel: 25
+    Steel: 50
 
 - type: latheRecipe
   id: TowelColorWhite

@@ -32,6 +32,8 @@ public abstract partial class SharedTurnstileSystem : EntitySystem
 
     private void OnPreventCollide(Entity<TurnstileComponent> ent, ref PreventCollideEvent args)
     {
+        ent.Comp.CollideExceptions.RemoveWhere(entity => TerminatingOrDeleted(entity)); //ss220 add removing unexist entity in turnstile
+
         if (args.Cancelled || !args.OurFixture.Hard || !args.OtherFixture.Hard)
             return;
 
@@ -82,6 +84,8 @@ public abstract partial class SharedTurnstileSystem : EntitySystem
 
     private void OnStartCollide(Entity<TurnstileComponent> ent, ref StartCollideEvent args)
     {
+        ent.Comp.CollideExceptions.RemoveWhere(entity => TerminatingOrDeleted(entity)); //ss220 add removing unexist entity in turnstile
+
         if (!ent.Comp.CollideExceptions.Contains(args.OtherEntity))
         {
             if (CanPassDirection(ent, args.OtherEntity))
@@ -102,6 +106,8 @@ public abstract partial class SharedTurnstileSystem : EntitySystem
 
     private void OnEndCollide(Entity<TurnstileComponent> ent, ref EndCollideEvent args)
     {
+        ent.Comp.CollideExceptions.RemoveWhere(entity => TerminatingOrDeleted(entity)); //ss220 add removing unexist entity in turnstile
+
         if (!args.OurFixture.Hard)
         {
             ent.Comp.CollideExceptions.Remove(args.OtherEntity);

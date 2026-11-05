@@ -4,34 +4,20 @@
 - type: entity
   parent: ClothingSponsorNeckBase
   id: ClothingSponsorNeckWreath
-  name: розовый венец
-  description: Длинный нашейный венец, сплетённый из прекрасных цветов.
+  name: rose wreath
+  description: A long neck wreath woven from beautiful flowers.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Neck/Misc/neck-wreath.rsi
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/Neck/Misc/neck-wreath.rsi
-
-# Шарф трубой
-- type: entity
-  parent: ClothingSponsorNeckBase
-  id: ClothingSponsorScarfTube
-  name: шарф трубой
-  description: Тепло внутри, холодно снаружи.
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Sponsor/Neck/Scarfs/scarf-tube.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Sponsor/Neck/Scarfs/scarf-tube.rsi
-  - type: Item
-    storedRotation: -90
 
 # Деревня дураков
 - type: entity
   parent: ClothingSponsorNeckBase
   id: ClothingSponsorScarfMuzhik
-  name: шарф мужика
-  description: Длинный и узкий для удобного распития самогона.
+  name: muzhik's scarf
+  description: Long and narrow for comfortable moonshine drinking.
   suffix: Шлёпа
   components:
   - type: Sprite
@@ -45,7 +31,7 @@
 - type: entity
   parent: ClothingSponsorNeckBase
   id: ClothingSponsorTieJujutsuShlepa
-  name: галстук офисного работника
+  name: office worker's tie
   description: U r my SPECIAL.
   suffix: Шлёпа
   components:

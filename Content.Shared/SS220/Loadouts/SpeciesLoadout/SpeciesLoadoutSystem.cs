@@ -6,11 +6,11 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Loadouts.SpeciesLoadout;
 
-public sealed class SpeciesLoadoutSystem : EntitySystem
+public sealed partial class SpeciesLoadoutSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedStorageSystem _storage = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedStorageSystem _storage = default!;
 
     public override void Initialize()
     {

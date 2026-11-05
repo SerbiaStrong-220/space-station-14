@@ -37,10 +37,12 @@
       tags:
       - Legalposter
     hideStackVisualsWhenClosed: false
-  - type: StorageFill
-    contents:
-      - id: Legalposters
-        amount: 3
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: Legalposters
+          amount: 3
   - type: ItemCounter
     count:
       tags: [Legalposter]
@@ -66,10 +68,12 @@
       tags:
       - Contrposter
     hideStackVisualsWhenClosed: false
-  - type: StorageFill
-    contents:
-      - id: Contrposters
-        amount: 3
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: Contrposters
+          amount: 3
   - type: ItemCounter
     count:
       tags: [Contrposter]

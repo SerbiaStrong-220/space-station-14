@@ -8,15 +8,17 @@
   id: ClothingBackpackDuffelSyndicateSWAgent
   suffix: Shitspawn, Ebent, Space Wars, Agent
   components:
-  - type: StorageFill
-    contents:
-    - id: BoxSurvivalSyndicate
-    - id: CrowbarRed
-    - id: HandheldGPSBasic
-    - id: MagazinePistolSubMachineGun
-      amount: 2
-    - id: MedicatedSuture
-    - id: RegenerativeMesh
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BoxSurvivalSyndicate
+        - id: CrowbarRed
+        - id: HandheldGPSBasic
+        - id: MagazinePistolSubMachineGun
+          amount: 2
+        - id: MedicatedSuture
+        - id: RegenerativeMesh
 
 - type: startingGear
   id: EbentSpaceWarsAgentGear
@@ -70,21 +72,23 @@
   id: ClothingBackpackDuffelSyndicateSWLeader
   suffix: Shitspawn, Ebent, Space Wars, Leader
   components:
-  - type: StorageFill
-    contents:
-    - id: BoxSurvivalSyndicate
-    - id: CrowbarRed
-    - id: HandheldGPSBasic
-    - id: MedicatedSuture
-    - id: RegenerativeMesh
-    - id: WeaponPistolViper
-    - id: MagazinePistol
-      amount: 3
-    - id: ExpensiveLighterSyndicate
-    - id: Stimpack
-      amount: 2
-    - id: CombatMedipen
-    - id: DoubleEmergencyOxygenTankFilled
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BoxSurvivalSyndicate
+        - id: CrowbarRed
+        - id: HandheldGPSBasic
+        - id: MedicatedSuture
+        - id: RegenerativeMesh
+        - id: WeaponPistolViper
+        - id: MagazinePistol
+          amount: 3
+        - id: ExpensiveLighterSyndicate
+        - id: Stimpack
+          amount: 2
+        - id: CombatMedipen
+        - id: DoubleEmergencyOxygenTankFilled
 
 - type: startingGear
   id: EbentSpaceWarsLeaderGear
@@ -138,19 +142,21 @@
   id: ClothingBackpackDuffelSyndicateSWOperative
   suffix: Shitspawn, Ebent, Space Wars, Operative
   components:
-  - type: StorageFill
-    contents:
-    - id: BoxSurvivalSyndicate
-    - id: CrowbarRed
-    - id: HandheldGPSBasic
-    - id: MagazinePistolSubMachineGun
-      amount: 2
-    - id: MedicatedSuture
-    - id: RegenerativeMesh
-    - id: Stimpack
-      amount: 3
-    - id: CombatMedipen
-    - id: DeathRattleImplanter
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BoxSurvivalSyndicate
+        - id: CrowbarRed
+        - id: HandheldGPSBasic
+        - id: MagazinePistolSubMachineGun
+          amount: 2
+        - id: MedicatedSuture
+        - id: RegenerativeMesh
+        - id: Stimpack
+          amount: 3
+        - id: CombatMedipen
+        - id: DeathRattleImplanter
 
 - type: startingGear
   id: EbentSpaceWarsOperativeGear
@@ -208,18 +214,20 @@
   - type: Storage
     grid:
     - 0,0,8,4
-  - type: StorageFill
-    contents:
-    - id: BoxSurvivalSyndicate
-    - id: HandheldGPSBasic
-    - id: MagazinePistol
-      amount: 2
-    - id: CableApcStack
-    - id: CableMVStack
-    - id: CableHVStack
-    - id: SheetGlass
-    - id: SheetPlasteel
-    - id: SheetSteel
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BoxSurvivalSyndicate
+        - id: HandheldGPSBasic
+        - id: MagazinePistol
+          amount: 2
+        - id: CableApcStack
+        - id: CableMVStack
+        - id: CableHVStack
+        - id: SheetGlass
+        - id: SheetPlasteel
+        - id: SheetSteel
 
 - type: entity
   name: армейская РПС
@@ -228,15 +236,17 @@
   id: ClothingBeltMilitaryWebbingSWEngineer
   suffix: Shitspawn, Ebent, Space Wars, Engineer
   components:
-  - type: StorageFill
-    contents:
-    - id: HolofanProjector
-    - id: GasAnalyzer
-    - id: trayScanner
-    - id: WelderExperimental
-    - id: PowerDrill
-    - id: Multitool
-    - id: SyndicateJawsOfLife
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: HolofanProjector
+        - id: GasAnalyzer
+        - id: trayScanner
+        - id: WelderExperimental
+        - id: PowerDrill
+        - id: Multitool
+        - id: SyndicateJawsOfLife
 
 - type: startingGear
   id: EbentSpaceWarsEngineerGear
@@ -290,17 +300,19 @@
   id: ClothingBackpackDuffelSyndicateSWMedic
   suffix: Shitspawn, Ebent, Space Wars, Engineer
   components:
-  - type: StorageFill
-    contents:
-    - id: BoxSurvivalSyndicate
-    - id: CrowbarRed
-    - id: HandheldGPSBasic
-    - id: DoubleEmergencyOxygenTankFilled
-    - id: MedkitAdvancedFilled
-    - id: SyndiHypo
-    - id: ChemistryBottleEpinephrine
-      amount: 2
-    - id: ChemistryBottleOmnizine
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BoxSurvivalSyndicate
+        - id: CrowbarRed
+        - id: HandheldGPSBasic
+        - id: DoubleEmergencyOxygenTankFilled
+        - id: MedkitAdvancedFilled
+        - id: SyndiHypo
+        - id: ChemistryBottleEpinephrine
+          amount: 2
+        - id: ChemistryBottleOmnizine
 
 - type: startingGear
   id: EbentSpaceWarsMedicGear

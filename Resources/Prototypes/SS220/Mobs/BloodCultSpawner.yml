@@ -27,7 +27,7 @@
 
 - type: entity
   name: Blood Cult Brother
-  parent: BaseMobHuman
+  parent: MobHuman
   id: MobBloodCultBrother
   components:
     - type: NpcFactionMember
@@ -40,3 +40,5 @@
       rootTask:
         task: SimpleHumanoidHostileCompound
     - type: CannotBeConsumed #Dark Reaper consume fix
+    - type: SSDIndicator
+      disableAutoSleep: true

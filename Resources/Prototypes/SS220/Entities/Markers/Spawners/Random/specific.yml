@@ -1,0 +1,50 @@
+- type: entity
+  name: Random Bear Trap Spawner 0.75
+  id: BearTrapArmed075
+  suffix: 75% chance
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: RandomSpawner
+    prototypes:
+    - BearTrapArmed
+    chance: 0.75
+  placement:
+    mode: AlignTileAny
+
+- type: entity
+  name: Random Bear Trap Spawner 0.5
+  id: BearTrapArmed05
+  suffix: 50% chance
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      layers:
+      - state: green
+    - type: RandomSpawner
+      prototypes:
+      - BearTrapArmed
+      chance: 0.5
+  placement:
+    mode: AlignTileAny
+
+- type: entity
+  name: Random Bear Trap Spawner 0.25
+  id: BearTrapArmed025
+  suffix: 25% chance
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      layers:
+      - state: green
+    - type: RandomSpawner
+      prototypes:
+      - BearTrapArmed
+      chance: 0.25
+  placement:
+    mode: AlignTileAny

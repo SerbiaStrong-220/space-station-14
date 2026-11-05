@@ -1,0 +1,12 @@
+ent-PalletSpawnerRandomSheet = спавнер случайный поддон
+    .desc = ""
+    .suffix = Сталь, пласталь, пластик, плазма, стекло
+ent-PalletSpawnerRandomGlass = спавнер случайный поддон
+    .desc = { ent-PalletSpawnerRandomSheet }
+    .suffix = Стекло
+ent-PalletSpawnerRandomOrganic = спавнер случайный поддон
+    .desc = { ent-PalletSpawnerRandomSheet }
+    .suffix = Органика
+ent-PalletSpawnerRandom = спавнер случайный поддон
+    .desc = { ent-PalletSpawnerRandomSheet }
+    .suffix = Любой

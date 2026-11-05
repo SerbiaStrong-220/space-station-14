@@ -1,0 +1,97 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: cultYoggBuilding
+  id: CultYoggWall
+  order: 0
+  result: WallCultYogg
+
+- type: cultYoggBuilding
+  id: CultYoggDoor
+  order: 1
+  result: CultYoggDoor
+
+- type: cultYoggBuilding
+  id: CultYoggPod
+  order: 2
+  frame: CultYoggBuildingFrame
+  result: CultYoggPod
+  materials:
+  - stack: LivingRootsStack
+    count: 5
+    icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: coilhv}
+  - stack: Tokl
+    count: 15
+    icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: tokl}
+
+- type: cultYoggBuilding
+  id: FungusHydroponic
+  order: 3
+  frame: CultYoggBuildingFrame
+  result: CultYoggFungusHydroponic
+  materials:
+  - stack: LivingRootsStack
+    count: 10
+    icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: coilhv}
+  - stack: Tokl
+    count: 10
+    icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: tokl}
+
+- type: cultYoggBuilding
+  id: CultYoggAltarBuilding
+  order: 4
+  frame: CultYoggBuildingFrame
+  result: CultYoggAltar
+  materials:
+  - stack: LivingRootsStack
+    count: 10
+    icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: coilmv}
+  - stack: Tokl
+    count: 10
+    icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: tokl}
+  requireStation: true
+
+- type: cultYoggBuilding
+  id: CultYoggPondBuilding
+  order: 5
+  frame: CultYoggBuildingFrame
+  result: CultYoggPond
+  materials:
+  - stack: LivingRootsStack
+    count: 5
+    icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: coilhv}
+  - stack: Tokl
+    count: 8
+    icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: tokl}
+
+- type: cultYoggBuilding
+  id: CultYoggAirlock
+  order: 6
+  result: CultYoggAirlock
+
+- type: cultYoggBuilding
+  id: CultYoggTeleporterBuilding
+  order: 7
+  frame: CultYoggBuildingFrame
+  result: VoidTeleportEnter
+  materials:
+  - stack: LivingRootsStack
+    count: 7
+    icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: coilhv}
+  - stack: Tokl
+    count: 3
+    icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: tokl}
+
+
+# TODO: раскомментить после того, как будут спрайты кровати
+#- type: cultYoggBuilding
+#  id: CultYoggBedBuilding
+#  order: 6
+#  frame: CultYoggBuildingFrame
+#  result: CultYoggBed
+#  materials:
+#  - stack: Tokl
+#    count: 10
+#    icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: tokl}
+#  - stack: Cablelive
+#    count: 5
+#    icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: coillv}

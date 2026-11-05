@@ -16,11 +16,19 @@ public sealed partial class AutoEmotePrototype : IPrototype
     [DataField("emote", required: true, customTypeSerializer: typeof(PrototypeIdSerializer<EmotePrototype>))]
     public string EmoteId = string.Empty;
 
+    // ss220 add chronic cough start
     /// <summary>
     /// How often an attempt at the emote will be made.
     /// </summary>
-    [DataField(required: true)]
-    public TimeSpan Interval;
+    [DataField]
+    public TimeSpan? Interval;
+
+    [DataField]
+    public TimeSpan? MinInterval;
+
+    [DataField]
+    public TimeSpan? MaxInterval;
+    // ss220 add chronic cough end
 
     /// <summary>
     /// Probability of performing the emote each interval.

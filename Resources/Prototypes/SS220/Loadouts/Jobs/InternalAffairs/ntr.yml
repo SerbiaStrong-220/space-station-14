@@ -1,0 +1,43 @@
+# Headset
+
+- type: loadout
+  id: NanoTrasenRepresentativeHeadset
+  equipment:
+    ears: ClothingHeadsetNanoTrasenRepresentative
+
+- type: loadout
+  id: NanoTrasenRepresentativeHeadsetAlt
+  equipment:
+    ears: ClothingHeadsetAltNanoTrasenRepresentative
+
+# Head
+- type: loadout
+  id: NanoTrasenOfficerBeret
+  equipment:
+    head: ClothingHeadHatBeretNanoTrasenOfficer
+
+- type: loadout
+  id: NanoTrasenRepresentativeCap
+  equipment:
+    head: ClothingHeadNTRCap
+
+- type: loadout
+  id: NanoTrasenRepresentativeTophat
+  equipment:
+    head: ClothingHeadNTRTophat
+
+# Outerclothing
+- type: loadout
+  id: NanoTrasenRepresentativeTrench
+  equipment:
+    outerClothing: ClothingOuterCoatNTRTrench
+
+- type: loadout
+  id: NanoTrasenRepresentativeFormalDress
+  equipment:
+    outerClothing: ClothingOuterCoatNTRFormalDress
+
+- type: loadout
+  id: NanoTrasenRepresentativeFormalCoat
+  equipment:
+    outerClothing: ClothingOuterCoatNTRFormalCoat

@@ -55,10 +55,11 @@
         - Cigar # SS220 cigarette pack fix end
     grid:
     - 0,0,4,1
-  - type: StorageFill
-    contents:
-    - id: Cigarette
-      amount: 10
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: Cigarette
+        amount: 10
   - type: ItemCounter
     count:
       tags: [Cigarette]
@@ -166,10 +167,11 @@
   - type: Item
     sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/red.rsi # SS220 from cabinet to 3/4 Part 1
     #SS220 Cigarettes rework start
-  - type: StorageFill
-    contents:
-    - id: CigaretteDromedaryCo
-      amount: 10
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: CigaretteDromedaryCo
+        amount: 10
     #SS220 Cigarettes rework end
 
 - type: entity
@@ -183,10 +185,11 @@
   - type: Item
     sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/blue.rsi # SS220 from cabinet to 3/4 Part 1
     #SS220 Cigarettes rework start
-  - type: StorageFill
-    contents:
-    - id: CigaretteAcmeCo
-      amount: 10
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: CigaretteAcmeCo
+        amount: 10
     #SS220 Cigarettes rework end
 
 - type: entity
@@ -200,10 +203,11 @@
   - type: Item
     sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/black.rsi # SS220 from cabinet to 3/4 Part 1
     #SS220 Cigarettes rework start
-  - type: StorageFill
-    contents:
-    - id: CigaretteNomads
-      amount: 10
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: CigaretteNomads
+        amount: 10
     #SS220 Cigarettes rework end
 
 - type: entity
@@ -216,10 +220,11 @@
     sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/syndicate.rsi # SS220 from cabinet to 3/4 Part 1
   - type: Item
     sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/syndicate.rsi # SS220 from cabinet to 3/4 Part 1
-  - type: StorageFill
-    contents:
-    - id: CigaretteSyndicate
-      amount: 10
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: CigaretteSyndicate
+        amount: 10
 
 - type: entity
   id: CigPackMixed
