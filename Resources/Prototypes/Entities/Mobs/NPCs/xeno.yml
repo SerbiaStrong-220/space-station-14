@@ -57,6 +57,7 @@
     allowedStates:
     - Alive
     - Dead
+  - type: DefibReviveAlive #SS220-xeno-defib
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -511,6 +512,7 @@
   - type: Hands
   - type: ComplexInteraction
   - type: MobState
+  - type: DefibReviveAlive #SS220-xeno-defib
   - type: Stamina
     baseCritThreshold: 200
   - type: Bloodstream
