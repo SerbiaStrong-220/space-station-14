@@ -8,16 +8,15 @@ using Robust.Shared.Player;
 
 namespace Content.Server.SS220.TransferOnDrag;
 
-public sealed class TransferOnDragSystem : SharedTransferOnDragSystem
+public sealed partial class TransferOnDragSystem : SharedTransferOnDragSystem
 {
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly QuickDialogSystem _quickDialog = default!;
-    [Dependency] private readonly IAdminLogManager _adminLog = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private QuickDialogSystem _quickDialog = default!;
+    [Dependency] private IAdminLogManager _adminLog = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
         SubscribeLocalEvent<TransferOnDragComponent, DragDropDraggedEvent>(OnDragDrop);
     }
 
