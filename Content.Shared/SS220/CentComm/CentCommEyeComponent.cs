@@ -26,4 +26,10 @@ public sealed partial class CentCommEyeComponent : Component
     /// </summary>
     [ViewVariables]
     public EntityUid? ChannelsActionEntity;
+
+    /// <summary>
+    /// Lighting toggle action, the same one ghosts have.
+    /// </summary>
+    [ViewVariables]
+    public EntityUid? LightingActionEntity;
 }

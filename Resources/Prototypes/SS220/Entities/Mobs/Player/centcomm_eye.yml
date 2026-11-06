@@ -49,6 +49,12 @@
   - type: Language
     knowAllLanguages: true
   - type: HallucinationImmune
+  - type: CentCommEye
+  - type: PointLightd
+    netsync: false
+    radius: 6
+    castShadows: false
+    enabled: false
   - type: NoFTL
   - type: Sprite
     sprite: SS220/Mobs/Silicon/centcomm_eye.rsi

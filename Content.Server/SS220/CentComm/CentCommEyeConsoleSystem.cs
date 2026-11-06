@@ -49,6 +49,7 @@ public sealed partial class CentCommEyeConsoleSystem : EntitySystem
 
     private static readonly EntProtoId ReturnAction = "ActionCentCommEyeReturn";
     private static readonly EntProtoId ChannelsAction = "ActionToggleRadioChannelsUI";
+    private static readonly EntProtoId LightingAction = "ActionToggleLighting";
 
     public override void Initialize()
     {
@@ -170,6 +171,7 @@ public sealed partial class CentCommEyeConsoleSystem : EntitySystem
         // The actions on the eye, which are available to the operator.
         _actions.AddAction(eye, ref eyeComp.ReturnActionEntity, ReturnAction);
         _actions.AddAction(eye, ref eyeComp.ChannelsActionEntity, ChannelsAction);
+        _actions.AddAction(eye, ref eyeComp.LightingActionEntity, LightingAction);
 
         return eye;
     }
@@ -180,18 +182,12 @@ public sealed partial class CentCommEyeConsoleSystem : EntitySystem
     /// </summary>
     private void SetActionsForceSend(EntityUid eye, ICommonSession session, bool enabled)
     {
-        if (!TryComp<CentCommEyeComponent>(eye, out var eyeComp))
-            return;
-
-        foreach (var action in new[] { eyeComp.ReturnActionEntity, eyeComp.ChannelsActionEntity })
+        foreach (var action in _actions.GetActions(eye))
         {
-            if (action is not { } uid)
-                continue;
-
             if (enabled)
-                _pvsOverride.AddForceSend(uid, session);
+                _pvsOverride.AddForceSend(action, session);
             else
-                _pvsOverride.RemoveForceSend(uid, session);
+                _pvsOverride.RemoveForceSend(action, session);
         }
     }
 
