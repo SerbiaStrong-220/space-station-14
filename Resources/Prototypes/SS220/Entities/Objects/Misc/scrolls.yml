@@ -26,6 +26,17 @@
 
 - type: entity
   parent: MartialArtManualBase
+  id: CQCManualBlueshield
+  name: tactical manual
+  description: A small, blue manual issued to Blueshield officers. There are drawn instructions of tactical hand-to-hand combat.
+  components:
+  - type: Sprite
+    state: cqc
+  - type: MartialArtOnTrigger
+    martialArt: CloseQuartersCombat
+
+- type: entity
+  parent: MartialArtManualBase
   id: CorporateJudoManual
   name: corporate judo manual
   description: A small, red manual. There are drawn instructions of NT Corporate Judo.

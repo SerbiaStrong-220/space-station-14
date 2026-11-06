@@ -23,7 +23,7 @@ selectable-set-blueshield-sheriff-name = Набор шерифа
 selectable-set-blueshield-sheriff-description = Лазерный револьвер в наплечной кобуре «Синего Щита» и ковбойская шляпа.
 
 selectable-set-blueshield-master-name = Набор мастера
-selectable-set-blueshield-master-description = Мануал по корпоративному дзюдо.
+selectable-set-blueshield-master-description = Тактическое руководство по CQC.
 
 selectable-set-blueshield-defender-name = Набор защитника
 selectable-set-blueshield-defender-description = Телескопический щит.
@@ -36,6 +36,9 @@ selectable-set-blueshield-night-watch-description = Прибор ночного 
 
 selectable-set-blueshield-cordon-name = Набор оцепления
 selectable-set-blueshield-cordon-description = Проектор силового поля.
+
+selectable-set-battery-weapon-upgrades-name = Набор модулей энергооружия
+selectable-set-battery-weapon-upgrades-description = ЭМИ-предохранитель, модуль скорострельности и микрореактор. В оружие можно установить не больше двух модулей.
 
 selectable-set-weapon-revolver-unika-name = Набор Уника
 selectable-set-weapon-revolver-unika-description = Сувенирный магнум «Уника» и два спидлоадера.

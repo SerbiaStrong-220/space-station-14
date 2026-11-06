@@ -415,3 +415,12 @@
 
 - type: Tag
   id: BSHolsterSupport
+
+- type: Tag
+  id: BatteryWeaponUpgrade
+
+- type: Tag
+  id: GunUpgradeEmpFuse
+
+- type: Tag
+  id: GunUpgradeMicroreactor
