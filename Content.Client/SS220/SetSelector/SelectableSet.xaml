@@ -1,23 +1,27 @@
-<Control xmlns="https://spacestation14.io"
-		xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
-		xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
-	<!-- Name and button -->
-	<PanelContainer Margin="5 5 0 5">
-			<PanelContainer.PanelOverride>
-				<gfx:StyleBoxFlat BackgroundColor="#1B1B1E" />
-			</PanelContainer.PanelOverride>
-			<BoxContainer Orientation="Vertical" HorizontalExpand="True">
-			<GridContainer Margin="5" Columns="2" MinSize="600 0">
-				<Label Name="SetName" StyleClasses="highlight"/>
-				<Button Margin="0 10" Name="SetButton" StyleClasses="OpenRight" Access="Public" HorizontalAlignment="Right"/>
-			</GridContainer>
-			<controls:HLine Color="#444551" Thickness="1" Margin="0 5"/>
-			<!-- Icon and Description -->
-			<GridContainer Margin="0 5" Columns="2">
-				<TextureRect Name="Icon" Margin="10" Stretch="KeepAspectCentered"
-							VerticalAlignment="Center" HorizontalAlignment="Right" SetSize="64 64"/>
-				<Label Name="SetDescription"/>
-			</GridContainer>
-		</BoxContainer>
-	</PanelContainer>
-</Control>
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+
+<BoxContainer
+    xmlns="https://spacestation14.io"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    xmlns:styleDef="clr-namespace:Content.Client.SS220.Experience.Ui"
+    Orientation="Horizontal"
+    Margin="0 6">
+    <PanelContainer SetSize="64 64" VerticalAlignment="Top">
+        <PanelContainer.PanelOverride>
+            <gfx:StyleBoxFlat BackgroundColor="{x:Static styleDef:ExperienceUiStyleDefinitions.BaseTextureButtonBackgroundColor}"/>
+        </PanelContainer.PanelOverride>
+        <TextureRect Name="Icon" Stretch="KeepAspectCentered"/>
+    </PanelContainer>
+    <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalAlignment="Center" Margin="10 0 0 0">
+        <BoxContainer Orientation="Horizontal">
+            <Label Name="SetName"
+                   StyleClasses="LabelKeyText"
+                   FontColorOverride="#e9dac0"
+                   HorizontalExpand="True"
+                   VerticalAlignment="Center"/>
+            <Button Name="SetButton" Access="Public" ToggleMode="True" MinWidth="96"/>
+        </BoxContainer>
+        <RichTextLabel Name="SetDescription" Margin="0 2 0 0"/>
+    </BoxContainer>
+</BoxContainer>

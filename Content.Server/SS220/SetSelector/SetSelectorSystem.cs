@@ -1,4 +1,5 @@
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Popups;
 using Content.Shared.SS220.SetSelector;
 using Content.Shared.Storage;
 using Robust.Shared.Audio.Systems;
@@ -7,34 +8,32 @@ using Robust.Shared.Prototypes;
 namespace Content.Server.SS220.SetSelector;
 
 /// <summary>
-/// <see cref="SetSelectorComponent"/>
-/// this system links the interface to the logic, and will output to the player a set of items selected by him in the interface
+/// Spawns the sets chosen in <see cref="SetSelectorComponent"/> once the selection is approved.
 /// </summary>
-public sealed partial class SetSelectorSystem : EntitySystem
+public sealed partial class SetSelectorSystem : SharedSetSelectorSystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private IPrototypeManager _proto = default!;
-    [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<SetSelectorComponent, BoundUIOpenedEvent>(OnUIOpened);
         SubscribeLocalEvent<SetSelectorComponent, SetSelectorApproveMessage>(OnApprove);
-        SubscribeLocalEvent<SetSelectorComponent, SetSelectorChangeSetMessage>(OnChangeSet);
-    }
-
-    private void OnUIOpened(Entity<SetSelectorComponent> selector, ref BoundUIOpenedEvent args)
-    {
-        UpdateUI(selector);
     }
 
     private void OnApprove(Entity<SetSelectorComponent> selector, ref SetSelectorApproveMessage args)
     {
-        if (selector.Comp.SelectedSets.Count != selector.Comp.MaxSelectedSets || EntityManager.IsQueuedForDeletion(selector))
+        if (EntityManager.IsQueuedForDeletion(selector))
             return;
+
+        if (selector.Comp.SelectedSets.Count != selector.Comp.MaxSelectedSets)
+        {
+            _popup.PopupEntity(Loc.GetString("set-selector-approve-failed"), selector, args.Actor);
+            return;
+        }
 
         EntityUid? spawnedStorage = null;
         if (selector.Comp.SpawnedStoragePrototype is { } storageProto)
@@ -52,33 +51,15 @@ public sealed partial class SetSelectorSystem : EntitySystem
         }
 
         if (spawnedStorage is { } spawned)
-            _hands.TryPickupAnyHand(args.Actor, spawned);
+        {
+            if (_hands.IsHolding(args.Actor, selector.Owner))
+                _hands.TryDrop(args.Actor, selector.Owner, checkActionBlocker: false, doDropInteraction: false, suppressDropSound: true);
 
-        // Play the sound on coordinates of the backpack/toolbox. The reason being, since we immediately delete it, the sound gets deleted alongside it.
+            _hands.TryPickupAnyHand(args.Actor, spawned);
+        }
+
+        // The selector is deleted right away, so the sound is played at its coordinates instead of being attached to it.
         _audio.PlayPvs(selector.Comp.ApproveSound, Transform(selector.Owner).Coordinates);
         QueueDel(selector);
-    }
-
-    private void OnChangeSet(Entity<SetSelectorComponent> selector, ref SetSelectorChangeSetMessage args)
-    {
-        if (args.SetNumber < 0 || args.SetNumber >= selector.Comp.PossibleSets.Count)
-            return;
-
-        if (!selector.Comp.SelectedSets.Remove(args.SetNumber))
-            selector.Comp.SelectedSets.Add(args.SetNumber);
-
-        UpdateUI(selector);
-    }
-
-    private void UpdateUI(Entity<SetSelectorComponent> selector)
-    {
-        var state = new SetSelectorBoundUserInterfaceState(
-            new(selector.Comp.PossibleSets),
-            new(selector.Comp.SelectedSets),
-            selector.Comp.MaxSelectedSets,
-            selector.Comp.ToolName,
-            selector.Comp.ToolDesc);
-
-        _ui.SetUiState(selector.Owner, SetSelectorUIKey.Key, state);
     }
 }

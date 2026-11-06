@@ -1,10 +1,11 @@
-using Content.Shared.SS220.SetSelector;
 using Robust.Shared.Audio;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server.SS220.SetSelector;
+namespace Content.Shared.SS220.SetSelector;
 
-[RegisterComponent, Access(typeof(SetSelectorSystem))]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+[Access(typeof(SharedSetSelectorSystem))]
 public sealed partial class SetSelectorComponent : Component
 {
     /// <summary>
@@ -13,7 +14,7 @@ public sealed partial class SetSelectorComponent : Component
     [DataField]
     public List<ProtoId<SelectableSetPrototype>> PossibleSets = new();
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public List<int> SelectedSets = new();
 
     [DataField]

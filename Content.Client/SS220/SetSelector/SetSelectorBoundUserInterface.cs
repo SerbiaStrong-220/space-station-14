@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Shared.SS220.SetSelector;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
@@ -13,16 +14,31 @@ public sealed class SetSelectorBoundUserInterface(EntityUid owner, Enum uiKey) :
     {
         base.Open();
 
+        var recenter = !EntMan.System<SharedUserInterfaceSystem>().TryGetPosition(Owner, UiKey, out _);
+
         _window = this.CreateWindow<SetSelectorMenu>();
-        _window.OnApprove += () => SendMessage(new SetSelectorApproveMessage());
-        _window.OnSetChange += index => SendMessage(new SetSelectorChangeSetMessage(index));
+        _window.OnApprove += Approve;
+        _window.OnSetChange += index => SendPredictedMessage(new SetSelectorChangeSetMessage(index));
+        Update();
+
+        if (!recenter)
+            return;
+
+        _window.Measure(Vector2Helpers.Infinity);
+        _window.RecenterWindow(new Vector2(0.5f, 0.5f));
     }
 
-    protected override void UpdateState(BoundUserInterfaceState state)
+    public override void Update()
     {
-        base.UpdateState(state);
+        if (_window == null || !EntMan.TryGetComponent<SetSelectorComponent>(Owner, out var selector))
+            return;
 
-        if (state is SetSelectorBoundUserInterfaceState current)
-            _window?.UpdateState(current);
+        _window.Update(selector.PossibleSets, selector.SelectedSets, selector.MaxSelectedSets, selector.ToolName, selector.ToolDesc);
+    }
+
+    private void Approve()
+    {
+        SendMessage(new SetSelectorApproveMessage());
+        Close();
     }
 }
