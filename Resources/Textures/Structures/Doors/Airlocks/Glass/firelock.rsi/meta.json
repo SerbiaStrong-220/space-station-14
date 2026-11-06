@@ -7,19 +7,11 @@
         "y": 32
     },
     "states": [
-		{
-			"name": "assembly"
-		},
         {
-            "name": "bolted_unlit",
-            "directions": 4
+            "name": "assembly"
         },
         {
             "name": "closed",
-            "directions": 4
-        },
-        {
-            "name": "closed_unlit",
             "directions": 4
         },
         {
@@ -69,79 +61,7 @@
             ]
         },
         {
-            "name": "closing_unlit",
-            "directions": 4,
-            "delays": [
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1
-                ],
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1
-                ],
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1
-                ],
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1
-                ]
-            ]
-        },
-        {
             "name": "deny",
-            "directions": 4,
-            "delays": [
-                [
-                    0.1,
-                    0.1,
-                    0.1
-                ],
-                [
-                    0.1,
-                    0.1,
-                    0.1
-                ],
-                [
-                    0.1,
-                    0.1,
-                    0.1
-                ],
-                [
-                    0.1,
-                    0.1,
-                    0.1
-                ]
-            ]
-        },
-        {
-            "name": "deny_unlit",
             "directions": 4,
             "delays": [
                 [
@@ -221,230 +141,40 @@
             ]
         },
         {
-            "name": "opening_unlit",
-            "directions": 4,
+            "name": "base_pressure_unlit",
             "delays": [
                 [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1
-                ],
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1
-                ],
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1
-                ],
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1
-                ]
-            ]
-        },
-        {
-            "name": "panel_closing",
-            "directions": 4,
-            "delays": [
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1
-                ],
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1
-                ],
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1
-                ],
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1
-                ]
-            ]
-        },
-        {
-            "name": "panel_open",
-            "directions": 4
-        },
-        {
-            "name": "panel_opening",
-            "directions": 4,
-            "delays": [
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1
-                ],
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1
-                ],
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1
-                ],
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1
-                ]
-            ]
-        },
-        {
-            "name": "welded",
-            "directions": 4
-        },
-        {
-            "name": "welded_open",
-            "directions": 4
-        },
-        {
-            "name": "emergency_unlit",
-            "directions": 4,
-            "delays": [
-                [
-                    0.4,
-                    0.4
-                ],
-                [
-                    0.4,
-                    0.4
-                ],
-                [
-                    0.4,
-                    0.4
-                ],
-                [
-                    0.4,
+                    0.8,
                     0.4
                 ]
             ]
         },
         {
-        "name": "pressure_unlit",
-        "delays": [
-            [
-            0.8,
-            0.4
+            "name": "pressure_unlit_flat",
+            "delays": [
+                [
+                    0.8,
+                    0.4
+                ]
             ]
-        ]
         },
         {
-        "name": "base_pressure_unlit",
-        "delays": [
-            [
-            0.8,
-            0.4
+            "name": "base_temperature_unlit",
+            "delays": [
+                [
+                    0.8,
+                    0.4
+                ]
             ]
-        ]
         },
         {
-        "name": "pressure_unlit_flat",
-        "delays": [
-            [
-            0.8,
-            0.4
+            "name": "temperature_unlit_flat",
+            "delays": [
+                [
+                    0.8,
+                    0.4
+                ]
             ]
-        ]
-        },
-        {
-        "name": "temperature_unlit",
-        "delays": [
-            [
-            0.8,
-            0.4
-            ]
-        ]
-        },
-        {
-        "name": "base_temperature_unlit",
-        "delays": [
-            [
-                0.8,
-                0.4
-            ]
-        ]
-        },
-        {
-        "name": "temperature_unlit_flat",
-        "delays": [
-            [
-                0.8,
-                0.4
-            ]
-        ]
         }
     ]
 }

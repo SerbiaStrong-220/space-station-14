@@ -1,0 +1,19 @@
+- type: entity
+  parent: BaseSubdermalImplant
+  id: NightVisionImplant
+  name: night vision implant
+  description: Enables night vision. Bright light washes out the image while it is active.
+  categories: [HideSpawnMenu]
+  components:
+  - type: NightVision
+    action: ActionToggleNightVisionImplant
+    profile: NightVisionGreen
+    priority: 5
+
+- type: entity
+  parent: BaseImplantOnlyImplanter
+  id: NightVisionImplanter
+  name: night vision implanter
+  components:
+  - type: Implanter
+    implant: NightVisionImplant

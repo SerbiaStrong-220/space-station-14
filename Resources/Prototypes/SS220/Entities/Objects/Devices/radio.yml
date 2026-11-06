@@ -17,13 +17,13 @@
     speechVerb: Robotic
   - type: HandheldRadio
   - type: Sprite
-    sprite: Objects/Devices/communication.rsi
+    sprite: SS220/Objects/Devices/radio_handheld.rsi
     layers:
     - state: walkietalkie
     - state: walkietalkie-on
     state: walkietalkie
   - type: Item
-    sprite: Objects/Devices/communication.rsi
+    sprite: SS220/Objects/Devices/radio_handheld.rsi
     heldPrefix: walkietalkie
   - type: Tag
     tags:

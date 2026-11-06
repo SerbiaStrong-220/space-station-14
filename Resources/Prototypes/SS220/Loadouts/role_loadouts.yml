@@ -270,4 +270,8 @@
   - ServiceInnerEncryptionKeys #SS220-ipc-builtin-radio
   - WorkerCash #SS220-Cash-personal
 
+- type: roleLoadout
+  id: RoleSurvivalCentcom
+  groups:
+  - SurvivalCentcom
 #! Эксклюзивы карт (Конец)

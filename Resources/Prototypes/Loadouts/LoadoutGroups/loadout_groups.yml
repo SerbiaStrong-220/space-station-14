@@ -778,6 +778,7 @@
   minLimit: 0
   loadouts:
   - FlowerWaterClown
+  - ClownBikeHornPennywise #SS220-Pennywise-update
 
 - type: loadoutGroup
   id: MimeHead
@@ -787,6 +788,7 @@
   - MimeHead
   - MimeFrenchBeret
   - MimeCap
+  - HarlequinHead #SS220-mime-harlequin
   - MoryakHead #SS220-Two Floppa Iterarion
 
 - type: loadoutGroup
@@ -796,6 +798,7 @@
   - MimeMask
   - MimeMaskSad
   - MimeMaskScared
+  - HarlequinMask #SS220-mime-harlequin
   - MoryakMask #SS220-Two Floppa Iterarion
 
 - type: loadoutGroup
@@ -804,6 +807,7 @@
   loadouts:
   - MimeJumpsuit
   - MimeJumpskirt
+  - HarlequinUniform #SS220-mime-harlequin
   - MoryakJumpsuit #SS220-Two Floppa Iterarion
 
 - type: loadoutGroup
@@ -824,6 +828,7 @@
 - type: loadoutGroup
   id: MimeBelt
   name: loadout-group-mime-belt
+  minLimit: 0 #SS220-mime-harlequin
   loadouts:
   - MimeSuspendersRed
   - MimeSuspendersBlack

@@ -1,5 +1,5 @@
 - type: job
-  id: SpiderQueen
+  id: SpiderQueenJob
   name: job-name-spider-queen
   description: job-description-spider-queen
   experienceDefinition: NoExperience
@@ -16,6 +16,7 @@
   id: SpiderQueenServant
   name: job-name-spider-queen-servant
   description: job-description-spider-queen-servant
+  supervisors: job-supervisors-spider-queen
   experienceDefinition: NoExperience
   setPreference: false
   playTimeTracker: AntagSpiderQueenServant

@@ -21,6 +21,30 @@
     Plastic: 400
 
 - type: latheRecipe
+  id: ClothingEyesNightVisionMedical
+  result: ClothingEyesNightVisionMedical
+  categories:
+  - Clothing
+  completetime: 4
+  materials:
+    Steel: 300
+    Glass: 200
+    Plastic: 200
+    Gold: 100
+
+- type: latheRecipe
+  id: ClothingEyesNightVisionSecurity
+  result: ClothingEyesNightVisionSecurity
+  categories:
+  - Clothing
+  completetime: 4
+  materials:
+    Steel: 300
+    Glass: 200
+    Plastic: 200
+    Gold: 100
+
+- type: latheRecipe
   id: DeviceCalculator
   result: DeviceCalculator
   completetime: 4

@@ -369,16 +369,22 @@ public sealed partial class PolymorphSystem : EntitySystem
             TransferSolutions(uid, parent);
         // SS220 Geras reagents fix end
 
-        if (component.Configuration.Inventory == PolymorphInventoryChange.Transfer)
+        // ss220 fix polymorph fail start
+        if (HasComp<InventoryComponent>(uid) && HasComp<InventoryComponent>(parent))
         {
-            _inventory.TransferEntityInventories(uid, parent);
-            foreach (var held in _hands.EnumerateHeld(uid))
+            if (component.Configuration.Inventory == PolymorphInventoryChange.Transfer)
             {
-                _hands.TryDrop(uid, held);
-                _hands.TryPickupAnyHand(parent, held, checkActionBlocker: false);
+                _inventory.TransferEntityInventories(uid, parent);
+                foreach (var held in _hands.EnumerateHeld(uid))
+                {
+                    _hands.TryDrop(uid, held);
+                    _hands.TryPickupAnyHand(parent, held, checkActionBlocker: false);
+                }
             }
         }
-        else if (component.Configuration.Inventory == PolymorphInventoryChange.Drop)
+        // ss220 fix polymorph fail end
+
+        if (HasComp<InventoryComponent>(uid) && component.Configuration.Inventory == PolymorphInventoryChange.Drop) // ss220 fix polymorph fail
         {
             if (_inventory.TryGetContainerSlotEnumerator(uid, out var enumerator))
             {

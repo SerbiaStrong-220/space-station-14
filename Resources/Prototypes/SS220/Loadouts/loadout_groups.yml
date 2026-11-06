@@ -59,7 +59,7 @@
 
   # Квартирмейстер (Начало)
 - type: loadoutGroup
-  id: QuartermasterHeadset 
+  id: QuartermasterHeadset
   name: loadout-group-quartermaster-headset
   minLimit: 1
   loadouts:
@@ -915,6 +915,13 @@
   loadouts:
   - MimeWhiteShoes
   - MoryakShoes
+
+- type: loadoutGroup
+  id: MimeNeck
+  name: loadout-group-mime-neck
+  minLimit: 0
+  loadouts:
+  - HarlequinNeck
   # Мим (Конец)
 
  # Уборщик (Начало)
@@ -991,6 +998,15 @@
 #! Сервис (Конец)
 
 #! Разное
+
+  # Центком
+- type: loadoutGroup
+  id: SurvivalCentcom
+  name: loadout-group-centcomm-extended
+  minLimit: 1
+  hidden: false
+  loadouts:
+  - EmergencyCentcom
 
   # Перчатки
 - type: loadoutGroup

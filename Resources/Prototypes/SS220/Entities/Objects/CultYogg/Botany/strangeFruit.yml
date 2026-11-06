@@ -2,9 +2,9 @@
 
 - type: entity
   name: strange fruit
-  parent: [BaseItem, CultYoggRestrictedItem]
+  parent: [BaseItem, BaseRestrictedLivingItem]
   suffix: CultYogg
-  id: ProductStrangeFruitCultYogg
+  id: ProductStrangeFruit
   components:
   - type: Sprite
     sprite: SS220/Objects/CultYogg/Botany/strangefruit.rsi
@@ -13,6 +13,7 @@
     seedId: StrangeFruit
   - type: Tag
     tags:
+    - YoggEquipment
     - CultYoggStealthProvidable
   - type: TriggerOnUse
   - type: TimerTrigger
@@ -130,7 +131,7 @@
   plantRsi: SS220/Objects/CultYogg/Botany/strangefruit.rsi
   packetPrototype: CultStrangeFruitSeed
   productPrototypes:
-    - ProductStrangeFruitCultYogg
+    - ProductStrangeFruit
   harvestRepeat: Repeat
   lifespan: 25
   maturation: 12

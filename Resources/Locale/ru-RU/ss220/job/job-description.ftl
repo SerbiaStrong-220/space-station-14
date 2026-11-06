@@ -9,7 +9,7 @@ job-description-prisoner = Заключённый космической ста�
 job-description-blueshield = Ваша главная цель - защитить глав станции. Помните, вы не офицер СБ.
 job-description-deathsquad = Член эскадрона смерти. Уничтожьте всё живое!
 
-job-description-migo = Вы - возвысившийся культист. Ваша задача - постройка баз, вербовка новых служителей, лечение и разведка.
+job-description-migo = Вы — возвысившийся культист. Ваши задачи — строительство баз, вербовка новых прислужников, лечение и разведка.
 
 job-description-security-pet = Питомец службы безопасности. Издевайтесь над офицерами или помогайте им.
 
@@ -18,3 +18,14 @@ job-description-space-dragon = { roles-antag-dragon-objective }
 job-description-syndicate-borg = { ghost-role-information-syndicate-cyborg-description }
 
 job-description-syndicate-reinforcement = { ghost-role-information-syndicate-reinforcement-description }
+
+job-description-security-pilot = Ловите преступников на станции, бороздите просторы космоса в поисках... Чего-нибудь.
+
+job-description-ghost-role = Вспомогательная роль для корректной работы джоб банов
+
+job-description-derelict-borg = Вы — давно заброшенный киборг.
+job-description-ninja = Выполните задания клана, используя снаряжение космического ниндзя.
+job-description-cburn = Устраните биологическую угрозу и проведите зачистку заражённых участков станции.
+job-description-death-squad-leader = Возглавьте Эскадрон Смерти и обеспечьте выполнение приказа.
+job-description-death-squad-healer = Оказывайте медицинскую помощь бойцам Эскадрона Смерти.
+job-description-death-squad-operative = { job-description-deathsquad }

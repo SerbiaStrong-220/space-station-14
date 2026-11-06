@@ -91,6 +91,11 @@
     sprite: SS220/Clothing/Mask/clown_pennywise.rsi
   - type: Clothing
     sprite: SS220/Clothing/Mask/clown_pennywise.rsi
+    clothingVisuals:
+      mask:
+      - state: equipped-MASK
+      - state: equipped-MASK-unshaded
+        shader: unshaded
   - type: BreathMask
   - type: IdentityBlocker
   - type: HideLayerClothing
@@ -126,5 +131,13 @@
     heatingCoefficient: 1.1
     coolingCoefficient: 0.9
 
-
-
+- type: entity
+  parent: ClothingMaskMime
+  id: ClothingMaskMimeHarlequin
+  name: gothic harlequin makeup
+  description: Makeup that allows you to see a crowd of invisible spectators in empty halls.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Mask/mime_harlequin.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Mask/mime_harlequin.rsi

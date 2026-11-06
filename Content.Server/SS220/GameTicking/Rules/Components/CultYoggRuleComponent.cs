@@ -103,7 +103,7 @@ public sealed partial class CultYoggRuleComponent : Component
     [DataField]
     public EntityWhitelist WhitelistToggleable = new()
     {
-        Tags = ["CultYoggInnerHandToggleable"]
+        Tags = ["YoggInnerHandEquipment"]
     };
 
     /// <summary>

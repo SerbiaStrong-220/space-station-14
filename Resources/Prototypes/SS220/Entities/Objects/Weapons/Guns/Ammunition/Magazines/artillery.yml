@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseItem
+  parent: BaseMagazine
   id: BaseMagazineArtilleryShell
   abstract: true
   components:

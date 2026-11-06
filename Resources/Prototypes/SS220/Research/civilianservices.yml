@@ -11,6 +11,18 @@
   - PinpointerCrew
 
 - type: technology
+  id: MedicalNightVision
+  name: research-technology-medical-night-vision
+  icon:
+    sprite: SS220/Clothing/Eyes/Glasses/nightvision.rsi
+    state: healthhudnight
+  discipline: CivilianServices
+  tier: 2
+  cost: 5000
+  recipeUnlocks:
+  - ClothingEyesNightVisionMedical
+
+- type: technology
   id: CloningPodMachine
   name: research-technology-cloning-technology
   icon:

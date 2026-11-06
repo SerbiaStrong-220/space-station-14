@@ -1,1 +1,10 @@
-guide-entry-cult-yogg = Культ Йог-Сотот
+guide-entry-cult-yogg = Культ Йог-Сотота
+guide-entry-cult-yogg-abilities = Способности культиста
+guide-entry-cult-yogg-migo = Ми-Го
+guide-entry-cult-yogg-conversion = Обращение и метки
+guide-entry-cult-yogg-base = База и растения
+guide-entry-cult-yogg-equipment = Снаряжение
+guide-entry-cult-yogg-recipes = Таблица преобразований
+guide-entry-cult-yogg-abyss = Бездна
+guide-entry-cult-yogg-ritual = Жертва и призыв
+guide-entry-cult-yogg-counterplay = Противодействие культу

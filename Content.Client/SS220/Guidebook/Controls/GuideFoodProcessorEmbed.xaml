@@ -1,0 +1,17 @@
+<PanelContainer xmlns="https://spacestation14.io"
+                xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                Margin="5">
+    <PanelContainer.PanelOverride>
+        <gfx:StyleBoxFlat BorderThickness="1" BorderColor="#777777"/>
+    </PanelContainer.PanelOverride>
+
+    <BoxContainer Orientation="Horizontal" SeparationOverride="8" Margin="8">
+        <BoxContainer Name="SourceIcon"/>
+        <Label Name="SourceName" VerticalAlignment="Center"/>
+        <Label Text="→" VerticalAlignment="Center"/>
+
+        <BoxContainer Name="ResultIcon"/>
+        <Label Name="ResultName" VerticalAlignment="Center"/>
+        <Label Name="ResultAmount" VerticalAlignment="Center"/>
+    </BoxContainer>
+</PanelContainer>

@@ -17,6 +17,14 @@
   - type: Tag
     tags:
     - BoxCardboard
+  # SS220-place-and-pickup-sounds-2 begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/cardboardbox_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/cardboardbox_drop.ogg
+  # SS220-place-and-pickup-sounds-2 end
 
 - type: entity
   parent: BoxBaseSmall

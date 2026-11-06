@@ -71,11 +71,6 @@
     entity: FoodMeatRotten
     # once it would say bloated, turn into the rotten prototype
     stage: 1
-  # SS220-kitchen-processor begin
-  - type: FoodProcessorIngredient
-    result: FoodMeatMeatball
-    resultCount: 3
-  # SS220-kitchen-processor end
 
 # Raw
 
@@ -126,6 +121,11 @@
     graph: ClumpToMeat
     node: make meat
   #ss220 fix meatwheat construction end
+  # SS220-kitchen-processor begin
+  - type: FoodProcessorIngredient
+    result: FoodMeatMeatball
+    resultCount: 3
+  # SS220-kitchen-processor end
 
 - type: entity
   parent: FoodMeatRawBase
@@ -1862,6 +1862,10 @@
       - state: generic-pink-inhand-left
       right:
       - state: generic-pink-inhand-right
+  # SS220-kitchen-processor begin
+  - type: FoodProcessorIngredient
+    result: FoodMeatBacon
+  # SS220-kitchen-processor end
 
 - type: entity
   parent: FoodCutletBase #SS220-grill-update-2

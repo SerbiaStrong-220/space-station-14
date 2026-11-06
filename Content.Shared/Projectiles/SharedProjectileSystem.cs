@@ -4,6 +4,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
+using Content.Shared.SS220.Weapons.Components;
 using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
@@ -88,6 +89,8 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     private void OnEmbedProjectileHit(Entity<EmbeddableProjectileComponent> embeddable, ref ProjectileHitEvent args)
     {
         EmbedAttach(embeddable, args.Target, args.Shooter, embeddable.Comp);
+
+        RemComp<AimedProjectileComponent>(embeddable); // SS220 Weapon overhaul
 
         // Raise a specific event for projectiles.
         if (!TryComp<ProjectileComponent>(embeddable, out var projectile))
