@@ -194,7 +194,7 @@ public sealed partial class CentCommEyeConsoleSystem : EntitySystem
     /// <summary>
     /// Sends the operator back to their body. The eye remains on the station.
     /// </summary>
-    private void Detach(Entity<CentCommEyeConsoleComponent> ent)
+    private void Detach(Entity<CentCommEyeConsoleComponent> ent, ICommonSession? session = null)
     {
         if (ent.Comp.User is not { } user)
             return;
@@ -206,10 +206,12 @@ public sealed partial class CentCommEyeConsoleSystem : EntitySystem
 
         RemComp<CentCommEyeOperatorComponent>(user);
 
-        if (!_mind.TryGetMind(user, out var mindId, out var mind))
-            return;
+        _mind.TryGetMind(user, out var mindId, out var mind);
 
-        if (_player.TryGetSessionById(mind.UserId, out var session))
+        if (session == null && mind != null)
+            _player.TryGetSessionById(mind.UserId, out session);
+
+        if (session != null)
         {
             _viewSubscriber.RemoveViewSubscriber(user, session);
 
@@ -220,7 +222,7 @@ public sealed partial class CentCommEyeConsoleSystem : EntitySystem
         if (ent.Comp.Eye is { } eyeUid && Exists(eyeUid))
             TransferFollowers(eyeUid, user);
 
-        if (mind.VisitingEntity == ent.Comp.Eye)
+        if (mind != null && mind.VisitingEntity == ent.Comp.Eye)
             _mind.UnVisit(mindId, mind);
     }
 
@@ -295,7 +297,7 @@ public sealed partial class CentCommEyeConsoleSystem : EntitySystem
 
     private void OnEyeDetached(Entity<CentCommEyeComponent> ent, ref PlayerDetachedEvent args)
     {
-        DetachFromEye(ent);
+        DetachFromEye(ent, args.Player);
     }
 
     private void OnEyeTerminating(Entity<CentCommEyeComponent> ent, ref EntityTerminatingEvent args)
@@ -307,11 +309,11 @@ public sealed partial class CentCommEyeConsoleSystem : EntitySystem
         console.Eye = null;
     }
 
-    private void DetachFromEye(Entity<CentCommEyeComponent> ent)
+    private void DetachFromEye(Entity<CentCommEyeComponent> ent, ICommonSession? session = null)
     {
         if (TryComp<CentCommEyeConsoleComponent>(ent.Comp.Console, out var console) && console.Eye == ent.Owner)
         {
-            Detach((ent.Comp.Console, console));
+            Detach((ent.Comp.Console, console), session);
             return;
         }
 
