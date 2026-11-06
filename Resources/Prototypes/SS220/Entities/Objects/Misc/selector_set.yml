@@ -11,6 +11,7 @@
   - type: SetSelector
   - type: ActivatableUI
     key: enum.SetSelectorUIKey.Key
+  - type: ActivatableUIRequiresAccess
   - type: UserInterface
     interfaces:
       enum.SetSelectorUIKey.Key:
@@ -33,9 +34,12 @@
   id: SetCaseBlueshieldPrimaryWeapon
   parent: SetSelectorBriefcaseBase
   name: blueshield primary gun case
+  suffix: Set selector
   components:
   - type: Sprite
     sprite: SS220/Objects/Storage/Briefcases/bs_weapon_case_large.rsi
+  - type: AccessReader
+    access: [["Blueshield"]]
   - type: SetSelector
     spawnedStoragePrototype: BriefcaseWeaponBlueshield
     maxSelectedSets: 1
@@ -47,11 +51,14 @@
   id: SetCaseBlueshieldSecondaryEquipment
   parent: SetSelectorBriefcaseBase
   name: blueshield secondary equipment case
+  suffix: Set selector
   components:
   - type: Sprite
     sprite: SS220/Objects/Storage/Briefcases/bs_weapon_case.rsi
   - type: Item
     size: Large
+  - type: AccessReader
+    access: [["Blueshield"]]
   - type: SetSelector
     spawnedStoragePrototype: BriefcaseWeaponSmallBlueshield
     maxSelectedSets: 2
@@ -60,3 +67,5 @@
     - BlueshieldMasterSet
     - BlueshieldDefenderSet
     - BlueshieldCombatMedicSet
+    - BlueshieldNightWatchSet
+    - BlueshieldCordonSet

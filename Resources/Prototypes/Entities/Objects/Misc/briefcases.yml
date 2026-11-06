@@ -42,7 +42,7 @@
   components:
   - type: Appearance
   - type: Sprite
-    sprite: SS220/Objects/Storage/Briefcases/weapon_case_large.rsi #ss220-resprite
+    sprite: SS220/Objects/Storage/Briefcases/weapon_case_large.rsi #SS220-resprite
     layers:
     - state: icon
       map: [ base ]
@@ -70,7 +70,7 @@
   suffix: Gun, Small, Empty
   components:
   - type: Sprite
-    sprite: SS220/Objects/Storage/Briefcases/weapon_case.rsi #ss220-resprite
+    sprite: SS220/Objects/Storage/Briefcases/weapon_case.rsi #SS220-resprite
   - type: Item
     size: Large
   - type: Storage

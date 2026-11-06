@@ -60,6 +60,7 @@
   id: LockedSecureRevolverSetSelectorCase
   parent: SetSelectorBase
   name: a protected revolver case
+  suffix: Set selector
   description: A shockproof case with a lock for storing a revolver. It is an accessory to the souvenir revolver.
   components:
   - type: SetSelector
@@ -70,6 +71,8 @@
     - WeaponEnergyMagnumSet
   - type: Item
     size: Large
+  - type: AccessReader
+    access: [["HeadOfSecurity"]]
   - type: Sprite
     sprite: SS220/Objects/Storage/hosgun_box.rsi
     layers:

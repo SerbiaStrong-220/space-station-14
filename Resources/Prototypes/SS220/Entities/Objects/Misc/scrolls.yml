@@ -12,8 +12,6 @@
     price: 3000
   - type: TriggerOnActivate
   - type: DeleteOnTrigger
-  - type: MartialArtOnTrigger
-    martialArt: CloseQuartersCombat
 
 - type: entity
   parent: [MartialArtManualBase, BaseSyndicateContraband]
@@ -23,6 +21,8 @@
   components:
   - type: Sprite
     state: cqc
+  - type: MartialArtOnTrigger
+    martialArt: CloseQuartersCombat
 
 - type: entity
   parent: MartialArtManualBase

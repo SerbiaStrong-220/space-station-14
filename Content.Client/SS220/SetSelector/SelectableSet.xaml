@@ -20,7 +20,7 @@
                    FontColorOverride="#e9dac0"
                    HorizontalExpand="True"
                    VerticalAlignment="Center"/>
-            <Button Name="SetButton" Access="Public" ToggleMode="True" MinWidth="96"/>
+            <Button Name="SetButton" Access="Public" ToggleMode="True" SetWidth="110"/>
         </BoxContainer>
         <RichTextLabel Name="SetDescription" Margin="0 2 0 0"/>
     </BoxContainer>

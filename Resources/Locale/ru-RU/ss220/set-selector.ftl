@@ -20,7 +20,7 @@ selectable-set-weapon-drozd-name = Набор Дрозд
 selectable-set-weapon-drozd-description = Пистолет-пулемёт Дрозд (.35 авто) и три магазина к нему.
 
 selectable-set-blueshield-sheriff-name = Набор шерифа
-selectable-set-blueshield-sheriff-description = Лазерный револьвер в наплечной кобуре «Синего Щита».
+selectable-set-blueshield-sheriff-description = Лазерный револьвер в наплечной кобуре «Синего Щита» и ковбойская шляпа.
 
 selectable-set-blueshield-master-name = Набор мастера
 selectable-set-blueshield-master-description = Мануал по корпоративному дзюдо.
@@ -30,6 +30,12 @@ selectable-set-blueshield-defender-description = Телескопический 
 
 selectable-set-blueshield-medical-name = Набор медика
 selectable-set-blueshield-medical-description = Компактный дефибриллятор.
+
+selectable-set-blueshield-night-watch-name = Набор ночного дозора
+selectable-set-blueshield-night-watch-description = Прибор ночного видения СБ.
+
+selectable-set-blueshield-cordon-name = Набор оцепления
+selectable-set-blueshield-cordon-description = Проектор силового поля.
 
 selectable-set-weapon-revolver-unika-name = Набор Уника
 selectable-set-weapon-revolver-unika-description = Сувенирный магнум «Уника» и два спидлоадера.

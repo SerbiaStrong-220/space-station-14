@@ -9,7 +9,7 @@
     Resizable="True"
     SetWidth="520"
     MinHeight="260"
-    MaxHeight="640">
+    MaxHeight="720">
     <Control>
         <PanelContainer>
             <PanelContainer.PanelOverride>

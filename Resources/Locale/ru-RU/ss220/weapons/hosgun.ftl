@@ -4,3 +4,4 @@ ent-LockedProtectedRevolverCase = защищённый кейс для рево�
     .desc = Ударопрочный кейс с замком для хранения револьвера. Является аксессуаром к сувенирному револьверу.
 ent-LockedSecureRevolverSetSelectorCase = { ent-LockedProtectedRevolverCase }
     .desc = { ent-LockedProtectedRevolverCase.desc }
+    .suffix = Выбор набора
