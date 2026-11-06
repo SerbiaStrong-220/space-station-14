@@ -23,8 +23,6 @@
   components:
   - type: Sprite
     state: cqc
-  - type: MartialArtOnTrigger
-    martialArt: CloseQuartersCombat
 
 - type: entity
   parent: MartialArtManualBase

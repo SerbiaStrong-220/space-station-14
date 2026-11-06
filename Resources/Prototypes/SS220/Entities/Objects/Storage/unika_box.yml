@@ -57,20 +57,6 @@
     - WeaponEnergyMagnum
 
 - type: entity
-  parent: LockedProtectedRevolverCase
-  id: LockedUnicaBox
-  name: a protected revolver case
-  description: A shockproof case with a lock for storing a revolver. It is an accessory to the souvenir revolver "Unica".
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: WeaponRevolverMatebaSouvenir
-        - id: SpeedLoaderMagnum
-          amount: 2
-
-- type: entity
   id: LockedSecureRevolverSetSelectorCase
   parent: SetSelectorBase
   name: a protected revolver case
@@ -82,6 +68,8 @@
     possibleSets:
     - WeaponRevolverUnikaSet
     - WeaponEnergyMagnumSet
+  - type: Item
+    size: Large
   - type: Sprite
     sprite: SS220/Objects/Storage/hosgun_box.rsi
     layers:

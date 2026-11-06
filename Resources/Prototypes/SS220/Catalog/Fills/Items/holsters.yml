@@ -34,7 +34,8 @@
   name: blueshield shoulder holster
   suffix: Filled
   components:
-  - type: ContainerFill
+  - type: EntityTableContainerFill
     containers:
-      charger_slot:
-      - WeaponEnergyGunRevolver
+      charger_slot: !type:AllSelector
+        children:
+        - id: WeaponEnergyGunRevolver

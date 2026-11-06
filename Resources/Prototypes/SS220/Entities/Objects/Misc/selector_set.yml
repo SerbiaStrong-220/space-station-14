@@ -1,3 +1,5 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 - type: entity
   id: SetSelectorBase
   parent: BaseItem
@@ -28,7 +30,7 @@
     size: Ginormous
 
 - type: entity
-  id: SetCaseBlueshieldPriamryWeapon
+  id: SetCaseBlueshieldPrimaryWeapon
   parent: SetSelectorBriefcaseBase
   name: blueshield primary gun case
   components:
@@ -58,4 +60,3 @@
     - BlueshieldMasterSet
     - BlueshieldDefenderSet
     - BlueshieldCombatMedicSet
-

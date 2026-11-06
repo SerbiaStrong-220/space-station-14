@@ -527,7 +527,7 @@
   id: UplinkCQCManual
   name: uplink-cqc-manual-name
   description: uplink-cqc-manual-desc
-  icon: {sprite: /Textures/SS220/Objects/Misc/cqc_manual.rsi, state: icon}
+  icon: {sprite: /Textures/SS220/Objects/Misc/manual.rsi, state: cqc}
   productEntity: CQCManual
   discountCategory: rareDiscounts
   discountDownTo:

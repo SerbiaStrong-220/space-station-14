@@ -4,11 +4,8 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.SetSelector;
 
-/// <summary>
-///
-/// </summary>
 [RegisterComponent, Access(typeof(SetSelectorSystem))]
-public sealed partial class SetSelectorComponent  : Component
+public sealed partial class SetSelectorComponent : Component
 {
     /// <summary>
     /// List of sets available for selection
@@ -20,7 +17,7 @@ public sealed partial class SetSelectorComponent  : Component
     public List<int> SelectedSets = new();
 
     [DataField]
-    public SoundCollectionSpecifier ApproveSound = new SoundCollectionSpecifier("storageRustle");
+    public SoundCollectionSpecifier ApproveSound = new("storageRustle");
 
     /// <summary>
     /// Max number of sets you can select.
