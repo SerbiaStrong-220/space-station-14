@@ -34,7 +34,9 @@
     size: Huge
 
 - type: entity
-  parent: [BriefcaseBase, BaseSyndicateContraband]
+  parent: BriefcaseBase #ss220-changes
+  #SS220: I don’t know what fucking genius decided to add contraband to such a basic prototype that everything else is going to inherit from.
+  #Removing the contraband inheritance from here is the best solution I’ve come up with; otherwise, there’ll be problems with upstream changes later on.
   id: BriefcaseWeapon
   name: secure weapon case
   suffix: Gun, Empty
@@ -42,7 +44,7 @@
   components:
   - type: Appearance
   - type: Sprite
-    sprite: Objects/Storage/Briefcases/weapon_case_large.rsi
+    sprite: SS220/Objects/Storage/Briefcases/weapon_case_large.rsi #ss220-resprite
     layers:
     - state: icon
       map: [ base ]
@@ -70,7 +72,7 @@
   suffix: Gun, Small, Empty
   components:
   - type: Sprite
-    sprite: Objects/Storage/Briefcases/weapon_case.rsi
+    sprite: SS220/Objects/Storage/Briefcases/weapon_case.rsi #ss220-resprite
   - type: Item
     size: Large
   - type: Storage

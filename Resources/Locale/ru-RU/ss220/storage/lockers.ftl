@@ -3,6 +3,9 @@ ent-LockerBlueshield = шкаф Синего Щита
 ent-LockerBlueshieldFilled = { ent-LockerBlueshield }
     .suffix = Заполненный
     .desc = { ent-LockerBaseSecure.desc }
+ent-LockerBlueshieldFilledSetCase = { ent-LockerBlueshield }
+    .suffix = Заполненный, Кейс с наборами
+    .desc = { ent-LockerBaseSecure.desc }
 
 ent-LockerPsychologist = шкаф психолога
     .desc = { ent-LockerBaseSecure.desc }

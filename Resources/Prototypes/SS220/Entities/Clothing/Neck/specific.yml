@@ -83,3 +83,31 @@
       sprite: SS220/Clothing/Neck/Misc/mime_harlequin.rsi
     - type: Clothing
       sprite: SS220/Clothing/Neck/Misc/mime_harlequin.rsi
+
+- type: entity
+  parent: ClothingBeltBase
+  id: ClothingBeltHolsterBlueshield
+  name: blueshield shoulder holster
+  description:
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Misc/bsoholster.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Misc/bsoholster.rsi
+    slots: [neck]
+  - type: Item
+    size: Ginormous
+  - type: Charger
+    chargeRate: 40
+    slotId: charger_slot
+    portable: true
+  - type: ContainerContainer
+    containers:
+      charger_slot: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      charger_slot:
+        ejectOnInteract: false
+        whitelist:
+          tags:
+          - BSHolsterSupport
