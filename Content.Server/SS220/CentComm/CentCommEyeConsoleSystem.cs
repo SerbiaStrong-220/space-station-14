@@ -10,6 +10,7 @@ using Content.Shared.Follower.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.Power.EntitySystems;
@@ -35,6 +36,7 @@ public sealed partial class CentCommEyeConsoleSystem : EntitySystem
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedPowerReceiverSystem _power = default!;
     [Dependency] private SharedTransformSystem _xform = default!;
@@ -71,6 +73,9 @@ public sealed partial class CentCommEyeConsoleSystem : EntitySystem
     private void OnActivate(Entity<CentCommEyeConsoleComponent> ent, ref ActivateInWorldEvent args)
     {
         if (args.Handled || !args.Complex)
+            return;
+
+        if (!_mobState.IsAlive(args.User))
             return;
 
         args.Handled = true;

@@ -16,9 +16,6 @@
   - type: Eye
     pvsScale: 1.5
     drawFov: false
-    visMask:
-    - Normal
-    - Ghost
   - type: Input
     context: "ghost"
   - type: Visibility
@@ -35,6 +32,12 @@
     - Security
     - Service
     - Supply
+    - Binary
+    - Law
+    - ChannelAlpha
+    - ChannelOmega
+    - RadioNanotrasen
+    - ChannelTSF
   - type: ShowJobIcons
   - type: ShowMindShieldIcons
   - type: ShowCriminalRecordIcons
