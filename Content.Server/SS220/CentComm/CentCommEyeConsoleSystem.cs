@@ -4,17 +4,13 @@ using Content.Server.Mind;
 using Content.Server.Shuttles.Components;
 using Content.Server.Spawners.Components;
 using Content.Server.Station.Systems;
-using Content.Shared.Access.Systems;
 using Content.Shared.Actions;
 using Content.Shared.Follower;
 using Content.Shared.Follower.Components;
-using Content.Shared.Interaction;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Power;
-using Content.Shared.Power.EntitySystems;
 using Content.Shared.SS220.CentComm;
 using Robust.Server.GameObjects;
 using Robust.Server.GameStates;
@@ -31,16 +27,13 @@ namespace Content.Server.SS220.CentComm;
 /// Lets the console operator pilot a remote eye over the station.
 /// The operator's mind visits the eye and returns on demand.
 /// </summary>
-public sealed partial class CentCommEyeConsoleSystem : EntitySystem
+public sealed partial class CentCommEyeConsoleSystem : SharedCentCommEyeConsoleSystem
 {
-    [Dependency] private AccessReaderSystem _access = default!;
     [Dependency] private FollowerSystem _follower = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedMindSystem _mind = default!;
-    [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
-    [Dependency] private SharedPowerReceiverSystem _power = default!;
     [Dependency] private SharedTransformSystem _xform = default!;
     [Dependency] private StationSystem _station = default!;
     [Dependency] private ISharedPlayerManager _player = default!;
@@ -56,7 +49,6 @@ public sealed partial class CentCommEyeConsoleSystem : EntitySystem
         base.Initialize();
 
         // Console
-        SubscribeLocalEvent<CentCommEyeConsoleComponent, ActivateInWorldEvent>(OnActivate);
         SubscribeLocalEvent<CentCommEyeConsoleComponent, PowerChangedEvent>(OnPowerChanged);
         SubscribeLocalEvent<CentCommEyeConsoleComponent, AnchorStateChangedEvent>(OnAnchorChanged);
         SubscribeLocalEvent<CentCommEyeConsoleComponent, ComponentShutdown>(OnConsoleShutdown);
@@ -72,39 +64,10 @@ public sealed partial class CentCommEyeConsoleSystem : EntitySystem
         SubscribeLocalEvent<CentCommEyeOperatorComponent, MoveEvent>(OnOperatorMoved);
     }
 
-    /// <summary>
-    /// Handles in-world console interaction.
-    /// </summary>
-    private void OnActivate(Entity<CentCommEyeConsoleComponent> ent, ref ActivateInWorldEvent args)
+    protected override void StartObserving(Entity<CentCommEyeConsoleComponent> ent, EntityUid user)
     {
-        if (args.Handled || !args.Complex)
-            return;
-
-        if (!_mobState.IsAlive(args.User))
-            return;
-
-        args.Handled = true;
-
-        if (!_power.IsPowered(ent.Owner))
-        {
-            _popup.PopupEntity(Loc.GetString("centcomm-eye-console-unpowered"), ent, args.User);
-            return;
-        }
-
-        if (!_access.IsAllowed(args.User, ent))
-        {
-            _popup.PopupEntity(Loc.GetString("centcomm-eye-console-access-denied"), ent, args.User);
-            return;
-        }
-
-        if (ent.Comp.User != null)
-        {
-            _popup.PopupEntity(Loc.GetString("centcomm-eye-console-in-use"), ent, args.User);
-            return;
-        }
-
-        if (!TryAttach(ent, args.User))
-            _popup.PopupEntity(Loc.GetString("centcomm-eye-console-no-station"), ent, args.User);
+        if (!TryAttach(ent, user))
+            _popup.PopupEntity(Loc.GetString("centcomm-eye-console-no-station"), ent, user);
     }
 
     /// <summary>
@@ -127,6 +90,7 @@ public sealed partial class CentCommEyeConsoleSystem : EntitySystem
 
         ent.Comp.Eye = eye;
         ent.Comp.User = user;
+        Dirty(ent);
 
         if (_player.TryGetSessionById(mind.UserId, out var session))
         {
@@ -200,6 +164,7 @@ public sealed partial class CentCommEyeConsoleSystem : EntitySystem
             return;
 
         ent.Comp.User = null;
+        Dirty(ent);
 
         if (!Exists(user))
             return;
@@ -235,6 +200,7 @@ public sealed partial class CentCommEyeConsoleSystem : EntitySystem
 
         var eye = ent.Comp.Eye;
         ent.Comp.Eye = null;
+        Dirty(ent);
         QueueDel(eye);
     }
 
@@ -307,6 +273,7 @@ public sealed partial class CentCommEyeConsoleSystem : EntitySystem
 
         Detach((ent.Comp.Console, console));
         console.Eye = null;
+        Dirty(ent.Comp.Console, console);
     }
 
     private void DetachFromEye(Entity<CentCommEyeComponent> ent, ICommonSession? session = null)

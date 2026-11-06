@@ -50,7 +50,7 @@
     knowAllLanguages: true
   - type: HallucinationImmune
   - type: CentCommEye
-  - type: PointLightd
+  - type: PointLight
     netsync: false
     radius: 6
     castShadows: false

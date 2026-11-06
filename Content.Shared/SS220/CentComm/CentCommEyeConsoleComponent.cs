@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.CentComm;
@@ -7,7 +8,7 @@ namespace Content.Shared.SS220.CentComm;
 /// <summary>
 /// A CentComm console that lets its operator pilot a remote observer, similar to AI eye.
 /// </summary>
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class CentCommEyeConsoleComponent : Component
 {
     /// <summary>
@@ -25,12 +26,12 @@ public sealed partial class CentCommEyeConsoleComponent : Component
     /// <summary>
     /// This console's eye. It is spawned on first use and then kept for the console's lifetime.
     /// </summary>
-    [ViewVariables]
+    [ViewVariables, AutoNetworkedField]
     public EntityUid? Eye;
 
     /// <summary>
     /// The operator currently piloting <see cref="Eye"/>, if any.
     /// </summary>
-    [ViewVariables]
+    [ViewVariables, AutoNetworkedField]
     public EntityUid? User;
 }
