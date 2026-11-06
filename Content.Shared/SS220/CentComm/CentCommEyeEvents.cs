@@ -5,6 +5,6 @@ using Content.Shared.Actions;
 namespace Content.Shared.SS220.CentComm;
 
 /// <summary>
-/// Raised on the operator when they use the granted action to stop piloting the eye.
+/// Raised on the eye when its operator uses the action to return to their body.
 /// </summary>
 public sealed partial class CentCommEyeReturnActionEvent : InstantActionEvent;

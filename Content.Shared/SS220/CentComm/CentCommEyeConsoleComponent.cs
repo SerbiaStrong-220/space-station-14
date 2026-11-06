@@ -5,7 +5,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared.SS220.CentComm;
 
 /// <summary>
-/// A CentComm console that lets its operator pilot a remote observer, similiar to AI eye.
+/// A CentComm console that lets its operator pilot a remote observer, similar to AI eye.
 /// </summary>
 [RegisterComponent]
 public sealed partial class CentCommEyeConsoleComponent : Component

@@ -5,8 +5,9 @@ namespace Content.Shared.SS220.CentComm;
 /// <summary>
 /// Added to the eye a <see cref="CentCommEyeConsoleComponent"/> spawned, which is what the operator
 /// is attached to while observing.
+/// </summary>
 [RegisterComponent]
-public sealed partial class CentCommEyeUserComponent : Component
+public sealed partial class CentCommEyeComponent : Component
 {
     /// <summary>
     /// The console this eye belongs to.

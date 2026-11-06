@@ -4,7 +4,7 @@
   parent: BaseAction
   id: ActionCentCommEyeReturn
   name: return to body
-  description: return back to the console
+  description: Return to your body at the console.
   components:
   - type: Action
     priority: -9

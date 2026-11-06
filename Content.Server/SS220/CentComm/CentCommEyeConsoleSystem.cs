@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Server.Mind;
 using Content.Server.Shuttles.Components;
 using Content.Server.Spawners.Components;
 using Content.Server.Station.Systems;
@@ -16,6 +17,7 @@ using Content.Shared.Power;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.SS220.CentComm;
 using Robust.Server.GameObjects;
+using Robust.Server.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
@@ -42,6 +44,7 @@ public sealed partial class CentCommEyeConsoleSystem : EntitySystem
     [Dependency] private SharedTransformSystem _xform = default!;
     [Dependency] private StationSystem _station = default!;
     [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private PvsOverrideSystem _pvsOverride = default!;
     [Dependency] private ViewSubscriberSystem _viewSubscriber = default!;
 
     private static readonly EntProtoId ReturnAction = "ActionCentCommEyeReturn";
@@ -54,16 +57,17 @@ public sealed partial class CentCommEyeConsoleSystem : EntitySystem
         // Console
         SubscribeLocalEvent<CentCommEyeConsoleComponent, ActivateInWorldEvent>(OnActivate);
         SubscribeLocalEvent<CentCommEyeConsoleComponent, PowerChangedEvent>(OnPowerChanged);
+        SubscribeLocalEvent<CentCommEyeConsoleComponent, AnchorStateChangedEvent>(OnAnchorChanged);
         SubscribeLocalEvent<CentCommEyeConsoleComponent, ComponentShutdown>(OnConsoleShutdown);
 
         // Eye
-        SubscribeLocalEvent<CentCommEyeUserComponent, CentCommEyeReturnActionEvent>(OnReturnAction);
-        SubscribeLocalEvent<CentCommEyeUserComponent, PlayerDetachedEvent>(OnEyeDetached);
-        SubscribeLocalEvent<CentCommEyeUserComponent, EntityTerminatingEvent>(OnEyeTerminating);
+        SubscribeLocalEvent<CentCommEyeComponent, CentCommEyeReturnActionEvent>(OnReturnAction);
+        SubscribeLocalEvent<CentCommEyeComponent, PlayerDetachedEvent>(OnEyeDetached);
+        SubscribeLocalEvent<CentCommEyeComponent, EntityTerminatingEvent>(OnEyeTerminating, before: [typeof(MindSystem)]);
 
         // Body left behind at the console
         SubscribeLocalEvent<CentCommEyeOperatorComponent, MobStateChangedEvent>(OnOperatorMobStateChanged);
-        SubscribeLocalEvent<CentCommEyeOperatorComponent, EntityTerminatingEvent>(OnOperatorTerminating);
+        SubscribeLocalEvent<CentCommEyeOperatorComponent, EntityTerminatingEvent>(OnOperatorTerminating, before: [typeof(MindSystem)]);
         SubscribeLocalEvent<CentCommEyeOperatorComponent, MoveEvent>(OnOperatorMoved);
     }
 
@@ -80,12 +84,6 @@ public sealed partial class CentCommEyeConsoleSystem : EntitySystem
 
         args.Handled = true;
 
-        if (ent.Comp.User != null)
-        {
-            _popup.PopupEntity(Loc.GetString("centcomm-eye-console-in-use"), ent, args.User);
-            return;
-        }
-
         if (!_power.IsPowered(ent.Owner))
         {
             _popup.PopupEntity(Loc.GetString("centcomm-eye-console-unpowered"), ent, args.User);
@@ -95,6 +93,12 @@ public sealed partial class CentCommEyeConsoleSystem : EntitySystem
         if (!_access.IsAllowed(args.User, ent))
         {
             _popup.PopupEntity(Loc.GetString("centcomm-eye-console-access-denied"), ent, args.User);
+            return;
+        }
+
+        if (ent.Comp.User != null)
+        {
+            _popup.PopupEntity(Loc.GetString("centcomm-eye-console-in-use"), ent, args.User);
             return;
         }
 
@@ -123,9 +127,14 @@ public sealed partial class CentCommEyeConsoleSystem : EntitySystem
         ent.Comp.Eye = eye;
         ent.Comp.User = user;
 
-        // PVS override to avoid entity pop-in on returning from the eye
         if (_player.TryGetSessionById(mind.UserId, out var session))
+        {
+            // PVS override to avoid entity pop-in on returning from the eye
             _viewSubscriber.AddViewSubscriber(user, session);
+
+            // Apparently lack of ghost vismask does not send Actions to player
+            SetActionsForceSend(eye, session, true);
+        }
 
         _mind.Visit(mindId, eye, mind);
         TransferFollowers(user, eye);
@@ -149,20 +158,41 @@ public sealed partial class CentCommEyeConsoleSystem : EntitySystem
     }
 
     /// <summary>
-    /// Set up the eye and it's actions.
+    /// Set up the eye and its actions.
     /// </summary>
     private EntityUid SpawnEye(Entity<CentCommEyeConsoleComponent> ent, EntityCoordinates coords)
     {
         var eye = SpawnAtPosition(ent.Comp.EyeProto, coords);
 
-        var eyeComp = EnsureComp<CentCommEyeUserComponent>(eye);
+        var eyeComp = EnsureComp<CentCommEyeComponent>(eye);
         eyeComp.Console = ent.Owner;
 
-        // The actions live on the eye, which is what the operator controls while observing.
+        // The actions on the eye, which are available to the operator.
         _actions.AddAction(eye, ref eyeComp.ReturnActionEntity, ReturnAction);
         _actions.AddAction(eye, ref eyeComp.ChannelsActionEntity, ChannelsAction);
 
         return eye;
+    }
+
+    /// <summary>
+    /// The eye sits on the ghost visibility layer, which its action entities inherit,
+    /// but the operator can't see that layer. Force send ignores visibility masks.
+    /// </summary>
+    private void SetActionsForceSend(EntityUid eye, ICommonSession session, bool enabled)
+    {
+        if (!TryComp<CentCommEyeComponent>(eye, out var eyeComp))
+            return;
+
+        foreach (var action in new[] { eyeComp.ReturnActionEntity, eyeComp.ChannelsActionEntity })
+        {
+            if (action is not { } uid)
+                continue;
+
+            if (enabled)
+                _pvsOverride.AddForceSend(uid, session);
+            else
+                _pvsOverride.RemoveForceSend(uid, session);
+        }
     }
 
     /// <summary>
@@ -184,7 +214,12 @@ public sealed partial class CentCommEyeConsoleSystem : EntitySystem
             return;
 
         if (_player.TryGetSessionById(mind.UserId, out var session))
+        {
             _viewSubscriber.RemoveViewSubscriber(user, session);
+
+            if (ent.Comp.Eye is { } eye)
+                SetActionsForceSend(eye, session, false);
+        }
 
         if (ent.Comp.Eye is { } eyeUid && Exists(eyeUid))
             TransferFollowers(eyeUid, user);
@@ -251,9 +286,9 @@ public sealed partial class CentCommEyeConsoleSystem : EntitySystem
     }
 
     /// <summary>
-    // Returns the console operator to their body.
+    /// Returns the console operator to their body.
     /// </summary>
-    private void OnReturnAction(Entity<CentCommEyeUserComponent> ent, ref CentCommEyeReturnActionEvent args)
+    private void OnReturnAction(Entity<CentCommEyeComponent> ent, ref CentCommEyeReturnActionEvent args)
     {
         if (args.Handled)
             return;
@@ -262,12 +297,12 @@ public sealed partial class CentCommEyeConsoleSystem : EntitySystem
         DetachFromEye(ent);
     }
 
-    private void OnEyeDetached(Entity<CentCommEyeUserComponent> ent, ref PlayerDetachedEvent args)
+    private void OnEyeDetached(Entity<CentCommEyeComponent> ent, ref PlayerDetachedEvent args)
     {
         DetachFromEye(ent);
     }
 
-    private void OnEyeTerminating(Entity<CentCommEyeUserComponent> ent, ref EntityTerminatingEvent args)
+    private void OnEyeTerminating(Entity<CentCommEyeComponent> ent, ref EntityTerminatingEvent args)
     {
         if (!TryComp<CentCommEyeConsoleComponent>(ent.Comp.Console, out var console) || console.Eye != ent.Owner)
             return;
@@ -276,7 +311,7 @@ public sealed partial class CentCommEyeConsoleSystem : EntitySystem
         console.Eye = null;
     }
 
-    private void DetachFromEye(Entity<CentCommEyeUserComponent> ent)
+    private void DetachFromEye(Entity<CentCommEyeComponent> ent)
     {
         if (TryComp<CentCommEyeConsoleComponent>(ent.Comp.Console, out var console) && console.Eye == ent.Owner)
         {
@@ -311,7 +346,7 @@ public sealed partial class CentCommEyeConsoleSystem : EntitySystem
         if (_xform.InRange(args.NewPosition, Transform(ent.Comp.Console).Coordinates, console.MaxUserRange))
             return;
 
-        Detach((ent.Comp.Console, console));
+        DetachFromOperator(ent);
     }
 
     private void DetachFromOperator(Entity<CentCommEyeOperatorComponent> ent)
@@ -328,6 +363,14 @@ public sealed partial class CentCommEyeConsoleSystem : EntitySystem
     private void OnPowerChanged(Entity<CentCommEyeConsoleComponent> ent, ref PowerChangedEvent args)
     {
         if (args.Powered)
+            return;
+
+        Detach(ent);
+    }
+
+    private void OnAnchorChanged(Entity<CentCommEyeConsoleComponent> ent, ref AnchorStateChangedEvent args)
+    {
+        if (args.Anchored)
             return;
 
         Detach(ent);
