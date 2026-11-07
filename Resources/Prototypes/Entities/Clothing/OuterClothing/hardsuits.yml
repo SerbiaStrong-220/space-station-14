@@ -375,6 +375,19 @@
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitWarden
+  #SS220-dna-lock begin
+  - type: DnaLockClothing
+  - type: DnaLockable
+    job: Warden
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 10
+    intensitySlope: 100
+    maxIntensity: 10
+    tileBreakScale: 0
+    maxTileBreak: 0
+    canCreateVacuum: false
+  #SS220-dna-lock end
 
 #Captain's Hardsuit
 - type: entity
