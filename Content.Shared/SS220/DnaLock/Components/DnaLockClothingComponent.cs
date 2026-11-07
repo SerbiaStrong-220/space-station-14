@@ -5,8 +5,9 @@ using Robust.Shared.Audio;
 namespace Content.Shared.SS220.DnaLock.Components;
 
 /// <summary>
-/// Clothing component with a DNA lock: when an unauthorized user equips the item,
-/// it starts a warning timer with beeps and popups. When the timer expires, the item detonates and is deleted.
+/// Clothing component with a DNA lock: when the item is worn by someone without access (it was put on, or the lock was turned on),
+/// it starts a warning timer with beeps and popups. The timer stops if the item is taken off or the wearer gains access.
+/// When the timer expires, the item detonates and is deleted.
 /// Requires a DnaLockableComponent and an ExplosiveComponent on the same entity.
 /// </summary>
 [RegisterComponent]

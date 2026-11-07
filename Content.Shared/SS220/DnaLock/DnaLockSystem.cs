@@ -215,6 +215,9 @@ public sealed partial class DnaLockSystem : EntitySystem
     {
         ent.Comp.LockActive = active;
         Dirty(ent);
+
+        var ev = new DnaLockActiveChangedEvent(active);
+        RaiseLocalEvent(ent, ref ev);
     }
 
     /// <summary>

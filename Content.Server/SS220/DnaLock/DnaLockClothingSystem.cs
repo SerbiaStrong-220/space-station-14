@@ -2,22 +2,26 @@
 
 using Content.Server.Explosion.EntitySystems;
 using Content.Shared.Clothing;
+using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.DnaLock;
 using Content.Shared.SS220.DnaLock.Components;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.DnaLock;
 
 /// <summary>
-/// Counts down and detonates DNA-locked clothing put on by someone without access.
+/// Counts down and detonates DNA-locked clothing worn by someone without access.
 /// </summary>
 public sealed partial class DnaLockClothingSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private ClothingSystem _clothing = default!;
     [Dependency] private ExplosionSystem _explosion = default!;
     [Dependency] private DnaLockSystem _dnaLock = default!;
 
@@ -31,6 +35,7 @@ public sealed partial class DnaLockClothingSystem : EntitySystem
 
         SubscribeLocalEvent<DnaLockClothingComponent, ClothingGotEquippedEvent>(OnEquipped);
         SubscribeLocalEvent<DnaLockClothingComponent, ClothingGotUnequippedEvent>(OnUnequipped);
+        SubscribeLocalEvent<DnaLockClothingComponent, DnaLockActiveChangedEvent>(OnLockActiveChanged);
     }
 
     public override void Update(float frameTime)
@@ -38,10 +43,16 @@ public sealed partial class DnaLockClothingSystem : EntitySystem
         base.Update(frameTime);
 
         var curTime = _timing.CurTime;
-        var query = EntityQueryEnumerator<DnaLockClothingActiveComponent, DnaLockClothingComponent>();
-        while (query.MoveNext(out var uid, out var active, out var clothing))
+        var query = EntityQueryEnumerator<DnaLockClothingActiveComponent, DnaLockClothingComponent, DnaLockableComponent>();
+        while (query.MoveNext(out var uid, out var active, out var clothing, out var dnaLock))
         {
             if (TerminatingOrDeleted(active.WearerUid))
+            {
+                RemCompDeferred<DnaLockClothingActiveComponent>(uid);
+                continue;
+            }
+
+            if (_dnaLock.CheckAccess((uid, dnaLock), active.WearerUid, silentFail: true))
             {
                 RemCompDeferred<DnaLockClothingActiveComponent>(uid);
                 continue;
@@ -66,24 +77,40 @@ public sealed partial class DnaLockClothingSystem : EntitySystem
 
     private void OnEquipped(Entity<DnaLockClothingComponent> ent, ref ClothingGotEquippedEvent args)
     {
-        // Access is checked once, on equip. Only taking the item off stops the countdown.
-        if (!TryComp<DnaLockableComponent>(ent, out var dnaLock)
-            || _dnaLock.CheckAccess((ent, dnaLock), args.Wearer, silentFail: true))
-            return;
-
-        var curTime = _timing.CurTime;
-        var active = EnsureComp<DnaLockClothingActiveComponent>(ent);
-        active.WearerUid = args.Wearer;
-        active.ExplodeAt = curTime + ent.Comp.TimeToExplode;
-        active.NextBeepAt = curTime + ent.Comp.BeepInterval;
-
-        var secondsLeft = (int) Math.Ceiling(ent.Comp.TimeToExplode.TotalSeconds);
-        Warn(ent, args.Wearer, ent.Comp, ent.Comp.WarningPopup, secondsLeft);
+        TryStartCountdown(ent, args.Wearer);
     }
 
     private void OnUnequipped(Entity<DnaLockClothingComponent> ent, ref ClothingGotUnequippedEvent args)
     {
         RemComp<DnaLockClothingActiveComponent>(ent);
+    }
+
+    // A lock turned on over clothing that is already worn, including binding it to someone else, must check the current wearer.
+    private void OnLockActiveChanged(Entity<DnaLockClothingComponent> ent, ref DnaLockActiveChangedEvent args)
+    {
+        if (!args.Active
+            || HasComp<DnaLockClothingActiveComponent>(ent)
+            || !_clothing.IsEquipped(ent.Owner)
+            || !_container.TryGetContainingContainer(ent.Owner, out var container))
+            return;
+
+        TryStartCountdown(ent, container.Owner);
+    }
+
+    private void TryStartCountdown(Entity<DnaLockClothingComponent> ent, EntityUid wearer)
+    {
+        if (!TryComp<DnaLockableComponent>(ent, out var dnaLock)
+            || _dnaLock.CheckAccess((ent, dnaLock), wearer, silentFail: true))
+            return;
+
+        var curTime = _timing.CurTime;
+        var active = EnsureComp<DnaLockClothingActiveComponent>(ent);
+        active.WearerUid = wearer;
+        active.ExplodeAt = curTime + ent.Comp.TimeToExplode;
+        active.NextBeepAt = curTime + ent.Comp.BeepInterval;
+
+        var secondsLeft = (int) Math.Ceiling(ent.Comp.TimeToExplode.TotalSeconds);
+        Warn(ent, wearer, ent.Comp, ent.Comp.WarningPopup, secondsLeft);
     }
 
     private void Warn(EntityUid item, EntityUid wearer, DnaLockClothingComponent clothing, LocId message, int secondsLeft)
