@@ -11,6 +11,7 @@ using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Administration.Managers;
+using Content.Server.Preferences.Managers;
 using Content.Shared.CCVar;
 using Content.Shared.Players;
 using Content.Shared.SS220.CCVars;
@@ -29,6 +30,7 @@ public sealed partial class DiscordPlayerManager : IPostInjectInit, IDisposable
     [Dependency] private IServerNetManager _netMgr = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IAdminManager _adminManager = default!;
+    [Dependency] private IServerPreferencesManager _prefsManager = default!;
 
     internal SponsorUsers? CachedSponsorUsers => _cachedSponsorUsers;
 
@@ -165,15 +167,16 @@ public sealed partial class DiscordPlayerManager : IPostInjectInit, IDisposable
                 return;
 
             contentPlayerData.SponsorInfo = info;
+
+            // Status was unknown until now, so loadouts were not stripped. Check them against the real tiers.
+            _prefsManager.RevalidatePreferences(e.Session);
         }
     }
 
     private async Task<DiscordSponsorInfo?> GetSponsorInfo(NetUserId userId)
     {
         if (string.IsNullOrEmpty(_linkApiUrl))
-        {
             return null;
-        }
 
         try
         {
