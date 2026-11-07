@@ -53,7 +53,9 @@ shell-invalid-color-hex = Недопустимый HEX-цвет!
 shell-target-player-does-not-exist = Целевой игрок не существует!
 shell-target-entity-does-not-have-message = Целевая сущность не имеет { $missing }!
 shell-timespan-minutes-must-be-correct = { $span } не является допустимым промежутком времени в минутах.
-shell-argument-must-be-prototype = Аргумент { $index } должен быть ${ prototypeName }!
+# SS220-localization-fix begin
+shell-argument-must-be-prototype = Аргумент { $index } должен быть { $prototype }!
+# SS220-localization-fix end
 shell-argument-number-must-be-between = Аргумент { $index } должен быть числом от { $lower } до { $upper }!
 shell-argument-station-id-invalid = Аргумент { $index } должен быть валидным station id!
 shell-argument-map-id-invalid = Аргумент { $index } должен быть валидным map id!

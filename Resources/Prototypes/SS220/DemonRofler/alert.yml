@@ -8,8 +8,8 @@
   - sprite: /Textures/SS220/DemonRofler/deadscore.rsi
     state: ds_1-3
   maxSeverity: 3
-  name: требуемые поглощения
-  description: Показывает количество поглощений, требуемых для следующего уровня.
+  name: alerts-demon-rofler-deadscore-name
+  description: alerts-demon-rofler-deadscore-desc
   
 - type: alert
   id: DeadscoreStage2
@@ -31,5 +31,5 @@
   - sprite: /Textures/SS220/DemonRofler/deadscore.rsi
     state: ds_2-8
   maxSeverity: 8
-  name: требуемые поглощения
-  description: Показывает количество поглощений, требуемых для следующего уровня.
+  name: alerts-demon-rofler-deadscore-name
+  description: alerts-demon-rofler-deadscore-desc

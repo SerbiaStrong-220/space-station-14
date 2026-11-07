@@ -530,7 +530,9 @@ namespace Content.Server.Voting.Managers
                         _adminLogger.Add(LogType.Vote, LogImpact.Extreme, $"Votekick for {located.Username} succeeded:  Yes: {votesYes} / No: {votesNo}. Yes: {yesVotersString} / No: {noVotersString}");
                         _chatManager.DispatchServerAnnouncement(Loc.GetString("ui-vote-votekick-success", ("target", targetEntityName), ("reason", reason)));
 
-                        if (!Enum.TryParse(_cfg.GetCVar(CCVars.VotekickBanDefaultSeverity), out NoteSeverity severity))
+                        // SS220-localization-fix
+                        if (!Enum.TryParse(_cfg.GetCVar(CCVars.VotekickBanDefaultSeverity), ignoreCase: true,
+                                out NoteSeverity severity))
                         {
                             _logManager.GetSawmill("admin.votekick")
                                 .Warning("Votekick ban severity could not be parsed from config! Defaulting to high.");

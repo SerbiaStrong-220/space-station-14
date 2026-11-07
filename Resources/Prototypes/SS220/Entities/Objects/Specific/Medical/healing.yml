@@ -12,7 +12,7 @@
   - type: Sprite
     state: pill16
   - type: Label
-    currentLabel: пакс 10u
+    currentLabel: label-pill-pax-10u
   - type: SolutionContainerManager
     solutions:
       food:
@@ -33,7 +33,7 @@
   - type: Sprite
     state: pill15
   - type: Label
-    currentLabel: хлоралгидрат 10u
+    currentLabel: label-pill-chloral-hydrate-10u
   - type: SolutionContainerManager
     solutions:
       food:
