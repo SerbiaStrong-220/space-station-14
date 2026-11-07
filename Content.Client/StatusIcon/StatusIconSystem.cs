@@ -74,11 +74,12 @@ public sealed class StatusIconSystem : SharedStatusIconSystem
     {
         var viewer = _playerManager.LocalSession?.AttachedEntity;
 
+        // SS220 ghost-hud-settings begin
+        if (HasComp<GhostComponent>(viewer) && data.VisibleToGhosts)
+            return true;
+        // SS220 ghost-hud-settings end
         // Always show our icons to our entity
         if (viewer == ent.Owner)
-            return true;
-
-        if (data.VisibleToGhosts && HasComp<GhostComponent>(viewer))
             return true;
 
         if (data.HideInContainer && (ent.Comp.Flags & MetaDataFlags.InContainer) != 0)

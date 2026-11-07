@@ -23,7 +23,7 @@ public sealed partial class GhostHudSystem : EntitySystem
     {
         foreach (var setting in ent.Comp.Huds)
         {
-            ApplyHud(ent.Owner, setting);
+            ApplyHud(ent, setting);
         }
     }
 
@@ -49,22 +49,22 @@ public sealed partial class GhostHudSystem : EntitySystem
                 return;
 
             setting.Enabled = args.Enabled;
-            ApplyHud(ent.Owner, setting);
+            ApplyHud(ent, setting);
             UpdateUi(ent);
             return;
         }
     }
 
-    private void ApplyHud(EntityUid uid, GhostHudSetting setting)
+    private void ApplyHud(Entity<GhostHudSettingsComponent> ent, GhostHudSetting setting)
     {
         var prototype = _prototype.Index(setting.Id);
         if (!setting.Enabled)
         {
-            EntityManager.RemoveComponents(uid, prototype.Components);
+            EntityManager.RemoveComponents(ent.Owner, prototype.Components);
             return;
         }
 
-        EntityManager.AddComponents(uid, prototype.Components);
+        EntityManager.AddComponents(ent.Owner, prototype.Components);
     }
 
     private void UpdateUi(Entity<GhostHudSettingsComponent> ent)
