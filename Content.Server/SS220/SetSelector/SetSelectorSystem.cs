@@ -58,7 +58,6 @@ public sealed partial class SetSelectorSystem : SharedSetSelectorSystem
             _hands.TryPickupAnyHand(args.Actor, spawned);
         }
 
-        // The selector is deleted right away, so the sound is played at its coordinates instead of being attached to it.
         _audio.PlayPvs(selector.Comp.ApproveSound, Transform(selector.Owner).Coordinates);
         QueueDel(selector);
     }
