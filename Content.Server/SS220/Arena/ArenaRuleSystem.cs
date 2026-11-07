@@ -11,6 +11,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.SS220.AdmemeEvents.EventRole;
+using Content.Shared.SS220.Arena;
 using Content.Shared.SS220.Arena.Lobby;
 using Content.Shared.Station;
 using Robust.Shared.Audio;

@@ -37,6 +37,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Content.Server.SS220.MindSlave;
 using Content.Shared.SS220.Experience;
+using Content.Shared.SS220.Arena;
 
 namespace Content.Server.Antag;
 
@@ -614,6 +615,9 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
             return true;
 
         if (_arrivals.IsOnArrivals((entity.Value, null)))
+            return false;
+
+        if (HasComp<ArenaParticipantComponent>(entity)) // SS220-arena-antag-fix
             return false;
 
         if (!def.AllowNonHumans && !HasComp<HumanoidProfileComponent>(entity))
