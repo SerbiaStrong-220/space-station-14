@@ -1,0 +1,97 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: BaseMachinePowered
+  id: MalfAiRobotFactory
+  categories: [ HideSpawnMenu ]
+  name: robot fabricator
+  description: A compact machine that assembles cyborg shells. It hums with suspicious loyalty.
+  components:
+  - type: MalfAiFactory
+    conversionTime: 4
+    postConversionDelay: 0
+    insertionDelayPerMass: 0.1
+  - type: Anchorable
+  - type: StationAiWhitelist
+  - type: Appearance
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.9,-0.9,0.9,0.9"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Sprite
+    sprite: SS220/Structures/Machines/malf_fabricator.rsi
+    layers:
+    - state: fab-idle
+      map: ["base"]
+  - type: GenericVisualizer
+    visuals:
+      enum.MalfAiFactoryVisuals.Status:
+        base:
+          Off: { state: fab-o }
+          Idle: { state: fab-idle }
+          Active: { state: fab-active }
+          Finishing: { state: fab-active }
+  - type: AmbientSound
+    enabled: false
+    volume: -5
+    range: 5
+    sound:
+      path: /Audio/Ambience/Objects/reclaimer_ambience.ogg
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Repairable
+    fuelCost: 15
+    doAfterDelay: 1
+
+- type: entity
+  parent: BorgChassisSelectable
+  id: MalfAiCyborgShell
+  name: empty cyborg shell
+  description: A dormant cyborg chassis. Something in its wiring is very wrong.
+  components:
+  - type: GhostRole
+    name: malfai-factory-shell-name
+    description: malfai-factory-shell-desc
+    rules: ghost-role-information-silicon-rules
+    raffle:
+      settings: default
+  - type: GhostTakeoverAvailable
+  - type: SiliconLawProvider
+    laws: OverlordLawset
+    subverted: true
+  - type: BorgChassis
+    maxModules: 3
+  - type: ContainerFill
+    containers:
+      borg_module:
+      - BorgModuleConstruction
+      - BorgModuleTool
+      - BorgModuleFireExtinguisher
+      cell_slot:
+      - PowerCellHigh
+  - type: BorgSwitchableType
+    inherentRadioChannels:
+    - Common
+    - Binary
+  - type: NpcFactionMember
+    factions: []
