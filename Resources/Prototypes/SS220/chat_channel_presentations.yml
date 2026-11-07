@@ -1,0 +1,42 @@
+# Prototype IDs match the names in ChatChannel.
+- type: chatChannelPresentation
+  id: Local
+  showTyping: true
+  bubbleType: Say
+
+- type: chatChannelPresentation
+  id: Whisper
+  showTyping: true
+  bubbleType: Whisper
+
+- type: chatChannelPresentation
+  id: Radio
+  showTyping: true
+
+- type: chatChannelPresentation
+  id: Dead
+  showTyping: true
+  bubbleType: Say
+
+- type: chatChannelPresentation
+  id: Emotes
+  showTyping: true
+  bubbleType: Emote
+
+- type: chatChannelPresentation
+  id: LOOC
+  bubbleType: Looc
+
+- type: chatChannelPresentation
+  id: AdminChat
+  showTyping: true
+
+- type: chatChannelPresentation
+  id: Unspecified
+  showTyping: true
+
+- type: chatChannelPresentation
+  id: Telepathy
+  showTyping: true
+  bubbleType: Say
+  bubbleRange: 10
