@@ -1,4 +1,5 @@
 using Content.Shared.Inventory;
+using Content.Shared.SS220.SiliconComponents;
 
 namespace Content.Shared.Wieldable;
 

@@ -1,0 +1,13 @@
+- type: alert
+  id: Malfunctions
+  icons:
+  - sprite: SS220/Interface/Alerts/crit_malfunctions.rsi
+    state: malf0
+  - sprite: SS220/Interface/Alerts/crit_malfunctions.rsi
+    state: malf1
+  - sprite: SS220/Interface/Alerts/crit_malfunctions.rsi
+    state: malf2
+  - sprite: SS220/Interface/Alerts/crit_malfunctions.rsi
+    state: malf3
+  name: alerts-malfunctions
+  description: alerts-malfunctions-desc

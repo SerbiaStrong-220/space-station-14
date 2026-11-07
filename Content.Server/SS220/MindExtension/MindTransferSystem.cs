@@ -14,7 +14,7 @@ public partial class MindExtensionSystem //MindTransferSystem
     /// <param name="oldEntity">The entity the player is leaving.</param>
     /// <param name="newEntity">The entity the player is entering.</param>
     /// <param name="player">The player's unique identifier.</param>
-    public void TransferExtension(EntityUid? oldEntity, EntityUid? newEntity, NetUserId? player)
+    public void TransferExtension(EntityUid? oldEntity, EntityUid? newEntity, NetUserId? player, bool createTrail = true)
     {
         if (player is null)
             return;
@@ -40,7 +40,10 @@ public partial class MindExtensionSystem //MindTransferSystem
         }
 
         data.CurrentBody = newEntity;
-        ChangeOrAddTrailPoint(data, newEntity.Value, false);
+
+        if (createTrail)
+            ChangeOrAddTrailPoint(data, newEntity.Value, false);
+
         SetRespawnTimer(data, newEntity.Value, player.Value);
 
         EnsureComp<MindExtensionContainerComponent>(newEntity.Value);
