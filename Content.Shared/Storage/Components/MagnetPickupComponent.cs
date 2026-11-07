@@ -28,4 +28,8 @@ public sealed partial class MagnetPickupComponent : Component
     [DataField, AutoNetworkedField]
     public bool WorksOutsideSlot = false;
     //SS220-OreBagBorgMagnet end
+    //SS220-MagnetToggle begin
+    [DataField, AutoNetworkedField]
+    public bool Enabled = true;
+    //SS220-MagnetToggle end
 }
