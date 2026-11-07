@@ -1,14 +1,14 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 using Robust.Shared.GameStates;
 
-namespace Content.Shared.SS220.EyeOffsetInCombatMode;
+namespace Content.Shared.SS220.ToggleableEyeOffset;
 
 /// <summary>
 /// Does what it's name says - modifies the offset when in combat mode
 /// </summary>
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class EyeOffsetInCombatModeComponent : Component
+public sealed partial class ToggleableEyeOffsetComponent : Component
 {
     /// <summary>
     /// The amount the view will be displaced when the cursor is positioned at/beyond the max offset distance.

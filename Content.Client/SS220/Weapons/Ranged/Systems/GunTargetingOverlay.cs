@@ -73,7 +73,9 @@ public sealed partial class GunTargetingOverlay : Overlay
             overlayColor = Color.Orange;
 
         // Show current angle
-        worldHandle.DrawCircle(mapPos.Position + currentAngle.RotateVec(direction), 0.08f, overlayColor, true);
-        worldHandle.DrawCircle(mapPos.Position + (-currentAngle).RotateVec(direction), 0.08f, overlayColor, true);
+
+        worldHandle.DrawCircle(mousePos.Position, 0.05f, overlayColor, true);
+        worldHandle.DrawCircle(mapPos.Position + currentAngle.RotateVec(direction), 0.05f, overlayColor, true);
+        worldHandle.DrawCircle(mapPos.Position + (-currentAngle).RotateVec(direction), 0.05f, overlayColor, true);
     }
 }

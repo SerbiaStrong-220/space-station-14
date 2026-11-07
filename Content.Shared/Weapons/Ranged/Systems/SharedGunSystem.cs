@@ -27,6 +27,7 @@ using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -70,6 +71,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
     [Dependency] protected readonly TagSystem TagSystem = default!;
     [Dependency] protected readonly ThrowingSystem ThrowingSystem = default!;
+    [Dependency] private readonly IConfigurationManager _cfg = default!; //SS220 weapon overhaul
 
     /// <summary>
     /// Default projectile speed
@@ -127,7 +129,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         SubscribeLocalEvent<GunComponent, GetVerbsEvent<Verb>>(OnGetVerbs);
         SubscribeLocalEvent<SuicideDoAfterEvent>(OnDoSuicideComplete);
         // SS220-new-feature kus end
-        SubscribeLocalEvent<GunComponent, GunCycleRequestEvent>(OnGunUsed);//SS220 weapon overhaul
+        SubscribeAllEvent<GunCycleRequestEvent>(OnGunUsed);//SS220 weapon overhaul
     }
 
     private void OnMapInit(Entity<GunComponent> gun, ref MapInitEvent args)
