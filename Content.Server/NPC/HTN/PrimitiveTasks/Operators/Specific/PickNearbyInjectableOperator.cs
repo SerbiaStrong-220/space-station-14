@@ -77,6 +77,8 @@ public sealed partial class PickNearbyInjectableOperator : HTNOperator
         if (!blackboard.TryGetValue<IEnumerable<KeyValuePair<EntityUid, float>>>("TargetList", out var patients, _entManager))
             return (false, null);
 
+        var isEmagged = _emaggedQuery.HasComponent(owner); //ss220-FixMedibot
+
         foreach (var (entity, _) in patients)
         {
             if (_mobState.TryGetComponent(entity, out var state) &&
@@ -103,7 +105,6 @@ public sealed partial class PickNearbyInjectableOperator : HTNOperator
                 // note: this and the actual injecting don't check for specific damage types so for example,
                 // radiation damage will trigger injection but the tricordrazine won't heal it.
                 //ss220-FixMedibot begin
-                var isEmagged = _emaggedQuery.HasComponent(owner);
                 if (!treatment.IsValid(_damageable.GetPositiveDamage((entity, damage)), isEmagged, _proto))
                     continue;
                 //ss220-FixMedibot end
