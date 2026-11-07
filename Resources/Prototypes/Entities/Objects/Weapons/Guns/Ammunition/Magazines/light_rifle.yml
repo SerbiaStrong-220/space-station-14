@@ -1,7 +1,7 @@
 # Empty mags
 - type: entity
   abstract: true
-  parent: [ BaseItem, BaseSecurityContraband ]
+  parent: [ BaseMagazine, BaseSecurityContraband ] # SS220-place-and-pickup-sounds-2
   id: BaseMagazineLightRifle
   name: "magazine (.30 rifle)"
   components:

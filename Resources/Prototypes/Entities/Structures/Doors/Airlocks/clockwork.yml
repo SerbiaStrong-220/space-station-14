@@ -1,5 +1,5 @@
 - type: entity
-  parent: Airlock
+  parent: [BaseAirlockUniqueStates, Airlock] #SS220-airlock-common-states
   id: PinionAirlock
   suffix: Pinion, Clockwork
   components:
@@ -14,7 +14,7 @@
     group: null
 
 - type: entity
-  parent: AirlockGlass
+  parent: [BaseAirlockUniqueStates, AirlockGlass] #SS220-airlock-common-states
   id: PinionAirlockGlass
   suffix: Pinion, Clockwork
   components:

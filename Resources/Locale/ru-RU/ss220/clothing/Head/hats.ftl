@@ -148,3 +148,7 @@ ent-ClothingHeadBigCapCommissar = фуражка комиссара
 ent-ClothingHeadHatFollower = шляпа последователя
     .desc = Настало время небес.
     .suffix = За время в игре
+
+ent-ClothingHeadHatMimeHarlequin = колпак готического арлекина
+    .desc = Высокий колпак как символ успеха и признания.
+    .suffix = За время в игре
