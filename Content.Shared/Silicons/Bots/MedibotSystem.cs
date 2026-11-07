@@ -111,8 +111,8 @@ public sealed class MedibotSystem : EntitySystem
             return false;
         }
 
-        var damage = _damageable.GetPositiveDamage((target, damageable)); //ss220-FixMedibot
         //ss220 fix medibot start
+        var damage = _damageable.GetPositiveDamage((target, damageable));
         var isEmagged = HasComp<EmaggedComponent>(medibot);
         if (damage.Empty && !isEmagged)
         {
