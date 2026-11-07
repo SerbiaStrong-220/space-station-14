@@ -1,6 +1,6 @@
 - type: ttsVoice
   id: Raynor
-  name: Raynor
+  name: Рейнор
   speaker: raynor
   provider: Silero
   categories: [ StartCraft ]
@@ -13,7 +13,7 @@
 
 - type: ttsVoice
   id: Kerrigan
-  name: Kerrigan
+  name: Керриган
   speaker: kerrigan
   provider: Silero
   categories: [ StartCraft ]
@@ -22,7 +22,7 @@
 
 - type: ttsVoice
   id: Tychus
-  name: Tychus
+  name: Тайкус
   speaker: tychus
   provider: Silero
   categories: [ StartCraft ]
@@ -35,7 +35,7 @@
 
 - type: ttsVoice
   id: Tosh
-  name: Tosh
+  name: Тош
   speaker: tosh
   provider: Silero
   categories: [ StartCraft ]
@@ -48,7 +48,7 @@
 
 - type: ttsVoice
   id: Stetmann
-  name: Stetmann
+  name: Штеттманн
   speaker: stetmann
   provider: Silero
   categories: [ StartCraft ]
@@ -57,7 +57,7 @@
 
 - type: ttsVoice
   id: Hanson
-  name: Hanson
+  name: Хэнсон
   speaker: hanson
   provider: Silero
   categories: [ StartCraft ]
@@ -66,7 +66,7 @@
 
 - type: ttsVoice
   id: Swann
-  name: Swann
+  name: Сван
   speaker: swann
   provider: Silero
   categories: [ StartCraft ]
@@ -79,7 +79,7 @@
 
 - type: ttsVoice
   id: Hill
-  name: Hill
+  name: Хилл
   speaker: hill
   provider: Silero
   categories: [ StartCraft ]
@@ -92,7 +92,7 @@
 
 - type: ttsVoice
   id: Valerian
-  name: Valerian
+  name: Валериан
   speaker: valerian
   provider: Silero
   categories: [ StartCraft ]

@@ -1,6 +1,6 @@
 - type: ttsVoice
   id: Huber
-  name: Huber
+  name: Хубер
   speaker: huber
   provider: Silero
   categories: [ EVILISLANDS ]
@@ -13,7 +13,7 @@
 
 - type: ttsVoice
   id: Guru
-  name: Guru
+  name: Гуру
   speaker: guru
   provider: Silero
   categories: [ EVILISLANDS ]
@@ -26,7 +26,7 @@
 
 - type: ttsVoice
   id: AllElder
-  name: All_elder
+  name: Всеобщий старейшина
   speaker: all_elder
   provider: Silero
   categories: [ EVILISLANDS ]
@@ -39,7 +39,7 @@
 
 - type: ttsVoice
   id: Nsheriff
-  name: Nsheriff
+  name: Шериф (северный)
   speaker: nsheriff
   provider: Silero
   categories: [ EVILISLANDS ]
@@ -52,7 +52,7 @@
 
 - type: ttsVoice
   id: Orcc
-  name: Orcc
+  name: Орк
   speaker: orcc
   provider: Silero
   categories: [ EVILISLANDS ]
@@ -65,7 +65,7 @@
 
 - type: ttsVoice
   id: Clerk
-  name: Clerk
+  name: Клерк
   speaker: clerk
   provider: Silero
   categories: [ EVILISLANDS ]
@@ -78,7 +78,7 @@
 
 - type: ttsVoice
   id: Witch
-  name: Witch
+  name: Ведьма
   speaker: witch
   provider: Silero
   categories: [ EVILISLANDS ]
@@ -91,7 +91,7 @@
 
 - type: ttsVoice
   id: Deva
-  name: Deva
+  name: Дева
   speaker: deva
   provider: Silero
   categories: [ EVILISLANDS ]
@@ -104,7 +104,7 @@
 
 - type: ttsVoice
   id: Goblin
-  name: Goblin
+  name: Гоблин
   speaker: goblin
   provider: Silero
   categories: [ EVILISLANDS ]
@@ -116,7 +116,7 @@
       sponsorTier: BigShlopa
 - type: ttsVoice
   id: Kapitan
-  name: Kapitan
+  name: Капитан
   speaker: kapitan
   provider: Silero
   categories: [ EVILISLANDS ]
@@ -129,7 +129,7 @@
 
 - type: ttsVoice
   id: Karh
-  name: Karh
+  name: Карх
   speaker: karh
   provider: Silero
   categories: [ EVILISLANDS ]
@@ -142,7 +142,7 @@
 
 - type: ttsVoice
   id: Sheriff
-  name: Sheriff
+  name: Шериф
   speaker: sheriff
   provider: Silero
   categories: [ EVILISLANDS ]
@@ -155,7 +155,7 @@
 
 - type: ttsVoice
   id: Trapper
-  name: Trapper
+  name: Охотник-зверолов
   speaker: trapper
   provider: Silero
   categories: [ EVILISLANDS ]
@@ -168,7 +168,7 @@
 
 - type: ttsVoice
   id: Glav
-  name: Glav
+  name: Главарь
   speaker: glav
   provider: Silero
   categories: [ EVILISLANDS ]
@@ -181,7 +181,7 @@
 
 - type: ttsVoice
   id: Mthief
-  name: Mthief
+  name: Вор-мужчина
   speaker: mthief
   provider: Silero
   categories: [ EVILISLANDS ]
@@ -194,7 +194,7 @@
 
 - type: ttsVoice
   id: Vor
-  name: Vor
+  name: Вор
   speaker: vor
   provider: Silero
   categories: [ EVILISLANDS ]
@@ -207,7 +207,7 @@
 
 - type: ttsVoice
   id: Junboy
-  name: Junboy
+  name: Юнец
   speaker: junboy
   provider: Silero
   categories: [ EVILISLANDS ]
@@ -220,7 +220,7 @@
 
 - type: ttsVoice
   id: Shopper
-  name: Shopper
+  name: Торговец
   speaker: shopper
   provider: Silero
   categories: [ EVILISLANDS ]
@@ -233,7 +233,7 @@
 
 - type: ttsVoice
   id: Iz
-  name: Iz
+  name: Из
   speaker: iz
   provider: Silero
   categories: [ EVILISLANDS ]
@@ -246,7 +246,7 @@
 
 - type: ttsVoice
   id: Nekro
-  name: Nekro
+  name: Некромант
   speaker: nekro
   provider: Silero
   categories: [ EVILISLANDS ]
@@ -259,7 +259,7 @@
 
 - type: ttsVoice
   id: Hwleader
-  name: Hwleader
+  name: Предводитель
   speaker: hwleader
   provider: Silero
   categories: [ EVILISLANDS ]
@@ -272,7 +272,7 @@
 
 - type: ttsVoice
   id: Hero
-  name: Hero
+  name: Герой
   speaker: hero
   provider: Silero
   categories: [ EVILISLANDS ]
@@ -285,7 +285,7 @@
 
 - type: ttsVoice
   id: Smith
-  name: Smith
+  name: Кузнец
   speaker: smith
   provider: Silero
   categories: [ EVILISLANDS ]
@@ -298,7 +298,7 @@
 
 - type: ttsVoice
   id: Magess
-  name: Magess
+  name: Волшебница
   speaker: magess
   provider: Silero
   categories: [ EVILISLANDS ]
@@ -307,7 +307,7 @@
 
 - type: ttsVoice
   id: Nalo
-  name: Nalo
+  name: Нало
   speaker: nalo
   provider: Silero
   categories: [ EVILISLANDS ]
@@ -320,7 +320,7 @@
 
 - type: ttsVoice
   id: Ycf
-  name: Ycf
+  name: Юноша-фермер
   speaker: ycf
   provider: Silero
   categories: [ EVILISLANDS ]
@@ -333,7 +333,7 @@
 
 - type: ttsVoice
   id: Oldnekro
-  name: Oldnekro
+  name: Старый некромант
   speaker: oldnekro
   provider: Silero
   categories: [ EVILISLANDS ]
@@ -346,7 +346,7 @@
 
 - type: ttsVoice
   id: Zak
-  name: Zak
+  name: Зак
   speaker: zak
   provider: Silero
   categories: [ EVILISLANDS ]

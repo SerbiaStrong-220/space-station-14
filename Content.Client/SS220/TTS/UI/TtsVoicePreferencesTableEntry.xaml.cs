@@ -73,6 +73,14 @@ public sealed partial class TtsVoicePreferencesTableEntry : BoxContainer
         RefreshPlayButton();
     }
 
+    /// <summary>
+    /// Marks the entry as the one whose voice is actually used for speech.
+    /// </summary>
+    public void SetActive(bool active)
+    {
+        ActiveLabel.Visible = active;
+    }
+
     public void SetHighlightColor(Color? color)
     {
         if (color == null)

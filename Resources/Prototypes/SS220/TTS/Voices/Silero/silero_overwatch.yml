@@ -1,6 +1,6 @@
 - type: ttsVoice
   id: Zenyatta
-  name: Zenyatta
+  name: Дзенъятта
   speaker: zenyatta
   provider: Silero
   categories: [ Overwatch ]
@@ -13,7 +13,7 @@
 
 - type: ttsVoice
   id: Kiriko
-  name: Kiriko
+  name: Кирико
   speaker: kiriko
   provider: Silero
   categories: [ Overwatch ]
@@ -26,7 +26,7 @@
 
 - type: ttsVoice
   id: Hanzo
-  name: Hanzo
+  name: Хандзо
   speaker: hanzo
   provider: Silero
   categories: [ Overwatch ]
@@ -39,7 +39,7 @@
 
 - type: ttsVoice
   id: Roadhog
-  name: Roadhog
+  name: Турбосвин
   speaker: roadhog
   provider: Silero
   categories: [ Overwatch ]
@@ -52,7 +52,7 @@
 
 - type: ttsVoice
   id: Sigma
-  name: Sigma
+  name: Сигма
   speaker: sigma
   provider: Silero
   categories: [ Overwatch ]
@@ -65,7 +65,7 @@
 
 - type: ttsVoice
   id: Soldier76
-  name: Soldier_76
+  name: Солдат-76
   speaker: soldier_76
   provider: Silero
   categories: [ Overwatch ]
@@ -78,7 +78,7 @@
 
 - type: ttsVoice
   id: Junkrat
-  name: Junkrat
+  name: Крысавчик
   speaker: junkrat
   provider: Silero
   categories: [ Overwatch ]
@@ -91,7 +91,7 @@
 
 - type: ttsVoice
   id: Tracer
-  name: Tracer
+  name: Трейсер
   speaker: tracer
   provider: Silero
   categories: [ Overwatch ]
@@ -104,7 +104,7 @@
 
 - type: ttsVoice
   id: Genji
-  name: Genji
+  name: Гэндзи
   speaker: genji
   provider: Silero
   categories: [ Overwatch ]
@@ -117,7 +117,7 @@
 
 - type: ttsVoice
   id: Echo
-  name: Echo
+  name: Эхо
   speaker: echo
   provider: Silero
   categories: [ Overwatch ]
@@ -130,7 +130,7 @@
 
 - type: ttsVoice
   id: Sojourn
-  name: Sojourn
+  name: Соджорн
   speaker: sojourn
   provider: Silero
   categories: [ Overwatch ]
@@ -143,7 +143,7 @@
 
 - type: ttsVoice
   id: Winston
-  name: Winston
+  name: Уинстон
   speaker: winston
   provider: Silero
   categories: [ Overwatch ]
@@ -156,7 +156,7 @@
 
 - type: ttsVoice
   id: Reaper
-  name: Reaper
+  name: Жнец
   speaker: reaper
   provider: Silero
   categories: [ Overwatch ]
@@ -169,7 +169,7 @@
 
 - type: ttsVoice
   id: TrainingRobot
-  name: Training_robot
+  name: Тренировочный робот
   speaker: training_robot
   provider: Silero
   categories: [ Overwatch ]
@@ -178,7 +178,7 @@
 
 - type: ttsVoice
   id: Moira
-  name: Moira
+  name: Мойра
   speaker: moira
   provider: Silero
   categories: [ Overwatch ]
@@ -191,7 +191,7 @@
 
 - type: ttsVoice
   id: Ashe
-  name: Ashe
+  name: Эш
   speaker: ashe
   provider: Silero
   categories: [ Overwatch ]
@@ -204,7 +204,7 @@
 
 - type: ttsVoice
   id: Brigitte
-  name: Brigitte
+  name: Бригитта
   speaker: brigitte
   provider: Silero
   categories: [ Overwatch ]
@@ -217,7 +217,7 @@
 
 - type: ttsVoice
   id: Mercy
-  name: Mercy
+  name: Ангел
   speaker: mercy
   provider: Silero
   categories: [ Overwatch ]
@@ -230,7 +230,7 @@
 
 - type: ttsVoice
   id: LucioOv
-  name: Lucio_ov
+  name: Лусио
   speaker: lucio_ov
   provider: Silero
   categories: [ Overwatch ]
@@ -243,7 +243,7 @@
 
 - type: ttsVoice
   id: DvaOv
-  name: Dva_ov
+  name: Д.Ва
   speaker: dva_ov
   provider: Silero
   categories: [ Overwatch ]
@@ -256,7 +256,7 @@
 
 - type: ttsVoice
   id: Symmetra
-  name: Symmetra
+  name: Симметра
   speaker: symmetra
   provider: Silero
   categories: [ Overwatch ]
@@ -269,7 +269,7 @@
 
 - type: ttsVoice
   id: Zarya
-  name: Zarya
+  name: Заря
   speaker: zarya
   provider: Silero
   categories: [ Overwatch ]
@@ -282,7 +282,7 @@
 
 - type: ttsVoice
   id: Cassidy
-  name: Cassidy
+  name: Кэссиди
   speaker: cassidy
   provider: Silero
   categories: [ Overwatch ]
@@ -295,7 +295,7 @@
 
 - type: ttsVoice
   id: Baptiste
-  name: Baptiste
+  name: Батист
   speaker: baptiste
   provider: Silero
   categories: [ Overwatch ]
@@ -308,7 +308,7 @@
 
 - type: ttsVoice
   id: JunkerQueen
-  name: Junker_queen
+  name: Королева свалки
   speaker: junker_queen
   provider: Silero
   categories: [ Overwatch ]
@@ -321,7 +321,7 @@
 
 - type: ttsVoice
   id: Doomfist
-  name: Doomfist
+  name: Роковой кулак
   speaker: doomfist
   provider: Silero
   categories: [ Overwatch ]
@@ -334,7 +334,7 @@
 
 - type: ttsVoice
   id: Pharah
-  name: Pharah
+  name: Фарра
   speaker: pharah
   provider: Silero
   categories: [ Overwatch ]
@@ -347,7 +347,7 @@
 
 - type: ttsVoice
   id: Sombra
-  name: Sombra
+  name: Сомбра
   speaker: sombra
   provider: Silero
   categories: [ Overwatch ]
@@ -360,7 +360,7 @@
 
 - type: ttsVoice
   id: Ana
-  name: Ana
+  name: Ана
   speaker: ana
   provider: Silero
   categories: [ Overwatch ]
@@ -373,7 +373,7 @@
 
 - type: ttsVoice
   id: Widowmaker
-  name: Widowmaker
+  name: Роковая вдова
   speaker: widowmaker
   provider: Silero
   categories: [ Overwatch ]
@@ -386,7 +386,7 @@
 
 - type: ttsVoice
   id: WreckingBall
-  name: Wrecking_Ball
+  name: Шар-разрушитель
   speaker: wrecking_ball
   provider: Silero
   categories: [ Overwatch ]
@@ -395,7 +395,7 @@
 
 - type: ttsVoice
   id: Tank
-  name: Tank
+  name: Танк
   speaker: tank
   provider: Silero
   categories: [ Overwatch ]
@@ -404,7 +404,7 @@
 
 - type: ttsVoice
   id: Torbjorn
-  name: Torbjorn
+  name: Торбьорн
   speaker: torbjorn
   provider: Silero
   categories: [ Overwatch ]
@@ -413,7 +413,7 @@
 
 - type: ttsVoice
   id: Reinhardt
-  name: Reinhardt
+  name: Райнхардт
   speaker: reinhardt
   provider: Silero
   categories: [ Overwatch ]
@@ -422,7 +422,7 @@
 
 - type: ttsVoice
   id: Orisa
-  name: Orisa
+  name: Ориса
   speaker: orisa
   provider: Silero
   categories: [ Overwatch ]
@@ -431,7 +431,7 @@
 
 - type: ttsVoice
   id: Mei
-  name: Mei
+  name: Мэй
   speaker: mei
   provider: Silero
   categories: [ Overwatch ]

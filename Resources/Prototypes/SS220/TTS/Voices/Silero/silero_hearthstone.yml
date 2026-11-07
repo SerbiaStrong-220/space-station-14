@@ -1,6 +1,6 @@
 - type: ttsVoice
   id: Squeamlish
-  name: Squeamlish
+  name: Сквимлиш
   speaker: squeamlish
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -13,7 +13,7 @@
 
 - type: ttsVoice
   id: Dagg
-  name: Dagg
+  name: Дагг
   speaker: dagg
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -26,7 +26,7 @@
 
 - type: ttsVoice
   id: Brukan
-  name: Brukan
+  name: Брукан
   speaker: brukan
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -39,7 +39,7 @@
 
 - type: ttsVoice
   id: Bolan
-  name: Bolan
+  name: Болан
   speaker: bolan
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -52,7 +52,7 @@
 
 - type: ttsVoice
   id: Goya
-  name: Goya
+  name: Гойя
   speaker: goya
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -65,7 +65,7 @@
 
 - type: ttsVoice
   id: Stargazer
-  name: Stargazer
+  name: Звездочёт
   speaker: stargazer
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -78,7 +78,7 @@
 
 - type: ttsVoice
   id: Eudora
-  name: Eudora
+  name: Эвдора
   speaker: eudora
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -91,7 +91,7 @@
 
 - type: ttsVoice
   id: Mozaki
-  name: Mozaki
+  name: Мозаки
   speaker: mozaki
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -100,7 +100,7 @@
 
 - type: ttsVoice
   id: Katrana
-  name: Katrana
+  name: Катрана
   speaker: katrana
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -113,7 +113,7 @@
 
 - type: ttsVoice
   id: ValeeraHs
-  name: Valeera_hs
+  name: Валира
   speaker: valeera_hs
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -126,7 +126,7 @@
 
 - type: ttsVoice
   id: Malacrass
-  name: Malacrass
+  name: Малакрасс
   speaker: malacrass
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -139,7 +139,7 @@
 
 - type: ttsVoice
   id: Elise
-  name: Elise
+  name: Элиза
   speaker: elise
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -152,7 +152,7 @@
 
 - type: ttsVoice
   id: Flark
-  name: Flark
+  name: Фларк
   speaker: flark
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -161,7 +161,7 @@
 
 - type: ttsVoice
   id: Rhogi
-  name: Rhogi
+  name: Роги
   speaker: rhogi
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -174,7 +174,7 @@
 
 - type: ttsVoice
   id: Gallywix
-  name: Gallywix
+  name: Галливикс
   speaker: gallywix
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -187,7 +187,7 @@
 
 - type: ttsVoice
   id: Talanji
-  name: Talanji
+  name: Таланджи
   speaker: talanji
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -200,7 +200,7 @@
 
 - type: ttsVoice
   id: DrSezavo
-  name: Dr_sezavo
+  name: Доктор Сезаво
   speaker: dr_sezavo
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -213,7 +213,7 @@
 
 - type: ttsVoice
   id: Tierra
-  name: Tierra
+  name: Тьерра
   speaker: tierra
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -226,7 +226,7 @@
 
 - type: ttsVoice
   id: Zenda
-  name: Zenda
+  name: Зенда
   speaker: zenda
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -239,7 +239,7 @@
 
 - type: ttsVoice
   id: Baechao
-  name: Baechao
+  name: Бэйчао
   speaker: baechao
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -252,7 +252,7 @@
 
 - type: ttsVoice
   id: Lilian
-  name: Lilian
+  name: Лилиан
   speaker: lilian
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -265,7 +265,7 @@
 
 - type: ttsVoice
   id: Aranna
-  name: Aranna
+  name: Аранна
   speaker: aranna
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -278,7 +278,7 @@
 
 - type: ttsVoice
   id: Oshi
-  name: Oshi
+  name: Оши
   speaker: oshi
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -291,7 +291,7 @@
 
 - type: ttsVoice
   id: Norroa
-  name: Norroa
+  name: Норроа
   speaker: norroa
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -304,7 +304,7 @@
 
 - type: ttsVoice
   id: Turalyon
-  name: Turalyon
+  name: Туралион
   speaker: turalyon
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -317,7 +317,7 @@
 
 - type: ttsVoice
   id: Aki
-  name: Aki
+  name: Аки
   speaker: aki
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -330,7 +330,7 @@
 
 - type: ttsVoice
   id: Lunara
-  name: Lunara
+  name: Лунара
   speaker: lunara
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -343,7 +343,7 @@
 
 - type: ttsVoice
   id: Bob
-  name: Bob
+  name: Боб
   speaker: bob
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -356,7 +356,7 @@
 
 - type: ttsVoice
   id: Illucia
-  name: Illucia
+  name: Иллюсия
   speaker: illucia
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -369,7 +369,7 @@
 
 - type: ttsVoice
   id: YrelHs
-  name: Yrel_hs
+  name: Ирель
   speaker: yrel_hs
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -382,7 +382,7 @@
 
 - type: ttsVoice
   id: Fireheart
-  name: Fireheart
+  name: Огненное Сердце
   speaker: fireheart
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -395,7 +395,7 @@
 
 - type: ttsVoice
   id: Lanathel
-  name: Lanathel
+  name: Ланатель
   speaker: lanathel
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -408,7 +408,7 @@
 
 - type: ttsVoice
   id: TyrandeHs
-  name: Tyrande_hs
+  name: Тиранда
   speaker: tyrande_hs
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -421,7 +421,7 @@
 
 - type: ttsVoice
   id: Draemus
-  name: Draemus
+  name: Дреймус
   speaker: draemus
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -434,7 +434,7 @@
 
 - type: ttsVoice
   id: Rasil
-  name: Rasil
+  name: Расиль
   speaker: rasil
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -447,7 +447,7 @@
 
 - type: ttsVoice
   id: Kalec
-  name: Kalec
+  name: Калесгос
   speaker: kalec
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -460,7 +460,7 @@
 
 - type: ttsVoice
   id: Karastamper
-  name: Karastamper
+  name: Караштамп
   speaker: karastamper
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -473,7 +473,7 @@
 
 - type: ttsVoice
   id: George
-  name: George
+  name: Джордж
   speaker: george
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -486,7 +486,7 @@
 
 - type: ttsVoice
   id: Pollark
-  name: Pollark
+  name: Поллард
   speaker: pollark
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -499,7 +499,7 @@
 
 - type: ttsVoice
   id: Stelina
-  name: Stelina
+  name: Стелина
   speaker: stelina
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -512,7 +512,7 @@
 
 - type: ttsVoice
   id: Kasa
-  name: Kasa
+  name: Каса
   speaker: kasa
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -521,7 +521,7 @@
 
 - type: ttsVoice
   id: Whirt
-  name: Whirt
+  name: Вирт
   speaker: whirt
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -534,7 +534,7 @@
 
 - type: ttsVoice
   id: Anarii
-  name: Anarii
+  name: Анария
   speaker: anarii
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -547,7 +547,7 @@
 
 - type: ttsVoice
   id: Ilza
-  name: Ilza
+  name: Илза
   speaker: ilza
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -560,7 +560,7 @@
 
 - type: ttsVoice
   id: Avozu
-  name: Avozu
+  name: Авозу
   speaker: avozu
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -569,7 +569,7 @@
 
 - type: ttsVoice
   id: Jeklik
-  name: Jeklik
+  name: Джеклик
   speaker: jeklik
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -582,7 +582,7 @@
 
 - type: ttsVoice
   id: Zibb
-  name: Zibb
+  name: Зибб
   speaker: zibb
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -595,7 +595,7 @@
 
 - type: ttsVoice
   id: Thrud
-  name: Thrud
+  name: Труд
   speaker: thrud
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -608,7 +608,7 @@
 
 - type: ttsVoice
   id: Isiset
-  name: Isiset
+  name: Изисет
   speaker: isiset
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -621,7 +621,7 @@
 
 - type: ttsVoice
   id: Akazamzarak
-  name: Akazamzarak
+  name: Аказдамзарак
   speaker: akazamzarak
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -630,7 +630,7 @@
 
 - type: ttsVoice
   id: Arha
-  name: Arha
+  name: Арха
   speaker: arha
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -639,7 +639,7 @@
 
 - type: ttsVoice
   id: Aidar
-  name: Aidar
+  name: Айдар
   speaker: aidar
   provider: Silero
   categories: [ Misc ]
@@ -648,7 +648,7 @@
 
 - type: ttsVoice
   id: Baya
-  name: Baya
+  name: Байя
   speaker: baya
   provider: Silero
   categories: [ Misc ]
@@ -657,7 +657,7 @@
 
 - type: ttsVoice
   id: Kseniya
-  name: Kseniya
+  name: Ксения
   speaker: kseniya
   provider: Silero
   categories: [ Misc ]
@@ -666,7 +666,7 @@
 
 - type: ttsVoice
   id: Eugene
-  name: Eugene
+  name: Евгений
   speaker: eugene
   provider: Silero
   categories: [ Misc ]
@@ -675,7 +675,7 @@
 
 - type: ttsVoice
   id: Linzi
-  name: Linzi
+  name: Линзи
   speaker: linzi
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -684,7 +684,7 @@
 
 - type: ttsVoice
   id: Cache
-  name: Cache
+  name: Кэш
   speaker: cache
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -693,7 +693,7 @@
 
 - type: ttsVoice
   id: Cravitz
-  name: Cravitz
+  name: Кравиц
   speaker: cravitz
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -702,7 +702,7 @@
 
 - type: ttsVoice
   id: LadyVashj
-  name: Lady_vashj
+  name: Леди Вайш
   speaker: lady_vashj
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -711,7 +711,7 @@
 
 - type: ttsVoice
   id: Dendrologist
-  name: Dendrologist
+  name: Дендролог
   speaker: dendrologist
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -720,7 +720,7 @@
 
 - type: ttsVoice
   id: Jythiros
-  name: Jythiros
+  name: Джитирос
   speaker: jythiros
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -729,7 +729,7 @@
 
 - type: ttsVoice
   id: Draan
-  name: Draan
+  name: Драан
   speaker: draan
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -738,7 +738,7 @@
 
 - type: ttsVoice
   id: Rikkar
-  name: Rikkar
+  name: Риккар
   speaker: rikkar
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -747,7 +747,7 @@
 
 - type: ttsVoice
   id: Splintergraft
-  name: Splintergraft
+  name: Щепоросток
   speaker: splintergraft
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -756,7 +756,7 @@
 
 - type: ttsVoice
   id: Malchezaar
-  name: Malchezaar
+  name: Малчезар
   speaker: malchezaar
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -765,7 +765,7 @@
 
 - type: ttsVoice
   id: Taskmaster
-  name: Taskmaster
+  name: Надсмотрщик
   speaker: taskmaster
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -774,7 +774,7 @@
 
 - type: ttsVoice
   id: Oxana
-  name: Oxana
+  name: Оксана
   speaker: oxana
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -783,7 +783,7 @@
 
 - type: ttsVoice
   id: Inara
-  name: Inara
+  name: Инара
   speaker: inara
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -792,7 +792,7 @@
 
 - type: ttsVoice
   id: Ivan
-  name: Ivan
+  name: Иван
   speaker: ivan
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -801,7 +801,7 @@
 
 - type: ttsVoice
   id: Kazamon
-  name: Kazamon
+  name: Казамон
   speaker: kazamon
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -810,7 +810,7 @@
 
 - type: ttsVoice
   id: Albin
-  name: Albin
+  name: Альбин
   speaker: albin
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -819,7 +819,7 @@
 
 - type: ttsVoice
   id: Ammunae
-  name: Ammunae
+  name: Аммуна
   speaker: ammunae
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -828,7 +828,7 @@
 
 - type: ttsVoice
   id: Illidara
-  name: Illidara
+  name: Иллидара
   speaker: illidara
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -837,7 +837,7 @@
 
 - type: ttsVoice
   id: Nici
-  name: Nici
+  name: Ници
   speaker: nici
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -846,7 +846,7 @@
 
 - type: ttsVoice
   id: Sinclari
-  name: Sinclari
+  name: Синклари
   speaker: sinclari
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -859,7 +859,7 @@
 
 - type: ttsVoice
   id: Kazakus
-  name: Kazakus
+  name: Казакус
   speaker: kazakus
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -872,7 +872,7 @@
 
 - type: ttsVoice
   id: OlToomba
-  name: Ol_toomba
+  name: "Ол' Тумба"
   speaker: ol_toomba
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -885,7 +885,7 @@
 
 - type: ttsVoice
   id: Moroes
-  name: Moroes
+  name: Мороуз
   speaker: moroes
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -898,7 +898,7 @@
 
 - type: ttsVoice
   id: MaievHs
-  name: Maiev_hs
+  name: Майев
   speaker: maiev_hs
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -911,7 +911,7 @@
 
 - type: ttsVoice
   id: Zentimo
-  name: Zentimo
+  name: Зентимо
   speaker: zentimo
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -924,7 +924,7 @@
 
 - type: ttsVoice
   id: Rastakhan
-  name: Rastakhan
+  name: Растахан
   speaker: rastakhan
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -937,7 +937,7 @@
 
 - type: ttsVoice
   id: Innkeeper
-  name: Innkeeper
+  name: Трактирщик
   speaker: innkeeper
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -950,7 +950,7 @@
 
 - type: ttsVoice
   id: Togwaggle
-  name: Togwaggle
+  name: Тогвоггл
   speaker: toggwaggle
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -963,7 +963,7 @@
 
 - type: ttsVoice
   id: Biggs
-  name: Biggs
+  name: Биггс
   speaker: biggs
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -976,7 +976,7 @@
 
 - type: ttsVoice
   id: Brann
-  name: Brann
+  name: Бранн
   speaker: brann
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -989,7 +989,7 @@
 
 - type: ttsVoice
   id: TekahnBoss
-  name: Tekahn_boss
+  name: Текан (босс)
   speaker: tekahn_boss
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1002,7 +1002,7 @@
 
 - type: ttsVoice
   id: Siamat
-  name: Siamat
+  name: Сиамат
   speaker: siamat
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1015,7 +1015,7 @@
 
 - type: ttsVoice
   id: Omnotron
-  name: Omnotron
+  name: Омнотрон
   speaker: omnotron
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1028,7 +1028,7 @@
 
 - type: ttsVoice
   id: Putricide
-  name: Putricide
+  name: Профессор Мерзоцид
   speaker: putricide
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1041,7 +1041,7 @@
 
 - type: ttsVoice
   id: Khadgar
-  name: Khadgar
+  name: Кадгар
   speaker: khadgar
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1054,7 +1054,7 @@
 
 - type: ttsVoice
   id: Zoie
-  name: Zoie
+  name: Зои
   speaker: zoie
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1067,7 +1067,7 @@
 
 - type: ttsVoice
   id: Azalina
-  name: Azalina
+  name: Азалина
   speaker: azalina
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1080,7 +1080,7 @@
 
 - type: ttsVoice
   id: Chu
-  name: Chu
+  name: Чу
   speaker: chu
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1093,7 +1093,7 @@
 
 - type: ttsVoice
   id: Tekahn
-  name: Tekahn
+  name: Текан
   speaker: tekahn
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1106,7 +1106,7 @@
 
 - type: ttsVoice
   id: Sthara
-  name: Sthara
+  name: Стара
   speaker: sthara
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1119,7 +1119,7 @@
 
 - type: ttsVoice
   id: Dovo
-  name: Dovo
+  name: Дово
   speaker: dovo
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1132,7 +1132,7 @@
 
 - type: ttsVoice
   id: Shaw
-  name: Shaw
+  name: Шоу
   speaker: shaw
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1145,7 +1145,7 @@
 
 - type: ttsVoice
   id: Greymane
-  name: Greymane
+  name: Седогрив
   speaker: greymane
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1158,7 +1158,7 @@
 
 - type: ttsVoice
   id: Willow
-  name: Willow
+  name: Уиллоу
   speaker: willow
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1171,7 +1171,7 @@
 
 - type: ttsVoice
   id: Haro
-  name: Haro
+  name: Харо
   speaker: haro
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1184,7 +1184,7 @@
 
 - type: ttsVoice
   id: Hagatha
-  name: Hagatha
+  name: Хагата
   speaker: hagatha
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1193,7 +1193,7 @@
 
 - type: ttsVoice
   id: Reno
-  name: Reno
+  name: Рено
   speaker: reno
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1206,7 +1206,7 @@
 
 - type: ttsVoice
   id: Ozara
-  name: Ozara
+  name: Озара
   speaker: ozara
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1219,7 +1219,7 @@
 
 - type: ttsVoice
   id: Loti
-  name: Loti
+  name: Лоти
   speaker: loti
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1232,7 +1232,7 @@
 
 - type: ttsVoice
   id: Tarkus
-  name: Tarkus
+  name: Таркус
   speaker: tarkus
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1245,7 +1245,7 @@
 
 - type: ttsVoice
   id: Voone
-  name: Voone
+  name: Вун
   speaker: voone
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1258,7 +1258,7 @@
 
 - type: ttsVoice
   id: Tala
-  name: Tala
+  name: Тала
   speaker: tala
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1267,7 +1267,7 @@
 
 - type: ttsVoice
   id: Edra
-  name: Edra
+  name: Эдра
   speaker: edra
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1280,7 +1280,7 @@
 
 - type: ttsVoice
   id: Myra
-  name: Myra
+  name: Майра
   speaker: myra
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1293,7 +1293,7 @@
 
 - type: ttsVoice
   id: Smiggs
-  name: Smiggs
+  name: Смиггс
   speaker: smiggs
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1306,7 +1306,7 @@
 
 - type: ttsVoice
   id: Timothy
-  name: Timothy
+  name: Тимоти
   speaker: timothy
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1319,7 +1319,7 @@
 
 - type: ttsVoice
   id: Wendy
-  name: Wendy
+  name: Венди
   speaker: wendy
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1332,7 +1332,7 @@
 
 - type: ttsVoice
   id: Hannigan
-  name: Hannigan
+  name: Ханниган
   speaker: hannigan
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1345,7 +1345,7 @@
 
 - type: ttsVoice
   id: Vargoth
-  name: Vargoth
+  name: Варгот
   speaker: vargoth
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1358,7 +1358,7 @@
 
 - type: ttsVoice
   id: Jolene
-  name: Jolene
+  name: Джолин
   speaker: jolene
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1371,7 +1371,7 @@
 
 - type: ttsVoice
   id: Kyriss
-  name: Kyriss
+  name: Кирисс
   speaker: kyriss
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1380,7 +1380,7 @@
 
 - type: ttsVoice
   id: Saurfang
-  name: Saurfang
+  name: Саурфанг
   speaker: saurfang
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1393,7 +1393,7 @@
 
 - type: ttsVoice
   id: Kizi
-  name: Kizi
+  name: Кизи
   speaker: kizi
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1406,7 +1406,7 @@
 
 - type: ttsVoice
   id: Slate
-  name: Slate
+  name: Слейт
   speaker: slate
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1419,7 +1419,7 @@
 
 - type: ttsVoice
   id: Hesutu
-  name: Hesutu
+  name: Хесуту
   speaker: hesutu
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1432,7 +1432,7 @@
 
 - type: ttsVoice
   id: Hancho
-  name: Hancho
+  name: Ханчо
   speaker: hancho
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1445,7 +1445,7 @@
 
 - type: ttsVoice
   id: Gnomenapper
-  name: Gnomenapper
+  name: Гномохват
   speaker: gnomenapper
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1458,7 +1458,7 @@
 
 - type: ttsVoice
   id: Valdera
-  name: Valdera
+  name: Валдера
   speaker: valdera
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1467,7 +1467,7 @@
 
 - type: ttsVoice
   id: Disidra
-  name: Disidra
+  name: Дисидра
   speaker: disidra
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1480,7 +1480,7 @@
 
 - type: ttsVoice
   id: Omu
-  name: Omu
+  name: Ому
   speaker: omu
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1493,7 +1493,7 @@
 
 - type: ttsVoice
   id: Floop
-  name: Floop
+  name: Флуп
   speaker: floop
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1506,7 +1506,7 @@
 
 - type: ttsVoice
   id: Belloc
-  name: Belloc
+  name: Беллок
   speaker: belloc
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1519,7 +1519,7 @@
 
 - type: ttsVoice
   id: Xurios
-  name: Xurios
+  name: Ксуриос
   speaker: xurios
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1532,7 +1532,7 @@
 
 - type: ttsVoice
   id: Wagtoggle
-  name: Wagtoggle
+  name: Вагтоггл
   speaker: wagtoggle
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1545,7 +1545,7 @@
 
 - type: ttsVoice
   id: Belnaara
-  name: Belnaara
+  name: Бельнаара
   speaker: belnaara
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1554,7 +1554,7 @@
 
 - type: ttsVoice
   id: Lilayell
-  name: Lilayell
+  name: Лилаелл
   speaker: lilayell
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1567,7 +1567,7 @@
 
 - type: ttsVoice
   id: Candlebeard
-  name: Candlebeard
+  name: Свечебород
   speaker: candlebeard
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1580,7 +1580,7 @@
 
 - type: ttsVoice
   id: Awilo
-  name: Awilo
+  name: Авило
   speaker: awilo
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1593,7 +1593,7 @@
 
 - type: ttsVoice
   id: Marei
-  name: Marei
+  name: Марей
   speaker: marei
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1606,7 +1606,7 @@
 
 - type: ttsVoice
   id: Applebough
-  name: Applebough
+  name: Эпплбо
   speaker: applebough
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1619,7 +1619,7 @@
 
 - type: ttsVoice
   id: Lazul
-  name: Lazul
+  name: Лазул
   speaker: lazul
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1632,7 +1632,7 @@
 
 - type: ttsVoice
   id: Arwyn
-  name: Arwyn
+  name: Арвин
   speaker: arwyn
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1645,7 +1645,7 @@
 
 - type: ttsVoice
   id: Glowtron
-  name: Glowtron
+  name: Светотрон
   speaker: glowtron
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1658,7 +1658,7 @@
 
 - type: ttsVoice
   id: Cardish
-  name: Cardish
+  name: Кардиш
   speaker: cardish
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1671,7 +1671,7 @@
 
 - type: ttsVoice
   id: Robold
-  name: Robold
+  name: Роболд
   speaker: robold
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1684,7 +1684,7 @@
 
 - type: ttsVoice
   id: Malfurion
-  name: Malfurion
+  name: Малфурион
   speaker: malfurion
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1697,7 +1697,7 @@
 
 - type: ttsVoice
   id: Deathwhisper
-  name: Deathwhisper
+  name: Смертный Шёпот
   speaker: deathwhisper
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1710,7 +1710,7 @@
 
 - type: ttsVoice
   id: Thunderking
-  name: Thunderking
+  name: Король-громовержец
   speaker: thunderking
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1723,7 +1723,7 @@
 
 - type: ttsVoice
   id: DrBoom
-  name: Dr_boom
+  name: Доктор Бум
   speaker: dr_boom
   provider: Silero
   categories: [ HEARTHSTONE ]
@@ -1736,7 +1736,7 @@
 
 - type: ttsVoice
   id: Hooktusk
-  name: Hooktusk
+  name: Крюкобивень
   speaker: hooktusk
   provider: Silero
   categories: [ HEARTHSTONE ]

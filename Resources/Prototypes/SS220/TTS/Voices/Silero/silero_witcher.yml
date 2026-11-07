@@ -1,6 +1,6 @@
 - type: ttsVoice
   id: Lambert
-  name: Lambert
+  name: Ламберт
   speaker: lambert
   provider: Silero
   categories: [ WITCHER ]
@@ -13,7 +13,7 @@
 
 - type: ttsVoice
   id: Shani
-  name: Shani
+  name: Шани
   speaker: shani
   provider: Silero
   categories: [ WITCHER ]
@@ -26,7 +26,7 @@
 
 - type: ttsVoice
   id: Lugos
-  name: Lugos
+  name: Лугос
   speaker: lugos
   provider: Silero
   categories: [ WITCHER ]
@@ -39,7 +39,7 @@
 
 - type: ttsVoice
   id: Ewald
-  name: Ewald
+  name: Эвальд
   speaker: ewald
   provider: Silero
   categories: [ WITCHER ]
@@ -52,7 +52,7 @@
 
 - type: ttsVoice
   id: Mirror
-  name: Mirror
+  name: Зеркало
   speaker: mirror
   provider: Silero
   categories: [ WITCHER ]
@@ -65,7 +65,7 @@
 
 - type: ttsVoice
   id: Noble
-  name: Noble
+  name: Дворянин
   speaker: noble
   provider: Silero
   categories: [ WITCHER ]
@@ -78,7 +78,7 @@
 
 - type: ttsVoice
   id: Avallach
-  name: Avallach
+  name: "Аваллак'х"
   speaker: avallach
   provider: Silero
   categories: [ WITCHER ]
@@ -92,7 +92,7 @@
 
 - type: ttsVoice
   id: Cerys
-  name: Cerys
+  name: Керис
   speaker: cerys
   provider: Silero
   categories: [ WITCHER ]
@@ -105,7 +105,7 @@
 
 - type: ttsVoice
   id: Philippa
-  name: Philippa
+  name: Филиппа
   speaker: philippa
   provider: Silero
   categories: [ WITCHER ]
@@ -119,7 +119,7 @@
 
 - type: ttsVoice
   id: Annah
-  name: Annah
+  name: Анна
   speaker: annah
   provider: Silero
   categories: [ WITCHER ]
@@ -132,7 +132,7 @@
 
 - type: ttsVoice
   id: Cirilla
-  name: Cirilla
+  name: Цири
   speaker: cirilla
   provider: Silero
   categories: [ WITCHER ]
@@ -145,7 +145,7 @@
 
 - type: ttsVoice
   id: Syanna
-  name: Syanna
+  name: Сианна
   speaker: syanna
   provider: Silero
   categories: [ WITCHER ]
@@ -158,7 +158,7 @@
 
 - type: ttsVoice
   id: Regis
-  name: Regis
+  name: Регис
   speaker: regis
   provider: Silero
   categories: [ WITCHER ]
@@ -171,7 +171,7 @@
 
 - type: ttsVoice
   id: Guillaume
-  name: Guillaume
+  name: Гийом
   speaker: guillaume
   provider: Silero
   categories: [ WITCHER ]
@@ -184,7 +184,7 @@
 
 - type: ttsVoice
   id: Vivienne
-  name: Vivienne
+  name: Вивьенна
   speaker: vivienne
   provider: Silero
   categories: [ WITCHER ]
@@ -197,7 +197,7 @@
 
 - type: ttsVoice
   id: Papillon
-  name: Papillon
+  name: Папийон
   speaker: papillon
   provider: Silero
   categories: [ WITCHER ]
@@ -211,7 +211,7 @@
 
 - type: ttsVoice
   id: Vesemir
-  name: Vesemir
+  name: Весемир
   speaker: vesemir
   provider: Silero
   categories: [ WITCHER ]
@@ -224,7 +224,7 @@
 
 - type: ttsVoice
   id: Crach
-  name: Crach
+  name: Краг
   speaker: crach
   provider: Silero
   categories: [ WITCHER ]
@@ -237,7 +237,7 @@
 
 - type: ttsVoice
   id: Geralt
-  name: Geralt
+  name: Геральт
   speaker: geralt
   provider: Silero
   categories: [ WITCHER ]
@@ -250,7 +250,7 @@
 
 - type: ttsVoice
   id: Yennefer
-  name: Yennefer
+  name: Йеннифэр
   speaker: yennefer
   provider: Silero
   categories: [ WITCHER ]
@@ -263,7 +263,7 @@
 
 - type: ttsVoice
   id: Udalryk
-  name: Udalryk
+  name: Удальрик
   speaker: udalryk
   provider: Silero
   categories: [ WITCHER ]
@@ -276,7 +276,7 @@
 
 - type: ttsVoice
   id: Dandelion
-  name: Dandelion
+  name: Лютик
   speaker: dandelion
   provider: Silero
   categories: [ WITCHER ]
@@ -289,7 +289,7 @@
 
 - type: ttsVoice
   id: Palmerin
-  name: Palmerin
+  name: Пальмерин
   speaker: palmerin
   provider: Silero
   categories: [ WITCHER ]
@@ -302,7 +302,7 @@
 
 - type: ttsVoice
   id: Olgierd
-  name: Olgierd
+  name: Ольгерд
   speaker: olgierd
   provider: Silero
   categories: [ WITCHER ]
@@ -316,7 +316,7 @@
 
 - type: ttsVoice
   id: Triss
-  name: Triss
+  name: Трисс
   speaker: triss
   provider: Silero
   categories: [ WITCHER ]
@@ -329,7 +329,7 @@
 
 - type: ttsVoice
   id: Hjalmar
-  name: Hjalmar
+  name: Хьялмар
   speaker: hjalmar
   provider: Silero
   categories: [ WITCHER ]
@@ -342,7 +342,7 @@
 
 - type: ttsVoice
   id: Eskel
-  name: Eskel
+  name: Эскель
   speaker: eskel
   provider: Silero
   categories: [ WITCHER ]

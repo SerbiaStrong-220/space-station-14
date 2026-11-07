@@ -1,6 +1,6 @@
 - type: ttsVoice
   id: Alyx
-  name: Alyx
+  name: Аликс
   speaker: alyx
   provider: Silero
   categories: [ HalfLife2 ]
@@ -9,7 +9,7 @@
 
 - type: ttsVoice
   id: Barney
-  name: Barney
+  name: Барни
   speaker: barney
   provider: Silero
   categories: [ HalfLife2 ]
@@ -18,7 +18,7 @@
 
 - type: ttsVoice
   id: VortE2
-  name: Vort_e2
+  name: Вортигонт (эпизод 2)
   speaker: vort_e2
   provider: Silero
   categories: [ HalfLife2 ]
@@ -31,7 +31,7 @@
 
 - type: ttsVoice
   id: Kleiner
-  name: Kleiner
+  name: Кляйнер
   speaker: kleiner
   provider: Silero
   categories: [ HalfLife2 ]
@@ -40,7 +40,7 @@
 
 - type: ttsVoice
   id: Father
-  name: Father
+  name: Отец Григорий
   speaker: father
   provider: Silero
   categories: [ HalfLife2 ]
@@ -53,7 +53,7 @@
 
 - type: ttsVoice
   id: GmanE2
-  name: Gman_e2
+  name: Джи-мэн (эпизод 2)
   speaker: gman_e2
   provider: Silero
   categories: [ HalfLife2 ]
@@ -66,7 +66,7 @@
 
 - type: ttsVoice
   id: Gman
-  name: Gman
+  name: Джи-мэн
   speaker: gman
   provider: Silero
   categories: [ HalfLife2 ]
@@ -79,7 +79,7 @@
 
 - type: ttsVoice
   id: Vort
-  name: Vort
+  name: Вортигонт
   speaker: vort
   provider: Silero
   categories: [ HalfLife2 ]
@@ -88,7 +88,7 @@
 
 - type: ttsVoice
   id: Overwatch
-  name: Overwatch
+  name: Дозор
   speaker: overwatch
   provider: Silero
   categories: [ HalfLife2 ]
@@ -101,7 +101,7 @@
 
 - type: ttsVoice
   id: Breen
-  name: Breen
+  name: Брин
   speaker: breen
   provider: Silero
   categories: [ HalfLife2 ]

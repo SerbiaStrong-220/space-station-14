@@ -19,6 +19,8 @@ ui-tts-provider-voice-selector-window-empty = Ничего не найдено.
 ui-tts-voice-selector-entry-select = Выбрать
 ui-tts-voice-preferences-table-provider-header = Провайдер
 ui-tts-voice-preferences-table-voice-header = Голос
+ui-tts-voice-preferences-table-active = ● Используется
+ui-tts-voice-preferences-table-hint = Озвучка использует первый включённый провайдер сверху. Перетащите строку, чтобы изменить приоритет.
 
 ui-tts-voice-preferences-tab-voice-not-allowed = Этот голос вам недоступен по причине:
     { $reason }

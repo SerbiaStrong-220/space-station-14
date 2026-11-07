@@ -1,6 +1,6 @@
 - type: ttsVoice
   id: SiriusBlack
-  name: Sirius_Black
+  name: Сириус Блэк
   speaker: Harry_Potter_Sirius_Black
   provider: Silero
   categories: [ HARRY_POTTER ]
@@ -9,7 +9,7 @@
 
 - type: ttsVoice
   id: Dobby
-  name: Dobby
+  name: Добби
   speaker: Harry_Potter_Dobby
   provider: Silero
   categories: [ HARRY_POTTER ]
@@ -22,7 +22,7 @@
 
 - type: ttsVoice
   id: SeverusSnapeFilm
-  name: Severus_snape_film
+  name: Северус Снегг (фильм)
   speaker: Harry_Potter_Severus_Snape_film
   provider: Silero
   categories: [ HARRY_POTTER ]
@@ -31,7 +31,7 @@
 
 - type: ttsVoice
   id: HarryPotter
-  name: Harry_Potter
+  name: Гарри Поттер
   speaker: Harry_Potter_Harry_Potter
   provider: Silero
   categories: [ HARRY_POTTER ]
@@ -40,7 +40,7 @@
 
 - type: ttsVoice
   id: AlbusDumbledore
-  name: Albus_Dumbledore
+  name: Альбус Дамблдор
   speaker: Harry_Potter_Albus_Dumbledore
   provider: Silero
   categories: [ HARRY_POTTER ]
@@ -49,7 +49,7 @@
 
 - type: ttsVoice
   id: Voldemort
-  name: Voldemort
+  name: Лорд Волдеморт
   speaker: Harry_Potter_Lord_Voldemort
   provider: Silero
   categories: [ HARRY_POTTER ]
@@ -58,7 +58,7 @@
 
 - type: ttsVoice
   id: SeverusSnape
-  name: Severus_Snape
+  name: Северус Снегг
   speaker: Harry_Potter_Severus_Snape
   provider: Silero
   categories: [ HARRY_POTTER ]
@@ -67,7 +67,7 @@
 
 - type: ttsVoice
   id: FiliusFlitwick
-  name: Filius_Flitwick
+  name: Филиус Флитвик
   speaker: Harry_Potter_Filius_Flitwick
   provider: Silero
   categories: [ HARRY_POTTER ]
@@ -80,7 +80,7 @@
 
 - type: ttsVoice
   id: MinervaMcGonagall
-  name: Minnerva_McGonagall
+  name: Минерва Макгонагалл
   speaker: Harry_Potter_Minerva_McGonagall
   provider: Silero
   categories: [ HARRY_POTTER ]
@@ -89,7 +89,7 @@
 
 - type: ttsVoice
   id: HoraceSlughorn
-  name: Horace_Slughorn
+  name: Гораций Слизнорт
   speaker: Harry_Potter_Horace_Slughorn
   provider: Silero
   categories: [ HARRY_POTTER ]
@@ -98,7 +98,7 @@
 
 - type: ttsVoice
   id: Cedric
-  name: Cedric
+  name: Седрик Диггори
   speaker: Harry_Potter_Cedric
   provider: Silero
   categories: [ HARRY_POTTER ]
@@ -107,7 +107,7 @@
 
 - type: ttsVoice
   id: Alastor
-  name: Alastor_Mad-eye_Moody
+  name: Аластор Грозный Глаз Грюм
   speaker: Harry_Potter_Alastor_Mad-Eye_Moody
   provider: Silero
   categories: [ HARRY_POTTER ]

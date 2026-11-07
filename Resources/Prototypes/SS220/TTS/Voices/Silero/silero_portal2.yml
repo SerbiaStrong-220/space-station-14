@@ -1,6 +1,6 @@
 - type: ttsVoice
   id: Dictor
-  name: Dictor
+  name: Диктор
   speaker: dictor
   provider: Silero
   categories: [ Portal2 ]
@@ -13,14 +13,14 @@
 
 - type: ttsVoice
   id: Glados
-  name: Glados
+  name: ГЛаДОС
   speaker: glados
   provider: Silero
   categories: [ Portal2 ]
 
 - type: ttsVoice
   id: Wheatley
-  name: Wheatley
+  name: Уитли
   speaker: wheatley
   provider: Silero
   categories: [ Portal2 ]
@@ -29,7 +29,7 @@
 
 - type: ttsVoice
   id: CaveJohnson
-  name: Cave_Johnson
+  name: Кейв Джонсон
   speaker: portal_cave_johnson
   provider: Silero
   categories: [ PORTAL ]

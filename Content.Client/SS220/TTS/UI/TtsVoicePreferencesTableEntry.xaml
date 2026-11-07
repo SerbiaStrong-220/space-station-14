@@ -10,6 +10,7 @@
                 <Label Name="ProviderNameLabel" Margin="5 0"/>
                 <cc:VSeparator/>
                 <Label Name="VoiceNameLabel" HorizontalExpand="True" Margin="5 0"/>
+                <Label Name="ActiveLabel" Text="{Loc ui-tts-voice-preferences-table-active}" FontColorOverride="#7FD97F" Visible="False" Margin="5 0"/>
                 <Button Name="VoiceSelectorButton" StyleClasses="OpenRight" Text="{Loc 'ui-humanoid-profile-editor-voice-settings'}" Access="Public" ToggleMode="True" />
                 <Button Name="VoicePlayButton" StyleClasses="OpenLeft" Text="{Loc 'ui-humanoid-profile-editor-voice-play'}" HorizontalAlignment="Right" />
             </BoxContainer>

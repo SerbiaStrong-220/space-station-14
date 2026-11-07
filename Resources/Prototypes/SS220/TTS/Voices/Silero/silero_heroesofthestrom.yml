@@ -1,6 +1,6 @@
 - type: ttsVoice
   id: Mira
-  name: Mira
+  name: Мира
   speaker: mira
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -9,7 +9,7 @@
 
 - type: ttsVoice
   id: Valeera
-  name: Valeera
+  name: Валира
   speaker: valeera
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -22,7 +22,7 @@
 
 - type: ttsVoice
   id: Rehgar
-  name: Rehgar
+  name: Регар
   speaker: rehgar
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -35,7 +35,7 @@
 
 - type: ttsVoice
   id: Yrel
-  name: Yrel
+  name: Ирель
   speaker: yrel
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -48,7 +48,7 @@
 
 - type: ttsVoice
   id: Volskaya
-  name: Volskaya
+  name: Вольская
   speaker: volskaya
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -61,7 +61,7 @@
 
 - type: ttsVoice
   id: Necromancer
-  name: Necromancer
+  name: Некромант
   speaker: necromancer
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -74,7 +74,7 @@
 
 - type: ttsVoice
   id: Zuljin
-  name: Zuljin
+  name: "Зул'джин"
   speaker: zuljin
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -87,7 +87,7 @@
 
 - type: ttsVoice
   id: Samuro
-  name: Samuro
+  name: Самуро
   speaker: samuro
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -100,7 +100,7 @@
 
 - type: ttsVoice
   id: Tyrael
-  name: Tyrael
+  name: Тираэль
   speaker: tyrael
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -113,7 +113,7 @@
 
 - type: ttsVoice
   id: Athena
-  name: Athena
+  name: Афина
   speaker: athena
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -126,7 +126,7 @@
 
 - type: ttsVoice
   id: Default
-  name: Default
+  name: Стандартный голос
   speaker: default
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -139,7 +139,7 @@
 
 - type: ttsVoice
   id: Chromie
-  name: Chromie
+  name: Хроми
   speaker: chromie
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -152,7 +152,7 @@
 
 - type: ttsVoice
   id: Orphea
-  name: Orphea
+  name: Орфея
   speaker: orphea
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -165,7 +165,7 @@
 
 - type: ttsVoice
   id: Adjutant
-  name: Adjutant
+  name: Адъютант
   speaker: adjutant
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -178,7 +178,7 @@
 
 - type: ttsVoice
   id: Vanndara
-  name: Vanndara
+  name: Ванндара
   speaker: vanndara
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -191,7 +191,7 @@
 
 - type: ttsVoice
   id: Mechatassadar
-  name: Mechatassadar
+  name: Механо-Тассадар
   speaker: mechatassadar
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -204,7 +204,7 @@
 
 - type: ttsVoice
   id: Blackheart
-  name: Blackheart
+  name: Чёрное Сердце
   speaker: blackheart
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -217,7 +217,7 @@
 
 - type: ttsVoice
   id: Olaf
-  name: Olaf
+  name: Олаф
   speaker: olaf
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -230,7 +230,7 @@
 
 - type: ttsVoice
   id: Alarak
-  name: Alarak
+  name: Аларак
   speaker: alarak
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -243,7 +243,7 @@
 
 - type: ttsVoice
   id: Dva
-  name: Dva
+  name: Д.Ва
   speaker: dva
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -256,7 +256,7 @@
 
 - type: ttsVoice
   id: Toy18
-  name: Toy18
+  name: Игрушка 18
   speaker: toy18
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -265,7 +265,7 @@
 
 - type: ttsVoice
   id: WitchdoctorH
-  name: Witchdoctor_h
+  name: Знахарь (Диабло)
   speaker: witchdoctor_h
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -278,7 +278,7 @@
 
 - type: ttsVoice
   id: Lucio
-  name: Lucio
+  name: Лусио
   speaker: lucio
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -291,7 +291,7 @@
 
 - type: ttsVoice
   id: Angel
-  name: Angel
+  name: Ангел
   speaker: angel
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -304,7 +304,7 @@
 
 - type: ttsVoice
   id: Abathur
-  name: Abathur
+  name: Абатур
   speaker: abathur
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -317,7 +317,7 @@
 
 - type: ttsVoice
   id: Erik
-  name: Erik
+  name: Эрик
   speaker: erik
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -330,7 +330,7 @@
 
 - type: ttsVoice
   id: Varian
-  name: Varian
+  name: Вариан
   speaker: varian
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -343,7 +343,7 @@
 
 - type: ttsVoice
   id: Anduin
-  name: Anduin
+  name: Андуин
   speaker: anduin
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -356,7 +356,7 @@
 
 - type: ttsVoice
   id: Deckard
-  name: Deckard
+  name: Декард Каин
   speaker: deckard
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -369,7 +369,7 @@
 
 - type: ttsVoice
   id: MalfurionH
-  name: Malfurion_h
+  name: Малфурион
   speaker: malfurion_h
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -382,7 +382,7 @@
 
 - type: ttsVoice
   id: Demonhunter
-  name: Demonhunter
+  name: Охотник на демонов
   speaker: demonhunter
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -395,7 +395,7 @@
 
 - type: ttsVoice
   id: Demon
-  name: Demon
+  name: Демон
   speaker: demon
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -408,7 +408,7 @@
 
 - type: ttsVoice
   id: KerriganH
-  name: Kerrigan_h
+  name: Керриган
   speaker: kerrigan_h
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -421,7 +421,7 @@
 
 - type: ttsVoice
   id: Ladyofthorns
-  name: Ladyofthorns
+  name: Леди Шипов
   speaker: ladyofthorns
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -434,7 +434,7 @@
 
 - type: ttsVoice
   id: Barbarian
-  name: Barbarian
+  name: Варвар
   speaker: barbarian
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -447,7 +447,7 @@
 
 - type: ttsVoice
   id: Crusader
-  name: Crusader
+  name: Крестоносец
   speaker: crusader
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -460,7 +460,7 @@
 
 - type: ttsVoice
   id: Whitemane
-  name: Whitemane
+  name: Уайтмейн
   speaker: whitemane
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -473,7 +473,7 @@
 
 - type: ttsVoice
   id: Nexushunter
-  name: Nexushunter
+  name: Охотник Нексуса
   speaker: nexushunter
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -486,7 +486,7 @@
 
 - type: ttsVoice
   id: GreymaneH
-  name: Greymane_h
+  name: Седогрив
   speaker: greymane_h
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -499,7 +499,7 @@
 
 - type: ttsVoice
   id: Gardensdayannouncer
-  name: Gardensdayannouncer
+  name: Диктор Дня садов
   speaker: gardensdayannouncer
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -512,7 +512,7 @@
 
 - type: ttsVoice
   id: Drekthar
-  name: Drekthar
+  name: "Дрек'Тар"
   speaker: drekthar
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -525,7 +525,7 @@
 
 - type: ttsVoice
   id: Amazon
-  name: Amazon
+  name: Амазонка
   speaker: amazon
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -534,7 +534,7 @@
 
 - type: ttsVoice
   id: Azmodan
-  name: Azmodan
+  name: Азмодан
   speaker: azmodan
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -543,7 +543,7 @@
 
 - type: ttsVoice
   id: Baleog
-  name: Baleog
+  name: Балеог
   speaker: baleog
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -552,7 +552,7 @@
 
 - type: ttsVoice
   id: Cho
-  name: Cho
+  name: Чо
   speaker: cho
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -561,7 +561,7 @@
 
 - type: ttsVoice
   id: Diablo
-  name: Diablo
+  name: Диабло
   speaker: diablo
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -570,7 +570,7 @@
 
 - type: ttsVoice
   id: Falstad
-  name: Falstad
+  name: Фалстад
   speaker: falstad
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -579,7 +579,7 @@
 
 - type: ttsVoice
   id: Gazlowe
-  name: Gazlowe
+  name: Газлоу
   speaker: gazlowe
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -588,7 +588,7 @@
 
 - type: ttsVoice
   id: Imperius
-  name: Imperius
+  name: Империй
   speaker: imperius
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -597,7 +597,7 @@
 
 - type: ttsVoice
   id: Leoric
-  name: Leoric
+  name: Леорик
   speaker: leoric
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -606,7 +606,7 @@
 
 - type: ttsVoice
   id: Lili
-  name: Lili
+  name: Лили
   speaker: lili
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -619,7 +619,7 @@
 
 - type: ttsVoice
   id: Stitches
-  name: Stitches
+  name: Мясник Стежок
   speaker: stitches
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -628,7 +628,7 @@
 
 - type: ttsVoice
   id: Wizard
-  name: Wizard
+  name: Волшебник
   speaker: wizard
   provider: Silero
   categories: [ HEROESOFTHESTORM ]
@@ -637,7 +637,7 @@
 
 - type: ttsVoice
   id: Zagara
-  name: Zagara
+  name: Загара
   speaker: zagara
   provider: Silero
   categories: [ HEROESOFTHESTORM ]

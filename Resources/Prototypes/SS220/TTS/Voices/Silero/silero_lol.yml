@@ -1,6 +1,6 @@
 - type: ttsVoice
   id: Evelynn
-  name: Evelynn
+  name: Эвелинн
   speaker: evelynn
   provider: Silero
   categories: [ LOL ]
@@ -13,7 +13,7 @@
 
 - type: ttsVoice
   id: Yuumi
-  name: Yuumi
+  name: Юми
   speaker: yuumi
   provider: Silero
   categories: [ LOL ]
@@ -22,7 +22,7 @@
 
 - type: ttsVoice
   id: Pantheon
-  name: pantheon
+  name: Пантеон
   speaker: pantheon
   provider: Silero
   categories: [ LOL ]
@@ -35,7 +35,7 @@
 
 - type: ttsVoice
   id: Darius
-  name: Darius
+  name: Дариус
   speaker: darius
   provider: Silero
   categories: [ LOL ]
@@ -48,7 +48,7 @@
 
 - type: ttsVoice
   id: Trundle
-  name: Trundle
+  name: Трандл
   speaker: trundle
   provider: Silero
   categories: [ LOL ]
@@ -61,7 +61,7 @@
 
 - type: ttsVoice
   id: Garen
-  name: Garen
+  name: Гарен
   speaker: garen
   provider: Silero
   categories: [ LOL ]
@@ -74,7 +74,7 @@
 
 - type: ttsVoice
   id: Kled
-  name: Kled
+  name: Клэд
   speaker: kled
   provider: Silero
   categories: [ LOL ]
@@ -87,7 +87,7 @@
 
 - type: ttsVoice
   id: Ekko
-  name: Ekko
+  name: Экко
   speaker: ekko
   provider: Silero
   categories: [ LOL ]
@@ -100,7 +100,7 @@
 
 - type: ttsVoice
   id: Volibear
-  name: Volibear
+  name: Волибир
   speaker: volibear
   provider: Silero
   categories: [ LOL ]
@@ -113,7 +113,7 @@
 
 - type: ttsVoice
   id: Samira
-  name: Samira
+  name: Самира
   speaker: samira
   provider: Silero
   categories: [ LOL ]
@@ -126,7 +126,7 @@
 
 - type: ttsVoice
   id: Swain
-  name: Swain
+  name: Свейн
   speaker: swain
   provider: Silero
   categories: [ LOL ]
@@ -139,7 +139,7 @@
 
 - type: ttsVoice
   id: Udyr
-  name: Udyr
+  name: Удир
   speaker: udyr
   provider: Silero
   categories: [ LOL ]
@@ -152,7 +152,7 @@
 
 - type: ttsVoice
   id: DrMundo
-  name: Dr_mundo
+  name: Доктор Мундо
   speaker: dr_mundo
   provider: Silero
   categories: [ LOL ]
@@ -165,7 +165,7 @@
 
 - type: ttsVoice
   id: Graves
-  name: Graves
+  name: Грейвз
   speaker: graves
   provider: Silero
   categories: [ LOL ]
@@ -178,7 +178,7 @@
 
 - type: ttsVoice
   id: Rakan
-  name: Rakan
+  name: Ракан
   speaker: rakan
   provider: Silero
   categories: [ LOL ]
@@ -191,7 +191,7 @@
 
 - type: ttsVoice
   id: RenataGlasc
-  name: Renata_glasc
+  name: Рената Гласк
   speaker: renata_glasc
   provider: Silero
   categories: [ LOL ]
@@ -204,7 +204,7 @@
 
 - type: ttsVoice
   id: Gangplank
-  name: Gangplank
+  name: Гангпланк
   speaker: gangplank
   provider: Silero
   categories: [ LOL ]
@@ -217,7 +217,7 @@
 
 - type: ttsVoice
   id: Riven
-  name: Riven
+  name: Ривен
   speaker: riven
   provider: Silero
   categories: [ LOL ]
@@ -230,7 +230,7 @@
 
 - type: ttsVoice
   id: Katarina
-  name: Katarina
+  name: Катарина
   speaker: katarina
   provider: Silero
   categories: [ LOL ]
@@ -243,7 +243,7 @@
 
 - type: ttsVoice
   id: Ahri
-  name: Ahri
+  name: Ари
   speaker: ahri
   provider: Silero
   categories: [ LOL ]
@@ -256,7 +256,7 @@
 
 - type: ttsVoice
   id: Ornn
-  name: Ornn
+  name: Орнн
   speaker: ornn
   provider: Silero
   categories: [ LOL ]
@@ -269,7 +269,7 @@
 
 - type: ttsVoice
   id: Braum
-  name: Braum
+  name: Браум
   speaker: braum
   provider: Silero
   categories: [ LOL ]
@@ -282,7 +282,7 @@
 
 - type: ttsVoice
   id: Fizz
-  name: Fizz
+  name: Физз
   speaker: fizz
   provider: Silero
   categories: [ LOL ]
@@ -291,7 +291,7 @@
 
 - type: ttsVoice
   id: Draven
-  name: Draven
+  name: Дрейвен
   speaker: draven
   provider: Silero
   categories: [ LOL ]
@@ -304,7 +304,7 @@
 
 - type: ttsVoice
   id: Qiyana
-  name: Qiyana
+  name: Киана
   speaker: qiyana
   provider: Silero
   categories: [ LOL ]
@@ -317,7 +317,7 @@
 
 - type: ttsVoice
   id: Ksante
-  name: Ksante
+  name: "К'Санте"
   speaker: ksante
   provider: Silero
   categories: [ LOL ]
@@ -330,7 +330,7 @@
 
 - type: ttsVoice
   id: Talon
-  name: Talon
+  name: Талон
   speaker: talon
   provider: Silero
   categories: [ LOL ]
@@ -343,7 +343,7 @@
 
 - type: ttsVoice
   id: Shyvana
-  name: Shyvana
+  name: Шивана
   speaker: shyvana
   provider: Silero
   categories: [ LOL ]
@@ -357,7 +357,7 @@
 
 - type: ttsVoice
   id: Janna
-  name: Janna
+  name: Жанна
   speaker: janna
   provider: Silero
   categories: [ LOL ]
@@ -370,7 +370,7 @@
 
 - type: ttsVoice
   id: Cassiopeia
-  name: Cassiopeia
+  name: Кассиопея
   speaker: cassiopeia
   provider: Silero
   categories: [ LOL ]
@@ -383,7 +383,7 @@
 
 - type: ttsVoice
   id: Taliyah
-  name: Taliyah
+  name: Талия
   speaker: taliyah
   provider: Silero
   categories: [ LOL ]
@@ -396,7 +396,7 @@
 
 - type: ttsVoice
   id: Neeko
-  name: Neeko
+  name: Нико
   speaker: neeko
   provider: Silero
   categories: [ LOL ]
@@ -409,7 +409,7 @@
 
 - type: ttsVoice
   id: Taric
-  name: Taric
+  name: Тарик
   speaker: taric
   provider: Silero
   categories: [ LOL ]
@@ -422,7 +422,7 @@
 
 - type: ttsVoice
   id: Akshan
-  name: Akshan
+  name: Акшан
   speaker: akshan
   provider: Silero
   categories: [ LOL ]
@@ -435,7 +435,7 @@
 
 - type: ttsVoice
   id: Tristana
-  name: Tristana
+  name: Тристана
   speaker: tristana
   provider: Silero
   categories: [ LOL ]
@@ -448,7 +448,7 @@
 
 - type: ttsVoice
   id: Sylas
-  name: Sylas
+  name: Сайлас
   speaker: sylas
   provider: Silero
   categories: [ LOL ]
@@ -461,7 +461,7 @@
 
 - type: ttsVoice
   id: Sejuani
-  name: Sejuani
+  name: Седжуани
   speaker: sejuani
   provider: Silero
   categories: [ LOL ]
@@ -474,7 +474,7 @@
 
 - type: ttsVoice
   id: Anivia
-  name: Anivia
+  name: Анивия
   speaker: anivia
   provider: Silero
   categories: [ LOL ]
@@ -487,7 +487,7 @@
 
 - type: ttsVoice
   id: Vayne
-  name: Vayne
+  name: Вейн
   speaker: vayne
   provider: Silero
   categories: [ LOL ]
@@ -500,7 +500,7 @@
 
 - type: ttsVoice
   id: Karma
-  name: Karma
+  name: Карма
   speaker: karma
   provider: Silero
   categories: [ LOL ]
@@ -513,7 +513,7 @@
 
 - type: ttsVoice
   id: Nilah
-  name: Nilah
+  name: Нила
   speaker: nilah
   provider: Silero
   categories: [ LOL ]
@@ -526,7 +526,7 @@
 
 - type: ttsVoice
   id: OlafLol
-  name: Olaf_lol
+  name: Олаф
   speaker: olaf_lol
   provider: Silero
   categories: [ LOL ]
@@ -539,7 +539,7 @@
 
 - type: ttsVoice
   id: Quinn
-  name: Quinn
+  name: Куинн
   speaker: quinn
   provider: Silero
   categories: [ LOL ]
@@ -552,7 +552,7 @@
 
 - type: ttsVoice
   id: Lissandra
-  name: Lissandra
+  name: Лиссандра
   speaker: lissandra
   provider: Silero
   categories: [ LOL ]
@@ -565,7 +565,7 @@
 
 - type: ttsVoice
   id: Hecarim
-  name: Hecarim
+  name: Гекарим
   speaker: hecarim
   provider: Silero
   categories: [ LOL ]
@@ -578,7 +578,7 @@
 
 - type: ttsVoice
   id: Vi
-  name: Vi
+  name: Вай
   speaker: vi
   provider: Silero
   categories: [ LOL ]
@@ -591,7 +591,7 @@
 
 - type: ttsVoice
   id: Zyra
-  name: Zyra
+  name: Зайра
   speaker: zyra
   provider: Silero
   categories: [ LOL ]
@@ -604,7 +604,7 @@
 
 - type: ttsVoice
   id: Zac
-  name: Zac
+  name: Зак
   speaker: zac
   provider: Silero
   categories: [ LOL ]
@@ -618,7 +618,7 @@
 
 - type: ttsVoice
   id: Senna
-  name: Senna
+  name: Сенна
   speaker: senna
   provider: Silero
   categories: [ LOL ]
@@ -627,7 +627,7 @@
 
 - type: ttsVoice
   id: Nunu
-  name: Nunu
+  name: Нуну
   speaker: nunu
   provider: Silero
   categories: [ LOL ]
@@ -636,7 +636,7 @@
 
 - type: ttsVoice
   id: Ryze
-  name: Ryze
+  name: Райз
   speaker: ryze
   provider: Silero
   categories: [ LOL ]
@@ -645,7 +645,7 @@
 
 - type: ttsVoice
   id: Yone
-  name: Yone
+  name: Ёнэ
   speaker: yone
   provider: Silero
   categories: [ LOL ]
@@ -654,7 +654,7 @@
 
 - type: ttsVoice
   id: Sett
-  name: Sett
+  name: Сетт
   speaker: sett
   provider: Silero
   categories: [ LOL ]
@@ -663,7 +663,7 @@
 
 - type: ttsVoice
   id: Camille
-  name: Camille
+  name: Камилла
   speaker: camille
   provider: Silero
   categories: [ LOL ]
@@ -672,7 +672,7 @@
 
 - type: ttsVoice
   id: LeeSin
-  name: Lee_sin
+  name: Ли Син
   speaker: lee_sin
   provider: Silero
   categories: [ LOL ]
@@ -681,7 +681,7 @@
 
 - type: ttsVoice
   id: Kayle
-  name: Kayle
+  name: Кейл
   speaker: kayle
   provider: Silero
   categories: [ LOL ]
@@ -690,7 +690,7 @@
 
 - type: ttsVoice
   id: Azir
-  name: Azir
+  name: Азир
   speaker: azir
   provider: Silero
   categories: [ LOL ]
@@ -699,7 +699,7 @@
 
 - type: ttsVoice
   id: Tryndamere
-  name: Tryndamere
+  name: Триндамер
   speaker: tryndamere
   provider: Silero
   categories: [ LOL ]
@@ -708,7 +708,7 @@
 
 - type: ttsVoice
   id: Nami
-  name: Nami
+  name: Нами
   speaker: nami
   provider: Silero
   categories: [ LOL ]
@@ -717,7 +717,7 @@
 
 - type: ttsVoice
   id: Zeri
-  name: Zeri
+  name: Зири
   speaker: zeri
   provider: Silero
   categories: [ LOL ]
@@ -730,7 +730,7 @@
 
 - type: ttsVoice
   id: Ziggs
-  name: Ziggs
+  name: Зиггс
   speaker: ziggs
   provider: Silero
   categories: [ LOL ]
@@ -739,7 +739,7 @@
 
 - type: ttsVoice
   id: Yorick
-  name: Yorick
+  name: Йорик
   speaker: yorick
   provider: Silero
   categories: [ LOL ]
@@ -748,7 +748,7 @@
 
 - type: ttsVoice
   id: Viktor
-  name: Viktor
+  name: Виктор
   speaker: viktor
   provider: Silero
   categories: [ LOL ]
@@ -757,7 +757,7 @@
 
 - type: ttsVoice
   id: Twitch
-  name: Twitch
+  name: Твитч
   speaker: twitch
   provider: Silero
   categories: [ LOL ]
@@ -770,7 +770,7 @@
 
 - type: ttsVoice
   id: TahmKench
-  name: Tahm_Kench
+  name: Тахм Кенч
   speaker: tahm_kench
   provider: Silero
   categories: [ LOL ]
@@ -779,7 +779,7 @@
 
 - type: ttsVoice
   id: Rumble
-  name: Rumble
+  name: Рамбл
   speaker: rumble
   provider: Silero
   categories: [ LOL ]
@@ -788,7 +788,7 @@
 
 - type: ttsVoice
   id: Sion
-  name: Sion
+  name: Сион
   speaker: sion
   provider: Silero
   categories: [ LOL ]
@@ -797,7 +797,7 @@
 
 - type: ttsVoice
   id: Meiow
-  name: Meiow
+  name: Мяу
   speaker: meiow
   provider: Silero
   categories: [ LOL ]
@@ -806,7 +806,7 @@
 
 - type: ttsVoice
   id: Lillia
-  name: Lillia
+  name: Лиллия
   speaker: lillia
   provider: Silero
   categories: [ LOL ]
@@ -819,7 +819,7 @@
 
 - type: ttsVoice
   id: Lucian
-  name: Lucian
+  name: Люциан
   speaker: lucian
   provider: Silero
   categories: [ LOL ]
@@ -828,7 +828,7 @@
 
 - type: ttsVoice
   id: Karthus
-  name: Karthus
+  name: Картус
   speaker: karthus
   provider: Silero
   categories: [ LOL ]
@@ -837,7 +837,7 @@
 
 - type: ttsVoice
   id: Jhinx
-  name: Jhinкс
+  name: Джин (альтернативный)
   speaker: jhinкс
   provider: Silero
   categories: [ LOL ]
@@ -846,7 +846,7 @@
 
 - type: ttsVoice
   id: Irelia
-  name: Irelia
+  name: Ирелия
   speaker: irelia
   provider: Silero
   categories: [ LOL ]
@@ -855,7 +855,7 @@
 
 - type: ttsVoice
   id: Jhin
-  name: Jhin
+  name: Джин
   speaker: jhin
   provider: Silero
   categories: [ LOL ]
@@ -864,7 +864,7 @@
 
 - type: ttsVoice
   id: Gwen
-  name: Gwen
+  name: Гвен
   speaker: gwen
   provider: Silero
   categories: [ LOL ]
@@ -877,7 +877,7 @@
 
 - type: ttsVoice
   id: Diana
-  name: Diana
+  name: Диана
   speaker: diana
   provider: Silero
   categories: [ LOL ]
@@ -886,7 +886,7 @@
 
 - type: ttsVoice
   id: Annie
-  name: Annie
+  name: Энни
   speaker: annie
   provider: Silero
   categories: [ LOL ]

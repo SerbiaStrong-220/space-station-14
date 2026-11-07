@@ -1,6 +1,6 @@
 - type: ttsVoice
   id: Demoman
-  name: Demoman
+  name: Подрывник
   speaker: demoman
   provider: Silero
   categories: [ TeamFortress2 ]
@@ -13,7 +13,7 @@
 
 - type: ttsVoice
   id: Engineer
-  name: Engineer
+  name: Инженер
   speaker: engineer
   provider: Silero
   categories: [ TeamFortress2 ]
@@ -22,7 +22,7 @@
 
 - type: ttsVoice
   id: Heavy
-  name: Heavy
+  name: Пулемётчик
   speaker: heavy
   provider: Silero
   categories: [ TeamFortress2 ]
@@ -31,7 +31,7 @@
 
 - type: ttsVoice
   id: Medic
-  name: Medic
+  name: Медик
   speaker: medic
   provider: Silero
   categories: [ TeamFortress2 ]
@@ -44,7 +44,7 @@
 
 - type: ttsVoice
   id: Scout
-  name: Scout
+  name: Разведчик
   speaker: scout
   provider: Silero
   categories: [ TeamFortress2 ]
@@ -53,7 +53,7 @@
 
 - type: ttsVoice
   id: SniperTf
-  name: Sniper_tf
+  name: Снайпер
   speaker: sniper_tf
   provider: Silero
   categories: [ TeamFortress2 ]
@@ -66,7 +66,7 @@
 
 - type: ttsVoice
   id: Soldier
-  name: Soldier
+  name: Солдат
   speaker: soldier
   provider: Silero
   categories: [ TeamFortress2 ]
@@ -79,7 +79,7 @@
 
 - type: ttsVoice
   id: Spy
-  name: Spy
+  name: Шпион
   speaker: spy
   provider: Silero
   categories: [ TeamFortress2 ]

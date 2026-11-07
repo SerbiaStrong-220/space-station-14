@@ -1,6 +1,6 @@
 - type: ttsVoice
   id: Aradesh
-  name: Aradesh
+  name: Арадеш
   speaker: aradesh
   provider: Silero
   categories: [ Fallout ]
@@ -9,7 +9,7 @@
 
 - type: ttsVoice
   id: Dornan
-  name: Dornan
+  name: Дорнан
   speaker: dornan
   provider: Silero
   categories: [ Fallout2 ]
@@ -22,7 +22,7 @@
 
 - type: ttsVoice
   id: Elder
-  name: Elder
+  name: Старейшина
   speaker: elder
   provider: Silero
   categories: [ Fallout2 ]
@@ -31,7 +31,7 @@
 
 - type: ttsVoice
   id: Harris
-  name: Harris
+  name: Харрис
   speaker: harris
   provider: Silero
   categories: [ Fallout ]
@@ -40,7 +40,7 @@
 
 - type: ttsVoice
   id: Cabbot
-  name: Cabbot
+  name: Каббот
   speaker: cabbot
   provider: Silero
   categories: [ Fallout ]
@@ -49,7 +49,7 @@
 
 - type: ttsVoice
   id: Decker
-  name: Decker
+  name: Декер
   speaker: decker
   provider: Silero
   categories: [ Fallout ]
@@ -62,7 +62,7 @@
 
 - type: ttsVoice
   id: Dick
-  name: Dick
+  name: Дик
   speaker: dick
   provider: Silero
   categories: [ Fallout2 ]
@@ -75,7 +75,7 @@
 
 - type: ttsVoice
   id: Officer
-  name: Officer
+  name: Офицер
   speaker: officer
   provider: Silero
   categories: [ Fallout2 ]
@@ -84,7 +84,7 @@
 
 - type: ttsVoice
   id: Frank
-  name: Frank
+  name: Фрэнк
   speaker: frank
   provider: Silero
   categories: [ Fallout2 ]
@@ -97,7 +97,7 @@
 
 - type: ttsVoice
   id: Gizmo
-  name: Gizmo
+  name: Гизмо
   speaker: gizmo
   provider: Silero
   categories: [ Fallout ]
@@ -110,7 +110,7 @@
 
 - type: ttsVoice
   id: Hakunin
-  name: Hakunin
+  name: Хакунин
   speaker: hakunin
   provider: Silero
   categories: [ Fallout2 ]
@@ -123,7 +123,7 @@
 
 - type: ttsVoice
   id: Harold
-  name: Harold
+  name: Гарольд
   speaker: harold
   provider: Silero
   categories: [ Fallout2 ]
@@ -136,7 +136,7 @@
 
 - type: ttsVoice
   id: Harry
-  name: Harry
+  name: Гарри
   speaker: harry
   provider: Silero
   categories: [ Fallout ]
@@ -149,7 +149,7 @@
 
 - type: ttsVoice
   id: Jain
-  name: Jain
+  name: Джейн
   speaker: jain
   provider: Silero
   categories: [ Fallout ]
@@ -158,7 +158,7 @@
 
 - type: ttsVoice
   id: Maxson
-  name: Maxson
+  name: Максон
   speaker: maxson
   provider: Silero
   categories: [ Fallout ]
@@ -171,7 +171,7 @@
 
 - type: ttsVoice
   id: Killian
-  name: Killian
+  name: Киллиан
   speaker: killian
   provider: Silero
   categories: [ Fallout ]
@@ -180,7 +180,7 @@
 
 - type: ttsVoice
   id: Laura
-  name: Laura
+  name: Лора
   speaker: laura
   provider: Silero
   categories: [ Fallout ]
@@ -189,7 +189,7 @@
 
 - type: ttsVoice
   id: Lieutenant
-  name: Lieutenant
+  name: Лейтенант
   speaker: lieutenant
   provider: Silero
   categories: [ Fallout ]
@@ -202,7 +202,7 @@
 
 - type: ttsVoice
   id: Loxley
-  name: Loxley
+  name: Локсли
   speaker: loxley
   provider: Silero
   categories: [ Fallout ]
@@ -215,7 +215,7 @@
 
 - type: ttsVoice
   id: Lynette
-  name: Lynette
+  name: Линетт
   speaker: lynette
   provider: Silero
   categories: [ Fallout2 ]
@@ -224,7 +224,7 @@
 
 - type: ttsVoice
   id: Marcus
-  name: Marcus
+  name: Маркус
   speaker: marcus
   provider: Silero
   categories: [ Fallout2 ]
@@ -237,7 +237,7 @@
 
 - type: ttsVoice
   id: Master
-  name: Master
+  name: Мастер
   speaker: master
   provider: Silero
   categories: [ Fallout ]
@@ -250,7 +250,7 @@
 
 - type: ttsVoice
   id: Morpheus
-  name: Morpheus
+  name: Морфей
   speaker: morpheus
   provider: Silero
   categories: [ Fallout ]
@@ -263,7 +263,7 @@
 
 - type: ttsVoice
   id: Myron
-  name: Myron
+  name: Майрон
   speaker: myron
   provider: Silero
   categories: [ Fallout2 ]
@@ -272,7 +272,7 @@
 
 - type: ttsVoice
   id: Nicole
-  name: Nicole
+  name: Николь
   speaker: nicole
   provider: Silero
   categories: [ Fallout ]
@@ -281,7 +281,7 @@
 
 - type: ttsVoice
   id: Overseer
-  name: Overseer
+  name: Смотритель
   speaker: overseer
   provider: Silero
   categories: [ Fallout ]
@@ -294,7 +294,7 @@
 
 - type: ttsVoice
   id: Rhombus
-  name: Rhombus
+  name: Ромбус
   speaker: rhombus
   provider: Silero
   categories: [ Fallout ]
@@ -303,7 +303,7 @@
 
 - type: ttsVoice
   id: Set
-  name: Set
+  name: Сет
   speaker: set
   provider: Silero
   categories: [ Fallout ]
@@ -316,7 +316,7 @@
 
 - type: ttsVoice
   id: Sulik
-  name: Sulik
+  name: Сулик
   speaker: sulik
   provider: Silero
   categories: [ Fallout2 ]
@@ -329,7 +329,7 @@
 
 - type: ttsVoice
   id: Tandi
-  name: Tandi
+  name: Танди
   speaker: tandi
   provider: Silero
   categories: [ Fallout ]
@@ -342,7 +342,7 @@
 
 - type: ttsVoice
   id: Vree
-  name: Vree
+  name: Ври
   speaker: vree
   provider: Silero
   categories: [ Fallout ]

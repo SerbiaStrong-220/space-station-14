@@ -19,6 +19,7 @@
             <!-- Added by code -->
         </BoxContainer>
         <cc:HSeparator/>
+        <Label Text="{Loc ui-tts-voice-preferences-table-hint}" StyleClasses="LabelSubText" Margin="5 3" HorizontalExpand="True"/>
     </BoxContainer>
     <cc:VSeparator/>
 </BoxContainer>

@@ -30,30 +30,35 @@ public sealed partial class TtsSystem : SharedTtsSystem
     [Dependency] private SharedTransformSystem _xforms = default!;
 
     #region Prometheus
+    private const string ProviderLabel = "provider";
+
     private static readonly Histogram RequestTimings = Metrics.CreateHistogram(
         "tts_req_timings",
-        "Timings of TTS API requests",
+        "Timings of TTS provider API requests in seconds",
         new HistogramConfiguration()
         {
-            LabelNames = ["type"],
-            Buckets = Histogram.ExponentialBuckets(.1, 1.5, 10),
+            LabelNames = [ProviderLabel, "result"],
+            Buckets = Histogram.ExponentialBuckets(.1, 1.5, 12),
         });
 
     private static readonly Counter WantedCount = Metrics.CreateCounter(
         "tts_wanted_count",
-        "Amount of wanted TTS audio.");
+        "Amount of wanted TTS audio.",
+        ProviderLabel);
 
     private static readonly Counter ReusedCount = Metrics.CreateCounter(
         "tts_reused_count",
-        "Amount of reused TTS audio from cache.");
+        "Amount of TTS audio reused from the provider cache.",
+        ProviderLabel);
 
-    private static readonly Counter WantedRadioCount = Metrics.CreateCounter(
-        "tts_wanted_radio_count",
-        "Amount of wanted TTS audio.");
-
-    private static readonly Counter ReusedRadioCount = Metrics.CreateCounter(
-        "tts_reused_radio_count",
-        "Amount of reused TTS audio from cache.");
+    private static readonly Histogram FFMpegProcessingTimings = Metrics.CreateHistogram(
+        "tts_ffmpeg_process_seconds",
+        "Seconds spent on ffmpeg processing (including pipe operations) of TTS audio",
+        new HistogramConfiguration()
+        {
+            LabelNames = ["kind", "result"],
+            Buckets = Histogram.ExponentialBuckets(.005, 1.6, 12),
+        });
     #endregion
 
     private int _maxMessageChars;

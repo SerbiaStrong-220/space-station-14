@@ -32,6 +32,8 @@ public partial class TtsSystem
 
         protected override string SawmillName => "silero_handler";
 
+        protected override TtsProvider Provider => TtsProvider.Silero;
+
         public TtsSileroHandler(TtsSystem ttsSystem, IConfigurationManager cfg) : base(ttsSystem, cfg)
         {
             ConfigurationManager.OnValueChanged(CCVars220.TtsSileroApiUrl, v => _apiUrl = v, true);
@@ -52,12 +54,13 @@ public partial class TtsSystem
             if (string.IsNullOrEmpty(_apiUrl) || string.IsNullOrEmpty(_apiToken))
                 return null;
 
-            WantedCount.Inc();
+            ObserveWanted();
 
             var cacheKey = new TtsCacheKey(TtsCacheKey.DefaultDivider, text, speaker, kind.ToString());
 
             if (Cache.TryGet(cacheKey, out var data))
             {
+                ObserveReused();
                 Log.Debug($"Use cached sound for '{text}' speech by '{speaker}' speaker");
                 return data.Value.GetReference();
             }
@@ -111,10 +114,12 @@ public partial class TtsSystem
                     if (httpResponse.StatusCode == HttpStatusCode.TooManyRequests)
                     {
                         Log.Warning("Silero TTS request was rate limited");
+                        ObserveRequest("rate_limited", reqTime);
                         return false;
                     }
 
                     Log.Error($"Silero TTS request returned bad status code: {httpResponse.StatusCode}");
+                    ObserveRequest("bad_status", reqTime);
                     return false;
                 }
 
@@ -130,6 +135,7 @@ public partial class TtsSystem
                 if (json.Results is null || json.Results.Count == 0)
                 {
                     Log.Error("Silero response missing results");
+                    ObserveRequest("bad_response", reqTime);
                     return false;
                 }
 
@@ -137,6 +143,7 @@ public partial class TtsSystem
                 if (string.IsNullOrEmpty(audioBase64))
                 {
                     Log.Error("Silero response missing audio data");
+                    ObserveRequest("bad_response", reqTime);
                     return false;
                 }
 
@@ -157,18 +164,18 @@ public partial class TtsSystem
                 await streamToRead.ReadExactlyAsync(response.Value.Buffer, 0, response.Value.Length, cts.Token);
 
                 Log.Verbose($"Generated new sound for '{text}' speech by '{speaker}' speaker with kind '{kind}' ({response.Value.Length} bytes)");
-                RequestTimings.WithLabels("Success").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
+                ObserveRequest("success", reqTime);
                 return true;
             }
             catch (TaskCanceledException)
             {
-                RequestTimings.WithLabels("Timeout").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
+                ObserveRequest("timeout", reqTime);
                 Log.Error($"Timeout of request generation new audio for '{text}' speech by '{speaker}' speaker");
                 return false;
             }
             catch (Exception e)
             {
-                RequestTimings.WithLabels("Error").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
+                ObserveRequest("error", reqTime);
                 Log.Error($"Failed of request generation new sound for '{text}' speech by '{speaker}' speaker\n{e}");
                 return false;
             }

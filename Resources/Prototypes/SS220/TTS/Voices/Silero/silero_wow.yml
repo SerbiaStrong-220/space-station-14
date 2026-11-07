@@ -1,6 +1,6 @@
 - type: ttsVoice
   id: Sabellian
-  name: Sabellian
+  name: Сабеллиан
   speaker: Dragons_Sabellian
   provider: Silero
   categories: [ WOW ]
@@ -9,7 +9,7 @@
 
 - type: ttsVoice
   id: Ysera
-  name: Ysera
+  name: Изера
   speaker: Dragons_Ysera
   provider: Silero
   categories: [ WOW ]
@@ -18,7 +18,7 @@
 
 - type: ttsVoice
   id: MalygosWotlk
-  name: Malygos_wotlk
+  name: Малигос (Ярость Короля-лича)
   speaker: Dragons_MalygosWrath_of_the_Lich_King
   provider: Silero
   categories: [ WOW ]
@@ -27,7 +27,7 @@
 
 - type: ttsVoice
   id: Ebyssian
-  name: Ebyssian
+  name: Эбиссиан
   speaker: Dragons_Ebyssian
   provider: Silero
   categories: [ WOW ]
@@ -36,7 +36,7 @@
 
 - type: ttsVoice
   id: Deathwing
-  name: Deathwing
+  name: Смертокрыл
   speaker: Dragons_Deathwing
   provider: Silero
   categories: [ WOW ]
@@ -45,7 +45,7 @@
 
 - type: ttsVoice
   id: Nozdormu
-  name: Nozdormu
+  name: Ноздорму
   speaker: Dragons_Nozdormu
   provider: Silero
   categories: [ WOW ]
@@ -54,7 +54,7 @@
 
 - type: ttsVoice
   id: Malygos
-  name: Malygos
+  name: Малигос
   speaker: Dragons_Malygos
   provider: Silero
   categories: [ WOW ]
@@ -63,7 +63,7 @@
 
 - type: ttsVoice
   id: Calderax
-  name: Calderax
+  name: Кальдеракс
   speaker: Draconids_Calderax
   provider: Silero
   categories: [ WOW ]
@@ -72,7 +72,7 @@
 
 - type: ttsVoice
   id: Bazentus
-  name: Bazentus
+  name: Базентус
   speaker: Draconids_Bazentus
   provider: Silero
   categories: [ WOW ]
@@ -81,7 +81,7 @@
 
 - type: ttsVoice
   id: Kazra
-  name: Kazra
+  name: Казра
   speaker: Draconids_Kazra
   provider: Silero
   categories: [ WOW ]
@@ -90,7 +90,7 @@
 
 - type: ttsVoice
   id: Seltherex
-  name: Seltherex
+  name: Сельтерекс
   speaker: Draconids_Seltherex
   provider: Silero
   categories: [ WOW ]
@@ -99,7 +99,7 @@
 
 - type: ttsVoice
   id: Sendrax
-  name: Sendrax
+  name: Сендракс
   speaker: Draconids_Sendrax
   provider: Silero
   categories: [ WOW ]
@@ -108,7 +108,7 @@
 
 - type: ttsVoice
   id: Evantkis
-  name: Evantkis
+  name: Эвантикс
   speaker: Draconids_Evantkis
   provider: Silero
   categories: [ WOW ]
@@ -117,7 +117,7 @@
 
 - type: ttsVoice
   id: Drine
-  name: Drine
+  name: Дрин
   speaker: Draconids_Drine
   provider: Silero
   categories: [ WOW ]
@@ -126,7 +126,7 @@
 
 - type: ttsVoice
   id: Lethanak
-  name: Lethanak
+  name: Летанак
   speaker: Draconids_Lethanak
   provider: Silero
   categories: [ WOW ]
@@ -135,7 +135,7 @@
 
 - type: ttsVoice
   id: WrathionEcho
-  name: Wrathion_echo
+  name: Вратион (эхо)
   speaker: Dragons2_Wrathion_echo
   provider: Silero
   categories: [ WOW ]
@@ -144,7 +144,7 @@
 
 - type: ttsVoice
   id: Alexstraza
-  name: Alexstraza
+  name: Алекстраза
   speaker: Dragons2_Alexstraza
   provider: Silero
   categories: [ WOW ]
@@ -153,7 +153,7 @@
 
 - type: ttsVoice
   id: Kalecgos
-  name: Kalecgos
+  name: Калесгос
   speaker: Dragons2_Kalecgos
   provider: Silero
   categories: [ WOW ]
@@ -162,7 +162,7 @@
 
 - type: ttsVoice
   id: Wrathion
-  name: Wrathion
+  name: Вратион
   speaker: Dragons2_Wrathion
   provider: Silero
   categories: [ WOW ]
@@ -171,7 +171,7 @@
 
 - type: ttsVoice
   id: KalechosEcho
-  name: Kalecgos_echo
+  name: Калесгос (эхо)
   speaker: Dragons2_Kalecgos_echo
   provider: Silero
   categories: [ WOW ]
@@ -180,7 +180,7 @@
 
 - type: ttsVoice
   id: AlextrazaEcho
-  name: Alextraza_echo
+  name: Алекстраза (эхо)
   speaker: Dragons2_Alextraza_echo
   provider: Silero
   categories: [ WOW ]
@@ -189,7 +189,7 @@
 
 - type: ttsVoice
   id: NeltharionEcho
-  name: Neltharion_echo
+  name: Нелтарион (эхо)
   speaker: Dragons2_Neltharion_echo
   provider: Silero
   categories: [ WOW ]
@@ -198,7 +198,7 @@
 
 - type: ttsVoice
   id: WrathionDeathwing
-  name: Wration_Deathwing
+  name: Вратион (Смертокрыл)
   speaker: Dragons2_Wrathion_Deathwing
   provider: Silero
   categories: [ WOW ]
@@ -207,7 +207,7 @@
 
 - type: ttsVoice
   id: Neltharion
-  name: Neltharion
+  name: Нелтарион
   speaker: Dragons2_Neltharion
   provider: Silero
   categories: [ WOW ]
@@ -216,7 +216,7 @@
 
 - type: ttsVoice
   id: Garrosh
-  name: Garrosh
+  name: Гаррош
   speaker: garrosh
   provider: Silero
   categories: [ WOW ]
@@ -225,7 +225,7 @@
 
 - type: ttsVoice
   id: Guldan
-  name: Guldan
+  name: "Гул'дан"
   speaker: guldan
   provider: Silero
   categories: [ WOW ]
@@ -234,7 +234,7 @@
 
 - type: ttsVoice
   id: Hogger
-  name: Hogger
+  name: Хоггер
   speaker: hogger
   provider: Silero
   categories: [ WOW ]
@@ -243,7 +243,7 @@
 
 - type: ttsVoice
   id: DeathwingAlt
-  name: Deathwing
+  name: Смертокрыл (альтернативный)
   speaker: deathwing
   provider: Silero
   categories: [ WOW ]

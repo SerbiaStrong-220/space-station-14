@@ -1,6 +1,6 @@
 - type: ttsVoice
   id: Bandit
-  name: Bandit
+  name: Бандит
   speaker: bandit
   provider: Silero
   categories: [ Stalker ]
@@ -13,7 +13,7 @@
 
 - type: ttsVoice
   id: Sidorovich
-  name: Sidorovich
+  name: Сидорович
   speaker: sidorovich
   provider: Silero
   categories: [ Stalker ]
@@ -26,7 +26,7 @@
 
 - type: ttsVoice
   id: Barman
-  name: Barman
+  name: Бармен
   speaker: barman
   provider: Silero
   categories: [ Stalker ]
@@ -39,7 +39,7 @@
 
 - type: ttsVoice
   id: Dolg1
-  name: Dolg1
+  name: Долговец 1
   speaker: dolg1
   provider: Silero
   categories: [ Stalker ]
@@ -52,7 +52,7 @@
 
 - type: ttsVoice
   id: Monolith2
-  name: Monolith2
+  name: Монолитовец 2
   speaker: monolith2
   provider: Silero
   categories: [ Stalker ]
@@ -65,7 +65,7 @@
 
 - type: ttsVoice
   id: Legends
-  name: Legends
+  name: Легенды
   speaker: legends
   provider: Silero
   categories: [ Stalker ]
@@ -78,7 +78,7 @@
 
 - type: ttsVoice
   id: Monolith1
-  name: Monolith1
+  name: Монолитовец 1
   speaker: monolith1
   provider: Silero
   categories: [ Stalker ]
@@ -91,7 +91,7 @@
 
 - type: ttsVoice
   id: Dolg2
-  name: Dolg2
+  name: Долговец 2
   speaker: dolg2
   provider: Silero
   categories: [ Stalker ]
@@ -104,7 +104,7 @@
 
 - type: ttsVoice
   id: Stories
-  name: Stories
+  name: Байки
   speaker: stories
   provider: Silero
   categories: [ Stalker ]
@@ -117,7 +117,7 @@
 
 - type: ttsVoice
   id: Freedom
-  name: Freedom
+  name: Свободовец
   speaker: freedom
   provider: Silero
   categories: [ Stalker ]
@@ -131,7 +131,7 @@
 
 - type: ttsVoice
   id: StalkerMetroBandit02
-  name: stalker_metro_bandit02
+  name: Бандит (Метро) 2
   speaker: stalker_metro_bandit02
   provider: Silero
   categories: [ Stalker ]
@@ -140,7 +140,7 @@
 
 - type: ttsVoice
   id: StalkerMetroDegtyarev
-  name: stalker_metro_degtyarev
+  name: Дегтярёв
   speaker: stalker_metro_degtyarev
   provider: Silero
   categories: [ Stalker ]
@@ -149,7 +149,7 @@
 
 - type: ttsVoice
   id: StalkerMetroNovice02
-  name: stalker_metro_novice02
+  name: Новичок (Метро) 2
   speaker: stalker_metro_novice02
   provider: Silero
   categories: [ Stalker ]
@@ -158,7 +158,7 @@
 
 - type: ttsVoice
   id: StalkerMetroPavel
-  name: stalker_metro_pavel
+  name: Павел
   speaker: stalker_metro_pavel
   provider: Silero
   categories: [ Stalker ]
@@ -167,7 +167,7 @@
 
 - type: ttsVoice
   id: StalkerMetroSaharov
-  name: stalker_metro_saharov
+  name: Сахаров
   speaker: stalker_metro_saharov
   provider: Silero
   categories: [ Stalker ]
@@ -176,7 +176,7 @@
 
 - type: ttsVoice
   id: StalkerMetroSoldier
-  name: stalker_metro_soldier
+  name: Солдат (Метро)
   speaker: stalker_metro_soldier
   provider: Silero
   categories: [ Stalker ]
@@ -185,7 +185,7 @@
 
 - type: ttsVoice
   id: StalkerMetroStalker01
-  name: stalker_metro_stalker01
+  name: Сталкер (Метро) 1
   speaker: stalker_metro_stalker01
   provider: Silero
   categories: [ Stalker ]
@@ -194,7 +194,7 @@
 
 - type: ttsVoice
   id: StalkerMetroNewbie01
-  name: stalker_metro_newbie01
+  name: Новичок (Метро) 1
   speaker: stalker_metro_newbie01
   provider: Silero
   categories: [ Stalker ]
@@ -203,7 +203,7 @@
 
 - type: ttsVoice
   id: Bandit1
-  name: Bandit1
+  name: Бандит 1
   speaker: bandit1
   provider: Silero
   categories: [ Stalker ]

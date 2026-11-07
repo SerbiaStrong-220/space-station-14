@@ -1,6 +1,6 @@
 - type: ttsVoice
   id: Dude
-  name: Dude
+  name: Чувак
   speaker: dude
   provider: Silero
   categories: [ Postal2 ]
@@ -13,7 +13,7 @@
 
 - type: ttsVoice
   id: P3
-  name: P3
+  name: П-3
   speaker: p3
   provider: Silero
   categories: [ AtomicHeart ]
@@ -26,7 +26,7 @@
 
 - type: ttsVoice
   id: Hraz
-  name: Hraz
+  name: Хряз
   speaker: hraz
   provider: Silero
   categories: [ AtomicHeart ]
@@ -39,7 +39,7 @@
 
 - type: ttsVoice
   id: Tereshkova
-  name: Tereshkova
+  name: Терешкова
   speaker: tereshkova
   provider: Silero
   categories: [ AtomicHeart ]
@@ -52,7 +52,7 @@
 
 - type: ttsVoice
   id: Babazina
-  name: Babazina
+  name: Баба Зина
   speaker: babazina
   provider: Silero
   categories: [ AtomicHeart ]
@@ -65,7 +65,7 @@
 
 - type: ttsVoice
   id: Rita
-  name: Rita
+  name: Рита
   speaker: rita
   provider: Silero
   categories: [ RITA ]
@@ -78,7 +78,7 @@
 
 - type: ttsVoice
   id: Harbor
-  name: Harbor
+  name: Харбор
   speaker: harbor
   provider: Silero
   categories: [ VALORANT ]
@@ -91,7 +91,7 @@
 
 - type: ttsVoice
   id: Sage
-  name: Sage
+  name: Сейдж
   speaker: sage
   provider: Silero
   categories: [ VALORANT ]
@@ -104,7 +104,7 @@
 
 - type: ttsVoice
   id: Brimstone
-  name: Brimstone
+  name: Бримстоун
   speaker: brimstone
   provider: Silero
   categories: [ VALORANT ]
@@ -117,7 +117,7 @@
 
 - type: ttsVoice
   id: Sova
-  name: Sova
+  name: Сова
   speaker: sova
   provider: Silero
   categories: [ VALORANT ]
@@ -130,7 +130,7 @@
 
 - type: ttsVoice
   id: Byasha
-  name: Byasha
+  name: Бяша
   speaker: byasha
   provider: Silero
   categories: [ TINYBUNNY ]
@@ -143,7 +143,7 @@
 
 - type: ttsVoice
   id: Anton
-  name: Anton
+  name: Антон
   speaker: anton
   provider: Silero
   categories: [ TINYBUNNY ]
@@ -157,7 +157,7 @@
 
 - type: ttsVoice
   id: Karina
-  name: Karina
+  name: Карина
   speaker: karina
   provider: Silero
   categories: [ TINYBUNNY ]
@@ -170,7 +170,7 @@
 
 - type: ttsVoice
   id: Semen
-  name: Semen
+  name: Семён
   speaker: semen
   provider: Silero
   categories: [ TINYBUNNY ]
@@ -183,7 +183,7 @@
 
 - type: ttsVoice
   id: Coach
-  name: Coach
+  name: Тренер
   speaker: coach
   provider: Silero
   categories: [ LEFT4DEAD ]
@@ -196,7 +196,7 @@
 
 - type: ttsVoice
   id: Patrick
-  name: Patrick
+  name: Патрик
   speaker: patrick
   provider: Silero
   categories: [ SPONGEBOB ]
@@ -209,7 +209,7 @@
 
 - type: ttsVoice
   id: Spongebob
-  name: Spongebob
+  name: Губка Боб
   speaker: spongebob
   provider: Silero
   categories: [ SPONGEBOB ]
@@ -222,7 +222,7 @@
 
 - type: ttsVoice
   id: LydiaTb
-  name: Lydia_tb
+  name: Лидия
   speaker: lydia_tb
   provider: Silero
   categories: [ TINYBUNNY ]
@@ -235,7 +235,7 @@
 
 - type: ttsVoice
   id: Plankton
-  name: Plankton
+  name: Планктон
   speaker: plankton
   provider: Silero
   categories: [ SPONGEBOB ]
@@ -248,7 +248,7 @@
 
 - type: ttsVoice
   id: Rochelle
-  name: Rochelle
+  name: Рошель
   speaker: rochelle
   provider: Silero
   categories: [ LEFT4DEAD ]
@@ -261,7 +261,7 @@
 
 - type: ttsVoice
   id: Grandmother
-  name: Grandmother
+  name: Бабушка
   speaker: grandmother
   provider: Silero
   categories: [ TINYBUNNY ]
@@ -274,7 +274,7 @@
 
 - type: ttsVoice
   id: Kate
-  name: Kate
+  name: Кейт
   speaker: kate
   provider: Silero
   categories: [ TINYBUNNY ]
@@ -287,7 +287,7 @@
 
 - type: ttsVoice
   id: Polina
-  name: Polina
+  name: Полина
   speaker: polina
   provider: Silero
   categories: [ TINYBUNNY ]
@@ -300,7 +300,7 @@
 
 - type: ttsVoice
   id: Ellis
-  name: Ellis
+  name: Эллис
   speaker: ellis
   provider: Silero
   categories: [ LEFT4DEAD ]
@@ -313,7 +313,7 @@
 
 - type: ttsVoice
   id: Dad
-  name: Dad
+  name: Папа
   speaker: dad
   provider: Silero
   categories: [ TINYBUNNY ]
@@ -326,7 +326,7 @@
 
 - type: ttsVoice
   id: Romka
-  name: Romka
+  name: Ромка
   speaker: romka
   provider: Silero
   categories: [ TINYBUNNY ]
@@ -339,7 +339,7 @@
 
 - type: ttsVoice
   id: Squidward
-  name: Squidward
+  name: Сквидвард
   speaker: squidward
   provider: Silero
   categories: [ SPONGEBOB ]
@@ -352,7 +352,7 @@
 
 - type: ttsVoice
   id: Nick
-  name: Nick
+  name: Ник
   speaker: nick
   provider: Silero
   categories: [ LEFT4DEAD ]
@@ -365,7 +365,7 @@
 
 - type: ttsVoice
   id: Gale
-  name: Gale
+  name: Гейл
   speaker: en_Gale
   provider: Silero
   categories: [ BALDURS_GATE_3 ]
@@ -374,7 +374,7 @@
 
 - type: ttsVoice
   id: Jaheira
-  name: Jaheira
+  name: Джахейра
   speaker: en_Jaheira
   provider: Silero
   categories: [ BALDURS_GATE_3 ]
@@ -383,7 +383,7 @@
 
 - type: ttsVoice
   id: Laezel
-  name: Laezel
+  name: Лаэзель
   speaker: en_Laezel
   provider: Silero
   categories: [ BALDURS_GATE_3 ]
@@ -392,7 +392,7 @@
 
 - type: ttsVoice
   id: Karlach
-  name: Karlach
+  name: Карлах
   speaker: en_Karlach
   provider: Silero
   categories: [ BALDURS_GATE_3 ]
@@ -401,7 +401,7 @@
 
 - type: ttsVoice
   id: Shadowheart
-  name: Shadowheart
+  name: Шэдоухарт
   speaker: en_Shadowheart
   provider: Silero
   categories: [ BALDURS_GATE_3 ]
@@ -410,7 +410,7 @@
 
 - type: ttsVoice
   id: Wyll
-  name: Wyll
+  name: Вилл
   speaker: en_Wyll
   provider: Silero
   categories: [ BALDURS_GATE_3 ]
@@ -419,7 +419,7 @@
 
 - type: ttsVoice
   id: Minthara
-  name: Minthara
+  name: Минтара
   speaker: en_Minthara
   provider: Silero
   categories: [ BALDURS_GATE_3 ]
@@ -428,7 +428,7 @@
 
 - type: ttsVoice
   id: Minsc
-  name: Minsc
+  name: Минск
   speaker: en_Minsc
   provider: Silero
   categories: [ BALDURS_GATE_3 ]
@@ -437,7 +437,7 @@
 
 - type: ttsVoice
   id: Astarion
-  name: Astarion
+  name: Астарион
   speaker: en_Astarion
   provider: Silero
   categories: [ BALDURS_GATE_3 ]
@@ -446,7 +446,7 @@
 
 - type: ttsVoice
   id: Halsin
-  name: Halsin
+  name: Хальсин
   speaker: en_Halsin
   provider: Silero
   categories: [ BALDURS_GATE_3 ]
@@ -455,7 +455,7 @@
 
 - type: ttsVoice
   id: EmperorBg3
-  name: Mind_Flayer_Emperor
+  name: Император (Свежеватель разума)
   speaker: en_Emperor
   provider: Silero
   categories: [ BALDURS_GATE_3 ]
@@ -464,7 +464,7 @@
 
 - type: ttsVoice
   id: Ketheric
-  name: Ketheric
+  name: Кетерик
   speaker: en_Ketheric
   provider: Silero
   categories: [ BALDURS_GATE_3 ]
@@ -473,7 +473,7 @@
 
 - type: ttsVoice
   id: Gortash
-  name: Gortash
+  name: Горташ
   speaker: en_Gortash
   provider: Silero
   categories: [ BALDURS_GATE_3 ]
@@ -482,7 +482,7 @@
 
 - type: ttsVoice
   id: Shredder
-  name: Shredder
+  name: Шреддер
   speaker: Ninja_Turtles_shredder
   provider: Silero
   categories: [ TMNT ]
@@ -491,7 +491,7 @@
 
 - type: ttsVoice
   id: HanSolo
-  name: Han_Solo
+  name: Хан Соло
   speaker: Star_Wars_Han_Solo
   provider: Silero
   categories: [ STAR_WARS ]
@@ -500,7 +500,7 @@
 
 - type: ttsVoice
   id: DarthSidious
-  name: Darth_Sidious
+  name: Дарт Сидиус
   speaker: Star_Wars_Darth_Sidious
   provider: Silero
   categories: [ STAR_WARS ]
@@ -509,7 +509,7 @@
 
 - type: ttsVoice
   id: LukeSkywalker
-  name: Luke_Skywalker
+  name: Люк Скайуокер
   speaker: Star_Wars_Luke_Skywalker
   provider: Silero
   categories: [ STAR_WARS ]
@@ -518,7 +518,7 @@
 
 - type: ttsVoice
   id: Yoda
-  name: Yoda
+  name: Йода
   speaker: Star_Wars_Yoda
   provider: Silero
   categories: [ STAR_WARS ]
@@ -527,7 +527,7 @@
 
 - type: ttsVoice
   id: DarthVader
-  name: Darth_Vader
+  name: Дарт Вейдер
   speaker: Star_Wars_Darth_Vader
   provider: Silero
   categories: [ STAR_WARS ]
@@ -536,7 +536,7 @@
 
 - type: ttsVoice
   id: ObiwanKenobi
-  name: Obi-wan_Kenobi
+  name: Оби-Ван Кеноби
   speaker: Star_Wars_Obi-Wan_Kenobi
   provider: Silero
   categories: [ STAR_WARS ]
@@ -545,7 +545,7 @@
 
 - type: ttsVoice
   id: AnakinSkywalker
-  name: Anakin_Skywalker
+  name: Энакин Скайуокер
   speaker: Star_Wars_Anakin_Skywalker
   provider: Silero
   categories: [ STAR_WARS ]
@@ -554,7 +554,7 @@
 
 - type: ttsVoice
   id: OptimusPrime
-  name: Optimus_Prime
+  name: Оптимус Прайм
   speaker: Transformers_War_of_Cybertron_optimusprime
   provider: Silero
   categories: [ TRANSFORMERS ]
@@ -563,7 +563,7 @@
 
 - type: ttsVoice
   id: Megatron
-  name: Megatron
+  name: Мегатрон
   speaker: Transformers_War_of_Cybertron_megatron
   provider: Silero
   categories: [ TRANSFORMERS ]
@@ -572,7 +572,7 @@
 
 - type: ttsVoice
   id: Soundwave
-  name: Soundwave
+  name: Саундвейв
   speaker: Transformers_War_of_Cybertron_soundwave
   provider: Silero
   categories: [ TRANSFORMERS ]
@@ -581,7 +581,7 @@
 
 - type: ttsVoice
   id: Aragorn
-  name: Aragorn
+  name: Арагорн
   speaker: The_Lord_of_the_Rings_Aragorn
   provider: Silero
   categories: [ LOTR ]
@@ -590,7 +590,7 @@
 
 - type: ttsVoice
   id: Elrond
-  name: Elrond
+  name: Элронд
   speaker: The_Lord_of_the_Rings_Elrond
   provider: Silero
   categories: [ LOTR ]
@@ -599,7 +599,7 @@
 
 - type: ttsVoice
   id: Gandalf
-  name: Gandalf
+  name: Гэндальф
   speaker: The_Lord_of_the_Rings_Gandalf
   provider: Silero
   categories: [ LOTR ]
@@ -608,7 +608,7 @@
 
 - type: ttsVoice
   id: Gimli
-  name: Gimli
+  name: Гимли
   speaker: The_Lord_of_the_Rings_Gimli
   provider: Silero
   categories: [ LOTR ]
@@ -617,7 +617,7 @@
 
 - type: ttsVoice
   id: Gollum
-  name: Gollum
+  name: Голлум
   speaker: The_Lord_of_the_Rings_Gollum
   provider: Silero
   categories: [ LOTR ]
@@ -630,7 +630,7 @@
 
 - type: ttsVoice
   id: Legolas
-  name: Legolas
+  name: Леголас
   speaker: The_Lord_of_the_Rings_Legolas
   provider: Silero
   categories: [ LOTR ]
@@ -639,7 +639,7 @@
 
 - type: ttsVoice
   id: GingerbreadMan
-  name: Gingerbread_Man
+  name: Пряничный человечек
   speaker: Srek_Gingerbread_Man
   provider: Silero
   categories: [ SHREK ]
@@ -652,7 +652,7 @@
 
 - type: ttsVoice
   id: Fiona
-  name: Fiona
+  name: Фиона
   speaker: Srek_Fiona
   provider: Silero
   categories: [ SHREK ]
@@ -661,7 +661,7 @@
 
 - type: ttsVoice
   id: Donkey
-  name: Donkey
+  name: Осёл
   speaker: Srek_Donkey
   provider: Silero
   categories: [ SHREK ]
@@ -674,7 +674,7 @@
 
 - type: ttsVoice
   id: FairyGodmother
-  name: Fairy_Godmother
+  name: Фея-крёстная
   speaker: Srek_Fairy_Godmother
   provider: Silero
   categories: [ SHREK ]
@@ -683,7 +683,7 @@
 
 - type: ttsVoice
   id: SrekKing
-  name: King
+  name: Король (Шрек)
   speaker: Srek_King
   provider: Silero
   categories: [ SHREK ]
@@ -692,7 +692,7 @@
 
 - type: ttsVoice
   id: SrekNarrator
-  name: Shrek_Narrator
+  name: Рассказчик (Шрек)
   speaker: Srek_Narrator
   provider: Silero
   categories: [ SHREK ]
@@ -701,7 +701,7 @@
 
 - type: ttsVoice
   id: PussInBoots
-  name: Puss_in_Boots
+  name: Кот в сапогах
   speaker: Srek_Puss_in_Boots
   provider: Silero
   categories: [ SHREK ]
@@ -710,7 +710,7 @@
 
 - type: ttsVoice
   id: Shrek
-  name: Shrek
+  name: Шрек
   speaker: Srek_Shrek
   provider: Silero
   categories: [ SHREK ]
@@ -719,7 +719,7 @@
 
 - type: ttsVoice
   id: JackSparrow
-  name: Jack_Sparrow
+  name: Джек Воробей
   speaker: Pirats_of_the_caribbean_Jack_Sparrow
   provider: Silero
   categories: [ POTC ]
@@ -728,7 +728,7 @@
 
 - type: ttsVoice
   id: Barbossa
-  name: Barbossa
+  name: Барбосса
   speaker: Pirats_of_the_caribbean_Barbossa
   provider: Silero
   categories: [ POTC ]
@@ -737,7 +737,7 @@
 
 - type: ttsVoice
   id: Tiadalma
-  name: Tiadalma
+  name: Тиа Дальма
   speaker: Pirats_of_the_caribbean_Tiadalma
   provider: Silero
   categories: [ POTC ]
@@ -746,7 +746,7 @@
 
 - type: ttsVoice
   id: DavyJones
-  name: Davy_Jones
+  name: Дейви Джонс
   speaker: Pirats_of_the_caribbean_Davy_Jones
   provider: Silero
   categories: [ POTC ]
@@ -755,7 +755,7 @@
 
 - type: ttsVoice
   id: X3Betty
-  name: Betty
+  name: Бетти
   speaker: X3_reunion_Betty
   provider: Silero
   categories: [ X3 ]
@@ -764,7 +764,7 @@
 
 - type: ttsVoice
   id: OverlordGnarl
-  name: Gnarl
+  name: Гнарл
   speaker: Overlord_2_Gnarl
   provider: Silero
   categories: [ OVERLORD2 ]
@@ -777,7 +777,7 @@
 
 - type: ttsVoice
   id: TonyStark
-  name: Tony_Stark
+  name: Тони Старк
   speaker: Marvel_Tony_Stark
   provider: Silero
   categories: [ MARVEL ]
@@ -786,7 +786,7 @@
 
 - type: ttsVoice
   id: Livsy
-  name: Livsy
+  name: Ливси
   speaker: Treasure_Island_Livsy
   provider: Silero
   categories: [ TREASURE_ISLAND ]
@@ -795,7 +795,7 @@
 
 - type: ttsVoice
   id: SpBrother
-  name: sp_brother
+  name: Брат (Слово пацана)
   speaker: slovo_patsana_brother
   provider: Silero
   categories: [ BOYS_WORD ]
@@ -804,7 +804,7 @@
 
 - type: ttsVoice
   id: SpKoschei
-  name: sp_koschei
+  name: Кощей
   speaker: slovo_patsana_koschei
   provider: Silero
   categories: [ BOYS_WORD ]
@@ -813,7 +813,7 @@
 
 - type: ttsVoice
   id: SpMarat
-  name: sp_marat
+  name: Марат
   speaker: slovo_patsana_marat
   provider: Silero
   categories: [ BOYS_WORD ]
@@ -822,7 +822,7 @@
 
 - type: ttsVoice
   id: SpAngryCop
-  name: sp_angry_cop
+  name: Злой мент
   speaker: slovo_patsana_angry_cop
   provider: Silero
   categories: [ BOYS_WORD ]
@@ -831,7 +831,7 @@
 
 - type: ttsVoice
   id: SpCop
-  name: sp_cop
+  name: Мент
   speaker: slovo_patsana_cop
   provider: Silero
   categories: [ BOYS_WORD ]
@@ -840,7 +840,7 @@
 
 - type: ttsVoice
   id: SpMain
-  name: sp_main
+  name: Главный герой (Слово пацана)
   speaker: slovo_patsana_main
   provider: Silero
   categories: [ BOYS_WORD ]
@@ -849,7 +849,7 @@
 
 - type: ttsVoice
   id: HgPoppy
-  name: hg_poppy
+  name: Поппи Свитинг
   speaker: hogwarts_poppy_sweeting
   provider: Silero
   categories: [ HOGWARTS ]
@@ -858,7 +858,7 @@
 
 - type: ttsVoice
   id: HgSebastian
-  name: hg_sebastian
+  name: Себастьян Сэллоу
   speaker: hogwarts_sebastian_sallow
   provider: Silero
   categories: [ HOGWARTS ]
@@ -867,7 +867,7 @@
 
 - type: ttsVoice
   id: HgPlayerFemale
-  name: hg_player_female
+  name: Студентка Хогвартса
   speaker: hogwarts_player_female
   provider: Silero
   categories: [ HOGWARTS ]
@@ -876,7 +876,7 @@
 
 - type: ttsVoice
   id: HgGoblinGenericA
-  name: hg_goblin_generic_a
+  name: Гоблин
   speaker: hogwarts_goblin_generic_a
   provider: Silero
   categories: [ HOGWARTS ]
@@ -889,7 +889,7 @@
 
 - type: ttsVoice
   id: HgPlayerMale
-  name: hg_player_male
+  name: Студент Хогвартса
   speaker: hogwarts_player_male
   provider: Silero
   categories: [ HOGWARTS ]
@@ -898,7 +898,7 @@
 
 - type: ttsVoice
   id: HgNatsai
-  name: hg_natsai
+  name: Нацай Онай
   speaker: hogwarts_natsai_onai
   provider: Silero
   categories: [ HOGWARTS ]
@@ -907,7 +907,7 @@
 
 - type: ttsVoice
   id: HgEleazarFig
-  name: hg_eleazar_fig
+  name: Элеазар Фиг
   speaker: hogwarts_eleazar_fig
   provider: Silero
   categories: [ HOGWARTS ]
@@ -916,7 +916,7 @@
 
 - type: ttsVoice
   id: HgAesopSharp
-  name: hg_aesop_sharp
+  name: Эзоп Шарп
   speaker: hogwarts_aesop_sharp
   provider: Silero
   categories: [ HOGWARTS ]
@@ -925,7 +925,7 @@
 
 - type: ttsVoice
   id: HgOminisGaunt
-  name: hg_ominis_gaunt
+  name: Оминис Мракс
   speaker: hogwarts_ominis_gaunt
   provider: Silero
   categories: [ HOGWARTS ]
@@ -934,7 +934,7 @@
 
 - type: ttsVoice
   id: HgSophroniaFranklin
-  name: hg_sophronia_franklin
+  name: Софрония Франклин
   speaker: hogwarts_sophronia_franklin
   provider: Silero
   categories: [ HOGWARTS ]
@@ -947,7 +947,7 @@
 
 - type: ttsVoice
   id: HgAbrahamRonen
-  name: hg_abraham_ronen
+  name: Авраам Ронен
   speaker: hogwarts_abraham_ronen
   provider: Silero
   categories: [ HOGWARTS ]
@@ -956,7 +956,7 @@
 
 - type: ttsVoice
   id: HgCuthbertBinns
-  name: hg_cuthbert_binns
+  name: Катберт Биннс
   speaker: hogwarts_cuthbert_binns
   provider: Silero
   categories: [ HOGWARTS ]
@@ -965,7 +965,7 @@
 
 - type: ttsVoice
   id: HgLodgok
-  name: hg_lodgok
+  name: Лодгок
   speaker: hogwarts_lodgok
   provider: Silero
   categories: [ HOGWARTS ]
@@ -974,7 +974,7 @@
 
 - type: ttsVoice
   id: HgMatildaWeasley
-  name: hg_matilda_weasley
+  name: Матильда Уизли
   speaker: hogwarts_matilda_weasley
   provider: Silero
   categories: [ HOGWARTS ]
@@ -983,7 +983,7 @@
 
 - type: ttsVoice
   id: HgMirabelGarlick
-  name: hg_mirabel_garlick
+  name: Мирабель Гарлик
   speaker: hogwarts_mirabel_garlick
   provider: Silero
   categories: [ HOGWARTS ]
@@ -992,7 +992,7 @@
 
 - type: ttsVoice
   id: HgDinahHecat
-  name: hg_dinah_hecat
+  name: Дина Гекат
   speaker: hogwarts_dinah_hecat
   provider: Silero
   categories: [ HOGWARTS ]
@@ -1001,7 +1001,7 @@
 
 - type: ttsVoice
   id: HalflifeGman
-  name: halflife_gman
+  name: Джи-мэн
   speaker: halflife_gman
   provider: Silero
   categories: [ HALFLIFE_ALYX ]
@@ -1010,7 +1010,7 @@
 
 - type: ttsVoice
   id: HalflifeVortigaunt
-  name: halflife_vortigaunt
+  name: Вортигонт
   speaker: halflife_vortigaunt
   provider: Silero
   categories: [ HALFLIFE_ALYX ]
@@ -1019,7 +1019,7 @@
 
 - type: ttsVoice
   id: HalflifeLarry
-  name: halflife_larry
+  name: Ларри
   speaker: halflife_larry
   provider: Silero
   categories: [ HALFLIFE_ALYX ]
@@ -1028,7 +1028,7 @@
 
 - type: ttsVoice
   id: HalflifeOlga
-  name: halflife_olga
+  name: Ольга
   speaker: halflife_olga
   provider: Silero
   categories: [ HALFLIFE_ALYX ]
@@ -1037,7 +1037,7 @@
 
 - type: ttsVoice
   id: HalflifeAlyx
-  name: halflife_alyx
+  name: Аликс
   speaker: halflife_alyx
   provider: Silero
   categories: [ HALFLIFE_ALYX ]
@@ -1046,7 +1046,7 @@
 
 - type: ttsVoice
   id: StrongholdRichard
-  name: stronghold_richard
+  name: Ричард Львиное Сердце
   speaker: stronghold_richard
   provider: Silero
   categories: [ STRONGHOLD ]
@@ -1055,7 +1055,7 @@
 
 - type: ttsVoice
   id: StrongholdSultan
-  name: stronghold_sultan
+  name: Султан
   speaker: stronghold_sultan
   provider: Silero
   categories: [ STRONGHOLD ]
@@ -1064,7 +1064,7 @@
 
 - type: ttsVoice
   id: StrongholdEmir
-  name: stronghold_emir
+  name: Эмир
   speaker: stronghold_emir
   provider: Silero
   categories: [ STRONGHOLD ]
@@ -1073,7 +1073,7 @@
 
 - type: ttsVoice
   id: StrongholdSaladin
-  name: stronghold_saladin
+  name: Саладин
   speaker: stronghold_saladin
   provider: Silero
   categories: [ STRONGHOLD ]
@@ -1082,7 +1082,7 @@
 
 - type: ttsVoice
   id: StrongholdAbbot
-  name: stronghold_abbot
+  name: Аббат
   speaker: stronghold_abbot
   provider: Silero
   categories: [ STRONGHOLD ]
@@ -1091,7 +1091,7 @@
 
 - type: ttsVoice
   id: StrongholdRat
-  name: stronghold_rat
+  name: Крыса
   speaker: stronghold_rat
   provider: Silero
   categories: [ STRONGHOLD ]
@@ -1104,7 +1104,7 @@
 
 - type: ttsVoice
   id: StrongholdHalif
-  name: stronghold_halif
+  name: Халиф
   speaker: stronghold_halif
   provider: Silero
   categories: [ STRONGHOLD ]
@@ -1113,7 +1113,7 @@
 
 - type: ttsVoice
   id: StrongholdSnake
-  name: stronghold_snake
+  name: Змей
   speaker: stronghold_snake
   provider: Silero
   categories: [ STRONGHOLD ]
@@ -1122,7 +1122,7 @@
 
 - type: ttsVoice
   id: StrongholdFriedrich
-  name: stronghold_friedrich
+  name: Фридрих
   speaker: stronghold_friedrich
   provider: Silero
   categories: [ STRONGHOLD ]
@@ -1131,7 +1131,7 @@
 
 - type: ttsVoice
   id: StrongholdBoar
-  name: stronghold_boar
+  name: Вепрь
   speaker: stronghold_boar
   provider: Silero
   categories: [ STRONGHOLD ]
@@ -1140,7 +1140,7 @@
 
 - type: ttsVoice
   id: CyberpunkMaleV
-  name: Cyberpunk_male_v
+  name: Ви (мужчина)
   speaker: Cyberpunk_male_v
   provider: Silero
   categories: [ CYBERPUNK ]
@@ -1149,7 +1149,7 @@
 
 - type: ttsVoice
   id: CyberpunkJohny
-  name: Cyberpunk_johny
+  name: Джонни
   speaker: Cyberpunk_johny
   provider: Silero
   categories: [ CYBERPUNK ]
@@ -1158,7 +1158,7 @@
 
 - type: ttsVoice
   id: CyberpunkTakemura
-  name: Cyberpunk_takemura
+  name: Такэмура
   speaker: Cyberpunk_takemura
   provider: Silero
   categories: [ CYBERPUNK ]
@@ -1167,7 +1167,7 @@
 
 - type: ttsVoice
   id: CyberpunkSobchak
-  name: Cyberpunk_sobchak
+  name: Собчак
   speaker: Cyberpunk_sobchak
   provider: Silero
   categories: [ CYBERPUNK ]
@@ -1176,7 +1176,7 @@
 
 - type: ttsVoice
   id: CyberpunkJackie
-  name: Cyberpunk_jackie
+  name: Джеки
   speaker: Cyberpunk_jackie
   provider: Silero
   categories: [ CYBERPUNK ]
@@ -1185,7 +1185,7 @@
 
 - type: ttsVoice
   id: CyberpunkKerry
-  name: Cyberpunk_kerry
+  name: Керри
   speaker: Cyberpunk_kerry
   provider: Silero
   categories: [ CYBERPUNK ]
@@ -1194,7 +1194,7 @@
 
 - type: ttsVoice
   id: CyberpunkMitch
-  name: Cyberpunk_mitch
+  name: Митч
   speaker: Cyberpunk_mitch
   provider: Silero
   categories: [ CYBERPUNK ]
@@ -1203,7 +1203,7 @@
 
 - type: ttsVoice
   id: CyberpunkSaul
-  name: Cyberpunk_saul
+  name: Сол
   speaker: Cyberpunk_saul
   provider: Silero
   categories: [ CYBERPUNK ]
@@ -1212,7 +1212,7 @@
 
 - type: ttsVoice
   id: CyberpunkHaru
-  name: Cyberpunk_haru
+  name: Хару
   speaker: Cyberpunk_haru
   provider: Silero
   categories: [ CYBERPUNK ]
@@ -1221,7 +1221,7 @@
 
 - type: ttsVoice
   id: CyberpunkVictor
-  name: Cyberpunk_victor
+  name: Виктор
   speaker: Cyberpunk_victor
   provider: Silero
   categories: [ CYBERPUNK ]
@@ -1230,7 +1230,7 @@
 
 - type: ttsVoice
   id: CyberpunkPlacide
-  name: Cyberpunk_placide
+  name: Пласид
   speaker: Cyberpunk_placide
   provider: Silero
   categories: [ CYBERPUNK ]
@@ -1239,7 +1239,7 @@
 
 - type: ttsVoice
   id: CyberpunkDexter
-  name: Cyberpunk_dexter
+  name: Декстер
   speaker: Cyberpunk_dexter
   provider: Silero
   categories: [ CYBERPUNK ]
@@ -1248,7 +1248,7 @@
 
 - type: ttsVoice
   id: CyberpunkSebastian
-  name: Cyberpunk_sebastian
+  name: Себастьян
   speaker: Cyberpunk_sebastian
   provider: Silero
   categories: [ CYBERPUNK ]
@@ -1257,7 +1257,7 @@
 
 - type: ttsVoice
   id: CyberpunkJefferson
-  name: Cyberpunk_jefferson
+  name: Джефферсон
   speaker: Cyberpunk_jefferson
   provider: Silero
   categories: [ CYBERPUNK ]
@@ -1266,7 +1266,7 @@
 
 - type: ttsVoice
   id: CyberpunkJoshua
-  name: Cyberpunk_joshua
+  name: Джошуа
   speaker: Cyberpunk_joshua
   provider: Silero
   categories: [ CYBERPUNK ]
@@ -1275,7 +1275,7 @@
 
 - type: ttsVoice
   id: TlouEllie
-  name: tlou_ellie
+  name: Элли
   speaker: tlou_ellie
   provider: Silero
   categories: [ TLOU ]
@@ -1284,7 +1284,7 @@
 
 - type: ttsVoice
   id: TlouJoel
-  name: tlou_joel
+  name: Джоэл
   speaker: tlou_joel
   provider: Silero
   categories: [ TLOU ]
@@ -1293,7 +1293,7 @@
 
 - type: ttsVoice
   id: TlouTess
-  name: tlou_tess
+  name: Тесс
   speaker: tlou_tess
   provider: Silero
   categories: [ TLOU ]
@@ -1302,7 +1302,7 @@
 
 - type: ttsVoice
   id: DrgMissionControl
-  name: Deep_rock_galactic_mission_control
+  name: Диспетчер миссии
   speaker: Deep_rock_galactic_mission_control
   provider: Silero
   categories: [ DEEP_ROCK_GALACTIC ]
@@ -1311,7 +1311,7 @@
 
 - type: ttsVoice
   id: DrgDwarves
-  name: Deep_rock_galactic_dwarves
+  name: Дворфы
   speaker: Deep_rock_galactic_dwarves
   provider: Silero
   categories: [ DEEP_ROCK_GALACTIC ]
@@ -1320,7 +1320,7 @@
 
 - type: ttsVoice
   id: AagInner
-  name: an_alt_girl_inner
+  name: Внутренний голос
   speaker: an_alt_girl_inner
   provider: Silero
   categories: [ SUNBOY ]
@@ -1329,7 +1329,7 @@
 
 - type: ttsVoice
   id: AagSunboyS
-  name: an_alt_girl_sunboy_s
+  name: Солнечный мальчик (S)
   speaker: an_alt_girl_sunboy_s
   provider: Silero
   categories: [ SUNBOY ]
@@ -1338,7 +1338,7 @@
 
 - type: ttsVoice
   id: AagSunboyN
-  name: an_alt_girl_dlc_sunboy_n
+  name: Солнечный мальчик (N)
   speaker: an_alt_girl_dlc_sunboy_n
   provider: Silero
   categories: [ SUNBOY ]
@@ -1347,7 +1347,7 @@
 
 - type: ttsVoice
   id: AagSunboyK
-  name: an_alt_girl_dlc_sunboy_k
+  name: Солнечный мальчик (K)
   speaker: an_alt_girl_dlc_sunboy_k
   provider: Silero
   categories: [ SUNBOY ]
@@ -1356,7 +1356,7 @@
 
 - type: ttsVoice
   id: LastYearsSnowNarrator
-  name: last_years_snow_narrator
+  name: Рассказчик (Снег прошлого года)
   speaker: last_years_snow_narrator
   provider: Silero
   categories: [ Misc ]
@@ -1365,7 +1365,7 @@
 
 - type: ttsVoice
   id: LastYearsSnowMan
-  name: last_years_snow_man
+  name: Мужчина (Снег прошлого года)
   speaker: last_years_snow_man
   provider: Silero
   categories: [ Misc ]
@@ -1378,7 +1378,7 @@
 
 - type: ttsVoice
   id: Marine2Titus
-  name: marine2_titus
+  name: Тит
   speaker: marine2_titus
   provider: Silero
   categories: [ WH40k ]
@@ -1387,7 +1387,7 @@
 
 - type: ttsVoice
   id: Marine2Berserk
-  name: marine2_berserk
+  name: Берсерк
   speaker: marine2_berserk
   provider: Silero
   categories: [ WH40k ]
@@ -1396,7 +1396,7 @@
 
 - type: ttsVoice
   id: Marine2Gadriel
-  name: marine2_gadriel
+  name: Гадриэль
   speaker: marine2_gadriel
   provider: Silero
   categories: [ WH40k ]
@@ -1405,7 +1405,7 @@
 
 - type: ttsVoice
   id: Marine2Chairon
-  name: marine2_chairon
+  name: Хейрон
   speaker: marine2_chairon
   provider: Silero
   categories: [ WH40k ]
@@ -1414,7 +1414,7 @@
 
 - type: ttsVoice
   id: Marine2Acheran
-  name: marine2_acheran
+  name: Ахеран
   speaker: marine2_acheran
   provider: Silero
   categories: [ WH40k ]
@@ -1423,7 +1423,7 @@
 
 - type: ttsVoice
   id: Marine2MachineSpirit4
-  name: marine2_machine_spirit_4
+  name: Дух машины
   speaker: marine2_machine_spirit_4
   provider: Silero
   categories: [ WH40k ]
@@ -1432,7 +1432,7 @@
 
 - type: ttsVoice
   id: Marine2MagosGaleo
-  name: marine2_magos_galeo
+  name: Магос Галео
   speaker: marine2_magos_galeo
   provider: Silero
   categories: [ WH40k ]
@@ -1441,7 +1441,7 @@
 
 - type: ttsVoice
   id: Marine2ServoSkull
-  name: marine2_servo-skull
+  name: Серво-череп
   speaker: marine2_servo-skull
   provider: Silero
   categories: [ WH40k ]
@@ -1450,7 +1450,7 @@
 
 - type: ttsVoice
   id: Marine2Balthazar
-  name: marine2_balthazar
+  name: Бальтазар
   speaker: marine2_balthazar
   provider: Silero
   categories: [ WH40k ]
@@ -1459,7 +1459,7 @@
 
 - type: ttsVoice
   id: Anastasia
-  name: Anastasia
+  name: Анастасия
   speaker: anastasia
   provider: Silero
   categories: [ Misc ]
@@ -1468,7 +1468,7 @@
 
 - type: ttsVoice
   id: Eleanora
-  name: Eleanora
+  name: Элеонора
   speaker: eleanora
   provider: Silero
   categories: [ Misc ]
@@ -1477,7 +1477,7 @@
 
 - type: ttsVoice
   id: Olya
-  name: Olya
+  name: Оля
   speaker: olya
   provider: Silero
   categories: [ Misc ]
@@ -1490,7 +1490,7 @@
 
 - type: ttsVoice
   id: Petr
-  name: Petr
+  name: Пётр
   speaker: petr
   provider: Silero
   categories: [ Misc ]
@@ -1499,7 +1499,7 @@
 
 - type: ttsVoice
   id: Vaas
-  name: Vaas
+  name: Вааз
   speaker: vaas
   provider: Silero
   categories: [ Misc ]
@@ -1508,7 +1508,7 @@
 
 - type: ttsVoice
   id: Valeria
-  name: Valeria
+  name: Валерия
   speaker: valeria
   provider: Silero
   categories: [ Misc ]
@@ -1517,7 +1517,7 @@
 
 - type: ttsVoice
   id: Winslow
-  name: Winslow
+  name: Уинслоу
   speaker: winslow
   provider: Silero
   categories: [ Misc ]

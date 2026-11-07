@@ -1,6 +1,6 @@
 - type: ttsVoice
   id: Announcer
-  name: Announcer
+  name: Диктор Dota 2
   speaker: announcer
   provider: Silero
   categories: [ Dota2 ]
@@ -9,7 +9,7 @@
 
 - type: ttsVoice
   id: Tusk
-  name: Tusk
+  name: Туск
   speaker: tusk
   provider: Silero
   categories: [ Dota2 ]
@@ -22,7 +22,7 @@
 
 - type: ttsVoice
   id: Earth
-  name: Earth
+  name: Дух земли
   speaker: earth
   provider: Silero
   categories: [ Dota2 ]
@@ -35,7 +35,7 @@
 
 - type: ttsVoice
   id: Wraith
-  name: Wraith
+  name: Король-призрак
   speaker: wraith
   provider: Silero
   categories: [ Dota2 ]
@@ -48,7 +48,7 @@
 
 - type: ttsVoice
   id: Meepo
-  name: Meepo
+  name: Мипо
   speaker: meepo
   provider: Silero
   categories: [ Dota2 ]
@@ -57,7 +57,7 @@
 
 - type: ttsVoice
   id: Lina
-  name: Lina
+  name: Лина
   speaker: lina
   provider: Silero
   categories: [ Dota2 ]
@@ -66,7 +66,7 @@
 
 - type: ttsVoice
   id: Bristle
-  name: Bristle
+  name: Бристлбэк
   speaker: bristle
   provider: Silero
   categories: [ Dota2 ]
@@ -79,7 +79,7 @@
 
 - type: ttsVoice
   id: Gyro
-  name: Gyro
+  name: Гирокоптер
   speaker: gyro
   provider: Silero
   categories: [ Dota2 ]
@@ -92,7 +92,7 @@
 
 - type: ttsVoice
   id: Treant
-  name: Treant
+  name: Древень
   speaker: treant
   provider: Silero
   categories: [ Dota2 ]
@@ -105,7 +105,7 @@
 
 - type: ttsVoice
   id: Lancer
-  name: Lancer
+  name: Фантомный копейщик
   speaker: lancer
   provider: Silero
   categories: [ Dota2 ]
@@ -118,7 +118,7 @@
 
 - type: ttsVoice
   id: Clockwerk
-  name: Clockwerk
+  name: Клокверк
   speaker: clockwerk
   provider: Silero
   categories: [ Dota2 ]
@@ -131,7 +131,7 @@
 
 - type: ttsVoice
   id: Batrider
-  name: Batrider
+  name: Бэтрайдер
   speaker: batrider
   provider: Silero
   categories: [ Dota2 ]
@@ -144,7 +144,7 @@
 
 - type: ttsVoice
   id: Kotl
-  name: Kotl
+  name: Хранитель Света
   speaker: kotl
   provider: Silero
   categories: [ Dota2 ]
@@ -157,7 +157,7 @@
 
 - type: ttsVoice
   id: Kunkka
-  name: Kunkka
+  name: Кункка
   speaker: kunkka
   provider: Silero
   categories: [ Dota2 ]
@@ -166,7 +166,7 @@
 
 - type: ttsVoice
   id: Pudge
-  name: Pudge
+  name: Пудж
   speaker: pudge
   provider: Silero
   categories: [ Dota2 ]
@@ -179,7 +179,7 @@
 
 - type: ttsVoice
   id: Juggernaut
-  name: Juggernaut
+  name: Джаггернаут
   speaker: juggernaut
   provider: Silero
   categories: [ Dota2 ]
@@ -193,7 +193,7 @@
 
 - type: ttsVoice
   id: Luna
-  name: Luna
+  name: Луна
   speaker: luna
   provider: Silero
   categories: [ Dota2 ]
@@ -202,7 +202,7 @@
 
 - type: ttsVoice
   id: Omni
-  name: Omni
+  name: Омникнайт
   speaker: omni
   provider: Silero
   categories: [ Dota2 ]
@@ -215,7 +215,7 @@
 
 - type: ttsVoice
   id: Sniper
-  name: Sniper
+  name: Снайпер
   speaker: sniper
   provider: Silero
   categories: [ Dota2 ]
@@ -228,7 +228,7 @@
 
 - type: ttsVoice
   id: Skywrath
-  name: Skywrath
+  name: Небесный маг
   speaker: skywrath
   provider: Silero
   categories: [ Dota2 ]
@@ -241,7 +241,7 @@
 
 - type: ttsVoice
   id: Bounty
-  name: Bounty
+  name: Охотник за головами
   speaker: bounty
   provider: Silero
   categories: [ Dota2 ]
@@ -250,7 +250,7 @@
 
 - type: ttsVoice
   id: Huskar
-  name: Huskar
+  name: Хускар
   speaker: huskar
   provider: Silero
   categories: [ Dota2 ]
@@ -263,7 +263,7 @@
 
 - type: ttsVoice
   id: Windranger
-  name: Windranger
+  name: Виндранер
   speaker: windranger
   provider: Silero
   categories: [ Dota2 ]
@@ -272,7 +272,7 @@
 
 - type: ttsVoice
   id: Bloodseeker
-  name: Bloodseeker
+  name: Блудсикер
   speaker: bloodseeker
   provider: Silero
   categories: [ Dota2 ]
@@ -285,7 +285,7 @@
 
 - type: ttsVoice
   id: Templar
-  name: Templar
+  name: Убийца-тамплиер
   speaker: templar
   provider: Silero
   categories: [ Dota2 ]
@@ -294,7 +294,7 @@
 
 - type: ttsVoice
   id: Ranger
-  name: Ranger
+  name: Дроу-рейнджер
   speaker: ranger
   provider: Silero
   categories: [ Dota2 ]
@@ -307,7 +307,7 @@
 
 - type: ttsVoice
   id: Shaker
-  name: Shaker
+  name: Землетряс
   speaker: shaker
   provider: Silero
   categories: [ Dota2 ]
@@ -320,7 +320,7 @@
 
 - type: ttsVoice
   id: Mortred
-  name: Mortred
+  name: Фантомная убийца
   speaker: mortred
   provider: Silero
   categories: [ Dota2 ]
@@ -329,7 +329,7 @@
 
 - type: ttsVoice
   id: Queen
-  name: Queen
+  name: Королева боли
   speaker: queen
   provider: Silero
   categories: [ Dota2 ]
@@ -338,7 +338,7 @@
 
 - type: ttsVoice
   id: Storm
-  name: Storm
+  name: Дух бури
   speaker: storm
   provider: Silero
   categories: [ Dota2 ]
@@ -351,7 +351,7 @@
 
 - type: ttsVoice
   id: Tide
-  name: Tide
+  name: Тайдхантер
   speaker: tide
   provider: Silero
   categories: [ Dota2 ]
@@ -365,7 +365,7 @@
 
 - type: ttsVoice
   id: Riki
-  name: Riki
+  name: Рики
   speaker: riki
   provider: Silero
   categories: [ Dota2 ]
@@ -378,7 +378,7 @@
 
 - type: ttsVoice
   id: Antimage
-  name: Antimage
+  name: Антимаг
   speaker: antimage
   provider: Silero
   categories: [ Dota2 ]
@@ -387,7 +387,7 @@
 
 - type: ttsVoice
   id: Witchdoctor
-  name: Witchdoctor
+  name: Знахарь
   speaker: witchdoctor
   provider: Silero
   categories: [ Dota2 ]
@@ -400,7 +400,7 @@
 
 - type: ttsVoice
   id: Doom
-  name: Doom
+  name: Дум
   speaker: doom
   provider: Silero
   categories: [ Dota2 ]
@@ -413,7 +413,7 @@
 
 - type: ttsVoice
   id: Wywern
-  name: Wywern
+  name: Зимняя виверна
   speaker: wywern
   provider: Silero
   categories: [ Dota2 ]
@@ -426,7 +426,7 @@
 
 - type: ttsVoice
   id: Invoker
-  name: Invoker
+  name: Инвокер
   speaker: invoker
   provider: Silero
   categories: [ Dota2 ]
@@ -439,7 +439,7 @@
 
 - type: ttsVoice
   id: Silencer
-  name: Silencer
+  name: Сайленсер
   speaker: silencer
   provider: Silero
   categories: [ Dota2 ]
@@ -452,7 +452,7 @@
 
 - type: ttsVoice
   id: Lycan
-  name: Lycan
+  name: Ликан
   speaker: lycan
   provider: Silero
   categories: [ Dota2 ]
@@ -465,7 +465,7 @@
 
 - type: ttsVoice
   id: Mirana
-  name: Mirana
+  name: Мирана
   speaker: mirana
   provider: Silero
   categories: [ Dota2 ]
@@ -478,7 +478,7 @@
 
 - type: ttsVoice
   id: Dazzle
-  name: Dazzle
+  name: Даззл
   speaker: dazzle
   provider: Silero
   categories: [ Dota2 ]
@@ -492,7 +492,7 @@
 
 - type: ttsVoice
   id: Cm
-  name: Cm
+  name: Кристальная дева
   speaker: cm
   provider: Silero
   categories: [ Dota2 ]
@@ -505,7 +505,7 @@
 
 - type: ttsVoice
   id: Baratrum
-  name: Baratrum
+  name: Баратрум
   speaker: baratrum
   provider: Silero
   categories: [ Dota2 ]
@@ -518,7 +518,7 @@
 
 - type: ttsVoice
   id: Abaddon
-  name: Abaddon
+  name: Абаддон
   speaker: abaddon
   provider: Silero
   categories: [ Dota2 ]
@@ -531,7 +531,7 @@
 
 - type: ttsVoice
   id: DSven
-  name: D_sven
+  name: Свен (альтернативный)
   speaker: d_sven
   provider: Silero
   categories: [ Dota2 ]
@@ -544,7 +544,7 @@
 
 - type: ttsVoice
   id: Monkey
-  name: Monkey
+  name: Король обезьян
   speaker: monkey
   provider: Silero
   categories: [ Dota2 ]
@@ -557,7 +557,7 @@
 
 - type: ttsVoice
   id: Ember
-  name: Ember
+  name: Дух огня
   speaker: ember
   provider: Silero
   categories: [ Dota2 ]
@@ -570,7 +570,7 @@
 
 - type: ttsVoice
   id: Zeus
-  name: Zeus
+  name: Зевс
   speaker: zeus
   provider: Silero
   categories: [ Dota2 ]
@@ -583,7 +583,7 @@
 
 - type: ttsVoice
   id: Dragonknight
-  name: Dragonknight
+  name: Рыцарь-дракон
   speaker: dragonknight
   provider: Silero
   categories: [ Dota2 ]

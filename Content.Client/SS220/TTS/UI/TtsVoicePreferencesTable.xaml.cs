@@ -123,6 +123,8 @@ public sealed partial class TtsVoicePreferencesTable : BoxContainer
 
     private void OnProviderStateChanged(TtsProvider provider, bool enabled)
     {
+        RefreshActiveEntry();
+
         if (!_entriesDict.TryGetValue(provider, out var entry))
             return;
 
@@ -173,6 +175,8 @@ public sealed partial class TtsVoicePreferencesTable : BoxContainer
             EntriesContainer.AddChild(entry);
             _entriesDict.Add(provider, entry);
         }
+
+        RefreshActiveEntry();
     }
 
     public void SetPreferences(TtsVoicePreferences pref, bool silent = false)
@@ -185,6 +189,24 @@ public sealed partial class TtsVoicePreferencesTable : BoxContainer
 
         if (!silent)
             OnPreferencesChanged?.Invoke();
+    }
+
+    /// <summary>
+    /// Marks the first entry (from top to bottom) whose provider is enabled,
+    /// the same way <see cref="SharedTtsSystem.TryGetAvailableVoiceId(TtsVoicePreferences, out ProtoId{TtsVoicePrototype}?)"/> picks the voice.
+    /// </summary>
+    private void RefreshActiveEntry()
+    {
+        var found = false;
+        foreach (var child in EntriesContainer.Children)
+        {
+            if (child is not TtsVoicePreferencesTableEntry entry)
+                continue;
+
+            var active = !found && _tts.IsProviderEnabled(entry.Prototype.Provider);
+            entry.SetActive(active);
+            found |= active;
+        }
     }
 
     private void RefreshEntryState(TtsVoicePreferencesTableEntry entry)
@@ -226,6 +248,7 @@ public sealed partial class TtsVoicePreferencesTable : BoxContainer
             hoveredControl.SetPositionInParent(curIndex);
 
             EntriesContainer.InvalidateMeasure();
+            RefreshActiveEntry();
         }
     }
 

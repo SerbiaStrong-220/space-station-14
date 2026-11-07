@@ -88,6 +88,20 @@ public partial class TtsSystem
 
         protected virtual string SawmillName => GetType().Name;
 
+        protected abstract TtsProvider Provider { get; }
+
+        private string? _providerLabel;
+        private string ProviderMetricLabel => _providerLabel ??= Provider.ToString().ToLowerInvariant();
+
+        protected void ObserveWanted() => WantedCount.WithLabels(ProviderMetricLabel).Inc();
+
+        protected void ObserveReused() => ReusedCount.WithLabels(ProviderMetricLabel).Inc();
+
+        protected void ObserveRequest(string result, DateTime startTime)
+        {
+            RequestTimings.WithLabels(ProviderMetricLabel, result).Observe((DateTime.UtcNow - startTime).TotalSeconds);
+        }
+
         public TtsProviderHandler(TtsSystem ttsSystem, IConfigurationManager cfg)
         {
             ConfigurationManager = cfg;

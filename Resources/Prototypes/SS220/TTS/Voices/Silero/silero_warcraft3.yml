@@ -1,6 +1,6 @@
 - type: ttsVoice
   id: Arthas
-  name: Arthas
+  name: Артас
   speaker: arthas
   provider: Silero
   categories: [ Warcraft3 ]
@@ -13,7 +13,7 @@
 
 - type: ttsVoice
   id: Kelthuzad
-  name: Kelthuzad
+  name: "Кел'Тузад"
   speaker: kelthuzad
   provider: Silero
   categories: [ Warcraft3 ]
@@ -26,7 +26,7 @@
 
 - type: ttsVoice
   id: Anubarak
-  name: Anubarak
+  name: "Ануб'арак"
   speaker: anubarak
   provider: Silero
   categories: [ Warcraft3 ]
@@ -39,7 +39,7 @@
 
 - type: ttsVoice
   id: Thrall
-  name: Thrall
+  name: Тралл
   speaker: thrall
   provider: Silero
   categories: [ Warcraft3 ]
@@ -52,7 +52,7 @@
 
 - type: ttsVoice
   id: Grunt
-  name: Grunt
+  name: Грунт
   speaker: grunt
   provider: Silero
   categories: [ Warcraft3 ]
@@ -65,7 +65,7 @@
 
 - type: ttsVoice
   id: Cairne
-  name: Cairne
+  name: Кэрн
   speaker: cairne
   provider: Silero
   categories: [ Warcraft3 ]
@@ -78,7 +78,7 @@
 
 - type: ttsVoice
   id: Rexxar
-  name: Rexxar
+  name: Рексар
   speaker: rexxar
   provider: Silero
   categories: [ Warcraft3 ]
@@ -91,7 +91,7 @@
 
 - type: ttsVoice
   id: Uther
-  name: Uther
+  name: Утер
   speaker: uther
   provider: Silero
   categories: [ Warcraft3 ]
@@ -104,7 +104,7 @@
 
 - type: ttsVoice
   id: Jaina
-  name: Jaina
+  name: Джайна
   speaker: jaina
   provider: Silero
   categories: [ Warcraft3 ]
@@ -113,7 +113,7 @@
 
 - type: ttsVoice
   id: Kael
-  name: Kael
+  name: Каэль
   speaker: kael
   provider: Silero
   categories: [ Warcraft3 ]
@@ -122,7 +122,7 @@
 
 - type: ttsVoice
   id: Garithos
-  name: Garithos
+  name: Гаритос
   speaker: garithos
   provider: Silero
   categories: [ Warcraft3 ]
@@ -135,7 +135,7 @@
 
 - type: ttsVoice
   id: Maiev
-  name: Maiev
+  name: Майев
   speaker: maiev
   provider: Silero
   categories: [ Warcraft3 ]
@@ -144,7 +144,7 @@
 
 - type: ttsVoice
   id: Naisha
-  name: Naisha
+  name: Найша
   speaker: naisha
   provider: Silero
   categories: [ Warcraft3 ]
@@ -153,7 +153,7 @@
 
 - type: ttsVoice
   id: Tyrande
-  name: Tyrande
+  name: Тиранда
   speaker: tyrande
   provider: Silero
   categories: [ Warcraft3 ]
@@ -162,7 +162,7 @@
 
 - type: ttsVoice
   id: Furion
-  name: Furion
+  name: Фурион
   speaker: furion
   provider: Silero
   categories: [ Warcraft3 ]
@@ -171,7 +171,7 @@
 
 - type: ttsVoice
   id: Illidan
-  name: Illidan
+  name: Иллидан
   speaker: illidan
   provider: Silero
   categories: [ Warcraft3 ]
@@ -184,7 +184,7 @@
 
 - type: ttsVoice
   id: Ladyvashj
-  name: Ladyvashj
+  name: Леди Вайш
   speaker: ladyvashj
   provider: Silero
   categories: [ Warcraft3 ]
@@ -193,7 +193,7 @@
 
 - type: ttsVoice
   id: Narrator
-  name: Narrator
+  name: Рассказчик
   speaker: narrator
   provider: Silero
   categories: [ Warcraft3 ]
@@ -202,7 +202,7 @@
 
 - type: ttsVoice
   id: Medivh
-  name: Medivh
+  name: Медив
   speaker: medivh
   provider: Silero
   categories: [ Warcraft3 ]
@@ -211,7 +211,7 @@
 
 - type: ttsVoice
   id: Villagerm
-  name: Villagerm
+  name: Селянин
   speaker: villagerm
   provider: Silero
   categories: [ Warcraft3 ]
@@ -224,7 +224,7 @@
 
 - type: ttsVoice
   id: Xenia
-  name: Xenia
+  name: Ксения
   speaker: xenia
   provider: Silero
   categories: [ Misc ]
@@ -233,7 +233,7 @@
 
 - type: ttsVoice
   id: IllidanF
-  name: Illidan_f
+  name: Иллидан (женский)
   speaker: illidan_f
   provider: Silero
   categories: [ Warcraft3 ]
@@ -246,7 +246,7 @@
 
 - type: ttsVoice
   id: Peon
-  name: Peon
+  name: Пеон
   speaker: peon
   provider: Silero
   categories: [ Warcraft3 ]
@@ -259,7 +259,7 @@
 
 - type: ttsVoice
   id: Chen
-  name: Chen
+  name: Чэнь
   speaker: chen
   provider: Silero
   categories: [ Warcraft3 ]
@@ -272,7 +272,7 @@
 
 - type: ttsVoice
   id: DreadBm
-  name: Dread_bm
+  name: Повелитель ужаса
   speaker: dread_bm
   provider: Silero
   categories: [ Warcraft3 ]
@@ -285,7 +285,7 @@
 
 - type: ttsVoice
   id: Sylvanas
-  name: Sylvanas
+  name: Сильвана
   speaker: sylvanas
   provider: Silero
   categories: [ Warcraft3 ]
@@ -294,7 +294,7 @@
 
 - type: ttsVoice
   id: Priest
-  name: Priest
+  name: Жрец
   speaker: priest
   provider: Silero
   categories: [ Warcraft3 ]
@@ -307,7 +307,7 @@
 
 - type: ttsVoice
   id: Acolyte
-  name: Acolyte
+  name: Послушник
   speaker: acolyte
   provider: Silero
   categories: [ Warcraft3 ]
@@ -320,7 +320,7 @@
 
 - type: ttsVoice
   id: Muradin
-  name: Muradin
+  name: Мурадин
   speaker: muradin
   provider: Silero
   categories: [ Warcraft3 ]
@@ -329,7 +329,7 @@
 
 - type: ttsVoice
   id: DreadT
-  name: Dread_t
+  name: Повелитель ужаса
   speaker: dread_t
   provider: Silero
   categories: [ Warcraft3 ]
@@ -338,7 +338,7 @@
 
 - type: ttsVoice
   id: Mannoroth
-  name: Mannoroth
+  name: Маннорот
   speaker: mannoroth
   provider: Silero
   categories: [ Warcraft3 ]
@@ -351,7 +351,7 @@
 
 - type: ttsVoice
   id: Sorceress
-  name: Sorceress
+  name: Чародейка
   speaker: sorceress
   provider: Silero
   categories: [ Warcraft3 ]
@@ -360,7 +360,7 @@
 
 - type: ttsVoice
   id: Peasant
-  name: Peasant
+  name: Крестьянин
   speaker: peasant
   provider: Silero
   categories: [ Warcraft3 ]
@@ -373,7 +373,7 @@
 
 - type: ttsVoice
   id: Archmage
-  name: Archmage
+  name: Верховный маг
   speaker: archmage
   provider: Silero
   categories: [ Warcraft3 ]
@@ -386,7 +386,7 @@
 
 - type: ttsVoice
   id: Admiral
-  name: Admiral
+  name: Адмирал
   speaker: admiral
   provider: Silero
   categories: [ Warcraft3 ]
@@ -399,7 +399,7 @@
 
 - type: ttsVoice
   id: Alchemist
-  name: Alchemist
+  name: Алхимик
   speaker: alchemist
   provider: Silero
   categories: [ Warcraft3 ]
@@ -412,7 +412,7 @@
 
 - type: ttsVoice
   id: Archimonde
-  name: Archimonde
+  name: Архимонд
   speaker: archimonde
   provider: Silero
   categories: [ Warcraft3 ]
@@ -425,7 +425,7 @@
 
 - type: ttsVoice
   id: Breaker
-  name: Breaker
+  name: Громила
   speaker: breaker
   provider: Silero
   categories: [ Warcraft3 ]
@@ -434,7 +434,7 @@
 
 - type: ttsVoice
   id: Captain
-  name: Captain
+  name: Капитан
   speaker: captain
   provider: Silero
   categories: [ Warcraft3 ]
@@ -447,7 +447,7 @@
 
 - type: ttsVoice
   id: Dryad
-  name: Dryad
+  name: Дриада
   speaker: dryad
   provider: Silero
   categories: [ Warcraft3 ]
@@ -456,7 +456,7 @@
 
 - type: ttsVoice
   id: ElfEng
-  name: Elf_eng
+  name: Эльф-инженер
   speaker: elf_eng
   provider: Silero
   categories: [ Warcraft3 ]
@@ -469,7 +469,7 @@
 
 - type: ttsVoice
   id: Footman
-  name: Footman
+  name: Пехотинец
   speaker: footman
   provider: Silero
   categories: [ Warcraft3 ]
@@ -482,7 +482,7 @@
 
 - type: ttsVoice
   id: Grom
-  name: Grom
+  name: Гром
   speaker: grom
   provider: Silero
   categories: [ Warcraft3 ]
@@ -495,7 +495,7 @@
 
 - type: ttsVoice
   id: Hh
-  name: Hh
+  name: Охотник на ведьм
   speaker: hh
   provider: Silero
   categories: [ Warcraft3 ]
@@ -508,7 +508,7 @@
 
 - type: ttsVoice
   id: Huntress
-  name: Huntress
+  name: Охотница
   speaker: huntress
   provider: Silero
   categories: [ Warcraft3 ]
@@ -517,7 +517,7 @@
 
 - type: ttsVoice
   id: Keeper
-  name: Keeper
+  name: Хранитель
   speaker: keeper
   provider: Silero
   categories: [ Warcraft3 ]
@@ -530,7 +530,7 @@
 
 - type: ttsVoice
   id: NagaM
-  name: Naga_m
+  name: Наг
   speaker: naga_m
   provider: Silero
   categories: [ Warcraft3 ]
@@ -543,7 +543,7 @@
 
 - type: ttsVoice
   id: NagaRg
-  name: Naga_rg
+  name: Наг-разбойник
   speaker: naga_rg
   provider: Silero
   categories: [ Warcraft3 ]
@@ -556,7 +556,7 @@
 
 - type: ttsVoice
   id: PeasantW
-  name: Peasant_w
+  name: Крестьянка
   speaker: peasant_w
   provider: Silero
   categories: [ Warcraft3 ]
@@ -565,7 +565,7 @@
 
 - type: ttsVoice
   id: Rifleman
-  name: Rifleman
+  name: Стрелок
   speaker: rifleman
   provider: Silero
   categories: [ Warcraft3 ]
@@ -578,7 +578,7 @@
 
 - type: ttsVoice
   id: Satyr
-  name: Satyr
+  name: Сатир
   speaker: satyr
   provider: Silero
   categories: [ Warcraft3 ]
@@ -591,7 +591,7 @@
 
 - type: ttsVoice
   id: SylvanasW
-  name: Sylvanas_w
+  name: Сильвана (Тёмная госпожа)
   speaker: sylvanas_w
   provider: Silero
   categories: [ Warcraft3 ]
@@ -600,7 +600,7 @@
 
 - type: ttsVoice
   id: Voljin
-  name: Voljin
+  name: "Вол'джин"
   speaker: voljin
   provider: Silero
   categories: [ Warcraft3 ]
@@ -613,7 +613,7 @@
 
 - type: ttsVoice
   id: Gryphon
-  name: Gryphon
+  name: Грифон
   speaker: gryphon
   provider: Silero
   categories: [ Warcraft3 ]
@@ -626,7 +626,7 @@
 
 - type: ttsVoice
   id: WarcraftGarrosh
-  name: warcraft_garrosh
+  name: Гаррош
   speaker: warcraft_garrosh
   provider: Silero
   categories: [ Warcraft3 ]
@@ -635,7 +635,7 @@
 
 - type: ttsVoice
   id: Kaelthas
-  name: Kaelthas
+  name: "Кель'Тас"
   speaker: kaelthas
   provider: Silero
   categories: [ Warcraft3 ]
@@ -644,7 +644,7 @@
 
 - type: ttsVoice
   id: Malganis
-  name: Malganis
+  name: "Мал'Ганис"
   speaker: malganis
   provider: Silero
   categories: [ Warcraft3 ]

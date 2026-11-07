@@ -27,13 +27,13 @@ public abstract partial class SharedTtsSystem : EntitySystem
 
     public static readonly TtsVoicePreferences DefaultVoicePreferences = new()
     {
-        [TtsProvider.Silero] = "SileroTest",
+        [TtsProvider.Silero] = "Barney",
         [TtsProvider.NTTS] = "father_grigori"
     };
 
     public static readonly TtsVoicePreferences DefaultAnnouncementVoicePreferences = new()
     {
-        [TtsProvider.Silero] = "SileroDefault",
+        [TtsProvider.Silero] = "Glados",
         [TtsProvider.NTTS] = "glados"
     };
 
