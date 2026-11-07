@@ -44,6 +44,15 @@ public sealed partial class InjectorModePrototype : IPrototype, IInheritingProto
     [DataField]
     public List<FixedPoint2> TransferAmounts = new() { 1, 5, 10, 15 };
 
+    // SS220 injector-quick-transfer bgn
+    /// <summary>
+    /// Optional transfer amounts cycled by the quick-toggle verb.
+    /// If null or empty, toggles between the minimum and maximum transfer amounts.
+    /// </summary>
+    [DataField]
+    public List<FixedPoint2>? QuickTransferAmounts;
+    // SS220 injector-quick-transfer end
+
     /// <summary>
     /// Injection/Drawing delay (seconds) when the target is a mob.
     /// </summary>
