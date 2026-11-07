@@ -97,6 +97,11 @@
   description: A happy honk prize, pray to the gods for your reward.
   categories: [ DoNotMap ]
   components:
+  #SS220 Recycler expansion start
+  - type: Tag
+    tags:
+    - GoldenBikeHorn
+  #SS220 Recycler expansion end
   - type: Sprite
     sprite: Objects/Fun/goldbikehorn.rsi
     state: icon

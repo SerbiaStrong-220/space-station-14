@@ -25,7 +25,18 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using System.Linq;
 using Content.Shared.Gibbing;
+using Content.Shared.Body.Components;
+using Content.Shared.Body.Systems;
+using Content.Shared.Chemistry.Reagent;
+using Content.Shared.FixedPoint;
 using Content.Shared.Humanoid;
+using Robust.Shared.Containers;
+using Content.Shared.PowerCell.Components;
+using Content.Shared.Power.Components;
+using Content.Shared.Power.EntitySystems;
+using Content.Server.Explosion.EntitySystems;
+using Content.Shared.Body;
+// SS220 recycler expansion end
 
 namespace Content.Server.Materials;
 
@@ -44,6 +55,14 @@ public sealed class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
     [Dependency] private readonly StackSystem _stack = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
+    // SS220 recycler expansion start
+    [Dependency] private readonly ExplosionSystem _explosion = default!;
+    [Dependency] private readonly SharedBatterySystem _batterySystem = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
+
+    private static readonly ProtoId<ReagentPrototype> BloodId = "Blood";
+    private static readonly FixedPoint2 OrganBloodVolume = 20;
+    // SS220 recycler expansion end
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -184,22 +203,73 @@ public sealed class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
 
         var xform = Transform(uid);
 
+        // SS220 recycler expansion start
+        if (component.ReclaimSolutions)
+            SpawnChemicalsFromComposition(uid, item, completion, !CanGib(uid, item, component), component, xform);
+
+        if (TryComp<ContainerManagerComponent>(item, out var containerManager))
+        {
+            foreach (var container in _container.GetAllContainers(item, containerManager))
+            {
+                var containerId = container.ToString();
+                if (containerId != null && containerId.StartsWith("solution@"))
+                    continue;
+
+                _container.EmptyContainer(container, true, xform.Coordinates);
+            }
+        }
+
+        if (TryComp<PowerCellComponent>(item, out var cell) && TryComp<BatteryComponent>(item, out var battery))
+        {
+            var charge = _batterySystem.GetCharge((item, battery));
+            if (charge > 0)
+            {
+                var intensity = Math.Min(charge / 1000f, 20f);
+                _explosion.QueueExplosion(uid, "Default", intensity, 1f, 2f, addLog: false);
+            }
+        }
+
         if (component.ReclaimMaterials)
             SpawnMaterialsFromComposition(uid, item, completion * component.Efficiency, xform: xform);
 
-        if (CanGib(uid, item, component))
+        if (CanGib(uid, item, component) || HasComp<OrganComponent>(item))
         {
-            var logImpact = HasComp<HumanoidProfileComponent>(item) ? LogImpact.Extreme : LogImpact.Medium;
+            var isOrgan = HasComp<OrganComponent>(item);
+            var logImpact = (HasComp<HumanoidProfileComponent>(item) || isOrgan) ? LogImpact.Extreme : LogImpact.Medium;
             _adminLogger.Add(LogType.Gib, logImpact, $"{ToPrettyString(item):victim} was gibbed by {ToPrettyString(uid):entity} ");
-            if (component.ReclaimSolutions)
-                SpawnChemicalsFromComposition(uid, item, completion, false, component, xform);
-            _gibbing.Gib(item);
-            _appearance.SetData(uid, RecyclerVisuals.Bloody, true);
-        }
-        else
-        {
-            if (component.ReclaimSolutions)
-                SpawnChemicalsFromComposition(uid, item, completion, true, component, xform);
+
+            if (isOrgan)
+            {
+                var bloodSolution = new Solution();
+
+                if (TryComp<OrganComponent>(item, out var organ))
+                {
+                    if (TryComp<BloodstreamComponent>(organ.Body, out var bloodstream))
+                    {
+                        bloodSolution.AddSolution(bloodstream.BloodReferenceSolution.Clone(), _prototype);
+                    }
+                    else if (organ.BloodReagent != null)
+                    {
+                        bloodSolution.AddReagent(organ.BloodReagent, OrganBloodVolume);
+                    }
+                    else
+                    {
+                        bloodSolution.AddReagent(BloodId, OrganBloodVolume);
+                    }
+
+                    if (bloodSolution.Volume > 0)
+                        bloodSolution.ScaleTo(OrganBloodVolume);
+                }
+
+                _puddle.TrySpillAt(uid, bloodSolution, out _, false, transformComponent: xform);
+                _appearance.SetData(uid, RecyclerVisuals.Bloody, true);
+            }
+            else
+            {
+                _gibbing.Gib(item);
+                _appearance.SetData(uid, RecyclerVisuals.Bloody, true);
+            }
+            //SS220 Recycler expansion end
         }
 
         QueueDel(item);
@@ -275,6 +345,16 @@ public sealed class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
             {
                 totalChemicals.AddSolution(drainableSolution, _prototype);
             }
+            // SS220 recycler expansion start
+            // Fallback for items that might not have DrainableSolution component but still have reagents.
+            else
+            {
+                foreach (var solution in _solutionContainer.EnumerateSolutions(item))
+                {
+                    totalChemicals.AddSolution(solution.Solution.Comp.Solution, _prototype);
+                }
+            }
+            // SS220 recycler expansion end
         }
         else
         {

@@ -237,6 +237,11 @@
   id: OrganMoth
   abstract: true
   suffix: Moth
+  #SS220 Recycler expansion start
+  components:
+  - type: Organ
+    bloodReagent: InsectBlood
+  #SS220 Recycler expansion end
 
 - type: entity
   id: OrganMothMetabolizer

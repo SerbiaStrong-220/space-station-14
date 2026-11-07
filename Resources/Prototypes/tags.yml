@@ -13,6 +13,9 @@
   id: AirAlarmElectronics # ConstructionGraph: AirAlarm
 
 - type: Tag
+  id: AirGrenade # SS220 recycler expansion
+
+- type: Tag
   id: Airlock # Used in ConstructionGraph "Airlock" to navigate between regular, glass, and highsec airlocks.
 
 - type: Tag
@@ -88,6 +91,9 @@
 
 - type: Tag
   id: Boll # MaterialStorage whitelist: Sheetifier
+
+- type: Tag
+  id: BoxMouthSwab # SS220 recycler expansion
 
 - type: Tag
   id: Book # Storage whitelist: BorgModuleService, BooksBag, Bookshelf. Blacklisting on various entities whitelisting PaperComponent
@@ -213,6 +219,9 @@
 
 - type: Tag
   id: Candle # Storage whitelist: BoxCandle
+
+- type: Tag
+  id: Cane # SS220 recycler expansion
 
 - type: Tag
   id: CaneBlade # Storage whitelist: CaneSheath. ItemMapper: CaneSheath
@@ -596,6 +605,9 @@
   id: Folder # Storage whitelist: Bookshelf, NoticeBoard, MailCart
 
 - type: Tag
+  id: PlasticToy # SS220 recycler expansion
+
+- type: Tag
   id: FoodSnack # Storage whitelist: CandyBucket, CandyBowl. ItemMapper: CandyBowl
 
 - type: Tag
@@ -651,6 +663,9 @@
 
 - type: Tag
   id: Goat # Reproductive partner key
+
+- type: Tag
+  id: GoldenBikeHorn # SS220 recycler expansion
 
 - type: Tag
   id: GoldenPlunger # Storage whitelist: JanitorialTrolley. ItemMapper: JanitorialTrolley
@@ -1321,6 +1336,9 @@
 - type: Tag
   id: Smokable # Storage whitelist: BaseSmokingPipe (and children)
 
+- type: Tag
+  id: SnuffBox # SS220 recycler expansion
+
 - type: Tag # Used on DungeonRoom prototypes.
   id: SnowyLabs # PrefabDunGen whitelist on SnowyLabs DungeonConfig.
 
@@ -1453,6 +1471,9 @@
 - type: Tag
   id: Trash # Tagged entities are generic garbage. They fit inside TrashBag and are destroyed by Recycler.
             # CargoBounty: BountyTrash. SpecialDigestible: OrganVoxStomach
+
+- type: Tag
+  id: GlassTube # SS220 recycler expansion
 
 - type: Tag
   id: TrashBag # Storage whitelist: BoxTrashbag, ClothingBeltJanitor, JanitorialTrolley. ItemMapper: JanitorialTrolley
