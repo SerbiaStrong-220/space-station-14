@@ -197,6 +197,40 @@
             max: 1
 
 - type: entity
+  parent: BaseComputerAiAccess
+  id: ComputerCrewRecordsManagement
+  name: crew records management console
+  description: Console for managing station crew records, lobby job limits and priority jobs.
+  components:
+  - type: HopConsole
+  - type: AccessReader
+    access:
+    - [ HeadOfPersonnel ]
+  - type: ActivatableUI
+    key: enum.HopConsoleUiKey.Key
+  - type: ActivatableUIRequiresAccess
+  - type: UserInterface
+    interfaces:
+      enum.HopConsoleUiKey.Key:
+        type: HopConsoleBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  # SS220 Hop improve: use the same computer texture layers as the ID console.
+  - type: Sprite
+    sprite: Structures/Machines/computers.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: id
+    - map: ["computerLayerKeys"]
+      state: id_key
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+
+- type: entity
   parent: ComputerShuttle
   id: ComputerShuttleAdditionalControl
   name: shuttle additional control computer

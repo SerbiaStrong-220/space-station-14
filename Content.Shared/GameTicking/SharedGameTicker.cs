@@ -150,7 +150,8 @@ namespace Content.Shared.GameTicking
     [Serializable, NetSerializable]
     public sealed class TickerJobsAvailableEvent(
         Dictionary<NetEntity, string> stationNames,
-        Dictionary<NetEntity, Dictionary<ProtoId<JobPrototype>, int?>> jobsAvailableByStation)
+        Dictionary<NetEntity, Dictionary<ProtoId<JobPrototype>, int?>> jobsAvailableByStation,
+        Dictionary<NetEntity, HashSet<ProtoId<JobPrototype>>>? priorityJobsByStation = null)  // SS220 Hop improve: carry priority lobby jobs alongside slot counts.
         : EntityEventArgs
     {
         /// <summary>
@@ -159,6 +160,14 @@ namespace Content.Shared.GameTicking
         public Dictionary<NetEntity, Dictionary<ProtoId<JobPrototype>, int?>> JobsAvailableByStation { get; } = jobsAvailableByStation;
 
         public Dictionary<NetEntity, string> StationNames { get; } = stationNames;
+
+        /// <summary>
+        /// Lobby-visible priority job markers.
+        /// </summary>
+        // SS220 Hop improve begin
+        public Dictionary<NetEntity, HashSet<ProtoId<JobPrototype>>> PriorityJobsByStation { get; } =
+            priorityJobsByStation ?? new();
+        // SS220 Hop improve end
     }
 
     [Serializable, NetSerializable, DataDefinition]
