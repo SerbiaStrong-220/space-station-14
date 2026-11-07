@@ -276,6 +276,16 @@
         Heat: 0
   - type: Ipc
     damageFromEmp: 0 #IPC EMP damage removed.
+  - type: SuitSensor
+    randomMode: false
+    mode: SensorOff
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    transmitFrequencyId: SuitSensor
+    savableAddress: false
+  - type: WirelessNetworkConnection
+    range: 1200
+  - type: StationLimitedNetwork
   - type: IntrinsicRadioReceiver
   - type: IntrinsicRadioTransmitter
     channels:

@@ -95,6 +95,11 @@ namespace Content.Client.ContextMenu.UI
         /// </summary>
         public void Close()
         {
+            // SS220-context-menu-submenu-begin
+            // Sub-menus are ModalRoot popups, so closing the root menu leaves them on screen.
+            CloseSubMenus(RootMenu);
+            // SS220-context-menu-submenu-end
+
             RootMenu.MenuBody.RemoveAllChildren();
             CancelOpen?.Cancel();
             CancelClose?.Cancel();
