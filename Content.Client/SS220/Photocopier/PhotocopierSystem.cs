@@ -1,4 +1,4 @@
-﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.SS220.Photocopier;
 using Robust.Client.GameObjects;
@@ -8,6 +8,7 @@ namespace Content.Client.SS220.Photocopier;
 public sealed partial class PhotocopierSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearanceSystem = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private readonly PhotocopierCombinedVisualState _fallbackVisualState =
         new(PhotocopierVisualState.Off, false, false, false);
@@ -32,7 +33,7 @@ public sealed partial class PhotocopierSystem : EntitySystem
             visualState = _fallbackVisualState;
         }
 
-        UpdateAppearance(uid, visualState, component, args.Sprite);
+        UpdateAppearance(uid, visualState);
     }
 
     private void OnAnimationCompleted(EntityUid uid, PhotocopierComponent component, AnimationCompletedEvent args)
@@ -46,76 +47,76 @@ public sealed partial class PhotocopierSystem : EntitySystem
             visualState = _fallbackVisualState;
         }
 
-        UpdateAppearance(uid, visualState, component, sprite);
+        UpdateAppearance(uid, visualState);
     }
 
-    private static void UpdateAppearance(EntityUid uid, PhotocopierCombinedVisualState visualState, PhotocopierComponent component, SpriteComponent sprite)
+    private void UpdateAppearance(EntityUid uid, PhotocopierCombinedVisualState visualState)
     {
-        SetLayerState(PhotocopierVisualLayers.Base, "off", sprite);
+        SetLayerState(PhotocopierVisualLayers.Base, "off", uid);
 
         switch (visualState.State)
         {
             case PhotocopierVisualState.Off:
-                HideLayer(PhotocopierVisualLayers.Led, sprite);
-                HideLayer(PhotocopierVisualLayers.Top, sprite);
-                HideLayer(PhotocopierVisualLayers.PrintAnim, sprite);
+                HideLayer(PhotocopierVisualLayers.Led, uid);
+                HideLayer(PhotocopierVisualLayers.Top, uid);
+                HideLayer(PhotocopierVisualLayers.PrintAnim, uid);
                 break;
 
             case PhotocopierVisualState.Powered:
-                SetLayerState(PhotocopierVisualLayers.Led, "led_powered", sprite);
-                SetLayerState(PhotocopierVisualLayers.Top, "top_powered", sprite);
-                HideLayer(PhotocopierVisualLayers.PrintAnim, sprite);
+                SetLayerState(PhotocopierVisualLayers.Led, "led_powered", uid);
+                SetLayerState(PhotocopierVisualLayers.Top, "top_powered", uid);
+                HideLayer(PhotocopierVisualLayers.PrintAnim, uid);
                 break;
 
             case PhotocopierVisualState.OutOfToner:
-                SetLayerState(PhotocopierVisualLayers.Led, "led_out", sprite);
-                SetLayerState(PhotocopierVisualLayers.Top, "top_powered", sprite);
-                HideLayer(PhotocopierVisualLayers.PrintAnim, sprite);
+                SetLayerState(PhotocopierVisualLayers.Led, "led_out", uid);
+                SetLayerState(PhotocopierVisualLayers.Top, "top_powered", uid);
+                HideLayer(PhotocopierVisualLayers.PrintAnim, uid);
                 break;
 
             case PhotocopierVisualState.Printing:
-                SetLayerState(PhotocopierVisualLayers.Led, "led_printing", sprite);
-                SetLayerState(PhotocopierVisualLayers.Top, "top_powered", sprite);
-                SetLayerState(PhotocopierVisualLayers.PrintAnim, "printing_paper", sprite);
+                SetLayerState(PhotocopierVisualLayers.Led, "led_printing", uid);
+                SetLayerState(PhotocopierVisualLayers.Top, "top_powered", uid);
+                SetLayerState(PhotocopierVisualLayers.PrintAnim, "printing_paper", uid);
                 break;
 
             case PhotocopierVisualState.Copying:
-                SetLayerState(PhotocopierVisualLayers.Led, "led_printing", sprite);
+                SetLayerState(PhotocopierVisualLayers.Led, "led_printing", uid);
                 SetLayerState(
                     PhotocopierVisualLayers.Top,
                     visualState.BurnsButts ? "top_scanning_emagged" : "top_scanning",
-                    sprite);
-                SetLayerState(PhotocopierVisualLayers.PrintAnim, "printing_paper", sprite);
+                    uid);
+                SetLayerState(PhotocopierVisualLayers.PrintAnim, "printing_paper", uid);
                 break;
         }
 
         if (visualState.State != PhotocopierVisualState.Off && visualState.BurnsButtManually)
         {
-            SetLayerState(PhotocopierVisualLayers.Led, "led_printing", sprite);
-            SetLayerState(PhotocopierVisualLayers.Top, "top_scanning_emagged", sprite);
+            SetLayerState(PhotocopierVisualLayers.Led, "led_printing", uid);
+            SetLayerState(PhotocopierVisualLayers.Top, "top_scanning_emagged", uid);
         }
 
         if (visualState.GotItem)
-            SetLayerState(PhotocopierVisualLayers.TopPaper, "top_paper", sprite);
+            SetLayerState(PhotocopierVisualLayers.TopPaper, "top_paper", uid);
         else
-            HideLayer(PhotocopierVisualLayers.TopPaper, sprite);
+            HideLayer(PhotocopierVisualLayers.TopPaper, uid);
     }
 
-    private static void SetLayerState(PhotocopierVisualLayers layer, string? state, SpriteComponent sprite)
+    private void SetLayerState(PhotocopierVisualLayers layer, string? state, EntityUid uid)
     {
         if (string.IsNullOrEmpty(state))
             return;
 
-        sprite.LayerSetVisible(layer, true);
-        sprite.LayerSetAutoAnimated(layer, true);
-        sprite.LayerSetState(layer, state);
+        _sprite.LayerSetVisible(uid, layer, true);
+        _sprite.LayerSetAutoAnimated(uid, layer, true);
+        _sprite.LayerSetRsiState(uid, layer, state);
     }
 
-    private static void HideLayer(PhotocopierVisualLayers layer, SpriteComponent sprite)
+    private void HideLayer(PhotocopierVisualLayers layer, EntityUid uid)
     {
-        if (!sprite.LayerMapTryGet(layer, out var actualLayer))
+        if (!_sprite.LayerMapTryGet(uid, layer, out var actualLayer, false))
             return;
 
-        sprite.LayerSetVisible(actualLayer, false);
+        _sprite.LayerSetVisible(uid, actualLayer, false);
     }
 }
