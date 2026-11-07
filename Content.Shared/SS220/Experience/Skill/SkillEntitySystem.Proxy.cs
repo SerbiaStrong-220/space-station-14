@@ -6,7 +6,7 @@ using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
+using Robust.Shared.Random;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.Experience.Skill;
@@ -81,18 +81,25 @@ public partial class SkillEntitySystem : EntitySystem
     /// Random that gives same result on client and on server
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public System.Random GetPredictedRandom(in List<int> valuesForSeed)
+    public IRobustRandom GetPredictedRandom(in List<int> valuesForSeed)
     {
         var seed = SharedRandomExtensions.HashCodeCombine(valuesForSeed);
-        return new System.Random(seed);
+        var rand = new RobustRandom();
+        rand.SetSeed(seed);
+
+        return rand;
     }
 
     /// <summary>
     /// Random that gives same result on client and on server
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public System.Random GetPredictedRandomOnCurTick(NetEntity netEnt, NetEntity? netEnt2 = null)
+    public IRobustRandom GetPredictedRandomOnCurTick(NetEntity netEnt, NetEntity? netEnt2 = null)
     {
-        return SharedRandomExtensions.PredictedRandom(GameTiming, netEnt, netEnt2);
+        var seed = SharedRandomExtensions.HashCodeCombine((int)GameTiming.CurTick.Value, netEnt.Id, netEnt2?.Id ?? 0);
+        var rand = new RobustRandom();
+        rand.SetSeed(seed);
+
+        return rand;
     }
 }

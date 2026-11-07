@@ -114,7 +114,7 @@ public sealed partial class CartPullerSystem : EntitySystem
         InteractionVerb verb = new()
         {
             Text = Name(cart.Value),
-            Act = () => _cart.TryAttachCart(entity, cartComp, argsInner.User),
+            Act = () => _cart.TryAttachCart(entity, cart.Value, cartComp, argsInner.User),
             Category = VerbCategory.AttachCart
         };
         args.Verbs.Add(verb);
