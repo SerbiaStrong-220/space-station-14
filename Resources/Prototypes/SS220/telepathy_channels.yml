@@ -15,3 +15,9 @@
   channelParameters:
     name: chat-telepathy-hive
     color: "#cc80ff"
+
+- type: telepathyChannel
+  id: TelepathyChannelXeno
+  channelParameters:
+    name: chat-telepathy-xeno
+    color: "#6300A6"
