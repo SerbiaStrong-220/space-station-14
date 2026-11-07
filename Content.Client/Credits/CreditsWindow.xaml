@@ -10,6 +10,14 @@
                 <!-- Contributors get added here by code -->
             </BoxContainer>
         </ScrollContainer>
+        <!-- SS220 contributors begin -->
+        <ScrollContainer Name="Ss220ContributorsTab"
+                         HScrollEnabled="False">
+            <BoxContainer Name="Ss220ContributorsContainer"
+                          Orientation="Vertical"
+                          Margin="2 2 0 0" />
+        </ScrollContainer>
+        <!-- SS220 contributors end -->
         <ScrollContainer Name="PatronsTab"
                          HScrollEnabled="False">
             <BoxContainer Name="PatronsContainer"
