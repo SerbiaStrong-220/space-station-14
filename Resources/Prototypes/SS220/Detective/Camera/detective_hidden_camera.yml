@@ -35,6 +35,7 @@
     range: 10
   - type: DetectiveCameraAttach
   - type: StationAiVision
+    enabled: false
   - type: Tag
     tags:
     - DetectiveCamera

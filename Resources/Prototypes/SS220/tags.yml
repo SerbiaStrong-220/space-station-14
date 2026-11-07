@@ -408,6 +408,9 @@
   id: MiGoBuildingBlocker
 
 - type: Tag
+  id: CassetteTapeLargeCapacity
+
+- type: Tag
   id: WeaponShotgunDoubleBarreled
 
 - type: Tag

@@ -185,3 +185,10 @@
   id: SecurityCorporateJudo
   equipment:
     belt: ClothingBeltCorporateJudoFilled
+
+# Storage
+- type: loadout
+  id: SecurityBadge
+  storage:
+    back:
+    - ClothingNeckBadgeSecurity
