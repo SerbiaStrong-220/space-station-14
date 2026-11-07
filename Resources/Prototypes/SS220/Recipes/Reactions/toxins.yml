@@ -1,0 +1,11 @@
+- type: reaction
+  id: Anaphyl
+  reactants:
+    Frontier:
+      amount: 1
+    Stimulants:
+      amount: 1
+    Lipozine:
+      amount: 1
+  products:
+    Anaphyl: 1

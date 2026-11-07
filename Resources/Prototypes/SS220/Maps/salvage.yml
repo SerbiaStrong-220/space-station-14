@@ -54,4 +54,9 @@
   mapPath: /Maps/SS220/Salvage/GreenHouseRuin_SS220.yml
   sizeString: salvage-map-wreck-size-medium
 
+- type: salvageMap
+  id: LivingComet_SS220
+  mapPath: /Maps/SS220/Salvage/LivingComet_SS220.yml
+  sizeString: salvage-map-wreck-size-medium
+
   # """Large""" maps
