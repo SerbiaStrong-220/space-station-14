@@ -67,8 +67,13 @@ public sealed partial class MedibotTreatment
 
         return metabolisms.Values
             .SelectMany(m => m.Effects)
-            .OfType<HealthChange>()
-            .SelectMany(h => h.Damage.DamageDict.Keys)
+            .SelectMany(effect => effect switch
+            {
+                HealthChange health => health.Damage.DamageDict.Keys,
+                EvenHealthChange even => even.Damage.Keys
+                    .SelectMany(group => proto.Index(group).DamageTypes),
+                _ => [],
+            })
             .Any(type => damage.DamageDict.GetValueOrDefault(type) > 0);
     }
     //ss220 fix medibot end
