@@ -17,7 +17,7 @@
       state: power_key
   - type: PointLight
     radius: 1.5
-    energy: 1.6
+    energy: 4.0
     color: "#ffe000" # check it
   - type: Computer
     board: SuperMatterObserverCircuitboard

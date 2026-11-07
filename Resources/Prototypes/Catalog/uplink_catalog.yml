@@ -2379,9 +2379,11 @@
   name: uplink-clothing-outer-vest-web-name
   description: uplink-clothing-outer-vest-web-desc
   productEntity: ClothingOuterVestWebMerc #SS220 syndie armor tweaks
-  discountCategory: usualDiscounts
-  discountDownTo:
-    Telecrystal: 3 #SS220 syndie armor tweaks
+  # SS220 StoreDiscountAndRefund_fix begin
+  # discountCategory: usualDiscounts
+  # discountDownTo:
+  #   Telecrystal: 3 #SS220 syndie armor tweaks
+  # SS220 StoreDiscountAndRefund_fix end
   cost:
     Telecrystal: 3 #SS220 syndie armor tweaks
   categories:
@@ -2401,9 +2403,11 @@
   name: uplink-clothing-outer-vest-web-elite-name
   description: uplink-clothing-outer-vest-web-elite-desc
   productEntity: ClothingOuterVestWebElite
-  discountCategory: usualDiscounts
-  discountDownTo:
-    Telecrystal: 6 # ss220 - post upstream - uplink tweaks
+  # SS220 StoreDiscountAndRefund_fix begin
+  # discountCategory: usualDiscounts
+  # discountDownTo:
+  #   Telecrystal: 6 # ss220 - post upstream - uplink tweaks
+  # SS220 StoreDiscountAndRefund_fix end
   cost:
     Telecrystal: 6 # ss220 - post upstream - uplink tweaks
   categories:
