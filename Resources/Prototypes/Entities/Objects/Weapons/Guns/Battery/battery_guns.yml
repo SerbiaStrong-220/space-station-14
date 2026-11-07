@@ -992,7 +992,7 @@
     startingCharge: 1200 # SS220-shotgun-battery
   #SS220-dna-lock begin
   - type: DnaLockable
-    roundstartJob: Warden
+    job: Warden
   #SS220-dna-lock end
 
 - type: entity

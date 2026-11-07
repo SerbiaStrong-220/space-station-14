@@ -378,7 +378,7 @@
   #SS220-dna-lock begin
   - type: DnaLockClothing
   - type: DnaLockable
-    roundstartJob: Warden
+    job: Warden
   - type: Explosive
     explosionType: Default
     totalIntensity: 10

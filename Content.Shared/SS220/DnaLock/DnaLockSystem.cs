@@ -22,6 +22,9 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.DnaLock;
 
+/// <summary>
+/// Stops players whose DNA isn't allowed from using DNA-locked items, and handles binding, toggling and emagging the lock.
+/// </summary>
 public sealed partial class DnaLockSystem : EntitySystem
 {
     [Dependency] private SharedEntityEffectsSystem _entityEffects = default!;
@@ -64,7 +67,7 @@ public sealed partial class DnaLockSystem : EntitySystem
     private void OnGetVerbs(Entity<DnaLockableComponent> ent, ref GetVerbsEvent<Verb> args)
     {
         // The server does not check range when executing a verb, so CanAccess is required here.
-        if (ent.Comp.RoundstartJob != null
+        if (ent.Comp.Job != null
             || IsEmagged(ent)
             || !args.CanAccess
             || !args.CanInteract
@@ -73,6 +76,7 @@ public sealed partial class DnaLockSystem : EntitySystem
 
         var user = args.User;
 
+        // The owner can turn the lock on and off. Anyone else can bind the item to themselves while the lock is off, replacing the previous owner.
         if (ent.Comp.AllowedDna.Contains(dna))
         {
             args.Verbs.Add(new Verb
@@ -81,7 +85,7 @@ public sealed partial class DnaLockSystem : EntitySystem
                 Icon = ent.Comp.LockActive
                     ? new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/unlock.svg.192dpi.png"))
                     : new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/lock.svg.192dpi.png")),
-                Act = () => ToggleLock(ent),
+                Act = () => SetLockActive(ent, !ent.Comp.LockActive),
             });
         }
         else if (!ent.Comp.LockActive)
@@ -90,17 +94,18 @@ public sealed partial class DnaLockSystem : EntitySystem
             {
                 Text = Loc.GetString("dna-lock-verb-register"),
                 Icon = new SpriteSpecifier.Texture(new("/Textures/SS220/Interface/VerbIcons/dna_lock.svg.192dpi.png")),
-                Act = () => RegisterDna(ent, user, dna),
+                Act = () => SetOwner(ent, user, dna),
             });
         }
     }
 
     private void OnStorageInteractAttempt(Entity<DnaLockableComponent> ent, ref StorageInteractAttemptEvent args)
     {
-        if (IsBlocked(ent, DnaLockBlockedActions.StorageOpen) && !CheckAccess(ent, args.User, args.Silent))
+        if (IsActionBlocked(ent, DnaLockBlockedActions.StorageOpen) && !CheckAccess(ent, args.User, args.Silent))
             args.Cancelled = true;
     }
 
+    // The event is raised on the deployed clothing, while the lock sits on the item it belongs to, such as a backpack.
     // Checked on equip rather than on the toggle action, so deploying through the strip menu is covered too.
     private void OnAttachedEquipAttempt(Entity<AttachedClothingComponent> ent, ref BeingEquippedAttemptEvent args)
     {
@@ -108,7 +113,7 @@ public sealed partial class DnaLockSystem : EntitySystem
             return;
 
         var lockEnt = (ent.Comp.AttachedUid, dnaLock);
-        if (!IsBlocked(lockEnt, DnaLockBlockedActions.ToggleableClothing) || IsAuthorized(lockEnt, args.EquipTarget))
+        if (!IsActionBlocked(lockEnt, DnaLockBlockedActions.ToggleableClothing) || IsAuthorized(lockEnt, args.EquipTarget))
             return;
 
         args.Reason = dnaLock.UnauthorizedUsePopup?.Id;
@@ -117,31 +122,35 @@ public sealed partial class DnaLockSystem : EntitySystem
 
     private void OnItemSlotEjectAttempt(Entity<DnaLockableComponent> ent, ref ItemSlotEjectAttemptEvent args)
     {
-        if (args.User is not { } user || !IsBlocked(ent, DnaLockBlockedActions.BatteryEject))
+        if (args.User is not { } user || !IsActionBlocked(ent, DnaLockBlockedActions.BatteryEject))
             return;
 
+        // CanEject also runs while verbs are built, so a popup here would show up on every right click.
         if (!CheckAccess(ent, user, silentFail: true))
             args.Cancelled = true;
     }
 
     private void OnActivatableUIOpenAttempt(Entity<DnaLockableComponent> ent, ref ActivatableUIOpenAttemptEvent args)
     {
-        if (IsBlocked(ent, DnaLockBlockedActions.UserInterface) && !CheckAccess(ent, args.User, args.Silent))
+        if (IsActionBlocked(ent, DnaLockBlockedActions.UserInterface) && !CheckAccess(ent, args.User, args.Silent))
             args.Cancel();
     }
 
     private void OnBoundUiMessageAttempt(Entity<DnaLockableComponent> ent, ref BoundUserInterfaceMessageAttempt args)
     {
+        // Storage messages follow the StorageOpen flag, so an item that locks only other actions can still be searched.
         var action = args.UiKey is StorageComponent.StorageUiKey.Key
             ? DnaLockBlockedActions.StorageOpen
             : DnaLockBlockedActions.UserInterface;
 
-        if (IsBlocked(ent, action) && !CheckAccess(ent, args.Actor, silentFail: args.Message is not OpenBoundInterfaceMessage))
+        // Feedback is shown only for the open request, not for every message from an interface that is already open.
+        if (IsActionBlocked(ent, action) && !CheckAccess(ent, args.Actor, silentFail: args.Message is not OpenBoundInterfaceMessage))
             args.Cancel();
     }
 
     private void OnExamined(Entity<DnaLockableComponent> ent, ref ExaminedEvent args)
     {
+        // Hidden locks, such as the one on the thief's satchel, show nothing to anyone but the owner.
         if (ent.Comp.ExamineOwnerOnly && !(TryGetDna(args.Examiner, out var dna) && ent.Comp.AllowedDna.Contains(dna)))
             return;
 
@@ -151,51 +160,66 @@ public sealed partial class DnaLockSystem : EntitySystem
             return;
         }
 
-        if (ent.Comp.RoundstartJob != null)
+        if (ent.Comp.Job != null)
         {
             args.PushMarkup(Loc.GetString(ent.Comp.AllowedDna.Count > 0
-                ? "dna-lock-examine-roundstart-locked"
-                : "dna-lock-examine-roundstart-waiting"));
+                ? "dna-lock-examine-job-locked"
+                : "dna-lock-examine-job-waiting"));
             return;
         }
 
         if (ent.Comp.AllowedDna.Count == 0)
         {
-            args.PushMarkup(Loc.GetString("dna-lock-examine-inround-unset"));
+            args.PushMarkup(Loc.GetString("dna-lock-examine-personal-unset"));
             return;
         }
 
         args.PushMarkup(Loc.GetString(ent.Comp.LockActive
-            ? "dna-lock-examine-inround-active"
-            : "dna-lock-examine-inround-inactive"));
+            ? "dna-lock-examine-personal-active"
+            : "dna-lock-examine-personal-inactive"));
     }
 
     private void OnEmagged(Entity<DnaLockableComponent> ent, ref GotEmaggedEvent args)
     {
-        if (ent.Comp.RoundstartJob != null
-            || IsEmagged(ent)
-            || !_emag.CompareFlag(args.Type, EmagType.Interaction))
+        // Job locks can't be emagged.
+        if (ent.Comp.Job != null)
             return;
 
+        // An already broken lock ignores the emag, so the emag keeps its charge.
+        if (IsEmagged(ent))
+            return;
+
+        if (!_emag.CompareFlag(args.Type, EmagType.Interaction))
+            return;
+
+        // EmagSystem then adds EmaggedComponent with the Interaction flag, which IsEmagged checks.
         args.Handled = true;
     }
 
-    public void RegisterDna(Entity<DnaLockableComponent> ent, EntityUid user, string dna)
+    /// <summary>
+    /// Binds a personal lock to <paramref name="dna"/>, replacing the previous owner, and turns the lock on.
+    /// </summary>
+    public void SetOwner(Entity<DnaLockableComponent> ent, EntityUid user, string dna)
     {
         ent.Comp.AllowedDna.Clear();
         ent.Comp.AllowedDna.Add(dna);
-        ent.Comp.LockActive = true;
-        Dirty(ent);
+        SetLockActive(ent, true);
 
         _popup.PopupClient(Loc.GetString("dna-lock-registered-popup"), ent.Owner, user);
     }
 
-    public void ToggleLock(Entity<DnaLockableComponent> ent)
+    /// <summary>
+    /// Turns a personal lock on or off. Job locks ignore this flag.
+    /// </summary>
+    public void SetLockActive(Entity<DnaLockableComponent> ent, bool active)
     {
-        ent.Comp.LockActive = !ent.Comp.LockActive;
+        ent.Comp.LockActive = active;
         Dirty(ent);
     }
 
+    /// <summary>
+    /// Adds <paramref name="dna"/> to the allowed list without removing anyone. Used by job locks, which allow every holder of the job.
+    /// </summary>
     public void AllowDna(Entity<DnaLockableComponent> ent, string dna)
     {
         if (ent.Comp.AllowedDna.Add(dna))
@@ -216,6 +240,9 @@ public sealed partial class DnaLockSystem : EntitySystem
         return false;
     }
 
+    /// <summary>
+    /// Gets the DNA of <paramref name="uid"/>. Returns false for entities without DNA.
+    /// </summary>
     public bool TryGetDna(EntityUid? uid, [NotNullWhen(true)] out string? dna)
     {
         dna = TryComp<DnaComponent>(uid, out var comp) ? comp.DNA : null;
@@ -224,13 +251,16 @@ public sealed partial class DnaLockSystem : EntitySystem
 
     private bool IsAuthorized(Entity<DnaLockableComponent> ent, EntityUid user)
     {
+        // Admin ghosts bypass the lock.
         if (HasComp<GhostComponent>(user) && _admin.IsAdmin(user))
             return true;
 
+        // An emagged lock lets everyone in.
         if (IsEmagged(ent))
             return true;
 
-        if (ent.Comp.RoundstartJob == null && !ent.Comp.LockActive)
+        // A personal lock that is off lets everyone in. A job lock is always on.
+        if (ent.Comp.Job == null && !ent.Comp.LockActive)
             return true;
 
         return TryGetDna(user, out var dna) && ent.Comp.AllowedDna.Contains(dna);
@@ -252,10 +282,10 @@ public sealed partial class DnaLockSystem : EntitySystem
 
     private bool IsEmagged(Entity<DnaLockableComponent> ent)
     {
-        return ent.Comp.RoundstartJob == null && _emag.CheckFlag(ent, EmagType.Interaction);
+        return _emag.CheckFlag(ent, EmagType.Interaction);
     }
 
-    private static bool IsBlocked(Entity<DnaLockableComponent> ent, DnaLockBlockedActions action)
+    private static bool IsActionBlocked(Entity<DnaLockableComponent> ent, DnaLockBlockedActions action)
     {
         return (ent.Comp.BlockedActions & action) != 0;
     }

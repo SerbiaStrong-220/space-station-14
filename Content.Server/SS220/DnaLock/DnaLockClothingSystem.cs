@@ -10,6 +10,9 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.DnaLock;
 
+/// <summary>
+/// Counts down and detonates DNA-locked clothing put on by someone without access.
+/// </summary>
 public sealed partial class DnaLockClothingSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
@@ -22,6 +25,8 @@ public sealed partial class DnaLockClothingSystem : EntitySystem
     {
         base.Initialize();
 
+        // The queued explosion is then processed on the next tick, after the item's queued deletion,
+        // so the item's own explosion resistance doesn't shield its wearer from the blast.
         UpdatesAfter.Add(typeof(ExplosionSystem));
 
         SubscribeLocalEvent<DnaLockClothingComponent, ClothingGotEquippedEvent>(OnEquipped);
@@ -52,6 +57,7 @@ public sealed partial class DnaLockClothingSystem : EntitySystem
             if (curTime < active.NextBeepAt)
                 continue;
 
+            // Counted from the previous beep rather than from now, so the beeps stay evenly spaced.
             active.NextBeepAt += clothing.BeepInterval;
             var secondsLeft = (int) Math.Ceiling((active.ExplodeAt - curTime).TotalSeconds);
             Warn(uid, active.WearerUid, clothing, clothing.TimerPopup, secondsLeft);
@@ -60,6 +66,7 @@ public sealed partial class DnaLockClothingSystem : EntitySystem
 
     private void OnEquipped(Entity<DnaLockClothingComponent> ent, ref ClothingGotEquippedEvent args)
     {
+        // Access is checked once, on equip. Only taking the item off stops the countdown.
         if (!TryComp<DnaLockableComponent>(ent, out var dnaLock)
             || _dnaLock.CheckAccess((ent, dnaLock), args.Wearer, silentFail: true))
             return;
@@ -88,6 +95,8 @@ public sealed partial class DnaLockClothingSystem : EntitySystem
     private void Detonate(EntityUid item, EntityUid wearer, DnaLockClothingComponent clothing)
     {
         _popup.PopupEntity(Loc.GetString(clothing.DetonationPopup), wearer, PopupType.LargeCaution);
+
+        // TriggerExplosive deletes the item by default.
         _explosion.TriggerExplosive(item, user: wearer);
     }
 }
