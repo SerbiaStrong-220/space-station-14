@@ -1,0 +1,118 @@
+- type: entity
+  id: BaseModularFoundation
+  abstract: true
+  parent: BaseStructure
+  name: ModularFoundation
+  description: you can open the drawers, you can knock on them, and even put things in them!
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Objects/Storage/ModuleFurniture/dresser.rsi
+    state: foundation
+  - type: Damageable
+    damageModifierSet: Wood
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWoodPlank1:
+            min: 3
+            max: 3
+      - !type:EmptyAllContainersBehaviour
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: ModuleFurniture
+    tileLayoutSize: 3,3
+  - type: ContainerContainer
+    containers:
+      module-furniture: !type:Container
+        showEnts: true
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Tag
+    tags:
+    - Wooden
+  - type: Anchorable
+  - type: Rotatable
+
+- type: entity
+  id: BaseCabinetFoundation
+  abstract: true
+  parent: BaseModularFoundation
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.2,-0.45,0.2,0.45"
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
+        - LowImpassable
+
+- type: entity
+  id: BaseDoubleCabinetFoundation
+  abstract: true
+  parent: BaseModularFoundation
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.45,0.4,0.45"
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
+        - LowImpassable
+
+- type: entity
+  id: BaseModularPart
+  abstract: true
+  parent: BaseStorageItem
+  name: ModularCabinetPart
+  description: Drawer for cabinet
+  components:
+  - type: ModuleFurniturePart
+    size: 1,1
+  - type: Item
+    size: Huge
+  - type: Sprite
+    sprite: SS220/Objects/Storage/ModuleFurniture/dresser.rsi
+    layers:
+    - state: drawer
+      map: ["enum.ModuleFurniturePartVisuals.LayerItem"]
+    - state: drawer-open
+      map: ["enum.ModuleFurniturePartVisuals.LayerOpened"]
+    - state: drawer-closed
+      map: ["enum.ModuleFurniturePartVisuals.LayerClosed"]
+  - type: Storage
+    grid:
+    - 0,0,8,3
+    maxItemSize: Large
+    storageOpenSound: /Audio/Effects/closetopen.ogg
+    storageCloseSound: /Audio/Effects/closetclose.ogg
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
+  - type: Appearance
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: UseDelay
+    delay: 0.5
+  - type: Tag
+    tags:
+    - Wooden
