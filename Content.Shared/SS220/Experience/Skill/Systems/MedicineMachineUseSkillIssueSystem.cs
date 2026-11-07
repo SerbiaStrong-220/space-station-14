@@ -28,6 +28,7 @@ public sealed class MedicineMachineUseSkillIssueSystem : SkillEntitySystem
         {
             args.FailureChance = 0f;
             args.SelfDamageChance = 0f;
+            return;
         }
 
         var newFailureChance = ComputeNewChance(entity.Comp.DefibrillatorFailureChance, args.FailureChance);

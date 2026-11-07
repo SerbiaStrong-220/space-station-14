@@ -3,6 +3,11 @@
   name: species-name-diona
   roundStart: true
   prototype: MobDiona
+  # SS220 age-tweak bgn
+  youngAge: 100
+  oldAge: 200
+  maxAge: 9999
+  # SS220 age-tweak end
   defaultSkinTone: "#cdb369"
   dollPrototype: AppearanceDiona
   skinColoration: Hues
