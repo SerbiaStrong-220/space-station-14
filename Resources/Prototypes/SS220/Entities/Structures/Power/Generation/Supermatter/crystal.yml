@@ -47,7 +47,7 @@
   - type: Tts
     voicePreferences:
       NTTS: glados
-    # randomVoicesList: SuperMatterVoices uncomment when map load/save test fixed
+    # randomVoicePreferences: SuperMatterVoices uncomment when map load/save test fixed
   - type: AmbientSound
     range: 5
     volume: 0

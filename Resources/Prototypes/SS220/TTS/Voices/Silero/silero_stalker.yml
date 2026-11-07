@@ -16,7 +16,7 @@
   name: Sidorovich
   speaker: sidorovich
   provider: Silero
-  categories: [ STALKER ]
+  categories: [ Stalker ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -29,7 +29,7 @@
   name: Barman
   speaker: barman
   provider: Silero
-  categories: [ STALKER ]
+  categories: [ Stalker ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -42,7 +42,7 @@
   name: Dolg1
   speaker: dolg1
   provider: Silero
-  categories: [ STALKER ]
+  categories: [ Stalker ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -55,7 +55,7 @@
   name: Monolith2
   speaker: monolith2
   provider: Silero
-  categories: [ STALKER ]
+  categories: [ Stalker ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -68,7 +68,7 @@
   name: Legends
   speaker: legends
   provider: Silero
-  categories: [ STALKER ]
+  categories: [ Stalker ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -81,7 +81,7 @@
   name: Monolith1
   speaker: monolith1
   provider: Silero
-  categories: [ STALKER ]
+  categories: [ Stalker ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -94,7 +94,7 @@
   name: Dolg2
   speaker: dolg2
   provider: Silero
-  categories: [ STALKER ]
+  categories: [ Stalker ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -107,7 +107,7 @@
   name: Stories
   speaker: stories
   provider: Silero
-  categories: [ STALKER ]
+  categories: [ Stalker ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -120,7 +120,7 @@
   name: Freedom
   speaker: freedom
   provider: Silero
-  categories: [ STALKER ]
+  categories: [ Stalker ]
   requirement: !type:TtsAllRequirement
     requirements:
     - !type:TtsSexRequirement
@@ -134,7 +134,7 @@
   name: stalker_metro_bandit02
   speaker: stalker_metro_bandit02
   provider: Silero
-  categories: [ STALKER ]
+  categories: [ Stalker ]
   requirement: !type:TtsSexRequirement
     sexes: [ Male ]
 
@@ -143,7 +143,7 @@
   name: stalker_metro_degtyarev
   speaker: stalker_metro_degtyarev
   provider: Silero
-  categories: [ STALKER ]
+  categories: [ Stalker ]
   requirement: !type:TtsSexRequirement
     sexes: [ Male ]
 
@@ -152,7 +152,7 @@
   name: stalker_metro_novice02
   speaker: stalker_metro_novice02
   provider: Silero
-  categories: [ STALKER ]
+  categories: [ Stalker ]
   requirement: !type:TtsSexRequirement
     sexes: [ Male ]
 
@@ -161,7 +161,7 @@
   name: stalker_metro_pavel
   speaker: stalker_metro_pavel
   provider: Silero
-  categories: [ STALKER ]
+  categories: [ Stalker ]
   requirement: !type:TtsSexRequirement
     sexes: [ Male ]
 
@@ -170,7 +170,7 @@
   name: stalker_metro_saharov
   speaker: stalker_metro_saharov
   provider: Silero
-  categories: [ STALKER ]
+  categories: [ Stalker ]
   requirement: !type:TtsSexRequirement
     sexes: [ Male ]
 
@@ -179,7 +179,7 @@
   name: stalker_metro_soldier
   speaker: stalker_metro_soldier
   provider: Silero
-  categories: [ STALKER ]
+  categories: [ Stalker ]
   requirement: !type:TtsSexRequirement
     sexes: [ Male ]
 
@@ -188,7 +188,7 @@
   name: stalker_metro_stalker01
   speaker: stalker_metro_stalker01
   provider: Silero
-  categories: [ STALKER ]
+  categories: [ Stalker ]
   requirement: !type:TtsSexRequirement
     sexes: [ Male ]
 
@@ -197,7 +197,7 @@
   name: stalker_metro_newbie01
   speaker: stalker_metro_newbie01
   provider: Silero
-  categories: [ STALKER ]
+  categories: [ Stalker ]
   requirement: !type:TtsSexRequirement
     sexes: [ Male ]
 
@@ -206,6 +206,6 @@
   name: Bandit1
   speaker: bandit1
   provider: Silero
-  categories: [ STALKER ]
+  categories: [ Stalker ]
   requirement: !type:TtsSexRequirement
     sexes: [ Male ]

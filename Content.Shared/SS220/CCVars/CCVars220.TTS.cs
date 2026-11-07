@@ -8,44 +8,7 @@ public sealed partial class CCVars220
     /// Enables the entire TTS request handle system.
     /// </summary>
     public static readonly CVarDef<bool> TtsEnabled =
-        CVarDef.Create("tts.enabled", true, CVar.SERVER | CVar.REPLICATED | CVar.NOTIFY);
-
-    #region NTTS
-    /// <summary>
-    /// Enables the NTTS provider.
-    /// </summary>
-    public static readonly CVarDef<bool> TtsNTTSEnabled =
-        CVarDef.Create("tts.ntts.enabled", true, CVar.SERVER | CVar.REPLICATED | CVar.NOTIFY);
-
-    public static readonly CVarDef<string> TtsNTTSApiUrl =
-        CVarDef.Create("tts.ntts.api_url", "", CVar.SERVERONLY);
-
-    /// <summary>
-    /// Maximum number of cached responses for the NTTS provider.
-    /// </summary>
-    public static readonly CVarDef<int> TtsNTTSMaxCache =
-        CVarDef.Create("tts.ntts.max_cache", 250, CVar.SERVERONLY | CVar.ARCHIVE);
-    #endregion
-
-    #region Silero
-    /// <summary>
-    /// Whether the Silero TTS provider is enabled
-    /// </summary>
-    public static readonly CVarDef<bool> TtsSileroEnabled =
-         CVarDef.Create("tts.silero.enabled", true, CVar.SERVER | CVar.REPLICATED | CVar.NOTIFY);
-
-    public static readonly CVarDef<string> TtsSileroApiUrl =
-        CVarDef.Create("tts.silero.api_url", "", CVar.SERVERONLY);
-
-    public static readonly CVarDef<string> TtsSileroApiToken =
-        CVarDef.Create("tts.silero.api_token", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
-
-    /// <summary>
-    /// Maximum number of cached responses for the Silero provider.
-    /// </summary>
-    public static readonly CVarDef<int> TtsSileroMaxCache =
-        CVarDef.Create("tts.silero.max_cache", 250, CVar.SERVERONLY | CVar.ARCHIVE);
-    #endregion
+        CVarDef.Create("tts.enabled", false, CVar.SERVER | CVar.REPLICATED | CVar.NOTIFY);
 
     /// <summary>
     /// TTS request timeout in seconds.
@@ -77,7 +40,47 @@ public sealed partial class CCVars220
     public static readonly CVarDef<float> TtsVoiceTestRequestCooldown =
         CVarDef.Create("tts.voice_test_request_cooldown", 5f, CVar.SERVER | CVar.REPLICATED | CVar.NOTIFY);
 
+    #region NTTS
+
+    /// <summary>
+    /// Enables the NTTS provider.
+    /// </summary>
+    public static readonly CVarDef<bool> TtsNTTSEnabled =
+        CVarDef.Create("tts.ntts.enabled", false, CVar.SERVER | CVar.REPLICATED | CVar.NOTIFY);
+
+    public static readonly CVarDef<string> TtsNTTSApiUrl =
+        CVarDef.Create("tts.ntts.api_url", "", CVar.SERVERONLY);
+
+    /// <summary>
+    /// Maximum number of cached responses for the NTTS provider.
+    /// </summary>
+    public static readonly CVarDef<int> TtsNTTSMaxCache =
+        CVarDef.Create("tts.ntts.max_cache", 400, CVar.SERVERONLY | CVar.ARCHIVE);
+    #endregion
+
+    #region Silero
+
+    /// <summary>
+    /// Whether the Silero TTS provider is enabled
+    /// </summary>
+    public static readonly CVarDef<bool> TtsSileroEnabled =
+         CVarDef.Create("tts.silero.enabled", false, CVar.SERVER | CVar.REPLICATED | CVar.NOTIFY);
+
+    public static readonly CVarDef<string> TtsSileroApiUrl =
+        CVarDef.Create("tts.silero.api_url", "", CVar.SERVERONLY);
+
+    public static readonly CVarDef<string> TtsSileroApiToken =
+        CVarDef.Create("tts.silero.api_token", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
+
+    /// <summary>
+    /// Maximum number of cached responses for the Silero provider.
+    /// </summary>
+    public static readonly CVarDef<int> TtsSileroMaxCache =
+        CVarDef.Create("tts.silero.max_cache", 400, CVar.SERVERONLY | CVar.ARCHIVE);
+    #endregion
+
     #region ClientSettings
+
     /// <summary>
     /// Default volume setting of TTS sound
     /// </summary>

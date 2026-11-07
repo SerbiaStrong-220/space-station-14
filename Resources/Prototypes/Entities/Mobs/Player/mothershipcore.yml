@@ -252,8 +252,7 @@
   - type: RadarConsole
   #SS220-AddMotherShip begin
   - type: Tts
-    randomVoicesList:
-      NTTS: Borg
+    randomVoicePreferences: Borg
   #SS220-AddMotherShip end
 
 - type: entity

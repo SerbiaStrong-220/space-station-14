@@ -13,8 +13,8 @@ public sealed partial class TtsVoiceCategoryPrototype : IPrototype, IEquatable<T
     public string LocalizedName => Loc.GetString(Name);
 
     [DataField]
-    public LocId Description = string.Empty;
-    public string LocalizedDescription => string.IsNullOrEmpty(Description) ? string.Empty : Loc.GetString(Description);
+    public LocId? Description;
+    public string LocalizedDescription => Description is { } desc ? Loc.GetString(desc) : string.Empty;
 
     [DataField]
     public Color Color = Color.White.WithAlpha(0.375f);

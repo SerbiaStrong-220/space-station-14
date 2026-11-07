@@ -11,7 +11,14 @@ ui-humanoid-profile-editor-voice-settings = ⚙
 ui-admin-tab-player-actions-tts-queues-clear = Сбросить очереди TTS
 
 ui-tts-provider-voice-selector-window-title = Выбор голоса провайдера { $providerName }
-ui-tts-provider-voice-selector-window-search-placeholder = Поиск...
+ui-tts-provider-voice-selector-window-search-placeholder = Поиск по названию или категории...
+ui-tts-provider-voice-selector-window-all-categories = Все категории
+ui-tts-provider-voice-selector-window-only-available = Показывать только доступные голоса
+ui-tts-provider-voice-selector-window-count = Голосов: { $count }
+ui-tts-provider-voice-selector-window-empty = Ничего не найдено.
+ui-tts-voice-selector-entry-select = Выбрать
+ui-tts-voice-preferences-table-provider-header = Провайдер
+ui-tts-voice-preferences-table-voice-header = Голос
 
 ui-tts-voice-preferences-tab-voice-not-allowed = Этот голос вам недоступен по причине:
     { $reason }

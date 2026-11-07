@@ -103,7 +103,7 @@ public partial class TtsSystem
             var reqTime = DateTime.UtcNow;
             try
             {
-                var cts = new CancellationTokenSource(TimeSpan.FromSeconds(TtsSystem._requestTimeout));
+                using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(TtsSystem._requestTimeout));
 
                 var httpResponse = await _httpClient.PostAsJsonAsync(_apiUrl, body, cts.Token);
                 if (!httpResponse.IsSuccessStatusCode)
@@ -127,7 +127,7 @@ public partial class TtsSystem
 
                 var json = await JsonSerializer.DeserializeAsync<SileroHttpResponseBody>(jsonStream, cancellationToken: cts.Token);
 
-                if (json.Results.Count == 0)
+                if (json.Results is null || json.Results.Count == 0)
                 {
                     Log.Error("Silero response missing results");
                     return false;

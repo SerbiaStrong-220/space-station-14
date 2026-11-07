@@ -234,7 +234,7 @@
   - type: MobPrice
     price: 1000
   - type: Tts
-    randomVoicesList: Borg
+    randomVoicePreferences: Borg
   - type: Tag
     tags:
     - DoorBumpOpener
