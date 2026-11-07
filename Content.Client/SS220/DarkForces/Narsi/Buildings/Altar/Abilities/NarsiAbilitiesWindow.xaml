@@ -1,0 +1,66 @@
+﻿<ui:FancyWindow xmlns="https://spacestation14.io"
+                xmlns:x="http://schemas.microsoft.com/winfx/2007/xaml"
+                xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls;assembly=Content.Client"
+                xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                Title="Способности"
+                MinSize="400 600">
+
+    <BoxContainer Orientation="Vertical" Margin="8 8 8 8">
+
+        <PanelContainer StyleClasses="Inset">
+
+            <BoxContainer Orientation="Vertical">
+                <Label Text="Способности" StyleClasses="LabelKeyText" Align="Center" />
+                <RichTextLabel Margin="8 8 8 8" Name="Description" />
+            </BoxContainer>
+
+        </PanelContainer>
+
+        <SplitContainer Name="SplitContainer" Orientation="Horizontal" VerticalExpand="True" Margin="0 0 0 8">
+
+            <PanelContainer>
+                <PanelContainer.PanelOverride>
+                    <gfx:StyleBoxFlat BackgroundColor="#1B1B1E" />
+                </PanelContainer.PanelOverride>
+
+                <BoxContainer VerticalExpand="True" Orientation="Vertical" MinWidth="416">
+
+                    <Label Text="Доступные для изучения"
+                           Align="Center"
+                           Margin="8 8 8 8"
+                           StyleClasses="LabelKeyText" />
+
+                    <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
+
+                        <BoxContainer Orientation="Vertical"
+                                      HorizontalExpand="True"
+                                      VerticalExpand="True"
+                                      Name="ClosedAbilities"
+                                      RectClipContent="True" />
+                    </ScrollContainer>
+                </BoxContainer>
+
+            </PanelContainer>
+
+            <PanelContainer>
+                <PanelContainer.PanelOverride>
+                    <gfx:StyleBoxFlat BackgroundColor="#1B1B1E" />
+                </PanelContainer.PanelOverride>
+
+                <BoxContainer VerticalExpand="True" Orientation="Vertical" MinWidth="416">
+
+                    <Label Text="Изученные" Align="Center" Margin="8 8 8 8" StyleClasses="LabelKeyText" />
+
+                    <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
+                        <BoxContainer Orientation="Vertical"
+                                      HorizontalExpand="True"
+                                      VerticalExpand="True"
+                                      Name="OpenedAbilities"
+                                      RectClipContent="True" />
+                    </ScrollContainer>
+
+                </BoxContainer>
+            </PanelContainer>
+        </SplitContainer>
+    </BoxContainer>
+</ui:FancyWindow>

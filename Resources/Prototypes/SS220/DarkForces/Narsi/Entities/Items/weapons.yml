@@ -1,0 +1,93 @@
+- type: entity
+  id: BaseNarsiWeapon
+  parent: BaseItem
+  suffix: Narsi
+  abstract: true
+
+- type: entity
+  name: Призрачный топор
+  parent: BaseNarsiWeapon
+  id: NarsiCultGhostAxe
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sharp
+    - type: Sprite
+      sprite: SS220/DarkForces/Cult/Effects/axe.rsi
+      state: icon
+    - type: MeleeWeapon
+      attackRate: 1.0
+      damage:
+        types:
+          Blunt: 5
+          Slash: 10
+      soundHit:
+        path: /Audio/Weapons/bladeslice.ogg
+    - type: Item
+      size: Huge
+    - type: Unremoveable
+
+- type: entity
+  name: Кровавый меч
+  parent: BaseNarsiWeapon
+  id: NarsiCultSword
+  description: Меч от которого исходит темная энергия
+  components:
+    - type: Sharp
+    - type: Sprite
+      sprite: SS220/DarkForces/Cult/Entities/Weapons/sword.rsi
+      state: icon
+    - type: MeleeWeapon
+      attackRate: 0.75
+      damage:
+        types:
+          Blunt: 10
+          Slash: 23
+      soundHit:
+        path: /Audio/Weapons/bladeslice.ogg
+    - type: Item
+      size: Huge
+    - type: DisarmMalus
+
+- type: entity
+  name: Кровавый топор
+  parent: BaseNarsiWeapon
+  id: NarsuCultAxe
+  description: Топор, от которого исходит темная энергия
+  components:
+    - type: Sharp
+    - type: Sprite
+      sprite: SS220/DarkForces/Cult/Entities/Weapons/axe.rsi
+      state: icon
+    - type: MeleeWeapon
+      attackRate: 1.0
+      damage:
+        types:
+          Blunt: 5
+          Slash: 15
+      soundHit:
+        path: /Audio/Weapons/bladeslice.ogg
+    - type: Item
+      size: Huge
+    - type: DisarmMalus
+
+- type: entity
+  name: Кровавая булава
+  parent: BaseNarsiWeapon
+  id: NarsiCultKeule
+  description: Булава, от которого исходит темная энергия
+  components:
+    - type: Sharp
+    - type: Sprite
+      sprite: SS220/DarkForces/Cult/Entities/Weapons/keule.rsi
+      state: icon
+    - type: MeleeWeapon
+      attackRate: 1.2
+      damage:
+        types:
+          Blunt: 3
+          Slash: 7
+      soundHit:
+        path: /Audio/Weapons/bladeslice.ogg
+    - type: Item
+      size: Huge
+    - type: DisarmMalus

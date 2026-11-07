@@ -1,0 +1,38 @@
+﻿- type: entity
+  parent: BaseItem
+  id: RatvarSoulVessel
+  name: "Вместилище души"
+  description: "Хранилище благословлённой Ратваром души праведника."
+  suffix: Ratvar
+  components:
+  - type: Transform
+    noRot: true
+  - type: Sprite
+    sprite: SS220/DarkForces/Ratvar/Items/soul_vessel.rsi
+    noRot: true
+    layers:
+    - state: soul_vessel
+      map: [ "soul" ]
+  - type: MindContainer
+  - type: RatvarSoulVessel
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.RatvarSoulVesselVisualState.State:
+        soul:
+          True: { state: "soul_vessel_occupied" }
+          False: { state: "soul_vessel" }
+  - type: RatvarItem
+
+- type: entity
+  parent: RatvarSoulVessel
+  id: RatvarSoulVesselGhost
+  suffix: Ghost Role
+  components:
+  - type: GhostRole
+    allowMovement: false
+    allowSpeech: false
+    name: "Вместилище души"
+    description: "Займите вместилище души, чтобы после стать Заводным Мародёром"
+    rules: "Слушайтесь и подчинайтесь праведникам Ратвара!"
+  - type: GhostTakeoverAvailable

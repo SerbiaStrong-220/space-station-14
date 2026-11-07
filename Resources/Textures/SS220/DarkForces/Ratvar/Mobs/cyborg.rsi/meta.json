@@ -1,0 +1,56 @@
+{
+    "version": 1,
+    "license": "Собственная лицензия. Полный запрет на копирование и использование вне проекта Dark Station или одобрения текущего владельца проекта",
+    "copyright": "DarkStation",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "cyborg",
+            "directions": 4,
+            "delays": [
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1
+                ],
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1
+                ],
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1
+                ],
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1
+                ]
+            ]
+        },
+        {
+            "name": "cyborg_e",
+            "directions": 4
+        },
+        {
+            "name": "cyborg_e_r",
+            "directions": 4
+        },
+        {
+            "name": "cyborg_l",
+            "directions": 4
+        },
+        {
+            "name": "cyborg_dead"
+        }
+    ]
+}

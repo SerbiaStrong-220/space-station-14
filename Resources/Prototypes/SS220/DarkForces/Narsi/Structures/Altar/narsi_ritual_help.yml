@@ -1,0 +1,39 @@
+- type: narsiRitualCategory
+  id: NarsiHelpRituals
+  name: Помощь
+  rituals:
+  - NarsiRunicPlasteelRitual
+  - NarsiRitualDaggerRitual
+  - NarsiIconsRitual
+
+- type: narsiRitual
+  id: NarsiRunicPlasteelRitual
+  name: Вызов материалов
+  description: С помощью темной магии, Нар'Си пришлет вам немного рунического металла.
+  requirementsDesc: Требуется 2 культиста
+  duration: 60
+  requirements:
+    cultistsCount: 2
+  effect: !type:NarsiItemsSpawnRitualEffect
+    itemToSpawn: SheetRunicPlasteelHalf
+
+- type: narsiRitual
+  id: NarsiRitualDaggerRitual
+  name: Ритуальный кинжал
+  description: С помощью темной магии, Нар'Си пришлет вам ритуальный кинжал. Полезно, если вы потеряли свой
+  requirementsDesc: Требуется 2 культиста
+  duration: 60
+  requirements:
+    cultistsCount: 2
+  effect: !type:NarsiItemsSpawnRitualEffect
+    itemToSpawn: RitualDagger
+
+- type: narsiRitual
+  id: NarsiIconsRitual
+  name: Тёмное зрение
+  description: Данный ритуал добавит иконки к персонажам культистов, что поможет вам распознавать их в толпе
+  requirementsDesc: Требуется 2 культиста
+  duration: 45
+  requirements:
+    cultistsCount: 2
+  effect: !type:NarsiIconsRitualEffect

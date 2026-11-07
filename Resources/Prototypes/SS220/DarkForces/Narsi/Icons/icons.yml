@@ -1,0 +1,25 @@
+- type: factionIcon
+  id: NarsiCultistIcon
+  priority: 11
+  showTo:
+    components:
+    - ShowAntagIcons
+    - NarsiCultist
+    - NarsiCultistLeader
+    - NarsiCultCreature
+  icon:
+    sprite: /Textures/SS220/DarkForces/Cult/Icons/cultist.rsi
+    state: cultist
+
+- type: factionIcon
+  id: NarsiCultistLeaderIcon
+  priority: 11
+  showTo:
+    components:
+    - ShowAntagIcons
+    - NarsiCultist
+    - NarsiCultistLeader
+    - NarsiCultCreature
+  icon:
+    sprite: /Textures/SS220/DarkForces/Cult/Icons/cultist.rsi
+    state: cultistLeader

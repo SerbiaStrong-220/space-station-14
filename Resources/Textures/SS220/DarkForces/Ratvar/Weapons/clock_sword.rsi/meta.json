@@ -1,0 +1,44 @@
+{
+    "version": 1,
+    "license": "Собственная лицензия. Полный запрет на копирование и использование вне проекта Dark Station или одобрения текущего владельца проекта",
+    "copyright": "DarkStation",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "icon-red"
+        },
+        {
+            "name": "icon-blue"
+        },
+        {
+            "name": "icon"
+        },
+        {
+            "name": "inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "inhand-right",
+            "directions": 4
+        },
+        {
+            "name": "inhand-left-blue",
+            "directions": 4
+        },
+        {
+            "name": "inhand-right-blue",
+            "directions": 4
+        },
+        {
+            "name": "inhand-left-red",
+            "directions": 4
+        },
+        {
+            "name": "inhand-right-red",
+            "directions": 4
+        }
+    ]
+}
