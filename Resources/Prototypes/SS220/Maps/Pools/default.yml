@@ -5,7 +5,7 @@
   maps:
   - Frankenstein
   - Noxus
-  - Axioma
+# - Axioma # Disabled until version 2.0 is released
   - Eclipse
   - Donuts
   - Astro
