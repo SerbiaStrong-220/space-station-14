@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Form>
+  <FormId>law_rep_investigation</FormId>
+  <PrototypeId>PaperNtFormLaw</PrototypeId>
+  <EntityName>форма НТ-КОМ-ЦК-ОТЧ</EntityName>
+  <PhotocopierTitle>Отчет о внутреннем расследовании</PhotocopierTitle>
+  <Content><![CDATA[[bold]Форма НТ-КОМ-ЦК-ОТЧ[/bold]
+[head=2]Отчет о внутреннем расследовании[/head]
+
+[italic]Дата: ДЕНЬ/МЕСЯЦ/ГОД [/italic]
+
+Я, (ПОЛНОЕ ИМЯ), как Представитель NanoTrasen, в ходе внутренней проверки, запрошенной (ПОЛНОЕ ИМЯ), в должности (ПОЛНОЕ НАЗВАНИЕ ДОЛЖНОСТИ) по причине (ПРИЧИНА ПРОВЕРКИ) выявил следующие нарушения:
+
+Также хочу сообщить о следующем:
+
+[italic]Место для печатей[/italic]]]></Content>
+</Form>
