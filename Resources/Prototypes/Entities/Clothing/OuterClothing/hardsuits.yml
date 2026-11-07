@@ -390,7 +390,7 @@
     canCreateVacuum: false
   - type: Speech
     speechVerb: Robotic
-    speechSounds: Pai
+    speechSounds: Beep
   - type: TTS
     voice: glados
   #SS220-dna-lock end
