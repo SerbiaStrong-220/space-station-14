@@ -1,0 +1,354 @@
+- type: ttsVoice
+  id: Lambert
+  name: Ламберт
+  speaker: lambert
+  provider: Silero
+  categories: [ WITCHER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Shani
+  name: Шани
+  speaker: shani
+  provider: Silero
+  categories: [ WITCHER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Lugos
+  name: Лугос
+  speaker: lugos
+  provider: Silero
+  categories: [ WITCHER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Ewald
+  name: Эвальд
+  speaker: ewald
+  provider: Silero
+  categories: [ WITCHER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Mirror
+  name: Зеркало
+  speaker: mirror
+  provider: Silero
+  categories: [ WITCHER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Noble
+  name: Дворянин
+  speaker: noble
+  provider: Silero
+  categories: [ WITCHER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Avallach
+  name: "Аваллак'х"
+  speaker: avallach
+  provider: Silero
+  categories: [ WITCHER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+
+- type: ttsVoice
+  id: Cerys
+  name: Керис
+  speaker: cerys
+  provider: Silero
+  categories: [ WITCHER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Philippa
+  name: Филиппа
+  speaker: philippa
+  provider: Silero
+  categories: [ WITCHER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+
+- type: ttsVoice
+  id: Annah
+  name: Анна
+  speaker: annah
+  provider: Silero
+  categories: [ WITCHER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Cirilla
+  name: Цири
+  speaker: cirilla
+  provider: Silero
+  categories: [ WITCHER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Syanna
+  name: Сианна
+  speaker: syanna
+  provider: Silero
+  categories: [ WITCHER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Regis
+  name: Регис
+  speaker: regis
+  provider: Silero
+  categories: [ WITCHER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Guillaume
+  name: Гийом
+  speaker: guillaume
+  provider: Silero
+  categories: [ WITCHER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Vivienne
+  name: Вивьенна
+  speaker: vivienne
+  provider: Silero
+  categories: [ WITCHER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Papillon
+  name: Папийон
+  speaker: papillon
+  provider: Silero
+  categories: [ WITCHER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+
+- type: ttsVoice
+  id: Vesemir
+  name: Весемир
+  speaker: vesemir
+  provider: Silero
+  categories: [ WITCHER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Crach
+  name: Краг
+  speaker: crach
+  provider: Silero
+  categories: [ WITCHER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Geralt
+  name: Геральт
+  speaker: geralt
+  provider: Silero
+  categories: [ WITCHER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Yennefer
+  name: Йеннифэр
+  speaker: yennefer
+  provider: Silero
+  categories: [ WITCHER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Udalryk
+  name: Удальрик
+  speaker: udalryk
+  provider: Silero
+  categories: [ WITCHER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Dandelion
+  name: Лютик
+  speaker: dandelion
+  provider: Silero
+  categories: [ WITCHER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Palmerin
+  name: Пальмерин
+  speaker: palmerin
+  provider: Silero
+  categories: [ WITCHER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Olgierd
+  name: Ольгерд
+  speaker: olgierd
+  provider: Silero
+  categories: [ WITCHER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+
+- type: ttsVoice
+  id: Triss
+  name: Трисс
+  speaker: triss
+  provider: Silero
+  categories: [ WITCHER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Hjalmar
+  name: Хьялмар
+  speaker: hjalmar
+  provider: Silero
+  categories: [ WITCHER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Eskel
+  name: Эскель
+  speaker: eskel
+  provider: Silero
+  categories: [ WITCHER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa

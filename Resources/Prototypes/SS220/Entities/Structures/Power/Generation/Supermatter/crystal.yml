@@ -44,9 +44,10 @@
     maxTileBreak: 128
   - type: NameIdentifier
     group: GenericNumber
-  - type: TTS
-    voice: glados
-    # randomVoicesList: SuperMatterVoices uncomment when map load/save test fixed
+  - type: Tts
+    voicePreferences:
+      NTTS: glados
+    # randomVoicePreferences: SuperMatterVoices uncomment when map load/save test fixed
   - type: AmbientSound
     range: 5
     volume: 0
@@ -123,13 +124,3 @@
     location: SuperMatterCrystal
   - type: GuideHelp
     guides: [ Supermatter, Power ]
-
-# Not in use cause of errors in map load/save test
-- type: randomVoicesList
-  id: SuperMatterVoices
-  voices:
-  - adjutant
-  - good_thalya
-  - turret_floor
-  - glados
-  - fact_core

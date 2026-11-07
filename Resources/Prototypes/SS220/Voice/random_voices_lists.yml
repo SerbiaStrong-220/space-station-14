@@ -1,18 +1,18 @@
-- type: randomVoicesList
+- type: randomVoicePreferences
   id: Borg
-  voices:
-  - glados
-  - space_core
-  - adventure_core
-  - sentrybot
-  - fact_core
+  preferences:
+  - NTTS: glados
+  - NTTS: space_core
+  - NTTS: adventure_core
+  - NTTS: sentrybot
+  - NTTS: fact_core
 
-- type: randomVoicesList
+- type: randomVoicePreferences
   id: Demons
-  voices:
-  - arc_warden_dota_2
-  - enigma_dota_2
-  - nyx_assassin_dota_2
-  - shadow_fiend_dota_2
-  - broodmother_dota_2
-  - phantom_assassin_arcana_dota_2
+  preferences:
+  - NTTS: arc_warden_dota_2
+  - NTTS: enigma_dota_2
+  - NTTS: nyx_assassin_dota_2
+  - NTTS: shadow_fiend_dota_2
+  - NTTS: broodmother_dota_2
+  - NTTS: phantom_assassin_arcana_dota_2

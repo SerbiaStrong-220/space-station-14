@@ -1,0 +1,358 @@
+- type: ttsVoice
+  id: Huber
+  name: Хубер
+  speaker: huber
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Guru
+  name: Гуру
+  speaker: guru
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: AllElder
+  name: Всеобщий старейшина
+  speaker: all_elder
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Nsheriff
+  name: Шериф (северный)
+  speaker: nsheriff
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Orcc
+  name: Орк
+  speaker: orcc
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Clerk
+  name: Клерк
+  speaker: clerk
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Witch
+  name: Ведьма
+  speaker: witch
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Deva
+  name: Дева
+  speaker: deva
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Goblin
+  name: Гоблин
+  speaker: goblin
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+- type: ttsVoice
+  id: Kapitan
+  name: Капитан
+  speaker: kapitan
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Karh
+  name: Карх
+  speaker: karh
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Sheriff
+  name: Шериф
+  speaker: sheriff
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Trapper
+  name: Охотник-зверолов
+  speaker: trapper
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Glav
+  name: Главарь
+  speaker: glav
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Mthief
+  name: Вор-мужчина
+  speaker: mthief
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Vor
+  name: Вор
+  speaker: vor
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Junboy
+  name: Юнец
+  speaker: junboy
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Shopper
+  name: Торговец
+  speaker: shopper
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Iz
+  name: Из
+  speaker: iz
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Nekro
+  name: Некромант
+  speaker: nekro
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Hwleader
+  name: Предводитель
+  speaker: hwleader
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Hero
+  name: Герой
+  speaker: hero
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Smith
+  name: Кузнец
+  speaker: smith
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Magess
+  name: Волшебница
+  speaker: magess
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Nalo
+  name: Нало
+  speaker: nalo
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Ycf
+  name: Юноша-фермер
+  speaker: ycf
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Oldnekro
+  name: Старый некромант
+  speaker: oldnekro
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Zak
+  name: Зак
+  speaker: zak
+  provider: Silero
+  categories: [ EVILISLANDS ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa

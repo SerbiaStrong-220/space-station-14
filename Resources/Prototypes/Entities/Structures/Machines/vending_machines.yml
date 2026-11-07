@@ -72,8 +72,11 @@
   - type: Anchorable
   - type: TypingIndicator
     proto: robot
-  - type: TTS # Corvax-TTS
-    voice: fact_core
+   # SS220 Tts begin
+  - type: Tts
+    voicePreferences:
+      NTTS: fact_core
+   # SS220 Tts end
   - type: Speech
     speechVerb: Robotic
     speechSounds: Vending

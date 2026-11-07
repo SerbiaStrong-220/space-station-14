@@ -1,0 +1,5 @@
+- type: localizedDataset
+  id: TtsVoiceTestSamples
+  values:
+    prefix: tts-voice-test-sample-
+    count: 12
