@@ -506,6 +506,10 @@
   name: forensic gloves
   description: Do not leave fibers or fingerprints. If you work without them, you're A TERRIBLE DETECTIVE.
   components:
+  # SS220 microfibers begin
+  - type: GloveMicroFiber
+    enabled: false
+  # SS220 microfibers end
   - type: Sprite
     sprite: Clothing/Hands/Gloves/forensic.rsi
   - type: Clothing

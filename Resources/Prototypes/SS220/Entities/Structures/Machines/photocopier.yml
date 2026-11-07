@@ -69,6 +69,9 @@
       whitelist:
         components:
           - TonerCartridge
+  - type: DeviceLinkSink
+    ports:
+    - PrintDocument
   - type: ActivatableUI
     key: enum.PhotocopierUiKey.Key
   - type: ActivatableUIRequiresPower
