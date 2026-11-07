@@ -820,7 +820,8 @@
       path: /Audio/SS220/Announcements/greytide.ogg
       params:
         volume: -4
-  # SS220 MoreAnonces (sound and alert upgrades) end    weight: 5
+  # SS220 MoreAnonces (sound and alert upgrades) end
+    weight: 5
     minimumPlayers: 25
     reoccurrenceDelay: 20
   - type: GreytideVirusRule
