@@ -18,6 +18,14 @@
     },
     {
       "name": "bnuuy_dead"
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
     }
-  ]
+    ]
 }
