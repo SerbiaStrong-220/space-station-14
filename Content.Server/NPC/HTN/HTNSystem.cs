@@ -392,6 +392,12 @@ public sealed class HTNSystem : EntitySystem
                 // Operator completed so go to the next one.
                 case HTNOperatorStatus.Finished:
                     ShutdownTask(currentOperator, blackboard, status);
+
+                    // SS220-deferred-npc-death-nre-fix begin
+                    if (component.Plan == null)
+                        break;
+                    // SS220-deferred-npc-death-nre-fix end
+
                     component.Plan.Index++;
 
                     // Plan finished!
@@ -402,6 +408,12 @@ public sealed class HTNSystem : EntitySystem
                     }
 
                     ConditionalShutdown(component.Plan, currentOperator, blackboard, HTNPlanState.TaskFinished);
+
+                    // SS220-deferred-npc-death-nre-fix begin
+                    if (component.Plan == null)
+                        break;
+                    // SS220-deferred-npc-death-nre-fix end
+
                     StartupTask(component.Plan.Tasks[component.Plan.Index], component.Blackboard, component.Plan.Effects[component.Plan.Index]);
                     break;
                 default:
@@ -423,7 +435,12 @@ public sealed class HTNSystem : EntitySystem
 
     public void ShutdownPlan(HTNComponent component)
     {
-        DebugTools.Assert(component.Plan != null);
+        // SS220-deferred-npc-death-nre-fix begin
+        //DebugTools.Assert(component.Plan != null);
+        if (component.Plan == null)
+            return;
+        // SS220-deferred-npc-death-nre-fix end
+
         var blackboard = component.Blackboard;
 
         foreach (var task in component.Plan.Tasks)
