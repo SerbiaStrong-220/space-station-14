@@ -17,7 +17,7 @@
         mask:
         - MachineMask
         layer:
-        - MachineLayer #SS220-hydroponics-tray-collision
+        - BulletImpassable
   - type: Anchorable
   - type: Pullable
   - type: Sprite
