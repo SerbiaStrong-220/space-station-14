@@ -92,7 +92,8 @@ public partial class SharedGrabSystem
 
         // TODO: Once we have predicted randomness delete this for something sane...
         var seed = SharedRandomExtensions.HashCodeCombine((int)_timing.CurTick.Value, GetNetEntity(grabbable.Owner).Id);
-        var rand = new System.Random(seed);
+        var rand = new RobustRandom();
+        rand.SetSeed(seed);
 
         if (chance >= 1 || rand.Prob(chance))
         {
