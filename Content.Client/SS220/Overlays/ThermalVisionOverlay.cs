@@ -14,6 +14,7 @@ public sealed class ThermalVisionOverlay : IgnoreLightVisionOverlay
     public ThermalVisionOverlay(float showRadius, float closeShowRadius) : base(showRadius, closeShowRadius)
     {
         _transformSystem = Entity.System<TransformSystem>();
+        _sprite = Entity.System<SpriteSystem>();
     }
 
     protected override void Render(Entity<SpriteComponent, TransformComponent> ent,
