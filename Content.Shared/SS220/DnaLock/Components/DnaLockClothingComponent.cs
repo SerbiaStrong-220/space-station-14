@@ -1,12 +1,10 @@
 ﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Robust.Shared.Audio;
-
 namespace Content.Shared.SS220.DnaLock.Components;
 
 /// <summary>
 /// Clothing component with a DNA lock: when the item is worn by someone without access (it was put on, or the lock was turned on),
-/// it starts a warning timer with beeps and popups. The timer stops if the item is taken off or the wearer gains access.
+/// it counts down aloud. The countdown stops if the item is taken off or the wearer gains access.
 /// When the timer expires, the item detonates and is deleted.
 /// Requires a DnaLockableComponent and an ExplosiveComponent on the same entity.
 /// </summary>
@@ -20,32 +18,26 @@ public sealed partial class DnaLockClothingComponent : Component
     public TimeSpan TimeToExplode = TimeSpan.FromSeconds(5);
 
     /// <summary>
-    /// Interval between warning beeps.
+    /// Interval between countdown lines.
     /// </summary>
     [DataField]
     public TimeSpan BeepInterval = TimeSpan.FromSeconds(1);
 
     /// <summary>
-    /// Warning beep sound.
+    /// Said by the item when the countdown starts.
     /// </summary>
     [DataField]
-    public SoundSpecifier WarningSound = new SoundPathSpecifier("/Audio/Items/beep.ogg");
+    public LocId WarningMessage = "dna-lock-clothing-unauthorized-warning";
 
     /// <summary>
-    /// Announced by the item to everyone nearby when an unauthorized user equips it.
+    /// Said by the item on every countdown line except the last.
     /// </summary>
     [DataField]
-    public LocId WarningPopup = "dna-lock-clothing-unauthorized-warning";
+    public LocId TimerMessage = "dna-lock-clothing-timer-warning";
 
     /// <summary>
-    /// Countdown announced by the item to everyone nearby.
+    /// Said by the item on the last countdown line, right before detonation.
     /// </summary>
     [DataField]
-    public LocId TimerPopup = "dna-lock-clothing-timer-warning";
-
-    /// <summary>
-    /// Announced by the item to everyone nearby at the moment of detonation.
-    /// </summary>
-    [DataField]
-    public LocId DetonationPopup = "dna-lock-clothing-detonating";
+    public LocId DetonationMessage = "dna-lock-clothing-detonating";
 }

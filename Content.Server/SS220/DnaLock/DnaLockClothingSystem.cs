@@ -1,12 +1,12 @@
 ﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Server.Chat.Systems;
 using Content.Server.Explosion.EntitySystems;
+using Content.Shared.Chat;
 using Content.Shared.Clothing;
 using Content.Shared.Clothing.EntitySystems;
-using Content.Shared.Popups;
 using Content.Shared.SS220.DnaLock;
 using Content.Shared.SS220.DnaLock.Components;
-using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 
@@ -18,8 +18,7 @@ namespace Content.Server.SS220.DnaLock;
 public sealed partial class DnaLockClothingSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private SharedPopupSystem _popup = default!;
-    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private ChatSystem _chat = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private ClothingSystem _clothing = default!;
     [Dependency] private ExplosionSystem _explosion = default!;
@@ -61,7 +60,7 @@ public sealed partial class DnaLockClothingSystem : EntitySystem
             if (curTime >= active.ExplodeAt)
             {
                 RemCompDeferred<DnaLockClothingActiveComponent>(uid);
-                Detonate(uid, active.WearerUid, clothing);
+                Detonate(uid, active.WearerUid);
                 continue;
             }
 
@@ -71,7 +70,9 @@ public sealed partial class DnaLockClothingSystem : EntitySystem
             // Counted from the previous beep rather than from now, so the beeps stay evenly spaced.
             active.NextBeepAt += clothing.BeepInterval;
             var secondsLeft = (int) Math.Ceiling((active.ExplodeAt - curTime).TotalSeconds);
-            Warn(uid, active.WearerUid, clothing, clothing.TimerPopup, secondsLeft);
+
+            var message = secondsLeft <= 1 ? clothing.DetonationMessage : clothing.TimerMessage;
+            Warn(uid, message, secondsLeft);
         }
     }
 
@@ -110,20 +111,22 @@ public sealed partial class DnaLockClothingSystem : EntitySystem
         active.NextBeepAt = curTime + ent.Comp.BeepInterval;
 
         var secondsLeft = (int) Math.Ceiling(ent.Comp.TimeToExplode.TotalSeconds);
-        Warn(ent, wearer, ent.Comp, ent.Comp.WarningPopup, secondsLeft);
+        Warn(ent, ent.Comp.WarningMessage, secondsLeft);
     }
 
-    private void Warn(EntityUid item, EntityUid wearer, DnaLockClothingComponent clothing, LocId message, int secondsLeft)
+    private void Warn(EntityUid item, LocId message, int secondsLeft)
     {
-        _popup.PopupEntity(Loc.GetString(message, ("seconds", secondsLeft)), wearer, PopupType.LargeCaution);
-        _audio.PlayPvs(clothing.WarningSound, item);
+        Say(item, Loc.GetString(message, ("seconds", secondsLeft)));
     }
 
-    private void Detonate(EntityUid item, EntityUid wearer, DnaLockClothingComponent clothing)
+    private void Detonate(EntityUid item, EntityUid wearer)
     {
-        _popup.PopupEntity(Loc.GetString(clothing.DetonationPopup), wearer, PopupType.LargeCaution);
-
         // TriggerExplosive deletes the item by default.
         _explosion.TriggerExplosive(item, user: wearer);
+    }
+
+    private void Say(EntityUid item, string message)
+    {
+        _chat.TrySendInGameICMessage(item, message, InGameICChatType.Speak, hideChat: true, hideLog: true, checkRadioPrefix: false, ignoreActionBlocker: true);
     }
 }

@@ -377,6 +377,7 @@
     clothingPrototype: ClothingHeadHelmetHardsuitWarden
   #SS220-dna-lock begin
   - type: DnaLockClothing
+    timeToExplode: 3 # This will be a gem xd; delete later
   - type: DnaLockable
     job: Warden
   - type: Explosive
@@ -387,6 +388,11 @@
     tileBreakScale: 0
     maxTileBreak: 0
     canCreateVacuum: false
+  - type: Speech
+    speechVerb: Robotic
+    speechSounds: Pai
+  - type: TTS
+    voice: glados
   #SS220-dna-lock end
 
 #Captain's Hardsuit

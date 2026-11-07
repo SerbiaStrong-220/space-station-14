@@ -11,6 +11,6 @@ dna-lock-examine-personal-unset = Может использовать любой
 dna-lock-examine-personal-active = Привязан к ДНК владельца, ДНК-замок включён.
 dna-lock-examine-personal-inactive = Привязан к ДНК владельца, но ДНК-замок выключен.
 
-dna-lock-clothing-unauthorized-warning = ВНИМАНИЕ! ДНК пользователя не распознана. Детонация через { $seconds } сек.!
-dna-lock-clothing-timer-warning = Детонация через { $seconds } сек.!
+dna-lock-clothing-unauthorized-warning = ДНК не распознана!
+dna-lock-clothing-timer-warning = { $seconds }!
 dna-lock-clothing-detonating = ДЕТОНАЦИЯ!
