@@ -45,7 +45,7 @@ public static class BanPanelEuiStateMsg
 ///     Contains all the data related to a particular ban action created by the BanPanel window.
 /// </summary>
 [Serializable, NetSerializable]
-public sealed record Ban
+public sealed partial record Ban // SS220 pending bans
 {
     public Ban(
         string? target,

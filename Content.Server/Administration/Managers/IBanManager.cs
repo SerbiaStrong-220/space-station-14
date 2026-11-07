@@ -10,7 +10,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.Administration.Managers;
 
-public interface IBanManager
+public partial interface IBanManager // SS220 pending bans
 {
     public void Initialize();
     public void Restart();

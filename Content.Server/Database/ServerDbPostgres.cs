@@ -189,6 +189,7 @@ namespace Content.Server.Database
             if (!includeUnbanned)
             {
                 banQuery = banQuery.Where(p =>
+                    p.PendingServer == null && // SS220 pending bans
                     p.Unban == null && (p.ExpirationTime == null || p.ExpirationTime.Value > DateTime.UtcNow));
             }
 
@@ -254,7 +255,10 @@ namespace Content.Server.Database
                 ban.AdminNameInBanTime, // SS220-add-admin-name-in-ban
                 unbanDef,
                 ban.ExemptFlags,
-                roles);
+                roles)
+            {
+                Pending = ban.Pending, // SS220 pending bans
+            };
         }
 
         private static UnbanDef? ConvertUnban(Unban? unban)
@@ -282,6 +286,7 @@ namespace Content.Server.Database
 
             var banEntity = new Ban
             {
+                Pending = ban.Pending, // SS220 pending bans
                 Type = ban.Type,
                 Addresses = [..ban.Addresses.Select(ba => new BanAddress { Address = ba.ToNpgsqlInet() })],
                 Hwids = [..ban.HWIds.Select(bh => new BanHwid { HWId = bh })],
