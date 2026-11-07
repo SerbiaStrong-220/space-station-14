@@ -2,7 +2,7 @@
 
 
 using Content.Shared.Administration.Logs;
-using Content.Shared.SS220.Experience.Systems;
+using Content.Shared.SS220.Experience.Systems.Experience;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 

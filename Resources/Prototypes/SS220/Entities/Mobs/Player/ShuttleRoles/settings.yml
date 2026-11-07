@@ -36,7 +36,7 @@
       nameSegments:
       - NamesRedwingsLast
       nameFormat: name-format-redwings-officer
-    - type: RoleExperienceAdd
+    - type: ExperienceAddition
       definitionId: RedWingsOfficerRoleExperience
 
 - type: randomHumanoidSettings
@@ -57,7 +57,7 @@
       nameSegments:
       - NamesRedwingsLast
       nameFormat: name-format-redwings-medic
-    - type: RoleExperienceAdd
+    - type: ExperienceAddition
       definitionId: RedWingsMedicRoleExperience
 
 - type: randomHumanoidSettings
@@ -78,5 +78,5 @@
       nameSegments:
       - NamesRedwingsLast
       nameFormat: name-format-redwings-pilot
-    - type: RoleExperienceAdd
+    - type: ExperienceAddition
       definitionId: RedWingsPilotRoleExperience

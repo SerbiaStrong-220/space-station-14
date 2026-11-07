@@ -52,7 +52,7 @@
 - type: skill
   id: CombatTrainingProfessional
   levelInfo:
-    maximumSublevel: 1
+    maximumSublevel: 0
     levelUpPopup: combat-training-professional-level-up-popup
     sublevelUpPopup: combat-training-professional-sublevel-up-popup
   levelDescription:

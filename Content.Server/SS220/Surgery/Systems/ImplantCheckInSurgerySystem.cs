@@ -7,7 +7,7 @@ using Content.Shared.Implants.Components;
 using Content.Shared.Paper;
 using Content.Shared.SS220.Experience;
 using Content.Shared.SS220.Experience.Skill.Components;
-using Content.Shared.SS220.Experience.Systems;
+using Content.Shared.SS220.Experience.Systems.Experience;
 using Content.Shared.SS220.Surgery.Components;
 using Robust.Server.Audio;
 using Robust.Server.Containers;

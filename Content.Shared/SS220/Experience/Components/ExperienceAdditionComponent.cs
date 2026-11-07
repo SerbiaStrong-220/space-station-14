@@ -1,0 +1,68 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using Content.Shared.SS220.Experience.Systems;
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
+
+namespace Content.Shared.SS220.Experience.Components;
+
+/// NOTE:
+// This can be ProtoId, but for now it is pointless
+public enum ExperienceAddSource
+{
+    Admin = 0,
+    RoundStart,
+    Job,
+    Role,
+    Antag
+}
+
+[RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState(fieldDeltas: true)]
+[Access(friends: [typeof(ExperienceAdditionSystem)], Other = AccessPermissions.ReadExecute)]
+public sealed partial class ExperienceAdditionComponent : Component
+{
+    [AlwaysPushInheritance]
+    [DataField, AutoNetworkedField]
+    public Dictionary<ExperienceAddSource, ExperienceAddSpecifier> Sources = new();
+
+    [AlwaysPushInheritance]
+    [DataField, AutoNetworkedField]
+    public ProtoId<ExperienceDefinitionPrototype>? DefinitionId;
+
+    [DataField, AutoNetworkedField]
+    public bool Forced;
+
+    // NOTE: If you need to more 'flags' like Forced
+    // Its better to actually make this changeable field
+    public static readonly HashSet<ExperienceAddSource> AdminForceWhitelistSources = [ExperienceAddSource.Admin, ExperienceAddSource.Antag];
+}
+
+[DataDefinition]
+[Serializable, NetSerializable]
+public partial struct ExperienceAddSpecifier
+{
+    [DataField]
+    public int FreeSublevelPoints;
+
+    [DataField]
+    public HashSet<ProtoId<KnowledgePrototype>> Knowledges;
+
+    [DataField]
+    public Dictionary<ProtoId<SkillTreePrototype>, SkillTreeInfo> Skills;
+
+    public ExperienceAddSpecifier(int freeSublevelPoints, HashSet<ProtoId<KnowledgePrototype>> knowledges, Dictionary<ProtoId<SkillTreePrototype>, SkillTreeInfo> skills)
+    {
+        FreeSublevelPoints = freeSublevelPoints;
+        Knowledges = knowledges;
+        Skills = skills;
+    }
+
+    public ExperienceAddSpecifier()
+    {
+        FreeSublevelPoints = 0;
+        Knowledges = [];
+        Skills = [];
+    }
+}

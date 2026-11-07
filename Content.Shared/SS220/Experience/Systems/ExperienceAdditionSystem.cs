@@ -1,0 +1,146 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using Content.Shared.SS220.Experience.Components;
+using Robust.Shared.Prototypes;
+
+namespace Content.Shared.SS220.Experience.Systems;
+
+public sealed partial class ExperienceAdditionSystem : EntitySystem
+{
+    private readonly HashSet<EntityUid> _recalculateQueue = new(20);
+
+    public override void Initialize()
+    {
+        SubscribeLocalEvent<ExperienceComponent, AddExperienceEvent>(OnAddExperience);
+        SubscribeLocalEvent<ExperienceComponent, RemoveExperienceEvent>(OnRemoveExperience);
+        SubscribeLocalEvent<ExperienceComponent, TryChangeExperienceDefinitionEvent>(OnTryChangeExperienceDefinition);
+
+        SubscribeLocalEvent<ExperienceAdditionComponent, MapInitEvent>(OnExperienceAdditionMapInit);
+
+        SubscribeLocalEvent<TryAddExperienceAdditionComponent, MapInitEvent>(OnTryAddExperienceAdditionMapInit);
+
+        InitializeOtherSubscription();
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        foreach (var ent in _recalculateQueue)
+        {
+            var recalculateEv = new RecalculateEntityExperience();
+            RaiseLocalEvent(ent, ref recalculateEv);
+        }
+
+        _recalculateQueue.Clear();
+    }
+
+    public void UpsertSpecifier(EntityUid uid, ExperienceAddSource source, ExperienceAddSpecifier? specifier)
+    {
+        var additionComp = EnsureComp<ExperienceAdditionComponent>(uid);
+
+        if (specifier is { } resolvedSpecifier)
+        {
+            // Yes we drop old one, can be discussed
+            additionComp.Sources[source] = resolvedSpecifier;
+        }
+        else
+        {
+            additionComp.Sources.Remove(source);
+        }
+
+        DirtyField(uid, additionComp, nameof(ExperienceAdditionComponent.Sources));
+
+        EnqueueRecalculation(uid);
+    }
+
+    public void UpsertAdminForcedSpecifier(EntityUid uid, ExperienceAddSource source, ExperienceAddSpecifier? specifier)
+    {
+        var additionComp = EnsureComp<ExperienceAdditionComponent>(uid);
+
+        additionComp.Forced = true;
+        DirtyField(uid, additionComp, nameof(ExperienceAdditionComponent.Forced));
+
+        UpsertSpecifier(uid, source, specifier);
+    }
+
+    public void RemoveAdminAdded(EntityUid uid)
+    {
+        if (!TryComp<ExperienceAdditionComponent>(uid, out var comp))
+            return;
+
+        comp.Sources.Remove(ExperienceAddSource.Admin);
+        comp.Forced = false;
+
+        DirtyField(uid, comp, nameof(ExperienceAdditionComponent.Sources));
+        DirtyField(uid, comp, nameof(ExperienceAdditionComponent.Forced));
+
+        EnqueueRecalculation(uid);
+    }
+
+    public void EnqueueRecalculation(EntityUid uid)
+    {
+        _recalculateQueue.Add(uid);
+    }
+
+    private void OnExperienceAdditionMapInit(Entity<ExperienceAdditionComponent> entity, ref MapInitEvent _)
+    {
+        EnqueueRecalculation(entity);
+    }
+
+    private void OnAddExperience(Entity<ExperienceComponent> entity, ref AddExperienceEvent args)
+    {
+        UpsertSpecifier(entity, args.Source, args.Specifier);
+    }
+
+    private void OnRemoveExperience(Entity<ExperienceComponent> entity, ref RemoveExperienceEvent args)
+    {
+        UpsertSpecifier(entity, args.Source, null);
+    }
+
+    private void OnTryChangeExperienceDefinition(Entity<ExperienceComponent> entity, ref TryChangeExperienceDefinitionEvent args)
+    {
+        // NOTE: for now null is just dev qol
+        // NOTE2: it is also used to skip changing if force=true
+        if (args.DefinitionId is null)
+            return;
+
+        var additionComp = EnsureComp<ExperienceAdditionComponent>(entity);
+
+        if (args.Forced)
+            additionComp.DefinitionId = args.DefinitionId;
+        else
+            additionComp.DefinitionId ??= args.DefinitionId;
+
+        EnqueueRecalculation(entity);
+        args.Changed = additionComp.DefinitionId == args.DefinitionId;
+
+        if (args.Changed)
+            DirtyField(entity, additionComp, nameof(ExperienceAdditionComponent.DefinitionId));
+    }
+
+    private void OnTryAddExperienceAdditionMapInit(Entity<TryAddExperienceAdditionComponent> entity, ref MapInitEvent _)
+    {
+        if (TryComp<ExperienceComponent>(entity, out var experience))
+        {
+            var tmpEv = new TryChangeExperienceDefinitionEvent(entity.Comp.DefinitionId, false);
+            OnTryChangeExperienceDefinition((entity.Owner, experience), ref tmpEv);
+
+            foreach (var (source, specifier) in entity.Comp.Sources)
+            {
+                UpsertSpecifier(entity, source, specifier);
+            }
+        }
+
+        RemComp(entity, entity.Comp);
+    }
+}
+
+[ByRefEvent]
+public readonly record struct AddExperienceEvent(ExperienceAddSource Source, ExperienceAddSpecifier Specifier);
+
+[ByRefEvent]
+public readonly record struct RemoveExperienceEvent(ExperienceAddSource Source);
+
+[ByRefEvent]
+public record struct TryChangeExperienceDefinitionEvent(ProtoId<ExperienceDefinitionPrototype>? DefinitionId, bool Forced, bool Changed = false);

@@ -63,7 +63,7 @@
 - type: skill
   id: ExtravehicularActivityProfessional
   levelInfo:
-    maximumSublevel: 1
+    maximumSublevel: 0
     levelUpPopup: extravehicular-activity-professional-level-up-popup
     sublevelUpPopup: extravehicular-activity-professional-sublevel-up-popup
   levelDescription:

@@ -20,7 +20,7 @@ using Content.Shared.SS220.Signature;
 using Robust.Client.Player;
 using Robust.Shared.Prototypes;
 using Content.Shared.SS220.Experience;
-using Content.Shared.SS220.Experience.Systems;
+using Content.Shared.SS220.Experience.Systems.Experience;
 
 namespace Content.Client.Paper.UI
 {
