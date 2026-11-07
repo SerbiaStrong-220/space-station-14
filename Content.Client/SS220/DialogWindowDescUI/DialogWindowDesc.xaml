@@ -2,8 +2,9 @@
 <controls:FancyWindow
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
-    MinSize="200 200">
+    MinSize="200 100">
     <BoxContainer Orientation="Vertical" Margin="8">
+        <RichTextLabel Name="DescDefaultLabel" Visible="False" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <BoxContainer Name="Prompts" Orientation="Vertical"/>
         <BoxContainer Orientation="Vertical"
                       HorizontalExpand="True"
