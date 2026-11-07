@@ -153,6 +153,7 @@
         - CartridgeAmmo
     # SS220 blueshield-whitelist-storage-fix
       tags:
+        - Sidearm # SS220 pistol lighter
         - PowerCellBlaster
         - LaserSMGPowerCell # SS220 IK-40 PowerCell-Storage-Fix
         - LaserCarabinePowerCell # SS220 IK-60 PowerCell-Storage-Fix
@@ -178,6 +179,8 @@
         - Gun
         - BallisticAmmoProvider
         - CartridgeAmmo
+      tags: # SS220 pistol lighter
+        - Sidearm
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-leather
