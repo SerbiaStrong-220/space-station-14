@@ -1,8 +1,10 @@
-using System.Numerics;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Damage.Components;
 using Content.Shared.Database;
+using Content.Shared.Mobs.Components;
 using Content.Shared.SS220.Shuttles.UI;
+using Content.Shared.SS220.Weapons.Components;
+using Content.Shared.Standing;
 using Content.Shared.Weapons.Hitscan.Components;
 using Content.Shared.Weapons.Hitscan.Events;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -12,16 +14,18 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
+using System.Numerics;
 
 namespace Content.Shared.Weapons.Hitscan.Systems;
 
-public sealed class HitscanBasicRaycastSystem : EntitySystem
+public sealed partial class HitscanBasicRaycastSystem : EntitySystem // SS220 separate HitscanBasicRaycastSystem.220.cs
 {
     [Dependency] private readonly SharedShuttleNavInfoSystem _sharedShuttleNavInfo = default!; // SS220-add-hitscan-to-map
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly ISharedAdminLogManager _log = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private StandingStateSystem _standing = default!; //SS220 weapon overhaul
 
     [Dependency] private readonly EntityQuery<HitscanBasicVisualsComponent> _visualsQuery = default!;
 
@@ -37,6 +41,7 @@ public sealed class HitscanBasicRaycastSystem : EntitySystem
         var shooter = args.Shooter ?? args.Gun;
         var mapCords = _transform.ToMapCoordinates(args.FromCoordinates);
         var ray = new CollisionRay(mapCords.Position, args.ShotDirection, (int) ent.Comp.CollisionMask);
+        var gun = args.Gun;//SS220 weapon overhaul
         var rayCastResults = _physics.IntersectRay(mapCords.MapId, ray, ent.Comp.MaxDistance, shooter, false);
 
         var target = args.Target;
@@ -47,7 +52,7 @@ public sealed class HitscanBasicRaycastSystem : EntitySystem
         var result = _container.IsEntityOrParentInContainer(shooter)
             ? rayCastResults.FirstOrNull()
             : rayCastResults.FirstOrNull(hit => CanBeTargeted(hit.HitEntity, ent.Owner) && (hit.HitEntity == target // SS220-make-hitscan-target-change
-                                                || CompOrNull<RequireProjectileTargetComponent>(hit.HitEntity)?.Active != true)); // SS220-make-hitscan-target-change
+                                                || CompOrNull<RequireProjectileTargetComponent>(hit.HitEntity)?.Active != true) || ShouldIgnoreRequireTarget(hit.HitEntity, gun, shooter)); // SS220-make-hitscan-target-change
 
         var distanceTried = result?.Distance ?? ent.Comp.MaxDistance;
 

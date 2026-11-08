@@ -651,7 +651,8 @@
         type: StrippableBoundUserInterface
   - type: InventorySlots
   - type: Inventory
-    speciesId: hamster
+    #speciesId: hamster #SS220 mothroach displacement
+    speciesId: mothroach
     templateId: hamster
     displacements:
       head:
@@ -4079,8 +4080,10 @@
   - type: IgnoreKudzu #ss220 kudzu nymph fix
   #SS220-NymphLanguageFix begin
   - type: Language
+    selectedLanguage: Galactic
     availableLanguages:
     - id: Galactic
+    - id: Rootspeak
   #SS220-NymphLanguageFix end
 
 - type: entity

@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: [ BaseItem, BaseSecurityContraband ]
+  parent: [ BaseMagazine, BaseSecurityContraband ] # SS220-place-and-pickup-sounds-2
   id: BaseMagazinePistol
   name: pistol magazine (.35 auto)
   components:
@@ -33,7 +33,7 @@
 
 - type: entity
   abstract: true
-  parent: [ BaseItem, BaseSecurityContraband ]
+  parent: [ BaseMagazine, BaseSecurityContraband ] # SS220-place-and-pickup-sounds-2
   id: BaseMagazinePistolHighCapacity
   name: machine pistol magazine (.35 auto)
   components:
@@ -66,7 +66,7 @@
 
 - type: entity
   abstract: true
-  parent: [ BaseItem, BaseSecurityContraband ]
+  parent: [ BaseMagazine, BaseSecurityContraband ] # SS220-place-and-pickup-sounds-2
   id: BaseMagazinePistolSubMachineGun  # Yeah it's weird but it's pistol caliber
   name: SMG magazine (.35 auto)
   components:
@@ -98,7 +98,7 @@
   - type: Appearance
 
 - type: entity
-  parent: [ BaseItem, BaseSecurityContraband ]
+  parent: [ BaseMagazine, BaseSecurityContraband ] # SS220-place-and-pickup-sounds-2
   id: MagazinePistolSubMachineGunTopMounted
   name: WT550 magazine (.35 auto top-mounted)
   description: Unconventional 30-round top feeding magazine for the WT550 SMG. Intended to hold general-purpose kinetic ammunition.

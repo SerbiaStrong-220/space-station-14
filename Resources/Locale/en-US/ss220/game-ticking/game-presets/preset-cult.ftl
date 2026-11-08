@@ -30,6 +30,15 @@ cult-yogg-cultists-numb-info =
     Cultists: { $cultists } (alive: { $aliveCultists })
     Mi-Go: { $MiGo } (alive: { $aliveMiGo })
 
+cult-yogg-stage-name =
+    { $stage ->
+        [initial] Inception
+        [reveal] Revelation
+        [alarm] Alarm
+        [god] Arrival
+       *[other] Unknown stage
+    }
+
 cult-yogg-stage-info =
     Current cult stage: { cult-yogg-stage-name }
     Cult members required to reach the next stage: { $count }

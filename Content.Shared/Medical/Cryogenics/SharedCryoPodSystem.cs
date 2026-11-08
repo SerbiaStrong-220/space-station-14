@@ -329,7 +329,7 @@ public abstract partial class SharedCryoPodSystem : EntitySystem
             && user != null)
         {
             // Eject the beaker to the user's hands if possible.
-            _hands.PickupOrDrop(user.Value, beaker.Value);
+            _hands.PickupOrDrop(user.Value, beaker.Value, suppressPickupSound: true); // SS220-drop-and-pickup-sound-suppression
         }
     }
 

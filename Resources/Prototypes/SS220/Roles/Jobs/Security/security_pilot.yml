@@ -1,7 +1,7 @@
 - type: job
   id: SecurityPilot
-  name: пилот СБ
-  description: Ловите преступников на станции, бороздите просторы космоса в поисках... Чего-нибудь.
+  name: job-name-security-pilot
+  description: job-description-security-pilot
   playTimeTracker: JobSecurityPilot
   requirements:
     - !type:DepartmentTimeRequirement

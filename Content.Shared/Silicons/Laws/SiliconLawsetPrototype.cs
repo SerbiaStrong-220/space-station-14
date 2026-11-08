@@ -1,4 +1,5 @@
-﻿using Robust.Shared.Prototypes;
+using System.Diagnostics.CodeAnalysis;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Silicons.Laws;
@@ -65,6 +66,17 @@ public sealed partial class SiliconLawsetPrototype : IPrototype
     /// <inheritdoc/>
     [IdDataField]
     public string ID { get; private set; } = default!;
+
+    // SS220 random lawset begin
+    /// <summary>
+    /// Relative selection weight. Null excludes this lawset from station randomization.
+    /// </summary>
+    [DataField]
+    public float? Weight { get; private set; }
+
+    [MemberNotNullWhen(true, nameof(Weight))]
+    public bool Randomizable => Weight is not null;
+    // SS220 random lawset end
 
     /// <summary>
     /// The locstring of the lawset for the guidebook entry, if no name is provided, defaults to the ID

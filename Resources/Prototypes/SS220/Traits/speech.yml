@@ -2,6 +2,8 @@
   id: SlavicAccent
   name: trait-slavic-accent-name
   description: trait-slavic-accent-desc
+  category: SpeechTraits
+  cost: 2
   components:
     - type: SlavicAccent
 

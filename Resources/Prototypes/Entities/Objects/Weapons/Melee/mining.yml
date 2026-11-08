@@ -49,6 +49,11 @@
       types:
         Piercing: 10
         Structural: 30
+  # SS220-DwarfMiners
+  - type: StrongMiner
+    species:
+    - Dwarf
+  # SS220-DwarfMiners
   - type: Item
     size: Normal
     shape:
@@ -231,6 +236,11 @@
         Blunt: 6
         Slash: 2
         Structural: 30
+  # SS220-DwarfMiners
+  - type: StrongMiner
+    species:
+    - Dwarf
+  # SS220-DwarfMiners
   - type: GunRequiresWield
   - type: DisarmMalus
   - type: Prying

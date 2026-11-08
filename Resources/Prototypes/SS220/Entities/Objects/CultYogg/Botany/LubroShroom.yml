@@ -2,8 +2,8 @@
 
 - type: entity
   name: LubroShroom
-  parent: [FoodProduceBase, ClothingShoesBase, CultYoggRestrictedItem]
-  id: FoodLubroShroomCult
+  parent: [FoodProduceBase, ClothingShoesBase, BaseRestrictedLivingItem]
+  id: FoodLubroShroom
   description: We didn't understand how to use it, so we just wear it on our feet
   components:
   - type: Edible
@@ -20,7 +20,7 @@
     sprintModifier: 0.93
   - type: LimitedEquip
     items:
-      - id: FoodLubroShroomCultDead
+      - id: FoodLubroShroomDead
   - type: FlavorProfile
     flavors:
       - menacing
@@ -42,6 +42,7 @@
     grindableSolutionName: food
   - type: Tag
     tags:
+    - YoggEquipment
     - Omnivorous
     - CultYoggStealthProvidable
     - WhitelistChameleon
@@ -67,7 +68,7 @@
   plantRsi: SS220/Objects/CultYogg/Botany/lurbo_shroom.rsi
   packetPrototype: LubroShroomSeeds
   productPrototypes:
-    - FoodLubroShroomCult
+    - FoodLubroShroom
   harvestRepeat: Repeat
   lifespan: 55
   maturation: 12
@@ -88,7 +89,7 @@
 - type: entity
   name: LubroShroomDead
   parent: FoodBase
-  id: FoodLubroShroomCultDead
+  id: FoodLubroShroomDead
   description: Now it's dead and useless.
   components:
   - type: Edible
