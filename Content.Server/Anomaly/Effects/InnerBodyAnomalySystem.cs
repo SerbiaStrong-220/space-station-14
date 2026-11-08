@@ -13,7 +13,6 @@ using Content.Shared.Database;
 using Content.Shared.Gibbing;
 using Content.Shared.Mobs;
 using Content.Shared.Popups;
-using Content.Shared.Prototypes;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics.Events;
@@ -100,7 +99,7 @@ public sealed class InnerBodyAnomalySystem : SharedInnerBodyAnomalySystem
 
         ent.Comp.Injected = true;
 
-        EntityManager.AddComponents(ent, injectedAnom.Components, removeExisting: false); //SS220-anomalyIPChostlight
+        EntityManager.AddComponents(ent, injectedAnom.Components);
 
         _stun.TryUpdateParalyzeDuration(ent, TimeSpan.FromSeconds(ent.Comp.StunDuration));
         _jitter.DoJitter(ent, TimeSpan.FromSeconds(ent.Comp.StunDuration), true);
@@ -215,23 +214,7 @@ public sealed class InnerBodyAnomalySystem : SharedInnerBodyAnomalySystem
             return;
 
         if (_proto.Resolve(ent.Comp.InjectionProto, out var injectedAnom))
-        //SS220-anomalyIPChostlight begin
-        {
-            // Only remove what anomaly actually brought in: anything the host brought from its
-            // own prototype is still the hosts own component and must survive anomaly.
-            var hostProto = Comp<MetaDataComponent>(ent).EntityPrototype;
-
-            foreach (var entry in injectedAnom.Components.Values)
-            {
-                var type = entry.Component.GetType();
-
-                if (hostProto != null && hostProto.HasComponent(type, EntityManager.ComponentFactory))
-                    continue;
-
-                RemComp(ent.Owner, type);
-            }
-        }
-        //SS220-anomalyIPChostlight end
+            EntityManager.RemoveComponents(ent, injectedAnom.Components);
 
         _stun.TryUpdateParalyzeDuration(ent, TimeSpan.FromSeconds(ent.Comp.StunDuration));
 
