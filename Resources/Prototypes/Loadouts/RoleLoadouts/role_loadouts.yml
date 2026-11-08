@@ -257,6 +257,7 @@
   - GroupTankHarness
   - MimeHead
   - MimeMask
+  - MimeNeck #SS220-mime-harlequin
   - MimeJumpsuit
   - MimeBackpack
   - MimeOuterClothing
@@ -706,4 +707,7 @@
 - type: roleLoadout
   id: RoleSurvivalSpaceNinja
   groups:
-  - GroupEVATank
+  #SS220-NinjaTankReturn begin
+  - GroupPocketTankDouble
+  - SurvivalExtended
+  #SS220-NinjaTankReturn end
