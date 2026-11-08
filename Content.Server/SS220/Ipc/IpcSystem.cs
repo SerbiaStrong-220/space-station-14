@@ -66,7 +66,6 @@ public sealed partial class IpcSystem : SharedIpcSystem
         SubscribeLocalEvent<IpcComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<IpcComponent, ComponentShutdown>(OnComponentShutdown);
         SubscribeLocalEvent<IpcComponent, PowerCellChangedEvent>(OnPowerCellChanged);
-        SubscribeLocalEvent<IpcComponent, PowerCellSlotEmptyEvent>(OnPowerCellSlotEmpty);
         SubscribeLocalEvent<IpcComponent, ToggleDrainActionEvent>(OnToggleDrainAction);
         SubscribeLocalEvent<IpcComponent, EmpPulseEvent>(OnEmpPulse);
         SubscribeLocalEvent<IpcComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovementSpeedModifiers);
@@ -143,17 +142,6 @@ public sealed partial class IpcSystem : SharedIpcSystem
         }
 
         Dirty(ent);
-    }
-
-    /// <summary>
-    /// When battery is ejected from the slot or full discharged.
-    /// </summary>
-    private void OnPowerCellSlotEmpty(Entity<IpcComponent> ent, ref PowerCellSlotEmptyEvent args)
-    {
-        if (Terminating(ent))
-            return;
-
-        _movementSpeedModifier.RefreshMovementSpeedModifiers(ent.Owner);
     }
 
     /// <summary>
