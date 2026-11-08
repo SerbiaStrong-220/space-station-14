@@ -94,7 +94,7 @@ public abstract partial class SharedHandsSystem
     /// <summary>
     ///     Attempts to drop the item in the currently active hand.
     /// </summary>
-    public bool TryDrop(Entity<HandsComponent?> ent, EntityCoordinates? targetDropLocation = null, bool checkActionBlocker = true, bool doDropInteraction = true)
+    public bool TryDrop(Entity<HandsComponent?> ent, EntityCoordinates? targetDropLocation = null, bool checkActionBlocker = true, bool doDropInteraction = true, bool suppressDropSound = false) // SS220-drop-and-pickup-sound-suppression
     {
         if (!Resolve(ent, ref ent.Comp, false))
             return false;
@@ -102,13 +102,13 @@ public abstract partial class SharedHandsSystem
         if (ent.Comp.ActiveHandId == null)
             return false;
 
-        return TryDrop(ent, ent.Comp.ActiveHandId, targetDropLocation, checkActionBlocker, doDropInteraction);
+        return TryDrop(ent, ent.Comp.ActiveHandId, targetDropLocation, checkActionBlocker, doDropInteraction, suppressDropSound); // SS220-drop-and-pickup-sound-suppression
     }
 
     /// <summary>
     ///     Drops an item at the target location.
     /// </summary>
-    public bool TryDrop(Entity<HandsComponent?> ent, EntityUid entity, EntityCoordinates? targetDropLocation = null, bool checkActionBlocker = true, bool doDropInteraction = true)
+    public bool TryDrop(Entity<HandsComponent?> ent, EntityUid entity, EntityCoordinates? targetDropLocation = null, bool checkActionBlocker = true, bool doDropInteraction = true, bool suppressDropSound = false) // SS220-drop-and-pickup-sound-suppression
     {
         if (!Resolve(ent, ref ent.Comp, false))
             return false;
@@ -116,13 +116,13 @@ public abstract partial class SharedHandsSystem
         if (!IsHolding(ent, entity, out var hand))
             return false;
 
-        return TryDrop(ent, hand, targetDropLocation, checkActionBlocker, doDropInteraction);
+        return TryDrop(ent, hand, targetDropLocation, checkActionBlocker, doDropInteraction, suppressDropSound); // SS220-drop-and-pickup-sound-suppression
     }
 
     /// <summary>
     ///     Drops a hands contents at the target location.
     /// </summary>
-    public bool TryDrop(Entity<HandsComponent?> ent, string handId, EntityCoordinates? targetDropLocation = null, bool checkActionBlocker = true, bool doDropInteraction = true)
+    public bool TryDrop(Entity<HandsComponent?> ent, string handId, EntityCoordinates? targetDropLocation = null, bool checkActionBlocker = true, bool doDropInteraction = true, bool suppressDropSound = false) // SS220-drop-and-pickup-sound-suppression
     {
         if (!Resolve(ent, ref ent.Comp, false))
             return false;
@@ -156,7 +156,7 @@ public abstract partial class SharedHandsSystem
 
         // drop the item with heavy calculations from their hands and place it at the calculated interaction range position
         // The DoDrop is handle if there's no drop target
-        DoDrop(ent, handId, doDropInteraction: doDropInteraction);
+        DoDrop(ent, handId, doDropInteraction: doDropInteraction, suppressDropSound: suppressDropSound); // SS220-drop-and-pickup-sound-suppression
 
         // if there's no drop location stop here
         if (targetDropLocation == null)
@@ -223,7 +223,10 @@ public abstract partial class SharedHandsSystem
     public virtual void DoDrop(Entity<HandsComponent?> ent,
         string handId,
         bool doDropInteraction = true,
-        bool log = true)
+        // SS220-drop-and-pickup-sound-suppression begin
+        bool log = true,
+        bool suppressDropSound = false)
+        // SS220-drop-and-pickup-sound-suppression end
     {
         if (!Resolve(ent, ref ent.Comp, false))
             return;
@@ -246,7 +249,7 @@ public abstract partial class SharedHandsSystem
         Dirty(ent);
 
         if (doDropInteraction)
-            _interactionSystem.DroppedInteraction(ent, entity.Value);
+            _interactionSystem.DroppedInteraction(ent, entity.Value, suppressDropSound); // SS220-drop-and-pickup-sound-suppression
 
         if (log)
             _adminLogger.Add(LogType.Drop, LogImpact.Low, $"{ToPrettyString(ent):user} dropped {ToPrettyString(entity):entity}");

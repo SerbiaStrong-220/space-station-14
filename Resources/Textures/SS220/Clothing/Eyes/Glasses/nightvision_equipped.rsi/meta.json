@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "taken from tgstation/tgstation",
+  "copyright": "taken from tgstation/tgstation; Forehead states: taken from tgstation/tgstation, healthhudnight-HELMET && night_off-HELMET && night-HELMET && sechudnight-HELMET sprited by Dinazewwr (discord) for SS220.",
   "size": {
     "x": 32,
     "y": 32
@@ -75,6 +75,76 @@
     },
     {
       "name": "night_off_eyes",
+      "directions": 4
+    },
+    {
+      "name": "healthhudnight-HELMET",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "sechudnight-HELMET",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "night-HELMET",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "night_off-HELMET",
       "directions": 4
     }
   ]

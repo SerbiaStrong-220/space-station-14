@@ -1,3 +1,4 @@
+using Content.Shared.SS220.Clothing.Events;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Inventory;
@@ -17,6 +18,13 @@ public sealed class BlurryVisionSystem : EntitySystem
 
     private void OnGetBlur(Entity<VisionCorrectionComponent> glasses, ref InventoryRelayedEvent<GetBlurEvent> args)
     {
+        // SS220-glasses-on-forehead-begin
+        var effectAttempt = new GlassesEffectAttemptEvent();
+        RaiseLocalEvent(glasses.Owner, ref effectAttempt);
+        if (effectAttempt.Cancelled)
+            return;
+        // SS220-glasses-on-forehead-end
+
         args.Args.Blur += glasses.Comp.VisionBonus;
         args.Args.CorrectionPower *= glasses.Comp.CorrectionPower;
     }

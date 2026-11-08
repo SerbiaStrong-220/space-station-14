@@ -3,5 +3,10 @@
   name: species-name-human
   roundStart: true
   prototype: MobHuman
+  # SS220 age-tweak bgn
+  youngAge: 35
+  oldAge: 70
+  maxAge: 100
+  # SS220 age-tweak end
   dollPrototype: AppearanceHuman
   skinColoration: HumanToned
