@@ -20,6 +20,29 @@ admin-verbs-statuses-active = Активные статусы:
 admin-verbs-statuses-add-tooltip = Добавить выбранный статус
 admin-verbs-statuses-remove-tooltip = Удалить выбранный статус
 
+# Commands (Delivery)
+admin-verbs-delivery-title = Изменить посылку
+admin-verbs-delivery-target = Посылка: { $name }
+admin-verbs-delivery-reward-label = Награда для карго (до модификаторов)
+admin-verbs-delivery-reward-apply = Применить награду
+admin-verbs-delivery-timer-label = Оставшееся время доставки
+admin-verbs-delivery-timer-current = Осталось: { $time }
+admin-verbs-delivery-timer-none = У этой посылки нет таймера
+admin-verbs-delivery-timer-apply = Применить время
+admin-verbs-delivery-recipient-label = Адресат
+admin-verbs-delivery-recipient-current = Сейчас: { $name }, { $job }
+admin-verbs-delivery-recipient-apply = Применить адресата
+admin-verbs-delivery-contents-label = Содержимое
+admin-verbs-delivery-contents-current = Сейчас внутри: { $name }
+admin-verbs-delivery-contents-empty = Пусто
+admin-verbs-delivery-contents-open = Изменить содержимое
+admin-verbs-delivery-contents-title = Содержимое посылки
+admin-verbs-delivery-contents-search = Поиск по названию или ID (например Crowbar)
+admin-verbs-delivery-contents-replace = Заменить содержимое
+admin-verbs-delivery-contents-clear = Очистить содержимое
+admin-verbs-delivery-contents-failed = Не удалось положить { $proto } в посылку. Содержимое не изменено.
+admin-verbs-delivery-contents-clear-search = Очистить
+
 # Commands (Scale)
 admin-verbs-scale-title = Изменить масштаб
 admin-verbs-scale-x-prompt = Ширина X (Текущая { $current })
