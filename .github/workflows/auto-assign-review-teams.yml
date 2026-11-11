@@ -51,10 +51,22 @@ jobs:
               'Changes: Map': 'review-map'
             };
 
+            const codeAffectingLabels = ['Changes: C#', 'Changes: Shaders', 'Changes: UI'];
+            const protoLabel = 'Changes: Prototypes';
+
             const potentialTeams = new Set();
-            for (const label of pullRequest.labels) {
-              if (labelTeamMap[label.name]) {
-                potentialTeams.add(labelTeamMap[label.name]);
+            const presentLabels = pullRequest.labels.map(l => l.name);
+
+            const hasCodeAffecting = presentLabels.some(l => codeAffectingLabels.includes(l));
+            const hasProto = presentLabels.includes(protoLabel);
+
+            if (hasProto && !hasCodeAffecting) {
+              potentialTeams.add('review-prototypes');
+            } else {
+              for (const label of presentLabels) {
+                if (labelTeamMap[label]) {
+                  potentialTeams.add(labelTeamMap[label]);
+                }
               }
             }
 
