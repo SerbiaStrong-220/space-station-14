@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Lidgren.Network;
+using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 
@@ -12,6 +13,7 @@ public sealed class MsgPlayTts : NetMessage
 
     public TtsAudioData Data { get; set; }
     public NetEntity? SourceUid { get; set; }
+    public NetCoordinates? SourceCoordinates { get; set; }
     public TtsMetadata Metadata { get; set; }
     public float VolumeModifier { get; set; } = 1f;
 
@@ -31,6 +33,8 @@ public sealed class MsgPlayTts : NetMessage
         SourceUid = buffer.ReadNetEntity();
         if (SourceUid is { Valid: false })
             SourceUid = null;
+        if (buffer.ReadBoolean())
+            SourceCoordinates = buffer.ReadNetCoordinates();
         var kind = (TtsKind)buffer.ReadInt32();
         var subkind = buffer.ReadString();
         VolumeModifier = buffer.ReadFloat();
@@ -42,6 +46,9 @@ public sealed class MsgPlayTts : NetMessage
     {
         Data.WriteToNetBuffer(buffer);
         buffer.Write(SourceUid ?? NetEntity.Invalid);
+        buffer.Write(SourceCoordinates.HasValue);
+        if (SourceCoordinates is { } coordinates)
+            buffer.Write(coordinates);
         buffer.Write((int)Metadata.Kind);
         buffer.Write(Metadata.Subkind);
         buffer.Write(VolumeModifier);

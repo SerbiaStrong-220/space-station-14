@@ -10,6 +10,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
+using Robust.Shared.Map;
 using Robust.Shared.Player;
 
 namespace Content.Client.SS220.TTS;
@@ -152,6 +153,14 @@ public sealed partial class TTSSystem
                         stream = _audio.PlayEntity(audioStream, request.Source, null, request.Params);
                     break;
 
+                case PlayRequestByCoordinates playRequestByCoordinates:
+                    stream = _audio.PlayStatic(
+                        playRequestByCoordinates.AudioStream,
+                        playRequestByCoordinates.Coordinates,
+                        null,
+                        request.Params);
+                    break;
+
                 case PlayRequestBySoundSpecifier playRequestBySoundSpecifier:
                     if (request.PlayGlobal)
                         stream = _audio.PlayGlobal(playRequestBySoundSpecifier.Sound, Filter.Local(), false);
@@ -178,7 +187,11 @@ public sealed partial class TTSSystem
     public void TryQueueRequest(TtsMetadata metadata, PlayRequest request)
     {
         ModifyMetadata(ref metadata, request.Source);
+        QueueRequest(metadata, request);
+    }
 
+    private void QueueRequest(TtsMetadata metadata, PlayRequest request)
+    {
         if (!_playQueues.TryGetValue(metadata, out var queue))
         {
             if (_playQueues.Count >= _maxEntitiesQueued)
@@ -232,7 +245,35 @@ public sealed partial class TTSSystem
         var volume = AdjustVolume(msg.Metadata.Kind);
         var audioParams = AudioParams.Default.WithVolume(volume);
 
-        QueuePlayTts(msg.Data, msg.Metadata, GetEntity(msg.SourceUid), audioParams, msg.Metadata.Kind == TtsKind.Telepathy);
+        if (msg.SourceUid == null)
+        {
+            QueuePlayTts(msg.Data, msg.Metadata, null, audioParams, msg.Metadata.Kind == TtsKind.Telepathy);
+            return;
+        }
+
+        if (TryGetEntity(msg.SourceUid, out var source) &&
+            TryComp<MetaDataComponent>(source, out var meta) && (meta.Flags & MetaDataFlags.Detached) == 0)
+        {
+            QueuePlayTts(msg.Data, msg.Metadata, source, audioParams, msg.Metadata.Kind == TtsKind.Telepathy);
+            return;
+        }
+
+        if (msg.SourceCoordinates is not { } coordinates ||
+            !TryGetEntity(coordinates.NetEntity, out var parent) ||
+            msg.Data.Length == 0)
+            return;
+
+        using MemoryStream stream = new(msg.Data.Buffer);
+        var audioStream = _audioManager.LoadAudioOggVorbis(stream);
+        var metadata = msg.Metadata;
+        ModifyMetadata(ref metadata, EntityUid.FirstUid);
+        if (_playDifferentTalkingTogether && metadata.Kind is TtsKind.Default or TtsKind.Whisper)
+            metadata.Subkind = msg.SourceUid.Value.Id.ToString();
+        var request = new PlayRequestByCoordinates(
+            audioStream,
+            new EntityCoordinates(parent.Value, coordinates.Position),
+            audioParams);
+        QueueRequest(metadata, request);
     }
 
     private float AdjustVolume(TtsKind kind)
@@ -277,6 +318,19 @@ public sealed partial class TTSSystem
         public PlayRequestByAudioStream(AudioStream audioStream, EntityUid? source = null, AudioParams? audioParams = null, bool playGlobal = false) : base(source, audioParams, playGlobal)
         {
             AudioStream = audioStream;
+        }
+    }
+
+    private sealed class PlayRequestByCoordinates : PlayRequest
+    {
+        public readonly AudioStream AudioStream;
+        public readonly EntityCoordinates Coordinates;
+
+        public PlayRequestByCoordinates(AudioStream stream, EntityCoordinates coordinates, AudioParams audioParams)
+            : base(audioParams: audioParams)
+        {
+            AudioStream = stream;
+            Coordinates = coordinates;
         }
     }
 

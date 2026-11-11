@@ -3,6 +3,7 @@
 using Content.Server.Chat.Systems;
 using Content.Shared.Chat;
 using Content.Shared.SS220.TTS;
+using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -53,6 +54,8 @@ public static class TtsContextMaker
         {
             Speaker = speaker,
             NetSpeaker = entityManager.GetNetEntity(speaker),
+            Coordinates = entityManager.GetNetCoordinates(
+                entityManager.GetComponent<TransformComponent>(speaker).Coordinates),
             InternalVoiceId = voiceId
         };
     }
@@ -75,6 +78,7 @@ public readonly record struct TtsSpeakerContext
 
     public EntityUid Speaker { get; init; }
     public NetEntity NetSpeaker { get; init; }
+    public NetCoordinates Coordinates { get; init; }
     public ProtoId<TTSVoicePrototype> VoiceId
     {
         get
