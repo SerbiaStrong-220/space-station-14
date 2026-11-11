@@ -154,6 +154,11 @@ public sealed partial class TTSSystem
                     break;
 
                 case PlayRequestByCoordinates playRequestByCoordinates:
+                    if (!TryComp(playRequestByCoordinates.Coordinates.EntityId, out MetaDataComponent? parentMeta) ||
+                        (parentMeta.Flags & MetaDataFlags.Detached) != 0 ||
+                        TerminatingOrDeleted(playRequestByCoordinates.Coordinates.EntityId))
+                        continue;
+
                     stream = _audio.PlayStatic(
                         playRequestByCoordinates.AudioStream,
                         playRequestByCoordinates.Coordinates,
@@ -252,7 +257,7 @@ public sealed partial class TTSSystem
         }
 
         if (TryGetEntity(msg.SourceUid, out var source) &&
-            TryComp<MetaDataComponent>(source, out var meta) && (meta.Flags & MetaDataFlags.Detached) == 0)
+            TryComp(source, out MetaDataComponent? meta) && (meta.Flags & MetaDataFlags.Detached) == 0)
         {
             QueuePlayTts(msg.Data, msg.Metadata, source, audioParams, msg.Metadata.Kind == TtsKind.Telepathy);
             return;
