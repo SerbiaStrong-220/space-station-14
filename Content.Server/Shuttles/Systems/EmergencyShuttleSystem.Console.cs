@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Content.Server.Screens.Components;
@@ -16,9 +15,7 @@ using Content.Shared.Shuttles.BUIStates;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Events;
 using Content.Shared.Shuttles.Systems;
-//SS220-emergency-shuttle-departure-control begin
 using Robust.Shared.Audio;
-//SS220-emergency-shuttle-departure-control end
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -361,9 +358,7 @@ public sealed partial class EmergencyShuttleSystem
         // Realistically most of this shit needs moving to a station component so each station has their own emergency shuttle
         // and timer and all that jazz so I don't really care about debugging if it works on cleanup vs start.
         _announced = false;
-        //SS220-emergency-shuttle-departure-control begin
-        _departureHolds.Clear();
-        //SS220-emergency-shuttle-departure-control end
+        _departureHolds.Clear(); //SS220-emergency-shuttle-departure-control
         ShuttlesLeft = false;
         _launchedShuttles = false;
         _consoleAccumulator = float.MinValue;

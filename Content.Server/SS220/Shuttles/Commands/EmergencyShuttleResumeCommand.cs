@@ -12,7 +12,7 @@ namespace Content.Server.SS220.Shuttles.Commands;
 [AdminCommand(AdminFlags.Round)]
 public sealed class EmergencyShuttleResumeCommand : LocalizedCommands
 {
-    [Dependency] private readonly IEntitySystemManager _systems = default!;
+    [Dependency] private IEntitySystemManager _systems = default!;
 
     public override string Command => "emergencyshuttleresume";
     public override string Description => Loc.GetString("cmd-emergency-shuttle-resume-desc");
