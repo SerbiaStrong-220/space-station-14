@@ -26,20 +26,14 @@ public sealed class HideEquipmentLayersClothingSystem : EntitySystem
 
     private void OnBeforeRender(Entity<InventoryComponent> ent, ref BeforeRenderEquipmentEvent args)
     {
-        if (args.Cancelled)
-            return;
-
         // A cloak in a pocket hides nothing.
         var worn = _inventory.GetSlotEnumerator(ent.AsNullable(), SlotFlags.WITHOUT_POCKET);
         while (worn.NextItem(out var item))
         {
-            if (!TryComp<HideEquipmentLayersClothingComponent>(item, out var hide)
-                || !hide.Slots.Contains(args.Slot)
-                || !_whitelist.CheckBoth(args.Equipment, hide.Blacklist, hide.Whitelist))
-                continue;
-
-            args.Cancel();
-            return;
+            if (TryComp<HideEquipmentLayersClothingComponent>(item, out var hide)
+                && hide.Slots.Contains(args.Slot)
+                && _whitelist.CheckBoth(args.Equipment, hide.Blacklist, hide.Whitelist))
+                args.Cancel();
         }
     }
 

@@ -74,3 +74,10 @@
   - type: FoldableClothing
     foldedEquippedPrefix: other-shoulder
     foldedHeldPrefix: other-shoulder
+
+# Add to a cloak's parents so it hides tanks and bags worn under it.
+- type: entity
+  abstract: true
+  id: BaseClothingCloak
+  components:
+  - type: HideEquipmentLayersClothing

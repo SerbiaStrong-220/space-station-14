@@ -4,13 +4,12 @@
 
   # Парадизовский
 - type: entity
-  parent: ClothingSponsorNeckBase
+  parent: [ClothingSponsorNeckBase, BaseClothingCloak]
   id: ClothingSponsorNeckParadise
   name: communion cloak
   description: Awarded to the chosen ones, granted a unique place in this world.
   suffix: Sponsor Neck
   components:
-  - type: HideEquipmentLayersClothing
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/ss220.rsi
   - type: Clothing
@@ -20,13 +19,12 @@
 
   # Для разработчиков (Кодеры)
 - type: entity
-  parent: ClothingSponsorNeckBase
+  parent: [ClothingSponsorNeckBase, BaseClothingCloak]
   id: ClothingSponsorNeckCoder
   name: cloak of creation
   description: A special cloak whose wearers are permitted to intervene and change the rules of the world.
   suffix: Sponsor Neck, Developer
   components:
-  - type: HideEquipmentLayersClothing
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/coder.rsi
   - type: Clothing
@@ -34,13 +32,12 @@
 
   # Для разработчиков (Мапперы)
 - type: entity
-  parent: ClothingSponsorNeckBase
+  parent: [ClothingSponsorNeckBase, BaseClothingCloak]
   id: ClothingSponsorNeckMapper
   name: cloak of genesis
   description: A special cloak whose wearers have been honored to participate in the creation of the world.
   suffix: Sponsor Neck, Mapper
   components:
-  - type: HideEquipmentLayersClothing
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/mapper.rsi
   - type: Clothing
@@ -48,13 +45,12 @@
 
   # Для разработчиков (Спрайтеры)
 - type: entity
-  parent: ClothingSponsorNeckBase
+  parent: [ClothingSponsorNeckBase, BaseClothingCloak]
   id: ClothingSponsorNeckSpriter
   name: cloak of inscription
   description: A special cloak whose wearers brought color and filled the world with grace.
   suffix: Sponsor Neck, Spriter
   components:
-  - type: HideEquipmentLayersClothing
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/spriter.rsi
   - type: Clothing
@@ -62,13 +58,12 @@
 
   # Для разработчиков (Трекероведы)
 - type: entity
-  parent: ClothingSponsorNeckBase
+  parent: [ClothingSponsorNeckBase, BaseClothingCloak]
   id: ClothingSponsorNeckTrackerExpert
   name: cloak of equilibrium
   description: A special cloak for those who have dedicated themselves to protecting the outside world.
   suffix: Sponsor Neck, Tracker
   components:
-  - type: HideEquipmentLayersClothing
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/pivocloak.rsi
   - type: Clothing
@@ -76,13 +71,12 @@
 
   # Награда ведущих разработчиков
 - type: entity
-  parent: ClothingSponsorNeckBase
+  parent: [ClothingSponsorNeckBase, BaseClothingCloak]
   id: ClothingSponsorNeckHeadDevelopment
   name: cloak of knowing creation
   description: A special cloak belonging to an entity attributed with power over the universe itself.
   suffix: Sponsor Neck, HeadDeveloper
   components:
-  - type: HideEquipmentLayersClothing
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/vedicloak.rsi
   - type: Clothing
@@ -90,26 +84,24 @@
 
 # Administrator
 - type: entity
-  parent: ClothingSponsorNeckBase
+  parent: [ClothingSponsorNeckBase, BaseClothingCloak]
   id: ClothingSponsorNeckAdministrator
   name: cloak of order
   description: An elegant mantle bestowed upon the eternal guardians who watch over the order of the world.
   suffix: Sponsor Neck, Administrator
   components:
-  - type: HideEquipmentLayersClothing
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/administrator.rsi
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/administrator.rsi
 
 - type: entity
-  parent: ClothingSponsorNeckOtherShoulderBase
+  parent: [ClothingSponsorNeckOtherShoulderBase, BaseClothingCloak]
   id: ClothingSponsorNeckMentor
   name: cloak of guidance
   description: A special cloak awarded to teachers who tirelessly guide the chosen ones on their arduous journey.
   suffix: Sponsor Neck, Mentor
   components:
-  - type: HideEquipmentLayersClothing
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/mentor.rsi
   - type: Clothing
@@ -117,13 +109,12 @@
 
 # Moderator
 - type: entity
-  parent: ClothingSponsorNeckBase
+  parent: [ClothingSponsorNeckBase, BaseClothingCloak]
   id: ClothingSponsorNeckModerator
   name: cloak of the ministry of love
   description: A cloak from the ministry where there is no darkness. Such cloaks are often worn by the thought police. The eyes on the pattern are definitely watching you.
   suffix: Sponsor Neck, Moderator
   components:
-  - type: HideEquipmentLayersClothing
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/moder.rsi
   - type: Clothing
@@ -131,13 +122,12 @@
 
  # Для викиредов
 - type: entity
-  parent: ClothingSponsorNeckBase
+  parent: [ClothingSponsorNeckBase, BaseClothingCloak]
   id: ClothingSponsorNeckWikiEditors
   name: cloak of cognition
   description: A special cloak granted to the first who imagined and composed the rules of our world.
   suffix: Sponsor Neck, Wikired
   components:
-  - type: HideEquipmentLayersClothing
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/wikicloak.rsi
   - type: Clothing
@@ -153,13 +143,12 @@
 
 # Разное
 - type: entity
-  parent: ClothingNeckBase
+  parent: [ClothingNeckBase, BaseClothingCloak]
   id: ClothingNeckCloakFloppa
   name: floppa's hide
   description: It's not what you think.
   suffix: Sponsor # А точно ли он спонсор?
   components:
-  - type: HideEquipmentLayersClothing
   - type: Sprite
     sprite: SS220/Clothing/Neck/Cloaks/floppa.rsi
   - type: ToggleableClothing
@@ -173,13 +162,12 @@
 
 # Для лороведов
 - type: entity
-  parent: ClothingSponsorNeckBase
+  parent: [ClothingSponsorNeckBase, BaseClothingCloak]
   id: ClothingSponsorNeckLoroveds
   name: the cloak of storytelling
   description: A special cloak given to the guardians, whose purpose is to preserve the memory of the world.
   suffix: Sponsor Neck, Loroved
   components:
-  - type: HideEquipmentLayersClothing
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/loroved.rsi
   - type: Clothing
