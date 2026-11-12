@@ -5,15 +5,12 @@ using Content.Shared.Whitelist;
 namespace Content.Shared.SS220.Clothing.Components;
 
 /// <summary>
-/// While worn on the neck, items in <see cref="Slots"/> are not drawn on the wearer.
+/// While worn on the neck, matching items on the back and in suit storage are not drawn on the wearer.
 /// Lets cloaks cover tanks and bags that would otherwise stick out from under them.
 /// </summary>
 [RegisterComponent]
 public sealed partial class HideEquipmentLayersClothingComponent : Component
 {
-    [DataField]
-    public HashSet<string> Slots = ["back", "suitstorage"];
-
     [DataField]
     public EntityWhitelist Whitelist = new() { Components = ["GasTank", "Storage"] };
 

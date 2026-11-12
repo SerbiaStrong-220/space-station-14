@@ -69,6 +69,4 @@
     sprite: SS220/Clothing/Neck/Cloaks/centcom_mantle_shoulder.rsi
   - type: Clothing
     sprite: SS220/Clothing/Neck/Cloaks/centcom_mantle_shoulder.rsi
-  - type: HideEquipmentLayersClothing # inherited from the cloak, but a shoulder mantle covers nothing
-    slots: []
 
