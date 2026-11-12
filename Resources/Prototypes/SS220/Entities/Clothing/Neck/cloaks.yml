@@ -29,7 +29,7 @@
   name: admiral's cape
   description: A cape with gold stitching, worn by Nanotrasen Navy Admirals.
   components:
-  - type: HideEquipmentLayersClothing
+    - type: HideEquipmentLayersClothing
     - type: Sprite
       sprite: SS220/Clothing/Neck/Cloaks/nanotrasen_admiral.rsi
 
@@ -40,7 +40,7 @@
   description: Literally 1984.
   suffix: Shitspawn
   components:
-  - type: HideEquipmentLayersClothing
+    - type: HideEquipmentLayersClothing
     - type: Sprite
       sprite: SS220/Clothing/Neck/Cloaks/shitty-1984.rsi
       scale: 0.125, 0.125
