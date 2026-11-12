@@ -15,5 +15,6 @@
   description: A vibrant green cape with gold stitching, worn by Nanotrasen Navy Admirals.
   categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
+  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
     - type: Sprite
       sprite: Corvax/Clothing/Neck/Cloaks/admiral.rsi
