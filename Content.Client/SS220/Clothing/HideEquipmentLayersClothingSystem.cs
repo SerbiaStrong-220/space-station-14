@@ -6,6 +6,7 @@ using Content.Shared.Clothing.Components;
 using Content.Shared.Inventory;
 using Content.Shared.SS220.Clothing;
 using Content.Shared.SS220.Clothing.Components;
+using Content.Shared.Whitelist;
 
 namespace Content.Client.SS220.Clothing;
 
@@ -13,6 +14,7 @@ public sealed class HideEquipmentLayersClothingSystem : EntitySystem
 {
     [Dependency] private readonly ClientClothingSystem _clothing = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
@@ -35,6 +37,7 @@ public sealed class HideEquipmentLayersClothingSystem : EntitySystem
             if (item != args.Equipment
                 && TryComp<HideEquipmentLayersClothingComponent>(item, out var hide)
                 && hide.Slots.Contains(args.Slot)
+                && _whitelist.IsValid(hide.Whitelist, args.Equipment)
                 && TryComp<ClothingComponent>(item, out var clothing)
                 && (clothing.Slots & slot.SlotFlags) != SlotFlags.NONE)
             {
