@@ -41,8 +41,8 @@
     - map: [ "belt" ]
     - map: [ "id" ]
     - map: [ "back" ]
+    - map: [ "neck" ]
     - map: [ "suitstorage" ]
-    - map: [ "neck" ] #SS220-cloak-over-suitstorage
 
     # Stuff that goes in front of equipment
     - map: [ "enum.HumanoidVisualLayers.SnoutCover" ]
