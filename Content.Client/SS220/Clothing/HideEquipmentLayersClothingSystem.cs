@@ -2,7 +2,6 @@
 
 using Content.Client.Clothing;
 using Content.Shared.Clothing;
-using Content.Shared.Clothing.Components;
 using Content.Shared.Inventory;
 using Content.Shared.SS220.Clothing;
 using Content.Shared.SS220.Clothing.Components;
@@ -30,21 +29,17 @@ public sealed class HideEquipmentLayersClothingSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        var enumerator = _inventory.GetSlotEnumerator((ent.Owner, ent.Comp));
-        while (enumerator.NextItem(out var item, out var slot))
+        // A cloak in a pocket hides nothing.
+        var worn = _inventory.GetSlotEnumerator(ent.AsNullable(), SlotFlags.WITHOUT_POCKET);
+        while (worn.NextItem(out var item))
         {
-            // Only counts when actually worn (e.g. a cloak in a pocket shouldn't hide anything).
-            if (item != args.Equipment
-                && TryComp<HideEquipmentLayersClothingComponent>(item, out var hide)
-                && hide.Slots.TryGetValue(args.Slot, out var whitelist)
-                && _whitelist.IsWhitelistPassOrNull(whitelist, args.Equipment)
-                && !_whitelist.IsValid(hide.Blacklist, args.Equipment)
-                && TryComp<ClothingComponent>(item, out var clothing)
-                && (clothing.Slots & slot.SlotFlags) != SlotFlags.NONE)
-            {
-                args.Cancel();
-                return;
-            }
+            if (!TryComp<HideEquipmentLayersClothingComponent>(item, out var hide)
+                || !hide.Slots.Contains(args.Slot)
+                || !_whitelist.CheckBoth(args.Equipment, hide.Blacklist, hide.Whitelist))
+                continue;
+
+            args.Cancel();
+            return;
         }
     }
 

@@ -10,7 +10,7 @@
   description: Awarded to the chosen ones, granted a unique place in this world.
   suffix: Sponsor Neck
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/ss220.rsi
   - type: Clothing
@@ -26,7 +26,7 @@
   description: A special cloak whose wearers are permitted to intervene and change the rules of the world.
   suffix: Sponsor Neck, Developer
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/coder.rsi
   - type: Clothing
@@ -40,7 +40,7 @@
   description: A special cloak whose wearers have been honored to participate in the creation of the world.
   suffix: Sponsor Neck, Mapper
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/mapper.rsi
   - type: Clothing
@@ -54,7 +54,7 @@
   description: A special cloak whose wearers brought color and filled the world with grace.
   suffix: Sponsor Neck, Spriter
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/spriter.rsi
   - type: Clothing
@@ -68,7 +68,7 @@
   description: A special cloak for those who have dedicated themselves to protecting the outside world.
   suffix: Sponsor Neck, Tracker
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/pivocloak.rsi
   - type: Clothing
@@ -82,7 +82,7 @@
   description: A special cloak belonging to an entity attributed with power over the universe itself.
   suffix: Sponsor Neck, HeadDeveloper
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/vedicloak.rsi
   - type: Clothing
@@ -96,7 +96,7 @@
   description: An elegant mantle bestowed upon the eternal guardians who watch over the order of the world.
   suffix: Sponsor Neck, Administrator
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/administrator.rsi
   - type: Clothing
@@ -109,7 +109,7 @@
   description: A special cloak awarded to teachers who tirelessly guide the chosen ones on their arduous journey.
   suffix: Sponsor Neck, Mentor
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/mentor.rsi
   - type: Clothing
@@ -123,7 +123,7 @@
   description: A cloak from the ministry where there is no darkness. Such cloaks are often worn by the thought police. The eyes on the pattern are definitely watching you.
   suffix: Sponsor Neck, Moderator
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/moder.rsi
   - type: Clothing
@@ -137,7 +137,7 @@
   description: A special cloak granted to the first who imagined and composed the rules of our world.
   suffix: Sponsor Neck, Wikired
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/wikicloak.rsi
   - type: Clothing
@@ -159,7 +159,7 @@
   description: It's not what you think.
   suffix: Sponsor # А точно ли он спонсор?
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing
   - type: Sprite
     sprite: SS220/Clothing/Neck/Cloaks/floppa.rsi
   - type: ToggleableClothing
@@ -179,7 +179,7 @@
   description: A special cloak given to the guardians, whose purpose is to preserve the memory of the world.
   suffix: Sponsor Neck, Loroved
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/loroved.rsi
   - type: Clothing

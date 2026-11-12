@@ -5,24 +5,20 @@ using Content.Shared.Whitelist;
 namespace Content.Shared.SS220.Clothing.Components;
 
 /// <summary>
-/// While this clothing is equipped, the visual layers of matching items in the listed equipment slots are not drawn.
-/// Used by cloaks so gas tanks and bags don't stick out from under them. Weapons are intentionally not hidden.
+/// While worn, items in <see cref="Slots"/> are not drawn on the wearer.
+/// Lets cloaks cover tanks and bags that would otherwise stick out from under them.
 /// </summary>
 [RegisterComponent]
 public sealed partial class HideEquipmentLayersClothingComponent : Component
 {
-    /// <summary>
-    /// Slot name -> which items in that slot get hidden.
-    /// </summary>
     [DataField]
-    public Dictionary<string, EntityWhitelist> Slots = new()
-    {
-        ["suitstorage"] = new() { Components = ["GasTank"] },
-        ["back"] = new() { Components = ["Storage", "GasTank"] },
-    };
+    public HashSet<string> Slots = ["back", "suitstorage"];
+
+    [DataField]
+    public EntityWhitelist Whitelist = new() { Components = ["GasTank", "Storage"] };
 
     /// <summary>
-    /// Items matching this are never hidden, even if they pass a slot whitelist (e.g. pneumatic cannon has storage).
+    /// Weapons stay visible, even ones with storage like the pneumatic cannon.
     /// </summary>
     [DataField]
     public EntityWhitelist Blacklist = new() { Components = ["Gun"] };

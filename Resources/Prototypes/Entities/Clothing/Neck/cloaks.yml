@@ -5,7 +5,7 @@
   name: central commander's cloak
   description: A pompous and elite green cloak with a nice gold trim, tailored specifically to the Central Commander. It's so heavy, the gold trim might be real.
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing #SS220-cloak-hide-equipment
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/centcomcloakformal.rsi
   - type: StealTarget
@@ -17,7 +17,7 @@
   name: captain's cloak
   description: A pompous and comfy blue cloak with a nice gold trim, while not particularly valuable as your other possessions, it sure is fancy.
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing #SS220-cloak-hide-equipment
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/cap.rsi
   - type: StealTarget
@@ -29,7 +29,7 @@
   name: head of security's cloak
   description: An exquisite dark and red cloak fitting for those who can assert dominance over wrongdoers. Take a stab at being civil in prosecution!
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing #SS220-cloak-hide-equipment
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/hos.rsi
   - type: StealTarget
@@ -41,7 +41,7 @@
   name: chief engineer's cloak
   description: A dark green cloak with light blue ornaments, given to those who proved themselves to master the precise art of engineering.
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing #SS220-cloak-hide-equipment
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/ce.rsi
   - type: StealTarget
@@ -53,7 +53,7 @@
   name: chief medical officer's cloak
   description: A sterile blue cloak with a green cross, radiating with a sense of duty and willingness to help others.
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing #SS220-cloak-hide-equipment
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/cmo.rsi
   - type: StealTarget
@@ -65,7 +65,7 @@
   name: research director's cloak
   description: A white cloak with violet stripes, showing your status as the arbiter of cutting-edge technology.
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing #SS220-cloak-hide-equipment
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/rd.rsi
   - type: StealTarget
@@ -85,7 +85,7 @@
   name: quartermaster's cloak
   description: A strong brown cloak with a reflective stripe, while not as fancy as others, it does show your managing skills.
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing #SS220-cloak-hide-equipment
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/qm.rsi
   - type: StealTarget
@@ -97,7 +97,7 @@
   name: head of personnel's cloak
   description: A blue cloak with red shoulders and gold buttons, proving you are the gatekeeper to any airlock on the station.
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing #SS220-cloak-hide-equipment
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/hop.rsi
   - type: StealTarget
@@ -109,7 +109,7 @@
   name: herald's cloak
   description: An evil-looking red cloak with spikes on its shoulders.
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing #SS220-cloak-hide-equipment
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/herald.rsi
 
@@ -119,7 +119,7 @@
   name: nanotrasen cloak
   description: A stately blue cloak to represent NanoTrasen.
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing #SS220-cloak-hide-equipment
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/nanotrasen.rsi
 
@@ -129,7 +129,7 @@
   name: captain's formal cloak
   description: A lavish and decorated cloak for special occasions.
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing #SS220-cloak-hide-equipment
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/capcloakformal.rsi
   - type: StealTarget
@@ -141,7 +141,7 @@
   name: weh cloak
   description: Weh!
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing #SS220-cloak-hide-equipment
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/admin.rsi
   - type: StealTarget
@@ -153,7 +153,7 @@
   name: supereme salvager's cloak
   description: Worn by the most skilled salvagers, for one who has mastered space and made the mining asteroid his domain. They don't just hand these things out, y'know?
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing #SS220-cloak-hide-equipment
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/miner.rsi
 
@@ -163,7 +163,7 @@
   name: vampire cloak
   description: Worn by high ranking vampires of the transylvanian society of vampires.
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing #SS220-cloak-hide-equipment
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/trans.rsi
 
@@ -173,7 +173,7 @@
   name: goliath cloak
   description: A cloak made from the hide of resilient fauna from a distant planet, though its protective value has faded with its age.
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing #SS220-cloak-hide-equipment
   - type: Sprite
     sprite: SS220/Clothing/Neck/Cloaks/goliathcloak.rsi #SS220-goliathresprite
   - type: ToggleableClothing
@@ -202,7 +202,7 @@
   name: pirate captain cloak
   description: A rather fetching black pirate cloak, complete with skull motif.
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing #SS220-cloak-hide-equipment
   - type: Sprite
     sprite: SS220/Clothing/Neck/Cloaks/piratecap.rsi #ss220 resprite
 
@@ -212,7 +212,7 @@
   name: moth cloak
   description: A cloak in the form of moth wings is an unusual and original element of the wardrobe that can attract the attention of others. It is made of a thin fabric imitating moth wings, with soft and fluffy edges. The raincoat is fastened around the neck with straps, and has a hood in the shape of a moths head.
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing #SS220-cloak-hide-equipment
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/moth.rsi
   - type: ToggleableClothing
@@ -244,7 +244,7 @@
   name: void cloak
   description: A cloak of darkness. For those who have gone to the dark side of the force.
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing #SS220-cloak-hide-equipment
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/void.rsi
   - type: ToggleableClothing
@@ -264,7 +264,7 @@
   name: pilot's cloak
   description: Cloak awarded to Nanotrasen's finest space aces.
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing #SS220-cloak-hide-equipment
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/ace.rsi
 
@@ -274,7 +274,7 @@
   name: werewolf cloak
   description: This cloak lets others know you're a lone wolf.
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing #SS220-cloak-hide-equipment
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/aro.rsi
 
@@ -284,7 +284,7 @@
   name: aeropilot's cloak # thank you happyman442 this was the best name idea ever
   description: Cloak awarded to Nanotrasen's finest pilots on planets with inhabitable atmospheres.
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing #SS220-cloak-hide-equipment
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/aroace.rsi
 
@@ -294,7 +294,7 @@
   name: poison cloak
   description: The purple color is a clear indicator you are poisonous.
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing #SS220-cloak-hide-equipment
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/bi.rsi
 
@@ -304,7 +304,7 @@
   name: cyclops cloak
   description: The circle on this cloak represents a cyclops' eye.
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing #SS220-cloak-hide-equipment
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/intersex.rsi
 
@@ -314,7 +314,7 @@
   name: poet cloak
   description: This cloak belonged to an ancient poet, you forgot which one.
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing #SS220-cloak-hide-equipment
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/les.rsi
 
@@ -324,7 +324,7 @@
   name: multi-level marketing cloak
   description: This cloak is highly sought after in the Nanotrasen Marketing Offices.
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing #SS220-cloak-hide-equipment
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/gay.rsi
 
@@ -335,7 +335,7 @@
   description: This cloak belonged to a greedy treasure hunter.
   suffix: For playtime #SS220-add-time-loadout-suffix
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing #SS220-cloak-hide-equipment
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/enby.rsi
 
@@ -345,7 +345,7 @@
   name: chef's cloak
   description: Meant to be worn alongside a frying pan.
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing #SS220-cloak-hide-equipment
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/pan.rsi
 

@@ -6,7 +6,7 @@
   name: CentComm field officer cloak
   description: This cloak reeks of authority and your termination.
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing
   - type: Sprite
     sprite: SS220/Clothing/Neck/Cloaks/centcomm_fo.rsi
 
@@ -17,7 +17,7 @@
   description: A luxurious cloak for an honored veteran of long service.
   suffix: За время в игре
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing
   - type: Sprite
     sprite: SS220/Clothing/Neck/Cloaks/captain_white_formal.rsi
   - type: StealTarget
@@ -29,7 +29,7 @@
   name: admiral's cape
   description: A cape with gold stitching, worn by Nanotrasen Navy Admirals.
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing
     - type: Sprite
       sprite: SS220/Clothing/Neck/Cloaks/nanotrasen_admiral.rsi
 
@@ -40,7 +40,7 @@
   description: Literally 1984.
   suffix: Shitspawn
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing
     - type: Sprite
       sprite: SS220/Clothing/Neck/Cloaks/shitty-1984.rsi
       scale: 0.125, 0.125
@@ -60,7 +60,7 @@
   name: heart of Alisa
   description: A huge, kind heart sealed in a piece of cloth.
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing
   - type: Sprite
     sprite: SS220/Clothing/Neck/Cloaks/alisa.rsi
   - type: ToggleableClothing
@@ -78,7 +78,7 @@
   name: the owl hero's cloak
   description:  Be prepared for night patrols and strange questions about mice.
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing
   - type: Sprite
     sprite: SS220/Clothing/Neck/Cloaks/owl.rsi
   - type: ToggleableClothing
@@ -97,7 +97,7 @@
   description: The owner has seen everything and more. From the dwarf under the bahus to the smoking chemist in the lab.
   suffix: For playtime
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing
   - type: Sprite
     sprite: SS220/Clothing/Neck/Cloaks/cmo_parade_cloak.rsi
   - type: Clothing
@@ -119,7 +119,7 @@
   description: The dark cloak of the chief engineer for years of service as the head of the engineering department.
   suffix: For playtime
   components:
-  - type: HideEquipmentLayersClothing # SS220 cloak hides suit storage
+  - type: HideEquipmentLayersClothing
   - type: Sprite
     sprite: SS220/Clothing/Neck/Cloaks/ce_dark.rsi
   - type: StealTarget
