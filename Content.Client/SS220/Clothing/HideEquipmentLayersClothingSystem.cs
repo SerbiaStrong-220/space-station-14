@@ -36,8 +36,9 @@ public sealed class HideEquipmentLayersClothingSystem : EntitySystem
             // Only counts when actually worn (e.g. a cloak in a pocket shouldn't hide anything).
             if (item != args.Equipment
                 && TryComp<HideEquipmentLayersClothingComponent>(item, out var hide)
-                && hide.Slots.Contains(args.Slot)
-                && _whitelist.IsValid(hide.Whitelist, args.Equipment)
+                && hide.Slots.TryGetValue(args.Slot, out var whitelist)
+                && _whitelist.IsWhitelistPassOrNull(whitelist, args.Equipment)
+                && !_whitelist.IsValid(hide.Blacklist, args.Equipment)
                 && TryComp<ClothingComponent>(item, out var clothing)
                 && (clothing.Slots & slot.SlotFlags) != SlotFlags.NONE)
             {
