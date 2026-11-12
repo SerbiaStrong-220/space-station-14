@@ -5,7 +5,7 @@ using Content.Shared.Whitelist;
 namespace Content.Shared.SS220.Clothing.Components;
 
 /// <summary>
-/// While worn, items in <see cref="Slots"/> are not drawn on the wearer.
+/// While worn on the neck, items in <see cref="Slots"/> are not drawn on the wearer.
 /// Lets cloaks cover tanks and bags that would otherwise stick out from under them.
 /// </summary>
 [RegisterComponent]
