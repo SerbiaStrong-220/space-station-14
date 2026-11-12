@@ -26,7 +26,7 @@ public partial class TtsSystem
         private string _apiUrl = string.Empty;
         private string _apiToken = string.Empty;
 
-        private readonly HttpClient _httpClient = new();
+        private readonly HttpClient _httpClient = CreateHttpClient();
 
         private readonly ConcurrentDictionary<TtsCacheKey, TtsResponse> _responsesInProgress = new();
 
@@ -47,6 +47,16 @@ public partial class TtsSystem
                 Cache.Limit = v;
                 Cache.Trim();
             }, true);
+        }
+
+        public override string PrepareText(string sanitizedText, TtsKind kind)
+        {
+            // The request is sent with "ssml": true
+            var traits = SoundTraits.RateFast;
+            if (kind == TtsKind.Whisper)
+                traits |= SoundTraits.PitchVerylow;
+
+            return ToSsmlText(sanitizedText, traits);
         }
 
         public override async Task<TtsResponse.Reference?> ConvertTextToSpeech(string text, string speaker, TtsKind kind)

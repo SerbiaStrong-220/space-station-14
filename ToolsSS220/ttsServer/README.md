@@ -30,7 +30,7 @@ Python 3.11.+
 ```
 [tts]
 enabled = true
-api_url = "http://127.0.0.1:5000/tts/"
+api_url = "http://127.0.0.1:5005/tts/"
 timeout = *зависит от железа*
 ```
 

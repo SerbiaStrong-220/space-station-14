@@ -52,6 +52,12 @@ public sealed partial class CCVars220
         CVarDef.Create("tts.ntts.api_url", "", CVar.SERVERONLY);
 
     /// <summary>
+    /// Auth token of the NTTS API, sent as a Bearer token. Not sent when empty.
+    /// </summary>
+    public static readonly CVarDef<string> TtsNTTSApiToken =
+        CVarDef.Create("tts.ntts.api_token", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
+
+    /// <summary>
     /// Maximum number of cached responses for the NTTS provider.
     /// </summary>
     public static readonly CVarDef<int> TtsNTTSMaxCache =

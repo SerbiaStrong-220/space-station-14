@@ -24,6 +24,7 @@ public sealed partial class TtsSystem : SharedTtsSystem
     [Dependency] private IAudioManager _audioManager = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private TtsNetManager _ttsNetManager = default!;
     [Dependency] private AudioSystem _audio = default!;
 
     /// <summary>
@@ -59,7 +60,7 @@ public sealed partial class TtsSystem : SharedTtsSystem
         Subs.CVar(_cfg, CCVars220.TtsAnnounceVolume, x => _announcementVolume = x, true);
 
         SubscribeNetworkEvent<TtsClearAllQueuesMessage>(OnClearAllQueues);
-        SubscribeNetworkEvent<PlayTtsMessage>(OnPlayTtsMessage);
+        _ttsNetManager.PlayTtsReceived += OnPlayTtsMessage;
 
         InitializeCacheKeyGeneration();
     }
@@ -134,7 +135,7 @@ public sealed partial class TtsSystem : SharedTtsSystem
         Log.Debug("TTS queues was cleared by server request");
     }
 
-    private void OnPlayTtsMessage(PlayTtsMessage args)
+    private void OnPlayTtsMessage(MsgPlayTts args)
     {
         foreach (var data in args.Datas)
         {
@@ -169,6 +170,7 @@ public sealed partial class TtsSystem : SharedTtsSystem
     public override void Shutdown()
     {
         base.Shutdown();
+        _ttsNetManager.PlayTtsReceived -= OnPlayTtsMessage;
         ClearAllQueuesAndStreams();
     }
 
@@ -181,7 +183,7 @@ public sealed partial class TtsSystem : SharedTtsSystem
                 if (audioBuffer.Length == 0)
                     break;
 
-                using (var memoryStream = new MemoryStream(audioBuffer.Buffer))
+                using (var memoryStream = new MemoryStream(audioBuffer.Buffer, 0, audioBuffer.Length))
                 {
                     var audioStream = _audioManager.LoadAudioOggVorbis(memoryStream);
                     TryQueueRequest(new PlayRequestByAudioStream(audioStream, meta, audioParams.Value));

@@ -2,6 +2,7 @@ using Content.Shared.SS220.TTS.Prototypes;
 using Content.Shared.SS220.TTS.Systems;
 using Robust.Shared.Configuration;
 using System.Diagnostics.CodeAnalysis;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Content.Server.SS220.TTS;
@@ -37,13 +38,10 @@ public partial class TtsSystem
             if (textSanitized == "")
                 return null;
 
-            var ssmlTraits = SoundTraits.RateFast;
-            if (kind == TtsKind.Whisper)
-                ssmlTraits |= SoundTraits.PitchVerylow;
+            if (char.IsLetter(textSanitized[^1]))
+                textSanitized += ".";
 
-            var textSsml = ToSsmlText(textSanitized, ssmlTraits);
-
-            return await handler.ConvertTextToSpeech(textSsml, speaker, kind);
+            return await handler.ConvertTextToSpeech(handler.PrepareText(textSanitized, kind), speaker, kind);
         }
         catch (Exception e)
         {
@@ -88,6 +86,13 @@ public partial class TtsSystem
 
         protected virtual string SawmillName => GetType().Name;
 
+        protected static HttpClient CreateHttpClient()
+        {
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.UserAgent.ParseAdd("SS220-SS14");
+            return client;
+        }
+
         protected abstract TtsProvider Provider { get; }
 
         private string? _providerLabel;
@@ -109,6 +114,11 @@ public partial class TtsSystem
 
             Log = Logger.GetSawmill(ttsSystem.Log.Name + SawmillName);
         }
+
+        /// <summary>
+        /// Converts the sanitized text into the format expected by the provider API. Plain text by default.
+        /// </summary>
+        public virtual string PrepareText(string sanitizedText, TtsKind kind) => sanitizedText;
 
         public abstract Task<TtsResponse.Reference?> ConvertTextToSpeech(string text, string speaker, TtsKind kind);
 

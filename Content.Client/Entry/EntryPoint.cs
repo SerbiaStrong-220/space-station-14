@@ -47,6 +47,7 @@ using Robust.Shared.Replays;
 using Content.Client.SS220.Discord;
 using Robust.Shared.Timing;
 using Content.Client.SS220.Species;
+using Content.Client.SS220.TTS;
 
 namespace Content.Client.Entry
 {
@@ -78,6 +79,7 @@ namespace Content.Client.Entry
         [Dependency] private readonly JobRequirementsManager _jobRequirements = default!;
         [Dependency] private readonly ContentLocalizationManager _contentLoc = default!;
         [Dependency] private readonly SponsorsManager _sponsorsManager = default!; // Corvax-Sponsors
+        [Dependency] private readonly TtsNetManager _ttsNetManager = default!; // SS220 TTS
         [Dependency] private readonly JoinQueueManager _queueManager = default!; // Corvax-Queue
         [Dependency] private readonly DiscordAuthManager _discordAuthManager = default!; // Corvax-DiscordAuth
         [Dependency] private readonly ContentReplayPlaybackManager _playbackMan = default!;
@@ -186,6 +188,7 @@ namespace Content.Client.Entry
             _voteManager.Initialize();
             _userInterfaceManager.SetDefaultTheme("SS14DefaultTheme");
             _sponsorsManager.Initialize(); // Corvax-Sponsors
+            _ttsNetManager.Initialize(); // SS220 TTS
             _queueManager.Initialize(); // Corvax-Queue
             _discordAuthManager.Initialize(); // Corvax-DiscordAuth
             _userInterfaceManager.SetActiveTheme(_configManager.GetCVar(CVars.InterfaceTheme));

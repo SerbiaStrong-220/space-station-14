@@ -9,21 +9,6 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.SS220.TTS;
 
 [Serializable, NetSerializable]
-public sealed class PlayTtsMessage(params PlayTtsMessageData[] datas) : EntityEventArgs
-{
-    public List<PlayTtsMessageData> Datas = [.. datas];
-
-    public PlayTtsMessage() : this([]) { }
-}
-
-[Serializable, NetSerializable]
-public struct PlayTtsMessageData
-{
-    public required ITtsData TtsData;
-    public required TtsMetadata TtsMetadata;
-}
-
-[Serializable, NetSerializable]
 public sealed class RequestTtsVoiceTestEvent(ProtoId<TtsVoicePrototype> voiceId) : EntityEventArgs
 {
     public readonly ProtoId<TtsVoicePrototype> VoiceId = voiceId;

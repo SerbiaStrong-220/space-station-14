@@ -41,6 +41,7 @@ using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Server.SS220.BackEndApi;
+using Content.Server.SS220.TTS;
 using Content.Shared.SS220.CCVars;
 using Content.Server.SS220.Wiki.Generators;
 
@@ -89,12 +90,13 @@ namespace Content.Server.Entry
         [Dependency] private readonly ServerUpdateManager _updateManager = default!;
         [Dependency] private readonly ServerFeedbackManager _feedbackManager = null!;
         // SS220-entry-point-edit-begin
-        [Dependency] private readonly DiscordAuthManager _discordAuthManager = default!; // Corvax-DiscordAuth
-        [Dependency] private readonly SponsorsManager _sponsorsManager = default!; // Corvax-Sponsors
-        [Dependency] private readonly JoinQueueManager _joinQueueManager = default!; // Corvax-Queue
-        [Dependency] private readonly DiscordPlayerManager _discordPlayerManager = default!; // SS220 discord player manager
-        [Dependency] private readonly DiscordBanPostManager _discordBanPostManager = default!; // SS220 discord ban post manager
-        [Dependency] private readonly ServerControlController _serverControlController = default!; // SS220 Backend-Api
+        [Dependency] private DiscordAuthManager _discordAuthManager = default!; // Corvax-DiscordAuth
+        [Dependency] private SponsorsManager _sponsorsManager = default!; // Corvax-Sponsors
+        [Dependency] private TtsNetManager _ttsNetManager = default!; // SS220 TTS
+        [Dependency] private JoinQueueManager _joinQueueManager = default!; // Corvax-Queue
+        [Dependency] private DiscordPlayerManager _discordPlayerManager = default!; // SS220 discord player manager
+        [Dependency] private DiscordBanPostManager _discordBanPostManager = default!; // SS220 discord ban post manager
+        [Dependency] private ServerControlController _serverControlController = default!; // SS220 Backend-Api
         // SS220-entry-point-edit-begin
 
         public override void PreInit()
@@ -142,6 +144,7 @@ namespace Content.Server.Entry
 
             _discordAuthManager.Initialize(); // Corvax-DiscordAuth
             _sponsorsManager.Initialize(); // Corvax-Sponsors
+            _ttsNetManager.Initialize(); // SS220 TTS
             _joinQueueManager.Initialize(); // Corvax-Queue
             _discordPlayerManager.Initialize(); // SS220 discord player manager
             _discordBanPostManager.Initialize(); // SS220 discord ban post manager

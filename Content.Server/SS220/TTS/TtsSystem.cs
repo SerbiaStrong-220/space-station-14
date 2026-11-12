@@ -9,6 +9,7 @@ using Prometheus;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -25,6 +26,7 @@ public sealed partial class TtsSystem : SharedTtsSystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IServerNetManager _netManager = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SharedTransformSystem _xforms = default!;
@@ -240,6 +242,11 @@ public sealed partial class TtsSystem : SharedTtsSystem
         }
     }
 
+    private void SendTtsMessage(MsgPlayTts message, ICommonSession receiver)
+    {
+        _netManager.ServerSendMessage(message, receiver.Channel);
+    }
+
     private bool IsValidReceiver(ICommonSession receiver)
     {
         if (_sessionsNotToSend.Contains(receiver))
@@ -354,7 +361,7 @@ public class ReferenceCounter<T>(T value)
         public readonly bool TryGetValue([NotNullWhen(true)] out T? value)
         {
             value = _counter.Value;
-            return _disposed && value != null;
+            return !_disposed && value != null;
         }
     }
 }

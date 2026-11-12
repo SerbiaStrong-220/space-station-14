@@ -22,7 +22,7 @@ public partial class TtsSystem
     {
         private string _apiUrl = string.Empty;
 
-        private readonly HttpClient _httpClient = new();
+        private readonly HttpClient _httpClient = CreateHttpClient();
 
         private readonly ConcurrentDictionary<TtsCacheKey, TtsResponse> _responsesInProgress = new();
 
@@ -33,6 +33,12 @@ public partial class TtsSystem
         public TtsNTTSHandler(TtsSystem ttsSystem, IConfigurationManager cfg) : base(ttsSystem, cfg)
         {
             ConfigurationManager.OnValueChanged(CCVars220.TtsNTTSApiUrl, v => _apiUrl = v, true);
+            ConfigurationManager.OnValueChanged(CCVars220.TtsNTTSApiToken, v =>
+            {
+                _httpClient.DefaultRequestHeaders.Authorization = string.IsNullOrEmpty(v)
+                    ? null
+                    : new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", v);
+            }, true);
             ConfigurationManager.OnValueChanged(CCVars220.TtsNTTSMaxCache, v =>
             {
                 Cache.Limit = v;

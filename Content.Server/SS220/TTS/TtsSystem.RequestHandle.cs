@@ -45,7 +45,7 @@ public partial class TtsSystem
         if (!ttsResponce.TryGetValue(out var audioData))
             return;
 
-        var msg = new PlayTtsMessage(new PlayTtsMessageData
+        var msg = new MsgPlayTts(new PlayTtsMessageData
         {
             TtsData = audioData,
             TtsMetadata = new TtsMetadata()
@@ -58,7 +58,7 @@ public partial class TtsSystem
         });
 
         foreach (var receiver in validReceivers)
-            RaiseNetworkEvent(msg, receiver);
+            SendTtsMessage(msg, receiver);
     }
 
     private async Task HandleWhisperRequest(TtsWhisperRequest request)
@@ -96,7 +96,7 @@ public partial class TtsSystem
             using var ttsResponce = await ConvertTextToSpeech(request.Text, request.SpeakerData.Voice, TtsKind.Whisper);
             if (ttsResponce.TryGetValue(out var audioData))
             {
-                var msg = new PlayTtsMessage(new PlayTtsMessageData
+                var msg = new MsgPlayTts(new PlayTtsMessageData
                 {
                     TtsData = audioData,
                     TtsMetadata = new TtsMetadata()
@@ -109,7 +109,7 @@ public partial class TtsSystem
                 });
 
                 foreach (var receiver in textReceivers)
-                    RaiseNetworkEvent(msg, receiver);
+                    SendTtsMessage(msg, receiver);
             }
         }
 
@@ -118,7 +118,7 @@ public partial class TtsSystem
             using var obfTtsResponce = await ConvertTextToSpeech(request.ObfuscatedText, request.SpeakerData.Voice, TtsKind.Whisper);
             if (obfTtsResponce.TryGetValue(out var obfAudioData))
             {
-                var obfMsg = new PlayTtsMessage(new PlayTtsMessageData
+                var obfMsg = new MsgPlayTts(new PlayTtsMessageData
                 {
                     TtsData = obfAudioData,
                     TtsMetadata = new TtsMetadata()
@@ -131,7 +131,7 @@ public partial class TtsSystem
                 });
 
                 foreach (var receiver in obfTextReceivers)
-                    RaiseNetworkEvent(obfMsg, receiver);
+                    SendTtsMessage(obfMsg, receiver);
             }
         }
     }
@@ -162,7 +162,7 @@ public partial class TtsSystem
 
         foreach (var (session, playEntity) in validReceivers)
         {
-            var msg = new PlayTtsMessage(new PlayTtsMessageData
+            var msg = new MsgPlayTts(new PlayTtsMessageData
             {
                 TtsData = audioData,
                 TtsMetadata = new TtsMetadata
@@ -175,7 +175,7 @@ public partial class TtsSystem
                 }
             });
 
-            RaiseNetworkEvent(msg, session);
+            SendTtsMessage(msg, session);
         }
     }
 
@@ -197,7 +197,7 @@ public partial class TtsSystem
                 Provider = request.Voice?.Provider,
             };
 
-            var msg = new PlayTtsMessage();
+            var msg = new MsgPlayTts();
 
             if (request.AnnouncementSound != null)
             {
@@ -225,7 +225,7 @@ public partial class TtsSystem
                 return;
 
             foreach (var receiver in validReceivers)
-                RaiseNetworkEvent(msg, receiver);
+                SendTtsMessage(msg, receiver);
         }
         finally
         {
@@ -257,7 +257,7 @@ public partial class TtsSystem
         if (!responce.TryGetValue(out var audioData))
             return;
 
-        var msg = new PlayTtsMessage(new PlayTtsMessageData
+        var msg = new MsgPlayTts(new PlayTtsMessageData
         {
             TtsData = audioData,
             TtsMetadata = new TtsMetadata()
@@ -270,7 +270,7 @@ public partial class TtsSystem
         });
 
         foreach (var receiver in validReceivers)
-            RaiseNetworkEvent(msg, receiver);
+            SendTtsMessage(msg, receiver);
     }
 
     private async Task HandleVoiceTestRequest(TtsVoiceTestRequest request)
@@ -286,7 +286,7 @@ public partial class TtsSystem
         if (!responce.TryGetValue(out var audioData))
             return;
 
-        var msg = new PlayTtsMessage(new PlayTtsMessageData
+        var msg = new MsgPlayTts(new PlayTtsMessageData
         {
             TtsData = audioData,
             TtsMetadata = new TtsMetadata()
@@ -297,7 +297,7 @@ public partial class TtsSystem
         });
 
         foreach (var receiver in validReceivers)
-            RaiseNetworkEvent(msg, receiver);
+            SendTtsMessage(msg, receiver);
     }
 
     private static IEnumerable<ITtsSpokeRequest> SplitRequestByLanguage(ITtsSpokeRequest request, LanguageMessage languageMessage)
