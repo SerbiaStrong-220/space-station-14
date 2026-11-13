@@ -3,13 +3,13 @@
   <FormId>sec_rep_ia</FormId>
   <PrototypeId>PaperNtFormLaw</PrototypeId>
   <EntityName>форма НТ-КОМ-ЦК-ОТЧ</EntityName>
-  <PhotocopierTitle>Отчёт Представителя НаноТрейзен</PhotocopierTitle>
+  <PhotocopierTitle>Отчёт Представителя NanoTrasen</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-КОМ-ЦК-ОТЧ[/bold]
-[head=2]Отчёт Представителя НаноТрейзен[/head]
+[head=2]Отчёт Представителя NanoTrasen[/head]
 
 [italic]Дата: ДЕНЬ/МЕСЯЦ/ГОД[/italic]
 
-Я, (ВАШЕ ПОЛНОЕ ИМЯ), как Представитель НаноТрейзен, сообщаю: (ТЕКСТ СООБЩЕНИЯ)
+Я, (ВАШЕ ПОЛНОЕ ИМЯ), как Представитель NanoTrasen, сообщаю: (ТЕКСТ СООБЩЕНИЯ)
 
 [italic]Данный документ может содержать нарушения, неправильность выполнения работы, невыполнение правил/сводов/законов/СРП.[/italic]
 

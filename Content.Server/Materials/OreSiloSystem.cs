@@ -19,6 +19,7 @@ public sealed class OreSiloSystem : SharedOreSiloSystem
     [Dependency] private readonly SharedUserInterfaceSystem _userInterface = default!;
     [Dependency] private readonly DeviceListSystem _deviceList = default!; // SS220 Add silo linking in mapping
     [Dependency] private readonly MaterialStorageSystem _materialStorage = default!; // ss220 ore silo tweak
+    [Dependency] private SharedTransformSystem _xform = default!; //SS220-FIX-Silos
 
     private const float OreSiloPreloadRangeSquared = 225f; // ~1 screen
 
@@ -139,7 +140,7 @@ public sealed class OreSiloSystem : SharedOreSiloSystem
                 if (actorXform.GridUid != clientXform.GridUid)
                     continue;
 
-                if ((actorXform.LocalPosition - clientXform.LocalPosition).LengthSquared() <= OreSiloPreloadRangeSquared)
+                if ((_xform.GetWorldPosition(actorXform) - _xform.GetWorldPosition(clientXform)).LengthSquared() <= OreSiloPreloadRangeSquared) //SS220-FIX-Silos
                 {
                     _silosToAdd.Add(clientComp.Silo.Value);
                 }
