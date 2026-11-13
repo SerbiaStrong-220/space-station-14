@@ -168,3 +168,17 @@
   collisionMask: Impassable
   rotation: User
   fx: EffectRCDConstruct1
+
+- type: rcd
+  id: FirelockGlass
+  category: Airlocks
+  sprite: /Textures/SS220/Interface/Radial/RCD/firelock_glass.png
+  mode: ConstructObject
+  prototype: FirelockGlass
+  cost: 4
+  delay: 3
+  collisionMask: FullTileMask
+  rules:
+  - IsFirelock
+  rotation: User
+  fx: EffectRCDConstruct3

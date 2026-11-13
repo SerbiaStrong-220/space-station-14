@@ -96,6 +96,8 @@
   cost: 4
   delay: 2
   collisionMask: Impassable
+  rules: #SS220-rcd-firelock-stacking
+    - CanBuildOnFirelock #SS220-rcd-firelock-stacking
   rotation: Fixed
   fx: EffectRCDConstruct2
 
@@ -111,6 +113,7 @@
   collisionMask: Impassable
   rules:
     - IsWindow
+    - CanBuildOnFirelock #SS220-rcd-firelock-stacking
   rotation: Fixed
   fx: EffectRCDConstruct2
 
@@ -126,6 +129,7 @@
   collisionBounds: "-0.23,-0.49,0.23,-0.36"
   rules:
     - IsWindow
+    - CanBuildOnFirelock #SS220-rcd-firelock-stacking
   rotation: User
   fx: EffectRCDConstruct1
   allowMultiDirection: true
@@ -141,6 +145,7 @@
   collisionMask: Impassable
   rules:
     - IsWindow
+    - CanBuildOnFirelock #SS220-rcd-firelock-stacking
   rotation: User
   fx: EffectRCDConstruct3
 
@@ -156,6 +161,7 @@
   collisionBounds: "-0.23,-0.49,0.23,-0.36"
   rules:
     - IsWindow
+    - CanBuildOnFirelock #SS220-rcd-firelock-stacking
   rotation: User
   fx: EffectRCDConstruct2
   allowMultiDirection: true
@@ -170,6 +176,8 @@
   cost: 4
   delay: 4
   collisionMask: FullTileMask
+  rules: #SS220-rcd-firelock-stacking
+    - CanBuildOnFirelock #SS220-rcd-firelock-stacking
   rotation: User # ss220 rcd upd (fix rot)
   fx: EffectRCDConstruct4
 
@@ -182,6 +190,8 @@
   cost: 4
   delay: 4
   collisionMask: FullTileMask
+  rules: #SS220-rcd-firelock-stacking
+    - CanBuildOnFirelock #SS220-rcd-firelock-stacking
   rotation: User # ss220 rcd upd (fix rot)
   fx: EffectRCDConstruct4
 
@@ -194,6 +204,8 @@
   cost: 4
   delay: 3
   collisionMask: FullTileMask
+  rules: #SS220-rcd-firelock-stacking
+    - IsFirelock #SS220-rcd-firelock-stacking
   rotation: User # ss220 rcd upd (fix rot)
   fx: EffectRCDConstruct3
 
