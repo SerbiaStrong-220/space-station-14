@@ -424,7 +424,7 @@
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [Animal] # Applying damage to the mobs with lower metabolism capabilities
+          type: [Animal, Arachnid] # Applying damage to the mobs with lower metabolism capabilities #SS220-fauna-diet-fix
         damage:
           types:
             Poison: 0.4
@@ -432,7 +432,7 @@
         probability: 0.04 #Scaled for time, not metabolismrate.
         conditions:
           - !type:MetabolizerTypeCondition
-            type: [Animal]
+            type: [Animal, Arachnid] #SS220-fauna-diet-fix
 
 - type: reagent
   id: Amatoxin
@@ -500,7 +500,7 @@
       - !type:PopupMessage
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Animal, Vox, Tajaran, Arachnid ] #SS220 Tajaran fix
+          type: [ Animal, Vox, Tajaran, Arachnid ] #SS220 Tajaran fix #SS220-fauna-diet-fix
           inverted: true
         type: Local
         visualType: MediumCaution
@@ -510,12 +510,12 @@
         probability: 0.1
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Animal, Vox, Plant, Tajaran, Arachnid ] #SS220 Tajaran fix
+          type: [ Animal, Vox, Plant, Tajaran, Arachnid ] #SS220 Tajaran fix #SS220-fauna-diet-fix
           inverted: true
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Animal, Vox, Plant, Tajaran, Arachnid ] #SS220 Tajaran fix
+          type: [ Animal, Vox, Plant, Tajaran, Arachnid ] #SS220 Tajaran fix #SS220-fauna-diet-fix
           inverted: true
         damage:
           types:
@@ -530,7 +530,7 @@
       - !type:AdjustReagent
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Animal, Tajaran, Arachnid ] #SS220 Tajaran fix
+          type: [ Animal, Tajaran, Arachnid ] #SS220 Tajaran fix #SS220-fauna-diet-fix
         reagent: Protein
         amount: 0.5
       - !type:AdjustReagent
