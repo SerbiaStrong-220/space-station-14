@@ -114,7 +114,7 @@
 - type: entity
   name: basic slime
   id: MobAdultSlimes
-  parent: BaseMobAdultSlimes
+  parent: [ BaseMobSlimesAnimal, BaseMobAdultSlimes ] #SS220-fauna-diet-fix
   abstract: true
   description: It looks so much like jelly. I wonder what it tastes like?
   components:
