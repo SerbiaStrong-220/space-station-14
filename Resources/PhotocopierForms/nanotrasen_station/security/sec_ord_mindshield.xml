@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Form>
+  <FormId>sec_ord_mindshield</FormId>
+  <PrototypeId>PaperNtFormSec</PrototypeId>
+  <EntityName>форма НТ-СБ-ЗАК</EntityName>
+  <PhotocopierTitle>Постановление об установке импланта «Защита разума»</PhotocopierTitle>
+  <Content><![CDATA[[bold]Форма НТ-СБ-ЗАК[/bold]
+[head=2]Постановление об установке импланта «Защита разума»[/head]
+
+[italic]Дата: ДЕНЬ/МЕСЯЦ/ГОД [/italic]
+
+Имя того, которому будет установлен: (ПОЛНОЕ ИМЯ)
+Должность: (ДОЛЖНОСТЬ)
+Причина установки импланта:
+
+[italic]Место для печатей — Глава Службы Безопасности[/italic]]]></Content>
+</Form>
