@@ -268,6 +268,7 @@ public sealed class StoreDiscountSystem : EntitySystem
                 continue;
             }
 
+            // SS220 StoreDiscount fix begin
             var canDiscount = false;
             foreach (var (currency, downTo) in listing.DiscountDownTo)
             {
@@ -280,6 +281,7 @@ public sealed class StoreDiscountSystem : EntitySystem
 
             if (!canDiscount)
                 continue;
+            // SS220 StoreDiscount fix end
 
             if (!listingsByDiscountCategory.TryGetValue(category.Value, out var list))
             {
