@@ -10,7 +10,7 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mind.Components;
 using Content.Shared.SS220.CultYogg.MiGo;
-using Content.Shared.StatusEffectNew;
+using Content.Shared.StatusEffect;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.CultYogg.MiGo;
