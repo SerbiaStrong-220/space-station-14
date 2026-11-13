@@ -49,6 +49,19 @@ namespace Content.Shared.Atmos.Piping.Unary.Components
             PressureLockoutOverride = false
         };
 
+        // SS220 MalfAI: 500 kPa dump (crew UI still shows Flood).
+        public static GasVentPumpData FloodModePreset = new GasVentPumpData
+        {
+            Enabled = true,
+            Dirty = true,
+            PumpDirection = VentPumpDirection.Releasing,
+            PressureChecks = VentPressureBound.ExternalBound,
+            ExternalPressureBound = 500f,
+            InternalPressureBound = 0f,
+            PressureLockoutOverride = true
+        };
+        // SS220 MalfAI end
+
         public static GasVentPumpData ReplaceModePreset = new GasVentPumpData
         {
             Enabled = false,
