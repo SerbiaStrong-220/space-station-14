@@ -148,7 +148,7 @@
         color: "#1d32bf"
       - state: trinkets-inhand-right
   - type: Clothing
-    sprite: CSS220/Clothing/Uniforms/Jumpskirt/colorturtle.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/colorturtle.rsi
     clothingVisuals:
       jumpsuit:
       - state: equipped-INNERCLOTHING
