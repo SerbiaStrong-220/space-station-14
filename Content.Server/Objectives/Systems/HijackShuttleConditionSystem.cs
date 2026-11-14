@@ -28,10 +28,10 @@ public sealed class HijackShuttleConditionSystem : EntitySystem
 
     private void OnGetProgress(EntityUid uid, HijackShuttleConditionComponent comp, ref ObjectiveGetProgressEvent args)
     {
-        args.Progress = GetProgress(args.MindId, args.Mind);
+        args.Progress = GetProgress(args.MindId, args.Mind, comp); // SS220 MalfAI
     }
 
-    private float GetProgress(EntityUid mindId, MindComponent mind)
+    private float GetProgress(EntityUid mindId, MindComponent mind, HijackShuttleConditionComponent comp) // SS220 MalfAI
     {
         // Not escaping alive if you're deleted/dead
         if (mind.OwnedEntity == null || _mind.IsCharacterDeadIc(mind))
@@ -45,20 +45,27 @@ public sealed class HijackShuttleConditionSystem : EntitySystem
         if (!_emergencyShuttle.EmergencyShuttleArrived)
             return 0f;
 
+        // SS220 MalfAI begin
+        if (!comp.RequireOwnerOnShuttle && !_emergencyShuttle.ShuttlesLeft)
+            return 0f;
+        // SS220 MalfAI end
+
         // Check hijack for each emergency shuttle
-        foreach (var stationData in EntityQuery<StationEmergencyShuttleComponent>())
+        var shuttles = EntityQueryEnumerator<StationEmergencyShuttleComponent>();
+        while (shuttles.MoveNext(out _, out var stationData))
         {
             if (stationData.EmergencyShuttle == null)
                 continue;
 
-            if (IsShuttleHijacked(stationData.EmergencyShuttle.Value, mindId))
+            // SS220 MalfAI: RequireOwnerOnShuttle is false for the AI, which never boards.
+            if (IsShuttleHijacked(stationData.EmergencyShuttle.Value, mindId, comp.RequireOwnerOnShuttle))
                 return 1f;
         }
 
         return 0f;
     }
 
-    private bool IsShuttleHijacked(EntityUid shuttleGridId, EntityUid mindId)
+    private bool IsShuttleHijacked(EntityUid shuttleGridId, EntityUid mindId, bool requireOwnerOnShuttle)
     {
         var gridPlayers = Filter.BroadcastGrid(shuttleGridId).Recipients;
         var humanoids = GetEntityQuery<HumanoidProfileComponent>();
@@ -72,7 +79,7 @@ public sealed class HijackShuttleConditionSystem : EntitySystem
                 !_mind.TryGetMind(player.AttachedEntity.Value, out var crewMindId, out _))
                 continue;
 
-            if (mindId == crewMindId)
+            if (mindId == crewMindId) // SS220 MalfAI
             {
                 agentOnShuttle = true;
                 continue;
@@ -99,6 +106,6 @@ public sealed class HijackShuttleConditionSystem : EntitySystem
             return false;
         }
 
-        return agentOnShuttle;
+        return !requireOwnerOnShuttle || agentOnShuttle; // SS220 MalfAI
     }
 }

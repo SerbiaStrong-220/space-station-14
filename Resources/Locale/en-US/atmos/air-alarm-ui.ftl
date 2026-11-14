@@ -46,6 +46,8 @@ air-alarm-ui-mode-wide-filtering = Filtering (wide)
 air-alarm-ui-mode-fill = Fill
 air-alarm-ui-mode-panic = Panic
 air-alarm-ui-mode-none = None
+# SS220 MalfAI
+air-alarm-ui-mode-flood = Flood
 
 
 air-alarm-ui-pump-direction-siphoning = Siphoning
