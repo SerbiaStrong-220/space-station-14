@@ -172,7 +172,7 @@ public sealed partial class SlotMachineSystem : EntitySystem
 
         var money = Spawn(SlotMachineComponent.CashPrototypeId, Transform(uid).Coordinates);
         if (TryComp<StackComponent>(money, out var stack))
-            _stack.SetCount(money, comp.StoredCredits, stack);
+            _stack.SetCount((money, stack), comp.StoredCredits);
 
         _popup.PopupEntity(Loc.GetString("slot-machine-popup-collected", ("amount", comp.StoredCredits)), args.Actor, args.Actor);
         comp.StoredCredits = 0;

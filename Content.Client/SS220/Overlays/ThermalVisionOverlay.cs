@@ -9,22 +9,24 @@ namespace Content.Client.SS220.Overlays;
 public sealed class ThermalVisionOverlay : IgnoreLightVisionOverlay
 {
     private readonly TransformSystem _transformSystem = default!;
+    private readonly SpriteSystem _sprite = default!;
 
     public ThermalVisionOverlay(float showRadius, float closeShowRadius) : base(showRadius, closeShowRadius)
     {
         _transformSystem = Entity.System<TransformSystem>();
+        _sprite = Entity.System<SpriteSystem>();
     }
 
     protected override void Render(Entity<SpriteComponent, TransformComponent> ent,
                         MapId? map, DrawingHandleWorld handle, Angle eyeRot)
     {
-        var (_, sprite, xform) = ent;
+        var (_, _, xform) = ent;
         if (xform.MapID != map)
             return;
 
         var position = _transformSystem.GetWorldPosition(xform);
         var rotation = _transformSystem.GetWorldRotation(xform);
 
-        sprite.Render(handle, eyeRot, rotation, position: position);
+        _sprite.RenderSprite(ent, handle, eyeRot, rotation, position);
     }
 }
