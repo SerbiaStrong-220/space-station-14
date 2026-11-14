@@ -203,6 +203,14 @@
   name: foam cutlass
   description: Cosplay as a pirate and force your friends to walk the plank.
   components:
+  #SS220 Recycler expansion start
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 100
+  - type: Tag
+    tags:
+    - PlasticToy
+  #SS220 Recycler expansion end
   - type: Sprite
     sprite: Objects/Weapons/Melee/cutlass.rsi
     state: foam_icon

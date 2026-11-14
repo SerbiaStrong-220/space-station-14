@@ -11,6 +11,11 @@
     - Soap
   - type: Sprite
     sprite: SS220/Objects/Specific/Janitorial/soap.rsi
+  #SS220 Recycler expansion start
+  - type: PhysicalComposition
+    chemicalComposition:
+      SoapReagent: 50
+  #SS220 Recycler expansion end
   - type: Appearance
   - type: Item
     sprite: SS220/Objects/Specific/Janitorial/soap.rsi
