@@ -1,0 +1,46 @@
+﻿- type: entity
+  id: BaseChaplainForceWall
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Physics
+    bodyType: Static
+  - type: ChaplainBarrier
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - FullTileMask
+        layer:
+        - GlassLayer
+  - type: Airtight
+  - type: Sprite
+    sprite: SS220/DarkForces/Chaplain/barrier.rsi
+    state: barrier
+  - type: Icon
+    sprite: SS220/DarkForces/Chaplain/barrier.rsi
+    state: barrier
+
+- type: entity
+  id: ChaplainForceWallNarsi
+  parent: BaseChaplainForceWall
+  name: "Защитный барьер от Нар'Си"
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: TimedDespawn
+    lifetime: 240
+
+
+- type: entity
+  id: ChaplainForceWallDefault
+  parent: BaseChaplainForceWall
+  name: "Защитный барьер от тёмных сил"
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: TimedDespawn
+    lifetime: 90

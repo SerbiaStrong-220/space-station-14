@@ -1,0 +1,38 @@
+- type: entity
+  id: NarsiAltarHeaven
+  parent: [ BaseStructure, BaseNarsiStructure ]
+  name: Оккультный Алтарь Нар'Си
+  components:
+  - type: Climbable
+  - type: Sprite
+    sprite: SS220/DarkForces/Cult/Structures/altar.rsi
+    layers:
+    - state: narsi
+    - state: narsi_lightning
+      shader: unshaded
+  - type: PointLight
+    radius: 1.5
+    energy: 1
+    color: "#f08080"
+  - type: Strap
+    position: Down
+    rotation: -90
+  - type: NarsiAltar
+    visualsParams:
+      visualsEntities:
+      - NarsiBalfire
+      - NarsiBloodBoom
+      - NarsiPentagrama
+  - type: NarsiCultStructure
+    building: Altar
+  - type: UserInterface
+    interfaces:
+      enum.NarsiAltarInterfaceKey.Key:
+        type: NarsiAltarBoundInterface
+      enum.NarsiAltarAbilitiesInterfaceKey.Key:
+        type: NarsiAbilitiesBoundInterface
+      enum.NarsiRitualsInterfaceKey.Key:
+        type: NarsiRitualsBoundInterface
+  - type: Construction
+    graph: NarsiCultAltarGraph
+    node: altar

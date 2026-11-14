@@ -53,6 +53,10 @@
   name: head
   abstract: true
   components:
+  # SS220 Cult Ratvar and Narsie port
+  - type: Tag
+    tags:
+    - Head
   - type: Organ
     category: Head
   - type: Sprite
@@ -80,6 +84,10 @@
   name: left arm
   abstract: true
   components:
+  # SS220 Cult Ratvar and Narsie port
+  - type: Tag
+    tags:
+    - LArm
   - type: Organ
     category: ArmLeft
   - type: Sprite
@@ -99,6 +107,10 @@
   name: right arm
   abstract: true
   components:
+  # SS220 Cult Ratvar and Narsie port
+  - type: Tag
+    tags:
+    - RArm
   - type: Organ
     category: ArmRight
   - type: Sprite
@@ -164,6 +176,10 @@
   name: left leg
   abstract: true
   components:
+  # SS220 Cult Ratvar and Narsie port
+  - type: Tag
+    tags:
+    - LLeg
   - type: Organ
     category: LegLeft
   - type: Sprite
@@ -183,6 +199,10 @@
   name: right leg
   abstract: true
   components:
+  # SS220 Cult Ratvar and Narsie port
+  - type: Tag
+    tags:
+    - RLeg
   - type: Organ
     category: LegRight
   - type: Sprite
@@ -352,6 +372,10 @@
   name: heart
   abstract: true
   components:
+  # SS220 Cult Ratvar and Narsie port
+  - type: Tag
+    tags:
+    - Heart
   - type: GibbableOrgan
   - type: Organ
     category: Heart

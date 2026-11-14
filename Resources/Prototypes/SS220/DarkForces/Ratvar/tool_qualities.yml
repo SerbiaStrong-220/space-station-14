@@ -1,0 +1,13 @@
+- type: tool
+  id: RatvarScrewing
+  name: tool-quality-ratvar-screwing-name
+  toolName: tool-quality-ratvar-screwing-tool-name
+  spawn: RatvarSlab
+  icon: { sprite: SS220/DarkForces/Ratvar/Weapons/clockwork_slab.rsi, state: clock_slab }
+
+- type: tool
+  id: RatvarAnchoring
+  name: tool-quality-ratvar-anchoring-name
+  toolName: tool-quality-ratvar-anchoring-tool-name
+  spawn: RatvarSlab
+  icon: { sprite: SS220/DarkForces/Ratvar/Weapons/clockwork_slab.rsi, state: clock_slab }

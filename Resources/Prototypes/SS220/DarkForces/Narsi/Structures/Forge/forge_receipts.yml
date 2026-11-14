@@ -1,0 +1,118 @@
+#оружие
+- type: narsiCultReceiptCategory
+  id: NarsiCultWeaponCategory
+  title: Оружие
+  items:
+    Sword:
+      name: Кровавый меч
+      description: Мощное оружие
+      icon: /Textures/SS220/DarkForces/Cult/Entities/Weapons/sword.rsi/icon.png
+      cost: 60
+      itemToSpawn: NarsiCultSword
+      requiredMaterial: RunicPlasteel
+
+    Keule:
+      name: Кровавая булава
+      description: Самое слабое оружие
+      icon: /Textures/SS220/DarkForces/Cult/Entities/Weapons/keule.rsi/icon.png
+      cost: 15
+      itemToSpawn: NarsiCultKeule
+      requiredMaterial: RunicPlasteel
+
+    Axe:
+      name: Кровавый топор
+      description: Среднее оружие
+      icon: /Textures/SS220/DarkForces/Cult/Entities/Weapons/axe.rsi/icon.png
+      cost: 30
+      itemToSpawn: NarsuCultAxe
+      requiredMaterial: RunicPlasteel
+
+    Blade:
+      name: Потусторонний клинок
+      description: Мощное оружие
+      icon: /Textures/Objects/Weapons/Melee/cult_blade.rsi/icon.png
+      cost: 60
+      itemToSpawn: EldritchBlade
+      requiredMaterial: RunicPlasteel
+
+    UnholyHalberd:
+      name: Нечестивая алебарда
+      description: Мощное оружие
+      icon: /Textures/Objects/Weapons/Melee/cult_halberd.rsi/icon.png
+      cost: 60
+      itemToSpawn: EldritchBlade
+      requiredMaterial: RunicPlasteel
+#Броня
+- type: narsiCultReceiptCategory
+  id: NarsiCultArmorCategory
+  title: Броня
+  items:
+    ArmorCult:
+      name: Доспехи аколита
+      description: Блокирует 50% повреждений
+      icon: /Textures/Clothing/OuterClothing/Armor/cult_armour.rsi/icon.png
+      cost: 30
+      itemToSpawn: ClothingOuterArmorCult
+      requiredMaterial: RunicPlasteel
+
+    ShoesCult:
+      name: Ботинки культа
+      description: Для идентефикации своих
+      icon: /Textures/Clothing/Shoes/Specific/cult.rsi/icon.png
+      cost: 5
+      itemToSpawn: ClothingShoesCult
+      requiredMaterial: RunicPlasteel
+
+    HeadHelmetCult:
+      name: Шлем культа
+      description: Блокирует 10% повреждений
+      icon: /Textures/Clothing/Head/Helmets/cult.rsi/icon.png
+      cost: 15
+      itemToSpawn: ClothingHeadHelmetCult
+      requiredMaterial: RunicPlasteel
+
+    HoodCulthood:
+      name: Капюшон культа
+      description: Просто капюшон
+      icon: /Textures/Clothing/Head/Hoods/cult.rsi/icon.png
+      cost: 5
+      itemToSpawn: ClothingHeadHatHoodCulthood
+      requiredMaterial: RunicPlasteel
+
+    MirrorShield:
+      name: Зеркальный щит
+      description: Отражает урон
+      icon: /Textures/Objects/Weapons/Melee/shields.rsi/mirror-icon.png
+      cost: 30
+      itemToSpawn: MirrorShield
+      requiredMaterial: RunicPlasteel
+
+    RobesCult:
+      name: Роба культа
+      description: Для красоты
+      icon: /Textures/Clothing/OuterClothing/Misc/cultrobes.rsi/icon.png
+      cost: 5
+      itemToSpawn: ClothingOuterRobesCult
+      requiredMaterial: RunicPlasteel
+
+#Плавка
+- type: narsiCultReceiptCategory
+  id: NarsiCultMetallCategory
+  title: Плавка
+  items:
+    Plasteel:
+      name: Рунический металл
+      description: Рунический металл из пластали
+      icon: /Textures/Objects/Materials/Sheets/metal.rsi/plasteel.png
+      cost: 30
+      itemToSpawn: SheetRunicPlasteel
+      requiredMaterial: Plasteel
+      buttonText: Переплавить
+
+    ShoesCult:
+      name: Рунический металл
+      description: Рунический металл из стали
+      icon: /Textures/Objects/Materials/Sheets/metal.rsi/steel.png
+      cost: 30
+      itemToSpawn: SheetRunicPlasteelHalf
+      requiredMaterial: Steel

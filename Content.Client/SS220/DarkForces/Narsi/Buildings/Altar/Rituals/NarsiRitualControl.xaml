@@ -1,0 +1,18 @@
+<Control xmlns="https://spacestation14.io"
+    xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
+    <PanelContainer HorizontalExpand="False" MaxSize="500 250" Margin="0 4 4 0">
+        <PanelContainer.PanelOverride>
+            <gfx:StyleBoxFlat BackgroundColor="#25252A" />
+        </PanelContainer.PanelOverride>
+
+        <BoxContainer Orientation="Vertical" Margin="8 8 8 8">
+            <Label Name="Name" Align="Center" Margin="4 4 4 4" />
+
+            <RichTextLabel Name="Description" Margin="4 4 4 4" StyleClasses="LabelSubText" />
+            <RichTextLabel Name="Requirements" Margin="4 4 4 4" StyleClasses="LabelSubText" />
+
+            <Button Name="StartRitualButton" Text="Провести ритуал"
+                VerticalAlignment="Bottom" Margin="8 8 8 8" />
+        </BoxContainer>
+    </PanelContainer>
+</Control>

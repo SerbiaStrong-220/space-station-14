@@ -1,0 +1,38 @@
+<ui:FancyWindow xmlns="https://spacestation14.io"
+                xmlns:x="http://schemas.microsoft.com/winfx/2007/xaml"
+                xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls;assembly=Content.Client"
+                MinSize="700 600" Resizable="True" Title="Темная кузня">
+    <BoxContainer Orientation="Vertical" Margin="8 8 8 8">
+
+        <BoxContainer Orientation="Horizontal" Margin="0 0 0 2">
+            <PanelContainer Margin="2 0 6 0" StyleClasses="Inset" VerticalAlignment="Center"
+                            VerticalExpand="True">
+                <SpriteView
+                    Name="EntityView"
+                    SetSize="96 96"
+                    Scale="2 2"
+                    Margin="8 8 8 8" />
+            </PanelContainer>
+
+            <BoxContainer Orientation="Vertical">
+                <BoxContainer Orientation="Horizontal" Margin="0 8 0 0" HorizontalExpand="false">
+                    <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                        <Label Text="Рунический металл:" StyleClasses="LabelKeyText" />
+                        <Label Text="Пласталь:" StyleClasses="LabelKeyText" />
+                        <Label Text="Сталь:" StyleClasses="LabelKeyText" />
+                        <Label Text="Статус:" StyleClasses="LabelKeyText" />
+                    </BoxContainer>
+                    <BoxContainer Orientation="Vertical" Margin="8 0 0 0" HorizontalExpand="True">
+                        <Label Name="RunicPlasteelCount" Text="40 штук" />
+                        <Label Name="PlasteelCount" Text="20 штук" />
+                        <Label Name="SteelCount" Text="30 штук" />
+                        <Label Name="ForgeStatus" Text="Готова к использованию" />
+                    </BoxContainer>
+                </BoxContainer>
+            </BoxContainer>
+        </BoxContainer>
+
+
+        <TabContainer Name="CTabContainer" VerticalExpand="True" Margin="0 0 0 2" />
+    </BoxContainer>
+</ui:FancyWindow>

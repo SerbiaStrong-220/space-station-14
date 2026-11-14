@@ -1,0 +1,36 @@
+﻿# Narsie
+- type: antag
+  id: NarsiCultist
+  name: "Культист Нар'Си"
+  antagonist: true
+  setPreference: true
+  objective: "Призовите Нар'Си в этот мир"
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 72000 # 20h
+
+- type: startingGear
+  id: NarsiCultistGear
+  storage:
+    back:
+    - RitualDagger
+    - SheetRunicPlasteelTen
+
+#Ratvar
+- type: antag
+  id: RatvarRighteous
+  name: "Праведник Ратвара"
+  antagonist: true
+  setPreference: true
+  objective: "Освободите Ратвара из заточения"
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 72000 # 20h (need good RolePlay)
+
+- type: startingGear
+  id: RatvarWarriorGear
+  equipment:
+    head: ClothingHeadHelmetRatvar
+    shoes: ClothingShoesRatvar
+    outerClothing: ClothingOuterRobesRatvar
+    gloves: ClothingHandsRatvar
