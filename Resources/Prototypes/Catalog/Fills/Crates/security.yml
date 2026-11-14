@@ -119,3 +119,40 @@
         - id: BoxTearGas
         - id: Bola # replace with 4 e-bolas when added
           amount: 4
+
+#ss220 lasertag start
+- type: entity
+  parent: CrateSecgear
+  id: CrateLaserTagEquipmentRed
+  name: Red lasertag equipment crate
+  description: Contains three red lasertag vests and three practice laser carabins. Requires Security access to open.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: ClothingOuterArmorLasertagRed
+          amount: 3
+        - id: WeaponLaserCarbinePractice
+          amount: 3
+        - id: ClothingUniformJumpsuitColorRed
+          amount: 3
+
+- type: entity
+  parent: CrateSecgear
+  id: CrateLaserTagEquipmentBlue
+  name: Blue lasertag equipment crate
+  description: Contains three blue lasertag vests and three practice laser carabins. Requires Security access to open.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: ClothingOuterArmorLasertagBlue
+          amount: 3
+        - id: WeaponLaserCarbinePractice
+          amount: 3
+        - id: ClothingUniformJumpsuitColorBlue
+          amount: 3
+
+#ss220 lasertag end
