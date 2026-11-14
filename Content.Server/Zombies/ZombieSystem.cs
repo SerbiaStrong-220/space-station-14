@@ -48,7 +48,7 @@ namespace Content.Server.Zombies
         [Dependency] private readonly SharedPopupSystem _popup = default!;
         [Dependency] private readonly SharedRoleSystem _role = default!;
 
-        private const string ZombifyableTag = "ZombifyableByMelee"; // SS220-add-animal-not-zombiefying
+        private static readonly ProtoId<TagPrototype> ZombifyableTag = "ZombifyableByMelee"; // SS220-add-animal-not-zombiefying
         public readonly ProtoId<NpcFactionPrototype> Faction = "Zombie";
 
         public const SlotFlags ProtectiveSlots =
@@ -64,6 +64,7 @@ namespace Content.Server.Zombies
         public override void Initialize()
         {
             base.Initialize();
+            InitializeTelepathy(); // SS220-november-event-balance
 
             SubscribeLocalEvent<ZombieComponent, EmoteEvent>(OnEmote, before:
                 new[] { typeof(VocalSystem), typeof(BodyEmotesSystem) });
@@ -261,6 +262,11 @@ namespace Content.Server.Zombies
                     args.Handled = true;
                     continue;
                 }
+
+                // SS220-add-animal-not-zombiefying begin
+                if (!_tag.HasTag(uid, ZombifyableTag))
+                    continue;
+                // SS220-add-animal-not-zombiefying end
 
                 if (_mobState.IsAlive(uid, mobState))
                 {

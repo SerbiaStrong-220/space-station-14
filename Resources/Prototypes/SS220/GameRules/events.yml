@@ -79,7 +79,7 @@
         volume: -4
     earliestStart: 20
     minimumPlayers: 15
-    weight: 5
+    weight: 6
     duration: 5
     maxDuration: 20
   - type: VentHordeRule
@@ -101,7 +101,7 @@
         volume: -4
     earliestStart: 20
     minimumPlayers: 15
-    weight: 5
+    weight: 6
     duration: 5
     maxDuration: 20
   - type: VentHordeRule

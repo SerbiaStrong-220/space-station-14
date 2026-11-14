@@ -490,6 +490,11 @@
     slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: SS220/Clothing/Eyes/Glasses/ninjavisor.rsi # SS220 Ninja Resprite
   - type: FlashImmunity
+  #SS220-november-event-balance begin
+  - type: NightVision
+    profile: NightVisionGreen
+    priority: 10
+  #SS220-november-event-balance end
 
 - type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons, BaseSecurityContraband, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
