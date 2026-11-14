@@ -4,6 +4,8 @@ using System.Linq;
 using System.Numerics;
 using Robust.Shared.Utility;
 using Content.Server.Shuttles.Events;
+using Content.Shared.IdentityManagement;
+using Content.Shared.SS220.Contractor;
 
 namespace Content.Server.Pinpointer;
 
@@ -52,6 +54,11 @@ public sealed class PinpointerSystem : SharedPinpointerSystem
 
         if (!ent.Comp.CanRetarget)
             LocateTarget(ent);
+
+        //ss220 contractor pinpointer add start
+        if (component.IsContractorPinpointer)
+            LocateTarget(uid, component, args.User);
+        //ss220 contractor pinpointer add end
 
         args.Handled = true;
     }
