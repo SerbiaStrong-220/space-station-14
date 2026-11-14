@@ -188,7 +188,7 @@
       storagebase: !type:AllSelector
         children:
         - id: BoxSurvivalCentcom
-        - id: WeaponBlasterKRV
+        - id: WeaponBlasterKRSUpgraded
         - id: PowerCellBlasterHighCapacity
           amount: 3
         - id: FlashlightSeclite

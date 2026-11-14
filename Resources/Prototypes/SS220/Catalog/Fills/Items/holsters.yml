@@ -27,3 +27,15 @@
         - id: WeaponRevolverBlackAngel
         - id: SpeedLoaderMagnum
           amount: 2
+
+- type: entity
+  id: ClothingBeltHolsterBlueshieldFilled
+  parent: ClothingBeltHolsterBlueshield
+  name: blueshield shoulder holster
+  suffix: Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      charger_slot: !type:AllSelector
+        children:
+        - id: WeaponEnergyGunRevolver

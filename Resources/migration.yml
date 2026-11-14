@@ -1071,3 +1071,9 @@ FoodLubroShroomCultDead: FoodLubroShroomDead
 FoodMikoTrapShroomCult: FoodMikoTrapShroom
 ShellClaw: ShellPincer
 ShellBeach: ShellScourge
+
+# 2026-08-10 - SS220 SetSelector
+LockedUnicaBox: LockedSecureRevolverSetSelectorCase
+
+# 2026-11-06 - SS220 KRV replaced by upgraded KRS
+WeaponBlasterKRV: WeaponBlasterKRSUpgraded

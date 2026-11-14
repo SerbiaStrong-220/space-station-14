@@ -1,0 +1,72 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: SetSelectorBase
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: Objects/Tools/Toolboxes/toolbox_thief.rsi
+    state: icon
+  - type: SetSelector
+  - type: ActivatableUI
+    key: enum.SetSelectorUIKey.Key
+  - type: ActivatableUIRequiresAccess
+  - type: UserInterface
+    interfaces:
+      enum.SetSelectorUIKey.Key:
+        type: SetSelectorBoundUserInterface
+
+- type: entity
+  id: SetSelectorBriefcaseBase
+  parent: SetSelectorBase
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/Briefcases/weapon_case_large.rsi
+    layers:
+    - state: icon
+    - state: unlocked
+  - type: Item
+    size: Ginormous
+
+- type: entity
+  id: SetCaseBlueshieldPrimaryWeapon
+  parent: SetSelectorBriefcaseBase
+  name: blueshield primary gun case
+  suffix: Set selector
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/Briefcases/bs_weapon_case_large.rsi
+  - type: AccessReader
+    access: [["Blueshield"]]
+  - type: SetSelector
+    spawnedStoragePrototype: BriefcaseWeaponBlueshield
+    maxSelectedSets: 1
+    possibleSets:
+    - WeaponBlasterKRSSet
+    - WeaponDrozdSet
+
+- type: entity
+  id: SetCaseBlueshieldSecondaryEquipment
+  parent: SetSelectorBriefcaseBase
+  name: blueshield secondary equipment case
+  suffix: Set selector
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/Briefcases/bs_weapon_case.rsi
+  - type: Item
+    size: Large
+  - type: AccessReader
+    access: [["Blueshield"]]
+  - type: SetSelector
+    spawnedStoragePrototype: BriefcaseWeaponSmallBlueshield
+    maxSelectedSets: 2
+    possibleSets:
+    - BlueshieldSheriffSet
+    - BlueshieldMasterSet
+    - BlueshieldDefenderSet
+    - BlueshieldCombatMedicSet
+    - BlueshieldNightWatchSet
+    - BlueshieldCordonSet
+    - BatteryWeaponUpgradesSet

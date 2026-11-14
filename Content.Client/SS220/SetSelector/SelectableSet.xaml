@@ -1,0 +1,27 @@
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+
+<BoxContainer
+    xmlns="https://spacestation14.io"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    xmlns:styleDef="clr-namespace:Content.Client.SS220.Experience.Ui"
+    Orientation="Horizontal"
+    Margin="0 6">
+    <PanelContainer SetSize="64 64" VerticalAlignment="Top">
+        <PanelContainer.PanelOverride>
+            <gfx:StyleBoxFlat BackgroundColor="{x:Static styleDef:ExperienceUiStyleDefinitions.BaseTextureButtonBackgroundColor}"/>
+        </PanelContainer.PanelOverride>
+        <TextureRect Name="Icon" Stretch="KeepAspectCentered"/>
+    </PanelContainer>
+    <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalAlignment="Center" Margin="10 0 0 0">
+        <BoxContainer Orientation="Horizontal">
+            <Label Name="SetName"
+                   StyleClasses="LabelKeyText"
+                   FontColorOverride="#e9dac0"
+                   HorizontalExpand="True"
+                   VerticalAlignment="Center"/>
+            <Button Name="SetButton" Access="Public" ToggleMode="True" SetWidth="110"/>
+        </BoxContainer>
+        <RichTextLabel Name="SetDescription" Margin="0 2 0 0"/>
+    </BoxContainer>
+</BoxContainer>

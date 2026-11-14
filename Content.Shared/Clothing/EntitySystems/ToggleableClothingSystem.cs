@@ -6,6 +6,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Popups;
+using Content.Shared.SS220.Clothing;
 using Content.Shared.Strip;
 using Content.Shared.Verbs;
 using Robust.Shared.Containers;
@@ -244,6 +245,13 @@ public sealed class ToggleableClothingSystem : EntitySystem
             _inventorySystem.TryUnequip(user, parent, component.Slot, force: true);
         else if (_inventorySystem.TryGetSlotEntity(parent, component.Slot, out var existing))
         {
+            //SS220-toggleable-clothing-replace begin
+            var occupiedEv = new ToggleableClothingSlotOccupiedEvent(user, parent);
+            RaiseLocalEvent(target, ref occupiedEv);
+            if (occupiedEv.Handled)
+                return;
+            //SS220-toggleable-clothing-replace end
+
             _popupSystem.PopupClient(Loc.GetString("toggleable-clothing-remove-first", ("entity", existing)),
                 user, user);
         }

@@ -1,0 +1,87 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: BaseBatteryWeaponUpgrade
+  parent: BaseItem
+  name: energy weapon module
+  description: A module for energy weapons.
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: Objects/Tools/upgrade.rsi
+  - type: Item
+    size: Small
+  - type: GunUpgrade
+  - type: StaticPrice
+    price: 750
+  - type: Tag
+    tags:
+    - BatteryWeaponUpgrade
+
+- type: entity
+  id: BatteryWeaponUpgradeEmpFuse
+  parent: BaseBatteryWeaponUpgrade
+  name: EMP fuse
+  components:
+  - type: Sprite
+    layers:
+    - state: base
+    - state: overlay-1
+      color: "#f2f2f2"
+    - state: overlay-2
+      color: "#3a62c9"
+    - state: overlay-3
+      color: "#9fb7ff"
+  - type: GunUpgrade
+    tags: [ GunUpgradeEmpFuse ]
+    examineText: gun-upgrade-examine-text-emp-fuse
+  - type: GunUpgradeEmpFuse
+
+- type: entity
+  id: BatteryWeaponUpgradeFireRate
+  parent: BaseBatteryWeaponUpgrade
+  name: fire rate module
+  components:
+  - type: Sprite
+    layers:
+    - state: base
+    - state: overlay-1
+      color: "#bbf134"
+    - state: overlay-2
+      color: "#07901b"
+    - state: overlay-3
+      color: "#9bf134"
+  - type: GunUpgrade
+    tags: [ GunUpgradeReloadSpeed ]
+    examineText: gun-upgrade-examine-text-reload
+  - type: GunUpgradeFireRate
+    coefficient: 1.25
+
+- type: entity
+  id: BatteryWeaponUpgradeMicroreactor
+  parent: BaseBatteryWeaponUpgrade
+  name: microreactor
+  components:
+  - type: Sprite
+    layers:
+    - state: base
+    - state: overlay-1
+      color: "#f7e35c"
+    - state: overlay-2
+      color: "#c27a00"
+    - state: overlay-3
+      color: "#ffd24a"
+  - type: GunUpgrade
+    tags: [ GunUpgradeMicroreactor ]
+    examineText: gun-upgrade-examine-text-microreactor
+  - type: GunUpgradeRecharge
+    chargeRate: 8
+
+- type: entity
+  id: BatteryWeaponUpgradeMicroreactorIntegrated
+  parent: BatteryWeaponUpgradeMicroreactor
+  suffix: Integrated
+  components:
+  - type: GunUpgradeRecharge
+    chargeRate: 48
+    pauseOnShot: 10
