@@ -222,8 +222,11 @@
   parent: BaseTraitorStealObjective
   id: BaseCMOStealObjective
   components:
-  - type: NotJobRequirement
-    jobs: [ ChiefMedicalOfficer ]
+  # SS220 department objective restrictions begin
+  - type: NotDepartmentRequirement
+    departments:
+    - Medical
+  # SS220 department objective restrictions end
   - type: StealCondition
     owner: job-name-cmo
 
@@ -238,10 +241,6 @@
   parent: BaseCMOStealObjective
   id: CMOCrewMonitorStealObjective
   components:
-  #ss220 paramed crewmonitor begin
-  - type: NotJobRequirement
-    jobs: [ ChiefMedicalOfficer, Paramedic ]
-  #ss220 paramed crewmonitor end
   - type: StealCondition
     stealGroup: HandheldCrewMonitor
 
@@ -252,8 +251,11 @@
   parent: BaseTraitorStealObjective
   id: BaseRDStealObjective
   components:
-  - type: NotJobRequirement
-    jobs: [ ResearchDirector ]
+  # SS220 department objective restrictions begin
+  - type: NotDepartmentRequirement
+    departments:
+    - Science
+  # SS220 department objective restrictions end
   - type: StealCondition
     owner: job-name-rd
 
@@ -297,8 +299,11 @@
   parent: BaseTraitorStealObjective
   id: MagbootsStealObjective
   components:
-  - type: NotJobRequirement
-    jobs: [ ChiefEngineer ]
+  # SS220 department objective restrictions begin
+  - type: NotDepartmentRequirement
+    departments:
+    - Engineering
+  # SS220 department objective restrictions end
   - type: StealCondition
     stealGroup: ClothingShoesBootsMagAdv
     owner: job-name-ce
@@ -309,8 +314,11 @@
   parent: BaseTraitorStealObjective
   id: ClipboardStealObjective
   components:
-  - type: NotJobRequirement
-    jobs: [ Quartermaster ]
+  # SS220 department objective restrictions begin
+  - type: NotDepartmentRequirement
+    departments:
+    - Cargo
+  # SS220 department objective restrictions end
   - type: StealCondition
     stealGroup: BoxFolderQmClipboard
     owner: job-name-qm

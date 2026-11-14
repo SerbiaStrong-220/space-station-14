@@ -8,8 +8,9 @@
   parent: BaseTraitorStealObjective
   id: EngravedKnuckledusterStealObjective
   components:
-  - type: NotJobRequirement
-    jobs: [ Quartermaster ]
+  - type: NotDepartmentRequirement
+    departments:
+    - Cargo
   - type: StealCondition
     stealGroup: EngravedKnuckleduster
     owner: job-name-qm
@@ -43,8 +44,9 @@
   parent: BaseTraitorStealObjective
   id: ClothingOuterReactiveArmorStealObjective
   components:
-  - type: NotJobRequirement
-    jobs: [ ResearchDirector ]
+  - type: NotDepartmentRequirement
+    departments:
+    - Science
   - type: StealCondition
     stealGroup: ClothingOuterReactiveArmor
     owner: job-name-rd
@@ -53,8 +55,9 @@
   parent: BaseTraitorStealObjective
   id: RCDCEStealObjective
   components:
-  - type: NotJobRequirement
-    jobs: [ ChiefEngineer ]
+  - type: NotDepartmentRequirement
+    departments:
+    - Engineering
   - type: StealCondition
     stealGroup: RCDCE
     owner: job-name-ce
