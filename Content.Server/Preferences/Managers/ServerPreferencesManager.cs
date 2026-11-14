@@ -12,8 +12,10 @@ using Content.Shared.Construction.Prototypes;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Humanoid.Prototypes;
+using Content.Shared.Players;
 using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
+using Content.Shared.Preferences.Loadouts.Effects;
 using Content.Shared.Roles;
 using Content.Shared.Traits;
 using Robust.Server.Player;
@@ -31,7 +33,7 @@ namespace Content.Server.Preferences.Managers
     /// Sends <see cref="MsgPreferencesAndSettings"/> before the client joins the lobby.
     /// Receives <see cref="MsgSelectCharacter"/> and <see cref="MsgUpdateCharacter"/> at any time.
     /// </summary>
-    public sealed class ServerPreferencesManager : IServerPreferencesManager, IPostInjectInit
+    public sealed partial class ServerPreferencesManager : IServerPreferencesManager, IPostInjectInit
     {
         [Dependency] private readonly IServerNetManager _netManager = default!;
         [Dependency] private readonly IConfigurationManager _cfg = default!;
@@ -263,6 +265,15 @@ namespace Content.Server.Preferences.Managers
 
             profile.EnsureValid(session, _dependencies);
 
+            // SS220 sponsor start
+            // Sponsor tiers are unknown: sponsor items may stay, but new ones can't be picked.
+            if (session.ContentData() is { SponsorInfo: null }
+                && AddsSponsorLoadout(profile, curPrefs.Characters.GetValueOrDefault(slot)))
+            {
+                return;
+            }
+            // SS220 sponsor end
+
             var profiles = new Dictionary<int, HumanoidCharacterProfile>(curPrefs.Characters)
             {
                 [slot] = profile
@@ -432,15 +443,6 @@ namespace Content.Server.Preferences.Managers
         {
             _cachedPlayerPrefs.Remove(session.UserId);
         }
-
-        // Corvax-Sponsors-Start: Calculate total available users slots with sponsors
-        private int GetMaxUserCharacterSlots(NetUserId userId)
-        {
-            var maxSlots = _cfg.GetCVar(CCVars.GameMaxCharacterSlots);
-            var extraSlots = _sponsors.TryGetInfo(userId, out var sponsor) ? sponsor.ExtraSlots : 0;
-            return maxSlots + extraSlots;
-        }
-        // Corvax-Sponsors-End
 
         public bool HavePreferencesLoaded(ICommonSession session)
         {
