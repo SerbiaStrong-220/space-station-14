@@ -10,3 +10,5 @@ seeds-lurbo-shroom-name = луброгус
 seeds-lurbo-shroom-display-name = луброгус
 seeds-miko-trap-shroom-name = миколовушка
 seeds-miko-trap-shroom-display-name = миколовушка
+seeds-fulgora-aetheris-name = Фулгора Эфирис
+seeds-fulgora-aetheris-display-name = Фулгора Эфирис
