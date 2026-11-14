@@ -36,7 +36,9 @@ public sealed partial class TtsVoicePreferences : IReadOnlyTtsVoicePreferences, 
 {
     public int Count => _keys.Count;
 
+    [ViewVariables]
     private readonly Dictionary<TtsProvider, ProtoId<TtsVoicePrototype>> _dict = [];
+
     private readonly List<TtsProvider> _keys = [];
 
     private const char StringPairsDivider = ',';
