@@ -1,5 +1,6 @@
 ﻿using Content.Shared.Damage;
 using Content.Shared.Tools;
+using Content.Shared.FixedPoint; // SS220 borg self welding
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -67,4 +68,19 @@ public sealed partial class RepairableComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool AllowSelfRepair = true;
+
+    // SS220 borg self welding begin
+    /// <summary>
+    /// Chassis damage reserved for a human repairer when self-repair is enabled.
+    /// Stored on the target so restarting repairs or changing borg repairers cannot reset the limit.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 UnrepairableDamage;
+
+    /// <summary>
+    /// Last chassis damage total used to track the borg repair budget.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 LastDamage;
+    // SS220 borg self welding end
 }
