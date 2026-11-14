@@ -295,7 +295,8 @@ public sealed partial class TTSSystem : EntitySystem
         var ttsMessage = new MsgPlayTts
         {
             Data = audioData,
-            SourceUid = speakerContext.NetSpeaker
+            SourceUid = speakerContext.NetSpeaker,
+            SourceCoordinates = speakerContext.Coordinates
         };
         foreach (var receiver in receivers)
         {
@@ -323,7 +324,8 @@ public sealed partial class TTSSystem : EntitySystem
             msgPlayTts = new MsgPlayTts
             {
                 Data = audioData,
-                SourceUid = speakerContext.NetSpeaker
+                SourceUid = speakerContext.NetSpeaker,
+                SourceCoordinates = speakerContext.Coordinates
             };
 
             ServerSendMessage(msgPlayTts, receiver);
@@ -354,6 +356,7 @@ public sealed partial class TTSSystem : EntitySystem
             {
                 Data = audioData,
                 SourceUid = context.SpeakerContext.NetSpeaker,
+                SourceCoordinates = context.SpeakerContext.Coordinates,
                 Metadata = new(TtsKind.Whisper, context.ChannelPrototype)
             };
         }
@@ -366,6 +369,7 @@ public sealed partial class TTSSystem : EntitySystem
             {
                 Data = obfAudioData,
                 SourceUid = context.SpeakerContext.NetSpeaker,
+                SourceCoordinates = context.SpeakerContext.Coordinates,
                 Metadata = new(TtsKind.Whisper, context.ChannelPrototype)
             };
         }
@@ -417,6 +421,7 @@ public sealed partial class TTSSystem : EntitySystem
                 {
                     Data = obfAudioData,
                     SourceUid = context.SpeakerContext.NetSpeaker,
+                    SourceCoordinates = context.SpeakerContext.Coordinates,
                     Metadata = new(TtsKind.Whisper, context.ChannelPrototype)
                 };
                 ServerSendMessage(obfTtsMessage, receiver);
@@ -434,6 +439,7 @@ public sealed partial class TTSSystem : EntitySystem
                 {
                     Data = audioData,
                     SourceUid = context.SpeakerContext.NetSpeaker,
+                    SourceCoordinates = context.SpeakerContext.Coordinates,
                     Metadata = new(TtsKind.Whisper, context.ChannelPrototype)
                 };
                 ServerSendMessage(ttsMessage, receiver);
