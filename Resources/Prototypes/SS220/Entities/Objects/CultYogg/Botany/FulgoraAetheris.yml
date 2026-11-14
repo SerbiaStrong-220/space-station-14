@@ -14,7 +14,6 @@
     seedId: FulgoraAetheris
   - type: Tag
     tags:
-    - YoggEquipment
     - CultYoggStealthProvidable
   - type: TriggerOnThrowDoHit
   - type: EmpOnTrigger
