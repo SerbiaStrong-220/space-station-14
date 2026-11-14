@@ -29,6 +29,7 @@ namespace Content.Client.Input
             common.AddFunction(ContentKeyFunctions.ExamineEntity);
             common.AddFunction(ContentKeyFunctions.OpenAHelp);
             common.AddFunction(KeyFunctions220.ToggleOffset); //SS220 weapon overhaul
+            common.AddFunction(KeyFunctions220.UseGunInHand); //SS220 weapon overhaul
             common.AddFunction(ContentKeyFunctions.TakeScreenshot);
             common.AddFunction(ContentKeyFunctions.TakeScreenshotNoUI);
             common.AddFunction(ContentKeyFunctions.ToggleFullscreen);

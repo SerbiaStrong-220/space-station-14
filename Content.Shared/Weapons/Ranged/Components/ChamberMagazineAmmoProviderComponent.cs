@@ -22,6 +22,17 @@ public sealed partial class ChamberMagazineAmmoProviderComponent : MagazineAmmoP
     [DataField, AutoNetworkedField]
     public bool AutoCycle = true;
 
+    //SS220 weapon overhaul begin
+    [DataField, AutoNetworkedField]
+    public bool CanBeLoadedManually = false;
+
+    [DataField, AutoNetworkedField]
+    public bool MustBeLoadedThroughChamber = false;
+
+    [DataField("soundInsert"), AutoNetworkedField]
+    public SoundSpecifier? InsertSound = new SoundPathSpecifier("/Audio/Weapons/Guns/MagIn/bullet_insert.ogg");
+    //SS220 weapon overhaul end
+
     /// <summary>
     /// Can the gun be racked, which opens and then instantly closes the bolt to cycle a round.
     /// </summary>

@@ -21,6 +21,7 @@
   - Medical
   - Maintenance
   - Chemistry
+  - Paramedic
   special:
   - !type:AddComponentSpecial
     components:
